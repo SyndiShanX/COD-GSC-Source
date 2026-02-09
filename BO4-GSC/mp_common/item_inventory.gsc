@@ -95,7 +95,7 @@ function_4a257174() {
 }
 
 function_fc04b237(weapon, weaponoptions) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(weapon));
 
   if(!isDefined(weaponoptions)) {
@@ -145,7 +145,7 @@ function_fc04b237(weapon, weaponoptions) {
 }
 
 function_a2162b3b(deployableweapon) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(deployableweapon === self.var_cc111ddc) {
       self.var_cc111ddc = undefined;
     }
@@ -188,7 +188,7 @@ function_76646dad(weapon) {
 function_e72d56f9(weapon, usecount) {
   assert(isDefined(weapon));
 
-  if(isplayer(self) && isalive(self)) {
+  if(isPlayer(self) && isalive(self)) {
     self function_d62822d5();
     networkid = self function_a33744de(weapon);
 
@@ -204,19 +204,19 @@ function_e72d56f9(weapon, usecount) {
 }
 
 event_handler[event_1294e3a7] function_9e4c68e2(eventstruct) {
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && self function_76646dad(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && self function_76646dad(eventstruct.weapon)) {
     self.var_cd3bc45b = eventstruct.weapon;
   }
 }
 
 event_handler[event_eb7e11e4] function_2f677e9d(eventstruct) {
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && self function_76646dad(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && self function_76646dad(eventstruct.weapon)) {
     self.var_d0015cb3 = eventstruct.weapon;
   }
 }
 
 event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && self function_76646dad(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && self function_76646dad(eventstruct.weapon)) {
     self.var_8181d952 = eventstruct.weapon;
     var_994e5c9a = 0;
     equipments = array(#"ability_smart_cover", #"eq_concertina_wire", #"eq_grapple", #"dart", #"eq_hawk", #"ultimate_turret");
@@ -328,7 +328,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
 event_handler[weapon_switch_started] function_f5883bb1(eventstruct) {
   self.next_weapon = undefined;
 
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self)) {
     if(eventstruct.weapon.isprimary && eventstruct.weapon != eventstruct.last_weapon) {
       self.next_weapon = eventstruct.weapon;
     }
@@ -336,7 +336,7 @@ event_handler[weapon_switch_started] function_f5883bb1(eventstruct) {
 }
 
 event_handler[weapon_change] function_a8c42ee4(eventstruct) {
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self)) {
     if(isDefined(self.var_8181d952)) {
       weapon = self.var_8181d952;
       equipments = array();
@@ -366,7 +366,7 @@ event_handler[weapon_change] function_a8c42ee4(eventstruct) {
 event_handler[gadget_primed] gadget_primed_callback(eventstruct) {
   player = eventstruct.entity;
 
-  if(sessionmodeiswarzonegame() && isplayer(player) && isalive(player) && player function_76646dad(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(player) && isalive(player) && player function_76646dad(eventstruct.weapon)) {
     function_d62822d5();
     player.var_cc111ddc = eventstruct.weapon;
   }
@@ -375,7 +375,7 @@ event_handler[gadget_primed] gadget_primed_callback(eventstruct) {
 event_handler[gadget_on] gadget_on_callback(eventstruct) {
   player = eventstruct.entity;
 
-  if(sessionmodeiswarzonegame() && isplayer(player) && isalive(player) && player function_76646dad(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(player) && isalive(player) && player function_76646dad(eventstruct.weapon)) {
     equipments = array(#"eq_grapple", #"dart", #"eq_hawk");
 
     foreach(equipmentname in equipments) {
@@ -390,7 +390,7 @@ event_handler[gadget_on] gadget_on_callback(eventstruct) {
 event_handler[event_dfabd488] function_40d8d1ec(eventstruct) {
   player = eventstruct.entity;
 
-  if(sessionmodeiswarzonegame() && isplayer(player) && isalive(player) && player function_76646dad(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(player) && isalive(player) && player function_76646dad(eventstruct.weapon)) {
     player.var_14c391cc = eventstruct.weapon;
   }
 }
@@ -398,7 +398,7 @@ event_handler[event_dfabd488] function_40d8d1ec(eventstruct) {
 event_handler[change_seat] function_2aa4e6cf(eventstruct) {
   player = self;
 
-  if(sessionmodeiswarzonegame() && isplayer(player) && isalive(player)) {
+  if(sessionmodeiswarzonegame() && isPlayer(player) && isalive(player)) {
     if(eventstruct.seat_index == 0 && player function_2cceca7b()) {
       player forceoffhandend();
     }
@@ -406,7 +406,7 @@ event_handler[change_seat] function_2aa4e6cf(eventstruct) {
 }
 
 function_38d1ea04() {
-  if(isplayer(self) && isDefined(self.inventory)) {
+  if(isPlayer(self) && isDefined(self.inventory)) {
     inventoryitem = self.inventory.items[11];
 
     if(isDefined(inventoryitem) && isDefined(inventoryitem.itementry)) {
@@ -432,7 +432,7 @@ function_38d1ea04() {
 }
 
 function_bdc03d88() {
-  if(isplayer(self) && isDefined(self.inventory)) {
+  if(isPlayer(self) && isDefined(self.inventory)) {
     inventoryitem = self.inventory.items[11];
 
     if(inventoryitem.networkid != 32767 && inventoryitem.itementry.itemtype == # "armor") {
@@ -446,7 +446,7 @@ function_bdc03d88() {
 }
 
 function_434d0c2b(itemtype, prioritylist, var_ab9610ad = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(ishash(itemtype));
   assert(isarray(prioritylist));
   items = [];
@@ -490,7 +490,7 @@ function_434d0c2b(itemtype, prioritylist, var_ab9610ad = undefined) {
 }
 
 _cycle_item(itemtype, prioritylist, var_bcc2655a) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(ishash(itemtype));
   assert(isarray(prioritylist));
 
@@ -547,7 +547,7 @@ _cycle_item(itemtype, prioritylist, var_bcc2655a) {
 }
 
 function_9da31874(itemtype) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(ishash(itemtype));
   items = [];
 
@@ -580,7 +580,7 @@ function_9da31874(itemtype) {
 }
 
 function_283a29c8(var_ab9610ad = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(function_fe402108()) {
     return;
@@ -594,7 +594,7 @@ function_283a29c8(var_ab9610ad = undefined) {
 }
 
 function_2e10e66e(var_ab9610ad = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(function_fe402108()) {
     return;
@@ -608,7 +608,7 @@ function_2e10e66e(var_ab9610ad = undefined) {
 }
 
 function_a7d62e18(var_ab9610ad = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(function_fe402108()) {
     return;
@@ -622,7 +622,7 @@ function_a7d62e18(var_ab9610ad = undefined) {
 }
 
 function_9d805044(itemtype, var_ab9610ad = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isstring(itemtype) || ishash(itemtype));
 
   if(function_fe402108()) {
@@ -751,7 +751,7 @@ function_d2f05352() {
 }
 
 function_a4413333() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   healthitem = self.inventory.items[10];
 
   if(healthitem.networkid !== 32767) {
@@ -810,7 +810,7 @@ function_6c36ab6b() {
 }
 
 function_60706bdb(networkid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   item = get_inventory_item(networkid);
 
   if(!isDefined(item) || !isDefined(item.itementry)) {
@@ -825,7 +825,7 @@ function_60706bdb(networkid) {
 }
 
 function_d7944517(itemid, weapon, count, amount, stashitem = 0, var_7cab8e12 = undefined, targetname = undefined, attachments = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(item_world_util::function_2c7fc531(itemid));
   self endon(#"death");
   droppos = var_7cab8e12;
@@ -839,19 +839,19 @@ function_d7944517(itemid, weapon, count, amount, stashitem = 0, var_7cab8e12 = u
 }
 
 function_d116a346(slot, weapon) {
-  if(sessionmodeiswarzonegame() && isplayer(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self)) {
     self.var_e42fb511 = weapon;
   }
 }
 
 _gadget_health_regen_on(slot, weapon) {
-  if(sessionmodeiswarzonegame() && isplayer(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self)) {
     self.var_d6cd7d80 = weapon;
   }
 }
 
 _gadget_health_regen_off(slot, weapon) {
-  if(sessionmodeiswarzonegame() && isplayer(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self)) {
     self.var_d6cd7d80 = undefined;
     self.var_e42fb511 = undefined;
   }
@@ -870,7 +870,7 @@ function_c1cef1ec(weapon) {
 }
 
 function_c6be9f7f(weapon, ammo) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(weapon));
   slot = self gadgetgetslot(weapon);
 
@@ -929,7 +929,7 @@ function_8214f1b6(itementry, var_dfe6c7e5 = 0) {
 }
 
 function_bba770de(itementry) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   count = 0;
 
   if(!isDefined(itementry)) {
@@ -958,7 +958,7 @@ function_bba770de(itementry) {
 }
 
 can_pickup_ammo(item, ammoamount = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   itementry = item.itementry;
   ammoweapon = itementry.weapon;
   ammoamount = isDefined(itementry.amount) ? itementry.amount : isDefined(ammoamount) ? ammoamount : 1;
@@ -970,7 +970,7 @@ can_pickup_ammo(item, ammoamount = undefined) {
 }
 
 function_550fcb41(item) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!(isDefined(item.itementry.stackable) && item.itementry.stackable)) {
     return false;
@@ -1012,7 +1012,7 @@ function_85645978(item) {
 }
 
 function_3fe6ef04() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_cfa0e915 = [];
 
   foreach(consumeditem in self.inventory.consumed) {
@@ -1027,7 +1027,7 @@ function_3fe6ef04() {
 }
 
 consume_item(item) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(item));
 
   if(!isDefined(item) || !isDefined(item.itementry)) {
@@ -1114,7 +1114,7 @@ consume_item(item) {
 }
 
 function_6d647220(item) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(item));
 
   if(!isDefined(item) || item.networkid == 32767) {
@@ -1136,7 +1136,7 @@ function_6d647220(item) {
   self use_inventory_item(item.networkid, 1);
   armoritem = undefined;
 
-  if(isplayer(self) && isDefined(self.inventory)) {
+  if(isPlayer(self) && isDefined(self.inventory)) {
     armoritem = self.inventory.items[11];
 
     if(!isDefined(armoritem) || armoritem.networkid == 32767 || armoritem.itementry.itemtype != # "armor") {
@@ -1157,7 +1157,7 @@ function_6d647220(item) {
 }
 
 cycle_equipment_item() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_bcc2655a = undefined;
   equipmentitem = self.inventory.items[12];
 
@@ -1180,7 +1180,7 @@ cycle_equipment_item() {
 }
 
 cycle_health_item() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_bcc2655a = undefined;
   healthitem = self.inventory.items[10];
 
@@ -1203,7 +1203,7 @@ cycle_health_item() {
 }
 
 function_9ba10b94(networkid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self endon(#"death");
   slotid = function_b246c573(networkid);
 
@@ -1233,7 +1233,7 @@ function_9ba10b94(networkid) {
 }
 
 function_9d102bbd(var_b72297c2, networkid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self endon(#"death");
 
   if(!item_world_util::can_pick_up(var_b72297c2)) {
@@ -1367,7 +1367,7 @@ function_9d102bbd(var_b72297c2, networkid) {
 }
 
 function_fba40e6c(item) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self endon(#"death");
 
   if(!item_world_util::can_pick_up(item)) {
@@ -1406,7 +1406,7 @@ function_fba40e6c(item) {
 }
 
 function_e66dcff5(item, var_662e1704 = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(self.inventory)) {
     return undefined;
@@ -1527,7 +1527,7 @@ function_e66dcff5(item, var_662e1704 = 0) {
 }
 
 drop_armor(stashitem = 0, var_7cab8e12 = undefined, targetname = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(self has_armor()) {
     item = self.inventory.items[11];
@@ -1539,7 +1539,7 @@ drop_armor(stashitem = 0, var_7cab8e12 = undefined, targetname = undefined) {
 }
 
 function_d86d7ac7(stashitem = 0, var_7cab8e12 = undefined, targetname = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   for(index = self.inventory.var_c212de25; index < 10; index++) {
     inventoryitem = self.inventory.items[index];
@@ -1551,7 +1551,7 @@ function_d86d7ac7(stashitem = 0, var_7cab8e12 = undefined, targetname = undefine
 }
 
 drop_inventory_item(networkid, stashitem = 0, var_7cab8e12 = undefined, targetname = undefined, var_4a6f595d = 1) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self endon(#"death");
   dropitem = undefined;
   item = get_inventory_item(networkid);
@@ -1653,7 +1653,7 @@ drop_inventory_item(networkid, stashitem = 0, var_7cab8e12 = undefined, targetna
 }
 
 equip_ammo(item, var_aec6fa7f) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(item));
   self function_db2abc4(item);
   itementry = item.itementry;
@@ -1680,7 +1680,7 @@ equip_ammo(item, var_aec6fa7f) {
 }
 
 function_4cde30fa(inventoryitem, itementry) {
-  if(game.state == "pregame" || !isplayer(self) || isDefined(self.var_3f1410dd) || !isDefined(inventoryitem) || !isDefined(itementry)) {
+  if(game.state == "pregame" || !isPlayer(self) || isDefined(self.var_3f1410dd) || !isDefined(inventoryitem) || !isDefined(itementry)) {
     return;
   }
 
@@ -1690,7 +1690,7 @@ function_4cde30fa(inventoryitem, itementry) {
 }
 
 function_bef83dc6() {
-  if(game.state == "pregame" || !isplayer(self) || !isDefined(self.var_3f1410dd)) {
+  if(game.state == "pregame" || !isPlayer(self) || !isDefined(self.var_3f1410dd)) {
     return;
   }
 
@@ -1732,7 +1732,7 @@ function_e258cef5(networkid, itemtype) {
 }
 
 equip_attachment(item, var_610add8d, var_d6f68de7, var_a3a17c55 = 1, switchweapon = 1) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isstruct(item));
   var_4e2a1ed8 = function_e258cef5(var_610add8d, #"weapon");
 
@@ -1792,7 +1792,7 @@ equip_attachment(item, var_610add8d, var_d6f68de7, var_a3a17c55 = 1, switchweapo
 }
 
 equip_backpack(item) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   inventoryitem = get_inventory_item(item.networkid);
 
   if(!isDefined(inventoryitem)) {
@@ -1829,13 +1829,12 @@ debug_print(message, weapon) {
     self iprintlnbold("<dev string:x69>" + message + weaponname);
     println("<dev string:x69>" + self.playername + "<dev string:x7d>" + message + weaponname);
   }
-
 }
 
 equip_equipment(item) {
   self notify("44650fade24c857e");
   self endon("44650fade24c857e");
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   while(isDefined(self) && isDefined(self.var_10abd91d) && self.var_10abd91d) {
     waitframe(1);
@@ -1922,7 +1921,7 @@ equip_equipment(item) {
 equip_health(item) {
   self notify("6243ac340a4d2698");
   self endon("6243ac340a4d2698");
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   while(isDefined(self) && isDefined(self.var_10abd91d) && self.var_10abd91d) {
     waitframe(1);
@@ -2013,7 +2012,7 @@ equip_health(item) {
 }
 
 equip_item(networkid, quickequip = 0, weaponid = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   item = get_inventory_item(networkid);
 
   if(isDefined(item) && isDefined(item.itementry)) {
@@ -2092,7 +2091,7 @@ function_bf2312f1(weapon) {
 }
 
 equip_weapon(item, switchweapon = 1, var_9fa01da8 = 0, var_a3a17c55 = 0, initialweaponraise = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   itementry = item.itementry;
   itemtype = itementry.itemtype;
   assert(itemtype == # "weapon");
@@ -2237,9 +2236,9 @@ equip_weapon(item, switchweapon = 1, var_9fa01da8 = 0, var_a3a17c55 = 0, initial
 }
 
 function_ec087745(var_75e3ca7a = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return 32767;
   }
 
@@ -2257,7 +2256,7 @@ function_ec087745(var_75e3ca7a = 0) {
 }
 
 function_c3fb7a6e() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_53c16cb = self function_ec087745();
 
   foreach(weaponslot in array(16 + 1, 16 + 1 + 6 + 1)) {
@@ -2274,7 +2273,7 @@ function_c3fb7a6e() {
 }
 
 function_d768ea30() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   networkid = self function_ec087745();
 
   if(networkid === 32767) {
@@ -2285,7 +2284,7 @@ function_d768ea30() {
 }
 
 function_bad4a3a5() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   weaponcount = 0;
   weapons = self getweaponslistprimaries();
 
@@ -2303,7 +2302,7 @@ function_bad4a3a5() {
 }
 
 function_777cc133() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   for(index = 0; index < self.inventory.var_c212de25; index++) {
     if(self.inventory.items[index].networkid == 32767) {
@@ -2313,7 +2312,7 @@ function_777cc133() {
 }
 
 function_2e711614(slotid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(self)) {
     return;
@@ -2331,7 +2330,7 @@ function_2e711614(slotid) {
 }
 
 function_230ceec4(weapon) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isweapon(weapon));
 
   if(!isDefined(self)) {
@@ -2364,14 +2363,14 @@ function_230ceec4(weapon) {
 }
 
 function_a33744de(weapon) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isweapon(weapon));
   weaponitem = function_230ceec4(weapon);
   return isDefined(weaponitem) ? weaponitem.networkid : 32767;
 }
 
 function_b246c573(networkid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(item_world_util::function_db35e94f(networkid));
 
   for(i = 0; i < self.inventory.items.size; i++) {
@@ -2404,7 +2403,7 @@ get_inventory_item(networkid) {
 }
 
 function_8babc9f9(itementry) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   name = isDefined(itementry.parentname) ? itementry.parentname : itementry.name;
 
   if(!isDefined(self) || !isDefined(self.inventory) || !isDefined(self.inventory.items)) {
@@ -2425,7 +2424,7 @@ function_8babc9f9(itementry) {
 }
 
 function_c48cd17f(networkid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(item_world_util::function_d9648161(networkid));
   item = get_inventory_item(networkid);
 
@@ -2437,7 +2436,7 @@ function_c48cd17f(networkid) {
 }
 
 function_189a93f8(weapon) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isweapon(weapon));
   item = function_230ceec4(weapon);
 
@@ -2449,7 +2448,7 @@ function_189a93f8(weapon) {
 }
 
 get_weapon_count() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(self.inventory)) {
     return 0;
@@ -2479,9 +2478,9 @@ get_weapon_slot(item) {
 }
 
 function_3f7ef88() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
-  if(!isplayer(self) || !isalive(self)) {
+  if(!isPlayer(self) || !isalive(self)) {
     return;
   }
 
@@ -2525,7 +2524,7 @@ function_3f7ef88() {
 }
 
 give_inventory_item(item, itemcount = 1, var_aec6fa7f = 0, slotid = undefined) {
-  if(!isplayer(self) || !isDefined(self.inventory)) {
+  if(!isPlayer(self) || !isDefined(self.inventory)) {
     assert(0, "<dev string:x13f>");
     return 0;
   }
@@ -2731,13 +2730,13 @@ give_inventory_item(item, itemcount = 1, var_aec6fa7f = 0, slotid = undefined) {
 }
 
 function_461de298() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!(isDefined(getgametypesetting(#"wzlootlockers")) ? getgametypesetting(#"wzlootlockers") : 0)) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -2751,7 +2750,7 @@ function_461de298() {
 }
 
 has_armor() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(self)) {
     return 0;
@@ -2774,19 +2773,19 @@ has_armor() {
 }
 
 has_backpack() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   hasbackpack = isDefined(self.inventory) && isDefined(self.inventory.items) && isDefined(self.inventory.items[13]) && isDefined(self.inventory.items[13].itementry) && self.inventory.items[13].itementry.itemtype == # "backpack";
   return hasbackpack;
 }
 
 function_471897e2() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_22939dc4 = isDefined(self.inventory) && isDefined(self.inventory.items) && isDefined(self.inventory.items[15]) && isDefined(self.inventory.items[15].itementry) && self.inventory.items[15].itementry.itemtype == # "resource" && self.inventory.items[15].itementry.name == # "resource_item_loot_locker_key";
   return var_22939dc4;
 }
 
 function_7fe4ce88(item_name) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(self.inventory)) {
     return undefined;
@@ -2806,12 +2805,12 @@ function_7fe4ce88(item_name) {
 }
 
 has_inventory_item(slotid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   return isDefined(self.inventory.items[slotid]) && self.inventory.items[slotid].networkid != 32767;
 }
 
 init_inventory() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self.inventory = spawnStruct();
   self.inventory.items = [];
 
@@ -2832,13 +2831,13 @@ function_fe402108() {
 }
 
 function_e7af31c6(slotid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(slotid >= 0 && slotid < 16 + 1 + 6 + 1 + 6 + 1);
   return self.inventory.items[slotid].networkid != 32767;
 }
 
 function_f3195b3d(networkid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isint(networkid) && networkid != 32767);
 
   foreach(slot in array(10, 11, 12, 13, 16 + 1, 16 + 1 + 6 + 1)) {
@@ -2861,7 +2860,7 @@ function_f3195b3d(networkid) {
 }
 
 function_db2abc4(item) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(item));
 
   if(isDefined(item) && isDefined(item.itementry)) {
@@ -2898,7 +2897,7 @@ function_db2abc4(item) {
 }
 
 function_a24d6e36(networkid, notifyclient = 1, var_cda2ff12 = 1) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isint(networkid) && networkid != 32767);
   self endon(#"death");
   itemid = function_c48cd17f(networkid);
@@ -2966,7 +2965,7 @@ function_eb70ad46(networkid, notifyclient = 1, var_cda2ff12 = 1) {
 }
 
 remove_inventory_item(networkid, var_dfe6c7e5 = 0, notifyclient = 1, var_cda2ff12 = 1) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isint(networkid) && networkid != 32767);
   itemid = function_c48cd17f(networkid);
 
@@ -3079,7 +3078,7 @@ function_85287396(enabled) {
 }
 
 function_fba4a353(item) {
-  if(!isplayer(self) || !isDefined(self.inventory)) {
+  if(!isPlayer(self) || !isDefined(self.inventory)) {
     assert(0, "<dev string:x13f>");
     return false;
   }
@@ -3131,7 +3130,7 @@ function_fba4a353(item) {
 }
 
 function_ecd1c667(itemid, count) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(item_world_util::function_2c7fc531(itemid));
   self endon(#"death");
   item = function_b1702735(itemid);
@@ -3149,7 +3148,7 @@ function_ecd1c667(itemid, count) {
 }
 
 function_cfe0e919(networkid, count) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isint(count) && count > 0);
   self endon(#"death");
   item = get_inventory_item(networkid);
@@ -3196,7 +3195,7 @@ function_c4468806(player, item) {
 }
 
 function_394d85cd() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_13339abf = array(#"ammo_type_9mm_item", #"ammo_type_45_item", #"ammo_type_556_item", #"ammo_type_762_item", #"ammo_type_338_item", #"ammo_type_50cal_item", #"ammo_type_12ga_item", #"ammo_type_rocket_item");
   var_c2043143 = array(2, 4, 8, 16, 32, 64, 128, 256);
 
@@ -3225,7 +3224,7 @@ function_394d85cd() {
 }
 
 function_a2c7ce35() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_3e9ef0a1 = array(array(#"frag_grenade_wz_item", #"cluster_semtex_wz_item", #"acid_bomb_wz_item", #"molotov_wz_item", #"wraithfire_wz_item", #"hatchet_wz_item", #"tomahawk_t8_wz_item", #"seeker_mine_wz_item", #"dart_wz_item", #"hawk_wz_item", #"ultimate_turret_wz_item"), array(#"swat_grenade_wz_item", #"concussion_wz_item", #"smoke_grenade_wz_item", #"smoke_grenade_wz_item_spring_holiday", #"emp_grenade_wz_item", #"spectre_grenade_wz_item"), array(#"grapple_wz_item", #"unlimited_grapple_wz_item", #"barricade_wz_item", #"spiked_barrier_wz_item", #"trophy_system_wz_item", #"concertina_wire_wz_item", #"sensor_dart_wz_item", #"supply_pod_wz_item", #"trip_wire_wz_item", #"cymbal_monkey_wz_item", #"homunculus_wz_item", #"vision_pulse_wz_item", #"flare_gun_wz_item", #"flare_gun_veh_wz_item", #"wz_snowball", #"wz_waterballoon"));
   var_c77511ea = array(8192, 16384, 32768);
   var_710be50e = array(12);
@@ -3282,7 +3281,7 @@ function_a2c7ce35() {
 }
 
 function_2bb3a825() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_9b624be0 = array(#"health_item_small", #"health_item_medium", #"health_item_large", #"health_item_squad");
   var_448bc079 = array(512, 1024, 2048, 4096);
   var_5675add1 = array(10);
@@ -3364,7 +3363,7 @@ function_ec238da8() {
 
 reset_inventory() {
   self endon(#"death", #"disconnect");
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self.var_7bba6210 = 1;
   self disableoffhandspecial();
   self disableoffhandweapons();
@@ -3409,7 +3408,7 @@ reset_inventory() {
 }
 
 function_26c87da8(var_c9293a27, var_8f194e5a) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(var_c9293a27) && isDefined(var_8f194e5a));
 
   if(!isDefined(var_c9293a27) || !isDefined(var_8f194e5a)) {
@@ -3443,7 +3442,7 @@ function_26c87da8(var_c9293a27, var_8f194e5a) {
 }
 
 function_b3342af3(item, notifyclient = 1, ignoreweapon = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isstruct(item));
 
   foreach(slotid in array(16 + 1, 16 + 1 + 6 + 1)) {
@@ -3494,7 +3493,7 @@ function_b3342af3(item, notifyclient = 1, ignoreweapon = undefined) {
 }
 
 function_41a57271(item, slot, notifyclient = 1, ignoreattachment = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isstruct(item));
 
   if(!isDefined(item.attachments)) {
@@ -3519,7 +3518,7 @@ function_41a57271(item, slot, notifyclient = 1, ignoreattachment = undefined) {
 }
 
 function_d019bf1d(networkid, var_dfe6c7e5 = 0, notifyclient = 1, var_8eb4edca = 1) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isint(networkid) && networkid != 32767);
 
   if(!function_f3195b3d(networkid)) {
@@ -3563,7 +3562,7 @@ function_d019bf1d(networkid, var_dfe6c7e5 = 0, notifyclient = 1, var_8eb4edca = 
 }
 
 function_3f5b2e2e(item, notifyclient = 1, var_8eb4edca = 1) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isstruct(item));
   itemtype = item.itementry.itemtype;
   networkid = item.networkid;
@@ -3630,7 +3629,7 @@ function_3f5b2e2e(item, notifyclient = 1, var_8eb4edca = 1) {
 
 use_inventory_item(networkid, usecount = 1, var_dfe6c7e5 = 1) {
   self endon(#"death");
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isint(networkid) && networkid != 32767);
 
   for(i = 0; i < self.inventory.items.size; i++) {
@@ -3718,7 +3717,7 @@ function_d8ceeeec(notifyhash) {
 }
 
 use_killstreak(networkid, item) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(item));
   self endoncallback(&function_d8ceeeec, #"death");
 
@@ -3855,7 +3854,7 @@ use_killstreak(networkid, item) {
 }
 
 function_3d113bfb() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

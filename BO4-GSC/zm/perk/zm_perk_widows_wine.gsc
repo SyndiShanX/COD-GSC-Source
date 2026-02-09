@@ -203,7 +203,7 @@ function_10519783(var_c34665fc) {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clientfield::set("winters_wail_slow_field", 0);
     return;
   }

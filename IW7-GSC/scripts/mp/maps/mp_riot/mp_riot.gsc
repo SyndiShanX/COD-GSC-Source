@@ -9,11 +9,11 @@ main() {
   scripts\mp\maps\mp_riot\mp_riot_fx::main();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_riot");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("sm_sunCascadeSizeMultiplier1", 2);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraaccurateocclusionthreshold", 400);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraaccurateocclusionthreshold", 400);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

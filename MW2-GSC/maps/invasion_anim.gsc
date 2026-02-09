@@ -136,11 +136,11 @@ vehicles() {
   //addNotetrack_customFunction( "btr80", "BTRfire", ::btr80_notetrack_fire, "invasion_opening_BTR" );
 }
 
-//#using_animtree( "vehicles" );
+/using_animtree( "vehicles" );
 //bmp_door_close()
 //{
-//	self ClearAnim( %bmp_doors_open, 0 );
-//	self SetAnim( %bmp_doors_close );
+//	self ClearAnim(%bmp_doors_open, 0 );
+//	self SetAnim(%bmp_doors_close );
 //}
 
 #using_animtree("player");

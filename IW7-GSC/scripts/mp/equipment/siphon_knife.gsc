@@ -7,7 +7,7 @@ func_10218() {}
 
 func_1181D(var_0, var_1, var_2) {
   if(isDefined(var_2) && isDefined(var_1)) {
-    if(isplayer(var_1) && var_1 != var_2) {
+    if(isPlayer(var_1) && var_1 != var_2) {
       if(!level.teambased || var_2.team != var_1.team) {
         var_2 thread func_10219(var_2);
         scripts\mp\lightarmor::setlightarmorvalue(var_2, var_2.maxhealth, 0);

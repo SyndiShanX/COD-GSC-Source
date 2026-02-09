@@ -8,7 +8,7 @@
 #include maps\_anim;
 #include maps\_weather;
 
-//#include maps\dcemp_code;
+/include maps\dcemp_code;
 #using_animtree("generic_human");
 
 whitehouse_spotlight_create(str_targetname, health) {

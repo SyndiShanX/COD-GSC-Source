@@ -138,11 +138,11 @@ JavelinUsageLoop() {
     wait 0.05;
 
     debugDraw = false;
-    if(GetDVar("missileDebugDraw") == "1")
+    if(getDvar("missileDebugDraw") == "1")
       debugDraw = true;
 
     debugText = false;
-    if(GetDVar("missileDebugText") == "1")
+    if(getDvar("missileDebugText") == "1")
       debugText = true;
 
     weapon = self getCurrentWeapon();
@@ -193,7 +193,6 @@ JavelinUsageLoop() {
           self.javelinStage = 1;
           continue;
         }
-
       }
 
       if(LockMissesPassedThreshold()) {
@@ -364,7 +363,7 @@ GetTargetList() {
 }
 
 DebugSightLine(start, end, passed) {
-  if(GetDVar("missileDebugDraw") != "1") {
+  if(getDvar("missileDebugDraw") != "1") {
     return;
   }
   if(passed)

@@ -15,7 +15,7 @@ main() {
 generic_human_anims() {
   maps\_hand_signals::inithandsignals();
 
-  if(getdvar("intro_mask") == "0") {
+  if(getDvar("intro_mask") == "0") {
     level.scr_anim["rorke"]["cornered_intro_rorke_2_start"] = % cornered_intro_rorke_2_start;
     level.scr_anim["rorke"]["cornered_intro_rorke_2_end"] = % cornered_intro_rorke_2_end;
   } else {
@@ -517,7 +517,7 @@ prop_anims() {
   level.scr_animtree["intro_gun"] = #animtree;
   level.scr_model["intro_gun"] = "generic_prop_raven";
 
-  if(getdvar("intro_mask") == "0")
+  if(getDvar("intro_mask") == "0")
     level.scr_anim["intro_gun"]["cornered_intro_rorke_gun"] = % cornered_intro_rorke_gun;
   else
     level.scr_anim["intro_gun"]["cornered_intro_rorke_gun"] = % cornered_level_intro_merrick_start_gun;

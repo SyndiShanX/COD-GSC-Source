@@ -34,8 +34,9 @@ skipto_mason_deck() {
   maps\blackout_util::disable_phalanx_cannons("hackable_phalanx_cannon_spot");
   skipto_teleport("player_skipto_mason_deck", get_heroes());
 
-  if(-1)
+  if(-1) {
     level thread setup_claw_bigdog();
+  }
 
   level thread play_pip("blackout_dradis", 0);
 }
@@ -112,17 +113,20 @@ move_wave_1_towards_vtol() {
   for(i = 0; i < i < a_guys.size; i++) {
     wait(randomfloatrange(0.5, 1.5));
 
-    if(isalive(a_guys[i]))
+    if(isalive(a_guys[i])) {
       a_guys[i] setgoalvolumeauto(e_volume_fallback);
+    }
 
-    if(i == n_half_group_count)
+    if(i == n_half_group_count) {
       wait 5;
+    }
   }
 }
 
 player_deck_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(!isai(eattacker) && smeansofdeath != "MOD_TRIGGER_HURT" && smeansofdeath != "MOD_FALLING")
+  if(!isai(eattacker) && smeansofdeath != "MOD_TRIGGER_HURT" && smeansofdeath != "MOD_FALLING") {
     idamage = 1;
+  }
 
   return idamage;
 }
@@ -150,8 +154,9 @@ jetpack_respawners() {
       if(getaicount() < 18) {
         level thread maps\_jetpack_ai::create_jetpack_ai(s_align, "pmc_assault_guy", 0, ::func_jetpack_live_to_deck);
 
-        if(flag("vtol_ready_for_liftoff"))
+        if(flag("vtol_ready_for_liftoff")) {
           n_jetpack_far_spawned++;
+        }
       }
 
       wait(randomfloatrange(3.0, 5.0));
@@ -184,14 +189,16 @@ setup_deck_friendly_moveup() {
 
   t_moveup_1 = get_ent("deck_moveup_wave_1_clear", "targetname");
 
-  if(isDefined(t_moveup_1))
+  if(isDefined(t_moveup_1)) {
     t_moveup_1 notify("trigger");
+  }
 
   waittill_ai_group_cleared("deck_wave_2");
   t_moveup_2 = get_ent("deck_moveup_wave_2_clear", "targetname");
 
-  if(isDefined(t_moveup_2))
+  if(isDefined(t_moveup_2)) {
     t_moveup_2 notify("trigger");
+  }
 
   waittill_ai_group_amount_killed("deck_wave_3", 6);
   t_moveup_3 = get_ent("deck_moveup_wave_3_clear", "targetname");
@@ -203,8 +210,9 @@ setup_deck_friendly_moveup() {
 
   t_moveup_final = get_ent("deck_moveup_final", "targetname");
 
-  if(isDefined(t_moveup_final))
+  if(isDefined(t_moveup_final)) {
     t_moveup_final notify("trigger");
+  }
 }
 
 func_ai_make_aggressive() {
@@ -246,8 +254,9 @@ deck_danger_zone() {
 
 spawn_seals_from_optional_objective() {
   if(level.num_seals_saved > 0) {
-    for(i = 0; i < 3; i++)
+    for(i = 0; i < 3; i++) {
       simple_spawn_single("support_seal", ::magic_bullet_shield);
+    }
   } else
     spawn_manager_enable("sm_mason_deck_allies");
 }
@@ -280,11 +289,13 @@ func_jetpack_run_to_cover() {
 }
 
 deck_event_jetpack_drones(str_struct, str_flag, n_wait_min, n_wait_max) {
-  if(!isDefined(n_wait_min))
+  if(!isDefined(n_wait_min)) {
     n_wait_min = 2;
+  }
 
-  if(!isDefined(n_wait_max))
+  if(!isDefined(n_wait_max)) {
     n_wait_max = 4;
+  }
 
   level endon(str_flag);
   level thread deck_event_jetpack_drones_cleanup(str_struct, str_flag);
@@ -327,8 +338,9 @@ deck_event_menendez_takeoff() {
   level.v_menendez_f38.delete_on_death = 1;
   level.v_menendez_f38 notify("death");
 
-  if(!isalive(level.v_menendez_f38))
+  if(!isalive(level.v_menendez_f38)) {
     level.v_menendez_f38 delete();
+  }
 }
 
 dialog_combat_menendez_takeoff() {
@@ -408,8 +420,9 @@ deck_event_crashed_drone_cover() {
   wait 8.2;
   m_cover trigger_on();
 
-  if(level.player istouching(m_cover))
+  if(level.player istouching(m_cover)) {
     level.player dodamage(1000, level.player.origin, m_cover);
+  }
 
   drone_cover_toggle(1);
 }
@@ -417,8 +430,9 @@ deck_event_crashed_drone_cover() {
 drone_cover_toggle(b_enabled) {
   a_nodes = getnodearray("drone_cover_node", "script_noteworthy");
 
-  foreach(node in a_nodes)
-  setenablenode(node, b_enabled);
+  foreach(node in a_nodes) {
+    setenablenode(node, b_enabled);
+  }
 }
 
 deck_event_f38_crash() {
@@ -510,8 +524,9 @@ fail_condition_all_enemies_dead() {
   level endon("player_boarded_vtol");
   s_evac = get_struct("vtol_elevator_breadcrumb_struct", "targetname");
 
-  while(getaiarray("axis").size > 0)
+  while(getaiarray("axis").size > 0) {
     wait 5;
+  }
 
   set_objective(level.obj_evac, s_evac.origin, "", undefined, undefined, 30);
   wait 30;
@@ -521,8 +536,9 @@ fail_condition_all_enemies_dead() {
   wait 0.3;
   level.player dodamage(1000, level.player.origin);
 
-  if(!isgodmode(level.player))
+  if(!isgodmode(level.player)) {
     missionfailedwrapper(&"BLACKOUT_VTOL_FAIL");
+  }
 }
 
 outro_launchers_fire() {
@@ -541,8 +557,9 @@ run_mason_deck_final_deck_attackers() {
   sp_rpg add_spawn_function(::func_outro_enemy_attacker, s_goalpos, e_target);
   a_enemies = getaiarray("axis");
 
-  foreach(guy in a_enemies)
-  guy thread func_outro_enemy_attacker(s_goalpos, e_target);
+  foreach(guy in a_enemies) {
+    guy thread func_outro_enemy_attacker(s_goalpos, e_target);
+  }
 
   n_spawned = 0;
   a_warp_structs = get_struct_array("outro_rail_spawner_warp", "targetname", 1);
@@ -551,10 +568,11 @@ run_mason_deck_final_deck_attackers() {
   while(getaicount() < 18) {
     n_index = n_spawned % n_index_max;
 
-    if(n_index == 4)
+    if(n_index == 4) {
       simple_spawn_single(sp_rpg, ::func_outro_warp_to_deck_struct, a_warp_structs[n_index]);
-    else
+    } else {
       simple_spawn_single(sp_assault, ::func_outro_warp_to_deck_struct, a_warp_structs[n_index]);
+    }
 
     n_spawned++;
     wait 0.2;
@@ -619,12 +637,14 @@ run_mason_deck_final_fadeout(player_body) {
   if(isDefined(level.is_briggs_alive) && level.is_briggs_alive && (isDefined(level.player get_story_stat("CHINA_IS_ALLY")) && level.player get_story_stat("CHINA_IS_ALLY"))) {
     level.player giveachievement_wrapper("SP_STORY_OBAMA_SURVIVES");
 
-    if(isDefined(level.is_karma_alive) && level.is_karma_alive)
+    if(isDefined(level.is_karma_alive) && level.is_karma_alive) {
       level.player giveachievement_wrapper("SP_STORY_CHLOE_LIVES");
+    }
   }
 
-  if(isDefined(level.is_briggs_alive) && !level.is_briggs_alive || isDefined(level.player get_story_stat("CHINA_IS_ALLY")) && !level.player get_story_stat("CHINA_IS_ALLY"))
+  if(isDefined(level.is_briggs_alive) && !level.is_briggs_alive || isDefined(level.player get_story_stat("CHINA_IS_ALLY")) && !level.player get_story_stat("CHINA_IS_ALLY")) {
     level.player set_story_stat("KARMA_DEAD_IN_COMMAND_CENTER", 1);
+  }
 
   level.player notify("mission_finished");
   screen_fade_out(0.25);
@@ -649,8 +669,9 @@ board_vtol_audio() {
 
 vtol_player_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
   if(self.health < 50) {
-    if(str_weapon != "avenger_missile_turret_blackout")
+    if(str_weapon != "avenger_missile_turret_blackout") {
       n_damage = 0;
+    }
   }
 
   return n_damage;
@@ -714,8 +735,9 @@ delete_at_end_node() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 
   level notify("start_ambient");
 }
@@ -740,8 +762,9 @@ play_drone_swarm(b_earthquake) {
     wait 1.5;
   }
 
-  if(!isDefined(b_earthquake) || b_earthquake == 1)
+  if(!isDefined(b_earthquake) || b_earthquake == 1) {
     level thread drone_earthquake();
+  }
 
   level waittill("start_ambient");
   level thread sky_cowbell();
@@ -819,8 +842,9 @@ play_drone_swarm_old(b_earthquake) {
   drone thread drone_swarm_fire_squibs(3);
   drone thread delete_at_end_node();
 
-  if(!isDefined(b_earthquake) || b_earthquake == 1)
+  if(!isDefined(b_earthquake) || b_earthquake == 1) {
     level thread drone_earthquake();
+  }
 
   level waittill("start_ambient");
   level thread sky_cowbell();
@@ -936,8 +960,9 @@ _get_random_element_player_cant_see(a_elements) {
 
     b_can_player_see_point = e_player is_looking_at(s_element.origin, 0.3, b_do_trace);
 
-    if(!b_can_player_see_point)
+    if(!b_can_player_see_point) {
       b_found_element = 1;
+    }
 
     wait 0.1;
   }
@@ -963,24 +988,27 @@ sky_cowbell_drone_spawn_func(a_flight_structs) {
 }
 
 sky_cowbell_drone_tracker() {
-  if(!isDefined(level.sky_cowbell.drones))
+  if(!isDefined(level.sky_cowbell.drones)) {
     level.sky_cowbell.drones = [];
+  }
 
   level.sky_cowbell.drones[level.sky_cowbell.drones.size] = self;
   b_is_avenger = issubstr(self.vehicletype, "avenger");
 
-  if(b_is_avenger)
+  if(b_is_avenger) {
     level.sky_cowbell.avenger_count++;
-  else
+  } else {
     level.sky_cowbell.pegasus_count++;
+  }
 
   self waittill("death");
   arrayremovevalue(level.sky_cowbell.drones, undefined);
 
-  if(b_is_avenger)
+  if(b_is_avenger) {
     level.sky_cowbell.avenger_count--;
-  else
+  } else {
     level.sky_cowbell.pegasus_count--;
+  }
 }
 
 sky_cowbell_firing_func(a_valid_targets) {
@@ -1016,25 +1044,31 @@ sky_cowbell_firing_func(a_valid_targets) {
 }
 
 sky_cowbell_set_max_drones(n_count) {
-  if(!isDefined(level.sky_cowbell.max_count))
+  if(!isDefined(level.sky_cowbell.max_count)) {
     level.sky_cowbell.max_count = 20;
+  }
 
-  if(isDefined(n_count))
+  if(isDefined(n_count)) {
     level.sky_cowbell.max_count = n_count;
+  }
 }
 
 sky_cowbell_set_ratio(n_ratio_avenger, n_ratio_pegasus) {
-  if(!isDefined(level.sky_cowbell.ratio_avenger))
+  if(!isDefined(level.sky_cowbell.ratio_avenger)) {
     level.sky_cowbell.ratio_avenger = 2;
+  }
 
-  if(!isDefined(level.sky_cowbell.ratio_pegasus))
+  if(!isDefined(level.sky_cowbell.ratio_pegasus)) {
     level.sky_cowbell.ratio_pegasus = 1;
+  }
 
-  if(isDefined(n_ratio_avenger))
+  if(isDefined(n_ratio_avenger)) {
     level.sky_cowbell.ratio_avenger = n_ratio_avenger;
+  }
 
-  if(isDefined(n_ratio_pegasus))
+  if(isDefined(n_ratio_pegasus)) {
     level.sky_cowbell.ratio_pegasus = n_ratio_pegasus;
+  }
 
   n_total = sky_cowbell_get_ratio_total();
   n_pegasus_count = level.sky_cowbell.ratio_pegasus;
@@ -1135,14 +1169,16 @@ delete_corpse() {
   self endon("delete");
   self waittill("death");
 
-  while(self.origin[2] < -1028)
+  while(self.origin[2] < -1028) {
     wait 0.5;
+  }
 
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 run_missile_firing_drones_around_player() {
@@ -1181,8 +1217,9 @@ find_missile_fire_at_target_the_player_is_looking_at() {
       continue;
     }
 
-    if(b_can_player_see_point)
+    if(b_can_player_see_point) {
       b_found_element = 1;
+    }
 
     wait 0.1;
   }
@@ -1222,8 +1259,9 @@ run_dev_drones() {
     vh_menendez_f38.delete_on_death = 1;
     vh_menendez_f38 notify("death");
 
-    if(!isalive(vh_menendez_f38))
+    if(!isalive(vh_menendez_f38)) {
       vh_menendez_f38 delete();
+    }
 
     wait_network_frame();
   }
@@ -1245,8 +1283,9 @@ dev_drones_ambience() {
 }
 
 setup_deck_phalanx_cannon_targets(delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   if(isDefined(level.is_briggs_alive) && level.is_briggs_alive) {
     add_global_spawn_function("axis", ::brute_force_kill_jetpacks);
@@ -1277,11 +1316,13 @@ claw_fire_direction_func() {
   a_shooters = maps\_fire_direction::get_fire_direction_shooters();
   a_enemies = getaiarray("axis");
 
-  foreach(ai_guy in a_enemies)
-  ai_guy._fire_direction_targeted = undefined;
+  foreach(ai_guy in a_enemies) {
+    ai_guy._fire_direction_targeted = undefined;
+  }
 
-  if(a_shooters.size > 0)
+  if(a_shooters.size > 0) {
     array_thread(a_shooters, ::_claw_fire_direction_grenades, v_shoot_pos);
+  }
 }
 
 _claw_fire_direction_grenades(v_position) {
@@ -1315,16 +1356,18 @@ _claw_fire_guns_at_targets_in_range(v_position) {
       wait 6;
       self set_ignoreall(0);
 
-      if(isDefined(level.vh_market_drone))
+      if(isDefined(level.vh_market_drone)) {
         radiusdamage(level.vh_market_drone.origin, 500, 15000, 12000);
+      }
     }
   }
 
   a_enemies = getaiarray("axis");
   a_guys_within_range = get_within_range(v_position, a_enemies, 256);
 
-  foreach(ai_guy in a_guys_within_range)
-  ai_guy._fire_direction_targeted = 1;
+  foreach(ai_guy in a_guys_within_range) {
+    ai_guy._fire_direction_targeted = 1;
+  }
 
   n_time = gettime();
 
@@ -1350,8 +1393,9 @@ _intro_claw_fire_turret(e_target, n_time_to_fire, b_spinup) {
   n_fire_time = weaponfiretime(str_turret);
   self.turret setturretspinning(1);
 
-  if(!isDefined(b_spinup) || b_spinup == 1)
+  if(!isDefined(b_spinup) || b_spinup == 1) {
     wait 1.5;
+  }
 
   n_shots = int(n_time_to_fire / n_fire_time);
 
@@ -1361,7 +1405,6 @@ _intro_claw_fire_turret(e_target, n_time_to_fire, b_spinup) {
       self.turret shootturret();
 
       level thread draw_line_for_time(self.turret.origin, e_target.origin, 1, 1, 1, n_fire_time);
-
     }
 
     wait(n_fire_time);
@@ -1385,8 +1428,9 @@ _can_hit_target_safely(v_position, v_start_pos) {
   for(j = 0; j < a_friendlies.size; j++) {
     b_could_hit_friendly = distance(a_trace["position"], a_friendlies[j].origin) < 256;
 
-    if(b_could_hit_friendly)
+    if(b_could_hit_friendly) {
       b_will_hit_friendly = 1;
+    }
   }
 
   v_to_player = vectornormalize(level.player.origin - v_start_pos);
@@ -1427,7 +1471,6 @@ claw_pathing() {
     self waittill("goal");
     wait 0.5;
   }
-
 }
 
 notetrack_give_exit_enemy_weapon(ai_enemy) {

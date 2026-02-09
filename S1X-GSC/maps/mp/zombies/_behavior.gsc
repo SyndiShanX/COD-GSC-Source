@@ -147,7 +147,7 @@ humanoid_seek_enemies_all_known() {
     if(var_3.ignoreme || isDefined(var_3.owner) && var_3.owner.ignoreme) {
       continue;
     }
-    if((isagent(var_3) || isplayer(var_3)) && (var_3 isnotarget() || isDefined(var_3.owner) && var_3.owner isnotarget())) {
+    if((isagent(var_3) || isPlayer(var_3)) && (var_3 isnotarget() || isDefined(var_3.owner) && var_3.owner isnotarget())) {
       continue;
     }
     if(isalliedsentient(self, var_3)) {

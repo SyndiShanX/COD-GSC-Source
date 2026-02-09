@@ -782,7 +782,7 @@ func_27E7() {
     if(scripts\mp\utility\game::istrue(self.stunned)) {
       continue;
     }
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(!self.turret canbetargeted(var_1)) {
@@ -816,7 +816,7 @@ func_27EA() {
     if(scripts\mp\utility\game::istrue(self.stunned)) {
       continue;
     }
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(!self.turret canbetargeted(var_0)) {
@@ -1202,7 +1202,7 @@ func_CA50() {
   self.var_6569 = createobjective_engineer(var_0, 1, 1);
 
   foreach(var_2 in level.players) {
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     if(var_2 scripts\mp\utility\game::_hasperk("specialty_engineer") && var_2.team != self.team) {
@@ -1553,7 +1553,7 @@ func_27D8() {
 canbetargeted(var_0) {
   var_1 = 1;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(!scripts\mp\utility\game::isreallyalive(var_0) || var_0.sessionstate != "playing") {
       return 0;
     }
@@ -1571,11 +1571,11 @@ canbetargeted(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 == self.owner) {
+  if(isPlayer(var_0) && var_0 == self.owner) {
     return 0;
   }
 
-  if(isplayer(var_0) && isDefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 4) {
+  if(isPlayer(var_0) && isDefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 4) {
     return 0;
   }
 
@@ -1583,11 +1583,11 @@ canbetargeted(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) && scripts\mp\utility\game::func_C7A0(self gettagorigin("tag_flash"), var_0 getEye())) {
+  if(isPlayer(var_0) && scripts\mp\utility\game::func_C7A0(self gettagorigin("tag_flash"), var_0 getEye())) {
     return 0;
   }
 
-  if(!isplayer(var_0) && scripts\mp\utility\game::func_C7A0(self gettagorigin("tag_flash"), var_0.origin)) {
+  if(!isPlayer(var_0) && scripts\mp\utility\game::func_C7A0(self gettagorigin("tag_flash"), var_0.origin)) {
     return 0;
   }
 

@@ -1,6 +1,6 @@
 /***********************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_weap_microwavegun.csc
+ * Script: clientscripts\_zombiemode_weap_microwavegun\.csc
 ***********************************************************/
 
 #include clientscripts\_utility;
@@ -22,28 +22,24 @@ init() {
   level._effect["microwavegun_sizzle_death_mist_low_g"] = loadfx("weapon/microwavegun/fx_sizzle_mist_low_g");
   level thread player_init();
 }
-
 player_init() {
   waitforclient(0);
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
   }
 }
-
 microwavegun_create_hit_response_fx(localClientNum, tag, effect) {
   if(!isDefined(self._microwavegun_hit_response_fx[localClientNum][tag])) {
     self._microwavegun_hit_response_fx[localClientNum][tag] = playFXOnTag(localClientNum, effect, self, tag);
   }
 }
-
 microwavegun_delete_hit_response_fx(localClientNum, tag) {
   if(isDefined(self._microwavegun_hit_response_fx[localClientNum][tag])) {
     DeleteFx(localClientNum, self._microwavegun_hit_response_fx[localClientNum][tag], false);
     self._microwavegun_hit_response_fx[localClientNum][tag] = undefined;
   }
 }
-
 microwavegun_bloat(localClientNum) {
   self endon("entityshutdown");
   durationMsec = 2500;
@@ -57,8 +53,9 @@ microwavegun_bloat(localClientNum) {
   while(1) {
     age = GetRealTime() - begin_time;
     bloat_fraction = age / durationMsec;
-    if(bloat_fraction > bloat_max_fraction)
+    if(bloat_fraction > bloat_max_fraction) {
       bloat_fraction = bloat_max_fraction;
+    }
     if(!isDefined(self)) {
       return;
     }
@@ -69,7 +66,6 @@ microwavegun_bloat(localClientNum) {
     realwait(0.05);
   }
 }
-
 microwavegun_zombie_initial_hit_response(localClientNum, set, newEnt) {
   if(isDefined(self.microwavegun_zombie_hit_response)) {
     self[[self.microwavegun_zombie_hit_response]](localClientNum, set, newEnt);
@@ -82,7 +78,7 @@ microwavegun_zombie_initial_hit_response(localClientNum, set, newEnt) {
     self._microwavegun_hit_response_fx = [];
   }
   self.microwavegun_initial_hit_response = true;
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     if(!isDefined(self._microwavegun_hit_response_fx[i])) {
       self._microwavegun_hit_response_fx[i] = [];
@@ -93,7 +89,6 @@ microwavegun_zombie_initial_hit_response(localClientNum, set, newEnt) {
     }
   }
 }
-
 microwavegun_zombie_expand_response(localClientNum, set, newEnt) {
   if(isDefined(self.microwavegun_zombie_hit_response)) {
     self[[self.microwavegun_zombie_hit_response]](localClientNum, set, newEnt);
@@ -106,7 +101,7 @@ microwavegun_zombie_expand_response(localClientNum, set, newEnt) {
     self._microwavegun_hit_response_fx = [];
   }
   initial_hit_occurred = isDefined(self.microwavegun_initial_hit_response) && self.microwavegun_initial_hit_response;
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     if(!isDefined(self._microwavegun_hit_response_fx[i])) {
       self._microwavegun_hit_response_fx[i] = [];

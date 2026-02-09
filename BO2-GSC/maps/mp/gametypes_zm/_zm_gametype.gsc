@@ -61,11 +61,11 @@ main() {
   level.dontshowendreason = 1;
   level.forceallallies = 0;
   level.allow_teamchange = 0;
-  setdvar("scr_disable_team_selection", 1);
+  setDvar("scr_disable_team_selection", 1);
   makedvarserverinfo("scr_disable_team_selection", 1);
   setmatchflag("hud_zombie", 1);
-  setdvar("scr_disable_weapondrop", 1);
-  setdvar("scr_xpscale", 0);
+  setDvar("scr_disable_weapondrop", 1);
+  setDvar("scr_xpscale", 0);
   level.onstartgametype = ::onstartgametype;
   level.onspawnplayer = ::blank;
   level.onspawnplayerunified = ::onspawnplayerunified;
@@ -76,14 +76,14 @@ main() {
   set_game_var("_team1_num", 0);
   set_game_var("_team2_num", 0);
   map_name = level.script;
-  mode = getdvar(#"ui_gametype");
+  mode = getDvar(#"ui_gametype");
 
   if((!isDefined(mode) || mode == "") && isDefined(level.default_game_mode))
     mode = level.default_game_mode;
 
   set_gamemode_var_once("mode", mode);
   set_game_var_once("side_selection", 1);
-  location = getdvar(#"ui_zm_mapstartlocation");
+  location = getDvar(#"ui_zm_mapstartlocation");
 
   if(location == "" && isDefined(level.default_start_location))
     location = level.default_start_location;
@@ -96,7 +96,7 @@ main() {
   set_gamemode_var_once("current_round", 0);
   set_gamemode_var_once("rules_read", 0);
   set_game_var_once("switchedsides", 0);
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   game["dialog"]["gametype"] = gametype + "_start";
   game["dialog"]["gametype_hardcore"] = gametype + "_start";
   game["dialog"]["offense_obj"] = "generic_boost";
@@ -280,17 +280,17 @@ game_module_player_damage_callback(einflictor, eattacker, idamage, idflags, smea
   self.last_damage_from_zombie_or_player = 0;
 
   if(isDefined(eattacker)) {
-    if(isplayer(eattacker) && eattacker == self) {
+    if(isPlayer(eattacker) && eattacker == self) {
       return;
     }
-    if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker))
+    if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isPlayer(eattacker))
       self.last_damage_from_zombie_or_player = 1;
   }
 
   if(isDefined(self._being_shellshocked) && self._being_shellshocked || self maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
     return;
   }
-  if(isplayer(eattacker) && isDefined(eattacker._encounters_team) && eattacker._encounters_team != self._encounters_team) {
+  if(isPlayer(eattacker) && isDefined(eattacker._encounters_team) && eattacker._encounters_team != self._encounters_team) {
     if(isDefined(self.hasriotshield) && self.hasriotshield && isDefined(vdir)) {
       if(isDefined(self.hasriotshieldequipped) && self.hasriotshieldequipped) {
         if(self maps\mp\zombies\_zm::player_shield_facing_attacker(vdir, 0.2) && isDefined(self.player_shield_apply_damage))
@@ -372,7 +372,7 @@ rungametypeprecache(gamemode) {
 
   if(isDefined(level.gamemode_map_location_precache)) {
     if(isDefined(level.gamemode_map_location_precache[gamemode])) {
-      loc = getdvar(#"ui_zm_mapstartlocation");
+      loc = getDvar(#"ui_zm_mapstartlocation");
 
       if(loc == "" && isDefined(level.default_start_location))
         loc = level.default_start_location;
@@ -399,7 +399,7 @@ rungametypemain(gamemode, mode_main_func, use_round_logic) {
 
   if(isDefined(level.gamemode_map_location_main)) {
     if(isDefined(level.gamemode_map_location_main[gamemode])) {
-      loc = getdvar(#"ui_zm_mapstartlocation");
+      loc = getDvar(#"ui_zm_mapstartlocation");
 
       if(loc == "" && isDefined(level.default_start_location))
         loc = level.default_start_location;
@@ -445,7 +445,7 @@ round_logic(mode_logic_func) {
   cur_round = get_gamemode_var("current_round");
   set_gamemode_var("current_round", cur_round + 1);
   game["gamemode_match"]["rounds"][cur_round] = spawnStruct();
-  game["gamemode_match"]["rounds"][cur_round].mode = getdvar(#"ui_gametype");
+  game["gamemode_match"]["rounds"][cur_round].mode = getDvar(#"ui_gametype");
   level thread[[mode_logic_func]]();
   flag_wait("start_encounters_match_logic");
   level.gamestarttime = gettime();
@@ -853,7 +853,7 @@ module_hud_full_screen_overlay() {
   fadetoblack.foreground = 1;
   fadetoblack.sort = 0;
 
-  if(is_encounter() || getdvar(#"ui_gametype") == "zcleansed")
+  if(is_encounter() || getDvar(#"ui_gametype") == "zcleansed")
     level waittill_any_or_timeout(25, "start_fullscreen_fade_out");
   else
     level waittill_any_or_timeout(25, "start_zombie_round_logic");
@@ -1221,7 +1221,6 @@ onspawnplayer(predictedspawn) {
 
       if(!isDefined(spawnpoint))
         println("ZM >> WARNING UNABLE TO FIND RESPAWN POINT NEAR TEAM - USING INITIAL SPAWN POINTS");
-
     }
 
     if(!isDefined(spawnpoint)) {

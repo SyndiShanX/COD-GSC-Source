@@ -4,15 +4,15 @@
 ***************************************************/
 
 main() {
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
-  setdvar("r_mpRimColor", ".7 .9 1");
-  setdvar("r_mpRimStrength", "7");
-  setdvar("r_mpRimDiffuseTint", ".77 .85 1.1");
+  setDvar("r_mpRimColor", ".7 .9 1");
+  setDvar("r_mpRimStrength", "7");
+  setDvar("r_mpRimDiffuseTint", ".77 .85 1.1");
 
-  setdvar("r_gunSightColorEntityScale", "7");
-  setdvar("r_gunSightColorNoneScale", "0.8");
+  setDvar("r_gunSightColorEntityScale", "7");
+  setDvar("r_gunSightColorNoneScale", "0.8");
 
   if(level.currentgen) {
     level.ospvisionset = "mp_levity_osp";
@@ -24,5 +24,4 @@ main() {
     level.droneVisionSet = "mp_levity_drone";
     level.droneLightSet = "mp_levity_drone";
   }
-
 }

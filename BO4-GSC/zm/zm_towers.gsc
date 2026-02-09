@@ -66,9 +66,9 @@
 autoexec opt_in() {
   level.aat_in_use = 1;
   level.bgb_in_use = 1;
-  setdvar(#"player_usewaterfriction", 0);
-  setdvar(#"hash_558e57dbb6559778", 1);
-  setdvar(#"r_lightingsunshadowcachedynamicsiegedistance", 3000);
+  setDvar(#"player_usewaterfriction", 0);
+  setDvar(#"hash_558e57dbb6559778", 1);
+  setDvar(#"r_lightingsunshadowcachedynamicsiegedistance", 3000);
   level.var_13473346 = 0;
   level.zombie_round_start_delay = 0;
   level.pack_a_punch_camo_index = 151;

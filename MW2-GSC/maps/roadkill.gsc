@@ -11,7 +11,7 @@
 #include maps\_hud_util;
 
 main() {
-  setdvar("newintro", 1);
+  setDvar("newintro", 1);
   SetSavedDvar("physVeh_collideWithClipOnly", 1);
   level.toffset = 0;
   level.nocompass = true;
@@ -1945,5 +1945,4 @@ roadkill_music() {
       AssertMsg("Unhandled start point " + level.start_point);
       break;
   }
-
 }

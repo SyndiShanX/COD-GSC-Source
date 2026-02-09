@@ -79,5 +79,5 @@ function rscrecteleport(params) {
   angles = player getplayerangles();
   cmd = (((((((((("" + pos[0]) + "") + pos[1]) + "") + pos[2]) + "") + angles[0]) + "") + angles[1]) + "") + angles[2];
   ratrecordmessage(0, "", cmd);
-  setdvar("", "");
+  setDvar("", "");
 }

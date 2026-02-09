@@ -6,7 +6,6 @@
 main() {
   if(!isDefined(level._id_1DC1)) {
     level._id_1DC1 = 0.2;
-
   }
   level._id_1DC2["awning"] = 1.0;
   level._id_1DC2["palm"] = 1.0;
@@ -15,11 +14,9 @@ main() {
 
   if(level._id_1DC3 < 0.1) {
     level._id_1DC3 = 0.1;
-
   }
   if(level._id_1DC4 > 1.0) {
     level._id_1DC4 = 1.0;
-
   }
   level.inc = 0;
   _id_1DD1();
@@ -71,7 +68,6 @@ windcontroller() {
 
     if(randomint(100) > 50) {
       var_0 = "right";
-
     }
     level notify("wind blows", var_0);
     wait(2 + randomfloat(10));
@@ -110,18 +106,15 @@ _id_1DCA(var_0, var_1) {
 
   if(common_scripts\utility::cointoss()) {
     var_4 = var_4 * -1;
-
   }
   var_5 = 80;
   var_6 = 80;
 
   if(isDefined(var_0._id_1DCB)) {
     var_6 = var_0._id_1DCB;
-
   }
   if(isDefined(var_0._id_1DCC)) {
     var_5 = var_0._id_1DCC;
-
   }
   for(;;) {
     var_0 notify("shutterSound");
@@ -141,7 +134,6 @@ _id_1DCA(var_0, var_1) {
       }
     } else if(var_7 > var_6) {
       var_7 = var_6;
-
     }
     var_8 = var_2.startyaw + var_7;
     var_9 = abs(var_2.angles[1] - var_8);
@@ -149,7 +141,6 @@ _id_1DCA(var_0, var_1) {
 
     if(var_10 < 0.25) {
       var_10 = 0.25;
-
     }
     var_2 rotateto((0, var_8, 0), var_10, var_10 * 0.5, var_10 * 0.5);
     wait(var_10);
@@ -164,7 +155,6 @@ shutterwanderleft(var_0, var_1) {
 
   if(var_1 == "left") {
     var_2 = var_2 + 179.9;
-
   }
   var_3 = 0.2;
   var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
@@ -176,21 +166,18 @@ shutterwanderleft(var_0, var_1) {
 
     if(common_scripts\utility::cointoss()) {
       var_4 = var_4 * -1;
-
     }
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
     if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
       var_2 = var_5;
-
     }
     var_6 = abs(var_0.angles[1] - var_2);
     var_3 = var_6 * 0.02 + randomfloat(2);
 
     if(var_3 < 0.3) {
       var_3 = 0.3;
-
     }
     var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
@@ -205,7 +192,6 @@ shutterwanderright(var_0, var_1) {
 
   if(var_1 == "left") {
     var_2 = var_2 + 179.9;
-
   }
   var_3 = 0.2;
   var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
@@ -217,21 +203,18 @@ shutterwanderright(var_0, var_1) {
 
     if(randomint(100) > 50) {
       var_4 = var_4 * -1;
-
     }
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
     if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
       var_2 = var_5;
-
     }
     var_6 = abs(var_0.angles[1] - var_2);
     var_3 = var_6 * 0.02 + randomfloat(2);
 
     if(var_3 < 0.3) {
       var_3 = 0.3;
-
     }
     var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);

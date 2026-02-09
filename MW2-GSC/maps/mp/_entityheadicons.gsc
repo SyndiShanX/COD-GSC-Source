@@ -149,84 +149,84 @@ keepPositioned(owner, offset) {
 }
 
 setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"{
-  if(!level.teamBased) {
-    return;
-  }
-  if(!isDefined(self.entityHeadIconTeam)) {
-    self.entityHeadIconTeam = "none";
-    self.entityHeadIcon = undefined;
-  }
+if(!level.teamBased) {
+  return;
+}
+if(!isDefined(self.entityHeadIconTeam)) {
+  self.entityHeadIconTeam = "none";
+  self.entityHeadIcon = undefined;
+}
 
-  shader = game["entity_headicon_" + team];
+shader = game["entity_headicon_" + team];
 
-  self.entityHeadIconTeam = team;
+self.entityHeadIconTeam = team;
 
-  if(isDefined(offset))
-    self.entityHeadIconOffset = offset;
-  else
-    self.entityHeadIconOffset = (0, 0, 0);
+if(isDefined(offset))
+  self.entityHeadIconOffset = offset;
+else
+  self.entityHeadIconOffset = (0, 0, 0);
 
-  self notify("kill_entity_headicon_thread");
+self notify("kill_entity_headicon_thread");
 
-  if(team == "none") {
-    if(isDefined(self.entityHeadIcon))
-      self.entityHeadIcon destroy();
-    return;
-  }
+if(team == "none") {
+  if(isDefined(self.entityHeadIcon))
+    self.entityHeadIcon destroy();
+  return;
+}
 
-  headIcon = newTeamHudElem(team);
-  headIcon.archived = true;
-  headIcon.x = self.origin[0] + self.entityHeadIconOffset[0];
-  headIcon.y = self.origin[1] + self.entityHeadIconOffset[1];
-  headIcon.z = self.origin[2] + self.entityHeadIconOffset[2];
-  headIcon.alpha = .8;
-  headIcon setShader(shader, 10, 10);
-  headIcon setWaypoint(false, false);
-  self.entityHeadIcon = headIcon;
+headIcon = newTeamHudElem(team);
+headIcon.archived = true;
+headIcon.x = self.origin[0] + self.entityHeadIconOffset[0];
+headIcon.y = self.origin[1] + self.entityHeadIconOffset[1];
+headIcon.z = self.origin[2] + self.entityHeadIconOffset[2];
+headIcon.alpha = .8;
+headIcon setShader(shader, 10, 10);
+headIcon setWaypoint(false, false);
+self.entityHeadIcon = headIcon;
 
-  self thread keepIconPositioned();
-  self thread destroyHeadIconsOnDeath();
+self thread keepIconPositioned();
+self thread destroyHeadIconsOnDeath();
 }
 
 setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"{
-  if(level.teamBased) {
-    return;
-  }
-  if(!isDefined(self.entityHeadIconTeam)) {
-    self.entityHeadIconTeam = "none";
-    self.entityHeadIcon = undefined;
-  }
+if(level.teamBased) {
+  return;
+}
+if(!isDefined(self.entityHeadIconTeam)) {
+  self.entityHeadIconTeam = "none";
+  self.entityHeadIcon = undefined;
+}
 
-  self notify("kill_entity_headicon_thread");
+self notify("kill_entity_headicon_thread");
 
-  if(!isDefined(player)) {
-    if(isDefined(self.entityHeadIcon))
-      self.entityHeadIcon destroy();
-    return;
-  }
+if(!isDefined(player)) {
+  if(isDefined(self.entityHeadIcon))
+    self.entityHeadIcon destroy();
+  return;
+}
 
-  team = player.team;
-  self.entityHeadIconTeam = team;
+team = player.team;
+self.entityHeadIconTeam = team;
 
-  if(isDefined(offset))
-    self.entityHeadIconOffset = offset;
-  else
-    self.entityHeadIconOffset = (0, 0, 0);
+if(isDefined(offset))
+  self.entityHeadIconOffset = offset;
+else
+  self.entityHeadIconOffset = (0, 0, 0);
 
-  shader = game["entity_headicon_" + team];
+shader = game["entity_headicon_" + team];
 
-  headIcon = newClientHudElem(player);
-  headIcon.archived = true;
-  headIcon.x = self.origin[0] + self.entityHeadIconOffset[0];
-  headIcon.y = self.origin[1] + self.entityHeadIconOffset[1];
-  headIcon.z = self.origin[2] + self.entityHeadIconOffset[2];
-  headIcon.alpha = .8;
-  headIcon setShader(shader, 10, 10);
-  headIcon setWaypoint(false, false);
-  self.entityHeadIcon = headIcon;
+headIcon = newClientHudElem(player);
+headIcon.archived = true;
+headIcon.x = self.origin[0] + self.entityHeadIconOffset[0];
+headIcon.y = self.origin[1] + self.entityHeadIconOffset[1];
+headIcon.z = self.origin[2] + self.entityHeadIconOffset[2];
+headIcon.alpha = .8;
+headIcon setShader(shader, 10, 10);
+headIcon setWaypoint(false, false);
+self.entityHeadIcon = headIcon;
 
-  self thread keepIconPositioned();
-  self thread destroyHeadIconsOnDeath();
+self thread keepIconPositioned();
+self thread destroyHeadIconsOnDeath();
 }
 
 keepIconPositioned() {

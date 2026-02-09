@@ -982,7 +982,7 @@ bossozstage2dodeath() {
 }
 
 givebossozkillwithblunderbussachievement(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_1)) {
+  if(isDefined(var_0) && isPlayer(var_0) && isDefined(var_1)) {
     var_3 = getweaponbasename(var_1);
 
     if(!isDefined(var_2) || var_2 != "MOD_MELEE") {
@@ -1407,7 +1407,7 @@ bossozstage2getleaptarget() {
     }
   }
 
-  if(isplayer(self.curmeleetarget)) {
+  if(isPlayer(self.curmeleetarget)) {
     if(!self.curmeleetarget isonground() || self.curmeleetarget isnoclip()) {
       var_0.valid = 0;
     }
@@ -1434,7 +1434,7 @@ bossozstage2modifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
   var_2 = int(min(var_2, var_0.health - var_8));
 
-  if(isDefined(var_1) && isplayer(var_1) && isDefined(var_3) && var_3 == "MOD_MELEE_ALT" && isDefined(var_4) && var_4 == "iw5_exominigunzm_mp") {
+  if(isDefined(var_1) && isPlayer(var_1) && isDefined(var_3) && var_3 == "MOD_MELEE_ALT" && isDefined(var_4) && var_4 == "iw5_exominigunzm_mp") {
     var_1 maps\mp\gametypes\zombies::givezombieachievement("DLC4_ZOMBIE_GOTOSLEEP");
   }
 

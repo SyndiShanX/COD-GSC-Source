@@ -22,52 +22,52 @@ function autoexec __init__sytem__() {
 }
 
 function __init__() {
-  setdvar("scr_veh_cleanupdebugprint", "0");
-  setdvar("scr_veh_driversarehidden", "1");
-  setdvar("scr_veh_driversareinvulnerable", "1");
-  setdvar("scr_veh_alive_cleanuptimemin", "119");
-  setdvar("scr_veh_alive_cleanuptimemax", "120");
-  setdvar("scr_veh_dead_cleanuptimemin", "20");
-  setdvar("scr_veh_dead_cleanuptimemax", "30");
-  setdvar("scr_veh_cleanuptime_dmgfactor_min", "0.33");
-  setdvar("scr_veh_cleanuptime_dmgfactor_max", "1.0");
-  setdvar("scr_veh_cleanuptime_dmgfactor_deadtread", "0.25");
-  setdvar("scr_veh_cleanuptime_dmgfraction_curve_begin", "0.0");
-  setdvar("scr_veh_cleanuptime_dmgfraction_curve_end", "1.0");
-  setdvar("scr_veh_cleanupabandoned", "1");
-  setdvar("scr_veh_cleanupdrifted", "1");
-  setdvar("scr_veh_cleanupmaxspeedmph", "1");
-  setdvar("scr_veh_cleanupmindistancefeet", "75");
-  setdvar("scr_veh_waittillstoppedandmindist_maxtime", "10");
-  setdvar("scr_veh_waittillstoppedandmindist_maxtimeenabledistfeet", "5");
-  setdvar("scr_veh_respawnafterhuskcleanup", "1");
-  setdvar("scr_veh_respawntimemin", "50");
-  setdvar("scr_veh_respawntimemax", "90");
-  setdvar("scr_veh_respawnwait_maxiterations", "30");
-  setdvar("scr_veh_respawnwait_iterationwaitseconds", "1");
-  setdvar("scr_veh_disablerespawn", "0");
-  setdvar("scr_veh_disableoverturndamage", "0");
-  setdvar("scr_veh_explosion_spawnfx", "1");
-  setdvar("scr_veh_explosion_doradiusdamage", "1");
-  setdvar("scr_veh_explosion_radius", "256");
-  setdvar("scr_veh_explosion_mindamage", "20");
-  setdvar("scr_veh_explosion_maxdamage", "200");
-  setdvar("scr_veh_ondeath_createhusk", "1");
-  setdvar("scr_veh_ondeath_usevehicleashusk", "1");
-  setdvar("scr_veh_explosion_husk_forcepointvariance", "30");
-  setdvar("scr_veh_explosion_husk_horzvelocityvariance", "25");
-  setdvar("scr_veh_explosion_husk_vertvelocitymin", "100");
-  setdvar("scr_veh_explosion_husk_vertvelocitymax", "200");
-  setdvar("scr_veh_explode_on_cleanup", "1");
-  setdvar("scr_veh_disappear_maxwaittime", "60");
-  setdvar("scr_veh_disappear_maxpreventdistancefeet", "30");
-  setdvar("scr_veh_disappear_maxpreventvisibilityfeet", "150");
-  setdvar("scr_veh_health_tank", "1350");
+  setDvar("scr_veh_cleanupdebugprint", "0");
+  setDvar("scr_veh_driversarehidden", "1");
+  setDvar("scr_veh_driversareinvulnerable", "1");
+  setDvar("scr_veh_alive_cleanuptimemin", "119");
+  setDvar("scr_veh_alive_cleanuptimemax", "120");
+  setDvar("scr_veh_dead_cleanuptimemin", "20");
+  setDvar("scr_veh_dead_cleanuptimemax", "30");
+  setDvar("scr_veh_cleanuptime_dmgfactor_min", "0.33");
+  setDvar("scr_veh_cleanuptime_dmgfactor_max", "1.0");
+  setDvar("scr_veh_cleanuptime_dmgfactor_deadtread", "0.25");
+  setDvar("scr_veh_cleanuptime_dmgfraction_curve_begin", "0.0");
+  setDvar("scr_veh_cleanuptime_dmgfraction_curve_end", "1.0");
+  setDvar("scr_veh_cleanupabandoned", "1");
+  setDvar("scr_veh_cleanupdrifted", "1");
+  setDvar("scr_veh_cleanupmaxspeedmph", "1");
+  setDvar("scr_veh_cleanupmindistancefeet", "75");
+  setDvar("scr_veh_waittillstoppedandmindist_maxtime", "10");
+  setDvar("scr_veh_waittillstoppedandmindist_maxtimeenabledistfeet", "5");
+  setDvar("scr_veh_respawnafterhuskcleanup", "1");
+  setDvar("scr_veh_respawntimemin", "50");
+  setDvar("scr_veh_respawntimemax", "90");
+  setDvar("scr_veh_respawnwait_maxiterations", "30");
+  setDvar("scr_veh_respawnwait_iterationwaitseconds", "1");
+  setDvar("scr_veh_disablerespawn", "0");
+  setDvar("scr_veh_disableoverturndamage", "0");
+  setDvar("scr_veh_explosion_spawnfx", "1");
+  setDvar("scr_veh_explosion_doradiusdamage", "1");
+  setDvar("scr_veh_explosion_radius", "256");
+  setDvar("scr_veh_explosion_mindamage", "20");
+  setDvar("scr_veh_explosion_maxdamage", "200");
+  setDvar("scr_veh_ondeath_createhusk", "1");
+  setDvar("scr_veh_ondeath_usevehicleashusk", "1");
+  setDvar("scr_veh_explosion_husk_forcepointvariance", "30");
+  setDvar("scr_veh_explosion_husk_horzvelocityvariance", "25");
+  setDvar("scr_veh_explosion_husk_vertvelocitymin", "100");
+  setDvar("scr_veh_explosion_husk_vertvelocitymax", "200");
+  setDvar("scr_veh_explode_on_cleanup", "1");
+  setDvar("scr_veh_disappear_maxwaittime", "60");
+  setDvar("scr_veh_disappear_maxpreventdistancefeet", "30");
+  setDvar("scr_veh_disappear_maxpreventvisibilityfeet", "150");
+  setDvar("scr_veh_health_tank", "1350");
   level.vehicle_drivers_are_invulnerable = getdvarint("scr_veh_driversareinvulnerable");
   level.onejectoccupants = &vehicle_eject_all_occupants;
   level.vehiclehealths["panzer4_mp"] = 2600;
   level.vehiclehealths["t34_mp"] = 2600;
-  setdvar("scr_veh_health_jeep", "700");
+  setDvar("scr_veh_health_jeep", "700");
   if(init_vehicle_entities()) {
     level.vehicle_explosion_effect = "_t6/vehicle/vexplosion/fx_vexplode_helicopter_exp_mp";
     level.veh_husk_models = [];
@@ -1321,7 +1321,7 @@ function function_87e9a4ad(veh_name, origin, angles) {
 
 function function_4b28749d(vehicle) {
   vehicle endon("death");
-  setdvar("", 0);
+  setDvar("", 0);
   while(true) {
     if(getdvarint("") != 0) {
       destroy_vehicle(vehicle);

@@ -173,7 +173,7 @@ run_scene() {
   while(1) {
     self waittill("trigger", player);
 
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       wait 0.05;
       continue;
     }
@@ -366,7 +366,6 @@ alien_lurker_init() {
 
   level notify("alien_lurkers_spawn_initialized");
 
-  /#	
   if(!alien_mode_has("nogame"))
     thread lurker_loop();
 }
@@ -848,7 +847,6 @@ debug_circle(center, radius, color, depthTest, segments, time) {
     time -= 0.05;
     wait 0.05;
   }
-
 }
 
 reset_teleport_inuse(node) {
@@ -916,17 +914,17 @@ ai_event_settings() {
   level.old_ai_eventdistnewenemy = GetDvarInt("ai_eventdistnewenemy");
   level.old_ai_eventdistdeath = GetDvarInt("ai_eventdistdeath");
 
-  SetDvar("ai_eventdistgunshot", CONST_LURKER_GUNSHOT_ALERT_DIST);
-  SetDvar("ai_eventdistgunshotteam", CONST_LURKER_GUNSHOT_ALERT_DIST);
-  SetDvar("ai_eventdistnewenemy", CONST_LURKER_ALERT_DIST);
-  SetDvar("ai_eventdistdeath", CONST_LURKER_ALERT_DIST);
+  setDvar("ai_eventdistgunshot", CONST_LURKER_GUNSHOT_ALERT_DIST);
+  setDvar("ai_eventdistgunshotteam", CONST_LURKER_GUNSHOT_ALERT_DIST);
+  setDvar("ai_eventdistnewenemy", CONST_LURKER_ALERT_DIST);
+  setDvar("ai_eventdistdeath", CONST_LURKER_ALERT_DIST);
 }
 
 ai_event_settings_reset() {
-  SetDvar("ai_eventdistgunshot", level.old_ai_eventdistgunshot);
-  SetDvar("ai_eventdistgunshotteam", level.old_ai_eventdistgunshotteam);
-  SetDvar("ai_eventdistnewenemy", level.old_ai_eventdistnewenemy);
-  SetDvar("ai_eventdistdeath", level.old_ai_eventdistdeath);
+  setDvar("ai_eventdistgunshot", level.old_ai_eventdistgunshot);
+  setDvar("ai_eventdistgunshotteam", level.old_ai_eventdistgunshotteam);
+  setDvar("ai_eventdistnewenemy", level.old_ai_eventdistnewenemy);
+  setDvar("ai_eventdistdeath", level.old_ai_eventdistdeath);
 }
 
 remove_farthest_lurker(avoid_ents) {
@@ -1207,7 +1205,7 @@ wakeup_to_player_damage() {
   while(true) {
     self waittill("damage", damage, attacker);
 
-    if(isDefined(attacker) && isalive(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker)) {
       break;
     }
   }
@@ -1741,7 +1739,6 @@ encounter_cycle_spawn(force_cycle_start_notify, endon_notify) {
   if(getdvarint("scr_debugcyclecount") == 1) {
     println("CYCLE_COUNT_DEBUG -- > Cycle Count INCREMENTED to: " + level.cycle_count);
   }
-
 }
 
 init_cycle_count() {

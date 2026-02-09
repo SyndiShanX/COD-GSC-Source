@@ -161,7 +161,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       level thread dogtags::spawn_dog_tag(self, attacker, &dogtags::onusedogtag, 0);
     }
   }
-  if(isplayer(attacker) == 0 || attacker.team == self.team) {
+  if(isPlayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
   if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {

@@ -63,7 +63,7 @@ getoriginformeleesectors(var_0) {
         var_1 = var_2.origin;
       }
     }
-  } else if(isplayer(var_0) && (var_0 isjumping() || var_0 ishighjumping())) {
+  } else if(isPlayer(var_0) && (var_0 isjumping() || var_0 ishighjumping())) {
     if(!isDefined(var_0.playergroundpostime)) {
       var_0.playergroundpostime = 0;
     }
@@ -246,9 +246,7 @@ getmeleetargetpoint(var_0, var_1) {
 
       if(!isDefined(var_12) && gettime() - var_9.timestamp >= self.meleesectorupdatetime) {
         if(isDefined(level.trycalculatesectororigin) && isDefined(level.trycalculatesectororigin[self.agent_type])) {
-          [
-            [level.trycalculatesectororigin[self.agent_type]]
-          ](var_9, var_4, self.attackoffset, self.radius);
+          [[level.trycalculatesectororigin[self.agent_type]]](var_9, var_4, self.attackoffset, self.radius);
         } else {
           trycalculatesectororigin(var_9, var_4, self.attackoffset, self.radius);
         }
@@ -578,7 +576,7 @@ isentstandingonme(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_3 = var_0 getvelocity()[2];
 
     if(abs(var_3) > 12) {
@@ -735,7 +733,7 @@ withinmeleeradius() {
 withinmeleeradiusbase() {
   var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq;
 
-  if(!var_0 && (isplayer(self.curmeleetarget) || isagent(self.curmeleetarget)) && isalive(self.curmeleetarget)) {
+  if(!var_0 && (isPlayer(self.curmeleetarget) || isagent(self.curmeleetarget)) && isalive(self.curmeleetarget)) {
     var_1 = self.curmeleetarget getgroundentity();
 
     if(isDefined(var_1) && isDefined(var_1.targetname) && var_1.targetname == "care_package") {
@@ -743,7 +741,7 @@ withinmeleeradiusbase() {
     }
   }
 
-  if(!var_0 && isplayer(self.curmeleetarget) && maps\mp\zombies\_util::is_true(self.curmeleetarget.isinexploitspot)) {
+  if(!var_0 && isPlayer(self.curmeleetarget) && maps\mp\zombies\_util::is_true(self.curmeleetarget.isinexploitspot)) {
     if(length(self getvelocity()) < 5) {
       var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq * 4;
     }

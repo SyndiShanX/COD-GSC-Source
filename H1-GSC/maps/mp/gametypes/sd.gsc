@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -148,7 +148,7 @@ onspawnplayer() {
     }
   }
 
-  if(isplayer(self) && !var_0) {
+  if(isPlayer(self) && !var_0) {
     if(level.multibomb && self.pers["team"] == game["attackers"])
       self setclientomnvar("ui_carrying_bomb", 1);
     else
@@ -171,7 +171,7 @@ onspawnplayer() {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isplayer(self))
+  if(isPlayer(self))
     self setclientomnvar("ui_carrying_bomb", 0);
 
   thread maps\mp\gametypes\common_sd_sr::checkallowspectating();

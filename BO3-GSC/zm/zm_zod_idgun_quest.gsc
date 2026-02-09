@@ -111,7 +111,7 @@ function function_14e2eca6(params) {
   if(isDefined(level.var_689ff92e) && level.var_689ff92e) {
     return;
   }
-  if(!isplayer(params.eattacker)) {
+  if(!isPlayer(params.eattacker)) {
     return;
   }
   n_rand = randomfloatrange(0, 1);

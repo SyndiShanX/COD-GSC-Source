@@ -185,7 +185,7 @@ function_5fff8c45(watcher, hitent) {
       continue;
     }
 
-    if(!isplayer(ent)) {
+    if(!isPlayer(ent)) {
       continue;
     }
 
@@ -218,7 +218,7 @@ function_c23ed15d(ent, shockduration) {
 function_a64504d2() {
   shockduration = level.var_a5ff950.shockduration;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_341cbc9e = self function_aa61b0b();
 
     if(var_341cbc9e) {
@@ -297,7 +297,7 @@ function_c80bac1f(shockcharge, var_51415470, shockduration) {
 
   self playSound("wpn_shockrifle_bounce");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread function_5439aa67(shockcharge);
     self freezecontrolsallowlook(1);
   }
@@ -317,7 +317,7 @@ function_c80bac1f(shockcharge, var_51415470, shockduration) {
   self giveweapon(var_cb36e12);
   self switchtoweaponimmediate(var_cb36e12, 1);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self freezecontrolsallowlook(0);
     self clientfield::set_to_player("shock_rifle_shocked", 1);
     self clientfield::set("shock_rifle_sound", 1);
@@ -341,7 +341,7 @@ function_c80bac1f(shockcharge, var_51415470, shockduration) {
   self function_3474c820();
   playsoundatposition(#"hash_f2b6a97233cbeb2", self.origin);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clientfield::set_to_player("shock_rifle_shocked", 0);
     self clientfield::set_to_player("shock_rifle_damage", 0);
     self clientfield::set("shock_rifle_sound", 0);
@@ -360,7 +360,7 @@ function_c80bac1f(shockcharge, var_51415470, shockduration) {
 
 function_e0141557(ent, var_51415470) {
   damage = var_51415470 ? level.var_a5ff950.impactdamage : level.var_a5ff950.shockdamage;
-  isplayer = isplayer(ent);
+  isplayer = isPlayer(ent);
 
   if(isDefined(ent.var_beee9523) && ent.var_beee9523) {
     damage = 10000;
@@ -382,7 +382,7 @@ function_92eabc2f(ent, var_51415470) {
   self.hit_ents[self.hit_ents.size] = ent;
   self.var_7471e7b7++;
 
-  if(isplayer(ent) && isDefined(ent.var_d44d1214)) {
+  if(isPlayer(ent) && isDefined(ent.var_d44d1214)) {
     ent gadget_radiation_field::shutdown(1);
   }
 
@@ -409,7 +409,7 @@ function_92eabc2f(ent, var_51415470) {
   shockduration = ent function_a64504d2();
   params = getstatuseffect(#"shock_rifle_shock");
   ent status_effect::status_effect_apply(params, level.shockrifleweapon, self.owner, 0, int((shockduration + level.var_a5ff950.var_772f6a9c) * 1000), undefined, self.origin);
-  isplayer = isplayer(ent);
+  isplayer = isPlayer(ent);
 
   if(isplayer) {
     ent clientfield::set_to_player("shock_rifle_damage", 1);
@@ -472,7 +472,7 @@ function_bcc47944(watcher) {
     damage = weapons::function_74bbb3fa(damage, weapon, self.weapon);
     attacker = self[[level.figure_out_attacker]](waitresult.attacker);
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
 

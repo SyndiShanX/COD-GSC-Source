@@ -521,7 +521,7 @@ trap_damage() {
     waitresult = self waittill(#"trigger");
     ent = waitresult.activator;
 
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       if(self function_3f401e8d(ent)) {
         continue;
       }
@@ -715,7 +715,7 @@ zombie_trap_death(e_trap, param) {
       break;
   }
 
-  if(isDefined(e_trap.activated_by_player) && isplayer(e_trap.activated_by_player)) {
+  if(isDefined(e_trap.activated_by_player) && isPlayer(e_trap.activated_by_player)) {
     e_trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     e_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
   }

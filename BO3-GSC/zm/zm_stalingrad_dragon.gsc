@@ -671,7 +671,7 @@ function function_2114330(n_duration) {
 
 function function_20b34915() {
   self endon("death");
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     current_weapon = self getcurrentweapon();
     n_health = self.maxhealth;
     if(current_weapon.isriotshield) {
@@ -2515,7 +2515,7 @@ function function_2ce58010() {
   level endon("hash_a35dee4e");
   while(true) {
     self waittill("damage", n_damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
-    if(isplayer(attacker) && level flag::get("dragon_boss_takedamage") && !level flag::get("world_is_paused")) {
+    if(isPlayer(attacker) && level flag::get("dragon_boss_takedamage") && !level flag::get("world_is_paused")) {
       foreach(var_61c194b7 in level.var_61699bd7[level.var_ef6a691]) {
         if(var_61c194b7 == partname) {
           level.var_ef9c43d7 notify("hash_bfb2d45a");

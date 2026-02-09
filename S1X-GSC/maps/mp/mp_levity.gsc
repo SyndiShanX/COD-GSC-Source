@@ -26,8 +26,8 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_levity");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -41,13 +41,12 @@ main() {
   if(level.nextgen) {
     level thread init_assembly_line();
 
-    SetDvar("sm_polygonOffsetPreset", 2);
+    setDvar("sm_polygonOffsetPreset", 2);
   }
 }
 
 init_assembly_line() {
-  anims = [
-    "mp_lev_drone_assembly_line_01", "mp_lev_drone_assembly_line_02", "mp_lev_drone_assembly_line_03", "mp_lev_drone_assembly_line_04", "mp_lev_drone_assembly_line_05", "mp_lev_drone_assembly_line_06", "mp_lev_drone_assembly_line_07"];
+  anims = ["mp_lev_drone_assembly_line_01", "mp_lev_drone_assembly_line_02", "mp_lev_drone_assembly_line_03", "mp_lev_drone_assembly_line_04", "mp_lev_drone_assembly_line_05", "mp_lev_drone_assembly_line_06", "mp_lev_drone_assembly_line_07"];
 
   foreach(a in anims) {
     PrecacheMpAnim(a);

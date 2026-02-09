@@ -141,7 +141,6 @@ _id_4384() {
 
     if(isDefined(var_0.target)) {
       var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
-
     }
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
     var_1[var_1.size] = var_0;
@@ -174,7 +173,6 @@ _id_4384() {
 
     if(isDefined(var_0.target)) {
       var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
-
     }
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
     var_6 = var_1[var_5];
@@ -260,7 +258,6 @@ _id_438C(var_0, var_1, var_2, var_3) {
 
   if(var_3 > 0) {
     var_6 = "right";
-
   }
   var_7 = var_0._id_4388[var_6];
   var_8 = var_1._id_4388[var_6];
@@ -280,7 +277,6 @@ _id_438D(var_0, var_1) {
 
   if(var_0._id_437D > var_2) {
     var_2 = var_0._id_437D;
-
   }
   if(distance(var_1.origin, var_0._id_437B._id_437C) > var_2 * 1.5) {
     return;
@@ -383,13 +379,11 @@ _id_4391(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(var_7["max"] > var_0._id_437D) {
     var_7["max"] = var_0._id_437D;
-
   }
   var_7["min"] = var_2;
 
   if(var_7["min"] < 0) {
     var_7["min"] = 0;
-
   }
   var_7["left_offset"] = var_4;
   var_7["right_offset"] = var_3;
@@ -423,7 +417,6 @@ _id_4392(var_0, var_1, var_2) {
 
   if(var_8 > 0) {
     var_3["offset"] = var_3["offset"] * -1;
-
   }
   return var_3;
 }
@@ -439,7 +432,6 @@ _id_4393(var_0) {
 
   if(var_0.health >= 100) {
     return 0;
-
   }
   level._id_4373++;
   return 1;
@@ -464,7 +456,6 @@ _id_4396() {
 
   if(common_scripts\utility::cointoss()) {
     var_0 = "allies";
-
   }
   foreach(var_2 in self._id_0A39) {}
   var_2.team = var_0;
@@ -482,18 +473,15 @@ _id_4397(var_0, var_1) {
 
     if(common_scripts\utility::cointoss()) {
       var_7 = var_7 * -1;
-
     }
     var_6 = level.player.offset + var_7;
   } else {
     var_6 = randomfloatrange(var_5 * -1, var_5);
-
   }
   var_8 = _id_43AC(var_4, var_3, var_6);
 
   if(isDefined(var_8["dodge"])) {
     var_6 = var_8["dodge"];
-
   }
   var_9 = _id_43BC(var_4, var_3, var_6);
   var_10 = [];
@@ -618,21 +606,18 @@ _id_43A0(var_0) {
 _id_43A2(var_0) {
   if(!isDefined(var_0._id_439C)) {
     var_0._id_439C = gettime();
-
   }
   var_0._id_439F = 0;
   _id_43A0(var_0);
 
   if(!isDefined(var_0._id_43A3)) {
     var_0._id_43A3 = 250;
-
   }
   var_0._id_24F6 = 0;
   var_1 = randomfloatrange(0, 1);
 
   if(!isDefined(var_0._id_438E)) {
     var_0._id_438E = var_1 * 2 - 1;
-
   }
   var_2 = self;
   var_3 = spawnStruct();
@@ -672,7 +657,6 @@ _id_43A2(var_0) {
 
     if(abs(var_0._id_43AA) > 6000 && gettime() > var_0._id_439C + 4000) {
       var_0 _id_439F("left behind!");
-
     }
     waittillframeend;
 
@@ -692,7 +676,6 @@ _id_43A2(var_0) {
 
       if(isDefined(var_0)) {
         var_0 delete();
-
       }
       _id_43A0();
       return;
@@ -709,7 +692,6 @@ _id_43A2(var_0) {
 
   if(var_0._id_439F && !common_scripts\utility::flag("race_complete")) {
     wait 5;
-
   }
   var_3 maps\_utility::_id_13DE("biker_reaches_path_end");
 }
@@ -738,7 +720,6 @@ _id_43AC(var_0, var_1, var_2) {
       var_3["dodge"] = var_5["right_offset"];
     } else {
       var_3["dodge"] = var_5["left_offset"];
-
     }
     break;
   }
@@ -815,13 +796,11 @@ _id_43B1() {
 
       if(var_9 < 100) {
         var_9 = 100;
-
       }
       if(var_8 > var_9) {
         var_8 = var_9;
       } else if(var_8 < self._id_43B2) {
         var_8 = self._id_43B2;
-
       }
       level.desired_speed = var_8;
       self vehicle_setspeed(var_8, 90, 20);
@@ -850,7 +829,6 @@ _id_43B3(var_0, var_1) {
     } else {
       if(var_5 > -500) {
         var_7 = 1.25;
-
       }
       if(var_7 > 0.95 && var_6 > 0.97) {
         var_7 = 0.95;
@@ -861,11 +839,9 @@ _id_43B3(var_0, var_1) {
 
     if(var_8 < self._id_43B2) {
       var_8 = self._id_43B2;
-
     }
     if(var_8 < 25) {
       var_8 = 25;
-
     }
     level._id_43B4 = var_8;
     self vehicle_setspeed(var_8, var_0, var_1);
@@ -884,7 +860,6 @@ _id_43B5(var_0, var_1) {
   } else {
     if(var_5 < level._id_436D && gettime() > self._id_439C + 4000) {
       _id_439F("low progress!");
-
     }
     var_5 = var_5 - 750;
     var_5 = var_5 + self._id_43A1;
@@ -896,7 +871,6 @@ _id_43B5(var_0, var_1) {
       var_6 = 1.0;
     } else if(var_5 < -100) {
       var_6 = 1.5;
-
     }
     if(isDefined(level.player.offset)) {
       if(var_5 > 250) {}
@@ -906,7 +880,6 @@ _id_43B5(var_0, var_1) {
 
     if(var_7 < 25) {
       var_7 = 25;
-
     }
     self vehicle_setspeed(var_7, var_0, var_1);
   }
@@ -922,7 +895,6 @@ _id_43B6(var_0) {
 
   if(var_2) {
     var_1 thread _id_43AD();
-
   }
   for(;;) {
     if(self._id_4394 == self._id_4394._id_437B) {
@@ -950,7 +922,6 @@ _id_43B6(var_0) {
       level._id_43B7 = maps\_utility::_id_0AE9(self.origin, level._id_2AFD);
     } else {
       level._id_43B7 = undefined;
-
     }
     wait 0.05;
   }
@@ -1040,7 +1011,6 @@ _id_43B8(var_0) {
     }
   } else {
     var_1._id_43A8 = 0;
-
   }
   var_19 = randomfloatrange(0, 100);
   var_19 = var_19 * 0.001;
@@ -1057,7 +1027,6 @@ _id_43B8(var_0) {
     var_4 = var_9["dodge"];
   } else if(isDefined(var_1._id_43B9)) {
     var_4 = var_1._id_43B9;
-
   }
   var_23 = 0.95;
   var_24 = var_5._id_437E * 0.5;
@@ -1067,7 +1036,6 @@ _id_43B8(var_0) {
     var_4 = var_24;
   } else if(var_4 < -1 * var_24) {
     var_4 = -1 * var_24;
-
   }
   if(var_5 != var_5._id_437B) {
     var_25 = var_1 _id_43BA(var_5, var_3, var_4, var_1.origin[2]);
@@ -1079,7 +1047,6 @@ _id_43B8(var_0) {
       var_16 = 25;
     } else if(var_26 < 0.95) {
       var_16 = 15;
-
     }
     var_1 vehicledriveto(var_25, var_16);
 
@@ -1134,7 +1101,6 @@ _id_43BC(var_0, var_1, var_2) {
   for(;;) {
     if(var_0 == var_0._id_437B) {
       return var_0._id_437C;
-
     }
     if(var_1 > var_0._id_437D) {
       var_1 = var_1 - var_0._id_437D;
@@ -1221,7 +1187,6 @@ _id_43C8() {
         self._id_43C7++;
       } else {
         self._id_43C7--;
-
       }
       if(self._id_43C7 > 1) {
         self._id_43C7 = self._id_43C7 - 3;
@@ -1237,15 +1202,12 @@ _id_43C8() {
 _id_43CA() {
   if(self._id_43C7 == 0) {
     return 1;
-
   }
   if(self._id_43C7 == 1 && self.offset > self._id_43C5) {
     return 1;
-
   }
   if(self._id_43C7 == -1 && self.offset < self._id_43C5 * -1) {
     return 1;
-
   }
   return 0;
 }
@@ -1267,13 +1229,11 @@ _id_43CB() {
       self._id_43A4 = self._id_43A4 + var_1;
     } else if(self._id_43C7 == -1) {
       self._id_43A4 = self._id_43A4 - var_1;
-
     }
     if(self._id_43A4 > var_0) {
       self._id_43A4 = var_0;
     } else if(self._id_43A4 < -1 * var_0) {
       self._id_43A4 = -1 * var_0;
-
     }
     self._id_43CC = self._id_43CC + self._id_43A4;
 
@@ -1294,7 +1254,6 @@ _id_43CD(var_0, var_1) {
     self._id_43CC = self._id_43CC - var_1;
   } else {
     self._id_43CC = self._id_43CC + var_1;
-
   }
   if(abs(self._id_43CC) < var_1) {
     self._id_43CC = var_1;
@@ -1330,7 +1289,6 @@ _id_43CF(var_0, var_1) {
 _id_43D0() {
   if(isDefined(level.player._id_3F42)) {
     return level.player._id_3F42;
-
   }
   return 0;
 }
@@ -1338,7 +1296,6 @@ _id_43D0() {
 _id_43D1() {
   if(isDefined(level.player._id_4394)) {
     return level.player._id_4394;
-
   }
   return level._id_2AFC[0];
 }
@@ -1348,7 +1305,6 @@ _id_43D2() {
 
   if(isDefined(level.player.vehicle) && self.veh_speed > level.player.vehicle.veh_speed) {
     var_0 = (1, 0.2, 0.2);
-
   }
   self._id_43A9 = self.origin;
 }

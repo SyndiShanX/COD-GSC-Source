@@ -64,7 +64,7 @@ cratewaitfordamage(var_0) {
   var_0.model setCanDamage(1);
   for(;;) {
     var_0.model waittill("damage", var_1, var_2, var_1, var_1, var_1, var_1, var_1, var_1, var_1, var_3);
-    if(isDefined(var_2) && (isDefined(level.rat_king) && var_2 == level.rat_king) || isDefined(var_3) && isplayer(var_2) && scripts\cp\maps\cp_disco\kung_fu_mode::iskungfuweapon(var_3)) {
+    if(isDefined(var_2) && (isDefined(level.rat_king) && var_2 == level.rat_king) || isDefined(var_3) && isPlayer(var_2) && scripts\cp\maps\cp_disco\kung_fu_mode::iskungfuweapon(var_3)) {
       var_0 thread breakcrateandwait(var_0);
       break;
     } else {
@@ -1183,7 +1183,7 @@ soul_key_pick_up_monitor(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
     scripts\cp\zombies\directors_cut::give_dc_player_extra_xp_for_carrying_newb();
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 playlocalsound("part_pickup");
       var_0 setscriptablepartstate("actions", "pickup");
       setplayerdataforplayers();
@@ -1470,7 +1470,7 @@ clearsewageonzombiedeath(var_0, var_1) {
   level endon("relic_quest_completed");
   for(;;) {
     level waittill("zombie_killed", var_2, var_3, var_4, var_5, var_6);
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
 
@@ -1504,7 +1504,7 @@ watchforplayerinvolume(var_0, var_1) {
   level endon("relic_quest_completed");
   for(;;) {
     var_0 waittill("trigger", var_2);
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
 
@@ -2116,7 +2116,7 @@ checkraceresults(var_0, var_1, var_2) {
   self setCanDamage(1);
   for(;;) {
     self waittill("damage", var_3, var_4, var_5, var_6);
-    if(isplayer(var_4) && scripts\engine\utility::flag("eye_active")) {
+    if(isPlayer(var_4) && scripts\engine\utility::flag("eye_active")) {
       if(!scripts\engine\utility::array_contains(level.active_eye_targets, var_0)) {
         continue;
       }

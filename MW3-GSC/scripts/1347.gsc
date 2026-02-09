@@ -16,7 +16,6 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_5) && var_5 == 0) {
     anim._id_20D6["scripted"] = ::_id_4032;
-
   }
   self._id_4011 = 0;
   self._id_4012 = undefined;
@@ -43,7 +42,6 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(var_4)) {
     var_4 = 1;
-
   }
   if(isDefined(self._id_4021)) {
     switch (self._id_4021.classname) {
@@ -91,7 +89,6 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
     self._id_4026 = self._id_4025.script_exploder;
   } else if(self._id_401C == 0) {
     self._id_4013 = getent(self.script_linkto, "script_linkname");
-
   }
   if(self._id_401D == 1) {
     self._id_4027 = getent("flashthrow_" + var_7, "targetname");
@@ -112,19 +109,15 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_8 > 0) {} else {
     self._id_4012 = maps\_utility::_id_0AE9(self._id_4013.origin, var_0);
-
   }
   if(var_0.size == 1) {
     self._id_4017 = 1;
-
   }
   for(var_9 = 0; var_9 < var_0.size; var_9++) {
     var_0[var_9] thread _id_402C(self, var_1, var_5);
-
   }
   while(self._id_4015 < var_0.size) {
     wait 0.05;
-
   }
   self notify("ready_to_breach");
   self._id_4018 = 1;
@@ -134,7 +127,6 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
     self waittill("execute_the_breach");
   } else {
     self notify("execute_the_breach");
-
   }
   common_scripts\utility::flag_set("begin_the_breach");
   self._id_401A = 1;
@@ -148,7 +140,6 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(self._id_4020)) {
     badplace_cylinder(self._id_401F, -1, self._id_4020.origin, self._id_4020.radius, 200, "bad_guys");
-
   }
   var_11 = getaiarray("bad_guys");
   var_12 = [];
@@ -161,11 +152,9 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_12.size > 0) {
     common_scripts\utility::array_thread(var_12, ::_id_4035, self);
-
   }
   while(!self._id_4019) {
     wait 0.05;
-
   }
   self notify("breach_complete");
 
@@ -178,7 +167,6 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
     for(var_9 = 0; var_9 < var_12.size; var_9++) {
       if(!isalive(var_12[var_9])) {
         var_12 = common_scripts\utility::array_remove(var_12, var_12[var_9]);
-
       }
       if(var_12.size == 0) {
         self._id_401B = 1;
@@ -200,7 +188,6 @@ _id_402C(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   self pushplayer(1);
   thread _id_4041();
@@ -216,11 +203,9 @@ _id_402C(var_0, var_1, var_2) {
     var_3 = "01";
   } else {
     var_3 = "02";
-
   }
   if(var_0._id_4017 == 1 && var_1 == "explosive_breach_left") {
     var_3 = "02";
-
   }
   switch (var_1) {
     case "explosive_breach_left":
@@ -228,7 +213,6 @@ _id_402C(var_0, var_1, var_2) {
         var_4 = "detcord_stack_left_start_no_approach_" + var_3;
       } else {
         var_4 = "detcord_stack_left_start_" + var_3;
-
       }
       var_5 = "detcord_stack_leftidle_" + var_3;
       var_6 = "detcord_stack_leftbreach_" + var_3;
@@ -286,11 +270,9 @@ _id_402C(var_0, var_1, var_2) {
 
       if(var_3 == "02") {
         self waittillmatch("single anim", "grenade_throw");
-
       }
       if(var_0._id_4017 == 1 && var_3 == "01") {
         self waittillmatch("single anim", "fire");
-
       }
       self magicgrenade(var_0._id_4027.origin, var_0._id_4028.origin, level._id_4030);
       self detach("projectile_m84_flashbang_grenade", var_8);
@@ -307,7 +289,6 @@ _id_402C(var_0, var_1, var_2) {
 
   if(var_2 == 0) {
     self._id_402D = 1;
-
   }
   var_0._id_4013 thread maps\_anim::_id_11C1(self, var_6);
 
@@ -338,11 +319,9 @@ _id_402C(var_0, var_1, var_2) {
 
   if(var_2 == 0) {
     self._id_402D = undefined;
-
   }
   if(isDefined(level._id_4031)) {
     self thread[[level._id_4031]](var_0);
-
   }
   var_0._id_4019 = 1;
   self pushplayer(0);
@@ -350,7 +329,6 @@ _id_402C(var_0, var_1, var_2) {
 
   while(!var_0._id_401B) {
     wait 0.05;
-
   }
   self._id_402B = 0;
 }
@@ -394,7 +372,6 @@ _id_4035(var_0) {
 
     if(level._id_4037 > 2) {
       level._id_4037 = 1;
-
     }
     var_1 = "exposed_flashbang_v" + level._id_4037;
     self.allowdeath = 1;
@@ -430,15 +407,12 @@ _id_403B(var_0) {
 _id_403C(var_0) {
   while(!self._id_401B) {
     wait 0.05;
-
   }
   if(isDefined(self._id_4020)) {
     badplace_delete(self._id_401F);
-
   }
   while(!self._id_401B) {
     wait 0.05;
-
   }
   common_scripts\utility::array_thread(var_0, ::_id_403D, self);
 }
@@ -464,7 +438,6 @@ _id_403E(var_0, var_1) {
 
       if(var_1) {
         playFX(level._effect["_breach_doorbreach_detpack"], self._id_4025.origin, anglesToForward(self._id_4025.angles));
-
       }
       break;
     case "shotgunhinges_breach_left":
@@ -473,7 +446,6 @@ _id_403E(var_0, var_1) {
 
       if(var_1) {
         playFX(level._effect["_breach_doorbreach_kick"], self._id_4025.origin, anglesToForward(self._id_4025.angles));
-
       }
       break;
     case "flash_breach_no_door_right":
@@ -517,11 +489,9 @@ _id_4041() {
 _id_4042(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   if(var_2 == 1) {
     self playSound(level.scr_sound["breach_wood_door_kick"]);
-
   }
   switch (var_0) {
     case "explosive":
@@ -578,7 +548,6 @@ _id_4046(var_0) {
 _id_4047(var_0) {
   if(!isDefined(self._id_4048)) {
     self._id_4048 = self.goalradius;
-
   }
   self.goalradius = var_0;
 }
@@ -586,7 +555,6 @@ _id_4047(var_0) {
 _id_4049() {
   if(isDefined(self._id_4048)) {
     self.goalradius = self._id_4048;
-
   }
   self._id_4048 = undefined;
 }
@@ -594,7 +562,6 @@ _id_4049() {
 _id_404A(var_0) {
   if(!isDefined(self._id_404B)) {
     self._id_404B = self._id_1032;
-
   }
   self._id_1032 = var_0;
 }
@@ -602,7 +569,6 @@ _id_404A(var_0) {
 _id_404C() {
   if(isDefined(self._id_404B)) {
     self._id_1032 = self._id_404B;
-
   }
   self._id_404B = undefined;
 }

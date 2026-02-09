@@ -306,7 +306,7 @@ lc_do_damage(source_enemy, arc_num, player, params) {
       player zm_score::player_add_points("death", "", "", self);
     }
 
-    if(isDefined(params.challenge_stat_name) && isDefined(player) && isplayer(player)) {
+    if(isDefined(params.challenge_stat_name) && isDefined(player) && isPlayer(player)) {
       player zm_stats::increment_challenge_stat(params.challenge_stat_name);
     }
 
@@ -329,7 +329,7 @@ function_915d4fec(params, v_origin, player) {
   if(isalive(self)) {
     self dodamage(params.n_damage_max, v_origin, player, undefined, "none", str_mod, 0, weapon);
 
-    if(!isalive(self) && isDefined(params.challenge_stat_name) && isplayer(player)) {
+    if(!isalive(self) && isDefined(params.challenge_stat_name) && isPlayer(player)) {
       player zm_stats::increment_challenge_stat(params.challenge_stat_name);
     }
   }

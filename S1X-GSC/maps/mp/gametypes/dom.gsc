@@ -4,7 +4,7 @@
 **************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -502,7 +502,7 @@ statusdialog(var_0, var_1, var_2) {
 }
 
 onenduse(var_0, var_1, var_2) {
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_capture_icon", 0);
   }
 
@@ -668,7 +668,7 @@ giveflagcapturexp(var_0, var_1) {
     var_2 = var_2.owner;
   }
 
-  if(isplayer(var_2)) {
+  if(isPlayer(var_2)) {
     level thread maps\mp\_utility::teamplayercardsplash("callout_securedposition" + self.label, var_2);
   }
 
@@ -681,7 +681,7 @@ giveflagcapturexp(var_0, var_1) {
       var_2 = var_2.owner;
     }
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     var_2 thread maps\mp\_events::domcaptureevent(var_1);
@@ -698,7 +698,7 @@ giveflagneutralizexp(var_0) {
     var_1 = var_1.owner;
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     level thread maps\mp\_utility::teamplayercardsplash("callout_neutralized_position" + self.label, var_1);
   }
 
@@ -711,7 +711,7 @@ giveflagneutralizexp(var_0) {
       var_1 = var_1.owner;
     }
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     var_1 thread maps\mp\_events::domneutralizeevent();
@@ -820,7 +820,7 @@ getdomroundtimepassed() {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(maps\mp\gametypes\_damage::isfriendlyfire(self, var_1)) {

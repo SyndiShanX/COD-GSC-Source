@@ -30,7 +30,8 @@ minion_chatter_monitor() {
 }
 
 minion_approach(enemy, attack_counter) {
-  /# debug_alien_ai_state( "default_approach" ); #/ /
+  debug_alien_ai_state("default_approach");
+  /
   # debug_alien_attacker_state("attacking");
 
   self.attacking_player = true;
@@ -49,7 +50,7 @@ minion_approach(enemy, attack_counter) {
 }
 
 explode_attack(enemy) {
-  /# debug_alien_ai_state( "swipe_melee" );
+  debug_alien_ai_state("swipe_melee");
   self.melee_type = "explode";
   alien_melee(enemy);
 }

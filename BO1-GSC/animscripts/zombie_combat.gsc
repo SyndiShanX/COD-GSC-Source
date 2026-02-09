@@ -10,6 +10,7 @@
 #include animscripts\zombie_shared;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 main() {
   self endon("killanimscript");
   [[self.exception["exposed"]]]();
@@ -18,7 +19,6 @@ main() {
   self setup();
   self exposedCombatMainLoop();
 }
-
 idleThread() {
   self endon("killanimscript");
   self endon("kill_idle_thread");
@@ -29,7 +29,6 @@ idleThread() {
     self ClearAnim(idleAnim, .2);
   }
 }
-
 setup() {
   if(self.a.pose == "stand") {
     self set_animarray_standing();
@@ -47,14 +46,12 @@ setup() {
     self thread idleThread();
   }
 }
-
 stopShortly() {
   self endon("killanimscript");
   self endon("melee");
   wait .2;
   self.a.movement = "stop";
 }
-
 set_animarray_standing() {
   self.a.array = [];
   self.a.array["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
@@ -78,7 +75,6 @@ set_animarray_standing() {
     self[[self.set_animarray_standing_override]]();
   }
 }
-
 set_animarray_crouching() {
   self.a.array = [];
   self.a.array["exposed_idle"] = array(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
@@ -88,7 +84,6 @@ set_animarray_crouching() {
   self.a.array["straight_level"] = % ai_zombie_idle_crawl_base;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_left_2_crawl;
 }
-
 exposedCombatMainLoop() {
   self endon("killanimscript");
   self endon("melee");
@@ -119,7 +114,6 @@ exposedCombatMainLoop() {
     justWaited = true;
   }
 }
-
 exposedWait() {
   if(!isDefined(self.can_always_see) && (!isDefined(self.enemy) || !self cansee(self.enemy))) {
     self endon("enemy");
@@ -134,11 +128,9 @@ exposedWait() {
     wait 0.05;
   }
 }
-
 resetGiveUpOnEnemyTime() {
   self.a.nextGiveUpOnEnemyTime = GetTime() + randomintrange(2000, 4000);
 }
-
 faceEnemyImmediately() {
   self endon("killanimscript");
   self notify("facing_enemy_immediately");
@@ -157,7 +149,6 @@ faceEnemyImmediately() {
   }
   self OrientMode("face current");
 }
-
 TryMelee() {
   if(!isDefined(self.enemy)) {
     return false;
@@ -165,7 +156,7 @@ TryMelee() {
   if(isDefined(self.in_special_attack)) {
     return false;
   }
-  if(distanceSquared(self.origin, self.enemy.origin) > 512 * 512) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > 512 * 512) {
     animscripts\zombie_melee::debug_melee("Not doing melee - Distance to enemy is more than 512 units.");
     return false;
   }
@@ -177,7 +168,6 @@ TryMelee() {
   self melee_notify_wrapper();
   return true;
 }
-
 can_banzai_melee() {
   if(!isDefined(self.banzai) || !self.banzai) {
     return false;
@@ -187,7 +177,6 @@ can_banzai_melee() {
   }
   return 0;
 }
-
 drop_turret() {
   maps\_mgturret::dropTurret();
   self animscripts\weaponList::RefillClip();
@@ -195,11 +184,9 @@ drop_turret() {
   self notify("dropped_gun");
   maps\_mgturret::restoreDefaults();
 }
-
 exception_exposed_mg42_portable() {
   drop_turret();
 }
-
 ReacquireWhenNecessary() {
   self endon("killanimscript");
   self endon("melee");
@@ -215,7 +202,6 @@ ReacquireWhenNecessary() {
     TryExposedReacquire();
   }
 }
-
 TryExposedReacquire() {
   if(!isValidEnemy(self.enemy)) {
     self.reacquire_state = 0;
@@ -280,13 +266,13 @@ TryExposedReacquire() {
     default:
       assert(self.reacquire_state == 6);
       self.reacquire_state = 0;
-      if(!(self canSee(self.enemy)))
+      if(!(self canSee(self.enemy))) {
         self FlagEnemyUnattackable();
+      }
       return;
   }
   self.reacquire_state++;
 }
-
 TrySpecialAttack() {
   if(!isDefined(self.specialAttack)) {
     return false;

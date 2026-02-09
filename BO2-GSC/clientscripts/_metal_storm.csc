@@ -25,7 +25,7 @@ metalstorm_player_enter(localclientnum) {
   while(true) {
     self waittill("enter_vehicle", user);
 
-    if(user isplayer()) {
+    if(user isPlayer()) {
       level.player_metalstorm = self;
       wait 0.1;
       self thread metalstorm_update_rumble();

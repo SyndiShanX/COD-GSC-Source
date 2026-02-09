@@ -14,7 +14,7 @@ main(allowed) {
   if(level.script == "mp_ca_vehicle_test" || level.script == "mp_vehicle_test")
     vehicles_enabled = 1;
 
-  if(getdvar(#"_id_2070E289") != "") {
+  if(getDvar(#"_id_2070E289") != "") {
     if(getdvarint(#"_id_2070E289") != 0)
       vehicles_enabled = 1;
     else

@@ -372,7 +372,7 @@ removeFromParticipantsArray() {
 }
 
 addToCharactersArray() {
-  assert(IsPlayer(self) || IsBot(self) || IsAgent(self));
+  assert(isPlayer(self) || IsBot(self) || IsAgent(self));
   level.characters[level.characters.size] = self;
 }
 
@@ -413,7 +413,6 @@ spawnPointUpdate() {
 
     wait(0.05);
   }
-
 }
 
 getActivePlayerList() {
@@ -427,7 +426,7 @@ getActivePlayerList() {
   }
 
   foreach(character in level.characters) {
-    if(IsPlayer(character) && is_ffa_mode && (character.sessionstate == "playing" || character.sessionstate == "dead")) {
+    if(isPlayer(character) && is_ffa_mode && (character.sessionstate == "playing" || character.sessionstate == "dead")) {
       level.active_ffa_players++;
     }
 
@@ -435,7 +434,7 @@ getActivePlayerList() {
       continue;
     }
 
-    if(IsPlayer(character) && character.sessionstate != "playing") {
+    if(isPlayer(character) && character.sessionstate != "playing") {
       continue;
     }
 

@@ -26,7 +26,7 @@ init() {
 
 toggle_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1)
-    setdvar("ui_zm_outromovie", "zm_tomb_ee");
+    setDvar("ui_zm_outromovie", "zm_tomb_ee");
 }
 
 toggle_wagon_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

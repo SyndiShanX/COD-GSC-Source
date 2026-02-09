@@ -33,7 +33,7 @@ on_player_spawned() {
 }
 
 function_3c893ac6(owner, statweapon, grenadeweaponname, duration, totaltime) {
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner stats::function_e24eec31(statweapon, #"used", 1);
   }
 
@@ -58,7 +58,7 @@ smoke_detonate(owner, statweapon, smokeweapon, position, radius, effectlifetime,
   ent = spawntimedfx(smokeweapon, position, dir_up, effectlifetime);
   ent setteam(owner.team);
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     ent setowner(owner);
   }
 
@@ -231,7 +231,7 @@ function_41470017(var_56d6af0e, applicant) {
 }
 
 event_handler[grenade_fire] function_f9d992c2(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

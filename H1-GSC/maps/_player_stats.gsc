@@ -45,7 +45,7 @@ register_difficulty(var_0, var_1) {
   if(isDefined(self.owner))
     var_2 = self.owner;
 
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     return;
   }
   if(var_1) {
@@ -63,7 +63,7 @@ register_level_name(var_0) {
   if(isDefined(self.owner))
     var_1 = self.owner;
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   var_1.stats["level_name"] = var_0;
@@ -76,7 +76,7 @@ toggle_register_kills_for_vehicle_occupants(var_0) {
   if(isDefined(self.owner))
     var_1 = self.owner;
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(!isDefined(var_0))
@@ -91,7 +91,7 @@ should_register_kills_for_vehicle_occupants() {
   if(isDefined(self.owner))
     var_0 = self.owner;
 
-  if(!isplayer(var_0))
+  if(!isPlayer(var_0))
     return 1;
 
   if(isDefined(var_0.stats["register_kills_for_vehicle_occupants"]) && var_0.stats["register_kills_for_vehicle_occupants"])
@@ -107,12 +107,12 @@ register_kill(var_0, var_1, var_2, var_3) {
   if(isDefined(self.owner))
     var_4 = self.owner;
 
-  if(!isplayer(var_4)) {
+  if(!isPlayer(var_4)) {
     if(isDefined(level.pmc_match) && level.pmc_match)
       var_4 = level.players[randomint(level.players.size)];
   }
 
-  if(!isplayer(var_4)) {
+  if(!isPlayer(var_4)) {
     return;
   }
   if(isDefined(level.skip_pilot_kill_count) && isDefined(var_0.drivingvehicle) && var_0.drivingvehicle) {
@@ -212,7 +212,7 @@ career_stat_increment(var_0, var_1) {
 }
 
 register_shot_hit() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(isDefined(self.registeringshothit)) {
@@ -315,11 +315,11 @@ set_stat_dvars() {
   var_0 = 1;
 
   foreach(var_2 in level.players) {
-    setdvar("stats_" + var_0 + "_kills_melee", var_2.stats["kills_melee"]);
-    setdvar("stats_" + var_0 + "_kills_juggernaut", var_2.stats["kills_juggernaut"]);
-    setdvar("stats_" + var_0 + "_kills_explosives", var_2.stats["kills_explosives"]);
-    setdvar("stats_" + var_0 + "_kills_vehicle", var_2.stats["kills_vehicle"]);
-    setdvar("stats_" + var_0 + "_kills_sentry", var_2.stats["kills_sentry"]);
+    setDvar("stats_" + var_0 + "_kills_melee", var_2.stats["kills_melee"]);
+    setDvar("stats_" + var_0 + "_kills_juggernaut", var_2.stats["kills_juggernaut"]);
+    setDvar("stats_" + var_0 + "_kills_explosives", var_2.stats["kills_explosives"]);
+    setDvar("stats_" + var_0 + "_kills_vehicle", var_2.stats["kills_vehicle"]);
+    setDvar("stats_" + var_0 + "_kills_sentry", var_2.stats["kills_sentry"]);
     var_3 = var_2 get_best_weapons(5);
 
     foreach(var_5 in var_3) {
@@ -330,10 +330,10 @@ set_stat_dvars() {
     }
 
     for(var_7 = 1; var_7 < 6; var_7++) {
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_name", " ");
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_kills", " ");
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_shots", " ");
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_accuracy", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_name", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_kills", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_shots", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_accuracy", " ");
     }
 
     for(var_7 = 0; var_7 < var_3.size; var_7++) {
@@ -341,10 +341,10 @@ set_stat_dvars() {
         break;
       }
 
-      setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_name", var_3[var_7].name);
-      setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_kills", var_3[var_7].kills);
-      setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_shots", var_3[var_7].shots_fired);
-      setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_accuracy", var_3[var_7].accuracy + "%");
+      setDvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_name", var_3[var_7].name);
+      setDvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_kills", var_3[var_7].kills);
+      setDvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_shots", var_3[var_7].shots_fired);
+      setDvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_accuracy", var_3[var_7].accuracy + "%");
     }
 
     var_0++;

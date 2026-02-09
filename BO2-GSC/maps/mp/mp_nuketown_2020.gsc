@@ -80,7 +80,7 @@ main() {
   spawncollision("collision_physics_128x128x10", "collider", (1113.81, 391.5, 218.7), (352.832, 23.1409, -0.786543));
   level.onspawnintermission = ::nuked_intermission;
   level.endgamefunction = ::nuked_end_game;
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   precacheitem("vcs_controller_mp");
   precachemenu("vcs");
   precachemodel("nt_sign_population");

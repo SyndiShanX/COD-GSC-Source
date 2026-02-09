@@ -97,7 +97,7 @@ function_7328ce94(b_pause, str_perk, str_result, n_slot) {
 on_ai_killed(s_params) {
   player = s_params.eattacker;
 
-  if(isplayer(player) && player hasperk(#"specialty_zombshell") && s_params.shitloc !== "none") {
+  if(isPlayer(player) && player hasperk(#"specialty_zombshell") && s_params.shitloc !== "none") {
     n_chance = player hasperk(#"specialty_mod_zombshell") ? 20 : 15;
 
     if(!isDefined(player.e_zombshell) && !player.var_69604b18 && math::cointoss(n_chance) && isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {

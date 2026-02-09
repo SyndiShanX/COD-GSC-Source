@@ -21,7 +21,7 @@ spidergrenade_used(var_0) {
   var_0 waittill("missile_stuck", var_1);
   var_0 missilethermal();
   var_0 missileoutline();
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     thread spidergrenade_stuckplayer(var_0, var_1);
     return;
   }
@@ -179,7 +179,7 @@ spidergrenade_destroyonemp() {
   }
 
   spidergrenade_awardpoints(var_0);
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_5 = scripts\engine\utility::ter_op(scripts\mp\utility::istrue(self.hasruggedeqp), "hitequip", "");
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_5);
   }

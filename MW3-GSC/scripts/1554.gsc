@@ -6,7 +6,6 @@
 _id_3C49() {
   if(!isDefined(level._id_3BD4)) {
     level._id_3BD4 = [];
-
   }
   level._id_3BD4[self.unique_id] = self;
 
@@ -15,7 +14,6 @@ _id_3C49() {
 
     while(isDefined(level._id_3C4A) && level._id_3C4A == gettime()) {
       wait 0.05;
-
     }
     level._id_3C4A = gettime();
 
@@ -39,7 +37,6 @@ _id_3C49() {
 _id_3C19() {
   if(isDefined(level.uavrig)) {
     return level.uavrig;
-
   }
   var_0 = maps\_remotemissile::_id_3C29();
   return var_0;
@@ -59,7 +56,6 @@ _id_3C4B(var_0) {
 _id_3C4C(var_0) {
   if(!isDefined(self._id_3BF0)) {
     self._id_3BF0 = [];
-
   }
   self._id_3BF0[self._id_3BF0.size] = var_0;
 }
@@ -94,7 +90,6 @@ _id_3C4E() {
 
     if(common_scripts\utility::flag("uav_reloading")) {
       level waittill("uav_reloading");
-
     }
     if(isDefined(level._id_3BDD)) {
       return;

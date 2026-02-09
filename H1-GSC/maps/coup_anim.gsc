@@ -603,7 +603,7 @@ killed_by_player(var_0) {
   for(;;) {
     self waittill("death", var_1);
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       break;
     }
   }

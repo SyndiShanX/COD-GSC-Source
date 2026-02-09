@@ -19,11 +19,9 @@ main() {
   self setEngagementMaxDist(768.000000, 1024.000000);
   character\c_zom_quad::main();
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\c_zom_quad::precache();
   precacheItem("ak47_zm");

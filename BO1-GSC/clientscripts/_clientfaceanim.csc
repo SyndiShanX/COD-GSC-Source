@@ -1,6 +1,6 @@
 /*********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_clientfaceanim.csc
+ * Script: clientscripts\_clientfaceanim\.csc
 *********************************************/
 
 #include clientscripts\_utility;
@@ -9,33 +9,31 @@
 actor_facial_anim_flag_handler(localClientNum, set, newEnt) {
   if(set) {
     if(GetDvarInt(#"cg_debugFace") != 0) {
-      PrintLn("*** SET flag face_disable - for ent " + self getEntityNumber() + "[" + self.type + "]");
+      PrintLn("*** SET flag face_disable - for ent " + self getentitynumber() + "[" + self.type + "]");
     }
     self.face_disable = true;
     self notify("face", "face_advance");
   } else {
     if(GetDvarInt(#"cg_debugFace") != 0) {
-      PrintLn("*** CLEARED flag face_disable - for ent " + self getEntityNumber() + "[" + self.type + "]");
+      PrintLn("*** CLEARED flag face_disable - for ent " + self getentitynumber() + "[" + self.type + "]");
     }
     self.face_disable = false;
     self notify("face", "face_advance");
   }
 }
-
 init_clientfaceanim() {
   register_clientflag_callback("actor", 1, ::actor_facial_anim_flag_handler);
   if(isDefined(level.zombiemode) && !level.zombiemode) {
     level._faceAnimCBFunc = clientscripts\_clientfaceanim::doFace;
   }
 }
-
 doFace(localClientNum) {
-  if(self IsPlayer())
+  if(self isPlayer()) {
     doFace_player(localClientNum);
-  else if(isDefined(level._faceCBFunc_generichuman))
+  } else if(isDefined(level._faceCBFunc_generichuman)) {
     self[[level._faceCBFunc_generichuman]](localClientNum);
+  }
 }
-
 #using_animtree("multiplayer");
 doFace_player(localClientNum) {
   self.face_anim_tree = "multiplayer";

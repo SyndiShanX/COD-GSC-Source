@@ -46,7 +46,6 @@ _id_1BFF() {
 
   if(!isDefined(level._id_1C00)) {
     level._id_1C00 = 0;
-
   }
   var_0 thread _id_1C08();
 }
@@ -69,7 +68,6 @@ _id_1C02(var_0) {
     level._id_1C03 = 1;
   } else {
     level._id_1C03++;
-
   }
   var_0 waittill("death");
   waittillframeend;
@@ -113,7 +111,6 @@ begingrenadetracking() {
     var_0 thread maps\_utility::grenade_earthquake();
   } else if(var_1 == "ninebang_grenade") {
     self._id_1C0B = 1;
-
   }
   self.throwinggrenade = 0;
 }
@@ -131,7 +128,6 @@ watchc4() {
     if(var_1 == "c4") {
       if(!self.c4array.size) {
         thread watchc4altdetonate();
-
       }
       self.c4array[self.c4array.size] = var_0;
       var_0.owner = self;
@@ -186,20 +182,17 @@ claymoredetonation() {
 
   if(isDefined(self._id_1C14)) {
     var_0 = self._id_1C14;
-
   }
   var_1 = spawn("trigger_radius", self.origin + (0, 0, 0 - var_0), 9, var_0, var_0 * 2);
   thread deleteondeath(var_1);
 
   if(!isDefined(level._id_1C15)) {
     level._id_1C15 = [];
-
   }
   level._id_1C15 = maps\_utility::_id_0BC3(level._id_1C15, self);
 
   if(!maps\_utility::_id_0A36() && level._id_1C15.size > 15) {
     level._id_1C15[0] delete();
-
   }
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -207,7 +200,7 @@ claymoredetonation() {
     if(isDefined(self.owner) && var_2 == self.owner) {
       continue;
     }
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       continue;
     }
     if(var_2 damageconetrace(self.origin, self) > 0) {
@@ -218,7 +211,6 @@ claymoredetonation() {
         self detonate(self.owner);
       } else {
         self detonate(undefined);
-
       }
       return;
     }
@@ -303,7 +295,6 @@ c4damage() {
     wait(0.1 + randomfloat(0.4));
   } else {
     wait 0.05;
-
   }
   if(!isDefined(self)) {
     return;
@@ -311,7 +302,7 @@ c4damage() {
   level.c4explodethisframe = 1;
   thread resetc4explodethisframe();
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     self detonate(var_0);
   } else {
     self detonate();
@@ -351,11 +342,9 @@ getdamageableents(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   for(var_5 = 0; var_5 < level.players.size; var_5++) {
     if(!isalive(level.players[var_5]) || level.players[var_5].sessionstate != "playing") {
@@ -415,7 +404,6 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
 
   if(lengthsquared(var_5) < var_2 * var_2) {
     var_4 = var_1;
-
   }
   var_6 = vectornormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);

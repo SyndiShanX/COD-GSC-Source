@@ -50,7 +50,7 @@ givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSo
     }
   }
 
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   if(!isDefined(overrideCheckPlayerScoreLimitSoon))
@@ -298,7 +298,6 @@ removeDisconnectedPlayerFromPlacement() {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
-
 }
 
 updatePlacement() {

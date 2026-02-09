@@ -120,7 +120,7 @@ playtargetmissilesound(alias, looping) {
 }
 
 on_missile_lock(params) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!flag::get("playing_stinger_fired_at_me")) {
     self thread playtargetmissilesound(params.weapon.lockontargetlockedsound, params.weapon.lockontargetlockedsoundloops);
@@ -130,7 +130,7 @@ on_missile_lock(params) {
 }
 
 function_c25f7d1(params) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self endon(#"death", #"disconnect");
   self flag::set("playing_stinger_fired_at_me");
   self thread playtargetmissilesound(params.weapon.lockontargetfiredonsound, params.weapon.lockontargetfiredonsoundloops);

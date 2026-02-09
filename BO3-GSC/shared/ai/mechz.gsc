@@ -718,7 +718,7 @@ function mechzdamagecallback(inflictor, attacker, damage, dflags, mod, weapon, p
   if(isDefined(level.mechz_explosive_damage_reaction_callback)) {
     if(isDefined(mod) && mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
       n_mechz_damage_percentage = 0.5;
-      if(isDefined(attacker) && isplayer(attacker) && isalive(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || (isDefined(attacker.personal_instakill) && attacker.personal_instakill))) {
+      if(isDefined(attacker) && isPlayer(attacker) && isalive(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || (isDefined(attacker.personal_instakill) && attacker.personal_instakill))) {
         n_mechz_damage_percentage = 1;
       }
       explosive_damage = damage * n_mechz_damage_percentage;

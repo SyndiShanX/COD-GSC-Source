@@ -97,7 +97,5 @@ precache() {
   precacheItem("glock");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_rambo::main();
-  //----------------
-}
+  //---------------- maps\_rambo::main();
+  //---------------- }

@@ -1,6 +1,6 @@
 /***************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_equipment.csc
+ * Script: clientscripts\_zombiemode_equipment\.csc
 ***************************************************/
 
 #include clientscripts\_utility;
@@ -16,7 +16,6 @@ is_equipment_included(equipment_name) {
   }
   return false;
 }
-
 include_equipment(equipment) {
   if(!isDefined(level._included_equipment)) {
     level._included_equipment = [];

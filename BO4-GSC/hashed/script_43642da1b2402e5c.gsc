@@ -148,7 +148,7 @@ is_active() {
 }
 
 on_ai_killed(params) {
-  if(isplayer(params.eattacker) && params.smeansofdeath === "MOD_MELEE") {
+  if(isPlayer(params.eattacker) && params.smeansofdeath === "MOD_MELEE") {
     params.eattacker notify(#"melee_reload");
   }
 }

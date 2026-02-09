@@ -205,7 +205,7 @@ function_c2cd0cba(var_71fbbf01) {
 }
 
 function_2190356a(var_96936cca, b_mute = 0) {
-  assert(isplayer(self), "<dev string:x38>");
+  assert(isPlayer(self), "<dev string:x38>");
   assert(var_96936cca >= 0 && var_96936cca <= 1000);
 
   if(var_96936cca >= 1 && !b_mute) {
@@ -217,7 +217,7 @@ function_2190356a(var_96936cca, b_mute = 0) {
 }
 
 function_63060af4(var_acc46b81, b_mute = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(var_acc46b81 == 0 || var_acc46b81 == 1);
   clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + "." + "trialsCounterValue", 0);
 
@@ -234,7 +234,7 @@ function_63060af4(var_acc46b81, b_mute = 0) {
 }
 
 function_f3aacffb() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + "." + "trialsCheckState", 0);
 }
 

@@ -488,7 +488,7 @@ breach_onUse(player) {
 }
 
 breach_onEndUse(team, player, success) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player maps\mp\gametypes\_gameobjects::updateUIProgress(self, false);
   }
 }

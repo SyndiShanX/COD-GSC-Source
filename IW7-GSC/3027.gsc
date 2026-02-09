@@ -19,7 +19,7 @@ func_963C() {
 init_location() {}
 
 dvarfuncs(var_0, var_1) {
-  setdvar(var_0, var_1);
+  setDvar(var_0, var_1);
 }
 
 func_D31A(var_0, var_1, var_2) {

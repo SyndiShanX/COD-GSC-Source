@@ -15,9 +15,9 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("r_specularcolorscale", "1");
+  setDvar("r_specularcolorscale", "1");
 
-  setdvar("compassmaxrange", "1600");
+  setDvar("compassmaxrange", "1600");
 
   level.airstrikefx = loadfx("explosions/clusterbomb_christmas");
 }

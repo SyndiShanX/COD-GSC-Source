@@ -45,7 +45,6 @@ class class_6fde4e6 {
     owner = undefined;
     var_6f08706b = undefined;
   }
-
 }
 
 class class_b599a4bc {
@@ -56,7 +55,6 @@ class class_b599a4bc {
     var_f6d13e1b = [];
     entity = undefined;
   }
-
 }
 
 autoexec __init__system__() {
@@ -822,7 +820,6 @@ function_50ba1eb0(entity, stub) {
     array::add(var_2943f1ec.var_f6d13e1b, var_f1e20c7f);
 
     function_78eae22a(entity, stub, 10);
-
   }
 
   entity thread function_adb36e84(stub);

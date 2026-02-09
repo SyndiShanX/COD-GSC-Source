@@ -1,6 +1,6 @@
 /********************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_weap_freezegun.csc
+ * Script: clientscripts\_zombiemode_weap_freezegun\.csc
 ********************************************************/
 
 #include clientscripts\_utility;
@@ -30,15 +30,13 @@ init() {
   level._effect["freezegun_crumple_gibtrail_fx"] = LoadFX("system_elements/fx_null");
   level thread player_init();
 }
-
 player_init() {
   waitforclient(0);
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
   }
 }
-
 freezegun_get_gibfx(shatter) {
   if(shatter) {
     return level._effect["freezegun_shatter_gib_fx"];
@@ -46,7 +44,6 @@ freezegun_get_gibfx(shatter) {
     return level._effect["freezegun_crumple_gib_fx"];
   }
 }
-
 freezegun_get_gibtrailfx(shatter) {
   if(shatter) {
     return level._effect["freezegun_shatter_gibtrail_fx"];
@@ -54,7 +51,6 @@ freezegun_get_gibtrailfx(shatter) {
     return level._effect["freezegun_crumple_gibtrail_fx"];
   }
 }
-
 freezegun_get_gibsound(shatter) {
   if(shatter) {
     return "zmb_death_gibs";
@@ -62,7 +58,6 @@ freezegun_get_gibsound(shatter) {
     return "zmb_death_gibs";
   }
 }
-
 freezegun_get_gibforce(tag, force_from_torso, shatter) {
   if(shatter) {
     start_pos = self.origin;
@@ -77,7 +72,6 @@ freezegun_get_gibforce(tag, force_from_torso, shatter) {
     return (0, 0, 0);
   }
 }
-
 freezegun_get_shatter_effect(upgraded) {
   if(upgraded) {
     return level._effect["freezegun_shatter_upgraded"];
@@ -85,7 +79,6 @@ freezegun_get_shatter_effect(upgraded) {
     return level._effect["freezegun_shatter"];
   }
 }
-
 freezegun_get_crumple_effect(upgraded) {
   if(upgraded) {
     return level._effect["freezegun_crumple_upgraded"];
@@ -93,30 +86,25 @@ freezegun_get_crumple_effect(upgraded) {
     return level._effect["freezegun_crumple"];
   }
 }
-
-freezegun_end_extremity_damage_fx(localClientNum, key) {
-  deletefx(localClientNum, self.freezegun_extremity_damage_fx_handles[localclientnum][key], false);
+freezegun_end_extremity_damage_fx(localclientnum, key) {
+  deletefx(localclientnum, self.freezegun_extremity_damage_fx_handles[localclientnum][key], false);
 }
-
-freezegun_end_all_extremity_damage_fx(localClientNum) {
+freezegun_end_all_extremity_damage_fx(localclientnum) {
   keys = getArrayKeys(self.freezegun_extremity_damage_fx_handles[localclientnum]);
   for(i = 0; i < keys.size; i++) {
-    freezegun_end_extremity_damage_fx(localClientNum, keys[i]);
+    freezegun_end_extremity_damage_fx(localclientnum, keys[i]);
   }
 }
-
 freezegun_end_extremity_damage_fx_for_all_localclients(key) {
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     freezegun_end_extremity_damage_fx(i, key);
   }
 }
-
-freezegun_play_extremity_damage_fx(localClientNum, fx, key, tag) {
-  self.freezegun_extremity_damage_fx_handles[localclientnum][key] = playFXOnTag(localClientNum, fx, self, tag);
+freezegun_play_extremity_damage_fx(localclientnum, fx, key, tag) {
+  self.freezegun_extremity_damage_fx_handles[localclientnum][key] = playFXOnTag(localclientnum, fx, self, tag);
 }
-
-freezegun_play_all_extremity_damage_fx(localClientNum) {
+freezegun_play_all_extremity_damage_fx(localclientnum) {
   if(!isDefined(self.freezegun_extremity_damage_fx_handles)) {
     self.freezegun_extremity_damage_fx_handles = [];
   }
@@ -125,21 +113,20 @@ freezegun_play_all_extremity_damage_fx(localClientNum) {
   }
   self.freezegun_extremity_damage_fx_handles[localclientnum] = [];
   if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_ARM)) {
-    freezegun_play_extremity_damage_fx(localClientNum, level._effect["freezegun_damage_sm"], "right_arm", "J_Elbow_RI");
+    freezegun_play_extremity_damage_fx(localclientnum, level._effect["freezegun_damage_sm"], "right_arm", "J_Elbow_RI");
   }
   if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_ARM)) {
-    freezegun_play_extremity_damage_fx(localClientNum, level._effect["freezegun_damage_sm"], "left_arm", "J_Elbow_LE");
+    freezegun_play_extremity_damage_fx(localclientnum, level._effect["freezegun_damage_sm"], "left_arm", "J_Elbow_LE");
   }
   if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_LEG)) {
-    freezegun_play_extremity_damage_fx(localClientNum, level._effect["freezegun_damage_sm"], "right_leg", "J_Knee_RI");
+    freezegun_play_extremity_damage_fx(localclientnum, level._effect["freezegun_damage_sm"], "right_leg", "J_Knee_RI");
   }
   if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_LEG)) {
-    freezegun_play_extremity_damage_fx(localClientNum, level._effect["freezegun_damage_sm"], "left_leg", "J_Knee_LE");
+    freezegun_play_extremity_damage_fx(localclientnum, level._effect["freezegun_damage_sm"], "left_leg", "J_Knee_LE");
   }
 }
-
 freezegun_extremity_damage_fx(localClientNum, set, newEnt) {
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     if(set) {
       self thread freezegun_play_all_extremity_damage_fx(i);
@@ -148,23 +135,20 @@ freezegun_extremity_damage_fx(localClientNum, set, newEnt) {
     }
   }
 }
-
-freezegun_end_all_torso_damage_fx(localClientNum) {
-  deletefx(localClientNum, self.freezegun_damage_torso_fx[localclientnum], true);
+freezegun_end_all_torso_damage_fx(localclientnum) {
+  deletefx(localclientnum, self.freezegun_damage_torso_fx[localclientnum], true);
 }
-
-freezegun_play_all_torso_damage_fx(localClientNum) {
+freezegun_play_all_torso_damage_fx(localclientnum) {
   if(!isDefined(self.freezegun_damage_torso_fx)) {
     self.freezegun_damage_torso_fx = [];
   }
   if(isDefined(self.freezegun_damage_torso_fx[localclientnum])) {
     return;
   }
-  self.freezegun_damage_torso_fx[localclientnum] = playFXOnTag(localClientNum, level._effect["freezegun_damage_torso"], self, "J_SpineLower");
+  self.freezegun_damage_torso_fx[localclientnum] = playFXOnTag(localclientnum, level._effect["freezegun_damage_torso"], self, "J_SpineLower");
 }
-
 freezegun_torso_damage_fx(localClientNum, set, newEnt) {
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     if(set) {
       self thread freezegun_play_all_torso_damage_fx(i);
@@ -173,14 +157,12 @@ freezegun_torso_damage_fx(localClientNum, set, newEnt) {
     }
   }
 }
-
 freezegun_do_gib_fx(tag, shatter) {
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     playFXOnTag(i, freezegun_get_gibtrailfx(shatter), self, tag);
   }
 }
-
 freezegun_do_gib(model, tag, force_from_torso, shatter) {
   if(shatter && !force_from_torso) {
     tag_pos = self.origin;
@@ -192,14 +174,13 @@ freezegun_do_gib(model, tag, force_from_torso, shatter) {
   CreateDynEntAndLaunch(0, model, tag_pos, tag_angles, tag_pos, self freezegun_get_gibforce(tag, force_from_torso, shatter), freezegun_get_gibtrailfx(shatter), 1);
   self freezegun_do_gib_fx(tag, shatter);
 }
-
 freezegun_gib_override(type, locations) {
   if("freeze" != type && "up" != type) {
     if(isDefined(self.freezegun_damage_fx_handles)) {
       for(i = 0; i < locations.size; i++) {
         switch (locations[i]) {
           case 0:
-            players = getLocalPlayers();
+            players = getlocalplayers();
             for(i = 0; i < players.size; i++) {
               self freezegun_end_all_extremity_damage_fx(i);
             }
@@ -240,7 +221,7 @@ freezegun_gib_override(type, locations) {
     explosion_effect = freezegun_get_shatter_effect(upgraded);
     alias = "wpn_freezegun_shatter_zombie";
   }
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     self clientscripts\_zombiemode::deleteZombieEyes(i);
     self freezegun_end_all_extremity_damage_fx(i);
@@ -251,16 +232,20 @@ freezegun_gib_override(type, locations) {
   for(i = 0; i < locations.size; i++) {
     switch (locations[i]) {
       case 0:
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_ARM) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn1) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag1)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_ARM) &&
+          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn1) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag1)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn1, level._gibbing_actor_models[self._gib_def].gibSpawnTag1, true, shatter);
         }
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_ARM) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn2) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag2)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_ARM) &&
+          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn2) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag2)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn2, level._gibbing_actor_models[self._gib_def].gibSpawnTag2, true, shatter);
         }
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_LEG) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn3) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag3)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_LEG) &&
+          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn3) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag3)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn3, level._gibbing_actor_models[self._gib_def].gibSpawnTag3, false, shatter);
         }
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_LEG) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn4) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag4)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_LEG) &&
+          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn4) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag4)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn4, level._gibbing_actor_models[self._gib_def].gibSpawnTag4, false, shatter);
         }
         self thread freezegun_do_gib_fx("J_SpineLower", shatter);

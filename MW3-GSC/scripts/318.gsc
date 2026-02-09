@@ -37,7 +37,6 @@ _id_1DDA(var_0) {
       var_1 moveto(var_4._id_1DD7, var_3);
     } else {
       var_1.origin = var_2;
-
     }
     if(var_4 == var_0) {
       var_1 hide();

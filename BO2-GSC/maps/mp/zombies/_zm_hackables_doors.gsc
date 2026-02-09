@@ -24,7 +24,6 @@ door_struct_debug() {
         color = vectorscale((1, 0, 0), 255.0);
 
       print3d(point, "+", color, 1, 1);
-
     }
   }
 }

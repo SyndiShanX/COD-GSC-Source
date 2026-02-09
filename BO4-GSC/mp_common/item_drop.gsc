@@ -60,7 +60,7 @@ function_344f8c02() {
 function_60c9a9e1() {
   while(true) {
     if(getdvarint(#"hash_9fd3c7ff85dca2c", 0)) {
-      setdvar(#"hash_9fd3c7ff85dca2c", 0);
+      setDvar(#"hash_9fd3c7ff85dca2c", 0);
       function_8a5fd783();
     }
 
@@ -219,7 +219,7 @@ function_44a6883c(&drop_item_id, &drop_items, &drop_count, &drop_amount, var_4a5
 }
 
 function_23b6897(player, position) {
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     heightoffset = max(player getplayerviewheight() + -20, 18);
     var_891dc751 = (0, 0, heightoffset);
     centerpoint = player.origin;
@@ -310,7 +310,7 @@ function_23b6897(player, position) {
         }
 
         if(!var_d154a9ba) {
-          if(isplayer(player)) {
+          if(isPlayer(player)) {
             eyepos = player getEye();
             sighttrace = physicstraceex(eyepos, checkpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), player, 1);
 
@@ -321,7 +321,6 @@ function_23b6897(player, position) {
             }
 
             debug_line(eyepos, checkpoint, (0, 1, 1));
-
           }
 
           return checkpoint;
@@ -330,7 +329,7 @@ function_23b6897(player, position) {
     }
   }
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     position = player.origin;
   }
 
@@ -338,17 +337,17 @@ function_23b6897(player, position) {
 }
 
 function_2734eea3(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return 0;
   }
 
   var_24242c8e = 0;
 
-  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.attacker) && isplayer(player.laststandparams.attacker) && player.laststandparams.attacker != player) {
+  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.attacker) && isPlayer(player.laststandparams.attacker) && player.laststandparams.attacker != player) {
     var_24242c8e |= !util::function_fbce7263(player.laststandparams.attacker.team, player.team);
   }
 
-  if(!var_24242c8e && isDefined(player.var_a1d415ee) && isDefined(player.var_a1d415ee.attacker) && isplayer(player.var_a1d415ee.attacker) && player.var_a1d415ee.attacker != player) {
+  if(!var_24242c8e && isDefined(player.var_a1d415ee) && isDefined(player.var_a1d415ee.attacker) && isPlayer(player.var_a1d415ee.attacker) && player.var_a1d415ee.attacker != player) {
     var_24242c8e |= !util::function_fbce7263(player.var_a1d415ee.attacker.team, player.team);
   }
 
@@ -364,7 +363,7 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
   ignoreent = player;
   zoffset = 64;
 
-  if(isplayer(player) && player isinvehicle()) {
+  if(isPlayer(player) && player isinvehicle()) {
     occupiedvehicle = player getvehicleoccupied();
     dontignore = 0;
 
@@ -425,7 +424,7 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
         parentent = var_708a2754[# "entity"];
 
         if(isDefined(parentent) && parentent.model != "") {
-          if(isplayer(parentent)) {
+          if(isPlayer(parentent)) {
             ignoreent = parentent;
             var_96a432da = var_708a2754[# "position"];
             continue;
@@ -485,14 +484,13 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
 
     debug_sphere(self.origin, 1, (1, 0.5, 0));
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       physicstrace = physicstraceex(self.origin, self.origin + (0, 0, -5), self.mins, self.maxs, ignoreent, 1);
 
       if(physicstrace[# "fraction"] < 1) {
         self.origin = player.origin + (0, 0, 18);
 
         debug_sphere(self.origin, 0.6, (1, 0, 0));
-
       }
     }
 
@@ -528,9 +526,7 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
       if(isDefined(self.var_7b500c20)) {
         foreach(item in self.var_7b500c20) {
           if(isDefined(item)) {
-            [
-              [level.var_19011fa7]
-            ] - > waitinqueue(self);
+            [[level.var_19011fa7]] - > waitinqueue(self);
 
             if(isDefined(item)) {
               item unlink();
@@ -542,7 +538,7 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
       }
 
       return;
-    } else if(!isDefined(parentent.iscorpse) && isDefined(parentent) && parentent.model != "" && !isplayer(parentent)) {
+    } else if(!isDefined(parentent.iscorpse) && isDefined(parentent) && parentent.model != "" && !isPlayer(parentent)) {
       var_fe7058af = 0;
 
       if(!var_e280bfe2) {
@@ -599,7 +595,7 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
 }
 
 event_handler[player_killed] codecallback_playerkilled(eventstruct) {
-  if(sessionmodeiswarzonegame() && isplayer(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self)) {
     drop_inventory(self);
 
     if(isDefined(self)) {
@@ -609,7 +605,7 @@ event_handler[player_killed] codecallback_playerkilled(eventstruct) {
 }
 
 event_handler[player_disconnect] codecallback_playerdisconnect(eventstruct) {
-  if(sessionmodeiswarzonegame() && isplayer(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self)) {
     if(!(isDefined(level.inprematchperiod) && level.inprematchperiod) && isDefined(self) && isDefined(self.var_97b0977) && self.var_97b0977) {
       drop_inventory(self);
 
@@ -654,7 +650,7 @@ function_8a5fd783() {
 }
 
 function_767443cc(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -670,7 +666,7 @@ drop_inventory(player) {
     return;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -690,7 +686,7 @@ drop_inventory(player) {
   level callback::callback(#"on_drop_inventory", player);
   items = [];
 
-  if(!isplayer(player) || !isDefined(player.inventory) || player oob::isoutofbounds()) {
+  if(!isPlayer(player) || !isDefined(player.inventory) || player oob::isoutofbounds()) {
     player.var_33a24f82 = 0;
     return items;
   }
@@ -1072,7 +1068,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
     #item: dropitem, #deathstash: deathstash
   };
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self callback::callback(#"on_drop_item", params);
   }
 

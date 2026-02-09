@@ -4,11 +4,8 @@
 ******************************************/
 
 main() {
-  //------------------
-  //EFECTS DEFINITIONS
-  //------------------
-
-  qBarrels = false;
+  //------------------ //EFECTS DEFINITIONS
+  //------------------ qBarrels = false;
   precacheItem("barrel_mp");
   barrels = getEntArray("explodable_barrel", "targetname");
   if((isDefined(barrels)) && (barrels.size > 0))
@@ -27,22 +24,11 @@ main() {
     level.breakables_fx["oilspill"]["spark"] = loadfx("impacts/small_metalhit_1");
   }
 
-  //------------------
-  //------------------
-
-  //-----------------
-  //SOUND DEFINITIONS
-  //-----------------
-  level.barrelExpSound = "explo_metal_rand";
-  //-----------------
-  //-----------------
-
-  level.barrelHealth = 150;
+  //------------------ //------------------ //----------------- //SOUND DEFINITIONS
+  //----------------- level.barrelExpSound = "explo_metal_rand";
+  //----------------- //----------------- level.barrelHealth = 150;
   maxBrokenPieces = 25;
-  //-------------
-  //-------------
-
-  level.precachemodeltype = [];
+  //------------- //------------- level.precachemodeltype = [];
   level.barrelExplodingThisFrame = false;
   level.breakables_clip = [];
 
@@ -331,7 +317,6 @@ explodable_barrel_explode() {
 
     self.origin = pos;
     self.angles += (0, 0, 90);
-
   }
   wait 0.05;
   level.barrelExplodingThisFrame = false;

@@ -51,7 +51,7 @@ main() {
   load_gump("la_1_gump_1b");
   clientnotify("argus_zone:off");
   flag_clear("drone_approach");
-  setdvar("aim_assist_script_disable", 1);
+  setDvar("aim_assist_script_disable", 1);
   flag_set("drone_approach");
   init_hero("harper");
   init_hero("hillary");
@@ -135,8 +135,9 @@ cougar_fall() {
   level thread run_scene_and_delete("close_call_drone");
   level thread run_scene_and_delete("sam_cougar_fall");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level thread run_scene_and_delete("sam_cougar_fall_harper");
+  }
 
   level.player delay_thread(4, ::switch_player_scene_to_delta);
   level.player delay_thread(14.5, ::play_stylized_impact_audio);
@@ -168,29 +169,37 @@ vehicle_bullet_collisions() {
   vh_police_mc5 = getent("lower_freeway_cycle4", "targetname");
   vh_cougar2 = getent("g20_group1_cougar2", "targetname");
 
-  if(isDefined(vh_police_car1))
+  if(isDefined(vh_police_car1)) {
     vh_police_car1 ignorecheapentityflag(1);
+  }
 
-  if(isDefined(vh_police_car2))
+  if(isDefined(vh_police_car2)) {
     vh_police_car2 ignorecheapentityflag(1);
+  }
 
-  if(isDefined(vh_police_mc1))
+  if(isDefined(vh_police_mc1)) {
     vh_police_mc1 ignorecheapentityflag(1);
+  }
 
-  if(isDefined(vh_police_mc2))
+  if(isDefined(vh_police_mc2)) {
     vh_police_mc2 ignorecheapentityflag(1);
+  }
 
-  if(isDefined(vh_police_mc3))
+  if(isDefined(vh_police_mc3)) {
     vh_police_mc3 ignorecheapentityflag(1);
+  }
 
-  if(isDefined(vh_police_mc4))
+  if(isDefined(vh_police_mc4)) {
     vh_police_mc4 ignorecheapentityflag(1);
+  }
 
-  if(isDefined(vh_police_mc5))
+  if(isDefined(vh_police_mc5)) {
     vh_police_mc5 ignorecheapentityflag(1);
+  }
 
-  if(isDefined(vh_cougar2))
+  if(isDefined(vh_cougar2)) {
     vh_cougar2 ignorecheapentityflag(1);
+  }
 }
 
 hide_hatch(veh_cougar) {
@@ -337,10 +346,11 @@ after_the_attack() {
     run_scene_first_frame("cougar_crawl");
     run_scene_first_frame("cougar_crawl_player");
 
-    if(!flag("harper_dead"))
+    if(!flag("harper_dead")) {
       run_scene_first_frame("cougar_crawl_harper");
-    else
+    } else {
       run_scene_first_frame("cougar_crawl_noharper");
+    }
 
     screen_fade_out(0);
     fade_with_shellshock_and_visionset();
@@ -354,20 +364,23 @@ after_the_attack() {
     level thread run_scene_and_delete("cougar_crawl");
     level thread run_scene_and_delete("cougar_crawl_player");
 
-    if(!flag("harper_dead"))
+    if(!flag("harper_dead")) {
       level thread run_scene_and_delete("cougar_crawl_harper");
-    else
+    } else {
       level thread run_scene_and_delete("cougar_crawl_noharper");
+    }
 
     debug_timer();
 
     scene_wait("cougar_crawl_player");
 
-    if(isDefined(level.old_friendlynamedist))
+    if(isDefined(level.old_friendlynamedist)) {
       setsaveddvar("g_friendlyNameDist", level.old_friendlynamedist);
+    }
 
-    if(flag("harper_dead"))
+    if(flag("harper_dead")) {
       level.player say_dialog("sect_i_ll_get_on_the_stin_0");
+    }
   }
 
   clientnotify("reset_snapshot");
@@ -455,10 +468,11 @@ get_on_sam() {
   sam_cougar usevehicle(level.player, 2);
   sam_cougar makevehicleunusable();
 
-  if(level.skipto_point == "sam")
+  if(level.skipto_point == "sam") {
     v_angles_to_use = level.sam_cougar.angles;
-  else
+  } else {
     v_angles_to_use = level.sam_cougar gettagangles("tag_origin_animate_jnt");
+  }
 
   v_angles = v_angles_to_use - vectorscale((0, 1, 0), 71.0);
   v_angles = (-15 - v_angles[0], v_angles[1], v_angles[2]);
@@ -468,7 +482,7 @@ get_on_sam() {
   sam_cougar hide_sam_turret();
   level.player thread sam_cougar_player_damage_watcher();
   level.player thread sam_attack_exploders();
-  setdvar("aim_assist_script_disable", 0);
+  setDvar("aim_assist_script_disable", 0);
   level.player.old_aim_assist_min_target_distance = getdvarint(#"_id_E87B44C5");
   level.player setclientdvar("aim_assist_min_target_distance", 100000);
   level.player.aim_turnrate_pitch_ads = getdvarfloat(#"_id_951514DE");
@@ -486,8 +500,9 @@ sam_turret_instructions() {
   level._screen_message_2.hidewheninmenu = 0;
   wait 4;
 
-  while(!level.player attackbuttonpressed())
+  while(!level.player attackbuttonpressed()) {
     wait 0.05;
+  }
 
   level._screen_message_1.hidewheninmenu = 1;
   level._screen_message_2.hidewheninmenu = 1;
@@ -570,8 +585,9 @@ sam_cougar() {
 sam_cougar_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, damagefromunderneath, modelindex, partname) {
   max_damage = 9000;
 
-  if(!isDefined(level.sam_cougar_damage))
+  if(!isDefined(level.sam_cougar_damage)) {
     level.sam_cougar_damage = 0;
+  }
 
   level.sam_cougar_damage = level.sam_cougar_damage + idamage;
 
@@ -661,18 +677,20 @@ sam_vo() {
     level.player say_dialog("here_they_come_002");
   }
 
-  if(!isDefined(level.player.missileturrettargetlist) || level.player.missileturrettargetlist.size == 0)
+  if(!isDefined(level.player.missileturrettargetlist) || level.player.missileturrettargetlist.size == 0) {
     level.player waittill("lock_on_missile_turret_start");
+  }
 
   level thread sam_direction_vo_left();
   level thread sam_direction_vo_right();
   level thread good_shot_vo();
   level thread sam_nag_vo("start_sam_end_vo");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level.player say_dialog("dont_let_them_get_007");
-  else
+  } else {
     level.player say_dialog("samu_you_have_to_take_dow_0");
+  }
 
   flag_wait("start_sam_end_vo");
   kill_all_pending_dialog();
@@ -681,17 +699,18 @@ sam_vo() {
   wait 1;
   level thread sam_nag_vo("sam_success");
 
-  if(flag("harper_dead"))
+  if(flag("harper_dead")) {
     level.player say_dialog("samu_they_re_all_over_us_0");
-  else
+  } else {
     level.harper say_dialog("harp_section_beat_they_0");
+  }
 
   flag_wait("sam_success");
   kill_all_pending_dialog();
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level.harper say_dialog("get_the_hell_out_o_002");
-  else {
+  } else {
     level.player say_dialog("thats_your_window_001");
     level.player say_dialog("sect_go_now_0");
   }
@@ -701,9 +720,9 @@ sam_direction_vo_left() {
   level endon("stop_other_sam_vo");
   a_dialog = [];
 
-  if(flag("harper_dead"))
+  if(flag("harper_dead")) {
     a_dialog[a_dialog.size] = "sect_radar_contact_left_0";
-  else {
+  } else {
     a_dialog[a_dialog.size] = "harp_left_side_left_side_0";
     a_dialog[a_dialog.size] = "come_around_90_deg_009";
   }
@@ -720,9 +739,9 @@ sam_direction_vo_right() {
   level endon("stop_other_sam_vo");
   a_dialog = [];
 
-  if(flag("harper_dead"))
+  if(flag("harper_dead")) {
     a_dialog[a_dialog.size] = "sect_radar_contact_right_0";
-  else {
+  } else {
     a_dialog[a_dialog.size] = "harp_right_section_righ_0";
     a_dialog[a_dialog.size] = "watch_your_flank_008";
   }
@@ -786,8 +805,9 @@ drone_sam_attack() {
   level endon("sam_complete");
   level endon("sam_success");
 
-  if(level.skipto_point != "sam")
+  if(level.skipto_point != "sam") {
     wait 8.5;
+  }
 
   angle_offsets = [];
   n_first_right_or_left = randomintrange(0, 2);
@@ -803,10 +823,11 @@ drone_sam_attack() {
     level.n_drone_wave = i;
     a_drones = spawn_sam_drone_group("sam_drone", 6, angle_offset[i - 1]);
 
-    if(angle_offset[i - 1] <= 180)
+    if(angle_offset[i - 1] <= 180) {
       level notify("sam_drones_left");
-    else
+    } else {
       level notify("sam_drones_right");
+    }
 
     level notify("drones_spawned");
 
@@ -818,8 +839,9 @@ drone_sam_attack() {
     } else
       array_wait(a_drones, "death", 8.5);
 
-    if(level.n_drone_wave == 5)
+    if(level.n_drone_wave == 5) {
       flag_set("start_sam_end_vo");
+    }
 
     playFX(level._effect["sam_drone_explode_shockwave"], level.player.origin, anglesToForward(flat_angle(level.sam_cougar gettagangles("tag_gunner_barrel2"))), (0, 0, 1));
     level notify("good_shot");
@@ -831,11 +853,13 @@ delete_sam_drone_corpses(a_drones) {
   flag_wait("sam_complete");
 
   foreach(vh_drone in a_drones) {
-    if(isDefined(vh_drone.deathmodel_pieces))
+    if(isDefined(vh_drone.deathmodel_pieces)) {
       array_delete(vh_drone.deathmodel_pieces);
+    }
 
-    if(isDefined(vh_drone))
+    if(isDefined(vh_drone)) {
       vh_drone delete();
+    }
   }
 }
 
@@ -850,7 +874,6 @@ debug_speed() {
     wait 0.05;
     debug_number(self getspeedmph());
   }
-
 }
 
 debug_number(n_speed) {
@@ -899,19 +922,19 @@ death_cheat() {
 
     wait 0.05;
   }
-
 }
 
 sam_wave_vo(v_player_angle, n_spawn_yaw) {
-  if(abs(n_spawn_yaw - 80) < 30)
+  if(abs(n_spawn_yaw - 80) < 30) {
     level.player say_dialog("more_drones_moving_013");
-  else {
+  } else {
     n_angle_diff = abs(n_spawn_yaw - v_player_angle);
 
-    if(n_angle_diff > 70 && n_angle_diff < 110 || n_angle_diff > 250 && n_angle_diff < 290)
+    if(n_angle_diff > 70 && n_angle_diff < 110 || n_angle_diff > 250 && n_angle_diff < 290) {
       level.player say_dialog("come_around_90_deg_009");
-    else if(n_angle_diff >= 110 && n_angle_diff <= 290)
+    } else if(n_angle_diff >= 110 && n_angle_diff <= 290) {
       level.player say_dialog("watch_your_flank_008");
+    }
   }
 }
 
@@ -951,8 +974,9 @@ drone_fly() {
   a_goal_groups[2] = getstructarray("plane_goto3", "targetname");
   a_goal_groups[3] = getstructarray("plane_goto4", "targetname");
 
-  if(cointoss())
+  if(cointoss()) {
     a_goal_groups = array_reverse(a_goal_groups);
+  }
 
   while(true) {
     foreach(a_goals in a_goal_groups) {
@@ -992,8 +1016,9 @@ plane_fire_weapons() {
     vec_to_target = vectornormalize(vec_to_target);
     forward = anglesToForward(self.angles);
 
-    if(vectordot(forward, vec_to_target) > 0.9)
+    if(vectordot(forward, vec_to_target) > 0.9) {
       facing_player = 1;
+    }
 
     wait 0.05;
   }

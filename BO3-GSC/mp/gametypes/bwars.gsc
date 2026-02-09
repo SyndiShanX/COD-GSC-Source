@@ -430,7 +430,7 @@ function bwars_update_scores() {
   while(!level.gameended) {
     foreach(flag in level.bwars_flags) {
       owner = flag gameobjects::get_owner_team();
-      if(isplayer(owner)) {
+      if(isPlayer(owner)) {
         owner.score = owner.score + 1;
       }
     }
@@ -722,7 +722,7 @@ function updatecapsperminute() {
   }
   self.numcaps++;
   minutespassed = globallogic_utils::gettimepassed() / 60000;
-  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed["total"])) {
     minutespassed = self.timeplayed["total"] / 60;
   }
   self.capsperminute = self.numcaps / minutespassed;

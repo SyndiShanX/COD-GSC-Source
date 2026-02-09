@@ -495,7 +495,7 @@ monitor() {
     profilestart();
 
     foreach(player in level.var_7506365) {
-      if(isDefined(player) && isplayer(player) && isalive(player)) {
+      if(isDefined(player) && isPlayer(player) && isalive(player)) {
         foreach(v in level.vsmgr) {
           if(!v.in_use) {
             continue;

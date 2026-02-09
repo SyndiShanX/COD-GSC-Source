@@ -12,7 +12,7 @@ setempimmune() {}
 unsetempimmune() {}
 
 setautospot() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   autospotadswatcher();
@@ -28,7 +28,7 @@ autospotdeathwatcher() {
 }
 
 unsetautospot() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self notify("endAutoSpotAdsWatcher");
@@ -333,7 +333,7 @@ applystunresistence(var_0, var_1, var_2) {
     var_3 = scripts\engine\utility::ter_op(isDefined(var_0.owner), var_0.owner, var_0);
     var_4 = scripts\engine\utility::ter_op(isDefined(var_1.owner), var_1.owner, var_1);
 
-    if(isplayer(var_3) && var_3 != var_1) {
+    if(isPlayer(var_3) && var_3 != var_1) {
       var_0 scripts\mp\damagefeedback::updatedamagefeedback("hittacresist", undefined, undefined, undefined, 1);
     }
 
@@ -1061,7 +1061,7 @@ func_83E9(var_0) {
 }
 
 setpainted(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_1 = 0.5;
 
     if(!scripts\mp\utility::_hasperk("specialty_engineer") && !scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
@@ -1922,7 +1922,7 @@ watchlifepackuse(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(var_1.team != var_0.team) {
@@ -4041,7 +4041,7 @@ bulletoutlinecheck(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
-  if(!(isplayer(var_0) || scripts\mp\utility::func_9F22(var_0)) || !(isplayer(var_1) || scripts\mp\utility::func_9F22(var_1))) {
+  if(!(isPlayer(var_0) || scripts\mp\utility::func_9F22(var_0)) || !(isPlayer(var_1) || scripts\mp\utility::func_9F22(var_1))) {
     return;
   }
   var_4 = var_0;
@@ -4059,7 +4059,7 @@ bulletoutlinecheck(var_0, var_1, var_2, var_3) {
   if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_4, var_5))) {
     return;
   }
-  if(isplayer(var_0) && isplayer(var_1) && scripts\mp\utility::func_C7A0(var_0 getEye(), var_1 getEye())) {
+  if(isPlayer(var_0) && isPlayer(var_1) && scripts\mp\utility::func_C7A0(var_0 getEye(), var_1 getEye())) {
     return;
   }
   if(isDefined(var_0.bulletoutline) && !var_1 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {

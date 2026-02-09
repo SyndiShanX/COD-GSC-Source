@@ -169,7 +169,7 @@ is_target_valid(dog, target) {
   }
 
   if(!(dog.team == # "allies")) {
-    if(!isplayer(target) && sessionmodeiszombiesgame()) {
+    if(!isPlayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
 
@@ -178,11 +178,11 @@ is_target_valid(dog, target) {
     }
   }
 
-  if(isplayer(target) && target.sessionstate == "spectator") {
+  if(isPlayer(target) && target.sessionstate == "spectator") {
     return 0;
   }
 
-  if(isplayer(target) && target.sessionstate == "intermission") {
+  if(isPlayer(target) && target.sessionstate == "intermission") {
     return 0;
   }
 
@@ -202,13 +202,13 @@ is_target_valid(dog, target) {
     return 0;
   }
 
-  if(isplayer(target) && isDefined(level.var_6f6cc58)) {
+  if(isPlayer(target) && isDefined(level.var_6f6cc58)) {
     if(!dog[[level.var_6f6cc58]](target)) {
       return 0;
     }
   }
 
-  if(isplayer(target) && isDefined(level.is_player_valid_override)) {
+  if(isPlayer(target) && isDefined(level.is_player_valid_override)) {
     return [[level.is_player_valid_override]](target);
   }
 
@@ -261,7 +261,7 @@ get_favorite_enemy(dog) {
 }
 
 get_last_valid_position() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return self.last_valid_position;
   }
 
@@ -399,7 +399,7 @@ zombiedogshouldrun(behaviortreeentity) {
 }
 
 use_low_attack() {
-  if(!isDefined(self.enemy) || !isplayer(self.enemy)) {
+  if(!isDefined(self.enemy) || !isPlayer(self.enemy)) {
     return false;
   }
 

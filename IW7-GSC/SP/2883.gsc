@@ -987,7 +987,7 @@ func_9A11() {
           var_14 = self.origin + anglestoup(self.angles) * 66;
           var_11 = vectornormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
           var_13 = scripts\common\trace::ray_trace(var_14, var_11, self, var_12);
-          if(isplayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
+          if(isPlayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             break;
           }
         }
@@ -1108,7 +1108,7 @@ func_9A11() {
           var_14 = self.origin + anglestoup(self.angles) * 66;
           var_11 = vectornormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
           var_13 = scripts\common\trace::ray_trace(var_14, var_11, self, var_12);
-          if(isplayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
+          if(isPlayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             if(isarray(self.var_B004["diff"]) && self.var_1F25 < self.var_B004["diff"].size - 1) {
               self.var_F274 = 1;
               scripts\sp\utility::func_65DD("scene_end");
@@ -1405,7 +1405,7 @@ func_9A35() {
           var_11 = self.origin + anglestoup(self.angles) * 66;
           var_8 = vectornormalize(level.player getEye() - var_11) * self.var_B004["trigger_radius"] + var_11;
           var_10 = scripts\common\trace::ray_trace(var_11, var_8, self, var_9);
-          if(isplayer(var_10["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
+          if(isPlayer(var_10["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             break;
           }
         }
@@ -1671,7 +1671,7 @@ func_9A37() {
             var_13 = self.origin + anglestoup(self.angles) * 66;
             var_10 = vectornormalize(level.player getEye() - var_13) * var_1["trigger_radius"] + var_13;
             var_12 = scripts\common\trace::ray_trace(var_13, var_10, self, var_11);
-            if(isplayer(var_12["entity"]) || isDefined(var_1["interaction_trigger_override"])) {
+            if(isPlayer(var_12["entity"]) || isDefined(var_1["interaction_trigger_override"])) {
               break;
             }
           }
@@ -1855,7 +1855,7 @@ func_2B88() {
         var_5 = self.origin + anglestoup(self.angles) * 66;
         var_1 = vectornormalize(level.player getEye() - var_5) * self.var_B004["trigger_radius"] + var_5;
         var_3 = scripts\common\trace::ray_trace(var_5, var_1, self, var_2);
-        if(isplayer(var_3["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
+        if(isPlayer(var_3["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
           break;
         }
       }
@@ -2798,7 +2798,7 @@ func_43DA(var_0, var_1) {
   if(var_3 < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925)) {
     var_4 = vectornormalize(level.player getEye() - self getEye()) * self.var_B004["trigger_radius"] + self getEye();
     var_6 = scripts\common\trace::ray_trace(self getEye(), var_4, self, var_5);
-    if(isplayer(var_6["entity"])) {
+    if(isPlayer(var_6["entity"])) {
       func_43DB();
     }
   }

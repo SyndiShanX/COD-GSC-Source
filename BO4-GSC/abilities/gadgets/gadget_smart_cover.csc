@@ -32,18 +32,18 @@ init_shared() {
 }
 
 setupdvars() {
-  setdvar(#"hash_25f7092e7c7b66f2", 0);
-  setdvar(#"hash_4332205cbf1cc384", 0);
-  setdvar(#"smartcover_drawtime", 1000);
-  setdvar(#"hash_436fc2fad44e9041", 1);
-  setdvar(#"hash_1d8eb304f5cf8033", 1);
-  setdvar(#"smartcover_tracedistance", level.smartcoversettings.bundle.var_1f0ae388);
-  setdvar(#"hash_13c23fd3a4387b84", 8);
-  setdvar(#"hash_55a8dba3350b8b7c", 4);
-  setdvar(#"hash_4f4ce3cb18b004bc", 10);
-  setdvar(#"hash_417afa70d515fba5", isDefined(level.smartcoversettings.bundle.var_76d79155) ? level.smartcoversettings.bundle.var_76d79155 : 0);
-  setdvar(#"hash_71f8bd4cd30de4b3", isDefined(level.smartcoversettings.bundle.var_e35fc674) ? level.smartcoversettings.bundle.var_e35fc674 : 0);
-  setdvar(#"hash_39a564d4801c4b2e", isDefined(level.smartcoversettings.bundle.var_1f0ae388) ? level.smartcoversettings.bundle.var_1f0ae388 : 0);
+  setDvar(#"hash_25f7092e7c7b66f2", 0);
+  setDvar(#"hash_4332205cbf1cc384", 0);
+  setDvar(#"smartcover_drawtime", 1000);
+  setDvar(#"hash_436fc2fad44e9041", 1);
+  setDvar(#"hash_1d8eb304f5cf8033", 1);
+  setDvar(#"smartcover_tracedistance", level.smartcoversettings.bundle.var_1f0ae388);
+  setDvar(#"hash_13c23fd3a4387b84", 8);
+  setDvar(#"hash_55a8dba3350b8b7c", 4);
+  setDvar(#"hash_4f4ce3cb18b004bc", 10);
+  setDvar(#"hash_417afa70d515fba5", isDefined(level.smartcoversettings.bundle.var_76d79155) ? level.smartcoversettings.bundle.var_76d79155 : 0);
+  setDvar(#"hash_71f8bd4cd30de4b3", isDefined(level.smartcoversettings.bundle.var_e35fc674) ? level.smartcoversettings.bundle.var_e35fc674 : 0);
+  setDvar(#"hash_39a564d4801c4b2e", isDefined(level.smartcoversettings.bundle.var_1f0ae388) ? level.smartcoversettings.bundle.var_1f0ae388 : 0);
 }
 
 smartcover_start_microwave(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

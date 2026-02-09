@@ -111,7 +111,7 @@ function pilot_loop_logic(s_start) {
 
 function ee_plane_vehicledamage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, var_740c2c73, v_point, v_dir, str_hit_loc, v_origin, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name, v_normal) {
   if(self.vehicletype == "biplane_zm" && !self flag::get("biplane_down")) {
-    if(isplayer(e_attacker) && e_attacker.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+    if(isPlayer(e_attacker) && e_attacker.zombie_vars["zombie_powerup_zombie_blood_on"]) {
       self flag::set("biplane_down");
     }
     return 0;

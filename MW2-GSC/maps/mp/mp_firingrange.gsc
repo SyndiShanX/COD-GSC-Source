@@ -19,7 +19,7 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_firingrange");
 
-  setdvar("r_diffusecolorscale", "1.5");
+  setDvar("r_diffusecolorscale", "1.5");
 
   /****** GET ENTITIES******/
   //TRIGGERS
@@ -198,7 +198,6 @@ damageTarget(dir) {
           //yaw = get2DYaw( attacker.origin, self.origin );
           //if( attacker.angles[1] > yaw )
           //	rotation = -1;
-
         }
 
         self rotateyaw(self.angles[2] + (180 * rotation), .3);
@@ -227,7 +226,6 @@ damageTarget(dir) {
         wait(.2);
         self playSound("amb_target_flip");
         break;
-
     }
   }
 }
@@ -382,7 +380,6 @@ moveTarget(dir, dis, speed) {
         self moveto(StartPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
-
     }
   }
 }

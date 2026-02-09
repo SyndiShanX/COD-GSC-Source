@@ -888,7 +888,7 @@ robotcantacticaljuke(entity) {
 }
 
 robotcanpreemptivejuke(entity) {
-  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isPlayer(entity.enemy)) {
     return false;
   }
 
@@ -1032,7 +1032,7 @@ robotdonttakecover(entity) {
 }
 
 _isvalidplayer(player) {
-  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isPlayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
 
@@ -2408,7 +2408,7 @@ robotdamageoverride(inflictor, attacker, damage, flags, meansofdamage, weapon, p
   entity = self;
 
   if(hitloc != "helmet" || hitloc != "head" || hitloc != "neck") {
-    if(isDefined(attacker) && !isplayer(attacker) && !isvehicle(attacker)) {
+    if(isDefined(attacker) && !isPlayer(attacker) && !isvehicle(attacker)) {
       dist = distancesquared(entity.origin, attacker.origin);
 
       if(dist < 65536) {

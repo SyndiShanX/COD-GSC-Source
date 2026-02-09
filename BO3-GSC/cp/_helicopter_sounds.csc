@@ -35,7 +35,7 @@ function init() {
   init_heli_sound_values("heli_guard", "turbine", 10, 0.9, 1, 30, 0.9, 1.05);
   init_heli_sound_values("heli_guard", "rotor", 10, 0.9, 1, 30, 0.9, 1.1);
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   level thread command_parser();
 }
@@ -150,7 +150,7 @@ function command_parser() {
           }
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.1);
   }

@@ -168,7 +168,7 @@ electric_switch() {
       user recordmapevent(17, gettime(), user.origin, level.round_number, switchentnum);
     }
 
-    if(isplayer(user)) {
+    if(isPlayer(user)) {
       user util::delay(1, "death", &zm_audio::create_and_play_dialog, #"power_switch", #"activate", undefined, 2);
     }
 

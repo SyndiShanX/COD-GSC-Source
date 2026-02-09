@@ -11,7 +11,7 @@ main() {
   wait RandomFloatRange(0, 0.4);
   self ClearAnim(%root, 0.1);
   duration = self startFlashBanged() * 0.001;
-  if(duration > 2 && randomInt(100) > 60) {
+  if(duration > 2 && RandomInt(100) > 60) {
     self SetFlaggedAnimRestart("flashed_anim", %zombie_dog_run_pain, 1, 0.2, self.animplaybackrate * 0.75);
   } else {
     self SetFlaggedAnimRestart("flashed_anim", %zombie_dog_run_flashbang, 1, 0.2, self.animplaybackrate);

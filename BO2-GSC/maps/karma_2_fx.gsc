@@ -187,10 +187,11 @@ createfx_setup() {
   maps\karma_2_anim::exit_club_anims();
   maps\karma_2_anim::mall_anims();
   maps\karma_2_anim::sundeck_anims();
-  level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
+  level.skipto_point = tolower(getDvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "")
+  if(level.skipto_point == "") {
     level.skipto_point = "club exit";
+  }
 
   maps\karma_2::load_gumps_karma();
 }

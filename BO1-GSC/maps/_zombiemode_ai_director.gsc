@@ -8,6 +8,7 @@
 #include maps\_zombiemode_utility;
 #include animscripts\zombie_Utility;
 #using_animtree("generic_human");
+
 init() {
   PrecacheRumble("explosion_generic");
   director_precache_models();
@@ -110,13 +111,12 @@ init() {
   level thread setup_player_damage_watchers();
   level thread director_max_ammo_watcher();
 }
-
 director_precache_models() {
   PrecacheModel("t5_weapon_engineer_club");
   PrecacheModel("c_zom_george_romero_zombiefied_fb");
 }
-
 #using_animtree("generic_human");
+
 director_prespawn() {
   self.animname = "director_zombie";
   self.custom_idle_setup = maps\_zombiemode_ai_director::director_zombie_idle_setup;
@@ -185,14 +185,12 @@ director_prespawn() {
   level.zombie_director = self;
   self notify("zombie_init_done");
 }
-
 director_health_watch() {
   self endon("death");
   while(1) {
     wait(1);
   }
 }
-
 director_zombie_idle_setup() {
   self.a.array["turn_left_45"] = % exposed_tracking_turn45L;
   self.a.array["turn_left_90"] = % exposed_tracking_turn90L;
@@ -206,7 +204,6 @@ director_zombie_idle_setup() {
   self.a.array["straight_level"] = % ai_zombie_boss_idle_a_coast;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
-
 init_director_zombie_anims() {
   level.scr_anim["director_zombie"]["death1"] = % ai_zombie_boss_death_coast;
   level.scr_anim["director_zombie"]["death2"] = % ai_zombie_boss_death_a_coast;
@@ -331,7 +328,6 @@ init_director_zombie_anims() {
   level._zombie_board_taunt["director_zombie"][6] = % ai_zombie_taunts_5e;
   level._zombie_board_taunt["director_zombie"][7] = % ai_zombie_taunts_5f;
 }
-
 director_zombie_spawn() {
   self.script_moveoverride = true;
   if(!isDefined(level.num_director_zombies)) {
@@ -339,7 +335,7 @@ director_zombie_spawn() {
   }
   level.num_director_zombies++;
   director_zombie = self maps\_zombiemode_net::network_safe_stalingrad_spawn("boss_zombie_spawn", 1);
-  director_zombie hide();
+  director_zombie Hide();
   self.count = 666;
   self.last_spawn_time = GetTime();
   if(!spawn_failed(director_zombie)) {
@@ -353,9 +349,8 @@ director_zombie_spawn() {
     level.num_director_zombies--;
   }
 }
-
 director_zombie_manager() {
-  start_boss = getEnt("start_boss_spawner", "script_noteworthy");
+  start_boss = getent("start_boss_spawner", "script_noteworthy");
   if(isDefined(start_boss)) {
     while(true) {
       if(level.num_director_zombies < level.max_director_zombies) {
@@ -377,7 +372,6 @@ director_zombie_manager() {
     wait(10);
   }
 }
-
 director_zombie_pick_best_spawner() {
   best_spawner = undefined;
   best_score = -1;
@@ -390,14 +384,12 @@ director_zombie_pick_best_spawner() {
   }
   return best_spawner;
 }
-
 show_damage() {
   while(1) {
     iprintln("damage = " + self.dmg_taken);
     wait(1);
   }
 }
-
 director_display_damage() {
   self endon("death");
   while(1) {
@@ -408,13 +400,11 @@ director_display_damage() {
     wait(.5);
   }
 }
-
 director_devgui_health() {
   if(isDefined(level.zombie_director)) {
     level.zombie_director director_reset_health(true);
   }
 }
-
 director_reset_health(easy) {
   players = getplayers();
   num_players = players.size;
@@ -426,7 +416,6 @@ director_reset_health(easy) {
   self.damage_two = self.max_damage_taken * .66;
   director_print("reset damage " + self.max_damage_taken);
 }
-
 director_flip_light_flag() {
   if(!is_true(self.director_light_set)) {
     self.director_light_set = true;
@@ -436,7 +425,6 @@ director_flip_light_flag() {
     self clearclientflag(level._ZOMBIE_ACTOR_FLAG_DIRECTOR_LIGHT);
   }
 }
-
 director_reset_light_flag() {
   self endon("death");
   if(self.health_state == "pristine") {
@@ -461,7 +449,6 @@ director_reset_light_flag() {
     self director_flip_light_flag();
   }
 }
-
 director_watch_damage() {
   self endon("death");
   self endon("humangun_leave");
@@ -488,18 +475,18 @@ director_watch_damage() {
         rand = RandomIntRange(0, 5);
         self thread[[level._audio_director_vox_play]]("vox_romero_weaken_" + rand, .25);
       }
-      if(isDefined(attacker) && IsPlayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker thread maps\_zombiemode_audio::create_and_play_dialog("director", "weaken");
       }
     } else if(self.health_state == "damage_one" && self.dmg_taken >= self.damage_two) {
       self.health_state = "damage_two";
-      self.light stopLoopSound(2);
+      self.light StopLoopSound(2);
       self director_flip_light_flag();
       if(isDefined(level._audio_director_vox_play)) {
         rand = RandomIntRange(0, 5);
         self thread[[level._audio_director_vox_play]]("vox_romero_weaken_" + rand, .25);
       }
-      if(isDefined(attacker) && IsPlayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker thread maps\_zombiemode_audio::create_and_play_dialog("director", "weaken");
       }
     }
@@ -552,7 +539,6 @@ director_watch_damage() {
   exit = self thread[[level.director_find_exit]]();
   self thread director_leave_map(exit, self.in_water);
 }
-
 director_custom_stumble() {
   director_print("custom stumble");
   stumble_anim = % ai_zombie_boss_stumble_coast;
@@ -561,13 +547,11 @@ director_custom_stumble() {
   animscripts\traverse\zombie_shared::wait_anim_length(stumble_anim, .02);
   self notify("stumble_done");
 }
-
 director_stumble_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "weapon_fx");
   playFXOnTag(level._effect["director_death_weapon"], self, "tag_light");
 }
-
 director_scream_in_water() {
   self endon("death");
   if(!isDefined(self.water_scream)) {
@@ -591,13 +575,11 @@ director_scream_in_water() {
     self.water_scream = undefined;
   }
 }
-
 director_scream_delay() {
   wait(2.6);
   clientnotify("ZDA");
   self thread director_blur();
 }
-
 director_blur() {
   self endon("death");
   players = getplayers();
@@ -606,7 +588,6 @@ director_blur() {
     player ShellShock("electrocution", 1.7, true);
   }
 }
-
 director_zombie_think() {
   self endon("death");
   self.pathEnemyFightDist = 96;
@@ -636,7 +617,6 @@ director_zombie_think() {
   self BloodImpact("hero");
   self thread director_zombie_update();
 }
-
 director_zombie_update() {
   self endon("death");
   self endon("director_exit");
@@ -660,7 +640,6 @@ director_zombie_update() {
     wait(1);
   }
 }
-
 director_add_weapon() {
   self Attach("t5_weapon_engineer_club", "tag_weapon_right");
   self.light = spawn("script_model", self GetTagOrigin("tag_light"));
@@ -672,12 +651,11 @@ director_add_weapon() {
   wait_network_frame();
   self director_flip_light_flag();
 }
-
 director_zombie_choose_buff() {
   if(is_true(self.ground_hit) || GetTime() < self.nextGroundHit || !self.is_activated) {
     self.buff = "speed";
   } else {
-    rand = randomInt(100);
+    rand = RandomInt(100);
     if(rand < 50) {
       self.buff = "electric";
     } else {
@@ -685,7 +663,6 @@ director_zombie_choose_buff() {
     }
   }
 }
-
 director_zombie_default_pathfind_heuristic(node) {
   if(!isDefined(node.targetname) || !isDefined(level.zones[node.targetname])) {
     return -1;
@@ -705,7 +682,6 @@ director_zombie_default_pathfind_heuristic(node) {
   }
   return score;
 }
-
 director_zombie_default_spawn_heuristic(spawner) {
   if(isDefined(spawner.last_spawn_time) && (GetTime() - spawner.last_spawn_time < 30000)) {
     return -1;
@@ -723,7 +699,6 @@ director_zombie_default_spawn_heuristic(spawner) {
   }
   return score;
 }
-
 director_zombie_choose_run() {
   self endon("death");
   while(true) {
@@ -770,7 +745,6 @@ director_zombie_choose_run() {
     wait_network_frame();
   }
 }
-
 director_wait_for_run_change() {
   self endon("death");
   self endon("director_calmed");
@@ -779,7 +753,6 @@ director_wait_for_run_change() {
   randf = randomFloatRange(2, 3);
   wait(randf);
 }
-
 director_zombie_health_manager() {
   self endon("death");
   while(1) {
@@ -789,7 +762,6 @@ director_zombie_health_manager() {
     director_print("health = " + self.health);
   }
 }
-
 director_zombie_update_goal_radius() {
   self endon("death");
   self endon("director_exit");
@@ -817,7 +789,6 @@ director_zombie_update_goal_radius() {
     wait(.5);
   }
 }
-
 director_kill_prone() {
   self endon("death");
   _KILL_DIST = 144;
@@ -835,7 +806,6 @@ director_kill_prone() {
     wait(0.5);
   }
 }
-
 director_zombie_check_player_proximity() {
   self endon("death");
   while(1) {
@@ -844,7 +814,7 @@ director_zombie_check_player_proximity() {
     }
     players = getplayers();
     for(i = 0; i < players.size; i++) {
-      dist = distanceSquared(self.origin, players[i].origin);
+      dist = DistanceSquared(self.origin, players[i].origin);
       if(dist < level.director_zombie_proximity_wake) {
         self notify("hit_player");
         break;
@@ -853,7 +823,6 @@ director_zombie_check_player_proximity() {
     wait_network_frame();
   }
 }
-
 director_zombie_update_proximity_wake() {
   while(!isDefined(level.round_number)) {
     wait(1);
@@ -870,19 +839,17 @@ director_zombie_update_proximity_wake() {
     wait(1);
   }
 }
-
 director_activation_damage() {
   self endon("death");
   self endon("disable_activation");
   self endon("hit_player");
   self waittill("activation_damage", attacker, weapon);
-  if(isDefined(attacker) && IsPlayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker maps\_zombiemode_score::player_add_points("damage");
     attacker thread maps\_zombiemode_audio::create_and_play_dialog("director", "anger");
   }
   self notify("director_aggro");
 }
-
 director_activation_hit_player() {
   self endon("death");
   self endon("disable_activation");
@@ -890,7 +857,6 @@ director_activation_hit_player() {
   self waittill("hit_player");
   self notify("director_aggro");
 }
-
 director_zombie_check_for_activation() {
   self endon("death");
   self endon("disable_activation");
@@ -916,7 +882,7 @@ director_zombie_check_for_activation() {
   }
   self playSound("zmb_director_light_start");
   aggro_anim = % ai_zombie_boss_enrage_start_coast;
-  if(randomInt(100) < 50) {
+  if(RandomInt(100) < 50) {
     aggro_anim = % ai_zombie_boss_enrage_start_a_coast;
   }
   if(isDefined(level._audio_director_vox_play)) {
@@ -932,7 +898,6 @@ director_zombie_check_for_activation() {
   }
   self thread director_zombie_ground_hit_think();
 }
-
 director_zombified_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "scream_a");
@@ -941,7 +906,6 @@ director_zombified_watcher(animname) {
     self.director_zombified = true;
   }
 }
-
 director_zombie_check_for_buff() {
   self endon("death");
   self endon("disable_buff");
@@ -978,7 +942,6 @@ director_zombie_check_for_buff() {
     wait(1);
   }
 }
-
 director_buff_cooldown() {
   self endon("death");
   while(1) {
@@ -989,7 +952,6 @@ director_buff_cooldown() {
     wait(0.1);
   }
 }
-
 director_get_zombies_to_buff() {
   zombies_in_range = [];
   zombies = GetAiSpeciesArray("axis", "all");
@@ -1001,7 +963,6 @@ director_get_zombies_to_buff() {
   }
   return zombies_in_range;
 }
-
 director_zombie_enemy_is_far() {
   self endon("death");
   far_enough = false;
@@ -1010,14 +971,13 @@ director_zombie_enemy_is_far() {
     if(height > 72) {
       far_enough = true;
     }
-    dist_enemy = distanceSquared(self.origin, self.favoriteenemy.origin);
+    dist_enemy = DistanceSquared(self.origin, self.favoriteenemy.origin);
     if(dist_enemy > level.director_enemy_range) {
       far_enough = true;
     }
   }
   return far_enough;
 }
-
 director_zombie_can_buff(zombie) {
   self endon("death");
   if(is_true(zombie.ignoreme)) {
@@ -1044,7 +1004,7 @@ director_zombie_can_buff(zombie) {
   if(height > 72) {
     return false;
   }
-  dist = distanceSquared(self.origin, zombie.origin);
+  dist = DistanceSquared(self.origin, zombie.origin);
   if(dist > range) {
     return false;
   }
@@ -1056,7 +1016,6 @@ director_zombie_can_buff(zombie) {
   }
   return true;
 }
-
 director_zombie_apply_buff(zombies) {
   self endon("death");
   if(self.buff == "electric") {
@@ -1067,7 +1026,6 @@ director_zombie_apply_buff(zombies) {
   }
   self director_zombie_choose_buff();
 }
-
 director_zombie_speed_buff(zombies, enrage_anim) {
   self endon("death");
   director_print("apply speed buff " + zombies.size);
@@ -1090,13 +1048,12 @@ director_zombie_speed_buff(zombies, enrage_anim) {
   }
   players = getplayers();
   for(i = 0; i < players.size; i++) {
-    if(distanceSquared(self.origin, players[i].origin) <= 600 * 600) {
+    if(DistanceSquared(self.origin, players[i].origin) <= 600 * 600) {
       players[i] thread maps\_zombiemode_audio::create_and_play_dialog("general", "react_sprinters");
       break;
     }
   }
 }
-
 director_zombie_get_num_speed_buff() {
   num = 0;
   zombies = GetAiSpeciesArray("axis", "all");
@@ -1107,12 +1064,11 @@ director_zombie_get_num_speed_buff() {
   }
   return num;
 }
-
 zombie_speed_buff() {
   self endon("death");
   self.speed_buff = true;
   fast_sprint = "sprint5";
-  if(randomInt(100) < 50) {
+  if(RandomInt(100) < 50) {
     fast_sprint = "sprint6";
   }
   self.zombie_move_speed = "sprint";
@@ -1120,7 +1076,6 @@ zombie_speed_buff() {
   self.run_combatanim = level.scr_anim[self.animname][fast_sprint];
   self.needs_run_update = true;
 }
-
 zombie_speed_debuff() {
   self endon("death");
   self.speed_buff = false;
@@ -1143,13 +1098,11 @@ zombie_speed_debuff() {
   }
   self.needs_run_update = true;
 }
-
 groundhit_fx_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "wrench_hit");
   playFXOnTag(level._effect["director_groundhit"], self, "tag_origin");
 }
-
 director_zombie_electric_buff(zombies) {
   self endon("death");
   director_print("apply electric buff " + zombies.size);
@@ -1174,13 +1127,12 @@ director_zombie_electric_buff(zombies) {
   }
   players = getplayers();
   for(i = 0; i < players.size; i++) {
-    if(distanceSquared(self.origin, players[i].origin) <= 600 * 600) {
+    if(DistanceSquared(self.origin, players[i].origin) <= 600 * 600) {
       players[i] thread maps\_zombiemode_audio::create_and_play_dialog("general", "react_sparkers");
       break;
     }
   }
 }
-
 director_sprint2walk() {
   self endon("death");
   transition_anim = level.scr_anim["director_zombie"]["sprint2walk"];
@@ -1190,7 +1142,6 @@ director_sprint2walk() {
   wait(time);
   self notify("transition_done");
 }
-
 director_sprint2walk_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "swap_fx");
@@ -1198,7 +1149,6 @@ director_sprint2walk_watcher(animname) {
   self setModel("c_zom_george_romero_light_fb");
   self.director_zombified = undefined;
 }
-
 director_zombie_ground_hit() {
   self endon("death");
   if(self.ground_hit) {
@@ -1213,11 +1163,9 @@ director_zombie_ground_hit() {
   self.nextGroundHit = GetTime() + level.director_ground_attack_delay;
   self notify("ground_hit_done");
 }
-
 director_zombie_update_next_groundhit() {
   self.nextGroundHit = GetTime() + level.director_ground_attack_delay;
 }
-
 director_zombie_ground_hit_think() {
   self endon("death");
   self endon("director_calmed");
@@ -1249,7 +1197,7 @@ director_zombie_ground_hit_think() {
           continue;
         }
         test_origin = players[i] getEye();
-        d = distanceSquared(origin, test_origin);
+        d = DistanceSquared(origin, test_origin);
         if(d > level.director_zombie_groundhit_radius * level.director_zombie_groundhit_radius) {
           continue;
         }
@@ -1269,14 +1217,12 @@ director_zombie_ground_hit_think() {
     wait_network_frame();
   }
 }
-
 scream_a_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "scream_a");
   clientnotify("ZDA");
   self thread director_blur();
 }
-
 director_zombie_sprint_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "scream_a");
@@ -1317,7 +1263,6 @@ director_zombie_sprint_watcher(animname) {
     }
   }
 }
-
 groundhit_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "wrench_hit");
@@ -1349,7 +1294,7 @@ groundhit_watcher(animname) {
   affected_players = [];
   for(i = 0; i < players.size; i++) {
     test_origin = players[i] getEye();
-    d = distanceSquared(origin, test_origin);
+    d = DistanceSquared(origin, test_origin);
     if(d > level.director_electrify_range_sq) {
       continue;
     }
@@ -1368,10 +1313,9 @@ groundhit_watcher(animname) {
     }
   }
 }
-
 scream_b_watcher(animname) {
   self endon("death");
-  rand = randomInt(100);
+  rand = RandomInt(100);
   if(rand > level.director_zombie_scream_b_chance) {
     return;
   }
@@ -1387,11 +1331,9 @@ scream_b_watcher(animname) {
     affected_players[i] ShellShock("electrocution", 1.5, true);
   }
 }
-
 director_zombie_die() {
   return true;
 }
-
 director_custom_damage(player) {
   self endon("death");
   if(isDefined(self.ground_hit) && self.ground_hit) {
@@ -1399,7 +1341,6 @@ director_custom_damage(player) {
   }
   return self.meleeDamage;
 }
-
 director_nuke_damage() {
   self endon("death");
   if(is_true(self.is_traversing)) {
@@ -1415,7 +1356,6 @@ director_nuke_damage() {
     self.nuke_react = undefined;
   }
 }
-
 director_tesla_damage(origin, player) {
   self.zombie_tesla_hit = false;
   if(is_true(self.leaving_level)) {
@@ -1425,7 +1365,6 @@ director_tesla_damage(origin, player) {
     self notify("activation_damage", player, "tesla_gun_zm");
   }
 }
-
 director_full_damage(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, sHitLoc, modelIndex, psOffsetTime) {
   self endon("death");
   self notify("activation_damage", attacker, weapon);
@@ -1450,13 +1389,11 @@ director_full_damage(inflictor, attacker, damage, flags, meansofdeath, weapon, v
   }
   return damage;
 }
-
 director_zombie_default_enter_level() {
   playFX(level._effect["director_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
 }
-
 setup_player_damage_watchers() {
   flag_wait("all_players_connected");
   players = getplayers();
@@ -1464,16 +1401,14 @@ setup_player_damage_watchers() {
     players[i].player_damage_override = ::player_damage_watcher;
   }
 }
-
 player_damage_watcher(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
-  if(IsPlayer(eAttacker)) {
+  if(isPlayer(eAttacker)) {
     return;
   }
   if(is_true(eAttacker.electrified)) {
     self player_electrify();
   }
 }
-
 player_electrify() {
   self endon("death");
   self endon("disconnect");
@@ -1489,7 +1424,6 @@ player_electrify() {
     self.electrified = undefined;
   }
 }
-
 zombie_set_electric_buff() {
   self.electrified = true;
   self setclientflag(level._ZOMBIE_ACTOR_FLAG_ELECTRIFIED);
@@ -1497,7 +1431,6 @@ zombie_set_electric_buff() {
   self thread zombie_melee_watcher(true);
   self.actor_killed_override = ::zombie_clear_electric_buff;
 }
-
 zombie_melee_watcher(is_zombie) {
   self endon("death");
   if(is_true(is_zombie)) {
@@ -1505,7 +1438,7 @@ zombie_melee_watcher(is_zombie) {
   }
   while(1) {
     self waittill("damage", amount, attacker, direction, point, method);
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(method == "MOD_MELEE") {
         attacker player_electrify();
         attacker thread maps\_zombiemode_audio::create_and_play_dialog("general", "damage_shocked");
@@ -1513,11 +1446,10 @@ zombie_melee_watcher(is_zombie) {
     }
   }
 }
-
 zombie_clear_electric_buff(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime) {
   self clearclientflag(level._ZOMBIE_ACTOR_FLAG_ELECTRIFIED);
-  self stopLoopSound(3);
-  if(isDefined(sMeansOfDeath) && isDefined(attacker) && IsPlayer(attacker)) {
+  self StopLoopSound(3);
+  if(isDefined(sMeansOfDeath) && isDefined(attacker) && isPlayer(attacker)) {
     if(sMeansOfDeath == "MOD_MELEE") {
       attacker player_electrify();
     }
@@ -1529,9 +1461,8 @@ zombie_clear_electric_buff(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon
   }
   self.electrified = undefined;
 }
-
 zombie_drop_max_ammo() {
-  chance = randomInt(100);
+  chance = RandomInt(100);
   director_print("chance " + chance + " < " + level.director_max_ammo_chance);
   if(chance < level.director_max_ammo_chance) {
     level.director_max_ammo_available = false;
@@ -1542,7 +1473,6 @@ zombie_drop_max_ammo() {
     level.director_max_ammo_chance += level.director_max_ammo_chance_inc;
   }
 }
-
 director_max_ammo_watcher() {
   level.director_max_ammo_available = false;
   level.director_max_ammo_chance = level.director_max_ammo_chance_default;
@@ -1559,7 +1489,6 @@ director_max_ammo_watcher() {
     }
   }
 }
-
 director_instakill() {}
 director_humangun_hit_response(upgraded) {
   if(is_true(self.defeated) || is_true(self.leaving_level) || is_true(self.entering_level)) {
@@ -1602,7 +1531,6 @@ director_humangun_hit_response(upgraded) {
     self director_calmed(10, true);
   }
 }
-
 director_humangun_react() {
   if(is_true(self.is_activated)) {
     self notify("disable_activation");
@@ -1611,21 +1539,18 @@ director_humangun_react() {
   self animcustom(::director_custom_idle);
   self thread director_delay_melee(0.6);
 }
-
 director_delay_melee(time) {
   self endon("death");
   self.cant_melee = true;
   wait(time);
   self.cant_melee = false;
 }
-
 director_custom_idle() {
   self endon("death");
   idle_anim = % ai_zombie_boss_idle_b_coast;
   self SetFlaggedAnimKnobAllRestart("idle_anim", idle_anim, %body, 1, .1, 1);
   wait(0.5);
 }
-
 director_leave_map(exit, calm) {
   self endon("death");
   self.leaving_level = true;
@@ -1636,9 +1561,8 @@ director_leave_map(exit, calm) {
   }
   self thread director_reenter_map();
 }
-
 director_reenter_map() {
-  r = randomInt(100);
+  r = RandomInt(100);
   devgui_timeaway = 0;
   if(devgui_timeaway > 0) {
     director_print("devgui leave for " + devgui_timeaway);
@@ -1666,7 +1590,6 @@ director_reenter_map() {
   self thread director_zombie_update();
   self.entering_level = undefined;
 }
-
 director_reenter_level() {}
 director_exit_level() {}
 director_find_exit() {}
@@ -1683,7 +1606,6 @@ director_transition(type) {
     self notify("director_run_change");
   }
 }
-
 director_calmed(delay, humangun) {
   if(is_true(self.is_activated)) {
     director_print("director_calmed");
@@ -1708,7 +1630,6 @@ director_calmed(delay, humangun) {
     }
   }
 }
-
 director_delayed_activation() {
   self endon("death");
   self endon("disable_activation");
@@ -1726,7 +1647,6 @@ director_delayed_activation() {
     wait_network_frame();
   }
 }
-
 director_melee_anim(attack_anim) {
   self endon("death");
   if(!isDefined(self.is_melee)) {
@@ -1736,13 +1656,11 @@ director_melee_anim(attack_anim) {
     self.is_melee = undefined;
   }
 }
-
 director_set_animarray_standing() {
   self.a.array["exposed_idle"] = array(%ai_zombie_boss_idle_a_coast, %ai_zombie_boss_idle_b_coast);
   self.a.array["straight_level"] = % ai_zombie_boss_idle_a_coast;
   self.a.array["stand_2_crouch"] = % ai_zombie_boss_idle_a_coast;
 }
-
 director_melee_miss() {
   self endon("death");
   if(isDefined(self.enemy)) {
@@ -1759,21 +1677,18 @@ director_melee_miss() {
     }
   }
 }
-
 director_fling(pos) {
   self endon("death");
   self.is_fling = true;
   self animcustom(::director_custom_fling);
   self.is_fling = undefined;
 }
-
 director_custom_fling() {
   self endon("death");
   fling_anim = % ai_zombie_boss_flinger_flail_coast;
   self SetFlaggedAnimKnobAllRestart("fling_anim", fling_anim, %body, 1, .1, 1);
   animscripts\traverse\zombie_shared::wait_anim_length(fling_anim, .02);
 }
-
 director_non_attacker(damage, weapon) {
   if(is_true(self.leaving_level)) {
     return damage;
@@ -1783,7 +1698,6 @@ director_non_attacker(damage, weapon) {
   }
   return damage;
 }
-
 director_animscripted(director_anim, director_notify, finish_anim) {
   if(!is_true(self.finish_anim)) {
     if(is_true(finish_anim)) {
@@ -1799,5 +1713,4 @@ director_animscripted(director_anim, director_notify, finish_anim) {
     director_print("animscripted never played");
   }
 }
-
 director_print(str) {}

@@ -23,7 +23,6 @@ main() {
 
   if(isDefined(level._id_41AB)) {
     level._id_41AB linkto(level._id_41A9);
-
   }
   common_scripts\utility::flag_init("_sea_waves");
   common_scripts\utility::flag_init("_sea_viewbob");
@@ -34,7 +33,6 @@ main() {
 
   if(isDefined(var_0)) {
     common_scripts\utility::array_thread(var_0, ::_id_41B8, level._id_41A7);
-
   }
   thread _id_41AC();
   return;
@@ -58,7 +56,6 @@ _id_41AF(var_0, var_1) {
     self.scale = self._id_41B0;
   } else {
     self.scale = randomfloatrange(2, 3);
-
   }
   var_2 = 0;
   var_3 = 0;
@@ -83,7 +80,6 @@ _id_41AF(var_0, var_1) {
       }
     } else {
       var_3 = var_4;
-
     }
     self._id_41B7 = (self.angles[0], self.angles[1], var_3);
   } else {
@@ -150,7 +146,6 @@ _id_41B8(var_0) {
             var_6._id_41B0 = randomfloatrange(var_9, var_10);
           } else {
             var_6._id_41B0 = int(var_8[var_2]);
-
           }
           break;
       }
@@ -165,7 +160,6 @@ _id_41B8(var_0) {
       var_11 = var_3[0].angles;
     } else {
       var_11 = vectortoangles(var_5 - var_4);
-
     }
     var_6._id_41B6 = vectordot(anglestoright(var_11), anglestoright(var_12));
     var_6._id_41B5 = vectordot(anglestoright(var_11), anglesToForward(var_12));
@@ -176,7 +170,6 @@ _id_41B8(var_0) {
 
   for(var_2 = 0; var_2 < var_3.size; var_2++) {
     var_3[var_2] thread _id_41BC(var_6, var_0);
-
   }
   wait 0.05;
   self linkto(var_6);
@@ -190,27 +183,23 @@ _id_41BA(var_0, var_1) {
   for(;;) {
     if(var_0._id_41A8 == "sway2") {
       var_0 waittill("sway1");
-
     }
     var_1 _id_41AF(var_0, "sway1");
     var_1 notify("precalcdone1");
 
     if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
-
     }
     var_1 rotateto(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
 
     if(var_0._id_41A8 == "sway1") {
       var_0 waittill("sway2");
-
     }
     var_1 _id_41AF(var_0, "sway2");
     var_1 notify("precalcdone2");
 
     if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
-
     }
     var_1 rotateto(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
   }
@@ -231,7 +220,6 @@ _id_41BC(var_0, var_1) {
 
   if(!isDefined(var_0.parent._id_41B9)) {
     var_0.parent waittill("got_link");
-
   }
   var_2 = var_0.parent._id_41B9;
   var_3 = var_0.origin;
@@ -269,7 +257,6 @@ _id_41BD() {
 
     if(common_scripts\utility::flag("_sea_bob")) {
       level._id_41A9 rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
-
     }
     self rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
     wait(self.time);
@@ -279,7 +266,6 @@ _id_41BD() {
 
     if(common_scripts\utility::flag("_sea_bob")) {
       level._id_41A9 rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
-
     }
     self rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
     wait(self.time);
@@ -331,7 +317,6 @@ _id_41C2(var_0, var_1) {
 
   if(!isDefined(self._id_41C1[var_1])) {
     self._id_41C1[var_1] = var_3;
-
   }
   while(self._id_41C1[var_1] == var_3) {
     wait 0.05;
@@ -353,17 +338,14 @@ _id_41C4(var_0, var_1) {
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_0[var_3]._id_41C5 = distancesquared(var_0[var_3].origin, level.player.origin);
-
   }
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_2 = _id_41C6(var_2, var_0[var_3]);
-
   }
   var_4 = [];
 
   for(var_3 = 0; var_3 < var_1; var_3++) {
     var_4[var_3] = var_2[var_3];
-
   }
   return var_4;
 }
@@ -383,7 +365,6 @@ _id_41C6(var_0, var_1) {
 
   if(var_2 == var_0.size) {
     var_0 = maps\_utility::_id_0BC3(var_0, var_1);
-
   }
   return var_0;
 }
@@ -394,7 +375,6 @@ _id_41C7() {
 
   if(!var_0.size) {
     return undefined;
-
   }
   var_2 = anglesToForward(var_1.angles);
   var_3 = anglestoright(var_1.angles);
@@ -421,7 +401,6 @@ _id_41C7() {
 
   for(var_5 = 0; var_5 < var_6.size; var_5++) {
     var_6[var_5].origin = var_6[var_5].v["origin"];
-
   }
   for(var_5 = 0; var_5 < var_4["right"].size; var_5++) {
     var_7 = maps\_utility::_id_0AE9(var_4["right"][var_5].origin, var_6, 64);
@@ -429,7 +408,6 @@ _id_41C7() {
 
     if(isDefined(var_4["right"][var_5].angles)) {
       var_7.v["forward"] = anglestoup(var_4["right"][var_5].angles);
-
     }
     var_4["right"][var_5].exploder = var_7;
   }
@@ -440,7 +418,6 @@ _id_41C7() {
 
     if(isDefined(var_4["left"][var_5].angles)) {
       var_7.v["forward"] = anglestoup(var_4["left"][var_5].angles);
-
     }
     var_4["left"][var_5].exploder = var_7;
   }
@@ -469,7 +446,6 @@ _id_41CA() {
 
     if(common_scripts\utility::flag("_sea_viewbob")) {
       level waittill("_sea_viewbob");
-
     }
     level.player playersetgroundreferenceent(undefined);
   }

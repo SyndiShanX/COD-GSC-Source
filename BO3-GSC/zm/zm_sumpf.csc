@@ -60,8 +60,8 @@ function main() {
   util::waitforclient(0);
   _zm_weap_tesla::init();
   callback::on_localclient_connect(&function_794950d2);
-  setdvar("player_shallowWaterWadeScale", 0.5);
-  setdvar("player_waistWaterWadeScale", 0.5);
+  setDvar("player_shallowWaterWadeScale", 0.5);
+  setDvar("player_waistWaterWadeScale", 0.5);
   level thread function_4e327cec();
   println("");
   level thread zm_sumpf_ffotd::main_end();
@@ -114,7 +114,7 @@ function function_4e327cec() {
 function function_938d448f() {
   while(true) {
     self waittill("trigger", who);
-    if(who isplayer()) {
+    if(who isPlayer()) {
       if(!(isDefined(who.var_b115a3e6) && who.var_b115a3e6)) {
         who.var_b115a3e6 = 1;
         who thread function_387efde5(self);

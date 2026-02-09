@@ -362,7 +362,7 @@ springpadthink(weapon, electricradius, armed) {
       weapon.zombies_only = 1;
 
       foreach(ent in weapon.fling_targets) {
-        if(isplayer(ent)) {
+        if(isPlayer(ent)) {
           ent thread player_fling(weapon.origin + vectorscale((0, 0, 1), 30.0), weapon.angles, direction_vector, weapon);
           continue;
         }
@@ -535,5 +535,4 @@ debugspringpad(radius) {
 
     wait 0.05;
   }
-
 }

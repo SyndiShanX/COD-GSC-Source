@@ -282,7 +282,7 @@ start_end_fail_timer(var_0) {
       thread maps\loki_audio::sfx_laptop_ending_fail();
       maps\loki_rog::show_hide_all_static(1);
       wait 1.0;
-      setdvar("ui_deadquote", &"LOKI_ENDING_FAIL");
+      setDvar("ui_deadquote", &"LOKI_ENDING_FAIL");
       level thread maps\_utility::missionfailedwrapper();
     }
   }

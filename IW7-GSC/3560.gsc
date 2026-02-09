@@ -148,7 +148,7 @@ func_5916(var_0, var_1) {
 }
 
 func_9FE2(var_0) {
-  return !isDefined(self.var_AD30) && isDefined(var_0) && isplayer(var_0) && var_0 getstance() != "prone";
+  return !isDefined(self.var_AD30) && isDefined(var_0) && isPlayer(var_0) && var_0 getstance() != "prone";
 }
 
 func_10DE4(var_0, var_1, var_2) {

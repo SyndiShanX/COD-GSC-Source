@@ -13,7 +13,6 @@ _id_23D8(var_0) {
 
   if(var_1 != "sound") {
     return 0;
-
   }
   var_2 = "anml" + getsubstr(var_0, 5);
 
@@ -21,7 +20,6 @@ _id_23D8(var_0) {
     thread maps\_utility::_id_23D9(var_2, "tag_eye");
   } else {
     thread common_scripts\utility::play_sound_in_space(var_2, self getEye());
-
   }
   return 1;
 }
@@ -100,7 +98,6 @@ _id_23DD(var_0, var_1) {
     self.a._id_0CDF = 1;
   } else {
     self.a._id_0CDF = 0;
-
   }
   animscripts\shared::_id_0CE0();
 }
@@ -124,7 +121,6 @@ _id_23E0(var_0, var_1) {
   }
   if(!isDefined(self._id_23E1)) {
     thread _id_23DF();
-
   }
   self startragdoll();
 }
@@ -157,7 +153,6 @@ _id_23E8(var_0) {
 
   if(isDefined(self.a._id_0D29)) {
     _id_0D2A();
-
   }
   self notify("entered_pose" + var_0);
 }
@@ -186,7 +181,7 @@ _id_23EB(var_0, var_1) {
   if(!issentient(self)) {
     return;
   }
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::_id_10E1(1.0);
   _id_23E8("prone");
 
@@ -201,7 +196,7 @@ _id_23EC(var_0, var_1) {
   if(!issentient(self)) {
     return;
   }
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::_id_10E1(1.0);
   _id_23E8("prone");
   self.a._id_0EE0 = undefined;
@@ -214,7 +209,7 @@ _id_0D74(var_0, var_1) {
   _id_23E8("crouch");
   self.a._id_0D29 = 1;
   self.a._id_0D2B = "stop";
-  self setproneanimnodes(-90, 90, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-90, 90, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::_id_10E1(1.0);
 }
 
@@ -264,7 +259,6 @@ _id_23F4(var_0, var_1) {
 _id_23F5(var_0, var_1) {
   if(weaponclass(self.weapon) == "rocketlauncher") {
     animscripts\combat_utility::_id_2385();
-
   }
   animscripts\weaponlist::_id_0CD0();
   self.a._id_114D = 0;
@@ -299,7 +293,6 @@ _id_23FA() {
 
   if(isDefined(self._id_0FD7)) {
     var_0 = "sprint";
-
   }
   if(isDefined(self.a)) {
     if(isDefined(self.a._id_0D2B)) {
@@ -323,7 +316,6 @@ _id_23FB(var_0, var_1) {
     var_2 = self.groundtype;
   } else {
     var_2 = "dirt";
-
   }
   var_3 = undefined;
 
@@ -331,14 +323,12 @@ _id_23FB(var_0, var_1) {
     var_3 = level._id_1E89[var_0][var_2];
   } else if(isDefined(level._id_1E89[var_0]["all"])) {
     var_3 = level._id_1E89[var_0]["all"];
-
   }
   if(!isDefined(var_3)) {
     return;
   }
   if(isai(self)) {
     playFXOnTag(var_3.fx, self, var_3.tag);
-
   }
   if(!isDefined(var_3._id_23FC) && !isDefined(var_3._id_23FD)) {
     return;
@@ -352,7 +342,6 @@ _id_23FE(var_0, var_1) {
     var_2 = self.groundtype;
   } else {
     var_2 = "dirt";
-
   }
   self playSound("step_scrape_" + var_2);
 }
@@ -362,7 +351,6 @@ _id_23FF(var_0, var_1) {
     var_2 = self.groundtype;
   } else {
     var_2 = "dirt";
-
   }
   self playSound("land_" + var_2);
 }
@@ -386,13 +374,11 @@ _id_2402(var_0, var_1) {
 
   if(issubstr(var_0, "large")) {
     var_2 = "_large";
-
   }
   if(isDefined(self.groundtype)) {
     var_3 = self.groundtype;
   } else {
     var_3 = "dirt";
-
   }
   self playSound("bodyfall_" + var_3 + var_2);
 }
@@ -408,7 +394,6 @@ _id_23CA(var_0, var_1, var_2) {
 
   if(isDefined(var_3)) {
     return [[var_3]](var_0, var_1);
-
   }
   switch (var_0) {
     case "undefined":
@@ -418,7 +403,6 @@ _id_23CA(var_0, var_1, var_2) {
     case "finish early":
       if(isDefined(self.enemy)) {
         return var_0;
-
       }
       break;
     case "swish small":
@@ -430,7 +414,6 @@ _id_23CA(var_0, var_1, var_2) {
     case "rechamber":
       if(animscripts\utility::_id_0C97()) {
         self playSound("weap_reload_shotgun_pump_npc");
-
       }
       self.a._id_114D = 0;
       break;
@@ -476,7 +459,6 @@ _id_23CA(var_0, var_1, var_2) {
     default:
       if(isDefined(var_2)) {
         return [[var_2]](var_0);
-
       }
       break;
   }
@@ -488,7 +470,6 @@ _id_0D4C(var_0, var_1, var_2) {
 
     if(!isDefined(var_3)) {
       var_3 = "undefined";
-
     }
     var_4 = [[var_1]](var_3);
 
@@ -509,7 +490,6 @@ _id_1156(var_0, var_1) {
 
     if(!isDefined(var_2)) {
       var_2 = "undefined";
-
     }
     var_3 = _id_23CA(var_2, var_0);
     [[var_1]](var_2);
@@ -535,13 +515,11 @@ _id_2405(var_0, var_1, var_2, var_3) {
 _id_2406(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_2)) {
     self endon(var_2);
-
   }
   self endon("killanimscript");
 
   if(!isDefined(var_4)) {
     var_4 = "undefined";
-
   }
   for(;;) {
     var_5 = gettime();
@@ -610,7 +588,6 @@ _id_2409(var_0, var_1) {
 
     if(var_0) {
       var_3 = "J_Ball_LE";
-
     }
     var_4 = _id_23FA();
     self playSound("step_" + var_4 + "_" + var_2);
@@ -718,7 +695,6 @@ _id_240C(var_0, var_1) {
 
   if(isDefined(self._id_0F8F)) {
     var_5 = 20;
-
   }
   var_6 = 0;
 

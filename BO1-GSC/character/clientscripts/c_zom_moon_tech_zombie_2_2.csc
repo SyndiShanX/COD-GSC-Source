@@ -1,6 +1,6 @@
 /******************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_zom_moon_tech_zombie_2_2.csc
+ * Script: character\clientscripts\c_zom_moon_tech_zombie_2_2\.csc
 ******************************************************************/
 
 matches_me() {

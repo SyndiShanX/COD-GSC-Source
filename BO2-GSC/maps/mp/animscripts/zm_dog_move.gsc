@@ -179,7 +179,7 @@ getsoundkey(distancesqr) {
 need_to_run() {
   run_dist_squared = 147456;
 
-  if(getdvar(#"_id_C7E63BA4") != "") {
+  if(getDvar(#"_id_C7E63BA4") != "") {
     dist = getdvarint(#"_id_C7E63BA4");
     run_dist_squared = dist * dist;
   }

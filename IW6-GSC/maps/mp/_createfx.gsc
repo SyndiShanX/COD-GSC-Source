@@ -54,7 +54,6 @@ Callback_PlayerConnect() {
     level.player = self;
 
     thread createFxLogic();
-
   } else
     kick(self GetEntityNumber());
 }

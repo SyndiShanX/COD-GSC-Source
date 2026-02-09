@@ -329,7 +329,7 @@ waitfordodge() {
     if(maps\mp\agents\_scripted_agent_anim_util::isstatelocked()) {
       continue;
     }
-    if(!isDefined(var_1) || !isalive(var_1) || !isplayer(var_1)) {
+    if(!isDefined(var_1) || !isalive(var_1) || !isPlayer(var_1)) {
       continue;
     }
     var_2 = var_1.origin - self.origin;

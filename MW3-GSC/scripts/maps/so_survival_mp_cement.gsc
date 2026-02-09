@@ -10,7 +10,6 @@ main() {
 
   if(!isDefined(level.func)) {
     level.func = [];
-
   }
   level.func["setanim"] = ::setanim;
   level.func["clearanim"] = ::clearanim;

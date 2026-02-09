@@ -64,7 +64,7 @@ class cammocrate {
       if(!isDefined(var_60a09143)) {
         break;
       }
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         function_2902ab6c(var_60a09143);
       }
     }
@@ -165,7 +165,6 @@ class cammocrate {
     mdl_ammo_cache.gameobject = s_ammo_cache_object;
     mdl_ammo_cache thread function_71f6269a(var_bd13c94b);
   }
-
 }
 
 #namespace ammo_cache;
@@ -193,7 +192,7 @@ function __main__() {
     ammo_cache = new cammocrate();
     [[ammo_cache]] - > spawn_ammo_cache(s_ammo_cache.origin, s_ammo_cache.angles);
   }
-  setdvar("AmmoBoxPickupTime", 0.75);
+  setDvar("AmmoBoxPickupTime", 0.75);
 }
 
 function hide_waypoint(e_player) {

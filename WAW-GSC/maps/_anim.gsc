@@ -421,11 +421,11 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
     if(scriptedAnimationIndex != -1) {
       guyPackets[scriptedAnimationIndex]["guy"] waittillmatch(anim_string, "end");
     } else {
-    if(scriptedSoundIndex != -1) {
-      guyPackets[scriptedSoundIndex]["guy"] waittill(anim_string);
+      if(scriptedSoundIndex != -1) {
+        guyPackets[scriptedSoundIndex]["guy"] waittill(anim_string);
+      }
     }
   }
-    }
 }
 
 start_notetrack_wait(guy, anim_string, anime, animname) {
@@ -858,9 +858,9 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
           if(isDefined(scr_notetrack["create model"])) {
             anim_addModel(guy, scr_notetrack);
           } else {
-          if(isDefined(scr_notetrack["delete model"])) {
-            anim_removeModel(guy, scr_notetrack);
-          }
+            if(isDefined(scr_notetrack["delete model"])) {
+              anim_removeModel(guy, scr_notetrack);
+            }
           }
           if((isDefined(scr_notetrack["selftag"])) &&
             (isDefined(scr_notetrack["effect"]))) {
@@ -877,11 +877,11 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
             if(isDefined(tag["tag"])) {
               playFXOnTag(level._effect[tag["effect"]], tag_owner, tag["tag"]);
             } else {
-            if(isDefined(tag["selftag"])) {
-              playFXOnTag(level._effect[tag["effect"]], self, tag["tag"]);
+              if(isDefined(tag["selftag"])) {
+                playFXOnTag(level._effect[tag["effect"]], self, tag["tag"]);
+              }
             }
           }
-            }
         }
       }
     }
@@ -1900,9 +1900,9 @@ chatAtTarget(msg, lookTarget) {
     if(destYaw > self.a.lookangle + moveRange) {
       self.a.lookangle += moveRange;
     } else {
-    if(destYaw < self.a.lookangle - moveRange) {
-      self.a.lookangle -= moveRange;
-    }
+      if(destYaw < self.a.lookangle - moveRange) {
+        self.a.lookangle -= moveRange;
+      }
     } else {
       self.a.lookangle = destYaw;
     }

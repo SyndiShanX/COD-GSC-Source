@@ -30,7 +30,7 @@
 function autoexec init() {
   initzmstalingradbehaviorsandasm();
   level.zombie_init_done = &stalingrad_zombie_init_done;
-  setdvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
   level.closest_player_override = &stalingrad_closest_player;
   level.closest_player_targets_override = &function_6d4522d4;
   level.is_valid_player_for_sentinel_drone = &function_5915f3d5;

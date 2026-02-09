@@ -69,9 +69,9 @@ __init__() {
 __main__() {}
 
 function_cfc02934() {
-  var_88846d2d = getdvar(#"hash_4a5fd7d94cfc9dfd", 0) != 0 || getdvarint(#"hash_4a5fd7d94cfc9dfd", 0) != 0;
+  var_88846d2d = getDvar(#"hash_4a5fd7d94cfc9dfd", 0) != 0 || getdvarint(#"hash_4a5fd7d94cfc9dfd", 0) != 0;
 
-  if(isplayer(self) && !isbot(self) && var_88846d2d) {
+  if(isPlayer(self) && !isbot(self) && var_88846d2d) {
     player = self;
     player giveachievement("wz_specialist_super_fan");
   }
@@ -98,7 +98,7 @@ on_contract_complete(params) {
 
 give_xp(var_c14ca2e6, xpstat, amount) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   var_60a35182 = 0;
 
   if(isDefined(player.pers) && isDefined(player.pers[# "plevel"]) && player.pers[# "plevel"] == level.maxprestige) {
@@ -132,7 +132,7 @@ give_xp(var_c14ca2e6, xpstat, amount) {
 function_ec3a8858() {
   player = self;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
 
@@ -147,9 +147,9 @@ function_ec3a8858() {
 
 function_f874ca5e(placement_player) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -159,7 +159,7 @@ function_f874ca5e(placement_player) {
 }
 
 player_connected() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   player.pers[# "jointime"] = gettime();
   player.pers[# "deathtime"] = 0;
@@ -172,7 +172,7 @@ player_connected() {
 }
 
 function_2c8aac6() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
 
   if(!player stats::function_f94325d3() || isbot(player) || !isDefined(player.pers)) {
@@ -223,19 +223,19 @@ player_disconnected() {
 
 function_fb20ad56() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player stats::function_d40764f3(#"hash_6d5e162204f447f4", 1);
 }
 
 function_d61fdbef() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player stats::function_d40764f3(#"hash_25f4611fc9d40aa8", 1);
 }
 
 function_67949803() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player stats::function_d40764f3(#"hash_63307a0460c698ac", 1);
 }
 
@@ -289,13 +289,13 @@ function_51cae91b(placement) {
 
 function_a0fea1a9() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player stats::function_d40764f3(#"hash_6429d1fccdef2c9", 1);
 }
 
 function_3217b0d2() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player stats::function_d40764f3(#"hash_7b8d2c77874a1c24", 1);
 
   if(player function_ec3a8858()) {
@@ -309,7 +309,7 @@ function_3217b0d2() {
 
 function_6a7970fe() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player stats::function_d40764f3(#"hash_5e9a745460a10f80", 1);
 
   if(isDefined(player.avenger) && player.avenger) {
@@ -477,7 +477,7 @@ function_d0c523bf() {
 }
 
 function_f8072c71(player) {
-  if(!isplayer(player) || !isDefined(self)) {
+  if(!isPlayer(player) || !isDefined(self)) {
     return;
   }
 
@@ -540,14 +540,14 @@ function_f8072c71(player) {
 }
 
 on_exit_locked_on_vehicle(player) {
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     player stats::function_d40764f3(#"vehicle_lock_exits", 1);
   }
 }
 
 function_c9a18304(eventstruct) {
   if(eventstruct.freefall) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self thread function_da21a17c();
     }
 
@@ -604,7 +604,7 @@ function_36e144fa(params) {
 
   attacker = params.eattacker;
 
-  if(isplayer(attacker) && !isinarray(self.var_9854aa3a, attacker)) {
+  if(isPlayer(attacker) && !isinarray(self.var_9854aa3a, attacker)) {
     if(!isDefined(self.var_9854aa3a)) {
       self.var_9854aa3a = [];
     } else if(!isarray(self.var_9854aa3a)) {
@@ -624,7 +624,7 @@ function_36e144fa(params) {
       self.var_91ddc6c5 = [];
     }
 
-    if(isplayer(attacker) && !isinarray(self.var_91ddc6c5, attacker)) {
+    if(isPlayer(attacker) && !isinarray(self.var_91ddc6c5, attacker)) {
       if(!isDefined(self.var_91ddc6c5)) {
         self.var_91ddc6c5 = [];
       } else if(!isarray(self.var_91ddc6c5)) {
@@ -648,7 +648,7 @@ function_a117c988() {
       }
     }
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       vehicle = attacker getvehicleoccupied();
 
       if(isDefined(vehicle) && isvehicle(vehicle)) {
@@ -670,7 +670,7 @@ function_a117c988() {
 
 on_player_killed(params) {
   victim = self;
-  assert(isplayer(victim));
+  assert(isPlayer(victim));
 
   if(isDefined(victim)) {
     victim.pers[# "deathtime"] = gettime();
@@ -895,13 +895,13 @@ function_8920ad6e(params) {
     return;
   }
 
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     params.eattacker stats::function_d40764f3(#"vehicles_destroyed", 1);
   }
 
   if(isDefined(params.occupants)) {
     if(params.occupants.size > 0 && self function_c7aa9338(params.occupants)) {
-      if(isplayer(params.eattacker)) {
+      if(isPlayer(params.eattacker)) {
         vehicle = params.eattacker getvehicleoccupied();
 
         if(isDefined(vehicle) && isvehicle(vehicle)) {
@@ -927,7 +927,7 @@ function_106be0dc(params) {
 
   item = params.item;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.pers[# "participation"]++;
 
     if(!isDefined(self.items_picked_up)) {
@@ -974,7 +974,7 @@ function_6c478b00(params) {
 
   activator = params.activator;
 
-  if(isplayer(activator)) {
+  if(isPlayer(activator)) {
     if(self === getdynent(#"dock_yard_stash_2")) {
       activator stats::function_d40764f3(#"cargo_supply_opened", 1);
     }
@@ -986,7 +986,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     return;
   }
 
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon)) {
     if(eventstruct.weapon.name === # "basketball") {
       if(isDefined(eventstruct.projectile)) {
         ball = eventstruct.projectile;
@@ -1050,7 +1050,7 @@ function_16de96c7(player) {
   }
 
   if(var_69a93dcf) {
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player stats::function_d40764f3(#"baskets_made", 1);
     }
   }
@@ -1094,9 +1094,9 @@ on_game_shutdown() {
 
 on_challenge_complete(params) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
-  if(!isplayer(player) || !isDefined(player.pers)) {
+  if(!isPlayer(player) || !isDefined(player.pers)) {
     return;
   }
 
@@ -1119,7 +1119,7 @@ on_challenge_complete(params) {
 }
 
 on_character_unlock(params) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     waitframe(1);
     player = self;
     var_bff5f1d6 = player stats::get_stat(#"characters", #"hash_44599132bf7320e8", #"unlocked");
@@ -1169,7 +1169,7 @@ on_item_pickup(params) {
   item = params.item;
   count = params.count;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(item.itementry) && item.itementry.itemtype === # "resource" && item_world_util::function_41f06d9d(item.itementry) && count > 0) {
       self stats::function_dad108fa(#"items_paint_cans_collected", count);
       self stats::function_b7f80d87("paint_cans_collected", count);
@@ -1193,7 +1193,7 @@ event_handler[event_cf200f34] function_209450ae(eventstruct) {
   position = eventstruct.position;
   direction = eventstruct.dir;
 
-  if(!isplayer(attacker) || !isDefined(weapon) || !isDefined(position) || !isDefined(direction)) {
+  if(!isPlayer(attacker) || !isDefined(weapon) || !isDefined(position) || !isDefined(direction)) {
     return;
   }
 

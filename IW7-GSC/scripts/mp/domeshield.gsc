@@ -123,7 +123,7 @@ domeshield_handledamage(var_0, var_1, var_2, var_3, var_4) {
 
 domeshield_handledamagefatal(var_0, var_1, var_2, var_3, var_4) {
   domeshield_awardpoints(var_0);
-  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_2) && scripts\engine\utility::isbulletdamage(var_2) && var_0 != self.owner) {
+  if(isDefined(var_0) && isPlayer(var_0) && isDefined(var_2) && scripts\engine\utility::isbulletdamage(var_2) && var_0 != self.owner) {
     var_0 scripts\mp\missions::func_D991("ch_dome_kill");
   }
 
@@ -289,7 +289,7 @@ domeshield_givedamagefeedback(var_0) {
     var_1 = "hitequip";
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_1);
   }
 }

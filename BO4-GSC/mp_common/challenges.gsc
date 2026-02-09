@@ -298,7 +298,7 @@ watchsprint() {
 }
 
 function_a79ea08b(einflictor, victim, idamage, weapon) {
-  if(!isDefined(self) || !isplayer(self) || !isDefined(victim) || !isplayer(victim)) {
+  if(!isDefined(self) || !isPlayer(self) || !isDefined(victim) || !isPlayer(victim)) {
     return;
   }
 
@@ -2250,7 +2250,7 @@ challengegameendmp(data) {
 }
 
 function_ea966b4a(killstreak) {
-  if(!isDefined(killstreak) || !isDefined(self) || !isplayer(self)) {
+  if(!isDefined(killstreak) || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -2289,7 +2289,7 @@ function_ea966b4a(killstreak) {
 }
 
 function_2f462ffd(victim, weapon, inflictor, objective) {
-  if(!isDefined(weapon) || !isDefined(self) || !isplayer(self) || !isDefined(victim) || !isplayer(victim)) {
+  if(!isDefined(weapon) || !isDefined(self) || !isPlayer(self) || !isDefined(victim) || !isPlayer(victim)) {
     return;
   }
 
@@ -2411,7 +2411,7 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
 }
 
 function_82bb78f7(weapon) {
-  if(!isDefined(self) || !isplayer(self) || !isDefined(weapon) || isDefined(killstreaks::get_from_weapon(weapon))) {
+  if(!isDefined(self) || !isPlayer(self) || !isDefined(weapon) || isDefined(killstreaks::get_from_weapon(weapon))) {
     return;
   }
 

@@ -325,7 +325,7 @@ update_previs(localclientnum) {
 }
 
 function_26c580d9(localclientnum, tripwire, trace, var_f2edf308) {
-  if(isDefined(level.tripwire.localclients[localclientnum].model.hitent) && isplayer(level.tripwire.localclients[localclientnum].model.hitent)) {
+  if(isDefined(level.tripwire.localclients[localclientnum].model.hitent) && isPlayer(level.tripwire.localclients[localclientnum].model.hitent)) {
     return false;
   }
 

@@ -225,7 +225,7 @@ addspacesmall() {
 
 playcredits() {
   visionsetnaked("", 0);
-  var_0 = getdvar("ui_char_museum_mode");
+  var_0 = getDvar("ui_char_museum_mode");
 
   for(var_1 = 0; var_1 < level.linelist.size; var_1++) {
     var_2 = 0.5;

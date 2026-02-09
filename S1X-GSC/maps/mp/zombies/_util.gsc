@@ -430,7 +430,7 @@ onscriptagentkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
   if(isDefined(self.deathanimstateoverride)) {
     var_9 = self.deathanimstateoverride;
   } else if(self.species == "dog") {
-    if(var_3 == "MOD_MELEE" && isDefined(var_1) && isplayer(var_1) && var_1 ishighjumpallowed()) {
+    if(var_3 == "MOD_MELEE" && isDefined(var_1) && isPlayer(var_1) && var_1 ishighjumpallowed()) {
       var_10 = vectornormalize(var_1.origin - self.origin);
       var_11 = anglesToForward(self.angles);
       var_12 = anglestoright(self.angles);
@@ -452,7 +452,7 @@ onscriptagentkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
       var_9 = "death";
     }
   } else if(var_3 == "MOD_MELEE") {
-    if(isDefined(var_1) && isplayer(var_1) && var_1 ishighjumpallowed()) {
+    if(isDefined(var_1) && isPlayer(var_1) && var_1 ishighjumpallowed()) {
       var_10 = vectornormalize(var_1.origin - self.origin);
       var_11 = anglesToForward(self.angles);
       var_12 = anglestoright(self.angles);
@@ -821,7 +821,7 @@ enemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   level.lastenemydeathpos = self.origin;
   level thread maps\mp\gametypes\zombies::chancetospawnpickup(var_1, self, var_3, var_4);
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread maps\mp\zombies\_zombies_audio::player_kill_zombie(var_6, var_3, var_4, self);
 
     if(!level.gameended) {

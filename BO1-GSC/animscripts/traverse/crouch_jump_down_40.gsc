@@ -6,6 +6,7 @@
 #include animscripts\utility;
 #include animscripts\traverse\zombie_shared;
 #using_animtree("generic_human");
+
 main() {
   switch (self.type) {
     case "human":
@@ -22,7 +23,6 @@ main() {
       break;
   }
 }
-
 human() {
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
@@ -38,7 +38,6 @@ human() {
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("stepanim");
 }
-
 dog() {
   dog_jump_down(96, 7);
 }

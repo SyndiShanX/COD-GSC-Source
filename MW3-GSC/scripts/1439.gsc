@@ -166,7 +166,6 @@ _id_43F5(var_0, var_1) {
 
   if(var_2 < level._id_43F6) {
     level._id_43F6 = var_2;
-
   }
   for(;;) {
     common_scripts\utility::flag_wait("_weather_lightning_enabled");
@@ -174,7 +173,6 @@ _id_43F5(var_0, var_1) {
 
     if(var_3 > 0) {
       wait(var_3);
-
     }
     if(!common_scripts\utility::flag("_weather_lightning_enabled")) {
       continue;
@@ -187,7 +185,6 @@ _id_43F5(var_0, var_1) {
 _id_43F7(var_0) {
   if(isDefined(level._id_43F1)) {
     common_scripts\utility::exploder(level._id_43F0[level._id_43F1]);
-
   }
   [[var_0]]();
 }
@@ -200,14 +197,12 @@ _id_43F8(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = randomint(var_3.size);
-
   }
   var_4 = 0;
 
   if(isDefined(level._id_43F1)) {
     while(var_4 == level._id_43F1) {
       var_4 = randomint(level._id_43F0.size);
-
     }
     level._id_43F1 = var_4;
   }
@@ -254,7 +249,6 @@ _id_43F9() {
     wait 1.5;
   } else if(level._id_43EC == 10) {
     wait 1;
-
   }
   var_0 = spawn("script_origin", (0, 0, 0));
   var_0.origin = level.player.origin + (0, 0, 60);

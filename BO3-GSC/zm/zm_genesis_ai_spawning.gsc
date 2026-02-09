@@ -144,7 +144,7 @@ function function_66a5ce12(ai_last, e_attacker) {
     var_4a50cb2a = level.var_6a6f912a;
     if(isDefined(var_4a50cb2a)) {
       var_bae0d10b = level zm_powerups::specific_powerup_drop("full_ammo", var_4a50cb2a);
-      if(isplayer(e_attacker)) {
+      if(isPlayer(e_attacker)) {
         v_destination = e_attacker.origin;
       } else {
         e_player = zm_utility::get_closest_player(var_4a50cb2a);

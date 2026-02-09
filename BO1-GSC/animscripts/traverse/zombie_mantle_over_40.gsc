@@ -19,8 +19,8 @@ main() {
     dog_wall_and_window_hop("wallhop", 40);
   }
 }
-
 #using_animtree("generic_human");
+
 wall_hop_zombie() {
   traverseData = [];
   if(self.has_legs) {
@@ -42,7 +42,6 @@ wall_hop_zombie() {
   }
   self DoTraverse(traverseData);
 }
-
 wall_hop_quad() {
   traverseData = [];
   if(self.has_legs) {

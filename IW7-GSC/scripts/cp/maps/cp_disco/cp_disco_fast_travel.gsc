@@ -48,7 +48,7 @@ trigger_when_player_close_by() {
       break;
     }
 
-    if(isplayer(var_6) && scripts\engine\utility::istrue(var_6.kung_fu_mode)) {
+    if(isPlayer(var_6) && scripts\engine\utility::istrue(var_6.kung_fu_mode)) {
       break;
     }
 
@@ -84,7 +84,7 @@ trigger_when_player_close_by() {
       continue;
     }
 
-    if(!isplayer(var_10)) {
+    if(!isPlayer(var_10)) {
       scripts\engine\utility::waitframe();
       continue;
     }

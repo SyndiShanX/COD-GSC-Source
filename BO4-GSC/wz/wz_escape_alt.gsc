@@ -378,7 +378,7 @@ function_e8f0335f() {
         var_b3a9e916 = 0;
       }
 
-      setdvar(#"hash_796c892495c48172", var_b3a9e916);
+      setDvar(#"hash_796c892495c48172", var_b3a9e916);
 
       while(self weaponswitchbuttonpressed()) {
         waitframe(1);
@@ -775,7 +775,7 @@ devgui_weapon_think() {
         break;
     }
 
-    setdvar(#"scr_give_wz_item", 0);
+    setDvar(#"scr_give_wz_item", 0);
     wait 0.5;
   }
 }
@@ -799,12 +799,12 @@ devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
     array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
   }
 
-  setdvar(#"scr_give_wz_item", -1);
+  setDvar(#"scr_give_wz_item", -1);
 }
 
 function_1880c93d() {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   item = wz_loadouts::_get_item(#"ultimate_turret_wz_item");
   var_fa3df96 = self item_inventory::function_e66dcff5(item);
   self item_world::function_de2018e3(item, self, var_fa3df96);

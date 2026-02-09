@@ -12,7 +12,6 @@ class class_a17e6f03 {
   constructor() {}
 
   destructor() {}
-
 }
 
 #namespace namespace_fdfaa57d;

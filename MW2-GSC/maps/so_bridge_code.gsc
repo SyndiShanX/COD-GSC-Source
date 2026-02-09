@@ -8,10 +8,8 @@
 #include maps\_vehicle;
 #include maps\_anim;
 
-// ---------------------------------------------------------------------------------
-//	Rapelling AI
-// ---------------------------------------------------------------------------------
-player_seek_stages() {
+// --------------------------------------------------------------------------------- //	Rapelling AI
+// --------------------------------------------------------------------------------- player_seek_stages() {
   self endon("death");
 
   stages[0] = 2000;
@@ -143,7 +141,6 @@ debug_draw_on_ent(msg) {
     Print3d(self.origin, msg, (0.8, 0.8, 0.2));
     wait(0.05);
   }
-
 }
 
 ai_rappel_death() {
@@ -166,10 +163,8 @@ ai_rappel_over_ground_death_anim(guy) {
   guy clear_deathanim();
 }
 
-// ---------------------------------------------------------------------------------
-//	Scripted Destructions
-// ---------------------------------------------------------------------------------
-missile_taxi_moves() {
+// --------------------------------------------------------------------------------- //	Scripted Destructions
+// --------------------------------------------------------------------------------- missile_taxi_moves() {
   // Remove the script_noteworthy from the ad sign on the taxi
   ents = getEntArray("taxi_ad_clip", "targetname");
   foreach(ent in ents) {
@@ -231,10 +226,8 @@ missile_taxi_get_exploded() {
   self notify("taxi_moving");
 }
 
-// ---------------------------------------------------------------------------------
-//	Attack Helicopter
-// ---------------------------------------------------------------------------------
-attack_heli() {
+// --------------------------------------------------------------------------------- //	Attack Helicopter
+// --------------------------------------------------------------------------------- attack_heli() {
   trigger_wait("attack_heli", "targetname");
   attack_heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("kill_heli");
   thread maps\_attack_heli::begin_attack_heli_behavior(attack_heli);
@@ -243,10 +236,8 @@ attack_heli() {
   radio_dialogue("so_bridge_hqr_enemy_helo");
 }
 
-// ---------------------------------------------------------------------------------
-//	Bridge Collapsing
-// ---------------------------------------------------------------------------------
-BRIDGE_COLLAPSE_SPEED = 1.0;
+// --------------------------------------------------------------------------------- //	Bridge Collapsing
+// --------------------------------------------------------------------------------- BRIDGE_COLLAPSE_SPEED = 1.0;
 
 collapsed_section_shakes() {
   trigger = GetEnt("collapsed_bridge_effects", "targetname");
@@ -288,7 +279,7 @@ bridge_collapse_prep() {
 
   //bridge_collapse_smashed_car_1
 
-  //	if( GetDvar( "test_bridge_collapse" ) == "1" )
+  //	if( getDvar( "test_bridge_collapse" ) == "1" )
   //	{	
   //		level thread notify_delay( "bridge_collapse", 10 );
   //	}

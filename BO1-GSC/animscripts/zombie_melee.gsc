@@ -10,6 +10,7 @@
 #include animscripts\Debug;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 MeleeCombat() {
   self endon("end_melee");
   self endon("killanimscript");
@@ -36,14 +37,14 @@ MeleeCombat() {
   }
   self thread EyesAtEnemy();
   self OrientMode("face enemy");
-  meleeDebugPrint("Melee begin");
+  MeleeDebugPrint("Melee begin");
   self AnimMode("zonly_physics");
   resetGiveUpTime();
   for(;;) {
     if(isDefined(self.marked_for_death)) {
       return;
     }
-    meleeDebugPrint("Melee main loop" + randomInt(100));
+    MeleeDebugPrint("Melee main loop" + RandomInt(100));
     if(!realMelee && animscripts\zombie_utility::okToMelee(self.enemy)) {
       realMelee = true;
       animscripts\zombie_utility::IAmMeleeing(self.enemy);
@@ -109,7 +110,7 @@ MeleeCombat() {
     self OrientMode("face default");
     if(is_true(self.noChangeDuringMelee)) {
       if(isDefined(self.enemy)) {
-        dist_sq = distanceSquared(self.origin, self.enemy.origin);
+        dist_sq = DistanceSquared(self.origin, self.enemy.origin);
         if(dist_sq > self.meleeAttackDist * self.meleeAttackDist) {
           self.safeToChangeScript = true;
           wait_network_frame();
@@ -131,21 +132,18 @@ MeleeCombat() {
   self notify("stop_melee_debug_print");
   scriptChange();
 }
-
 resetGiveUpTime() {
-  if(distanceSquared(self.origin, self.enemy.origin) > anim.chargeRangeSq) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > anim.chargeRangeSq) {
     self.giveUpOnMeleeTime = GetTime() + randomintrange(2700, 3300);
   } else {
     self.giveUpOnMeleeTime = GetTime() + randomintrange(1700, 2300);
   }
 }
-
-meleeDebugPrint(text) {
+MeleeDebugPrint(text) {
   return;
   self.meleedebugprint = text;
   self thread meleeDebugPrintThreadWrapper();
 }
-
 meleeDebugPrintThreadWrapper() {
   if(!isDefined(self.meleedebugthread)) {
     self.meleedebugthread = true;
@@ -153,7 +151,6 @@ meleeDebugPrintThreadWrapper() {
     self.meleedebugthread = undefined;
   }
 }
-
 meleeDebugPrintThread() {
   self endon("death");
   self endon("killanimscript");
@@ -163,35 +160,28 @@ meleeDebugPrintThread() {
     wait .05;
   }
 }
-
 debug_melee_on_actor() {
   return false;
 }
-
 debug_melee(msg) {
   if(!debug_melee_on_actor()) {
     return;
   }
   PrintLn(msg);
 }
-
 debug_melee_line(start, end, color, duration) {}
 CanContinueToMelee() {
   return CanMeleeInternal("already started");
 }
-
 CanMeleeAnyRange() {
   return CanMeleeInternal("any range");
 }
-
 CanMeleeDesperate() {
   return CanMeleeInternal("long range");
 }
-
 CanMelee() {
   return CanMeleeInternal("normal");
 }
-
 CanMeleeInternal(state) {
   if(!IsSentient(self.enemy)) {
     debug_melee("Not doing melee - Does not have a valid target.");
@@ -266,7 +256,7 @@ CanMeleeInternal(state) {
     if(state == "already started") {
       return false;
     }
-    if((!self is_banzai() || IsPlayer(self.enemy)) && isDefined(self.lastMeleeGiveUpTime) && GetTime() - self.lastMeleeGiveUpTime < 3000) {
+    if((!self is_banzai() || isPlayer(self.enemy)) && isDefined(self.lastMeleeGiveUpTime) && GetTime() - self.lastMeleeGiveUpTime < 3000) {
       debug_melee("Not doing melee - Recently meleed someone and missed.");
       return false;
     }
@@ -283,7 +273,6 @@ CanMeleeInternal(state) {
   }
   return true;
 }
-
 isMeleePathClear(vecToEnemy, enemyPoint) {
   dirToEnemy = VectorNormalize((vecToEnemy[0], vecToEnemy[1], 0));
   meleePoint = enemyPoint - (dirToEnemy[0] * 28, dirToEnemy[1] * 28, 0);
@@ -297,21 +286,23 @@ isMeleePathClear(vecToEnemy, enemyPoint) {
   }
   trace1 = bulletTrace(self.origin + (0, 0, 20), meleePoint + (0, 0, 20), true, self);
   trace2 = bulletTrace(self.origin + (0, 0, 72), meleePoint + (0, 0, 72), true, self);
-  if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 && isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
+  if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 &&
+    isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
     return true;
   }
-  if(isDefined(trace1["entity"]) && trace1["entity"] == self.enemy && isDefined(trace2["entity"]) && trace2["entity"] == self.enemy) {
+  if(isDefined(trace1["entity"]) && trace1["entity"] == self.enemy &&
+    isDefined(trace2["entity"]) && trace2["entity"] == self.enemy) {
     return true;
   }
   if(is_true(level.zombie_melee_in_water)) {
-    if(isDefined(trace1["surfacetype"]) && trace1["surfacetype"] == "water" && isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
+    if(isDefined(trace1["surfacetype"]) && trace1["surfacetype"] == "water" &&
+      isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
       return true;
     }
   }
   debug_melee("Not doing melee - Can not move to the melee point, MayMoveToPoint failed.");
   return false;
 }
-
 PlayMeleeSound() {
   if(!isDefined(self.a.nextMeleeChargeSound)) {
     self.a.nextMeleeChargeSound = 0;
@@ -321,13 +312,12 @@ PlayMeleeSound() {
     self.a.nextMeleeChargeSound = GetTime() + 8000;
   }
 }
-
 AiVsAiMeleeCombat() {
   self endon("killanimscript");
   self melee_notify_wrapper();
   self OrientMode("face enemy");
   self ClearAnim(%root, 0.3);
-  IWin = (randomInt(10) < 8);
+  IWin = (RandomInt(10) < 8);
   if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     IWin = true;
   }
@@ -346,7 +336,7 @@ AiVsAiMeleeCombat() {
   desiredDistSqrd = 72 * 72;
   self PlayMeleeSound();
   AiVsAiMeleeCharge(desiredDistSqrd);
-  if(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd) {
     return false;
   }
   self.meleePartner = self.enemy;
@@ -356,20 +346,17 @@ AiVsAiMeleeCombat() {
   self.meleeAnim = myAnim;
   self animcustom(::AiVsAiAnimCustom);
 }
-
 AiVsAiMeleeCharge(desiredDistSqrd) {
   giveUpTime = GetTime() + 2500;
   self SetAnimKnobAll(animscripts\zombie_run::GetRunAnim(), %body, 1, 0.2);
-  while(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && GetTime() < giveUpTime) {
+  while(DistanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && GetTime() < giveUpTime) {
     wait .05;
   }
 }
-
 AiVsAiAnimCustom() {
   self endon("killanimscript");
   self AiVsAiMeleeAnim(self.meleeAnim);
 }
-
 AiVsAiMeleeAnim(myAnim) {
   self endon("end_melee");
   self thread endMeleeOnKillanimscript();
@@ -380,13 +367,11 @@ AiVsAiMeleeAnim(myAnim) {
   self animscripts\zombie_shared::DoNoteTracks("meleeAnim");
   self notify("end_melee");
 }
-
 endMeleeOnKillanimscript() {
   self endon("end_melee");
   self waittill("killanimscript");
   self.meleePartner notify("end_melee");
 }
-
 pick_zombie_melee_anim(zombie_guy) {
   melee_anim = undefined;
   if(zombie_guy.has_legs) {

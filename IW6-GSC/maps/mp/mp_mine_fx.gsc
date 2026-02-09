@@ -5,7 +5,7 @@
 
 main() {
   level._effect["vfx_waterfall_bokeh"] = loadfx("vfx/moments/mp_mine/vfx_waterfall_bokeh");
-  setdvar("fx_alphathreshold", 9);
+  setDvar("fx_alphathreshold", 9);
   level._effect["vfx_waterfall_splash_top"] = loadfx("vfx/moments/mp_mine/vfx_waterfall_splash_top");
   level._effect["vfx_light_flash_red_flat"] = loadfx("vfx/moments/mp_mine/vfx_light_flash_red_flat");
   level._effect["vfx_ceiling_smoke_mine"] = loadfx("vfx/moments/mp_mine/vfx_ceiling_smoke_mine");

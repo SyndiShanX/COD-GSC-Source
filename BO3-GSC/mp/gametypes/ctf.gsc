@@ -50,7 +50,7 @@ function main() {
   level.doubleovertime = 1;
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
   if(getdvarstring("scr_ctf_spawnPointFacingAngle") == "") {
-    setdvar("scr_ctf_spawnPointFacingAngle", "0");
+    setDvar("scr_ctf_spawnPointFacingAngle", "0");
   }
   level.teambased = 1;
   level.overrideteamscore = 1;
@@ -687,7 +687,7 @@ function getotherflag(flag) {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     for(index = 0; index < level.flags.size; index++) {
       flagteam = "invalidTeam";
       inflagradius = 0;
@@ -697,7 +697,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       if(isDefined(flagcarrier)) {
         flagorigin = level.flags[index].carrier.origin;
         iscarried = 1;
-        if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+        if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
           if(isDefined(level.flags[index].carrier.attackerdata)) {
             if(level.flags[index].carrier != attacker) {
               if(isDefined(level.flags[index].carrier.attackerdata[self.clientid])) {
@@ -728,7 +728,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
           offendedflag = 1;
         }
       }
-      if(inflagradius && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+      if(inflagradius && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
         if(defendedflag) {
           if(isDefined(self.isflagcarrier) && self.isflagcarrier) {
             scoreevents::processscoreevent("kill_flag_carrier", attacker, undefined, weapon);
@@ -771,7 +771,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(!isDefined(self.isflagcarrier) || !self.isflagcarrier) {
     return;
   }
-  if(isDefined(attacker) && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     if(isDefined(self.flagcarried)) {
       for(index = 0; index < level.flags.size; index++) {
         currentflag = level.flags[index];

@@ -88,7 +88,7 @@ function function_92b4b156() {
     switch (var_c59a59e1) {
       case 0: {
         var_81f963f4 waittill("trigger", trigplayer);
-        if(isplayer(trigplayer) && !trigplayer laststand::player_is_in_laststand() && !(trigplayer.is_drinking > 0)) {
+        if(isPlayer(trigplayer) && !trigplayer laststand::player_is_in_laststand() && !(trigplayer.is_drinking > 0)) {
           var_3bb6997f = trigplayer getcurrentweapon();
           if(!trigplayer hasweapon(var_3bb6997f)) {
             continue;
@@ -134,7 +134,7 @@ function function_92b4b156() {
       }
       case 2: {
         var_81f963f4 waittill("trigger", trigplayer);
-        if(isplayer(trigplayer) && !trigplayer laststand::player_is_in_laststand() && !(trigplayer.is_drinking > 0)) {
+        if(isPlayer(trigplayer) && !trigplayer laststand::player_is_in_laststand() && !(trigplayer.is_drinking > 0)) {
           b_valid_weapon = trigplayer function_a5a542a(var_3bb6997f, var_c59a59e1);
           if(!b_valid_weapon) {
             continue;

@@ -82,7 +82,6 @@ __init__() {
     level.var_53c1f615[level.var_53c1f615.size] = var_fab8d6ce;
 
     var_fab8d6ce callback::function_d8abfc3d(#"on_entity_deleted", &function_64ab9843);
-
   }
 
   assert(isscriptfunctionptr(&function_6318bedf));

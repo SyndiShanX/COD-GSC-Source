@@ -121,7 +121,7 @@ func_C58B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
     var_2 = var_15 * var_14;
 
-    if(isplayer(var_13)) {
+    if(isPlayer(var_13)) {
       var_16 = scripts\engine\utility::ter_op(scripts\mp\utility::istrue(self.hasruggedeqp), "hitequip", "");
       var_13 scripts\mp\damagefeedback::updatedamagefeedback(var_16, var_2 >= self.maxhealth);
     }

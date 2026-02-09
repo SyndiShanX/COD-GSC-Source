@@ -163,7 +163,7 @@ run_plant_attack_on_damage_logic() {
       if(self.gas_fx_playing == 0)
         thread plant_gas_fx();
 
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("standard");
 
         if(self.plant_health <= 0) {
@@ -203,7 +203,7 @@ plant_radius_attack() {
   for(;;) {
     self.trigger waittill("trigger", var_0);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(self.gas_fx_playing == 0)

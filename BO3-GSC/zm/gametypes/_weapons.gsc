@@ -553,12 +553,12 @@ function watchforthrowbacks() {
 function registergrenadelauncherduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
   dvarstring = ("scr_" + dvarstring) + "_grenadeLauncherDudTime";
   if(getdvarstring(dvarstring) == "") {
-    setdvar(dvarstring, defaultvalue);
+    setDvar(dvarstring, defaultvalue);
   }
   if(getdvarint(dvarstring) > maxvalue) {
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   } else if(getdvarint(dvarstring) < minvalue) {
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
   }
   level.grenadelauncherdudtimedvar = dvarstring;
   level.grenadelauncherdudtimemin = minvalue;
@@ -569,12 +569,12 @@ function registergrenadelauncherduddvar(dvarstring, defaultvalue, minvalue, maxv
 function registerthrowngrenadeduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
   dvarstring = ("scr_" + dvarstring) + "_thrownGrenadeDudTime";
   if(getdvarstring(dvarstring) == "") {
-    setdvar(dvarstring, defaultvalue);
+    setDvar(dvarstring, defaultvalue);
   }
   if(getdvarint(dvarstring) > maxvalue) {
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   } else if(getdvarint(dvarstring) < minvalue) {
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
   }
   level.throwngrenadedudtimedvar = dvarstring;
   level.throwngrenadedudtimemin = minvalue;
@@ -585,12 +585,12 @@ function registerthrowngrenadeduddvar(dvarstring, defaultvalue, minvalue, maxval
 function registerkillstreakdelay(dvarstring, defaultvalue, minvalue, maxvalue) {
   dvarstring = ("scr_" + dvarstring) + "_killstreakDelayTime";
   if(getdvarstring(dvarstring) == "") {
-    setdvar(dvarstring, defaultvalue);
+    setDvar(dvarstring, defaultvalue);
   }
   if(getdvarint(dvarstring) > maxvalue) {
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   } else if(getdvarint(dvarstring) < minvalue) {
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
   }
   level.killstreakrounddelay = getdvarint(dvarstring);
 }
@@ -851,7 +851,7 @@ function updatestowedweapon() {
 }
 
 function loadout_get_class_num() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(self.curclass));
   if(isDefined(level.classtoclassnum[self.curclass])) {
     return level.classtoclassnum[self.curclass];

@@ -124,7 +124,7 @@ function player_attacks_enemy(player, amount, type, point, weapon, direction_vec
 }
 
 function player_attacker(attacker) {
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     return true;
   }
   return false;
@@ -289,7 +289,7 @@ function zombie_damage_failsafe() {
   continue_failsafe_damage = 0;
   while(true) {
     wait(0.5);
-    if(!isDefined(self.enemy) || !isplayer(self.enemy)) {
+    if(!isDefined(self.enemy) || !isPlayer(self.enemy)) {
       continue;
     }
     if(self istouching(self.enemy)) {
@@ -297,7 +297,7 @@ function zombie_damage_failsafe() {
       if(!continue_failsafe_damage) {
         wait(5);
       }
-      if(!isDefined(self.enemy) || !isplayer(self.enemy) || self.enemy hasperk("specialty_armorvest")) {
+      if(!isDefined(self.enemy) || !isPlayer(self.enemy) || self.enemy hasperk("specialty_armorvest")) {
         continue;
       }
       if(self istouching(self.enemy) && !self.enemy laststand::player_is_in_laststand() && isalive(self.enemy)) {
@@ -631,7 +631,7 @@ function do_a_taunt() {
   }
   self.old_origin = self.origin;
   if(getdvarstring("zombie_taunt_freq") == "") {
-    setdvar("zombie_taunt_freq", "5");
+    setDvar("zombie_taunt_freq", "5");
   }
   freq = getdvarint("zombie_taunt_freq");
   if(freq >= randomint(100)) {
@@ -666,7 +666,7 @@ function should_attack_player_thru_boards() {
     }
   }
   if(getdvarstring("zombie_reachin_freq") == "") {
-    setdvar("zombie_reachin_freq", "50");
+    setDvar("zombie_reachin_freq", "50");
   }
   freq = getdvarint("zombie_reachin_freq");
   players = getplayers();
@@ -1045,7 +1045,7 @@ function zombie_delay_powerup_drop(origin) {
 }
 
 function zombie_death_points(origin, mod, hit_location, attacker, zombie, team) {
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     return;
   }
   if(!attacker player_can_score_from_zombies()) {
@@ -1246,7 +1246,7 @@ function damage_on_fire(player) {
 }
 
 function player_using_hi_score_weapon(player) {
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     weapon = player getcurrentweapon();
     return weapon == level.weaponnone || weapon.issemiauto;
   }
@@ -1464,7 +1464,7 @@ function zombie_death_event(zombie) {
   if(isDefined(zombie) && !isDefined(zombie.damagehit_origin) && isDefined(attacker) && isalive(attacker) && !isvehicle(attacker)) {
     zombie.damagehit_origin = attacker getweaponmuzzlepoint();
   }
-  if(isDefined(attacker) && isplayer(attacker) && attacker player_can_score_from_zombies()) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker player_can_score_from_zombies()) {
     if(isDefined(zombie.script_parameters)) {
       attacker notify("zombie_death_params", zombie.script_parameters, isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area);
     }
@@ -1556,12 +1556,12 @@ function zombie_death_event(zombie) {
           zombie thread zombie_utility::zombie_gut_explosion();
         }
       }
-      if(isDefined(attacker) && isplayer(attacker) && !is_weapon_shotgun(zombie.damageweapon)) {
+      if(isDefined(attacker) && isPlayer(attacker) && !is_weapon_shotgun(zombie.damageweapon)) {
         attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_EXPLOSIVES");
       }
     }
     if(zombie.damagemod === "MOD_GRENADE" || zombie.damagemod === "MOD_GRENADE_SPLASH") {
-      if(isDefined(attacker) && isalive(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker)) {
         attacker.grenade_multiattack_count++;
         attacker.grenade_multiattack_ent = zombie;
         attacker.grenade_multikill_count++;
@@ -1572,7 +1572,7 @@ function zombie_death_event(zombie) {
     level.zombie_total++;
     level.zombie_total_subtract++;
   } else {
-    if(isDefined(zombie.attacker) && isplayer(zombie.attacker)) {
+    if(isDefined(zombie.attacker) && isPlayer(zombie.attacker)) {
       level.zombie_player_killed_count++;
       if(isDefined(zombie.sound_damage_player) && zombie.sound_damage_player == zombie.attacker) {
         zombie.attacker zm_audio::create_and_play_dialog("kill", "damage");

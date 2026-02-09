@@ -284,7 +284,7 @@ function function_d8d01032() {
   self thread function_b2a1b297();
   self waittill("death");
   self thread function_2a2bfc25();
-  if(isDefined(self.attacker) && isplayer(self.attacker) && self.attacker hasweapon(getweapon("knife_plunger"))) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker) && self.attacker hasweapon(getweapon("knife_plunger"))) {
     level thread zm_castle_ee_side::function_c7bb86e5(self.attacker);
   }
   level.var_2f0a5661--;
@@ -383,11 +383,11 @@ function function_78e44cda() {
   wait(0.05);
   level waittill("start_zombie_round_logic");
   wait(0.05);
-  setdvar("", 0);
+  setDvar("", 0);
   adddebugcommand("");
   while(true) {
     if(getdvarint("")) {
-      setdvar("", 0);
+      setDvar("", 0);
       level thread function_eac1444a();
     }
     wait(0.5);

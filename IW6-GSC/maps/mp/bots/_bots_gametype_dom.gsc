@@ -73,7 +73,7 @@ bot_dom_debug() {
     wait(0.05);
 
   while(1) {
-    if(GetDvar("bot_DrawDebugGametype") == "dom") {
+    if(getDvar("bot_DrawDebugGametype") == "dom") {
       flags = bot_get_all_possible_flags();
       foreach(flag in flags) {
         if(flag.classname != "trigger_radius")
@@ -307,14 +307,14 @@ should_start_cautious_approach_dom(firstCheck) {
 }
 
 bot_dom_debug_should_capture_all() {
-  if(GetDvar("bot_dom_debug_capture_all") == "1")
+  if(getDvar("bot_dom_debug_capture_all") == "1")
     return true;
 
   return false;
 }
 
 bot_dom_debug_should_protect_all() {
-  if(GetDvar("bot_dom_debug_protect_all") == "1")
+  if(getDvar("bot_dom_debug_protect_all") == "1")
     return true;
 
   return false;
@@ -512,7 +512,6 @@ bot_choose_flag() {
           flag_num = 1;
         else
           flag_num = 2;
-
       }
 
       goal_type = undefined;

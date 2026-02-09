@@ -216,7 +216,7 @@ insta_kill_upgraded_player_kill_func(active_time) {
 pers_insta_kill_melee_swipe(smeansofdeath, eattacker) {
   if(maps\mp\zombies\_zm_pers_upgrades::is_pers_system_active()) {
     if(isDefined(smeansofdeath) && smeansofdeath == "MOD_MELEE") {
-      if(isplayer(self) && maps\mp\zombies\_zm_pers_upgrades::is_insta_kill_upgraded_and_active()) {
+      if(isPlayer(self) && maps\mp\zombies\_zm_pers_upgrades::is_insta_kill_upgraded_and_active()) {
         self notify("pers_melee_swipe");
         level.pers_melee_swipe_zombie_swiper = eattacker;
       }
@@ -230,7 +230,6 @@ pers_upgrade_jugg_player_death_stat() {
       if(!(isDefined(self.pers_upgrades_awarded["jugg"]) && self.pers_upgrades_awarded["jugg"])) {
         if(level.round_number <= level.pers_jugg_hit_and_die_round_limit) {
           self maps\mp\zombies\_zm_stats::increment_client_stat("pers_jugg", 0);
-
         }
       }
     }
@@ -266,7 +265,6 @@ pers_upgrade_flopper_damage_check(smeansofdeath, idamage) {
       self maps\mp\zombies\_zm_stats::increment_client_stat("pers_flopper_counter", 0);
 
       iprintlnbold("FLOPPER STAT: INCREMENTED");
-
     }
   } else {
     if(!(isDefined(self.pers_flopper_active) && self.pers_flopper_active)) {
@@ -376,7 +374,6 @@ pers_upgrade_pistol_points_kill() {
         self maps\mp\zombies\_zm_stats::increment_client_stat("pers_pistol_points_counter", 0);
 
         iprintlnbold("PISTOL POINTS STAT: INCREMENTED");
-
       }
     }
   } else
@@ -472,7 +469,6 @@ pers_upgrade_double_points_pickup_start() {
       self maps\mp\zombies\_zm_stats::increment_client_stat("pers_double_points_counter", 0);
 
       iprintlnbold("PISTOL POINTS STAT: INCREMENTED");
-
     }
   }
 
@@ -658,7 +654,6 @@ pers_upgrade_sniper_kill_check(zombie, attacker) {
       self maps\mp\zombies\_zm_stats::increment_client_stat("pers_sniper_counter", 0);
 
       iprintlnbold("SNIPER STAT: INCREMENTED");
-
     }
   }
 }
@@ -741,7 +736,7 @@ pers_upgrade_box_weapon_used(e_user, e_grabber) {
   if(level.round_number >= level.pers_box_weapon_lose_round) {
     return;
   }
-  if(isDefined(e_grabber) && isplayer(e_grabber)) {
+  if(isDefined(e_grabber) && isPlayer(e_grabber)) {
     if(is_true(e_grabber.pers_box_weapon_awarded)) {
       return;
     }
@@ -749,13 +744,11 @@ pers_upgrade_box_weapon_used(e_user, e_grabber) {
       return;
     }
     e_grabber maps\mp\zombies\_zm_stats::increment_client_stat("pers_box_weapon_counter", 0);
-
-  } else if(isDefined(e_user) && isplayer(e_user)) {
+  } else if(isDefined(e_user) && isPlayer(e_user)) {
     if(isDefined(e_user.pers_upgrades_awarded["box_weapon"]) && e_user.pers_upgrades_awarded["box_weapon"]) {
       return;
     }
     e_user maps\mp\zombies\_zm_stats::zero_client_stat("pers_box_weapon_counter", 0);
-
   }
 }
 
@@ -876,7 +869,7 @@ pers_treasure_chest_choosespecialweapon(player) {
 
     keys = array_randomize(level.pers_box_weapons);
 
-    forced_weapon = getdvar(#"_id_45ED7744");
+    forced_weapon = getDvar(#"_id_45ED7744");
 
     if(forced_weapon != "" && isDefined(level.zombie_weapons[forced_weapon]))
       arrayinsert(keys, forced_weapon, 0);

@@ -180,7 +180,6 @@ playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot
     } else {
       println("<dev string:x10e>" + str_script_alias + "<dev string:x12c>");
       self thread _missing_dialog(str_script_alias, str_vox_file, uniquenotify);
-
     }
   } else {
     self thread _temp_dialog(str_script_alias, uniquenotify);
@@ -211,7 +210,7 @@ playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot
 _play_sound_to_player_with_notify(soundalias, player_or_team, uniquenotify) {
   self endon(#"death");
 
-  if(isplayer(player_or_team)) {
+  if(isPlayer(player_or_team)) {
     player_or_team endon(#"death");
     self playsoundtoplayer(soundalias, player_or_team);
   } else if(isstring(player_or_team)) {
@@ -230,7 +229,7 @@ _play_sound_to_player_with_notify(soundalias, player_or_team, uniquenotify) {
 }
 
 _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
-  setdvar(#"bgcache_disablewarninghints", 1);
+  setDvar(#"bgcache_disablewarninghints", 1);
 
   if(!b_missing_vo && isDefined(self.propername)) {
     str_line = self.propername + ": " + str_line;
@@ -261,7 +260,7 @@ _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
     }
   }
 
-  setdvar(#"bgcache_disablewarninghints", 0);
+  setDvar(#"bgcache_disablewarninghints", 0);
   self notify(uniquenotify);
 }
 

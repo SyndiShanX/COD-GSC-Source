@@ -12,8 +12,9 @@
 #include maps\_damagefeedback;
 
 setskill(reset, skill_override) {
-  if(!isDefined(level.script))
-    level.script = tolower(getdvar(#"mapname"));
+  if(!isDefined(level.script)) {
+    level.script = tolower(getDvar(#"mapname"));
+  }
 
   if(!isDefined(reset) || reset == 0) {
     if(isDefined(level.gameskill)) {
@@ -29,43 +30,47 @@ setskill(reset, skill_override) {
     thread playerhealthdebug();
   }
 
-  if(!isDefined(level.invultime_onshield_multiplier))
+  if(!isDefined(level.invultime_onshield_multiplier)) {
     level.invultime_onshield_multiplier = 1;
+  }
 
-  if(!isDefined(level.player_attacker_accuracy_multiplier))
+  if(!isDefined(level.player_attacker_accuracy_multiplier)) {
     level.player_attacker_accuracy_multiplier = 1;
+  }
 
   level.gameskill = getlocalprofileint("g_gameskill");
 
-  if(isDefined(skill_override))
+  if(isDefined(skill_override)) {
     level.gameskill = skill_override;
+  }
 
   replay_single_mission = getdvarint(#"_id_0F241E06");
 
   if(replay_single_mission == 1) {
     single_mission_difficulty = getdvarint(#"_id_1DFA0958");
 
-    if(single_mission_difficulty >= 0)
+    if(single_mission_difficulty >= 0) {
       level.gameskill = single_mission_difficulty;
+    }
   }
 
-  setdvar("saved_gameskill", level.gameskill);
+  setDvar("saved_gameskill", level.gameskill);
 
   switch (level.gameskill) {
     case 0:
-      setdvar("currentDifficulty", "easy");
+      setDvar("currentDifficulty", "easy");
       level.currentdifficulty = "easy";
       break;
     case 1:
-      setdvar("currentDifficulty", "normal");
+      setDvar("currentDifficulty", "normal");
       level.currentdifficulty = "normal";
       break;
     case 2:
-      setdvar("currentDifficulty", "hardened");
+      setDvar("currentDifficulty", "hardened");
       level.currentdifficulty = "hardened";
       break;
     case 3:
-      setdvar("currentDifficulty", "veteran");
+      setDvar("currentDifficulty", "veteran");
       level.currentdifficulty = "veteran";
       break;
   }
@@ -279,8 +284,9 @@ apply_difficulty_var_with_func(difficulty_func) {
   level.playerhealth_regularregendelay = [[difficulty_func]]("playerHealth_RegularRegenDelay");
   level.worthydamageratio = [[difficulty_func]]("worthyDamageRatio");
 
-  if(level.auto_adjust_threatbias)
+  if(level.auto_adjust_threatbias) {
     thread apply_threat_bias_to_all_players(difficulty_func);
+  }
 
   level.longregentime = [[difficulty_func]]("longRegenTime");
   level.healthoverlaycutoff = [[difficulty_func]]("healthOverlayCutoff");
@@ -309,16 +315,19 @@ apply_threat_bias_to_all_players(difficulty_func) {
   flag_wait("all_players_connected");
   players = get_players();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i].threatbias = int([[difficulty_func]]("threatbias"));
+  }
 }
 
 coop_damage_and_accuracy_scaling(difficulty_func) {
-  while(!isDefined(level.flag))
+  while(!isDefined(level.flag)) {
     wait 0.05;
+  }
 
-  while(!isDefined(level.flag["all_players_spawned"]))
+  while(!isDefined(level.flag["all_players_spawned"])) {
     wait 0.05;
+  }
 
   flag_wait("all_players_spawned");
   players = get_players();
@@ -338,10 +347,11 @@ getcurrentdifficultysetting(msg) {
 }
 
 getcoopvalue(msg, numplayers) {
-  if(numplayers <= 0)
+  if(numplayers <= 0) {
     numplayers = 1;
+  }
 
-  return level.difficultysettings[msg][getdvar(#"_id_DA8CD87B")][numplayers - 1];
+  return level.difficultysettings[msg][getDvar(#"_id_DA8CD87B")][numplayers - 1];
 }
 
 get_locked_difficulty_val(msg, ignored) {
@@ -353,38 +363,44 @@ always_pain() {
 }
 
 pain_protection() {
-  if(!pain_protection_check())
+  if(!pain_protection_check()) {
     return false;
+  }
 
   return randomint(100) > 25;
 }
 
 pain_protection_check() {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return false;
+  }
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy)) {
     return false;
+  }
 
-  if(!isalive(level.painai) || level.painai.a.script != "pain")
+  if(!isalive(level.painai) || level.painai.a.script != "pain") {
     level.painai = self;
+  }
 
-  if(self == level.painai)
+  if(self == level.painai) {
     return false;
+  }
 
-  if(self.damageweapon != "none" && weaponisboltaction(self.damageweapon))
+  if(self.damageweapon != "none" && weaponisboltaction(self.damageweapon)) {
     return false;
+  }
 
   return true;
 }
 
 playerhealthdebug() {
-  setdvar("scr_health_debug", "1");
+  setDvar("scr_health_debug", "1");
   waittillframeend;
 
   while(true) {
     while(true) {
-      if(getdvar(#"scr_health_debug") != "0") {
+      if(getDvar(#"scr_health_debug") != "0") {
         break;
       }
 
@@ -394,7 +410,7 @@ playerhealthdebug() {
     thread printhealthdebug();
 
     while(true) {
-      if(getdvar(#"scr_health_debug") == "0") {
+      if(getDvar(#"scr_health_debug") == "0") {
         break;
       }
 
@@ -404,7 +420,6 @@ playerhealthdebug() {
     level notify("stop_printing_grenade_timers");
     destroyhealthdebug();
   }
-
 }
 
 printhealthdebug() {
@@ -416,11 +431,13 @@ printhealthdebug() {
   level.healthbarkeys[1] = "No Hit Time";
   level.healthbarkeys[2] = "No Die Time";
 
-  if(!isDefined(level.playerinvultimeend))
+  if(!isDefined(level.playerinvultimeend)) {
     level.playerinvultimeend = 0;
+  }
 
-  if(!isDefined(level.player_deathinvulnerabletimeout))
+  if(!isDefined(level.player_deathinvulnerabletimeout)) {
     level.player_deathinvulnerabletimeout = 0;
+  }
 
   for(i = 0; i < level.healthbarkeys.size; i++) {
     key = level.healthbarkeys[i];
@@ -469,12 +486,13 @@ printhealthdebug() {
       player = players[0];
       width = 0;
 
-      if(i == 0)
+      if(i == 0) {
         width = player.health / player.maxhealth * 300;
-      else if(i == 1)
+      } else if(i == 1) {
         width = (level.playerinvultimeend - gettime()) / 1000 * 40;
-      else if(i == 2)
+      } else if(i == 2) {
         width = (level.player_deathinvulnerabletimeout - gettime()) / 1000 * 40;
+      }
 
       width = int(max(width, 1));
       width = int(min(width, 300));
@@ -522,7 +540,7 @@ set_accuracy_based_on_situation() {
     return;
   }
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     resetmissdebouncetime();
 
     if(self.a.misstime > gettime()) {
@@ -553,8 +571,9 @@ setsniperaccuracy() {
   if((!isDefined(self.lastmissedenemy) || self.enemy != self.lastmissedenemy) && distancesquared(self.origin, self.enemy.origin) > 250000) {
     self.accuracy = 0;
 
-    if(level.gameskill > 0 || self.snipershotcount > 1)
+    if(level.gameskill > 0 || self.snipershotcount > 1) {
       self.lastmissedenemy = self.enemy;
+    }
 
     return;
   }
@@ -562,8 +581,9 @@ setsniperaccuracy() {
   self.accuracy = (1 + 1 * self.sniperhitcount) * self.baseaccuracy;
   self.sniperhitcount++;
 
-  if(level.gameskill < 1 && self.sniperhitcount == 1)
+  if(level.gameskill < 1 && self.sniperhitcount == 1) {
     self.lastmissedenemy = undefined;
+  }
 }
 
 didsomethingotherthanshooting() {
@@ -587,7 +607,7 @@ resetmisstime() {
   if(!isalive(self.enemy)) {
     return;
   }
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     self.accuracy = self.baseaccuracy;
     return;
   }
@@ -606,8 +626,9 @@ setmisstime(howlong) {
   if(self.a.misstimedebounce > gettime()) {
     return;
   }
-  if(howlong > 0)
+  if(howlong > 0) {
     self.accuracy = 0;
+  }
 
   howlong = howlong * 1000;
   self.a.misstime = gettime() + howlong;
@@ -620,7 +641,7 @@ playerhurtcheck() {
   for(;;) {
     self waittill("damage", amount, attacker, dir, point, mod);
 
-    if(isDefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker.team == self.team) {
       continue;
     }
     self.hurtagain = 1;
@@ -663,8 +684,9 @@ playerhealthregen() {
   lastinvulratio = 1;
   self thread playerhurtcheck();
 
-  if(!isDefined(self.veryhurt))
+  if(!isDefined(self.veryhurt)) {
     self.veryhurt = 0;
+  }
 
   self.bolthit = 0;
 
@@ -673,8 +695,9 @@ playerhealthregen() {
     waittillframeend;
 
     if(self.health == self.maxhealth) {
-      if(self player_flag("player_has_red_flashing_overlay"))
+      if(self player_flag("player_has_red_flashing_overlay")) {
         player_flag_clear("player_has_red_flashing_overlay");
+      }
 
       lastinvulratio = 1;
       playerjustgotredflashing = 0;
@@ -695,8 +718,9 @@ playerhealthregen() {
       if(!wasveryhurt) {
         hurttime = gettime();
 
-        if(!isDefined(level.disable_damage_blur))
+        if(!isDefined(level.disable_damage_blur)) {
           self startfadingblur(3.6, 2);
+        }
 
         self player_flag_set("player_has_red_flashing_overlay");
         playerjustgotredflashing = 1;
@@ -716,18 +740,21 @@ playerhealthregen() {
         self.veryhurt = 1;
         newhealth = health_ratio;
 
-        if(gettime() > hurttime + level.longregentime)
+        if(gettime() > hurttime + level.longregentime) {
           newhealth = newhealth + 0.1;
+        }
 
-        if(newhealth >= 1)
+        if(newhealth >= 1) {
           reducetakecoverwarnings();
+        }
       } else {
         newhealth = 1;
         self.veryhurt = 0;
       }
 
-      if(newhealth > 1.0)
+      if(newhealth > 1.0) {
         newhealth = 1.0;
+      }
 
       if(newhealth <= 0) {
         return;
@@ -743,11 +770,13 @@ playerhealthregen() {
       self setnormalhealth(2 / self.maxhealth);
       invulworthyhealthdrop = 1;
 
-      if(!isDefined(level.player_deathinvulnerabletimeout))
+      if(!isDefined(level.player_deathinvulnerabletimeout)) {
         level.player_deathinvulnerabletimeout = 0;
+      }
 
-      if(level.player_deathinvulnerabletimeout < gettime())
+      if(level.player_deathinvulnerabletimeout < gettime()) {
         level.player_deathinvulnerabletimeout = gettime() + getdvarint(#"_id_4E44E32D");
+      }
     }
 
     oldratio = self.health / self.maxhealth;
@@ -755,8 +784,9 @@ playerhealthregen() {
     health_add = 0;
     hurttime = gettime();
 
-    if(!isDefined(level.disable_damage_blur))
+    if(!isDefined(level.disable_damage_blur)) {
       self startfadingblur(3, 0.8);
+    }
 
     if(!invulworthyhealthdrop) {
       continue;
@@ -772,8 +802,9 @@ playerhealthregen() {
       playerjustgotredflashing = 0;
     } else if(veryhurt)
       invultime = level.invultime_postshield;
-    else
+    else {
       invultime = level.invultime_preshield;
+    }
 
     lastinvulratio = self.health / self.maxhealth;
     self thread playerinvul(invultime);
@@ -791,25 +822,27 @@ reducetakecoverwarnings() {
       setlocalprofilevar("takeCoverWarnings", takecoverwarnings);
 
       debugtakecoverwarnings();
-
     }
   }
 }
 
 debugtakecoverwarnings() {
-  if(getdvar(#"_id_57298A77") == "")
-    setdvar("scr_debugtakecover", "0");
+  if(getDvar(#"_id_57298A77") == "") {
+    setDvar("scr_debugtakecover", "0");
+  }
 
-  if(getdebugdvar("scr_debugtakecover") == "1")
+  if(getdebugdvar("scr_debugtakecover") == "1") {
     iprintln("Warnings remaining: ", getlocalprofileint("takeCoverWarnings") - 3);
+  }
 }
 
 playerinvul(timer) {
   self endon("death");
   self endon("disconnect");
 
-  if(isDefined(self.flashendtime) && self.flashendtime > gettime())
+  if(isDefined(self.flashendtime) && self.flashendtime > gettime()) {
     timer = timer * getcurrentdifficultysetting("flashbangedInvulFactor");
+  }
 
   if(timer > 0) {
     self.attackeraccuracy = 0;
@@ -831,14 +864,16 @@ grenadeawareness() {
 
   if(self.team == "axis") {
     if(level.gameskill >= 2) {
-      if(randomint(100) < 33)
+      if(randomint(100) < 33) {
         self.grenadeawareness = 0.2;
-      else
+      } else {
         self.grenadeawareness = 0.5;
+      }
     } else if(randomint(100) < 33)
       self.grenadeawareness = 0;
-    else
+    else {
       self.grenadeawareness = 0.2;
+    }
   }
 }
 
@@ -895,8 +930,9 @@ new_style_health_overlay() {
   if(issplitscreen()) {
     overlay setshader("overlay_low_health_splat", 640, 960);
 
-    if(self == level.players[0])
+    if(self == level.players[0]) {
       overlay.y = overlay.y - 120;
+    }
   } else
     overlay setshader("overlay_low_health_splat", 640, 480);
 
@@ -919,9 +955,9 @@ new_style_health_overlay() {
     } else
       targetdamagealpha = 1.0 - self.health / self.maxhealth;
 
-    if(overlay.alpha < targetdamagealpha)
+    if(overlay.alpha < targetdamagealpha) {
       overlay.alpha = targetdamagealpha;
-    else if(overlay.alpha != 0) {
+    } else if(overlay.alpha != 0) {
       level thread healthfadeoffwatcher(overlay, 0.75);
       overlay fadeovertime(0.75);
       overlay.alpha = 0;
@@ -936,10 +972,11 @@ healthoverlay() {
 }
 
 add_hudelm_position_internal(aligny) {
-  if(level.console)
+  if(level.console) {
     self.fontscale = 2;
-  else
+  } else {
     self.fontscale = 1.6;
+  }
 
   self.x = 0;
   self.y = -36;
@@ -958,10 +995,11 @@ add_hudelm_position_internal(aligny) {
   self.background.horzalign = "center";
   self.background.vertalign = "middle";
 
-  if(level.console)
+  if(level.console) {
     self.background setshader("popmenu_bg", 650, 52);
-  else
+  } else {
     self.background setshader("popmenu_bg", 650, 42);
+  }
 
   self.background.alpha = 0.5;
 }
@@ -981,8 +1019,9 @@ create_warning_elem(player) {
 play_hurt_vox() {
   if(isDefined(self.veryhurt)) {
     if(self.veryhurt == 0) {
-      if(randomintrange(0, 1) == 1)
+      if(randomintrange(0, 1) == 1) {
         playsoundatposition("chr_breathing_hurt_start", self.origin);
+      }
     }
   }
 }
@@ -1014,11 +1053,13 @@ destroy_warning_elem(fadeout) {
 }
 
 maychangecoverwarningalpha(coverwarning) {
-  if(!isDefined(coverwarning))
+  if(!isDefined(coverwarning)) {
     return false;
+  }
 
-  if(isDefined(coverwarning.beingdestroyed))
+  if(isDefined(coverwarning.beingdestroyed)) {
     return false;
+  }
 
   return true;
 }
@@ -1069,28 +1110,35 @@ cover_warning_check() {
 shouldshowcoverwarning() {
   return 0;
 
-  if(isDefined(level.enable_cover_warning))
+  if(isDefined(level.enable_cover_warning)) {
     return level.enable_cover_warning;
+  }
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return 0;
+  }
 
-  if(level.gameskill > 1)
+  if(level.gameskill > 1) {
     return 0;
+  }
 
-  if(level.missionfailed)
+  if(level.missionfailed) {
     return 0;
+  }
 
-  if(issplitscreen() || coopgame())
+  if(issplitscreen() || coopgame()) {
     return 0;
+  }
 
   takecoverwarnings = getlocalprofileint("takeCoverWarnings");
 
-  if(takecoverwarnings <= 3)
+  if(takecoverwarnings <= 3) {
     return 0;
+  }
 
-  if(isDefined(level.cover_warning_hud))
+  if(isDefined(level.cover_warning_hud)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1102,17 +1150,20 @@ redflashingoverlay(overlay) {
   self endon("disconnect");
   coverwarning = undefined;
 
-  if(self shouldshowcoverwarning())
+  if(self shouldshowcoverwarning()) {
     coverwarning = create_warning_elem(self);
+  }
 
   stopflashingbadlytime = gettime() + level.longregentime;
   fadefunc(overlay, coverwarning, 1, 1, 0);
 
-  while(gettime() < stopflashingbadlytime && isalive(self))
+  while(gettime() < stopflashingbadlytime && isalive(self)) {
     fadefunc(overlay, coverwarning, 0.9, 1, 0);
+  }
 
-  if(isalive(self))
+  if(isalive(self)) {
     fadefunc(overlay, coverwarning, 0.65, 0.8, 0);
+  }
 
   if(maychangecoverwarningalpha(coverwarning)) {
     coverwarning fadeovertime(1.0);
@@ -1135,8 +1186,9 @@ fadefunc(overlay, coverwarning, severity, mult, hud_scaleonly) {
   remainingtime = 0.8 - fadeintime - stayfulltime - fadeouthalftime - fadeoutfulltime;
   assert(remainingtime >= -0.001);
 
-  if(remainingtime < 0)
+  if(remainingtime < 0) {
     remainingtime = 0;
+  }
 
   halfalpha = 0.8 + severity * 0.1;
   leastalpha = 0.5 + severity * 0.3;
@@ -1150,8 +1202,9 @@ fadefunc(overlay, coverwarning, severity, mult, hud_scaleonly) {
     }
   }
 
-  if(isDefined(coverwarning))
+  if(isDefined(coverwarning)) {
     coverwarning thread fontscaler(1.0, fadeintime);
+  }
 
   wait(fadeintime + stayfulltime);
   overlay fadeovertime(fadeouthalftime);
@@ -1175,8 +1228,9 @@ fadefunc(overlay, coverwarning, severity, mult, hud_scaleonly) {
     }
   }
 
-  if(isDefined(coverwarning))
+  if(isDefined(coverwarning)) {
     coverwarning thread fontscaler(0.9, fadeoutfulltime);
+  }
 
   wait(fadeoutfulltime);
   wait(remainingtime);
@@ -1192,14 +1246,15 @@ healthoverlay_remove(overlay) {
 settakecoverwarnings() {
   ispregameplaylevel = level.script == "training" || level.script == "cargoship" || level.script == "coup";
 
-  if(getlocalprofileint("takeCoverWarnings") == -1 || ispregameplaylevel)
+  if(getlocalprofileint("takeCoverWarnings") == -1 || ispregameplaylevel) {
     setlocalprofilevar("takeCoverWarnings", 9);
+  }
 
   debugtakecoverwarnings();
 }
 
 increment_take_cover_warnings_on_death() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   level notify("new_cover_on_death_thread");
@@ -1214,8 +1269,9 @@ increment_take_cover_warnings_on_death() {
   }
   warnings = getlocalprofileint("takeCoverWarnings");
 
-  if(warnings < 10)
+  if(warnings < 10) {
     setlocalprofilevar("takeCoverWarnings", warnings + 1);
+  }
 
   debugtakecoverwarnings();
 }
@@ -1240,8 +1296,9 @@ difficulty_pump_thread() {
     lowest_current_skill = getdvarint(#"saved_gameskill");
     gameskill = getlocalprofileint("g_gameskill");
 
-    if(gameskill < lowest_current_skill)
+    if(gameskill < lowest_current_skill) {
       lowest_current_skill = gameskill;
+    }
 
     setskill(1, lowest_current_skill);
     wait_network_frame();
@@ -1307,21 +1364,23 @@ coop_player_threat_bias_adjuster() {
     if(level.auto_adjust_threatbias) {
       players = get_players("allies");
 
-      for(i = 0; i < players.size; i++)
+      for(i = 0; i < players.size; i++) {
         enable_auto_adjust_threatbias(players[i]);
+      }
     }
   }
 }
 
 toggle_health_overlay(b_indicator_active) {
-  if(!isDefined(b_indicator_active))
+  if(!isDefined(b_indicator_active)) {
     b_indicator_active = 1;
+  }
 
   if(b_indicator_active) {
-    setdvar("scr_damagefeedback", "1");
+    setDvar("scr_damagefeedback", "1");
     level.disable_damage_overlay = undefined;
   } else {
-    setdvar("scr_damagefeedback", "0");
+    setDvar("scr_damagefeedback", "0");
     self maps\_damagefeedback::updatedamagefeedback();
     level.disable_damage_overlay = 1;
   }

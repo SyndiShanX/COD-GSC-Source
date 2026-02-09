@@ -63,7 +63,7 @@ getmeritstatus(var_0) {
 mt_kills(var_0, var_1) {
   var_2 = var_0.var_4F;
   var_3 = var_0.victim;
-  if(!isDefined(var_2) || !isplayer(var_2)) {
+  if(!isDefined(var_2) || !isPlayer(var_2)) {
     return;
   }
 
@@ -130,8 +130,8 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     return;
   }
 
-  if(!isplayer(var_1)) {
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+  if(!isPlayer(var_1)) {
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       var_1 = var_1.owner;
     } else {
       return;
@@ -161,7 +161,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   var_18 = 0;
   foreach(var_1A in getarraykeys(level.all_magic_weapons)) {
     if(scripts\cp\utility::getrawbaseweaponname(var_4) == var_1A) {
-      if(getdvar("ui_mapname") == "cp_final" && var_1A == "arclassic") {
+      if(getDvar("ui_mapname") == "cp_final" && var_1A == "arclassic") {
         var_18 = 0;
       } else {
         var_18 = 1;
@@ -304,7 +304,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     var_1 processmerit("mt_faf_burned_out_kills");
   }
 
-  if(getdvar("ui_mapname") == "cp_rave") {
+  if(getDvar("ui_mapname") == "cp_rave") {
     if(isDefined(self.agent_type) && self.agent_type == "zombie_sasquatch") {
       var_1 processmerit("mt_dlc1_sasquatch_kills");
     }
@@ -332,7 +332,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     }
   }
 
-  if(getdvar("ui_mapname") == "cp_disco") {
+  if(getDvar("ui_mapname") == "cp_disco") {
     if(var_4 == "iw7_katana_zm_pap2+camo222" || var_4 == "iw7_katana_windforce_zm") {
       var_1 processmerit("mt_dlc2_pap2_katana");
     } else if(var_4 == "iw7_nunchucks_zm_pap2+camo222") {
@@ -360,7 +360,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     }
   }
 
-  if(getdvar("ui_mapname") == "cp_town") {
+  if(getDvar("ui_mapname") == "cp_town") {
     if(var_11) {
       if(var_4 == "iw7_knife_zm_cleaver") {
         var_1 processmerit("mt_dlc3_cleaver_kills");
@@ -395,7 +395,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     }
   }
 
-  if(getdvar("ui_mapname") == "cp_final") {
+  if(getDvar("ui_mapname") == "cp_final") {
     if(var_1D) {
       var_1 processmerit("mt_dlc4_venomx_kills");
     }
@@ -444,7 +444,7 @@ processmerit(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isplayer(self) || isai(self)) {
+  if(!isPlayer(self) || isai(self)) {
     return;
   }
 

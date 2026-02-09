@@ -209,7 +209,7 @@ onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   }
 
   if(isDefined(self.btrophysystem)) {
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       self.lastdamagedir[self.lastdamagedir.size] = vectornormalize(var_1.origin - self.origin);
       self.lastdamagetime = gettime();
     }

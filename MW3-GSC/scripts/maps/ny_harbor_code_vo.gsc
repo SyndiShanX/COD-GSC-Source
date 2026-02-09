@@ -6,7 +6,6 @@
 _id_4AD8(var_0) {
   if(isDefined(var_0)) {
     wait(var_0);
-
   }
   common_scripts\utility::flag_wait("npcs_spawned");
   maps\_utility::_id_11F4("nyharbor_rno_inposition");
@@ -44,7 +43,6 @@ _id_4ADA(var_0) {
 
   if(isDefined(var_0)) {
     wait(var_0);
-
   }
   maps\_utility::_id_11F4("nyharbor_sel_watchsonar");
   wait 2;
@@ -63,7 +61,6 @@ _id_4ADA(var_0) {
 _id_4ADB(var_0) {
   if(isDefined(var_0)) {
     wait(var_0);
-
   }
   maps\_utility::_id_11F4("nyharbor_lns_powerdown");
   wait 3;
@@ -83,7 +80,6 @@ _id_4ADB(var_0) {
 
   if(!common_scripts\utility::flag("vo_stop_mine_nag")) {
     maps\_utility::_id_11F4("nyharbor_lns_plantjaywick");
-
   }
   common_scripts\utility::flag_wait("submine_planted");
   wait 3;
@@ -169,19 +165,16 @@ _id_4ADF() {
 
   if(!common_scripts\utility::flag("hatch_player_using_ladder")) {
     level._id_4AE1 maps\_utility::_id_168C("nyharbor_rno_headdown");
-
   }
   wait 5;
 
   if(!common_scripts\utility::flag("hatch_player_using_ladder")) {
     level._id_4AE0 maps\_utility::_id_168C("nyharbor_trk_jobtodo");
-
   }
   wait 5;
 
   if(!common_scripts\utility::flag("hatch_player_using_ladder")) {
     level._id_4AE1 maps\_utility::_id_168C("nyharbor_rno_downthere");
-
   }
   common_scripts\utility::flag_wait("sub_exterior_hind_1_fire");
   level._id_4AE0 maps\_utility::_id_168C("nyharbor_trk_incominghind");
@@ -208,7 +201,6 @@ _id_00AA() {
       var_1 = 1;
     } else {
       var_1 = 0;
-
     }
     wait 6;
   }
@@ -305,7 +297,6 @@ _id_4AED() {
       var_1 = 1;
     } else {
       var_1 = 0;
-
     }
     wait 6;
   }
@@ -322,7 +313,6 @@ _id_4AEE(var_0) {
 _id_4AEF(var_0) {
   if(isDefined(var_0)) {
     wait(var_0);
-
   }
   common_scripts\utility::flag_wait("sub_exit_player_going_out_hatch");
   wait 3;

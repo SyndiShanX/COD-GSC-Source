@@ -42,8 +42,9 @@ play_water_fx() {
   self setclientflag(n_client_flag);
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self clearclientflag(n_client_flag);
+  }
 }
 
 precache_createfx_fx() {
@@ -226,11 +227,11 @@ initmodelanims() {
 }
 
 set_createfx_water_dvars_street() {
-  setdvar("r_waterwavespeed", "1.092 1.060 1.085 1.045");
-  setdvar("r_waterwaveamplitude", "3.0 1.25 2.69307 2.95");
-  setdvar("r_waterwavewavelength", "111.9 77 187.6 245");
-  setdvar("r_waterwaveangle", "70.6 46.9 117.1 179.67");
-  setdvar("r_waterwavephase", "0 0 0 0");
-  setdvar("r_waterwavesteepness", "1 1 1 1");
-  setdvar("r_waterwavebase", "12");
+  setDvar("r_waterwavespeed", "1.092 1.060 1.085 1.045");
+  setDvar("r_waterwaveamplitude", "3.0 1.25 2.69307 2.95");
+  setDvar("r_waterwavewavelength", "111.9 77 187.6 245");
+  setDvar("r_waterwaveangle", "70.6 46.9 117.1 179.67");
+  setDvar("r_waterwavephase", "0 0 0 0");
+  setDvar("r_waterwavesteepness", "1 1 1 1");
+  setDvar("r_waterwavebase", "12");
 }

@@ -1,11 +1,11 @@
 /*********************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_viet_zombie_female_body_alt.csc
+ * Script: character\clientscripts\c_viet_zombie_female_body_alt\.csc
 *********************************************************************/
 
 matches_me() {
   if(self.model == "c_viet_zombie_female_alt") {
-    returntrue;
+    return true;
   }
   return (false);
 }

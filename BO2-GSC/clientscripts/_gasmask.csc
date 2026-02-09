@@ -24,7 +24,6 @@ gasmask_off() {
     disable_filter_hazmat(level.localplayers[0], 0, 0);
 
     println("_gasmask::gasmask_off completed");
-
   }
 }
 
@@ -36,7 +35,6 @@ gasmask_on_pristine() {
     thread gasmask_breathing();
 
     println("_gasmask::gasmask_on_pristine completed");
-
   }
 }
 
@@ -51,7 +49,6 @@ gasmask_on_cracked_1() {
     enable_filter_hazmat(level.localplayers[0], 0, 0, 2, 1.0);
 
     println("_gaskmask::gasmask_on_cracked_1 complted");
-
   }
 }
 
@@ -66,7 +63,6 @@ gasmask_on_cracked_2() {
     enable_filter_hazmat(level.localplayers[0], 0, 0, 3, 1.0);
 
     println("_gaskmask::gasmask_on_cracked_2 complted");
-
   }
 }
 
@@ -81,7 +77,6 @@ gasmask_on_cracked_3() {
     enable_filter_hazmat(level.localplayers[0], 0, 0, 4, 1.0);
 
     println("_gaskmask::gasmask_on_cracked_3 complted");
-
   }
 }
 

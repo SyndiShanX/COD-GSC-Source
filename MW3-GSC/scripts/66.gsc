@@ -27,9 +27,8 @@ _id_226E() {
 }
 
 main() {
-  if(getdvar("mg42") == "") {
-    setdvar("mgTurret", "off");
-
+  if(getDvar("mg42") == "") {
+    setDvar("mgTurret", "off");
   }
   level._id_2270 = 24;
   var_0 = getEntArray("turretInfo", "targetname");
@@ -50,7 +49,6 @@ _id_2271() {
     if(isDefined(var_0)) {
       if(isDefined(var_0.radius)) {
         self.goalradius = var_0.radius;
-
       }
       self setgoalnode(var_0);
     }
@@ -58,7 +56,6 @@ _id_2271() {
 
   while(!isDefined(self.node)) {
     wait 0.05;
-
   }
   var_1 = undefined;
 
@@ -69,7 +66,6 @@ _id_2271() {
 
   if(!isDefined(var_1)) {
     var_1 = self.node;
-
   }
   if(!isDefined(var_1)) {
     return;
@@ -94,7 +90,6 @@ _id_2271() {
     _id_22C2(var_3);
   } else {
     _id_22C5(var_3);
-
   }
   maps\_mg_penetration::_id_0A47(var_1._id_0A50);
 }
@@ -133,7 +128,6 @@ _id_21BB(var_0) {
 
   if(!isDefined(self._id_2276)) {
     self._id_2276 = 1;
-
   }
   for(;;) {
     while(self._id_2276) {
@@ -177,32 +171,27 @@ _id_2278() {
     var_0 = self.script_delay_min;
   } else {
     var_0 = _id_2277("delay");
-
   }
   if(isDefined(self.script_delay_max)) {
     var_1 = self.script_delay_max - var_0;
   } else {
     var_1 = _id_2277("delay_range");
-
   }
   if(isDefined(self._id_2279)) {
     var_2 = self._id_2279;
   } else {
     var_2 = _id_2277("burst");
-
   }
   if(isDefined(self._id_227A)) {
     var_3 = self._id_227A - var_2;
   } else {
     var_3 = _id_2277("burst_range");
-
   }
   var_4 = gettime();
   var_5 = "start";
 
   if(isDefined(self._id_227B)) {
     thread _id_227D();
-
   }
   for(;;) {
     var_6 = (var_4 - gettime()) * 0.001;
@@ -223,7 +212,6 @@ _id_2278() {
 
     if(var_5 != "aim") {
       var_5 = "aim";
-
     }
     thread _id_2282(var_6);
     self waittill("turretstatechange");
@@ -246,7 +234,6 @@ _id_227D() {
 
   if(isDefined(self._id_227E)) {
     self._id_227F = 1;
-
   }
   for(;;) {
     self waittill("turret_fire");
@@ -291,11 +278,10 @@ _id_2283(var_0) {
   self settargetentity(var_0);
 
   for(;;) {
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0.origin = self._id_21B9 getorigin();
     } else {
       var_0.origin = self._id_21B9.origin;
-
     }
     var_0.origin = var_0.origin + (20 - randomfloat(40), 20 - randomfloat(40), 20 - randomfloat(60));
     wait 0.2;
@@ -324,32 +310,27 @@ _id_2284(var_0, var_1) {
     var_2 = var_0.script_delay_min;
   } else {
     var_2 = _id_2277("delay");
-
   }
   if(isDefined(var_0.script_delay_max)) {
     var_3 = var_0.script_delay_max - var_2;
   } else {
     var_3 = _id_2277("delay_range");
-
   }
   if(isDefined(var_0._id_2279)) {
     var_4 = var_0._id_2279;
   } else {
     var_4 = _id_2277("burst");
-
   }
   if(isDefined(var_0._id_227A)) {
     var_5 = var_0._id_227A - var_4;
   } else {
     var_5 = _id_2277("burst_range");
-
   }
   for(;;) {
     var_0 startfiring();
 
     if(isDefined(var_1)) {
       var_0 thread _id_2283(var_1);
-
     }
     wait(var_4 + randomfloat(var_5));
     var_0 stopfiring();
@@ -360,7 +341,6 @@ _id_2284(var_0, var_1) {
 _id_2285() {
   if(!isDefined(self._id_219F)) {
     self._id_219F = 0;
-
   }
   if(!isDefined(self.targetname)) {
     return;
@@ -375,7 +355,6 @@ _id_2285() {
   }
   if(!isDefined(var_0._id_2287)) {
     var_0._id_2287 = 1;
-
   }
   self._id_2286 = var_0._id_2286;
   var_1 = 1;
@@ -402,11 +381,9 @@ _id_2285() {
 
       if(isDefined(var_3[var_4]._id_2286) && var_3[var_4]._id_2286 == self._id_2286) {
         var_5 = 0;
-
       }
       if(isDefined(var_3[var_4]._id_2196)) {
         var_5 = 1;
-
       }
       if(var_5) {
         var_2[var_2.size] = var_3[var_4];
@@ -417,7 +394,6 @@ _id_2285() {
       var_3 = maps\_utility::_id_2288(var_0.origin, undefined, var_2);
     } else {
       var_3 = maps\_utility::_id_1EE9(var_0.origin, undefined);
-
     }
     var_2 = undefined;
 
@@ -435,7 +411,6 @@ _id_2285() {
 _id_2289() {
   if(!isDefined(self._id_2275)) {
     self._id_2275 = "manual_ai";
-
   }
   var_0 = getnode(self.target, "targetname");
 
@@ -454,7 +429,6 @@ _id_2289() {
     var_2 = 1;
   } else {
     var_2 = 0;
-
   }
   for(;;) {
     if(self.count == 0) {
@@ -490,7 +464,6 @@ _id_228A(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_2 delete();
-
   }
   if(isDefined(var_3)) {
     var_3 delete();
@@ -520,15 +493,12 @@ _id_228B(var_0, var_1, var_2) {
 _id_228C() {
   if(!isDefined(level._id_228D)) {
     return 0;
-
   }
   if(level.player getstance() == "prone") {
     return 1;
-
   }
   if(level._id_228E == "cow" && level.player getstance() == "crouch") {
     return 1;
-
   }
   return 0;
 }
@@ -538,7 +508,6 @@ _id_228F() {
     return (0, 0, 5);
   } else if(level.player getstance() == "crouch") {
     return (0, 0, 25);
-
   }
   return (0, 0, 50);
 }
@@ -564,9 +533,8 @@ _id_2290(var_0, var_1) {
   var_3 = spawn("script_model", (0, 0, 0));
   var_3.scale = 3;
 
-  if(getdvar("mg42") != "off") {
+  if(getDvar("mg42") != "off") {
     var_3 setModel("temp");
-
   }
   var_3 thread _id_2297(var_0, var_2);
   level thread _id_228A(self, "death", var_2, var_3);
@@ -599,7 +567,6 @@ _id_2290(var_0, var_1) {
         var_7 = var_7 + var_12;
       } else {
         self notify("next_target");
-
       }
       var_2.origin = var_7;
       wait 0.1;
@@ -611,7 +578,6 @@ _id_2290(var_0, var_1) {
 
         if(_id_228C()) {
           var_13 = 2;
-
         }
         wait(var_9);
       }
@@ -648,7 +614,6 @@ _id_2290(var_0, var_1) {
           var_7 = var_7 + var_12;
         } else {
           self notify("next_target");
-
         }
         var_2.origin = var_7;
         wait 0.1;
@@ -700,7 +665,6 @@ _id_2290(var_0, var_1) {
 
       while(isDefined(level._id_228D)) {
         wait 0.2;
-
       }
       wait(0.75 + randomfloat(0.2));
     }
@@ -715,7 +679,6 @@ _id_2295(var_0) {
 
     for(var_2 = 0; var_2 < var_0.size; var_2++) {
       var_1[var_2] = 0;
-
     }
     for(var_2 = 0; var_2 < var_0.size; var_2++) {
       self._id_2293 = randomint(var_0.size);
@@ -753,7 +716,7 @@ _id_2296(var_0, var_1, var_2) {
 }
 
 _id_2297(var_0, var_1) {
-  if(getdvar("mg42") == "off") {
+  if(getDvar("mg42") == "off") {
     return;
   }
   self._id_2294 = self;
@@ -770,13 +733,11 @@ _id_2298(var_0) {
 
   if(isDefined(var_1._id_229A)) {
     var_2 = var_1._id_229A;
-
   }
   var_3 = 2;
 
   if(isDefined(var_1._id_229B)) {
     var_2 = var_1._id_229B;
-
   }
   for(;;) {
     var_1 waittill("turret_deactivate");
@@ -844,7 +805,6 @@ _id_229F(var_0, var_1) {
 _id_22A3(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 0.88;
-
   }
   self endon("death");
   self notify("stop_mg42_target_drones");
@@ -853,11 +813,9 @@ _id_22A3(var_0, var_1, var_2) {
 
   if(!isDefined(self._id_22A5)) {
     self._id_22A5 = 0;
-
   }
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   self setmode("manual_ai");
   var_3 = maps\_utility::_id_229D();
@@ -866,7 +824,6 @@ _id_22A3(var_0, var_1, var_2) {
     var_4 = 1;
   } else {
     var_4 = 0;
-
   }
   for(;;) {
     if(var_4) {
@@ -876,21 +833,19 @@ _id_22A3(var_0, var_1, var_2) {
         self setmode("auto_nonai");
       } else {
         self setmode("auto_ai");
-
       }
       level waittill("new_drone");
     }
 
     if(!isDefined(self._id_22A8)) {
       self._id_22A8 = self.convergencetime;
-
     }
     self.convergencetime = 2;
 
     if(!var_0) {
       var_5 = self getturretowner();
 
-      if(!isalive(var_5) || isplayer(var_5)) {
+      if(!isalive(var_5) || isPlayer(var_5)) {
         wait 0.05;
         continue;
       } else {
@@ -898,13 +853,11 @@ _id_22A3(var_0, var_1, var_2) {
       }
     } else {
       var_5 = undefined;
-
     }
     if(var_1 == "allies") {
       var_6 = "axis";
     } else {
       var_6 = "allies";
-
     }
     while(level._id_1FFB[var_6]._id_22A9) {
       common_scripts\utility::lock("mg42_drones");
@@ -929,13 +882,11 @@ _id_22A3(var_0, var_1, var_2) {
 
       if(isDefined(self._id_22AA)) {
         [[self._id_22AA]]();
-
       }
       if(var_0) {
         self setmode("manual");
       } else {
         self setmode("manual_ai");
-
       }
       self settargetentity(var_7, (0, 0, 32));
       _id_22AB(var_7, 1, var_2);
@@ -1080,19 +1031,15 @@ _id_1F07(var_0) {
 
       if(isDefined(var_8.leftarc)) {
         var_5._id_0F7A.leftarc = min(var_8.leftarc, 45);
-
       }
       if(isDefined(var_8.rightarc)) {
         var_5._id_0F7A.rightarc = min(var_8.rightarc, 45);
-
       }
       if(isDefined(var_8.toparc)) {
         var_5._id_0F7A.toparc = min(var_8.toparc, 15);
-
       }
       if(isDefined(var_8.bottomarc)) {
         var_5._id_0F7A.bottomarc = min(var_8.bottomarc, 15);
-
       }
       var_2[var_11] = undefined;
       var_8 delete();
@@ -1319,7 +1266,6 @@ _id_22C0(var_0) {
 
   if(var_3 == "ambush") {
     thread _id_22BD(var_0);
-
   }
   if(var_2._id_0FA8) {
     _id_22C2(var_2);
@@ -1332,7 +1278,6 @@ _id_22C0(var_0) {
 
   if(var_3 == "ambush") {
     _id_22BF(var_2, var_0);
-
   }
   var_2 settargetentity(var_0);
 }
@@ -1381,7 +1326,6 @@ _id_22C5(var_0) {
 
   if(self isbadguy()) {
     self.health = 1;
-
   }
   self._id_0FBC = % saw_gunner_run_fast;
   self._id_0FC0 = % saw_gunner_run_fast;
@@ -1403,11 +1347,9 @@ _id_22C5(var_0) {
 
   if(self isbadguy()) {
     self.health = var_1;
-
   }
   if(soundexists("weapon_setup")) {
     thread common_scripts\utility::play_sound_in_space("weapon_setup");
-
   }
   self animscripted("setup_done", var_0.origin, var_0.angles, var_2);
   _id_114E();
@@ -1433,7 +1375,6 @@ _id_22C9() {
 _id_22CA() {
   if(!isDefined(self._id_0A50)) {
     return 0;
-
   }
   return self._id_0A50.owner == self;
 }
@@ -1477,7 +1418,6 @@ _id_22CB() {
     _id_22C2(var_5);
   } else {
     _id_22C5(var_5);
-
   }
   maps\_mg_penetration::_id_0A47(var_2._id_0A50);
 }
@@ -1643,7 +1583,6 @@ _id_22D7(var_0) {
 
   if(!isDefined(var_1)) {
     return 0;
-
   }
   return var_1 == self;
 }

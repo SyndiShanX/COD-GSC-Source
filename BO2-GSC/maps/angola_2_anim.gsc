@@ -139,15 +139,17 @@ play_signature_boat_fx_launch() {
 play_sig_splash_effect(guy) {
   boat = getent("small_sig_gunboat", "targetname");
 
-  if(isDefined(boat))
+  if(isDefined(boat)) {
     boat play_fx("splash_fx", boat.origin, boat.angles);
+  }
 }
 
 play_splash_effect(guy) {
   boat = getent("small_gunboat_anim", "targetname");
 
-  if(isDefined(boat))
+  if(isDefined(boat)) {
     boat play_fx("splash_fx", boat.origin, boat.angles);
+  }
 }
 
 hudson_ladders() {
@@ -164,8 +166,9 @@ gunboat_right_ram_fx(gunboat) {
   level.player playrumbleonentity("explosion_generic");
   level.main_barge play_fx("barge_water_right", level.main_barge.origin, level.main_barge.angles, undefined, 1, "tag_origin");
 
-  if(isDefined(gunboat))
+  if(isDefined(gunboat)) {
     physicsexplosionsphere(gunboat.origin, 3000, 1000, 0.5);
+  }
 }
 
 gunboat_left_ram_fx(gunboat) {
@@ -175,8 +178,9 @@ gunboat_left_ram_fx(gunboat) {
   level.player playrumbleonentity("explosion_generic");
   level.main_barge play_fx("barge_water_left", level.main_barge.origin, level.main_barge.angles, undefined, 1, "tag_origin");
 
-  if(isDefined(gunboat))
+  if(isDefined(gunboat)) {
     physicsexplosionsphere(gunboat.origin, 3000, 1000, 0.5);
+  }
 }
 
 #using_animtree("vehicles");
@@ -219,8 +223,9 @@ machete_blackscreen_start(guy) {
 }
 
 machete_blackscreen_end(guy) {
-  if(isDefined(level.machete_blackscreen_on))
+  if(isDefined(level.machete_blackscreen_on)) {
     level screen_fade_in(0);
+  }
 }
 
 machete_punch(guy) {
@@ -540,8 +545,9 @@ start_barge_sinking(guy) {
   level waittill("save_woods_swim_started");
   wait 1;
 
-  foreach(m_anim_model in a_actors)
-  level.main_barge thread anim_single_aligned(m_anim_model, "barge_sink_fxanims");
+  foreach(m_anim_model in a_actors) {
+    level.main_barge thread anim_single_aligned(m_anim_model, "barge_sink_fxanims");
+  }
 
   n_time = getanimlength(level.scr_anim["sinking_barge_barrels"]["barge_sink_fxanims"]);
   wait 2;

@@ -21,9 +21,9 @@ mainDebug() {
   if(getdebugdvar("debug_corner") == "") {
     setDvar("debug_corner", "off");
   } else {
-  if(getdebugdvar("debug_corner") == "on") {
-    debug_corner();
-  }
+    if(getdebugdvar("debug_corner") == "on") {
+      debug_corner();
+    }
   }
   if(getDvar("chain") == "1") {
     thread debugchains();

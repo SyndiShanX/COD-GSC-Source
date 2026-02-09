@@ -484,7 +484,7 @@ func_E06B() {
 }
 
 func_9D11(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(scripts\engine\utility::within_fov(self.origin, self.angles, var_0.origin, 0.766)) {
       if(isDefined(var_0.var_11413) || lib_0F25::func_1140D()) {
         return 1;

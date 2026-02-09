@@ -32,7 +32,7 @@ pickedupballisticknife() {
 }
 
 trackassists(attacker, damage, isflare) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -483,7 +483,7 @@ disarmedhackedcarepackage() {
 }
 
 destroyed_car() {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -595,7 +595,7 @@ function_90185171(totaltimeplayed, credits, casexp) {
 
   player = self;
 
-  if(!isDefined(player) || !isplayer(player) || isbot(player)) {
+  if(!isDefined(player) || !isPlayer(player) || isbot(player)) {
     return;
   }
 
@@ -785,7 +785,7 @@ gameend(winner, var_c1e98979) {
     if(isDefined(winner) && isDefined(level.teams[winner])) {
       data.winner = winner;
     }
-  } else if(isDefined(winner) && isplayer(winner)) {
+  } else if(isDefined(winner) && isPlayer(winner)) {
     data.winner = winner;
   }
 
@@ -897,7 +897,7 @@ function_57d8515c() {
     players = getplayers();
 
     foreach(player in players) {
-      if(!isDefined(player) || !isplayer(player) || isbot(player)) {
+      if(!isDefined(player) || !isPlayer(player) || isbot(player)) {
         continue;
       }
 
@@ -913,13 +913,13 @@ function_57d8515c() {
 }
 
 getfinalkill(player) {
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     player stats::function_dad108fa(#"get_final_kill", 1);
   }
 }
 
 destroy_killstreak_vehicle(weapon, vehicle, hatchet_kill_stat) {
-  if(!isplayer(self) || !isDefined(weapon)) {
+  if(!isPlayer(self) || !isDefined(weapon)) {
     return;
   }
 
@@ -949,7 +949,7 @@ capturedcrate(owner) {
 }
 
 destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehicle = 1) {
-  if(!isplayer(self) || !isDefined(weapon)) {
+  if(!isPlayer(self) || !isDefined(weapon)) {
     return;
   }
 
@@ -1468,7 +1468,7 @@ calledincarepackage() {
 }
 
 destroyedhelicopter(attacker, weapon, damagetype, playercontrolled) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -1497,7 +1497,7 @@ destroyedplayercontrolledaircraft() {
 }
 
 destroyedaircraft(attacker, weapon, playercontrolled, lethal = 1) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -1593,7 +1593,7 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shitloc, atta
 
   self.anglesondeath = self getplayerangles();
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker.anglesonkill = attacker getplayerangles();
   }
 
@@ -1807,7 +1807,7 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shitloc, atta
     }
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     data.attackerorigin = attacker.origin;
     data.attackerforward = anglesToForward(attacker.anglesonkill);
     data.attackeronground = attacker isonground();
@@ -1892,7 +1892,7 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shitloc, atta
       var_8ddd9a81 = getplayers(attacker.team);
 
       foreach(attacking_player in var_8ddd9a81) {
-        if(!isplayer(attacking_player)) {
+        if(!isPlayer(attacking_player)) {
           continue;
         }
 
@@ -2009,7 +2009,7 @@ waitandprocessplayerkilledcallback(data) {
   waitframe(1);
   util::waittillslowprocessallowed();
 
-  if(isDefined(data.weapon) && data.weapon != level.weaponnone && isDefined(data.attacker) && isplayer(data.attacker)) {
+  if(isDefined(data.weapon) && data.weapon != level.weaponnone && isDefined(data.attacker) && isPlayer(data.attacker)) {
     level thread dochallengecallback("playerKilled", data);
   }
 

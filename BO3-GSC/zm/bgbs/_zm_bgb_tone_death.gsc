@@ -39,7 +39,7 @@ function function_1473087b() {
 }
 
 function actor_death_override(e_attacker) {
-  if(self.archetype !== "zombie" || !isplayer(e_attacker)) {
+  if(self.archetype !== "zombie" || !isPlayer(e_attacker)) {
     return;
   }
   if(e_attacker bgb::is_enabled("zm_bgb_tone_death")) {

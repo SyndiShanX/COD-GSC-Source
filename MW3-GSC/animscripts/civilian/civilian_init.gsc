@@ -113,11 +113,9 @@ _id_4088() {
 
     if(isDefined(level._id_0C59[self._id_1032]["dodge_left"])) {
       var_0 = level._id_0C59[self._id_1032]["dodge_left"];
-
     }
     if(isDefined(level._id_0C59[self._id_1032]["dodge_right"])) {
       var_1 = level._id_0C59[self._id_1032]["dodge_right"];
-
     }
     animscripts\move::_id_10D0(var_0, var_1);
   }
@@ -128,7 +126,6 @@ _id_4088() {
     maps\_utility::_id_2722();
   } else {
     maps\_utility::_id_2721();
-
   }
   self._id_0FBC = level._id_0C59[self._id_1032]["run_noncombat"];
   self._id_1081 = self._id_0FBC;
@@ -152,7 +149,6 @@ _id_4089() {
     var_0 = 1;
   } else if(isDefined(self._id_408B)) {
     var_0 = 0;
-
   }
   if(var_0) {
     self._id_10C3 = animscripts\civilian\civilian_move::_id_407D;
@@ -183,7 +179,6 @@ _id_408C() {
       _id_4088();
     } else if(!var_0 && var_1) {
       _id_4089();
-
     }
     var_0 = var_1;
     wait 0.05;

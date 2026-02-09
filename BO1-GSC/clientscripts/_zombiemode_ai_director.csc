@@ -1,6 +1,6 @@
 /*****************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_ai_director.csc
+ * Script: clientscripts\_zombiemode_ai_director\.csc
 *****************************************************/
 
 #include clientscripts\_utility;
@@ -20,11 +20,10 @@ init() {
   level._effect["director_impact_humangun_upgraded"] = loadfx("weapon/human_gun/fx_hgun_impact_exp_lrg_ug");
   level thread zombie_director_aggro();
 }
-
 zombie_director_aggro() {
   while(1) {
     level waittill("ZDA");
-    players = getLocalPlayers();
+    players = GetLocalPlayers();
     for(i = 0; i < players.size; i++) {
       player = players[i];
       PlayRumbleOnPosition(i, "explosion_generic", player.origin);
@@ -32,7 +31,6 @@ zombie_director_aggro() {
     }
   }
 }
-
 player_blur() {
   self endon("death");
   self endon("disconnect");
@@ -44,7 +42,6 @@ player_blur() {
     self.blurred = undefined;
   }
 }
-
 zombie_director_light_update(local_client_num, set, newEnt) {
   self endon("death");
   self endon("entityshutdown");
@@ -54,7 +51,7 @@ zombie_director_light_update(local_client_num, set, newEnt) {
   if(!isDefined(self.humangun_zombie_hit_response)) {
     self.humangun_zombie_hit_response = ::humangun_director_hit_response;
   }
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   if(!isDefined(self.health_state)) {
     self.health_state = "pristine";
     self.health_fx = "director_weapon_docile";
@@ -81,14 +78,13 @@ zombie_director_light_update(local_client_num, set, newEnt) {
     player._zombie_director_light_fx = playFXOnTag(i, level._effect[self.health_fx], self, "tag_light");
   }
 }
-
 zombie_director_death(local_client_num, set, newEnt) {
   self endon("death");
   self endon("entityshutdown");
   if(local_client_num != 0) {
     return;
   }
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   if(set) {
     for(i = 0; i < players.size; i++) {
       player = players[i];
@@ -117,14 +113,13 @@ zombie_director_death(local_client_num, set, newEnt) {
     }
   }
 }
-
 humangun_director_hit_response(local_client_num, set, newEnt, upgraded) {
   self endon("death");
   self endon("entityshutdown");
   if(local_client_num != 0) {
     return;
   }
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(isDefined(player._zombie_director_impact_humangun_fx)) {

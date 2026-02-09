@@ -55,7 +55,6 @@ function_ee150fcc(team, team_players) {
     if(var_f8896168) {
       var_ab9e77bf[party.party_id] = party.var_a15e4438;
     }
-
   }
 
   var_6195506c = 0;
@@ -621,7 +620,6 @@ function_a9822793() {
     println("<dev string:x38>" + "<dev string:x111>");
     function_a9bfa6d6();
   }
-
 }
 
 function_a9bfa6d6() {
@@ -719,7 +717,7 @@ function_1aa0418f() {
     players = getplayers();
 
     if(players.size > 0 && players[0] isstreamerready()) {
-      setdvar(#"devgui_bot", "<dev string:x247>");
+      setDvar(#"devgui_bot", "<dev string:x247>");
       wait 3;
       function_a9822793();
       wait 1;

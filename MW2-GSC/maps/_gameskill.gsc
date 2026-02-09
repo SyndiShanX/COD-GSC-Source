@@ -11,7 +11,7 @@
 // this script handles all major global gameskill considerations
 setSkill(reset) {
   if(!isDefined(level.script))
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
 
   if(!isDefined(reset) || reset == false) {
     if(isDefined(level.gameSkill)) {
@@ -23,7 +23,7 @@ setSkill(reset) {
     level.global_damage_func_ads = ::empty_kill_func;
     level.global_damage_func = ::empty_kill_func;
     level.global_kill_func = ::empty_kill_func;
-    if(GetDvar("arcademode") == "1")
+    if(getDvar("arcademode") == "1")
       thread maps\_arcademode::main();
 
     // first init stuff
@@ -93,8 +93,8 @@ setSkill(reset) {
   anim.run_accuracy = 0.5;
   anim.walk_accuracy = 0.8;
 
-  // if( GetDvar( "autodifficulty_frac" ) == "" )
-  SetDvar("autodifficulty_frac", 0); // disabled for now
+  // if( getDvar( "autodifficulty_frac" ) == "" )
+  setDvar("autodifficulty_frac", 0); // disabled for now
 
   level.difficultySettings_frac_data_points = [];
 
@@ -303,7 +303,7 @@ setSkill(reset) {
   updateAllDifficulty();
 
   // not sure what to do with this
-  SetDvar("autodifficulty_original_setting", level.gameskill);
+  setDvar("autodifficulty_original_setting", level.gameskill);
   SetSavedDvar("player_meleeDamageMultiplier", 100 / 250);
 }
 
@@ -383,7 +383,7 @@ updateAllDifficulty() {
 }
 
 setDifficulty() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   Assert(isDefined(self.gameskill));
 
   self set_difficulty_from_locked_settings();
@@ -472,7 +472,7 @@ aa_should_start_fresh() {
 }
 
 apply_difficulty_frac_with_func(difficulty_func, current_frac) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   // TODO: put these properties on the player somehow
 
   //prof_begin( "apply_difficulty_frac_with_func" );
@@ -520,7 +520,7 @@ update_player_attacker_accuracy() {
 }
 
 apply_difficulty_step_with_func(difficulty_func, current_frac) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   // TODO: put these properties on the player somehow
 
   //prof_begin( "apply_difficulty_step_with_func" );
@@ -611,7 +611,7 @@ pain_protection_check() {
   if(!isalive(self.enemy))
     return false;
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return false;
 
   if(!isalive(level.painAI) || level.painAI.script != "pain")
@@ -743,7 +743,7 @@ axisAccuracyControl()
 	//prof_begin( "axisAccuracyControl" );
 	
 	SetDvarIfUninitialized( "scr_dynamicaccuracy", "off" );
-	if( GetDvar( "scr_dynamicaccuracy" ) != "on" )
+	if( getDvar( "scr_dynamicaccuracy" ) != "on" )
 	{
 // 		self simpleAccuracyControl();
 	}
@@ -756,7 +756,7 @@ axisAccuracyControl()
 			
 			//prof_begin( "axisAccuracyControl" );
 			
-			if( isDefined( self.enemy ) && IsPlayer( self.enemy ) && self CanSee( self.enemy ) )
+			if( isDefined( self.enemy ) && isPlayer( self.enemy ) && self CanSee( self.enemy ) )
 			{
 				self.a.accuracyGrowthMultiplier += 0.05 * anim.accuracyGrowthRate;
 				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax )
@@ -791,7 +791,7 @@ set_accuracy_based_on_situation() {
     return;
   }
 
-  if(IsPlayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     resetMissDebounceTime();
     if(self.a.missTime > GetTime()) {
       self.accuracy = 0;
@@ -829,7 +829,7 @@ setSniperAccuracy() {
   self.sniperShotCount++;
 
   gameskill = level.gameskill;
-  if(IsPlayer(self.enemy))
+  if(isPlayer(self.enemy))
     gameskill = self.enemy.gameskill;
 
   if(shouldForceSniperMissShot()) {
@@ -889,7 +889,7 @@ waitTimeIfPlayerIsHit() {
   if(!isalive(self.enemy))
     return waittime;
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return waittime;
 
   if(self.enemy ent_flag("player_is_invulnerable"))
@@ -924,7 +924,7 @@ resetMissTime() {
     return;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     self.accuracy = self.baseAccuracy;
     //prof_end( "resetMissTime" );
     return;
@@ -1152,7 +1152,7 @@ playerHurtcheck() {
 
 /*draw_player_health_packets()
 {
-	Assert( IsPlayer( self ) );
+	Assert( isPlayer( self ) );
 
 	packets = [];
 	red = ( 1, 0, 0 );
@@ -1222,7 +1222,7 @@ playerHurtcheck() {
 }*/
 
 player_health_packets() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   // 	thread draw_player_health_packets();
   self.player_health_packets = 3;
@@ -1245,7 +1245,7 @@ playerHealthRegenInit() {
 }
 
 playerHealthRegen() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   //prof_begin( "playerHealthRegen" );
 
@@ -1289,7 +1289,7 @@ playerHealthRegen() {
     }
 
     if(self.health <= 0) {
-      /#showHitLog();
+      showHitLog();
       //prof_end( "playerHealthRegen" );
       return;
     }
@@ -1374,7 +1374,6 @@ playerHealthRegen() {
         self.deathInvulnerableTimeout = 0;
       if(self.deathInvulnerableTimeout < GetTime())
         self.deathInvulnerableTimeout = GetTime() + self.deathInvulnerableTime;
-
     }
 
     oldRatio = self.health / self.maxHealth;
@@ -1385,7 +1384,7 @@ playerHealthRegen() {
     thread blurView(3, 0.8);
 
     if(!invulWorthyHealthDrop) {
-      /#logHit( self.health, 0 );
+      logHit(self.health, 0);
       continue;
     }
     if(self ent_flag("player_is_invulnerable"))
@@ -1402,7 +1401,7 @@ playerHealthRegen() {
       invulTime = self.gs.invulTime_preShield;
     }
 
-    /#logHit( self.health, invulTime );
+    logHit(self.health, invulTime);
     lastinvulratio = self.health / self.maxHealth;
 
     self thread playerInvul(invulTime);
@@ -1412,7 +1411,7 @@ playerHealthRegen() {
 }
 
 reduceTakeCoverWarnings() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   //prof_begin( "reduceTakeCoverWarnings" );
 
@@ -1424,7 +1423,7 @@ reduceTakeCoverWarnings() {
     if(takeCoverWarnings > 0) {
       takeCoverWarnings--;
       self SetLocalPlayerProfileData("takeCoverWarnings", takeCoverWarnings);
-      /#DebugTakeCoverWarnings();
+      DebugTakeCoverWarnings();
     }
   }
 
@@ -1502,7 +1501,7 @@ showHitLog() {
 }
 
 playerInvul(timer) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(isDefined(self.flashendtime) && self.flashendtime > GetTime())
     timer = timer * getCurrentDifficultySetting("flashbangedInvulFactor");
@@ -1564,7 +1563,7 @@ grenadeAwareness() {
 }
 
 blurView(blur, timer) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   if(ent_flag("player_no_auto_blur")) {
     return;
   }
@@ -1576,7 +1575,7 @@ blurView(blur, timer) {
 }
 
 playerBreathingSound(healthcap) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   wait(2);
   for(;;) {
@@ -1595,7 +1594,7 @@ playerBreathingSound(healthcap) {
 }
 
 healthOverlay() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   self endon("noHealthOverlay");
   //prof_begin( "healthOverlay" );
@@ -1731,7 +1730,7 @@ add_hudelm_position_internal(alignY) {
 }
 
 create_warning_elem() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   hudelem = NewClientHudElem(self);
   hudelem add_hudelm_position_internal();
@@ -1755,7 +1754,7 @@ waitTillPlayerIsHitAgain() {
 }
 
 destroy_warning_elem_when_hit_again(hudelem) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   hudelem endon("being_destroyed");
 
@@ -1851,7 +1850,7 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
 }
 
 take_cover_warnings_enabled() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(isDefined(level.cover_warnings_disabled)) {
     AssertEx(level.cover_warnings_disabled, "level.cover_warnings_disabled must be true or undefined");
@@ -1865,7 +1864,7 @@ take_cover_warnings_enabled() {
 }
 
 should_show_cover_warning() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(!isAlive(self))
     return false;
@@ -1898,7 +1897,7 @@ should_show_cover_warning() {
 // You are Hurt. Get to Cover!
 // &"GAME_GET_TO_COVER";
 take_cover_warning() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   self endon("hit_again");
   self endon("damage");
@@ -1961,7 +1960,7 @@ player_recovers_from_red_flashing() {
 }
 
 healthOverlay_remove(overlay) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   self waittill("noHealthOverlay");
   overlay Destroy();
@@ -1989,7 +1988,7 @@ init_take_cover_warnings() {
     self SetLocalPlayerProfileData("takeCoverWarnings", 9);
   }
 
-  /#DebugTakeCoverWarnings();
+  DebugTakeCoverWarnings();
 }
 
 increment_take_cover_warnings_on_death() {
@@ -2008,11 +2007,11 @@ increment_take_cover_warnings_on_death() {
   if(warnings < 10)
     self SetLocalPlayerProfileData("takeCoverWarnings", warnings + 1);
 
-  /#DebugTakeCoverWarnings();
+  DebugTakeCoverWarnings();
 }
 
 auto_adjust_difficulty_player_positioner() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   org = self.origin;
   // 	thread debug_message( ".", org, 6 );
@@ -2022,7 +2021,7 @@ auto_adjust_difficulty_player_positioner() {
 }
 
 autospot_is_close_to_player(org) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   return DistanceSquared(self.origin, org) < (140 * 140);
 }
@@ -2060,7 +2059,7 @@ auto_adjust_difficulty_track_player_death() {
   level.player waittill("death");
   num = GetDvarInt("autodifficulty_playerDeathTimer");
   num -= 60;
-  SetDvar("autodifficulty_playerDeathTimer", num);
+  setDvar("autodifficulty_playerDeathTimer", num);
   // 	scriptPrintln( "script_autodifficulty", "Set deathtimer to " + num );
 }
 
@@ -2251,12 +2250,12 @@ hud_debug_add_second_string(num, offset) {
 }
 
 aa_init_stats() {
-  if(GetDvar("createfx") == "on")
+  if(getDvar("createfx") == "on")
     return;
   if(GetDvarInt("noder") || GetDvarInt("painter")) {
     return;
   }
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -2264,16 +2263,16 @@ aa_init_stats() {
 
   level.sp_stat_tracking_func = maps\_gameskill::auto_adjust_new_zone;
 
-  SetDvar("aa_player_kills", "0");
-  SetDvar("aa_enemy_deaths", "0");
-  SetDvar("aa_enemy_damage_taken", "0");
-  SetDvar("aa_player_damage_taken", "0");
-  SetDvar("aa_player_damage_dealt", "0");
-  SetDvar("aa_ads_damage_dealt", "0");
-  SetDvar("aa_time_tracking", "0");
-  SetDvar("aa_deaths", "0");
+  setDvar("aa_player_kills", "0");
+  setDvar("aa_enemy_deaths", "0");
+  setDvar("aa_enemy_damage_taken", "0");
+  setDvar("aa_player_damage_taken", "0");
+  setDvar("aa_player_damage_dealt", "0");
+  setDvar("aa_ads_damage_dealt", "0");
+  setDvar("aa_time_tracking", "0");
+  setDvar("aa_deaths", "0");
 
-  SetDvar("player_cheated", 0);
+  setDvar("player_cheated", 0);
 
   level.auto_adjust_results = [];
   thread aa_time_tracking();
@@ -2288,7 +2287,7 @@ aa_init_stats() {
 }
 
 command_used(cmd) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   //prof_begin( "command_used" );
 
@@ -2310,9 +2309,9 @@ command_used(cmd) {
 }
 
 aa_time_tracking() {
-  if(GetDvar("createfx") != "")
+  if(getDvar("createfx") != "")
     return;
-  if(GetDvar("scr_generateClipModels") != "" && GetDvar("scr_generateClipModels") != "0")
+  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0")
     return; // shortcut for generating clipmodels gah.
 
   waittillframeend; // so level.start_point is defined
@@ -2321,9 +2320,9 @@ aa_time_tracking() {
 
     //aa_add_event_float( "aa_time_tracking", 0.2 );
 
-    if(IsGodMode(level.player) || level.start_point != "default" || GetDvar("timescale", 1) != "1") {
-      if(GetDvar("player_cheated") != "1")
-        SetDvar("player_cheated", 1);
+    if(IsGodMode(level.player) || level.start_point != "default" || getDvar("timescale", 1) != "1") {
+      if(getDvar("player_cheated") != "1")
+        setDvar("player_cheated", 1);
     }
 
     /*
@@ -2370,7 +2369,7 @@ aa_player_health_tracking() {
 }
 
 auto_adjust_new_zone(zone) {
-  if(GetDvar("createfx") == "on") {
+  if(getDvar("createfx") == "on") {
     return;
   }
   if(!isDefined(level.auto_adjust_flags)) {
@@ -2388,23 +2387,23 @@ auto_adjust_new_zone(zone) {
   //prof_begin( "auto_adjust_new_zone" );
 
   // already processing this zone?
-  if(GetDvar("aa_zone" + zone) == "") {
-    SetDvar("aa_zone" + zone, "on");
+  if(getDvar("aa_zone" + zone) == "") {
+    setDvar("aa_zone" + zone, "on");
     level.auto_adjust_flags[zone] = 1;
     aa_update_flags();
 
-    SetDvar("start_time" + zone, GetDvar("aa_time_tracking"));
+    setDvar("start_time" + zone, getDvar("aa_time_tracking"));
 
     // measure always
-    SetDvar("starting_player_kills" + zone, GetDvar("aa_player_kills"));
-    SetDvar("starting_deaths" + zone, GetDvar("aa_deaths"));
-    SetDvar("starting_ads_damage_dealt" + zone, GetDvar("aa_ads_damage_dealt"));
-    SetDvar("starting_player_damage_dealt" + zone, GetDvar("aa_player_damage_dealt"));
-    SetDvar("starting_player_damage_taken" + zone, GetDvar("aa_player_damage_taken"));
-    SetDvar("starting_enemy_damage_taken" + zone, GetDvar("aa_enemy_damage_taken"));
-    SetDvar("starting_enemy_deaths" + zone, GetDvar("aa_enemy_deaths"));
+    setDvar("starting_player_kills" + zone, getDvar("aa_player_kills"));
+    setDvar("starting_deaths" + zone, getDvar("aa_deaths"));
+    setDvar("starting_ads_damage_dealt" + zone, getDvar("aa_ads_damage_dealt"));
+    setDvar("starting_player_damage_dealt" + zone, getDvar("aa_player_damage_dealt"));
+    setDvar("starting_player_damage_taken" + zone, getDvar("aa_player_damage_taken"));
+    setDvar("starting_enemy_damage_taken" + zone, getDvar("aa_enemy_damage_taken"));
+    setDvar("starting_enemy_deaths" + zone, getDvar("aa_enemy_deaths"));
   } else {
-    if(GetDvar("aa_zone" + zone) == "done") {
+    if(getDvar("aa_zone" + zone) == "done") {
       //prof_end( "auto_adjust_new_zone" );
       return;
     }
@@ -2418,7 +2417,7 @@ auto_adjust_new_zone(zone) {
 auto_adust_zone_complete(zone) {
   //prof_begin( "auto_adust_zone_complete" );
 
-  SetDvar("aa_zone" + zone, "done");
+  setDvar("aa_zone" + zone, "done");
 
   start_time = GetDvarFloat("start_time" + zone);
   starting_player_kills = GetDvarInt("starting_player_kills" + zone);
@@ -2487,7 +2486,7 @@ auto_adust_zone_complete(zone) {
 
   msg = "Completed AA sequence: ";
 
-  if(GetDvar("player_cheated") == "1") {
+  if(getDvar("player_cheated") == "1") {
     msg = "Cheated in AA sequence: ";
   }
 
@@ -2521,12 +2520,12 @@ aa_update_flags() {}
 
 aa_add_event(event, amount) {
   old_amount = GetDvarInt(event);
-  SetDvar(event, old_amount + amount);
+  setDvar(event, old_amount + amount);
 }
 
 aa_add_event_float(event, amount) {
   old_amount = GetDvarFloat(event);
-  SetDvar(event, old_amount + amount);
+  setDvar(event, old_amount + amount);
 }
 
 return_false(attacker) {
@@ -2537,7 +2536,7 @@ player_attacker(attacker) {
   if([[level.custom_player_attacker]](attacker))
     return true;
 
-  if(IsPlayer(attacker))
+  if(isPlayer(attacker))
     return true;
 
   if(!isDefined(attacker.car_damage_owner_recorder))

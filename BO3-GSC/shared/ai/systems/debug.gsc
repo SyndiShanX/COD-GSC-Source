@@ -259,7 +259,7 @@ function debugdrawweightedpoint(entity, point, weight, lowestvalue, highestvalue
 }
 
 function delete_all_ai_corpses() {
-  setdvar("", 0);
+  setDvar("", 0);
   corpses = getcorpsearray();
   foreach(corpse in corpses) {
     if(isactorcorpse(corpse)) {

@@ -87,7 +87,7 @@ friendly_fire_think(var_0) {
         var_8 = 1;
     }
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_8 = 1;
 
       if(isDefined(var_6) && var_6 == "none")
@@ -101,7 +101,7 @@ friendly_fire_think(var_0) {
     } else if(isDefined(var_2.code_classname) && var_2.code_classname == "script_vehicle") {
       var_9 = var_2 getvehicleowner();
 
-      if(isDefined(var_9) && isplayer(var_9))
+      if(isDefined(var_9) && isPlayer(var_9))
         var_8 = 1;
     }
 
@@ -244,7 +244,7 @@ missionfail(var_0) {
   if(!isDefined(var_0))
     var_0 = 0;
 
-  if(getdvar("friendlyfire_dev_disabled") == "1") {
+  if(getDvar("friendlyfire_dev_disabled") == "1") {
     return;
   }
   level.player endon("death");

@@ -88,11 +88,11 @@ main(notifyname, character, node, scr_thread, bitflags) {
   if((isDefined(node)) && (!level.scripted_animation_counter[notifyname])) {
     level.scripted_animation[notifyname][0] notify("anim_notify" + notifyname);
   } else {
-  if(getDvar("debug") == "1") {
-    println("Counter for sequence ", notifyname, " was ", level.scripted_animation_counter[notifyname]);
+    if(getDvar("debug") == "1") {
+      println("Counter for sequence ", notifyname, " was ", level.scripted_animation_counter[notifyname]);
+    }
   }
 }
-  }
 
 checkanim(notifyname, total) {
   doanim = true;

@@ -329,7 +329,6 @@ spawnFrontLineThink() {
         axisTeam[axisTeam.size] = player;
       else
         alliesTeam[alliesTeam.size] = player;
-
     }
 
     alliesAverage = getAverageOrigin(alliesTeam);
@@ -440,7 +439,6 @@ spawnFrontLineThink() {
           Line(drawMidpoint, idealLineEnd, (0, 1, 0), 0, false, CONST_FRONTLINE_UPDATE_SCALE);
           Line(idealLineStart, drawMidpoint, (0, 0.5, 0), 0, false, CONST_FRONTLINE_UPDATE_SCALE);
         }
-
       } else {
         if(useLog)
           [[level.matchRecording_logEvent]](level.frontlineLogIDs["line"], "allies", "FRONT_LINE", 0, 0, GetTime(), undefined, 0, 0);
@@ -452,7 +450,6 @@ spawnFrontLineThink() {
       }
     }
   }
-
 }
 
 correctHomogenization() {
@@ -508,7 +505,7 @@ correctHomogenization() {
     usableEdges[usableEdges.size] = axisStartSpawns[0];
   }
 
-  anchorSpawnType = Int(GetDvar("scr_anchorSpawns"));
+  anchorSpawnType = Int(getDvar("scr_anchorSpawns"));
 
   for(;;) {
     wait(5);
@@ -571,9 +568,7 @@ correctHomogenization() {
 
     level.alliesWeightOrg = alliesAnchorToUse.origin;
     level.axisWeightOrg = axisAnchorToUse.origin;
-
   }
-
 }
 
 detectHomogenization() {
@@ -607,7 +602,6 @@ detectHomogenization() {
   } else {
     return false;
   }
-
 }
 
 preferAlliesByDistance(spawnPoint) {

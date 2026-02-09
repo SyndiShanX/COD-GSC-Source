@@ -18,8 +18,8 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_prison");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -129,7 +129,6 @@ zombieExtractionGates() {
     gate.gate moveto(gate.gate.originalPos, moveTime, .1, .2);
     gate.collision moveto(gate.gate.originalPos, moveTime, .1, .2);
   }
-
 }
 
 disconnectGatePaths() {
@@ -142,7 +141,6 @@ disconnectGatePaths() {
   foreach(gate in level.zombieMovingGates) {
     gate.collision disconnectpaths();
   }
-
 }
 
 bounceGate(delaytime) {
@@ -229,7 +227,6 @@ gasFieldsOn() {
   foreach(trigger in gasFields) {
     trigger trigger_on();
   }
-
 }
 
 gasFieldsOff() {
@@ -238,7 +235,6 @@ gasFieldsOff() {
   foreach(trigger in gasFields) {
     trigger trigger_off();
   }
-
 }
 
 soundWatcher(soundOrg) {

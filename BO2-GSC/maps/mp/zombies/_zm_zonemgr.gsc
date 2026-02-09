@@ -938,8 +938,8 @@ _destroy_debug_zones() {
 _debug_zones() {
   enabled = 0;
 
-  if(getdvar(#"_id_10E35BC4") == "")
-    setdvar("zombiemode_debug_zones", "0");
+  if(getDvar(#"_id_10E35BC4") == "")
+    setDvar("zombiemode_debug_zones", "0");
 
   while(true) {
     wasenabled = enabled;
@@ -984,7 +984,6 @@ _debug_zones() {
           zone.debug_hud[4] settext("");
 
         println("ZM >> DEBUG=" + text);
-
       }
     }
 

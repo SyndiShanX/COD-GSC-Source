@@ -6,13 +6,11 @@
 _id_6854(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(level._id_6855)) {
     level._id_6855 = [];
-
   }
   var_5 = 1;
 
   if(isDefined(var_4)) {
     var_5 = var_4;
-
   }
   var_6 = spawnStruct();
   level._id_6855[level._id_6855.size] = var_6;
@@ -88,7 +86,6 @@ _id_685B(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   for(var_3 = 0; var_3 < level._id_6855.size; var_3++) {
     var_4 = level._id_6855[var_3];
@@ -121,7 +118,6 @@ _id_685C(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   for(var_3 = 0; var_3 < level._id_6855.size; var_3++) {
     var_4 = level._id_6855[var_3];
@@ -153,7 +149,7 @@ _id_685C(var_0, var_1) {
 }
 
 _id_685D() {
-  if(getdvar("snd_staticDebug") == "") {
+  if(getDvar("snd_staticDebug") == "") {
     return;
   }
 }
@@ -161,7 +157,6 @@ _id_685D() {
 _id_685E() {
   if(!isDefined(level._id_6855)) {
     level._id_6855 = [];
-
   }
   thread _id_685D();
 
@@ -171,7 +166,6 @@ _id_685E() {
     if(var_1._id_6856["active"] == 1) {
       if(var_1._id_6856["type"] == "looping") {
         var_1 thread _id_6859();
-
       }
       if(var_1._id_6856["type"] == "oneshot") {
         var_1 thread _id_685A();

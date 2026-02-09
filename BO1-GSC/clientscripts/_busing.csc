@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_busing.csc
+ * Script: clientscripts\_busing\.csc
 **************************************/
 
 busInit() {
@@ -12,12 +12,12 @@ busInit() {
   thread busSaveWait();
   clientscripts\_utility::registerSystem("busCmd", ::busCmdHandler);
 }
-
 busSaveWait() {
   for(;;) {
     level waittill("save_restore");
-    if(level.nextBusState == "")
+    if(level.nextBusState == "") {
       level.nextBusState = level.activeBusState;
+    }
     level.activeBusState = "";
     if(level.nextBusState == "") {
       busStateDeactivate();
@@ -27,7 +27,6 @@ busSaveWait() {
     thread updateBus(false);
   }
 }
-
 busCmdHandler(clientNum, state, oldState) {
   if(clientNum != 0) {
     return;
@@ -36,13 +35,11 @@ busCmdHandler(clientNum, state, oldState) {
   println("bussing debug: got state '" + state + "'");
   level notify("new_bus");
 }
-
 setBusState(state) {
   level.nextBusState = state;
   println("bussing debug: set state '" + state + "'");
   level notify("new_bus");
 }
-
 updateBus(forcefade) {
   level endon("save_restore");
   if(forcefade) {
@@ -70,7 +67,6 @@ updateBus(forcefade) {
     level.activeBusState = next;
   }
 }
-
 busStateActivate(name) {
   println("activating bus '" + name + "'");
   state = level.busStates[name];
@@ -82,11 +78,9 @@ busStateActivate(name) {
   keys = getArrayKeys(state.levels);
   assert(isDefined(keys));
 }
-
 busStateDeactivate() {
   println("deactivating bus ");
 }
-
 declareBusState(name) {
   if(!isDefined(level.busStates)) {
     return;
@@ -99,15 +93,12 @@ declareBusState(name) {
   level.busStates[name].time = 0.5;
   level.busStates[name].levels = [];
 }
-
 busVolume(busname, value) {
   level.busStates[level.busDeclareName].levels[busname] = value;
 }
-
 busFadeTime(time) {
   level.busStates[level.busDeclareName].time = time;
 }
-
 busIsIn(bus, names) {
   for(j = 0; j < names.size; j++) {
     if(bus == names[j]) {
@@ -116,45 +107,51 @@ busIsIn(bus, names) {
   }
   return false;
 }
-
 busVolumes(names, value) {
   for(j = 0; j < names.size; j++) {
     busVolume(names[j], value);
   }
 }
-
 busVolumeAll(value) {}
 argsAsDict(a, b, c, d, e, f, g, h, i) {
   names = [];
-  if(isDefined(a))
+  if(isDefined(a)) {
     names[0] = a;
-  if(isDefined(b))
+  }
+  if(isDefined(b)) {
     names[1] = b;
-  if(isDefined(c))
+  }
+  if(isDefined(c)) {
     names[2] = c;
-  if(isDefined(d))
+  }
+  if(isDefined(d)) {
     names[3] = d;
-  if(isDefined(e))
+  }
+  if(isDefined(e)) {
     names[4] = e;
-  if(isDefined(f))
+  }
+  if(isDefined(f)) {
     names[5] = f;
-  if(isDefined(g))
+  }
+  if(isDefined(g)) {
     names[6] = g;
-  if(isDefined(h))
+  }
+  if(isDefined(h)) {
     names[7] = h;
-  if(isDefined(i))
+  }
+  if(isDefined(i)) {
     names[8] = i;
+  }
   return names;
 }
-
 busVolumesExcept(a, b, c, d, e, f, g, h, i) {
   args = argsAsDict(a, b, c, d, e, f, g, h, i);
   value = args[args.size - 1];
   names = [];
-  for(i = 0; i < args.size - 1; i++)
+  for(i = 0; i < args.size - 1; i++) {
     names[i] = args[i];
+  }
 }
-
 registerDefaults() {
   declareBusState("map_load");
   busFadeTime(.25);

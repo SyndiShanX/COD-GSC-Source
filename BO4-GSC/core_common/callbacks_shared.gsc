@@ -893,13 +893,13 @@ event_handler[sidemission_launch] codecallback_launchsidemission(eventstruct) {
 }
 
 event_handler[ui_fadeblackscreen] codecallback_fadeblackscreen(eventstruct) {
-  if(isplayer(self) && !isbot(self)) {
+  if(isPlayer(self) && !isbot(self)) {
     self thread hud::fade_to_black_for_x_sec(0, eventstruct.duration, eventstruct.blend, eventstruct.blend);
   }
 }
 
 event_handler[event_40f83b44] function_4b5ab05f(eventstruct) {
-  if(isplayer(self) && !isbot(self)) {
+  if(isPlayer(self) && !isbot(self)) {
     self thread hud::fade_to_black_for_x_sec(0, eventstruct.duration, eventstruct.blend_out, eventstruct.blend_in);
   }
 }
@@ -927,7 +927,7 @@ abort_level() {
   level.callbackbotshutdown = &callback_void;
 
   if(isDefined(level._gametype_default)) {
-    setdvar(#"g_gametype", level._gametype_default);
+    setDvar(#"g_gametype", level._gametype_default);
   }
 
   exitlevel(0);

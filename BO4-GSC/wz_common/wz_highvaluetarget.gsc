@@ -41,7 +41,7 @@ __init__() {
 }
 
 function_fbb8f1d1() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -158,7 +158,7 @@ function_9141be4e() {
 
   attacker = self.laststandparams.attacker;
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -193,7 +193,7 @@ function_3f8e4156(params) {
     attacker = params.laststandparams.attacker;
   }
 
-  if(!isplayer(attacker) || attacker.team == self.team || !attacker function_fbb8f1d1()) {
+  if(!isPlayer(attacker) || attacker.team == self.team || !attacker function_fbb8f1d1()) {
     return;
   }
 

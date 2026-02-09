@@ -1,6 +1,6 @@
 /*********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_coast_fx.csc
+ * Script: clientscripts\zombie_coast_fx\.csc
 *********************************************/
 
 #include clientscripts\_utility;
@@ -22,7 +22,6 @@ main() {
   level thread clientscripts\_zombiemode::init_perk_machines_fx();
   level.blizzard = false;
 }
-
 footsteps() {}
 precache_util_fx() {}
 precache_scripted_fx() {
@@ -39,7 +38,6 @@ precache_scripted_fx() {
   level._effect["flare"] = LoadFX("maps/zombie/fx_zmb_coast_flare");
   level._effect["flare_no_dlight"] = LoadFX("maps/zombie/fx_zmb_coast_flare_no_dlight");
 }
-
 precache_createfx_fx() {
   level._effect["fx_zombie_boss_water_intro"] = loadfx("maps/zombie/fx_zombie_boss_water_intro");
   level._effect["fx_zombie_boss_water_boil"] = loadfx("maps/zombie/fx_zombie_boss_water_boil");
@@ -84,7 +82,6 @@ precache_createfx_fx() {
   level._effect["fx_zmb_coast_vault_door_glow"] = loadfx("maps/zombie/fx_zmb_coast_vault_door_glow");
   level._effect["fx_zmb_coast_dest_fuse_box"] = loadfx("maps/zombie/fx_zmb_coast_dest_fuse_box");
 }
-
 manage_player_rain() {
   while(1) {
     time = RandomFloat(10, 30);
@@ -95,10 +92,9 @@ manage_player_rain() {
     realwait(time);
   }
 }
-
 start_player_rain() {
   level endon("stop_player_rain");
-  players = getLocalPlayers();
+  players = getlocalplayers();
   while(1) {
     if(isDefined(players[0])) {
       playFXOnTag(0, level._effect["player_rain"], players[0], "tag_origin");
@@ -107,7 +103,6 @@ start_player_rain() {
   }
   realwait(0.05);
 }
-
 coast_fog_triggers_init(localClientNum) {
   lighthouse_array = getEntArray(localClientNum, "lighthouseFog_interior", "targetname");
   array_thread(lighthouse_array, ::fog_trigger, ::lighthouse_fog_change, 1);
@@ -120,7 +115,6 @@ coast_fog_triggers_init(localClientNum) {
   exterior_array = getEntArray(localClientNum, "exteriorfog_trigger", "targetname");
   array_thread(exterior_array, ::fog_trigger, ::exterior_fog_change, 0);
 }
-
 fog_trigger(change_func, inside_val) {
   while(1) {
     self waittill("trigger", who);
@@ -130,7 +124,6 @@ fog_trigger(change_func, inside_val) {
     }
   }
 }
-
 exterior_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -158,7 +151,6 @@ exterior_fog_change(ent_player) {
     setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 lighthouse_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -186,7 +178,6 @@ lighthouse_fog_change(ent_player) {
     setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 shipfront_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -214,7 +205,6 @@ shipfront_fog_change(ent_player) {
     setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 shipback_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -242,7 +232,6 @@ shipback_fog_change(ent_player) {
     setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 shipIce_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -270,7 +259,6 @@ shipIce_fog_change(ent_player) {
     setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 coast_fog_blizzard(localClientNum, set, newEnt) {
   if(!self isLocalPlayer()) {
     return;

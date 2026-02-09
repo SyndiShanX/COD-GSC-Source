@@ -167,7 +167,7 @@ blinkknife_validatestuckto(var_0) {
     return 0;
   }
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return 0;
   }
 

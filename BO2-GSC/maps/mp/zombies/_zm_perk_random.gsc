@@ -437,7 +437,7 @@ get_weighted_random_perk(player) {
   if(isDefined(level.custom_random_perk_weights))
     keys = player[[level.custom_random_perk_weights]]();
 
-  forced_perk = getdvar(#"_id_B097C64C");
+  forced_perk = getDvar(#"_id_B097C64C");
 
   if(forced_perk != "" && isDefined(level._random_perk_machine_perk_list[forced_perk]))
     arrayinsert(keys, forced_perk, 0);

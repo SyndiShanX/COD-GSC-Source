@@ -22,7 +22,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2A02("explosions/aerial_explosion", "tag_engine_right", "mi17_helicopter_secondary_exp", undefined, undefined, undefined, 2.5, 1);
   maps\_vehicle::_id_2A02("explosions/aerial_explosion", "tag_deathfx", "mi17_helicopter_secondary_exp", undefined, undefined, undefined, 4.0);
   maps\_vehicle::_id_2A02(var_3[var_0], undefined, "mi17_helicopter_crash", undefined, undefined, undefined, -1, undefined, "stop_crash_loop_sound");
-  maps\_vehicle::_id_2AC1( % mi17_heli_rotors, undefined, 0);
+  maps\_vehicle::_id_2AC1(%mi17_heli_rotors, undefined, 0);
   maps\_vehicle::_id_2A02("explosions/grenadeexp_default", "tag_engine_left", "mi17_helicopter_hit", undefined, undefined, undefined, 0.2, 1);
   maps\_vehicle::_id_2A02("explosions/grenadeexp_default", "tag_engine_right", "mi17_helicopter_hit", undefined, undefined, undefined, 0.5, 1);
   maps\_vehicle::_id_2AC5();

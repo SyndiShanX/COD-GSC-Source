@@ -77,7 +77,7 @@ main(model, type) {
   build_light(model, "red_blink1", "TAG_LIGHT_TAIL1", "misc/aircraft_light_red_blink", "running", randomStartDelay);
   build_light(model, "red_blink2", "TAG_LIGHT_TAIL2", "misc/aircraft_light_red_blink", "running", randomStartDelay);
 
-  mapname = getdvar("mapname");
+  mapname = getDvar("mapname");
   if(!isDefined(level.script))
     level.script = tolower(mapname);
 

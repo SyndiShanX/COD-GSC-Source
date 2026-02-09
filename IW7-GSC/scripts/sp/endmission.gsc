@@ -82,9 +82,9 @@ func_1355(var_0) {
   level notify("nextmission");
   level.var_BF95 = 1;
   level.player getrankinfoxpamt();
-  setdvar("ui_showPopup", "0");
-  setdvar("ui_popupString", "");
-  setdvar("ui_prev_map", level.script);
+  setDvar("ui_showPopup", "0");
+  setDvar("ui_popupString", "");
+  setDvar("ui_prev_map", level.script);
   game["previous_map"] = undefined;
   var_1 = func_7F6B(level.script);
   scripts\sp\gameskill::func_262C("aa_main_" + level.script);
@@ -188,7 +188,7 @@ func_1355(var_0) {
   }
 
   if(isDefined(var_9)) {
-    setdvar("last_transition_movie", var_9);
+    setDvar("last_transition_movie", var_9);
     if(!scripts\engine\utility::flag_exist("nextmission_transition_bink_primed")) {
       scripts\engine\utility::flag_init("nextmission_transition_bink_primed");
     }
@@ -768,8 +768,8 @@ func_136A(var_0) {
     }
   }
 
-  if(getdvar("last_transition_movie", "") == var_5) {
-    setdvar("last_transition_movie", "");
+  if(getDvar("last_transition_movie", "") == var_5) {
+    setDvar("last_transition_movie", "");
     return;
   }
 
@@ -983,7 +983,7 @@ func_F77F(var_0) {
 }
 
 func_13CD(var_0) {
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
 
@@ -1251,7 +1251,7 @@ func_7FE6() {
 }
 
 func_6CD9() {
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return 1;
   }
 

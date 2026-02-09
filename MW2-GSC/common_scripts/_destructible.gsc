@@ -83,11 +83,8 @@ warn_about_old_destructible() {
 }
 
 find_destructibles() {
-  //---------------------------------------------------------------------
-  // Find all destructibles by their targetnames and run the setup
-  //---------------------------------------------------------------------
-
-  //	array_thread( getEntArray( "destructible_vehicle", "targetname" ), ::setup_destructibles );
+  //--------------------------------------------------------------------- // Find all destructibles by their targetnames and run the setup
+  //--------------------------------------------------------------------- //	array_thread( getEntArray( "destructible_vehicle", "targetname" ), ::setup_destructibles );
 
   //assuring orders -nate
   vehicles = getEntArray("destructible_vehicle", "targetname");
@@ -130,17 +127,14 @@ find_destructibles() {
 
     level.created_destructibles = undefined;
   }
-
 }
 
 setup_destructibles(cached) {
   if(!isDefined(cached))
     cached = false;
 
-  //---------------------------------------------------------------------
-  // Figure out what destructible information this entity should use
-  //---------------------------------------------------------------------
-  destuctableInfo = undefined;
+  //--------------------------------------------------------------------- // Figure out what destructible information this entity should use
+  //--------------------------------------------------------------------- destuctableInfo = undefined;
   AssertEx(isDefined(self.destructible_type), "Destructible object with targetname 'destructible' does not have a 'destructible_type' key / value");
 
   self.modeldummyon = false; // - nate added for vehicle dummy stuff. This is so I can turn a destructible into a dummy and throw it around on jeepride.
@@ -163,10 +157,8 @@ setup_destructibles(cached) {
 
   add_destructible_fx();
 
-  //---------------------------------------------------------------------
-  // Attach all parts to the entity
-  //---------------------------------------------------------------------
-  if(isDefined(level.destructible_type[self.destuctableInfo].parts)) {
+  //--------------------------------------------------------------------- // Attach all parts to the entity
+  //--------------------------------------------------------------------- if(isDefined(level.destructible_type[self.destuctableInfo].parts)) {
     self.destructible_parts = [];
     for(i = 0; i < level.destructible_type[self.destuctableInfo].parts.size; i++) {
       // create the struct where the info for each entity will be held
@@ -215,10 +207,8 @@ setup_destructibles(cached) {
   if(isDefined(self.target))
     thread destructible_handles_collision_brushes();
 
-  //---------------------------------------------------------------------
-  // Make this entity take damage and wait for events
-  //---------------------------------------------------------------------
-  if(self.code_classname != "script_vehicle")
+  //--------------------------------------------------------------------- // Make this entity take damage and wait for events
+  //--------------------------------------------------------------------- if(self.code_classname != "script_vehicle")
     self setCanDamage(true);
   if(isSP())
     self thread connectTraverses();
@@ -226,10 +216,8 @@ setup_destructibles(cached) {
 }
 
 destructible_create(type, tagName, health, validAttackers, validDamageZone, validDamageCause) {
-  //---------------------------------------------------------------------
-  // Creates a new information structure for a destructible object
-  //---------------------------------------------------------------------
-  Assert(isDefined(type));
+  //--------------------------------------------------------------------- // Creates a new information structure for a destructible object
+  //--------------------------------------------------------------------- Assert(isDefined(type));
 
   if(!isDefined(level.destructible_type))
     level.destructible_type = [];
@@ -254,10 +242,8 @@ destructible_create(type, tagName, health, validAttackers, validDamageZone, vali
 }
 
 destructible_part(tagName, modelName, health, validAttackers, validDamageZone, validDamageCause, alsoDamageParent, physicsOnExplosion, grenadeImpactDeath, receiveDamageFromParent) {
-  //---------------------------------------------------------------------
-  // Adds a part to the last created destructible information structure
-  //---------------------------------------------------------------------
-  destructibleIndex = (level.destructible_type.size - 1);
+  //--------------------------------------------------------------------- // Adds a part to the last created destructible information structure
+  //--------------------------------------------------------------------- destructibleIndex = (level.destructible_type.size - 1);
   Assert(isDefined(level.destructible_type[destructibleIndex].parts));
   Assert(isDefined(level.destructible_type[destructibleIndex].parts.size));
 
@@ -270,13 +256,10 @@ destructible_part(tagName, modelName, health, validAttackers, validDamageZone, v
 }
 
 destructible_state(tagName, modelName, health, validAttackers, validDamageZone, validDamageCause, grenadeImpactDeath, splashRotation) {
-  //---------------------------------------------------------------------
-  // Adds a new part that is a state of the last created part
+  //--------------------------------------------------------------------- // Adds a new part that is a state of the last created part
   // When the previous part reaches zero health this part will show up
   // and the previous part will be removed
-  //---------------------------------------------------------------------
-
-  destructibleIndex = (level.destructible_type.size - 1);
+  //--------------------------------------------------------------------- destructibleIndex = (level.destructible_type.size - 1);
   partIndex = (level.destructible_type[destructibleIndex].parts.size - 1);
   stateIndex = (level.destructible_type[destructibleIndex].parts[partIndex].size);
 
@@ -683,11 +666,8 @@ destructible_info(partIndex, stateIndex, tagName, modelName, health, validAttack
 
 precache_destructibles() {
   // I needed this to be seperate for vehicle scripts.
-  //---------------------------------------------------------------------
-  // Precache referenced models and load referenced effects
-  //---------------------------------------------------------------------
-
-  if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
+  //--------------------------------------------------------------------- // Precache referenced models and load referenced effects
+  //--------------------------------------------------------------------- if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
     return;
   }
   //if( !isDefined( level.precachedModels ) )
@@ -762,11 +742,8 @@ precache_destructibles() {
 
 add_destructible_fx() {
   // I needed this to be seperate for vehicle scripts.
-  //---------------------------------------------------------------------
-  // Precache referenced models and load referenced effects
-  //---------------------------------------------------------------------
-
-  if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
+  //--------------------------------------------------------------------- // Precache referenced models and load referenced effects
+  //--------------------------------------------------------------------- if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
     return;
   }
   //if( !isDefined( level.precachedFX ) )
@@ -819,7 +796,6 @@ add_destructible_fx() {
       }
     }
   }
-
 }
 
 canDamageDestructible(testDestructible) {
@@ -831,11 +807,9 @@ canDamageDestructible(testDestructible) {
 }
 
 destructible_think() {
-  //---------------------------------------------------------------------
-  // Force it to run update part one time first so we can have parts with
+  //--------------------------------------------------------------------- // Force it to run update part one time first so we can have parts with
   // 0 health that will start on level load instead of waiting for damage
-  //---------------------------------------------------------------------
-  damage = 0;
+  //--------------------------------------------------------------------- damage = 0;
   modelName = self.model;
   tagName = undefined;
   point = self.origin;
@@ -844,10 +818,8 @@ destructible_think() {
   damageType = undefined;
   self destructible_update_part(damage, modelName, tagName, point, direction_vec, attacker, damageType);
 
-  //---------------------------------------------------------------------
-  // Wait until this entity takes damage
-  //---------------------------------------------------------------------
-  self endon("stop_taking_damage");
+  //--------------------------------------------------------------------- // Wait until this entity takes damage
+  //--------------------------------------------------------------------- self endon("stop_taking_damage");
   for(;;) {
     // set these to undefined to clear them for each loop to save variables
     damage = undefined;
@@ -876,7 +848,7 @@ destructible_think() {
     if(damage <= 0) {
       continue;
     }
-    if(isDefined(attacker) && IsPlayer(attacker))
+    if(isDefined(attacker) && isPlayer(attacker))
       self.damageOwner = attacker;
 
     type = getDamageType(type);
@@ -950,7 +922,7 @@ is_shotgun_damage(attacker, type) {
     return false;
 
   currentWeapon = undefined;
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     currentweapon = attacker getCurrentWeapon();
   }
 
@@ -1007,11 +979,9 @@ getPartAndStateIndex(modelName, tagName) {
 }
 
 destructible_update_part(damage, modelName, tagName, point, direction_vec, attacker, damageType, partInfo) {
-  //---------------------------------------------------------------------
-  // Find what part this is, or is a child of. If the base model was
+  //--------------------------------------------------------------------- // Find what part this is, or is a child of. If the base model was
   // the entity that was damaged the part index will be -1
-  //---------------------------------------------------------------------
-  if(!isDefined(self.destructible_parts))
+  //--------------------------------------------------------------------- if(!isDefined(self.destructible_parts))
     return;
   if(self.destructible_parts.size == 0) {
     return;
@@ -1027,11 +997,9 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
   if(partIndex < 0) {
     return;
   }
-  //---------------------------------------------------------------------
-  // Deduct the damage amount from the part's health
+  //--------------------------------------------------------------------- // Deduct the damage amount from the part's health
   // If the part runs out of health go to the next state
-  //---------------------------------------------------------------------
-  state_before = stateIndex;
+  //--------------------------------------------------------------------- state_before = stateIndex;
   updateHealthValue = false;
   delayModelSwap = false;
   prof_begin("_destructible");
@@ -1098,7 +1066,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
       validDamageCause = self isValidDamageCause(partIndex, stateIndex, damageType);
       if(validDamageCause) {
         if(isDefined(attacker)) {
-          if(IsPlayer(attacker)) {
+          if(isPlayer(attacker)) {
             self.player_damage += damage;
           } else {
             if(attacker != self)
@@ -1171,15 +1139,12 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
       return;
     }
 
-    //---------------------------------------------------------------------
-    // A state change is required so detach the old model or replace it if
+    //--------------------------------------------------------------------- // A state change is required so detach the old model or replace it if
     // it's the base model that took the damage.
     // Then attach the model ( if specified ) used for the new state
     // Only do this if there is another state to go to, some parts might have
     // fx or anims, or sounds but no next model to go to
-    //---------------------------------------------------------------------
-
-    // if the part is meant to explode on this state set a flag. Actual explosion will be done down below
+    //--------------------------------------------------------------------- // if the part is meant to explode on this state set a flag. Actual explosion will be done down below
     if(isDefined(level.destructible_type[self.destuctableInfo].parts[partIndex][actionStateIndex].v["explode"]))
       self.exploding = true;
 
@@ -1365,7 +1330,6 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
           if(GetDvarInt("debug_destructibles", 0) == 1) {
             thread draw_line_for_time(physTagOrigin, physTagOrigin + initial_velocity, 1, 1, 1, 5.0);
           }
-
         } else {
           initial_velocity = point;
           impactDir = (0, 0, 0);
@@ -1452,11 +1416,8 @@ destructible_splash_damage(damage, point, direction_vec, attacker, damageType) {
   if(isDefined(self.exploded)) {
     return;
   }
-  //------------------------------------------------------------------------
-  // Fill an array of all possible parts that might have been splash damaged
-  //------------------------------------------------------------------------
-
-  if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
+  //------------------------------------------------------------------------ // Fill an array of all possible parts that might have been splash damaged
+  //------------------------------------------------------------------------ if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
     return;
   }
   damagedParts = self getAllActiveParts(direction_vec);
@@ -1469,11 +1430,8 @@ destructible_splash_damage(damage, point, direction_vec, attacker, damageType) {
   closestPartDist = getLowestPartDistance(damagedParts);
   Assert(isDefined(closestPartDist));
 
-  //--------------------------------------------------------------------------
-  // Damage each part depending on how close it was to the splash damage point
-  //--------------------------------------------------------------------------
-
-  prof_begin("_destructible");
+  //-------------------------------------------------------------------------- // Damage each part depending on how close it was to the splash damage point
+  //-------------------------------------------------------------------------- prof_begin("_destructible");
 
   foreach(part in damagedParts) {
     distanceMod = (part.v["distance"] * 1.4);
@@ -1616,7 +1574,7 @@ isAttackerValid(partIndex, stateIndex, attacker) {
     return true;
 
   if(sType == "no_player") {
-    if(!isplayer(attacker))
+    if(!isPlayer(attacker))
       return true;
     if(!isDefined(attacker.damageIsFromPlayer))
       return true;
@@ -1624,7 +1582,7 @@ isAttackerValid(partIndex, stateIndex, attacker) {
       return true;
   } else
   if(sType == "player_only") {
-    if(IsPlayer(attacker))
+    if(isPlayer(attacker))
       return true;
     if(isDefined(attacker.damageIsFromPlayer) && attacker.damageIsFromPlayer)
       return true;
@@ -2350,7 +2308,7 @@ get_player_touching(ent) {
 }
 
 is_so() {
-  return GetDvar("specialops") == "1";
+  return getDvar("specialops") == "1";
 }
 
 destructible_handles_collision_brushes() {
@@ -2400,7 +2358,6 @@ collision_brush_post_explosion(clip) {
       }
     } else {
       thread debug_player_in_post_clip(clip);
-
     }
   }
 
@@ -2413,7 +2370,6 @@ debug_player_in_post_clip(clip) {
   if(isDefined(player)) {
     AssertEx(!IsAlive(player), "Player is in a clip of a destructible, but is still alive. He's either in godmode or we're doing something wrong. Player will be stuck now.");
   }
-
 }
 
 destructible_get_my_breakable_light(range) {
@@ -2598,7 +2554,6 @@ destructible_spotlight_think(action_v, eModel, damageType, partIndex) {
     // can be deleted during wait
     level.destructible_spotlight LinkTo(tag_origin);
   }
-
 }
 
 is_valid_damagetype(damageType, v, idx, groupNum) {

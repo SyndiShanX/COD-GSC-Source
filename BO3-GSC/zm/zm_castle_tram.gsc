@@ -180,7 +180,7 @@ function function_38a21d48() {
   self.health = 100000;
   while(true) {
     self waittill("damage", n_amount, e_attacker, v_direction, v_point, str_type);
-    if(isplayer(e_attacker) && (str_type == "MOD_GRENADE" || str_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(e_attacker) && (str_type == "MOD_GRENADE" || str_type == "MOD_GRENADE_SPLASH")) {
       e_attacker.var_a1ba5103 = 1;
       e_attacker.var_66e0478a = 0;
     }

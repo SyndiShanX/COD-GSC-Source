@@ -175,29 +175,29 @@ updateBar(barFrac, rateOfChange) {
 }
 
 updateBarScale(barFrac, rateOfChange) // rateOfChange is optional and is in "(entire bar lengths) per second"{
-  barWidth = int(self.width * barFrac + 0.5); // (+ 0.5 rounds)
+barWidth = int(self.width * barFrac + 0.5); // (+ 0.5 rounds)
 
-  if(!barWidth)
-    barWidth = 1;
+if(!barWidth)
+  barWidth = 1;
 
-  self.bar.frac = barFrac;
-  self.bar setShader(self.bar.shader, barWidth, self.height);
+self.bar.frac = barFrac;
+self.bar setShader(self.bar.shader, barWidth, self.height);
 
-  assertEx(barWidth <= self.width, "barWidth <= self.width: " + barWidth + " <= " + self.width + " - barFrac was " + barFrac);
+assertEx(barWidth <= self.width, "barWidth <= self.width: " + barWidth + " <= " + self.width + " - barFrac was " + barFrac);
 
-  //if barWidth is bigger than self.width then we are drawing more than 100% if(isDefined(rateOfChange) && barWidth < self.width) {
-    if(rateOfChange > 0) {
-      //printLn( "scaling from: " + barWidth + " to " + self.width + " at " + ((1 - barFrac) / rateOfChange) );
-      assertex(((1 - barFrac) / rateOfChange) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);
-      self.bar scaleOverTime((1 - barFrac) / rateOfChange, self.width, self.height);
-    } else if(rateOfChange < 0) {
-      //printLn( "scaling from: " + barWidth + " to " + 0 + " at " + (barFrac / (-1 * rateOfChange)) );
-      assertex((barFrac / (-1 * rateOfChange)) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);
-      self.bar scaleOverTime(barFrac / (-1 * rateOfChange), 1, self.height);
-    }
-  }
-  self.bar.rateOfChange = rateOfChange;
-  self.bar.lastUpdateTime = getTime();
+//if barWidth is bigger than self.width then we are drawing more than 100% if(isDefined(rateOfChange) && barWidth < self.width) {
+if(rateOfChange > 0) {
+  //printLn( "scaling from: " + barWidth + " to " + self.width + " at " + ((1 - barFrac) / rateOfChange) );
+  assertex(((1 - barFrac) / rateOfChange) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);
+  self.bar scaleOverTime((1 - barFrac) / rateOfChange, self.width, self.height);
+} else if(rateOfChange < 0) {
+  //printLn( "scaling from: " + barWidth + " to " + 0 + " at " + (barFrac / (-1 * rateOfChange)) );
+  assertex((barFrac / (-1 * rateOfChange)) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);
+  self.bar scaleOverTime(barFrac / (-1 * rateOfChange), 1, self.height);
+}
+}
+self.bar.rateOfChange = rateOfChange;
+self.bar.lastUpdateTime = getTime();
 }
 
 createFontString(font, fontScale) {
@@ -478,7 +478,6 @@ showElem() {
     self.bar.hidden = false;
     if(self.bar.alpha != 1)
       self.bar.alpha = 1;
-
   } else {
     if(self.alpha != 1)
       self.alpha = 1;

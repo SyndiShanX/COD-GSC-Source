@@ -1,7 +1,7 @@
 main() {
   level._effect["test_effect"] = loadfx("misc/moth_runner");
 
-  if(getdvar("clientSideEffects", "1") != "1") {
+  if(getDvar("clientSideEffects", "1") != "1") {
     maps\createfx\mp_underground_fx::main();
   }
 

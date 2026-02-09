@@ -22,30 +22,36 @@ init_mortars() {
 }
 
 set_mortar_dust(mortar_name, dust_name, range) {
-  if(!isDefined(level._explosion_dust_range))
+  if(!isDefined(level._explosion_dust_range)) {
     init_mortars();
+  }
 
   level._explosion_dust_name[mortar_name] = dust_name;
 
-  if(!isDefined(range))
+  if(!isDefined(range)) {
     range = 512;
+  }
 
   level._explosion_dust_range[mortar_name] = range;
 }
 
 set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default) {
-  if(!isDefined(level._explosion_quake_power))
+  if(!isDefined(level._explosion_quake_power)) {
     init_mortars();
+  }
 
   if(isDefined(set_default) && set_default) {
-    if(!isDefined(level._explosion_quake_power[mortar_name]))
+    if(!isDefined(level._explosion_quake_power[mortar_name])) {
       level._explosion_quake_power[mortar_name] = quake_power;
+    }
 
-    if(!isDefined(level._explosion_quake_power[mortar_name]))
+    if(!isDefined(level._explosion_quake_power[mortar_name])) {
       level._explosion_quake_time[mortar_name] = quake_time;
+    }
 
-    if(!isDefined(level._explosion_quake_radius[mortar_name]))
+    if(!isDefined(level._explosion_quake_radius[mortar_name])) {
       level._explosion_quake_radius[mortar_name] = quake_radius;
+    }
   } else {
     level._explosion_quake_power[mortar_name] = quake_power;
     level._explosion_quake_time[mortar_name] = quake_time;
@@ -54,15 +60,18 @@ set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default
 }
 
 set_mortar_range(mortar_name, min_range, max_range, set_default) {
-  if(!isDefined(level._explosion_min_range))
+  if(!isDefined(level._explosion_min_range)) {
     init_mortars();
+  }
 
   if(isDefined(set_default) && set_default) {
-    if(!isDefined(level._explosion_min_range[mortar_name]))
+    if(!isDefined(level._explosion_min_range[mortar_name])) {
       level._explosion_min_range[mortar_name] = min_range;
+    }
 
-    if(!isDefined(level._explosion_max_range[mortar_name]))
+    if(!isDefined(level._explosion_max_range[mortar_name])) {
       level._explosion_max_range[mortar_name] = max_range;
+    }
   } else {
     level._explosion_min_range[mortar_name] = min_range;
     level._explosion_max_range[mortar_name] = max_range;
@@ -70,45 +79,56 @@ set_mortar_range(mortar_name, min_range, max_range, set_default) {
 }
 
 set_mortar_delays(mortar_name, min_delay, max_delay, barrage_min_delay, barrage_max_delay, set_default) {
-  if(!isDefined(level._explosion_min_delay))
+  if(!isDefined(level._explosion_min_delay)) {
     init_mortars();
+  }
 
   if(isDefined(set_default) && set_default) {
-    if(!isDefined(level._explosion_min_delay[mortar_name]) && isDefined(min_delay))
+    if(!isDefined(level._explosion_min_delay[mortar_name]) && isDefined(min_delay)) {
       level._explosion_min_delay[mortar_name] = min_delay;
+    }
 
-    if(!isDefined(level._explosion_max_delay[mortar_name]) && isDefined(min_delay))
+    if(!isDefined(level._explosion_max_delay[mortar_name]) && isDefined(min_delay)) {
       level._explosion_max_delay[mortar_name] = max_delay;
+    }
 
-    if(!isDefined(level._explosion_barrage_min_delay[mortar_name]) && isDefined(barrage_min_delay))
+    if(!isDefined(level._explosion_barrage_min_delay[mortar_name]) && isDefined(barrage_min_delay)) {
       level._explosion_barrage_min_delay[mortar_name] = barrage_min_delay;
+    }
 
-    if(!isDefined(level._explosion_barrage_max_delay[mortar_name]) && isDefined(barrage_max_delay))
+    if(!isDefined(level._explosion_barrage_max_delay[mortar_name]) && isDefined(barrage_max_delay)) {
       level._explosion_barrage_max_delay[mortar_name] = barrage_max_delay;
+    }
   } else {
-    if(isDefined(min_delay))
+    if(isDefined(min_delay)) {
       level._explosion_min_delay[mortar_name] = min_delay;
+    }
 
-    if(isDefined(min_delay))
+    if(isDefined(min_delay)) {
       level._explosion_max_delay[mortar_name] = max_delay;
+    }
 
-    if(isDefined(barrage_min_delay))
+    if(isDefined(barrage_min_delay)) {
       level._explosion_barrage_min_delay[mortar_name] = barrage_min_delay;
+    }
 
-    if(isDefined(barrage_max_delay))
+    if(isDefined(barrage_max_delay)) {
       level._explosion_barrage_max_delay[mortar_name] = barrage_max_delay;
+    }
   }
 }
 
 set_mortar_chance(mortar_name, chance, set_default) {
-  if(!isDefined(level._explosion_view_chance))
+  if(!isDefined(level._explosion_view_chance)) {
     init_mortars();
+  }
 
   assert(chance <= 1, "_mortar::set_mortar_chance(), the chance parameter needs to be between 0 and 1");
 
   if(isDefined(set_default) && set_default) {
-    if(!isDefined(level._explosion_view_chance[mortar_name]))
+    if(!isDefined(level._explosion_view_chance[mortar_name])) {
       level._explosion_view_chance[mortar_name] = chance;
+    }
   } else
     level._explosion_view_chance[mortar_name] = chance;
 }
@@ -117,16 +137,18 @@ player_view_chance(view_chance, explosion_point) {
   chance = randomfloat(1);
 
   if(chance <= view_chance) {
-    if(within_fov(self getEye(), self getplayerangles(), explosion_point, cos(30)))
+    if(within_fov(self getEye(), self getplayerangles(), explosion_point, cos(30))) {
       return true;
+    }
   }
 
   return false;
 }
 
 explosion_incoming(mortar_name, pos, soundnum) {
-  if(!isDefined(level._explosion_last_incoming))
+  if(!isDefined(level._explosion_last_incoming)) {
     level._explosion_last_incoming = -1;
+  }
 
   for(soundnum = randomint(4) + 1; soundnum == level._explosion_last_incoming; soundnum = randomint(4) + 1) {}
 
@@ -190,26 +212,31 @@ explosion_incoming(mortar_name, pos, soundnum) {
 }
 
 explosion_boom(mortar_name, explosion_origin, power, time, radius) {
-  if(!isDefined(power))
+  if(!isDefined(power)) {
     power = 0.15;
+  }
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 2;
+  }
 
-  if(!isDefined(radius))
+  if(!isDefined(radius)) {
     radius = 850;
+  }
 
   explosion_sound(mortar_name, explosion_origin);
   playFX(0, level._effect[mortar_name], explosion_origin);
   localplayers = level.localplayers;
 
-  for(i = 0; i < localplayers.size; i++)
+  for(i = 0; i < localplayers.size; i++) {
     localplayers[i] earthquake(power, time, explosion_origin, radius);
+  }
 }
 
 explosion_sound(mortar_name, pos) {
-  if(!isDefined(level._explosion_last_sound))
+  if(!isDefined(level._explosion_last_sound)) {
     level._explosion_last_sound = 0;
+  }
 
   for(soundnum = randomint(3) + 1; soundnum == level._explosion_last_sound; soundnum = randomint(3) + 1) {}
 
@@ -271,17 +298,21 @@ explosion_sound(mortar_name, pos) {
 explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_power, quake_time, quake_radius, dust_points) {
   set_mortar_quake(mortar_name, 0.15, 2, 850, 1);
 
-  if(!isDefined(blast_radius))
+  if(!isDefined(blast_radius)) {
     blast_radius = level._explosion_blast_radius[mortar_name];
+  }
 
-  if(!isDefined(quake_power))
+  if(!isDefined(quake_power)) {
     quake_power = level._explosion_quake_power[mortar_name];
+  }
 
-  if(!isDefined(quake_time))
+  if(!isDefined(quake_time)) {
     quake_time = level._explosion_quake_time[mortar_name];
+  }
 
-  if(!isDefined(quake_radius))
+  if(!isDefined(quake_radius)) {
     quake_radius = level._explosion_quake_radius[mortar_name];
+  }
 
   explosion_incoming(mortar_name, self.origin);
   level notify("explosion", mortar_name);
@@ -290,8 +321,9 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
   if(isDefined(dust_points) && dust_points.size > 0) {
     max_range = 384;
 
-    if(isDefined(level._explosion_dust_range) && isDefined(level._explosion_dust_range[mortar_name]))
+    if(isDefined(level._explosion_dust_range) && isDefined(level._explosion_dust_range[mortar_name])) {
       max_range = level._explosion_dust_range[mortar_name];
+    }
 
     for(i = 0; i < dust_points.size; i++) {
       if(distancesquared(dust_points[i].origin, self.origin) < max_range * max_range) {
@@ -315,17 +347,21 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
   set_mortar_delays(mortar_name, 5, 7, 5, 7, 1);
   set_mortar_chance(mortar_name, 0, 1);
 
-  if(!isDefined(barrage_amount) || barrage_amount < 1)
+  if(!isDefined(barrage_amount) || barrage_amount < 1) {
     barrage_amount = 1;
+  }
 
-  if(!isDefined(no_terrain))
+  if(!isDefined(no_terrain)) {
     no_terrain = 0;
+  }
 
-  if(isDefined(level._explosion_stopnotify) && isDefined(level._explosion_stopnotify[mortar_name]))
+  if(isDefined(level._explosion_stopnotify) && isDefined(level._explosion_stopnotify[mortar_name])) {
     level endon(level._explosion_stopnotify[mortar_name]);
+  }
 
-  if(!isDefined(level._explosion_stop_barrage) || !isDefined(level._explosion_stop_barrage[mortar_name]))
+  if(!isDefined(level._explosion_stop_barrage) || !isDefined(level._explosion_stop_barrage[mortar_name])) {
     level._explosion_stop_barrage[mortar_name] = 0;
+  }
 
   explosion_points = [];
   explosion_points_structs = [];
@@ -360,8 +396,9 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
     dust_points_structs = [];
   }
 
-  if(isDefined(level._explosion_start_notify) && isDefined(level._explosion_start_notify[mortar_name]))
+  if(isDefined(level._explosion_start_notify) && isDefined(level._explosion_start_notify[mortar_name])) {
     level waittill(level._explosion_start_notify[mortar_name]);
+  }
 
   while(true) {
     while(!level._explosion_stop_barrage[mortar_name]) {
@@ -405,10 +442,11 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
         last_explosion = -1;
 
         if(do_mortar) {
-          if(isDefined(level._explosion_delay) && isDefined(level._explosion_delay[mortar_name]))
+          if(isDefined(level._explosion_delay) && isDefined(level._explosion_delay[mortar_name])) {
             wait(level._explosion_delay[mortar_name]);
-          else
+          } else {
             wait(randomfloatrange(level._explosion_min_delay[mortar_name], level._explosion_max_delay[mortar_name]));
+          }
 
           continue;
         }
@@ -418,10 +456,11 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
       }
 
       if(barrage_amount > 1) {
-        if(isDefined(level._explosion_barrage_delay) && isDefined(level._explosion_barrage_delay[mortar_name]))
+        if(isDefined(level._explosion_barrage_delay) && isDefined(level._explosion_barrage_delay[mortar_name])) {
           wait(level._explosion_barrage_delay[mortar_name]);
-        else
+        } else {
           wait(randomfloatrange(level._explosion_barrage_min_delay[mortar_name], level._explosion_barrage_max_delay[mortar_name]));
+        }
       }
     }
 

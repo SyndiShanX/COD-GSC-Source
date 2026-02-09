@@ -91,11 +91,11 @@ specialops_init() {
 
   // Clear out the deadquote.
   level.so_deadquotes_chance = 0.5; // 50/50 chance of using level specific deadquotes.
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   thread so_special_failure_hint();
 
   // For no longer opening level selection in spec ops after returning from a splitscreen game
-  setdvar("ui_skip_level_select", "1");
+  setDvar("ui_skip_level_select", "1");
 
   pick_starting_location_so();
   level thread setSoUniqueSavedDvars();
@@ -251,7 +251,7 @@ fade_challenge_out(challenge_id, skipDialog) {
 
   specialops_mission_over_setup(true);
 
-  setdvar("ui_mission_success", 1);
+  setDvar("ui_mission_success", 1);
   maps\_endmission::coop_eog_summary();
 
   specialops_summary_player_choice();
@@ -736,7 +736,7 @@ so_include_deadquote_array(quotes) {
 */
 so_create_hud_item(yLine, xOffset, message, player, always_draw) {
   if(isDefined(player))
-    assertex(isplayer(player), "so_create_hud_item() received a value for player that did not pass the isplayer() check.");
+    assertex(isPlayer(player), "so_create_hud_item() received a value for player that did not pass the isPlayer() check.");
 
   if(!isDefined(yLine))
     yLine = 0;
@@ -1027,7 +1027,7 @@ set_hud_red(new_alpha) {
 =============
 */
 info_hud_wait_for_player(endon_notify) {
-  assertex(isplayer(self), "info_hud_wait_for_player() must be called on a player.");
+  assertex(isPlayer(self), "info_hud_wait_for_player() must be called on a player.");
 
   // Prevent thread from being initiated multiple times.
   if(isDefined(self.so_infohud_toggle_state)) {
@@ -1055,11 +1055,11 @@ info_hud_wait_for_player(endon_notify) {
     switch (self.so_infohud_toggle_state) {
       case "on":
         self.so_infohud_toggle_state = "off";
-        setdvar("so_ophud_" + self.unique_id, "0");
+        setDvar("so_ophud_" + self.unique_id, "0");
         break;
       case "off":
         self.so_infohud_toggle_state = "on";
-        setdvar("so_ophud_" + self.unique_id, "1");
+        setDvar("so_ophud_" + self.unique_id, "1");
         break;
     }
     self notify("update_challenge_timer");
@@ -1073,7 +1073,7 @@ info_hud_wait_force_on() {
   self waittill("force_challenge_timer");
   self.so_hud_show_time = gettime();
   self.so_infohud_toggle_state = "on";
-  setdvar("so_ophud_" + self.unique_id, "1");
+  setDvar("so_ophud_" + self.unique_id, "1");
 }
 
 info_hud_start_state() {
@@ -1098,7 +1098,7 @@ info_hud_start_state() {
 =============
 */
 info_hud_handle_fade(hudelem, endon_notify) {
-  assertex(isplayer(self), "info_hud_handle_fade() must be called on a player.");
+  assertex(isPlayer(self), "info_hud_handle_fade() must be called on a player.");
   assertex(isDefined(hudelem), "info_hud_handle_fade() requires a valid hudelem to be passed in.");
 
   level endon("new_challenge_timer");
@@ -1190,14 +1190,12 @@ info_hud_decrement_timer(time) {
 =============
 */
 is_dvar_character_switcher(dvar) {
-  val = getdvar(dvar);
+  val = getDvar(dvar);
   return val == "so_char_client" || val == "so_char_host";
 }
 
-// ---------------------------------------------------------------------------------
-//	Special Ops common dialog.
-// ---------------------------------------------------------------------------------
-has_been_played() {
+// --------------------------------------------------------------------------------- //	Special Ops common dialog.
+// --------------------------------------------------------------------------------- has_been_played() {
   best_time_name = tablelookup("sp/specOpsTable.csv", 1, level.script, 9);
   if(best_time_name == "")
     return false;
@@ -1461,9 +1459,7 @@ so_dialog_counter_update(current_count, current_goal, countdown_divide) {
   level.so_counter_dialog_time = gettime() + 800;
 }
 
-// ---------------------------------------------------------------------------------
-
-so_crush_player(player, mod) {
+// --------------------------------------------------------------------------------- so_crush_player(player, mod) {
   assert(isDefined(self));
   assert(isDefined(player));
 

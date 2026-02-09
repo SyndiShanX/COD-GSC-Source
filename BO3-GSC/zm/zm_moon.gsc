@@ -238,8 +238,8 @@ function main() {
   level.zombie_speed_up = &moon_speed_up;
   level.ai_astro_explode = &moon_push_zombies_when_astro_explodes;
   level thread spare_change();
-  setdvar("dlc5_get_client_weapon_from_entitystate", 1);
-  setdvar("hkai_pathfindIterationLimit", 900);
+  setDvar("dlc5_get_client_weapon_from_entitystate", 1);
+  setDvar("hkai_pathfindIterationLimit", 900);
   scene::add_scene_func("cin_zmhd_sizzle_moon_cam", &cin_zmhd_sizzle_moon_cam, "play");
   level thread zm_moon_ffotd::main_end();
 }
@@ -1295,7 +1295,7 @@ function moon_zombie_death_response() {
 
 function setup_water_physics() {
   level flag::wait_till("start_zombie_round_logic");
-  setdvar("phys_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
 }
 
 function cliff_fall_death() {
@@ -1385,7 +1385,7 @@ function is_player_killable(player, checkignoremeflag) {
   if(!isalive(player)) {
     return false;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
   if(player.sessionstate == "spectator") {

@@ -121,7 +121,7 @@ dofinalkillcam() {
   if(isDefined(level.finalkillcamsettings[winner].attacker))
     maps\mp\_challenges::getfinalkill(level.finalkillcamsettings[winner].attacker);
 
-  visionsetnaked(getdvar(#"mapname"), 0.0);
+  visionsetnaked(getDvar(#"mapname"), 0.0);
   players = level.players;
 
   for(index = 0; index < players.size; index++) {
@@ -528,7 +528,7 @@ iskillcamgrenadeweapon(sweapon) {
 calckillcamtime(sweapon, entitystarttime, predelay, respawn, maxtime) {
   camtime = 0.0;
 
-  if(getdvar(#"_id_C45D9077") == "") {
+  if(getDvar(#"_id_C45D9077") == "") {
     if(iskillcamentityweapon(sweapon))
       camtime = (gettime() - entitystarttime) / 1000 - predelay - 0.1;
     else if(!respawn)
@@ -554,7 +554,7 @@ calckillcamtime(sweapon, entitystarttime, predelay, respawn, maxtime) {
 calcpostdelay() {
   postdelay = 0;
 
-  if(getdvar(#"_id_0D34D95D") == "")
+  if(getDvar(#"_id_0D34D95D") == "")
     postdelay = 2;
   else {
     postdelay = getdvarfloat(#"_id_0D34D95D");

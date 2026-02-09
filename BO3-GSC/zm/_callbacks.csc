@@ -59,7 +59,7 @@ function playerspawned(localclientnum) {
 
 function entityspawned(localclientnum) {
   self endon("entityshutdown");
-  if(self isplayer()) {
+  if(self isPlayer()) {
     if(isDefined(level._clientfaceanimonplayerspawned)) {
       self thread[[level._clientfaceanimonplayerspawned]](localclientnum);
     }

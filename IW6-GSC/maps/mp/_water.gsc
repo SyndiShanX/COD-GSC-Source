@@ -113,7 +113,7 @@ watchPlayerEnterWater(aboveWater, waterShallowSplashZ) {
   while(true) {
     self waittill("trigger", ent);
 
-    if(!IsPlayer(ent) && !IsAgent(ent)) {
+    if(!isPlayer(ent) && !IsAgent(ent)) {
       continue;
     }
     if(!IsAlive(ent) || (IsAgent(ent) && isDefined(ent.agent_type) && ent.agent_type == "dog")) {
@@ -177,7 +177,7 @@ playerInWater(underWater, aboveWater, waterShallowSplashZ) {
       self notify("above_water");
       stopWaterVisuals();
 
-      if(IsPlayer(self)) {
+      if(isPlayer(self)) {
         if(self hasFemaleCustomizationModel()) {
           self playLocalSound("Fem_breathing_better");
         } else {
@@ -320,13 +320,13 @@ underWaterBubbles() {
 
 startWaterVisuals() {
   self ShellShock("mp_flooded_water", 8);
-  if(IsPlayer(self))
+  if(isPlayer(self))
     self SetBlurForPlayer(10, 0.0);
 }
 
 stopWaterVisuals() {
   self StopShellShock();
-  if(IsPlayer(self))
+  if(isPlayer(self))
     self SetBlurForPlayer(0, 0.85);
 }
 

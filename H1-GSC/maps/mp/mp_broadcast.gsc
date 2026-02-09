@@ -16,11 +16,11 @@ main() {
   game["defenders"] = "axis";
   game["allies_soldiertype"] = "desert";
   game["axis_soldiertype"] = "desert";
-  setdvar("r_specularcolorscale", "1");
-  setdvar("r_diffusecolorscale", "5");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("compassmaxrange", "1600");
+  setDvar("r_specularcolorscale", "1");
+  setDvar("r_diffusecolorscale", "5");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("compassmaxrange", "1600");
   thread misc_rotate_ceilingfans();
   thread misc_rotate_wallfans();
 

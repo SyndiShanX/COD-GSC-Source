@@ -10,6 +10,6 @@ main() {
   level._effect["mp_bog_horizon_flash"] = loadfx("ambient_runners/mp_bog_horizon_flash");
   level._effect["battlefield_smokebank_S"] = loadfx("smoke/battlefield_smokebank_S");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_bog_sh_fx::main();
 }

@@ -368,9 +368,9 @@ onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     }
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && !isDefined(self.favoriteenemy)) {
+  if(isDefined(var_1) && isPlayer(var_1) && !isDefined(self.favoriteenemy)) {
     var_17 = isDefined(self.curmeleetarget) && self.curmeleetarget == var_1;
-    var_18 = isDefined(self.curmeleetarget) && !isplayer(self.curmeleetarget);
+    var_18 = isDefined(self.curmeleetarget) && !isPlayer(self.curmeleetarget);
 
     if(var_17 || var_18) {
       if(distancesquared(self.origin, var_1.origin) <= self.var_4D45) {
@@ -702,7 +702,7 @@ func_7E78(var_0, var_1, var_2) {
 
   var_4 = 1.0;
 
-  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_1) && isDefined(var_4) && !iskillstreakweapon(var_1)) {
+  if(isDefined(var_0) && isPlayer(var_0) && isDefined(var_1) && isDefined(var_4) && !iskillstreakweapon(var_1)) {
     var_4 = func_3E61(var_0, var_1, var_4);
     return var_4;
   } else if(isDefined(var_4)) {
@@ -1132,24 +1132,21 @@ func_13F55() {
       self.sharpturnnotifydist = level.var_13FA8[self.movemode];
 
       if(isDefined(level.var_BCE5[self.agent_type])) {
-        self.moveratescale = [
-          }
+        self.moveratescale = [}
           [level.var_BCE5[self.agent_type]]]();
       else {
         self.moveratescale = 1;
       }
 
       if(isDefined(level.var_C082[self.agent_type])) {
-        self.var_C081 = [
-          }
+        self.var_C081 = [}
           [level.var_C082[self.agent_type]]]();
       else {
         self.var_C081 = 1;
       }
 
       if(isDefined(level.var_126E9[self.agent_type])) {
-        self.traverseratescale = [
-          }
+        self.traverseratescale = [}
           [level.var_126E9[self.agent_type]]]();
       else {
         self.traverseratescale = 1;
@@ -1173,8 +1170,7 @@ func_13F55() {
         }
       } else if(isDefined(self.speedup)) {
         if(isDefined(level.var_BCE5[self.agent_type])) {
-          self.moveratescale = [
-            }
+          self.moveratescale = [}
             [level.var_BCE5[self.agent_type]]]();
         else {
           self.moveratescale = 1;
@@ -1304,7 +1300,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       self playSound("zmb_clown_explode");
     }
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       scripts\common\fx::playfxnophase(level._effect["suicide_zmb_death"], self.origin + (0, 0, 50), anglesToForward(self.angles), anglestoup(self.angles));
     } else {
       scripts\common\fx::playfxnophase(level._effect["suicide_zmb_explode"], self.origin + (0, 0, 50), anglesToForward(self.angles), anglestoup(self.angles));

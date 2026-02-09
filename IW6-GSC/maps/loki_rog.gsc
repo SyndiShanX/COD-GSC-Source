@@ -1056,7 +1056,7 @@ start_rog_fail_timer(var_0) {
   wait(var_0);
 
   if(!common_scripts\utility::flag("rog_intro_player_flipped_switch")) {
-    setdvar("ui_deadquote", &"LOKI_ENDING_FAIL");
+    setDvar("ui_deadquote", &"LOKI_ENDING_FAIL");
     level thread maps\_utility::missionfailedwrapper();
   }
 }
@@ -1886,7 +1886,7 @@ rog_impact_danger_close_check(var_0) {
       }
 
       if(!common_scripts\utility::flag("ROG_no_fail")) {
-        setdvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
+        setDvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
         level thread maps\_utility::missionfailedwrapper();
         return;
       }
@@ -3617,11 +3617,11 @@ rog_check_pass_fail(var_0) {
 rog_fail_wrapper() {
   if(!common_scripts\utility::flag("ROG_no_fail")) {
     if(level.rog_ff_fail)
-      setdvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
+      setDvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
     else if(level.rog_track_fail)
-      setdvar("ui_deadquote", &"LOKI_ROG_FAIL_TRAINTRACK");
+      setDvar("ui_deadquote", &"LOKI_ROG_FAIL_TRAINTRACK");
     else
-      setdvar("ui_deadquote", &"LOKI_ROG_FAIL");
+      setDvar("ui_deadquote", &"LOKI_ROG_FAIL");
 
     level thread maps\_utility::missionfailedwrapper();
   }

@@ -15,7 +15,7 @@ function main() {
   precache();
   core_frontend_fx::main();
   core_frontend_sound::main();
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
 }
 
 function precache() {}

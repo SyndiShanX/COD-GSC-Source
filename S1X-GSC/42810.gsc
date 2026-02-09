@@ -226,7 +226,7 @@ minedamagemonitor() {
   for(;;) {
     self waittill("damage", var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(!maps\mp\gametypes\_weapons::friendlyfirecheck(self.owner, var_0)) {
@@ -257,7 +257,7 @@ minedamagemonitor() {
 
   self.wasdamaged = 1;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("bouncing_betty");
   }
 

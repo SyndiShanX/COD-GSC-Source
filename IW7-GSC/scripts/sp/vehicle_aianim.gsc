@@ -1387,7 +1387,7 @@ func_1FC3(var_0, var_1) {
       continue;
     }
 
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       break;
     }
   }
@@ -1616,7 +1616,7 @@ func_872D(var_0) {
   wait(var_6 * var_5);
   var_8 = (0, 0, 1);
   var_9 = var_0.origin;
-  if(getdvar("ragdoll_enable") == "0") {
+  if(getDvar("ragdoll_enable") == "0") {
     var_0 delete();
     return;
   }

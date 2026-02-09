@@ -97,7 +97,6 @@ init() {
 
       if(getDvar("scr_dump_weapon_assets") != "")
         println("weapon,mp/" + weapon_name + "_" + attachmentName + "_mp");
-
     }
 
     attachmentCombos = [];
@@ -130,7 +129,6 @@ init() {
       if(altWeapon != "none")
         println("weapon,mp/" + altWeapon);
     }
-
   }
 
   precacheItem("flare_mp");
@@ -541,21 +539,21 @@ dropWeaponForDeath(attacker) {
     return;
   }
   if(!isDefined(weapon)) {
-    if(getdvar("scr_dropdebug") == "1")
+    if(getDvar("scr_dropdebug") == "1")
       println("didn't drop weapon: not defined");
 
     return;
   }
 
   if(weapon == "none") {
-    if(getdvar("scr_dropdebug") == "1")
+    if(getDvar("scr_dropdebug") == "1")
       println("didn't drop weapon: weapon == none");
 
     return;
   }
 
   if(!self hasWeapon(weapon)) {
-    if(getdvar("scr_dropdebug") == "1")
+    if(getDvar("scr_dropdebug") == "1")
       println("didn't drop weapon: don't have it anymore (" + weapon + ")");
 
     return;
@@ -563,7 +561,7 @@ dropWeaponForDeath(attacker) {
 
   if(weapon != "riotshield_mp") {
     if(!(self AnyAmmoForWeaponModes(weapon))) {
-      if(getdvar("scr_dropdebug") == "1")
+      if(getDvar("scr_dropdebug") == "1")
         println("didn't drop weapon: no ammo for weapon modes");
 
       return;
@@ -572,7 +570,7 @@ dropWeaponForDeath(attacker) {
     clipAmmoR = self GetWeaponAmmoClip(weapon, "right");
     clipAmmoL = self GetWeaponAmmoClip(weapon, "left");
     if(!clipAmmoR && !clipAmmoL) {
-      if(getdvar("scr_dropdebug") == "1")
+      if(getDvar("scr_dropdebug") == "1")
         println("didn't drop weapon: no ammo in clip");
 
       return;
@@ -592,7 +590,7 @@ dropWeaponForDeath(attacker) {
     item ItemWeaponSetAmmo(1, 1, 0);
   }
 
-  if(getdvar("scr_dropdebug") == "1")
+  if(getDvar("scr_dropdebug") == "1")
     println("dropped weapon: " + weapon);
 
   self.droppedDeathWeapon = true;
@@ -683,7 +681,7 @@ watchPickup() {
     // otherwise, player merely acquired ammo and didn't pick this up
   }
 
-  if(getdvar("scr_dropdebug") == "1")
+  if(getDvar("scr_dropdebug") == "1")
     println("picked up weapon: " + weapname + ", " + isDefined(self.ownersattacker));
 
   assert(isDefined(player.tookWeaponFrom));
@@ -1218,7 +1216,6 @@ watchClaymores() {
       if(getdvarint("scr_claymoredebug")) {
         claymore thread claymoreDebug();
       }
-
     }
   }
 }
@@ -1793,566 +1790,566 @@ weaponDamageTracePassed(from, to, startRadius, ent) {
 // damagepos = the position damage is coming from
 // damagedir = the direction damage is moving in
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
-  if(self.isPlayer) {
-    self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](eInflictor, // eInflictor The entity that causes the damage.( e.g. a turret )
-      eAttacker, // eAttacker The entity that is attacking.
-      iDamage, // iDamage Integer specifying the amount of damage done
-      0, // iDFlags Integer specifying flags that are to be applied to the damage
-      sMeansOfDeath, // sMeansOfDeath Integer specifying the method of death
-      sWeapon, // sWeapon The weapon number of the weapon used to inflict the damage
-      damagepos, // vPoint The point the damage is from?
-      damagedir, // vDir The direction of the damage
-      "none", // sHitLoc The location of the hit
-      0 // psOffsetTime The time offset for the damage);
-  } else {
-    // destructable walls and such can only be damaged in certain ways.
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp") || sWeapon == "stealth_bomb_mp") {
-      return;
-    }
-    self.entity notify("damage", iDamage, eAttacker, (0, 0, 0), (0, 0, 0), "mod_explosive", "", "");
-  }
-}
-
-debugline(a, b, color) {
-  for(i = 0; i < 30 * 20; i++) {
-    line(a, b, color);
-    wait .05;
-  }
-}
-
-debugprint(pt, txt) {
-  for(i = 0; i < 30 * 20; i++) {
-    print3d(pt, txt);
-    wait .05;
-  }
-}
-
-onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage, eAttacker) {
-  self endon("death");
-  self endon("disconnect");
-
-  switch (sWeapon) {
-    case "concussion_grenade_mp":
-      // should match weapon settings in gdt
-      radius = 512;
-      scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
-
-      if(scale < 0)
-        scale = 0;
-
-      time = 2 + (4 * scale);
-
-      wait(0.05);
-      eAttacker notify("stun_hit");
-      self shellShock("concussion_grenade_mp", time);
-      self.concussionEndTime = getTime() + (time * 1000);
-      break;
-
-    case "weapon_cobra_mk19_mp":
-      // mk19 is too powerful with shellshock slowdown
-      break;
-
-    default:
-      // shellshock will only be done if meansofdeath is an appropriate type and if there is enough damage.
-      maps\mp\gametypes\_shellshock::shellshockOnDamage(meansOfDeath, damage);
-      break;
-  }
-
-}
-
-// weapon stowing logic ===================================================================
-
-// weapon class boolean helpers
-isPrimaryWeapon(weapName) {
-  if(weapName == "none")
-    return false;
-
-  if(weaponInventoryType(weapName) != "primary")
-    return false;
-
-  switch (weaponClass(weapName)) {
-    case "rifle":
-    case "smg":
-    case "mg":
-    case "spread":
-    case "pistol":
-    case "rocketlauncher":
-    case "sniper":
-      return true;
-
-    default:
-      return false;
-  }
-}
-
-isAltModeWeapon(weapName) {
-  if(weapName == "none")
-    return false;
-
-  return (weaponInventoryType(weapName) == "altmode");
-}
-
-isInventoryWeapon(weapName) {
-  if(weapName == "none")
-    return false;
-
-  return (weaponInventoryType(weapName) == "item");
-}
-
-isRiotShield(weapName) {
-  if(weapName == "none")
-    return false;
-
-  return (WeaponType(weapName) == "riotshield");
-}
-
-isOffhandWeapon(weapName) {
-  if(weapName == "none")
-    return false;
-
-  return (weaponInventoryType(weapName) == "offhand");
-}
-
-isSideArm(weapName) {
-  if(weapName == "none")
-    return false;
-
-  if(weaponInventoryType(weapName) != "primary")
-    return false;
-
-  return (weaponClass(weapName) == "pistol");
-}
-
-// This needs for than this.. this would qualify c4 as a grenade
-isGrenade(weapName) {
-  weapClass = weaponClass(weapName);
-  weapType = weaponInventoryType(weapName);
-
-  if(weapClass != "grenade")
-    return false;
-
-  if(weapType != "offhand")
-    return false;
-}
-
-getStowOffsetModel(weaponName) {
-  assert(isDefined(level.stow_offset_array));
-
-  baseName = getBaseWeaponName(weaponName);
-
-  return (level.stow_offset_array[baseName]);
-}
-
-stowPriorityWeapon() {
-  assert(isDefined(level.stow_priority_model_array));
-
-  // returns the first large projectil the player owns in case player owns more than one
-  foreach(weapon_name, priority_weapon in level.stow_priority_model_array) {
-    weaponName = getBaseWeaponName(weapon_name);
-    weaponList = self getWeaponsListAll();
-
-    foreach(weapon in weaponList) {
-      if(self getCurrentWeapon() == weapon) {
-        continue;
+    if(self.isPlayer) {
+      self.damageOrigin = damagepos;
+      self.entity thread[[level.callbackPlayerDamage]](eInflictor, // eInflictor The entity that causes the damage.( e.g. a turret )
+        eAttacker, // eAttacker The entity that is attacking.
+        iDamage, // iDamage Integer specifying the amount of damage done
+        0, // iDFlags Integer specifying flags that are to be applied to the damage
+        sMeansOfDeath, // sMeansOfDeath Integer specifying the method of death
+        sWeapon, // sWeapon The weapon number of the weapon used to inflict the damage
+        damagepos, // vPoint The point the damage is from?
+        damagedir, // vDir The direction of the damage
+        "none", // sHitLoc The location of the hit
+        0 // psOffsetTime The time offset for the damage);
       }
-      if(weaponName == getBaseWeaponName(weapon))
-        return weaponName + "_mp";
-    }
-  }
-
-  return "";
-}
-
-// thread loop life = player's life
-updateStowedWeapon() {
-  self endon("spawned");
-  self endon("killed_player");
-  self endon("disconnect");
-
-  self.tag_stowed_back = undefined;
-  self.tag_stowed_hip = undefined;
-
-  team = self.team;
-  class = self.class;
-
-  self thread stowedWeaponsRefresh();
-
-  while(true) {
-    self waittill("weapon_change", newWeapon);
-
-    if(newWeapon == "none") {
-      continue;
-    }
-    self thread stowedWeaponsRefresh();
-  }
-}
-
-stowedWeaponsRefresh() {
-  self endon("spawned");
-  self endon("killed_player");
-  self endon("disconnect");
-
-  detach_all_weapons();
-  stow_on_back();
-  stow_on_hip();
-}
-
-detach_all_weapons() {
-  if(isDefined(self.tag_stowed_back))
-    self detach_back_weapon();
-
-  if(isDefined(self.tag_stowed_hip))
-    self detach_hip_weapon();
-}
-
-detach_back_weapon() {
-  detach_success = self detachIfAttached(self.tag_stowed_back, "tag_stowed_back");
-
-  // test for bug
-  //assertex( detach_success, "Detaching: " + self.tag_stowed_back + " from tag: tag_stowed_back failed." );
-  self.tag_stowed_back = undefined;
-}
-
-detach_hip_weapon() {
-  detach_success = self detachIfAttached(self.tag_stowed_hip, "tag_stowed_hip");
-
-  // test for bug
-  //assertex( detach_success, "Detaching: " + detach_model + " from tag: tag_stowed_hip failed." );
-  self.tag_stowed_hip = undefined;
-}
-
-stow_on_back() {
-  prof_begin("stow_on_back");
-  currentWeapon = self getCurrentWeapon();
-  currentIsAlt = isAltModeWeapon(currentWeapon);
-
-  assert(!isDefined(self.tag_stowed_back));
-
-  stowWeapon = undefined;
-  stowCamo = 0;
-  large_projectile = self stowPriorityWeapon();
-  stowOffsetModel = undefined;
-
-  if(large_projectile != "") {
-    stowWeapon = large_projectile;
-  } else {
-    weaponsList = self getWeaponsListPrimaries();
-    foreach(weaponName in weaponsList) {
-      if(weaponName == currentWeapon) {
-        continue;
-      }
-      invType = weaponInventoryType(weaponName);
-
-      if(invType != "primary") {
-        if(invType == "altmode") {
-          continue;
+      else {
+        // destructable walls and such can only be damaged in certain ways.
+        if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp") || sWeapon == "stealth_bomb_mp") {
+          return;
         }
-        if(weaponClass(weaponName) == "pistol")
-          continue;
+        self.entity notify("damage", iDamage, eAttacker, (0, 0, 0), (0, 0, 0), "mod_explosive", "", "");
       }
+    }
 
-      if(WeaponType(weaponName) == "riotshield") {
-        continue;
+    debugline(a, b, color) {
+      for(i = 0; i < 30 * 20; i++) {
+        line(a, b, color);
+        wait .05;
       }
-      // Don't stow the current on our back when we're using the alt
-      if(currentIsAlt && weaponAltWeaponName(weaponName) == currentWeapon) {
-        continue;
+    }
+
+    debugprint(pt, txt) {
+      for(i = 0; i < 30 * 20; i++) {
+        print3d(pt, txt);
+        wait .05;
       }
-      stowWeapon = weaponName;
-      stowOffsetModel = getStowOffsetModel(stowWeapon);
-
-      if(stowWeapon == self.primaryWeapon)
-        stowCamo = self.loadoutPrimaryCamo;
-      else if(stowWeapon == self.secondaryWeapon)
-        stowCamo = self.loadoutSecondaryCamo;
-      else
-        stowCamo = 0;
-    }
-  }
-
-  if(!isDefined(stowWeapon)) {
-    prof_end("stow_on_back");
-    return;
-  }
-
-  if(large_projectile != "") {
-    self.tag_stowed_back = level.stow_priority_model_array[large_projectile];
-  } else {
-    self.tag_stowed_back = getWeaponModel(stowWeapon, stowCamo);
-  }
-
-  if(isDefined(stowOffsetModel)) {
-    self attach(stowOffsetModel, "tag_stowed_back", true);
-    attachTag = "tag_stow_back_mid_attach";
-  } else {
-    attachTag = "tag_stowed_back";
-  }
-
-  self attach(self.tag_stowed_back, attachTag, true);
-
-  hideTagList = GetWeaponHideTags(stowWeapon);
-
-  if(!isDefined(hideTagList)) {
-    prof_end("stow_on_back");
-    return;
-  }
-
-  for(i = 0; i < hideTagList.size; i++)
-    self HidePart(hideTagList[i], self.tag_stowed_back);
-
-  prof_end("stow_on_back");
-}
-
-stow_on_hip() {
-  currentWeapon = self getCurrentWeapon();
-
-  assert(!isDefined(self.tag_stowed_hip));
-
-  stowWeapon = undefined;
-
-  weaponsList = self getWeaponsListOffhands();
-  foreach(weaponName in weaponsList) {
-    if(weaponName == currentWeapon) {
-      continue;
-    }
-    if(weaponName != "c4_mp" && weaponName != "claymore_mp") {
-      continue;
-    }
-    stowWeapon = weaponName;
-  }
-
-  if(!isDefined(stowWeapon)) {
-    return;
-  }
-  self.tag_stowed_hip = getWeaponModel(stowWeapon);
-  self attach(self.tag_stowed_hip, "tag_stowed_hip_rear", true);
-
-  hideTagList = GetWeaponHideTags(stowWeapon);
-
-  if(!isDefined(hideTagList)) {
-    return;
-  }
-  for(i = 0; i < hideTagList.size; i++)
-    self HidePart(hideTagList[i], self.tag_stowed_hip);
-}
-
-updateSavedLastWeapon() {
-  self endon("death");
-  self endon("disconnect");
-
-  currentWeapon = self.currentWeaponAtSpawn;
-  self.saved_lastWeapon = currentWeapon;
-
-  for(;;) {
-    self waittill("weapon_change", newWeapon);
-
-    if(newWeapon == "none") {
-      self.saved_lastWeapon = currentWeapon;
-      continue;
     }
 
-    weaponInvType = weaponInventoryType(newWeapon);
+    onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage, eAttacker) {
+      self endon("death");
+      self endon("disconnect");
 
-    if(weaponInvType != "primary" && weaponInvType != "altmode") {
-      self.saved_lastWeapon = currentWeapon;
-      continue;
+      switch (sWeapon) {
+        case "concussion_grenade_mp":
+          // should match weapon settings in gdt
+          radius = 512;
+          scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
+
+          if(scale < 0)
+            scale = 0;
+
+          time = 2 + (4 * scale);
+
+          wait(0.05);
+          eAttacker notify("stun_hit");
+          self shellShock("concussion_grenade_mp", time);
+          self.concussionEndTime = getTime() + (time * 1000);
+          break;
+
+        case "weapon_cobra_mk19_mp":
+          // mk19 is too powerful with shellshock slowdown
+          break;
+
+        default:
+          // shellshock will only be done if meansofdeath is an appropriate type and if there is enough damage.
+          maps\mp\gametypes\_shellshock::shellshockOnDamage(meansOfDeath, damage);
+          break;
+      }
     }
 
-    if(newWeapon == "onemanarmy_mp") {
-      self.saved_lastWeapon = currentWeapon;
-      continue;
+    // weapon stowing logic ===================================================================
+
+    // weapon class boolean helpers
+    isPrimaryWeapon(weapName) {
+      if(weapName == "none")
+        return false;
+
+      if(weaponInventoryType(weapName) != "primary")
+        return false;
+
+      switch (weaponClass(weapName)) {
+        case "rifle":
+        case "smg":
+        case "mg":
+        case "spread":
+        case "pistol":
+        case "rocketlauncher":
+        case "sniper":
+          return true;
+
+        default:
+          return false;
+      }
     }
 
-    self updateMoveSpeedScale("primary");
+    isAltModeWeapon(weapName) {
+      if(weapName == "none")
+        return false;
 
-    self.saved_lastWeapon = currentWeapon;
-    currentWeapon = newWeapon;
-  }
-}
-
-EMPPlayer(numSeconds) {
-  self endon("disconnect");
-  self endon("death");
-
-  self thread clearEMPOnDeath();
-}
-
-clearEMPOnDeath() {
-  self endon("disconnect");
-
-  self waittill("death");
-}
-
-updateMoveSpeedScale(weaponType) {
-  /*
-  if( self _hasPerk( "specialty_lightweight" ) )
-  	self.moveSpeedScaler = 1.10;
-  else
-  	self.moveSpeedScaler = 1;
-  */
-
-  if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary")
-    weaponType = self.primaryWeapon;
-  else
-    weaponType = self.secondaryWeapon;
-
-  if(isDefined(self.primaryWeapon) && self.primaryWeapon == "riotshield_mp") {
-    self setMoveSpeedScale(.8 * self.moveSpeedScaler);
-    return;
-  }
-
-  if(!isDefined(weaponType))
-    weapClass = "none";
-  else
-    weapClass = weaponClass(weaponType);
-
-  switch (weapClass) {
-    case "rifle":
-      self setMoveSpeedScale(0.95 * self.moveSpeedScaler);
-      break;
-    case "pistol":
-      self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
-      break;
-    case "mg":
-      self setMoveSpeedScale(0.875 * self.moveSpeedScaler);
-      break;
-    case "smg":
-      self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
-      break;
-    case "spread":
-      self setMoveSpeedScale(.95 * self.moveSpeedScaler);
-      break;
-    case "rocketlauncher":
-      self setMoveSpeedScale(0.80 * self.moveSpeedScaler);
-      break;
-    case "sniper":
-      self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
-      break;
-    default:
-      self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
-      break;
-  }
-}
-
-buildWeaponData(filterPerks) {
-  attachmentList = getAttachmentList();
-  max_weapon_num = 149;
-
-  baseWeaponData = [];
-
-  for(weaponId = 0; weaponId <= max_weapon_num; weaponId++) {
-    baseName = tablelookup("mp/statstable.csv", 0, weaponId, 4);
-    if(baseName == "") {
-      continue;
+      return (weaponInventoryType(weapName) == "altmode");
     }
-    assetName = baseName + "_mp";
 
-    if(!isSubStr(tableLookup("mp/statsTable.csv", 0, weaponId, 2), "weapon_")) {
-      continue;
+    isInventoryWeapon(weapName) {
+      if(weapName == "none")
+        return false;
+
+      return (weaponInventoryType(weapName) == "item");
     }
-    if(weaponInventoryType(assetName) != "primary") {
-      continue;
+
+    isRiotShield(weapName) {
+      if(weapName == "none")
+        return false;
+
+      return (WeaponType(weapName) == "riotshield");
     }
-    weaponInfo = spawnStruct();
-    weaponInfo.baseName = baseName;
-    weaponInfo.assetName = assetName;
-    weaponInfo.variants = [];
 
-    weaponInfo.variants[0] = assetName;
-    // the alphabetize function is slow so we try not to do it for every weapon/attachment combo; a code solution would be better.
-    attachmentNames = [];
-    for(innerLoopCount = 0; innerLoopCount < 6; innerLoopCount++) {
-      // generating attachment combinations
-      attachmentName = tablelookup("mp/statStable.csv", 0, weaponId, innerLoopCount + 11);
+    isOffhandWeapon(weapName) {
+      if(weapName == "none")
+        return false;
 
-      if(filterPerks) {
-        switch (attachmentName) {
-          case "fmj":
-          case "xmags":
-          case "rof":
+      return (weaponInventoryType(weapName) == "offhand");
+    }
+
+    isSideArm(weapName) {
+      if(weapName == "none")
+        return false;
+
+      if(weaponInventoryType(weapName) != "primary")
+        return false;
+
+      return (weaponClass(weapName) == "pistol");
+    }
+
+    // This needs for than this.. this would qualify c4 as a grenade
+    isGrenade(weapName) {
+      weapClass = weaponClass(weapName);
+      weapType = weaponInventoryType(weapName);
+
+      if(weapClass != "grenade")
+        return false;
+
+      if(weapType != "offhand")
+        return false;
+    }
+
+    getStowOffsetModel(weaponName) {
+      assert(isDefined(level.stow_offset_array));
+
+      baseName = getBaseWeaponName(weaponName);
+
+      return (level.stow_offset_array[baseName]);
+    }
+
+    stowPriorityWeapon() {
+      assert(isDefined(level.stow_priority_model_array));
+
+      // returns the first large projectil the player owns in case player owns more than one
+      foreach(weapon_name, priority_weapon in level.stow_priority_model_array) {
+        weaponName = getBaseWeaponName(weapon_name);
+        weaponList = self getWeaponsListAll();
+
+        foreach(weapon in weaponList) {
+          if(self getCurrentWeapon() == weapon) {
             continue;
+          }
+          if(weaponName == getBaseWeaponName(weapon))
+            return weaponName + "_mp";
         }
       }
 
-      if(attachmentName == "") {
-        break;
-      }
-
-      attachmentNames[attachmentName] = true;
+      return "";
     }
 
-    // generate an alphabetized attachment list
-    attachments = [];
-    foreach(attachmentName in attachmentList) {
-      if(!isDefined(attachmentNames[attachmentName])) {
-        continue;
-      }
-      weaponInfo.variants[weaponInfo.variants.size] = baseName + "_" + attachmentName + "_mp";
-      attachments[attachments.size] = attachmentName;
-    }
+    // thread loop life = player's life
+    updateStowedWeapon() {
+      self endon("spawned");
+      self endon("killed_player");
+      self endon("disconnect");
 
-    for(i = 0; i < (attachments.size - 1); i++) {
-      colIndex = tableLookupRowNum("mp/attachmentCombos.csv", 0, attachments[i]);
-      for(j = i + 1; j < attachments.size; j++) {
-        if(tableLookup("mp/attachmentCombos.csv", 0, attachments[j], colIndex) == "no") {
+      self.tag_stowed_back = undefined;
+      self.tag_stowed_hip = undefined;
+
+      team = self.team;
+      class = self.class;
+
+      self thread stowedWeaponsRefresh();
+
+      while(true) {
+        self waittill("weapon_change", newWeapon);
+
+        if(newWeapon == "none") {
           continue;
         }
-        weaponInfo.variants[weaponInfo.variants.size] = baseName + "_" + attachments[i] + "_" + attachments[j] + "_mp";
+        self thread stowedWeaponsRefresh();
       }
     }
 
-    baseWeaponData[baseName] = weaponInfo;
-  }
+    stowedWeaponsRefresh() {
+      self endon("spawned");
+      self endon("killed_player");
+      self endon("disconnect");
 
-  return (baseWeaponData);
-}
-
-monitorSemtex() {
-  self endon("disconnect");
-  self endon("death");
-
-  for(;;) {
-    self waittill("grenade_fire", weapon);
-
-    if(!isSubStr(weapon.model, "semtex")) {
-      continue;
-    }
-    weapon waittill("missile_stuck", stuckTo);
-
-    if(!isPlayer(stuckTo)) {
-      continue;
-    }
-    if(level.teamBased && isDefined(stuckTo.team) && stuckTo.team == self.team) {
-      weapon.isStuck = "friendly";
-      continue;
+      detach_all_weapons();
+      stow_on_back();
+      stow_on_hip();
     }
 
-    weapon.isStuck = "enemy";
-    weapon.stuckEnemyEntity = stuckTo;
+    detach_all_weapons() {
+      if(isDefined(self.tag_stowed_back))
+        self detach_back_weapon();
 
-    stuckTo maps\mp\gametypes\_hud_message::playerCardSplashNotify("semtex_stuck", self);
+      if(isDefined(self.tag_stowed_hip))
+        self detach_hip_weapon();
+    }
 
-    self thread maps\mp\gametypes\_hud_message::SplashNotify("stuck_semtex", 100);
-    self notify("process", "ch_bullseye");
-  }
-}
+    detach_back_weapon() {
+      detach_success = self detachIfAttached(self.tag_stowed_back, "tag_stowed_back");
 
-turret_monitorUse() {
-  for(;;) {
-    self waittill("trigger", player);
+      // test for bug
+      //assertex( detach_success, "Detaching: " + self.tag_stowed_back + " from tag: tag_stowed_back failed." );
+      self.tag_stowed_back = undefined;
+    }
 
-    self thread turret_playerThread(player);
-  }
-}
+    detach_hip_weapon() {
+      detach_success = self detachIfAttached(self.tag_stowed_hip, "tag_stowed_hip");
 
-turret_playerThread(player) {
-  player endon("death");
-  player endon("disconnect");
+      // test for bug
+      //assertex( detach_success, "Detaching: " + detach_model + " from tag: tag_stowed_hip failed." );
+      self.tag_stowed_hip = undefined;
+    }
 
-  player notify("weapon_change", "none");
+    stow_on_back() {
+      prof_begin("stow_on_back");
+      currentWeapon = self getCurrentWeapon();
+      currentIsAlt = isAltModeWeapon(currentWeapon);
 
-  self waittill("turret_deactivate");
+      assert(!isDefined(self.tag_stowed_back));
 
-  player notify("weapon_change", player getCurrentWeapon());
-}
+      stowWeapon = undefined;
+      stowCamo = 0;
+      large_projectile = self stowPriorityWeapon();
+      stowOffsetModel = undefined;
+
+      if(large_projectile != "") {
+        stowWeapon = large_projectile;
+      } else {
+        weaponsList = self getWeaponsListPrimaries();
+        foreach(weaponName in weaponsList) {
+          if(weaponName == currentWeapon) {
+            continue;
+          }
+          invType = weaponInventoryType(weaponName);
+
+          if(invType != "primary") {
+            if(invType == "altmode") {
+              continue;
+            }
+            if(weaponClass(weaponName) == "pistol")
+              continue;
+          }
+
+          if(WeaponType(weaponName) == "riotshield") {
+            continue;
+          }
+          // Don't stow the current on our back when we're using the alt
+          if(currentIsAlt && weaponAltWeaponName(weaponName) == currentWeapon) {
+            continue;
+          }
+          stowWeapon = weaponName;
+          stowOffsetModel = getStowOffsetModel(stowWeapon);
+
+          if(stowWeapon == self.primaryWeapon)
+            stowCamo = self.loadoutPrimaryCamo;
+          else if(stowWeapon == self.secondaryWeapon)
+            stowCamo = self.loadoutSecondaryCamo;
+          else
+            stowCamo = 0;
+        }
+      }
+
+      if(!isDefined(stowWeapon)) {
+        prof_end("stow_on_back");
+        return;
+      }
+
+      if(large_projectile != "") {
+        self.tag_stowed_back = level.stow_priority_model_array[large_projectile];
+      } else {
+        self.tag_stowed_back = getWeaponModel(stowWeapon, stowCamo);
+      }
+
+      if(isDefined(stowOffsetModel)) {
+        self attach(stowOffsetModel, "tag_stowed_back", true);
+        attachTag = "tag_stow_back_mid_attach";
+      } else {
+        attachTag = "tag_stowed_back";
+      }
+
+      self attach(self.tag_stowed_back, attachTag, true);
+
+      hideTagList = GetWeaponHideTags(stowWeapon);
+
+      if(!isDefined(hideTagList)) {
+        prof_end("stow_on_back");
+        return;
+      }
+
+      for(i = 0; i < hideTagList.size; i++)
+        self HidePart(hideTagList[i], self.tag_stowed_back);
+
+      prof_end("stow_on_back");
+    }
+
+    stow_on_hip() {
+      currentWeapon = self getCurrentWeapon();
+
+      assert(!isDefined(self.tag_stowed_hip));
+
+      stowWeapon = undefined;
+
+      weaponsList = self getWeaponsListOffhands();
+      foreach(weaponName in weaponsList) {
+        if(weaponName == currentWeapon) {
+          continue;
+        }
+        if(weaponName != "c4_mp" && weaponName != "claymore_mp") {
+          continue;
+        }
+        stowWeapon = weaponName;
+      }
+
+      if(!isDefined(stowWeapon)) {
+        return;
+      }
+      self.tag_stowed_hip = getWeaponModel(stowWeapon);
+      self attach(self.tag_stowed_hip, "tag_stowed_hip_rear", true);
+
+      hideTagList = GetWeaponHideTags(stowWeapon);
+
+      if(!isDefined(hideTagList)) {
+        return;
+      }
+      for(i = 0; i < hideTagList.size; i++)
+        self HidePart(hideTagList[i], self.tag_stowed_hip);
+    }
+
+    updateSavedLastWeapon() {
+      self endon("death");
+      self endon("disconnect");
+
+      currentWeapon = self.currentWeaponAtSpawn;
+      self.saved_lastWeapon = currentWeapon;
+
+      for(;;) {
+        self waittill("weapon_change", newWeapon);
+
+        if(newWeapon == "none") {
+          self.saved_lastWeapon = currentWeapon;
+          continue;
+        }
+
+        weaponInvType = weaponInventoryType(newWeapon);
+
+        if(weaponInvType != "primary" && weaponInvType != "altmode") {
+          self.saved_lastWeapon = currentWeapon;
+          continue;
+        }
+
+        if(newWeapon == "onemanarmy_mp") {
+          self.saved_lastWeapon = currentWeapon;
+          continue;
+        }
+
+        self updateMoveSpeedScale("primary");
+
+        self.saved_lastWeapon = currentWeapon;
+        currentWeapon = newWeapon;
+      }
+    }
+
+    EMPPlayer(numSeconds) {
+      self endon("disconnect");
+      self endon("death");
+
+      self thread clearEMPOnDeath();
+    }
+
+    clearEMPOnDeath() {
+      self endon("disconnect");
+
+      self waittill("death");
+    }
+
+    updateMoveSpeedScale(weaponType) {
+      /*
+      if( self _hasPerk( "specialty_lightweight" ) )
+      	self.moveSpeedScaler = 1.10;
+      else
+      	self.moveSpeedScaler = 1;
+      */
+
+      if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary")
+        weaponType = self.primaryWeapon;
+      else
+        weaponType = self.secondaryWeapon;
+
+      if(isDefined(self.primaryWeapon) && self.primaryWeapon == "riotshield_mp") {
+        self setMoveSpeedScale(.8 * self.moveSpeedScaler);
+        return;
+      }
+
+      if(!isDefined(weaponType))
+        weapClass = "none";
+      else
+        weapClass = weaponClass(weaponType);
+
+      switch (weapClass) {
+        case "rifle":
+          self setMoveSpeedScale(0.95 * self.moveSpeedScaler);
+          break;
+        case "pistol":
+          self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
+          break;
+        case "mg":
+          self setMoveSpeedScale(0.875 * self.moveSpeedScaler);
+          break;
+        case "smg":
+          self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
+          break;
+        case "spread":
+          self setMoveSpeedScale(.95 * self.moveSpeedScaler);
+          break;
+        case "rocketlauncher":
+          self setMoveSpeedScale(0.80 * self.moveSpeedScaler);
+          break;
+        case "sniper":
+          self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
+          break;
+        default:
+          self setMoveSpeedScale(1.0 * self.moveSpeedScaler);
+          break;
+      }
+    }
+
+    buildWeaponData(filterPerks) {
+      attachmentList = getAttachmentList();
+      max_weapon_num = 149;
+
+      baseWeaponData = [];
+
+      for(weaponId = 0; weaponId <= max_weapon_num; weaponId++) {
+        baseName = tablelookup("mp/statstable.csv", 0, weaponId, 4);
+        if(baseName == "") {
+          continue;
+        }
+        assetName = baseName + "_mp";
+
+        if(!isSubStr(tableLookup("mp/statsTable.csv", 0, weaponId, 2), "weapon_")) {
+          continue;
+        }
+        if(weaponInventoryType(assetName) != "primary") {
+          continue;
+        }
+        weaponInfo = spawnStruct();
+        weaponInfo.baseName = baseName;
+        weaponInfo.assetName = assetName;
+        weaponInfo.variants = [];
+
+        weaponInfo.variants[0] = assetName;
+        // the alphabetize function is slow so we try not to do it for every weapon/attachment combo; a code solution would be better.
+        attachmentNames = [];
+        for(innerLoopCount = 0; innerLoopCount < 6; innerLoopCount++) {
+          // generating attachment combinations
+          attachmentName = tablelookup("mp/statStable.csv", 0, weaponId, innerLoopCount + 11);
+
+          if(filterPerks) {
+            switch (attachmentName) {
+              case "fmj":
+              case "xmags":
+              case "rof":
+                continue;
+            }
+          }
+
+          if(attachmentName == "") {
+            break;
+          }
+
+          attachmentNames[attachmentName] = true;
+        }
+
+        // generate an alphabetized attachment list
+        attachments = [];
+        foreach(attachmentName in attachmentList) {
+          if(!isDefined(attachmentNames[attachmentName])) {
+            continue;
+          }
+          weaponInfo.variants[weaponInfo.variants.size] = baseName + "_" + attachmentName + "_mp";
+          attachments[attachments.size] = attachmentName;
+        }
+
+        for(i = 0; i < (attachments.size - 1); i++) {
+          colIndex = tableLookupRowNum("mp/attachmentCombos.csv", 0, attachments[i]);
+          for(j = i + 1; j < attachments.size; j++) {
+            if(tableLookup("mp/attachmentCombos.csv", 0, attachments[j], colIndex) == "no") {
+              continue;
+            }
+            weaponInfo.variants[weaponInfo.variants.size] = baseName + "_" + attachments[i] + "_" + attachments[j] + "_mp";
+          }
+        }
+
+        baseWeaponData[baseName] = weaponInfo;
+      }
+
+      return (baseWeaponData);
+    }
+
+    monitorSemtex() {
+      self endon("disconnect");
+      self endon("death");
+
+      for(;;) {
+        self waittill("grenade_fire", weapon);
+
+        if(!isSubStr(weapon.model, "semtex")) {
+          continue;
+        }
+        weapon waittill("missile_stuck", stuckTo);
+
+        if(!isPlayer(stuckTo)) {
+          continue;
+        }
+        if(level.teamBased && isDefined(stuckTo.team) && stuckTo.team == self.team) {
+          weapon.isStuck = "friendly";
+          continue;
+        }
+
+        weapon.isStuck = "enemy";
+        weapon.stuckEnemyEntity = stuckTo;
+
+        stuckTo maps\mp\gametypes\_hud_message::playerCardSplashNotify("semtex_stuck", self);
+
+        self thread maps\mp\gametypes\_hud_message::SplashNotify("stuck_semtex", 100);
+        self notify("process", "ch_bullseye");
+      }
+    }
+
+    turret_monitorUse() {
+      for(;;) {
+        self waittill("trigger", player);
+
+        self thread turret_playerThread(player);
+      }
+    }
+
+    turret_playerThread(player) {
+      player endon("death");
+      player endon("disconnect");
+
+      player notify("weapon_change", "none");
+
+      self waittill("turret_deactivate");
+
+      player notify("weapon_change", player getCurrentWeapon());
+    }

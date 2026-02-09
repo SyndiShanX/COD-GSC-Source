@@ -156,6 +156,6 @@ end_nojump() {
 helicopter_fail() {
   level endon("player_jumped");
   level waittill("heli_got_away");
-  setdvar("ui_deadquote", &"FLOOD_HELICOPTER_ESCAPED");
+  setDvar("ui_deadquote", &"FLOOD_HELICOPTER_ESCAPED");
   thread maps\_utility::missionfailedwrapper();
 }

@@ -82,7 +82,7 @@ player_on_minigun() {
     return false;
   if(self.classname == "script_vehicle") {
     owner = self getvehicleowner();
-    if(isDefined(owner) && isplayer(owner))
+    if(isDefined(owner) && isPlayer(owner))
       return true;
     else
       return false;

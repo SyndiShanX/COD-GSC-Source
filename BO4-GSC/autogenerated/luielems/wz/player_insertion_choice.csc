@@ -48,7 +48,6 @@ class cplayer_insertion_choice: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("_state", 1, 2, "int");
   }
-
 }
 
 register(uid) {

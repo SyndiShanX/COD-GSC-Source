@@ -628,7 +628,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   var_13 = var_2;
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
     if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
       if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
@@ -645,7 +645,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_13 = var_12.maxhealth;
   }
 
-  if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+  if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
     var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
   }
 
@@ -689,7 +689,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   var_12.var_E1 = var_12.var_E1 + var_13;
   var_12 playSound("talon_damaged");
   if(var_12.var_E1 >= var_12.maxhealth) {
-    if(isplayer(var_1) && !isDefined(var_12.owner) || var_1 != var_12.owner) {
+    if(isPlayer(var_1) && !isDefined(var_12.owner) || var_1 != var_12.owner) {
       var_12.var_1D41 = 1;
       var_1 notify("destroyed_killstreak", var_5);
       thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_remote_tank", var_1);

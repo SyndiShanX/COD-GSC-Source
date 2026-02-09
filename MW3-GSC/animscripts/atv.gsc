@@ -56,7 +56,7 @@ _id_24CD() {
   var_1 = [];
   var_1["left2right"] = getanimlength(animscripts\utility::_id_0D4D("left2right"));
   var_1["right2left"] = getanimlength(animscripts\utility::_id_0D4D("right2left"));
-  self setanimknoball( % atv_turn, % body, 1, 0);
+  self setanimknoball(%atv_turn, %body, 1, 0);
   self setanim(animscripts\utility::_id_0D4D("drive"), 1, 0);
   self setanimknob(animscripts\utility::_id_0D4D(var_0), 1, 0);
   self setanimtime(animscripts\utility::_id_0D4D(var_0), 0.5);
@@ -68,7 +68,6 @@ _id_24CD() {
 
       if(var_0 == "right2left") {
         var_3 = 1 - var_3;
-
       }
       var_4 = 20 * abs(var_3 - var_2);
 
@@ -97,7 +96,7 @@ _id_24CE() {
   self endon("killanimscript");
   var_0 = 0.05;
   var_1 = 0;
-  self setanimknoball( % atv_aiming, % body, 1, 0);
+  self setanimknoball(%atv_aiming, %body, 1, 0);
   self setanimknob(animscripts\utility::_id_0D4D("idle"), 1, 0);
 
   for(;;) {
@@ -121,7 +120,6 @@ _id_24CE() {
 
     if(var_1 <= gettime()) {
       _id_24D1();
-
     }
     self setanimknoblimited(animscripts\utility::_id_0D4D("add_aim_left_center"), var_3, var_0);
     self setanimlimited(animscripts\utility::_id_0D4D("add_aim_left_left"), var_4, var_0);
@@ -199,7 +197,7 @@ _id_24D0(var_0) {
 
 _id_24D1() {
   self notify("want_shoot_while_driving");
-  self setanim( % atv_add_fire, 1, 0.2);
+  self setanim(%atv_add_fire, 1, 0.2);
 
   if(isDefined(self._id_0EE9)) {
     return;
@@ -215,7 +213,7 @@ _id_24D2() {
   wait 0.05;
   self notify("end_shoot_while_driving");
   self._id_0EE9 = undefined;
-  self clearanim( % atv_add_fire, 0.2);
+  self clearanim(%atv_add_fire, 0.2);
 }
 
 _id_24D3() {
@@ -249,7 +247,6 @@ _id_24D5() {
     self._id_0CDA = "burst";
   } else {
     self._id_0CDA = "single";
-
   }
   if(isDefined(self.enemy.vehicle)) {
     var_1 = 0.5;
@@ -272,13 +269,11 @@ _id_24D5() {
           var_9 = 128;
         } else if(var_9 < -128) {
           var_9 = -128;
-
         }
         if(var_9 > 0) {
           var_9 = 128 - var_9;
         } else {
           var_9 = -128 - var_9;
-
         }
         self._id_0CAB = undefined;
         self._id_0CB1 = var_2.origin + var_8 * var_5 + var_9 * var_6;
@@ -307,15 +302,12 @@ _id_24D6() {
 _id_24D7() {
   if(!self._id_0EF1._id_0EF7) {
     return 0;
-
   }
   if(!animscripts\combat_utility::_id_0F08(0)) {
     return 0;
-
   }
   if(!animscripts\utility::_id_0EE3()) {
     return 0;
-
   }
   _id_24D8();
   self notify("abort_reload");
@@ -326,19 +318,19 @@ _id_24D8() {
   self endon("atv_event_occurred");
   self._id_0F0A = 1;
   self waittill("start_blending_reload");
-  self setanim( % atv_aiming, 0, 0.25);
+  self setanim(%atv_aiming, 0, 0.25);
   self setflaggedanimrestart("gun_down", animscripts\utility::_id_0D4D("gun_down"), 1, 0.25);
   animscripts\shared::_id_0C51("gun_down");
   self clearanim(animscripts\utility::_id_0D4D("gun_down"), 0);
-  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::_id_0D4D("reload"), % body, 1, 0.25);
+  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::_id_0D4D("reload"), %body, 1, 0.25);
   animscripts\shared::_id_0C51("reload_anim");
-  self clearanim( % atv_reload, 0.2);
+  self clearanim(%atv_reload, 0.2);
   self setflaggedanimrestart("gun_up", animscripts\utility::_id_0D4D("gun_up"), 1, 0.25);
   self._id_0F0B = 1;
   animscripts\shared::_id_0C51("gun_up", ::_id_24D9);
   self._id_0F0A = undefined;
-  self clearanim( % atv_reload, 0.1);
-  self setanim( % atv_aiming, 1, 0.1);
+  self clearanim(%atv_reload, 0.1);
+  self setanim(%atv_aiming, 1, 0.1);
 
   if(isDefined(self._id_0F0B)) {
     self._id_0F0B = undefined;
@@ -381,7 +373,6 @@ _id_24DC() {
 
     if(isDefined(self._id_0CAB)) {
       var_6 = self._id_0CAB getshootatpos();
-
     }
     if(!isDefined(var_6)) {
       var_3 = 0;
@@ -399,7 +390,6 @@ _id_24DC() {
 
     if(var_3 > self.rightaimlimit || var_3 < self.leftaimlimit) {
       var_3 = 0;
-
     }
     if(var_4) {
       var_4 = 0;
@@ -414,8 +404,8 @@ _id_24DC() {
     var_2 = var_3;
     var_11 = min(max(0 - var_3, 0), 90) / 90 * self.a._id_0CC3;
     var_12 = min(max(var_3, 0), 90) / 90 * self.a._id_0CC3;
-    self setanimlimited( % atv_aim_4, var_11, var_0);
-    self setanimlimited( % atv_aim_6, var_12, var_0);
+    self setanimlimited(%atv_aim_4, var_11, var_0);
+    self setanimlimited(%atv_aim_6, var_12, var_0);
     wait 0.05;
   }
 }
@@ -444,7 +434,6 @@ _id_24DD(var_0, var_1, var_2) {
 
   if(isDefined(anim._id_24DE) && var_8 == anim._id_24DE && gettime() - anim._id_24DF < 500) {
     var_8 = var_4;
-
   }
   anim._id_24DE = var_8;
   anim._id_24DF = gettime();
@@ -458,7 +447,6 @@ _id_24E0() {
 
   if(lengthsquared(var_1) > 1000000) {
     var_1 = vectornormalize(var_1) * 1000;
-
   }
   var_2 = spawn("script_origin", self.origin);
   var_2 moveslide((0, 0, 40), 15, var_1);
@@ -485,7 +473,6 @@ _id_24E2() {
 
   if(!isDefined(var_0)) {
     return _id_24E1();
-
   }
   var_1 = var_0._id_0F15;
   _id_24E0();

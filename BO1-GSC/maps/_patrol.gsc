@@ -7,6 +7,7 @@
 #include maps\_utility;
 #include maps\_anim;
 #using_animtree("generic_human");
+
 patrol_init() {
   level.scr_anim["generic"]["patrol_walk"] = % patrol_bored_patrolwalk;
   level.scr_anim["generic"]["patrol_walk_twitch"] = % patrol_bored_patrolwalk_twitch;
@@ -25,7 +26,6 @@ patrol_init() {
   level.scr_anim["generic"]["patrol_idle_phone"] = % patrol_bored_idle_cellphone;
   level._patrol_init = true;
 }
-
 patrol(start_target) {
   if(!isDefined(level._patrol_init)) {
     patrol_init();
@@ -174,7 +174,6 @@ patrol(start_target) {
     nextgoal = random(currentgoals);
   }
 }
-
 patrol_walk_twitch_loop() {
   self endon("death");
   self endon("enemy");
@@ -210,14 +209,12 @@ patrol_walk_twitch_loop() {
     }
   }
 }
-
 waittill_combat_wait() {
   self endon("end_patrol");
   level endon("_stealth_spotted");
   level endon("_stealth_found_corpse");
   self waittill("enemy");
 }
-
 waittill_death() {
   self waittill("death");
   if(!isDefined(self)) {
@@ -225,7 +222,6 @@ waittill_death() {
   }
   release_claimed_node();
 }
-
 release_claimed_node() {
   self notify("release_node");
   if(!isDefined(self.last_patrol_goal)) {
@@ -233,7 +229,6 @@ release_claimed_node() {
   }
   self.last_patrol_goal.patrol_claimed = undefined;
 }
-
 waittill_combat() {
   self endon("death");
   assert(!isDefined(self.enemy));
@@ -257,7 +252,6 @@ waittill_combat() {
   }
   self.last_patrol_goal.patrol_claimed = undefined;
 }
-
 get_target_ents() {
   array = [];
   if(isDefined(self.target)) {
@@ -265,7 +259,6 @@ get_target_ents() {
   }
   return array;
 }
-
 get_target_nodes() {
   array = [];
   if(isDefined(self.target)) {
@@ -273,7 +266,6 @@ get_target_nodes() {
   }
   return array;
 }
-
 get_linked_nodes() {
   array = [];
   if(isDefined(self.script_linkto)) {
@@ -287,7 +279,6 @@ get_linked_nodes() {
   }
   return array;
 }
-
 showclaimed(goal) {
   self endon("release_node");
 }

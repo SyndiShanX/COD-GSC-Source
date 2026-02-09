@@ -334,7 +334,7 @@ function _monkey_zombietempledeathcallback(einflictor, attacker, idamage, smeans
   self.grenadeammo = 0;
   self thread zombie_utility::zombie_eye_glow_stop();
   playFX(level._effect["monkey_death"], self.origin);
-  if(isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker zm_audio::create_and_play_dialog("kill", "thief");
   }
   if(self.damagemod == "MOD_BURNED") {
@@ -678,7 +678,7 @@ function _monkey_zombietempleescapedeathcallback(einflictor, attacker, idamage, 
   self.grenadeammo = 0;
   playsoundatposition("zmb_stealer_death", self.origin);
   self thread zombie_utility::zombie_eye_glow_stop();
-  if(isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker zm_audio::create_and_play_dialog("kill", "thief");
     isfavoriteenemy = isDefined(self.favoriteenemy) && self.favoriteenemy == self.attacker;
     nomeleehits = !isDefined(self.melee_count) || self.melee_count == 0;
@@ -686,7 +686,7 @@ function _monkey_zombietempleescapedeathcallback(einflictor, attacker, idamage, 
       self.attacker zm_score::player_add_points("thundergun_fling", 500, (0, 0, 0), 0);
     }
   }
-  if(isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker zm_score::player_add_points("damage");
   }
   if(isDefined(self.powerup)) {

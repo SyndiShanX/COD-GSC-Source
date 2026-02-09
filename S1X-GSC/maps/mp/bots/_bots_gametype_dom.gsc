@@ -230,7 +230,7 @@ should_start_cautious_approach_dom(firstCheck) {
 }
 
 bot_dom_debug_should_capture_all() {
-  if(GetDvar("bot_dom_debug_capture_all") == "1") {
+  if(getDvar("bot_dom_debug_capture_all") == "1") {
     return true;
   }
 
@@ -238,7 +238,7 @@ bot_dom_debug_should_capture_all() {
 }
 
 bot_dom_debug_should_protect_all() {
-  if(GetDvar("bot_dom_debug_protect_all") == "1") {
+  if(getDvar("bot_dom_debug_protect_all") == "1") {
     return true;
   }
 
@@ -455,7 +455,6 @@ bot_choose_flag() {
         } else {
           flag_num = 2;
         }
-
       }
 
       goal_type = undefined;

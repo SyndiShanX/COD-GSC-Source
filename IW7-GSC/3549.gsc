@@ -111,7 +111,7 @@ c4_destroyonemp() {
     var_5 = "hitequip";
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_5);
   }
 

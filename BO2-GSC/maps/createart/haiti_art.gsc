@@ -8,8 +8,8 @@
 
 main() {
   level.tweakfile = 1;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   vs_trigs = getEntArray("visionset", "targetname");
   array_thread(vs_trigs, ::vision_set);
 }
@@ -39,8 +39,8 @@ vision_set_change(str_vision_set) {
 
   switch (str_vision_set) {
     case "sp_haiti_intro":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
   }
 
   visionsetnaked(str_vision_set, n_vs_time);
@@ -64,7 +64,7 @@ vision_set() {
 
 vtol_interior() {
   visionsetnaked("sp_haiti_vtol_interior", 0.1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity", 8);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
   setsaveddvar("sm_sunAlwaysCastsShadow", 1);
@@ -75,14 +75,14 @@ vtol_interior() {
 
 vtol_interior_door_open() {
   visionsetnaked("sp_haiti_vtol_interior", 0.1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity", 8);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
 
 skydive_pre_gameplay() {
   visionsetnaked("sp_haiti_skydive_pre_gameplay", 0.1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity", 8);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
   setsaveddvar("sm_sunAlwaysCastsShadow", 0);
@@ -91,28 +91,28 @@ skydive_pre_gameplay() {
 
 skydive_section_01() {
   visionsetnaked("sp_haiti_skydive_section_01", 0.1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity", 8);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
 
 skydive_section_02() {
   visionsetnaked("sp_haiti_skydive_section_01", 0.1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity", 8);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
 
 skydive_landing() {
   visionsetnaked("sp_haiti_landing", 0.1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity", 8);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
 
 ground() {
   visionsetnaked("sp_haiti_ground", 0.1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity", 8);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }

@@ -1207,7 +1207,7 @@ applyloadout() {
 
   if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
     if(!isDefined(self.costume)) {
-      if(isplayer(self))
+      if(isPlayer(self))
         self.costume = cao_getactivecostume();
       else if(isagent(self) && self.agent_type == "player")
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();

@@ -171,7 +171,7 @@ watchfordirectplayerdamage(var_0, var_1) {
       continue;
     }
 
-    if(!isplayer(var_3) && !isagent(var_3)) {
+    if(!isPlayer(var_3) && !isagent(var_3)) {
       continue;
     }
 

@@ -10,7 +10,6 @@ main() {
 
   if(isendstr(self.headmodel, "_hat")) {
     codescripts\character::attachhat("alias_africa_militia_hats_b", _id_05BB::main());
-
   }
   self.voice = "african";
 }

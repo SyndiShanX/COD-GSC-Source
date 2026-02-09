@@ -150,15 +150,11 @@ function private squadmemberthink() {
           if(isDefined(self.enemy)) {
             self setgoal(self.enemy);
           }
-          [
-            [squad]
-          ] - > addsquadbreadcrumbs(self);
+          [[squad]] - > addsquadbreadcrumbs(self);
         } else {
           recordline(self.origin, squadleader.origin, (0, 1, 0), "", self);
           recordenttext(self.squadname + "", self, (0, 1, 0), "");
-          followposition = [
-            [squad]
-          ] - > getsquadbreadcrumb();
+          followposition = [[squad]] - > getsquadbreadcrumb();
           followdistsq = distance2dsquared(self.goalpos, followposition);
           if(isDefined(squadleader.enemy)) {
             if(!isDefined(self.enemy) || (isDefined(self.enemy) && self.enemy != squadleader.enemy)) {

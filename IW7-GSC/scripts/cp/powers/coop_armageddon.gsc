@@ -87,7 +87,7 @@ area_has_enemies(var_0) {
 
 drop_meteor_in_area(var_0, var_1) {
   var_2 = get_drop_pos(var_0);
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     magicbullet("iw7_armageddonmeteor_mp", var_2.start, var_2.end, var_1);
     return;
   }

@@ -324,7 +324,6 @@ init_flags_here() {
   flag_init("heli_firing");
 
   flag_init("debug_crumbs");
-
 }
 
 empty() {}
@@ -559,7 +558,7 @@ start_boatdrive_end() {
 }
 
 start_boatdrive_nofail() {
-  SetDvar("scr_zodiac_test", 1);
+  setDvar("scr_zodiac_test", 1);
   level.player EnableInvulnerability();
   thread start_default();
 }
@@ -707,5 +706,4 @@ af_chase_music() {
       AssertMsg("Unhandled start point " + level.start_point);
       break;
   }
-
 }

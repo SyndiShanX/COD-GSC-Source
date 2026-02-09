@@ -21,18 +21,18 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_ca_rumble");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.55");
-    SetDvar("sm_sunsamplesizenear", ".15");
+    setDvar("sm_sunShadowScale", "0.55");
+    setDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.56" + "");
-    SetDvar("sm_sunsamplesizenear", ".22");
+    setDvar("sm_sunShadowScale", "0.56" + "");
+    setDvar("sm_sunsamplesizenear", ".22");
   } else {
-    SetDvar("sm_sunShadowScale", "0.9");
-    SetDvar("sm_sunsamplesizenear", ".27");
+    setDvar("sm_sunShadowScale", "0.9");
+    setDvar("sm_sunsamplesizenear", ".27");
   }
 
   setdvar_cg_ng("r_specularColorScale", 1.7, 5);
@@ -448,7 +448,6 @@ setup_fish() {
   if(isDefined(fish)) {
     fish thread update_fish();
   }
-
 }
 
 update_fish() {
@@ -519,7 +518,7 @@ metal_detector_damage_monitor(metal_detector) {
   self setCanDamage(true);
   while(self.md_health > 0.0) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(IsPlayer(attacker))
+    if(isPlayer(attacker))
       self.maintain_fx = true;
     self.md_health -= amount;
   }

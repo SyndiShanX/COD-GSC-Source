@@ -105,7 +105,7 @@ sq_atd_watch_elevator(str_flag) {
   while(true) {
     self waittill("trigger", e_who);
 
-    if(!isplayer(e_who)) {
+    if(!isPlayer(e_who)) {
       wait 0.05;
       continue;
     }

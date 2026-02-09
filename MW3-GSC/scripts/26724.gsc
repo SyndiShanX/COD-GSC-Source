@@ -6,7 +6,6 @@
 _id_49DB(var_0, var_1, var_2) {
   if(!isDefined(level._id_49DC)) {
     thread _id_49EE();
-
   }
   var_3 = spawnStruct();
   level._id_49DC[var_0] = var_3;
@@ -18,7 +17,6 @@ _id_49DB(var_0, var_1, var_2) {
     }
   } else {
     var_3._id_49DE = 0;
-
   }
   var_3._id_49DF = spawnStruct();
   var_3._id_49E0 = spawnStruct();
@@ -45,7 +43,6 @@ _id_49E5() {}
 _id_49E6(var_0, var_1) {
   if(var_0.priority >= 100) {
     return 1;
-
   }
   if(isarray(var_1._id_49DD)) {
     for(var_2 = 0; var_2 < var_1._id_49DD.size; var_2++) {
@@ -55,7 +52,6 @@ _id_49E6(var_0, var_1) {
     }
   } else if(var_0._id_3EC1 + var_1._id_49DE > var_1._id_49DD) {
     return 0;
-
   }
   return 1;
 }
@@ -91,7 +87,6 @@ _id_49E9(var_0, var_1) {
         var_1._id_49DF._id_49E3._id_49EA = undefined;
       } else {
         var_1._id_49DF._id_49EB = undefined;
-
       }
       var_2._id_49E4 = undefined;
 
@@ -149,7 +144,6 @@ _id_49F0(var_0, var_1) {
         var_1._id_49EA = var_8;
       } else {
         var_2._id_49DF._id_49E3 = var_1;
-
       }
       var_1._id_49E4 = var_7;
       var_7._id_49EA = var_1;
@@ -182,13 +176,11 @@ _id_49F3(var_0, var_1) {
     var_2._id_49E4 = var_3;
   } else {
     var_0._id_49E3 = var_1._id_49E4;
-
   }
   if(isDefined(var_3)) {
     var_3._id_49EA = var_2;
   } else {
     var_0._id_49EB = var_1._id_49EA;
-
   }
   var_1._id_49EA = undefined;
   var_1._id_49E4 = undefined;
@@ -198,7 +190,6 @@ _id_49F3(var_0, var_1) {
 _id_49F4(var_0, var_1, var_2) {
   if(var_2 && isDefined(var_1._id_49F5)) {
     [[var_1._id_49F5]](var_1);
-
   }
   _id_49E8(var_1, var_0);
   _id_49F3(var_0._id_49E0, var_1);
@@ -208,7 +199,6 @@ _id_49F4(var_0, var_1, var_2) {
 _id_49F6(var_0, var_1, var_2) {
   if(var_2 && isDefined(var_1._id_49F7)) {
     [[var_1._id_49F7]](var_1);
-
   }
   _id_49F3(var_0._id_49DF, var_1);
 }
@@ -258,7 +248,6 @@ _id_49F8(var_0, var_1) {
 _id_49F9(var_0, var_1) {
   if(isDefined(var_1)) {
     wait(var_1);
-
   }
   if(!isDefined(var_0)) {
     return;
@@ -308,7 +297,6 @@ _id_49FD(var_0, var_1) {
     while(isDefined(var_0)) {
       if(isDefined(var_0.name) && var_0.name == var_1) {
         var_2++;
-
       }
       var_0 = var_0._id_49E4;
     }
@@ -332,7 +320,6 @@ _id_49FF(var_0, var_1) {
 _id_4A00(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1)) {
     var_1 = -1;
-
   }
   var_5 = _id_4A03(var_2, var_3, var_4);
   var_5._id_4A01 = var_0;
@@ -343,15 +330,12 @@ _id_4A00(var_0, var_1, var_2, var_3, var_4) {
 _id_4A03(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     var_0 = 100;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 100;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   var_3 = _id_49EF(var_0, var_1, var_2);
   var_3._id_49ED = ::_id_4A04;
@@ -372,7 +356,6 @@ _id_4A06(var_0) {}
 _id_4A07(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1)) {
     var_1 = -1;
-
   }
   var_5 = _id_4A09(var_2, var_3, var_4);
   var_5._id_4A08 = var_0;
@@ -382,15 +365,12 @@ _id_4A07(var_0, var_1, var_2, var_3, var_4) {
 _id_4A09(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     var_0 = 100;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 100;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   var_3 = _id_49EF(var_0, var_1, var_2);
   var_3._id_49ED = ::_id_4A0A;

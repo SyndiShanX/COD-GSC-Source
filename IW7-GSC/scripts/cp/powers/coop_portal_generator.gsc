@@ -148,7 +148,7 @@ func_13B15(var_0) {
   var_2 = 1;
   for(;;) {
     self waittill("trigger", var_3);
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       wait(0.1);
       continue;
     }

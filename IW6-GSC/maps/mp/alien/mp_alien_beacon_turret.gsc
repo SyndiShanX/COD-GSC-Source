@@ -87,7 +87,7 @@ remote_turret_monitoruse() {
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     if(var_2 maps\mp\alien\_utility::is_holding_deployable()) {

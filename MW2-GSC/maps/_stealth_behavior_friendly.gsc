@@ -40,8 +40,8 @@ friendly_state_hidden() {
 
 friendly_state_spotted() {
   //-->NEW ASSERT COME GRAB MO IF THIS HITS
-  assert(!isplayer(self));
-  //if( isplayer( self ) )
+  assert(!isPlayer(self));
+  //if( isPlayer( self ) )
   //	return;
 
   self thread set_battlechatter(true);

@@ -1267,7 +1267,7 @@ breach_participants_ready_to_proceed(player, breach_friendlies, door_volume) {
 
   // Check if friendlies are ready to breach...
   if(!breach_friendlies_ready_at_other_door(door_volume, true)) {
-    if(GetDvar("breach_requires_friendlies_in_position") == "1") {
+    if(getDvar("breach_requires_friendlies_in_position") == "1") {
       if(!breachfriendlies_can_teleport(breach_friendlies, door_volume))
         return false;
     }
@@ -1302,11 +1302,10 @@ wait_for_breach_or_deletion(ent) {
         continue;
     }
 
-    /*----------------------------------------------
-    MAKE SURE THERE ARE NO ENEMIES, IF WE CARE
+    /*---------------------------------------------- MAKE SURE THERE ARE NO ENEMIES, IF WE CARE
     ------------------------------------------------*/
     if((isDefined(ent.safe_volume)) && (!is_specialop())) {
-      if(IsPlayer(other) && IsAlive(other)) {
+      if(isPlayer(other) && IsAlive(other)) {
         enemies = ent.safe_volume get_ai_touching_volume("axis");
         if(enemies.size) {
           thread breach_too_many_enemies_hint();
@@ -1315,12 +1314,11 @@ wait_for_breach_or_deletion(ent) {
       }
     }
 
-    /*----------------------------------------------
-    TRIGGER THE PLAYER BREACH, FRIENDLY BREACH, OR JUST OPEN THE DOOR
+    /*---------------------------------------------- TRIGGER THE PLAYER BREACH, FRIENDLY BREACH, OR JUST OPEN THE DOOR
     ------------------------------------------------*/
     breach_friendlies = get_available_breachfriendlies(door_volume);
 
-    if(IsPlayer(other) && IsAlive(other)) {
+    if(isPlayer(other) && IsAlive(other)) {
       if(breach_should_be_skipped(trigger.script_slowmo_breach)) {
         break;
       }
@@ -1600,7 +1598,7 @@ friendlies_breach(breach_array, aBreachFriendlies) {
 
   player_volume = get_player_volume(door_volume);
 
-  breachRequiresFriendlies = (GetDvar("breach_requires_friendlies_in_position") == "1");
+  breachRequiresFriendlies = (getDvar("breach_requires_friendlies_in_position") == "1");
   if(!breachRequiresFriendlies) {
     // override teleport if they're already there and we can rely on normal breaching logic
     if(isDefined(player_volume) && breach_friendlies_ready_at_other_door(player_volume)) {
@@ -2112,7 +2110,7 @@ get_available_breachfriendlies(volume) {
   // don't want dead/removed guys to be considered
   available_friendlies = array_removeDead(level.breachfriendlies);
 
-  breachRequiresFriendlies = (GetDvar("breach_requires_friendlies_in_position") == "1");
+  breachRequiresFriendlies = (getDvar("breach_requires_friendlies_in_position") == "1");
 
   foreach(guy in available_friendlies) {
     // remove him if he's already breaching
@@ -2148,7 +2146,7 @@ breach_group_trigger_think() {
 }
 
 slowmo_player_cleanup() {
-  AssertEx(IsPlayer(self), "slowmo_player_cleanup() called on a non-player.");
+  AssertEx(isPlayer(self), "slowmo_player_cleanup() called on a non-player.");
 
   if(isDefined(level.playerSpeed))
     self SetMoveSpeedScale(level.playerSpeed);
@@ -2333,8 +2331,8 @@ clear_breaching_variable() {
 
 slomo_difficulty_dvars() {
   //Get current viewKick values
-  old_bg_viewKickScale = GetDvar("bg_viewKickScale"); // 0.8
-  old_bg_viewKickMax = GetDvar("bg_viewKickMax"); // 90
+  old_bg_viewKickScale = getDvar("bg_viewKickScale"); // 0.8
+  old_bg_viewKickMax = getDvar("bg_viewKickMax"); // 90
   SetSavedDvar("bg_viewKickScale", 0.3); // make the view kick a little easier
   SetSavedDvar("bg_viewKickMax", "15"); // make the view kick a little easier
 
@@ -2440,7 +2438,7 @@ breach_enemy_spawner_think() {
 record_last_player_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
   if(!isalive(attacker))
     return;
-  if(!IsPlayer(attacker))
+  if(!isPlayer(attacker))
     return;
   if(!self IsBadGuy()) {
     return;
@@ -2583,13 +2581,12 @@ hostage_health_regen() {
   while(isDefined(self)) {
     self waittill("damage", amount, attacker);
     if(isDefined(attacker)) {
-      if(IsPlayer(attacker)) {
+      if(isPlayer(attacker)) {
         //self DoDamage( self.health + 100, self.origin, level.player );
         self Kill(self.origin, level.player);
         break;
       } else if((isDefined(attacker.team)) && (attacker.team == "allies"))
         self.health = baseHealth;
-
     }
   }
 }
@@ -2607,7 +2604,7 @@ hostage_mission_fail() {
   missionFailedHostage = false;
   self thread hostage_health_regen();
   room_volume = get_room_volume_from_slomo_breach_number(self.script_slowmo_breach);
-  if(GetDvar("hostage_missionfail") == "0") {
+  if(getDvar("hostage_missionfail") == "0") {
     return;
   }
   while(isDefined(self)) {
@@ -2615,7 +2612,7 @@ hostage_mission_fail() {
     // Mission failed. A hostage was executed.
 
     if(isDefined(attacker)) {
-      if(IsPlayer(attacker)) {
+      if(isPlayer(attacker)) {
         level notify("player_shot_a_hostage");
         // Mission failed. You killed a hostage.
         waittillframeend; // give level.last_player_damage a chance to get set
@@ -2634,7 +2631,7 @@ hostage_mission_fail() {
         }
 
         missionFailedHostage = true;
-      } else if((isDefined(attacker.team)) && (attacker.team == "allies") && (!IsPlayer(attacker))) {
+      } else if((isDefined(attacker.team)) && (attacker.team == "allies") && (!isPlayer(attacker))) {
         AssertMsg("hostage was accidentally killed by a friendly...need a script fix for this");
         // Mission failed. A hostage was executed.
         breach_set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
@@ -2722,7 +2719,7 @@ set_door_charge_anim_special() {
   level.scr_anim["breach_door_charge"]["breach"] = % breach_player_frame_charge;
 }
 
-//#using_animtree( "player" );
+/using_animtree( "player" );
 #using_animtree("multiplayer");
 player_animations() {
   if(!isDefined(level.slowmo_viewhands))
@@ -3092,7 +3089,7 @@ breach_debug_display_animnames(room_volume) {
     return;
   org = self.origin;
   wait(0.05);
-  if(GetDvar("breach_debug") == "0")
+  if(getDvar("breach_debug") == "0")
     return;
   //self ==> the script_origin in the door targeted by the lookat trigger
   aBreachAI = [];
@@ -3111,7 +3108,6 @@ breach_debug_display_animnames(room_volume) {
         thread debug_message(spawner.animation, neworg, 1);
         neworg = neworg - (0, 0, 10);
       }
-
     }
 
     wait(1);
@@ -3151,8 +3147,7 @@ get_manhandled() {
   self.readyToBeManhandled = false;
   self.startManhandling = false;
   manhandlerSpawner = undefined;
-  /*-----------------------
-  FIND THE MANHANDLER ASSOCIATED WITH THIS HOSTAGE
+  /*----------------------- FIND THE MANHANDLER ASSOCIATED WITH THIS HOSTAGE
   -------------------------*/
   if(self.script_noteworthy == "manhandled") {
     manhandlerSpawner = GetEnt(self.target, "targetname");
@@ -3161,8 +3156,7 @@ get_manhandled() {
 
   friendly_manhandler = undefined; // may not spawn a manhandler if this hostage will just be guarded....the hostage getting manhandled will take care of spawning him
 
-  /*-----------------------
-  BUILD LIST OF ANIMS FOR THIS HOSTAGE
+  /*----------------------- BUILD LIST OF ANIMS FOR THIS HOSTAGE
   -------------------------*/
   sAnimManhandledPrepare = undefined;
   sAnimManhandledPrepareIdle = undefined;
@@ -3188,14 +3182,12 @@ get_manhandled() {
   sAnimManhandledPrepare = sAnimManhandled + "_prepare" + sAnimVariationSuffix;
   sAnimManhandledPrepareIdle = sAnimManhandled + "_prepare_idle" + sAnimVariationSuffix;
   sAnimManhandled = sAnimManhandled + sAnimVariationSuffix;
-  /*-----------------------
-  MAKE SURE THERE ARE AT LEAST THE MANHANDLED ANIM AND THE IDLE
+  /*----------------------- MAKE SURE THERE ARE AT LEAST THE MANHANDLED ANIM AND THE IDLE
   -------------------------*/
   self assert_if_anim_not_defined(sAnimManhandled);
   self assert_if_anim_not_defined(sAnimManhandledIdle);
 
-  /*-----------------------
-  SPAWN MANHANDLER OUTSIDE DOOR, ONLY FOR THE ONE GETTING TAKEN DOWN
+  /*----------------------- SPAWN MANHANDLER OUTSIDE DOOR, ONLY FOR THE ONE GETTING TAKEN DOWN
   -------------------------*/
   if(self.script_noteworthy == "manhandled") {
     friendly_manhandler = manhandlerSpawner spawn_ai(true);
@@ -3208,31 +3200,26 @@ get_manhandled() {
     friendly_manhandler thread manhandler_think();
   }
 
-  /*-----------------------
-  WAIT UNTIL PLAYER PLANTS CHARGE
+  /*----------------------- WAIT UNTIL PLAYER PLANTS CHARGE
   -------------------------*/
   wait(1);
 
-  /*-----------------------
-  SHOW MANHANDLER, IF THERE IS ONE TO SHOW
+  /*----------------------- SHOW MANHANDLER, IF THERE IS ONE TO SHOW
   -------------------------*/
   if(self.script_noteworthy == "manhandled")
     friendly_manhandler Show();
 
-  /*-----------------------
-  WAIT TO FINISH REGULAR BREACH ANIM
+  /*----------------------- WAIT TO FINISH REGULAR BREACH ANIM
   -------------------------*/
   self waittill("finished_breach_start_anim");
 
-  /*-----------------------
-  PLAY MANHANDLE PREPARE ANIMS
+  /*----------------------- PLAY MANHANDLE PREPARE ANIMS
   -------------------------*/
   if(anim_exists(sAnimManhandledPrepare)) {
     self.reference anim_generic(self, sAnimManhandledPrepare);
   }
 
-  /*-----------------------
-  PLAY MANHANDLE PREPARE IDLE UNTIL MANHANDLER READY TO COME IN
+  /*----------------------- PLAY MANHANDLE PREPARE IDLE UNTIL MANHANDLER READY TO COME IN
   -------------------------*/
   if(anim_exists(sAnimManhandledPrepareIdle))
     self.reference thread anim_generic_loop(self, sAnimManhandledPrepareIdle, "stop_idle");
@@ -3241,15 +3228,13 @@ get_manhandled() {
 
   self.readyToBeManhandled = true;
 
-  /*-----------------------
-  ONLY WAIT IF THE HOSTAGE HAS AN APPROPRIATE LOOP
+  /*----------------------- ONLY WAIT IF THE HOSTAGE HAS AN APPROPRIATE LOOP
   -------------------------*/
   if(isDefined(sAnimManhandledPrepareIdle)) {
     while(self manhandler_hold())
       wait(0.05);
   }
-  /*-----------------------
-  PLAY MANHANDLE ANIMS
+  /*----------------------- PLAY MANHANDLE ANIMS
   -------------------------*/
   self.reference notify("stop_idle");
   self notify("stop_idle");
@@ -3262,8 +3247,7 @@ get_manhandled() {
   //play hostage manhandle
   self.reference anim_generic(self, sAnimManhandled);
 
-  /*-----------------------
-  PLAY MANHANDLE IDLES
+  /*----------------------- PLAY MANHANDLE IDLES
   -------------------------*/
   //Play friendly manhandler idle if there
   if((isDefined(friendly_manhandler)) && (isDefined(level.scr_anim["generic"][friendly_manhandler.animation + "_idle"]))) {
@@ -3363,7 +3347,7 @@ player_loses_speedscale(progress, start, end) {
 
 manhandler_think() {
   level endon("mission failed");
-  if(GetDvar("hostage_missionfail") == "1") {
+  if(getDvar("hostage_missionfail") == "1") {
     level endon("player_shot_a_hostage");
   }
   self thread magic_bullet_shield();
@@ -3372,8 +3356,7 @@ manhandler_think() {
     self.ignoreme = true;
   self.grenadeawareness = 0;
   wait(1);
-  /*-----------------------
-  GET POINTERS TO THE HOSTAGES I WILL MANHANDLE
+  /*----------------------- GET POINTERS TO THE HOSTAGES I WILL MANHANDLE
   -------------------------*/
   aHostages = [];
   aAI = GetAISpeciesArray("neutral", "civilian");
@@ -3387,8 +3370,7 @@ manhandler_think() {
   }
   AssertEx(aHostages.size > 0, "Manhandler with export " + self.export+" can not find any hostages with script_noteworthy containing 'manhandled*' in its script_slomo_breach number");
 
-  /*-----------------------
-  WAIT FOR ALL ASSOCIATED HOSTAGES TO BE READY TO BE MANHANDLED
+  /*----------------------- WAIT FOR ALL ASSOCIATED HOSTAGES TO BE READY TO BE MANHANDLED
   -------------------------*/
   iCounter = aHostages.size;
   tempArray = aHostages;
@@ -3400,18 +3382,15 @@ manhandler_think() {
         tempArray = array_remove(tempArray, guy);
         iCounter--;
       }
-
     }
   }
-  /*-----------------------
-  TELL MANHANDLER TO START MANHANDLE SEQUENCE
+  /*----------------------- TELL MANHANDLER TO START MANHANDLE SEQUENCE
   -------------------------*/
   foreach(guy in aHostages) {
     // This shouldn't be necessary?
     if(isDefined(guy))
       guy.startManhandling = true;
   }
-
 }
 
 assert_if_anim_not_defined(sAnim) {

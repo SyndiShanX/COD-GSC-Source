@@ -2119,7 +2119,7 @@ chopper_attacker_check() {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
     if(isDefined(var_3)) {
-      if(isplayer(var_3)) {
+      if(isPlayer(var_3)) {
         if(isDefined(var_11)) {
           if(var_11 == "rpg_player" || var_11 == "maaws") {
             thread chopper_damage_state();
@@ -3141,7 +3141,7 @@ lariver_defend_aa72x_missile_detection() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(maps\deer_hunt_util::array_is_defined([var_9, var_1]) && var_9 == "maaws" && isplayer(var_1)) {
+    if(maps\deer_hunt_util::array_is_defined([var_9, var_1]) && var_9 == "maaws" && isPlayer(var_1)) {
       self kill((0, 0, 0), level.player);
       common_scripts\utility::flag_set("player_killed_defend_aa72x");
 
@@ -3479,7 +3479,7 @@ lariver_chopper_passanger_logic() {
     return;
   }
   if(isDefined(var_0)) {
-    if(isplayer(var_0))
+    if(isPlayer(var_0))
       self.ridingvehicle notify("player_attacked_riders");
   }
 }

@@ -34,7 +34,7 @@ stage_logic() {
 exit_stage(success) {}
 
 ee_zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
-  if(isDefined(attacker) && isplayer(attacker) && maps\mp\zm_tomb_chamber::is_point_in_chamber(self.origin)) {
+  if(isDefined(attacker) && isPlayer(attacker) && maps\mp\zm_tomb_chamber::is_point_in_chamber(self.origin)) {
     level.n_ee_portal_souls++;
 
     if(level.n_ee_portal_souls == 1)

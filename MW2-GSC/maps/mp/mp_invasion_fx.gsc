@@ -21,7 +21,6 @@ main() {
   level._effect["falling_brick_runner"] = loadfx("misc/falling_brick_runner");
   level._effect["falling_brick_runner_line_400"] = loadfx("misc/falling_brick_runner_line_400");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_invasion_fx::main();
-
 }

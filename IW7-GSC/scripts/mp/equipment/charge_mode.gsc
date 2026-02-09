@@ -424,7 +424,7 @@ func_3D06(var_0) {
       continue;
     }
 
-    if(!isplayer(var_1) && !scripts\mp\utility::func_9F22(var_1)) {
+    if(!isPlayer(var_1) && !scripts\mp\utility::func_9F22(var_1)) {
       continue;
     }
 
@@ -437,7 +437,7 @@ func_3D18(var_0, var_1) {
     return;
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(var_1 func_8569()) {
       return;
     }

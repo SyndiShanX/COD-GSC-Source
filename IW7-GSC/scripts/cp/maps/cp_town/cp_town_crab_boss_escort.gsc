@@ -645,7 +645,7 @@ egg_sac_damage_monitor(var_0, var_1) {
     var_0 waittill("damage", var_2, var_3);
     var_0.health = 999999;
     var_0.fake_health = var_0.fake_health - var_2;
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       show_hit_marker(var_0, var_3);
     }
 
@@ -654,7 +654,7 @@ egg_sac_damage_monitor(var_0, var_1) {
     }
   }
 
-  if(isDefined(var_3) && isplayer(var_3)) {
+  if(isDefined(var_3) && isPlayer(var_3)) {
     var_3 scripts\cp\cp_merits::processmerit("mt_dlc3_eggs_killed");
   }
 

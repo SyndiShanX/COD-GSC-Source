@@ -102,7 +102,7 @@ devgui_player_spawn_think() {
       }
     }
 
-    setdvar(#"mp_lockspawn_command_devgui", "<dev string:x68>");
+    setDvar(#"mp_lockspawn_command_devgui", "<dev string:x68>");
     wait 0.5;
   }
 }
@@ -122,7 +122,7 @@ devgui_vehicle_spawn_think() {
         add_vehicle_at_eye_trace("<dev string:x22e>");
       }
 
-      setdvar(#"scr_spawnvehicle", 0);
+      setDvar(#"scr_spawnvehicle", 0);
     }
 
     waitframe(1);
@@ -138,7 +138,7 @@ function_cb7cee87() {
   self endon("<dev string:x239>");
   level endon(#"game_ended");
   player_devgui_base = "<dev string:x24c>";
-  setdvar(#"scr_boast_gesture", "<dev string:x68>");
+  setDvar(#"scr_boast_gesture", "<dev string:x68>");
   util::add_devgui(player_devgui_base + "<dev string:x265>", "<dev string:x274>" + "<dev string:x27b>" + "<dev string:x28f>");
 
   while(getdvarstring(#"scr_boast_gesture", "<dev string:x68>") == "<dev string:x68>") {
@@ -146,7 +146,7 @@ function_cb7cee87() {
   }
 
   game.var_461b2589 = 1;
-  setdvar(#"scr_boast_gesture", "<dev string:x68>");
+  setDvar(#"scr_boast_gesture", "<dev string:x68>");
   var_fca60300 = function_5e2d2d9b();
 
   foreach(item_hash, boasts in var_fca60300) {
@@ -169,7 +169,7 @@ function_42644f29() {
     gesture = getdvarstring(#"scr_boast_gesture");
 
     if(gesture != "<dev string:x68>") {
-      setdvar(#"bg_boastenabled", 1);
+      setDvar(#"bg_boastenabled", 1);
       players = getplayers();
 
       if(isDefined(level.boastplayer) && isDefined(players[level.boastplayer])) {
@@ -178,7 +178,7 @@ function_42644f29() {
         players[0] playboast(gesture);
       }
 
-      setdvar(#"scr_boast_gesture", "<dev string:x68>");
+      setDvar(#"scr_boast_gesture", "<dev string:x68>");
     }
 
     waitframe(1);
@@ -304,7 +304,7 @@ devgui_weapon_think() {
       devgui_handle_player_command(&devgui_give_weapon, weapon_name);
     }
 
-    setdvar(#"mp_weap_devgui", "<dev string:x68>");
+    setDvar(#"mp_weap_devgui", "<dev string:x68>");
     wait 0.5;
   }
 }
@@ -401,7 +401,7 @@ devgui_weapon_asset_name_display_think() {
 }
 
 devgui_attachment_cycling_clear(index) {
-  setdvar(level.attachment_cycling_dvars[index], "<dev string:x112>");
+  setDvar(level.attachment_cycling_dvars[index], "<dev string:x112>");
 }
 
 devgui_attachment_cycling_update() {
@@ -471,7 +471,7 @@ devgui_attachment_cycling_update() {
 devgui_attachment_cycling_think() {
   for(;;) {
     state = getdvarstring(#"mp_attachment_cycling_state_devgui");
-    setdvar(#"mp_attachment_cycling_state_devgui", "<dev string:x112>");
+    setDvar(#"mp_attachment_cycling_state_devgui", "<dev string:x112>");
 
     if(issubstr(state, "<dev string:x435>")) {
       if("<dev string:x43e>" == state) {
@@ -496,7 +496,7 @@ devgui_attachment_cycling_think() {
 
 devgui_give_weapon(weapon_name) {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self notify(#"devgui_give_ammo");
   self endon(#"devgui_give_ammo");
   endtime = gettime() + 10000;
@@ -662,7 +662,7 @@ devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
     array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
   }
 
-  setdvar(#"mp_weap_devgui", "<dev string:x4b7>");
+  setDvar(#"mp_weap_devgui", "<dev string:x4b7>");
 }
 
 init_debug_center_screen() {
@@ -675,7 +675,7 @@ init_debug_center_screen() {
         zero_idle_movement = getdvarint(#"zero_idle_movement", 0);
 
         if(zero_idle_movement == 0) {
-          setdvar(#"zero_idle_movement", 1);
+          setDvar(#"zero_idle_movement", 1);
           zero_idle_movement = 1;
         }
       }
@@ -683,7 +683,7 @@ init_debug_center_screen() {
       level notify(#"stop center screen debug");
 
       if(zero_idle_movement == 1) {
-        setdvar(#"zero_idle_movement", 0);
+        setDvar(#"zero_idle_movement", 0);
         zero_idle_movement = 0;
       }
     }
@@ -739,9 +739,9 @@ devgui_add_ve_map_switches() {
 function_6a24e58f() {
   level notify(#"hash_254f5df0e8f1d66");
   level endon(#"hash_254f5df0e8f1d66");
-  setdvar(#"hash_3a3f995b08f2b9b8", -1);
-  setdvar(#"hash_2aab28ebf600b8c7", -1);
-  setdvar(#"hash_4874e2dd28221d6c", -1);
+  setDvar(#"hash_3a3f995b08f2b9b8", -1);
+  setDvar(#"hash_2aab28ebf600b8c7", -1);
+  setDvar(#"hash_4874e2dd28221d6c", -1);
   wait 0.5;
   path = "<dev string:x5c6>";
   cmd = "<dev string:x5e5>";
@@ -804,20 +804,20 @@ function_6a24e58f() {
         var_14f1a63 = 0;
       }
 
-      setdvar(#"timelimit_override", var_14f1a63);
-      setdvar(#"hash_3a3f995b08f2b9b8", -1);
+      setDvar(#"timelimit_override", var_14f1a63);
+      setDvar(#"hash_3a3f995b08f2b9b8", -1);
     }
 
     if(getdvarint(#"hash_2aab28ebf600b8c7", -1) != -1) {
       var_168b7d5 = getdvarint(#"hash_2aab28ebf600b8c7", -1);
       [[level._setteamscore]](#"allies", var_168b7d5);
-      setdvar(#"hash_2aab28ebf600b8c7", -1);
+      setDvar(#"hash_2aab28ebf600b8c7", -1);
     }
 
     if(getdvarint(#"hash_4874e2dd28221d6c", -1) != -1) {
       var_46c53e6e = getdvarint(#"hash_4874e2dd28221d6c", -1);
       [[level._setteamscore]](#"axis", var_46c53e6e);
-      setdvar(#"hash_4874e2dd28221d6c", -1);
+      setDvar(#"hash_4874e2dd28221d6c", -1);
     }
 
     wait 1;
@@ -841,7 +841,7 @@ function_7bef8d25() {
 
     player = level.players[0];
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       remaining_health = math::clamp(remaining_health, 0, isDefined(player.maxhealth) ? player.maxhealth : 100);
       damage = player.health - remaining_health;
 
@@ -852,7 +852,7 @@ function_7bef8d25() {
       }
     }
 
-    setdvar(#"hash_28af507d964c5802", 0);
+    setDvar(#"hash_28af507d964c5802", 0);
   }
 }
 
@@ -876,7 +876,7 @@ function_46b22d99() {
       continue;
     }
 
-    setdvar(#"scr_end_round", 0);
+    setDvar(#"scr_end_round", 0);
     var_53b4c3ae = getgametypesetting(#"timelimit");
     var_c585681e = 0.25;
     setgametypesetting("<dev string:x6a3>", var_c585681e);
@@ -908,7 +908,7 @@ function_be0f9897() {
 
     player = level.players[0];
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       if(damage <= 0) {
         heal = damage * -1;
         var_66cb03ad = player.var_66cb03ad < 0 ? player.maxhealth : player.var_66cb03ad;
@@ -927,7 +927,7 @@ function_be0f9897() {
       }
     }
 
-    setdvar(#"scr_damage_health", 0);
+    setDvar(#"scr_damage_health", 0);
   }
 }
 
@@ -953,7 +953,7 @@ function_773432e2() {
 
     player = level.players[0];
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       if(actionid != -1) {
         player luinotifyevent(#"challenge_coin_received", 1, actionid);
       }
@@ -967,8 +967,8 @@ function_773432e2() {
       }
     }
 
-    setdvar(#"hash_649ea18bd5e55893", -1);
-    setdvar(#"hash_6ad3f58a8e0a1e59", -1);
+    setDvar(#"hash_649ea18bd5e55893", -1);
+    setDvar(#"hash_6ad3f58a8e0a1e59", -1);
   }
 }
 

@@ -997,10 +997,10 @@ function function_d526f0bb() {
     if(player.team == "axis") {
       continue;
     }
-    if(isvehicle(player) && isDefined(player.owner) && isplayer(player.owner) && (!(isDefined(player.autonomous) && player.autonomous))) {
+    if(isvehicle(player) && isDefined(player.owner) && isPlayer(player.owner) && (!(isDefined(player.autonomous) && player.autonomous))) {
       player = player.owner;
     }
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(isDefined(self.def.var_d1c98aa0)) {

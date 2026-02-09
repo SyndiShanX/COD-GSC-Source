@@ -83,7 +83,7 @@ function private _clonegibdata(localclientnum, entity, clone) {
 }
 
 function private _getgibdef(entity) {
-  if(entity isplayer() || entity isplayercorpse()) {
+  if(entity isPlayer() || entity isplayercorpse()) {
     return entity getplayergibdef();
   }
   if(isDefined(entity.gib_data)) {
@@ -162,7 +162,7 @@ function private _gibentity(localclientnum, gibflags, shouldspawngibs) {
   }
   currentgibflag = 2;
   gibdir = undefined;
-  if(entity isplayer() || entity isplayercorpse()) {
+  if(entity isPlayer() || entity isplayercorpse()) {
     yaw_bits = (gibflags >> 9) &(8 - 1);
     yaw = getanglefrombits(yaw_bits, 3);
     gibdir = anglesToForward((0, yaw, 0));
@@ -248,7 +248,7 @@ function private _gibclientextrainternal(localclientnum, entity, gibflag) {
 
 function private _gibhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
-  if(entity isplayer() || entity isplayercorpse()) {
+  if(entity isPlayer() || entity isplayercorpse()) {
     if(!util::is_mature() || util::is_gib_restricted_build()) {
       return;
     }

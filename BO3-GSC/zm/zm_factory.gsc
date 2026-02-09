@@ -107,7 +107,7 @@ function main() {
   zm::spawn_life_brush((700, -986, 280), 128, 128);
   level.random_pandora_box_start = 1;
   if(1 == getdvarint("movie_intro")) {
-    setdvar("art_review", "1");
+    setDvar("art_review", "1");
     level.random_pandora_box_start = 0;
     level.start_chest_name = "chest_4";
     clock_snow = getent("clock_snow", "targetname");
@@ -214,9 +214,9 @@ function function_a1d5988d() {
 
 function cinematic() {
   level flag::wait_till("all_players_connected");
-  setdvar("cg_draw2D", 0);
-  setdvar("cg_drawFPS", 0);
-  setdvar("cg_drawPerformanceWarnings", 0);
+  setDvar("cg_draw2D", 0);
+  setDvar("cg_drawFPS", 0);
+  setDvar("cg_drawPerformanceWarnings", 0);
   while(!aretexturesloaded()) {
     wait(0.05);
   }
@@ -227,7 +227,7 @@ function cinematic() {
     e_player allowjump(0);
   }
   level.players[0] setclientuivisibilityflag("hud_visible", 0);
-  setdvar("debug_show_viewpos", "0");
+  setDvar("debug_show_viewpos", "0");
   wait(3);
   s_tag_align = struct::get("tag_align_switch_box");
   s_tag_align scene::play("cin_der_01_intro_3rd_sh010");
@@ -247,7 +247,7 @@ function periodic_lightning_strikes() {
   util::wait_network_frame();
   while(true) {
     n_random_wait = randomintrange(12, 18);
-    if(isDefined(self) && isplayer(self)) {
+    if(isDefined(self) && isPlayer(self)) {
       self notify("lightning_strike");
       self clientfield::increment_to_player("lightning_strike", 1);
     }
@@ -1811,13 +1811,13 @@ function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_valu
   if(!isDefined(n_base_value)) {
     n_base_value = -1;
   }
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   adddebugcommand(((((("" + str_devgui_path) + "") + str_dvar) + "") + n_value) + "");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }

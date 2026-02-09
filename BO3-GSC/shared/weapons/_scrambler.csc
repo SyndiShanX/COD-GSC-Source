@@ -217,7 +217,7 @@ function scramblerupdate(localclientnum) {
         enemyvoscrambleramount = 1;
       }
       if(getdvarfloat("snd_futz") != enemyvoscrambleramount) {
-        setdvar("snd_futz", enemyvoscrambleramount);
+        setDvar("snd_futz", enemyvoscrambleramount);
       }
     }
     wait(0.25);

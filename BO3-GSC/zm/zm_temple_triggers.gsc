@@ -281,7 +281,7 @@ function water_drop_trigger_think() {
   }
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       self trigger::function_d1278be0(who, &water_drop_trig_entered, &water_drop_trig_exit);
     } else if(isDefined(who.water_trigger_func)) {
       who thread[[who.water_trigger_func]](self);

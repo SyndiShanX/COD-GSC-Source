@@ -47,7 +47,7 @@ watch_bodily_functions() {
     if(!isDefined(self)) {
       return;
     }
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     if(type != "MOD_MELEE") {

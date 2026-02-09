@@ -146,7 +146,7 @@ function function_ff8b7145() {
           zombie function_a35db70f();
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     if(string == "") {
       a_zombies = zm_elemental_zombie::function_d41418b8();
@@ -154,7 +154,7 @@ function function_ff8b7145() {
         a_zombies = arraysortclosest(a_zombies, level.players[0].origin);
         a_zombies[0] function_a35db70f();
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.05);
   }

@@ -268,7 +268,7 @@ function_9a6b2309() {
       }
 
       level thread zm_game_module::zombie_goto_round(round_number);
-      setdvar(#"hash_57e97658cd1d89e2", "<dev string:x38>");
+      setDvar(#"hash_57e97658cd1d89e2", "<dev string:x38>");
     }
 
     string = getdvarstring(#"hash_25a4cfc19b09ae41", "<dev string:x38>");
@@ -284,7 +284,7 @@ function_9a6b2309() {
         zm_trial::function_fe2ecb6(strikes);
       }
 
-      setdvar(#"hash_25a4cfc19b09ae41", "<dev string:x38>");
+      setDvar(#"hash_25a4cfc19b09ae41", "<dev string:x38>");
     }
 
     string = getdvarstring(#"hash_2446ebd1d15f0dab", "<dev string:x38>");
@@ -292,7 +292,7 @@ function_9a6b2309() {
 
     if(cmd.size > 0) {
       complete_current_round();
-      setdvar(#"hash_2446ebd1d15f0dab", "<dev string:x38>");
+      setDvar(#"hash_2446ebd1d15f0dab", "<dev string:x38>");
     }
 
     string = getdvarstring(#"hash_5a32209acb1f54a0", "<dev string:x38>");
@@ -300,7 +300,7 @@ function_9a6b2309() {
 
     if(cmd.size > 0) {
       zm_trial::fail(undefined, getplayers());
-      setdvar(#"hash_5a32209acb1f54a0", "<dev string:x38>");
+      setDvar(#"hash_5a32209acb1f54a0", "<dev string:x38>");
     }
 
     string = getdvarstring(#"hash_1576c65ebdf43de0", "<dev string:x38>");
@@ -314,7 +314,7 @@ function_9a6b2309() {
       }
 
       level.var_ee7ca64 = [];
-      setdvar(#"hash_1576c65ebdf43de0", "<dev string:x38>");
+      setDvar(#"hash_1576c65ebdf43de0", "<dev string:x38>");
     }
 
     string = getdvarstring(#"hash_2f6ef50454652bf2", "<dev string:x38>");
@@ -330,12 +330,12 @@ function_9a6b2309() {
         player zm_stats::function_49469f35(stat_name, curr_time);
       }
 
-      setdvar(#"hash_2f6ef50454652bf2", "<dev string:x38>");
+      setDvar(#"hash_2f6ef50454652bf2", "<dev string:x38>");
     }
 
     if(getdvarint(#"hash_145033f5271f2651", 0) == 1) {
       zm_trial_util::function_9c1092f6();
-      setdvar(#"hash_145033f5271f2651", 0);
+      setDvar(#"hash_145033f5271f2651", 0);
     }
 
     waitframe(1);

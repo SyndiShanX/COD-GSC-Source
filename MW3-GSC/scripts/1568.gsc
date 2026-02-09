@@ -12,10 +12,9 @@ main(var_0, var_1, var_2) {
     var_3 = "mi17_so";
   } else if(isDefined(var_1) && var_1 == "mi17_so_takes_damage") {
     var_3 = "mi17_so_takes_damage";
-
   }
   _id_061D::main(var_0, var_3, var_2);
-  maps\_vehicle::_id_2AC1( % mi17_heli_rotors, undefined, 0);
+  maps\_vehicle::_id_2AC1(%mi17_heli_rotors, undefined, 0);
   maps\_vehicle::_id_2ABE("vehicle_mi17_woodland");
   maps\_vehicle::_id_2ABE("vehicle_mi17_woodland_fly");
   maps\_vehicle::_id_2ABE("vehicle_mi17_woodland_landing");
@@ -33,7 +32,6 @@ _id_2B1D() {
     self._id_295A = 710;
   } else {
     self._id_295A = 710 + distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
-
   }
   self._id_2941 = 0;
   maps\_vehicle::_id_2AB3("running");
@@ -42,7 +40,6 @@ _id_2B1D() {
 _id_3A9C(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1]._id_2523 = % mi17_heli_idle;
-
   }
   return var_0;
 }
@@ -58,7 +55,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 10; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[1]._id_0F59 = % mi17_1_idle;
   var_0[2]._id_0F59 = % mi17_2_idle;
@@ -194,7 +190,6 @@ _id_3E84() {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     precachemodel(var_0[var_1[var_2]].model);
-
   }
   return var_0;
 }

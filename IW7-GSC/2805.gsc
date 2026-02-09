@@ -561,7 +561,7 @@ func_FADC() {
     var_0 = 3;
   }
 
-  if(isplayer(self) && var_0 == 0) {
+  if(isPlayer(self) && var_0 == 0) {
     setmodelfromcustomization();
   } else {
     func_72A5(var_0);

@@ -543,8 +543,8 @@ attack_shield(shield) {
 
   self.old_origin = self.origin;
 
-  if(getdvar(#"_id_B253DFE7") == "")
-    setdvar("zombie_shield_attack_freq", "15");
+  if(getDvar(#"_id_B253DFE7") == "")
+    setDvar("zombie_shield_attack_freq", "15");
 
   freq = getdvarint(#"_id_B253DFE7");
   self.doing_shield_attack = 1;

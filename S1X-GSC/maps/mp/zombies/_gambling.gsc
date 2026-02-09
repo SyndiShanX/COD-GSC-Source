@@ -1295,8 +1295,7 @@ discoverplinkologic(var_0) {
         var_13 = 0;
 
         if(isDefined(level.zmbfindgamblecustomvo)) {
-          var_13 = [
-            }
+          var_13 = [}
             [level.zmbfindgamblecustomvo]](var_4, var_0);
         else {
           var_13 = var_4 playerplinkovosee();

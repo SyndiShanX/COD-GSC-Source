@@ -75,7 +75,7 @@ function_e5ca5733(str_archetype) {
 }
 
 function_a3d16ee5(s_params) {
-  if(isDefined(self.score_event) && isplayer(s_params.eattacker)) {
+  if(isDefined(self.score_event) && isPlayer(s_params.eattacker)) {
     scoreevents::processscoreevent(self.score_event, s_params.eattacker, undefined, s_params.weapon);
   }
 }
@@ -412,7 +412,7 @@ add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "", var_e6e6150
     return;
   }
 
-  assert(isplayer(self), "<dev string:x4e>");
+  assert(isPlayer(self), "<dev string:x4e>");
   points = zm_utility::round_up_score(points, 10);
 
   if(isDefined(level.var_894a83d8) && level.var_894a83d8 || var_e6e61503 || function_e31cf9d5(str_awarded_by)) {
@@ -542,7 +542,7 @@ function_82732ced() {
 }
 
 function_89db94b3(e_attacker, n_damage, e_inflictor) {
-  if(!isplayer(e_attacker) || !isDefined(self.var_8d5c706f) || isDefined(self.marked_for_death) && self.marked_for_death) {
+  if(!isPlayer(e_attacker) || !isDefined(self.var_8d5c706f) || isDefined(self.marked_for_death) && self.marked_for_death) {
     return;
   }
 

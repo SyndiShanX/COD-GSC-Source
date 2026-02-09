@@ -861,7 +861,7 @@ HitlocDebug(attacker, victim, damage, hitloc, dflags) {
     attacker.hitlocInited = true;
   }
 
-  if(level.splitscreen || !isPLayer(attacker)) {
+  if(level.splitscreen || !isPlayer(attacker)) {
     return;
   }
   elemcount = 6;
@@ -1192,7 +1192,6 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       }
 
       friendly = true;
-
     } else // not hitting teammate
     {
       prof_begin("PlayerDamage world");
@@ -1237,7 +1236,6 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       victim thread maps\mp\gametypes\_missions::playerDamaged(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc);
 
       prof_end("PlayerDamage world");
-
     }
 
     if(attackerIsNPC && isDefined(eAttacker.gunner))
@@ -1417,7 +1415,7 @@ Callback_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, 
   if(level.teamBased && isDefined(attacker.team) && attacker.team == self.team)
     mayDoLastStand = false;
 
-  if(getdvar("scr_forcelaststand") == "1")
+  if(getDvar("scr_forcelaststand") == "1")
     mayDoLastStand = true;
 
   if(!mayDoLastStand) {

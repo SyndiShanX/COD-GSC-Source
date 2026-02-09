@@ -45,7 +45,5 @@ precache() {
   precacheItem("dog_bite");
   precacheItem("fraggrenade");
 
-  //----------------
-  animscripts\dog\dog_init::initDogAnimations();
-  //----------------
-}
+  //---------------- animscripts\dog\dog_init::initDogAnimations();
+  //---------------- }

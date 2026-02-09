@@ -25,7 +25,7 @@ init() {
       break;
   }
 
-  var_0 = getdvar("g_gametype");
+  var_0 = getDvar("g_gametype");
   var_1 = maps\mp\_utility::getattachmentlistbasenames();
   var_1 = common_scripts\utility::alphabetize(var_1);
   var_2 = 150;
@@ -2077,7 +2077,7 @@ claymoredetonation() {
 
   self playSound("claymore_activated");
 
-  if(isplayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_delaymine")) {
+  if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_delaymine")) {
     var_1 notify("triggered_claymore");
     wait(level.delayminetime);
   } else {
@@ -2288,7 +2288,7 @@ c4damage() {
   for(;;) {
     self waittill("damage", var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!isplayer(var_0) && !isagent(var_0)) {
+    if(!isPlayer(var_0) && !isagent(var_0)) {
       continue;
     }
     if(!friendlyfirecheck(self.owner, var_0)) {
@@ -2333,7 +2333,7 @@ c4damage() {
 
   self.wasdamaged = 1;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("c4");
   }
 
@@ -3106,7 +3106,7 @@ updatemovespeedscale() {
 }
 
 stancerecoiladjuster() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("death");
@@ -3184,7 +3184,7 @@ monitorsemtexstick() {
   self waittill("missile_stuck", var_0);
   thread stickyhandlemovers("detonate");
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
   if(self.owner isstucktofriendly(var_0)) {
@@ -3268,7 +3268,7 @@ minedamagemonitor() {
   for(;;) {
     self waittill("damage", var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!isplayer(var_0) && !isagent(var_0)) {
+    if(!isPlayer(var_0) && !isagent(var_0)) {
       continue;
     }
     if(isDefined(var_9) && var_9 == "bouncingbetty_mp") {
@@ -3302,7 +3302,7 @@ minedamagemonitor() {
 
   self.wasdamaged = 1;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("bouncing_betty");
   }
 
@@ -3364,7 +3364,7 @@ mineproximitytrigger() {
   self notify("mine_triggered");
   self playSound("mine_betty_click");
 
-  if(isplayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_delaymine")) {
+  if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_delaymine")) {
     var_1 notify("triggered_mine");
     wait(level.delayminetime);
   } else {
@@ -3584,7 +3584,7 @@ minedamagedebug(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 minedamageheightpassed(var_0, var_1) {
-  if(isplayer(var_1) && isalive(var_1) && var_1.sessionstate == "playing") {
+  if(isPlayer(var_1) && isalive(var_1) && var_1.sessionstate == "playing") {
     var_2 = var_1 maps\mp\_utility::getstancecenter();
   } else if(var_1.classname == "misc_turret") {
     var_2 = var_1.origin + (0, 0, 32);
@@ -4044,7 +4044,7 @@ watchgrenadegraceperiod() {
           var_4 = 1;
         }
 
-        if(isplayer(self)) {
+        if(isPlayer(self)) {
           self iprintlnbold(&"MP_EXPLOSIVES_UNAVAILABLE_FOR_N", var_4);
         }
       }

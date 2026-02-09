@@ -9,7 +9,7 @@ main() {
 
   //* Fog section *
 
-  setdvar("scr_fog_disable", "1");
+  setDvar("scr_fog_disable", "1");
 
   VisionSetNaked("mp_killhouse", 0);
 }

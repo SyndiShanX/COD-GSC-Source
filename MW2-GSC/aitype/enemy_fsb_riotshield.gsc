@@ -66,7 +66,5 @@ precache() {
   precacheItem("usp");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_riotshield::init_riotshield();
-  //----------------
-}
+  //---------------- maps\_riotshield::init_riotshield();
+  //---------------- }

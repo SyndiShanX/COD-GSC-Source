@@ -266,7 +266,6 @@ function_fe82c566() {
     self waittill(#"movedone");
 
     iprintlnbold("<dev string:x89>" + level.var_23674b8f.var_80284ca5[level.var_23674b8f.var_c8a6d360].script_noteworthy);
-
   }
 }
 
@@ -305,7 +304,6 @@ function_92344a03() {
       var_135425aa = 1;
 
       iprintlnbold("<dev string:xa4>");
-
     }
 
     self waittill(#"teleporting_done");

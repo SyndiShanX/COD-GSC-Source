@@ -46,7 +46,7 @@ function_74649ba9(player, filterid, pass, enable) {
 
   util::function_89a98f85();
 
-  if(isDefined(player) && isplayer(player) && isalive(player)) {
+  if(isDefined(player) && isPlayer(player) && isalive(player)) {
     num = player.localclientnum;
     setfilterpassenabled(num, filterid, pass, enable);
   }

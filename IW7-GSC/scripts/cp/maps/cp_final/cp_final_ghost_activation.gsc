@@ -53,7 +53,7 @@ skull_damage_monitor(var_0) {
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
-    if(isDefined(var_2) && isplayer(var_2)) {
+    if(isDefined(var_2) && isPlayer(var_2)) {
       playFX(level._effect["ghost_explosion_death_green"], var_0.origin);
       var_0 delete();
       return;

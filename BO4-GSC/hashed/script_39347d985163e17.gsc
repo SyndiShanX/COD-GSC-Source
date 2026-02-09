@@ -141,7 +141,7 @@ function_33e89162(mdl_weapon, var_6d4294b0) {
   mdl_weapon thread zm_red_challenges_rewards::pickup_timeout(undefined, undefined, max(var_6d4294b0 - 5, 5));
   s_waitresult = self waittilltimeout(var_6d4294b0, #"boon_weapon_picked_up");
 
-  if(s_waitresult._notify == "boon_weapon_picked_up" && isplayer(s_waitresult.player)) {
+  if(s_waitresult._notify == "boon_weapon_picked_up" && isPlayer(s_waitresult.player)) {
     weapon_reward = s_waitresult.player zm_red_challenges_rewards::function_e2a25377(mdl_weapon.weapon.name);
     s_waitresult.player unlockweapon(weapon_reward);
 

@@ -144,7 +144,6 @@ function_b121d5f5() {
   foreach(i, countdown_line in countdown_lines) {
     if(getdvarint(#"hash_8ddd1821fceebe9", 0)) {
       iprintlnbold(i);
-
     }
 
     function_aa8af5cd(level.var_40263d6, countdown_line);
@@ -336,7 +335,6 @@ function_aa8af5cd(locs, line) {
     playsoundatposition(line, loc);
 
     level thread function_cd7664d5(loc, line);
-
   }
 }
 
@@ -353,7 +351,6 @@ function_6c6d4350() {
     playsoundatposition("evt_gantry_alarm", loc);
 
     level thread function_cd7664d5(loc, "<dev string:x38>", (1, 1, 0));
-
   }
 }
 
@@ -433,7 +430,6 @@ function_cd7664d5(loc, alias, color) {
 
   if(getdvarint(#"hash_2115192db52b1b16", 0)) {
     print3d(loc + (0, 0, 32), alias, color, 1, 1.2, 120);
-
   }
 }
 

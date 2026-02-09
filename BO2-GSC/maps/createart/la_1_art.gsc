@@ -11,15 +11,15 @@ main() {
   flag_wait("level.player");
   level.tweakfile = 1;
   level thread swap_vista();
-  r_rimintensity_debug = getdvar(#"r_rimIntensity_debug");
+  r_rimintensity_debug = getDvar(#"r_rimIntensity_debug");
   setsaveddvar("r_rimIntensity_debug", 1);
-  r_rimintensity = getdvar(#"r_rimIntensity");
+  r_rimintensity = getDvar(#"r_rimIntensity");
   setsaveddvar("r_rimIntensity", 8);
 
   foreach(m_godray in getEntArray("godrays", "targetname"))
   m_godray hide();
 
-  level.map_default_sun_direction = getdvar(#"r_lightTweakSunDirection");
+  level.map_default_sun_direction = getDvar(#"r_lightTweakSunDirection");
   setsaveddvar("r_lightTweakSunDirection", (-12.9, 3.6, 0));
   visionsetnaked("sp_la_1_intro_secretary", 2);
   start_dist = 224.631;
@@ -280,7 +280,7 @@ lerp_sun_direction(v_sun_direction_angles, n_time) {
     n_time = 0;
 
   if(n_time > 0) {
-    r_lighttweaksundirection = getdvar(#"r_lightTweakSunDirection");
+    r_lighttweaksundirection = getDvar(#"r_lightTweakSunDirection");
     a_angle_strings = strtok(r_lighttweaksundirection, " ");
     v_current_angles = (int(a_angle_strings[0]), int(a_angle_strings[1]), int(a_angle_strings[2]));
     t_delta = 0;

@@ -96,7 +96,7 @@ init() {
 
   common_scripts\_bcs_location_trigs::bcs_location_trigs_init();
 
-  gametype = getdvar("g_gametype");
+  gametype = getDvar("g_gametype");
   level.istactical = true;
   if(gametype == "war" || gametype == "kc" || gametype == "dom") {
     level.istactical = false;
@@ -287,7 +287,6 @@ suppressingFireTracking() {
 
     self notify("stoppedFiring");
   }
-
 }
 
 suppressTimeout() {
@@ -499,7 +498,6 @@ threatCalloutTracking() {
 
           break;
         }
-
       }
     }
 
@@ -992,7 +990,7 @@ GetQACalloutAlias(basealias, lineIndex) {
 }
 
 battleChatter_canPrint() {
-  if(GetDvar("debug_bcprint") == self.team || GetDvar("debug_bcprint") == "all") {
+  if(getDvar("debug_bcprint") == self.team || getDvar("debug_bcprint") == "all") {
     return (true);
   }
 
@@ -1000,7 +998,7 @@ battleChatter_canPrint() {
 }
 
 battleChatter_canPrintDump() {
-  if(GetDvar("debug_bcprintdump") == self.team || GetDvar("debug_bcprintdump") == "all") {
+  if(getDvar("debug_bcprintdump") == self.team || getDvar("debug_bcprintdump") == "all") {
     return true;
   }
 
@@ -1020,7 +1018,7 @@ battleChatter_printDump(alias) {
     return;
   }
 
-  dumpType = GetDvar("debug_bcprintdumptype", "csv");
+  dumpType = getDvar("debug_bcprintdumptype", "csv");
   if(dumpType != "csv" && dumpType != "txt") {
     return;
   }
@@ -1049,10 +1047,7 @@ battleChatter_printDump(alias) {
     factionPrefix = maps\mp\gametypes\_teams::getTeamVoicePrefix(self.team);
     factionPrefix = GetSubStr(factionPrefix, 0, factionPrefix.size - 1);
 
-    dumpString = level.script + "," +
-      factionPrefix + "," +
-      self.pers["voiceNum"] + "," +
-      aliasType;
+    dumpString = level.script + "," + factionPrefix + "," + self.pers["voiceNum"] + "," + aliasType;
 
     battleChatter_printDumpLine(level.bcs_csv_dumpFile, dumpString, "bcs_csv_dumpFileWriting");
   } else if(dumpType == "txt") {
@@ -1070,7 +1065,6 @@ battleChatter_printDump(alias) {
 
     battleChatter_printDumpLine(level.bcs_txt_dumpFile, dumpString, "bcs_txt_dumpFileWriting");
   }
-
 }
 
 battleChatter_debugPrint(alias) {

@@ -121,7 +121,7 @@ jet_timer() {
   var_1 = max(10, var_0);
   var_1 = min(var_1, 100);
 
-  if(getdvar("jet_flyby_timer") != "")
+  if(getDvar("jet_flyby_timer") != "")
     level.civilianjetflyby_timer = 5 + getdvarint("jet_flyby_timer");
   else
     level.civilianjetflyby_timer = (0.25 + randomfloatrange(0.3, 0.7)) * 60 * var_1;
@@ -1129,7 +1129,7 @@ triggertouchthink(var_0, var_1) {
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isplayer(var_2) && !isDefined(var_2.finished_spawning)) {
+    if(!isPlayer(var_2) && !isDefined(var_2.finished_spawning)) {
       continue;
     }
     if(!isalive(var_2)) {
@@ -1143,7 +1143,7 @@ triggertouchthink(var_0, var_1) {
 playertouchtriggerthink(var_0, var_1, var_2) {
   var_0 endon("deleted");
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     self endon("death");
 
   if(!common_scripts\utility::issp())
@@ -1195,7 +1195,7 @@ movementtracker() {
   }
   self endon("disconnect");
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     self endon("death");
 
   self.movetrackers = 0;

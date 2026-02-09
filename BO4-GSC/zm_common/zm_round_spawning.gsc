@@ -21,7 +21,6 @@ class class_2517dc3b {
   constructor() {
     var_d7d3cd31 = [];
   }
-
 }
 
 class class_557db8fd {
@@ -40,7 +39,6 @@ class class_557db8fd {
     var_30bb6097 = [];
     var_74f6178a = 0;
   }
-
 }
 
 autoexec __init__system__() {
@@ -429,7 +427,6 @@ function_4990741c() {
           }
         }
       }
-
     }
 
     if(var_a6559064 > level.var_fb9b5925) {
@@ -733,7 +730,6 @@ function_44298b05() {
         }
       }
     }
-
   }
 
   level.var_c1a3937d = var_e6f6bd65;
@@ -826,7 +822,6 @@ function_a845f70f(n_points, var_fadd1539) {
     }
 
     level.var_1113eecd[var_fadd1539[i]] = level.var_8cb2d124[var_fadd1539[i]];
-
   }
 }
 
@@ -1223,7 +1218,7 @@ devgui() {
         break;
     }
 
-    setdvar(#"hash_5996494c7608f933", "<dev string:x576>");
+    setDvar(#"hash_5996494c7608f933", "<dev string:x576>");
   }
 }
 

@@ -1001,7 +1001,7 @@ player_exits_giant_robot_head_trigger_think() {
     if(!(isDefined(self.stub.is_available) && self.stub.is_available)) {
       continue;
     }
-    if(!isplayer(player) || !is_player_valid(player)) {
+    if(!isPlayer(player) || !is_player_valid(player)) {
       continue;
     }
     level thread init_player_eject_logic(self.stub, player);
@@ -1774,12 +1774,12 @@ footprint_check_for_nearby_players(ai_giant_robot) {
 }
 
 setup_giant_robot_devgui() {
-  setdvar("force_giant_robot_0", "off");
-  setdvar("force_giant_robot_1", "off");
-  setdvar("force_giant_robot_2", "off");
-  setdvar("force_three_robot_round", "off");
-  setdvar("force_left_foot", "off");
-  setdvar("force_right_foot", "off");
+  setDvar("force_giant_robot_0", "off");
+  setDvar("force_giant_robot_1", "off");
+  setDvar("force_giant_robot_2", "off");
+  setDvar("force_three_robot_round", "off");
+  setDvar("force_left_foot", "off");
+  setDvar("force_right_foot", "off");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Giant Robot:1/Force Robot 0 (NML):1\" \"force_giant_robot_0 on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Giant Robot:1/Force Robot 1 (Trench):2\" \"force_giant_robot_1 on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Giant Robot:1/Force Robot 2 (Village):3\" \"force_giant_robot_2 on\"\n");
@@ -1791,8 +1791,8 @@ setup_giant_robot_devgui() {
 
 watch_for_force_giant_robot() {
   while(true) {
-    if(getdvar(#"_id_79D9A3FA") == "on") {
-      setdvar("force_giant_robot_0", "off");
+    if(getDvar(#"_id_79D9A3FA") == "on") {
+      setDvar("force_giant_robot_0", "off");
 
       if(isDefined(level.devgui_force_giant_robot) && level.devgui_force_giant_robot == 0) {
         level.devgui_force_giant_robot = undefined;
@@ -1803,8 +1803,8 @@ watch_for_force_giant_robot() {
       }
     }
 
-    if(getdvar(#"_id_79D9A3FB") == "on") {
-      setdvar("force_giant_robot_1", "off");
+    if(getDvar(#"_id_79D9A3FB") == "on") {
+      setDvar("force_giant_robot_1", "off");
 
       if(isDefined(level.devgui_force_giant_robot) && level.devgui_force_giant_robot == 1) {
         level.devgui_force_giant_robot = undefined;
@@ -1815,8 +1815,8 @@ watch_for_force_giant_robot() {
       }
     }
 
-    if(getdvar(#"_id_79D9A3FC") == "on") {
-      setdvar("force_giant_robot_2", "off");
+    if(getDvar(#"_id_79D9A3FC") == "on") {
+      setDvar("force_giant_robot_2", "off");
 
       if(isDefined(level.devgui_force_giant_robot) && level.devgui_force_giant_robot == 2) {
         level.devgui_force_giant_robot = undefined;
@@ -1827,8 +1827,8 @@ watch_for_force_giant_robot() {
       }
     }
 
-    if(getdvar(#"_id_DF4E4957") == "on") {
-      setdvar("force_three_robot_round", "off");
+    if(getDvar(#"_id_DF4E4957") == "on") {
+      setDvar("force_three_robot_round", "off");
 
       if(isDefined(level.devgui_force_three_robot_round) && level.devgui_force_three_robot_round) {
         level.devgui_force_three_robot_round = undefined;
@@ -1839,8 +1839,8 @@ watch_for_force_giant_robot() {
       }
     }
 
-    if(getdvar(#"_id_D816D475") == "on") {
-      setdvar("force_left_foot", "off");
+    if(getDvar(#"_id_D816D475") == "on") {
+      setDvar("force_left_foot", "off");
 
       if(isDefined(level.devgui_force_giant_robot_foot) && level.devgui_force_giant_robot_foot == "left") {
         level.devgui_force_giant_robot_foot = undefined;
@@ -1851,8 +1851,8 @@ watch_for_force_giant_robot() {
       }
     }
 
-    if(getdvar(#"_id_462243C8") == "on") {
-      setdvar("force_right_foot", "off");
+    if(getDvar(#"_id_462243C8") == "on") {
+      setDvar("force_right_foot", "off");
 
       if(isDefined(level.devgui_force_giant_robot_foot) && level.devgui_force_giant_robot_foot == "right") {
         level.devgui_force_giant_robot_foot = undefined;
@@ -1865,7 +1865,6 @@ watch_for_force_giant_robot() {
 
     wait 0.05;
   }
-
 }
 
 starting_spawn_light() {

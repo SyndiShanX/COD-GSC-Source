@@ -10,7 +10,7 @@
 
 init() {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar(#"mapname"));
+    level.script = tolower(getDvar(#"mapname"));
 
   precacheshader("overlay_low_health");
   level.global_damage_func_ads = ::empty_kill_func;
@@ -30,16 +30,16 @@ init() {
 
   switch (level.gameskill) {
     case 0:
-      setdvar("currentDifficulty", "easy");
+      setDvar("currentDifficulty", "easy");
       break;
     case 1:
-      setdvar("currentDifficulty", "normal");
+      setDvar("currentDifficulty", "normal");
       break;
     case 2:
-      setdvar("currentDifficulty", "hardened");
+      setDvar("currentDifficulty", "hardened");
       break;
     case 3:
-      setdvar("currentDifficulty", "veteran");
+      setDvar("currentDifficulty", "veteran");
       break;
   }
 
@@ -52,7 +52,7 @@ init() {
   level.invultime_postshield = 0.3;
   level.playerhealth_regularregendelay = 2400;
   level.worthydamageratio = 0.1;
-  setdvar("player_meleeDamageMultiplier", 0.4);
+  setDvar("player_meleeDamageMultiplier", 0.4);
   onplayerconnect_callback(::onplayerconnect);
 }
 
@@ -80,7 +80,7 @@ playerhurtcheck() {
   for(;;) {
     self waittill("damage", amount, attacker, dir, point, mod);
 
-    if(isDefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker.team == self.team) {
       continue;
     }
     self.hurtagain = 1;
@@ -124,8 +124,8 @@ playerhealthregen() {
 
   self.bolthit = 0;
 
-  if(getdvar(#"_id_FCECE67E") == "")
-    setdvar("scr_playerInvulTimeScale", 1.0);
+  if(getDvar(#"_id_FCECE67E") == "")
+    setDvar("scr_playerInvulTimeScale", 1.0);
 
   playerinvultimescale = getdvarfloat(#"_id_FCECE67E");
 
@@ -208,7 +208,6 @@ playerhealthregen() {
 
       if(level.player_deathinvulnerabletimeout < gettime())
         level.player_deathinvulnerabletimeout = gettime() + getdvarint(#"_id_4E44E32D");
-
     }
 
     oldratio = self.health / self.maxhealth;
@@ -376,14 +375,14 @@ logregen(newhealth) {}
 showhitlog() {}
 
 playerhealthdebug() {
-  if(getdvar(#"scr_health_debug") == "")
-    setdvar("scr_health_debug", "0");
+  if(getDvar(#"scr_health_debug") == "")
+    setDvar("scr_health_debug", "0");
 
   waittillframeend;
 
   while(true) {
     while(true) {
-      if(getdvar(#"scr_health_debug") != "0") {
+      if(getDvar(#"scr_health_debug") != "0") {
         break;
       }
 
@@ -393,7 +392,7 @@ playerhealthdebug() {
     thread printhealthdebug();
 
     while(true) {
-      if(getdvar(#"scr_health_debug") == "0") {
+      if(getDvar(#"scr_health_debug") == "0") {
         break;
       }
 
@@ -403,7 +402,6 @@ playerhealthdebug() {
     level notify("stop_printing_grenade_timers");
     destroyhealthdebug();
   }
-
 }
 
 printhealthdebug() {
@@ -488,7 +486,6 @@ printhealthdebug() {
       }
     }
   }
-
 }
 
 destroyhealthdebug() {
@@ -500,5 +497,4 @@ destroyhealthdebug() {
     level.healthbarhudelems[level.healthbarkeys[i]].bar destroy();
     level.healthbarhudelems[level.healthbarkeys[i]] destroy();
   }
-
 }

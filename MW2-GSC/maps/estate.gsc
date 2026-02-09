@@ -1858,7 +1858,7 @@ ending_drag_failure() {
   level.player.ignoreme = true;
   level.player shellshock("estate_bouncingbetty", 9);
 
-  setdvar("ui_deadquote", &"ESTATE_FAKE_DEATH_QUOTE");
+  setDvar("ui_deadquote", &"ESTATE_FAKE_DEATH_QUOTE");
   missionfailedwrapper();
 }
 

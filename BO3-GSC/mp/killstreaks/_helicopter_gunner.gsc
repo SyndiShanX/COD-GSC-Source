@@ -351,7 +351,7 @@ function ontimeoutcallback() {
 function watchplayerteamchangethread(helicopter) {
   helicopter notify("mothership_team_change");
   helicopter endon("mothership_team_change");
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   player endon("gunner_left");
   player util::waittill_any("joined_team", "disconnect", "joined_spectators");
@@ -365,7 +365,7 @@ function watchplayerteamchangethread(helicopter) {
 function watchplayerexitrequestthread(player) {
   player notify("watchplayerexitrequestthread_singleton");
   player endon("watchplayerexitrequestthread_singleton");
-  assert(isplayer(player));
+  assert(isPlayer(player));
   mothership = self;
   level endon("game_ended");
   player endon("disconnect");
@@ -387,7 +387,7 @@ function watchplayerexitrequestthread(player) {
 }
 
 function enterhelicopter(isowner) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   seatindex = -1;
   if(!isowner) {
@@ -782,7 +782,7 @@ function watchmissilesthread() {
 }
 
 function watchvisionswitchthread() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   player endon("disconnect");
   player endon("gunner_left");

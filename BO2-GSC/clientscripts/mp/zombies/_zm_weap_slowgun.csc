@@ -11,7 +11,7 @@
 #include clientscripts\mp\zombies\_zm_audio;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   if(!clientscripts\mp\zombies\_zm_weapons::is_weapon_included("slowgun_zm")) {
@@ -200,12 +200,11 @@ show_anim_rates() {
       ents = getEntArray(0);
 
       foreach(ent in ents) {
-        if(isDefined(ent) && (ent isplayer() || isDefined(ent._eyearray) && isDefined(ent._eyearray[0])) && ent isalive())
+        if(isDefined(ent) && (ent isPlayer() || isDefined(ent._eyearray) && isDefined(ent._eyearray[0])) && ent isalive())
           ent show_anim_rate(lp.origin, 360000);
       }
     }
 
     wait 0.05;
   }
-
 }

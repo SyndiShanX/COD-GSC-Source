@@ -11,10 +11,8 @@
 #include maps\so_demo_so_bridge_code;
 #include maps\_specialops;
 
-// ---------------------------------------------------------------------------------
-//	Init
-// ---------------------------------------------------------------------------------
-main() {
+// --------------------------------------------------------------------------------- //	Init
+// --------------------------------------------------------------------------------- main() {
   default_start(::start_so_demoman);
   add_start("so_demoman", ::start_so_demoman, "Demolition Man");
 
@@ -47,10 +45,8 @@ main() {
   thread maps\so_bridge_amb::main();
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Initializations
-// ---------------------------------------------------------------------------------
-start_so_demoman() {
+// --------------------------------------------------------------------------------- //	Challenge Initializations
+// --------------------------------------------------------------------------------- start_so_demoman() {
   so_demoman_init();
 
   thread music_loop("so_demo_so_bridge_music", 344);
@@ -123,7 +119,7 @@ so_demoman_init() {
   level.bonus_count_goal = 5;
   level.vehicle_damage = 0;
 
-  level.default_sprint = getdvar("player_sprintSpeedScale");
+  level.default_sprint = getDvar("player_sprintSpeedScale");
   level.player_sprint_scale = 2;
   setSavedDvar("player_sprintUnlimited", "1");
   setSavedDvar("player_sprintSpeedScale", level.player_sprint_scale);
@@ -154,13 +150,8 @@ so_demoman_setup_veteran() {
   objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_VETERAN");
 }
 
-// ---------------------------------------------------------------------------------
-//	Enable/Disable events
-// ---------------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------------
-
-custom_eog_summary() {
+// --------------------------------------------------------------------------------- //	Enable/Disable events
+// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- custom_eog_summary() {
   // Give the players some slight fudge at the start of the map. Planting C4 on the cars before the timer starts
   // still winds up with about half a second of "normal" time before IA is engaged making it impossible to get 100%.
   level.normal_time = max(level.normal_time - 1.0, 0.0);
@@ -203,8 +194,7 @@ custom_eog_summary() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-enable_uav_resources() {
+// --------------------------------------------------------------------------------- enable_uav_resources() {
   array_thread(getvehiclenodearray("uav_sound", "script_noteworthy"), maps\_ucav::plane_sound_node);
   array_thread(getvehiclenodearray("fire_missile", "script_noteworthy"), maps\_ucav::fire_missile_node);
 }
@@ -217,20 +207,17 @@ enable_ambient_uavs() {
   thread delayThread(20, ::spawn_vehicle_from_targetname_and_drive, "ucav_flyover_03");
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_bridge() {
+// --------------------------------------------------------------------------------- enable_rappel_bridge() {
   flag_set("so_rappel_bridge");
   array_spawn_function_noteworthy("rappel_bridge", ::ai_rappel_think);
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_bridge_seek() {
+// --------------------------------------------------------------------------------- enable_rappel_bridge_seek() {
   flag_set("so_rappel_bridge_seek");
   array_spawn_function_noteworthy("rappel_bridge_seek", ::ai_rappel_think, true);
 }
 
-// ---------------------------------------------------------------------------------
-enable_bridge_collapse() {
+// --------------------------------------------------------------------------------- enable_bridge_collapse() {
   flag_set("so_bridge_collapse");
 
   precacheModel("vehicle_coupe_gold");
@@ -240,7 +227,7 @@ enable_bridge_collapse() {
 
   trigger = GetEnt("bridge_collapse", "targetname");
 
-  if(GetDvar("test_bridge_collapse") == "1") {
+  if(getDvar("test_bridge_collapse") == "1") {
     trigger thread notify_delay("trigger", 10);
   }
 
@@ -274,30 +261,25 @@ enable_bridge_collapse() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-enable_missile_attack_taxi() {
+// --------------------------------------------------------------------------------- enable_missile_attack_taxi() {
   flag_set("so_missile_attack_taxi");
   thread missile_taxi_moves();
 }
 
-// ---------------------------------------------------------------------------------
-enable_attack_heli() {
+// --------------------------------------------------------------------------------- enable_attack_heli() {
   flag_set("so_attack_heli");
   thread attack_heli();
 }
 
-// ---------------------------------------------------------------------------------
-enable_troop_flood() {
+// --------------------------------------------------------------------------------- enable_troop_flood() {
   flag_set("so_flood_spawner");
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_heli_close() {
+// --------------------------------------------------------------------------------- enable_rappel_heli_close() {
   flag_set("so_rappel_heli_close");
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_heli_far() {
+// --------------------------------------------------------------------------------- enable_rappel_heli_far() {
   flag_set("so_rappel_heli_far");
 }
 

@@ -86,7 +86,6 @@ __init__() {
 __main__() {
   if(getdvarint(#"zm_debug_ee", 0)) {
     level thread function_9562e9c1();
-
   }
 
   level flag::wait_till("start_zombie_round_logic");
@@ -202,7 +201,7 @@ function_cf58d5fe() {
 }
 
 function_7d6c1805(e_player) {
-  if(!isplayer(e_player)) {
+  if(!isPlayer(e_player)) {
     return;
   }
 
@@ -914,7 +913,7 @@ function_588dcdff() {
 }
 
 function_134e0d03(e_player) {
-  if(!isplayer(e_player)) {
+  if(!isPlayer(e_player)) {
     return;
   }
 

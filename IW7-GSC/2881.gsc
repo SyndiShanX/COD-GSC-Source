@@ -10,9 +10,9 @@ main() {
   precachestring(&"SCRIPT_INTELLIGENCE_PERCENT");
   precachestring(&"SCRIPT_INTELLIGENCE_UPLOADING");
   level.var_9953 = func_48A0();
-  setdvar("ui_level_cheatpoints", level.var_9953.size);
+  setDvar("ui_level_cheatpoints", level.var_9953.size);
   level.var_9950 = 0;
-  setdvar("ui_level_player_cheatpoints", level.var_9950);
+  setDvar("ui_level_player_cheatpoints", level.var_9950);
   level.var_113C7 = func_48A1();
   func_9858();
   func_995C();
@@ -32,7 +32,7 @@ func_E041() {
   self.item notsolid();
   scripts\engine\utility::trigger_off();
   level.var_9950++;
-  setdvar("ui_level_player_cheatpoints", level.var_9950);
+  setDvar("ui_level_player_cheatpoints", level.var_9950);
   self notify("end_trigger_thread");
 }
 
@@ -148,16 +148,16 @@ func_12F84() {
     self stoploopsound("intelligence_pickup_loop");
     self waittill("trigger", var_0);
     self playLoopSound("intelligence_pickup_loop");
-    setdvar("ui_securing", "intel");
-    setdvar("ui_securing_progress", 0.0);
+    setDvar("ui_securing", "intel");
+    setDvar("ui_securing_progress", 0.0);
     thread func_D9DA();
     func_906C();
   }
 
   self notify("hold_complete");
   self stoploopsound("intelligence_pickup_loop");
-  setdvar("ui_securing_progress", 1.0);
-  setdvar("ui_securing", "");
+  setDvar("ui_securing_progress", 1.0);
+  setDvar("ui_securing", "");
 }
 
 func_906C() {
@@ -167,13 +167,13 @@ func_906C() {
     if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player)) {
       level.player.var_906B++;
     } else {
-      setdvar("ui_securing", "");
+      setDvar("ui_securing", "");
       self stoploopsound("intelligence_pickup_loop");
       self notify("stopped_pressing");
     }
 
     if(level.player.var_906B >= 30) {
-      setdvar("ui_securing", "");
+      setDvar("ui_securing", "");
       self notify("stopped_pressing");
       self stoploopsound("intelligence_pickup_loop");
     }
@@ -188,7 +188,7 @@ func_D9DA() {
   var_1 = 8;
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
-    setdvar("ui_securing_progress", getdvarfloat("ui_securing_progress") + 1 / var_0);
+    setDvar("ui_securing_progress", getdvarfloat("ui_securing_progress") + 1 / var_0);
     scripts\engine\utility::waitframe();
   }
 }

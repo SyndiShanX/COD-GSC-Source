@@ -18,22 +18,22 @@ callback_hostmigration() {
   var_2.hostmigrationcontrolsfrozen = 0;
 
   level.hostmigrationtimer = 1;
-  setdvar("ui_inhostmigration", 1);
+  setDvar("ui_inhostmigration", 1);
   level notify("host_migration_begin");
   maps\mp\gametypes\_gamelogic::updatetimerpausedness();
 
   foreach(var_2 in level.characters) {
     var_2 thread hostmigrationtimerthink();
 
-    if(isplayer(var_2))
+    if(isPlayer(var_2))
       var_2 setclientomnvar("ui_session_state", var_2.sessionstate);
   }
 
-  setdvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   level endon("host_migration_begin");
   hostmigrationwait();
   level.hostmigrationtimer = undefined;
-  setdvar("ui_inhostmigration", 0);
+  setDvar("ui_inhostmigration", 0);
   level notify("host_migration_end");
   maps\mp\gametypes\_gamelogic::updatetimerpausedness();
   level thread maps\mp\gametypes\_gamelogic::updategameevents();
@@ -65,10 +65,10 @@ hostmigrationname(var_0) {
   if(isDefined(var_0.entity_number))
     var_1 = var_0.entity_number;
 
-  if(isplayer(var_0) && isDefined(var_0.name))
+  if(isPlayer(var_0) && isDefined(var_0.name))
     var_2 = var_0.name;
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     return "player <" + var_2 + "> (entNum " + var_1 + ")";
 
   if(isagent(var_0) && maps\mp\_utility::isgameparticipant(var_0))

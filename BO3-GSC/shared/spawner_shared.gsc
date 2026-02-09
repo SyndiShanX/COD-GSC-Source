@@ -23,7 +23,7 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   if(getdvarstring("noai") == "") {
-    setdvar("noai", "off");
+    setDvar("noai", "off");
   }
   level._nextcoverprint = 0;
   level._ai_group = [];
@@ -1377,7 +1377,7 @@ function player_saw_kill(guy, attacker) {
     return 0;
   }
   if(isalive(attacker)) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       return 1;
     }
     players = getplayers();
@@ -1874,16 +1874,16 @@ function autoexec init_npcdeathtracking() {
   callback::add_callback("hash_acb66515", &track_vehicle_deaths);
   callback::add_callback("hash_7b543e98", &show_actor_damage);
   callback::add_callback("hash_9bd1e27f", &show_vehicle_damage);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   level thread listenfornpcdeaths();
 }
 
 function track_vehicle_deaths(params) {
   b_killed_by_player = 0;
-  if(isDefined(params) && isplayer(params.eattacker)) {
+  if(isDefined(params) && isPlayer(params.eattacker)) {
     b_killed_by_player = 1;
     if(getdvarint("")) {
       n_xp_value = getscoreinfoxp("" + self.scoretype);
@@ -1901,7 +1901,7 @@ function track_vehicle_deaths(params) {
 
 function track_npc_deaths(params) {
   b_killed_by_player = 0;
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     b_killed_by_player = 1;
     if(getdvarint("")) {
       n_xp_value = getscoreinfoxp("" + self.scoretype);
@@ -2043,7 +2043,7 @@ function checkfordeathtrackingreset() {
   if(getdvarint("") == 1) {
     level.a_npcdeaths = [];
     iprintln("");
-    setdvar("", 0);
+    setDvar("", 0);
   }
 }
 

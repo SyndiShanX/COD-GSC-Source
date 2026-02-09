@@ -8,7 +8,6 @@ main() {
   self.voice = "german";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_ger_richtofen_dlc2_body");
 }

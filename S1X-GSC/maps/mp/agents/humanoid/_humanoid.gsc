@@ -124,7 +124,7 @@ iswithinattackheight(var_0) {
   var_2 = var_0[2] - self.origin[2];
   var_1 = var_2 <= self.attackzheight && var_2 >= self.attackzheightdown;
 
-  if(!var_1 && isplayer(self.curmeleetarget) && maps\mp\zombies\_util::is_true(self.curmeleetarget.isinexploitspot)) {
+  if(!var_1 && isPlayer(self.curmeleetarget) && maps\mp\zombies\_util::is_true(self.curmeleetarget.isinexploitspot)) {
     if(length(self getvelocity()) < 5) {
       var_1 = var_2 <= self.attackzheight * 2 && var_2 >= self.attackzheightdown;
     }

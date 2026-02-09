@@ -11,8 +11,8 @@ zm_frontend_bgb_slots_logic() {
 }
 
 zm_frontend_bgb_devgui() {
-  setdvar(#"bgb_test_power_boost_devgui", "<dev string:x38>");
-  setdvar(#"bgb_test_success_fail_devgui", "<dev string:x38>");
+  setDvar(#"bgb_test_power_boost_devgui", "<dev string:x38>");
+  setDvar(#"bgb_test_success_fail_devgui", "<dev string:x38>");
   bgb_devgui_base = "<dev string:x3b>";
   a_n_amounts = array(1, 5, 10, 100);
 
@@ -56,8 +56,8 @@ bgb_devgui_think() {
       }
     }
 
-    setdvar(#"bgb_test_power_boost_devgui", "<dev string:x38>");
-    setdvar(#"bgb_test_success_fail_devgui", "<dev string:x38>");
+    setDvar(#"bgb_test_power_boost_devgui", "<dev string:x38>");
+    setDvar(#"bgb_test_success_fail_devgui", "<dev string:x38>");
     wait 0.5;
   }
 }

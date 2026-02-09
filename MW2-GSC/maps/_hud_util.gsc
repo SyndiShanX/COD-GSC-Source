@@ -208,7 +208,7 @@ createFontString(font, fontScale) {
 */
 
 createClientFontString(font, fontScale) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   fontElem = newClientHudElem(self);
   fontElem.elemType = "font";
@@ -227,7 +227,7 @@ createClientFontString(font, fontScale) {
 }
 
 createClientTimer(font, fontScale) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   timerElem = newClientHudElem(self);
   timerElem.elemType = "timer";

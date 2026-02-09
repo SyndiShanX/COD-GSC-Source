@@ -13,9 +13,8 @@ _id_421A() {
   self endon("pain_death");
   var_0 = self._id_0B6E._id_41ED._id_421B;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     thread _id_4229();
-
   }
   for(;;) {
     maps\_utility::_id_1654("_stealth_enabled");
@@ -63,11 +62,9 @@ _id_421D() {
 _id_421F(var_0) {
   if(!isDefined(var_0)) {
     var_0 = self._id_0B6E._id_41ED.stance;
-
   }
   if(var_0 == "back") {
     var_0 = "prone";
-
   }
   var_1 = level._id_0B6E._id_41ED._id_4220;
   var_2 = level._id_0B6E._id_41ED._id_4221[var_1][var_0];
@@ -84,7 +81,6 @@ _id_421F(var_0) {
 
   if(isDefined(self._id_4223) && var_3 > self._id_4223) {
     var_3 = self._id_4223;
-
   }
   return var_2 + var_3;
 }
@@ -117,7 +113,6 @@ _id_4229() {
       var_3 = 0;
     } else {
       var_3 = self[[var_1]]();
-
     }
     foreach(var_9, var_5 in self._id_0B6E._id_41ED._id_4222) {
       foreach(var_8, var_7 in var_5) {}
@@ -145,13 +140,11 @@ _id_422F() {
       case "prone":
         if(self._id_0B6E._id_41ED._id_4228 != "prone") {
           self._id_0B6E._id_41ED._id_4230 = self._id_0B6E._id_41ED._id_4231;
-
         }
         break;
       case "crouch":
         if(self._id_0B6E._id_41ED._id_4228 == "stand") {
           self._id_0B6E._id_41ED._id_4230 = self._id_0B6E._id_41ED._id_4231;
-
         }
         break;
     }
@@ -180,7 +173,7 @@ _id_4232() {
   self._id_0B6E = spawnStruct();
   self._id_0B6E._id_41ED = spawnStruct();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self._id_0B6E._id_41ED._id_4227 = ::_id_422D;
     self._id_0B6E._id_41ED._id_422A = ::_id_422E;
 

@@ -72,7 +72,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_14 = var_4 == "MOD_MELEE";
   var_15 = isDefined(self.isfrozen) && isDefined(var_5) && !scripts\cp\cp_weapon::isforgefreezeweapon(var_5) || var_4 == "MOD_MELEE";
   var_10 = scripts\engine\utility::isbulletdamage(var_4);
-  var_11 = isDefined(var_1) && isplayer(var_1);
+  var_11 = isDefined(var_1) && isPlayer(var_1);
   var_12 = scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
   var_13 = (var_1 scripts\cp\cp_weapon::has_attachment(var_5, "overclock") || var_1 scripts\cp\cp_weapon::has_attachment(var_5, "overclockcp")) && var_10;
   var_14 = scripts\engine\utility::istrue(self.battleslid);
@@ -220,7 +220,7 @@ is_grenade(var_0, var_1) {
 
 onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   scripts\cp\zombies\zombie_scriptable_states::turn_off_states_on_death(self);
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 notify("zombie_killed", self, self.origin, var_4, var_3, var_6);
   }
 
@@ -352,7 +352,7 @@ give_attacker_kill_rewards(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(!isplayer(var_0) && !isDefined(var_0.owner) || !isplayer(var_0.owner)) {
+  if(!isPlayer(var_0) && !isDefined(var_0.owner) || !isPlayer(var_0.owner)) {
     return;
   }
 
@@ -405,7 +405,7 @@ givekillreward(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 should_get_currency_from_kill(var_0) {
-  if(isplayer(var_0) && scripts\cp\cp_laststand::player_in_laststand(var_0)) {
+  if(isPlayer(var_0) && scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return 0;
   }
 
@@ -432,11 +432,11 @@ isonhumanteam(var_0) {
 }
 
 shitloc_mods(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0) && isplayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade") && scripts\cp\utility::coop_getweaponclass(var_2) == "weapon_sniper") {
+  if(isDefined(var_0) && isPlayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade") && scripts\cp\utility::coop_getweaponclass(var_2) == "weapon_sniper") {
     return "head";
   }
 
-  if(isDefined(var_0) && isplayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("increased_limb_damage") && is_limb(var_2, var_3, var_1, var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("increased_limb_damage") && is_limb(var_2, var_3, var_1, var_0)) {
     return "torso_upper";
   }
 
@@ -616,7 +616,7 @@ eligible_for_reward(var_0, var_1, var_2, var_3) {
 onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   var_13 = scripts\cp\utility::is_trap(var_0);
   if((isDefined(var_1) && isDefined(var_4) && scripts\engine\utility::isbulletdamage(var_4) || scripts\cp\utility::player_has_special_ammo(var_1, "combined_ammo") && var_4 == "MOD_EXPLOSIVE_BULLET") || var_5 == "poison_ammo_mp") {
-    if(isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isPlayer(var_1) || isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       if(!var_13) {
         var_1 check_for_special_damage(self, var_0, var_3, var_5, var_4);
       }
@@ -707,7 +707,7 @@ should_do_stun_damage(var_0, var_1, var_2) {
     return 1;
   }
 
-  if(isDefined(var_2) && isplayer(var_2) && var_1 != "MOD_MELEE") {
+  if(isDefined(var_2) && isPlayer(var_2) && var_1 != "MOD_MELEE") {
     var_3 = isDefined(var_0) && var_0 == var_2 getcurrentprimaryweapon();
     return var_3 && var_2 scripts\cp\utility::has_stun_ammo();
   }

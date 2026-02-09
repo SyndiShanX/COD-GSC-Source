@@ -526,7 +526,6 @@ showElem() {
     if(self.bar.alpha != 1) {
       self.bar.alpha = 1;
     }
-
   } else {
     if(self.alpha != 1) {
       self.alpha = 1;

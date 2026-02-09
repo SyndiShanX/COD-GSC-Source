@@ -24,7 +24,6 @@ _id_0A47(var_0) {
 
   if(isDefined(self._id_0A4B)) {
     var_2.origin = self._id_0A4B;
-
   }
   var_0 settargetentity(var_2);
   var_3 = undefined;
@@ -66,7 +65,7 @@ _id_0A4E(var_0) {
     wait 0.1;
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     self endon("saw_enemy");
     var_3 = var_1 getEye();
     var_2 = vectortoangles(var_3 - var_0.origin);
@@ -84,7 +83,6 @@ _id_0A4E(var_0) {
 
     if(!isDefined(var_7)) {
       var_7 = var_0.origin;
-
     }
     var_0 moveto(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
@@ -191,7 +189,6 @@ _id_0A58() {
 _id_0A59(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] endon("death");
-
   }
   var_2 = 0;
   var_3 = 1;
@@ -199,11 +196,9 @@ _id_0A59(var_0) {
   for(;;) {
     if(isalive(var_0[var_2])) {
       var_0[var_2] _id_0A4F(1);
-
     }
     if(isalive(var_0[var_3])) {
       var_0[var_3] _id_0A4F(0);
-
     }
     var_4 = var_2;
     var_2 = var_3;
@@ -244,11 +239,9 @@ _id_0A5B(var_0, var_1, var_2) {
 
   if(var_3 < 5) {
     var_3 = 5;
-
   }
   if(var_3 > 20) {
     var_3 = 20;
-
   }
   var_4 = var_2 - var_1;
   var_4 = (var_4[0] / var_3, var_4[1] / var_3, var_4[2] / var_3);

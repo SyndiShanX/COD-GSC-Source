@@ -50,7 +50,7 @@ bank_teller_logic() {
   while(true) {
     level.bank_teller_dmg_trig waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname, blah);
 
-    if(isDefined(attacker) && isplayer(attacker) && damage == 1500 && type == "MOD_MELEE") {
+    if(isDefined(attacker) && isPlayer(attacker) && damage == 1500 && type == "MOD_MELEE") {
       bank_teller_give_money();
       level.bank_teller_transfer_trig trigger_off();
     }

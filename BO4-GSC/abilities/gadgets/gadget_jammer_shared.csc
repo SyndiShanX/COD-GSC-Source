@@ -70,7 +70,7 @@ function_43a5b68a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 player_isjammed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
 

@@ -903,7 +903,7 @@ shouldrunserversideeffects() {
   if(level.createfx_enabled) {
     return 1;
   } else {
-    return getdvar("clientSideEffects") != "1";
+    return getDvar("clientSideEffects") != "1";
   }
 }
 

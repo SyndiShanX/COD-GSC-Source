@@ -352,9 +352,7 @@ checkvalidposition(var_0, var_1) {
   if(isDefined(level.invalidtranspondervolumes)) {
     if(isDefined(level.is_in_box_func)) {
       foreach(var_5 in level.invalidtranspondervolumes) {
-        if([
-            [level.is_in_box_func]
-          ](var_5[0], var_5[1], var_5[2], var_5[3], self.origin)) {
+        if([[level.is_in_box_func]](var_5[0], var_5[1], var_5[2], var_5[3], self.origin)) {
           return 0;
         }
       }

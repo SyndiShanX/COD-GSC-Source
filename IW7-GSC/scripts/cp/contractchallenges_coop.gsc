@@ -90,7 +90,7 @@ contractkills(var_0) {
     self waittill("kill_event_buffered", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     var_10 = 0;
     var_11 = scripts\cp\utility::getweaponclass(var_5);
-    var_12 = getdvar("ui_mapname");
+    var_12 = getDvar("ui_mapname");
     var_13 = scripts\engine\utility::isbulletdamage(var_4);
     var_14 = isDefined(var_5) && var_5 == "iw7_dischorddummy_zm" || var_5 == "iw7_facemelterdummy_zm" || var_5 == "iw7_headcutterdummy_zm" || var_5 == "iw7_shredderdummy_zm";
     var_15 = issubstr(var_5, "venomx");
@@ -429,7 +429,7 @@ contractmoneyearned(var_0) {
   self endon("game_ended");
   for(;;) {
     self waittill("currency_earned_buffered", var_1);
-    var_2 = getdvar("ui_mapname");
+    var_2 = getDvar("ui_mapname");
     var_3 = 0;
     switch (var_0.ref) {
       case "con_cash_earned_zmb":
@@ -537,7 +537,7 @@ contractmoneyspent(var_0) {
   self endon("game_ended");
   for(;;) {
     self waittill("currency_spent_buffered", var_1);
-    var_2 = getdvar("ui_mapname");
+    var_2 = getDvar("ui_mapname");
     var_3 = 0;
     switch (var_0.ref) {
       case "con_cash_spent_zmb":

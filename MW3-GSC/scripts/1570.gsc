@@ -8,21 +8,17 @@ main() {
     level._effect["air_support_marker"] = loadfx("smoke/signal_smoke_air_support_paris_ac130");
   } else {
     level._effect["air_support_marker"] = loadfx("smoke/signal_smoke_air_support");
-
   }
   level._effect["air_support_trail"] = loadfx("smoke/smoke_geotrail_air_support");
 
   if(isDefined(level._id_3E87)) {
     level._effect["air_support_sticky_marker"] = level._id_3E87;
-
   }
   if(isDefined(level._id_3E88)) {
     level._effect["air_support_marker_enemy"] = level._id_3E88;
-
   }
   if(isDefined(level._id_3E89)) {
     level._effect["air_support_trail_enemy"] = level._id_3E89;
-
   }
   level._id_3E8A = "ac130_40mm_air_support_strobe";
   precacheitem(level._id_3E8A);
@@ -63,7 +59,6 @@ _id_3E8D() {
 
   if(isDefined(level._id_3E8E)) {
     var_0 = level._id_3E8E;
-
   }
   var_1 = weaponfiretime("air_support_strobe") - 0.05;
 
@@ -104,7 +99,6 @@ _id_3E91() {
 
   if(isDefined(level._id_3E92)) {
     var_0 = level._id_3E92;
-
   }
   for(;;) {
     var_1 = _id_3E9F();
@@ -115,7 +109,6 @@ _id_3E91() {
 
       if(!isDefined(level._id_3E94) || !level._id_3E94) {
         var_1 thread _id_3E96();
-
       }
       wait(var_0);
       var_1 _id_3EA8();
@@ -136,7 +129,6 @@ _id_3E95(var_0) {
   for(;;) {
     while(!_id_3EA0()) {
       wait 1;
-
     }
     wait 10;
 
@@ -154,7 +146,6 @@ _id_3E96() {
 
   if(isDefined(level._id_3E97)) {
     var_0 = 3;
-
   }
   wait(var_0);
   var_1 = 512;
@@ -177,7 +168,6 @@ _id_3E98(var_0) {
     self._id_3E9A = 1;
   } else {
     playFXOnTag(common_scripts\utility::getfx("air_support_trail"), self._id_3E99, "tag_origin");
-
   }
   wait 2.35;
   var_1 = 0.5;
@@ -198,7 +188,6 @@ _id_3E98(var_0) {
 
   if(isDefined(var_5["position"])) {
     self.origin = var_5["position"];
-
   }
   if(isDefined(self._id_3E9B) && self._id_3E9B) {
     thread _id_3E9C();
@@ -206,7 +195,6 @@ _id_3E98(var_0) {
     playFX(common_scripts\utility::getfx("air_support_marker_enemy"), self.origin);
   } else {
     playFX(common_scripts\utility::getfx("air_support_marker"), self.origin);
-
   }
   _id_3E9E(self);
   var_6 = 512;
@@ -219,7 +207,6 @@ _id_3E98(var_0) {
       stopFXOnTag(common_scripts\utility::getfx("air_support_marker_enemy"), self._id_3E99, "tag_origin");
     } else {
       stopFXOnTag(common_scripts\utility::getfx("air_support_marker"), self._id_3E99, "tag_origin");
-
     }
     self._id_3E99 delete();
   }
@@ -275,7 +262,6 @@ _id_3E9E(var_0) {
 _id_3E9F() {
   for(level._id_3E8B = common_scripts\utility::array_removeundefined(level._id_3E8B); level._id_3E8B.size == 0; level._id_3E8B = common_scripts\utility::array_removeundefined(level._id_3E8B)) {
     level waittill("air_support_strobe_popped", var_0);
-
   }
   return level._id_3E8B[0];
 }
@@ -287,11 +273,9 @@ _id_3EA0() {
 _id_3EA1(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     level._id_3EA2 = var_1;
-
   }
   if(isDefined(var_2)) {
     level._id_3EA3 = var_2;
-
   }
   level._id_3EA4 = var_0;
 }
@@ -302,7 +286,6 @@ _id_3EA5() {
 
     if(isDefined(level._id_3EA3)) {
       var_0 = level._id_3EA4 gettagorigin(level._id_3EA3);
-
     }
     if(isDefined(level._id_3EA2)) {
       var_1 = level.player getEye();
@@ -349,13 +332,11 @@ _id_3EA8() {
 
     if(!isDefined(var_7)) {
       var_7 = self.origin + _id_3EB1(32);
-
     }
     if(isDefined(self._id_3E9A)) {
       var_8 = magicbullet(level._id_3E8A, var_4, var_7);
     } else {
       var_8 = magicbullet(level._id_3E8A, var_4, var_7, self.owner);
-
     }
     var_8 thread _id_3EAC(0.3, 0.5, 1200);
     var_9 = spawnStruct();
@@ -486,14 +467,12 @@ _id_3EB7() {
 
     if(isDefined(self._id_163B)) {
       var_10 = self._id_163B;
-
     }
     if(isDefined(var_9) && var_9 == level._id_3E8A && (isDefined(self) && isDefined(self.health) && self.health <= var_10 && self.health + var_0 > var_10) && !maps\_vehicle::_id_1C06()) {
       level._id_3EB4++;
 
       if(isDefined(level._id_3EB8) && self == level._id_3EB8) {
         level._id_3EB5 = 1;
-
       }
       return;
     } else if(!isDefined(self) || !isDefined(self.health) || self.health <= var_10) {

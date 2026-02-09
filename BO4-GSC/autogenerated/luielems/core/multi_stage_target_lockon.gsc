@@ -31,7 +31,6 @@ class cmulti_stage_target_lockon: cluielem {
     cluielem::add_clientfield("entNum", 1, 6, "int");
     cluielem::add_clientfield("targetState", 1, 3, "int");
   }
-
 }
 
 register(uid) {

@@ -266,7 +266,7 @@ give_blocker_awards() {
 spawn_proto_ancestor() {
   var_0 = getent("temp_spawn_ancestor", "targetname");
   var_0 waittill("trigger");
-  setdvar("scr_debug_ancestor_spawn", 1);
+  setDvar("scr_debug_ancestor_spawn", 1);
 }
 
 jump_to_gas_station() {}

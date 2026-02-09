@@ -74,7 +74,7 @@ on_ai_killed(params) {
     return;
   }
 
-  if(level.var_44445188 === # "no_headshots" && isplayer(params.eattacker) && zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath)) {
+  if(level.var_44445188 === # "no_headshots" && isPlayer(params.eattacker) && zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath)) {
     zm_trial::fail(#"hash_11e532a4f9c3e482", array(params.eattacker));
     return;
   }

@@ -404,11 +404,11 @@ fastrope_player_think() {
   self.vehicle waittill("reached_wait_node");
   wait 2.5;
 
-  if(getdvar("fastropeunlock") == "")
-    setdvar("fastropeunlock", "0");
+  if(getDvar("fastropeunlock") == "")
+    setDvar("fastropeunlock", "0");
 
-  if(!isDefined(getdvar("fastropeunlock")))
-    setdvar("fastropeunlock", "0");
+  if(!isDefined(getDvar("fastropeunlock")))
+    setDvar("fastropeunlock", "0");
 
   fastrope_player_viewshift();
   fastrope_player_unload();
@@ -424,7 +424,7 @@ play_fast_rope_fx() {
 }
 
 fastrope_player_viewshift() {
-  var_0 = int(getdvar("fastropeunlock"));
+  var_0 = int(getDvar("fastropeunlock"));
 
   if(!var_0)
     fastrope_player_viewshift_lock();
@@ -433,7 +433,7 @@ fastrope_player_viewshift() {
 }
 
 fastrope_player_unload() {
-  var_0 = int(getdvar("fastropeunlock"));
+  var_0 = int(getDvar("fastropeunlock"));
 
   if(!var_0)
     fastrope_player_unload_lock();

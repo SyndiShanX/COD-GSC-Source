@@ -154,7 +154,7 @@ func_13A1C(var_0) {
   self endon("death");
   for(;;) {
     self waittill("trigger", var_1);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 

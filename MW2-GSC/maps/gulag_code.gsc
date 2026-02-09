@@ -326,7 +326,6 @@ doomed_just_doomed_think() {
     self.attackeraccuracy += 0.2;
     self.threatbias += 40;
   }
-
 }
 
 /*
@@ -646,7 +645,6 @@ player_heli_stabilizes() {
     self SetHoverParams(0, 0, 0);
     flag_waitopen("stabilize");
   }
-
 }
 
 destroy_close_missiles() {
@@ -757,8 +755,7 @@ track_fly_in_progress(fly_in_progress, fly_in_progress_target, fly_in_progress_d
   }
 }
 
-/* --------------
- TV MOVIES
+/* -------------- TV MOVIES
 ---------------*/
 init_tv_movies() {
   wait(1);
@@ -798,7 +795,6 @@ armed_heli_fires_turrets() {
   foreach(turret in heli.mgturret) {
     turret SetTargetEntity(armed_target_1);
   }
-
 }
 
 glassy_pain() {
@@ -1756,7 +1752,7 @@ reinforcement_friendlies() {
   self waittill("trigger");
 
   // these guys fill in for any dead
-  /# flag_assert( "control_room" );
+  flag_assert("control_room");
 
   ai = GetAIArray("allies");
   spawners = getEntArray(self.target, "targetname");
@@ -2070,7 +2066,6 @@ blue_light_flickers() {
     self.looper Delete();
     wait(0.9);
   }
-
 }
 
 friendly_cellblock_respawner() {
@@ -2910,7 +2905,7 @@ price_spawn_think() {
 
   if(!isalive(self)) {
     // the pow was killed
-    SetDvar("ui_deadquote", "@GULAG_PRICE_KILLED");
+    setDvar("ui_deadquote", "@GULAG_PRICE_KILLED");
     //maps\_utility::missionFailedWrapper();
     return;
   }
@@ -3010,7 +3005,6 @@ going_in_hot() {
   foreach(turret in self.mgturret) {
     turret StopFiring();
   }
-
 }
 
 handle_gulag_world_fx() {
@@ -3187,7 +3181,6 @@ handle_exterior_fx(array, outside_array) {
 
       // cleanse the outside world of non visual entities
       cleanse_the_world();
-
     }
 
     EnableForcedNoSunShadows();
@@ -3507,7 +3500,6 @@ nodes_are_periodically_bad() {
     wait(timer);
     BadPlace_Cylinder("", 2, self.origin, 16, 64, "axis");
     //BadPlace_Cylinder( name, duration, origin, radius, height, team, team... );
-
   }
 }
 
@@ -3791,7 +3783,7 @@ perimeter_tarp_spawner_think() {
 
 should_break_m203_hint(nothing) {
   player = get_player_from_self();
-  Assert(IsPlayer(player));
+  Assert(isPlayer(player));
 
   // am I using my m203 weapon?
   weapon = player GetCurrentWeapon();
@@ -3900,7 +3892,7 @@ all_missiles_model_can_die(slamraam) {
   self.health = 250;
   for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
-    if(IsAlive(attacker) && IsPlayer(attacker)) {
+    if(IsAlive(attacker) && isPlayer(attacker)) {
       if(self.health <= 0) {
         // slamraam_killed_0 slamraam_killed_1 slamraam_killed_2
         flag_set("slamraam_killed_" + slamraam.script_parameters);

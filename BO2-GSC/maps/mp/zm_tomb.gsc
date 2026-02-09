@@ -134,10 +134,10 @@ main() {
   level.callbackvehicledamage = ::tomb_vehicle_damage_override_wrapper;
   level.level_specific_stats_init = ::init_tomb_stats;
   maps\mp\zombies\_load::main();
-  setdvar("zombiemode_path_minz_bias", 13);
-  setdvar("tu14_bg_chargeShotExponentialAmmoPerChargeLevel", 1);
+  setDvar("zombiemode_path_minz_bias", 13);
+  setDvar("tu14_bg_chargeShotExponentialAmmoPerChargeLevel", 1);
 
-  if(getdvar(#"createfx") == "1") {
+  if(getDvar(#"createfx") == "1") {
     return;
   }
   level_precache();
@@ -262,10 +262,10 @@ main() {
     if(is_classic())
       level.zombie_ai_limit = 20;
 
-    setdvar("fx_marks_draw", 0);
-    setdvar("disable_rope", 1);
-    setdvar("cg_disableplayernames", 1);
-    setdvar("disableLookAtEntityLogic", 1);
+    setDvar("fx_marks_draw", 0);
+    setDvar("disable_rope", 1);
+    setDvar("cg_disableplayernames", 1);
+    setDvar("disableLookAtEntityLogic", 1);
   } else
     level.zombie_ai_limit = 24;
 
@@ -637,7 +637,7 @@ give_personality_characters() {
   self.favorite_wall_weapons_list = [];
   self.talks_in_danger = 0;
 
-  if(getdvar(#"_id_40772CF1") != "")
+  if(getDvar(#"_id_40772CF1") != "")
     self.characterindex = getdvarint(#"_id_40772CF1");
 
   switch (self.characterindex) {
@@ -1126,59 +1126,59 @@ tomb_powerup_grab(s_powerup, e_player) {
 }
 
 setup_powerup_devgui() {
-  setdvar("zombie_blood", "off");
+  setDvar("zombie_blood", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Power Ups:2/Now:1/Drop Zombie Blood:1\" \"zombie_blood on\"\n");
   level thread watch_devgui_zombie_blood();
 }
 
 setup_oneinchpunch_devgui() {
-  setdvar("test_oneinchpunch", "off");
+  setDvar("test_oneinchpunch", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/OneInchPunch:2/OneInchPunch:1\" \"test_oneinchpunch on\"\n");
-  setdvar("test_oneinchpunch_upgraded", "off");
+  setDvar("test_oneinchpunch_upgraded", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/OneInchPunch:2/OneInchPunch_Upgraded:1\" \"test_oneinchpunch_upgraded on\"\n");
-  setdvar("test_oneinchpunch_air", "off");
+  setDvar("test_oneinchpunch_air", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/OneInchPunch:2/OneInchPunch_Air:1\" \"test_oneinchpunch_air on\"\n");
-  setdvar("test_oneinchpunch_fire", "off");
+  setDvar("test_oneinchpunch_fire", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/OneInchPunch:2/OneInchPunch_Fire:1\" \"test_oneinchpunch_fire on\"\n");
-  setdvar("test_oneinchpunch_ice", "off");
+  setDvar("test_oneinchpunch_ice", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/OneInchPunch:2/OneInchPunch_Ice:1\" \"test_oneinchpunch_ice on\"\n");
-  setdvar("test_oneinchpunch_lightning", "off");
+  setDvar("test_oneinchpunch_lightning", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/OneInchPunch:2/OneInchPunch_Lightning:1\" \"test_oneinchpunch_lightning on\"\n");
   level thread watch_devgui_oneinchpunch();
 }
 
 watch_devgui_oneinchpunch() {
   while(true) {
-    if(getdvar(#"_id_A3C7E066") == "on") {
-      setdvar("test_oneinchpunch", "off");
+    if(getDvar(#"_id_A3C7E066") == "on") {
+      setDvar("test_oneinchpunch", "off");
       player = get_players()[0];
       player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
-    } else if(getdvar(#"_id_8921AB91") == "on") {
-      setdvar("test_oneinchpunch_upgraded", "off");
+    } else if(getDvar(#"_id_8921AB91") == "on") {
+      setDvar("test_oneinchpunch_upgraded", "off");
       player = get_players()[0];
       player.b_punch_upgraded = 1;
       player.str_punch_element = "upgraded";
       player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
-    } else if(getdvar(#"_id_0C236601") == "on") {
-      setdvar("test_oneinchpunch_air", "off");
+    } else if(getDvar(#"_id_0C236601") == "on") {
+      setDvar("test_oneinchpunch_air", "off");
       player = get_players()[0];
       player.b_punch_upgraded = 1;
       player.str_punch_element = "air";
       player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
-    } else if(getdvar(#"_id_9092E46B") == "on") {
-      setdvar("test_oneinchpunch_fire", "off");
+    } else if(getDvar(#"_id_9092E46B") == "on") {
+      setDvar("test_oneinchpunch_fire", "off");
       player = get_players()[0];
       player.b_punch_upgraded = 1;
       player.str_punch_element = "fire";
       player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
-    } else if(getdvar(#"_id_0C238736") == "on") {
-      setdvar("test_oneinchpunch_ice", "off");
+    } else if(getDvar(#"_id_0C238736") == "on") {
+      setDvar("test_oneinchpunch_ice", "off");
       player = get_players()[0];
       player.b_punch_upgraded = 1;
       player.str_punch_element = "ice";
       player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
-    } else if(getdvar(#"_id_09341C49") == "on") {
-      setdvar("test_oneinchpunch_lightning", "off");
+    } else if(getDvar(#"_id_09341C49") == "on") {
+      setDvar("test_oneinchpunch_lightning", "off");
       player = get_players()[0];
       player.b_punch_upgraded = 1;
       player.str_punch_element = "lightning";
@@ -1187,11 +1187,10 @@ watch_devgui_oneinchpunch() {
 
     wait 0.1;
   }
-
 }
 
 setup_tablet_devgui() {
-  setdvar("test_player_tablet", "3");
+  setDvar("test_player_tablet", "3");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/Easter Ann:3/Tablet-None:1\" \"test_player_tablet 0\"\n");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/Easter Ann:3/Tablet-Clean:1\" \"test_player_tablet 1\"\n");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/Easter Ann:3/Tablet-Dirty:1\" \"test_player_tablet 2\"\n");
@@ -1200,41 +1199,38 @@ setup_tablet_devgui() {
 
 watch_devgui_tablet() {
   while(true) {
-    if(getdvar(#"_id_4806208C") != "3") {
+    if(getDvar(#"_id_4806208C") != "3") {
       player = get_players()[0];
-      n_tablet_state = int(getdvar(#"_id_4806208C"));
+      n_tablet_state = int(getDvar(#"_id_4806208C"));
       player setclientfieldtoplayer("player_tablet_state", n_tablet_state);
-      setdvar("test_player_tablet", "3");
+      setDvar("test_player_tablet", "3");
     }
 
     wait 0.1;
   }
-
 }
 
 watch_devgui_zombie_blood() {
   while(true) {
-    if(getdvar(#"_id_FA71C6BA") == "on") {
-      setdvar("zombie_blood", "off");
+    if(getDvar(#"_id_FA71C6BA") == "on") {
+      setDvar("zombie_blood", "off");
       level thread maps\mp\zombies\_zm_devgui::zombie_devgui_give_powerup("zombie_blood", 1);
     }
 
     wait 0.1;
   }
-
 }
 
 watch_devgui_double_points() {
   while(true) {
-    if(getdvar(#"_id_1FB6003C") == "on") {
-      setdvar("double_points", "off");
+    if(getDvar(#"_id_1FB6003C") == "on") {
+      setDvar("double_points", "off");
       level thread maps\mp\zombies\_zm_devgui::zombie_devgui_give_powerup("double_points", 1);
       iprintlnbold("change");
     }
 
     wait 0.1;
   }
-
 }
 
 setup_rex_starts() {
@@ -1684,11 +1680,11 @@ custom_vending_precaching() {
 
 tomb_actor_damage_override_wrapper(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   if(isDefined(self.b_zombie_blood_damage_only) && self.b_zombie_blood_damage_only) {
-    if(!isplayer(attacker) || !attacker.zombie_vars["zombie_powerup_zombie_blood_on"])
+    if(!isPlayer(attacker) || !attacker.zombie_vars["zombie_powerup_zombie_blood_on"])
       return 0;
   }
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "capture_zombie" && isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "capture_zombie" && isDefined(attacker) && isPlayer(attacker)) {
     if(damage >= self.health) {
       if(100 * level.round_number > attacker.n_capture_zombie_points) {
         attacker maps\mp\zombies\_zm_score::player_add_points("rebuild_board", 10);
@@ -1710,7 +1706,7 @@ tomb_actor_damage_override_wrapper(inflictor, attacker, damage, flags, meansofde
 }
 
 tomb_zombie_death_event_callback() {
-  if(isDefined(self) && isDefined(self.damagelocation) && isDefined(self.damagemod) && isDefined(self.damageweapon) && isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self) && isDefined(self.damagelocation) && isDefined(self.damagemod) && isDefined(self.damageweapon) && isDefined(self.attacker) && isPlayer(self.attacker)) {
     if(is_headshot(self.damageweapon, self.damagelocation, self.damagemod) && maps\mp\zombies\_zm_challenges::challenge_exists("zc_headshots") && !(!isDefined(self.script_noteworthy) && !isDefined("capture_zombie") || isDefined(self.script_noteworthy) && isDefined("capture_zombie") && self.script_noteworthy == "capture_zombie"))
       self.attacker maps\mp\zombies\_zm_challenges::increment_stat("zc_headshots");
   }

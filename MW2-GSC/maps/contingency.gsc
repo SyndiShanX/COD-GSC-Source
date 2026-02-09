@@ -517,7 +517,7 @@ start_slide() {
   thread handle_slide();
 }
 
-//#using_animtree( "generic_human" );
+/using_animtree( "generic_human" );
 handle_slide() {
   price_destroys_btr = level.price_destroys_btr;
   thread cargo_choppers2();
@@ -772,7 +772,6 @@ first_uav_sequence() {
     level.uavRig = spawn("script_model", level.uav.origin);
     level.uavRig setModel("tag_origin");
     thread UAVRigAiming();
-
   }
   flag_wait("player_on_ridge");
 
@@ -2048,8 +2047,8 @@ debug_timer() {
 
 put_on_player_gas_mask() {
   //thread debug_timer();
-  //orig_nightVisionFadeInOutTime = GetDvar( "nightVisionFadeInOutTime" );
-  //orig_nightVisionPowerOnTime = GetDvar( "nightVisionPowerOnTime" );
+  //orig_nightVisionFadeInOutTime = getDvar( "nightVisionFadeInOutTime" );
+  //orig_nightVisionPowerOnTime = getDvar( "nightVisionPowerOnTime" );
   //SetSavedDvar( "nightVisionPowerOnTime", 0.5 );
   //SetSavedDvar( "nightVisionFadeInOutTime", 0.5 );
   //SetSavedDvar( "overrideNVGModelWithKnife", 1 );
@@ -2181,7 +2180,6 @@ setup_remote_missile_target_guy() {
   if(isDefined(self.ridingvehicle)) {
     self endon("death");
     self waittill("jumpedout");
-
   }
   self thread maps\_remotemissile::setup_remote_missile_target();
 }
@@ -3022,7 +3020,6 @@ price_smart_path_following(first_node) {
 
     //get the next node
     next_node = getnode(next_node.target, "targetname");
-
   }
 }
 
@@ -3522,7 +3519,6 @@ dialog_price_kill() {
     current_line++;
     if(current_line >= dialog.size)
       current_line = 0;
-
   }
 }
 
@@ -3559,7 +3555,6 @@ dialog_price_kill_dog() {
     current_line++;
     if(current_line >= dialog_dog.size)
       current_line = 0;
-
   }
 }
 
@@ -3569,7 +3564,7 @@ monitor_stealth_pain() {
   if(!isDefined(attacker)) {
     return;
   }
-  if((isplayer(attacker)) && (isDefined(self.script_deathflag))) {
+  if((isPlayer(attacker)) && (isDefined(self.script_deathflag))) {
     if(self.script_deathflag != "blocking_stationary_dead")
       thread price_helps_kill_group(self.script_deathflag);
   }
@@ -3581,7 +3576,7 @@ monitor_stealth_kills() {
   if(!isDefined(killer)) {
     return;
   }
-  if(isplayer(killer)) {
+  if(isPlayer(killer)) {
     thread dialog_player_kill();
     return;
   }
@@ -4374,7 +4369,6 @@ dialog_theyre_looking_for_you() {
     radio_dialogue(dialog_line); //dont cut off the other line but clear the que
     if(current_line >= dialog.size)
       current_line = 0;
-
   }
 }
 
@@ -5098,7 +5092,7 @@ woods_prespotted_func() {
 stealth_woods() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   //threat_array[ "warning1" ] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
@@ -5167,7 +5161,7 @@ scan_when_idle() {
 stealth_bridge_area() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   switch (self.team) {
@@ -5230,7 +5224,7 @@ stealth_bridge_area() {
 stealth_base() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   switch (self.team) {
@@ -6372,7 +6366,7 @@ base_autosave_logic() {
 }
 
 timer_start() {
-  if(getdvar("notimer") == "1")
+  if(getDvar("notimer") == "1")
     return;
   dialogue_line = undefined;
   level.timer_allowed_time = undefined;
@@ -6401,7 +6395,7 @@ timer_start() {
 }
 
 timer_logic(iSeconds, sLabel, bUseTick) {
-  if(getdvar("notimer") == "1") {
+  if(getDvar("notimer") == "1") {
     return;
   }
   if(!isDefined(bUseTick))
@@ -6410,8 +6404,7 @@ timer_logic(iSeconds, sLabel, bUseTick) {
   killTimer();
   level endon("kill_timer");
 
-  /*-----------------------
-  TIMER SETUP
+  /*----------------------- TIMER SETUP
   -------------------------*/
   level.hudTimerIndex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(-250);
@@ -6420,8 +6413,7 @@ timer_logic(iSeconds, sLabel, bUseTick) {
   level.timer settenthstimer(iSeconds);
   level.start_time = gettime();
 
-  /*-----------------------
-  TIMER EXPIRED
+  /*----------------------- TIMER EXPIRED
   -------------------------*/
   if(bUseTick == true)
     thread timer_tick();

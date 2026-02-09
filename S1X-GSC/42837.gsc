@@ -646,7 +646,7 @@ bot_ball_origin_can_see_goal(var_0, var_1, var_2) {
 }
 
 bot_ball_trace_to_origin(var_0, var_1) {
-  if(isDefined(self) && (isplayer(self) || isagent(self))) {
+  if(isDefined(self) && (isPlayer(self) || isagent(self))) {
     var_2 = playerphysicstrace(var_0, var_1, self);
   } else {
     var_2 = playerphysicstrace(var_0, var_1);
@@ -922,7 +922,7 @@ teleport_to_zone_character(var_0, var_1) {
   var_3 = level.teleport_zones[var_0];
   var_4 = gettime();
 
-  if(isplayer(var_1) && (var_1.sessionstate == "intermission" || var_1.sessionstate == "spectator")) {
+  if(isPlayer(var_1) && (var_1.sessionstate == "intermission" || var_1.sessionstate == "spectator")) {
     var_5 = getEntArray("mp_global_intermission", "classname");
     var_5 = teleport_filter_spawn_point(var_5, var_0);
     var_6 = var_5[0];
@@ -933,7 +933,7 @@ teleport_to_zone_character(var_0, var_1) {
     var_7 = undefined;
     var_8 = var_1.angles;
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_8 = var_1 getangles();
     }
 

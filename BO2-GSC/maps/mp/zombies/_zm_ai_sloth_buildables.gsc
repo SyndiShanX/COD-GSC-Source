@@ -266,7 +266,6 @@ fetch_buildable_condition() {
           return true;
         } else {
           sloth_print("turbine not built");
-
         }
       }
     }
@@ -662,7 +661,6 @@ wallbuy_action() {
       current_piece maps\mp\zm_buried_buildables::ondrop_chalk(self);
 
       sloth_print("stub was built during anim");
-
     } else {
       stub maps\mp\zm_buried_buildables::onuseplantobject_chalk(self);
       stub buildablestub_finish_build(self);
@@ -670,7 +668,6 @@ wallbuy_action() {
       thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(stub);
 
       sloth_print("built " + self player_get_buildable_piece(1).script_noteworthy);
-
     }
 
     arrayremovevalue(self.wallbuy_pieces_taken, self player_get_buildable_piece(1));

@@ -6,7 +6,7 @@
 
 init_avatar() {
   level.maxavatars = 18;
-  setdvar("scr_vl_link_primary_weap", 0);
+  setDvar("scr_vl_link_primary_weap", 0);
   animateallweaponrooms();
 }
 
@@ -40,7 +40,7 @@ playerspawnlocalplayeravatar(var_0, var_1, var_2, var_3, var_4) {
   var_8 _meth_8577(var_6._id_A7EC);
   var_8.controller = var_4;
   var_8.xuid = var_0;
-  setdvar("virtuallobbymembers", level.vlavatars.size);
+  setDvar("virtuallobbymembers", level.vlavatars.size);
 }
 
 bot_disable_tactical_goals() {
@@ -370,7 +370,7 @@ get_ownerid_for_avatar(var_0) {
 removelobbyavatar(var_0) {
   var_1 = get_ownerid_for_avatar(var_0);
   level.vlavatars[var_1] = undefined;
-  setdvar("virtuallobbymembers", level.vlavatars.size);
+  setDvar("virtuallobbymembers", level.vlavatars.size);
 
   if(level.vl_focus == var_1) {
     if(level.vlavatars.size > 0) {

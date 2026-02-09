@@ -13,7 +13,7 @@ main() {
     self.enemy.syncedmeleetarget = undefined;
   }
 
-  self clearanim( % root, 0.2);
-  self setflaggedanimrestart("dog_pain_anim", % german_shepherd_run_pain, 1, 0.2, 1);
+  self clearanim(%root, 0.2);
+  self setflaggedanimrestart("dog_pain_anim", %german_shepherd_run_pain, 1, 0.2, 1);
   animscripts\shared::_id_0C51("dog_pain_anim");
 }

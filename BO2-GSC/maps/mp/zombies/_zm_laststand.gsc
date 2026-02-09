@@ -47,8 +47,8 @@ init() {
   level.primaryprogressbarwidth = 120;
   level.primaryprogressbary_ss = 280;
 
-  if(getdvar(#"_id_A17166B0") == "")
-    setdvar("revive_trigger_radius", "40");
+  if(getDvar(#"_id_A17166B0") == "")
+    setDvar("revive_trigger_radius", "40");
 
   level.laststandgetupallowed = 0;
 }
@@ -81,7 +81,7 @@ player_any_player_in_laststand() {
 }
 
 player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if("zcleansed" == level.gametype)
       maps\mp\_demo::bookmark("kill", gettime(), self, attacker, 0, einflictor);
 
@@ -168,7 +168,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
   if(isDefined(self.is_zombie) && self.is_zombie) {
     self takeallweapons();
 
-    if(isDefined(attacker) && isplayer(attacker) && attacker != self)
+    if(isDefined(attacker) && isPlayer(attacker) && attacker != self)
       attacker notify("killed_a_zombie_player", einflictor, self, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
   } else {
     self laststand_disable_player_weapons();
@@ -646,13 +646,13 @@ revive_trigger_think() {
       revive_success = reviver revive_do_revive(self, gun);
       reviver revive_give_back_weapons(gun);
 
-      if(isplayer(self))
+      if(isPlayer(self))
         self allowjump(1);
 
       self.laststand = undefined;
 
       if(revive_success) {
-        if(isplayer(self))
+        if(isPlayer(self))
           maps\mp\zombies\_zm_chugabud::player_revived_cleanup_chugabud_corpse();
 
         self thread revive_success(reviver);
@@ -773,7 +773,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived revive_hud_show_n_fade(3.0);
   playerbeingrevived.revivetrigger sethintstring("");
 
-  if(isplayer(playerbeingrevived))
+  if(isPlayer(playerbeingrevived))
     playerbeingrevived startrevive(self);
 
   if(!isDefined(self.reviveprogressbar))
@@ -837,7 +837,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
     self.revivetexthud destroy();
 
   if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
-    if(isplayer(playerbeingrevived))
+    if(isPlayer(playerbeingrevived))
       playerbeingrevived stoprevive(self);
   }
 
@@ -922,7 +922,7 @@ revive_success(reviver, b_track_stats) {
   if(!isDefined(b_track_stats))
     b_track_stats = 1;
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self notify("player_revived", reviver);
     return;
   }
@@ -963,7 +963,7 @@ revive_success(reviver, b_track_stats) {
 
 revive_force_revive(reviver) {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(self player_is_in_laststand());
   self thread revive_success(reviver);
 }
@@ -1009,7 +1009,7 @@ revive_hud_think() {
         if(players[i] player_is_in_laststand()) {
           continue;
         }
-        if(getdvar(#"g_gametype") == "vs") {
+        if(getDvar(#"g_gametype") == "vs") {
           if(players[i].team != playertorevive.team)
             continue;
         }
@@ -1061,7 +1061,6 @@ drawcylinder(pos, rad, height) {
     line(pos + (cos(theta) * currad, sin(theta) * currad, curheight), pos + (cos(theta2) * currad, sin(theta2) * currad, curheight));
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta) * currad, sin(theta) * currad, curheight));
   }
-
 }
 
 get_lives_remaining() {

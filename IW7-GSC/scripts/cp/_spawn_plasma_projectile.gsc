@@ -45,7 +45,7 @@ func_85CD(var_0, var_1) {
 func_85CE(var_0) {
   var_0 endon("death");
   var_0 waittill("missile_stuck", var_1);
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     return;
   }
 
@@ -231,7 +231,7 @@ func_13B91() {
   thread func_127B9();
   for(;;) {
     self waittill("trigger", var_2);
-    if(!isplayer(var_2) && !isagent(var_2)) {
+    if(!isPlayer(var_2) && !isagent(var_2)) {
       continue;
     }
 
@@ -308,7 +308,7 @@ func_6312() {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setscriptablepartstate("burning", "neutral", 1);
   }
 }

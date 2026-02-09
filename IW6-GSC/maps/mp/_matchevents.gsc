@@ -27,7 +27,6 @@ onPlayerConnect() {
   if(level.prematchPeriod > 0) {
     for(;;) {
       level waittill("connected", player);
-
     }
   }
 }

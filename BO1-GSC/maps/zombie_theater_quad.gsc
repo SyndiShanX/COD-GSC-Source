@@ -14,12 +14,10 @@ init_roofs() {
   level thread quad_dining_roof_break();
   level thread quad_roof_fx();
 }
-
 quad_roof_crumble_fx() {
   quad_crumble_triggers = getEntArray("quad_roof_crumble_fx_trigger", "targetname");
   array_thread(quad_crumble_triggers, ::quad_roof_crumble_fx_play);
 }
-
 quad_roof_crumble_fx_play() {
   play_quad_first_sounds();
   roof_parts = getEntArray(self.target, "targetname");
@@ -39,7 +37,6 @@ quad_roof_crumble_fx_play() {
     exploder(self.script_int);
   }
 }
-
 play_quad_first_sounds() {
   location = getstruct(self.target, "targetname");
   self playSound("zmb_vocals_quad_spawn", "sounddone");
@@ -47,32 +44,28 @@ play_quad_first_sounds() {
   self playSound("zmb_quad_roof_hit");
   thread play_wood_land_sound(location.origin);
 }
-
 play_wood_land_sound(origin) {
   wait(1);
   playsoundatposition("zmb_quad_roof_break_land", origin - (0, 0, 150));
 }
-
 rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playRumbleOnEntity(high_rumble_string);
+        players[i] playrumbleonentity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playRumbleOnEntity(low_rumble_string);
+        players[i] playrumbleonentity(low_rumble_string);
       }
     } else {
-      players[i] playRumbleOnEntity(high_rumble_string);
+      players[i] playrumbleonentity(high_rumble_string);
     }
   }
 }
-
 quad_roof_fx() {
   quad_roof_triggers = getEntArray("quad_roof_dust_effect_trigger", "targetname");
   array_thread(quad_roof_triggers, ::quad_roof_fx_play);
 }
-
 quad_roof_fx_play() {
   while(1) {
     self waittill("trigger", who);
@@ -84,23 +77,21 @@ quad_roof_fx_play() {
     exploder(self.script_int);
   }
 }
-
 quad_traverse_death_fx() {
   self endon("quad_end_traverse_anim");
   self waittill("death");
   playFX(level._effect["quad_grnd_dust_spwnr"], self.origin);
 }
-
 begin_quad_introduction(quad_round_name) {
   if(flag("dog_round")) {
     flag_clear("dog_round");
   }
-  if(level.next_dog_round == (level.round_number + 1))
+  if(level.next_dog_round == (level.round_number + 1)) {
     level.next_dog_round++;
+  }
   level.zombie_total = 0;
   level.quad_round_name = quad_round_name;
 }
-
 Theater_Quad_Round() {
   level.zombie_health = level.zombie_vars["zombie_health_start"];
   old_round = level.round_number;
@@ -109,7 +100,6 @@ Theater_Quad_Round() {
   kill_all_zombies();
   level.round_number = old_round;
 }
-
 spawn_second_wave_quads(second_wave_targetname) {
   second_wave_spawners = [];
   second_wave_spawners = getEntArray(second_wave_targetname, "targetname");
@@ -123,13 +113,12 @@ spawn_second_wave_quads(second_wave_targetname) {
       ai thread maps\_zombiemode::round_spawn_failsafe();
       ai thread quad_traverse_death_fx();
     }
-    wait(randomInt(10, 45));
+    wait(RandomInt(10, 45));
   }
   wait_network_frame();
 }
-
 spawn_a_quad_zombie(spawn_array) {
-  spawn_point = spawn_array[randomInt(spawn_array.size)];
+  spawn_point = spawn_array[RandomInt(spawn_array.size)];
   ai = spawn_zombie(spawn_point);
   if(isDefined(ai)) {
     ai thread maps\_zombiemode::round_spawn_failsafe();
@@ -138,7 +127,6 @@ spawn_a_quad_zombie(spawn_array) {
   wait(level.zombie_vars["zombie_spawn_delay"]);
   wait_network_frame();
 }
-
 kill_all_zombies() {
   zombies = GetAiSpeciesArray("axis", "all");
   if(isDefined(zombies)) {
@@ -151,7 +139,6 @@ kill_all_zombies() {
     }
   }
 }
-
 prevent_round_ending() {
   level endon("quad_round_can_end");
   while(1) {
@@ -161,7 +148,6 @@ prevent_round_ending() {
     wait(0.5);
   }
 }
-
 Intro_Quad_spawn() {
   timer = GetTime();
   spawned = 0;
@@ -184,8 +170,9 @@ Intro_Quad_spawn() {
     return;
   }
   while(1) {
-    if(isDefined(level.delay_spawners))
+    if(isDefined(level.delay_spawners)) {
       manage_zombie_spawn_delay(timer);
+    }
     level.delay_spawners = true;
     spawn_a_quad_zombie(initial_spawners);
     wait(0.2);
@@ -229,19 +216,17 @@ Intro_Quad_spawn() {
   level notify("quad_round_can_end");
   level.delay_spawners = undefined;
 }
-
 manage_zombie_spawn_delay(start_timer) {
   if(GetTime() - start_timer < 15000) {
-    level.zombie_vars["zombie_spawn_delay"] = randomInt(30, 45);
+    level.zombie_vars["zombie_spawn_delay"] = RandomInt(30, 45);
   } else if(GetTime() - start_timer < 25000) {
-    level.zombie_vars["zombie_spawn_delay"] = randomInt(15, 30);
+    level.zombie_vars["zombie_spawn_delay"] = RandomInt(15, 30);
   } else if(GetTime() - start_timer < 35000) {
-    level.zombie_vars["zombie_spawn_delay"] = randomInt(10, 15);
+    level.zombie_vars["zombie_spawn_delay"] = RandomInt(10, 15);
   } else if(GetTime() - start_timer < 50000) {
-    level.zombie_vars["zombie_spawn_delay"] = randomInt(5, 10);
+    level.zombie_vars["zombie_spawn_delay"] = RandomInt(5, 10);
   }
 }
-
 quad_lobby_roof_break() {
   zone = level.zones["foyer_zone"];
   while(1) {
@@ -260,9 +245,8 @@ quad_lobby_roof_break() {
   quad_stage_roof_break_single(8);
   maps\_zombiemode_zone_manager::reinit_zone_spawners();
 }
-
 quad_dining_roof_break() {
-  trigger = getEnt("dining_first_floor", "targetname");
+  trigger = getent("dining_first_floor", "targetname");
   trigger waittill("trigger");
   flag_set("dining_occupied");
   quad_stage_roof_break_single(9);
@@ -270,7 +254,6 @@ quad_dining_roof_break() {
   quad_stage_roof_break_single(10);
   maps\_zombiemode_zone_manager::reinit_zone_spawners();
 }
-
 quad_stage_roof_break() {
   level thread play_quad_start_vo();
   quad_stage_roof_break_single(1);
@@ -294,12 +277,10 @@ quad_stage_roof_break() {
   quad_stage_roof_break_single(14);
   maps\_zombiemode_zone_manager::reinit_zone_spawners();
 }
-
 quad_stage_roof_break_single(index) {
-  trigger = getEnt("quad_roof_crumble_fx_origin_" + index, "target");
+  trigger = getent("quad_roof_crumble_fx_origin_" + index, "target");
   trigger thread quad_roof_crumble_fx_play();
 }
-
 play_quad_start_vo() {
   wait(3);
   players = getplayers();

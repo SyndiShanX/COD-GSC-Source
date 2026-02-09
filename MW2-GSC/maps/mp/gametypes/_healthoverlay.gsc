@@ -59,7 +59,6 @@ showTempDamage() {
       self VisionSetNakedForPlayer("mp_crash", getDvarFloat("scr_damage_fadeout") * getDvarInt("scr_damage_numfades"));
       wait(getDvarFloat("scr_damage_fadeout"));
     }
-
   }
 
 }

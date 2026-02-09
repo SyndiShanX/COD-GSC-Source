@@ -16,8 +16,9 @@ main() {
   self.a.script = "scripted";
   self.codescripted = undefined;
 
-  if(isDefined(self.deathstring_passed))
+  if(isDefined(self.deathstring_passed)) {
     self.deathstring = self.deathstring_passed;
+  }
 
   self waittill("killanimscript");
 }
@@ -28,13 +29,15 @@ init(notifyname, origin, angles, theanim, animmode, root) {
   self.codescripted["angles"] = angles;
   self.codescripted["anim"] = theanim;
 
-  if(isDefined(animmode))
+  if(isDefined(animmode)) {
     self.codescripted["animMode"] = animmode;
-  else
+  } else {
     self.codescripted["animMode"] = "normal";
+  }
 
-  if(isDefined(root))
+  if(isDefined(root)) {
     self.codescripted["root"] = root;
-  else
+  } else {
     self.codescripted["root"] = % root;
+  }
 }

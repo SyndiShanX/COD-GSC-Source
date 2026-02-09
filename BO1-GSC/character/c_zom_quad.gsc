@@ -21,7 +21,6 @@ main() {
   self.gibSpawn4 = "c_zom_quad_g_llegspawn";
   self.gibSpawnTag4 = "J_Knee_LE";
 }
-
 precache() {
   precacheModel("c_zom_quad_body");
   precacheModel("c_zom_quad_head");

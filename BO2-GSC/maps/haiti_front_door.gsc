@@ -104,8 +104,9 @@ front_door_main() {
   simple_spawn("sp_entry_ramp", ::enemy_battle_think);
   simple_spawn("sp_entry_ramp_launchers", ::enemy_battle_think, 0, 1);
 
-  if(level.is_sco_supporting)
+  if(level.is_sco_supporting) {
     level thread sco_east_walkway_support();
+  }
 
   flag_wait("wall_smash");
   simple_spawn("sp_ramp_shack", ::enemy_battle_think);
@@ -135,8 +136,9 @@ main_entrance_main() {
   level thread kill_and_cleanup_ents("cleanup_snipers");
   level thread kill_and_cleanup_ents("cleanup_garage");
 
-  if(level.is_sco_supporting)
+  if(level.is_sco_supporting) {
     level thread sco_main_entrance_support();
+  }
 
   simple_spawn("main_entrance_guys", ::enemy_battle_think);
   trigger_wait("trig_foyer_start");
@@ -201,8 +203,9 @@ laser_turret_challenge() {
   level endon("cleanup_front_door");
   self waittill("death", attacker);
 
-  if(isDefined(attacker) && attacker == level.player)
+  if(isDefined(attacker) && attacker == level.player) {
     level notify("laser_turret_killed");
+  }
 }
 
 main_entrance_shutters() {
@@ -210,23 +213,27 @@ main_entrance_shutters() {
   a_m_middle_doors = getEntArray("sec_gate_side_02", "targetname");
   m_center_door = getent("sec_gate_mid", "targetname");
 
-  foreach(m_door in a_m_outermost_doors)
-  m_door movez(400, 0.05);
+  foreach(m_door in a_m_outermost_doors) {
+    m_door movez(400, 0.05);
+  }
 
-  foreach(m_door in a_m_middle_doors)
-  m_door movez(400, 0.05);
+  foreach(m_door in a_m_middle_doors) {
+    m_door movez(400, 0.05);
+  }
 
   m_center_door movez(253, 0.05);
   wait 0.1;
   flag_wait("main_entrance_start");
 
-  foreach(m_door in a_m_outermost_doors)
-  m_door movez(-1 * 400, 10.0);
+  foreach(m_door in a_m_outermost_doors) {
+    m_door movez(-1 * 400, 10.0);
+  }
 
   wait 2.0;
 
-  foreach(m_door in a_m_middle_doors)
-  m_door movez(-1 * 400, 10.0);
+  foreach(m_door in a_m_middle_doors) {
+    m_door movez(-1 * 400, 10.0);
+  }
 
   wait 2.0;
   m_center_door movez(-1 * 253, 6.5);
@@ -254,8 +261,9 @@ start_ground_events() {
 
   a_vh_tigrs = spawn_vehicles_from_targetname("gaz_tigr_front_door");
 
-  foreach(vh_tigr in a_vh_tigrs)
-  vh_tigr add_cleanup_ent("cleanup_front_door");
+  foreach(vh_tigr in a_vh_tigrs) {
+    vh_tigr add_cleanup_ent("cleanup_front_door");
+  }
 
   level thread squad_replenish_init();
   level thread ambient_jetwing_init();
@@ -279,8 +287,9 @@ battle_start() {
     a_vh_claws = simple_spawn("sp_battle_start_claw_allies", ::battle_think_claw);
     level endon("walkway_collapse");
 
-    for(a_vh_qr_axis = remove_dead_from_array(a_vh_qr_axis); a_vh_qr_axis.size > 2; a_vh_qr_axis = remove_dead_from_array(a_vh_qr_axis))
+    for(a_vh_qr_axis = remove_dead_from_array(a_vh_qr_axis); a_vh_qr_axis.size > 2; a_vh_qr_axis = remove_dead_from_array(a_vh_qr_axis)) {
       wait 1.0;
+    }
 
     a_vh_qr_axis = spawn_vehicles_from_targetname("sp_battle_start_qr_axis_support");
     array_thread(a_vh_qr_axis, ::defend, s_defend_spot.origin, s_defend_spot.radius);
@@ -298,8 +307,9 @@ lot_right_flank() {
 battle_think_claw() {
   self.deathfunction = ::bigdog_override;
 
-  if(isDefined(self.script_friendname))
+  if(isDefined(self.script_friendname)) {
     self.name = self.script_friendname;
+  }
 
   if(isDefined(self.target)) {
     n_dest = getnode(self.target, "targetname");
@@ -310,8 +320,9 @@ battle_think_claw() {
 
 bigdog_override() {
   if(isDefined(self.attacker.classname) && self.attacker.classname == "script_vehicle") {
-    if(issubstr(self.attacker.targetname, "intruder_quadrotors"))
+    if(issubstr(self.attacker.targetname, "intruder_quadrotors")) {
       level notify("quadrotors_kill_bigdog");
+    }
   }
 
   return false;
@@ -406,8 +417,9 @@ storage() {
   flag_wait_either("west_walkway_support_northeast", "west_walkway_support_north");
 
   foreach(ai_camo in a_ai_camo) {
-    if(isalive(ai_camo))
+    if(isalive(ai_camo)) {
       ai_camo setgoalvolumeauto(level.goalvolumes["vol_west_walkway_ground"]);
+    }
   }
 }
 
@@ -416,8 +428,9 @@ west_walkway() {
   level thread model_restore_area("convert_lobby");
   a_ai_snipers = simple_spawn("west_walkway_snipers", ::enemy_battle_think);
 
-  if(level.is_sco_supporting)
+  if(level.is_sco_supporting) {
     level thread sco_west_walkway_support();
+  }
 
   level thread sniper_dialog();
   level thread west_walkway_support_east();
@@ -558,14 +571,16 @@ ambient_jetwing_init() {
   a_s_jetwings = getstructarray("jetwing_landing_spot", "script_noteworthy");
 
   foreach(s_jetwing in a_s_jetwings) {
-    if(!isDefined(level.a_jetwing_groups[s_jetwing.targetname]))
+    if(!isDefined(level.a_jetwing_groups[s_jetwing.targetname])) {
       level.a_jetwing_groups[s_jetwing.targetname] = [];
+    }
 
     level.a_jetwing_groups[s_jetwing.targetname][level.a_jetwing_groups[s_jetwing.targetname].size] = s_jetwing;
   }
 
-  if(!flag("wall_smash"))
+  if(!flag("wall_smash")) {
     level thread jetwing_manager("beachhead", "wall_smash");
+  }
 
   level thread jetwing_manager("rooftops", "close_outer_doors");
 }
@@ -600,24 +615,27 @@ jetwing_manager(str_location, str_end_flag) {
 }
 
 spawn_jetwing_group(a_s_landing_group, n_spawn_limit, str_end_flag) {
-  if(!isDefined(n_spawn_limit))
+  if(!isDefined(n_spawn_limit)) {
     n_spawn_limit = 99;
+  }
 
   level endon(str_end_flag);
   n_spawned = 0;
 
   foreach(s_loc in a_s_landing_group) {
     if(randomint(100) < 80) {
-      if(level.is_sco_supporting && randomint(100) < 25)
+      if(level.is_sco_supporting && randomint(100) < 25) {
         level thread maps\_jetpack_ai::create_jetpack_ai(s_loc, "sco_assault", 1, ::random_death);
-      else
+      } else {
         level thread maps\_jetpack_ai::create_jetpack_ai(s_loc, "seal_drone", 1, ::random_death);
+      }
 
       wait(randomfloatrange(0.5, 1.0));
       n_spawned++;
 
-      if(n_spawned >= n_spawn_limit)
+      if(n_spawned >= n_spawn_limit) {
         return;
+      }
     }
   }
 }
@@ -698,8 +716,9 @@ qrotor_fire_direction_think() {
   self endon("death");
   self setvehweapon("quadrotor_turret_explosive");
 
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
+  }
 
   self gopath();
   self waittill("reached_end_node");
@@ -719,8 +738,9 @@ front_door_dialog() {
   level.player say_dialog("sect_supporting_element_1_0");
   level.player say_dialog("se1_established_containm_0", 0.5);
 
-  if(level.is_sco_supporting)
+  if(level.is_sco_supporting) {
     level.player say_dialog("se1_chinese_special_forc_0", 0.5);
+  }
 
   level.player say_dialog("sect_se_2_are_you_up_0", 1.0);
   level.player say_dialog("se2_affirm_in_position_0", 0.5);
@@ -733,8 +753,9 @@ front_door_dialog() {
     level.player queue_dialog("sect_knock_out_the_aa_las_0", undefined, undefined, undefined, 1);
   }
 
-  if(isalive(level.ai_front_claw))
+  if(isalive(level.ai_front_claw)) {
     level.ai_front_claw waittill("death");
+  }
 
   level.player say_dialog("sect_se_1_and_2_are_takin_0");
   level.player say_dialog("sect_don_t_get_sidetracke_0");
@@ -746,24 +767,29 @@ front_door_battle_chatter() {
   flag_wait("entry_ramp_start");
   queue_dialog_ally("usr2_enemy_claw_to_our_fr_0", 2, undefined, str_endon);
 
-  if(level.is_obama_supporting)
+  if(level.is_obama_supporting) {
     harper_dialog("harp_friendly_claws_movin_0");
+  }
 
-  if(!flag("walkway_launchers_cleared"))
+  if(!flag("walkway_launchers_cleared")) {
     queue_dialog_ally("usr0_more_rpgs_on_the_roo_0", 8, undefined, str_endon);
+  }
 
   queue_dialog_ally("usr0_take_out_the_quad_ro_0", 4, undefined, str_endon);
 
-  if(isalive(level.ai_front_claw))
+  if(isalive(level.ai_front_claw)) {
     harper_dialog("harp_kill_that_damn_claw_0", 4);
+  }
 
-  if(!flag("walkway_launchers_cleared"))
+  if(!flag("walkway_launchers_cleared")) {
     queue_dialog_ally("usr1_rpgs_on_the_south_ca_0", 4, undefined, str_endon);
+  }
 
   queue_dialog_ally("usr3_guys_in_cover_behi_0", 4, undefined, str_endon);
 
-  if(isalive(level.ai_front_claw))
+  if(isalive(level.ai_front_claw)) {
     queue_dialog_ally("usr0_take_down_that_claw_0", 4, undefined, str_endon);
+  }
 }
 
 sco_east_walkway_support_dialog() {
@@ -848,8 +874,9 @@ main_entrance_dialog() {
   level endon("at_foyer_entrance");
   waittill_ai_group_cleared("entrance_bigdogs");
 
-  if(level.is_sco_supporting)
+  if(level.is_sco_supporting) {
     level.player queue_dialog("se1_claws_are_down_you_0");
+  }
 
   level.player queue_dialog("sect_everyone_on_me_pus_0");
   harper_dialog("harp_you_heard_the_man_c_0");
@@ -893,8 +920,9 @@ god_rod_perk_dialog() {
         level.player say_dialog(a_str_dialog[n_lines_played], 0);
         n_lines_played++;
 
-        if(n_lines_played == a_str_dialog.size)
+        if(n_lines_played == a_str_dialog.size) {
           n_lines_played = 0;
+        }
       }
     }
 

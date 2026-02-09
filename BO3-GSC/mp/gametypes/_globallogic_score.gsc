@@ -528,7 +528,7 @@ function _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreak
 }
 
 function setplayermomentumdebug() {
-  setdvar("", 0);
+  setDvar("", 0);
   while(true) {
     wait(1);
     momentumpercent = getdvarfloat("", 0);
@@ -917,7 +917,7 @@ function updatewinlossstats(winner) {
   }
   players = level.players;
   updateweaponcontractplayed();
-  if(!isDefined(winner) || (isDefined(winner) && !isplayer(winner) && winner == "tie")) {
+  if(!isDefined(winner) || (isDefined(winner) && !isPlayer(winner) && winner == "tie")) {
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"])) {
         continue;
@@ -928,7 +928,7 @@ function updatewinlossstats(winner) {
       updatetiestats(players[i]);
     }
   } else {
-    if(isplayer(winner)) {
+    if(isPlayer(winner)) {
       if(level.hostforcedend && winner ishost()) {
         return;
       }

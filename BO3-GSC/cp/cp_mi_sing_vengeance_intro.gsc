@@ -74,7 +74,7 @@ function function_773ef6a0() {
   trigger = getent("apartment_light_fire_trigger", "targetname");
   while(true) {
     trigger waittill("trigger", e_other);
-    if(e_other == self && isplayer(self)) {
+    if(e_other == self && isPlayer(self)) {
       while(isDefined(self) && self istouching(trigger)) {
         if(!isDefined(self.var_a6b29bdf)) {
           self.var_a6b29bdf = 1;
@@ -1444,10 +1444,10 @@ function function_616e9ab6(str_objective, b_starting) {
   level flag::wait_till("");
   objectives::set("", struct::get(""));
   level flag::set("");
-  setdvar("", "");
+  setDvar("", "");
   wait(1);
   if(level.activeplayers.size == 1) {
-    setdvar("", "");
+    setDvar("", "");
   }
   wait(1);
   level thread takedown_main();
@@ -1469,10 +1469,10 @@ function function_8771151f(str_objective, b_starting) {
   level flag::wait_till("");
   objectives::set("", struct::get(""));
   level flag::set("");
-  setdvar("", "");
+  setDvar("", "");
   wait(1);
   while(level.activeplayers.size != 3) {
-    setdvar("", "");
+    setDvar("", "");
     wait(1);
   }
   level thread takedown_main();
@@ -1494,10 +1494,10 @@ function function_7d5fbc40(str_objective, b_starting) {
   level flag::wait_till("");
   objectives::set("", struct::get(""));
   level flag::set("");
-  setdvar("", "");
+  setDvar("", "");
   wait(1);
   while(level.activeplayers.size != 4) {
-    setdvar("", "");
+    setDvar("", "");
     wait(1);
   }
   level thread takedown_main();

@@ -238,7 +238,7 @@ function function_90913542(str_flag) {
   if(self == level) {
     a_players = level.players;
   } else {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       a_players = array(self);
     } else {
       return;

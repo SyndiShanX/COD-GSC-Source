@@ -103,7 +103,7 @@ function_53d38216(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 
   if(self !== level.ai_vip) {
-    if(isplayer(einflictor)) {
+    if(isPlayer(einflictor)) {
       einflictor thread function_cf613da7();
       einflictor thread ct_utils::function_785eb2ca();
       var_e8d6f89 = ct_bots::function_2a8fc6b2();

@@ -22,7 +22,7 @@ init() {
   createvox("zombie_blood", "powerup_zombie_blood");
   createvox("boxmove", "event_magicbox");
   createvox("dogstart", "event_dogstart");
-  thread init_gamemodespecificvox(getdvar(#"ui_gametype"), getdvar(#"ui_zm_mapstartlocation"));
+  thread init_gamemodespecificvox(getDvar(#"ui_gametype"), getDvar(#"ui_zm_mapstartlocation"));
   level.allowzmbannouncer = 1;
 }
 
@@ -173,7 +173,7 @@ announceroundwinner(winner, delay) {
   if(isDefined(delay) && delay > 0)
     wait(delay);
 
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
   if(winner != "tied") {
@@ -197,7 +197,7 @@ announcematchwinner(winner, delay) {
   if(isDefined(delay) && delay > 0)
     wait(delay);
 
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
   if(winner != "tied") {
@@ -218,7 +218,7 @@ announcematchwinner(winner, delay) {
 }
 
 announcegamemoderules() {
-  if(getdvar(#"ui_zm_mapstartlocation") == "town")
+  if(getDvar(#"ui_zm_mapstartlocation") == "town")
     leaderdialog("rules", undefined, undefined, undefined, 20);
 }
 

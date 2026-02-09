@@ -637,7 +637,7 @@ damageTracker() {
 
     maps\mp\killstreaks\_killstreaks::killstreakHit(attacker, sWeapon, level.ac130);
 
-    if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
+    if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
       attacker.owner maps\mp\gametypes\_damagefeedback::updateDamageFeedback("ac130");
     }
 
@@ -957,7 +957,6 @@ ac130_control_bot_aiming() {
         last_inaccuracy_check = GetTime();
       }
       target_loc = target_loc + inaccuracy_vector;
-
     } else if(GetTime() > next_random_node_time) {
       next_random_node_time = GetTime() + RandomIntRange(1000, 2000);
       target_loc = maps\mp\bots\_bots_ks_remote_vehicle::get_random_outside_target();
@@ -1112,7 +1111,7 @@ context_Sensative_Dialog_Guy_Crawling() {
     level waittill("ai_crawling", guy);
 
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog", 0) == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog", 0) == "1")
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (0, 1, 0));
     }
 
@@ -1125,9 +1124,8 @@ context_Sensative_Dialog_Guy_Pain() {
 
   for(;;) {
     level waittill("ai_pain", guy);
-    /#		
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog") == "1")
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 0, 0));
     }
 
@@ -1144,7 +1142,7 @@ context_Sensative_Dialog_Secondary_Explosion_Vehicle() {
     wait 1;
 
     if(isDefined(vehicle_origin)) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog") == "1")
         thread debug_line(level.ac130player.origin, vehicle_origin, 5.0, (0, 0, 1));
     }
 
@@ -1166,18 +1164,16 @@ context_Sensative_Dialog_Kill(guy, attacker) {
   if(!isDefined(attacker)) {
     return;
   }
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   level.enemiesKilledInTimeWindow++;
   level notify("enemy_killed");
 
-  /#	
   if((isDefined(guy)) && (isDefined(guy.origin))) {
-    if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+    if(getDvar("ac130_debug_context_sensative_dialog") == "1")
       thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 1, 0));
   }
-
 }
 
 context_Sensative_Dialog_Kill_Thread() {

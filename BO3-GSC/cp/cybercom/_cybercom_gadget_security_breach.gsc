@@ -179,7 +179,7 @@ function private _activate_security_breach(slot, weapon) {
     self playSound("gdt_cybercore_activate" + (isDefined(upgraded) && (upgraded ? "_upgraded" : "")));
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_hijack");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", fired);
@@ -293,7 +293,7 @@ function private _security_breach(player, weapon) {
 }
 
 function function_dc86efaa(var_b6c35df6, str_state) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   switch (str_state) {
     case "begin": {
@@ -376,7 +376,7 @@ function _start_transition(direction) {
 
 function setanchorvolume(ent) {
   clearanchorvolume();
-  if(isDefined(ent) && isplayer(self)) {
+  if(isDefined(ent) && isPlayer(self)) {
     self.cybercom.secbreachanchorent = ent;
     if(isDefined(ent.script_parameters)) {
       data = strtok(ent.script_parameters, " ");

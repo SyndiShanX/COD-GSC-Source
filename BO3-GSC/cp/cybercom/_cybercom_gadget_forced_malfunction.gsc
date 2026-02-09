@@ -142,7 +142,7 @@ function private _activate_forced_malfunction(slot, weapon) {
     self.cybercom.lock_targets = [];
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_forcedmalfunction");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);

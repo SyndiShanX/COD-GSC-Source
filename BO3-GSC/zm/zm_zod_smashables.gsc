@@ -61,7 +61,7 @@ class csmashable {
     e_clip setCanDamage(1);
     while(true) {
       e_clip waittill("damage", n_amt, e_attacker, v_dir, v_pos, str_type);
-      if(isDefined(e_attacker) && isplayer(e_attacker) && (isDefined(e_attacker.beastmode) && e_attacker.beastmode) && str_type === "MOD_MELEE") {
+      if(isDefined(e_attacker) && isPlayer(e_attacker) && (isDefined(e_attacker.beastmode) && e_attacker.beastmode) && str_type === "MOD_MELEE") {
         m_e_trigger notify("trigger", e_attacker);
         break;
       }
@@ -278,7 +278,6 @@ class csmashable {
     function_6ea46467(1);
     thread main();
   }
-
 }
 
 #namespace zm_zod_smashables;

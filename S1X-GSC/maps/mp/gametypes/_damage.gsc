@@ -36,7 +36,7 @@ isFriendlyFire(victim, attacker) {
     return false;
   }
 
-  if(!IsPlayer(attacker) && !isDefined(attacker.team)) {
+  if(!isPlayer(attacker) && !isDefined(attacker.team)) {
     return false;
   }
 
@@ -52,7 +52,7 @@ isFriendlyFire(victim, attacker) {
 }
 
 killedSelf(attacker) {
-  if(!IsPlayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return false;
   }
 
@@ -90,7 +90,7 @@ handleWorldDeath(attacker, lifeId, sMeansOfDeath, sHitLoc) {
   assert(attacker.team == "axis" || attacker.team == "allies");
 
   if((level.teamBased && attacker.team != self.team) || !level.teamBased) {
-    if(isDefined(level.onNormalDeath) && (IsPlayer(attacker) || IsAgent(attacker)) && attacker.team != "spectator") {
+    if(isDefined(level.onNormalDeath) && (isPlayer(attacker) || IsAgent(attacker)) && attacker.team != "spectator") {
       [[level.onNormalDeath]](self, attacker, lifeId);
     }
   }
@@ -192,7 +192,6 @@ handleNormalDeath(lifeId, attacker, eInflictor, sWeapon, sMeansOfDeath) {
         attacker thread maps\mp\killstreaks\_killstreaks::giveKillstreak("nuke", false, true, attacker);
         attacker thread maps\mp\gametypes\_hud_message::killstreakSplashNotify("nuke", numKills, undefined, undefined, slotIndex);
       }
-
     }
 
     attacker setPlayerStatIfGreater("longestkillstreak", attacker.pers["cur_kill_streak"]);
@@ -354,7 +353,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
   victim endon("spawned");
   victim notify("killed_player");
 
-  if(isDefined(attacker) && IsPlayer(attacker) && isDefined(attacker.exo_ping_on) && attacker.exo_ping_on == true) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.exo_ping_on) && attacker.exo_ping_on == true) {
     attacker maps\mp\gametypes\_missions::processChallenge("ch_exoability_ping");
   }
 
@@ -427,9 +426,9 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
 
   deathTimeOffset = 0;
 
-  if(!IsPlayer(eInflictor) && isDefined(eInflictor.primaryWeapon)) {
+  if(!isPlayer(eInflictor) && isDefined(eInflictor.primaryWeapon)) {
     sPrimaryWeapon = eInflictor.primaryWeapon;
-  } else if(isDefined(attacker) && IsPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
+  } else if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
     sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
   } else {
     if(isSubStr(sWeapon, "alt_")) {
@@ -609,7 +608,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
   victim maps\mp\_matchdata::logPlayerLife(true);
   victim maps\mp\_matchdata::logPlayerDeath(self.lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon, sHitLoc, victimCurrentWeapon);
 
-  if(isMeleeMOD(sMeansOfDeath) && IsPlayer(attacker) && !IsSubStr(sWeapon, "riotshield")) {
+  if(isMeleeMOD(sMeansOfDeath) && isPlayer(attacker) && !IsSubStr(sWeapon, "riotshield")) {
     attacker incPlayerStat("knifekills", 1);
   }
 
@@ -618,7 +617,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
 
   if(victim isSwitchingTeams()) {
     handleTeamChangeDeath();
-  } else if(!IsPlayer(attacker) || (IsPlayer(attacker) && sMeansOfDeath == "MOD_FALLING")) {
+  } else if(!isPlayer(attacker) || (isPlayer(attacker) && sMeansOfDeath == "MOD_FALLING")) {
     handleWorldDeath(attacker, self.lifeId, sMeansOfDeath, sHitLoc);
 
     if(IsAgent(attacker)) {
@@ -647,7 +646,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
 
     victim.pers["cur_death_streak"]++;
 
-    if(IsPlayer(attacker) && victim isJuggernaut()) {
+    if(isPlayer(attacker) && victim isJuggernaut()) {
       attacker thread teamPlayerCardSplash("callout_killed_juggernaut", attacker);
     }
   }
@@ -660,7 +659,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
     self.previousprimary = undefined;
   }
 
-  if(IsPlayer(attacker) && attacker != self && (!level.teamBased || (level.teamBased && self.team != attacker.team))) {
+  if(isPlayer(attacker) && attacker != self && (!level.teamBased || (level.teamBased && self.team != attacker.team))) {
     if(wasInLastStand && isDefined(lastWeaponBeforeDroppingIntoLastStand)) {
       weaponName = lastWeaponBeforeDroppingIntoLastStand;
     } else {
@@ -1465,7 +1464,7 @@ getKillcamEntity(attacker, eInflictor, sWeapon) {
 
     case "ball_drone_gun_mp":
     case "ball_drone_projectile_mp":
-      if(IsPlayer(attacker) && isDefined(attacker.ballDrone) && isDefined(attacker.ballDrone.turret) && isDefined(attacker.ballDrone.turret.killCamEnt)) {
+      if(isPlayer(attacker) && isDefined(attacker.ballDrone) && isDefined(attacker.ballDrone.turret) && isDefined(attacker.ballDrone.turret.killCamEnt)) {
         return attacker.ballDrone.turret.killCamEnt;
       }
       break;
@@ -1576,7 +1575,7 @@ HitlocDebug(attacker, victim, damage, hitloc, dflags) {
     attacker.hitlocInited = true;
   }
 
-  if(level.splitscreen || !isPLayer(attacker)) {
+  if(level.splitscreen || !isPlayer(attacker)) {
     return;
   }
 
@@ -1710,7 +1709,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
   attackerIsHittingTeammate = attackerIsHittingTeam(victim, eAttacker);
 
   attackerIsInflictorVictim = isDefined(eAttacker) && isDefined(eInflictor) && isDefined(victim) &&
-    IsPlayer(eAttacker) && (eAttacker == eInflictor) && (eAttacker == victim) &&
+    isPlayer(eAttacker) && (eAttacker == eInflictor) && (eAttacker == victim) &&
     !isDefined(eInflictor.poison);
 
   if(attackerIsInflictorVictim) {
@@ -1743,7 +1742,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
     }
 
     if(sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET" || sMeansOfDeath == "MOD_EXPLOSIVE_BULLET" && !attackerIsHittingTeammate) {
-      if(IsPlayer(eAttacker)) {
+      if(isPlayer(eAttacker)) {
         eAttacker.lastAttackedShieldPlayer = victim;
         eAttacker.lastAttackedShieldTime = getTime();
       }
@@ -1821,7 +1820,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
   if(isDefined(victim.canDoCombat) && !victim.canDoCombat) {
     return "!victim.canDoCombat";
   }
-  if(isDefined(eAttacker) && IsPlayer(eAttacker) && isDefined(eAttacker.canDoCombat) && !eAttacker.canDoCombat) {
+  if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(eAttacker.canDoCombat) && !eAttacker.canDoCombat) {
     return "!eAttacker.canDoCombat";
   }
 
@@ -1941,26 +1940,26 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       victim.explosiveInfo["stickKill"] = isDefined(eInflictor.isStuck) && eInflictor.isStuck == "enemy";
       victim.explosiveInfo["stickFriendlyKill"] = isDefined(eInflictor.isStuck) && eInflictor.isStuck == "friendly";
 
-      if(IsPlayer(eAttacker) && eAttacker != self) {
+      if(isPlayer(eAttacker) && eAttacker != self) {
         self maps\mp\gametypes\_gamelogic::setInflictorStat(eInflictor, eAttacker, sWeapon);
       }
     }
 
     if((isSubStr(sMeansOfDeath, "MOD_IMPACT")) && (sWeapon == "m320_mp" || isSubStr(sWeapon, "gl") || isSubStr(sWeapon, "gp25"))) {
-      if(IsPlayer(eAttacker) && eAttacker != self) {
+      if(isPlayer(eAttacker) && eAttacker != self) {
         self maps\mp\gametypes\_gamelogic::setInflictorStat(eInflictor, eAttacker, sWeapon);
       }
     }
 
-    if(IsPlayer(eAttacker) && isDefined(eAttacker.pers["participation"])) {
+    if(isPlayer(eAttacker) && isDefined(eAttacker.pers["participation"])) {
       eAttacker.pers["participation"]++;
-    } else if(IsPlayer(eAttacker)) {
+    } else if(isPlayer(eAttacker)) {
       eAttacker.pers["participation"] = 1;
     }
 
     if(attackerIsHittingTeammate) {
       prof_begin("PlayerDamage player");
-      if(level.friendlyfire == 0 || (!IsPlayer(eAttacker) && level.friendlyfire != 1)) {
+      if(level.friendlyfire == 0 || (!isPlayer(eAttacker) && level.friendlyfire != 1)) {
         if(sWeapon == "artillery_mp" || sWeapon == "stealth_bomb_mp") {
           victim damageShellshockAndRumble(eInflictor, sWeapon, sMeansOfDeath, iDamage, iDFlags, eAttacker);
         }
@@ -2013,13 +2012,13 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
         iDamage = 1;
       }
 
-      if(isDefined(eAttacker) && IsPlayer(eAttacker)) {
+      if(isDefined(eAttacker) && isPlayer(eAttacker)) {
         addAttacker(victim, eAttacker, eInflictor, sWeapon, iDamage, vPoint, vDir, sHitLoc, psOffsetTime, sMeansOfDeath);
       }
 
-      if(isDefined(eAttacker) && !IsPlayer(eAttacker) && isDefined(eAttacker.owner) && (!isDefined(eAttacker.scrambled) || !eAttacker.scrambled)) {
+      if(isDefined(eAttacker) && !isPlayer(eAttacker) && isDefined(eAttacker.owner) && (!isDefined(eAttacker.scrambled) || !eAttacker.scrambled)) {
         addAttacker(victim, eAttacker.owner, eInflictor, sWeapon, iDamage, vPoint, vDir, sHitLoc, psOffsetTime, sMeansOfDeath);
-      } else if(isDefined(eAttacker) && !IsPlayer(eAttacker) && isDefined(eAttacker.secondOwner) && isDefined(eAttacker.scrambled) && eAttacker.scrambled) {
+      } else if(isDefined(eAttacker) && !isPlayer(eAttacker) && isDefined(eAttacker.secondOwner) && isDefined(eAttacker.scrambled) && eAttacker.scrambled) {
         addAttacker(victim, eAttacker.secondOwner, eInflictor, sWeapon, iDamage, vPoint, vDir, sHitLoc, psOffsetTime, sMeansOfDeath);
       }
 
@@ -2027,13 +2026,13 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
         victim notify("survived_explosion", eAttacker);
       }
 
-      if(isDefined(eAttacker) && IsPlayer(eAttacker) && isDefined(sWeapon)) {
+      if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(sWeapon)) {
         eAttacker thread maps\mp\gametypes\_weapons::checkHit(sWeapon, victim);
       }
 
       victim.attackerPosition = undefined;
 
-      if(isDefined(eAttacker) && IsPlayer(eAttacker) && isDefined(sWeapon) && eAttacker != victim) {
+      if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(sWeapon) && eAttacker != victim) {
         victim.attackerPosition = eAttacker.origin;
       }
 
@@ -2119,7 +2118,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
   prof_begin("PlayerDamage log");
 
   if(getDvarInt("g_debugDamage")) {
-    PrintLn("client:" + victim GetEntityNumber() + " health:" + victim.health + " attacker:" + eAttacker GetEntityNumber() + " inflictor is player:" + IsPlayer(eInflictor) + " damage:" + iDamage + " hitLoc:" + sHitLoc + " range:" + Distance(eAttacker.origin, victim.origin));
+    PrintLn("client:" + victim GetEntityNumber() + " health:" + victim.health + " attacker:" + eAttacker GetEntityNumber() + " inflictor is player:" + isPlayer(eInflictor) + " damage:" + iDamage + " hitLoc:" + sHitLoc + " range:" + Distance(eAttacker.origin, victim.origin));
   }
 
   if(victim.sessionstate != "dead") {
@@ -2129,7 +2128,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
     lpselfGuid = victim.guid;
     lpattackerteam = "";
 
-    if(IsPlayer(eAttacker)) {
+    if(isPlayer(eAttacker)) {
       lpattacknum = eAttacker getEntityNumber();
       lpattackGuid = eAttacker.guid;
       lpattackname = eAttacker.name;
@@ -2183,7 +2182,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       spawnToDamageReceivedTime = -1;
     }
 
-    if(isDefined(eAttacker) && isDefined(eAttacker.spawnInfo) && isDefined(eAttacker.spawnInfo.spawnTime) && IsPlayer(eAttacker)) {
+    if(isDefined(eAttacker) && isDefined(eAttacker.spawnInfo) && isDefined(eAttacker.spawnInfo.spawnTime) && isPlayer(eAttacker)) {
       spawnToDamageDealtTime = (gameTime - eAttacker.spawnInfo.spawnTime) / 1000.0;
 
       if(spawnToDamageDealtTime <= 3.0 && eAttacker.spawnInfo.damageDealtTooFast == false) {
@@ -2268,9 +2267,9 @@ addAttacker(victim, eAttacker, eInflictor, sWeapon, iDamage, vPoint, vDir, sHitL
   victim.attackerData[eAttacker.guid].attackerEnt = eAttacker;
   victim.attackerData[eAttacker.guid].lasttimeDamaged = getTime();
 
-  if(isDefined(eInflictor) && !IsPlayer(eInflictor) && isDefined(eInflictor.primaryWeapon)) {
+  if(isDefined(eInflictor) && !isPlayer(eInflictor) && isDefined(eInflictor.primaryWeapon)) {
     victim.attackerData[eAttacker.guid].sPrimaryWeapon = eInflictor.primaryWeapon;
-  } else if(isDefined(eAttacker) && IsPlayer(eAttacker) && eAttacker getCurrentPrimaryWeapon() != "none") {
+  } else if(isDefined(eAttacker) && isPlayer(eAttacker) && eAttacker getCurrentPrimaryWeapon() != "none") {
     victim.attackerData[eAttacker.guid].sPrimaryWeapon = eAttacker getCurrentPrimaryWeapon();
   } else {
     victim.attackerData[eAttacker.guid].sPrimaryWeapon = undefined;
@@ -2280,7 +2279,7 @@ addAttacker(victim, eAttacker, eInflictor, sWeapon, iDamage, vPoint, vDir, sHitL
     victim.enemyHitCounts = [];
   }
 
-  if(IsPlayer(eAttacker)) {
+  if(isPlayer(eAttacker)) {
     if(!isDefined(victim.enemyHitCounts[eAttacker.guid])) {
       victim.enemyHitCounts[eAttacker.guid] = 0;
     }
@@ -2398,7 +2397,7 @@ Callback_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, 
   }
 
   lastStandParams.sWeapon = sWeapon;
-  if(isDefined(attacker) && IsPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
     lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
   } else {
     lastStandParams.sPrimaryWeapon = undefined;
@@ -2424,10 +2423,9 @@ Callback_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, 
       mayDoLastStand = false;
       killTeamInLastStand(self.team);
     }
-
   }
 
-  if(getdvar("scr_forcelaststand") == "1") {
+  if(getDvar("scr_forcelaststand") == "1") {
     mayDoLastStand = true;
   }
 
@@ -3242,7 +3240,7 @@ logPrintPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryW
   lpselfteam = self.team;
   lpselfguid = self.guid;
 
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     lpattackGuid = attacker.guid;
     lpattackname = attacker.name;
     lpattackerteam = attacker.team;
@@ -3266,7 +3264,7 @@ destroyOnReviveEntDeath(reviveEnt) {
 }
 
 gamemodeModifyPlayerDamage(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc) {
-  if(isDefined(eAttacker) && IsPlayer(eAttacker) && isAlive(eAttacker)) {
+  if(isDefined(eAttacker) && isPlayer(eAttacker) && isAlive(eAttacker)) {
     if(level.matchRules_damageMultiplier) {
       iDamage *= level.matchRules_damageMultiplier;
     }
@@ -3372,7 +3370,7 @@ processDamageTaken(inflictor, attacker, damage, iDFlags, meansOfDeath, weapon, p
 
   maps\mp\killstreaks\_killstreaks::killstreakHit(attacker, weapon, self);
 
-  if(isDefined(attacker) && IsPlayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(self.damageFeedback);
 
     if(self isNewAttacker(attacker)) {
@@ -3381,7 +3379,7 @@ processDamageTaken(inflictor, attacker, damage, iDFlags, meansOfDeath, weapon, p
   }
 
   if(self.damagetaken >= self.maxhealth) {
-    if(self.bIsKillstreak && IsPlayer(attacker)) {
+    if(self.bIsKillstreak && isPlayer(attacker)) {
       attacker notify("destroyed_killstreak", weapon);
     }
 
@@ -3555,7 +3553,7 @@ onKillstreakKilled(attacker, weapon, damageType, damage, xpEvent, leaderDialog, 
   validAttacker = undefined;
 
   if(isDefined(attacker) && isDefined(self.owner)) {
-    if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
+    if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
       attacker = attacker.owner;
     }
 
@@ -3590,7 +3588,6 @@ onKillstreakKilled(attacker, weapon, damageType, damage, xpEvent, leaderDialog, 
     if(isDefined(isVehicle) && isVehicle) {
       level thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, validAttacker, damage, damageType, weapon);
     }
-
   }
 
   self thread maps\mp\_events::checkVandalismMedal(validAttacker);

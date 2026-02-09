@@ -30,32 +30,32 @@ init() {
     return;
   }
 
-  if(getdvar(#"scr_showspawns") == "")
-    setdvar("scr_showspawns", "0");
+  if(getDvar(#"scr_showspawns") == "")
+    setDvar("scr_showspawns", "0");
 
-  if(getdvar(#"scr_showstartspawns") == "")
-    setdvar("scr_showstartspawns", "0");
+  if(getDvar(#"scr_showstartspawns") == "")
+    setDvar("scr_showstartspawns", "0");
 
-  if(getdvar(#"scr_botsHasPlayerWeapon") == "")
-    setdvar("scr_botsHasPlayerWeapon", "0");
+  if(getDvar(#"scr_botsHasPlayerWeapon") == "")
+    setDvar("scr_botsHasPlayerWeapon", "0");
 
-  if(getdvar(#"scr_botsGrenadesOnly") == "")
-    setdvar("scr_botsGrenadesOnly", "0");
+  if(getDvar(#"scr_botsGrenadesOnly") == "")
+    setDvar("scr_botsGrenadesOnly", "0");
 
-  if(getdvar(#"scr_botsSpecialGrenadesOnly") == "")
-    setdvar("scr_botsSpecialGrenadesOnly", "0");
+  if(getDvar(#"scr_botsSpecialGrenadesOnly") == "")
+    setDvar("scr_botsSpecialGrenadesOnly", "0");
 
-  if(getdvar(#"scr_devHeliPathsDebugDraw") == "")
-    setdvar("scr_devHeliPathsDebugDraw", "0");
+  if(getDvar(#"scr_devHeliPathsDebugDraw") == "")
+    setDvar("scr_devHeliPathsDebugDraw", "0");
 
-  if(getdvar(#"scr_devStrafeRunPathDebugDraw") == "")
-    setdvar("scr_devStrafeRunPathDebugDraw", "0");
+  if(getDvar(#"scr_devStrafeRunPathDebugDraw") == "")
+    setDvar("scr_devStrafeRunPathDebugDraw", "0");
 
-  if(getdvar(#"scr_show_hq_spawns") == "")
-    setdvar("scr_show_hq_spawns", "");
+  if(getDvar(#"scr_show_hq_spawns") == "")
+    setDvar("scr_show_hq_spawns", "");
 
-  if(getdvar(#"scr_testScriptRuntimeError") == "")
-    setdvar("scr_testScriptRuntimeError", "0");
+  if(getDvar(#"scr_testScriptRuntimeError") == "")
+    setDvar("scr_testScriptRuntimeError", "0");
 
   precachemodel("defaultactor");
   precachestring(&"testPlayerScoreForTan");
@@ -71,13 +71,13 @@ init() {
   thread devstraferunpathdebugdraw();
   thread maps\mp\gametypes\_dev_class::dev_cac_init();
   thread maps\mp\gametypes\_globallogic_score::setplayermomentumdebug();
-  setdvar("scr_giveperk", "");
-  setdvar("scr_forceevent", "");
-  setdvar("scr_draw_triggers", "0");
+  setDvar("scr_giveperk", "");
+  setDvar("scr_forceevent", "");
+  setDvar("scr_draw_triggers", "0");
   thread engagement_distance_debug_toggle();
   thread equipment_dev_gui();
   thread grenade_dev_gui();
-  setdvar("debug_dynamic_ai_spawning", "0");
+  setDvar("debug_dynamic_ai_spawning", "0");
   level.bot_overlay = 0;
   level.bot_threat = 0;
   level.bot_path = 0;
@@ -104,7 +104,6 @@ init() {
     updatedevsettings();
     wait 0.5;
   }
-
 }
 
 onplayerconnect() {
@@ -140,7 +139,7 @@ updatehardpoints() {
         player maps\mp\killstreaks\_killstreaks::givekillstreak(keys[i]);
       }
 
-      setdvar(dvar, "0");
+      setDvar(dvar, "0");
     }
   }
 
@@ -185,12 +184,12 @@ warpalltohost(team) {
     players[i] setorigin(origin);
   }
 
-  setdvar("scr_playerwarp", "");
+  setDvar("scr_playerwarp", "");
 }
 
 updatedevsettingszm() {
   if(level.players.size > 0) {
-    if(getdvar(#"r_streamDumpDistance") == "3") {
+    if(getDvar(#"r_streamDumpDistance") == "3") {
       if(!isDefined(level.streamdumpteamindex))
         level.streamdumpteamindex = 0;
       else
@@ -229,7 +228,7 @@ updatedevsettingszm() {
       }
 
       if(numpoints == 0) {
-        setdvar("r_streamDumpDistance", "0");
+        setDvar("r_streamDumpDistance", "0");
         level.streamdumpteamindex = -1;
       } else {
         averageorigin = (0, 0, 0);
@@ -243,11 +242,10 @@ updatedevsettingszm() {
         level.players[0] setplayerangles(averageangles);
         level.players[0] setorigin(averageorigin);
         wait 0.05;
-        setdvar("r_streamDumpDistance", "2");
+        setDvar("r_streamDumpDistance", "2");
       }
     }
   }
-
 }
 
 updatedevsettings() {
@@ -267,7 +265,7 @@ updatedevsettings() {
 
   if(!isDefined(level.show_spawns) || level.show_spawns != show_spawns) {
     level.show_spawns = show_spawns;
-    setdvar("scr_showspawns", level.show_spawns);
+    setDvar("scr_showspawns", level.show_spawns);
 
     if(level.show_spawns)
       showspawnpoints();
@@ -277,7 +275,7 @@ updatedevsettings() {
 
   if(!isDefined(level.show_start_spawns) || level.show_start_spawns != show_start_spawns) {
     level.show_start_spawns = show_start_spawns;
-    setdvar("scr_showstartspawns", level.show_start_spawns);
+    setDvar("scr_showstartspawns", level.show_start_spawns);
 
     if(level.show_start_spawns)
       showstartspawnpoints();
@@ -290,15 +288,15 @@ updatedevsettings() {
   if(level.players.size > 0) {
     updatehardpoints();
 
-    if(getdvar(#"scr_playerwarp") == "host")
+    if(getDvar(#"scr_playerwarp") == "host")
       warpalltohost();
-    else if(getdvar(#"scr_playerwarp") == "enemies_host")
-      warpalltohost(getdvar(#"scr_playerwarp"));
-    else if(getdvar(#"scr_playerwarp") == "friendlies_host")
-      warpalltohost(getdvar(#"scr_playerwarp"));
-    else if(getdvar(#"scr_playerwarp") == "next_start_spawn") {
+    else if(getDvar(#"scr_playerwarp") == "enemies_host")
+      warpalltohost(getDvar(#"scr_playerwarp"));
+    else if(getDvar(#"scr_playerwarp") == "friendlies_host")
+      warpalltohost(getDvar(#"scr_playerwarp"));
+    else if(getDvar(#"scr_playerwarp") == "next_start_spawn") {
       players = get_players();
-      setdvar("scr_playerwarp", "");
+      setDvar("scr_playerwarp", "");
 
       if(!isDefined(level.devgui_start_spawn_index))
         level.devgui_start_spawn_index = 0;
@@ -318,9 +316,9 @@ updatedevsettings() {
 
       if(level.devgui_start_spawn_index >= spawns.size)
         level.devgui_start_spawn_index = 0;
-    } else if(getdvar(#"scr_playerwarp") == "prev_start_spawn") {
+    } else if(getDvar(#"scr_playerwarp") == "prev_start_spawn") {
       players = get_players();
-      setdvar("scr_playerwarp", "");
+      setDvar("scr_playerwarp", "");
 
       if(!isDefined(level.devgui_start_spawn_index))
         level.devgui_start_spawn_index = 0;
@@ -340,9 +338,9 @@ updatedevsettings() {
 
       if(level.devgui_start_spawn_index < 0)
         level.devgui_start_spawn_index = spawns.size - 1;
-    } else if(getdvar(#"scr_playerwarp") == "next_spawn") {
+    } else if(getDvar(#"scr_playerwarp") == "next_spawn") {
       players = get_players();
-      setdvar("scr_playerwarp", "");
+      setDvar("scr_playerwarp", "");
 
       if(!isDefined(level.devgui_spawn_index))
         level.devgui_spawn_index = 0;
@@ -362,9 +360,9 @@ updatedevsettings() {
 
       if(level.devgui_spawn_index >= spawns.size)
         level.devgui_spawn_index = 0;
-    } else if(getdvar(#"scr_playerwarp") == "prev_spawn") {
+    } else if(getDvar(#"scr_playerwarp") == "prev_spawn") {
       players = get_players();
-      setdvar("scr_playerwarp", "");
+      setDvar("scr_playerwarp", "");
 
       if(!isDefined(level.devgui_spawn_index))
         level.devgui_spawn_index = 0;
@@ -384,7 +382,7 @@ updatedevsettings() {
 
       if(level.devgui_spawn_index < 0)
         level.devgui_spawn_index = spawns.size - 1;
-    } else if(getdvar(#"scr_devgui_spawn") != "") {
+    } else if(getDvar(#"scr_devgui_spawn") != "") {
       player = gethostplayer();
 
       if(!isDefined(player.devgui_spawn_active))
@@ -402,8 +400,8 @@ updatedevsettings() {
         player setactionslot(4, "nightvision");
       }
 
-      setdvar("scr_devgui_spawn", "");
-    } else if(getdvar(#"scr_player_ammo") != "") {
+      setDvar("scr_devgui_spawn", "");
+    } else if(getDvar(#"scr_player_ammo") != "") {
       players = get_players();
 
       if(!isDefined(level.devgui_unlimited_ammo))
@@ -425,8 +423,8 @@ updatedevsettings() {
         players[i] notify("devgui_unlimited_ammo");
       }
 
-      setdvar("scr_player_ammo", "");
-    } else if(getdvar(#"scr_player_momentum") != "") {
+      setDvar("scr_player_ammo", "");
+    } else if(getDvar(#"scr_player_momentum") != "") {
       if(!isDefined(level.devgui_unlimited_momentum))
         level.devgui_unlimited_momentum = 1;
       else
@@ -440,11 +438,11 @@ updatedevsettings() {
         level notify("devgui_unlimited_momentum");
       }
 
-      setdvar("scr_player_momentum", "");
-    } else if(getdvar(#"scr_give_player_score") != "") {
+      setDvar("scr_player_momentum", "");
+    } else if(getDvar(#"scr_give_player_score") != "") {
       level thread devgui_increase_momentum(getdvarint(#"scr_give_player_score"));
-      setdvar("scr_give_player_score", "");
-    } else if(getdvar(#"scr_player_zero_ammo") != "") {
+      setDvar("scr_give_player_score", "");
+    } else if(getDvar(#"scr_player_zero_ammo") != "") {
       players = get_players();
 
       for(i = 0; i < players.size; i++) {
@@ -461,14 +459,14 @@ updatedevsettings() {
         }
       }
 
-      setdvar("scr_player_zero_ammo", "");
-    } else if(getdvar(#"scr_emp_jammed") != "") {
+      setDvar("scr_player_zero_ammo", "");
+    } else if(getDvar(#"scr_emp_jammed") != "") {
       players = get_players();
 
       for(i = 0; i < players.size; i++) {
         player = players[i];
 
-        if(getdvar(#"scr_emp_jammed") == "0") {
+        if(getDvar(#"scr_emp_jammed") == "0") {
           player setempjammed(0);
           continue;
         }
@@ -476,8 +474,8 @@ updatedevsettings() {
         player setempjammed(1);
       }
 
-      setdvar("scr_emp_jammed", "");
-    } else if(getdvar(#"scr_round_pause") != "") {
+      setDvar("scr_emp_jammed", "");
+    } else if(getDvar(#"scr_round_pause") != "") {
       if(!level.timerstopped) {
         iprintln("Pausing Round Timer");
         maps\mp\gametypes\_globallogic_utils::pausetimer();
@@ -486,11 +484,11 @@ updatedevsettings() {
         maps\mp\gametypes\_globallogic_utils::resumetimer();
       }
 
-      setdvar("scr_round_pause", "");
-    } else if(getdvar(#"scr_round_end") != "") {
+      setDvar("scr_round_pause", "");
+    } else if(getDvar(#"scr_round_end") != "") {
       level maps\mp\gametypes\_globallogic::forceend();
-      setdvar("scr_round_end", "");
-    } else if(getdvar(#"scr_health_debug") != "") {
+      setDvar("scr_round_end", "");
+    } else if(getDvar(#"scr_health_debug") != "") {
       players = get_players();
       host = gethostplayer();
 
@@ -517,8 +515,8 @@ updatedevsettings() {
           players[i] thread devgui_health_debug();
       }
 
-      setdvar("scr_health_debug", "");
-    } else if(getdvar(#"scr_show_hq_spawns") != "") {
+      setDvar("scr_health_debug", "");
+    } else if(getDvar(#"scr_show_hq_spawns") != "") {
       if(!isDefined(level.devgui_show_hq))
         level.devgui_show_hq = 0;
 
@@ -534,10 +532,10 @@ updatedevsettings() {
         level.devgui_show_hq = !level.devgui_show_hq;
       }
 
-      setdvar("scr_show_hq_spawns", "");
+      setDvar("scr_show_hq_spawns", "");
     }
 
-    if(getdvar(#"r_streamDumpDistance") == "3") {
+    if(getDvar(#"r_streamDumpDistance") == "3") {
       if(!isDefined(level.streamdumpteamindex))
         level.streamdumpteamindex = 0;
       else
@@ -553,7 +551,7 @@ updatedevsettings() {
       }
 
       if(numpoints == 0) {
-        setdvar("r_streamDumpDistance", "0");
+        setDvar("r_streamDumpDistance", "0");
         level.streamdumpteamindex = -1;
       } else {
         averageorigin = (0, 0, 0);
@@ -567,23 +565,23 @@ updatedevsettings() {
         level.players[0] setplayerangles(averageangles);
         level.players[0] setorigin(averageorigin);
         wait 0.05;
-        setdvar("r_streamDumpDistance", "2");
+        setDvar("r_streamDumpDistance", "2");
       }
     }
   }
 
-  if(getdvar(#"scr_giveperk") == "0") {
+  if(getDvar(#"scr_giveperk") == "0") {
     players = get_players();
     iprintln("Taking all perks from all players");
 
     for(i = 0; i < players.size; i++)
       players[i] clearperks();
 
-    setdvar("scr_giveperk", "");
+    setDvar("scr_giveperk", "");
   }
 
-  if(getdvar(#"scr_giveperk") != "") {
-    perk = getdvar(#"scr_giveperk");
+  if(getDvar(#"scr_giveperk") != "") {
+    perk = getDvar(#"scr_giveperk");
     specialties = strtok(perk, "|");
     players = get_players();
     iprintln("Giving all players perk: '" + perk + "'");
@@ -595,16 +593,16 @@ updatedevsettings() {
       }
     }
 
-    setdvar("scr_giveperk", "");
+    setDvar("scr_giveperk", "");
   }
 
-  if(getdvar(#"scr_forcegrenade") != "") {
-    force_grenade_throw(getdvar(#"scr_forcegrenade"));
-    setdvar("scr_forcegrenade", "");
+  if(getDvar(#"scr_forcegrenade") != "") {
+    force_grenade_throw(getDvar(#"scr_forcegrenade"));
+    setDvar("scr_forcegrenade", "");
   }
 
-  if(getdvar(#"scr_forceevent") != "") {
-    event = getdvar(#"scr_forceevent");
+  if(getDvar(#"scr_forceevent") != "") {
+    event = getDvar(#"scr_forceevent");
     player = gethostplayer();
     forward = anglesToForward(player.angles);
     right = anglestoright(player.angles);
@@ -618,32 +616,32 @@ updatedevsettings() {
     else if(event == "painright")
       player dodamage(1, player.origin + right);
 
-    setdvar("scr_forceevent", "");
+    setDvar("scr_forceevent", "");
   }
 
-  if(getdvar(#"scr_takeperk") != "") {
-    perk = getdvar(#"scr_takeperk");
+  if(getDvar(#"scr_takeperk") != "") {
+    perk = getDvar(#"scr_takeperk");
 
     for(i = 0; i < level.players.size; i++) {
       level.players[i] unsetperk(perk);
       level.players[i].extraperks[perk] = undefined;
     }
 
-    setdvar("scr_takeperk", "");
+    setDvar("scr_takeperk", "");
   }
 
-  if(getdvar(#"scr_x_kills_y") != "") {
-    nametokens = strtok(getdvar(#"scr_x_kills_y"), " ");
+  if(getDvar(#"scr_x_kills_y") != "") {
+    nametokens = strtok(getDvar(#"scr_x_kills_y"), " ");
 
     if(nametokens.size > 1)
       thread xkillsy(nametokens[0], nametokens[1]);
 
-    setdvar("scr_x_kills_y", "");
+    setDvar("scr_x_kills_y", "");
   }
 
-  if(getdvar(#"scr_usedogs") != "") {
-    ownername = getdvar(#"scr_usedogs");
-    setdvar("scr_usedogs", "");
+  if(getDvar(#"scr_usedogs") != "") {
+    ownername = getDvar(#"scr_usedogs");
+    setDvar("scr_usedogs", "");
     owner = undefined;
 
     for(index = 0; index < level.players.size; index++) {
@@ -655,12 +653,12 @@ updatedevsettings() {
       owner maps\mp\killstreaks\_killstreaks::triggerkillstreak("dogs_mp");
   }
 
-  if(getdvar(#"scr_set_level") != "") {
+  if(getDvar(#"scr_set_level") != "") {
     player.pers["rank"] = 0;
     player.pers["rankxp"] = 0;
     newrank = min(getdvarint(#"scr_set_level"), 54);
     newrank = max(newrank, 1);
-    setdvar("scr_set_level", "");
+    setDvar("scr_set_level", "");
     lastxp = 0;
 
     for(index = 0; index <= newrank; index++) {
@@ -672,20 +670,20 @@ updatedevsettings() {
     }
   }
 
-  if(getdvar(#"scr_givexp") != "") {
+  if(getDvar(#"scr_givexp") != "") {
     player thread maps\mp\gametypes\_rank::giverankxp("challenge", getdvarint(#"scr_givexp"), 1);
-    setdvar("scr_givexp", "");
+    setDvar("scr_givexp", "");
   }
 
-  if(getdvar(#"scr_do_notify") != "") {
+  if(getDvar(#"scr_do_notify") != "") {
     for(i = 0; i < level.players.size; i++)
-      level.players[i] maps\mp\gametypes\_hud_message::oldnotifymessage(getdvar(#"scr_do_notify"), getdvar(#"scr_do_notify"), game["icons"]["allies"]);
+      level.players[i] maps\mp\gametypes\_hud_message::oldnotifymessage(getDvar(#"scr_do_notify"), getDvar(#"scr_do_notify"), game["icons"]["allies"]);
 
-    announcement(getdvar(#"scr_do_notify"), 0);
-    setdvar("scr_do_notify", "");
+    announcement(getDvar(#"scr_do_notify"), 0);
+    setDvar("scr_do_notify", "");
   }
 
-  if(getdvar(#"_id_4F1284FA") != "") {
+  if(getDvar(#"_id_4F1284FA") != "") {
     ents = getEntArray();
     level.entarray = [];
     level.entcounts = [];
@@ -711,9 +709,9 @@ updatedevsettings() {
     }
   }
 
-  if(getdvar(#"debug_dynamic_ai_spawning") == "1" && !isDefined(level.larry))
+  if(getDvar(#"debug_dynamic_ai_spawning") == "1" && !isDefined(level.larry))
     thread larry_thread();
-  else if(getdvar(#"debug_dynamic_ai_spawning") == "0")
+  else if(getDvar(#"debug_dynamic_ai_spawning") == "0")
     level notify("kill_larry");
 
   if(level.bot_overlay == 0 && getdvarint(#"_id_1CBC4852") == 1) {
@@ -757,14 +755,14 @@ updatedevsettings() {
 waitthennotifyroundkillcam() {
   wait 0.05;
   level notify("play_final_killcam");
-  setdvar("scr_force_roundkillcam", 0);
+  setDvar("scr_force_roundkillcam", 0);
 }
 
 waitthennotifyfinalkillcam() {
   wait 0.05;
   level notify("play_final_killcam");
   wait 0.05;
-  setdvar("scr_force_finalkillcam", 0);
+  setDvar("scr_force_finalkillcam", 0);
 }
 
 devgui_spawn_think() {
@@ -779,20 +777,19 @@ devgui_spawn_think() {
     self setactionslot(4, "");
 
     if(!dpad_left && self buttonpressed("DPAD_LEFT")) {
-      setdvar("scr_playerwarp", "prev_spawn");
+      setDvar("scr_playerwarp", "prev_spawn");
       dpad_left = 1;
     } else if(!self buttonpressed("DPAD_LEFT"))
       dpad_left = 0;
 
     if(!dpad_right && self buttonpressed("DPAD_RIGHT")) {
-      setdvar("scr_playerwarp", "next_spawn");
+      setDvar("scr_playerwarp", "next_spawn");
       dpad_right = 1;
     } else if(!self buttonpressed("DPAD_RIGHT"))
       dpad_right = 0;
 
     wait 0.05;
   }
-
 }
 
 devgui_unlimited_ammo() {
@@ -858,7 +855,6 @@ devgui_increase_momentum(score) {
     }
     player maps\mp\gametypes\_globallogic_score::giveplayermomentumnotification(score, &"testPlayerScoreForTan", "PLAYER_SCORE", 0);
   }
-
 }
 
 devgui_health_debug() {
@@ -898,7 +894,6 @@ devgui_health_debug() {
     self.debug_health_bar setshader("black", width, 8);
     self.debug_health_text setvalue(self.health);
   }
-
 }
 
 giveextraperks() {
@@ -935,7 +930,7 @@ updateminimapsetting() {
   requiredmapaspectratio = getdvarfloat(#"scr_RequiredMapAspectratio");
 
   if(!isDefined(level.minimapheight)) {
-    setdvar("scr_minimap_height", "0");
+    setDvar("scr_minimap_height", "0");
     level.minimapheight = 0;
   }
 
@@ -1031,22 +1026,22 @@ updateminimapsetting() {
           player camerasetposition(viewpos, (90, getnorthyaw(), 0));
           player cameraactivate(1);
           player takeallweapons();
-          setdvar("cg_drawGun", 0);
-          setdvar("cg_draw2D", 0);
-          setdvar("cg_drawFPS", 0);
-          setdvar("fx_enable", 0);
-          setdvar("r_fog", 0);
-          setdvar("r_highLodDist", 0);
-          setdvar("r_znear", znear);
-          setdvar("r_lodscale", 0);
-          setdvar("r_lodScaleRigid", 0);
-          setdvar("cg_drawVersion", 0);
-          setdvar("sm_enable", 1);
-          setdvar("player_view_pitch_down", 90);
-          setdvar("player_view_pitch_up", 0);
-          setdvar("cg_fov", angle);
-          setdvar("cg_fovMin", 1);
-          setdvar("debug_show_viewpos", "0");
+          setDvar("cg_drawGun", 0);
+          setDvar("cg_draw2D", 0);
+          setDvar("cg_drawFPS", 0);
+          setDvar("fx_enable", 0);
+          setDvar("r_fog", 0);
+          setDvar("r_highLodDist", 0);
+          setDvar("r_znear", znear);
+          setDvar("r_lodscale", 0);
+          setDvar("r_lodScaleRigid", 0);
+          setDvar("cg_drawVersion", 0);
+          setDvar("sm_enable", 1);
+          setDvar("player_view_pitch_down", 90);
+          setDvar("player_view_pitch_up", 0);
+          setDvar("cg_fov", angle);
+          setDvar("cg_fovMin", 1);
+          setDvar("debug_show_viewpos", "0");
 
           if(isDefined(level.objpoints)) {
             for(i = 0; i < level.objpointnames.size; i++) {
@@ -1062,7 +1057,7 @@ updateminimapsetting() {
         } else
           println("^1Error: There are not exactly 2 \"minimap_corner\" entities in the level.");
       } else
-        setdvar("scr_minimap_height", "0");
+        setDvar("scr_minimap_height", "0");
     }
   }
 
@@ -1102,7 +1097,6 @@ drawminimapbounds(viewpos, mincorner, maxcorner) {
     print3d(toppos, "This Side Up", (1, 1, 1), 1, textscale);
     wait 0.05;
   }
-
 }
 
 minimapwarn(corners) {
@@ -1150,15 +1144,15 @@ testscriptruntimeerror() {
   wait 5;
 
   for(;;) {
-    if(getdvar(#"scr_testScriptRuntimeError") != "0") {
+    if(getDvar(#"scr_testScriptRuntimeError") != "0") {
       break;
     }
 
     wait 1;
   }
 
-  myerror = getdvar(#"scr_testScriptRuntimeError");
-  setdvar("scr_testScriptRuntimeError", "0");
+  myerror = getDvar(#"scr_testScriptRuntimeError");
+  setDvar("scr_testScriptRuntimeError", "0");
 
   if(myerror == "assert")
     testscriptruntimeerrorassert();
@@ -1172,18 +1166,18 @@ testdvars() {
   wait 5;
 
   for(;;) {
-    if(getdvar(#"scr_testdvar") != "") {
+    if(getDvar(#"scr_testdvar") != "") {
       break;
     }
 
     wait 1;
   }
 
-  tokens = strtok(getdvar(#"scr_testdvar"), " ");
+  tokens = strtok(getDvar(#"scr_testdvar"), " ");
   dvarname = tokens[0];
   dvarvalue = tokens[1];
-  setdvar(dvarname, dvarvalue);
-  setdvar("scr_testdvar", "");
+  setDvar(dvarname, dvarvalue);
+  setDvar("scr_testdvar", "");
   thread testdvars();
 }
 
@@ -1200,7 +1194,7 @@ addtestclients() {
 
   playsoundonplayers("vox_kls_dav_spawn");
   testclients = getdvarint(#"scr_testclients");
-  setdvar("scr_testclients", 0);
+  setDvar("scr_testclients", 0);
 
   for(i = 0; i < testclients; i++) {
     ent[i] = addtestclient();
@@ -1230,7 +1224,7 @@ addenemyheli() {
   }
 
   enemyheli = getdvarint(#"scr_spawnenemyheli");
-  setdvar("scr_spawnenemyheli", 0);
+  setDvar("scr_spawnenemyheli", 0);
   team = "autoassign";
   player = gethostplayer();
 
@@ -1293,7 +1287,7 @@ addenemyu2() {
   }
 
   type = getdvarint(#"scr_spawnenemyu2");
-  setdvar("scr_spawnenemyu2", 0);
+  setDvar("scr_spawnenemyu2", 0);
   team = "autoassign";
   player = gethostplayer();
 
@@ -1346,7 +1340,7 @@ addtestcarepackage() {
     }
   }
 
-  setdvar("scr_givetestsupplydrop", 0);
+  setDvar("scr_givetestsupplydrop", 0);
   ent = getormakebot(team);
 
   if(!isDefined(ent)) {
@@ -1374,7 +1368,7 @@ removetestclients() {
 
   playsoundonplayers("vox_kls_dav_kill");
   removetype = getdvarint(#"scr_testclientsremove");
-  setdvar("scr_testclientsremove", 0);
+  setDvar("scr_testclientsremove", 0);
   host = gethostplayer();
   players = level.players;
 
@@ -1410,7 +1404,6 @@ testclient(team) {
     self waittill("spawned_player");
     wait 0.1;
   }
-
 }
 
 showonespawnpoint(spawn_point, color, notification, height, print) {
@@ -1522,7 +1515,6 @@ print3duntilnotified(origin, text, color, alpha, scale, notification) {
     print3d(origin, text, color, alpha, scale);
     wait 0.05;
   }
-
 }
 
 lineuntilnotified(start, end, color, depthtest, notification) {
@@ -1532,14 +1524,13 @@ lineuntilnotified(start, end, color, depthtest, notification) {
     line(start, end, color, depthtest);
     wait 0.05;
   }
-
 }
 
 engagement_distance_debug_toggle() {
   level endon("kill_engage_dist_debug_toggle_watcher");
 
   if(!isDefined(getdvarint(#"debug_engage_dists")))
-    setdvar("debug_engage_dists", "0");
+    setDvar("debug_engage_dists", "0");
 
   laststate = getdvarint(#"debug_engage_dists");
 
@@ -1557,7 +1548,6 @@ engagement_distance_debug_toggle() {
 
     wait 0.3;
   }
-
 }
 
 dvar_turned_on(val) {
@@ -1751,7 +1741,6 @@ engage_dists_watcher() {
     player.lastweapon = playerweapon;
     wait 0.05;
   }
-
 }
 
 debug_realtime_engage_dist() {
@@ -1807,7 +1796,6 @@ debug_realtime_engage_dist() {
     thread plot_circle_fortime(1, 1, 0.05, level.debugrtengagedistcolor, tracepoint, tracenormal);
     wait 0.05;
   }
-
 }
 
 hudobj_changecolor(hudobjarray, newcolor) {
@@ -1886,13 +1874,12 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
     plotpoints = [];
     wait(hangtime);
   }
-
 }
 
 larry_thread() {
-  setdvar("bot_AllowMovement", "0");
-  setdvar("bot_PressAttackBtn", "0");
-  setdvar("bot_PressMeleeBtn", "0");
+  setDvar("bot_AllowMovement", "0");
+  setDvar("bot_PressAttackBtn", "0");
+  setDvar("bot_PressMeleeBtn", "0");
   level.larry = spawnStruct();
   player = gethostplayer();
   player thread larry_init(level.larry);
@@ -1970,7 +1957,6 @@ larry_ai_thread(larry, origin, angles) {
     self setplayerangles(angles);
     self clearperks();
   }
-
 }
 
 larry_ai_damage(larry) {
@@ -2008,7 +1994,6 @@ larry_ai_damage(larry) {
 
     larry.menu[larry.menu_weapon] settext("<unknown>");
   }
-
 }
 
 larry_ai_health(larry) {
@@ -2018,7 +2003,6 @@ larry_ai_health(larry) {
     wait 0.05;
     larry.menu[larry.menu_health] setvalue(self.health);
   }
-
 }
 
 larry_hud_init(larry) {
@@ -2064,7 +2048,6 @@ larry_hud_destroy(larry) {
 
     larry.cleartextmarker destroy();
   }
-
 }
 
 new_hud(hud_name, msg, x, y, scale) {
@@ -2143,7 +2126,6 @@ watch_botsdvars() {
 
     wait 1.0;
   }
-
 }
 
 getattachmentchangemodifierbutton() {
@@ -2214,7 +2196,6 @@ watchattachmentchange() {
 
     wait 0.05;
   }
-
 }
 
 print_weapon_name() {
@@ -2288,7 +2269,7 @@ take_all_grenades_and_equipment(player) {
 equipment_dev_gui() {
   set_equipment_list();
   set_grenade_list();
-  setdvar("scr_give_equipment", "");
+  setDvar("scr_give_equipment", "");
 
   while(true) {
     wait 0.5;
@@ -2300,7 +2281,7 @@ equipment_dev_gui() {
         level.players[i] giveweapon(level.dev_equipment[devgui_int]);
       }
 
-      setdvar("scr_give_equipment", "0");
+      setDvar("scr_give_equipment", "0");
     }
   }
 
@@ -2309,7 +2290,7 @@ equipment_dev_gui() {
 grenade_dev_gui() {
   set_equipment_list();
   set_grenade_list();
-  setdvar("scr_give_grenade", "");
+  setDvar("scr_give_grenade", "");
 
   while(true) {
     wait 0.5;
@@ -2321,17 +2302,17 @@ grenade_dev_gui() {
         level.players[i] giveweapon(level.dev_grenade[devgui_int]);
       }
 
-      setdvar("scr_give_grenade", "0");
+      setDvar("scr_give_grenade", "0");
     }
   }
 
 }
 
 force_grenade_throw(weapon) {
-  setdvar("bot_AllowMovement", "0");
-  setdvar("bot_PressAttackBtn", "0");
-  setdvar("bot_PressMeleeBtn", "0");
-  setdvar("scr_botsAllowKillstreaks", "0");
+  setDvar("bot_AllowMovement", "0");
+  setDvar("bot_PressAttackBtn", "0");
+  setDvar("bot_PressMeleeBtn", "0");
+  setDvar("scr_botsAllowKillstreaks", "0");
   host = gethostplayer();
 
   if(!isDefined(host.team)) {
@@ -2411,7 +2392,6 @@ bot_dpad_think() {
 
     level notify("bot_index_changed");
   }
-
 }
 
 bot_overlay_think() {
@@ -2422,11 +2402,10 @@ bot_overlay_think() {
 
   for(;;) {
     if(getdvarint(#"bot_Debug") != level.bot_index)
-      setdvar("bot_Debug", level.bot_index);
+      setDvar("bot_Debug", level.bot_index);
 
     level waittill("bot_index_changed");
   }
-
 }
 
 bot_threat_think() {
@@ -2437,11 +2416,10 @@ bot_threat_think() {
 
   for(;;) {
     if(getdvarint(#"bot_DebugThreat") != level.bot_index)
-      setdvar("bot_DebugThreat", level.bot_index);
+      setDvar("bot_DebugThreat", level.bot_index);
 
     level waittill("bot_index_changed");
   }
-
 }
 
 bot_path_think() {
@@ -2452,26 +2430,25 @@ bot_path_think() {
 
   for(;;) {
     if(getdvarint(#"bot_DebugPaths") != level.bot_index)
-      setdvar("bot_DebugPaths", level.bot_index);
+      setDvar("bot_DebugPaths", level.bot_index);
 
     level waittill("bot_index_changed");
   }
-
 }
 
 bot_overlay_stop() {
   level notify("bot_overlay_stop");
-  setdvar("bot_Debug", "-1");
+  setDvar("bot_Debug", "-1");
 }
 
 bot_path_stop() {
   level notify("bot_path_stop");
-  setdvar("bot_DebugPaths", "-1");
+  setDvar("bot_DebugPaths", "-1");
 }
 
 bot_threat_stop() {
   level notify("bot_threat_stop");
-  setdvar("bot_DebugThreat", "-1");
+  setDvar("bot_DebugThreat", "-1");
 }
 
 devstraferunpathdebugdraw() {
@@ -2493,7 +2470,7 @@ devstraferunpathdebugdraw() {
 
       if(!isDefined(node)) {
         println("No strafe run path found");
-        setdvar("scr_devStrafeRunPathDebugDraw", "0");
+        setDvar("scr_devStrafeRunPathDebugDraw", "0");
         continue;
       }
 
@@ -2561,7 +2538,6 @@ devstraferunpathdebugdraw() {
     } else
       wait 1;
   }
-
 }
 
 devhelipathdebugdraw() {
@@ -2636,7 +2612,6 @@ devhelipathdebugdraw() {
 
     wait 0.05;
   }
-
 }
 
 draworiginlines() {
@@ -2696,7 +2671,6 @@ drawpath(linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endon
     ent = enttarget;
     wait 0.05;
   }
-
 }
 
 drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endonmsg) {
@@ -2711,7 +2685,6 @@ drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffse
     drawtime = drawtime - 0.05;
     wait 0.05;
   }
-
 }
 
 get_lookat_origin(player) {
@@ -2737,7 +2710,6 @@ draw_pathnode_think(node, color) {
     draw_pathnode(node, color);
     wait 0.05;
   }
-
 }
 
 draw_pathnodes_stop() {
@@ -2766,7 +2738,6 @@ node_get(player) {
 
     draw_pathnode(node, (0.85, 0.85, 0.1));
   }
-
 }
 
 dev_get_node_pair() {

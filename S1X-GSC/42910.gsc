@@ -61,12 +61,12 @@ isworldkillcam(var_0, var_1) {
 }
 
 prekillcamnotify(var_0, var_1, var_2, var_3) {
-  if(isplayer(self) && isDefined(var_1) && isplayer(var_1)) {
+  if(isPlayer(self) && isDefined(var_1) && isPlayer(var_1)) {
     var_4 = maps\mp\gametypes\_playerlogic::gatherclassweapons();
     var_5 = gettime();
     waitframe();
 
-    if(isplayer(self) && isDefined(var_1) && isplayer(var_1)) {
+    if(isPlayer(self) && isDefined(var_1) && isPlayer(var_1)) {
       var_5 = (gettime() - var_5) / 1000;
       self.streamweapons = self loadcustomizationplayerview(var_1, var_2 + var_5, var_3, var_4);
       self precachekillcamiconforweapon(var_3);
@@ -75,7 +75,7 @@ prekillcamnotify(var_0, var_1, var_2, var_3) {
 }
 
 killcamtime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(getdvar("scr_killcam_time") == "") {
+  if(getDvar("scr_killcam_time") == "") {
     var_7 = maps\mp\_utility::strip_suffix(var_1, "_lefthand");
 
     if(var_5 || var_1 == "artillery_mp" || var_1 == "stealth_bomb_mp" || var_1 == "killstreakmahem_mp") {
@@ -145,7 +145,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   level.numplayerswaitingtoenterkillcam--;
   var_17 = killcamtime(var_3, var_4, var_5, var_7, var_8, var_14, level.showingfinalkillcam);
 
-  if(getdvar("scr_killcam_posttime") == "") {
+  if(getDvar("scr_killcam_posttime") == "") {
     var_18 = 2;
   } else {
     var_18 = getdvarfloat("scr_killcam_posttime");
@@ -176,7 +176,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   if(isagent(var_9) && !isDefined(var_9.isactive)) {
     return;
   }
-  if(isplayer(var_9)) {
+  if(isPlayer(var_9)) {
     self setclientomnvar("ui_killcam_killedby_id", var_9 getentitynumber());
   } else if(isagent(var_9)) {
     self setclientomnvar("ui_killcam_killedby_id", -1);
@@ -210,7 +210,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
         var_21 = getweaponattachments(var_4);
       }
 
-      if(!level.showingfinalkillcam && maps\mp\_utility::practiceroundgame() && isplayer(var_9) && !isbot(self) && !isagent(self) && maps\mp\gametypes\_class::loadoutvalidforcopycat(var_9)) {
+      if(!level.showingfinalkillcam && maps\mp\_utility::practiceroundgame() && isPlayer(var_9) && !isbot(self) && !isagent(self) && maps\mp\gametypes\_class::loadoutvalidforcopycat(var_9)) {
         self setclientomnvar("ui_killcam_copycat", 1);
         thread waitcopycatkillcambutton(var_9);
       } else {
@@ -255,7 +255,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   var_27 = gettime();
   self notify("begin_killcam", var_27);
 
-  if(!var_15 && !isagent(var_9) && isDefined(var_9) && isplayer(var_10)) {
+  if(!var_15 && !isagent(var_9) && isDefined(var_9) && isPlayer(var_10)) {
     var_9 visionsyncwithplayer(var_10);
   }
 
@@ -473,7 +473,7 @@ killcamcleanup(var_0) {
   setcinematiccamerastyle("unknown", -1, -1);
   self.killcam = undefined;
 
-  if(isDefined(self.killcamstartedtimedeciseconds) && isplayer(self) && maps\mp\_matchdata::canloglife(self.lifeid)) {
+  if(isDefined(self.killcamstartedtimedeciseconds) && isPlayer(self) && maps\mp\_matchdata::canloglife(self.lifeid)) {
     var_1 = maps\mp\_utility::gettimepasseddecisecondsincludingrounds();
     setmatchdata("lives", self.lifeid, "killcamWatchTimeDeciSeconds", maps\mp\_utility::clamptobyte(var_1 - self.killcamstartedtimedeciseconds));
   }

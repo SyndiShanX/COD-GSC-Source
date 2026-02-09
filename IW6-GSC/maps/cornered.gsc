@@ -41,7 +41,7 @@ main() {
   thread maps\cornered_building_entry::festival_balloons();
   thread maps\cornered_building_entry::ambient_building_lights();
   maps\_utility::add_global_spawn_function("axis", maps\cornered_code::disable_sniper_glint);
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
   setsaveddvar("r_ssaofadedepth", 256);
   setsaveddvar("r_ssaorejectdepth", 1024);
 }
@@ -67,7 +67,7 @@ cornered_starts() {
 }
 
 e3_start() {
-  setdvar("e3", "1");
+  setDvar("e3", "1");
   maps\cornered_intro::setup_intro_internal();
 }
 

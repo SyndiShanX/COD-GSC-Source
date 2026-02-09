@@ -73,7 +73,7 @@ function _on(slot, weapon) {
   self thread cybercom::function_c3c6aff4(slot, weapon, "changed_class", "active_camo_off");
   self thread cybercom::function_c3c6aff4(slot, weapon, "cybercom_disabled", "active_camo_off");
   self thread function_cba091b7(slot, weapon);
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_camo");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);

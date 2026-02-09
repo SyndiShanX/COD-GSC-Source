@@ -21,7 +21,7 @@ __init__() {
 }
 
 gameplay_started_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  setdvar(#"cg_isgameplayactive", newval);
+  setDvar(#"cg_isgameplayactive", newval);
 
   if(newval) {
     level callback::callback(#"on_gameplay_started", localclientnum);

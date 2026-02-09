@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_mortar.csc
+ * Script: clientscripts\_mortar\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -21,7 +21,6 @@ init_mortars() {
   level._explosion_dust_range = [];
   level._explosion_dust_name = [];
 }
-
 set_mortar_dust(mortar_name, dust_name, range) {
   if(!isDefined(level._explosion_dust_range)) {
     init_mortars();
@@ -32,7 +31,6 @@ set_mortar_dust(mortar_name, dust_name, range) {
   }
   level._explosion_dust_range[mortar_name] = range;
 }
-
 set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default) {
   if(!isDefined(level._explosion_quake_power)) {
     init_mortars();
@@ -53,7 +51,6 @@ set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default
     level._explosion_quake_radius[mortar_name] = quake_radius;
   }
 }
-
 set_mortar_range(mortar_name, min_range, max_range, set_default) {
   if(!isDefined(level._explosion_min_range)) {
     init_mortars();
@@ -70,7 +67,6 @@ set_mortar_range(mortar_name, min_range, max_range, set_default) {
     level._explosion_max_range[mortar_name] = max_range;
   }
 }
-
 set_mortar_delays(mortar_name, min_delay, max_delay, barrage_min_delay, barrage_max_delay, set_default) {
   if(!isDefined(level._explosion_min_delay)) {
     init_mortars();
@@ -103,7 +99,6 @@ set_mortar_delays(mortar_name, min_delay, max_delay, barrage_min_delay, barrage_
     }
   }
 }
-
 set_mortar_chance(mortar_name, chance, set_default) {
   if(!isDefined(level._explosion_view_chance)) {
     init_mortars();
@@ -117,7 +112,6 @@ set_mortar_chance(mortar_name, chance, set_default) {
     level._explosion_view_chance[mortar_name] = chance;
   }
 }
-
 player_view_chance(view_chance, explosion_point) {
   chance = RandomFloat(1);
   if(chance <= view_chance) {
@@ -127,14 +121,13 @@ player_view_chance(view_chance, explosion_point) {
   }
   return false;
 }
-
 explosion_incoming(mortar_name, pos, soundnum) {
   if(!isDefined(level._explosion_last_incoming)) {
     level._explosion_last_incoming = -1;
   }
-  soundnum = randomInt(4) + 1;
+  soundnum = RandomInt(4) + 1;
   while(soundnum == level._explosion_last_incoming) {
-    soundnum = randomInt(4) + 1;
+    soundnum = RandomInt(4) + 1;
   }
   level._explosion_last_incoming = soundnum;
   if(level._effectType[mortar_name] == "mortar") {
@@ -193,7 +186,6 @@ explosion_incoming(mortar_name, pos, soundnum) {
     }
   }
 }
-
 explosion_boom(mortar_name, explosion_origin, power, time, radius) {
   if(!isDefined(power)) {
     power = 0.15;
@@ -206,19 +198,18 @@ explosion_boom(mortar_name, explosion_origin, power, time, radius) {
   }
   explosion_sound(mortar_name, explosion_origin);
   playFX(0, level._effect[mortar_name], explosion_origin);
-  localPlayers = getLocalPlayers();
+  localPlayers = getlocalplayers();
   for(i = 0; i < localPlayers.size; i++) {
     localPlayers[i] Earthquake(power, time, explosion_origin, radius);
   }
 }
-
 explosion_sound(mortar_name, pos) {
   if(!isDefined(level._explosion_last_sound)) {
     level._explosion_last_sound = 0;
   }
-  soundnum = randomInt(3) + 1;
+  soundnum = RandomInt(3) + 1;
   while(soundnum == level._explosion_last_sound) {
-    soundnum = randomInt(3) + 1;
+    soundnum = RandomInt(3) + 1;
   }
   level._explosion_last_sound = soundnum;
   if(level._effectType[mortar_name] == "mortar") {
@@ -272,7 +263,6 @@ explosion_sound(mortar_name, pos) {
     }
   }
 }
-
 explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_power, quake_time, quake_radius, dust_points) {
   set_mortar_quake(mortar_name, 0.15, 2, 850, true);
   if(!isDefined(blast_radius)) {
@@ -306,7 +296,6 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
     }
   }
 }
-
 mortar_loop(mortar_name, barrage_amount, no_terrain) {
   level endon("stop_all_mortar_loops");
   assertex((isDefined(mortar_name) && (mortar_name != "")), "mortar_name not passed. pass in level script");
@@ -362,11 +351,11 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
       for(j = 0; j < barrage_amount; j++) {
         max_rangeSQ = level._explosion_max_range[mortar_name] * level._explosion_max_range[mortar_name];
         min_rangeSQ = level._explosion_min_range[mortar_name] * level._explosion_min_range[mortar_name];
-        random_num = randomInt(explosion_points.size);
+        random_num = RandomInt(explosion_points.size);
         for(i = 0; i < explosion_points.size; i++) {
           num = (i + random_num) % explosion_points.size;
           do_mortar = false;
-          players = getLocalPlayers();
+          players = getlocalplayers();
           for(q = 0; q < players.size; q++) {
             dist = DistanceSquared(players[q] GetOrigin(), explosion_points[num].origin);
             if(num != last_explosion && dist < max_rangeSQ && dist > min_rangeSQ) {

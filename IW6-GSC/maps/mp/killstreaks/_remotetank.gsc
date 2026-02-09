@@ -532,7 +532,6 @@ startUsingTank() {
     owner VisionSetThermalForPlayer(game["thermal_vision"], 1.5);
     owner ThermalVisionOn();
     owner ThermalVisionFOFOverlayOn();
-
   }
   if(getDvarInt("camera_thirdPerson"))
     owner setThirdPersonDOF(false);
@@ -774,7 +773,6 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
     if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
       if(attacker _hasPerk("specialty_armorpiercing"))
         modifiedDamage += damage * level.armorPiercingMod;
-
     }
 
     if(IsExplosiveDamageMOD(meansOfDeath))
@@ -784,7 +782,7 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
   if(IsExplosiveDamageMOD(meansOfDeath) && (isDefined(weapon) && weapon == "destructible_car"))
     modifiedDamage = vehicle.maxHealth;
 
-  if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
+  if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
     attacker.owner maps\mp\gametypes\_damagefeedback::updateDamageFeedback("remote_tank");
   }
 
@@ -998,7 +996,6 @@ tank_FireMissiles(remoteTank) {
 
       remoteTank playSound("talon_rocket_reload");
       self PlayLocalSound("talon_rocket_reload_plr");
-
     } else
       wait(0.05);
   }
@@ -1022,7 +1019,6 @@ tank_DropMines(remoteTank) {
       remoteTank playSound("item_blast_shield_on");
 
       wait(8.0);
-
     } else
       wait(0.05);
   }

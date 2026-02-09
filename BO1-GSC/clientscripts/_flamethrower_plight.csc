@@ -1,12 +1,11 @@
 /**************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_flamethrower_plight.csc
+ * Script: clientscripts\_flamethrower_plight\.csc
 **************************************************/
 
 init() {
   level._effect["ft_pilot_light"] = LoadFX("weapon/muzzleflashes/fx_pilot_light");
 }
-
 play_pilot_light_fx(localClientNum) {
   self notify("new_pilot_light");
   self endon("new_pilot_light");

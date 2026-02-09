@@ -7,8 +7,9 @@
 #include maps\_hud_util;
 
 init() {
-  if(level.script == "frontend")
+  if(level.script == "frontend") {
     return;
+  }
   PrecacheItem("syrette_sp");
   precachestring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
   precachestring(&"GAME_PLAYER_NEEDS_TO_BE_REVIVED");
@@ -29,14 +30,12 @@ init() {
     level.primaryProgressBarY = 280;
   }
   if(getDvar(#"revive_trigger_radius") == "") {
-    SetDvar("revive_trigger_radius", "40");
+    setDvar("revive_trigger_radius", "40");
   }
 }
-
 player_is_in_laststand() {
   return (isDefined(self.revivetrigger));
 }
-
 player_num_in_laststand() {
   num = 0;
   players = get_players();
@@ -47,15 +46,12 @@ player_num_in_laststand() {
   }
   return num;
 }
-
 player_all_players_in_laststand() {
   return (player_num_in_laststand() == get_players().size);
 }
-
 player_any_player_in_laststand() {
   return (player_num_in_laststand() > 0);
 }
-
 PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
   if(getDvar(#"zombiemode") != "1" && sMeansOfDeath == "MOD_CRUSH") {
     if(self player_is_in_laststand()) {
@@ -68,8 +64,8 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   }
   self.downs++;
   self.stats["downs"] = self.downs;
-  dvarName = "player" + self getEntityNumber() + "downs";
-  setdvar(dvarName, self.downs);
+  dvarName = "player" + self GetEntityNumber() + "downs";
+  setDvar(dvarName, self.downs);
   self AllowJump(false);
   if(isDefined(level.playerlaststand_func)) {
     [[level.playerlaststand_func]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
@@ -95,9 +91,19 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   self thread laststand_bleedout(GetDvarFloat(#"player_lastStandBleedoutTime"));
   self notify("player_downed");
 }
-
 laststand_allowed(sWeapon, sMeansOfDeath, sHitLoc) {
-  if(getDvar(#"zombiemode") != "1" && sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET" && sMeansOfDeath != "MOD_HEAD_SHOT" && sMeansOfDeath != "MOD_MELEE" && sMeansOfDeath != "MOD_BAYONET" && sMeansOfDeath != "MOD_GRENADE" && sMeansOfDeath != "MOD_GRENADE_SPLASH" && sMeansOfDeath != "MOD_PROJECTILE" && sMeansOfDeath != "MOD_PROJECTILE_SPLASH" && sMeansOfDeath != "MOD_EXPLOSIVE" && sMeansOfDeath != "MOD_BURNED") {
+  if(getDvar(#"zombiemode") != "1" &&
+    sMeansOfDeath != "MOD_PISTOL_BULLET" &&
+    sMeansOfDeath != "MOD_RIFLE_BULLET" &&
+    sMeansOfDeath != "MOD_HEAD_SHOT" &&
+    sMeansOfDeath != "MOD_MELEE" &&
+    sMeansOfDeath != "MOD_BAYONET" &&
+    sMeansOfDeath != "MOD_GRENADE" &&
+    sMeansOfDeath != "MOD_GRENADE_SPLASH" &&
+    sMeansOfDeath != "MOD_PROJECTILE" &&
+    sMeansOfDeath != "MOD_PROJECTILE_SPLASH" &&
+    sMeansOfDeath != "MOD_EXPLOSIVE" &&
+    sMeansOfDeath != "MOD_BURNED") {
     return false;
   }
   if(level.laststandpistol == "none") {
@@ -105,7 +111,6 @@ laststand_allowed(sWeapon, sMeansOfDeath, sHitLoc) {
   }
   return true;
 }
-
 laststand_disable_player_weapons() {
   weaponInventory = self GetWeaponsList();
   self.lastActiveWeapon = self GetCurrentWeapon();
@@ -140,7 +145,6 @@ laststand_disable_player_weapons() {
     self DisableOffhandWeapons();
   }
 }
-
 laststand_enable_player_weapons() {
   if(!self.hadpistol) {
     self TakeWeapon(self.laststandpistol);
@@ -159,7 +163,6 @@ laststand_enable_player_weapons() {
     }
   }
 }
-
 laststand_clean_up_on_disconnect(playerBeingRevived, reviverGun) {
   reviveTrigger = playerBeingRevived.revivetrigger;
   playerBeingRevived waittill("disconnect");
@@ -174,7 +177,6 @@ laststand_clean_up_on_disconnect(playerBeingRevived, reviverGun) {
   }
   self revive_give_back_weapons(reviverGun);
 }
-
 laststand_give_pistol() {
   assert(isDefined(self.laststandpistol));
   assert(self.laststandpistol != "none");
@@ -186,7 +188,6 @@ laststand_give_pistol() {
     self SwitchToWeapon(self.laststandpistol);
   }
 }
-
 Laststand_Bleedout(delay) {
   self endon("player_revived");
   self endon("disconnect");
@@ -218,7 +219,6 @@ Laststand_Bleedout(delay) {
     self mission_failed_during_laststand(self);
   }
 }
-
 revive_trigger_spawn() {
   radius = GetDvarInt(#"revive_trigger_radius");
   self.revivetrigger = spawn("trigger_radius", self.origin, 0, radius, radius);
@@ -230,7 +230,6 @@ revive_trigger_spawn() {
   self.revivetrigger.createtime = gettime();
   self thread revive_trigger_think();
 }
-
 revive_trigger_think() {
   self endon("disconnect");
   self endon("zombified");
@@ -268,7 +267,6 @@ revive_trigger_think() {
     }
   }
 }
-
 revive_give_back_weapons(gun) {
   self TakeWeapon("syrette_sp");
   if(self player_is_in_laststand()) {
@@ -283,7 +281,6 @@ revive_give_back_weapons(gun) {
     }
   }
 }
-
 can_revive(revivee) {
   if(!isAlive(self)) {
     return false;
@@ -319,11 +316,9 @@ can_revive(revivee) {
   }
   return true;
 }
-
 is_reviving(revivee) {
   return (can_revive(revivee) && self UseButtonPressed());
 }
-
 is_facing(facee) {
   orientation = self getPlayerAngles();
   forwardVec = anglesToForward(orientation);
@@ -335,7 +330,6 @@ is_facing(facee) {
   dotProduct = VectorDot(unitForwardVec2D, unitToFaceeVec2D);
   return (dotProduct > 0.9);
 }
-
 revive_do_revive(playerBeingRevived, reviverGun) {
   assert(self is_reviving(playerBeingRevived));
   reviveTime = 3;
@@ -398,7 +392,6 @@ revive_do_revive(playerBeingRevived, reviverGun) {
   playerBeingRevived.revivetrigger.beingRevived = 0;
   return revived;
 }
-
 say_revived_vo() {
   if(getDvar(#"zombiemode") == "1" || IsSubStr(level.script, "nazi_zombie_")) {
     players = get_players();
@@ -409,7 +402,6 @@ say_revived_vo() {
     }
   }
 }
-
 auto_revive(reviver) {
   if(isDefined(self.revivetrigger)) {
     self.revivetrigger.auto_revive = true;
@@ -439,7 +431,6 @@ auto_revive(reviver) {
   self thread say_revived_vo();
   self notify("player_revived", reviver);
 }
-
 remote_revive(reviver) {
   if(!self player_is_in_laststand()) {
     return;
@@ -447,7 +438,6 @@ remote_revive(reviver) {
   reviver giveachievement_wrapper("SP_ZOM_NODAMAGE");
   self auto_revive(reviver);
 }
-
 revive_success(reviver) {
   self notify("player_revived", reviver);
   self reviveplayer();
@@ -464,14 +454,12 @@ revive_success(reviver) {
   self.ignoreme = false;
   self thread say_revived_vo();
 }
-
 revive_force_revive(reviver) {
   assert(isDefined(self));
-  assert(IsPlayer(self));
+  assert(isPlayer(self));
   assert(self player_is_in_laststand());
   self thread revive_success(reviver);
 }
-
 revive_hud_create() {
   self.revive_hud = newclientHudElem(self);
   self.revive_hud.alignX = "center";
@@ -489,7 +477,6 @@ revive_hud_create() {
     self.revive_hud.y = -80;
   }
 }
-
 revive_hud_think() {
   self endon("disconnect");
   while(1) {
@@ -524,26 +511,22 @@ revive_hud_think() {
     }
   }
 }
-
 fadeReviveMessageOver(playerToRevive, time) {
   revive_hud_show();
   self.revive_hud setText(&"GAME_PLAYER_NEEDS_TO_BE_REVIVED", playerToRevive);
   self.revive_hud fadeOverTime(time);
   self.revive_hud.alpha = 0;
 }
-
 revive_hud_show() {
   assert(isDefined(self));
   assert(isDefined(self.revive_hud));
   self.revive_hud.alpha = 1;
 }
-
 revive_hud_show_n_fade(time) {
   revive_hud_show();
   self.revive_hud fadeOverTime(time);
   self.revive_hud.alpha = 0;
 }
-
 drawcylinder(pos, rad, height) {
   currad = rad;
   curheight = height;
@@ -555,7 +538,6 @@ drawcylinder(pos, rad, height) {
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta) * currad, sin(theta) * currad, curheight));
   }
 }
-
 mission_failed_during_laststand(dead_player) {
   if(isDefined(level.no_laststandmissionfail) && level.no_laststandmissionfail) {
     return;

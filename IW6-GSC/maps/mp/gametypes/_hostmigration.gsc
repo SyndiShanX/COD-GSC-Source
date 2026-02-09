@@ -32,12 +32,12 @@ Callback_HostMigration() {
   foreach(character in level.characters) {
     character thread hostMigrationTimerThink();
 
-    if(IsPlayer(character)) {
+    if(isPlayer(character)) {
       character SetClientOmnvar("ui_session_state", character.sessionstate);
     }
   }
 
-  SetDvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
 
   level endon("host_migration_begin");
   hostMigrationWait();
@@ -50,7 +50,7 @@ Callback_HostMigration() {
   maps\mp\gametypes\_gamelogic::UpdateTimerPausedness();
 
   level thread maps\mp\gametypes\_gamelogic::updateGameEvents();
-  if((GetDvar("squad_use_hosts_squad") == "1")) {
+  if((getDvar("squad_use_hosts_squad") == "1")) {
     level thread maps\mp\gametypes\_menus::update_wargame_after_migration();
   }
 }
@@ -121,7 +121,7 @@ hostMigrationTimerThink() {
 
   assertex(isDefined(self.hostMigrationControlsFrozen), "Not properly tracking controller frozen for " + hostMigrationName(self));
 
-  if(IsPlayer(self))
+  if(isPlayer(self))
     self setClientDvar("cg_scoreboardPingGraph", "0");
 
   hostMigrationTimerThink_Internal();
@@ -135,7 +135,7 @@ hostMigrationTimerThink() {
     self.hostMigrationControlsFrozen = undefined;
   }
 
-  if(IsPlayer(self))
+  if(isPlayer(self))
     self setClientDvar("cg_scoreboardPingGraph", "1");
 }
 

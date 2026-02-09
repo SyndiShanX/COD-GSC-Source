@@ -14,7 +14,7 @@
 #include maps\mp\gametypes\_globallogic_audio;
 
 main() {
-  if(getdvar(#"mapname") == "mp_background") {
+  if(getDvar(#"mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -234,7 +234,7 @@ onscoreclosemusic() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isplayer(attacker) == 0 || attacker.team == self.team) {
+  if(isPlayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
   attacker maps\mp\gametypes\_globallogic_score::giveteamscoreforobjective(attacker.team, level.teamscoreperkill);

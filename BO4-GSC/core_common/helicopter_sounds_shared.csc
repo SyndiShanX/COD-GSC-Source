@@ -36,7 +36,7 @@ __init__() {
   init_heli_sound_values("heli_guard", "rotor", 10, 0.9, 1, 30, 0.9, 1.1);
 
   if(getdvarstring(#"helisounds") == "<dev string:x38>") {
-    setdvar(#"helisounds", "<dev string:x38>");
+    setDvar(#"helisounds", "<dev string:x38>");
   }
 
   level thread command_parser();
@@ -79,7 +79,6 @@ init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, ma
     println("<dev string:x112>" + min_pitch);
     println("<dev string:x131>" + max_pitch);
   }
-
 }
 
 command_parser() {
@@ -155,7 +154,7 @@ command_parser() {
         }
       }
 
-      setdvar(#"helisounds", "<dev string:x38>");
+      setDvar(#"helisounds", "<dev string:x38>");
     }
 
     wait 0.1;
@@ -430,7 +429,6 @@ heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
         println("<dev string:x502>" + self.cur_speed);
         println("<dev string:x52d>" + run_volume);
       }
-
     }
 
     wait wait_time;

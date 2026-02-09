@@ -67,7 +67,7 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     } else if(var_15) {
       if(var_10) {
         if(scripts\cp\utility::is_ricochet_damage()) {
-          if(isplayer(var_1) && isDefined(var_8) && var_8 != "shield") {
+          if(isPlayer(var_1) && isDefined(var_8) && var_8 != "shield") {
             if(isDefined(var_0)) {
               var_1 dodamage(var_2, var_1.origin - (0, 0, 50), var_1, var_0, var_4);
             } else {
@@ -173,7 +173,7 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       var_1E = 0;
     } else if(var_1 scripts\cp\utility::agentisfnfimmune()) {
       var_1E = 0;
-    } else if(isplayer(var_12) && isplayer(var_1)) {
+    } else if(isPlayer(var_12) && isPlayer(var_1)) {
       var_1E = 0;
     } else {
       var_1E = 1;
@@ -476,7 +476,7 @@ update_zombie_damage_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     return;
   }
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_11 = self[[level.var_4C44]](var_0, var_1, var_2, var_4, var_5, var_7, var_8, var_9, var_10);
     if(!scripts\engine\utility::istrue(var_11)) {
       return;
@@ -507,7 +507,7 @@ update_performance_zombie_damage(var_0, var_1, var_2) {
   }
 
   scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "damage_done_on_alien", var_1);
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\cp\cp_gamescore::update_personal_encounter_performance("personal", "damage_done_on_alien", var_1);
     return;
   }
@@ -693,7 +693,7 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       var_11 = "";
-      if(isDefined(var_8) && isplayer(var_8)) {
+      if(isDefined(var_8) && isPlayer(var_8)) {
         var_11 = var_8 scripts\cp\utility::getuniqueid();
       }
 
@@ -727,7 +727,7 @@ isfriendlyfire(var_0, var_1) {
     return 0;
   }
 
-  if(!isplayer(var_1) && !isDefined(var_1.team)) {
+  if(!isPlayer(var_1) && !isDefined(var_1.team)) {
     return 0;
   }
 
@@ -751,7 +751,7 @@ finishplayerdamagewrapper(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self finishplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   }
 

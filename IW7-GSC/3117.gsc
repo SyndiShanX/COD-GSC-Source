@@ -386,14 +386,12 @@ ghostexplode(var_0, var_1, var_2) {
 
 ghostexplosionradiusdamage(var_0, var_1, var_2) {
   var_3 = getclosestactivemovingtargetwithinrange(var_0, var_2);
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(isDefined(var_3)) {
       var_1 thread scripts\cp\cp_damage::updatedamagefeedback("hitcritical");
       if([[level.should_moving_target_explode]](var_0, var_3)) {
         if(isDefined(level.process_player_gns_combo_func)) {
-          [
-            [level.process_player_gns_combo_func]
-          ](var_1, var_3);
+          [[level.process_player_gns_combo_func]](var_1, var_3);
         }
 
         process_moving_target_hit(var_3, var_1, var_0);

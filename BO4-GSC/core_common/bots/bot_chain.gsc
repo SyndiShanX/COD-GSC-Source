@@ -24,7 +24,6 @@ class class_92792865 {
     activecolor = undefined;
     var_d1e3e893 = undefined;
   }
-
 }
 
 autoexec __init__system__() {
@@ -308,7 +307,6 @@ function_ea764100() {
       }
     }
   }
-
 }
 
 function_e3eaa42b() {

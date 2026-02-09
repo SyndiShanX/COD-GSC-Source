@@ -214,7 +214,7 @@ function function_8c75c164(var_2de8cf5e, var_bee8e45) {
   while(true) {
     var_2de8cf5e[0].var_de6d4fc0.health = 1000000;
     var_2de8cf5e[0].var_de6d4fc0 waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     function_ccdb680e(var_2de8cf5e, 1);
@@ -308,7 +308,7 @@ function function_3b8ba4e9() {
       self.var_1431218c.health = 1000000;
       self.var_1431218c waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
     }
-    if(!isDefined(attacker) || !isplayer(attacker)) {}
+    if(!isDefined(attacker) || !isPlayer(attacker)) {}
     self.var_1431218c clientfield::set("ee_anthem_pa", 0);
     self.var_1431218c playSound("zmb_nikolai_mus_pa_destruct");
     util::wait_network_frame();
@@ -425,7 +425,7 @@ function function_75442852() {
   self.var_ac086ffb.health = 1000000;
   while(true) {
     self.var_ac086ffb waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     self.success = 1;

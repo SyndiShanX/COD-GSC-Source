@@ -6,7 +6,6 @@
 _id_148C() {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   if(!isDefined(level._id_1456._id_148D)) {
     level._id_1456._id_148D = spawnStruct();
@@ -65,7 +64,6 @@ _id_14A0(var_0, var_1, var_2) {
     var_3 = var_1;
   } else {
     var_3 = var_0;
-
   }
   level notify(var_3 + "dist_monitor_stop");
   _id_14A9(var_3, var_2);
@@ -86,13 +84,11 @@ _id_14A4(var_0, var_1, var_2, var_3, var_4, var_5) {
     level endon(var_2 + "dist_monitor_stop");
   } else {
     level endon(var_0 + "dist_monitor_stop");
-
   }
   var_6 = 1.0;
 
   if(isDefined(var_4)) {
     var_6 = var_4;
-
   }
   var_7 = 1;
 
@@ -123,7 +119,6 @@ _id_14A5(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     var_5 = var_3;
-
   }
   _id_14B3("free", var_0, var_2, var_4, undefined, var_1, var_5);
 }
@@ -133,13 +128,11 @@ _id_14A6(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_2 = var_0;
-
   }
   var_3 = "all";
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-
   }
   if(var_3 == "free" || var_3 == "all") {
     foreach(var_6, var_5 in level._id_1456._id_148D._id_1492["free"]) {}
@@ -185,7 +178,6 @@ _id_14AA(var_0, var_1, var_2, var_3) {
 _id_14AB(var_0, var_1) {
   if(!isDefined(level._id_1456._id_148D.callback)) {
     level._id_1456._id_148D.callback = [];
-
   }
   level._id_1456._id_148D.callback[var_0] = var_1;
 }
@@ -203,7 +195,6 @@ _id_14AD(var_0, var_1) {
 
     if(var_2.size == 0) {
       var_2 = maps\_audio::_id_14AE(var_0, var_2);
-
     }
     level._id_1456._id_148D._id_1473[var_0] = var_2;
   }
@@ -217,7 +208,6 @@ _id_14AF(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   if(isDefined(level._id_1456._id_148D._id_1492[var_2][var_0])) {
     level._id_1456._id_148D._id_1492[var_2][var_0]["paused"] = 1;
@@ -229,7 +219,6 @@ _id_14B0(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   if(isDefined(level._id_1456._id_148D._id_1492[var_2][var_0])) {
     level._id_1456._id_148D._id_1492[var_2][var_0]["paused"] = 0;
@@ -242,7 +231,6 @@ _id_14B1(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   if(isDefined(level._id_1456._id_148D._id_1492[var_2][var_0])) {
     level notify(var_2 + "_" + var_0 + "_event");
@@ -258,7 +246,6 @@ _id_14B2(var_0, var_1, var_2, var_3) {
 
     if(!isDefined(level._id_1456._id_148D._id_1492[var_4][var_0]["linked_dambs"])) {
       level._id_1456._id_148D._id_1492[var_4][var_0]["linked_dambs"] = [];
-
     }
     var_5 = level._id_1456._id_148D._id_1492[var_4][var_0]["linked_dambs"].size;
     level._id_1456._id_148D._id_1492[var_4][var_0]["linked_dambs"][var_5] = spawnStruct();
@@ -273,13 +260,11 @@ _id_14B3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_3)) {
     var_8 = var_3;
-
   }
   var_9 = var_1;
 
   if(isstring(var_2)) {
     var_9 = var_2;
-
   }
   if(!isDefined(level._id_1456._id_148D._id_1492[var_0][var_9])) {
     var_10 = _id_14F9(var_1);
@@ -293,7 +278,6 @@ _id_14B3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(isDefined(var_7)) {
       _id_14B4(var_9, var_7);
-
     }
     if(isDefined(var_5)) {
       level._id_1456._id_148D._id_1492[var_0][var_9]["entity"] = var_5;
@@ -325,7 +309,6 @@ _id_14B5(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3 = var_2;
-
   }
   if(var_0 == "zone" && !isDefined(var_1)) {
     if(isDefined(level._id_1456._id_148D._id_1492[var_0])) {
@@ -360,16 +343,13 @@ _id_14B6(var_0, var_1, var_2) {
     var_8 = randomfloatrange(var_6, var_7);
   } else {
     var_8 = randomfloatrange(var_4, var_5);
-
   }
   for(;;) {
     if(level._id_1456._id_148D._id_1492[var_0][var_1]["paused"]) {
       level waittill(var_0 + "_" + var_1 + "_event");
-
     }
     if(!level._id_1456._id_148D._id_1492[var_0][var_1]["paused"]) {
       wait(var_8);
-
     }
     var_9 = _id_14E5(var_0, var_1);
 
@@ -395,7 +375,6 @@ _id_14B6(var_0, var_1, var_2) {
       }
     } else {
       maps\_audio::_id_1466("Dynamic ambience is playing back serially and using components which do not define oneshots or loops");
-
     }
     var_8 = randomfloatrange(var_4, var_5);
   }
@@ -412,14 +391,12 @@ _id_14BB(var_0, var_1, var_2, var_3, var_4) {
         var_7 = spawn("script_origin", var_3);
       } else {
         var_7 = spawn("script_origin", level.player.origin);
-
       }
       level._id_1456._id_148D._id_1498++;
       var_7 playLoopSound(var_6);
 
       if(isDefined(var_4)) {
         var_7 linkto(var_4);
-
       }
       var_8 = level._id_1456._id_148D._id_148F;
       level._id_1456._id_148D._id_1492[var_0][var_1]["single_loops"][var_8] = var_7;
@@ -436,14 +413,12 @@ _id_14BC(var_0, var_1, var_2, var_1) {
     var_3._id_14BD = 0;
   } else {
     var_3._id_14BD = 1;
-
   }
   if(isDefined(var_2["oneshots"]) || isDefined(var_2["loops"])) {
     var_3._id_14B7 = 1;
 
     if(!isDefined(var_2["radius"])) {
       var_2["radius"] = [0.0, 0.01];
-
     }
     var_3._id_14BE = min(var_2["radius"][0], var_2["radius"][1]);
     var_3._id_14BF = max(var_2["radius"][0], var_2["radius"][1]);
@@ -488,7 +463,6 @@ _id_14BC(var_0, var_1, var_2, var_1) {
     }
   } else {
     var_3._id_14B7 = 0;
-
   }
   var_3._id_14B8 = 0;
 
@@ -506,7 +480,6 @@ _id_14D3(var_0, var_1, var_2) {
   for(;;) {
     if(!isDefined(var_2)) {
       level notify(var_0 + "_" + var_1 + "_stop");
-
     }
     wait 1.0;
   }
@@ -532,7 +505,6 @@ _id_14D4(var_0, var_1, var_2, var_3) {
         var_6 = randomfloatrange(var_0._id_14CF, var_0._id_14D0);
       } else {
         var_6 = randomfloatrange(0, 360);
-
       }
       var_7 = var_5 * cos(var_6);
       var_8 = var_5 * sin(var_6);
@@ -554,7 +526,6 @@ _id_14D4(var_0, var_1, var_2, var_3) {
 
           if(isDefined(var_3)) {
             var_10 = var_3;
-
           }
           var_11 = var_4._id_14D5 - var_10;
           var_7 = var_11[0] * cos(var_9) - var_11[1] * sin(var_9);
@@ -565,7 +536,6 @@ _id_14D4(var_0, var_1, var_2, var_3) {
 
       if(isDefined(var_0._id_14C5)) {
         var_4._id_14D8 = randomfloatrange(var_0._id_14C5, var_0._id_14C6);
-
       }
       if(isDefined(var_0._id_14CD)) {
         var_4._id_14D9 = randomfloatrange(var_0._id_14C5, var_0._id_14C6);
@@ -574,7 +544,6 @@ _id_14D4(var_0, var_1, var_2, var_3) {
     }
   } else {
     var_4._id_14BA = 0;
-
   }
   return var_4;
 }
@@ -591,7 +560,6 @@ _id_14DC(var_0) {
     var_1 = randomfloatrange(var_0._id_14C3, var_0._id_14C4);
   } else {
     var_1 = randomfloatrange(var_0._id_14C0, var_0._id_14C1);
-
   }
   return var_1;
 }
@@ -614,11 +582,9 @@ _id_14DD(var_0, var_1, var_2, var_3) {
     for(;;) {
       if(level._id_1456._id_148D._id_1492[var_0][var_1]["paused"]) {
         level waittill(var_0 + "_" + var_1 + "_event");
-
       }
       if(!level._id_1456._id_148D._id_1492[var_0][var_1]["paused"]) {
         wait(var_5);
-
       }
       if(var_4._id_14B8 && !isDefined(var_4._id_14B9)) {
         level notify(var_0 + "_" + var_1 + "_stop");
@@ -637,7 +603,6 @@ _id_14DD(var_0, var_1, var_2, var_3) {
 
       if(var_10._id_14BA) {
         thread _id_14DF(var_0, var_1, var_10);
-
       }
       var_5 = randomfloatrange(var_4._id_14C0, var_4._id_14C1);
     }
@@ -673,14 +638,12 @@ _id_14E0(var_0, var_1, var_2) {
     var_3 = var_2._id_14B9.origin;
   } else if(isDefined(var_2.point)) {
     var_3 = var_2.point;
-
   }
   if(level._id_1456._id_148D._id_1497 < level._id_1456._id_148D._id_1499) {
     var_4 = spawn("script_origin", var_3 + var_2._id_14D5);
 
     if(isDefined(var_2._id_14B9) && var_2.mode == "attach") {
       var_4 linkto(var_2._id_14B9);
-
     }
     var_4 playSound(var_2._id_1486["name"], "sounddone");
     var_4 thread maps\_audio::_id_14E1();
@@ -698,7 +661,6 @@ _id_14E0(var_0, var_1, var_2) {
 
       if(isDefined(var_2._id_14D8)) {
         var_4 scalepitch(var_2._id_14D8);
-
       }
       if(isDefined(var_2._id_14DA)) {
         wait 0.05;
@@ -730,7 +692,6 @@ _id_14E3(var_0, var_1, var_2) {
       var_3 = var_2._id_14B9.origin;
     } else if(isDefined(var_2.point)) {
       var_3 = var_2.point;
-
     }
     var_4 = var_2._id_1486["name"];
     var_5 = _id_14E7(var_4);
@@ -748,13 +709,11 @@ _id_14E3(var_0, var_1, var_2) {
 
     if(isDefined(var_5["end_alias"])) {
       var_12 = var_5["end_alias"];
-
     }
     var_13 = spawn("script_origin", var_3 + var_2._id_14D5);
 
     if(isDefined(var_2._id_14B9) && var_2.mode == "attach") {
       var_13 linkto(var_2._id_14B9);
-
     }
     var_13 playLoopSound(var_9);
 
@@ -777,7 +736,6 @@ _id_14E3(var_0, var_1, var_2) {
         var_15 = 1;
       } else if(!isDefined(var_2.mode) && isDefined(var_2._id_14D7)) {
         var_15 = 1;
-
       }
       if(var_15) {
         var_16 = 0.1 * var_2._id_14D6;
@@ -786,7 +744,6 @@ _id_14E3(var_0, var_1, var_2) {
 
       if(isDefined(var_2._id_14D8)) {
         var_13 setpitch(var_2._id_14D8);
-
       }
       if(isDefined(var_2._id_14DA)) {
         wait 0.05;
@@ -902,7 +859,6 @@ _id_14E6(var_0) {
     level._id_1456._id_148D._id_1493[var_0["name"]] = var_3;
   } else {
     var_3 = level._id_1456._id_148D._id_1493[var_0["name"]];
-
   }
   var_9 = randomfloatrange(0.0, var_3);
   var_10 = undefined;
@@ -990,7 +946,6 @@ _id_14E7(var_0) {
 _id_14E9(var_0) {
   if(!isDefined(level._id_1456._id_148D._id_1495)) {
     level._id_1456._id_148D._id_1495 = [];
-
   }
   var_1 = [];
 
@@ -1030,7 +985,6 @@ _id_14EB(var_0, var_1, var_2) {
     }
   } else {
     thread _id_14B6(var_0, var_1, var_2);
-
   }
   level waittill(var_0 + "_" + var_1 + "_stop");
   wait 0.1;
@@ -1077,7 +1031,6 @@ _id_14EE(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_4 = var_3;
-
   }
   var_5 = [];
   var_6 = 0;
@@ -1121,11 +1074,9 @@ _id_14EF(var_0, var_1) {
 
   if(var_1) {
     var_4 = _id_14F1(var_3, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = _id_14F1(var_2, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -1158,31 +1109,26 @@ _id_14F1(var_0, var_1) {
         case "fade_in":
           if(isDefined(var_11) && var_11 != "") {
             var_6 = max(float(var_11), 0.0);
-
           }
           break;
         case "fade_out":
           if(isDefined(var_11) && var_11 != "") {
             var_7 = max(float(var_11), 0.0);
-
           }
           break;
         case "end_alias":
           if(isDefined(var_11) && var_11 != "") {
             var_5 = var_11;
-
           }
           break;
         case "duration_min":
           if(isDefined(var_11) && var_11 != "") {
             var_8[0] = float(var_11);
-
           }
           break;
         case "duration_max":
           if(isDefined(var_11) && var_11 != "") {
             var_8[1] = float(var_11);
-
           }
           break;
         default:
@@ -1195,19 +1141,15 @@ _id_14F1(var_0, var_1) {
 
   if(isDefined(var_6)) {
     var_2["fade_in"] = var_6;
-
   }
   if(isDefined(var_7)) {
     var_2["fade_out"] = var_7;
-
   }
   if(isDefined(var_5)) {
     var_2["end_alias"] = var_5;
-
   }
   if(isDefined(var_8[0])) {
     var_2["duration"] = _id_14F2(var_8);
-
   }
   return var_2;
 }
@@ -1315,50 +1257,39 @@ _id_14F3(var_0, var_1) {
     if(isDefined(var_5[0])) {
       if(isstring(var_5[0])) {
         var_5[1] = 1.0;
-
       }
       var_2["oneshots"] = var_5;
     }
 
     if(isDefined(var_6[0])) {
       var_2["loops"] = var_6;
-
     }
     if(isDefined(var_7[0])) {
       var_2["single_loops"] = var_7;
-
     }
     if(isDefined(var_8[0])) {
       var_2["first_event"] = _id_14F2(var_8);
-
     }
     if(isDefined(var_9[0])) {
       var_2["event_time"] = _id_14F2(var_9);
-
     }
     if(isDefined(var_10[0])) {
       var_2["radius"] = _id_14F2(var_10);
-
     }
     if(isDefined(var_11[0])) {
       var_2["cone"] = _id_14F2(var_11);
-
     }
     if(isDefined(var_12[0])) {
       var_2["delta"] = _id_14F2(var_12);
-
     }
     if(isDefined(var_13[0])) {
       var_2["travel_time"] = _id_14F2(var_13);
-
     }
     if(isDefined(var_14[0])) {
       var_2["pitch"] = _id_14F2(var_14);
-
     }
     if(isDefined(var_15[0])) {
       var_2["pitch_time"] = _id_14F2(var_15);
-
     }
     if(!isDefined(var_2["radius"])) {
       var_2["radius"] = [0.0, 0.01];
@@ -1375,11 +1306,9 @@ _id_14F4(var_0, var_1) {
 
   if(var_1) {
     var_4 = _id_14F3(var_2, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = _id_14F3(var_3, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -1407,19 +1336,16 @@ _id_14F6(var_0, var_1) {
         case "first_event_min":
           if(isDefined(var_9) && var_9 != "") {
             var_5[0] = float(var_9);
-
           }
           break;
         case "first_event_max":
           if(isDefined(var_9) && var_9 != "") {
             var_5[1] = float(var_9);
-
           }
           break;
         case "event_time_min":
           if(isDefined(var_9) && var_9 != "") {
             var_6[0] = float(var_9);
-
           }
           break;
         case "event_time_max":
@@ -1454,7 +1380,6 @@ _id_14F6(var_0, var_1) {
 
       for(var_7 = 0; var_7 < var_4.size; var_7++) {
         var_3["components"][var_3["components"].size] = [var_4[0], 1.0];
-
       }
       if(var_3["components"].size == 0) {
         var_3["components"] = undefined;
@@ -1462,7 +1387,6 @@ _id_14F6(var_0, var_1) {
     }
   } else if(var_4.size != 0) {
     var_3["components"] = var_4;
-
   }
   return var_3;
 }
@@ -1474,11 +1398,9 @@ _id_14F7(var_0, var_1) {
 
   if(var_1) {
     var_4 = _id_14F6(var_2, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = _id_14F6(var_3, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -1493,7 +1415,6 @@ _id_14F9(var_0) {
     var_1 = level._id_1456._id_148D._id_1473[var_0];
   } else {
     var_1 = _id_14F7(var_0, 1);
-
   }
   if(!isDefined(var_1) || var_1.size == 0) {
     return;

@@ -12,9 +12,9 @@ main() {
   precacheshader("torpedo_connection_bar");
   precacheshader("torpedo_connection_frame");
   level.intel_items = create_array_of_intel_items();
-  setdvar("ui_level_cheatpoints", level.intel_items.size);
+  setDvar("ui_level_cheatpoints", level.intel_items.size);
   level.intel_counter = 0;
-  setdvar("ui_level_player_cheatpoints", level.intel_counter);
+  setDvar("ui_level_player_cheatpoints", level.intel_counter);
   level.table_origins = create_array_of_origins_from_table();
   initialize_intel();
 
@@ -40,7 +40,7 @@ remove_intel_item() {
   self.item notsolid();
   common_scripts\utility::trigger_off();
   level.intel_counter++;
-  setdvar("ui_level_player_cheatpoints", level.intel_counter);
+  setDvar("ui_level_player_cheatpoints", level.intel_counter);
   self notify("end_trigger_thread");
 }
 
@@ -151,16 +151,16 @@ upload_hold() {
     self stoploopsound("intelligence_pickup_loop");
     self waittill("trigger", var_0);
     self playLoopSound("intelligence_pickup_loop");
-    setdvar("ui_securing", "intel");
-    setdvar("ui_securing_progress", 0.0);
+    setDvar("ui_securing", "intel");
+    setDvar("ui_securing_progress", 0.0);
     thread progress_bar();
     hold_count_check();
   }
 
   self notify("hold_complete");
   self stoploopsound("intelligence_pickup_loop");
-  setdvar("ui_securing_progress", 1.0);
-  setdvar("ui_securing", "");
+  setDvar("ui_securing_progress", 1.0);
+  setDvar("ui_securing", "");
 }
 
 hold_count_check() {
@@ -170,13 +170,13 @@ hold_count_check() {
     if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player))
       level.player.hold_count++;
     else {
-      setdvar("ui_securing", "");
+      setDvar("ui_securing", "");
       self stoploopsound("intelligence_pickup_loop");
       self notify("stopped_pressing");
     }
 
     if(level.player.hold_count >= 30) {
-      setdvar("ui_securing", "");
+      setDvar("ui_securing", "");
       self notify("stopped_pressing");
       self stoploopsound("intelligence_pickup_loop");
     }
@@ -191,7 +191,7 @@ progress_bar() {
   var_1 = 8;
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
-    setdvar("ui_securing_progress", getdvarfloat("ui_securing_progress") + 1 / var_0);
+    setDvar("ui_securing_progress", getdvarfloat("ui_securing_progress") + 1 / var_0);
     common_scripts\utility::waitframe();
   }
 }

@@ -53,7 +53,6 @@ setupMiniMap(material) {
   }
   setMiniMap(material, northwest[0], northwest[1], southeast[0], southeast[1]);
 }
-
 vecscale(vec, scalar) {
   return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
 }

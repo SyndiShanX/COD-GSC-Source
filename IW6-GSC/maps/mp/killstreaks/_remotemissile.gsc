@@ -222,7 +222,6 @@ missileEyes(player, rocket) {
 
     if(GetDvarInt("camera_thirdPerson"))
       player SetThirdPersonDOF(true);
-
   }
 
   player SetClientOmnvar("ui_predator_missile", 0);

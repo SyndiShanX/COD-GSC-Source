@@ -1024,7 +1024,7 @@ wait_until_player_use_cortex() {
   while(!var_0) {
     self waittill("trigger", var_1);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(common_scripts\utility::flag("cortex_carryable")) {
@@ -1073,7 +1073,7 @@ wait_until_player_repairs_console() {
   while(!var_0) {
     self waittill("trigger", var_1);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(useholdthink(var_1)) {
@@ -1110,7 +1110,7 @@ useholdthink(var_0) {
 
   var_0.repair_spot.done_with_use_bar = 0;
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     var_0 thread personalusebar(self);
 
   var_0.hasprogressbar = 1;

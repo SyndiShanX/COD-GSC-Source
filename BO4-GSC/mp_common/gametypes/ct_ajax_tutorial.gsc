@@ -1228,7 +1228,7 @@ function_e9b5de80() {
       level thread ct_vo::function_831e0584(array("vox_tvoi_tutor_ajax_final_event_3_start_0"), 1);
     }
 
-    setdvar(#"hash_3e06b14c41136e95", 0);
+    setDvar(#"hash_3e06b14c41136e95", 0);
 
     do {
       waitframe(1);

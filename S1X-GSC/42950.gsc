@@ -4,14 +4,14 @@
 **************************************/
 
 init() {
-  setdvar("missileRemoteSteerPitchRange", "60 87");
+  setDvar("missileRemoteSteerPitchRange", "60 87");
   level._missile_strike_setting = [];
   level._missile_strike_setting["Particle_FX"] = spawnStruct();
   level._missile_strike_setting["Particle_FX"].gas = loadfx("vfx/unique/vfx_killstreak_missilestrike_dna");
   level._missile_strike_setting["Particle_FX"].gasfriendly = loadfx("vfx/unique/vfx_killstreak_missilestrike_dna_friendly");
   level._missile_strike_setting["Audio"] = spawnStruct();
   level._missile_strike_setting["Launch_Value"] = spawnStruct();
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   if(var_0 == "mp_suburbia") {
     level._missile_strike_setting["Launch_Value"].vert = 7000;
@@ -1157,7 +1157,7 @@ targeting_hud_think(var_0, var_1) {
         break;
       }
 
-      if((isplayer(var_22) || isagent(var_22)) && player_is_valid_target(var_22)) {
+      if((isPlayer(var_22) || isagent(var_22)) && player_is_valid_target(var_22)) {
         var_10.x = var_22.origin[0];
         var_10.y = var_22.origin[1];
         var_10.z = var_22.origin[2];

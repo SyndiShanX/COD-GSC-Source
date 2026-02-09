@@ -126,7 +126,7 @@ playerGetNodeLookingAt(type) {
   trace = bulletTrace(start, end, false, self, true, false, false, false, false);
   self.lastNodeLookingAtTrace = trace;
   lookingAway = (trace["fraction"] == 1);
-  /# debugPlacementLine( start, start + ( playerDir * ORBITAL_DIST_FROM_PLAYER * trace[ "fraction" ] ), ( 0, 1, 0 ), ( 1, 0, 0 ), lookingAway );
+  debugPlacementLine(start, start + (playerDir * ORBITAL_DIST_FROM_PLAYER * trace["fraction"]), (0, 1, 0), (1, 0, 0), lookingAway);
   if(lookingAway) {
     return playerGetNearestNode(undefined, type);
   }
@@ -140,7 +140,7 @@ playerGetNodeLookingAt(type) {
 
   normal = trace["normal"];
   isGroundFlat = normal[2] > 0.8;
-  /# debugPlacementLine( position, position + ( normal * 20 ), ( 0, 1, 0 ), ( 1, 0, 0 ), !isGroundFlat );
+  debugPlacementLine(position, position + (normal * 20), (0, 1, 0), (1, 0, 0), !isGroundFlat);
   if(!isGroundFlat) {
     return playerGetNearestNode(position, type);
   }
@@ -153,7 +153,7 @@ playerGetNodeLookingAt(type) {
         break;
       }
     }
-    /# debugPlacementSphere( position, 5.0, ( 0, 1, 0 ), ( 1, 0, 0 ), pointInVolume );
+    debugPlacementSphere(position, 5.0, (0, 1, 0), (1, 0, 0), pointInVolume);
     if(pointInVolume) {
       return playerGetNearestNode(position, type);
     }
@@ -222,16 +222,16 @@ groundPositionOffEdge(position, type) {
 _nodeFindNewRemoteMissileOrg(node, remoteMissileSpawns, type) {
   ent = nodeFindRemoteMissleEnt(node, remoteMissileSpawns, type);
   if(isDefined(ent)) {
-    /# debugNodeFindNewRemoteMissileEnt( node, ent.script_noteworthy );
+    debugNodeFindNewRemoteMissileEnt(node, ent.script_noteworthy);
     return nodeGetRemoteMissleEntOrg(node, remoteMissileSpawns);
   }
 
   org = nodeTestFireFromAbove(node, type);
   if(isDefined(org)) {
-    /# debugNodeFindNewRemoteMissileEnt( node, "up" );
+    debugNodeFindNewRemoteMissileEnt(node, "up");
     return nodeGetRemoteMissileOrgFromAbove(node);
   } else {
-    /# debugNodeFindNewRemoteMissileEnt( node, "none" );
+    debugNodeFindNewRemoteMissileEnt(node, "none");
   }
 }
 
@@ -275,7 +275,7 @@ nodeTestFireFromAbove(node, type) {
   org = getStartPositionAbove(node);
 
   passed = remoteMissileEntTraceToOriginPassedWrapper(org, node.origin, type);
-  /# debugPlacementLine( org, node.origin, ( 0, 1, 0 ), ( 1, 0, 0 ), !passed );
+  debugPlacementLine(org, node.origin, (0, 1, 0), (1, 0, 0), !passed);
   if(passed) {
     node.bestMissileSpawnAbove = org;
     return org;
@@ -305,7 +305,7 @@ nodeFindRemoteMissleEnt(node, remoteMissileSpawns, type) {
   remoteMissileSpawns = SortByDistance(remoteMissileSpawns, node.origin);
   foreach(ent in remoteMissileSpawns) {
     passed = remoteMissileEntTraceToOriginPassedWrapper(ent.origin, node.origin, type);
-    /# debugPlacementLine( ent.origin, node.origin, ( 0, 1, 0 ), ( 1, 0, 0 ), !passed );
+    debugPlacementLine(ent.origin, node.origin, (0, 1, 0), (1, 0, 0), !passed);
     if(passed) {
       node.bestMissileSpawn = ent;
       return ent;
@@ -409,7 +409,7 @@ playerGetNearestNode(point, type) {
   nearestNodeValid = isDefined(nearestNode);
   if(nearestNodeValid) {
     nearestNodeValid = nodeCanHitGround(nearestNode, type) && carepackageTrace(nearestNode.origin, self, type);
-    /#debugPlacementBox( nearestNode.origin + ( 0, 0, 20 ), ( 0, 1, 0 ), ( 1, 0, 0 ), !nearestNodeValid );
+    debugPlacementBox(nearestNode.origin + (0, 0, 20), (0, 1, 0), (1, 0, 0), !nearestNodeValid);
   }
 
   if(nearestNodeValid) {
@@ -486,7 +486,7 @@ playerFindNodeInFrontInternal(point, minDistSearch, maxDistSearch, type, result)
       trace = bulletTrace(start, end, false, self);
 
       nextNodeValid = (trace["fraction"] == 1) && carepackageTrace(nextNode.origin, self, type);
-      /#debugPlacementBox( nextNode.origin + ( 0, 0, 20 ), ( 0, 1, 0 ), ( 1, 0, 0 ), !nextNodeValid );
+      debugPlacementBox(nextNode.origin + (0, 0, 20), (0, 1, 0), (1, 0, 0), !nextNodeValid);
       if(nextNodeValid) {
         return nextNode;
       }
@@ -536,7 +536,7 @@ checkNodeStart(startNode, player, type) {
         nextNode.nodeChecked = true;
         nodeContainer.nodesToCheck["" + nextNode GetNodeNumber()] = undefined;
         nodeContainer.nodesChecked["" + nextNode GetNodeNumber()] = nextNode;
-        /# drawBadPathDebug( nextNode );
+        drawBadPathDebug(nextNode);
         nextLinkDistance = nextNode.linkDistance + 1;
 
         if(nextLinkDistance <= ORBITAL_FIND_NODE_MAX_LINKS) {
@@ -545,14 +545,15 @@ checkNodeStart(startNode, player, type) {
         }
       } else {
         cleanupNodeFields(nodeContainer);
-        /# drawParentPathDebug( nextNode ); /
+        drawParentPathDebug(nextNode);
+        /
         # removeNodeParents(nodeContainer);
         return nextNode;
       }
     } else {
       cleanupNodeFields(nodeContainer);
 
-      /# removeNodeParents( nodeContainer );
+      removeNodeParents(nodeContainer);
       return;
     }
 
@@ -613,11 +614,11 @@ addNodesToBeChecked(nodeContainer, linkDistance, parentNode, maxDistSq, player, 
         if(!isDefined(node.linkDistance)) {
           node.linkDistance = linkDistance;
           nodeContainer.nodesToCheck["" + node GetNodeNumber()] = node;
-          /# addNodeParent( node, parentNode );
+          addNodeParent(node, parentNode);
         } else {
           if(node.linkDistance > linkDistance) {
             node.linkDistance = linkDistance;
-            /# addNodeParent( node, parentNode );
+            addNodeParent(node, parentNode);
           }
         }
       }
@@ -702,18 +703,18 @@ nodeSetRemoteMissileNameWrapper(origin, name) {
 
     NodeSetRemoteMissileName(node, name);
   } else {
-    /# PrintLn( "Error: nodeSetRemoteMissileNameWrapper() could not find a node at origin: " + origin );
+    PrintLn("Error: nodeSetRemoteMissileNameWrapper() could not find a node at origin: " + origin);
   }
 }
 
 addNodeParent(node, parent) {
-  if(GetDvar("scr_orbital_path_debug", "0") != "0") {
+  if(getDvar("scr_orbital_path_debug", "0") != "0") {
     node.parent = parent;
   }
 }
 
 removeNodeParents(nodeContainer) {
-  if(GetDvar("scr_orbital_path_debug", "0") != "0") {
+  if(getDvar("scr_orbital_path_debug", "0") != "0") {
     foreach(node in nodeContainer.nodesToCheck) {
       node.parent = undefined;
     }
@@ -724,7 +725,7 @@ removeNodeParents(nodeContainer) {
 }
 
 drawBadPathDebug(node) {
-  if(GetDvar("scr_orbital_path_debug", "0") != "0") {
+  if(getDvar("scr_orbital_path_debug", "0") != "0") {
     OFFSET = (0, 0, 2);
     if(isDefined(node.parent)) {
       Line(node.origin + OFFSET, node.parent.origin + OFFSET, (1, 0, 0), 1, 0, GetDvarInt("scr_orbital_path_debug_frames", 1000));
@@ -734,7 +735,7 @@ drawBadPathDebug(node) {
 }
 
 drawParentPathDebug(node) {
-  if(GetDvar("scr_orbital_path_debug", "0") != "0") {
+  if(getDvar("scr_orbital_path_debug", "0") != "0") {
     OFFSET = (0, 0, 10);
     numLinks = 0;
     previousNode = node;
@@ -759,7 +760,7 @@ debugBestNode(node) {
     return;
   }
 
-  if(GetDvar("scr_goliath_debug_placement", "0") != "0") {
+  if(getDvar("scr_goliath_debug_placement", "0") != "0") {
     debugPlacementBox(node.origin + (0, 0, 20), (0, 1, 0));
     nextNode = node.parentNode;
     prevNode = node;
@@ -780,7 +781,7 @@ debugPlacementLine(pos1, pos2, color1, color2, colorCondition) {
     colorCondition = false;
   }
 
-  if(GetDvar("scr_goliath_debug_placement", "0") != "0") {
+  if(getDvar("scr_goliath_debug_placement", "0") != "0") {
     color = color1;
     if(colorCondition) {
       color = color2;
@@ -794,7 +795,7 @@ debugPlacementSphere(pos, radius, color1, color2, colorCondition) {
     colorCondition = false;
   }
 
-  if(GetDvar("scr_goliath_debug_placement", "0") != "0") {
+  if(getDvar("scr_goliath_debug_placement", "0") != "0") {
     color = color1;
     if(colorCondition) {
       color = color2;
@@ -808,7 +809,7 @@ debugPlacementBox(pos, color1, color2, colorCondition) {
     colorCondition = false;
   }
 
-  if(GetDvar("scr_goliath_debug_placement", "0") != "0") {
+  if(getDvar("scr_goliath_debug_placement", "0") != "0") {
     color = color1;
     if(colorCondition) {
       color = color2;

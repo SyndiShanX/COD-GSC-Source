@@ -19,7 +19,7 @@ function autoexec __init__sytem__() {
 }
 
 function __init__() {
-  setdvar("debug_crash_type", -1);
+  setDvar("debug_crash_type", -1);
 }
 
 function main() {

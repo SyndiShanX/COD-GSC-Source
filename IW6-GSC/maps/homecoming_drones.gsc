@@ -138,7 +138,7 @@ drone_move_custom(var_0) {
         var_18 = var_1[var_1.size - 1]["origin"] - (0, 0, 100);
         var_19 = physicstrace(var_17, var_18);
 
-        if(getdvar("debug_drones") == "1") {
+        if(getDvar("debug_drones") == "1") {
           thread common_scripts\utility::draw_line_for_time(var_17, var_18, 1, 1, 1, var_6);
           thread common_scripts\utility::draw_line_for_time(self.origin, var_19, 0, 0, 1, var_6);
         }
@@ -201,7 +201,7 @@ drone_move_custom(var_0) {
     if(!var_5)
       self.drone_look_ahead_point = var_21;
 
-    if(getdvar("debug_drones") == "1") {
+    if(getDvar("debug_drones") == "1") {
       thread common_scripts\utility::draw_line_for_time(var_17, var_18, 1, 1, 1, var_6);
       thread maps\_drone::draw_point(var_21, 1, 0, 0, 16, var_6);
     }
@@ -213,7 +213,7 @@ drone_move_custom(var_0) {
     var_20 = var_24 * var_23;
     var_20 = var_20 + self.origin;
 
-    if(getdvar("debug_drones") == "1")
+    if(getDvar("debug_drones") == "1")
       thread common_scripts\utility::draw_line_for_time(self.origin, var_20, 0, 0, 1, var_6);
 
     self moveto(var_20, var_6);

@@ -41,13 +41,12 @@ init() {
     sound_ent playSound(datalogs[i], "sounddone");
     sound_ent playLoopSound("vox_radio_egg_snapshot", 1);
     wait(datalogs_delay[datalogs[i]]);
-    sound_ent stopLoopSound(1);
+    sound_ent stoploopsound(1);
     i++;
     datalog_locs = array_remove(datalog_locs, log_struct);
     datalog_locs = array_randomize(datalog_locs);
   }
 }
-
 log_qualifier() {
   if(isDefined(self._has_log)) {
     return true;

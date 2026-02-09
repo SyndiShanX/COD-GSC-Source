@@ -6,7 +6,6 @@
 main() {
   if(!getdvarint("r_reflectionProbeGenerate")) {
     _id_4CBA::main();
-
   }
   level._effect["dust_wind_fast"] = loadfx("dust/dust_wind_fast_paper");
   level._effect["dust_wind_fast_no_paper"] = loadfx("dust/dust_wind_fast_no_paper");

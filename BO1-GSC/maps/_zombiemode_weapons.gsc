@@ -20,11 +20,9 @@ init() {
   PrecacheShader("specialty_firesale_zombies");
   level._zombiemode_check_firesale_loc_valid_func = ::default_check_firesale_loc_valid_func;
 }
-
 default_check_firesale_loc_valid_func() {
   return true;
 }
-
 add_zombie_weapon(weapon_name, upgrade_name, hint, cost, weaponVO, weaponVOresp, ammo_cost) {
   if(isDefined(level.zombie_include_weapons) && !isDefined(level.zombie_include_weapons[weapon_name])) {
     return;
@@ -57,11 +55,9 @@ add_zombie_weapon(weapon_name, upgrade_name, hint, cost, weaponVO, weaponVOresp,
   struct.ammo_cost = ammo_cost;
   level.zombie_weapons[weapon_name] = struct;
 }
-
 default_weighting_func() {
   return 1;
 }
-
 default_tesla_weighting_func() {
   num_to_add = 1;
   if(isDefined(level.pulls_since_last_tesla_gun)) {
@@ -78,7 +74,6 @@ default_tesla_weighting_func() {
   }
   return num_to_add;
 }
-
 default_1st_move_weighting_func() {
   if(level.chest_moves > 0) {
     num_to_add = 1;
@@ -87,7 +82,6 @@ default_1st_move_weighting_func() {
     return 0;
   }
 }
-
 default_upgrade_weapon_weighting_func() {
   if(level.chest_moves > 1) {
     return 1;
@@ -95,7 +89,6 @@ default_upgrade_weapon_weighting_func() {
     return 0;
   }
 }
-
 default_cymbal_monkey_weighting_func() {
   players = get_players();
   count = 0;
@@ -114,14 +107,12 @@ default_cymbal_monkey_weighting_func() {
     }
   }
 }
-
 is_weapon_included(weapon_name) {
   if(!isDefined(level.zombie_weapons)) {
     return false;
   }
   return isDefined(level.zombie_weapons[weapon_name]);
 }
-
 include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
   if(!isDefined(level.zombie_include_weapons)) {
     level.zombie_include_weapons = [];
@@ -141,7 +132,6 @@ include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
     level.weapon_weighting_funcs[weapon_name] = weighting_func;
   }
 }
-
 init_weapons() {
   add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", &"ZOMBIE_WEAPON_M1911", 50, "pistol", "", undefined);
   add_zombie_weapon("python_zm", "python_upgraded_zm", &"ZOMBIE_WEAPON_PYTHON", 2200, "pistol", "", undefined);
@@ -190,7 +180,6 @@ init_weapons() {
   }
   Precachemodel("zombie_teddybear");
 }
-
 add_limited_tesla_gun() {
   weapon_spawns = getEntArray("weapon_upgrade", "targetname");
   for(i = 0; i < weapon_spawns.size; i++) {
@@ -202,14 +191,12 @@ add_limited_tesla_gun() {
     }
   }
 }
-
 add_limited_weapon(weapon_name, amount) {
   if(!isDefined(level.limited_weapons)) {
     level.limited_weapons = [];
   }
   level.limited_weapons[weapon_name] = amount;
 }
-
 init_pay_turret() {
   pay_turrets = [];
   pay_turrets = getEntArray("pay_turret", "targetname");
@@ -224,7 +211,6 @@ init_pay_turret() {
     pay_turrets[i] thread pay_turret_think(cost);
   }
 }
-
 init_weapon_upgrade() {
   weapon_spawns = [];
   weapon_spawns = getEntArray("weapon_upgrade", "targetname");
@@ -235,12 +221,11 @@ init_weapon_upgrade() {
     weapon_spawns[i] setCursorHint("HINT_NOICON");
     weapon_spawns[i] UseTriggerRequireLookAt();
     weapon_spawns[i] thread weapon_spawn_think();
-    model = getEnt(weapon_spawns[i].target, "targetname");
+    model = getent(weapon_spawns[i].target, "targetname");
     model useweaponhidetags(weapon_spawns[i].zombie_weapon_upgrade);
     model hide();
   }
 }
-
 init_weapon_toggle() {
   if(!isDefined(level.magic_box_weapon_toggle_init_callback)) {
     return;
@@ -296,7 +281,6 @@ init_weapon_toggle() {
   }
   level thread[[level.magic_box_weapon_toggle_init_callback]]();
 }
-
 get_weapon_toggle(weapon_name) {
   if(!isDefined(level.zombie_weapon_toggles)) {
     return undefined;
@@ -312,11 +296,9 @@ get_weapon_toggle(weapon_name) {
   }
   return undefined;
 }
-
 is_weapon_toggle(weapon_name) {
   return isDefined(get_weapon_toggle(weapon_name));
 }
-
 disable_weapon_toggle(weapon_name) {
   toggle = get_weapon_toggle(weapon_name);
   if(!isDefined(toggle)) {
@@ -331,7 +313,6 @@ disable_weapon_toggle(weapon_name) {
   toggle.weapon_model hide();
   toggle.trigger SetHintString(level.zombie_weapon_toggle_disabled_hint);
 }
-
 enable_weapon_toggle(weapon_name) {
   toggle = get_weapon_toggle(weapon_name);
   if(!isDefined(toggle)) {
@@ -342,7 +323,6 @@ enable_weapon_toggle(weapon_name) {
   toggle.weapon_model useweaponhidetags(weapon_name);
   deactivate_weapon_toggle(weapon_name);
 }
-
 activate_weapon_toggle(weapon_name, trig_for_vox) {
   if(level.zombie_weapon_toggle_active_count >= level.zombie_weapon_toggle_max_active_count) {
     if(isDefined(trig_for_vox)) {
@@ -362,7 +342,6 @@ activate_weapon_toggle(weapon_name, trig_for_vox) {
   toggle.light setModel(level.zombie_weapon_toggle_active_light);
   toggle.trigger SetHintString(level.zombie_weapon_toggle_deactivate_hint);
 }
-
 deactivate_weapon_toggle(weapon_name, trig_for_vox) {
   toggle = get_weapon_toggle(weapon_name);
   if(!isDefined(toggle)) {
@@ -378,7 +357,6 @@ deactivate_weapon_toggle(weapon_name, trig_for_vox) {
   toggle.light setModel(level.zombie_weapon_toggle_inactive_light);
   toggle.trigger SetHintString(level.zombie_weapon_toggle_activate_hint);
 }
-
 acquire_weapon_toggle(weapon_name, player) {
   toggle = get_weapon_toggle(weapon_name);
   if(!isDefined(toggle)) {
@@ -392,14 +370,12 @@ acquire_weapon_toggle(weapon_name, player) {
   toggle.trigger SetHintString(level.zombie_weapon_toggle_acquired_hint);
   toggle thread unacquire_weapon_toggle_on_death_or_disconnect_thread(player);
 }
-
 unacquire_weapon_toggle_on_death_or_disconnect_thread(player) {
   self notify("end_unacquire_weapon_thread");
   self endon("end_unacquire_weapon_thread");
   player waittill_any("spawned_spectator", "disconnect");
   unacquire_weapon_toggle(self.weapon_name);
 }
-
 unacquire_weapon_toggle(weapon_name) {
   toggle = get_weapon_toggle(weapon_name);
   if(!isDefined(toggle)) {
@@ -413,7 +389,6 @@ unacquire_weapon_toggle(weapon_name) {
   toggle.trigger SetHintString(level.zombie_weapon_toggle_deactivate_hint);
   toggle notify("end_unacquire_weapon_thread");
 }
-
 weapon_toggle_think() {
   for(;;) {
     self.trigger waittill("trigger", player);
@@ -430,7 +405,6 @@ weapon_toggle_think() {
     }
   }
 }
-
 init_weapon_cabinet() {
   weapon_cabs = getEntArray("weapon_cabinet_use", "targetname");
   for(i = 0; i < weapon_cabs.size; i++) {
@@ -439,27 +413,22 @@ init_weapon_cabinet() {
     weapon_cabs[i] UseTriggerRequireLookAt();
   }
 }
-
 get_weapon_hint(weapon_name) {
   AssertEx(isDefined(level.zombie_weapons[weapon_name]), weapon_name + " was not included or is not part of the zombie weapon list.");
   return level.zombie_weapons[weapon_name].hint;
 }
-
 get_weapon_cost(weapon_name) {
   AssertEx(isDefined(level.zombie_weapons[weapon_name]), weapon_name + " was not included or is not part of the zombie weapon list.");
   return level.zombie_weapons[weapon_name].cost;
 }
-
 get_ammo_cost(weapon_name) {
   AssertEx(isDefined(level.zombie_weapons[weapon_name]), weapon_name + " was not included or is not part of the zombie weapon list.");
   return level.zombie_weapons[weapon_name].ammo_cost;
 }
-
 get_is_in_box(weapon_name) {
   AssertEx(isDefined(level.zombie_weapons[weapon_name]), weapon_name + " was not included or is not part of the zombie weapon list.");
   return level.zombie_weapons[weapon_name].is_in_box;
 }
-
 is_weapon_upgraded(weaponname) {
   if(!isDefined(weaponname) || weaponname == "") {
     return false;
@@ -467,24 +436,23 @@ is_weapon_upgraded(weaponname) {
   weaponname = ToLower(weaponname);
   ziw_keys = GetArrayKeys(level.zombie_weapons);
   for(i = 0; i < level.zombie_weapons.size; i++) {
-    if(isDefined(level.zombie_weapons[ziw_keys[i]].upgrade_name) && level.zombie_weapons[ziw_keys[i]].upgrade_name == weaponname) {
+    if(isDefined(level.zombie_weapons[ziw_keys[i]].upgrade_name) &&
+      level.zombie_weapons[ziw_keys[i]].upgrade_name == weaponname) {
       return true;
     }
   }
   return false;
 }
-
 has_upgrade(weaponname) {
   has_upgrade = false;
   if(isDefined(level.zombie_weapons[weaponname]) && isDefined(level.zombie_weapons[weaponname].upgrade_name)) {
-    has_upgrade = self hasWeapon(level.zombie_weapons[weaponname].upgrade_name);
+    has_upgrade = self HasWeapon(level.zombie_weapons[weaponname].upgrade_name);
   }
   if(!has_upgrade && "knife_ballistic_zm" == weaponname) {
     has_upgrade = has_upgrade("knife_ballistic_bowie_zm") || has_upgrade("knife_ballistic_sickle_zm");
   }
   return has_upgrade;
 }
-
 has_weapon_or_upgrade(weaponname) {
   upgradedweaponname = weaponname;
   if(isDefined(level.zombie_weapons[weaponname]) && isDefined(level.zombie_weapons[weaponname].upgrade_name)) {
@@ -492,14 +460,13 @@ has_weapon_or_upgrade(weaponname) {
   }
   has_weapon = false;
   if(isDefined(level.zombie_weapons[weaponname])) {
-    has_weapon = self hasWeapon(weaponname) || self has_upgrade(weaponname);
+    has_weapon = self HasWeapon(weaponname) || self has_upgrade(weaponname);
   }
   if(!has_weapon && "knife_ballistic_zm" == weaponname) {
     has_weapon = has_weapon_or_upgrade("knife_ballistic_bowie_zm") || has_weapon_or_upgrade("knife_ballistic_sickle_zm");
   }
   return has_weapon;
 }
-
 treasure_chest_init() {
   if(level.mutators["mutator_noMagicBox"]) {
     chests = getEntArray("treasure_chest_use", "targetname");
@@ -535,7 +502,6 @@ treasure_chest_init() {
   }
   array_thread(level.chests, ::treasure_chest_think);
 }
-
 init_starting_chest_location() {
   level.chest_index = 0;
   start_chest_found = false;
@@ -565,7 +531,6 @@ init_starting_chest_location() {
   }
   level.chests[level.chest_index] thread[[level.pandora_show_func]]();
 }
-
 hide_rubble() {
   rubble = getEntArray(self.script_noteworthy + "_rubble", "script_noteworthy");
   if(isDefined(rubble)) {
@@ -576,7 +541,6 @@ hide_rubble() {
     println("^3Warning: No rubble found for magic box");
   }
 }
-
 show_rubble() {
   if(isDefined(self.chest_rubble)) {
     for(x = 0; x < self.chest_rubble.size; x++) {
@@ -586,24 +550,21 @@ show_rubble() {
     println("^3Warning: No rubble found for magic box");
   }
 }
-
 set_treasure_chest_cost(cost) {
   level.zombie_treasure_chest_cost = cost;
 }
-
 get_chest_pieces() {
-  self.chest_lid = getEnt(self.target, "targetname");
-  self.chest_origin = getEnt(self.chest_lid.target, "targetname");
-  self.chest_box = getEnt(self.chest_origin.target, "targetname");
+  self.chest_lid = GetEnt(self.target, "targetname");
+  self.chest_origin = GetEnt(self.chest_lid.target, "targetname");
+  self.chest_box = GetEnt(self.chest_origin.target, "targetname");
   self.chest_rubble = [];
   rubble = getEntArray(self.script_noteworthy + "_rubble", "script_noteworthy");
   for(i = 0; i < rubble.size; i++) {
-    if(distanceSquared(self.origin, rubble[i].origin) < 10000) {
+    if(DistanceSquared(self.origin, rubble[i].origin) < 10000) {
       self.chest_rubble[self.chest_rubble.size] = rubble[i];
     }
   }
 }
-
 play_crazi_sound() {
   if(is_true(level.player_4_vox_override)) {
     self playlocalsound("zmb_laugh_rich");
@@ -611,7 +572,6 @@ play_crazi_sound() {
     self playlocalsound("zmb_laugh_child");
   }
 }
-
 show_chest() {
   self thread[[level.pandora_show_func]]();
   self enable_trigger();
@@ -624,7 +584,6 @@ show_chest() {
     self[[self.box_hacks["summon_box"]]](false);
   }
 }
-
 hide_chest() {
   self disable_trigger();
   self.chest_lid hide();
@@ -637,14 +596,12 @@ hide_chest() {
     self[[self.box_hacks["summon_box"]]](true);
   }
 }
-
 default_pandora_fx_func() {
   self.pandora_light = spawn("script_model", self.chest_origin.origin);
   self.pandora_light.angles = self.chest_origin.angles + (-90, 0, 0);
   self.pandora_light setModel("tag_origin");
   playFXOnTag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
 }
-
 default_pandora_show_func(anchor, anchorTarget, pieces) {
   if(!isDefined(self.pandora_light)) {
     if(!isDefined(level.pandora_fx_func)) {
@@ -656,7 +613,6 @@ default_pandora_show_func(anchor, anchorTarget, pieces) {
   wait(0.5);
   playFX(level._effect["lght_marker_flare"], self.pandora_light.origin);
 }
-
 treasure_chest_think() {
   self endon("kill_chest_think");
   if(isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"]) && level.zombie_vars["zombie_powerup_fire_sale_on"] && self[[level._zombiemode_check_firesale_loc_valid_func]]()) {
@@ -798,7 +754,6 @@ treasure_chest_think() {
   self notify("chest_accessed");
   self thread treasure_chest_think();
 }
-
 decide_hide_show_chest_hint(endon_notify) {
   if(isDefined(endon_notify)) {
     self endon(endon_notify);
@@ -815,7 +770,6 @@ decide_hide_show_chest_hint(endon_notify) {
     wait(0.1);
   }
 }
-
 weapon_show_hint_choke() {
   level._weapon_show_hint_choke = 0;
   while(1) {
@@ -823,7 +777,6 @@ weapon_show_hint_choke() {
     level._weapon_show_hint_choke = 0;
   }
 }
-
 decide_hide_show_hint(endon_notify) {
   if(isDefined(endon_notify)) {
     self endon(endon_notify);
@@ -863,7 +816,6 @@ decide_hide_show_hint(endon_notify) {
     level._weapon_show_hint_choke++;
   }
 }
-
 can_buy_weapon() {
   if(isDefined(self.is_drinking) && self is_drinking()) {
     return false;
@@ -883,11 +835,11 @@ can_buy_weapon() {
   }
   return true;
 }
-
 default_box_move_logic() {
   index = -1;
   for(i = 0; i < level.chests.size; i++) {
-    if(IsSubStr(level.chests[i].script_noteworthy, ("move" + (level.chest_moves + 1))) && i != level.chest_index) {
+    if(IsSubStr(level.chests[i].script_noteworthy, ("move" + (level.chest_moves + 1))) &&
+      i != level.chest_index) {
       index = i;
       break;
     }
@@ -906,7 +858,6 @@ default_box_move_logic() {
     }
   }
 }
-
 treasure_chest_move(player_vox) {
   level waittill("weapon_fly_away_start");
   players = get_players();
@@ -934,7 +885,7 @@ treasure_chest_move(player_vox) {
   } else {
     playsoundatposition("zmb_vox_ann_magicbox", soundpoint.origin);
   }
-  anchor moveTo(anchor.origin + (0, 0, 50), 5);
+  anchor moveto(anchor.origin + (0, 0, 50), 5);
   if(isDefined(level.custom_vibrate_func)) {
     [[level.custom_vibrate_func]](anchor);
   } else {
@@ -988,7 +939,6 @@ treasure_chest_move(player_vox) {
   flag_clear("moving_chest_now");
   self.chest_origin.chest_moving = false;
 }
-
 fire_sale_fix() {
   if(!isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"])) {
     return;
@@ -1013,10 +963,10 @@ fire_sale_fix() {
     self set_hint_string(self, "default_treasure_chest_" + self.zombie_cost);
   }
 }
-
 check_for_desirable_chest_location() {
-  if(!isDefined(level.desirable_chest_location))
+  if(!isDefined(level.desirable_chest_location)) {
     return level.chest_index;
+  }
   if(level.chests[level.chest_index].script_noteworthy == level.desirable_chest_location) {
     level.desirable_chest_location = undefined;
     return level.chest_index;
@@ -1030,7 +980,6 @@ check_for_desirable_chest_location() {
   level.desirable_chest_location = undefined;
   return level.chest_index;
 }
-
 rotateroll_box() {
   angles = 40;
   angles2 = 0;
@@ -1042,7 +991,6 @@ rotateroll_box() {
     wait(0.7);
   }
 }
-
 verify_chest_is_open() {
   for(i = 0; i < level.open_chest_location.size; i++) {
     if(isDefined(level.open_chest_location[i])) {
@@ -1054,7 +1002,6 @@ verify_chest_is_open() {
   }
   level.verify_chest = false;
 }
-
 treasure_chest_timeout() {
   self endon("user_grabbed_weapon");
   self.chest_origin endon("box_hacked_respin");
@@ -1062,7 +1009,6 @@ treasure_chest_timeout() {
   wait(12);
   self notify("trigger", level);
 }
-
 treasure_chest_lid_open() {
   openRoll = 105;
   openTime = 0.5;
@@ -1070,7 +1016,6 @@ treasure_chest_lid_open() {
   play_sound_at_pos("open_chest", self.origin);
   play_sound_at_pos("music_chest", self.origin);
 }
-
 treasure_chest_lid_close(timedOut) {
   closeRoll = -105;
   closeTime = 0.5;
@@ -1078,12 +1023,10 @@ treasure_chest_lid_close(timedOut) {
   play_sound_at_pos("close_chest", self.origin);
   self notify("lid_closed");
 }
-
 treasure_chest_ChooseRandomWeapon(player) {
   keys = GetArrayKeys(level.zombie_weapons);
-  return keys[randomInt(keys.size)];
+  return keys[RandomInt(keys.size)];
 }
-
 treasure_chest_ChooseWeightedRandomWeapon(player) {
   keys = GetArrayKeys(level.zombie_weapons);
   toggle_weapons_in_use = 0;
@@ -1154,9 +1097,8 @@ treasure_chest_ChooseWeightedRandomWeapon(player) {
     }
   }
   filtered = array_randomize(filtered);
-  return filtered[randomInt(filtered.size)];
+  return filtered[RandomInt(filtered.size)];
 }
-
 weapon_is_dual_wield(name) {
   switch (name) {
     case "cz75dw_zm":
@@ -1171,7 +1113,6 @@ weapon_is_dual_wield(name) {
       return false;
   }
 }
-
 get_left_hand_weapon_model_name(name) {
   switch (name) {
     case "microwavegundw_zm":
@@ -1182,7 +1123,6 @@ get_left_hand_weapon_model_name(name) {
       return GetWeaponModel(name);
   }
 }
-
 clean_up_hacked_box() {
   self waittill("box_hacked_respin");
   self endon("box_spin_done");
@@ -1195,7 +1135,6 @@ clean_up_hacked_box() {
     self.weapon_model_dw = undefined;
   }
 }
-
 treasure_chest_weapon_spawn(chest, player, respin) {
   self endon("box_hacked_respin");
   self thread clean_up_hacked_box();
@@ -1347,12 +1286,10 @@ treasure_chest_weapon_spawn(chest, player, respin) {
   self.weapon_string = undefined;
   self notify("box_spin_done");
 }
-
 chest_get_min_usage() {
   min_usage = 4;
   return (min_usage);
 }
-
 chest_get_max_usage() {
   max_usage = 6;
   players = get_players();
@@ -1379,17 +1316,15 @@ chest_get_max_usage() {
   }
   return (max_usage);
 }
-
 timer_til_despawn(floatHeight) {
   self endon("kill_weapon_movement");
   putBackTime = 12;
-  self moveTo(self.origin - (0, 0, floatHeight), putBackTime, (putBackTime * 0.5));
+  self MoveTo(self.origin - (0, 0, floatHeight), putBackTime, (putBackTime * 0.5));
   wait(putBackTime);
   if(isDefined(self)) {
     self Delete();
   }
 }
-
 treasure_chest_glowfx() {
   fxObj = spawn("script_model", self.origin + (0, 0, 0));
   fxobj setModel("tag_origin");
@@ -1398,13 +1333,12 @@ treasure_chest_glowfx() {
   self waittill_any("weapon_grabbed", "box_moving");
   fxobj delete();
 }
-
 treasure_chest_give_weapon(weapon_string) {
   self.last_box_weapon = GetTime();
   primaryWeapons = self GetWeaponsListPrimaries();
   current_weapon = undefined;
   weapon_limit = 2;
-  if(self hasWeapon(weapon_string)) {
+  if(self HasWeapon(weapon_string)) {
     if(issubstr(weapon_string, "knife_ballistic_")) {
       self notify("zmb_lost_knife");
     }
@@ -1444,9 +1378,9 @@ treasure_chest_give_weapon(weapon_string) {
     self maps\_zombiemode_weap_cymbal_monkey::player_give_cymbal_monkey();
     self play_weapon_vo(weapon_string);
     return;
-  } else if(weapon_string == "knife_ballistic_zm" && self hasWeapon("bowie_knife_zm")) {
+  } else if(weapon_string == "knife_ballistic_zm" && self HasWeapon("bowie_knife_zm")) {
     weapon_string = "knife_ballistic_bowie_zm";
-  } else if(weapon_string == "knife_ballistic_zm" && self hasWeapon("sickle_knife_zm")) {
+  } else if(weapon_string == "knife_ballistic_zm" && self HasWeapon("sickle_knife_zm")) {
     weapon_string = "knife_ballistic_sickle_zm";
   }
   if(weapon_string == "ray_gun_zm") {
@@ -1457,12 +1391,11 @@ treasure_chest_give_weapon(weapon_string) {
   self SwitchToWeapon(weapon_string);
   self play_weapon_vo(weapon_string);
 }
-
 pay_turret_think(cost) {
   if(!isDefined(self.target)) {
     return;
   }
-  turret = getEnt(self.target, "targetname");
+  turret = GetEnt(self.target, "targetname");
   if(!isDefined(turret)) {
     return;
   }
@@ -1511,7 +1444,6 @@ pay_turret_think(cost) {
     }
   }
 }
-
 watch_for_laststand(player) {
   self endon("stop watching");
   while(!player maps\_laststand::player_is_in_laststand()) {
@@ -1524,7 +1456,6 @@ watch_for_laststand(player) {
     self UseBy(player);
   }
 }
-
 watch_for_fake_death(player) {
   self endon("stop watching");
   player waittill("fake_death");
@@ -1532,7 +1463,6 @@ watch_for_fake_death(player) {
     self UseBy(player);
   }
 }
-
 watch_for_timeout(player, time) {
   self endon("stop watching");
   self thread cancel_timer_on_end(player);
@@ -1541,12 +1471,10 @@ watch_for_timeout(player, time) {
     self UseBy(player);
   }
 }
-
 cancel_timer_on_end(player) {
   self waittill("stop watching");
   player notify("stop watching");
 }
-
 weapon_cabinet_door_open(left_or_right) {
   if(left_or_right == "left") {
     self rotateyaw(120, 0.3, 0.2, 0.1);
@@ -1554,7 +1482,6 @@ weapon_cabinet_door_open(left_or_right) {
     self rotateyaw(-120, 0.3, 0.2, 0.1);
   }
 }
-
 check_collector_achievement(bought_weapon) {
   if(!isDefined(self.bought_weapons)) {
     self.bought_weapons = [];
@@ -1571,7 +1498,6 @@ check_collector_achievement(bought_weapon) {
   }
   self giveachievement_wrapper("SP_ZOM_COLLECTOR");
 }
-
 weapon_set_first_time_hint(cost, ammo_cost) {
   if(isDefined(level.has_pack_a_punch) && !level.has_pack_a_punch) {
     self SetHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
@@ -1579,7 +1505,6 @@ weapon_set_first_time_hint(cost, ammo_cost) {
     self SetHintString(&"ZOMBIE_WEAPONCOSTAMMO_UPGRADE", cost, ammo_cost);
   }
 }
-
 weapon_spawn_think() {
   cost = get_weapon_cost(self.zombie_weapon_upgrade);
   ammo_cost = get_ammo_cost(self.zombie_weapon_upgrade);
@@ -1604,7 +1529,7 @@ weapon_spawn_think() {
     if(!player_has_weapon) {
       if(player.score >= cost) {
         if(self.first_time_triggered == false) {
-          model = getEnt(self.target, "targetname");
+          model = getent(self.target, "targetname");
           model thread weapon_show(player);
           self.first_time_triggered = true;
           if(!is_grenade) {
@@ -1639,7 +1564,7 @@ weapon_spawn_think() {
       }
       if(player.score >= ammo_cost) {
         if(self.first_time_triggered == false) {
-          model = getEnt(self.target, "targetname");
+          model = getent(self.target, "targetname");
           model thread weapon_show(player);
           self.first_time_triggered = true;
           if(!is_grenade) {
@@ -1663,7 +1588,6 @@ weapon_spawn_think() {
     }
   }
 }
-
 weapon_show(player) {
   player_angles = VectorToAngles(player.origin - self.origin);
   player_yaw = player_angles[1];
@@ -1683,9 +1607,8 @@ weapon_show(player) {
   self Show();
   play_sound_at_pos("weapon_show", self.origin, self);
   time = 1;
-  self moveTo(self.og_origin, time);
+  self MoveTo(self.og_origin, time);
 }
-
 get_pack_a_punch_weapon_options(weapon) {
   if(!isDefined(self.pack_a_punch_weapon_options)) {
     self.pack_a_punch_weapon_options = [];
@@ -1722,7 +1645,6 @@ get_pack_a_punch_weapon_options(weapon) {
   self.pack_a_punch_weapon_options[weapon] = self CalcWeaponOptions(camo_index, lens_index, reticle_index, reticle_color_index);
   return self.pack_a_punch_weapon_options[weapon];
 }
-
 weapon_give(weapon, is_upgrade) {
   primaryWeapons = self GetWeaponsListPrimaries();
   current_weapon = undefined;
@@ -1772,7 +1694,6 @@ weapon_give(weapon, is_upgrade) {
   self SwitchToWeapon(weapon);
   self play_weapon_vo(weapon);
 }
-
 play_weapon_vo(weapon) {
   if(isDefined(level._audio_custom_weapon_check)) {
     type = self[[level._audio_custom_weapon_check]](weapon);
@@ -1781,48 +1702,51 @@ play_weapon_vo(weapon) {
   }
   self maps\_zombiemode_audio::create_and_play_dialog("weapon_pickup", type);
 }
-
 weapon_type_check(weapon) {
-  if(!isDefined(self.entity_num))
+  if(!isDefined(self.entity_num)) {
     return "crappy";
+  }
   switch (self.entity_num) {
     case 0:
-      if(weapon == "m16_zm")
+      if(weapon == "m16_zm") {
         return "favorite";
-      else if(weapon == "rottweil72_upgraded_zm")
+      } else if(weapon == "rottweil72_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 1:
-      if(weapon == "fnfal_zm")
+      if(weapon == "fnfal_zm") {
         return "favorite";
-      else if(weapon == "hk21_upgraded_zm")
+      } else if(weapon == "hk21_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 2:
-      if(weapon == "china_lake_zm")
+      if(weapon == "china_lake_zm") {
         return "favorite";
-      else if(weapon == "thundergun_upgraded_zm")
+      } else if(weapon == "thundergun_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 3:
-      if(weapon == "mp40_zm")
+      if(weapon == "mp40_zm") {
         return "favorite";
-      else if(weapon == "crossbow_explosive_upgraded_zm")
+      } else if(weapon == "crossbow_explosive_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
   }
-  if(IsSubStr(weapon, "upgraded"))
+  if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  else
+  } else {
     return level.zombie_weapons[weapon].vox;
+  }
 }
-
 get_player_index(player) {
-  assert(IsPlayer(player));
+  assert(isPlayer(player));
   assert(isDefined(player.entity_num));
   return player.entity_num;
 }
-
 ammo_give(weapon) {
   give_ammo = false;
   if(!is_offhand_weapon(weapon)) {

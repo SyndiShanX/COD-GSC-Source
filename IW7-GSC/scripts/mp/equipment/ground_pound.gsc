@@ -136,7 +136,7 @@ func_8653(var_0, var_1, var_2, var_3, var_4) {
     return var_4;
   }
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return var_4;
   }
 

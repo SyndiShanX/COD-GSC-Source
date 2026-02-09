@@ -185,7 +185,7 @@ function onspawnplayer(predictedspawn) {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isDefined(attacker) || attacker == self || !isplayer(attacker) || attacker.team == self.team) {
+  if(!isDefined(attacker) || attacker == self || !isPlayer(attacker) || attacker.team == self.team) {
     return;
   }
   if(self.team == game["defenders"] && (isDefined(attacker.escortingrobot) && attacker.escortingrobot)) {
@@ -642,7 +642,7 @@ function robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   eattacker.damagerobot = eattacker.damagerobot + weapon_damage;
   if(self.shutdowndamage >= level.shutdowndamage) {
     origin = (0, 0, 0);
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       level thread popups::displayteammessagetoall(&"MP_ESCORT_ROBOT_DISABLED", eattacker);
       level.robot recordgameeventnonplayer("robot_disabled");
       if(distance2dsquared(self.origin, level.goalobject.trigger.origin) < (level.goalobject.trigger.radius + 50) * (level.goalobject.trigger.radius + 50)) {
@@ -1044,7 +1044,7 @@ function debug_reset_robot_to_start() {
         level.robot stop_robot();
         level.robot setgoal(level.robot.origin, 0);
       }
-      setdvar("", 0);
+      setDvar("", 0);
     }
     wait(0.5);
   }
@@ -1271,7 +1271,7 @@ function kill_anything_blocking_goal(goal) {
   debug_draw_blocked_path_kill_radius(self.origin, 108);
   entities = getdamageableentarray(self.origin, 108);
   foreach(entity in entities) {
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       continue;
     }
     if(entity == self) {

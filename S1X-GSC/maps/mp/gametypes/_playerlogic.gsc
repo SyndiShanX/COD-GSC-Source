@@ -84,7 +84,6 @@ TimeUntilspawn(includePenalties) {
     if(isDefined(self.setSpawnPoint)) {
       respawnDelay += level.tiSpawnDelay;
     }
-
   }
 
   waveBased = (getDvarFloat("scr_" + level.gameType + "_waverespawndelay") > 0);
@@ -149,7 +148,6 @@ spawnClient() {
       if(!self.hasSpawned && TeamKillDelay() <= 0) {
         self.pers["teamKillPunish"] = false;
       }
-
     } else if(isRoundBased() && !isLastRound()) {
       if(isDefined(self.tagAvailable) && self.tagAvailable) {
         setLowerMessage("spawn_info", game["strings"]["spawn_tag_wait"]);
@@ -1420,7 +1418,7 @@ Callback_PlayerConnect() {
   self initClientDvars();
   self initPlayerStats();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -1688,7 +1686,6 @@ Callback_PlayerConnect() {
     }
   }
 
-  /#	
   assert(self.connectTime == getTime());
 }
 
@@ -2031,7 +2028,6 @@ addToAliveCount() {
 
 incrementAliveCount(teamAdding) {
   level.aliveCount[teamAdding]++;
-  /#	
   if(!isDefined(level.alive_players)) {
     level.alive_players = [];
   }
@@ -2045,7 +2041,6 @@ incrementAliveCount(teamAdding) {
   if(level.alive_players[teamAdding].size != level.aliveCount[teamAdding]) {
     AssertMsg("WARNING: level.alive_players and level.aliveCount are out of sync!");
   }
-
 }
 
 removeFromAliveCount(disconnected) {
@@ -2070,7 +2065,6 @@ removeFromAliveCount(disconnected) {
 
 decrementAliveCount(teamRemoving) {
   level.aliveCount[teamRemoving]--;
-  /#	
   for(i = 0; i < level.alive_players[teamRemoving].size; i++) {
     if(level.alive_players[teamRemoving][i] == self) {
       level.alive_players[teamRemoving][i] = level.alive_players[teamRemoving][level.alive_players[teamRemoving].size - 1];
@@ -2082,7 +2076,6 @@ decrementAliveCount(teamRemoving) {
   if(level.alive_players[teamRemoving].size != level.aliveCount[teamRemoving]) {
     AssertMsg("WARNING: level.alive_players and level.aliveCount are out of sync!");
   }
-
 }
 
 addToLivesCount() {

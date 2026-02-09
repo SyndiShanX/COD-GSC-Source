@@ -29,9 +29,9 @@ main() {
   level.casual_health_scalar = 0.45;
   level.casual_reward_scalar = 1.0;
   level.casual_score_scalar = 0.5;
-  setdvar("r_reactiveMotionWindAmplitudeScale", 0.15);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 0.15);
   setomnvar("alt_jump_height", 145.0);
-  setdvar("sm_sunShadowScale", "0.5");
+  setDvar("sm_sunShadowScale", "0.5");
   level.include_default_challenges = 1;
   level.challenge_registration_func = maps\mp\alien\mp_alien_dlc3_challenges::register_dlc3_challenges;
   level.challenge_scalar_func = maps\mp\alien\mp_alien_dlc3_challenges::dlc3_challenge_scalar_func;
@@ -103,8 +103,8 @@ main() {
   maps\mp\agents\alien\_alien_gargoyle::gargoyle_level_init();
   maps\mp\agents\alien\_alien_bomber::bomber_level_init();
   maps\mp\_compass::setupminimap("compass_map_mp_alien_descent");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -343,7 +343,7 @@ shroom_bounce_monitor() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0))
+    if(isPlayer(var_0))
       var_0 thread shroom_bounce();
   }
 }
@@ -1082,7 +1082,7 @@ descent_alien_death_override_func(var_0) {
 }
 
 descent_alien_custom_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = isDefined(var_1) && isplayer(var_1);
+  var_7 = isDefined(var_1) && isPlayer(var_1);
 
   if(var_7 && isDefined(var_4) && maps\mp\alien\_utility::weapon_has_alien_attachment(var_4) && var_3 != "MOD_MELEE" && !maps\mp\alien\_utility::is_true(level.easter_egg_lodge_sign_active)) {
     playFX(level._effect["alien_ark_gib"], self.origin + (0, 0, 32));
@@ -1099,7 +1099,7 @@ descent_alien_custom_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       return 1;
     }
 
-    if(var_7 || isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(var_7 || isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       level thread maps\mp\mp_alien_dlc3_escape::alien_death_trail(self.origin);
       return 0;
     }

@@ -38,7 +38,6 @@ main() {
 
   if(!isDefined(level._id_6845)) {
     _id_663D::_id_4CBC();
-
   }
   common_scripts\utility::trigger_off("breach_save_trig_1", "targetname");
   common_scripts\utility::trigger_off("breach_save_trig_2", "targetname");
@@ -222,7 +221,7 @@ _id_6848() {
   precacherumble("viewmodel_large");
   precacherumble("grenade_rumble");
 
-  if(getdvar("ps3Game") == "true") {
+  if(getDvar("ps3Game") == "true") {
     precachemodel("fullbody_price_africa_assault_a_sandstorm");
     precachemodel("fullbody_soap_africa_assault_a_sandstorm");
   }

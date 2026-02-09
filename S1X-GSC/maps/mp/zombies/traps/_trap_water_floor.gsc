@@ -102,7 +102,7 @@ trapwaterlaunch(var_0, var_1) {
   var_2 = var_0 getvelocity();
   var_3 = var_0.origin;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_4 = (var_2[0], var_2[1], 700);
     var_0 setvelocity(var_4);
     earthquake(0.4, 1, var_3, 500, var_0);

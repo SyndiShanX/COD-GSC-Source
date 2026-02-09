@@ -55,13 +55,13 @@ on_end(localclientnum) {
 function_777d7ba2() {
   self notify("7b33eb8d5a1768f6");
   self endon("7b33eb8d5a1768f6");
-  setdvar(#"slide_blur_enabled", 0);
+  setDvar(#"slide_blur_enabled", 0);
 
   while(true) {
     level waittill(#"end_game", #"hash_7646638df88a3656");
 
     if(level.var_a2859227 != 1) {
-      setdvar(#"slide_blur_enabled", 1);
+      setDvar(#"slide_blur_enabled", 1);
       break;
     }
   }

@@ -16,7 +16,7 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -703,7 +703,7 @@ mission_failed_out_of_time() {
   level.player endon("death");
   level endon("kill_timer");
   level notify("mission failed");
-  setdvar("ui_deadquote", level.missionfailedquote);
+  setDvar("ui_deadquote", level.missionfailedquote);
   maps\_utility::missionfailedwrapper();
 }
 

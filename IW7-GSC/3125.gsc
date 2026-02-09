@@ -24,7 +24,7 @@ func_D4D7(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_4)) {
     self scragentsetorientmode("face angle abs", self.angles);
-  } else if(isplayer(var_4) && var_4 == self.enemy) {
+  } else if(isPlayer(var_4) && var_4 == self.enemy) {
     self scragentsetorientmode("face enemy");
   } else {
     var_5 = var_4.origin - self.origin;
@@ -102,7 +102,7 @@ func_CA1F(var_0) {
   if(var_3 > self.meleerangesq) {
     return;
   }
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_4 = func_3D76(var_0);
     var_5 = func_3D95(var_0);
 

@@ -201,7 +201,7 @@ on_vehicle_damage(params) {
 }
 
 event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -246,7 +246,7 @@ watchremotecontroldeactivate() {
 }
 
 event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -471,7 +471,7 @@ function_ea9fe221(dart, collision) {
 
   waitframe(1);
 
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     player clientfield::set_to_player("dart_wz_static_postfx", 0);
     player val::set(#"dart", "freezecontrols", 1);
     player enableweaponcycling();
@@ -482,7 +482,7 @@ function_ea9fe221(dart, collision) {
     dart disabledartmissilelocking();
     dart setspeedimmediate(0);
 
-    if(isDefined(player) && isplayer(player) && !isbot(player)) {
+    if(isDefined(player) && isPlayer(player) && !isbot(player)) {
       forward = anglesToForward(dart.angles);
       moveamount = vectorscale(forward, 300 * -1);
       trace = physicstrace(dart.origin, dart.origin + moveamount, (4 * -1, 4 * -1, 4 * -1), (4, 4, 4), undefined, 1);
@@ -501,7 +501,7 @@ function_ea9fe221(dart, collision) {
     player cameraactivate(1);
   }
 
-  if(isDefined(player) && isplayer(player) && !isbot(player)) {
+  if(isDefined(player) && isPlayer(player) && !isbot(player)) {
     player vehicle::stop_monitor_missiles_locked_on_to_me();
     player vehicle::stop_monitor_damage_as_occupant();
   }
@@ -514,7 +514,7 @@ function_ea9fe221(dart, collision) {
 
   wait waittime;
 
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     player setclientuivisibilityflag("hud_visible", 1);
     player val::reset(#"dart", "freezecontrols");
     player cameraactivate(0);
@@ -530,14 +530,14 @@ function_ea9fe221(dart, collision) {
 on_vehicle_killed(params) {
   if(isDefined(params.occupants)) {
     if(params.occupants.size > 0 && self function_c7aa9338(params.occupants)) {
-      if(isplayer(params.eattacker)) {
+      if(isPlayer(params.eattacker)) {
         params.eattacker stats::function_dad108fa(#"destroy_equipment", 1);
         callback::callback(#"hash_67dd51a5d529c64c");
       }
     }
   }
 
-  if(isDefined(self.owner) && isplayer(self.owner)) {
+  if(isDefined(self.owner) && isPlayer(self.owner)) {
     self.owner leave_dart(self);
   }
 
@@ -578,7 +578,7 @@ isvaliddartmissiletarget(ent) {
     return false;
   }
 
-  entisplayer = isplayer(ent);
+  entisplayer = isPlayer(ent);
 
   if(entisplayer && !isalive(ent)) {
     return false;
@@ -608,7 +608,7 @@ isvaliddartmissiletarget(ent) {
 isstillvaliddartmissiletarget(ent, weapon) {
   player = self;
 
-  if(!(target_istarget(ent) || isplayer(ent)) && !(isDefined(ent.allowcontinuedlockonafterinvis) && ent.allowcontinuedlockonafterinvis)) {
+  if(!(target_istarget(ent) || isPlayer(ent)) && !(isDefined(ent.allowcontinuedlockonafterinvis) && ent.allowcontinuedlockonafterinvis)) {
     return false;
   }
 
@@ -618,7 +618,7 @@ isstillvaliddartmissiletarget(ent, weapon) {
     return false;
   }
 
-  entisplayer = isplayer(ent);
+  entisplayer = isPlayer(ent);
 
   if(entisplayer && !isalive(ent)) {
     return false;

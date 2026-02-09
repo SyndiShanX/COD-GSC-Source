@@ -245,7 +245,7 @@ function_e1273acb(localclientnum, intensity = 0) {
   tagfx = level.var_213a0963[intensity];
 
   foreach(player in players) {
-    if(!isDefined(player) || !player isplayer()) {
+    if(!isDefined(player) || !player isPlayer()) {
       continue;
     }
 

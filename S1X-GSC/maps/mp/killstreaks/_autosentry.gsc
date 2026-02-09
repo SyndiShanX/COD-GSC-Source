@@ -1054,7 +1054,6 @@ sam_acquireTarget() {
         if(isDefined(self.team)) {
           entityList = level.UAVModels[level.otherTeam[self.team]];
         }
-
       }
 
       foreach(uav in entityList) {

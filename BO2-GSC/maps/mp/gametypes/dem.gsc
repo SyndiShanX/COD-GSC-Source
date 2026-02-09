@@ -26,7 +26,7 @@
 #include maps\mp\gametypes\_hostmigration;
 
 main() {
-  if(getdvar(#"mapname") == "mp_background") {
+  if(getDvar(#"mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -360,7 +360,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     }
   }
 
-  if(isDefined(bombzone) && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(isDefined(bombzone) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     if(bombzone maps\mp\gametypes\_gameobjects::getownerteam() != attacker.team) {
       if(!isDefined(attacker.dem_offends))
         attacker.dem_offends = 0;
@@ -374,7 +374,6 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
         maps\mp\_scoreevents::processscoreevent("killed_defender", attacker, self, sweapon);
       } else {
         attacker iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU OFFENSIVE CREDIT AS BOOSTING PREVENTION");
-
       }
     } else {
       if(!isDefined(attacker.dem_defends))
@@ -394,7 +393,6 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
         maps\mp\_scoreevents::processscoreevent("killed_attacker", attacker, self, sweapon);
       } else {
         attacker iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU DEFENSIVE CREDIT AS BOOSTING PREVENTION");
-
       }
     }
   }
@@ -768,7 +766,6 @@ onuseobject(player) {
       player recordgameevent("plant");
     } else {
       player iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU PLANT CREDIT AS BOOSTING PREVENTION");
-
     }
 
     level thread maps\mp\_popups::displayteammessagetoall(&"MP_EXPLOSIVES_PLANTED_BY", player);
@@ -793,7 +790,6 @@ onuseobject(player) {
       player recordgameevent("defuse");
     } else {
       player iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU DEFUSE CREDIT AS BOOSTING PREVENTION");
-
     }
 
     level thread maps\mp\_popups::displayteammessagetoall(&"MP_EXPLOSIVES_DEFUSED_BY", player);
@@ -1071,7 +1067,7 @@ updateeventsperminute() {
   self.numbombevents++;
   minutespassed = maps\mp\gametypes\_globallogic_utils::gettimepassed() / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed["total"]))
+  if(isPlayer(self) && isDefined(self.timeplayed["total"]))
     minutespassed = self.timeplayed["total"] / 60;
 
   self.eventsperminute = self.numbombevents / minutespassed;

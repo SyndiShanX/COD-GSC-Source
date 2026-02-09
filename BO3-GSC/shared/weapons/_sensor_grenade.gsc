@@ -129,10 +129,10 @@ function watchsensorgrenadedamage(watcher) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
-    if(level.teambased && isplayer(attacker)) {
+    if(level.teambased && isPlayer(attacker)) {
       if(!level.hardcoremode && self.owner.team == attacker.pers["team"] && self.owner != attacker) {
         continue;
       }

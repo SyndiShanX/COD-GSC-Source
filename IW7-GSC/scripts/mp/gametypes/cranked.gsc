@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -32,7 +32,7 @@ main() {
   level.onnormaldeath = ::onnormaldeath;
   if(!level.teambased) {
     level.onplayerscore = ::onplayerscore;
-    setdvar("scr_cranked_scorelimit", getdvarint("scr_cranked_scorelimit_ffa", 60));
+    setDvar("scr_cranked_scorelimit", getdvarint("scr_cranked_scorelimit_ffa", 60));
     setteammode("ffa");
   }
 

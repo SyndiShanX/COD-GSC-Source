@@ -37,24 +37,24 @@ function init_duplicate_render_bundles() {
 
 function duprenderbundledebuglisten() {
   self endon("entityshutdown");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   while(true) {
     playbundlename = getdvarstring("");
     if(playbundlename != "") {
       self thread playduprenderbundle(playbundlename);
-      setdvar("", "");
+      setDvar("", "");
     }
     stopbundlename = getdvarstring("");
     if(stopbundlename != "") {
       self thread stopduprenderbundle();
-      setdvar("", "");
+      setDvar("", "");
     }
     stopbundlename = getdvarstring("");
     if(stopbundlename != "") {
       self thread exitduprenderbundle();
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }

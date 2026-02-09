@@ -9,9 +9,9 @@
 main() {
   level.tweakfile = 1;
   visionsetnaked("sp_la1_2", 5);
-  r_rimintensity_debug = getdvar(#"r_rimIntensity_debug");
+  r_rimintensity_debug = getDvar(#"r_rimIntensity_debug");
   setsaveddvar("r_rimIntensity_debug", 1);
-  r_rimintensity = getdvar(#"r_rimIntensity");
+  r_rimintensity = getDvar(#"r_rimIntensity");
   setsaveddvar("r_rimIntensity", 15);
 }
 

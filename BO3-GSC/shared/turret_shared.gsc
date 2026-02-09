@@ -259,7 +259,7 @@ function _get_default_target_offset(e_target, n_index) {
       if(issentient(self) && issentient(e_target)) {
         z_offset = (isvehicle(e_target) ? 0 : (isDefined(s_turret.n_torso_targetting_offset) ? s_turret.n_torso_targetting_offset : 0));
       } else {
-        if(isplayer(e_target)) {
+        if(isPlayer(e_target)) {
           z_offset = randomintrange(40, 50);
         } else {
           if(e_target.type === "human") {
@@ -542,7 +542,7 @@ function _turret_think(n_index, v_offset) {
         occupy_time = 3600;
       }
       if(!(isDefined(s_turret.disable_ai_getoff) && s_turret.disable_ai_getoff)) {
-        bwasplayertarget = isDefined(s_turret.e_last_target) && s_turret.e_last_target.health > 0 && isplayer(s_turret.e_last_target);
+        bwasplayertarget = isDefined(s_turret.e_last_target) && s_turret.e_last_target.health > 0 && isPlayer(s_turret.e_last_target);
         if(bwasplayertarget) {
           occupy_time = occupy_time / 4;
         }
@@ -640,7 +640,7 @@ function _waittill_user_change(n_index) {
   if(isalive(ai_user)) {
     if(isactor(ai_user)) {
       ai_user endon("death");
-    } else if(isplayer(ai_user)) {
+    } else if(isPlayer(ai_user)) {
       self notify("turret_disabled" + _index(n_index));
     }
   }
@@ -764,7 +764,7 @@ function _debug_turret_think(n_index) {
       if(isactor(e_target)) {
         str_target = str_target + "";
       } else {
-        if(isplayer(e_target)) {
+        if(isPlayer(e_target)) {
           str_target = str_target + "";
         } else {
           if(isvehicle(e_target)) {
@@ -1072,7 +1072,7 @@ function _get_potential_targets(n_index) {
         } else {
           if(_is_target_within_range(e_target, s_turret) == 0) {
             ignore_target = 1;
-          } else if(isplayer(e_target) && e_target hasperk("specialty_nottargetedbysentry")) {
+          } else if(isPlayer(e_target) && e_target hasperk("specialty_nottargetedbysentry")) {
             ignore_target = 1;
           }
         }
@@ -1207,7 +1207,7 @@ function can_hit_target(e_target, n_index) {
   if(isDefined(e_target) && (isDefined(e_target.ignoreme) && e_target.ignoreme)) {
     return 0;
   }
-  b_target_in_view = is_target_in_view((isplayer(e_target) ? e_target gettagorigin("tag_eye") : e_target.origin + v_offset), n_index);
+  b_target_in_view = is_target_in_view((isPlayer(e_target) ? e_target gettagorigin("tag_eye") : e_target.origin + v_offset), n_index);
   b_trace_passed = 1;
   if(b_target_in_view) {
     if(!s_turret.b_ignore_line_of_sight) {
@@ -1266,7 +1266,7 @@ function trace_test(e_target, v_offset = (0, 0, 0), n_index) {
   s_turret = _get_turret_data(n_index);
   v_start_org = self gettagorigin(s_turret.str_tag_pivot);
   v_target = e_target.origin + v_offset;
-  if(sessionmodeismultiplayergame() && isplayer(e_target)) {
+  if(sessionmodeismultiplayergame() && isPlayer(e_target)) {
     v_target = e_target getshootatpos();
   }
   if(distancesquared(v_start_org, v_target) < 10000) {
@@ -1303,7 +1303,7 @@ function track_lens_flare() {
   self endon("disable_lens_flare");
   while(true) {
     e_target = self gettargetentity();
-    if(self.turretontarget && (isDefined(e_target) && isplayer(e_target))) {
+    if(self.turretontarget && (isDefined(e_target) && isPlayer(e_target))) {
       if(isDefined(self gettagorigin("TAG_LASER"))) {
         e_target util::waittill_player_looking_at(self gettagorigin("TAG_LASER"), 90);
         if(isDefined(e_target)) {

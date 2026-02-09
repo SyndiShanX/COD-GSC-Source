@@ -33,7 +33,7 @@ function disable() {}
 function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(meansofdeath === "MOD_MELEE") {
     damage = damage * 5;
-    if((self.health - damage) <= 0 && isDefined(attacker) && isplayer(attacker)) {
+    if((self.health - damage) <= 0 && isDefined(attacker) && isPlayer(attacker)) {
       attacker zm_stats::increment_challenge_stat("GUM_GOBBLER_SWORD_FLAY");
     }
   }

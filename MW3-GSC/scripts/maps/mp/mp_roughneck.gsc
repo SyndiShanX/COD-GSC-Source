@@ -11,16 +11,15 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_roughneck");
   maps\mp\_compass::setupminimap("compass_map_mp_roughneck");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_diffuseColorScale", 1.25);
-  setdvar("r_specularColorScale", 2.75);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_diffuseColorScale", 1.25);
+  setDvar("r_specularColorScale", 2.75);
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.5");
+    setDvar("sm_sunShadowScale", "0.5");
   } else {
-    setdvar("sm_sunShadowScale", "0.75");
-
+    setDvar("sm_sunShadowScale", "0.75");
   }
   game["attackers"] = "axis";
   game["defenders"] = "allies";
@@ -40,7 +39,7 @@ watchplayerenterwater() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       if(isDefined(var_0.helitype) && var_0.helitype == "remote_uav") {
         wait 0.5;
         var_0 notify("death");

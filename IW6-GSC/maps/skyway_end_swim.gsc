@@ -213,7 +213,7 @@ drown_die() {
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_grunt");
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_bubbles_long");
   level.player thread maps\_utility::play_sound_on_entity("sw_underwater_choke");
-  setdvar("ui_deadquote", &"SKYWAY_DROWN");
+  setDvar("ui_deadquote", &"SKYWAY_DROWN");
   maps\_utility::missionfailedwrapper();
 }
 

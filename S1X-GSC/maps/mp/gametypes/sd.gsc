@@ -9,7 +9,7 @@
 #include maps\mp\gametypes\common_sd_sr;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -180,7 +180,7 @@ onSpawnPlayer() {
     }
   }
 
-  if(IsPlayer(self) && !is_respawning_with_bomb_carrier_class) {
+  if(isPlayer(self) && !is_respawning_with_bomb_carrier_class) {
     if(level.multiBomb && self.pers["team"] == game["attackers"]) {
       self SetClientOmnvar("ui_carrying_bomb", true);
     } else {
@@ -202,7 +202,7 @@ onSpawnPlayer() {
 }
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self SetClientOmnvar("ui_carrying_bomb", false);
   }
 

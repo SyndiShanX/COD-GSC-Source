@@ -293,9 +293,9 @@ cheat_complete_stage() {
   level endon("reset_sundial");
 
   while(true) {
-    if(getdvar(#"_id_1186DB2D") != "") {
+    if(getDvar(#"_id_1186DB2D") != "") {
       if(isDefined(level._last_stage_started)) {
-        setdvar("cheat_sq", "");
+        setDvar("cheat_sq", "");
         stage_completed("sq", level._last_stage_started);
       }
     }
@@ -565,7 +565,7 @@ navcomputer_waitfor_navcard() {
   while(true) {
     navcomputer_use_trig waittill("trigger", who);
 
-    if(isplayer(who) && is_player_valid(who)) {
+    if(isPlayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
         who playSound("zmb_sq_navcard_success");
@@ -772,7 +772,6 @@ setup_sq_debug() {
 
     thread zombie_devgui_player_sq_commands();
   }
-
 }
 
 zombie_devgui_player_sq_commands() {
@@ -805,7 +804,6 @@ zombie_devgui_player_sq_commands() {
     adddebugcommand("devgui_cmd \"Zombies:1/Buried/SQ:1/Players:1/" + players[i].name + "/Completed:2/Buried:3/Maxis:1\" \"set dg_sq_player " + ip1 + "; set dg_sq_map BURIED; set zombie_devgui comp_2\" \\n");
     adddebugcommand("devgui_cmd \"Zombies:1/Buried/SQ:1/Players:1/" + players[i].name + "/Completed:2/Buried:3/Ricky:2\" \"set dg_sq_player " + ip1 + "; set dg_sq_map BURIED; set zombie_devgui comp_1\" \\n");
   }
-
 }
 
 devgui_sq(cmd) {
@@ -856,7 +854,7 @@ devgui_sq(cmd) {
         pindex = 1;
 
       sq_player = level.sq_players[pindex - 1];
-      sq_level = getdvar(#"_id_2685E710");
+      sq_level = getDvar(#"_id_2685E710");
       sq_set_stat(sq_player, sq_level, cmd_strings[0]);
       break;
     case "sq_start_stage_bt":
@@ -902,7 +900,6 @@ sq_set_stat(sq_player, sq_level, sq_cmd) {
       sq_player maps\mp\zombies\_zm_stats::set_global_stat("SQ_" + sq_level + "_LAST_COMPLETED", 2);
       break;
   }
-
 }
 
 warp_to_struct_position(str_value, str_key) {

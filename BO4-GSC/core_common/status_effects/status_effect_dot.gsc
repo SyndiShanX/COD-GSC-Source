@@ -61,7 +61,7 @@ dot_rumble_loop() {
   self endon(#"dot_rumble_loop", #"endstatuseffect");
   waitframe(1);
 
-  if(!isplayer(self.owner)) {
+  if(!isPlayer(self.owner)) {
     return;
   }
 
@@ -82,7 +82,7 @@ dot_end() {
 }
 
 function_3b694684(count) {
-  if(!isplayer(self.owner)) {
+  if(!isPlayer(self.owner)) {
     return;
   }
 
@@ -117,7 +117,7 @@ function_5236325e(applicant, killcament) {
     if(isDefined(self.owner)) {
       resistance = 0;
 
-      if(isplayer(self.owner)) {
+      if(isPlayer(self.owner)) {
         resistance = self.owner status_effect::function_3c54ae98(7);
       }
 
@@ -163,7 +163,7 @@ function_ae0405e2(applicant) {
   if(isDefined(applicant) && (!isDefined(self.owner) || self.owner != applicant)) {
     applicant.var_dbffaa32 = undefined;
 
-    if(isDefined(applicant.owner) && isplayer(applicant.owner)) {
+    if(isDefined(applicant.owner) && isPlayer(applicant.owner)) {
       applicant.owner.var_dbffaa32 = undefined;
     }
   }
@@ -180,9 +180,9 @@ dot_report(applicant) {
 
   self.owner.var_dbffaa32 = 1;
 
-  if(isplayer(applicant)) {
+  if(isPlayer(applicant)) {
     applicant.var_dbffaa32 = 1;
-  } else if(isDefined(applicant.owner) && isplayer(applicant.owner)) {
+  } else if(isDefined(applicant.owner) && isPlayer(applicant.owner)) {
     applicant.owner.var_dbffaa32 = 1;
   }
 
@@ -194,7 +194,7 @@ dot_report(applicant) {
 
   dir = self.owner.origin - location;
 
-  if(isplayer(self.owner) && !self.owner getinvulnerability()) {
+  if(isPlayer(self.owner) && !self.owner getinvulnerability()) {
     self.owner addtodamageindicator(self.var_adb1692a, dir);
   }
 }

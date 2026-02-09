@@ -32,7 +32,7 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -576,7 +576,7 @@ fail_on_damage() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isplayer(var_1))
+    if(isPlayer(var_1))
       maps\_friendlyfire::missionfail();
   }
 }

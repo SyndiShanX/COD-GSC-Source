@@ -351,11 +351,11 @@ ride_uaz_door() {
   /*
   	flag_wait( "wait_for_player" );
   	anim_model = self maps\_vehicle_aianim::getanimatemodel();
-  	anim_model maps\_vehicle_aianim::setanimrestart_once( %uaz_passenger_exit_into_stand_door, false );
+  	anim_model maps\_vehicle_aianim::setanimrestart_once(%uaz_passenger_exit_into_stand_door, false );
 
   	flag_wait( "uaz_mounted" );
-  	anim_model ClearAnim( %uaz_passenger_exit_into_stand_door, 0 );
-  	anim_model maps\_vehicle_aianim::setanimrestart_once( %uaz_passenger_enter_from_huntedrun_door, true );
+  	anim_model ClearAnim(%uaz_passenger_exit_into_stand_door, 0 );
+  	anim_model maps\_vehicle_aianim::setanimrestart_once(%uaz_passenger_enter_from_huntedrun_door, true );
   */
 }
 
@@ -479,7 +479,6 @@ vehicle_event_node() {
       vehicle Maps\_vehicle::vehicle_ai_event(self.script_vehicleaianim);
 
       println(self.script_vehicleaianim);
-
     }
   }
 }
@@ -909,7 +908,8 @@ ride_uaz_player_launch() {
   enablePlayerWeapons(false);
   level.player.rig unlink();
   level.player.rig RotateVelocity((300, 300, 300), 10);
-  level.player.rig MoveGravity(throw, 1);
+  level.player.rig MoveGravity(
+    throw, 1);
   level.player.rig hide();
 }
 
@@ -1222,7 +1222,7 @@ player_enemy() {
   while(true) {
     self waittill("enemy");
 
-    if(Isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       // reset dists
       self SetEngagementMaxDist(default_MaxDist, default_FalloffDist);
     } else {
@@ -1762,7 +1762,6 @@ guy_free_attack(guy, pos) {
       guy allowedstances(stance);
 
       guy thread debug_stance(stance);
-
     }
 
     wait 1;
@@ -2185,7 +2184,7 @@ main_turret_think(target_ai) {
       if(isDefined(ent.ridingvehicle))
         continue;
       if(self Vehicle_CanTurretTargetPoint(ent.origin + (0, 0, 20), 1, ent)) {
-        if(isplayer(ent) || (IsAI(ent) && !self.fire_on_ai)) {
+        if(isPlayer(ent) || (IsAI(ent) && !self.fire_on_ai)) {
           ent_flag_set("hold_fire");
           self maps\_vehicle::mgon();
         } else {
@@ -2379,7 +2378,7 @@ set_flag_on_player_damage(flag_str) {
   while(true) {
     self waittill("damage", amount, damager);
     assert(isDefined(damager));
-    if(isplayer(damager)) {
+    if(isPlayer(damager)) {
       break;
     }
   }
@@ -2590,7 +2589,7 @@ delete_not_touching() {
 drawpath() {
   self endon("death");
 
-  if(getdvar("debug_heli") == "") {
+  if(getDvar("debug_heli") == "") {
     return;
   }
 
@@ -2615,7 +2614,7 @@ drawpath() {
 }
 
 mark_heli_path(ent) {
-  if(getdvar("debug_heli") == "") {
+  if(getDvar("debug_heli") == "") {
     return;
   }
   old_ent = ent;
@@ -2628,7 +2627,6 @@ mark_heli_path(ent) {
     Line(ent.origin, old_ent.origin, (0.7, 0, 0), 1, false, 500);
     old_ent = ent;
   }
-
 }
 
 draw_tri(origin1, origin2, origin3) {

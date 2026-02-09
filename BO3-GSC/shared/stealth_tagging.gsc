@@ -21,7 +21,7 @@ function get_tagged() {
 }
 
 function tagging_thread() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(self enabled());
   self endon("disconnect");
   timeinc = 0.25;
@@ -58,7 +58,7 @@ function tagging_thread() {
           }
           self.stealth.tagging.tag_times[enemyentnum] = self.stealth.tagging.tag_times[enemyentnum] + ((1 / self.stealth.tagging.tag_time) * timeinc);
           if(self.stealth.tagging.tag_times[enemyentnum] >= 1) {
-            if(isplayer(self)) {
+            if(isPlayer(self)) {
               self playsoundtoplayer("uin_gadget_fully_charged", self);
             }
             enemy thread tagging_set_tagged(1);

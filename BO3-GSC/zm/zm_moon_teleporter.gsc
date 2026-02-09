@@ -179,7 +179,7 @@ function is_player_teleport_valid(player) {
   if(!isalive(player)) {
     return false;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
   if(player.sessionstate == "spectator") {

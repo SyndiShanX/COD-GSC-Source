@@ -239,7 +239,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
   var_1cfdf798 = isDefined(victim.lastattacker) ? victim.lastattacker === attacker : 0;
 
-  if(!isplayer(attacker) || level.capturetime && victim function_d126ce1b() && attacker function_d126ce1b() || attacker.pers[# "team"] == victim.pers[# "team"]) {
+  if(!isPlayer(attacker) || level.capturetime && victim function_d126ce1b() && attacker function_d126ce1b() || attacker.pers[# "team"] == victim.pers[# "team"]) {
     if(var_376742ed) {
       victim function_580fd2d5(attacker, weapon);
     }
@@ -319,7 +319,7 @@ on_player_killed(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shi
     self notify(#"hash_68e3332f714afbbc");
   }
 
-  if(!isDefined(self) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(self) || !isDefined(attacker) || !isPlayer(attacker)) {
     return;
   }
 
@@ -378,7 +378,7 @@ function_d3a438fb(entity) {
 }
 
 function_580fd2d5(attacker, weapon) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -900,7 +900,7 @@ function_bcaf6836() {
         foreach(struct in playerlist) {
           player = struct.player;
 
-          if(isDefined(player) && isplayer(player) && (isDefined(player.var_c8d27c06) ? player.var_c8d27c06 : 0) < gettime()) {
+          if(isDefined(player) && isPlayer(player) && (isDefined(player.var_c8d27c06) ? player.var_c8d27c06 : 0) < gettime()) {
             player playsoundtoplayer(#"mpl_control_capture_contested", player);
             player.var_c8d27c06 = gettime() + 5000;
           }
@@ -911,7 +911,7 @@ function_bcaf6836() {
 }
 
 on_touch_use(sentient) {
-  if(isplayer(sentient)) {
+  if(isPlayer(sentient)) {
     if(is_zone_contested(self) && (isDefined(sentient.var_c8d27c06) ? sentient.var_c8d27c06 : 0) < gettime()) {
       sentient playsoundtoplayer(#"mpl_control_capture_contested", sentient);
       sentient.var_c8d27c06 = gettime() + 5000;
@@ -930,7 +930,7 @@ on_touch_use(sentient) {
 function_88acffae(sentient) {
   sentient endon(#"hash_68e3332f714afbbc");
 
-  if(!isplayer(sentient)) {
+  if(!isPlayer(sentient)) {
     return;
   }
 
@@ -1059,7 +1059,7 @@ on_zone_capture(sentient) {
   self gameobjects::must_maintain_claim(1);
   self update_team_client_field();
 
-  if(isplayer(sentient)) {
+  if(isPlayer(sentient)) {
     sentient recordgameevent("hardpoint_captured");
     bb::function_95a5b5c2("exited_control_point_captured", self.zoneindex, sentient.team, sentient.origin, sentient);
     self notify(#"hash_68e3332f714afbbc");
@@ -1146,7 +1146,7 @@ on_zone_capture_neutral(sentient) {
   self gameobjects::must_maintain_claim(1);
   self update_team_client_field();
 
-  if(isplayer(sentient)) {
+  if(isPlayer(sentient)) {
     sentient recordgameevent("hardpoint_captured");
   }
 
@@ -1447,7 +1447,7 @@ player_use_loop(gameobject) {
 }
 
 on_begin_use(sentient) {
-  if(isplayer(sentient)) {
+  if(isPlayer(sentient)) {
     ownerteam = self gameobjects::get_owner_team();
 
     if(ownerteam == # "neutral") {
@@ -1477,7 +1477,7 @@ isplayerinzonewithrole(touchlist, roletype) {
       continue;
     }
 
-    if(isplayer(touchinfo.player) && isDefined(touchinfo.player.playerrole) && touchinfo.player.playerrole.rolename == roletype) {
+    if(isPlayer(touchinfo.player) && isDefined(touchinfo.player.playerrole) && touchinfo.player.playerrole.rolename == roletype) {
       return true;
     }
   }
@@ -1567,7 +1567,7 @@ update_caps_per_minute(lastownerteam) {
   self.numcaps++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed[# "total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed[# "total"])) {
     minutespassed = self.timeplayed[# "total"] / 60;
   }
 

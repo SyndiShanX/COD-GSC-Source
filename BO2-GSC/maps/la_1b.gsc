@@ -46,7 +46,7 @@ main() {
   maps\_lockonmissileturret::init(0, undefined, 6);
   level thread objectives();
   level.veh_roof_sam = spawn_vehicle_from_targetname("intruder_sam");
-  setdvar("footstep_sounds_cutoff", 8000);
+  setDvar("footstep_sounds_cutoff", 8000);
   setsaveddvar("cg_aggressiveCullRadius", "100");
   level thread do_eye();
   level thread la_1b_fxanim_deconstruct();
@@ -95,8 +95,9 @@ load_roof_gump() {
     spawn_roof_sam();
     trigger_wait("load_plaza_gump");
 
-    if(isDefined(level.veh_roof_sam))
+    if(isDefined(level.veh_roof_sam)) {
       level.veh_roof_sam delete();
+    }
 
     wait 0.25;
     level thread load_gump("la_1b_gump_1");
@@ -128,15 +129,17 @@ init_vehicles() {
   a_script_models = getEntArray("script_model", "classname");
   a_vehicles = arraycombine(a_script_models, getEntArray("script_vehicle", "classname"), 0, 0);
 
-  foreach(veh in a_vehicles)
-  global_vehicle_spawn_func(veh);
+  foreach(veh in a_vehicles) {
+    global_vehicle_spawn_func(veh);
+  }
 }
 
 global_vehicle_spawn_func(veh) {
-  if(is_police_car(veh))
+  if(is_police_car(veh)) {
     veh thread police_car();
-  else if(is_police_motorcycle(veh))
+  } else if(is_police_motorcycle(veh)) {
     veh thread police_motorcycle();
+  }
 }
 
 level_precache() {

@@ -70,7 +70,6 @@ movable_cover_init() {
       point.auto = isDefined(point.script_parameters) && point.script_parameters == "auto";
       point.stay = isDefined(point.script_parameters) && point.script_parameters == "stay";
       end_points[point.script_label] = point;
-
     }
   }
 
@@ -376,7 +375,6 @@ movable_cover_trigger(trigger, move_to) {
 
     if(isDefined(self.animate_ent) && isDefined(level.movable_cover_move_anim[self.movable_type]["move"])) {
       self.animate_ent scriptmodelPlayanim(level.movable_cover_move_anim[self.movable_type]["move"]);
-
     }
 
     self MoveTo(move_to.origin, time, accel_time);
@@ -493,7 +491,7 @@ movable_cover_calc_move_speed_scale(current_time, move_time, accel_time, decel_t
 }
 
 movable_cover_is_pushed(player, trigger, move_dir) {
-  if(!isDefined(player) || !IsReallyAlive(player) || !IsPlayer(player))
+  if(!isDefined(player) || !IsReallyAlive(player) || !isPlayer(player))
     return false;
 
   if(!movable_cover_is_touched(trigger, player))

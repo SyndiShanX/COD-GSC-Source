@@ -133,7 +133,7 @@ function_233f80e1(entity) {
       return false;
     }
 
-    if(!isplayer(entity.enemy)) {
+    if(!isPlayer(entity.enemy)) {
       return false;
     }
 

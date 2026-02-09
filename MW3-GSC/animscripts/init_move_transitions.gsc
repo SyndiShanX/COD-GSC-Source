@@ -11,11 +11,9 @@ _id_2082() {
 
   if(!isDefined(anim._id_1164)) {
     anim._id_1164 = [];
-
   }
   if(!isDefined(anim._id_1173)) {
     anim._id_1173 = [];
-
   }
   anim._id_1176 = [];
   anim._id_1177 = [];
@@ -23,26 +21,21 @@ _id_2082() {
 
   if(!isDefined(anim._id_1185)) {
     anim._id_1185 = [];
-
   }
   if(!isDefined(anim._id_1186)) {
     anim._id_1186 = [];
-
   }
   if(!isDefined(anim._id_11AC)) {
     anim._id_11AC = [];
-
   }
   anim._id_11AD = [];
   anim._id_11B0 = [];
 
   if(!isDefined(anim._id_1187)) {
     anim._id_1187 = [];
-
   }
   if(!isDefined(anim._id_11A9)) {
     anim._id_11A9 = [];
-
   }
   anim._id_2085 = [];
   anim._id_2086 = [];
@@ -436,7 +429,6 @@ _id_2087() {
           var_5 = getnotetracktimes(anim._id_1173[var_3][var_2], "code_move")[0];
         } else {
           var_5 = 1;
-
         }
         anim._id_11AC[var_3][var_2] = getmovedelta(anim._id_1173[var_3][var_2], 0, var_5);
         anim._id_11A9[var_3][var_2] = getangledelta(anim._id_1173[var_3][var_2], 0, 1);
@@ -472,7 +464,6 @@ _id_2087() {
 
   if(!isDefined(anim._id_1190)) {
     anim._id_1190 = 0;
-
   }
   foreach(var_3, var_8 in anim._id_1179) {
     for(var_2 = 7; var_2 <= 9; var_2++) {

@@ -377,7 +377,7 @@ function cheat_complete_stage() {
   while(true) {
     if(getdvarstring("cheat_sq") != "") {
       if(isDefined(level._last_stage_started)) {
-        setdvar("cheat_sq", "");
+        setDvar("cheat_sq", "");
         zm_sidequests::stage_completed("sq", level._last_stage_started);
       }
     }
@@ -551,7 +551,7 @@ function function_66951281() {
 
 function function_69090b83() {
   self waittill("death", attacker);
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(!isDefined(self)) {

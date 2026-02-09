@@ -135,7 +135,6 @@ assault_vehicle_ai_aerial_follow_path_outside(path) {
     drive_time = 0;
 
     while(Distance2DSquared(next_node.origin, self.origin) > squared(SCR_CONST_REACHED_NODE_RADIUS)) {
-      /#			
       self assault_vehicle_ai_draw_debug_path(path, i, node_offset);
 
       drive_time += 0.05;
@@ -160,7 +159,6 @@ assault_vehicle_ai_move_to_aerial_node(node) {
   current_node_origin = node.origin + get_aerial_offset();
   self assault_vehicle_ai_air_movement_func(current_node_origin);
   while(DistanceSquared(self.origin, current_node_origin) > SCR_CONST_REACHED_NODE_RADIUS * SCR_CONST_REACHED_NODE_RADIUS) {
-    /#		
     if(GetDvarInt("ai_showpaths") == 1 || SCR_CONST_ALWAYS_SHOW_VEHICLE_PATH_DEBUG) {
       line(self.origin, current_node_origin, (0, 0, 1), 1.0, false, 4);
     }
@@ -328,7 +326,6 @@ assault_vehicle_ai_get_camera_position() {
 
 assault_vehicle_ai_threat() {
   self endon("death");
-  /#	
   self childthread assault_vehicle_ai_debug_threat_lines();
 
   while(1) {
@@ -685,7 +682,6 @@ assault_vehicle_ai_follow_path(path, movement_func, enemy_moved_func, node_z_off
     drive_time = 0;
 
     while(Distance2DSquared(next_node.origin, self.origin) > squared(SCR_CONST_REACHED_NODE_RADIUS)) {
-      /#			
       self assault_vehicle_ai_draw_debug_path(path, i, node_offset);
 
       drive_time += 0.05;

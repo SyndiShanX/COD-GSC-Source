@@ -27,7 +27,7 @@ main() {
   level.register_offhand_weapons_for_level_defaults_override = ::register_offhand_weapons_for_level_defaults_override;
   level.use_zombie_heroes = true;
   flag_init("_start_zm_pistol_rank");
-  SetDvar("magic_chest_movable", "0");
+  setDvar("magic_chest_movable", "0");
   maps\_zombiemode::main();
   level.zone_manager_init_func = ::prototype_zone_init;
   init_zones[0] = "start_zone";
@@ -46,11 +46,9 @@ main() {
   level thread pistol_rank_setup();
   level.has_pack_a_punch = false;
 }
-
 precache_player_model_override() {
   mptype\player_t5_zm_theater::precache();
 }
-
 give_player_model_override(entity_num) {
   if(isDefined(self.zm_random_char)) {
     entity_num = self.zm_random_char;
@@ -70,7 +68,6 @@ give_player_model_override(entity_num) {
       break;
   }
 }
-
 player_set_viewmodel_override(entity_num) {
   switch (self.entity_num) {
     case 0:
@@ -87,7 +84,6 @@ player_set_viewmodel_override(entity_num) {
       break;
   }
 }
-
 register_offhand_weapons_for_level_defaults_override() {
   register_lethal_grenade_for_level("stielhandgranate");
   level.zombie_lethal_grenade_player_init = "stielhandgranate";
@@ -98,7 +94,6 @@ register_offhand_weapons_for_level_defaults_override() {
   register_melee_weapon_for_level("knife_zm");
   level.zombie_melee_weapon_player_init = "knife_zm";
 }
-
 setup_weapon_cabinet() {
   weapon_cabs = getEntArray("weapon_cabinet_use", "targetname");
   for(i = 0; i < weapon_cabs.size; i++) {
@@ -108,7 +103,6 @@ setup_weapon_cabinet() {
   }
   array_thread(weapon_cabs, ::weapon_cabinet_think);
 }
-
 weapon_cabinet_think() {
   weapons = getEntArray("cabinet_weapon", "targetname");
   doors = getEntArray(self.target, "targetname");
@@ -189,7 +183,6 @@ weapon_cabinet_think() {
     }
   }
 }
-
 weapon_cabinet_door_open(left_or_right) {
   if(left_or_right == "left") {
     self rotateyaw(120, 0.3, 0.2, 0.1);
@@ -197,11 +190,9 @@ weapon_cabinet_door_open(left_or_right) {
     self rotateyaw(-120, 0.3, 0.2, 0.1);
   }
 }
-
 bad_area_fixes() {
   thread disable_stances_in_zones();
 }
-
 disable_stances_in_zones() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -210,7 +201,6 @@ disable_stances_in_zones() {
     players[i] thread out_of_bounds_watcher();
   }
 }
-
 fix_hax() {
   self endon("disconnect");
   self endon("death");
@@ -239,7 +229,6 @@ fix_hax() {
     }
   }
 }
-
 fix_couch_stuckspot() {
   self endon("disconnect");
   self endon("death");
@@ -251,7 +240,6 @@ fix_couch_stuckspot() {
     }
   }
 }
-
 in_bad_zone_watcher() {
   self endon("disconnect");
   level endon("fake_death");
@@ -271,11 +259,13 @@ in_bad_zone_watcher() {
       array_check = no_prone_zones.size;
     }
     for(i = 0; i < array_check; i++) {
-      if(isDefined(no_prone_and_crouch_zones[i]) && self is_within_volume(no_prone_and_crouch_zones[i]["min"][0], no_prone_and_crouch_zones[i]["max"][0], no_prone_and_crouch_zones[i]["min"][1], no_prone_and_crouch_zones[i]["max"][1], no_prone_and_crouch_zones[i]["min"][2], no_prone_and_crouch_zones[i]["max"][2])) {
+      if(isDefined(no_prone_and_crouch_zones[i]) &&
+        self is_within_volume(no_prone_and_crouch_zones[i]["min"][0], no_prone_and_crouch_zones[i]["max"][0], no_prone_and_crouch_zones[i]["min"][1], no_prone_and_crouch_zones[i]["max"][1], no_prone_and_crouch_zones[i]["min"][2], no_prone_and_crouch_zones[i]["max"][2])) {
         self allowprone(false);
         self allowcrouch(false);
         break;
-      } else if(isDefined(no_prone_zones[i]) && self is_within_volume(no_prone_zones[i]["min"][0], no_prone_zones[i]["max"][0], no_prone_zones[i]["min"][1], no_prone_zones[i]["max"][1], no_prone_zones[i]["min"][2], no_prone_zones[i]["max"][2])) {
+      } else if(isDefined(no_prone_zones[i]) &&
+        self is_within_volume(no_prone_zones[i]["min"][0], no_prone_zones[i]["max"][0], no_prone_zones[i]["min"][1], no_prone_zones[i]["max"][1], no_prone_zones[i]["min"][2], no_prone_zones[i]["max"][2])) {
         self allowprone(false);
         break;
       } else {
@@ -286,7 +276,6 @@ in_bad_zone_watcher() {
     wait 0.05;
   }
 }
-
 is_within_volume(min_x, max_x, min_y, max_y, min_z, max_z) {
   if(self.origin[0] > max_x || self.origin[0] < min_x) {
     return false;
@@ -297,11 +286,9 @@ is_within_volume(min_x, max_x, min_y, max_y, min_z, max_z) {
   }
   return true;
 }
-
 init_sounds() {
   maps\_zombiemode_utility::add_sound("break_stone", "break_stone");
 }
-
 include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
@@ -363,7 +350,6 @@ include_weapons() {
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", &"WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", &"WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
 }
-
 include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -371,7 +357,6 @@ include_powerups() {
   include_powerup("full_ammo");
   include_powerup("carpenter");
 }
-
 above_couches_death() {
   level endon("junk purchased");
   while(1) {
@@ -386,7 +371,6 @@ above_couches_death() {
     }
   }
 }
-
 above_roof_death() {
   while(1) {
     wait 0.2;
@@ -400,7 +384,6 @@ above_roof_death() {
     }
   }
 }
-
 below_ground_death() {
   while(1) {
     wait 0.2;
@@ -414,7 +397,6 @@ below_ground_death() {
     }
   }
 }
-
 out_of_bounds_watcher() {
   self endon("disconnect");
   outside_of_map = [];
@@ -442,7 +424,6 @@ out_of_bounds_watcher() {
     wait 0.2;
   }
 }
-
 check_solo_game() {
   flag_wait("all_players_connected");
   players = GetPlayers();
@@ -452,7 +433,6 @@ check_solo_game() {
     players[0].lives = 0;
   }
 }
-
 prototype_zone_init() {
   flag_init("always_on");
   flag_set("always_on");
@@ -460,14 +440,12 @@ prototype_zone_init() {
   add_adjacent_zone("start_zone", "upstairs_zone", "start_2_upstairs");
   add_adjacent_zone("box_zone", "upstairs_zone", "box_2_upstairs");
 }
-
 prototype_eggs() {
   trigs = getEntArray("evt_egg_killme", "targetname");
   for(i = 0; i < trigs.size; i++) {
     trigs[i] thread check_for_egg_damage();
   }
 }
-
 check_for_egg_damage() {
   if(!isDefined(level.egg_damage_counter)) {
     level.egg_damage_counter = 0;
@@ -475,7 +453,6 @@ check_for_egg_damage() {
   self waittill("damage");
   level.egg_damage_counter = level.egg_damage_counter + 1;
 }
-
 time_to_play() {
   if(!isDefined(level.egg_damage_counter)) {
     level.egg_damage_counter = 0;
@@ -490,7 +467,6 @@ time_to_play() {
   level.music_override = false;
   level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
 }
-
 pistol_rank_setup() {
   flag_init("_start_zm_pistol_rank");
   flag_wait("all_players_connected");

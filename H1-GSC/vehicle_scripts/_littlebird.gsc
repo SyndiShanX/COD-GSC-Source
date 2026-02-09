@@ -287,7 +287,7 @@ littlebird_emp_death(var_0, var_1) {
   self.enablerocketdeath = 1;
   maps\_vehicle_code::vehicle_kill_common(var_0, var_1);
 
-  if(getdvar("mapname") == "lab")
+  if(getDvar("mapname") == "lab")
     check_lab_achievement();
 
   self kill(self.origin, var_0);

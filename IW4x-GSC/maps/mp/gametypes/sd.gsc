@@ -11,7 +11,7 @@
 // Doesn't seem to be setting angle on spawn so that you are facing your rallypoint
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();

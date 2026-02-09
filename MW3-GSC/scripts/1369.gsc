@@ -6,7 +6,7 @@
 _id_4218() {
   _id_42FB();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   switch (self.team) {
@@ -29,7 +29,7 @@ _id_42FA(var_0, var_1) {
 }
 
 _id_42FB(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     _id_055E::_id_4219();
     return;
   }
@@ -50,7 +50,6 @@ _id_42FB(var_0) {
 
   if(isDefined(var_0)) {
     _id_42FD(var_0);
-
   }
   self._id_0B6E._id_423A._id_42FC = 1;
 }
@@ -90,7 +89,6 @@ _id_4300() {
 _id_4301(var_0) {
   if(!isDefined(self._id_0B6E._id_423A._id_0AD9)) {
     maps\_stealth_threat_enemy::_id_4249();
-
   }
   if(isDefined(var_0)) {
     _id_4305(var_0);
@@ -108,7 +106,6 @@ _id_4303() {
 _id_4304(var_0, var_1) {
   if(isDefined(var_0)) {
     maps\_stealth_threat_enemy::_id_4261(var_0);
-
   }
   if(isDefined(var_1)) {
     maps\_stealth_threat_enemy::_id_4266(var_1);
@@ -125,7 +122,6 @@ _id_4305(var_0, var_1) {
     while(isDefined(self._id_0B6E._id_41D0._id_41D1[var_2][var_5])) {
       if(!isDefined(var_0[var_5])) {
         var_0[var_5] = maps\_stealth_shared_utilities::_id_41D2(var_2, var_5);
-
       }
       var_4++;
       var_5 = var_3 + var_4;
@@ -152,7 +148,6 @@ _id_42F5(var_0) {
 _id_4308(var_0) {
   if(!isDefined(self._id_0B6E._id_423A._id_4250)) {
     _id_0561::_id_428A();
-
   }
   if(isDefined(var_0)) {
     _id_4309(var_0);
@@ -230,7 +225,6 @@ _id_4316(var_0, var_1, var_2, var_3) {
 _id_4317(var_0) {
   if(!isDefined(self._id_0B6E._id_423A._id_42C8)) {
     _id_0564::_id_42C5();
-
   }
   if(isDefined(var_0)) {
     _id_4318(var_0);
@@ -248,7 +242,6 @@ _id_4319() {
 _id_431A(var_0) {
   if(!isDefined(self._id_0B6E._id_423A._id_42D1)) {
     _id_0565::_id_42CB();
-
   }
   if(isDefined(var_0)) {
     _id_431B(var_0);
@@ -374,7 +367,6 @@ _id_432F(var_0, var_1, var_2, var_3, var_4) {
     thread maps\_anim::_id_11CD(var_0, "gravity", var_1, var_3);
   } else {
     thread maps\_anim::_id_11C8(var_0, var_1, var_3);
-
   }
   var_0 maps\_stealth_shared_utilities::_id_420D(self, var_2, var_3, var_6);
   maps\_utility::_id_09C9(maps\_utility::_id_09CA, "stop_idle_proc");
@@ -495,7 +487,6 @@ _id_433E() {
 _id_433F(var_0) {
   if(isDefined(self._id_204F)) {
     level._id_0B6E._id_1124.groups[self._id_204F] = common_scripts\utility::array_remove(level._id_0B6E._id_1124.groups[self._id_204F], self);
-
   }
   self._id_204F = maps\_utility::string(var_0);
 
@@ -545,7 +536,6 @@ _id_4342() {
 _id_4343() {
   if(maps\_utility::_id_133C("_stealth_enabled")) {
     maps\_utility::_id_13DC("_stealth_enabled");
-
   }
   if(self.team == "allies") {
     _id_055E::_id_421A();
@@ -555,7 +545,6 @@ _id_4343() {
 _id_4344() {
   if(maps\_utility::_id_133C("_stealth_enabled")) {
     maps\_utility::_id_13DE("_stealth_enabled");
-
   }
   self.maxvisibledist = 8192;
 }

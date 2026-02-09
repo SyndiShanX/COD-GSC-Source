@@ -834,7 +834,7 @@ laser_damage_trigger_logic(var_0, var_1) {
   var_0.trigger endon("target_shot");
   for(;;) {
     var_0.trigger waittill("trigger", var_2);
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       break;
     }
   }

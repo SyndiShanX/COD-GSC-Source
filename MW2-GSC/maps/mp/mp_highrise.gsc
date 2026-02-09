@@ -15,9 +15,9 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_highrise");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.11);
-  setdvar("r_lightGridContrast", .9);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.11);
+  setDvar("r_lightGridContrast", .9);
 
   VisionSetNaked("mp_highrise");
   ambientPlay("embient_mp_highrise");
@@ -28,7 +28,7 @@ main() {
   // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 3;
 
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   //thread Elevator( "elev1" );
   //thread Elevator( "elev2" );
   //thread Elevator( "elev3" );	

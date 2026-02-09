@@ -1523,7 +1523,7 @@ canSeeAny(team) {
     if(isDefined(team[i]) && team[i] cansee(self)) {
       return true;
     }
-  return false;
+    return false;
   }
 }
 

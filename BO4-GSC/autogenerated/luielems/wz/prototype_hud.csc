@@ -118,7 +118,6 @@ class cprototype_hud: cluielem {
     cluielem::add_clientfield("fail_fanfare_visibility", 4000, 1, "int", var_2b966169);
     cluielem::add_clientfield("deploy_prompt_visibility", 4000, 1, "int", var_83a9258);
   }
-
 }
 
 register(uid, var_fdf544c8, var_33c5c30f, var_96284758, var_bde1ea58, var_9a41cc6b, var_532cdc1a, var_3e5d22, var_61c0f0c1, var_5dd927bd, var_7a99f2e1, var_f3632296, var_d59bef9f, var_be5884c9, var_b5ae72b8, var_2b966169, var_83a9258) {

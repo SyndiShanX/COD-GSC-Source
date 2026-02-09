@@ -49,7 +49,7 @@ function init_low_gravity_fx() {
 function gravity_trigger() {
   while(true) {
     self waittill("trigger", who);
-    if(!isplayer(who)) {
+    if(!isPlayer(who)) {
       self thread trigger::function_d1278be0(who, &gravity_zombie_in, &gravity_zombie_out);
     } else {
       self thread trigger::function_d1278be0(who, &gravity_player_in, &gravity_player_out);
@@ -563,7 +563,7 @@ function update_zombie_gravity_transition() {
 function zombie_airlock_think() {
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       continue;
     }
     if(!level flag::get("power_on")) {

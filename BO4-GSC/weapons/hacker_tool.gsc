@@ -95,7 +95,7 @@ watchhackertoolfired() {
           #player: self, #is_remote_hack: 1
         });
 
-        if(isDefined(hackertooltarget.owner) && isplayer(hackertooltarget.owner) && hackertooltarget.owner.team != self.team) {
+        if(isDefined(hackertooltarget.owner) && isPlayer(hackertooltarget.owner) && hackertooltarget.owner.team != self.team) {
           hackertooltarget.owner killstreaks::play_killstreak_hacked_dialog(hackertooltarget.killstreaktype, hackertooltarget.killstreakid, self);
         }
       } else if(isentityhackableweaponobject(hackertooltarget) && isDefined(hackertooltarget.hackertrigger)) {
@@ -106,7 +106,7 @@ watchhackertoolfired() {
         self.throwinggrenade = 0;
       } else if(isDefined(hackertooltarget.killstreak_hackedcallback) && (!isDefined(hackertooltarget.killstreaktimedout) || hackertooltarget.killstreaktimedout == 0)) {
         if(hackertooltarget.killstreak_hackedprotection == 0) {
-          if(isDefined(hackertooltarget.owner) && isplayer(hackertooltarget.owner)) {
+          if(isDefined(hackertooltarget.owner) && isPlayer(hackertooltarget.owner)) {
             hackertooltarget.owner killstreaks::play_killstreak_hacked_dialog(hackertooltarget.killstreaktype, hackertooltarget.killstreakid, self);
           }
 
@@ -121,7 +121,7 @@ watchhackertoolfired() {
             self stats::function_dad108fa(#"hack_streak_with_blindeye_or_engineer", 1);
           }
         } else {
-          if(isDefined(hackertooltarget.owner) && isplayer(hackertooltarget.owner)) {
+          if(isDefined(hackertooltarget.owner) && isPlayer(hackertooltarget.owner)) {
             self.hackertooltarget.owner killstreaks::play_killstreak_firewall_hacked_dialog(self.hackertooltarget.killstreaktype, self.hackertooltarget.killstreakid);
           }
 
@@ -172,7 +172,7 @@ watchhackertoolfired() {
 }
 
 event_handler[grenade_pullback] function_f4068d35(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -301,7 +301,7 @@ hackertooltargetloop(weapon) {
       if(self.hackertoollocktimeelapsed == 0) {
         self playlocalsound(#"evt_hacker_hacking");
 
-        if(isDefined(self.hackertooltarget.owner) && isplayer(self.hackertooltarget.owner)) {
+        if(isDefined(self.hackertooltarget.owner) && isPlayer(self.hackertooltarget.owner)) {
           if(isDefined(self.hackertooltarget.killstreak_hackedcallback) && (!isDefined(self.hackertooltarget.killstreaktimedout) || self.hackertooltarget.killstreaktimedout == 0)) {
             if(self.hackertooltarget.killstreak_hackedprotection == 0) {
               self.hackertooltarget.owner killstreaks::play_killstreak_being_hacked_dialog(self.hackertooltarget.killstreaktype, self.hackertooltarget.killstreakid);

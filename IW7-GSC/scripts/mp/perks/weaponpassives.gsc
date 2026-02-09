@@ -2241,7 +2241,7 @@ func_AD70(var_0) {
       break;
     }
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(teamsmatch(self.owner, var_1)) {

@@ -159,7 +159,7 @@ jet_timer() {
   timelimit = max(10, match_timelimit);
   timelimit = min(timelimit, 100);
 
-  if(GetDvar("jet_flyby_timer") != "") {
+  if(getDvar("jet_flyby_timer") != "") {
     level.civilianJetFlyBy_timer = 5 + GetDvarInt("jet_flyby_timer");
   } else {
     level.civilianJetFlyBy_timer = (0.25 + RandomFloatRange(0.3, 0.7)) * 60 * timeLimit;
@@ -1274,7 +1274,7 @@ triggerTouchThink(enterFunc, exitFunc) {
   while(true) {
     self waittill("trigger", player);
 
-    if(!IsPlayer(player) && !isDefined(player.finished_spawning)) {
+    if(!isPlayer(player) && !isDefined(player.finished_spawning)) {
       continue;
     }
 
@@ -1291,7 +1291,7 @@ triggerTouchThink(enterFunc, exitFunc) {
 playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
   trigger endon("deleted");
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     self endon("death");
   }
 
@@ -1350,7 +1350,7 @@ movementTracker() {
   }
   self endon("disconnect");
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     self endon("death");
   }
 

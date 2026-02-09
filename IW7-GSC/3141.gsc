@@ -519,7 +519,7 @@ func_100BE(var_0, var_1, var_2, var_3) {
       return 0;
     }
 
-    if(isplayer(var_7) && isDefined(self._blackboard.var_E5FD) && self._blackboard.var_E5FD) {
+    if(isPlayer(var_7) && isDefined(self._blackboard.var_E5FD) && self._blackboard.var_E5FD) {
       return 0;
     }
   } else {

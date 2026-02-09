@@ -49,7 +49,7 @@ function should_play_sound(mod) {
 }
 
 function update(mod, inflictor, perkfeedback) {
-  if(!isplayer(self) || sessionmodeiszombiesgame()) {
+  if(!isPlayer(self) || sessionmodeiszombiesgame()) {
     return;
   }
   if(should_play_sound(mod)) {
@@ -107,13 +107,13 @@ function play_hit_sound(mod, alert) {
 }
 
 function update_special(hitent) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!isDefined(hitent)) {
     return;
   }
-  if(!isplayer(hitent)) {
+  if(!isPlayer(hitent)) {
     return;
   }
   wait(0.05);

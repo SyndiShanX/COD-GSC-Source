@@ -8,6 +8,7 @@
 #include maps\_zombiemode_utility;
 #include maps\_zombiemode_net;
 #using_animtree("generic_human");
+
 init() {
   if(!maps\_zombiemode_weapons::is_weapon_included("tesla_gun_zm")) {
     return;
@@ -36,7 +37,6 @@ init() {
   set_zombie_var("tesla_network_death_choke", 4);
   level thread on_player_connect();
 }
-
 tesla_damage_init(hit_location, hit_origin, player) {
   player endon("disconnect");
   if(isDefined(player.tesla_enemies_hit) && player.tesla_enemies_hit > 0) {
@@ -57,7 +57,6 @@ tesla_damage_init(hit_location, hit_origin, player) {
   }
   player.tesla_enemies_hit = 0;
 }
-
 tesla_arc_damage(source_enemy, player, arc_num) {
   player endon("disconnect");
   debug_print("TESLA: Evaulating arc damage for arc: " + arc_num + " Current enemies hit: " + player.tesla_enemies_hit);
@@ -80,7 +79,6 @@ tesla_arc_damage(source_enemy, player, arc_num) {
     enemies[i] tesla_arc_damage(self, player, arc_num + 1);
   }
 }
-
 tesla_end_arc_damage(arc_num, enemies_hit_num) {
   if(arc_num >= level.zombie_vars["tesla_max_arcs"]) {
     debug_print("TESLA: Ending arcing. Max arcs hit");
@@ -97,7 +95,6 @@ tesla_end_arc_damage(arc_num, enemies_hit_num) {
   }
   return false;
 }
-
 tesla_get_enemies_in_area(origin, distance, player) {
   distance_squared = distance * distance;
   enemies = [];
@@ -118,7 +115,7 @@ tesla_get_enemies_in_area(origin, distance, player) {
       if(is_magic_bullet_shield_enabled(zombies[i])) {
         continue;
       }
-      if(distanceSquared(origin, test_origin) > distance_squared) {
+      if(DistanceSquared(origin, test_origin) > distance_squared) {
         continue;
       }
       if(!BulletTracePassed(origin, test_origin, false, undefined)) {
@@ -129,7 +126,6 @@ tesla_get_enemies_in_area(origin, distance, player) {
   }
   return enemies;
 }
-
 tesla_flag_hit(enemy, hit) {
   if(IsArray(enemy)) {
     for(i = 0; i < enemy.size; i++) {
@@ -139,7 +135,6 @@ tesla_flag_hit(enemy, hit) {
     enemy.zombie_tesla_hit = hit;
   }
 }
-
 tesla_do_damage(source_enemy, arc_num, player) {
   player endon("disconnect");
   if(arc_num > 1) {
@@ -189,7 +184,6 @@ tesla_do_damage(source_enemy, arc_num, player) {
   }
   player maps\_zombiemode_score::player_add_points("death", "", "");
 }
-
 tesla_play_death_fx(arc_num) {
   tag = "J_SpineUpper";
   fx = "tesla_shock";
@@ -205,7 +199,6 @@ tesla_play_death_fx(arc_num) {
     [[self.tesla_head_gib_func]]();
   }
 }
-
 tesla_play_arc_fx(target) {
   if(!isDefined(self) || !isDefined(target)) {
     wait(level.zombie_vars["tesla_arc_travel_time"]);
@@ -222,7 +215,7 @@ tesla_play_arc_fx(target) {
   origin = self GetTagOrigin(tag);
   target_origin = target GetTagOrigin(target_tag);
   distance_squared = level.zombie_vars["tesla_min_fx_distance"] * level.zombie_vars["tesla_min_fx_distance"];
-  if(distanceSquared(origin, target_origin) < distance_squared) {
+  if(DistanceSquared(origin, target_origin) < distance_squared) {
     debug_print("TESLA: Not playing arcing FX. Enemies too close.");
     return;
   }
@@ -230,20 +223,17 @@ tesla_play_arc_fx(target) {
   fxOrg setModel("tag_origin");
   fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
   playsoundatposition("wpn_tesla_bounce", fxOrg.origin);
-  fxOrg moveTo(target_origin, level.zombie_vars["tesla_arc_travel_time"]);
+  fxOrg MoveTo(target_origin, level.zombie_vars["tesla_arc_travel_time"]);
   fxOrg waittill("movedone");
   fxOrg delete();
 }
-
 tesla_debug_arc(origin, distance) {}
 is_tesla_damage(mod) {
   return ((isDefined(self.damageweapon) && (self.damageweapon == "tesla_gun_zm" || self.damageweapon == "tesla_gun_upgraded_zm")) && (mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH"));
 }
-
 enemy_killed_by_tesla() {
   return (isDefined(self.tesla_death) && self.tesla_death == true);
 }
-
 on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
@@ -252,7 +242,6 @@ on_player_connect() {
     player thread tesla_network_choke();
   }
 }
-
 tesla_sound_thread() {
   self endon("disconnect");
   self waittill("spawned_player");
@@ -265,11 +254,10 @@ tesla_sound_thread() {
       self playLoopSound("wpn_tesla_idle", 0.25);
     } else {
       self notify("weap_away");
-      self stopLoopSound(0.25);
+      self StopLoopSound(0.25);
     }
   }
 }
-
 tesla_engine_sweets() {
   self endon("disconnect");
   self endon("weap_away");
@@ -278,7 +266,6 @@ tesla_engine_sweets() {
     self play_tesla_sound("wpn_tesla_sweeps_idle");
   }
 }
-
 tesla_pvp_thread() {
   self endon("disconnect");
   self endon("death");
@@ -310,7 +297,6 @@ tesla_pvp_thread() {
     self playSound("wpn_tesla_bounce");
   }
 }
-
 play_tesla_sound(emotion) {
   self endon("disconnect");
   if(!isDefined(level.one_emo_at_a_time)) {
@@ -328,14 +314,12 @@ play_tesla_sound(emotion) {
     level.one_emo_at_a_time = 0;
   }
 }
-
 tesla_killstreak_sound() {
   self endon("disconnect");
   self maps\_zombiemode_audio::create_and_play_dialog("kill", "tesla");
   wait(3.5);
   level clientNotify("TGH");
 }
-
 tesla_network_choke() {
   self endon("disconnect");
   self endon("death");

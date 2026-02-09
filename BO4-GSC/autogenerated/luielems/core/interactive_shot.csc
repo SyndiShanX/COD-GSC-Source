@@ -28,7 +28,6 @@ class cinteractive_shot: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::function_dcb34c80("string", "text", 1);
   }
-
 }
 
 register(uid, textcallback) {

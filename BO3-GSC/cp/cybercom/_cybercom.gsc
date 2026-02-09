@@ -83,7 +83,7 @@ function ability_on(slot, weapon) {
     }
     self generatescriptevent();
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(!isDefined(self.var_1c0132c[weapon.name])) {
       self.var_1c0132c[weapon.name] = 0;
     }
@@ -135,7 +135,7 @@ function function_25889576(einflictor, eattacker, idamage, idflags, smeansofdeat
       }
     }
   }
-  if(isDefined(self.tokubetsukogekita) && self.tokubetsukogekita && isDefined(eattacker) && !isplayer(eattacker)) {
+  if(isDefined(self.tokubetsukogekita) && self.tokubetsukogekita && isDefined(eattacker) && !isPlayer(eattacker)) {
     idamage = 1;
   }
   if(idamage > 30) {
@@ -259,7 +259,7 @@ function on_menu_response() {
 }
 
 function disablecybercom(var_1e41d598) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self.cybercom.var_18714ef0 = self gadgetpowerget(0);
   self.cybercom.var_3e73c959 = self gadgetpowerget(1);
   self.cybercom.var_647643c2 = self gadgetpowerget(1);
@@ -280,7 +280,7 @@ function disablecybercom(var_1e41d598) {
 }
 
 function enablecybercom() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self clientfield::set_to_player("cybercom_disabled", 0);
   if(isDefined(self.cybercom.lastequipped)) {
     self cybercom_gadget::equipability(self.cybercom.lastequipped.name);
@@ -322,7 +322,7 @@ function _cybercom_notify_toggle_on() {
       player enablecybercom();
     } else {
       level clientfield::set("cybercom_disabled", 0);
-      setdvar("cybercom_enabled", 1);
+      setDvar("cybercom_enabled", 1);
       foreach(player in getplayers()) {
         player enablecybercom();
       }
@@ -339,7 +339,7 @@ function _cybercom_notify_toggle_off() {
       player disablecybercom(var_1e41d598);
     } else {
       level clientfield::set("cybercom_disabled", 1);
-      setdvar("cybercom_enabled", 0);
+      setDvar("cybercom_enabled", 0);
       foreach(player in getplayers()) {
         player disablecybercom();
       }

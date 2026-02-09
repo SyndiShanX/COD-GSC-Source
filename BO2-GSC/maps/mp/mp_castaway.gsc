@@ -19,8 +19,8 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_castaway_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_castaway");
-  setdvar("compassmaxrange", "2100");
-  setdvar("bg_dog_swim_enabled", 1);
+  setDvar("compassmaxrange", "2100");
+  setDvar("bg_dog_swim_enabled", 1);
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";

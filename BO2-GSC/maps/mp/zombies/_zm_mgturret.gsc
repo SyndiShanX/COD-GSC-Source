@@ -7,8 +7,8 @@
 #include common_scripts\utility;
 
 main() {
-  if(getdvar(#"_id_7C9A91DF") == "")
-    setdvar("mgTurret", "off");
+  if(getDvar(#"_id_7C9A91DF") == "")
+    setDvar("mgTurret", "off");
 
   level.magic_distance = 24;
   turretinfos = getEntArray("turretInfo", "targetname");
@@ -256,7 +256,7 @@ random_spread(ent) {
   self.manual_target = ent;
 
   while(true) {
-    if(isplayer(ent))
+    if(isPlayer(ent))
       ent.origin = self.manual_target getorigin();
     else
       ent.origin = self.manual_target.origin;

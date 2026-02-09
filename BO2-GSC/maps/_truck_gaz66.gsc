@@ -6,9 +6,9 @@
 #include maps\_vehicle;
 
 main(model, type) {
-  if(self.vehicletype == "truck_gaz66_player_single50")
+  if(self.vehicletype == "truck_gaz66_player_single50") {
     build_aianims(::set_gunner_anims, ::set_gunner_vehicle_anims);
-  else {
+  } else {
     build_aianims(::setanims, ::set_vehicle_anims);
     build_unload_groups(::unload_groups);
   }
@@ -41,8 +41,9 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 10; i++)
+  for(i = 0; i < 10; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -131,8 +132,9 @@ set_gunner_vehicle_anims(positions) {
 set_gunner_anims() {
   positions = [];
 
-  for(i = 0; i < 3; i++)
+  for(i = 0; i < 3; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

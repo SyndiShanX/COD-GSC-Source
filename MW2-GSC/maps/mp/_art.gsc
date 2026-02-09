@@ -29,7 +29,7 @@ main() {
   thread tweakart();
 
   if(!isDefined(level.script))
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
 }
 
 tweakart() {
@@ -86,7 +86,6 @@ tweakart() {
     }
     wait .1;
   }
-
 }
 
 fovslidercheck() {
@@ -115,14 +114,13 @@ fovslidercheck() {
     level.dofDefault["farStart"] = level.dofDefault["nearEnd"] + 1;
     SetDevDvar("scr_dof_farStart", level.dofDefault["farStart"]);
   }
-
 }
 
 dumpsettings() {
   if(GetDvarInt("scr_art_dump") == 0)
     return false;
 
-  filename = "createart/" + GetDvar("scr_art_visionfile") + "_art.gsc";
+  filename = "createart/" + getDvar("scr_art_visionfile") + "_art.gsc";
 
   artStartFogFileExport();
   fileprint_launcher("// _createart generated.modify at your own risk. Changing values should be fine.");
@@ -140,29 +138,29 @@ dumpsettings() {
   fileprint_launcher("}");
   artEndFogFileExport();
 
-  visionFilename = "vision/" + GetDvar("scr_art_visionfile") + ".vision";
+  visionFilename = "vision/" + getDvar("scr_art_visionfile") + ".vision";
 
   artStartVisionFileExport();
 
-  fileprint_launcher("r_glow\"" + GetDvar("r_glowTweakEnable") + "\"");
-  fileprint_launcher("r_glowRadius0 \"" + GetDvar("r_glowTweakRadius0") + "\"");
-  fileprint_launcher("r_glowBloomCutoff \"" + GetDvar("r_glowTweakBloomCutoff") + "\"");
-  fileprint_launcher("r_glowBloomDesaturation \"" + GetDvar("r_glowTweakBloomDesaturation") + "\"");
-  fileprint_launcher("r_glowBloomIntensity0 \"" + GetDvar("r_glowTweakBloomIntensity0") + "\"");
+  fileprint_launcher("r_glow\"" + getDvar("r_glowTweakEnable") + "\"");
+  fileprint_launcher("r_glowRadius0 \"" + getDvar("r_glowTweakRadius0") + "\"");
+  fileprint_launcher("r_glowBloomCutoff \"" + getDvar("r_glowTweakBloomCutoff") + "\"");
+  fileprint_launcher("r_glowBloomDesaturation \"" + getDvar("r_glowTweakBloomDesaturation") + "\"");
+  fileprint_launcher("r_glowBloomIntensity0 \"" + getDvar("r_glowTweakBloomIntensity0") + "\"");
   fileprint_launcher(" ");
-  fileprint_launcher("r_filmEnable\"" + GetDvar("r_filmTweakEnable") + "\"");
-  fileprint_launcher("r_filmContrast\"" + GetDvar("r_filmTweakContrast") + "\"");
-  fileprint_launcher("r_filmBrightness\"" + GetDvar("r_filmTweakBrightness") + "\"");
-  fileprint_launcher("r_filmDesaturation\"" + GetDvar("r_filmTweakDesaturation") + "\"");
-  fileprint_launcher("r_filmDesaturationDark\"" + GetDvar("r_filmTweakDesaturationDark") + "\"");
-  fileprint_launcher("r_filmInvert\"" + GetDvar("r_filmTweakInvert") + "\"");
-  fileprint_launcher("r_filmLightTint \"" + GetDvar("r_filmTweakLightTint") + "\"");
-  fileprint_launcher("r_filmMediumTint\"" + GetDvar("r_filmTweakMediumTint") + "\"");
-  fileprint_launcher("r_filmDarkTint\"" + GetDvar("r_filmTweakDarkTint") + "\"");
+  fileprint_launcher("r_filmEnable\"" + getDvar("r_filmTweakEnable") + "\"");
+  fileprint_launcher("r_filmContrast\"" + getDvar("r_filmTweakContrast") + "\"");
+  fileprint_launcher("r_filmBrightness\"" + getDvar("r_filmTweakBrightness") + "\"");
+  fileprint_launcher("r_filmDesaturation\"" + getDvar("r_filmTweakDesaturation") + "\"");
+  fileprint_launcher("r_filmDesaturationDark\"" + getDvar("r_filmTweakDesaturationDark") + "\"");
+  fileprint_launcher("r_filmInvert\"" + getDvar("r_filmTweakInvert") + "\"");
+  fileprint_launcher("r_filmLightTint \"" + getDvar("r_filmTweakLightTint") + "\"");
+  fileprint_launcher("r_filmMediumTint\"" + getDvar("r_filmTweakMediumTint") + "\"");
+  fileprint_launcher("r_filmDarkTint\"" + getDvar("r_filmTweakDarkTint") + "\"");
   fileprint_launcher(" ");
-  fileprint_launcher("r_primaryLightUseTweaks\"" + GetDvar("r_primaryLightUseTweaks") + "\"");
-  fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + GetDvar("r_primaryLightTweakDiffuseStrength") + "\"");
-  fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + GetDvar("r_primaryLightTweakSpecularStrength") + "\"");
+  fileprint_launcher("r_primaryLightUseTweaks\"" + getDvar("r_primaryLightUseTweaks") + "\"");
+  fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + getDvar("r_primaryLightTweakDiffuseStrength") + "\"");
+  fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + getDvar("r_primaryLightTweakSpecularStrength") + "\"");
 
   if(!artEndVisionFileExport())
     return false;

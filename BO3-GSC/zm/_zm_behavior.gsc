@@ -91,7 +91,7 @@ function private initzmbehaviorsandasm() {
   animationstatenetwork::registernotetrackhandlerfunction("destroy_piece", &notetrackboardtear);
   animationstatenetwork::registernotetrackhandlerfunction("zombie_window_melee", &notetrackboardmelee);
   animationstatenetwork::registernotetrackhandlerfunction("bhb_burst", &zombiebhbburst);
-  setdvar("scr_zm_use_code_enemy_selection", 1);
+  setDvar("scr_zm_use_code_enemy_selection", 1);
 }
 
 function zombiefindflesh(behaviortreeentity) {
@@ -208,9 +208,7 @@ function zombiefindflesh(behaviortreeentity) {
         behaviortreeentity.has_exit_point = undefined;
         behaviortreeentity.ignoreall = 0;
         if(isDefined(level.enemy_location_override_func)) {
-          goalpos = [
-            [level.enemy_location_override_func]
-          ](behaviortreeentity, behaviortreeentity.favoriteenemy);
+          goalpos = [[level.enemy_location_override_func]](behaviortreeentity, behaviortreeentity.favoriteenemy);
           if(isDefined(goalpos)) {
             behaviortreeentity setgoal(goalpos);
           } else {
@@ -642,7 +640,7 @@ function zombieshouldattackthroughboardscondition(behaviortreeentity) {
     }
   }
   if(getdvarstring("zombie_reachin_freq") == "") {
-    setdvar("zombie_reachin_freq", "50");
+    setDvar("zombie_reachin_freq", "50");
   }
   freq = getdvarint("zombie_reachin_freq");
   players = getplayers();
@@ -671,7 +669,7 @@ function zombieshouldtauntcondition(behaviortreeentity) {
     return false;
   }
   if(getdvarstring("zombie_taunt_freq") == "") {
-    setdvar("zombie_taunt_freq", "5");
+    setDvar("zombie_taunt_freq", "5");
   }
   freq = getdvarint("zombie_taunt_freq");
   if(freq >= randomint(100)) {

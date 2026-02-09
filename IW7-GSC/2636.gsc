@@ -172,7 +172,7 @@ watchfordirectplayerdamage(var_0, var_1) {
     if(var_3 == self.owner) {
       continue;
     }
-    if(!isplayer(var_3) && !isagent(var_3)) {
+    if(!isPlayer(var_3) && !isagent(var_3)) {
       continue;
     }
     if(!scripts\cp\utility::isreallyalive(var_3)) {

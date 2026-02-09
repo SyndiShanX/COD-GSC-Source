@@ -2134,7 +2134,7 @@ func_AD70(var_0) {
     if(!isDefined(var_1) || !isDefined(self) || !isDefined(self.owner)) {
       break;
     }
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(teamsmatch(self.owner, var_1)) {

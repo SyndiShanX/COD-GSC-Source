@@ -26,14 +26,12 @@ __init__() {
   if(getdvarint(#"hash_4894e3a42dd84dfa", 0)) {
     callback::on_connect(&on_player_connect);
   }
-
 }
 
 __main__() {
   if(getdvarint(#"hash_4894e3a42dd84dfa", 0)) {
     level thread devgui();
   }
-
 }
 
 function_9af806be(var_c5b25bc5) {
@@ -99,7 +97,6 @@ function_2a94cd59() {
       self.n_regen_delay -= 1;
       break;
   }
-
 }
 
 function_6a7a1533(var_c5b25bc5) {
@@ -107,7 +104,7 @@ function_6a7a1533(var_c5b25bc5) {
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(!isplayer(attacker) || !isDefined(attacker.var_2fe40b9d)) {
+  if(!isPlayer(attacker) || !isDefined(attacker.var_2fe40b9d)) {
     return damage;
   }
 
@@ -265,7 +262,7 @@ devgui() {
         break;
     }
 
-    setdvar(#"hash_443a451d4b2f9de2", "<dev string:x2e0>");
+    setDvar(#"hash_443a451d4b2f9de2", "<dev string:x2e0>");
   }
 }
 

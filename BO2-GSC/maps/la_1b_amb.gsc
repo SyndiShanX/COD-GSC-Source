@@ -15,23 +15,29 @@ main() {
 }
 
 advertisements() {
-  if(self.script_noteworthy == "talent")
+  if(self.script_noteworthy == "talent") {
     self playLoopSound("vox_ads_1_01_001a_pa");
+  }
 
-  if(self.script_noteworthy == "tiny")
+  if(self.script_noteworthy == "tiny") {
     self playLoopSound("vox_ads_1_01_002a_pa");
+  }
 
-  if(self.script_noteworthy == "bala")
+  if(self.script_noteworthy == "bala") {
     self playLoopSound("vox_ads_1_01_004a_pa");
+  }
 
-  if(self.script_noteworthy == "passion")
+  if(self.script_noteworthy == "passion") {
     self playLoopSound("vox_ads_1_01_007a_pa");
+  }
 
-  if(self.script_noteworthy == "cola")
+  if(self.script_noteworthy == "cola") {
     self playLoopSound("vox_ads_1_01_008a_pa");
+  }
 
-  if(self.script_noteworthy == "cinema")
+  if(self.script_noteworthy == "cinema") {
     self playLoopSound("vox_ads_1_01_009a_pa");
+  }
 
   self waittill("damage");
   self playSound("dst_glass_pane");
@@ -86,10 +92,11 @@ play_sam_creaking_sounds() {
   wait_max = undefined;
 
   while(true) {
-    if(!isDefined(level.num_planes_shot))
+    if(!isDefined(level.num_planes_shot)) {
       wait_max = 15;
-    else
+    } else {
       wait_max = get_wait_max();
+    }
 
     level.player playSound("evt_cougar_creak");
     wait(randomintrange(2, wait_max));
@@ -97,14 +104,15 @@ play_sam_creaking_sounds() {
 }
 
 get_wait_max() {
-  if(level.num_planes_shot < 2)
+  if(level.num_planes_shot < 2) {
     return 12;
-  else if(level.num_planes_shot < 6)
+  } else if(level.num_planes_shot < 6) {
     return 8;
-  else if(level.num_planes_shot < 9)
+  } else if(level.num_planes_shot < 9) {
     return 6;
-  else
+  } else {
     return 4;
+  }
 }
 
 play_post_cougar_blend() {
@@ -129,10 +137,11 @@ play_intro_radio() {
 }
 
 la_drone_control_tones(activate) {
-  if(activate)
+  if(activate) {
     level thread play_drone_control_tones();
-  else
+  } else {
     level notify("stop_drone_control_tones");
+  }
 }
 
 play_drone_control_tones() {
@@ -151,10 +160,11 @@ waitfor_enough_drones() {
   while(true) {
     drones = get_vehicle_array("veh_t6_drone_quad_rotor_sp", "model");
 
-    if(!isDefined(drones) || drones.size <= 2)
+    if(!isDefined(drones) || drones.size <= 2) {
       wait 1;
-    else
+    } else {
       break;
+    }
 
     wait 0.1;
   }
@@ -171,8 +181,9 @@ play_drone_control_tones_single() {
   wait 4;
   drones = get_vehicle_array("veh_t6_drone_quad_rotor_sp", "model");
 
-  if(isDefined(drone))
+  if(isDefined(drone)) {
     arrayremovevalue(drones, drone);
+  }
 
   array_thread(drones, ::play_drone_reply);
 }
@@ -180,6 +191,7 @@ play_drone_control_tones_single() {
 play_drone_reply() {
   wait(randomfloatrange(0.1, 0.85));
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self playSound("veh_qr_tones_activate_reply");
+  }
 }

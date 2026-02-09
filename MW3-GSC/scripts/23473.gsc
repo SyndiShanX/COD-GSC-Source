@@ -10,7 +10,6 @@ main(var_0, var_1, var_2) {
     var_3 = "cobra_so";
   } else {
     var_3 = "cobra";
-
   }
   maps\_vehicle::_id_2AC2(var_3, var_0, var_1, var_2);
   maps\_vehicle::_id_2AD2(::_id_2B1D);
@@ -18,7 +17,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2ABE("vehicle_cobra_helicopter_low");
   maps\_vehicle::_id_2ABE("vehicle_cobra_helicopter_fly");
   maps\_vehicle::_id_2ABE("vehicle_cobra_helicopter_fly_low");
-  maps\_vehicle::_id_2AC1( % bh_rotors, undefined, 0, 3.0);
+  maps\_vehicle::_id_2AC1(%bh_rotors, undefined, 0, 3.0);
   var_4 = [];
   var_4["vehicle_cobra_helicopter"] = "explosions/large_vehicle_explosion";
   var_4["vehicle_cobra_helicopter_low"] = "explosions/large_vehicle_explosion";
@@ -58,7 +57,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 2; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_pilot";
   var_0[1]._id_24F2 = "tag_gunner";

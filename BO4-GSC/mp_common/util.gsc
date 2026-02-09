@@ -534,7 +534,7 @@ self_delete() {
 }
 
 use_button_pressed() {
-  assert(isplayer(self), "<dev string:x9d>");
+  assert(isPlayer(self), "<dev string:x9d>");
   return self usebuttonpressed();
 }
 
@@ -720,18 +720,18 @@ init_map_art_dev() {
 }
 
 disable_gameplay_timers() {
-  setdvar(#"timelimitoverride", 0);
-  setdvar(#"prematchperiodoverride", 0);
-  setdvar(#"preroundperiodoverride", 0);
+  setDvar(#"timelimitoverride", 0);
+  setDvar(#"prematchperiodoverride", 0);
+  setDvar(#"preroundperiodoverride", 0);
 }
 
 disable_draft() {
-  setdvar(#"draftenabled", 0);
-  setdvar(#"auto_select_character", 1);
+  setDvar(#"draftenabled", 0);
+  setDvar(#"auto_select_character", 1);
 }
 
 disable_ui() {
-  setdvar(#"ui_enabled", 0);
+  setDvar(#"ui_enabled", 0);
 }
 
 override_gts_timelimit() {
@@ -746,6 +746,6 @@ override_gts_timelimit() {
 }
 
 enable_art_fps() {
-  setdvar(#"cg_drawfps", 0);
-  setdvar(#"cg_drawartfps", 1);
+  setDvar(#"cg_drawfps", 0);
+  setDvar(#"cg_drawartfps", 1);
 }

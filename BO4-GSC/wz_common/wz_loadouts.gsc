@@ -48,9 +48,9 @@ _get_item(itemname) {
 }
 
 function_a9b8fa06() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
-  if(!isplayer(self) || !isalive(self)) {
+  if(!isPlayer(self) || !isalive(self)) {
     return;
   }
 
@@ -68,9 +68,9 @@ function_a9b8fa06() {
 }
 
 function_3fed57dd() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
-  if(!isplayer(self) || !isalive(self)) {
+  if(!isPlayer(self) || !isalive(self)) {
     return;
   }
 
@@ -112,9 +112,9 @@ function_3fed57dd() {
 }
 
 function_9de0644f() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
-  if(!isplayer(self) || !isalive(self)) {
+  if(!isPlayer(self) || !isalive(self)) {
     return;
   }
 

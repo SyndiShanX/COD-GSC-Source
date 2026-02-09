@@ -9,12 +9,11 @@ main() {
   self.script_badplace = false;
   build_aianims(::setanims, ::set_vehicle_anims);
 }
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   for(i = 0; i < 3; i++) {
@@ -28,7 +27,6 @@ setanims() {
   positions[2].idle = % ai_huey_gunner1;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

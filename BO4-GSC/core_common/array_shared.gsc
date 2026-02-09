@@ -190,9 +190,7 @@ add_sorted(&array, item, allow_dupes = 1, func_compare, var_e19f0739 = 0) {
   if(isDefined(item)) {
     if(allow_dupes || !isinarray(array, item)) {
       for(i = 0; i <= array.size; i++) {
-        if(i == array.size || isDefined(func_compare) && ([
-            [func_compare]
-          ](item, array[i]) || var_e19f0739) || !isDefined(func_compare) && (item <= array[i] || var_e19f0739)) {
+        if(i == array.size || isDefined(func_compare) && ([[func_compare]](item, array[i]) || var_e19f0739) || !isDefined(func_compare) && (item <= array[i] || var_e19f0739)) {
           arrayinsert(array, item, i);
           break;
         }
@@ -638,9 +636,7 @@ bubble_sort(&array, sort_func) {
       i = end - 2;
 
       for(j = i + 1; i >= start; j--) {
-        if([
-            [sort_func]
-          ](array[j], array[i])) {
+        if([[sort_func]](array[j], array[i])) {
           swap(array, j, i);
           var_f9038db1 = 1;
         }

@@ -45,10 +45,10 @@ endgame(var_0, var_1) {
   level.time_survived = get_time_survived();
   setomnvar("zm_time_survived", level.time_survived);
   setomnvarforallclients("post_game_state", 1);
-  setdvar("g_deadChat", 1);
-  setdvar("ui_allow_teamchange", 0);
-  setdvar("bg_compassShowEnemies", 0);
-  setdvar("scr_gameended", 1);
+  setDvar("g_deadChat", 1);
+  setDvar("ui_allow_teamchange", 0);
+  setDvar("bg_compassShowEnemies", 0);
+  setDvar("scr_gameended", 1);
   setgameendtime(0);
   setomnvar("zm_ui_timer", 0);
   scripts\cp\cp_challenge::deactivate_current_challenge();
@@ -287,7 +287,7 @@ func_40A5(var_0) {
 }
 
 func_FF5E(var_0) {
-  if((var_0 == 1 || var_0 == 2) && getdvar("ui_mapname") == "cp_jackal_ass") {
+  if((var_0 == 1 || var_0 == 2) && getDvar("ui_mapname") == "cp_jackal_ass") {
     return "cp_titan";
   }
 
@@ -297,8 +297,8 @@ func_FF5E(var_0) {
 func_ADDE(var_0) {
   func_A5D7();
   level scripts\engine\utility::waittill_any_timeout(15, "intermission_over");
-  setdvar("ui_mapname", var_0);
-  setdvar("g_gametype", "aliens");
+  setDvar("ui_mapname", var_0);
+  setDvar("g_gametype", "aliens");
   var_1 = "map " + var_0;
 }
 

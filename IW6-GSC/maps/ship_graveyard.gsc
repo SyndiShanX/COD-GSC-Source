@@ -153,7 +153,7 @@ main() {
 
   if(maps\_utility::is_gen4()) {}
 
-  if(getdvar("createfx", "") == "on") {
+  if(getDvar("createfx", "") == "on") {
     level.struct_class_names = undefined;
     common_scripts\utility::struct_class_init();
     var_3 = common_scripts\utility::getstruct("lighthouse_node", "targetname");
@@ -278,7 +278,7 @@ main() {
   level.player notifyonplayercommand("fire weapon", "+attack_akimbo_accessible");
   level.player notifyonplayercommand("used ads", "+toggleads_throw");
   level.player notifyonplayercommand("used ads", "+speed_throw");
-  level.oldff_block = getdvar("ai_friendlyFireBlockDuration");
+  level.oldff_block = getDvar("ai_friendlyFireBlockDuration");
   level.player notifyonplayercommand("melee_button_pressed", "+melee");
   level.player notifyonplayercommand("melee_button_pressed", "+melee_breath");
   level.player notifyonplayercommand("melee_button_pressed", "+melee_zoom");
@@ -293,7 +293,7 @@ main() {
   level.weld_use_trigger = common_scripts\utility::get_target_ent("weld_use_trigger");
   level.weld_use_trigger common_scripts\utility::trigger_off();
   setsaveddvar("fx_alphathreshold", 5);
-  setdvar("shpg_torpedo_tries", 0);
+  setDvar("shpg_torpedo_tries", 0);
 
   if(!maps\_utility::is_gen4()) {
     var_7 = getEntArray("trigger_multiple_depthoffield", "classname");
@@ -435,7 +435,7 @@ start_test_above_2() {
   level.player allowjump(0);
   level.player maps\_utility::player_speed_percent(10, 0.1);
   level.baker maps\_utility::set_generic_idle_anim("surface_swim_idle");
-  level.player_view_pitch_down = getdvar("player_view_pitch_down");
+  level.player_view_pitch_down = getDvar("player_view_pitch_down");
   level.player maps\_underwater::player_scuba_mask();
   setsaveddvar("player_view_pitch_down", 5);
   level.player enableslowaim(0.5, 0.5);
@@ -456,14 +456,14 @@ start_test_above_2() {
 
 start_greenlight() {
   maps\_hud_util::start_overlay("black");
-  setdvar("greenlight", 1);
+  setDvar("greenlight", 1);
   maps\ship_graveyard_util::set_start_positions("start_tutorial");
   common_scripts\utility::flag_set("start_swim");
 }
 
 start_tutorial() {
   maps\_hud_util::start_overlay("white");
-  setdvar("greenlight", 0);
+  setDvar("greenlight", 0);
   maps\ship_graveyard_util::set_start_positions("start_tutorial");
   common_scripts\utility::flag_set("start_swim");
 }
@@ -788,7 +788,7 @@ sonar_setup() {
 
 sonar_mine_setup() {
   common_scripts\utility::flag_wait("start_sonar_mines");
-  setdvar("shpg_torpedo_tries", 0);
+  setDvar("shpg_torpedo_tries", 0);
   common_scripts\utility::array_thread(getEntArray("dyn_balloon", "targetname"), maps\ship_graveyard_util::dyn_balloon_delete);
   thread maps\ship_graveyard_code::torpedo_the_ship();
   common_scripts\utility::waitframe();

@@ -558,10 +558,7 @@ objective_regroup_on_price() {
   objective_state(objective_number, "done");
 }
 
-// -------------
-// --- INTRO ---
-// -------------
-intro_setup() {
+// ------------- // --- INTRO --- // ------------- intro_setup() {
   thread half_particles_setup();
 
   thread intro_player();
@@ -682,10 +679,7 @@ intro_price_rise_out_of_sand() {
   flag_set("intro_price_reached_post_getup_node");
 }
 
-// -------------------
-// --- ROAD PATROL ---
-// -------------------
-road_setup() {
+// ------------------- // --- ROAD PATROL --- // ------------------- road_setup() {
   level.price PushPlayer(true);
   price_be_stealthy();
 
@@ -1801,10 +1795,7 @@ road_price_sees_thermalspike() {
   //Price: "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge"radio_dialogue("pri_thermalspike");
 }
 
-// ---------------------
-// --- AUSSIE RAPPEL ---
-// ---------------------
-rappel_setup() {
+// --------------------- // --- AUSSIE RAPPEL --- // --------------------- rappel_setup() {
   flag_wait("rappel_threads");
 
   thread rappel_guard_weapons();
@@ -2147,10 +2138,7 @@ rappel_price_setup_at_cave() {
   level.price.baseAccuracy = 25; // I want him to take out a some enemies, but not all of them.
 }
 
-// -------------------------
-// --- CAVE 1 (BARRACKS) ---
-// -------------------------
-barracks_setup() {
+// ------------------------- // --- CAVE 1 (BARRACKS) --- // ------------------------- barracks_setup() {
   // SPAWNFUNCS
   first_patroller = GetEnt("backdoor_barracks_patroller_guy1", "targetname");
   first_patroller thread add_spawn_function(::barracks_firstpatroller_spawnfunc);
@@ -2582,7 +2570,7 @@ barracks_rightside_warning() {
     wait(0.1);
 
     trig waittill("trigger", other);
-    if(!IsPlayer(other)) {
+    if(!isPlayer(other)) {
       continue;
     }
 
@@ -2980,7 +2968,7 @@ barracks_stealthbreak_abandoned_price_watcher() {
   while(1) {
     trig waittill("trigger", other);
 
-    if(!IsPlayer(other)) {
+    if(!isPlayer(other)) {
       wait(0.05);
       continue;
     }
@@ -3013,7 +3001,7 @@ barracks_stealthbreak_abandoned_price_watcher() {
       continue;
     }
 
-    SetDvar("ui_deadquote", "@AF_CAVES_DEADQUOTE_ABANDONED_PRICE");
+    setDvar("ui_deadquote", "@AF_CAVES_DEADQUOTE_ABANDONED_PRICE");
     maps\_utility::missionFailedWrapper();
   }
 }
@@ -3232,10 +3220,7 @@ barracks_enemy_cleanup() {
   thread AI_delete_when_out_of_sight(guys, 256);
 }
 
-// -----------------
-// --- STEAMROOM ---
-// -----------------
-steamroom_setup() {
+// ----------------- // --- STEAMROOM --- // ----------------- steamroom_setup() {
   thread steamroom_before_player_gets_there_setup();
 
   // wait for level progression
@@ -3505,8 +3490,7 @@ steamroom_price_teleport() {
   level.price ForceTeleport(pos, angles);
 }
 
-// --- KNIFE KILL SEQUENCE --
-steamroom_knifekill_setup() {
+// --- KNIFE KILL SEQUENCE -- steamroom_knifekill_setup() {
   animref = GetEnt("steamroom_price_stealthkill_animref", "targetname");
 
   spawner = GetEnt(animref.target, "targetname");
@@ -3864,9 +3848,7 @@ steamroom_price_knifekill_bloodfx(stabWaitTime) {
   wait(stabWaitTime);
   playFX(bloodfx, level.price GetTagOrigin(fxTag));
 }
-// --- END KNIFE KILL SEQUENCE --
-
-steamroom_dialogue() {
+// --- END KNIFE KILL SEQUENCE -- steamroom_dialogue() {
   // "Disciple Six, we've lost all contact with Disciple Five. Check it out over."radio_dialogue("afcaves_schq_lostcontact");
 
   if(!flag("steamroom_entrance")) {

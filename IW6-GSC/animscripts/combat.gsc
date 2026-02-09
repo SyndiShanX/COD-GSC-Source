@@ -863,7 +863,7 @@ keeptryingtomelee() {
     wait(0.2 + randomfloat(0.3));
 
     if(isDefined(self.enemy)) {
-      if(isplayer(self.enemy))
+      if(isPlayer(self.enemy))
         var_0 = 40000;
       else
         var_0 = 10000;
@@ -882,7 +882,7 @@ delaystandardmelee() {
   if(isDefined(self.nomeleechargedelay)) {
     return;
   }
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     return;
   }
   animscripts\melee::melee_standard_delaystandardcharge(self.enemy);

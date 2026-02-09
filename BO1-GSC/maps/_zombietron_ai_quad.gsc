@@ -15,8 +15,8 @@ wait_for_leap() {
     self.custom_attack = false;
   }
 }
-
 #using_animtree("generic_human");
+
 quad_prespawn() {
   self.animname = "quad_zombie";
   self.custom_idle_setup = maps\_zombietron_ai_quad::quad_zombie_idle_setup;
@@ -37,7 +37,6 @@ quad_prespawn() {
   self.moveplaybackrate = 1.3;
   self.is_quad = true;
 }
-
 quad_zombie_idle_setup() {
   self.a.array["turn_left_45"] = % exposed_tracking_turn45L;
   self.a.array["turn_left_90"] = % exposed_tracking_turn90L;
@@ -51,7 +50,6 @@ quad_zombie_idle_setup() {
   self.a.array["straight_level"] = % ai_zombie_quad_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
-
 init_quad_zombie_anims() {
   level.scr_anim["quad_zombie"]["death1"] = % ai_zombie_quad_death;
   level.scr_anim["quad_zombie"]["death2"] = % ai_zombie_quad_death_2;
@@ -184,7 +182,6 @@ init_quad_zombie_anims() {
   level._zombie_board_taunt["quad_zombie"][4] = % ai_zombie_quad_taunt_5;
   level._zombie_board_taunt["quad_zombie"][5] = % ai_zombie_quad_taunt_6;
 }
-
 quad_vox() {
   self endon("death");
   wait(5);
@@ -192,27 +189,26 @@ quad_vox() {
   while(1) {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
-      if(distanceSquared(self.origin, players[i].origin) > 1200 * 1200) {
+      if(DistanceSquared(self.origin, players[i].origin) > 1200 * 1200) {
         self playSound("zmb_quad_amb");
         quad_wait = 7;
-      } else if(distanceSquared(self.origin, players[i].origin) > 200 * 200) {
+      } else if(DistanceSquared(self.origin, players[i].origin) > 200 * 200) {
         self playSound("zmb_quad_vox");
         quad_wait = 5;
-      } else if(distanceSquared(self.origin, players[i].origin) < 150 * 150) {
+      } else if(DistanceSquared(self.origin, players[i].origin) < 150 * 150) {
         wait(.05);
       }
     }
     wait randomfloatrange(1, quad_wait);
   }
 }
-
 quad_close() {
   self endon("death");
   while(1) {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
       if(is_player_valid(players[i], true)) {
-        if(distanceSquared(self.origin, players[i].origin) < 150 * 150) {
+        if(DistanceSquared(self.origin, players[i].origin) < 150 * 150) {
           self playSound("zmb_quad_close");
           wait randomfloatrange(1, 2);
         }
@@ -221,7 +217,6 @@ quad_close() {
     wait_network_frame();
   }
 }
-
 set_leap_attack_properties() {
   self.pathEnemyFightDist = 320;
   self.goalradius = 320;
@@ -229,7 +224,6 @@ set_leap_attack_properties() {
   self.can_leap = true;
   self.in_special_attack = true;
 }
-
 set_default_attack_properties() {
   self.pathEnemyFightDist = 64;
   self.meleeAttackDist = 64;
@@ -238,7 +232,6 @@ set_default_attack_properties() {
   self.can_leap = false;
   self.in_special_attack = undefined;
 }
-
 check_wait() {
   min_dist = 96;
   max_dist = 144;
@@ -252,7 +245,6 @@ check_wait() {
     }
   }
 }
-
 quad_zombie_think() {
   self endon("death");
   self.specialAttack = maps\_zombietron_ai_quad::TryLeap;
@@ -270,7 +262,6 @@ quad_zombie_think() {
     wait_network_frame();
   }
 }
-
 trackCollision() {
   self endon("death");
   self endon("stop_coll");
@@ -284,7 +275,6 @@ trackCollision() {
     wait_network_frame();
   }
 }
-
 quad_finish_leap() {
   self endon("death");
   self.state = "waiting";
@@ -294,14 +284,12 @@ quad_finish_leap() {
   self.syncedMeleeTarget = undefined;
   self OrientMode("face enemy");
 }
-
 quad_stop_leap() {
   self endon("death");
   self SetFlaggedAnimKnobAllRestart("attack", %ai_zombie_quad_attack_leap_loop_out, %body, 1, .1, self.moveplaybackrate);
   self animscripts\zombie_shared::DoNoteTracks("attack");
   self quad_finish_leap();
 }
-
 quad_leap_attack() {
   self endon("death");
   self endon("stop_leap");
@@ -326,7 +314,6 @@ quad_leap_attack() {
   wait 1;
   quad_finish_leap();
 }
-
 TryLeap() {
   if(self.state == "leaping") {
     return true;
@@ -334,7 +321,7 @@ TryLeap() {
   if(!isDefined(self.enemy)) {
     return false;
   }
-  if(distanceSquared(self.origin, self.enemy.origin) > 512 * 512) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > 512 * 512) {
     return false;
   }
   if(self.a.pose == "prone") {

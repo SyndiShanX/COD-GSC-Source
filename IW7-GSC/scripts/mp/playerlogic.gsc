@@ -1581,7 +1581,7 @@ removeplayerondisconnect() {
 initclientdvarssplitscreenspecific() {
   if(level.splitscreen || self issplitscreenplayer()) {
     self setclientdvars("cg_fovscale", "0.75");
-    setdvar("r_materialBloomHQScriptMasterEnable", 0);
+    setDvar("r_materialBloomHQScriptMasterEnable", 0);
     return;
   }
 
@@ -1589,17 +1589,17 @@ initclientdvarssplitscreenspecific() {
 }
 
 initclientdvars() {
-  setdvar("cg_drawCrosshair", 1);
-  setdvar("cg_drawCrosshairNames", 1);
+  setDvar("cg_drawCrosshair", 1);
+  setDvar("cg_drawCrosshairNames", 1);
   if(level.hardcoremode) {
-    setdvar("cg_drawCrosshair", 0);
-    setdvar("cg_drawCrosshairNames", 1);
+    setDvar("cg_drawCrosshair", 0);
+    setDvar("cg_drawCrosshairNames", 1);
   }
 
   if(isDefined(level.alwaysdrawfriendlynames) && level.alwaysdrawfriendlynames) {
-    setdvar("cg_drawFriendlyNamesAlways", 1);
+    setDvar("cg_drawFriendlyNamesAlways", 1);
   } else {
-    setdvar("cg_drawFriendlyNamesAlways", 0);
+    setDvar("cg_drawFriendlyNamesAlways", 0);
   }
 
   self setclientdvars("cg_drawSpectatorMessages", 1);
@@ -1797,7 +1797,7 @@ callback_playerconnect() {
   self.usingonlinedataoffline = self isusingonlinedataoffline();
   initclientdvars();
   initplayerstats();
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -2592,7 +2592,7 @@ func_13B76() {
     var_3 = var_0 + var_2 * 10000;
     var_4 = bulletTrace(var_0, var_3, 1, self, 0, 0, 0, 0, 0);
     var_5 = var_4["entity"];
-    if(isDefined(var_5) && isplayer(var_5) && var_5.team != self.team && scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_5)) {
+    if(isDefined(var_5) && isPlayer(var_5) && var_5.team != self.team && scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_5)) {
       if(isDefined(var_5)) {
         func_12F36("ui_target_health", var_5.health);
       }

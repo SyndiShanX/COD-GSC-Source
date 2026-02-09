@@ -37,16 +37,14 @@ main() {
 
   level._effect["dlight_laptop"] = loadfx("misc/dlight_laptop");
 
-  /*-----------------------
-  CHEAP VEHICLE EXPLOSIONS
+  /*----------------------- CHEAP VEHICLE EXPLOSIONS
   -------------------------*/
   level._effect["large_vehicle_explosion"] = loadfx("explosions/large_vehicle_explosion");
   level._effect["cheap_vehicle_explosion"] = loadfx("explosions/small_vehicle_explosion_low");
   level._effect["cheap_mack_truck_explosion"] = loadfx("explosions/tanker_explosion_dcburn");
   level._effect["tanker_fire"] = loadfx("fire/firelp_large_pm");
 
-  /*-----------------------
-  PLAYER BLACKHAWKCRASH
+  /*----------------------- PLAYER BLACKHAWKCRASH
   -------------------------*/
   level._effect["smoke_trail_black_heli"] = loadfx("smoke/smoke_trail_black_heli");
   level._effect["dlight_blue"] = loadfx("misc/dlight_blue");
@@ -58,8 +56,7 @@ main() {
   level._effect["firelp_med_pm_nolight"] = loadfx("fire/firelp_med_pm_nolight");
   level._effect["firelp_small_pm_nolight"] = loadfx("fire/firelp_small_pm_nolight");
 
-  /*-----------------------
-  LITTLEBIRD CRASH
+  /*----------------------- LITTLEBIRD CRASH
   -------------------------*/
   level._effect["crash_main_01"] = loadfx("explosions/javelin_explosion_dcburn");
   level._effect["crash_end_01"] = loadfx("explosions/helicopter_explosion_little_bird_dcburn");
@@ -67,8 +64,7 @@ main() {
   level._effect["chopper_smoke_trail"] = loadfx("fire/fire_smoke_trail_L");
   level._effect["chopper_explosion"] = loadfx("explosions/aerial_explosion");
 
-  /*-----------------------
-  Sniping
+  /*----------------------- Sniping
   -------------------------*/
   level._effect["headshot"] = loadfx("impacts/flesh_hit_head_fatal_exit"); // sprays on wall
   level._effect["headshot2"] = loadfx("impacts/flesh_hit_splat_large"); // chunks
@@ -83,22 +79,19 @@ main() {
   level._effect["heat_shimmer_door"] = loadfx("distortion/abrams_exhaust");
   level._effect["heli_dust_default"] = loadfx("treadfx/heli_dust_airlift");
 
-  /*-----------------------
-  FLARES
+  /*----------------------- FLARES
   -------------------------*/
   level._effect["flare_runner_intro"] = loadfx("misc/flare_start");
   level._effect["flare_runner"] = loadfx("misc/flare");
   level._effect["flare_runner_fizzout"] = loadfx("misc/flare_end");
 
-  /*-----------------------
-  PLANE AIRSTRIKES
+  /*----------------------- PLANE AIRSTRIKES
   -------------------------*/
   level.airstrikefx = loadfx("explosions/clusterbomb");
   //level.airstrikefx 	 = loadfx( "explosions/tanker_explosion" );
   //level.scr_sound[ "airstrike" ][ "explosion" ]				 = "mortar_incoming";
 
-  /*-----------------------
-  AMBIENT FX
+  /*----------------------- AMBIENT FX
   -------------------------*/
   level._effect["powerline_runner"] = loadfx("explosions/powerline_runner");
 
@@ -137,7 +130,7 @@ littlebird_monument_crash(crashStruct) {
       continue;
     if(!isDefined(amount))
       continue;
-    if(isplayer(attacker))
+    if(isPlayer(attacker))
       continue;
     if((type == "MOD_PROJECTILE") && (amount > 999)) {
       break;

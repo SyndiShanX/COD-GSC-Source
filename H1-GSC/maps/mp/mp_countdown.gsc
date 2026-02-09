@@ -12,6 +12,6 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_countdown");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  setdvar("compassmaxrange", "2000");
+  setDvar("compassmaxrange", "2000");
   maps\mp\_utility::headquartersradiomove((-844, -1384, 6), (-844, -1384, -4));
 }

@@ -10,7 +10,6 @@ main() {
   self.voice = "american";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_zom_quad_body_bloat");
   precacheModel("c_zom_quad_head_bloat");

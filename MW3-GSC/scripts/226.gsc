@@ -35,14 +35,13 @@ main() {
   level._id_09B2 = 0;
   level._id_09B3 = 1;
   common_scripts\utility::flag_init("arcadeMode_multiplier_maxed");
-  setdvar("arcademode_lives_changed", 0);
+  setDvar("arcademode_lives_changed", 0);
   level._id_09B4 = 1;
   level._id_09B5 = 3;
   _id_0A2A();
 
   for(var_0 = 0; var_0 < level._id_09AE; var_0++) {
-    setdvar("arcademode_checkpoint_" + var_0, "");
-
+    setDvar("arcademode_checkpoint_" + var_0, "");
   }
   level._id_09B6 = 0;
   level._id_09B7 = 0;
@@ -57,27 +56,26 @@ main() {
   level._id_09BC = 10;
   level._id_09BD = 0;
 
-  if(getdvar("arcademode_lives") == "" || getdvar("arcademode_full") != "1" || level.script == "cargoship") {
-    setdvar("arcademode_lives", 2);
+  if(getDvar("arcademode_lives") == "" || getDvar("arcademode_full") != "1" || level.script == "cargoship") {
+    setDvar("arcademode_lives", 2);
     level._id_09BD = 2;
   }
 
-  if(getdvar("arcademode_full") == "1" && level.script == "cargoship") {
-    setdvar("arcademode_lives", 5);
+  if(getDvar("arcademode_full") == "1" && level.script == "cargoship") {
+    setDvar("arcademode_lives", 5);
     level._id_09BD = 5;
   }
 
   var_1 = getdvarint("arcadeMode_lives");
-  setdvar("arcademode_earned_lives", var_1);
+  setDvar("arcademode_earned_lives", var_1);
   level._id_09BE = getdvarint("arcademode_playthrough_count");
   level._id_09BE++;
-  setdvar("arcademode_playthrough_count", level._id_09BE);
-  setdvar("arcademode_died", 0);
-  setdvar("arcademode_score", 0);
+  setDvar("arcademode_playthrough_count", level._id_09BE);
+  setDvar("arcademode_died", 0);
+  setDvar("arcademode_score", 0);
 
-  if(getdvar("arcademode_combined_score") == "" || getdvar("arcademode_full") == "1" && level.script == "cargoship") {
-    setdvar("arcademode_combined_score", 0);
-
+  if(getDvar("arcademode_combined_score") == "" || getDvar("arcademode_full") == "1" && level.script == "cargoship") {
+    setDvar("arcademode_combined_score", 0);
   }
   var_2 = _id_09C6();
   var_2 = var_2 * 60;
@@ -90,7 +88,6 @@ main() {
 
   for(var_0 = 0; var_0 < var_3.size; var_0++) {
     level._id_09C3[var_3[var_0]] = [];
-
   }
   var_4 = level._id_09C3;
   thread _id_09D0();
@@ -110,9 +107,8 @@ main() {
 }
 
 _id_09C5() {
-  if(getdvar("arcademode") != "1") {
+  if(getDvar("arcademode") != "1") {
     return 0;
-
   }
   return common_scripts\utility::flag("arcademode_complete");
 }
@@ -124,7 +120,6 @@ _id_09C6() {
 
   if(isDefined(var_1[level.script])) {
     var_0 = var_1[level.script];
-
   }
   level._id_09C7 = var_2;
   return var_0;
@@ -135,17 +130,16 @@ _id_09C8() {
   level maps\_utility::_id_09C9(common_scripts\utility::flag_wait, "missionfailed");
   level.player maps\_utility::_id_09C9(maps\_utility::_id_09CA, "death");
   maps\_utility::_id_09CB();
-  setdvar("arcademode_died", 1);
+  setDvar("arcademode_died", 1);
   var_0 = getdvarint("arcademode_lives");
   var_1 = getdvarint("arcademode_earned_lives");
 
   if(var_0 > var_1) {
     var_0 = var_1;
-
   }
   var_0 = var_0 - 1;
-  setdvar("arcademode_lives", var_0);
-  setdvar("arcademode_lives_changed", -1);
+  setDvar("arcademode_lives", var_0);
+  setDvar("arcademode_lives_changed", -1);
   _id_09D7(var_0 + 1);
   level._id_09CC = 1;
   _id_09ED();
@@ -195,7 +189,6 @@ _id_09D0() {
 
   for(var_0 = 0; var_0 < level._id_09BC; var_0++) {
     _id_09F2(var_0, 16, 78, -18, 64, level._id_09BB);
-
   }
   for(;;) {
     var_1 = getdvarint("arcademode_lives_changed");
@@ -217,13 +210,13 @@ _id_09D0() {
         var_3 = getdvarint("arcademode_earned_lives");
         var_3--;
         var_2 = var_3;
-        setdvar("arcademode_earned_lives", var_3);
-        setdvar("arcademode_lives", var_3);
+        setDvar("arcademode_earned_lives", var_3);
+        setDvar("arcademode_lives", var_3);
       }
 
       _id_09D7(var_2);
       level._id_09CC = 1;
-      setdvar("arcademode_lives_changed", 0);
+      setDvar("arcademode_lives_changed", 0);
     }
 
     wait 0.05;
@@ -236,9 +229,8 @@ _id_09D2() {
 
   if(var_0 > var_1) {
     thread _id_09F9(var_0 - var_1);
-
   }
-  setdvar("arcademode_earned_lives", var_0);
+  setDvar("arcademode_earned_lives", var_0);
   thread _id_09D7(var_0);
   return var_0 > var_1;
 }
@@ -260,7 +252,6 @@ _id_09D5(var_0, var_1) {
     self setshader("arcademode_life", 64, 64);
   } else {
     self setshader("stance_stand", 64, 64);
-
   }
   self fadeovertime(1);
   self.alpha = 1;
@@ -281,13 +272,11 @@ _id_09D6(var_0) {
 _id_09D7(var_0) {
   if(var_0 > 10) {
     var_0 = 10;
-
   }
   var_1 = getdvarint("arcademode_earned_lives");
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
     level._id_09D1[var_2] _id_09D5(var_2, var_1);
-
   }
   for(var_2 = var_0; var_2 < level._id_09BC; var_2++) {
     if(var_2 < 0) {
@@ -324,7 +313,6 @@ _id_09D9() {
 
     if(var_2 >= level._id_09DB.size) {
       var_2 = level._id_09DB.size - 1;
-
     }
     for(var_0 = level._id_09DA + var_1 * level._id_09B5; var_0 < level._id_09DA + (var_1 + 1) * level._id_09B5; var_0++) {
       if(var_0 >= level._id_09AF.size) {
@@ -346,7 +334,6 @@ _id_09DD(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(level._id_09AF.size == 0) {
     level._id_09DE = var_6.x;
-
   }
   var_6.y = var_2;
   var_6 setshader("arcademode_kill", var_4, var_4);
@@ -367,7 +354,6 @@ _id_09DD(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_6.alpha = 0;
   } else {
     var_6.alpha = 1;
-
   }
   for(;;) {
     if(var_6.x == level._id_09DE) {
@@ -375,7 +361,6 @@ _id_09DD(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(level._id_09AF.size == 1) {
         wait 3;
-
       }
       var_6 fadeovertime(var_8);
       var_6.color = (1, 0, 0);
@@ -386,13 +371,11 @@ _id_09DD(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       for(var_9 = 0; var_9 < level._id_09AF.size - 1; var_9++) {
         level._id_09AF[var_9] = level._id_09AF[var_9 + 1];
-
       }
       level._id_09AF[level._id_09AF.size - 1] = undefined;
 
       if(!level._id_09AF.size) {
         thread _id_0A2A();
-
       }
       return;
     }
@@ -440,7 +423,6 @@ _id_09E0(var_0) {
     level._id_09B0 = gettime() + var_0 * 1000;
   } else {
     level._id_09B0 = level._id_09B0 + var_0 * 1000;
-
   }
   waittillframeend;
 
@@ -459,14 +441,12 @@ _id_09E0(var_0) {
 
   if(var_6 > var_3) {
     var_6 = var_3;
-
   }
   var_6 = var_6 * var_2;
   var_6 = int(var_6);
 
   if(var_6 > 980) {
     var_6 = 980;
-
   }
   if(!isDefined(var_4)) {
     var_4 = _id_09DF(0, 0, var_6, var_1);
@@ -507,11 +487,9 @@ _id_09E0(var_0) {
 
     if(var_6 <= 0) {
       var_6 = 1;
-
     }
     if(var_6 > 980) {
       var_6 = 980;
-
     }
     var_4 scaleovertime(1, var_6, var_1);
     var_5 scaleovertime(1, var_6, var_1);
@@ -637,7 +615,6 @@ _id_09EA() {
     var_1 = getdvarint("arcademode_combined_score");
   } else {
     var_1 = getdvarint("arcademode_score");
-
   }
   _id_09F0(var_1);
   level._id_09CC = 0;
@@ -677,13 +654,11 @@ _id_09EE(var_0) {
 
   if(var_2 <= 15) {
     var_3 = 1;
-
   }
   level._id_09B2 = level._id_09B2 + var_3;
 
   if(level._id_09B2 > var_1) {
     level._id_09B2 = var_1;
-
   }
   _id_09F0(int(level._id_09B2));
 }
@@ -722,7 +697,6 @@ _id_09F1(var_0, var_1) {
 
   for(var_3 = var_2.size; var_3 < var_1.size; var_3++) {
     var_1[var_3].alpha = 0;
-
   }
   if(var_0 == 0) {
     var_1[0].alpha = 1;
@@ -760,7 +734,6 @@ _id_09F3() {
 
   for(var_2 = 0; var_2 < 4; var_2++) {
     var_1[var_2] = var_0[var_2] * 0.15;
-
   }
   level._id_09F6 = var_1;
 }
@@ -778,9 +751,8 @@ _id_09F8(var_0, var_1, var_2, var_3) {
   var_4.vertalign = "middle";
   var_4.fontscale = 3;
 
-  if(getdvar("widescreen") == "1") {
+  if(getDvar("widescreen") == "1") {
     var_4.fontscale = 5;
-
   }
   var_4.color = (0.8, 1, 0.8);
   var_4.font = "objective";
@@ -797,7 +769,6 @@ _id_09F8(var_0, var_1, var_2, var_3) {
 _id_09F9(var_0) {
   for(var_1 = 0; var_1 < 5; var_1++) {
     thread _id_09FB();
-
   }
   var_2 = _id_09F8("center", 0.2, 0, -100);
   var_2.label = &"SCRIPT_EXTRA_LIFE";
@@ -839,7 +810,6 @@ _id_09FD(var_0) {
 
   if(var_1 < var_0) {
     var_1 = var_1 + 5;
-
   }
   return var_1;
 }
@@ -850,7 +820,6 @@ _id_09FE(var_0, var_1, var_2, var_3) {
   }
   if(isDefined(level._id_09FF[var_2])) {
     var_2 = level._id_09FF[var_2];
-
   }
   var_3 = int(var_3);
   var_3 = _id_09FD(var_3);
@@ -859,15 +828,14 @@ _id_09FE(var_0, var_1, var_2, var_3) {
   var_4 = var_4 + var_3;
   var_5 = getdvarint("arcademode_combined_score");
   var_5 = var_5 + var_3;
-  setdvar("arcademode_combined_score", var_5);
-  setdvar("arcademode_score", var_4);
+  setDvar("arcademode_combined_score", var_5);
+  setDvar("arcademode_score", var_4);
   var_6 = 60;
   var_7 = 1.5;
   var_8 = 0.9 + (var_3 - 10) * 0.01;
 
   if(var_8 > 1.4) {
     var_8 = 1.4;
-
   }
   var_9 = (0.75, 0, 0);
 
@@ -893,8 +861,8 @@ _id_0A01() {
   if(var_0 >= level._id_09BC) {
     var_0 = level._id_09BC;
   } else {
-    setdvar("arcademode_lives", var_0);
-    setdvar("arcademode_lives_changed", 1);
+    setDvar("arcademode_lives", var_0);
+    setDvar("arcademode_lives_changed", 1);
   }
 
   level._id_09F4 = level._id_09F5[level.gameskill];
@@ -993,7 +961,6 @@ _id_0A06(var_0) {
 
   if(level.player._id_0A07 == 0) {
     level.player._id_0A04 = 0;
-
   }
   var_1 destroy();
 }
@@ -1012,11 +979,9 @@ _id_0A08() {
 
   if(common_scripts\utility::cointoss()) {
     var_1 = var_1 * -1;
-
   }
   if(common_scripts\utility::cointoss()) {
     var_2 = var_2 * -1;
-
   }
   self.x = var_1;
   self.y = var_2;
@@ -1033,7 +998,6 @@ _id_0A0A(var_0, var_1, var_2) {
     var_3 = level._id_09C1 + level._id_0A0B[var_0["damage_location"]] + level._id_0A0C[var_0["type"]];
   } else {
     var_3 = level._id_09C1 + level._id_0A0C[var_0["type"]];
-
   }
   thread _id_09FE(var_0["origin"], 1, var_1, var_3);
 }
@@ -1041,7 +1005,6 @@ _id_0A0A(var_0, var_1, var_2) {
 _id_0A0D(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = "none";
-
   }
   var_3 = level._id_09FF[var_0];
 
@@ -1057,7 +1020,6 @@ _id_0A0D(var_0, var_1, var_2) {
 
   if(var_3 == "explosive") {
     var_5["origin"] = self.origin;
-
   }
   level._id_09C3[var_3][level._id_09C3[var_3].size] = var_5;
 }
@@ -1133,7 +1095,6 @@ _id_0A15() {
 
   if(var_2 == 0) {
     var_2++;
-
   }
   var_3 = 0.5;
   level._id_0A1A = 1;
@@ -1163,27 +1124,24 @@ _id_0A15() {
 
   for(var_12 = 0; var_12 < level._id_09BC; var_12++) {
     level._id_09D1[var_12] destroy();
-
   }
   var_13 = 130;
   level._id_09D1 = [];
 
   for(var_12 = 0; var_12 < level._id_09BC; var_12++) {
     _id_09F2(var_12, -135 + var_13, var_10, -30, 96, level._id_09BB + 10);
-
   }
   var_14 = getdvarint("arcademode_lives");
   var_15 = level._id_09BD;
 
   if(var_14 > var_15) {
     var_14 = var_15;
-
   }
   _id_09D7(var_14);
   var_16 = 0;
   var_17 = undefined;
 
-  if(getdvar("arcademode_full") == "1") {
+  if(getDvar("arcademode_full") == "1") {
     var_17 = _id_09F8("left", var_4, 20, var_6);
     var_17 settext(&"SCRIPT_TOTAL_SCORE");
     _id_0A12(var_13, var_6);
@@ -1210,7 +1168,6 @@ _id_0A15() {
 
   for(var_21 = 0; var_2 >= 60; var_2 = var_2 - 60) {
     var_20++;
-
   }
   var_21 = var_2;
   var_22 = _id_09F8("left", var_4, 20, var_8);
@@ -1235,14 +1192,12 @@ _id_0A15() {
 
     if(var_28 <= 15) {
       var_29 = 1;
-
     }
     var_29 = int(var_29);
     var_25 = var_25 + var_29;
 
     if(var_25 > var_24) {
       var_25 = var_24;
-
     }
     _id_09F0(var_25);
 
@@ -1280,11 +1235,10 @@ _id_0A15() {
 
       if(var_12 == var_34) {
         var_41 = 1;
-
       }
       var_25 = int(var_37 * (1 - var_41) + var_38 * var_41);
 
-      if(getdvar("arcademode_full") == "1") {
+      if(getDvar("arcademode_full") == "1") {
         var_16 = int(var_39 * (1 - var_41) + var_40 * var_41);
         _id_0A14(var_16);
       }
@@ -1315,7 +1269,6 @@ _id_0A15() {
           var_43 = 10;
         } else {
           var_43 = var_44;
-
         }
         if(var_14 < 20) {
           var_43 = var_44;
@@ -1332,7 +1285,7 @@ _id_0A15() {
       var_45 = var_45 * var_43;
       var_29 = int(var_45);
 
-      if(getdvar("arcademode_full") == "1") {
+      if(getDvar("arcademode_full") == "1") {
         var_16 = var_16 + var_29;
         _id_0A14(var_16);
       }
@@ -1372,7 +1325,6 @@ _id_0A15() {
       var_47 = &"SCRIPT_DIFFICULTY_BONUS_THREE";
     } else {
       var_47 = &"SCRIPT_DIFFICULTY_BONUS_FOUR";
-
     }
     var_29 = int(ceil(var_25 * var_46) - var_25);
     _id_0A20(var_25, var_16, var_29, var_47, "bullet_ap_glass", var_9, var_4);
@@ -1382,23 +1334,21 @@ _id_0A15() {
 
   var_48 = 0;
 
-  if(getdvar("arcademode_full") == "1") {
+  if(getDvar("arcademode_full") == "1") {
     var_49 = "s18";
     var_50 = getdvarint(var_49);
 
     if(var_16 > var_50) {
       var_51 = _id_09EF(var_16);
       var_52 = _id_0A2F(var_51);
-      setdvar(var_49, var_52);
+      setDvar(var_49, var_52);
       var_53 = 0;
 
       if(!level._id_09B7) {
         var_53 = 1;
-
       }
       if(level.script == "airplane") {
         var_53 = 1;
-
       }
       if(var_53) {
         var_48 = 1;
@@ -1408,12 +1358,10 @@ _id_0A15() {
     level.player uploadscore("LB_FULL", getdvarint(var_49));
   } else {
     var_54 = [];
-
   }
   if(var_48) {
     if(!level._id_09B7) {
       updategamerprofile();
-
     }
     wait 1;
     var_55 = _id_09F8("center", var_4, 0, var_9);
@@ -1434,7 +1382,7 @@ _id_0A15() {
     var_19 setpulsefx(0, 0, 1000);
   }
 
-  if(getdvar("arcademode_full") == "1") {
+  if(getDvar("arcademode_full") == "1") {
     var_17 setpulsefx(0, 0, 1000);
 
     for(var_12 = 0; var_12 < level._id_09EB; var_12++) {
@@ -1455,20 +1403,18 @@ _id_0A15() {
 
   wait 1;
 
-  if(getdvar("arcademode_full") == "1") {
+  if(getDvar("arcademode_full") == "1") {
     logstring("ArcadeMode Score: " + var_25 + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + var_16);
   } else {
     logstring("ArcadeMode Score: " + var_25 + ", mission: " + level.script + ", gameskill: " + level.gameskill);
-
   }
-  setdvar("arcademode_combined_score", var_16);
+  setDvar("arcademode_combined_score", var_16);
 
   if(!level._id_09B7) {
-    setdvar("ui_arcade_lost", 1);
+    setDvar("ui_arcade_lost", 1);
     _id_0A10();
   } else {
-    setdvar("ui_arcade_lost", 0);
-
+    setDvar("ui_arcade_lost", 0);
   }
   common_scripts\utility::flag_set("arcademode_ending_complete");
 }
@@ -1490,23 +1436,20 @@ _id_0A20(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(var_11 <= 15) {
       var_2 = 1;
-
     }
     var_2 = int(var_2);
     var_0 = var_0 + var_2;
 
     if(var_0 > var_9) {
       var_0 = var_9;
-
     }
     _id_09F0(var_0);
 
-    if(getdvar("arcademode_full") == "1") {
+    if(getDvar("arcademode_full") == "1") {
       var_1 = var_1 + var_2;
 
       if(var_1 > var_10) {
         var_1 = var_10;
-
       }
       _id_0A14(var_1);
     }
@@ -1545,7 +1488,6 @@ _id_0A21(var_0) {
 
   if(var_0 > 0) {
     var_1 fadeovertime(var_0);
-
   }
   var_1.alpha = 1;
 }
@@ -1566,7 +1508,6 @@ _id_0A24(var_0, var_1) {
 
   for(var_3 = 0; var_0 >= 10; var_0 = var_0 - 10) {
     var_2++;
-
   }
   while(var_1 >= 10) {
     var_3++;
@@ -1617,7 +1558,6 @@ _id_0A27() {
 
   for(var_0 = 0; var_0 < level._id_09DB.size; var_0++) {
     level._id_09DC[var_0] = (level._id_09DB[var_0][0] * 0.35, level._id_09DB[var_0][1] * 0.35, level._id_09DB[var_0][2] * 0.35);
-
   }
   level._id_09DB[0] = level._id_09AC;
 }
@@ -1656,7 +1596,6 @@ _id_0A29() {
 
   for(var_0 = 0; var_0 < level._id_09AF.size; var_0++) {
     level._id_09AF[var_0] destroy();
-
   }
   level._id_09AF = [];
 }
@@ -1738,7 +1677,6 @@ _id_0A2F(var_0) {
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1 = var_0[var_2] + var_1;
-
   }
   return var_1;
 }

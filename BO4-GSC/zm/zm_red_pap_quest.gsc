@@ -1463,7 +1463,7 @@ function_bb898a46() {
   while(true) {
     s_notify = self waittill(#"damage");
 
-    if(isplayer(s_notify.attacker)) {
+    if(isPlayer(s_notify.attacker)) {
       level.var_10e70c82 -= s_notify.amount;
 
       if(level.var_10e70c82 < 9500 || s_notify.weapon === getweapon("shotgun_trenchgun_t8_upgraded")) {
@@ -1925,7 +1925,7 @@ function_8bdbbbf7(params) {
   if(isDefined(self.var_799d54ae) && self.var_799d54ae) {
     level.var_7906c5af--;
 
-    if(isDefined(params.eattacker) && isplayer(params.eattacker)) {
+    if(isDefined(params.eattacker) && isPlayer(params.eattacker)) {
       if(zombie_utility::get_zombie_var_team(#"zombie_powerup_double_points_on", #"allies")) {
         n_points = 20;
       } else {
@@ -2137,7 +2137,7 @@ function_951bdb49() {
   while(true) {
     s_result = t_pap waittill(#"trigger");
 
-    if(isDefined(s_result.activator) && isplayer(s_result.activator)) {
+    if(isDefined(s_result.activator) && isPlayer(s_result.activator)) {
       player = s_result.activator;
       mdl_blocker setvisibletoplayer(player);
       level flag::set(#"pap_defend");

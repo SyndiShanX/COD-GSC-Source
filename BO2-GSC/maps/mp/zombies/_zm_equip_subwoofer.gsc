@@ -459,7 +459,7 @@ subwooferthink(weapon, armed) {
     entities = arraycombine(entities, props, 0, 0);
 
     foreach(ent in entities) {
-      if(!isDefined(ent) || (isplayer(ent) || isai(ent)) && !isalive(ent)) {
+      if(!isDefined(ent) || (isPlayer(ent) || isai(ent)) && !isalive(ent)) {
         continue;
       }
       if(isDefined(ent.ignore_subwoofer) && ent.ignore_subwoofer) {
@@ -479,7 +479,7 @@ subwooferthink(weapon, armed) {
         continue;
 
       if(!within_fov(original_origin, original_angles, ent.origin, cos(45))) {
-        if(isplayer(ent))
+        if(isPlayer(ent))
           ent hit_player(action, 0);
 
         continue;
@@ -488,7 +488,7 @@ subwooferthink(weapon, armed) {
       weapon subwoofer_network_choke();
       ent_trace_origin = ent.origin;
 
-      if(isai(ent) || isplayer(ent))
+      if(isai(ent) || isPlayer(ent))
         ent_trace_origin = ent getEye();
 
       if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "subwoofer_target")
@@ -505,7 +505,7 @@ subwooferthink(weapon, armed) {
       if(isDefined(ent.in_the_ground) && ent.in_the_ground || isDefined(ent.in_the_ceiling) && ent.in_the_ceiling || isDefined(ent.ai_state) && ent.ai_state == "zombie_goto_entrance" || !(isDefined(ent.completed_emerging_into_playable_area) && ent.completed_emerging_into_playable_area))
         onlydamage = 1;
 
-      if(isplayer(ent)) {
+      if(isPlayer(ent)) {
         ent notify("player_" + action);
         ent hit_player(action, 1);
         continue;
@@ -769,7 +769,6 @@ debugsubwoofer() {
 
     wait 0.05;
   }
-
 }
 
 debugsubwooferprint3d(row, text, color) {
@@ -810,5 +809,4 @@ subwoofer_debug_animation_print(msg1, msg2) {
     print3d(self.origin + vectorscale((0, 0, 1), 40.0), "GetUp: " + msg2, color, 1, 0.75);
     wait 0.05;
   }
-
 }

@@ -10,20 +10,20 @@
 #include common_scripts\_artCommon;
 
 main() {
-  if(GetDvar("scr_art_tweak") == "" || GetDvar("scr_art_tweak") == "0")
-    SetDvar("scr_art_tweak", 0);
+  if(getDvar("scr_art_tweak") == "" || getDvar("scr_art_tweak") == "0")
+    setDvar("scr_art_tweak", 0);
 
-  if(GetDvar("scr_cmd_plr_sun") == "")
+  if(getDvar("scr_cmd_plr_sun") == "")
     SetDevDvar("scr_cmd_plr_sun", "0");
 
-  if(GetDvar("scr_dof_enable") == "")
+  if(getDvar("scr_dof_enable") == "")
     SetSavedDvar("scr_dof_enable", "1");
 
-  if(GetDvar("scr_cinematic_autofocus") == "")
-    SetDvar("scr_cinematic_autofocus", "1");
+  if(getDvar("scr_cinematic_autofocus") == "")
+    setDvar("scr_cinematic_autofocus", "1");
 
-  if(GetDvar("scr_art_visionfile") == "")
-    SetDvar("scr_art_visionfile", level.script);
+  if(getDvar("scr_art_visionfile") == "")
+    setDvar("scr_art_visionfile", level.script);
 
   level.dofDefault["nearStart"] = 1;
   level.dofDefault["nearEnd"] = 1;
@@ -48,7 +48,7 @@ main() {
   thread tweakart();
 
   if(!isDefined(level.script))
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
 }
 
 tweakart() {
@@ -56,16 +56,16 @@ tweakart() {
     level.tweakfile = false;
 
   // not in DEVGUI
-  SetDvar("scr_fog_fraction", "1.0");
-  SetDvar("scr_art_dump", "0");
+  setDvar("scr_fog_fraction", "1.0");
+  setDvar("scr_art_dump", "0");
 
   // update the devgui variables to current settings
-  SetDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
-  SetDvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
-  SetDvar("scr_dof_farStart", level.dofDefault["farStart"]);
-  SetDvar("scr_dof_farEnd", level.dofDefault["farEnd"]);
-  SetDvar("scr_dof_nearBlur", level.dofDefault["nearBlur"]);
-  SetDvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
+  setDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
+  setDvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
+  setDvar("scr_dof_farStart", level.dofDefault["farStart"]);
+  setDvar("scr_dof_farEnd", level.dofDefault["farEnd"]);
+  setDvar("scr_dof_nearBlur", level.dofDefault["nearBlur"]);
+  setDvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
 
   // not in DEVGUI
   level.fogfraction = 1.0;
@@ -80,7 +80,7 @@ tweakart() {
 
   for(;;) {
     while(GetDvarInt("scr_art_tweak") == 0) {
-      //	AssertEx( GetDvar( "scr_art_dump" ) == "0", "Must Enable Art Tweaks to export _art file." );
+      //	AssertEx( getDvar( "scr_art_dump" ) == "0", "Must Enable Art Tweaks to export _art file." );
       wait .05;
       if(!GetDvarInt("scr_art_tweak") == 0)
         common_scripts\_artCommon::setfogsliders(); // sets the sliders to whatever the current fog value is
@@ -109,46 +109,45 @@ tweakart() {
       PrintLn("Art settings dumped success!");
       addstring = "maps\\createart\\" + level.script + "_art::main();";
       AssertEx(level.tweakfile, "remove all art setting in " + level.script + ".gsc and add the following line before _load: " + addstring);
-      SetDvar("scr_art_dump", "0");
+      setDvar("scr_art_dump", "0");
     }
     wait .05;
   }
-
 }
 
 fovslidercheck() {
   // catch all those cases where a slider can be pushed to a place of conflict
   if(level.dofDefault["nearStart"] >= level.dofDefault["nearEnd"]) {
     level.dofDefault["nearStart"] = level.dofDefault["nearEnd"] - 1;
-    SetDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
+    setDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
   }
   if(level.dofDefault["nearEnd"] <= level.dofDefault["nearStart"]) {
     level.dofDefault["nearEnd"] = level.dofDefault["nearStart"] + 1;
-    SetDvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
+    setDvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
   }
   if(level.dofDefault["farStart"] >= level.dofDefault["farEnd"]) {
     level.dofDefault["farStart"] = level.dofDefault["farEnd"] - 1;
-    SetDvar("scr_dof_farStart", level.dofDefault["farStart"]);
+    setDvar("scr_dof_farStart", level.dofDefault["farStart"]);
   }
   if(level.dofDefault["farEnd"] <= level.dofDefault["farStart"]) {
     level.dofDefault["farEnd"] = level.dofDefault["farStart"] + 1;
-    SetDvar("scr_dof_farEnd", level.dofDefault["farEnd"]);
+    setDvar("scr_dof_farEnd", level.dofDefault["farEnd"]);
   }
   if(level.dofDefault["farBlur"] >= level.dofDefault["nearBlur"]) {
     level.dofDefault["farBlur"] = level.dofDefault["nearBlur"] - .1;
-    SetDvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
+    setDvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
   }
   if(level.dofDefault["farStart"] <= level.dofDefault["nearEnd"]) {
     level.dofDefault["farStart"] = level.dofDefault["nearEnd"] + 1;
-    SetDvar("scr_dof_farStart", level.dofDefault["farStart"]);
+    setDvar("scr_dof_farStart", level.dofDefault["farStart"]);
   }
 }
 
 dumpsettings() {
-  if(GetDvar("scr_art_dump") == "0")
+  if(getDvar("scr_art_dump") == "0")
     return false;
 
-  filename = "createart/" + GetDvar("scr_art_visionfile") + "_art.gsc";
+  filename = "createart/" + getDvar("scr_art_visionfile") + "_art.gsc";
 
   //////////////////
 
@@ -174,7 +173,7 @@ dumpsettings() {
     return false;
   //////////////////////////////
 
-  visionFilename = "vision/" + GetDvar("scr_art_visionfile") + ".vision";
+  visionFilename = "vision/" + getDvar("scr_art_visionfile") + ".vision";
   //	file = OpenFile( visionFilename, "write" );
 
   file = 1;
@@ -182,25 +181,25 @@ dumpsettings() {
   //	AssertEx( ( file != -1 ), "File not writeable( may need checked out of P4 ): " + filename );
   artStartVisionFileExport();
 
-  fileprint_launcher("r_glow\"" + GetDvar("r_glowTweakEnable") + "\"");
-  fileprint_launcher("r_glowRadius0 \"" + GetDvar("r_glowTweakRadius0") + "\"");
-  fileprint_launcher("r_glowBloomCutoff \"" + GetDvar("r_glowTweakBloomCutoff") + "\"");
-  fileprint_launcher("r_glowBloomDesaturation \"" + GetDvar("r_glowTweakBloomDesaturation") + "\"");
-  fileprint_launcher("r_glowBloomIntensity0 \"" + GetDvar("r_glowTweakBloomIntensity0") + "\"");
+  fileprint_launcher("r_glow\"" + getDvar("r_glowTweakEnable") + "\"");
+  fileprint_launcher("r_glowRadius0 \"" + getDvar("r_glowTweakRadius0") + "\"");
+  fileprint_launcher("r_glowBloomCutoff \"" + getDvar("r_glowTweakBloomCutoff") + "\"");
+  fileprint_launcher("r_glowBloomDesaturation \"" + getDvar("r_glowTweakBloomDesaturation") + "\"");
+  fileprint_launcher("r_glowBloomIntensity0 \"" + getDvar("r_glowTweakBloomIntensity0") + "\"");
   fileprint_launcher(" ");
-  fileprint_launcher("r_filmEnable\"" + GetDvar("r_filmTweakEnable") + "\"");
-  fileprint_launcher("r_filmContrast\"" + GetDvar("r_filmTweakContrast") + "\"");
-  fileprint_launcher("r_filmBrightness\"" + GetDvar("r_filmTweakBrightness") + "\"");
-  fileprint_launcher("r_filmDesaturation\"" + GetDvar("r_filmTweakDesaturation") + "\"");
-  fileprint_launcher("r_filmDesaturationDark\"" + GetDvar("r_filmTweakDesaturationDark") + "\"");
-  fileprint_launcher("r_filmInvert\"" + GetDvar("r_filmTweakInvert") + "\"");
-  fileprint_launcher("r_filmLightTint \"" + GetDvar("r_filmTweakLightTint") + "\"");
-  fileprint_launcher("r_filmMediumTint\"" + GetDvar("r_filmTweakMediumTint") + "\"");
-  fileprint_launcher("r_filmDarkTint\"" + GetDvar("r_filmTweakDarkTint") + "\"");
+  fileprint_launcher("r_filmEnable\"" + getDvar("r_filmTweakEnable") + "\"");
+  fileprint_launcher("r_filmContrast\"" + getDvar("r_filmTweakContrast") + "\"");
+  fileprint_launcher("r_filmBrightness\"" + getDvar("r_filmTweakBrightness") + "\"");
+  fileprint_launcher("r_filmDesaturation\"" + getDvar("r_filmTweakDesaturation") + "\"");
+  fileprint_launcher("r_filmDesaturationDark\"" + getDvar("r_filmTweakDesaturationDark") + "\"");
+  fileprint_launcher("r_filmInvert\"" + getDvar("r_filmTweakInvert") + "\"");
+  fileprint_launcher("r_filmLightTint \"" + getDvar("r_filmTweakLightTint") + "\"");
+  fileprint_launcher("r_filmMediumTint\"" + getDvar("r_filmTweakMediumTint") + "\"");
+  fileprint_launcher("r_filmDarkTint\"" + getDvar("r_filmTweakDarkTint") + "\"");
   fileprint_launcher(" ");
-  fileprint_launcher("r_primaryLightUseTweaks\"" + GetDvar("r_primaryLightUseTweaks") + "\"");
-  fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + GetDvar("r_primaryLightTweakDiffuseStrength") + "\"");
-  fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + GetDvar("r_primaryLightTweakSpecularStrength") + "\"");
+  fileprint_launcher("r_primaryLightUseTweaks\"" + getDvar("r_primaryLightUseTweaks") + "\"");
+  fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + getDvar("r_primaryLightTweakDiffuseStrength") + "\"");
+  fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + getDvar("r_primaryLightTweakSpecularStrength") + "\"");
 
   if(!artEndVisionFileExport())
     return false;
@@ -216,8 +215,8 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
   level.diffuse_high = diffuse_high;
   level.diffuse_low = diffuse_low;
 
-  SetDvar("r_lighttweaksunlight", level.sunlight_dark);
-  SetDvar("r_lighttweakdiffusefraction", level.diffuse_low);
+  setDvar("r_lighttweaksunlight", level.sunlight_dark);
+  setDvar("r_lighttweakdiffusefraction", level.diffuse_low);
   direction = "up";
 
   for(;;) {
@@ -267,12 +266,12 @@ brighten(target_sunlight, time, freq) {
     time = time - freq;
 
     sunlight = sunlight + changeamount;
-    SetDvar("r_lighttweaksunlight", sunlight);
+    setDvar("r_lighttweaksunlight", sunlight);
     // IPrintLn( "^6sunlight = ", sunlight );
 
     frac = (sunlight - level.sunlight_dark) / (level.sunlight_bright - level.sunlight_dark);
     diffuse = level.diffuse_high + (level.diffuse_low - level.diffuse_high) * frac;
-    SetDvar("r_lighttweakdiffusefraction", diffuse);
+    setDvar("r_lighttweakdiffusefraction", diffuse);
     // IPrintLn( "^6diffuse = ", diffuse );
 
     wait freq;
@@ -295,12 +294,12 @@ darken(target_sunlight, time, freq) {
     time = time - freq;
 
     sunlight = sunlight - changeamount;
-    SetDvar("r_lighttweaksunlight", sunlight);
+    setDvar("r_lighttweaksunlight", sunlight);
     // IPrintLn( "^6sunlight = ", sunlight );
 
     frac = (sunlight - level.sunlight_dark) / (level.sunlight_bright - level.sunlight_dark);
     diffuse = level.diffuse_high + (level.diffuse_low - level.diffuse_high) * frac;
-    SetDvar("r_lighttweakdiffusefraction", diffuse);
+    setDvar("r_lighttweakdiffusefraction", diffuse);
     // IPrintLn( "^6diffuse = ", diffuse );
 
     wait freq;
@@ -313,7 +312,7 @@ scale(percent) {
 }
 
 adsDoF() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   self.dof = level.dofDefault;
   art_tweak = false;
@@ -329,7 +328,7 @@ adsDoF() {
       continue;
     }
 
-    /# art_tweak = GetDvarInt( "scr_art_tweak" );
+    art_tweak = GetDvarInt("scr_art_tweak");
 
     if(GetDvarInt("scr_dof_enable") && !art_tweak) {
       updateDoF();
@@ -341,7 +340,7 @@ adsDoF() {
 }
 
 updateCinematicDoF() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   adsFrac = self PlayerAds();
 
@@ -400,7 +399,7 @@ updateCinematicDoF() {
 }
 
 updateDoF() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   adsFrac = self PlayerAds();
 
   if(adsFrac == 0.0) {
@@ -534,7 +533,7 @@ javelin_dof(trace, enemies, playerEye, playerForward, adsFrac) {
 }
 
 setDoFTarget(adsFrac, nearStart, nearEnd, farStart, farEnd, nearBlur, farBlur) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(adsFrac == 1) {
     changeDoFValue("nearStart", nearStart, 50);
@@ -556,7 +555,7 @@ setDoFTarget(adsFrac, nearStart, nearEnd, farStart, farEnd, nearBlur, farBlur) {
 }
 
 changeDoFValue(valueName, targetValue, maxChange) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(self.dof[valueName] > targetValue) {
     changeVal = (self.dof[valueName] - targetValue) * 0.5;
@@ -584,7 +583,7 @@ changeDoFValue(valueName, targetValue, maxChange) {
 }
 
 lerpDoFValue(valueName, targetValue, lerpAmount) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   self.dof[valueName] = level.dofDefault[valueName] + ((targetValue - level.dofDefault[valueName]) * lerpAmount);
 }
@@ -599,7 +598,7 @@ dofvarupdate() {
 }
 
 setdefaultdepthoffield() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(isDefined(self.dofDefault)) {
     self SetDepthOfField(self.dofDefault["nearStart"], self.dofDefault["nearEnd"], self.dofDefault["farStart"], self.dofDefault["farEnd"], self.dofDefault["nearBlur"], self.dofDefault["farBlur"]);

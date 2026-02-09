@@ -613,7 +613,7 @@ func_E877(var_0, var_1, var_2, var_3) {
 
     self setanimknob(var_9, 1, 0.3, 0.8);
     self.a.var_1C8D = gettime() + 500;
-    if(isDefined(var_13) && isplayer(var_13)) {
+    if(isDefined(var_13) && isPlayer(var_13)) {
       self func_83CE();
     }
 
@@ -629,7 +629,7 @@ func_D50E(var_0, var_1, var_2, var_3) {
 func_E874(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   for(;;) {
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       self func_83CE();
     }
 

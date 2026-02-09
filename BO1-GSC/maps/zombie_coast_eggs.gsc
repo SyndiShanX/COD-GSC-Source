@@ -18,7 +18,6 @@ init() {
   level mic_test();
   level thread c_overseer();
 }
-
 c_flags() {
   flag_init("ffs");
   flag_init("ffd");
@@ -45,13 +44,12 @@ c_flags() {
   flag_init("sdm");
   flag_init("dmf");
 }
-
 #using_animtree("generic_human");
+
 c_anims() {
   level.scr_anim["dancer"]["breakdown"] = % ai_zombie_flinger_flail;
   level.scr_anim["dancer"]["spin"] = % ai_zombie_dying_back_idle;
 }
-
 beat_break(str_anim) {
   self endon("death");
   self endon("switch");
@@ -63,7 +61,6 @@ beat_break(str_anim) {
     animscripts\traverse\zombie_shared::wait_anim_length(dance_anim, .02);
   }
 }
-
 mic_test() {
   PreCacheModel("p_zom_vril_device");
   PreCacheModel("p_zom_vodka_bottle");
@@ -74,7 +71,6 @@ mic_test() {
   PreCacheShader("zom_hud_icon_bottle");
   PreCacheShader("zom_hud_icon_vril");
 }
-
 summon_the_shamans() {
   level.beginning = getstruct("cheaters_never_prosper", "targetname");
   rough_note = StrTok(level.beginning.script_parameters, " ");
@@ -91,11 +87,10 @@ summon_the_shamans() {
     temp = Int(balance[i]);
     level.together_again = add_to_array(level.together_again, temp, false);
   }
-  that_one = getEnt("trig_mine", "targetname");
+  that_one = GetEnt("trig_mine", "targetname");
   that_one SetCursorHint("HINT_NOICON");
   that_one SetHintString("");
 }
-
 c_overseer() {
   wait(0.2);
   flag_wait("all_players_connected");
@@ -122,17 +117,16 @@ c_overseer() {
     level thread libra();
   }
 }
-
 knock_on_door() {
   level endon("scrambled");
-  knock_trig = getEnt("e_gargoyle", "targetname");
+  knock_trig = GetEnt("e_gargoyle", "targetname");
   if(!isDefined(knock_trig)) {
     return;
   }
   flag_wait("power_on");
-  pneumatic_tube = getEnt("trig_deliver", "targetname");
+  pneumatic_tube = GetEnt("trig_deliver", "targetname");
   pneumatic_tube playLoopSound("zmb_whooooosh_loop", 2);
-  level.egg_sound_ent = getEnt("ent_loop_door_sounds", "targetname");
+  level.egg_sound_ent = GetEnt("ent_loop_door_sounds", "targetname");
   knock_trig playSound("zmb_haxorz_suxorz");
   level gargoyle_speaks(knock_trig);
   while(1) {
@@ -165,7 +159,7 @@ knock_on_door() {
       if(level._e_group) {
         if(flag("ffd") && flag("hgd") && !flag("bs")) {
           flag_set("bs");
-          level.egg_sound_ent stopLoopSound(1.5);
+          level.egg_sound_ent StopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, 4, 3, 5, undefined);
           level.egg_sound_ent playLoopSound("zmb_fantastical_worlds_loop", 1.5);
           wait(1.0);
@@ -182,57 +176,63 @@ knock_on_door() {
         }
         if(flag("ffd") && flag("hgd") && flag("bd") && !flag("ke")) {
           flag_set("ke");
-          level.egg_sound_ent stopLoopSound(1.5);
+          level.egg_sound_ent StopLoopSound(1.5);
           level thread delayed_song_loop();
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, 8, 4, 9, undefined);
           wait(1.0);
           continue;
         }
         if(flag("ffd") && flag("hgd") && flag("bd") && !flag("aca")) {
-          level.egg_sound_ent stopLoopSound(1);
+          level.egg_sound_ent StopLoopSound(1);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 5);
           wait(1.0);
           continue;
         }
         if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && !flag("mcs")) {
-          level.egg_sound_ent stopLoopSound(1.5);
+          level.egg_sound_ent StopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 6);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && !flag("mm")) {
-          level.egg_sound_ent stopLoopSound(1.5);
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
+          flag("mcs") && !flag("mm")) {
+          level.egg_sound_ent StopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 7);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && !flag("s_s")) {
-          level.egg_sound_ent stopLoopSound(1.5);
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
+          flag("mcs") && flag("mm") && !flag("s_s")) {
+          level.egg_sound_ent StopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 8);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && flag("s_s") && !flag("sdm")) {
-          level.egg_sound_ent stopLoopSound(1.5);
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
+          flag("mcs") && flag("mm") && flag("s_s") && !flag("sdm")) {
+          level.egg_sound_ent StopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, 13, 5, 14, undefined);
           level.egg_sound_ent playLoopSound("zmb_fantastical_worlds_loop", 1.5);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && flag("s_s") && flag("sdm") && !flag("dmf")) {
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
+          flag("mcs") && flag("mm") && flag("s_s") && flag("sdm") &&
+          !flag("dmf")) {
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 9);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && flag("s_s") && flag("dmf")) {
-          level.egg_sound_ent stopLoopSound(1.5);
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
+          flag("mcs") && flag("mm") && flag("s_s") && flag("dmf")) {
+          level.egg_sound_ent StopLoopSound(1.5);
           wait(1.0);
           continue;
           return;
         }
       } else {
         if(flag("ffd") && flag("hgd") && !flag("aca")) {
-          level.egg_sound_ent stopLoopSound(1.5);
+          level.egg_sound_ent StopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, 4, "3b", 9, undefined);
           flag_set("aca");
           wait(1.0);
@@ -248,12 +248,14 @@ knock_on_door() {
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") && flag("sdm") && !flag("dmf")) {
+        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") &&
+          flag("sdm") && !flag("dmf")) {
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 9);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") && flag("dmf")) {
+        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") &&
+          flag("dmf")) {
           wait(1.0);
           continue;
           return;
@@ -262,20 +264,17 @@ knock_on_door() {
     }
   }
 }
-
 force_wait_for_forcefield_looper() {
   wait(21.5);
   flag_set("hgs");
   level.egg_sound_ent playLoopSound("zmb_wizzybizzy_home_loop", 1.5);
 }
-
 delayed_song_loop() {
   wait(27);
   level.egg_sound_ent playLoopSound("vox_egg_skit_song", 1);
 }
-
 gargoyle_speaks(knock_trig) {
-  trig = getEnt("trig_start_voices", "targetname");
+  trig = GetEnt("trig_start_voices", "targetname");
   listener = undefined;
   if(!isDefined(trig)) {
     return;
@@ -313,10 +312,9 @@ gargoyle_speaks(knock_trig) {
   level maps\zombie_coast_amb::play_characters_skits_etc(listener, knock_trig, undefined, 1, 0, undefined);
   flag_set("ffs");
 }
-
 gargoyle_watch_early_door_hit() {
   level endon("stop_watching_early_knock");
-  knock_trig = getEnt("e_gargoyle", "targetname");
+  knock_trig = GetEnt("e_gargoyle", "targetname");
   hit = false;
   while(!hit) {
     knock_trig waittill("trigger", impatient_player);
@@ -325,30 +323,28 @@ gargoyle_watch_early_door_hit() {
     }
   }
 }
-
 engage() {
-  ship_wheel = getEnt("sm_ship_wheel", "targetname");
-  wheel_turn_right = getEnt("t_rotate_wheel_right", "targetname");
-  wheel_turn_left = getEnt("t_rotate_wheel_left", "targetname");
+  ship_wheel = GetEnt("sm_ship_wheel", "targetname");
+  wheel_turn_right = GetEnt("t_rotate_wheel_right", "targetname");
+  wheel_turn_left = GetEnt("t_rotate_wheel_left", "targetname");
   ship_wheel.spot = 0;
   wheel_turn_right thread press_the_button(1);
   wheel_turn_left thread press_the_button(0);
-  right_lever_trigger = getEnt("trig_eot_right_switch", "targetname");
-  left_lever_trigger = getEnt("trig_eot_left_switch", "targetname");
-  right_lever = getEnt(right_lever_trigger.target, "targetname");
+  right_lever_trigger = GetEnt("trig_eot_right_switch", "targetname");
+  left_lever_trigger = GetEnt("trig_eot_left_switch", "targetname");
+  right_lever = GetEnt(right_lever_trigger.target, "targetname");
   right_lever.spot = 0;
-  left_lever = getEnt(left_lever_trigger.target, "targetname");
+  left_lever = GetEnt(left_lever_trigger.target, "targetname");
   left_lever.spot = 0;
   right_lever_trigger thread egg_drop_soup();
   left_lever_trigger thread egg_drop_soup();
   level thread eyes_on_the_wall(ship_wheel, right_lever, left_lever);
 }
-
 press_the_button(i_direction) {
   level endon("shs");
   self UseTriggerRequireLookAt();
   self SetHintString("");
-  wheel = getEnt(self.target, "targetname");
+  wheel = GetEnt(self.target, "targetname");
   flag_wait("power_on");
   while(!flag("shs")) {
     self waittill("trigger");
@@ -371,12 +367,11 @@ press_the_button(i_direction) {
     }
   }
 }
-
 egg_drop_soup() {
   level endon("shs");
   self UseTriggerRequireLookAt();
   self SetHintString("");
-  lever = getEnt(self.target, "targetname");
+  lever = GetEnt(self.target, "targetname");
   flag_wait("power_on");
   while(!flag("shs")) {
     self waittill("trigger");
@@ -393,15 +388,13 @@ egg_drop_soup() {
     }
   }
 }
-
 cancer() {
   level thread coast_egg_fuse_controller();
   level thread coast_egg_fuse_box_think();
 }
-
 coast_egg_fuse_box_think() {
-  fuse_box_trigger = getEnt("trig_fuse_replace", "targetname");
-  fuse_box = getEnt("ent_fuse_box", "targetname");
+  fuse_box_trigger = GetEnt("trig_fuse_replace", "targetname");
+  fuse_box = GetEnt("ent_fuse_box", "targetname");
   if(!isDefined(fuse_box_trigger)) {
     return;
   }
@@ -433,7 +426,6 @@ coast_egg_fuse_box_think() {
     }
   }
 }
-
 coast_egg_fuse_controller() {
   fuse_array = getstructarray("struct_ep", "targetname");
   fuse_delivered = undefined;
@@ -444,7 +436,7 @@ coast_egg_fuse_controller() {
       fuse_array[i].object = spawn("script_model", fuse_array[i].origin);
       fuse_array[i].object.angles = fuse_array[i].angles;
       fuse_array[i].object setModel(fuse_array[i].script_parameters);
-      fuse_array[i].object.starter = getEnt(fuse_array[i].target, "targetname");
+      fuse_array[i].object.starter = GetEnt(fuse_array[i].target, "targetname");
       fuse_array[i].object.starter UseTriggerRequireLookAt();
       fuse_array[i].object.starter SetCursorHint("HINT_NOICON");
       fuse_array[i].object.starter EnableLinkTo();
@@ -459,7 +451,7 @@ coast_egg_fuse_controller() {
   }
   for(i = 0; i < fuse_array.size; i++) {
     if(!isDefined(fuse_array[i].object.starter)) {
-      fuse_array[i].object.starter = getEnt(fuse_array[i].target, "targetname");
+      fuse_array[i].object.starter = GetEnt(fuse_array[i].target, "targetname");
     }
     fuse_array[i].starter Delete();
     if(isDefined(fuse_array[i].object)) {
@@ -468,13 +460,11 @@ coast_egg_fuse_controller() {
   }
   array_delete(fuse_array);
 }
-
 coast_egg_fuse_lost(str_endon, str_waittill) {
   level endon(str_endon);
   level waittill(str_waittill);
   return true;
 }
-
 coast_egg_fuse_think() {
   fuse_found = false;
   while(!fuse_found) {
@@ -489,9 +479,8 @@ coast_egg_fuse_think() {
     }
   }
   self trigger_off();
-  self hide();
+  self Hide();
 }
-
 coast_egg_clear_fuse_on_death() {
   self endon("disconnect");
   level endon("ffd");
@@ -502,7 +491,6 @@ coast_egg_clear_fuse_on_death() {
   }
   level notify("fuse_lost");
 }
-
 coast_egg_clear_fuse_on_disconnect(ent_ply) {
   level endon("ffd");
   level endon("fuse_lost");
@@ -510,18 +498,16 @@ coast_egg_clear_fuse_on_disconnect(ent_ply) {
   ent_ply waittill("disconnect");
   level notify("fuse_lost");
 }
-
 coast_egg_fuse_starts_holy(ent_player) {
-  knock_trig = getEnt("e_gargoyle", "targetname");
+  knock_trig = GetEnt("e_gargoyle", "targetname");
   players = GetPlayers();
   level thread force_wait_for_forcefield_looper();
   level maps\zombie_coast_amb::play_characters_skits_etc(ent_player, knock_trig, 2, 2, 3, undefined);
 }
-
 aries() {
   flag_wait("hgs");
   enta_made_the_shot_trigger = getEntArray("trig_holy_g_damage", "targetname");
-  metal_door = getEnt("ent_metal_door", "targetname");
+  metal_door = GetEnt("ent_metal_door", "targetname");
   if(!isDefined(enta_made_the_shot_trigger)) {
     return;
   }
@@ -530,14 +516,13 @@ aries() {
     if(level flag_exists("hg" + i)) {
       enta_made_the_shot_trigger[i] thread coast_egg_power_source_react("hg" + i);
     } else {
-      PrintLn("** more triggers than flags set up!**");
+      PrintLn("***************************** more triggers than flags set up!*********************************************");
     }
   }
   level thread coast_egg_holy_grenade_watcher();
   flag_wait("hgd");
   stop_exploder(770);
 }
-
 coast_egg_power_source_react(str_flag) {
   rtg = getstruct(self.target, "targetname");
   field = undefined;
@@ -554,7 +539,7 @@ coast_egg_power_source_react(str_flag) {
     if(is_player_valid(e_attacker) && (i_dmg_type == level.trials[0] || i_dmg_type == level.trials[1])) {
       flag_set(str_flag);
       self._source_damaged = true;
-      field stopLoopSound(.1);
+      field StopLoopSound(.1);
       field playSound("zmb_wizzybizzy_explo");
     }
   }
@@ -564,12 +549,10 @@ coast_egg_power_source_react(str_flag) {
   self trigger_off();
   self Delete();
 }
-
 coast_egg_holy_grenade_watcher() {
   flag_wait_all("hg0", "hg1", "hg2", "hg3");
   flag_set("hgd");
 }
-
 virgo() {
   enta_egg_ice_break_trigger = getEntArray("trig_egg_break_ice", "targetname");
   ice_blocks = getEntArray("ent_bartender", "targetname");
@@ -588,7 +571,6 @@ virgo() {
   level thread coast_egg_bottle_delivered();
   level thread coast_egg_bartender(holsters);
 }
-
 coast_egg_bartender(structs) {
   level endon("bd");
   while(!flag("bd")) {
@@ -603,7 +585,6 @@ coast_egg_bartender(structs) {
     structs = array_randomize(structs);
   }
 }
-
 coast_egg_bottle_think() {
   level endon("bd");
   second_spot = getstruct(self.target, "targetname");
@@ -636,7 +617,7 @@ coast_egg_bottle_think() {
   e_icebreaker Delete();
   end_point = PhysicsTrace(e_bottle.origin, bottle_end);
   e_bottle NotSolid();
-  e_bottle moveTo(end_point, 1.4, 0.2, 0);
+  e_bottle MoveTo(end_point, 1.4, 0.2, 0);
   player_caught = e_bottle coast_egg_bottle_caught(e_catch_trig);
   level notify("stop_egg_debug");
   if(isDefined(player_caught) && is_player_valid(player_caught)) {
@@ -647,7 +628,7 @@ coast_egg_bottle_think() {
     player_caught thread coast_eggs_hud("zom_hud_icon_bottle", "bd");
     e_catch_trig Unlink();
     e_catch_trig Delete();
-    e_bottle hide();
+    e_bottle Hide();
     e_bottle Delete();
     return true;
   } else {
@@ -657,12 +638,11 @@ coast_egg_bottle_think() {
     e_bottle playSound("zmb_worf_speed_fail");
     e_catch_trig Unlink();
     e_catch_trig Delete();
-    e_bottle hide();
+    e_bottle Hide();
     e_bottle Delete();
     return false;
   }
 }
-
 coast_egg_bottle_caught(e_trigger) {
   self endon("movedone");
   while(isDefined(e_trigger)) {
@@ -672,7 +652,6 @@ coast_egg_bottle_caught(e_trigger) {
     }
   }
 }
-
 coast_egg_clear_bottle_on_death() {
   self endon("disconnect");
   level endon("bd");
@@ -683,7 +662,6 @@ coast_egg_clear_bottle_on_death() {
   }
   level notify("butterfingers");
 }
-
 coast_egg_clear_bottle_on_disconnect(ent_ply) {
   level endon("bd");
   level endon("butterfingers");
@@ -691,10 +669,9 @@ coast_egg_clear_bottle_on_disconnect(ent_ply) {
   ent_ply waittill("disconnect");
   level notify("butterfingers");
 }
-
 coast_egg_bottle_delivered() {
-  e_delivery_trigger = getEnt("trig_deliver", "targetname");
-  delivery_tube = getEnt(e_delivery_trigger.target, "targetname");
+  e_delivery_trigger = GetEnt("trig_deliver", "targetname");
+  delivery_tube = GetEnt(e_delivery_trigger.target, "targetname");
   if(!isDefined(e_delivery_trigger)) {
     return;
   }
@@ -719,15 +696,13 @@ coast_egg_bottle_delivered() {
   }
   flag_set("bd");
 }
-
 coast_egg_bottle_cleanup() {
-  e_bottle = getEnt(self.target, "targetname");
+  e_bottle = GetEnt(self.target, "targetname");
   if(isDefined(e_bottle)) {
     e_bottle Delete();
   }
   self Delete();
 }
-
 denlo() {
   radios = getEntArray("hello_world", "targetname");
   for(i = 0; i < radios.size; i++) {
@@ -737,7 +712,6 @@ denlo() {
     radios[i] thread coast_egg_art_critic_message();
   }
 }
-
 coast_egg_art_critic_message() {
   level endon("aca");
   if(!isDefined(self.script_special)) {
@@ -767,7 +741,6 @@ coast_egg_art_critic_message() {
     }
   }
 }
-
 call_out(str_message) {
   level endon("aca");
   level._reach = add_to_array(level._reach, str_message);
@@ -781,7 +754,6 @@ call_out(str_message) {
     return true;
   }
 }
-
 pisces() {
   flag_wait("aca");
   level._serenade = [];
@@ -790,7 +762,6 @@ pisces() {
   flag_wait("bp");
   flag_set("mcs");
 }
-
 eyes_on_the_wall(spinner, starboard, port) {
   Assert(isDefined(spinner.spot));
   Assert(isDefined(starboard.spot));
@@ -806,7 +777,6 @@ eyes_on_the_wall(spinner, starboard, port) {
     wait(0.1);
   }
 }
-
 metal_horse() {
   horse_struct = getstruct("struct_thunder", "targetname");
   flag_wait("shs");
@@ -860,12 +830,10 @@ metal_horse() {
   horse waittill("movedone");
   horse Delete();
 }
-
 noisemakers() {
   enta_sound_beacon_triggers = getEntArray("trig_use_sound_beacon", "targetname");
   array_thread(enta_sound_beacon_triggers, ::coast_egg_musical_chairs_beach_beacon_used);
 }
-
 coast_egg_musical_chairs_beach_beacon_used() {
   self UseTriggerRequireLookAt();
   self SetHintString("");
@@ -894,7 +862,6 @@ coast_egg_musical_chairs_beach_beacon_used() {
     }
   }
 }
-
 coast_egg_musical_check() {
   Assert(isDefined(level._serenade));
   Assert(isDefined(level.mermaid));
@@ -905,14 +872,12 @@ coast_egg_musical_check() {
   }
   return true;
 }
-
 libra() {
   flag_wait("mcs");
   flag_set("hn");
   flag_wait("mm");
   flag_set("ss");
 }
-
 rotary_styles() {
   enta_harmony_triggers = getEntArray("trig_pure_harmony", "targetname");
   if(!isDefined(enta_harmony_triggers)) {
@@ -924,16 +889,15 @@ rotary_styles() {
   level._dials[2] = -1;
   level._dials[3] = -1;
   for(i = 0; i < enta_harmony_triggers.size; i++) {
-    rand = randomInt(9);
+    rand = RandomInt(9);
     enta_harmony_triggers[i] coast_egg_dial_setup(rand);
   }
   for(i = 0; i < enta_harmony_triggers.size; i++) {
     enta_harmony_triggers[i] thread coast_egg_dial_think();
   }
 }
-
 coast_egg_dial_setup(int_start_spot) {
-  dial = getEnt(self.target, "targetname");
+  dial = GetEnt(self.target, "targetname");
   dial.pos = 0;
   dial ent_flag_init("rotating");
   level._dials[self.script_special] = dial;
@@ -946,9 +910,8 @@ coast_egg_dial_setup(int_start_spot) {
     }
   }
 }
-
 coast_egg_dial_think() {
-  dial = getEnt(self.target, "targetname");
+  dial = GetEnt(self.target, "targetname");
   partners = self.script_vector;
   self SetHintString("");
   self SetCursorHint("HINT_NOICON");
@@ -963,17 +926,17 @@ coast_egg_dial_think() {
         other_dials = getEntArray(self.targetname, "targetname");
         for(i = 0; i < other_dials.size; i++) {
           if(other_dials[i].script_special == partners[0]) {
-            partner_dial = getEnt(other_dials[i].target, "targetname");
+            partner_dial = GetEnt(other_dials[i].target, "targetname");
             if(isDefined(partner_dial)) {
               level coast_egg_dial_rotate(partner_dial);
             } else {}
           } else if(other_dials[i].script_special == partners[1]) {
-            partner_dial = getEnt(other_dials[i].target, "targetname");
+            partner_dial = GetEnt(other_dials[i].target, "targetname");
             if(isDefined(partner_dial)) {
               level coast_egg_dial_rotate(partner_dial);
             } else {}
           } else if(other_dials[i].script_special == partners[2]) {
-            partner_dial = getEnt(other_dials[i].target, "targetname");
+            partner_dial = GetEnt(other_dials[i].target, "targetname");
             if(isDefined(partner_dial)) {
               level coast_egg_dial_rotate(partner_dial);
             } else {}
@@ -989,7 +952,6 @@ coast_egg_dial_think() {
     }
   }
 }
-
 coast_egg_dial_rotate(ent_dial) {
   if(!isDefined(ent_dial.pos)) {
     ent_dial.pos = 0;
@@ -998,7 +960,7 @@ coast_egg_dial_rotate(ent_dial) {
     wait(0.1);
   }
   ent_dial ent_flag_set("rotating");
-  ent_dial rotatePitch(36, 0.2);
+  ent_dial RotatePitch(36, 0.2);
   ent_dial waittill("rotatedone");
   ent_dial.pos++;
   if(ent_dial.pos > 9) {
@@ -1010,7 +972,6 @@ coast_egg_dial_rotate(ent_dial) {
   }
   ent_dial ent_flag_clear("rotating");
 }
-
 coast_egg_dials_in_harmony() {
   Assert(isDefined(level._dials));
   Assert(isDefined(level.together_again));
@@ -1022,7 +983,6 @@ coast_egg_dials_in_harmony() {
   }
   return match;
 }
-
 leo() {
   flag_wait("ss");
   level thread coast_egg_sacrifice_spot_start();
@@ -1030,13 +990,12 @@ leo() {
   flag_wait("re");
   flag_wait("s_s");
 }
-
 coast_egg_sacrifice_spot_start() {
   level._humangun_escape_override = getstruct("struct_sacrifice_grabbed_by_light", "targetname");
   middle_of_the_light = getstruct("struct_middle_of_light", "targetname");
   top_of_the_house = getstruct("struct_top_of_the_house", "targetname");
-  trig_reached_light = getEnt("trig_human_into_the_light", "targetname");
-  trig_gotcha = getEnt("trig_mine", "targetname");
+  trig_reached_light = GetEnt("trig_human_into_the_light", "targetname");
+  trig_gotcha = GetEnt("trig_mine", "targetname");
   reward = undefined;
   light_mover = undefined;
   who = undefined;
@@ -1050,7 +1009,7 @@ coast_egg_sacrifice_spot_start() {
   while(!flag("re")) {
     while(!flag("sa")) {
       trig_reached_light waittill("trigger", who);
-      if(isDefined(who) && IsAlive(who) && !IsPlayer(who) && who.animname == "human_zombie") {
+      if(isDefined(who) && IsAlive(who) && !isPlayer(who) && who.animname == "human_zombie") {
         light_mover = spawn("script_model", who.origin);
         light_mover.angles = who.angles;
         light_mover setModel("tag_origin");
@@ -1067,7 +1026,7 @@ coast_egg_sacrifice_spot_start() {
         who.humangun_zombie_1st_hit_was_upgraded = undefined;
         level._humangun_escape_override = undefined;
         who thread rising_watch(light_mover);
-        light_mover moveTo(middle_of_the_light.origin, 2.0);
+        light_mover MoveTo(middle_of_the_light.origin, 2.0);
         light_mover waittill_notify_or_timeout("movedone", 2.0);
         if(isDefined(who) && IsAlive(who)) {
           flag_set("sa");
@@ -1101,7 +1060,7 @@ coast_egg_sacrifice_spot_start() {
       who._lighthouse_owned = undefined;
       who thread stop_magic_bullet_shield();
       who Unlink();
-      who hide();
+      who Hide();
       who DoDamage(who.health + 10, who.origin);
     }
     if(isDefined(light_mover)) {
@@ -1120,7 +1079,7 @@ coast_egg_sacrifice_spot_start() {
             fx_spot notify("completed");
             light_mover notify("completed");
             fx_spot Delete();
-            reward stopLoopSound(.1);
+            reward StopLoopSound(.1);
             reward playSound("zmb_tingling_sensation");
             grabber thread coast_eggs_hud("zom_hud_icon_vril", "s_s");
             reward Unlink();
@@ -1142,10 +1101,9 @@ coast_egg_sacrifice_spot_start() {
     wait(0.1);
   }
 }
-
 device_return_from_death(vec_spot) {
   level endon("s_s");
-  trig_gotcha = getEnt("trig_mine", "targetname");
+  trig_gotcha = GetEnt("trig_mine", "targetname");
   while(!flag("s_s")) {
     level waittill("device_lost");
     device = spawn("script_model", vec_spot);
@@ -1157,7 +1115,7 @@ device_return_from_death(vec_spot) {
       trig_gotcha waittill("trigger", who);
       if(is_player_valid(who)) {
         device notify("completed");
-        device stopLoopSound(.1);
+        device StopLoopSound(.1);
         device playSound("zmb_tingling_sensation");
         who thread coast_eggs_hud("zom_hud_icon_vril", "s_s");
         device Delete();
@@ -1168,7 +1126,6 @@ device_return_from_death(vec_spot) {
     }
   }
 }
-
 watch_for_death(ent_guy) {
   self endon("completed");
   ent_guy waittill("death");
@@ -1179,7 +1136,6 @@ watch_for_death(ent_guy) {
   level._humangun_escape_override = getstruct("struct_sacrifice_grabbed_by_light", "targetname");
   self Delete();
 }
-
 rotate_while_moving() {
   self endon("completed");
   while(isDefined(self)) {
@@ -1187,7 +1143,6 @@ rotate_while_moving() {
     self waittill("rotatedone");
   }
 }
-
 device_replace_on_death() {
   self endon("disconnect");
   level endon("s_s");
@@ -1198,14 +1153,12 @@ device_replace_on_death() {
   }
   level notify("device_lost");
 }
-
 lost_salvation(ent_ply) {
   level endon("s_s");
   ent_ply endon("death");
   ent_ply waittill("disconnect");
   level notify("device_lost");
 }
-
 rising_watch(org_mover) {
   self endon("death");
   org_mover endon("completed");
@@ -1220,11 +1173,10 @@ rising_watch(org_mover) {
   self notify("lighthouse_owned");
   self._light_accept = true;
 }
-
 coast_egg_device_delivered() {
-  delivery_trig = getEnt("trig_deliver", "targetname");
-  delivery_tube = getEnt(delivery_trig.target, "targetname");
-  knock_trig = getEnt("e_gargoyle", "targetname");
+  delivery_trig = GetEnt("trig_deliver", "targetname");
+  delivery_tube = GetEnt(delivery_trig.target, "targetname");
+  knock_trig = GetEnt("e_gargoyle", "targetname");
   if(!isDefined(delivery_trig)) {
     return;
   }
@@ -1247,18 +1199,17 @@ coast_egg_device_delivered() {
         device Delete();
       }
       flag_set("s_s");
-      level.egg_sound_ent stopLoopSound(1.5);
+      level.egg_sound_ent StopLoopSound(1.5);
       level maps\zombie_coast_amb::play_characters_skits_etc(shorts_man, knock_trig, 13, 5, 14, undefined);
       level.egg_sound_ent playLoopSound("zmb_fantastical_worlds_loop", 1.5);
       flag_set("sdm");
     }
   }
 }
-
 capricorn() {
-  trig_hit = getEnt("trig_fix_tv", "targetname");
-  fuse_box = getEnt("ent_fuse_box", "targetname");
-  knock_trig = getEnt("e_gargoyle", "targetname");
+  trig_hit = GetEnt("trig_fix_tv", "targetname");
+  fuse_box = GetEnt("ent_fuse_box", "targetname");
+  knock_trig = GetEnt("e_gargoyle", "targetname");
   fixed = false;
   if(!isDefined(trig_hit)) {
     return;
@@ -1280,7 +1231,6 @@ capricorn() {
   level notify("coast_easter_egg_achieved");
   level thread consequences_will_never_be_the_same();
 }
-
 coast_egg_broken_spark(fuse_box) {
   level endon("stop_spark");
   while(isDefined(self)) {
@@ -1289,14 +1239,12 @@ coast_egg_broken_spark(fuse_box) {
     wait(RandomFloatRange(0.5, 1.2));
   }
 }
-
 consequences_will_never_be_the_same() {
   struct = getstruct("consequence", "targetname");
   if(isDefined(struct)) {
     level thread maps\_zombiemode_powerups::specific_powerup_drop("tesla", struct.origin);
   }
 }
-
 coast_eggs_hud(str_shader, str_endon) {
   self.eggHud = create_simple_hud(self);
   self.eggHud.foreground = true;
@@ -1312,20 +1260,17 @@ coast_eggs_hud(str_shader, str_endon) {
   self.eggHud setshader(str_shader, 32, 32);
   self thread coast_eggs_hud_remove_on_death(str_endon);
 }
-
 coast_remove_eggs_hud() {
   self endon("death");
   if(isDefined(self.eggHud)) {
     self.eggHud Destroy();
   }
 }
-
 coast_eggs_hud_remove_on_death(str_endon) {
   level endon(str_endon);
   self waittill_any("death", "_zombie_game_over", "spawned_spectator");
   self thread coast_remove_eggs_hud();
 }
-
 coast_egg_debug_print3d(str_text) {
   self endon("stop_egg_debug");
   self endon("death");
@@ -1334,7 +1279,6 @@ coast_egg_debug_print3d(str_text) {
     wait(0.5);
   }
 }
-
 coast_egg_play_anim(str_anim, str_notify, str_endon) {
   self endon(str_endon);
   self endon("death");

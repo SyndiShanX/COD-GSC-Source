@@ -168,7 +168,7 @@ set_permissions() {
 function_4c37bb21(var_2b7584f0) {
   var_156b3879 = self function_b7c8d984(undefined, 0);
 
-  if(isDefined(var_156b3879) && isplayer(var_156b3879)) {
+  if(isDefined(var_156b3879) && isPlayer(var_156b3879)) {
     self.spectatorteam = var_156b3879.team;
 
     if(var_2b7584f0) {
@@ -363,7 +363,7 @@ function_2b728d67(attacker) {
   }
 
   var_8447710e = player::figure_out_attacker(attacker);
-  var_6407d695 = isDefined(var_8447710e) && isplayer(var_8447710e) && var_8447710e != self && isalive(var_8447710e);
+  var_6407d695 = isDefined(var_8447710e) && isPlayer(var_8447710e) && var_8447710e != self && isalive(var_8447710e);
   var_156b3879 = self function_b7c8d984(var_8447710e, var_6407d695);
 
   if(!isDefined(var_156b3879)) {
@@ -372,7 +372,7 @@ function_2b728d67(attacker) {
 
   var_156b3879 = follow_chain(var_156b3879);
 
-  if(isDefined(var_156b3879) && isplayer(var_156b3879)) {
+  if(isDefined(var_156b3879) && isPlayer(var_156b3879)) {
     self.spectatorclient = -1;
     self.spectatorteam = var_156b3879.team;
     self setcurrentspectatorclient(var_156b3879);

@@ -187,7 +187,6 @@ function_7857357b(tacbundle, params, node) {
 
   if(self bot::in_combat() && !self iscovervalid(node)) {
     self bot::record_text("<dev string:xdf>", (1, 0, 0), "<dev string:x4c>");
-
   }
 
   return self g_stop_player_too_many_weapons_monitor(params.stance);

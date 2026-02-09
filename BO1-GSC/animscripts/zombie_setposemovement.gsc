@@ -7,6 +7,7 @@
 #include maps\_Utility;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 SetPoseMovement(desiredPose, desiredMovement) {
   if(desiredPose == "") {
     desiredPose = self.a.pose;
@@ -16,7 +17,6 @@ SetPoseMovement(desiredPose, desiredMovement) {
   }
   [[anim.SetPoseMovementFnArray[desiredPose][desiredMovement]]]();
 }
-
 InitPoseMovementFunctions() {
   anim.SetPoseMovementFnArray["stand"]["stop"] = ::BeginStandStop;
   anim.SetPoseMovementFnArray["stand"]["walk"] = ::BeginStandWalk;
@@ -25,7 +25,6 @@ InitPoseMovementFunctions() {
   anim.SetPoseMovementFnArray["crouch"]["walk"] = ::BeginCrouchWalk;
   anim.SetPoseMovementFnArray["crouch"]["run"] = ::BeginCrouchRun;
 }
-
 BeginStandStop() {
   switch (self.a.pose) {
     case "stand":
@@ -61,7 +60,6 @@ BeginStandStop() {
   }
   return true;
 }
-
 BeginStandWalk() {
   switch (self.a.pose) {
     case "stand":
@@ -97,7 +95,6 @@ BeginStandWalk() {
   }
   return true;
 }
-
 BeginStandRun() {
   switch (self.a.pose) {
     case "stand":
@@ -130,7 +127,6 @@ BeginStandRun() {
   }
   return true;
 }
-
 BeginCrouchStop() {
   switch (self.a.pose) {
     case "stand":
@@ -166,7 +162,6 @@ BeginCrouchStop() {
       assertEX(0, "SetPoseMovement::BeginCrouchStop " + self.a.pose + " " + self.a.movement);
   }
 }
-
 BeginCrouchWalk() {
   switch (self.a.pose) {
     case "stand":
@@ -203,7 +198,6 @@ BeginCrouchWalk() {
   }
   return true;
 }
-
 BeginCrouchRun() {
   switch (self.a.pose) {
     case "stand":
@@ -237,7 +231,6 @@ BeginCrouchRun() {
   }
   return true;
 }
-
 PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
   endTime = GetTime() + crossblendTime * 1000;
   self SetFlaggedAnimKnobAll("blendTransition", transAnim, %body, 1, crossblendTime, 1);
@@ -251,38 +244,31 @@ PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
   }
   wait waittime;
 }
-
 PlayTransitionStandWalk(transAnim, finalAnim) {
   PlayTransitionAnimation(transAnim, "stand", "walk", 1, finalAnim);
 }
-
 StandWalkToStand() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandWalkToStand " + self.a.pose);
   assertEX(self.a.movement == "walk", "SetPoseMovement::StandWalkToStand " + self.a.movement);
   self.a.movement = "stop";
 }
-
 StandWalkToCrouch() {
   StandWalkToStand();
   StandToCrouch();
 }
-
 StandRunToStand() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandRunToStand " + self.a.pose);
   assertEX(self.a.movement == "run", "SetPoseMovement::StandRunToStand " + self.a.movement);
   self.a.movement = "stop";
 }
-
 StandRunToCrouch() {
   self.a.movement = "stop";
   self.a.pose = "crouch";
 }
-
 PlayBlendTransitionStandRun(animname) {
   transtime = 0.2;
   PlayBlendTransition(animname, transtime, "stand", "run");
 }
-
 BlendIntoStandRun() {
   if(self animscripts\utility::IsInCombat()) {
     if(isDefined(self.run_combatanim)) {
@@ -313,18 +299,16 @@ BlendIntoStandRun() {
   }
   self notify("BlendIntoStandRun");
 }
-
 PlayBlendTransitionStandWalk(animname) {
-  if(self.a.movement != "stop")
+  if(self.a.movement != "stop") {
     self endon("movemode");
+  }
   PlayBlendTransition(animname, 0.2, "stand", "walk");
 }
-
 BlendIntoStandWalk() {
   walkanim = animscripts\walk::getStandWalkAnim();
   PlayBlendTransitionStandWalk(walkanim);
 }
-
 CrouchToStand() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToStand " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToStand " + self.a.movement);
@@ -336,50 +320,41 @@ CrouchToStand() {
   self randomizeIdleSet();
   PlayTransitionAnimation(%crouch2stand, "stand", "stop", standSpeed);
 }
-
 CrouchToCrouchWalk() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToCrouchWalk " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToCrouchWalk " + self.a.movement);
   BlendIntoCrouchWalk();
 }
-
 CrouchToStandWalk() {
   CrouchToCrouchWalk();
   BlendIntoStandWalk();
 }
-
 CrouchWalkToCrouch() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchWalkToCrouch " + self.a.pose);
   assertEX(self.a.movement == "walk", "SetPoseMovement::CrouchWalkToCrouch " + self.a.movement);
   self.a.movement = "stop";
 }
-
 CrouchWalkToStand() {
   CrouchWalkToCrouch();
   CrouchToStand();
 }
-
 CrouchRunToCrouch() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchRunToCrouch " + self.a.pose);
   assertEX(self.a.movement == "run", "SetPoseMovement::CrouchRunToCrouch " + self.a.movement);
   self.a.movement = "stop";
 }
-
 CrouchRunToStand() {
   CrouchRunToCrouch();
   CrouchToStand();
 }
-
 CrouchToCrouchRun() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToCrouchRun " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToCrouchRun " + self.a.movement);
   BlendIntoCrouchRun();
 }
-
 CrouchToStandRun() {
   BlendIntoStandRun();
 }
-
 BlendIntoCrouchRun() {
   if(isDefined(self.crouchrun_combatanim)) {
     self SetAnimKnobAll(self.crouchrun_combatanim, %body, 1, 0.2);
@@ -392,7 +367,6 @@ BlendIntoCrouchRun() {
     self notify("BlendIntoCrouchRun");
   }
 }
-
 BlendIntoCrouchWalk() {
   if(isDefined(self.crouchrun_combatanim)) {
     self SetAnimKnobAll(self.crouchrun_combatanim, %body, 1, 0.2);
@@ -402,7 +376,6 @@ BlendIntoCrouchWalk() {
     PlayBlendTransition(%crouch_fastwalk_F, 0.2, "crouch", "walk");
   }
 }
-
 StandToCrouch() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandToCrouch " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::StandToCrouch " + self.a.movement);
@@ -417,7 +390,6 @@ StandToCrouch() {
   }
   PlayTransitionAnimation(%exposed_stand_2_crouch, "crouch", "stop", 1, undefined, crouchspeed);
 }
-
 PlayTransitionAnimation2(transAnim, endPose, endMovement, finalAnim) {
   self SetFlaggedAnimKnobAll("transAnimDone1", transAnim, %body, 1, 0.2, 1);
   if(!isDefined(self.a.pose)) {
@@ -435,20 +407,18 @@ PlayTransitionAnimation2(transAnim, endPose, endMovement, finalAnim) {
     self SetAnimKnobAll(finalAnim, %body, 1, 0.2, 1);
   }
 }
-
 PlayTransitionAnimationThread_WithoutWaitSetStates(transAnim, endPose, endMovement, finalAnim, rate) {
   self endon("killanimscript");
   self endon("entered_pose" + endPose);
   PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, false);
 }
-
 PlayTransitionAnimation(transAnim, endPose, endMovement, finalAnim, rate) {
   PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, true);
 }
-
 PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, waitSetStatesEnabled) {
-  if(!isDefined(rate))
+  if(!isDefined(rate)) {
     rate = 1;
+  }
   if(waitSetStatesEnabled) {
     self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
   }
@@ -470,7 +440,6 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
     self SetAnimKnobAll(finalAnim, %body, 1, 0.2, rate);
   }
 }
-
 waitSetStates(timetowait, killmestring, endPose) {
   self endon("killanimscript");
   self endon("death");

@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -148,7 +148,7 @@ onplayerconnect() {
     var_0.pers["assists"] = var_0.total_tags_banked;
     var_0.objective_additionalentity = var_0.tags_carried;
     var_0.muggings = [];
-    if(isplayer(var_0) && !isbot(var_0)) {
+    if(isPlayer(var_0) && !isbot(var_0)) {
       var_0.dogtagsicon = var_0 scripts\mp\hud_util::createicon("hud_tagcount", 48, 48);
       var_0.dogtagsicon scripts\mp\hud_util::setpoint("TOP LEFT", "TOP LEFT", 200, 0);
       var_0.dogtagsicon.alpha = 1;
@@ -221,14 +221,14 @@ spawndogtags(var_0, var_1) {
         var_2 = var_0.tags_carried;
         var_0.tags_carried = 0;
         var_0.objective_additionalentity = 0;
-        if(isplayer(var_0) && !isbot(var_0)) {
+        if(isPlayer(var_0) && !isbot(var_0)) {
           var_0.dogtagstext setvalue(var_0.tags_carried);
           var_0.dogtagstext thread scripts\mp\hud::fontpulse(var_0);
           var_0 thread scripts\mp\hud_message::showsplash("mugger_suicide", var_2);
         }
       }
     } else if(isDefined(var_0.attackerdata) && var_0.attackerdata.size > 0) {
-      if(isplayer(var_1) && isDefined(var_0.attackerdata) && isDefined(var_1.guid) && isDefined(var_0.attackerdata[var_1.guid])) {
+      if(isPlayer(var_1) && isDefined(var_0.attackerdata) && isDefined(var_1.guid) && isDefined(var_0.attackerdata[var_1.guid])) {
         var_4 = var_0.attackerdata[var_1.guid];
         if(isDefined(var_4) && isDefined(var_4.attackerent) && var_4.attackerent == var_1) {
           if(isDefined(var_4.smeansofdeath) && var_4.smeansofdeath == "MOD_MELEE" || (var_4.weapon == "throwingknife_mp" || var_4.weapon == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac > 0) {
@@ -241,7 +241,7 @@ spawndogtags(var_0, var_1) {
 
               var_0.tags_carried = var_0.tags_carried - var_2;
               var_0.objective_additionalentity = var_0.tags_carried;
-              if(isplayer(var_0) && !isbot(var_0)) {
+              if(isPlayer(var_0) && !isbot(var_0)) {
                 var_0.dogtagstext setvalue(var_0.tags_carried);
                 var_0.dogtagstext thread scripts\mp\hud::fontpulse(var_0);
                 var_0 thread scripts\mp\hud_message::showsplash("callout_mugged", var_2);
@@ -618,7 +618,7 @@ mugger_delayed_banking() {
   level endon("banking_all");
   self.tags_carried++;
   self.objective_additionalentity = self.tags_carried;
-  if(isplayer(self) && !isbot(self)) {
+  if(isPlayer(self) && !isbot(self)) {
     self.dogtagstext setvalue(self.tags_carried);
     self.dogtagstext thread scripts\mp\hud::fontpulse(self);
   }
@@ -677,7 +677,7 @@ mugger_bank_tags(var_0, var_1) {
     self.total_tags_banked = self.total_tags_banked + var_2;
     self.tags_carried = self.tags_carried - var_2;
     self.objective_additionalentity = self.tags_carried;
-    if(isplayer(self) && !isbot(self)) {
+    if(isPlayer(self) && !isbot(self)) {
       self.dogtagstext setvalue(self.tags_carried);
       self.dogtagstext thread scripts\mp\hud::fontpulse(self);
     }

@@ -59,8 +59,7 @@ mortarSpawner(delayEnt) {
   if(isDefined(delayEnt.script_delay)) {
     delay_base = delayEnt.script_delay;
   } else {
-  if(isDefined(delayEnt.script_delay_min)) {
-  }
+    if(isDefined(delayEnt.script_delay_min)) {}
     delay_base = delayEnt.script_delay_min;
     delay_range = delayEnt.script_delay_max - delayEnt.script_delay_min;
   }

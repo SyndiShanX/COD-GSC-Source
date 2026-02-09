@@ -55,7 +55,7 @@ registerscoreinfo(var_0, var_1, var_2) {
 
 getscoreinfovalue(var_0) {
   var_1 = "scr_" + level.gametype + "_score_" + var_0;
-  if(getdvar(var_1) != "") {
+  if(getDvar(var_1) != "") {
     return getdvarint(var_1);
   }
 
@@ -66,7 +66,7 @@ getscoreinfocategory(var_0, var_1) {
   switch (var_1) {
     case "value":
       var_2 = "scr_" + level.gametype + "_score_" + var_0;
-      if(getdvar(var_2) != "") {
+      if(getDvar(var_2) != "") {
         return getdvarint(var_2);
       } else {
         return level.scoreinfo[var_0]["value"];
@@ -251,7 +251,7 @@ giverankxp(var_0, var_1, var_2) {
     return;
   }
 
-  if(isai(self) || !isplayer(self)) {
+  if(isai(self) || !isPlayer(self)) {
     return;
   }
 
@@ -460,7 +460,7 @@ scoreeventpopup(var_0) {
     self.owner scoreeventpopup(var_0);
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

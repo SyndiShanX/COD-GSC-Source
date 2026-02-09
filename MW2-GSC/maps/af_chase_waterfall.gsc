@@ -69,7 +69,6 @@ rumbly_rocks_bumps() {
       level.player PlayRumbleOnEntity("damage_heavy");
     else
       level.player PlayRumbleOnEntity("damage_light");
-
   }
 }
 
@@ -352,7 +351,7 @@ rapids_scene() {
   }
 }
 
-//#using_animtree( "generic_human" );
+/using_animtree( "generic_human" );
 
 price_does_steady_boat_anims_and_sound() {
   level.price delaythread(0.666, ::play_sound_on_entity, "afchase_pri_holdsteady");
@@ -515,7 +514,7 @@ water_fall_edge() {
   wait 1;
   if(!flag("killed_pickup_heli")) {
     // Shepherd escaped on the Helicopter.
-    SetDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_SHOOT_DOWN");
+    setDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_SHOOT_DOWN");
     missionFailedWrapper();
     return;
   }
@@ -529,7 +528,7 @@ water_fall_edge() {
   level.eq_ent MoveTo((1, 0, 0), 5, 0, 0);
 
   wait 2;
-  setdvar("ui_char_museum_mode", "credits_1");
+  setDvar("ui_char_museum_mode", "credits_1");
   nextmission();
 
   wait 7;

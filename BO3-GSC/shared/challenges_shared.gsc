@@ -432,7 +432,7 @@ function disarmedhackedcarepackage() {
 }
 
 function destroyed_car() {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
   self addplayerstat("destroy_car", 1);
@@ -522,7 +522,7 @@ function gameend(winner) {
     if(isDefined(winner) && isDefined(level.teams[winner])) {
       data.winner = winner;
     }
-  } else if(isDefined(winner) && isplayer(winner)) {
+  } else if(isDefined(winner) && isPlayer(winner)) {
     data.winner = winner;
   }
   for(index = 0; index < level.placement["all"].size; index++) {
@@ -541,13 +541,13 @@ function gameend(winner) {
 }
 
 function getfinalkill(player) {
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     player addplayerstat("get_final_kill", 1);
   }
 }
 
 function destroyrcbomb(weapon) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self destroyscorestreak(weapon, 1, 1);
@@ -568,7 +568,7 @@ function capturedcrate(owner) {
 }
 
 function destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehicle = 1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(isDefined(level.killstreakweapons[weapon])) {
@@ -1006,7 +1006,7 @@ function calledincarepackage() {
 }
 
 function destroyedhelicopter(attacker, weapon, damagetype, playercontrolled) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   attacker destroyscorestreak(weapon, playercontrolled, 0);
@@ -1031,7 +1031,7 @@ function destroyedplayercontrolledaircraft() {
 }
 
 function destroyedaircraft(attacker, weapon, playercontrolled) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   attacker destroyscorestreak(weapon, playercontrolled, 0);
@@ -1228,7 +1228,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
       data.victimactivebouncingbetties[data.victimactivebouncingbetties.size] = bouncingbettyinfo;
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     data.attackerorigin = data.attacker.origin;
     data.attackeronground = data.attacker isonground();
     data.attackerwallrunning = data.attacker iswallrunning();

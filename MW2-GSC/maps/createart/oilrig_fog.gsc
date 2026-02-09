@@ -10,8 +10,7 @@ main() {
 
   setDevDvar("scr_fog_disable", "0");
 
-  /*-----------------------
-  //oilrig_underwater.vision
+  /*----------------------- //oilrig_underwater.vision
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_underwater");
   ent.startDist = 0;
@@ -30,8 +29,7 @@ main() {
   ent.sunEndFadeAngle = 101.5;
   ent.normalFogScale = 1;
 
-  /*-----------------------
-  //oilrig_exterior_deck0.vision
+  /*----------------------- //oilrig_exterior_deck0.vision
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_exterior_deck0");
   ent.startDist = 903.412;
@@ -51,8 +49,7 @@ main() {
   ent.normalFogScale = 1;
   */
 
-  /*-----------------------
-  //oilrig_interior.vision
+  /*----------------------- //oilrig_interior.vision
   //Triggered walking up to the first breach area and all other interiors
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_interior");
@@ -73,8 +70,7 @@ main() {
   ent.normalFogScale = 1;
   */
 
-  /*-----------------------
-  //oilrig_exterior_deck1.vision
+  /*----------------------- //oilrig_exterior_deck1.vision
   //triggered coming out on deck 1 for the first time
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_exterior_deck1");
@@ -95,8 +91,7 @@ main() {
   ent.normalFogScale = 1;
   */
 
-  /*-----------------------
-  //oilrig_exterior_deck2.vision
+  /*----------------------- //oilrig_exterior_deck2.vision
   //Up the stairs to deck 2
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_exterior_deck2");
@@ -117,8 +112,7 @@ main() {
   ent.normalFogScale = 1;
   */
 
-  /*-----------------------
-  //oilrig_exterior_deck3.vision
+  /*----------------------- //oilrig_exterior_deck3.vision
   //Heading to the stairs to deck3
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_exterior_deck3");
@@ -139,8 +133,7 @@ main() {
   ent.normalFogScale = 1;
   */
 
-  /*-----------------------
-  //oilrig_exterior_deck4.vision
+  /*----------------------- //oilrig_exterior_deck4.vision
   //Out the last building to the helipad
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_exterior_deck4");
@@ -161,8 +154,7 @@ main() {
   ent.normalFogScale = 1;
   */
 
-  /*-----------------------
-  //oilrig_exterior_heli.vision
+  /*----------------------- //oilrig_exterior_heli.vision
   //Triggered over 5 seconds when you get on the heli at the end
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_exterior_heli");
@@ -183,8 +175,7 @@ main() {
   ent.normalFogScale = 1;
   */
 
-  /*-----------------------
-  //oilrig_interior2.vision
+  /*----------------------- //oilrig_interior2.vision
   //Triggered in second interior
   -------------------------*/
   ent = maps\_utility::create_vision_set_fog("oilrig_interior2");

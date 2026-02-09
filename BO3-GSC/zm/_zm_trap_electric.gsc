@@ -86,7 +86,7 @@ function damage(trap) {
   self endon("death");
   n_param = randomint(100);
   self.marked_for_death = 1;
-  if(isDefined(trap.activated_by_player) && isplayer(trap.activated_by_player)) {
+  if(isDefined(trap.activated_by_player) && isPlayer(trap.activated_by_player)) {
     trap.activated_by_player zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
     if(isDefined(trap.activated_by_player.zapped_zombies)) {
       trap.activated_by_player.zapped_zombies++;

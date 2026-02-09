@@ -308,7 +308,7 @@ function private function_36db86b() {
 function private function_9bfd96c8(bopenclaw) {
   self.explosive_dmg_taken_on_grab_start = undefined;
   if(isDefined(self.e_grabbed)) {
-    if(isplayer(self.e_grabbed)) {
+    if(isPlayer(self.e_grabbed)) {
       self.e_grabbed clientfield::set_to_player("mechz_grab", 0);
       self.e_grabbed allowcrouch(1);
       self.e_grabbed allowprone(1);
@@ -549,7 +549,7 @@ function private function_672f9804() {
   self clientfield::set("mechz_wpn_source", 0);
   level flag::clear("mechz_launching_claw");
   if(isDefined(self.e_grabbed)) {
-    if(isplayer(self.e_grabbed) && zm_utility::is_player_valid(self.e_grabbed)) {
+    if(isPlayer(self.e_grabbed) && zm_utility::is_player_valid(self.e_grabbed)) {
       self.e_grabbed thread function_8b0a73b5(self);
     } else if(isai(self.e_grabbed)) {
       self.e_grabbed thread function_860f0461(self);

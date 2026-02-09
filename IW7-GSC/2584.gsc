@@ -194,7 +194,7 @@ func_85B5(var_0) {
 func_F62B(var_0) {
   self.var_1652 = spawnStruct();
 
-  if(isplayer(var_0) && isDefined(var_0.grenadetimers)) {
+  if(isPlayer(var_0) && isDefined(var_0.grenadetimers)) {
     self.var_1652.isplayertimer = 1;
     self.var_1652.player = var_0;
     self.var_1652.timername = self.grenadeweapon;

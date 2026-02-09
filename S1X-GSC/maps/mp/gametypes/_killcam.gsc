@@ -74,7 +74,7 @@ setKillCameraStyle(eInflictor, attackerNum, killcamentityindex, weaponName, vict
 
   assert(IsGameParticipant(attacker));
 
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     self SetClientOmnvar("ui_killcam_killedby_id", attacker GetEntityNumber());
   } else if(IsAgent(attacker)) {
     self SetClientOmnvar("ui_killcam_killedby_id", -1);
@@ -108,7 +108,7 @@ setKillCameraStyle(eInflictor, attackerNum, killcamentityindex, weaponName, vict
         attachments = GetWeaponAttachments(sWeapon);
       }
 
-      if(!level.showingFinalKillcam && practiceRoundGame() && IsPlayer(attacker) && !IsBot(self) && !IsAgent(self) && maps\mp\gametypes\_class::loadoutValidForCopycat(attacker)) {
+      if(!level.showingFinalKillcam && practiceRoundGame() && isPlayer(attacker) && !IsBot(self) && !IsAgent(self) && maps\mp\gametypes\_class::loadoutValidForCopycat(attacker)) {
         self SetClientOmnvar("ui_killcam_copycat", true);
         self thread waitCopycatKillcamButton(attacker);
       } else {
@@ -153,7 +153,7 @@ setKillCameraStyle(eInflictor, attackerNum, killcamentityindex, weaponName, vict
   startTime = getTime();
   self notify("begin_killcam", startTime);
 
-  if(!isAgent(attacker) && isDefined(attacker) && IsPlayer(victim)) {
+  if(!isAgent(attacker) && isDefined(attacker) && isPlayer(victim)) {
     attacker visionsyncwithplayer(victim);
   }
 
@@ -344,7 +344,7 @@ waitCopycatKillcamButton(attacker) {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  assert(IsPlayer(attacker));
+  assert(isPlayer(attacker));
 
   self NotifyOnPlayerCommand("KillCamCopyCat", "weapnext");
 

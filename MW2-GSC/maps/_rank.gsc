@@ -70,11 +70,11 @@ xp_player_init() {
     self.summary["rank"] = 0;
   }
 
-  setdvar("player_1_xp", "0");
-  setdvar("player_2_xp", "0");
+  setDvar("player_1_xp", "0");
+  setDvar("player_2_xp", "0");
 
-  setdvar("player_1_rank", "0");
-  setdvar("player_2_rank", "0");
+  setDvar("player_1_rank", "0");
+  setDvar("player_2_rank", "0");
 
   self.rankUpdateTotal = 0;
   self.hud_rankscroreupdate = newclientHudElem(self);
@@ -141,8 +141,8 @@ get_xpbarwidth() {
   else
     player_num = "2";
 
-  rank_range = int(tableLookup("sp/rankTable.csv", 0, getdvar("player_" + player_num + "_rank"), 3));
-  rank_xp = int(getdvar("player_" + player_num + "_xp")) - int(tableLookup("sp/rankTable.csv", 0, getdvar("player_" + player_num + "_rank"), 2));
+  rank_range = int(tableLookup("sp/rankTable.csv", 0, getDvar("player_" + player_num + "_rank"), 3));
+  rank_xp = int(getDvar("player_" + player_num + "_xp")) - int(tableLookup("sp/rankTable.csv", 0, getDvar("player_" + player_num + "_rank"), 2));
 
   fullwidth = hud_width_format();
   newwidth = int(fullwidth * (rank_xp / rank_range));
@@ -249,7 +249,7 @@ updatePlayerScore(type, value) {
   self notify("update_xp");
   self endon("update_xp");
 
-  if(getdvar("xp_enable", "0") != "1") {
+  if(getDvar("xp_enable", "0") != "1") {
     return;
   }
   //assertex ( isDefined( level.scoreInfo ), "Trying to give player XP when XP feature is not enabled, set dvar xp_enable to 1." );
@@ -293,11 +293,11 @@ updatePlayerScore(type, value) {
   self.summary["rankxp"] += self.rankUpdateTotal;
 
   if(self == level.player) {
-    setdvar("player_1_xp", self.summary["summary"]["xp"]);
-    setdvar("player_1_rank", self.summary["rank"]);
+    setDvar("player_1_xp", self.summary["summary"]["xp"]);
+    setDvar("player_1_rank", self.summary["rank"]);
   } else {
-    setdvar("player_2_xp", self.summary["summary"]["xp"]);
-    setdvar("player_2_rank", self.summary["rank"]);
+    setDvar("player_2_xp", self.summary["summary"]["xp"]);
+    setDvar("player_2_rank", self.summary["rank"]);
   }
 
   self xpbar_update();
@@ -358,9 +358,9 @@ updateRank() {
   self.summary["rank"] = newRankId;
 
   if(self == level.player)
-    setdvar("player_1_rank", self.summary["rank"]);
+    setDvar("player_1_rank", self.summary["rank"]);
   else
-    setdvar("player_2_rank", self.summary["rank"]);
+    setDvar("player_2_rank", self.summary["rank"]);
 
   self xpbar_update();
 

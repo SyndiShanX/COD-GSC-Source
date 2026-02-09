@@ -522,7 +522,7 @@ giveobject(var_0) {
     }
   }
 
-  if(isDefined(var_0.carryicon) && isplayer(self)) {
+  if(isDefined(var_0.carryicon) && isPlayer(self)) {
     if(level.splitscreen) {
       self.carryicon = maps\mp\gametypes\_hud_util::createicon(var_0.carryicon, 33, 33);
       self.carryicon maps\mp\gametypes\_hud_util::setpoint("BOTTOM RIGHT", "BOTTOM RIGHT", -50, -78);
@@ -1428,7 +1428,7 @@ triggertouchthink(var_0) {
   var_0 updateuserate();
 
   while(maps\mp\_utility::isreallyalive(self) && isDefined(var_0.trigger) && (self istouching(var_0.trigger) || isboostingabovetriggerradius(var_0.trigger)) && !level.gameended) {
-    if(isplayer(self) && var_0.usetime) {
+    if(isPlayer(self) && var_0.usetime) {
       updateuiprogress(var_0, 1);
       updateproxbar(var_0, 0);
     }
@@ -1437,7 +1437,7 @@ triggertouchthink(var_0) {
   }
 
   if(isDefined(self) && isDefined(self.touchtriggers)) {
-    if(isplayer(self) && var_0.usetime) {
+    if(isPlayer(self) && var_0.usetime) {
       updateuiprogress(var_0, 0);
       updateproxbar(var_0, 1);
     }
@@ -1738,7 +1738,7 @@ attachusemodel() {
 useholdthink(var_0) {
   var_0 notify("use_hold");
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 playerlinkto(self.trigger);
   } else {
     var_0 linkto(self.trigger);
@@ -1772,7 +1772,7 @@ useholdthink(var_0) {
   self.inuse = 1;
   self.userate = 0;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread personalusebar(self);
   }
 

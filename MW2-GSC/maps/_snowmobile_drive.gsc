@@ -335,7 +335,7 @@ waittill_vehicle_falling_so() {
   trigger_ent = GetEnt("player_crashes_trigger", "script_noteworthy");
   while(1) {
     trigger_ent waittill("trigger", player);
-    if(!isDefined(player) || !isplayer(player))
+    if(!isDefined(player) || !isPlayer(player))
       continue;
     if(player.snowmobile == self) {
       self notify("veh_falling");
@@ -457,20 +457,15 @@ drive_turning_anims(vehicle) {
   vehicle SetAnimTime(vehicle getanim(curAnim + "R"), 0.5);
 
   for(;;) {
-    //-------------------------------------------------------
-    // Steer the handlebars based on the player's input
-    //-------------------------------------------------------
-    movement_last = movement;
+    //------------------------------------------------------- // Steer the handlebars based on the player's input
+    //------------------------------------------------------- movement_last = movement;
     movement = vehicle Vehicle_GetSteering() * -1.0;
     movementChange = movement - movement_last;
     steerValue = movement;
     steerValue = clamp(steerValue, STEER_MIN, STEER_MAX);
 
-    //-------------------------------------------------------
-    // Blend turn anims on the vehicle with the right weights
-    //-------------------------------------------------------
-
-    newDirection = false;
+    //------------------------------------------------------- // Blend turn anims on the vehicle with the right weights
+    //------------------------------------------------------- newDirection = false;
 
     if(movementChange < 0) {
       // change to turn left anims
@@ -491,11 +486,8 @@ drive_turning_anims(vehicle) {
       newAnim = "turn_left2right_";
     }
 
-    //---------------------------
-    // Animate the bars and hands
-    //---------------------------
-
-    // See where the opposite animation needs to start so that it matches the previous animations position
+    //--------------------------- // Animate the bars and hands
+    //--------------------------- // See where the opposite animation needs to start so that it matches the previous animations position
     newAnimStartTime["L"] = vehicle GetAnimTime(vehicle getanim(curAnim + "L"));
     newAnimStartTime["R"] = vehicle GetAnimTime(vehicle getanim(curAnim + "R"));
 
@@ -648,7 +640,7 @@ drive_shooting_update_anims(vehicle) {
     shootButtonPressed = is_shoot_button_pressed();
 
     if(shootButtonPressed && (vehicle.snowmobileAmmoCount > 0)) {
-      assert(isplayer(self));
+      assert(isPlayer(self));
       self ent_flag_set("player_shot_on_snowmobile");
       // play gun fire anims
       vehicle SetFlaggedAnimKnobLimitedRestart("fire_anim", vehicle getanim("gun_fire"), 1.0, 0.0, 1.0);

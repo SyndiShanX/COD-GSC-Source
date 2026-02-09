@@ -14,7 +14,6 @@ init_squadManager() {
   anim.squadRand = 0;
   anim.squadInitialized = true;
 }
-
 createSquad(squadName) {
   assertex(!isDefined(anim.squads[squadName]), "createSquad attempted to create a squad with the same name as an existing squad");
   anim.squads[squadName] = spawnStruct();
@@ -58,7 +57,6 @@ createSquad(squadName) {
   squad thread updateMemberStates();
   return (squad);
 }
-
 deleteSquad(squadName) {
   assertex(isDefined(anim.squads[squadName]), "deleteSquad attempted to delete a squad that does not exist");
   if(squadName == "axis" || squadName == "allies") {
@@ -79,13 +77,11 @@ deleteSquad(squadName) {
     anim.squadIndex[i] updateSquadList();
   }
 }
-
 generateSquadName() {
   squadName = "auto" + anim.squadRand;
   anim.squadRand++;
   return (squadName);
 }
-
 addPlayerToSquad(squadName) {
   if(!isDefined(squadName)) {
     if(isDefined(self.script_squadname)) {
@@ -100,7 +96,6 @@ addPlayerToSquad(squadName) {
   squad = anim.squads[squadName];
   self.squad = squad;
 }
-
 squadChange() {
   self endon("death");
   wait(10.0);
@@ -111,7 +106,6 @@ squadChange() {
   }
   self addToSquad(squadName);
 }
-
 addToSquad(squadName) {
   assertex(IsSentient(self), "addToSquad attempted to add a non-sentient member to a squad");
   if(!isDefined(squadName)) {
@@ -152,7 +146,6 @@ addToSquad(squadName) {
   }
   self thread memberDeathWaiter();
 }
-
 removeFromSquad() {
   assertex(isDefined(self.squad), "removeFromSquad attempted to remove a member who was not part of a squad (self.squad == undefined)");
   squad = self.squad;
@@ -193,7 +186,6 @@ removeFromSquad() {
   }
   self notify("removed from squad");
 }
-
 addOfficerToSquad() {
   squad = self.squad;
   if(isDefined(self.officerID)) {
@@ -204,7 +196,6 @@ addOfficerToSquad() {
   squad.officers[self.officerID] = self;
   squad.officerCount = squad.officers.size;
 }
-
 removeOfficerFromSquad() {
   squad = self.squad;
   officerID = -1;
@@ -232,7 +223,6 @@ removeOfficerFromSquad() {
     self.officerID = undefined;
   }
 }
-
 officerWaiter() {
   if(!isDefined(level.loadoutComplete)) {
     anim waittill("loadout complete");
@@ -243,7 +233,6 @@ officerWaiter() {
     }
   }
 }
-
 updateWaiter() {
   while(1) {
     anim waittill("squadupdate", action);
@@ -263,7 +252,6 @@ updateWaiter() {
     }
   }
 }
-
 squadTracker() {
   anim endon("squad deleted " + self.squadName);
   while(1) {
@@ -271,13 +259,11 @@ squadTracker() {
     wait(0.1);
   }
 }
-
 memberDeathWaiter() {
   self endon("removed from squad");
   self waittill("death", attacker);
   self removeFromSquad();
 }
-
 memberCombatWaiter() {
   self endon("removed from squad");
   while(1) {
@@ -290,7 +276,6 @@ memberCombatWaiter() {
     wait(0.05);
   }
 }
-
 updateHeading() {
   if(isDefined(self.enemy)) {
     self.forward = VectorNormalize(self.enemy.origin - self.origin);
@@ -311,7 +296,6 @@ updateHeading() {
     self.forward = newHeading;
   }
 }
-
 updateOrigin() {
   newOrigin = (0, 0, 0);
   numInfluences = 0;
@@ -328,7 +312,6 @@ updateOrigin() {
     self.origin = newOrigin;
   }
 }
-
 updateCombat() {
   self.isInCombat = false;
   for(i = 0; i < anim.squadIndex.size; i++) {
@@ -337,14 +320,16 @@ updateCombat() {
     }
   }
   for(i = 0; i < self.members.size; i++) {
-    if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && isDefined(self.members[i].enemy.squad.squadName) && self.members[i].combatTime > 0) {
+    if(isDefined(self.members[i].enemy) &&
+      isDefined(self.members[i].enemy.squad) &&
+      isDefined(self.members[i].enemy.squad.squadName) &&
+      self.members[i].combatTime > 0) {
       if(isDefined(self.squadList[self.members[i].enemy.squad.squadName])) {
         self.squadList[self.members[i].enemy.squad.squadName].isInContact = true;
       }
     }
   }
 }
-
 updateAll() {
   newOrigin = (0, 0, 0);
   numInfluences = 0;
@@ -374,7 +359,6 @@ updateAll() {
   self.enemy = curEnemy;
   self updateHeading();
 }
-
 updateSquadList() {
   for(i = 0; i < anim.squadIndex.size; i++) {
     if(!isDefined(self.squadList[anim.squadIndex[i].squadName])) {
@@ -387,12 +371,10 @@ updateSquadList() {
     }
   }
 }
-
 isOfficer() {
   fullRank = self animscripts\battlechatter::getRank();
   return (fullRank == "sergeant" || fullRank == "lieutenant" || fullRank == "captain" || fullRank == "sergeant");
 }
-
 aiUpdateAnimState(animscript) {
   switch (animscript) {
     case "combat":
@@ -423,7 +405,6 @@ aiUpdateAnimState(animscript) {
       break;
   }
 }
-
 updateStates() {
   self resetState("combat");
   self resetState("cover");
@@ -443,7 +424,6 @@ updateStates() {
     self queryMemberState(self.members[i], "cover");
   }
 }
-
 updateMemberStates() {
   anim endon("squad deleted " + self.squadName);
   timeSlice = 0.2;
@@ -457,7 +437,6 @@ updateMemberStates() {
     wait(timeSlice);
   }
 }
-
 aiUpdateCombat(timeSlice) {
   if(isDefined(self.lastEnemySightPos)) {
     if(self.combatTime < 0) {
@@ -477,7 +456,6 @@ aiUpdateCombat(timeSlice) {
     self.combatTime -= timeSlice;
   }
 }
-
 aiUpdateSuppressed(timeSlice) {
   if(self.suppressed) {
     if(self.suppressedTime < 0) {
@@ -493,26 +471,22 @@ aiUpdateSuppressed(timeSlice) {
     self.suppressedTime -= timeSlice;
   }
 }
-
 initState(state, activateRatio) {
   self.squadStates[state] = spawnStruct();
   self.squadStates[state].activateRatio = activateRatio;
   self.squadStates[state].isActive = false;
   self.squadStates[state].numActive = 0;
 }
-
 resetState(state) {
   self.squadStates[state].isActive = false;
   self.squadStates[state].numActive = 0;
 }
-
 queryMemberAnimState(member) {
   self.squadStates[member.a.state].numActive++;
   if(self.squadStates[member.a.state].numActive > (self.squadStates[member.a.state].activateRatio * self.members.size)) {
     self.squadStates[member.a.state].isActive = true;
   }
 }
-
 queryMemberState(member, state) {
   switch (state) {
     case "suppressed":
@@ -540,11 +514,9 @@ queryMemberState(member, state) {
     self.squadStates[state].isActive = true;
   }
 }
-
 aiUpdateMessages(timeSlice) {
   self removeExpiredMessages();
 }
-
 constructMessage(contents, lifetime, sender) {
   assert(isDefined(contents));
   if(isDefined(contents)) {
@@ -560,7 +532,6 @@ constructMessage(contents, lifetime, sender) {
   }
   return undefined;
 }
-
 postSquadMessage(contents, lifetime) {
   assert(isDefined(self.squad));
   assert(isDefined(self.squad.members));
@@ -574,7 +545,6 @@ postSquadMessage(contents, lifetime) {
     }
   }
 }
-
 postMessage(message) {
   assert(isDefined(message));
   if(isDefined(message)) {
@@ -584,7 +554,6 @@ postMessage(message) {
     self.messages[self.messages.size] = message;
   }
 }
-
 hasMessage(contents) {
   if(isDefined(self.messages) && self.messages.size > 0) {
     for(i = 0; i < self.messages.size; i++) {
@@ -596,7 +565,6 @@ hasMessage(contents) {
   }
   return false;
 }
-
 removeExpiredMessages() {
   if(isDefined(self.messages) && self.messages.size > 0) {
     newArray = [];

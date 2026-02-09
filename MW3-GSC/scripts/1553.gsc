@@ -60,7 +60,6 @@ _id_3CE2() {
 
   if(!_id_0614::_id_3BA2()) {
     _id_0614::_id_3B9D();
-
   }
   _id_3CE5();
   level._id_3CE3._id_3BA1 = 1;
@@ -115,7 +114,6 @@ _id_3CE7() {
 
   if(!isDefined(self._id_1FB6)) {
     self._id_1FB6 = 4;
-
   }
   thread _id_0612::_id_3C4F();
 }
@@ -204,7 +202,6 @@ _id_3CE8(var_0) {
           var_3 = "cm_bp_cp_sentrygun";
         } else {
           var_3 = "UK_1mc_deploy_sentry";
-
         }
         var_4 = undefined;
         var_5 = "specialty_airdrop_sentry_minigun";
@@ -345,7 +342,6 @@ _id_3CE8(var_0) {
 _id_3CEF(var_0, var_1) {
   if(!isDefined(level._id_11BB)) {
     level._id_11BB = [];
-
   }
   var_2[0] = var_0;
   var_2[1] = var_1;
@@ -396,7 +392,6 @@ _id_3CF1(var_0) {
 
   if(var_1 == "remote_missile") {
     maps\_remotemissile::_id_3BE5(1, var_2.weaponname);
-
   }
   if(!isDefined(var_0) || !var_0) {
     thread maps\_utility::_id_11F4(var_2._id_3CEB);
@@ -472,7 +467,6 @@ _id_3CF5() {
       _id_3CF2(var_1);
     } else if(!isDefined(self._id_00D3) || !self._id_00D3) {
       _id_3CF9();
-
     }
     if(maps\_utility::_id_12DC()) {
       wait 0.05;
@@ -485,7 +479,6 @@ _id_3CF5() {
     if(self getcurrentweapon() == "none") {
       while(self getcurrentweapon() == "none") {
         wait 0.05;
-
       }
       waittillframeend;
     }
@@ -497,15 +490,12 @@ _id_3CF7(var_0) {
 
   if(!self isonground() && iscarrykillstreak(var_1)) {
     return 0;
-
   }
   if(isusingremote()) {
     return 0;
-
   }
   if(isDefined(self.selectinglocation)) {
     return 0;
-
   }
   if(self isusingturret() && (isridekillstreak(var_1) || iscarrykillstreak(var_1))) {
     iprintlnbold(&"MP_UNAVAILABLE_USING_TURRET");
@@ -519,11 +509,9 @@ _id_3CF7(var_0) {
 
   if(!common_scripts\utility::isweaponenabled()) {
     return 0;
-
   }
   if(!self[[var_0._id_3CE9]](var_0)) {
     return 0;
-
   }
   return 1;
 }
@@ -557,7 +545,6 @@ _id_3CFA(var_0) {
 
   while(self._id_3B10) {
     wait 0.05;
-
   }
   self notify("stopped_using_uav");
   return self._id_3CFB;
@@ -576,7 +563,6 @@ _id_3CFD(var_0) {
 
   if(!var_2) {
     return 0;
-
   }
   return 1;
 }
@@ -584,7 +570,6 @@ _id_3CFD(var_0) {
 _id_3CFE(var_0) {
   if(issubstr(var_0.streaktype, "specialty_")) {
     return var_0.streaktype;
-
   }
   if(var_0.streaktype == "carepackage_c4") {
     return "carepackage_c4";
@@ -598,7 +583,6 @@ _id_3CFE(var_0) {
     return "precision_airstrike";
   } else if(var_0.streaktype == "carepackage_stealth_airstrike") {
     return "stealth_airstrike";
-
   }
   var_1 = [];
   var_2 = [];
@@ -654,7 +638,7 @@ _id_3D01() {
 }
 
 _id_3D02(var_0) {
-  common_scripts/_sentry::givesentry("sentry_minigun");
+  common_scripts / _sentry::givesentry("sentry_minigun");
   thread _id_3D04();
   self notifyonplayercommand("controller_sentry_cancel", "+actionslot 4");
   self notifyonplayercommand("controller_sentry_cancel", "weapnext");
@@ -664,7 +648,7 @@ _id_3D02(var_0) {
 }
 
 _id_3D03(var_0) {
-  common_scripts/_sentry::givesentry("sentry_gun");
+  common_scripts / _sentry::givesentry("sentry_gun");
   thread _id_3D04();
   self notifyonplayercommand("controller_sentry_cancel", "+actionslot 4");
   self notifyonplayercommand("controller_sentry_cancel", "weapnext");
@@ -691,7 +675,6 @@ _id_3D05(var_0) {
     var_2 = "precision";
   } else if(var_1 == "stealth_airstrike") {
     var_2 = "stealth";
-
   }
   var_3 = _id_0617::_id_3CD9(var_2);
   _id_3CF9();

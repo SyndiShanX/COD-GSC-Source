@@ -62,10 +62,10 @@ init() {
   game["dialog"]["airstrike_mp"] = "airstrike";
   game["dialog"]["helicopter_mp"] = "helisupport";
 
-  if(getdvar("scr_heli_hardpoint_interval") != "")
+  if(getDvar("scr_heli_hardpoint_interval") != "")
     level.helicopterinterval = getdvarfloat("scr_heli_hardpoint_interval");
   else {
-    setdvar("scr_heli_hardpoint_interval", 180);
+    setDvar("scr_heli_hardpoint_interval", 180);
     level.helicopterinterval = 180;
   }
 
@@ -679,7 +679,7 @@ givehardpointitem(var_0) {
   if(!maps\mp\_utility::is_true(level.killstreaksenabled))
     return 0;
 
-  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0)
+  if(getDvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0)
     return 0;
 
   if(isDefined(self.selectinglocation))
@@ -1036,7 +1036,7 @@ useairstrike(var_0) {
 }
 
 killstreakhit(var_0, var_1, var_2) {
-  if(isDefined(var_1) && isplayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
+  if(isDefined(var_1) && isPlayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
     if((level.teambased && var_2.owner.team != var_0.team || !level.teambased) && var_0 != var_2.owner) {
       if(maps\mp\_utility::iskillstreakweapon(var_1)) {
         return;

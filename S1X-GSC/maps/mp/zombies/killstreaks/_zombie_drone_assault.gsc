@@ -289,7 +289,7 @@ drone_modifydamage(var_0, var_1, var_2, var_3) {
     var_4 = -1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_4 = -1;
   }
 

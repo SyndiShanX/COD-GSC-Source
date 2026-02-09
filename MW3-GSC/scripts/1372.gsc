@@ -14,7 +14,6 @@ _id_424A() {
 
   if(self.type == "dog") {
     thread _id_424C();
-
   }
   for(;;) {
     self waittill("_stealth_enemy_alert_level_change", var_0);
@@ -32,7 +31,6 @@ _id_424B(var_0) {
 
   if(issubstr(var_0, "warning")) {
     var_1 = "warning";
-
   }
   switch (var_1) {
     case "warning":
@@ -89,7 +87,6 @@ _id_424E(var_0, var_1) {
 
   while(distancesquared(self.origin, var_0.origin) > var_2 && maps\_utility::_id_1008("_stealth_enabled")) {
     wait 0.1;
-
   }
   var_0.ignoreall = 0;
   var_0.favoriteenemy = self;
@@ -163,7 +160,6 @@ _id_4254() {
 
       if(common_scripts\utility::cointoss()) {
         var_0 = "b";
-
       }
       maps\_utility::_id_140B("_stealth_patrol_search_" + var_0, 1);
     } else {
@@ -199,7 +195,6 @@ _id_4254() {
 
   if(!self isingoal(self.origin)) {
     self._id_0CE5 = var_3 + (0, 0, 64);
-
   }
   _id_4252(10);
   self._id_0CE5 = undefined;
@@ -233,7 +228,6 @@ _id_4255() {
 
     if(common_scripts\utility::cointoss()) {
       var_2 = "_stealth_patrol_search_b";
-
     }
     maps\_utility::_id_140B(var_2, 1);
   } else {
@@ -253,7 +247,6 @@ _id_4255() {
 
     if(randomint(100) > 50) {
       var_2 = "b";
-
     }
     maps\_utility::_id_140B("_stealth_patrol_search_" + var_2, 1);
   } else {
@@ -304,7 +297,6 @@ _id_4258() {
       var_0 = var_0 * 0.75;
     } else {
       return;
-
     }
     wait 15;
 
@@ -320,13 +312,11 @@ _id_425A() {
 
   if(maps\_utility::_id_133C("_stealth_saw_corpse")) {
     maps\_utility::_id_13DB("_stealth_saw_corpse");
-
   }
   wait 0.05;
 
   if(maps\_utility::_id_133C("_stealth_found_corpse")) {
     maps\_utility::_id_13DB("_stealth_found_corpse");
-
   }
   maps\_utility::_id_13DC("_stealth_normal");
   var_0 = maps\_stealth_shared_utilities::_id_41D2("threat", "normal");
@@ -374,15 +364,12 @@ _id_4261(var_0) {
 
   if(!isDefined(var_0["reset"])) {
     var_0["reset"] = ::_id_425B;
-
   }
   if(!isDefined(var_0["attack"])) {
     var_0["attack"] = ::_id_4257;
-
   }
   if(!isDefined(var_0["normal"])) {
     var_0["normal"] = ::_id_425B;
-
   }
   foreach(var_3, var_2 in var_0) {}
   maps\_stealth_shared_utilities::_id_41CF("threat", var_3, var_2);
@@ -400,7 +387,6 @@ _id_4264(var_0) {
 
   if(issubstr(var_0, "warning")) {
     var_0 = "warning";
-
   }
   _id_4260(var_0);
   self notify("awareness_alert_level", var_0);
@@ -415,7 +401,6 @@ _id_4265() {
     var_0["attack"] = _id_055B::_id_4241;
   } else {
     var_0["attack"] = _id_055B::_id_423E;
-
   }
   return var_0;
 }
@@ -425,15 +410,12 @@ _id_4266(var_0) {
 
   if(!isDefined(var_0["reset"])) {
     var_0["reset"] = var_1["reset"];
-
   }
   if(!isDefined(var_0["warning"])) {
     var_0["warning"] = var_1["warning"];
-
   }
   if(!isDefined(var_0["attack"])) {
     var_0["attack"] = var_1["attack"];
-
   }
   foreach(var_4, var_3 in var_0) {}
   maps\_stealth_shared_utilities::_id_41CF("animation", var_4, var_3);

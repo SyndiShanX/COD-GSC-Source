@@ -484,7 +484,7 @@ func_1968() {
 
   for(;;) {
     self waittill("trigger", var_0);
-    if(!isDefined(var_0) || isplayer(var_0)) {
+    if(!isDefined(var_0) || isPlayer(var_0)) {
       continue;
     }
 

@@ -137,7 +137,7 @@ function init() {
       }
     }
     if(reset) {
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }
@@ -145,12 +145,12 @@ function init() {
 function dev_cac_camera(on) {
   if(on) {
     self setclientthirdperson(1);
-    setdvar("", "");
-    setdvar("", "");
-    setdvar("", "");
+    setDvar("", "");
+    setDvar("", "");
+    setDvar("", "");
   } else {
     self setclientthirdperson(0);
-    setdvar("", getdvarstring(""));
+    setDvar("", getdvarstring(""));
   }
 }
 
@@ -312,7 +312,7 @@ function dev_cac_overlay_destroy(hud) {
     hud.menu[i] destroy();
   }
   hud destroy();
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function dev_cac_overlay_create() {

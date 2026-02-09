@@ -8,7 +8,7 @@ func_D4DA() {
     self.a.var_BF8C = 0;
   }
 
-  if((isDefined(self.enemy) && isplayer(self.enemy)) || randomint(3) == 0) {
+  if((isDefined(self.enemy) && isPlayer(self.enemy)) || randomint(3) == 0) {
     if(gettime() > self.a.var_BF8C) {
       scripts\anim\face::saygenericdialogue("meleecharge");
       self.a.var_BF8C = gettime() + 8000;
@@ -21,7 +21,7 @@ func_D4D8() {
     self.a.var_BF8B = 0;
   }
 
-  if((isDefined(self.enemy) && isplayer(self.enemy)) || randomint(3) == 0) {
+  if((isDefined(self.enemy) && isPlayer(self.enemy)) || randomint(3) == 0) {
     if(gettime() > self.a.var_BF8B) {
       scripts\anim\face::saygenericdialogue("meleeattack");
       self.a.var_BF8B = gettime() + 8000;

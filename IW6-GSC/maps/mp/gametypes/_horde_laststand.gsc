@@ -93,7 +93,7 @@ registerLastStandParameter(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon
   lastStandParams.sHitLoc = sHitLoc;
   lastStandParams.lastStandStartTime = getTime();
 
-  if(isDefined(attacker) && IsPlayer(attacker) && (attacker getCurrentPrimaryWeapon() != "none"))
+  if(isDefined(attacker) && isPlayer(attacker) && (attacker getCurrentPrimaryWeapon() != "none"))
     lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
   else
     lastStandParams.sPrimaryWeapon = undefined;
@@ -193,9 +193,9 @@ reviveTriggerThinkHorde() {
         player thread maps\mp\gametypes\_hud_message::SplashNotifyDelayed("horde_reviver");
         player thread maps\mp\perks\_perkfunctions::setLightArmor(850);
 
-        if(IsPlayer(player)) {
+        if(isPlayer(player)) {
           awardHordeRevive(player);
-        } else if(isDefined(player.owner) && IsPlayer(player.owner) && (player.owner != self.owner)) {
+        } else if(isDefined(player.owner) && isPlayer(player.owner) && (player.owner != self.owner)) {
           awardHordeRevive(player.owner);
         }
       }
@@ -203,7 +203,6 @@ reviveTriggerThinkHorde() {
       if(!isDefined(result)) {
         player maps\mp\gametypes\_gameobjects::updateUIProgress(self, false);
       }
-
     }
 
     if(isDefined(result) && result) {
@@ -221,7 +220,7 @@ lastStandWaittillLifeRecived() {
 
   player waittill("revive_trigger", reviver);
 
-  if(isDefined(reviver) && IsPlayer(reviver) && reviver != player)
+  if(isDefined(reviver) && isPlayer(reviver) && reviver != player)
     player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify("revived", reviver);
 
   player lastStandRespawnPlayerHorde(self);
@@ -359,7 +358,7 @@ perkPenalty(player) {
   playerendon("disconnect");
   level endon("game_ended");
 
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   while(isPlayerInLastStand(player) && (player.horde_perks.size > 0)) {

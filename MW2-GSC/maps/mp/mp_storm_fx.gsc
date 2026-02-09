@@ -18,7 +18,6 @@ main() {
   level._effect["waterfall_drainage_mp_small"] = loadfx("water/waterfall_drainage_mp_small");
   level._effect["waterfall_drainage_splash_mp"] = loadfx("water/waterfall_drainage_splash_mp");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_storm_fx::main();
-
 }

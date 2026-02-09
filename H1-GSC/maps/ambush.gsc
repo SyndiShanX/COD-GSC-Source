@@ -23,7 +23,7 @@ dead_script() {
   maps\ambush_lighting::main();
   common_scripts\utility::flag_set("aa_takeover");
 
-  if(getdvar("start") != "" && getdvar("start") != "default") {
+  if(getDvar("start") != "" && getDvar("start") != "default") {
     wait 0.05;
     common_scripts\utility::flag_set("ambush_init");
     common_scripts\utility::flag_set("takeover_finalized_done");
@@ -31,10 +31,10 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -657,7 +657,7 @@ ambush_player_interrupt() {
 ambush_mission_fail() {
   level endon("ambush_vehicles_inplace");
   common_scripts\utility::flag_wait("ambush_mission_fail");
-  setdvar("ui_deadquote", "@AMBUSH_MISSIONFAIL_STARTED_EARLY");
+  setDvar("ui_deadquote", "@AMBUSH_MISSIONFAIL_STARTED_EARLY");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1491,7 +1491,7 @@ ambush_tower_blackout() {
 }
 
 ambush_recover_h1() {
-  level.oldnearclip = getdvar("r_znear");
+  level.oldnearclip = getDvar("r_znear");
   setsaveddvar("r_znear", 2.0);
   setsaveddvar("r_mbEnable", 2);
   var_0 = spawn("script_origin", level.badguy_jeep gettagorigin("tag_driver"));
@@ -1767,7 +1767,7 @@ badguy_health_shield() {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       if(self.health < var_0) {
         break;
       }
@@ -2109,7 +2109,7 @@ aarea_apartment_init() {
   level thread apartment_helicopter();
   level thread apartment_mg_nest_2();
 
-  if(getdvar("old_friendlies_path_to_roof") != "1")
+  if(getDvar("old_friendlies_path_to_roof") != "1")
     level thread apartment_teleport_roof_friendlies();
 
   level thread apartment_suicide();
@@ -2489,7 +2489,7 @@ apartment_mg_nest_player_damage(var_0, var_1, var_2) {
     var_1 waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_3 = var_8;
 
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
     if(var_4 < 150)
@@ -2975,7 +2975,7 @@ failed() {
   level thread maps\_utility::radio_dialogue_queue("ambush_mhp_losthim_" + var_0);
   soundscripts\_snd::snd_message("aud_start_mix_mission_failed");
   wait 1.5;
-  setdvar("ui_deadquote", "@AMBUSH_MISSIONFAIL_ESCAPED");
+  setDvar("ui_deadquote", "@AMBUSH_MISSIONFAIL_ESCAPED");
   var_1 = 1;
 
   if(var_1)
@@ -3026,7 +3026,7 @@ badguy_died(var_0) {
   self.health = self.health * var_0;
   self waittill("death");
   soundscripts\_snd::snd_message("aud_start_mix_mission_failed");
-  setdvar("ui_deadquote", "@AMBUSH_MISSIONFAIL_KILLED_TARGET");
+  setDvar("ui_deadquote", "@AMBUSH_MISSIONFAIL_KILLED_TARGET");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -3458,11 +3458,11 @@ hud_hide(var_0) {
   wait 0.05;
 
   if(isDefined(var_0) && !var_0) {
-    setdvar("ui_hud_showstanceicon", "1");
+    setDvar("ui_hud_showstanceicon", "1");
     setsaveddvar("compass", "1");
     setsaveddvar("ammoCounterHide", "0");
   } else {
-    setdvar("ui_hud_showstanceicon", "0");
+    setDvar("ui_hud_showstanceicon", "0");
     setsaveddvar("compass", "0");
     setsaveddvar("ammoCounterHide", "1");
   }
@@ -3596,10 +3596,10 @@ vehicle_turret_think() {
 
     if(!isDefined(var_0))
       var_0 = vehicle_get_target_player_only();
-    else if(isDefined(var_0) && !isplayer(var_0))
+    else if(isDefined(var_0) && !isPlayer(var_0))
       var_0 = vehicle_get_target_player_only();
 
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       var_2 = 0;
       var_2 = sighttracepassed(self.origin, level.player.origin + (0, 0, 150), 0, self);
 
@@ -3612,7 +3612,7 @@ vehicle_turret_think() {
       var_3 = var_0.origin + (0, 0, 32);
       self setturrettargetvec(var_3);
 
-      if(getdvar("debug_bmp") == "1")
+      if(getDvar("debug_bmp") == "1")
         thread maps\_utility::draw_line_until_notify(self.origin + (0, 0, 32), var_3, 1, 0, 0, self, "stop_drawing_line");
 
       var_4 = randomfloatrange(2, 3);
@@ -3640,7 +3640,7 @@ vehicle_turret_think() {
       }
     }
 
-    if(getdvar("debug_bmp") == "1")
+    if(getDvar("debug_bmp") == "1")
       self notify("stop_drawing_line");
   }
 }

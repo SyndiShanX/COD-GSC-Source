@@ -9,8 +9,8 @@
 init_animset_default_move() {
   var_0 = [];
   var_0["fire"] = % exposed_shoot_auto_v3;
-  var_0["single"] = [ % exposed_shoot_semi1];
-  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
+  var_0["single"] = [%exposed_shoot_semi1];
+  var_0["single_shotgun"] = [%shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
   var_0["burst2"] = % exposed_shoot_burst3;
   var_0["burst3"] = % exposed_shoot_burst3;
   var_0["burst4"] = % exposed_shoot_burst4;
@@ -48,8 +48,8 @@ init_animset_default_move() {
 init_animset_smg_move() {
   var_0 = [];
   var_0["fire"] = % smg_exposed_shoot_auto_v3;
-  var_0["single"] = [ % smg_exposed_shoot_semi1];
-  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
+  var_0["single"] = [%smg_exposed_shoot_semi1];
+  var_0["single_shotgun"] = [%shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
   var_0["burst2"] = % smg_exposed_shoot_burst3;
   var_0["burst3"] = % smg_exposed_shoot_burst3;
   var_0["burst4"] = % smg_exposed_shoot_burst4;

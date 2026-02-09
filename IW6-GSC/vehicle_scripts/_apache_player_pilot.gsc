@@ -325,7 +325,7 @@ monitorsaverecentlyloaded() {
   for(;;) {
     if(issaverecentlyloaded()) {
       self.owner notify("SAVGAME_RELEASES_BUTTONS");
-      setdvar("ui_deadquote", "");
+      setDvar("ui_deadquote", "");
     }
 
     wait 0.05;

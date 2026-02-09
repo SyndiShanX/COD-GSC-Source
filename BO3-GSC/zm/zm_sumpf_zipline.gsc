@@ -449,7 +449,7 @@ function zipdamage(parent) {
   while(true) {
     self waittill("trigger", ent);
     if(parent.zipactive == 1 && isDefined(ent) && isalive(ent)) {
-      if(isplayer(ent)) {
+      if(isPlayer(ent)) {
         ent thread playerzipdamage(parent);
       } else {
         ent thread zombiezipdamage();

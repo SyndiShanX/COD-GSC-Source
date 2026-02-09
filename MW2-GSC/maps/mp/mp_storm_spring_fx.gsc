@@ -17,7 +17,6 @@ main() {
   //level._effect[ "light_c4_blink_nodlight" ] 			= loadfx( "misc/light_c4_blink_nodlight" );
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_storm_spring_fx::main();
-
 }

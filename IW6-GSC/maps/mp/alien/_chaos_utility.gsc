@@ -535,7 +535,7 @@ translate_to_actual_zone_name(zone_name_list) {
     }
   }
 
-  /# AssertEx( actual_zone_name_list.size == zone_name_list.size, "Unable to find the actual zone name for some zones." );
+  AssertEx(actual_zone_name_list.size == zone_name_list.size, "Unable to find the actual zone name for some zones.");
 
   if(actual_zone_name_list.size == 0) {
     result_actual_name_string = "";

@@ -176,7 +176,7 @@ mechzfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
   players = getlocalplayers();
 
   for(i = 0; i < players.size; i++) {
-    if(!players[i] isplayer()) {
+    if(!players[i] isPlayer()) {
       continue;
     }
     if(abs(self.origin[2] - players[i].origin[2]) < 100) {

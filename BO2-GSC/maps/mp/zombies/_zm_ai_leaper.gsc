@@ -193,7 +193,7 @@ leaper_death() {
     level notify("last_leaper_down");
   }
 
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     event = "death";
 
     if(issubstr(self.damageweapon, "knife_ballistic_"))
@@ -266,7 +266,6 @@ leaper_can_use_anim(local_mid, local_end, dir) {
       if(isDefined(trace["fraction"]) && trace["fraction"] < 1) {
         if(getdvarint(#"_id_5B4FE0B3") == 1)
           line(forward_org, real_mid, (1, 0, 0), 1, 0, 100);
-
       } else {
         if(getdvarint(#"_id_5B4FE0B3") == 1)
           line(forward_org, real_mid, (0, 1, 0), 1, 0, 100);
@@ -291,7 +290,6 @@ leaper_can_use_anim(local_mid, local_end, dir) {
   } else {
     if(getdvarint(#"_id_5B4FE0B3") >= 1)
       line(mid, end, (0, 1, 0), 1, 0, 100);
-
   }
 
   trace = bulletTrace(end_top, end_bottom, 1, self);
@@ -304,7 +302,6 @@ leaper_can_use_anim(local_mid, local_end, dir) {
   } else {
     if(getdvarint(#"_id_5B4FE0B3") >= 1)
       line(end_top, end_bottom, (0, 1, 0), 1, 0, 100);
-
   }
 
   return true;
@@ -725,7 +722,6 @@ leaper_spawn_logic(leaper_array, favorite_enemy) {
     str_zone_list_active = str_zone_list_active + "" + key;
 
     assertmsg("No leaper spawn locations were found in any of the occupied or active zones. Occupied zones: " + str_zone_list_occupied + ". Active zones: " + str_zone_list_active);
-
   }
 
   if(getdvarint(#"_id_A8C231AA")) {

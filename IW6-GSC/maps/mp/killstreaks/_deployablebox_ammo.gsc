@@ -77,7 +77,6 @@ addAllWeaponAmmo() {
         self addOneWeaponAmmo(weaponName, 2);
       } else if(WeaponClass(weaponName) == "rocketlauncher") {
         self addOneWeaponAmmo(weaponName, 1);
-
       }
     }
   }

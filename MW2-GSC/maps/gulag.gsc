@@ -2369,7 +2369,6 @@ gulag_finish_rescue_thread(trigger_to, ai) {
 
     guy Delete();
   }
-
 }
 
 finish_rescue_sequence(offset) {

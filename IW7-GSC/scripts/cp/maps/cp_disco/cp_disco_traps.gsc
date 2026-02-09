@@ -149,7 +149,7 @@ kill_zombies(var_0, var_1, var_2) {
   self endon("stop_buffer");
   for(;;) {
     var_0 waittill("trigger", var_3);
-    if(isplayer(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3)) {
+    if(isPlayer(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3)) {
       if(scripts\engine\utility::istrue(var_3.flung)) {
         continue;
       }
@@ -270,7 +270,7 @@ kill_zombies_hydrant(var_0) {
   self.valve endon("stop_hydrant_trap");
   for(;;) {
     self.trigger waittill("trigger", var_1);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_2 = var_1 getvelocity();
       var_1 setvelocity(var_2 + var_0 * 35);
       continue;

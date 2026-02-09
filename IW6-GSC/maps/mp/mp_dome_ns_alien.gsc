@@ -107,7 +107,7 @@ on_damaged_finished(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     self maps\mp\mp_dome_ns_alien_think::OnDamage(eInflictor, eAttacker, damageModified, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
   }
 
-  if(IsPlayer(eAttacker)) {
+  if(isPlayer(eAttacker)) {
     if(isDefined(self.attackState) && self.attackState != "attacking") {
       if(DistanceSquared(self.origin, eAttacker.origin) <= self.dogDamagedRadiusSq) {
         self.favoriteEnemy = eAttacker;

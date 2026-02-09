@@ -60,7 +60,6 @@ main() {
     zm_sq::start(#"spoon_quest", 1);
 
     level thread function_a860e46e();
-
   }
 
   level thread setup_docks_crane();

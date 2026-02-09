@@ -48,7 +48,7 @@ stryker_setmode_ai() {
   self.turretMode = "ai";
   self.targetSearchOrigin = undefined;
 
-  if(getdvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - " + self.turretMode + " mode");
 
   self thread stryker_turret_think();
@@ -67,7 +67,7 @@ stryker_setmode_manual(origin) {
 
   self thread stryker_turret_think();
 
-  if(getdvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - " + self.turretMode + " mode");
 
   wait STRYKER_MANUAL_AI_DURATION;
@@ -109,7 +109,7 @@ stryker_scan_start() {
   assert(!isDefined(self.scanning));
   self.scanning = true;
 
-  if(getdvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - scan start");
 
   alternate = 0;
@@ -137,7 +137,7 @@ stryker_scan_start() {
 }
 
 stryker_scan_stop() {
-  if(getdvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1")
     iprintln("^2stryker - scan stop");
 
   self clearTurretTarget();
@@ -250,7 +250,7 @@ stryker_shoot_target(target) {
   // aim the gun at the target and wait for it to be lined up or timeout
   targetOffset = stryker_get_target_offset(target);
 
-  if(getdvar("arcadia_debug_stryker") == "1") {
+  if(getDvar("arcadia_debug_stryker") == "1") {
     iprintln("^2stryker - shooting a target");
     if(self.turretMode == "ai")
       thread draw_line_for_time(self.origin + (0, 0, 100), target.origin + targetOffset, 1, 1, 0, 2.0);
@@ -298,7 +298,7 @@ ai_becomes_suppressed()
 	self endon( "ai_becomes_suppressed" );
 	
 	
-	if( getdvar( "arcadia_debug_stryker" ) == "1" )
+	if( getDvar( "arcadia_debug_stryker" ) == "1" )
 		thread draw_line_to_ent_for_time( ( 0, 0, 10000 ), self, 1, 0, 0, STRYKER_AI_SUPPRESSION_TIME );
 	
 	

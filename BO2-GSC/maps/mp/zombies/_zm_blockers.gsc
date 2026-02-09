@@ -80,7 +80,7 @@ door_init() {
 
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "electric_door" || self.script_noteworthy == "electric_buyable_door") {
-      if(getdvar(#"ui_gametype") == "zgrief") {
+      if(getDvar(#"ui_gametype") == "zgrief") {
         self setinvisibletoall();
         return;
       }
@@ -92,7 +92,7 @@ door_init() {
 
       return;
     } else if(self.script_noteworthy == "local_electric_door") {
-      if(getdvar(#"ui_gametype") == "zgrief") {
+      if(getDvar(#"ui_gametype") == "zgrief") {
         self setinvisibletoall();
         return;
       }
@@ -959,7 +959,6 @@ blocker_init() {
             targets[j] hide();
 
             iprintlnbold(" Hide ");
-
           }
         }
       } else if(targets[j].script_parameters == "repair_board") {
@@ -1029,7 +1028,7 @@ blocker_init() {
 }
 
 should_delete_zbarriers() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
 
   if(!is_classic() && !is_standard() && gametype != "zgrief")
     return true;

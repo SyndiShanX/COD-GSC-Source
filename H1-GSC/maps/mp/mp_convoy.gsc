@@ -16,9 +16,9 @@ main() {
   game["defenders"] = "allies";
   game["allies_soldiertype"] = "desert";
   game["axis_soldiertype"] = "desert";
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("compassmaxrange", "2000");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("compassmaxrange", "2000");
   thread delete_botconnect_clip();
   thread misc_rotate_ceilingfans();
   fix_sab_bomb();

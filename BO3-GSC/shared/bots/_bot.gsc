@@ -75,7 +75,7 @@ function __init__() {
   if(!isDefined(level.botignorethreat)) {
     level.botignorethreat = &bot_combat::ignore_non_sentient;
   }
-  setdvar("bot_maxMantleHeight", 200);
+  setDvar("bot_maxMantleHeight", 200);
   level thread bot_devgui_think();
 }
 
@@ -272,22 +272,22 @@ function wait_release_swim_buttons(waittime) {
 
 function init_bot_settings() {
   level.botsettings = [[level.getbotsettings]]();
-  setdvar("bot_AllowMelee", (isDefined(level.botsettings.allowmelee) ? level.botsettings.allowmelee : 0));
-  setdvar("bot_AllowGrenades", (isDefined(level.botsettings.allowgrenades) ? level.botsettings.allowgrenades : 0));
-  setdvar("bot_AllowKillstreaks", (isDefined(level.botsettings.allowkillstreaks) ? level.botsettings.allowkillstreaks : 0));
-  setdvar("bot_AllowHeroGadgets", (isDefined(level.botsettings.allowherogadgets) ? level.botsettings.allowherogadgets : 0));
-  setdvar("bot_Fov", (isDefined(level.botsettings.fov) ? level.botsettings.fov : 0));
-  setdvar("bot_FovAds", (isDefined(level.botsettings.fovads) ? level.botsettings.fovads : 0));
-  setdvar("bot_PitchSensitivity", level.botsettings.pitchsensitivity);
-  setdvar("bot_YawSensitivity", level.botsettings.yawsensitivity);
-  setdvar("bot_PitchSpeed", (isDefined(level.botsettings.pitchspeed) ? level.botsettings.pitchspeed : 0));
-  setdvar("bot_PitchSpeedAds", (isDefined(level.botsettings.pitchspeedads) ? level.botsettings.pitchspeedads : 0));
-  setdvar("bot_YawSpeed", (isDefined(level.botsettings.yawspeed) ? level.botsettings.yawspeed : 0));
-  setdvar("bot_YawSpeedAds", (isDefined(level.botsettings.yawspeedads) ? level.botsettings.yawspeedads : 0));
-  setdvar("pitchAccelerationTime", (isDefined(level.botsettings.pitchaccelerationtime) ? level.botsettings.pitchaccelerationtime : 0));
-  setdvar("yawAccelerationTime", (isDefined(level.botsettings.yawaccelerationtime) ? level.botsettings.yawaccelerationtime : 0));
-  setdvar("pitchDecelerationThreshold", (isDefined(level.botsettings.pitchdecelerationthreshold) ? level.botsettings.pitchdecelerationthreshold : 0));
-  setdvar("yawDecelerationThreshold", (isDefined(level.botsettings.yawdecelerationthreshold) ? level.botsettings.yawdecelerationthreshold : 0));
+  setDvar("bot_AllowMelee", (isDefined(level.botsettings.allowmelee) ? level.botsettings.allowmelee : 0));
+  setDvar("bot_AllowGrenades", (isDefined(level.botsettings.allowgrenades) ? level.botsettings.allowgrenades : 0));
+  setDvar("bot_AllowKillstreaks", (isDefined(level.botsettings.allowkillstreaks) ? level.botsettings.allowkillstreaks : 0));
+  setDvar("bot_AllowHeroGadgets", (isDefined(level.botsettings.allowherogadgets) ? level.botsettings.allowherogadgets : 0));
+  setDvar("bot_Fov", (isDefined(level.botsettings.fov) ? level.botsettings.fov : 0));
+  setDvar("bot_FovAds", (isDefined(level.botsettings.fovads) ? level.botsettings.fovads : 0));
+  setDvar("bot_PitchSensitivity", level.botsettings.pitchsensitivity);
+  setDvar("bot_YawSensitivity", level.botsettings.yawsensitivity);
+  setDvar("bot_PitchSpeed", (isDefined(level.botsettings.pitchspeed) ? level.botsettings.pitchspeed : 0));
+  setDvar("bot_PitchSpeedAds", (isDefined(level.botsettings.pitchspeedads) ? level.botsettings.pitchspeedads : 0));
+  setDvar("bot_YawSpeed", (isDefined(level.botsettings.yawspeed) ? level.botsettings.yawspeed : 0));
+  setDvar("bot_YawSpeedAds", (isDefined(level.botsettings.yawspeedads) ? level.botsettings.yawspeedads : 0));
+  setDvar("pitchAccelerationTime", (isDefined(level.botsettings.pitchaccelerationtime) ? level.botsettings.pitchaccelerationtime : 0));
+  setDvar("yawAccelerationTime", (isDefined(level.botsettings.yawaccelerationtime) ? level.botsettings.yawaccelerationtime : 0));
+  setDvar("pitchDecelerationThreshold", (isDefined(level.botsettings.pitchdecelerationthreshold) ? level.botsettings.pitchdecelerationthreshold : 0));
+  setDvar("yawDecelerationThreshold", (isDefined(level.botsettings.yawdecelerationthreshold) ? level.botsettings.yawdecelerationthreshold : 0));
   meleerange = getdvarint("player_meleeRangeDefault") * (isDefined(level.botsettings.meleerangemultiplier) ? level.botsettings.meleerangemultiplier : 0);
   level.botsettings.meleerange = int(meleerange);
   level.botsettings.meleerangesq = meleerange * meleerange;
@@ -952,7 +952,7 @@ function bot_devgui_think() {
         }
       }
     }
-    setdvar("", "");
+    setDvar("", "");
   }
 }
 

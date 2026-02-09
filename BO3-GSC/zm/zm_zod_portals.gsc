@@ -164,7 +164,7 @@ function portal_think() {
     if(isDefined(e_portee.teleporting) && e_portee.teleporting) {
       continue;
     }
-    if(isplayer(e_portee)) {
+    if(isPlayer(e_portee)) {
       if(e_portee getstance() != "prone") {
         playFX(level._effect["portal_3p"], e_portee.origin);
         e_portee playlocalsound("zmb_teleporter_teleport_2d");

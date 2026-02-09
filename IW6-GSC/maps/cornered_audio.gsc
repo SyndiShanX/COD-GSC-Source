@@ -152,7 +152,7 @@ aud_ally_gear_rustle_2() {
 }
 
 intro_convoy() {
-  if(getdvar("intro_mask") == "0")
+  if(getDvar("intro_mask") == "0")
     wait 9;
   else
     wait 12;

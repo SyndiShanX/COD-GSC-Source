@@ -84,7 +84,7 @@ set_cliffhanger_alert_cold_patrol_anims() {
 stealth_cliffhanger_clifftop() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
@@ -115,7 +115,7 @@ stealth_cliffhanger_clifftop() {
 stealth_cliffhanger() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self._stealth_move_detection_cap = 0;
     return;
   }

@@ -20,7 +20,7 @@ setup_camparams() {
   var_1 = getdvarint("virtualLobbyMode", 0);
 
   if(var_1 == 0)
-    setdvar("virtualLobbyReady", "0");
+    setDvar("virtualLobbyReady", "0");
 
   level.camparams = var_0;
 }
@@ -249,7 +249,7 @@ updatecamerafinish(var_0) {
 
   if(getdvarint("virtualLobbyReady", 0) == 0) {
     wait 1.0;
-    setdvar("virtualLobbyReady", "1");
+    setDvar("virtualLobbyReady", "1");
     thread maps\mp\_vl_base::setvirtuallobbypresentable();
   }
 }

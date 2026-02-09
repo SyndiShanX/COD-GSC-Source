@@ -253,7 +253,7 @@ function_a0068ca0(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     helicopter thread wait_and_explode();
     eattacker = self[[level.figure_out_attacker]](eattacker);
 
-    if(isDefined(eattacker) && isplayer(eattacker) && (!isDefined(helicopter.owner) || helicopter.owner util::isenemyplayer(eattacker))) {
+    if(isDefined(eattacker) && isPlayer(eattacker) && (!isDefined(helicopter.owner) || helicopter.owner util::isenemyplayer(eattacker))) {
       if(isDefined(helicopter.owner)) {
         helicopter.owner thread globallogic_audio::function_fd32b1bd("overwatch_helicopter_snipers");
         helicopter killstreaks::play_destroyed_dialog_on_owner("overwatch_helicopter", helicopter.killstreak_id);
@@ -343,7 +343,7 @@ function_a9fc0ef6(helicopter) {
 watchplayerteamchangethread(helicopter) {
   helicopter notify(#"hash_73c07c54a285eb73");
   helicopter endon(#"hash_73c07c54a285eb73", #"overwatch_hacked");
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   player endon(#"overwatch_left");
   player waittill(#"joined_team", #"disconnect", #"joined_spectators");
@@ -730,7 +730,7 @@ function_8338a92d(params) {
 }
 
 function_24de8afe(var_e8c2fadd, owner) {
-  if(!isDefined(self) || !isDefined(owner) || !isDefined(var_e8c2fadd) || !isplayer(var_e8c2fadd) || var_e8c2fadd.team == owner.team || !isDefined(self.enemy) || self.enemy != var_e8c2fadd) {
+  if(!isDefined(self) || !isDefined(owner) || !isDefined(var_e8c2fadd) || !isPlayer(var_e8c2fadd) || var_e8c2fadd.team == owner.team || !isDefined(self.enemy) || self.enemy != var_e8c2fadd) {
     return;
   }
 

@@ -9,10 +9,11 @@ precache() {
   precachemodel("c_usa_mp_seal6_smg_fb");
   precachemodel("c_usa_mp_seal6_shortsleeve_viewhands");
 
-  if(level.multiteam)
+  if(level.multiteam) {
     game["set_player_model"]["allies"]["smg"] = ::set_player_model;
-  else
+  } else {
     game["set_player_model"]["allies"]["smg"] = ::set_player_model;
+  }
 }
 
 set_player_model() {

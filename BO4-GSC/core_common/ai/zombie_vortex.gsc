@@ -144,7 +144,6 @@ start_timed_vortex(effect_version, v_vortex_origin, n_vortex_radius, n_vortex_ex
 
     if(isDefined(level.idgun_draw_debug) && level.idgun_draw_debug) {
       circle(v_vortex_origin, n_vortex_radius, (0, 0, 1), 0, 1, 1);
-
     }
 
     foreach(ai_zombie in a_ai_zombies) {
@@ -224,7 +223,6 @@ vortex_explosion(v_vortex_explosion_origin, eattacker, n_vortex_radius) {
 
   if(isDefined(level.idgun_draw_debug) && level.idgun_draw_debug) {
     circle(v_vortex_explosion_origin, n_vortex_radius, (1, 0, 0), 0, 1, 1000);
-
   }
 
   foreach(ai_zombie in a_ai_zombies) {

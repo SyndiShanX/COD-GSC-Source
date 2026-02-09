@@ -213,7 +213,7 @@ function_9c2d463d(t_damage) {
     self thread stop_fan_trap_blood_fx();
     self dodamage(self.health + 1000, t_damage.origin, undefined, t_damage);
 
-    if(isDefined(t_damage.activated_by_player) && isplayer(t_damage.activated_by_player)) {
+    if(isDefined(t_damage.activated_by_player) && isPlayer(t_damage.activated_by_player)) {
       t_damage.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
       t_damage.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }
@@ -245,7 +245,7 @@ function_9c2d463d(t_damage) {
     #e_player: t_damage.activated_by_player
   });
 
-  if(isDefined(t_damage.activated_by_player) && isplayer(t_damage.activated_by_player)) {
+  if(isDefined(t_damage.activated_by_player) && isPlayer(t_damage.activated_by_player)) {
     t_damage.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     t_damage.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
   }
@@ -301,7 +301,7 @@ fan_trap_rumble_think() {
   while(true) {
     s_result = self.t_rumble waittill(#"trigger");
 
-    if(isplayer(s_result.activator)) {
+    if(isPlayer(s_result.activator)) {
       if(!(isDefined(s_result.activator.fan_trap_rumble) && s_result.activator.fan_trap_rumble)) {
         self thread fan_trap_rumble(s_result.activator);
       }
@@ -338,7 +338,7 @@ fan_trap_damage() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isplayer(s_result.activator)) {
+    if(isPlayer(s_result.activator)) {
       s_result.activator thread player_fan_trap_damage();
       continue;
     }
@@ -561,7 +561,7 @@ function_9699194a(t_damage) {
       self.var_12745932 = 1;
       self dodamage(self.health + 1000, t_damage.origin, t_damage.activated_by_player, t_damage);
 
-      if(isDefined(t_damage.activated_by_player) && isplayer(t_damage.activated_by_player)) {
+      if(isDefined(t_damage.activated_by_player) && isPlayer(t_damage.activated_by_player)) {
         t_damage.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
         t_damage.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
       }
@@ -592,7 +592,7 @@ function_9699194a(t_damage) {
     #e_player: t_damage.activated_by_player
   });
 
-  if(isDefined(t_damage.activated_by_player) && isplayer(t_damage.activated_by_player)) {
+  if(isDefined(t_damage.activated_by_player) && isPlayer(t_damage.activated_by_player)) {
     t_damage.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     t_damage.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
   }
@@ -831,7 +831,7 @@ function_1f7e661f(t_damage) {
     });
     self dodamage(self.health + 1000, self.origin, undefined, t_damage);
 
-    if(isDefined(t_damage.activated_by_player) && isplayer(t_damage.activated_by_player)) {
+    if(isDefined(t_damage.activated_by_player) && isPlayer(t_damage.activated_by_player)) {
       t_damage.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
       t_damage.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }
@@ -845,7 +845,7 @@ function_1f7e661f(t_damage) {
     });
     self dodamage(self.health + 1000, self.origin, undefined, t_damage);
 
-    if(isDefined(t_damage.activated_by_player) && isplayer(t_damage.activated_by_player)) {
+    if(isDefined(t_damage.activated_by_player) && isPlayer(t_damage.activated_by_player)) {
       t_damage.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
       t_damage.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }
@@ -909,7 +909,7 @@ function_c3ac9950() {
   while(true) {
     s_result = self.t_rumble waittill(#"trigger");
 
-    if(isplayer(s_result.activator)) {
+    if(isPlayer(s_result.activator)) {
       if(!(isDefined(s_result.activator.b_spinning_trap_rumble) && s_result.activator.b_spinning_trap_rumble)) {
         self thread spinning_trap_rumble(s_result.activator);
       }

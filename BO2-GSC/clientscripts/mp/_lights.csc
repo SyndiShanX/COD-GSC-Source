@@ -136,7 +136,7 @@ add_light(clientnum) {
   light = spawn(clientnum, self.origin);
   light makelight(self.pl);
 
-  if(getdvar(#"r_reflectionProbeGenerate") == "1")
+  if(getDvar(#"r_reflectionProbeGenerate") == "1")
     light setlightintensity(0);
 
   return light;
@@ -168,7 +168,7 @@ mixer_get_ramp() {
 }
 
 debug_draw_mixer() {
-  if(getdvar(#"_id_D77F221A") != "") {
+  if(getDvar(#"_id_D77F221A") != "") {
     left_pos = self.origin - (24 / 2, 0, 0);
     right_pos = self.origin + (24 / 2, 0, 0);
 
@@ -456,11 +456,9 @@ add_light_thread(light_struct, light_type, side, default_type) {
       level._light_types[default_type].count[side]++;
     } else {
       println("*** Client : Unable to set up script thread for client light - default type " + light_type + " is unknown.");
-
     }
   } else {
     println("*** Client : Unable to set up script thread for client light - " + light_type + " is unknown - and no default specified.");
-
   }
 }
 
@@ -658,7 +656,7 @@ init_lights(clientnum) {
 
     array_thread(lights, ::create_lights, clientnum);
 
-    if(getdvar(#"r_reflectionProbeGenerate") == "1") {
+    if(getDvar(#"r_reflectionProbeGenerate") == "1") {
       return;
     }
     array_thread(lights, ::mixer_thread, clientnum);
@@ -674,7 +672,7 @@ add_slaved_lights(localclientnum) {
     light = spawn(localclientnum, lights[i].origin);
     light makelight(lights[i].pl);
 
-    if(getdvar(#"r_reflectionProbeGenerate") == "1")
+    if(getDvar(#"r_reflectionProbeGenerate") == "1")
       light setlightintensity(0);
 
     light makelightslave(lights[i].pl);

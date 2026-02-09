@@ -746,7 +746,7 @@ disable_spawn_point_exploration(clear = 1) {
 }
 
 set_spawn_point_exploration_radius(radius) {
-  setdvar(#"spawnsystem_player_explored_radius", radius);
+  setDvar(#"spawnsystem_player_explored_radius", radius);
 }
 
 add_spawn_points(team, spawnpointname) {
@@ -803,7 +803,6 @@ setup_trigger_enabled_spawn_points(spawn_points) {
         spawn_point.disabled = undefined;
 
         array::add(level.spawnpoint_triggers, trig, 0);
-
       }
     }
 
@@ -820,7 +819,6 @@ setup_trigger_enabled_spawn_points(spawn_points) {
         array::add(trig.spawn_points_to_enable, spawn_point, 0);
 
         array::add(level.spawnpoint_triggers, trig, 0);
-
       }
     }
 
@@ -1195,7 +1193,7 @@ spawnpoint_debug() {
         break;
     }
 
-    setdvar(#"spawnsystem_debug_command", "<dev string:x326>");
+    setDvar(#"spawnsystem_debug_command", "<dev string:x326>");
 
     if(isDefined(getdvarint(#"spawnsystem_debug_triggers", 0)) && getdvarint(#"spawnsystem_debug_triggers", 0)) {
       foreach(trig in level.spawnpoint_triggers) {

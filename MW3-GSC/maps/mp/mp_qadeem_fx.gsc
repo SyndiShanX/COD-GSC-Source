@@ -27,8 +27,7 @@ main() {
   level._effect["lionhead_fountain_qadeem"] = loadfx("water/lionhead_fountain_qadeem");
   level._effect["water_bubbles_random_runner_qad"] = loadfx("water/water_bubbles_random_runner_qad");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_qadeem_fx::main();
   }
-
 }

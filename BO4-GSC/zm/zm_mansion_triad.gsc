@@ -522,7 +522,7 @@ function_2aa04f9f() {
   while(true) {
     s_notify = self.t_dmg waittill(#"damage");
 
-    if(isplayer(s_notify.attacker) && mansion_util::is_shield(s_notify.weapon) && s_notify.mod === "MOD_MELEE" && isDefined(s_notify.attacker.is_blue) && s_notify.attacker.is_blue) {
+    if(isPlayer(s_notify.attacker) && mansion_util::is_shield(s_notify.weapon) && s_notify.mod === "MOD_MELEE" && isDefined(s_notify.attacker.is_blue) && s_notify.attacker.is_blue) {
       var_e4e66b68 = undefined;
       e_player = s_notify.attacker;
       self thread function_8c4357b4("low", 0);
@@ -722,7 +722,7 @@ function_40e665ab() {
   while(true) {
     waitresult = self waittill(#"trigger");
 
-    if(!isplayer(waitresult.activator)) {
+    if(!isPlayer(waitresult.activator)) {
       continue;
     }
 
@@ -942,7 +942,7 @@ function_226e15cc() {
 }
 
 function_4175b958(var_88206a50, ent) {
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
 }
 
 function_138b784e(var_f0e6c7a2, ent) {
@@ -974,7 +974,7 @@ function_138b784e(var_f0e6c7a2, ent) {
 }
 
 function_a23300bc(var_88206a50, ent) {
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
 }
 
 function_3d90aae2(var_f0e6c7a2, ent) {
@@ -1000,7 +1000,7 @@ function_3d90aae2(var_f0e6c7a2, ent) {
 }
 
 function_53e85e3d(var_88206a50, ent) {
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
 }
 
 function_25d21cdb(var_f0e6c7a2, ent) {
@@ -1032,7 +1032,7 @@ function_25d21cdb(var_f0e6c7a2, ent) {
 }
 
 function_ecb921f0(var_88206a50, ent) {
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
 }
 
 function_49798eb9(var_f0e6c7a2, ent) {
@@ -1058,7 +1058,7 @@ function_49798eb9(var_f0e6c7a2, ent) {
 }
 
 function_5e8b7383(var_88206a50, ent) {
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
 }
 
 function_28082147(var_f0e6c7a2, ent) {
@@ -1090,7 +1090,7 @@ function_28082147(var_f0e6c7a2, ent) {
 }
 
 function_ba203e13(var_88206a50, ent) {
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && distance2dsquared(var_88206a50.origin, ent.origin) <= 400 * 400;
 }
 
 function_60bda2cf(var_f0e6c7a2, ent) {

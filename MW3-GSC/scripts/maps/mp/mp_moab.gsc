@@ -10,10 +10,10 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_moab");
   maps\mp\_compass::setupminimap("compass_map_mp_moab");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_diffuseColorScale", 1.36);
-  setdvar("r_specularColorScale", 2.94);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_diffuseColorScale", 1.36);
+  setDvar("r_specularColorScale", 2.94);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level thread moab_wheel();

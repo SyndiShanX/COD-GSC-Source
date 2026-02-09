@@ -20,7 +20,7 @@ main(model, type) {
   build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx("explosions/vehicle_explosion_hummer", "tag_deathfx", "car_explode");
 
-  //	build_drive( %humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10 );
+  //	build_drive(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10 );
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("allies");

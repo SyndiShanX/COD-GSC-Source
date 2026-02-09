@@ -619,7 +619,7 @@ mutatoremz_watchforattackhits() {
   for(;;) {
     self waittill("attack_hit", var_0, var_1);
 
-    if(isplayer(var_0) && maps\mp\_utility::isreallyalive(var_0)) {
+    if(isPlayer(var_0) && maps\mp\_utility::isreallyalive(var_0)) {
       if(isDefined(var_0.exosuitonline) && var_0.exosuitonline) {
         var_0 thread mutatoremz_applyemp();
       }
@@ -1130,7 +1130,7 @@ getdismembermentmodifier(var_0, var_1, var_2) {
 
   var_4 = level.dismembermentmodifiers[var_3];
 
-  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_1) && isDefined(var_4) && !maps\mp\_utility::iskillstreakweapon(var_1)) {
+  if(isDefined(var_0) && isPlayer(var_0) && isDefined(var_1) && isDefined(var_4) && !maps\mp\_utility::iskillstreakweapon(var_1)) {
     var_4 = checkweaponupgrademodifier(var_0, var_1, var_4);
     return var_4;
   } else if(isDefined(var_4)) {
@@ -1262,7 +1262,7 @@ trymutilate(var_0, var_1, var_2, var_3, var_4, var_5) {
           var_6 = 1;
         }
 
-        if(isalive(self) && isplayer(var_4)) {
+        if(isalive(self) && isPlayer(var_4)) {
           if(var_8 && maps\mp\zombies\_util::is_true(self.dismember_crawl)) {
             var_4 thread maps\mp\zombies\_zombies_audio::player_hurt_zombie_vox("crawl_spawn");
           } else if(var_9 && isDefined(self.missingbodyparts) && self.missingbodyparts != 0) {

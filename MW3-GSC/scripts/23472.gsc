@@ -18,7 +18,6 @@ init() {
 _id_5BA2() {
   if(!isDefined(self._id_5BA3)) {
     self._id_5BA3 = spawnStruct();
-
   }
   self._id_5BA3.stingerlockstarttime = 0;
   self._id_5BA3._id_5BA4 = 0;
@@ -54,13 +53,11 @@ _id_5BA8() {
   for(;;) {
     while(!_id_5BAD()) {
       wait 0.05;
-
     }
     thread _id_5BA9();
 
     while(_id_5BAD()) {
       wait 0.05;
-
     }
     self notify("stinger_IRT_off");
     _id_5BA2();
@@ -128,7 +125,6 @@ _id_5BAA() {
 
   if(var_1.size == 0) {
     return undefined;
-
   }
   var_3 = var_1[0];
 
@@ -148,15 +144,12 @@ _id_5BAC(var_0) {
 _id_55A1(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(!target_istarget(var_0)) {
     return 0;
-
   }
   if(!_id_5BAC(var_0)) {
     return 0;
-
   }
   return 1;
 }
@@ -166,11 +159,9 @@ _id_5BAD() {
 
   if(var_0 != "stinger") {
     return 0;
-
   }
   if(self playerads() == 1.0) {
     return 1;
-
   }
   return 0;
 }
@@ -180,7 +171,6 @@ _id_5BAE(var_0) {
 
   if(!isDefined(var_0)) {
     return 0;
-
   }
   var_2 = distance2d(self.origin, var_0.origin);
 

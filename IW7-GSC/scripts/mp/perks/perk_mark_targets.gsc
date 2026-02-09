@@ -12,7 +12,7 @@ marktarget_run(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(scripts\engine\utility::isbulletdamage(var_1) && isplayer(var_0) && var_0.team != self.team && !var_0 scripts\mp\utility::_hasperk("specialty_empimmune") && !isDefined(var_0.ismarkedtarget)) {
+  if(scripts\engine\utility::isbulletdamage(var_1) && isPlayer(var_0) && var_0.team != self.team && !var_0 scripts\mp\utility::_hasperk("specialty_empimmune") && !isDefined(var_0.ismarkedtarget)) {
     thread marktarget_execute(var_0);
   }
 }

@@ -530,7 +530,7 @@ ball_carrier_touched_goal(var_0) {
   ball_check_assist(var_0, 1);
   var_0 scripts\mp\utility::incperstat("touchdowns", 1);
   var_0 scripts\mp\persistence::statsetchild("round", "touchdowns", var_0.pers["touchdowns"]);
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\utility::setextrascore0(var_0.pers["touchdowns"]);
     var_0 thread scripts\mp\matchdata::loggameevent("dunk", var_0.origin);
   }
@@ -590,7 +590,7 @@ ball_touched_goal(var_0) {
     ball_check_assist(self.lastcarrier, 0);
     self.lastcarrier scripts\mp\utility::incperstat("fieldgoals", 1);
     self.lastcarrier scripts\mp\persistence::statsetchild("round", "fieldgoals", self.lastcarrier.pers["fieldgoals"]);
-    if(isplayer(self.lastcarrier)) {
+    if(isPlayer(self.lastcarrier)) {
       self.lastcarrier scripts\mp\utility::setextrascore1(self.lastcarrier.pers["fieldgoals"]);
       self.lastcarrier thread scripts\mp\matchdata::loggameevent("fieldgoal", self.lastcarrier.origin);
     }
@@ -823,7 +823,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     var_13 = var_0 == var_1;
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != var_10.pers["team"]) {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1.pers["team"] != var_10.pers["team"]) {
     if(isDefined(var_1.ball_carried) && var_13) {
       var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
       var_11 = 1;
@@ -894,8 +894,8 @@ hidehudelementongameend(var_0) {
 removeuplinkgoal() {
   self endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devRemoveDomFlag", "") != "") {
-      var_0 = getdvar("scr_devRemoveDomFlag", "");
+    if(getDvar("scr_devRemoveDomFlag", "") != "") {
+      var_0 = getDvar("scr_devRemoveDomFlag", "");
       if(var_0 == "_a") {
         var_1 = "allies";
       } else {
@@ -924,8 +924,8 @@ removeuplinkgoal() {
 placeuplinkgoal() {
   self endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devPlaceDomFlag", "") != "") {
-      var_0 = getdvar("scr_devPlaceDomFlag", "");
+    if(getDvar("scr_devPlaceDomFlag", "") != "") {
+      var_0 = getDvar("scr_devPlaceDomFlag", "");
       if(var_0 == "_a") {
         var_1 = "allies";
       } else {

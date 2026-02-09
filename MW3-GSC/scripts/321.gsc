@@ -10,9 +10,9 @@ main() {
   precachestring(&"SCRIPT_INTELLIGENCE_OF_FOURTYSIX");
   precachestring(&"SCRIPT_INTELLIGENCE_PREV_FOUND");
   level._id_1E26 = _id_1E32();
-  setdvar("ui_level_cheatpoints", level._id_1E26.size);
+  setDvar("ui_level_cheatpoints", level._id_1E26.size);
   level._id_1E27 = 0;
-  setdvar("ui_level_player_cheatpoints", level._id_1E27);
+  setDvar("ui_level_player_cheatpoints", level._id_1E27);
   level._id_1E28 = _id_1E34();
   _id_1E2D();
 
@@ -39,7 +39,7 @@ _id_1E2B() {
   self.item notsolid();
   common_scripts\utility::trigger_off();
   level._id_1E27++;
-  setdvar("ui_level_player_cheatpoints", level._id_1E27);
+  setDvar("ui_level_player_cheatpoints", level._id_1E27);
   self notify("end_trigger_thread");
 }
 
@@ -67,7 +67,6 @@ _id_1E30() {
 
   while(!_id_1E31()) {
     wait 0.1;
-
   }
   _id_1E2B();
 }
@@ -104,7 +103,6 @@ _id_1E34() {
 
       for(var_4 = 0; var_4 < var_3.size; var_4++) {
         var_3[var_4] = int(var_3[var_4]);
-
       }
       var_0[var_1] = (var_3[0], var_3[1], var_3[2]);
       continue;
@@ -181,11 +179,9 @@ _id_1E38(var_0) {
 
     if(var_7 >= 22) {
       var_5 maps\_utility::_id_1E39("INFORMANT");
-
     }
     if(var_7 == 46) {
       var_5 maps\_utility::_id_1E39("SCOUT_LEADER");
-
     }
     var_6 common_scripts\utility::delaycall(var_3, ::destroy);
   }
@@ -211,7 +207,6 @@ _id_1E3B() {
 
     for(var_1 = 0; var_1 < var_3.size; var_1++) {
       var_3[var_1] = int(var_3[var_1]);
-
     }
     var_0[var_1] = (var_3[0], var_3[1], var_3[2]);
   }

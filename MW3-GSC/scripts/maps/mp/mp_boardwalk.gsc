@@ -10,17 +10,16 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_boardwalk");
   maps\mp\_compass::setupminimap("compass_map_mp_boardwalk");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_diffuseColorScale", 1.2);
-  setdvar("r_specularColorScale", 2.5);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_diffuseColorScale", 1.2);
+  setDvar("r_specularColorScale", 2.5);
   thread maps\mp\mp_boardwalk_scriptlights::main();
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.6");
+    setDvar("sm_sunShadowScale", "0.6");
   } else {
-    setdvar("sm_sunShadowScale", "0.8");
-
+    setDvar("sm_sunShadowScale", "0.8");
   }
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -91,7 +90,6 @@ balloons() {
 
   if(!isDefined(level.remote_uav)) {
     level.remote_uav = [];
-
   }
   var_0 = getEntArray("balloon_volume", "targetname");
 
@@ -199,7 +197,6 @@ animal_race_victory(var_0) {
 
   if(isDefined(var_0._id_18F5)) {
     thread create_exploder_play_fx(var_0._id_18F5);
-
   }
   foreach(var_2 in level.animal_marquee_lights) {}
   var_2 setModel("marquee_lights_yellow_flashing_fast");
@@ -232,7 +229,6 @@ monitor_catcher_damage(var_0) {
 
     if(isDefined(var_0._id_18F5)) {
       thread create_exploder_play_fx(var_0._id_18F5);
-
     }
     wait 3;
   }

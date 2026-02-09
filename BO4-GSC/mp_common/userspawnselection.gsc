@@ -339,7 +339,7 @@ waitforspawnselection() {
     }
 
     if(menu == "SpawnSelect" && !var_ff3ca6eb) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self setspawngroupforplayer(waitresult.intpayload);
 
         if(!level.infinalkillcam) {

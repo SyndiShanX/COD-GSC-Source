@@ -144,7 +144,7 @@ func_69C5() {
   var_2 = isDefined(var_1) && var_1 == "tag_flicker";
   var_3 = isDefined(var_1) && var_1 == "tag_weapon";
   if(!self.issmokeversion) {
-    if(isDefined(var_0) && isplayer(var_0) || isagent(var_0) && !var_3 && !var_2) {
+    if(isDefined(var_0) && isPlayer(var_0) || isagent(var_0) && !var_3 && !var_2) {
       if(scripts\mp\equipment\phase_shift::areentitiesinphase(var_0, self)) {
         var_0 dodamage(35, self.origin, self.owner, self, "MOD_IMPACT", scripts\engine\utility::ter_op(self.issmokeversion, "power_smoke_drone_mp", "power_exploding_drone_mp"));
       }
@@ -399,7 +399,7 @@ explodingdrone_givedamagefeedback(var_0) {
     var_1 = "hitequip";
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_1);
   }
 }
@@ -500,7 +500,7 @@ func_69C1(var_0) {
 }
 
 isusingreaper() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 

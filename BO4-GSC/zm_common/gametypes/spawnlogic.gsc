@@ -19,17 +19,17 @@ __init__() {
 
 main() {
   if(getdvarstring(#"scr_recordspawndata") == "<dev string:x38>") {
-    setdvar(#"scr_recordspawndata", 0);
+    setDvar(#"scr_recordspawndata", 0);
   }
 
   level.storespawndata = getdvarint(#"scr_recordspawndata", 0);
 
   if(getdvarstring(#"scr_killbots") == "<dev string:x38>") {
-    setdvar(#"scr_killbots", 0);
+    setDvar(#"scr_killbots", 0);
   }
 
   if(getdvarstring(#"scr_killbottimer") == "<dev string:x38>") {
-    setdvar(#"scr_killbottimer", 0.25);
+    setDvar(#"scr_killbottimer", 0.25);
   }
 
   thread loopbotspawns();
@@ -49,8 +49,8 @@ main() {
     }
   }
 
-  if(!isDefined(getdvar(#"scr_spawnpointdebug"))) {
-    setdvar(#"scr_spawnpointdebug", 0);
+  if(!isDefined(getDvar(#"scr_spawnpointdebug"))) {
+    setDvar(#"scr_spawnpointdebug", 0);
   }
 
   if(getdvarint(#"scr_spawnpointdebug", 0) > 0) {
@@ -186,7 +186,6 @@ placespawnpoints(spawnpointname) {
 
     spawnpoints[index].fakeclassname = spawnpointname;
     level.extraspawnpointsused[level.extraspawnpointsused.size] = spawnpoints[index];
-
   }
 }
 
@@ -832,9 +831,7 @@ getallalliedandenemyplayers(obj) {
       }
 
       if(isDefined(level.customalivecheck)) {
-        if(![
-            [level.customalivecheck]
-          ](player)) {
+        if(![[level.customalivecheck]](player)) {
           continue;
         }
       }
@@ -961,7 +958,6 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints, forceallydistanceweight,
     if(level.storespawndata || level.debugspawning) {
       spawnpoint.spawndata[spawnpoint.spawndata.size] = "<dev string:x1ac>";
     }
-
   }
 
   if(isDefined(favoredspawnpoints)) {
@@ -1340,7 +1336,7 @@ loopbotspawns() {
 }
 
 allowspawndatareading() {
-  setdvar(#"scr_showspawnid", "<dev string:x38>");
+  setDvar(#"scr_showspawnid", "<dev string:x38>");
   prevval = getdvarstring(#"scr_showspawnid");
   prevrelval = getdvarstring(#"scr_spawnidcycle");
   readthistime = 0;
@@ -1353,7 +1349,7 @@ allowspawndatareading() {
       relval = getdvarstring(#"scr_spawnidcycle");
 
       if(isDefined(relval) && relval != "<dev string:x38>") {
-        setdvar(#"scr_spawnidcycle", "<dev string:x38>");
+        setDvar(#"scr_spawnidcycle", "<dev string:x38>");
       } else {
         wait 0.5;
         continue;
@@ -1492,7 +1488,6 @@ spawnweightdebug(spawnpoints) {
 
     waitframe(1);
   }
-
 }
 
 profiledebug() {
@@ -1589,7 +1584,7 @@ avoidweapondamage(spawnpoints) {
 
   weapondamagepenalty = 100000;
 
-  if(isDefined(getdvar(#"scr_spawnpointweaponpenalty"))) {
+  if(isDefined(getDvar(#"scr_spawnpointweaponpenalty"))) {
     weapondamagepenalty = getdvarfloat(#"scr_spawnpointweaponpenalty", 0);
   }
 
@@ -1607,7 +1602,6 @@ avoidweapondamage(spawnpoints) {
         if(level.storespawndata || level.debugspawning) {
           spawnpoints[i].spawndata[spawnpoints[i].spawndata.size] = "<dev string:x28f>" + int(weapondamagepenalty);
         }
-
       }
     }
   }
@@ -1739,7 +1733,6 @@ spawnpointupdate(spawnpoint) {
       if(debug) {
         line(player.origin + (0, 0, 50), spawnpoint.sighttracepoint, (0.5, 1, 0.5));
       }
-
     }
   }
 
@@ -1760,7 +1753,7 @@ spawnpointupdate(spawnpoint) {
 }
 
 getlospenalty() {
-  if(isDefined(getdvar(#"scr_spawnpointlospenalty")) && getdvarint(#"scr_spawnpointlospenalty", 0)) {
+  if(isDefined(getDvar(#"scr_spawnpointlospenalty")) && getdvarint(#"scr_spawnpointlospenalty", 0)) {
     return getdvarfloat(#"scr_spawnpointlospenalty", 0);
   }
 
@@ -1851,7 +1844,6 @@ avoidvisibleenemies(spawnpoints, teambased) {
         spawnpoints[i].sightchecks[index] = spawnStruct();
         spawnpoints[i].sightchecks[index].penalty = penalty;
       }
-
     }
   } else {
     for(i = 0; i < spawnpoints.size; i++) {
@@ -1867,7 +1859,6 @@ avoidvisibleenemies(spawnpoints, teambased) {
         spawnpoints[i].sightchecks[index] = spawnStruct();
         spawnpoints[i].sightchecks[index].penalty = penalty;
       }
-
     }
 
     mindistteam = "all";
@@ -1907,7 +1898,6 @@ avoidvisibleenemies(spawnpoints, teambased) {
           if(level.storespawndata || level.debugspawning) {
             spawnpoints[i].spawndata[spawnpoints[i].spawndata.size] = "<dev string:x2a5>" + int(spawnpoints[i].minenemydist[mindistteam]) + "<dev string:x2b9>" + int(penalty);
           }
-
         }
       }
     }
@@ -1950,7 +1940,6 @@ avoidspawnreuse(spawnpoints, teambased) {
         if(level.storespawndata || level.debugspawning) {
           spawnpoint.spawndata[spawnpoint.spawndata.size] = "<dev string:x2c5>" + worsen;
         }
-
       } else {
         spawnpoint.lastspawnedplayer = undefined;
       }

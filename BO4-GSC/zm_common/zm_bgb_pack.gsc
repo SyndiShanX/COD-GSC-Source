@@ -63,7 +63,6 @@ __init__() {
   if(!sessionmodeisonlinegame()) {
     level.var_4af38aa3 = 1;
   }
-
 }
 
 __main__() {

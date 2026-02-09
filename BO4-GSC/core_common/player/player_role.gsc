@@ -34,7 +34,7 @@ get_category_for_index(characterindex) {
 
 get_category() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   characterindex = player get();
   assert(is_valid(characterindex));
   return get_category_for_index(characterindex);
@@ -67,7 +67,7 @@ is_valid(index) {
 }
 
 get() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   return self getspecialistindex();
 }
 
@@ -77,7 +77,7 @@ update_fields() {
 
 set(index, force) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   assert(is_valid(index));
   player.pers[# "characterindex"] = index;
   player setspecialistindex(index);
@@ -114,7 +114,7 @@ set(index, force) {
 
 clear() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player setspecialistindex(0);
   player.pers[# "characterindex"] = undefined;
   player.playerrole = undefined;

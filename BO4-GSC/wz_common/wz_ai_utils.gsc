@@ -68,7 +68,7 @@ __init__() {
 function_b4f41a02() {
   level endon(#"game_ended");
   aitypes = array(#"spawner_boct_zombie_wz", #"spawner_boct_zombie_mob_wz", #"spawner_wz_blight_father", #"spawner_boct_zombie_dog_wz", #"spawner_boct_brutus_special_wz", #"spawner_boct_brutus_wz", #"spawner_boct_avogadro");
-  setdvar(#"hash_209287456d55fca1", "<dev string:x38>");
+  setDvar(#"hash_209287456d55fca1", "<dev string:x38>");
 
   foreach(type in aitypes) {
     if(function_e949cfd7(type)) {
@@ -103,7 +103,7 @@ function_b4f41a02() {
         break;
     }
 
-    setdvar(#"hash_209287456d55fca1", "<dev string:x38>");
+    setDvar(#"hash_209287456d55fca1", "<dev string:x38>");
   }
 }
 
@@ -441,7 +441,7 @@ function_a679f9b(params) {
     self.ai_zone.var_84b8298c--;
     wz_ai_zonemgr::function_37411c68(self.ai_zone, self);
 
-    if(isDefined(params.eattacker) && isplayer(params.eattacker)) {
+    if(isDefined(params.eattacker) && isPlayer(params.eattacker)) {
       if(self.archetype == # "zombie") {
         self.ai_zone.var_58ba2ab7++;
         return;
@@ -461,7 +461,7 @@ is_player_valid(player) {
     return false;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
 
@@ -833,7 +833,7 @@ function_f311bd4c(ai_zone) {
     self.fxent delete();
   }
 
-  if(isplayer(waitresult.attacker)) {
+  if(isPlayer(waitresult.attacker)) {
     if(isDefined(self.quacknarok) && self.quacknarok) {
       self.quacknarok = 0;
       self detach(#"p8_zm_red_floatie_duck", "j_spinelower");

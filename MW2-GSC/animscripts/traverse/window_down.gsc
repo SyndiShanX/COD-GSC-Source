@@ -118,7 +118,7 @@ if(!includeD)
 	level.traverseFall[level.traverseFall.size] = dif;
 if(getdebugdvar("debug_traversefall") != "")
 {
-	setdvar("debug_traversefall", "");
+	setDvar("debug_traversefall", "");
 	for(i=0;i<level.traverseFall.size;i++)
 		println ("	level.window_down_height[", i, "] = ", level.traverseFall[i], ";");
 }

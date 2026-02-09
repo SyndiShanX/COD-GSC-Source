@@ -13,13 +13,11 @@ init() {
   }
   level._effect["monkey_glow"] = loadfx("maps/zombie/fx_zombie_monkey_light");
 }
-
 player_give_cymbal_monkey() {
   self giveweapon("zombie_cymbal_monkey");
   self set_player_tactical_grenade("zombie_cymbal_monkey");
   self thread player_handle_cymbal_monkey();
 }
-
 #using_animtree("zombie_cymbal_monkey");
 player_handle_cymbal_monkey() {
   self notify("starting_monkey_watch");
@@ -89,12 +87,10 @@ player_handle_cymbal_monkey() {
     wait(0.05);
   }
 }
-
 wait_for_attractor_positions_complete() {
   self waittill("attractor_positions_generated");
   self.attract_to_origin = false;
 }
-
 monkey_cleanup(parent) {
   while(true) {
     if(!isDefined(parent)) {
@@ -104,7 +100,6 @@ monkey_cleanup(parent) {
     wait(0.05);
   }
 }
-
 do_monkey_sound(model, info) {
   monk_scream_vox = false;
   if(isDefined(level.monk_scream_trig) && self IsTouching(level.monk_scream_trig)) {
@@ -128,21 +123,18 @@ do_monkey_sound(model, info) {
     thread play_sam_furnace();
   }
 }
-
 play_delayed_explode_vox() {
   wait(6.5);
   if(isDefined(self)) {
     self playSound("zmb_vox_monkey_explode");
   }
 }
-
 play_sam_furnace() {
   wait(2);
   play_sound_2d("sam_furnace_1");
   wait(2.5);
   play_sound_2d("sam_furnace_2");
 }
-
 get_thrown_monkey() {
   self endon("disconnect");
   self endon("starting_monkey_watch");
@@ -154,7 +146,6 @@ get_thrown_monkey() {
     wait(0.05);
   }
 }
-
 monitor_zombie_groans(info) {
   self endon("explode");
   while(true) {
@@ -178,7 +169,6 @@ monitor_zombie_groans(info) {
     wait(0.05);
   }
 }
-
 play_zombie_groans() {
   self endon("death");
   self endon("monkey_blown_up");
@@ -191,7 +181,6 @@ play_zombie_groans() {
     }
   }
 }
-
 cymbal_monkey_exists() {
   return isDefined(level.zombie_weapons["zombie_cymbal_monkey"]);
 }

@@ -200,7 +200,7 @@ isvehiclealive(var_0) {
 white_out(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!isplayer(var_3))
+  if(!isPlayer(var_3))
     var_3 = level.player;
 
   if(!isDefined(var_2))
@@ -219,7 +219,7 @@ white_out(var_0, var_1, var_2) {
 fade_to_black(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
-  if(!isplayer(var_4))
+  if(!isPlayer(var_4))
     var_4 = level.player;
 
   var_4.auxillary_hud = newclienthudelem(var_4);

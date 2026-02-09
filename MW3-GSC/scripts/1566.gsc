@@ -12,13 +12,12 @@ _id_3E56(var_0) {
 main(var_0, var_1, var_2) {
   if(_id_3E56(var_0)) {
     vehicle_scripts\_attack_heli::_id_2874();
-
   }
   maps\_vehicle::_id_2AC2("littlebird", var_0, var_1, var_2);
   maps\_vehicle::_id_2AD2(::_id_2B1D);
   maps\_vehicle::_id_2ABE("vehicle_little_bird_armed");
   maps\_vehicle::_id_2ABE("vehicle_little_bird_bench");
-  maps\_vehicle::_id_2AC1( % mi28_rotors, undefined, 0, 3.0);
+  maps\_vehicle::_id_2AC1(%mi28_rotors, undefined, 0, 3.0);
   maps\_vehicle::_id_2A02("explosions/helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, 1);
   maps\_vehicle::_id_2A02("fire/fire_smoke_trail_L", "tag_engine", "littlebird_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1);
   maps\_vehicle::_id_2A02("explosions/helicopter_explosion_secondary_small", "tag_engine", undefined, undefined, undefined, undefined, 2.5, 1);
@@ -36,17 +35,15 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2AAD(var_4, "white_blink", "TAG_LIGHT_BELLY", "misc/aircraft_light_white_blink", "running", var_3);
   maps\_vehicle::_id_2AAD(var_4, "red_blink1", "TAG_LIGHT_TAIL1", "misc/aircraft_light_red_blink_occ", "running", var_3);
   maps\_vehicle::_id_2AAD(var_4, "red_blink2", "TAG_LIGHT_TAIL2", "misc/aircraft_light_red_blink_occ", "running", var_3);
-  var_5 = getdvar("mapname");
+  var_5 = getDvar("mapname");
 
   if(!isDefined(level.script)) {
     level.script = tolower(var_5);
-
   }
   var_6 = "minigun_littlebird_spinnup";
 
   if(_id_3E57()) {
     var_6 = "minigun_littlebird";
-
   }
   maps\_vehicle::_id_2A4A(var_6, "TAG_MINIGUN_ATTACH_LEFT", "vehicle_little_bird_minigun_left");
   maps\_vehicle::_id_2A4A(var_6, "TAG_MINIGUN_ATTACH_RIGHT", "vehicle_little_bird_minigun_right");
@@ -92,7 +89,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 8; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_pilot1";
   var_0[1]._id_24F2 = "tag_pilot2";

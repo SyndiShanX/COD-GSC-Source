@@ -402,7 +402,7 @@ function_7e67379d() {
 function_f8274c62() {
   level flag::init(#"always_on");
   level flag::set(#"always_on");
-  setdvar(#"hash_6ec233a56690f409", 1);
+  setDvar(#"hash_6ec233a56690f409", 1);
   zm_zonemgr::zone_init("zone_model_industries_upper");
   zm_zonemgr::zone_init("zone_west_side_exterior_upper_03");
   zm_zonemgr::add_adjacent_zone("zone_library", "zone_start", "activate_catwalk", 0);

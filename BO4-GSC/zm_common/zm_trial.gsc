@@ -347,9 +347,9 @@ reset_round() {
 
 function_64e7056f() {
   var_971a40d8 = getdvarfloat(#"hash_30076a8d362ea423", -0.5);
-  setdvar(#"hash_30076a8d362ea423", 0.5);
+  setDvar(#"hash_30076a8d362ea423", 0.5);
   wait 0.5;
-  setdvar(#"hash_30076a8d362ea423", var_971a40d8);
+  setDvar(#"hash_30076a8d362ea423", var_971a40d8);
 }
 
 function_ae725d63(n_delay = 8) {

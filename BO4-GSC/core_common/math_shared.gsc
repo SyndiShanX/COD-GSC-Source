@@ -124,7 +124,7 @@ get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_use_eye) {
   if(!isDefined(b_use_eye)) {
     b_use_eye = 0;
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       b_use_eye = 1;
     }
   }
@@ -136,7 +136,7 @@ get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_use_eye) {
     v_origin = self util::get_eye();
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     v_angles = self getplayerangles();
 
     if(level.wiiu) {
@@ -205,7 +205,7 @@ get_dot_forward(v_point, b_ignore_z, b_normalize) {
 
 get_dot_from_eye(v_point, b_ignore_z, b_normalize, str_direction) {
   assert(isDefined(v_point), "<dev string:xf8>");
-  assert(isplayer(self) || isai(self), "<dev string:x12e>" + self.classname + "<dev string:x150>");
+  assert(isPlayer(self) || isai(self), "<dev string:x12e>" + self.classname + "<dev string:x150>");
   n_dot = get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, 1);
   return n_dot;
 }

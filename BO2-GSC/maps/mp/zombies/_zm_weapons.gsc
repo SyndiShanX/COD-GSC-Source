@@ -447,7 +447,7 @@ claymoredetonate(attacker, weaponname) {
 
   if(isDefined(attacker))
     self detonate(attacker);
-  else if(isDefined(self.owner) && isplayer(self.owner))
+  else if(isDefined(self.owner) && isPlayer(self.owner))
     self detonate(self.owner);
   else
     self detonate();
@@ -1380,7 +1380,6 @@ get_weapon_display_name(weapon_name) {
     weapon_display = &"MPUI_NONE";
 
     weapon_display = "missing weapon name " + weapon_name;
-
   }
 
   return weapon_display;
@@ -2209,10 +2208,10 @@ weapon_type_check(weapon) {
 }
 
 get_player_index(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   assert(isDefined(player.characterindex));
 
-  if(player.entity_num == 0 && getdvar(#"_id_2222BA21") != "") {
+  if(player.entity_num == 0 && getDvar(#"_id_2222BA21") != "") {
     new_vo_index = getdvarint(#"_id_2222BA21");
     return new_vo_index;
   }

@@ -25,7 +25,7 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   vehicle::add_main_callback("spider", &spider_initialize);
-  setdvar("", 0);
+  setDvar("", 0);
 }
 
 function no_switch_on() {
@@ -495,7 +495,7 @@ function spider_get_target_position() {
       self setpersonalthreatbias(self.enemy, -2000, 5);
     }
   }
-  if(isDefined(enemy) && isplayer(enemy)) {
+  if(isDefined(enemy) && isPlayer(enemy)) {
     enemy_vel_offset = enemy getvelocity() * 0.5;
     enemy_look_dir_offset = anglesToForward(enemy.angles);
     if(distance2dsquared(self.origin, enemy.origin) > (500 * 500)) {
@@ -542,7 +542,7 @@ function path_update_interrupt_melee() {
           self notify("near_goal");
         }
       }
-      if(isDefined(self.enemy) && isplayer(self.enemy)) {
+      if(isDefined(self.enemy) && isPlayer(self.enemy)) {
         forward = anglesToForward(self.enemy getplayerangles());
         dir_to_raps = self.origin - self.enemy.origin;
         speedtouse = self.settings.defaultmovespeed * 2;

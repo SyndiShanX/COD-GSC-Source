@@ -10,7 +10,7 @@
 #include maps\mp\killstreaks\_airdrop;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -184,7 +184,7 @@ onPlayerConnect() {
     player.game_extrainfo = player.tags_carried;
     player.muggings = [];
 
-    if(IsPlayer(player) && !IsBot(player)) {
+    if(isPlayer(player) && !IsBot(player)) {
       player.dogtagsIcon = player createIcon("hud_tagcount", 48, 48);
       player.dogtagsIcon setPoint("TOP LEFT", "TOP LEFT", 200, 0);
       player.dogtagsIcon.alpha = 1;
@@ -263,14 +263,14 @@ spawnDogTags(victim, attacker) {
         num_extra_tags = victim.tags_carried;
         victim.tags_carried = 0;
         victim.game_extrainfo = 0;
-        if(IsPlayer(victim) && !IsBot(victim)) {
+        if(isPlayer(victim) && !IsBot(victim)) {
           victim.dogtagsText setValue(victim.tags_carried);
           victim.dogtagsText thread maps\mp\gametypes\_hud::fontPulse(victim);
           victim thread maps\mp\gametypes\_hud_message::SplashNotifyUrgent("mugger_suicide", num_extra_tags);
         }
       }
     } else if(isDefined(victim.attackerData) && victim.attackerData.size > 0) {
-      if(IsPlayer(attacker) && isDefined(victim.attackerData) && isDefined(attacker.guid) && isDefined(victim.attackerData[attacker.guid])) {
+      if(isPlayer(attacker) && isDefined(victim.attackerData) && isDefined(attacker.guid) && isDefined(victim.attackerData[attacker.guid])) {
         attData = victim.attackerData[attacker.guid];
         if(isDefined(attData) && isDefined(attData.attackerEnt) && attData.attackerEnt == attacker) {
           if(isDefined(attData.sMeansOfDeath) && (attData.sMeansOfDeath == "MOD_MELEE" || ((attData.weapon == "throwingknife_mp" || attData.weapon == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac > 0.0))) {
@@ -282,7 +282,7 @@ spawnDogTags(victim, attacker) {
               }
               victim.tags_carried -= num_extra_tags;
               victim.game_extrainfo = victim.tags_carried;
-              if(IsPlayer(victim) && !IsBot(victim)) {
+              if(isPlayer(victim) && !IsBot(victim)) {
                 victim.dogtagsText setValue(victim.tags_carried);
                 victim.dogtagsText thread maps\mp\gametypes\_hud::fontPulse(victim);
                 victim thread maps\mp\gametypes\_hud_message::SplashNotifyUrgent("callout_mugged", num_extra_tags);
@@ -369,7 +369,6 @@ spawnDogTags(victim, attacker) {
   if(num_extra_tags < 5) {
     objective_position(level.dogtags[victim.guid].objId, pos);
     objective_state(level.dogtags[victim.guid].objId, "active");
-
   } else {
     mugger_tag_pile_notify(pos, "mugger_megadrop", num_extra_tags, victim, attacker);
   }
@@ -693,7 +692,7 @@ mugger_delayed_banking() {
 
   self.tags_carried++;
   self.game_extrainfo = self.tags_carried;
-  if(IsPlayer(self) && !IsBot(self)) {
+  if(isPlayer(self) && !IsBot(self)) {
     self.dogtagsText setValue(self.tags_carried);
     self.dogtagsText thread maps\mp\gametypes\_hud::fontPulse(self);
   }
@@ -748,7 +747,7 @@ mugger_bank_tags(bank_all, noSplash) {
     self.total_tags_banked += tags_to_bank;
     self.tags_carried -= tags_to_bank;
     self.game_extrainfo = self.tags_carried;
-    if(IsPlayer(self) && !IsBot(self)) {
+    if(isPlayer(self) && !IsBot(self)) {
       self.dogtagsText setValue(self.tags_carried);
       self.dogtagsText thread maps\mp\gametypes\_hud::fontPulse(self);
     }

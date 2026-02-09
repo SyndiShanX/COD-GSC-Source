@@ -31,8 +31,7 @@ main() {
 start_map() {
   level endon("special_op_terminated");
 
-  /*-----------------------
-  INITIALIZATION
+  /*----------------------- INITIALIZATION
   -------------------------*/
   level.hostagemanhandle = false;
   thread fade_challenge_in();
@@ -60,8 +59,7 @@ start_map() {
   maps\_compass::setupMiniMap("compass_map_oilrig_lvl_1");
   array_thread(getEntArray("compassTriggers", "targetname"), maps\oilrig::compass_triggers_think);
 
-  /*-----------------------
-  FIRST BREACH
+  /*----------------------- FIRST BREACH
   -------------------------*/
   array_call(level.players, ::SetMoveSpeedScale, 1);
   level.playerspeed = undefined;
@@ -70,8 +68,7 @@ start_map() {
 
   battlechatter_on("axis");
 
-  /*-----------------------
-  OPEN GATE, SOUND ALARMS
+  /*----------------------- OPEN GATE, SOUND ALARMS
   -------------------------*/
   flag_wait("upper_room_cleared");
 
@@ -89,20 +86,17 @@ start_map() {
 
   flag_wait("player_at_deck1_midpoint");
 
-  /*-----------------------
-  DECK 2 RAPPELERS
+  /*----------------------- DECK 2 RAPPELERS
   -------------------------*/
   aSpawners = getEntArray("hostiles_rappel_deck2", "targetname");
   flag_wait("rappel_dudes_failsafe");
   aHostiles = maps\oilrig::spawn_group_staggered(aSpawners);
 
-  /*-----------------------
-  DECK 2 HELICOPTER
+  /*----------------------- DECK 2 HELICOPTER
   -------------------------*/
   heli_enters_and_attacks();
 
-  /*-----------------------
-  DECK 3
+  /*----------------------- DECK 3
   -------------------------*/
   flag_wait("player_at_stairs_to_top_deck");
   thread maps\oilrig::deck3_firefight();
@@ -114,13 +108,11 @@ start_map() {
   //***Sub Command			Hotel Six, be advised, hostages have been confirmed at your location along with possible explosives, over.
   radio_dialogue("oilrig_sbc_hostconfirmed");
 
-  /*-----------------------
-  FINAL BREACH
+  /*----------------------- FINAL BREACH
   -------------------------*/
   flag_wait("top_deck_room_breached");
 
-  /*-----------------------
-  LEVEL END
+  /*----------------------- LEVEL END
   -------------------------*/
   flag_wait("barracks_cleared");
 
@@ -178,13 +170,12 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
     // this damage is done to self.health which isnt used to determine the helicopter's health, damageTaken is.
     eHeli waittill("damage", damage, attacker, direction_vec, P, type);
 
-    if(!isDefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isPlayer(attacker))
       continue;
     else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
       break;
     }
-
   }
 }
 

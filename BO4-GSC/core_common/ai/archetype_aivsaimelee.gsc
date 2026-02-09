@@ -90,7 +90,7 @@ iscloseenoughforaivsaimelee(behaviortreeentity) {
 }
 
 shouldaquiremutexonenemyforaivsaimelee(behaviortreeentity) {
-  if(isplayer(behaviortreeentity.enemy)) {
+  if(isPlayer(behaviortreeentity.enemy)) {
     return false;
   }
 
@@ -441,14 +441,12 @@ playscriptedmeleeanimations() {
 
     recordcircle(self gettagorigin("<dev string:x4c8>"), 2, (1, 0.5, 0), "<dev string:x63>");
     recordline(self gettagorigin("<dev string:x4c8>"), opponent.origin, (1, 0.5, 0), "<dev string:x63>");
-
   } else {
     self animscripted("aivsaimeleewinner", opponent gettagorigin("tag_sync"), opponent gettagangles("tag_sync"), self._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
     opponent animscripted("aivsaimeleeloser", opponent gettagorigin("tag_sync"), opponent gettagangles("tag_sync"), opponent._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
 
     recordcircle(opponent gettagorigin("<dev string:x4c8>"), 2, (1, 0.5, 0), "<dev string:x63>");
     recordline(opponent gettagorigin("<dev string:x4c8>"), self.origin, (1, 0.5, 0), "<dev string:x63>");
-
   }
 
   opponent thread handledeath(opponent._ai_melee_animname, self);
@@ -567,7 +565,6 @@ debug_chosenmeleeanimations(behaviortreeentity) {
     record3dtext("<dev string:x68d>" + behaviortreeentity._ai_melee_animname, behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
     record3dtext("<dev string:x6a7>" + behaviortreeentity.enemy._ai_melee_animname, behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
   }
-
 }
 
 handledeath(animationname, attacker) {

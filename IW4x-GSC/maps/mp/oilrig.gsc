@@ -48,7 +48,6 @@ level_think() {
     eDerrick_thing rotatevelocity((0, speed, 0), time);
     wait(time);
   }
-
 }
 
 custom_kill_trigger() {

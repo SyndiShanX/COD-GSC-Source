@@ -415,7 +415,7 @@ doping() {
   if(isDefined(var_3)) {
     if(isDefined(var_3.team) && var_3.team != self.team) {
       var_5 = (1, 0, 0);
-      if(isplayer(var_3)) {
+      if(isPlayer(var_3)) {
         var_4 = "KILL";
         self notify("enemy_sighted");
       } else {

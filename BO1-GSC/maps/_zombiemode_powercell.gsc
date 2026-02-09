@@ -24,14 +24,12 @@ init() {
     [[level.powercell_init_func]]();
   }
 }
-
 test() {}
 powercell_precache() {
   PrecacheShader("zom_pack_a_punch_battery_icon");
 }
-
 powercell_init() {
-  self.trigger = getEnt(self.target, "targetname");
+  self.trigger = GetEnt(self.target, "targetname");
   if(!isDefined(self.trigger)) {
     return;
   }
@@ -39,7 +37,6 @@ powercell_init() {
   self.trigger SetCursorHint("HINT_NOICON");
   self thread powercell_wait();
 }
-
 powercell_wait() {
   self thread powercell_fx();
   self.trigger UseTriggerRequireLookAt();
@@ -56,7 +53,6 @@ powercell_wait() {
     }
   }
 }
-
 powercell_fx() {
   self.fx = spawn("script_model", self.origin);
   self.fx.angles = self.angles;
@@ -65,21 +61,18 @@ powercell_fx() {
   self waittill("powercell_picked_up");
   self.fx delete();
 }
-
 powercell_replace() {
   self.trigger trigger_on();
   self show();
   self thread powercell_wait();
 }
-
 powercell_init_dropoff() {
-  dropoff_trigger = getEnt("powercell_dropoff", "targetname");
+  dropoff_trigger = GetEnt("powercell_dropoff", "targetname");
   if(!isDefined(dropoff_trigger)) {
     return;
   }
   dropoff_trigger thread powercell_dropoff();
 }
-
 powercell_init_hud() {
   flag_wait("all_players_connected");
   players = GetPlayers();
@@ -98,7 +91,6 @@ powercell_init_hud() {
     players[i].powercellEquipped = false;
   }
 }
-
 powercell_pickup(powercell) {
   self endon("death");
   self.powercellEquipped = true;
@@ -108,7 +100,6 @@ powercell_pickup(powercell) {
   self thread powercell_check_for_loss();
   powercell notify("powercell_picked_up");
 }
-
 powercell_check_for_loss() {
   self endon("powercell_dropoff");
   self waittill_any("fake_death", "death", "player_downed");
@@ -116,7 +107,6 @@ powercell_check_for_loss() {
     self powercell_lost();
   }
 }
-
 powercell_dropoff() {
   self UseTriggerRequireLookAt();
   self SetHintString(&"ZOMBIE_POWERCELL_DROPOFF");
@@ -138,12 +128,10 @@ powercell_dropoff() {
     }
   }
 }
-
 powercell_dropoff_done() {
   level waittill("powercell_done");
   self delete();
 }
-
 powercell_lost() {
   self.powercellEquipped = false;
   self.powercellHud.alpha = 0;

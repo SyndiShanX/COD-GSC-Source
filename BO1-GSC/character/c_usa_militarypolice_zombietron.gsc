@@ -10,7 +10,6 @@ main() {
   self.voice = "american";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_usa_militarypolice_body_zt");
   codescripts\character::precacheModelArray(xmodelalias\c_ger_honorguard_zomb_headalias_zt::main());

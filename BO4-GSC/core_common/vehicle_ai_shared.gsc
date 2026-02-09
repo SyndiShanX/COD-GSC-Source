@@ -28,7 +28,7 @@ entityisarchetype(entity, archetype) {
     return false;
   }
 
-  if(isplayer(entity) && entity.usingvehicle && isDefined(entity.viewlockedentity) && entity.viewlockedentity.archetype === archetype) {
+  if(isPlayer(entity) && entity.usingvehicle && isDefined(entity.viewlockedentity) && entity.viewlockedentity.archetype === archetype) {
     return true;
   }
 
@@ -229,7 +229,7 @@ getairfollowingposition(userelativeangletohost) {
 
   if(isDefined(self.host.airfollowconfig) && self.host.airfollowconfig.tag !== "") {
     angles = self.host gettagangles(self.host.airfollowconfig.tag);
-  } else if(isplayer(self.host)) {
+  } else if(isPlayer(self.host)) {
     angles = self.host getplayerangles();
   } else {
     angles = self.host.angles;
@@ -1311,7 +1311,7 @@ function_329f45a4(current_state, to_state, connection, params) {
 
   driver = self getseatoccupant(0);
 
-  if(isplayer(driver)) {
+  if(isPlayer(driver)) {
     return true;
   }
 
@@ -1430,7 +1430,6 @@ debugscore(entity, num, sorted) {
     count++;
     record3dtext(score.scorename + "<dev string:xb4>" + score.score, self.origin - (0, 0, 10 * count), color);
   }
-
 }
 
 _less_than_val(left, right) {
@@ -1643,20 +1642,20 @@ target_hijackers() {
     hijackingplayer = waitresult.hijacking_player;
     self getperfectinfo(hijackingplayer, 1);
 
-    if(isplayer(hijackingplayer)) {
+    if(isPlayer(hijackingplayer)) {
       self setpersonalthreatbias(hijackingplayer, 1500, 4);
     }
   }
 }
 
 event_handler[enter_vehicle] function_f2964e93(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 }
 
 event_handler[exit_vehicle] function_b7880090(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 }

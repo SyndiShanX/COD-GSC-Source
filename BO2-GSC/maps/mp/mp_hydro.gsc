@@ -31,7 +31,7 @@ main() {
 
   registerclientfield("world", "pre_wave", 1, 1, "int");
   registerclientfield("world", "big_wave", 1, 1, "int");
-  setdvar("compassmaxrange", "2300");
+  setDvar("compassmaxrange", "2300");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
@@ -67,7 +67,7 @@ main() {
   level.waterambientfxrightback = loadfx("maps/mp_maps/fx_mp_hydro_flood_splash_right_back");
   level.waterambientfxboxfront = loadfx("maps/mp_maps/fx_mp_hydro_flood_splash_box");
   level.waterambientfxboxback = loadfx("maps/mp_maps/fx_mp_hydro_flood_splash_box_back");
-  setdvar("tu6_player_shallowWaterHeight", "10.5");
+  setDvar("tu6_player_shallowWaterHeight", "10.5");
   visionsetnaked("mp_hydro", 1);
   level thread removeobjectsondemovertime();
   set_dvar_if_unset("scr_hydro_water_rush", 1);
@@ -157,7 +157,7 @@ initwatertriggers() {
   playFXOnTag(level.waterambientfxleftmiddle, water_ambient_middle_left, "tag_origin");
   playFXOnTag(level.waterambientfxrightfront, water_ambient_front_right, "tag_origin");
   playFXOnTag(level.waterambientfxleftfront, water_ambient_front_left, "tag_origin");
-  setdvar("R_WaterWaveBase", 0);
+  setDvar("R_WaterWaveBase", 0);
 
   if(level.timelimit) {
     seconds = level.timelimit * 60;
@@ -172,7 +172,7 @@ initwatertriggers() {
   water_kill_triggers[water_kill_triggers.size] = trigger;
   self thread watchwatertrigger(water_mover, water_kill_triggers, water_pa_1, water_pa_2, water_pa_3, water_ambient_back_pillar, water_ambient_front_block, water_ambient_mover);
   wait 5;
-  setdvar("R_WaterWaveBase", 0);
+  setDvar("R_WaterWaveBase", 0);
 }
 
 watchwatertrigger(water_mover, water_kill_triggers, water_pa_1, water_pa_2, water_pa_3, water_ambient_back, water_ambient_box, water_ambient_mover) {
@@ -244,7 +244,7 @@ watchwatertrigger(water_mover, water_kill_triggers, water_pa_1, water_pa_2, wate
     water_ambient_box stoploopsound(1);
     water_ambient_back stoploopsound(1);
     stop_exploder(1005);
-    setdvar("R_WaterWaveAmplitude", "0 0 0 0");
+    setDvar("R_WaterWaveAmplitude", "0 0 0 0");
     water_mover.origin = vectorscale((0, 0, -1), 500.0);
     wait 2;
     water_fx1 delete();
@@ -264,10 +264,10 @@ play_exploder() {
 }
 
 watchdevnotify() {
-  startvalue = getdvar(#"scr_hydro_water_rush");
+  startvalue = getDvar(#"scr_hydro_water_rush");
 
   for(;;) {
-    should_water_rush = getdvar(#"scr_hydro_water_rush");
+    should_water_rush = getDvar(#"scr_hydro_water_rush");
 
     if(should_water_rush != startvalue) {
       level notify("dev_water_rush");
@@ -373,12 +373,12 @@ waterkilltriggerthink(triggers) {
         continue;
       }
 
-      if(isplayer(entity))
+      if(isPlayer(entity))
         entity dodamage(entity.health * 2, triggers[triggertouched].origin + (0, 0, 1), triggers[triggertouched], triggers[triggertouched], 0, "MOD_HIT_BY_OBJECT", 0, "hydro_water_mp");
       else
         entity dodamage(entity.health * 2, triggers[triggertouched].origin + (0, 0, 1), triggers[triggertouched], triggers[triggertouched], 0, "MOD_CRUSH");
 
-      if(isplayer(entity))
+      if(isPlayer(entity))
         entity playlocalsound("mpl_splash_death");
     }
   }
@@ -388,7 +388,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {

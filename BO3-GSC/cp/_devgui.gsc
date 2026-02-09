@@ -27,14 +27,14 @@ function autoexec __init__sytem__() {
 }
 
 function __init__() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", 0);
-  setdvar("", "");
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", 0);
+  setDvar("", "");
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", "");
   thread devgui_think();
   thread devgui_weapon_think();
   thread devgui_weapon_asset_name_display_think();
@@ -142,7 +142,7 @@ function devgui_handle_player_command(cmd, playercallback, pcb_param) {
   } else {
     array::thread_all(getplayers(), playercallback, pcb_param);
   }
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function devgui_think() {
@@ -290,24 +290,18 @@ function devgui_think() {
         if(isDefined(level.custom_devgui)) {
           if(isarray(level.custom_devgui)) {
             foreach(devgui in level.custom_devgui) {
-              if(isDefined([
-                  [devgui]
-                ](cmd)) && [
-                  [devgui]
-                ](cmd)) {
+              if(isDefined([[devgui]](cmd)) && [[devgui]](cmd)) {
                 break;
               }
             }
           } else {
-            [
-              [level.custom_devgui]
-            ](cmd);
+            [[level.custom_devgui]](cmd);
           }
         }
         break;
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }
@@ -389,7 +383,7 @@ function function_cac73614(var_735c65d7) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self addrankxpvalue("", var_735c65d7);
 }
 
@@ -397,7 +391,7 @@ function function_9f78d70e(var_735c65d7) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   weaponnum = int(tablelookup("", 3, self.currentweapon.rootweapon.displayname, 0));
   var_b51b0d94 = self getdstat("", weaponnum, "");
   self setdstat("", weaponnum, "", var_735c65d7 + var_b51b0d94);
@@ -415,7 +409,7 @@ function devgui_kill() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   if(isalive(self)) {
     self disableinvulnerability();
     death_from = (randomfloatrange(-20, 20), randomfloatrange(-20, 20), randomfloatrange(-20, 20));
@@ -427,7 +421,7 @@ function devgui_toggle_ammo() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_toggle_ammo");
   self endon("devgui_toggle_ammo");
@@ -449,7 +443,7 @@ function devgui_toggle_ignore() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self.ignoreme = !self.ignoreme;
 }
@@ -458,7 +452,7 @@ function devgui_toggle_infinitesolo() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self.infinite_solo_revives = !self.infinite_solo_revives;
 }
@@ -467,7 +461,7 @@ function devgui_revive() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self reviveplayer();
   if(isDefined(self.revivetrigger)) {
@@ -499,7 +493,7 @@ function devgui_give_health() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_give_health");
   if(self.maxhealth >= 2000 && isDefined(self.orgmaxhealth)) {
@@ -608,12 +602,12 @@ function devgui_weapon_think() {
     weapon_name = getdvarstring("");
     if(weapon_name != "") {
       devgui_handle_player_command(weapon_name, &devgui_give_weapon, weapon_name);
-      setdvar("", "");
+      setDvar("", "");
     }
     attachmentname = getdvarstring("");
     if(attachmentname != "") {
       devgui_handle_player_command(attachmentname, &devgui_give_attachment, attachmentname);
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }
@@ -708,7 +702,7 @@ function devgui_give_weapon(weapon_name) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_give_ammo");
   self endon("devgui_give_ammo");
@@ -757,7 +751,7 @@ function devgui_give_attachment(attachment_name) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_give_attachment");
   self endon("devgui_give_attachment");
@@ -805,14 +799,14 @@ function init_debug_center_screen() {
         thread debug_center_screen();
         zero_idle_movement = getdvarstring("");
         if(isDefined(zero_idle_movement) && zero_idle_movement == "") {
-          setdvar("", "");
+          setDvar("", "");
           zero_idle_movement = "";
         }
       }
     } else {
       level notify("hash_8e42baed");
       if(zero_idle_movement == "") {
-        setdvar("", "");
+        setDvar("", "");
         zero_idle_movement = "";
       }
     }

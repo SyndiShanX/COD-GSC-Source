@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_lights.csc
+ * Script: clientscripts\_lights\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -15,7 +15,6 @@ set_light_color(light_struct, col) {
     }
   }
 }
-
 set_light_intensity(light_struct, intensity) {
   if((light_struct.light_intensity > 0.05) && (intensity <= 0.05)) {
     set_light_notify(light_struct, "off");
@@ -32,7 +31,6 @@ set_light_intensity(light_struct, intensity) {
     }
   }
 }
-
 set_light_radius(light_struct, rad) {
   light_struct.light_radius = rad;
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
@@ -43,7 +41,6 @@ set_light_radius(light_struct, rad) {
     }
   }
 }
-
 set_light_inner_fov(light_struct, inner) {
   light_struct.light_inner_fov = inner;
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
@@ -54,7 +51,6 @@ set_light_inner_fov(light_struct, inner) {
     }
   }
 }
-
 set_light_outer_fov(light_struct, outer) {
   light_struct.light_outer_fov = outer;
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
@@ -65,7 +61,6 @@ set_light_outer_fov(light_struct, outer) {
     }
   }
 }
-
 set_light_exponent(light_struct, exp) {
   light_struct.light_exponent = exp;
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
@@ -76,7 +71,6 @@ set_light_exponent(light_struct, exp) {
     }
   }
 }
-
 set_light_notify(light_struct, name) {
   light_struct.light_notify = name;
   if(isDefined(self.light_models)) {
@@ -90,18 +84,17 @@ set_light_notify(light_struct, name) {
     }
   }
 }
-
 play_light_sound(light_struct, sound) {
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
     playSound(0, sound, self.origin);
   }
 }
-
 play_light_fx(light_struct, fx) {
-  if(!isDefined(level._effect[fx]))
+  if(!isDefined(level._effect[fx])) {
     return;
+  }
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
-    players = getLocalPlayers();
+    players = getlocalplayers();
     org = self.origin;
     off = (0, 0, 0);
     if(isDefined(self.light_models) && isDefined(self.light_models[0])) {
@@ -123,7 +116,6 @@ play_light_fx(light_struct, fx) {
     }
   }
 }
-
 add_light(clientNum) {
   light = spawn(clientNum, self.origin);
   light makelight(self.pl);
@@ -132,7 +124,6 @@ add_light(clientNum) {
   }
   return (light);
 }
-
 rotate_light_yaw() {
   while(1) {
     for(i = 0; i < self.lights.size; i++) {
@@ -143,7 +134,6 @@ rotate_light_yaw() {
     self.lights[0] waittill("rotatedone");
   }
 }
-
 create_lights(clientNum) {
   if(!isDefined(self.lights)) {
     self.lights = [];
@@ -153,7 +143,7 @@ create_lights(clientNum) {
     self thread rotate_light_yaw();
   }
   if(isDefined(self.script_light_model) && isDefined(self.script_light_on_model) && isDefined(self.script_light_off_model)) {
-    ent = getEnt(clientNum, self.script_light_model, "targetname");
+    ent = getent(clientNum, self.script_light_model, "targetname");
     if(isDefined(ent)) {
       if(!isDefined(self.light_models)) {
         self.light_models = [];
@@ -167,18 +157,15 @@ create_lights(clientNum) {
     }
   }
 }
-
 light_off(light_struct) {
   set_light_color(light_struct, (0, 0, 0));
   set_light_intensity(light_struct, 0);
   level waittill("eternity");
 }
-
 light_solid(light_struct) {
   set_light_notify(light_struct, "on");
   level waittill("eternity");
 }
-
 generic_pulsing(light_struct) {
   on = light_struct.light_intensity;
   off = .05;
@@ -209,7 +196,6 @@ generic_pulsing(light_struct) {
     wait(.75);
   }
 }
-
 generic_double_strobe(light_struct) {
   on = light_struct.light_intensity;
   off = 0;
@@ -224,7 +210,6 @@ generic_double_strobe(light_struct) {
     wait(.05);
   }
 }
-
 ber3b_firelight(light_struct) {
   full = light_struct.light_intensity;
   old_intensity = full;
@@ -239,7 +224,6 @@ ber3b_firelight(light_struct) {
     old_intensity = intensity;
   }
 }
-
 generic_flickering(light_struct) {
   if(isDefined(light_struct.script_wait_min)) {
     min_flickerless_time = light_struct.script_wait_min;
@@ -301,7 +285,6 @@ generic_flickering(light_struct) {
     wait(RandomFloatRange(min_flickerless_time, max_flickerless_time));
   }
 }
-
 fade_off_burst_intensity(light_struct, burst_intensity, min_intensity, fade_duration) {
   min_intensity = Min(burst_intensity, min_intensity);
   max_intensity = Max(burst_intensity, min_intensity);
@@ -313,7 +296,6 @@ fade_off_burst_intensity(light_struct, burst_intensity, min_intensity, fade_dura
     wait(0.05);
   }
 }
-
 explode_then_flicker(light_struct) {
   min_delay = 0.1;
   max_delay = 0.2;
@@ -370,14 +352,12 @@ explode_then_flicker(light_struct) {
     curr_intensity = temp_intensity;
   }
 }
-
 flicker_killer(light_struct, delay) {
   light_struct waittill("activated");
   wait(delay);
   light_struct notify("kill_flicker");
   set_light_intensity(light_struct, 0);
 }
-
 fire_flicker_then_stop(light_struct) {
   light_struct endon("kill_flicker");
   min_delay = 0.1;
@@ -424,7 +404,6 @@ fire_flicker_then_stop(light_struct) {
     curr_intensity = temp_intensity;
   }
 }
-
 electrical_flicker(light_struct) {
   min_delay = 0.02;
   max_delay = 0.1;
@@ -446,7 +425,7 @@ electrical_flicker(light_struct) {
   curr_intensity = intensity;
   realWait(0.016 * (light_struct.light_id % 3));
   for(;;) {
-    while(!clientHasSnapshot(0) || DistanceSquared(self.origin, getlocalplayer(0).origin) > 2250000) {
+    while(!ClientHasSnapshot(0) || DistanceSquared(self.origin, getlocalplayer(0).origin) > 2250000) {
       wait(2.0);
     }
     temp_intensity = intensity * RandomFloatRange(min_intensity, max_intensity);
@@ -468,7 +447,6 @@ electrical_flicker(light_struct) {
     curr_intensity = temp_intensity;
   }
 }
-
 fire_flicker(light_struct) {
   min_delay = 0.1;
   max_delay = 0.2;
@@ -495,11 +473,11 @@ fire_flicker(light_struct) {
   }
   for(;;) {
     if(check_range) {
-      while(!clientHasSnapshot(0) || DistanceSquared(self.origin, getlocalplayer(0).origin) > 2250000) {
+      while(!ClientHasSnapshot(0) || DistanceSquared(self.origin, getlocalplayer(0).origin) > 2250000) {
         wait(2.0);
       }
     } else {
-      while(!clientHasSnapshot(0)) {
+      while(!ClientHasSnapshot(0)) {
         wait(2.0);
       }
     }
@@ -522,12 +500,10 @@ fire_flicker(light_struct) {
     curr_intensity = temp_intensity;
   }
 }
-
 television(light_struct) {
   self thread tv_changes_intensity(light_struct);
   self thread tv_changes_color(light_struct);
 }
-
 tv_changes_intensity(light_struct) {
   full = light_struct.light_intensity;
   old_intensity = full;
@@ -543,7 +519,6 @@ tv_changes_intensity(light_struct) {
     old_intensity = intensity;
   }
 }
-
 tv_changes_color(light_struct) {
   range = 0.5;
   base = 0.5;
@@ -570,10 +545,10 @@ tv_changes_color(light_struct) {
     }
   }
 }
-
 triggered_lights_think(light_struct) {
-  if(!isDefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy)) {
     return;
+  }
   level waittill(self.script_noteworthy);
   if(isDefined(self.script_float)) {
     set_light_intensity(light_struct, self.script_float);
@@ -581,7 +556,6 @@ triggered_lights_think(light_struct) {
     set_light_intensity(light_struct, 1.5);
   }
 }
-
 mixer_get_ramp() {
   if(self.mixer.mix_pos == 0) {
     return self.mixer.right_to_left_ramp;
@@ -589,7 +563,6 @@ mixer_get_ramp() {
     return self.mixer.left_to_right_ramp;
   }
 }
-
 debug_draw_mixer() {}
 switch_light_once_only() {
   if(self.script_light_onetime == 1) {
@@ -598,7 +571,6 @@ switch_light_once_only() {
   }
   return false;
 }
-
 mixer_level_activate() {
   if(!isDefined(self.script_mixer_event)) {
     return;
@@ -615,7 +587,6 @@ mixer_level_activate() {
     }
   }
 }
-
 mixer_self_activate() {
   if(!isDefined(self.script_mixer_event)) {
     return;
@@ -632,7 +603,6 @@ mixer_self_activate() {
     }
   }
 }
-
 mixer_event_monitor() {
   if(!isDefined(self.script_mixer_event) && !isDefined(self.script_mixer_robot_min)) {
     return;
@@ -678,7 +648,6 @@ mixer_event_monitor() {
     }
   }
 }
-
 init_mixer_lights(client_num) {
   self.mixer.lights = [];
   for(i = 0; i < 2; i++) {
@@ -781,11 +750,9 @@ init_mixer_lights(client_num) {
   self.mixer.lights[0].play_light_sound_alias = "";
   self.mixer.lights[1].play_light_sound_alias = "";
 }
-
 clean_lights() {
   self.mixer.last_mix_val = self.mixer.mix_val;
 }
-
 add_light_thread(light_struct, light_type, side, default_type) {
   if(!isDefined(level._next_light_id)) {
     level._next_light_id = 0;
@@ -808,7 +775,6 @@ add_light_thread(light_struct, light_type, side, default_type) {
     println("*** Client : Unable to set up script thread for client light - " + light_type + " is unknown - and no default specified.");
   }
 }
-
 setup_mixer_lights() {
   light_type = self.targetname;
   if(!isDefined(light_type) && !isDefined(self.script_light_type)) {
@@ -819,7 +785,6 @@ setup_mixer_lights() {
   add_light_thread(self.mixer.lights[0], light_type, 0);
   add_light_thread(self.mixer.lights[1], self.script_light2_targetname, 1, "light_off");
 }
-
 mixer_robot_think() {
   if(!isDefined(self.script_mixer_robot_max)) {
     self.script_mixer_robot_max = self.script_mixer_robot_min;
@@ -837,7 +802,6 @@ mixer_robot_think() {
     self.mixer_activated = 1;
   }
 }
-
 mixer_thread(client_num) {
   if(!IsSplitScreenHost(client_num)) {
     return;
@@ -907,9 +871,8 @@ mixer_thread(client_num) {
     }
   }
 }
-
-report_light_counts(clientNum, lights) {
-  if(!IsSplitScreenHost(clientNum)) {
+report_light_counts(clientnum, lights) {
+  if(!IsSplitScreenHost(clientnum)) {
     return;
   }
   lights_with_models = 0;
@@ -926,7 +889,6 @@ report_light_counts(clientNum, lights) {
   }
   PrintLn("*** Client : Lights with models : " + lights_with_models);
 }
-
 register_light_type(type, func) {
   if(!isDefined(level._light_types)) {
     level._light_types = [];
@@ -939,7 +901,6 @@ register_light_type(type, func) {
     level._light_types[type].count[1] = 0;
   }
 }
-
 get_lights_by_label(label) {
   lights = GetStructArray("light", "classname");
   return_array = [];
@@ -950,7 +911,6 @@ get_lights_by_label(label) {
   }
   return return_array;
 }
-
 get_lights_in_radius(pos, rad) {
   lights = GetStructArray("light", "classname");
   return_array = [];
@@ -962,7 +922,6 @@ get_lights_in_radius(pos, rad) {
   }
   return return_array;
 }
-
 get_labelled_lights_in_radius(label, pos, rad) {
   lights = GetStructArray("light", "classname");
   return_array = [];
@@ -976,7 +935,6 @@ get_labelled_lights_in_radius(label, pos, rad) {
   }
   return return_array;
 }
-
 switch_light_mixers(lights) {
   if(isDefined(lights)) {
     for(i = 0; i < lights.size; i++) {
@@ -987,7 +945,6 @@ switch_light_mixers(lights) {
     }
   }
 }
-
 clean_up_spin_models() {
   self waittill("destroy_spin_models");
   PrintLn("*** clean_up_spin_models");
@@ -1000,12 +957,11 @@ clean_up_spin_models() {
     self.spin_models = undefined;
   }
 }
-
 run_spin_model(notify_name, light, spin_model_name, spin_model_fx, spin_model_fx_tag) {
   PrintLn("*** run spin model " + notify_name + " " + spin_model_name);
   self endon("destroy_spin_models");
   self thread clean_up_spin_models();
-  players = getLocalPlayers();
+  players = getlocalplayers();
   self.spin_models = [];
   for(i = 0; i < players.size; i++) {
     self.spin_models[i] = spawn(i, self.origin, "script_model");
@@ -1029,7 +985,6 @@ run_spin_model(notify_name, light, spin_model_name, spin_model_fx, spin_model_fx
     }
   }
 }
-
 light_model_switch(clientNum, notify_name, model_name, light, spin_model_name, spin_model_fx, spin_model_fx_tag) {
   while(1) {
     self waittill(notify_name);
@@ -1044,7 +999,6 @@ light_model_switch(clientNum, notify_name, model_name, light, spin_model_name, s
     self setModel(model_name);
   }
 }
-
 init_lights(clientNum) {
   register_light_type("explode_then_flicker", ::explode_then_flicker);
   register_light_type("firecaster", ::ber3b_firelight);

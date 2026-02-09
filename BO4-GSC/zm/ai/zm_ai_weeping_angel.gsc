@@ -71,7 +71,6 @@ function_b6824ff0(entity, player, duration, color) {
     endpoint = function_78910888(player);
     entity thread function_e5ffb77c(entity.origin, endpoint, 0.05, color);
   }
-
 }
 
 function_e5ffb77c(start, end, duration, color) {

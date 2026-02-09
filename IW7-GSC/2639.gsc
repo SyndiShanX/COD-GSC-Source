@@ -7,7 +7,7 @@ updatedamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(level.friendly_damage_check) && [[level.friendly_damage_check]](var_4, var_5, var_6)) {
     return;
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_7 = "standard_cp";
@@ -369,7 +369,7 @@ scale_alien_damage_by_weapon_type(var_0, var_1, var_2, var_3, var_4) {
 }
 
 scale_alien_damage_by_prestige(var_0, var_1) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_2 = var_0 scripts\cp\perks\prestige::prestige_getweapondamagescalar();
     var_1 = var_1 * var_2;
     var_1 = int(var_1);
@@ -385,7 +385,7 @@ func_3D84(var_0, var_1, var_2, var_3, var_4) {
     return var_1;
   }
 
-  if(!isDefined(var_2) || !isplayer(var_2) || var_4 != "MOD_EXPLOSIVE_BULLET") {
+  if(!isDefined(var_2) || !isPlayer(var_2) || var_4 != "MOD_EXPLOSIVE_BULLET") {
     return var_1;
   }
 
@@ -643,7 +643,7 @@ onkillstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = undefined;
 
   if(isDefined(var_0) && isDefined(self.owner)) {
-    if(isDefined(var_0.owner) && isplayer(var_0.owner)) {
+    if(isDefined(var_0.owner) && isPlayer(var_0.owner)) {
       var_0 = var_0.owner;
     }
 
@@ -693,7 +693,7 @@ func_3343() {
   for(;;) {
     self waittill("damage", var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!isplayer(var_0) && !isagent(var_0)) {
+    if(!isPlayer(var_0) && !isagent(var_0)) {
       continue;
     }
     if(!friendlyfirecheck(self.owner, var_0)) {
@@ -739,7 +739,7 @@ func_3343() {
     self.damagedby = var_0;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 updatedamagefeedback("c4");
   }
 

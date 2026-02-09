@@ -116,7 +116,7 @@ watchplayerenterwater() {
     if(isDefined(level.ishorde) && level.ishorde && isagent(var_0) && isDefined(var_0.horde_type) && var_0.horde_type == "Quad" && !isDefined(var_0.inwater))
       var_0 thread hordedoginwater(self);
 
-    if(!isplayer(var_0) && !isai(var_0)) {
+    if(!isPlayer(var_0) && !isai(var_0)) {
       continue;
     }
     if(!isalive(var_0)) {
@@ -474,7 +474,7 @@ playerdisableunderwater() {
         self enableoffhandsecondaryweapons();
     }
 
-    if(isDefined(level.ishorde) && isplayer(self))
+    if(isDefined(level.ishorde) && isPlayer(self))
       maps\mp\gametypes\_weapons::restoreweapon("underwater");
     else if(isDefined(self.water_last_weapon))
       maps\mp\_utility::switch_to_last_weapon(self.water_last_weapon);

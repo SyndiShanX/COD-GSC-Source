@@ -161,7 +161,7 @@ gondola_hostmigration() {
 }
 
 link_player_to_gondola() {
-  if(self function_9a8ab327() && isplayer(self)) {
+  if(self function_9a8ab327() && isPlayer(self)) {
     self endon(#"disconnect", #"death");
     e_origin = util::spawn_model("tag_origin", self.origin, self.angles);
     level.var_ee9168a2[level.var_ee9168a2.size] = e_origin;
@@ -171,7 +171,7 @@ link_player_to_gondola() {
 }
 
 function_9a8ab327() {
-  if(isplayer(self) || isactor(self)) {
+  if(isPlayer(self) || isactor(self)) {
     if(isDefined(level.e_gondola) && isDefined(level.e_gondola.t_ride) && self istouching(level.e_gondola.t_ride)) {
       return true;
     } else {

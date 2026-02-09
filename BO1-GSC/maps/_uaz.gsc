@@ -9,7 +9,6 @@ main() {
   self build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
   build_aianims(::setanims, ::set_vehicle_anims);
 }
-
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   positions[0].sittag = "tag_driver";
@@ -30,8 +29,8 @@ set_vehicle_anims(positions) {
   positions[3].vehicle_getoutanim = % v_uaz_passenger3_door_open;
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   num_positions = 4;
@@ -60,7 +59,6 @@ setanims() {
   positions[3].getout_fast = % crew_uaz_passenger3_tumbleout;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

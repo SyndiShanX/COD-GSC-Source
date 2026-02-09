@@ -327,9 +327,7 @@ crab_boss_zombie_spawn_manager() {
         var_2.dont_cleanup = 1;
         var_2.synctransients = "sprint";
         if(isDefined(level.cb_zmb_spawn_func)) {
-          [
-            [level.cb_zmb_spawn_func]
-          ](var_2);
+          [[level.cb_zmb_spawn_func]](var_2);
         }
 
         var_2 thread play_intro(var_2);
@@ -501,8 +499,8 @@ get_zombie_spawn_delay() {
 
 death_ray_cannon() {
   level.cb_zmb_spawn_func = ::assign_enemy;
-  var_0 = getdvar("scrAgent_ragdollImpulseZ");
-  setdvar("scrAgent_ragdollImpulseZ", 10000);
+  var_0 = getDvar("scrAgent_ragdollImpulseZ");
+  setDvar("scrAgent_ragdollImpulseZ", 10000);
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::set_up_weak_spot();
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::hit_weak_spot_with_death_ray_cannon();
   for(var_1 = 0; var_1 < 1; var_1++) {
@@ -524,7 +522,7 @@ death_ray_cannon() {
 
   delete_weak_spot();
   level.crab_boss notify("stop_death_ray_attack_logic");
-  setdvar("scrAgent_ragdollImpulseZ", var_0);
+  setDvar("scrAgent_ragdollImpulseZ", var_0);
   scripts\cp\cp_vo::try_to_play_vo_on_all_players("boss_phase_2_success_cannon_final");
   scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray::crab_boss_pain_and_heal();
 }

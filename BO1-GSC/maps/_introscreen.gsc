@@ -12,7 +12,7 @@ main() {
   flag_init("introscreen_complete");
   PrecacheShader("black");
   if(getDvar(#"introscreen") == "") {
-    SetDvar("introscreen", "1");
+    setDvar("introscreen", "1");
   }
   level.splitscreen = GetDvarInt(#"splitscreen");
   level.hidef = GetDvarInt(#"hidef");
@@ -63,14 +63,15 @@ main() {
       introscreen_delay();
       break;
     case "rebirth":
-      if(!isDefined(level.start_point))
+      if(!isDefined(level.start_point)) {
         introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_MASON_INTROSCREEN_2", &"REBIRTH_MASON_INTROSCREEN_3", &"REBIRTH_MASON_INTROSCREEN_4", &"REBIRTH_MASON_INTROSCREEN_5");
-      else {
-        if(level.start_point == "default" || level.start_point == "mason_stealth" || level.start_point == "mason_lab")
+      } else {
+        if(level.start_point == "default" || level.start_point == "mason_stealth" || level.start_point == "mason_lab") {
           introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_MASON_INTROSCREEN_2", &"REBIRTH_MASON_INTROSCREEN_3", &"REBIRTH_MASON_INTROSCREEN_4", &"REBIRTH_MASON_INTROSCREEN_5");
-        else {
-          if(level.start_point != "btr_rail")
+        } else {
+          if(level.start_point != "btr_rail") {
             introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_HUDSON_INTROSCREEN_2", &"REBIRTH_HUDSON_INTROSCREEN_3", &"REBIRTH_HUDSON_INTROSCREEN_4");
+          }
         }
       }
       break;
@@ -98,7 +99,6 @@ main() {
       break;
   }
 }
-
 introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, rubout_time, color, type, scale, font) {
   index = level.introstring.size;
   yPos = (index * 30);
@@ -128,10 +128,11 @@ introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, 
     }
   }
   if(!isDefined(scale)) {
-    if(level.splitscreen && !level.hidef)
+    if(level.splitscreen && !level.hidef) {
       fontScale = 2.5;
-    else
+    } else {
       fontScale = 1.5;
+    }
   } else
     fontScale = scale;
   level.introstring[index] = NewHudElem();
@@ -160,7 +161,6 @@ introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, 
     level.introstring[index].color = level.introstring_text_color;
   }
 }
-
 introscreen_create_line(string, type, scale, font, color) {
   index = level.introstring.size;
   yPos = (index * 30);
@@ -190,10 +190,11 @@ introscreen_create_line(string, type, scale, font, color) {
     }
   }
   if(!isDefined(scale)) {
-    if(level.splitscreen && !level.hidef)
+    if(level.splitscreen && !level.hidef) {
       fontScale = 2.75;
-    else
+    } else {
       fontScale = 1.75;
+    }
   } else
     fontScale = scale;
   level.introstring[index] = NewHudElem();
@@ -217,7 +218,6 @@ introscreen_create_line(string, type, scale, font, color) {
     level.introstring[index].color = color;
   }
 }
-
 introscreen_fadeOutText() {
   for(i = 0; i < level.introstring.size; i++) {
     level.introstring[i] FadeOverTime(1.5);
@@ -229,7 +229,6 @@ introscreen_fadeOutText() {
   }
   wait(0.25);
 }
-
 introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime, totaltime, time_to_redact, delay_after_text, rubout_time, color) {
   if(isDefined(level.custom_introscreen)) {
     [[level.custom_introscreen]](string1, string2, string3, string4, string5);
@@ -247,8 +246,9 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
     level.introblack SetShader(level.introscreen_shader, 640, 480);
   }
   flag_wait("all_players_connected");
-  if(!isDefined(level.introscreen_dontfreezcontrols))
+  if(!isDefined(level.introscreen_dontfreezcontrols)) {
     freezecontrols_all(true);
+  }
   level._introscreen = true;
   wait(0.5);
   level.introstring = [];
@@ -276,28 +276,28 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
     totalpausetime += pausetime;
   }
   if(isDefined(string2)) {
-    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + randomInt(delay_between_redacts_min, delay_between_redacts_max);
+    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + RandomInt(delay_between_redacts_min, delay_between_redacts_max);
     redacted_line_time = int(1000 * (totaltime - totalpausetime));
     level thread introscreen_create_redacted_line(string2, redacted_line_time, start_rubout_time, rubout_time, color);
     wait(pausetime);
     totalpausetime += pausetime;
   }
   if(isDefined(string3)) {
-    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + randomInt(delay_between_redacts_min, delay_between_redacts_max);
+    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + RandomInt(delay_between_redacts_min, delay_between_redacts_max);
     redacted_line_time = int(1000 * (totaltime - totalpausetime));
     level thread introscreen_create_redacted_line(string3, redacted_line_time, start_rubout_time, rubout_time, color);
     wait(pausetime);
     totalpausetime += pausetime;
   }
   if(isDefined(string4)) {
-    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + randomInt(delay_between_redacts_min, delay_between_redacts_max);
+    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + RandomInt(delay_between_redacts_min, delay_between_redacts_max);
     redacted_line_time = int(1000 * (totaltime - totalpausetime));
     level thread introscreen_create_redacted_line(string4, redacted_line_time, start_rubout_time, rubout_time, color);
     wait(pausetime);
     totalpausetime += pausetime;
   }
   if(isDefined(string5)) {
-    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + randomInt(delay_between_redacts_min, delay_between_redacts_max);
+    start_rubout_time = Int((start_rubout_time + rubout_time) - (pausetime * 1000)) + RandomInt(delay_between_redacts_min, delay_between_redacts_max);
     redacted_line_time = int(1000 * (totaltime - totalpausetime));
     level thread introscreen_create_redacted_line(string5, redacted_line_time, start_rubout_time, rubout_time, color);
     wait(pausetime);
@@ -314,10 +314,11 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
   } else {
     wait 2.5;
   }
-  if(isDefined(level.introscreen_shader_fadeout_time))
+  if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblack FadeOverTime(level.introscreen_shader_fadeout_time);
-  else
+  } else {
     level.introblack FadeOverTime(1.5);
+  }
   level.introblack.alpha = 0;
   flag_set("starting final intro screen fadeout");
   level thread freezecontrols_all(false, 0.75);
@@ -326,7 +327,6 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
   introscreen_fadeOutText();
   flag_set("introscreen_complete");
 }
-
 introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pausetime2, timebeforefade, skipwait) {
   if(isDefined(level.custom_introscreen)) {
     [[level.custom_introscreen]](string1, string2, string3, string4, string5);
@@ -346,8 +346,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   if(!isDefined(skipwait)) {
     flag_wait("all_players_connected");
   }
-  if(!isDefined(level.introscreen_dontfreezcontrols))
+  if(!isDefined(level.introscreen_dontfreezcontrols)) {
     freezecontrols_all(true);
+  }
   level._introscreen = true;
   if(isDefined(skipwait)) {
     flag_wait("all_players_connected");
@@ -403,13 +404,11 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   introscreen_fadeOutText();
   flag_set("introscreen_complete");
 }
-
 introscreen_player_connect() {
   if(isDefined(level._introscreen) && level._introscreen) {
     self FreezeControls(true);
   }
 }
-
 introscreen_report_disconnected_clients() {
   flag_wait("introscreen_complete");
   if(isDefined(level._disconnected_clients)) {
@@ -418,7 +417,6 @@ introscreen_report_disconnected_clients() {
     }
   }
 }
-
 introscreen_clear_redacted_flags() {
   flag_clear("introscreen_complete");
   flag_clear("starting final intro screen fadeout");

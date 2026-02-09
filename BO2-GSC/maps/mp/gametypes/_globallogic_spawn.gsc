@@ -316,11 +316,11 @@ spawnplayer() {
     }
   }
 
-  if(getdvar(#"scr_showperksonspawn") == "")
-    setdvar("scr_showperksonspawn", "0");
+  if(getDvar(#"scr_showperksonspawn") == "")
+    setDvar("scr_showperksonspawn", "0");
 
   if(level.hardcoremode)
-    setdvar("scr_showperksonspawn", "0");
+    setDvar("scr_showperksonspawn", "0");
 
   if(getdvarint(#"scr_showperksonspawn") == 1 && game["state"] != "postgame") {
     pixbeginevent("showperksonspawn");
@@ -340,7 +340,7 @@ spawnplayer() {
   waittillframeend;
   self notify("spawned_player");
   self logstring("S " + self.origin[0] + " " + self.origin[1] + " " + self.origin[2]);
-  setdvar("scr_selecting_location", "");
+  setDvar("scr_selecting_location", "");
 
   if(self is_bot()) {
     pixbeginevent("bot");
@@ -451,12 +451,12 @@ kickifidontspawninternal() {
   self endon("spawned");
   waittime = 90;
 
-  if(getdvar(#"_id_4257CF5C") != "")
+  if(getDvar(#"_id_4257CF5C") != "")
     waittime = getdvarfloat(#"_id_4257CF5C");
 
   mintime = 45;
 
-  if(getdvar(#"_id_0DF057E0") != "")
+  if(getDvar(#"_id_0DF057E0") != "")
     mintime = getdvarfloat(#"_id_0DF057E0");
 
   starttime = gettime();

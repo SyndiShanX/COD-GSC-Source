@@ -33,19 +33,19 @@ main() {
 
   setdvar_cg_ng("r_specularColorScale", 2.3, 10);
   setdvar_cg_ng("r_diffuseColorScale", 1.2, 3);
-  setdvar("r_ssaorejectdepth", 1500);
-  setdvar("r_ssaofadedepth", 1200);
+  setDvar("r_ssaorejectdepth", 1500);
+  setDvar("r_ssaofadedepth", 1200);
 
-  SetDvar("r_sky_fog_intensity", "1");
-  SetDvar("r_sky_fog_min_angle", "74.6766");
-  SetDvar("r_sky_fog_max_angle", "91.2327");
-  SetDvar("r_lightGridEnableTweaks", 1);
-  SetDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_sky_fog_intensity", "1");
+  setDvar("r_sky_fog_min_angle", "74.6766");
+  setDvar("r_sky_fog_max_angle", "91.2327");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.6");
+    setDvar("sm_sunShadowScale", "0.6");
   } else if(level.xenon) {
-    setdvar("sm_sunShadowScale", "0.7");
+    setDvar("sm_sunShadowScale", "0.7");
   }
 
   game["attackers"] = "allies";
@@ -178,7 +178,7 @@ is_ai_sight_line() {
 }
 
 satellite_fall() {
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   if(level.snow_satellite_allowed) {
@@ -349,7 +349,6 @@ satellite_fall() {
         break;
       }
 
-      /#	
       satellite_killstreak_wait();
       flag_clear("satellite_crashed");
       pre_crash_group satellite_group_show();
@@ -365,10 +364,8 @@ satellite_fall() {
         common_scripts\_exploder::stop_exploder_proc("4");
         common_scripts\_exploder::stop_exploder_proc("32");
       }
-
     }
   }
-
 }
 
 monitor_touching() {
@@ -505,7 +502,6 @@ satellite_group(targetname) {
     } else {
       parent.linked[parent.linked.size] = ent;
       ent LinkTo(parent);
-
     }
   }
 
@@ -558,7 +554,7 @@ satellite_killstreak_wait_dvar() {
     if(value == default_value) {
       waitframe();
     } else {
-      SetDvar(dvar_name, default_value);
+      setDvar(dvar_name, default_value);
       level notify("satellite_start", level.player);
     }
   }
@@ -575,7 +571,6 @@ move_satellite(end) {
     self MoveTo(start, 0.1);
     wait(0.1);
   }
-
 }
 
 play_satellite_static_on_connect() {
@@ -583,7 +578,6 @@ play_satellite_static_on_connect() {
     level waittill("connected", player);
     player thread run_func_after_spawn(::satellite_static);
   }
-
 }
 
 play_crater_fire_on_connect() {

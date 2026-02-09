@@ -22,7 +22,8 @@ CHARGE_ATTACK_START_SOUND = "";
 ELITE_REGEN_START_SOUND = "";
 
 elite_approach(enemy, attack_counter) {
-  /# maps\mp\agents\alien\_alien_think::debug_alien_ai_state( "elite_approach" ); #/ /
+  maps\mp\agents\alien\_alien_think::debug_alien_ai_state("elite_approach");
+  /
   # maps\mp\agents\alien\_alien_think::debug_alien_attacker_state("attacking");
 
   if(DistanceSquared(enemy.origin, self.origin) > ALIEN_CHARGE_ATTACK_DISTANCE_MAX * ALIEN_CHARGE_ATTACK_DISTANCE_MAX)
@@ -130,7 +131,7 @@ do_ground_slam(enemy) {
 }
 
 charge_attack(enemy) {
-  /# maps\mp\agents\alien\_alien_think::debug_alien_ai_state( "charge_attack" );
+  maps\mp\agents\alien\_alien_think::debug_alien_ai_state("charge_attack");
 
   if(enemy being_charged()) {
     wait 0.2;
@@ -143,7 +144,7 @@ charge_attack(enemy) {
 }
 
 angered(enemy) {
-  /# maps\mp\agents\alien\_alien_think::debug_alien_ai_state( "health_regen" );
+  maps\mp\agents\alien\_alien_think::debug_alien_ai_state("health_regen");
 
   self.melee_type = "angered";
   maps\mp\agents\alien\_alien_think::alien_melee(enemy);

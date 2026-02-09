@@ -422,7 +422,7 @@ function_482c54d5(watcher, owner) {
   s_result = self waittilltimeout(5, #"stationary", #"hash_14fd7b6a20ac8f44");
   waitframe(1);
 
-  if(isplayer(s_result.target)) {
+  if(isPlayer(s_result.target)) {
     v_pos = groundtrace(self.origin + (0, 0, 32) + (0, 0, 8), self.origin + (0, 0, 32) + (0, 0, -100000), 0, self)[# "position"];
 
     if(isDefined(v_pos)) {
@@ -567,7 +567,7 @@ function_c74dfed4(weapon) {
     s_result = self.trigger waittill(#"trigger");
 
     if(isDefined(s_result.activator)) {
-      if(isplayer(s_result.activator) && s_result.activator == self.owner) {
+      if(isPlayer(s_result.activator) && s_result.activator == self.owner) {
         s_result.activator thread function_b1abe6ab(self.trigger, weapon);
         continue;
       }

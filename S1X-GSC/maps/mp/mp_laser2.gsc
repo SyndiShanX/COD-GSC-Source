@@ -125,7 +125,7 @@ set_lighting_values() {
 set_umbra_values()
 
 {
-  SetDvar("r_umbraAccurateOcclusionThreshold", 256);
+  setDvar("r_umbraAccurateOcclusionThreshold", 256);
 }
 
 HandleClouds() {
@@ -857,7 +857,7 @@ handle_event_geo_off() {
 }
 
 handle_pathing_pre_event() {
-  if(getdvar("scr_dynamic_event_state", "on") != "endstate" && (!isDefined(level.dynamicEventsType) || level.dynamicEventsType != 2)) {
+  if(getDvar("scr_dynamic_event_state", "on") != "endstate" && (!isDefined(level.dynamicEventsType) || level.dynamicEventsType != 2)) {
     wait(.05);
   }
 
@@ -870,7 +870,6 @@ handle_pathing_pre_event() {
     ent hideGeo();
     ent connect_paths();
   }
-
 }
 
 handle_pathing_post_event() {
@@ -885,7 +884,6 @@ handle_pathing_post_event() {
   if(isDefined(level.pre_event_pathing_blockers)) {
     array_thread(level.pre_event_pathing_blockers, ::connect_paths);
   }
-
 }
 
 OceanObjectMover_set_goal(ocean_ent) {
@@ -1063,7 +1061,6 @@ aud_handle_waves_crash() {
     player clientaddsoundsubmix("mp_post_event_mix", 1);
     wait(0.05);
   }
-
 }
 
 handleTsunamiWarningSounds() {

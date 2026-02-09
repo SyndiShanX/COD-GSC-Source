@@ -407,7 +407,7 @@ function_3e2e539(params) {
       params.einflictor notify(#"death");
       waitframe(1);
 
-      if(isDefined(params.einflictor) && isDefined(params.eattacker) && isplayer(params.eattacker)) {
+      if(isDefined(params.einflictor) && isDefined(params.eattacker) && isPlayer(params.eattacker)) {
         params.einflictor detonate(params.eattacker);
       }
     } else {

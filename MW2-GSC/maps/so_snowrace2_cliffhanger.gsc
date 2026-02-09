@@ -85,11 +85,11 @@ gate_think() {
   level endon("special_op_terminated");
   self waittill("trigger", ent);
 
-  if(isplayer(ent)) {
+  if(isPlayer(ent)) {
     ent.gates_hit++;
   } else {
     assert(isDefined(ent.player));
-    assert(isplayer(ent.player));
+    assert(isPlayer(ent.player));
     ent.player.gates_hit++;
   }
 
@@ -137,7 +137,7 @@ finishline() {
   foreach(player in level.players)
   player.finish_time = getTime();
 
-  assert(isplayer(player));
+  assert(isPlayer(player));
   assert(isDefined(player.playername));
 
   end_race_cleanup();

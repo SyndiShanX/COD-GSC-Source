@@ -566,7 +566,7 @@ clean_deleted(&array) {
 
 get_eye() {
   if(sessionmodeiscampaigngame()) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       linked_ent = self getlinkedent();
 
       if(isDefined(linked_ent) && getdvarint(#"cg_camerausetagcamera", 0) > 0) {
@@ -607,7 +607,7 @@ lerp_dvar(str_dvar, n_start_val = getdvarfloat(str_dvar, 0), n_end_val, n_lerp_t
       continue;
     }
 
-    setdvar(str_dvar, n_curr_val);
+    setDvar(str_dvar, n_curr_val);
   }
   while(n_time_delta < n_lerp_time);
 }
@@ -760,7 +760,7 @@ isenemyteam(team) {
 isenemyplayer(player) {
   assert(isDefined(player));
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
 
@@ -1460,7 +1460,7 @@ function_26489405() {
 }
 
 function_8570168d() {
-  if(getdvar(#"hash_49e94b7aefac4f49", 0)) {
+  if(getDvar(#"hash_49e94b7aefac4f49", 0)) {
     return true;
   }
 

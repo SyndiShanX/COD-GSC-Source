@@ -94,7 +94,7 @@ givecustomloadout() {
 
 onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
   if(sweapon == "crossbow_mp" && smeansofdeath == "MOD_IMPACT") {
-    if(isDefined(eattacker) && isplayer(eattacker)) {
+    if(isDefined(eattacker) && isPlayer(eattacker)) {
       if(!isDefined(eattacker.pers["sticks"]))
         eattacker.pers["sticks"] = 1;
       else
@@ -108,7 +108,7 @@ onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, 
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     baseweaponname = getreffromitemindex(getbaseweaponitemindex(sweapon)) + "_mp";
 
     if(smeansofdeath == "MOD_MELEE")
@@ -170,7 +170,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 }
 
 onstartgametype() {
-  setdvar("scr_xpscale", 0);
+  setDvar("scr_xpscale", 0);
   setclientnamemode("auto_change");
   setobjectivetext("allies", &"OBJECTIVES_SAS");
   setobjectivetext("axis", &"OBJECTIVES_SAS");

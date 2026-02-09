@@ -159,12 +159,12 @@ function onspawnplayer(predictedspawn) {
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   player = self;
-  if(isplayer(attacker) && attacker.team != self.team) {
+  if(isPlayer(attacker) && attacker.team != self.team) {
     if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
       attacker globallogic_score::giveteamscoreforobjective(attacker.team, level.teamscoreperkill);
     }
   }
-  if(isDefined(attacker) && isplayer(attacker) && attacker.team != self.team) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker.team != self.team) {
     if(isDefined(player) && isDefined(player.carriedtacos)) {
       if(player.carriedtacos >= 5) {
         scoreevents::processscoreevent("clean_kill_enemy_carrying_tacos", attacker);

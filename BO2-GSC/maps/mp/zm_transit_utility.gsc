@@ -94,7 +94,7 @@ try_resume_zombie_spawning() {
 
 automatonspeak(category, type, response, force_variant, override) {
   if(isDefined(level.automaton) && !is_true(level.automaton.disabled_by_emp)) {
-    if(getdvar(#"_id_6DF184E8") == "")
+    if(getDvar(#"_id_6DF184E8") == "")
       iprintlnbold("Automaton VO: " + type);
 
     if(type != "leaving" && type != "leaving_warning") {
@@ -148,7 +148,7 @@ transit_breakable_glass() {
   while(true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type);
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(self.damage_state == 0) {
         self glass_gets_destroyed();
         self.damage_state = 1;

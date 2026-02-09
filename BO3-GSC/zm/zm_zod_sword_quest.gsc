@@ -845,7 +845,7 @@ function on_zombie_killed() {
       var_d41ef8d1 = 589294;
     }
     if(dist_sq < var_d41ef8d1) {
-      if(isDefined(self.attacker) && isplayer(self.attacker)) {
+      if(isDefined(self.attacker) && isPlayer(self.attacker)) {
         if(self.attacker function_6dc5b484(e_statue.statue_id) && !self.attacker function_24978bad(e_statue.statue_id) && !self.attacker flag::get("in_beastmode")) {
           self bank_zombie_kill(self.attacker, e_statue);
         }
@@ -1195,10 +1195,10 @@ function set_sword_upgrade_level(n_level) {
 }
 
 function sword_devgui() {
-  setdvar("", 0);
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", 0);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1224,7 +1224,7 @@ function sword_devgui() {
         e_player give_sword(n_level, 1);
         e_player.sword_allowed = 1;
         e_player notify("hash_1867e603");
-        setdvar("", "");
+        setDvar("", "");
       }
     } else if(n_level == 2) {
       foreach(e_player in level.activeplayers) {
@@ -1236,7 +1236,7 @@ function sword_devgui() {
         }
         e_player give_sword(n_level, 1);
         e_player.sword_allowed = 1;
-        setdvar("", "");
+        setDvar("", "");
       }
     }
     str_cheat = getdvarstring("");
@@ -1267,14 +1267,14 @@ function sword_devgui() {
         break;
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     var_e4b329eb = getdvarint("");
     if(var_e4b329eb > 0) {
       foreach(e_player in level.players) {
         zm_weap_glaive::function_7855de72(e_player);
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     util::wait_network_frame();
   }
 }

@@ -880,12 +880,12 @@ destructible_think() {
       continue;
     }
     if(common_scripts\utility::issp()) {
-      if(isDefined(var_5) && isplayer(var_5)) {
+      if(isDefined(var_5) && isPlayer(var_5)) {
         self.damageowner = var_5;
       }
-    } else if(isDefined(var_5) && isplayer(var_5)) {
+    } else if(isDefined(var_5) && isPlayer(var_5)) {
       self.damageowner = var_5;
-    } else if(isDefined(var_5) && isDefined(var_5.gunner) && isplayer(var_5.gunner)) {
+    } else if(isDefined(var_5) && isDefined(var_5.gunner) && isPlayer(var_5.gunner)) {
       self.damageowner = var_5.gunner;
     }
 
@@ -949,7 +949,7 @@ is_shotgun_damage(var_0, var_1) {
 
   var_2 = undefined;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_2 = var_0 getcurrentweapon();
   } else if(isDefined(level.enable_ai_shotgun_destructible_damage) && level.enable_ai_shotgun_destructible_damage) {
     if(isDefined(var_0.weapon)) {
@@ -1100,7 +1100,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
       if(var_23) {
         if(isDefined(var_5)) {
-          if(isplayer(var_5)) {
+          if(isPlayer(var_5)) {
             self.player_damage = self.player_damage + var_0;
           } else if(var_5 != self) {
             self.non_player_damage = self.non_player_damage + var_0;
@@ -1631,7 +1631,7 @@ isattackervalid(var_0, var_1, var_2) {
   }
 
   if(var_3 == "no_player") {
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       return 1;
     }
 
@@ -1643,7 +1643,7 @@ isattackervalid(var_0, var_1, var_2) {
       return 1;
     }
   } else if(var_3 == "player_only") {
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       return 1;
     }
 
@@ -2418,7 +2418,7 @@ get_player_touching(var_0) {
 }
 
 is_so() {
-  return getdvar("specialops") == "1";
+  return getDvar("specialops") == "1";
 }
 
 destructible_handles_collision_brushes() {
@@ -3639,7 +3639,7 @@ triggertouchthink(var_0, var_1) {
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isplayer(var_2) && !isDefined(var_2.finished_spawning)) {
+    if(!isPlayer(var_2) && !isDefined(var_2.finished_spawning)) {
       continue;
     }
     if(!isalive(var_2)) {
@@ -3654,7 +3654,7 @@ triggertouchthink(var_0, var_1) {
 playertouchtriggerthink(var_0, var_1, var_2) {
   var_0 endon("death");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self endon("death");
   }
 

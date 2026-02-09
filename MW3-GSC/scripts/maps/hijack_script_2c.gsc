@@ -53,7 +53,7 @@ _id_599D() {
   common_scripts\utility::flag_wait("player_entered_end_area");
   var_0 common_scripts\utility::trigger_on();
   common_scripts\utility::flag_wait("tarmac_level_fail");
-  setdvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
+  setDvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
   level notify("mission failed");
   maps\_utility::_id_1826();
 }
@@ -72,7 +72,6 @@ _id_599E() {
 _id_599F() {
   if(isDefined(level._id_59A0)) {
     level._id_59A0 notify("stop_debate_advisor_loop");
-
   }
   level._id_59A1 = getent("commander_pistol_on_ground", "targetname");
   level._id_59A1 hide();

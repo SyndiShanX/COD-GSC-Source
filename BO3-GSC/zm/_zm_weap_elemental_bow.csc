@@ -19,8 +19,8 @@ function __init__() {
   level._effect["elemental_bow_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_default_ambient_1p_zmb";
   level._effect["elemental_bow_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_default_impact_zmb";
   level._effect["elemental_bow_arrow_charged_impact"] = "dlc1/zmb_weapon/fx_bow_default_impact_ug_zmb";
-  setdvar("bg_chargeShotUseOneAmmoForMultipleBullets", 0);
-  setdvar("bg_zm_dlc1_chargeShotMultipleBulletsForFullCharge", 2);
+  setDvar("bg_chargeShotUseOneAmmoForMultipleBullets", 0);
+  setDvar("bg_zm_dlc1_chargeShotMultipleBulletsForFullCharge", 2);
 }
 
 function function_5b4bf635(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

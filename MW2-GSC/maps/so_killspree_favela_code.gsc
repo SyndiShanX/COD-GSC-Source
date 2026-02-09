@@ -83,7 +83,7 @@ release_doggy() {
   array_spawn_function(dog_spawner, ::enemy_seek_player, 300);
 
   if(!isDefined(level.gameskill))
-    num_of_dogs = max(int(getdvar("g_gameskill")), 1);
+    num_of_dogs = max(int(getDvar("g_gameskill")), 1);
   else
     num_of_dogs = max(level.gameskill, 1);
 
@@ -224,9 +224,7 @@ hud_clean_up() {
   self notify("hud_cleaned_up");
 }
 
-// ---------------------------------------------------------------------------------
-
-enemy_type_monitor() {
+// --------------------------------------------------------------------------------- enemy_type_monitor() {
   level endon("special_op_terminated");
 
   flag_wait("enemy_population_info_available");
@@ -287,7 +285,7 @@ hunter_register_death() {
 dog_register_death() {
   self waittill("death", attacker);
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker.dogs_killed++;
   }
 }
@@ -296,7 +294,7 @@ civilian_register_death() {
   self waittill("death", attacker);
 
   assert(isDefined(level.gameskill));
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker.civilians_killed++;
     level.civilian_killed++;
     level notify("civilian_died");

@@ -266,7 +266,6 @@ _id_1324() {
       var_2 = "smoke_out";
     } else if(var_1 == "c4") {
       var_2 = "c4_plant";
-
     }
     if(isDefined(var_2)) {
       _id_1330(var_2);
@@ -291,23 +290,18 @@ _id_1325() {
 _id_1326(var_0, var_1, var_2) {
   if(var_0 <= 0) {
     return 0;
-
   }
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return 0;
-
   }
   if(var_1 == self) {
     return 0;
-
   }
   if(var_2 == "MOD_MELEE") {
     return 0;
-
   }
   if(isDefined(level._id_0AD3) && !level._id_0AD3) {
     return 0;
-
   }
   return 1;
 }
@@ -330,31 +324,25 @@ _id_1327() {
 }
 
 _id_1328(var_0, var_1) {
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return 0;
-
   }
   if(var_0 == self) {
     return 0;
-
   }
   if(_id_133B()) {
     return 0;
-
   }
   if(abs(var_1[2] - self.origin[2] > 128)) {
     return 0;
-
   }
   var_2 = distance2d(self.origin, var_1);
 
   if(!animscripts\battlechatter_ai::_id_0B35(var_0, var_2)) {
     return 0;
-
   }
   if(isDefined(level._id_0AD3) && !level._id_0AD3) {
     return 0;
-
   }
   return 1;
 }
@@ -371,7 +359,6 @@ _id_132A() {
 
   if(var_1 < var_2 * level._id_132E) {
     var_0 = "bleedout";
-
   }
   return var_0;
 }
@@ -410,22 +397,18 @@ _id_1330(var_0) {
 _id_1331(var_0) {
   if(!isDefined(level._id_1312) || !level._id_1312) {
     return 0;
-
   }
   if(self._id_1315) {
     return 0;
-
   }
   if(!isDefined(self._id_1316[var_0])) {
     return 1;
-
   }
   var_1 = self._id_1316[var_0];
   var_2 = anim._id_130C._id_0B6D[var_0] * 1000;
 
   if(gettime() - var_1 >= var_2) {
     return 1;
-
   }
   return 0;
 }
@@ -438,7 +421,6 @@ _id_1333(var_0, var_1) {
   if(var_0 == "reload") {
     if(isDefined(level._id_1334["skip_inform_reloading"]) && level._id_1334["skip_inform_reloading"]) {
       return undefined;
-
     }
     if(isDefined(level._id_1334["inform_reloading"])) {
       return level._id_1334["inform_reloading"];
@@ -453,13 +435,11 @@ _id_1335(var_0) {
 
   if(isDefined(level._id_1336) && level._id_1336) {
     var_1 = "STEALTH_";
-
   }
   var_2 = "1";
 
   if(var_0 == level._id_1337) {
     var_2 = "2";
-
   }
   switch (level._id_1338) {
     case "fso":
@@ -492,7 +472,6 @@ _id_1339(var_0) {
 
   if(distancesquared(var_4.origin, self.origin) > anim._id_130C._id_1310) {
     return 0;
-
   }
   return 1;
 }
@@ -500,7 +479,6 @@ _id_1339(var_0) {
 _id_133B() {
   if(maps\_utility::_id_133C("laststand_downed") && maps\_utility::_id_1008("laststand_downed")) {
     return 1;
-
   }
   return 0;
 }

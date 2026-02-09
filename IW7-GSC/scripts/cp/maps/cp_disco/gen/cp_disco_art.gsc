@@ -5,6 +5,6 @@
 
 main() {
   level.tweakfile = 1;
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1);
 }

@@ -58,7 +58,7 @@ function_1c4b5097(item) {
 }
 
 function_1e224132(activator, laststate, state) {
-  if(isplayer(activator) && !level.inprematchperiod) {
+  if(isPlayer(activator) && !level.inprematchperiod) {
     characterassetname = getcharacterassetname(activator getcharacterbodytype(), currentsessionmode());
 
     if(activator character_unlock::function_f0406288(#"mason_unlock")) {
@@ -76,7 +76,7 @@ function_e3abcf2() {
   self endon(#"disconnect", #"game_ended");
   var_70f6f8c = 1;
 
-  while(isplayer(self) && isalive(self) && var_70f6f8c) {
+  while(isPlayer(self) && isalive(self) && var_70f6f8c) {
     var_70f6f8c = self character_unlock::function_f0406288(#"mason_unlock");
     waitframe(1);
   }

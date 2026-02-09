@@ -153,7 +153,7 @@ function private _activate_servo_shortout(slot, weapon) {
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_servoshortout");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);

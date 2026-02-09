@@ -389,7 +389,7 @@ function has_minimap() {
 function get_enemies(on_radar = 0) {
   enemies = self getenemies();
   for(i = 0; i < enemies.size; i++) {
-    if(isplayer(enemies[i]) && enemies[i] isinmovemode("", "")) {
+    if(isPlayer(enemies[i]) && enemies[i] isinmovemode("", "")) {
       arrayremoveindex(enemies, i);
       i--;
     }
@@ -611,13 +611,13 @@ function function_682f20bc(cmd) {
 }
 
 function system_devgui_gadget_think() {
-  setdvar("", "");
+  setDvar("", "");
   for(;;) {
     wait(1);
     gadget = getdvarstring("");
     if(gadget != "") {
       bot_turn_on_gadget(getweapon(gadget));
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }

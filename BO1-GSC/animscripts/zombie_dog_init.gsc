@@ -31,18 +31,17 @@ main() {
   self setTalkToSpecies("dog");
   self.health = int(anim.dog_health * self.health);
 }
-
 change_anim_set(animset) {
   assert(animset == "shepherd" || animset == "zombie");
   self.animSet = animset;
-  if(isDefined(anim.dogAnims) && isDefined(anim.dogAnims[self.animSet]))
+  if(isDefined(anim.dogAnims) && isDefined(anim.dogAnims[self.animSet])) {
     self.stopAnimDistSq = anim.dogAnims[self.animSet].dogStoppingDistSq;
+  }
 }
-
 setMeleeAttackDist() {
   self endon("death");
   while(1) {
-    if(isDefined(self.enemy) && IsPlayer(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       self.meleeAttackDist = anim.dogAnims[self.animSet].dogAttackPlayerDist;
     } else {
       self.meleeAttackDist = 102;
@@ -50,7 +49,6 @@ setMeleeAttackDist() {
     self waittill("enemy");
   }
 }
-
 initDogAnimations() {
   if(!isDefined(level.dogsInitialized)) {
     level.dogsInitialized = true;
@@ -79,15 +77,13 @@ initDogAnimations() {
   }
   level.dog_melee_index = 0;
   level.dog_melee_timing_array = array_randomize(array);
-  SetDvar("friendlySaveFromDog", "0");
+  setDvar("friendlySaveFromDog", "0");
 }
-
 initCommonDogAnims() {}
 calcAnimLengthVariables(animset) {
   anim.dogAnims[animset].dogStoppingDistSq = lengthSquared(getmovedelta(anim.dogAnims[animset].move["run_stop"], 0, 1) * 1.2);
   anim.dogAnims[animset].dogStartMoveDist = length(getmovedelta(anim.dogAnims[animset].move["run_start"], 0, 1));
 }
-
 initZombieDogAnimations() {
   anim.dogAnims["zombie"] = spawnStruct();
   anim.dogAnims["zombie"].lookKnob[2] = % zombie_dog_look_2;

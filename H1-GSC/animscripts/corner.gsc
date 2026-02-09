@@ -159,7 +159,7 @@ mainloopstart() {
 #using_animtree("generic_human");
 
 hasonekneeup() {
-  var_0 = [ % cornercrr_alert_painc, %cornercrr_alert_paina, %cornercrl_painb, %exposed_crouch_pain_headsnap, %exposed_crouch_pain_flinch, %exposed_crouch_pain_chest, %exposed_crouch_pain_left_arm, %exposed_crouch_pain_right_arm, %exposed_stand_2_crouch, %cornercrl_lean_2_alert, %run_2_crouch_f, %run_2_crouch_90l, %run_2_crouch_90r, %run_2_crouch_180l, %run_2_crouch_idle_1, %run_2_crouch_idle_3, %run_2_crouch_idle_7, %run_2_crouch_idle_9, %cornercrr_lean_2_alert, %cornercrl_reloada, %cornercrr_reload, %cornercrl_cqb_trans_in_1, %cornercrl_cqb_trans_in_2, %cornercrl_cqb_trans_in_3, %cornercrl_cqb_trans_in_4, %cornercrl_cqb_trans_in_6, %cornercrl_cqb_trans_in_7, %cornercrl_cqb_trans_in_8, %grenade_return_cornercrl_1knee_throw, %grenade_return_cornercrr_1knee_throw];
+  var_0 = [%cornercrr_alert_painc, %cornercrr_alert_paina, %cornercrl_painb, %exposed_crouch_pain_headsnap, %exposed_crouch_pain_flinch, %exposed_crouch_pain_chest, %exposed_crouch_pain_left_arm, %exposed_crouch_pain_right_arm, %exposed_stand_2_crouch, %cornercrl_lean_2_alert, %run_2_crouch_f, %run_2_crouch_90l, %run_2_crouch_90r, %run_2_crouch_180l, %run_2_crouch_idle_1, %run_2_crouch_idle_3, %run_2_crouch_idle_7, %run_2_crouch_idle_9, %cornercrr_lean_2_alert, %cornercrl_reloada, %cornercrr_reload, %cornercrl_cqb_trans_in_1, %cornercrl_cqb_trans_in_2, %cornercrl_cqb_trans_in_3, %cornercrl_cqb_trans_in_4, %cornercrl_cqb_trans_in_6, %cornercrl_cqb_trans_in_7, %cornercrl_cqb_trans_in_8, %grenade_return_cornercrl_1knee_throw, %grenade_return_cornercrr_1knee_throw];
 
   foreach(var_2 in var_0) {
     if(self getanimweight(var_2) != 0.0)
@@ -173,8 +173,8 @@ shouldplayalerttransition(var_0) {
   if(!animscripts\utility::using_improved_transitions())
     return 0;
 
-  var_1 = [ % cornercrl_trans_a_2_alert, %cornercrr_trans_a_2_alert, %cornercrl_trans_b_2_alert, %cornercrr_trans_b_2_alert, %cornercrouchr_crouchidle_2_alert, %cornercrouchl_crouchidle_2_alert, %h1_cornercrr_alert_paina_2, %h1_cornercrr_alert_painb_2, %h1_cornercrr_alert_painc_2, %h1_cornercrl_painb_2, %h1_cornercrl_trans_2_2knees, %h1_cornercrouch_trans_2_2knee, %h1_cornercrr_alert_paina_2, %h1_cornercrr_alert_painb_2, %h1_cornercrr_alert_painc_2, %cornercrr_reloada, %cornercrr_reloadb, %cornercrl_reloadb];
-  var_2 = [ % walk_backward, %walk_left, %walk_right, %walk_forward];
+  var_1 = [%cornercrl_trans_a_2_alert, %cornercrr_trans_a_2_alert, %cornercrl_trans_b_2_alert, %cornercrr_trans_b_2_alert, %cornercrouchr_crouchidle_2_alert, %cornercrouchl_crouchidle_2_alert, %h1_cornercrr_alert_paina_2, %h1_cornercrr_alert_painb_2, %h1_cornercrr_alert_painc_2, %h1_cornercrl_painb_2, %h1_cornercrl_trans_2_2knees, %h1_cornercrouch_trans_2_2knee, %h1_cornercrr_alert_paina_2, %h1_cornercrr_alert_painb_2, %h1_cornercrr_alert_painc_2, %cornercrr_reloada, %cornercrr_reloadb, %cornercrl_reloadb];
+  var_2 = [%walk_backward, %walk_left, %walk_right, %walk_forward];
 
   foreach(var_4 in var_1) {
     if(var_0 getanimweight(var_4) != 0.0)

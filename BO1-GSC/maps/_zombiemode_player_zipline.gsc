@@ -11,7 +11,6 @@ main() {
   precache_zipline_assets();
   init_player_ziplines();
 }
-
 #using_animtree("zombie_coast");
 precache_zipline_assets() {
   precachemodel("viewmodel_hands_no_model");
@@ -21,7 +20,6 @@ precache_zipline_assets() {
   level.zipline_anims["zipline_loop"] = % pb_zombie_zipline_loop;
   level.zipline_animtree = #animtree;
 }
-
 init_player_ziplines() {
   zipline_vehicles = getEntArray("zipline_vehicles", "script_noteworthy");
   zipline_trigs = getEntArray("player_zipline", "targetname");
@@ -30,7 +28,6 @@ init_player_ziplines() {
   players = get_players();
   array_thread(players, ::jump_button_monitor);
 }
-
 monitor_player_zipline(zipline_vehicles) {
   zip_path = self.target;
   targets = getEntArray(self.target, "targetname");
@@ -63,7 +60,7 @@ monitor_player_zipline(zipline_vehicles) {
   enemyoverride[1] = poi;
   while(1) {
     self waittill("trigger", who);
-    if(!isplayer(who)) {
+    if(!isPlayer(who)) {
       if(isDefined(who.is_ziplining)) {
         continue;
       }
@@ -111,15 +108,13 @@ monitor_player_zipline(zipline_vehicles) {
     }
   }
 }
-
 wait_to_end_looper() {
   self endon("death");
   self waittill("zombie_end_traverse");
   if(isDefined(self)) {
-    self stopLoopSound(1);
+    self StopLoopSound(1);
   }
 }
-
 wait_for_player_to_disconnect(followers) {
   self endon("exit_zipline");
   self waittill("disconnect");
@@ -130,7 +125,6 @@ wait_for_player_to_disconnect(followers) {
     }
   }
 }
-
 wait_for_player_exit_zipline(followers) {
   self endon("disconnect");
   self endon("death");
@@ -144,7 +138,6 @@ wait_for_player_exit_zipline(followers) {
     }
   }
 }
-
 wait_for_human_zombie_exit_zipline(followers) {
   self endon("death");
   while(is_true(self.is_traversing)) {
@@ -160,7 +153,6 @@ wait_for_human_zombie_exit_zipline(followers) {
     }
   }
 }
-
 reset_followers_on_death(followers) {
   self endon("zombie_end_traverse");
   self waittill("death");
@@ -173,7 +165,6 @@ reset_followers_on_death(followers) {
     }
   }
 }
-
 is_ok_to_zipline(zip_path) {
   if(self maps\_laststand::player_is_in_laststand()) {
     return false;
@@ -192,7 +183,6 @@ is_ok_to_zipline(zip_path) {
   }
   return false;
 }
-
 do_player_zipline(vehicle, zip_path, zip_trig) {
   self endon("disconnect");
   vehicle thread zipline_player_death_disconnect_failsafe(self);
@@ -246,21 +236,18 @@ do_player_zipline(vehicle, zip_path, zip_trig) {
   wait(2);
   self.is_ziplining = undefined;
 }
-
 force_deletion_of_soundent(player, vehicle) {
   vehicle endon("reached_end_node");
   vehicle endon("player_unlinked");
   player waittill_any("death", "disconnect");
   self Delete();
 }
-
 zipline_player_death_disconnect_failsafe(player) {
   self endon("player_unlinked");
   player waittill_any("death", "disconnect");
   self unlink();
   self.in_use = undefined;
 }
-
 player_exit_zipline(vehicle, zip_trig) {
   vehicle.in_use = undefined;
   vehicle notify("player_unlinked");
@@ -288,7 +275,6 @@ player_exit_zipline(vehicle, zip_trig) {
   self decrement_is_drinking();
   self allowmelee(true);
 }
-
 move_to_safe_landing_spot(zip_trig, vehicle, zipliner) {
   landing_spots = getstructarray(zip_trig.target, "targetname");
   if(landing_spots.size < 1) {
@@ -305,7 +291,6 @@ move_to_safe_landing_spot(zip_trig, vehicle, zipliner) {
     wait(.05);
   }
 }
-
 zipliner_can_land_here(spot, zipliner) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -318,7 +303,6 @@ zipliner_can_land_here(spot, zipliner) {
   }
   return true;
 }
-
 player_enter_zipline(vehicle, path_start) {
   self thread zombie_zipline_intersect_monitor();
   self setloweredweapon(1);
@@ -344,10 +328,9 @@ player_enter_zipline(vehicle, path_start) {
     self allowprone(false);
     self allowads(false);
   }
-  self hide();
+  self Hide();
   wait_network_frame();
 }
-
 monitor_perk_on_zipline() {
   self endon("disconnect");
   while(isDefined(self.perk_purchased)) {
@@ -363,7 +346,6 @@ monitor_perk_on_zipline() {
   self allowsprint(false);
   self setviewmodel("viewmodel_hands_no_model");
 }
-
 zombie_zipline_intersect_monitor() {
   self endon("exit_zipline");
   self endon("disconnect");
@@ -391,7 +373,6 @@ zombie_zipline_intersect_monitor() {
     wait(.05);
   }
 }
-
 get_zipline_vehicle(vehicles) {
   for(i = 0; i < vehicles.size; i++) {
     if(!isDefined(vehicles[i].in_use)) {
@@ -401,7 +382,6 @@ get_zipline_vehicle(vehicles) {
   }
   return undefined;
 }
-
 get_zipline_end_node(start_path) {
   start_node = getvehiclenode(start_path, "targetname");
   while(1) {
@@ -415,7 +395,6 @@ get_zipline_end_node(start_path) {
     }
   }
 }
-
 flag_wait_any_array(flag_array) {
   flag_activated = false;
   while(!flag_activated) {
@@ -427,7 +406,6 @@ flag_wait_any_array(flag_array) {
     wait(.1);
   }
 }
-
 jump_button_monitor() {
   level endon("intermission");
   self endon("disconnect");
@@ -438,7 +416,6 @@ jump_button_monitor() {
     wait(.1);
   }
 }
-
 move_delete_zipline_gate() {
   self notsolid();
   org = self.origin + (0, 0, 250);
@@ -453,7 +430,7 @@ move_delete_zipline_gate() {
     wait(time - 0.05);
   }
   time = 1;
-  self moveTo(org, time, time * 0.5);
+  self MoveTo(org, time, time * 0.5);
   self RotateTo(self.angles + (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)), time * 0.75);
   self waittill("movedone");
   playsoundatposition("zmb_zombie_spawn", self.origin);

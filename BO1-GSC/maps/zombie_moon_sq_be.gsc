@@ -35,7 +35,6 @@ init() {
   declare_sidequest_stage("be", "stage_one", ::init_stage_1, ::stage_logic_1, ::exit_stage_1);
   declare_sidequest_stage("be", "stage_two", ::init_stage_2, ::stage_logic_2, ::exit_stage_2);
 }
-
 init_stage_2() {}
 stage_logic_2() {
   org = level._be.origin;
@@ -72,7 +71,6 @@ stage_logic_2() {
   level._be = undefined;
   stage_completed("be", "stage_two");
 }
-
 wait_for_close_player() {
   level endon("be2_validation");
   self endon("death");
@@ -88,7 +86,6 @@ wait_for_close_player() {
     wait(.5);
   }
 }
-
 bhb_teleport_loc_check(grenade, model, info) {
   if(isDefined(level.teleport_target_trigger) && grenade IsTouching(level.teleport_target_trigger)) {
     level._be SetClientFlag(level._SCRIPTMOVER_CLIENT_FLAG_BLACKHOLE);
@@ -98,19 +95,18 @@ bhb_teleport_loc_check(grenade, model, info) {
   }
   return false;
 }
-
 teleport_target(grenade, model) {
   level.teleport_target_trigger Delete();
   level.teleport_target_trigger = undefined;
   wait(1.0);
   time = 3.0;
-  model moveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
+  model MoveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
   wait(time);
   teleport_targets = getEntArray("vista_rocket", "targetname");
-  model hide();
+  model Hide();
   playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
   wait(0.5);
-  model stopLoopSound(1);
+  model StopLoopSound(1);
   wait(0.5);
   for(i = 0; i < teleport_targets.size; i++) {
     playFX(level._effect["black_hole_bomb_event_horizon"], teleport_targets[i].origin + (0, 0, 2500));
@@ -119,22 +115,18 @@ teleport_target(grenade, model) {
   wait(2.0);
   level notify("be2_tp_done");
 }
-
 be2_validation(position) {
-  if(distanceSquared(level._be_pos, position) < (164 * 164)) {
+  if(DistanceSquared(level._be_pos, position) < (164 * 164)) {
     level notify("be2_validation");
   }
   return false;
 }
-
 exit_stage_2(success) {
   flag_set("be2");
 }
-
 init_stage_1() {
   level thread moon_be_start_capture();
 }
-
 stage_logic_1() {
   flag_wait("complete_be_1");
   level._be playSound("evt_be_insert");
@@ -142,7 +134,6 @@ stage_logic_1() {
   level thread play_vox_on_closest_player(6);
   stage_completed("be", "stage_one");
 }
-
 exit_stage_1(success) {}
 moon_be_start_capture() {
   level endon("end_game");
@@ -154,7 +145,6 @@ moon_be_start_capture() {
   }
   level thread moon_be_activate();
 }
-
 moon_be_activate() {
   start = getstruct("struct_be_start", "targetname");
   road_start = GetVehicleNode("vs_stage_1a", "targetname");
@@ -185,7 +175,7 @@ moon_be_activate() {
   start = false;
   while(!start) {
     d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-    if(IsPlayer(attacker) && moon_be_move(road_start.script_string)) {
+    if(isPlayer(attacker) && moon_be_move(road_start.script_string)) {
       if(moon_be_move(dmg_type)) {
         level._be playSound("evt_sq_blackegg_activate");
         attacker thread play_be_hit_vox(1);
@@ -198,7 +188,6 @@ moon_be_activate() {
   level._be_vehicle thread moon_be_think();
   level._be_vehicle thread maps\_vehicle::gopath();
 }
-
 moon_be_think() {
   self endon("death");
   self endon("finished_path");
@@ -227,7 +216,7 @@ moon_be_think() {
           motivation = true;
         } else {
           d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-          if(IsPlayer(attacker) && moon_be_move(node.script_string)) {
+          if(isPlayer(attacker) && moon_be_move(node.script_string)) {
             motivation = moon_be_move(dmg_type);
             vox_dude = attacker;
           }
@@ -307,7 +296,7 @@ moon_be_think() {
             motivation = true;
           } else {
             d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-            if(IsPlayer(attacker) && moon_be_move(next_chain_start.script_string)) {
+            if(isPlayer(attacker) && moon_be_move(next_chain_start.script_string)) {
               motivation = moon_be_move(dmg_type);
               vox_dude = attacker;
             }
@@ -333,7 +322,6 @@ moon_be_think() {
     }
   }
 }
-
 moon_be_move(motivation_array) {
   if(!isDefined(motivation_array)) {
     return false;
@@ -362,7 +350,6 @@ moon_be_move(motivation_array) {
     return false;
   }
 }
-
 get_closest_index_2d(org, array, dist) {
   if(!isDefined(dist)) {
     dist = 9999999;
@@ -381,7 +368,6 @@ get_closest_index_2d(org, array, dist) {
   }
   return index;
 }
-
 moon_be_anim_swap(int_anim) {
   self endon("death");
   self._be_model StopAnimScripted();
@@ -391,23 +377,20 @@ moon_be_anim_swap(int_anim) {
     self._be_org_anim thread maps\_anim::anim_loop_aligned(self._be_model, "to_the_right", "tag_origin_animate_jnt");
   }
 }
-
 moon_be_stop_anim() {
   self endon("death");
   self._be_model StopAnimScripted();
 }
-
 moon_be_resume_anim() {
   self endon("death");
   self endon("be_stage_one_over");
-  rand = randomInt(1);
+  rand = RandomInt(1);
   if(rand) {
     self._be_org_anim thread maps\_anim::anim_loop_aligned(self._be_model, "to_the_left", "tag_origin_animate_jnt");
   } else {
     self._be_org_anim thread maps\_anim::anim_loop_aligned(self._be_model, "to_the_right", "tag_origin_animate_jnt");
   }
 }
-
 waittill_player_is_close() {
   while(1) {
     players = get_players();
@@ -420,14 +403,12 @@ waittill_player_is_close() {
     wait(.5);
   }
 }
-
 play_be_hit_vox(num) {
   if(num > 4) {
     num -= 4;
   }
   self thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest2", undefined, num);
 }
-
 play_vox_on_closest_player(num) {
   player = get_closest_player(level._be.origin);
   player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest2", undefined, num);

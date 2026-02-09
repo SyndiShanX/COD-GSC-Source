@@ -14,12 +14,10 @@ init_traps() {
   level pentagon_fix_electric_trap_init();
   level quad_first_drop_fx_init();
 }
-
 init_flags() {
   flag_init("trap_elevator");
   flag_init("trap_quickrevive");
 }
-
 electric_trap_battery_init() {
   trap_batteries = getEntArray("trigger_trap_piece", "targetname");
   players = get_players();
@@ -28,7 +26,6 @@ electric_trap_battery_init() {
   }
   array_thread(trap_batteries, ::pickup_trap_piece);
 }
-
 pickup_trap_piece() {
   self endon("_piece_placed");
   if(!isDefined(self.target)) {
@@ -61,7 +58,6 @@ pickup_trap_piece() {
     }
   }
 }
-
 spawn_trap_piece() {
   spawn_struct = getstruct(self.target, "targetname");
   trap_model = spawn("script_model", spawn_struct.origin);
@@ -69,7 +65,6 @@ spawn_trap_piece() {
   trap_model.angles = spawn_struct.angles;
   return trap_model;
 }
-
 pentagon_hide_piece_triggers() {
   trap_piece_triggers = getEntArray("trigger_trap_piece", "targetname");
   for(i = 0; i < trap_piece_triggers.size; i++) {
@@ -78,14 +73,12 @@ pentagon_hide_piece_triggers() {
     }
   }
 }
-
 pentagon_fix_electric_trap_init() {
   fix_trigger_array = getEntArray("trigger_battery_trap_fix", "targetname");
   if(isDefined(fix_trigger_array)) {
     array_thread(fix_trigger_array, ::pentagon_fix_electric_trap);
   }
 }
-
 pentagon_fix_electric_trap() {
   if(!isDefined(self.script_flag_wait)) {
     PrintLn("trap at " + self.origin + " missing script flag");
@@ -99,7 +92,7 @@ pentagon_fix_electric_trap() {
   self UseTriggerRequireLookAt();
   trap_trigger = getEntArray(self.script_flag_wait, "targetname");
   array_thread(trap_trigger, ::electric_hallway_trap_piece_hide, self.script_flag_wait);
-  trap_cover = getEnt(self.script_string, "targetname");
+  trap_cover = GetEnt(self.script_string, "targetname");
   level thread pentagon_trap_cover_remove(trap_cover, self.script_flag_wait);
   while(!flag(self.script_flag_wait)) {
     self waittill("trigger", who);
@@ -119,7 +112,6 @@ pentagon_fix_electric_trap() {
   self SetHintString("");
   self trigger_off();
 }
-
 pentagon_show_piece_triggers() {
   trap_piece_triggers = getEntArray("trigger_trap_piece", "targetname");
   for(i = 0; i < trap_piece_triggers.size; i++) {
@@ -128,7 +120,6 @@ pentagon_show_piece_triggers() {
     }
   }
 }
-
 trap_piece_deliver_clean_up(ent_trig) {
   self endon("death");
   self endon("disconnect");
@@ -136,7 +127,6 @@ trap_piece_deliver_clean_up(ent_trig) {
   ent_trig notify("_piece_placed");
   ent_trig Delete();
 }
-
 electric_hallway_trap_piece_hide(str_flag) {
   if(!isDefined(str_flag)) {
     return;
@@ -147,7 +137,6 @@ electric_hallway_trap_piece_hide(str_flag) {
     self trigger_off();
   }
 }
-
 electric_hallway_trap_piece_show(str_flag) {
   if(!isDefined(str_flag)) {
     return;
@@ -155,7 +144,6 @@ electric_hallway_trap_piece_show(str_flag) {
   flag_wait(str_flag);
   self trigger_on();
 }
-
 pentagon_trap_cover_remove(ent_cover, str_flag) {
   flag_wait(str_flag);
   ent_cover NotSolid();
@@ -166,12 +154,11 @@ pentagon_trap_cover_remove(ent_cover, str_flag) {
   ent_cover RotateRoll((360 * RandomIntRange(4, 10)), 1.2, 0.6, 0);
   playFXOnTag(level._effect["poltergeist"], ent_cover.fx, "tag_origin");
   ent_cover waittill("rotatedone");
-  ent_cover hide();
-  ent_cover.fx hide();
+  ent_cover Hide();
+  ent_cover.fx Hide();
   ent_cover.fx Delete();
   ent_cover Delete();
 }
-
 pentagon_have_battery_hud() {
   self.powercellHud = create_simple_hud(self);
   self.powercellHud.foreground = true;
@@ -187,26 +174,22 @@ pentagon_have_battery_hud() {
   self.powercellHud setshader("zom_icon_trap_switch_handle", 32, 32);
   self thread pentagon_remove_hud_on_death();
 }
-
 pentagon_remove_battery_hud() {
   if(isDefined(self.powercellHud)) {
     self.powercellHud Destroy();
   }
 }
-
 pentagon_remove_hud_on_death() {
   self endon("trap_piece_returned");
   self waittill_either("death", "_zombie_game_over");
   self thread pentagon_remove_battery_hud();
 }
-
 quad_first_drop_fx_init() {
   vent_drop_triggers = getEntArray("trigger_quad_intro", "targetname");
   for(i = 0; i < vent_drop_triggers.size; i++) {
     level thread quad_first_drop_fx(vent_drop_triggers[i]);
   }
 }
-
 quad_first_drop_fx(ent_trigger) {
   if(!isDefined(ent_trigger.script_int)) {
     return;

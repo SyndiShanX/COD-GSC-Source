@@ -8,7 +8,6 @@ createeffect(var_0, var_1) {
 
   if(!isDefined(level.createfxent)) {
     level.createfxent = [];
-
   }
   level.createfxent[level.createfxent.size] = var_2;
   var_2.v = [];
@@ -23,7 +22,6 @@ createeffect(var_0, var_1) {
 
     if(!isDefined(var_3)) {
       var_3 = [];
-
     }
     var_3[var_3.size] = var_2;
     level.createfxbyfxid[var_1] = var_3;
@@ -55,7 +53,6 @@ getintervalsounddelaymaxdefault() {
 add_effect(var_0, var_1) {
   if(!isDefined(level._effect)) {
     level._effect = [];
-
   }
   level._effect[var_0] = loadfx(var_1);
 }
@@ -65,7 +62,6 @@ createloopsound() {
 
   if(!isDefined(level.createfxent)) {
     level.createfxent = [];
-
   }
   level.createfxent[level.createfxent.size] = var_0;
   var_0.v = [];
@@ -76,9 +72,8 @@ createloopsound() {
   var_0.v["origin"] = (0, 0, 0);
   var_0.v["server_culled"] = 1;
 
-  if(getdvar("serverCulledSounds") != "1") {
+  if(getDvar("serverCulledSounds") != "1") {
     var_0.v["server_culled"] = 0;
-
   }
   var_0.drawn = 1;
   return var_0;
@@ -97,7 +92,6 @@ createnewexploder() {
 
   if(!isDefined(level.createfxent)) {
     level.createfxent = [];
-
   }
   level.createfxent[level.createfxent.size] = var_0;
   var_0.v = [];
@@ -137,13 +131,11 @@ createfx_common() {
     hack_start("painter_mp");
   } else {
     hack_start("painter");
-
   }
   common_scripts\utility::flag_init("createfx_saving");
 
   if(!isDefined(level.createfx)) {
     level.createfx = [];
-
   }
   level.createfx_loopcounter = 0;
   var_0 = getEntArray();
@@ -158,13 +150,11 @@ createfx_common() {
 
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
     var_4[var_5] delete();
-
   }
   var_4 = getEntArray("trigger_radius", "classname");
 
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
     var_4[var_5] delete();
-
   }
   level notify("createfx_common_done");
 }
@@ -175,11 +165,9 @@ createfxlogic() {
 
   if(!isDefined(level._effect)) {
     level._effect = [];
-
   }
-  if(getdvar("createfx_map") == "") {} else if(getdvar("createfx_map") == common_scripts\utility::get_template_level()) {
+  if(getDvar("createfx_map") == "") {} else if(getDvar("createfx_map") == common_scripts\utility::get_template_level()) {
     [[level.func_position_player]]();
-
   }
   level.createfxhudelements = [];
   level.createfx_hudelements = 30;
@@ -226,7 +214,6 @@ createfxlogic() {
 
       if(var_5 > 0) {
         var_6.color = (0, 0, 0);
-
       }
       var_4[var_4.size] = var_6;
     }
@@ -249,7 +236,6 @@ createfxlogic() {
 
     if(var_5 > 0) {
       var_6.color = (0, 0, 0);
-
     }
     var_4[var_4.size] = var_6;
   }
@@ -277,7 +263,6 @@ createfxlogic() {
 
   if(!level.mp_createfx) {
     var_8 = level.player.origin;
-
   }
   var_9 = [];
   var_9["loopfx"]["selected"] = (1, 1, 0.2);
@@ -338,25 +323,20 @@ createfxlogic() {
 
     if(button_is_clicked("shift", "BUTTON_X")) {
       var_7 = !var_7;
-
     }
     if(button_is_clicked("F5")) {}
 
     if(getdvarint("scr_createfx_dump")) {
       generate_fx_log();
-
     }
     if(button_is_clicked("F2")) {
       toggle_createfx_drawing();
-
     }
     if(button_is_clicked("ins")) {
       insert_effect();
-
     }
     if(button_is_clicked("del")) {
       delete_pressed();
-
     }
     if(button_is_clicked("end", "l")) {
       drop_selection_to_ground();
@@ -365,11 +345,9 @@ createfxlogic() {
 
     if(button_is_clicked("escape")) {
       clear_settable_fx();
-
     }
     if(button_is_clicked("space")) {
       set_off_exploders();
-
     }
     if(button_is_clicked("g")) {
       select_all_exploders_of_currently_selected("exploder");
@@ -389,16 +367,13 @@ createfxlogic() {
 
     if(button_is_clicked("BUTTON_LSTICK")) {
       copy_ents();
-
     }
     if(button_is_clicked("BUTTON_RSTICK")) {
       paste_ents();
-
     }
     if(var_21) {
       if(button_is_clicked("c")) {
         copy_ents();
-
       }
       if(button_is_clicked("v")) {
         paste_ents();
@@ -407,7 +382,6 @@ createfxlogic() {
 
     if(isDefined(level.selected_fx_option_index)) {
       common_scripts\_createfxmenu::menu_fx_option_set();
-
     }
     for(var_3 = 0; var_3 < level.createfxent.size; var_3++) {
       var_12 = level.createfxent[var_3];
@@ -428,7 +402,6 @@ createfxlogic() {
         if(var_10 != var_20) {
           if(!ent_is_selected(var_10)) {
             var_10 thread entity_highlight_disable();
-
           }
           if(!ent_is_selected(var_20)) {
             var_20 thread entity_highlight_enable();
@@ -446,19 +419,15 @@ createfxlogic() {
 
       if(button_is_clicked("enter", "p")) {
         reset_axis_of_selected_ents();
-
       }
       if(button_is_clicked("v")) {
         copy_angles_of_selected_ents();
-
       }
       for(var_3 = 0; var_3 < level.selected_fx_ents.size; var_3++) {
         level.selected_fx_ents[var_3] draw_axis();
-
       }
       if(level.selectedrotate_pitch != 0 || level.selectedrotate_yaw != 0 || level.selectedrotate_roll != 0) {
         var_14 = 1;
-
       }
       wait 0.05;
     } else {
@@ -475,18 +444,15 @@ createfxlogic() {
 
       if(distance((0, 0, 0), var_26) > 0) {
         var_14 = 1;
-
       }
       wait 0.05;
     }
 
     if(var_14) {
       update_selected_entities();
-
     }
     if(!level.mp_createfx) {
       var_8 = [[level.func_position_player_get]](var_8);
-
     }
     var_10 = var_20;
 
@@ -536,7 +502,6 @@ last_selected_entity_has_changed(var_0) {
     }
   } else {
     return common_scripts\_createfxmenu::entities_are_selected();
-
   }
   return var_0 != level.selected_fx_ents[level.selected_fx_ents.size - 1];
 }
@@ -614,7 +579,6 @@ rotate_over_time(var_0, var_1) {
       var_0 addyaw(level.selectedrotate_yaw);
     } else {
       var_0 addroll(level.selectedrotate_roll);
-
     }
     wait 0.05;
     var_0 draw_axis();
@@ -672,7 +636,6 @@ delete_selection() {
     if(ent_is_selected(var_2)) {
       if(isDefined(var_2.looper)) {
         var_2.looper delete();
-
       }
       var_2 notify("stop_loop");
       continue;
@@ -814,7 +777,6 @@ paste_ents() {
 
   for(var_0 = 0; var_0 < level.stored_ents.size; var_0++) {
     add_and_select_entity(level.stored_ents[var_0]);
-
   }
   move_selection_to_cursor();
   update_selected_entities();
@@ -832,7 +794,6 @@ get_center_of_array(var_0) {
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1 = (var_1[0] + var_0[var_2].v["origin"][0], var_1[1] + var_0[var_2].v["origin"][1], var_1[2] + var_0[var_2].v["origin"][2]);
-
   }
   return (var_1[0] / var_0.size, var_1[1] / var_0.size, var_1[2] / var_0.size);
 }
@@ -849,11 +810,9 @@ ent_draw_axis() {
 rotation_is_occuring() {
   if(level.selectedrotate_roll != 0) {
     return 1;
-
   }
   if(level.selectedrotate_pitch != 0) {
     return 1;
-
   }
   return level.selectedrotate_yaw != 0;
 }
@@ -952,7 +911,6 @@ manipulate_createfx_ents(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(var_0) && var_7 == var_0) {
       if(!common_scripts\_createfxmenu::entities_are_selected()) {
         common_scripts\_createfxmenu::display_fx_info(var_7);
-
       }
       if(var_1) {
         var_9 = index_is_selected(var_6);
@@ -972,7 +930,6 @@ manipulate_createfx_ents(var_0, var_1, var_2, var_3, var_4, var_5) {
         if(var_3) {
           if(level.createfx_selecting) {
             select_entity(var_6, var_7);
-
           }
           if(!level.createfx_selecting) {
             deselect_entity(var_6, var_7);
@@ -984,11 +941,9 @@ manipulate_createfx_ents(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(index_is_selected(var_6)) {
         var_11 = "selected";
-
       }
       if(var_7.textalpha > 0) {
         var_12 = var_5 * (var_7.v["fxid"].size * -2.93 * var_8);
-
       }
       continue;
     }
@@ -997,7 +952,6 @@ manipulate_createfx_ents(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(index_is_selected(var_6)) {
       var_11 = "selected";
-
     }
     if(var_7.textalpha > 0) {
       var_12 = var_5 * (var_7.v["fxid"].size * -2.93);
@@ -1059,7 +1013,6 @@ select_entity(var_0, var_1) {
 ent_is_highlighted(var_0) {
   if(!isDefined(level.fx_highlightedent)) {
     return 0;
-
   }
   return var_0 == level.fx_highlightedent;
 }
@@ -1074,7 +1027,6 @@ deselect_entity(var_0, var_1) {
 
   if(!ent_is_highlighted(var_1)) {
     var_1 thread entity_highlight_disable();
-
   }
   var_2 = [];
 
@@ -1137,7 +1089,6 @@ clear_fx_hudelements() {
 set_fx_hudelement(var_0) {
   for(var_1 = 0; var_1 < 1; var_1++) {
     level.createfxhudelements[level.fxhudelements][var_1] settext(var_0);
-
   }
   level.fxhudelements++;
 }
@@ -1152,7 +1103,6 @@ createfx_centerprint_thread(var_0) {
 
   for(var_1 = 0; var_1 < 5; var_1++) {
     level.createfx_centerprint[var_1] settext(var_0);
-
   }
   wait 4.5;
 
@@ -1168,11 +1118,9 @@ buttondown(var_0, var_1) {
 buttonpressed_internal(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(kb_locked(var_0)) {
     return 0;
-
   }
   return level.player buttonpressed(var_0);
 }
@@ -1189,50 +1137,41 @@ get_selected_move_vector() {
   if(buttondown("kp_uparrow", "DPAD_UP")) {
     if(level.selectedmove_forward < 0) {
       level.selectedmove_forward = 0;
-
     }
     level.selectedmove_forward = level.selectedmove_forward + var_6;
   } else if(buttondown("kp_downarrow", "DPAD_DOWN")) {
     if(level.selectedmove_forward > 0) {
       level.selectedmove_forward = 0;
-
     }
     level.selectedmove_forward = level.selectedmove_forward - var_6;
   } else {
     level.selectedmove_forward = 0;
-
   }
   if(buttondown("kp_rightarrow", "DPAD_RIGHT")) {
     if(level.selectedmove_right < 0) {
       level.selectedmove_right = 0;
-
     }
     level.selectedmove_right = level.selectedmove_right + var_6;
   } else if(buttondown("kp_leftarrow", "DPAD_LEFT")) {
     if(level.selectedmove_right > 0) {
       level.selectedmove_right = 0;
-
     }
     level.selectedmove_right = level.selectedmove_right - var_6;
   } else {
     level.selectedmove_right = 0;
-
   }
   if(buttondown("BUTTON_Y")) {
     if(level.selectedmove_up < 0) {
       level.selectedmove_up = 0;
-
     }
     level.selectedmove_up = level.selectedmove_up + var_6;
   } else if(buttondown("BUTTON_B")) {
     if(level.selectedmove_up > 0) {
       level.selectedmove_up = 0;
-
     }
     level.selectedmove_up = level.selectedmove_up - var_6;
   } else {
     level.selectedmove_up = 0;
-
   }
   var_7 = (0, 0, 0);
   var_7 = var_7 + var_3 * level.selectedmove_forward;
@@ -1294,7 +1233,6 @@ process_button_held_and_clicked() {
 locked(var_0) {
   if(isDefined(level.createfx_lockedlist[var_0])) {
     return 0;
-
   }
   return kb_locked(var_0);
 }
@@ -1328,45 +1266,37 @@ set_anglemod_move_vector() {
   if(buttondown("kp_uparrow", "DPAD_UP")) {
     if(level.selectedrotate_pitch < 0) {
       level.selectedrotate_pitch = 0;
-
     }
     level.selectedrotate_pitch = level.selectedrotate_pitch + var_0;
   } else if(buttondown("kp_downarrow", "DPAD_DOWN")) {
     if(level.selectedrotate_pitch > 0) {
       level.selectedrotate_pitch = 0;
-
     }
     level.selectedrotate_pitch = level.selectedrotate_pitch - var_0;
   } else {
     level.selectedrotate_pitch = 0;
-
   }
   if(buttondown("kp_leftarrow", "DPAD_LEFT")) {
     if(level.selectedrotate_yaw < 0) {
       level.selectedrotate_yaw = 0;
-
     }
     level.selectedrotate_yaw = level.selectedrotate_yaw + var_0;
   } else if(buttondown("kp_rightarrow", "DPAD_RIGHT")) {
     if(level.selectedrotate_yaw > 0) {
       level.selectedrotate_yaw = 0;
-
     }
     level.selectedrotate_yaw = level.selectedrotate_yaw - var_0;
   } else {
     level.selectedrotate_yaw = 0;
-
   }
   if(buttondown("BUTTON_Y")) {
     if(level.selectedrotate_roll < 0) {
       level.selectedrotate_roll = 0;
-
     }
     level.selectedrotate_roll = level.selectedrotate_roll + var_0;
   } else if(buttondown("BUTTON_B")) {
     if(level.selectedrotate_roll > 0) {
       level.selectedrotate_roll = 0;
-
     }
     level.selectedrotate_roll = level.selectedrotate_roll - var_0;
   } else {
@@ -1375,15 +1305,15 @@ set_anglemod_move_vector() {
 }
 
 cfxprintlnstart() {
-  common_scripts\utility::fileprint_launcher_start_file();
+  common_scripts\utility:: fileprint_launcher_start_file();
 }
 
 cfxprintln(var_0, var_1) {
-  common_scripts\utility::fileprint_launcher(var_1);
+  common_scripts\utility:: fileprint_launcher(var_1);
 
-  if(var_0 == -1) {
-    return;
-  }
+    if(var_0 == -1) {
+      return;
+    }
 }
 
 cfxprintlnend(var_0, var_1, var_2) {
@@ -1391,15 +1321,13 @@ cfxprintlnend(var_0, var_1, var_2) {
 
   if(var_2 != "" || var_1) {
     var_3 = 0;
-
   }
   var_4 = common_scripts\utility::get_template_level() + var_2 + "_fx.gsc";
 
   if(var_1) {
     var_4 = "backup.gsc";
-
   }
-  common_scripts\utility::fileprint_launcher_end_file("/share/raw/maps/createfx/" + var_4, var_3);
+  common_scripts\utility:: fileprint_launcher_end_file("/share/raw/maps/createfx/" + var_4, var_3);
 }
 
 update_selected_entities() {
@@ -1412,7 +1340,6 @@ update_selected_entities() {
 hack_start(var_0) {
   if(!isDefined(var_0)) {
     var_0 = "painter_mp";
-
   }
   precachemenu(var_0);
   wait 0.05;
@@ -1466,7 +1393,6 @@ createfx_orgranize_array() {
 stop_fx_looper() {
   if(isDefined(self.looper)) {
     self.looper delete();
-
   }
   stop_loopsound();
 }
@@ -1497,15 +1423,12 @@ restart_fx_looper() {
 
   if(self.v["type"] == "loopfx") {
     common_scripts\_fx::create_looper();
-
   }
   if(self.v["type"] == "oneshotfx") {
     common_scripts\_fx::create_triggerfx();
-
   }
   if(self.v["type"] == "soundfx") {
     common_scripts\_fx::create_loopsound();
-
   }
   if(self.v["type"] == "soundfx_interval") {
     common_scripts\_fx::create_interval_sound();
@@ -1553,7 +1476,6 @@ process_fx_rotater() {
       var_2 addyaw(level.selectedrotate_yaw);
     } else {
       var_2 addroll(level.selectedrotate_roll);
-
     }
     var_4.v["angles"] = var_2.angles;
     var_2 delete();

@@ -28,7 +28,6 @@ main() {
   self.gibSpawn4 = "c_zom_moon_tech_body_g_llegspawn";
   self.gibSpawnTag4 = "J_Knee_LE";
 }
-
 precache() {
   precacheModel("c_zom_moon_tech_body_shirtguts_2");
   codescripts\character::precacheModelArray(xmodelalias\c_zom_moon_heads_alias::main());

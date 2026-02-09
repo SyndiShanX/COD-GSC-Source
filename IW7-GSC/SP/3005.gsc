@@ -349,7 +349,7 @@ func_5DCE(var_0) {
 
   for(;;) {
     self waittill("damage", var_5, var_6, var_7, var_8, var_7, var_7, var_7, var_9, var_7, var_10);
-    if((isDefined(var_6) && isplayer(var_6)) || isDefined(var_6) && isDefined(level.var_A351) && var_6 == level.var_A351) {
+    if((isDefined(var_6) && isPlayer(var_6)) || isDefined(var_6) && isDefined(level.var_A351) && var_6 == level.var_A351) {
       func_D973(var_9, var_5, var_8);
     }
   }

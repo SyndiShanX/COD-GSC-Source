@@ -15,7 +15,6 @@ main() {
     default:
 
       assertmsg("Traversal: 'mantle_window_dive_36' doesn't support entity type '" + self.type + "'.");
-
   }
 }
 

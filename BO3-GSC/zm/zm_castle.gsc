@@ -227,7 +227,7 @@ function main() {
   level thread intro_screen();
   level thread setupmusic();
   level.zone_occupied_func = &function_1ba33179;
-  setdvar("hkai_pathfindIterationLimit", 1000);
+  setDvar("hkai_pathfindIterationLimit", 1000);
   level thread function_287ae5ec();
   zm_castle_ffotd::main_end();
 }
@@ -297,9 +297,9 @@ function function_e0836624() {
   level endon("hash_a3369c1f");
   while(true) {
     level waittill("host_migration_end");
-    setdvar("doublejump_enabled", 1);
-    setdvar("playerEnergy_enabled", 1);
-    setdvar("wallrun_enabled", 1);
+    setDvar("doublejump_enabled", 1);
+    setDvar("playerEnergy_enabled", 1);
+    setDvar("wallrun_enabled", 1);
   }
 }
 
@@ -467,7 +467,7 @@ function setupmusic() {
 function function_44dc3fb4() {
   while(true) {
     self waittill("trigger", trigplayer);
-    if(isplayer(trigplayer)) {
+    if(isPlayer(trigplayer)) {
       if(self.script_sound == "richtofen") {
         return;
       }
@@ -533,7 +533,7 @@ function function_798c5d1a() {
 
 function enemy_location_override(ai_zombie, ai_enemy) {
   aiprofile_beginentry("castle-enemy_location_override");
-  if(isplayer(ai_enemy) && ai_enemy zm_zonemgr::entity_in_zone("zone_undercroft") && (ai_enemy iswallrunning() || !ai_enemy isonground())) {
+  if(isPlayer(ai_enemy) && ai_enemy zm_zonemgr::entity_in_zone("zone_undercroft") && (ai_enemy iswallrunning() || !ai_enemy isonground())) {
     if(!isDefined(ai_enemy.v_ground_pos)) {
       ai_enemy thread function_d578bf1a();
     }

@@ -6,8 +6,8 @@
 #include maps\_utility;
 
 main() {
-  if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "")
-    setdvar("cobrapilot_surface_to_air_missiles_enabled", "1");
+  if(getDvar("cobrapilot_surface_to_air_missiles_enabled") == "")
+    setDvar("cobrapilot_surface_to_air_missiles_enabled", "1");
 
   self tryReload();
   self thread fireMissile();
@@ -52,7 +52,7 @@ turret_think() {
 
   self.attackRadius *= difficultyScaler;
 
-  if(getdvar("cobrapilot_debug") == "1")
+  if(getDvar("cobrapilot_debug") == "1")
     iprintln("surface-to-air missile range difficultyScaler = " + difficultyScaler);
 
   for(;;) {
@@ -87,7 +87,7 @@ turret_think() {
       continue;
     }
     // fire the missile and wait a while
-    if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "1") {
+    if(getDvar("cobrapilot_surface_to_air_missiles_enabled") == "1") {
       self notify("shoot_target", eTarget);
       self waittill("missile_fired", eMissile);
       if(isDefined(eMissile)) {
@@ -141,7 +141,7 @@ fireMissile() {
     eMissile = self fireWeapon(self.missileTags[self.missileLaunchNextTag], targetEnt, offset);
     assert(isDefined(eMissile));
 
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getDvar("cobrapilot_debug") == "1")
       level thread draw_missile_target_line(eMissile, targetEnt, offset);
 
     if(!isDefined(targetEnt.incomming_Missiles))

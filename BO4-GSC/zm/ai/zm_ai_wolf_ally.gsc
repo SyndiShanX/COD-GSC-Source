@@ -31,7 +31,6 @@ class class_b382833a {
     adjustmentstarted = 0;
     var_425c4c8b = 1;
   }
-
 }
 
 autoexec __init__system__() {
@@ -79,7 +78,6 @@ function_7728abc3() {
     self.var_594b7855 = 1;
 
     self thread function_6ca1cd82();
-
   }
 }
 
@@ -117,7 +115,6 @@ function_6ca1cd82(entity, player, duration, color) {
 
         if(isDefined(self.favoriteenemy)) {
           line(self.favoriteenemy getcentroid(), var_bf50a54d, (1, 1, 0));
-
         }
       }
     }
@@ -515,7 +512,7 @@ function_14a8c157(entity) {
       return false;
     }
 
-    if(isplayer(entity.enemy) && distancesq >= 100 * 100) {
+    if(isPlayer(entity.enemy) && distancesq >= 100 * 100) {
       if(entity.enemy issprinting()) {
         enemyvelocity = vectornormalize(entity.enemy getvelocity());
         var_7a61ad67 = vectornormalize(entity getvelocity());
@@ -574,7 +571,6 @@ function_26fcd34f(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       enemy_distance = distance(entity.origin, entity.enemy.origin);
 
       recordcircle(entity.enemy.origin, 8, (1, 0, 0), "<dev string:xea>");
-
     } else {
       entity.meleeinfo.var_cb28f380 = entity localtoworldcoords(var_e397f54c);
     }
@@ -585,7 +581,6 @@ function_26fcd34f(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     recordcircle(entity.meleeinfo.var_9bfa8497, 8, (0, 1, 0), "<dev string:xea>");
     recordcircle(animendpos, 8, (0, 1, 0), "<dev string:xea>");
     record3dtext("<dev string:xcc>" + distance, animendpos, (0, 1, 0), "<dev string:xea>");
-
   }
 }
 

@@ -21,7 +21,6 @@ onPlayerConnect() {
     level waittill("connected", player);
     player thread onPlayerSpawned();
     player.soflamAmmoUsed = 0;
-
   }
 }
 
@@ -81,7 +80,6 @@ watch_alien_soflam_usage() {
 
     wait(0.05);
   }
-
 }
 
 playLockSound() {
@@ -135,7 +133,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (300, 0, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -144,7 +141,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (0, 300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -153,7 +149,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (0, -300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -162,7 +157,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (300, 300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -171,7 +165,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (-300, 0, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -180,7 +173,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (-300, -300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -189,7 +181,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (300, -300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -295,5 +286,4 @@ update_soflam_ammocount() {
     if(!maps\mp\alien\_utility::is_true(self.has_special_weapon) && !maps\mp\alien\_utility::is_true(self.is_holding_deployable))
       self SwitchToWeapon(self GetWeaponsListPrimaries()[0]);
   }
-
 }

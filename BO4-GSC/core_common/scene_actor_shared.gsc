@@ -146,7 +146,6 @@ class csceneactor: csceneobject {
       }
     }
   }
-
 }
 
 class cscenefakeactor: csceneobject, csceneactor {
@@ -193,7 +192,6 @@ class cscenefakeactor: csceneobject, csceneactor {
       }
     }
   }
-
 }
 
 class cscenecompanion: csceneobject, csceneactor {
@@ -275,7 +273,6 @@ class cscenecompanion: csceneobject, csceneactor {
 
     csceneobject::_spawn();
   }
-
 }
 
 class cscenesharedcompanion: cscenecompanion, csceneobject, csceneactor {

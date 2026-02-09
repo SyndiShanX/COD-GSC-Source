@@ -10,16 +10,16 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_compact");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.10);
-  setdvar("r_lightGridContrast", 1);
-  setdvar("compassmaxrange", "1700");
-  setdvar("r_drawSun", 0);
-  setdvar("r_tessellation", 0);
-  setdvar("r_lodbiasrigid", -2000);
-  setdvar("r_lodbiasskinned", -2000);
-  setdvar("r_fog", 1);
-  setdvar("r_smodelinstancedthreshold", 0);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.10);
+  setDvar("r_lightGridContrast", 1);
+  setDvar("compassmaxrange", "1700");
+  setDvar("r_drawSun", 0);
+  setDvar("r_tessellation", 0);
+  setDvar("r_lodbiasrigid", -2000);
+  setDvar("r_lodbiasskinned", -2000);
+  setDvar("r_fog", 1);
+  setDvar("r_smodelinstancedthreshold", 0);
 
   ambientPlay("ambient_mp_compact");
 
@@ -30,33 +30,33 @@ main() {
 
   //level thread crusherControl();
 
-  setdvar("r_primaryLightUseTweaks", 1);
-  setdvar("r_primaryLightTweakDiffuseStrength", 2.71);
-  setdvar("r_primaryLightTweakSpecularStrength", 1);
+  setDvar("r_primaryLightUseTweaks", 1);
+  setDvar("r_primaryLightTweakDiffuseStrength", 2.71);
+  setDvar("r_primaryLightTweakSpecularStrength", 1);
 
-  setdvar("r_viewModelPrimaryLightUseTweaks", 1);
-  setdvar("r_viewModelPrimaryLightTweakDiffuseStrength", 2.71);
-  setdvar("r_viewModelPrimaryLightTweakSpecularStrength", 1);
+  setDvar("r_viewModelPrimaryLightUseTweaks", 1);
+  setDvar("r_viewModelPrimaryLightTweakDiffuseStrength", 2.71);
+  setDvar("r_viewModelPrimaryLightTweakSpecularStrength", 1);
 
-  setdvar("r_colorScaleUseTweaks", 1);
-  setdvar("r_diffuseColorScale", 1.07);
-  setdvar("r_specularColorScale", 2.69);
+  setDvar("r_colorScaleUseTweaks", 1);
+  setDvar("r_diffuseColorScale", 1.07);
+  setDvar("r_specularColorScale", 2.69);
 
-  setdvar("r_veil", 1);
-  setdvar("r_veilusetweaks", 1);
-  setdvar("r_veilStrength", 0.237);
-  setdvar("r_veilBackgroundStrength", 1.343);
+  setDvar("r_veil", 1);
+  setDvar("r_veilusetweaks", 1);
+  setDvar("r_veilStrength", 0.237);
+  setDvar("r_veilBackgroundStrength", 1.343);
 }
 
 doMagnet() {
   strength = 18000;
-  if(getdvar("scr_compact_magnet_strength") != "")
+  if(getDvar("scr_compact_magnet_strength") != "")
     strength = getdvarfloat("scr_compact_magnet_strength");
   if(strength == 0) {
     return;
   }
   radius = 250;
-  if(getdvar("scr_compact_magnet_radius") != "")
+  if(getDvar("scr_compact_magnet_radius") != "")
     radius = getdvarfloat("scr_compact_magnet_radius");
   if(radius <= 0) {
     return;

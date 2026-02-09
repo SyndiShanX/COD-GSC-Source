@@ -10,13 +10,12 @@
 init() {
   trigs = getEntArray("betty_purchase", "targetname");
   for(i = 0; i < trigs.size; i++) {
-    model = getEnt(trigs[i].target, "targetname");
+    model = getent(trigs[i].target, "targetname");
     model hide();
   }
   array_thread(trigs, ::buy_bouncing_betties);
   level thread give_betties_after_rounds();
 }
-
 buy_bouncing_betties() {
   self.zombie_cost = 1000;
   self sethintstring(&"ZOMBIE_BETTY_PURCHASE");
@@ -37,7 +36,7 @@ buy_bouncing_betties() {
           who thread bouncing_betty_setup();
           who thread show_betty_hint("betty_purchased");
           if(self.betties_triggered == false) {
-            model = getEnt(self.target, "targetname");
+            model = getent(self.target, "targetname");
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.betties_triggered = true;
           }
@@ -50,7 +49,6 @@ buy_bouncing_betties() {
     }
   }
 }
-
 set_betty_visible() {
   players = getplayers();
   trigs = getEntArray("betty_purchase", "targetname");
@@ -66,7 +64,6 @@ set_betty_visible() {
     players = getplayers();
   }
 }
-
 bouncing_betty_watch() {
   self endon("death");
   while(1) {
@@ -78,7 +75,6 @@ bouncing_betty_watch() {
     }
   }
 }
-
 betty_death_think() {
   self waittill("death");
   if(isDefined(self.trigger)) {
@@ -86,7 +82,6 @@ betty_death_think() {
   }
   self delete();
 }
-
 bouncing_betty_setup() {
   self thread bouncing_betty_watch();
   self giveweapon("mine_bouncing_betty");
@@ -94,7 +89,6 @@ bouncing_betty_setup() {
   self setactionslot(4, "weapon", "mine_bouncing_betty");
   self setweaponammostock("mine_bouncing_betty", 5);
 }
-
 betty_think() {
   wait(2);
   trigger = spawn("trigger_radius", self.origin, 9, 80, 64);
@@ -109,7 +103,7 @@ betty_think() {
   tag_origin setModel("tag_origin");
   tag_origin linkto(fake_model);
   playFXOnTag(level._effect["betty_trail"], tag_origin, "tag_origin");
-  fake_model moveTo(fake_model.origin + (0, 0, 32), .2);
+  fake_model moveto(fake_model.origin + (0, 0, 32), .2);
   fake_model waittill("movedone");
   playFX(level._effect["betty_explode"], fake_model.origin);
   earthquake(1, .4, fake_model.origin, 512);
@@ -131,14 +125,12 @@ betty_think() {
     self delete();
   }
 }
-
 betty_smoke_trail() {
   self.tag_origin = spawn("script_model", self.origin);
   self.tag_origin setModel("tag_origin");
   playFXOnTag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
-  self.tag_origin moveTo(self.tag_origin.origin + (0, 0, 100), .15);
+  self.tag_origin moveto(self.tag_origin.origin + (0, 0, 100), .15);
 }
-
 give_betties_after_rounds() {
   while(1) {
     level waittill("between_round_over");
@@ -155,7 +147,6 @@ give_betties_after_rounds() {
     }
   }
 }
-
 init_hint_hudelem(x, y, alignX, alignY, fontscale, alpha) {
   self.x = x;
   self.y = y;
@@ -165,7 +156,6 @@ init_hint_hudelem(x, y, alignX, alignY, fontscale, alpha) {
   self.alpha = alpha;
   self.sort = 20;
 }
-
 setup_client_hintelem() {
   self endon("death");
   self endon("disconnect");
@@ -174,14 +164,14 @@ setup_client_hintelem() {
   }
   self.hintelem init_hint_hudelem(320, 220, "center", "bottom", 1.6, 1.0);
 }
-
 show_betty_hint(string) {
   self endon("death");
   self endon("disconnect");
-  if(string == "betty_purchased")
+  if(string == "betty_purchased") {
     text = &"ZOMBIE_BETTY_HOWTO";
-  else
+  } else {
     text = &"ZOMBIE_BETTY_ALREADY_PURCHASED";
+  }
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

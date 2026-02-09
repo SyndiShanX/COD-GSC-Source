@@ -67,7 +67,7 @@ function_a5b7c42d() {
 }
 
 function_2100fa40(attacker, victim, weapon, attackerweapon, meansofdeath) {
-  if(!isDefined(attacker) || !isDefined(attackerweapon) || !isDefined(attacker.var_9db94fe3) || !isplayer(attacker.var_9db94fe3) || attacker.team == victim.team) {
+  if(!isDefined(attacker) || !isDefined(attackerweapon) || !isDefined(attacker.var_9db94fe3) || !isPlayer(attacker.var_9db94fe3) || attacker.team == victim.team) {
     return false;
   }
 
@@ -122,7 +122,7 @@ on_player_killed(params) {
   attacker = params.eattacker;
   weapon = params.weapon;
 
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     return;
   }
 
@@ -137,13 +137,13 @@ has_target() {
 }
 
 function_c075723c(str_field_name, n_value) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clientfield::set_player_uimodel(str_field_name, n_value);
   }
 }
 
 function_c7dcfe36(slot, value) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self function_820a63e9(slot, value);
   }
 }

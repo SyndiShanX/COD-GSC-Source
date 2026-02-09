@@ -11,7 +11,7 @@ precache() {
 }
 
 init(fadetime) {
-  setdvar("scr_damagefeedback", "1");
+  setDvar("scr_damagefeedback", "1");
   self.hud_damagefeedback = newdamageindicatorhudelem(self);
   self.hud_damagefeedback.horzalign = "center";
   self.hud_damagefeedback.vertalign = "middle";
@@ -21,8 +21,9 @@ init(fadetime) {
   self.hud_damagefeedback.archived = 1;
   self.hud_damagefeedback setshader("damage_feedback_glow", 24, 48);
 
-  if(!(isDefined(level.era) && (level.era == "twentytwenty" || level.era == "")))
+  if(!(isDefined(level.era) && (level.era == "twentytwenty" || level.era == ""))) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
+  }
 
   self.hud_damagefeedback_blue = newdamageindicatorhudelem(self);
   self.hud_damagefeedback_blue.horzalign = "center";
@@ -56,7 +57,7 @@ updatedamagefeedback() {
   if(!getdvarint(#"_id_C50FF950")) {
     return;
   }
-  if(!isplayer(self) || !isDefined(self.hud_damagefeedback)) {
+  if(!isPlayer(self) || !isDefined(self.hud_damagefeedback)) {
     return;
   }
   self playlocalsound("spl_hit_alert");
@@ -69,7 +70,7 @@ updatevechicledamagefeedback(weapon) {
   if(!getdvarint(#"_id_C50FF950")) {
     return;
   }
-  if(!isplayer(self) || !isDefined(self.hud_damagefeedback) || !isDefined(self.hud_damagefeedback_blue) || !isDefined(self.hud_damagefeedback_orange)) {
+  if(!isPlayer(self) || !isDefined(self.hud_damagefeedback) || !isDefined(self.hud_damagefeedback_blue) || !isDefined(self.hud_damagefeedback_orange)) {
     return;
   }
   self playlocalsound("spl_hit_alert");

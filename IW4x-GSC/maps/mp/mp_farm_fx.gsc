@@ -21,6 +21,6 @@ main() {
   level._effect["water_noise_ud"] = loadfx("ambient_runners/mp_farm_water_noise_ud01");
   level._effect["water_noise"] = loadfx("ambient_runners/mp_farm_water_noise01");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_farm_fx::main();
 }

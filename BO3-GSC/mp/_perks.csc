@@ -149,7 +149,7 @@ function get_players(local_client_num) {
   entities = getEntArray(local_client_num);
   if(isDefined(entities)) {
     foreach(ent in entities) {
-      if(ent isplayer()) {
+      if(ent isPlayer()) {
         players[players.size] = ent;
       }
     }
@@ -349,7 +349,7 @@ function gettrackerfxposition(local_client_num) {
     }
     fwd = vel;
   }
-  if(self isplayer() && self isplayerwallrunning()) {
+  if(self isPlayer() && self isplayerwallrunning()) {
     if(self isplayerwallrunningright()) {
       up = vectorcross(up, fwd);
     } else {
@@ -385,7 +385,7 @@ function monitor_detectnearbyenemies(local_client_num) {
   setuimodelvalue(sixthsensemodel, 0);
   while(true) {
     localplayer = getlocalplayer(local_client_num);
-    if(!localplayer isplayer() || localplayer hasperk(local_client_num, "specialty_detectnearbyenemies") == 0 || (localplayer getinkillcam(local_client_num) == 1 || isalive(localplayer) == 0)) {
+    if(!localplayer isPlayer() || localplayer hasperk(local_client_num, "specialty_detectnearbyenemies") == 0 || (localplayer getinkillcam(local_client_num) == 1 || isalive(localplayer) == 0)) {
       setuimodelvalue(sixthsensemodel, 0);
       previousenemydetectedbitfield = 0;
       self util::waittill_any("death", "spawned", "perks_changed");
@@ -417,7 +417,7 @@ function monitor_detectnearbyenemies(local_client_num) {
       if(isDefined(sixthsenseent._isclone) && sixthsenseent._isclone) {
         player = sixthsenseent.owner;
       }
-      if(player isplayer() && player hasperk(local_client_num, "specialty_sixthsensejammer")) {
+      if(player isPlayer() && player hasperk(local_client_num, "specialty_sixthsensejammer")) {
         distancescalarsq = getdvarfloat("specialty_sixthsensejammer_distance_scalar", 0.01);
         zscalarsq = getdvarfloat("specialty_sixthsensejammer_z_scalar", 0.01);
       }

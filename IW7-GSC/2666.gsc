@@ -9,7 +9,7 @@ initcpvosystem() {
   level.var_134BF = [];
   level.var_134C0 = [];
   level.vo_dialogue_prefix = [];
-  level.var_13519 = "cp\" + getdvar("ui_mapname") + "_vo_table.csv";
+  level.var_13519 = "cp\" + getDvar("ui_mapname") + "_vo_table.csv";
   level thread func_C904();
   level thread func_BE3E();
 }
@@ -421,8 +421,7 @@ play_vo(var_0, var_1) {
 
     if(var_6 == self) {
       if(isDefined(level.get_alias_2d_func)) {
-        var_7 = [
-          }
+        var_7 = [}
           [level.get_alias_2d_func]](var_6, var_2, var_4);
       else {
         var_7 = get_alias_2d_version(var_6, var_2, var_4);
@@ -601,7 +600,7 @@ func_FF79(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(scripts\engine\utility::is_true(self.rave_mode)) {
     if(isDefined(level.rave_vo_approve_func)) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         if(!self[[level.rave_vo_approve_func]](var_0)) {
           return 0;
         }
@@ -610,7 +609,7 @@ func_FF79(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(isDefined(level.pap_vo_approve_func)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(!self[[level.pap_vo_approve_func]](var_0)) {
         return 0;
       }
@@ -696,7 +695,7 @@ func_1781(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("death");
   self endon("disconnect");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(var_1) && isDefined(level.vo_functions[var_1])) {
       if(isDefined(var_7)) {
         self thread[[level.vo_functions[var_1]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
@@ -936,7 +935,7 @@ add_to_nag_vo(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 = undefined;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_6 = self;
   }
 

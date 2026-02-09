@@ -45,16 +45,18 @@ convoy_setup() {
   level.convoy.vh_g20_1 thread func_on_death(::g20_1_death);
   level.convoy.vh_g20_1 thread _init_cougar_turret("bullet");
 
-  if(!flag("G20_1_saved"))
+  if(!flag("G20_1_saved")) {
     level.convoy.vh_g20_1 delete();
+  }
 
   level.convoy.vh_g20_2 = get_ent("convoy_g20_2", "targetname", 1);
   level.convoy.vehicles[level.convoy.vehicles.size] = level.convoy.vh_g20_2;
   level.convoy.vh_g20_2 thread func_on_death(::g20_2_death);
   level.convoy.vh_g20_2 thread _init_cougar_turret("bullet");
 
-  if(!flag("G20_2_saved"))
+  if(!flag("G20_2_saved")) {
     level.convoy.vh_g20_2 delete();
+  }
 
   level.convoy.lapd_escort = [];
   level.convoy.lapd_escort[0] = maps\_vehicle::spawn_vehicle_from_targetname("police_escort_front_right");
@@ -63,8 +65,9 @@ convoy_setup() {
   level.convoy.vehicles = array_removedead(level.convoy.vehicles);
 
   for(i = 0; i < level.convoy.vehicles.size; i++) {
-    if(!maps\_skipto::is_after_skipto("f35_flying"))
+    if(!maps\_skipto::is_after_skipto("f35_flying")) {
       level.convoy.vehicles[i] thread convoy_vehicle_think("convoy_start_default");
+    }
 
     level.convoy.vehicles[i] thread convoy_setup_fakehealth();
     level.convoy.vehicles[i] thread add_scripted_damage_state(0.33, ::convoy_low_health_func);
@@ -73,8 +76,9 @@ convoy_setup() {
 
   level thread begin_lapd_convoy_escort();
 
-  if(maps\_skipto::is_after_skipto("f35_boarding"))
+  if(maps\_skipto::is_after_skipto("f35_boarding")) {
     level thread clientnotify_delay("player_put_on_helmet", 2);
+  }
 }
 
 convoy_ground_health_warning() {
@@ -83,8 +87,9 @@ convoy_ground_health_warning() {
   flag_wait("roadblock_done");
   wait 0.05;
 
-  while(self.armor >= self.armor_max / 2)
+  while(self.armor >= self.armor_max / 2) {
     wait 0.05;
+  }
 
   maps\_objectives::set_objective(level.obj_protect, level.convoy.vh_potus, "protect", undefined, 0, 120);
 }
@@ -138,8 +143,9 @@ harper_fires_from_van() {
   flag_wait("player_flying");
   ai_harper = get_ent("harper_ai", "targetname");
 
-  if(!isDefined(ai_harper))
+  if(!isDefined(ai_harper)) {
     ai_harper = simple_spawn_single("harper");
+  }
 
   ai_harper.animname = "harper";
   b_has_unloaded = 0;
@@ -188,8 +194,9 @@ _shoot_at_drones() {
     if(isDefined(a_drones) && a_drones.size > 0) {
       e_target = random(a_drones);
 
-      if(maps\la_2_player_f35::_can_bullet_hit_target(self.origin, e_target))
+      if(maps\la_2_player_f35::_can_bullet_hit_target(self.origin, e_target)) {
         b_has_target = 1;
+      }
     }
 
     wait 0.1;
@@ -210,16 +217,18 @@ convoy_setup_fakehealth() {
 convoy_low_health_func() {
   playFXOnTag(level._effect["cougar_damage_smoke"], self, "tag_origin");
 
-  if(self == level.convoy.vh_potus)
+  if(self == level.convoy.vh_potus) {
     level notify("POTUS_health_low");
+  }
 }
 
 begin_lapd_convoy_escort() {
   self waittill("convoy_at_roadblock");
 
   foreach(car in level.convoy.lapd_escort) {
-    if(maps\_skipto::is_default_skipto())
+    if(maps\_skipto::is_default_skipto()) {
       car thread convoy_vehicle_think("convoy_start_default");
+    }
 
     car thread temp_avoidance_on_noteworthy();
   }
@@ -231,13 +240,15 @@ convoy_vehicle_think(node_or_string) {
   self endon("_convoy_vehicle_think_stop");
   self endon("death");
 
-  if(!isDefined(self.ent_flag["is_moving"]))
+  if(!isDefined(self.ent_flag["is_moving"])) {
     self ent_flag_init("is_moving");
+  }
 
-  if(isstring(node_or_string))
+  if(isstring(node_or_string)) {
     nd_path = convoy_get_path_node(node_or_string);
-  else
+  } else {
     nd_path = node_or_string;
+  }
 
   n_acceleration = 30;
   flag_wait("convoy_movement_started");
@@ -262,8 +273,9 @@ convoy_vehicle_think(node_or_string) {
 
     self resumespeed(n_acceleration);
 
-    if(n_speed < 0)
+    if(n_speed < 0) {
       n_speed = 0;
+    }
 
     self ent_flag_set("is_moving");
   }
@@ -277,11 +289,13 @@ convoy_get_count_moving() {
   for(i = 0; i < a_temp.size; i++) {
     n_speed = a_temp[i] getspeedmph();
 
-    if(n_speed > n_speed_threshold)
+    if(n_speed > n_speed_threshold) {
       a_temp[i] ent_flag_set("is_moving");
+    }
 
-    if(a_temp[i] ent_flag("is_moving"))
+    if(a_temp[i] ent_flag("is_moving")) {
       n_moving++;
+    }
   }
 
   return n_moving;
@@ -296,11 +310,13 @@ convoy_get_count_stopped() {
     if(is_alive(a_temp[i])) {
       n_speed = a_temp[i] getspeedmph();
 
-      if(n_speed < n_speed_threshold)
+      if(n_speed < n_speed_threshold) {
         a_temp[i] ent_flag_clear("is_moving");
+      }
 
-      if(!a_temp[i] ent_flag("is_moving"))
+      if(!a_temp[i] ent_flag("is_moving")) {
         n_stopped++;
+      }
     }
   }
 
@@ -341,21 +357,24 @@ convoy_vehicle_think_van(node_or_string) {
     self thread func_on_notify("dogfights_wait_for_convoy", ::stop_and_wait_for_flag, "dogfight_done", 30);
   }
 
-  if(!isDefined(self.ent_flag["ignore_convoy_path"]))
+  if(!isDefined(self.ent_flag["ignore_convoy_path"])) {
     self ent_flag_init("ignore_convoy_path");
+  }
 
-  if(isstring(node_or_string))
+  if(isstring(node_or_string)) {
     nd_path = convoy_get_path_node(node_or_string);
-  else
+  } else {
     nd_path = node_or_string;
+  }
 
   n_acceleration = 15;
   flag_wait("player_flying");
   self clearanim(%root, 0.2);
   t_debris_trigger = get_ent("player_inside_debris_cloud_trigger", "targetname", 1);
 
-  while(level.player istouching(t_debris_trigger))
+  while(level.player istouching(t_debris_trigger)) {
     wait 0.1;
+  }
 
   if(is_greenlight_build()) {
     self setspeed(0);
@@ -367,16 +386,18 @@ convoy_vehicle_think_van(node_or_string) {
   self ent_flag_set("is_moving");
   s_check = getstruct("player_out_of_intro", "targetname");
 
-  while(self.origin[0] < s_check.origin[0])
+  while(self.origin[0] < s_check.origin[0]) {
     wait 0.05;
+  }
 
   wait 1;
 
   if(level.player.origin[0] < s_check.origin[0]) {
     self setspeed(0);
 
-    while(level.player.origin[0] < s_check.origin[0])
+    while(level.player.origin[0] < s_check.origin[0]) {
       wait 0.05;
+    }
 
     self setspeed(60);
   }
@@ -435,11 +456,13 @@ van_roadblock_behavior() {
     b_can_path = bullettracepassed(self.origin, v_drive_point, 1, self);
     n_wait_time = n_wait_time_default;
 
-    if(!isDefined(s_drive_point_last))
+    if(!isDefined(s_drive_point_last)) {
       s_drive_point_last = s_drive_point;
+    }
 
-    if(isDefined(s_drive_point_last) && s_drive_point == s_drive_point_last)
+    if(isDefined(s_drive_point_last) && s_drive_point == s_drive_point_last) {
       b_can_path = 0;
+    }
 
     if(b_can_path) {
       self setvehgoalpos(v_drive_point);
@@ -482,7 +505,7 @@ potus_death() {
   wait 1;
 
   if(level.skipto_point != "f35_eject") {
-    setdvar("ui_deadquote", &"LA_2_OBJ_PROTECT_FAIL");
+    setDvar("ui_deadquote", &"LA_2_OBJ_PROTECT_FAIL");
     missionfailed();
   }
 }
@@ -497,10 +520,11 @@ convoy_regroup_check() {
     n_vehicles = level.convoy.vehicles.size;
     n_vehicles_stopped = convoy_get_count_stopped();
 
-    if(n_vehicles == n_vehicles_stopped)
+    if(n_vehicles == n_vehicles_stopped) {
       flag_set("convoy_in_position");
-    else
+    } else {
       flag_clear("convoy_in_position");
+    }
 
     wait 1;
   }
@@ -515,8 +539,9 @@ convoy_register_stop_point(str_trigger_name, str_wait_flag, func_on_trigger, par
 
   println(str_trigger_name + " hit\\n");
 
-  if(isDefined(func_on_trigger))
+  if(isDefined(func_on_trigger)) {
     self[[func_on_trigger]](param_1);
+  }
 
   flag_wait(str_wait_flag);
 
@@ -524,13 +549,15 @@ convoy_register_stop_point(str_trigger_name, str_wait_flag, func_on_trigger, par
 
   flag_set("convoy_can_move");
 
-  if(isDefined(t_stop))
+  if(isDefined(t_stop)) {
     t_stop delete();
+  }
 }
 
 _waittill_triggered_by_convoy(b_potus) {
-  if(!isDefined(b_potus))
+  if(!isDefined(b_potus)) {
     b_potus = 0;
+  }
 
   b_is_convoy_vehicle = 0;
 
@@ -541,8 +568,9 @@ _waittill_triggered_by_convoy(b_potus) {
       if(e_triggered == level.convoy.vehicles[i]) {
         b_is_convoy_vehicle = 1;
 
-        if(isDefined(b_potus) && b_potus && e_triggered != level.convoy.vh_potus)
+        if(isDefined(b_potus) && b_potus && e_triggered != level.convoy.vh_potus) {
           b_is_convoy_vehicle = 0;
+        }
       }
     }
   }
@@ -551,12 +579,13 @@ _waittill_triggered_by_convoy(b_potus) {
 convoy_set_leader() {
   level.convoy.vehicles = array_removedead(level.convoy.vehicles);
 
-  if(flag("G20_1_saved") && !flag("G20_1_dead"))
+  if(flag("G20_1_saved") && !flag("G20_1_dead")) {
     level.convoy.leader = level.convoy.vh_g20_1;
-  else if(flag("G20_2_saved") && !flag("G20_2_dead"))
+  } else if(flag("G20_2_saved") && !flag("G20_2_dead")) {
     level.convoy.leader = level.convoy.vh_g20_2;
-  else
+  } else {
     level.convoy.leader = level.convoy.vh_potus;
+  }
 }
 
 convoy_get_leader() {
@@ -581,8 +610,9 @@ convoy_pathing_start() {
   flag_wait("player_flying");
   n_threshold = 16000;
 
-  while(distance2d(level.convoy.leader.origin, level.f35.origin) > n_threshold)
+  while(distance2d(level.convoy.leader.origin, level.f35.origin) > n_threshold) {
     wait 0.1;
+  }
 
   flag_set("convoy_movement_started");
   level.convoy.lapd_escort[0] thread police_sirens();
@@ -598,8 +628,9 @@ convoy_distance_check(n_distance, n_distance_warning_percentage) {
   assert(isDefined(n_distance), "n_distance is a required parameter for convoy_distance_check");
   flag_wait("convoy_movement_started");
 
-  if(isDefined(n_distance_warning_percentage))
+  if(isDefined(n_distance_warning_percentage)) {
     level.convoy.distance_warning_percentage = n_distance_warning_percentage;
+  }
 
   level.convoy.distance_max = n_distance;
   n_counter = 0;
@@ -611,14 +642,16 @@ convoy_distance_check(n_distance, n_distance_warning_percentage) {
   while(!flag("eject_sequence_started")) {
     n_delta = distance2d(level.f35.origin, level.convoy.vh_potus.origin);
 
-    if(n_delta > n_distance_warning)
+    if(n_delta > n_distance_warning) {
       flag_clear("player_in_range_of_convoy");
-    else
+    } else {
       flag_set("player_in_range_of_convoy");
+    }
 
     if(n_delta > n_distance_max) {
-      if(!flag("no_fail_from_distance") && !isgodmode(level.player))
+      if(!flag("no_fail_from_distance") && !isgodmode(level.player)) {
         level.convoy.vh_potus notify("death");
+      }
     }
 
     wait 1;
@@ -630,8 +663,9 @@ convoy_distance_check_update(n_distance, n_warning_distance_percentage) {
   level.convoy.distance_max = n_distance;
   level.convoy.distance_warning_percentage = level.convoy.distance_warning_percentage_default;
 
-  if(isDefined(n_warning_distance_percentage))
+  if(isDefined(n_warning_distance_percentage)) {
     level.convoy.distance_warning_percentage = n_warning_distance_percentage;
+  }
 
   level thread convoy_distance_check(n_distance, n_warning_distance_percentage);
 }
@@ -639,56 +673,65 @@ convoy_distance_check_update(n_distance, n_warning_distance_percentage) {
 convoy_vehicle_damage(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   should_flash = 0;
 
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     should_flash = 1;
 
-    if(!isDefined(self.player_damage))
+    if(!isDefined(self.player_damage)) {
       self.player_damage = 0;
-    else {
-      if(issubstr(sweapon, "missile_turret"))
+    } else {
+      if(issubstr(sweapon, "missile_turret")) {
         self.player_damage = self.player_damage + 200;
-      else
+      } else {
         self.player_damage = self.player_damage + 10;
+      }
 
-      if(self.player_damage > 500)
+      if(self.player_damage > 500) {
         level.player thread maps\_friendlyfire::missionfail();
+      }
     }
 
     idamage = 0;
   } else if(isai(eattacker)) {
     str_team = eattacker.team;
 
-    if(str_team == "allies")
+    if(str_team == "allies") {
       return 0;
-    else if(str_team == "axis")
+    } else if(str_team == "axis") {
       should_flash = 1;
+    }
   } else if(isDefined(eattacker.classname) && eattacker.classname == "script_vehicle") {
-    if(issubstr(eattacker.vehicletype, "cougar") || eattacker == level.convoy.vh_van)
+    if(issubstr(eattacker.vehicletype, "cougar") || eattacker == level.convoy.vh_van) {
       should_flash = 0;
-    else
+    } else {
       should_flash = 1;
+    }
 
     idamage = 25;
 
-    if(issubstr(sweapon, "missile_turret"))
+    if(issubstr(sweapon, "missile_turret")) {
       idamage = 200;
+    }
 
-    if(self == level.convoy.vh_van)
+    if(self == level.convoy.vh_van) {
       idamage = 0;
+    }
   }
 
-  if(should_flash)
+  if(should_flash) {
     self thread convoy_vehicle_flash_damage();
+  }
 
-  if(type == "MOD_CRUSH")
+  if(type == "MOD_CRUSH") {
     idamage = 0;
+  }
 
   self.armor = self.armor - idamage;
 
   if(!flag("eject_sequence_started")) {
     if(self.armor - idamage <= 0) {
-      if(!isgodmode(level.player))
+      if(!isgodmode(level.player)) {
         self notify("death");
+      }
     }
   }
 

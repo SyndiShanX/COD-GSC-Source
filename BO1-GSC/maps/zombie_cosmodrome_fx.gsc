@@ -14,14 +14,12 @@ main() {
   maps\createfx\zombie_cosmodrome_fx::main();
   wind_initial_setting();
 }
-
 wind_initial_setting() {
   SetSavedDvar("wind_global_vector", "140 120 0");
   SetSavedDvar("wind_global_low_altitude", -250);
   SetSavedDvar("wind_global_hi_altitude", 6000);
   SetSavedDvar("wind_global_low_strength_percent", 0.3);
 }
-
 precache_util_fx() {}
 precache_scripted_fx() {
   level._effect["zombie_power_switch"] = loadfx("maps/zombie/fx_zombie_power_switch");
@@ -71,7 +69,6 @@ precache_scripted_fx() {
   level._effect["zomb_gib"] = Loadfx("maps/zombie/fx_zombie_dog_explosion");
   level._effect["test_spin_fx"] = LoadFX("env/light/fx_light_warning");
 }
-
 precache_createfx_fx() {
   level._effect["fx_tower_light_glow"] = loadfx("maps/flashpoint/fx_tower_light_glow");
   level._effect["fx_zombie_rocket_trap_heat_glow"] = loadfx("maps/zombie/fx_zombie_rocket_trap_heat_glow");
@@ -111,7 +108,6 @@ precache_createfx_fx() {
   level._effect["fx_zmb_elec_terminal_bridge"] = loadfx("maps/zombie/fx_zmb_elec_terminal_bridge");
   level._effect["fx_zmb_russian_rocket_smk"] = loadfx("maps/zombie/fx_zmb_russian_rocket_smk");
 }
-
 initModelAnims() {
   level.scr_anim["fxanim_props"]["a_wirespark_long"][0] = % fxanim_gp_wirespark_long_anim;
   level.scr_anim["fxanim_props"]["a_wirespark_med"][0] = % fxanim_gp_wirespark_med_anim;
@@ -121,14 +117,13 @@ initModelAnims() {
   enta_wirespark_med = getEntArray("fxanim_gp_wirespark_med_mod", "targetname");
   for(i = 0; i < enta_wirespark_long.size; i++) {
     enta_wirespark_long[i] thread wirespark_long(1, 5);
-    PrintLn("** FX: wirespark_long**");
+    PrintLn("************* FX: wirespark_long*************");
   }
   for(i = 0; i < enta_wirespark_med.size; i++) {
     enta_wirespark_med[i] thread wirespark_med(1, 5);
-    println("** FX: wirespark_med**");
+    println("************* FX: wirespark_med*************");
   }
 }
-
 wirespark_long(delay_min, delay_max) {
   wait(3);
   wait(delay_min);
@@ -137,7 +132,6 @@ wirespark_long(delay_min, delay_max) {
   self.animname = "fxanim_props";
   level thread anim_loop(self, "a_wirespark_long");
 }
-
 wirespark_med(delay_min, delay_max) {
   wait(3);
   wait(delay_min);
@@ -146,7 +140,6 @@ wirespark_med(delay_min, delay_max) {
   self.animname = "fxanim_props";
   level thread anim_loop(self, "a_wirespark_med");
 }
-
 wirespark_fx_1(guy) {
   wire_model = spawn("script_model", guy.origin);
   wire_model setModel("tag_origin");
@@ -156,7 +149,6 @@ wirespark_fx_1(guy) {
   wait(0.5);
   wire_model Delete();
 }
-
 wirespark_fx_2(guy) {
   wire_model = spawn("script_model", guy.origin);
   wire_model setModel("tag_origin");

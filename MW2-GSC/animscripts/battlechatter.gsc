@@ -39,7 +39,7 @@ init_battleChatter() {
   }
   SetDvarIfUninitialized("bcs_enable", "on");
 
-  if(GetDvar("bcs_enable", "on") == "off") {
+  if(getDvar("bcs_enable", "on") == "off") {
     anim.chatInitialized = false;
     anim.player.chatInitialized = false;
     return;
@@ -365,7 +365,7 @@ init_battleChatter() {
   // how long before we can chatter about a threat again?
   anim.bcs_threatResetTime = 3000;
 
-  if(GetDvar("debug_bcdrawobjects") == "on")
+  if(getDvar("debug_bcdrawobjects") == "on")
     thread bcDrawObjects();
 
   anim.squadCreateFuncs[anim.squadCreateFuncs.size] = ::init_squadBattleChatter;
@@ -415,8 +415,7 @@ init_battleChatter() {
     anim.squadIndex[index] init_squadBattleChatter();
   }
 
-  /*----------- THREAT CALLOUT CHANCES -----------
-  - anim.threatCallouts[] is indexed by the types of possible threat callouts for this AI, and holds %chance weights that help determine if that the AI will
+  /*----------- THREAT CALLOUT CHANCES ----------- - anim.threatCallouts[] is indexed by the types of possible threat callouts for this AI, and holds %chance weights that help determine if that the AI will
   try to use that type of threat callout to alert players to a threat.
   	
   - These are matched against the values of self.allowedCallouts[] for each AI, to determine
@@ -753,10 +752,10 @@ bcsEnabled() {
 }
 
 bcsDebugWaiter() {
-  lastState = GetDvar("bcs_enable", "on");
+  lastState = getDvar("bcs_enable", "on");
 
   while(1) {
-    state = GetDvar("bcs_enable", "on");
+    state = getDvar("bcs_enable", "on");
 
     if(state != lastState) {
       switch (state) {
@@ -921,20 +920,20 @@ playThreatEvent() {
     return;
   }
 
-  if(threatWasAlreadyCalledOut(threat) && !IsPlayer(threat)) {
+  if(threatWasAlreadyCalledOut(threat) && !isPlayer(threat)) {
     return;
   }
 
   anim thread lockAction(self, "threat");
 
-  if(GetDvar("debug_bcinteraction") == "on")
+  if(getDvar("debug_bcinteraction") == "on")
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), threat.origin + (0, 0, 50), (1, 0, 0), 1.5);
 
   success = false;
 
   switch (self.chatQueue["threat"].eventType) {
     case "infantry":
-      if(IsPlayer(threat) || !isDefined(threat GetTurret())) {
+      if(isPlayer(threat) || !isDefined(threat GetTurret())) {
         success = self threatInfantry(threat);
       } else {
         // if we ever want emplacement callouts again, put one here
@@ -1347,7 +1346,7 @@ getThreatInfantryCalloutType(threat) {
   self.possibleThreatCallouts = [];
 
   // is it an RPG?
-  if(!IsPlayer(threat) && threat usingRocketLauncher()) {
+  if(!isPlayer(threat) && threat usingRocketLauncher()) {
     self addPossibleThreatCallout("rpg");
   }
 
@@ -1719,7 +1718,7 @@ playResponseEvent() {
 
   anim thread lockAction(self, "response");
 
-  if(GetDvar("debug_bcinteraction") == "on")
+  if(getDvar("debug_bcinteraction") == "on")
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), respondTo.origin + (0, 0, 50), (1, 1, 0), 1.5);
 
   switch (self.chatQueue["response"].eventType) {
@@ -1849,7 +1848,7 @@ orderMove(modifier, orderTo) {
 
   chatPhrase = self createChatPhrase();
 
-  if(GetDvar("debug_bcinteraction") == "on" && isDefined(orderTo))
+  if(getDvar("debug_bcinteraction") == "on" && isDefined(orderTo))
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), orderTo.origin + (0, 0, 50), (0, 1, 0), 1.5);
 
   self tryOrderTo(chatPhrase, orderTo);
@@ -1872,12 +1871,12 @@ orderDisplace(modifier) {
 tryOrderTo(chatPhrase, orderTo) {
   if(RandomInt(100) > anim.eventChance["response"]["order"]) {
     // only return if the orderTo guy isn't the player
-    if(!isDefined(orderTo) || (isDefined(orderTo) && !IsPlayer(orderTo))) {
+    if(!isDefined(orderTo) || (isDefined(orderTo) && !isPlayer(orderTo))) {
       return;
     }
   }
 
-  if(isDefined(orderTo) && IsPlayer(orderTo) && isDefined(level.player.bcNameID)) {
+  if(isDefined(orderTo) && isPlayer(orderTo) && isDefined(level.player.bcNameID)) {
     chatPhrase addPlayerNameAlias();
     chatPhrase.lookTarget = level.player;
   } else if(isDefined(orderTo) && self canSayName(orderTo)) {
@@ -2005,7 +2004,7 @@ playPhrase(chatPhrase, noSound) {
     return;
   }
 
-  //	if( GetDvar( "bcs_stealth" ) != "" && self.voice == "british" )
+  //	if( getDvar( "bcs_stealth" ) != "" && self.voice == "british" )
   if(isDefined(level._stealth) && (self voice_is_british_based())) {
     for(i = 0; i < chatPhrase.soundAliases.size; i++)
       chatPhrase.soundAliases[i] = chatPhrase.soundAliases[i] + "_s";
@@ -2169,7 +2168,7 @@ canSay(eventAction, eventType, priority, modifier) {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     return false;
   }
 
@@ -2357,7 +2356,7 @@ getEventState(strAction) {
 }
 
 isFiltered(strAction) {
-  if(GetDvar("bcs_filter" + strAction, "off") == "on" || GetDvar("bcs_filter" + strAction, "off") == "1")
+  if(getDvar("bcs_filter" + strAction, "off") == "on" || getDvar("bcs_filter" + strAction, "off") == "1")
     return (true);
 
   return (false);
@@ -2394,7 +2393,7 @@ doTypeLimit(strAction, strType) {
 }
 
 bcIsSniper() {
-  if(IsPlayer(self))
+  if(isPlayer(self))
     return false;
 
   if(self isExposed())
@@ -2466,7 +2465,7 @@ isOfficer() {
 }
 
 bcGetClaimedNode() {
-  if(IsPlayer(self))
+  if(isPlayer(self))
     return self.node;
   else
     return self GetClaimedNode();
@@ -2655,7 +2654,7 @@ getRelativeAngles(ent) {
 
   angles = ent.angles;
 
-  if(!IsPlayer(ent)) {
+  if(!isPlayer(ent)) {
     node = ent bcGetClaimedNode();
     if(isDefined(node)) {
       angles = node.angles;
@@ -2818,42 +2817,42 @@ getFrontArcClockDirection(direction) {
 }
 
 // gets a clock direction from a "viewer" to a "target"getDirectionFacingClock(viewerAngles, viewerOrigin, targetOrigin) {
-  forward = anglesToForward(viewerAngles);
-  vFacing = VectorNormalize(forward);
-  anglesToFacing = VectorToAngles(vFacing);
-  anglesToPoint = VectorToAngles(targetOrigin - viewerOrigin);
+forward = anglesToForward(viewerAngles);
+vFacing = VectorNormalize(forward);
+anglesToFacing = VectorToAngles(vFacing);
+anglesToPoint = VectorToAngles(targetOrigin - viewerOrigin);
 
-  angle = anglesToFacing[1] - anglesToPoint[1];
-  angle += 360;
-  angle = Int(angle) % 360;
+angle = anglesToFacing[1] - anglesToPoint[1];
+angle += 360;
+angle = Int(angle) % 360;
 
-  if(angle > 345 || angle < 15) {
-    direction = "12";
-  } else if(angle < 45) {
-    direction = "1";
-  } else if(angle < 75) {
-    direction = "2";
-  } else if(angle < 105) {
-    direction = "3";
-  } else if(angle < 135) {
-    direction = "4";
-  } else if(angle < 165) {
-    direction = "5";
-  } else if(angle < 195) {
-    direction = "6";
-  } else if(angle < 225) {
-    direction = "7";
-  } else if(angle < 255) {
-    direction = "8";
-  } else if(angle < 285) {
-    direction = "9";
-  } else if(angle < 315) {
-    direction = "10";
-  } else {
-    direction = "11";
-  }
+if(angle > 345 || angle < 15) {
+  direction = "12";
+} else if(angle < 45) {
+  direction = "1";
+} else if(angle < 75) {
+  direction = "2";
+} else if(angle < 105) {
+  direction = "3";
+} else if(angle < 135) {
+  direction = "4";
+} else if(angle < 165) {
+  direction = "5";
+} else if(angle < 195) {
+  direction = "6";
+} else if(angle < 225) {
+  direction = "7";
+} else if(angle < 255) {
+  direction = "8";
+} else if(angle < 285) {
+  direction = "9";
+} else if(angle < 315) {
+  direction = "10";
+} else {
+  direction = "11";
+}
 
-  return (direction);
+return (direction);
 }
 
 getVectorRightAngle(vDir) {
@@ -2972,7 +2971,7 @@ player_name_called_recently() {
 }
 
 isUsingSameVoice(otherguy) {
-  if(GetDvar("bcs_allowsamevoiceresponse") == "on") {
+  if(getDvar("bcs_allowsamevoiceresponse") == "on") {
     return false;
   }
 
@@ -3098,26 +3097,26 @@ addThreatCalloutQA_NextLine(respondTo, prevLine, location) {
 }
 
 // takes a soundalias that ends with "_report" and returns a variant of it that ends with "_echo"createEchoAlias(reportAlias, respondTo) {
-  reportSuffix = "_report";
-  echoSuffix = "_echo";
+reportSuffix = "_report";
+echoSuffix = "_echo";
 
-  // make sure that we're responding in the responder's countryID and voice
-  echoPrefix = self.owner.countryID + "_" + self.owner.npcID + "_";
+// make sure that we're responding in the responder's countryID and voice
+echoPrefix = self.owner.countryID + "_" + self.owner.npcID + "_";
 
-  AssertEx(IsSubStr(reportAlias, reportSuffix), "reportAlias doesn't have substring '" + reportSuffix + "', so it doesn't look like an eligible report alias.");
+AssertEx(IsSubStr(reportAlias, reportSuffix), "reportAlias doesn't have substring '" + reportSuffix + "', so it doesn't look like an eligible report alias.");
 
-  reportSuffixStartIndex = reportAlias.size - reportSuffix.size; // figure out where the end of this baseAlias is
+reportSuffixStartIndex = reportAlias.size - reportSuffix.size; // figure out where the end of this baseAlias is
 
-  // some guys have longer npcIDs than others, so we have to allow the base prefix to be variable length
-  oldPrefix = self.owner.countryID + "_" + respondTo.npcID + "_";
-  oldPrefixLength = oldPrefix.size;
+// some guys have longer npcIDs than others, so we have to allow the base prefix to be variable length
+oldPrefix = self.owner.countryID + "_" + respondTo.npcID + "_";
+oldPrefixLength = oldPrefix.size;
 
-  baseAlias = GetSubStr(reportAlias, oldPrefixLength, reportSuffixStartIndex); // start 5 spots in to eliminate the original countryID and npcID info
+baseAlias = GetSubStr(reportAlias, oldPrefixLength, reportSuffixStartIndex); // start 5 spots in to eliminate the original countryID and npcID info
 
-  // construct the final alias
-  echoAlias = echoPrefix + baseAlias + echoSuffix;
+// construct the final alias
+echoAlias = echoPrefix + baseAlias + echoSuffix;
 
-  return echoAlias;
+return echoAlias;
 }
 
 // format: US_1_callout_[contactclock/targetclock/yourclock/cardinal]_[modifier]
@@ -3456,7 +3455,7 @@ squadCanBurst(squad) {
 canDoFlavorBurst() {
   canDo = false;
 
-  if(!IsPlayer(self) && IsAlive(self) && self.classname != "actor_enemy_dog" && level.flavorbursts[self.team] && self voiceCanBurst() && self.flavorbursts) {
+  if(!isPlayer(self) && IsAlive(self) && self.classname != "actor_enemy_dog" && level.flavorbursts[self.team] && self voiceCanBurst() && self.flavorbursts) {
     canDo = true;
   }
 
@@ -3563,7 +3562,7 @@ getFlavorBurstAliases(nationality, burstID, startingLine) {
 playFlavorBurstLine(burster, alias) {
   anim endon("battlechatter disabled");
 
-  if(GetDvar("bcs_fbt_debug") == "on") {
+  if(getDvar("bcs_fbt_debug") == "on") {
     self thread flavorBurstLineDebug(burster, alias);
   }
 
@@ -3599,7 +3598,7 @@ debugPrintEvents()
 	if( !isalive( self ) )
 		return;
 
-	if( GetDvar( "debug_bcshowqueue" ) != self.team && GetDvar( "debug_bcshowqueue" ) != "all" )
+	if( getDvar( "debug_bcshowqueue" ) != self.team && getDvar( "debug_bcshowqueue" ) != "all" )
 		return;
 
 	self endon( "death" );
@@ -3626,13 +3625,13 @@ debugPrintEvents()
 
 debugQueueEvents()
 {
-	if( GetDvar( "debug_bcresponse" ) == "on" )
+	if( getDvar( "debug_bcresponse" ) == "on" )
 		self thread printQueueEvent( "response" );
-	if( GetDvar( "debug_bcthreat" ) == "on" )
+	if( getDvar( "debug_bcthreat" ) == "on" )
 		self thread printQueueEvent( "threat" );
-	if( GetDvar( "debug_bcinform" ) == "on" )
+	if( getDvar( "debug_bcinform" ) == "on" )
 		self thread printQueueEvent( "inform" );
-	if( GetDvar( "debug_bcorder" ) == "on" )
+	if( getDvar( "debug_bcorder" ) == "on" )
 		self thread printQueueEvent( "order" );
 }
 
@@ -3723,7 +3722,7 @@ battleChatter_printDump(aliases, descriptor) {
     return;
   }
 
-  dumpType = GetDvar("debug_bcprintdumptype");
+  dumpType = getDvar("debug_bcprintdumptype");
   if(dumpType != "csv" && dumpType != "txt") {
     return;
   }
@@ -3736,8 +3735,7 @@ battleChatter_printDump(aliases, descriptor) {
 
   level.lastDumpTime = GetTime(); // reset
 
-  // -- CSV dumps help the audio dept optimize where they spend their time --
-  if(dumpType == "csv") {
+  // -- CSV dumps help the audio dept optimize where they spend their time -- if(dumpType == "csv") {
     // only 1 write at a time
     if(!flag_exist("bcs_csv_dumpFileWriting")) {
       flag_init("bcs_csv_dumpFileWriting");
@@ -3760,8 +3758,7 @@ battleChatter_printDump(aliases, descriptor) {
     }
   }
 
-  // -- TXT dumps help the design dept tweak distributions and timing --
-  else if(dumpType == "txt") {
+  // -- TXT dumps help the design dept tweak distributions and timing -- else if(dumpType == "txt") {
     AssertEx(isDefined(descriptor), "battlechatter print dumps of type 'txt' require a descriptor!");
 
     if(!flag_exist("bcs_txt_dumpFileWriting")) {
@@ -3790,7 +3787,6 @@ battleChatter_printDump(aliases, descriptor) {
 
     battleChatter_printDumpLine(level.bcs_txt_dumpFile, dumpString, "bcs_txt_dumpFileWriting");
   }
-
 }
 
 getAliasTypeFromSoundalias(alias) {

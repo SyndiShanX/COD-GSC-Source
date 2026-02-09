@@ -375,7 +375,6 @@ setGuns() {
     level.gun_guns[16] = "iw6_magnum_mp_acogpistol_akimbo";
     level.gun_guns[17] = "iw6_knifeonly_mp";
   }
-
 }
 
 setGunsFinal() {

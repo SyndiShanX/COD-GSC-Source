@@ -1022,7 +1022,6 @@ function_f9ed304d() {
 
   if(!isDefined(self)) {
     iprintlnbold("<dev string:x38>");
-
   }
 }
 
@@ -1615,7 +1614,7 @@ function_64f9f527() {
 }
 
 objcounter_init(str_label, var_8f1f8855, n_total, n_mode = 0, var_455d8dee = 1) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(!isDefined(str_label)) {
       str_label = level.var_f01ac782;
     }
@@ -1647,7 +1646,7 @@ objcounter_init(str_label, var_8f1f8855, n_total, n_mode = 0, var_455d8dee = 1) 
 }
 
 function_785eb2ca() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     assert(isDefined(level.ct_shared_objcounter.n_count), "<dev string:x68>");
 
     switch (level.ct_shared_objcounter.n_mode) {
@@ -1681,7 +1680,7 @@ magic_explosion(v_loc, str_weapontype = # "frag_grenade") {
 }
 
 is_facing(facee, requireddot = 0.5, b_2d = 1) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     orientation = self getplayerangles();
   } else if(isvehicle(self)) {
     orientation = self.angles;
@@ -1757,12 +1756,12 @@ function_292141a(_hash) {
 }
 
 cleanup_globals() {
-  setdvar(#"custom_killstreak_mode", 0);
-  setdvar(#"custom_killstreak1", "");
-  setdvar(#"custom_killstreak2", "");
-  setdvar(#"custom_killstreak3", "");
-  setdvar(#"hash_3e06b14c41136e95", 0);
-  setdvar(#"scr_scorestreaks", 1);
+  setDvar(#"custom_killstreak_mode", 0);
+  setDvar(#"custom_killstreak1", "");
+  setDvar(#"custom_killstreak2", "");
+  setDvar(#"custom_killstreak3", "");
+  setDvar(#"hash_3e06b14c41136e95", 0);
+  setDvar(#"scr_scorestreaks", 1);
   level.usingscorestreaks = getdvarint(#"scr_scorestreaks", 0) != 0;
   level.disablescoreevents = 0;
   level.disablemomentum = 0;
@@ -2575,35 +2574,35 @@ player_collisionbox(var_96065dae, var_8d3fbac4 = undefined, n_size = 0) {
 }
 
 function_6046a5e3(str_weapon, attachments) {
-  setdvar(#"hash_4b0035c0038e0762", hash(str_weapon));
+  setDvar(#"hash_4b0035c0038e0762", hash(str_weapon));
   var_c7239f6f = min(isDefined(attachments) ? attachments.size : 0, 6);
 
   for(i = 0; i < var_c7239f6f; i++) {
-    setdvar(#"hash_721ee06404866532" + i, hash(attachments[i]));
+    setDvar(#"hash_721ee06404866532" + i, hash(attachments[i]));
   }
 
   while(i < 6) {
-    setdvar(#"hash_721ee06404866532" + i, #"");
+    setDvar(#"hash_721ee06404866532" + i, #"");
     i++;
   }
 }
 
 function_c3e647e2(str_weapon, attachments) {
-  setdvar(#"hash_6dcfed2e90bdae6e", hash(str_weapon));
+  setDvar(#"hash_6dcfed2e90bdae6e", hash(str_weapon));
   var_c7239f6f = min(isDefined(attachments) ? attachments.size : 0, 6);
 
   for(i = 0; i < var_c7239f6f; i++) {
-    setdvar(#"hash_c7f896e4dff882e" + i, hash(attachments[i]));
+    setDvar(#"hash_c7f896e4dff882e" + i, hash(attachments[i]));
   }
 
   while(i < 6) {
-    setdvar(#"hash_c7f896e4dff882e" + i, #"");
+    setDvar(#"hash_c7f896e4dff882e" + i, #"");
     i++;
   }
 }
 
 function_84adcd1f() {
-  var_e6b5e0d7 = getdvar(#"hash_3fb2952874e511c2");
+  var_e6b5e0d7 = getDvar(#"hash_3fb2952874e511c2");
   hands_weapon = getweapon(isDefined(var_e6b5e0d7) ? var_e6b5e0d7 : # "bare_hands_ct");
   return hands_weapon;
 }
@@ -3679,17 +3678,17 @@ function_e44c5b8e(str_killstreak, var_88d2d0b2 = 10, var_baf3556b = 0) {
 
   if(e_player.killstreak.size == 0) {
     level.var_b4a06c5b = str_killstreak;
-    setdvar(#"custom_killstreak_mode", 2);
-    setdvar(#"custom_killstreak1", level.killstreakindices[str_killstreak]);
-    setdvar(#"custom_killstreak2", 0);
-    setdvar(#"custom_killstreak3", 0);
+    setDvar(#"custom_killstreak_mode", 2);
+    setDvar(#"custom_killstreak1", level.killstreakindices[str_killstreak]);
+    setDvar(#"custom_killstreak2", 0);
+    setDvar(#"custom_killstreak3", 0);
     self.pers[# "killstreak_quantity"] = [];
     self.pers[# "held_killstreak_ammo_count"] = [];
     self.pers[# "held_killstreak_clip_count"] = [];
     e_player loadout::give_killstreaks();
   }
 
-  setdvar(#"hash_3e06b14c41136e95", !var_baf3556b);
+  setDvar(#"hash_3e06b14c41136e95", !var_baf3556b);
 
   if(!var_88d2d0b2) {
     level thread function_5160be8c();
@@ -3744,7 +3743,7 @@ function_944e4110(params) {
   eattacker = params.eattacker;
   weapon = params.weapon;
 
-  if(isplayer(eattacker) && !isbot(eattacker) && eattacker != self) {
+  if(isPlayer(eattacker) && !isbot(eattacker) && eattacker != self) {
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, level.var_b4a06c5b);
     level.var_78a31a59 = cost;
     var_595e41ee = int(cost / level.var_dd8875fe + 0.5);
@@ -4055,7 +4054,7 @@ function_a61ebb46(str_hint) {
 
 function_dfd7add4() {
   sessionmode = currentsessionmode();
-  setdvar(#"devgui_ct", "<dev string:x1c9>");
+  setDvar(#"devgui_ct", "<dev string:x1c9>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x1cc>");
@@ -4121,7 +4120,7 @@ function_dfd7add4() {
         break;
     }
 
-    setdvar(#"devgui_ct", "<dev string:x1c9>");
+    setDvar(#"devgui_ct", "<dev string:x1c9>");
   }
 }
 

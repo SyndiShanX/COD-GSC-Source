@@ -318,7 +318,7 @@ function_c2d403f(n_index) {
   while(true) {
     s_notify = self waittill(#"damage");
 
-    if(isplayer(s_notify.attacker)) {
+    if(isPlayer(s_notify.attacker)) {
       if(self.b_frozen) {
         if(self.b_primed) {
           self moveto(level.s_mq_blood_vessel_loc.vessel.origin, 0.7, 0.1, 0.1);

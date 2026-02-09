@@ -238,7 +238,7 @@ getmodulesforcrate(var_0, var_1) {
 }
 
 getrandomcratetype(var_0, var_1) {
-  if(getdvar("g_gametype") != "horde") {
+  if(getDvar("g_gametype") != "horde") {
     var_7 = isDefined(level.mapkillstreak) && isDefined(level.cratetypes[var_0][level.mapkillstreak]);
     var_8 = isDefined(level.mapkillstreakautodropindex) && level.numdropcrates >= level.mapkillstreakautodropindex;
 
@@ -1135,7 +1135,7 @@ deletecrate(var_0, var_1) {
 }
 
 useholdthink(var_0, var_1, var_2) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 playerlinkto(self);
   } else {
     var_0 linkto(self);
@@ -1168,7 +1168,7 @@ useholdthink(var_0, var_1, var_2) {
     self.usetime = 3000;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread personalusebar(self, var_2);
   }
 

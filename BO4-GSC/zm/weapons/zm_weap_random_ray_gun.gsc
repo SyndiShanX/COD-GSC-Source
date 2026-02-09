@@ -179,7 +179,6 @@ function_1ec5c573(weapon, n_damage, meansofdeath) {
     var_aebb78d5 = zm_utility::round_up_to_ten(var_aebb78d5);
 
     iprintln("<dev string:x38>" + function_9e72a96(self.archetype) + "<dev string:x42>" + self getentnum() + "<dev string:x46>" + var_aebb78d5 + "<dev string:x4b>" + function_9e72a96(meansofdeath));
-
   }
 
   return var_aebb78d5;
@@ -296,7 +295,6 @@ function_656b149c(var_c74d5934, s_waitresult, var_41bf50f) {
           iprintln("<dev string:x172>");
           break;
       }
-
     }
 
     if(s_waitresult.weapon === level.var_4b14202f) {
@@ -306,7 +304,6 @@ function_656b149c(var_c74d5934, s_waitresult, var_41bf50f) {
     if(isDefined(0) && false) {
       self.var_3d7d20b = var_ea0a46dc;
     }
-
   }
 
   if(isalive(self)) {
@@ -558,7 +555,6 @@ function_6cd38e99(var_f5716a6, var_18e8905a) {
         if(getdvarint(#"hash_e2e03328b366e75", 0)) {
           iprintlnbold("<dev string:x1f7>" + e_zombie getentnum() + "<dev string:x200>");
         }
-
       }
     }
   }

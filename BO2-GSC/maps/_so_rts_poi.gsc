@@ -16,11 +16,13 @@ preload() {
   level.rts.poi = poi_populate();
 
   foreach(poi in level.rts.poi) {
-    if(isDefined(poi.model) && poi.model != "")
+    if(isDefined(poi.model) && poi.model != "") {
       precachemodel(poi.model);
+    }
 
-    if(isDefined(poi.compassicon) && poi.compassicon != "")
+    if(isDefined(poi.compassicon) && poi.compassicon != "") {
       precacheshader(poi.compassicon);
+    }
   }
 }
 
@@ -72,20 +74,25 @@ poi_populate() {
     poi.alttrig = lookup_value(ref, i, 12);
     poi.extraweight = float(lookup_value(ref, i, 13));
 
-    if(poi.model == "")
+    if(poi.model == "") {
       poi.model = undefined;
+    }
 
-    if(poi.objtext == "")
+    if(poi.objtext == "") {
       poi.objtext = undefined;
+    }
 
-    if(poi.compassicon == "")
+    if(poi.compassicon == "") {
       poi.compassicon = undefined;
+    }
 
-    if(poi.target == "")
+    if(poi.target == "") {
       poi.target = undefined;
+    }
 
-    if(poi.alttrig == "")
+    if(poi.alttrig == "") {
       poi.alttrig = undefined;
+    }
 
     poi_types[poi_types.size] = poi;
   }
@@ -98,8 +105,9 @@ checkpoint_save_restored() {
   numpoiswithcapturetime = 0;
 
   foreach(poi in level.rts.poi) {
-    if(!isDefined(poi.entity))
+    if(!isDefined(poi.entity)) {
       poi.entity = getent(poi.ref, "targetname");
+    }
 
     if(isDefined(poi.entity)) {
       poinum = 0;
@@ -112,18 +120,21 @@ checkpoint_save_restored() {
       poi.poinum = poinum;
       luinotifyevent(&"rts_add_poi", 2, poi.entity getentitynumber(), poinum);
 
-      if(poi.entity.team == "allies")
+      if(poi.entity.team == "allies") {
         luinotifyevent(&"rts_protect_poi", 1, poi.entity getentitynumber());
+      }
 
-      if(poi.capture_time > 0)
+      if(poi.capture_time > 0) {
         luinotifyevent(&"rts_secure_poi", 1, poi.entity getentitynumber());
+      }
     }
   }
 }
 
 poicaptured(entity, capteam) {
-  if(!isDefined(capteam))
+  if(!isDefined(capteam)) {
     capteam = "allies";
+  }
 
   valid = [];
 
@@ -140,23 +151,27 @@ poicaptured(entity, capteam) {
       luinotifyevent(&"rts_captured_poi", 1, poi.entity getentitynumber());
       poi.ignoreme = 1;
 
-      if(isDefined(poi.entity.destroyed_cb))
+      if(isDefined(poi.entity.destroyed_cb)) {
         [[poi.entity.destroyed_cb]](poi.entity);
+      }
     }
 
-    if(isDefined(poi.trigger))
+    if(isDefined(poi.trigger)) {
       poi.trigger delete();
+    }
 
     if(isDefined(poi.fakevehicle)) {
       if(isarray(poi.fakevehicle)) {
-        foreach(fake in poi.fakevehicle)
-        fake delete();
+        foreach(fake in poi.fakevehicle) {
+          fake delete();
+        }
       } else
         poi.fakevehicle delete();
     }
 
-    if(isDefined(poi.objectivenum))
+    if(isDefined(poi.objectivenum)) {
       objective_state(poi.objectivenum, capteam == "allies" ? "done" : "failed");
+    }
 
     level notify("poi_deleted_" + poi.ref);
   }
@@ -176,13 +191,15 @@ del_poi(poi) {
     poi.entity delete();
   }
 
-  if(isDefined(poi.trigger))
+  if(isDefined(poi.trigger)) {
     poi.trigger delete();
+  }
 
   if(isDefined(poi.fakevehicle)) {
     if(isarray(poi.fakevehicle)) {
-      foreach(fake in poi.fakevehicle)
-      fake delete();
+      foreach(fake in poi.fakevehicle) {
+        fake delete();
+      }
     } else
       poi.fakevehicle delete();
   }
@@ -208,17 +225,21 @@ deleteallpoi(substr) {
 }
 
 add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
-  if(!isDefined(ui))
+  if(!isDefined(ui)) {
     ui = 1;
+  }
 
-  if(!isDefined(ignore))
+  if(!isDefined(ignore)) {
     ignore = 0;
+  }
 
-  if(!isDefined(useenthp))
+  if(!isDefined(useenthp)) {
     useenthp = 0;
+  }
 
-  if(!isDefined(ui_note))
+  if(!isDefined(ui_note)) {
     ui_note = undefined;
+  }
 
   poi = getpoibyref(ref);
 
@@ -237,8 +258,9 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
     poi.entity.ref = poi;
 
     if(poi.health > 0) {
-      if(!is_true(useenthp))
+      if(!is_true(useenthp)) {
         poi.entity.health = poi.health;
+      }
 
       poi.entity.takedamage = 1;
 
@@ -280,12 +302,13 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
       poi.poinum = poinum;
       luinotifyevent(&"rts_add_poi", 2, poi.entity getentitynumber(), poinum);
 
-      if(isDefined(ui_note))
+      if(isDefined(ui_note)) {
         luinotifyevent(ui_note, 1, poi.entity getentitynumber());
-      else if(poi.entity.team == "axis")
+      } else if(poi.entity.team == "axis") {
         luinotifyevent(&"rts_secure_poi", 1, poi.entity getentitynumber());
-      else if(poi.entity.team == "allies")
+      } else if(poi.entity.team == "allies") {
         luinotifyevent(&"rts_defend_poi", 1, poi.entity getentitynumber());
+      }
     }
 
     poi.nodes = getnodesinradiussorted(poi.origin, 256, 0);
@@ -312,8 +335,9 @@ initpois() {
   }
 
   foreach(poi in level.rts.poi) {
-    if(!isDefined(poi.entity))
+    if(!isDefined(poi.entity)) {
       poi.entity = getent(poi.ref, "targetname");
+    }
 
     if(isDefined(poi.entity)) {
       assert(isDefined(poi.model), "Entity declared as POI but no model specified");
@@ -322,8 +346,9 @@ initpois() {
       poi.entity.angles = ent.angles;
       poi.entity.targetname = ent.targetname;
 
-      if(isDefined(ent.radius))
+      if(isDefined(ent.radius)) {
         poi.entity.radius = ent.radius;
+      }
 
       ent delete();
       poi.entity.ref = poi;
@@ -341,31 +366,36 @@ initpois() {
     }
   }
 
-  if(isDefined(level.rts.allied_base) && isDefined(level.rts.allied_base.entity))
+  if(isDefined(level.rts.allied_base) && isDefined(level.rts.allied_base.entity)) {
     level.rts.allied_base.entity maps\_so_rts_support::set_as_target("allies");
+  }
 }
 
 claimpoi(poi, team) {
   poi.team = team;
 
-  if(isDefined(poi.entity))
+  if(isDefined(poi.entity)) {
     poi.entity.team = team;
+  }
 
-  if(team == "axis")
+  if(team == "axis") {
     poi.dominate_weight = poi.capture_time * -1;
-  else if(team == "allies")
+  } else if(team == "allies") {
     poi.dominate_weight = poi.capture_time;
-  else
+  } else {
     poi.dominate_weight = 0;
+  }
 
-  if(isDefined(poi.claimcallback))
+  if(isDefined(poi.claimcallback)) {
     poi thread[[poi.claimcallback]](team);
+  }
 }
 
 getpoibyref(refname) {
   foreach(poi in level.rts.poi) {
-    if(poi.ref == refname)
+    if(poi.ref == refname) {
       return poi;
+    }
   }
 
   return undefined;
@@ -375,8 +405,9 @@ getpoients() {
   ents = [];
 
   foreach(poi in level.rts.poi) {
-    if(isDefined(poi.entity))
+    if(isDefined(poi.entity)) {
       ents[ents.size] = poi.entity;
+    }
   }
 
   return ents;
@@ -389,10 +420,11 @@ poi_setobjectivenumber(ref, num, compassicon) {
   if(isDefined(compassicon)) {
     objective_icon(poi.objectivenum, compassicon);
 
-    if(isDefined(poi.trigger))
+    if(isDefined(poi.trigger)) {
       objective_size(poi.objectivenum, poi.trigger getentitynumber());
-    else
+    } else {
       objective_size(poi.objectivenum, poi.entity getentitynumber());
+    }
 
     objective_position(poi.objectivenum, poi.origin + (0, 0, poi.obj_zoff));
   }
@@ -404,16 +436,18 @@ poi_addobjective(poi) {
   }
   poi.objectivenum = level.poiobjectivenum;
 
-  if(isDefined(poi.objtext))
+  if(isDefined(poi.objtext)) {
     objective_add(poi.poiobjectivenum, "active", poi.objtext, poi.entity);
+  }
 
   if(isDefined(poi.compassicon)) {
     objective_icon(poi.objectivenum, poi.compassicon);
 
-    if(isDefined(poi.trigger))
+    if(isDefined(poi.trigger)) {
       objective_size(poi.objectivenum, poi.trigger getentitynumber());
-    else
+    } else {
       objective_size(poi.objectivenum, poi.entity getentitynumber());
+    }
 
     objective_position(poi.objectivenum, poi.origin + (0, 0, poi.obj_zoff));
   }
@@ -425,8 +459,9 @@ getpoiobjectives() {
   pois = [];
 
   foreach(poi in level.rts.poi) {
-    if(poi.capture_time > 0)
+    if(poi.capture_time > 0) {
       pois[pois.size] = poi;
+    }
   }
 
   return pois;
@@ -461,10 +496,11 @@ poi_deathwatch(poi) {
   level endon("rts_terminated");
   level endon("poi_deleted_" + poi.ref);
 
-  if(poi.team == "allies")
+  if(poi.team == "allies") {
     capteam = "axis";
-  else
+  } else {
     capteam = "allies";
+  }
 
   origin = self.origin;
   entnum = self getentitynumber();
@@ -481,10 +517,11 @@ poi_deathwatch(poi) {
     poi.pulsealert = time + 3000;
     health = self.health;
 
-    if(health < 0)
+    if(health < 0) {
       health = 0;
-    else
+    } else {
       health = int(health / max_health * 255);
+    }
 
     val = maps\_so_rts_support::make_gpr_opcode(2) + 65280 + health;
     poi.entity thread maps\_so_rts_support::set_gpr(val);
@@ -514,10 +551,11 @@ poi_dominationwatch(poi) {
     aitouchers = poi.trigger maps\_so_rts_support::get_ents_touching_trigger();
 
     foreach(ai in aitouchers) {
-      if(ai.team == "allies")
+      if(ai.team == "allies") {
         poi.dominate_weight = poi.dominate_weight + 1;
-      else
+      } else {
         poi.dominate_weight = poi.dominate_weight - 1;
+      }
 
       poi.touchers[ai.team]++;
     }
@@ -546,45 +584,56 @@ poi_dominationwatch(poi) {
 }
 
 ai_can_plantintruder(poi, ai) {
-  if(poi.team == "allies")
+  if(poi.team == "allies") {
     capteam = "axis";
-  else
+  } else {
     capteam = "allies";
+  }
 
-  if(is_true(poi.intruder_being_planted))
+  if(is_true(poi.intruder_being_planted)) {
     return false;
+  }
 
-  if(is_true(poi.has_intruder))
+  if(is_true(poi.has_intruder)) {
     return false;
+  }
 
-  if(is_true(poi.block_intruder))
+  if(is_true(poi.block_intruder)) {
     return false;
+  }
 
-  if(capteam == "allies" && !flag("rts_mode"))
+  if(capteam == "allies" && !flag("rts_mode")) {
     return false;
+  }
 
-  if(gettime() < poi.plant_attempt + 2000)
+  if(gettime() < poi.plant_attempt + 2000) {
     return false;
+  }
 
   if(isDefined(ai)) {
-    if(!isDefined(ai.initialized))
+    if(!isDefined(ai.initialized)) {
       return false;
+    }
 
-    if(!isDefined(ai.ai_ref))
+    if(!isDefined(ai.ai_ref)) {
       return false;
+    }
 
-    if(ai != level.rts.player && ai.ai_ref.species != "human")
+    if(ai != level.rts.player && ai.ai_ref.species != "human") {
       return false;
+    }
 
     if(level.rts.nointruderzones.size) {
       foreach(zone in level.rts.nointruderzones) {
-        if(ai istouching(zone))
+        if(ai istouching(zone)) {
           return false;
+        }
       }
     }
 
-    if(!ai istouching(poi.intruder_trigger))
+    if(!ai istouching(poi.intruder_trigger)) {
       return false;
+    }
   }
 
   return true;
@@ -594,24 +643,27 @@ poi_capturewatch(poi) {
   level endon("rts_terminated");
   level endon("poi_deleted_" + poi.ref);
 
-  if(poi.team == "allies")
+  if(poi.team == "allies") {
     capteam = "axis";
-  else
+  } else {
     capteam = "allies";
+  }
 
-  if(isDefined(poi.alttrig))
+  if(isDefined(poi.alttrig)) {
     poi.trigger = getent(poi.alttrig, "targetname");
-  else
+  } else {
     poi.trigger = spawn("trigger_radius", poi.entity.origin, 0, isDefined(poi.entity.radius) ? poi.entity.radius : level.rts.poiradius, 72);
+  }
 
   time_required_to_dominate = poi.capture_time;
   time_required_to_dominate2x = time_required_to_dominate + time_required_to_dominate;
   poi_addobjective(poi);
 
-  if(isDefined(poi.alttrig))
+  if(isDefined(poi.alttrig)) {
     poi.intruder_trigger = getent(poi.alttrig, "targetname");
-  else
+  } else {
     poi.intruder_trigger = spawn("trigger_radius", poi.entity.origin, 0, isDefined(poi.entity.radius) ? poi.entity.radius : level.rts.poiradius / 2, 128);
+  }
 
   assert(isDefined(poi.intruder_trigger));
   poi.intruder_trigger thread watchnetworkintruder(poi);
@@ -624,17 +676,19 @@ poi_capturewatch(poi) {
     networkintruders = poi.trigger maps\_so_rts_support::get_ents_touching_trigger(level.rts.networkintruders[capteam]);
 
     if(networkintruders.size > 0) {
-      if(capteam == "allies")
+      if(capteam == "allies") {
         poi.dominate_weight = poi.dominate_weight + 1;
-      else
+      } else {
         poi.dominate_weight = poi.dominate_weight - 1;
+      }
 
       if(!is_true(poi.has_intruder)) {
         poi.has_intruder = 1;
         level notify("poi_contested", poi.entity);
 
-        if(capteam == "allies")
+        if(capteam == "allies") {
           luinotifyevent(&"rts_hide_poi", 1, poi.entity getentitynumber());
+        }
       }
     } else {
       if(capteam == "allies") {
@@ -678,11 +732,13 @@ poi_capturewatch(poi) {
       }
     }
 
-    if(capteam == "allies" && poi.dominate_weight >= time_required_to_dominate)
+    if(capteam == "allies" && poi.dominate_weight >= time_required_to_dominate) {
       poi.dominate_weight = time_required_to_dominate;
+    }
 
-    if(capteam == "axis" && poi.dominate_weight <= time_required_to_dominate * -1)
+    if(capteam == "axis" && poi.dominate_weight <= time_required_to_dominate * -1) {
       poi.dominate_weight = time_required_to_dominate * -1;
+    }
 
     if(poi.dominate_weight != lastval) {
       if(capteam == "allies") {
@@ -697,17 +753,18 @@ poi_capturewatch(poi) {
 
       lastval = poi.dominate_weight;
 
-      if(!is_true(poi.reverse_timer))
+      if(!is_true(poi.reverse_timer)) {
         val = maps\_so_rts_support::make_gpr_opcode(2) + ((time_required_to_dominate2x << 8) + int(progress * time_required_to_dominate2x));
-      else {
+      } else {
         progress = 1.0 - progress;
         val = maps\_so_rts_support::make_gpr_opcode(2) + ((time_required_to_dominate2x << 8) + int(progress * time_required_to_dominate2x));
       }
 
       poi.entity thread maps\_so_rts_support::set_gpr(val);
 
-      foreach(unit in networkintruders)
-      unit thread maps\_so_rts_support::set_gpr(val);
+      foreach(unit in networkintruders) {
+        unit thread maps\_so_rts_support::set_gpr(val);
+      }
     }
 
     if(capteam == "allies" && poi.dominate_weight == time_required_to_dominate && poi.entity.team != capteam) {
@@ -723,8 +780,9 @@ poi_capturewatch(poi) {
       poi.entity notify("taken_perm");
       luinotifyevent(&"rts_captured_poi", 1, poi.entity getentitynumber());
 
-      foreach(unit in networkintruders)
-      unit dodamage(10000, unit.origin, unit);
+      foreach(unit in networkintruders) {
+        unit dodamage(10000, unit.origin, unit);
+      }
 
       maps\_so_rts_event::trigger_event(poi.intruder_prefix + "_success_" + capteam);
       maps\_so_rts_event::trigger_event("sfx_intruder_success");
@@ -745,8 +803,9 @@ poi_capturewatch(poi) {
       poi.entity notify("taken_perm");
       luinotifyevent(&"rts_captured_poi", 1, poi.entity getentitynumber());
 
-      foreach(unit in networkintruders)
-      unit dodamage(10000, unit.origin, unit);
+      foreach(unit in networkintruders) {
+        unit dodamage(10000, unit.origin, unit);
+      }
 
       level thread poicaptured(poi.entity, capteam);
       return;
@@ -778,8 +837,9 @@ poi_watch(poi) {
 
     if(poi.entity.team == "axis") {
       if(poi.touchers["axis"] == 0 && poi.touchers["allies"] > 0) {
-        if(!isDefined(poi.captime))
+        if(!isDefined(poi.captime)) {
           poi.captime = gettime();
+        }
 
         if(gettime() - poi.captime > 3000) {
           claimpoi(poi, "allies");
@@ -805,8 +865,9 @@ poi_watch(poi) {
 
 ispoient(ent) {
   foreach(poi in level.rts.poi) {
-    if(isDefined(poi.entity) && ent == poi.entity)
+    if(isDefined(poi.entity) && ent == poi.entity) {
       return poi.ref;
+    }
   }
 
   return undefined;
@@ -819,10 +880,11 @@ poithink(poi) {
   } else if(poi.capture_time > 0 && poi.canbe_retaken != 0)
     level thread poi_dominationwatch(poi);
   else if(poi.capture_time > 0 && poi.canbe_retaken == 0) {
-    if(is_true(poi.need_device))
+    if(is_true(poi.need_device)) {
       level thread poi_capturewatch(poi);
-    else
+    } else {
       level thread poi_watch(poi);
+    }
   } else {}
 }
 
@@ -832,8 +894,9 @@ getclosestpoi(myorigin, myteam, threshsq) {
 
   foreach(poi in level.rts.poi) {
     if(isDefined(myteam)) {
-      if(poi.team == myteam)
+      if(poi.team == myteam) {
         continue;
+      }
     }
 
     distsq = distancesquared(poi.entity.origin, myorigin);
@@ -885,32 +948,38 @@ watchnetworkintruder(poi) {
   level endon("rts_terminated");
   self endon("death");
 
-  if(poi.team == "allies")
+  if(poi.team == "allies") {
     capteam = "axis";
-  else
+  } else {
     capteam = "allies";
+  }
 
   self thread watchnetworkintruderplant(poi);
   level thread trigger_use(poi.trigger, level.rts.intruderplantstring, "intruder_placed_" + poi.trigger getentitynumber(), undefined, capteam);
 
-  if(capteam == "allies")
+  if(capteam == "allies") {
     level thread networkintruder_watchgunuse(poi);
+  }
 
   while(isDefined(poi.trigger)) {
     poi.trigger.disable_use = undefined;
     networkintruders = poi.trigger maps\_so_rts_support::get_ents_touching_trigger(level.rts.networkintruders[capteam]);
 
-    if(networkintruders.size > 0)
+    if(networkintruders.size > 0) {
       poi.trigger.disable_use = 1;
+    }
 
-    if(capteam == level.rts.player.team && !level.rts.player isonground())
+    if(capteam == level.rts.player.team && !level.rts.player isonground()) {
       poi.trigger.disable_use = 1;
+    }
 
-    if(isDefined(level.rts.player.ally) && isDefined(level.rts.player.ally.vehicle))
+    if(isDefined(level.rts.player.ally) && isDefined(level.rts.player.ally.vehicle)) {
       poi.trigger.disable_use = 1;
+    }
 
-    if(is_true(level.rts.switch_trans))
+    if(is_true(level.rts.switch_trans)) {
       poi.trigger.disable_use = 1;
+    }
 
     wait 0.05;
   }

@@ -51,7 +51,6 @@ class czm_towers_challenges_hud: cluielem {
     cluielem::function_dcb34c80("string", "challenge_text", 1);
     cluielem::add_clientfield("required_goal", 1, 7, "int");
   }
-
 }
 
 set_challenge_progress(player, value) {

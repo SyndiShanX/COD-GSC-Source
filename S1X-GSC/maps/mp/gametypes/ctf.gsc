@@ -899,7 +899,7 @@ removeflagcarrierclass() {
 oncantuse(var_0) {}
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != self.pers["team"]) {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1.pers["team"] != self.pers["team"]) {
     if(isDefined(var_1.carryflag)) {
       var_1 thread maps\mp\_events::killwithflagevent();
     }

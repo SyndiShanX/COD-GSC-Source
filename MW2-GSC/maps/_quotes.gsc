@@ -23,21 +23,21 @@ setDeadQuote() {
     deadQuoteIndex = randomInt(deadQuoteSize);
 
     // This is used for testing
-    if(GetDvar("cycle_deathquotes") != "") {
-      if(GetDvar("ui_deadquote_index") == "")
-        SetDvar("ui_deadquote_index", "0");
+    if(getDvar("cycle_deathquotes") != "") {
+      if(getDvar("ui_deadquote_index") == "")
+        setDvar("ui_deadquote_index", "0");
 
       deadQuoteIndex = GetDvarInt("ui_deadquote_index");
 
-      SetDvar("ui_deadquote", lookupDeathQuote(deadQuoteIndex));
+      setDvar("ui_deadquote", lookupDeathQuote(deadQuoteIndex));
 
       deadQuoteIndex++;
       if(deadQuoteIndex > (deadQuoteSize - 1))
         deadQuoteIndex = 0;
 
-      SetDvar("ui_deadquote_index", deadQuoteIndex);
+      setDvar("ui_deadquote_index", deadQuoteIndex);
     } else {
-      SetDvar("ui_deadquote", lookupDeathQuote(deadQuoteIndex));
+      setDvar("ui_deadquote", lookupDeathQuote(deadQuoteIndex));
     }
   }
 }
@@ -71,9 +71,9 @@ setDeadQuote_so() {
       }
     }
 
-    setdvar("ui_deadquote_v3", getdvar("ui_deadquote_v2"));
-    setdvar("ui_deadquote_v2", getdvar("ui_deadquote_v1"));
-    setdvar("ui_deadquote_v1", deadquotes[i]);
+    setDvar("ui_deadquote_v3", getDvar("ui_deadquote_v2"));
+    setDvar("ui_deadquote_v2", getDvar("ui_deadquote_v1"));
+    setDvar("ui_deadquote_v1", deadquotes[i]);
   }
 
   // A few deadquotes have icons attached to them.
@@ -99,17 +99,17 @@ setDeadQuote_so() {
       break;
   }
 
-  setdvar("ui_deadquote", deadquotes[i]);
+  setDvar("ui_deadquote", deadquotes[i]);
 }
 
 deadquote_recently_used(deadquote) {
-  if(deadquote == getdvar("ui_deadquote_v1"))
+  if(deadquote == getDvar("ui_deadquote_v1"))
     return true;
 
-  if(deadquote == getdvar("ui_deadquote_v2"))
+  if(deadquote == getDvar("ui_deadquote_v2"))
     return true;
 
-  if(deadquote == getdvar("ui_deadquote_v3"))
+  if(deadquote == getDvar("ui_deadquote_v3"))
     return true;
 
   return false;

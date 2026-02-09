@@ -32,7 +32,7 @@ main() {
 should_use_old_lightgrids() {
   if(scripts\mp_patches\common::is_iw4_map()) {
     // TODO: disable for certain maps atm
-    switch (getdvar("mapname")) {
+    switch (getDvar("mapname")) {
       case "mp_favela": // shadows need fixed
       case "mp_fuel2": // map looks way too dark, vision/lightset touchups might fix?
       case "mp_invasion": // hit or miss
@@ -50,7 +50,7 @@ should_use_old_lightgrids() {
 }
 
 init() {
-  setdvar("r_lightgridnoncompressed", should_use_old_lightgrids());
+  setDvar("r_lightgridnoncompressed", should_use_old_lightgrids());
 }
 
 init_stub() {
@@ -226,7 +226,7 @@ music_onplayerspawned_stub() {
 
   wait 0.05;
 
-  if(getdvar("virtuallobbyactive") == "0") {
+  if(getDvar("virtuallobbyactive") == "0") {
     if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
       if(!maps\mp\_utility::issecondarysplitscreenplayer())
         self playlocalsound(game["music"]["spawn_" + self.team]);
@@ -386,7 +386,7 @@ onplayerspawned_stub() {
 }
 
 updatedamagefeedback_stub(var_0, var_1) {
-  if(!isplayer(self) || !isDefined(var_0)) {
+  if(!isPlayer(self) || !isDefined(var_0)) {
     return;
   }
   switch (var_0) {
@@ -577,7 +577,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   level.numplayerswaitingtoenterkillcam--;
   var_20 = maps\mp\gametypes\_killcam::killcamtime(var_3, var_4, var_8, var_11, var_12, var_18, level.showingfinalkillcam);
 
-  if(getdvar("scr_killcam_posttime") == "")
+  if(getDvar("scr_killcam_posttime") == "")
     var_21 = 2;
   else {
     var_21 = getdvarfloat("scr_killcam_posttime");
@@ -607,12 +607,12 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   if(isagent(var_13) && !isDefined(var_13.isactive)) {
     return;
   }
-  if(isplayer(var_14))
+  if(isPlayer(var_14))
     self setclientomnvar("ui_killcam_victim_id", var_14 getentitynumber());
   else
     self setclientomnvar("ui_killcam_victim_id", -1);
 
-  if(isplayer(var_13))
+  if(isPlayer(var_13))
     self setclientomnvar("ui_killcam_killedby_id", var_13 getentitynumber());
   else if(isagent(var_13))
     self setclientomnvar("ui_killcam_killedby_id", -1);
@@ -643,7 +643,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
       if(var_25 != "iw5_combatknife")
         var_24 = getweaponattachments(var_4);
 
-      if(!level.showingfinalkillcam && (isplayer(var_13) && !isbot(self) && !isagent(self)) && self maps\mp\_utility::_hasPerk("specialty_copycat")) {
+      if(!level.showingfinalkillcam && (isPlayer(var_13) && !isbot(self) && !isagent(self)) && self maps\mp\_utility::_hasPerk("specialty_copycat")) {
         self setclientomnvar("ui_killcam_copycat", 1);
         thread waitcopycatkillcambutton(var_13);
       } else
@@ -657,7 +657,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
     }
   }
 
-  if(isplayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2)
+  if(isPlayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2)
     self setclientomnvar("ui_killcam_killedby_nemesis", 1);
   else
     self setclientomnvar("ui_killcam_killedby_nemesis", 0);
@@ -683,7 +683,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   var_27 = gettime();
   self notify("begin_killcam", var_27);
 
-  if(!isagent(var_13) && isDefined(var_13) && isplayer(var_14))
+  if(!isagent(var_13) && isDefined(var_13) && isPlayer(var_14))
     var_13 visionsyncwithplayer(var_14);
 
   maps\mp\_utility::updatesessionstate("spectator");
@@ -797,7 +797,7 @@ callback_playerconnect_stub() {
   initclientdvars();
   initplayerstats();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1")
     level waittill("eternity");
 
   self.guid = self getguid();

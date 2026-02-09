@@ -436,7 +436,7 @@ butchdance_combat() {
     magicbullet("m27", var_10.origin, level.allies[0].origin);
     magicbullet("m27", var_10.origin, level.allies[1].origin);
     wait 0.5;
-    setdvar("ui_deadquote", &"ENEMY_HQ_MERRICK_AND_KEEGAN_WERE");
+    setDvar("ui_deadquote", &"ENEMY_HQ_MERRICK_AND_KEEGAN_WERE");
     maps\_utility::missionfailedwrapper();
     return;
   } else
@@ -649,7 +649,7 @@ handle_flyaway_fail() {
 
 truck_turret_fail() {
   wait 4;
-  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_WERE_SHOT_DOWN_BY");
+  setDvar("ui_deadquote", &"ENEMY_HQ_YOU_WERE_SHOT_DOWN_BY");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -842,7 +842,7 @@ player_fail_finale() {
 
     while(common_scripts\utility::flag("player_left_finale_area")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setDvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -857,6 +857,6 @@ player_fail_finale() {
 player_fail_finale_instakill() {
   level.player endon("death");
   common_scripts\utility::flag_wait("player_left_finale_area_instakill");
-  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setDvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }

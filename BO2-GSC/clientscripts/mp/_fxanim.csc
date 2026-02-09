@@ -12,7 +12,7 @@ init() {
 }
 
 fxanim_init(localclientnum) {
-  mapname = getdvar(#"mapname");
+  mapname = getDvar(#"mapname");
 
   switch (mapname) {
     case "mp_array":

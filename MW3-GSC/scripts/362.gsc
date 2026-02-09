@@ -11,14 +11,12 @@ _id_2852() {
 
   if(self.vehicletype == "hind" || self.vehicletype == "ny_harbor_hind") {
     var_0 = 1;
-
   }
   if(self.vehicletype == "cobra" || self.vehicletype == "cobra_player") {
     thread _id_286C("chopperpilot_hellfire", "cobra_Sidewinder");
 
     if(isDefined(self._id_2853)) {
       self._id_2853 thread _id_286C("chopperpilot_hellfire", "cobra_Sidewinder");
-
     }
     var_0 = 1;
   }
@@ -29,7 +27,7 @@ _id_2852() {
   level thread _id_2856(self);
   level thread maps\_helicopter_ai::_id_2845(self);
 
-  if(getdvar("cobrapilot_wingman_enabled") == "1") {
+  if(getDvar("cobrapilot_wingman_enabled") == "1") {
     if(isDefined(self._id_2854)) {
       level._id_2855 = self;
       level thread maps\_helicopter_ai::_id_284E(self);
@@ -75,14 +73,12 @@ _id_2859(var_0, var_1, var_2, var_3) {
 
       if(var_4) {
         var_0 playSound("cobra_flare_fire");
-
       }
       var_4 = !var_4;
     }
 
     if(var_5 <= var_2 - 1) {
       thread _id_2860(var_0, var_3);
-
     }
     wait 0.1;
   }
@@ -94,7 +90,6 @@ _id_285B(var_0) {
 
   if(isDefined(var_0._id_285C)) {
     var_1 = var_0._id_285C;
-
   }
   _id_2859(var_0, 8, 1, var_1);
 }
@@ -102,7 +97,6 @@ _id_285B(var_0) {
 _id_285D() {
   if(isDefined(self._id_285E)) {
     missile_deleteattractor(self._id_285E);
-
   }
   self._id_285E = missile_createattractorent(self._id_285F, 10000, 10000);
 }
@@ -114,7 +108,6 @@ _id_2860(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = 5.0;
-
   }
   var_2 = _id_2863(var_0);
   var_3 = spawn("script_origin", var_0 gettagorigin("tag_flare"));
@@ -124,7 +117,6 @@ _id_2860(var_0, var_1) {
   if(isDefined(var_0._id_2857)) {
     if(isDefined(var_0._id_285E)) {
       missile_deleteattractor(var_0._id_285E);
-
     }
     var_4 = missile_createattractorent(var_3, 10000, 10000);
   }
@@ -140,14 +132,12 @@ _id_2860(var_0, var_1) {
   if(isDefined(var_0._id_2857)) {
     if(isDefined(var_4)) {
       missile_deleteattractor(var_4);
-
     }
     var_0 thread _id_285D();
   }
 
   if(!isDefined(var_0.script_targetoffset_z)) {
     var_0.script_targetoffset_z = 0;
-
   }
   var_6 = (0, 0, var_0.script_targetoffset_z);
 
@@ -179,19 +169,15 @@ _id_2864(var_0, var_1) {
 _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   if(!isDefined(var_4)) {
     var_4 = 1;
-
   }
   if(!isDefined(var_5)) {
     var_5 = 0;
-
   }
   var_7 = [];
   var_8 = undefined;
@@ -223,11 +209,9 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_6)) {
     var_10 = maps\_utility::_id_264D(var_10, var_6);
-
   }
   if(var_5) {
     var_10 = maps\_utility::_id_0B53(var_10);
-
   }
   var_13 = anglesToForward(self.angles);
 
@@ -262,7 +246,6 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         var_18 = 48;
       } else {
         var_18 = 150;
-
       }
       var_17 = sighttracepassed(self.origin, var_10[var_11].origin + (0, 0, var_18), 0, self);
 
@@ -278,11 +261,9 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(var_7.size == 0) {
     return var_8;
-
   }
   if(var_7.size == 1) {
     return var_7[0];
-
   }
   var_19 = maps\_utility::_id_0AE9(self.origin, var_7);
   return var_19;
@@ -296,7 +277,6 @@ _id_2867(var_0) {
 
   if(isDefined(self._id_2857)) {
     self endon("gunner_stop_firing");
-
   }
   var_1 = (0, 0, 0);
 
@@ -304,16 +284,14 @@ _id_2867(var_0) {
     var_1 = var_1 + (0, 0, var_0.script_targetoffset_z);
   } else if(issentient(var_0)) {
     var_1 = (0, 0, 32);
-
   }
   self setturrettargetent(var_0, var_1);
 
   while(self.health > 0) {
     var_2 = randomintrange(1, 25);
 
-    if(getdvar("cobrapilot_debug") == "1") {
+    if(getDvar("cobrapilot_debug") == "1") {
       iprintln("randomShots = " + var_2);
-
     }
     for(var_3 = 0; var_3 < var_2; var_3++) {
       if(isDefined(self._id_2857)) {
@@ -327,7 +305,6 @@ _id_2867(var_0) {
 
       if(isDefined(self._id_2857)) {
         self setvehweapon(level._id_2868[self._id_2858.currentweapon].v["weapon"]);
-
       }
       wait 0.05;
     }
@@ -337,19 +314,17 @@ _id_2867(var_0) {
 }
 
 _id_286B(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(getdvar("cobrapilot_debug") != "1") {
+  if(getDvar("cobrapilot_debug") != "1") {
     return;
   }
   if(!isDefined(var_4)) {
     var_4 = (0, 0, 0);
-
   }
   var_2 endon("death");
   self endon("gunner_new_target");
 
   if(!isDefined(var_3)) {
     var_3 = (0, 0, 0);
-
   }
   if(isDefined(var_5)) {
     var_5 = gettime() + var_5 * 1000;
@@ -371,15 +346,12 @@ _id_286C(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     var_4[1] = var_1;
-
   }
   if(isDefined(var_2)) {
     var_4[2] = var_2;
-
   }
   if(isDefined(var_3)) {
     var_4[3] = var_3;
-
   }
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
     for(var_6 = 0; var_6 < level._id_286E[var_4[var_5]].size; var_6++) {
@@ -391,7 +363,6 @@ _id_286C(var_0, var_1, var_2, var_3) {
 fire_missile(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   var_5 = undefined;
   var_6 = undefined;
@@ -520,7 +491,6 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
     var_9 = self._id_2871;
   } else {
     var_9 = -1;
-
   }
   for(var_10 = 0; var_10 < var_1; var_10++) {
     var_9++;
@@ -532,7 +502,6 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
 
         if(isDefined(level._effect["ffar_mi28_muzzleflash"])) {
           playFXOnTag(common_scripts\utility::getfx("ffar_mi28_muzzleflash"), self, var_8[var_9]);
-
         }
         thread _id_2872(0.1, 0.5, 0.2, var_2.origin, 1600);
       }
@@ -558,7 +527,6 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
               var_11 thread _id_2873(0.6);
             } else {
               var_11 thread _id_2873(var_4);
-
             }
             break;
           default:
@@ -566,7 +534,6 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
         }
       } else {
         var_11 = self fireweapon(var_8[var_9]);
-
       }
       self notify("missile_fired", var_11);
     }
@@ -575,7 +542,6 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_10 < var_1 - 1) {
       wait(var_6);
-
     }
     if(isDefined(var_3)) {
       wait(var_3);

@@ -399,7 +399,7 @@ function private thrashershouldconsumezombie(entity) {
 }
 
 function private thrasherconsumeplayer(entity) {
-  if(isplayer(entity.favoriteenemy)) {
+  if(isPlayer(entity.favoriteenemy)) {
     entity thread thrasherserverutils::thrasherconsumeplayerutil(entity, entity.favoriteenemy);
   }
 }
@@ -741,7 +741,7 @@ function private thrasherconsumeplayerscene(thrasher, playerclone) {
 function thrasherconsumeplayerutil(thrasher, player) {
   assert(isactor(thrasher));
   assert(thrasher.archetype == "");
-  assert(isplayer(player));
+  assert(isPlayer(player));
   thrasher endon("kill_consume_player");
   if(isDefined(player.thrasherconsumed) && player.thrasherconsumed) {
     return;

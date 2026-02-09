@@ -90,7 +90,7 @@ function function_d657f93a() {
 }
 
 function function_8b3820b0(params) {
-  if(self ai::has_behavior_attribute("rogue_control") && isplayer(params.eattacker)) {
+  if(self ai::has_behavior_attribute("rogue_control") && isPlayer(params.eattacker)) {
     var_9bed3c76 = self ai::get_behavior_attribute("rogue_control");
     if(var_9bed3c76 == "level_3" || var_9bed3c76 == "forced_level_3") {
       params.eattacker notify("hash_275edb93");
@@ -103,7 +103,7 @@ function function_b68ffa5d() {
 }
 
 function function_6e45ce5d(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     player = params.eattacker;
     if(isDefined(player.hijacked_vehicle_entity) && player.hijacked_vehicle_entity.archetype === "raps" && player.hijacked_vehicle_entity != self) {
       player notify("hash_5cd1f75c");
@@ -111,7 +111,7 @@ function function_6e45ce5d(params) {
       player notify("hash_5cd1f75c");
     }
   } else {
-    if(isDefined(params.eattacker.iffowner) && params.eattacker.archetype === "raps" && isplayer(params.eattacker.iffowner)) {
+    if(isDefined(params.eattacker.iffowner) && params.eattacker.archetype === "raps" && isPlayer(params.eattacker.iffowner)) {
       params.eattacker.iffowner notify("hash_5cd1f75c");
     } else if(self.archetype === "raps" && params.eattacker === self) {
       foreach(player in level.activeplayers) {
@@ -138,7 +138,7 @@ function function_c6ba5108() {
 }
 
 function function_8eb61d56(params) {
-  if(isplayer(params.eattacker) && self.archetype == "robot" && (isDefined(self.current_scene) && issubstr(self.current_scene, "cin_lot_10_01_skybridge_vign_jump_robot") || (isDefined(self.traversestartnode) && isDefined(self.traversestartnode.animscript) && issubstr(tolower(self.traversestartnode.animscript), "jump")))) {
+  if(isPlayer(params.eattacker) && self.archetype == "robot" && (isDefined(self.current_scene) && issubstr(self.current_scene, "cin_lot_10_01_skybridge_vign_jump_robot") || (isDefined(self.traversestartnode) && isDefined(self.traversestartnode.animscript) && issubstr(tolower(self.traversestartnode.animscript), "jump")))) {
     params.eattacker notify("hash_4f2b7767");
   }
 }
@@ -153,7 +153,7 @@ function function_109e560b() {
     self thread function_d48890bb();
     while(!isDefined(self.var_66202c1f)) {
       self waittill("damage", n_damage, e_attacker, v_direction, v_point, s_type);
-      if(isplayer(e_attacker) && (s_type === "MOD_RIFLE_BULLET" || s_type === "MOD_PISTOL_BULLET" || s_type === "MOD_HEAD_SHOT")) {
+      if(isPlayer(e_attacker) && (s_type === "MOD_RIFLE_BULLET" || s_type === "MOD_PISTOL_BULLET" || s_type === "MOD_HEAD_SHOT")) {
         self.var_66202c1f = 1;
       }
     }
@@ -162,7 +162,7 @@ function function_109e560b() {
 
 function function_d48890bb() {
   self waittill("death", attacker);
-  if(isplayer(attacker) && self.var_66202c1f !== 1) {
+  if(isPlayer(attacker) && self.var_66202c1f !== 1) {
     attacker notify("hash_c4928636");
   }
 }
@@ -185,7 +185,7 @@ function function_4815496() {
 }
 
 function function_b9a9c8d8(params) {
-  if(self.archetype == "civilian" || self.archetype == "allies" && isplayer(params.eattacker)) {
+  if(self.archetype == "civilian" || self.archetype == "allies" && isPlayer(params.eattacker)) {
     world.var_aaf25bba = 0;
   }
 }
@@ -195,7 +195,7 @@ function function_9e965239() {
 }
 
 function function_3bbd5251(params) {
-  if(self.archetype == "robot" && isplayer(params.eattacker) && isDefined(self.current_scene) && issubstr(self.current_scene, "cin_lotus_charging_station_awaken_robot")) {
+  if(self.archetype == "robot" && isPlayer(params.eattacker) && isDefined(self.current_scene) && issubstr(self.current_scene, "cin_lotus_charging_station_awaken_robot")) {
     params.eattacker notify("hash_f0d8a6c8");
   }
 }
@@ -205,7 +205,7 @@ function function_8593adf4() {
 }
 
 function function_e36c85d8(params) {
-  if(isplayer(params.eattacker) && self.archetype == "robot") {
+  if(isPlayer(params.eattacker) && self.archetype == "robot") {
     player = params.eattacker;
     if(self clientfield::get("robot_EMP") || self clientfield::get("cybercom_sysoverload")) {
       if(!isDefined(player.var_cacfc33c)) {
@@ -302,7 +302,7 @@ function function_75102c92() {
 }
 
 function function_f5ef0d83(params) {
-  if(isplayer(params.eattacker) && self.team === "axis" && isDefined(self.current_scene) && array::contains(level.var_d97ef4e5, self.current_scene)) {
+  if(isPlayer(params.eattacker) && self.team === "axis" && isDefined(self.current_scene) && array::contains(level.var_d97ef4e5, self.current_scene)) {
     params.eattacker notify("hash_c335c11b");
   }
 }
@@ -328,7 +328,7 @@ function function_fc480d54() {
 }
 
 function function_e8cf8caa(params) {
-  if(isplayer(params.eattacker) && self.var_2f8cff2 === 1) {
+  if(isPlayer(params.eattacker) && self.var_2f8cff2 === 1) {
     params.eattacker notify("hash_3dbcf4f1");
   }
 }
@@ -341,14 +341,14 @@ function function_12b1c299() {
 
 function function_436940b1(params) {
   if(self.archetype === "robot") {
-    if(isplayer(params.eattacker)) {
+    if(isPlayer(params.eattacker)) {
       player = params.eattacker;
       if(isDefined(player.hijacked_vehicle_entity) && player.hijacked_vehicle_entity.archetype === "amws" && player.hijacked_vehicle_entity != self) {
         player notify("hash_746844e8");
       } else if(isDefined(params.einflictor) && params.einflictor.archetype === "amws" && params.einflictor != self) {
         player notify("hash_746844e8");
       }
-    } else if(isDefined(params.eattacker.iffowner) && params.eattacker.archetype === "amws" && isplayer(params.eattacker.iffowner)) {
+    } else if(isDefined(params.eattacker.iffowner) && params.eattacker.archetype === "amws" && isPlayer(params.eattacker.iffowner)) {
       params.eattacker.iffowner notify("hash_746844e8");
     }
   }

@@ -56,7 +56,7 @@ function private on_player_connect() {
 
 function private setup_devgui() {
   waittillframeend();
-  setdvar("", "");
+  setDvar("", "");
   aat_devgui_base = "";
   keys = getarraykeys(level.aat);
   foreach(key in keys) {
@@ -81,7 +81,7 @@ function private aat_devgui_think() {
         level.players[i] thread aat_set_debug_text(aat_name, 0, 0, 0);
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }
@@ -175,7 +175,7 @@ function get_nonalternate_weapon(weapon) {
 }
 
 function aat_response(death, inflictor, attacker, damage, flags, mod, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(mod != "MOD_PISTOL_BULLET" && mod != "MOD_RIFLE_BULLET" && mod != "MOD_GRENADE" && mod != "MOD_PROJECTILE" && mod != "MOD_EXPLOSIVE" && mod != "MOD_IMPACT") {

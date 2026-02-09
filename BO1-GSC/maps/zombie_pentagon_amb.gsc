@@ -12,18 +12,16 @@
 main() {
   level thread setup_phone_audio();
 }
-
 setup_phone_audio() {
   wait(1);
   level.phone_counter = 0;
   array_thread(getEntArray("secret_phone_trig", "targetname"), ::phone_egg);
 }
-
 phone_egg() {
   if(!isDefined(self)) {
     return;
   }
-  phone = getEnt(self.target, "targetname");
+  phone = GetEnt(self.target, "targetname");
   if(isDefined(phone)) {
     blinky = playFXOnTag(level._effect["fx_zombie_light_glow_telephone"], phone, "tag_light");
   }
@@ -31,7 +29,7 @@ phone_egg() {
   self SetCursorHint("HINT_NOICON");
   self playLoopSound("zmb_egg_phone_loop");
   self waittill("trigger", player);
-  self stopLoopSound(1);
+  self StopLoopSound(1);
   player playSound("zmb_egg_phone_activate");
   level.phone_counter = level.phone_counter + 1;
   if(level.phone_counter == 3) {
@@ -41,7 +39,6 @@ phone_egg() {
     level thread play_music_easter_egg();
   }
 }
-
 play_music_easter_egg() {
   level.music_override = true;
   if(is_mature()) {
@@ -54,15 +51,16 @@ play_music_easter_egg() {
   level.music_override = false;
   level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
 }
-
 play_pentagon_announcer_vox(alias, defcon_level) {
-  if(!isDefined(alias))
+  if(!isDefined(alias)) {
     return;
+  }
   if(!isDefined(level.pentann_is_speaking)) {
     level.pentann_is_speaking = 0;
   }
-  if(isDefined(defcon_level))
+  if(isDefined(defcon_level)) {
     alias = alias + "_" + defcon_level;
+  }
   if(level.pentann_is_speaking == 0) {
     level.pentann_is_speaking = 1;
     level play_initial_alarm();
@@ -70,7 +68,6 @@ play_pentagon_announcer_vox(alias, defcon_level) {
     level.pentann_is_speaking = 0;
   }
 }
-
 play_initial_alarm() {
   structs = getstructarray("defcon_alarms", "targetname");
   for(i = 0; i < structs.size; i++) {
@@ -78,13 +75,11 @@ play_initial_alarm() {
   }
   wait(.5);
 }
-
 pentagon_unlock_doa() {
   level.ZOMBIE_PENTAGON_PLAYER_CF_UPDATEPROFILE = 0;
   players = get_players();
   array_thread(players, ::pentagon_delay_update);
 }
-
 pentagon_delay_update() {
   self endon("death");
   self endon("disconnect");

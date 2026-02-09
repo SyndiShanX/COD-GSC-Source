@@ -11,7 +11,6 @@
 init() {
   init_equipment_upgrade();
 }
-
 register_equipment(equipment_name, hint, howto_hint, equipmentVO, watcher_thread) {
   if(!isDefined(level.zombie_include_equipment) || !is_true(level.zombie_include_equipment[equipment_name])) {
     return;
@@ -30,14 +29,12 @@ register_equipment(equipment_name, hint, howto_hint, equipmentVO, watcher_thread
   struct.watcher_thread = watcher_thread;
   level.zombie_equipment[equipment_name] = struct;
 }
-
 is_equipment_included(equipment_name) {
   if(!isDefined(level.zombie_include_equipment)) {
     return false;
   }
   return isDefined(level.zombie_include_equipment[equipment_name]);
 }
-
 include_zombie_equipment(equipment_name) {
   if(!isDefined(level.zombie_include_equipment)) {
     level.zombie_include_equipment = [];
@@ -45,7 +42,6 @@ include_zombie_equipment(equipment_name) {
   level.zombie_include_equipment[equipment_name] = true;
   PrecacheItem(equipment_name);
 }
-
 init_equipment_upgrade() {
   equipment_spawns = [];
   equipment_spawns = getEntArray("zombie_equipment_upgrade", "targetname");
@@ -58,23 +54,19 @@ init_equipment_upgrade() {
     equipment_spawns[i] thread equipment_spawn_think();
   }
 }
-
 get_equipment_hint(equipment_name) {
   AssertEx(isDefined(level.zombie_equipment[equipment_name]), equipment_name + " was not included or is not registered with the equipment system.");
   return level.zombie_equipment[equipment_name].hint;
 }
-
 get_equipment_howto_hint(equipment_name) {
   AssertEx(isDefined(level.zombie_equipment[equipment_name]), equipment_name + " was not included or is not registered with the equipment system.");
   return level.zombie_equipment[equipment_name].howto_hint;
 }
-
 add_to_equipment_trigger_list(equipment_name) {
   AssertEx(isDefined(level.zombie_equipment[equipment_name]), equipment_name + " was not included or is not registered with the equipment system.");
   level.zombie_equipment[equipment_name].triggers[level.zombie_equipment[equipment_name].triggers.size] = self;
-  level.zombie_equipment[equipment_name].models[level.zombie_equipment[equipment_name].models.size] = getEnt(self.target, "targetname");
+  level.zombie_equipment[equipment_name].models[level.zombie_equipment[equipment_name].models.size] = GetEnt(self.target, "targetname");
 }
-
 equipment_spawn_think() {
   for(;;) {
     self waittill("trigger", player);
@@ -87,7 +79,7 @@ equipment_spawn_think() {
       if(isDefined(level.hacker_tool_positions)) {
         new_pos = random(level.hacker_tool_positions);
         self.origin = new_pos.trigger_org;
-        model = getEnt(self.target, "targetname");
+        model = getent(self.target, "targetname");
         model.origin = new_pos.model_org;
         model.angles = new_pos.model_ang;
       }
@@ -95,7 +87,6 @@ equipment_spawn_think() {
     player equipment_give(self.zombie_equipment_upgrade);
   }
 }
-
 set_equipment_invisibility_to_player(equipment, invisible) {
   triggers = level.zombie_equipment[equipment].triggers;
   for(i = 0; i < triggers.size; i++) {
@@ -110,7 +101,6 @@ set_equipment_invisibility_to_player(equipment, invisible) {
     }
   }
 }
-
 equipment_take() {
   equipment = self get_player_equipment();
   if(!isDefined(equipment)) {
@@ -127,7 +117,6 @@ equipment_take() {
   }
   self set_player_equipment(undefined);
 }
-
 equipment_give(equipment) {
   if(self is_player_equipment(equipment)) {
     return;
@@ -153,7 +142,6 @@ equipment_give(equipment) {
   self thread equipment_slot_watcher(equipment);
   self maps\_zombiemode_audio::create_and_play_dialog("weapon_pickup", level.zombie_equipment[equipment].vox);
 }
-
 equipment_slot_watcher(equipment) {
   self notify("kill_equipment_slot_watcher");
   self endon("kill_equipment_slot_watcher");
@@ -189,7 +177,6 @@ equipment_slot_watcher(equipment) {
     }
   }
 }
-
 is_limited_equipment(equipment) {
   if(isDefined(level._limited_equipment)) {
     for(i = 0; i < level._limited_equipment.size; i++) {
@@ -200,7 +187,6 @@ is_limited_equipment(equipment) {
     return false;
   }
 }
-
 limited_equipment_in_use(equipment) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -211,7 +197,6 @@ limited_equipment_in_use(equipment) {
   }
   return false;
 }
-
 setup_limited_equipment(equipment) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -220,7 +205,6 @@ setup_limited_equipment(equipment) {
   self thread release_limited_equipment_on_disconnect(equipment);
   self thread release_limited_equipment_on_equipment_taken(equipment);
 }
-
 release_limited_equipment_on_equipment_taken(equipment) {
   self endon("disconnect");
   self waittill_either(equipment + "_taken", "spawned_spectator");
@@ -229,7 +213,6 @@ release_limited_equipment_on_equipment_taken(equipment) {
     players[i] set_equipment_invisibility_to_player(equipment, false);
   }
 }
-
 release_limited_equipment_on_disconnect(equipment) {
   self endon(equipment + "_taken");
   self waittill("disconnect");
@@ -240,14 +223,12 @@ release_limited_equipment_on_disconnect(equipment) {
     }
   }
 }
-
 is_equipment_active(equipment) {
   if(!isDefined(self.current_equipment_active) || !isDefined(self.current_equipment_active[equipment])) {
     return false;
   }
   return (self.current_equipment_active[equipment]);
 }
-
 init_equipment_hint_hudelem(x, y, alignX, alignY, fontscale, alpha) {
   self.x = x;
   self.y = y;
@@ -257,7 +238,6 @@ init_equipment_hint_hudelem(x, y, alignX, alignY, fontscale, alpha) {
   self.alpha = alpha;
   self.sort = 20;
 }
-
 setup_equipment_client_hintelem() {
   self endon("death");
   self endon("disconnect");
@@ -266,7 +246,6 @@ setup_equipment_client_hintelem() {
   }
   self.hintelem init_equipment_hint_hudelem(320, 220, "center", "bottom", 1.6, 1.0);
 }
-
 show_equipment_hint(equipment) {
   self notify("kill_previous_show_equipment_hint_thread");
   self endon("kill_previous_show_equipment_hint_thread");

@@ -439,7 +439,7 @@ watchdeployedriotshielddamage() {
     if(!(isDefined(level.players_can_damage_riotshields) && level.players_can_damage_riotshields)) {
       continue;
     }
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     assert(isDefined(self.owner) && isDefined(self.owner.team));

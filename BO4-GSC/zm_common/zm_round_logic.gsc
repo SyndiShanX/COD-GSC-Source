@@ -513,7 +513,7 @@ round_spawning_test() {
 }
 
 round_start() {
-  setdvar(#"hash_52a4767bd6da84f1", 0);
+  setDvar(#"hash_52a4767bd6da84f1", 0);
 
   if(!isDefined(level.zombie_spawners) || level.zombie_spawners.size == 0) {
     println("<dev string:x9f>");

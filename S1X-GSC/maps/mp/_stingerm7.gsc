@@ -160,7 +160,7 @@ anyStingerMissileLockedOn(missiles, target) {
 }
 
 get_best_locking_target() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   enemy_team = getOtherTeam(self.team);
   enemy_players = [];
@@ -220,7 +220,6 @@ get_best_locking_target() {
 
       enemy_vehicles[enemy_vehicles.size] = vehicle;
     }
-
   }
 
   aerialTargets = maps\mp\killstreaks\_killstreaks::getAerialKillstreakArray(enemy_team);
@@ -262,13 +261,13 @@ get_best_locking_target() {
 }
 
 locking_target_still_valid(target) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   eye_origin = self getEye();
   eye_dir = anglesToForward(self GetPlayerAngles());
   target_origin = stingerm7_get_target_pos(target);
 
-  if((IsPlayer(target) || IsBot(target) || (isDefined(level.isHorde) && level.isHorde && IsAgent(target))) && !isReallyAlive(target)) {
+  if((isPlayer(target) || IsBot(target) || (isDefined(level.isHorde) && level.isHorde && IsAgent(target))) && !isReallyAlive(target)) {
     return false;
   }
 
@@ -288,7 +287,7 @@ remove_invalid_locks() {
       }
 
       origin_mod = (0, 0, 0);
-      if(IsPlayer(self.stingerm7_info.locked_targets[i]) || IsBot(self.stingerm7_info.locked_targets[i])) {
+      if(isPlayer(self.stingerm7_info.locked_targets[i]) || IsBot(self.stingerm7_info.locked_targets[i])) {
         origin_mod = (0, 0, 64);
       }
 
@@ -361,7 +360,6 @@ locked_feedback() {
         if(isDefined(warbird.owner) && isDefined(warbird.player) && isDefined(self.stingerm7_info.locked_targets) && IsInArray(self.stingerm7_info.locked_targets, warbird)) {
           warbird.owner playLocalSound("wpn_stingerm7_enemy_locked");
         }
-
       }
     }
 

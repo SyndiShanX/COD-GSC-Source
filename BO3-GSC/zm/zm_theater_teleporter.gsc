@@ -48,7 +48,7 @@ function teleporter_init() {
   level.zombietheaterteleporterseeklogicfunc = &zombietheaterteleporterseeklogic;
   level flag::init("teleporter_linked");
   level flag::init("core_linked");
-  setdvar("theaterAftereffectOverride", "-1");
+  setDvar("theaterAftereffectOverride", "-1");
   poi1 = getent("teleporter_poi1", "targetname");
   poi2 = getent("teleporter_poi2", "targetname");
   players = getplayers();

@@ -715,7 +715,7 @@ function function_2ff7183() {
   }
   while(true) {
     trigger waittill("trigger", who);
-    if(isDefined(who) && isplayer(who)) {
+    if(isDefined(who) && isPlayer(who)) {
       if(zm_audio::sndmusicsystem_isabletoplay()) {
         who playsoundtoplayer("mus_island_lair_entry_oneshot", who);
       }

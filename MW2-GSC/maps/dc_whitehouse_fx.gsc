@@ -149,7 +149,6 @@ lightning_flash(dir) {
 
         setSunLight(3, 3, 3.7);
         //parking_lightning( 3 );
-
       }
       break;
 
@@ -173,7 +172,6 @@ lightning_flash(dir) {
 
         setSunLight(2, 2, 2.5);
         //parking_lightning( 2.25 );
-
       }
       break;
     }

@@ -9,7 +9,7 @@ main() {
 
   //* Fog section *
 
-  setdvar("scr_fog_disable", "0");
+  setDvar("scr_fog_disable", "0");
 
   //setExpFog(300, 1400, 0.5, 0.5, 0.5, 0);
   VisionSetNaked("mp_cargoship", 0);

@@ -36,7 +36,6 @@ class crevive_hud: cluielem {
     cluielem::add_clientfield("clientNum", 1, 6, "int");
     cluielem::add_clientfield("fadeTime", 1, 5, "int");
   }
-
 }
 
 register(uid) {

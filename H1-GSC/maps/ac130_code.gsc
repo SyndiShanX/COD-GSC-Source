@@ -106,7 +106,7 @@ missionend(var_0) {
 }
 
 spawn_enemies(var_0) {
-  if(getdvar("ac130_gameplay_enabled") == "0") {
+  if(getDvar("ac130_gameplay_enabled") == "0") {
     return;
   }
   var_1 = getent(var_0, "script_noteworthy");
@@ -114,7 +114,7 @@ spawn_enemies(var_0) {
 }
 
 stop_enemies(var_0) {
-  if(getdvar("ac130_gameplay_enabled") == "0") {
+  if(getDvar("ac130_gameplay_enabled") == "0") {
     return;
   }
   var_1 = getent(var_0, "script_noteworthy");
@@ -153,13 +153,13 @@ move_friendlies(var_0) {
 }
 
 damage_church() {
-  if(getdvar("ac130_gameplay_enabled") == "0") {
+  if(getDvar("ac130_gameplay_enabled") == "0") {
     return;
   }
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(issubstr(tolower(var_4), "splash")) {
@@ -183,7 +183,7 @@ missionfail_church() {
     return;
   }
   common_scripts\utility::flag_set("mission_failed");
-  setdvar("ui_deadquote", "@AC130_CHURCH_DAMAGED");
+  setDvar("ui_deadquote", "@AC130_CHURCH_DAMAGED");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -194,13 +194,13 @@ mission_fail_vehicle_death() {
   if(common_scripts\utility::flag("mission_failed")) {
     return;
   }
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     common_scripts\utility::flag_set("mission_failed");
-    setdvar("ui_deadquote", "@AC130_FRIENDLY_FIRE");
+    setDvar("ui_deadquote", "@AC130_FRIENDLY_FIRE");
     maps\_utility::missionfailedwrapper();
   } else {
     common_scripts\utility::flag_set("mission_failed");
-    setdvar("ui_deadquote", "@AC130_FRIENDLIES_DEAD");
+    setDvar("ui_deadquote", "@AC130_FRIENDLIES_DEAD");
     maps\_utility::missionfailedwrapper();
   }
 }
@@ -363,7 +363,7 @@ friendly_fire_vehicle_thread() {
     if(!isDefined(var_1)) {
       continue;
     }
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(common_scripts\utility::flag("mission_failed")) {
@@ -372,9 +372,9 @@ friendly_fire_vehicle_thread() {
     common_scripts\utility::flag_set("mission_failed");
 
     if(common_scripts\utility::flag("friendlies_loading_vehicles"))
-      setdvar("ui_deadquote", "@AC130_FRIENDLY_FIRE");
+      setDvar("ui_deadquote", "@AC130_FRIENDLY_FIRE");
     else
-      setdvar("ui_deadquote", "@AC130_CIVILIAN_FIRE_VEHICLE");
+      setDvar("ui_deadquote", "@AC130_CIVILIAN_FIRE_VEHICLE");
 
     maps\_utility::missionfailedwrapper();
   }
@@ -398,14 +398,14 @@ helictoper_friendly_fire(var_0) {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
     if(common_scripts\utility::flag("mission_failed")) {
       return;
     }
     common_scripts\utility::flag_set("mission_failed");
-    setdvar("ui_deadquote", "@AC130_FRIENDLY_FIRE_HELICOPTER");
+    setDvar("ui_deadquote", "@AC130_FRIENDLY_FIRE_HELICOPTER");
     maps\_utility::missionfailedwrapper();
   }
 }
@@ -457,14 +457,14 @@ civilian_car_riders_mission_fail() {
     if(!isDefined(var_1)) {
       continue;
     }
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(common_scripts\utility::flag("mission_failed")) {
       return;
     }
     common_scripts\utility::flag_set("mission_failed");
-    setdvar("ui_deadquote", "@AC130_CIVILIAN_FIRE");
+    setDvar("ui_deadquote", "@AC130_CIVILIAN_FIRE");
     maps\_utility::missionfailedwrapper();
   }
 }
@@ -549,7 +549,7 @@ sim_destruction() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(!isDefined(level.credits_active)) {
-      if(!isplayer(var_1))
+      if(!isPlayer(var_1))
         continue;
     }
 
@@ -606,7 +606,7 @@ destructible_building() {
     self waittill("damage", var_7, var_8, var_9, var_10, var_11);
 
     if(!isDefined(level.credits_active)) {
-      if(!isplayer(var_8))
+      if(!isPlayer(var_8))
         continue;
     }
 

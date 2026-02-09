@@ -5,7 +5,8 @@
 
 #include maps\mp\_utility;
 #include common_scripts\utility;
- //#include _vehicleLogic.gsc;
+
+/include _vehicleLogic.gsc;
 
 init() {
   //tank support cut
@@ -188,7 +189,6 @@ startTank(tankType) {
   self thread watchForThreat(); //reacts to players about to fire with rockets
 
   self thread forceDirection();
-
 }
 
 waitForChangeTeams() {
@@ -454,13 +454,11 @@ tankDamageMonitor() {
       //self vehicle_SetSpeed( newSpeed, 10, 10 );
       //self.standardSpeed = newSpeed;
       stage3 = true;
-
     } else if(self.health < (maxHealth / 2) && stage2 == false) {
       //newSpeed = 6;
       //self vehicle_SetSpeed( newSpeed, 10, 10 );
       //self.standardSpeed = newSpeed;
       stage2 = true;
-
     } else if(self.health < (maxHealth / 1.5) && stage1 == false) {
       //newSpeed = 10;
       //self vehicle_SetSpeed( newSpeed, 10, 10 );
@@ -518,7 +516,6 @@ handlePossibleThreat(attacker) {
     self setEvadeSpeed();
     wait(4);
     self stopToForward();
-
   } else if(position == "front_side" || position == "front") {
     playFX(level.tankCover, self.origin);
     self stopToReverse();
@@ -1953,7 +1950,6 @@ debugPrint3D(origin, printString, color, alpha, scale, duration) {
     print3d(origin, printString, color, alpha, scale, duration);
     println("3D: " + printString);
   }
-
 }
 
 drawTankGraphIds() {

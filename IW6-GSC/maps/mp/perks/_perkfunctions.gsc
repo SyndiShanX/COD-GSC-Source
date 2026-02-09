@@ -17,7 +17,7 @@ setEMPImmune() {}
 unsetEMPImmune() {}
 
 setAutoSpot() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self autoSpotAdsWatcher();
@@ -34,7 +34,7 @@ autoSpotDeathWatcher() {
 }
 
 unsetAutoSpot() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self notify("endAutoSpotAdsWatcher");
@@ -1065,7 +1065,7 @@ unsetLittlebirdSupport() {
 }
 
 setPainted(attacker) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     outlineTime = 1;
 
     if(!self _hasPerk("specialty_incog")) {
@@ -2332,7 +2332,7 @@ setLightArmor(optionalArmorValue) {
   if(isDefined(optionalArmorValue))
     self.lightArmorHP = optionalArmorValue;
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self SetClientOmnvar("ui_light_armor", true);
     self _setNameplateMaterial("player_name_bg_green_vest", "player_name_bg_red_vest");
   }
@@ -2349,7 +2349,7 @@ removeLightArmorOnDeath() {
 
 unsetLightArmor() {
   self.lightArmorHP = undefined;
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self SetClientOmnvar("ui_light_armor", false);
     self _restorePreviousNameplateMaterial();
   }
@@ -2455,7 +2455,6 @@ watchStopRevenge() {
     }
     headIcon destroy();
   }
-
 }
 
 watchRevengeVictimDisconnected() {
@@ -2476,7 +2475,6 @@ watchRevengeVictimDisconnected() {
     }
     headIcon destroy();
   }
-
 }
 
 unsetRevenge() {

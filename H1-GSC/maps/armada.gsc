@@ -17,7 +17,7 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -25,7 +25,7 @@ main() {
   vehicle_scripts\_mig29::setmig29fxoverride("contrail", "fx\smoke\jet_contrail_airlift");
   vehicle_scripts\_mig29::setmig29fxoverride("contrail_02", "fx\smoke\jet_contrail_airlift");
 
-  if(getdvar("min_spec_ai") == "1") {
+  if(getDvar("min_spec_ai") == "1") {
     var_0 = getEntArray("drone_delete_on_unload", "script_noteworthy");
 
     for(var_1 = 0; var_1 < var_0.size; var_1++)
@@ -109,8 +109,8 @@ main() {
   level.heli_delay = [1.2, 0.6, 2, 0, 5, 3.5, 1.8, 2.5, 0.7, 0.5, 1.5, 0, 2.8];
   maps\createart\armada_art::main();
 
-  if(getdvar("tv_helper") == "")
-    setdvar("tv_helper", "off");
+  if(getDvar("tv_helper") == "")
+    setDvar("tv_helper", "off");
 
   common_scripts\utility::flag_init("player_has_flashed");
   common_scripts\utility::flag_init("return_fire");
@@ -1952,7 +1952,7 @@ achieve_tvs() {
     }
   }
 
-  if(getdvar("tv_helper") != "off")
+  if(getDvar("tv_helper") != "off")
     common_scripts\utility::array_thread(var_0, ::tv_helper);
 
   level.tvhook = ::achieve_tvs_hook;

@@ -337,28 +337,28 @@ dropweaponfordeath(attacker, sweapon, smeansofdeath) {
     return;
   }
   if(!isDefined(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: not defined");
 
     return;
   }
 
   if(weapon == "none") {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: weapon == none");
 
     return;
   }
 
   if(!self hasweapon(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: don't have it anymore (" + weapon + ")");
 
     return;
   }
 
   if(!self anyammoforweaponmodes(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo for weapon modes");
 
     return;
@@ -375,7 +375,7 @@ dropweaponfordeath(attacker, sweapon, smeansofdeath) {
   clip_and_stock_ammo = clipammo + stockammo;
 
   if(!clip_and_stock_ammo) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo");
 
     return;
@@ -394,7 +394,7 @@ dropweaponfordeath(attacker, sweapon, smeansofdeath) {
     return;
   }
 
-  if(getdvar(#"_id_08F7FC88") == "1")
+  if(getDvar(#"_id_08F7FC88") == "1")
     println("dropped weapon: " + weapon);
 
   droplimitedweapon(weapon, self, item);
@@ -410,28 +410,28 @@ dropweaponfordeath(attacker, sweapon, smeansofdeath) {
 
 dropweapontoground(weapon) {
   if(!isDefined(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: not defined");
 
     return;
   }
 
   if(weapon == "none") {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: weapon == none");
 
     return;
   }
 
   if(!self hasweapon(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: don't have it anymore (" + weapon + ")");
 
     return;
   }
 
   if(!self anyammoforweaponmodes(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo for weapon modes");
 
     switch (weapon) {
@@ -457,7 +457,7 @@ dropweapontoground(weapon) {
   clip_and_stock_ammo = clipammo + stockammo;
 
   if(!clip_and_stock_ammo) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo");
 
     return;
@@ -470,7 +470,7 @@ dropweapontoground(weapon) {
 
   item = self dropitem(weapon);
 
-  if(getdvar(#"_id_08F7FC88") == "1")
+  if(getDvar(#"_id_08F7FC88") == "1")
     println("dropped weapon: " + weapon);
 
   droplimitedweapon(weapon, self, item);
@@ -502,7 +502,7 @@ watchpickup() {
   weapname = self getitemweaponname();
   self waittill("trigger", player, droppeditem);
 
-  if(getdvar(#"_id_08F7FC88") == "1")
+  if(getDvar(#"_id_08F7FC88") == "1")
     println("picked up weapon: " + weapname + ", " + isDefined(self.ownersattacker));
 
   assert(isDefined(player.tookweaponfrom));
@@ -1183,7 +1183,6 @@ debugline(a, b, color) {
     line(a, b, color);
     wait 0.05;
   }
-
 }
 
 onweapondamage(eattacker, einflictor, sweapon, meansofdeath, damage) {
@@ -1513,10 +1512,10 @@ weapons_get_dvar_int(dvar, def) {
 }
 
 weapons_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }
@@ -1708,7 +1707,7 @@ dropscavengerfordeath(attacker) {
   }
   if(level.gametype == "hack")
     item = self dropscavengeritem("scavenger_item_hack_mp");
-  else if(isplayer(attacker) && attacker hasperk("specialty_scavenger"))
+  else if(isPlayer(attacker) && attacker hasperk("specialty_scavenger"))
     item = self dropscavengeritem("scavenger_item_mp");
   else
     return;

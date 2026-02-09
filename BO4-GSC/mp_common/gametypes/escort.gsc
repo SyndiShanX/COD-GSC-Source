@@ -161,7 +161,7 @@ onspawnplayer(predictedspawn) {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isDefined(attacker) || attacker == self || !isplayer(attacker) || attacker.team == self.team) {
+  if(!isDefined(attacker) || attacker == self || !isPlayer(attacker) || attacker.team == self.team) {
     return;
   }
 
@@ -729,7 +729,7 @@ robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpo
   if(self.shutdowndamage >= level.shutdowndamage) {
     origin = (0, 0, 0);
 
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       level thread popups::displayteammessagetoall(#"hash_6fd616c1d7988357", eattacker);
       level.robot recordgameeventnonplayer("robot_disabled");
 
@@ -1249,7 +1249,7 @@ debug_reset_robot_to_start() {
         level.robot setgoal(level.robot.origin, 0);
       }
 
-      setdvar(#"scr_escort_robot_reset_path", 0);
+      setDvar(#"scr_escort_robot_reset_path", 0);
     }
 
     wait 0.5;
@@ -1494,9 +1494,7 @@ watch_robot_enter(robot) {
       foreach(player in level.aliveplayers[attackers]) {
         if(isDefined(player.escortingrobot) && player.escortingrobot) {
           scoreevents::processscoreevent(#"escort_robot_escort_goal", player, undefined, undefined);
-          [
-            [level.var_37d62931]
-          ](player, 1);
+          [[level.var_37d62931]](player, 1);
           var_6913cac0 = player stats::get_stat(#"playerstatslist", #"stats_escort_robot_delivered", #"statvalue") + 1;
           player stats::set_stat(#"playerstatslist", #"stats_escort_robot_delivered", #"statvalue", var_6913cac0);
         }
@@ -1538,7 +1536,7 @@ kill_anything_blocking_goal(goal) {
   entities = getdamageableentarray(self.origin, 108);
 
   foreach(entity in entities) {
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       continue;
     }
 

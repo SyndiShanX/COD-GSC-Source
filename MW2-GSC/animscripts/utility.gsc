@@ -1116,7 +1116,6 @@ canSeeEnemyFromExposed() {
   } else {
     if(self getentnum() == getdebugdvarint("anim_dotshow"))
       thread persistentDebugLine(self.node.origin + getNodeOffset(self.node), enemyEye);
-
   }
 
   //prof_end( "canSeeEnemyFromExposed" );
@@ -1229,7 +1228,7 @@ canSuppressEnemyFromExposed() {
     return false;
   }
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return aiSuppressAI();
 
   if(isDefined(self.node)) {
@@ -1256,7 +1255,7 @@ canSuppressEnemy() {
     return false;
   }
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return aiSuppressAI();
 
   startOffset = self getMuzzlePos();
@@ -1297,583 +1296,582 @@ canSeeAndShootPoint(point) {
 }
 
 needRecalculateSuppressSpot() {
-  if(isDefined(self.goodShootPos) && !self canSeeAndShootPoint(self.goodShootPos))
-    return true;
-
-  // we need to recalculate the suppress spot
-  // if we've moved or if we saw our enemy in a different place than when we
-  // last calculated it
-  return (!isDefined(self.lastEnemySightPosOld) || self.lastEnemySightPosOld != self.lastEnemySightPos || distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024 // 1024 = 32 * 32);
-}
-
-findGoodSuppressSpot(startOffset) {
-  if(!needRecalculateSuppressSpot())
-    return isDefined(self.goodShootPos);
-
-  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > squared(self.enemy.maxVisibleDist)) {
-    self.goodShootPos = undefined;
-    return false;
-  }
-
-  // make sure we can see from our eye to our gun; if we can't then we really shouldn't be trying to suppress at all!
-  if(!sightTracePassed(self getShootAtPos(), startOffset, false, undefined)) {
-    self.goodShootPos = undefined;
-    return false;
-  }
-
-  self.lastEnemySightPosSelfOrigin = self.origin;
-  self.lastEnemySightPosOld = self.lastEnemySightPos;
-
-  currentEnemyPos = GetEnemyEyePos();
-
-  trace = bulletTrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
-  startTracesAt = trace["position"];
-
-  percievedMovementVector = self.lastEnemySightPos - startTracesAt;
-  lookVector = vectorNormalize(self.lastEnemySightPos - startOffset);
-  percievedMovementVector = percievedMovementVector - vector_multiply(lookVector, vectorDot(percievedMovementVector, lookVector));
-  // percievedMovementVector is what self.lastEnemySightPos - startTracesAt looks like from our position( that is, projected perpendicular to the direction we're looking ).
-
-  idealTraceInterval = 20.0;
-  numTraces = int(length(percievedMovementVector) / idealTraceInterval + 0.5); // one trace every 20 units, ideally
-  if(numTraces < 1)
-    numTraces = 1;
-  if(numTraces > 20)
-    numTraces = 20; // cap it
-  vectorDif = self.lastEnemySightPos - startTracesAt;
-  vectorDif = (vectorDif[0] / numTraces, vectorDif[1] / numTraces, vectorDif[2] / numTraces);
-  numTraces++; // to get both start and end points for traces
-
-  traceTo = startTracesAt;
-
-  if(getdebugdvarint("debug_dotshow") == self getentnum()) {
-    thread print3dtime(15, self.lastEnemySightPos, "lastpos", (1, .2, .2), 1, 0.75); // origin, text, RGB, alpha, scale
-    thread print3dtime(15, startTracesAt, "currentpos", (1, .2, .2), 1, 0.75); // origin, text, RGB, alpha, scale
-  }
-
-  self.goodShootPos = undefined;
-
-  goodTraces = 0;
-  neededGoodTraces = 2; // we stop at 3 good traces away from the cover where they disappeared, should be about 40 units
-  for(i = 0; i < numTraces + neededGoodTraces; i++) {
-    tracePassed = sightTracePassed(startOffset, traceTo, false, undefined);
-    thisTraceTo = traceTo;
-
-    if(getdebugdvarint("debug_dotshow") == self getentnum()) {
-      if(tracePassed)
-        color = (.2, .2, 1);
-      else
-        color = (.2, .2, .2);
-      // showDebugLine( startOffset, traceTo, color, 0.75 );
-      thread print3dtime(15, traceTo, ".", color, 1, 0.75); // origin, text, RGB, alpha, scale
-    }
-
-    // after we've hit self.lastEnemySightPos, look only perpendicular to our line of sight
-    if(i == numTraces - 1) {
-      vectorDif = vectorDif - vector_multiply(lookVector, vectorDot(vectorDif, lookVector));
-    }
-
-    traceTo += vectorDif; // for next time
-
-    if(tracePassed) {
-      goodTraces++;
-
-      self.goodShootPos = thisTraceTo;
-
-      // if first trace succeeded, we take it, because it probably means they're crouched under cover and we can shoot over it
-      if(i > 0 && goodTraces < neededGoodTraces && i < numTraces + neededGoodTraces - 1) {
-        continue;
-      }
+    if(isDefined(self.goodShootPos) && !self canSeeAndShootPoint(self.goodShootPos))
       return true;
-    } else {
+
+    // we need to recalculate the suppress spot
+    // if we've moved or if we saw our enemy in a different place than when we
+    // last calculated it
+    return (!isDefined(self.lastEnemySightPosOld) || self.lastEnemySightPosOld != self.lastEnemySightPos || distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024 // 1024 = 32 * 32);
+    }
+
+    findGoodSuppressSpot(startOffset) {
+      if(!needRecalculateSuppressSpot())
+        return isDefined(self.goodShootPos);
+
+      if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > squared(self.enemy.maxVisibleDist)) {
+        self.goodShootPos = undefined;
+        return false;
+      }
+
+      // make sure we can see from our eye to our gun; if we can't then we really shouldn't be trying to suppress at all!
+      if(!sightTracePassed(self getShootAtPos(), startOffset, false, undefined)) {
+        self.goodShootPos = undefined;
+        return false;
+      }
+
+      self.lastEnemySightPosSelfOrigin = self.origin;
+      self.lastEnemySightPosOld = self.lastEnemySightPos;
+
+      currentEnemyPos = GetEnemyEyePos();
+
+      trace = bulletTrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
+      startTracesAt = trace["position"];
+
+      percievedMovementVector = self.lastEnemySightPos - startTracesAt;
+      lookVector = vectorNormalize(self.lastEnemySightPos - startOffset);
+      percievedMovementVector = percievedMovementVector - vector_multiply(lookVector, vectorDot(percievedMovementVector, lookVector));
+      // percievedMovementVector is what self.lastEnemySightPos - startTracesAt looks like from our position( that is, projected perpendicular to the direction we're looking ).
+
+      idealTraceInterval = 20.0;
+      numTraces = int(length(percievedMovementVector) / idealTraceInterval + 0.5); // one trace every 20 units, ideally
+      if(numTraces < 1)
+        numTraces = 1;
+      if(numTraces > 20)
+        numTraces = 20; // cap it
+      vectorDif = self.lastEnemySightPos - startTracesAt;
+      vectorDif = (vectorDif[0] / numTraces, vectorDif[1] / numTraces, vectorDif[2] / numTraces);
+      numTraces++; // to get both start and end points for traces
+
+      traceTo = startTracesAt;
+
+      if(getdebugdvarint("debug_dotshow") == self getentnum()) {
+        thread print3dtime(15, self.lastEnemySightPos, "lastpos", (1, .2, .2), 1, 0.75); // origin, text, RGB, alpha, scale
+        thread print3dtime(15, startTracesAt, "currentpos", (1, .2, .2), 1, 0.75); // origin, text, RGB, alpha, scale
+      }
+
+      self.goodShootPos = undefined;
+
       goodTraces = 0;
+      neededGoodTraces = 2; // we stop at 3 good traces away from the cover where they disappeared, should be about 40 units
+      for(i = 0; i < numTraces + neededGoodTraces; i++) {
+        tracePassed = sightTracePassed(startOffset, traceTo, false, undefined);
+        thisTraceTo = traceTo;
+
+        if(getdebugdvarint("debug_dotshow") == self getentnum()) {
+          if(tracePassed)
+            color = (.2, .2, 1);
+          else
+            color = (.2, .2, .2);
+          // showDebugLine( startOffset, traceTo, color, 0.75 );
+          thread print3dtime(15, traceTo, ".", color, 1, 0.75); // origin, text, RGB, alpha, scale
+        }
+
+        // after we've hit self.lastEnemySightPos, look only perpendicular to our line of sight
+        if(i == numTraces - 1) {
+          vectorDif = vectorDif - vector_multiply(lookVector, vectorDot(vectorDif, lookVector));
+        }
+
+        traceTo += vectorDif; // for next time
+
+        if(tracePassed) {
+          goodTraces++;
+
+          self.goodShootPos = thisTraceTo;
+
+          // if first trace succeeded, we take it, because it probably means they're crouched under cover and we can shoot over it
+          if(i > 0 && goodTraces < neededGoodTraces && i < numTraces + neededGoodTraces - 1) {
+            continue;
+          }
+          return true;
+        } else {
+          goodTraces = 0;
+        }
+      }
+
+      return isDefined(self.goodShootPos);
     }
-  }
 
-  return isDefined(self.goodShootPos);
-}
+    // Returns an animation from an array of animations with a corrosponding array of weights.
+    anim_array(animArray, animWeights) {
+      total_anims = animArray.size;
+      idleanim = randomint(total_anims);
+      assert(total_anims);
+      assert(animArray.size == animWeights.size);
+      if(total_anims == 1)
+        return animArray[0];
 
-// Returns an animation from an array of animations with a corrosponding array of weights.
-anim_array(animArray, animWeights) {
-  total_anims = animArray.size;
-  idleanim = randomint(total_anims);
-  assert(total_anims);
-  assert(animArray.size == animWeights.size);
-  if(total_anims == 1)
-    return animArray[0];
+      weights = 0;
+      total_weight = 0;
 
-  weights = 0;
-  total_weight = 0;
+      for(i = 0; i < total_anims; i++)
+        total_weight += animWeights[i];
 
-  for(i = 0; i < total_anims; i++)
-    total_weight += animWeights[i];
+      anim_play = randomfloat(total_weight);
+      current_weight = 0;
 
-  anim_play = randomfloat(total_weight);
-  current_weight = 0;
-
-  for(i = 0; i < total_anims; i++) {
-    current_weight += animWeights[i];
-    if(anim_play >= current_weight) {
-      continue;
-    }
-    idleanim = i;
-    break;
-  }
-
-  return animArray[idleanim];
-}
-
-print3dtime(timer, org, msg, color, alpha, scale) {
-  newtime = timer / 0.05;
-  for(i = 0; i < newtime; i++) {
-    print3d(org, msg, color, alpha, scale);
-    wait(0.05);
-  }
-}
-
-print3drise(org, msg, color, alpha, scale) {
-  newtime = 5 / 0.05;
-  up = 0;
-  org = org + randomvector(30);
-
-  for(i = 0; i < newtime; i++) {
-    up += 0.5;
-    print3d(org + (0, 0, up), msg, color, alpha, scale);
-    wait(0.05);
-  }
-}
-
-crossproduct(vec1, vec2) {
-  return (vec1[0] * vec2[1] - vec1[1] * vec2[0] > 0);
-}
-
-getGrenadeModel() {
-  return getWeaponModel(self.grenadeweapon);
-}
-
-sawEnemyMove(timer) {
-  if(!isDefined(timer))
-    timer = 500;
-  return (gettime() - self.personalSightTime < timer);
-}
-
-canThrowGrenade() {
-  if(!self.grenadeAmmo)
-    return false;
-
-  if(self.script_forceGrenade)
-    return true;
-
-  return (isplayer(self.enemy));
-}
-
-usingBoltActionWeapon() {
-  return (weaponIsBoltAction(self.weapon));
-}
-
-random_weight(array) {
-  idleanim = randomint(array.size);
-  if(array.size > 1) {
-    anim_weight = 0;
-    for(i = 0; i < array.size; i++)
-      anim_weight += array[i];
-
-    anim_play = randomfloat(anim_weight);
-
-    anim_weight = 0;
-    for(i = 0; i < array.size; i++) {
-      anim_weight += array[i];
-      if(anim_play < anim_weight) {
+      for(i = 0; i < total_anims; i++) {
+        current_weight += animWeights[i];
+        if(anim_play >= current_weight) {
+          continue;
+        }
         idleanim = i;
         break;
       }
+
+      return animArray[idleanim];
     }
-  }
 
-  return idleanim;
-}
+    print3dtime(timer, org, msg, color, alpha, scale) {
+      newtime = timer / 0.05;
+      for(i = 0; i < newtime; i++) {
+        print3d(org, msg, color, alpha, scale);
+        wait(0.05);
+      }
+    }
 
-setFootstepEffect(name, fx) {
-  assertEx(isDefined(name), "Need to define the footstep surface type.");
-  assertEx(isDefined(fx), "Need to define the footstep effect.");
-  if(!isDefined(anim.optionalStepEffects))
-    anim.optionalStepEffects = [];
-  anim.optionalStepEffects[anim.optionalStepEffects.size] = name;
-  level._effect["step_" + name] = fx;
-}
+    print3drise(org, msg, color, alpha, scale) {
+      newtime = 5 / 0.05;
+      up = 0;
+      org = org + randomvector(30);
 
-setFootstepEffectSmall(name, fx) {
-  assertEx(isDefined(name), "Need to define the footstep surface type.");
-  assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(anim.optionalStepEffectsSmall))
-    anim.optionalStepEffectsSmall = [];
-  anim.optionalStepEffectsSmall[anim.optionalStepEffectsSmall.size] = name;
-  level._effect["step_small_" + name] = fx;
-}
+      for(i = 0; i < newtime; i++) {
+        up += 0.5;
+        print3d(org + (0, 0, up), msg, color, alpha, scale);
+        wait(0.05);
+      }
+    }
 
-setNotetrackEffect(notetrack, tag, surfacename, fx, sound_prefix, sound_suffix) {
-  assert(isDefined(notetrack));
-  assert(isDefined(tag));
-  assert(isDefined(fx));
-  assertEx(isstring(notetrack), "Notetrack name must be a string");
+    crossproduct(vec1, vec2) {
+      return (vec1[0] * vec2[1] - vec1[1] * vec2[0] > 0);
+    }
 
-  if(!isDefined(surfacename))
-    surfacename = "all";
+    getGrenadeModel() {
+      return getWeaponModel(self.grenadeweapon);
+    }
 
-  if(!isDefined(level._notetrackFX))
-    level._notetrackFX = [];
+    sawEnemyMove(timer) {
+      if(!isDefined(timer))
+        timer = 500;
+      return (gettime() - self.personalSightTime < timer);
+    }
 
-  level._notetrackFX[notetrack][surfacename] = spawnStruct();
-  level._notetrackFX[notetrack][surfacename].tag = tag;
-  level._notetrackFX[notetrack][surfacename].fx = fx;
-  if(isDefined(sound_prefix))
-    level._notetrackFX[notetrack][surfacename].sound_prefix = sound_prefix;
-  if(isDefined(sound_suffix))
-    level._notetrackFX[notetrack][surfacename].sound_suffix = sound_suffix;
-}
+    canThrowGrenade() {
+      if(!self.grenadeAmmo)
+        return false;
 
-persistentDebugLine(start, end) {
-  self endon("death");
-  level notify("newdebugline");
-  level endon("newdebugline");
+      if(self.script_forceGrenade)
+        return true;
 
-  for(;;) {
-    line(start, end, (0.3, 1, 0), 1);
-    wait(0.05);
-  }
-}
+      return (isPlayer(self.enemy));
+    }
 
-EnterProneWrapper(timer) {
-  thread enterProneWrapperProc(timer);
-}
+    usingBoltActionWeapon() {
+      return (weaponIsBoltAction(self.weapon));
+    }
 
-enterProneWrapperProc(timer) {
-  self endon("death");
-  self notify("anim_prone_change");
-  self endon("anim_prone_change");
-  // wrapper so we can put a breakpoint on it
-  self EnterProne(timer, isDefined(self.a.onback));
-  self waittill("killanimscript");
+    random_weight(array) {
+      idleanim = randomint(array.size);
+      if(array.size > 1) {
+        anim_weight = 0;
+        for(i = 0; i < array.size; i++)
+          anim_weight += array[i];
 
-  // in case we dont actually make it into prone by the time another script comes in
-  if(self.a.pose != "prone" && !isDefined(self.a.onback))
-    self.a.pose = "prone";
-}
+        anim_play = randomfloat(anim_weight);
 
-ExitProneWrapper(timer) {
-  thread ExitProneWrapperProc(timer);
-}
+        anim_weight = 0;
+        for(i = 0; i < array.size; i++) {
+          anim_weight += array[i];
+          if(anim_play < anim_weight) {
+            idleanim = i;
+            break;
+          }
+        }
+      }
 
-ExitProneWrapperProc(timer) {
-  self endon("death");
-  self notify("anim_prone_change");
-  self endon("anim_prone_change");
-  // wrapper so we can put a breakpoint on it
-  self ExitProne(timer);
-  self waittill("killanimscript");
+      return idleanim;
+    }
 
-  // in case we dont actually leave prone, change it out of prone
-  if(self.a.pose == "prone")
-    self.a.pose = "crouch";
-}
+    setFootstepEffect(name, fx) {
+      assertEx(isDefined(name), "Need to define the footstep surface type.");
+      assertEx(isDefined(fx), "Need to define the footstep effect.");
+      if(!isDefined(anim.optionalStepEffects))
+        anim.optionalStepEffects = [];
+      anim.optionalStepEffects[anim.optionalStepEffects.size] = name;
+      level._effect["step_" + name] = fx;
+    }
 
-canBlindfire() {
-  if(self.a.atConcealmentNode)
-    return false;
+    setFootstepEffectSmall(name, fx) {
+      assertEx(isDefined(name), "Need to define the footstep surface type.");
+      assertEx(isDefined(fx), "Need to define the mud footstep effect.");
+      if(!isDefined(anim.optionalStepEffectsSmall))
+        anim.optionalStepEffectsSmall = [];
+      anim.optionalStepEffectsSmall[anim.optionalStepEffectsSmall.size] = name;
+      level._effect["step_small_" + name] = fx;
+    }
 
-  if(!animscripts\weaponList::usingAutomaticWeapon())
-    return false;
+    setNotetrackEffect(notetrack, tag, surfacename, fx, sound_prefix, sound_suffix) {
+      assert(isDefined(notetrack));
+      assert(isDefined(tag));
+      assert(isDefined(fx));
+      assertEx(isstring(notetrack), "Notetrack name must be a string");
 
-  if(weaponClass(self.weapon) == "mg")
-    return false;
+      if(!isDefined(surfacename))
+        surfacename = "all";
 
-  if(isDefined(self.disable_blindfire) && self.disable_blindfire == true)
-    return false;
+      if(!isDefined(level._notetrackFX))
+        level._notetrackFX = [];
 
-  return true;
-}
+      level._notetrackFX[notetrack][surfacename] = spawnStruct();
+      level._notetrackFX[notetrack][surfacename].tag = tag;
+      level._notetrackFX[notetrack][surfacename].fx = fx;
+      if(isDefined(sound_prefix))
+        level._notetrackFX[notetrack][surfacename].sound_prefix = sound_prefix;
+      if(isDefined(sound_suffix))
+        level._notetrackFX[notetrack][surfacename].sound_suffix = sound_suffix;
+    }
 
-canHitSuppressSpot() {
-  if(!hasEnemySightPos())
-    return false;
-  myGunPos = self getMuzzlePos();
-  return (sightTracePassed(myGunPos, getEnemySightPos(), false, undefined));
-}
+    persistentDebugLine(start, end) {
+      self endon("death");
+      level notify("newdebugline");
+      level endon("newdebugline");
 
-moveAnim(animname) /* string */ {
-  assert(isDefined(self.a.moveAnimSet));
-  return self.a.moveAnimSet[animname];
-}
+      for(;;) {
+        line(start, end, (0.3, 1, 0), 1);
+        wait(0.05);
+      }
+    }
 
-randomAnimOfTwo(anim1, anim2) {
-  if(randomint(2))
-    return anim1;
-  else
-    return anim2;
-}
+    EnterProneWrapper(timer) {
+      thread enterProneWrapperProc(timer);
+    }
 
-animArray(animname) /* string */ {
-  // println( "playing anim: ", animname );
+    enterProneWrapperProc(timer) {
+      self endon("death");
+      self notify("anim_prone_change");
+      self endon("anim_prone_change");
+      // wrapper so we can put a breakpoint on it
+      self EnterProne(timer, isDefined(self.a.onback));
+      self waittill("killanimscript");
 
-  assert(isDefined(self.a.array));
+      // in case we dont actually make it into prone by the time another script comes in
+      if(self.a.pose != "prone" && !isDefined(self.a.onback))
+        self.a.pose = "prone";
+    }
 
-  if(!isDefined(self.a.array[animname])) {
-    dumpAnimArray();
-    assertex(isDefined(self.a.array[animname]), "self.a.array[ \"" + animname + "\" ] is undefined");
-  }
+    ExitProneWrapper(timer) {
+      thread ExitProneWrapperProc(timer);
+    }
 
-  return self.a.array[animname];
-}
+    ExitProneWrapperProc(timer) {
+      self endon("death");
+      self notify("anim_prone_change");
+      self endon("anim_prone_change");
+      // wrapper so we can put a breakpoint on it
+      self ExitProne(timer);
+      self waittill("killanimscript");
 
-animArrayAnyExist(animname) {
-  assert(isDefined(self.a.array));
+      // in case we dont actually leave prone, change it out of prone
+      if(self.a.pose == "prone")
+        self.a.pose = "crouch";
+    }
 
-  if(!isDefined(self.a.array[animname])) {
-    dumpAnimArray();
-    assertex(isDefined(self.a.array[animname]), "self.a.array[ \"" + animname + "\" ] is undefined");
-  }
+    canBlindfire() {
+      if(self.a.atConcealmentNode)
+        return false;
 
-  return self.a.array[animname].size > 0;
-}
+      if(!animscripts\weaponList::usingAutomaticWeapon())
+        return false;
 
-animArrayPickRandom(animname) {
-  assert(isDefined(self.a.array));
+      if(weaponClass(self.weapon) == "mg")
+        return false;
 
-  if(!isDefined(self.a.array[animname])) {
-    dumpAnimArray();
-    assertex(isDefined(self.a.array[animname]), "self.a.array[ \"" + animname + "\" ] is undefined");
-  }
+      if(isDefined(self.disable_blindfire) && self.disable_blindfire == true)
+        return false;
 
-  assert(self.a.array[animname].size > 0);
-
-  index = randomint(self.a.array[animname].size);
-
-  return self.a.array[animname][index];
-}
-
-dumpAnimArray() {
-  println("self.a.array:");
-  keys = getArrayKeys(self.a.array);
-  for(i = 0; i < keys.size; i++) {
-    if(isarray(self.a.array[keys[i]]))
-      println(" array[ \"" + keys[i] + "\" ] = {array of size " + self.a.array[keys[i]].size + "}");
-    else
-      println(" array[ \"" + keys[i] + "\" ] = ", self.a.array[keys[i]]);
-  }
-}
-
-array(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
-  array = [];
-  if(isDefined(a)) array[0] = a;
-  else return array;
-  if(isDefined(b)) array[1] = b;
-  else return array;
-  if(isDefined(c)) array[2] = c;
-  else return array;
-  if(isDefined(d)) array[3] = d;
-  else return array;
-  if(isDefined(e)) array[4] = e;
-  else return array;
-  if(isDefined(f)) array[5] = f;
-  else return array;
-  if(isDefined(g)) array[6] = g;
-  else return array;
-  if(isDefined(h)) array[7] = h;
-  else return array;
-  if(isDefined(i)) array[8] = i;
-  else return array;
-  if(isDefined(j)) array[9] = j;
-  else return array;
-  if(isDefined(k)) array[10] = k;
-  else return array;
-  if(isDefined(l)) array[11] = l;
-  else return array;
-  if(isDefined(m)) array[12] = m;
-  else return array;
-  if(isDefined(n)) array[13] = n;
-  return array;
-}
-
-getAIPrimaryWeapon() {
-  return self.primaryweapon;
-}
-
-getAISecondaryWeapon() {
-  return self.secondaryweapon;
-}
-
-getAISidearmWeapon() {
-  return self.sidearm;
-}
-
-getAICurrentWeapon() {
-  return self.weapon;
-}
-
-usingPrimary() {
-  return (self.weapon == self.primaryweapon && self.weapon != "none");
-}
-
-usingSecondary() {
-  return (self.weapon == self.secondaryweapon && self.weapon != "none");
-}
-
-usingSidearm() {
-  return (self.weapon == self.sidearm && self.weapon != "none");
-}
-
-getAICurrentWeaponSlot() {
-  if(self.weapon == self.primaryweapon)
-    return "primary";
-  else if(self.weapon == self.secondaryweapon)
-    return "secondary";
-  else if(self.weapon == self.sidearm)
-    return "sidearm";
-  else
-    assertMsg("self.weapon does not match any known slot");
-}
-
-AIHasWeapon(weapon) {
-  if(isDefined(self.weaponInfo[weapon]))
-    return true;
-
-  return false;
-}
-
-getAnimEndPos(theanim) {
-  moveDelta = getMoveDelta(theanim, 0, 1);
-  return self localToWorldCoords(moveDelta);
-}
-
-damageLocationIsAny(a, b, c, d, e, f, g, h, i, j, k, ovr) {
-  /* possibile self.damageLocation's:
-  		"torso_upper""torso_lower""helmet""head""neck""left_arm_upper""left_arm_lower""left_hand""right_arm_upper""right_arm_lower""right_hand""gun""none""left_leg_upper""left_leg_lower""left_foot""right_leg_upper""right_leg_lower""right_foot"*/
-
-  if(!isDefined(a)) return false;
-  if(self.damageLocation == a) return true;
-  if(!isDefined(b)) return false;
-  if(self.damageLocation == b) return true;
-  if(!isDefined(c)) return false;
-  if(self.damageLocation == c) return true;
-  if(!isDefined(d)) return false;
-  if(self.damageLocation == d) return true;
-  if(!isDefined(e)) return false;
-  if(self.damageLocation == e) return true;
-  if(!isDefined(f)) return false;
-  if(self.damageLocation == f) return true;
-  if(!isDefined(g)) return false;
-  if(self.damageLocation == g) return true;
-  if(!isDefined(h)) return false;
-  if(self.damageLocation == h) return true;
-  if(!isDefined(i)) return false;
-  if(self.damageLocation == i) return true;
-  if(!isDefined(j)) return false;
-  if(self.damageLocation == j) return true;
-  if(!isDefined(k)) return false;
-  if(self.damageLocation == k) return true;
-  assert(!isDefined(ovr));
-  return false;
-}
-
-usingPistol() {
-  return weaponClass(self.weapon) == "pistol";
-}
-
-usingRocketLauncher() {
-  return weaponClass(self.weapon) == "rocketlauncher";
-}
-
-usingMG() {
-  return weaponClass(self.weapon) == "mg";
-}
-
-usingShotGun() {
-  return weaponclass(self.weapon) == "spread";
-}
-
-usingRifleLikeWeapon() {
-  class = weaponClass(self.weapon);
-
-  switch (class) {
-    case "mg":
-    case "smg":
-    case "sniper":
-    case "rifle":
-    case "spread":
       return true;
-  }
-
-  return false;
-}
-
-ragdollDeath(moveAnim) {
-  self endon("killanimscript");
-
-  lastOrg = self.origin;
-  moveVec = (0, 0, 0);
-  for(;;) {
-    wait(0.05);
-    force = distance(self.origin, lastOrg);
-    lastOrg = self.origin;
-
-    if(self.health == 1) {
-      self.a.nodeath = true;
-      self startRagdoll();
-      self clearAnim(moveAnim, 0.1);
-      wait(0.05);
-      physicsExplosionSphere(lastOrg, 600, 0, force * 0.1);
-      self notify("killanimscript");
-      return;
     }
 
-  }
-}
+    canHitSuppressSpot() {
+      if(!hasEnemySightPos())
+        return false;
+      myGunPos = self getMuzzlePos();
+      return (sightTracePassed(myGunPos, getEnemySightPos(), false, undefined));
+    }
 
-shouldCQB() {
-  return isDefined(self.cqbwalking) && !isDefined(self.grenade);
-}
+    moveAnim(animname) /* string */ {
+      assert(isDefined(self.a.moveAnimSet));
+      return self.a.moveAnimSet[animname];
+    }
 
-isCQBWalking() {
-  return isDefined(self.cqbwalking);
-}
+    randomAnimOfTwo(anim1, anim2) {
+      if(randomint(2))
+        return anim1;
+      else
+        return anim2;
+    }
 
-isCQBWalkingOrFacingEnemy() {
-  return !self.faceMotion || isDefined(self.cqbwalking);
-}
+    animArray(animname) /* string */ {
+      // println( "playing anim: ", animname );
 
-randomizeIdleSet() {
-  self.a.idleSet = randomint(2);
-}
+      assert(isDefined(self.a.array));
 
-isShotgun(weapon) {
-  return weaponclass(weapon) == "spread";
-}
+      if(!isDefined(self.a.array[animname])) {
+        dumpAnimArray();
+        assertex(isDefined(self.a.array[animname]), "self.a.array[ \"" + animname + "\" ] is undefined");
+      }
 
-isSniperRifle(weapon) {
-  return weaponclass(weapon) == "sniper";
-}
+      return self.a.array[animname];
+    }
 
-weapon_pump_action_shotgun() {
-  return self.weapon != "none" && weaponIsBoltAction(self.weapon) && weaponclass(self.weapon) == "spread";
-}
+    animArrayAnyExist(animname) {
+      assert(isDefined(self.a.array));
 
-// meant to be used with any integer seed, for a small integer maximum (ideally one that divides anim.randomIntTableSize)
-getRandomIntFromSeed(intSeed, intMax) {
-  assert(intMax > 0);
+      if(!isDefined(self.a.array[animname])) {
+        dumpAnimArray();
+        assertex(isDefined(self.a.array[animname]), "self.a.array[ \"" + animname + "\" ] is undefined");
+      }
 
-  index = intSeed % anim.randomIntTableSize;
-  return anim.randomIntTable[index] % intMax;
-}
+      return self.a.array[animname].size > 0;
+    }
 
-getCurrentWeaponSlotName() {
-  assert(isDefined(self));
+    animArrayPickRandom(animname) {
+      assert(isDefined(self.a.array));
 
-  if(self usingSecondary())
-    return "secondary";
+      if(!isDefined(self.a.array[animname])) {
+        dumpAnimArray();
+        assertex(isDefined(self.a.array[animname]), "self.a.array[ \"" + animname + "\" ] is undefined");
+      }
 
-  if(self usingSidearm())
-    return "sidearm";
+      assert(self.a.array[animname].size > 0);
 
-  // primary and unknowns/none return this slot by default
-  return "primary";
-}
+      index = randomint(self.a.array[animname].size);
+
+      return self.a.array[animname][index];
+    }
+
+    dumpAnimArray() {
+      println("self.a.array:");
+      keys = getArrayKeys(self.a.array);
+      for(i = 0; i < keys.size; i++) {
+        if(isarray(self.a.array[keys[i]]))
+          println(" array[ \"" + keys[i] + "\" ] = {array of size " + self.a.array[keys[i]].size + "}");
+        else
+          println(" array[ \"" + keys[i] + "\" ] = ", self.a.array[keys[i]]);
+      }
+    }
+
+    array(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+      array = [];
+      if(isDefined(a)) array[0] = a;
+      else return array;
+      if(isDefined(b)) array[1] = b;
+      else return array;
+      if(isDefined(c)) array[2] = c;
+      else return array;
+      if(isDefined(d)) array[3] = d;
+      else return array;
+      if(isDefined(e)) array[4] = e;
+      else return array;
+      if(isDefined(f)) array[5] = f;
+      else return array;
+      if(isDefined(g)) array[6] = g;
+      else return array;
+      if(isDefined(h)) array[7] = h;
+      else return array;
+      if(isDefined(i)) array[8] = i;
+      else return array;
+      if(isDefined(j)) array[9] = j;
+      else return array;
+      if(isDefined(k)) array[10] = k;
+      else return array;
+      if(isDefined(l)) array[11] = l;
+      else return array;
+      if(isDefined(m)) array[12] = m;
+      else return array;
+      if(isDefined(n)) array[13] = n;
+      return array;
+    }
+
+    getAIPrimaryWeapon() {
+      return self.primaryweapon;
+    }
+
+    getAISecondaryWeapon() {
+      return self.secondaryweapon;
+    }
+
+    getAISidearmWeapon() {
+      return self.sidearm;
+    }
+
+    getAICurrentWeapon() {
+      return self.weapon;
+    }
+
+    usingPrimary() {
+      return (self.weapon == self.primaryweapon && self.weapon != "none");
+    }
+
+    usingSecondary() {
+      return (self.weapon == self.secondaryweapon && self.weapon != "none");
+    }
+
+    usingSidearm() {
+      return (self.weapon == self.sidearm && self.weapon != "none");
+    }
+
+    getAICurrentWeaponSlot() {
+      if(self.weapon == self.primaryweapon)
+        return "primary";
+      else if(self.weapon == self.secondaryweapon)
+        return "secondary";
+      else if(self.weapon == self.sidearm)
+        return "sidearm";
+      else
+        assertMsg("self.weapon does not match any known slot");
+    }
+
+    AIHasWeapon(weapon) {
+      if(isDefined(self.weaponInfo[weapon]))
+        return true;
+
+      return false;
+    }
+
+    getAnimEndPos(theanim) {
+      moveDelta = getMoveDelta(theanim, 0, 1);
+      return self localToWorldCoords(moveDelta);
+    }
+
+    damageLocationIsAny(a, b, c, d, e, f, g, h, i, j, k, ovr) {
+      /* possibile self.damageLocation's:
+      		"torso_upper""torso_lower""helmet""head""neck""left_arm_upper""left_arm_lower""left_hand""right_arm_upper""right_arm_lower""right_hand""gun""none""left_leg_upper""left_leg_lower""left_foot""right_leg_upper""right_leg_lower""right_foot"*/
+
+      if(!isDefined(a)) return false;
+      if(self.damageLocation == a) return true;
+      if(!isDefined(b)) return false;
+      if(self.damageLocation == b) return true;
+      if(!isDefined(c)) return false;
+      if(self.damageLocation == c) return true;
+      if(!isDefined(d)) return false;
+      if(self.damageLocation == d) return true;
+      if(!isDefined(e)) return false;
+      if(self.damageLocation == e) return true;
+      if(!isDefined(f)) return false;
+      if(self.damageLocation == f) return true;
+      if(!isDefined(g)) return false;
+      if(self.damageLocation == g) return true;
+      if(!isDefined(h)) return false;
+      if(self.damageLocation == h) return true;
+      if(!isDefined(i)) return false;
+      if(self.damageLocation == i) return true;
+      if(!isDefined(j)) return false;
+      if(self.damageLocation == j) return true;
+      if(!isDefined(k)) return false;
+      if(self.damageLocation == k) return true;
+      assert(!isDefined(ovr));
+      return false;
+    }
+
+    usingPistol() {
+      return weaponClass(self.weapon) == "pistol";
+    }
+
+    usingRocketLauncher() {
+      return weaponClass(self.weapon) == "rocketlauncher";
+    }
+
+    usingMG() {
+      return weaponClass(self.weapon) == "mg";
+    }
+
+    usingShotGun() {
+      return weaponclass(self.weapon) == "spread";
+    }
+
+    usingRifleLikeWeapon() {
+      class = weaponClass(self.weapon);
+
+      switch (class) {
+        case "mg":
+        case "smg":
+        case "sniper":
+        case "rifle":
+        case "spread":
+          return true;
+      }
+
+      return false;
+    }
+
+    ragdollDeath(moveAnim) {
+      self endon("killanimscript");
+
+      lastOrg = self.origin;
+      moveVec = (0, 0, 0);
+      for(;;) {
+        wait(0.05);
+        force = distance(self.origin, lastOrg);
+        lastOrg = self.origin;
+
+        if(self.health == 1) {
+          self.a.nodeath = true;
+          self startRagdoll();
+          self clearAnim(moveAnim, 0.1);
+          wait(0.05);
+          physicsExplosionSphere(lastOrg, 600, 0, force * 0.1);
+          self notify("killanimscript");
+          return;
+        }
+      }
+    }
+
+    shouldCQB() {
+      return isDefined(self.cqbwalking) && !isDefined(self.grenade);
+    }
+
+    isCQBWalking() {
+      return isDefined(self.cqbwalking);
+    }
+
+    isCQBWalkingOrFacingEnemy() {
+      return !self.faceMotion || isDefined(self.cqbwalking);
+    }
+
+    randomizeIdleSet() {
+      self.a.idleSet = randomint(2);
+    }
+
+    isShotgun(weapon) {
+      return weaponclass(weapon) == "spread";
+    }
+
+    isSniperRifle(weapon) {
+      return weaponclass(weapon) == "sniper";
+    }
+
+    weapon_pump_action_shotgun() {
+      return self.weapon != "none" && weaponIsBoltAction(self.weapon) && weaponclass(self.weapon) == "spread";
+    }
+
+    // meant to be used with any integer seed, for a small integer maximum (ideally one that divides anim.randomIntTableSize)
+    getRandomIntFromSeed(intSeed, intMax) {
+      assert(intMax > 0);
+
+      index = intSeed % anim.randomIntTableSize;
+      return anim.randomIntTable[index] % intMax;
+    }
+
+    getCurrentWeaponSlotName() {
+      assert(isDefined(self));
+
+      if(self usingSecondary())
+        return "secondary";
+
+      if(self usingSidearm())
+        return "sidearm";
+
+      // primary and unknowns/none return this slot by default
+      return "primary";
+    }

@@ -26,9 +26,8 @@ settings() {
   level._swimming.dof_far_end = 2345;
   level._swimming.dof_near_blur = 6;
   level._swimming.dof_far_blur = 2.16;
-  SetDvar("bg_bobAmplitudeSwimming", "2 2");
+  setDvar("bg_bobAmplitudeSwimming", "2 2");
 }
-
 set_default_vision_set(vision_set) {}
 set_swimming_vision_set(vision_set) {}
 main() {
@@ -39,11 +38,10 @@ main() {
   enable();
   anims();
   fx();
-  SetDvar("player_swimTime", 1000);
+  setDvar("player_swimTime", 1000);
   OnPlayerConnect_Callback(::on_player_connect);
   OnSaveRestored_Callback(::on_save_restored);
 }
-
 on_player_connect() {
   PrintLn("^4_swimming - server: server player connect");
   init_player();
@@ -52,7 +50,6 @@ on_player_connect() {
   self thread swimmingDrown();
   self thread underWaterFX();
 }
-
 test() {}
 on_save_restored() {
   wait 2;
@@ -69,17 +66,14 @@ on_save_restored() {
     PrintLn("^4_swimming - server: save restore, not underwater");
   }
 }
-
 disable() {
   self._swimming.is_swimming_enabled = false;
   self ClientNotify("_swimming:disable");
 }
-
 enable() {
   self._swimming.is_swimming_enabled = true;
   self ClientNotify("_swimming:enable");
 }
-
 anims() {
   level._swimming.anims["breaststroke"][0] = % viewmodel_swim_breaststroke_a;
   level._swimming.anims["breaststroke"][1] = % viewmodel_swim_breaststroke_b;
@@ -91,7 +85,6 @@ anims() {
   level._swimming.anims["right"][0] = % viewmodel_swim_to_right;
   level._swimming.anims["tread"][0] = % viewmodel_swim_tread_water;
 }
-
 fx() {
   level._effect["underwater"] = LoadFX("env/water/fx_water_particles_surface_fxr");
   level._effect["deep"] = LoadFX("env/water/fx_water_particle_dp_spawner");
@@ -105,14 +98,12 @@ fx() {
   level._effect["wake"] = LoadFX("bio/player/fx_player_water_swim_wake");
   level._effect["ripple"] = LoadFX("bio/player/fx_player_water_swim_ripple");
 }
-
 init_player() {
   self._swimming = spawnStruct();
   self._swimming.is_swimming = false;
   self._swimming.is_underwater = false;
   self._swimming.is_swimming_enabled = true;
 }
-
 swimmingTracker() {
   self endon("death");
   self endon("disconnect");
@@ -139,7 +130,6 @@ swimmingTracker() {
     wait .05;
   }
 }
-
 underWaterFX() {
   self endon("death");
   self endon("disconnect");
@@ -160,7 +150,6 @@ underWaterFX() {
     }
   }
 }
-
 swimmingDrown() {
   self endon("death");
   self endon("disconnect");
@@ -181,7 +170,6 @@ swimmingDrown() {
   }
   self Suicide();
 }
-
 advance_drowning_phase(phase) {
   t_delta = swimming_get_time();
   if(isDefined(level.disable_drowning) && level.disable_drowning) {
@@ -203,7 +191,6 @@ advance_drowning_phase(phase) {
   }
   return phase;
 }
-
 swimming_get_time() {
   t_now = GetTime();
   t_delta = 0;
@@ -213,11 +200,9 @@ swimming_get_time() {
   self._swimming.last_get_time = t_now;
   return t_delta;
 }
-
 get_phase_time(phase) {
   return (level._swimming.swim_times[phase] * 1000);
 }
-
 get_reset_time(phase) {
   return (level._swimming.drown_reset_times[phase] * 1000);
 }

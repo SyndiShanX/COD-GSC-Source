@@ -130,7 +130,7 @@ can_activate(placement) {
 }
 
 activate_vehicle(type) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
 
   if(!player killstreakrules::iskillstreakallowed(type, player.team)) {
@@ -476,7 +476,7 @@ explode(attacker, weapon) {
   destroyedbyenemy = 0;
   var_3906173b = isDefined(weapon) && weapon.name === "gadget_icepick";
 
-  if(!(isDefined(self.abandoned) && self.abandoned) && isplayer(attacker)) {
+  if(!(isDefined(self.abandoned) && self.abandoned) && isPlayer(attacker)) {
     bundle = self.var_22a05c26;
 
     if(util::function_fbce7263(self.team, attacker.team)) {
@@ -565,7 +565,7 @@ function_d75fbe15(origin, angles) {
     mask = 1 | 2;
     trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
 
-    if(isDefined(trace[# "entity"]) && isplayer(trace[# "entity"])) {
+    if(isDefined(trace[# "entity"]) && isPlayer(trace[# "entity"])) {
       wheelcounts[i] = 0;
       continue;
     }

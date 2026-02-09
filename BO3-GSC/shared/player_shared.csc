@@ -16,5 +16,5 @@ function __init__() {
 }
 
 function gameplay_started_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  setdvar("cg_isGameplayActive", newval);
+  setDvar("cg_isGameplayActive", newval);
 }

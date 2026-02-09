@@ -13,7 +13,6 @@ main() {
     level.vehicle_death_thread[self.vehicletype] = ::delete_and_sink_fx;
   }
 }
-
 delete_and_sink_fx() {
   self notify("nodeath_thread");
   if(!isDefined(self.weapon_last_damage)) {

@@ -493,8 +493,7 @@ _getplayerlistforattractor(var_0, var_1) {
 _getplayersinattractorrange(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  if(level.nextgen) {
-    } else {}
+  if(level.nextgen) {} else {}
 
   foreach(var_6 in var_1) {
     var_7 = abs(var_6.origin[2] - var_0.origin[2]);

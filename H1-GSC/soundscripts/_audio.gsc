@@ -14,7 +14,7 @@ aud_init(var_0) {
     level.aud = spawnStruct();
 
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   if(!isDefined(level._audio))
     level._audio = spawnStruct();

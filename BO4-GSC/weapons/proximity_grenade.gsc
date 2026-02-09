@@ -106,7 +106,7 @@ creategadgetproximitygrenadewatcher(watcher) {
 onspawnproximitygrenadeweaponobject(watcher, owner) {
   self thread setupkillcament();
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner stats::function_e24eec31(self.weapon, #"used", 1);
   }
 
@@ -333,7 +333,6 @@ chainplayer(eattacker, killcament, weapon, meansofdeath, damage, proximitychain,
     depth = 0;
     time = 200;
     util::debug_line(self.origin + (0, 0, 50), player.origin + (0, 0, 50), color, alpha, depth, time);
-
   }
 
   self tesla_play_arc_fx(player, waittime);
@@ -378,7 +377,7 @@ function watchproximitygrenadehitplayer(owner) {
     ent = waitresult.entity;
     surface = waitresult.stype;
 
-    if(isDefined(ent) && isplayer(ent) && surface != "riotshield") {
+    if(isDefined(ent) && isPlayer(ent) && surface != "riotshield") {
       if(level.teambased && !util::function_fbce7263(ent.team, self.owner.team)) {
         continue;
       }
@@ -497,7 +496,7 @@ watch_death() {
 }
 
 event_handler[grenade_fire] function_b0604bb3(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

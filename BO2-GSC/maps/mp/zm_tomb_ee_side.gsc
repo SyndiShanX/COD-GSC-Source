@@ -174,7 +174,7 @@ wagon_fire_trigger_watch() {
   while(true) {
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname);
 
-    if(isplayer(attacker) && (attacker getcurrentweapon() == "staff_water_zm" || attacker getcurrentweapon() == "staff_water_upgraded_zm")) {
+    if(isPlayer(attacker) && (attacker getcurrentweapon() == "staff_water_zm" || attacker getcurrentweapon() == "staff_water_upgraded_zm")) {
       level.n_wagon_fires_out++;
 
       if(!flag("ee_wagon_timer_start"))
@@ -322,7 +322,6 @@ bunker_trigger_thread() {
       level.n_tablets_remaining--;
 
       iprintln("1 - take the tablet to the church");
-
     }
 
     if(player.sq_one_inch_punch_stage == 4) {
@@ -332,7 +331,6 @@ bunker_trigger_thread() {
       player playSound("zmb_squest_oiptablet_place_table");
 
       iprintln("5 - charge the tablet in the bunker");
-
     } else if(player.sq_one_inch_punch_stage == 6 && (isDefined(player.beacon_ready) && player.beacon_ready)) {
       player setclientfieldtoplayer("ee_beacon_reward", 0);
       player maps\mp\zombies\_zm_weapons::weapon_give("beacon_zm");
@@ -347,7 +345,6 @@ bunker_trigger_thread() {
       player.sq_one_inch_punch_stage++;
 
       iprintln("7 - tablet is activated; bestow rewards");
-
     }
   }
 }
@@ -370,7 +367,6 @@ birdbath_trigger_thread() {
       player.sq_one_inch_punch_stage++;
 
       iprintln("2 - charge the tablet in the church");
-
     }
 
     if(player.sq_one_inch_punch_stage == 3) {
@@ -384,7 +380,6 @@ birdbath_trigger_thread() {
       player thread tablet_cleanliness_thread();
 
       iprintln("4 - take the tablet to the tank bunker");
-
     }
   }
 }
@@ -401,7 +396,6 @@ tablet_cleanliness_thread() {
       level thread tablet_cleanliness_chastise(self);
 
       iprintln("1 - take the tablet to the church");
-
     }
 
     wait 1;
@@ -446,7 +440,7 @@ bunker_volume_death_check() {
   assert(isDefined(volume), volume_name + " does not exist");
   attacker = self.attacker;
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(attacker.sq_one_inch_punch_stage == 5 && (self.damagemod == "MOD_MELEE" || self.damageweapon == "tomb_shield_zm")) {
       if(self istouching(volume)) {
         self setclientfield("ee_zombie_tablet_fx", 1);
@@ -460,7 +454,6 @@ bunker_volume_death_check() {
           level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("side_sting_3");
 
           iprintln("6 - activate the tablet in the bunker");
-
         }
       }
     }
@@ -486,7 +479,7 @@ church_volume_death_check() {
   assert(isDefined(volume), volume_name + " does not exist");
   attacker = self.attacker;
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(attacker.sq_one_inch_punch_stage == 2 && (self.damagemod == "MOD_MELEE" || self.damageweapon == "tomb_shield_zm")) {
       if(self istouching(volume)) {
         self setclientfield("ee_zombie_tablet_fx", 1);
@@ -502,7 +495,6 @@ church_volume_death_check() {
           level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("side_sting_6");
 
           iprintln("3 - tablet is charged, pick up the tablet from the birdbath");
-
         }
       }
     }
@@ -558,7 +550,6 @@ radio_ee_debug() {
     print3d(self.origin, "R", vectorscale((1, 0, 1), 255.0), 1);
     wait 0.05;
   }
-
 }
 
 radio_ee_think() {

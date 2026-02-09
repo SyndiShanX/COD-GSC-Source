@@ -21,7 +21,7 @@
 #namespace stealth_player;
 
 function init() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(!isDefined(self.stealth));
   if(!isDefined(self.stealth)) {
     self.stealth = spawnStruct();

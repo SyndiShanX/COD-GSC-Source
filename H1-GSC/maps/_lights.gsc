@@ -74,7 +74,7 @@ kill_flicker_when_damaged(var_0) {
 }
 
 generic_pulsing() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -114,7 +114,7 @@ generic_pulsing() {
 }
 
 generic_double_strobe() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -192,7 +192,7 @@ getclosests_flickering_model(var_0) {
 }
 
 generic_flickering() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -495,7 +495,7 @@ flickerlightintensity(var_0, var_1) {
 }
 
 burning_trash_fire() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }

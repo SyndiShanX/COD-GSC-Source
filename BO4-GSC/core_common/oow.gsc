@@ -83,7 +83,7 @@ function_eb7eb3d4() {
 }
 
 kill_entity(entity) {
-  if(isplayer(entity) && entity isinvehicle()) {
+  if(isPlayer(entity) && entity isinvehicle()) {
     vehicle = entity getvehicleoccupied();
     occupants = vehicle getvehoccupants();
 
@@ -98,7 +98,7 @@ kill_entity(entity) {
 
   entity dodamage(entity.health + 10000, entity.origin, undefined, undefined, "none", "MOD_TRIGGER_HURT", 8192 | 16384);
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity suicide();
   }
 }

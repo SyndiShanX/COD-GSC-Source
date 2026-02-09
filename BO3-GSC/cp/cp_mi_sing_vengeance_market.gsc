@@ -512,7 +512,7 @@ function function_e955ac45() {
 }
 
 function monitor_quadtank_health(obj, params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(params.smeansofdeath === "MOD_RIFLE_BULLET" || params.smeansofdeath === "MOD_PISTOL_BULLET") {
       if(params.partname != "tag_target_lower" && params.partname != "tag_target_upper" && params.partname != "tag_defense_active" && params.partname != "tag_body_animate") {
         level notify("hash_52293e91");
@@ -997,7 +997,7 @@ function function_eef8125c() {
 }
 
 function function_7273d688(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(isDefined(eattacker) && !isplayer(eattacker) && eattacker != level.ai_hendricks) {
+  if(isDefined(eattacker) && !isPlayer(eattacker) && eattacker != level.ai_hendricks) {
     idamage = 0;
   } else if(!level flag::get("plaza_combat_live")) {
     level flag::set("plaza_combat_live");

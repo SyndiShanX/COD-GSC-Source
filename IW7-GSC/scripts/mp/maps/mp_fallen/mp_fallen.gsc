@@ -9,10 +9,10 @@ main() {
   scripts\mp\maps\mp_fallen\mp_fallen_fx::main();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_fallen");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraaccurateocclusionthreshold", 400);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraaccurateocclusionthreshold", 400);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -105,7 +105,7 @@ func_139A8() {
   self endon("ball_initial_pitch_over");
   for(;;) {
     self.var_9037 waittill("trigger", var_0);
-    if(isplayer(var_0) && scripts\mp\utility::isreallyalive(var_0)) {
+    if(isPlayer(var_0) && scripts\mp\utility::isreallyalive(var_0)) {
       var_0 dodamage(35, self.origin, self, self, "MOD_IMPACT");
       thread func_10830(self.origin);
       break;

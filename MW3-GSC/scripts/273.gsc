@@ -4,7 +4,7 @@
 **************************************/
 
 init() {
-  if(getdvar("scr_elevator_disabled") == "1") {
+  if(getDvar("scr_elevator_disabled") == "1") {
     return;
   }
   var_0 = getEntArray("elevator_group", "targetname");
@@ -55,7 +55,6 @@ elevator_update_global_dvars() {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "0");
     } else {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "1");
-
     }
     wait 1;
   }
@@ -97,9 +96,8 @@ elevator_fsm(var_0) {
         thread floor_override(var_2);
         waittill_or_timeout("floor_override", level.elevator_waittime);
 
-        if(self.floor_override && isDefined(self.overrider) && isplayer(self.overrider)) {
+        if(self.floor_override && isDefined(self.overrider) && isPlayer(self.overrider)) {
           get_floor(self.overrider);
-
         }
         self.estate = "[B]";
         continue;
@@ -110,14 +108,13 @@ elevator_fsm(var_0) {
           var_3 = var_2 discrete_waittill("trigger");
         } else {
           var_3 = "elevator_called";
-
         }
         if(isstring(var_3) && var_3 == "elevator_called" && self.moveto_floor != get_curfloor()) {
           self.estate = "[B]";
           break;
         }
 
-        if(isDefined(var_3) && isplayer(var_3) && isalive(var_3)) {
+        if(isDefined(var_3) && isPlayer(var_3) && isalive(var_3)) {
           var_4 = var_3 istouching(var_2);
           var_5 = isDefined(var_2.motion_trigger) && var_3 istouching(var_2.motion_trigger);
           var_6 = var_4 || var_5;
@@ -249,7 +246,6 @@ get_floor(var_0) {
     if(var_3 == "elevator_floor_selector") {
       if(var_4 != "none") {
         self.moveto_floor = int(var_4);
-
       }
       break;
     }
@@ -290,7 +286,6 @@ elevator_sound_think() {
 
   if(level.elevator_music && isDefined(var_0)) {
     var_0 playLoopSound("elev_musak_loop");
-
   }
   thread listen_for("closing_inner_doors");
   thread listen_for("opening_inner_doors");
@@ -316,11 +311,9 @@ listen_for(var_0) {
 
     if(issubstr(var_0, "closing_")) {
       var_1 playSound("elev_door_close");
-
     }
     if(issubstr(var_0, "opening_")) {
       var_1 playSound("elev_door_open");
-
     }
     if(var_0 == "elevator_moving") {
       var_1 playSound("elev_run_start");
@@ -329,7 +322,6 @@ listen_for(var_0) {
 
     if(var_0 == "interrupted") {
       var_1 playSound("elev_door_interupt");
-
     }
     if(var_0 == "elevator_moved") {
       var_1 stoploopsound("elev_run_loop");
@@ -566,7 +558,6 @@ build_elevators() {
 
   if(!level.elevator_motion_detection) {
     setup_hints();
-
   }
   foreach(var_39 in level.elevators) {
     var_40 = var_39 get_housing_primarylight();
@@ -639,7 +630,6 @@ discrete_waittill(var_0) {
     self.motion_trigger waittill(var_0, var_1);
   } else {
     self waittill(var_0, var_1);
-
   }
   disable_trigger();
   return var_1;
@@ -717,7 +707,6 @@ get_housing_children() {
 
   if(isDefined(var_3)) {
     var_0[var_0.size] = var_3;
-
   }
   var_6 = get_housing_models();
 
@@ -842,7 +831,6 @@ waittill_finish_moving(var_0, var_1, var_2, var_3) {
 isinbound(var_0) {
   if(level.script == "plaza" || level.script == "highrise_test") {
     return isinboundingspere(var_0);
-
   }
   var_1 = self.origin[0];
   var_2 = self.origin[1];
@@ -876,10 +864,10 @@ elevator_get_dvar_int(var_0, var_1) {
 }
 
 elevator_get_dvar(var_0, var_1) {
-  if(getdvar(var_0) != "") {
+  if(getDvar(var_0) != "") {
     return getdvarfloat(var_0);
   } else {
-    setdvar(var_0, var_1);
+    setDvar(var_0, var_1);
     return var_1;
   }
 }

@@ -200,7 +200,7 @@ fly_to_extraction_on_trigger() {
   fly_to_extraction_trigger = getent("fly_to_extraction_trig", "targetname");
   while(1) {
     fly_to_extraction_trigger waittill("trigger", owner);
-    if(IsPlayer(owner)) {
+    if(isPlayer(owner)) {
       self notify("fly_to_extraction");
       return;
     }
@@ -543,7 +543,6 @@ wait_for_nuke_detonate(nuke_timer, override_msg) {
 
     if(nuke_timer <= 30) {
       level.nuke_clockObject playSound("ui_mp_nukebomb_timer");
-
     }
     wait(1.0);
     nuke_timer--;
@@ -615,7 +614,7 @@ watch_special_spawn_trig() {
 
   while(1) {
     self waittill("trigger", player);
-    if(isDefined(player) && isplayer(player) && isalive(player)) {
+    if(isDefined(player) && isPlayer(player) && isalive(player)) {
       break;
     } else {
       wait 0.05;
@@ -630,7 +629,6 @@ watch_special_spawn_trig() {
 
       if(GetDvarInt("alien_debug_escape") > 0)
         IPrintLnBold("^0[SPECIALS SPAWNED][^7TRIGGERED^0]");
-
     }
   } else {
     if(GetDvarInt("alien_debug_escape") > 0)
@@ -1002,7 +1000,6 @@ face_hive(primary_target) {
       face_angle = VectorToAngles(face_vec);
 
       self SetLookAtEnt(primary_target);
-
     } else {
       self clearLookAtEnt();
     }
@@ -1551,7 +1548,6 @@ init_chaos_airdrop() {
 
   register_airdrop_sub_items();
 
-  /#	
   if(GetDvarInt("alien_supply_drop_debug") > 0) {
     thread test_supply_drop();
   }
@@ -1559,7 +1555,6 @@ init_chaos_airdrop() {
   if(GetDvarInt("alien_heli_debug") > 0) {
     thread test_attack_heli();
   }
-
 }
 
 test_supply_drop() {

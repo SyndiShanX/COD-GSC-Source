@@ -177,9 +177,7 @@ uav_rig_aiming() {
   }
 }
 
-// Vehicles -----------------------------------------------
-
-setup_base_vehicles() {
+// Vehicles ----------------------------------------------- setup_base_vehicles() {
   self endon("death");
 
   self thread maps\_remotemissile::setup_remote_missile_target();
@@ -334,8 +332,7 @@ spawn_vehicle_and_go(struct) {
 //	self maps\_vehicle::vehicle_unload();
 //}
 
-// HUD ----------------------------------------------------
-hud_wave_num() {
+// HUD ---------------------------------------------------- hud_wave_num() {
   while(1) {
     level waittill("new_wave_started");
 
@@ -487,28 +484,23 @@ hud_get_wave_list(wave_num) {
   //	switch( wave_num )
   //	{
   //		case 1:
-  //			// - Wave 1 -
-  //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE1";
+  //			// - Wave 1 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE1";
   //			break;
   //
   //		case 2:
-  //			// - Wave 2 -
-  //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE2";
+  //			// - Wave 2 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE2";
   //			break;
   //
   //		case 3:
-  //			// - Wave 3 -
-  //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE3";
+  //			// - Wave 3 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE3";
   //			break;
   //
   //		case 4:
-  //			// - Wave 4 -
-  //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE4";
+  //			// - Wave 4 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE4";
   //			break;
   //
   //		case 5:
-  //			// - Wave 5 -
-  //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE5";
+  //			// - Wave 5 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE5";
   //			break;
   //
   //		default:
@@ -596,8 +588,7 @@ hud_wave_splash(wave_num, timer) {
   }
 }
 
-// DEBUG ---------------------------------------------------
-so_debug_print(msg, delay) {
+// DEBUG --------------------------------------------------- so_debug_print(msg, delay) {
   message = "> " + msg;
 
   if(isDefined(delay)) {
@@ -607,7 +598,7 @@ so_debug_print(msg, delay) {
     message = ">>" + message;
   }
 
-  if(GetDvar("specialops_debug") == "1")
+  if(getDvar("specialops_debug") == "1")
     IPrintLn(message);
 }
 

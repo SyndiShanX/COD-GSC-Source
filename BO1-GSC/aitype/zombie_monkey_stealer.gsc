@@ -19,11 +19,9 @@ main() {
   self setEngagementMaxDist(768.000000, 1024.000000);
   character\c_zom_monkey_stealer::main();
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\c_zom_monkey_stealer::precache();
   precacheItem("m1911_zm");

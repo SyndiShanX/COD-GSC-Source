@@ -48,7 +48,6 @@ _id_3C6A() {
     precacheturret("sentry_minigun_so");
   } else {
     precacheturret("sentry_minigun_mp");
-
   }
   level._id_3C68["sentry_minigun"] = spawnStruct();
   _id_3C7D("sentry_minigun");
@@ -82,7 +81,6 @@ _id_3C6C() {
     precacheturret("sentry_gun_so");
   } else {
     precacheturret("sentry_gun_mp");
-
   }
   level._id_3C68["sentry_gun"] = spawnStruct();
   _id_3C6F("sentry_gun");
@@ -255,7 +253,6 @@ _id_3C80(var_0, var_1, var_2) {
 
     if(!isDefined(level._id_3C83)) {
       level._id_3C83 = 5;
-
     }
     if(!isDefined(level._id_3C84)) {
       level._id_3C84 = 2;
@@ -265,7 +262,6 @@ _id_3C80(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     if(!isDefined(self.script_team)) {
       self.script_team = "axis";
-
     }
     var_0 = self.script_team;
   }
@@ -279,7 +275,6 @@ _id_3C80(var_0, var_1, var_2) {
 
   if(common_scripts\utility::issp() || level.teambased || _id_12DC()) {
     self setturretteam(var_0);
-
   }
   self.sentrytype = var_1;
   self._id_0A38 = 1;
@@ -298,7 +293,6 @@ _id_3C80(var_0, var_1, var_2) {
     self._id_2A6F = 300;
   } else {
     self._id_2A6F = 300;
-
   }
   if(common_scripts\utility::issp()) {
     self call[[level._id_1E83]](var_0);
@@ -324,7 +318,6 @@ _id_3C80(var_0, var_1, var_2) {
 
   if(getdvarint("survival_chaos") != 1) {
     thread _id_3C8F();
-
   }
   if(!isDefined(var_2)) {
     if(common_scripts\utility::issp()) {
@@ -347,7 +340,6 @@ _id_3C89() {
 
   if(isDefined(var_0) && isDefined(var_0.team) && self.team != var_0.team && isDefined(level._id_1E87)) {
     var_0[[level._id_1E87]](self, var_1, var_2);
-
   }
   if(!common_scripts\utility::issp()) {
     removefromturretlist();
@@ -361,12 +353,10 @@ _id_3C89() {
 
   if(common_scripts\utility::issp()) {
     self call[[level._id_1E84]]();
-
   }
-  if(!common_scripts\utility::issp() && isDefined(var_0) && isplayer(var_0)) {
+  if(!common_scripts\utility::issp() && isDefined(var_0) && isPlayer(var_0)) {
     if(isDefined(self.owner)) {
       self.owner thread[[level.leaderdialogonplayer_func]]("destroy_sentry", "sentry_status");
-
     }
     var_0 thread[[level.onxpevent]]("kill");
   }
@@ -383,7 +373,6 @@ _id_3C89() {
 
   if(common_scripts\utility::issp() && (!isDefined(self._id_3C8A) || !self._id_3C8A)) {
     self setcontents(0);
-
   }
   wait 1.5;
   self playSound("sentry_explode_smoke");
@@ -401,7 +390,7 @@ _id_3C89() {
 
   level._id_3C67 = common_scripts\utility::array_remove(level._id_3C67, self);
 
-  if(!common_scripts\utility::issp() || getdvar("specialops") == "1") {
+  if(!common_scripts\utility::issp() || getDvar("specialops") == "1") {
     thread _id_3CCE();
   }
 }
@@ -475,7 +464,6 @@ _id_3C8F() {
   }
   if(!common_scripts\utility::issp()) {
     _id_3CC6();
-
   }
   _id_3CC3();
   var_0._id_1A96 = self;
@@ -555,7 +543,6 @@ _id_3C94(var_0) {
 
   if(!common_scripts\utility::issp()) {
     var_0 _id_3CC5();
-
   }
   var_0 _id_3CC1();
   thread common_scripts\utility::play_sound_in_space("sentry_gun_plant", var_0.origin);
@@ -599,7 +586,6 @@ _id_3C97() {
 
   if(getdvarint("sentry_overheat_debug") == 1) {
     thread _id_3C9A();
-
   }
   for(;;) {
     if(self._id_3C98 >= level._id_3C83 * 10) {
@@ -611,7 +597,6 @@ _id_3C97() {
       self._id_3C98 = self._id_3C98 + 1;
     } else if(self._id_3C98 > 0) {
       self._id_3C98 = self._id_3C98 - 1;
-
     }
     wait(0.1 / level._id_3C81);
   }
@@ -623,7 +608,6 @@ _id_3C99() {
   while(self.overheated) {
     if(self._id_3C98 > 0) {
       self._id_3C98 = self._id_3C98 - 1;
-
     }
     wait(0.1 / level._id_3C81);
   }
@@ -639,11 +623,14 @@ _id_3C9A() {
 
     if(self.overheated) {
       var_1 = "{{{ ";
-      var_2 = " }}}";
+      var_2 = " }
     }
-
-    wait 0.2;
   }
+  ";
+}
+
+wait 0.2;
+}
 }
 
 _id_3C9B() {
@@ -670,7 +657,6 @@ _id_3C9D() {
 
   if(level._id_3C68[self.sentrytype]._id_3C75) {
     self waittill("turret_on_target");
-
   }
   if(isDefined(self.overheated) && self.overheated) {
     return;
@@ -687,7 +673,6 @@ _id_3C9D() {
     for(var_2 = 0; var_2 < var_1; var_2++) {
       if(_id_3CA0()) {
         self shootturret();
-
       }
       self notify("bullet_fired");
       wait(var_0);
@@ -715,7 +700,6 @@ _id_3C9E(var_0, var_1) {
 _id_3CA0() {
   if(!isDefined(self._id_3C9F)) {
     return 1;
-
   }
   return self._id_3C9F;
 }
@@ -735,7 +719,6 @@ _id_3CA2() {
 
   if(isDefined(self)) {
     self playSound("sentry_steam");
-
   }
   while(isDefined(self)) {
     playFXOnTag(common_scripts\utility::getfx("sentry_turret_overheat_smoke_sp"), self, "tag_flash");
@@ -768,7 +751,6 @@ _id_3CA5() {
 
   if(!isDefined(self.momentum)) {
     self.momentum = 0;
-
   }
   thread _id_3CAA();
 
@@ -782,7 +764,6 @@ _id_3CA5() {
 
     if(common_scripts\utility::issp()) {
       common_scripts\utility::self_func("setanim", level._id_3C68[self.sentrytype]._id_11D6, 1.0, 0.2, self.momentum);
-
     }
     wait 0.2;
   }
@@ -798,11 +779,9 @@ _id_3CA6() {
 
   if(isDefined(self._id_3CA7)) {
     self._id_3CA7 delete();
-
   }
   if(isDefined(self._id_3CA8)) {
     self._id_3CA8 delete();
-
   }
   self delete();
 }
@@ -831,7 +810,6 @@ _id_3CA9() {
 
     if(common_scripts\utility::issp()) {
       common_scripts\utility::self_func("setanim", level._id_3C68[self.sentrytype]._id_11D6, 1.0, 0.2, self.momentum);
-
     }
     wait 0.2;
   }
@@ -932,7 +910,6 @@ _id_3CAE(var_0, var_1, var_2, var_3) {
 
   if(isDefined(self._id_1A96)) {
     return undefined;
-
   }
   common_scripts\utility::_disableweapon();
   self notify("placingSentry");
@@ -940,15 +917,12 @@ _id_3CAE(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_1)) {
     var_1 = self.origin;
-
   }
   if(!isDefined(var_2)) {
     var_2 = self.angles;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   var_4 = spawnturret("misc_turret", var_1, level._id_3C68[var_0].weaponinfo);
   var_4 setModel(level._id_3C68[var_0]._id_3C79);
@@ -972,7 +946,6 @@ _id_3CAE(var_0, var_1, var_2, var_3) {
 
   if(!common_scripts\utility::issp()) {
     var_4 addtoturretlist();
-
   }
   if(!var_3) {
     thread _id_3CB0(var_4);
@@ -1019,11 +992,9 @@ _id_3CB0(var_0) {
     common_scripts\utility::waittill_any("sentry_placement_canceled", "death", "disconnect");
   } else {
     common_scripts\utility::waittill_any("sentry_placement_canceled");
-
   }
   if(_id_12DC()) {
     self._id_3CAF = 1;
-
   }
   waittillframeend;
   var_0 delete();
@@ -1065,7 +1036,6 @@ _id_3CB3(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   if(!common_scripts\utility::issp()) {
     self endon("disconnect");
@@ -1078,7 +1048,6 @@ _id_3CB3(var_0, var_1) {
 
     while(self usebuttonpressed()) {
       wait 0.05;
-
     }
     for(;;) {
       _id_3CBE(0);
@@ -1093,7 +1062,6 @@ _id_3CB3(var_0, var_1) {
 
   if(!common_scripts\utility::issp()) {
     self notify("restock_reset");
-
   }
   if(!common_scripts\utility::issp()) {
     var_0.lifeid = self.lifeid;
@@ -1107,11 +1075,9 @@ _id_3CB3(var_0, var_1) {
 
   if(!var_1) {
     waittillframeend;
-
   }
   if(isDefined(level._id_3CB4) && level._id_3CB4) {
     var_0 thread _id_3CCC();
-
   }
   if(!common_scripts\utility::issp()) {
     var_0 thread _id_3CCB();
@@ -1178,7 +1144,6 @@ _id_3CB9() {
     self notify("sentry_notification");
   } else {
     self forceusehintoff();
-
   }
   self._id_3CB8 = undefined;
 }
@@ -1225,7 +1190,7 @@ _id_3CBB() {
   while(self.health > 0) {
     self waittill("damage", var_5, var_0, var_6, var_7, var_1, var_8, var_9);
 
-    if(isDefined(var_0) && !isplayer(var_0)) {
+    if(isDefined(var_0) && !isPlayer(var_0)) {
       var_2 = var_2 + var_5;
       var_3 = var_3 + (gettime() - var_4);
       var_4 = gettime();
@@ -1241,7 +1206,6 @@ _id_3CBB() {
 
         if(!var_10) {
           level notify("a_sentry_is_underattack");
-
         }
         var_2 = 0;
         var_3 = 0;
@@ -1253,19 +1217,17 @@ _id_3CBB() {
       }
     }
 
-    if(!common_scripts\utility::issp() && isDefined(var_0) && isplayer(var_0) && var_0 _id_3CD2(self)) {
+    if(!common_scripts\utility::issp() && isDefined(var_0) && isPlayer(var_0) && var_0 _id_3CD2(self)) {
       self.health = self._id_29A1;
       return;
     }
 
     if(isDefined(level._id_1E88) && isDefined(var_0)) {
       var_0[[level._id_1E88]]();
-
     }
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       if(!common_scripts\utility::issp()) {
         var_0[[level.func["damagefeedback"]]]("false");
-
       }
       thread _id_3C9E(0, 2.0);
     }
@@ -1275,7 +1237,6 @@ _id_3CBB() {
       self._id_2A6F = self._id_2A6F - var_5;
     } else {
       self._id_29A1 = self.health;
-
     }
     if(self.health < self._id_163B) {
       break;
@@ -1284,7 +1245,6 @@ _id_3CBB() {
 
   if(!common_scripts\utility::issp() && var_0 _id_3CD1(self)) {
     var_0 thread[[level.onxpevent]]("kill");
-
   }
   self notify("death", var_0, var_1);
 }
@@ -1292,15 +1252,12 @@ _id_3CBB() {
 _id_3CBC(var_0, var_1) {
   if(isDefined(var_1) && isai(var_1) && isDefined(var_1._id_0A37) && var_1._id_0A37) {
     return 0;
-
   }
   if(self._id_2A6F <= 0) {
     return 0;
-
   }
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(!issubstr(var_0, "BULLET")) {
     return 0;
@@ -1348,7 +1305,6 @@ _id_3CC0() {
 _id_3CC1() {
   if(!issentient(self) && isDefined(self.owner) && isDefined(self.owner.team)) {
     self call[[level._id_1E83]](self.owner.team);
-
   }
   self setmode("sentry");
   self._id_3CC2 = 1;
@@ -1357,7 +1313,6 @@ _id_3CC1() {
 _id_3CC3() {
   if(issentient(self)) {
     self call[[level._id_1E84]]();
-
   }
   self setmode("sentry_offline");
   self._id_3CC2 = 0;
@@ -1366,7 +1321,6 @@ _id_3CC3() {
 _id_3CC4(var_0) {
   if(isDefined(self.pers["team"])) {
     var_0.pers["team"] = self.pers["team"];
-
   }
   var_0 _id_3CC5();
 }
@@ -1376,7 +1330,6 @@ _id_3CC5() {
 
   if(self.sentrytype == "sentry_gun") {
     var_0 = (0, 0, 75);
-
   }
   self[[level.func["setTeamHeadIcon"]]](self.pers["team"], var_0);
 }
@@ -1425,7 +1378,6 @@ _id_3CCB() {
   while(self._id_3C87 >= 0) {
     if(self._id_3CC2) {
       self._id_3C87 = self._id_3C87 - 1;
-
     }
     wait 1;
   }
@@ -1495,31 +1447,24 @@ _id_3CD0() {
 _id_3CD1(var_0) {
   if(!isDefined(self)) {
     return 0;
-
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
-
   }
   if(!isDefined(level.onxpevent)) {
     return 0;
-
   }
   if(!isDefined(self.pers["team"])) {
     return 0;
-
   }
   if(!isDefined(var_0.team)) {
     return 0;
-
   }
   if(!level.teambased && self == var_0.owner) {
     return 0;
-
   }
   if(level.teambased && self.pers["team"] == var_0.team) {
     return 0;
-
   }
   return 1;
 }
@@ -1527,23 +1472,18 @@ _id_3CD1(var_0) {
 _id_3CD2(var_0) {
   if(!isDefined(self)) {
     return 0;
-
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
-
   }
   if(!level.teambased) {
     return 0;
-
   }
   if(self == var_0.owner) {
     return 0;
-
   }
   if(self.team != var_0.team) {
     return 0;
-
   }
   return 1;
 }

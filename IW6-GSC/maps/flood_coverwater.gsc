@@ -7,7 +7,7 @@ init_coverwater(var_0) {
   if(!isDefined(var_0))
     var_0 = "";
 
-  level.cw_znear_default = getdvar("r_znear");
+  level.cw_znear_default = getDvar("r_znear");
   level.cw_trigger_volumes = [];
   level.current_audio_zone = maps\_utility::get_audio_zone();
   level.cw_waterwipe_above_playing = 0;
@@ -225,7 +225,7 @@ trigger_volume_think(var_0) {
     var_3 = self getistouchingentities(var_2);
 
     foreach(var_1 in var_3) {
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         if(!common_scripts\utility::flag("cw_player_in_water"))
           level.player thread player_in_coverwater(self);
 
@@ -264,7 +264,7 @@ water_surface_think(var_0) {
         var_8 = var_4 - (0, 0, 1);
         var_9 = var_8 + 120 * var_3;
 
-        if(isplayer(var_2))
+        if(isPlayer(var_2))
           magicbullet("coverwater_magicbullet_under", var_8, var_9, level.player);
         else
           magicbullet("coverwater_magicbullet_under", var_8, var_9);
@@ -274,7 +274,7 @@ water_surface_think(var_0) {
         var_8 = var_4 + (0, 0, 1);
         var_9 = var_8 + 120 * var_3;
 
-        if(isplayer(var_2))
+        if(isPlayer(var_2))
           magicbullet("coverwater_magicbullet_above", var_8, var_9, level.player);
         else
           magicbullet("coverwater_magicbullet_above", var_8, var_9);
@@ -378,7 +378,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
 
   var_4 = gettime();
 
-  if(!isplayer(self) && var_2)
+  if(!isPlayer(self) && var_2)
     playFX(common_scripts\utility::getfx("cw_enter_splash_small"), self.origin);
 
   if(!isDefined(var_1))
@@ -388,7 +388,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
     self.cw_in_rising_water = 0;
 
   for(;;) {
-    if(!isplayer(self) && self.cw_in_rising_water)
+    if(!isPlayer(self) && self.cw_in_rising_water)
       wait(randomfloatrange(0.05, 0.1));
     else
       wait(randomfloatrange(0.15, 0.25));
@@ -403,7 +403,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
     var_8 = 36;
     var_9 = var_7["position"][2] - self.origin[2];
 
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       if(!self.cw_in_rising_water && var_9 < var_8 && isDefined(self.animarchetype)) {
         self allowedstances("prone", "crouch", "stand");
         maps\_utility::clear_archetype();
@@ -423,7 +423,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
 
     var_10 = "water_movement";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(!common_scripts\utility::flag("cw_player_underwater")) {
         if(distance(self getvelocity(), (0, 0, 0)) < 5)
           var_10 = "water_stop_player";
@@ -440,7 +440,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
     var_11 = common_scripts\utility::getfx(var_10);
     var_5 = var_7["position"] + var_1;
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(!common_scripts\utility::flag("cw_player_underwater")) {
         if(self getnormalizedmovement()[0] > 0) {
           var_12 = distance(self getvelocity(), (0, 0, 0));
@@ -480,7 +480,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(isplayer(self) && isDefined(level.cw_player_in_rising_water) && level.cw_player_in_rising_water) {
+    if(isPlayer(self) && isDefined(level.cw_player_in_rising_water) && level.cw_player_in_rising_water) {
       if(!common_scripts\utility::flag("cw_player_underwater"))
         thread fx_water_surface_floater(var_5, var_11, var_7["entity"], var_0, 0);
 
@@ -879,7 +879,7 @@ player_abovewater_defaults() {
 
 print_player_speed() {
   for(;;) {
-    jkuprint("player max pos speed: " + getdvar("g_speed"));
+    jkuprint("player max pos speed: " + getDvar("g_speed"));
     var_0 = level.player getvelocity();
     var_1 = distance((var_0[0], var_0[1], 0), (0, 0, 0));
     jkuprint("curr speed: " + var_1);

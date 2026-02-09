@@ -176,7 +176,7 @@ func_13B54(var_0, var_1) {
         scripts\mp\gamescore::trackbuffassist(var_0, var_2, "power_speedBoost");
       }
 
-      if(isplayer(var_2)) {
+      if(isPlayer(var_2)) {
         var_2.var_109A9 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_screen"), var_2 getEye(), var_2);
         triggerfx(var_2.var_109A9);
       }
@@ -259,7 +259,7 @@ func_13B4E(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(var_3)) {
       switch (var_3) {
         case "player_linger":
-          if(isplayer(self) && isDefined(self.var_109B2) && !isDefined(self.var_109BA)) {
+          if(isPlayer(self) && isDefined(self.var_109B2) && !isDefined(self.var_109BA)) {
             self notify(var_4);
             self.var_109BA = 1;
           }

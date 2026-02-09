@@ -21,7 +21,6 @@ main() {
     self.a._id_0D12 = self.a._id_0B29;
   } else {
     self.a._id_0D12 = 0;
-
   }
   self.a._id_0B29 = gettime();
 
@@ -29,11 +28,9 @@ main() {
     self.a._id_0D13 = 1;
   } else {
     self.a._id_0D13 = undefined;
-
   }
   if(self.a._id_0D14) {
     self.health = 1;
-
   }
   var_0 = 0;
   var_1 = 0;
@@ -45,13 +42,11 @@ main() {
 
   if(!isDefined(self._id_0D16)) {
     animscripts\face::_id_0C41("pain");
-
   }
   if(self.damagelocation == "helmet") {
     animscripts\death::_id_0D17();
   } else if(_id_0D1F() && randomint(2) == 0) {
     animscripts\death::_id_0D17();
-
   }
   if(isDefined(self._id_0D18)) {
     self[[self._id_0D18]]();
@@ -80,7 +75,6 @@ end_script() {
 
     if(!isDefined(self._id_0D1D)) {
       self.ignoreme = 0;
-
     }
     self._id_0D1D = undefined;
   }
@@ -94,7 +88,6 @@ end_script() {
 _id_0D1F() {
   if(isexplosivedamagemod(self.damagemod)) {
     return 1;
-
   }
   if(gettime() - anim.lastcarexplosiontime <= 50) {
     var_0 = anim.lastcarexplosionrange * anim.lastcarexplosionrange * 1.2 * 1.2;
@@ -120,11 +113,9 @@ _id_0D25() {
   }
   if(!isDefined(self._id_0D1C) || gettime() - self.a._id_0D12 > 1500) {
     self._id_0D1C = randomintrange(2, 3);
-
   }
   if(isDefined(self.lastattacker) && distancesquared(self.origin, self.lastattacker.origin) < squared(512)) {
     self._id_0D1C = 0;
-
   }
   if(self._id_0D1C > 0) {
     self._id_0D1C--;
@@ -136,17 +127,14 @@ _id_0D25() {
       self._id_0D1D = 1;
     } else {
       self.ignoreme = 1;
-
     }
     if(animscripts\utility::_id_0C95()) {
       animscripts\shared::_id_0C9B(self.primaryweapon, "right");
-
     }
     if(self.a._id_0D26 == "crouch") {
       return % exposed_crouch_extendedpaina;
-
     }
-    var_0 = animscripts\utility::_id_0C6D( % stand_exposed_extendedpain_chest, % stand_exposed_extendedpain_head_2_crouch, % stand_exposed_extendedpain_hip_2_crouch);
+    var_0 = animscripts\utility::_id_0C6D(%stand_exposed_extendedpain_chest, %stand_exposed_extendedpain_head_2_crouch, %stand_exposed_extendedpain_hip_2_crouch);
   }
 }
 
@@ -172,7 +160,6 @@ _id_0D27() {
 
     if(!var_1 && self.a._id_0D2B == "run" && abs(self getmotionangle()) < 60) {
       return _id_0D2C();
-
     }
     self.a._id_0D2B = "stop";
     return _id_0D30();
@@ -196,7 +183,6 @@ _id_0D2C() {
     var_1 = 1;
   } else if(self maymovetopoint(self localtoworldcoords((200, 0, 0)))) {
     var_1 = 1;
-
   }
   if(isDefined(self.a._id_0D2D)) {
     var_2 = 0;
@@ -235,31 +221,24 @@ _id_0D2E() {
 
   if(animscripts\utility::_id_0D2F("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
     var_0[var_0.size] = % pistol_stand_pain_chest;
-
   }
   if(animscripts\utility::_id_0D2F("torso_lower", "left_leg_upper", "right_leg_upper")) {
     var_0[var_0.size] = % pistol_stand_pain_groin;
-
   }
   if(animscripts\utility::_id_0D2F("head", "neck")) {
     var_0[var_0.size] = % pistol_stand_pain_head;
-
   }
   if(animscripts\utility::_id_0D2F("left_arm_lower", "left_arm_upper", "torso_upper")) {
     var_0[var_0.size] = % pistol_stand_pain_leftshoulder;
-
   }
   if(animscripts\utility::_id_0D2F("right_arm_lower", "right_arm_upper", "torso_upper")) {
     var_0[var_0.size] = % pistol_stand_pain_rightshoulder;
-
   }
   if(var_0.size < 2) {
     var_0[var_0.size] = % pistol_stand_pain_chest;
-
   }
   if(var_0.size < 2) {
     var_0[var_0.size] = % pistol_stand_pain_groin;
-
   }
   return var_0[randomint(var_0.size)];
 }
@@ -267,7 +246,6 @@ _id_0D2E() {
 _id_0D30() {
   if(animscripts\utility::_id_0C95()) {
     return _id_0D2E();
-
   }
   var_0 = [];
   var_1 = [];
@@ -285,7 +263,6 @@ _id_0D30() {
 
   if(animscripts\utility::_id_0D2F("right_arm_upper", "right_arm_lower")) {
     var_0[var_0.size] = % exposed_pain_right_arm;
-
   }
   if(animscripts\utility::_id_0D2F("left_arm_lower", "left_arm_upper")) {
     var_0[var_0.size] = % stand_exposed_extendedpain_shoulderswing;
@@ -343,7 +320,6 @@ _id_0D32(var_0) {
 
     if(animhasnotetrack(var_3, "code_move")) {
       var_4 = getnotetracktimes(var_3, "code_move")[0];
-
     }
     var_5 = getmovedelta(var_3, 0, var_4);
     var_6 = self localtoworldcoords(var_5);
@@ -361,7 +337,6 @@ _id_0D33() {
 
   if(!self.damageshield && !self.a._id_0D31) {
     var_0[var_0.size] = % exposed_crouch_extendedpaina;
-
   }
   var_0[var_0.size] = % exposed_crouch_pain_chest;
   var_0[var_0.size] = % exposed_crouch_pain_headsnap;
@@ -369,11 +344,9 @@ _id_0D33() {
 
   if(animscripts\utility::_id_0D2F("left_hand", "left_arm_lower", "left_arm_upper")) {
     var_0[var_0.size] = % exposed_crouch_pain_left_arm;
-
   }
   if(animscripts\utility::_id_0D2F("right_hand", "right_arm_lower", "right_arm_upper")) {
     var_0[var_0.size] = % exposed_crouch_pain_right_arm;
-
   }
   return var_0[randomint(var_0.size)];
 }
@@ -388,11 +361,10 @@ _id_0D34() {
 
 _id_0D35(var_0) {
   var_1 = 1;
-  self setflaggedanimknoballrestart("painanim", var_0, % body, 1, 0.1, var_1);
+  self setflaggedanimknoballrestart("painanim", var_0, %body, 1, 0.1, var_1);
 
   if(self.a._id_0D26 == "prone") {
-    self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
-
+    self updateprone(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
   }
   if(animhasnotetrack(var_0, "start_aim")) {
     thread _id_0D36("painanim");
@@ -401,7 +373,6 @@ _id_0D35(var_0) {
 
   if(animhasnotetrack(var_0, "code_move")) {
     animscripts\shared::_id_0C51("painanim");
-
   }
   animscripts\shared::_id_0C51("painanim");
 }
@@ -424,7 +395,6 @@ _id_0D37() {
 _id_0D38(var_0) {
   if(var_0 == "none") {
     return 0;
-
   }
   self.a._id_0D19 = "none";
   thread _id_0D37();
@@ -446,7 +416,6 @@ _id_0D38(var_0) {
         var_2 = 1;
       } else {
         var_2 = 0;
-
       }
       break;
     case "cover_right":
@@ -465,22 +434,21 @@ _id_0D38(var_0) {
         var_2 = 1;
       } else {
         var_2 = 0;
-
       }
       break;
     case "cover_right_stand_A":
       var_2 = 0;
       break;
     case "cover_right_stand_B":
-      _id_0D3B( % corner_standr_pain_b_2_alert);
+      _id_0D3B(%corner_standr_pain_b_2_alert);
       var_2 = 1;
       break;
     case "cover_left_stand_A":
-      _id_0D3B( % corner_standl_pain_a_2_alert);
+      _id_0D3B(%corner_standl_pain_a_2_alert);
       var_2 = 1;
       break;
     case "cover_left_stand_B":
-      _id_0D3B( % corner_standl_pain_b_2_alert);
+      _id_0D3B(%corner_standl_pain_b_2_alert);
       var_2 = 1;
       break;
     case "cover_crouch":
@@ -506,7 +474,7 @@ _id_0D38(var_0) {
       var_2 = 1;
       break;
     case "cover_crouch_aim":
-      _id_0D3B( % covercrouch_pain_aim_2_hide_01);
+      _id_0D3B(%covercrouch_pain_aim_2_hide_01);
       var_2 = 1;
       break;
     case "saw":
@@ -516,7 +484,6 @@ _id_0D38(var_0) {
         var_3 = % saw_gunner_lowwall_pain_02;
       } else {
         var_3 = % saw_gunner_prone_pain;
-
       }
       self setflaggedanimknob("painanim", var_3, 1, 0.3, 1);
       animscripts\shared::_id_0C51("painanim");
@@ -573,7 +540,6 @@ _id_0D3E(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self endon(var_1);
-
   }
   wait(var_0);
   self.a._id_0D2B = "stop";
@@ -582,19 +548,16 @@ _id_0D3E(var_0, var_1) {
 _id_0D3F() {
   if(self.a._id_0D31 || self.diequietly || self.damageshield) {
     return 0;
-
   }
   if(self.stairsstate != "none") {
     return 0;
-
   }
   if(isDefined(self.a._id_0D29)) {
     return 0;
-
   }
-  var_0["prone"] = animscripts\utility::_id_0C6D( % dying_crawl_2_back);
-  var_0["stand"] = animscripts\utility::_id_0C6D( % dying_stand_2_back_v1, % dying_stand_2_back_v2);
-  var_0["crouch"] = animscripts\utility::_id_0C6D( % dying_crouch_2_back);
+  var_0["prone"] = animscripts\utility::_id_0C6D(%dying_crawl_2_back);
+  var_0["stand"] = animscripts\utility::_id_0C6D(%dying_stand_2_back_v1, %dying_stand_2_back_v2);
+  var_0["crouch"] = animscripts\utility::_id_0C6D(%dying_crouch_2_back);
   self.a._id_0D40 = var_0[self.a._id_0D26][randomint(var_0[self.a._id_0D26].size)];
 
   if(isDefined(self._id_0D41)) {
@@ -606,11 +569,9 @@ _id_0D3F() {
 
   if(!_id_0D46(self.a._id_0D40)) {
     return 0;
-
   }
   if(self.health > 100) {
     return 0;
-
   }
   var_1 = animscripts\utility::_id_0D2F("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot");
 
@@ -621,7 +582,6 @@ _id_0D3F() {
   } else {
     if(anim._id_0D43 > 0) {
       return 0;
-
     }
     if(gettime() < anim._id_0D44) {
       return 0;
@@ -630,7 +590,6 @@ _id_0D3F() {
 
   if(isDefined(self._id_0D45)) {
     return 0;
-
   }
   foreach(var_3 in level.players) {
     if(distance(self.origin, var_3.origin) < 175) {
@@ -640,11 +599,9 @@ _id_0D3F() {
 
   if(animscripts\utility::_id_0D2F("head", "helmet", "gun", "right_hand", "left_hand")) {
     return 0;
-
   }
   if(animscripts\utility::_id_0C95()) {
     return 0;
-
   }
   anim._id_0D44 = gettime() + 3000;
   anim._id_0D42 = gettime() + 3000;
@@ -656,7 +613,6 @@ _id_0D3F() {
 _id_0D46(var_0) {
   if(isDefined(self.a._id_0D47)) {
     return 1;
-
   }
   var_1 = getmovedelta(var_0, 0, 1);
   var_2 = self localtoworldcoords(var_1);
@@ -665,15 +621,15 @@ _id_0D46(var_0) {
 
 _id_0D48() {
   self.a._id_0C6D = [];
-  self.a._id_0C6D["stand_2_crawl"] = animscripts\utility::_id_0C6D( % dying_stand_2_crawl_v1, % dying_stand_2_crawl_v2, % dying_stand_2_crawl_v3);
-  self.a._id_0C6D["crouch_2_crawl"] = animscripts\utility::_id_0C6D( % dying_crouch_2_crawl);
+  self.a._id_0C6D["stand_2_crawl"] = animscripts\utility::_id_0C6D(%dying_stand_2_crawl_v1, %dying_stand_2_crawl_v2, %dying_stand_2_crawl_v3);
+  self.a._id_0C6D["crouch_2_crawl"] = animscripts\utility::_id_0C6D(%dying_crouch_2_crawl);
   self.a._id_0C6D["crawl"] = % dying_crawl;
-  self.a._id_0C6D["death"] = animscripts\utility::_id_0C6D( % dying_crawl_death_v1, % dying_crawl_death_v2);
+  self.a._id_0C6D["death"] = animscripts\utility::_id_0C6D(%dying_crawl_death_v1, %dying_crawl_death_v2);
   self.a._id_0C6D["back_idle"] = % dying_back_idle;
-  self.a._id_0C6D["back_idle_twitch"] = animscripts\utility::_id_0C6D( % dying_back_twitch_a, % dying_back_twitch_b);
+  self.a._id_0C6D["back_idle_twitch"] = animscripts\utility::_id_0C6D(%dying_back_twitch_a, %dying_back_twitch_b);
   self.a._id_0C6D["back_crawl"] = % dying_crawl_back;
   self.a._id_0C6D["back_fire"] = % dying_back_fire;
-  self.a._id_0C6D["back_death"] = animscripts\utility::_id_0C6D( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3);
+  self.a._id_0C6D["back_death"] = animscripts\utility::_id_0C6D(%dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3);
 
   if(isDefined(self._id_0D49)) {
     [[self._id_0D49]]();
@@ -690,7 +646,7 @@ _id_0D4A() {
   thread _id_0D39();
   level notify("ai_crawling", self);
   thread _id_0D51();
-  self setanimknoball( % dying, % body, 1, 0.1, 1);
+  self setanimknoball(%dying, %body, 1, 0.1, 1);
 
   if(!_id_0D53()) {
     return;
@@ -702,7 +658,6 @@ _id_0D4A() {
 
   if(isDefined(self.enemy)) {
     self setlookatentity(self.enemy);
-
   }
   _id_0D6D();
 
@@ -731,7 +686,6 @@ _id_0D4A() {
 
     if(randomfloat(1) < 0.4) {
       var_1 = animscripts\utility::_id_0CA8("back_idle_twitch");
-
     }
     self setflaggedanimknobrestart("back_idle_or_fire", var_1, 1, 0.1, 1.0);
     var_2 = getanimlength(var_1);
@@ -748,15 +702,14 @@ _id_0D4A() {
         var_2 = 0;
       } else {
         var_2 = var_2 - var_3;
-
       }
       animscripts\notetracks::_id_0D4F(var_3, "back_idle_or_fire");
     }
   }
 
   self notify("end_dying_crawl_back_aim");
-  self clearanim( % dying_back_aim_4_wrapper, 0.3);
-  self clearanim( % dying_back_aim_6_wrapper, 0.3);
+  self clearanim(%dying_back_aim_4_wrapper, 0.3);
+  self clearanim(%dying_back_aim_6_wrapper, 0.3);
   self._id_0D50 = animscripts\utility::_id_0CA8("back_death");
   _id_0D79();
   self.a._id_0D19 = "none";
@@ -770,7 +723,7 @@ _id_0D51() {
   self endon("end_dying_crawl_back_aim");
   self waittill("death", var_0, var_1);
 
-  if(!isDefined(self) || !isDefined(var_0) || !isplayer(var_0)) {
+  if(!isDefined(self) || !isDefined(var_0) || !isPlayer(var_0)) {
     return;
   }
 }
@@ -778,7 +731,6 @@ _id_0D51() {
 _id_0D52() {
   if(!_id_0D66(anglesToForward(self.angles))) {
     return 0;
-
   }
   return gettime() < self._id_0D4E;
 }
@@ -787,7 +739,6 @@ _id_0D53() {
   if(!isDefined(self._id_0D41)) {
     if(self.a._id_0D26 == "prone") {
       return 1;
-
     }
     if(self.a._id_0D2B == "stop") {
       if(randomfloat(1) < 0.4) {
@@ -807,14 +758,12 @@ _id_0D53() {
 
     if(!_id_0D46(var_0)) {
       return 1;
-
     }
     thread _id_0D57();
     self setflaggedanimknob("falling", var_0, 1, 0.5, 1);
     animscripts\shared::_id_0C51("falling");
   } else {
     thread _id_0D57();
-
   }
   self.a._id_0D40 = % dying_crawl_2_back;
   self.a._id_0D19 = "dying_crawl";
@@ -825,11 +774,9 @@ _id_0D53() {
 
     if(!_id_0D46(var_1)) {
       return 1;
-
     }
     if(isDefined(self._id_0D54)) {
       self playSound(self._id_0D54);
-
     }
     self setflaggedanimknobrestart("crawling", var_1, 1, 0.1, 1.0);
     animscripts\shared::_id_0C51("crawling");
@@ -839,13 +786,11 @@ _id_0D53() {
 
   if(!isDefined(self._id_0D41) && _id_0D66(anglesToForward(self.angles) * -1)) {
     return 1;
-
   }
   var_2 = animscripts\utility::_id_0CA8("death");
 
   if(var_2 != % dying_crawl_death_v2) {
     self.a._id_0D55 = 1;
-
   }
   animscripts\death::_id_0D56(var_2);
   _id_0D79();
@@ -874,11 +819,9 @@ _id_0D57() {
 
   if(isDefined(self.a._id_0D58)) {
     var_3 = self.a._id_0D58;
-
   }
   if(isDefined(self.a._id_0D59)) {
     var_4 = level._effect[self.a._id_0D59];
-
   }
   while(var_3) {
     var_5 = self gettagorigin(var_1);
@@ -899,8 +842,8 @@ _id_0D5A() {
     return;
   }
   self._id_0D5B = 1;
-  self setanimlimited( % dying_back_aim_4, 1, 0);
-  self setanimlimited( % dying_back_aim_6, 1, 0);
+  self setanimlimited(%dying_back_aim_4, 1, 0);
+  self setanimlimited(%dying_back_aim_6, 1, 0);
   var_0 = 0;
 
   for(;;) {
@@ -909,26 +852,23 @@ _id_0D5A() {
 
     if(abs(var_2) > 3) {
       var_2 = common_scripts\utility::sign(var_2) * 3;
-
     }
     var_1 = angleclamp180(var_0 + var_2);
 
     if(var_1 < 0) {
       if(var_1 < -45.0) {
         var_1 = -45.0;
-
       }
       var_3 = var_1 / -45.0;
-      self setanim( % dying_back_aim_4_wrapper, var_3, 0.05);
-      self setanim( % dying_back_aim_6_wrapper, 0, 0.05);
+      self setanim(%dying_back_aim_4_wrapper, var_3, 0.05);
+      self setanim(%dying_back_aim_6_wrapper, 0, 0.05);
     } else {
       if(var_1 > 45.0) {
         var_1 = 45.0;
-
       }
       var_3 = var_1 / 45.0;
-      self setanim( % dying_back_aim_6_wrapper, var_3, 0.05);
-      self setanim( % dying_back_aim_4_wrapper, 0, 0.05);
+      self setanim(%dying_back_aim_6_wrapper, var_3, 0.05);
+      self setanim(%dying_back_aim_4_wrapper, 0, 0.05);
     }
 
     var_0 = var_1;
@@ -947,11 +887,9 @@ _id_0D5E(var_0) {
   if(var_0 == "fire_spray") {
     if(!animscripts\utility::_id_0CE3()) {
       return 1;
-
     }
     if(!_id_0D60()) {
       return 1;
-
     }
     animscripts\utility::_id_0D5F();
     return 1;
@@ -981,7 +919,6 @@ _id_0D60() {
 _id_0D66(var_0) {
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   var_1 = vectornormalize(self.enemy getshootatpos() - self getEye());
   return vectordot(var_1, var_0) > 0.5;
@@ -1000,7 +937,6 @@ _id_0D67(var_0) {
 
   if(self.health > 1) {
     self.health = 1;
-
   }
   wait 0.05;
   self._id_0D0F = undefined;
@@ -1052,23 +988,18 @@ _id_0D6F() {
 _id_0D70() {
   if(anim._id_0D6B > 0) {
     return 0;
-
   }
   if(gettime() < anim._id_0D6C) {
     return 0;
-
   }
   if(self.a._id_0D31 || self.diequietly || self.damageshield) {
     return 0;
-
   }
   if(isDefined(self._id_0D45)) {
     return 0;
-
   }
   if(distance(self.origin, level.player.origin) < 175) {
     return 0;
-
   }
   anim._id_0D6C = gettime() + 3000;
   thread _id_0D71();
@@ -1083,7 +1014,7 @@ _id_0D71() {
   thread _id_0D67("corner_grenade");
   thread maps\_utility::_id_0D72(0);
   self.threatbias = -1000;
-  self setflaggedanimknoballrestart("corner_grenade_pain", % corner_standr_death_grenade_hit, % body, 1, 0.1);
+  self setflaggedanimknoballrestart("corner_grenade_pain", %corner_standr_death_grenade_hit, %body, 1, 0.1);
   self waittillmatch("corner_grenade_pain", "dropgun");
   animscripts\shared::_id_0D73();
   self waittillmatch("corner_grenade_pain", "anim_pose = \"back\"");
@@ -1094,7 +1025,7 @@ _id_0D71() {
   self._id_0D45 = ::_id_0D7D;
   self waittillmatch("corner_grenade_pain", "end");
   var_1 = gettime() + randomintrange(25000, 60000);
-  self setflaggedanimknoballrestart("corner_grenade_idle", % corner_standr_death_grenade_idle, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("corner_grenade_idle", %corner_standr_death_grenade_idle, %body, 1, 0.2);
   thread _id_0D80();
 
   while(!_id_0D7B()) {
@@ -1106,7 +1037,7 @@ _id_0D71() {
   }
 
   var_2 = % corner_standr_death_grenade_slump;
-  self setflaggedanimknoballrestart("corner_grenade_release", var_2, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("corner_grenade_release", var_2, %body, 1, 0.2);
   var_3 = getnotetracktimes(var_2, "grenade_drop");
   var_4 = var_3[0] * getanimlength(var_2);
   wait(var_4 - 1.0);
@@ -1128,13 +1059,11 @@ _id_0D76(var_0, var_1) {
 
   if(var_5["fraction"] < 0.5) {
     var_2 = var_5["position"];
-
   }
   var_6 = "default";
 
   if(var_5["surfacetype"] != "none") {
     var_6 = var_5["surfacetype"];
-
   }
   thread _id_0D77("grenade_bounce_" + var_6, var_2);
   self.grenadeweapon = "fraggrenade";
@@ -1167,35 +1096,30 @@ _id_0D79() {
 _id_0D7B() {
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   if(distancesquared(self.origin, self.enemy.origin) > 147456) {
     return 0;
-
   }
   if(distancesquared(self.origin, self.enemy.origin) < 16384) {
     return 1;
-
   }
   var_0 = self.enemy.origin + self._id_0D7C * 3.0;
   var_1 = self.enemy.origin;
 
   if(self.enemy.origin != var_0) {
     var_1 = pointonsegmentnearesttopoint(self.enemy.origin, var_0, self.origin);
-
   }
   if(distancesquared(self.origin, var_1) < 16384) {
     return 1;
-
   }
   return 0;
 }
 
 _id_0D7D() {
-  var_0 = animscripts\utility::_id_0C6D( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3, % dying_back_death_v4);
+  var_0 = animscripts\utility::_id_0C6D(%dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3, %dying_back_death_v4);
   var_1 = var_0[randomint(var_0.size)];
   animscripts\death::playdeathsound();
-  self setflaggedanimknoballrestart("corner_grenade_die", var_1, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("corner_grenade_die", var_1, %body, 1, 0.2);
   var_2 = animscripts\combat_utility::_id_0D7E();
   _id_0D76(var_2, 3.0);
   var_3 = getweaponmodel("fraggrenade");
@@ -1227,7 +1151,6 @@ _id_0D80() {
         var_1 = self.enemy.origin;
       } else {
         var_1 = self.origin;
-
       }
       var_0 = self.enemy;
       self._id_0D81 = (0, 0, 0);
@@ -1250,12 +1173,11 @@ _id_0D82(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return;
   }
   self._id_0D83 = 1;
-  var_7 = animscripts\utility::_id_0C6D( % pain_add_standing_belly, % pain_add_standing_left_arm, % pain_add_standing_right_arm);
+  var_7 = animscripts\utility::_id_0C6D(%pain_add_standing_belly, %pain_add_standing_left_arm, %pain_add_standing_right_arm);
   var_8 = % pain_add_standing_belly;
 
   if(animscripts\utility::_id_0D2F("left_arm_lower", "left_arm_upper", "left_hand")) {
     var_8 = % pain_add_standing_left_arm;
-
   }
   if(animscripts\utility::_id_0D2F("right_arm_lower", "right_arm_upper", "right_hand")) {
     var_8 = % pain_add_standing_right_arm;
@@ -1265,12 +1187,11 @@ _id_0D82(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_8 = % pain_add_standing_right_leg;
   } else {
     var_8 = var_7[randomint(var_7.size)];
-
   }
-  self setanimlimited( % add_pain, 1, 0.1, 1);
+  self setanimlimited(%add_pain, 1, 0.1, 1);
   self setanimlimited(var_8, 1, 0, 1);
   wait 0.4;
   self clearanim(var_8, 0.2);
-  self clearanim( % add_pain, 0.2);
+  self clearanim(%add_pain, 0.2);
   self._id_0D83 = undefined;
 }

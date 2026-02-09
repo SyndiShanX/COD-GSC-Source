@@ -422,7 +422,7 @@ function function_523cdc93(var_9e5eb4d9 = 1) {
   }
   util::wait_network_frame();
   wait(0.25);
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker thread newworld_rooftops::function_8e9219f();
   }
   if(isDefined(self)) {
@@ -1248,7 +1248,7 @@ function function_c633d8fe() {
   if(sessionmodeiscampaignzombiesgame()) {
     return 1;
   }
-  assert(isplayer(self));
+  assert(isPlayer(self));
   return self getdstat("PlayerStatsByMap", "cp_mi_zurich_newworld", "hasBeenCompleted");
 }
 
@@ -1382,7 +1382,7 @@ function function_606dbca2(params) {
   if(self.team !== "axis") {
     return;
   }
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     level notify("hash_921d7387");
   }
 }

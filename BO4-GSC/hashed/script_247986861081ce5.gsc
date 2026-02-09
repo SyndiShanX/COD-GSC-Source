@@ -139,7 +139,7 @@ function_6882655b() {
 }
 
 function_5e7d8d96(s_params) {
-  if(!level.var_f0efd877 || !isplayer(s_params.eattacker)) {
+  if(!level.var_f0efd877 || !isPlayer(s_params.eattacker)) {
     return;
   }
 

@@ -115,7 +115,7 @@ function_138aec8e(attacker) {
       return;
     }
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker.var_5a9bcbe4++;
     }
   }

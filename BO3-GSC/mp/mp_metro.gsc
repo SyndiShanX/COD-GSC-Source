@@ -16,13 +16,13 @@
 
 function main() {
   precache();
-  setdvar("phys_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
   clientfield::register("scriptmover", "mp_metro_train_timer", 1, 1, "int");
   mp_metro_fx::main();
   mp_metro_sound::main();
   load::main();
   compass::setupminimap("compass_map_mp_metro");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   level.cleandepositpoints = array((-399.059, 1.39783, -47.875), (-1539.2, -239.678, -207.875), (878.216, -0.543464, -47.875), (69.9086, 1382.49, 0.125));
   if(getgametypesetting("allowMapScripting")) {
     level thread mp_metro_train::init();
@@ -34,7 +34,7 @@ function main() {
 function precache() {}
 
 function devgui_metro() {
-  setdvar("", "");
+  setDvar("", "");
   for(;;) {
     wait(0.5);
     devgui_string = getdvarstring("");
@@ -55,7 +55,7 @@ function devgui_metro() {
       }
     }
     if(getdvarstring("") != "") {
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }

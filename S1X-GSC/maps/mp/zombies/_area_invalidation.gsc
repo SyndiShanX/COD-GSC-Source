@@ -171,20 +171,20 @@ onusedefuseobject(var_0) {
   self.visuals[0] setbombenabled(0);
   var_1 = var_0;
 
-  if(!isplayer(var_1) && isplayer(var_1.owner)) {
+  if(!isPlayer(var_1) && isPlayer(var_1.owner)) {
     var_1 = var_1.owner;
   }
 
   var_1 maps\mp\gametypes\zombies::givepointsforevent("breach_fix");
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     givedefuseachievement(var_0);
   }
 
   level.bombsdefused++;
   var_2 = var_0;
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_2 = level.players[0];
   }
 

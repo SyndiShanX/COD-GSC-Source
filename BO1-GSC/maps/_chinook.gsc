@@ -10,12 +10,11 @@ main() {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_unload_groups(::unload_groups);
 }
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   for(i = 0; i < 9; i++) {
@@ -23,7 +22,6 @@ setanims() {
   }
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

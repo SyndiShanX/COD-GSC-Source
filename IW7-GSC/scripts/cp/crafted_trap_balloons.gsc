@@ -351,7 +351,7 @@ kill_zombies() {
   self.dmg_trigger = spawn("trigger_radius", self.origin + (0, 0, -20), 0, 256, 128);
   for(;;) {
     self.dmg_trigger waittill("trigger", var_0);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       continue;
     }
 

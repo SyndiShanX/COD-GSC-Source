@@ -196,7 +196,7 @@ add_leap_node(node, weight) {
   if(!isDefined(node.target) || isDefined(node.script_delay))
     return false;
 
-  if(getdvar("debug") == "1")
+  if(getDvar("debug") == "1")
     node thread debug_leap_node();
 
   if(!is_in_array(level.leap_node_array, node)) {

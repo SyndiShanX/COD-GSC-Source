@@ -75,11 +75,11 @@ function spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacke
   }
   if(objectives_for_attacker_and_victim_only) {
     objective_setinvisibletoall(level.dogtags[victim.entnum].objid[attacker.team]);
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       objective_setvisibletoplayer(level.dogtags[victim.entnum].objid[attacker.team], attacker);
     }
     objective_setinvisibletoall(level.dogtags[victim.entnum].objid[victim.team]);
-    if(isplayer(victim)) {
+    if(isPlayer(victim)) {
       objective_setvisibletoplayer(level.dogtags[victim.entnum].objid[victim.team], victim);
     }
   }

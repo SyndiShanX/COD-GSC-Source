@@ -44,7 +44,7 @@ beginningoflevelsave() {
   common_scripts\utility::flag_set("game_saving");
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
   savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
-  setdvar("ui_grenade_death", "0");
+  setDvar("ui_grenade_death", "0");
   common_scripts\utility::flag_clear("game_saving");
 }
 
@@ -181,7 +181,7 @@ _autosave_game_now(var_0) {
   if(try_to_autosave_now()) {
     autosave_recon(var_5);
     commitsave(var_5);
-    setdvar("ui_grenade_death", "0");
+    setDvar("ui_grenade_death", "0");
   }
 
   return 1;
@@ -291,7 +291,7 @@ tryautosave(var_0, var_1, var_2, var_3, var_4, var_5) {
       autosave_recon(var_10);
       commitsave(var_10);
       level.lastsavetime = gettime();
-      setdvar("ui_grenade_death", "0");
+      setDvar("ui_grenade_death", "0");
       break;
     }
 
@@ -454,7 +454,7 @@ autosavethreatcheck(var_0) {
     if(!isDefined(var_3.enemy)) {
       continue;
     }
-    if(!isplayer(var_3.enemy)) {
+    if(!isPlayer(var_3.enemy)) {
       continue;
     }
     if(var_3.type == "dog") {
@@ -466,7 +466,7 @@ autosavethreatcheck(var_0) {
       continue;
     }
 
-    if(isDefined(var_3.melee) && isDefined(var_3.melee.target) && isplayer(var_3.melee.target))
+    if(isDefined(var_3.melee) && isDefined(var_3.melee.target) && isPlayer(var_3.melee.target))
       return 0;
 
     var_7 = [[level.autosave_proximity_threat_func]](var_3);

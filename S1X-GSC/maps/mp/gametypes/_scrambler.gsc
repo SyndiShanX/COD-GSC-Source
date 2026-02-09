@@ -384,8 +384,7 @@ scramblerProximityTracker() {
 
       scramDistance = DistanceSquared(scrambler.origin, self.origin);
 
-      if((level.teambased && scrambler.team != self.team) ||
-        (!level.teambased && isDefined(scrambler.owner) && scrambler.owner != self)) {
+      if((level.teambased && scrambler.team != self.team) || (!level.teambased && isDefined(scrambler.owner) && scrambler.owner != self)) {
         if(scramDistance < scramblerProximity * scramblerProximity) {
           self.inPlayerScrambler = scrambler.owner;
         } else {
@@ -412,5 +411,4 @@ scramblerProximityTracker() {
       }
     }
   }
-
 }

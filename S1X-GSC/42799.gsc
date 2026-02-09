@@ -11,7 +11,7 @@ update_exo_battery_hud(var_0) {
   self endon("faux_spawn");
   self endon("kill_battery");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   while(get_exo_ability_hud_omnvar_value(var_0, "ui_exo_battery_toggle") == 1) {

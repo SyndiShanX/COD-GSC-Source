@@ -41,7 +41,7 @@ on_player_killed() {
   attacker = self.laststandparams.attacker;
   weapon = self.laststandparams.sweapon;
 
-  if(!isplayer(attacker) || !isDefined(weapon)) {
+  if(!isPlayer(attacker) || !isDefined(weapon)) {
     return;
   }
 

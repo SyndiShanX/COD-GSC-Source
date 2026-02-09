@@ -84,7 +84,7 @@ onpickup(var_0) {
     var_0.objective = 2;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread maps\mp\_matchdata::loggameevent("pickup", var_0.origin);
     var_0 setclientomnvar("ui_carrying_bomb", 1);
   }
@@ -413,7 +413,7 @@ bombplanted(var_0, var_1) {
   level.bombplanted = 1;
   var_1.objective = 0;
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_carrying_bomb", 0);
   }
 

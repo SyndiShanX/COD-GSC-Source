@@ -61,7 +61,6 @@ init() {
   if(zm_custom::function_901b751c(#"zmpapenabled") == 2) {
     level thread function_62933c32();
   }
-
 }
 
 function_62933c32() {

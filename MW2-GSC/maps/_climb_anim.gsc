@@ -92,7 +92,7 @@ pick_warning(warning) {
 }
 
 pick_left_hit(price) {
-  /# pick_warning( "left_in" );
+  pick_warning("left_in");
 
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_inhand");
@@ -108,7 +108,7 @@ pick_left_fx(price) {
 }
 
 pick_right_hit(price) {
-  /# pick_warning( "right_in" );
+  pick_warning("right_in");
 
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_weapon_left");
@@ -117,7 +117,7 @@ pick_right_hit(price) {
 }
 
 pick_left_out(price) {
-  /# pick_warning( "left_out" );
+  pick_warning("left_out");
 
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_inhand");
@@ -126,7 +126,7 @@ pick_left_out(price) {
 }
 
 pick_right_out(price) {
-  /# pick_warning( "right_out" );
+  pick_warning("right_out");
   // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_weapon_left");
   price traceFX_on_tag("ice_pick_out", "TAG_ICE_PICKER_FX", CONST_traceFX_dist);
@@ -301,7 +301,6 @@ get_anims_for_climbing_direction(anims, dir, arm) {
       anims["additive"] = % climb_right_additive;
       anims["additive_in_strength"] = 0.5;
       anims["additive_out_strength"] = 1;
-
     } else {
       anims["fail"] = % player_icepicker_left_high_stab_fail_a;
       anims["additive"] = % climb_left_additive;

@@ -30,7 +30,7 @@ func_3D54() {
 
   for(;;) {
     if(getdvarint("scr_savetest") > 0) {
-      setdvar("scr_savetest", "0");
+      setDvar("scr_savetest", "0");
       scripts\sp\utility::func_2669("cheat_save");
       wait 1;
     }
@@ -96,7 +96,7 @@ immediatelevelstartsave() {
   }
   var_3 = "levelshots / autosave / autosave_" + level.script + "immediate_start";
   _savegame("immediatelevelstart", &"AUTOSAVE_LEVELSTART", var_3, 1);
-  setdvar("ui_grenade_death", "0");
+  setDvar("ui_grenade_death", "0");
   level.player func_8591(0);
   scripts\engine\utility::flag_clear("game_saving");
   scripts\engine\utility::flag_set("ImmediateLevelStartSave");
@@ -136,7 +136,7 @@ func_2A6E() {
     return;
   }
   _savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
-  setdvar("ui_grenade_death", "0");
+  setDvar("ui_grenade_death", "0");
   level.player func_8591(0);
   scripts\engine\utility::flag_clear("game_saving");
 }
@@ -287,7 +287,7 @@ func_1190(var_0, var_1) {
   if(func_12878(var_7)) {
     _commitsave(var_7);
     level.player func_8591(0);
-    setdvar("ui_grenade_death", "0");
+    setDvar("ui_grenade_death", "0");
   }
 
   return 1;
@@ -438,7 +438,7 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
       _commitsave(var_11);
       level.player func_8591(0);
       level.var_A9E7 = gettime();
-      setdvar("ui_grenade_death", "0");
+      setDvar("ui_grenade_death", "0");
       break;
     }
 
@@ -686,10 +686,10 @@ func_268F(var_0, var_1) {
     if(!isDefined(var_4.enemy)) {
       continue;
     }
-    if(!isplayer(var_4.enemy)) {
+    if(!isPlayer(var_4.enemy)) {
       continue;
     }
-    if(isDefined(var_4.melee) && isDefined(var_4.melee.target) && isplayer(var_4.melee.target)) {
+    if(isDefined(var_4.melee) && isDefined(var_4.melee.target) && isPlayer(var_4.melee.target)) {
       return 0;
     }
 

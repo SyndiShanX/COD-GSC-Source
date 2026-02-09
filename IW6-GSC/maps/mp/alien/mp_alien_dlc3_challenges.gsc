@@ -171,7 +171,7 @@ kill_nodamage_monitor() {
     if(maps\mp\alien\_utility::is_true(self.ability_invulnerable)) {
       continue;
     }
-    if(isDefined(var_1) && isplayer(var_1) && maps\mp\alien\_utility::is_hardcore_mode()) {
+    if(isDefined(var_1) && isPlayer(var_1) && maps\mp\alien\_utility::is_hardcore_mode()) {
       level notify("kill_nodamage_failed");
       return;
     } else if(isDefined(var_1) && isagent(var_1) || var_5 == "alien_minion_explosion") {
@@ -330,7 +330,7 @@ dlc3_damage_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
       if(!isDefined(var_8))
         return 0;
 
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         if(!isDefined(var_8.damaged_by_players))
           var_8.damaged_by_players = [];
 
@@ -360,17 +360,17 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
       return 0;
     case "leaning_shot":
-      if(isDefined(var_1) && isplayer(var_1) && isDefined(var_4) && var_4 == var_1 getcurrentweapon() && var_1 isleaning())
+      if(isDefined(var_1) && isPlayer(var_1) && isDefined(var_4) && var_4 == var_1 getcurrentweapon() && var_1 isleaning())
         maps\mp\alien\_challenge::update_challenge("leaning_shot", 1);
 
       return 0;
     case "jump_shot":
-      if(isDefined(var_1) && isplayer(var_1) && isDefined(var_4) && var_4 == var_1 getcurrentweapon() && !var_1 isonground())
+      if(isDefined(var_1) && isPlayer(var_1) && isDefined(var_4) && var_4 == var_1 getcurrentweapon() && !var_1 isonground())
         maps\mp\alien\_challenge::update_challenge("jump_shot", 1);
 
       return 0;
     case "sliding_shot":
-      if(isDefined(var_1) && isplayer(var_1) && var_3 == "MOD_MELEE" && var_1 is_sliding())
+      if(isDefined(var_1) && isPlayer(var_1) && var_3 == "MOD_MELEE" && var_1 is_sliding())
         maps\mp\alien\_challenge::update_challenge("sliding_shot", 1);
 
       return 0;
@@ -389,37 +389,37 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
       return 0;
     case "barrel_kills":
-      if(isDefined(var_1) && isplayer(var_1) && isDefined(var_0) && isDefined(var_0.targetname) && var_0.targetname == "scriptable_destructible_barrel")
+      if(isDefined(var_1) && isPlayer(var_1) && isDefined(var_0) && isDefined(var_0.targetname) && var_0.targetname == "scriptable_destructible_barrel")
         maps\mp\alien\_challenge::update_challenge("barrel_kills", 1);
 
       return 0;
     case "healthy_kills":
-      if(isDefined(var_1) && isplayer(var_1) && var_1.health >= var_1.maxhealth)
+      if(isDefined(var_1) && isPlayer(var_1) && var_1.health >= var_1.maxhealth)
         maps\mp\alien\_challenge::update_challenge("healthy_kills", 1);
 
       return 0;
     case "minion_preexplode":
-      if(isDefined(var_1) && isplayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "minion" && var_3 != "MOD_SUICIDE")
+      if(isDefined(var_1) && isPlayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "minion" && var_3 != "MOD_SUICIDE")
         maps\mp\alien\_challenge::update_challenge("minion_preexplode", 1);
 
       return 0;
     case "bomber_preexplode":
-      if(isDefined(var_1) && isplayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "bomber" && var_3 != "MOD_SUICIDE")
+      if(isDefined(var_1) && isPlayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "bomber" && var_3 != "MOD_SUICIDE")
         maps\mp\alien\_challenge::update_challenge("bomber_preexplode", 1);
 
       return 0;
     case "kill_phantom":
-      if(isDefined(var_1) && isplayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "locust" && maps\mp\alien\_utility::is_true(self.is_cloaking))
+      if(isDefined(var_1) && isPlayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "locust" && maps\mp\alien\_utility::is_true(self.is_cloaking))
         maps\mp\alien\_challenge::update_challenge("kill_phantom", 1);
 
       return 0;
     case "kill_nodamage":
-      if(isDefined(var_1) && isplayer(var_1))
+      if(isDefined(var_1) && isPlayer(var_1))
         maps\mp\alien\_challenge::update_challenge("kill_nodamage", 1);
 
       return 0;
     case "flying_aliens":
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         if(maps\mp\alien\_utility::get_alien_type() == "bomber" && var_3 != "MOD_SUICIDE")
           maps\mp\alien\_challenge::update_challenge("flying_aliens", 1);
         else if(maps\mp\alien\_utility::get_alien_type() == "gargoyle" && maps\mp\alien\_utility::is_true(self.in_air))
@@ -428,17 +428,17 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
       return 0;
     case "melee_gargoyles":
-      if(isDefined(var_1) && isplayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "gargoyle" && var_3 == "MOD_MELEE")
+      if(isDefined(var_1) && isPlayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "gargoyle" && var_3 == "MOD_MELEE")
         maps\mp\alien\_challenge::update_challenge("melee_gargoyles", 1);
 
       return 0;
     case "melee_mammoth":
-      if(isDefined(var_1) && isplayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "mammoth" && var_3 == "MOD_MELEE")
+      if(isDefined(var_1) && isPlayer(var_1) && maps\mp\alien\_utility::get_alien_type() == "mammoth" && var_3 == "MOD_MELEE")
         maps\mp\alien\_challenge::update_challenge("melee_mammoth", 1);
 
       return 0;
     case "higher_ground":
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         if(!isDefined(var_0) || isDefined(var_0) && !maps\mp\alien\_utility::is_trap(var_0)) {
           if(var_1.origin[2] - self.origin[2] > 100)
             maps\mp\alien\_challenge::update_challenge("higher_ground", 1);
@@ -447,7 +447,7 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
       return 0;
     case "lower_ground":
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         if(!isDefined(var_0) || isDefined(var_0) && !maps\mp\alien\_utility::is_trap(var_0)) {
           if(self.origin[2] - var_1.origin[2] > 100)
             maps\mp\alien\_challenge::update_challenge("lower_ground", 1);
@@ -461,7 +461,7 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
       return 0;
     case "team_prone":
-      if(isDefined(var_1) && isplayer(var_1) && isDefined(var_4) && var_4 == var_1 getcurrentweapon()) {
+      if(isDefined(var_1) && isPlayer(var_1) && isDefined(var_4) && var_4 == var_1 getcurrentweapon()) {
         var_9 = 1;
 
         foreach(var_11 in level.players) {
@@ -479,7 +479,7 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
       maps\mp\alien\_challenge::update_challenge(level.current_challenge, var_4, var_3);
       return 0;
     case "melee_5_goons_dlc3":
-      if(isDefined(self.alien_type) && self.alien_type == "goon" && isDefined(var_1) && isplayer(var_1) && var_3 == "MOD_MELEE")
+      if(isDefined(self.alien_type) && self.alien_type == "goon" && isDefined(var_1) && isPlayer(var_1) && var_3 == "MOD_MELEE")
         maps\mp\alien\_challenge::update_challenge("melee_5_goons_dlc3", 1);
 
       return 0;
@@ -489,7 +489,7 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 }
 
 is_long_shot(var_0, var_1, var_2) {
-  if(isplayer(var_0) && isalive(var_0) && !var_0 maps\mp\_utility::isusingremote()) {
+  if(isPlayer(var_0) && isalive(var_0) && !var_0 maps\mp\_utility::isusingremote()) {
     if(distancesquared(var_0.origin, var_2.origin) >= 608400)
       return 1;
   }

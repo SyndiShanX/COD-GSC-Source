@@ -42,7 +42,6 @@ finalize_init() {
 
     level thread devgui_setup();
     level.var_b4ef4d73 = 1;
-
   }
 }
 

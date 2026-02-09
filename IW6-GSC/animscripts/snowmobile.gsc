@@ -212,7 +212,7 @@ snowmobile_loop_passenger_shooting() {
     self setanimlimited(animscripts\utility::animarray("add_aim_backright_left"), var_3, var_0);
     self setanimlimited(animscripts\utility::animarray("add_aim_backright_right"), var_4, var_0);
 
-    if(isplayer(self.enemy))
+    if(isPlayer(self.enemy))
       self updateplayersightaccuracy();
 
     wait 0.05;

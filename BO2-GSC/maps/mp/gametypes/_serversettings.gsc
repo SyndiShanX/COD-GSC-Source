@@ -4,53 +4,53 @@
 *************************************************/
 
 init() {
-  level.hostname = getdvar(#"sv_hostname");
+  level.hostname = getDvar(#"sv_hostname");
 
   if(level.hostname == "")
     level.hostname = "CoDHost";
 
-  setdvar("sv_hostname", level.hostname);
-  setdvar("ui_hostname", level.hostname);
+  setDvar("sv_hostname", level.hostname);
+  setDvar("ui_hostname", level.hostname);
   makedvarserverinfo("ui_hostname", "CoDHost");
-  level.motd = getdvar(#"scr_motd");
+  level.motd = getDvar(#"scr_motd");
 
   if(level.motd == "")
     level.motd = "";
 
-  setdvar("scr_motd", level.motd);
-  setdvar("ui_motd", level.motd);
+  setDvar("scr_motd", level.motd);
+  setDvar("ui_motd", level.motd);
   makedvarserverinfo("ui_motd", "");
-  level.allowvote = getdvar(#"g_allowVote");
+  level.allowvote = getDvar(#"g_allowVote");
 
   if(level.allowvote == "")
     level.allowvote = "1";
 
-  setdvar("g_allowvote", level.allowvote);
-  setdvar("ui_allowvote", level.allowvote);
+  setDvar("g_allowvote", level.allowvote);
+  setDvar("ui_allowvote", level.allowvote);
   makedvarserverinfo("ui_allowvote", "1");
   level.allow_teamchange = "0";
 
   if(sessionmodeisprivate() || !sessionmodeisonlinegame())
     level.allow_teamchange = "1";
 
-  setdvar("ui_allow_teamchange", level.allow_teamchange);
+  setDvar("ui_allow_teamchange", level.allow_teamchange);
   level.friendlyfire = getgametypesetting("friendlyfiretype");
-  setdvar("ui_friendlyfire", level.friendlyfire);
+  setDvar("ui_friendlyfire", level.friendlyfire);
   makedvarserverinfo("ui_friendlyfire", "0");
 
-  if(getdvar(#"scr_mapsize") == "")
-    setdvar("scr_mapsize", "64");
+  if(getDvar(#"scr_mapsize") == "")
+    setDvar("scr_mapsize", "64");
   else if(getdvarfloat(#"scr_mapsize") >= 64)
-    setdvar("scr_mapsize", "64");
+    setDvar("scr_mapsize", "64");
   else if(getdvarfloat(#"scr_mapsize") >= 32)
-    setdvar("scr_mapsize", "32");
+    setDvar("scr_mapsize", "32");
   else if(getdvarfloat(#"scr_mapsize") >= 16)
-    setdvar("scr_mapsize", "16");
+    setDvar("scr_mapsize", "16");
   else
-    setdvar("scr_mapsize", "8");
+    setDvar("scr_mapsize", "8");
 
   level.mapsize = getdvarfloat(#"scr_mapsize");
-  constraingametype(getdvar(#"g_gametype"));
+  constraingametype(getDvar(#"g_gametype"));
   constrainmapsize(level.mapsize);
 
   for(;;) {
@@ -60,32 +60,32 @@ init() {
 }
 
 updateserversettings() {
-  sv_hostname = getdvar(#"sv_hostname");
+  sv_hostname = getDvar(#"sv_hostname");
 
   if(level.hostname != sv_hostname) {
     level.hostname = sv_hostname;
-    setdvar("ui_hostname", level.hostname);
+    setDvar("ui_hostname", level.hostname);
   }
 
-  scr_motd = getdvar(#"scr_motd");
+  scr_motd = getDvar(#"scr_motd");
 
   if(level.motd != scr_motd) {
     level.motd = scr_motd;
-    setdvar("ui_motd", level.motd);
+    setDvar("ui_motd", level.motd);
   }
 
-  g_allowvote = getdvar(#"g_allowVote");
+  g_allowvote = getDvar(#"g_allowVote");
 
   if(level.allowvote != g_allowvote) {
     level.allowvote = g_allowvote;
-    setdvar("ui_allowvote", level.allowvote);
+    setDvar("ui_allowvote", level.allowvote);
   }
 
   scr_friendlyfire = getgametypesetting("friendlyfiretype");
 
   if(level.friendlyfire != scr_friendlyfire) {
     level.friendlyfire = scr_friendlyfire;
-    setdvar("ui_friendlyfire", level.friendlyfire);
+    setDvar("ui_friendlyfire", level.friendlyfire);
   }
 }
 

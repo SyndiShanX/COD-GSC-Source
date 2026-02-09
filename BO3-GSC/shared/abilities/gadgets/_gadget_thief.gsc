@@ -235,7 +235,7 @@ function handlethiefkill(slot, weapon, victim) {
       self clientfield::set_player_uimodel("playerAbilities.playerGadget3.flashEnd", int(currentpower / gadgetthiefkillpowergainwithoutmultiplier));
       self thread resetflashstartandendafterdelay(3);
       self gadgetpowerset(slot, currentpower);
-    } else if(isplayer(victim) && self.pers[# "hash_476984c8"] === victim.entnum && weapon.isheroweapon) {
+    } else if(isPlayer(victim) && self.pers[# "hash_476984c8"] === victim.entnum && weapon.isheroweapon) {
       scoreevents::processscoreevent("kill_enemy_with_their_hero_weapon", self);
     }
   }

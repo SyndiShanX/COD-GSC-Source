@@ -233,7 +233,7 @@ bot_debug_drawing() {
   SetDevDvarIfUninitialized("bot_DebugPathToPlayer", "");
 
   for(;;) {
-    draw_debug_type = GetDvar("bot_DrawDebugSpecial");
+    draw_debug_type = getDvar("bot_DrawDebugSpecial");
 
     clear_defense_draw();
     if(draw_debug_type == "defend") {
@@ -249,7 +249,7 @@ bot_debug_drawing() {
       bot_debug_draw_cached_paths();
     }
 
-    if(GetDvar("bot_DebugPathToPlayer") != "" && level.gameType == "war") {
+    if(getDvar("bot_DebugPathToPlayer") != "" && level.gameType == "war") {
       SetDevDvar("bot_DebugPathToPlayer", "");
 
       human = get_all_humans()[0];
@@ -464,7 +464,7 @@ bot_set_loadout_class() {
       while(!isDefined(level.bot_loadouts_initialized))
         wait(0.05);
 
-      debugClass = GetDvar("bot_debugClass", "");
+      debugClass = getDvar("bot_debugClass", "");
       if(isDefined(debugClass) && debugClass != "") {
         self.bot_class = debugClass;
         return;
@@ -530,7 +530,7 @@ bot_can_join_team(team) {
   if(matchMakingGame())
     return true;
 
-  if(GetDvar("squad_vs_squad") == "1")
+  if(getDvar("squad_vs_squad") == "1")
     return true;
 
   if(!level.teamBased)
@@ -563,21 +563,21 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
   if(!isDefined(level.bot_cm_human_picked))
     level.bot_cm_human_picked = false;
 
-  if((GetDvar("squad_vs_squad") == "1")) {
+  if((getDvar("squad_vs_squad") == "1")) {
     while(!(isDefined(level.squad_vs_squad_allies_client) && isDefined(level.squad_vs_squad_axis_client))) {
       wait 0.05;
     }
     wait 2.0;
   }
 
-  if((GetDvar("squad_match") == "1")) {
+  if((getDvar("squad_match") == "1")) {
     while(!isDefined(level.squad_match_client)) {
       wait 0.05;
     }
     wait 2.0;
   }
 
-  if((GetDvar("squad_use_hosts_squad") == "1")) {
+  if((getDvar("squad_use_hosts_squad") == "1")) {
     while(!isDefined(level.wargame_client)) {
       wait 0.05;
     }
@@ -1053,7 +1053,7 @@ spawn_bots(num_bots, team, botCallback, haltWhenFull, notifyWhenDone, difficulty
 
     bot = undefined;
 
-    if((GetDvar("squad_vs_squad") == "1")) {
+    if((getDvar("squad_vs_squad") == "1")) {
       leader = level.squad_vs_squad_axis_client;
       if(team == "allies") {
         leader = level.squad_vs_squad_allies_client;
@@ -1100,7 +1100,7 @@ spawn_bots(num_bots, team, botCallback, haltWhenFull, notifyWhenDone, difficulty
           level.squad_vs_squad_has_forfeited = true;
         }
       }
-    } else if((GetDvar("squad_use_hosts_squad") == "1")) {
+    } else if((getDvar("squad_use_hosts_squad") == "1")) {
       if(level.wargame_client.team == team) {
         if(matchMakingGame()) {
           index = find_squad_member_index(level.wargame_client, team);
@@ -1146,7 +1146,7 @@ spawn_bots(num_bots, team, botCallback, haltWhenFull, notifyWhenDone, difficulty
       } else {
         bot = AddBot("", 0, 0, 0);
       }
-    } else if((GetDvar("squad_match") == "1")) {
+    } else if((getDvar("squad_match") == "1")) {
       if(team == "axis") {
         index = GetEnemySquadData("squadHQ", "aiSquadMembers", squad_index);
 
@@ -1311,7 +1311,7 @@ bot_think() {
 }
 
 bot_set_personality_from_dev_dvar() {
-  debug_personality = GetDvar("bot_debugPersonality", "default");
+  debug_personality = getDvar("bot_debugPersonality", "default");
 
   if(debug_personality != "default")
     self bot_set_personality(debug_personality);
@@ -1504,7 +1504,7 @@ on_bot_killed(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitL
   self BotClearScriptGoal();
 
   attacker_ent = bot_get_known_attacker(attacker, eInflictor);
-  if(!bot_is_fireteam_mode() && GetDvar("squad_match") != "1" && GetDvar("squad_vs_squad") != "1" && isDefined(attacker_ent) && attacker_ent.classname == "script_vehicle" && isDefined(attacker_ent.helitype)) {
+  if(!bot_is_fireteam_mode() && getDvar("squad_match") != "1" && getDvar("squad_vs_squad") != "1" && isDefined(attacker_ent) && attacker_ent.classname == "script_vehicle" && isDefined(attacker_ent.helitype)) {
     respawn_chance = self BotGetDifficultySetting("launcherRespawnChance");
     if(RandomFloat(1.0) < respawn_chance)
       self.respawn_with_launcher = true;
@@ -1512,7 +1512,7 @@ on_bot_killed(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitL
 }
 
 bot_should_do_killcam() {
-  if(GetDvar("scr_game_spectatetype") == "2") {
+  if(getDvar("scr_game_spectatetype") == "2") {
     if(spectators_exist()) {
       return false;
     }
@@ -2033,7 +2033,6 @@ bot_crate_valid(crate) {
 
     if(isDefined(crate.disabled_use_for) && isDefined(crate.disabled_use_for[self GetEntityNumber()]) && crate.disabled_use_for[self GetEntityNumber()])
       return false;
-    /#				
     if(!isDefined(level.bot_can_use_box_by_type[crate.boxType])) {
       AssertMsg("Crate type <" + crate.boxType + "> is not supported for bots");
       return false;
@@ -2852,7 +2851,6 @@ handle_smoke(final_wait_time) {
   smoke_sight_clip_collision_64_short = GetEnt("smoke_grenade_sight_clip_64_short", "targetname");
   if(isDefined(smoke_sight_clip_collision_64_short)) {
     new_sight_clip_origin CloneBrushmodelToScriptmodel(smoke_sight_clip_collision_64_short);
-
   }
 
   wait(next_wait_time);
@@ -2860,7 +2858,6 @@ handle_smoke(final_wait_time) {
   smoke_sight_clip_collision_64_tall = GetEnt("smoke_grenade_sight_clip_64_tall", "targetname");
   if(isDefined(smoke_sight_clip_collision_64_tall)) {
     new_sight_clip_origin CloneBrushmodelToScriptmodel(smoke_sight_clip_collision_64_tall);
-
   }
 
   wait(next_wait_time);
@@ -2868,7 +2865,6 @@ handle_smoke(final_wait_time) {
   smoke_sight_clip_collision_256 = GetEnt("smoke_grenade_sight_clip_256", "targetname");
   if(isDefined(smoke_sight_clip_collision_256)) {
     new_sight_clip_origin CloneBrushmodelToScriptmodel(smoke_sight_clip_collision_256);
-
   }
 
   wait(next_wait_time);

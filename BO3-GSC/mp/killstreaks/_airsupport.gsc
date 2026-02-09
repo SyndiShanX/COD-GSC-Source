@@ -71,7 +71,7 @@ function endselectiononhostmigration() {
 }
 
 function endselectionthink() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   assert(isDefined(self.selectinglocation));
   assert(self.selectinglocation == 1);

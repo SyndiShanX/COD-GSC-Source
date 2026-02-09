@@ -393,7 +393,7 @@ function_1af254ac() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isplayer(s_result.activator) && isalive(s_result.activator)) {
+    if(isPlayer(s_result.activator) && isalive(s_result.activator)) {
       self.stub.related_parent.mdl_orb ghost();
 
       if(!isDefined(level.var_659daf1d)) {
@@ -600,7 +600,7 @@ function step_2(var_a276c861) {
   var_eec33496 = struct::get("s_p_s2_b_en_po");
   e_activator = var_eec33496 zm_unitrigger::function_fac87205("", 64);
 
-  if(isplayer(e_activator)) {
+  if(isPlayer(e_activator)) {
     e_activator clientfield::increment_to_player("" + # "hash_5cab8aa95fc9ea84");
   }
 
@@ -1026,7 +1026,6 @@ function_f1d0739() {
         level thread function_787bed75();
 
         iprintln("<dev string:x117>");
-
       }
     }
 
@@ -1192,7 +1191,7 @@ function_750df71a() {
   while(isDefined(var_21841d64)) {
     s_result = t_interact waittill(#"trigger");
 
-    if(isplayer(s_result.activator)) {
+    if(isPlayer(s_result.activator)) {
       level notify(#"hash_2a774132e6f379ae", {
         #e_player: s_result.activator
       });
@@ -1708,7 +1707,6 @@ step_4(var_a276c861) {
   } else {
     pause_zombies(1, 0);
     wait 16;
-
   }
 
   level.var_d804e8a9 = undefined;
@@ -2105,7 +2103,7 @@ function_3035b012() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isplayer(s_result.activator) && isalive(s_result.activator)) {
+    if(isPlayer(s_result.activator) && isalive(s_result.activator)) {
       e_player = s_result.activator;
       e_player enableweapons();
       e_player playSound(#"hash_503df109f2de7783");
@@ -3039,7 +3037,7 @@ function_8562a40f() {
   var_97bc4cb3 = struct::get(var_97bc4cb3.target);
   e_activator = var_97bc4cb3 zm_unitrigger::function_fac87205("", 64);
 
-  if(isplayer(e_activator) && isalive(e_activator)) {
+  if(isPlayer(e_activator) && isalive(e_activator)) {
     e_activator playSound(#"hash_6aa220e65103f345");
   }
 }
@@ -3702,7 +3700,7 @@ boss_fight_setup() {
 function_f90d2c81(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   n_damage = -1;
 
-  if(isDefined(attacker) && !isplayer(attacker)) {
+  if(isDefined(attacker) && !isPlayer(attacker)) {
     var_607b7fd9 = getweapon(#"hash_494f5501b3f8e1e9");
 
     if(isDefined(weapon) && weapon == var_607b7fd9) {
@@ -4983,7 +4981,7 @@ function_276db81() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isplayer(s_result.activator) && level.var_659daf1d.size) {
+    if(isPlayer(s_result.activator) && level.var_659daf1d.size) {
       s_result.activator clientfield::increment_to_player("" + # "hash_506164c22c4c7ca8");
       a_str_tags = arraycopy(level.var_659daf1d);
 

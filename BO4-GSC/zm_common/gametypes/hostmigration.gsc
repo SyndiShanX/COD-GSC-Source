@@ -440,9 +440,7 @@ find_alternate_player_place(v_origin, min_radius, max_radius, max_height, ignore
             override_abort = 0;
 
             if(isDefined(level._whoswho_reject_node_override_func)) {
-              override_abort = [
-                [level._whoswho_reject_node_override_func]
-              ](v_origin, n_node);
+              override_abort = [[level._whoswho_reject_node_override_func]](v_origin, n_node);
             }
 
             if(!override_abort) {

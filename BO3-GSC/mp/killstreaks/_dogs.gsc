@@ -448,7 +448,7 @@ function dog_health_regen() {
 }
 
 function trackattackerdamage(attacker) {
-  if(!isDefined(attacker) || !isplayer(attacker) || !isDefined(self.script_owner)) {
+  if(!isDefined(attacker) || !isPlayer(attacker) || !isDefined(self.script_owner)) {
     return;
   }
   if(level.teambased && attacker.team == self.script_owner.team || attacker == self) {
@@ -488,7 +488,7 @@ function dog_health_regen_think(delay, interval, regen_interval) {
 
 function selfdefensechallenge() {
   self waittill("death", attacker);
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(self.script_owner) && self.script_owner == attacker) {
       return;
     }
@@ -520,7 +520,7 @@ function flash_dogs(area) {
     }
     if(dog istouching(area)) {
       do_flash = 1;
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         if(level.teambased && dog.team == self.team) {
           do_flash = 0;
         } else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner) {
@@ -539,7 +539,7 @@ function flash_dogs(area) {
 }
 
 function devgui_dog_think() {
-  setdvar("", "");
+  setDvar("", "");
   debug_patrol = 0;
   for(;;) {
     cmd = getdvarstring("");
@@ -589,7 +589,7 @@ function devgui_dog_think() {
       }
     }
     if(cmd != "") {
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }

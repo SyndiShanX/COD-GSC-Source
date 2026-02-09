@@ -118,7 +118,7 @@ function watch_contract_debug() {
           player setup_player_contracts();
         }
       }
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) > 0) {
       if(isDefined(level.players)) {
@@ -139,7 +139,7 @@ function watch_contract_debug() {
           iprintln(((((("" + test_slot) + "") + new_index) + "") + player.name) + "");
         }
       }
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) > 0) {
       if(isDefined(level.players)) {
@@ -161,22 +161,22 @@ function watch_contract_debug() {
           iprintln((("" + test_slot) + "") + player.name);
         }
       }
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) > 0) {
       iprintln("");
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) > 0) {
       iprintln("");
-      setdvar("", 0);
+      setDvar("", 0);
     }
     wait(0.5);
   }
 }
 
 function is_contract_active(challenge_index) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return false;
   }
   if(!isDefined(self.pers["contracts"])) {
@@ -193,14 +193,14 @@ function is_contract_active(challenge_index) {
 
 function on_hero_ability_kill(ability, victimability) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
 }
 
 function on_hero_ability_medal() {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
   player add_stat(1013);
@@ -209,14 +209,14 @@ function on_hero_ability_medal() {
 
 function on_hero_ability_multikill(killcount, ability) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
 }
 
 function on_hero_weapon_multikill(killcount, weapon) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
 }
@@ -241,7 +241,7 @@ function contract_kills(data) {
   if(!isDefined(weapon) || weapon == level.weaponnone) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
   player add_stat(1015);

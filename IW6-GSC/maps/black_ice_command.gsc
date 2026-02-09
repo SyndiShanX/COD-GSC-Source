@@ -272,7 +272,7 @@ command_fail_late_death() {
   level.player thread maps\_gameskill::blood_splat_on_screen("left");
   level.player thread maps\_gameskill::blood_splat_on_screen("right");
   level.player thread maps\_gameskill::blood_splat_on_screen("bottom");
-  setdvar("ui_deadquote", &"BLACK_ICE_COMMAND_FAIL_LATE");
+  setDvar("ui_deadquote", &"BLACK_ICE_COMMAND_FAIL_LATE");
   wait 1.0;
   maps\_utility::missionfailedwrapper();
   wait 10;
@@ -427,7 +427,7 @@ player_control_sequence() {
   level endon("flag_player_failed_control");
   level waittill("notify_start_player_control");
   var_0 = getdvarint("bi_command_pressure_trial", 0);
-  setdvar("bi_command_pressure_trial", var_0 + 1);
+  setDvar("bi_command_pressure_trial", var_0 + 1);
   thread display_lever_hint();
   thread player_control_baker_nag_and_fail();
   level notify("notify_player_start_input_test");

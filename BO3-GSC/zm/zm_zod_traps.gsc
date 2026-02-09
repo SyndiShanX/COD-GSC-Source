@@ -119,7 +119,7 @@ class ctrap {
     if(!isvehicle(ent) && ent.team != "allies") {
       ent.a.gib_ref = array::random(array("guts", "right_arm", "left_arm", "head"));
       ent thread zombie_death::do_gib();
-      if(isplayer(m_e_who)) {
+      if(isPlayer(m_e_who)) {
         m_e_who zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
       }
     }
@@ -172,7 +172,7 @@ class ctrap {
     while(true) {
       m_t_damage waittill("trigger", ent);
       m_t_damage.activated_by_player = m_e_who;
-      if(isplayer(ent)) {
+      if(isPlayer(ent)) {
         if(ent getstance() == "prone" || ent isonslide()) {
           continue;
         }
@@ -403,7 +403,6 @@ class ctrap {
     m_b_are_strikers_moving = 0;
     self thread update_chain_animation();
   }
-
 }
 
 #namespace zm_zod_traps;

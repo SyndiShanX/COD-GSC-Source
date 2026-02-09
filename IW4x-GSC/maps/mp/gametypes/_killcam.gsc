@@ -38,7 +38,7 @@ killcam(attackerNum, // entity number of the attacker
     return;
   }
   // length from killcam start to killcam end
-  if(getdvar("scr_killcam_time") == "") {
+  if(getDvar("scr_killcam_time") == "") {
     if(sWeapon == "artillery_mp" || sWeapon == "stealth_bomb_mp")
       camtime = (gettime() - killcamentitystarttime) / 1000 - predelay - .1;
     else if(level.showingFinalKillcam)
@@ -64,7 +64,7 @@ killcam(attackerNum, // entity number of the attacker
   }
 
   // time after player death that killcam continues for
-  if(getdvar("scr_killcam_posttime") == "")
+  if(getDvar("scr_killcam_posttime") == "")
     postdelay = 2;
   else {
     postdelay = getdvarfloat("scr_killcam_posttime");

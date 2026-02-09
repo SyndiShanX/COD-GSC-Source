@@ -76,7 +76,6 @@ _id_3F3C() {
       if(var_3._id_3F39 == 0) {
         if(level._id_17F6 >= var_3._id_3F38) {
           var_1[var_1.size] = var_3;
-
         }
         continue;
       }
@@ -149,20 +148,17 @@ _id_3F40(var_0) {
 
       if(!isDefined(var_7)) {
         var_7 = 1;
-
       }
       if(var_7 < 0) {
         self._id_3F3D[var_0]._id_3F42 = 0;
       } else {
         self._id_3F3D[var_0]._id_3F42 = self._id_3F3D[var_0]._id_3F42 + var_7;
-
       }
       thread _id_3F53(var_0);
     }
 
     if(isDefined(var_6) && isai(var_6)) {
       playFX(level._effect["money"], var_6.origin + (0, 0, 32));
-
     }
     self._id_3F3D[var_0]._id_3F42 = 0;
     self._id_3F3D[var_0]._id_3F41++;
@@ -172,7 +168,6 @@ _id_3F40(var_0) {
 
     while(common_scripts\utility::flag("challenge_monitor_busy")) {
       wait 0.05;
-
     }
     self notify("challenge_complete", var_0);
     maps\_utility::delaythread(0.05, ::_id_3F53, var_0);
@@ -219,7 +214,7 @@ _id_3F46() {
   }
   self waittill("death", var_0, var_1, var_2);
 
-  if(!isDefined(var_0) || !isplayer(var_0)) {
+  if(!isDefined(var_0) || !isPlayer(var_0)) {
     return;
   }
   if(common_scripts\utility::isflashed()) {
@@ -239,7 +234,7 @@ _id_3F48() {
   }
   self waittill("death", var_0, var_1, var_2);
 
-  if(!isDefined(var_0) || !isplayer(var_0)) {
+  if(!isDefined(var_0) || !isPlayer(var_0)) {
     return;
   }
   if(isDefined(var_2) && weapontype(var_2) == "riotshield") {
@@ -305,7 +300,6 @@ _id_3F50(var_0) {
 
     while(self._id_3F3D[var_0]._id_3F42 == 0) {
       common_scripts\utility::waittill_any_timeout(var_3, var_0);
-
     }
     if(level._id_3F51) {
       level waittill("wave_started");
@@ -361,7 +355,6 @@ _id_3F54(var_0, var_1) {
     var_2._id_3E1F = 1;
   } else {
     var_2._id_3E1F = 1.1;
-
   }
   _id_0618::_id_3E14(var_2);
 }
@@ -373,7 +366,6 @@ _id_3F55(var_0) {
 _id_3F56(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_3D4A;
-
   }
   return tablelookup("sp/survival_challenge.csv", 1, var_0, 0);
 }
@@ -385,7 +377,6 @@ _id_3F57(var_0) {
 _id_3F58(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0].name;
-
   }
   return tablelookup("sp/survival_challenge.csv", 1, var_0, 2);
 }
@@ -393,7 +384,6 @@ _id_3F58(var_0) {
 _id_3F59(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_189B;
-
   }
   return tablelookup("sp/survival_challenge.csv", 1, var_0, 3);
 }
@@ -401,7 +391,6 @@ _id_3F59(var_0) {
 _id_3F5A(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_3F34;
-
   }
   return tablelookupistring("sp/survival_challenge.csv", 1, var_0, 4);
 }
@@ -409,7 +398,6 @@ _id_3F5A(var_0) {
 _id_3F5B(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0].icon;
-
   }
   return tablelookup("sp/survival_challenge.csv", 1, var_0, 5);
 }
@@ -417,7 +405,6 @@ _id_3F5B(var_0) {
 _id_3F5C(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_3F35;
-
   }
   return int(tablelookup("sp/survival_challenge.csv", 1, var_0, 6));
 }
@@ -425,7 +412,6 @@ _id_3F5C(var_0) {
 _id_3F5D(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0].xp;
-
   }
   return int(tablelookup("sp/survival_challenge.csv", 1, var_0, 7));
 }
@@ -433,7 +419,6 @@ _id_3F5D(var_0) {
 _id_3F5E(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_3F36;
-
   }
   return int(tablelookup("sp/survival_challenge.csv", 1, var_0, 8));
 }
@@ -441,7 +426,6 @@ _id_3F5E(var_0) {
 _id_3F5F(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_3F37;
-
   }
   return int(tablelookup("sp/survival_challenge.csv", 1, var_0, 9));
 }
@@ -449,7 +433,6 @@ _id_3F5F(var_0) {
 _id_3F60(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_3F38;
-
   }
   return int(tablelookup("sp/survival_challenge.csv", 1, var_0, 10));
 }
@@ -457,7 +440,6 @@ _id_3F60(var_0) {
 _id_3F61(var_0) {
   if(_id_3F55(var_0)) {
     return level._id_3F3B[var_0]._id_3F39;
-
   }
   return int(tablelookup("sp/survival_challenge.csv", 1, var_0, 11));
 }

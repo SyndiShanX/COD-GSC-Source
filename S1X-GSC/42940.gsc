@@ -83,11 +83,11 @@ on_agent_dog_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     self[[self.animcbs.onexit[self.aistate]]]();
   }
 
-  if(isplayer(var_1) && isDefined(self.owner) && var_1 != self.owner) {
+  if(isPlayer(var_1) && isDefined(self.owner) && var_1 != self.owner) {
     self.owner maps\mp\_utility::leaderdialogonplayer("dog_killed");
     maps\mp\gametypes\_damage::onkillstreakkilled(var_1, var_4, var_3, var_2, "destroyed_guard_dog");
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_notsobestfriend");
 
       if(!self isonground()) {
@@ -125,7 +125,7 @@ on_damaged_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     maps\mp\agents\dog\_dog_think::ondamage(var_0, var_1, var_10, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(isDefined(self.attackstate) && self.attackstate != "attacking") {
       if(distancesquared(self.origin, var_1.origin) <= self.dogdamagedradiussq) {
         self.favoriteenemy = var_1;

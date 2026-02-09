@@ -154,8 +154,9 @@ setup_pistol_anim_array(animtype, array) {
   for(i = 0; i < arrivalkeys.size; i++) {
     arrivaltype = arrivalkeys[i];
 
-    if(isarray(array[animtype]["move"]["stand"]["pistol"][arrivaltype]))
+    if(isarray(array[animtype]["move"]["stand"]["pistol"][arrivaltype])) {
       array[animtype]["move"]["crouch"]["pistol"][arrivaltype] = array[animtype]["move"]["stand"]["pistol"][arrivaltype];
+    }
   }
 
   array[animtype]["move"]["stand"]["pistol"]["combat_run_f"] = % ai_pistol_run_lowready_f;

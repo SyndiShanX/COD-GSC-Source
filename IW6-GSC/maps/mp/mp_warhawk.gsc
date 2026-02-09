@@ -27,17 +27,17 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_warhawk");
 
-  SetDvar("r_lightGridEnableTweaks", 1);
-  SetDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_diffuseColorScale", 1.2, 1.5);
   setdvar_cg_ng("r_specularcolorscale", 1.5, 9);
-  setdvar("r_ssaorejectdepth", 1500);
-  setdvar("r_ssaofadedepth", 1200);
+  setDvar("r_ssaorejectdepth", 1500);
+  setDvar("r_ssaofadedepth", 1200);
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.6");
+    setDvar("sm_sunShadowScale", "0.6");
   } else if(level.xenon) {
-    setdvar("sm_sunShadowScale", "0.7");
+    setDvar("sm_sunShadowScale", "0.7");
   }
 
   game["attackers"] = "allies";

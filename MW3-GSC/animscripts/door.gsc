@@ -25,7 +25,6 @@ _id_1088() {
     _id_10A1(var_0);
   } else {
     _id_10A4(var_0);
-
   }
   for(;;) {
     var_2 = self getdoorpathnode();
@@ -54,14 +53,13 @@ _id_108C(var_0) {
 
   if(self.grenadeweapon == "flash_grenade") {
     self notify("flashbang_thrown");
-
   }
   self orientmode("face current");
   var_0._id_108D = gettime() + 5000;
   self._id_108E = gettime() + 100000;
   self notify("move_interrupt");
   self._id_0FC9 = undefined;
-  self clearanim( % combatrun, 0.2);
+  self clearanim(%combatrun, 0.2);
   self.a._id_0D2B = "stop";
   self waittill("done_grenade_throw");
   self orientmode("face default");
@@ -82,7 +80,6 @@ _id_1092(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_0.type == "Door Interior" && !self comparenodedirtopathdir(var_0)) {
     var_8 = -1 * var_8;
-
   }
   var_9 = (var_0.origin[0], var_0.origin[1], var_0.origin[2] + 64);
   var_10 = var_9;
@@ -96,7 +93,6 @@ _id_1092(var_0, var_1, var_2, var_3, var_4) {
       var_13 = 20;
     } else if(var_13 < -20) {
       var_13 = -20;
-
     }
     var_10 = var_9 + var_13 * var_11;
   }

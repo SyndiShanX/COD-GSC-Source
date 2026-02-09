@@ -90,7 +90,7 @@ bot_sd_attacker() {
 
       self.bot["patrol_update"] = gettime() + randomintrange(2500, 5000);
     }
-  } else if(isDefined(level.sdbomb.carrier) && !isplayer(level.sdbomb.carrier)) {
+  } else if(isDefined(level.sdbomb.carrier) && !isPlayer(level.sdbomb.carrier)) {
     if(!isDefined(self.protectcarrier)) {
       if(randomint(100) > 70)
         self.protectcarrier = 1;

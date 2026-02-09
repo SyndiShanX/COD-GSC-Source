@@ -40,7 +40,7 @@ function main() {
 }
 
 function chamber_devgui() {
-  setdvar("", 5);
+  setDvar("", 5);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -53,7 +53,7 @@ function watch_chamber_wall() {
   while(true) {
     if(getdvarint("") != 5) {
       chamber_change_walls(getdvarint(""));
-      setdvar("", 5);
+      setDvar("", 5);
     }
     wait(0.05);
   }

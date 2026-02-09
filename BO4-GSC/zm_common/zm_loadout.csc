@@ -28,13 +28,12 @@ __init__() {
   if(!isdemoplaying()) {
     callback::on_localplayer_spawned(&on_localplayer_spawned);
   }
-
 }
 
 on_localplayer_spawned(localclientnum) {
   self.class_num = 0;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.class_num = function_cc90c352(localclientnum);
   }
 
@@ -62,7 +61,7 @@ function_622d8349(localclientnum) {
 }
 
 get_loadout_item(localclientnum, slot) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return undefined;
   }
 
@@ -78,7 +77,7 @@ get_loadout_item(localclientnum, slot) {
 }
 
 function_439b009a(localclientnum, slot) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return undefined;
   }
 

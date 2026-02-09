@@ -1080,9 +1080,7 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
     if(self.usetime > 0) {
       if(isDefined(self.onbeginuse)) {
         if(isDefined(self.classobj)) {
-          [
-            [self.classobj]
-          ] - > onbeginuse(player);
+          [[self.classobj]] - > onbeginuse(player);
         } else {
           self[[self.onbeginuse]](player);
         }
@@ -1285,7 +1283,7 @@ function prox_trigger_think() {
   }
   while(true) {
     self.trigger waittill("trigger", player);
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(player.using_map_vehicle === 1) {
@@ -2000,7 +1998,7 @@ function update_compass_icon(relativeteam, showicon) {
 
 function hide_waypoint(e_player) {
   if(isDefined(e_player)) {
-    assert(isplayer(e_player), "");
+    assert(isPlayer(e_player), "");
     objective_setinvisibletoplayer(self.objectiveid, e_player);
   } else {
     objective_setinvisibletoall(self.objectiveid);
@@ -2009,7 +2007,7 @@ function hide_waypoint(e_player) {
 
 function show_waypoint(e_player) {
   if(isDefined(e_player)) {
-    assert(isplayer(e_player), "");
+    assert(isPlayer(e_player), "");
     objective_setvisibletoplayer(self.objectiveid, e_player);
   } else {
     objective_setvisibletoall(self.objectiveid);
@@ -2311,7 +2309,7 @@ function hide_icon_distance_and_los(v_color, hide_distance, los_check, ignore_en
 }
 
 function gameobject_is_player_looking_at(origin, dot, do_trace, ignore_ent, ignore_trace_distance) {
-  assert(isplayer(self), "");
+  assert(isPlayer(self), "");
   if(!isDefined(dot)) {
     dot = 0.7;
   }

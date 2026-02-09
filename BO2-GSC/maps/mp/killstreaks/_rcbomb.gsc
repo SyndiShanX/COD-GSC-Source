@@ -36,12 +36,12 @@ init() {
   loadfx("vehicle/light/fx_rcbomb_light_red_os");
   maps\mp\_treadfx::preloadtreadfx("rc_car_medium_mp");
   level._effect["rcbombexplosion"] = loadfx("maps/mp_maps/fx_mp_exp_rc_bomb");
-  car_size = getdvar(#"scr_rcbomb_car_size");
+  car_size = getDvar(#"scr_rcbomb_car_size");
 
   if(car_size == "")
-    setdvar("scr_rcbomb_car_size", "1");
+    setDvar("scr_rcbomb_car_size", "1");
 
-  setdvar("scr_rcbomb_notimeout", 0);
+  setDvar("scr_rcbomb_notimeout", 0);
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowrcbomb")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("rcbomb_mp", "rcbomb_mp", "killstreak_rcbomb", "rcbomb_used", ::usekillstreakrcbomb);
@@ -119,7 +119,7 @@ usekillstreakrcbomb(hardpointtype) {
 }
 
 spawnrcbomb(placement, team) {
-  car_size = getdvar(#"scr_rcbomb_car_size");
+  car_size = getDvar(#"scr_rcbomb_car_size");
   model = "veh_t6_drone_rcxd";
   enemymodel = "veh_t6_drone_rcxd_alt";
   death_model = "veh_t6_drone_rcxd";
@@ -444,7 +444,7 @@ blowup(attacker, weaponname) {
   self hide();
   self setclientfield("rcbomb_death", 1);
 
-  if(attacker != self.owner && isplayer(attacker)) {
+  if(attacker != self.owner && isPlayer(attacker)) {
     attacker maps\mp\_challenges::destroyrcbomb(weaponname);
 
     if(self.owner isenemyplayer(attacker)) {
@@ -530,7 +530,7 @@ calculatespawnorigin(origin, angles) {
     mask = level.physicstracemaskphysics | level.physicstracemaskvehicle;
     trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
 
-    if(isDefined(trace["entity"]) && isplayer(trace["entity"])) {
+    if(isDefined(trace["entity"]) && isPlayer(trace["entity"])) {
       wheelcounts[i] = 0;
       continue;
     }
@@ -675,14 +675,14 @@ rcbomb_force_explode() {
 }
 
 rcbomb_debug_box(origin, mins, maxs, color) {
-  debug_rcbomb = getdvar(#"_id_8EAE5CA0");
+  debug_rcbomb = getDvar(#"_id_8EAE5CA0");
 
   if(debug_rcbomb == "1")
     box(origin, mins, maxs, 0, color, 1, 1, 300);
 }
 
 rcbomb_debug_line(start, end, color) {
-  debug_rcbomb = getdvar(#"_id_8EAE5CA0");
+  debug_rcbomb = getDvar(#"_id_8EAE5CA0");
 
   if(debug_rcbomb == "1")
     line(start, end, color, 1, 1, 300);

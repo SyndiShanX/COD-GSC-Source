@@ -18,7 +18,7 @@ DEFAULT_WAIT_TIME_BETWEEN_REGEN = 0.35;
 DEFAULT_REGEN_HEALTH_AMOUNT = 1;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\alien\_globallogic::init();
@@ -651,7 +651,6 @@ player_hotjoin() {
     if(isDefined(alien) && is_true(alien.pet))
       maps\mp\alien\_outline_proto::enable_outline_for_player(alien, self, 3, false, "high");
   }
-
 }
 
 player_init_health_regen() {
@@ -700,7 +699,7 @@ onSpawnPlayer() {
     self thread melee_strength_timer();
 
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("locker_key_upgrade")) {
-    map = GetDvar("ui_mapname");
+    map = getDvar("ui_mapname");
     if(map == "mp_alien_armory" || map == "mp_alien_beacon" || map == "mp_alien_dlc3" || map == "mp_alien_last") {
       self thread init_locker_key_upgrade();
     }
@@ -1104,7 +1103,7 @@ resetUIDvarsOnspawn() {}
 
 resetUIDvarsOnConnect() {
   self SetClientOmnvar("ui_alien_max_currency", self.maxCurrency);
-  SetDvar("cg_drawCrosshairNames", false);
+  setDvar("cg_drawCrosshairNames", false);
 }
 
 resetUIDvarsOnSpectate() {}
@@ -1237,7 +1236,6 @@ custom_giveloadout(fakespawn) {
     self thread wait_and_force_weapon_switch();
   } else {
     self SetSpawnWeapon(self.default_starting_pistol);
-
   }
 
   if(self should_give_starting_flare()) {
@@ -1283,11 +1281,12 @@ setCharacterModels(bodyModelName, headModelName, viewModelName) {
 
 setModelFromCustomization() {
   wait 0.05;
-  /# / / dev builds need to wait longer or things won 't be loaded up.
+  / /
+  dev builds need to wait longer or things won 't be loaded up.
   wait 0.5;
 
   assert(isDefined(self));
-  assert(IsPlayer(self));
+  assert(isPlayer(self));
 
   bodyModelName = self GetCustomizationBody();
   headModelName = self GetCustomizationHead();
@@ -1372,7 +1371,6 @@ special_weapon_hints() {
       } else if(weapon == "alienbomb_mp") {
         self thread show_tutorial_text(weapon);
       }
-
     }
     wait(1);
   }
@@ -1402,7 +1400,6 @@ show_weapon_switch_hints() {
     } else
       self setclientomnvar("ui_alien_riotshield_equipped", -1);
   }
-
 }
 
 show_tutorial_text(weapon) {
@@ -1613,11 +1610,11 @@ AlienEndGame(winner, endReasonTextIndex) {
 
   SetOmnvar("ui_pause_menu_show", false);
 
-  SetDvar("ui_game_state", "postgame");
+  setDvar("ui_game_state", "postgame");
   setDvar("g_deadChat", 1);
   setDvar("ui_allow_teamchange", 0);
-  SetDvar("bg_compassShowEnemies", 0);
-  SetDvar("scr_gameended", 1);
+  setDvar("bg_compassShowEnemies", 0);
+  setDvar("scr_gameended", 1);
 
   setGameEndTime(0);
 
@@ -1701,7 +1698,7 @@ setRoundGameMode() {
     self setCommonPlayerData("round", "gameMode", "mugger");
   }
 
-  self setCommonPlayerData("round", "map", ToLower(GetDvar("mapname")));
+  self setCommonPlayerData("round", "map", ToLower(getDvar("mapname")));
 }
 
 blackBox_EndGame_Score() {
@@ -1815,7 +1812,6 @@ blackBox_EndGame(endcondition, playtime) {
     }
 
     bbprint(player_bbprint_ref, "playername %s playerplaytime %f playerkills %i playerscore %i playerassists %i playerrevives %i playerdrillrestarts %i playerdeaths %i playerhives %i playertraps %i playertotalcurrency %i playercurrencyspent %i playerdeployables %i playerdeployablesused %i ", player_name, player_play_time, player_kills, player_score, player_assists, player_revives, player_drill_restarts, player_deaths, player_hives, player_traps, player_currency_total, player_currency_spent, player_deployables, player_deployables_used);
-
   }
 }
 
@@ -1903,7 +1899,6 @@ alien_customprematchperiod() {
 
     level notify("introscreen_over");
     level.introscreen_done = true;
-
   } else {
     wait(1);
     level notify("introscreen_over");
@@ -1920,7 +1915,6 @@ alien_customprematchperiod() {
     if(!isDefined(level.players[index].pers["team"]))
       continue;
   }
-
 }
 
 wait_for_first_player_connect() {

@@ -49,7 +49,6 @@ init_once() {
     add_name(destructible_defs[i], "destructible");
   }
 }
-
 main() {
   while(getDvar(#"propman") != "1") {
     wait 1;
@@ -70,7 +69,6 @@ main() {
   level thread menu_input();
   level setup_xform_menu();
 }
-
 set_crosshair() {
   crossHair = NewDebugHudElem();
   crossHair.location = 0;
@@ -84,7 +82,6 @@ set_crosshair() {
   crossHair.y = 233;
   crossHair setText(".");
 }
-
 setup_groups() {
   level.model_group_map = [];
   level.dynent_groups = [];
@@ -94,7 +91,6 @@ setup_groups() {
   level.model_group_map["p_jun_fruit_apple"] = "fruits";
   level.model_group_map["p_jun_fruit_pineapple"] = "fruits";
 }
-
 add_to_group(group, model) {
   if(isDefined(level.groups[group])) {
     if(check_for_dupes(level.groups[group], model)) {
@@ -105,7 +101,6 @@ add_to_group(group, model) {
     level.groups[group][0] = model;
   }
 }
-
 add_model_to_group(model) {
   if(isDefined(level.model_group_map[model])) {
     add_to_group(level.model_group_map[model], model);
@@ -113,42 +108,35 @@ add_model_to_group(model) {
     add_to_group("miscmodel", model);
   }
 }
-
 init() {
   level.highlighted = [];
   level.rotate_highlighted = [];
 }
-
 add_to_dynent_group(dynent_name) {
   if(check_for_dupes(level.dynent_groups, dynent_name)) {
     level.dynent_groups[level.dynent_groups.size] = dynent_name;
   }
 }
-
 add_to_all_objects() {
   if(check_for_dupes(level.all_objects, self)) {
     level.all_objects[level.all_objects.size] = self;
   }
 }
-
 remove_from_all_objects() {
   if(level.all_objects.size > 0) {
     level.all_objects = array_remove(level.all_objects, self);
   }
 }
-
 add_name(name, type) {
   if(check_for_dupes(level.model_names[type], name)) {
     level.model_names[type][level.model_names[type].size] = name;
   }
 }
-
 add_model(type) {
   if(check_for_dupes(level.models[type], self)) {
     level.models[type][level.models[type].size] = self;
   }
 }
-
 check_for_dupes(array, single) {
   for(i = 0; i < array.size; i++) {
     if(array[i] == single) {
@@ -157,7 +145,6 @@ check_for_dupes(array, single) {
   }
   return true;
 }
-
 setup_menus() {
   level.menu_sys = [];
   level.menu_sys["current_menu"] = spawnStruct();
@@ -245,7 +232,6 @@ setup_menus() {
   add_menuoptions("selected_miscmodel_save_menu", "Save Selected", ::save_miscmodel_highlighted);
   enable_menu("choose_mode");
 }
-
 add_menu(menu_name, title) {
   if(isDefined(level.menu_sys[menu_name])) {
     println("^1level.menu_sys[" + menu_name + "] already exists, change the menu_name");
@@ -255,7 +241,6 @@ add_menu(menu_name, title) {
   level.menu_sys[menu_name].title = "none";
   level.menu_sys[menu_name].title = title;
 }
-
 add_menuoptions(menu_name, option_text, func) {
   if(!isDefined(level.menu_sys[menu_name].options)) {
     level.menu_sys[menu_name].options = [];
@@ -264,7 +249,6 @@ add_menuoptions(menu_name, option_text, func) {
   level.menu_sys[menu_name].options[num] = option_text;
   level.menu_sys[menu_name].function[num] = func;
 }
-
 add_menu_child(parent_menu, child_menu, child_title, child_number_override, func) {
   if(!isDefined(level.menu_sys[child_menu])) {
     add_menu(child_menu, child_title);
@@ -286,11 +270,9 @@ add_menu_child(parent_menu, child_menu, child_title, child_number_override, func
     level.menu_sys[parent_menu].children_func[size] = func;
   }
 }
-
 set_no_back_menu(menu_name) {
   level.menu_sys[menu_name].no_back = true;
 }
-
 enable_menu(menu_name) {
   disable_menu("current_menu");
   if(isDefined(level.menu_cursor)) {
@@ -314,7 +296,6 @@ enable_menu(menu_name) {
     level.menu_sys["current_menu"].options[back_option_num] = set_menu_hudelem(text, "options", 20 * back_option_num);
   }
 }
-
 disable_menu(menu_name) {
   if(isDefined(level.menu_sys[menu_name])) {
     if(isDefined(level.menu_sys[menu_name].title)) {
@@ -330,7 +311,6 @@ disable_menu(menu_name) {
   level.menu_sys[menu_name].title = undefined;
   level.menu_sys[menu_name].options = [];
 }
-
 set_menu_hudelem(text, type, y_offset) {
   x = 10;
   y = 100;
@@ -346,7 +326,6 @@ set_menu_hudelem(text, type, y_offset) {
   y = y + y_offset;
   return set_hudelem(text, x, y, scale);
 }
-
 set_hudelem(text, x, y, scale, alpha) {
   if(!isDefined(alpha)) {
     alpha = 1;
@@ -370,7 +349,6 @@ set_hudelem(text, x, y, scale, alpha) {
   }
   return hud;
 }
-
 menu_input() {
   level endon("stop_createdynents");
   while(1) {
@@ -434,7 +412,6 @@ menu_input() {
     level enable_menu(level.menu_sys[menu_name].children_menu[key]);
   }
 }
-
 force_menu_back() {
   level endon("stop_createdynents");
   wait(0.1);
@@ -450,11 +427,11 @@ force_menu_back() {
   keys[7] = "7";
   keys[8] = "8";
   keys[9] = "9";
-  if(key > 0 && key < 10)
+  if(key > 0 && key < 10) {
     key = keys[key];
+  }
   level notify("menu_button_pressed", key);
 }
-
 list_menu(list, x, y, scale, func) {
   hud_array = [];
   space_apart = 15;
@@ -503,7 +480,6 @@ list_menu(list, x, y, scale, func) {
     return current_num;
   }
 }
-
 move_list_menu(hud_array, dir, space, num) {
   time = 0.1;
   if(dir == "up") {
@@ -526,7 +502,6 @@ move_list_menu(hud_array, dir, space, num) {
     hud_array[i].alpha = alpha;
   }
 }
-
 hud_selector(x, y) {
   level endon("stop_createdynents");
   if(isDefined(level.hud_selector)) {
@@ -539,7 +514,6 @@ hud_selector(x, y) {
   level.hud_selector.alpha = 0.5;
   level.hud_selector.sort = 10;
 }
-
 hud_selector_fade_out(time) {
   level endon("stop_createdynents");
   if(!isDefined(time)) {
@@ -553,7 +527,6 @@ hud_selector_fade_out(time) {
   wait(time + 0.1);
   hud Destroy();
 }
-
 selection_error(msg, x, y) {
   level endon("stop_createdynents");
   hud = set_hudelem(undefined, x - 10, y, 1);
@@ -570,7 +543,6 @@ selection_error(msg, x, y) {
   hud Destroy();
   error_hud Destroy();
 }
-
 hud_font_scaler(mult) {
   level endon("stop_createdynents");
   self notify("stop_fontscaler");
@@ -589,7 +561,6 @@ hud_font_scaler(mult) {
     wait(0.05);
   }
 }
-
 update_selected_object_position() {
   object = level.selected_object;
   if(isDefined(object)) {
@@ -599,14 +570,13 @@ update_selected_object_position() {
     if(trace["fraction"] != 1) {
       vector = trace["position"] + (0, 0, level.selected_object_z_offset);
       if(vector != object.origin) {
-        object moveTo(vector, 0.1);
+        object MoveTo(vector, 0.1);
         object waittill("movedone");
       }
     }
     wait(0.1);
   }
 }
-
 move_selected_object(with_trace) {
   level endon("stop_createdynents");
   self notify("stop_move_selected_object");
@@ -632,19 +602,17 @@ move_selected_object(with_trace) {
       vector = level.debug_player getEye() + vector_scale(forward, level.selected_object_dist);
     }
     if(vector != self.origin) {
-      self moveTo(vector, 0.1);
+      self MoveTo(vector, 0.1);
       self waittill("movedone");
     } else {
       wait(0.1);
     }
   }
 }
-
 get_random_model() {
   count = level.groups[level.selected_group].size;
   return level.groups[level.selected_group][randomintrange(0, count)];
 }
-
 spray_model() {
   level.spray = [];
   if(isDefined(level.selected_object) && !isDefined(level.selected_group)) {
@@ -724,7 +692,6 @@ spray_model() {
   level notify("stop_spray");
   remove_hud("spray_hud");
 }
-
 do_spray_model() {
   forward = anglesToForward(level.debug_player GetPlayerAngles());
   vector = level.debug_player getEye() + vector_scale(forward, 48);
@@ -734,7 +701,6 @@ do_spray_model() {
   object PhysicsLaunch(object.origin, velocity);
   object store_model("dynent");
 }
-
 spray_trajectory() {
   level endon("stop_createdynents");
   level endon("stop_spray");
@@ -758,7 +724,6 @@ spray_trajectory() {
     wait(0.05);
   }
 }
-
 spray_hud() {
   level.spray_hud = [];
   x = 0;
@@ -801,7 +766,6 @@ spray_hud() {
     new_hud("spray_hud", "- Quit", x + 60, y + 40, 1);
   }
 }
-
 spray_buttons() {
   clear_universal_buttons("spray");
   add_universal_button("spray", "dpad_up");
@@ -813,7 +777,6 @@ spray_buttons() {
   add_universal_button("spray", "button_rshldr");
   level thread universal_input_loop("spray", "stop_spray", true);
 }
-
 add_universal_button(button_group, name) {
   if(!isDefined(level.u_buttons[button_group])) {
     level.u_buttons[button_group] = [];
@@ -822,11 +785,9 @@ add_universal_button(button_group, name) {
     level.u_buttons[button_group][level.u_buttons[button_group].size] = name;
   }
 }
-
 clear_universal_buttons(button_group) {
   level.u_buttons[button_group] = [];
 }
-
 universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_button) {
   level endon("stop_createdynents");
   level endon(end_on);
@@ -863,16 +824,13 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
     wait(0.05);
   }
 }
-
 disable_buttons(button_group) {
   level.u_buttons_disable[button_group] = true;
 }
-
 enable_buttons(button_group) {
   wait(1);
   level.u_buttons_disable[button_group] = false;
 }
-
 select_dynent_group() {
   level.dyn_ent_selected_group = undefined;
   y = level.menu_sys["current_menu"].options[0].y;
@@ -888,11 +846,9 @@ select_dynent_group() {
   }
   arrow_hud Destroy();
 }
-
 group_selected(group_name) {
   level.selected_group = group_name;
 }
-
 remove_hud(hud_name) {
   if(!isDefined(level.hud_array[hud_name])) {
     return;
@@ -903,7 +859,6 @@ remove_hud(hud_name) {
   }
   level.hud_array[hud_name] = undefined;
 }
-
 new_hud(hud_name, msg, x, y, scale) {
   if(!isDefined(level.hud_array)) {
     level.hud_array = [];
@@ -915,7 +870,6 @@ new_hud(hud_name, msg, x, y, scale) {
   level.hud_array[hud_name][level.hud_array[hud_name].size] = hud;
   return hud;
 }
-
 object_highlight(objects) {
   level endon("stop_createdynents");
   level endon("stop_select_model");
@@ -948,7 +902,6 @@ object_highlight(objects) {
     }
   }
 }
-
 selected_delete(no_force_back) {
   if(isDefined(level.selected_object)) {
     level.selected_object remove_from_all_objects();
@@ -965,7 +918,6 @@ selected_delete(no_force_back) {
     }
   }
 }
-
 selected_back() {
   if(isDefined(level.selected_object)) {
     if(isDefined(level.selected_object.old_origin)) {
@@ -980,7 +932,6 @@ selected_back() {
     level thread force_menu_back();
   }
 }
-
 selected_save_highlight(key) {
   if(isDefined(level.highlighted_object)) {
     object = level.highlighted_object;
@@ -996,7 +947,6 @@ selected_save_highlight(key) {
     wait(0.1);
   }
 }
-
 save_highlight_loop() {
   level endon("stop_createdynents");
   self endon("stop_save_highlight");
@@ -1005,15 +955,12 @@ save_highlight_loop() {
     wait(0.05);
   }
 }
-
 add_highlighted() {
   level.highlighted[level.highlighted.size] = self;
 }
-
 remove_highlighted() {
   level.highlighted = array_remove(level.highlighted, self);
 }
-
 selected_models_save_thread(type) {
   level endon("stop_createdynents");
   level waittill("disable selected_" + type + "_save_menu");
@@ -1021,45 +968,37 @@ selected_models_save_thread(type) {
     level.models[type][i] remove_save_stat();
   }
 }
-
 selected_dynent_save() {
   level.highlighted = [];
   level thread selected_models_save_thread("dynent");
 }
-
 selected_destructible_save() {
   level.highlighted = [];
   level thread selected_models_save_thread("destructible");
 }
-
 selected_miscmodel_save() {
   level.highlighted = [];
   level thread selected_models_save_thread("miscmodel");
 }
-
 remove_save_stat() {
   self notify("stop_save_highlight");
   self.save_selected = false;
 }
-
 save_dynent_highlighted() {
   if(level.highlighted.size > 0) {
     return save_master("Save Selected DynEnts?", "dynents_selected", level.highlighted, "dynent");
   }
 }
-
 save_destructible_highlighted() {
   if(level.highlighted.size > 0) {
     return save_master("Save Selected Destructibles?", "detructibles_selected", level.highlighted, "destructible");
   }
 }
-
 save_miscmodel_highlighted() {
   if(level.highlighted.size > 0) {
     return save_master("Save Selected Misc_Models?", "miscmodels_selected", level.highlighted, "miscmodel");
   }
 }
-
 setup_menu_buttons() {
   clear_universal_buttons("menu");
   menu_cursor();
@@ -1088,7 +1027,6 @@ setup_menu_buttons() {
   add_universal_button("menu", "backspace");
   level thread universal_input_loop("menu", "never", undefined, undefined, "button_ltrig");
 }
-
 menu_cursor() {
   level.menu_cursor = set_hudelem(undefined, 0, 130, 1.3);
   level.menu_cursor SetShader("white", 125, 20);
@@ -1097,7 +1035,6 @@ menu_cursor() {
   level.menu_cursor.sort = 1;
   level.menu_cursor.current_pos = 0;
 }
-
 any_button_hit(button_hit, type) {
   buttons = [];
   if(type == "numbers") {
@@ -1121,7 +1058,6 @@ any_button_hit(button_hit, type) {
   }
   return false;
 }
-
 setup_xform_menu() {
   level.selected_object_z_offset = 0;
   level.selected_object_dist = 48;
@@ -1130,7 +1066,6 @@ setup_xform_menu() {
   level.xform_hud_active = 0;
   toggle_xform_hud();
 }
-
 toggle_xform_hud() {
   level.xform_hud_active = !level.xform_hud_active;
   if(level.xform_hud_active) {
@@ -1162,7 +1097,6 @@ toggle_xform_hud() {
     remove_hud("xform_hud");
   }
 }
-
 setup_xform_buttons() {
   clear_universal_buttons("xform");
   add_universal_button("xform", "button_a");
@@ -1174,15 +1108,15 @@ setup_xform_buttons() {
   add_universal_button("xform", "button_lstick");
   level thread universal_input_loop("xform", "never", true);
 }
-
 xform_input_handler() {
   level endon("stop_createdynents");
   rate = 2;
   while(1) {
     level waittill("xform_button_pressed", key);
     object = level.selected_object;
-    if(!isDefined(object))
+    if(!isDefined(object)) {
       object = level.highlighted_object;
+    }
     if(!level.debug_player ButtonPressed("button_ltrig")) {
       if(key == "button_rshldr") {
         level.selected_object_z_offset += 4;
@@ -1211,7 +1145,6 @@ xform_input_handler() {
     wait(0.1);
   }
 }
-
 place(type) {
   if(isDefined(level.selected_object)) {
     level.selected_object notify("unlink_selected_object");
@@ -1220,7 +1153,6 @@ place(type) {
     level.selected_object = undefined;
   }
 }
-
 place_copy(type) {
   if(isDefined(level.selected_object)) {
     level.selected_object notify("unlink_selected_object");
@@ -1237,31 +1169,24 @@ place_copy(type) {
     level.selected_object.angles = angles;
   }
 }
-
 place_dynent() {
   place("dynent");
 }
-
 place_destructible() {
   place("destructible");
 }
-
 place_miscmodel() {
   place("miscmodel");
 }
-
 place_dynent_copy() {
   place_copy("dynent");
 }
-
 place_destructible_copy() {
   place_copy("destructible");
 }
-
 place_miscmodel_copy() {
   place_copy("miscmodel");
 }
-
 select_dynent_from_list() {
   y = level.menu_sys["current_menu"].options[0].y;
   arrow_hud = set_hudelem("-------->", 120, y, 1.3);
@@ -1269,7 +1194,6 @@ select_dynent_from_list() {
   level.selected_group = undefined;
   arrow_hud Destroy();
 }
-
 select_destructible_from_list() {
   y = level.menu_sys["current_menu"].options[0].y;
   arrow_hud = set_hudelem("-------->", 120, y, 1.3);
@@ -1277,14 +1201,12 @@ select_destructible_from_list() {
   level.selected_group = undefined;
   arrow_hud Destroy();
 }
-
 select_miscmodel_from_list() {
   y = level.menu_sys["current_menu"].options[0].y;
   arrow_hud = set_hudelem("-------->", 120, y, 1.3);
   list_menu(level.model_names["miscmodel"], 180, y, 1.3, ::spawn_miscmodel);
   arrow_hud Destroy();
 }
-
 spawn_selected_object(model_name, with_trace, type) {
   if(isDefined(level.selected_object)) {
     level.selected_object Delete();
@@ -1300,19 +1222,15 @@ spawn_selected_object(model_name, with_trace, type) {
   level.select_group = undefined;
   level.selected_object thread move_selected_object(with_trace);
 }
-
 spawn_dynent(model_name) {
   spawn_selected_object(model_name, true, "dynent");
 }
-
 spawn_miscmodel(model_name) {
   spawn_selected_object(model_name, true, "miscmodel");
 }
-
 spawn_destructible(model_name) {
   spawn_selected_object(model_name, true, "destructible");
 }
-
 move_model() {
   if(isDefined(level.highlighted_object)) {
     level.selected_object = level.highlighted_object;
@@ -1321,13 +1239,11 @@ move_model() {
     level thread move_model_thread();
   }
 }
-
 move_model_thread() {
   level endon("stop_createdynents");
   level waittill("stop_move");
   level thread force_menu_back();
 }
-
 copy_model(type) {
   if(isDefined(level.highlighted_object)) {
     model_origin = level.highlighted_object.origin;
@@ -1344,49 +1260,39 @@ copy_model(type) {
     level thread copy_thread();
   }
 }
-
 copy_dynent() {
   copy_model("dynent");
 }
-
 copy_destructible() {
   copy_model("destructible");
 }
-
 copy_miscmodel() {
   copy_model("miscmodel");
 }
-
 copy_thread() {
   level endon("stop_createdynents");
   level waittill("stop_move");
   level thread force_menu_back();
 }
-
 select_dynents() {
   select("dynent");
 }
-
 select_destructibles() {
   select("destructible");
 }
-
 select_miscmodels() {
   select("miscmodel");
 }
-
 select(type) {
   if(level.models[type].size > 0) {
     level thread select_model_thread(type);
   }
 }
-
 draw_selectables(objects) {
   for(i = 0; i < objects.size; i++) {
     objects[i] thread select_icon_think();
   }
 }
-
 select_icon_think() {
   level endon("stop_createdynents");
   self endon("death");
@@ -1402,7 +1308,6 @@ select_icon_think() {
     wait(0.05);
   }
 }
-
 delete_model() {
   if(isDefined(level.highlighted_object)) {
     level.highlighted_object remove_from_all_objects();
@@ -1413,7 +1318,6 @@ delete_model() {
     level.selected_object = undefined;
   }
 }
-
 select_model_thread(type) {
   level endon("stop_createdynents");
   selected_delete(true);
@@ -1424,7 +1328,6 @@ select_model_thread(type) {
   level waittill("disable " + type + "_select_menu");
   level notify("stop_select_model");
 }
-
 select_main_thread(type) {
   level endon("stop_createdynents");
   level endon("stop_select_model");
@@ -1437,41 +1340,34 @@ select_main_thread(type) {
     wait(0.05);
   }
 }
-
 set_default_path() {
   if(!isDefined(level.path)) {
     level.path = "prop_man/" + level.script + "/";
   }
 }
-
 store_model(type) {
   self add_to_all_objects();
   level.models[type] = array_add(level.models[type], self);
 }
-
 remove_model(type) {
   level.models[type] = array_remove(level.models[type], self);
 }
-
 save_dynents() {
   if(level.models["dynent"].size > 0) {
     return save_master("Save All DynEnts?", "dynents_all", level.models["dynent"], "dynent");
   }
 }
-
 save_destructibles() {
   if(level.models["destructible"].size > 0) {
     return save_master("Save All Destructibles?", "destructibles_all", level.models["destructible"], "destructible");
   }
 }
-
 save_miscmodels() {
   selected_delete(true);
   if(level.models["miscmodel"].size > 0) {
     return save_master("Save All misc models?", "miscmodels_all", level.models["miscmodel"], "miscmodel");
   }
 }
-
 save_master(save_msg, filename, save_array, type) {
   disable_buttons("menu");
   disable_buttons("rotate");
@@ -1505,7 +1401,6 @@ save_master(save_msg, filename, save_array, type) {
   level thread enable_buttons("rotate");
   level thread enable_buttons("prop");
 }
-
 save_dialog(msg, filename) {
   if(!isDefined(level.save_hud_x)) {
     level.save_hud_x = 0;
@@ -1540,13 +1435,11 @@ save_dialog(msg, filename) {
   level.save_no_hud.alignX = "center";
   level.save_no_hud.sort = 35;
 }
-
 destroy_hud(hud) {
   if(isDefined(hud)) {
     hud Destroy();
   }
 }
-
 save_complete(msg) {
   hud = set_hudelem("Save Successful", 320, 100, 1.5);
   hud.alignX = "center";
@@ -1563,7 +1456,6 @@ save_complete(msg) {
   hud Destroy();
   hud_msg Destroy();
 }
-
 save_failed() {
   hud = set_hudelem("Save Failed!", 320, 100, 1.5);
   hud.AlignX = "center";
@@ -1574,7 +1466,6 @@ save_failed() {
   wait(3);
   hud Destroy();
 }
-
 save_selector(x, y, width) {
   hud = set_hudelem(undefined, x, y, 1);
   hud.alignX = "center";
@@ -1587,7 +1478,6 @@ save_selector(x, y, width) {
   wait(0.35);
   hud Destroy();
 }
-
 save(model_array, filename, type) {}
 save_buttons() {
   clear_universal_buttons("save");
@@ -1595,10 +1485,10 @@ save_buttons() {
   add_universal_button("save", "button_b");
   level thread universal_input_loop("save", "stop_savebutton_loop");
 }
-
 quit() {
-  if(level.xform_hud_active)
+  if(level.xform_hud_active) {
     toggle_xform_hud();
+  }
   level.hud_selector Destroy();
   disable_menu("current_menu");
   level.menu_sys = [];

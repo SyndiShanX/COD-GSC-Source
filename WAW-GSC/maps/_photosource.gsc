@@ -427,7 +427,7 @@ psource_delete() {
     if(i != level.psource_selectindex) {
       newarray[newarray.size] = level.psource_views[i];
     }
-  level.psource_views = newarray;
+    level.psource_views = newarray;
   }
   flag_set("psource_refresh");
   setDvar("psource_delete", "");

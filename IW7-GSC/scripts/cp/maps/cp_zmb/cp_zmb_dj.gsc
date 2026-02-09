@@ -40,9 +40,9 @@ init_fetch_quest() {
 
 debug_dj_location() {
   for(;;) {
-    if(getdvar("scr_dj_location") != "") {
+    if(getDvar("scr_dj_location") != "") {
       level thread setup_dj_doors();
-      setdvar("scr_dj_location", "");
+      setDvar("scr_dj_location", "");
     }
 
     wait(1);
@@ -1681,7 +1681,7 @@ dj_close_window() {
 
 dj_idle() {
   level.dj.current_state = "idle";
-  var_0 = scripts\engine\utility::random([ % iw7_cp_zom_hoff_dj_desk_01, %iw7_cp_zom_hoff_dj_desk_02, %iw7_cp_zom_hoff_dj_desk_03, %iw7_cp_zom_hoff_dj_desk_04, %iw7_cp_zom_hoff_dj_desk_05, %iw7_cp_zom_hoff_dj_desk_06]);
+  var_0 = scripts\engine\utility::random([%iw7_cp_zom_hoff_dj_desk_01, %iw7_cp_zom_hoff_dj_desk_02, %iw7_cp_zom_hoff_dj_desk_03, %iw7_cp_zom_hoff_dj_desk_04, %iw7_cp_zom_hoff_dj_desk_05, %iw7_cp_zom_hoff_dj_desk_06]);
   var_1 = % iw7_cp_zom_hoff_dj_idle_01;
   var_2 = var_1;
   if(randomint(100) > 80) {
@@ -1712,7 +1712,7 @@ dj_exit_mic() {
 
 dj_mic_loop() {
   level.dj.current_state = "mic_loop";
-  var_0 = [ % iw7_cp_zom_hoff_dj_vo_06, %iw7_cp_zom_hoff_dj_vo_05, %iw7_cp_zom_hoff_dj_vo_04, %iw7_cp_zom_hoff_dj_vo_03, %iw7_cp_zom_hoff_dj_vo_02, %iw7_cp_zom_hoff_dj_vo_01];
+  var_0 = [%iw7_cp_zom_hoff_dj_vo_06, %iw7_cp_zom_hoff_dj_vo_05, %iw7_cp_zom_hoff_dj_vo_04, %iw7_cp_zom_hoff_dj_vo_03, %iw7_cp_zom_hoff_dj_vo_02, %iw7_cp_zom_hoff_dj_vo_01];
   var_1 = ["IW7_cp_zom_hoff_dj_vo_05", "IW7_cp_zom_hoff_dj_vo_04", "IW7_cp_zom_hoff_dj_vo_03", "IW7_cp_zom_hoff_dj_vo_02", "IW7_cp_zom_hoff_dj_vo_01", "IW7_cp_zom_hoff_dj_vo_06"];
   var_2 = scripts\engine\utility::random(var_1);
   var_3 = undefined;

@@ -11,8 +11,8 @@ precache_engineer_fx() {
   level._effect["engineer_groundhit"] = LoadFx("maps/zombie/fx_zombie_boss_grnd_hit");
   level._effect["engineer_spawn"] = LoadFx("maps/zombie/fx_zombie_boss_spawn");
 }
-
 #using_animtree("generic_human");
+
 engineer_prespawn() {
   maps\_zombietron_spawner::zombie_spawn_init("boss_zombie");
   self boss_zombie_idle_setup();
@@ -23,14 +23,12 @@ engineer_prespawn() {
   self.anim_array[self.animname]["stop"]["stand"]["none"]["idle"] = self.a.overrideIdleAnimArray;
   self notify("zombie_init_done");
 }
-
 play_idle() {
   transTime = 0.2;
-  idleAnim = self.a.overrideIdleAnimArray[randomInt(self.a.overrideIdleAnimArray.size)];
+  idleAnim = self.a.overrideIdleAnimArray[RandomInt(self.a.overrideIdleAnimArray.size)];
   self SetFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, transTime, self.animplaybackrate);
   self animscripts\zombie_shared::DoNoteTracks("idle");
 }
-
 boss_zombie_idle_setup() {
   self.a.array["turn_left_45"] = % exposed_tracking_turn45L;
   self.a.array["turn_left_90"] = % exposed_tracking_turn90L;
@@ -44,7 +42,6 @@ boss_zombie_idle_setup() {
   self.a.array["straight_level"] = % ai_zombie_boss_idle_a;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
-
 init_engineer_zombie_anims() {
   if(!isDefined(level._zombie_melee)) {
     level._zombie_melee = [];

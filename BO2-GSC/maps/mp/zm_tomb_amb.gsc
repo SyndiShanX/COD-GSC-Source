@@ -490,7 +490,7 @@ sndmaelstrom() {
   while(true) {
     trig waittill("trigger", who);
 
-    if(isplayer(who) && !is_true(who.sndmaelstrom)) {
+    if(isPlayer(who) && !is_true(who.sndmaelstrom)) {
       who.sndmaelstrom = 1;
       level setclientfield("sndMaelstromPlr" + who getentitynumber(), 1);
     }

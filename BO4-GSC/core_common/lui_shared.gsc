@@ -23,7 +23,7 @@ class cluielem {
   }
 
   function close_luielem(player) {
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player closeluielem(_uid);
     }
   }
@@ -55,7 +55,6 @@ class cluielem {
   function setup_clientfields(uid) {
     _uid = uid;
   }
-
 }
 
 autoexec __init__system__() {
@@ -400,17 +399,13 @@ function_1bc580af() {
 
       if(menu === # "full_screen_movie") {
         if(response === # "finished_movie_playback") {
-          [
-            [lui_menu]
-          ] - > close(self);
+          [[lui_menu]] - > close(self);
           self notify(#"movie_done");
           break;
         }
 
         if(response === # "skippable" && isDefined(value)) {
-          [
-            [lui_menu]
-          ] - > registerplayer_callout_traversal(self, value);
+          [[lui_menu]] - > registerplayer_callout_traversal(self, value);
         }
       }
     }

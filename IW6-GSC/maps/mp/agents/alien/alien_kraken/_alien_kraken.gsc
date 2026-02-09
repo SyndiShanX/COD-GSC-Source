@@ -745,7 +745,7 @@ attacktriggerwait(var_0, var_1) {
   for(;;) {
     var_0 waittill("touch", var_3);
 
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
     if(!canperformmelee() || istentaclespawning(var_1)) {
@@ -851,7 +851,7 @@ alienkrakenprocesshitloc(var_0, var_1) {
 }
 
 bullethitarmor(var_0, var_1, var_2) {
-  if(isplayer(var_2))
+  if(isPlayer(var_2))
     var_2 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("hitalienarmor");
 }
 
@@ -920,7 +920,7 @@ alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   } else if(!var_12 && !var_13)
     var_2 = maps\mp\alien\_damage::set_alien_damage_by_weapon_type(var_4, var_5, var_2);
 
-  if(isplayer(var_1) && !maps\mp\alien\_utility::is_trap(var_0)) {
+  if(isPlayer(var_1) && !maps\mp\alien\_utility::is_trap(var_0)) {
     var_2 = maps\mp\alien\_damage::scale_alien_damage_by_perks(var_1, var_2, var_4, var_5);
     var_2 = maps\mp\alien\_damage::scale_alien_damage_by_weapon_type(var_1, var_2, var_4, var_5, var_8);
   }
@@ -929,7 +929,7 @@ alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   var_2 = int(var_2);
 
   if(isDefined(var_1)) {
-    if(isDefined(var_1.owner) && isplayer(var_1.owner))
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner))
       var_1.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
     else
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);

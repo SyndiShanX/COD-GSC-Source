@@ -218,7 +218,7 @@ on_ai_killed(s_params) {
   weapon = s_params.weapon;
   means_of_death = s_params.smeansofdeath;
 
-  if(isplayer(e_player) && isDefined(weapon) && weapon.name == # "zhield_zpear_turret") {
+  if(isPlayer(e_player) && isDefined(weapon) && weapon.name == # "zhield_zpear_turret") {
     if(!isDefined(e_player.var_53ce87a7)) {
       e_player.var_53ce87a7 = 0;
       e_player.var_822346e9 = 0;
@@ -233,7 +233,7 @@ on_ai_killed(s_params) {
     }
   }
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     if(is_challenge_active(14) && !(isDefined(self.var_45bfef99) && self.var_45bfef99)) {
       if(isDefined(str_hit_loc)) {
         if(str_hit_loc == # "helmet" || str_hit_loc == # "head") {
@@ -296,7 +296,7 @@ on_ai_killed(s_params) {
 }
 
 function_4ca8c034(attacker, weapon, hit_loc, means_of_death) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 

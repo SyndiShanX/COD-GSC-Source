@@ -83,7 +83,6 @@ class cct_progressbar_status: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("_state", 1, 4, "int");
   }
-
 }
 
 register(uid) {

@@ -9,13 +9,12 @@ main() {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_unload_groups(::unload_groups);
 }
-
 #using_animtree("tank");
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   num_positions = 4;
@@ -33,5 +32,4 @@ setanims() {
   positions[0].aimdown = % ai_50cal_gunner_aim_down;
   return positions;
 }
-
 unload_groups() {}

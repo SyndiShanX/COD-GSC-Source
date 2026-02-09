@@ -106,8 +106,9 @@ street_fail_condition() {
   t_fail_player = getent("fail_player", "targetname");
 
   while(true) {
-    if(!self istouching(t_fail_player))
+    if(!self istouching(t_fail_player)) {
       missionfailedwrapper();
+    }
 
     wait 0.05;
   }
@@ -136,20 +137,23 @@ house_clean_up_and_reset() {
       vehicle.delete_on_death = 1;
       vehicle notify("death");
 
-      if(!isalive(vehicle))
+      if(!isalive(vehicle)) {
         vehicle delete();
+      }
     }
   }
 
   a_ai = getaiarray();
 
-  foreach(ai in a_ai)
-  ai delete();
+  foreach(ai in a_ai) {
+    ai delete();
+  }
 
   a_house_triggers = getEntArray("house_trigger", "script_noteworthy");
 
-  foreach(t_house in a_house_triggers)
-  t_house delete();
+  foreach(t_house in a_house_triggers) {
+    t_house delete();
+  }
 
   flag_wait("house_event_end");
   level.player setmovespeedscale(1);
@@ -205,21 +209,23 @@ ambient_neighborhood_vehicles() {
   level endon("player_at_front_gate");
 
   while(true) {
-    if(randomint(3) == 0)
+    if(randomint(3) == 0) {
       vh_ambient = "pan_hatchback";
-    else if(randomint(3) == 1)
+    } else if(randomint(3) == 1) {
       vh_ambient = "pan_van";
-    else
+    } else {
       vh_ambient = "pan_truck";
+    }
 
-    if(randomint(4) == 0)
+    if(randomint(4) == 0) {
       nd_start = getvehiclenode("start_sideroad_1", "targetname");
-    else if(randomint(4) == 1)
+    } else if(randomint(4) == 1) {
       nd_start = getvehiclenode("start_sideroad_2", "targetname");
-    else if(randomint(4) == 2)
+    } else if(randomint(4) == 2) {
       nd_start = getvehiclenode("start_sideroad_3", "targetname");
-    else
+    } else {
       nd_start = getvehiclenode("start_sideroad_4", "targetname");
+    }
 
     vh_car = spawn_vehicle_from_targetname(vh_ambient);
     vh_car thread go_path(nd_start);

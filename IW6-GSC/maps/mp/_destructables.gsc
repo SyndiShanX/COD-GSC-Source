@@ -6,7 +6,7 @@
 init() {
   ents = getEntArray("destructable", "targetname");
 
-  if(getdvar("scr_destructables") == "0") {
+  if(getDvar("scr_destructables") == "0") {
     for(i = 0; i < ents.size; i++)
       ents[i] delete();
   } else {

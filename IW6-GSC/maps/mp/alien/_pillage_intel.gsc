@@ -7,7 +7,7 @@ create_intel_spots() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     return;
   }
-  setdvar("scr_alien_intel_pillage", 1);
+  setDvar("scr_alien_intel_pillage", 1);
   level.intel_outline_func = ::intel_pillage_outline;
   level.intel_pillage_show_func = ::create_intel_from_pillage_spot;
   level.intel_pillage_allowed_func = ::intel_pillage_allowed_func;
@@ -118,7 +118,7 @@ intel_pillage_allowed_func() {
 init_player_intel_total() {
   var_0 = "NO_INTEL_ACHIEVEMENT";
   var_1 = 0;
-  var_2 = getdvar("ui_mapname");
+  var_2 = getDvar("ui_mapname");
 
   switch (var_2) {
     case "mp_alien_armory":
@@ -256,7 +256,7 @@ aliens_get_intel_num_possible() {
   var_0 = 0;
   var_1 = 0;
   var_2 = 0;
-  var_3 = getdvar("ui_mapname");
+  var_3 = getDvar("ui_mapname");
 
   switch (var_3) {
     case "mp_alien_armory":
@@ -287,7 +287,7 @@ aliens_get_intel_num_possible() {
 aliens_get_intel_num_collected(var_0) {
   var_1 = 0;
   var_2 = 5;
-  var_3 = getdvar("ui_mapname");
+  var_3 = getDvar("ui_mapname");
 
   switch (var_3) {
     case "mp_alien_armory":
@@ -341,7 +341,7 @@ give_player_easter_egg_intel(var_0) {
 give_player_intel(var_0) {
   var_0 setclientomnvar("ui_alien_intel_num_collected", aliens_get_intel_num_collected(var_0) + 1);
   wait 0.5;
-  var_1 = getdvar("ui_mapname");
+  var_1 = getDvar("ui_mapname");
   var_0 notify("dlc_vo_notify", "intel_recovered", var_0);
 
   if(isDefined(self.location) && self.type == 2) {
@@ -416,7 +416,7 @@ play_intel_pickup_vo(var_0) {
 
 get_vo_to_play(var_0) {
   if(!isDefined(level.intel_table)) {
-    var_1 = getdvar("ui_mapname");
+    var_1 = getDvar("ui_mapname");
 
     switch (var_1) {
       case "mp_alien_armory":

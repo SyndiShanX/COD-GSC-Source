@@ -74,7 +74,6 @@ TimeUntilspawn(includeTeamkillDelay) {
     // Spawning with tactical insertion
     if(isDefined(self.setSpawnPoint))
       respawnDelay += level.tiSpawnDelay;
-
   }
 
   waveBased = (getDvarInt("scr_" + level.gameType + "_waverespawndelay") > 0);
@@ -125,7 +124,6 @@ spawnClient() {
 
       if(!self.hasSpawned && self.pers["teamkills"] <= level.maxAllowedTeamkills)
         self.pers["teamKillPunish"] = false;
-
     } else if(isRoundBased() && !isLastRound()) {
       setLowerMessage("spawn_info", game["strings"]["spawn_next_round"]);
       self thread removeSpawnMessageShortly(3.0);
@@ -982,7 +980,7 @@ Callback_PlayerConnect() {
   self initClientDvars();
   self initPlayerStats();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1")
     level waittill("eternity");
 
   self.guid = self getGuid();
@@ -1128,7 +1126,6 @@ Callback_PlayerConnect() {
       self maps\mp\gametypes\_menus::beginClassChoice();
   }
 
-  /#	
   assert(connectTime == getTime());
 }
 

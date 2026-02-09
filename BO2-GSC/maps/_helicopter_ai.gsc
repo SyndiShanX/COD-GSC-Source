@@ -18,8 +18,9 @@ helicopter_think(target) {
   self.attack_right_range = 1000;
   self.attack_move_frequency = 2;
 
-  if(isDefined(target))
+  if(isDefined(target)) {
     self.cur_target = target;
+  }
 
   self thread helicopter_movement();
   self thread helicopter_fire_update2();
@@ -33,14 +34,16 @@ circle_target() {
   vec_from_target = self.origin - self.cur_target.origin;
   yaw = vectortoangles(vec_from_target)[1];
 
-  if(lengthsquared(vec_from_target) < self.attack_circle_range * self.attack_circle_range)
+  if(lengthsquared(vec_from_target) < self.attack_circle_range * self.attack_circle_range) {
     yaw = yaw + 180;
+  }
 
   while(true) {
     offset = anglesToForward((0, yaw, 0));
 
-    while(!isDefined(self.cur_target))
+    while(!isDefined(self.cur_target)) {
       wait 1;
+    }
 
     goal = self.cur_target.origin;
     yaw = yaw + 2.0;
@@ -79,7 +82,7 @@ attack_target() {
         vec_to_attacker = vec_to_attacker - anglesToForward(driver getplayerangles());
         vec_to_attacker = vectornormalize(vec_to_attacker);
       }
-    } else if(isplayer(self.cur_target)) {
+    } else if(isPlayer(self.cur_target)) {
       vec_to_attacker = vec_to_attacker - anglesToForward(self.cur_target getplayerangles());
       vec_to_attacker = vectornormalize(vec_to_attacker);
     }
@@ -125,8 +128,9 @@ helicopter_damage_watcher() {
     self waittill("damage", damage, attacker, dir, point, type);
 
     if(isDefined(attacker)) {
-      if(isplayer(attacker) && isDefined(attacker.viewlockedentity) && attacker.viewlockedentity isvehicle())
+      if(isPlayer(attacker) && isDefined(attacker.viewlockedentity) && attacker.viewlockedentity isvehicle()) {
         attacker = attacker.viewlockedentity;
+      }
 
       if(isDefined(self.attacker) && self.attacker == attacker) {
         continue;
@@ -142,10 +146,11 @@ helicopter_movement() {
   self setheliheightlock(1);
 
   while(true) {
-    if(isDefined(self.cur_target))
+    if(isDefined(self.cur_target)) {
       self attack_target();
-    else
+    } else {
       wait 0.05;
+    }
   }
 }
 
@@ -155,8 +160,9 @@ helicopter_fire_update() {
   self thread maps\_turret::enable_turret(0, 0);
   self maps\_turret::set_turret_target_flags(11, 0);
 
-  while(true)
+  while(true) {
     wait 1;
+  }
 }
 
 helicopter_fire_update2() {

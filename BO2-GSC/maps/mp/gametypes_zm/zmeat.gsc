@@ -191,7 +191,7 @@ watch_debug_input() {
 
   for(;;) {
     if(self actionslottwobuttonpressed()) {
-      if(getdvar(#"_id_0B188A91") != "") {
+      if(getDvar(#"_id_0B188A91") != "") {
         self disableinvulnerability();
         self dodamage(self.health + 666, self.origin);
       }
@@ -199,7 +199,6 @@ watch_debug_input() {
 
     wait 0.05;
   }
-
 }
 
 zmbmusicsetupmeat() {
@@ -262,7 +261,6 @@ monitor_meat_on_side() {
 
       if(isDefined(level.item_meat))
         playFX(level._effect["spawn_cloud"], level.item_meat.origin);
-
     }
 
     wait 0.05;
@@ -401,7 +399,7 @@ item_meat_watch_bounce() {
       playFX(level._effect["meat_bounce"], pos, normal);
   }
 
-  if(isDefined(ent) && isplayer(ent)) {
+  if(isDefined(ent) && isPlayer(ent)) {
     add_meat_event("player_hit_player", self.owner, ent);
     self.owner hit_player_with_meat(ent);
   }
@@ -1499,10 +1497,8 @@ item_meat_volley(player) {
 item_meat_caught(player, in_air) {
   if(in_air) {
     println("MEAT: Caught the meat on the fly\\n");
-
   } else {
     println("MEAT: Caught the meat while moving\\n");
-
   }
 }
 
@@ -1953,7 +1949,7 @@ paramstr(param) {
   if(!isDefined(param))
     return "undefined";
 
-  if(isplayer(param))
+  if(isPlayer(param))
     return param.name;
 
   if(isstring(param) || isint(param) || isfloat(param) || isvec(param))

@@ -112,7 +112,7 @@ SetNoClearance() {
   checks[3] = (-40, 0, 40);
   checks[4] = (40, 0, 40);
 
-  if(GetDVar("missileDebugDraw") == "1")
+  if(getDvar("missileDebugDraw") == "1")
     debug = true;
   else
     debug = false;
@@ -154,15 +154,12 @@ JavelinCLULoop() {
   for(;;) {
     wait 0.05;
 
-    //-------------------------
-    // Four possible states:
+    //------------------------- // Four possible states:
     //No missile in the tube, so CLU will not search for targets.
     //		CLU has a lock.
     //		CLU is locking on to a target.
     //		CLU is searching for a target to begin locking on to.
-    //-------------------------
-
-    clipAmmo = self GetCurrentWeaponClipAmmo();
+    //------------------------- clipAmmo = self GetCurrentWeaponClipAmmo();
     if(!clipAmmo) {
       self ClearCLUTarget();
       continue;

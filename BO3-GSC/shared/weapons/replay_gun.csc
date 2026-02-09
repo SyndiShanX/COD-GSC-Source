@@ -37,7 +37,7 @@ function watch_lockon(localclientnum) {
       self.replay_lock duplicate_render::change_dr_flags(localclientnum, undefined, "replay_locked");
       self.replay_lock = undefined;
     }
-    if(isDefined(target) && (target isplayer() || target isai()) && isalive(target)) {
+    if(isDefined(target) && (target isPlayer() || target isai()) && isalive(target)) {
       switch (state) {
         case 0:
         case 1:

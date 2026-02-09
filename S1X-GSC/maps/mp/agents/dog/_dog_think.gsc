@@ -706,7 +706,7 @@ watchownerdamage() {
     }
     self.owner waittill("damage", var_0, var_1);
 
-    if(isplayer(var_1) && var_1 != self.owner) {
+    if(isPlayer(var_1) && var_1 != self.owner) {
       if(self.attackstate == "attacking") {
         continue;
       }

@@ -13,14 +13,12 @@ init() {
   }
   level thread crossbow_on_player_connect();
 }
-
 crossbow_on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
     player thread watch_for_monkey_bolt();
   }
 }
-
 watch_for_monkey_bolt() {
   self endon("death");
   self endon("disconnect");
@@ -36,7 +34,6 @@ watch_for_monkey_bolt() {
     }
   }
 }
-
 crossbow_monkey_bolt(player_who_fired) {
   level thread monkey_bolt_cleanup(self);
   attract_dist_diff = level.monkey_attract_dist_diff;
@@ -52,7 +49,7 @@ crossbow_monkey_bolt(player_who_fired) {
     max_attract_dist = 1536;
   }
   if(isDefined(level.monkey_bolt_holder)) {
-    if(IsPlayer(level.monkey_bolt_holder)) {
+    if(isPlayer(level.monkey_bolt_holder)) {
       self create_zombie_point_of_interest(max_attract_dist, num_attractors, 10000, true);
       valid_poi = maps\_zombiemode_utility::check_point_in_active_zone(self.origin);
       level._bolt_on_back = 0;
@@ -91,7 +88,6 @@ crossbow_monkey_bolt(player_who_fired) {
     }
   }
 }
-
 monkey_bolt_taunts(ent_grenade) {
   self endon("death");
   if(self.isdog || !self.has_legs) {
@@ -119,7 +115,6 @@ monkey_bolt_taunts(ent_grenade) {
   }
   level.monkey_bolt_holder = undefined;
 }
-
 monkey_bolt_cleanup(ent_grenade) {
   while(isDefined(ent_grenade)) {
     wait(0.1);
@@ -128,7 +123,6 @@ monkey_bolt_cleanup(ent_grenade) {
     level.monkey_bolt_holder = undefined;
   }
 }
-
 monkey_bolt_on_back(monkey_bolt, player_who_fired, player_with_back_bolt) {
   if(!isDefined(level._bolt_on_back)) {
     level._bolt_on_back = 0;

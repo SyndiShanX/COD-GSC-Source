@@ -85,21 +85,15 @@ script_model() {
 }
 
 dialog() {
-  //-----------------------------------------
-  // Opening mission dialog
-  //-----------------------------------------
-
-  // Hunter Two-One, this is Hunter Two-One Actual. Our evac choppers are taking heavy losses from ground fire!
+  //----------------------------------------- // Opening mission dialog
+  //----------------------------------------- // Hunter Two-One, this is Hunter Two-One Actual. Our evac choppers are taking heavy losses from ground fire!
   level.scr_sound["foley"]["arcadia_fly_heavylosses"] = "arcadia_fly_heavylosses";
 
   // We gotta destroy those triple-A positions so they can get the rest of the civvies outta here! Let's go!
   level.scr_sound["foley"]["arcadia_fly_destroytriplea"] = "arcadia_fly_destroytriplea";
 
-  //-----------------------------------------
-  // After checkpoint - mission dialog
-  //-----------------------------------------
-
-  // Hunter Two-One-Actual, Overlord. Gimme a sitrep over.
+  //----------------------------------------- // After checkpoint - mission dialog
+  //----------------------------------------- // Hunter Two-One-Actual, Overlord. Gimme a sitrep over.
   level.scr_radio["arcadia_hqr_sitrep"] = "arcadia_hqr_sitrep";
 
   // We're just past the enemy blockade at Checkpoint Lima. Now proceeding into Arcadia, over.
@@ -132,11 +126,8 @@ dialog() {
   // Huah.
   level.scr_sound["generic"]["arcadia_ar2_huah"] = "arcadia_ar2_huah";
 
-  //-----------------------------------------
-  // Player designates a valid stryker target
-  //-----------------------------------------
-
-  // Roger, we have a lock. Engaging target.
+  //----------------------------------------- // Player designates a valid stryker target
+  //----------------------------------------- // Roger, we have a lock. Engaging target.
   level.scr_radio["arcadia_str_wehavelock"] = "arcadia_str_wehavelock";
 
   // Badger One copies, engaging your target.
@@ -187,11 +178,8 @@ dialog() {
   // Confirmed, suppressing enemies near the police car
   level.scr_radio["arcadia_str_confpolicecar"] = "arcadia_str_confpolicecar";
 
-  //-----------------------------------------
-  // Stryker finished firing at target area
-  //-----------------------------------------
-
-  // Badger One to Hunter Two, target destroyed.
+  //----------------------------------------- // Stryker finished firing at target area
+  //----------------------------------------- // Badger One to Hunter Two, target destroyed.
   level.scr_radio["arcadia_str_targdestroyed"] = "arcadia_str_targdestroyed";
 
   // Badger One to Hunter Two, area suppressed.
@@ -200,11 +188,8 @@ dialog() {
   // Badger One to Hunter Two, target area suppressed.
   level.scr_radio["arcadia_str_tasuppressed"] = "arcadia_str_tasuppressed";
 
-  //-----------------------------------------
-  // Player designates an invalid target or out of range
-  //-----------------------------------------
-
-  // Uh, negative, that target is out of range, over.
+  //----------------------------------------- // Player designates an invalid target or out of range
+  //----------------------------------------- // Uh, negative, that target is out of range, over.
   level.scr_radio["arcadia_str_uhnegative"] = "arcadia_str_uhnegative";
 
   // Negative, that's an invalid target over.
@@ -216,11 +201,8 @@ dialog() {
   // Target is out of range.
   level.scr_radio["arcadia_str_outofrange"] = "arcadia_str_outofrange";
 
-  //-----------------------------------------
-  // Stryker is about to advance
-  //-----------------------------------------
-
-  // Stand clear, we're rollin'.
+  //----------------------------------------- // Stryker is about to advance
+  //----------------------------------------- // Stand clear, we're rollin'.
   level.scr_radio["arcadia_str_wererollin"] = "arcadia_str_wererollin";
 
   // Be advised, we're movin' up. Stand clear.
@@ -229,18 +211,12 @@ dialog() {
   // All ground units, stand clear. Badger One is oscar mike.
   level.scr_radio["arcadia_str_oscarmike"] = "arcadia_str_oscarmike";
 
-  //-----------------------------------------
-  // Stryker is staying put
-  //-----------------------------------------
-
-  // Badger One holding position.
+  //----------------------------------------- // Stryker is staying put
+  //----------------------------------------- // Badger One holding position.
   level.scr_radio["arcadia_str_holdingposition"] = "arcadia_str_holdingposition";
 
-  //-----------------------------------------
-  // Calling out enemies in the houses
-  //-----------------------------------------
-
-  // We got hostiles in the yellow house!
+  //----------------------------------------- // Calling out enemies in the houses
+  //----------------------------------------- // We got hostiles in the yellow house!
   level.scr_sound["foley"]["arcadia_fly_yellowhouse"] = "arcadia_fly_yellowhouse";
 
   // Enemies in the grey house!!!
@@ -261,11 +237,8 @@ dialog() {
   // Roger that, enemy foot-mobiles by the apartments, take 'em ouuut!!
   level.scr_sound["foley"]["arcadia_fly_apartments"] = "arcadia_fly_apartments";
 
-  //-----------------------------------------
-  // Remind player to use laser designator
-  //-----------------------------------------
-
-  // Use your designator! Lase targets for the Stryker!
+  //----------------------------------------- // Remind player to use laser designator
+  //----------------------------------------- // Use your designator! Lase targets for the Stryker!
   level.scr_sound["foley"]["arcadia_fly_usedesignator"] = "arcadia_fly_usedesignator";
 
   // Squad, use your laser designators! Paint targets for the Stryker!
@@ -280,21 +253,15 @@ dialog() {
   // All Hunter teams, this is Badger One. Paint the target, over.
   level.scr_radio["arcadia_str_painttarget"] = "arcadia_str_painttarget";
 
-  //-----------------------------------------
-  // Player eliminated RPG threats
-  //-----------------------------------------
-
-  // Thanks for the assist, Hunter Two-One.
+  //----------------------------------------- // Player eliminated RPG threats
+  //----------------------------------------- // Thanks for the assist, Hunter Two-One.
   level.scr_radio["arcadia_str_thanks"] = "arcadia_str_thanks";
 
   // Nice work, Hunter Two-One. Thanks for the assist.
   level.scr_radio["arcadia_str_nicework"] = "arcadia_str_nicework";
 
-  //-----------------------------------------
-  // Friendlies move up
-  //-----------------------------------------
-
-  // Everyone move up!
+  //----------------------------------------- // Friendlies move up
+  //----------------------------------------- // Everyone move up!
   level.scr_sound["foley"]["arcadia_fly_everyoneup"] = "arcadia_fly_everyoneup";
 
   // Move up!
@@ -306,18 +273,12 @@ dialog() {
   // Let's go, let's go!!
   level.scr_sound["dunn"]["arcadia_cpd_letsgo"] = "arcadia_cpd_letsgo";
 
-  //-----------------------------------------
-  // Stryker dies
-  //-----------------------------------------
-
-  // All Hunter units, be advised, we just lost Badger One. Stryker support is unavailable, I repeat, Stryker support is unavailable. Make do with what you got. Out.
+  //----------------------------------------- // Stryker dies
+  //----------------------------------------- // All Hunter units, be advised, we just lost Badger One. Stryker support is unavailable, I repeat, Stryker support is unavailable. Make do with what you got. Out.
   level.scr_sound["foley"]["arcadia_fly_lostbadgerone"] = "arcadia_fly_lostbadgerone";
 
-  //-----------------------------------------
-  // Use houses for cover, get off streets
-  //-----------------------------------------
-
-  // Get off the streets, use the houses for cover!!
+  //----------------------------------------- // Use houses for cover, get off streets
+  //----------------------------------------- // Get off the streets, use the houses for cover!!
   level.scr_sound["foley"]["arcadia_fly_offstreets"] = "arcadia_fly_offstreets";
 
   // Flank 'em through the houses!! Go go go!!
@@ -332,21 +293,15 @@ dialog() {
   // Get outta the street!!
   level.scr_sound["foley"]["arcadia_fly_outtastreets"] = "arcadia_fly_outtastreets";
 
-  //-----------------------------------------
-  // Sentry gun shoutouts
-  //-----------------------------------------
-
-  // Squad, take out the sentry guns!
+  //----------------------------------------- // Sentry gun shoutouts
+  //----------------------------------------- // Squad, take out the sentry guns!
   level.scr_sound["foley"]["arcadia_fly_sentryguns"] = "arcadia_fly_sentryguns";
 
   // Take out that sentry gun!
   level.scr_sound["foley"]["arcadia_fly_takeoutsgun"] = "arcadia_fly_takeoutsgun";
 
-  //-----------------------------------------
-  // Stryker warns about RPGs
-  //-----------------------------------------
-
-  // Hunter Two-One Actual, this is Badger One! Our anti-missile system cannot handle the volume of RPG fire, we need your team to thin 'em out, how copy, over?
+  //----------------------------------------- // Stryker warns about RPGs
+  //----------------------------------------- // Hunter Two-One Actual, this is Badger One! Our anti-missile system cannot handle the volume of RPG fire, we need your team to thin 'em out, how copy, over?
   level.scr_radio["arcadia_str_rpgfire"] = "arcadia_str_rpgfire";
 
   // Solid copy Badger One, we're on it! Out!
@@ -358,11 +313,8 @@ dialog() {
   // Squad! They're targeting the Stryker! Watch for RPGs!
   level.scr_sound["foley"]["arcadia_fly_watchforrpgs"] = "arcadia_fly_watchforrpgs";
 
-  //-----------------------------------------
-  // Golf course vehicle laser designation
-  //-----------------------------------------
-
-  // Ramirez, use your laser designator to call in artillery on those vehicles!
+  //----------------------------------------- // Golf course vehicle laser designation
+  //----------------------------------------- // Ramirez, use your laser designator to call in artillery on those vehicles!
   level.scr_sound["foley"]["arcadia_fly_laserdes"] = "arcadia_fly_laserdes";
 
   // Ramirez, call artrillery on the enemy vehicles! Use your laser designator!
@@ -380,21 +332,15 @@ dialog() {
   // Coordinates confirmed. Firing!
   level.scr_radio["arcadia_art_confirmed"] = "arcadia_art_confirmed";
 
-  //-----------------------------------------
-  // Stryker about to run over player
-  //-----------------------------------------
-
-  // Ramirez! You're gonna get run over! Get outta their way!
+  //----------------------------------------- // Stryker about to run over player
+  //----------------------------------------- // Ramirez! You're gonna get run over! Get outta their way!
   level.scr_sound["foley"]["arcadia_fly_getrunover"] = "arcadia_fly_getrunover";
 
   // Ramirez! Honey Badger's moving! Get outta their way!
   level.scr_sound["dunn"]["arcadia_cpd_getoutta"] = "arcadia_cpd_getoutta";
 
-  //-----------------------------------------
-  // After AA neutralized - mission dialog
-  //-----------------------------------------
-
-  // Overlord, Hunter Two-One-Actual. Triple-A has been neutralized. We're heading to 4677 Brookmere Road, over.
+  //----------------------------------------- // After AA neutralized - mission dialog
+  //----------------------------------------- // Overlord, Hunter Two-One-Actual. Triple-A has been neutralized. We're heading to 4677 Brookmere Road, over.
   level.scr_sound["foley"]["arcadia_fly_headingto4677"] = "arcadia_fly_headingto4677";
 
   // Interrogative - what exactly are we looking for, over?
@@ -418,11 +364,8 @@ dialog() {
   // All right, you heard the man - 4677 Brookmere Road. Move!
   level.scr_sound["foley"]["arcadia_fly_heardtheman"] = "arcadia_fly_heardtheman";
 
-  //-----------------------------------------
-  // Ending mission dialog
-  //-----------------------------------------
-
-  // Icepick.
+  //----------------------------------------- // Ending mission dialog
+  //----------------------------------------- // Icepick.
   level.scr_sound["foley"]["arcadia_fly_icepick1"] = "arcadia_fly_icepick1";
 
   // Icepick!

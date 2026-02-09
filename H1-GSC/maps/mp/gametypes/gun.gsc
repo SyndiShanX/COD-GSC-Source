@@ -60,8 +60,8 @@ main() {
 gundebug() {
   var_0 = "scr_gun_force_next";
   var_1 = "scr_gun_force_prev";
-  setdvar(var_0, 0);
-  setdvar(var_1, 0);
+  setDvar(var_0, 0);
+  setDvar(var_1, 0);
 
   while(!isDefined(level.player))
     waitframe();
@@ -73,7 +73,7 @@ gundebug() {
       level.player.gungameprevgunindex = level.player.gungamegunindex;
       level.player.gungamegunindex++;
       level.player givenextgun();
-      setdvar(var_0, 0);
+      setDvar(var_0, 0);
       continue;
     }
 
@@ -83,7 +83,7 @@ gundebug() {
       for(level.player.gungamegunindex--; level.player.gungamegunindex < 0; level.player.gungamegunindex = level.player.gungamegunindex + level.gun_guns.size) {}
 
       level.player givenextgun();
-      setdvar(var_1, 0);
+      setDvar(var_1, 0);
     }
   }
 }
@@ -261,7 +261,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   if(!isDefined(var_1)) {
     return;
   }
-  if(var_3 == "MOD_TRIGGER_HURT" && !isplayer(var_1))
+  if(var_3 == "MOD_TRIGGER_HURT" && !isPlayer(var_1))
     var_1 = self;
 
   if(isDefined(var_4) && maps\mp\_utility::isdestructibleweapon(var_4) && var_1 != self) {
@@ -270,7 +270,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   if(isDefined(var_4) && maps\mp\_utility::isenvironmentweapon(var_4)) {
     return;
   }
-  if(var_3 == "MOD_FALLING" || isplayer(var_1)) {
+  if(var_3 == "MOD_FALLING" || isPlayer(var_1)) {
     if(var_3 == "MOD_FALLING" || var_1 == self || maps\mp\_utility::ismeleemod(var_3) && !isdedicatedmeleeweapon(var_4)) {
       self playlocalsound("mp_war_objective_lost");
       self.gungameprevgunindex = self.gungamegunindex;

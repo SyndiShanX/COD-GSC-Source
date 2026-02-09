@@ -395,7 +395,7 @@ rscrecteleport(params) {
   angles = player getplayerangles();
   cmd = "<dev string:x3ae>" + pos[0] + "<dev string:x3c1>" + pos[1] + "<dev string:x3c7>" + pos[2] + "<dev string:x3cd>" + angles[0] + "<dev string:x3d4>" + angles[1] + "<dev string:x3db>" + angles[2];
   ratrecordmessage(0, "<dev string:x3e2>", cmd);
-  setdvar(#"rat_record_teleport_request", 0);
+  setDvar(#"rat_record_teleport_request", 0);
 }
 
 function_f52fc58b(params) {

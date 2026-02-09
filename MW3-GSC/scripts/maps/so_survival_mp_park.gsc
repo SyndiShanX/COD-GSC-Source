@@ -44,7 +44,7 @@ killtrigger(var_0, var_1, var_2) {
   for(;;) {
     var_3 waittill("trigger", var_4);
 
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
     var_4 maps\_utility::_id_1887();

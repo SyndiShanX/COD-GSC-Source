@@ -10,7 +10,6 @@ main() {
   self.voice = "vietnamese";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_viet_zombie_napalm");
   precacheModel("c_viet_zombie_napalm_head");

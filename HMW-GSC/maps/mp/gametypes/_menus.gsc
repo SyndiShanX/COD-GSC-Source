@@ -70,7 +70,7 @@ connectedmenus() {}
 
 getclasschoice(choice) {
   if(choice <= 100) {
-    if(getdvar("sv_disableCustomClasses") == "1") {
+    if(getDvar("sv_disableCustomClasses") == "1") {
       return "class0";
     }
 

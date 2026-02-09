@@ -33,13 +33,11 @@ init() {
   level thread black_hole_bomb_throttle_anim_changes();
   flag_set("bhb_anim_change_allowed");
 }
-
 player_give_black_hole_bomb() {
   self giveweapon("zombie_black_hole_bomb");
   self set_player_tactical_grenade("zombie_black_hole_bomb");
   self thread player_handle_black_hole_bomb();
 }
-
 #using_animtree("zombie_cymbal_monkey");
 player_handle_black_hole_bomb() {
   self notify("starting_black_hole_bomb");
@@ -92,16 +90,12 @@ player_handle_black_hole_bomb() {
         model._new_ground_trace = true;
         grenade resetmissiledetonationtime();
         if(isDefined(level.black_hole_bomb_loc_check_func)) {
-          if([
-              [level.black_hole_bomb_loc_check_func]
-            ](grenade, model, info)) {
+          if([[level.black_hole_bomb_loc_check_func]](grenade, model, info)) {
             continue;
           }
         }
         if(isDefined(level._blackhole_bomb_valid_area_check)) {
-          if([
-              [level._blackhole_bomb_valid_area_check]
-            ](grenade, model, self)) {
+          if([[level._blackhole_bomb_valid_area_check]](grenade, model, self)) {
             continue;
           }
         }
@@ -128,12 +122,10 @@ player_handle_black_hole_bomb() {
     wait(0.05);
   }
 }
-
 wait_for_attractor_positions_complete() {
   self waittill("attractor_positions_generated");
   self.attract_to_origin = false;
 }
-
 black_hole_bomb_cleanup(parent, model) {
   model endon("sam_stole_it");
   grenade_org = parent.origin;
@@ -149,21 +141,18 @@ black_hole_bomb_cleanup(parent, model) {
   }
   level thread black_hole_bomb_corpse_collect(grenade_org);
 }
-
 black_hole_bomb_corpse_collect(vec_origin) {
   wait(0.1);
   corpse_array = GetCorpseArray();
   for(i = 0; i < corpse_array.size; i++) {
-    if(distanceSquared(corpse_array[i].origin, vec_origin) < 192 * 192) {
+    if(DistanceSquared(corpse_array[i].origin, vec_origin) < 192 * 192) {
       corpse_array[i] thread black_hole_bomb_corpse_delete();
     }
   }
 }
-
 black_hole_bomb_corpse_delete() {
   self Delete();
 }
-
 do_black_hole_bomb_sound(model, info) {
   monk_scream_vox = false;
   if(level.music_override == false) {
@@ -184,7 +173,6 @@ do_black_hole_bomb_sound(model, info) {
     play_sound_in_space("zmb_vox_monkey_explode", position);
   }
 }
-
 get_thrown_black_hole_bomb() {
   self endon("disconnect");
   self endon("starting_black_hole_bomb");
@@ -196,7 +184,6 @@ get_thrown_black_hole_bomb() {
     wait(0.05);
   }
 }
-
 monitor_zombie_groans(info) {
   self endon("explode");
   while(true) {
@@ -220,7 +207,6 @@ monitor_zombie_groans(info) {
     wait(0.05);
   }
 }
-
 play_zombie_groans() {
   self endon("death");
   self endon("black_hole_bomb_blown_up");
@@ -233,11 +219,9 @@ play_zombie_groans() {
     }
   }
 }
-
 black_hole_bomb_exists() {
   return isDefined(level.zombie_weapons["zombie_black_hole_bomb"]);
 }
-
 black_hole_bomb_initial_attract_func(ent_poi) {
   self endon("death");
   if(isDefined(self.pre_black_hole_bomb_run_combatanim)) {
@@ -272,7 +256,7 @@ black_hole_bomb_initial_attract_func(ent_poi) {
     level[[level._black_hole_attract_override]]();
   }
   while(isDefined(ent_poi)) {
-    self._distance_to_black_hole = distanceSquared(self.origin, self._current_black_hole_bomb_origin);
+    self._distance_to_black_hole = DistanceSquared(self.origin, self._current_black_hole_bomb_origin);
     if(self._black_hole_attract_walk == 0 && (self._distance_to_black_hole < outer_edge && self._distance_to_black_hole > inner_range)) {
       if(isDefined(self._bhb_walk_attract)) {
         self[[self._bhb_walk_attract]]();
@@ -307,7 +291,6 @@ black_hole_bomb_initial_attract_func(ent_poi) {
   }
   self thread black_hole_bomb_escaped_zombie_reset();
 }
-
 black_hole_bomb_store_movement_anim() {
   self endon("death");
   current_anim = self.run_combatanim;
@@ -319,14 +302,12 @@ black_hole_bomb_store_movement_anim() {
   }
   AssertMsg("couldn't find zombie run anim in the array keys");
 }
-
 black_hole_bomb_being_pulled_fx() {
   self endon("death");
   wait_network_frame();
   self SetClientFlag(level._ACTOR_CLIENT_FLAG_BLACKHOLE);
   self._black_hole_bomb_being_pulled_in_fx = 1;
 }
-
 black_hole_bomb_attract_walk() {
   self endon("death");
   flag_wait("bhb_anim_change_allowed");
@@ -355,7 +336,6 @@ black_hole_bomb_attract_walk() {
   self._bhb_change_anim_notified = 1;
   self.a.runBlendTime = self._normal_run_blend_time;
 }
-
 black_hole_bomb_attract_run() {
   self endon("death");
   rand = RandomIntRange(1, 4);
@@ -381,7 +361,6 @@ black_hole_bomb_attract_run() {
   self._bhb_change_anim_notified = 1;
   self.a.runBlendTime = self._normal_run_blend_time;
 }
-
 black_hole_bomb_death_anim() {
   self endon("death");
   flt_moveto_time = 0.7;
@@ -393,7 +372,6 @@ black_hole_bomb_death_anim() {
   }
   return death_animation;
 }
-
 black_hole_bomb_death_while_attracted() {
   self endon("death");
   death_animation = undefined;
@@ -403,7 +381,6 @@ black_hole_bomb_death_while_attracted() {
   }
   return death_animation;
 }
-
 black_hole_bomb_arrival_attract_func(ent_poi) {
   self endon("death");
   self endon("zombie_acquire_enemy");
@@ -416,7 +393,6 @@ black_hole_bomb_arrival_attract_func(ent_poi) {
     self black_hole_bomb_event_horizon_death(self._current_black_hole_bomb_origin, ent_poi);
   }
 }
-
 black_hole_bomb_event_horizon_death(vec_black_hole_org, grenade) {
   self endon("death");
   self maps\_zombiemode_spawner::zombie_eye_glow_stop();
@@ -428,15 +404,13 @@ black_hole_bomb_event_horizon_death(vec_black_hole_org, grenade) {
   grenade notify("black_hole_bomb_kill");
   self DoDamage(self.health + 50, self.origin + (0, 0, 50), self._black_hole_bomb_tosser, "zombie_black_hole_bomb", "MOD_CRUSH");
 }
-
 black_hole_bomb_corpse_hide() {
   if(isDefined(self._black_hole_bomb_collapse_death) && self._black_hole_bomb_collapse_death == 1) {
     playFXOnTag(level._effect["black_hole_bomb_zombie_gib"], self, "tag_origin");
-    self hide();
+    self Hide();
   }
   if(isDefined(self._black_hole_bomb_being_pulled_in_fx) && self._black_hole_bomb_being_pulled_in_fx == 1) {}
 }
-
 black_hole_bomb_escaped_zombie_reset() {
   self endon("death");
   flag_wait("bhb_anim_change_allowed");
@@ -451,12 +425,12 @@ black_hole_bomb_escaped_zombie_reset() {
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl5", false);
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl_hand_1", false);
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl_hand_2", false);
-    rand_walk_anim = randomInt(legless_walk_anims.size);
+    rand_walk_anim = RandomInt(legless_walk_anims.size);
     legless_sprint_anims = [];
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl2", false);
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl3", false);
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl_sprint1", false);
-    rand_sprint_anim = randomInt(legless_sprint_anims.size);
+    rand_sprint_anim = RandomInt(legless_sprint_anims.size);
     if(self.zombie_move_speed == "walk") {
       self set_run_anim(legless_walk_anims[rand_walk_anim]);
       self.run_combatanim = level.scr_anim[self.animname][legless_walk_anims[rand_walk_anim]];
@@ -490,7 +464,7 @@ black_hole_bomb_escaped_zombie_reset() {
   self._bhb_change_anim_notified = 1;
   self._black_hole_bomb_being_pulled_in_fx = 0;
   self.a.runBlendTime = self._normal_run_blend_time;
-  which_anim = randomInt(10);
+  which_anim = RandomInt(10);
   if(self.has_legs) {
     if(which_anim > 5) {
       self.deathanim = level.scr_anim[self.animname]["death1"];
@@ -507,7 +481,6 @@ black_hole_bomb_escaped_zombie_reset() {
   self._had_legs = undefined;
   self._bhb_ent_flag_init = 0;
 }
-
 black_hole_bomb_throttle_anim_changes() {
   if(!isDefined(level._black_hole_bomb_zombies_anim_change)) {
     level._black_hole_bomb_zombies_anim_change = [];
@@ -521,7 +494,8 @@ black_hole_bomb_throttle_anim_changes() {
     }
     array_zombies_allowed_to_switch = level._black_hole_bomb_zombies_anim_change;
     for(i = 0; i < array_zombies_allowed_to_switch.size; i++) {
-      if(isDefined(array_zombies_allowed_to_switch[i]) && IsAlive(array_zombies_allowed_to_switch[i])) {
+      if(isDefined(array_zombies_allowed_to_switch[i]) &&
+        IsAlive(array_zombies_allowed_to_switch[i])) {
         array_zombies_allowed_to_switch[i] ent_flag_set("bhb_anim_change");
       }
       if(i >= int_max_num_zombies_per_frame) {
@@ -545,7 +519,6 @@ black_hole_bomb_throttle_anim_changes() {
     wait(0.1);
   }
 }
-
 black_hole_bomb_teleport_init(ent_grenade) {
   if(!isDefined(ent_grenade)) {
     return;
@@ -557,18 +530,16 @@ black_hole_bomb_teleport_init(ent_grenade) {
   wait(0.1);
   teleport_trigger Delete();
 }
-
 black_hole_bomb_trigger_monitor(ent_trigger) {
   ent_trigger endon("black_hole_complete");
   while(1) {
     ent_trigger waittill("trigger", ent_player);
-    if(IsPlayer(ent_player) && !ent_player IsOnGround() && !is_true(ent_player.lander)) {
+    if(isPlayer(ent_player) && !ent_player IsOnGround() && !is_true(ent_player.lander)) {
       ent_trigger thread black_hole_teleport_trigger_thread(ent_player, ::black_hole_time_before_teleport, ::black_hole_teleport_cancel);
     }
     wait(0.1);
   }
 }
-
 black_hole_time_before_teleport(ent_player, str_endon) {
   ent_player endon(str_endon);
   if(!BulletTracePassed(ent_player getEye(), self.origin + (0, 0, 65), false, ent_player)) {
@@ -587,7 +558,8 @@ black_hole_time_before_teleport(ent_player, str_endon) {
     chosen_spot = [[level._override_blackhole_destination_logic]](black_hole_teleport_structs, ent_player);
   } else {
     for(i = 0; i < black_hole_teleport_structs.size; i++) {
-      if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) && (ent_player get_current_zone() != black_hole_teleport_structs[i].script_string)) {
+      if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) &&
+        (ent_player get_current_zone() != black_hole_teleport_structs[i].script_string)) {
         chosen_spot = black_hole_teleport_structs[i];
         break;
       }
@@ -598,7 +570,6 @@ black_hole_time_before_teleport(ent_player, str_endon) {
     ent_player thread black_hole_teleport(chosen_spot);
   }
 }
-
 black_hole_teleport_cancel(ent_player) {}
 black_hole_teleport(struct_dest) {
   self endon("death");
@@ -631,12 +602,10 @@ black_hole_teleport(struct_dest) {
   self FreezeControls(false);
   self thread slightly_delayed_player_response();
 }
-
 slightly_delayed_player_response() {
   wait(1);
   self maps\_zombiemode_audio::create_and_play_dialog("general", "teleport_gersh");
 }
-
 black_hole_teleport_trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ent endon("death");
   self endon("black_hole_complete");
@@ -644,7 +613,7 @@ black_hole_teleport_trigger_thread(ent, on_enter_payload, on_exit_payload) {
     return;
   }
   self black_hole_teleport_add_trigger_to_ent(ent);
-  endon_condition = "leave_trigger_" + self getEntityNumber();
+  endon_condition = "leave_trigger_" + self GetEntityNumber();
   if(isDefined(on_enter_payload)) {
     self thread[[on_enter_payload]](ent, endon_condition);
   }
@@ -659,32 +628,33 @@ black_hole_teleport_trigger_thread(ent, on_enter_payload, on_exit_payload) {
     self black_hole_teleport_remove_trigger_from_ent(ent);
   }
 }
-
 black_hole_teleport_add_trigger_to_ent(ent) {
   if(!isDefined(ent._triggers)) {
     ent._triggers = [];
   }
-  ent._triggers[self getEntityNumber()] = 1;
+  ent._triggers[self GetEntityNumber()] = 1;
 }
-
 black_hole_teleport_remove_trigger_from_ent(ent) {
-  if(!isDefined(ent._triggers))
+  if(!isDefined(ent._triggers)) {
     return;
-  if(!isDefined(ent._triggers[self getEntityNumber()]))
+  }
+  if(!isDefined(ent._triggers[self GetEntityNumber()])) {
     return;
-  ent._triggers[self getEntityNumber()] = 0;
+  }
+  ent._triggers[self GetEntityNumber()] = 0;
 }
-
 black_hole_teleport_ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers))
+  if(!isDefined(self._triggers)) {
     return false;
-  if(!isDefined(self._triggers[trig getEntityNumber()]))
+  }
+  if(!isDefined(self._triggers[trig GetEntityNumber()])) {
     return false;
-  if(!self._triggers[trig getEntityNumber()])
+  }
+  if(!self._triggers[trig GetEntityNumber()]) {
     return false;
+  }
   return true;
 }
-
 black_hole_bomb_kill_counter(grenade) {
   self endon("death");
   grenade endon("death");
@@ -700,7 +670,6 @@ black_hole_bomb_kill_counter(grenade) {
     }
   }
 }
-
 black_hole_bomb_create_exit_portal(pos) {
   exit_portal_fx_spot = spawn("script_model", pos);
   exit_portal_fx_spot setModel("tag_origin");
@@ -708,12 +677,10 @@ black_hole_bomb_create_exit_portal(pos) {
   exit_portal_fx_spot thread black_hole_bomb_exit_clean_up();
   exit_portal_fx_spot playSound("zmb_gersh_teleporter_go");
 }
-
 black_hole_bomb_exit_clean_up() {
   wait(4.0);
   self Delete();
 }
-
 black_hole_bomb_stolen_by_sam(ent_grenade, ent_model) {
   if(!isDefined(ent_model)) {
     return;
@@ -741,8 +708,8 @@ black_hole_bomb_stolen_by_sam(ent_grenade, ent_model) {
   ent_model waittill("movedone");
   ent_model Delete();
 }
-
 #using_animtree("generic_human");
+
 black_hole_bomb_anim_init() {
   if(isDefined(level._use_extra_blackhole_anims)) {
     [[level._use_extra_blackhole_anims]]();

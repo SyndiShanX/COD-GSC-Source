@@ -31,8 +31,7 @@ main() {
   level._effect["bottles_misc3_destruct"] = loadfx("props/bottles_misc3_destruct");
   level._effect["bottles_misc4_destruct"] = loadfx("props/bottles_misc4_destruct");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_nola_fx::main();
   }
-
 }

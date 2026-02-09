@@ -58,12 +58,12 @@ function tesla_devgui_dvar_think() {
   if(!zm_weapons::is_weapon_included(level.weaponzmteslagun)) {
     return;
   }
-  setdvar("", level.zombie_vars[""]);
-  setdvar("", level.zombie_vars[""]);
-  setdvar("", level.zombie_vars[""]);
-  setdvar("", level.zombie_vars[""]);
-  setdvar("", level.zombie_vars[""]);
-  setdvar("", level.zombie_vars[""]);
+  setDvar("", level.zombie_vars[""]);
+  setDvar("", level.zombie_vars[""]);
+  setDvar("", level.zombie_vars[""]);
+  setDvar("", level.zombie_vars[""]);
+  setDvar("", level.zombie_vars[""]);
+  setDvar("", level.zombie_vars[""]);
   for(;;) {
     level.zombie_vars[""] = getdvarint("");
     level.zombie_vars[""] = getdvarint("");

@@ -261,7 +261,7 @@ func_28F3() {
   var_0 = 0;
   var_1 = 5;
   while(var_1 > var_0) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       var_2 = spawnfxforclient(level.var_28C9, self getEye(), self);
       thread func_28F4(var_2, 0.1);
       triggerfx(var_2);

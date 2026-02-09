@@ -22,7 +22,6 @@ init() {
   level thread check_water();
   level thread check_player_freeze();
 }
-
 zombie_coast_adjust_percent() {
   while(1) {
     level waittill("between_round_over");
@@ -35,7 +34,6 @@ zombie_coast_adjust_percent() {
     }
   }
 }
-
 zombie_check_riser() {
   self endon("death");
   if(isDefined(self.script_string) && self.script_string == "riser") {
@@ -43,7 +41,6 @@ zombie_check_riser() {
   }
   self thread zombie_water_out();
 }
-
 zombie_water_out() {
   self endon("death");
   while(1) {
@@ -56,7 +53,6 @@ zombie_water_out() {
     wait_network_frame();
   }
 }
-
 zombie_entered_water(trigger) {
   self endon("death");
   self.in_water = true;
@@ -67,7 +63,6 @@ zombie_entered_water(trigger) {
   }
   self thread zombie_water_in();
 }
-
 zombie_water_move_slow() {
   if(is_true(self.speed_buff)) {
     var = randomintrange(1, 5);
@@ -91,7 +86,6 @@ zombie_water_move_slow() {
   }
   self.needs_run_update = true;
 }
-
 zombie_water_in() {
   self endon("death");
   while(1) {
@@ -110,7 +104,6 @@ zombie_water_in() {
     wait_network_frame();
   }
 }
-
 zombie_exited_water() {
   self endon("death");
   self.in_water = false;
@@ -122,11 +115,10 @@ zombie_exited_water() {
   }
   self thread zombie_water_out();
 }
-
 zombie_water_move_normal() {
   if(is_true(self.speed_buff)) {
     fast_sprint = "sprint5";
-    if(randomInt(100) < 50) {
+    if(RandomInt(100) < 50) {
       fast_sprint = "sprint6";
     }
     self set_run_anim(fast_sprint);
@@ -152,14 +144,12 @@ zombie_water_move_normal() {
   }
   self.needs_run_update = true;
 }
-
 check_water() {
   for(i = 0; i < level.water.size; i++) {
     level.water[i] thread water_trigger();
     level.water[i] thread wade_trigger();
   }
 }
-
 check_player_freeze() {
   level waittill("all_players_connected");
   players = getplayers();
@@ -167,17 +157,15 @@ check_player_freeze() {
     players[i] thread water_watch_freeze();
   }
 }
-
 water_trigger() {
   self endon("death");
   while(1) {
     self waittill("trigger", who);
-    if(IsPlayer(who) && who.sessionstate != "spectator") {
+    if(isPlayer(who) && who.sessionstate != "spectator") {
       self thread trigger_thread(who, ::water_player_in, ::water_player_out);
     }
   }
 }
-
 update_hud_elem(player) {
   player endon("disconnect");
   player endon("death");
@@ -186,7 +174,6 @@ update_hud_elem(player) {
     player notify("update_frost_state");
   }
 }
-
 water_debug_hud_elem_thread(player) {
   player endon("disconnect");
   player endon("death");
@@ -194,12 +181,11 @@ water_debug_hud_elem_thread(player) {
   while(1) {
     if(isDefined(player._in_coast_water)) {
       self SetValue(player._in_coast_water);
-      PrintLn("player " + player getEntityNumber() + " updates hud");
+      PrintLn("player " + player GetEntityNumber() + " updates hud");
     }
     player waittill("update_frost_state");
   }
 }
-
 water_player_in(e_player, endon_condition) {
   if(!isDefined(e_player._in_coast_water) || e_player._in_coast_water == 0) {
     e_player._in_coast_water = 0;
@@ -207,13 +193,11 @@ water_player_in(e_player, endon_condition) {
   }
   e_player._in_coast_water++;
 }
-
 water_player_out(e_player) {
   if(e_player._in_coast_water > 0) {
     e_player._in_coast_water--;
   }
 }
-
 water_watch_player_frost_state() {
   self endon("death");
   self endon("disconnect");
@@ -238,13 +222,11 @@ water_watch_player_frost_state() {
     self wait_to_update_frost_state();
   }
 }
-
 wait_to_update_frost_state() {
   self endon("disconnect");
   self endon("update_frost_state");
   wait(0.1);
 }
-
 water_frost_bleed_out_reset() {
   self SetClientFlag(level._CF_PLAYER_WATER_FROST_REMOVE);
   wait_network_frame();
@@ -255,7 +237,6 @@ water_frost_bleed_out_reset() {
   wait_network_frame();
   wait_network_frame();
 }
-
 water_damage_zombie() {
   self endon("death");
   if(is_true(self.ignore_water_damage)) {
@@ -279,16 +260,14 @@ water_damage_zombie() {
     }
   }
 }
-
 wade_trigger() {
   while(1) {
     self waittill("trigger", who);
-    if(isplayer(who) && (!isDefined(who._wading_active) || !who._wading_active)) {
+    if(isPlayer(who) && (!isDefined(who._wading_active) || !who._wading_active)) {
       who thread wade_audio(self);
     }
   }
 }
-
 wade_audio(trigger) {
   self endon("death");
   self endon("disconnect");
@@ -302,23 +281,22 @@ wade_audio(trigger) {
     self thread monitor_player_movement();
     while(self IsTouching(trigger)) {
       if(self.is_wading) {
-        ent2 stopLoopSound(1);
+        ent2 StopLoopSound(1);
         ent1 playLoopSound("zmb_wade", 1);
       } else {
-        ent1 stopLoopSound(1);
+        ent1 StopLoopSound(1);
         ent2 playLoopSound("zmb_wade_idle", 1);
       }
       wait(.1);
     }
     self._wading_active = false;
-    ent1 stopLoopSound(1);
-    ent2 stopLoopSound(1);
+    ent1 StopLoopSound(1);
+    ent2 StopLoopSound(1);
     wait(1);
     ent1 Delete();
     ent2 Delete();
   }
 }
-
 monitor_player_movement() {
   self endon("disconnect");
   self endon("death");
@@ -334,7 +312,6 @@ monitor_player_movement() {
     }
   }
 }
-
 play_cold_dialog_while_inwater() {
   self notify("audio_coldwater_dupe");
   self endon("audio_coldwater_dupe");
@@ -357,7 +334,6 @@ play_cold_dialog_while_inwater() {
     wait(RandomIntRange(15, 30));
   }
 }
-
 water_watch_freeze() {
   self endon("death");
   self endon("disconnect");
@@ -384,7 +360,7 @@ water_watch_freeze() {
         if(time_in_water > 0) {
           time_in_water -= diff;
           if(time_in_water < 0) {
-            self stopLoopSound(2);
+            self StopLoopSound(2);
             time_in_water = 0;
           }
         }
@@ -395,14 +371,13 @@ water_watch_freeze() {
     nextTime = GetTime();
   }
 }
-
 water_player_freeze() {
   self endon("death");
   self endon("disconnect");
   self.is_frozen = true;
   self EnableInvulnerability();
   self FreezeControls(true);
-  self stopLoopSound(2);
+  self StopLoopSound(2);
   ice_trigger = spawn("trigger_damage", self.origin, 0, 15, 72);
   ice_trigger enablelinkto();
   ice_trigger linkto(self);
@@ -411,7 +386,6 @@ water_player_freeze() {
   self thread maps\_zombiemode_audio::create_and_play_dialog("general", "water_frozen");
   self thread water_player_free(ice_trigger);
 }
-
 water_player_free(ice_trigger) {
   self endon("death");
   self endon("disconnect");

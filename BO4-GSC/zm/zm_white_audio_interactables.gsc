@@ -84,7 +84,6 @@ function_445e3d3d() {
       zm_hms_util::function_e308175e(#"hash_6b6fadebd260d209" + level.var_b53764f7 + "_sfx", self.origin);
 
       iprintlnbold("<dev string:x4e>");
-
     }
   }
 }
@@ -152,7 +151,6 @@ function_a7f8aee6() {
     }
 
     iprintlnbold("<dev string:x6e>" + i);
-
   }
 }
 
@@ -581,7 +579,7 @@ function_93040a5d() {
 
 function_ce7e594b() {
   foreach(player in level.players) {
-    if(isplayer(self.attacker) && !isbot(self.attacker)) {
+    if(isPlayer(self.attacker) && !isbot(self.attacker)) {
       return true;
     }
   }

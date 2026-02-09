@@ -45,8 +45,7 @@ main() {
   //
 
   // need to add SO maps differently, need to save script vars
-  //--------
-  /*
+  //-------- /*
   TO DO:
   */
 
@@ -88,9 +87,7 @@ main() {
     level.specOpsSettings = specOpsSettings;
   }
 
-  //--------
-
-  /*
+  //-------- /*
   	missionSettings addLevel( "cargoship", false, "MAKE_THE_JUMP", true, "THE_PACKAGE" );
   	missionSettings addLevel( "coup", false, undefined, true );
   	missionSettings addLevel( "blackout", false, "COMPLETE_BLACKOUT", true, "THE_RESCUE" );
@@ -149,8 +146,8 @@ _nextmission(endgame) {
   levelIndex = undefined;
 
   setsaveddvar("ui_nextMission", "1");
-  setdvar("ui_showPopup", "0");
-  setdvar("ui_popupString", "");
+  setDvar("ui_showPopup", "0");
+  setDvar("ui_popupString", "");
 
   if(level.script == "ending") {
     level.script = "af_chase";
@@ -176,20 +173,19 @@ _nextmission(endgame) {
     level.missionSettings setLevelCompleted(levelIndex);
 
     if((level.player GetLocalPlayerProfileData("highestMission")) < levelindex + 1 && (level.script == "ending") && getdvarint("mis_cheat") == 0) {
-      setdvar("ui_sp_unlock", "0"); // set reset value to 0
-      setdvar("ui_sp_unlock", "1");
+      setDvar("ui_sp_unlock", "0"); // set reset value to 0
+      setDvar("ui_sp_unlock", "1");
     }
 
     PrintLn(">> SP PERCENT UPDATE - _nextmission()");
 
     completion_percentage = updateSpPercent();
 
-    /#	
     if(getdvarint("ui_debug_setlevel") != 0) {
       _setHighestMissionIfNotCheating(getdvarint("ui_debug_clearlevel"));
       level.missionSettings setLevelCompleted(max(0, getdvarint("ui_debug_clearlevel") - 1));
 
-      setdvar("ui_debug_setlevel", "");
+      setDvar("ui_debug_setlevel", "");
     }
 
     // Debug prints
@@ -225,7 +221,7 @@ _nextmission(endgame) {
 
   if(level.script == "airplane" || level.script == "ending") {
     setsaveddvar("ui_nextMission", "0");
-    //setdvar( "ui_victoryquote", "@VICTORYQUOTE_IW_THANKS_FOR_PLAYING" );
+    //setDvar( "ui_victoryquote", "@VICTORYQUOTE_IW_THANKS_FOR_PLAYING" );
     missionSuccess("trainer");
     return;
   } else {
@@ -281,8 +277,7 @@ getTotalpercentCompleteSP() {
   Hardened Progress	60% 	-25
   Veteran Progress	60%	-10
   Intel Items		21/45 -15
-  --------------------------------
-  Total			x%		-100
+  -------------------------------- Total			x%		-100
   Play Time			##:##:##
   */
 
@@ -452,7 +447,7 @@ setSoLevelCompleted(levelIndex) {
           player.eog_unlock_value = group.ref;
 
           if(getdvarint("solo_play") && (player == level.player))
-            setdvar("ui_last_opened_group", 0);
+            setDvar("ui_last_opened_group", 0);
         }
       }
 
@@ -522,14 +517,14 @@ setLevelCompleted(levelIndex) {
 _setHighestMissionIfNotCheating(mission) {
   //if( maps\_cheat::is_cheating() || flag( "has_cheated" ) )
   //	return;
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player SetLocalPlayerProfileData("highestMission", mission);
 }
 
 _setMissionDiffStringIfNotCheating(missionsDifficultyString) {
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player SetLocalPlayerProfileData("missionHighestDifficulty", missionsDifficultyString);
@@ -715,7 +710,7 @@ ui_debug_clearall() {
           player SetLocalPlayerProfileData(best_time_name, 0);
       }
 
-      setdvar("ui_debug_clearall", "");
+      setDvar("ui_debug_clearall", "");
     }
 
     wait 0.05;
@@ -743,22 +738,20 @@ coop_eog_summary() {
   thread maps\_ambient::use_eq_settings("specialop_fadeout", level.eq_mix_track);
   thread maps\_ambient::blend_to_eq_track(level.eq_mix_track, 10);
 
-  //----------------------------------------------
-  // Set all stat dvars so menu can display stats
-  //----------------------------------------------
-  foreach(player in level.players) {
+  //---------------------------------------------- // Set all stat dvars so menu can display stats
+  //---------------------------------------------- foreach(player in level.players) {
     // Names
-    setdvar("player_" + playerNum + "_name", player.playername);
+    setDvar("player_" + playerNum + "_name", player.playername);
 
     // Kills
-    setdvar("player_" + playerNum + "_kills", player.stats["kills"]);
+    setDvar("player_" + playerNum + "_kills", player.stats["kills"]);
 
     // Difficulty
     difficultyIndex = difficulty.size;
     difficulty[difficultyIndex] = player get_player_gameskill();
 
     assert(isDefined(diffString[difficulty[difficultyIndex]]));
-    setdvar("player_" + playerNum + "_difficulty", diffString[difficulty[difficultyIndex]]);
+    setDvar("player_" + playerNum + "_difficulty", diffString[difficulty[difficultyIndex]]);
 
     playerNum++;
   }
@@ -774,60 +767,57 @@ coop_eog_summary() {
   assertex(isDefined(level.challenge_end_time), "Special Ops missions need to ensure level.challenge_end_time is set before displaying stats.");
 
   seconds = (level.challenge_end_time - level.challenge_start_time) * 0.001;
-  setdvar("elapsed_mission_time", convert_to_time_string(seconds, true));
+  setDvar("elapsed_mission_time", convert_to_time_string(seconds, true));
 
   // callback that sets custom data for eog summary
   if(isDefined(level.eog_summary_callback)) {
-    setdvar("ui_eog_success_heading_player1", "");
-    setdvar("ui_eog_success_heading_player2", "");
+    setDvar("ui_eog_success_heading_player1", "");
+    setDvar("ui_eog_success_heading_player2", "");
     create_custom_eog_defaults();
     [[level.eog_summary_callback]]();
   }
 
   if(isDefined(level.custom_eog_summary) && level.custom_eog_summary)
-    setdvar("ui_eog_custom", 1);
+    setDvar("ui_eog_custom", 1);
   else
-    setdvar("ui_eog_custom", 0);
+    setDvar("ui_eog_custom", 0);
 
-  //----------------------------------------------
-  // Open summary menus on all players
-  //----------------------------------------------
-
-  // opens up end-of-game summary menu for player gameplay performance
+  //---------------------------------------------- // Open summary menus on all players
+  //---------------------------------------------- // opens up end-of-game summary menu for player gameplay performance
   if(is_coop()) {
     reset_eog_popup_dvars();
     // setup eog popups that shows stars earned, unlocks, and new best time
     // player 1
     if(isDefined(level.player.eog_firststar) && level.player.eog_firststar)
-      setdvar("ui_first_star_player1", level.player.eog_firststar);
+      setDvar("ui_first_star_player1", level.player.eog_firststar);
 
     if(isDefined(level.player.eog_newstar) && level.player.eog_newstar)
-      setdvar("ui_eog_player1_stars", level.player.eog_newstar_value);
+      setDvar("ui_eog_player1_stars", level.player.eog_newstar_value);
 
     if(isDefined(level.player.eog_unlock) && level.player.eog_unlock)
-      setdvar("ui_eog_player1_unlock", level.player.eog_unlock_value);
+      setDvar("ui_eog_player1_unlock", level.player.eog_unlock_value);
 
     if(isDefined(level.player.eog_besttime) && level.player.eog_besttime)
-      setdvar("ui_eog_player1_besttime", level.player.eog_besttime_value);
+      setDvar("ui_eog_player1_besttime", level.player.eog_besttime_value);
 
     if(isDefined(level.player.eog_noreward) && level.player.eog_noreward)
-      setdvar("ui_eog_player1_noreward", level.player.eog_noreward);
+      setDvar("ui_eog_player1_noreward", level.player.eog_noreward);
 
     // player 2
     if(isDefined(level.player2.eog_firststar) && level.player2.eog_firststar)
-      setdvar("ui_first_star_player2", level.player2.eog_firststar);
+      setDvar("ui_first_star_player2", level.player2.eog_firststar);
 
     if(isDefined(level.player2.eog_newstar) && level.player2.eog_newstar)
-      setdvar("ui_eog_player2_stars", level.player2.eog_newstar_value);
+      setDvar("ui_eog_player2_stars", level.player2.eog_newstar_value);
 
     if(isDefined(level.player2.eog_unlock) && level.player2.eog_unlock)
-      setdvar("ui_eog_player2_unlock", level.player2.eog_unlock_value);
+      setDvar("ui_eog_player2_unlock", level.player2.eog_unlock_value);
 
     if(isDefined(level.player2.eog_besttime) && level.player2.eog_besttime)
-      setdvar("ui_eog_player2_besttime", level.player2.eog_besttime_value);
+      setDvar("ui_eog_player2_besttime", level.player2.eog_besttime_value);
 
     if(isDefined(level.player2.eog_noreward) && level.player2.eog_noreward)
-      setdvar("ui_eog_player2_noreward", level.player2.eog_noreward);
+      setDvar("ui_eog_player2_noreward", level.player2.eog_noreward);
 
     wait 0.05;
     level.player openpopupmenu("coop_eog_summary");
@@ -837,16 +827,16 @@ coop_eog_summary() {
 
     // setup eog popups that shows stars earned, unlocks, and new best time
     if(isDefined(level.player.eog_firststar) && level.player.eog_firststar)
-      setdvar("ui_first_star_player1", level.player.eog_firststar);
+      setDvar("ui_first_star_player1", level.player.eog_firststar);
 
     if(isDefined(level.player.eog_newstar) && level.player.eog_newstar)
-      setdvar("ui_eog_player1_stars", level.player.eog_newstar_value);
+      setDvar("ui_eog_player1_stars", level.player.eog_newstar_value);
 
     if(isDefined(level.player.eog_unlock) && level.player.eog_unlock)
-      setdvar("ui_eog_player1_unlock", level.player.eog_unlock_value);
+      setDvar("ui_eog_player1_unlock", level.player.eog_unlock_value);
 
     if(isDefined(level.player.eog_besttime) && level.player.eog_besttime)
-      setdvar("ui_eog_player1_besttime", level.player.eog_besttime_value);
+      setDvar("ui_eog_player1_besttime", level.player.eog_besttime_value);
 
     wait 0.05;
     level.player openpopupmenu("sp_eog_summary");
@@ -922,13 +912,13 @@ use_custom_eog_default_kills(player) {
 }
 
 reset_eog_popup_dvars() {
-  setdvar("ui_eog_player1_stars", "");
-  setdvar("ui_eog_player1_unlock", "");
-  setdvar("ui_eog_player1_besttime", "");
-  setdvar("ui_eog_player1_noreward", "");
+  setDvar("ui_eog_player1_stars", "");
+  setDvar("ui_eog_player1_unlock", "");
+  setDvar("ui_eog_player1_besttime", "");
+  setDvar("ui_eog_player1_noreward", "");
 
-  setdvar("ui_eog_player2_stars", "");
-  setdvar("ui_eog_player2_unlock", "");
-  setdvar("ui_eog_player2_besttime", "");
-  setdvar("ui_eog_player2_noreward", "");
+  setDvar("ui_eog_player2_stars", "");
+  setDvar("ui_eog_player2_unlock", "");
+  setDvar("ui_eog_player2_besttime", "");
+  setDvar("ui_eog_player2_noreward", "");
 }

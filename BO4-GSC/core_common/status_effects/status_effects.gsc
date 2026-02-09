@@ -40,9 +40,9 @@ on_end_game() {
 }
 
 status_effects_init() {
-  setdvar(#"scr_status_effects_devgui_cmd", "<dev string:x38>");
-  setdvar(#"scr_status_effects_devgui_arg", 0);
-  setdvar(#"scr_status_effects_devgui_player", 0);
+  setDvar(#"scr_status_effects_devgui_cmd", "<dev string:x38>");
+  setDvar(#"scr_status_effects_devgui_arg", 0);
+  setDvar(#"scr_status_effects_devgui_player", 0);
 
   if(isdedicated()) {
     return;
@@ -155,8 +155,8 @@ status_effects_devgui_think() {
         break;
     }
 
-    setdvar(#"scr_status_effects_devgui_cmd", "<dev string:x38>");
-    setdvar(#"scr_status_effects_devgui_arg", "<dev string:x38>");
+    setDvar(#"scr_status_effects_devgui_cmd", "<dev string:x38>");
+    setDvar(#"scr_status_effects_devgui_arg", "<dev string:x38>");
     wait 0.5;
   }
 }

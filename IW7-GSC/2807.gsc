@@ -334,7 +334,7 @@ func_12821(var_0) {
 }
 
 func_12817(var_0, var_1, var_2) {
-  if(!isDefined(var_0.owner) || !isplayer(var_0.owner)) {
+  if(!isDefined(var_0.owner) || !isPlayer(var_0.owner)) {
     return;
   }
   var_0.owner thread scripts\mp\damagefeedback::updatedamagefeedback("hiticontrophysystem");
@@ -399,7 +399,7 @@ trophy_givedamagefeedback(var_0) {
     var_1 = "hitequip";
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_1);
   }
 }

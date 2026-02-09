@@ -747,7 +747,7 @@ function register_perks() {
 }
 
 function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor) {
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(victim) || !isDefined(attacker) || !isPlayer(attacker)) {
     return damage;
   }
   if(!isDefined(damage) || !isDefined(meansofdeath) || !isDefined(weapon)) {
@@ -772,7 +772,7 @@ function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, wea
 function cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
   assert(isDefined(victim));
   assert(isDefined(attacker));
-  assert(isplayer(victim));
+  assert(isPlayer(victim));
   if(damage <= 0) {
     return damage;
   }
@@ -781,7 +781,7 @@ function cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, h
     debug = 1;
   }
   final_damage = damage;
-  if(isplayer(attacker) && attacker hasperk("specialty_bulletdamage") && isprimarydamage(mod)) {
+  if(isPlayer(attacker) && attacker hasperk("specialty_bulletdamage") && isprimarydamage(mod)) {
     if(victim hasperk("specialty_armorvest") && !isheaddamage(hitloc)) {
       if(debug) {
         println(((("" + victim.name) + "") + attacker.name) + "");

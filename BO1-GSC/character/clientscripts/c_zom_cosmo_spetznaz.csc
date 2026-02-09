@@ -1,6 +1,6 @@
 /************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_zom_cosmo_spetznaz.csc
+ * Script: character\clientscripts\c_zom_cosmo_spetznaz\.csc
 ************************************************************/
 
 matches_me() {

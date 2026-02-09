@@ -1357,7 +1357,7 @@ func_6574(var_0) {
     return 1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(isDefined(var_0.health) && var_0.health < var_0.maxhealth) {
       return 1;
     }

@@ -8,8 +8,8 @@
 
 main() {
   level.tweakfile = 1;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 15);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 15);
   setsaveddvar("r_lightGridEnableTweaks", 1);
   setsaveddvar("r_lightGridIntensity", 1.2);
   setsaveddvar("r_lightGridContrast", 0.6);
@@ -41,29 +41,29 @@ vision_set_change(str_vision_set) {
   switch (str_vision_set) {
     case "sp_karma2_mall_interior":
       n_vs_time = 2;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 10);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 10);
       break;
     case "sp_karma2_clubexit":
       n_vs_time = 2;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 4);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 4);
       break;
     case "sp_karma2_sundeck":
       n_vs_time = 2;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       break;
     case "sp_karma2_defalco_walk":
       n_vs_time = 2;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       setsaveddvar("r_lightTweakSunLight", 15);
       break;
     case "sp_karma2_end":
       n_vs_time = 2;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       break;
   }
 

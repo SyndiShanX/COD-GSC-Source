@@ -4,66 +4,63 @@
 // scripter: 		(initial clientside work - laufer)
 //
 
-#include clientscripts\mp\_utility; 
+#include clientscripts\mp\_utility;
 #include clientscripts\mp\_ambientpackage;
 
-main()
-{
-	//************************************************************************************************
-	//                                              Ambient Packages
-	//************************************************************************************************
+main() {
+  //************************************************************************************************
+  //Ambient Packages
+  //************************************************************************************************
 
-	//declare an ambientpackage, and populate it with elements
-	//mandatory parameters are <package name>, <alias name>, <spawnMin>, <spawnMax>
-	//followed by optional parameters <distMin>, <distMax>, <angleMin>, <angleMax>
-	
-	//***************
-	//Outdoor
-	//***************
+  //declare an ambientpackage, and populate it with elements
+  //mandatory parameters are <package name>, <alias name>, <spawnMin>, <spawnMax>
+  //followed by optional parameters <distMin>, <distMax>, <angleMin>, <angleMax>
 
-		declareAmbientpackage( "outdoor_pkg" );	
-		
-		declareAmbientpackage( "cave_pkg" );	
-		
-		declareAmbientpackage( "partial_pkg" );
-		
-		declareAmbientpackage( "full_pkg" );
-		
+  //***************
+  //Outdoor
+  //***************
 
-	//************************************************************************************************
-	//                                       ROOMS
-	//************************************************************************************************
+  declareAmbientpackage("outdoor_pkg");
 
-	//explicitly activate the base ambientpackage, which is used when not touching any ambientPackageTriggers
-	//the other trigger based packages will be activated automatically when the player is touching them
-	//the same pattern is followed for setting up ambientRooms
+  declareAmbientpackage("cave_pkg");
 
-	//***************
-	//Outdoor
-	//*************** 
+  declareAmbientpackage("partial_pkg");
 
-		declareAmbientRoom( "outdoor_room" );	
-			setAmbientRoomReverb( "outdoor_room", "mountains", .8, 1 );
-			setAmbientRoomtone( "outdoor_room", "bg_steady" );	
-			
-		declareAmbientRoom( "cave_room" );
-			setAmbientRoomReverb( "cave_room", "stoneroom", 1, 1);
-			setAmbientRoomtone( "cave_room", "cave_int" );
-			
-		declareAmbientRoom( "partial_room" );
-			setAmbientRoomReverb( "partial_room", "wood_room", 1, 1);
-			setAmbientRoomtone( "partial_room", "partial" );
-			
-		declareAmbientRoom( "full_room" );
-			setAmbientRoomReverb( "full_room", "wood_room", 1, 1);
-			setAmbientRoomtone( "full_room", "full" );
+  declareAmbientpackage("full_pkg");
 
 
-	//************************************************************************************************
-	//                                      ACTIVATE DEFAULT AMBIENT SETTINGS
-	//************************************************************************************************
-	
-		activateAmbientPackage( 0, "outdoor_pkg", 0 );
-		activateAmbientRoom( 0, "outdoor_room", 0 );	
+  //************************************************************************************************
+  // ROOMS
+  //************************************************************************************************
+
+  //explicitly activate the base ambientpackage, which is used when not touching any ambientPackageTriggers
+  //the other trigger based packages will be activated automatically when the player is touching them
+  //the same pattern is followed for setting up ambientRooms
+
+  //***************
+  //Outdoor
+  //***************
+
+  declareAmbientRoom("outdoor_room");
+  setAmbientRoomReverb("outdoor_room", "mountains", .8, 1);
+  setAmbientRoomtone("outdoor_room", "bg_steady");
+
+  declareAmbientRoom("cave_room");
+  setAmbientRoomReverb("cave_room", "stoneroom", 1, 1);
+  setAmbientRoomtone("cave_room", "cave_int");
+
+  declareAmbientRoom("partial_room");
+  setAmbientRoomReverb("partial_room", "wood_room", 1, 1);
+  setAmbientRoomtone("partial_room", "partial");
+
+  declareAmbientRoom("full_room");
+  setAmbientRoomReverb("full_room", "wood_room", 1, 1);
+  setAmbientRoomtone("full_room", "full");
+
+  //************************************************************************************************
+  //ACTIVATE DEFAULT AMBIENT SETTINGS
+  //************************************************************************************************
+
+  activateAmbientPackage(0, "outdoor_pkg", 0);
+  activateAmbientRoom(0, "outdoor_room", 0);
 }
-

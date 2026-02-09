@@ -79,7 +79,7 @@ function_c0862b9e() {
   while(true) {
     waitresult = self.var_6522085c waittill(#"damage");
 
-    if(!isDefined(waitresult.attacker) || !isplayer(waitresult.attacker)) {
+    if(!isDefined(waitresult.attacker) || !isPlayer(waitresult.attacker)) {
       continue;
     }
 

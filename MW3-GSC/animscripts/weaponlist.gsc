@@ -56,7 +56,6 @@ _id_0CD0() {
     self._id_0CD1 = weaponclipsize(self.weapon);
   } else {
     self._id_0CD1 = weaponclipsize(self.weapon);
-
   }
   if(self._id_0CD1 <= 0) {
     return 0;
@@ -68,15 +67,12 @@ _id_0CD0() {
 _id_0CD4(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_2)) {
     var_2 = 3.0;
-
   }
   if(!isDefined(var_3)) {
     var_2 = 1;
-
   }
   if(!isDefined(var_4)) {
     var_4 = "rifle";
-
   }
   var_0 = tolower(var_0);
   anim._id_0CD5[var_0]["type"] = var_1;

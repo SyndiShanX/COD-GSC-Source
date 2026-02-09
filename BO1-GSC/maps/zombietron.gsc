@@ -32,13 +32,12 @@ main() {
   maps\createart\zombietron_art::main();
   setDvar("scr_expDeathMayMoveCheck", "off");
 }
-
 onPlayerConnect() {
   self notify("onPlayerConnect");
   self endon("onPlayerConnect");
   for(;;) {
     level waittill("connecting", player);
-    player.entity_num = player getEntityNumber();
+    player.entity_num = player GetEntityNumber();
     player thread onPlayerSpawned();
     player thread onPlayerDisconnect();
     player thread maps\_zombietron_pickups::update_drop_bomb();
@@ -47,15 +46,12 @@ onPlayerConnect() {
     player.stats["score"] = 0;
   }
 }
-
 cheat_Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   return 0;
 }
-
 onPlayerDisconnect() {
   self waittill("disconnect");
 }
-
 onPlayerSpawned() {
   self endon("disconnect");
   for(;;) {
@@ -103,7 +99,6 @@ onPlayerSpawned() {
     }
   }
 }
-
 precache_shaders() {
   PreCacheShader("cinematic");
   PrecacheShader("zom_icon_community_pot");
@@ -112,7 +107,6 @@ precache_shaders() {
   PrecacheShader("zom_pack_a_punch_battery_icon");
   PrecacheShader("text_box");
 }
-
 precache_models() {
   precachemodel("char_ger_zombieeye");
   PrecacheModel("zombie_z_money_icon");
@@ -127,12 +121,10 @@ precache_models() {
   PrecacheModel("c_zom_red_guy_fb");
   PrecacheModel("c_zom_yellow_guy_fb");
 }
-
 init_shellshocks() {
   level.player_killed_shellshock = "zombie_death";
   PrecacheShellshock(level.player_killed_shellshock);
 }
-
 init_strings() {}
 init_sounds() {
   add_sound("end_of_round", "mus_zmb_round_over");
@@ -147,7 +139,6 @@ init_sounds() {
   add_sound("door_slide_open", "zmb_door_slide_open");
   add_sound("door_rotate_open", "zmb_door_slide_open");
 }
-
 init_levelvars() {
   level.dogshit = 0;
   level.is_zombie_level = true;
@@ -243,25 +234,23 @@ init_levelvars() {
   level.default_ai_limit = 32;
   SetAILimit(level.default_ai_limit);
   if(getDvar(#"zombie_dog_animset") == "") {
-    SetDvar("zombie_dog_animset", "zombie");
+    setDvar("zombie_dog_animset", "zombie");
   }
 }
-
 init_dvars() {
   setSavedDvar("fire_world_damage", "0");
   setSavedDvar("fire_world_damage_rate", "0");
   setSavedDvar("fire_world_damage_duration", "0");
   SetSavedDvar("sv_restrictedtempents", "1");
 }
-
 init_flags() {}
 init_fx() {
   maps\_zombietron_ai_ape::precache_ape_fx();
   maps\_zombietron_ai_dog::precache_dog_fx();
   maps\_zombietron_ai_engineer::precache_engineer_fx();
 }
-
 #using_animtree("generic_human");
+
 init_standard_zombie_anims() {
   level.scr_anim["zombie"]["death1"] = % ai_zombie_death_v1;
   level.scr_anim["zombie"]["death2"] = % ai_zombie_death_v2;
@@ -369,7 +358,6 @@ init_standard_zombie_anims() {
   }
   level._zombie_run_taunt["zombie"] = [];
 }
-
 init_animscripts() {
   animscripts\zombie_init::firstInit();
   animscripts\zombie_dog_init::initDogAnimations();
@@ -386,7 +374,6 @@ init_animscripts() {
   maps\_zombietron_ai_quad::init_quad_zombie_anims();
   maps\_zombietron_ai_engineer::init_engineer_zombie_anims();
 }
-
 force_game_controller_bindings() {
   level.dogshit++;
   level.dogshit = level.dogshit & 7;
@@ -395,7 +382,6 @@ force_game_controller_bindings() {
     players[i] setclientflagasval(level.dogshit);
   }
 }
-
 menu_message(state, item) {
   if(state == "close") {
     switch (item) {
@@ -405,5 +391,4 @@ menu_message(state, item) {
     }
   }
 }
-
 zombie_devgui_think() {}

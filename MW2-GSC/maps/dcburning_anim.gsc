@@ -22,8 +22,7 @@ anims() {
   level.scr_anim["generic"]["airport_civ_dying_groupB_wounded"] = % airport_civ_dying_groupB_wounded;
   level.scr_anim["generic"]["airport_civ_dying_groupB_wounded_death"] = % airport_civ_dying_groupB_wounded_death;
 
-  /*-----------------------
-  TRENCH ANIMS
+  /*----------------------- TRENCH ANIMS
   -------------------------*/
   level.scr_anim["generic"]["favela_run_and_wave"] = % favela_run_and_wave;
   level.scr_anim["generic"]["civilian_run_2_crawldeath"] = % civilian_run_2_crawldeath;
@@ -32,8 +31,7 @@ anims() {
   level.scr_anim["generic"]["roadkill_cover_radio_soldier3"][0] = % roadkill_cover_radio_soldier3;
   level.scr_anim["generic"]["roadkill_cover_radio_soldier2"][0] = % roadkill_cover_radio_soldier2;
 
-  /*-----------------------
-  DRONE RUN CYCLES
+  /*----------------------- DRONE RUN CYCLES
   -------------------------*/
   //default
   //run_lowready_F_relative
@@ -64,8 +62,7 @@ anims() {
   //	civilian_run_2_crawldeath
   //	death_explosion_run_F_v1
 
-  /*-----------------------
-  SEAKNIGHT LOADS/UNLOADS
+  /*----------------------- SEAKNIGHT LOADS/UNLOADS
   -------------------------*/
   level.scr_anim["generic"]["ch46_load_1"] = % ch46_load_1;
   level.scr_anim["generic"]["ch46_load_2"] = % ch46_load_2;
@@ -74,8 +71,7 @@ anims() {
 
   level.scr_anim["generic"]["ch46_unload_idle"][0] = % exposed_crouch_idle_alert_v1;
 
-  /*-----------------------
-  ROOFTOP
+  /*----------------------- ROOFTOP
   -------------------------*/
   level.scr_anim["generic"]["leader_blackhawk_getin"] = % blackout_bh_evac_2;
   level.scr_anim["generic"]["leader_blackhawk_idle"][0] = % blackout_bh_evac_2_idle;
@@ -89,15 +85,13 @@ anims() {
   level.scr_anim["generic"]["dcburning_elevator_corpse_bump_A"] = % dcburning_elevator_corpse_bump_A;
   level.scr_anim["generic"]["dcburning_elevator_corpse_bump_B"] = % dcburning_elevator_corpse_bump_B;
 
-  /*-----------------------
-  SLAMRAAM TARP
+  /*----------------------- SLAMRAAM TARP
   -------------------------*/
   level.scr_anim["operator"]["pulldown"] = % gulag_slamraam_tarp_pull_guy2_v1;
   level.scr_anim["operator"]["idle"][0] = % gulag_slamraam_tarp_idle_guy2_v1;
   level.scr_anim["puller"]["pulldown"] = % gulag_slamraam_tarp_pull_guy1_v1;
 
-  /*-----------------------
-  LITTLEBIRD RIDER DEATHS
+  /*----------------------- LITTLEBIRD RIDER DEATHS
   -------------------------*/
   level.scr_anim["generic"]["littlebird_rider_death"] = % fastrope_fall;
 
@@ -111,8 +105,7 @@ anims() {
   level.scr_anim["generic"]["AT4_idle"][0] = % corner_standr_alert_idle;
   level.scr_anim["generic"]["launchfacility_a_at4_fire"] = % launchfacility_a_at4_fire;
 
-  /*-----------------------
-  PATROL
+  /*----------------------- PATROL
   -------------------------*/
   level.scr_anim["generic"]["patrol_walk"] = % patrol_bored_patrolwalk;
   level.scr_anim["generic"]["patrol_walk_twitch"] = % patrol_bored_patrolwalk_twitch;
@@ -120,8 +113,7 @@ anims() {
   level.scr_anim["generic"]["patrol_start"] = % patrol_bored_2_walk;
   level.scr_anim["generic"]["patrol_turn180"] = % patrol_bored_2_walk_180turn;
 
-  /*-----------------------
-  ENEMY JAVELIN, STINGER, SPOTTERS
+  /*----------------------- ENEMY JAVELIN, STINGER, SPOTTERS
   -------------------------*/
   level.scr_anim["generic"]["javelin_arrival"] = % covercrouch_run_in_M;
   level.scr_anim["generic"]["javelin_idle_start"] = % javelin_idle_A;
@@ -164,8 +156,7 @@ anims() {
   level.scr_anim["generic"]["enemy_spotter_prone_react"] = % prone_2_stand;
   level.scr_anim["generic"]["enemy_spotter_prone_death"] = % exposed_crouch_death_fetal;
 
-  /*-----------------------
-  ELEVATOR IDLES
+  /*----------------------- ELEVATOR IDLES
   -------------------------*/
   level.scr_anim["generic"]["node_elevator_cover_right"][0] = % corner_standR_alert_idle;
   level.scr_anim["generic"]["node_elevator_cover_right"][1] = % corner_standR_alert_twitch01;
@@ -174,15 +165,13 @@ anims() {
   level.scr_anim["generic"]["node_elevator_cover_right"][4] = % corner_standR_alert_twitch05;
   level.scr_anim["generic"]["node_elevator_cover_right"][5] = % corner_standR_alert_twitch06;
 
-  /*-----------------------
-  COMMERCE RAPPEL
+  /*----------------------- COMMERCE RAPPEL
   -------------------------*/
   level.scr_anim["generic"]["traverse_wallhop"] = % traverse_wallhop;
   level.scr_anim["generic"]["oilrig_rappel_2_crouch"] = % oilrig_rappel_2_crouch;
   addNotetrack_customFunction("generic", "over_solid", maps\dcburning::rappel_window_exploder, "oilrig_rappel_2_crouch");
 
-  /*-----------------------
-  BUNKER
+  /*----------------------- BUNKER
   -------------------------*/
   level.scr_anim["generic"]["DC_Burning_bunker_sit_idle"][0] = % DC_Burning_bunker_sit_idle;
 
@@ -276,8 +265,7 @@ anims() {
 }
 
 dialogue() {
-  /*-----------------------
-  BUNKER
+  /*----------------------- BUNKER
   -------------------------*/
   //Marine 1	Give him some water and keep him still.	
   level.scr_sound["dcburn_gm1_keepstill"] = "dcburn_gm1_keepstill";
@@ -315,8 +303,7 @@ dialogue() {
   //Rangers: Hooah!
   level.scr_sound["dcburn_hoh_1"] = "dcburn_hoh_1";
 
-  /*-----------------------
-  TRENCHES NAGGING
+  /*----------------------- TRENCHES NAGGING
   -------------------------*/
   //Cpl. Dunn	11	4	Ramirez! Stay in the trenches, you're gonna get your ass blown off!	
   level.scr_sound["generic"]["dcburn_cpd_stayintrench"] = "dcburn_cpd_stayintrench";
@@ -330,8 +317,7 @@ dialogue() {
   //Cpl. Dunn	11	7	Ramirez, what are you doing? Stick to the trenches!	
   level.scr_sound["generic"]["dcburn_cpd_wheregoing"] = "dcburn_cpd_wheregoing";
 
-  /*-----------------------
-  TRENCHES - JAVELIN ALERTS
+  /*----------------------- TRENCHES - JAVELIN ALERTS
   -------------------------*/
   //Marine 2	Incoming!	
   level.scr_sound["dcburn_javelins_incoming_00"] = "dcburn_gm2_incoming";
@@ -339,8 +325,7 @@ dialogue() {
   //Marine 1	Incoming! Incoming! Take cover!!!	
   level.scr_sound["dcburn_javelins_incoming_01"] = "dcburn_gm1_takecover";
 
-  /*-----------------------
-  TRENCHES - GENERAL
+  /*----------------------- TRENCHES - GENERAL
   -------------------------*/
   //Overlord HQ Radio Voice	All callsigns be advised...eyes on Commerce confirms enemy activity. Mortars, rockets...heavy small arms fire. Stay frosty.	
   level.scr_radio["dcburn_hqr_commerceconfirms"] = "dcburn_hqr_commerceconfirms";
@@ -383,8 +368,7 @@ dialogue() {
   //Cpl. Dunn	I see foot mobiles...12 o'clock, 100 meters!	
   level.scr_radio["dcburn_cpd_footmobiles"] = "dcburn_cpd_footmobiles";
 
-  /*-----------------------
-  TRENCHES - MOVE IN WHILE LAV IS SUPPRESSING NAGS
+  /*----------------------- TRENCHES - MOVE IN WHILE LAV IS SUPPRESSING NAGS
   -------------------------*/
   //Sgt. Macey	All right! RCT One's LAV has them suppressed! Get ready to move on my mark!
   level.scr_sound["generic"]["dcburn_mcy_humveesupp"] = "dcburn_mcy_humveesupp";
@@ -416,8 +400,7 @@ dialogue() {
   //Sgt. Macey	Get your ass out of the killzone and into the target building, NOW!	
   level.scr_radio["dcburn_mcy_intotargbuilding"] = "dcburn_mcy_intotargbuilding";
 
-  /*-----------------------
-  COMMERCE - LOBBY TO ELEVATOR NAGS
+  /*----------------------- COMMERCE - LOBBY TO ELEVATOR NAGS
   -------------------------*/
   //Sgt. Foley	Use your grenade launchers!	
   level.scr_sound["generic"]["dcburn_mcy_grenadelaunch"] = "dcburn_mcy_grenadelaunch";
@@ -437,8 +420,7 @@ dialogue() {
   //Sgt. Macey Move up! Move up!	
   level.scr_sound["generic"]["dcburn_mcy_lobby_move_nag_04"] = "dcburn_mcy_moveup2";
 
-  /*-----------------------
-  COMMERCE ELEVATOR BOTTOM TO ELEVATOR TOP
+  /*----------------------- COMMERCE ELEVATOR BOTTOM TO ELEVATOR TOP
   -------------------------*/
   //Sgt. Macey	Overlord, this is Hunter Two-One, be advised, we're inside and proceeding to the upper floors.	
   level.scr_radio["dcburn_mcy_upperfloors"] = "dcburn_mcy_upperfloors";
@@ -452,8 +434,7 @@ dialogue() {
   //Overlord HQ Radio Voice: Solid copy, Two-One.	
   level.scr_radio["dcburn_hqr_solidcopy"] = "dcburn_hqr_solidcopy";
 
-  /*-----------------------
-  COMMERCE COURTYARD - HEADING TO MEZZANINE
+  /*----------------------- COMMERCE COURTYARD - HEADING TO MEZZANINE
   -------------------------*/
   //Sgt. Macey: Overlord this is Hunter Two-One. Proceeding to the mezzanine. Tell the LAV from RCT One to hold their fire, over.
   level.scr_radio["dcburn_mcy_tomezzanine"] = "dcburn_mcy_mezzanine";
@@ -467,8 +448,7 @@ dialogue() {
   //Overlord HQ Radio Voice: Roger that, Two-One.	
   level.scr_radio["dcburn_hqr_rogerthat"] = "dcburn_hqr_rogerthat";
 
-  /*-----------------------
-  COMMERCE COURTYARD - UP PAVLOV'S RAMP
+  /*----------------------- COMMERCE COURTYARD - UP PAVLOV'S RAMP
   -------------------------*/
 
   //That's the frickin' Capitol Building!	
@@ -501,8 +481,7 @@ dialogue() {
   //Overlord HQ Radio Voice	Copy that, Two-One.	
   level.scr_radio["dcburn_hqr_copythat"] = "dcburn_hqr_copythat";
 
-  /*-----------------------
-  COMMERCE ELEVATOR TOP TO CROWS NEST
+  /*----------------------- COMMERCE ELEVATOR TOP TO CROWS NEST
   -------------------------*/
   //Sgt. Macey: Overlord, We're on the fifth floor, proceeding to the southwest corner.
   level.scr_radio["dcburn_mcy_onfifth"] = "dcburn_mcy_swcorner";
@@ -525,8 +504,7 @@ dialogue() {
   //Sgt. Macey: All Hunter units, I have a visual on the enemy crow's nest at the southwest corner. Move forward and clear it out.
   level.scr_radio["dcburn_mcy_visoncrow"] = "dcburn_mcy_viscrowsnest";
 
-  /*-----------------------
-  CROWS NEST
+  /*----------------------- CROWS NEST
   -------------------------*/
   //Sgt. Macey: Overlord this is Hunter Two-One. We've secured the enemy crow's nest on the southwest corner.
   level.scr_sound["generic"]["dcburn_mcy_seccrowsnest"] = "dcburn_mcy_seccrowsnest";
@@ -546,8 +524,7 @@ dialogue() {
   //Sgt. Macey	Ramirez, scan for targets to the south of the Washington Monument!		
   level.scr_sound["generic"]["dcburn_mcy_scanfortargets"] = "dcburn_mcy_scanfortargets";
 
-  /*-----------------------
-  CROWS EVAC GETTING SCHWACKED NAGS
+  /*----------------------- CROWS EVAC GETTING SCHWACKED NAGS
   -------------------------*/
   //Evac Site Radio Voice	We're taking fire at the Washington Monument! We are down to 80 percent combat effectiveness! Request immediate sniper fire on targets west of the Monument, over!	
   level.scr_radio["dcburn_evc_damage_00"] = "dcburn_evc_80percenteffective";
@@ -564,8 +541,7 @@ dialogue() {
   //Evac Site Radio Voice	All callsigns, this is the Washington Monument evac site!!! Be advised, our situation is critical!!! We can't take much more of this!!! We need more time to get these civvies outta here!!!	
   level.scr_radio["dcburn_evc_damage_fail"] = "dcburn_evc_civviesouttahere";
 
-  /*-----------------------
-  CROWS GET ON BARRETT NAGS
+  /*----------------------- CROWS GET ON BARRETT NAGS
   -------------------------*/
   //Sgt. Macey We got foot-mobiles at the World War Two Memorial. Ramirez, get on the Barrett and take 'em out!		
   level.scr_sound["generic"]["barret_nag_0"] = "dcburn_mcy_ww2mem";
@@ -576,8 +552,7 @@ dialogue() {
   //Sgt. Macey Ramirez - get your ass on that sniper rifle. Move!		
   level.scr_sound["generic"]["barret_nag_2"] = "dcburn_mcy_getonrifle";
 
-  /*-----------------------
-  CROWS SHOOT BARRETT NAGS
+  /*----------------------- CROWS SHOOT BARRETT NAGS
   -------------------------*/
   //Sgt. Macey	21	6	The evac site is still taking heavy fire! Ramirez - target all enemy foot-mobiles.		
   level.scr_sound["generic"]["barret_shoot_nag_0"] = "dcburn_mcy_targetenemy";
@@ -585,8 +560,7 @@ dialogue() {
   //Sgt. Macey	21	7	Ramirez! Target the enemy infantry! Take 'em out!		
   level.scr_sound["generic"]["barret_shoot_nag_1"] = "dcburn_mcy_targetinfantry";
 
-  /*-----------------------
-  CROWS STAY IN CROWSNEST NAGS
+  /*----------------------- CROWS STAY IN CROWSNEST NAGS
   -------------------------*/
   //Sgt. Macey	21	8	Ramirez, get back here! We gotta provide support to the evac site before they get overrun!		
   level.scr_sound["generic"]["stay_in_nest_nag_0"] = "dcburn_mcy_beforeoverrun";
@@ -597,8 +571,7 @@ dialogue() {
   //Sgt. Macey	21	10	Ramirez, return to your post! We gotta cover the evac site!		
   level.scr_sound["generic"]["stay_in_nest_nag_2"] = "dcburn_mcy_returntopost";
 
-  /*-----------------------
-  CROWS NEST - HOSTILES INSIDE PERIMETER NAGS
+  /*----------------------- CROWS NEST - HOSTILES INSIDE PERIMETER NAGS
   -------------------------*/
   //Overlord (HQ Radio) Hunter Two-One be advised, you have enemy foot mobiles converging on your position...stay frosty.		
   level.scr_radio["dcburn_hqr_stayfrosty"] = "dcburn_hqr_stayfrosty";
@@ -612,8 +585,7 @@ dialogue() {
   //Cpl. Dunn	22	4	Taking fire! Taking fire! Foot mobiles inside the perimeter! 	
   level.scr_sound["generic"]["dcburn_cpd_takingfire"] = "dcburn_cpd_takingfire";
 
-  /*-----------------------
-  CROWS NEST - ENEMY ARMOR
+  /*----------------------- CROWS NEST - ENEMY ARMOR
   -------------------------*/
   //Overlord (HQ Radio) Hunter Two-One, recommend you clear outta there...I see a mass of foot-mobiles converging on your position…		
   level.scr_radio["dcburn_hqr_clearout"] = "dcburn_hqr_clearout";
@@ -630,8 +602,7 @@ dialogue() {
   //Cpl. Dunn: Hooah!
   //level.scr_sound[ "dcburn_hoh_2" ] = "dcburn_hoh_2";
 
-  /*-----------------------
-  CROWS NEST - FIND ROCKETS NAGS
+  /*----------------------- CROWS NEST - FIND ROCKETS NAGS
   -------------------------*/
   //Sgt. Macey	Ramirez, use some of this ordnance to take out the enemy vehicles! Move!	
   level.scr_sound["generic"]["dcburn_mcy_useordnance"] = "dcburn_mcy_useordnance";
@@ -648,8 +619,7 @@ dialogue() {
   //Sgt. Macey	24	7	Use whatever enemy ordnance you can find and take down those helis and armor. Move!		
   level.scr_sound["generic"]["rocket_nag_3"] = "dcburn_mcy_whateveryoufind";
 
-  /*-----------------------
-  CROWS NEST - USE ROCKETS NAGS
+  /*----------------------- CROWS NEST - USE ROCKETS NAGS
   -------------------------*/
   //Sgt. Macey	25	2	Ramirez! Take out those vehicles!!! The evac site is taking heavy fire!!!		
   level.scr_sound["generic"]["rocket_shoot_nag_0"] = "dcburn_mcy_heavyfire";
@@ -660,8 +630,7 @@ dialogue() {
   //Sgt. Macey	25	1	The evac site is getting overrun! Take out the enemy vehicles!		
   level.scr_sound["generic"]["rocket_shoot_nag_2"] = "dcburn_mcy_takeoutveh";
 
-  /*-----------------------
-  CROWS NEST TO ROOF
+  /*----------------------- CROWS NEST TO ROOF
   -------------------------*/
 
   //Overlord (HQ Radio)	32	7	Atlas Two-Six is now away. All remaining evacuation units, execute level three evacuation protocols. Urgent surgicals only.	
@@ -703,8 +672,7 @@ dialogue() {
   //Sgt. Foley We're out of time! Go!	
   level.scr_sound["generic"]["dcburn_mcy_outoftimego"] = "dcburn_mcy_outoftimego";
 
-  /*-----------------------
-  CROWS NEST TO ROOF - GET TO BREACH DOOR
+  /*----------------------- CROWS NEST TO ROOF - GET TO BREACH DOOR
   -------------------------*/
   //Sgt. Macey	26	4	Get to the roof and RV with the SEAL Team! Move! Move!		
   level.scr_sound["generic"]["dcburn_mcy_rvwithseals"] = "dcburn_mcy_rvwithseals";
@@ -721,8 +689,7 @@ dialogue() {
   //Sgt. Macey	Ramirez, let's go! Hostiles are overrunning this position!	
   level.scr_sound["generic"]["dcburn_mcy_overrunningpos"] = "dcburn_mcy_overrunningpos";
 
-  /*-----------------------
-  CROWS NEST TO ROOF - GET TO STAIRWELL
+  /*----------------------- CROWS NEST TO ROOF - GET TO STAIRWELL
   -------------------------*/
   //Sgt. Macey	26	5	We're outnumbered - we need to get to the roof ASAP!!!! Go! Go! Go!		
   level.scr_sound["generic"]["dcburn_mcy_outnumbered"] = "dcburn_mcy_outnumbered";
@@ -736,8 +703,7 @@ dialogue() {
   //Sgt. Macey	We're getting overrun! Everyone to the roof! Now!	
   level.scr_sound["generic"]["dcburn_mcy_gettingoverrun"] = "dcburn_mcy_gettingoverrun";
 
-  /*-----------------------
-  HELI RIDE - MINIGUN NAGS
+  /*----------------------- HELI RIDE - MINIGUN NAGS
   -------------------------*/
   //Sgt. Macey	27	5	Ramirez, get on the minigun!!!		
   level.scr_sound["generic"]["dcburn_mcy_getonminigun"] = "dcburn_mcy_getonminigun";
@@ -757,8 +723,7 @@ dialogue() {
   //Sgt. Macey	Ramirez!!! You're polishing brass on the Titanic! Get on the minigun, let's go!!!	
   level.scr_sound["generic"]["dcburn_mcy_brassontitanic"] = "dcburn_mcy_brassontitanic";
 
-  /*-----------------------
-  HELI RIDE BG CHATTER
+  /*----------------------- HELI RIDE BG CHATTER
   -------------------------*/
 
   //Overlord (HQ Radio)	32	1	First wave of civilian transports is away. Reaver Two, proceed with second stage evacation. Litter urgent personnel only.	
@@ -782,8 +747,7 @@ dialogue() {
   //Ranger 1	32	11	Get your men on that transport now, WE ARE LEAVING!!!	
   level.scr_radio["dcburn_ar1_weareleaving"] = "dcburn_ar1_weareleaving";
 
-  /*-----------------------
-  HELI RIDE
+  /*----------------------- HELI RIDE
   -------------------------*/
 
   //Sgt. Foley Overlord, Dagger Two-Two is hit and going down!

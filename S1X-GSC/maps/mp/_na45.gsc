@@ -73,7 +73,7 @@ m990_hit(weapon, hit_pos, hit_normal, hit_ent, hit_dir, part_name) {
 
     self.primer = spawn_tag_origin();
 
-    if(isDefined(hit_ent) && (IsPlayer(hit_ent) || IsAgent(hit_ent))) {
+    if(isDefined(hit_ent) && (isPlayer(hit_ent) || IsAgent(hit_ent))) {
       self.primer.origin = hit_pos + hit_dir;
       self.primer.angles = VectorToAngles(hit_dir * -1);
     } else {
@@ -87,7 +87,7 @@ m990_hit(weapon, hit_pos, hit_normal, hit_ent, hit_dir, part_name) {
 
     if(isDefined(hit_ent)) {
       primer_link_ent = hit_ent;
-      if(IsPlayer(hit_ent) || IsAgent(hit_ent)) {
+      if(isPlayer(hit_ent) || IsAgent(hit_ent)) {
         if(IsAlive(hit_ent)) {
           self thread transfer_primer_to_corpse(hit_ent, part_name);
         } else {

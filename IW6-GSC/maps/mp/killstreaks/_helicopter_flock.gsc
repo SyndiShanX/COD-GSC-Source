@@ -260,7 +260,6 @@ monitorKills() {
     self.killCount++;
     level.heli_flock_victims[level.heli_flock_victims.size] = player;
   }
-
 }
 
 startLbFiring1() {
@@ -358,7 +357,7 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
     }
   }
 
-  if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
+  if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
     attacker.owner maps\mp\gametypes\_damagefeedback::updateDamageFeedback("helicopter");
   }
 

@@ -45,7 +45,6 @@ init() {
   thread setup_firesale_audio();
   thread setup_bonfiresale_audio();
 }
-
 init_powerups() {
   flag_init("zombie_drop_powerups");
   flag_set("zombie_drop_powerups");
@@ -77,7 +76,6 @@ init_powerups() {
   level thread powerup_hud_overlay();
   level thread solo_powerup_hud_overlay();
 }
-
 powerup_hud_overlay() {
   level endon("disconnect");
   level.powerup_hud_array = [];
@@ -105,7 +103,6 @@ powerup_hud_overlay() {
   level thread Power_up_hud("specialty_firesale_zombies", level.powerup_hud[2], 36, "zombie_powerup_fire_sale_time", "zombie_powerup_fire_sale_on");
   level thread Power_up_hud("zom_icon_bonfire", level.powerup_hud[3], 116, "zombie_powerup_bonfire_sale_time", "zombie_powerup_bonfire_sale_on");
 }
-
 Power_up_hud(Shader, PowerUp_Hud, X_Position, PowerUp_timer, PowerUp_Var) {
   while(true) {
     if(level.zombie_vars[PowerUp_timer] < 5) {
@@ -127,7 +124,6 @@ Power_up_hud(Shader, PowerUp_Hud, X_Position, PowerUp_timer, PowerUp_Var) {
     wait(0.05);
   }
 }
-
 solo_powerup_hud_overlay() {
   level endon("disconnect");
   flag_wait("all_players_connected");
@@ -153,20 +149,22 @@ solo_powerup_hud_overlay() {
     players[p] thread solo_power_up_hud("zom_icon_minigun", players[p].solo_powerup_hud[0], 76, "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
   }
 }
-
 solo_power_up_hud(Shader, PowerUp_Hud, X_Position, PowerUp_timer, PowerUp_Var) {
   self endon("disconnect");
   while(true) {
-    if(level.zombie_vars[PowerUp_timer] < 5 && (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
+    if(level.zombie_vars[PowerUp_timer] < 5 &&
+      (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
       wait(0.1);
       PowerUp_Hud.alpha = 0;
       wait(0.1);
-    } else if(level.zombie_vars[PowerUp_timer] < 10 && (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
+    } else if(level.zombie_vars[PowerUp_timer] < 10 &&
+      (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
       wait(0.2);
       PowerUp_Hud.alpha = 0;
       wait(0.18);
     }
-    if(level.zombie_vars[PowerUp_Var] == true && (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
+    if(level.zombie_vars[PowerUp_Var] == true &&
+      (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
       PowerUp_Hud.x = X_Position;
       PowerUp_Hud.alpha = 1;
       PowerUp_Hud setshader(Shader, 32, 32);
@@ -176,11 +174,9 @@ solo_power_up_hud(Shader, PowerUp_Hud, X_Position, PowerUp_timer, PowerUp_Var) {
     wait(0.05);
   }
 }
-
 randomize_powerups() {
   level.zombie_powerup_array = array_randomize(level.zombie_powerup_array);
 }
-
 get_next_powerup() {
   powerup = level.zombie_powerup_array[level.zombie_powerup_index];
   level.zombie_powerup_index++;
@@ -190,7 +186,6 @@ get_next_powerup() {
   }
   return powerup;
 }
-
 get_valid_powerup() {
   if(isDefined(level.zombie_powerup_boss)) {
     i = level.zombie_powerup_boss;
@@ -206,7 +201,8 @@ get_valid_powerup() {
   while(1) {
     if(powerup == "carpenter" && get_num_window_destroyed() < 5) {
       powerup = get_next_powerup();
-    } else if(powerup == "fire_sale" && (level.zombie_vars["zombie_powerup_fire_sale_on"] == true || level.chest_moves < 1)) {
+    } else if(powerup == "fire_sale" &&
+      (level.zombie_vars["zombie_powerup_fire_sale_on"] == true || level.chest_moves < 1)) {
       powerup = get_next_powerup();
     } else if(powerup == "all_revive") {
       if(!maps\_laststand::player_num_in_laststand()) {
@@ -221,7 +217,6 @@ get_valid_powerup() {
     }
   }
 }
-
 mingun_no_drop() {
   if(level.zombie_vars["zombie_powerup_minigun_on"] == true) {
     return true;
@@ -237,7 +232,6 @@ mingun_no_drop() {
   }
   return false;
 }
-
 get_num_window_destroyed() {
   num = 0;
   for(i = 0; i < level.exterior_goals.size; i++) {
@@ -247,7 +241,6 @@ get_num_window_destroyed() {
   }
   return num;
 }
-
 watch_for_drop() {
   flag_wait("begin_spawning");
   players = get_players();
@@ -267,7 +260,6 @@ watch_for_drop() {
     wait(0.5);
   }
 }
-
 add_zombie_powerup(powerup_name, model_name, hint, fx) {
   if(isDefined(level.zombie_include_powerups) && !isDefined(level.zombie_include_powerups[powerup_name])) {
     return;
@@ -289,11 +281,9 @@ add_zombie_powerup(powerup_name, model_name, hint, fx) {
   level.zombie_powerup_array[level.zombie_powerup_array.size] = powerup_name;
   add_zombie_special_drop(powerup_name);
 }
-
 add_zombie_special_drop(powerup_name) {
   level.zombie_special_drop_array[level.zombie_special_drop_array.size] = powerup_name;
 }
-
 include_zombie_powerup(powerup_name) {
   if("1" == getDvar(#"mutator_noPowerups")) {
     return;
@@ -303,11 +293,9 @@ include_zombie_powerup(powerup_name) {
   }
   level.zombie_include_powerups[powerup_name] = true;
 }
-
 powerup_round_start() {
   level.powerup_drop_count = 0;
 }
-
 powerup_drop(drop_point) {
   if(level.mutators["mutator_noPowerups"]) {
     return;
@@ -318,7 +306,7 @@ powerup_drop(drop_point) {
   if(!isDefined(level.zombie_include_powerups) || level.zombie_include_powerups.size == 0) {
     return;
   }
-  rand_drop = randomInt(100);
+  rand_drop = randomint(100);
   if(rand_drop > 2) {
     if(!level.zombie_vars["zombie_drop_item"]) {
       return;
@@ -355,7 +343,6 @@ powerup_drop(drop_point) {
   powerup thread powerup_grab();
   level.zombie_vars["zombie_drop_item"] = 0;
 }
-
 specific_powerup_drop(powerup_name, drop_spot) {
   powerup = maps\_zombiemode_net::network_safe_spawn("powerup", 1, "script_model", drop_spot + (0, 0, 40));
   if(isDefined(powerup)) {
@@ -373,7 +360,6 @@ specific_powerup_drop(powerup_name, drop_spot) {
     powerup thread powerup_grab();
   }
 }
-
 special_powerup_drop(drop_point) {
   if(!isDefined(level.zombie_include_powerups) || level.zombie_include_powerups.size == 0) {
     return;
@@ -393,7 +379,6 @@ special_powerup_drop(drop_point) {
   }
   powerup special_drop_setup();
 }
-
 powerup_setup() {
   powerup = get_valid_powerup();
   struct = level.zombie_powerups[powerup];
@@ -406,15 +391,15 @@ powerup_setup() {
   }
   self playLoopSound("zmb_spawn_powerup_loop");
 }
-
 special_drop_setup() {
   powerup = undefined;
   is_powerup = true;
   if(level.round_number <= 10 || maps\_laststand::player_num_in_laststand()) {
     powerup = get_valid_powerup();
   } else {
-    powerup = level.zombie_special_drop_array[randomInt(level.zombie_special_drop_array.size)];
-    if(level.round_number > 15 && (randomInt(100) < (level.round_number - 15) * 5)) {
+    powerup = level.zombie_special_drop_array[RandomInt(level.zombie_special_drop_array.size)];
+    if(level.round_number > 15 &&
+      (RandomInt(100) < (level.round_number - 15) * 5)) {
       powerup = "nothing";
     }
   }
@@ -429,8 +414,9 @@ special_drop_setup() {
     case "minigun":
       break;
     case "full_ammo":
-      if(level.round_number > 10 && (randomInt(100) < (level.round_number - 10) * 5)) {
-        powerup = level.zombie_powerup_array[randomInt(level.zombie_powerup_array.size)];
+      if(level.round_number > 10 &&
+        (RandomInt(100) < (level.round_number - 10) * 5)) {
+        powerup = level.zombie_powerup_array[RandomInt(level.zombie_powerup_array.size)];
       }
       break;
     case "dog":
@@ -477,7 +463,6 @@ special_drop_setup() {
     self thread powerup_grab();
   }
 }
-
 powerup_grab() {
   self endon("powerup_timedout");
   self endon("powerup_grabbed");
@@ -544,7 +529,7 @@ powerup_grab() {
         }
         wait(0.1);
         playsoundatposition("zmb_powerup_grabbed", self.origin);
-        self stopLoopSound();
+        self stoploopsound();
         if(self.powerup_name != "fire_sale") {
           level thread maps\_zombiemode_audio::do_announcer_playvox(level.devil_vox["powerup"][self.powerup_name]);
         }
@@ -555,7 +540,6 @@ powerup_grab() {
     wait 0.1;
   }
 }
-
 start_revive_all(item) {
   players = get_players();
   reviver = players[0];
@@ -572,7 +556,6 @@ start_revive_all(item) {
     }
   }
 }
-
 start_fire_sale(item) {
   level notify("powerup fire sale");
   level endon("powerup fire sale");
@@ -587,7 +570,6 @@ start_fire_sale(item) {
   level.zombie_vars["zombie_powerup_fire_sale_on"] = false;
   level notify("fire_sale_off");
 }
-
 start_bonfire_sale(item) {
   level notify("powerup bonfire sale");
   level endon("powerup bonfire sale");
@@ -608,7 +590,6 @@ start_bonfire_sale(item) {
   }
   temp_ent Delete();
 }
-
 start_carpenter(origin) {
   window_boards = getstructarray("exterior_goal", "targetname");
   total = level.exterior_goals.size;
@@ -617,7 +598,7 @@ start_carpenter(origin) {
   while(true) {
     windows = get_closest_window_repair(window_boards, origin);
     if(!isDefined(windows)) {
-      carp_ent stopLoopSound(1);
+      carp_ent stoploopsound(1);
       carp_ent playSound("evt_carpenter_end", "sound_done");
       carp_ent waittill("sound_done");
       break;
@@ -645,33 +626,31 @@ start_carpenter(origin) {
   }
   carp_ent delete();
 }
-
 get_closest_window_repair(windows, origin) {
   current_window = undefined;
   shortest_distance = undefined;
   for(i = 0; i < windows.size; i++) {
-    if(all_chunks_intact(windows[i].barrier_chunks))
+    if(all_chunks_intact(windows[i].barrier_chunks)) {
       continue;
+    }
     if(!isDefined(current_window)) {
       current_window = windows[i];
-      shortest_distance = distanceSquared(current_window.origin, origin);
+      shortest_distance = DistanceSquared(current_window.origin, origin);
     } else {
-      if(distanceSquared(windows[i].origin, origin) < shortest_distance) {
+      if(DistanceSquared(windows[i].origin, origin) < shortest_distance) {
         current_window = windows[i];
-        shortest_distance = distanceSquared(windows[i].origin, origin);
+        shortest_distance = DistanceSquared(windows[i].origin, origin);
       }
     }
   }
   return current_window;
 }
-
 powerup_vo(type) {
   self endon("death");
   self endon("disconnect");
   wait(randomfloatrange(3, 3.5));
   self maps\_zombiemode_audio::create_and_play_dialog("powerup", type);
 }
-
 powerup_wobble() {
   self endon("powerup_grabbed");
   self endon("powerup_timedout");
@@ -684,18 +663,17 @@ powerup_wobble() {
   }
   while(isDefined(self)) {
     waittime = randomfloatrange(2.5, 5);
-    yaw = randomInt(360);
+    yaw = RandomInt(360);
     if(yaw > 300) {
       yaw = 300;
     } else if(yaw < 60) {
       yaw = 60;
     }
     yaw = self.angles[1] + yaw;
-    self rotateto((-60 + randomInt(120), yaw, -45 + randomInt(90)), waittime, waittime * 0.5, waittime * 0.5);
+    self rotateto((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }
-
 powerup_timeout() {
   self endon("powerup_grabbed");
   wait 15;
@@ -716,7 +694,6 @@ powerup_timeout() {
   self notify("powerup_timedout");
   self delete();
 }
-
 nuke_powerup(drop_item) {
   zombies = getaispeciesarray("axis");
   location = drop_item.origin;
@@ -763,7 +740,6 @@ nuke_powerup(drop_item) {
     players[i] maps\_zombiemode_score::player_add_points("nuke_powerup", 400);
   }
 }
-
 nuke_flash() {
   players = getplayers();
   for(i = 0; i < players.size; i++) {
@@ -786,7 +762,6 @@ nuke_flash() {
   wait 1.1;
   fadetowhite destroy();
 }
-
 double_points_powerup(drop_item) {
   level notify("powerup points scaled");
   level endon("powerup points scaled");
@@ -795,7 +770,6 @@ double_points_powerup(drop_item) {
   wait 30;
   level.zombie_vars["zombie_point_scalar"] = 1;
 }
-
 full_ammo_powerup(drop_item) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -808,7 +782,6 @@ full_ammo_powerup(drop_item) {
   }
   level thread full_ammo_on_hud(drop_item);
 }
-
 insta_kill_powerup(drop_item) {
   level notify("powerup instakill");
   level endon("powerup instakill");
@@ -821,7 +794,6 @@ insta_kill_powerup(drop_item) {
     players[i] notify("insta_kill_over");
   }
 }
-
 check_for_instakill(player, mod, hit_location) {
   if(level.mutators["mutator_noPowerups"]) {
     return;
@@ -849,7 +821,6 @@ check_for_instakill(player, mod, hit_location) {
     }
   }
 }
-
 insta_kill_on_hud(drop_item) {
   self endon("disconnect");
   if(level.zombie_vars["zombie_powerup_insta_kill_on"]) {
@@ -859,7 +830,6 @@ insta_kill_on_hud(drop_item) {
   level.zombie_vars["zombie_powerup_insta_kill_on"] = true;
   level thread time_remaning_on_insta_kill_powerup();
 }
-
 time_remaning_on_insta_kill_powerup() {
   temp_enta = spawn("script_origin", (0, 0, 0));
   temp_enta playLoopSound("zmb_insta_kill_loop");
@@ -871,12 +841,11 @@ time_remaning_on_insta_kill_powerup() {
   for(i = 0; i < players.size; i++) {
     players[i] playSound("zmb_insta_kill");
   }
-  temp_enta stopLoopSound(2);
+  temp_enta stoploopsound(2);
   level.zombie_vars["zombie_powerup_insta_kill_on"] = false;
   level.zombie_vars["zombie_powerup_insta_kill_time"] = 30;
   temp_enta delete();
 }
-
 point_doubler_on_hud(drop_item) {
   self endon("disconnect");
   if(level.zombie_vars["zombie_powerup_point_doubler_on"]) {
@@ -886,7 +855,6 @@ point_doubler_on_hud(drop_item) {
   level.zombie_vars["zombie_powerup_point_doubler_on"] = true;
   level thread time_remaining_on_point_doubler_powerup();
 }
-
 time_remaining_on_point_doubler_powerup() {
   temp_ent = spawn("script_origin", (0, 0, 0));
   temp_ent playLoopSound("zmb_double_point_loop");
@@ -899,11 +867,10 @@ time_remaining_on_point_doubler_powerup() {
   for(i = 0; i < players.size; i++) {
     players[i] playSound("zmb_points_loop_off");
   }
-  temp_ent stopLoopSound(2);
+  temp_ent stoploopsound(2);
   level.zombie_vars["zombie_powerup_point_doubler_time"] = 30;
   temp_ent delete();
 }
-
 toggle_bonfire_sale_on() {
   level endon("powerup bonfire sale");
   if(!isDefined(level.zombie_vars["zombie_powerup_bonfire_sale_on"])) {
@@ -916,7 +883,6 @@ toggle_bonfire_sale_on() {
     level waittill("bonfire_sale_off");
   }
 }
-
 toggle_fire_sale_on() {
   level endon("powerup fire sale");
   if(!isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"])) {
@@ -946,7 +912,6 @@ toggle_fire_sale_on() {
     }
   }
 }
-
 fire_sale_weapon_wait() {
   self.zombie_cost = self.old_cost;
   while(isDefined(self.chest_user)) {
@@ -954,7 +919,6 @@ fire_sale_weapon_wait() {
   }
   self set_hint_string(self, "default_treasure_chest_" + self.zombie_cost);
 }
-
 remove_temp_chest(chest_index) {
   while(isDefined(level.chests[chest_index].chest_user) || (isDefined(level.chests[chest_index]._box_open) && level.chests[chest_index]._box_open == true)) {
     wait_network_frame();
@@ -965,11 +929,9 @@ remove_temp_chest(chest_index) {
   level.chests[chest_index] maps\_zombiemode_weapons::hide_chest();
   level.chests[chest_index] maps\_zombiemode_weapons::show_rubble();
 }
-
 devil_dialog_delay() {
   wait(1.0);
 }
-
 full_ammo_on_hud(drop_item) {
   self endon("disconnect");
   hudelem = maps\_hud_util::createFontString("objective", 2);
@@ -981,7 +943,6 @@ full_ammo_on_hud(drop_item) {
   hudelem.label = drop_item.hint;
   hudelem thread full_ammo_move_hud();
 }
-
 full_ammo_move_hud() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -996,14 +957,12 @@ full_ammo_move_hud() {
   wait move_fade_time;
   self destroy();
 }
-
 check_for_rare_drop_override(pos) {
   if(isDefined(flag("ape_round")) && flag("ape_round")) {
     return (0);
   }
   return (0);
 }
-
 setup_firesale_audio() {
   wait(2);
   intercom = getEntArray("intercom", "targetname");
@@ -1020,13 +979,11 @@ setup_firesale_audio() {
     level notify("firesale_over");
   }
 }
-
 play_firesale_audio() {
   self playLoopSound("mus_fire_sale");
   level waittill("firesale_over");
-  self stopLoopSound();
+  self stoploopsound();
 }
-
 setup_bonfiresale_audio() {
   wait(2);
   intercom = getEntArray("intercom", "targetname");
@@ -1043,13 +1000,11 @@ setup_bonfiresale_audio() {
     level notify("firesale_over");
   }
 }
-
 play_bonfiresale_audio() {
   self playLoopSound("mus_fire_sale");
   level waittill("firesale_over");
-  self stopLoopSound();
+  self stoploopsound();
 }
-
 minigun_weapon_powerup(ent_player) {
   self endon("disconnect");
   ent_player endon("death");
@@ -1063,7 +1018,6 @@ minigun_weapon_powerup(ent_player) {
   level.zombie_vars["zombie_powerup_minigun_on"] = true;
   level thread minigun_weapon_powerup_countdown(ent_player, "minigun_time_over");
 }
-
 minigun_weapon_powerup_countdown(ent_player, str_gun_return_notify) {
   ent_player endon("death");
   ent_player endon("player_downed");
@@ -1078,7 +1032,6 @@ minigun_weapon_powerup_countdown(ent_player, str_gun_return_notify) {
   setClientSysState("levelNotify", "minie", ent_player);
   level thread minigun_weapon_powerup_remove(ent_player, str_gun_return_notify);
 }
-
 minigun_weapon_powerup_remove(ent_player, str_gun_return_notify) {
   ent_player endon("death");
   ent_player endon("player_downed");
@@ -1110,11 +1063,9 @@ minigun_weapon_powerup_remove(ent_player, str_gun_return_notify) {
     }
   }
 }
-
 minigun_weapon_powerup_off() {
   level.zombie_vars["zombie_powerup_minigun_time"] = 0;
 }
-
 minigun_watch_gunner_downed() {
   primaryWeapons = self GetWeaponsListPrimaries();
   for(i = 0; i < primaryWeapons.size; i++) {
@@ -1127,5 +1078,4 @@ minigun_watch_gunner_downed() {
   self._show_solo_hud = false;
   level._zombie_minigun_powerup_last_stand_func = undefined;
 }
-
 print_powerup_drop(powerup, type) {}

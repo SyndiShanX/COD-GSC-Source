@@ -226,7 +226,7 @@ giveMoney_think() {
 }
 
 giveMoney_helper(attacker, type) {
-  if(isDefined(attacker) && !isplayer(attacker)) {
+  if(isDefined(attacker) && !isPlayer(attacker)) {
     if(isDefined(self.saved_player_attacker))
       attacker = self.saved_player_attacker;
   }
@@ -255,7 +255,7 @@ giveMoney_helper(attacker, type) {
 
   // if player is last to kill, give player kill points	
   if(isPlayer(attacker)) {
-    if(getdvar("money_sharing") == "1") {
+    if(getDvar("money_sharing") == "1") {
       foreach(player in level.players) {
         if(isDefined(self.kill_reward_money)) {
           if(killType == "kill_melee" && isDefined(self.kill_melee_reward_money))
@@ -304,7 +304,7 @@ giveMoney_helper(attacker, type) {
 }
 
 give_objective_reward() {
-  if(getdvar("money_sharing") == "1") {
+  if(getDvar("money_sharing") == "1") {
     foreach(player in level.players)
     player giveMoney("objective");
   } else if(isDefined(self) && isPlayer(self))
@@ -344,7 +344,7 @@ took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
     return;
   }
   // this is to make sure player gets money after killing enemy during their traversal anim
-  if(isplayer(attacker))
+  if(isPlayer(attacker))
     self.saved_player_attacker = attacker;
 
   currentTime = gettime();
@@ -366,11 +366,11 @@ updatePlayerMoney(type, value, attacker) {
   self notify("update_money");
   self endon("update_money");
 
-  if(getdvar("money_enable", "0") != "1") {
+  if(getDvar("money_enable", "0") != "1") {
     return;
   }
   // optional in game reward control
-  if(getdvar("in_game_reward") != "1") {
+  if(getDvar("in_game_reward") != "1") {
     allowed_types = "completion ";
     allowed_types_array = strTok(allowed_types, " ");
 

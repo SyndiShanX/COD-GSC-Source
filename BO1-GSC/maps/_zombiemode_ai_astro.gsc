@@ -36,8 +36,8 @@ init() {
   level.zombie_total_set_func = ::astro_zombie_total_update;
   maps\_zombiemode_spawner::register_zombie_damage_callback(::astro_damage_callback);
 }
-
 #using_animtree("generic_human");
+
 astro_prespawn() {
   self.animname = "astro_zombie";
   self.custom_idle_setup = ::astro_zombie_idle_setup;
@@ -92,7 +92,6 @@ astro_prespawn() {
   self.ignore_poi_targetname[self.ignore_poi_targetname.size] = "zm_bhb";
   self notify("zombie_init_done");
 }
-
 astro_zombie_idle_setup() {
   self.a.array["turn_left_45"] = % exposed_tracking_turn45L;
   self.a.array["turn_left_90"] = % exposed_tracking_turn90L;
@@ -106,7 +105,6 @@ astro_zombie_idle_setup() {
   self.a.array["straight_level"] = % ai_zombie_idle_v1_delta;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
-
 init_astro_zombie_anims() {
   level.scr_anim["astro_zombie"]["death1"] = % ai_zombie_napalm_death_01;
   level.scr_anim["astro_zombie"]["death2"] = % ai_zombie_napalm_death_02;
@@ -171,12 +169,10 @@ init_astro_zombie_anims() {
   level._zombie_board_taunt["astro_zombie"][6] = % ai_zombie_taunts_5e;
   level._zombie_board_taunt["astro_zombie"][7] = % ai_zombie_taunts_5f;
 }
-
 init_astro_zombie_fx() {
   level._effect["astro_spawn"] = loadfx("maps/zombie/fx_zombie_boss_spawn");
   level._effect["astro_explosion"] = loadfx("maps/zombie_moon/fx_moon_qbomb_explo_distort");
 }
-
 astro_zombie_spawn() {
   self.script_moveoverride = true;
   if(!isDefined(level.num_astro_zombies)) {
@@ -198,7 +194,6 @@ astro_zombie_spawn() {
   }
   return astro_zombie;
 }
-
 astro_zombie_can_spawn() {
   if(!is_true(level.zombie_total_update)) {
     return false;
@@ -208,12 +203,11 @@ astro_zombie_can_spawn() {
   }
   return true;
 }
-
 astro_zombie_manager() {
   self notify("astro_manager_end");
   self endon("astro_manager_end");
   flag_wait("all_players_connected");
-  spawner = getEnt("astronaut_zombie", "targetname");
+  spawner = getent("astronaut_zombie", "targetname");
   while(true) {
     if(!is_true(level.on_the_moon)) {
       wait(0.5);
@@ -229,7 +223,6 @@ astro_zombie_manager() {
     wait(0.5);
   }
 }
-
 astro_zombie_total_update() {
   level.zombie_total_update = true;
   level.zombies_left_before_astro_spawn = RandomIntRange(int(level.zombie_total * 0.25), int(level.zombie_total * 0.75));
@@ -239,7 +232,6 @@ astro_zombie_total_update() {
   _debug_astro_print("next astro round = " + level.next_astro_round);
   _debug_astro_print("zombies to kill = " + (level.zombie_total - level.zombies_left_before_astro_spawn));
 }
-
 astro_zombie_think() {
   self endon("death");
   self.entered_level = false;
@@ -269,7 +261,6 @@ astro_zombie_think() {
     wait(1);
   }
 }
-
 astro_zombie_headbutt_think() {
   self endon("death");
   self.is_headbutt = false;
@@ -284,7 +275,7 @@ astro_zombie_headbutt_think() {
     if(!self.is_headbutt && GetTime() > self.next_headbutt_time) {
       origin = self getEye();
       test_origin = self.enemy getEye();
-      dist_sqr = distanceSquared(origin, test_origin);
+      dist_sqr = DistanceSquared(origin, test_origin);
       if(dist_sqr > level.astro_headbutt_radius_sqr) {
         wait_network_frame();
         continue;
@@ -311,7 +302,6 @@ astro_zombie_headbutt_think() {
     wait_network_frame();
   }
 }
-
 astro_restore_move_speed(time) {
   self endon("disconnect");
   wait(time);
@@ -320,7 +310,6 @@ astro_restore_move_speed(time) {
   self AllowCrouch(true);
   self SetMoveSpeedScale(1);
 }
-
 astro_turn_player() {
   self endon("death");
   self.player_to_headbutt = self.enemy;
@@ -347,7 +336,6 @@ astro_turn_player() {
   dist = Distance(self.origin, player.origin);
   _debug_astro_print("grab dist = " + dist);
 }
-
 astro_watch_controls(astro) {
   self endon("released");
   self endon("disconnect");
@@ -358,7 +346,6 @@ astro_watch_controls(astro) {
   self FreezeControls(false);
   _debug_astro_print(self.playername + " released from watch");
 }
-
 astro_zombie_headbutt_watcher(animname) {
   self endon("death");
   while(1) {
@@ -370,7 +357,6 @@ astro_zombie_headbutt_watcher(animname) {
     self thread astro_zombie_teleport_enemy();
   }
 }
-
 astro_zombie_headbutt_release_watcher(animname) {
   self endon("death");
   _RELEASE_DIST = 59.0;
@@ -395,7 +381,6 @@ astro_zombie_headbutt_release_watcher(animname) {
     wait(time);
   }
 }
-
 astro_zombie_attack() {
   self endon("death");
   if(!isDefined(self.player_to_headbutt)) {
@@ -427,7 +412,6 @@ astro_zombie_attack() {
     player DoDamage(damage, self.origin, self);
   }
 }
-
 astro_headbutt_damage(astro, org) {
   self endon("disconnect");
   self waittill("perk_lost");
@@ -438,7 +422,6 @@ astro_headbutt_damage(astro, org) {
     self DoDamage(damage, org);
   }
 }
-
 astro_zombie_teleport_enemy() {
   self endon("death");
   player = self.player_to_headbutt;
@@ -455,7 +438,8 @@ astro_zombie_teleport_enemy() {
   for(i = 0; i < black_hole_teleport_structs.size; i++) {
     volume = level.zones[black_hole_teleport_structs[i].script_string].volumes[0];
     active_zone = check_point_in_active_zone(black_hole_teleport_structs[i].origin);
-    if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) && (player_current_zone != black_hole_teleport_structs[i].script_string)) {
+    if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) &&
+      (player_current_zone != black_hole_teleport_structs[i].script_string)) {
       if(!flag("power_on") || volume.script_string == "lowgravity") {
         chosen_spot = black_hole_teleport_structs[i];
         break;
@@ -470,7 +454,6 @@ astro_zombie_teleport_enemy() {
     player thread astro_zombie_teleport(chosen_spot);
   }
 }
-
 astro_zombie_teleport(struct_dest) {
   self endon("death");
   if(!isDefined(struct_dest)) {
@@ -503,10 +486,9 @@ astro_zombie_teleport(struct_dest) {
   PlayRumbleOnPosition("explosion_generic", self.origin);
   self playsoundtoplayer("zmb_gersh_teleporter_go_2d", self);
 }
-
 astro_zombie_die() {
   playFXOnTag(level._effect["astro_explosion"], self, "J_SpineLower");
-  self stopLoopSound(1);
+  self stoploopsound(1);
   self playSound("evt_astro_zombie_explo");
   self thread astro_delay_delete();
   self thread astro_player_pulse();
@@ -516,15 +498,13 @@ astro_zombie_die() {
   _debug_astro_print("astro killed in " + level.round_number);
   return self maps\_zombiemode_spawner::zombie_death_animscript();
 }
-
 astro_delay_delete() {
   self endon("death");
   self SetPlayerCollision(0);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
   wait_network_frame();
-  self hide();
+  self Hide();
 }
-
 astro_player_pulse() {
   eye_org = self getEye();
   foot_org = self.origin + (0, 0, 8);
@@ -546,7 +526,7 @@ astro_player_pulse() {
     }
     test_org = player getEye();
     explode_radius = level.astro_explode_radius;
-    if(distanceSquared(eye_org, test_org) > explode_radius * explode_radius) {
+    if(DistanceSquared(eye_org, test_org) > explode_radius * explode_radius) {
       continue;
     }
     test_org_foot = player.origin + (0, 0, 8);
@@ -577,7 +557,6 @@ astro_player_pulse() {
     }
   }
 }
-
 astro_actor_damage(weapon, damage, attacker) {
   self endon("death");
   switch (weapon) {
@@ -588,11 +567,9 @@ astro_actor_damage(weapon, damage, attacker) {
   }
   return damage;
 }
-
 astro_nuke_damage() {
   self endon("death");
 }
-
 astro_custom_damage(player) {
   damage = self.meleeDamage;
   if(self.is_headbutt) {
@@ -601,11 +578,9 @@ astro_custom_damage(player) {
   _debug_astro_print("astro damage = " + damage);
   return damage;
 }
-
 astro_microwavegun_sizzle(player) {
   _debug_astro_print("astro sizzle");
 }
-
 astro_zombie_default_enter_level() {
   playFX(level._effect["astro_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
@@ -614,19 +589,16 @@ astro_zombie_default_enter_level() {
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("general", "astro_spawn");
   self.entered_level = true;
 }
-
 astro_damage_callback(mod, hit_location, hit_origin, player, amount) {
   if(isDefined(self.animname) && self.animname == "astro_zombie") {
     return true;
   }
   return false;
 }
-
 _debug_astro_health_watch() {
   self endon("death");
   while(1) {
     wait(1);
   }
 }
-
 _debug_astro_print(str) {}

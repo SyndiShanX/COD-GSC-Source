@@ -3157,7 +3157,7 @@ ending_pt1_sequence() {
   if(!common_scripts\utility::flag("vignette_ending_qte_success")) {
     if(!common_scripts\utility::flag("already_failing")) {
       common_scripts\utility::flag_set("already_failing");
-      setdvar("ui_deadquote", &"FLOOD_ENDING_QTE_0_FAILED");
+      setDvar("ui_deadquote", &"FLOOD_ENDING_QTE_0_FAILED");
       level maps\_utility::missionfailedwrapper();
     }
 
@@ -3236,7 +3236,7 @@ outro_pt1_blood(var_0) {
 }
 
 ending_pt2_player_sequence_save() {
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   common_scripts\utility::flag_clear("vignette_ending_qte_success");
   common_scripts\utility::flag_clear("vignette_ending_scene_start");
   var_0 = maps\_vignette_util::vignette_actor_spawn("vignette_outro_player_legs", "outro_player_legs");

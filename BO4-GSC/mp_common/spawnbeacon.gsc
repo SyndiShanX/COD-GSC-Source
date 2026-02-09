@@ -214,7 +214,7 @@ function_fa81d248(attacker, weapon) {
     attacker = self[[level.figure_out_attacker]](attacker);
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && spawnbeacon.owner !== attacker && isDefined(weapon)) {
+  if(isDefined(attacker) && isPlayer(attacker) && spawnbeacon.owner !== attacker && isDefined(weapon)) {
     attacker stats::function_e24eec31(weapon, #"hash_1c9da51ed1906285", 1);
   }
 

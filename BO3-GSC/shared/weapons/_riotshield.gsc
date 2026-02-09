@@ -308,7 +308,7 @@ function watchdeployedriotshielddamage() {
     /
     #
     assert(isDefined(self.owner) && isDefined(self.owner.team));
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(level.teambased && attacker.team == self.owner.team && attacker != self.owner) {
         continue;
       }
@@ -351,7 +351,7 @@ function damagethendestroyriotshield(attacker, weapon) {
   self.owner.riotshieldentity = undefined;
   self notsolid();
   self clientfield::set("riotshield_state", 2);
-  if(isDefined(attacker) && attacker != self.owner && isplayer(attacker)) {
+  if(isDefined(attacker) && attacker != self.owner && isPlayer(attacker)) {
     scoreevents::processscoreevent("destroyed_shield", attacker, self.owner, weapon);
   }
   wait(getdvarfloat("riotshield_destroyed_cleanup_time"));

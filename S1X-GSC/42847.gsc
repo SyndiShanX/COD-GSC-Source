@@ -48,7 +48,7 @@ init() {
   }
 
   level thread onplayerconnectfunctions();
-  setdvar("scr_ball_water_drop_delay", 10);
+  setDvar("scr_ball_water_drop_delay", 10);
 }
 
 player_set_in_water(var_0) {
@@ -134,7 +134,7 @@ watchplayerenterwater() {
       var_0 thread hordedoginwater(self);
     }
 
-    if(!isplayer(var_0) && !isai(var_0)) {
+    if(!isPlayer(var_0) && !isai(var_0)) {
       continue;
     }
     if(!isalive(var_0)) {
@@ -540,7 +540,7 @@ playerdisableunderwater() {
       }
     }
 
-    if(isDefined(level.ishorde) && isplayer(self)) {
+    if(isDefined(level.ishorde) && isPlayer(self)) {
       maps\mp\gametypes\_weapons::restoreweapon("underwater");
     } else if(isDefined(self.water_last_weapon)) {
       maps\mp\_utility::switch_to_last_weapon(self.water_last_weapon);

@@ -326,7 +326,6 @@ function_5ebe7443() {
       if(isDefined(self.var_d6acaac4)) {
         recordsphere(self.protectdest, 8, (1, 1, 0), "<dev string:x48>");
         recordline(self.protectdest, self.var_d6acaac4, (0, 1, 0), "<dev string:x48>");
-
       }
     }
 

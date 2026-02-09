@@ -543,7 +543,7 @@ enemyishiding() {
   if(self.enemy common_scripts\utility::isflashed())
     return 1;
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
       return 1;
   } else if(isai(self.enemy) && self.enemy animscripts\utility::issuppressedwrapper())

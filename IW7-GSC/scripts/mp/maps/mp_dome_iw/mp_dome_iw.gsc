@@ -9,10 +9,10 @@ main() {
   scripts\mp\maps\mp_dome_iw\mp_dome_iw_fx::main();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_dome_iw");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_sdfShadowPenumbra", 0.2);
-  setdvar("r_umbraMinObjectContribution", 3);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_sdfShadowPenumbra", 0.2);
+  setDvar("r_umbraMinObjectContribution", 3);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -122,7 +122,7 @@ killtriggerloop(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(isDefined(var_1)) {
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         var_1 suicide();
         continue;
       }

@@ -10,7 +10,7 @@
 #include maps\mp\alien\_challenge_function;
 
 init_challenge() {
-  map_name = getdvar("ui_mapname");
+  map_name = getDvar("ui_mapname");
   level.alien_challenge_table = "mp/alien/" + map_name + "_challenges.csv";
 
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
@@ -37,9 +37,9 @@ spawn_challenge_internal() {
     return;
   }
 
-  if(GetDvar("scr_setactivechallenge") != "") {
-    challenge = GetDvar("scr_setactivechallenge");
-    SetDvar("scr_setactivechallenge", "");
+  if(getDvar("scr_setactivechallenge") != "") {
+    challenge = getDvar("scr_setactivechallenge");
+    setDvar("scr_setactivechallenge", "");
   }
 
   activate_new_challenge(challenge);
@@ -217,7 +217,7 @@ challenge_countdown() {
 }
 
 can_pick_up_challenge(player) {
-  if(!IsPlayer(player))
+  if(!isPlayer(player))
     return false;
 
   if(isAI(player))
@@ -244,7 +244,6 @@ display_challenge_message(message, activate, scalar) {
       level.current_challenge_index = int(index);
       level.current_challenge_pre_challenge = 1;
       player PlayLocalSound("mp_intel_received");
-
     } else {
       player SetClientOmnvar("ui_intel_active_index", -1);
       player SetClientOmnvar("ui_intel_progress_current", -1);

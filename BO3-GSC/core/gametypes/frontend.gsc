@@ -47,9 +47,9 @@ function main() {
   level.weaponnone = getweapon("none");
   level thread dailychallengedevguiinit();
   level thread function_4afc218();
-  setdvar("", 0);
+  setDvar("", 0);
   adddebugcommand("");
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -246,7 +246,7 @@ function play_black_market_animation(animname, idleanimname, originent, tagangle
 }
 
 function dailychallengedevguiinit() {
-  setdvar("", 0);
+  setDvar("", 0);
   num_rows = tablelookuprowcount("");
   for(row_num = 2; row_num < num_rows; row_num++) {
     challenge_name = tablelookupcolumnforrow("", row_num, 5);
@@ -271,12 +271,12 @@ function dailychallengedevguithink() {
     adddebugcommand((("" + daily_challenge_stat) + "") + "");
     adddebugcommand(("" + daily_challenge_index) + "");
     adddebugcommand("" + "");
-    setdvar("", 0);
+    setDvar("", 0);
   }
 }
 
 function function_4afc218() {
-  setdvar("", 0);
+  setDvar("", 0);
   while(true) {
     if(getdvarint("") <= 0 || !sessionmodeiszombiesgame()) {
       wait(1);
@@ -322,7 +322,7 @@ function function_ead1dc1a() {
         break;
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.2);
   }
 }

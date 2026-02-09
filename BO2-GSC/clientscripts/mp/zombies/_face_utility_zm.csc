@@ -333,7 +333,6 @@ showstate(state) {
 
     wait 0.01;
   }
-
 }
 
 setfacestate(state) {

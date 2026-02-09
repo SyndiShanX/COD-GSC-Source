@@ -38,7 +38,7 @@ func_FC5B(var_0, var_1) {
   if(!var_1) {
     var_0 waittill("missile_stuck", var_2);
 
-    if(isplayer(var_2) || isagent(var_2)) {
+    if(isPlayer(var_2) || isagent(var_2)) {
       scripts\mp\weapons::grenadestuckto(var_0, var_2);
     }
   }

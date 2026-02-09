@@ -68,7 +68,7 @@ function main() {
   load::main();
   namespace_465859d::function_7403e82b();
   vengeance_util::fire_fx();
-  setdvar("vengeance_save", "1");
+  setDvar("vengeance_save", "1");
   level thread vengeance_temple::function_38bcd0();
   level thread vengeance_market::function_bd50a158();
   spawners = getEntArray();

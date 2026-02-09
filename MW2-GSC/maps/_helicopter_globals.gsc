@@ -25,7 +25,7 @@ globalThink() {
   level thread flares_think(self);
   level thread maps\_helicopter_ai::evasive_think(self);
 
-  if(getdvar("cobrapilot_wingman_enabled") == "1") {
+  if(getDvar("cobrapilot_wingman_enabled") == "1") {
     if(isDefined(self.script_wingman)) {
       level.wingman = self;
       level thread maps\_helicopter_ai::wingman_think(self);
@@ -71,7 +71,7 @@ flares_fire_burst(vehicle, fxCount, flareCount, flareTime) {
 
     if(isDefined(vehicle.playercontrolled)) {
       level.stats["flares_used"]++;
-      if(getdvar("cobrapilot_sounds_enabled") == "1")
+      if(getDvar("cobrapilot_sounds_enabled") == "1")
         vehicle.pilot playLocalSound("weap_flares_fire");
     }
 
@@ -96,7 +96,6 @@ flares_fire(vehicle) {
   } else {
     flares_fire_burst(vehicle, 8, 1, 5.0);
   }
-
 }
 
 flares_redirect_missiles(vehicle, flareTime) {
@@ -274,7 +273,7 @@ shootEnemyTarget_Bullets(eTarget) {
 
   while(self.health > 0) {
     randomShots = randomintrange(1, 25);
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getDvar("cobrapilot_debug") == "1")
       iprintln("randomShots = " + randomShots);
 
     for(i = 0; i < randomShots; i++) {
@@ -299,7 +298,7 @@ shootEnemyTarget_Bullets(eTarget) {
 }
 
 shootEnemyTarget_Bullets_DebugLine(eStartEnt, eStartEntTag, eTarget, eTargetOffset, color, timer) {
-  if(getdvar("cobrapilot_debug") != "1") {
+  if(getDvar("cobrapilot_debug") != "1") {
     return;
   }
   if(!isDefined(color))

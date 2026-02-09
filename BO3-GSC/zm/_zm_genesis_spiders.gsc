@@ -194,7 +194,7 @@ function function_747a2fea() {
   self endon("death");
   while(true) {
     self waittill("damage", n_amount, e_attacker, v_direction, v_hit_location, str_mod);
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       e_attacker.use_weapon_type = str_mod;
       self thread zm_powerups::check_for_instakill(e_attacker, str_mod, v_hit_location);
     }
@@ -226,7 +226,7 @@ function function_7609fd9() {
       level notify("last_ai_down", self);
     }
   }
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       e_attacker zm_score::player_add_points("death_spider");
     }
@@ -419,9 +419,9 @@ function function_9f7a20d2() {
   level notify("hash_f96039de");
   level thread zm_audio::sndmusicsystem_playstate("spider_roundstart");
   if(isDefined(level.var_9d7b5e00)) {
-    setdvar("ai_meleeRange", level.var_9d7b5e00);
+    setDvar("ai_meleeRange", level.var_9d7b5e00);
   } else {
-    setdvar("ai_meleeRange", 100);
+    setDvar("ai_meleeRange", 100);
   }
 }
 
@@ -433,9 +433,9 @@ function function_123b370a() {
   }
   level.var_8276ee15 = 0;
   level notify("hash_daeb2e4f");
-  setdvar("ai_meleeRange", level.melee_range_sav);
-  setdvar("ai_meleeWidth", level.melee_width_sav);
-  setdvar("ai_meleeHeight", level.melee_height_sav);
+  setDvar("ai_meleeRange", level.melee_range_sav);
+  setDvar("ai_meleeWidth", level.melee_width_sav);
+  setDvar("ai_meleeHeight", level.melee_height_sav);
 }
 
 function function_1abf8192() {
@@ -650,7 +650,7 @@ function function_f4bd92a2(n_to_spawn, s_spawn_point) {
 function function_82b6256d() {
   self waittill("death", e_attacker);
   self zm_spawner::check_zombie_death_event_callbacks(e_attacker);
-  if(isplayer(e_attacker) && (isDefined(level.var_26af7b39) && level.var_26af7b39) && (isDefined(level.var_a5d2ba4) && level.var_a5d2ba4)) {
+  if(isPlayer(e_attacker) && (isDefined(level.var_26af7b39) && level.var_26af7b39) && (isDefined(level.var_a5d2ba4) && level.var_a5d2ba4)) {
     var_46927a7e = getent("apothicon_belly_center", "targetname");
     if(e_attacker istouching(var_46927a7e) && self istouching(var_46927a7e)) {
       level notify("hash_ca3a841");

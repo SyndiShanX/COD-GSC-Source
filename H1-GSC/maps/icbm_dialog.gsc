@@ -236,7 +236,7 @@ dialog_tango_down() {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return;
   }
   if(!isDefined(var_0.animname)) {

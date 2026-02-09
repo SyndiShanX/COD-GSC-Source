@@ -512,7 +512,7 @@ civiliancleanuptothrowgrenade(behaviortreeentity) {
 
       if(isactor(behaviortreeentity.enemy) && isDefined(behaviortreeentity.grenadeweapon)) {
         grenade = behaviortreeentity.enemy magicgrenadetype(behaviortreeentity.grenadeweapon, behaviortreeentity gettagorigin("j_wrist_ri"), (0, 0, 0), float(behaviortreeentity.grenadeweapon.aifusetime) / 1000);
-      } else if(isplayer(behaviortreeentity.enemy) && isDefined(behaviortreeentity.grenadeweapon)) {
+      } else if(isPlayer(behaviortreeentity.enemy) && isDefined(behaviortreeentity.grenadeweapon)) {
         grenade = behaviortreeentity.enemy magicgrenadeplayer(behaviortreeentity.grenadeweapon, behaviortreeentity gettagorigin("j_wrist_ri"), (0, 0, 0));
       }
 

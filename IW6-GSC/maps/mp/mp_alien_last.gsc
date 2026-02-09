@@ -107,8 +107,8 @@ main() {
   maps\mp\mp_alien_last_fx::main();
   maps\mp\_load::main();
   maps\mp\_compass::setupminimap("compass_map_mp_alien_last");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -1756,7 +1756,7 @@ setup_incompatible_list() {
 }
 
 last_custom_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = isDefined(var_1) && isplayer(var_1);
+  var_7 = isDefined(var_1) && isPlayer(var_1);
 
   if(var_7 && isDefined(var_4) && maps\mp\alien\_utility::weapon_has_alien_attachment(var_4) && var_3 != "MOD_MELEE" && !maps\mp\alien\_utility::is_true(level.easter_egg_lodge_sign_active)) {
     playFX(level._effect["alien_ark_gib"], self.origin + (0, 0, 32));
@@ -1768,7 +1768,7 @@ last_custom_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(maps\mp\alien\_utility::is_true(level.should_use_custom_death_func)) {
-    if(var_7 || isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(var_7 || isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       playFX(level._effect["soul_escape"], self.origin + (0, 0, 32));
       return 0;
     }

@@ -45,7 +45,6 @@ ai_init() {
 
   if(!isDefined(level.wave_table)) {
     level.wave_table = "sp/survival_waves.csv";
-
   }
   level._id_3D43 = [];
   level._id_3D44 = [];
@@ -102,7 +101,6 @@ kill_sentry_on_contact() {
 
   if(isDefined(self._id_0EF1)) {
     self waittill("jumpedout");
-
   }
   if(!isDefined(level._id_3C67)) {
     return;
@@ -146,7 +144,6 @@ _id_3D49() {
     if(isDefined(var_6) && var_6.size) {
       if(!isDefined(level._id_3D55)) {
         level._id_3D55 = [];
-
       }
       foreach(var_8 in var_6) {}
       level._id_3D55[var_8] = var_4;
@@ -165,7 +162,6 @@ _id_3D49() {
 _id_3D56(var_0, var_1) {
   if(!isDefined(level._id_3D57)) {
     level._id_3D57 = [];
-
   }
   level._id_3D57[var_0] = var_1;
 }
@@ -173,7 +169,6 @@ _id_3D56(var_0, var_1) {
 _id_3D58(var_0, var_1) {
   if(!isDefined(level._id_3D59)) {
     level._id_3D59 = [];
-
   }
   foreach(var_3 in var_1) {}
   precacheitem(var_3);
@@ -207,7 +202,6 @@ _id_3D5A() {
 
     if(_id_3DFE(var_4)) {
       level._id_3D44[var_4] = var_5;
-
     }
     var_2[var_4] = var_5;
   }
@@ -220,7 +214,6 @@ _id_3D5C(var_0, var_1) {
 
   if(isDefined(var_0._id_3D5D)) {
     var_2 = "survival_ai_" + var_0._id_3D5D._id_160B;
-
   }
   var_3 = undefined;
 
@@ -281,7 +274,6 @@ _id_3D63() {
 
   if(isDefined(level._id_3D64) && level._id_3D64.size) {
     var_0 = maps\_utility::_id_1843(var_0, level._id_3D64);
-
   }
   var_0 = maps\_utility::_id_1843(var_0, _id_3DC4());
   return var_0;
@@ -322,7 +314,6 @@ _id_3D65() {
         self kill(self.origin, var_5);
       } else {
         self kill(self.origin);
-
       }
       return;
     }
@@ -336,7 +327,6 @@ _id_3D66() {
 
   if(isDefined(self._id_12DD) && self._id_12DD.size) {
     var_0 = self._id_12DD[self._id_12DD.size - 1];
-
   }
   return var_0;
 }
@@ -404,7 +394,6 @@ _id_3D6D() {
 _id_3D6F() {
   if(isDefined(self._id_3D5D)) {
     return self._id_3D5D._id_160B;
-
   }
   if(isDefined(level._id_3B70)) {
     foreach(var_1 in level._id_3B70) {
@@ -416,7 +405,6 @@ _id_3D6F() {
 
   if(isDefined(self._id_3B73) && isai(self._id_3B73)) {
     return _id_3E03(level._id_17F6);
-
   }
   return undefined;
 }
@@ -490,7 +478,6 @@ _id_3D74() {
 _id_3D75() {
   if(isDefined(self._id_3D76) && isDefined(self._id_3D5D)) {
     return self._id_3D5D._id_160B;
-
   }
   var_0 = _id_3D6F();
 
@@ -504,7 +491,6 @@ _id_3D75() {
 
   if(isDefined(var_3) && !var_2) {
     self.health = var_3;
-
   }
   var_4 = _id_3DFB(var_0);
 
@@ -520,7 +506,6 @@ _id_3D75() {
 
   if(isDefined(var_5)) {
     maps\_utility::_id_2736(var_5);
-
   }
   var_6 = _id_3DF7(var_0);
 
@@ -610,7 +595,6 @@ _id_3D7B() {
 
   if(!isDefined(self._id_3D7C)) {
     thread _id_3D7E();
-
   }
   var_0 = 0;
   var_1 = 0;
@@ -645,11 +629,9 @@ _id_3D7E() {
 _id_3D7F(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
-
   }
   if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
-
   }
   var_3 = spawn("script_model", self gettagorigin(var_0) + var_1);
   var_3 setModel("weapon_c4");
@@ -657,7 +639,6 @@ _id_3D7F(var_0, var_1, var_2) {
 
   if(!isDefined(self._id_3D80)) {
     self._id_3D80 = [];
-
   }
   self._id_3D80[self._id_3D80.size] = var_3;
 }
@@ -673,7 +654,6 @@ _id_3D81(var_0, var_1) {
 
   if(isDefined(self._id_3B38)) {
     var_0 = 5;
-
   }
   for(var_3 = 0; var_3 < self._id_3D80.size; var_3++) {
     playFXOnTag(common_scripts\utility::getfx("martyrdom_dlight_red"), self._id_3D80[var_3], "tag_fx");
@@ -709,7 +689,6 @@ _id_3D81(var_0, var_1) {
 
   if(var_6) {
     wait 0.25;
-
   }
   var_4 = sortbydistance(var_4, var_4[0].origin + (0, 0, -120));
 
@@ -725,7 +704,6 @@ _id_3D81(var_0, var_1) {
 
     if(!isDefined(var_2)) {
       var_2 = undefined;
-
     }
     var_4[var_3] radiusdamage(var_4[var_3].origin, 192, 100, 50, var_2, "MOD_EXPLOSIVE");
     var_4[var_3] thread _id_0618::_id_3D82();
@@ -777,7 +755,6 @@ _id_3D86() {
 _id_3D88(var_0) {
   if(isDefined(level._id_3D89) && level._id_3D89.size >= 6) {
     return 0;
-
   }
   var_1 = [];
 
@@ -788,7 +765,6 @@ _id_3D88(var_0) {
 
   if(!var_1.size) {
     return 0;
-
   }
   var_5 = _id_3D8C(384, 2.0);
   var_5 = _id_3D8B(var_5);
@@ -856,7 +832,6 @@ _id_3D8C(var_0, var_1) {
 _id_3D8D(var_0, var_1) {
   if(isDefined(self._id_3D8E) || self.weight < var_1) {
     return 0;
-
   }
   foreach(var_3 in level.players) {
     if(distance2d(self.origin, var_3.origin) < var_0) {
@@ -954,7 +929,6 @@ _id_3D92(var_0) {
     if(isDefined(var_3)) {
       if(!isDefined(level._id_3D89)) {
         level._id_3D89 = [];
-
       }
       level._id_3D89[level._id_3D89.size] = var_3;
       var_3 thread _id_3D9F(var_0);
@@ -991,14 +965,12 @@ _id_3D94(var_0, var_1, var_2) {
 
   if(!isDefined(var_2) || var_2) {
     var_3.origin = maps\_utility::_id_2281(var_0, 12, -120);
-
   }
   var_3.angles = (0, var_1[1], 0);
   playFXOnTag(common_scripts\utility::getfx("claymore_laser"), var_3, "tag_fx");
 
   if(isDefined(self) && isalive(self)) {
     var_3.owner = self;
-
   }
   return var_3;
 }
@@ -1032,7 +1004,6 @@ _id_3D95() {
 _id_3D96(var_0) {
   if(isDefined(var_0.disabled)) {
     return 0;
-
   }
   var_1 = self.origin + (0, 0, 32);
   var_2 = var_1 - var_0.origin;
@@ -1041,14 +1012,12 @@ _id_3D96(var_0) {
 
   if(var_4 < 20) {
     return 0;
-
   }
   var_2 = vectornormalize(var_2);
   var_5 = vectordot(var_2, var_3);
 
   if(!isDefined(level._id_3D97)) {
     level._id_3D97 = cos(70);
-
   }
   return var_5 > level._id_3D97;
 }
@@ -1063,7 +1032,6 @@ _id_3D98(var_0) {
 
   if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
-
   }
   self playSound("detpack_explo_main", "sound_done");
   playFX(level._effect["claymore_explosion"], self.origin);
@@ -1102,7 +1070,6 @@ _id_3D9C() {
 
   if(_id_3D9D()) {
     var_2 = 0.1 + randomfloat(0.4);
-
   }
   _id_3D98(var_2);
 }
@@ -1142,7 +1109,6 @@ _id_3DA0() {
 
   if(!isDefined(self._id_3D7C)) {
     thread _id_3DA1();
-
   }
   var_0 = 0;
   var_1 = 0;
@@ -1209,7 +1175,7 @@ _id_3DA4(var_0) {
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(isplayer(var_2) || var_5 == "MOD_EXPLOSIVE" || var_5 == "MOD_GRENADE" || var_5 == "MOD_GRENADE_SPLASH") {
+    if(isPlayer(var_2) || var_5 == "MOD_EXPLOSIVE" || var_5 == "MOD_GRENADE" || var_5 == "MOD_GRENADE_SPLASH") {
       thread _id_0618::_id_3DA5(var_2, var_5, var_10);
       return;
     }
@@ -1270,7 +1236,7 @@ _id_3DA9(var_0, var_1, var_2) {
     if(!isDefined(var_5) || !isalive(var_5)) {
       continue;
     }
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       if(maps\_utility::_id_1A43(var_5) || maps\_utility::_id_1A75(var_5)) {
         continue;
       }
@@ -1286,7 +1252,6 @@ _id_3DA9(var_0, var_1, var_2) {
         var_6 = "radiation_med";
       } else {
         var_6 = "radiation_high";
-
       }
       var_5._id_3DAB = 1;
       var_5._id_3DAD = var_6;
@@ -1318,7 +1283,6 @@ _id_3DAF(var_0, var_1, var_2) {
 
   if(!isDefined(var_2) || var_2) {
     var_3.origin = maps\_utility::_id_2281(var_0, 12, -120) + (0, 0, 5);
-
   }
   var_3.angles = (0, var_1[1], 0);
   var_3._id_3DB0 = var_3 common_scripts\utility::spawn_tag_origin();
@@ -1327,7 +1291,6 @@ _id_3DAF(var_0, var_1, var_2) {
 
   if(isDefined(self) && isalive(self)) {
     var_3.owner = self;
-
   }
   return var_3;
 }
@@ -1369,7 +1332,6 @@ _id_3DB2() {
 
   if(_id_3D9D()) {
     var_2 = 0.1 + randomfloat(0.4);
-
   }
   _id_3DB3(var_2);
 }
@@ -1384,7 +1346,6 @@ _id_3DB3(var_0) {
 
   if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
-
   }
   level._id_3D9A = gettime();
   self playSound("detpack_explo_main", "sound_done");
@@ -1465,7 +1426,6 @@ _id_3DBA(var_0, var_1) {
 
     if(!common_scripts\utility::flag("aggressive_mode")) {
       common_scripts\utility::waittill_any_timeout(var_9, "aggressive_mode");
-
     }
     wait 0.05;
   }
@@ -1553,7 +1513,6 @@ _id_3DC2() {
 
     if(!isDefined(var_1)) {
       var_1 = maps\_utility::_id_2608(self.origin);
-
     }
     if(isDefined(var_1)) {
       var_2 = self cansee(var_1);
@@ -1579,7 +1538,6 @@ _id_3DC3() {
 
   if(isDefined(level._id_3DBF)) {
     var_0++;
-
   }
   return var_0;
 }
@@ -1681,7 +1639,7 @@ _id_3DD0() {
     if(isDefined(var_1) && isai(var_1) && self.team != var_1.team) {
       var_10 = _id_3DD2(var_0, self._id_3DD1["ai_damage"]);
     } else if(var_4 == "MOD_MELEE") {
-      if(isDefined(var_1) && isplayer(var_1) && isDefined(var_9) && issubstr(var_9, "riotshield_so")) {
+      if(isDefined(var_1) && isPlayer(var_1) && isDefined(var_9) && issubstr(var_9, "riotshield_so")) {
         var_10 = _id_3DD2(var_0, self._id_3DD1["melee_riotshield"]);
       } else {
         var_10 = _id_3DD2(var_0, self._id_3DD1["melee"]);
@@ -1693,19 +1651,16 @@ _id_3DD0() {
       var_11 = 1;
     } else {
       var_10 = _id_3DD2(var_0, self._id_3DD1["bodyshot"]);
-
     }
     var_10 = int(var_10);
 
     if(var_10 < 0 && abs(var_10) >= self.health) {
       if(var_11) {
         self._id_0A33 = 1;
-
       }
       thread _id_0618::_id_3DA5(var_1, var_4, var_9);
     } else {
       self.health = self.health + var_10;
-
     }
     self notify("dmg_factored");
   }
@@ -1716,7 +1671,6 @@ _id_3DD2(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     var_2 = int(var_0 * (1 - var_1));
-
   }
   return var_2;
 }
@@ -1744,7 +1698,6 @@ _id_3DD4(var_0, var_1) {
 
   if(isDefined(self._id_3D5D)) {
     var_2 = _id_3DFA(self._id_3D5D._id_160B);
-
   }
   for(;;) {
     if(self.health / var_2 <= var_0) {
@@ -1812,17 +1765,14 @@ _id_3DD8() {
 
   if(getdvarint("survival_chaos") != 1) {
     self._id_3DD9 = 1;
-
   }
   _id_3DDA();
 
   if(getdvarint("survival_chaos") != 1) {
     thread _id_3DDB();
-
   }
   if(1) {
     self._id_3AB9 = 9999;
-
   }
   self setengagementmindist(100, 60);
   self setengagementmaxdist(512, 768);
@@ -1841,7 +1791,6 @@ _id_00D4() {
       self.minpaindamage = 250;
     } else {
       self.minpaindamage = 350;
-
     }
     wait 0.05;
   }
@@ -1896,7 +1845,6 @@ _id_3DDC(var_0) {
 
   if(isDefined(self._id_3D5D)) {
     var_1 = _id_3DFA(self._id_3D5D._id_160B);
-
   }
   for(;;) {
     self waittill("damage");
@@ -1914,7 +1862,6 @@ _id_3DDD() {
 
   if(getdvarint("survival_chaos") != 1) {
     _id_3DEB();
-
   }
   level notify("juggernaut_died");
 
@@ -1924,7 +1871,7 @@ _id_3DDD() {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
 }
@@ -1966,7 +1913,6 @@ _id_3DE0(var_0, var_1) {
 
   if(isDefined(level._id_12E5) && level._id_12E5) {
     var_2 thread maps\_rank::_id_12E0();
-
   }
   var_2._id_12DE = int(_id_3DFD(var_0) * 0.2);
   level._id_3D64[level._id_3D64.size] = var_2;
@@ -1988,7 +1934,6 @@ _id_3DE2(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_5)) {
     return var_4;
-
   }
   var_6 = _id_0618::_id_3DCB("ally_drop_chopper", var_2.origin, var_2);
   var_6 thread _id_0619::_id_3D09("reached_dynamic_path_end death deathspin");
@@ -2014,11 +1959,9 @@ _id_3DE2(var_0, var_1, var_2, var_3) {
 
     if(var_0 == "friendly_support_delta") {
       var_8.headicon = "headicon_delta_so";
-
     }
     if(var_0 == "friendly_support_riotshield") {
       var_8.headicon = "headicon_gign_so";
-
     }
     var_8.drawoncompass = 0;
     wait 0.05;
@@ -2031,7 +1974,6 @@ _id_3DE2(var_0, var_1, var_2, var_3) {
 _id_3DE3() {
   if(isDefined(self) && isalive(self)) {
     return self getEye();
-
   }
   return undefined;
 }
@@ -2058,7 +2000,6 @@ _id_3DE5() {
     thread _id_00D5(300);
   } else {
     thread _id_00D5(150);
-
   }
   self.ignoreme = 0;
   self.fixednode = 0;
@@ -2098,7 +2039,6 @@ _id_3DE7(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self waittill(var_1);
-
   }
   wait(var_0);
   maps\_utility::_id_1902();
@@ -2109,7 +2049,6 @@ _id_3DE8() {
 
   if(isDefined(self.owner) && isalive(self.owner)) {
     self.owner notify("ally_died");
-
   }
   _id_3DEB();
 }
@@ -2119,7 +2058,6 @@ _id_3DE9() {
 
   if(isDefined(self.team) && self.team == "axis") {
     _id_061A::_id_3D30();
-
   }
   if(isDefined(level._id_1AB1)) {
     self.sidearm = level._id_1AB1;
@@ -2148,7 +2086,6 @@ _id_3DEB() {
 
     if(isDefined(self._id_3DD9) && self._id_3DD9 && var_0 != "none") {
       thread animscripts\shared::_id_23C9("iw5_riotshield_so", var_0);
-
     }
     animscripts\shared::_id_23BE("iw5_riotshield_so");
     self.weaponinfo["iw5_riotshield_so"]._id_2099 = "none";
@@ -2185,7 +2122,6 @@ _id_3DEC(var_0, var_1, var_2, var_3) {
 
     if(!isDefined(var_14)) {
       var_14 = maps\_utility::_id_2608(self.origin);
-
     }
     if(!isDefined(var_14)) {
       wait(var_0);
@@ -2200,7 +2136,6 @@ _id_3DEC(var_0, var_1, var_2, var_3) {
       }
     } else if(distancesquared(self.origin, var_14.origin) < self.goalradius * self.goalradius) {
       self getenemyinfo(var_14);
-
     }
     if(!isDefined(var_13) || var_13 != var_14) {
       var_13 = var_14;
@@ -2248,7 +2183,6 @@ _id_061B(var_0) {
 
       while(distancesquared(var_1, var_0.origin) < 144) {
         wait 0.5;
-
       }
       self setgoalentity(var_0);
     }
@@ -2313,7 +2247,6 @@ _id_3DF1(var_0) {
 _id_3DF2(var_0) {
   if(_id_3DF1(var_0)) {
     return level._id_3D43[var_0]._id_3D4A;
-
   }
   return int(tablelookup("sp/survival_waves.csv", 1, var_0, 0));
 }
@@ -2330,11 +2263,9 @@ _id_3DF4(var_0) {
 _id_3DF5(var_0) {
   if(isDefined(level._id_3D57) && isDefined(level._id_3D57[var_0])) {
     return level._id_3D57[var_0];
-
   }
   if(_id_3DF1(var_0)) {
     return level._id_3D43[var_0].classname;
-
   }
   return tablelookup("sp/survival_waves.csv", 1, var_0, 4);
 }
@@ -2342,11 +2273,9 @@ _id_3DF5(var_0) {
 _id_3DF6(var_0) {
   if(isDefined(level._id_3D59) && isDefined(level._id_3D59[var_0])) {
     return level._id_3D59[var_0];
-
   }
   if(_id_3DF1(var_0)) {
     return level._id_3D43[var_0].weapon;
-
   }
   var_1 = tablelookup("sp/survival_waves.csv", 1, var_0, 5);
   return strtok(var_1, " ");
@@ -2355,7 +2284,6 @@ _id_3DF6(var_0) {
 _id_3DF7(var_0) {
   if(_id_3DF1(var_0)) {
     return level._id_3D43[var_0]._id_3D5B;
-
   }
   var_1 = tablelookup("sp/survival_waves.csv", 1, var_0, 6);
   return strtok(var_1, " ");
@@ -2364,7 +2292,6 @@ _id_3DF7(var_0) {
 _id_3DF8(var_0) {
   if(_id_3DF1(var_0)) {
     return level._id_3D43[var_0].name;
-
   }
   return tablelookup("sp/survival_waves.csv", 1, var_0, 2);
 }
@@ -2372,7 +2299,6 @@ _id_3DF8(var_0) {
 _id_3DF9(var_0) {
   if(_id_3DF1(var_0)) {
     return level._id_3D43[var_0]._id_189B;
-
   }
   return tablelookup("sp/survival_waves.csv", 1, var_0, 3);
 }
@@ -2382,17 +2308,14 @@ _id_3DFA(var_0) {
     var_1 = 1.0 + level._id_3D46 * 0.1;
   } else {
     var_1 = 1.0;
-
   }
   if(_id_3DF1(var_0)) {
     return int(level._id_3D43[var_0].health * var_1);
-
   }
   var_2 = tablelookup("sp/survival_waves.csv", 1, var_0, 7);
 
   if(var_2 == "") {
     return undefined;
-
   }
   return int(int(var_2) * var_1);
 }
@@ -2402,17 +2325,14 @@ _id_3DFB(var_0) {
     var_1 = 1.0 + level._id_3D46 * 0.05;
   } else {
     var_1 = 1.0;
-
   }
   if(_id_3DF1(var_0)) {
     return min(level._id_3D43[var_0].speed * var_1, 1.5);
-
   }
   var_2 = tablelookup("sp/survival_waves.csv", 1, var_0, 8);
 
   if(var_2 == "") {
     return undefined;
-
   }
   return min(float(var_2) * var_1, 1.5);
 }
@@ -2422,7 +2342,6 @@ _id_3DFC(var_0) {
     var_1 = 1.0 + level._id_3D46 * 0.2;
   } else {
     var_1 = 1.0;
-
   }
   if(_id_3DF1(var_0)) {
     if(isDefined(level._id_3D43[var_0].accuracy)) {
@@ -2436,7 +2355,6 @@ _id_3DFC(var_0) {
 
   if(var_2 == "") {
     return undefined;
-
   }
   return float(var_2) * var_1;
 }
@@ -2444,13 +2362,11 @@ _id_3DFC(var_0) {
 _id_3DFD(var_0) {
   if(_id_3DF1(var_0)) {
     return level._id_3D43[var_0].xp;
-
   }
   var_1 = tablelookup("sp/survival_waves.csv", 1, var_0, 9);
 
   if(var_1 == "") {
     return undefined;
-
   }
   return int(var_1);
 }
@@ -2458,13 +2374,11 @@ _id_3DFD(var_0) {
 _id_3DFE(var_0) {
   if(_id_3DF1(var_0) && isDefined(level._id_3D44)) {
     return isDefined(level._id_3D44[var_0]);
-
   }
   var_1 = tablelookup("sp/survival_waves.csv", 1, var_0, 10);
 
   if(!isDefined(var_1) || var_1 == "") {
     return 0;
-
   }
   return 1;
 }
@@ -2476,7 +2390,6 @@ _id_3DFF(var_0) {
 _id_3E00(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D4F;
-
   }
   return int(tablelookup(level.wave_table, 2, var_0, 1));
 }
@@ -2484,7 +2397,6 @@ _id_3E00(var_0) {
 _id_3E01(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D4A;
-
   }
   return int(tablelookup(level.wave_table, 2, var_0, 0));
 }
@@ -2496,7 +2408,6 @@ _id_3E02(var_0) {
 _id_3E03(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D4B;
-
   }
   return tablelookup(level.wave_table, 2, var_0, 3);
 }
@@ -2504,7 +2415,6 @@ _id_3E03(var_0) {
 _id_3E04(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D4C;
-
   }
   var_1 = [];
   var_2 = int(tablelookup(level.wave_table, 2, var_0, 4));
@@ -2517,7 +2427,6 @@ _id_3E04(var_0) {
 
     for(var_5 = 0; var_5 < var_4; var_5++) {
       var_1[var_5] = 3;
-
     }
     if(var_3 == 1) {
       if(level._id_3B6F == 4) {
@@ -2538,13 +2447,11 @@ _id_3E04(var_0) {
 _id_3E05(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D4D;
-
   }
   var_1 = tablelookup(level.wave_table, 2, var_0, 5);
 
   if(isDefined(var_1) && var_1 != "") {
     return strtok(var_1, " ");
-
   }
   return undefined;
 }
@@ -2552,7 +2459,6 @@ _id_3E05(var_0) {
 _id_3E06(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D4E;
-
   }
   var_1 = tablelookup(level.wave_table, 2, var_0, 6);
   var_2 = [];
@@ -2562,7 +2468,6 @@ _id_3E06(var_0) {
 
     for(var_3 = 0; var_3 < var_1.size; var_3++) {
       var_2[var_3] = int(var_1[var_3]);
-
     }
     return var_2;
   }
@@ -2588,13 +2493,11 @@ _id_3E07(var_0, var_1) {
 _id_3E08(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D50;
-
   }
   var_1 = tablelookup(level.wave_table, 2, var_0, 7);
 
   if(isDefined(var_1) && var_1 != "") {
     return strtok(var_1, " ");
-
   }
   return undefined;
 }
@@ -2602,13 +2505,11 @@ _id_3E08(var_0) {
 _id_3E09(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D51;
-
   }
   var_1 = tablelookup(level.wave_table, 2, var_0, 8);
 
   if(isDefined(var_1) && var_1 != "") {
     return strtok(var_1, " ");
-
   }
   return undefined;
 }
@@ -2616,7 +2517,6 @@ _id_3E09(var_0) {
 _id_3E0A(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D54;
-
   }
   return int(tablelookup(level.wave_table, 2, var_0, 9));
 }
@@ -2630,13 +2530,11 @@ _id_3E0B(var_0) {
 _id_3E0C(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D52;
-
   }
   var_1 = _id_3E05(var_0);
 
   if(!isDefined(var_1) || !var_1.size) {
     return "";
-
   }
   foreach(var_3 in var_1) {
     if(issubstr(var_3, "dog")) {
@@ -2650,13 +2548,11 @@ _id_3E0C(var_0) {
 _id_3E0D(var_0) {
   if(_id_3DFF(var_0)) {
     return level._id_3D47[var_0]._id_3D53;
-
   }
   var_1 = _id_3E0C(var_0);
 
   if(!isDefined(var_1)) {
     return 0;
-
   }
   return _id_3E07(var_0, var_1);
 }

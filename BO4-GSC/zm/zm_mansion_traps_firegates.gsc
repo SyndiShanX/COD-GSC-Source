@@ -559,7 +559,7 @@ function_5ad19000(e_trap) {
     #e_victim: self, #e_trap: e_trap
   });
 
-  if(isDefined(e_trap.activated_by_player) && isplayer(e_trap.activated_by_player)) {
+  if(isDefined(e_trap.activated_by_player) && isPlayer(e_trap.activated_by_player)) {
     e_trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     e_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
   }

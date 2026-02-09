@@ -50,7 +50,6 @@ class cscriptbundleobjectbase {
       }
     }
   }
-
 }
 
 class cscriptbundlebase {
@@ -121,7 +120,6 @@ class cscriptbundlebase {
   }
 
   function on_error(e) {}
-
 }
 
 #namespace scriptbundle;

@@ -666,7 +666,7 @@ sentry_handleDamage() {
       }
     }
 
-    if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
+    if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
       attacker.owner maps\mp\gametypes\_damagefeedback::updateDamageFeedback("sentry");
     }
 

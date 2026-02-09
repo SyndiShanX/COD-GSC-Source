@@ -262,7 +262,7 @@ function heli_get_dvar(dvar, def) {
   if(getdvarstring(dvar) != "") {
     return getdvarfloat(dvar);
   }
-  setdvar(dvar, def);
+  setDvar(dvar, def);
   return float(def);
 }
 
@@ -842,7 +842,7 @@ function assignprimarytargets(targets) {
       killstreaks::update_dog_threat(targets[idx]);
       continue;
     }
-    if(isplayer(targets[idx])) {
+    if(isPlayer(targets[idx])) {
       killstreaks::update_player_threat(targets[idx]);
       continue;
     }
@@ -999,7 +999,7 @@ function heli_damage_monitor(hardpointtype) {
   }
   for(;;) {
     self waittill("damage", damage, attacker, direction, point, type, modelname, tagname, partname, weapon, flags, inflictor, chargelevel);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     heli_friendlyfire = weaponobjects::friendlyfirecheck(self.owner, attacker);
@@ -1191,7 +1191,7 @@ function heli_damage_monitor(hardpointtype) {
       if(target_istarget(self)) {
         target_remove(self);
       }
-    } else if(isDefined(self.owner) && isplayer(self.owner)) {
+    } else if(isDefined(self.owner) && isPlayer(self.owner)) {
       if((last_hit_vo + hit_vo_spacing) < gettime()) {
         if(type == "MOD_PROJECTILE" || randomintrange(0, 3) == 0) {
           last_hit_vo = gettime();

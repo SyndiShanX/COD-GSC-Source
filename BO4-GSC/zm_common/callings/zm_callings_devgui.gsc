@@ -34,9 +34,9 @@ function_1d4f22e4(cmd) {
     arr = strtok(str, "<dev string:x14f>");
     taskid = arr[0];
     taskid = int(taskid);
-    setdvar(#"zm_active_daily_calling", taskid);
-    setdvar(#"zm_active_event_calling", 0);
-    setdvar(#"hash_acdd08b365cb62f", 1);
+    setDvar(#"zm_active_daily_calling", taskid);
+    setDvar(#"zm_active_event_calling", 0);
+    setDvar(#"hash_acdd08b365cb62f", 1);
     return;
   }
 

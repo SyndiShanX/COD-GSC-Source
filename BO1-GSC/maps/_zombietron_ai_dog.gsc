@@ -14,7 +14,6 @@ precache_dog_fx() {
   level._effect["dog_trail_fire"] = Loadfx("maps/zombie/fx_zombie_dog_fire_trail");
   level._effect["dog_trail_ash"] = Loadfx("maps/zombie/fx_zombie_dog_ash_trail");
 }
-
 #using_animtree("dog");
 dog_prespawn() {
   self.targetname = "zombie_dog";
@@ -50,7 +49,6 @@ dog_prespawn() {
   self.flame_damage_time = 0;
   self notify("zombie_init_done");
 }
-
 dog_fx_eye_glow() {
   self.fx_dog_eye = spawn("script_model", self GetTagOrigin("J_EyeBall_LE"));
   assert(isDefined(self.fx_dog_eye));
@@ -58,9 +56,8 @@ dog_fx_eye_glow() {
   self.fx_dog_eye setModel("tag_origin");
   self.fx_dog_eye LinkTo(self, "J_EyeBall_LE");
 }
-
 dog_fx_trail() {
-  if(randomInt(100) > level.zombie_vars["dog_fire_trail_percent"]) {
+  if(randomint(100) > level.zombie_vars["dog_fire_trail_percent"]) {
     self.fx_dog_trail_type = level._effect["dog_trail_ash"];
     self.fx_dog_trail_sound = "dog_trail_fire_breath";
   } else {
@@ -74,11 +71,11 @@ dog_fx_trail() {
   self.fx_dog_trail setModel("tag_origin");
   self.fx_dog_trail LinkTo(self, "tag_origin");
 }
-
 dog_death() {
   self waittill("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self playSound("zmb_hellhound_vox_death");
   if(isDefined(self.attacker) && isai(self.attacker)) {
     self.attacker notify("killed", self);
@@ -92,7 +89,6 @@ dog_death() {
     self delete();
   }
 }
-
 dog_explode_fx(origin) {
   if(!isDefined(origin)) {
     return;
@@ -104,14 +100,12 @@ dog_explode_fx(origin) {
   wait(5);
   fx delete();
 }
-
 dog_player_damage() {
   if(isDefined(self.tank) || isDefined(self.heli)) {
     return;
   }
   self DoDamage(100, self.origin);
 }
-
 dog_move_audio() {
   self endon("death");
   level.doggy_movement_vox = 0;
@@ -122,7 +116,7 @@ dog_move_audio() {
   while(1) {
     players = get_players();
     for(i = 0; i < players.size; i++) {
-      if((distanceSquared(self.origin, players[i].origin) < 50 * 50) && (level.doggy_attack_vox <= 3) && !self.playing_attack_vox) {
+      if((DistanceSquared(self.origin, players[i].origin) < 50 * 50) && (level.doggy_attack_vox <= 3) && !self.playing_attack_vox) {
         level.doggy_attack_vox++;
         self.playing_attack_vox = true;
         self thread vox_timer("attack");
@@ -138,7 +132,6 @@ dog_move_audio() {
     wait(.1);
   }
 }
-
 vox_timer(type) {
   self endon("death");
   switch (type) {

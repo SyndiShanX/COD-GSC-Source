@@ -110,7 +110,7 @@ function_429c452(localclientnum, should_play) {
     return 0;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return should_play;
   }
 
@@ -148,7 +148,7 @@ function_e56218ab(localclientnum, should_play) {
     return 0;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return should_play;
   }
 

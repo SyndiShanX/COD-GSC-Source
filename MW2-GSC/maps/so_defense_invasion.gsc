@@ -10,10 +10,8 @@
 #include maps\_specialops;
 #include maps\so_defense_invasion_code;
 
-// ---------------------------------------------------------------------------------
-//	Init
-// ---------------------------------------------------------------------------------
-main() {
+// --------------------------------------------------------------------------------- //	Init
+// --------------------------------------------------------------------------------- main() {
   maps\invasion_precache::main();
   maps\invasion_fx::main();
   maps\createart\invasion_art::main();
@@ -67,10 +65,8 @@ main() {
   maps\_compass::setupMiniMap("compass_map_invasion");
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Initializations
-// ---------------------------------------------------------------------------------
-start_so_defense() {
+// --------------------------------------------------------------------------------- //	Challenge Initializations
+// --------------------------------------------------------------------------------- start_so_defense() {
   so_defense_init();
   so_defense_challenge_prep();
   so_defense_wave_1();
@@ -206,10 +202,8 @@ so_defense_setup_radio_dialog() {
   level.scr_radio["so_def_inv_stingernates"] = "so_def_inv_stingernates";
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Waves
-// ---------------------------------------------------------------------------------
-so_defense_challenge_prep() {
+// --------------------------------------------------------------------------------- //	Challenge Waves
+// --------------------------------------------------------------------------------- so_defense_challenge_prep() {
   thread enable_hellfire_attack();
   pause_hellfire_attack();
 
@@ -377,21 +371,14 @@ custom_eog_summary() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-//	Enable/Disable events
-// ---------------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------------
-
-enable_nates_exploders() {
+// --------------------------------------------------------------------------------- //	Enable/Disable events
+// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- enable_nates_exploders() {
   thread fire_off_exploder(getent("north_side_low", "targetname"));
   thread fire_off_exploder(getent("north_side_high", "targetname"));
   thread fire_off_exploder(getent("west_side", "targetname"));
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_smoke_wave_north(dialog_wait) {
+// --------------------------------------------------------------------------------- enable_smoke_wave_north(dialog_wait) {
   create_smoke_wave("magic_smoke_grenade_north", dialog_wait);
 }
 
@@ -399,9 +386,7 @@ enable_smoke_wave_south(dialog_wait) {
   create_smoke_wave("magic_smoke_grenade", dialog_wait);
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_hunter_truck_enemies_bank() {
+// --------------------------------------------------------------------------------- enable_hunter_truck_enemies_bank() {
   create_hunter_truck_enemies("truck_north_right");
 }
 
@@ -409,9 +394,7 @@ enable_hunter_truck_enemies_road() {
   create_hunter_truck_enemies("truck_north_left");
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_btr80_circling_street() {
+// --------------------------------------------------------------------------------- enable_btr80_circling_street() {
   create_btr80("nate_attacker_left");
 }
 
@@ -419,9 +402,7 @@ enable_btr80_circling_parking_lot() {
   create_btr80("nate_attacker_mid");
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_hunter_enemy_refill(refill_at, min_fill, max_fill, refill_total) {
+// --------------------------------------------------------------------------------- enable_hunter_enemy_refill(refill_at, min_fill, max_fill, refill_total) {
   hunter_enemies_refill(refill_at, min_fill, max_fill, refill_total);
 }
 
@@ -441,9 +422,7 @@ enable_hunter_enemy_group_burger_town(enemy_count) {
   create_hunter_enemy_group("burger_town_enemies", enemy_count);
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_hellfire_attack() {
+// --------------------------------------------------------------------------------- enable_hellfire_attack() {
   hellfire_attack_start();
 }
 
@@ -459,9 +438,7 @@ unpause_hellfire_attack() {
   hellfire_attack_unpause();
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_attack_heli_everywhere(wait_time) {
+// --------------------------------------------------------------------------------- enable_attack_heli_everywhere(wait_time) {
   create_attack_heli("kill_heli", "attack_heli_circle_node", wait_time);
 }
 

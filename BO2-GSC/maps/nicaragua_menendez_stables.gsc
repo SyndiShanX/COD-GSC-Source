@@ -173,8 +173,9 @@ delete_execution_enemies() {
   a_enemies = getaiarray("axis");
 
   foreach(ai_enemy in a_enemies) {
-    if(isalive(ai_enemy) && ai_enemy.origin[0] < -4096)
+    if(isalive(ai_enemy) && ai_enemy.origin[0] < -4096) {
       ai_enemy delete();
+    }
   }
 }
 
@@ -219,19 +220,22 @@ stables_brutality_logic() {
   self waittill("death");
   t_pdf_enter = getent("trig_stables_pdf_enter", "targetname");
 
-  if(isDefined(t_pdf_enter))
+  if(isDefined(t_pdf_enter)) {
     t_pdf_enter useby(level.player);
+  }
 
   t_brutality_start = getent("trig_stables_front_brutality_start", "targetname");
 
-  if(isDefined(t_brutality_start))
+  if(isDefined(t_brutality_start)) {
     t_brutality_start useby(level.player);
+  }
 
   wait 3;
   t_rage = getent("trig_stables_rage", "targetname");
 
-  if(isDefined(t_rage))
+  if(isDefined(t_rage)) {
     t_rage useby(level.player);
+  }
 }
 
 stables_brutality_front_logic() {
@@ -267,8 +271,9 @@ pitchfork_think() {
   level endon("pitchfork_logic_done");
 
   while(!flag("player_grabbed_pitchfork")) {
-    if(self usebuttonpressed())
+    if(self usebuttonpressed()) {
       flag_set("player_grabbed_pitchfork");
+    }
 
     wait 0.05;
   }
@@ -309,26 +314,30 @@ horse_death_nicaragua() {
 
   if(isDefined(self.current_anim_speed)) {
     if(self.current_anim_speed == level.idle) {
-      if(randomintrange(1, 100) < 50)
+      if(randomintrange(1, 100) < 50) {
         death_anim = level.horse_deaths[2].animation;
-      else
+      } else {
         death_anim = level.horse_deaths[3].animation;
+      }
     } else if(randomintrange(1, 100) < 50)
       death_anim = level.horse_deaths[0].animation;
-    else
+    else {
       death_anim = level.horse_deaths[1].animation;
+    }
   }
 
-  if(isDefined(self.death_anim))
+  if(isDefined(self.death_anim)) {
     death_anim = self.death_anim;
+  }
 
   if(isDefined(death_anim)) {
     self setflaggedanimknoball("horse_death", death_anim, %root, 1, 0.2, 1);
     self animscripts\shared::donotetracks("horse_death", ::handle_horse_death_fx);
     self waittillmatch("horse_death", "stop");
 
-    if(self.classname == "script_vehicle")
+    if(self.classname == "script_vehicle") {
       self vehicle_setspeed(0, 25, "Dead");
+    }
   }
 
   self.dontfreeme = undefined;
@@ -347,8 +356,9 @@ charging_horse_spawners() {
 stables_trapped_horses() {
   a_horses_trapped = maps\_vehicle::spawn_vehicles_from_targetname("trapped_horse");
 
-  foreach(vh_horse in a_horses_trapped)
-  vh_horse thread trapped_horse_update();
+  foreach(vh_horse in a_horses_trapped) {
+    vh_horse thread trapped_horse_update();
+  }
 
   vh_horse = maps\_vehicle::spawn_vehicle_from_targetname("stables_charging_horse3_spawner");
   vh_horse thread trapped_horse_update();
@@ -370,8 +380,9 @@ trapped_horse_update() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 collapse_roof() {
@@ -391,18 +402,21 @@ stables_pdf_logic() {
   self.b_not_part_of_rage = 1;
   level waittill("rage_on");
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "stables_pdf_center")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "stables_pdf_center") {
     self waittill("goal");
+  }
 
   self.b_not_part_of_rage = 0;
 
-  while(!(isDefined(self.b_picked_rage_fake_rush) && self.b_picked_rage_fake_rush) && !flag("rage_off") && !flag("stables_about_to_exit"))
+  while(!(isDefined(self.b_picked_rage_fake_rush) && self.b_picked_rage_fake_rush) && !flag("rage_off") && !flag("stables_about_to_exit")) {
     wait 0.05;
+  }
 
   clear_threatbias("menendez", self.script_string);
 
-  while(!flag("rage_off"))
+  while(!flag("rage_off")) {
     wait 0.05;
+  }
 
   self.goalradius = 2048;
 }

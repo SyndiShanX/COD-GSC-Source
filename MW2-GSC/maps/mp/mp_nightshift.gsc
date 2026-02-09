@@ -11,7 +11,7 @@ main() {
   maps\createart\mp_nightshift_art::main();
   maps\mp\_load::main();
   maps\mp\_compass::setupMiniMap("compass_map_mp_nightshift");
-  setdvar("compassmaxrange", "2400");
+  setDvar("compassmaxrange", "2400");
 
   ambientPlay("ambient_mp_urban");
   VisionSetNaked("mp_nightshift");
@@ -19,9 +19,9 @@ main() {
   game["attackers"] = "axis";
   game["defenders"] = "allies";
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.2);
-  setdvar("r_lightGridContrast", 1);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.2);
+  setDvar("r_lightGridContrast", 1);
 
   // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 1.5;

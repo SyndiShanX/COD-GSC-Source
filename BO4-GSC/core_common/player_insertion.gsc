@@ -255,7 +255,7 @@ fly_path(insertion, var_1d83d08d, fly_over_point, var_59526dd5) {
 }
 
 function_1db63266() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   insertionindex = function_20cba65e(self);
   insertion = level.insertions[insertionindex];
 
@@ -266,13 +266,13 @@ function_1db63266() {
 
 function_9368af66(insertion, player) {
   assert(isstruct(insertion));
-  assert(isplayer(player));
+  assert(isPlayer(player));
   insertion.infilteament setvisibletoplayer(player);
   insertion.infilteament clientfield::set("infiltration_ent", function_1e4302d0(1, insertion.index));
 }
 
 function_20cba65e(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
   if(!isDefined(player)) {
     return 0;
@@ -1971,7 +1971,7 @@ function_b80277f7() {
 }
 
 function_1c06c249(plane) {
-  if(isplayer(self) && isDefined(plane)) {
+  if(isPlayer(self) && isDefined(plane)) {
     self match_record::function_ded5f5b6(#"hash_1657e02fb5073e4a", plane.origin);
     self match_record::set_player_stat(#"hash_16618233fdac5c29", gettime());
     self match_record::set_player_stat(#"hash_63b95d780b2bd355", self flagsys::get(#"hash_224cb97b8f682317"));
@@ -2084,7 +2084,7 @@ start_freefall(velocity, parachute) {
 }
 
 function_4630bf0a() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self match_record::function_ded5f5b6(#"hash_7d9d379ecba10793", self.origin);
     self match_record::set_player_stat(#"hash_1469faf3180d8b7a", gettime());
     self.var_37ef8626 = gettime();
@@ -2341,10 +2341,10 @@ function_943c98fb(insertion) {
       level function_8dcd8623();
     }
 
-    setdvar(#"hash_683dafe2da41b42e", "<dev string:x282>");
+    setDvar(#"hash_683dafe2da41b42e", "<dev string:x282>");
 
     if(getdvarint(#"hash_5566ccc7de522a4a", 0)) {
-      setdvar(#"hash_5566ccc7de522a4a", 0);
+      setDvar(#"hash_5566ccc7de522a4a", 0);
       level thread function_4910c182(insertion);
     }
   }

@@ -85,7 +85,7 @@ player_init() {
 
 func_E459() {
   level waittill("game_ended");
-  setdvar("cg_draw2d", 1);
+  setDvar("cg_draw2d", 1);
 }
 
 onplayerconnect() {
@@ -94,7 +94,7 @@ onplayerconnect() {
   var_0 waittill("spawned_player");
   wait(1);
   var_0 takeallweapons();
-  setdvar("cg_draw2d", 0);
+  setDvar("cg_draw2d", 0);
   if(!isDefined(var_0)) {
     return;
   } else {
@@ -493,11 +493,11 @@ func_2BD8(var_0, var_1) {
     var_4 = var_3 / var_2;
     var_5 = sin(180 * var_4);
     var_6 = var_0 * var_5;
-    setdvar("r_blur", var_6);
+    setDvar("r_blur", var_6);
     wait(0.05);
   }
 
-  setdvar("r_blur", 0);
+  setDvar("r_blur", 0);
 }
 
 func_7284() {

@@ -88,7 +88,7 @@ function private function_555608c7() {
   self.takedamage = 1;
   while(true) {
     self waittill("damage", amount, attacker);
-    if(isDefined(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isPlayer(attacker)) {
       break;
     }
   }
@@ -100,7 +100,7 @@ function private function_555608c7() {
   self clearpath();
   self setgoal(self.origin, 1);
   self.var_88168473 = 1;
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     self.ignoreall = 0;
     self.favoriteenemy = attacker;
     self setentitytarget(attacker);
@@ -125,7 +125,7 @@ function private function_555608c7() {
   self.var_faa677d7 = gettime() + 10000;
   self thread namespace_1a381543::function_90118d8c("zmb_simianaut_roar");
   self.zombie_move_speed = "run";
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     self setgoal(attacker.origin, 1);
     self.ignoreall = 0;
     self.favoriteenemy = attacker;
@@ -177,7 +177,7 @@ function function_ce73145c() {
       continue;
     }
     if(isDefined(self)) {
-      if(!isplayer(guy)) {
+      if(!isPlayer(guy)) {
         self animscripted("pissedoff", self.origin, self.angles, "ai_zombie_doa_simianaut_attack_v1");
         self waittillmatch("pissedoff");
         if(isDefined(guy)) {
@@ -226,10 +226,10 @@ function private function_66efd1eb() {
       if(!isDefined(player) || !isalive(player)) {
         continue;
       }
-      if(isplayer(player) && isDefined(player.doa.var_1db1e638) && gettime() < player.doa.var_1db1e638) {
+      if(isPlayer(player) && isDefined(player.doa.var_1db1e638) && gettime() < player.doa.var_1db1e638) {
         continue;
       }
-      if(isplayer(player) && (isDefined(player.doa.respawning) && player.doa.respawning)) {
+      if(isPlayer(player) && (isDefined(player.doa.respawning) && player.doa.respawning)) {
         continue;
       }
       if(isDefined(player.vehicle)) {

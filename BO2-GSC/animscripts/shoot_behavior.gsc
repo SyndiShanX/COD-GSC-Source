@@ -24,24 +24,28 @@ decidewhatandhowtoshoot(objective) {
   self.fastburst = 0;
   self.shouldreturntocover = 0;
 
-  if(!isDefined(self.changingcoverpos))
+  if(!isDefined(self.changingcoverpos)) {
     self.changingcoverpos = 0;
+  }
 
   atcover = isDefined(self.covernode) && self.covernode.type != "Cover Prone" && self.covernode.type != "Conceal Prone";
 
-  if(atcover)
+  if(atcover) {
     wait 0.05;
+  }
 
   prevshootent = self.shootent;
   prevshootpos = self.shootpos;
   prevshootstyle = self.shootstyle;
   self animscripts\shared::updatelaserstatus(1);
 
-  if(self issniper())
+  if(self issniper()) {
     self resetsniperaim(1);
+  }
 
-  if(atcover && (!self.a.atconcealmentnode || !self canseeenemy()))
+  if(atcover && (!self.a.atconcealmentnode || !self canseeenemy())) {
     thread watchforincomingfire();
+  }
 
   thread runonshootbehaviorend();
   self.ambushendtime = undefined;
@@ -51,35 +55,39 @@ decidewhatandhowtoshoot(objective) {
     assert(!isDefined(self.shootent) || isDefined(self.shootpos));
     result = undefined;
 
-    if(self.weapon == "none")
+    if(self.weapon == "none") {
       nogunshoot();
-    else if(!self.a.allow_shooting) {
+    } else if(!self.a.allow_shooting) {
       setshootstyle("none", 0);
 
-      if(isDefined(self.enemy))
+      if(isDefined(self.enemy)) {
         setshootent(self.enemy);
+      }
     } else if(self weaponanims() == "rocketlauncher")
       result = rpgshoot();
-    else if(self.weaponclass == "pistol")
+    else if(self.weaponclass == "pistol") {
       result = pistolshoot();
-    else if(self.weaponclass == "spread")
+    } else if(self.weaponclass == "spread") {
       result = shotgunshoot();
-    else if(self.weaponclass == "gas")
+    } else if(self.weaponclass == "gas") {
       result = flamethrower_shoot();
-    else if(usinggrenadelauncher())
+    } else if(usinggrenadelauncher()) {
       result = grenadeshoot();
-    else
+    } else {
       result = rifleshoot();
+    }
 
-    if(checkchanged(prevshootent, self.shootent) || !isDefined(self.shootent) && checkchanged(prevshootpos, self.shootpos) || checkchanged(prevshootstyle, self.shootstyle))
+    if(checkchanged(prevshootent, self.shootent) || !isDefined(self.shootent) && checkchanged(prevshootpos, self.shootpos) || checkchanged(prevshootstyle, self.shootstyle)) {
       self notify("shoot_behavior_change");
+    }
 
     prevshootent = self.shootent;
     prevshootpos = self.shootpos;
     prevshootstyle = self.shootstyle;
 
-    if(!isDefined(result))
+    if(!isDefined(result)) {
       waitabit();
+    }
   }
 }
 
@@ -118,18 +126,20 @@ shouldsuppress() {
 rifleshoot() {
   if(self.shootobjective == "normal") {
     if(!canseeenemy()) {
-      if(self issniper())
+      if(self issniper()) {
         self resetsniperaim();
+      }
 
-      if(!isDefined(self.enemy))
+      if(!isDefined(self.enemy)) {
         havenothingtoshoot();
-      else {
+      } else {
         markenemyposinvisible();
 
-        if((self.providecoveringfire || randomint(5) > 0) && shouldsuppress())
+        if((self.providecoveringfire || randomint(5) > 0) && shouldsuppress()) {
           self.shootobjective = "suppress";
-        else
+        } else {
           self.shootobjective = "ambush";
+        }
 
         return "retry";
       }
@@ -146,34 +156,38 @@ rifleshoot() {
 
     markenemyposinvisible();
 
-    if(self issniper())
+    if(self issniper()) {
       self resetsniperaim();
+    }
 
     if(!cansuppressenemy()) {
-      if(self.shootobjective == "suppress" || self.team == "allies" && !isvalidenemy(self.enemy))
+      if(self.shootobjective == "suppress" || self.team == "allies" && !isvalidenemy(self.enemy)) {
         havenothingtoshoot();
-      else {
+      } else {
         assert(self.shootobjective == "ambush");
         self.shootstyle = "none";
         likelyenemydir = self getanglestolikelyenemypath();
 
         if(!isDefined(likelyenemydir)) {
-          if(isDefined(self.covernode))
+          if(isDefined(self.covernode)) {
             likelyenemydir = self.covernode.angles;
-          else
+          } else {
             likelyenemydir = self.angles;
+          }
         }
 
         self.shootent = undefined;
         dist = 1024;
 
-        if(isDefined(self.enemy))
+        if(isDefined(self.enemy)) {
           dist = distance(self.origin, self.enemy.origin);
+        }
 
         newshootpos = self getEye() + anglesToForward(likelyenemydir) * dist;
 
-        if(!isDefined(self.shootpos) || distancesquared(newshootpos, self.shootpos) > 25)
+        if(!isDefined(self.shootpos) || distancesquared(newshootpos, self.shootpos) > 25) {
           self.shootpos = newshootpos;
+        }
 
         if(shouldstopambushing()) {
           self.ambushendtime = undefined;
@@ -185,15 +199,16 @@ rifleshoot() {
       self.shootent = undefined;
       self.shootpos = getenemysightpos();
 
-      if(self.shootobjective == "suppress")
+      if(self.shootobjective == "suppress") {
         self setshootstyleforsuppression();
-      else {
+      } else {
         assert(self.shootobjective == "ambush");
         self.shootstyle = "none";
 
         if(self shouldstopambushing()) {
-          if(shouldsuppress())
+          if(shouldsuppress()) {
             self.shootobjective = "suppress";
+          }
 
           self.ambushendtime = undefined;
 
@@ -211,10 +226,11 @@ rifleshoot() {
 
 shouldstopambushing() {
   if(!isDefined(self.ambushendtime)) {
-    if(self.team == "allies")
+    if(self.team == "allies") {
       self.ambushendtime = gettime() + randomintrange(4000, 10000);
-    else
+    } else {
       self.ambushendtime = gettime() + randomintrange(40000, 60000);
+    }
   }
 
   return self.ambushendtime < gettime();
@@ -232,14 +248,16 @@ rpgshootexplodable() {
     for(i = 0; i < enemy._explodable_targets.size; i++) {
       target = enemy._explodable_targets[i];
 
-      if(isDefined(target) && self cansee(target))
+      if(isDefined(target) && self cansee(target)) {
         self setentitytarget(target);
+      }
     }
   }
 
   if(isDefined(target)) {
-    while(isDefined(target) && isalive(enemy) && self.weapon == weapon)
+    while(isDefined(target) && isalive(enemy) && self.weapon == weapon) {
       wait 0.05;
+    }
 
     self clearentitytarget();
   }
@@ -252,8 +270,9 @@ rpgshoot() {
     return;
   }
 
-  if(isDefined(self.enemy) && isDefined(self.enemy._explodable_targets))
+  if(isDefined(self.enemy) && isDefined(self.enemy._explodable_targets)) {
     self thread rpgshootexplodable();
+  }
 
   setshootent(self.enemy);
   self.shootstyle = "single";
@@ -275,10 +294,11 @@ grenadeshoot() {
 
   setshootent(self.enemy);
 
-  if(self.bulletsinclip > 1)
+  if(self.bulletsinclip > 1) {
     self.shootstyle = "burst";
-  else
+  } else {
     self.shootstyle = "single";
+  }
 }
 
 shotgunshoot() {
@@ -332,8 +352,9 @@ pistolshoot() {
 
     self.shootstyle = "none";
 
-    if(!isDefined(self.ambushendtime))
+    if(!isDefined(self.ambushendtime)) {
       self.ambushendtime = gettime() + randomintrange(4000, 8000);
+    }
 
     if(self.ambushendtime < gettime()) {
       self.shootobjective = "normal";
@@ -346,8 +367,9 @@ pistolshoot() {
 markenemyposinvisible() {
   if(isDefined(self.enemy) && !self.changingcoverpos && self.a.script != "combat") {
     if(isai(self.enemy) && isDefined(self.enemy.a.script) && (self.enemy.a.script == "cover_stand" || self.enemy.a.script == "cover_crouch")) {
-      if(isDefined(self.enemy.a.covermode) && self.enemy.a.covermode == "Hide")
+      if(isDefined(self.enemy.a.covermode) && self.enemy.a.covermode == "Hide") {
         return;
+      }
     }
 
     self.couldntseeenemypos = self.enemy.origin;
@@ -371,23 +393,28 @@ watchforincomingfire() {
 }
 
 readytoreturntocover() {
-  if(self.changingcoverpos)
+  if(self.changingcoverpos) {
     return false;
+  }
 
-  if(isDefined(self.isramboing) && self.isramboing)
+  if(isDefined(self.isramboing) && self.isramboing) {
     return false;
+  }
 
   assert(isDefined(self.coverposestablishedtime));
 
-  if(!isvalidenemy(self.enemy) || !self cansee(self.enemy))
+  if(!isvalidenemy(self.enemy) || !self cansee(self.enemy)) {
     return true;
+  }
 
-  if(gettime() < self.coverposestablishedtime + 800)
+  if(gettime() < self.coverposestablishedtime + 800) {
     return false;
+  }
 
-  if(isplayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
-    if(gettime() < self.coverposestablishedtime + 3000)
+  if(isPlayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
+    if(gettime() < self.coverposestablishedtime + 3000) {
       return false;
+    }
   }
 
   return true;
@@ -400,8 +427,9 @@ runonshootbehaviorend() {
 }
 
 checkchanged(prevval, newval) {
-  if(isDefined(prevval) != isDefined(newval))
+  if(isDefined(prevval) != isDefined(newval)) {
     return true;
+  }
 
   if(!isDefined(newval)) {
     assert(!isDefined(prevval));
@@ -431,44 +459,50 @@ havenothingtoshoot() {
 }
 
 shootingplayerathigherdifficulty() {
-  return level.gameskill == 3 && isplayer(self.enemy);
+  return level.gameskill == 3 && isPlayer(self.enemy);
 }
 
 setshootstyleforvisibleenemy() {
   assert(isDefined(self.shootpos));
   assert(isDefined(self.shootent));
 
-  if(isDefined(self.shootent.enemy) && isDefined(self.shootent.enemy.syncedmeleetarget))
+  if(isDefined(self.shootent.enemy) && isDefined(self.shootent.enemy.syncedmeleetarget)) {
     return setshootstyle("single", 0);
+  }
 
-  if(self issniper() || self weapon_spread())
+  if(self issniper() || self weapon_spread()) {
     return setshootstyle("single", 0);
+  }
 
   distancesq = distancesquared(self getshootatpos(), self.shootpos);
 
   if(weaponissemiauto(self.weapon)) {
-    if(distancesq < 2560000 || shootingplayerathigherdifficulty())
+    if(distancesq < 2560000 || shootingplayerathigherdifficulty()) {
       return setshootstyle("semi", 0);
+    }
 
     return setshootstyle("single", 0);
   }
 
-  if(self.weaponclass == "mg")
+  if(self.weaponclass == "mg") {
     return setshootstyle("full", 0);
+  }
 
   if(distancesq < 90000) {
-    if(isDefined(self.shootent) && isDefined(self.shootent.magic_bullet_shield))
+    if(isDefined(self.shootent) && isDefined(self.shootent.magic_bullet_shield)) {
       return setshootstyle("single", 0);
-    else
+    } else {
       return setshootstyle("full", 0);
+    }
   } else if(distancesq < 810000 || shootingplayerathigherdifficulty())
     return setshootstyle("burst", 1);
 
   if(self.providecoveringfire || distancesq < 2560000) {
-    if(shoulddosemiforvariety())
+    if(shoulddosemiforvariety()) {
       return setshootstyle("semi", 0);
-    else
+    } else {
       return setshootstyle("burst", 0);
+    }
   }
 
   return setshootstyle("single", 0);
@@ -481,20 +515,23 @@ setshootstyleforsuppression() {
   assert(!self weapon_spread());
 
   if(weaponissemiauto(self.weapon)) {
-    if(distancesq < 2560000)
+    if(distancesq < 2560000) {
       return setshootstyle("semi", 0);
+    }
 
     return setshootstyle("single", 0);
   }
 
-  if(self.weaponclass == "mg")
+  if(self.weaponclass == "mg") {
     return setshootstyle("full", 0);
+  }
 
   if(self.providecoveringfire || distancesq < 1690000) {
-    if(shoulddosemiforvariety())
+    if(shoulddosemiforvariety()) {
       return setshootstyle("semi", 0);
-    else
+    } else {
       return setshootstyle("burst", 0);
+    }
   }
 
   return setshootstyle("single", 0);
@@ -510,18 +547,21 @@ shoulddosemiforvariety() {
 
   return 0;
 
-  if(!isDefined(self.semiforvarietycheck))
+  if(!isDefined(self.semiforvarietycheck)) {
     self.semiforvarietycheck = 0;
+  }
 
   time = gettime();
 
-  if(time < self.semiforvarietycheck)
+  if(time < self.semiforvarietycheck) {
     return 0;
+  }
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     dosemi = 1;
-  else
+  } else {
     dosemi = 0;
+  }
 
   self.semiforvarietycheck = time + 10000;
   return dosemi;
@@ -532,8 +572,9 @@ resetsniperaim(considermissing) {
   self.snipershotcount = 0;
   self.sniperhitcount = 0;
 
-  if(isDefined(considermissing))
+  if(isDefined(considermissing)) {
     self.lastmissedenemy = undefined;
+  }
 }
 
 showsniperglint() {
@@ -552,6 +593,7 @@ showsniperglint() {
   if(!isDefined(level._effect["sniper_glint"])) {
     return;
   }
-  if(distancesquared(self.origin, self.enemy.origin) > 65536)
+  if(distancesquared(self.origin, self.enemy.origin) > 65536) {
     playFXOnTag(level._effect["sniper_glint"], self, "tag_flash");
+  }
 }

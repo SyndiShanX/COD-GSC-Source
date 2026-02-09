@@ -81,7 +81,7 @@ spit_projectile(enemy) {
 }
 
 spit_attack(enemy) {
-  /# maps\mp\agents\alien\_alien_think::debug_alien_ai_state( "spit_attack" );
+  maps\mp\agents\alien\_alien_think::debug_alien_ai_state("spit_attack");
   self endon("melee_pain_interrupt");
   isEnemyChopper = isDefined(enemy) && isDefined(enemy.code_classname) && enemy.code_classname == "script_vehicle";
 
@@ -231,7 +231,7 @@ is_valid_spit_target(spit_target, check_attacker_values) {
     return false;
   }
 
-  if(check_attacker_values && IsPlayer(spit_target) && !has_attacker_space(spit_target)) {
+  if(check_attacker_values && isPlayer(spit_target) && !has_attacker_space(spit_target)) {
     return false;
   }
 
@@ -302,7 +302,7 @@ fire_spit_projectile() {
 }
 
 get_lookahead_target_location(projectile_speed, target, use_eye_location) {
-  if(!IsPlayer(target))
+  if(!isPlayer(target))
     return target.origin;
 
   lookAheadPercentage = get_lookahead_percentage();
@@ -399,7 +399,7 @@ spit_aoe_cloud_damage(impact_location, trigger) {
   while(true) {
     trigger waittill("trigger", player);
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(!IsAlive(player)) {
@@ -466,7 +466,6 @@ spitter_combat(enemy) {
     } else {
       wait 0.05;
     }
-
   }
 }
 

@@ -87,7 +87,6 @@ main() {
 
   if(!getdvarint("r_reflectionProbeGenerate")) {
     _id_55B9::main();
-
   }
   if(!isDefined(level.createfxent)) {
     level.createfxent = [];

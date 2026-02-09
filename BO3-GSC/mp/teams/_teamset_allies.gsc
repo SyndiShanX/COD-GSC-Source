@@ -27,8 +27,8 @@ function init(team) {
   game["headicon_" + team] = "faction_allies";
   level.teamprefix[team] = "vox_st";
   level.teampostfix[team] = "st6";
-  setdvar("g_TeamName_" + team, &"MPUI_ALLIES_SHORT");
-  setdvar("g_FactionName_" + team, "allies");
+  setDvar("g_TeamName_" + team, &"MPUI_ALLIES_SHORT");
+  setDvar("g_FactionName_" + team, "allies");
   game["strings"][team + "_win"] = &"MP_BLACK_OPS_WIN_MATCH";
   game["strings"][team + "_win_round"] = &"MP_BLACK_OPS_WIN_ROUND";
   game["strings"][team + "_mission_accomplished"] = &"MP_BLACK_OPS_MISSION_ACCOMPLISHED";
@@ -40,7 +40,7 @@ function init(team) {
   game["music"]["victory_" + team] = "VICTORY_ST6";
   game["icons"][team] = "faction_allies";
   game["voice"][team] = "vox_st6_";
-  setdvar("scr_" + team, "marines");
+  setDvar("scr_" + team, "marines");
   level.heli_vo[team]["hit"] = "vox_ops_2_kls_attackheli_hit";
   game["flagmodels"][team] = "p7_mp_flag_allies";
   game["carry_flagmodels"][team] = "p7_mp_flag_allies_carry";

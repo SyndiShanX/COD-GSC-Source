@@ -162,7 +162,7 @@ repeater_headshot_ammo_passive(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
 
@@ -222,7 +222,7 @@ cheatammoifnecessary() {
   }
 
   if(self.team != "allies") {
-    if(!isplayer(self.enemy)) {
+    if(!isPlayer(self.enemy)) {
       return 0;
     }
   }
@@ -667,7 +667,7 @@ cansuppressenemy() {
     return 0;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return aisuppressai();
   }
 
@@ -827,7 +827,7 @@ cansuppressenemyfromexposed() {
     return 0;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return aisuppressai();
   }
 
@@ -894,7 +894,7 @@ enemyishiding() {
     return 1;
   }
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth) {
       return 1;
     }

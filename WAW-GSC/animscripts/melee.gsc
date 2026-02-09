@@ -268,9 +268,6 @@ CanMeleeInternal(state) {
     if(self.enemyDistanceSq <= anim.meleeRangeSq) {
       if(!isMeleePathClear(vecToEnemy, enemyPoint)) {
         if(!self is_banzai() && !self is_zombie()) {
-
-        }
-        {
           return false;
         }
       }

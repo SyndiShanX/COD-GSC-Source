@@ -74,7 +74,7 @@ check_createfx_limit() {}
 check_limit_type(var_0, var_1) {}
 
 print_org(var_0, var_1, var_2, var_3) {
-  if(getdvar("debug") == "1") {}
+  if(getDvar("debug") == "1") {}
 }
 
 func_C519(var_0, var_1, var_2, var_3) {}
@@ -292,7 +292,7 @@ oneshotfxthread() {
 }
 
 add_reactive_fx() {
-  if(!scripts\engine\utility::issp() && getdvar("createfx") == "") {
+  if(!scripts\engine\utility::issp() && getDvar("createfx") == "") {
     return;
   }
 
@@ -311,7 +311,7 @@ add_reactive_fx() {
 
 reactive_fx_thread() {
   if(!scripts\engine\utility::issp()) {
-    if(getdvar("createfx") == "on") {
+    if(getDvar("createfx") == "on") {
       scripts\engine\utility::flag_wait("createfx_started");
     }
   }

@@ -168,7 +168,7 @@ melee_isvalid() {
 
   if(isDefined(self.meleechargedistsq))
     var_2 = self.meleechargedistsq;
-  else if(isplayer(var_0))
+  else if(isPlayer(var_0))
     var_2 = 40000;
   else
     var_2 = 25600;
@@ -200,7 +200,7 @@ melee_isvalid() {
   if(isDefined(var_0.dontattackme) || isDefined(var_0.ignoreme) && var_0.ignoreme)
     return 0;
 
-  if(!isai(var_0) && !isplayer(var_0))
+  if(!isai(var_0) && !isPlayer(var_0))
     return 0;
 
   if(isai(var_0)) {
@@ -211,7 +211,7 @@ melee_isvalid() {
       return 0;
   }
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     var_3 = var_0 getstance();
   else
     var_3 = var_0.a.pose;
@@ -306,7 +306,7 @@ melee_standard_chooseaction() {
 melee_standard_resetgiveuptime() {
   if(isDefined(self.meleechargedistsq))
     var_0 = self.meleechargedistsq;
-  else if(isplayer(self.melee.target))
+  else if(isPlayer(self.melee.target))
     var_0 = 40000;
   else
     var_0 = 25600;
@@ -420,7 +420,7 @@ melee_standard_getinposition() {
   var_15 = undefined;
   var_16 = animscripts\utility::lookupanim("run", "straight");
 
-  if(isplayer(self.melee.target) && self.melee.target == self.enemy)
+  if(isPlayer(self.melee.target) && self.melee.target == self.enemy)
     self orientmode("face enemy");
   else
     self orientmode("face point", self.melee.target.origin);
@@ -465,7 +465,7 @@ melee_standard_getinposition() {
     var_22 = self.melee.target.origin + var_21 * var_13;
     var_15 = common_scripts\utility::distance_2d_squared(self.origin, var_22);
 
-    if(var_17 && var_0 <= var_10 && (gettime() - var_14 >= var_12 || !isplayer(self.melee.target))) {
+    if(var_17 && var_0 <= var_10 && (gettime() - var_14 >= var_12 || !isPlayer(self.melee.target))) {
       break;
     }
 
@@ -483,7 +483,7 @@ melee_playchargesound() {
   if(!isDefined(self.a.nextmeleechargesound))
     self.a.nextmeleechargesound = 0;
 
-  if(isDefined(self.enemy) && isplayer(self.enemy) || randomint(3) == 0) {
+  if(isDefined(self.enemy) && isPlayer(self.enemy) || randomint(3) == 0) {
     if(gettime() > self.a.nextmeleechargesound) {
       animscripts\face::saygenericdialogue("meleecharge");
       self.a.nextmeleechargesound = gettime() + 8000;

@@ -30,7 +30,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 1; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   return var_0;
 }

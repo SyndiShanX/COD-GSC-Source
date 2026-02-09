@@ -62,7 +62,7 @@ main() {
   thread oil_pumps_animate();
   thread flarestack_swap();
   thread maps\black_ice_fx::fx_init();
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
 }
 
 mission_flag_inits() {
@@ -128,7 +128,7 @@ a_globals() {
   level._bravo = [];
   level._vehicles = [];
   getdvarint("bi_command_pressure_trial", 0);
-  setdvar("bi_command_pressure_trial", 0);
+  setDvar("bi_command_pressure_trial", 0);
 }
 
 threat_group_inits() {

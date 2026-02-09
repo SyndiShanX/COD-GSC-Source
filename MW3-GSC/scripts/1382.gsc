@@ -33,7 +33,6 @@ _id_42D5() {
         thread _id_42DF();
       } else if(maps\_utility::_id_1008("_stealth_stance_change")) {
         self notify("_stealth_stance_dont_change");
-
       }
       wait 0.05;
     }
@@ -116,7 +115,6 @@ _id_42DD() {
         _id_42E0();
       } else {
         self allowedstances("prone");
-
       }
       break;
     case "prone":
@@ -172,7 +170,6 @@ _id_42E1(var_0) {
 
   if(!isDefined(var_0)) {
     var_0 = self._id_0B6E._id_41D0._id_42E2;
-
   }
   wait(var_0);
 

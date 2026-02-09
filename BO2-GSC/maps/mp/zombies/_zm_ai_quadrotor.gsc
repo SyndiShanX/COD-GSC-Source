@@ -191,7 +191,6 @@ quadrotor_watch_for_game_end() {
     self delete();
 
     iprintln("Maxis deleted");
-
   }
 }
 

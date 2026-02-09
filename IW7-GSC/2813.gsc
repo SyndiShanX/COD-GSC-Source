@@ -44,7 +44,7 @@ func_13D18() {
     if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_1)) {
       continue;
     }
-    if(gettime() - var_0 > 190 && !scripts\mp\utility\game::isusingremote() && getdvar("scr_whizby_off") == "") {
+    if(gettime() - var_0 > 190 && !scripts\mp\utility\game::isusingremote() && getDvar("scr_whizby_off") == "") {
       thread func_13D17(var_1);
       var_0 = gettime();
     }

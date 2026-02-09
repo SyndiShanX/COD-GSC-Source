@@ -44,7 +44,7 @@ spiderhole() {
   }
   nodes = getnodearray(self.target, "targetname");
   if(nodes.size > 0) {
-    target_node = nodes[randomInt(nodes.size)];
+    target_node = nodes[RandomInt(nodes.size)];
   }
   if(isDefined(spider_lid)) {
     if(isDefined(spider_lid.script_fxid)) {
@@ -66,13 +66,12 @@ spiderhole() {
   }
   self.pacifist = false;
   closest_player = get_closest_player(self.origin);
-  if(chance >= randomInt(100)) {
+  if(chance >= RandomInt(100)) {
     self thread spiderhole_charge(anim_org, spider_lid, closest_player);
   } else {
     self thread spiderhole_run_to_node(anim_org, spider_lid, target_node);
   }
 }
-
 spiderhole_charge(anim_org, spider_lid, closest_player) {
   self endon("death");
   self spiderhole_anim(anim_org, spider_lid, closest_player);
@@ -82,7 +81,6 @@ spiderhole_charge(anim_org, spider_lid, closest_player) {
   self.banzai_no_wait = true;
   self maps\_banzai::banzai_force();
 }
-
 spiderhole_charge_internal() {
   players = get_players();
   squad = getaiarray("allies");
@@ -91,13 +89,12 @@ spiderhole_charge_internal() {
   combined = array_combine(players, squad);
   guy = get_closest_living(self.origin, combined, 1024);
   if(!isDefined(guy)) {
-    guy = players[randomInt(players.size)];
+    guy = players[randomint(players.size)];
   }
   self thread set_goal_to_guy(guy);
   self playSound("jpn_charge");
   self thread spiderhole_charge_think();
 }
-
 set_goal_to_guy(guy) {
   self endon("death");
   while(issentient(guy)) {
@@ -106,7 +103,6 @@ set_goal_to_guy(guy) {
   }
   self thread spiderhole_charge_internal();
 }
-
 spiderhole_charge_think() {
   self endon("death");
   self waittill("stop_spiderhole");
@@ -116,7 +112,6 @@ spiderhole_charge_think() {
     self.run_combatanim = self.old_run_combatanim;
   }
 }
-
 spiderhole_run_to_node(anim_org, spider_lid, target_node) {
   self endon("death");
   if(isDefined(target_node)) {
@@ -139,7 +134,6 @@ spiderhole_run_to_node(anim_org, spider_lid, target_node) {
     self spiderhole_anim_internal(self.script_spiderhole_anim, self, spider_lid);
   }
 }
-
 spiderhole_reset_death(delay) {
   self endon("death");
   wait(delay);
@@ -147,8 +141,8 @@ spiderhole_reset_death(delay) {
   self.deathanim = undefined;
   self.nodeathragdoll = undefined;
 }
-
 #using_animtree("generic_human");
+
 spiderhole_anim(anim_org, lid, closest_object) {
   if(isDefined(self.script_spiderhole_anim)) {
     self.allowdeath = true;
@@ -164,9 +158,8 @@ spiderhole_anim(anim_org, lid, closest_object) {
   self.deathanim = undefined;
   self.nodeathragdoll = undefined;
 }
-
 spiderhole_getout_anim(anim_org, lid, closest_object) {
-  num = randomInt(100);
+  num = RandomInt(100);
   if(num > 80) {
     getout_anim = "stumble_out";
   } else {
@@ -176,7 +169,6 @@ spiderhole_getout_anim(anim_org, lid, closest_object) {
   lid thread spiderhole_drop_lid_to_ground();
   self thread spiderhole_reset_death(1);
 }
-
 spiderhole_anim_internal(anim_ref, anim_org, lid, closest_object) {
   if(isDefined(closest_object)) {
     angles = VectorToAngles(closest_object.origin - self.origin);
@@ -200,16 +192,14 @@ spiderhole_anim_internal(anim_ref, anim_org, lid, closest_object) {
     lid notify("out_of_spiderhole");
   }
 }
-
 spiderhole_drop_lid_to_ground() {
   if(!isDefined(level.no_spider_lid_drop)) {
     wait(1.5);
     self Unlink();
     groundPos = PhysicsTrace(self.origin + (0, 0, 64), self.origin - (0, 0, 256));
-    self moveTo(groundPos + (0, 0, 6), 0.5);
+    self MoveTo(groundPos + (0, 0, 6), 0.5);
   }
 }
-
 spiderhole_duck(anim_ref, anim_org, lid, closest_object) {
   self endon("death");
   if(anim_ref == "grenade_toss" || anim_ref == "gun_spray") {
@@ -221,7 +211,7 @@ spiderhole_duck(anim_ref, anim_org, lid, closest_object) {
     }
     while(1) {
       closest_player = get_closest_player(self.origin);
-      if(distanceSquared(closest_player.origin, self.origin) > 96 * 96) {
+      if(DistanceSquared(closest_player.origin, self.origin) > 96 * 96) {
         break;
       }
       wait(0.05);
@@ -230,17 +220,14 @@ spiderhole_duck(anim_ref, anim_org, lid, closest_object) {
     self spiderhole_getout_anim(anim_org, lid, closest_object);
   }
 }
-
 spiderhole_grenade_toss(guy) {
   tag = guy GetTagOrigin("tag_weapon_left");
   target = get_closest_player(guy.origin);
   guy MagicGrenade(tag, target.origin, 3);
 }
-
 spiderhole_gun_spray(guy) {
   guy Shoot(guy.accuracy);
 }
-
 line_to_tag(tag_name) {
   self endon("death");
   player = get_players()[0];
@@ -249,7 +236,6 @@ line_to_tag(tag_name) {
     wait(0.05);
   }
 }
-
 do_print3d(msg, time, offset) {}
 draw_tag_angles(tagname) {}
 monitor_spiderhole_death(lid) {

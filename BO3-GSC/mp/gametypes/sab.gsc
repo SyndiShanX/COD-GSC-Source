@@ -566,7 +566,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       inbombzone = 1;
     }
   }
-  if(inbombzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(inbombzone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     if(inbombzoneteam == self.pers["team"]) {
       attacker thread challenges::killedbaseoffender(level.bombzones[inbombzoneteam], weapon);
       self recordkillmodifier("defending");
@@ -580,7 +580,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       self recordkillmodifier("assaulting");
     }
   }
-  if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isbombcarrier) && self.isbombcarrier == 1) {
+  if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isbombcarrier) && self.isbombcarrier == 1) {
     self recordkillmodifier("carrying");
   }
   if(self.isplanting == 1) {

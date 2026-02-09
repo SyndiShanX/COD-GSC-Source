@@ -232,7 +232,7 @@ function sndmaelstrom() {
   }
   while(true) {
     trig waittill("trigger", who);
-    if(isplayer(who) && (!(isDefined(who.sndmaelstrom) && who.sndmaelstrom))) {
+    if(isPlayer(who) && (!(isDefined(who.sndmaelstrom) && who.sndmaelstrom))) {
       who.sndmaelstrom = 1;
       who clientfield::set_to_player("sndMaelstrom", 1);
     }
@@ -326,7 +326,7 @@ function function_66aff463() {
   var_8e7ce497 = spawn("trigger_damage", self.origin, 0, 15, 50);
   while(true) {
     var_8e7ce497 waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weapon);
-    if(isplayer(inflictor) && issubstr(weapon.name, "staff_" + self.script_string)) {
+    if(isPlayer(inflictor) && issubstr(weapon.name, "staff_" + self.script_string)) {
       level notify("hash_556250a8");
       level util::clientnotify("snd" + self.script_string);
       break;
@@ -396,7 +396,7 @@ function function_bec55ee6() {
   self.var_ac086ffb.health = 1000000;
   while(true) {
     self.var_ac086ffb waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     if(type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_EXPLOSIVE") {

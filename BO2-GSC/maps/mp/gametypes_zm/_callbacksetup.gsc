@@ -169,7 +169,7 @@ abortlevel() {
   level.callbackactordamage = ::callbackvoid;
   level.callbackactorkilled = ::callbackvoid;
   level.callbackvehicledamage = ::callbackvoid;
-  setdvar("g_gametype", "dm");
+  setDvar("g_gametype", "dm");
   exitlevel(0);
 }
 

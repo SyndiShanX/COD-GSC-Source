@@ -254,7 +254,7 @@ sentry_handleDamage() {
           } else {
             modifiedDamage = 0;
           }
-          if(IsPlayer(attacker)) {
+          if(isPlayer(attacker)) {
             attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("sentry");
           }
           break;
@@ -439,8 +439,7 @@ applyPrisonTurretRadarArrow() {
           }
 
           if(isDefined(level.players[j]) && IsAlive(level.players[j]) &&
-            ((level.teamBased && level.players[j].team != level.prison_turrets[i].spawned_turret.team) ||
-              (!level.teamBased && level.players[j] != level.prison_turrets[i].spawned_turret.owner))) {
+            ((level.teamBased && level.players[j].team != level.prison_turrets[i].spawned_turret.team) || (!level.teamBased && level.players[j] != level.prison_turrets[i].spawned_turret.owner))) {
             turret_to_player_distance = DistanceSquared(level.players[j].origin, level.prison_turrets[i].spawned_turret.origin);
 
             if(turret_to_player_distance < 3610000) {

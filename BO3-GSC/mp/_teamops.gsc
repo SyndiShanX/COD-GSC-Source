@@ -144,7 +144,7 @@ function stopteamops() {
 
 function processplayerevent(event, player) {
   teamopsname = game["teamops"].teamopsname;
-  if(isplayer(player) && isDefined(teamopsname)) {
+  if(isPlayer(player) && isDefined(teamopsname)) {
     level processteamevent(event, player, player.team);
   }
 }
@@ -233,7 +233,7 @@ function watchteamopstime() {
     if(isDefined(game["teamops"].teamopsname)) {
       if(getdvarint("scr_stop_teamops") == 1) {
         stopteamops();
-        setdvar("scr_stop_teamops", 0);
+        setDvar("scr_stop_teamops", 0);
       }
     }
     timepassed = globallogic_utils::gettimepassed() / 1000;
@@ -248,7 +248,7 @@ function watchteamopstime() {
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   level endon("teamops_starting");
-  if(isplayer(attacker) == 0 || attacker.team == self.team) {
+  if(isPlayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
   if(!isDefined(level.teamopskilltracker)) {

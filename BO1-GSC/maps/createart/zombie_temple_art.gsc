@@ -23,7 +23,7 @@ main() {
   time = 0;
   max_fog_opacity = 0.604413;
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
-  visionSetNaked("zombie_temple", 0);
+  VisionSetNaked("zombie_temple", 0);
   SetSavedDvar("r_lightGridEnableTweaks", 1);
   SetSavedDvar("r_lightGridIntensity", 1.6);
   SetSavedDvar("r_lightGridContrast", 0.5);

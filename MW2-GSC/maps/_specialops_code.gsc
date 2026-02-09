@@ -853,7 +853,7 @@ specialops_mission_over_stats(was_success) {
       player SetLocalPlayerProfileData("missionspecops", setlevel);
       level.specOpsSettings maps\_endmission::setSoLevelCompleted(max(0, setlevel - 1));
 
-      setdvar("ui_debug_setlevel", "");
+      setDvar("ui_debug_setlevel", "");
     }
 
     upto = getdvarint("ui_debug_setlevel_upto");
@@ -867,7 +867,7 @@ specialops_mission_over_stats(was_success) {
       }
       player SetLocalPlayerProfileData("missionsohighestdifficulty", difficulty_string);
 
-      setdvar("ui_debug_setlevel_upto", "");
+      setDvar("ui_debug_setlevel_upto", "");
     }
 
     // Debug prints
@@ -1401,24 +1401,24 @@ waittill_player_respond(player_num) {
 }
 
 so_special_failure_hint_reset_dvars(icon_dvar) {
-  setdvar("ui_dog_death", 0);
-  setdvar("ui_vehicle_death", 0);
-  setdvar("ui_destructible_death", 0);
-  setdvar("ui_barrel_death", 0);
-  setdvar("ui_grenade_death", 0);
-  setdvar("ui_time_failure", 0);
-  setdvar("ui_ff_death", 0);
-  setdvar("ui_juggernaut_death", 0);
-  setdvar("ui_bled_out", 0);
-  setdvar("ui_icon_partner", 0);
-  setdvar("ui_icon_obj", 0);
-  setdvar("ui_icon_obj_offscreen", 0);
-  setdvar("ui_icon_stars", 0);
-  setdvar("ui_icon_claymore", 0);
-  setdvar("ui_icon_stealth_stance", 0);
+  setDvar("ui_dog_death", 0);
+  setDvar("ui_vehicle_death", 0);
+  setDvar("ui_destructible_death", 0);
+  setDvar("ui_barrel_death", 0);
+  setDvar("ui_grenade_death", 0);
+  setDvar("ui_time_failure", 0);
+  setDvar("ui_ff_death", 0);
+  setDvar("ui_juggernaut_death", 0);
+  setDvar("ui_bled_out", 0);
+  setDvar("ui_icon_partner", 0);
+  setDvar("ui_icon_obj", 0);
+  setDvar("ui_icon_obj_offscreen", 0);
+  setDvar("ui_icon_stars", 0);
+  setDvar("ui_icon_claymore", 0);
+  setDvar("ui_icon_stealth_stance", 0);
 
   if(isDefined(icon_dvar))
-    setdvar(icon_dvar, 1);
+    setDvar(icon_dvar, 1);
 }
 
 so_special_failure_hint() {

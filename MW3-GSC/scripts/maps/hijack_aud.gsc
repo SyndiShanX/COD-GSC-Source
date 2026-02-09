@@ -480,7 +480,6 @@ _id_58B2(var_0, var_1) {
     case "random_tail_expl":
       if(level._id_58AF == 0) {
         thread _id_5930();
-
       }
       break;
     case "ground_internal_start":
@@ -557,7 +556,6 @@ _id_448C(var_0, var_1) {
 
   if(getsubstr(var_0, 0, 4) != "mus_") {
     return 0;
-
   }
   level notify("kill_other_music");
   level endon("kill_other_music");
@@ -754,7 +752,6 @@ _id_58D0(var_0) {
 
   if(var_0) {
     var_1 playSound("hijk_zero_g_bigshake");
-
   }
   var_1 playSound("hijk_tilt_stress_01");
 }
@@ -1938,7 +1935,6 @@ blackout() {
 _id_5942() {
   if(isDefined(level._id_5943)) {
     level._id_5943 stoploopsound();
-
   }
   if(!isDefined(level._id_55CA)) {
     level._id_55CA = spawn("script_origin", level._id_5943.origin);
@@ -1967,7 +1963,6 @@ _id_5942() {
 _id_5944() {
   if(isDefined(level._id_5943)) {
     level._id_5943 stoploopsound();
-
   }
   if(!isDefined(level._id_55CA)) {
     level._id_55CA = spawn("script_origin", level._id_5943.origin);
@@ -2048,25 +2043,20 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(self) && !isDefined(self._id_5607)) {
     self._id_5607 = spawnStruct();
-
   }
   if(!isDefined(level._id_0113)) {
     level._id_0113 = 1;
-
   }
   if(!isDefined(level._id_0114)) {
     level._id_0114 = 0;
-
   }
   if(level._id_0113 == 1) {
     if(isDefined(self) && !isDefined(self._id_5607.enabled)) {
       self._id_5607.enabled = 1;
-
     }
     if(isDefined(self) && isDefined(self._id_5607) && isDefined(self._id_5607.enabled) && self._id_5607.enabled) {
       if(isDefined(self) && !isDefined(self._id_5607._id_562C)) {
         self._id_5607._id_562C = self.origin;
-
       }
       self._id_5607.velocity = (self.origin - self._id_5607._id_562C) / 2;
 
@@ -2094,13 +2084,11 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
         if(!isDefined(var_4) || var_4 <= 0) {
           var_4 = 1;
-
         }
         var_21 = var_20 * var_4;
 
         if(isDefined(var_21)) {
           self setpitch(var_21, var_0);
-
         }
         if(level._id_0114 == 1) {
           var_22 = 0.75;
@@ -2111,7 +2099,6 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
           if(isDefined(var_7)) {
             var_26 = var_7;
-
           }
           var_27 = (0, 0, 128);
           var_28 = "doppler():: " + var_10 + " pitch: " + var_21;

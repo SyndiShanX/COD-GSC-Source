@@ -98,7 +98,7 @@ system_init() {
   level._stealth.logic.corpse = spawnStruct();
   level._stealth.logic.corpse.array = [];
   level._stealth.logic.corpse.last_pos = undefined;
-  level._stealth.logic.corpse.max_num = int(getdvar("ai_corpseCount"));
+  level._stealth.logic.corpse.max_num = int(getDvar("ai_corpseCount"));
   level._stealth.logic.corpse.sight_dist = 1500;
   level._stealth.logic.corpse.detect_dist = 256;
   level._stealth.logic.corpse.found_dist = 96;
@@ -111,11 +111,11 @@ system_init() {
   level._stealth.logic.corpse.corpse_height["hidden"] = 6;
   level._stealth.logic.ai_event = [];
   level._stealth.logic.ai_event["ai_eventDistDeath"] = [];
-  level._stealth.logic.ai_event["ai_eventDistDeath"]["spotted"] = getdvar("ai_eventDistDeath");
+  level._stealth.logic.ai_event["ai_eventDistDeath"]["spotted"] = getDvar("ai_eventDistDeath");
   level._stealth.logic.ai_event["ai_eventDistDeath"]["alert"] = 512;
   level._stealth.logic.ai_event["ai_eventDistDeath"]["hidden"] = 256;
   level._stealth.logic.ai_event["ai_eventDistPain"] = [];
-  level._stealth.logic.ai_event["ai_eventDistPain"]["spotted"] = getdvar("ai_eventDistPain");
+  level._stealth.logic.ai_event["ai_eventDistPain"]["spotted"] = getDvar("ai_eventDistPain");
   level._stealth.logic.ai_event["ai_eventDistPain"]["alert"] = 384;
   level._stealth.logic.ai_event["ai_eventDistPain"]["hidden"] = 256;
   level._stealth.logic.ai_event["ai_eventDistExplosion"] = [];
@@ -123,15 +123,15 @@ system_init() {
   level._stealth.logic.ai_event["ai_eventDistExplosion"]["alert"] = 4000;
   level._stealth.logic.ai_event["ai_eventDistExplosion"]["hidden"] = 4000;
   level._stealth.logic.ai_event["ai_eventDistBullet"] = [];
-  level._stealth.logic.ai_event["ai_eventDistBullet"]["spotted"] = getdvar("ai_eventDistBullet");
+  level._stealth.logic.ai_event["ai_eventDistBullet"]["spotted"] = getDvar("ai_eventDistBullet");
   level._stealth.logic.ai_event["ai_eventDistBullet"]["alert"] = 64;
   level._stealth.logic.ai_event["ai_eventDistBullet"]["hidden"] = 64;
   level._stealth.logic.ai_event["ai_eventDistFootstep"] = [];
-  level._stealth.logic.ai_event["ai_eventDistFootstep"]["spotted"] = getdvar("ai_eventDistFootstep");
+  level._stealth.logic.ai_event["ai_eventDistFootstep"]["spotted"] = getDvar("ai_eventDistFootstep");
   level._stealth.logic.ai_event["ai_eventDistFootstep"]["alert"] = 64;
   level._stealth.logic.ai_event["ai_eventDistFootstep"]["hidden"] = 64;
   level._stealth.logic.ai_event["ai_eventDistFootstepWalk"] = [];
-  level._stealth.logic.ai_event["ai_eventDistFootstepWalk"]["spotted"] = getdvar("ai_eventDistFootstepWalk");
+  level._stealth.logic.ai_event["ai_eventDistFootstepWalk"]["spotted"] = getDvar("ai_eventDistFootstepWalk");
   level._stealth.logic.ai_event["ai_eventDistFootstepWalk"]["alert"] = 32;
   level._stealth.logic.ai_event["ai_eventDistFootstepWalk"]["hidden"] = 32;
   level._stealth.logic.system_state_functions = [];
@@ -272,7 +272,7 @@ friendly_logic() {
   friendly_init();
   var_0 = self._stealth.logic.current_stance_func;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     thread friendly_movespeed_calc_loop();
 
   for(;;) {
@@ -286,7 +286,7 @@ friendly_init() {
   self._stealth = spawnStruct();
   self._stealth.logic = spawnStruct();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
 
@@ -995,7 +995,7 @@ stealth_ai_logic() {
 }
 
 stealth_ai_behavior(var_0, var_1, var_2, var_3) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   switch (self.team) {

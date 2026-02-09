@@ -6,7 +6,6 @@
 main() {
   if(!isDefined(level.global_fx)) {
     level.global_fx = [];
-
   }
   level._id_1BF8 = [];
   var_0 = randomfloatrange(-20, -15);
@@ -61,7 +60,6 @@ global_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(!isDefined(level._id_1BF8[var_9])) {
       level._id_1BF8[var_9] = [];
-
     }
     level._id_1BF8[var_9][level._id_1BF8[var_9].size] = var_8;
   }
@@ -70,19 +68,15 @@ global_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
 global_fx_create(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(level._effect)) {
     level._effect = [];
-
   }
   if(!isDefined(level._effect[var_0])) {
     level._effect[var_0] = loadfx(var_1);
-
   }
   if(isDefined(var_4)) {
     var_2 = var_2 + randomfloat(var_4);
-
   }
   if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
-
   }
   var_5 = common_scripts\utility::createoneshoteffect(var_0);
   var_5.v["origin"] = self.origin;
@@ -92,7 +86,6 @@ global_fx_create(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     var_5.v["soundalias"] = var_3;
-
   }
   return var_5;
 }

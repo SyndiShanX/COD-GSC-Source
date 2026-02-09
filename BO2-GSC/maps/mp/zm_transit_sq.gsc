@@ -252,7 +252,6 @@ sidequest_debug_tracker_update(mainkey, subkey) {
 
     wait 1;
   }
-
 }
 
 generic_stage_start() {
@@ -553,7 +552,7 @@ richtofen_sidequest_a() {
   while(true) {
     level.sq_volume waittill("trigger", who);
 
-    if(isplayer(who) && isalive(who) && who getcurrentweapon() == "jetgun_zm" && (!isDefined(who.jetgun_heatval) || who.jetgun_heatval < 1)) {
+    if(isPlayer(who) && isalive(who) && who getcurrentweapon() == "jetgun_zm" && (!isDefined(who.jetgun_heatval) || who.jetgun_heatval < 1)) {
       who thread left_sq_area_watcher(level.sq_volume);
       notifystring = who waittill_any_return("disconnect", "weapon_change", "death", "player_downed", "jetgun_overheated", "left_sg_area");
 
@@ -568,7 +567,7 @@ richtofen_sidequest_a() {
 
         self.checking_jetgun_fire = 0;
       }
-    } else if(isplayer(who) && isalive(who) && who getcurrentweapon() == "jetgun_zm" && (isDefined(who.jetgun_heatval) && who.jetgun_heatval > 1)) {
+    } else if(isPlayer(who) && isalive(who) && who getcurrentweapon() == "jetgun_zm" && (isDefined(who.jetgun_heatval) && who.jetgun_heatval > 1)) {
       if(!isDefined(ric_fail_heat)) {
         ric_fail_heat = 1;
         level thread richtofensay("vox_zmba_sidequest_jet_low_0", undefined, 0, 10);
@@ -1250,7 +1249,7 @@ navcomputer_waitfor_navcard() {
   while(true) {
     navcomputer_use_trig waittill("trigger", who);
 
-    if(isplayer(who) && is_player_valid(who)) {
+    if(isPlayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
         who playSound("zmb_sq_navcard_success");

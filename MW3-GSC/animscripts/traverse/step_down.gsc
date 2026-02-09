@@ -21,7 +21,7 @@ _id_3FFA() {
   self traversemode("nogravity");
   var_0 = self getnegotiationstartnode();
   self orientmode("face angle", var_0.angles[1]);
-  self setflaggedanimknoballrestart("stepanim", % step_down_low_wall, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("stepanim", %step_down_low_wall, %body, 1, 0.1, 1);
   self waittillmatch("stepanim", "gravity on");
   self traversemode("gravity");
   animscripts\shared::_id_0C51("stepanim");

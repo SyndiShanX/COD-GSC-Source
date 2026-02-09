@@ -28,7 +28,7 @@ __init__() {
   level.var_57e2bc08 = &leader_dialog;
   level.playequipmentdestroyedonplayer = &play_equipment_destroyed_on_player;
   level.playequipmenthackedonplayer = &play_equipment_hacked_on_player;
-  setdvar(#"hash_2fd9eb199c2ef1cf", 0.4);
+  setDvar(#"hash_2fd9eb199c2ef1cf", 0.4);
 }
 
 init() {
@@ -171,7 +171,7 @@ announce_round_winner(delay) {
 
   winner = round::get_winner();
 
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
 
@@ -957,7 +957,7 @@ set_music_on_team(state, team = "both", wait_time = 0, save_state = 0, return_st
 
 set_music_on_player(state, wait_time = 0, save_state = 0, return_state = 0) {
   self endon(#"disconnect");
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(state)) {
     return;

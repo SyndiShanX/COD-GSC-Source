@@ -10,11 +10,9 @@ main() {
 _id_40B8(var_0, var_1) {
   if(1) {
     return spawnStruct();
-
   }
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   var_2 = newhudelem();
   var_2.alignx = "right";
@@ -64,7 +62,6 @@ _id_40BC() {
 
         if(level._id_40B7[var_4].alpha != 0) {
           level._id_40B7[var_4] moveovertime(0.3);
-
         }
         level._id_40B7[var_4].y = var_5;
       }

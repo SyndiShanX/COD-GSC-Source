@@ -9,6 +9,7 @@
 #include animscripts\debug;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 MoveRun() {
   desiredPose = self animscripts\zombie_utility::choosePose("stand");
   switch (desiredPose) {
@@ -44,7 +45,6 @@ MoveRun() {
       break;
   }
 }
-
 GetRunAnim() {
   run_anim = undefined;
   if(isDefined(self.a.combatRunAnim)) {
@@ -55,14 +55,12 @@ GetRunAnim() {
   assertex(isDefined(run_anim), "run.gsc - No run animation for this AI.");
   return run_anim;
 }
-
 GetCrouchRunAnim() {
   if(isDefined(self.a.crouchRunAnim)) {
     return self.a.crouchRunAnim;
   }
   return % crouch_fastwalk_F;
 }
-
 MoveStandCombatOverride() {
   if(isDefined(self.needs_run_update) && !self.needs_run_update) {
     wait(GetRunAnimUpdateFrequency());
@@ -74,7 +72,6 @@ MoveStandCombatOverride() {
   animscripts\zombie_shared::DoNoteTracksForTime(getRunAnimUpdateFrequency(), "runanim");
   self.needs_run_update = false;
 }
-
 MoveStandCombatNormal() {
   self ClearAnim(%walk_and_run_loops, 0.2);
   self setanimknob(%combatrun, 1.0, 0.2, self.moveplaybackrate);
@@ -96,7 +93,6 @@ MoveStandCombatNormal() {
   animscripts\zombie_shared::DoNoteTracksForTime(getRunAnimUpdateFrequency(), "runanim");
   self notify("stopRunning");
 }
-
 MoveStandNoncombatOverride() {
   self endon("movemode");
   if(isDefined(self.needs_run_update) && !self.needs_run_update) {
@@ -108,7 +104,6 @@ MoveStandNoncombatOverride() {
   animscripts\zombie_shared::DoNoteTracksForTime(0.2, "runanim");
   self.needs_run_update = false;
 }
-
 MoveStandNoncombatNormal() {
   self endon("movemode");
   self ClearAnim(%combatrun, 0.6);
@@ -123,7 +118,6 @@ MoveStandNoncombatNormal() {
   }
   animscripts\zombie_shared::DoNoteTracksForTime(getRunAnimUpdateFrequency(), "runanim");
 }
-
 MoveCrouchRunOverride() {
   self endon("movemode");
   if(isDefined(self.needs_run_update) && !self.needs_run_update) {
@@ -134,7 +128,6 @@ MoveCrouchRunOverride() {
   animscripts\zombie_shared::DoNoteTracksForTime(0.2, "runanim");
   self.needs_run_update = false;
 }
-
 MoveCrouchRunNormal() {
   self endon("movemode");
   if(isDefined(self.needs_run_update) && !self.needs_run_update) {
@@ -152,7 +145,6 @@ MoveCrouchRunNormal() {
   animscripts\zombie_shared::DoNoteTracksForTime(0.2, "runanim");
   self.needs_run_update = false;
 }
-
 runLoopIsNearBeginning() {
   animfraction = self getAnimTime(%walk_and_run_loops);
   loopLength = getAnimLength(animscripts\zombie_run::GetRunAnim()) / 3.0;
@@ -170,7 +162,6 @@ runLoopIsNearBeginning() {
   }
   return false;
 }
-
 UpdateRunWeights(notifyString, frontAnim, backAnim, leftAnim, rightAnim) {
   self endon("killanimscript");
   self endon(notifyString);
@@ -183,14 +174,12 @@ UpdateRunWeights(notifyString, frontAnim, backAnim, leftAnim, rightAnim) {
     wait getRunAnimUpdateFrequency();
   }
 }
-
 GetLookaheadAngle() {
   yawDiff = VectorToAngles(self.lookaheaddir)[1] - self.angles[1];
   yawDiff = yawDiff * (1.0 / 360.0);
   yawDiff = (yawDiff - floor(yawDiff + 0.5)) * 360.0;
   return yawDiff;
 }
-
 UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
   blendTime = 0.2;
   rate = 1;
@@ -204,13 +193,15 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
     yawDiff = self GetLookaheadAngle();
     animWeights = animscripts\zombie_utility::QuadrantAnimWeights(yawDiff);
     tempYawDiff = yawDiff;
-    if(tempYawDiff < 0)
+    if(tempYawDiff < 0) {
       tempYawDiff *= -1;
+    }
     minYaw = GetDvarFloat(#"ai_slowdownMinYawDiff");
     if(tempYawDiff >= minYaw) {
       maxYaw = GetDvarFloat(#"ai_slowdownMaxYawDiff");
-      if(tempYawDiff > maxYaw)
+      if(tempYawDiff > maxYaw) {
         tempYawDiff = maxYaw;
+      }
       maxYaw -= minYaw;
       tempYawDiff -= minYaw;
       minRate = GetDvarFloat(#"ai_slowdownMinRate");
@@ -236,7 +227,6 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
   self SetAnim(rightAnim, animWeights["right"], blendTime, rate);
   self.needs_run_update = false;
 }
-
 UpdateRunWeightsBiasForward(notifyString, frontAnim, backAnim, leftAnim, rightAnim) {
   self endon("killanimscript");
   self endon(notifyString);
@@ -256,7 +246,6 @@ UpdateRunWeightsBiasForward(notifyString, frontAnim, backAnim, leftAnim, rightAn
     wait getRunAnimUpdateFrequency();
   }
 }
-
 MakeRunSounds(notifyString) {
   self endon("killanimscript");
   self endon(notifyString);
@@ -267,7 +256,6 @@ MakeRunSounds(notifyString) {
     self playSound("fly_step_run_npc_concrete");
   }
 }
-
 getRunAnimUpdateFrequency() {
   return GetDvarFloat(#"ai_runAnimUpdateFrequency");
 }

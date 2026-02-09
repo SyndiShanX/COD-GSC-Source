@@ -730,7 +730,7 @@ getvalidtargets(rocket, trace, max_targets) {
   enemies = self getenemies();
 
   foreach(player in enemies) {
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
 
@@ -821,7 +821,7 @@ getbesttarget(rocket, trace) {
   enemies = self getenemies();
 
   foreach(player in enemies) {
-    if(!isplayer(player) || isDefined(player.lockedin) && player.lockedin) {
+    if(!isPlayer(player) || isDefined(player.lockedin) && player.lockedin) {
       continue;
     }
 
@@ -919,7 +919,7 @@ create_missile_hud(rocket) {
   ti = 0;
 
   foreach(enemy in enemies) {
-    if(isplayer(enemy) && util::function_fbce7263(player.team, enemy.team)) {
+    if(isPlayer(enemy) && util::function_fbce7263(player.team, enemy.team)) {
       entnum = enemy getentitynumber();
       player.var_ebf52bbc[entnum] = ti;
       ti++;
@@ -984,7 +984,7 @@ targeting_hud_think(rocket) {
           continue;
         }
 
-        if(isplayer(target)) {
+        if(isPlayer(target)) {
           if(isalive(target)) {
             var_4ef4e267 = target getentitynumber();
             ti = player.var_ebf52bbc[var_4ef4e267];

@@ -92,7 +92,6 @@ class czm_red_challenges_hud: cluielem {
     cluielem::add_clientfield("rewardHidden", 15000, 1, "int", var_26df3d64);
     cluielem::add_clientfield("challengeFailing", 15000, 1, "int", var_90359ec7);
   }
-
 }
 
 register(uid, var_be2ad4d, var_a7896263, var_4866daed, progresscallback, var_5d7491df, var_26df3d64, var_90359ec7) {

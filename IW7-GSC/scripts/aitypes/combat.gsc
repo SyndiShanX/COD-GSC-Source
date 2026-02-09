@@ -321,7 +321,7 @@ func_FE88(var_0) {
   var_1 = self.bt.shootparams;
   var_2 = makescrambler();
 
-  if(isDefined(self.enemy) && !isplayer(self.enemy) && var_1.starttime < gettime()) {
+  if(isDefined(self.enemy) && !isPlayer(self.enemy) && var_1.starttime < gettime()) {
     var_3 = int(gettime() / 50);
 
     if(self getentitynumber() % 4 != var_3 % 4) {
@@ -569,7 +569,7 @@ func_FFC6() {
     return 0;
   }
 
-  return level.var_7683 == 3 && isplayer(self.enemy);
+  return level.var_7683 == 3 && isPlayer(self.enemy);
 }
 
 func_FFF6() {

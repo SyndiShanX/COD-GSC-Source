@@ -181,7 +181,7 @@ func_13992(var_0, var_1) {
       var_3 scripts\mp\utility\game::func_F741(var_1.var_FCA3);
       var_2 = var_1.var_FCA3;
 
-      if(isplayer(var_3)) {
+      if(isPlayer(var_3)) {
         var_3.var_1894 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_screen"), var_3 getEye(), var_3);
         triggerfx(var_3.var_1894);
         scripts\mp\gamescore::trackbuffassist(var_0, var_3, "adrenaline_mist_mp");

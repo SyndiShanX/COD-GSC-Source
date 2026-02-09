@@ -15,7 +15,7 @@ set_hudoutline(var_0, var_1) {
 }
 
 is_coop() {
-  if(issplitscreen() || getdvar("coop") == "1")
+  if(issplitscreen() || getDvar("coop") == "1")
     return 1;
 
   return 0;
@@ -139,7 +139,7 @@ set_vision_set(var_0, var_1) {
     var_1 = 1;
 
   visionsetnaked(var_0, var_1);
-  setdvar("vision_set_current", var_0);
+  setDvar("vision_set_current", var_0);
 }
 
 set_vision_set_player(var_0, var_1) {
@@ -976,7 +976,7 @@ shock_ondeath() {
   if(isDefined(self.specialdeath)) {
     return;
   }
-  if(getdvar("r_texturebits") == "16") {
+  if(getDvar("r_texturebits") == "16") {
     return;
   }
   self shellshock("default", 3);
@@ -2372,7 +2372,7 @@ missionfailedwrapper() {
   if(arcademode()) {
     return;
   }
-  if(getdvar("failure_disabled") == "1") {
+  if(getDvar("failure_disabled") == "1") {
     return;
   }
   if(isDefined(level.mission_fail_func)) {
@@ -2685,7 +2685,7 @@ flashmonitor() {
   for(;;) {
     self waittill("flashbang", var_0, var_1, var_2, var_3, var_4);
 
-    if("1" == getdvar("noflash")) {
+    if("1" == getDvar("noflash")) {
       continue;
     }
     if(is_player_down(self)) {
@@ -4347,7 +4347,7 @@ enable_bulletwhizbyreaction() {
 }
 
 clear_dvar(var_0) {
-  setdvar(var_0, "");
+  setDvar(var_0, "");
 }
 
 set_fixednode_true() {
@@ -4724,23 +4724,23 @@ set_baseaccuracy(var_0) {
 
 set_console_status() {
   if(!isDefined(level.console))
-    level.console = getdvar("consoleGame") == "true";
+    level.console = getDvar("consoleGame") == "true";
   else {}
 
   if(!isDefined(level.xenon))
-    level.xenon = getdvar("xenonGame") == "true";
+    level.xenon = getDvar("xenonGame") == "true";
   else {}
 
   if(!isDefined(level.ps3))
-    level.ps3 = getdvar("ps3Game") == "true";
+    level.ps3 = getDvar("ps3Game") == "true";
   else {}
 
   if(!isDefined(level.xb3))
-    level.xb3 = getdvar("xb3Game") == "true";
+    level.xb3 = getDvar("xb3Game") == "true";
   else {}
 
   if(!isDefined(level.ps4))
-    level.ps4 = getdvar("ps4Game") == "true";
+    level.ps4 = getDvar("ps4Game") == "true";
   else {}
 }
 
@@ -4852,7 +4852,7 @@ enable_pain() {
 }
 
 kill_wrapper() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(common_scripts\utility::flag_exist("special_op_terminated") && common_scripts\utility::flag("special_op_terminated"))
       return 0;
 
@@ -5307,7 +5307,7 @@ waterfx(var_0, var_1) {
     }
     var_6 = "water_movement";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(distance(self getvelocity(), (0, 0, 0)) < 5)
         var_6 = "water_stop";
     } else if(isDefined(level._effect["water_" + self.a.movement]))
@@ -5566,7 +5566,7 @@ add_earthquake(var_0, var_1, var_2, var_3) {
 }
 
 arcademode() {
-  return getdvar("arcademode") == "1";
+  return getDvar("arcademode") == "1";
 }
 
 arcademode_stop_timer() {
@@ -6089,7 +6089,7 @@ waittill_true_goal(var_0, var_1) {
 }
 
 player_speed_percent(var_0, var_1) {
-  var_2 = int(getdvar("g_speed"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.g_speed))
     level.player.g_speed = var_2;
@@ -6101,7 +6101,7 @@ player_speed_percent(var_0, var_1) {
 blend_movespeedscale_percent(var_0, var_1) {
   var_2 = self;
 
-  if(!isplayer(var_2))
+  if(!isPlayer(var_2))
     var_2 = level.player;
 
   if(!isDefined(var_2.movespeedscale))
@@ -6112,7 +6112,7 @@ blend_movespeedscale_percent(var_0, var_1) {
 }
 
 player_speed_set(var_0, var_1) {
-  var_2 = int(getdvar("g_speed"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.g_speed))
     level.player.g_speed = var_2;
@@ -6131,7 +6131,7 @@ player_bob_scale_set(var_0, var_1) {
 blend_movespeedscale(var_0, var_1) {
   var_2 = self;
 
-  if(!isplayer(var_2))
+  if(!isPlayer(var_2))
     var_2 = level.player;
 
   if(!isDefined(var_2.movespeedscale))
@@ -6176,7 +6176,7 @@ player_speed_default(var_0) {
 blend_movespeedscale_default(var_0) {
   var_1 = self;
 
-  if(!isplayer(var_1))
+  if(!isPlayer(var_1))
     var_1 = level.player;
 
   if(!isDefined(var_1.movespeedscale)) {
@@ -6188,7 +6188,7 @@ blend_movespeedscale_default(var_0) {
 }
 
 teleport_ent(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setorigin(var_0.origin);
     self setplayerangles(var_0.angles);
   } else
@@ -6200,7 +6200,7 @@ teleport_to_ent_tag(var_0, var_1) {
   var_3 = var_0 gettagangles(var_1);
   self dontinterpolate();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setorigin(var_2);
     self setplayerangles(var_3);
   } else if(isai(self))
@@ -6882,7 +6882,7 @@ using_hdr_fog() {
 }
 
 fog_set_changes(var_0, var_1) {
-  if(!isplayer(self))
+  if(!isPlayer(self))
     maps\_art::init_fog_transition();
   else
     init_self_fog_transition();
@@ -6905,7 +6905,7 @@ fog_set_changes(var_0, var_1) {
   if(!isDefined(var_1))
     var_1 = var_2.transitiontime;
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     set_fog_to_ent_values(var_2, var_1);
     level.fog_transition_ent.fogset = var_0;
     level.fog_transition_ent.time = var_1;
@@ -6921,11 +6921,11 @@ fog_set_changes(var_0, var_1) {
 
 set_fog_to_ent_values(var_0, var_1) {
   if(isDefined(var_0.sunfogenabled) && var_0.sunfogenabled) {
-    if(!isplayer(self))
+    if(!isPlayer(self))
       setexpfog(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.sunred, var_0.sungreen, var_0.sunblue, var_0.hdrsuncolorintensity, var_0.sundir, var_0.sunbeginfadeangle, var_0.sunendfadeangle, var_0.normalfogscale, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle);
     else
       self playersetexpfog(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.sunred, var_0.sungreen, var_0.sunblue, var_0.hdrsuncolorintensity, var_0.sundir, var_0.sunbeginfadeangle, var_0.sunendfadeangle, var_0.normalfogscale, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle);
-  } else if(!isplayer(self))
+  } else if(!isPlayer(self))
     setexpfog(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle);
   else
     self playersetexpfog(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle);
@@ -6951,7 +6951,7 @@ init_self_visionset() {
 }
 
 vision_set_changes(var_0, var_1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     var_2 = 1;
 
     if(!isDefined(level.vision_set_transition_ent)) {
@@ -6971,7 +6971,7 @@ vision_set_changes(var_0, var_1) {
       visionsetnaked(var_0, var_1);
 
     level.lvl_visionset = var_0;
-    setdvar("vision_set_current", var_0);
+    setDvar("vision_set_current", var_0);
   } else {
     init_self_visionset();
 
@@ -7073,7 +7073,7 @@ delete_interactives_in_volumes(var_0) {
 }
 
 mask_exploders_in_volume(var_0) {
-  if(getdvar("createfx") != "") {
+  if(getDvar("createfx") != "") {
     return;
   }
   var_1 = getEntArray("script_brushmodel", "classname");
@@ -7535,7 +7535,7 @@ player_leaves_humvee(var_0) {
   var_1 = self;
   var_2 = level.player;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_2 = self;
     var_1 = var_2.humvee_org;
   }
@@ -7647,7 +7647,7 @@ ignorerandombulletdamage_drone_proc() {
   for(;;) {
     self waittill("damage", var_0, var_1);
 
-    if(!isplayer(var_1) && issentient(var_1)) {
+    if(!isPlayer(var_1) && issentient(var_1)) {
       if(isDefined(var_1.enemy) && var_1.enemy != self)
         continue;
     }
@@ -8114,7 +8114,7 @@ remove_damagefeedback() {
 }
 
 is_demo() {
-  if(getdvar("e3demo") == "1")
+  if(getDvar("e3demo") == "1")
     return 1;
 
   return 0;
@@ -8655,9 +8655,9 @@ setdvar_cg_ng(var_0, var_1, var_2) {
     set_console_status();
 
   if(is_gen4())
-    setdvar(var_0, var_2);
+    setDvar(var_0, var_2);
   else
-    setdvar(var_0, var_1);
+    setDvar(var_0, var_1);
 }
 
 setsaveddvar_cg_ng(var_0, var_1, var_2) {
@@ -8892,17 +8892,17 @@ lerpfov_saved_thread(var_0, var_1) {
 
 ui_action_slot_force_active_on(var_0) {
   var_1 = "ui_actionslot_" + var_0 + "_forceActive";
-  setdvar(var_1, "on");
+  setDvar(var_1, "on");
 }
 
 ui_action_slot_force_active_off(var_0) {
   var_1 = "ui_actionslot_" + var_0 + "_forceActive";
-  setdvar(var_1, "turn_off");
+  setDvar(var_1, "turn_off");
 }
 
 ui_action_slot_force_active_one_time(var_0) {
   var_1 = "ui_actionslot_" + var_0 + "_forceActive";
-  setdvar(var_1, "onetime");
+  setDvar(var_1, "onetime");
 }
 
 hastag(var_0, var_1) {

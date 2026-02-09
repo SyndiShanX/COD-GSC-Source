@@ -301,9 +301,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
   if(self.team == game.defenders && isDefined(attacker)) {
     if(level.friendlyfire > 0 && isDefined(attacker.team) && attacker.team == self.team) {
       processkill = 0;
-    } else if(isplayer(attacker) && attacker != self) {
+    } else if(isPlayer(attacker) && attacker != self) {
       processkill = 1;
-    } else if(level.infect_allowsuicide && (attacker == self || !isplayer(attacker))) {
+    } else if(level.infect_allowsuicide && (attacker == self || !isPlayer(attacker))) {
       processkill = 1;
       wassuicide = 1;
     }

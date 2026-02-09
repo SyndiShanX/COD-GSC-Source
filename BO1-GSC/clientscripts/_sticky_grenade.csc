@@ -1,6 +1,6 @@
 /*********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_sticky_grenade.csc
+ * Script: clientscripts\_sticky_grenade\.csc
 *********************************************/
 
 #include clientscripts\_utility;
@@ -10,7 +10,6 @@ main() {
   level._effect["grenade_friendly_light"] = loadfx("weapon/crossbow/fx_trail_crossbow_blink_grn_os");
   level.zombie_sticky_grenade_spawned_func = ::spawned;
 }
-
 spawned(localClientNum, play_sound) {
   self endon("entityshutdown");
   player = GetLocalPlayer(localClientNum);
@@ -33,7 +32,6 @@ spawned(localClientNum, play_sound) {
     }
   }
 }
-
 loop_local_sound(localClientNum, alias, interval, fx) {
   self endon("entityshutdown");
   while(1) {

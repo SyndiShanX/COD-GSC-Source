@@ -11,8 +11,9 @@ main() {
 }
 
 attach_snowcat_props() {
-  if(self.vehicletype == "tank_snowcat_plow")
+  if(self.vehicletype == "tank_snowcat_plow") {
     self attach("t5_veh_snowcat_plow", "tag_origin");
+  }
 }
 
 #using_animtree("vehicles");
@@ -42,8 +43,9 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 10; i++)
+  for(i = 0; i < 10; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

@@ -12,11 +12,9 @@ main() {
   flag_init("can_save");
   flag_set("can_save");
 }
-
 autosave_description() {
   return (&"AUTOSAVE_AUTOSAVE");
 }
-
 autosave_names(num) {
   if(num == 0) {
     savedescription = &"AUTOSAVE_GAME";
@@ -25,7 +23,6 @@ autosave_names(num) {
   }
   return savedescription;
 }
-
 start_level_save() {
   flag_wait("all_players_connected");
   flag_wait("starting final intro screen fadeout");
@@ -44,21 +41,19 @@ start_level_save() {
   flag_set("game_saving");
   imagename = "levelshots/autosave/autosave_" + level.script + "start";
   for(i = 0; i < players.size; i++) {
-    players[i].savedVisionSet = players[i] getvisionSetNaked();
+    players[i].savedVisionSet = players[i] GetVisionSetNaked();
   }
   SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
   setDvar("ui_grenade_death", "0");
   println("Saving level start saved game");
   flag_clear("game_saving");
 }
-
 trigger_autosave(trigger) {
   if(!isDefined(trigger.script_autosave)) {
     trigger.script_autosave = 0;
   }
   autosave_think(trigger);
 }
-
 autosave_think(trigger) {
   savedescription = autosave_names(trigger.script_autosave);
   if(!(isDefined(savedescription))) {
@@ -74,7 +69,6 @@ autosave_think(trigger) {
     trigger delete();
   }
 }
-
 autosave_name_think(trigger) {
   trigger waittill("trigger", ent);
   if(isDefined(level.customautosavecheck)) {
@@ -84,7 +78,7 @@ autosave_name_think(trigger) {
   }
   name = trigger.script_autosavename;
   level._save_pos = trigger.origin;
-  level._save_trig_ent = ent getEntityNumber();
+  level._save_trig_ent = ent getentitynumber();
   maps\_utility::set_breadcrumbs_player_positions();
   maps\_utility::autosave_by_name(name);
   wait 2;
@@ -92,11 +86,9 @@ autosave_name_think(trigger) {
     trigger delete();
   }
 }
-
 trigger_autosave_immediate(trigger) {
   trigger waittill("trigger");
 }
-
 auto_save_print(msg, msg2) {
   msg = " AUTOSAVE: " + msg;
   if(isDefined(msg2)) {
@@ -105,7 +97,6 @@ auto_save_print(msg, msg2) {
     println(msg);
   }
 }
-
 autosave_game_now(suppress_print) {
   if(flag("game_saving")) {
     return false;
@@ -117,7 +108,7 @@ autosave_game_now(suppress_print) {
   descriptionString = autosave_description();
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i].savedVisionSet = players[i] getvisionSetNaked();
+    players[i].savedVisionSet = players[i] GetVisionSetNaked();
   }
   if(isDefined(suppress_print)) {
     saveId = saveGameNoCommit(filename, descriptionString, "$default", true);
@@ -145,12 +136,10 @@ autosave_game_now(suppress_print) {
   flag_clear("game_saving");
   return true;
 }
-
 autosave_now_trigger(trigger) {
   trigger waittill("trigger");
   autosave_now();
 }
-
 try_to_autosave_now() {
   if(!issavesuccessful()) {
     return false;
@@ -163,7 +152,6 @@ try_to_autosave_now() {
   }
   return true;
 }
-
 autosave_check_simple() {
   if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]()) {
     return false;
@@ -202,7 +190,6 @@ autosave_check_simple() {
   }
   return true;
 }
-
 try_auto_save(filename, description, image, timeout, ent) {
   if(!flag("all_players_connected")) {
     flag_wait("all_players_connected");
@@ -217,7 +204,7 @@ try_auto_save(filename, description, image, timeout, ent) {
     ent = get_players()[0];
   }
   level._save_pos = ent.origin;
-  level._save_trig_ent = ent getEntityNumber();
+  level._save_trig_ent = ent getentitynumber();
   maps\_utility::set_breadcrumbs_player_positions();
   wait(0.05);
   while(1) {
@@ -228,7 +215,7 @@ try_auto_save(filename, description, image, timeout, ent) {
     if(autosave_check() && !isSaveRecentlyLoaded()) {
       players = get_players();
       for(i = 0; i < players.size; i++) {
-        players[i].savedVisionSet = players[i] getvisionSetNaked();
+        players[i].savedVisionSet = players[i] GetVisionSetNaked();
       }
       saveId = saveGameNoCommit(filename, descriptionString, image, coopGame());
       if(!isDefined(saveId) || saveId < 0) {
@@ -256,7 +243,6 @@ try_auto_save(filename, description, image, timeout, ent) {
   flag_clear("game_saving");
   return false;
 }
-
 autosave_check(doPickyChecks) {
   if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]()) {
     return false;
@@ -287,7 +273,6 @@ autosave_check(doPickyChecks) {
   }
   return true;
 }
-
 autosave_player_check() {
   host = get_host();
   if(host IsMeleeing()) {
@@ -321,7 +306,6 @@ autosave_player_check() {
   }
   return true;
 }
-
 autosave_health_check() {
   players = get_players();
   if(players.size > 1) {
@@ -341,7 +325,6 @@ autosave_health_check() {
   }
   return true;
 }
-
 autosave_threat_check(doPickyChecks) {
   if(level.script == "see2") {
     return true;
@@ -356,7 +339,7 @@ autosave_threat_check(doPickyChecks) {
       continue;
     }
     if(enemies[i].isdog) {
-      if(distanceSquared(enemies[i].origin, host.origin) < (384 * 384)) {
+      if(DistanceSquared(enemies[i].origin, host.origin) < (384 * 384)) {
         return (false);
       }
       continue;

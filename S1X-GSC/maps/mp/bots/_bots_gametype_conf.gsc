@@ -41,7 +41,7 @@ bot_conf_debug() {
   SetDevDvarIfUninitialized("bot_DrawDebugTagNearestNodes", "0");
   while(1) {
     if(GetDvarInt("bot_DrawDebugGametype") == 1) {
-      if(GetDvar(SCR_CONST_DEBUG_SHOW_ALL_TAGS_NAME) == "0") {
+      if(getDvar(SCR_CONST_DEBUG_SHOW_ALL_TAGS_NAME) == "0") {
         foreach(tag in level.dogtags) {
           if(tag maps\mp\gametypes\_gameobjects::canInteractWith("allies") || tag maps\mp\gametypes\_gameobjects::canInteractWith("axis")) {
             bot_draw_circle(tag.curorigin, level.bot_tag_obj_radius, (1, 0, 0), false, 16);
@@ -76,7 +76,7 @@ bot_conf_debug() {
       }
     }
 
-    if(GetDvar("bot_DrawDebugTagNearestNodes") == "1") {
+    if(getDvar("bot_DrawDebugTagNearestNodes") == "1") {
       foreach(tag in level.dogtags) {
         if(tag maps\mp\gametypes\_gameobjects::canInteractWith("allies") || tag maps\mp\gametypes\_gameobjects::canInteractWith("axis")) {
           if(isDefined(tag.nearest_node)) {
@@ -181,7 +181,7 @@ bot_conf_think() {
       self.tags_seen = bot_combine_tag_seen_arrays(new_visible_tags, self.tags_seen);
     }
 
-    if(GetDvarInt("bot_DrawDebugGametype") == 1 && GetDvar(SCR_CONST_DEBUG_SHOW_ALL_TAGS_NAME) == "0") {
+    if(GetDvarInt("bot_DrawDebugGametype") == 1 && getDvar(SCR_CONST_DEBUG_SHOW_ALL_TAGS_NAME) == "0") {
       if(isDefined(self.tag_getting) && self.health > 0) {
         color = (0.5, 0, 0.5);
         if(self.team == "allies") {

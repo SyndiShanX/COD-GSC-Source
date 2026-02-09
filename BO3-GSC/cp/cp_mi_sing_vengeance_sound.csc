@@ -61,7 +61,7 @@ function function_4035bef1() {
   }
   while(true) {
     trigger waittill("trigger", who);
-    if(who isplayer()) {
+    if(who isPlayer()) {
       playSound(0, "amb_police_siren", (23974, 2768, 631));
       break;
     }

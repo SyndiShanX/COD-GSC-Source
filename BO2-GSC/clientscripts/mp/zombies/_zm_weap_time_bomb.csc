@@ -7,7 +7,7 @@
 #include clientscripts\mp\zombies\_zm_weapons;
 
 init_time_bomb() {
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   level._effect["time_bomb_set"] = loadfx("weapon/time_bomb/fx_time_bomb_detonate");

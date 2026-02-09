@@ -24,7 +24,7 @@ main() {
     death_anims[death_anims.size] = % zombie_dog_tesla_death_e;
     self animMode("gravity");
     self clearanim(%root, 0.2);
-    self setflaggedanimrestart("dog_anim", death_anims[randomInt(death_anims.size)], 1, 0.2, 1);
+    self setflaggedanimrestart("dog_anim", death_anims[randomint(death_anims.size)], 1, 0.2, 1);
     self animscripts\zombie_shared::DoNoteTracks("dog_anim");
   } else {
     death_direction = animscripts\zombie_dog_pain::getAnimDirection(self.damageyaw);

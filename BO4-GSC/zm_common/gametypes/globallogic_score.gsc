@@ -167,7 +167,7 @@ _setplayermomentum(player, momentum) {
 _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {}
 
 setplayermomentumdebug() {
-  setdvar(#"sv_momentumpercent", 0);
+  setDvar(#"sv_momentumpercent", 0);
 
   while(true) {
     wait 1;

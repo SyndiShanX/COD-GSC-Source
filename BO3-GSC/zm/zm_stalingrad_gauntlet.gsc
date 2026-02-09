@@ -218,8 +218,8 @@ function function_8d5fd156(e_attacker) {
   if(!isDefined(self) || self.archetype === "sentinel_drone") {
     return;
   }
-  if(!isplayer(e_attacker)) {
-    if(isplayer(e_attacker.owner)) {
+  if(!isPlayer(e_attacker)) {
+    if(isPlayer(e_attacker.owner)) {
       e_attacker = e_attacker.owner;
     } else {
       return;
@@ -252,7 +252,7 @@ function function_4f6d5274(e_attacker) {
   if(!isDefined(self) || self.archetype === "sentinel_drone") {
     return;
   }
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(isDefined(self.damageweapon) && (self.damagemod === "MOD_PISTOL_BULLET" || self.damagemod === "MOD_RIFLE_BULLET")) {
       if(isDefined(e_attacker.var_da98b8a4)) {
         if(e_attacker.var_da98b8a4 == e_attacker._bbdata["shots"]) {
@@ -279,7 +279,7 @@ function function_f2988f0a() {
     return;
   }
   e_attacker = self.attacker;
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(function_efaf3bd6(self.damageweapon, self.damagemod)) {
       level.var_de98e3ce.var_b57ab994++;
       if(level.var_de98e3ce.var_b57ab994 >= level.var_de98e3ce.var_e97b0f0a) {
@@ -401,7 +401,7 @@ function function_dcc4fd22() {
   if(isDefined(self.var_4d11bb60) && self.var_4d11bb60) {
     return;
   }
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     e_player = self.attacker;
   } else {
     return;

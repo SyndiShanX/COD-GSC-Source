@@ -344,7 +344,7 @@ shootflares(var_0) {
 
   if(isDefined(self.flarerig_tagangles))
     var_2 = flat_angle_yaw(var_1 gettagangles(self.flarerig_tagangles));
-  else if(isplayer(var_1))
+  else if(isPlayer(var_1))
     var_2 = (var_1 getplayerangles()[0], var_2[1], var_2[2]);
 
   var_3 = var_1.origin;

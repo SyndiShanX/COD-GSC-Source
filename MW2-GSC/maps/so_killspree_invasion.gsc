@@ -10,10 +10,8 @@
 #include maps\_specialops;
 #include maps\so_killspree_invasion_code;
 
-// ---------------------------------------------------------------------------------
-//	Init
-// ---------------------------------------------------------------------------------
-main() {
+// --------------------------------------------------------------------------------- //	Init
+// --------------------------------------------------------------------------------- main() {
   maps\invasion_precache::main();
   maps\invasion_fx::main();
   maps\createart\invasion_art::main();
@@ -60,10 +58,8 @@ main() {
   maps\_compass::setupMiniMap("compass_map_invasion");
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Initializations
-// ---------------------------------------------------------------------------------
-start_so_killspree() {
+// --------------------------------------------------------------------------------- //	Challenge Initializations
+// --------------------------------------------------------------------------------- start_so_killspree() {
   so_killspree_init();
 
   thread music_loop("so_killspree_invasion_music", 124);
@@ -229,13 +225,8 @@ so_killspree_setup_radio_dialog() {
   level.scr_radio["so_def_inv_bmpspottedyou"] = "so_def_inv_bmpspottedyou";
 }
 
-// ---------------------------------------------------------------------------------
-//	Enable/Disable events
-// ---------------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------------
-
-custom_eog_summary() {
+// --------------------------------------------------------------------------------- //	Enable/Disable events
+// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- custom_eog_summary() {
   foreach(player in level.players) {
     player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_SOLID", player.solid_kills);
     player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_HEARTLESS", player.heartless_kills);
@@ -244,9 +235,7 @@ custom_eog_summary() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_kill_counter_hud() {
+// --------------------------------------------------------------------------------- enable_kill_counter_hud() {
   level.pulse_requests = [];
   level.pulse_requests_p1 = [];
   level.pulse_requests_p2 = [];
@@ -256,17 +245,13 @@ enable_kill_counter_hud() {
   array_thread(level.players, ::hud_create_kill_counter);
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_nates_exploders() {
+// --------------------------------------------------------------------------------- enable_nates_exploders() {
   thread fire_off_exploder(getent("north_side_low", "targetname"));
   thread fire_off_exploder(getent("north_side_high", "targetname"));
   thread fire_off_exploder(getent("west_side", "targetname"));
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_smoke_wave_north(dialog_wait, flag_start) {
+// --------------------------------------------------------------------------------- enable_smoke_wave_north(dialog_wait, flag_start) {
   create_smoke_wave("magic_smoke_grenade_north", flag_start, dialog_wait);
 }
 
@@ -274,9 +259,7 @@ enable_smoke_wave_south(dialog_wait, flag_start) {
   create_smoke_wave("magic_smoke_grenade", flag_start, dialog_wait);
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_hunter_truck_enemies_bank(flag_start) {
+// --------------------------------------------------------------------------------- enable_hunter_truck_enemies_bank(flag_start) {
   create_hunter_truck_enemies("truck_north_right", flag_start);
 }
 
@@ -284,9 +267,7 @@ enable_hunter_truck_enemies_road(flag_start) {
   create_hunter_truck_enemies("truck_north_left", flag_start);
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_btr80_circling_street(flag_start) {
+// --------------------------------------------------------------------------------- enable_btr80_circling_street(flag_start) {
   create_btr80("nate_attacker_left", flag_start);
 }
 
@@ -294,9 +275,7 @@ enable_btr80_circling_parking_lot(flag_start) {
   create_btr80("nate_attacker_mid", flag_start);
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_hunter_enemy_refill(refill_at, min_fill, max_fill) {
+// --------------------------------------------------------------------------------- enable_hunter_enemy_refill(refill_at, min_fill, max_fill) {
   hunter_enemies_refill(refill_at, min_fill, max_fill);
 }
 

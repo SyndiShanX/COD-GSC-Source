@@ -63,12 +63,12 @@ function private quadphasingservice(entity) {
     }
   }
   if(entity.var_3b07930a == "quad_phase_left") {
-    if(isplayer(entity.enemy) && entity.enemy islookingat(entity)) {
+    if(isPlayer(entity.enemy) && entity.enemy islookingat(entity)) {
       if(entity maymovefrompointtopoint(entity.origin, zombie_utility::getanimendpos(level.var_9fcbbc83["phase_left_long"]))) {
         entity.var_662afd11 = 1;
       }
     }
-  } else if(isplayer(entity.enemy) && entity.enemy islookingat(entity)) {
+  } else if(isPlayer(entity.enemy) && entity.enemy islookingat(entity)) {
     if(entity maymovefrompointtopoint(entity.origin, zombie_utility::getanimendpos(level.var_9fcbbc83["phase_right_long"]))) {
       entity.var_662afd11 = 1;
     }

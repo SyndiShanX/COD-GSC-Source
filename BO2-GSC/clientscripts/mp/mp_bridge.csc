@@ -19,7 +19,7 @@ main() {
   thread clientscripts\mp\_audio::audio_init(0);
   thread clientscripts\mp\mp_bridge_amb::main();
   setsaveddvar("sm_sunshadowsmall", 1);
-  setdvar("tu7_cg_deathCamAboveWater", "8");
+  setDvar("tu7_cg_deathCamAboveWater", "8");
   registerclientfield("scriptmover", "police_car_lights", 1, 1, "int", ::destructible_car_lights, 0);
   setsaveddvar("sm_sunsamplesizenear", 0.25);
   waitforclient(0);

@@ -45,7 +45,7 @@ state_scripted_update(params) {
   self endon(#"change_state", #"death");
   driver = self getseatoccupant(0);
 
-  if(isplayer(driver)) {
+  if(isPlayer(driver)) {
     driver endon(#"disconnect");
     driver util::waittill_attack_button_pressed();
     self kill(self.origin, driver);
@@ -64,7 +64,7 @@ state_death_update(params) {
   damage_on_death = self.damage_on_death;
 
   if(isDefined(attacker) && !(isDefined(self.detonate_sides_disabled) && self.detonate_sides_disabled)) {
-    if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isplayer(attacker))) {
+    if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isPlayer(attacker))) {
       damage_on_death = 0;
       self detonate_sides(attacker);
     }
@@ -439,7 +439,7 @@ detonation_monitor() {
 }
 
 function_ded83def(lastenemy) {
-  if(isDefined(self.enemy) && isplayer(self.enemy)) {
+  if(isDefined(self.enemy) && isPlayer(self.enemy)) {
     if(lastenemy !== self.enemy) {
       lastdisttoenemysquared = 1e+08;
       lastenemy = self.enemy;
@@ -459,7 +459,7 @@ function_ded83def(lastenemy) {
     enemy = self.enemy;
     enemy_origin = enemy.origin;
 
-    if(isplayer(enemy) && enemy isinvehicle()) {
+    if(isPlayer(enemy) && enemy isinvehicle()) {
       enemy_vehicle = enemy getvehicleoccupied();
 
       if(isDefined(enemy_vehicle)) {
@@ -612,7 +612,7 @@ function_dcecac3c() {
     }
   }
 
-  if(isDefined(enemy) && isplayer(enemy)) {
+  if(isDefined(enemy) && isPlayer(enemy)) {
     enemy_vel_offset = enemy getvelocity() * 0.5;
     enemy_look_dir_offset = anglesToForward(enemy.angles);
 
@@ -669,7 +669,7 @@ path_update_interrupt() {
         }
       }
 
-      if(isDefined(self.enemy) && isplayer(self.enemy) && !isDefined(self.slow_trigger)) {
+      if(isDefined(self.enemy) && isPlayer(self.enemy) && !isDefined(self.slow_trigger)) {
         forward = anglesToForward(self.enemy getplayerangles());
         var_d3d5462f = self.origin - self.enemy.origin;
         speedtouse = self.settings.defaultmovespeed;

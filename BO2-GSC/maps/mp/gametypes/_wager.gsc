@@ -106,7 +106,7 @@ deductplayerante() {
 }
 
 incrementescrowforplayer(amount) {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
   if(!isDefined(game["escrows"]))

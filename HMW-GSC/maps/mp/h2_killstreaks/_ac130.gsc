@@ -658,7 +658,7 @@ ac130_damage_tracker() {
 
     modifiedDamage = damage;
 
-    if(IsPlayer(attacker))
+    if(isPlayer(attacker))
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("ac130");
 
     if(isDefined(sWeapon)) {

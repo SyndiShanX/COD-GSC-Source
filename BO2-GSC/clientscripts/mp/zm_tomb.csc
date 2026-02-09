@@ -737,14 +737,12 @@ sky_pillar_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
     soundlineemitter("zmb_squest_light_beam", (1, -14, -685), (-8, 5, 530));
 
     println("Sky Pillar Fading In");
-
   } else {
     self thread sky_pillar_fade(localclientnum, 0, 4.0);
     playSound(0, "zmb_squest_crystal_sky_pillar_stop", (3, 0, 218));
     soundstoplineemitter("zmb_squest_light_beam", (1, -14, -685), (-8, 5, 530));
 
     println("Sky Pillar Fading Out");
-
   }
 }
 
@@ -898,7 +896,7 @@ set_player_weather_visionset(localclientnum, oldval, newval, bnewent, binitialsn
     else
       setworldfogactivebank(localclientnum, 1);
 
-    src_suncolor = getdvar(#"r_lightTweakSunColor");
+    src_suncolor = getDvar(#"r_lightTweakSunColor");
     lerp_suncolor_dvar(localclientnum, src_suncolor, "0.380056 0.775788 1", n_suncolor_lerp_time);
   } else if(newval == 1) {
     fog_vol_to_visionset_set_suffix("_rain");
@@ -908,7 +906,7 @@ set_player_weather_visionset(localclientnum, oldval, newval, bnewent, binitialsn
     else
       setworldfogactivebank(localclientnum, 2);
 
-    src_suncolor = getdvar(#"r_lightTweakSunColor");
+    src_suncolor = getDvar(#"r_lightTweakSunColor");
     lerp_suncolor_dvar(localclientnum, src_suncolor, "0.380056 0.775788 1", n_suncolor_lerp_time);
   } else if(newval == 2) {
     fog_vol_to_visionset_set_suffix("_snow");
@@ -918,7 +916,7 @@ set_player_weather_visionset(localclientnum, oldval, newval, bnewent, binitialsn
     else
       setworldfogactivebank(localclientnum, 4);
 
-    src_suncolor = getdvar(#"r_lightTweakSunColor");
+    src_suncolor = getDvar(#"r_lightTweakSunColor");
     lerp_suncolor_dvar(localclientnum, src_suncolor, "0.769943 0.894102 1", n_suncolor_lerp_time);
   }
 }
@@ -1070,14 +1068,14 @@ lerp_dvar(str_dvar, n_val, n_lerp_time, b_saved_dvar, localclientnum) {
       continue;
     }
 
-    setdvar(str_dvar, n_curr_val);
+    setDvar(str_dvar, n_curr_val);
   }
   while(n_time_delta < n_lerp_time);
 
   if(is_true(b_saved_dvar))
     setsaveddvar(str_dvar, n_val);
   else
-    setdvar(str_dvar, n_val);
+    setDvar(str_dvar, n_val);
 }
 
 player_tablet_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}

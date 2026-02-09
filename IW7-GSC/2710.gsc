@@ -34,7 +34,7 @@ setupminimap(var_0) {
     var_9 = var_4;
   }
 
-  if(getdvar("mapname") == "mp_boneyard_ns") {
+  if(getDvar("mapname") == "mp_boneyard_ns") {
     var_9 = var_9 - (220, 220, 0);
     var_8 = var_8 + (220, 220, 0);
   }

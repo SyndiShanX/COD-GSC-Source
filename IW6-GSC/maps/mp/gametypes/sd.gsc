@@ -8,7 +8,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -288,7 +288,6 @@ onNormalDeath(victim, attacker, lifeId) {
 
     attacker incPersStat("defends", 1);
     attacker maps\mp\gametypes\_persistence::statSetChild("round", "defends", attacker.pers["defends"]);
-
   } else if(victim.isBombCarrier) {
     attacker incPlayerStat("bombcarrierkills", 1);
     thread maps\mp\_matchdata::logKillEvent(lifeId, "carrying");
@@ -536,7 +535,7 @@ onEndUse(team, player, result) {
     player.isPlanting = false;
   }
 
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player SetClientOmnvar("ui_bomb_planting_defusing", 0);
     player.ui_bomb_planting_defusing = undefined;
   }
@@ -614,7 +613,7 @@ onUsePlantObject(player) {
     player.bombPlantedTime = getTime();
     maps\mp\gametypes\_gamescore::givePlayerScore("plant", player);
 
-    if(IsPlayer(player))
+    if(isPlayer(player))
       player thread maps\mp\_matchdata::logGameEvent("plant", player.origin);
   }
 }
@@ -724,7 +723,7 @@ onUseDefuseObject(player) {
   player incPersStat("defuses", 1);
   player maps\mp\gametypes\_persistence::statSetChild("round", "defuses", player.pers["defuses"]);
 
-  if(IsPlayer(player))
+  if(isPlayer(player))
     player thread maps\mp\_matchdata::logGameEvent("defuse", player.origin);
 }
 
@@ -742,7 +741,7 @@ onPickup(player) {
   player.isBombCarrier = true;
   player incPlayerStat("bombscarried", 1);
 
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player thread maps\mp\_matchdata::logGameEvent("pickup", player.origin);
   }
   player SetClientOmnvar("ui_carrying_bomb", true);

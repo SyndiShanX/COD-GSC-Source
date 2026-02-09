@@ -135,7 +135,7 @@ sndcapturezonetrig() {
   while(true) {
     self waittill("trigger", who);
 
-    if(who isplayer() && !is_true(who.sndincapzone)) {
+    if(who isPlayer() && !is_true(who.sndincapzone)) {
       self.players++;
       who.sndincapzone = 1;
       self thread sndcapturezonetrig_player(who);
@@ -275,8 +275,8 @@ init() {
   init_heli_sound_values("qrdrone", "turbine_moving", 30, 0.0, 0.9, 20, 0.9, 1.1);
   init_heli_sound_values("qrdrone", "turn", 5, 0, 1, 1, 1, 1);
 
-  if(getdvar(#"_id_21D60E03") == "")
-    setdvar("helisounds", "");
+  if(getDvar(#"_id_21D60E03") == "")
+    setDvar("helisounds", "");
 
   level thread command_parser();
 }
@@ -305,12 +305,11 @@ init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, ma
     println("Init Heli Sounds min_pitch: " + min_pitch);
     println("Init Heli Sounds max_pitch: " + max_pitch);
   }
-
 }
 
 command_parser() {
   while(true) {
-    command = getdvar(#"_id_21D60E03");
+    command = getDvar(#"_id_21D60E03");
 
     if(command != "") {
       success = 1;
@@ -378,12 +377,11 @@ command_parser() {
         }
       }
 
-      setdvar("helisounds", "");
+      setDvar("helisounds", "");
     }
 
     wait 0.1;
   }
-
 }
 
 init_heli_sounds_player_drone() {
@@ -520,7 +518,6 @@ heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
         println("^5a self.cur_speed = " + self.cur_speed);
         println("^5a run_volume. " + run_volume);
       }
-
     }
 
     wait(wait_time);

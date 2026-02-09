@@ -31,7 +31,7 @@ main() {
 }
 
 r_outdoor_feather() {
-  mapname = getdvar(#"mapname");
+  mapname = getDvar(#"mapname");
   setsaveddvar("r_outdoorfeather", "8");
 
   switch (mapname) {
@@ -52,7 +52,7 @@ wave_initial_setting() {
 }
 
 wind_initial_setting() {
-  mapname = getdvar(#"mapname");
+  mapname = getDvar(#"mapname");
   setsaveddvar("enable_global_wind", 1);
   setsaveddvar("wind_global_vector", "-110 -150 -110");
   setsaveddvar("wind_global_low_altitude", -175);

@@ -8,7 +8,7 @@
 #include clientscripts\mp\_music;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   level._effect["lightning_miss"] = loadfx("weapon/zmb_staff/fx_zmb_staff_elec_ug_impact_miss");

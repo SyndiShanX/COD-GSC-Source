@@ -712,7 +712,7 @@ func_D681() {
       continue;
     }
 
-    if(isplayer(var_1) && self.portal_is_open) {
+    if(isPlayer(var_1) && self.portal_is_open) {
       if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
         wait(0.05);
         continue;

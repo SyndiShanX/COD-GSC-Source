@@ -19,29 +19,24 @@ init_1() {
   declare_sidequest_stage("sq", "ss1", ::init_stage_1, ::stage_logic, ::exit_stage_1);
   buttons = getEntArray("sq_ss_button", "targetname");
   for(i = 0; i < buttons.size; i++) {
-    ent = getEnt(buttons[i].target, "targetname");
+    ent = GetEnt(buttons[i].target, "targetname");
     buttons[i].terminal_model = ent;
   }
   level._ss_buttons = buttons;
 }
-
 init_2() {
   declare_sidequest_stage("sq", "ss2", ::init_stage_2, ::stage_logic, ::exit_stage_2);
 }
-
 init_stage_1() {
   flag_clear("wait_for_hack");
   level._ss_stage = 1;
 }
-
 init_stage_2() {
   level._ss_stage = 2;
 }
-
 ss2_hack(hacker) {
   flag_clear("wait_for_hack");
 }
-
 stage_logic() {
   buttons = level._ss_buttons;
   array_thread(buttons, ::sq_ss_button_thread);
@@ -57,11 +52,9 @@ stage_logic() {
   }
   stage_completed("sq", "ss" + level._ss_stage);
 }
-
 do_ss1_logic() {
   ss_logic(6, 1);
 }
-
 do_ss2_logic() {
   level.ss_comp_vox_count = 0;
   ss_logic(6, 3);
@@ -74,7 +67,6 @@ do_ss2_logic() {
   wait(2);
   level notify("rl");
 }
-
 generate_sequence(seq_length) {
   seq = [];
   for(i = 0; i < seq_length; i++) {
@@ -104,23 +96,19 @@ generate_sequence(seq_length) {
   }
   return (seq);
 }
-
 kill_debug() {}
 exit_stage_1(success) {
   kill_debug();
   flag_set("ss1");
   array_thread(level._ss_buttons, ::sq_ss_button_dud_thread);
 }
-
 exit_stage_2(success) {
   kill_debug();
 }
-
 sq_ss_button_dud_thread() {
   self endon("ss_kill_button_thread");
   self thread sq_ss_button_thread(true);
 }
-
 sq_ss_button_debug() {
   level endon("ss_kill_button_thread");
   level endon("sq_ss1_over");
@@ -130,7 +118,6 @@ sq_ss_button_debug() {
     wait(0.1);
   }
 }
-
 do_attract() {
   flag_set("displays_active");
   buttons = level._ss_buttons;
@@ -174,7 +161,6 @@ do_attract() {
   wait(0.5);
   flag_clear("displays_active");
 }
-
 sq_ss_button_thread(dud) {
   level endon("sq_ss1_over");
   level endon("sq_ss2_over");
@@ -200,7 +186,6 @@ sq_ss_button_thread(dud) {
     targ_model setModel("p_zom_moon_magic_box_com");
   }
 }
-
 get_console_model(num) {
   model = "p_zom_moon_magic_box_com";
   switch (num) {
@@ -219,7 +204,6 @@ get_console_model(num) {
   }
   return model;
 }
-
 ss_logic(seq_length, seq_start_length) {
   seq = generate_sequence(seq_length);
   level._ss_user_seq = [];
@@ -241,7 +225,6 @@ ss_logic(seq_length, seq_start_length) {
     }
   }
 }
-
 ss_logic_internal(seq, seq_length, seq_start_length) {
   self endon("ss_won");
   self endon("ss_failed");
@@ -258,7 +241,6 @@ ss_logic_internal(seq, seq_length, seq_start_length) {
   level._ss_sequence_matched = true;
   self notify("ss_won");
 }
-
 user_input_timeout(len) {
   self endon("correct_input");
   self endon("ss_failed");
@@ -266,7 +248,6 @@ user_input_timeout(len) {
   wait(len * 4);
   self notify("ss_failed");
 }
-
 validate_input(sequence, len) {
   self thread user_input_timeout(len);
   while(level._ss_user_seq.size < len) {
@@ -285,7 +266,6 @@ validate_input(sequence, len) {
   level._ss_user_seq = [];
   self notify("correct_input");
 }
-
 display_fail() {
   flag_set("displays_active");
   buttons = level._ss_buttons;
@@ -317,14 +297,12 @@ display_fail() {
   }
   flag_clear("displays_active");
 }
-
 play_win_seq(seq) {
   for(i = 0; i < seq.size; i++) {
     level thread Play_Sound_In_Space(color_sound_selector(seq[i]), (-1006.3, 294.2, -93.7));
     wait(0.2);
   }
 }
-
 display_success(seq) {
   flag_set("displays_active");
   buttons = level._ss_buttons;
@@ -356,7 +334,6 @@ display_success(seq) {
   }
   flag_clear("displays_active");
 }
-
 display_seq(buttons, seq, index) {
   flag_set("displays_active");
   for(i = 0; i < index; i++) {
@@ -381,7 +358,6 @@ display_seq(buttons, seq, index) {
   }
   flag_clear("displays_active");
 }
-
 color_sound_selector(index) {
   switch (index) {
     case 0:
@@ -394,7 +370,6 @@ color_sound_selector(index) {
       return "evt_ss_lo_g";
   }
 }
-
 do_ss_start_vox(stage) {
   playon = level._ss_buttons[1].terminal_model;
   if(stage == 1) {
@@ -402,8 +377,9 @@ do_ss_start_vox(stage) {
     if(isDefined(player)) {
       playon playSound("vox_mcomp_quest_step1_0", "mcomp_done0");
       playon waittill("mcomp_done0");
-      if(isDefined(player))
+      if(isDefined(player)) {
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 0);
+      }
     }
   } else {
     if(level.ss_comp_vox_count == 0) {
@@ -411,7 +387,6 @@ do_ss_start_vox(stage) {
     }
   }
 }
-
 do_ss_failure_vox(stage) {
   playon = level._ss_buttons[1].terminal_model;
   if(stage == 1) {
@@ -419,8 +394,9 @@ do_ss_failure_vox(stage) {
     if(isDefined(player)) {
       playon playSound("vox_mcomp_quest_step1_1", "mcomp_done2");
       playon waittill("mcomp_done2");
-      if(isDefined(player))
+      if(isDefined(player)) {
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 1);
+      }
     }
   } else {
     player = is_player_close_enough(playon);
@@ -439,7 +415,6 @@ do_ss_failure_vox(stage) {
     }
   }
 }
-
 do_ss_success_vox(stage) {
   playon = level._ss_buttons[1].terminal_model;
   if(stage == 1) {
@@ -447,8 +422,9 @@ do_ss_success_vox(stage) {
     if(isDefined(player)) {
       playon playSound("vox_mcomp_quest_step1_2", "mcomp_done3");
       playon waittill("mcomp_done3");
-      if(isDefined(player))
+      if(isDefined(player)) {
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 2);
+      }
     }
   } else {
     switch (level.ss_comp_vox_count) {
@@ -470,7 +446,6 @@ do_ss_success_vox(stage) {
     }
   }
 }
-
 is_player_close_enough(org) {
   players = get_players();
   for(i = 0; i < players.size; i++) {

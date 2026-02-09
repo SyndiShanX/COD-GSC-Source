@@ -20,14 +20,12 @@ main() {
     level.script = tolower(getDvar("mapname"));
   }
 }
-
 artfxprintln(file, string) {
   if(file == -1) {
     return;
   }
   fprintln(file, string);
 }
-
 strtok_loc(string, par1) {
   stringlist = [];
   indexstring = "";
@@ -44,7 +42,6 @@ strtok_loc(string, par1) {
   }
   return stringlist;
 }
-
 setfogsliders() {
   fogall = strtok_loc(getDvar(#"g_fogColorReadOnly"), " ");
   red = fogall[0];
@@ -59,39 +56,37 @@ setfogsliders() {
     halfplane = 10000001;
     nearplane = 10000000;
   }
-  setdvar("scr_fog_exp_halfplane", halfplane);
-  setdvar("scr_fog_nearplane", nearplane);
-  setdvar("scr_fog_color", red + " " + green + " " + blue);
+  setDvar("scr_fog_exp_halfplane", halfplane);
+  setDvar("scr_fog_nearplane", nearplane);
+  setDvar("scr_fog_color", red + " " + green + " " + blue);
 }
-
 tweakart() {}
 fovslidercheck() {
   if(level.dofDefault["nearStart"] >= level.dofDefault["nearEnd"]) {
     level.dofDefault["nearStart"] = level.dofDefault["nearEnd"] - 1;
-    setdvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
+    setDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
   }
   if(level.dofDefault["nearEnd"] <= level.dofDefault["nearStart"]) {
     level.dofDefault["nearEnd"] = level.dofDefault["nearStart"] + 1;
-    setdvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
+    setDvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
   }
   if(level.dofDefault["farStart"] >= level.dofDefault["farEnd"]) {
     level.dofDefault["farStart"] = level.dofDefault["farEnd"] - 1;
-    setdvar("scr_dof_farStart", level.dofDefault["farStart"]);
+    setDvar("scr_dof_farStart", level.dofDefault["farStart"]);
   }
   if(level.dofDefault["farEnd"] <= level.dofDefault["farStart"]) {
     level.dofDefault["farEnd"] = level.dofDefault["farStart"] + 1;
-    setdvar("scr_dof_farEnd", level.dofDefault["farEnd"]);
+    setDvar("scr_dof_farEnd", level.dofDefault["farEnd"]);
   }
   if(level.dofDefault["farBlur"] >= level.dofDefault["nearBlur"]) {
     level.dofDefault["farBlur"] = level.dofDefault["nearBlur"] - .1;
-    setdvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
+    setDvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
   }
   if(level.dofDefault["farStart"] <= level.dofDefault["nearEnd"]) {
     level.dofDefault["farStart"] = level.dofDefault["nearEnd"] + 1;
-    setdvar("scr_dof_farStart", level.dofDefault["farStart"]);
+    setDvar("scr_dof_farStart", level.dofDefault["farStart"]);
   }
 }
-
 dumpsettings() {}
 dofvarupdate() {
   level.dofDefault["nearStart"] = getDvarInt(#"scr_dof_nearStart");
@@ -101,10 +96,11 @@ dofvarupdate() {
   level.dofDefault["nearBlur"] = getDvarFloat(#"scr_dof_nearBlur");
   level.dofDefault["farBlur"] = getDvarFloat(#"scr_dof_farBlur");
 }
-
 setdefaultdepthoffield() {
   if(isDefined(level.do_not_use_dof)) {
     return;
   }
-  self setDepthOfField(level.dofDefault["nearStart"], level.dofDefault["nearEnd"], level.dofDefault["farStart"], level.dofDefault["farEnd"], level.dofDefault["nearBlur"], level.dofDefault["farBlur"]);
+  self setDepthOfField(
+    level.dofDefault["nearStart"], level.dofDefault["nearEnd"], level.dofDefault["farStart"], level.dofDefault["farEnd"], level.dofDefault["nearBlur"], level.dofDefault["farBlur"]
+  );
 }

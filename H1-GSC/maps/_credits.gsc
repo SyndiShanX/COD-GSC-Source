@@ -934,7 +934,7 @@ initspecialthanks() {
 }
 
 initiwcredits() {
-  if(getdvar("mapname") == "ac130") {
+  if(getDvar("mapname") == "ac130") {
     addleftimage("logo_infinityward", 256, 128, 4.375);
     addspace();
     addspace();

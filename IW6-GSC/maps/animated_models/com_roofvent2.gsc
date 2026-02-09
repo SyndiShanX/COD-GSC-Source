@@ -9,7 +9,7 @@ main() {
   if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = [];
 
-  mapname = tolower(getdvar("mapname"));
+  mapname = tolower(getDvar("mapname"));
   SP = true;
   if(string_starts_with(mapname, "mp_"))
     SP = false;

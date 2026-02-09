@@ -829,7 +829,7 @@ openslidingdoor(var_0, var_1) {
     var_4.var_C62C = 1;
   }
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     if(!scripts\engine\utility::istrue(var_0.player_opened)) {
       if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
         var_1 scripts\cp\cp_merits::processmerit("mt_purchase_doors");
@@ -931,7 +931,7 @@ closeslidingdoor(var_0, var_1) {
         if(distance(var_0.origin, var_6.origin) > distance(var_13.origin, var_0.origin)) {
           if(distance(var_11, var_13.origin) <= 16) {
             var_14 = scripts\engine\utility::getclosest(var_13.origin, [var_6, var_0]);
-            if(isplayer(var_13)) {
+            if(isPlayer(var_13)) {
               if(!var_13 scripts\cp\utility::is_valid_player()) {
                 var_13 setvelocity(var_14.origin);
                 continue;

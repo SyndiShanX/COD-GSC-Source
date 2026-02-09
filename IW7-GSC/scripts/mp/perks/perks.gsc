@@ -866,11 +866,11 @@ giveperksafterspawn() {
 }
 
 updateactiveperks(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_8 = isDefined(var_0) && isplayer(var_0);
+  var_8 = isDefined(var_0) && isPlayer(var_0);
   var_9 = scripts\mp\utility\game::getweaponrootname(var_5);
   var_10 = isDefined(var_9) && var_9 == "iw7_axe";
   var_11 = var_10 && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "grenade";
-  var_12 = isDefined(var_1) && isplayer(var_1) && var_1 != var_2;
+  var_12 = isDefined(var_1) && isPlayer(var_1) && var_1 != var_2;
 
   if(var_12 && (var_8 || var_11)) {
     thread scripts\mp\perks\weaponpassives::func_12F61(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);

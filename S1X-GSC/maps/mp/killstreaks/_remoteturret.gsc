@@ -675,7 +675,7 @@ turret_setActive() {
   if(isDefined(level.isHorde) && level.isHorde) {
     self thread turret_hordeShootDronesAndTurrets();
   }
-  /# self thread turret_watchDestroy();
+  self thread turret_watchDestroy();
 }
 
 turret_ModifyDamage(attacker, weapon, type, damage) {
@@ -697,7 +697,7 @@ onTurretDeath(attacker, weapon, meansOfDeath, damage) {
   }
 
   if(isDefined(level.isHorde) && level.isHorde) {
-    if(!IsPlayer(attacker)) {
+    if(!isPlayer(attacker)) {
       attacker = attacker.owner;
     }
   }
@@ -974,14 +974,7 @@ watchEnterAndExit() {
 
 player_shouldDisableRemoteEnter(turret) {
   currentWeapon = self GetCurrentWeapon();
-  return (turret turret_isStunned() ||
-    self player_isUsingKillstreak(turret) ||
-    (isDefined(self.underWater) && self.underWater) ||
-    self.using_remote_turret ||
-    currentWeapon == "none" ||
-    self IsTouching(turret.ownerTrigger) ||
-    (self IsLinked() && !self.using_remote_turret) ||
-    (isDefined(self.empGrenaded) && self.empGrenaded)
+  return (turret turret_isStunned() || self player_isUsingKillstreak(turret) || (isDefined(self.underWater) && self.underWater) || self.using_remote_turret || currentWeapon == "none" || self IsTouching(turret.ownerTrigger) || (self IsLinked() && !self.using_remote_turret) || (isDefined(self.empGrenaded) && self.empGrenaded)
   );
 }
 
@@ -1094,8 +1087,7 @@ playerCanUseTurret(turret) {
 
 player_isUsingKillstreak(turret) {
   currentWeapon = self GetCurrentWeapon();
-  return (self isJuggernaut() || self isUsingRemote() || self isInRemoteTransition() ||
-    (isKillstreakWeapon(currentWeapon) &&
+  return (self isJuggernaut() || self isUsingRemote() || self isInRemoteTransition() || (isKillstreakWeapon(currentWeapon) &&
       currentWeapon != "killstreak_remote_turret_mp" &&
       currentWeapon != CONST_REMOTE_TURRET_MG_WEAPINFO &&
       currentWeapon != CONST_REMOTE_TURRET_BEAM_WEAPINFO &&
@@ -1137,20 +1129,11 @@ player_handleTurretHints(turret) {
 
     waitframe();
   }
-
 }
 
 player_shouldClearTurretPickupHints(turret) {
   currentWeapon = self GetCurrentWeapon();
-  return (turret turret_isStunned() ||
-    self player_isUsingKillstreak(turret) ||
-    (isDefined(self.underWater) && self.underWater) ||
-    self.using_remote_turret ||
-    currentWeapon == "none" ||
-    !self IsTouching(turret.ownerTrigger) ||
-    !isReallyAlive(self) ||
-    !self IsOnGround() ||
-    isDefined(turret.carriedBy)
+  return (turret turret_isStunned() || self player_isUsingKillstreak(turret) || (isDefined(self.underWater) && self.underWater) || self.using_remote_turret || currentWeapon == "none" || !self IsTouching(turret.ownerTrigger) || !isReallyAlive(self) || !self IsOnGround() || isDefined(turret.carriedBy)
   );
 }
 
@@ -1434,7 +1417,7 @@ turret_timeOut() {
   lifeSpan = level.turretSettings[self.turretType].timeOut;
   self.owner SetClientOmnvar("ui_sentry_lifespan", lifeSpan);
 
-  if(GetDvar("scr_remote_turret_timeout", "0") != "0") {
+  if(getDvar("scr_remote_turret_timeout", "0") != "0") {
     lifeSpan = GetDvarFloat("scr_remote_turret_timeout");
   }
 
@@ -1785,7 +1768,7 @@ turret_fireRocket(isAutoTurret) {
   if(isDefined(level.isHorde) && level.isHorde) {
     hitEnemyPlayer = (isDefined(entHit) && isDefined(entHit.team) && (self.team != entHit.team));
   } else {
-    hitEnemyPlayer = (isDefined(entHit) && IsPlayer(entHit) && !IsAlliedSentient(self.owner, entHit));
+    hitEnemyPlayer = (isDefined(entHit) && isPlayer(entHit) && !IsAlliedSentient(self.owner, entHit));
   }
 
   if(!hitEnemyPlayer && isAutoTurret) {
@@ -2094,7 +2077,7 @@ turret_watchDestroy() {
     waitframe();
   }
 
-  SetDvar("scr_remote_turret_destroy", 0);
+  setDvar("scr_remote_turret_destroy", 0);
 
   self notify("death");
 }

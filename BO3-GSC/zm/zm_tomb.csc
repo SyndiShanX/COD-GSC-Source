@@ -148,7 +148,7 @@ function main() {
   level thread function_6ac83719();
   level thread zm_tomb_capture_zones::function_902e1a6d();
   level.sndnomeleeonclient = 1;
-  setdvar("bg_chargeShotExponentialAmmoPerChargeLevel", 1);
+  setDvar("bg_chargeShotExponentialAmmoPerChargeLevel", 1);
   level thread zm_tomb_ffotd::main_end();
 }
 
@@ -1014,14 +1014,14 @@ function lerp_dvar(str_dvar, n_val, n_lerp_time, b_saved_dvar, localclientnum) {
     if(isDefined(b_saved_dvar) && b_saved_dvar) {
       setsaveddvar(str_dvar, n_curr_val);
     } else {
-      setdvar(str_dvar, n_curr_val);
+      setDvar(str_dvar, n_curr_val);
     }
   }
   while(n_time_delta < n_lerp_time);
   if(isDefined(b_saved_dvar) && b_saved_dvar) {
     setsaveddvar(str_dvar, n_val);
   } else {
-    setdvar(str_dvar, n_val);
+    setDvar(str_dvar, n_val);
   }
 }
 

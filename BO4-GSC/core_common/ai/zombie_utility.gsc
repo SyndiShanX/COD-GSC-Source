@@ -105,7 +105,7 @@ is_player_valid(player, checkignoremeflag, ignore_laststand_players, var_da86116
     return 0;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return 0;
   }
 
@@ -575,7 +575,6 @@ debugposinternal(org, string, size) {
     waitframe(1);
     print3d(org, string, color, 1, size);
   }
-
 }
 
 debugpos(org, string) {
@@ -596,7 +595,6 @@ showdebugproc(frompoint, topoint, color, printtime) {
     line(frompoint, topoint, color);
     i += 1;
   }
-
 }
 
 showdebugline(frompoint, topoint, color, printtime) {
@@ -773,7 +771,7 @@ canthrowgrenade() {
     return 1;
   }
 
-  return isplayer(self.enemy);
+  return isPlayer(self.enemy);
 }
 
 random_weight(array) {
@@ -1156,7 +1154,7 @@ get_zombie_var_team(zvar, team) {
 }
 
 set_zombie_var_player(zvar, value) {
-  assert(isplayer(self), "<dev string:x19e>");
+  assert(isPlayer(self), "<dev string:x19e>");
 
   if(!isDefined(self.zombie_vars)) {
     self.zombie_vars = [];
@@ -1166,7 +1164,7 @@ set_zombie_var_player(zvar, value) {
 }
 
 get_zombie_var_player(zvar) {
-  assert(isplayer(self), "<dev string:x1d2>");
+  assert(isPlayer(self), "<dev string:x1d2>");
 
   if(!isDefined(self.zombie_vars)) {
     self.zombie_vars = [];
@@ -2089,8 +2087,8 @@ zombie_should_gib(amount, attacker, type) {
   weapon = undefined;
 
   if(isDefined(attacker)) {
-    if(isplayer(attacker) || isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies) {
-      if(isplayer(attacker)) {
+    if(isPlayer(attacker) || isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies) {
+      if(isPlayer(attacker)) {
         weapon = attacker getcurrentweapon();
       } else {
         weapon = attacker.weapon;
@@ -2123,7 +2121,7 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       return false;
     }
 
@@ -2140,13 +2138,13 @@ head_should_gib(attacker, type, point) {
     return false;
   }
 
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     if(!(isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
       return false;
     }
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     weapon = attacker getcurrentweapon();
   } else {
     weapon = attacker.weapon;
@@ -2233,7 +2231,7 @@ damage_over_time(dmg, delay, attacker, means_of_death) {
     return;
   }
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     attacker = self;
   }
 

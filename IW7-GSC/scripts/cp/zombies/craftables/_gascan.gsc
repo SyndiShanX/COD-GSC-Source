@@ -275,7 +275,7 @@ func_76C2() {
   var_0 = 9216;
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(isplayer(var_2) && isDefined(var_10) && var_5 != "MOD_MELEE") {
+    if(isPlayer(var_2) && isDefined(var_10) && var_5 != "MOD_MELEE") {
       self notify("gas_spot_damaged");
       foreach(var_12 in level.var_38B3) {
         if(var_12 == self) {
@@ -321,7 +321,7 @@ func_76C1() {
   self.var_4D27 endon("death");
   for(;;) {
     self.var_4D27 waittill("trigger", var_0);
-    if(isplayer(var_0) && isalive(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0) && !isDefined(var_0.padding_damage)) {
+    if(isPlayer(var_0) && isalive(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0) && !isDefined(var_0.padding_damage)) {
       var_0.padding_damage = 1;
       var_0 dodamage(15, var_0.origin);
       var_0 thread remove_padding_damage();

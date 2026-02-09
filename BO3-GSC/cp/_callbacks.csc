@@ -68,7 +68,7 @@ function entityspawned(localclientnum) {
     println("");
     return;
   }
-  if(self isplayer()) {
+  if(self isPlayer()) {
     if(isDefined(level._clientfaceanimonplayerspawned)) {
       self thread[[level._clientfaceanimonplayerspawned]](localclientnum);
     }

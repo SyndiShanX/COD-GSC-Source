@@ -259,7 +259,7 @@ afterlife_player_damage_callback(einflictor, eattacker, idamage, idflags, smeans
   if(isDefined(self.afterlife) && self.afterlife)
     return 0;
 
-  if(isDefined(eattacker) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker))) {
+  if(isDefined(eattacker) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie || isPlayer(eattacker))) {
     if(isDefined(self.hasriotshield) && self.hasriotshield && isDefined(vdir)) {
       item_dmg = 100;
 
@@ -868,7 +868,7 @@ afterlife_revive_trigger_think() {
       revive_success = reviver afterlife_revive_do_revive(self, gun);
       reviver revive_give_back_weapons(gun);
 
-      if(isplayer(self))
+      if(isPlayer(self))
         self allowjump(1);
 
       self.laststand = undefined;
@@ -944,7 +944,7 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived revive_hud_show_n_fade(3.0);
   playerbeingrevived.revivetrigger sethintstring("");
 
-  if(isplayer(playerbeingrevived))
+  if(isPlayer(playerbeingrevived))
     playerbeingrevived startrevive(self);
 
   if(!isDefined(self.reviveprogressbar))
@@ -1018,7 +1018,7 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
     self.revivetexthud destroy();
 
   if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
-    if(isplayer(playerbeingrevived))
+    if(isPlayer(playerbeingrevived))
       playerbeingrevived stoprevive(self);
   }
 
@@ -1566,7 +1566,7 @@ afterlife_interact_object_think() {
 
     self waittill("damage", amount, attacker);
 
-    if(attacker == level || isplayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
+    if(attacker == level || isPlayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
       if(isDefined(self.script_string)) {
         if(isDefined(level.afterlife_interact_dist)) {
           if(attacker == level || distancesquared(attacker.origin, self.origin) < level.afterlife_interact_dist * level.afterlife_interact_dist) {

@@ -959,7 +959,7 @@ function function_fb199a7c() {
   self.gem = doa_pickups::spawnubertreasure(self.origin, 1, 0, 0, 0, 5, self.script_noteworthy, undefined, 0, 0)[0];
   while(true) {
     mytrigger waittill("trigger", truck);
-    if(isplayer(truck)) {
+    if(isPlayer(truck)) {
       continue;
     }
     if(isDefined(truck) && isDefined(truck.owner) && isDefined(self.gem)) {
@@ -1636,7 +1636,7 @@ function cow_damage_trigger(cow) {
       continue;
     }
     guy playSound("zmb_buffalo_impact");
-    if(!isplayer(guy)) {
+    if(!isPlayer(guy)) {
       if(!isvehicle(guy)) {
         guy clientfield::set("zombie_rhino_explosion", 1);
         namespace_fba031c8::trygibbinglimb(guy, 5000);
@@ -1665,7 +1665,7 @@ function cow_damage_watch() {
         if(isDefined(attacker.owner)) {
           attacker = attacker.owner;
         }
-        if(isplayer(attacker)) {
+        if(isPlayer(attacker)) {
           attacker.doa.var_ec573900++;
         }
       }
@@ -1673,7 +1673,7 @@ function cow_damage_watch() {
       self playSound("zmb_cow_explode");
       self notify("medium_rare");
       if(isDefined(self.sacred)) {
-        if(isplayer(attacker)) {
+        if(isPlayer(attacker)) {
           attacker.doa.var_130471f++;
         }
         self playSound("zmb_cow_explode_gold");

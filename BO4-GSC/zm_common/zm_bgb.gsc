@@ -244,8 +244,8 @@ bgb_player_monitor() {
 
 setup_devgui() {
   waittillframeend();
-  setdvar(#"bgb_acquire_devgui", "<dev string:x79>");
-  setdvar(#"hash_7877ee182ba11433", -1);
+  setDvar(#"bgb_acquire_devgui", "<dev string:x79>");
+  setDvar(#"hash_7877ee182ba11433", -1);
   bgb_devgui_base = "<dev string:x7c>";
   keys = getarraykeys(level.bgb);
 
@@ -272,7 +272,7 @@ bgb_devgui_think() {
       bgb_devgui_acquire(var_522737d6);
     }
 
-    setdvar(#"bgb_acquire_devgui", "<dev string:x79>");
+    setDvar(#"bgb_acquire_devgui", "<dev string:x79>");
     wait 0.5;
   }
 }
@@ -1048,7 +1048,7 @@ take() {
 }
 
 get_enabled() {
-  if(isplayer(self) && isDefined(self.bgb)) {
+  if(isPlayer(self) && isDefined(self.bgb)) {
     return self.bgb;
   }
 
@@ -1092,7 +1092,7 @@ function_c6cd71d5(str_powerup, v_origin = self get_player_dropped_powerup_origin
   e_powerup = zm_powerups::specific_powerup_drop(str_powerup, v_origin, undefined, 0.1, undefined, undefined, 1, 1, 1, 1);
   e_powerup.e_player_owner = self;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self zm_stats::increment_challenge_stat(#"hash_3ebae93ea866519c");
   }
 }
@@ -1136,7 +1136,7 @@ function_9d8118f5(v_origin) {
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     name = attacker get_enabled();
 
     if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
@@ -1152,7 +1152,7 @@ vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, 
     return idamage;
   }
 
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     name = eattacker get_enabled();
 
     if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
@@ -1168,7 +1168,7 @@ actor_death_override(attacker) {
     return 0;
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     name = attacker get_enabled();
 
     if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {

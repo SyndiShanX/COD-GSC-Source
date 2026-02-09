@@ -15,5 +15,5 @@ main() {
   game["defenders"] = "allies";
   game["allies_soldiertype"] = "woodland";
   game["axis_soldiertype"] = "woodland";
-  setdvar("compassmaxrange", "1400");
+  setDvar("compassmaxrange", "1400");
 }

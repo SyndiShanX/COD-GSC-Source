@@ -8,7 +8,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -41,36 +41,36 @@ main() {
 
   precacheString(&"MP_WAITING_FOR_HQ");
 
-  if(getdvar("koth_autodestroytime") == "")
-    setdvar("koth_autodestroytime", "60");
+  if(getDvar("koth_autodestroytime") == "")
+    setDvar("koth_autodestroytime", "60");
   level.hqAutoDestroyTime = getdvarint("koth_autodestroytime");
 
-  if(getdvar("koth_spawntime") == "")
-    setdvar("koth_spawntime", "0");
+  if(getDvar("koth_spawntime") == "")
+    setDvar("koth_spawntime", "0");
   level.hqSpawnTime = getdvarint("koth_spawntime");
 
-  if(getdvar("koth_kothmode") == "")
-    setdvar("koth_kothmode", "1");
+  if(getDvar("koth_kothmode") == "")
+    setDvar("koth_kothmode", "1");
   level.kothMode = getdvarint("koth_kothmode");
 
-  if(getdvar("koth_captureTime") == "")
-    setdvar("koth_captureTime", "20");
+  if(getDvar("koth_captureTime") == "")
+    setDvar("koth_captureTime", "20");
   level.captureTime = getdvarint("koth_captureTime");
 
-  if(getdvar("koth_destroyTime") == "")
-    setdvar("koth_destroyTime", "10");
+  if(getDvar("koth_destroyTime") == "")
+    setDvar("koth_destroyTime", "10");
   level.destroyTime = getdvarint("koth_destroyTime");
 
-  if(getdvar("koth_delayPlayer") == "")
-    setdvar("koth_delayPlayer", 1);
+  if(getDvar("koth_delayPlayer") == "")
+    setDvar("koth_delayPlayer", 1);
   level.delayPlayer = getdvarint("koth_delayPlayer");
 
-  if(getdvar("koth_spawnDelay") == "")
-    setdvar("koth_spawnDelay", 0);
+  if(getDvar("koth_spawnDelay") == "")
+    setDvar("koth_spawnDelay", 0);
   level.spawnDelay = getdvarint("koth_spawnDelay");
 
-  if(getdvar("koth_extraDelay") == "")
-    setdvar("koth_extraDelay", 0.0);
+  if(getDvar("koth_extraDelay") == "")
+    setDvar("koth_extraDelay", 0.0);
 
   level.extraDelay = getdvarint("koth_extraDelay");
 
@@ -472,11 +472,11 @@ onRadioCapture(player) {
 scriptDestroyHQ() {
   level endon("hq_destroyed");
   while(1) {
-    if(getdvar("scr_destroyhq") != "1") {
+    if(getDvar("scr_destroyhq") != "1") {
       wait .1;
       continue;
     }
-    setdvar("scr_destroyhq", "0");
+    setDvar("scr_destroyhq", "0");
 
     hqOwningTeam = level.radioObject maps\mp\gametypes\_gameobjects::getOwnerTeam();
     for(i = 0; i < level.players.size; i++) {
@@ -907,13 +907,13 @@ drawPoint(org, size, color) {
 
 kothDebug() {
   while(1) {
-    if(getdvar("scr_kothdebug") != "1") {
+    if(getDvar("scr_kothdebug") != "1") {
       wait 2;
       continue;
     }
 
     while(1) {
-      if(getdvar("scr_kothdebug") != "1") {
+      if(getDvar("scr_kothdebug") != "1") {
         break;
       }
       if(!isDefined(level.players) || level.players.size <= 0) {

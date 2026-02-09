@@ -25,7 +25,7 @@ set_level_lighting_values() {
 }
 
 toggle_breach_lightset_triggers() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     return;
   }
   var_0 = getent("breach_blowout_trig", "targetname");

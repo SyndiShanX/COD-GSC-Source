@@ -8,6 +8,7 @@
 #include maps\_zombiemode_utility;
 #include maps\_zombiemode_net;
 #using_animtree("generic_human");
+
 init() {
   if(!maps\_zombiemode_weapons::is_weapon_included("microwavegundw_zm")) {
     return;
@@ -79,22 +80,18 @@ init() {
   level thread microwavegun_on_player_connect();
   level._microwaveable_objects = [];
 }
-
 add_microwaveable_object(ent) {
   level._microwaveable_objects = add_to_array(level._microwaveable_objects, ent, false);
 }
-
 remove_microwaveable_object(ent) {
   level._microwaveable_objects = array_remove(level._microwaveable_objects, ent);
 }
-
 microwavegun_on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
     player thread wait_for_microwavegun_fired();
   }
 }
-
 wait_for_microwavegun_fired() {
   self endon("disconnect");
   self waittill("spawned_player");
@@ -106,7 +103,6 @@ wait_for_microwavegun_fired() {
     }
   }
 }
-
 microwavegun_network_choke() {
   level.microwavegun_network_choke_count++;
   if(!(level.microwavegun_network_choke_count % 10)) {
@@ -115,7 +111,6 @@ microwavegun_network_choke() {
     wait_network_frame();
   }
 }
-
 microwavegun_fired(upgraded) {
   if(!isDefined(level.microwavegun_sizzle_enemies)) {
     level.microwavegun_sizzle_enemies = [];
@@ -131,7 +126,6 @@ microwavegun_fired(upgraded) {
   level.microwavegun_sizzle_enemies = [];
   level.microwavegun_sizzle_vecs = [];
 }
-
 microwavegun_get_enemies_in_range(upgraded, microwaveable_objects) {
   view_pos = self GetWeaponMuzzlePoint();
   test_list = undefined;
@@ -157,7 +151,7 @@ microwavegun_get_enemies_in_range(upgraded, microwaveable_objects) {
       continue;
     }
     test_origin = zombies[i] getcentroid();
-    test_range_squared = distanceSquared(view_pos, test_origin);
+    test_range_squared = DistanceSquared(view_pos, test_origin);
     if(test_range_squared > sizzle_range_squared) {
       zombies[i] microwavegun_debug_print("range", (1, 0, 0));
       return;
@@ -169,7 +163,7 @@ microwavegun_get_enemies_in_range(upgraded, microwaveable_objects) {
       continue;
     }
     radial_origin = PointOnSegmentNearestToPoint(view_pos, end_pos, test_origin);
-    if(distanceSquared(test_origin, radial_origin) > cylinder_radius_squared) {
+    if(DistanceSquared(test_origin, radial_origin) > cylinder_radius_squared) {
       zombies[i] microwavegun_debug_print("cylinder", (1, 0, 0));
       continue;
     }
@@ -192,7 +186,6 @@ microwavegun_get_enemies_in_range(upgraded, microwaveable_objects) {
     }
   }
 }
-
 microwavegun_debug_print(msg, color) {}
 microwavegun_sizzle_zombie(player, sizzle_vec, index) {
   if(!isDefined(self) || !IsAlive(self)) {
@@ -245,7 +238,6 @@ microwavegun_sizzle_zombie(player, sizzle_vec, index) {
     }
   }
 }
-
 microwavegun_handle_death_notetracks(note) {
   if(note == "expand") {
     self setclientflag(level._ZOMBIE_ACTOR_FLAG_MICROWAVEGUN_EXPAND_RESPONSE);
@@ -254,7 +246,6 @@ microwavegun_handle_death_notetracks(note) {
     self thread microwavegun_sizzle_death_ending();
   }
 }
-
 microwavegun_sizzle_death_ending() {
   if(!isDefined(self)) {
     return;
@@ -263,7 +254,6 @@ microwavegun_sizzle_death_ending() {
   wait(0.1);
   self self_delete();
 }
-
 microwavegun_dw_zombie_hit_response_internal(mod, damageweapon, player) {
   player endon("disconnect");
   if(!isDefined(self) || !IsAlive(self)) {
@@ -294,7 +284,6 @@ microwavegun_dw_zombie_hit_response_internal(mod, damageweapon, player) {
     player thread maps\_zombiemode_audio::create_and_play_dialog("kill", "micro_dual");
   }
 }
-
 microwavegun_zap_get_shock_fx(weapon) {
   if(weapon == "microwavegundw_zm") {
     return level._effect["microwavegun_zap_shock_dw"];
@@ -304,7 +293,6 @@ microwavegun_zap_get_shock_fx(weapon) {
     return level._effect["microwavegun_zap_shock_ug"];
   }
 }
-
 microwavegun_zap_get_shock_eyes_fx(weapon) {
   if(weapon == "microwavegundw_zm") {
     return level._effect["microwavegun_zap_shock_eyes_dw"];
@@ -314,12 +302,10 @@ microwavegun_zap_get_shock_eyes_fx(weapon) {
     return level._effect["microwavegun_zap_shock_eyes_ug"];
   }
 }
-
 microwavegun_zap_head_gib(weapon) {
   self endon("death");
   network_safe_play_fx_on_tag("microwavegun_zap_death_fx", 2, microwavegun_zap_get_shock_eyes_fx(weapon), self, "J_Eyeball_LE");
 }
-
 microwavegun_zap_death_fx(weapon) {
   tag = "J_SpineUpper";
   if(self.isdog) {
@@ -336,7 +322,6 @@ microwavegun_zap_death_fx(weapon) {
     self thread microwavegun_zap_head_gib(weapon);
   }
 }
-
 microwavegun_zombie_damage_response(mod, hit_location, hit_origin, player, amount) {
   if(self is_microwavegun_dw_damage()) {
     self thread microwavegun_dw_zombie_hit_response_internal(mod, self.damageweapon, player);
@@ -344,7 +329,6 @@ microwavegun_zombie_damage_response(mod, hit_location, hit_origin, player, amoun
   }
   return false;
 }
-
 microwavegun_zombie_death_response() {
   if(self enemy_killed_by_dw_microwavegun()) {
     return true;
@@ -353,23 +337,18 @@ microwavegun_zombie_death_response() {
   }
   return false;
 }
-
 is_microwavegun_dw_damage() {
   return isDefined(self.damageweapon) && (self.damageweapon == "microwavegundw_zm" || self.damageweapon == "microwavegundw_upgraded_zm" || self.damageweapon == "microwavegunlh_zm" || self.damageweapon == "microwavegunlh_upgraded_zm") && (self.damagemod == "MOD_IMPACT");
 }
-
 enemy_killed_by_dw_microwavegun() {
   return is_true(self.microwavegun_dw_death);
 }
-
 is_microwavegun_damage() {
   return isDefined(self.damageweapon) && (self.damageweapon == "microwavegun_zm" || self.damageweapon == "microwavegun_upgraded_zm") && (self.damagemod != "MOD_GRENADE" && self.damagemod != "MOD_GRENADE_SPLASH");
 }
-
 enemy_killed_by_microwavegun() {
   return is_true(self.microwavegun_death);
 }
-
 microwavegun_sound_thread() {
   self endon("disconnect");
   self waittill("spawned_player");
@@ -382,11 +361,10 @@ microwavegun_sound_thread() {
       self playLoopSound("tesla_idle", 0.25);
     } else {
       self notify("weap_away");
-      self stopLoopSound(0.25);
+      self StopLoopSound(0.25);
     }
   }
 }
-
 setup_microwavegun_vox(player, waittime) {
   level notify("force_end_microwave_vox");
   level endon("force_end_microwave_vox");

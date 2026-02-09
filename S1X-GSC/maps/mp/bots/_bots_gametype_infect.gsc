@@ -262,7 +262,7 @@ bot_infect_find_node_can_see_ent(targetEnt, startNode) {
       start = nNode.origin + eyeOfs;
 
       end = targetEnt.origin;
-      if(IsPlayer(targetEnt)) {
+      if(isPlayer(targetEnt)) {
         end = targetEnt getStanceCenter();
       }
 

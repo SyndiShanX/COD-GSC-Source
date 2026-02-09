@@ -13,9 +13,9 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_bog_summer");
   game["attackers"] = "axis";
   game["defenders"] = "allies";
-  setdvar("compassmaxrange", "1800");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("compassmaxrange", "1800");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.gametype == "dom") {
     level.domborderfx["friendly"]["_a"] = "vfx\unique\vfx_marker_dom";

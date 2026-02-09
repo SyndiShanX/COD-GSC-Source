@@ -189,10 +189,10 @@ function player_killstreak_timer() {
   self endon("disconnect");
   self endon("death");
   if(getdvarstring("zombie_kills") == "") {
-    setdvar("zombie_kills", "7");
+    setDvar("zombie_kills", "7");
   }
   if(getdvarstring("zombie_kill_timer") == "") {
-    setdvar("zombie_kill_timer", "5");
+    setDvar("zombie_kill_timer", "5");
   }
   kills = getdvarint("zombie_kills");
   time = getdvarint("zombie_kill_timer");
@@ -474,7 +474,7 @@ function do_player_or_npc_playvox(sound_to_play, category, subcategory) {
   if(!self arenearbyspeakersactive() || (isDefined(self.ignorenearbyspkrs) && self.ignorenearbyspkrs)) {
     self.speakingline = sound_to_play;
     self.isspeaking = 1;
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self clientfield::set_to_player("isspeaking", 1);
     }
     playbacktime = soundgetplaybacktime(sound_to_play);
@@ -493,7 +493,7 @@ function do_player_or_npc_playvox(sound_to_play, category, subcategory) {
       self playsoundontag(sound_to_play, "J_Head");
       wait(playbacktime);
     }
-    if(isplayer(self) && isDefined(self.last_vo_played_time)) {
+    if(isPlayer(self) && isDefined(self.last_vo_played_time)) {
       if(gettime() < (self.last_vo_played_time + 5000)) {
         self.last_vo_played_time = gettime();
         waittime = 7;
@@ -501,7 +501,7 @@ function do_player_or_npc_playvox(sound_to_play, category, subcategory) {
     }
     wait(waittime);
     self.isspeaking = 0;
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self clientfield::set_to_player("isspeaking", 0);
     }
     if(!level flag::get("solo_game") && (isDefined(level.sndplayervox[category][subcategory].response) && level.sndplayervox[category][subcategory].response)) {
@@ -1628,7 +1628,7 @@ function sndplayerhitalert(e_victim, str_meansofdeath, e_inflictor, weapon) {
   if(!(isDefined(level.sndzhdaudio) && level.sndzhdaudio)) {
     return;
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!checkforvalidmod(str_meansofdeath)) {

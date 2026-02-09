@@ -8,6 +8,7 @@
 #include animscripts\anims;
 #include maps\_utility;
 #using_animtree("generic_human");
+
 main() {
   self trackScriptState("Death Main", "code");
   self endon("killanimscript");
@@ -43,7 +44,7 @@ main() {
   explosiveDamage = explosiveDamage && (!isDefined(self.noExplosiveDeathAnim) || !self.noExplosiveDeathAnim);
   if(self.damageLocation == "helmet") {
     self helmetPop();
-  } else if(explosiveDamage && randomInt(2) == 0) {
+  } else if(explosiveDamage && RandomInt(2) == 0) {
     self helmetPop();
   }
   self ClearAnim(%root, 0.3);
@@ -77,7 +78,6 @@ main() {
   deathAnim = get_death_anim();
   play_death_anim(deathAnim);
 }
-
 play_hit_by_vehicle_anim() {
   if(self.damagemod == "MOD_CRUSH") {
     deathAnim = get_death_anim();
@@ -89,12 +89,11 @@ play_hit_by_vehicle_anim() {
   }
   return false;
 }
-
 goSlowMo() {
   if(GetPlayers().size > 1) {
     return;
   }
-  if(!IsPlayer(self.attacker)) {
+  if(!isPlayer(self.attacker)) {
     return;
   }
   if(self.team == self.attacker.team) {
@@ -105,7 +104,6 @@ goSlowMo() {
   wait(time);
   SetTimeScale(1);
 }
-
 waitForRagdoll(time) {
   wait(time);
   do_ragdoll = true;
@@ -119,7 +117,6 @@ waitForRagdoll(time) {
     self animscripts\shared::DropAllAIWeapons();
   }
 }
-
 get_extended_death_seq(deathAnim) {
   deathSeq = [];
   if(animArrayExist("flameA_start") && deathAnim == animArray("flameA_start")) {
@@ -156,7 +153,6 @@ get_extended_death_seq(deathAnim) {
   }
   return undefined;
 }
-
 play_death_anim(deathAnim) {
   deathSeq = get_extended_death_seq(deathAnim);
   if(isDefined(deathSeq)) {
@@ -191,7 +187,6 @@ play_death_anim(deathAnim) {
   self animscripts\shared::DropAllAIWeapons();
   self maps\_dds::dds_notify_casualty();
 }
-
 special_death() {
   if(self.a.special == "none") {
     return false;
@@ -265,12 +260,10 @@ special_death() {
   }
   return false;
 }
-
 DoDeathFromArray(deathArray) {
-  deathAnim = deathArray[randomInt(deathArray.size)];
+  deathAnim = deathArray[RandomInt(deathArray.size)];
   play_death_anim(deathAnim);
 }
-
 helmetPop() {
   if(!isDefined(self)) {
     return;
@@ -291,7 +284,6 @@ helmetPop() {
   }
   self detach(hatModel, "");
 }
-
 helmetLaunch(model, origin, angles, damageDir) {
   launchForce = damageDir;
   launchForce = launchForce * RandomFloatRange(1100, 4000);
@@ -301,13 +293,11 @@ helmetLaunch(model, origin, angles, damageDir) {
   contactPoint = self.origin + (RandomFloatRange(-1, 1), RandomFloatRange(-1, 1), RandomFloatRange(-1, 1)) * 5;
   CreateDynEntAndLaunch(model, origin, angles, contactPoint, (forcex, forcey, forcez));
 }
-
 removeSelfFrom_SquadLastSeenEnemyPos(org) {
   for(i = 0; i < anim.squadIndex.size; i++) {
     anim.squadIndex[i] clearSightPosNear(org);
   }
 }
-
 clearSightPosNear(org) {
   if(!isDefined(self.sightPos)) {
     return;
@@ -317,7 +307,6 @@ clearSightPosNear(org) {
     self.sightTime = GetTime();
   }
 }
-
 shouldDoRunningForwardDeath() {
   if(self.a.movement != "run") {
     return false;
@@ -333,7 +322,6 @@ shouldDoRunningForwardDeath() {
   }
   return false;
 }
-
 get_death_anim() {
   if(self.a.pose == "stand") {
     if(shouldDoRunningForwardDeath()) {
@@ -349,7 +337,6 @@ get_death_anim() {
     return getBackDeathAnim();
   }
 }
-
 getRunningForwardDeathAnim() {
   deathArray = [];
   if(WeaponClass(self.damageWeapon) == "spread") {
@@ -372,9 +359,8 @@ getRunningForwardDeathAnim() {
   if(!deathArray.size) {
     return getStandDeathAnim();
   }
-  return deathArray[randomInt(deathArray.size)];
+  return deathArray[RandomInt(deathArray.size)];
 }
-
 getStandDeathAnim() {
   deathArray = [];
   if(weaponAnims() == "pistol") {
@@ -422,7 +408,7 @@ getStandDeathAnim() {
     }
     if((self.damageyaw > 135) || (self.damageyaw <= -135)) {
       if(damageLocationIsAny("torso_upper", "left_arm_upper", "right_arm_upper")) {
-        if(firingDeathAllowed() && randomInt(100) < 35) {
+        if(firingDeathAllowed() && RandomInt(100) < 35) {
           deathArray[deathArray.size] = animArray("firing_1", "death");
           deathArray[deathArray.size] = animArray("firing_2", "death");
         }
@@ -461,7 +447,7 @@ getStandDeathAnim() {
       }
       deathArray[deathArray.size] = animArray("fall_to_knees_2", "death");
     }
-    if(deathArray.size < 2 || randomInt(100) < 15) {
+    if(deathArray.size < 2 || RandomInt(100) < 15) {
       deathArray[deathArray.size] = animArray("front", "death");
       deathArray[deathArray.size] = animArray("front_2", "death");
     }
@@ -471,16 +457,14 @@ getStandDeathAnim() {
   if(deathArray.size == 0) {
     deathArray[deathArray.size] = animArray("front", "death");
   }
-  return deathArray[randomInt(deathArray.size)];
+  return deathArray[RandomInt(deathArray.size)];
 }
-
 getStandRPGDeathAnimArray() {
   deathArray = [];
   deathArray[deathArray.size] = animArray("front", "death");
   deathArray[deathArray.size] = animArray("stagger", "death");
   return deathArray;
 }
-
 getStandPistolDeathAnimArray() {
   deathArray = [];
   if(abs(self.damageYaw) < 50) {
@@ -495,7 +479,7 @@ getStandPistolDeathAnimArray() {
         deathArray[deathArray.size] = animArray("groin", "death");
       }
     }
-    if(!damageLocationIsAny("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomInt(2) == 0) {
+    if(!damageLocationIsAny("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && RandomInt(2) == 0) {
       deathArray[deathArray.size] = animArray("head", "death");
     }
     if(deathArray.size == 0 || damageLocationIsAny("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper")) {
@@ -504,7 +488,6 @@ getStandPistolDeathAnimArray() {
   }
   return deathArray;
 }
-
 getStandPowerDeathAnimArray() {
   deathArray = [];
   if(damageLocationIsAny("neck")) {
@@ -547,7 +530,6 @@ getStandPowerDeathAnimArray() {
   assertex(deathArray.size > 0, deathArray.size);
   return deathArray;
 }
-
 getStandSniperDeathAnimArray() {
   deathArray = [];
   if((self.damageyaw > 135) || (self.damageyaw <= -135)) {
@@ -580,7 +562,6 @@ getStandSniperDeathAnimArray() {
   assertex(deathArray.size > 0, deathArray.size);
   return deathArray;
 }
-
 getStandCrossbowDeathAnimArray() {
   deathArray = [];
   if(damageLocationIsAny("left_leg_upper", "left_leg_lower", "left_foot")) {
@@ -616,7 +597,6 @@ getStandCrossbowDeathAnimArray() {
   assertex(deathArray.size > 0, deathArray.size);
   return deathArray;
 }
-
 getRunCrossbowDeathAnimArray() {
   deathArray = [];
   if(damageLocationIsAny("left_leg_upper", "left_leg_lower", "left_foot")) {
@@ -645,7 +625,6 @@ getRunCrossbowDeathAnimArray() {
   }
   return deathArray;
 }
-
 getCrouchDeathAnim() {
   deathArray = [];
   if(self usingGasWeapon()) {
@@ -666,47 +645,46 @@ getCrouchDeathAnim() {
   }
   deathArray = array_removeUndefined(deathArray);
   assertex(deathArray.size > 0, deathArray.size);
-  return deathArray[randomInt(deathArray.size)];
+  return deathArray[RandomInt(deathArray.size)];
 }
-
 getProneDeathAnim() {
   return animArray("front", "death");
 }
-
 getBackDeathAnim() {
   return animArrayPickRandom("front", "death");
 }
-
 tryAddDeathAnim(animName) {
   assert(!animHasNoteTrack(animName, "fire") && !animHasNoteTrack(animName, "fire_spray"));
   return animName;
 }
-
 tryAddFiringDeathAnim(animName) {
   assert(animHasNoteTrack(animName, "fire") || animHasNoteTrack(animName, "fire_spray"));
   return animName;
 }
-
 firingDeathAllowed() {
-  if(!isDefined(self.weapon) || !self animscripts\weaponList::usingAutomaticWeapon())
+  if(!isDefined(self.weapon) || !self animscripts\weaponList::usingAutomaticWeapon()) {
     return false;
-  if(self.a.weaponPos["right"] == "none")
+  }
+  if(self.a.weaponPos["right"] == "none") {
     return false;
-  if(is_true(self.dieQuietly))
+  }
+  if(is_true(self.dieQuietly)) {
     return false;
-  if(is_false(self.dofiringdeath))
+  }
+  if(is_false(self.dofiringdeath)) {
     return false;
+  }
   return true;
 }
-
 longDeathAllowed() {
-  if(is_true(level.disableLongDeaths))
+  if(is_true(level.disableLongDeaths)) {
     return false;
-  if(is_true(self.a.disableLongDeath))
+  }
+  if(is_true(self.a.disableLongDeath)) {
     return false;
+  }
   return true;
 }
-
 play_explosion_death() {
   if(self.damageLocation != "none") {
     return false;
@@ -775,7 +753,7 @@ play_explosion_death() {
     }
   }
   gib_chance = 50;
-  deathAnim = deathArray[randomInt(deathArray.size)];
+  deathAnim = deathArray[RandomInt(deathArray.size)];
   if(getDvar(#"scr_expDeathMayMoveCheck") == "on") {
     localDeltaVector = getMoveDelta(deathAnim, 0, 1);
     endPoint = self localToWorldCoords(localDeltaVector);
@@ -796,7 +774,6 @@ play_explosion_death() {
   play_death_anim(deathAnim);
   return true;
 }
-
 play_flame_death_anim() {
   if(self.damagemod == "MOD_MELEE") {
     return false;
@@ -865,13 +842,12 @@ play_flame_death_anim() {
   if(deathArray.size == 0) {
     return false;
   }
-  randomChoice = randomInt(deathArray.size);
+  randomChoice = RandomInt(deathArray.size);
   self thread flame_death_fx();
   deathAnim = deathArray[randomChoice];
   play_death_anim(deathAnim);
   return true;
 }
-
 flame_death_fx() {
   self endon("death");
   if(is_true(self.is_on_fire)) {
@@ -913,7 +889,6 @@ flame_death_fx() {
     playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[1]);
   } else {}
 }
-
 on_fire_timeout() {
   self endon("death");
   wait 12;
@@ -922,7 +897,6 @@ on_fire_timeout() {
     self notify("stop_flame_damage");
   }
 }
-
 play_gas_death_anim() {
   if(!is_mature()) {
     return false;
@@ -957,12 +931,11 @@ play_gas_death_anim() {
   if(deathArray.size == 0) {
     return false;
   }
-  randomChoice = randomInt(deathArray.size);
+  randomChoice = RandomInt(deathArray.size);
   deathAnim = deathArray[randomChoice];
   play_death_anim(deathAnim);
   return true;
 }
-
 play_bulletgibbed_death_anim() {
   maxDist = 300;
   if(self.damagemod == "MOD_MELEE") {
@@ -977,7 +950,7 @@ play_bulletgibbed_death_anim() {
   if(WeaponClass(self.damageWeapon) == "spread") {
     maxDist = 300;
     shotty_gib = true;
-    distSquared = distanceSquared(self.origin, self.attacker.origin);
+    distSquared = DistanceSquared(self.origin, self.attacker.origin);
     if(distSquared < 110 * 110) {
       gib_chance = 100;
     } else if(distSquared < 200 * 200) {
@@ -985,7 +958,7 @@ play_bulletgibbed_death_anim() {
     } else if(distSquared < 270 * 270) {
       gib_chance = 50;
     } else if(distSquared < 330 * 330) {
-      if(randomInt(100) < 50) {
+      if(RandomInt(100) < 50) {
         gib_chance = 50;
       } else {
         return false;
@@ -1013,8 +986,8 @@ play_bulletgibbed_death_anim() {
     return false;
   }
   self.a.gib_ref = undefined;
-  distSquared = distanceSquared(self.origin, self.attacker.origin);
-  if(randomInt(100) < gib_chance && distSquared < maxDist * maxDist && (force_gib || GetTime() > anim.lastGibTime + anim.gibDelay)) {
+  distSquared = DistanceSquared(self.origin, self.attacker.origin);
+  if(RandomInt(100) < gib_chance && distSquared < maxDist * maxDist && (force_gib || GetTime() > anim.lastGibTime + anim.gibDelay)) {
     anim.lastGibTime = GetTime();
     refs = [];
     switch (self.damageLocation) {
@@ -1077,7 +1050,6 @@ play_bulletgibbed_death_anim() {
   play_death_anim(deathAnim);
   return true;
 }
-
 isValidGibRef(gib_ref) {
   refs = [];
   refs[refs.size] = "right_arm";
@@ -1086,13 +1058,13 @@ isValidGibRef(gib_ref) {
   refs[refs.size] = "left_leg";
   refs[refs.size] = "no_legs";
   refs[refs.size] = "head";
-  if(is_in_array(refs, gib_ref))
+  if(is_in_array(refs, gib_ref)) {
     return true;
+  }
   return false;
 }
-
 try_gib_extended_death(chance) {
-  if(randomInt(100) >= chance) {
+  if(RandomInt(100) >= chance) {
     return false;
   }
   if(self.a.pose == "prone" || self.a.pose == "back") {
@@ -1111,7 +1083,6 @@ try_gib_extended_death(chance) {
   }
   return false;
 }
-
 do_extended_death(deathSeq) {
   self animscripts\shared::DropAllAIWeapons();
   self thread do_gib();
@@ -1121,11 +1092,10 @@ do_extended_death(deathSeq) {
   self animscripts\shared::DoNoteTracks("deathhitanim");
   self notify("stop_death_anim_short_circuit");
   self thread end_extended_death(deathSeq);
-  numDeathLoops = randomInt(2) + 1;
+  numDeathLoops = RandomInt(2) + 1;
   self thread extended_death_loop(deathSeq, numDeathLoops);
   self waittill("extended_death_ended");
 }
-
 end_extended_death(deathSeq) {
   assert(isDefined(deathSeq[2]));
   self waittill_any("damage_afterdeath", "ending_extended_death");
@@ -1133,7 +1103,6 @@ end_extended_death(deathSeq) {
   self animscripts\shared::DoNoteTracks("deathdieanim");
   self notify("extended_death_ended");
 }
-
 extended_death_loop(deathSeq, numLoops) {
   self endon("damage");
   assert(isDefined(deathSeq[1]));
@@ -1144,7 +1113,6 @@ extended_death_loop(deathSeq, numLoops) {
   }
   self notify("ending_extended_death");
 }
-
 get_gib_extended_death_anims() {
   hitfrom = undefined;
   if((self.damageyaw > 90) || (self.damageyaw <= -90)) {
@@ -1169,17 +1137,15 @@ get_gib_extended_death_anims() {
   }
   return deathSeq;
 }
-
 randomize_array(array) {
   for(i = 0; i < array.size; i++) {
-    j = randomInt(array.size);
+    j = RandomInt(array.size);
     temp = array[i];
     array[i] = array[j];
     array[j] = temp;
   }
   return array;
 }
-
 play_bayonet_death_anim() {
   if(self.damagemod != "MOD_BAYONET") {
     return false;
@@ -1211,7 +1177,6 @@ play_bayonet_death_anim() {
   play_death_anim(deathAnim);
   return true;
 }
-
 get_tag_for_damage_location() {
   tag = "J_SpineLower";
   if(self.damagelocation == "helmet") {
@@ -1235,7 +1200,6 @@ get_tag_for_damage_location() {
   }
   return tag;
 }
-
 bayonet_death_fx(side) {
   tag = self get_tag_for_damage_location();
   if(isDefined(level._effect) && isDefined(level._effect["character_bayonet_blood_in"])) {
@@ -1262,7 +1226,6 @@ bayonet_death_fx(side) {
     }
   } else {}
 }
-
 get_gib_ref(direction) {
   if(isDefined(self.a.gib_ref)) {
     return;
@@ -1315,7 +1278,6 @@ get_gib_ref(direction) {
     self.a.gib_ref = undefined;
   }
 }
-
 set_last_gib_time() {
   anim notify("stop_last_gib_time");
   anim endon("stop_last_gib_time");
@@ -1323,11 +1285,9 @@ set_last_gib_time() {
   anim.lastGibTime = GetTime();
   anim.totalGibs = RandomIntRange(anim.minGibs, anim.maxGibs);
 }
-
 get_random(array) {
-  return array[randomInt(array.size)];
+  return array[RandomInt(array.size)];
 }
-
 do_gib() {
   if(!is_mature()) {
     return;
@@ -1402,13 +1362,11 @@ do_gib() {
   self setModel(limb_data["body_model"]);
   self Attach(limb_data["legs_model"]);
 }
-
 precache_gib_fx() {
   anim._effect["animscript_gib_fx"] = LoadFx("weapon/bullet/fx_flesh_gib_fatal_01");
   anim._effect["animscript_gibtrail_fx"] = LoadFx("trail/fx_trail_blood_streak");
   anim._effect["death_neckgrab_spurt"] = LoadFx("impacts/fx_flesh_hit_neck_fatal");
 }
-
 get_limb_data(gib_ref) {
   temp_array = [];
   torsoDmg1_defined = isDefined(self.torsoDmg1);
@@ -1492,7 +1450,6 @@ get_limb_data(gib_ref) {
     return undefined;
   }
 }
-
 throw_gib(spawn_models, spawn_tags, velocities) {
   if(velocities.size < 1) {
     return;
@@ -1503,7 +1460,6 @@ throw_gib(spawn_models, spawn_tags, velocities) {
     CreateDynEntAndLaunch(spawn_models[i], origin, angles, origin, velocities[i], anim._effect["animscript_gibtrail_fx"], 1);
   }
 }
-
 death_anim_short_circuit() {
   self endon("stop_death_anim_short_circuit");
   wait 0.3;
@@ -1520,12 +1476,11 @@ death_anim_short_circuit() {
     }
   }
 }
-
 launch_ragdoll_based_on_damage_type(bullet_scale) {
   if(self call_overloaded_func("animscripts\pain", "wasDamagedByExplosive")) {
     force = 1.6;
   } else if(WeaponClass(self.damageWeapon) == "spread") {
-    distSquared = distanceSquared(self.origin, self.attacker.origin);
+    distSquared = DistanceSquared(self.origin, self.attacker.origin);
     maxDistSquared = 300 * 300;
     if(distSquared > maxDistSquared) {
       distSquared = maxDistSquared;
@@ -1550,7 +1505,6 @@ launch_ragdoll_based_on_damage_type(bullet_scale) {
   self startragdoll();
   self launchragdoll(initial_force, self.damageLocation);
 }
-
 playCustomDeathAnim() {
   if(!animHasNoteTrack(self.deathanim, "dropgun") && !animHasNoteTrack(self.deathanim, "fire_spray")) {
     self animscripts\shared::DropAllAIWeapons();
@@ -1569,7 +1523,6 @@ playCustomDeathAnim() {
   }
   return;
 }
-
 playDeathSound() {
   if(!damageLocationIsAny("head", "helmet")) {
     if(!is_true(self.dieQuietly)) {
@@ -1579,7 +1532,9 @@ playDeathSound() {
       }
     }
   } else {
-    if(self.damageLocation == "helmet" && isDefined(self.hatModel) && ModelHasPhysPreset(self.hatModel) && issubstr(self.hatmodel, "helm")) {
+    if(self.damageLocation == "helmet" && isDefined(self.hatModel) &&
+      ModelHasPhysPreset(self.hatModel) &&
+      issubstr(self.hatmodel, "helm")) {
       self playSound("prj_bullet_impact_headshot_helmet");
     } else {
       self playSound("prj_bullet_impact_headshot");

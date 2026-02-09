@@ -6,7 +6,6 @@
 main(var_0, var_1) {
   if(!isDefined(level._effect)) {
     level._effect = [];
-
   }
   level._effect["flare_runner_intro"] = loadfx("misc/flare_start");
   level._effect["flare_runner"] = loadfx("misc/flare");
@@ -30,7 +29,6 @@ _id_408E(var_0, var_1, var_2, var_3) {
 
     for(var_8 = 0; var_8 < 3; var_8++) {
       var_7[var_8] = var_3[var_8] * var_6 + var_2[var_8] * (1 - var_6);
-
     }
     level._id_4090 = (var_7[0], var_7[1], var_7[2]);
     wait 0.05;
@@ -79,7 +77,6 @@ _id_4094() {
 
     if(var_0 > 1) {
       var_0 = var_0 + randomfloat(0.2);
-
     }
     var_1 = level._id_4090 * var_0;
     setsunlight(var_1[0], var_1[1], var_1[2]);

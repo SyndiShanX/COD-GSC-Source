@@ -313,7 +313,7 @@ hvt_office_fail() {
 
   while(!common_scripts\utility::flag("hvt_office_explosion")) {
     if(level.player istouching(var_0)) {
-      setdvar("ui_deadquote", &"CORNERED_FAIL_HVT_INTERROGATE");
+      setDvar("ui_deadquote", &"CORNERED_FAIL_HVT_INTERROGATE");
       maps\_utility::missionfailedwrapper();
     }
 
@@ -322,7 +322,7 @@ hvt_office_fail() {
 
   for(;;) {
     if(level.player istouching(var_0) || level.player istouching(var_1)) {
-      setdvar("ui_deadquote", &"CORNERED_FAIL_EXPLOSION");
+      setDvar("ui_deadquote", &"CORNERED_FAIL_EXPLOSION");
       maps\_utility::missionfailedwrapper();
     }
 
@@ -461,9 +461,9 @@ hvt_office_hvt_death() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isDefined(var_1) && isplayer(var_1) && var_4 != "MOD_IMPACT") {
+    if(isDefined(var_1) && isPlayer(var_1) && var_4 != "MOD_IMPACT") {
       self kill();
-      setdvar("ui_deadquote", &"CORNERED_HVT_KILLED_FAIL");
+      setDvar("ui_deadquote", &"CORNERED_HVT_KILLED_FAIL");
       maps\_utility::missionfailedwrapper();
       self notify("hvt_dead");
     }
@@ -750,7 +750,7 @@ stairwell_handler() {
   thread stairwell_office_vo();
   thread office_enemy_setup();
   thread maps\cornered_fx::fx_screen_water_sheeting("stairwell_water_sheet", "lobby_shake");
-  level.default_sprint = getdvar("player_sprintSpeedScale");
+  level.default_sprint = getDvar("player_sprintSpeedScale");
   setsaveddvar("player_sprintSpeedScale", 1.2);
   common_scripts\utility::flag_wait("stairwell_shake_1");
   level notify("done_random_shaking");
@@ -1429,7 +1429,7 @@ fall_player() {
     level.player lerpviewangleclamp(0.5, 0, 0, 0, 0, 0, 0);
     var_3 = getanimlength(level.fall_arms_and_legs[0] maps\_utility::getanim("cornered_exfil_fail_player"));
     wait(var_3 - 2.0);
-    setdvar("ui_deadquote", &"CORNERED_PARACHUTE_FAIL");
+    setDvar("ui_deadquote", &"CORNERED_PARACHUTE_FAIL");
     maps\_utility::missionfailedwrapper();
   }
 }

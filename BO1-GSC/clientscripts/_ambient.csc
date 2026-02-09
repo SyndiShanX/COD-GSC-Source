@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_ambient.csc
+ * Script: clientscripts\_ambient\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -9,9 +9,8 @@
 init(local_client_num) {
   clocks_init(local_client_num);
 }
-
 clocks_init(clientNum) {
-  curr_time = getSystemTime();
+  curr_time = GetSystemTime();
   hours = curr_time[0];
   if(hours > 12) {
     hours -= 12;
@@ -54,12 +53,11 @@ clocks_init(clientNum) {
     array_thread(second_hand_array, ::clock_run, second_values);
   }
 }
-
 clock_run(time_values) {
   self endon("entityshutdown");
   if(isDefined(self.script_noteworthy)) {
     hour = time_values["hand_time"];
-    curr_time = getSystemTime(1);
+    curr_time = GetSystemTime(1);
     switch (ToLower(self.script_noteworthy)) {
       case "honolulu":
         hour = curr_time[0] - 10;
@@ -109,26 +107,26 @@ clock_run(time_values) {
     }
     time_values["hand_time"] = hour;
   }
-  while(!clientHasSnapshot(0)) {
+  while(!ClientHasSnapshot(0)) {
     wait(0.1);
   }
-  self rotatePitch(time_values["hand_time"] * time_values["rotate"], 0.05);
+  self RotatePitch(time_values["hand_time"] * time_values["rotate"], 0.05);
   self waittill("rotatedone");
-  while(!clientHasSnapshot(0)) {
+  while(!ClientHasSnapshot(0)) {
     wait(0.1);
   }
   if(isDefined(time_values["first_rotate"])) {
-    self rotatePitch(time_values["first_rotate"], 0.05);
+    self RotatePitch(time_values["first_rotate"], 0.05);
     self waittill("rotatedone");
   }
-  prev_time = getSystemTime();
+  prev_time = GetSystemTime();
   while(true) {
-    curr_time = getSystemTime();
+    curr_time = GetSystemTime();
     if(prev_time != curr_time) {
-      while(!clientHasSnapshot(0)) {
+      while(!ClientHasSnapshot(0)) {
         wait(0.1);
       }
-      self rotatePitch(time_values["rotate_bit"], 0.05);
+      self RotatePitch(time_values["rotate_bit"], 0.05);
       prev_time = curr_time;
     }
     wait(1.0);

@@ -4,11 +4,11 @@
 **************************************/
 
 soundonly() {
-  return getdvar("scr_createfx_type", "0") == "2";
+  return getDvar("scr_createfx_type", "0") == "2";
 }
 
 fxonly() {
-  return getdvar("scr_createfx_type", "0") == "1";
+  return getDvar("scr_createfx_type", "0") == "1";
 }
 
 tracknoneditfx(var_0) {
@@ -98,7 +98,7 @@ createloopsound() {
   var_0.v["origin"] = (0, 0, 0);
   var_0.v["server_culled"] = 1;
 
-  if(getdvar("serverCulledSounds") != "1") {
+  if(getDvar("serverCulledSounds") != "1") {
     var_0.v["server_culled"] = 0;
   }
 
@@ -245,7 +245,7 @@ createfx_common() {
   }
 
   level.createfx_loopcounter = 0;
-  setdvar("ui_hidehud", "1");
+  setDvar("ui_hidehud", "1");
   level notify("createfx_common_done");
 }
 
@@ -315,7 +315,7 @@ createfxlogic() {
     level._effect = [];
   }
 
-  if(getdvar("createfx_map") == "") {} else if(getdvar("createfx_map") == common_scripts\utility::get_template_level()) {
+  if(getDvar("createfx_map") == "") {} else if(getDvar("createfx_map") == common_scripts\utility::get_template_level()) {
     [[level.func_position_player]]();
   }
 
@@ -328,9 +328,9 @@ createfxlogic() {
   init_locked_list();
   init_colors();
 
-  if(getdvar("createfx_use_f4") == "") {}
+  if(getDvar("createfx_use_f4") == "") {}
 
-  if(getdvar("createfx_no_autosave") == "") {}
+  if(getDvar("createfx_no_autosave") == "") {}
 
   level.createfx_draw_enabled = 1;
   level.last_displayed_ent = undefined;
@@ -2418,13 +2418,13 @@ set_tool_hudelem(var_0, var_1, var_2) {
 }
 
 select_by_substring() {
-  var_0 = getdvar("select_by_substring");
+  var_0 = getDvar("select_by_substring");
 
   if(var_0 == "") {
     return 0;
   }
 
-  setdvar("select_by_substring", "");
+  setDvar("select_by_substring", "");
   var_1 = [];
 
   foreach(var_4, var_3 in level.createfxent) {

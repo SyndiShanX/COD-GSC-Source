@@ -89,7 +89,7 @@ init() {
     if(firstSpawners.size > level.max_ape_zombies) {
       chosenSpawners = [];
       while(chosenSpawners.size < level.max_ape_zombies) {
-        index = randomInt(firstSpawners.size);
+        index = RandomInt(firstSpawners.size);
         if(firstSpawners[index].script_string == "boss") {
           chosenSpawners = array_add(chosenSpawners, firstSpawners[index]);
         }
@@ -118,8 +118,8 @@ init() {
   level thread ape_adjust_max_ammo();
   level thread ape_round_tracker();
 }
-
 #using_animtree("generic_human");
+
 ape_prespawn() {
   self.animname = "ape_zombie";
   self.custom_idle_setup = maps\_zombiemode_ai_ape::ape_zombie_idle_setup;
@@ -183,14 +183,12 @@ ape_prespawn() {
   self setTeamForEntity("axis");
   self notify("zombie_init_done");
 }
-
 ape_health_watch() {
   self endon("death");
   while(1) {
     wait(1);
   }
 }
-
 ape_set_airstrike_damage() {
   flag_wait("all_players_connected");
   players = GetPlayers();
@@ -200,7 +198,6 @@ ape_set_airstrike_damage() {
     self.maxAirstrikeDamage = 100;
   }
 }
-
 ape_zombie_idle_setup() {
   self.a.array["turn_left_45"] = % exposed_tracking_turn45L;
   self.a.array["turn_left_90"] = % exposed_tracking_turn90L;
@@ -214,7 +211,6 @@ ape_zombie_idle_setup() {
   self.a.array["straight_level"] = % ai_zombie_simianaut_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
-
 init_ape_zombie_anims() {
   level.scr_anim["ape_zombie"]["death1"] = % ai_zombie_boss_death;
   level.scr_anim["ape_zombie"]["death2"] = % ai_zombie_boss_death_a;
@@ -345,7 +341,6 @@ init_ape_zombie_anims() {
   level._zombie_board_taunt["ape_zombie"][6] = % ai_zombie_taunts_5e;
   level._zombie_board_taunt["ape_zombie"][7] = % ai_zombie_taunts_5f;
 }
-
 init_ape_powerup_drops() {
   level.ape_powerup_array = [];
   if(!isDefined(level.zombie_powerup_array)) {
@@ -362,7 +357,6 @@ init_ape_powerup_drops() {
   level.ape_powerup_array = array_randomize(level.ape_powerup_array);
   level.ape_powerup_index = 0;
 }
-
 ape_zombie_spawn() {
   self.script_moveoverride = true;
   if(!isDefined(level.num_ape_zombies)) {
@@ -386,7 +380,6 @@ ape_zombie_spawn() {
     level.num_ape_zombies--;
   }
 }
-
 ape_round_spawning() {
   level endon("intermission");
   level endon("end_of_round");
@@ -409,7 +402,6 @@ ape_round_spawning() {
     }
   }
 }
-
 ape_round_wait() {
   wait(1);
   if(flag("ape_round")) {
@@ -419,14 +411,12 @@ ape_round_wait() {
     }
   }
 }
-
 ape_round_aftermath() {
   flag_wait("last_ape_down");
   ape_stop_fog();
   wait(6);
   level.ape_intermission = false;
 }
-
 ape_stop_fog() {
   start_dist = 50;
   half_dist = 1209;
@@ -449,7 +439,6 @@ ape_stop_fog() {
   clear_fog_threads();
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
 }
-
 ape_round_tracker() {
   level.ape_save_spawn_func = level.round_spawn_func;
   level.ape_save_wait_func = level.round_wait_func;
@@ -472,14 +461,12 @@ ape_round_tracker() {
     }
   }
 }
-
 ape_round_start() {
   flag_set("ape_round");
   if(isDefined(level.ape_round_start)) {
     level thread[[level.ape_round_start]]();
   }
 }
-
 ape_round_stop() {
   flag_clear("ape_round");
   flag_clear("last_ape_down");
@@ -487,9 +474,8 @@ ape_round_stop() {
     level thread[[level.ape_round_stop]]();
   }
 }
-
 ape_zombie_manager() {
-  start_ape = getEnt("start_boss_spawner", "script_noteworthy");
+  start_ape = getent("start_boss_spawner", "script_noteworthy");
   if(isDefined(start_ape)) {
     while(true) {
       if(level.num_ape_zombies < level.max_ape_zombies) {
@@ -511,7 +497,6 @@ ape_zombie_manager() {
     wait(10);
   }
 }
-
 ape_zombie_pick_best_spawner() {
   best_spawner = undefined;
   best_score = -1;
@@ -524,7 +509,6 @@ ape_zombie_pick_best_spawner() {
   }
   return best_spawner;
 }
-
 ape_zombie_think() {
   self endon("death");
   self.is_activated = false;
@@ -582,7 +566,6 @@ ape_zombie_think() {
     wait(1);
   }
 }
-
 ape_zombie_pick_idle_point() {
   best_score = -1;
   best_node = undefined;
@@ -595,7 +578,6 @@ ape_zombie_pick_idle_point() {
   }
   return best_node;
 }
-
 ape_zombie_default_pathfind_heuristic(node) {
   if(!isDefined(node.targetname) || !isDefined(level.zones[node.targetname])) {
     return -1;
@@ -618,7 +600,6 @@ ape_zombie_default_pathfind_heuristic(node) {
   }
   return score;
 }
-
 ape_zombie_default_spawn_heuristic(spawner) {
   if(isDefined(spawner.last_spawn_time) && (GetTime() - spawner.last_spawn_time < 30000)) {
     return -1;
@@ -647,7 +628,6 @@ ape_zombie_default_spawn_heuristic(spawner) {
   }
   return score;
 }
-
 ape_zombie_choose_run() {
   self endon("death");
   while(true) {
@@ -684,7 +664,6 @@ ape_zombie_choose_run() {
     wait(0.05);
   }
 }
-
 ape_zombie_check_laststand() {
   self endon("death");
   while(!self.entered_level) {
@@ -699,7 +678,6 @@ ape_zombie_check_laststand() {
     wait_network_frame();
   }
 }
-
 ape_zombie_wait_for_switch() {
   self endon("death");
   self endon("already_switched");
@@ -711,7 +689,6 @@ ape_zombie_wait_for_switch() {
   self.nextGroundHit = GetTime();
   self ape_zombie_switch_player(1);
 }
-
 ape_zombie_switch_player(speed_up) {
   players = getplayers();
   if(players.size > 1) {
@@ -731,7 +708,6 @@ ape_zombie_switch_player(speed_up) {
     self notify("already_switched");
   }
 }
-
 wait_for_round_over() {
   self endon("stop_managing_health");
   while(true) {
@@ -740,13 +716,11 @@ wait_for_round_over() {
     wait(0.05);
   }
 }
-
 wait_for_activation() {
   self waittill("ape_activated");
   self notify("update_health");
   self notify("stop_managing_health");
 }
-
 ape_zombie_check_player_proximity() {
   self endon("death");
   while(1) {
@@ -763,7 +737,6 @@ ape_zombie_check_player_proximity() {
     wait_network_frame();
   }
 }
-
 ape_zombie_update_proximity_wake() {
   while(!isDefined(level.round_number)) {
     wait(1);
@@ -780,7 +753,6 @@ ape_zombie_update_proximity_wake() {
     wait(1);
   }
 }
-
 ape_zombie_damage_during_activate() {
   self endon("death");
   self endon("play_activate_done");
@@ -788,7 +760,6 @@ ape_zombie_damage_during_activate() {
   self waittill_either("damage", "hit_player");
   self notify("play_activate_done");
 }
-
 ape_zombie_play_activate() {
   self endon("death");
   self endon("play_activate_done");
@@ -799,7 +770,6 @@ ape_zombie_play_activate() {
   wait(time);
   self notify("play_activate_done");
 }
-
 ape_zombie_check_for_activation() {
   self endon("death");
   self endon("ape_activated");
@@ -830,13 +800,11 @@ ape_zombie_check_for_activation() {
   }
   self notify("ape_activated");
 }
-
 ape_zombie_is_activated() {
   self waittill("ape_activated");
   self thread ape_zombie_ground_hit_think();
   self thread ape_zombie_push_zombies();
 }
-
 ape_zombie_ground_hit() {
   self endon("death");
   if(self.ground_hit) {
@@ -856,7 +824,6 @@ ape_zombie_ground_hit() {
   }
   self thread animscripts\zombie_combat::main();
 }
-
 ape_zombie_ground_hit_think() {
   self endon("death");
   self.ground_hit = false;
@@ -871,7 +838,7 @@ ape_zombie_ground_hit_think() {
           continue;
         }
         test_origin = players[i] getEye();
-        d = distanceSquared(origin, test_origin);
+        d = DistanceSquared(origin, test_origin);
         if(d > level.ape_zombie_groundhit_trigger_radius * level.ape_zombie_groundhit_trigger_radius) {
           continue;
         }
@@ -888,10 +855,9 @@ ape_zombie_ground_hit_think() {
     wait_network_frame();
   }
 }
-
 scream_a_watcher(animname) {
   self endon("death");
-  rand = randomInt(100);
+  rand = RandomInt(100);
   if(rand > level.ape_zombie_scream_a_chance) {
     return;
   }
@@ -907,7 +873,6 @@ scream_a_watcher(animname) {
     affected_players[i] ShellShock("electrocution", 1.5, true);
   }
 }
-
 groundhit_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "fire");
@@ -985,10 +950,9 @@ groundhit_watcher(animname) {
     }
   }
 }
-
 scream_b_watcher(animname) {
   self endon("death");
-  rand = randomInt(100);
+  rand = RandomInt(100);
   if(rand > level.ape_zombie_scream_b_chance) {
     return;
   }
@@ -1004,7 +968,6 @@ scream_b_watcher(animname) {
     affected_players[i] ShellShock("electrocution", 1.5, true);
   }
 }
-
 ape_zombie_die() {
   self maps\_zombiemode_spawner::reset_attack_spot();
   self.grenadeAmmo = 0;
@@ -1042,7 +1005,6 @@ ape_zombie_die() {
   flag_set("last_ape_down");
   return false;
 }
-
 ape_zombie_powerup_drop() {
   if(!level.ape_powerup_array.size) {
     return;
@@ -1061,32 +1023,28 @@ ape_zombie_powerup_drop() {
   level.powerup_drop_count--;
   level thread maps\_zombiemode_powerups::powerup_drop(self.origin);
 }
-
 ape_adjust_max_ammo() {
   while(1) {
     level waittill("between_round_over");
     wait_network_frame();
   }
 }
-
 ape_zombie_wait_for_respawn() {
   level thread wait_for_round();
   level waittill("respawn_now");
   level.num_ape_zombies--;
 }
-
 wait_for_round() {
   level endon("respawn_now");
   level waittill("between_round_over");
   wait(1);
   level waittill("between_round_over");
-  if(randomInt(100) < 50) {
+  if(RandomInt(100) < 50) {
     wait(1);
     level waittill("between_round_over");
   }
   level notify("respawn_now");
 }
-
 ape_thundergun_disintegrate(player) {
   self endon("death");
   self DoDamage(level.ape_thundergun_damage, player.origin, player);
@@ -1099,7 +1057,6 @@ ape_thundergun_disintegrate(player) {
     flag_clear("tgun_react");
   }
 }
-
 ape_fire_damage(trap) {
   self endon("death");
   self DoDamage(level.ape_fire_damage, self.origin);
@@ -1115,12 +1072,10 @@ ape_fire_damage(trap) {
     }
   }
 }
-
 ape_trap_reaction(trap) {
   self endon("death");
   trap notify("trap_done");
 }
-
 ape_custom_damage(player) {
   self endon("death");
   if(isDefined(self.ground_hit) && self.ground_hit) {
@@ -1128,7 +1083,6 @@ ape_custom_damage(player) {
   }
   return self.meleeDamage;
 }
-
 ape_actor_damage(weapon, damage, attacker) {
   self endon("death");
   switch (weapon) {
@@ -1160,14 +1114,13 @@ ape_actor_damage(weapon, damage, attacker) {
   }
   return damage;
 }
-
 ape_nuke_damage(location) {
   self endon("death");
   if(!self.entered_level) {
     return;
   }
   nuke_dist_sq = 1024 * 1024;
-  if(distanceSquared(self.origin, location) < nuke_dist_sq) {
+  if(DistanceSquared(self.origin, location) < nuke_dist_sq) {
     damage = self.maxhealth * 0.5;
     self DoDamage(damage, self.origin);
     if(self.is_activated && self.health > 0) {
@@ -1178,23 +1131,19 @@ ape_nuke_damage(location) {
     self.is_activated = true;
   }
 }
-
 ape_tesla_damage(origin, player) {
   self DoDamage(level.ape_tesla_damage, origin, player);
   if(self.health > 0) {
     self.zombie_tesla_hit = false;
   }
 }
-
 ape_dog_damage() {
   DOG_MELEE_DAMAGE = 100;
   self DoDamage(DOG_MELEE_DAMAGE, self.origin);
 }
-
 ape_zombie_damage_fx(mod, hit_location, hit_origin, player) {
   playFX(level._effect["ape_impact"], hit_origin);
 }
-
 ape_non_attacker(damage, weapon) {
   TURRET_DAMAGE = 25;
   if(weapon == "zombie_ability_turret") {
@@ -1202,14 +1151,12 @@ ape_non_attacker(damage, weapon) {
   }
   return 0;
 }
-
 ape_zombie_default_enter_level() {
   playFX(level._effect["ape_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
   self.entered_level = true;
 }
-
 ape_zombie_knockdown() {
   self endon("death");
   time = getAnimLength(%ai_zombie_thundergun_hit_forwardtoface);
@@ -1219,7 +1166,6 @@ ape_zombie_knockdown() {
   self animscripted("up", self.origin, self.angles, %ai_zombie_thundergun_getup_a, "normal", %body, 1);
   wait(time);
 }
-
 ape_zombie_push_zombies() {
   self endon("death");
   while(1) {
@@ -1241,7 +1187,6 @@ ape_zombie_push_zombies() {
     wait(rand);
   }
 }
-
 ape_pathing() {
   self endon("death");
   while(1) {
@@ -1253,7 +1198,6 @@ ape_pathing() {
     wait_network_frame();
   }
 }
-
 ape_find_flesh() {
   self endon("death");
   level endon("intermission");

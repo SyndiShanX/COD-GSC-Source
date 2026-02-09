@@ -121,7 +121,7 @@ event_handler[level_init] main(eventstruct) {
   load::main();
   util::waitforclient(0);
   zm_mansion_sound::main();
-  setdvar(#"hash_6d05981efd5d8d74", 400);
+  setDvar(#"hash_6d05981efd5d8d74", 400);
 }
 
 force_stream_model(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -62,8 +62,8 @@ _id_5A63() {
 
 _id_5A5E() {
   level.player disableweapons();
-  level._id_5A94 = getdvar("bg_viewBobAmplitudeBase");
-  level._id_5A95 = getdvar("bg_viewBobAmplitudeStanding");
+  level._id_5A94 = getDvar("bg_viewBobAmplitudeBase");
+  level._id_5A95 = getDvar("bg_viewBobAmplitudeStanding");
   setsaveddvar("bg_viewBobAmplitudeBase", "0.05");
   setsaveddvar("bg_viewBobAmplitudeStanding", "0.014 0.014");
   maps\_compass::setupminimap("compass_map_hijack_airplane", "airplane_upper_minimap_corner");
@@ -102,8 +102,8 @@ _id_5A5F() {
   var_0 = common_scripts\utility::getstruct("player_start_debate", "targetname");
   level.player setorigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  level._id_5A94 = getdvar("bg_viewBobAmplitudeBase");
-  level._id_5A95 = getdvar("bg_viewBobAmplitudeStanding");
+  level._id_5A94 = getDvar("bg_viewBobAmplitudeBase");
+  level._id_5A95 = getDvar("bg_viewBobAmplitudeStanding");
   setsaveddvar("bg_viewBobAmplitudeBase", "0.05");
   setsaveddvar("bg_viewBobAmplitudeStanding", "0.014 0.014");
   maps\_compass::setupminimap("compass_map_hijack_airplane", "airplane_upper_minimap_corner");
@@ -250,7 +250,7 @@ _id_5A9B() {
 }
 
 _id_5A9C() {
-  var_0 = getdvar("objectiveFadeTooFar");
+  var_0 = getDvar("objectiveFadeTooFar");
   common_scripts\utility::flag_wait("follow_pres");
   objective_add(maps\_utility::_id_2816("follow_president"), "current", &"HIJACK_FOLLOW_PRES", level._id_58CB.origin);
   objective_onentity(maps\_utility::_id_2816("follow_president"), level._id_58CB, (0, 0, 70));
@@ -517,19 +517,15 @@ _id_5AA7() {
 
   if(isDefined(var_1._id_0D04)) {
     var_1 maps\_utility::_id_1902();
-
   }
   if(isDefined(var_2._id_0D04)) {
     var_2 maps\_utility::_id_1902();
-
   }
   if(isDefined(var_3._id_0D04)) {
     var_3 maps\_utility::_id_1902();
-
   }
   if(isDefined(var_4._id_0D04)) {
     var_4 maps\_utility::_id_1902();
-
   }
   var_1 delete();
   var_2 delete();
@@ -749,7 +745,6 @@ _id_5ABA() {
 
   if(!common_scripts\utility::flag("in_guard_position")) {
     level._id_59A0 maps\_anim::_id_124E(var_2, "intro_cine_pitcher_loop", "stop_intro_loop");
-
   }
   var_0 unlink();
   var_1 unlink();
@@ -766,7 +761,6 @@ _id_5ABB() {
 
   if(isDefined(level._id_5A98._id_0D04)) {
     level._id_5A98 maps\_utility::_id_1902();
-
   }
   level._id_5A98 delete();
   common_scripts\utility::flag_set("delete_intro_ambient_guys");
@@ -956,7 +950,6 @@ _id_5AC9() {
     level.player maps\hijack_code::_id_595E();
   } else {
     wait 0.6;
-
   }
   setphysicsgravitydir((0, 0, -1));
   wait 1.5;
@@ -1300,7 +1293,6 @@ _id_5AD7() {
 
   if(isDefined(self._id_0D04)) {
     maps\_utility::_id_1902();
-
   }
   self kill();
 }
@@ -1315,7 +1307,6 @@ _id_5AD8(var_0) {
 
   if(isDefined(self._id_0D04)) {
     maps\_utility::_id_1902();
-
   }
   level._id_59A0 thread maps\_anim::_id_124E(self, var_0);
   self invisiblenotsolid();
@@ -1425,7 +1416,6 @@ _id_5AE2(var_0) {
 
         while(iscinematicplaying()) {
           wait 0.05;
-
         }
         break;
       case 1:
@@ -1434,7 +1424,6 @@ _id_5AE2(var_0) {
 
         while(iscinematicplaying()) {
           wait 0.05;
-
         }
         break;
       default:
@@ -1626,7 +1615,6 @@ _id_5AEC() {
 
   if(!common_scripts\utility::flag("pre_zerog_checkpoint")) {
     var_0 maps\_anim::_id_1246(var_2, "hallway_cabinet_open");
-
   }
   var_0 maps\_anim::_id_124E(var_2, "hallway_cabinet_loop", "end_cabinet_loop");
   common_scripts\utility::flag_wait("zero_g_trig");
@@ -1648,7 +1636,6 @@ _id_5AEE() {
 
   if(isDefined(level._id_58C9)) {
     level._id_58C9 maps\_utility::_id_104A("ak74u", "primary");
-
   }
   var_0 = maps\_utility::_id_272F("dying_agent1");
   var_0._id_1032 = "generic";
@@ -1668,11 +1655,9 @@ _id_5AEE() {
 
   if(isDefined(level._id_5A87)) {
     level._id_5A87 thread maps\hijack::_id_5A7C();
-
   }
   if(isDefined(level._id_5A89)) {
     level._id_5A89 thread maps\hijack::_id_5A7C();
-
   }
   if(isDefined(level._id_5A9A)) {
     level._id_5A9A thread maps\hijack::_id_5A7C();
@@ -1937,7 +1922,6 @@ _id_5AF7() {
   foreach(var_1 in level._id_5AF1) {
     if(isDefined(var_1._id_0D04)) {
       var_1 maps\_utility::_id_1902();
-
     }
     var_1 kill(level._id_5A9A.origin, level._id_5A9A);
   }
@@ -1948,7 +1932,6 @@ _id_5AF7() {
   if(isalive(level._id_5A96) && isDefined(level._id_5A96)) {
     if(isDefined(level._id_5A96._id_0D04)) {
       level._id_5A96 maps\_utility::_id_1902();
-
     }
     level._id_5A96 delete();
   }
@@ -1956,7 +1939,6 @@ _id_5AF7() {
   if(isalive(level._id_58C9) && isDefined(level._id_58C9)) {
     if(isDefined(level._id_58C9._id_0D04)) {
       level._id_58C9 maps\_utility::_id_1902();
-
     }
     level._id_58C9 delete();
   }
@@ -1964,7 +1946,6 @@ _id_5AF7() {
   if(isalive(level._id_58C7) && isDefined(level._id_58C7)) {
     if(isDefined(level._id_58C7._id_0D04)) {
       level._id_58C7 maps\_utility::_id_1902();
-
     }
     level._id_58C7 delete();
   }
@@ -1972,7 +1953,6 @@ _id_5AF7() {
   if(isalive(level._id_5A97) && isDefined(level._id_5A97)) {
     if(isDefined(level._id_5A97._id_0D04)) {
       level._id_5A97 maps\_utility::_id_1902();
-
     }
     level._id_5A97 delete();
   }
@@ -1988,7 +1968,6 @@ _id_5AF7() {
 
   if(isDefined(level._id_282E) && isDefined(level._id_282E["pre_zerog_guys"])) {
     maps\_utility::_id_282E("pre_zerog_guys");
-
   }
   maps\_utility::_id_265A("axis");
 }
@@ -2001,11 +1980,11 @@ _id_5AF8() {
   var_2 = maps\_utility::_id_2640("zerog_terrorist3", "script_noteworthy");
   var_3 = maps\_utility::_id_2640("zerog_terrorist4", "script_noteworthy");
   var_4 = maps\_utility::_id_2640("zerog_terrorist5", "script_noteworthy");
-  var_0 thread _id_5AFB("zerog_terror1_track", "zerog_terrorist_01_align", % hijack_zerog_terrorist_01_alive, % hijack_zerog_terrorist_01_dead);
-  var_1 thread _id_5AFB("zerog_terror2_track", "zerog_terrorist_02_align", % hijack_zerog_terrorist_02_alive, % hijack_zerog_terrorist_02_dead);
-  var_2 thread _id_5AFB("zerog_terror3_track", "zerog_terrorist_03_align", % hijack_zerog_terrorist_03_alive, % hijack_zerog_terrorist_03_dead);
-  var_3 thread _id_5AFB("zerog_terror4_track", "zerog_terrorist_04_align", % hijack_zerog_terrorist_04_alive, % hijack_zerog_terrorist_04_dead);
-  var_4 thread _id_5AFB("zerog_terror5_track", "zerog_terrorist_05_align", % hijack_zerog_terrorist_05_alive, % hijack_zerog_terrorist_05_dead);
+  var_0 thread _id_5AFB("zerog_terror1_track", "zerog_terrorist_01_align", %hijack_zerog_terrorist_01_alive, %hijack_zerog_terrorist_01_dead);
+  var_1 thread _id_5AFB("zerog_terror2_track", "zerog_terrorist_02_align", %hijack_zerog_terrorist_02_alive, %hijack_zerog_terrorist_02_dead);
+  var_2 thread _id_5AFB("zerog_terror3_track", "zerog_terrorist_03_align", %hijack_zerog_terrorist_03_alive, %hijack_zerog_terrorist_03_dead);
+  var_3 thread _id_5AFB("zerog_terror4_track", "zerog_terrorist_04_align", %hijack_zerog_terrorist_04_alive, %hijack_zerog_terrorist_04_dead);
+  var_4 thread _id_5AFB("zerog_terror5_track", "zerog_terrorist_05_align", %hijack_zerog_terrorist_05_alive, %hijack_zerog_terrorist_05_dead);
   level._id_5AF4 thread maps\_anim::_id_1246(level._id_5A87, "zerog_moment");
   level._id_5AF4 thread maps\_anim::_id_1246(level._id_5A89, "zerog_moment");
   wait 0.1;
@@ -2036,7 +2015,6 @@ _id_5AFB(var_0, var_1, var_2, var_3) {
     self forceteleport(var_4.origin, var_4.angles);
   } else {
     self forceteleport(var_4.origin, var_4.angles + (0, -90, 0));
-
   }
   self linkto(var_4, "J_prop_1");
   level._id_5AF4 thread maps\_anim::_id_1246(var_4, var_1);
@@ -2054,7 +2032,6 @@ _id_0119() {
     level.player._id_0119 = 1;
   } else {
     level.player._id_0119++;
-
   }
   if(level.player._id_0119 == 5) {
     level.player maps\_utility::_id_1E39("FLIGHT_ATTENDANT");
@@ -2063,7 +2040,7 @@ _id_0119() {
 
 _id_5B00() {
   var_0 = "single anim";
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self setflaggedanim(var_0, self._id_5AFC, 1);
   thread maps\_anim::_id_0C61(self, var_0, self._id_5AFC, self._id_1032);
   thread maps\_anim::_id_0C62(self, var_0, self._id_5AFC);
@@ -2072,7 +2049,6 @@ _id_5B00() {
     thread _id_5B1A();
   } else if(self._id_1032 != "zerog_terrorist4") {
     thread _id_5B02(self._id_5AFC);
-
   }
   self waittill("death");
 }
@@ -2120,9 +2096,9 @@ _id_5B01(var_0, var_1) {
   thread maps\_anim::_id_0C61(self, var_2, self._id_5AFD, self._id_1032);
   thread maps\_anim::_id_0C62(self, var_2, self._id_5AFD);
   self setanimtime(self._id_5AFD, var_4);
-  self setanimlimited( % zero_g_shot, 0.95, 0);
+  self setanimlimited(%zero_g_shot, 0.95, 0);
   wait 1.0;
-  self clearanim( % zero_g_shot, 0.5);
+  self clearanim(%zero_g_shot, 0.5);
 
   if(self._id_1032 == "zerog_terrorist3") {
     self waittillmatch("single anim", "unlink");
@@ -2229,9 +2205,9 @@ _id_5B04() {
   common_scripts\utility::flag_wait("zero_g_trig");
   wait 1.75;
   level._id_5B05 thread maps\_anim::_id_1246(var_4, "zerog_overhead_door_l");
-  var_4 setanimtime( % hijack_zerog_overhead_door_l, 0.65);
+  var_4 setanimtime(%hijack_zerog_overhead_door_l, 0.65);
   level._id_5B05 thread maps\_anim::_id_1246(var_3, "zerog_rectanglebox");
-  var_3 setanimtime( % hijack_zerog_rectanglebox, 0.65);
+  var_3 setanimtime(%hijack_zerog_rectanglebox, 0.65);
   wait 0.2;
   level._id_5B06 thread maps\_anim::_id_1246(var_5, "zerog_overhead_door_r");
   wait 0.3;
@@ -2457,7 +2433,6 @@ _id_5B17(var_0, var_1, var_2) {
 _id_5B18() {
   if(level._id_1F19 != "lower_level_combat") {
     level._id_5A89 waittillmatch("single anim", "end");
-
   }
   level._id_5A87.ignoreme = 1;
   level._id_5A87.ignoreall = 1;
@@ -2531,7 +2506,6 @@ _id_5B1A() {
     level._id_5AF4 maps\_anim::_id_1246(level._id_58D2, "zerog_hero_agent");
   } else {
     level._id_5AF4 maps\_anim::_id_1246(level._id_58D2, "zerog_commander_alt");
-
   }
   common_scripts\utility::flag_set("zero_g_done");
   thread _id_5B1C();
@@ -2590,7 +2564,6 @@ _id_5B1E() {
 
   if(common_scripts\utility::flag("dining_room_done")) {
     level._id_58D2 maps\_utility::_id_168C("hijack_cmd_roomclear");
-
   }
   common_scripts\utility::flag_wait("move_president_to_second_room_start");
   level._id_58D2 maps\_utility::_id_168C("hijack_cmd_headdown");
@@ -2598,7 +2571,6 @@ _id_5B1E() {
 
   if(common_scripts\utility::flag("dining_room_done")) {
     level._id_58D2 maps\_utility::_id_168C("hijack_cmd_roomclear");
-
   }
   common_scripts\utility::flag_wait("spawn_hallway_terrorists_1");
   maps\_utility::_id_11F4("hijack_fso2_jammedshut");
@@ -2866,7 +2838,7 @@ _id_5B2F() {
 _id_5B30() {
   level endon("planecrash_approaching");
   wait 300;
-  setdvar("ui_deadquote", &"HIJACK_FAIL_CRASH");
+  setDvar("ui_deadquote", &"HIJACK_FAIL_CRASH");
   level notify("mission failed");
   maps\_utility::_id_1826();
 }
@@ -2883,7 +2855,6 @@ _id_5B31(var_0) {
           var_5 thread _id_5B33("hijack_generic_stumble_crouch2", var_0);
         } else {
           var_5 thread _id_5B33("hijack_generic_stumble_crouch1", var_0);
-
         }
         var_2 = var_2 + 1;
         continue;
@@ -2894,7 +2865,6 @@ _id_5B31(var_0) {
           var_5 thread _id_5B33("hijack_generic_stumble_stand2", var_0);
         } else {
           var_5 thread _id_5B33("hijack_generic_stumble_stand1", var_0);
-
         }
         var_3 = var_3 + 1;
       }
@@ -3007,7 +2977,6 @@ _id_5B35() {
     level.player maps\hijack_code::_id_595E();
   } else {
     wait 1.0;
-
   }
   level.player enableweapons();
   wait 1.0;
@@ -3021,13 +2990,11 @@ _id_5B37(var_0, var_1) {
 
   if(var_0.health == 1) {
     var_0 dodamage(1, level.player.origin, level.player);
-
   }
   var_1.allowdeath = 1;
 
   if(var_1.health == 1) {
     var_1 dodamage(1, level.player.origin, level.player);
-
   }
   wait 1.7;
   var_1._id_0D45 = undefined;
@@ -3149,7 +3116,6 @@ _id_5B3D(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_3 maps\_anim::_id_124E(var_4, var_2);
-
   }
   common_scripts\utility::flag_wait_or_timeout("kill_cargo", 300);
   self unlink();
@@ -3166,7 +3132,6 @@ _id_5B3E(var_0) {
 
   if(!isDefined(level._id_4BAB)) {
     level._id_4BAB = [];
-
   }
   level._id_4BAB[level._id_4BAB.size] = var_1;
   common_scripts\utility::flag_wait("start_" + var_0);
@@ -3289,7 +3254,7 @@ _id_5B43() {
 }
 
 _id_5B44() {
-  setdvar("ui_deadquote", &"HIJACK_MISSIONFAIL_ALENA");
+  setDvar("ui_deadquote", &"HIJACK_MISSIONFAIL_ALENA");
   thread maps\_utility::_id_1826();
 }
 
@@ -3300,7 +3265,6 @@ _id_5B45() {
 
   if(isDefined(level._id_59E0._id_0D04)) {
     level._id_59E0 maps\_utility::_id_1902();
-
   }
   level._id_59E0._id_0D45 = ::_id_5B44;
   var_0 = maps\_utility::_id_272C("cargo_room_terrorists_b");
@@ -3319,7 +3283,6 @@ _id_5B45() {
     level._id_5A16 thread maps\_anim::_id_11DD(var_3, "pre_find_daughter_short");
   } else {
     level._id_5A16 thread maps\_anim::_id_11DD(var_3, "pre_find_daughter");
-
   }
   var_2 waittillmatch("single anim", "done_throwing");
   var_2.allowdeath = 1;
@@ -3381,7 +3344,6 @@ _id_5A21() {
   if(isDefined(level._id_59E0)) {
     if(isDefined(level._id_59E0._id_0D04)) {
       level._id_59E0 maps\_utility::_id_1902();
-
     }
     level._id_59E0 delete();
   }

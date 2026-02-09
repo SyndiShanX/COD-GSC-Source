@@ -131,7 +131,7 @@ add_time_bomb_to_mystery_box() {
 }
 
 player_give_time_bomb() {
-  assert(isplayer(self), "player_give_time_bomb can only be used on players!");
+  assert(isPlayer(self), "player_give_time_bomb can only be used on players!");
   self giveweapon("time_bomb_zm");
   self swap_weapon_to_time_bomb();
   self thread show_time_bomb_hints();
@@ -1576,7 +1576,6 @@ _get_time_bomb_round_type() {
       str_types = str_types + " " + a_round_type;
 
     assertmsg("_get_time_bomb_round_type conditions passed multiple times for the following types: " + str_types);
-
   }
 
   debug_time_bomb_print("round type = " + a_round_type[0]);
@@ -1584,7 +1583,7 @@ _get_time_bomb_round_type() {
 }
 
 is_spectator() {
-  return isplayer(self) && isDefined(self.sessionstate) && self.sessionstate == "spectator";
+  return isPlayer(self) && isDefined(self.sessionstate) && self.sessionstate == "spectator";
 }
 
 _time_bomb_resets_all_barrier_attack_spots_taken() {

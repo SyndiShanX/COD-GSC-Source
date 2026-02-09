@@ -30,11 +30,9 @@ _id_3B6A(var_0, var_1) {
 
       if(isDefined(level._id_16C3)) {
         self._id_3B6C = max(level._id_16C3 - (self._id_3B6B - level._id_16CF), 0);
-
       }
       if(!maps\_utility::_id_12C1() || isDefined(maps\_utility::_id_133A(self)._id_3B6B)) {
         common_scripts\utility::flag_set(var_1);
-
       }
       break;
     }

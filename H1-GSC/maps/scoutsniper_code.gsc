@@ -648,7 +648,7 @@ vehicle_turret_think() {
   for(;;) {
     wait 0.05;
 
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       var_3 = 0;
       var_3 = sighttracepassed(self.origin, level.player.origin + (0, 0, 150), 0, self);
 
@@ -661,7 +661,7 @@ vehicle_turret_think() {
       var_4 = var_0.origin + (0, 0, 32);
       self setturrettargetvec(var_4);
 
-      if(getdvar("debug_bmp") == "1")
+      if(getDvar("debug_bmp") == "1")
         thread maps\_utility::draw_line_until_notify(self.origin + (0, 0, 32), var_4, 1, 0, 0, self, "stop_drawing_line");
 
       var_5 = randomfloatrange(1, 1.5);
@@ -689,7 +689,7 @@ vehicle_turret_think() {
       }
     }
 
-    if(getdvar("debug_bmp") == "1")
+    if(getDvar("debug_bmp") == "1")
       self notify("stop_drawing_line");
   }
 }
@@ -1356,7 +1356,7 @@ chopper_ai_mode_missiles(var_0) {
     var_5 = randomintrange(4, 6);
     var_6 = bulletTrace(self.origin + (0, 0, -150), var_0.origin, 1, level.price);
 
-    if(!isDefined(var_6["entity"]) || !isplayer(var_6["entity"])) {
+    if(!isDefined(var_6["entity"]) || !isPlayer(var_6["entity"])) {
       var_7 = getEntArray("church_breakable", "targetname");
 
       if(isDefined(var_7) && var_7.size && var_0 istouching(var_2)) {
@@ -1593,7 +1593,7 @@ field_enemy_death() {
   while(isalive(self)) {
     self waittill("damage", var_0, var_1);
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       thread maps\_stealth_behavior::enemy_announce_spotted_bring_team(level.player.origin);
       common_scripts\utility::flag_set("_stealth_spotted");
       break;
@@ -2356,19 +2356,19 @@ price_death() {
   maps\_utility::radio_dialogue_stop();
   var_1 = undefined;
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     var_1 = &"SCOUTSNIPER_FRIENDLY_FIRE_WILL_NOT";
   else
     var_1 = &"SCOUTSNIPER_YOUR_ACTIONS_GOT_CPT";
 
-  setdvar("ui_deadquote", var_1);
+  setDvar("ui_deadquote", var_1);
   thread maps\_utility::missionfailedwrapper();
 }
 
 price_left_behind() {
   maps\_utility::radio_dialogue_stop();
   var_0 = &"SCOUTSNIPER_LEFT_BEHIND";
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
   thread maps\_utility::missionfailedwrapper();
 }
 
@@ -2480,7 +2480,7 @@ killed_by_player(var_0) {
   for(;;) {
     self waittill("death", var_1);
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       break;
     }
   }
@@ -3206,7 +3206,7 @@ printhint2(var_0) {
 }
 
 keyhint(var_0, var_1, var_2) {
-  if(getdvar("chaplincheat") == "1") {
+  if(getDvar("chaplincheat") == "1") {
     return;
   }
   clear_hints();
@@ -3452,7 +3452,7 @@ price_custom_detection(var_0, var_1, var_2) {
     var_3 = getaiarray("axis");
 
     foreach(var_5 in var_3) {
-      if(getdvar("debug_price_custom_detection") == "1")
+      if(getDvar("debug_price_custom_detection") == "1")
         thread maps\_utility::draw_circle_for_time(var_5.origin, var_0, 1, 0, 0, 0.1);
 
       if(distancesquared(self.origin, var_5.origin) < var_0 * var_0) {

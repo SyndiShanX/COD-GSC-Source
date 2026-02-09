@@ -2578,7 +2578,7 @@ notify_ambush_destroy_player_off() {
 }
 
 mission_failed_intro() {
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
+  setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -2652,7 +2652,7 @@ blackout_timer(var_0, var_1, var_2, var_3) {
 
   switch (var_3) {
     case 0:
-      if(getdvar("notimer") == "1") {
+      if(getDvar("notimer") == "1") {
         return;
       }
       if(!isDefined(var_2))
@@ -2667,7 +2667,7 @@ blackout_timer(var_0, var_1, var_2, var_3) {
       wait(var_0 - 15);
       break;
     case 1:
-      if(getdvar("notimer") == "1") {
+      if(getDvar("notimer") == "1") {
         return;
       }
       if(!isDefined(var_2))
@@ -2724,7 +2724,7 @@ player_failcase_tunnel() {
 
     while(common_scripts\utility::flag("FLAG_player_failcase_tunnel")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+        setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -2739,7 +2739,7 @@ player_failcase_tunnel() {
 player_failcase_tunnel_overrun() {
   level endon("player_in_jeep");
   common_scripts\utility::flag_wait("FLAG_player_failcase_tunnel_overrun");
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+  setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 

@@ -217,11 +217,11 @@ death_trigger() {
     if(!flag("reached_top")) {
       if(GetDvarInt("hold_on_tight")) {
         // Hold on for dear life.
-        SetDvar("ui_deadquote", &"CLIFFHANGER_HOLD_ON_TIGHT");
+        setDvar("ui_deadquote", &"CLIFFHANGER_HOLD_ON_TIGHT");
       } else {
-        SetDvar("hold_on_tight", 1);
+        setDvar("hold_on_tight", 1);
         // Nobody makes the first jump...
-        SetDvar("ui_deadquote", &"CLIFFHANGER_MAKES_FIRST_JUMP");
+        setDvar("ui_deadquote", &"CLIFFHANGER_MAKES_FIRST_JUMP");
       }
       maps\_utility::missionFailedWrapper();
     }
@@ -769,7 +769,7 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
   // set the player's lookat angle info for determining stab angles
   //model thread test_player_angle( arm_globals );
   //model thread maps\_debug::drawTagForever( "tag_origin" );
-  start_dir = GetDvar("climb_startdir");
+  start_dir = getDvar("climb_startdir");
   arm_globals.start_climb_time = 0;
 
   relink_time = 0;
@@ -1992,7 +1992,6 @@ fix_origins_until_death(ent, fake_model, past_tag, current_tag) {
 
     fake_model.angles = (pitch, array["angles"][1], 0);
     ent.viewModel.angles = (pitch, array["angles"][1], 0);
-
   }
 }
 
@@ -2646,9 +2645,9 @@ icepick_button_pressed_instant(ent) {
 }
 
 link_model(model) {
-  SetDvar("b1", "0");
-  SetDvar("b2", "90");
-  SetDvar("b3", "40");
+  setDvar("b1", "0");
+  setDvar("b2", "90");
+  setDvar("b3", "40");
   for(;;) {
     b1 = GetDvarInt("b1");
     b2 = GetDvarInt("b2");
@@ -2921,7 +2920,6 @@ draw_ent_num(offset) {
     Print3d(self.origin + (0, 0, offset), self GetEntNum(), (0.3, 0.9, 0.5), 1, 0.25);
     wait(0.05);
   }
-
 }
 
 play_crack_fx_on_arm(arm) {
@@ -3077,7 +3075,6 @@ cliff_scene_with_price() {
   } else {
     thread teleport_to_cave();
     thread death_trigger();
-
   }
 
   SetSavedDvar("sm_sunsamplesizenear", 0.0625);
@@ -3216,7 +3213,6 @@ delete_player_climb_blocker_and_set_time() {
     self SetAnimTime(animation, 0.99);
     //println( "POP" );
   }
-
 }
 
 gaz_catches_player(player) {
@@ -3460,7 +3456,7 @@ player_big_jump() {
   // player grunts as he jumps
   level.player playSound("scn_cliffhanger_player_make_bigjump");
 
-  SetDvar("hold_on_tight", 1);
+  setDvar("hold_on_tight", 1);
   // if the player is going too fast, he may clip through the slope, so slow him down
   vel = level.player GetVelocity();
   speed = Distance(vel, (0, 0, 0));
@@ -3668,7 +3664,6 @@ player_big_jump() {
     //player_arms	Hide();
     //player_arms delayThread( 0.5, ::self_delete );
     //player_arms notify( "stop_weights" );
-
   }
 
   flag_set("reached_top");

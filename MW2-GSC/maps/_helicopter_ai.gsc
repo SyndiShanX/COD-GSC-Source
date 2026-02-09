@@ -90,7 +90,7 @@ evasive_startManeuvers(vehicle, points) {
 
   thread evasive_endManeuvers(vehicle);
 
-  if(getdvar("cobrapilot_debug") == "1")
+  if(getDvar("cobrapilot_debug") == "1")
     vehicle evasive_drawPoints(points);
 
   vehicle setNearGoalNotifyDist(1500);
@@ -116,7 +116,7 @@ evasive_startManeuvers(vehicle, points) {
     //prof_end( "cobrapilot_ai" );
 
     //draw line to represent target yaw
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getDvar("cobrapilot_debug") == "1")
       thread draw_line_until_notify(points[i]["pos"], points[i]["pos"] + (vector_multiply(anglesToForward((0, goalYawAngle, 0)), 250)), 1.0, 1.0, 0.2, vehicle, "evasive_action_done");
 
     vehicle setTargetYaw(goalYawAngle);
@@ -216,7 +216,7 @@ wingman_think(vehicle) {
 
     goalPos = wingman_getGoalPos(dist_forward, dist_side, dist_up);
 
-    if(getdvar("cobrapilot_debug") == "1") {
+    if(getDvar("cobrapilot_debug") == "1") {
       thread draw_line_for_time(level.playervehicle.origin, goalPos, 0, 1, 0, goalPosUpdateTime);
       thread draw_line_for_time(level.playervehicle.origin, vehicle.origin, 0, 0, 1, goalPosUpdateTime);
       thread draw_line_for_time(vehicle.origin, goalPos, 1, 1, 0, goalPosUpdateTime);
@@ -267,7 +267,7 @@ wingman_think(vehicle) {
       if(getPlayerHeliSpeed() <= 30)
         bStop = true;
 
-      if(getdvar("cobrapilot_debug") == "1")
+      if(getDvar("cobrapilot_debug") == "1")
         iprintln("wingman speed: " + wingmanSpeed + " : " + bStop);
 
       vehicle setVehGoalPos(goalPos, bStop);

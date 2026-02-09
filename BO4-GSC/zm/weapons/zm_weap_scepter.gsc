@@ -458,7 +458,7 @@ function_be8ae52f(w_curr) {
 
         self scepter_rumble(6);
         self thread function_b67b2aff(e_last_target, n_damage, var_1c218ece, w_curr);
-      } else if(isplayer(e_last_target)) {
+      } else if(isPlayer(e_last_target)) {
         e_last_target thread function_1f6199f0(self);
       }
     } else {
@@ -1265,14 +1265,12 @@ function_6dfa3b7a() {
 render_debug_sphere(origin, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
     sphere(origin, 2, color, 0.75, 1, 10, 100);
-
   }
 }
 
 function_7067b673(origin1, origin2, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
     line(origin1, origin2, color, 0.75, 1, 100);
-
   }
 }
 

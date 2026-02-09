@@ -3355,7 +3355,7 @@ function function_9ab6fc55(var_5fe70955, max_missiles) {
       self playSound("veh_quadtank_mlrs_plant_start");
       self setvehweapon(getweapon("quadtank_main_turret_rocketpods_javelin"));
     }
-    if(isDefined(self.enemy) && !isplayer(self.enemy)) {
+    if(isDefined(self.enemy) && !isPlayer(self.enemy)) {
       var_85596fc1 = 1;
     }
     if(isDefined(self.enemy) && var_30e3f243 > (350 * 350)) {

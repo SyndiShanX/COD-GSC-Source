@@ -410,7 +410,7 @@ function_4492525b(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapo
   has_perk = self hasperk(#"specialty_death_dash");
   var_656a2751 = isDefined(self.var_d675d730) && isDefined(self.var_d675d730.var_4aee0032) && self.var_d675d730.var_4aee0032;
   var_2d419edd = smeansofdeath === "MOD_FALLING";
-  var_c241fbf4 = isplayer(eattacker) || isplayer(einflictor);
+  var_c241fbf4 = isPlayer(eattacker) || isPlayer(einflictor);
 
   if(has_perk && var_656a2751 && (var_2d419edd || var_c241fbf4)) {
     return 0;

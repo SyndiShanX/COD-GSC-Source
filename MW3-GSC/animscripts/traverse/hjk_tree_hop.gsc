@@ -15,8 +15,8 @@ main() {
 
 _id_34EA() {
   if(isDefined(self.type) && self.type == "civilian") {
-    animscripts\traverse\shared::_id_3FE6( % so_hijack_civ_log_jump, 39.875);
+    animscripts\traverse\shared::_id_3FE6(%so_hijack_civ_log_jump, 39.875);
   } else {
-    animscripts\traverse\shared::_id_3FE6( % traverse_wallhop_3, 39.875);
+    animscripts\traverse\shared::_id_3FE6(%traverse_wallhop_3, 39.875);
   }
 }

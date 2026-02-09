@@ -88,7 +88,7 @@ function function_795f4e6() {
   self endon("hash_e37d497d");
   while(true) {
     self waittill("trigger_activated", e_user);
-    if(isplayer(e_user) && !level flag::get("abcd_speaking") && !level flag::get("sophia_speaking") && !level flag::get("shadowman_speaking") && !self function_94b3b616()) {
+    if(isPlayer(e_user) && !level flag::get("abcd_speaking") && !level flag::get("sophia_speaking") && !level flag::get("shadowman_speaking") && !self function_94b3b616()) {
       self thread function_66d50897("trigger");
       return;
     }
@@ -102,7 +102,7 @@ function function_35f4f25f() {
   var_b1c8a081 = 0;
   while(!var_b1c8a081) {
     self.clip waittill("damage", n_amount, e_attacker, v_org, v_dir, str_mod);
-    if(isplayer(e_attacker) && !level flag::get("abcd_speaking") && !level flag::get("sophia_speaking") && !level flag::get("shadowman_speaking") && !self function_94b3b616()) {
+    if(isPlayer(e_attacker) && !level flag::get("abcd_speaking") && !level flag::get("sophia_speaking") && !level flag::get("shadowman_speaking") && !self function_94b3b616()) {
       var_b1c8a081 = 1;
       self thread function_66d50897("damage");
     } else {

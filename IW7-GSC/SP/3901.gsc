@@ -773,7 +773,7 @@ func_B60F() {
   self.var_87F6 = 0;
   self.melee.var_9904 = 1;
   if(isDefined(anim)) {
-    if(isplayer(self.melee.target)) {
+    if(isPlayer(self.melee.target)) {
       level.var_B5F7[self.unittype] = gettime() + level.var_B5F6[self.unittype];
       return;
     }

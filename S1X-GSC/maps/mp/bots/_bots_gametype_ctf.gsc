@@ -27,7 +27,6 @@ setup_callbacks() {
 }
 
 setup_bot_ctf() {
-  /#	
   if(SCR_CONST_CTF_BOTS_IGNORE_HUMAN_PLAYER_ROLES) {
     level.bot_gametype_ignore_human_player_roles = true;
   }

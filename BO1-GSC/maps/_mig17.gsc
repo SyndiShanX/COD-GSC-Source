@@ -10,7 +10,6 @@ main() {
     self thread maps\_plane_weapons::bomb_init(self.script_numbombs);
   }
 }
-
 mig17_setup_bombs() {
   precachemodel("aircraft_bomb");
   LoadFx("explosions/fx_mortarExp_dirt");

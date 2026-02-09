@@ -17,6 +17,6 @@ main() {
   level._effect["hawk"] = loadfx("weather/hawk");
   level._effect["bird_seagull_flock_large"] = loadfx("misc/bird_seagull_flock_large");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_backlot_fx::main();
 }

@@ -10,7 +10,6 @@ main() {
   self.voice = "american";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_rus_scientist_body1_zt");
   precacheModel("c_rus_scientist_head1");

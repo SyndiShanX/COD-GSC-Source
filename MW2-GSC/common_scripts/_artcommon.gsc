@@ -27,16 +27,16 @@ artCommonfxprintln(string) {
 
 setfogsliders() {
   fogcolor = getdvarvector("g_fogColorReadOnly");
-  maxOpacity = GetDvar("g_fogMaxOpacityReadOnly");
-  halfplane = GetDvar("g_fogHalfDistReadOnly");
-  nearplane = GetDvar("g_fogStartDistReadOnly");
+  maxOpacity = getDvar("g_fogMaxOpacityReadOnly");
+  halfplane = getDvar("g_fogHalfDistReadOnly");
+  nearplane = getDvar("g_fogStartDistReadOnly");
 
-  sunFogEnabled = GetDvar("g_sunFogEnabledReadOnly");
+  sunFogEnabled = getDvar("g_sunFogEnabledReadOnly");
   sunFogColor = getdvarvector("g_sunFogColorReadOnly");
   sunFogDir = getdvarvector("g_sunFogDirReadOnly");
-  sunFogBeginFadeAngle = GetDvar("g_sunFogBeginFadeAngleReadOnly");
-  sunFogEndFadeAngle = GetDvar("g_sunFogEndFadeAngleReadOnly");
-  sunFogScale = GetDvar("g_sunFogScaleReadOnly");
+  sunFogBeginFadeAngle = getDvar("g_sunFogBeginFadeAngleReadOnly");
+  sunFogEndFadeAngle = getDvar("g_sunFogEndFadeAngleReadOnly");
+  sunFogScale = getDvar("g_sunFogScaleReadOnly");
 
   if(!isDefined(fogcolor) || !isDefined(maxOpacity) || !isDefined(halfplane) || !isDefined(nearplane) || !isDefined(sunFogEnabled) || !isDefined(sunFogColor) || !isDefined(sunFogDir) || !isDefined(sunFogBeginFadeAngle) || !isDefined(sunFogEndFadeAngle) || !isDefined(sunFogScale)) {
     fogcolor = (1, 1, 1);
@@ -47,10 +47,9 @@ setfogsliders() {
     sunFogEnabled = false;
     sunFogColor = (1, 1, 1);
     sunFogDir = (1.0, 0.0, 0.0);
-    sunFogBeginFadeAngle = GetDvar("g_sunFogBeginFadeAngle");
-    sunFogEndFadeAngle = GetDvar("g_sunFogEndFadeAngle");
-    sunFogScale = GetDvar("g_sunFogScaleReadOnly");
-
+    sunFogBeginFadeAngle = getDvar("g_sunFogBeginFadeAngle");
+    sunFogEndFadeAngle = getDvar("g_sunFogEndFadeAngle");
+    sunFogScale = getDvar("g_sunFogScaleReadOnly");
   }
   SetDevDvar("scr_fog_exp_halfplane", halfplane);
   SetDevDvar("scr_fog_nearplane", nearplane);
@@ -107,6 +106,6 @@ artfxprintlnFog() {
     if(level.sunFogEnabled)
       fileprint_launcher("\tsetExpFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogcolor[0] + ", " + level.fogcolor[1] + ", " + level.fogcolor[2] + ", " + level.fogmaxopacity + ", 0, " + level.sunFogColor[0] + ", " + level.sunFogColor[1] + ", " + level.sunFogColor[2] + ", (" + level.sunFogDir[0] + ", " + level.sunFogDir[1] + ", " + level.sunFogDir[2] + "), " + level.sunFogBeginFadeAngle + ", " + level.sunFogEndFadeAngle + ", " + level.sunFogScale + " );");
     else
-      fileprint_launcher("\tsetExpFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogcolor[0] + ", " + level.fogcolor[1] + ", " + level.fogcolor[2] + ", " + level.fogmaxopacity + ", 0 );");
+    fileprint_launcher("\tsetExpFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogcolor[0] + ", " + level.fogcolor[1] + ", " + level.fogcolor[2] + ", " + level.fogmaxopacity + ", 0 );");
   }
 }

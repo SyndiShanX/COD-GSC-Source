@@ -39,7 +39,7 @@ is_active() {
 }
 
 range_check(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(!isplayer(attacker) && !isplayer(inflictor)) {
+  if(!isPlayer(attacker) && !isPlayer(inflictor)) {
     return -1;
   }
 
@@ -55,7 +55,7 @@ range_check(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vd
 }
 
 function_23d15bf3(var_f85889ce) {
-  if(isplayer(var_f85889ce) && distance2dsquared(var_f85889ce.origin, self.origin) <= 122500) {
+  if(isPlayer(var_f85889ce) && distance2dsquared(var_f85889ce.origin, self.origin) <= 122500) {
     return true;
   }
 

@@ -40,7 +40,7 @@ main() {
   level notify("end_of_jungle_escape");
   level thread angola_jungle_wave_spawning();
   level thread angola_jungle_ending_objectives();
-  setdvar("footstep_sounds_cutoff", 3000);
+  setDvar("footstep_sounds_cutoff", 3000);
 }
 
 angola_jungle_ending_objectives() {
@@ -99,8 +99,9 @@ kill_player_if_linger(delay) {
   level.player endon("death");
   level endon("je_end_scene_started");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   flag_set("jungle_ending_do_not_save");
   guys = getaiarray("axis");
@@ -157,8 +158,9 @@ je_trigger_hind_beach_evacuation(str_category) {
   ai_enemy = getent("hind_dummy_pilot_ai", "targetname");
   ai_enemy.health = 666666;
 
-  if(!level.ai_hudson is_model_attached("c_usa_angola_hudson_glasses"))
+  if(!level.ai_hudson is_model_attached("c_usa_angola_hudson_glasses")) {
     level.ai_hudson attach("c_usa_angola_hudson_glasses");
+  }
 
   level thread maps\_audio::switch_music_wait("ANGOLA_HUDSON_SHOT", 37);
   level thread maps\_audio::switch_music_wait("ANGOLA_END_RESOLVE", 40);
@@ -179,13 +181,15 @@ make_ai_ignore_all_to_stop_firing() {
   axis = getaiarray("axis");
 
   foreach(ai in axis) {
-    if(isDefined(ai) && isalive(ai))
+    if(isDefined(ai) && isalive(ai)) {
       ai set_ignoreall(1);
+    }
   }
 
   foreach(ai in axis) {
-    if(!level.player is_player_looking_at(ai.origin, 0.6))
+    if(!level.player is_player_looking_at(ai.origin, 0.6)) {
       ai delete();
+    }
   }
 }
 
@@ -195,8 +199,9 @@ is_model_attached(str_model) {
   for(i = 0; i < n_attached; i++) {
     str_attach_model = self getattachmodelname(i);
 
-    if(str_attach_model == str_model)
+    if(str_attach_model == str_model) {
       return true;
+    }
   }
 
   return false;
@@ -257,13 +262,15 @@ enemy_run_from_forest_to_beach(delay, str_category, alive_time) {
   level waittill("spawn_end_scene_enemies");
   cleanup_ents("jungle_battle_3");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   a_spawners = getEntArray("ae_end_attack_spawner", "targetname");
 
-  if(isDefined(a_spawners))
+  if(isDefined(a_spawners)) {
     a_ai = simple_spawn(a_spawners, ::spawn_fn_ai_run_to_target, 0, str_category, 0, 0, 0);
+  }
 
   for(i = 0; i < a_ai.size; i++) {
     e_ai = a_ai[i];
@@ -275,15 +282,16 @@ enemy_run_from_forest_to_beach(delay, str_category, alive_time) {
 }
 
 forest_enemy_damage_override_func(einflictor, e_attacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(!isDefined(smeansofdeath) || smeansofdeath == "MOD_UNKNOWN")
+  if(!isDefined(smeansofdeath) || smeansofdeath == "MOD_UNKNOWN") {
     return 0;
-  else if(!isDefined(self.alreadylaunched)) {
+  } else if(!isDefined(self.alreadylaunched)) {
     self.alreadylaunched = 1;
     self startragdoll(1);
     v_launch = vectorscale((0, 0, 1), 100.0);
 
-    if(randomint(100) < 40)
+    if(randomint(100) < 40) {
       v_launch = v_launch + anglesToForward(einflictor.angles) * 300;
+    }
 
     self launchragdoll(v_launch, "J_SpineUpper");
   }
@@ -296,8 +304,9 @@ play_outro_vo() {
   hind vehicle_toggle_sounds(0);
   guys = getaiarray("axis");
 
-  foreach(guy in guys)
-  guy delete();
+  foreach(guy in guys) {
+    guy delete();
+  }
 
   wait 1;
   level.player say_dialog("wood_you_can_t_kill_me_1");

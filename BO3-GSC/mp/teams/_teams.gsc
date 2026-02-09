@@ -26,12 +26,12 @@ function __init__() {
 function init() {
   game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
   if(getdvarstring("scr_teambalance") == "") {
-    setdvar("scr_teambalance", "0");
+    setDvar("scr_teambalance", "0");
   }
   level.teambalance = getdvarint("scr_teambalance");
   level.teambalancetimer = 0;
   if(getdvarstring("scr_timeplayedcap") == "") {
-    setdvar("scr_timeplayedcap", "1800");
+    setDvar("scr_timeplayedcap", "1800");
   }
   level.timeplayedcap = int(getdvarint("scr_timeplayedcap"));
   level.freeplayers = [];

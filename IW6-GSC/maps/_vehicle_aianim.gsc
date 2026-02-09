@@ -1440,7 +1440,7 @@ parachute_death_monitor(var_0, var_1) {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       break;
     }
   }
@@ -1585,7 +1585,7 @@ animontag_ragdoll_death(var_0, var_1) {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       break;
     }
   }
@@ -1850,7 +1850,7 @@ guy_blowup(var_0) {
   var_8 = (0, 0, 1);
   var_9 = var_0.origin;
 
-  if(getdvar("ragdoll_enable") == "0") {
+  if(getDvar("ragdoll_enable") == "0") {
     var_0 delete();
     return;
   }

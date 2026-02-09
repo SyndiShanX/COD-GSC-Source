@@ -96,7 +96,7 @@ watchforinterrupt(var_0) {
 decrementminijackalsincoming(var_0) {
   var_1 = undefined;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_1 = "ent_" + var_0 getentitynumber();
   } else {
     var_1 = var_0;
@@ -455,7 +455,7 @@ func_B95F(var_0) {
       var_0 func_4CF1(self, var_8);
     }
 
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       var_5 scripts\mp\damagefeedback::updatedamagefeedback("");
       scripts\mp\killstreaks\killstreaks::killstreakhit(var_5, var_13, self, var_8);
       scripts\mp\damage::logattackerkillstreak(self, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);

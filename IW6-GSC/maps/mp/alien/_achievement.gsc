@@ -86,7 +86,7 @@ is_valid_achievement(achievement) {
 update_achievement(reference, progress_amt, param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10) {
   achievement = self.achievement_list[reference];
 
-  /#/ / < TODO J.C. > Move this back into release build
+  / / < TODO J.C. > Move this back into release build
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     return;
   }
@@ -170,7 +170,6 @@ update_achievement_all_players(reference, progress_amt) {
   foreach(player in level.players) {
     player update_achievement(reference, progress_amt);
   }
-
 }
 
 update_scavenge_achievement() {
@@ -210,7 +209,6 @@ eggAllFoundForPack(packNum) {
 
       self SetClientOmnvar("ui_alien_eggstra_xp", true);
       self thread maps\mp\alien\_persistence::wait_and_give_player_xp(10000, 5.0);
-
     }
 
     if(hasModifiedFlags == true)
@@ -241,7 +239,7 @@ update_mp_eggs_achievement(dlc_num) {
 
 update_intel_achievement(dlc_num) {
   dlc_num = 0;
-  map_name = getdvar("ui_mapname");
+  map_name = getDvar("ui_mapname");
   if(map_name == "mp_alien_armory")
     dlc_num = 1;
   if(map_name == "mp_alien_beacon")
@@ -265,5 +263,4 @@ update_intel_achievement(dlc_num) {
     default:
       break;
   }
-
 }

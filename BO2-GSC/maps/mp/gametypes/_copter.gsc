@@ -83,7 +83,7 @@ createcopter(location, team, damagetrig) {
   scriptorigin.dontascend = 0;
   scriptorigin.health = 2000;
 
-  if(getdvar(#"_id_A8262D2E") != "")
+  if(getDvar(#"_id_A8262D2E") != "")
     scriptorigin.health = getdvarfloat(#"_id_A8262D2E");
 
   scriptorigin.team = team;
@@ -429,7 +429,7 @@ coptershoot() {
       if(vectordot(curdir, enemydir) > costhreshold) {
         canseetarget = bullettracepassed(mypos, enemypos, 0, undefined);
 
-        if(!canseetarget && isplayer(self.desireddirentity) && isalive(self.desireddirentity))
+        if(!canseetarget && isPlayer(self.desireddirentity) && isalive(self.desireddirentity))
           canseetarget = bullettracepassed(mypos, self.desireddirentity getEye(), 0, undefined);
 
         if(canseetarget) {
@@ -457,12 +457,12 @@ coptershoot() {
 mymagicbullet(pos, dir) {
   damage = 20;
 
-  if(getdvar(#"_id_9E8F8CB7") != "")
+  if(getDvar(#"_id_9E8F8CB7") != "")
     damage = getdvarint(#"_id_9E8F8CB7");
 
   trace = bulletTrace(pos, pos + vectorscale(dir, 10000), 1, undefined);
 
-  if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"]))
+  if(isDefined(trace["entity"]) && isPlayer(trace["entity"]) && isalive(trace["entity"]))
     trace["entity"] thread[[level.callbackplayerdamage]](self, self, damage, 0, "MOD_RIFLE_BULLET", "copter", self.origin, dir, "none", 0, 0);
 }
 
@@ -614,7 +614,7 @@ copterdamage(damagetrig) {
   while(true) {
     damagetrig waittill("damage", amount, attacker);
 
-    if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.team) {
+    if(isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.team) {
       continue;
     }
     self.health = self.health - amount;

@@ -464,7 +464,6 @@ shed() {
       }
 
       iprintlnbold("<dev string:x347>");
-
     }
   }
 }

@@ -336,7 +336,6 @@ class cbeastcode {
     m_b_discovered = 0;
     m_n_device_state = 1;
   }
-
 }
 
 #namespace zm_zod_beastcode;

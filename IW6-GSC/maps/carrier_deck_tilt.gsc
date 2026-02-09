@@ -685,7 +685,7 @@ tilt_allies() {
   level.hesh maps\_utility::set_ignoreall(1);
   level.hesh maps\_utility::pathrandompercent_zero();
   level.hesh.a.movement = "run";
-  var_2 = getdvar("ai_friendlyFireBlockDuration");
+  var_2 = getDvar("ai_friendlyFireBlockDuration");
   setsaveddvar("ai_friendlyFireBlockDuration", 0);
   level.hesh pushplayer(1);
   level.hesh.ignorerandombulletdamage = 1;
@@ -2021,7 +2021,7 @@ player_hit_detect(var_0, var_1, var_2) {
   for(;;) {
     self waittill("player_pushed", var_3, var_4);
 
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       if(var_4[0] > 5 || var_4[1] > 5) {
         level.player dodamage(var_0, self.origin, self);
         level.player pushplayervector((25, 10, 0));

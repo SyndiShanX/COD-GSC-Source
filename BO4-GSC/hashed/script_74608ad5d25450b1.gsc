@@ -205,7 +205,7 @@ function_e4f54b1d() {
 }
 
 function_cdddec81(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(attacker zm_hms_util::function_fab5fb4d(weapon, "zm_aat_frostbite")) {
       if(self.var_7ba65499 !== 1) {
         self set_frozen(1);

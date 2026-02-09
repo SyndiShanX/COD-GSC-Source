@@ -170,7 +170,7 @@ func_A4AC() {
   self.isjuggernautmaniac = 0;
   self.isjuggernautlevelcustom = 0;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setclientomnvar("ui_juggernaut", 0);
   }
 
@@ -183,7 +183,7 @@ func_A4AB() {
   self endon("jugg_removed");
   level waittill("game_ended");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setclientomnvar("ui_juggernaut", 0);
   }
 }

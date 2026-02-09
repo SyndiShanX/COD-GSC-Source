@@ -5,25 +5,25 @@
 ********************************/
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   if(maps\bog_b_beautiful_corner::beautiful_corner()) {
     return;
   }
-  if(getdvar("bog_camerashake") == "")
-    setdvar("bog_camerashake", "1");
+  if(getDvar("bog_camerashake") == "")
+    setDvar("bog_camerashake", "1");
 
-  if(getdvar("bog_disableenemies") == "")
-    setdvar("bog_disableenemies", "0");
+  if(getDvar("bog_disableenemies") == "")
+    setDvar("bog_disableenemies", "0");
 
-  if(getdvar("bog_debug_tank") == "")
-    setdvar("bog_debug_tank", "0");
+  if(getDvar("bog_debug_tank") == "")
+    setDvar("bog_debug_tank", "0");
 
-  if(getdvar("bog_debug_flyby") == "")
-    setdvar("bog_debug_flyby", "0");
+  if(getDvar("bog_debug_flyby") == "")
+    setDvar("bog_debug_flyby", "0");
 
-  if(getdvar("bog_b_min_spec") == "1")
+  if(getDvar("bog_b_min_spec") == "1")
     makeminspec();
 
   maps\_utility::add_start("arch", ::start_arch);
@@ -512,7 +512,7 @@ rpg_tank_shooter() {
   self waittill("goal");
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "rpg_tank_shooter_fall") {
-    if(getdvar("ragdoll_enable") == "1")
+    if(getDvar("ragdoll_enable") == "1")
       thread roof_guy_fall_on_death();
   }
 
@@ -558,18 +558,18 @@ attack_troops() {
     var_4 = var_0.origin + (0, 0, 32);
     self setturrettargetvec(var_4);
 
-    if(getdvar("bog_debug_tank") == "1")
+    if(getDvar("bog_debug_tank") == "1")
       thread maps\_utility::draw_line_until_notify(level.abrams.origin + (0, 0, 32), var_4, 1, 0, 0, self, "stop_drawing_line");
 
     common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 3.0);
     self clearturrettarget();
 
-    if(getdvar("bog_debug_tank") == "1") {
+    if(getDvar("bog_debug_tank") == "1") {
       self notify("stop_drawing_line");
       thread maps\_utility::draw_line_until_notify(level.abrams.origin + (0, 0, 32), var_4, 0, 1, 0, self, "stop_drawing_line");
     }
 
-    if(getdvar("bog_debug_tank") == "1")
+    if(getDvar("bog_debug_tank") == "1")
       self notify("stop_drawing_line");
   }
 }
@@ -1149,7 +1149,7 @@ alley_dooropen(var_0) {
 }
 
 flyby() {
-  if(getdvar("bog_b_min_spec") == "1") {
+  if(getDvar("bog_b_min_spec") == "1") {
     return;
   }
   var_0 = getEntArray(self.target, "targetname");
@@ -1346,7 +1346,7 @@ t72_kill_player_trigger() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     var_2 = level.player.health / 3;
@@ -1365,7 +1365,7 @@ t72_kill_player_trigger() {
     }
 
     level notify("new_quote_string");
-    setdvar("ui_deadquote", "@BOG_B_T72_MG_DEATH");
+    setDvar("ui_deadquote", "@BOG_B_T72_MG_DEATH");
   }
 }
 
@@ -1789,7 +1789,7 @@ t72_in_final_position_preh1() {
   level.t72 common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 4.0);
   level.t72 clearturrettarget();
 
-  if(getdvar("bog_debug_tank") == "1") {
+  if(getDvar("bog_debug_tank") == "1") {
     var_2 = level.t72 gettagorigin("tag_flash");
     var_3 = level.t72 gettagorigin("tag_turret");
     var_1 = getent("t72_aim_at_final_building_location", "targetname");

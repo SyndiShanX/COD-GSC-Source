@@ -83,8 +83,9 @@ main() {
   level._effect["claymore_explode"] = loadfx("explosions/fx_grenadeexp_dirt");
   level._effect["claymore_gib"] = loadfx("explosions/fx_exp_death_gib");
 
-  if(!isDefined(level.skip_weapon_precache))
+  if(!isDefined(level.skip_weapon_precache)) {
     precache_weapons();
+  }
 }
 
 precache_weapons() {

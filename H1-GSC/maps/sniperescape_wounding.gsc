@@ -856,7 +856,7 @@ surprisers_die_soon() {
 
 drawatag() {
   for(;;) {
-    var_0 = getdvar("heli_tag");
+    var_0 = getDvar("heli_tag");
 
     if(var_0 != "")
       maps\_debug::drawtag(var_0);
@@ -1360,7 +1360,7 @@ check_for_price() {
   if(!isalive(level.price)) {
     return;
   }
-  setdvar("ui_deadquote", &"SNIPERESCAPE_YOU_LEFT_YOUR_SPOTTER");
+  setDvar("ui_deadquote", &"SNIPERESCAPE_YOU_LEFT_YOUR_SPOTTER");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1542,7 +1542,7 @@ price_death_failure() {
   common_scripts\utility::flag_assert("heli_comes_to_rest");
   level.price waittill("death");
   wait 4;
-  setdvar("ui_deadquote", &"SNIPERESCAPE_CPT_MACMILLAN_DIED");
+  setDvar("ui_deadquote", &"SNIPERESCAPE_CPT_MACMILLAN_DIED");
   maps\_utility::missionfailedwrapper();
 }
 

@@ -578,8 +578,8 @@ _playlocalsound(var_0) {
 
 dvarintvalue(var_0, var_1, var_2, var_3) {
   var_0 = "scr_" + level.gametype + "_" + var_0;
-  if(getdvar(var_0) == "") {
-    setdvar(var_0, var_1);
+  if(getDvar(var_0) == "") {
+    setDvar(var_0, var_1);
     return var_1;
   }
 
@@ -592,14 +592,14 @@ dvarintvalue(var_0, var_1, var_2, var_3) {
     return var_4;
   }
 
-  setdvar(var_0, var_4);
+  setDvar(var_0, var_4);
   return var_4;
 }
 
 dvarfloatvalue(var_0, var_1, var_2, var_3) {
   var_0 = "scr_" + level.gametype + "_" + var_0;
-  if(getdvar(var_0) == "") {
-    setdvar(var_0, var_1);
+  if(getDvar(var_0) == "") {
+    setDvar(var_0, var_1);
     return var_1;
   }
 
@@ -612,7 +612,7 @@ dvarfloatvalue(var_0, var_1, var_2, var_3) {
     return var_4;
   }
 
-  setdvar(var_0, var_4);
+  setDvar(var_0, var_4);
   return var_4;
 }
 
@@ -1181,12 +1181,12 @@ registerscorelimitdvar(var_0, var_1) {
 
 registertimelimitdvar(var_0, var_1) {
   registerwatchdvarfloat("timelimit", var_1);
-  setdvar("ui_timelimit", gettimelimit());
+  setDvar("ui_timelimit", gettimelimit());
 }
 
 registerhalftimedvar(var_0, var_1) {
   registerwatchdvarint("halftime", var_1);
-  setdvar("ui_halftime", func_7EEF());
+  setDvar("ui_halftime", func_7EEF());
 }
 
 registernumlivesdvar(var_0, var_1) {
@@ -1202,7 +1202,7 @@ botgetworldclosestedge(var_0, var_1) {
 }
 
 func_F7D3(var_0) {
-  setdvar("overtimeTimeLimit", var_0);
+  setDvar("overtimeTimeLimit", var_0);
 }
 
 func_7920(var_0, var_1) {
@@ -1263,7 +1263,7 @@ func_791E(var_0) {
 }
 
 func_7E8A(var_0) {
-  var_1 = getdvar(var_0);
+  var_1 = getDvar(var_0);
   if(var_1 == "") {
     return (0, 0, 0);
   }
@@ -1273,9 +1273,9 @@ func_7E8A(var_0) {
     return (0, 0, 0);
   }
 
-  setdvar("tempR", var_2[0]);
-  setdvar("tempG", var_2[1]);
-  setdvar("tempB", var_2[2]);
+  setDvar("tempR", var_2[0]);
+  setDvar("tempG", var_2[1]);
+  setDvar("tempB", var_2[2]);
   return (getdvarfloat("tempR"), getdvarfloat("tempG"), getdvarfloat("tempB"));
 }
 
@@ -1335,7 +1335,7 @@ registerwatchdvarfloat(var_0, var_1) {
 registerwatchdvar(var_0, var_1) {
   var_2 = "scr_" + level.gametype + "_" + var_0;
   level.var_13A08[var_2] = spawnStruct();
-  level.var_13A08[var_2].value = getdvar(var_2, var_1);
+  level.var_13A08[var_2].value = getDvar(var_2, var_1);
   level.var_13A08[var_2].type = "string";
   level.var_13A08[var_2].var_C174 = "update_" + var_0;
 }
@@ -2217,7 +2217,7 @@ func_1429(var_0, var_1) {
   self endon("die");
   var_2 = 0.05;
   while(var_0 > 0) {
-    if(isplayer(var_1) && !isreallyalive(var_1)) {
+    if(isPlayer(var_1) && !isreallyalive(var_1)) {
       var_1 waittill("spawned_player");
     }
 
@@ -2253,7 +2253,7 @@ playdeathsound() {
 }
 
 rankingenabled() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 
@@ -2300,7 +2300,7 @@ func_22DB(var_0, var_1, var_2) {
 
 func_80A2(var_0, var_1) {
   var_2 = var_1;
-  var_2 = getdvar(var_0, var_1);
+  var_2 = getDvar(var_0, var_1);
   return var_2;
 }
 
@@ -3319,7 +3319,7 @@ teamplayercardsplash(var_0, var_1, var_2, var_3) {
         continue;
       }
 
-      if(!isplayer(var_5)) {
+      if(!isPlayer(var_5)) {
         continue;
       }
     }
@@ -3698,7 +3698,7 @@ func_13CA1(var_0, var_1, var_2) {
         if(var_0 != "alt_none" && getweaponrootname(var_0) == "iw7_axe") {
           if(isDefined(var_1)) {
             var_3 = var_1;
-            if(!isplayer(var_1) && isDefined(var_1.owner)) {
+            if(!isPlayer(var_1) && isDefined(var_1.owner)) {
               var_3 = var_1.owner;
             }
 
@@ -3900,7 +3900,7 @@ killtrigger(var_0, var_1, var_2) {
   var_3 = spawn("trigger_radius", var_0, 0, var_1, var_2);
   for(;;) {
     var_3 waittill("trigger", var_4);
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
 
@@ -4579,8 +4579,8 @@ setcommonrulesfrommatchdata(var_0) {
   level.matchrules_vampirism = 0;
   setdynamicdvar("scr_game_spectatetype", getmatchrulesdata("commonOption", "spectateModeAllowed"));
   setdynamicdvar("scr_game_allowkillcam", getmatchrulesdata("commonOption", "showKillcam"));
-  setdvar("camera_allow3rdspectate", getmatchrulesdata("commonOption", "spectate3rdAllowed"));
-  setdvar("lobby_team_select", getmatchrulesdata("commonOption", "teamAssignmentAllowed"));
+  setDvar("camera_allow3rdspectate", getmatchrulesdata("commonOption", "spectate3rdAllowed"));
+  setDvar("lobby_team_select", getmatchrulesdata("commonOption", "teamAssignmentAllowed"));
   setdynamicdvar("scr_game_forceuav", getmatchrulesdata("commonOption", "radarAlwaysOn"));
   setdynamicdvar("scr_" + level.gametype + "_playerrespawndelay", getmatchrulesdata("commonOption", "respawnDelay"));
   setdynamicdvar("scr_" + level.gametype + "_waverespawndelay", getmatchrulesdata("commonOption", "waveRespawnDelay"));
@@ -4607,7 +4607,7 @@ setcommonrulesfrommatchdata(var_0) {
     setdynamicdvar("scr_team_fftype", getmatchrulesdata("commonOption", "friendlyFire"));
   }
 
-  setdvar("bg_compassShowEnemies", getdvar("scr_game_forceuav"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
   setdynamicdvar("scr_" + level.gametype + "_pointsPerKill", getmatchrulesdata("commonOption", "pointsPerKill"));
   setdynamicdvar("scr_" + level.gametype + "_pointsPerDeath", getmatchrulesdata("commonOption", "pointsPerDeath"));
   setdynamicdvar("scr_" + level.gametype + "_pointsHeadshotBonus", getmatchrulesdata("commonOption", "pointsHeadshotBonus"));
@@ -4615,7 +4615,7 @@ setcommonrulesfrommatchdata(var_0) {
   setdynamicdvar("scr_devRemoveDomFlag", "");
   setdynamicdvar("scr_devPlaceDomFlag", "");
   if(func_D957() || getdvarint("systemlink")) {
-    setdvar("com_codcasterEnabled", getmatchrulesdata("commonOption", "codcasterEnabled"));
+    setDvar("com_codcasterEnabled", getmatchrulesdata("commonOption", "codcasterEnabled"));
   }
 }
 
@@ -4980,7 +4980,7 @@ isteamparticipant(var_0) {
     return 1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return 1;
   }
 
@@ -5004,7 +5004,7 @@ isgameparticipant(var_0) {
     return 1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return 1;
   }
 
@@ -5082,7 +5082,7 @@ func_9E7D(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return 0;
   }
 
@@ -5357,23 +5357,23 @@ func_F305() {
   }
 
   if(!isDefined(level.console)) {
-    level.console = getdvar("consoleGame") == "true";
+    level.console = getDvar("consoleGame") == "true";
   }
 
   if(!isDefined(level.var_13E0F)) {
-    level.var_13E0F = getdvar("xenonGame") == "true";
+    level.var_13E0F = getDvar("xenonGame") == "true";
   }
 
   if(!isDefined(level.var_DADB)) {
-    level.var_DADB = getdvar("ps3Game") == "true";
+    level.var_DADB = getDvar("ps3Game") == "true";
   }
 
   if(!isDefined(level.var_13E0E)) {
-    level.var_13E0E = getdvar("xb3Game") == "true";
+    level.var_13E0E = getDvar("xb3Game") == "true";
   }
 
   if(!isDefined(level.var_DADC)) {
-    level.var_DADC = getdvar("ps4Game") == "true";
+    level.var_DADC = getDvar("ps4Game") == "true";
   }
 }
 
@@ -5391,11 +5391,11 @@ func_F6DB(var_0, var_1, var_2) {
   }
 
   if(func_9BEE()) {
-    setdvar(var_0, var_2);
+    setDvar(var_0, var_2);
     return;
   }
 
-  setdvar(var_0, var_1);
+  setDvar(var_0, var_1);
 }
 
 func_9FE7(var_0, var_1, var_2) {
@@ -5806,7 +5806,7 @@ setkillstreakpoints() {
 
 getmapname() {
   if(!isDefined(level.mapname)) {
-    level.mapname = getdvar("mapname");
+    level.mapname = getDvar("mapname");
   }
 
   return level.mapname;
@@ -6252,7 +6252,7 @@ func_9E05(var_0, var_1) {
     return 0;
   }
 
-  if(!isplayer(var_1) && !isDefined(var_1.team)) {
+  if(!isPlayer(var_1) && !isDefined(var_1.team)) {
     return 0;
   }
 
@@ -6887,7 +6887,7 @@ _hudoutlineviewmodelenable(var_0, var_1, var_2) {
     var_2 = 0;
   }
 
-  if(!isplayer(self)) {}
+  if(!isPlayer(self)) {}
 
   if(!var_1 && !isreallyalive(self)) {}
 
@@ -6910,7 +6910,7 @@ func_91AE(var_0) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -7048,7 +7048,7 @@ placeequipmentfailed(var_0, var_1, var_2, var_3) {
     case "cryo_mine_mp":
     case "trip_mine_mp":
     case "blackhole_grenade_mp":
-      if(isplayer(self) && isreallyalive(self)) {
+      if(isPlayer(self) && isreallyalive(self)) {
         self iprintlnbold("Placement Failed");
       }
 
@@ -7519,14 +7519,14 @@ istouchingboundsnullify(var_0) {
   var_1 = 0;
   if(isDefined(level.outofboundstriggerpatches) && level.outofboundstriggerpatches.size > 0) {
     foreach(var_3 in level.outofboundstriggerpatches) {
-      if(isplayer(var_0) && var_0 istouching(var_3)) {
+      if(isPlayer(var_0) && var_0 istouching(var_3)) {
         if(isDefined(var_3.var_336) && var_3.var_336 == "apex_unoutofbounds") {
           break;
         }
 
         var_1 = 1;
         break;
-      } else if(!isplayer(var_0) && var_0 istouching(var_3)) {
+      } else if(!isPlayer(var_0) && var_0 istouching(var_3)) {
         var_1 = 1;
         break;
       }
@@ -7674,7 +7674,7 @@ watcharbitraryuptriggerexit(var_0) {
 }
 
 shouldaddtoarbitraryuptrigger(var_0, var_1) {
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return 0;
   }
 
@@ -7719,7 +7719,7 @@ getarbitraryuptriggerblinkloc() {
 }
 
 isinarbitraryup() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(self getworldupreferenceangles() != (0, 0, 0)) {
       return 1;
     }

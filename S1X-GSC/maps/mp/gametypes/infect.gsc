@@ -515,7 +515,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     return;
   }
 
-  if((self.team == "axis") && IsPlayer(attacker) && (attacker.team == "allies") && isMeleeMOD(sMeansOfDeath)) {
+  if((self.team == "axis") && isPlayer(attacker) && (attacker.team == "allies") && isMeleeMOD(sMeansOfDeath)) {
     attacker maps\mp\gametypes\_missions::processChallenge("ch_infect_tooclose");
   }
 

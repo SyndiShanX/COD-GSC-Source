@@ -169,12 +169,12 @@ disconnect_paths_at_end_anim(var_0) {
 }
 
 mission_failed_garage() {
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_KEEP_UP");
+  setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_KEEP_UP");
   maps\_utility::missionfailedwrapper();
 }
 
 mission_failed_garage_provoke() {
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
+  setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -211,7 +211,7 @@ begin_interior() {
 
   wait 2;
 
-  if(getdvar("clockwork_disable_bad_vo", "0") == "0") {
+  if(getDvar("clockwork_disable_bad_vo", "0") == "0") {
     var_7 = maps\_utility::get_closest_ai(level.player.origin, "axis");
     var_7 maps\clockwork_code::char_dialog_add_and_go("clockwork_spg1_heyyoucantpark");
     level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_wewontbelong");
@@ -1158,7 +1158,7 @@ control_nvg_staticscreens_on() {
 
 player_failcase_leave_garage() {
   common_scripts\utility::flag_wait("FLAG_player_leave_garage");
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+  setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 

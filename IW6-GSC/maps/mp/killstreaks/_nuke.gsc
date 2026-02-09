@@ -192,7 +192,6 @@ nukeEffects() {
 
   foreach(player in level.players) {
     level thread nukeEffect(player);
-
   }
 }
 
@@ -211,7 +210,7 @@ nukeEffect(player) {
     dirToNuke = anglesToForward(yawAngle);
 
     nukeDistance = 5000;
-    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	
+    nukeDistance = getDvarInt("scr_nukeDistance");
 
     nukeLoc = player.origin + (dirToNuke * nukeDistance);
   } else {
@@ -275,7 +274,7 @@ nukeVision() {
 
   VisionSetPostApply("nuke_global_flash", .1);
   SetExpFog(0, 956, 0.72, 0.61, 0.39, 0.968, 0.85, 1, 0.298, 0.273, 0.266, .25, (0, 0, -1), 84, 118, 2.75, .984, 124, 100);
-  SetDvar("r_materialBloomHQScriptMasterEnable", 0);
+  setDvar("r_materialBloomHQScriptMasterEnable", 0);
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(.5);
 
   level notify("nuke_aftermath_post_started");

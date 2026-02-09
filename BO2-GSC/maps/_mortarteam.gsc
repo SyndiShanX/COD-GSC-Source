@@ -33,20 +33,23 @@ mortartrigger() {
 }
 
 mortarspawner(delayent) {
-  if(!isDefined(delayent))
+  if(!isDefined(delayent)) {
     delayent = self;
+  }
 
   spawners[0] = self;
 
   if(is_true(self.script_mortar_team_size)) {
-    if(self.script_mortar_team_size == 2)
+    if(self.script_mortar_team_size == 2) {
       spawners[1] = self;
+    }
   } else {
     ents = getEntArray(self.target, "targetname");
 
     for(i = 0; i < ents.size; i++) {
-      if(issubstr(ents[i].classname, "actor"))
+      if(issubstr(ents[i].classname, "actor")) {
         spawners[1] = ents[i];
+      }
     }
   }
 
@@ -57,9 +60,9 @@ mortarspawner(delayent) {
   delay_base = 0;
   delay_range = 0;
 
-  if(isDefined(delayent.script_delay))
+  if(isDefined(delayent.script_delay)) {
     delay_base = delayent.script_delay;
-  else if(isDefined(delayent.script_delay_min)) {
+  } else if(isDefined(delayent.script_delay_min)) {
     delay_base = delayent.script_delay_min;
     delay_range = delayent.script_delay_max - delayent.script_delay_min;
   }
@@ -77,16 +80,18 @@ mortarteamspawn(spawners, node, mortar_targets) {
   name[1] = "aimguy";
   node endon("stop_mortar");
 
-  if(!isDefined(node.mortarsetup))
+  if(!isDefined(node.mortarsetup)) {
     node.mortarsetup = 0;
+  }
 
   mortarthink[0] = ::loadguy;
   mortarthink[1] = ::aimguy;
   self.objectivepositionentity = undefined;
   self.setup = 0;
 
-  if(!isDefined(node.mortarteamactive))
+  if(!isDefined(node.mortarteamactive)) {
     node.mortarteamactive = 0;
+  }
 
   assert(!node.mortarteamactive, "Mortarteam that runs to " + node.origin + " has multiple mortar teams active on it. Can only have 1 team at a time operating each unique mortar.");
   index = 0;
@@ -96,10 +101,11 @@ mortarteamspawn(spawners, node, mortar_targets) {
     spawners[index].script_moveoverride = 1;
     spawn = undefined;
 
-    if(!isDefined(spawners[index].script_forcespawn))
+    if(!isDefined(spawners[index].script_forcespawn)) {
       spawn = spawners[index] dospawn();
-    else
+    } else {
       spawn = spawners[index] stalingradspawn();
+    }
 
     if(spawn_failed(spawn)) {
       wait 1;
@@ -116,8 +122,9 @@ mortarteamspawn(spawners, node, mortar_targets) {
     self.guy[index] = spawn;
     spawn.animname = name[index];
 
-    if(spawn.health < 5000)
+    if(spawn.health < 5000) {
       spawn.health = 1;
+    }
 
     spawn thread[[mortarthink[index]]](self, node);
     index++;
@@ -129,8 +136,9 @@ mortarteamspawn(spawners, node, mortar_targets) {
     wait 0.05;
   }
 
-  if(isDefined(self.loadguy))
+  if(isDefined(self.loadguy)) {
     self.loadguy thread stop_mortar_if_player_nearby(node);
+  }
 
   self waittill("loadguy_done");
 
@@ -146,15 +154,17 @@ mortarteamspawn(spawners, node, mortar_targets) {
   self.node = node;
   node.mortar_targets = mortar_targets;
 
-  if(isalive(self.aimguy))
+  if(isalive(self.aimguy)) {
     self thread transferobjectivepositionentity();
+  }
 
   for(;;) {
     if(isalive(self.loadguy)) {
-      if(isalive(self.aimguy) && self.aimguy.ready)
+      if(isalive(self.aimguy) && self.aimguy.ready) {
         dualmortaruntildeath(node);
-      else
+      } else {
         singlemortaronerep(node);
+      }
 
       continue;
     }
@@ -179,8 +189,9 @@ mortarteamspawn(spawners, node, mortar_targets) {
 transferobjectivepositionentity() {
   self.loadguy waittill("death");
 
-  if(isalive(self.aimguy))
+  if(isalive(self.aimguy)) {
     self.objectivepositionentity = self.aimguy;
+  }
 }
 
 singlemortaronerep(node) {
@@ -188,8 +199,9 @@ singlemortaronerep(node) {
   loadguy endon("death");
   loadguy endon("stop_mortar");
 
-  if(loadguy.health < 5000)
+  if(loadguy.health < 5000) {
     loadguy.health = 1;
+  }
 
   node notify("stopIdle");
   loadguy gun_remove();
@@ -237,8 +249,9 @@ player_nearby_reaction_animcustom() {
 aimguymortarsuntildeath(node) {
   aimguy = self.aimguy;
 
-  if(aimguy.health < 5000)
+  if(aimguy.health < 5000) {
     aimguy.health = 1;
+  }
 
   aimguy endon("death");
   aimguy endon("stop_mortar");
@@ -262,11 +275,13 @@ dualmortaruntildeath(node) {
   aimguy = self.aimguy;
   guy = self.guy;
 
-  if(loadguy.health < 5000)
+  if(loadguy.health < 5000) {
     loadguy.health = 1;
+  }
 
-  if(aimguy.health < 5000)
+  if(aimguy.health < 5000) {
     aimguy.health = 1;
+  }
 
   loadguy endon("death");
   aimguy endon("death");
@@ -297,8 +312,9 @@ aimguy(ent, node) {
   self.script_longdeath = 0;
   just_setup = isDefined(node.script_nodestate) && node.script_nodestate == "just_setup";
 
-  if(!just_setup)
+  if(!just_setup) {
     node anim_reach(self, "pickup");
+  }
 
   self gun_remove();
   node thread anim_loop_aligned(self, "wait_idle", undefined, "stopIdle");
@@ -348,8 +364,9 @@ loadguy(ent, node) {
     self attach(level.prop_mortar, "TAG_WEAPON_LEFT");
     dist = undefined;
 
-    for(i = 0; i < setupanim.size; i++)
+    for(i = 0; i < setupanim.size; i++) {
       dist[i] = distance(self.origin, getstartorigin(node.origin, node.angles, setupanim[i]));
+    }
 
     index = 0;
     current_dist = dist[0];
@@ -370,8 +387,9 @@ loadguy(ent, node) {
   node thread anim_single_aligned(self, setupstring[index]);
   self waittillmatch("single anim", "open_mortar");
 
-  if(soundexists("weapon_setup"))
+  if(soundexists("weapon_setup")) {
     thread play_sound_in_space("weapon_setup");
+  }
 
   node waittill(setupstring[index]);
   mortar = spawn("script_model", (0, 0, 0));
@@ -382,8 +400,9 @@ loadguy(ent, node) {
   ent.mortar = mortar;
   node.mortar = mortar;
 
-  if(!just_setup)
+  if(!just_setup) {
     self detach(level.prop_mortar, "TAG_WEAPON_LEFT");
+  }
 
   ent.setup = 1;
   ent notify("loadguy_done");
@@ -411,24 +430,27 @@ fire(guy) {
 
   wait 0.4;
 
-  if(isDefined(level._effect["mortar_flash_special"]))
+  if(isDefined(level._effect["mortar_flash_special"])) {
     playFXOnTag(level._effect["mortar_flash_special"], mortar, "TAG_fx");
-  else if(isDefined(level._effect["mortar_flash"]))
+  } else if(isDefined(level._effect["mortar_flash"])) {
     playFXOnTag(level._effect["mortar_flash"], mortar, "TAG_fx");
+  }
 
   if(isDefined(level.scr_sound["mortar_flash"])) {}
 
   target = random(mortar_targets);
 
-  if(isDefined(mortarent))
+  if(isDefined(mortarent)) {
     mortarent notify("mortar_fired");
+  }
 
-  if(!isDefined(level.mortarteam_incoming_sound))
+  if(!isDefined(level.mortarteam_incoming_sound)) {
     level.mortarteam_incoming_sound = "prj_mortar_incoming";
+  }
 
-  if(isDefined(level.timetoimpact))
+  if(isDefined(level.timetoimpact)) {
     wait(level.timetoimpact);
-  else {
+  } else {
     incoming_ent = spawn("script_origin", target.origin);
     wait(distance(self.origin, target.origin) * 0.0008);
     incoming_ent playSound(level.mortarteam_incoming_sound, "sound_done");
@@ -437,21 +459,24 @@ fire(guy) {
   }
 
   if(!isDefined(level.explosionhide)) {
-    if(isDefined(level.mortarteam_exp_sound))
+    if(isDefined(level.mortarteam_exp_sound)) {
       thread play_sound_in_space(level.mortarteam_exp_sound, target.origin);
-    else
+    } else {
       thread play_sound_in_space("exp_mortar", target.origin);
+    }
 
     playFX(level.mortar, target.origin);
   }
 }
 
 attachmortar(guy) {
-  if(!isDefined(guy.mortarammo))
+  if(!isDefined(guy.mortarammo)) {
     guy.mortarammo = 0;
+  }
 
-  if(!guy.mortarammo)
+  if(!guy.mortarammo) {
     guy attach(level.prop_mortar_ammunition, "TAG_WEAPON_RIGHT");
+  }
 
   guy.mortarammo = 1;
 }

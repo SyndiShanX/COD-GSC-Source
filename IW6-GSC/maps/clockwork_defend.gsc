@@ -386,7 +386,7 @@ fail_mission_leave_area() {
   common_scripts\utility::flag_wait_any("def_player_north", "player_on_podium", "def_player_south");
   thread watch_player_leave_area();
   common_scripts\utility::flag_wait("defend_player_fail_leaving");
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
+  setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -971,7 +971,7 @@ open_vault_door() {
   wait 11;
 
   if(!common_scripts\utility::flag("player_out_of_defend")) {
-    setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_SEPARATED");
+    setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_SEPARATED");
     maps\_utility::missionfailedwrapper();
   } else {
     var_3 = maps\_utility::obj("defendexit");
@@ -1664,7 +1664,7 @@ watch_pod_blocker(var_0, var_1) {
       if(!isDefined(var_1) || !isalive(var_1)) {
         common_scripts\utility::flag_set("ally_died");
         var_9 = &"CLOCKWORK_QUOTE_CYPHER_SHOT";
-        setdvar("ui_deadquote", var_9);
+        setDvar("ui_deadquote", var_9);
         maps\_utility::missionfailedwrapper();
         return;
       }
@@ -1926,7 +1926,7 @@ shockwavedetonation() {
     if(isDefined(self.owner) && isDefined(var_2) && var_2 == self.owner) {
       continue;
     }
-    if(isDefined(var_2) && isplayer(var_2)) {
+    if(isDefined(var_2) && isPlayer(var_2)) {
       continue;
     }
     if(!isDefined(var_2) || var_2 damageconetrace(self.origin, self) > 0) {
@@ -1979,7 +1979,7 @@ shockwave_damage_monitor(var_0) {
   for(;;) {
     var_1 waittill("damage", var_3, var_2, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-    if(!isDefined(var_2) || !isplayer(var_2)) {
+    if(!isDefined(var_2) || !isPlayer(var_2)) {
       continue;
     }
     break;
@@ -2196,7 +2196,7 @@ player_monitor_mine_friendly_fire() {
   level notify("player_monitor_mine_friendly_fire");
   level endon("player_monitor_mine_friendly_fire");
   level.player endon("stop_thermobaric_mine");
-  var_0 = getdvar("g_friendlyfireDist");
+  var_0 = getDvar("g_friendlyfireDist");
   var_1 = "timeout";
 
   while(level.player hasweapon("thermobaric_mine")) {
@@ -2322,7 +2322,7 @@ minedamagemonitor() {
   for(;;) {
     self waittill("damage", var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!isplayer(var_0) || isDefined(var_9) && var_9 == "thermobaric_mine") {
+    if(!isPlayer(var_0) || isDefined(var_9) && var_9 == "thermobaric_mine") {
       continue;
     }
     break;

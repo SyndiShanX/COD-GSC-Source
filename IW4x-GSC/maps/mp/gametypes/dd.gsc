@@ -8,7 +8,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -642,7 +642,6 @@ bombHandler(player, destType) {
     player incPlayerStat("bombsdefused", 1);
     player thread maps\mp\_matchdata::logGameEvent("defuse", player.origIn);
   }
-
 }
 
 playDemolitionTickingSound(site) {

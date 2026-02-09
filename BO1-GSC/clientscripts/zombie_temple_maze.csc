@@ -1,6 +1,6 @@
 /************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_temple_maze.csc
+ * Script: clientscripts\zombie_temple_maze\.csc
 ************************************************/
 
 #include clientscripts\_utility;
@@ -17,7 +17,6 @@ maze_trap_move_wall(localClientNum, active) {
     wall thread move_maze_wall(active);
   }
 }
-
 maze_wall_init(localClientNum) {
   if(!isDefined(self.init) || !self.init) {
     self init_maze_mover(-128, 0.25, 1.0, true, "evt_maze_wall_down", "evt_maze_wall_up");
@@ -29,7 +28,6 @@ maze_wall_init(localClientNum) {
     self.client_num = localClientNum;
   }
 }
-
 init_maze_mover(moveDist, moveUpTime, moveDownTime, blocksPaths, moveUpSound, moveDownSound) {
   self.isActive = false;
   self.activeCount = 0;
@@ -44,7 +42,6 @@ init_maze_mover(moveDist, moveUpTime, moveDownTime, blocksPaths, moveUpSound, mo
   self.moveDownSound = moveDownSound;
   self.startAngles = self.angles;
 }
-
 move_maze_wall(active) {
   if(active && isDefined(self.moveUpSound)) {}
   if(!active && isDefined(self.moveDownSound)) {}
@@ -66,7 +63,6 @@ move_maze_wall(active) {
   self.isActive = active;
   self thread _maze_mover_move(goalPos, moveTime);
 }
-
 set_maze_trap_wall(localClientNum) {
   walls = getEntArray(localClientNum, "maze_trap_wall", "targetname");
   bestWall = undefined;
@@ -87,14 +83,13 @@ set_maze_trap_wall(localClientNum) {
     self.wall.assigned = true;
   }
 }
-
 _maze_mover_move(goal, time) {
   self endon("stop_maze_mover");
   self.isMoving = true;
   if(time == 0) {
     time = .01;
   }
-  self moveTo(goal, time);
+  self moveto(goal, time);
   self waittill("movedone");
   self.isMoving = false;
   if(self.isActive) {
@@ -103,7 +98,6 @@ _maze_mover_move(goal, time) {
     _maze_mover_play_fx(self.script_fxid2, self.fx_active2_offset);
   }
 }
-
 _maze_mover_play_fx(fx_name, offset) {
   if(isDefined(fx_name)) {
     vFwd = anglesToForward(self.angles);

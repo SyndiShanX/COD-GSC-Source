@@ -19,8 +19,9 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 4; i++)
+  for(i = 0; i < 4; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_gunner1";
   positions[1].sittag = "tag_driver";

@@ -51,7 +51,7 @@ bot_set_difficulty(var_0) {
   }
 
   self botsetdifficulty(var_0);
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.pers["rankxp"] = ::scripts\mp\utility::get_rank_xp_for_bot();
     scripts\mp\rank::playerupdaterank();
   }

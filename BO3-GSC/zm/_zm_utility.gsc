@@ -46,7 +46,7 @@ function convertsecondstomilliseconds(seconds) {
 }
 
 function is_player() {
-  return isplayer(self) || (isDefined(self.pers) && (isDefined(self.pers["isBot"]) && self.pers["isBot"]));
+  return isPlayer(self) || (isDefined(self.pers) && (isDefined(self.pers["isBot"]) && self.pers["isBot"]));
 }
 
 function lerp(chunk) {
@@ -1049,7 +1049,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(!isalive(player)) {
     return 0;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return 0;
   }
   if(isDefined(player.is_zombie) && player.is_zombie == 1) {
@@ -2336,7 +2336,7 @@ function shock_onpain() {
   self notify("stop_shock_onpain");
   self endon("stop_shock_onpain");
   if(getdvarstring("blurpain") == "") {
-    setdvar("blurpain", "on");
+    setDvar("blurpain", "on");
   }
   while(true) {
     oldhealth = self.health;
@@ -2873,7 +2873,7 @@ function giveachievement_wrapper(achievement, all_players) {
       }
     }
   } else {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       println("");
       return;
     }
@@ -3009,9 +3009,7 @@ function track_players_intersection_tracker() {
           continue;
         }
         if(isDefined(level.player_intersection_tracker_override)) {
-          if(players[i][
-              [level.player_intersection_tracker_override]
-            ](players[j])) {
+          if(players[i][[level.player_intersection_tracker_override]](players[j])) {
             continue;
           }
         }
@@ -3044,7 +3042,7 @@ function track_players_intersection_tracker() {
 }
 
 function is_player_looking_at(origin, dot, do_trace, ignore_ent) {
-  assert(isplayer(self), "");
+  assert(isPlayer(self), "");
   if(!isDefined(dot)) {
     dot = 0.7;
   }
@@ -3655,7 +3653,7 @@ function wait_for_attractor_positions_complete() {
 }
 
 function get_player_index(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   assert(isDefined(player.characterindex));
   if(player.entity_num == 0 && getdvarstring("") != "") {
     new_vo_index = getdvarint("");

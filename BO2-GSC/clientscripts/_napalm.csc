@@ -9,13 +9,15 @@
 #include clientscripts\_airsupport;
 
 startnapalm(localclientnum, pos, yaw, teamfaction, team, owner, exittype) {
-  if(!isDefined(level.napalmstrikeinited) || level.napalmstrikeinited != 1)
+  if(!isDefined(level.napalmstrikeinited) || level.napalmstrikeinited != 1) {
     init_napalmstrike();
+  }
 
   players = level.localplayers;
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     callnapalmstrike(localclientnum, pos, yaw, teamfaction, team, owner, exittype);
+  }
 }
 
 init_napalmstrike() {
@@ -48,8 +50,9 @@ callnapalmstrike(localclientnum, coord, yaw, teamfaction, team, owner, exittype)
   direction = (0, yaw, 0);
   planeflyheight = 850;
 
-  if(isDefined(level.airsupportheightscale))
+  if(isDefined(level.airsupportheightscale)) {
     planeflyheight = planeflyheight * level.airsupportheightscale;
+  }
 
   startpoint = coord + vectorscale(anglesToForward(direction), -1 * 24000);
   endpoint = coord + vectorscale(anglesToForward(direction), 24000);
@@ -138,14 +141,16 @@ releaseflare(localclientnum, owner, plane, startpoint, endpoint, direction) {
 callstrike_flareeffect(localclientnum, plane, pathend, owner) {
   fxtimer = 0.15;
 
-  if(isDefined(level.airsupportfxtimer))
+  if(isDefined(level.airsupportfxtimer)) {
     fxtimer = level.airsupportfxtimer;
+  }
 
   fxtimer = getdvarfloatdefault("scr_fxTimer", fxtimer);
   bombwait = 2.35;
 
-  if(isDefined(level.airsupportbombtimer))
+  if(isDefined(level.airsupportbombtimer)) {
     bombwait = level.airsupportbombtimer;
+  }
 
   bombwait = getdvarfloatdefault("scr_napalmflareTimer", bombwait);
   wait(bombwait);
@@ -160,11 +165,13 @@ callstrike_flareeffect(localclientnum, plane, pathend, owner) {
   minangle = 5;
   maxangle = 45;
 
-  if(isDefined(level.napalmflameminangle))
+  if(isDefined(level.napalmflameminangle)) {
     minangle = level.napalmflameminangle;
+  }
 
-  if(isDefined(level.napalmflamemaxangle))
+  if(isDefined(level.napalmflamemaxangle)) {
     maxangle = level.napalmflamemaxangle;
+  }
 
   maxangle = getdvarfloatdefault("scr_napalm_maxAngles", maxangle);
   hitpos = (0, 0, 0);

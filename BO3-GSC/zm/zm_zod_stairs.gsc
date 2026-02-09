@@ -156,7 +156,6 @@ class cstair {
     m_n_power_index = n_power_index;
     m_b_discovered = 0;
   }
-
 }
 
 #namespace zm_zod_stairs;

@@ -327,7 +327,7 @@ func_6568() {
       continue;
     }
 
-    while(isplayer(self.enemy)) {
+    while(isPlayer(self.enemy)) {
       if(scripts\anim\utility::func_8BED()) {
         level.var_A9D0 = gettime();
       }

@@ -11,7 +11,11 @@ debugchains() {
   fnodenum = 0;
   fnodes = [];
   for(i = 0; i < nodes.size; i++) {
-    if((!(nodes[i] has_spawnflag(level.SPAWNFLAG_PATH_NOT_CHAIN))) && (((isDefined(nodes[i].target)) && ((getnodearray(nodes[i].target, "targetname")).size > 0)) || ((isDefined(nodes[i].targetname)) && ((getnodearray(nodes[i].targetname, "target")).size > 0)))) {
+    if((!(nodes[i] has_spawnflag(level.SPAWNFLAG_PATH_NOT_CHAIN))) &&
+      (
+        ((isDefined(nodes[i].target)) && ((getnodearray(nodes[i].target, "targetname")).size > 0)) || ((isDefined(nodes[i].targetname)) && ((getnodearray(nodes[i].targetname, "target")).size > 0))
+      )
+    ) {
       fnodes[fnodenum] = nodes[i];
       fnodenum++;
     }
@@ -36,29 +40,26 @@ debugchains() {
     maps\_spawner::waitframe();
   }
 }
-
 debug_enemyPos(num) {
   ai = getaiarray();
   for(i = 0; i < ai.size; i++) {
-    if(ai[i] getEntityNumber() != num) {
+    if(ai[i] getentitynumber() != num) {
       continue;
     }
     ai[i] thread debug_enemyPosProc();
     break;
   }
 }
-
 debug_stopEnemyPos(num) {
   ai = getaiarray();
   for(i = 0; i < ai.size; i++) {
-    if(ai[i] getEntityNumber() != num) {
+    if(ai[i] getentitynumber() != num) {
       continue;
     }
     ai[i] notify("stop_drawing_enemy_pos");
     break;
   }
 }
-
 debug_enemyPosProc() {
   self endon("death");
   self endon("stop_drawing_enemy_pos");
@@ -74,7 +75,6 @@ debug_enemyPosProc() {
     line(self.origin + (0, 0, 70), pos, (0.9, 0.5, 0.3), 0.5);
   }
 }
-
 debug_enemyPosReplay() {
   ai = getaiarray();
   guy = undefined;
@@ -135,35 +135,30 @@ debug_enemyPosReplay() {
     line(guy.origin + (0, 0, 45), guy.goodShootPos, (0.2, 0.6, 0.2), 0.5);
   }
 }
-
 drawEntTag(num) {}
 drawTag(tag, opcolor) {
   org = self GetTagOrigin(tag);
   ang = self GetTagAngles(tag);
   drawArrow(org, ang, opcolor);
 }
-
 drawOrgForever(opcolor) {
   for(;;) {
     drawArrow(self.origin, self.angles, opcolor);
     wait(0.05);
   }
 }
-
 drawArrowForever(org, ang) {
   for(;;) {
     drawArrow(org, ang);
     wait(0.05);
   }
 }
-
 drawOriginForever() {
   for(;;) {
     drawArrow(self.origin, self.angles);
     wait(0.05);
   }
 }
-
 drawArrow(org, ang, opcolor) {
   scale = 50;
   forward = anglesToForward(ang);
@@ -189,14 +184,12 @@ drawArrow(org, ang, opcolor) {
   line(org, org + right, blue, 0.9);
   line(org, org + up, green, 0.9);
 }
-
 drawPlayerViewForever() {
   for(;;) {
     drawArrow(level.player.origin, level.player getplayerangles(), (1, 1, 1));
     wait(0.05);
   }
 }
-
 drawTagForever(tag, opcolor) {
   self endon("death");
   for(;;) {
@@ -204,7 +197,6 @@ drawTagForever(tag, opcolor) {
     wait(0.05);
   }
 }
-
 dragTagUntilDeath(tag) {
   for(;;) {
     if(!isDefined(self.origin)) {
@@ -214,7 +206,6 @@ dragTagUntilDeath(tag) {
     wait(0.05);
   }
 }
-
 viewTag(type, tag) {
   if(type == "ai") {
     ai = getaiarray();
@@ -228,7 +219,6 @@ viewTag(type, tag) {
     }
   }
 }
-
 debug_corner() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -274,12 +264,11 @@ debug_corner() {
     covered++;
   }
 }
-
 coverTest() {
   coverSetupAnim();
 }
-
 #using_animtree("generic_human");
+
 coverSetupAnim() {
   spawn = undefined;
   spawner = undefined;
@@ -337,7 +326,6 @@ coverSetupAnim() {
   removeActiveSpawner(self);
   level.completedNodes[level.completedNodes.size] = self;
 }
-
 removeActiveSpawner(spawner) {
   newSpawners = [];
   for(p = 0; p < level.activeNodes.size; p++) {
@@ -348,14 +336,12 @@ removeActiveSpawner(spawner) {
   }
   level.activeNodes = newSpawners;
 }
-
 createLine(org) {
   for(;;) {
     line(org + (0, 0, 35), org, (0.2, 0.5, 0.8), 0.5);
     wait(0.05);
   }
 }
-
 createLineConstantly(ent) {
   org = undefined;
   while(isalive(ent)) {
@@ -367,7 +353,6 @@ createLineConstantly(ent) {
     wait(0.05);
   }
 }
-
 debugMisstime() {
   self notify("stopdebugmisstime");
   self endon("stopdebugmisstime");
@@ -381,11 +366,9 @@ debugMisstime() {
     wait(0.05);
   }
 }
-
 debugMisstimeOff() {
   self notify("stopdebugmisstime");
 }
-
 setEmptyDvar(dvar, setting) {}
 debugJump(num) {}
 debugDvars() {}
@@ -415,7 +398,6 @@ showDebugTrace() {
     line(start, trace["position"], (0.9, 0.5, 0.8), 0.5);
   }
 }
-
 hatmodel() {}
 debug_nuke() {
   players = get_players();
@@ -437,15 +419,14 @@ debug_nuke() {
       ai[i] dodamage(300, (0, 0, 0), player);
     }
   }
-  setdvar("debug_nuke", "off");
+  setDvar("debug_nuke", "off");
 }
-
 debug_missTime() {}
 camera() {
   wait(0.05);
   cameras = getEntArray("camera", "targetname");
   for(i = 0; i < cameras.size; i++) {
-    ent = getEnt(cameras[i].target, "targetname");
+    ent = getent(cameras[i].target, "targetname");
     cameras[i].origin2 = ent.origin;
     cameras[i].angles = vectortoangles(ent.origin - cameras[i].origin);
   }
@@ -507,17 +488,14 @@ camera() {
     wait(3);
   }
 }
-
 freePlayer() {
-  setdvar("cl_freemove", "0");
+  setDvar("cl_freemove", "0");
 }
-
 setPlayerToCamera(camera) {
-  setdvar("cl_freemove", "2");
+  setDvar("cl_freemove", "2");
   setdebugangles(camera.angles);
   setdebugorigin(camera.origin + (0, 0, -60));
 }
-
 deathspawnerPreview() {
   waittillframeend;
   for(i = 0; i < 50; i++) {
@@ -535,7 +513,6 @@ deathspawnerPreview() {
     }
   }
 }
-
 lastSightPosWatch() {}
 watchMinimap() {
   precacheItem("defaultweapon");
@@ -544,11 +521,10 @@ watchMinimap() {
     wait .25;
   }
 }
-
 updateMinimapSetting() {
   requiredMapAspectRatio = GetDvarFloat(#"scr_requiredMapAspectRatio");
   if(!isDefined(level.minimapheight)) {
-    setdvar("scr_minimap_height", "0");
+    setDvar("scr_minimap_height", "0");
     level.minimapheight = 0;
   }
   minimapheight = GetDvarFloat(#"scr_minimap_height");
@@ -642,7 +618,6 @@ updateMinimapSetting() {
     }
   }
 }
-
 getchains() {
   chainarray = [];
   chainarray = getEntArray("minimap_line", "script_noteworthy");
@@ -652,7 +627,6 @@ getchains() {
   }
   return array;
 }
-
 getchain() {
   array = [];
   ent = self;
@@ -661,7 +635,7 @@ getchain() {
     if(!isDefined(ent) || !isDefined(ent.target)) {
       break;
     }
-    ent = getEnt(ent.target, "targetname");
+    ent = getent(ent.target, "targetname");
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
       break;
@@ -673,11 +647,9 @@ getchain() {
   }
   return originarray;
 }
-
 vecscale(vec, scalar) {
   return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
 }
-
 drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   level notify("end_draw_map_bounds");
   level endon("end_draw_map_bounds");
@@ -710,7 +682,6 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
     wait .05;
   }
 }
-
 debug_vehiclesittags() {
   vehicles = getEntArray("script_vehicle", "classname");
   type = "none";
@@ -731,7 +702,6 @@ debug_vehiclesittags() {
     }
   }
 }
-
 islookingatorigin(origin) {
   normalvec = vectorNormalize(origin - self getShootAtPos());
   veccomp = vectorNormalize((origin - (0, 0, 24)) - self getShootAtPos());
@@ -744,7 +714,6 @@ islookingatorigin(origin) {
     return false;
   }
 }
-
 debug_colornodes() {
   wait(0.05);
   ai = getaiarray();
@@ -771,7 +740,6 @@ debug_colornodes() {
   draw_colorNodes(array, "allies");
   draw_colorNodes(array, "axis");
 }
-
 draw_colorNodes(array, team) {
   keys = getArrayKeys(array[team]);
   for(i = 0; i < keys.size; i++) {
@@ -785,7 +753,6 @@ draw_colorNodes(array, team) {
     }
   }
 }
-
 get_team_substr() {
   if(self.team == "allies") {
     if(!isDefined(self.node.script_color_allies)) {
@@ -800,7 +767,6 @@ get_team_substr() {
     return self.node.script_color_axis;
   }
 }
-
 try_to_draw_line_to_node() {
   if(!isDefined(self.node)) {
     return;
@@ -817,26 +783,23 @@ try_to_draw_line_to_node() {
   }
   line(self.origin + (0, 0, 64), self.node.origin, level.color_debug[self.script_forceColor]);
 }
-
 fogcheck() {
   if(getDvar(#"depth_close") == "") {
-    setdvar("depth_close", "0");
+    setDvar("depth_close", "0");
   }
   if(getDvar(#"depth_far") == "") {
-    setdvar("depth_far", "1500");
+    setDvar("depth_far", "1500");
   }
   close = GetDvarInt(#"depth_close");
   far = GetDvarInt(#"depth_far");
   setexpfog(close, far, 1, 1, 1, 0);
 }
-
 debugThreat() {
   {
     level.last_threat_debug = gettime();
     thread debugThreatCalc();
   }
 }
-
 debugThreatCalc() {}
 displayThreat(entity, entityGroup) {
   self endon("death");
@@ -883,7 +846,6 @@ displayThreat(entity, entityGroup) {
     wait(0.05);
   }
 }
-
 debugColorFriendlies() {
   level.debug_color_friendlies = [];
   level.debug_color_huds = [];
@@ -893,7 +855,6 @@ debugColorFriendlies() {
     draw_color_friendlies();
   }
 }
-
 debugColorFriendliesToggleWatch() {}
 draw_color_friendlies() {
   level endon("updated_color_friendlies");
@@ -941,14 +902,12 @@ draw_color_friendlies() {
     y += offset_y;
   }
 }
-
 drawUsers() {
   if(isalive(self.color_user)) {
     line(self.origin + (0, 0, 35), self.color_user.origin + (0, 0, 35), (1, 1, 1), 1.0);
     print3d(self.origin + (0, 0, -25), "in-use", (1, 1, 1), 1, 1);
   }
 }
-
 colordebug() {
   wait(0.5);
   col = [];
@@ -969,12 +928,10 @@ colordebug() {
     wait(0.05);
   }
 }
-
 draw_colored_nodes(color) {
   nodes = level.arrays_of_colorCoded_nodes["allies"][color];
   array_thread(nodes, ::drawUsers);
 }
-
 init_animSounds() {
   level.animSounds = [];
   level.animSound_aliases = [];
@@ -989,7 +946,6 @@ init_animSounds() {
     init_animSounds_for_animname(animnames[i]);
   }
 }
-
 init_notetracks_for_animname(animname) {
   notetracks = getarraykeys(level.scr_notetrack[animname]);
   for(i = 0; i < notetracks.size; i++) {
@@ -1005,7 +961,6 @@ init_notetracks_for_animname(animname) {
     }
   }
 }
-
 init_animSounds_for_animname(animname) {
   animes = getarraykeys(level.scr_animSound[animname]);
   for(i = 0; i < animes.size; i++) {
@@ -1015,7 +970,6 @@ init_animSounds_for_animname(animname) {
     level.animSound_aliases[animname][anime]["#" + anime]["created_by_animSound"] = true;
   }
 }
-
 add_hud_line(x, y, msg) {
   hudelm = newHudElem();
   hudelm.alignX = "left";
@@ -1028,7 +982,6 @@ add_hud_line(x, y, msg) {
   level.animsound_hud_extralines[level.animsound_hud_extralines.size] = hudelm;
   return hudelm;
 }
-
 debug_animSound() {}
 draw_animsounds_in_hud() {
   guy = level.animsound_tagged;
@@ -1131,7 +1084,6 @@ draw_animsounds_in_hud() {
     debug_animSoundSave();
   }
 }
-
 get_alias_from_stored(animSound) {
   if(!isDefined(level.animSound_aliases[animSound.animname])) {
     return;
@@ -1144,11 +1096,9 @@ get_alias_from_stored(animSound) {
   }
   return level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]["soundalias"];
 }
-
 is_from_animsound(animname, anime, notetrack) {
   return isDefined(level.animSound_aliases[animname][anime][notetrack]["created_by_animSound"]);
 }
-
 display_animSound() {
   players = get_players();
   if(distance(players[0].origin, self.origin) > 1500) {
@@ -1156,7 +1106,6 @@ display_animSound() {
   }
   level.animSounds_thisframe[level.animSounds_thisframe.size] = self;
 }
-
 debug_animSoundTag(tagnum) {}
 debug_animSoundTagSelected() {}
 tag_sound(tag, tagnum) {
@@ -1174,7 +1123,6 @@ tag_sound(tag, tagnum) {
     debug_animSoundSave();
   }
 }
-
 debug_animSoundSave() {}
 print_aliases_to_file(file) {
   tab = "";
@@ -1211,7 +1159,6 @@ print_aliases_to_file(file) {
   }
   fprintln(file, "}");
 }
-
 tostr(str) {
   newstr = "\"";
   for(i = 0; i < str.size; i++) {
@@ -1225,29 +1172,25 @@ tostr(str) {
   newstr += "\"";
   return newstr;
 }
-
 drawDebugLineInternal(fromPoint, toPoint, color, durationFrames) {
   for(i = 0; i < durationFrames; i++) {
     line(fromPoint, toPoint, color);
     wait(0.05);
   }
 }
-
 drawDebugLine(fromPoint, toPoint, color, durationFrames) {
   thread drawDebugLineInternal(fromPoint, toPoint, color, durationFrames);
 }
-
 complete_me() {
   if(getDvar(#"credits_active") == "1") {
     wait 7;
-    setdvar("credits_active", "0");
+    setDvar("credits_active", "0");
     maps\_endmission::credits_end();
     return;
   }
   wait 7;
   nextmission();
 }
-
 debug_bayonet() {}
 new_hud(hud_name, msg, x, y, scale) {
   if(!isDefined(level.hud_array)) {
@@ -1260,7 +1203,6 @@ new_hud(hud_name, msg, x, y, scale) {
   level.hud_array[hud_name][level.hud_array[hud_name].size] = hud;
   return hud;
 }
-
 debug_show_viewpos() {
   wait_for_first_player();
   hud_title = NewDebugHudElem();
@@ -1292,7 +1234,7 @@ debug_show_viewpos() {
   hud_z.alignX = "left";
   hud_z.fontscale = 1.2;
   hud_z SetValue(0);
-  SetDvar("debug_show_viewpos", "0");
+  setDvar("debug_show_viewpos", "0");
   players = get_players();
   while(1) {
     if(GetDvarInt(#"debug_show_viewpos") > 0) {
@@ -1319,7 +1261,6 @@ debug_show_viewpos() {
     wait(0.5);
   }
 }
-
 number_before_decimal(num) {
   abs_num = abs(num);
   count = 0;
@@ -1331,16 +1272,13 @@ number_before_decimal(num) {
     }
   }
 }
-
 round_to(val, num) {
   return Int(val * num) / num;
 }
-
 set_event_printname_thread(text, focus) {}
 get_playerone() {
   return get_players()[0];
 }
-
 engagement_distance_debug_toggle() {}
 dvar_turned_on(val) {
   if(val <= 0) {
@@ -1349,7 +1287,6 @@ dvar_turned_on(val) {
     return true;
   }
 }
-
 engagement_distance_debug_init() {
   level.debug_xPos = -50;
   level.debug_yPos = 250;
@@ -1397,14 +1334,12 @@ engagement_distance_debug_init() {
   hudObjArray[3] = level.realtimeEngageDist_offvalue;
   return hudObjArray;
 }
-
 engage_dist_debug_hud_destroy(hudArray, killNotify) {
   level waittill(killNotify);
   for(i = 0; i < hudArray.size; i++) {
     hudArray[i] Destroy();
   }
 }
-
 weapon_engage_dists_init() {
   level.engageDists = [];
   genericPistol = spawnStruct();
@@ -1460,11 +1395,9 @@ weapon_engage_dists_init() {
   engage_dists_add("lee_enfield_scoped", genericSniper);
   level thread engage_dists_watcher();
 }
-
 engage_dists_add(weapontypeStr, values) {
   level.engageDists[weapontypeStr] = values;
 }
-
 get_engage_dists(weapontypeStr) {
   if(isDefined(level.engageDists[weapontypeStr])) {
     return level.engageDists[weapontypeStr];
@@ -1472,7 +1405,6 @@ get_engage_dists(weapontypeStr) {
     return undefined;
   }
 }
-
 engage_dists_watcher() {
   level endon("kill_all_engage_dist_debug");
   level endon("kill_engage_dists_watcher");
@@ -1497,7 +1429,6 @@ engage_dists_watcher() {
     wait(0.05);
   }
 }
-
 debug_realtime_engage_dist() {
   level endon("kill_all_engage_dist_debug");
   level endon("kill_realtime_engagement_distance_debug");
@@ -1525,7 +1456,8 @@ debug_realtime_engage_dist() {
         engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
         engageDistMax = level.weaponEngageDistValues.engageDistMax;
         if((traceDist >= engageDistMin) && (traceDist <= engageDistMax)) {
-          if((traceDist >= (engageDistOptimal - engageDistMulligan)) && (traceDist <= (engageDistOptimal + engageDistMulligan))) {
+          if((traceDist >= (engageDistOptimal - engageDistMulligan)) &&
+            (traceDist <= (engageDistOptimal + engageDistMulligan))) {
             hudObjArray engagedist_hud_changetext("optimal", tracedist);
             hudobj_changecolor(hudObjArray, level.green);
           } else {
@@ -1546,7 +1478,6 @@ debug_realtime_engage_dist() {
     wait(0.05);
   }
 }
-
 hudobj_changecolor(hudObjArray, newcolor) {
   for(i = 0; i < hudObjArray.size; i++) {
     hudObj = hudObjArray[i];
@@ -1556,7 +1487,6 @@ hudobj_changecolor(hudObjArray, newcolor) {
     }
   }
 }
-
 engagedist_hud_changetext(engageDistType, units) {
   if(!isDefined(level.lastDistType)) {
     level.lastDistType = "none";
@@ -1592,7 +1522,6 @@ engagedist_hud_changetext(engageDistType, units) {
   }
   level.lastDistType = engageDistType;
 }
-
 debug_ai_engage_dist() {
   level endon("kill_all_engage_dist_debug");
   level endon("kill_ai_engagement_distance_debug");
@@ -1616,7 +1545,8 @@ debug_ai_engage_dist() {
             engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
             engageDistMax = level.weaponEngageDistValues.engageDistMax;
             if((dist >= engageDistMin) && (dist <= engageDistMax)) {
-              if((dist >= (engageDistOptimal - engageDistMulligan)) && (dist <= (engageDistOptimal + engageDistMulligan))) {
+              if((dist >= (engageDistOptimal - engageDistMulligan)) &&
+                (dist <= (engageDistOptimal + engageDistMulligan))) {
                 drawColor = level.green;
                 drawString = "RAD";
               } else {
@@ -1639,7 +1569,6 @@ debug_ai_engage_dist() {
     wait(0.05);
   }
 }
-
 plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
   if(!isDefined(color)) {
     color = (0, 1, 0);
@@ -1665,7 +1594,6 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
     wait hangtime;
   }
 }
-
 dynamic_ai_spawner() {
   if(!isDefined(level.debug_dynamic_ai_spawner)) {
     dynamic_ai_spawner_init();
@@ -1680,14 +1608,12 @@ dynamic_ai_spawner() {
     level.dynamic_spawn_dummy_model delete();
   }
 }
-
 dynamic_ai_spawner_init() {
   level.enemy_spawner = dynamic_ai_spawner_create_enemy_spawner();
   if(!isDefined(level.enemy_spawner)) {
     return;
   }
 }
-
 dynamic_ai_spawner_create_enemy_spawner() {
   spawners = getspawnerarray();
   for(i = 0; i < spawners.size; i++) {
@@ -1705,7 +1631,6 @@ dynamic_ai_spawner_create_enemy_spawner() {
     }
   }
 }
-
 spawn_guy_placement(spawner) {
   level endon("kill dynamic spawning");
   if(!isDefined(spawner)) {
@@ -1736,7 +1661,6 @@ spawn_guy_placement(spawner) {
     wait(0.05);
   }
 }
-
 spawn_anywhere(spawner) {
   level endon("kill dynamic spawning");
   if(self UseButtonPressed()) {
@@ -1749,7 +1673,6 @@ spawn_anywhere(spawner) {
   }
   spawner.count = 50;
 }
-
 display_module_text() {}
 debug_goalradius() {}
 ai_puppeteer() {
@@ -1767,7 +1690,6 @@ ai_puppeteer() {
   }
   ai_puppeteer_destroy_hud();
 }
-
 ai_puppet_manager() {
   level endon("kill ai puppeteer");
   self endon("death");
@@ -1852,13 +1774,11 @@ ai_puppet_manager() {
     wait(0.05);
   }
 }
-
 ai_puppet_set(puppet) {
   level.ai_puppet = level.playerCursorAi;
   level.ai_puppet.old_goalradius = level.ai_puppet.goalradius;
   level.ai_puppet StopAnimScripted();
 }
-
 ai_puppet_release(restore) {
   if(isDefined(level.ai_puppet)) {
     if(restore) {
@@ -1868,7 +1788,6 @@ ai_puppet_release(restore) {
     level.ai_puppet = undefined;
   }
 }
-
 ai_puppet_cursor_tracker() {
   level endon("kill ai puppeteer");
   self endon("death");
@@ -1892,7 +1811,7 @@ ai_puppet_cursor_tracker() {
       nodes = GetAnyNodeArray(level.playerCursor["position"], 24);
       if(nodes.size > 0) {
         node = nodes[0];
-        if(node.type != "Path" && distanceSquared(node.origin, level.playerCursor["position"]) < 24 * 24) {
+        if(node.type != "Path" && DistanceSquared(node.origin, level.playerCursor["position"]) < 24 * 24) {
           if(!level.ai_puppet_highlighting) {
             ai_puppeteer_render_node(node, (0, 1, 1));
           }
@@ -1906,7 +1825,6 @@ ai_puppet_cursor_tracker() {
     wait(0.05);
   }
 }
-
 ai_puppeteer_create_hud() {
   level.puppeteer_hud_select = NewDebugHudElem();
   level.puppeteer_hud_select.x = 0;
@@ -1933,7 +1851,6 @@ ai_puppeteer_create_hud() {
   level.puppeteer_hud_goto SetText("A for goto");
   level.puppeteer_hud_shoot SetText("R_TRIG for shoot");
 }
-
 ai_puppeteer_destroy_hud() {
   if(isDefined(level.puppeteer_hud_select)) {
     level.puppeteer_hud_select Destroy();
@@ -1945,7 +1862,6 @@ ai_puppeteer_destroy_hud() {
     level.puppeteer_hud_shoot Destroy();
   }
 }
-
 ai_puppeteer_render_point(point, normal, forward, color) {
   surface_vector = VectorCross(forward, normal);
   surface_vector = VectorNormalize(surface_vector);
@@ -1956,7 +1872,6 @@ ai_puppeteer_render_point(point, normal, forward, color) {
   line(point, point + vector_scale(surface_vector, 5), color, 1, true);
   line(point, point + vector_scale(surface_vector, -5), color, 1, true);
 }
-
 ai_puppeteer_render_node(node, color) {
   print3d(node.origin, node.type, color, 1, 0.35);
   box(node.origin, (-16, -16, 0), (16, 16, 16), node.angles[1], color, 1, 1);
@@ -1964,11 +1879,9 @@ ai_puppeteer_render_node(node, color) {
   nodeForward = vector_scale(nodeForward, 8);
   line(node.origin, node.origin + nodeForward, color, 1, 1);
 }
-
 ai_puppeteer_render_ai(ai, color) {
   circle(ai.origin + (0, 0, 1), 15, color, false, true);
 }
-
 ai_puppeteer_highlight_point(point, normal, forward, color) {
   level endon("kill ai puppeteer");
   self endon("death");
@@ -1983,7 +1896,6 @@ ai_puppeteer_highlight_point(point, normal, forward, color) {
   }
   level.ai_puppet_highlighting = false;
 }
-
 ai_puppeteer_highlight_node(node) {
   level endon("kill ai puppeteer");
   self endon("death");
@@ -1998,7 +1910,6 @@ ai_puppeteer_highlight_node(node) {
   }
   level.ai_puppet_highlighting = false;
 }
-
 ai_puppeteer_highlight_ai(ai, color) {
   level endon("kill ai puppeteer");
   self endon("death");

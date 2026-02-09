@@ -669,7 +669,7 @@ onturretdeath(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(level.ishorde) && level.ishorde) {
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       var_0 = var_0.owner;
     }
   }
@@ -1680,7 +1680,7 @@ turret_firerocket(var_0) {
   if(isDefined(level.ishorde) && level.ishorde) {
     var_6 = isDefined(var_5) && isDefined(var_5.team) && self.team != var_5.team;
   } else {
-    var_6 = isDefined(var_5) && isplayer(var_5) && !isalliedsentient(self.owner, var_5);
+    var_6 = isDefined(var_5) && isPlayer(var_5) && !isalliedsentient(self.owner, var_5);
   }
 
   if(!var_6 && var_0) {

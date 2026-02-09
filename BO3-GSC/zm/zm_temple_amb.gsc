@@ -97,7 +97,7 @@ function visual_trigger_vox(place) {
   vox_trig = spawn("trigger_radius", struct.origin - vectorscale((0, 0, 1), 100), 0, 250, 200);
   while(true) {
     vox_trig waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       who thread zm_audio::create_and_play_dialog("general", place);
       if(place == "location_maze") {
         wait(90);
@@ -138,7 +138,7 @@ function function_19277046() {
     if(!level flag::get("gongs_resonating")) {
       continue;
     }
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     if(weapon != level.start_weapon) {

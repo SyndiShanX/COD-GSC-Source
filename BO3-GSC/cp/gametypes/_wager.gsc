@@ -94,7 +94,7 @@ function deduct_player_ante() {
 }
 
 function increment_escrow_for_player(amount) {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
   if(!isDefined(game["escrows"])) {

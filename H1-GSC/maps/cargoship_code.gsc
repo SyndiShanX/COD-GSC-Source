@@ -1047,8 +1047,8 @@ playermaskputon() {
     wait 1;
   }
 
-  var_0 = getdvar("nightVisionFadeInOutTime");
-  var_1 = getdvar("nightVisionPowerOnTime");
+  var_0 = getDvar("nightVisionFadeInOutTime");
+  var_1 = getDvar("nightVisionPowerOnTime");
   setsaveddvar("nightVisionPowerOnTime", 0.5);
   setsaveddvar("nightVisionFadeInOutTime", 0.5);
   setsaveddvar("overrideNVGModelWithKnife", 1);
@@ -1201,7 +1201,7 @@ execute_ai(var_0, var_1, var_2, var_3, var_4) {
     while(var_6) {
       var_10 = bulletTrace(self gettagorigin("tag_flash"), var_9.origin, 1, self);
 
-      if(!isDefined(var_10["entity"]) || !isplayer(var_10["entity"])) {
+      if(!isDefined(var_10["entity"]) || !isPlayer(var_10["entity"])) {
         break;
       }
 
@@ -1365,7 +1365,7 @@ txt_voice(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_10 = int(var_0 * 20);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     while(var_10) {
       var_11 = level.player getplayerangles();
       var_12 = anglesToForward(var_11);
@@ -1748,7 +1748,7 @@ deck_enemies_herokill() {
       if(var_7) {
         var_4 = 0;
 
-        if(!isplayer(var_0[var_6])) {
+        if(!isPlayer(var_0[var_6])) {
           var_0[var_6] thread execute_ai_solo(self, 0, undefined, 1);
           self notify("marked_for_death");
         }
@@ -1783,7 +1783,7 @@ deck_enemies_behavior() {
       if(var_5) {
         var_4 = 0;
 
-        if(!isplayer(var_0[var_1])) {
+        if(!isPlayer(var_0[var_1])) {
           var_0[var_1] thread execute_ai_solo(self, 0, undefined, 1);
           self notify("marked_for_death");
         }
@@ -2113,7 +2113,7 @@ heli_deckdrop_target() {
 }
 
 player_speed_set_cargoship(var_0, var_1) {
-  var_2 = int(getdvar("g_speed"));
+  var_2 = int(getDvar("g_speed"));
   var_3 = var_0;
 
   if(!isDefined(level.player.g_speed))
@@ -2636,14 +2636,14 @@ caroghold_remove_flash_grenade(var_0) {
 }
 
 jumptoinit() {
-  if(getdvar("jumpto") == "")
-    setdvar("jumpto", "");
+  if(getDvar("jumpto") == "")
+    setDvar("jumpto", "");
 
-  if(!isDefined(getdvar("jumpto")))
-    setdvar("jumpto", "");
+  if(!isDefined(getDvar("jumpto")))
+    setDvar("jumpto", "");
 
-  var_0 = getdvar("start");
-  var_1 = getdvar("jumpto");
+  var_0 = getDvar("start");
+  var_1 = getDvar("jumpto");
   level.jumpto = "start";
   level.jumptosection = "bridge";
 
@@ -4153,7 +4153,7 @@ escape_invisible_timer() {
   level.escape_timer["escape_aftdeck_flag"] = 10;
   level.escape_timer["end_no_jump"] = 12.5;
 
-  if(getdvar("no_escape") == "1") {
+  if(getDvar("no_escape") == "1") {
     level.escape_timer = [];
     level.escape_timer["escape_cargohold1_enter"] = 9999;
     level.escape_timer["escape_catwalk_madeit"] = 9999;
@@ -4220,7 +4220,7 @@ escape_mission_failed() {
     return;
   }
   level notify("mission_failed");
-  setdvar("ui_deadquote", level.missionfailedquote["escape"]);
+  setDvar("ui_deadquote", level.missionfailedquote["escape"]);
   maps\_utility::missionfailedwrapper();
 }
 
@@ -4232,13 +4232,13 @@ end_handle_player_fall() {
   var_1 = getent("end_player_fall", "targetname");
   var_1 waittill("trigger");
 
-  if(getdvar("cargoship_jump") == "")
-    setdvar("cargoship_jump", "1");
+  if(getDvar("cargoship_jump") == "")
+    setDvar("cargoship_jump", "1");
 
-  switch (int(getdvar("cargoship_jump"))) {
+  switch (int(getDvar("cargoship_jump"))) {
     case 1:
       level.missionfailedquote["escape"] = level.missionfailedquote["jump1"];
-      setdvar("cargoship_jump", "2");
+      setDvar("cargoship_jump", "2");
       break;
     default:
       level.missionfailedquote["escape"] = level.missionfailedquote["jump"];
@@ -4249,7 +4249,7 @@ end_handle_player_fall() {
 }
 
 escape_handle_wrongway() {
-  if(getdvar("no_escape") == "1") {
+  if(getDvar("no_escape") == "1") {
     return;
   }
   common_scripts\utility::flag_wait("escape_explosion");
@@ -4497,10 +4497,10 @@ hint_setup() {
 }
 
 keyhint(var_0, var_1) {
-  if(getdvar("chaplincheat") == "1") {
+  if(getDvar("chaplincheat") == "1") {
     return;
   }
-  if(getdvar("limited_mode") == "1") {
+  if(getDvar("limited_mode") == "1") {
     return;
   }
   clear_hints();

@@ -939,7 +939,7 @@ function function_a8b0c139(trigger, objective_id) {
   }
   while(true) {
     trigger waittill("trigger", guy);
-    if(isDefined(guy) && !isplayer(guy)) {
+    if(isDefined(guy) && !isPlayer(guy)) {
       continue;
     }
     break;

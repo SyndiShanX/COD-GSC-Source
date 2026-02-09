@@ -17,8 +17,7 @@ main() {
 
 anims() {
   maps\_props::add_smoking_notetracks("generic");
-  /*-----------------------
-  TRAINING - RANGE
+  /*----------------------- TRAINING - RANGE
   -------------------------*/
   //Begining, all start at same time:
   level.scr_anim["foley"]["training_intro_begining"] = % training_intro_foley_begining;
@@ -73,8 +72,7 @@ anims() {
   level.scr_anim["generic"]["training_locals_sit"][0] = % training_locals_sit;
   level.scr_anim["generic"]["training_locals_kneel"][0] = % training_locals_kneel;
 
-  /*-----------------------
-  PATROLS
+  /*----------------------- PATROLS
   -------------------------*/
   level.scr_anim["generic"]["smoke_idle"][0] = % patrol_bored_idle_smoke;
   level.scr_anim["generic"]["smoke_reach"] = % patrol_bored_idle_smoke;
@@ -114,8 +112,7 @@ anims() {
   level.scr_anim["generic"]["smoking"][1] = % parabolic_leaning_guy_smoking_twitch;
   level.scr_anim["generic"]["smoking_react"] = % parabolic_leaning_guy_react;
 
-  /*-----------------------
-  RUNNERS
+  /*----------------------- RUNNERS
   -------------------------*/
   level.scr_anim["generic"]["training_jog_guy1"] = % training_jog_guy1;
   level.scr_anim["generic"]["training_jog_guy2"] = % training_jog_guy2;
@@ -125,8 +122,7 @@ anims() {
   level.scr_anim["generic"]["freerunnerB_loop"] = % freerunnerB_loop;
   level.scr_anim["generic"]["huntedrun_1_idle"] = % huntedrun_1_idle;
 
-  /*-----------------------
-  AMBIENT
+  /*----------------------- AMBIENT
   -------------------------*/
   //looping
   level.scr_anim["generic"]["training_sleeping_in_chair"][0] = % training_sleeping_in_chair;
@@ -233,19 +229,16 @@ anims() {
   addNotetrack_customFunction("generic", "footstep_right_small", ::bounce_fx);
   addNotetrack_customFunction("generic", "footstep_left_small", ::bounce_fx);
 
-  /*-----------------------
-  JAVELIN BEHAVIOR
+  /*----------------------- JAVELIN BEHAVIOR
   -------------------------*/
   //javelin_idle_A
 
-  /*-----------------------
-  HUMVEES COMING IN, WOUNDED
+  /*----------------------- HUMVEES COMING IN, WOUNDED
   -------------------------*/
   //estate_chopper_sequence_body
   //estate_chopper_sequence_soldier
 
-  /*-----------------------
-  PIT
+  /*----------------------- PIT
   -------------------------*/
   level.scr_anim["dunn"]["training_pit_sitting_welcome"] = % training_pit_sitting_welcome;
   level.scr_anim["dunn"]["training_pit_sitting_idle"][0] = % training_pit_sitting_idle;
@@ -285,8 +278,7 @@ notetrack_dunn_button_press(guy) {
 }
 
 dialogue() {
-  /*-----------------------
-  BASKETBALL NAGS
+  /*----------------------- BASKETBALL NAGS
   -------------------------*/
   //Ranger 2		Get off the court dude.	train_ar2_getoffcourt
   level.scr_sound["court_nag_00"] = "train_ar2_getoffcourt";
@@ -297,8 +289,7 @@ dialogue() {
   //Ranger 2		Allen, what the hell?	
   level.scr_sound["court_nag_02"] = "train_ar2_allenwhatthe";
 
-  /*-----------------------
-  RIFLE TRAINING START
+  /*----------------------- RIFLE TRAINING START
   -------------------------*/
   //Sgt. Foley	training	Welcome to pull-the-trigger 101. 	
   level.scr_sound["foley"]["train_fly_welcome"] = "train_fly_welcome";
@@ -341,8 +332,7 @@ dialogue() {
   level.scr_sound["foley"]["train_fly_turnaround"] = "train_fly_turnaround";
   level.scr_face["foley"]["train_fly_turnaround"] = % train_fly_turnaround;
 
-  /*-----------------------
-  FIRE FROM THE HIP
+  /*----------------------- FIRE FROM THE HIP
   -------------------------*/
   //Sgt. Foley	training	Sgt. Foley	Private Allen, grab that weapon off the table and fire at the targets behind you.
   level.scr_sound["foley"]["nag_rifle_pickup_01"] = "train_fly_grabthatweapon";
@@ -371,8 +361,7 @@ dialogue() {
   //Sgt. Foley	training	What are you waiting for? Reload your weapon. 	
   //level.scr_sound[ "foley" ][ "train_fly_waitingfor" ] = "train_fly_waitingfor";
 
-  /*-----------------------
-  ADS WHILE CROUCHED
+  /*----------------------- ADS WHILE CROUCHED
   -------------------------*/
   //Sgt. Foley	training	See what I mean? He sprayed bullets all over the damn place.	
   level.scr_sound["foley"]["train_fly_sprayedbullets"] = "train_fly_sprayedbullets";
@@ -414,8 +403,7 @@ dialogue() {
   //Sgt. Foley	5	12	Now that's how you do it. You want to take down your targets quickly and with control.	
   level.scr_sound["foley"]["train_fly_howyoudoit"] = "train_fly_howyoudoit";
 
-  /*-----------------------
-  ADS WHILE PRONE
+  /*----------------------- ADS WHILE PRONE
   -------------------------*/
   //Sgt. Foley	training	That's all there is to it. You want your target to go down? You gotta aim down your sights.	
   level.scr_sound["foley"]["train_fly_gottaaim"] = "train_fly_gottaaim";
@@ -447,8 +435,7 @@ dialogue() {
   //Sgt. Foley	training	Private, I need you to fire from the prone position.	
   //level.scr_sound[ "foley" ][ "train_fly_needyoutofire" ] = "train_fly_needyoutofire";
 
-  /*-----------------------
-  TIMED ADS - SWITCHING TARGETS
+  /*----------------------- TIMED ADS - SWITCHING TARGETS
   -------------------------*/
   //Sgt. Foley	training	Aiming down your sights also works for switching quickly between targets. 	
   level.scr_sound["foley"]["train_fly_switching"] = "train_fly_switching";
@@ -473,8 +460,7 @@ dialogue() {
   //Afghan Translator	If your target is close to where you are aiming, you can snap to it quickly by quickly aiming down your sights.	
   level.scr_sound["translator"]["train_fly_iftargetclose"] = "train_aft_iftargetclose";
 
-  /*-----------------------
-  TIMED ADS - FAILED - TOO SLOW
+  /*----------------------- TIMED ADS - FAILED - TOO SLOW
   -------------------------*/
   //Sgt. Foley	training	That was too slow. You need engage and release your aim quickly to snap to new targets
   level.scr_sound["foley"]["timed_ads_too_slow_00"] = "train_fly_tooslow";
@@ -485,8 +471,7 @@ dialogue() {
   //Sgt. Foley	training	Do it again and speed it up. Show these men how to snap to new targets by quickly popping in and out of aiming down your sights.
   level.scr_sound["foley"]["timed_ads_too_slow_02"] = "train_fly_poppinginandout";
 
-  /*-----------------------
-  TIMED ADS - FAILED - NOT SNAPPING
+  /*----------------------- TIMED ADS - FAILED - NOT SNAPPING
   -------------------------*/
   //Sgt. Foley	training	Do it again. You can snap to new targets by quickly engaging and releasing your aim.
   level.scr_sound["foley"]["timed_ads_not_snapping_00"] = "train_fly_speeditup";
@@ -497,8 +482,7 @@ dialogue() {
   //Private Allen, you're doing it wrong. Quickly engage and release aiming down the sight to snap to new targets.	
   level.scr_sound["foley"]["timed_ads_not_snapping_02"] = "train_fly_doingitwrong";
 
-  /*-----------------------
-  TIMED ADS - NOT SNAPPING NAGS
+  /*----------------------- TIMED ADS - NOT SNAPPING NAGS
   -------------------------*/
   //Private Allen, aim down your sights to snap to the target.	
   level.scr_sound["foley"]["nag_ads_snap_01"] = "train_fly_aimtosnap";
@@ -512,8 +496,7 @@ dialogue() {
   //You're not aiming properly, Private. Snap to the targets by aiming down your sights.	
   level.scr_sound["foley"]["nag_ads_snap_04"] = "train_fly_notaimingprop";
 
-  /*-----------------------
-  BULLET PENETRATION
+  /*----------------------- BULLET PENETRATION
   -------------------------*/
   //Sgt. Foley	training	Now if your target is behind light cover, remember that certain weapons can penetrate and hit your target.	
   level.scr_sound["foley"]["train_fly_lightcover"] = "train_fly_lightcover";
@@ -536,8 +519,7 @@ dialogue() {
   //Sgt. Foley	training	Private Allen, hit the target through the wood panel.	
   level.scr_sound["foley"]["nag_penetration_fire_02"] = "train_fly_allenwoodpanel";
 
-  /*-----------------------
-  FRAG TRAINING
+  /*----------------------- FRAG TRAINING
   -------------------------*/
   //Sgt. Foley	training	Last but not least, you need to know how to toss a frag grenade.	
   level.scr_sound["foley"]["train_fly_tossafrag"] = "train_fly_tossafrag";
@@ -563,8 +545,7 @@ dialogue() {
   //Afghan Translator	This soldier here will throw a grenade to take out several targets at once.	
   level.scr_sound["translator"]["train_fly_grenadedownrange"] = "train_aft_grenadedownrange";
 
-  /*-----------------------
-  FOLEY FRAG NAGS
+  /*----------------------- FOLEY FRAG NAGS
   -------------------------*/
   //****TODO - REPLACE WITH REAL DIALOGUE
   //Sgt. Foley Let's go, Private. Pick up some of the frag grenades from the table
@@ -589,8 +570,7 @@ dialogue() {
   //Sgt. Foley	Good.	
   level.scr_sound["foley"]["train_fly_good"] = "train_fly_good";
 
-  /*-----------------------
-  GET TO OBJECTIVE
+  /*----------------------- GET TO OBJECTIVE
   -------------------------*/
   //Sgt. Foley	training	Thanks for the help, Private Allen. Now get over to The Pit...Colonel Shepherd wants to see you run the course.	
   level.scr_sound["foley"]["train_fly_thanksforhelp"] = "train_fly_thanksforhelp";
@@ -601,8 +581,7 @@ dialogue() {
   //Afghan Translator	All right, who here wants to go first? Show me what you've learned so far.	
   level.scr_sound["translator"]["train_fly_gofirst"] = "train_aft_gofirst";
 
-  /*-----------------------
-  CQB COURSE
+  /*----------------------- CQB COURSE
   -------------------------*/
 
   //Cpl. Dunn	training	Hey Private. Welcome back to The Pit. 	
@@ -639,8 +618,7 @@ dialogue() {
   //Cpl. Dunn	Smile for the cameras and don't miss.. Shepard and the rest of the brass are scouting for a shooter for some special op.	
   level.scr_sound["dunn"]["train_cpd_smileforcameras"] = "train_cpd_smileforcameras";
 
-  /*-----------------------
-  GET INTO THE PIT NAGS
+  /*----------------------- GET INTO THE PIT NAGS
   -------------------------*/
   //Cpl. Dunn	Ok, head on in. Timer starts as soon as the first target pops.	
   level.scr_sound["dunn"]["train_cpd_timerstarts"] = "train_cpd_timerstarts";
@@ -668,8 +646,7 @@ dialogue() {
   //Cpl. Dunn	<sigh, sentiment is 'same shit different day/what else is new > 	
   level.scr_sound["dunn"]["train_cpd_sigh"] = "train_cpd_sigh";
 
-  /*-----------------------
-  PIT DIALOGUE
+  /*----------------------- PIT DIALOGUE
   -------------------------*/
   //Cpl. Dunn	Clear the area!
   level.scr_radio["train_cpd_clearthearea"] = "train_cpd_clearthearea";
@@ -716,8 +693,7 @@ dialogue() {
   //Cpl. Dunn	training	Sprint to the exit! Clock's ticking!	
   level.scr_radio["train_cpd_sprint"] = "train_cpd_sprint";
 
-  /*-----------------------
-  DUNN MELEE NAGS
+  /*----------------------- DUNN MELEE NAGS
   -------------------------*/
 
   //Cpl. Dunn	training	Melee with your knife!	
@@ -735,8 +711,7 @@ dialogue() {
   //Cpl. Dunn Use your knife!
   level.scr_radio["melee_nag_04"] = "train_cpd_useyourknife";
 
-  /*-----------------------
-  DUNN ADS NAGS
+  /*----------------------- DUNN ADS NAGS
   -------------------------*/
   //Cpl. Dunn Stop firing from the hip! Aim down your sights!	
   level.scr_radio["pit_ads_nag_00"] = "train_cpd_stopfiringfromhip";
@@ -750,8 +725,7 @@ dialogue() {
   //Cpl. Dunn Stop firing from the hip! Aim down your sights!	
   //level.scr_radio[ "pit_ads_nag_02" ] = "train_cpd_stopfiringfromhip2";
 
-  /*-----------------------
-  DUNN MOVE FORWARD NAGS
+  /*----------------------- DUNN MOVE FORWARD NAGS
   -------------------------*/
 
   //Cpl. Dunn	Move! This is a timed course!
@@ -769,8 +743,7 @@ dialogue() {
   //Cpl. Dunn Let's go! Move up! This is a timed course, Private
   level.scr_radio["nag_hurry_04"] = "train_cpd_timedcourse2";
 
-  /*-----------------------
-  DUNN SPRINT NAGS - FAIL, TRY AGAIN
+  /*----------------------- DUNN SPRINT NAGS - FAIL, TRY AGAIN
   -------------------------*/
 
   //Cpl. Dunn You need to sprint to complete the course. Go back to the red circle and try again
@@ -785,8 +758,7 @@ dialogue() {
   //Cpl. Dunn You can't finish till you sprint, Allen. Go back to the red circle and sprint to the end.
   level.scr_radio["nag_didnt_sprint_03"] = "train_cpd_cantfinishsprint";
 
-  /*-----------------------
-  DUNN SPRINT NAGS - GO GO GO
+  /*----------------------- DUNN SPRINT NAGS - GO GO GO
   -------------------------*/
   //Cpl. Dunn Go! Sprint to the exit!
   level.scr_radio["nag_sprint_00"] = "train_cpd_sprinttoexit";
@@ -800,8 +772,7 @@ dialogue() {
   //Cpl. Dunn Now sprint to the exit! Move! Move! Move!
   level.scr_radio["nag_sprint_03"] = "train_cpd_nowsprint";
 
-  /*-----------------------
-  END OF PIT DIALOGUE
+  /*----------------------- END OF PIT DIALOGUE
   -------------------------*/
   //Cpl. Dunn	You took out too many targets with your knife. Try again, this time, with bullets.	
   level.scr_sound["dunn"]["train_cpd_targetswithknife"] = "train_cpd_targetswithknife";
@@ -833,8 +804,7 @@ dialogue() {
   level.scr_sound["dunn"]["train_cpd_runagain"] = "train_cpd_runagain";
   level.scr_face["dunn"]["train_cpd_runagain"] = % train_cpd_runagain;
 
-  /*-----------------------
-  END OF PIT DIFFICULTY SELECTION
+  /*----------------------- END OF PIT DIFFICULTY SELECTION
   -------------------------*/
 
   //EASY
@@ -885,8 +855,7 @@ dialogue() {
   level.scr_sound["dunn"]["end_of_course_vet_02"] = "train_cpd_amazingwork";
   level.scr_face["dunn"]["end_of_course_vet_02"] = % train_cpd_amazingwork;
 
-  /*-----------------------
-  ENDING SEQUENCE
+  /*----------------------- ENDING SEQUENCE
   -------------------------*/
   //Overlord (HQ Radio)	training	All Hunter units, get to your victors. We're headed out.	
   level.scr_radio["train_hqr_headedout"] = "train_hqr_headedout";
@@ -936,8 +905,7 @@ dialogue() {
   //Nobody can tell if your high if you're wearing shades, that's the whole point of shades.	
   //level.scr_sound[ "conversation_xx" ][ xx ] = "train_ar4_shades";		
 
-  /*-----------------------
-  RANDOM CONVERSATIONS #1
+  /*----------------------- RANDOM CONVERSATIONS #1
   -------------------------*/
   //Ranger 3	training	14	3	Hey man, you get the word? Boon bugged out.	
   level.scr_sound["conversation_01"][0] = "train_ar3_boonbugged";
@@ -1017,8 +985,7 @@ dialogue() {
   //Nah, these guys were like kids most of them… they're like.. You know, shooting their neighbors and then all of a sudden they want to be policemen.It's ridiculous.	
   level.scr_sound["conversation_01"][25] = "train_ar4_ridiculous";
 
-  /*-----------------------
-  RANDOM CONVERSATIONS #2
+  /*----------------------- RANDOM CONVERSATIONS #2
   -------------------------*/
 
   //Ranger 1	training	14	21	No ammo, no armor.	
@@ -1117,8 +1084,7 @@ dialogue() {
   //I swear to god I am crapping sand now.	
   level.scr_sound["conversation_02"][31] = "train_ar4_crapsand";
 
-  /*-----------------------
-  RANDOM CONVERSATIONS #3
+  /*----------------------- RANDOM CONVERSATIONS #3
   -------------------------*/
 
   //Ranger 5	training	14	50	Anyone see the grease for the Mark 19 turret? I'm trying to fix the turret ring.	
@@ -1245,7 +1211,6 @@ model_anims() {
     tarp assign_animtree();
     tarp.animent thread anim_loop_solo(tarp, "training_camo_tarp_wind", "stop_loop");
   }
-
 }
 
 #using_animtree("animated_props");

@@ -36,11 +36,13 @@ init(getupallowed) {
   level.primaryprogressbarheight = 4;
   level.primaryprogressbarwidth = 120;
 
-  if(issplitscreen())
+  if(issplitscreen()) {
     level.primaryprogressbary = 280;
+  }
 
-  if(getdvar(#"_id_A17166B0") == "")
-    setdvar("revive_trigger_radius", "40");
+  if(getDvar(#"_id_A17166B0") == "") {
+    setDvar("revive_trigger_radius", "40");
+  }
 
   level.laststandgetupallowed = 0;
 
@@ -60,8 +62,9 @@ player_num_in_laststand() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i] player_is_in_laststand())
+    if(players[i] player_is_in_laststand()) {
       num++;
+    }
   }
 
   return num;
@@ -77,8 +80,9 @@ player_any_player_in_laststand() {
 
 playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
   if(smeansofdeath == "MOD_CRUSH") {
-    if(self player_is_in_laststand())
+    if(self player_is_in_laststand()) {
       self mission_failed_during_laststand(self);
+    }
 
     return;
   }
@@ -89,11 +93,12 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
   self.downs++;
   self.stats["downs"] = self.downs;
   dvarname = "player" + self getentitynumber() + "downs";
-  setdvar(dvarname, self.downs);
+  setDvar(dvarname, self.downs);
   self allowjump(0);
 
-  if(isDefined(level.playerlaststand_func))
+  if(isDefined(level.playerlaststand_func)) {
     [[level.playerlaststand_func]](einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
+  }
 
   if(!laststand_allowed(sweapon, smeansofdeath, shitloc)) {
     self mission_failed_during_laststand(self);
@@ -112,10 +117,11 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
   self laststand_give_pistol();
   self.ignoreme = 1;
 
-  if(level.laststandgetupallowed)
+  if(level.laststandgetupallowed) {
     self thread laststand_getup();
-  else
+  } else {
     self thread laststand_bleedout(getdvarfloat(#"player_lastStandBleedoutTime"));
+  }
 
   self notify("player_downed");
   self thread refire_player_downed();
@@ -126,16 +132,19 @@ refire_player_downed() {
   self endon("death");
   wait 1.0;
 
-  if(self.num_perks)
+  if(self.num_perks) {
     self notify("player_downed");
+  }
 }
 
 laststand_allowed(sweapon, smeansofdeath, shitloc) {
-  if(smeansofdeath != "MOD_PISTOL_BULLET" && smeansofdeath != "MOD_RIFLE_BULLET" && smeansofdeath != "MOD_HEAD_SHOT" && smeansofdeath != "MOD_MELEE" && smeansofdeath != "MOD_BAYONET" && smeansofdeath != "MOD_GRENADE" && smeansofdeath != "MOD_GRENADE_SPLASH" && smeansofdeath != "MOD_PROJECTILE" && smeansofdeath != "MOD_PROJECTILE_SPLASH" && smeansofdeath != "MOD_EXPLOSIVE" && smeansofdeath != "MOD_BURNED")
+  if(smeansofdeath != "MOD_PISTOL_BULLET" && smeansofdeath != "MOD_RIFLE_BULLET" && smeansofdeath != "MOD_HEAD_SHOT" && smeansofdeath != "MOD_MELEE" && smeansofdeath != "MOD_BAYONET" && smeansofdeath != "MOD_GRENADE" && smeansofdeath != "MOD_GRENADE_SPLASH" && smeansofdeath != "MOD_PROJECTILE" && smeansofdeath != "MOD_PROJECTILE_SPLASH" && smeansofdeath != "MOD_EXPLOSIVE" && smeansofdeath != "MOD_BURNED") {
     return false;
+  }
 
-  if(level.laststandpistol == "none")
+  if(level.laststandpistol == "none") {
     return false;
+  }
 
   return true;
 }
@@ -168,27 +177,30 @@ laststand_disable_player_weapons() {
     }
   }
 
-  if(!isDefined(self.laststandpistol))
+  if(!isDefined(self.laststandpistol)) {
     self.laststandpistol = level.laststandpistol;
+  }
 
   self disableweaponcycling();
   self disableoffhandweapons();
 }
 
 laststand_enable_player_weapons() {
-  if(!self.hadpistol)
+  if(!self.hadpistol) {
     self takeweapon(self.laststandpistol);
+  }
 
   self enableweaponcycling();
   self enableoffhandweapons();
 
-  if(self.lastactiveweapon != "none" && self.lastactiveweapon != "mortar_round" && self.lastactiveweapon != "mine_bouncing_betty" && self.lastactiveweapon != "claymore_zm" && self.lastactiveweapon != "spikemore_zm")
+  if(self.lastactiveweapon != "none" && self.lastactiveweapon != "mortar_round" && self.lastactiveweapon != "mine_bouncing_betty" && self.lastactiveweapon != "claymore_zm" && self.lastactiveweapon != "spikemore_zm") {
     self switchtoweapon(self.lastactiveweapon);
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
-    if(isDefined(primaryweapons) && primaryweapons.size > 0)
+    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
+    }
   }
 }
 
@@ -196,14 +208,17 @@ laststand_clean_up_on_disconnect(playerbeingrevived, revivergun) {
   revivetrigger = playerbeingrevived.revivetrigger;
   playerbeingrevived waittill("disconnect");
 
-  if(isDefined(revivetrigger))
+  if(isDefined(revivetrigger)) {
     revivetrigger delete();
+  }
 
-  if(isDefined(self.reviveprogressbar))
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar destroyelem();
+  }
 
-  if(isDefined(self.revivetexthud))
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
+  }
 
   self revive_give_back_weapons(revivergun);
 }
@@ -234,17 +249,18 @@ laststand_bleedout(delay) {
     wait 1;
   }
 
-  while(self.revivetrigger.beingrevived == 1)
+  while(self.revivetrigger.beingrevived == 1) {
     wait 0.1;
+  }
 
   self notify("bled_out");
   wait_network_frame();
   setclientsysstate("lsm", "0", self);
   level notify("bleed_out", self getentitynumber());
 
-  if(isDefined(level.is_specops_level) && level.is_specops_level)
+  if(isDefined(level.is_specops_level) && level.is_specops_level) {
     self thread[[level.spawnspectator]]();
-  else {
+  } else {
     self.ignoreme = 0;
     self mission_failed_during_laststand(self);
   }
@@ -315,43 +331,53 @@ revive_give_back_weapons(gun) {
   if(self player_is_in_laststand()) {
     return;
   }
-  if(gun != "none" && gun != "mine_bouncing_betty" && gun != "claymore_zm" && gun != "spikemore_zm" && gun != "equip_gasmask_zm" && gun != "lower_equip_gasmask_zm" && self hasweapon(gun))
+  if(gun != "none" && gun != "mine_bouncing_betty" && gun != "claymore_zm" && gun != "spikemore_zm" && gun != "equip_gasmask_zm" && gun != "lower_equip_gasmask_zm" && self hasweapon(gun)) {
     self switchtoweapon(gun);
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
-    if(isDefined(primaryweapons) && primaryweapons.size > 0)
+    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
+    }
   }
 }
 
 can_revive(revivee) {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
+  }
 
-  if(self player_is_in_laststand())
+  if(self player_is_in_laststand()) {
     return false;
+  }
 
-  if(isDefined(self.current_equipment_active) && isDefined(self.current_equipment_active["equip_hacker_zm"]) && self.current_equipment_active["equip_hacker_zm"])
+  if(isDefined(self.current_equipment_active) && isDefined(self.current_equipment_active["equip_hacker_zm"]) && self.current_equipment_active["equip_hacker_zm"]) {
     return false;
+  }
 
-  if(!isDefined(revivee.revivetrigger))
+  if(!isDefined(revivee.revivetrigger)) {
     return false;
+  }
 
-  if(!self istouching(revivee.revivetrigger))
+  if(!self istouching(revivee.revivetrigger)) {
     return false;
+  }
 
-  if(revivee depthinwater() > 10)
+  if(revivee depthinwater() > 10) {
     return true;
+  }
 
-  if(!self is_facing(revivee))
+  if(!self is_facing(revivee)) {
     return false;
+  }
 
-  if(!sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined))
+  if(!sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined)) {
     return false;
+  }
 
-  if(!bullettracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined))
+  if(!bullettracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined)) {
     return false;
+  }
 
   return true;
 }
@@ -376,8 +402,9 @@ revive_do_revive(playerbeingrevived, revivergun) {
   assert(self is_reviving(playerbeingrevived));
   revivetime = 3;
 
-  if(self hasperk("specialty_quickrevive"))
+  if(self hasperk("specialty_quickrevive")) {
     revivetime = revivetime / 2;
+  }
 
   timer = 0;
   revived = 0;
@@ -387,11 +414,13 @@ revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived.revivetrigger sethintstring("");
   playerbeingrevived startrevive(self);
 
-  if(!isDefined(self.reviveprogressbar))
+  if(!isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar = self createprimaryprogressbar();
+  }
 
-  if(!isDefined(self.revivetexthud))
+  if(!isDefined(self.revivetexthud)) {
     self.revivetexthud = newclienthudelem(self);
+  }
 
   self thread laststand_clean_up_on_disconnect(playerbeingrevived, revivergun);
   self.reviveprogressbar updatebar(0.01, 1 / revivetime);
@@ -401,8 +430,9 @@ revive_do_revive(playerbeingrevived, revivergun) {
   self.revivetexthud.vertalign = "bottom";
   self.revivetexthud.y = -113;
 
-  if(issplitscreen())
+  if(issplitscreen()) {
     self.revivetexthud.y = -107;
+  }
 
   self.revivetexthud.foreground = 1;
   self.revivetexthud.font = "default";
@@ -429,14 +459,17 @@ revive_do_revive(playerbeingrevived, revivergun) {
     }
   }
 
-  if(isDefined(self.reviveprogressbar))
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar destroyelem();
+  }
 
-  if(isDefined(self.revivetexthud))
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
+  }
 
-  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived)
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
     playerbeingrevived stoprevive(self);
+  }
 
   playerbeingrevived.revivetrigger sethintstring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
   playerbeingrevived.revivetrigger.beingrevived = 0;
@@ -462,8 +495,9 @@ auto_revive(reviver) {
 
   self reviveplayer();
 
-  if(isDefined(self.premaxhealth))
+  if(isDefined(self.premaxhealth)) {
     self setmaxhealth(self.premaxhealth);
+  }
 
   setclientsysstate("lsm", "0", self);
   self notify("stop_revive_trigger");
@@ -489,8 +523,9 @@ revive_success(reviver) {
   self notify("player_revived", reviver);
   self reviveplayer();
 
-  if(isDefined(self.premaxhealth))
+  if(isDefined(self.premaxhealth)) {
     self setmaxhealth(self.premaxhealth);
+  }
 
   reviver.revives++;
   reviver.stats["revives"] = reviver.revives;
@@ -506,7 +541,7 @@ revive_success(reviver) {
 
 revive_force_revive(reviver) {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(self player_is_in_laststand());
   self thread revive_success(reviver);
 }
@@ -542,8 +577,9 @@ revive_hud_think() {
       if(!players[i] player_is_in_laststand() || !isDefined(players[i].revivetrigger.createtime)) {
         continue;
       }
-      if(!isDefined(playertorevive) || playertorevive.revivetrigger.createtime > players[i].revivetrigger.createtime)
+      if(!isDefined(playertorevive) || playertorevive.revivetrigger.createtime > players[i].revivetrigger.createtime) {
         playertorevive = players[i];
+      }
     }
 
     if(isDefined(playertorevive)) {
@@ -551,9 +587,10 @@ revive_hud_think() {
         if(players[i] player_is_in_laststand()) {
           continue;
         }
-        if(getdvar(#"g_gametype") == "vs") {
-          if(players[i].team != playertorevive.team)
+        if(getDvar(#"g_gametype") == "vs") {
+          if(players[i].team != playertorevive.team) {
             continue;
+          }
         }
 
         players[i] thread faderevivemessageover(playertorevive, 3.0);
@@ -595,7 +632,6 @@ drawcylinder(pos, rad, height) {
     line(pos + (cos(theta) * currad, sin(theta) * currad, curheight), pos + (cos(theta2) * currad, sin(theta2) * currad, curheight));
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta) * currad, sin(theta) * currad, curheight));
   }
-
 }
 
 mission_failed_during_laststand(dead_player) {
@@ -613,7 +649,6 @@ mission_failed_during_laststand(dead_player) {
       }
 
       println("Player #" + i + " is alive");
-
     }
   }
 
@@ -625,16 +660,18 @@ ai_laststand_on_death() {
   self waittill("death", attacker, type, weapon);
   revive_kill = 0;
 
-  if(isDefined(weapon) && isDefined(attacker) && isalive(attacker) && isplayer(attacker) && attacker player_is_in_laststand()) {
+  if(isDefined(weapon) && isDefined(attacker) && isalive(attacker) && isPlayer(attacker) && attacker player_is_in_laststand()) {
     if(isDefined(level.coop_incap_weapon)) {
-      if(level.coop_incap_weapon == weapon)
+      if(level.coop_incap_weapon == weapon) {
         revive_kill = 1;
+      }
     } else if(weaponclass(weapon) == "pistol")
       revive_kill = 1;
   }
 
-  if(revive_kill)
+  if(revive_kill) {
     attacker auto_revive(attacker);
+  }
 }
 
 laststand_can_pick_self_up() {
@@ -644,8 +681,9 @@ laststand_can_pick_self_up() {
 get_lives_remaining() {
   assert(level.laststandgetupallowed, "Lives only exist in the Laststand type GETUP.");
 
-  if(level.laststandgetupallowed && isDefined(self.laststand_info) && isDefined(self.laststand_info.type_getup_lives))
+  if(level.laststandgetupallowed && isDefined(self.laststand_info) && isDefined(self.laststand_info.type_getup_lives)) {
     return max(0, self.laststand_info.type_getup_lives);
+  }
 
   return 0;
 }
@@ -689,8 +727,9 @@ laststand_getup_damage_watcher() {
     self waittill("damage");
     self.laststand_info.getup_bar_value = self.laststand_info.getup_bar_value - level.const_laststand_getup_bar_damage;
 
-    if(self.laststand_info.getup_bar_value < 0)
+    if(self.laststand_info.getup_bar_value < 0) {
       self.laststand_info.getup_bar_value = 0;
+    }
   }
 }
 

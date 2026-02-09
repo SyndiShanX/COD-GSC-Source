@@ -77,9 +77,9 @@ main() {
   level.player setviewmodel("viewhands_gs_jungle_b");
   thread maps\jungle_ghosts_jungle::jungle_moving_foliage_settings();
   setsaveddvar("cg_foliagesnd_alias", "plyr_wet_foliage_mvmnt");
-  setdvar("ads_dof_tracedist", 2048);
+  setDvar("ads_dof_tracedist", 2048);
   common_scripts\utility::trigger_off("river_slide_trig", "targetname");
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
   thread maps\jungle_ghosts_jungle::motion_tracker_setup();
   createthreatbiasgroup("friendly_squad");
   createthreatbiasgroup("chopper_guys");

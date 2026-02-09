@@ -234,10 +234,11 @@ createfx_setup() {
   maps\karma_anim::spiderbot_anims();
   maps\karma_anim::construction_anims();
   maps\karma_anim::club_anims();
-  level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
+  level.skipto_point = tolower(getDvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "")
+  if(level.skipto_point == "") {
     level.skipto_point = "arrival";
+  }
 
   maps\karma::load_gumps_karma();
 }

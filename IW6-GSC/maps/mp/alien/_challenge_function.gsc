@@ -68,7 +68,6 @@ init_challenge_type() {
     register_challenge("challenge_failed", undefined, false, undefined, undefined, ::default_resetSuccess, ::default_resetSuccess, undefined, undefined);
     register_challenge("challenge_success", undefined, false, undefined, undefined, ::default_resetSuccess, ::default_resetSuccess, undefined, undefined);
     register_challenge("barrier_hive", undefined, false, undefined, undefined, ::default_resetSuccess, ::default_resetSuccess, undefined, undefined);
-
   }
   init_alien_challenges_from_table();
 
@@ -145,7 +144,6 @@ init_alien_challenges_from_table() {
     level.challenge_data[challengeID].allowedinsolo = int(tablelookup(CHALLENGE_TABLE, TABLE_INDEX, entryIndex, TABLE_ALLOWEDINSOLO));
     level.challenge_data[challengeID].allowed_hives = allowed_hives;
   }
-
 }
 
 default_canActivateFunc() {
@@ -231,7 +229,6 @@ leper_watch_death() {
   self waittill("death", attacker, cause, weapon);
   if(isDefined(attacker) && (isPlayer(attacker) || isDefined(attacker.classname) && attacker.classname == "misc_turret" && isDefined(attacker.owner) && attacker.owner IsUsingTurret())) {
     maps\mp\alien\_challenge::update_challenge("kill_leper", "success");
-
   } else {
     maps\mp\alien\_challenge::update_challenge("kill_leper", "fail");
   }
@@ -630,7 +627,6 @@ update_pistols_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused
     self.success = true;
     maps\mp\alien\_challenge::deactivate_current_challenge();
   }
-
 }
 
 update_shotguns_only(weapon, sMeansOfDeath, arc_death, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9) {
@@ -964,7 +960,7 @@ update_alien_damage_challenge(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfD
   if(!isDefined(level.current_challenge)) {
     return;
   }
-  if(level.current_challenge == "melee_only" && sMeansOfDeath != "MOD_MELEE" && !is_flaming_stowed_riotshield_damage(sMeansOfDeath, sWeapon, eInflictor) && IsPlayer(eAttacker)) {
+  if(level.current_challenge == "melee_only" && sMeansOfDeath != "MOD_MELEE" && !is_flaming_stowed_riotshield_damage(sMeansOfDeath, sWeapon, eInflictor) && isPlayer(eAttacker)) {
     maps\mp\alien\_challenge::update_challenge("melee_only");
   }
 
@@ -1060,7 +1056,6 @@ update_alien_weapon_challenges(weapon, sMeansOfDeath) {
     default:
       return;
   }
-
 }
 
 update_challenge_progress(current_val, max_val) {
@@ -1282,7 +1277,6 @@ default_challenge_scalar_func(challenge_name) {
         case 4:
           return 15;
       }
-
   }
   return undefined;
 }

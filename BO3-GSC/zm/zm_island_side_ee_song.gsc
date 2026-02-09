@@ -193,7 +193,7 @@ function function_cd6c47c5() {
 function function_f86f94db() {
   while(true) {
     self waittill("damage", damage, attacker, dir, loc, str_type, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(str_type) && str_type != "MOD_MELEE") {

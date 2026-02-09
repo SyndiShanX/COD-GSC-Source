@@ -178,7 +178,7 @@ mission_music() {
     case "powerstealth":
     case "factory_ingress":
     case "intro_train":
-      if(getdvar("music_enable") == "1")
+      if(getDvar("music_enable") == "1")
         maps\_utility::music_play("mus_factory_powerstealth");
 
       common_scripts\utility::flag_wait("powerstealth_end");

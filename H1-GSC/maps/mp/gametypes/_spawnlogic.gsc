@@ -508,13 +508,13 @@ updateactiveplayerlist() {
   foreach(var_4 in level.characters) {
     var_4.isactiveplayer = 0;
 
-    if(isplayer(var_4) && var_2 && (var_4.sessionstate == "playing" || var_4.sessionstate == "dead"))
+    if(isPlayer(var_4) && var_2 && (var_4.sessionstate == "playing" || var_4.sessionstate == "dead"))
       level.active_ffa_players++;
 
     if(!maps\mp\_utility::isreallyalive(var_4)) {
       continue;
     }
-    if(isplayer(var_4) && var_4.sessionstate != "playing") {
+    if(isPlayer(var_4) && var_4.sessionstate != "playing") {
       continue;
     }
     var_4.spawnlogicteam = getspawnteam(var_4);

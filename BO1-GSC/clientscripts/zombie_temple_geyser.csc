@@ -1,6 +1,6 @@
 /**************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_temple_geyser.csc
+ * Script: clientscripts\zombie_temple_geyser\.csc
 **************************************************/
 
 #include clientscripts\_utility;
@@ -12,7 +12,6 @@ main() {
   register_clientflag_callback("player", level._CF_PLAYER_GEYSER_FAKE_PLAYER_SETUP_PRONE, ::geyser_player_setup_prone);
   register_clientflag_callback("player", level._CF_PLAYER_GEYSER_FAKE_PLAYER_SETUP_STAND, ::geyser_player_setup_stand);
 }
-
 #using_animtree("zombie_coast");
 init_player_geyser_anims() {
   level.geyser_anims = [];
@@ -20,18 +19,17 @@ init_player_geyser_anims() {
   level.geyser_anims["player_geyser_prone"] = % pb_rifle_prone_flinger_flail;
   level.geyser_animtree = #animtree;
 }
-
 #using_animtree("zombie_coast");
 geyser_player_setup_prone(localClientNum, set, newEnt) {
   if(self isspectating()) {
     return;
   }
-  player = getLocalPlayers()[localClientNum];
-  if(player getEntityNumber() == self getEntityNumber()) {
+  player = getlocalplayers()[localClientNum];
+  if(player GetEntityNumber() == self GetEntityNumber()) {
     if(set) {
-      self playRumbleOnEntity(localClientNum, "slide_rumble");
+      self PlayRumbleOnEntity(localClientNum, "slide_rumble");
     } else {
-      self stopRumble(localClientNum, "slide_rumble");
+      self StopRumble(localClientNum, "slide_rumble");
     }
     return;
   }
@@ -78,18 +76,17 @@ geyser_player_setup_prone(localClientNum, set, newEnt) {
     self.fake_player[localClientNum] = undefined;
   }
 }
-
 #using_animtree("zombie_coast");
 geyser_player_setup_stand(localClientNum, set, newEnt) {
   if(self isspectating()) {
     return;
   }
-  player = getLocalPlayers()[localClientNum];
-  if(player getEntityNumber() == self getEntityNumber()) {
+  player = getlocalplayers()[localClientNum];
+  if(player GetEntityNumber() == self GetEntityNumber()) {
     if(set) {
-      self playRumbleOnEntity(localClientNum, "slide_rumble");
+      self PlayRumbleOnEntity(localClientNum, "slide_rumble");
     } else {
-      self stopRumble(localClientNum, "slide_rumble");
+      self StopRumble(localClientNum, "slide_rumble");
     }
     return;
   }
@@ -136,7 +133,6 @@ geyser_player_setup_stand(localClientNum, set, newEnt) {
     self.fake_player[localClientNum] = undefined;
   }
 }
-
 geyser_weapon_monitor(fake_weapon) {
   self endon("end_geyser");
   self endon("disconnect");
@@ -148,17 +144,15 @@ geyser_weapon_monitor(fake_weapon) {
     fake_weapon useweaponhidetags(self.weapon);
   }
 }
-
 player_disconnect_tracker() {
   self notify("stop_tracking");
   self endon("stop_tracking");
-  ent_num = self getEntityNumber();
+  ent_num = self GetEntityNumber();
   while(isDefined(self)) {
     wait(0.05);
   }
   level notify("player_disconnected", ent_num);
 }
-
 geyser_model_remover(str_endon, player) {
   player endon(str_endon);
   level waittill("player_disconnected", client);
@@ -167,7 +161,6 @@ geyser_model_remover(str_endon, player) {
   }
   self Delete();
 }
-
 wait_for_geyser_player_to_disconnect(localClientNum) {
   str_endon = "player_geyser" + localClientNum;
   self.fake_player[localClientNum] thread geyser_model_remover(str_endon, self);

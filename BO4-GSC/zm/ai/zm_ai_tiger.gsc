@@ -39,7 +39,6 @@ __init__() {
   if(!zm_score::function_e5ca5733(#"tiger")) {
     zm_score::function_e5d6e6dd(#"tiger", 60);
   }
-
 }
 
 __main__() {}
@@ -143,7 +142,7 @@ function_10687511(entity) {
 
   goalent = entity.favoriteenemy;
 
-  if(isplayer(goalent)) {
+  if(isPlayer(goalent)) {
     goalent = zm_ai_utility::function_a2e8fd7b(entity, entity.favoriteenemy);
   }
 

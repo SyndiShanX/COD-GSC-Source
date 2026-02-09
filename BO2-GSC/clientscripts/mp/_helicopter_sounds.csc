@@ -32,8 +32,8 @@ init() {
   init_heli_sound_values("heli_guard", "turbine", 10, 0.9, 1, 30, 0.9, 1.05);
   init_heli_sound_values("heli_guard", "rotor", 10, 0.9, 1, 30, 0.9, 1.1);
 
-  if(getdvar(#"_id_21D60E03") == "")
-    setdvar("helisounds", "");
+  if(getDvar(#"_id_21D60E03") == "")
+    setDvar("helisounds", "");
 
   level thread command_parser();
 }
@@ -71,12 +71,11 @@ init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, ma
     println("Init Heli Sounds min_pitch: " + min_pitch);
     println("Init Heli Sounds max_pitch: " + max_pitch);
   }
-
 }
 
 command_parser() {
   while(true) {
-    command = getdvar(#"_id_21D60E03");
+    command = getDvar(#"_id_21D60E03");
 
     if(command != "") {
       success = 1;
@@ -144,12 +143,11 @@ command_parser() {
         }
       }
 
-      setdvar("helisounds", "");
+      setDvar("helisounds", "");
     }
 
     wait 0.1;
   }
-
 }
 
 init_heli_sounds_gunner() {
@@ -321,10 +319,8 @@ start_helicopter_sounds(localclientnum) {
 
     if(getdvarint(#"_id_55AD9BED") > 0)
       iprintlnbold("helicopter type: " + self.vehicletype + " vehicletype");
-
   } else {
     println("^6start_helicopter_sounds(): helicopter type not defined");
-
   }
 }
 
@@ -440,7 +436,6 @@ heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
         println("^5a self.cur_speed = " + self.cur_speed);
         println("^5a run_volume. " + run_volume);
       }
-
     }
 
     wait(wait_time);

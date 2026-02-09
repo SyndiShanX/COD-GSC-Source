@@ -92,7 +92,7 @@ function_cd252d6e(e_attacker, w_weapon) {
   while(i <= 6) {
     self dodamage(var_70ab6bc, self.origin, e_attacker, undefined, "none", "MOD_AAT", 0, w_weapon);
 
-    if(!isalive(self) && isplayer(e_attacker)) {
+    if(!isalive(self) && isPlayer(e_attacker)) {
       e_attacker zm_stats::increment_challenge_stat(#"zombie_hunter_plasmatic_burst");
     }
 
@@ -133,7 +133,7 @@ zombie_death_gib(e_attacker, w_weapon) {
   gibserverutils::giblegs(self);
   self dodamage(self.health, self.origin, e_attacker, e_attacker, "none", "MOD_AAT", 0, w_weapon);
 
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     e_attacker zm_stats::increment_challenge_stat(#"zombie_hunter_plasmatic_burst");
   }
 }

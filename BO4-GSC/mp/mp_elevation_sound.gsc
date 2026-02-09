@@ -19,7 +19,7 @@ function_14f3a3c2() {
   while(true) {
     waitresult = trigger waittill(#"trigger");
 
-    if(isplayer(waitresult.activator)) {
+    if(isPlayer(waitresult.activator)) {
       trigger playSound("amb_dmg_bell");
     }
   }

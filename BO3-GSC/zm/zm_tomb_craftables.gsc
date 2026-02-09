@@ -117,7 +117,7 @@ function add_craftable_cheat(craftable) {
 }
 
 function autocraft_staffs() {
-  setdvar("autocraft_staffs", "off");
+  setDvar("autocraft_staffs", "off");
   adddebugcommand("");
   while(getdvarstring("autocraft_staffs") != "on") {
     util::wait_network_frame();
@@ -149,7 +149,7 @@ function autocraft_staffs() {
 
 function run_craftables_devgui() {
   level thread autocraft_staffs();
-  setdvar("", "");
+  setDvar("", "");
   while(true) {
     craftable_id = getdvarstring("");
     if(craftable_id != "") {
@@ -158,7 +158,7 @@ function run_craftables_devgui() {
         players = getplayers();
         players[0] zm_craftables::player_take_piece(piece_spawn);
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.05);
   }

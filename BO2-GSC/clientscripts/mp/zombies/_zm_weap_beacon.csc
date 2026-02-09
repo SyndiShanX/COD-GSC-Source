@@ -13,7 +13,7 @@ init() {
   level.beacon_name = "beacon_zm";
   level.beacon_model = "t6_wpn_zmb_homing_beacon_world";
 
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   if(!clientscripts\mp\zombies\_zm_weapons::is_weapon_included(level.beacon_name)) {

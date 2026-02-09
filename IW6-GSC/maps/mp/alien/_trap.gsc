@@ -277,7 +277,6 @@ fire_trap_think() {
 
     if(alien_mode_has("outline"))
       maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.barrel, self.cost);
-
   }
 }
 
@@ -341,7 +340,7 @@ fire_trap_burn(fire_start_loc) {
   while(true) {
     self.burn_trig waittill("trigger", victim);
 
-    if(!isDefined(victim) || !isReallyAlive(victim) || (!isplayer(victim) && !IsAgent(victim)) || (isDefined(victim.burning) && victim.burning)) {
+    if(!isDefined(victim) || !isReallyAlive(victim) || (!isPlayer(victim) && !IsAgent(victim)) || (isDefined(victim.burning) && victim.burning)) {
       continue;
     }
 
@@ -361,7 +360,7 @@ do_damage_over_time(victim) {
 
   victim.burning = true;
 
-  if(isplayer(victim)) {
+  if(isPlayer(victim)) {
     duration = self.damage_time_player;
     DoT = self.DoT_player;
   } else {
@@ -391,7 +390,7 @@ do_damage_until_timeout(damage, duration, interval, attacker) {
   while(elapsed_time < duration && isDefined(attacker.owner)) {
     attacker.owner.burning_victim = true;
 
-    if(isplayer(self))
+    if(isPlayer(self))
       self DoDamage(damage, self.origin, undefined, attacker.burn_trig);
     else if(isDefined(attacker) && isDefined(attacker.owner))
       self DoDamage(damage, self.origin, attacker.owner, attacker.burn_trig);
@@ -520,7 +519,7 @@ trap_shock(victim, damage_override, use_capacity) {
   wait 0.05;
 
   owner = self.owner;
-  if(isplayer(victim))
+  if(isPlayer(victim))
     owner = self.generator;
 
   if(isDefined(use_capacity) && use_capacity) {
@@ -674,7 +673,6 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
     self.generator stopLoopSound("alien_fence_gen_lp");
     self.generator playSound("alien_fence_gen_off");
     self.shock_trig stopLoopSound("alien_fence_hum_lp");
-
   }
 }
 
@@ -1191,7 +1189,6 @@ turret_monitorUse() {
         self thread monitor_player_use();
       } else {
         player setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
-
       }
     } else {
       self.owner = player;
@@ -1381,7 +1378,6 @@ clear_turret_ammo_counter_on_dismount(user) {
   if(user GetCurrentWeapon() == "none") {
     user thread restore_last_valid_weapon();
   }
-
 }
 
 restore_last_valid_weapon() {
@@ -1434,7 +1430,6 @@ monitor_flare_use() {
     else
       glowStick thread create_flare(level.spawnGlow["friendly"], self);
     self TakeWeapon("alienflare_mp");
-
   }
 }
 

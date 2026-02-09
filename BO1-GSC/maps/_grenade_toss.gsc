@@ -4,6 +4,7 @@
 **************************************/
 
 #using_animtree("generic_human");
+
 force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
   self endon("death");
   og_grenadeweapon = undefined;
@@ -20,7 +21,7 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
   }
   angles = VectorToAngles(pos - self.origin);
   self OrientMode("face angle", angles[1]);
-  if(distanceSquared(self.origin, pos) < 200 * 200) {
+  if(DistanceSquared(self.origin, pos) < 200 * 200) {
     return false;
   }
   self.force_grenade_throw_tag = throw_tag;
@@ -70,7 +71,6 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
   self notify("forced_grenade_thrown");
   return true;
 }
-
 force_grenade_toss_internal(guy) {
   guy MagicGrenade(guy GetTagOrigin(guy.force_grenade_throw_tag), guy.force_grenade_pos, guy.force_grenade_explod_time);
   guy.grenadeammo--;

@@ -17,7 +17,7 @@ autoexec __init__system__() {
 
 function_c3c9d0e5() {
   if(getdvarstring(#"scene_menu_mode", "<dev string:x38>") == "<dev string:x38>") {
-    setdvar(#"scene_menu_mode", "<dev string:x3b>");
+    setDvar(#"scene_menu_mode", "<dev string:x3b>");
   }
 
   level thread run_scene_tests();
@@ -42,7 +42,7 @@ run_scene_tests() {
     }
 
     if(str_scene != "<dev string:x38>") {
-      setdvar(#"run_client_scene", "<dev string:x38>");
+      setDvar(#"run_client_scene", "<dev string:x38>");
       clear_old_ents(str_scene);
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "<dev string:x49>");
@@ -71,7 +71,7 @@ run_scene_tests() {
     str_scene = getdvarstring(#"init_client_scene");
 
     if(str_scene != "<dev string:x38>") {
-      setdvar(#"init_client_scene", "<dev string:x38>");
+      setDvar(#"init_client_scene", "<dev string:x38>");
       clear_old_ents(str_scene);
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "<dev string:x49>");
@@ -91,7 +91,7 @@ run_scene_tests() {
     str_scene = getdvarstring(#"stop_client_scene");
 
     if(str_scene != "<dev string:x38>") {
-      setdvar(#"stop_client_scene", "<dev string:x38>");
+      setDvar(#"stop_client_scene", "<dev string:x38>");
       function_d2785094(level.var_a572f325);
       level stop(str_scene, 1);
     }
@@ -109,7 +109,7 @@ clear_old_ents(str_scene) {
 }
 
 toggle_scene_menu() {
-  setdvar(#"client_scene_menu", 0);
+  setDvar(#"client_scene_menu", 0);
   n_scene_menu_last = -1;
 
   while(true) {
@@ -132,7 +132,7 @@ toggle_scene_menu() {
             level flagsys::clear(#"hash_7b50fddf7a4b9e2e");
             level flagsys::clear(#"hash_5bcd66a9c21f5b2d");
             level notify(#"scene_menu_cleanup");
-            setdvar(#"cl_tacticalhud", 1);
+            setDvar(#"cl_tacticalhud", 1);
             break;
         }
 
@@ -165,7 +165,7 @@ display_scene_menu(str_type, str_scene) {
   level endon(#"scene_menu_cleanup");
   waittillframeend();
   level flagsys::set(#"menu_open");
-  setdvar(#"cl_tacticalhud", 0);
+  setDvar(#"cl_tacticalhud", 0);
   b_shot_menu = 0;
   a_scenedefs = get_scenedefs(str_type);
 
@@ -294,7 +294,7 @@ display_scene_menu(str_type, str_scene) {
         level thread display_scene_menu(str_type);
       } else {
         level.scene_menu_shot_index = selected;
-        setdvar(#"client_scene_menu", 0);
+        setDvar(#"client_scene_menu", 0);
       }
     }
 
@@ -308,7 +308,7 @@ display_scene_menu(str_type, str_scene) {
 
         level thread display_scene_menu(str_type);
       } else if(names[selected] == "<dev string:x128>") {
-        setdvar(#"client_scene_menu", 0);
+        setDvar(#"client_scene_menu", 0);
       } else if(b_shot_menu) {
         if(names[selected] == "<dev string:xa2>") {
           level.scene_menu_shot_index = selected;
@@ -319,13 +319,13 @@ display_scene_menu(str_type, str_scene) {
 
           level thread display_scene_menu(str_type);
         } else if(names[selected] == "<dev string:x9b>") {
-          setdvar(#"stop_client_scene", str_scene);
+          setDvar(#"stop_client_scene", str_scene);
         } else if(names[selected] == "<dev string:x8d>") {
-          setdvar(#"init_client_scene", str_scene);
+          setDvar(#"init_client_scene", str_scene);
         } else if(names[selected] == "<dev string:x94>") {
-          setdvar(#"run_client_scene", str_scene);
+          setDvar(#"run_client_scene", str_scene);
         } else {
-          setdvar(#"run_client_scene", str_scene + "<dev string:x45>" + names[selected]);
+          setDvar(#"run_client_scene", str_scene + "<dev string:x45>" + names[selected]);
         }
       }
 
@@ -440,13 +440,12 @@ function_3bafd088(var_a572f325) {
     var_a572f325.var_2640d68e = getdvarint(#"scr_show_shot_info_for_igcs", 0);
     var_a572f325.drawfps = getdvarint(#"cg_drawfps", 1);
     level.var_a572f325 = var_a572f325;
-    setdvar(#"hash_13d62f4d290ef671", 1);
-    setdvar(#"scr_show_shot_info_for_igcs", 1);
-    setdvar(#"cg_drawfps", 0);
+    setDvar(#"hash_13d62f4d290ef671", 1);
+    setDvar(#"scr_show_shot_info_for_igcs", 1);
+    setDvar(#"cg_drawfps", 0);
     adddebugcommand(0, "<dev string:x208>");
     wait 1;
   }
-
 }
 
 function_d2785094(var_a572f325) {
@@ -469,12 +468,11 @@ function_d2785094(var_a572f325) {
       }
     }
 
-    setdvar(#"hash_13d62f4d290ef671", drawbig);
-    setdvar(#"scr_show_shot_info_for_igcs", var_2640d68e);
-    setdvar(#"cg_drawfps", drawfps);
+    setDvar(#"hash_13d62f4d290ef671", drawbig);
+    setDvar(#"scr_show_shot_info_for_igcs", var_2640d68e);
+    setDvar(#"cg_drawfps", drawfps);
     adddebugcommand(0, "<dev string:x216>");
   }
-
 }
 
 test_play(arg1, arg2, str_mode) {
@@ -514,11 +512,7 @@ debug_display() {
         foreach(i, o_scene in self.scenes) {
           n_offset = 15 * (i + 1);
           print3d(self.origin - (0, 0, n_offset), o_scene._str_name, (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
-          print3d(self.origin - (0, 0, n_offset + 5), "<dev string:x22f>" + (isDefined([
-            [o_scene]
-          ] - > function_2ba44cd0()) ? "<dev string:x38>" + [
-            [o_scene]
-          ] - > function_2ba44cd0() : "<dev string:x38>") + "<dev string:x241>", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
+          print3d(self.origin - (0, 0, n_offset + 5), "<dev string:x22f>" + (isDefined([[o_scene]] - > function_2ba44cd0()) ? "<dev string:x38>" + [[o_scene]] - > function_2ba44cd0() : "<dev string:x38>") + "<dev string:x241>", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
           print3d(self.origin - (0, 0, n_offset + 10), "<dev string:x245>" + (isDefined(function_12479eba(o_scene._str_name)) ? "<dev string:x38>" + function_12479eba(o_scene._str_name) : "<dev string:x38>") + "<dev string:x257>", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
         }
       } else if(isDefined(self.scriptbundlename)) {

@@ -10,16 +10,18 @@
 start_shrimp_path(shrimp_effect, str_path_start, min_speed, max_speed, min_respawn_delay, max_respawn_delay, start_delay, str_kill_flag, activate_all_paths) {
   level endon("stop_shrimps");
 
-  if(isDefined(start_delay))
+  if(isDefined(start_delay)) {
     wait(start_delay);
+  }
 
   a_all_path_starts = getstructarray(str_path_start, "targetname");
   assert(isDefined(a_all_path_starts), "Shrimp missing start struct - " + str_path_start);
 
-  if(!isDefined(activate_all_paths))
+  if(!isDefined(activate_all_paths)) {
     only_one_path_required = randomint(a_all_path_starts.size);
-  else
+  } else {
     only_one_path_required = undefined;
+  }
 
   for(i = 0; i < a_all_path_starts.size; i++) {
     if(!isDefined(only_one_path_required) || only_one_path_required == i) {
@@ -34,8 +36,9 @@ _setup_shrimp_path(shrimp_effect, s_path_start, min_speed, max_speed, min_respaw
 
   while(true) {
     if(isDefined(str_kill_flag)) {
-      if(flag(str_kill_flag))
+      if(flag(str_kill_flag)) {
         return;
+      }
     }
 
     speed = randomfloatrange(min_speed, max_speed);
@@ -48,8 +51,9 @@ _setup_shrimp_path(shrimp_effect, s_path_start, min_speed, max_speed, min_respaw
 shrimp_move_down_spline(shrimp_effect, s_path_start, move_speed, start_delay, str_kill_flag) {
   level endon("stop_shrimps");
 
-  if(isDefined(start_delay))
+  if(isDefined(start_delay)) {
     wait(start_delay);
+  }
 
   e_move = spawn("script_model", s_path_start.origin);
   e_move setModel("tag_origin");

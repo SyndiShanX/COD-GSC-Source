@@ -34,7 +34,7 @@ precacheOrbital()
   level.drop_pod_effect["drop_pod_explode"] = LoadFX("vfx/explosion/orbital_drop_pod_explode");
   level.drop_pod_effect["drop_pod_spike_impact"] = LoadFX("vfx/weaponimpact/drop_pod_spike_impact");
 
-  current_level = GetDvar("mapname");
+  current_level = getDvar("mapname");
   switch (current_level) {
     case "mp_refraction":
       level.drop_pod_dome["friendly"] = LoadFX("vfx/unique/orbital_dome_friendly_ref");
@@ -67,12 +67,12 @@ initializeOribtalMode()
 
   level.forcerespawn_time = 15;
 
-  current_level = GetDvar("mapname");
+  current_level = getDvar("mapname");
 
   switch (current_level) {
     case "mp_refraction":
 
-      SetDvar("missileRemoteSteerPitchRange", "37 88");
+      setDvar("missileRemoteSteerPitchRange", "37 88");
 
       level.left_loop_start = getent("orbital_plane_left_loop_start", "targetname");
       level.left_big_loop_start = getent("orbital_plane_left_big_loop_start", "targetname");
@@ -121,7 +121,7 @@ initializeOribtalMode()
 
     default:
 
-      SetDvar("missileRemoteSteerPitchRange", "47 88");
+      setDvar("missileRemoteSteerPitchRange", "47 88");
 
       height_ent = getent("airstrikeheight", "targetname");
       minimap_origins = getEntArray("minimap_corner", "targetname");
@@ -623,7 +623,7 @@ linkPlayerOrbitalShip()
   static_length = 0.3;
   self thread setOrbitalView("ship", 0);
 
-  current_level = GetDvar("mapname");
+  current_level = getDvar("mapname");
 
   self DontInterpolate();
   switch (current_level) {

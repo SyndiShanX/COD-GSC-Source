@@ -18,7 +18,7 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_concert_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_concert");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
@@ -60,7 +60,7 @@ player_splash_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity) && isalive(entity))
+    if(isPlayer(entity) && isalive(entity))
       self thread trigger_thread(entity, ::player_water_fx);
   }
 }
@@ -79,7 +79,7 @@ water_trigger_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       entity playSound("mpl_splash_death");
       playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
     }

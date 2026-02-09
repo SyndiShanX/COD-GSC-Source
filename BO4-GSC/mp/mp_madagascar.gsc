@@ -19,7 +19,7 @@
 event_handler[level_init] main(eventstruct) {
   mp_madagascar_fx::main();
   mp_madagascar_sound::main();
-  setdvar(#"hash_3910a4196fe6b62e", 0);
+  setDvar(#"hash_3910a4196fe6b62e", 0);
   load::main();
   compass::setupminimap("");
   level.cleandepositpoints = array((1628.25, -356.25, 16), (1635, 2070, 187), (-1884.25, -156.75, -86.5), (463.25, 386.25, 196));

@@ -128,7 +128,7 @@ function function_f3127c4f() {
   level flagsys::wait_till("");
   wait(1);
   zm_devgui::add_custom_devgui_callback(&function_b6937313);
-  setdvar("", 0);
+  setDvar("", 0);
   adddebugcommand(("" + level.craftable_shield_equipment) + "");
   adddebugcommand(("" + level.craftable_shield_equipment) + "");
   adddebugcommand(("" + level.craftable_shield_equipment) + "");

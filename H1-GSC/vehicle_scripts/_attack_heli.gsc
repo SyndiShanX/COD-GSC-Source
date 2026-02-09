@@ -12,7 +12,7 @@ preload() {
 }
 
 attack_heli_fx() {
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
+  if(getdvarint("sm_enable") && getDvar("r_zfeather") != "0")
     level._effect["_attack_heli_spotlight"] = loadfx("fx\misc\hunted_spotlight_model");
   else
     level._effect["_attack_heli_spotlight"] = loadfx("fx\misc\spotlight_large");
@@ -486,7 +486,7 @@ heli_shoot_think() {
     if(!heli_has_target() || !heli_has_player_target()) {
       var_1 = heli_get_target_player_only();
 
-      if(isplayer(var_1))
+      if(isPlayer(var_1))
         self.etarget = var_1;
     }
 
@@ -496,7 +496,7 @@ heli_shoot_think() {
       if(self.etarget != var_2) {
         var_1 = heli_get_target_player_only();
 
-        if(isplayer(var_1))
+        if(isPlayer(var_1))
           self.etarget = var_1;
       }
     }
@@ -508,7 +508,7 @@ heli_shoot_think() {
       }
     }
 
-    if(isDefined(self.heli_lastattacker) && isplayer(self.heli_lastattacker))
+    if(isDefined(self.heli_lastattacker) && isPlayer(self.heli_lastattacker))
       self.etarget = self.heli_lastattacker;
     else if(!heli_has_target()) {
       var_1 = heli_get_target_ai_only();
@@ -538,10 +538,10 @@ heli_shoot_think() {
       continue;
     }
 
-    if(isplayer(self.etarget) || isai(self.etarget))
+    if(isPlayer(self.etarget) || isai(self.etarget))
       fire_guns();
 
-    if(isplayer(self.etarget))
+    if(isPlayer(self.etarget))
       thread player_grace_period(self);
 
     common_scripts\utility::waittill_notify_or_timeout("damage_by_player", level.attackhelitargetreaquire);
@@ -562,7 +562,7 @@ heli_can_see_target() {
 
   var_0 = self.etarget.origin + (0, 0, 32);
 
-  if(isplayer(self.etarget))
+  if(isPlayer(self.etarget))
     var_0 = self.etarget getEye();
 
   var_1 = self gettagorigin("tag_flash");
@@ -574,7 +574,7 @@ heli_has_player_target() {
   if(!isDefined(self.etarget))
     return 0;
 
-  if(isplayer(self.etarget))
+  if(isPlayer(self.etarget))
     return 1;
   else
     return 0;
@@ -596,7 +596,7 @@ heli_has_target() {
 heli_get_target() {
   var_0 = maps\_helicopter_globals::getenemytarget(level.attackhelirange, level.attackhelifov, 1, 1, 0, 1, level.attackheliexcluders);
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0))
     var_0 = self.targetdefault;
 
   if(!isDefined(var_0))
@@ -670,7 +670,7 @@ heli_missiles_think() {
     wait 0.05;
     self waittill("fire_missiles", var_7);
 
-    if(!isplayer(var_7)) {
+    if(!isPlayer(var_7)) {
       continue;
     }
     var_8 = var_7;
@@ -785,7 +785,7 @@ fire_guns() {
 getburstsize(var_0) {
   var_1 = undefined;
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_1 = level.attackheliaiburstsize;
     return var_1;
   }
@@ -807,7 +807,7 @@ fire_missiles(var_0) {
   self endon("heli_players_dead");
   wait(var_0);
 
-  if(!isplayer(self.etarget)) {
+  if(!isPlayer(self.etarget)) {
     return;
   }
   self notify("fire_missiles", self.etarget);
@@ -865,17 +865,17 @@ minigun_fire(var_0, var_1) {
   self endon("death");
   self endon("heli_players_dead");
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     self endon("cant_see_player");
 
   var_2 = get_turrets();
   common_scripts\utility::array_call(var_2, ::startfiring);
   wait(randomfloatrange(1, 2));
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     thread target_track(var_0);
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_3 = randomfloatrange(0.5, 3);
     thread fire_missiles(var_3);
   }
@@ -908,7 +908,7 @@ turret_minigun_target_track(var_0, var_1) {
   self notify("miniguns_have_new_target");
   self endon("miniguns_have_new_target");
 
-  if(!isplayer(var_0) && isai(var_0) && level.attackhelikillsai == 0) {
+  if(!isPlayer(var_0) && isai(var_0) && level.attackhelikillsai == 0) {
     var_2 = spawn("script_origin", var_0.origin + (0, 0, 100));
     var_2 linkto(var_0);
     thread minigun_ai_target_cleanup(var_2);
@@ -931,7 +931,7 @@ minigun_spindown(var_0) {
   self endon("heli_players_dead");
   self endon("firing_miniguns");
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     wait(randomfloatrange(3, 4));
   else
     wait(randomfloatrange(1, 2));
@@ -970,7 +970,7 @@ can_see_player(var_0) {
   var_1 = self gettagorigin("tag_flash");
   var_2 = (0, 0, 0);
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     var_2 = var_0 getEye();
   else
     var_2 = var_0.origin;
@@ -1013,7 +1013,7 @@ heli_damage_monitor() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isDefined(var_1) || !isplayer(var_1)) {
+    if(!isDefined(var_1) || !isPlayer(var_1)) {
       continue;
     }
     self notify("damage_by_player");
@@ -1065,7 +1065,7 @@ is_hidden_from_heli(var_0) {
 }
 
 updatedamagefeedbackhud() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self.hud_damagefeedback setshader("damage_feedback", 24, 48);
@@ -1075,7 +1075,7 @@ updatedamagefeedbackhud() {
 }
 
 updatedamagefeedbacksnd() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self playlocalsound("player_feedback_hit_alert");
@@ -1265,7 +1265,7 @@ within_player_fov() {
   if(!isDefined(self.etarget))
     return 0;
 
-  if(!isplayer(self.etarget))
+  if(!isPlayer(self.etarget))
     return 0;
 
   var_0 = self.etarget;

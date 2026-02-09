@@ -63,7 +63,7 @@ function explodable_barrel_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && (!isplayer(attacker) && (isDefined(attacker.classname) && attacker.classname != "worldspawn"))) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && (!isPlayer(attacker) && (isDefined(attacker.classname) && attacker.classname != "worldspawn"))) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {

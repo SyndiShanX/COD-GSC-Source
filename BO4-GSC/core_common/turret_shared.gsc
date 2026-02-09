@@ -240,7 +240,7 @@ _get_default_target_offset(e_target, n_index) {
 
   if(s_turret.str_weapon_type == "bullet") {
     if(isDefined(e_target)) {
-      if(isplayer(e_target)) {
+      if(isPlayer(e_target)) {
         z_offset = randomintrange(40, 50);
       } else if(e_target.type === "human") {
         z_offset = randomintrange(20, 60);
@@ -359,7 +359,6 @@ fire_for_time(n_time, n_index = 0) {
   } else {
     w_weapon = get_weapon(n_index);
     assert(n_time >= w_weapon.firetime, "<dev string:xa6>" + n_time + "<dev string:xb4>" + w_weapon.firetime);
-
   }
 
   while(n_time > 0 || b_fire_forever) {
@@ -541,7 +540,7 @@ _turret_think(n_index, v_offset) {
       }
 
       if(!(isDefined(s_turret.disable_ai_getoff) && s_turret.disable_ai_getoff)) {
-        bwasplayertarget = isDefined(s_turret.e_last_target) && s_turret.e_last_target.health > 0 && isplayer(s_turret.e_last_target);
+        bwasplayertarget = isDefined(s_turret.e_last_target) && s_turret.e_last_target.health > 0 && isPlayer(s_turret.e_last_target);
 
         if(bwasplayertarget) {
           occupy_time /= 4;
@@ -670,7 +669,7 @@ _check_for_paused(n_index) {
 _drop_turret(n_index, bexitifautomatedonly) {
   ai_user = get_user(n_index);
 
-  if(isalive(ai_user) && !isbot(ai_user) && !isplayer(ai_user) && (isDefined(ai_user.turret_auto_use) && ai_user.turret_auto_use || !(isDefined(bexitifautomatedonly) && bexitifautomatedonly))) {
+  if(isalive(ai_user) && !isbot(ai_user) && !isPlayer(ai_user) && (isDefined(ai_user.turret_auto_use) && ai_user.turret_auto_use || !(isDefined(bexitifautomatedonly) && bexitifautomatedonly))) {
     vehicle::get_out(self, ai_user, "gunner1");
   }
 }
@@ -721,7 +720,7 @@ _debug_turret_think(n_index) {
     if(isDefined(e_target)) {
       if(isactor(e_target)) {
         str_target += "<dev string:x161>";
-      } else if(isplayer(e_target)) {
+      } else if(isPlayer(e_target)) {
         str_target += "<dev string:x166>";
       } else if(isvehicle(e_target)) {
         str_target += "<dev string:x16f>";
@@ -999,7 +998,7 @@ trace_test(e_target, v_offset = (0, 0, 0), n_index) {
   v_start_org = self gettagorigin(s_turret.str_tag_pivot);
   v_target = e_target.origin + v_offset;
 
-  if((sessionmodeismultiplayergame() || sessionmodeiswarzonegame()) && isplayer(e_target)) {
+  if((sessionmodeismultiplayergame() || sessionmodeiswarzonegame()) && isPlayer(e_target)) {
     v_target = e_target getshootatpos();
   }
 
@@ -1040,7 +1039,7 @@ track_lens_flare() {
   while(true) {
     e_target = self turretgettarget(0);
 
-    if(self.turretontarget && isDefined(e_target) && isplayer(e_target)) {
+    if(self.turretontarget && isDefined(e_target) && isPlayer(e_target)) {
       if(isDefined(self gettagorigin("TAG_LASER"))) {
         e_target util::waittill_player_looking_at(self gettagorigin("TAG_LASER"), 90);
 

@@ -948,7 +948,7 @@ function function_c7c38164(str_endon = undefined) {
   }
   while(true) {
     self waittill("damage", n_amount, e_attacker);
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       self playSound("zmb_ee_rocketcrash_bell_imp_1");
       wait(0.1);
     }
@@ -1953,9 +1953,9 @@ function function_88e260d() {
 
 function function_d6026710() {
   level flag::init("");
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   level thread zm_castle_util::setup_devgui_func("", "", 1, &function_690690ef);
   level thread zm_castle_util::setup_devgui_func("", "", 1, &function_b1c42655);
   level thread zm_castle_util::setup_devgui_func("", "", 1, &function_dc5045eb);
@@ -2075,7 +2075,7 @@ function function_dd0c3214() {
 function function_b38b0751() {
   while(true) {
     if(getdvarint("") == 1) {
-      setdvar("", 0);
+      setDvar("", 0);
       var_747532f4 = getent("", "");
       var_747532f4 notify("keeper_charge");
       var_747532f4 notify("start_moving");
@@ -2109,13 +2109,13 @@ function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_valu
   if(!isDefined(n_base_value)) {
     n_base_value = -1;
   }
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   adddebugcommand(((((("" + str_devgui_path) + "") + str_dvar) + "") + n_value) + "");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }

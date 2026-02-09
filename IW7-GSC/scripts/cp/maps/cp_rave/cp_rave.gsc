@@ -4,17 +4,17 @@
 ***********************************************/
 
 main() {
-  setdvar("sm_sunSampleSizeNear", 0.705);
-  setdvar("r_volumetricsBulbAttenClamp", 250);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraAccurateOcclusionThreshold", 4000);
-  setdvar("sm_roundRobinPrioritySpotShadows", 8);
-  setdvar("sm_spotUpdateLimit", 8);
-  setdvar("groundPound_minActivateHeight", 32);
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("sm_sunSampleSizeNear", 0.705);
+  setDvar("r_volumetricsBulbAttenClamp", 250);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 4000);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
+  setDvar("groundPound_minActivateHeight", 32);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   level.blumberjackdebugger = getdvarint("debug_lumberjack", 0);
   level.bsasquatchdebugger = getdvarint("debug_sasquatch", 0);
   level.bsuperslasherdebugger = getdvarint("debug_superslasher", 0);
@@ -1287,7 +1287,7 @@ waitforplayerinput(var_0, var_1) {
 }
 
 rave_processenemykilledfunc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isplayer(var_1) && !scripts\engine\utility::istrue(var_1.has_rave_dust) && !isDefined(var_1.rave_dust_pouch)) {
+  if(isPlayer(var_1) && !scripts\engine\utility::istrue(var_1.has_rave_dust) && !isDefined(var_1.rave_dust_pouch)) {
     if((isDefined(var_1.setculldist) && var_1.setculldist % 20 == 0) || scripts\engine\utility::istrue(var_1.should_drop_pouch)) {
       var_1.should_drop_pouch = 1;
       var_10 = getclosestpointonnavmesh(var_9);
@@ -2114,7 +2114,7 @@ setup_slide() {
       continue;
     }
 
-    if(isplayer(var_1) && var_1 scripts\cp\utility::is_valid_player(1)) {
+    if(isPlayer(var_1) && var_1 scripts\cp\utility::is_valid_player(1)) {
       var_1.onslide = 1;
       var_1 thread player_down_slide(var_0);
     }
@@ -3561,7 +3561,7 @@ create_fire_damage_trigger(var_0, var_1, var_2) {
   level thread kill_ents_on_ravefx_death(var_0, var_1, var_2, var_3);
   for(;;) {
     var_3 waittill("trigger", var_4);
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
 
@@ -4000,7 +4000,7 @@ water_triggers() {
 water_trigger() {
   for(;;) {
     self waittill("trigger", var_0);
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -4144,7 +4144,7 @@ cp_rave_onzombiedamage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 }
 
 cp_rave_lethaldamage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(var_5) && issubstr(var_5, "cos_092") && isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_5) && issubstr(var_5, "cos_092") && isDefined(var_1) && isPlayer(var_1)) {
     playheadshotexplosioneffects(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 }
@@ -4600,7 +4600,7 @@ watchforplayermeleedamage(var_0, var_1) {
       continue;
     }
 
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
 
@@ -4970,18 +4970,18 @@ cp_rave_kill_reward(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       return 60;
     }
 
-    if(isDefined(var_1) && isplayer(var_1) && scripts\engine\utility::istrue(var_1.rave_mode)) {
+    if(isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::istrue(var_1.rave_mode)) {
       return var_6 * 2;
     }
 
     return var_6;
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && level.slasher_fight) {
+  if(isDefined(var_1) && isPlayer(var_1) && level.slasher_fight) {
     return 0;
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && scripts\engine\utility::istrue(var_1.rave_mode)) {
+  if(isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::istrue(var_1.rave_mode)) {
     return var_6 * 2;
   }
 
@@ -5432,7 +5432,7 @@ survivor_logic() {
   level.survivor = spawn("script_model", var_0.origin);
   level.survivor.angles = var_0.angles;
   level.survivor setModel("zmb_world_k_smith");
-  var_1 = [ % iw7_cp_survivor_cabin_idle_01, %iw7_cp_survivor_cabin_idle_02];
+  var_1 = [%iw7_cp_survivor_cabin_idle_01, %iw7_cp_survivor_cabin_idle_02];
   var_2 = ["IW7_cp_survivor_cabin_idle_01", "IW7_cp_survivor_cabin_idle_02"];
   var_3 = 0;
   for(;;) {
@@ -5450,7 +5450,7 @@ rockwall_logic() {
   var_0 = getent("rockwall", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 

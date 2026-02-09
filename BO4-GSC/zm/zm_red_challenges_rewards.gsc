@@ -651,7 +651,7 @@ function_73fda38e(n_amount) {
 function_b858f95a() {
   self endon(#"death");
 
-  if(isplayer(self) && isDefined(self.s_tribute_bowl)) {
+  if(isPlayer(self) && isDefined(self.s_tribute_bowl)) {
     s_bowl = self.s_tribute_bowl;
 
     if(isDefined(s_bowl.var_9d32404) && isDefined(self.var_9e09931e)) {
@@ -1249,7 +1249,7 @@ function_e08e4c9c(str_bgb, var_8b84b3ce) {
   wait var_cef149e8;
   e_player = level function_c45635c7(mdl_reward, 1, 1, 1);
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     e_player thread give_bgb(str_bgb);
     e_player playSound(#"hash_1c696244a9a3dbbf");
   }
@@ -1290,7 +1290,7 @@ function_445c5623(var_aa4f9213, var_8b84b3ce, var_b7e0faf0 = 1) {
   wait var_cef149e8;
   e_player = level function_c45635c7(mdl_reward, 0, 1, var_b7e0faf0);
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     level thread zm_audio::sndannouncerplayvox(var_aa4f9213);
     e_player playSound(#"hash_1c696244a9a3dbbf");
 
@@ -1323,7 +1323,7 @@ function_ae58bd73(var_8b84b3ce) {
   wait var_cef149e8;
   e_player = level function_c45635c7(mdl_reward, 1, 1, 1);
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     weapon = e_player getcurrentweapon();
     e_player thread function_fc6ae19f();
     e_player playSound(#"hash_1c696244a9a3dbbf");
@@ -1428,7 +1428,7 @@ function_529e8585(var_fd6264f6) {
   wait var_fd6264f6;
   waitresult = self waittill(#"powerup_grabbed");
 
-  if(isDefined(waitresult.e_grabber) && isplayer(waitresult.e_grabber)) {
+  if(isDefined(waitresult.e_grabber) && isPlayer(waitresult.e_grabber)) {
     waitresult.e_grabber playSound(#"hash_1c696244a9a3dbbf");
   }
 }

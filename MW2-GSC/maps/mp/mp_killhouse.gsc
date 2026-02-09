@@ -16,8 +16,8 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("compassmaxrange", "2200");
-  setdvar("r_specularcolorscale", "1");
-  setdvar("sm_sunSampleSizeNear", "0.35"); //This fixes the shadow errors
+  setDvar("compassmaxrange", "2200");
+  setDvar("r_specularcolorscale", "1");
+  setDvar("sm_sunSampleSizeNear", "0.35"); //This fixes the shadow errors
 
 }

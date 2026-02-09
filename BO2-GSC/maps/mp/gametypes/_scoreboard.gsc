@@ -8,10 +8,10 @@ init() {
     return;
   }
   if(sessionmodeiszombiesgame()) {
-    setdvar("g_TeamIcon_Axis", "faction_cia");
-    setdvar("g_TeamIcon_Allies", "faction_cdc");
+    setDvar("g_TeamIcon_Axis", "faction_cia");
+    setDvar("g_TeamIcon_Allies", "faction_cdc");
   } else {
-    setdvar("g_TeamIcon_Axis", game["icons"]["axis"]);
-    setdvar("g_TeamIcon_Allies", game["icons"]["allies"]);
+    setDvar("g_TeamIcon_Axis", game["icons"]["axis"]);
+    setDvar("g_TeamIcon_Allies", game["icons"]["allies"]);
   }
 }

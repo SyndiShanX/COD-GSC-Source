@@ -1,5 +1,5 @@
 main() {
-  if(getdvar("clientSideEffects", "1") != "1") {
+  if(getDvar("clientSideEffects", "1") != "1") {
     maps\createfx\mp_paris_fx::main();
   }
 

@@ -12,7 +12,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2ABE("vehicle_blackhawk_low");
   maps\_vehicle::_id_2ABE("vehicle_blackhawk_low_thermal");
   maps\_vehicle::_id_2ABE("vehicle_blackhawk_hero_sas_night");
-  maps\_vehicle::_id_2AC1( % bh_rotors, undefined, 0);
+  maps\_vehicle::_id_2AC1(%bh_rotors, undefined, 0);
   var_3 = [];
   var_3["vehicle_blackhawk"] = "explosions/helicopter_explosion";
   var_3["vehicle_blackhawk_sas_night"] = "explosions/helicopter_explosion";
@@ -50,7 +50,6 @@ _id_2B1D() {
     self._id_295A = 762;
   } else {
     self._id_295A = 762 + distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
-
   }
   self._id_2941 = 0;
 }
@@ -58,7 +57,6 @@ _id_2B1D() {
 _id_3A9C(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1]._id_2523 = % bh_idle;
-
   }
   return var_0;
 }
@@ -102,7 +100,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 8; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_0F59 = % bh_pilot_idle;
   var_0[1]._id_0F59 = % bh_copilot_idle;
@@ -204,7 +201,6 @@ _id_3E84() {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     precachemodel(var_0[var_1[var_2]].model);
-
   }
   return var_0;
 }

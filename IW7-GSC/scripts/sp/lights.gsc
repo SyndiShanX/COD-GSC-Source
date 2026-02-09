@@ -61,7 +61,7 @@ init_light_generic_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
   }
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     func_F466(0, (0, 0, 0));
     return;
   }
@@ -176,7 +176,7 @@ func_ACA2() {
 
 init_light_flicker(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
   init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_10, var_11, 1);
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -414,7 +414,7 @@ func_AC8A(var_0, var_1) {
 
 init_light_pulse_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
   init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_10, undefined, 1);
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -842,7 +842,7 @@ init_light_type(var_0) {
 }
 
 func_7765() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -879,7 +879,7 @@ func_7765() {
 }
 
 func_774A() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -944,7 +944,7 @@ func_776F() {
 }
 
 func_3299() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }

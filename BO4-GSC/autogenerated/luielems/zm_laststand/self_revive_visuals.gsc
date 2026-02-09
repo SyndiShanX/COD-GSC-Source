@@ -31,7 +31,6 @@ class cself_revive_visuals: cluielem {
     cluielem::add_clientfield("self_revive_progress_bar_fill", 1, 5, "float");
     cluielem::add_clientfield("revive_progress", 1, 5, "float");
   }
-
 }
 
 register(uid) {

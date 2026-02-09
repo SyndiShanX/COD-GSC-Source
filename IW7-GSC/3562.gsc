@@ -13,7 +13,7 @@ func_1181C(var_0, var_1) {
 
 func_1181B(var_0, var_1, var_2) {
   if(isDefined(var_2) && isDefined(var_1)) {
-    if(isplayer(var_1) && var_1 != var_2) {
+    if(isPlayer(var_1) && var_1 != var_2) {
       if(!level.teambased || var_2.team != var_1.team) {
         var_2 func_E7FC(var_0, var_1, var_2);
       }

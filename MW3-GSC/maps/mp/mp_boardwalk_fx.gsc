@@ -34,8 +34,7 @@ main() {
   level._effect["mp_bw_waterpour"] = loadfx("maps/mp_boardwalk/mp_bw_waterpour");
   level._effect["mp_bw_paperwind"] = loadfx("maps/mp_boardwalk/mp_bw_paperwind");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_boardwalk_fx::main();
   }
-
 }

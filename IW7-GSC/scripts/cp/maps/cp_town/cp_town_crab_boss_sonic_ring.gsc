@@ -175,7 +175,7 @@ player_touch_monitor(var_0) {
   var_0 endon("stop_sonic_ring_trigger_monitor");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 dodamage(40, var_1.origin);
     }
   }

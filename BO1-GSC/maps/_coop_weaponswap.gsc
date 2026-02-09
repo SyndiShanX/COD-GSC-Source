@@ -7,7 +7,6 @@ init() {
   precachemodel("char_usa_raider_gear_flametank");
   level._swap_flametank_model = "char_usa_raider_gear_flametank";
 }
-
 flamethrower_swap() {
   self endon("death");
   self endon("disconnect");

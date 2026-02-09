@@ -25,20 +25,20 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_ca_red_river");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_reactiveMotionWindAmplitudeScale", 3);
-  setdvar("r_reactiveMotionWindFrequencyScale", .33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 3);
+  setDvar("r_reactiveMotionWindFrequencyScale", .33);
 
   setdvar_cg_ng("r_specularColorScale", 2.5, 9);
   setdvar_cg_ng("r_diffuseColorScale", 1.25, 1.5);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.4");
+    setDvar("sm_sunShadowScale", "0.4");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.4");
+    setDvar("sm_sunShadowScale", "0.4");
   } else {
-    SetDvar("sm_sunShadowScale", "0.9");
+    setDvar("sm_sunShadowScale", "0.9");
   }
 
   game["attackers"] = "allies";

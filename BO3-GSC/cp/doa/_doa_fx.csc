@@ -339,9 +339,9 @@ function function_e68e3c0d(localclientnum, name, off, tag, kill = 0) {
   if(!isDefined(self.var_ca61d2d6)) {
     self.var_ca61d2d6 = [];
   }
-  assert(!(self isplayer() && name == ""));
-  assert(!(self isplayer() && name == ""));
-  if(self isplayer()) {
+  assert(!(self isPlayer() && name == ""));
+  assert(!(self isPlayer() && name == ""));
+  if(self isPlayer()) {
     loc_000043C8: loc_000043FC: namespace_693feb87::debugmsg((((((("" + (isDefined(self.name) ? self.name : "")) + "") + name) + "") + (isDefined(tag) ? tag : "") + "") + (off ? "" : "") + "") + localclientnum);
   }
   if(off) {

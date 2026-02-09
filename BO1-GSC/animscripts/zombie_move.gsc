@@ -9,6 +9,7 @@
 #include animscripts\zombie_shared;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 main() {
   self endon("killanimscript");
   [[self.exception["move"]]]();
@@ -40,12 +41,11 @@ main() {
   }
   MoveMainLoop();
 }
-
 MoveMainLoop() {
   prevLoopTime = self getAnimTime(%walk_and_run_loops);
-  self.a.runLoopCount = randomInt(10000);
+  self.a.runLoopCount = RandomInt(10000);
   moveMode = self.moveMode;
-  if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 4096) {
+  if(isDefined(self.pathGoalPos) && DistanceSquared(self.origin, self.pathGoalPos) < 4096) {
     moveMode = "walk";
   }
   self.needs_run_update = true;
@@ -62,12 +62,10 @@ MoveMainLoop() {
     self trySideStep();
   }
 }
-
 moveAgain() {
   self notify("killanimscript");
   animscripts\zombie_move::main();
 }
-
 sideStepInit() {
   self.a.steppedDir = 0;
   self.a.lastSideStepTime = GetTime();
@@ -86,7 +84,6 @@ sideStepInit() {
     level.sideStepAnims["roll_forward"] = array(%ai_zombie_spets_roll_a, %ai_zombie_spets_roll_b, %ai_zombie_spets_roll_c);
   }
 }
-
 trySideStep() {
   if(isDefined(self.shouldSideStepFunc)) {
     self.sideStepType = self[[self.shouldSideStepFunc]]();
@@ -107,14 +104,14 @@ trySideStep() {
   if(isDefined(self.sideStepAnims)) {
     sideStepAnims = self.sideStepAnims;
   }
-  self.stepAnim = sideStepAnims[animName][randomInt(sideStepAnims[animName].size)];
+  self.stepAnim = sideStepAnims[animName][RandomInt(sideStepAnims[animName].size)];
   assertex(isDefined(self.stepAnim), "Sidestep anim " + animName + " not found");
   if(!self checkRoomForAnim(self.stepAnim)) {
     hasRoom = false;
     if(self.sideStepType == "roll" && self.desiredStepDir != "forward") {
       self.desiredStepDir = "forward";
       animName = self.sideStepType + "_" + self.desiredStepDir;
-      self.stepAnim = sideStepAnims[animName][randomInt(sideStepAnims[animName].size)];
+      self.stepAnim = sideStepAnims[animName][RandomInt(sideStepAnims[animName].size)];
       assertex(isDefined(self.stepAnim), "Sidestep anim " + animName + " not found");
       hasRoom = self checkRoomForAnim(self.stepAnim);
     }
@@ -124,7 +121,6 @@ trySideStep() {
   }
   self AnimCustom(::doSideStep);
 }
-
 getDesiredSideStepDir(sideStepType) {
   if(sideStepType == "roll" || sideStepType == "phase") {
     self.desiredStepDir = "forward";
@@ -143,43 +139,45 @@ getDesiredSideStepDir(sideStepType) {
   }
   return self.desiredStepDir;
 }
-
 checkRoomForAnim(stepAnim) {
   if(!self MayMoveFromPointToPoint(self.origin, getAnimEndPos(stepAnim))) {
     return false;
   }
   return true;
 }
-
 shouldSideStep() {
-  if(canSideStep() && IsPlayer(self.enemy) && self.enemy IsLookingAt(self)) {
-    if(self.zombie_move_speed != "sprint" || RandomFloat(1) < level.SIDE_STEP_CHANCE)
+  if(canSideStep() && isPlayer(self.enemy) && self.enemy IsLookingAt(self)) {
+    if(self.zombie_move_speed != "sprint" || RandomFloat(1) < level.SIDE_STEP_CHANCE) {
       return "step";
-    else
+    } else {
       return "roll";
+    }
   }
   return "none";
 }
-
 canSideStep() {
   if(!isDefined(self.zombie_can_sidestep) || !self.zombie_can_sidestep) {
-    if(!issubstr(self.classname, "zombie_spetznaz"))
+    if(!issubstr(self.classname, "zombie_spetznaz")) {
       return false;
+    }
   }
-  if(GetTime() - self.a.lastSideStepTime < level.REACTION_INTERVAL)
+  if(GetTime() - self.a.lastSideStepTime < level.REACTION_INTERVAL) {
     return false;
-  if(!isDefined(self.enemy))
+  }
+  if(!isDefined(self.enemy)) {
     return false;
-  if(self.a.pose != "stand")
+  }
+  if(self.a.pose != "stand") {
     return false;
-  distSqFromEnemy = distanceSquared(self.origin, self.enemy.origin);
+  }
+  distSqFromEnemy = DistanceSquared(self.origin, self.enemy.origin);
   if(distSqFromEnemy < level.MIN_REACTION_DIST_SQ) {
     return false;
   }
   if(distSqFromEnemy > level.MAX_REACTION_DIST_SQ) {
     return false;
   }
-  if(!isDefined(self.pathgoalpos) || distanceSquared(self.origin, self.pathgoalpos) < level.MIN_REACTION_DIST_SQ) {
+  if(!isDefined(self.pathgoalpos) || DistanceSquared(self.origin, self.pathgoalpos) < level.MIN_REACTION_DIST_SQ) {
     return false;
   }
   if(abs(self GetMotionAngle()) > 15) {
@@ -191,32 +189,33 @@ canSideStep() {
   }
   return true;
 }
-
 shouldForwardStep() {
-  if(canForwardStep() && IsPlayer(self.enemy)) {
+  if(canForwardStep() && isPlayer(self.enemy)) {
     return "phase";
   }
   return "none";
 }
-
 canForwardStep() {
   if(!isDefined(self.zombie_can_forwardstep) || !self.zombie_can_forwardstep) {
     return false;
   }
-  if(GetTime() - self.a.lastSideStepTime < level.FORWARD_REACTION_INTERVAL)
+  if(GetTime() - self.a.lastSideStepTime < level.FORWARD_REACTION_INTERVAL) {
     return false;
-  if(!isDefined(self.enemy))
+  }
+  if(!isDefined(self.enemy)) {
     return false;
-  if(self.a.pose != "stand")
+  }
+  if(self.a.pose != "stand") {
     return false;
-  distSqFromEnemy = distanceSquared(self.origin, self.enemy.origin);
+  }
+  distSqFromEnemy = DistanceSquared(self.origin, self.enemy.origin);
   if(distSqFromEnemy < level.FORWARD_MIN_REACTION_DIST_SQ) {
     return false;
   }
   if(distSqFromEnemy > level.FORWARD_MAX_REACTION_DIST_SQ) {
     return false;
   }
-  if(!isDefined(self.pathgoalpos) || distanceSquared(self.origin, self.pathgoalpos) < level.MIN_REACTION_DIST_SQ) {
+  if(!isDefined(self.pathgoalpos) || DistanceSquared(self.origin, self.pathgoalpos) < level.MIN_REACTION_DIST_SQ) {
     return false;
   }
   if(abs(self GetMotionAngle()) > 15) {
@@ -228,7 +227,6 @@ canForwardStep() {
   }
   return true;
 }
-
 doSideStep() {
   self endon("death");
   self endon("killanimscript");
@@ -241,7 +239,6 @@ doSideStep() {
   self.a.lastSideStepTime = GetTime();
   return true;
 }
-
 playSideStepAnim(stepAnim, sideStepType) {
   self AnimMode("gravity", false);
   self OrientMode("face angle", self.angles[1]);
@@ -298,7 +295,6 @@ playSideStepAnim(stepAnim, sideStepType) {
     self.deathFunction = maps\_zombiemode_spawner::zombie_death_animscript;
   }
 }
-
 faceLookaheadForABit() {
   self endon("death");
   self endon("killanimscript");
@@ -308,7 +304,6 @@ faceLookaheadForABit() {
   self AnimMode("normal", false);
   self OrientMode("face default");
 }
-
 sideStepBlendOut(animLength, animName, hasExitAlign) {
   self endon("killanimscript");
   self endon("death");
@@ -322,7 +317,6 @@ sideStepBlendOut(animLength, animName, hasExitAlign) {
   self ClearAnim(%exposed_modern, 0);
   self SetFlaggedAnimKnobAllRestart("run_anim", animscripts\zombie_run::GetRunAnim(), %body, 1, runBlendInTime, self.moveplaybackrate);
 }
-
 restorePainOnKillanimscript() {
   self waittill("killanimscript");
   if(isDefined(self) && IsAlive(self)) {
@@ -330,14 +324,12 @@ restorePainOnKillanimscript() {
     self.deathFunction = undefined;
   }
 }
-
 disablePain() {
   self.a.storedDisablePain = self.a.disablePain;
   self.a.storedAllowPain = self.a.allowPain;
   self.a.disablePain = true;
   self.allowPain = false;
 }
-
 restorePain() {
   if(isDefined(self.a.storedDisablePain) && isDefined(self.a.storedAllowPain)) {
     self.a.disablePain = self.a.storedDisablePain;

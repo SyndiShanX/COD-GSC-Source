@@ -208,9 +208,7 @@ powerup_hud_monitor() {
           continue;
         }
         if(isDefined(level.powerup_player_valid)) {
-          if(![
-              [level.powerup_player_valid]
-            ](player))
+          if(![[level.powerup_player_valid]](player))
             continue;
         }
 
@@ -644,11 +642,11 @@ powerup_setup(powerup_override, powerup_team, powerup_location) {
     players = get_players();
     self.weapon = maps\mp\zombies\_zm_magicbox::treasure_chest_chooseweightedrandomweapon(players[0]);
 
-    weapon = getdvar(#"_id_45ED7744");
+    weapon = getDvar(#"_id_45ED7744");
 
     if(weapon != "" && isDefined(level.zombie_weapons[weapon])) {
       self.weapon = weapon;
-      setdvar("scr_force_weapon", "");
+      setDvar("scr_force_weapon", "");
     }
 
     self.base_weapon = self.weapon;
@@ -837,7 +835,6 @@ powerup_zombie_grab(powerup_team) {
           level thread[[level._game_mode_powerup_zombie_grab]](self, who);
         else {
           println("Unrecognized poweup.");
-
         }
 
         break;
@@ -1005,9 +1002,7 @@ powerup_grab(powerup_team) {
               level thread[[level.powerup_intro_vox]](self);
               return;
             } else if(isDefined(level.powerup_vo_available)) {
-              can_say_vo = [
-                [level.powerup_vo_available]
-              ]();
+              can_say_vo = [[level.powerup_vo_available]]();
 
               if(!can_say_vo) {
                 self powerup_delete();

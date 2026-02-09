@@ -346,7 +346,7 @@ carryobjectusethink() {
     if(scripts\mp\utility\game::func_9F22(var_0)) {
       continue;
     }
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(var_0 func_84CA()) {
@@ -861,7 +861,7 @@ setdropped(var_0) {
   } else {
     var_13 = scripts\engine\trace::ray_trace(self.safeorigin + (0, 0, 20), self.safeorigin - (0, 0, 20), var_12, var_11, 0);
 
-    if(isplayer(var_13["entity"])) {
+    if(isPlayer(var_13["entity"])) {
       var_13["entity"] = undefined;
     }
   }
@@ -917,7 +917,7 @@ setdropped(var_0) {
     self.curorigin = self.trigger.origin;
     var_24 = undefined;
 
-    if(!isplayer(var_13["entity"]) || !isbot(var_13["entity"]) || !isagent(var_13["entity"])) {
+    if(!isPlayer(var_13["entity"]) || !isbot(var_13["entity"]) || !isagent(var_13["entity"])) {
       var_24 = var_13["entity"];
     }
 
@@ -1686,7 +1686,7 @@ func_127CA(var_0) {
     if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_0)) {
       break;
     }
-    if(isplayer(self) && var_0.usetime > 50) {
+    if(isPlayer(self) && var_0.usetime > 50) {
       updateuiprogress(var_0, 1);
     }
 
@@ -1695,7 +1695,7 @@ func_127CA(var_0) {
 
   if(isDefined(self)) {
     if(var_0.usetime > 50) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         updateuiprogress(var_0, 0);
       }
 
@@ -2061,7 +2061,7 @@ func_12F57() {
 useholdthink(var_0) {
   var_0 notify("use_hold");
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 getweaponvariantattachments(self.trigger);
   } else {
     var_0 linkto(self.trigger);

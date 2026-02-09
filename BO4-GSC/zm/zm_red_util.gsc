@@ -240,7 +240,7 @@ function_ee58ddd4(is_scroll = 0) {
 
   e_activator = self zm_unitrigger::function_fac87205("", n_radius);
 
-  if(isplayer(e_activator)) {
+  if(isPlayer(e_activator)) {
     if(is_scroll) {
       e_activator thread function_eb6f144(self.script_string, mdl_collectible);
       return;

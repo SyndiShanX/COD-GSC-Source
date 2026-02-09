@@ -96,13 +96,13 @@ jetgun_devgui_dvar_think() {
   if(!maps\mp\zombies\_zm_weapons::is_weapon_included("jetgun_zm")) {
     return;
   }
-  setdvar("scr_jetgun_cylinder_radius", level.zombie_vars["jetgun_cylinder_radius"]);
-  setdvar("scr_jetgun_grind_range", level.zombie_vars["jetgun_grind_range"]);
-  setdvar("scr_jetgun_drag_range", level.zombie_vars["jetgun_drag_range"]);
-  setdvar("scr_jetgun_gib_range", level.zombie_vars["jetgun_gib_range"]);
-  setdvar("scr_jetgun_gib_damage", level.zombie_vars["jetgun_gib_damage"]);
-  setdvar("scr_jetgun_knockdown_range", level.zombie_vars["jetgun_knockdown_range"]);
-  setdvar("scr_jetgun_knockdown_damage", level.zombie_vars["jetgun_knockdown_damage"]);
+  setDvar("scr_jetgun_cylinder_radius", level.zombie_vars["jetgun_cylinder_radius"]);
+  setDvar("scr_jetgun_grind_range", level.zombie_vars["jetgun_grind_range"]);
+  setDvar("scr_jetgun_drag_range", level.zombie_vars["jetgun_drag_range"]);
+  setDvar("scr_jetgun_gib_range", level.zombie_vars["jetgun_gib_range"]);
+  setDvar("scr_jetgun_gib_damage", level.zombie_vars["jetgun_gib_damage"]);
+  setDvar("scr_jetgun_knockdown_range", level.zombie_vars["jetgun_knockdown_range"]);
+  setDvar("scr_jetgun_knockdown_damage", level.zombie_vars["jetgun_knockdown_damage"]);
 
   for(;;) {
     level.zombie_vars["jetgun_cylinder_radius"] = getdvarint(#"_id_6ECD5E99");
@@ -114,7 +114,6 @@ jetgun_devgui_dvar_think() {
     level.zombie_vars["jetgun_knockdown_damage"] = getdvarint(#"_id_7FA8E804");
     wait 0.5;
   }
-
 }
 
 jetgun_on_player_connect() {
@@ -142,7 +141,6 @@ never_overheat() {
 
     wait 0.05;
   }
-
 }
 
 watch_overheat() {
@@ -482,7 +480,6 @@ jetgun_debug_print_on_ent(msg, color) {
     print3d(self.origin + vectorscale((0, 0, 1), 60.0), msg, color, 1, 1);
     wait 0.05;
   }
-
 }
 
 try_gibbing() {
@@ -735,5 +732,4 @@ zombie_drag_radius() {
     circle(self.origin, level.zombie_vars["jetgun_drag_range"], (1, 0, 1));
     wait 0.05;
   }
-
 }

@@ -34,8 +34,9 @@ main() {
   setsaveddvar("sm_sunSampleSizeNear", 0.4);
   level thread ambient_drones();
 
-  if(level.player hasweapon("riotshield_sp"))
+  if(level.player hasweapon("riotshield_sp")) {
     flag_set("player_brought_shield");
+  }
 
   s_cougar_spawner = get_vehicle_spawner("intro_cougar");
   veh_cougar = spawnvehicle("veh_t6_mil_cougar_interior", "intro_cougar", "apc_cougar_nophysics", s_cougar_spawner.origin, s_cougar_spawner.angles);
@@ -45,8 +46,9 @@ main() {
   level.player setclientdvar("cg_fov", 55);
   run_scene_first_frame("intro");
 
-  if(flag("harper_dead"))
+  if(flag("harper_dead")) {
     run_scene_first_frame("intro_player_noharper");
+  }
 
   waittill_textures_loaded();
   clientnotify("argus_zone:intro");
@@ -75,8 +77,9 @@ main() {
   level clientnotify("over_black");
   level.player setclientdvar("cg_fov", n_fov);
 
-  if(flag("harper_dead"))
+  if(flag("harper_dead")) {
     n_player_body detach("adrenaline_syringe_small_animated", "tag_weapon");
+  }
 }
 
 intro_hide_fxanim() {
@@ -160,8 +163,9 @@ run_reflection_scene() {
   m_reflection_cougar = getent("cougar_reflection_scene", "targetname");
   level thread run_scene_and_delete("intro_reflection");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level thread run_scene_and_delete("intro_reflection_harper");
+  }
 
   scene_wait("intro_reflection");
   m_reflection_cougar delete();
@@ -205,13 +209,15 @@ turn_on_reflection_cam() {
 }
 
 turn_off_reflection_cam(b_delete) {
-  if(!isDefined(b_delete))
+  if(!isDefined(b_delete)) {
     b_delete = 0;
+  }
 
   level.sm_cam_ent clearclientflag(1);
 
-  if(b_delete)
+  if(b_delete) {
     level.sm_cam_ent delay_thread(2, ::self_delete);
+  }
 }
 
 drone_approach() {
@@ -219,8 +225,9 @@ drone_approach() {
   exploder(60);
   wait 5;
 
-  while(flag("drone_approach"))
+  while(flag("drone_approach")) {
     wait 0.2;
+  }
 
   stop_exploder(55);
   stop_exploder(60);
@@ -358,8 +365,9 @@ cougar3_aim(veh_cougar) {
 }
 
 fade_in(m_player_body) {
-  if(!is_mature())
+  if(!is_mature()) {
     wait 7;
+  }
 
   flag_set("end_intro_screen");
   maps\_objectives::set_objective(level.obj_prom_night);
@@ -395,12 +403,12 @@ show_vehicle_count() {
     ambient_count = 0;
 
     foreach(vehicle in vehicles) {
-      if(isDefined(vehicle.b_is_ambient))
+      if(isDefined(vehicle.b_is_ambient)) {
         ambient_count++;
+      }
     }
 
     iprintln("Count: " + vehicles.size + " Ambient: " + ambient_count);
     wait 0.05;
   }
-
 }

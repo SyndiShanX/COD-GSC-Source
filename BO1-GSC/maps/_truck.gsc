@@ -9,12 +9,11 @@ main(model, type) {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_unload_groups(::unload_groups);
 }
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   num_positios = 10;
@@ -53,7 +52,6 @@ setanims() {
   positions[9].idle = % crew_truck_guy8_sit_idle;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

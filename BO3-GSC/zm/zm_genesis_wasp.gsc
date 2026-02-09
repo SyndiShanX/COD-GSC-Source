@@ -153,7 +153,7 @@ function wasp_round_spawning() {
   level.zombie_total = int(n_wave_count * 1);
   if(getdvarstring("") != "" && getdvarint("") > 0) {
     level.zombie_total = getdvarint("");
-    setdvar("", 0);
+    setDvar("", 0);
   }
   wait(1);
   parasite_round_fx();
@@ -554,9 +554,9 @@ function wasp_round_start() {
   level notify("wasp_round_starting");
   level thread zm_audio::sndmusicsystem_playstate("parasite_start");
   if(isDefined(level.wasp_melee_range)) {
-    setdvar("ai_meleeRange", level.wasp_melee_range);
+    setDvar("ai_meleeRange", level.wasp_melee_range);
   } else {
-    setdvar("ai_meleeRange", 100);
+    setDvar("ai_meleeRange", 100);
   }
 }
 
@@ -568,9 +568,9 @@ function wasp_round_stop() {
   }
   level.waspround_nomusic = 0;
   level notify("wasp_round_ending");
-  setdvar("ai_meleeRange", level.melee_range_sav);
-  setdvar("ai_meleeWidth", level.melee_width_sav);
-  setdvar("ai_meleeHeight", level.melee_height_sav);
+  setDvar("ai_meleeRange", level.melee_range_sav);
+  setDvar("ai_meleeWidth", level.melee_width_sav);
+  setDvar("ai_meleeHeight", level.melee_height_sav);
 }
 
 function play_wasp_round() {
@@ -742,7 +742,7 @@ function wasp_death() {
       level notify("last_ai_down", self);
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(isDefined(attacker.on_train) && attacker.on_train) {
       attacker notify("wasp_train_kill");
     }
@@ -914,7 +914,7 @@ function wasp_add_to_spawn_pool(optional_player_target) {
 }
 
 function function_7085a2e4(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(isplayer(eattacker) && (isDefined(eattacker.var_e8e8daad) && eattacker.var_e8e8daad)) {
+  if(isPlayer(eattacker) && (isDefined(eattacker.var_e8e8daad) && eattacker.var_e8e8daad)) {
     idamage = int(idamage * 1.5);
   }
   return idamage;

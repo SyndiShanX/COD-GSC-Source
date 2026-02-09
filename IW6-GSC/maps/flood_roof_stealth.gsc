@@ -508,11 +508,11 @@ break_stealth_mg(var_0) {
   }
 
   if(var_0 == "start")
-    setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL0");
+    setDvar("ui_deadquote", &"FLOOD_STEALTH_FAIL0");
   else if(randomint(2))
-    setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL1");
+    setDvar("ui_deadquote", &"FLOOD_STEALTH_FAIL1");
   else
-    setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL2");
+    setDvar("ui_deadquote", &"FLOOD_STEALTH_FAIL2");
 }
 
 no_attack_hint() {

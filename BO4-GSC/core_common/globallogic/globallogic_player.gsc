@@ -12,7 +12,7 @@ function_c5343206(eattacker, einflictor, idamage, smeansofdeath, weapon) {
     return;
   }
 
-  if(!isplayer(eattacker)) {
+  if(!isPlayer(eattacker)) {
     return;
   }
 
@@ -168,7 +168,7 @@ function_43084f6c(player) {
 }
 
 function_9f942458(var_6ba44c6, var_fbbdf63c) {
-  if(!isplayer(var_fbbdf63c)) {
+  if(!isPlayer(var_fbbdf63c)) {
     return false;
   }
 
@@ -306,7 +306,7 @@ trackattackerdamage(eattacker, idamage, smeansofdeath, weapon) {
     return;
   }
 
-  if(!isplayer(eattacker)) {
+  if(!isPlayer(eattacker)) {
     return;
   }
 
@@ -401,7 +401,7 @@ function_efd02c1d(einflictor) {
     return;
   }
 
-  if(isplayer(einflictor)) {
+  if(isPlayer(einflictor)) {
     return;
   }
 
@@ -409,7 +409,7 @@ function_efd02c1d(einflictor) {
     return;
   }
 
-  if(!isplayer(einflictor.owner)) {
+  if(!isPlayer(einflictor.owner)) {
     return;
   }
 

@@ -226,14 +226,14 @@ _lightning() {
 
       for(i = 0; i < n_strikes; i++) {
         n_blend_time = randomfloatrange(0.1, 0.35);
-        setdvar("r_exposureTweak", 1);
+        setDvar("r_exposureTweak", 1);
         playsoundatposition("amb_thunder_flash", v_end_pos);
-        setdvar("r_exposureValue", randomfloatrange(-1, 1));
+        setDvar("r_exposureValue", randomfloatrange(-1, 1));
         level thread lerp_dvar("r_exposureValue", n_level_exposure, n_blend_time);
         setsaveddvar("r_lightTweakSunLight", randomfloatrange(28, 32));
         level thread lerp_dvar("r_lightTweakSunLight", n_level_sunlight, n_blend_time, 1);
         wait(n_blend_time);
-        setdvar("r_exposureTweak", 0);
+        setDvar("r_exposureTweak", 0);
       }
 
       level.lightning_strike = undefined;
@@ -257,13 +257,13 @@ lightning_strike() {
 
     for(i = 0; i < n_strikes; i++) {
       n_blend_time = randomfloatrange(0.1, 0.35);
-      setdvar("r_exposureTweak", 1);
-      setdvar("r_exposureValue", randomfloatrange(-1, 1));
+      setDvar("r_exposureTweak", 1);
+      setDvar("r_exposureValue", randomfloatrange(-1, 1));
       level thread lerp_dvar("r_exposureValue", n_level_exposure, n_blend_time);
       setsaveddvar("r_lightTweakSunLight", randomfloatrange(28, 32));
       level thread lerp_dvar("r_lightTweakSunLight", n_level_sunlight, n_blend_time, 1);
       wait(n_blend_time);
-      setdvar("r_exposureTweak", 0);
+      setDvar("r_exposureTweak", 0);
     }
 
     level.lightning_strike = undefined;

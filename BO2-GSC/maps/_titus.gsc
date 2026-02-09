@@ -36,8 +36,9 @@ _titus_fire_watcher() {
   while(true) {
     self waittill("weapon_fired", str_weapon);
 
-    if(str_weapon == "exptitus6_sp")
+    if(str_weapon == "exptitus6_sp") {
       _titus_locate_target();
+    }
   }
 }
 
@@ -130,11 +131,13 @@ _titus_marked() {
 }
 
 _titus_reset_grenade_fuse(n_fuse_min, n_fuse_max) {
-  if(!isDefined(n_fuse_min))
+  if(!isDefined(n_fuse_min)) {
     n_fuse_min = 2;
+  }
 
-  if(!isDefined(n_fuse_max))
+  if(!isDefined(n_fuse_max)) {
     n_fuse_max = 3;
+  }
 
   self waittill("death");
   a_grenades = getEntArray("grenade", "classname");

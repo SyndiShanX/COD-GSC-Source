@@ -77,7 +77,7 @@ function main() {
   namespace_a52a2a1d::function_7403e82b();
   aquifer_util::loadeffects();
   thread function_c2c4ea75();
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   createthreatbiasgroup("players_vtol");
   createthreatbiasgroup("players_ground");
   createthreatbiasgroup("defend_hunters");

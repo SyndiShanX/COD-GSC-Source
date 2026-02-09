@@ -7,12 +7,11 @@
 
 main() {
   self endon("killanimscript");
-  self clearanim( % root, 0.2);
-  self clearanim( % german_shepherd_run_stop, 0);
+  self clearanim(%root, 0.2);
+  self clearanim(%german_shepherd_run_stop, 0);
 
   if(!isDefined(self._id_3B58) && !isDefined(self._id_3B0C) && self.a._id_0D2B == "run" && (!isDefined(self._id_1199) || self._id_1199 == 0)) {
     _id_3B61();
-
   }
   thread _id_3B64();
   self._id_3B58 = undefined;
@@ -21,14 +20,13 @@ main() {
   if(self.a._id_0D2B == "run") {
     var_0 = undefined;
     var_0 = _id_3B65();
-    self setanimrestart( % german_shepherd_run, var_0["center"], 0.2, 1);
-    self setanimrestart( % german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
-    self setanimrestart( % german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
-    self setflaggedanimknob("dog_run", % german_shepherd_run_knob, 1, 0.2, self._id_0FC6);
+    self setanimrestart(%german_shepherd_run, var_0["center"], 0.2, 1);
+    self setanimrestart(%german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
+    self setanimrestart(%german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
+    self setflaggedanimknob("dog_run", %german_shepherd_run_knob, 1, 0.2, self._id_0FC6);
     animscripts\notetracks::_id_0D4F(0.1, "dog_run");
   } else {
-    self setflaggedanimrestart("dog_walk", % german_shepherd_walk, 1, 0.2, self._id_0FC6);
-
+    self setflaggedanimrestart("dog_walk", %german_shepherd_walk, 1, 0.2, self._id_0FC6);
   }
   thread animscripts\dog\dog_stop::_id_3B01("normal");
 
@@ -38,10 +36,9 @@ main() {
     if(self.a._id_0D2B == "run") {
       if(self._id_117F == 0) {
         thread _id_3B62();
-
       }
       self waittill("run");
-      self clearanim( % german_shepherd_run_stop, 0.1);
+      self clearanim(%german_shepherd_run_stop, 0.1);
     }
   }
 }
@@ -56,7 +53,6 @@ _id_3B59() {
       self.stopanimdistsq = 0;
     } else {
       self.stopanimdistsq = anim._id_3AEE;
-
     }
     if(isDefined(self._id_10B7)) {
       self[[self._id_10B7]]();
@@ -77,15 +73,15 @@ _id_3B5A() {
 
   if(self.a._id_0D2B == "run") {
     var_0 = _id_3B65();
-    self clearanim( % german_shepherd_walk, 0.3);
-    self setanim( % german_shepherd_run, var_0["center"], 0.2, 1);
-    self setanim( % german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
-    self setanim( % german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
-    self setflaggedanimknob("dog_run", % german_shepherd_run_knob, 1, 0.2, self._id_0FC6);
+    self clearanim(%german_shepherd_walk, 0.3);
+    self setanim(%german_shepherd_run, var_0["center"], 0.2, 1);
+    self setanim(%german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
+    self setanim(%german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
+    self setflaggedanimknob("dog_run", %german_shepherd_run_knob, 1, 0.2, self._id_0FC6);
     animscripts\notetracks::_id_0D4F(0.2, "dog_run");
   } else {
-    self clearanim( % german_shepherd_run_knob, 0.3);
-    self setflaggedanim("dog_walk", % german_shepherd_walk, 1, 0.2, self._id_0FC6);
+    self clearanim(%german_shepherd_run_knob, 0.3);
+    self setflaggedanim("dog_walk", %german_shepherd_walk, 1, 0.2, self._id_0FC6);
     animscripts\notetracks::_id_0D4F(0.2, "dog_walk");
   }
 }
@@ -148,7 +144,6 @@ _id_3B5C(var_0) {
     var_1 = % german_shepherd_run_start_l;
   } else if(var_0 > 60) {
     var_1 = % german_shepherd_run_start_r;
-
   }
   return var_1;
 }
@@ -162,7 +157,7 @@ _id_3B5D() {
     return;
   }
   self animmode("zonly_physics", 0);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self._id_10B7 = ::_id_3B5E;
   self._id_10A8 = 1;
   self setflaggedanimrestart("turnAnim", var_0, 1, 0.2, self._id_0FC6);
@@ -181,7 +176,7 @@ _id_3B5D() {
 _id_3B5E() {
   self._id_10A8 = undefined;
   self orientmode("face default");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self animmode("none", 0);
 }
 
@@ -223,7 +218,6 @@ _id_3B60() {
         var_5 = 4;
       } else {
         var_5 = 1;
-
       }
       self setanimrestart(anim._id_3AF8[var_5], 1, 0.2, 1);
       var_6 = self.angles[1] + anim._id_3AF7[var_5];
@@ -250,12 +244,11 @@ _id_3B60() {
         var_10 = % german_shepherd_rotate_ccw;
       } else {
         var_10 = % german_shepherd_rotate_cw;
-
       }
       self setflaggedanimrestart("dog_turn", var_10, 1, 0.2, 1.0);
       animscripts\shared::_id_0C51("dog_turn");
-      self clearanim( % german_shepherd_rotate_cw, 0.2);
-      self clearanim( % german_shepherd_rotate_ccw, 0.2);
+      self clearanim(%german_shepherd_rotate_cw, 0.2);
+      self clearanim(%german_shepherd_rotate_ccw, 0.2);
     }
 
     thread _id_3B5B();
@@ -269,23 +262,23 @@ _id_3B61() {
   if(isDefined(self.pathgoalpos)) {
     if(isDefined(self.pathgoalpos)) {
       _id_3B60();
-      self clearanim( % root, 0.2);
+      self clearanim(%root, 0.2);
       return;
     }
   }
 
   self orientmode("face default");
-  self setflaggedanimknobrestart("dog_prerun", % german_shepherd_run_start, 1, 0.2, self._id_0FC6);
+  self setflaggedanimknobrestart("dog_prerun", %german_shepherd_run_start, 1, 0.2, self._id_0FC6);
   animscripts\shared::_id_0C51("dog_prerun");
   self animmode("none", 0);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 }
 
 _id_3B62() {
   self endon("killanimscript");
   self endon("run");
-  self clearanim( % german_shepherd_run_knob, 0.1);
-  self setflaggedanimrestart("stop_anim", % german_shepherd_run_stop, 1, 0.2, 1);
+  self clearanim(%german_shepherd_run_knob, 0.1);
+  self setflaggedanimrestart("stop_anim", %german_shepherd_run_stop, 1, 0.2, 1);
   animscripts\shared::_id_0C51("stop_anim");
 }
 
@@ -308,7 +301,6 @@ _id_3B64() {
       var_0 = "anml_dog_growl";
     } else if(!isDefined(self._id_206F)) {
       var_0 = "anml_dog_bark";
-
     }
     if(!isDefined(var_0)) {
       break;
@@ -329,7 +321,6 @@ _id_3B65() {
   if(self.leanamount > 0) {
     if(self.leanamount < 0.95) {
       self.leanamount = 0.95;
-
     }
     var_0["left"] = 0;
     var_0["right"] = (1 - self.leanamount) * 20;
@@ -338,24 +329,20 @@ _id_3B65() {
       var_0["right"] = 1;
     } else if(var_0["right"] < 0) {
       var_0["right"] = 0;
-
     }
     var_0["center"] = 1 - var_0["right"];
   } else if(self.leanamount < 0) {
     if(self.leanamount > -0.95) {
       self.leanamount = -0.95;
-
     }
     var_0["right"] = 0;
     var_0["left"] = (1 + self.leanamount) * 20;
 
     if(var_0["left"] > 1) {
       var_0["left"] = 1;
-
     }
     if(var_0["left"] < 0) {
       var_0["left"] = 0;
-
     }
     var_0["center"] = 1 - var_0["left"];
   } else {

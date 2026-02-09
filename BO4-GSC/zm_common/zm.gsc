@@ -179,12 +179,12 @@ init() {
     register_zombie_damage_override_callback(&aat::aat_response);
   }
 
-  setdvar(#"doublejump_enabled", 0);
-  setdvar(#"wallrun_enabled", 0);
-  setdvar(#"sprintleap_enabled", 0);
-  setdvar(#"traverse_mode", 2);
-  setdvar(#"weaponrest_enabled", 0);
-  setdvar(#"ui_allowdisplaycontinue", 1);
+  setDvar(#"doublejump_enabled", 0);
+  setDvar(#"wallrun_enabled", 0);
+  setDvar(#"sprintleap_enabled", 0);
+  setDvar(#"traverse_mode", 2);
+  setDvar(#"weaponrest_enabled", 0);
+  setDvar(#"ui_allowdisplaycontinue", 1);
 
   if(!isDefined(level.killstreakweapons)) {
     level.killstreakweapons = [];
@@ -820,10 +820,10 @@ init_player_levelvars() {
 }
 
 init_dvars() {
-  setdvar(#"magic_chest_movable", 1);
-  setdvar(#"revive_trigger_radius", 75);
-  setdvar(#"scr_deleteexplosivesonspawn", 0);
-  setdvar(#"cg_healthperbar", 50);
+  setDvar(#"magic_chest_movable", 1);
+  setDvar(#"revive_trigger_radius", 75);
+  setDvar(#"scr_deleteexplosivesonspawn", 0);
+  setDvar(#"cg_healthperbar", 50);
 }
 
 init_function_overrides() {
@@ -1005,7 +1005,7 @@ vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, 
 }
 
 function_7bdb1f9f(attacker, damage, meansofdeath, weapon, shitloc) {
-  if((isDefined(level.headshots_only) && level.headshots_only || zm_trial_headshots_only::is_active()) && isplayer(attacker)) {
+  if((isDefined(level.headshots_only) && level.headshots_only || zm_trial_headshots_only::is_active()) && isPlayer(attacker)) {
     if(meansofdeath == "MOD_MELEE" && (shitloc == "head" || shitloc == "helmet")) {
       return int(damage);
     }
@@ -1064,7 +1064,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   self.knuckles_extinguish_flames = weapon.name == # "tazer_knuckles";
   attacker thread zm_audio::sndplayerhitalert(self, meansofdeath, inflictor, weapon, shitloc, damage);
 
-  if(!isplayer(attacker) && isDefined(self.non_attacker_func)) {
+  if(!isPlayer(attacker) && isDefined(self.non_attacker_func)) {
     if(isDefined(self.non_attack_func_takes_attacker) && self.non_attack_func_takes_attacker) {
       return self[[self.non_attacker_func]](damage, weapon, attacker);
     } else {
@@ -1148,7 +1148,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     }
   }
 
-  if(isDefined(inflictor) && isplayer(attacker) && attacker == inflictor) {
+  if(isDefined(inflictor) && isPlayer(attacker) && attacker == inflictor) {
     if(meansofdeath == "MOD_HEAD_SHOT" || meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_RIFLE_BULLET") {
       if(!isDefined(attacker.hits)) {
         attacker.hits = 0;
@@ -1158,7 +1158,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     }
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(isalive(attacker) && (meansofdeath === "MOD_GRENADE" || meansofdeath === "MOD_GRENADE_SPLASH")) {
       attacker.grenade_multiattack_count++;
       attacker.grenade_multiattack_ent = self;
@@ -1177,7 +1177,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
       var_6b5f7089 = 1;
     }
 
-    if(isplayer(attacker) && attacker issplitscreen()) {
+    if(isPlayer(attacker) && attacker issplitscreen()) {
       players = getplayers();
 
       if(players.size == 4) {
@@ -1347,14 +1347,14 @@ actor_killed_override(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
   }
 
   if(isDefined(eattacker)) {
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       player = eattacker;
-    } else if(isDefined(eattacker.owner) && isplayer(eattacker) && eattacker.classname == "script_vehicle") {
+    } else if(isDefined(eattacker.owner) && isPlayer(eattacker) && eattacker.classname == "script_vehicle") {
       player = eattacker.owner;
     }
   }
 
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     killcam_entity_info = killcam::get_killcam_entity_info(player, einflictor, weapon);
     deathtime = gettime();
     deathtimeoffset = 0;
@@ -1387,7 +1387,7 @@ actor_killed_override(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
     attacker = attacker.owner;
   }
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     level.n_total_kills++;
     type = undefined;
 
@@ -1684,7 +1684,7 @@ end_game() {
 
   intermission();
 
-  if(getdvar(#"hash_4413f876155a89bd", 0)) {
+  if(getDvar(#"hash_4413f876155a89bd", 0)) {
     restart_prompt();
   }
 

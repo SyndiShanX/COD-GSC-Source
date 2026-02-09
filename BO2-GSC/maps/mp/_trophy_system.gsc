@@ -252,7 +252,7 @@ watchtrophysystemdamage(watcher) {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weaponname, idflags);
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     if(level.teambased) {

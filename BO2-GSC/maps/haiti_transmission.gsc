@@ -62,8 +62,9 @@ skipto_transmission() {
   model_restore_area("convert_lobby_theater");
   a_m_big_screen = getEntArray("big_screen", "targetname");
 
-  foreach(m_big_screen in a_m_big_screen)
-  m_big_screen hide();
+  foreach(m_big_screen in a_m_big_screen) {
+    m_big_screen hide();
+  }
 
   level thread door_think("m_room_door", "theater_doors_open", "stop_transmission_3_done", vectorscale((0, 1, 0), 65.0));
   setup_harper();
@@ -112,13 +113,15 @@ foyer_main() {
   level.player maps\_fire_direction::_fire_direction_kill();
   t_perk = getent("t_bruteforce", "targetname");
 
-  if(isDefined(t_perk))
+  if(isDefined(t_perk)) {
     t_perk delete();
+  }
 
   t_perk = getent("t_intruder", "targetname");
 
-  if(isDefined(t_perk))
+  if(isDefined(t_perk)) {
     t_perk delete();
+  }
 
   set_objective(level.obj_assault_builidng, undefined, "done");
   level thread objective_breadcrumb(level.obj_goto_control_room, "obj_control_room");
@@ -170,8 +173,9 @@ foyer_main() {
 theater_main() {
   a_m_big_screen = getEntArray("big_screen", "targetname");
 
-  foreach(m_big_screen in a_m_big_screen)
-  m_big_screen hide();
+  foreach(m_big_screen in a_m_big_screen) {
+    m_big_screen hide();
+  }
 
   level thread door_think("m_room_door", "theater_doors_open", "stop_transmission_3_done", vectorscale((0, 1, 0), 65.0));
   trigger_wait("trig_theater_screeners");
@@ -209,22 +213,25 @@ transmission_main() {
   cleanup_ents("cleanup_theater");
   level thread model_restore_area("convert_after_trap");
 
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     level thread run_scene_and_delete("stop_transmission_1_harper", 0.5);
+  }
 
   level thread run_scene_and_delete("stop_transmission_1", 0.35);
   wait 1.0;
   level thread run_scene_first_frame("stop_transmission_chair_2");
 
   foreach(ai_squadmate in level.a_ai_player_squad) {
-    if(isalive(ai_squadmate))
+    if(isalive(ai_squadmate)) {
       ai_squadmate delete();
+    }
   }
 
   scene_wait("stop_transmission_1");
 
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     level thread run_scene_and_delete("stop_transmission_2_harper");
+  }
 
   level run_scene_and_delete("stop_transmission_2");
 }
@@ -234,8 +241,9 @@ its_a_trap_main() {
   m_door delete();
   level thread door_think("control_room_door", undefined, undefined, vectorscale((-1, 0, 0), 65.0), 0.05);
 
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     level thread run_scene_and_delete("stop_transmission_3_harper");
+  }
 
   level run_scene_and_delete("stop_transmission_3");
   setmusicstate("HAITI_MENENDEZ_CHASE");
@@ -243,10 +251,11 @@ its_a_trap_main() {
 }
 
 find_menendez_main() {
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     set_objective(level.obj_find_menendez, level.ai_harper, "follow");
-  else
+  } else {
     set_objective(level.obj_find_menendez);
+  }
 
   level thread spawn_static_actors("hall_body");
   run_thread_on_targetname("t_explosion", ::triggered_explosion);
@@ -277,8 +286,9 @@ celerium_main() {
   level thread sliding_door_think();
   trigger_wait("t_teleport_harper");
 
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     level thread teleport_harper_to_end();
+  }
 
   flag_wait("ending_start");
   set_objective(level.obj_find_menendez, undefined, "done");
@@ -316,19 +326,22 @@ foyer_support() {
   nd_exit = getnode("nd_foyer_upper_exit", "targetname");
   a_s_support = getstructarray("s_foyer_upper", "targetname");
 
-  foreach(s_support in a_s_support)
-  s_support thread ambient_support_respawner(a_sp_support, "throw_flashbangs", "foyer_upper_defenders", nd_exit);
+  foreach(s_support in a_s_support) {
+    s_support thread ambient_support_respawner(a_sp_support, "throw_flashbangs", "foyer_upper_defenders", nd_exit);
+  }
 }
 
 ambient_support_respawner(a_sp_support, str_endflag, str_target_group, nd_exit) {
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     nd_dest = getnode(self.target, "targetname");
+  }
 
   while(!flag(str_endflag)) {
     ai_support = simple_spawn_single(random(a_sp_support), ::ambient_support_think, self, nd_dest, str_target_group, nd_exit);
 
-    if(isDefined(ai_support))
+    if(isDefined(ai_support)) {
       ai_support waittill("death");
+    }
 
     wait(randomfloatrange(1.5, 6.0));
   }
@@ -340,10 +353,11 @@ ambient_support_think(s_start, nd_dest, str_target_group, nd_exit) {
   self.script_noteworthy = s_start.script_noteworthy;
   self change_movemode("cqb");
 
-  if(isDefined(nd_dest))
+  if(isDefined(nd_dest)) {
     self setgoalnode(nd_dest);
-  else
+  } else {
     self setgoalpos(self.origin);
+  }
 
   self thread ai_ally_attack_think(str_target_group, nd_exit);
 }
@@ -354,18 +368,21 @@ get_squadmates_inside() {
   a_nd_squadmates = getnodearray("nd_lobby_squadmates", "targetname");
 
   for(i = 0; i < level.a_ai_player_squad.size; i++) {
-    if(isalive(level.a_ai_player_squad[i]) && !level.a_ai_player_squad[i] istouching(e_volume))
+    if(isalive(level.a_ai_player_squad[i]) && !level.a_ai_player_squad[i] istouching(e_volume)) {
       level.a_ai_player_squad[i] forceteleport(a_nd_squadmates[i].origin, a_nd_squadmates[i].angles);
+    }
   }
 
-  if(level.is_harper_alive && !level.ai_harper istouching(e_volume))
+  if(level.is_harper_alive && !level.ai_harper istouching(e_volume)) {
     level.ai_harper forceteleport(a_nd_squadmates[i].origin, a_nd_squadmates[i].angles);
+  }
 
   flag_wait("haiti_gump_interior");
 
   foreach(ai_squadmember in level.a_ai_player_squad) {
-    if(isalive(ai_squadmember) && !ai_squadmember istouching(e_volume))
+    if(isalive(ai_squadmember) && !ai_squadmember istouching(e_volume)) {
       ai_squadmember dodamage(ai_squadmember.health, ai_squadmember.origin);
+    }
   }
 
   wait 0.5;
@@ -559,19 +576,22 @@ theater_cleanup() {
 control_room_closet() {
   a_m_destroyed = getEntArray("control_room_destroyed", "targetname");
 
-  foreach(m_destroyed in a_m_destroyed)
-  m_destroyed hide();
+  foreach(m_destroyed in a_m_destroyed) {
+    m_destroyed hide();
+  }
 
   flag_wait("bomb_exploded");
   level clientnotify("sndAlarms");
 
-  foreach(m_destroyed in a_m_destroyed)
-  m_destroyed show();
+  foreach(m_destroyed in a_m_destroyed) {
+    m_destroyed show();
+  }
 
   a_m_clean = getEntArray("control_room_clean", "targetname");
 
-  foreach(m_clean in a_m_clean)
-  m_clean delete();
+  foreach(m_clean in a_m_clean) {
+    m_clean delete();
+  }
 }
 
 computer_guy_think() {
@@ -621,8 +641,9 @@ fill_theater_right(player) {
 
   n_wait_time = 19.0 - (gettime() - n_start_time) / 1000;
 
-  if(n_wait_time > 0)
+  if(n_wait_time > 0) {
     wait(n_wait_time);
+  }
 
   level thread spawn_static_actors("stage_right_idle");
 }
@@ -647,21 +668,24 @@ fill_theater_left(player) {
 
   n_wait_time = 6.0 - (gettime() - n_start_time) / 1000;
 
-  if(n_wait_time > 0)
+  if(n_wait_time > 0) {
     wait(n_wait_time);
+  }
 
   level thread spawn_static_actors("stage_left_idle");
 }
 
 enter_theater(s_start_loc, s_loc_end, b_is_cqb) {
-  if(!isDefined(b_is_cqb))
+  if(!isDefined(b_is_cqb)) {
     b_is_cqb = 0;
+  }
 
   ai_seal = simple_spawn_single("seal_assault");
   ai_seal forceteleport(s_start_loc.origin, s_start_loc.angles);
 
-  if(b_is_cqb)
+  if(b_is_cqb) {
     ai_seal change_movemode("cqb");
+  }
 
   ai_seal add_cleanup_ent("cleanup_transmission");
   ai_seal.goalradius = 12;
@@ -681,8 +705,9 @@ enter_theater(s_start_loc, s_loc_end, b_is_cqb) {
 menendez_movie(m_actor) {
   a_m_big_screen = getEntArray("big_screen", "targetname");
 
-  foreach(m_big_screen in a_m_big_screen)
-  m_big_screen show();
+  foreach(m_big_screen in a_m_big_screen) {
+    m_big_screen show();
+  }
 
   play_movie_on_surface_async("haiti_int_1", 0, 0, undefined, undefined, 0.3, 1);
   play_movie_on_surface_async("haiti_int_1b", 0, 0, undefined, undefined, 0.3, 1);
@@ -732,8 +757,9 @@ booby_trap_explode(m_actor) {
   cleanup_ents("cleanup_transmission");
   ai_guy = get_ais_from_scene("stop_transmission_3", "soldier2");
 
-  if(isDefined(ai_guy))
+  if(isDefined(ai_guy)) {
     ai_guy gun_remove();
+  }
 }
 
 distant_explosions() {
@@ -747,8 +773,9 @@ distant_explosions() {
     wait(randomfloatrange(1.0, 7.0));
     b_big_explosion = 0;
 
-    if(gettime() < n_next_big_explosion)
+    if(gettime() < n_next_big_explosion) {
       b_big_explosion = 1;
+    }
 
     if(b_big_explosion) {
       n_magnitude = randomfloatrange(1.6, 2.0);
@@ -774,11 +801,13 @@ triggered_explosion() {
   simple_spawn(a_sp_guys);
   s_explosion = getstruct(self.target, "targetname");
 
-  if(isDefined(s_explosion.script_delay))
+  if(isDefined(s_explosion.script_delay)) {
     wait(s_explosion.script_delay);
+  }
 
-  if(isDefined(self.script_string))
+  if(isDefined(self.script_string)) {
     level notify(self.script_string);
+  }
 
   exploder(self.script_int);
   earthquake(2.0, 0.5, s_explosion.origin, 1000);
@@ -787,15 +816,17 @@ triggered_explosion() {
   n_radius_squared = s_explosion.radius * s_explosion.radius;
   n_magnitude = 125.0;
 
-  if(isDefined(s_explosion.script_float))
+  if(isDefined(s_explosion.script_float)) {
     n_magnitude = s_explosion.script_float;
+  }
 
   v_force = anglesToForward(s_explosion.angles) * n_magnitude;
   a_ai_guys = getaiarray("axis", "allies");
 
   foreach(ai_guy in a_ai_guys) {
-    if(distancesquared(s_explosion.origin, ai_guy.origin) < n_radius_squared)
+    if(distancesquared(s_explosion.origin, ai_guy.origin) < n_radius_squared) {
       ai_guy thread _launch_ai(v_force);
+    }
   }
 
   radiusdamage(s_explosion.origin, s_explosion.radius * 1.2, 500, 50, undefined, "MOD_EXPLOSIVE");
@@ -813,8 +844,9 @@ trig_wait_for_player(s_loc) {
       set_objective(s_loc.n_objective, s_loc, "remove");
 
       foreach(n_index, s_scan_loc in level.a_s_scan_locations) {
-        if(s_scan_loc == s_loc)
+        if(s_scan_loc == s_loc) {
           level.a_s_scan_locations[n_index] = undefined;
+        }
       }
 
       level notify("location_removed");
@@ -839,10 +871,11 @@ follow_player() {
   while(true) {
     n_dist_sq = distancesquared(level.player.origin, self.origin);
 
-    if(n_dist_sq > 262144)
+    if(n_dist_sq > 262144) {
       self change_movemode("cqb_sprint");
-    else
+    } else {
       self change_movemode("cqb");
+    }
 
     if(n_dist_sq > 65536) {
       nd_curr = getnearestnode(level.player.origin);
@@ -858,8 +891,9 @@ follow_player() {
 }
 
 hallway_pmc_think(b_unaware) {
-  if(!isDefined(b_unaware))
+  if(!isDefined(b_unaware)) {
     b_unaware = 0;
+  }
 
   self.goalradius = 1000;
   self.script_radius = 1000;
@@ -901,8 +935,9 @@ hangar_gump_wait(n_door_close_delay) {
       level.ai_harper forceteleport(s_loc.origin, s_loc.angles);
     }
 
-    while(!level.player istouching(e_vol) || !level.ai_harper istouching(e_vol))
+    while(!level.player istouching(e_vol) || !level.ai_harper istouching(e_vol)) {
       wait 0.05;
+    }
   }
 
   flag_set("close_ending_transition");
@@ -937,8 +972,9 @@ spin_emergency_light(str_targetname, str_start_notify, str_endon) {
   playFXOnTag(level._effect["emergency_light"], m_light, "tag_light_fx");
   level notify(str_start_notify);
 
-  if(isDefined(str_endon))
+  if(isDefined(str_endon)) {
     level waittill(str_endon);
+  }
 
   m_light delete();
 }
@@ -950,8 +986,9 @@ teleport_harper_to_end() {
     a_s_tp_locs = getstructarray("s_harper_skipto_end", "targetname");
 
     foreach(s_tp_loc in a_s_tp_locs) {
-      if(level.ai_harper teleport(s_tp_loc.origin, s_tp_loc.angles))
+      if(level.ai_harper teleport(s_tp_loc.origin, s_tp_loc.angles)) {
         return;
+      }
     }
   }
 }
@@ -1007,8 +1044,9 @@ friendly_asd_in_theater() {
   self endon("death");
   trig = getent("asd_in_theater", "targetname");
 
-  while(!self istouching(trig))
+  while(!self istouching(trig)) {
     wait 0.05;
+  }
 
   flag_set("asd_in_theater");
 }
@@ -1017,8 +1055,9 @@ challenge_asd_theater(str_notify) {
   self endon("death");
   flag_wait("asd_in_theater");
 
-  if(flag("brute_force_perk_used") && !flag("friendly_asd_died"))
+  if(flag("brute_force_perk_used") && !flag("friendly_asd_died")) {
     self notify(str_notify);
+  }
 }
 
 lobby_dialog() {
@@ -1028,8 +1067,9 @@ lobby_dialog() {
   flag_wait("throw_flashbangs");
   wait 3;
 
-  if(level.player maps\_flashgrenades::isflashbanged())
+  if(level.player maps\_flashgrenades::isflashbanged()) {
     level.player say_dialog("sect_dammit_return_fire_0");
+  }
 }
 
 loading_dock_dialog() {
@@ -1062,10 +1102,11 @@ theater_dialog() {
   dialog_end_convo();
   flag_wait("theater_attack_start");
 
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     harper_dialog("harp_more_quads_take_th_0");
-  else
+  } else {
     level.player say_dialog("sect_enemy_quads_incoming_0");
+  }
 
   flag_wait("theater_doors_open");
   level.player say_dialog("sect_push_forward_we_ve_0");

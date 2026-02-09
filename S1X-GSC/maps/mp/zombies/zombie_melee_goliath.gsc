@@ -899,7 +899,7 @@ onmeleegoliathkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
   var_9 = self.body;
   maps\mp\zombies\_zombies::onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-  if(isDefined(var_1) && isplayer(var_1) && var_3 == "MOD_MELEE") {
+  if(isDefined(var_1) && isPlayer(var_1) && var_3 == "MOD_MELEE") {
     var_1 maps\mp\gametypes\zombies::givezombieachievement("DLC2_ZOMBIE_LOVETAP");
   }
 

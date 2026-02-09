@@ -1,6 +1,6 @@
 /*****************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_viet_zombie_female_body.csc
+ * Script: character\clientscripts\c_viet_zombie_female_body\.csc
 *****************************************************************/
 
 matches_me() {

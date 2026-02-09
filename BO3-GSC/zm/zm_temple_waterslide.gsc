@@ -247,7 +247,7 @@ function slide_player_enter_watch() {
   trig = getent("cave_slide_force_crouch", "targetname");
   while(true) {
     trig waittill("trigger", who);
-    if(isDefined(who) && isplayer(who) && who.sessionstate != "spectator" && (!(isDefined(who.on_slide) && who.on_slide))) {
+    if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && (!(isDefined(who.on_slide) && who.on_slide))) {
       who.on_slide = 1;
       who thread player_slide_watch();
       who thread zm_audio::create_and_play_dialog("general", "slide");
@@ -259,7 +259,7 @@ function slide_player_exit_watch() {
   trig = getent("cave_slide_force_stand", "targetname");
   while(true) {
     trig waittill("trigger", who);
-    if(isDefined(who) && isplayer(who) && who.sessionstate != "spectator" && (isDefined(who.on_slide) && who.on_slide)) {
+    if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && (isDefined(who.on_slide) && who.on_slide)) {
       who.on_slide = 0;
       who notify("water_slide_exit");
     }

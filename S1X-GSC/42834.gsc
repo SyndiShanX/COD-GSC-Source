@@ -253,7 +253,7 @@ locking_target_still_valid(var_0) {
   var_2 = anglesToForward(self getangles());
   var_3 = stingerm7_get_target_pos(var_0);
 
-  if((isplayer(var_0) || isbot(var_0) || isDefined(level.ishorde) && level.ishorde && isagent(var_0)) && !maps\mp\_utility::isreallyalive(var_0)) {
+  if((isPlayer(var_0) || isbot(var_0) || isDefined(level.ishorde) && level.ishorde && isagent(var_0)) && !maps\mp\_utility::isreallyalive(var_0)) {
     return 0;
   }
 
@@ -275,7 +275,7 @@ remove_invalid_locks() {
 
       var_1 = (0, 0, 0);
 
-      if(isplayer(self.stingerm7_info.locked_targets[var_0]) || isbot(self.stingerm7_info.locked_targets[var_0])) {
+      if(isPlayer(self.stingerm7_info.locked_targets[var_0]) || isbot(self.stingerm7_info.locked_targets[var_0])) {
         var_1 = (0, 0, 64);
       }
 

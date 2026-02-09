@@ -100,7 +100,7 @@ function_89ec3604() {
 }
 
 function_51f76fdb(inflictor, attacker, damage, flags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker) && is_crossbow(weapon) && is_crossbow_charged(weapon, attacker) && attacker zm_powerups::is_insta_kill_active()) {
+  if(isPlayer(attacker) && is_crossbow(weapon) && is_crossbow_charged(weapon, attacker) && attacker zm_powerups::is_insta_kill_active()) {
     if(!isactor(self) || !isDefined(inflictor) || smeansofdeath !== "MOD_PROJECTILE") {
       return -1;
     }
@@ -214,7 +214,7 @@ function_615d8c38(params) {
     return;
   }
 
-  if(!isplayer(params.eattacker)) {
+  if(!isPlayer(params.eattacker)) {
     return;
   }
 
@@ -317,7 +317,7 @@ function_c805f2f9(params) {
   w_crossbow = params.weapon;
   var_5ff12d5f = params.einflictor;
 
-  if(!isactor(self) || !isplayer(player) || !isDefined(var_5ff12d5f)) {
+  if(!isactor(self) || !isPlayer(player) || !isDefined(var_5ff12d5f)) {
     return;
   }
 

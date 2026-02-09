@@ -26,7 +26,6 @@ build_skit_entry(character, vo) {
   entry.vo = vo;
   return entry;
 }
-
 init_skits() {
   if(!isDefined(level._skit_data)) {
     level._skit_data = [];
@@ -48,7 +47,6 @@ init_skits() {
     level._skit_data["start1"] = array(build_skit_entry("takeo", "vox_egg_skit_start_1_0"), build_skit_entry("richtofen", "vox_egg_skit_start_1_1"), build_skit_entry("nikolai", "vox_egg_skit_start_1_2"), build_skit_entry("nikolai", "vox_egg_skit_start_1_3"), build_skit_entry("takeo", "vox_egg_skit_start_1_4"), build_skit_entry("nikolai", "vox_egg_skit_start_1_5"), build_skit_entry("dempsey", "vox_egg_skit_start_1_6"), build_skit_entry("dempsey", "vox_egg_skit_start_1_7"));
   }
 }
-
 skit_interupt(fail_pos, group) {
   level endon("start_skit_done");
   if(!isDefined(level._start_skit_pos)) {
@@ -107,7 +105,7 @@ skit_interupt(fail_pos, group) {
       wait(0.2);
     }
   }
-  character = speaker getEntityNumber();
+  character = speaker GetEntityNumber();
   if(isDefined(speaker.zm_random_char)) {
     character = speaker.zm_random_char;
   }
@@ -120,7 +118,6 @@ skit_interupt(fail_pos, group) {
   speaker waittill("line_done");
   level.skit_vox_override = 0;
 }
-
 do_skit_line(script_line) {
   players = get_players();
   speaking_player = players[0];
@@ -131,7 +128,7 @@ do_skit_line(script_line) {
         break;
       }
     } else {
-      if(players[i] getEntityNumber() == script_line.character) {
+      if(players[i] GetEntityNumber() == script_line.character) {
         speaking_player = players[i];
         break;
       }
@@ -144,7 +141,6 @@ do_skit_line(script_line) {
   speaking_player.speaking_line = false;
   level notify("line_spoken");
 }
-
 start_skit(skit_name, group) {
   level endon("skit_interupt");
   script = level._skit_data[skit_name];
@@ -159,7 +155,6 @@ start_skit(skit_name, group) {
   }
   level.skit_vox_override = 0;
 }
-
 fail_skit(first_time) {
   fail_skits = undefined;
   if(isDefined(first_time) && first_time) {
@@ -196,12 +191,12 @@ fail_skit(first_time) {
     level endon("skit_interupt");
     level thread skit_interupt(pos, proposed_group);
     for(i = 0; i < proposed_group.size; i++) {
-      level thread do_skit_line(skit[proposed_group[i] getEntityNumber()]);
+      level thread do_skit_line(skit[proposed_group[i] GetEntityNumber()]);
       level waittill("line_spoken");
     }
   } else {
     player = players[RandomIntRange(0, players.size)];
-    level thread do_skit_line(skit[player getEntityNumber()]);
+    level thread do_skit_line(skit[player GetEntityNumber()]);
     level waittill("line_spoken");
   }
   level.skit_vox_override = 0;

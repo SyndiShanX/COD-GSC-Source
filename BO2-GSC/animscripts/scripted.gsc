@@ -24,8 +24,9 @@ main() {
     self.scripted_dialogue = undefined;
   }
 
-  if(isDefined(self.deathstring_passed))
+  if(isDefined(self.deathstring_passed)) {
     self.deathstring = self.deathstring_passed;
+  }
 
   self waittill("killanimscript");
 }
@@ -36,25 +37,29 @@ init(notifyname, origin, angles, theanim, animmode, root, rate, goaltime, lerpti
   self.codescripted["angles"] = angles;
   self.codescripted["anim"] = theanim;
 
-  if(isDefined(animmode))
+  if(isDefined(animmode)) {
     self.codescripted["AnimMode"] = animmode;
-  else
+  } else {
     self.codescripted["AnimMode"] = "normal";
+  }
 
-  if(isDefined(root))
+  if(isDefined(root)) {
     self.codescripted["root"] = root;
-  else
+  } else {
     self.codescripted["root"] = % body;
+  }
 
   self.codescripted["rate"] = rate;
 
-  if(isDefined(goaltime))
+  if(isDefined(goaltime)) {
     self.codescripted["goalTime"] = goaltime;
-  else
+  } else {
     self.codescripted["goalTime"] = 0.2;
+  }
 
-  if(isDefined(lerptime))
+  if(isDefined(lerptime)) {
     self.codescripted["lerpTime"] = lerptime;
-  else
+  } else {
     self.codescripted["lerpTime"] = 0.0;
+  }
 }

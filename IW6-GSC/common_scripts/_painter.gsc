@@ -681,7 +681,6 @@ orient_model() {
   if(group.bFacade) {
     self.angles = flat_angle(vectortoangles(self.origin - level.painter_player getEye()));
     self addyaw(90);
-
   }
 
   assert(isDefined(group.angleoffset) && isDefined(group.angleoffset[self.model]));
@@ -767,7 +766,6 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
       model = spam_modelattrace(countourtrace, getmodel);
       model orient_model();
       models[models.size] = model;
-
     }
   return models;
 }

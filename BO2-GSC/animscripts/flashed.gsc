@@ -23,18 +23,20 @@ main() {
   self endon("killanimscript");
   animscripts\utility::initialize("flashed");
 
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     self exitpronewrapper(1);
+  }
 
   self.a.pose = "stand";
   self startflashbanged();
   self animscripts\face::saygenericdialogue("flashbang");
   self.allowdeath = 1;
 
-  if(isDefined(self.flashedanim))
+  if(isDefined(self.flashedanim)) {
     self setanimknoball(self.flashedanim, %body);
-  else
+  } else {
     self thread flashbanganim();
+  }
 
   for(;;) {
     time = gettime();

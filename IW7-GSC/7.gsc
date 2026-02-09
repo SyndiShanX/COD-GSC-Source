@@ -4,7 +4,7 @@
 **************************************/
 
 codecallback_startgametype() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -15,7 +15,7 @@ codecallback_startgametype() {
 }
 
 codecallback_playerconnect() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -158,7 +158,7 @@ abortlevel() {
   level.callbackplayerlaststand = ::callbackvoid;
   level.callbackplayermigrated = ::callbackvoid;
   level.callbackhostmigration = ::callbackvoid;
-  setdvar("g_gametype", "dm");
+  setDvar("g_gametype", "dm");
   exitlevel(0);
 }
 

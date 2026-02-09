@@ -54,7 +54,7 @@ function result(death, attacker, mod, weapon) {
       self.variant_type = 8;
     }
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_TURNED");
   }
   self thread turned_local_blast(attacker);

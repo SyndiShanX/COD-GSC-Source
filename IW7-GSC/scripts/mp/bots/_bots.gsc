@@ -212,8 +212,7 @@ bot_set_loadout_class() {
       }
 
       if(isDefined(self.override_class_function)) {
-        self.bot_class = [
-          }
+        self.bot_class = [}
           [self.override_class_function]]();
       else {
         self.bot_class = scripts\mp\bots\bots_personality::bot_setup_callback_class();

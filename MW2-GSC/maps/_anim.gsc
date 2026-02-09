@@ -573,7 +573,6 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
         IPrintLnBold(level.scr_text[animname][anime]);
 
       // 			add_animation( animname, anime );
-
     }
 
     if(!isDefined(guy)) {
@@ -607,7 +606,6 @@ anim_single_failsafeOnGuy(owner, anime) {
   PrintLn("Guy had classname " + name + " and entnum " + num);
   waittillframeend;
   AssertEx(0, "Animation '" + anime + "' did not finish after 60 seconds. See note above");
-
 }
 
 anim_single_failsafe(guys, anime) {
@@ -736,7 +734,6 @@ anim_single_internal(guys, anime, tag, anim_end_time, animname_override) {
 
         animation = level.scr_anim[animname][anime];
         guy SetFlaggedAnim(anim_string, animation, 1, 0.2);
-
       } else
       if(guy.code_classname == "misc_turret") {
         animation = level.scr_anim[animname][anime];
@@ -788,7 +785,6 @@ anim_single_internal(guys, anime, tag, anim_end_time, animname_override) {
       IPrintLnBold(level.scr_text[animname][anime]);
       wait 1.5;
     }
-
   }
 
   if(isDefined(scriptedAnimationIndex)) {
@@ -2148,7 +2144,7 @@ anim_facialAnim(guy, anime, faceanim) {
   self endon(anime);
   changeTime = 0.05;
   // must wait because animscripted starts the main animation and we have to wait until its started
-  // 	guy SetAnim( %scripted, 0.01, 0.3, 1 );
+  // 	guy SetAnim(%scripted, 0.01, 0.3, 1 );
 
   guy notify("newLookTarget");
 
@@ -2178,7 +2174,7 @@ anim_facialFiller(msg, lookTarget) {
 
   changeTime = 0.05;
   // must wait because animscripted starts the main animation and we have to wait until its started
-  // 	guy SetAnim( %scripted, 0.01, 0.3, 1 );
+  // 	guy SetAnim(%scripted, 0.01, 0.3, 1 );
 
   self notify("newLookTarget");
   self endon("newLookTarget");

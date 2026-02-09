@@ -18,7 +18,6 @@ init() {
   declare_stage_asset_from_struct("sq", "DgCWf", "sq_dgcwf_sw1", ::sw1_thread, ::sw1_press);
   declare_stage_asset("sq", "DgCWf", "sq_dgcwf_trig", ::plate_trigger);
 }
-
 plate_counter() {
   self endon("death");
   while(1) {
@@ -32,7 +31,6 @@ plate_counter() {
     wait(0.05);
   }
 }
-
 plate_debug() {
   level endon("sq_DgCWf_over");
   if(!isDefined(level._debug_plate)) {
@@ -70,14 +68,12 @@ plate_debug() {
     wait(0.1);
   }
 }
-
 restart_plate_mon(trig) {
   trig endon("death");
   level endon("sq_DgCWf_over");
   self waittill("spawned_player");
   self thread plate_monitor(trig);
 }
-
 plate_monitor(trig) {
   self endon("disconnect");
   trig endon("death");
@@ -110,7 +106,6 @@ plate_monitor(trig) {
     }
   }
 }
-
 plate_trigger() {
   self endon("death");
   self thread play_success_audio();
@@ -126,20 +121,18 @@ plate_trigger() {
     players[i] thread plate_monitor(self);
   }
 }
-
 begin_dgcwf_vox() {
   self endon("death");
   while(1) {
     self waittill("trigger", who);
     if(isPlayer(who)) {
-      self stopLoopSound(1);
+      self stoploopsound(1);
       who thread dgcwf_story_vox();
       return;
     }
     wait(0.05);
   }
 }
-
 sw1_press() {
   self endon("death");
   while(1) {
@@ -148,7 +141,6 @@ sw1_press() {
     self.owner_ent.pressed = true;
   }
 }
-
 sw1_thread() {
   self endon("death");
   self.on_pos = self.origin;
@@ -159,7 +151,7 @@ sw1_thread() {
   while(1) {
     if(flag("dgcwf_on_plate")) {
       self.pressed = false;
-      self moveTo(self.on_pos, 0.25);
+      self moveto(self.on_pos, 0.25);
       self playSound("evt_sq_dgcwf_lever_kachunk");
       self waittill("movedone");
       self.trigger trigger_on();
@@ -177,7 +169,7 @@ sw1_thread() {
       self.pressed = false;
       self.trigger trigger_off();
       self playSound("evt_sq_dgcwf_lever_dechunk");
-      self moveTo(self.off_pos, 0.25);
+      self moveto(self.off_pos, 0.25);
       self waittill("movedone");
       while(!flag("dgcwf_on_plate")) {
         wait(0.05);
@@ -186,7 +178,6 @@ sw1_thread() {
     wait(0.05);
   }
 }
-
 init_stage() {
   level._on_plate = 0;
   if(get_players().size > 1) {
@@ -194,17 +185,15 @@ init_stage() {
   }
   flag_clear("dgcwf_sw1_pressed");
   flag_clear("dgcwf_plot_vo_done");
-  trig = getEnt("sq_dgcwf_trig", "targetname");
+  trig = GetEnt("sq_dgcwf_trig", "targetname");
   trig trigger_on();
   maps\zombie_temple_sq_brock::delete_radio();
   level thread delayed_start_skit();
 }
-
 delayed_start_skit() {
   wait(.5);
   level thread maps\zombie_temple_sq_skits::start_skit("tt2");
 }
-
 stage_logic() {
   level endon("sq_DgCWf_over");
   flag_wait("dgcwf_on_plate");
@@ -218,20 +207,17 @@ stage_logic() {
   wait(5);
   level thread stage_completed("sq", "DgCWf");
 }
-
 slightly_delayed_player_response() {
   wait(2.5);
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest2", undefined, 4);
 }
-
 play_success_audio() {
   level endon("sq_DgCWf_over");
   flag_wait("dgcwf_on_plate");
   flag_wait("dgcwf_sw1_pressed");
   self playSound("evt_sq_dgcwf_gears");
 }
-
 exit_stage(success) {
   if(isDefined(level._debug_plate)) {
     level._debug_plate = undefined;
@@ -240,7 +226,7 @@ exit_stage(success) {
     level.on_plate_text Destroy();
     level.on_plate_text = undefined;
   }
-  trig = getEnt("sq_dgcwf_trig", "targetname");
+  trig = GetEnt("sq_dgcwf_trig", "targetname");
   trig trigger_off();
   if(success) {
     maps\zombie_temple_sq_brock::create_radio(3);
@@ -254,7 +240,6 @@ exit_stage(success) {
     level._dgcwf_sound_ent = undefined;
   }
 }
-
 dgcwf_story_vox() {
   level endon("sq_DgCWf_over");
   struct = getstruct("sq_location_dgcwf", "targetname");
@@ -264,7 +249,7 @@ dgcwf_story_vox() {
   level._dgcwf_sound_ent = spawn("script_origin", struct.origin);
   if(isDefined(self)) {
     level.skit_vox_override = true;
-    self playSound("vox_egg_story_2_0" + maps\zombie_temple_sq::get_variant_from_entity_num(self getEntityNumber()), "vox_egg_sounddone");
+    self playSound("vox_egg_story_2_0" + maps\zombie_temple_sq::get_variant_from_entity_num(self GetEntityNumber()), "vox_egg_sounddone");
     self waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
@@ -272,7 +257,7 @@ dgcwf_story_vox() {
   level._dgcwf_sound_ent waittill("sounddone");
   if(isDefined(self)) {
     level.skit_vox_override = true;
-    self playSound("vox_egg_story_2_2" + maps\zombie_temple_sq::get_variant_from_entity_num(self getEntityNumber()), "vox_egg_sounddone");
+    self playSound("vox_egg_story_2_2" + maps\zombie_temple_sq::get_variant_from_entity_num(self GetEntityNumber()), "vox_egg_sounddone");
     self waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }

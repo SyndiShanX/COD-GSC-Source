@@ -74,7 +74,7 @@ function_18a77b37(slot_index) {
 
 function_442539(slot_index, weapon) {
   assert(isDefined(self.pers[# "loadout"].slots[slot_index]));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(weapon));
   self.pers[# "loadout"].slots[slot_index].weapon = weapon;
 }

@@ -32,7 +32,7 @@ func_E85E() {
       continue;
     }
 
-    if(distance2dsquared(self.origin, var_2.origin) < 100000 && isplayer(var_2)) {
+    if(distance2dsquared(self.origin, var_2.origin) < 100000 && isPlayer(var_2)) {
       var_2 thread func_A6D4(self);
     }
   }

@@ -49,7 +49,6 @@ debug_friendlyfire() {
     friendly_fire SetValue(level.player.participation);
     wait 0.25;
   }
-
 }
 
 // every entity that influences friedly fire should run this thread (ai of both teams, vehicles of both teams)
@@ -92,7 +91,7 @@ friendly_fire_think(entity) {
     if(!isDefined(weaponName))
       weaponName = entity.damageweapon;
 
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       bPlayersDamage = true;
 
       // player shot a red barrel or something similar and it blew up and damaged/killed this guy so just ignore it
@@ -105,7 +104,7 @@ friendly_fire_think(entity) {
     } else
     if((isDefined(attacker.code_classname)) && (attacker.code_classname == "script_vehicle")) {
       owner = attacker GetVehicleOwner();
-      if((isDefined(owner)) && (IsPlayer(owner)))
+      if((isDefined(owner)) && (isPlayer(owner)))
         bPlayersDamage = true;
     }
 
@@ -252,7 +251,7 @@ missionfail(civilianKilled) {
     return;
   }
 
-  if(GetDvar("friendlyfire_dev_disabled") == "1") {
+  if(getDvar("friendlyfire_dev_disabled") == "1") {
     return;
   }
   level.player endon("death");
@@ -269,18 +268,18 @@ missionfail(civilianKilled) {
   }
   if(civilianKilled)
     // You shot a civilian. Watch your fire!
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED"); // You shot a civilian. Watch your fire!
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED"); // You shot a civilian. Watch your fire!
   else if(isDefined(level.custom_friendly_fire_message))
-    SetDvar("ui_deadquote", level.custom_friendly_fire_message); // friendly fire will not be tolerated
+    setDvar("ui_deadquote", level.custom_friendly_fire_message); // friendly fire will not be tolerated
   else if(level.campaign == "british")
     // Friendly fire will not be tolerated!
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH"); // Friendly fire will not be tolerated!
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH"); // Friendly fire will not be tolerated!
   else if(level.campaign == "russian")
     // You are a traitor to the motherland!
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN"); // You are a traitor to the motherland!
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN"); // You are a traitor to the motherland!
   else
     // Friendly fire will not be tolerated!
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // Friendly fire will not be tolerated!
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // Friendly fire will not be tolerated!
 
   // shader if specified
   if(isDefined(level.custom_friendly_fire_shader))

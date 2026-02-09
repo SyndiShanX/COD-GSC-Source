@@ -830,7 +830,6 @@ give_special_ammo(boxent) {
       self default_specialammo_onUseDeployable(boxent, false, false, "deployable_specialammo_comb");
       self setLowerMessage("sp_ammo", &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
       break;
-
   }
 }
 
@@ -882,7 +881,6 @@ onUseDeployable_adrenaline(boxEnt) {
 
   if(isDefined(level.custom_adrenalinebox_logic)) {
     self thread[[level.custom_adrenalinebox_logic]](level.deployablebox_adrenalinebox_rank[boxEnt.upgrade_rank], boxEnt.upgrade_rank);
-
   }
 }
 
@@ -1005,7 +1003,6 @@ onUseDeployable_juicebox(boxEnt) {
 
   if(isDefined(level.custom_juicebox_logic)) {
     self thread[[level.custom_juicebox_logic]](level.deployablebox_juicebox_rank[boxEnt.upgrade_rank], boxEnt.upgrade_rank);
-
   }
 }
 
@@ -1075,7 +1072,6 @@ custom_juicebox_logic(juicetime, rank, isEasterEgg) {
     endTime = (self.juicetime * 1000) + GetTime();
 
     self SetClientDvar("ui_juiced_end_milliseconds", endTime);
-
   }
 
   custom_unset_juicebox();

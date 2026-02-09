@@ -565,6 +565,6 @@ is_cheating() {
     if(level.cheatStates[level.cheatDvars[i]]) {
       return true;
     }
-  return false;
+    return false;
   }
 }

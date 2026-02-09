@@ -219,7 +219,7 @@ _replace_values(a_args, value) {
 }
 
 set_takedamage(b_value = 1) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(b_value) {
       self disableinvulnerability();
     } else {
@@ -241,7 +241,7 @@ default_allowdeath() {
 }
 
 validate_takedamage() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return !self getinvulnerability();
   }
 
@@ -251,7 +251,7 @@ validate_takedamage() {
 set_takeweapons(b_value = 1) {
   if(b_value) {
     if(!(isDefined(self.gun_removed) && self.gun_removed)) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self player::take_weapons();
       } else {
         self animation::detach_weapon();
@@ -261,7 +261,7 @@ set_takeweapons(b_value = 1) {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self player::give_back_weapons();
     return;
   }
@@ -307,7 +307,7 @@ set_ignoreme(b_value = 1) {
 }
 
 set_disablegestures(b_value = 1) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.disablegestures = b_value;
   }
 }

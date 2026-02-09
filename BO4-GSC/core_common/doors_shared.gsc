@@ -478,13 +478,9 @@ class cdoor {
         b_animating = s_door_struct.c_door flag::get("animating");
 
         if(s_door_struct.c_door.m_e_door != m_e_door) {
-          if(![
-              [s_door_struct.c_door]
-            ] - > is_open() && !b_animating) {
+          if(![[s_door_struct.c_door]] - > is_open() && !b_animating) {
             s_door_struct.c_door.m_e_trigger_player = m_e_trigger_player;
-            [
-              [s_door_struct.c_door]
-            ] - > open();
+            [[s_door_struct.c_door]] - > open();
           }
         }
       }
@@ -704,12 +700,8 @@ class cdoor {
         b_animating = s_door_struct.c_door flag::get("animating");
 
         if(s_door_struct.c_door.m_e_door != m_e_door) {
-          if([
-              [s_door_struct.c_door]
-            ] - > is_open() && !b_animating) {
-            [
-              [s_door_struct.c_door]
-            ] - > close();
+          if([[s_door_struct.c_door]] - > is_open() && !b_animating) {
+            [[s_door_struct.c_door]] - > close();
           }
         }
       }
@@ -928,7 +920,6 @@ class cdoor {
   function function_61c13b93() {
     return m_v_close_pos;
   }
-
 }
 
 autoexec __init__system__() {
@@ -1019,19 +1010,11 @@ door_panel_interact(b_is_panel_reusable) {
       foreach(e_door in a_e_doors) {
         if(isDefined(e_door) && isDefined(e_door.c_door)) {
           door = e_door.c_door;
-          [
-            [door]
-          ] - > unlock();
-          [
-            [door]
-          ] - > set_player_who_opened(e_player);
+          [[door]] - > unlock();
+          [[door]] - > set_player_who_opened(e_player);
 
-          if([
-              [door]
-            ] - > is_open()) {
-            [
-              [door]
-            ] - > close();
+          if([[door]] - > is_open()) {
+            [[door]] - > close();
 
             if(!(isDefined(door.m_s_bundle.door_closes) && door.m_s_bundle.door_closes) && isDefined(door.m_s_bundle.var_d37e8f3e) && door.m_s_bundle.var_d37e8f3e) {
               door notify(#"set_destructible", {
@@ -1042,9 +1025,7 @@ door_panel_interact(b_is_panel_reusable) {
             continue;
           }
 
-          [
-            [door]
-          ] - > open();
+          [[door]] - > open();
         }
       }
 
@@ -1315,12 +1296,10 @@ door_open_update(c_door) {
     if(!c_door flag::get("open")) {
       if(!c_door flag::get("locked")) {
         if(b_hold_open || b_auto_close) {
-          [
-            [c_door]
-          ] - > open();
+          [[c_door]] - > open();
 
           if(b_hold_open) {
-            if(isplayer(e_who)) {
+            if(isPlayer(e_who)) {
               e_who player_freeze_in_place(1);
               e_who disableweapons();
               e_who disableoffhandweapons();
@@ -1328,24 +1307,20 @@ door_open_update(c_door) {
           }
 
           door_wait_until_clear(c_door, e_who);
-          [
-            [c_door]
-          ] - > close();
+          [[c_door]] - > close();
 
           if(b_hold_open) {
             waitframe(1);
             c_door flag::wait_till_clear("animating");
 
-            if(isplayer(e_who)) {
+            if(isPlayer(e_who)) {
               e_who player_freeze_in_place(0);
               e_who enableweapons();
               e_who enableoffhandweapons();
             }
           }
         } else {
-          [
-            [c_door]
-          ] - > open();
+          [[c_door]] - > open();
         }
       }
 
@@ -1513,7 +1488,7 @@ function_4fb146e4(c_door) {
   entcount = 0;
 
   foreach(entity in allentities) {
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       continue;
     }
 
@@ -1585,7 +1560,7 @@ door_wait_until_user_release(c_door, e_triggerer, str_kill_on_door_notify) {
 door_wait_until_clear(c_door, e_triggerer) {
   e_trigger = c_door.m_e_trigger;
 
-  if(isplayer(e_triggerer) && isDefined(c_door.m_s_bundle.door_use_hold) && c_door.m_s_bundle.door_use_hold) {
+  if(isPlayer(e_triggerer) && isDefined(c_door.m_s_bundle.door_use_hold) && c_door.m_s_bundle.door_use_hold) {
     c_door.m_e_trigger door_wait_until_user_release(c_door, e_triggerer);
   }
 

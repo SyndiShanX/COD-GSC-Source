@@ -238,7 +238,7 @@ function_cbb2f05b(watcher) {
     damage = weapons::function_74bbb3fa(damage, weapon, self.weapon);
     self.var_18acfe18 += damage;
 
-    if(!isplayer(attacker) && isDefined(attacker.owner)) {
+    if(!isPlayer(attacker) && isDefined(attacker.owner)) {
       attacker = attacker.owner;
     }
 

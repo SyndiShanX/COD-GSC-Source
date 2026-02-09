@@ -487,7 +487,7 @@ function abort_level() {
   level.callbackactorspawned = &callback_void;
   level.callbackbotentereduseredge = &callback_void;
   if(isDefined(level._gametype_default)) {
-    setdvar("g_gametype", level._gametype_default);
+    setDvar("g_gametype", level._gametype_default);
   }
   exitlevel(0);
 }

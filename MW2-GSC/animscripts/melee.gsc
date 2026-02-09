@@ -213,7 +213,7 @@ Melee_IsValid() {
 
   if(isDefined(self.meleeChargeDistSq))
     chargeDistSq = self.meleeChargeDistSq;
-  else if(isplayer(target))
+  else if(isPlayer(target))
     chargeDistSq = CHARGE_RANGE_SQ_VS_PLAYER;
   else
     chargeDistSq = CHARGE_RANGE_SQ;
@@ -395,7 +395,7 @@ Melee_Standard_ChooseAction() {
 Melee_Standard_ResetGiveUpTime() {
   if(isDefined(self.meleeChargeDistSq))
     chargeDistSq = self.meleeChargeDistSq;
-  else if(isplayer(self.melee.target))
+  else if(isPlayer(self.melee.target))
     chargeDistSq = CHARGE_RANGE_SQ_VS_PLAYER;
   else
     chargeDistSq = CHARGE_RANGE_SQ;
@@ -537,7 +537,7 @@ Melee_Standard_GetInPosition() {
 
   runAnim = % run_lowready_F;
 
-  if(isplayer(self.melee.target) && self.melee.target == self.enemy)
+  if(isPlayer(self.melee.target) && self.melee.target == self.enemy)
     self orientMode("face enemy");
   else
     self orientMode("face point", self.melee.target.origin);
@@ -604,7 +604,7 @@ Melee_PlayChargeSound() {
   if(!isDefined(self.a.nextMeleeChargeSound))
     self.a.nextMeleeChargeSound = 0;
 
-  if((isDefined(self.enemy) && isplayer(self.enemy)) || randomint(3) == 0) {
+  if((isDefined(self.enemy) && isPlayer(self.enemy)) || randomint(3) == 0) {
     if(gettime() > self.a.nextMeleeChargeSound) {
       self animscripts\face::SayGenericDialogue("meleecharge");
       self.a.nextMeleeChargeSound = gettime() + 8000;

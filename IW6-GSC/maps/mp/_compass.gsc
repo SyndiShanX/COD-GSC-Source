@@ -40,7 +40,7 @@ setupMiniMap(material) {
     }
   }
 
-  if(GetDvar("mapname") == "mp_boneyard_ns") {
+  if(getDvar("mapname") == "mp_boneyard_ns") {
     southeast -= (220, 220, 0);
     northwest += (220, 220, 0);
   }

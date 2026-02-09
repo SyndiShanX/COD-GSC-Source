@@ -15,7 +15,6 @@ main() {
     default:
 
       assertmsg("Traversal: 'dive_over_40' doesn't support entity type '" + self.type + "'.");
-
   }
 }
 

@@ -279,12 +279,12 @@ ispointvulnerable(var_0) {
 }
 
 avoidweapondamage(var_0) {
-  if(getdvar("scr_spawnpointnewlogic") == "0") {
+  if(getDvar("scr_spawnpointnewlogic") == "0") {
     return;
   }
   var_1 = 100000;
 
-  if(getdvar("scr_spawnpointweaponpenalty") != "" && getdvar("scr_spawnpointweaponpenalty") != "0")
+  if(getDvar("scr_spawnpointweaponpenalty") != "" && getDvar("scr_spawnpointweaponpenalty") != "0")
     var_1 = getdvarfloat("scr_spawnpointweaponpenalty");
 
   var_2 = 62500;
@@ -402,7 +402,7 @@ legacybullettracepassed(var_0, var_1, var_2) {
 }
 
 getlospenalty() {
-  if(getdvar("scr_spawnpointlospenalty") != "" && getdvar("scr_spawnpointlospenalty") != "0")
+  if(getDvar("scr_spawnpointlospenalty") != "" && getDvar("scr_spawnpointlospenalty") != "0")
     return getdvarfloat("scr_spawnpointlospenalty");
 
   return 100000;
@@ -464,7 +464,7 @@ lastminutesighttraces(var_0) {
 }
 
 avoidvisibleenemies(var_0, var_1) {
-  if(getdvar("scr_spawnpointnewlogic") == "0") {
+  if(getDvar("scr_spawnpointnewlogic") == "0") {
     return;
   }
   var_2 = getlospenalty();
@@ -493,7 +493,7 @@ avoidvisibleenemies(var_0, var_1) {
 }
 
 avoidspawnreuse(var_0, var_1) {
-  if(getdvar("scr_spawnpointnewlogic") == "0") {
+  if(getDvar("scr_spawnpointnewlogic") == "0") {
     return;
   }
   var_2 = gettime();
@@ -529,7 +529,7 @@ avoidspawnreuse(var_0, var_1) {
 }
 
 avoidsamespawn(var_0) {
-  if(getdvar("scr_spawnpointnewlogic") == "0") {
+  if(getDvar("scr_spawnpointnewlogic") == "0") {
     return;
   }
   if(!isDefined(self.lastspawnpoint)) {

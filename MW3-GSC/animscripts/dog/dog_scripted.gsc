@@ -15,7 +15,6 @@ main() {
 
   if(isDefined(self._id_3B67)) {
     self._id_3B68 = self._id_3B67;
-
   }
   self waittill("killanimscript");
 }
@@ -30,7 +29,6 @@ init(var_0, var_1, var_2, var_3, var_4, var_5) {
     self._id_3B66["animMode"] = var_4;
   } else {
     self._id_3B66["animMode"] = "normal";
-
   }
   if(isDefined(var_5)) {
     self._id_3B66["root"] = var_5;

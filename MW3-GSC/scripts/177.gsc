@@ -20,7 +20,6 @@ _id_15B7(var_0) {
     var_1 = _id_15BD(var_0);
   } else {
     var_1 = maps\_audio::_id_15B8(var_0, var_1);
-
   }
   var_1["name"] = var_0;
   var_2 = var_1["probability"];

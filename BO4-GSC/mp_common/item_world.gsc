@@ -119,7 +119,7 @@ function_e0b64358(player, item) {
 }
 
 function_f3b6e182(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   usetrigger = spawn("trigger_radius_use", (0, 0, -10000), 0, 128, 72);
   usetrigger triggerignoreteam();
   usetrigger setinvisibletoall();
@@ -137,7 +137,7 @@ function_f3b6e182(player) {
 }
 
 function_b516210b(var_889058cc, origin, activator) {
-  if(!isplayer(activator)) {
+  if(!isPlayer(activator)) {
     return;
   }
 
@@ -320,7 +320,7 @@ function_a240798a(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot
 }
 
 function_a712496a(item, player, networkid, itemid, itemcount, var_aec6fa7f, slotid) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(item_inventory::get_weapon_count() == 2) {
     stashitem = item.hidetime === -1;
@@ -353,7 +353,7 @@ function_e1965ae1() {
   level flagsys::wait_till(#"hash_507a4486c4a79f1d");
   util::wait_network_frame(1);
   level flagsys::wait_till_clear(#"hash_2d3b2a4d082ba5ee");
-  setdvar(#"hash_21e070fbb56cf0f", 0);
+  setDvar(#"hash_21e070fbb56cf0f", 0);
 
   if(isDefined(level.item_spawn_stashes)) {
     foreach(supply_stash in level.item_spawn_stashes) {
@@ -362,7 +362,7 @@ function_e1965ae1() {
   }
 
   foreach(player in getplayers()) {
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player weaponobjects::function_ac7c2bf9();
     }
   }
@@ -398,7 +398,6 @@ function_e1965ae1() {
   foreach(player in getplayers()) {
     player thread function_76eb9bd7();
   }
-
 }
 
 event_handler[freefall] function_5019e563(eventstruct) {
@@ -440,7 +439,7 @@ function_f7fb8a17(reset = 1) {
 
   level.item_spawn_seed = seedvalue;
   match_record::set_stat(#"item_spawn_seed", seedvalue);
-  setdvar(#"hash_21e070fbb56cf0f", 0);
+  setDvar(#"hash_21e070fbb56cf0f", 0);
   var_6937495e = seedvalue << 1;
   var_6937495e |= reset ? 1 : 0;
   level clientfield::set("item_world_seed", var_6937495e);
@@ -464,7 +463,7 @@ function_a7b7d70b(player, networkid) {
 
 function_8bac489c(supplystash, player) {
   assert(isDefined(supplystash));
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
   if(supplystash.var_193b3626 === player getentitynumber()) {
     return true;
@@ -807,7 +806,7 @@ _on_player_spawned() {
 
 function_9aefb438(params) {
   if(isDefined(params) && params.message == # "hash_52e9e8e985489587") {
-    if(!isDefined(self) || !isplayer(self) || !isalive(self)) {
+    if(!isDefined(self) || !isPlayer(self) || !isalive(self)) {
       params.player = undefined;
       return;
     }
@@ -913,7 +912,7 @@ function_ad7ad6ce(trigger_struct) {
   usetrigger = self;
   activator = trigger_struct.activator;
 
-  if(!isDefined(activator) || !isplayer(activator) || !isalive(activator) || activator inlaststand()) {
+  if(!isDefined(activator) || !isPlayer(activator) || !isalive(activator) || activator inlaststand()) {
     return;
   }
 
@@ -1058,7 +1057,7 @@ function_ba96cdf(player) {
 
   function_1b11e73c();
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     var_fee74908 = player function_e6ea1ee0();
 
     if(isDefined(player)) {
@@ -1251,7 +1250,7 @@ function_a54d07e6(item, activator) {
 }
 
 function_7c84312d(origin, angles) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(self.inventory)) {
     return;
@@ -1576,7 +1575,7 @@ consume_item(item) {
 }
 
 function_df82b00c() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     assert(0);
     return;
   }
@@ -1696,7 +1695,7 @@ function_de2018e3(item, player, slotid = undefined) {
 }
 
 pickup_item(item, var_22be503 = 1, var_26a492bc = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(self.inventory)) {
     return 0;
@@ -1760,7 +1759,7 @@ pickup_item(item, var_22be503 = 1, var_26a492bc = 0) {
 }
 
 function_8e0d14c1(var_4b0875ec = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   usetrigger = self.var_19caeeea;
 
   if(!isDefined(usetrigger)) {
@@ -2024,7 +2023,7 @@ function_4de3ca98() {
 function_76eb9bd7() {
   function_1b11e73c();
 
-  if(!isDefined(self) || !isplayer(self) || !isalive(self)) {
+  if(!isDefined(self) || !isPlayer(self) || !isalive(self)) {
     return;
   }
 

@@ -15,7 +15,7 @@ _id_54A7(var_0, var_1, var_2, var_3, var_4) {
   maps\_vehicle::_id_2AC2("technical", var_0, var_1, var_2);
   maps\_vehicle::_id_2AD2(::_id_2B1D);
   maps\_vehicle::_id_2A4A(var_4, "tag_50cal", var_3, undefined, "auto_ai", 0.5, 20, -14);
-  maps\_vehicle::_id_2AC1( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  maps\_vehicle::_id_2AC1(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   maps\_vehicle::_id_2AC5();
   maps\_vehicle::_id_2ACE(999, 500, 1500);
   maps\_vehicle::_id_2AC6("allies");
@@ -55,7 +55,6 @@ _id_3A9C(var_0) {
 _id_2B1D() {
   if(!isDefined(self._id_24FB)) {
     self._id_24FB = 1;
-
   }
   if(!isDefined(self._id_24F9)) {
     self._id_24F9 = 1;
@@ -69,7 +68,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 3; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_driver";
   var_0[1]._id_24F2 = "tag_gunner";

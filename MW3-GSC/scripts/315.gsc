@@ -118,17 +118,15 @@ jet_timer() {
   var_1 = max(10, var_0);
   var_1 = min(var_1, 100);
 
-  if(getdvar("jet_flyby_timer") != "") {
+  if(getDvar("jet_flyby_timer") != "") {
     level.civilianjetflyby_timer = 5 + getdvarint("jet_flyby_timer");
   } else {
     level.civilianjetflyby_timer = (0.25 + randomfloatrange(0.3, 0.7)) * 60 * var_1;
-
   }
   wait(level.civilianjetflyby_timer);
 
   while(isDefined(level.airstrikeinprogress) || isDefined(level.ac130player) || isDefined(level.chopper) || isDefined(level.remotemissileinprogress)) {
     wait 0.05;
-
   }
   self notify("start_flyby");
   level.civilianjetflyby = 1;
@@ -139,7 +137,6 @@ jet_timer() {
 gettimeinterval() {
   if(common_scripts\utility::issp()) {
     return 10.0;
-
   }
   if(isDefined(game["status"]) && game["status"] == "overtime") {
     return 1.0;
@@ -153,7 +150,6 @@ getwatcheddvar(var_0) {
 
   if(isDefined(level.overridewatchdvars) && isDefined(level.overridewatchdvars[var_0])) {
     return level.overridewatchdvars[var_0];
-
   }
   return level.watchdvars[var_0].value;
 }
@@ -225,20 +221,17 @@ jet_planesound(var_0, var_1) {
 
   while(!targetisclose(var_0, var_1)) {
     wait 0.05;
-
   }
   var_0 thread playsound_loop_on_ent("veh_mig29_close_loop");
 
   while(targetisinfront(var_0, var_1)) {
     wait 0.05;
-
   }
   wait 0.5;
   var_0 thread playsound_float("veh_mig29_sonic_boom");
 
   while(targetisclose(var_0, var_1)) {
     wait 0.05;
-
   }
   var_0 notify("stop soundveh_mig29_close_loop");
   self waittill("flyby_done");
@@ -251,7 +244,6 @@ playsound_float(var_0, var_1, var_2) {
 
   if(!isDefined(var_1)) {
     var_1 = self.origin;
-
   }
   var_3.origin = var_1;
 
@@ -259,7 +251,6 @@ playsound_float(var_0, var_1, var_2) {
     var_3 playsoundasmaster(var_0);
   } else {
     var_3 playSound(var_0);
-
   }
   wait 10.0;
   var_3 delete();
@@ -306,7 +297,6 @@ targetisclose(var_0, var_1) {
     var_3 = 1;
   } else {
     var_3 = -1;
-
   }
   var_4 = common_scripts\utility::flat_origin(var_0.origin);
   var_5 = var_4 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_3 * 100000);
@@ -334,7 +324,6 @@ vending_machine() {
 
   if(isDefined(var_3.target)) {
     self.vm_fx_loc = getent(var_3.target, "targetname").origin;
-
   }
   self.vm_normal setCanDamage(1);
   self.vm_normal_model = self.vm_normal.model;
@@ -365,7 +354,6 @@ vending_machine() {
     }
     if(isDefined(self.soda_slot)) {
       soda_can_eject();
-
     }
     soda_can_drop(spawn_soda());
     wait 0.05;
@@ -388,7 +376,6 @@ vending_machine_damage_monitor(var_0) {
     if(isDefined(var_7)) {
       if(issubstr(var_1, tolower(var_7))) {
         var_3 = var_3 * 3;
-
       }
       self.hp = self.hp - var_3;
 
@@ -402,7 +389,6 @@ vending_machine_damage_monitor(var_0) {
         var_8 = self.vm_normal.origin + (37, -31, 52);
       } else {
         var_8 = self.vm_fx_loc;
-
       }
       playFX(var_2, var_8);
       self.vm_normal setModel(self.vm_damaged_model);
@@ -410,7 +396,6 @@ vending_machine_damage_monitor(var_0) {
       while(self.soda_count > 0) {
         if(isDefined(self.soda_slot)) {
           soda_can_eject();
-
         }
         soda_can_drop(spawn_soda());
         wait 0.05;
@@ -500,7 +485,6 @@ metal_detector() {
     self.alarm_interval = 7;
   } else {
     self.alarm_interval = 2;
-
   }
   self.alarm_playing = 0;
   self.alarm_annoyance = 0;
@@ -527,7 +511,6 @@ playsound_and_light(var_0, var_1, var_2, var_3) {
 
     if(!self.alarm_annoyance) {
       self playSound(var_0);
-
     }
     playFX(var_1, var_2);
     playFX(var_1, var_3);
@@ -548,14 +531,12 @@ annoyance_tracker() {
     self.tolerance--;
   } else {
     self.alarm_annoyance = 1;
-
   }
   var_1 = gettime();
   var_2 = 7;
 
   if(common_scripts\utility::issp()) {
     var_2 = 2;
-
   }
   waittill_any_or_timeout("dmg_triggered", "touch_triggered", "weapon_triggered", var_2 + 2);
   var_3 = gettime() - var_1;
@@ -631,7 +612,6 @@ isinbound(var_0, var_1) {
 isinbound_single(var_0, var_1, var_2) {
   if(var_0 > var_1 && var_0 < var_2) {
     return 1;
-
   }
   return 0;
 }
@@ -773,7 +753,6 @@ motion_light_timeout(var_0, var_1) {
 outdoor_motion_dlight() {
   if(!isDefined(level.outdoor_motion_light)) {
     level.outdoor_motion_light = loadfx("misc/outdoor_motion_light");
-
   }
   level endon("game_ended");
   self.movetracker = 1;
@@ -870,13 +849,11 @@ trigger_door() {
 
     if(anythingtouchingtrigger(self)) {
       self waittill("trigger_empty");
-
     }
     wait 3.0;
 
     if(anythingtouchingtrigger(self)) {
       self waittill("trigger_empty");
-
     }
     var_0 thread doorclose(var_1);
   }
@@ -887,7 +864,6 @@ dooropen(var_0, var_1) {
     self rotateto((0, self.baseyaw + 90, 1), var_0, 0.1, 0.75);
   } else {
     self rotateto((0, self.baseyaw - 90, 1), var_0, 0.1, 0.75);
-
   }
   self playSound("door_generic_house_open");
   wait(var_0 + 0.05);
@@ -1042,7 +1018,6 @@ photo_copier_copy_bar_goes() {
 
     if(var_5 > 0) {
       var_1 setlightintensity(var_5);
-
     }
     wait 0.05;
   }
@@ -1092,7 +1067,6 @@ fan_blade_rotate(var_0) {
 
   if(isDefined(self.speed)) {
     var_3 = self.speed;
-
   }
   if(var_0 == "slow") {
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed") {
@@ -1110,7 +1084,6 @@ fan_blade_rotate(var_0) {
     wait 0;
   } else {
     wait(randomfloatrange(0, 1));
-
   }
   var_4 = self.angles;
   var_5 = anglestoright(self.angles) * 100;
@@ -1129,7 +1102,6 @@ fan_blade_rotate(var_0) {
       self rotatevelocity((0, var_1, 0), var_2);
     } else {
       self rotatevelocity((0, var_1, 0), var_2);
-
     }
     wait(var_2);
   }
@@ -1142,7 +1114,7 @@ triggertouchthink(var_0, var_1) {
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isplayer(var_2) && !isDefined(var_2.finished_spawning)) {
+    if(!isPlayer(var_2) && !isDefined(var_2.finished_spawning)) {
       continue;
     }
     if(!isalive(var_2)) {
@@ -1155,41 +1127,35 @@ triggertouchthink(var_0, var_1) {
 }
 
 playertouchtriggerthink(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self endon("death");
-
   }
   if(!common_scripts\utility::issp()) {
     var_3 = self.guid;
   } else {
     var_3 = "player" + gettime();
-
   }
   var_0.touchlist[var_3] = self;
 
   if(isDefined(var_0.movetracker)) {
     self.movetrackers++;
-
   }
   var_0 notify("trigger_enter", self);
   self notify("trigger_enter", var_0);
 
   if(isDefined(var_1)) {
     self thread[[var_1]](var_0);
-
   }
   self.touchtriggers[var_0.entnum] = var_0;
 
   while(isalive(self) && self istouching(var_0) && (common_scripts\utility::issp() || !level.gameended)) {
     wait 0.05;
-
   }
   if(isDefined(self)) {
     self.touchtriggers[var_0.entnum] = undefined;
 
     if(isDefined(var_0.movetracker)) {
       self.movetrackers--;
-
     }
     self notify("trigger_leave", var_0);
 
@@ -1215,9 +1181,8 @@ movementtracker() {
   }
   self endon("disconnect");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self endon("death");
-
   }
   self.movetrackers = 0;
   self.distmoved = 0;

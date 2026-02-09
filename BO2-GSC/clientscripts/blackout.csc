@@ -59,12 +59,13 @@ lerp_cam_fov(time_s, old_fov, new_fov) {
 }
 
 min_max(val, min, max) {
-  if(val < min)
+  if(val < min) {
     return min;
-  else if(val > max)
+  } else if(val > max) {
     return max;
-  else
+  } else {
     return val;
+  }
 }
 
 extra_cam_mirror_fov() {
@@ -88,8 +89,9 @@ extra_cam_mirror_fov() {
 }
 
 run_extracam_primary(localclientnum, set, newent) {
-  if(!isDefined(level.extra_cam_active_primary))
+  if(!isDefined(level.extra_cam_active_primary)) {
     level.extra_cam_active_primary = 0;
+  }
 
   if(!level.extra_cam_active_primary && set) {
     println("**** extra cam on - client****");
@@ -159,15 +161,17 @@ toggle_holo_table(localclientnum, set, newent) {
   self mapshaderconstant(localclientnum, 0, "ScriptVector0");
   unused = 0;
 
-  if(set)
+  if(set) {
     self setshaderconstant(localclientnum, 0, unused, unused, unused, 1);
-  else
+  } else {
     self setshaderconstant(localclientnum, 0, unused, unused, unused, 0);
+  }
 }
 
 set_flag_messiah_mode(localclientnum, set, newent) {
-  if(!isDefined(level.messiah_mode_on))
+  if(!isDefined(level.messiah_mode_on)) {
     level.messiah_mode_on = !set;
+  }
 
   if(set && !level.messiah_mode_on) {
     enable_filter_massiah(level.localplayers[0], 1);

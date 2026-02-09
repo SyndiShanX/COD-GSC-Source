@@ -4,7 +4,7 @@
 **************************************/
 
 trackrounds_think() {
-  if(getdvar("mapname") == getdvar("virtualLobbyMap")) {
+  if(getDvar("mapname") == getDvar("virtualLobbyMap")) {
     return;
   }
   self endon("death");
@@ -65,7 +65,7 @@ toggle_has_trackrounds(var_0) {
 }
 
 set_painted_trackrounds(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(self.painted_tracked) && self.painted_tracked) {
       return;
     }

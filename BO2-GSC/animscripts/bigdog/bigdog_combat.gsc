@@ -76,7 +76,6 @@ hunkerdown() {
     self.hunkereddown = 1;
 
     self animscripts\debug::debugpopstate();
-
   }
 }
 
@@ -94,7 +93,6 @@ hunkerup() {
     self.hunkereddown = 0;
 
     self animscripts\debug::debugpopstate();
-
   }
 }
 

@@ -599,13 +599,12 @@ getBestHeight(centerPoint) {
 
     if(trace["position"][2] > bestHeight) {
       bestHeight = trace["position"][2];
-
     }
   }
 
   self.bestHeight = bestHeight + 300;
 
-  switch (GetDvar("mapname")) {
+  switch (getDvar("mapname")) {
     case "mp_morningwood":
       self.bestHeight += 600;
       break;
@@ -627,7 +626,6 @@ getBestHeight(centerPoint) {
       }
       break;
   }
-
 }
 
 airshipFlyDefense(owner, pathStart, pathGoal, pathEnd, flyHeight, guardPosition) {
@@ -783,7 +781,6 @@ waitForConfirmation() {
   for(;;) {
     wait 0.05;
   }
-
 }
 
 airshipFlyGunner(owner, pathStart, pathGoal, pathEnd, flyHeight) {

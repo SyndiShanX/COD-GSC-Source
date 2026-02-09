@@ -189,7 +189,7 @@ function watch_for_gongs_gone_bad() {
 
 function force_eclipse_watcher() {
   level endon("end_game");
-  setdvar("scr_force_eclipse", 0);
+  setDvar("scr_force_eclipse", 0);
   level waittill("start_zombie_round_logic");
   while(true) {
     while(0 == getdvarint("scr_force_eclipse")) {
@@ -214,7 +214,7 @@ function gong_trigger_handler() {
   }
   while(true) {
     self.owner_ent.var_4ba5f5f1 waittill("damage", amount, attacker, dir, point, mod);
-    if(isplayer(attacker) && mod == "MOD_MELEE") {
+    if(isPlayer(attacker) && mod == "MOD_MELEE") {
       self.owner_ent notify("triggered", attacker);
     }
   }
@@ -465,7 +465,7 @@ function cheat_complete_stage() {
   while(true) {
     if(getdvarstring("cheat_sq") != "") {
       if(isDefined(level._last_stage_started)) {
-        setdvar("cheat_sq", "");
+        setDvar("cheat_sq", "");
         zm_sidequests::stage_completed("sq", level._last_stage_started);
       }
     }
@@ -517,14 +517,14 @@ function sidequest_done() {
   trigger.height = 72;
   while(true) {
     trigger waittill("trigger", who);
-    if(isplayer(who) && !isDefined(who._has_anti115)) {
+    if(isPlayer(who) && !isDefined(who._has_anti115)) {
       who._has_anti115 = 1;
       who playSound("zmb_meteor_activate");
       who thread reward();
       who thread zm_audio::create_and_play_dialog("eggs", "quest8", 7);
       who thread delayed_loser_response();
       break;
-    } else if(isplayer(who)) {
+    } else if(isPlayer(who)) {
       who playSound("zmb_no_cha_ching");
     }
   }
@@ -642,12 +642,12 @@ function rotate_skydome(n_time) {
   n_change = var_3557d539 / (n_time / 0.1);
   while(var_3557d539 > 0) {
     level.var_9e9e4a20 = level.var_9e9e4a20 + n_change;
-    setdvar("r_skyRotation", level.var_9e9e4a20);
+    setDvar("r_skyRotation", level.var_9e9e4a20);
     var_3557d539 = var_3557d539 - n_change;
     wait(0.1);
   }
   level.var_9e9e4a20 = 0;
-  setdvar("r_skyRotation", level.var_9e9e4a20);
+  setDvar("r_skyRotation", level.var_9e9e4a20);
 }
 
 function function_7aca917c(var_8182276a = 0) {
@@ -1046,11 +1046,11 @@ function function_e63287bf() {
 function function_b1064ab3(cmd) {
   switch (cmd) {
     case "": {
-      setdvar("", 0);
+      setDvar("", 0);
       return true;
     }
     case "": {
-      setdvar("", 1);
+      setDvar("", 1);
       return true;
     }
   }

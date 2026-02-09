@@ -266,7 +266,6 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
 
     if(!isDefined(self.bot_defending_nodes) || self.bot_defending_nodes.size == 0)
       self bot_defend_stop();
-
   } else {
     if(isDefined(optional_params))
       AssertEx(!isDefined(optional_params["capture_trigger"]), "Only a defense of type 'capture_zone' should have a 'capture_trigger' defined");
@@ -420,7 +419,7 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
 
     result = "";
     if(isDefined(self.cur_defend_node) || isDefined(self.cur_defend_point_override)) {
-      if(can_plant_trap && (self bot_is_protecting()) && !IsPlayer(defendCenter) && isDefined(self.defend_entrance_index)) {
+      if(can_plant_trap && (self bot_is_protecting()) && !isPlayer(defendCenter) && isDefined(self.defend_entrance_index)) {
         trap_item = self bot_get_ambush_trap_item("trap_directional", "trap", "c4");
         if(isDefined(trap_item)) {
           entrances = self bot_get_entrances_for_stance_and_index(undefined, self.defend_entrance_index);
@@ -608,9 +607,7 @@ defense_cautious_approach() {
       time_since_last_dist_check += 0.25;
       if(time_since_last_dist_check >= 0.5) {
         time_since_last_dist_check = 0.0;
-        if([
-            [level.bot_funcs["should_start_cautious_approach"]]
-          ](false))
+        if([[level.bot_funcs["should_start_cautious_approach"]]](false))
           should_continue_waiting = false;
       }
     }
@@ -732,7 +729,6 @@ defense_cautious_approach() {
               self notify("defend_force_node_recalculation");
               wait(0.25);
             }
-
           }
 
           wait(0.05);

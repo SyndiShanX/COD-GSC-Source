@@ -9,7 +9,6 @@
 camsys_init() {
   level.cam_shots = [];
 }
-
 create_cp(origin) {
   cp = spawnStruct();
   cp.origin = origin;
@@ -20,7 +19,6 @@ create_cp(origin) {
   cp.attrib["shake"] = undefined;
   return cp;
 }
-
 build_shot(shot_name, track_type, target_type, track_array, target_array) {
   if(isDefined(level.cam_shots[shot_name])) {
     assertmsg("shot_name of, '" + shot_name + "' already exists.");
@@ -43,7 +41,6 @@ build_shot(shot_name, track_type, target_type, track_array, target_array) {
   shot.cam_target = target;
   level.cam_shots[shot_name] = shot;
 }
-
 build_curve(cpoints) {
   curve_id = GetCurve();
   for(i = 0; i < cpoints.size; i++) {
@@ -56,20 +53,17 @@ build_curve(cpoints) {
   BuildCurve(curve_id);
   return curve_id;
 }
-
 create_camera(origin) {
   if(!isDefined(origin)) {
     origin = (0, 0, 0);
   }
   return spawn("script_camera", origin);
 }
-
 create_scene(scene_name, shots) {
   for(i = 0; i < shots.size; i++) {
     create_scene_add_shot(scene_name, shots[i]);
   }
 }
-
 play_scene(scene) {
   camera = create_camera();
   link_players_to_camera(camera);
@@ -87,7 +81,6 @@ play_scene(scene) {
   unlink_players_from_camera(camera);
   level notify("igc_finished");
 }
-
 skip_scene(scene) {
   level endon("igc_finished");
   level thread catch_use_button();
@@ -95,7 +88,6 @@ skip_scene(scene) {
   flag_set("skip_igc_" + scene);
   level notify("player_skip_igc_confirmed");
 }
-
 catch_use_button() {
   level endon("igc_finished");
   wait(0.2);
@@ -110,7 +102,6 @@ catch_use_button() {
     wait(0.05);
   }
 }
-
 create_scene_add_shot(name_of_scene, shot_name, shot_number) {
   if(!isDefined(level.cam_scenes)) {
     level.cam_scenes = [];
@@ -126,13 +117,11 @@ create_scene_add_shot(name_of_scene, shot_name, shot_number) {
   }
   level.cam_scenes[name_of_scene].shots[shot_number] = shot_name;
 }
-
 play_shot(shot_name, camera) {
   track = level.cam_shots[shot_name].cam_track;
   target = level.cam_shots[shot_name].cam_target;
   play_shot_internal(camera, track, target);
 }
-
 play_shot_internal(camera, track, target, end_on) {
   level endon("player_skip_igc_confirmed");
   track_id = -1;
@@ -172,14 +161,12 @@ play_shot_internal(camera, track, target, end_on) {
     FreeCurve(target_id);
   }
 }
-
 link_players_to_camera(camera) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] PlayerLinkToCamera(camera);
   }
 }
-
 unlink_players_from_camera(camera) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -187,14 +174,12 @@ unlink_players_from_camera(camera) {
   }
   camera Delete();
 }
-
 IsCurve(type) {
   if(type == "Timed Curve" || type == "Rounded Curve" || type == "Smoothed Curve") {
     return true;
   }
   return false;
 }
-
 create_cam_node(scene_name, pos, angles, time, accel, deccel) {
   if(!isDefined(level.cam_scenes)) {
     level.cam_scenes = [];
@@ -215,7 +200,6 @@ create_cam_node(scene_name, pos, angles, time, accel, deccel) {
   level.cam_scenes[scene_name][size]["accel"] = accel;
   level.cam_scenes[scene_name][size]["deccel"] = deccel;
 }
-
 playback_scene(option1, option2, option3) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -266,7 +250,6 @@ playback_scene(option1, option2, option3) {
   }
   level notify("plackback_finished");
 }
-
 draw_shot(shot_name) {}
 draw_shot_track(shot_name) {}
 draw_shot_target(shot_name) {}

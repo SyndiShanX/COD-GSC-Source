@@ -87,7 +87,6 @@ _id_6488(var_0, var_1) {
 
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   if(var_0 == 1) {
     _id_6499();
@@ -176,7 +175,6 @@ _id_649D(var_0) {
 
   if(!isDefined(level._id_649E)) {
     level._id_649E = [];
-
   }
   var_0._id_649F = var_1;
   level._id_649E[level._id_649E.size] = var_0;
@@ -205,7 +203,6 @@ _id_64A1() {
 _id_64A2() {
   if(!isDefined(level.chopper)) {
     _id_64A3();
-
   }
   return level.chopper;
 }
@@ -213,7 +210,6 @@ _id_64A2() {
 _id_64A3() {
   if(!isDefined(level.chopper)) {
     level.chopper = maps\_vehicle::_id_2A99("heli_nikolai");
-
   }
   level.chopper._id_581D = missile_createrepulsorent(level.chopper, 5000, 800);
   level.chopper setCanDamage(0);
@@ -233,7 +229,6 @@ _id_64A3() {
 _id_64A4() {
   if(!isDefined(level._id_64A5)) {
     level._id_64A5 = _id_594A("nikolai", "nikolai_spawn_point");
-
   }
   if(!isDefined(level._id_64A6)) {
     _id_64A2() maps\_vehicle::_id_2AE6(level._id_64A5);
@@ -251,7 +246,6 @@ _id_64A7(var_0, var_1, var_2, var_3) {
 
     if(distancesquared(var_5, self.origin) <= var_4) {
       level notify(var_3);
-
     }
     wait 0.05;
   }
@@ -274,7 +268,6 @@ _id_64A9() {
 move_player_to_start(var_0) {
   if(!isDefined(var_0)) {
     var_0 = level._id_1F19 + "_playerstart";
-
   }
   return _id_64AA(var_0, "targetname");
 }
@@ -294,7 +287,6 @@ _id_64AA(var_0, var_1) {
 _id_594A(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = level._id_1F19 + "_" + var_0;
-
   }
   var_2 = _id_594B(var_0, var_1);
   return var_2;
@@ -332,7 +324,6 @@ _id_594B(var_0, var_1) {
 
   if(isDefined(var_3.angles)) {
     var_2.angles = var_3.angles;
-
   }
   var_4 = var_2 maps\_utility::_id_166F();
   return var_4;
@@ -537,7 +528,6 @@ _id_64BF() {
 
   if(isDefined(var_0) && isDefined(var_0._id_164F)) {
     level endon(var_0._id_164F);
-
   }
   common_scripts\utility::waittill_either("death", "pain_death");
   wait 1;
@@ -554,7 +544,6 @@ _id_64C0() {
 
   if(isDefined(var_0) && isDefined(var_0._id_164F)) {
     level endon(var_0._id_164F);
-
   }
   common_scripts\utility::waittill_either("death", "pain_death");
   wait 1;
@@ -666,7 +655,6 @@ _id_64C8(var_0) {
 
     if(isalive(self)) {
       self.health = self.health * 3;
-
     }
     self.maxhealth = self.maxhealth * 3;
 
@@ -727,12 +715,10 @@ _id_64CE() {
 _id_64CF(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   if(var_1) {
     if(!isDefined(level._id_64D0)) {
       level._id_64D0 = [];
-
     }
     level._id_64D0[var_0] = 1;
   }
@@ -767,7 +753,6 @@ _id_64D2() {
     }
   } else {
     var_0 = getEntArray(self.targetname, "targetname");
-
   }
   foreach(var_3 in var_0) {
     var_3 notify("disable_trigger");
@@ -827,7 +812,6 @@ _id_64D9(var_0, var_1) {
 
   if(vectordot(var_2, var_0) < 0) {
     var_3 = -1;
-
   }
   var_4 = (1.0 - var_1) * var_0;
   var_5 = var_3 * var_1 * var_2;
@@ -839,7 +823,6 @@ _id_64DA(var_0) {
 
   if(!isDefined(var_0)) {
     var_0 = 0.1;
-
   }
   for(;;) {
     var_1 = self.origin;
@@ -860,7 +843,6 @@ _id_64DB(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     thread _id_64DC();
-
   }
   for(;;) {
     self moveto(var_4 + var_0 * var_1, var_5, 0.05, 0.05);
@@ -909,7 +891,6 @@ _id_596D(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = 4;
-
   }
   if(isDefined(level._id_596E)) {
     level._id_596E destroy();
@@ -947,13 +928,11 @@ _id_64E0(var_0, var_1) {
 
   if(!isDefined(var_0)) {
     var_0 = 1;
-
   }
   var_0 = max(0.0, min(1.0, var_0));
 
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   var_1 = max(0.01, var_1);
 
@@ -1004,7 +983,6 @@ _id_64E5(var_0, var_1, var_2) {
 
   if(!var_4) {
     var_3[var_3.size] = var_1;
-
   }
   return var_3;
 }
@@ -1090,13 +1068,11 @@ _id_64E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(isDefined(var_9.radius)) {
       var_8 = var_9.radius;
-
     }
     var_10 = vectornormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)));
 
     if(vectordot(var_10, (0, 0, 1)) < 0) {
       var_10 = var_10 * -1;
-
     }
     var_10 = var_10 * randomfloatrange(0, var_8);
     var_11 = var_9.origin + var_10;
@@ -1115,7 +1091,6 @@ _id_64E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(isDefined(var_7)) {
       var_15 = var_15 * (1.0 / var_7);
-
     }
     var_14 = var_14 * randomfloatrange(var_15, var_15 + 50);
     var_16 = var_0.origin + var_14 + var_12 * -1000;
@@ -1183,7 +1158,6 @@ _id_64EA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
     if(var_31 > var_9) {
       var_31 = var_9;
-
     }
     var_32 = var_28 * 0.5;
     var_26 = [];
@@ -1206,7 +1180,6 @@ _id_64EA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_37 = 0;
     } else if(var_37 > 1) {
       var_37 = 1;
-
     }
     var_37 = 1 - var_37;
     var_38 = var_1 + var_14 * var_37;
@@ -1217,7 +1190,6 @@ _id_64EA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_37 = 0;
     } else if(var_37 > 1) {
       var_37 = 1;
-
     }
     var_39 = var_5 + var_15 * var_37;
     setsaveddvar("player_sprintSpeedScale", var_39);
@@ -1254,19 +1226,15 @@ _id_64EC() {
 _id_64ED() {
   if(!isDefined(self)) {
     return 0;
-
   }
   if(self.a._id_0D26 == "prone") {
     return 0;
-
   }
   if(!isDefined(self.prevnode)) {
     return 0;
-
   }
   if(!isDefined(self.prevnode._id_64EE)) {
     return 0;
-
   }
   var_0 = self.angles[1];
   var_1 = self.prevnode.angles[1];
@@ -1274,13 +1242,11 @@ _id_64ED() {
 
   if(var_2 > 45) {
     return 0;
-
   }
   var_3 = distance(self.origin, self.prevnode.origin);
 
   if(var_3 > 16) {
     return 0;
-
   }
   if(isDefined(level._id_64EF)) {
     var_4 = gettime() - level._id_64EF;
@@ -1363,11 +1329,9 @@ _id_64F6(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   if(isDefined(var_0._id_2753) && var_0._id_2753 + var_1 >= var_2) {
     return var_0._id_2754;
-
   }
   var_0._id_2753 = var_2;
 
@@ -1420,7 +1384,6 @@ _id_64F8(var_0) {
 
   while(isalive(var_0) && var_0 istouching(self)) {
     wait 0.05;
-
   }
   _id_64FD();
   level._id_64F9 = undefined;
@@ -1434,11 +1397,9 @@ _id_64FB(var_0, var_1) {
 
   if(isDefined(var_0)) {
     level._id_64F9 = var_0;
-
   }
   if(isDefined(var_1)) {
     level._id_64FA = var_1;
-
   }
   while(isDefined(level._id_64F9) && level._id_64F9 != "") {
     level notify("tv_movies_played");
@@ -1450,7 +1411,6 @@ _id_64FB(var_0, var_1) {
       if(!isDefined(var_4._id_64FC)) {
         if(isDefined(level._id_64FA) && level._id_64FA != "") {
           var_4 playLoopSound(level._id_64FA);
-
         }
         var_4 thread _id_64FE();
       }
@@ -1490,7 +1450,6 @@ _id_64FF(var_0, var_1, var_2) {
 
   if(isDefined(var_1) && var_1 > 0) {
     wait(var_1);
-
   }
   setsaveddvar("cg_cinematicFullScreen", "0");
   cinematicingame(var_0);
@@ -1501,13 +1460,11 @@ _id_64FF(var_0, var_1, var_2) {
 _id_6500(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 0.05;
-
   }
   var_0 = var_0 + "";
 
   if(!isDefined(level._id_6501)) {
     level._id_6501 = [];
-
   }
   level._id_6501["num"] = [];
 
@@ -1540,25 +1497,21 @@ _id_6503(var_0, var_1, var_2, var_3, var_4) {
     setsaveddvar("compass", 0);
   } else {
     setsaveddvar("compass", 1);
-
   }
   if(var_1 == 0) {
     setsaveddvar("ammoCounterHide", 1);
   } else {
     setsaveddvar("ammoCounterHide", 0);
-
   }
   if(var_2 == 0) {
     setsaveddvar("hud_showstance", 0);
   } else {
     setsaveddvar("hud_showstance", 1);
-
   }
   if(var_3 == 0) {
     setsaveddvar("actionSlotsHide", 1);
   } else {
     setsaveddvar("actionSlotsHide", 0);
-
   }
   if(var_4 == 0) {
     setsaveddvar("hud_drawhud", 0);

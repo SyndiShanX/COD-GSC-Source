@@ -41,7 +41,6 @@ class cct_shared_desc: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("_state", 1, 2, "int");
   }
-
 }
 
 register(uid) {

@@ -12,7 +12,6 @@ main() {
   footsteps();
   maps\createfx\zombie_cod5_asylum_fx::main();
 }
-
 footsteps() {
   animscripts\utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -34,7 +33,6 @@ footsteps() {
   animscripts\utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   animscripts\utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 precache_createfx_fx() {
   level._effect["god_rays_small"] = loadfx("env/light/fx_light_god_ray_sm_single");
   level._effect["god_rays_dust_motes"] = loadfx("env/light/fx_light_god_rays_dust_motes");
@@ -92,7 +90,6 @@ precache_createfx_fx() {
   level._effect["dog_entrance"] = Loadfx("maps/zombie/fx_zombie_fire_trp");
   level._effect["fx_light_godray_md_asylum"] = loadfx("maps/zombie/fx_light_godray_md_asylum");
 }
-
 scriptedFX() {
   level._effect["large_ceiling_dust"] = LoadFx("env/dirt/fx_dust_ceiling_impact_lg_mdbrown");
   level._effect["poltergeist"] = LoadFx("misc/fx_zombie_couch_effect");
@@ -116,12 +113,12 @@ scriptedFX() {
   level._effect["elec_torso"] = loadfx("env/electrical/fx_elec_player_torso");
   level._effect["elec_trail_one_shot"] = loadfx("misc/fx_zombie_elec_trail_oneshot");
 }
-
 chair_light() {
-  lantern = getEnt("morgue_lamp", "script_noteworthy");
-  lght = getEnt("lamp_light", "targetname");
-  if(!isDefined(lght))
+  lantern = getent("morgue_lamp", "script_noteworthy");
+  lght = getent("lamp_light", "targetname");
+  if(!isDefined(lght)) {
     return;
+  }
   lght linkto(lantern);
   lght setlightintensity(2.1);
   mdl = spawn("script_model", lantern.origin);

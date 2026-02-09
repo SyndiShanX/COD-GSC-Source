@@ -198,7 +198,7 @@ function moon_be_activate() {
   start = 0;
   while(!start) {
     d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-    if(isplayer(attacker) && moon_be_move(road_start.script_string)) {
+    if(isPlayer(attacker) && moon_be_move(road_start.script_string)) {
       if(moon_be_move(dmg_type)) {
         level._be playSound("evt_sq_blackegg_activate");
         attacker thread play_be_hit_vox(1);
@@ -244,7 +244,7 @@ function moon_be_think() {
           motivation = 1;
         } else {
           d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-          if(isplayer(attacker) && moon_be_move(node.script_string)) {
+          if(isPlayer(attacker) && moon_be_move(node.script_string)) {
             motivation = moon_be_move(dmg_type);
             vox_dude = attacker;
           }
@@ -340,7 +340,7 @@ function moon_be_think() {
             motivation = 1;
           } else {
             d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-            if(isplayer(attacker) && moon_be_move(next_chain_start.script_string)) {
+            if(isPlayer(attacker) && moon_be_move(next_chain_start.script_string)) {
               motivation = moon_be_move(dmg_type);
               vox_dude = attacker;
             }

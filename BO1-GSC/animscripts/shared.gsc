@@ -9,6 +9,7 @@
 #include animscripts\anims;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 placeWeaponOn(weapon, position) {
   self notify("weapon_position_change");
   if(!isDefined(self.weaponInfo[weapon])) {
@@ -48,17 +49,14 @@ placeWeaponOn(weapon, position) {
   call_overloaded_func("animscripts\init", "SetWeaponDist");
   assert(self.a.weaponPos["left"] == "none" || self.a.weaponPos["right"] == "none");
 }
-
 detachWeapon(weapon) {
   self.a.weaponPos[self.weaponInfo[weapon].position] = "none";
   self.weaponInfo[weapon].position = "none";
 }
-
 attachWeapon(weapon, position) {
   self.weaponInfo[weapon].position = position;
   self.a.weaponPos[position] = weapon;
 }
-
 detachAllWeaponModels() {
   if(isDefined(self.weapon_positions)) {
     for(index = 0; index < self.weapon_positions.size; index++) {
@@ -70,7 +68,6 @@ detachAllWeaponModels() {
     }
   }
 }
-
 updateAttachedWeaponModels() {
   if(isDefined(self.weapon_positions)) {
     for(index = 0; index < self.weapon_positions.size; index++) {
@@ -85,7 +82,6 @@ updateAttachedWeaponModels() {
     }
   }
 }
-
 getTagForPos(position) {
   switch (position) {
     case "chest":
@@ -103,7 +99,6 @@ getTagForPos(position) {
       break;
   }
 }
-
 DropAIWeapon() {
   if(is_true(self.a.dropping_weapons)) {
     return;
@@ -137,7 +132,6 @@ DropAIWeapon() {
   }
   self.weapon = "none";
 }
-
 DropAllAIWeapons() {
   if(is_true(self.a.dropping_weapons)) {
     return;
@@ -174,7 +168,6 @@ DropAllAIWeapons() {
   self.weapon = "none";
   self.a.dropping_weapons = undefined;
 }
-
 swapDropWeapon() {
   if(has_script_drop_weapon()) {
     found_weapon = false;
@@ -199,7 +192,6 @@ swapDropWeapon() {
     self.script_dropweapon = undefined;
   }
 }
-
 swapDropWeaponPrimary() {
   if(has_script_drop_weapon()) {
     position = self.weaponInfo[self.primaryweapon].position;
@@ -210,18 +202,15 @@ swapDropWeaponPrimary() {
     }
   }
 }
-
 addPhysWeapon() {
   self thread deleteAtLimit();
 }
-
 has_script_drop_weapon() {
   if(isDefined(self.script_dropweapon) && IsString(self.script_dropweapon) && (self.script_dropweapon != "")) {
     return true;
   }
   return false;
 }
-
 player_weapon_drop(weapon_name) {
   if(IsSubStr(ToLower(weapon_name), "rpg")) {
     return "rpg_player_sp";
@@ -230,12 +219,10 @@ player_weapon_drop(weapon_name) {
   }
   return weapon_name;
 }
-
 deleteAtLimit() {
   wait 30.0;
   self delete();
 }
-
 HandleDogSoundNoteTracks(note) {
   if(note == "sound_dogstep_run_default") {
     self playSound("fly_dog_step_run_default");
@@ -253,7 +240,6 @@ HandleDogSoundNoteTracks(note) {
   }
   return true;
 }
-
 registerNoteTracks() {
   anim.notetracks["anim_pose = \"stand\""] = ::noteTrackPoseStand;
   anim.notetracks["anim_pose = \"crouch\""] = ::noteTrackPoseCrouch;
@@ -307,7 +293,6 @@ registerNoteTracks() {
   anim.notetracks["headlookat = \"player\""] = ::noteTrackHeadLookatPlayer;
   anim.notetracks["lookat = \"\""] = ::noteTrackClearLookAt;
 }
-
 noteTrackLookAtPlayer(note, flagName) {
   if(!IsSentient(self)) {
     return;
@@ -316,7 +301,6 @@ noteTrackLookAtPlayer(note, flagName) {
   self.lookat_set_in_anim = true;
   self LookAtEntity(get_players()[0]);
 }
-
 noteTrackHeadLookAtPlayer(note, flagName) {
   if(!IsSentient(self)) {
     return;
@@ -326,7 +310,6 @@ noteTrackHeadLookAtPlayer(note, flagName) {
   self.lookat_set_in_anim = true;
   self LookAtEntity(get_players()[0]);
 }
-
 noteTrackClearLookAt(note, flagName) {
   if(!IsSentient(self)) {
     return;
@@ -336,7 +319,6 @@ noteTrackClearLookAt(note, flagName) {
   SetSavedDvar("ik_dvar_lookatentity_notorso", false);
   self LookAtEntity();
 }
-
 noteTrackFire(note, flagName) {
   if(!IsSentient(self)) {
     return;
@@ -347,7 +329,6 @@ noteTrackFire(note, flagName) {
     thread[[animscripts\shared::shootNotetrack]]();
   }
 }
-
 noteTrackStopAnim(note, flagName) {}
 noteTrackStartRagdoll(note, flagName) {
   if(isDefined(self.noragdoll)) {
@@ -355,43 +336,36 @@ noteTrackStartRagdoll(note, flagName) {
   }
   self do_ragdoll_death();
 }
-
 noteTrackMovementStop(note, flagName) {
   if(IsSentient(self)) {
     self.a.movement = "stop";
   }
 }
-
 noteTrackMovementWalk(note, flagName) {
   if(IsSentient(self)) {
     self.a.movement = "walk";
   }
 }
-
 noteTrackMovementRun(note, flagName) {
   if(IsSentient(self)) {
     self.a.movement = "run";
   }
 }
-
 noteTrackAlertnessAiming(note, flagName) {
   if(IsSentient(self)) {
     self.a.alertness = "aiming";
   }
 }
-
 noteTrackAlertnessCasual(note, flagName) {
   if(IsSentient(self)) {
     self.a.alertness = "casual";
   }
 }
-
 noteTrackAlertnessAlert(note, flagName) {
   if(IsSentient(self)) {
     self.a.alertness = "alert";
   }
 }
-
 noteTrackPoseStand(note, flagName) {
   if(IsSentient(self)) {
     if(self.a.pose == "prone") {
@@ -402,7 +376,6 @@ noteTrackPoseStand(note, flagName) {
     self notify("entered_pose" + "stand");
   }
 }
-
 noteTrackPoseCrouch(note, flagName) {
   if(IsSentient(self)) {
     if(self.a.pose == "prone") {
@@ -417,7 +390,6 @@ noteTrackPoseCrouch(note, flagName) {
     }
   }
 }
-
 noteTrackPoseProne(note, flagName) {
   if(IsSentient(self)) {
     self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
@@ -426,7 +398,6 @@ noteTrackPoseProne(note, flagName) {
     self notify("entered_pose" + "prone");
   }
 }
-
 noteTrackPoseCrawl(note, flagName) {
   if(IsSentient(self)) {
     self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
@@ -435,7 +406,6 @@ noteTrackPoseCrawl(note, flagName) {
     self notify("entered_pose" + "prone");
   }
 }
-
 noteTrackPoseBack(note, flagName) {
   if(self.a.pose == "prone") {
     self ExitProneWrapper(1.0);
@@ -444,7 +414,6 @@ noteTrackPoseBack(note, flagName) {
   self notify("entered_pose" + "back");
   self.a.movement = "stop";
 }
-
 noteTrackGunHand(note, flagName) {
   if(isSubStr(note, "leftright")) {
     animscripts\shared::placeWeaponOn(self.weapon, "left");
@@ -459,16 +428,14 @@ noteTrackGunHand(note, flagName) {
     animscripts\shared::placeWeaponOn(self.weapon, "none");
   }
 }
-
 placeWeaponOnRightOnInterrupt() {
   self endon("death");
   self endon("placed_weapon_on_right");
   self waittill("killanimscript");
-  if(AIhasWeapon(self.weapon)) {
+  if(AIHasWeapon(self.weapon)) {
     animscripts\shared::placeWeaponOn(self.weapon, "right");
   }
 }
-
 noteTrackGunDrop(note, flagName) {
   self.lastWeapon = self.weapon;
   primaryweapon = self.primaryweapon;
@@ -482,23 +449,19 @@ noteTrackGunDrop(note, flagName) {
   }
   self animscripts\anims::clearAnimCache();
 }
-
 noteTrackGunToChest(note, flagName) {
   animscripts\shared::placeWeaponOn(self.weapon, "chest");
 }
-
 noteTrackGunToBack(note, flagName) {
   animscripts\shared::placeWeaponOn(self.weapon, "back");
   self.weapon = self getPreferredWeapon();
   self.bulletsInClip = weaponClipSize(self.weapon);
   self animscripts\anims::clearAnimCache();
 }
-
 noteTrackChestToBack(note, flagName) {
   assert(hasSecondaryWeapon());
   animscripts\shared::placeWeaponOn(getSecondaryWeapon(), "back");
 }
-
 noteTrackPistolPickup(note, flagName) {
   if(AIHasSidearm()) {
     animscripts\shared::placeWeaponOn(self.sidearm, "right");
@@ -506,14 +469,12 @@ noteTrackPistolPickup(note, flagName) {
     self notify("weapon_switch_done");
   }
 }
-
 noteTrackPistolPutaway(note, flagName) {
   animscripts\shared::placeWeaponOn(self.weapon, "none");
   self.weapon = self getPreferredWeapon();
   self.bulletsInClip = weaponClipSize(self.weapon);
   self animscripts\anims::clearAnimCache();
 }
-
 noteTrackWeaponSwitch(note, flagName) {
   assertex(hasSecondaryWeapon(), "no secondary weapon available! check the aitype for this actor. ");
   if(self.weapon == self.primaryweapon) {
@@ -541,22 +502,18 @@ noteTrackWeaponSwitch(note, flagName) {
   noteTrackWeaponSwitchGlint(note, flagName);
   self.lastWeapon = self.weapon;
 }
-
 noteTrackWeaponSwitchGlint(note, flagName) {
   if(isDefined(self.weapon)) {}
 }
-
 noteTrackDropClip(note, flagName) {
   self thread handleDropClip(flagName);
 }
-
 noteTrackRefillClip(note, flagName) {
   if(weaponClass(self.weapon) == "rocketlauncher") {
     self showRocket();
   }
   self animscripts\weaponList::RefillClip();
 }
-
 noteTrackLoadShell(note, flagName) {}
 noteTrackPistolRechamber(note, flagName) {}
 noteTrackGravity(note, flagName) {
@@ -566,7 +523,6 @@ noteTrackGravity(note, flagName) {
     self AnimMode("nogravity");
   }
 }
-
 noteTrackBodyFall(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
@@ -579,7 +535,6 @@ noteTrackBodyFall(note, flagName) {
     self playSound("fly_bodyfall_small_" + groundType);
   }
 }
-
 noteTrackFootStep(note, flagName) {
   if(isSubStr(note, "left")) {
     playFootStep("J_Ball_LE");
@@ -590,7 +545,6 @@ noteTrackFootStep(note, flagName) {
     self playSound("fly_gear_run");
   }
 }
-
 noteTrackFootScrape(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
@@ -599,20 +553,18 @@ noteTrackFootScrape(note, flagName) {
   }
   self playSound("fly_step_scrape_" + groundType);
 }
-
 noteTrackLand(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
   } else {
     groundType = "dirt";
   }
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self playSound("fly_land_plr_" + groundType);
   } else {
     self playSound("fly_land_npc_" + groundType);
   }
 }
-
 HandleNoteTrack(note, flagName, customFunction, var1) {
   if(isAI(self) && self.isdog) {
     if(HandleDogSoundNoteTracks(note)) {
@@ -675,19 +627,14 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
     default:
       if(isDefined(customFunction)) {
         if(!isDefined(var1)) {
-          return [
-            [customFunction]
-          ](note);
+          return [[customFunction]](note);
         } else {
-          return [
-            [customFunction]
-          ](note, var1);
+          return [[customFunction]](note, var1);
         }
       }
       break;
   }
 }
-
 DoNoteTracks(flagName, customFunction, debugIdentifier, var1) {
   for(;;) {
     self waittill(flagName, note);
@@ -700,7 +647,6 @@ DoNoteTracks(flagName, customFunction, debugIdentifier, var1) {
     }
   }
 }
-
 DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
   assert(isDefined(interceptFunction));
   for(;;) {
@@ -718,7 +664,6 @@ DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
     }
   }
 }
-
 DoNoteTracksPostCallback(flagName, postFunction) {
   assert(isDefined(postFunction));
   for(;;) {
@@ -733,15 +678,12 @@ DoNoteTracksPostCallback(flagName, postFunction) {
     }
   }
 }
-
 DoNoteTracksForever(flagName, killString, customFunction, debugIdentifier) {
   DoNoteTracksForeverProc(::DoNoteTracks, flagName, killString, customFunction, debugIdentifier);
 }
-
 DoNoteTracksForeverIntercept(flagName, killString, interceptFunction, debugIdentifier) {
   DoNoteTracksForeverProc(::DoNoteTracksIntercept, flagName, killString, interceptFunction, debugIdentifier);
 }
-
 DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, debugIdentifier) {
   if(isDefined(killString)) {
     self endon(killString);
@@ -765,29 +707,24 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
     }
   }
 }
-
 DoNoteTracksForTime(time, flagName, customFunction, debugIdentifier) {
   ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, time, flagName, customFunction, debugIdentifier, ent);
 }
-
 DoNoteTracksForTimeIntercept(time, flagName, interceptFunction, debugIdentifier) {
   ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForeverIntercept, time, flagName, interceptFunction, debugIdentifier, ent);
 }
-
 DoNoteTracksForTimeProc(doNoteTracksForeverFunc, time, flagName, customFunction, debugIdentifier, ent) {
   ent endon("stop_notetracks");
   [[doNoteTracksForeverFunc]](flagName, undefined, customFunction, debugIdentifier);
 }
-
 doNoteTracksForTimeEndNotify(time) {
   wait(time);
   self notify("stop_notetracks");
 }
-
 playFootStep(foot) {
   if(!level.clientScripts) {
     if(!isAI(self)) {
@@ -813,7 +750,6 @@ playFootStep(foot) {
   }
   [[anim.optionalStepEffectFunction]](foot, groundType);
 }
-
 playFootStepEffect(foot, groundType) {
   if(level.clientScripts) {
     return;
@@ -830,7 +766,6 @@ playFootStepEffect(foot, groundType) {
     return;
   }
 }
-
 shootNotetrack() {
   waittillframeend;
   now = GetTime();
@@ -843,7 +778,6 @@ shootNotetrack() {
     }
   }
 }
-
 fire_straight() {
   if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none") {
     return;
@@ -859,7 +793,6 @@ fire_straight() {
   self shoot(1, pos);
   self decrementBulletsInClip();
 }
-
 noteTrackFireSpray(note, flagName) {
   if(self.a.weaponPos["right"] == "none") {
     return;
@@ -882,7 +815,6 @@ noteTrackFireSpray(note, flagName) {
   }
   self decrementBulletsInClip();
 }
-
 getPredictedAimYawToShootEntOrPos(time) {
   if(!isDefined(self.shootEnt)) {
     if(!isDefined(self.shootPos)) {
@@ -893,7 +825,6 @@ getPredictedAimYawToShootEntOrPos(time) {
   predictedPos = self.shootEnt.origin + vector_scale(self.shootEntVelocity, time);
   return getAimYawToPoint(predictedPos);
 }
-
 getAimYawToShootEntOrPos() {
   if(!isDefined(self.shootEnt)) {
     if(!isDefined(self.shootPos)) {
@@ -903,7 +834,6 @@ getAimYawToShootEntOrPos() {
   }
   return getAimYawToPoint(self.shootEnt GetShootAtPos(self));
 }
-
 getAimPitchToShootEntOrPos() {
   pitch = getPitchToShootEntOrPos();
   if(self.a.script == "cover_crouch" && isDefined(self.a.coverMode) && self.a.coverMode == "lean") {
@@ -911,7 +841,6 @@ getAimPitchToShootEntOrPos() {
   }
   return pitch;
 }
-
 getPitchToShootEntOrPos() {
   if(!isDefined(self.shootEnt)) {
     if(!isDefined(self.shootPos)) {
@@ -921,7 +850,6 @@ getPitchToShootEntOrPos() {
   }
   return animscripts\combat_utility::getPitchToSpot(self.shootEnt GetShootAtPos(self));
 }
-
 getAimYawToPoint(point) {
   yaw = GetYawToSpot(point);
   dist = distance(self.origin, point);
@@ -932,17 +860,14 @@ getAimYawToPoint(point) {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 trackShootEntOrPos() {
   self animscripts\shared::setAimingAnims(%aim_2, %aim_4, %aim_6, %aim_8);
   self animscripts\shared::trackLoopStart();
 }
-
 trackLoopStart() {
   self notify("trackLoopStart");
   self.pauseTrackLoop = false;
 }
-
 trackLoopPause() {
   self endon("death");
   while(1) {
@@ -950,13 +875,11 @@ trackLoopPause() {
     self.pauseTrackLoop = true;
   }
 }
-
 trackLoopPacer() {
   self endon("death");
   wait(0.05);
   self notify("trackLoopStart");
 }
-
 scriptNeedsTagAim() {
   if(isDefined(self.a.script)) {
     if(self.a.script == "move" || self.a.script == "cover_right" || self.a.script == "cover_left" || self.a.script == "cover_pillar") {
@@ -965,7 +888,6 @@ scriptNeedsTagAim() {
   }
   return false;
 }
-
 trackLoopGetShootFromPos() {
   origin = undefined;
   if(scriptNeedsTagAim()) {
@@ -980,7 +902,6 @@ trackLoopGetShootFromPos() {
   }
   return origin;
 }
-
 trackLoopGetShootFromAngles() {
   angles = undefined;
   if(scriptNeedsTagAim()) {
@@ -991,7 +912,6 @@ trackLoopGetShootFromAngles() {
   }
   return angles;
 }
-
 trackLoop() {
   self endon("death");
   self.aimAngleOffset = 0;
@@ -1081,7 +1001,7 @@ trackLoop() {
     shootFromAngles = (shootFromPitchAngle, shootFromYawAngle, shootFromAngles[2]);
     if(!isDefined(shootPos)) {
       assert(!isDefined(self.shootEnt));
-      if(isDefined(self.node) && self.node.type == "Guard" && distanceSquared(self.origin, self.node.origin) < 16) {
+      if(isDefined(self.node) && self.node.type == "Guard" && DistanceSquared(self.origin, self.node.origin) < 16) {
         yawDelta = AngleClamp180(shootFromYawAngle - self.node.angles[1]);
         pitchDelta = 0;
       } else {
@@ -1125,11 +1045,13 @@ trackLoop() {
       adjustedMaxYawDeltaChange = maxYawDeltaChange + abs(shootFromYawDelta);
       adjustedMaxPitchDeltaChange = maxPitchDeltaChange + abs(shootFromPitchDelta);
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > adjustedMaxYawDeltaChange)
+      if(abs(yawDeltaChange) > adjustedMaxYawDeltaChange) {
         yawDelta = prevYawDelta + adjustedMaxYawDeltaChange * sign(yawDeltaChange);
+      }
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > adjustedMaxPitchDeltaChange)
+      if(abs(pitchDeltaChange) > adjustedMaxPitchDeltaChange) {
         pitchDelta = prevPitchDelta + adjustedMaxPitchDeltaChange * sign(pitchDeltaChange);
+      }
     }
     prevshootFromYawAngle = shootFromYawAngle;
     prevshootFromPitchAngle = shootFromPitchAngle;
@@ -1178,7 +1100,6 @@ trackLoop() {
     }
   }
 }
-
 setAnimAimWeight(goalweight, goaltime) {
   if(!isDefined(goaltime) || goaltime <= 0) {
     self.a.aimweight = goalweight;
@@ -1186,15 +1107,15 @@ setAnimAimWeight(goalweight, goaltime) {
     self.a.aimweight_end = goalweight;
     self.a.aimweight_transframes = 0;
   } else {
-    if(!isDefined(self.a.aimweight))
+    if(!isDefined(self.a.aimweight)) {
       self.a.aimweight = 0;
+    }
     self.a.aimweight_start = self.a.aimweight;
     self.a.aimweight_end = goalweight;
     self.a.aimweight_transframes = int(goaltime * 20);
   }
   self.a.aimweight_t = 0;
 }
-
 incrAnimAimWeight() {
   if(self.a.aimweight_t < self.a.aimweight_transframes) {
     self.a.aimweight_t++;
@@ -1202,15 +1123,14 @@ incrAnimAimWeight() {
     self.a.aimweight = self.a.aimweight_start * (1 - t) + self.a.aimweight_end * t;
   }
 }
-
 decideNumShotsForBurst() {
   numShots = 0;
   if(animscripts\weaponList::usingSemiAutoWeapon()) {
-    numShots = anim.semiFireNumShots[randomInt(anim.semiFireNumShots.size)];
+    numShots = anim.semiFireNumShots[RandomInt(anim.semiFireNumShots.size)];
   } else if(self.fastBurst) {
-    numShots = anim.fastBurstFireNumShots[randomInt(anim.fastBurstFireNumShots.size)];
+    numShots = anim.fastBurstFireNumShots[RandomInt(anim.fastBurstFireNumShots.size)];
   } else {
-    numShots = anim.burstFireNumShots[randomInt(anim.burstFireNumShots.size)];
+    numShots = anim.burstFireNumShots[RandomInt(anim.burstFireNumShots.size)];
   }
   if(numShots <= self.bulletsInClip) {
     return numShots;
@@ -1221,7 +1141,6 @@ decideNumShotsForBurst() {
   }
   return self.bulletsInClip;
 }
-
 decideNumShotsForFull() {
   numShots = self.bulletsInClip;
   if(weaponClass(self.weapon) == "mg") {
@@ -1236,7 +1155,6 @@ decideNumShotsForFull() {
   }
   return numShots;
 }
-
 handleDropClip(flagName) {
   self endon("killanimscript");
   self endon("abort_reload");
@@ -1287,7 +1205,6 @@ handleDropClip(flagName) {
     }
   }
 }
-
 resetClipOnAbort(clipModel, currentTag) {
   self notify("clip_detached");
   self endon("clip_detached");
@@ -1307,10 +1224,9 @@ resetClipOnAbort(clipModel, currentTag) {
     }
   }
 }
-
 moveToOriginOverTime(origin, time) {
   self endon("killanimscript");
-  if(distanceSquared(self.origin, origin) > 16 * 16 && !self mayMoveToPoint(origin)) {
+  if(DistanceSquared(self.origin, origin) > 16 * 16 && !self mayMoveToPoint(origin)) {
     return;
   }
   self.keepClaimedNodeInGoal = true;
@@ -1324,11 +1240,9 @@ moveToOriginOverTime(origin, time) {
   }
   self.keepClaimedNodeInGoal = false;
 }
-
 returnTrue() {
   return true;
 }
-
 playLookAnimation(lookAnim, lookTime, canStopCallback) {
   if(!isDefined(canStopCallback)) {
     canStopCallback = ::returnTrue;
@@ -1346,23 +1260,20 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
     wait(0.1);
   }
 }
-
 getSecondaryWeapon() {
   if(isDefined(self.weapon)) {
-    if(self.weapon == self.primaryweapon && AIhasWeapon(self.secondaryweapon) && weaponClass(self.secondaryweapon) != "pistol") {
+    if(self.weapon == self.primaryweapon && AIHasWeapon(self.secondaryweapon) && weaponClass(self.secondaryweapon) != "pistol") {
       return self.secondaryweapon;
-    } else if(self.weapon == self.secondaryweapon && AIhasWeapon(self.primaryweapon) && weaponClass(self.secondaryweapon) != "pistol") {
+    } else if(self.weapon == self.secondaryweapon && AIHasWeapon(self.primaryweapon) && weaponClass(self.secondaryweapon) != "pistol") {
       return self.primaryweapon;
     }
   }
   return undefined;
 }
-
 hasSecondaryWeapon() {
   weapon = getSecondaryWeapon();
   return (isDefined(weapon) && (weapon != "none"));
 }
-
 shouldThrowDownWeapon() {
   if(!hasSecondaryWeapon()) {
     return false;
@@ -1382,7 +1293,6 @@ shouldThrowDownWeapon() {
   }
   return false;
 }
-
 throwDownWeapon() {
   self endon("killanimscript");
   swapAnim = animArray("throw_down_weapon");
@@ -1399,7 +1309,7 @@ throwDownWeapon() {
     }
     if(note == "anim_gunhand = \"right\"") {
       assertex(hasSecondaryWeapon(), "self.secondaryweapon not defined! check the aitype for this actor. ");
-      if(AIhasWeapon(self.secondaryweapon)) {
+      if(AIHasWeapon(self.secondaryweapon)) {
         self animscripts\shared::placeWeaponOn(self.secondaryweapon, "right");
       } else {
         self animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
@@ -1411,7 +1321,6 @@ throwDownWeapon() {
   }
   self maps\_gameskill::didSomethingOtherThanShooting();
 }
-
 shouldSwitchWeapons() {
   if(!hasSecondaryWeapon() || !self.a.allow_weapon_switch) {
     return false;
@@ -1442,7 +1351,6 @@ shouldSwitchWeapons() {
   }
   return false;
 }
-
 shouldSwitchWeaponForDistance() {
   if((weaponAnims() == "rocketlauncher" && isEnemyInExplodableVolume()) || !IsSentient(self.enemy)) {
     return false;
@@ -1489,7 +1397,6 @@ shouldSwitchWeaponForDistance() {
   self.a.weapon_switch_for_distance_time = -1;
   return false;
 }
-
 isExposed() {
   if(self.a.script == "cover_crouch" || self.a.script == "cover_stand") {
     if(isDefined(self.a.coverMode) && self.a.coverMode == "Hide") {
@@ -1502,7 +1409,6 @@ isExposed() {
   }
   return true;
 }
-
 getWeaponSwitchAnim() {
   animName = "weapon_switch";
   if(!isExposed()) {
@@ -1524,7 +1430,6 @@ getWeaponSwitchAnim() {
   }
   return animArray(animName);
 }
-
 getWeaponPulloutAnim() {
   animName = "weapon_pullout";
   if(!isExposed()) {
@@ -1536,7 +1441,6 @@ getWeaponPulloutAnim() {
   }
   return animArray(animName);
 }
-
 switchWeapons() {
   swapAnim = getWeaponSwitchAnim();
   if(!isDefined(swapAnim)) {
@@ -1558,7 +1462,6 @@ switchWeapons() {
   self notify("weapon_switched");
   self maps\_gameskill::didSomethingOtherThanShooting();
 }
-
 isEnemyInExplodableVolume() {
   if(!isDefined(self.enemy)) {
     return false;
@@ -1574,7 +1477,6 @@ isEnemyInExplodableVolume() {
   }
   return false;
 }
-
 shouldSwitchWeaponForSituation() {
   self endon("death");
   secondaryWeaponClass = weaponClass(self getSecondaryWeapon());
@@ -1583,7 +1485,6 @@ shouldSwitchWeaponForSituation() {
   }
   return false;
 }
-
 setAimingAnims(aim_2, aim_4, aim_6, aim_8) {
   assert(isDefined(aim_2));
   assert(isDefined(aim_4));

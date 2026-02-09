@@ -78,7 +78,6 @@ _id_1954() {
 
   while(getdvarint("test_next_mission") < 1) {
     wait 3;
-
   }
   _id_1956();
 }
@@ -104,15 +103,14 @@ _id_1956() {
     level.player enableinvulnerability();
     var_0 = undefined;
     setsaveddvar("ui_nextMission", "1");
-    setdvar("ui_showPopup", "0");
-    setdvar("ui_popupString", "");
-    setdvar("ui_prev_map", level.script);
+    setDvar("ui_showPopup", "0");
+    setDvar("ui_popupString", "");
+    setDvar("ui_prev_map", level.script);
 
     if(level.script == "london") {
       game["previous_map"] = "london";
     } else {
       game["previous_map"] = undefined;
-
     }
     var_0 = level._id_1953 _id_188A(level.script);
 
@@ -125,7 +123,7 @@ _id_1956() {
       }
     }
 
-    setdvar("prologue_select", "0");
+    setDvar("prologue_select", "0");
     maps\_gameskill::_id_195B("aa_main_" + level.script);
 
     if(!isDefined(var_0)) {
@@ -135,13 +133,12 @@ _id_1956() {
 
     if(level.script != "sp_dubai") {
       maps\_utility::_id_195C();
-
     }
     level._id_1953 _id_1970(var_0);
 
     if(level.player getlocalplayerprofiledata("highestMission") < var_0 + 1 && level.script == "sp_dubai" && getdvarint("mis_cheat") == 0) {
-      setdvar("ui_sp_unlock", "0");
-      setdvar("ui_sp_unlock", "1");
+      setDvar("ui_sp_unlock", "0");
+      setDvar("ui_sp_unlock", "1");
     }
 
     var_2 = _id_195E();
@@ -149,15 +146,12 @@ _id_1956() {
 
     if(level._id_1953 _id_1987(var_0)) {
       maps\_utility::_id_195D(level._id_1953 _id_1983(var_0));
-
     }
     if(level._id_1953 _id_1986(var_0) && _id_1966(var_0) == 4 && level._id_1953 _id_1988(var_0)) {
       maps\_utility::_id_195D(level._id_1953 _id_1984(var_0));
-
     }
     if(level._id_1953 _id_198A() && level._id_1953 _id_1975() > 2) {
       maps\_utility::_id_195D(level._id_1953 _id_1989());
-
     }
     if(level.script == "sp_dubai") {
       return;
@@ -192,7 +186,6 @@ _id_195E() {
 
   if(getdvarint("mis_cheat") == 0) {
     level.player setlocalplayerprofiledata("percentCompleteSP", var_0);
-
   }
   return var_0;
 }
@@ -281,15 +274,12 @@ _id_1913(var_0) {
 
     for(var_5 = 0; var_5 < var_3.size; var_5++) {
       var_4 = var_4 + max(0, int(var_3[var_5]) - 1);
-
     }
     if(var_3.size == 0) {
       var_3 = "00000000000000000000000000000000000000000000000000";
-
     }
     while(var_0 >= var_3.size) {
       var_3 = var_3 + "0";
-
     }
     var_6 = 0;
 
@@ -321,7 +311,6 @@ _id_1913(var_0) {
 
     for(var_5 = 0; var_5 < var_7.size; var_5++) {
       var_9 = var_9 + max(0, int(var_7[var_5]) - 1);
-
     }
     var_10 = var_9 - var_4;
 
@@ -419,14 +408,14 @@ _id_1970(var_0) {
 }
 
 _id_1971(var_0) {
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player setlocalplayerprofiledata("highestMission", var_0);
 }
 
 _id_1972(var_0) {
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player setlocalplayerprofiledata("missionHighestDifficulty", var_0);
@@ -485,7 +474,6 @@ _id_197E(var_0, var_1) {
     var_2 = var_1;
   } else {
     var_2 = self._id_190C.size;
-
   }
   self._id_190C[var_2] = spawnStruct();
   self._id_190C[var_2].name = var_0;
@@ -496,7 +484,6 @@ _id_197E(var_0, var_1) {
   }
   if(!isDefined(level._id_1952[var_3]._id_197F)) {
     level._id_1952[var_3]._id_197F = [];
-
   }
   var_4 = level._id_1952[var_3]._id_197F.size;
   level._id_1952[var_3]._id_197F[var_4] = var_0;
@@ -536,7 +523,6 @@ _id_1984(var_0) {
 _id_1985(var_0) {
   if(!isDefined(self._id_190C[var_0]._id_1543)) {
     return undefined;
-
   }
   return self._id_190C[var_0]._id_1543;
 }
@@ -578,7 +564,6 @@ _id_1988(var_0) {
 _id_197C(var_0) {
   if(!isDefined(self._id_190C[var_0]._id_197C)) {
     return 0;
-
   }
   return 1;
 }
@@ -634,7 +619,6 @@ _id_198E() {
 _id_17F8(var_0) {
   if(!isDefined(self._id_16C6)) {
     self._id_16C6 = [];
-
   }
   if(!isDefined(level._id_16CF)) {
     level._id_16CF = 0;
@@ -669,13 +653,11 @@ _id_17F8(var_0) {
 
     if(isDefined(level._id_16CB)) {
       var_7 = level._id_16CB;
-
     }
     var_8 = 0;
 
     if(var_1 < var_7) {
       var_8 = int((var_7 - var_1) / var_7 * 10000);
-
     }
     level._id_16C4 = int(level._id_16D1 * 10000) + var_8;
 
@@ -698,7 +680,6 @@ _id_17F8(var_0) {
 
   if(isDefined(level._id_16BD)) {
     [[level._id_16BD]]();
-
   }
   if(var_0) {
     common_scripts\utility::flag_set("special_op_final_xp_given");
@@ -716,7 +697,6 @@ _id_17F8(var_0) {
 
         if(isDefined(var_17) && var_17 != "") {
           var_16 = var_3 getlocalplayerprofiledata(var_17);
-
         }
         if(isDefined(var_16) && var_16 == 0 && !maps\_utility::_id_12DC()) {
           var_3 thread maps\_utility::_id_12BE("completion_xp");
@@ -752,52 +732,41 @@ _id_01DB(var_0) {
 _id_17FA() {
   if(isDefined(level._id_12F5) && level._id_12F5 > 0) {
     wait(level._id_12F5);
-
   }
   thread maps\_ambient::_id_1946("specialop_fadeout", level._id_1707);
   thread maps\_ambient::_id_1948(level._id_1707, 10);
   _id_1993();
 
   if(isDefined(level.player._id_196A) && level.player._id_196A) {
-    setdvar("ui_first_star_player1", level.player._id_196A);
-
+    setDvar("ui_first_star_player1", level.player._id_196A);
   }
   if(isDefined(level.player._id_196B) && level.player._id_196B) {
-    setdvar("ui_eog_player1_stars", level.player._id_196C);
-
+    setDvar("ui_eog_player1_stars", level.player._id_196C);
   }
   if(isDefined(level.player._id_196D) && level.player._id_196D) {
-    setdvar("ui_eog_player1_unlock", level.player._id_196E);
-
+    setDvar("ui_eog_player1_unlock", level.player._id_196E);
   }
   if(isDefined(level.player._id_1911) && level.player._id_1911) {
-    setdvar("ui_eog_player1_bestscore", level.player._id_1912);
-
+    setDvar("ui_eog_player1_bestscore", level.player._id_1912);
   }
   if(maps\_utility::_id_12C1()) {
     if(isDefined(level.player._id_190E) && level.player._id_190E) {
-      setdvar("ui_eog_player1_noreward", level.player._id_190E);
-
+      setDvar("ui_eog_player1_noreward", level.player._id_190E);
     }
     if(isDefined(level._id_1337._id_196A) && level._id_1337._id_196A) {
-      setdvar("ui_first_star_player2", level._id_1337._id_196A);
-
+      setDvar("ui_first_star_player2", level._id_1337._id_196A);
     }
     if(isDefined(level._id_1337._id_196B) && level._id_1337._id_196B) {
-      setdvar("ui_eog_player2_stars", level._id_1337._id_196C);
-
+      setDvar("ui_eog_player2_stars", level._id_1337._id_196C);
     }
     if(isDefined(level._id_1337._id_196D) && level._id_1337._id_196D) {
-      setdvar("ui_eog_player2_unlock", level._id_1337._id_196E);
-
+      setDvar("ui_eog_player2_unlock", level._id_1337._id_196E);
     }
     if(isDefined(level._id_1337._id_190E) && level._id_1337._id_190E) {
-      setdvar("ui_eog_player2_noreward", level._id_1337._id_190E);
-
+      setDvar("ui_eog_player2_noreward", level._id_1337._id_190E);
     }
     if(isDefined(level._id_1337._id_1911) && level._id_1337._id_1911) {
-      setdvar("ui_eog_player2_bestscore", level._id_1337._id_1912);
-
+      setDvar("ui_eog_player2_bestscore", level._id_1337._id_1912);
     }
     wait 0.05;
     level.player openpopupmenu("coop_eog_summary");
@@ -809,16 +778,16 @@ _id_17FA() {
 }
 
 _id_1993() {
-  setdvar("ui_eog_player1_stars", "");
-  setdvar("ui_eog_player1_unlock", "");
-  setdvar("ui_eog_player1_besttime", "");
-  setdvar("ui_eog_player1_bestscore", "");
-  setdvar("ui_eog_player1_noreward", "");
-  setdvar("ui_eog_player2_stars", "");
-  setdvar("ui_eog_player2_unlock", "");
-  setdvar("ui_eog_player2_besttime", "");
-  setdvar("ui_eog_player2_bestscore", "");
-  setdvar("ui_eog_player2_noreward", "");
+  setDvar("ui_eog_player1_stars", "");
+  setDvar("ui_eog_player1_unlock", "");
+  setDvar("ui_eog_player1_besttime", "");
+  setDvar("ui_eog_player1_bestscore", "");
+  setDvar("ui_eog_player1_noreward", "");
+  setDvar("ui_eog_player2_stars", "");
+  setDvar("ui_eog_player2_unlock", "");
+  setDvar("ui_eog_player2_besttime", "");
+  setDvar("ui_eog_player2_bestscore", "");
+  setDvar("ui_eog_player2_noreward", "");
 }
 
 _id_1994() {
@@ -871,7 +840,6 @@ _id_1999() {
     var_0 = "@SPECIAL_OPS_UI_TEAM_SCORE";
   } else {
     var_0 = "@SPECIAL_OPS_UI_SCORE";
-
   }
   var_1 = self._id_16C6["score"];
   maps\_utility::_id_16C7(var_0, var_1);

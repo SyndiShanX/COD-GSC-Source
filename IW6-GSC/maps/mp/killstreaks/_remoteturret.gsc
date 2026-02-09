@@ -885,7 +885,7 @@ turret_handleDamage() {
     self.damageFade = 0.0;
 
     modifiedDamage = damage;
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("remote_turret");
 
       if(attacker _hasPerk("specialty_armorpiercing")) {
@@ -893,7 +893,7 @@ turret_handleDamage() {
       }
     }
 
-    if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
+    if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
       attacker.owner maps\mp\gametypes\_damagefeedback::updateDamageFeedback("remote_turret");
     }
 
@@ -928,7 +928,7 @@ turret_handleDamage() {
     self.damageTaken += modifiedDamage;
 
     if(self.damageTaken >= self.maxHealth) {
-      if(IsPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
+      if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
         attacker thread maps\mp\gametypes\_rank::giveRankXP("kill", 100, weapon, meansOfDeath);
         attacker notify("destroyed_killstreak");
       }

@@ -325,7 +325,7 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   if(isBulletDamage(meansOfDeath)) {
     assert(isDefined(attacker));
 
-    if(IsPlayer(attacker) && attacker _hasPerk("specialty_paint_pro") && !isKillstreakWeapon(weapon) && IsPlayer(victim) && !victim _hasPerk("specialty_class_lowprofile")) {
+    if(isPlayer(attacker) && attacker _hasPerk("specialty_paint_pro") && !isKillstreakWeapon(weapon) && isPlayer(victim) && !victim _hasPerk("specialty_class_lowprofile")) {
       if(!victim isPainted()) {
         attacker maps\mp\gametypes\_missions::processChallenge("ch_bulletpaint");
       }
@@ -337,16 +337,15 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
       victim thread maps\mp\perks\_perkfunctions::setPainted(attacker);
     }
 
-    if(IsPlayer(attacker) && isDefined(weapon) && getWeaponClass(weapon) == "weapon_sniper" && isSubStr(weapon, "silencer")) {
+    if(isPlayer(attacker) && isDefined(weapon) && getWeaponClass(weapon) == "weapon_sniper" && isSubStr(weapon, "silencer")) {
       damage *= 0.75;
     }
 
-    if(IsPlayer(attacker) &&
+    if(isPlayer(attacker) &&
       (attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest"))) {
       damageAdd += 0;
-    } else if(IsPlayer(attacker) &&
-      (attacker _hasPerk("specialty_bulletdamage") ||
-        attacker _hasPerk("specialty_moredamage"))) {
+    } else if(isPlayer(attacker) &&
+      (attacker _hasPerk("specialty_bulletdamage") || attacker _hasPerk("specialty_moredamage"))) {
       damageAdd += damage * level.bulletDamageMod;
     } else if(victim _hasPerk("specialty_armorvest")) {
       damageAdd -= damage * level.armorVestMod;
@@ -358,10 +357,9 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
       if(!weakToHeadShots) {
         damage *= level.juggernautMod;
       }
-
     }
   } else if(IsExplosiveDamageMOD(meansOfDeath)) {
-    if(IsPlayer(attacker) &&
+    if(isPlayer(attacker) &&
       attacker != victim &&
       (attacker IsItemUnlocked("specialty_paint") && attacker _hasPerk("specialty_paint")) && !isKillstreakWeapon(weapon)) {
       if(!victim isPainted()) {
@@ -415,7 +413,6 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
     if(maps\mp\gametypes\_weapons::inGrenadeGracePeriod()) {
       damage *= level.juggernautMod;
     }
-
   } else if(meansOfDeath == "MOD_FALLING") {
     if(victim IsItemUnlocked("specialty_falldamage") && victim _hasPerk("specialty_falldamage")) {
       damageAdd = 0;
@@ -618,5 +615,4 @@ applyPerks() {
   if(self _hasPerk("specialty_class_hardline")) {
     self givePerk("specialty_hardline", false);
   }
-
 }

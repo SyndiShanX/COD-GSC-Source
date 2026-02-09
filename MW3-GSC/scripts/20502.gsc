@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2AC2("gaz_tigr_harbor", var_0, var_1, var_2);
   maps\_vehicle::_id_2AD2(::_id_2B1D);
   maps\_vehicle::_id_2ACD(::_id_3E58);
-  maps\_vehicle::_id_2AC1( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  maps\_vehicle::_id_2AC1(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   maps\_vehicle::_id_2AC5();
   maps\_vehicle::_id_2ACE(999, 500, 1500);
   maps\_vehicle::_id_2AC6("axis");
@@ -24,13 +24,11 @@ main(var_0, var_1, var_2) {
     }
   } else {
     maps\_vehicle::_id_2ACA(::_id_3A9D, ::_id_3A9C);
-
   }
   if(var_2 == "script_vehicle_gaz_tigr_turret_physics_paris") {
     maps\_vehicle::_id_2AD0(var_0, "vehicle_gaz_harbor");
   } else {
     _id_4436(var_2);
-
   }
   var_3 = maps\_vehicle::_id_2B1A(var_0, var_2);
   maps\_vehicle::_id_2AAD(var_3, "headlight_L", "TAG_HEADLIGHT_LEFT", "misc/spotlight_btr80_daytime", "running", 0.0);
@@ -107,7 +105,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_driver";
   var_0[1]._id_24F2 = "tag_passenger";

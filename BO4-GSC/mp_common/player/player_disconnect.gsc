@@ -51,7 +51,7 @@ callback_playerdisconnect() {
       level thread globallogic::forceend();
     }
 
-    setdvar(#"splitscreen_playernum", players.size);
+    setDvar(#"splitscreen_playernum", players.size);
   }
 
   if(isDefined(self.score) && isDefined(self.pers) && isDefined(self.pers[# "team"])) {

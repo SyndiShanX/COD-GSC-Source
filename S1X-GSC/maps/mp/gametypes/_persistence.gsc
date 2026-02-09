@@ -245,7 +245,6 @@ updateBufferedStats() {
     player writeBufferedStats();
     player updateWeaponBufferedStats();
   }
-
 }
 
 writeBufferedStats() {
@@ -325,7 +324,6 @@ updateWeaponBufferedStats() {
     if(tokens[0] == "alt") {
       tokens[0] = tokens[1] + "_" + tokens[2];
     }
-
   }
 
   if(tokens[0] == "gl" || tokens[0] == "shotgun") {
@@ -418,7 +416,6 @@ updateWeaponBufferedStats() {
       if(attachmentBase != "tactical") {
         self incrementAttachmentStat(attachmentBase, "shots", self.trackingWeaponShots);
       }
-
     }
 
     if(self.trackingWeaponKills > 0) {

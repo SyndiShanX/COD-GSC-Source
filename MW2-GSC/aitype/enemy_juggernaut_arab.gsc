@@ -62,7 +62,5 @@ precache() {
   precacheItem("beretta");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_juggernaut::main();
-  //----------------
-}
+  //---------------- maps\_juggernaut::main();
+  //---------------- }

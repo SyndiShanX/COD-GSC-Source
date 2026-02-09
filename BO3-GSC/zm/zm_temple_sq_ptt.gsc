@@ -116,7 +116,7 @@ function player_line_thread() {
   self endon("lit");
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       who thread zm_audio::create_and_play_dialog("eggs", "quest4", randomintrange(0, 2));
       return;
     }

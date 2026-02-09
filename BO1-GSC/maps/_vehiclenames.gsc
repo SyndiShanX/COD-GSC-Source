@@ -8,12 +8,15 @@ get_name() {
   american_names = 10;
   british_names = 18;
   russian_names = 10;
-  if(!(isDefined(game["americanvehiclenames"])))
-    game["americanvehiclenames"] = randomInt(american_names);
-  if(!(isDefined(game["britishvehiclenames"])))
-    game["britishvehiclenames"] = randomInt(british_names);
-  if(!(isDefined(game["russianvehiclenames"])))
-    game["russianvehiclenames"] = randomInt(russian_names);
+  if(!(isDefined(game["americanvehiclenames"]))) {
+    game["americanvehiclenames"] = randomint(american_names);
+  }
+  if(!(isDefined(game["britishvehiclenames"]))) {
+    game["britishvehiclenames"] = randomint(british_names);
+  }
+  if(!(isDefined(game["russianvehiclenames"]))) {
+    game["russianvehiclenames"] = randomint(russian_names);
+  }
   if(!isDefined(level.campaign)) {
     return;
   }
@@ -29,7 +32,6 @@ get_name() {
     get_american_name();
   }
 }
-
 get_american_name() {
   vehiclename = undefined;
   switch (game["americanvehiclenames"]) {
@@ -68,7 +70,6 @@ get_american_name() {
   vehiclename = add_group_name(vehiclename);
   self setvehiclelookattext(vehiclename, self.vehicletypefancy);
 }
-
 get_british_name() {
   vehiclename = undefined;
   switch (game["britishvehiclenames"]) {
@@ -131,7 +132,6 @@ get_british_name() {
   vehiclename = add_group_name(vehiclename);
   self setvehiclelookattext(vehiclename, self.vehicletypefancy);
 }
-
 get_russian_name() {
   vehiclename = undefined;
   switch (game["russianvehiclenames"]) {
@@ -170,9 +170,9 @@ get_russian_name() {
   vehiclename = add_group_name(vehiclename);
   self setvehiclelookattext(vehiclename, self.vehicletypefancy);
 }
-
 add_group_name(vehiclename) {
-  if(isDefined(self.script_tankgroup))
+  if(isDefined(self.script_tankgroup)) {
     vehiclename = self.script_tankgroup + ": " + vehiclename;
+  }
   return vehiclename;
 }

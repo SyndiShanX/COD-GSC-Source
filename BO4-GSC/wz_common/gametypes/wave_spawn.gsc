@@ -51,7 +51,7 @@ function_a27362d0(params) {
 }
 
 function_ca1398a7() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

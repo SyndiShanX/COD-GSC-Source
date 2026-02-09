@@ -81,7 +81,7 @@ grabclosestzombies(var_0, var_1) {
         continue;
       }
 
-      if(isplayer(var_6)) {
+      if(isPlayer(var_6)) {
         continue;
       }
 

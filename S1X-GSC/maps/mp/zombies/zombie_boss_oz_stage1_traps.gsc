@@ -251,7 +251,7 @@ turrethandledamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   self.wasdamaged = 1;
   self.damagefade = 0.0;
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("remote_turret");
   }
 
@@ -400,7 +400,7 @@ stationaryturret_shoot() {
   for(;;) {
     wait 0.05;
 
-    if(isDefined(self.targetplayer) && (isplayer(self.targetplayer) && self.targetplayer.ignoreme)) {
+    if(isDefined(self.targetplayer) && (isPlayer(self.targetplayer) && self.targetplayer.ignoreme)) {
       continue;
     }
     if(isDefined(self.targetplayer)) {
@@ -779,7 +779,7 @@ start_laser_damage() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(isDefined(var_0.nextlasertrapdamagetime) && var_0.nextlasertrapdamagetime > gettime()) {
         continue;
       }
@@ -904,7 +904,7 @@ start_electricity_damage() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(isDefined(var_0.nextelectricitytrapdamagetime) && var_0.nextelectricitytrapdamagetime > gettime()) {
         continue;
       }
@@ -1022,7 +1022,7 @@ start_gas_damage() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(isDefined(var_0.nextgastrapdamagetime) && var_0.nextgastrapdamagetime > gettime()) {
         continue;
       }

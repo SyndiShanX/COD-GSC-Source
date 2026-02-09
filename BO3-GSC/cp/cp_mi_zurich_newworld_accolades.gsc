@@ -54,7 +54,7 @@ function function_c27610f9(var_8e087689, var_70b01bd3) {
     foreach(player in level.activeplayers) {
       player notify(var_8e087689);
     }
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     self notify(var_8e087689);
   }
   if(isDefined(var_70b01bd3)) {
@@ -72,7 +72,7 @@ function function_89a4c66f() {
 }
 
 function function_595dc718(params) {
-  if(isplayer(params.eattacker) && params.smeansofdeath == "MOD_BURNED") {
+  if(isPlayer(params.eattacker) && params.smeansofdeath == "MOD_BURNED") {
     if(!isDefined(params.eattacker.var_6659e536) || params.eattacker.var_6659e536 != params.einflictor) {
       params.eattacker.var_6659e536 = params.einflictor;
       params.eattacker.var_57582aca = 1;
@@ -110,7 +110,7 @@ function function_314eff4a() {
 }
 
 function function_9257e223(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     player = params.eattacker;
     if(player iswallrunning()) {
       player function_c27610f9("ch04_wall_run_kills");
@@ -126,7 +126,7 @@ function function_9d5a87b1(params) {
   if(self.team !== "axis") {
     return;
   }
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     player = params.eattacker;
     var_3d9e461f = !bullettracepassed(player getEye(), self getEye(), 0, self);
     if(util::isbulletimpactmod(params.smeansofdeath) && var_3d9e461f) {
@@ -146,7 +146,7 @@ function function_5a3da660() {
 
 function function_f9a5c6a1() {
   self waittill("hash_f8c5dd60", weapon, eattacker);
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     if(eattacker.var_c81126e8 == 0) {
       eattacker.s_timer = util::new_timer(2);
       eattacker.var_c81126e8++;
@@ -175,7 +175,7 @@ function function_1b6f43c5(params) {
   if(self.team !== "axis") {
     return;
   }
-  if(isplayer(params.eattacker) && (params.smeansofdeath == "MOD_GRENADE" || params.smeansofdeath == "MOD_GRENADE_SPLASH" || params.smeansofdeath == "MOD_EXPLOSIVE" || params.smeansofdeath == "MOD_EXPLOSIVE_SPLASH" || params.smeansofdeath == "MOD_PROJECTILE" || params.smeansofdeath == "MOD_PROJECTILE_SPLASH")) {
+  if(isPlayer(params.eattacker) && (params.smeansofdeath == "MOD_GRENADE" || params.smeansofdeath == "MOD_GRENADE_SPLASH" || params.smeansofdeath == "MOD_EXPLOSIVE" || params.smeansofdeath == "MOD_EXPLOSIVE_SPLASH" || params.smeansofdeath == "MOD_PROJECTILE" || params.smeansofdeath == "MOD_PROJECTILE_SPLASH")) {
     if(!isDefined(params.eattacker.var_b5385d9d)) {
       params.eattacker.var_b5385d9d = params.einflictor;
       params.eattacker.var_b2c73b97 = 1;
@@ -218,7 +218,7 @@ function function_a87e96e() {
 }
 
 function function_ee3272c2(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(isDefined(params.eattacker.var_fc30fc22)) {
       if(params.einflictor == params.eattacker.var_fc30fc22) {
         params.eattacker.var_c6c262e8++;
@@ -235,7 +235,7 @@ function function_353e449e() {
 }
 
 function function_3867e45c(params) {
-  if(isplayer(params.eattacker) && params.eattacker.weap === "icicle") {
+  if(isPlayer(params.eattacker) && params.eattacker.weap === "icicle") {
     params.eattacker notify("hash_c347271c");
   }
 }
@@ -257,7 +257,7 @@ function function_deb99e6() {
 }
 
 function function_c008ffe2(params) {
-  if(isplayer(params.eattacker) && self.archetype == "robot") {
+  if(isPlayer(params.eattacker) && self.archetype == "robot") {
     if(self.b_disabled) {
       params.eattacker notify("hash_4c313fa2");
     }
@@ -302,7 +302,7 @@ function function_323baa37() {
 }
 
 function function_bc7f04af(params) {
-  if(self.archetype == "civilian" || self.archetype == "allies" && isplayer(params.eattacker)) {
+  if(self.archetype == "civilian" || self.archetype == "allies" && isPlayer(params.eattacker)) {
     params.eattacker savegame::set_player_data("b_nw_accolade_12_failed", 1);
   }
 }
@@ -311,7 +311,7 @@ function function_829b12c4(params) {
   self endon("death");
   if(isDefined(self.archetype) && (self.archetype == "civilian" || self.archetype == "allies")) {
     self waittill("touch", e_toucher);
-    if(isplayer(e_toucher)) {
+    if(isPlayer(e_toucher)) {
       e_toucher savegame::set_player_data("b_nw_accolade_12_failed", 1);
     }
   }
@@ -331,7 +331,7 @@ function function_f7dd9b2c() {
 }
 
 function function_e50c8d4a(params) {
-  if(isDefined(params.eattacker) && isplayer(params.eattacker) && isDefined(params.eattacker.hijacked_vehicle_entity) && params.eattacker.hijacked_vehicle_entity.archetype === "turret") {
+  if(isDefined(params.eattacker) && isPlayer(params.eattacker) && isDefined(params.eattacker.hijacked_vehicle_entity) && params.eattacker.hijacked_vehicle_entity.archetype === "turret") {
     if(params.eattacker.hijacked_vehicle_entity !== self) {
       params.eattacker notify("hash_802ebfac");
     }
@@ -374,7 +374,7 @@ function function_14316bd1() {
   level endon("hash_f7bb45b");
   while(true) {
     self waittill("trigger", ent);
-    if(isplayer(ent) && ent iswallrunning()) {
+    if(isPlayer(ent) && ent iswallrunning()) {
       a_trace = bulletTrace(ent.origin, ent.origin - vectorscale((0, 0, 1), 1000), 0, ent);
       if(isDefined(a_trace["entity"]) && a_trace["entity"].script_noteworthy === "chase_train") {
         ent notify("hash_fda475d4");

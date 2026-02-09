@@ -164,7 +164,6 @@ class class_66e46dd {
     var_9abb59c4 = 2;
     var_90e84049 = 3;
   }
-
 }
 
 class class_d7100ae3 {
@@ -310,7 +309,6 @@ class class_d7100ae3 {
     var_f3797cc9 = 0;
     var_2ed6212f = 0;
   }
-
 }
 
 #namespace zm_castle_ee_side;
@@ -414,7 +412,7 @@ function function_374ac18c(var_2de8cf5e, var_bee8e45) {
   while(true) {
     var_2de8cf5e[0].var_df5776d8.health = 1000000;
     var_2de8cf5e[0].var_df5776d8 waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     function_972992c4(var_2de8cf5e, 1);
@@ -523,7 +521,7 @@ function function_e26b6053() {
   while(!b_shot) {
     self.health = 1000000;
     self waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(isDefined(attacker) && isplayer(attacker) && attacker bgb::is_active("zm_bgb_in_plain_sight")) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker bgb::is_active("zm_bgb_in_plain_sight")) {
       if(function_ab61ab31(weapon)) {
         b_shot = 1;
       }
@@ -690,7 +688,7 @@ function function_64e6de56() {
     }
     e_impact delete();
   }
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     return false;
   }
   return true;
@@ -1100,7 +1098,7 @@ function function_8d95ec46(e_attacker) {
 
 function function_f10f1879(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   var_7c4fe278 = getweapon("knife_plunger");
-  if(weapon == var_7c4fe278 && isDefined(attacker) && isplayer(attacker) && isDefined(attacker.var_ea5424ae) && attacker.var_ea5424ae > 0) {
+  if(weapon == var_7c4fe278 && isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.var_ea5424ae) && attacker.var_ea5424ae > 0) {
     damage = 777 * self.health;
     if(isDefined(self)) {
       self thread function_beeeab78();
@@ -1288,21 +1286,17 @@ function function_239f31ac(n_val) {
 }
 
 function function_8f84cfff(n_val) {
-  /# [ [level.var_9f94326b]
-] - > function_aa7c5ce2();
+  [[level.var_9f94326b]] - > function_aa7c5ce2();
 }
 
 function function_e6679107(n_val) {
-  /# [ [level.var_9f94326b]
-] - > function_4db73fa1();
+  [[level.var_9f94326b]] - > function_4db73fa1();
 }
 
 function function_71626c1a(n_val) {
-  /# [ [level.var_9f94326b]
-] - > function_ec1f5e9(1, 15);
+  [[level.var_9f94326b]] - > function_ec1f5e9(1, 15);
 }
 
 function function_c8b68402(n_val) {
-  /# [ [level.var_9f94326b]
-] - > function_ec1f5e9(9, 35);
+  [[level.var_9f94326b]] - > function_ec1f5e9(9, 35);
 }

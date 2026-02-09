@@ -240,7 +240,7 @@ function private placeable_mine_damage() {
       return;
     }
     self.health = self.maxhealth;
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.owner) && attacker == self.owner) {
@@ -330,7 +330,7 @@ function private placeable_mine_detonate(attacker, weapon, target) {
   if(isDefined(attacker)) {
     self detonate(attacker);
   } else {
-    if(isDefined(self.owner) && isplayer(self.owner)) {
+    if(isDefined(self.owner) && isPlayer(self.owner)) {
       self detonate(self.owner);
     } else {
       self detonate();

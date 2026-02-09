@@ -49,7 +49,7 @@ function_2bbffff9() {
 }
 
 function_1e224132(activator, laststate, state) {
-  if(level.var_e46e7048 === 0 && isplayer(activator)) {
+  if(level.var_e46e7048 === 0 && isPlayer(activator)) {
     activator stats::function_d40764f3(#"activation_count_broadcast", 1);
   }
 }

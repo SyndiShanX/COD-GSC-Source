@@ -104,7 +104,7 @@ function_928be07c(var_6a59aecf) {
     var_7df0eb2d = var_6a59aecf;
     level.friendlyfire = var_6a59aecf;
     setgametypesetting(#"zmfriendlyfiretype", var_6a59aecf);
-    setdvar(#"ui_friendlyfire", var_6a59aecf);
+    setDvar(#"ui_friendlyfire", var_6a59aecf);
   } else {
     var_7df0eb2d = function_901b751c(#"zmfriendlyfiretype");
   }

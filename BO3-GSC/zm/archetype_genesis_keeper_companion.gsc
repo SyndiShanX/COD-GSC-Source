@@ -50,7 +50,6 @@ class class_78f8bb8 {
   }
 
   destructor() {}
-
 }
 
 #namespace keepercompanionbehavior;
@@ -259,7 +258,7 @@ function private keepercompaniondelaymovement(entity) {
 }
 
 function private _isvalidplayer(player) {
-  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isPlayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
   return true;
@@ -535,7 +534,7 @@ function function_95adf61c(player) {
   }
   if(player laststand::player_is_in_laststand()) {
     player notify("stop_revive_trigger");
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player allowjump(1);
     }
     player.laststand = undefined;

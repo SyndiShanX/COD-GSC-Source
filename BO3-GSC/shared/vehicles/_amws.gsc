@@ -115,7 +115,7 @@ function state_driving_update(params) {
   self endon("change_state");
   self endon("death");
   driver = self getseatoccupant(0);
-  if(isplayer(driver)) {
+  if(isPlayer(driver)) {
     while(true) {
       driver endon("disconnect");
       driver util::waittill_vehicle_move_up_button_pressed();

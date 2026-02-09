@@ -476,23 +476,23 @@ func_F305() {
   }
 
   if(!isDefined(level.console)) {
-    level.console = getdvar("consoleGame") == "true";
+    level.console = getDvar("consoleGame") == "true";
   }
 
   if(!isDefined(level.var_13E0F)) {
-    level.var_13E0F = getdvar("xenonGame") == "true";
+    level.var_13E0F = getDvar("xenonGame") == "true";
   }
 
   if(!isDefined(level.var_DADB)) {
-    level.var_DADB = getdvar("ps3Game") == "true";
+    level.var_DADB = getDvar("ps3Game") == "true";
   }
 
   if(!isDefined(level.var_13E0E)) {
-    level.var_13E0E = getdvar("xb3Game") == "true";
+    level.var_13E0E = getDvar("xb3Game") == "true";
   }
 
   if(!isDefined(level.var_DADC)) {
-    level.var_DADC = getdvar("ps4Game") == "true";
+    level.var_DADC = getDvar("ps4Game") == "true";
   }
 }
 
@@ -871,7 +871,7 @@ getattachmenttype(var_0) {
 
   var_1 = tablelookup("mp\attachmentTable.csv", 4, var_0, 2);
   if(!isDefined(var_1) || isDefined(var_1) && var_1 == "") {
-    var_2 = getdvar("g_gametype");
+    var_2 = getDvar("g_gametype");
     if(var_2 == "zombie") {
       var_1 = tablelookup("cp\zombies\zombie_attachmentTable.csv", 4, var_0, 2);
     }
@@ -1196,11 +1196,11 @@ func_F6DB(var_0, var_1, var_2) {
   }
 
   if(func_9BEE()) {
-    setdvar(var_0, var_2);
+    setDvar(var_0, var_2);
     return;
   }
 
-  setdvar(var_0, var_1);
+  setDvar(var_0, var_1);
 }
 
 func_9BEE() {
@@ -1658,7 +1658,7 @@ isgameparticipant(var_0) {
     return 1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return 1;
   }
 
@@ -1773,7 +1773,7 @@ destroyheadiconsondeath() {
 }
 
 setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(isgameparticipant(var_0) && !isplayer(var_0)) {
+  if(isgameparticipant(var_0) && !isPlayer(var_0)) {
     return;
   }
 
@@ -1805,7 +1805,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
     var_10 = 1;
   }
 
-  if(!isplayer(var_0) && var_0 == "none") {
+  if(!isPlayer(var_0) && var_0 == "none") {
     foreach(var_13, var_12 in self.entityheadicons) {
       if(isDefined(var_12)) {
         var_12 destroy();
@@ -1817,7 +1817,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
     return;
   }
 
-  if(isplayer(var_3)) {
+  if(isPlayer(var_3)) {
     if(isDefined(self.entityheadicons[var_3.guid])) {
       self.entityheadicons[var_3.guid] destroy();
       self.entityheadicons[var_3.guid] = undefined;
@@ -1876,11 +1876,11 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
   var_12 setwaypoint(var_8, var_9, var_10, var_11);
   var_12 thread keeppositioned(self, var_3, var_7);
   thread destroyiconsondeath();
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_12 thread destroyonownerdisconnect(var_1);
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_12 thread destroyonownerdisconnect(self);
   }
 
@@ -3490,11 +3490,11 @@ make_entity_sentient_cp(var_0, var_1) {
 
 get_attacker_as_player(var_0) {
   if(isDefined(var_0)) {
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       return var_0;
     }
 
-    if(isDefined(var_0.owner) && isplayer(var_0.owner)) {
+    if(isDefined(var_0.owner) && isPlayer(var_0.owner)) {
       return var_0.owner;
     }
   }
@@ -4700,7 +4700,7 @@ get_array_of_valid_players(var_0, var_1) {
 }
 
 is_valid_player(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 
@@ -5044,7 +5044,7 @@ breathingmanager(var_0, var_1) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -5770,7 +5770,7 @@ usegrenadegesture(var_0, var_1) {
 }
 
 is_codxp() {
-  return getdvar("scr_codxp", "") != "";
+  return getDvar("scr_codxp", "") != "";
 }
 
 too_close_to_other_interactions(var_0) {
@@ -6049,7 +6049,7 @@ deactivatebrushmodel(var_0, var_1) {
 }
 
 rankingenabled() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 

@@ -173,7 +173,7 @@ function function_ca6a0809(eventpackage) {
   self endon("disconnect");
   e_originator = eventpackage.parms[0];
   self notify("stealth_vo", "alert");
-  if(isplayer(e_originator)) {
+  if(isPlayer(e_originator)) {
     e_originator stealth_player::function_ca6a0809(self);
   }
 }
@@ -314,7 +314,7 @@ function on_alert_changed(eventpackage) {
     if(isDefined(i_id) && isDefined(e_originator) && iscorpse(e_originator)) {
       self thread delayed_service_event(8, i_id);
     }
-    if(isplayer(e_originator) && str_newalert == "combat" && level.stealth.var_e7ad9c1f == 0) {
+    if(isPlayer(e_originator) && str_newalert == "combat" && level.stealth.var_e7ad9c1f == 0) {
       if(isDefined(self.blindaim) && self.blindaim) {
         e_originator stealth_vo::function_e3ae87b3("spotted_sniper", self, 2);
       } else {
@@ -476,7 +476,7 @@ function enter_combat_with(enemy) {
     self setstealthsightvalue(enemy, 1);
   }
   self ai_sniper::actor_lase_stop();
-  if(isplayer(enemy) && getdvarint("stealth_all_aware")) {
+  if(isPlayer(enemy) && getdvarint("stealth_all_aware")) {
     foreach(player in level.activeplayers) {
       if(player == enemy) {
         continue;

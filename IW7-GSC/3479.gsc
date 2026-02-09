@@ -619,7 +619,7 @@ watchgastrigger(var_0, var_1) {
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     if(level.teambased && var_2.team == var_0.team && var_2 != var_0) {

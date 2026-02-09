@@ -950,7 +950,7 @@ set_flag_on_targetname_trigger_by_player(var_0) {
   for(;;) {
     var_1 waittill("trigger", var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       common_scripts\utility::flag_set(var_0);
       return;
     }

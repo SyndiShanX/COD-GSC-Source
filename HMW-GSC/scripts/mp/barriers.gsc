@@ -21,7 +21,7 @@ add_barrier_map_entry(map, func) {
 }
 
 setup_barriers() {
-  current_map = getdvar("mapname");
+  current_map = getDvar("mapname");
   foreach(barrier in level.barrier_maps) {
     if(barrier["map"] == current_map) {
       level thread[[barrier["func"]]]();

@@ -16,12 +16,12 @@ main() {
 
   ambientPlay("ambient_mp_abandon");
 
-  setdvar("r_specularcolorscale", "2.5");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.452);
-  setdvar("r_lightGridContrast", 0);
+  setDvar("r_specularcolorscale", "2.5");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.452);
+  setDvar("r_lightGridContrast", 0);
 
-  setdvar("compassmaxrange", "1800");
+  setDvar("compassmaxrange", "1800");
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";

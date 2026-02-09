@@ -67,7 +67,7 @@ func_1276F(var_0) {
 
   for(;;) {
     var_0 waittill("trigger", var_2);
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_2 setwatersheeting(1, var_1);
       wait(var_1 * 0.2);
     }
@@ -224,7 +224,7 @@ func_1272E(var_0) {
 func_4984() {}
 
 func_9CEA() {
-  if(getdvar("createfx") != "") {
+  if(getDvar("createfx") != "") {
     return 1;
   }
 
@@ -290,7 +290,7 @@ func_1272F(var_0) {
       continue;
     }
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
 
@@ -544,7 +544,7 @@ func_1277E(var_0) {
       var_10 = 0.25;
     }
 
-    setdvar("tempdvar", var_10);
+    setDvar("tempdvar", var_10);
     var_10 = getdvarfloat("tempdvar");
     if(isDefined(var_11)) {
       radiusdamage(var_6.origin, var_9, var_11, var_11 * 0.5);
@@ -894,7 +894,7 @@ func_12729(var_0) {
         }
       }
     }
-  } else if(isplayer(var_3)) {
+  } else if(isPlayer(var_3)) {
     var_4 = var_3 scripts\anim\battlechatter::func_7E32("custom");
   } else {
     var_4 = var_3;
@@ -1094,7 +1094,7 @@ func_12741(var_0) {
 
   for(;;) {
     var_0 waittill("trigger", var_2);
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
 
@@ -1630,7 +1630,7 @@ func_1273C(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_4);
     var_5 = var_0.origin;
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       var_3 = var_1;
       if(var_0.classname == "trigger_radius_fire") {
         if(isDefined(var_0.script_radius)) {

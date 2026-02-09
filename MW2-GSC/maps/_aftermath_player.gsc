@@ -166,7 +166,6 @@ adjust_swivel_over_time(ent) {
       }
       wait 0.05;
     }
-
   }
 }
 
@@ -442,7 +441,6 @@ player_random_blur() {
     wait blur_time;
     setblur(0, recovery_time);
     wait 5;
-
   }
 }
 
@@ -468,7 +466,6 @@ player_jump_punishment() {
     wait 0.2;
     //		if( !flag( "force_limp" ) )
     //			level.player fall();
-
   }
 }
 

@@ -640,7 +640,7 @@ bot_ball_origin_can_see_goal(origin, goal, thorough) {
 }
 
 bot_ball_trace_to_origin(start_origin, end_origin) {
-  if(isDefined(self) && (IsPlayer(self) || IsAgent(self))) {
+  if(isDefined(self) && (isPlayer(self) || IsAgent(self))) {
     hitPos = PlayerPhysicsTrace(start_origin, end_origin, self);
   } else {
     hitPos = PlayerPhysicsTrace(start_origin, end_origin);
@@ -816,11 +816,11 @@ teleport_watch_debug_dvar(dvar_name, dvar_default) {
   SetDvarIfUninitialized(dvar_name, dvar_default);
 
   while(1) {
-    current_value = GetDvar(dvar_name, dvar_default);
+    current_value = getDvar(dvar_name, dvar_default);
 
     if(current_value != dvar_default) {
       level notify("teleport_dvar_changed", dvar_name, current_value);
-      SetDvar(dvar_name, dvar_default);
+      setDvar(dvar_name, dvar_default);
     }
 
     wait .25;
@@ -1053,8 +1053,7 @@ get_teleport_delta(zone_name) {
   return delta;
 }
 
-teleport_to_zone_killstreaks(zone_name) {
-}
+teleport_to_zone_killstreaks(zone_name) {}
 
 teleport_notify_death() {
   if(isDefined(self)) {

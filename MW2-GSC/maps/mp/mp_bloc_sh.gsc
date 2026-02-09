@@ -12,7 +12,7 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_bloc_sh");
 
-  setdvar("compassmaxrange", "2000");
+  setDvar("compassmaxrange", "2000");
 
   ambientPlay("ambient_trainer_ext2");
 
@@ -22,6 +22,6 @@ main() {
   // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 1.8;
 
-  setdvar("r_specularcolorscale", "2.2");
-  setdvar("r_diffusecolorscale", "1.2");
+  setDvar("r_specularcolorscale", "2.2");
+  setDvar("r_diffusecolorscale", "1.2");
 }

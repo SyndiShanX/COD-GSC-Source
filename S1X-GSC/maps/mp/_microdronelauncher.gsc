@@ -16,7 +16,7 @@ monitor_microdrone_launch() {
   level._effect["mdl_sticky_explosion"] = LoadFx("vfx/explosion/frag_grenade_default");
   level._effect["mdl_sticky_blinking"] = LoadFx("vfx/lights/light_semtex_blinking");
 
-  Assert(IsPlayer(self) || IsAgent(self));
+  Assert(isPlayer(self) || IsAgent(self));
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
@@ -66,7 +66,7 @@ determine_sticky_position(firing_player) {
     sticky_grenade setModel("projectile_semtex_grenade");
 
     if(isDefined(trace["entity"])) {
-      if(IsPlayer(trace["entity"])) {
+      if(isPlayer(trace["entity"])) {
         firing_player thread show_stuck_fanfare();
         trace["entity"] thread show_stuck_fanfare();
       }

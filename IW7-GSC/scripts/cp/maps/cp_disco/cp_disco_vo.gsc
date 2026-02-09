@@ -343,7 +343,7 @@ ww_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   level notify(var_0 + "_about_to_play");
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(self issplitscreenplayer() && !self issplitscreenplayerprimary()) {
       return;
     }
@@ -478,7 +478,7 @@ play_announcer_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(self issplitscreenplayer() && !self issplitscreenplayerprimary()) {
       return;
     }

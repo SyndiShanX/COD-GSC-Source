@@ -169,7 +169,7 @@ build_fx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 build_deathfx_override(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   level.vttype = var_1;
   level.vtmodel = var_2;
@@ -428,7 +428,7 @@ build_light(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 build_light_override(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   level.vtclassname = var_0;
   build_light(var_0, var_1, var_2, var_3, var_4, var_5);
@@ -498,7 +498,7 @@ build_drive(var_0, var_1, var_2, var_3) {
 
 build_template(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   if(isDefined(var_2))
     var_0 = var_2;

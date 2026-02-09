@@ -81,7 +81,6 @@ class cct_shared_ingame_hint: cluielem {
     cluielem::add_clientfield("_state", 1, 4, "int");
     cluielem::function_dcb34c80("string", "inGameHint", 1);
   }
-
 }
 
 register(uid) {

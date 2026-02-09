@@ -735,7 +735,7 @@ function function_e8628610(var_225347e1) {
 
 function function_e6f86e4d(n_damage) {
   var_6be53fb8 = n_damage;
-  if(isplayer(self) && (isDefined(self.var_d89174ae) && self.var_d89174ae)) {
+  if(isPlayer(self) && (isDefined(self.var_d89174ae) && self.var_d89174ae)) {
     var_6be53fb8 = n_damage * 1.15;
   }
   return var_6be53fb8;

@@ -51,9 +51,9 @@ f35_wakeup() {
   level.player thread player_wakes_up_la_2();
   level thread pilot_pre_drag_idle();
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level thread harper_wakes_up();
-  else {
+  } else {
     flag_set("start_anderson_f35_exit");
     wait 5.5;
     level notify("harper_woke_up");
@@ -87,20 +87,23 @@ fire_hydrant_break() {
     }
   }
 
-  while(distance2d(level.player.origin, m_hydrant.origin) > 700)
+  while(distance2d(level.player.origin, m_hydrant.origin) > 700) {
     wait 0.05;
+  }
 
   m_hydrant dodamage(5000, m_hydrant.origin);
 }
 
 player_wakes_up_la_2(b_remove_weapons, str_return_weapons_notify) {
-  assert(isplayer(self), "player_wakes_up can only be used on players!");
+  assert(isPlayer(self), "player_wakes_up can only be used on players!");
 
-  if(!isDefined(level.flag["player_awake"]))
+  if(!isDefined(level.flag["player_awake"])) {
     flag_init("player_awake");
+  }
 
-  if(!isDefined(b_remove_weapons))
+  if(!isDefined(b_remove_weapons)) {
     b_remove_weapons = 1;
+  }
 
   e_temp = spawn("script_origin", self.origin);
   e_temp.angles = self getplayerangles();
@@ -113,8 +116,9 @@ player_wakes_up_la_2(b_remove_weapons, str_return_weapons_notify) {
   self setplayerviewratescale(30);
   self hide_hud();
 
-  if(b_remove_weapons)
+  if(b_remove_weapons) {
     self thread _player_wakes_up_remove_weapons(str_return_weapons_notify);
+  }
 
   self shellshock("death", 12);
   self screen_fade_out(0);
@@ -161,13 +165,15 @@ intro_move_player_origin() {
   v_start_ang = s_player_start.angles;
   v_saved_pos = "";
 
-  if(v_saved_pos != "")
+  if(v_saved_pos != "") {
     v_start_pos = level.f35 localtoworldcoords(v_saved_pos);
+  }
 
   v_saved_ang = "";
 
-  if(v_saved_ang != "")
+  if(v_saved_ang != "") {
     v_start_ang = v_saved_ang;
+  }
 
   level.player setorigin(bulletTrace(v_start_pos + vectorscale((0, 0, 1), 1000.0), v_start_pos + vectorscale((0, 0, 1), 1000.0) + vectorscale((0, 0, -1), 100000.0), 0, level.player)["position"]);
   level.player setplayerangles(v_start_ang);
@@ -223,13 +229,15 @@ harper_drags_pilot_to_van() {
   delete_ais_from_scene("pilot_drag");
   n_wait_time = 1;
 
-  if(!flag("player_in_f35"))
+  if(!flag("player_in_f35")) {
     n_wait_time = 5;
+  }
 
   flag_wait("player_in_f35");
 
-  if(isDefined(ai_harper))
+  if(isDefined(ai_harper)) {
     ai_harper anim_stopanimscripted();
+  }
 
   wait(n_wait_time);
   vh_intro_van.origin = nd_start.origin;
@@ -242,8 +250,9 @@ actor_died_fail() {
   level endon("pilot_drag_ended");
   self waittill("death");
 
-  if(!isDefined(level.pilot_drag_over))
+  if(!isDefined(level.pilot_drag_over)) {
     level.player thread maps\_friendlyfire::missionfail();
+  }
 }
 
 pilot_drag_play_harper_anims() {
@@ -257,15 +266,16 @@ required_vehicle_death() {
   if(flag("player_in_f35")) {
     return;
   }
-  setdvar("ui_deadquote", &"LA_2_REQUIRED_VEHICLE_DEAD");
+  setDvar("ui_deadquote", &"LA_2_REQUIRED_VEHICLE_DEAD");
   missionfailed();
 }
 
 late_cops_driveup() {
   squad_cars = spawn_vehicles_from_targetname("late_lapd");
 
-  foreach(car in squad_cars)
-  car.overridevehicledamage = ::cops_damage_override;
+  foreach(car in squad_cars) {
+    car.overridevehicledamage = ::cops_damage_override;
+  }
 
   playsoundatposition("amb_distant_police_oneshot", (6744, -33418, 316));
   level waittill("harper_woke_up");
@@ -279,8 +289,9 @@ late_cops_driveup() {
   flag_wait("player_in_f35");
   wait 5.0;
 
-  for(i = 0; i < squad_cars.size; i++)
+  for(i = 0; i < squad_cars.size; i++) {
     squad_cars[i] notify("kill_siren");
+  }
 }
 
 fake_building_collapse() {
@@ -292,8 +303,9 @@ fake_building_collapse() {
 
 cops_damage_override(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(eattacker == level.player) {
-    if(self.health - idamage <= 0)
+    if(self.health - idamage <= 0) {
       level.player thread maps\_friendlyfire::missionfail();
+    }
   }
 
   return idamage;
@@ -310,8 +322,9 @@ intro_cougars() {
 play_delayed_stop_sound(num) {
   wait 0.5;
 
-  while(self getspeed() >= 5)
+  while(self getspeed() >= 5) {
     wait 0.1;
+  }
 
   self playSound("amb_police_stop_" + num);
 }
@@ -392,8 +405,9 @@ anim_f35_startup() {
 intro_guys_die() {
   a_intro_guys = simple_spawn("intro_guys");
 
-  for(i = 0; i < a_intro_guys.size; i++)
+  for(i = 0; i < a_intro_guys.size; i++) {
     a_intro_guys[i] thread play_intro_guy_death_anim();
+  }
 }
 
 play_intro_guy_death_anim() {
@@ -445,8 +459,9 @@ billboard_1_lookat_trigger() {
   while(!b_should_fire_rpg) {
     t_lookat waittill("trigger");
 
-    if(distance(t_lookat.origin, level.player.origin) < 6000)
+    if(distance(t_lookat.origin, level.player.origin) < 6000) {
       b_should_fire_rpg = 1;
+    }
   }
 
   fire_magic_rpg_struct("hotel_st_billboard_magic_struct");
@@ -473,8 +488,9 @@ setup_parking_garage() {
   while(b_roof_pristine) {
     t_damage waittill("damage", n_damage, e_attacker, v_fire_direction, v_hit_point, str_type);
 
-    if(isDefined(e_attacker) && isplayer(e_attacker) && isDefined(str_type) && issubstr(str_type, "PROJECTILE"))
+    if(isDefined(e_attacker) && isPlayer(e_attacker) && isDefined(str_type) && issubstr(str_type, "PROJECTILE")) {
       b_roof_pristine = 0;
+    }
   }
 
   level notify("parking_structure_roof_collapse");
@@ -494,8 +510,9 @@ parking_structure_destroy_roof() {
   a_vehicles_on_roof = [];
 
   for(i = 0; i < a_vehicles.size; i++) {
-    if(a_vehicles[i] istouching(t_physics))
+    if(a_vehicles[i] istouching(t_physics)) {
       a_vehicles_on_roof[a_vehicles_on_roof.size] = a_vehicles[i];
+    }
   }
 
   level notify("fxanim_garage_roof_start");
@@ -503,12 +520,14 @@ parking_structure_destroy_roof() {
   a_to_die = get_ai_touching_volume("axis", "parking_garage_destroyed_roof_part_trigger");
 
   if(a_to_die.size > 0) {
-    for(i = 0; i < a_to_die.size; i++)
+    for(i = 0; i < a_to_die.size; i++) {
       a_to_die[i] die();
+    }
   }
 
-  for(i = 0; i < a_roof_nodes.size; i++)
+  for(i = 0; i < a_roof_nodes.size; i++) {
     setenablenode(a_roof_nodes[i], 0);
+  }
 
   bm_roof_clip_pristine delete();
   t_damage delete();
@@ -568,13 +587,14 @@ fake_physics_vehicle_launch() {
       n_accumulated = n_accumulated + n_damage;
     }
 
-    if(!b_is_dead && n_accumulated > n_health)
+    if(!b_is_dead && n_accumulated > n_health) {
       b_is_dead = 1;
+    }
 
     if(b_should_move && b_is_enough_damage) {
-      if(b_is_explosive_type)
+      if(b_is_explosive_type) {
         self vehicle_explosion_launch(v_hit_point);
-      else if(b_is_bullet_type) {
+      } else if(b_is_bullet_type) {
         n_scale = randomintrange(n_scale_bullet_min, n_scale_bullet_max);
         v_launch_direction = vectornormalize(v_hit_point - self.origin) * n_scale * -1;
         self physicslaunch(v_hit_point, v_launch_direction);
@@ -600,8 +620,9 @@ gas_station_death() {
   maps\_drones::drones_delete("gas_station_drones");
   vh_truck = get_ent("truck_gas_station", "targetname");
 
-  if(isDefined(vh_truck))
+  if(isDefined(vh_truck)) {
     vh_truck dodamage(9999, vh_truck.origin, level.player, level.player, "explosive");
+  }
 }
 
 warehouse_death() {
@@ -645,7 +666,7 @@ kill_player_if_under_crane(n_timeout) {
   level delay_thread(n_timeout, "crane_collapse_done");
   self waittill("trigger");
   level.deadquote_override = 1;
-  setdvar("ui_deadquote", &"LA_2_F35_DEAD_CRANE");
+  setDvar("ui_deadquote", &"LA_2_F35_DEAD_CRANE");
   level.f35 do_vehicle_damage(level.f35.health_regen.health, self);
 }
 
@@ -664,10 +685,11 @@ damage_trigger_monitor(str_trigger_name, n_damage_before_trigger, str_notify_on_
     b_check_attackers = 1;
     a_attackers = [];
 
-    if(isarray(a_valid_attackers))
+    if(isarray(a_valid_attackers)) {
       a_attackers = a_valid_attackers;
-    else
+    } else {
       a_attackers[a_attackers.size] = a_valid_attackers;
+    }
   }
 
   b_check_attackers = isDefined(a_valid_attackers);
@@ -681,23 +703,27 @@ damage_trigger_monitor(str_trigger_name, n_damage_before_trigger, str_notify_on_
       b_should_damage = 0;
 
       for(i = 0; i < a_attackers.size; i++) {
-        if(a_attackers[i] == e_attacker)
+        if(a_attackers[i] == e_attacker) {
           b_should_damage = 1;
+        }
       }
     }
 
-    if(b_should_damage)
+    if(b_should_damage) {
       n_damage_total = n_damage_total + n_damage;
+    }
   }
 
   self notify(str_notify_on_death);
   t_damage notify("death");
 
-  if(isDefined(e_target))
+  if(isDefined(e_target)) {
     e_target delete();
+  }
 
-  if(isDefined(func_on_death))
+  if(isDefined(func_on_death)) {
     t_damage[[func_on_death]]();
+  }
 }
 
 f35_ground_targets() {
@@ -737,8 +763,9 @@ ground_vehicle_fires_at_player(n_custom_index) {
   n_index = 1;
   v_offset = (0, 0, 0);
 
-  if(isDefined(n_custom_index))
+  if(isDefined(n_custom_index)) {
     n_index = n_custom_index;
+  }
 
   self maps\_turret::set_turret_burst_parameters(5, 7, 1.5, 3, n_index);
 
@@ -750,18 +777,20 @@ ground_vehicle_fires_at_player(n_custom_index) {
 }
 
 add_ground_vehicle_damage_callback() {
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.overridevehicledamage = ::ground_vehicle_damage_callback;
+  }
 }
 
 ground_vehicle_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(isDefined(sweapon)) {
-    if(sweapon == "f35_missile_turret_player")
+    if(sweapon == "f35_missile_turret_player") {
       idamage = 9999;
-    else if(sweapon == "f35_side_minigun_player")
+    } else if(sweapon == "f35_side_minigun_player") {
       idamage = 1000;
-    else if(sweapon == "cougar_gun_turret")
+    } else if(sweapon == "cougar_gun_turret") {
       idamage = 1;
+    }
   }
 
   return idamage;
@@ -778,8 +807,9 @@ spawn_ground_target_guys() {
 }
 
 _ground_targets_end() {
-  if(flag("ground_targets_escape"))
+  if(flag("ground_targets_escape")) {
     wait 6;
+  }
 
   maps\_drones::drones_delete("gas_station_drones");
   maps\_drones::drones_delete("warehouse_drones");
@@ -834,8 +864,9 @@ setup_ground_attack_objectives() {
     a_targets[a_targets.size] = t_gas_station;
   }
 
-  if(!flag("warehouse_destroyed"))
+  if(!flag("warehouse_destroyed")) {
     t_warehouse = get_ent("warehouse_damage_trigger", "targetname");
+  }
 
   level.ground_attack_targets = a_targets.size;
   array_thread(a_targets, ::objective_ground_attack_add);
@@ -855,8 +886,9 @@ ground_attack_vehicle_death() {
   self vehicle_explosion_launch(self.origin);
   level.ground_attack_vehicles--;
 
-  if(level.ground_attack_vehicles == 0)
+  if(level.ground_attack_vehicles == 0) {
     flag_set("ground_attack_vehicles_dead");
+  }
 }
 
 setup_spawn_functions() {
@@ -902,16 +934,18 @@ building_collapse_planes_fire() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 _explode_near_target(e_target) {
   self endon("death");
   self thread _collapse_building_on_missile_hit();
 
-  while(distance(self.origin, e_target.origin) > 200)
+  while(distance(self.origin, e_target.origin) > 200) {
     wait 0.05;
+  }
 
   self resetmissiledetonationtime(0);
 }
@@ -944,8 +978,9 @@ vehicle_fires_at_target_pool_then_dies(str_enemy_targetname) {
 
   self waittill("target_array_destroyed");
 
-  while(self getspeedmph() > 5)
+  while(self getspeedmph() > 5) {
     wait 1;
+  }
 
   wait(randomfloatrange(3, 5));
   iprintlnbold("destroying ambient vehicle");
@@ -960,16 +995,18 @@ gas_station_collateral_damage() {
   self waittill("death");
   t_gas_station = get_ent("gas_station_damage_trigger", "targetname");
 
-  if(isDefined(t_gas_station))
+  if(isDefined(t_gas_station)) {
     t_gas_station dodamage(9999, t_gas_station.origin, level.player, level.player, "explosive");
+  }
 }
 
 warehouse_guys_func(a_convoy_nodes, a_player_nodes) {
   self endon("death");
   assert(isDefined(a_convoy_nodes), "a_convoy_nodes is a required parameter for warehouse_guys_func");
 
-  if(!isDefined(a_player_nodes))
+  if(!isDefined(a_player_nodes)) {
     a_player_nodes = a_convoy_nodes;
+  }
 
   n_distance_to_next_max_sq = 300 * 300;
   n_distance_from_last_max_sq = 300 * 300;
@@ -978,14 +1015,16 @@ warehouse_guys_func(a_convoy_nodes, a_player_nodes) {
   self.a.rockets = 200;
   self.dropweapon = 0;
 
-  if(is_mature() && !is_gib_restricted_build())
+  if(is_mature() && !is_gib_restricted_build()) {
     self.force_gib = 1;
+  }
 
   b_should_target_player = isDefined(self.script_noteworthy) && self.script_noteworthy == "shoot_player";
   a_nodes = a_convoy_nodes;
 
-  if(b_should_target_player)
+  if(b_should_target_player) {
     a_nodes = a_player_nodes;
+  }
 
   assert(a_nodes.size > 0, "a_nodes for " + self.targetname + " at position " + self.origin + " has no nodes for warehouse_guys_func");
 
@@ -1001,8 +1040,9 @@ warehouse_guys_func(a_convoy_nodes, a_player_nodes) {
       n_distance_to_cover_sq = distancesquared(self.origin, nd_cover.origin);
       b_distance_to_next_ok = n_distance_to_cover_sq > n_distance_to_next_max_sq;
 
-      if(!b_node_claimed && b_distance_to_next_ok && b_distance_from_last_ok)
+      if(!b_node_claimed && b_distance_to_next_ok && b_distance_from_last_ok) {
         b_found_node = 1;
+      }
 
       wait 0.05;
     }
@@ -1014,8 +1054,9 @@ warehouse_guys_func(a_convoy_nodes, a_player_nodes) {
     n_shoot_time = randomfloatrange(10, 25);
     e_target = maps\la_2_convoy::convoy_get_leader();
 
-    if(b_should_target_player)
+    if(b_should_target_player) {
       e_target = level.player;
+    }
 
     self thread shoot_at_target(e_target, undefined, 0, n_shoot_time);
     wait(n_shoot_time);
@@ -1025,8 +1066,9 @@ warehouse_guys_func(a_convoy_nodes, a_player_nodes) {
 remove_target_on_death() {
   self waittill("death");
 
-  if(target_istarget(self))
+  if(target_istarget(self)) {
     target_remove(self);
+  }
 }
 
 attack_convoy_leader_ai() {
@@ -1039,14 +1081,16 @@ attack_convoy_leader_ai() {
   self waittill("goal");
   self set_pacifist(0);
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "shoot_player" && self.weapon == "rpg")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "shoot_player" && self.weapon == "rpg") {
     b_shoot_player = 1;
+  }
 
   while(true) {
     e_target = maps\la_2_convoy::convoy_get_leader();
 
-    if(b_shoot_player)
+    if(b_shoot_player) {
       e_target = level.player;
+    }
 
     self shoot_at_target(e_target);
     wait 1;
@@ -1070,8 +1114,9 @@ rooftop_guys_func(a_nodes_edge, a_nodes_interior, a_volumes_infantry) {
     self go_to_appropriate_goal(a_nodes, a_volumes_infantry);
     e_target = maps\la_2_convoy::convoy_get_leader();
 
-    if(b_shoot_player)
+    if(b_shoot_player) {
       e_target = level.player;
+    }
 
     self shoot_at_target(e_target);
     wait 8;
@@ -1085,15 +1130,17 @@ go_to_appropriate_goal(a_nodes, a_volumes_infantry) {
     nd_goal = random(a_nodes);
     n_index = 0;
 
-    if(flag("convoy_at_parking_structure"))
+    if(flag("convoy_at_parking_structure")) {
       n_index = 1;
+    }
 
     e_volume = a_volumes_infantry[n_index];
     b_node_occupied = isnodeoccupied(nd_goal);
     b_is_within_volume = is_point_inside_volume(nd_goal.origin, e_volume);
 
-    if(!b_node_occupied && b_is_within_volume)
+    if(!b_node_occupied && b_is_within_volume) {
       b_has_goal = 1;
+    }
   }
 
   self set_goal_node(nd_goal);
@@ -1139,13 +1186,15 @@ spawn_vehicles_from_targetname_and_gopath(str_name) {
 molotov_throw(str_targetname, v_start, v_end) {
   assert(isDefined(str_targetname) || (isDefined(v_start) || isDefined(v_end)), "either str_targetname or v_start and v_end are required for molotov_throw function");
 
-  if(isDefined(str_targetname))
+  if(isDefined(str_targetname)) {
     s_start = get_struct(str_targetname, "targetname", 1);
+  }
 
-  if(!isDefined(v_start) && isDefined(s_start))
+  if(!isDefined(v_start) && isDefined(s_start)) {
     v_start = s_start.origin;
-  else if(!isDefined(v_start) && !isDefined(s_start))
+  } else if(!isDefined(v_start) && !isDefined(s_start)) {
     v_start = self.origin;
+  }
 
   if(!isDefined(v_end)) {
     s_end = get_struct(s_start.target, "targetname", 1);
@@ -1174,8 +1223,9 @@ f35_pacing() {
   level.f35 delay_thread(2, ::pip_start, "la_pip_seq_3", maps\la_2_anim::vo_pip_pacing);
   flag_wait("convoy_at_roadblock");
 
-  while(distance2dsquared(level.convoy.leader.origin, level.player.origin) > 100000000)
+  while(distance2dsquared(level.convoy.leader.origin, level.player.origin) > 100000000) {
     wait 0.05;
+  }
 
   flag_set("roadblock_done");
 }
@@ -1185,16 +1235,18 @@ pip_start(str_bink_name, func_during_bink) {
   flag_set("pip_playing");
   level.f35.current_bink = str_bink_name;
 
-  if(isDefined(level.f35.current_bink_id))
+  if(isDefined(level.f35.current_bink_id)) {
     stop3dcinematic(level.f35.current_bink_id);
+  }
 
   wait 0.1;
   maps\la_2_player_f35::f35_show_console("tag_display_message");
   thread maps\_glasses::play_bink_on_hud(str_bink_name, 0, 0);
   flag_wait("glasses_bink_playing");
 
-  if(isDefined(func_during_bink))
+  if(isDefined(func_during_bink)) {
     self thread[[func_during_bink]]();
+  }
 
   flag_waitopen("glasses_bink_playing");
   f35_show_console(undefined);
@@ -1216,16 +1268,18 @@ ambient_activity_warehouse_street() {
   maps\_drones::drones_delete("warehouse_st_blockade_lapd");
   a_lookat_triggers = get_ent_array("drones_warehouse_st_turn_kill_trigger_left", "targetname", 1);
 
-  for(i = 0; i < a_lookat_triggers.size; i++)
+  for(i = 0; i < a_lookat_triggers.size; i++) {
     a_lookat_triggers[i] delete();
+  }
 }
 
 ambient_activitiy_stop_warehouse_st_left() {
   level waittill("stop_ambient_activity_warehouse_street_left");
   a_lookat_triggers = get_ent_array("drones_warehouse_st_turn_kill_trigger", "targetname", 1);
 
-  for(i = 0; i < a_lookat_triggers.size; i++)
+  for(i = 0; i < a_lookat_triggers.size; i++) {
     a_lookat_triggers[i] delete();
+  }
 }
 
 ambient_activity_hotel_street() {
@@ -1281,8 +1335,9 @@ ambient_activity_hotel_street_turn() {
 ambient_activity_parking_structure() {
   t_radio_tower = get_ent("radio_tower_damage_trigger", "targetname");
 
-  if(isDefined(t_radio_tower))
+  if(isDefined(t_radio_tower)) {
     fire_magic_rpg_struct("radio_tower_magic_damage_struct");
+  }
 
   maps\_drones::drones_set_cheap_flag("parking_structure_drones", 1);
   maps\_drones::drones_set_cheap_flag("parking_structure_lapd_drones", 1);
@@ -1320,8 +1375,9 @@ lapd_ai_hotel_turn(a_goals, a_fire_points) {
   while(!b_found_node) {
     nd_goal = random(a_goals);
 
-    if(!isnodeoccupied(nd_goal))
+    if(!isnodeoccupied(nd_goal)) {
       b_found_node = 1;
+    }
   }
 
   self set_goal_node(nd_goal);
@@ -1389,8 +1445,9 @@ pre_building_collapse_event() {
   maps\_drones::drones_delete("building_collapse_battle_allies");
   a_triggers = get_ent_array("pre_building_collapse_drones_lookat_kill_triggers", "targetname", 1);
 
-  for(i = 0; i < a_triggers.size; i++)
+  for(i = 0; i < a_triggers.size; i++) {
     a_triggers[i] delete();
+  }
 }
 
 convoy_waits_after_crane_building() {
@@ -1401,8 +1458,9 @@ convoy_waits_after_crane_building() {
     while(!b_player_hit_trigger) {
       t_wait waittill("trigger", e_triggered);
 
-      if(isplayer(e_triggered))
+      if(isPlayer(e_triggered)) {
         b_player_hit_trigger = 1;
+      }
     }
 
     flag_set("convoy_at_rooftops");
@@ -1418,11 +1476,13 @@ crane_building_spawner() {
     t_crane_building waittill("trigger");
     n_distance_current = distance(t_crane_building.origin, level.player.origin);
 
-    if(n_distance_current < 15000)
+    if(n_distance_current < 15000) {
       level notify("spawn_crane_building_heli");
+    }
 
-    if(n_distance_current < 7500)
+    if(n_distance_current < 7500) {
       b_spawn_ready = 1;
+    }
   }
 
   if(!flag("convoy_at_dogfight")) {}
@@ -1457,8 +1517,9 @@ weapon_index_test() {
   for(i = 0; i < 5; i++) {
     str_weapon = self seatgetweapon(i);
 
-    if(!isDefined(str_weapon))
+    if(!isDefined(str_weapon)) {
       str_weapon = "NONE";
+    }
 
     iprintlnbold(str_weapon + " at seat index " + i);
   }
@@ -1491,8 +1552,9 @@ heli_triggers_crane_fall() {
   self waittill_either("crash_move_done", "missed_rooftop");
   t_crane = get_ent("rooftop_crane_trigger", "targetname");
 
-  if(isDefined(t_crane))
+  if(isDefined(t_crane)) {
     t_crane dodamage(9999, t_crane.origin, level.player);
+  }
 }
 
 heli_crash_audio() {
@@ -1516,8 +1578,9 @@ _heli_crash_sanity_check(s_reference) {
     }
     n_dot_up = self get_dot_up(s_reference.origin);
 
-    if(n_dot_up > 0)
+    if(n_dot_up > 0) {
       self notify("missed_rooftop");
+    }
 
     wait 0.05;
   }
@@ -1528,8 +1591,9 @@ helicopter_rappel_unload(func_ai_custom) {
   self.rappel_unloading_done = 0;
   self.originheightoffset = 75;
 
-  if(!isDefined(func_ai_custom))
+  if(!isDefined(func_ai_custom)) {
     func_ai_custom = ::crane_building_ai_func;
+  }
 }
 
 land_heli() {
@@ -1552,8 +1616,9 @@ crane_building_ai_func() {
     wait(randomfloatrange(0.1, 0.6));
     nd_goal = random(a_goals);
 
-    if(!isnodeoccupied(nd_goal))
+    if(!isnodeoccupied(nd_goal)) {
       b_found_goal = 1;
+    }
   }
 
   self set_goalradius(32);
@@ -1648,8 +1713,9 @@ mark_ai_for_death() {
 
   println("mark_ai_for_death killing AI at " + self.origin);
 
-  if(isalive(self))
+  if(isalive(self)) {
     self dodamage(self.health, self.origin);
+  }
 }
 
 rooftop_ai_individual_objective(str_group_name) {
@@ -1663,11 +1729,13 @@ rooftop_ai_individual_objective(str_group_name) {
     n_living_count = a_guys.size;
     n_total_count = get_ai_group_count(str_group_name);
 
-    if(n_living_count == 0 && n_total_count == 0)
+    if(n_living_count == 0 && n_total_count == 0) {
       b_should_loop = 0;
+    }
 
-    if(n_total_count == n_living_count)
+    if(n_total_count == n_living_count) {
       b_track_objective = 1;
+    }
 
     if(b_track_objective && n_living_count > 0) {
       e_temp = get_closest_living(level.f35.origin, a_guys);
@@ -1719,14 +1787,16 @@ f35_trenchrun() {
   while(!b_player_within_range) {
     n_distance_current_sq = distancesquared(level.convoy.vh_potus.origin, level.player.origin);
 
-    if(n_distance_sq > n_distance_current_sq)
+    if(n_distance_sq > n_distance_current_sq) {
       b_player_within_range = 1;
+    }
 
     wait 0.1;
   }
 
-  while(!level.f35.is_vtol)
+  while(!level.f35.is_vtol) {
     wait 0.25;
+  }
 
   wait 2;
   flag_set("trenchruns_start");
@@ -1754,11 +1824,13 @@ f35_trenchrun() {
 }
 
 do_vehicle_damage(n_amount, e_attacker, str_damage_type) {
-  if(isDefined(self.armor))
+  if(isDefined(self.armor)) {
     self.armor = self.armor - n_amount;
+  }
 
-  if(!isDefined(str_damage_type))
+  if(!isDefined(str_damage_type)) {
     str_damage_type = "explosive";
+  }
 
   self dodamage(n_amount, self.origin, e_attacker, e_attacker, str_damage_type);
 }
@@ -1769,17 +1841,21 @@ spawn_trenchrun_plane(str_spawner_name, str_start_point, n_speed, v_offset, n_up
   sp_vehicle = get_vehicle_spawner(str_spawner_name, "targetname");
   nd_start = getvehiclenode(str_start_point, "targetname");
 
-  if(!isDefined(sp_vehicle.angles))
+  if(!isDefined(sp_vehicle.angles)) {
     sp_vehicle.angles = (0, 0, 0);
+  }
 
-  if(!isDefined(nd_start.angles))
+  if(!isDefined(nd_start.angles)) {
     nd_start.angles = (0, 0, 0);
+  }
 
-  if(!isDefined(n_speed))
+  if(!isDefined(n_speed)) {
     n_speed = 250;
+  }
 
-  if(!isDefined(b_track))
+  if(!isDefined(b_track)) {
     b_track = 1;
+  }
 
   v_origin_old = sp_vehicle.origin;
   v_angles_old = sp_vehicle.angles;
@@ -1790,8 +1866,9 @@ spawn_trenchrun_plane(str_spawner_name, str_start_point, n_speed, v_offset, n_up
   vh_plane endon("death");
 
   if(b_track) {
-    if(!isDefined(level.trenchrun_planes))
+    if(!isDefined(level.trenchrun_planes)) {
       level.trenchrun_planes = [];
+    }
 
     level.trenchrun_planes[level.trenchrun_planes.size] = vh_plane;
   }
@@ -1805,10 +1882,11 @@ spawn_trenchrun_plane(str_spawner_name, str_start_point, n_speed, v_offset, n_up
   vh_plane.using_ai = 0;
   vh_plane thread _trenchrun_update_goal_pos(10192);
 
-  if(isDefined(v_offset) && !isDefined(n_update_time))
+  if(isDefined(v_offset) && !isDefined(n_update_time)) {
     vh_plane pathfixedoffset(v_offset);
-  else if(isDefined(v_offset) && isDefined(n_update_time))
+  } else if(isDefined(v_offset) && isDefined(n_update_time)) {
     vh_plane pathvariableoffset(v_offset, n_update_time);
+  }
 
   vh_plane setneargoalnotifydist(700);
   vh_plane thread go_path(nd_start);
@@ -1831,8 +1909,9 @@ spawn_trenchrun_plane(str_spawner_name, str_start_point, n_speed, v_offset, n_up
 trenchrun_sanity_check() {
   self endon("death");
 
-  while(!isDefined(self.suicide_target))
+  while(!isDefined(self.suicide_target)) {
     wait 0.1;
+  }
 
   while(true) {
     n_distance = distance(self.origin, self.suicide_target.origin);
@@ -1855,24 +1934,27 @@ _print_goal_line(s_goal, n_red, n_green, n_blue, n_refresh_time) {
   self endon("_kill_goal_line");
   self endon("death");
 
-  if(!isDefined(n_red))
+  if(!isDefined(n_red)) {
     n_red = 1;
+  }
 
-  if(!isDefined(n_green))
+  if(!isDefined(n_green)) {
     n_green = 1;
+  }
 
-  if(!isDefined(n_blue))
+  if(!isDefined(n_blue)) {
     n_blue = 1;
+  }
 
-  if(!isDefined(n_refresh_time))
+  if(!isDefined(n_refresh_time)) {
     n_refresh_time = 1;
+  }
 
   while(true) {
     n_distance = distance(self.origin, s_goal.origin);
     self thread draw_line_for_time(self.origin, s_goal.origin, n_red, n_green, n_blue, n_refresh_time);
     wait(n_refresh_time);
   }
-
 }
 
 _trenchrun_update_goal_pos(n_near_goal_draw_red_line) {
@@ -1899,8 +1981,9 @@ _trenchrun_update_goal_pos(n_near_goal_draw_red_line) {
         n_b = 0;
       }
 
-      if(self.using_ai)
+      if(self.using_ai) {
         self setvehgoalpos(v_predicted_location);
+      }
     }
 
     wait 0.05;
@@ -1914,31 +1997,31 @@ trenchrun_draw_line(e_target, n_distance_to_red) {
   while(true) {
     n_distance = distance(self.origin, e_target.origin);
 
-    if(n_distance < n_distance_to_red)
+    if(n_distance < n_distance_to_red) {
       self thread _print_goal_line(e_target, 1, 0, 0, 0.05);
+    }
 
     wait 0.05;
   }
-
 }
 
 trenchrun_add_objective_to_plane() {
-  if(!isDefined(level.trenchrun_wave))
+  if(!isDefined(level.trenchrun_wave)) {
     level.trenchrun_wave = 1;
+  }
 
   n_wave = level.trenchrun_wave;
 
-  if(n_wave == 1)
+  if(n_wave == 1) {
     n_objective = level.obj_trenchrun_1;
-  else if(n_wave == 2)
+  } else if(n_wave == 2) {
     n_objective = level.obj_trenchrun_2;
-  else if(n_wave == 3)
+  } else if(n_wave == 3) {
     n_objective = level.obj_trenchrun_3;
-  else if(n_wave == 4)
+  } else if(n_wave == 4) {
     n_objective = level.obj_trenchrun_4;
-  else {
+  } else {
     assertmsg("trenchrun wave " + n_wave + " not supported");
-
   }
 
   maps\_objectives::set_objective(n_objective, self, "", -1);
@@ -2001,14 +2084,16 @@ eject_wait_for_player_position() {
     waittill_player_near_convoy_and_f35_for_eject();
 
     foreach(nd_start_node in a_eject_drone_starts) {
-      if(distance2dsquared(level.f35.origin, nd_start_node.origin) > distance2dsquared(level.f35.origin, nd_spline_start.origin))
+      if(distance2dsquared(level.f35.origin, nd_start_node.origin) > distance2dsquared(level.f35.origin, nd_spline_start.origin)) {
         nd_spline_start = nd_start_node;
+      }
     }
 
     is_clear = bullettracepassed(level.f35.origin, nd_spline_start.origin, 0, level.f35);
 
-    if(is_clear && level.player is_looking_at(level.convoy.leader, 0.7, 0))
+    if(is_clear && level.player is_looking_at(level.convoy.leader, 0.7, 0)) {
       b_spawn_ready = 1;
+    }
   }
   while(!b_spawn_ready);
 
@@ -2039,8 +2124,9 @@ waittill_player_near_convoy_and_f35_for_eject() {
         v_player_forward = vectornormalize(anglesToForward(level.f35.angles));
 
         if(vectordot(v_player_to_plane, v_plane_forward) > 0.7) {
-          if(vectordot(v_plane_forward, v_player_forward) > 0.8)
+          if(vectordot(v_plane_forward, v_player_forward) > 0.8) {
             b_facing_drone = 1;
+          }
         }
       }
     }
@@ -2172,8 +2258,9 @@ f38s_play_exhaust() {
   for(i = 2; i < 5; i++) {
     f35 = getent("f35_" + i, "targetname");
 
-    if(isDefined(f35))
+    if(isDefined(f35)) {
       playFXOnTag(level._effect["f38_afterburner"], f35, "tag_origin");
+    }
   }
 }
 
@@ -2198,10 +2285,11 @@ f35_eject_sequence_setup() {
   level thread maps\createart\la_2_art::eject();
   exploder(600);
 
-  if(flag("harper_dead"))
+  if(flag("harper_dead")) {
     exploder(710);
-  else
+  } else {
     exploder(700);
+  }
 }
 
 f35_intercepts_drone() {
@@ -2222,8 +2310,9 @@ f35_intercepts_drone() {
   m_linkto moveto(vh_drone.origin, n_moveto_time);
   m_linkto rotateto(v_rotate_to, 1, 0.25, 0.25);
 
-  while(1024 < distance(level.f35.origin, vh_drone.origin))
+  while(1024 < distance(level.f35.origin, vh_drone.origin)) {
     wait 0.05;
+  }
 
   level.convoy.vh_potus.takedamage = 0;
   level.f35 do_vehicle_damage(level.f35.health_regen.health, vh_drone);
@@ -2246,12 +2335,14 @@ eject_drone_spawn() {
     waittill_player_near_convoy_and_f35_for_eject();
 
     foreach(nd_start_node in a_eject_drone_starts) {
-      if(distance2dsquared(level.f35.origin, nd_start_node.origin) > distance2dsquared(level.f35.origin, nd_spline_start.origin))
+      if(distance2dsquared(level.f35.origin, nd_start_node.origin) > distance2dsquared(level.f35.origin, nd_spline_start.origin)) {
         nd_spline_start = nd_start_node;
+      }
     }
 
-    if(level.player is_looking_at(level.convoy.leader, 0.7, 1))
+    if(level.player is_looking_at(level.convoy.leader, 0.7, 1)) {
       b_spawn_ready = 1;
+    }
   }
   while(!b_spawn_ready);
 
@@ -2274,8 +2365,9 @@ eject_drone_spawn() {
     v_f35_forward = vectornormalize(anglesToForward(level.f35.angles));
 
     if(vectordot(v_drone_forward, v_f35_forward) < -0.8) {
-      if(level.player is_player_looking_at(vh_plane.origin, 0.8, 1, level.f35))
+      if(level.player is_player_looking_at(vh_plane.origin, 0.8, 1, level.f35)) {
         is_looking_at = 1;
+      }
     }
 
     wait 0.05;
@@ -2304,11 +2396,13 @@ eject_plan_fire_before_eject() {
 }
 
 eject_plane_fire(e_target, use_actual_pos, use_rockets) {
-  if(!isDefined(use_actual_pos))
+  if(!isDefined(use_actual_pos)) {
     use_actual_pos = 0;
+  }
 
-  if(!isDefined(use_rockets))
+  if(!isDefined(use_rockets)) {
     use_rockets = 0;
+  }
 
   level endon("midair_collision_started");
   e_target endon("death");
@@ -2332,7 +2426,7 @@ near_convoy_fail_watcher() {
     n_dist = distance2dsquared(v_convoy_vehicle.origin, self.origin);
 
     if(n_dist < n_fail_dist) {
-      setdvar("ui_deadquote", &"LA_2_OBJ_PROTECT_FAIL");
+      setDvar("ui_deadquote", &"LA_2_OBJ_PROTECT_FAIL");
       missionfailed();
     }
 
@@ -2364,23 +2458,26 @@ f35_outro() {
   level.convoy.vh_potus play_fx("cougar_dome_light", undefined, undefined, -1, 1, "tag_fx_domelight");
 
   if(is_alive(level.convoy.vh_g20_1)) {
-    if(!flag("harper_dead"))
+    if(!flag("harper_dead")) {
       level thread maps\_scene::run_scene("outro_g20_1");
-    else
+    } else {
       level thread maps\_scene::run_scene("outro_g20_1_noharper");
+    }
   }
 
   if(is_alive(level.convoy.vh_g20_2)) {
-    if(!flag("harper_dead"))
+    if(!flag("harper_dead")) {
       level thread maps\_scene::run_scene("outro_g20_2");
-    else
+    } else {
       level thread maps\_scene::run_scene("outro_g20_2_noharper");
+    }
   }
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level thread maps\_scene::run_scene("outro_hero");
-  else
+  } else {
     level thread maps\_scene::run_scene("outro_hero_noharper");
+  }
 
   level thread press_fadeout();
   wait 1;
@@ -2456,13 +2553,14 @@ vtol_check_on_path() {
     is_safe = 0;
 
     foreach(t_path in a_path_trigs) {
-      if(level.player istouching(t_path))
+      if(level.player istouching(t_path)) {
         is_safe = 1;
+      }
     }
 
-    if(!is_safe)
+    if(!is_safe) {
       level thread vtol_off_path();
-    else {
+    } else {
       level notify("vtol_on_path");
       flag_clear("vtol_off_path");
     }
@@ -2514,17 +2612,21 @@ hotel_street_heli_think() {
 }
 
 heli_death_trail(str_ender) {
-  if(!isDefined(str_ender))
+  if(!isDefined(str_ender)) {
     str_ender = undefined;
+  }
 
-  if(isDefined(str_ender))
+  if(isDefined(str_ender)) {
     self endon(str_ender);
+  }
 
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     playFX(self.deathfx, self.origin);
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     playFXOnTag(level._effect["heli_crash_trail"], self, "tag_origin");
+  }
 }

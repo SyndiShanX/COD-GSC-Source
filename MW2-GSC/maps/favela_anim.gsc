@@ -181,11 +181,8 @@ dialog() {
   // Roach, that was a civilian! Last I checked you served with the SAS, not the SS. Check your bloody targets!
   //level.scr_sound[ "mactavish" ][ "favela_cmt_notthess" ]				= "favela_cmt_notthess";
 
-  //------------
-  // DRIVING IN CAR
-  //------------
-
-  // Ghost, the plates are a match.
+  //------------ // DRIVING IN CAR
+  //------------ // Ghost, the plates are a match.
   level.scr_radio["favela_cmt_ready2move"] = "favela_cmt_ready2move";
 
   // Copy. Any sign of Faust's right hand man?
@@ -206,11 +203,8 @@ dialog() {
   // Get down get down!!!
   level.scr_radio["favela_cmt_getdown"] = "favela_cmt_getdown";
 
-  //------------
-  // CHASE
-  //------------
-
-  // Ghost, our driver's dead! We're on foot! Meet us at the Hotel Rio and cut him off if you can!
+  //------------ // CHASE
+  //------------ // Ghost, our driver's dead! We're on foot! Meet us at the Hotel Rio and cut him off if you can!
   level.scr_sound["mactavish"]["favela_cmt_driversdead"] = "favela_cmt_driversdead";
 
   // Roger, I'm on my way!
@@ -228,11 +222,8 @@ dialog() {
   // He's down! Good job Roach.
   level.scr_sound["mactavish"]["favela_cmt_hesdown"] = "favela_cmt_hesdown";
 
-  //------------
-  // ALLEY
-  //------------
-
-  // Let's go.
+  //------------ // ALLEY
+  //------------ // Let's go.
   level.scr_sound["royce"]["favela_ryc_letsgo"] = "favela_ryc_letsgo";
 
   // Remember - there are civilians in the favela. Take clean shots, watch your background.
@@ -244,11 +235,8 @@ dialog() {
   // Roger that.
   level.scr_sound["meat"]["favela_met_rogerthat"] = "favela_met_rogerthat";
 
-  //------------
-  // FAVELA
-  //------------
-
-  // Bravo Six, be advised - we've engaged enemy militia at the lower village!
+  //------------ // FAVELA
+  //------------ // Bravo Six, be advised - we've engaged enemy militia at the lower village!
   level.scr_radio["favela_cmt_fullbattalion"] = "favela_cmt_fullbattalion";
 
   // Roach! I'm with you! Watch the rooftops! Go!
@@ -272,11 +260,8 @@ dialog() {
   // Roach! I'm down! Meat's dead! They're all over - (gunfire, angry shouting in Portuguese)
   level.scr_radio["favela_ryc_imhit"] = "favela_ryc_imdown";
 
-  //------------
-  // SOCCER
-  //------------
-
-  // Roach - we've got Faust's location! He's headed west along the upper levels of the favela.
+  //------------ // SOCCER
+  //------------ // Roach - we've got Faust's location! He's headed west along the upper levels of the favela.
   level.scr_radio["favela_cmt_cuthimoff"] = "favela_cmt_cuthimoff";
 
   // We'll keep him from doubling back on our side - keep going and cut him off up top!
@@ -291,11 +276,8 @@ dialog() {
   // Roach - this is their territory and they know it well! Keep an eye open for ambush positions and check your corners!
   level.scr_radio["favela_cmt_theirterritory"] = "favela_cmt_theirterritory";
 
-  //------------
-  // LOWER HILL
-  //------------
-
-  // Roach, we're taking heavy fire from militia here but I'm still tracking Faust! He's gone into a building to get something! Ghost, you see him?
+  //------------ // LOWER HILL
+  //------------ // Roach, we're taking heavy fire from militia here but I'm still tracking Faust! He's gone into a building to get something! Ghost, you see him?
   level.scr_radio["favela_cmt_stilltracking"] = "favela_cmt_stilltracking";
 
   // Roger that, subject is now carrying a black duffel bag full of cash! Greedy bastard!
@@ -379,11 +361,8 @@ dialog() {
   // Roach! He's getting closer to your part of the favela!! Keep moving! Go! Go!
   level.scr_radio["favela_cmt_closertoyourpart"] = "favela_cmt_closertoyourpart";
 
-  //------------
-  // UPPER HILL
-  //------------
-
-  // Ghost he's going for that motorcycle!
+  //------------ // UPPER HILL
+  //------------ // Ghost he's going for that motorcycle!
   level.scr_radio["favela_cmt_motorcycle"] = "favela_cmt_motorcycle";
 
   // (gunshots, explosion) No he's not.
@@ -413,11 +392,8 @@ dialog() {
   // Roger that.
   level.scr_radio["favela_gst_rogerthat"] = "favela_gst_rogerthat";
 
-  //------------
-  // ENDING
-  //------------
-
-  // He's gonna get away!!
+  //------------ // ENDING
+  //------------ // He's gonna get away!!
   level.scr_radio["favela_gst_getaway"] = "favela_gst_getaway";
 
   // No he's not.
@@ -430,11 +406,8 @@ dialog() {
   level.scr_sound["ghost"]["favela_gst_skiesareclear"] = "favela_gst_skiesareclear";
   level.scr_sound["ghost"]["favela_gst_onourown"] = "favela_gst_onourown";
 
-  //------------
-  // CIVILIAN WALLA
-  //------------
-
-  level.scr_sound["generic"]["walla1"] = "favela_civ1_outofhere"; // Get out of here!! Hurry!!
+  //------------ // CIVILIAN WALLA
+  //------------ level.scr_sound["generic"]["walla1"] = "favela_civ1_outofhere"; // Get out of here!! Hurry!!
   level.scr_sound["generic"]["walla2"] = "favela_civ2_run"; // Run! Get to cover!!!
   level.scr_sound["generic"]["walla3"] = "favela_civ3_kidsoutofhere"; // Get the kids out of here!!! Go! Go!!!
   level.scr_sound["generic"]["walla4"] = "favela_civ4_carlarun"; // Carla, run!! Get out here!!!	

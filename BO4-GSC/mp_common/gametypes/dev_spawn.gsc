@@ -13,8 +13,8 @@
 
 function_d8049496() {
   callback::on_start_gametype(&on_start_gametype);
-  setdvar(#"hash_4c1fd51cfe763a2", "<dev string:x38>");
-  setdvar(#"hash_6d53bd520b4f7853", "<dev string:x42>");
+  setDvar(#"hash_4c1fd51cfe763a2", "<dev string:x38>");
+  setDvar(#"hash_6d53bd520b4f7853", "<dev string:x42>");
 }
 
 on_start_gametype() {
@@ -46,7 +46,7 @@ function_c28b3d26() {
 
   if(!isDefined(level.show_spawns) || level.show_spawns != show_spawns) {
     level.show_spawns = show_spawns;
-    setdvar(#"scr_showspawns", level.show_spawns);
+    setDvar(#"scr_showspawns", level.show_spawns);
 
     if(level.show_spawns) {
       showspawnpoints();
@@ -57,7 +57,7 @@ function_c28b3d26() {
 
   if(!isDefined(level.var_8f7b54b5) || level.var_8f7b54b5 != var_8f7b54b5) {
     level.var_8f7b54b5 = var_8f7b54b5;
-    setdvar(#"hash_42bc2c660a3d2ecd", level.var_8f7b54b5);
+    setDvar(#"hash_42bc2c660a3d2ecd", level.var_8f7b54b5);
 
     if(level.var_8f7b54b5) {
       function_1b0780eb();
@@ -112,7 +112,7 @@ function_3326cf8d() {
       function_f084faed();
       var_9e1b22d = function_f0b81b80(var_14d21c2b);
       function_bf14041f(var_9e1b22d);
-      setdvar(#"scr_set_spawns", "<dev string:x164>");
+      setDvar(#"scr_set_spawns", "<dev string:x164>");
     }
 
     wait 1;

@@ -122,7 +122,7 @@ function_c3f6fd96() {
 }
 
 function_1286cbf(s_params) {
-  if(isplayer(s_params.eattacker) && function_f820b73(s_params.weapon, 1) && s_params.smeansofdeath == "MOD_MELEE") {
+  if(isPlayer(s_params.eattacker) && function_f820b73(s_params.weapon, 1) && s_params.smeansofdeath == "MOD_MELEE") {
     player = s_params.eattacker;
     var_d695a618 = 50 - player zm_armor::get(#"hero_weapon_armor");
 
@@ -583,7 +583,7 @@ staff_lightning_get_valid_targets(player, v_source) {
 }
 
 staff_lightning_arc_fx(e_source, ai_zombie) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self endon(#"disconnect");
   }
 
@@ -601,7 +601,7 @@ staff_lightning_arc_fx(e_source, ai_zombie) {
 }
 
 staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     e_attacker endon(#"disconnect");
   }
 

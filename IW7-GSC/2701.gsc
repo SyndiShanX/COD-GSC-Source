@@ -64,7 +64,7 @@ init() {
 
   scripts\common\bcs_location_trigs::bcs_location_trigs_init();
   scripts\mp\bcs_location_trigs::bcs_location_trigs_init();
-  var_6 = getdvar("g_gametype");
+  var_6 = getDvar("g_gametype");
   level.istactical = 1;
 
   if(var_6 == "war" || var_6 == "kc" || var_6 == "dom") {
@@ -1009,7 +1009,7 @@ setselfvoinfo(var_0, var_1, var_2, var_3) {
 }
 
 saytoself(var_0, var_1, var_2, var_3) {
-  if(isagent(var_0) || !isplayer(var_0)) {
+  if(isagent(var_0) || !isPlayer(var_0)) {
     return;
   }
   if(scripts\mp\utility\game::istrue(var_0.bcdisabled)) {

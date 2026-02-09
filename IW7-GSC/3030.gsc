@@ -245,8 +245,8 @@ func_5BFD(var_0, var_1) {
   var_6 = [0, 0];
   var_7 = 2500;
   var_8 = 375;
-  var_9 = [ % drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
-  var_10 = [ % drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
+  var_9 = [%drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
+  var_10 = [%drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
   var_11 = 4.4;
   var_12 = 1.5;
   var_13 = 3.0;
@@ -347,8 +347,8 @@ func_5BFC(var_0) {
   var_7 = [0, 0];
   var_8 = 2500;
   var_9 = 375;
-  var_10 = [ % drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
-  var_11 = [ % drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
+  var_10 = [%drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
+  var_11 = [%drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
 
   if(!isDefined(var_0)) {
     var_12 = 2.4;

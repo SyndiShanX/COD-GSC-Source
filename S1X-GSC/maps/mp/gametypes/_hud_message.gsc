@@ -192,7 +192,7 @@ dispatchNotify(slot) {
 }
 
 promotionSplashNotify() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -376,7 +376,7 @@ showNotifyMessage(notifyData) {
 }
 
 coopKillstreakSplashNotify(splashRef, supportDialog) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -399,7 +399,7 @@ coopKillstreakSplashNotify(splashRef, supportDialog) {
 }
 
 killstreakSplashNotify(splashRef, streakVal, appendString, modules, slotIndex) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -444,7 +444,7 @@ killstreakSplashNotify(splashRef, streakVal, appendString, modules, slotIndex) {
 }
 
 challengeSplashNotify(challengeRef, originalChallengeState, newChallengeState) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -482,7 +482,7 @@ challengeSplashNotify(challengeRef, originalChallengeState, newChallengeState) {
 }
 
 splashNotify(splashRef, optionalNumber, optionalKillstreakSlot) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -509,7 +509,7 @@ splashNotify(splashRef, optionalNumber, optionalKillstreakSlot) {
 }
 
 splashNotifyUrgent(splashRef, optionalNumber) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -531,7 +531,7 @@ splashNotifyUrgent(splashRef, optionalNumber) {
 }
 
 splashNotifyDelayed(splashRef, optionalNumber) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -556,7 +556,7 @@ splashNotifyDelayed(splashRef, optionalNumber) {
 }
 
 rankupSplashNotify(splashRef, rank, prestige) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -582,7 +582,7 @@ rankupSplashNotify(splashRef, rank, prestige) {
 }
 
 playerCardSplashNotify(splashRef, player, optionalNumber) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -772,9 +772,9 @@ actionNotifyMessage(actionData) {
 
       case "playercard_splash":
         if(isDefined(actionData.playerCardPlayer)) {
-          assert(IsPlayer(actionData.playerCardPlayer) || IsAgent(actionData.playerCardPlayer));
+          assert(isPlayer(actionData.playerCardPlayer) || IsAgent(actionData.playerCardPlayer));
           self SetClientOmnvar("ui_splash_playercard_idx", splashIdx);
-          if(IsPlayer(actionData.playerCardPlayer)) {
+          if(isPlayer(actionData.playerCardPlayer)) {
             self SetClientOmnvar("ui_splash_playercard_clientnum", actionData.playerCardPlayer GetEntityNumber());
           }
           if(isDefined(actionData.optionalNumber)) {

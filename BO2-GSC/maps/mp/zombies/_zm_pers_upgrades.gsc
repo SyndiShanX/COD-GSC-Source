@@ -346,7 +346,6 @@ pers_upgrade_carpenter_active() {
       if(!isDefined(self.pers_carpenter_kill)) {
         break;
       }
-
     }
 
     self.pers_carpenter_kill = undefined;

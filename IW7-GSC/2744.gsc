@@ -80,7 +80,7 @@ func_D367() {
   if(level.gameended) {
     return;
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(scripts\mp\utility\game::isusingremote()) {
@@ -189,7 +189,7 @@ func_D368(var_0) {
   self endon("joined_team");
   self endon("joined_spectators");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self.hardcoreinjuredlooopsplayed = 0;

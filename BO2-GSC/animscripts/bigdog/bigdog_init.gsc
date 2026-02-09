@@ -234,7 +234,7 @@ bigdog_chase_enemy_behavior() {
 
   while(true) {
     if(isDefined(self.enemy) && (!isDefined(curenemy) || self.enemy != curenemy)) {
-      if(isplayer(self.enemy) || isai(self.enemy)) {
+      if(isPlayer(self.enemy) || isai(self.enemy)) {
         curenemy = self.enemy;
         self setgoalentity(curenemy);
       }
@@ -286,23 +286,21 @@ update_turret_target() {
           offset = (randomint(400), randomint(400), randomint(400));
           self.turret set_turret_target(self.fakeenemy, offset);
         } else if(canbigdogturretshoottarget()) {
-          if(isplayer(self.enemy)) {
+          if(isPlayer(self.enemy)) {
             offset = getplayerstancebasedoffset(self.enemy);
             self.turret set_turret_target(self.enemy, offset);
 
-            if(getdvar(#"_id_0C5E1FC8") == "on") {
+            if(getDvar(#"_id_0C5E1FC8") == "on") {
               recordline(self.turret gettagorigin("tag_flash"), self.enemy.origin + offset, (1, 0, 0), "Script", self);
               recordline(self.turret gettagorigin("tag_laser"), self.enemy.origin + offset, (1, 0, 0), "Script", self);
             }
-
           } else {
             self.turret set_turret_target(self.enemy);
 
-            if(getdvar(#"_id_0C5E1FC8") == "on") {
+            if(getDvar(#"_id_0C5E1FC8") == "on") {
               recordline(self.turret gettagorigin("tag_flash"), self.enemy.origin, (0, 1, 0), "Script", self);
               recordline(self.turret gettagorigin("tag_laser"), self.enemy.origin, (1, 0, 0), "Script", self);
             }
-
           }
         } else
           self.turret clear_turret_target();
@@ -599,7 +597,7 @@ bigdog_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
     } else if(attackedbyplayerusingbigdogvehicle(inflictor, attacker))
       dobodydamage = 1;
   } else {
-    assert(!isplayer(attacker));
+    assert(!isPlayer(attacker));
 
     if(is_bullet_damage(attacker, meansofdeath)) {
       if(isleghit) {
@@ -675,7 +673,7 @@ bigdog_try_pain(location, attacker) {
 }
 
 attackedbyplayer(attacker) {
-  if(isDefined(attacker) && isplayer(attacker))
+  if(isDefined(attacker) && isPlayer(attacker))
     return true;
 
   return false;
@@ -1115,7 +1113,7 @@ bigdog_bullet_hint_trigger(attacker, damage, meansofdeath, weapon, bonename, isl
   if(self.bullethintshown && self.chargedbullethintshown) {
     return;
   }
-  if(isplayer(attacker) && isbodyhit) {
+  if(isPlayer(attacker) && isbodyhit) {
     if(weaponchargeable) {
       if(!self.chargedbullethintshown && !weaponischarged) {
         if(!isDefined(self.bullet_hint_timer) || level.bullet_hint_timer get_time_in_seconds() > 5) {

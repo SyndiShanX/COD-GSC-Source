@@ -94,7 +94,7 @@ subclass_juggernaut() {
     return; // deleted
   if(!isDefined(attacker))
     return;
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   attacker player_giveachievement_wrapper("IM_THE_JUGGERNAUT");

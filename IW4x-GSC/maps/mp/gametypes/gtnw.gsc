@@ -243,7 +243,6 @@ overtimeThread(time) {
   } else {
     thread maps\mp\gametypes\_gamelogic::endGame("tie", game["strings"]["time_limit_reached"]);
   }
-
 }
 
 disableSpawning(waitTime) {

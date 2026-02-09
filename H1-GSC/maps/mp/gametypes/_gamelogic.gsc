@@ -51,7 +51,7 @@ onforfeit(var_0) {
 
   level.forcedend = 1;
 
-  if(isplayer(var_3))
+  if(isPlayer(var_3))
     logstring("forfeit, win: " + var_3 getxuid() + "(" + var_3.name + ")");
   else
     logstring("forfeit, win: " + var_3 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
@@ -329,9 +329,7 @@ updategameevents() {
 
         if(var_4 && !isDefined(level.onelefttime["allies"])) {
           level.onelefttime["allies"] = gettime();
-          var_7 = [
-            [level.ononeleftevent]
-          ]("allies");
+          var_7 = [[level.ononeleftevent]]("allies");
 
           if(isDefined(var_7)) {
             if(!isDefined(var_6))
@@ -343,9 +341,7 @@ updategameevents() {
 
         if(var_5 && !isDefined(level.onelefttime["axis"])) {
           level.onelefttime["axis"] = gettime();
-          var_8 = [
-            [level.ononeleftevent]
-          ]("axis");
+          var_8 = [[level.ononeleftevent]]("axis");
 
           if(isDefined(var_8)) {
             if(!isDefined(var_6))
@@ -690,7 +686,7 @@ updatewinlossstats(var_0) {
 
       updatetiestats(var_2);
     }
-  } else if(isplayer(var_0)) {
+  } else if(isPlayer(var_0)) {
     var_4[0] = var_0;
 
     if(level.players.size > 5)
@@ -1129,7 +1125,7 @@ checkscorelimit() {
     if(game["teamScores"]["allies"] < maps\mp\_utility::getwatcheddvar("scorelimit") && game["teamScores"]["axis"] < maps\mp\_utility::getwatcheddvar("scorelimit"))
       return;
   } else {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       return;
     }
     var_2 = maps\mp\_utility::getwatcheddvar("scorelimit");
@@ -1464,7 +1460,7 @@ callback_startgametype() {
   level.prematchperiodend = 0;
   level.postgamenotifies = 0;
   level.intermission = 0;
-  setdvar("bg_compassShowEnemies", getdvar("scr_game_forceuav"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
 
   if(!isDefined(game["gamestarted"])) {
     game["clientid"] = 0;
@@ -1726,13 +1722,13 @@ callback_startgametype() {
     }
   }
 
-  setdvar("ui_scorelimit", 0);
-  setdvar("ui_allow_teamchange", 1);
+  setDvar("ui_scorelimit", 0);
+  setDvar("ui_allow_teamchange", 1);
 
   if(maps\mp\_utility::getgametypenumlives())
-    setdvar("g_deadChat", 0);
+    setDvar("g_deadChat", 0);
   else
-    setdvar("g_deadChat", 1);
+    setDvar("g_deadChat", 1);
 
   var_7 = getdvarfloat("scr_" + level.gametype + "_waverespawndelay");
 
@@ -1777,7 +1773,7 @@ callback_startgametype() {
   level.scorepercentagecutoff = getdvarint("scr_" + level.gametype + "_score_percentage_cut_off", 80);
   level.timepercentagecutoff = getdvarint("scr_" + level.gametype + "_time_percentage_cut_off", 80);
 
-  if(!level.console && (getdvar("dedicated") == "dedicated LAN server" || getdvar("dedicated") == "dedicated internet server"))
+  if(!level.console && (getDvar("dedicated") == "dedicated LAN server" || getDvar("dedicated") == "dedicated internet server"))
     thread verifydedicatedconfiguration();
 
   setattackingteam();
@@ -1813,7 +1809,7 @@ verifydedicatedconfiguration() {
     if(!getdvarint("xblive_privatematch"))
       exitlevel(0);
 
-    if(getdvar("dedicated") != "dedicated LAN server" && getdvar("dedicated") != "dedicated internet server")
+    if(getDvar("dedicated") != "dedicated LAN server" && getDvar("dedicated") != "dedicated internet server")
       exitlevel(0);
 
     wait 5;
@@ -1844,12 +1840,12 @@ updateuiscorelimit() {
     level common_scripts\utility::waittill_either("update_scorelimit", "update_winlimit");
 
     if(!maps\mp\_utility::isroundbased() || !maps\mp\_utility::isobjectivebased()) {
-      setdvar("ui_scorelimit", maps\mp\_utility::getwatcheddvar("scorelimit"));
+      setDvar("ui_scorelimit", maps\mp\_utility::getwatcheddvar("scorelimit"));
       thread checkscorelimit();
       continue;
     }
 
-    setdvar("ui_scorelimit", maps\mp\_utility::getwatcheddvar("winlimit"));
+    setDvar("ui_scorelimit", maps\mp\_utility::getwatcheddvar("winlimit"));
   }
 }
 
@@ -1947,11 +1943,11 @@ startgame() {
   if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning())
     thread maps\mp\gametypes\_legacyspawnlogic::spawnperframeupdate();
 
-  setdvar("ui_inprematch", 1);
+  setDvar("ui_inprematch", 1);
   prematchperiod();
   maps\mp\_utility::gameflagset("prematch_done");
   level notify("prematch_over");
-  setdvar("ui_inprematch", 0);
+  setDvar("ui_inprematch", 0);
   level.prematch_done_time = gettime();
   updatetimerpausedness();
   thread timelimitclock();
@@ -2284,7 +2280,7 @@ freezeallplayers(var_0, var_1) {
 }
 
 endgameovertime(var_0, var_1) {
-  setdvar("bg_compassShowEnemies", 0);
+  setDvar("bg_compassShowEnemies", 0);
   handlekillstreaksonroundswitch(0);
   freezeallplayers(1.0, 1);
 
@@ -2338,7 +2334,7 @@ endgameovertime(var_0, var_1) {
   game["status"] = var_0;
   level notify("restarting");
   game["state"] = "playing";
-  setdvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   map_restart(1);
 }
 
@@ -2361,7 +2357,7 @@ handlekillstreaksonroundswitch(var_0) {
 }
 
 endgamehalftime(var_0) {
-  setdvar("bg_compassShowEnemies", 0);
+  setDvar("bg_compassShowEnemies", 0);
   handlekillstreaksonroundswitch(0);
   var_1 = "halftime";
   var_2 = 1;
@@ -2415,7 +2411,7 @@ endgamehalftime(var_0) {
   game["status"] = "halftime";
   level notify("restarting");
   game["state"] = "playing";
-  setdvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   map_restart(1);
 }
 
@@ -2453,7 +2449,7 @@ endgame(var_0, var_1, var_2) {
     return;
   }
   game["state"] = "postgame";
-  setdvar("ui_game_state", "postgame");
+  setDvar("ui_game_state", "postgame");
   level.gameendtime = gettime();
   level.gameended = 1;
   level.ingraceperiod = 0;
@@ -2497,7 +2493,7 @@ endgame(var_0, var_1, var_2) {
 
     maps\mp\gametypes\_gamescore::updateteamscore("axis");
     maps\mp\gametypes\_gamescore::updateteamscore("allies");
-  } else if(isDefined(var_0) && isplayer(var_0))
+  } else if(isDefined(var_0) && isPlayer(var_0))
     game["roundsWon"][var_0.guid]++;
 
   maps\mp\gametypes\_gamescore::updateplacement();
@@ -2507,9 +2503,9 @@ endgame(var_0, var_1, var_2) {
   foreach(var_5 in level.players)
   var_5 setclientdvar("ui_opensummary", 1);
 
-  setdvar("g_deadChat", 1);
-  setdvar("ui_allow_teamchange", 0);
-  setdvar("bg_compassShowEnemies", 0);
+  setDvar("g_deadChat", 1);
+  setDvar("ui_allow_teamchange", 0);
+  setDvar("bg_compassShowEnemies", 0);
   freezeallplayers(1.0, 1);
   var_7 = game["switchedsides"];
 
@@ -2537,7 +2533,7 @@ endgame(var_0, var_1, var_2) {
 
       level notify("restarting");
       game["state"] = "playing";
-      setdvar("ui_game_state", "playing");
+      setDvar("ui_game_state", "playing");
       map_restart(1);
       return;
     }
@@ -2777,7 +2773,7 @@ endgame(var_0, var_1, var_2) {
 
   if(isDefined(level.ishorde) && level.ishorde) {
     if(isDefined(level.zombiescompleted) && level.zombiescompleted)
-      setdvar("cg_drawCrosshair", 1);
+      setDvar("cg_drawCrosshair", 1);
   }
 
   level notify("exitLevel_called");
@@ -2853,7 +2849,7 @@ getscoreperminute(var_0) {
   var_2 = maps\mp\_utility::gettimelimit();
   var_3 = maps\mp\_utility::gettimepassed() / 60000 + 0.0001;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     var_4 = self.score / var_3;
   else
     var_4 = getteamscore(var_0) / var_3;
@@ -2864,7 +2860,7 @@ getscoreperminute(var_0) {
 getscoreremaining(var_0) {
   var_1 = maps\mp\_utility::getwatcheddvar("scorelimit");
 
-  if(isplayer(self))
+  if(isPlayer(self))
     var_2 = var_1 - self.score;
   else
     var_2 = var_1 - getteamscore(var_0);
@@ -2932,7 +2928,7 @@ trackleaderboarddeathstats(var_0, var_1) {
 }
 
 trackattackerleaderboarddeathstats(var_0, var_1, var_2) {
-  if(isDefined(self) && isplayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     if(var_1 != "MOD_FALLING") {
       if(maps\mp\_utility::ismeleemod(var_1) && issubstr(var_0, "tactical")) {
         return;

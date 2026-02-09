@@ -99,14 +99,14 @@ playlightning(localclientnum) {
 
     for(i = 0; i < n_strikes; i++) {
       n_blend_time = randomfloatrange(0.0, 0.25);
-      setdvar("r_exposureTweak", 1);
+      setDvar("r_exposureTweak", 1);
       playSound(localclientnum, "amb_thunder_flash", lightning_origin);
-      setdvar("r_exposureValue", randomfloatrange(1.8, 2.3));
+      setDvar("r_exposureValue", randomfloatrange(1.8, 2.3));
       level thread serverlerpdvar(localclientnum, "r_exposureValue", n_level_exposure, n_blend_time);
       setsaveddvar("r_lightTweakSunLight", randomfloatrange(25, 32));
       level thread serverlerpdvar(localclientnum, "r_lightTweakSunLight", n_level_sunlight, n_blend_time, 1);
       serverwait(localclientnum, n_blend_time);
-      setdvar("r_exposureTweak", 0);
+      setDvar("r_exposureTweak", 0);
     }
   }
 }

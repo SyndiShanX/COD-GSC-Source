@@ -54,10 +54,10 @@ function private is_target_valid(target) {
   if(!isalive(target)) {
     return 0;
   }
-  if(isplayer(target) && target.sessionstate == "spectator") {
+  if(isPlayer(target) && target.sessionstate == "spectator") {
     return 0;
   }
-  if(isplayer(target) && target.sessionstate == "intermission") {
+  if(isPlayer(target) && target.sessionstate == "intermission") {
     return 0;
   }
   if(isDefined(target.ignoreme) && target.ignoreme) {

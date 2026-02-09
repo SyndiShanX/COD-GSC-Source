@@ -149,9 +149,9 @@ function main() {
   level.a_func_vehicle_damage_override = [];
   level.callbackvehicledamage = &tomb_vehicle_damage_override_wrapper;
   level.level_specific_stats_init = &init_tomb_stats;
-  setdvar("zombiemode_path_minz_bias", 13);
-  setdvar("bg_chargeShotExponentialAmmoPerChargeLevel", 1);
-  setdvar("dlc2_fix_scripted_looping_linked_animations", 1);
+  setDvar("zombiemode_path_minz_bias", 13);
+  setDvar("bg_chargeShotExponentialAmmoPerChargeLevel", 1);
+  setDvar("dlc2_fix_scripted_looping_linked_animations", 1);
   level thread setup_tomb_spawn_groups();
   spawner_main_chamber_capture_zombies = getent("chamber_capture_zombie_spawner", "targetname");
   spawner_main_chamber_capture_zombies spawner::add_spawn_function(&chamber_capture_zombie_spawn_init);
@@ -241,10 +241,10 @@ function main() {
     if(zm_utility::is_classic()) {
       level.zombie_ai_limit = 20;
     }
-    setdvar("fx_marks_draw", 0);
-    setdvar("disable_rope", 1);
-    setdvar("cg_disableplayernames", 1);
-    setdvar("disableLookAtEntityLogic", 1);
+    setDvar("fx_marks_draw", 0);
+    setDvar("disable_rope", 1);
+    setDvar("cg_disableplayernames", 1);
+    setDvar("disableLookAtEntityLogic", 1);
   } else {
     level.zombie_ai_limit = 24;
   }
@@ -915,23 +915,23 @@ function tomb_powerup_grab(s_powerup, e_player) {
 }
 
 function setup_powerup_devgui() {
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   level thread watch_devgui_zombie_blood();
 }
 
 function setup_oneinchpunch_devgui() {
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   level thread watch_devgui_oneinchpunch();
 }
@@ -939,13 +939,13 @@ function setup_oneinchpunch_devgui() {
 function watch_devgui_oneinchpunch() {
   while(true) {
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       foreach(player in getplayers()) {
         player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
       }
     } else {
       if(getdvarstring("") == "") {
-        setdvar("", "");
+        setDvar("", "");
         foreach(player in getplayers()) {
           player.b_punch_upgraded = 1;
           player.str_punch_element = "";
@@ -953,7 +953,7 @@ function watch_devgui_oneinchpunch() {
         }
       } else {
         if(getdvarstring("") == "") {
-          setdvar("", "");
+          setDvar("", "");
           foreach(player in getplayers()) {
             player.b_punch_upgraded = 1;
             player.str_punch_element = "";
@@ -961,7 +961,7 @@ function watch_devgui_oneinchpunch() {
           }
         } else {
           if(getdvarstring("") == "") {
-            setdvar("", "");
+            setDvar("", "");
             foreach(player in getplayers()) {
               player.b_punch_upgraded = 1;
               player.str_punch_element = "";
@@ -969,14 +969,14 @@ function watch_devgui_oneinchpunch() {
             }
           } else {
             if(getdvarstring("") == "") {
-              setdvar("", "");
+              setDvar("", "");
               foreach(player in getplayers()) {
                 player.b_punch_upgraded = 1;
                 player.str_punch_element = "";
                 player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
               }
             } else if(getdvarstring("") == "") {
-              setdvar("", "");
+              setDvar("", "");
               foreach(player in getplayers()) {
                 player.b_punch_upgraded = 1;
                 player.str_punch_element = "";
@@ -992,7 +992,7 @@ function watch_devgui_oneinchpunch() {
 }
 
 function setup_tablet_devgui() {
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1005,7 +1005,7 @@ function watch_devgui_tablet() {
       player = getplayers()[0];
       n_tablet_state = int(getdvarint(""));
       player clientfield::set_to_player("", n_tablet_state);
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.1);
   }
@@ -1014,7 +1014,7 @@ function watch_devgui_tablet() {
 function watch_devgui_zombie_blood() {
   while(true) {
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level thread zm_devgui::zombie_devgui_give_powerup("", 1);
     }
     wait(0.1);
@@ -1024,7 +1024,7 @@ function watch_devgui_zombie_blood() {
 function watch_devgui_double_points() {
   while(true) {
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level thread zm_devgui::zombie_devgui_give_powerup("", 1);
       iprintlnbold("");
     }
@@ -1281,11 +1281,11 @@ function tomb_special_weapon_magicbox_check(weapon) {
 
 function tomb_actor_damage_override_wrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, timeoffset, boneindex, modelindex, surfacetype, surfacenormal) {
   if(isDefined(self.b_zombie_blood_damage_only) && self.b_zombie_blood_damage_only) {
-    if(!isplayer(eattacker) || !eattacker.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+    if(!isPlayer(eattacker) || !eattacker.zombie_vars["zombie_powerup_zombie_blood_on"]) {
       return 0;
     }
   }
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "capture_zombie" && isDefined(eattacker) && isplayer(eattacker)) {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "capture_zombie" && isDefined(eattacker) && isPlayer(eattacker)) {
     if(idamage >= self.health) {
       if((100 * level.round_number) > eattacker.n_capture_zombie_points) {
         eattacker zm_score::player_add_points("rebuild_board", 10);
@@ -1308,7 +1308,7 @@ function tomb_actor_damage_override_wrapper(einflictor, eattacker, idamage, idfl
 }
 
 function tomb_zombie_death_event_callback(attacker) {
-  if(isDefined(self) && isDefined(self.damagelocation) && isDefined(self.damagemod) && isDefined(self.damageweapon) && isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self) && isDefined(self.damagelocation) && isDefined(self.damagemod) && isDefined(self.damageweapon) && isDefined(self.attacker) && isPlayer(self.attacker)) {
     if(zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod) && zm_challenges_tomb::challenge_exists("zc_headshots") && !self.script_noteworthy === "capture_zombie") {
       self.attacker zm_challenges_tomb::increment_stat("zc_headshots");
     }

@@ -24,7 +24,7 @@ adddeathicon(var_0, var_1, var_2, var_3, var_4) {
   if(!level.teambased) {
     return;
   }
-  if(isDefined(var_4) && isplayer(var_4) && var_4 maps\mp\_utility::_hasperk("specialty_silentkill")) {
+  if(isDefined(var_4) && isPlayer(var_4) && var_4 maps\mp\_utility::_hasperk("specialty_silentkill")) {
     return;
   }
   var_5 = var_0.origin;
@@ -33,7 +33,7 @@ adddeathicon(var_0, var_1, var_2, var_3, var_4) {
   wait 0.05;
   maps\mp\_utility::waittillslowprocessallowed();
 
-  if(getdvar("ui_hud_showdeathicons") == "0") {
+  if(getDvar("ui_hud_showdeathicons") == "0") {
     return;
   }
   if(level.hardcoremode) {

@@ -167,7 +167,7 @@ rpg_spot(var_0) {
   common_scripts\utility::flag_set("rpg_taken");
   var_4 = level.player getweaponammostock("rpg");
 
-  if(getdvar("player_sustainAmmo") == "0") {
+  if(getDvar("player_sustainAmmo") == "0") {
     while(level.player getweaponammostock("rpg") == var_4 && var_4)
       wait 0.05;
   }
@@ -703,7 +703,7 @@ magic_missileguy_takehits(var_0, var_1) {
   for(;;) {
     self waittill("damage", var_3, var_4);
 
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       break;
     }
 
@@ -715,7 +715,7 @@ magic_missileguy_takehits(var_0, var_1) {
   var_0.magic_missile_guy = undefined;
   self kill();
 
-  if(getdvar("ragdoll_enable") != "0")
+  if(getDvar("ragdoll_enable") != "0")
     self unlink();
 
   self stopanimscripted();
@@ -730,7 +730,7 @@ ragdoll_or_death_duringanimation(var_0) {
   var_3 = gettime() + var_2 * 1000;
   wait(var_2 * 0.2);
 
-  if(getdvar("ragdoll_enable") == "0") {
+  if(getDvar("ragdoll_enable") == "0") {
     wait(var_2 * 0.8);
     self delete();
     return;
@@ -1053,7 +1053,7 @@ loosejunk(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_2) && self.health > 100) {
+    if(!isPlayer(var_2) && self.health > 100) {
       continue;
     }
     self unlink();
@@ -1462,7 +1462,7 @@ whackamole_death(var_0) {
   }
   var_0 waittillmatch("deathanim", "start_ragdoll");
 
-  if(getdvar("ragdoll_enable") != "0")
+  if(getDvar("ragdoll_enable") != "0")
     thread dropspeedbump(var_0.origin, self);
   else
     var_0 delete();
@@ -1530,7 +1530,7 @@ attack_dummy_path() {
   var_4 = spawn("script_model", var_0[0].origin);
   var_4 setModel("fx");
 
-  if(getdvar("jeepride_showhelitargets") == "off")
+  if(getDvar("jeepride_showhelitargets") == "off")
     var_4 hide();
 
   var_4 notsolid();
@@ -2003,7 +2003,7 @@ dropspeedbump(var_0, var_1) {
 }
 
 ragdollragdollragdollragdollragdollragdoll() {
-  if(getdvar("ragdoll_enable") == "0") {
+  if(getDvar("ragdoll_enable") == "0") {
     self delete();
     return;
   }
@@ -2665,7 +2665,7 @@ tire_deflate() {
     if(!isDefined(var_6) || !isDefined(var_5)) {
       return;
     }
-    if(isplayer(var_1) && issubstr(var_6, "_wheel"))
+    if(isPlayer(var_1) && issubstr(var_6, "_wheel"))
       thread tire_deflater(var_2, var_3, var_6);
   }
 }
@@ -2747,7 +2747,7 @@ vehicle_turret_think() {
     wait 0.05;
     var_0 = level.player;
 
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       var_3 = 0;
       var_3 = sighttracepassed(self gettagorigin("tag_flash"), level.player getEye(), 1, self);
 
@@ -2759,7 +2759,7 @@ vehicle_turret_think() {
       var_4 = var_0.origin + (0, 0, 32);
       self setturrettargetvec(bulletspread(self gettagorigin("tag_flash"), var_4, 2.0));
 
-      if(getdvar("debug_bmp") == "1")
+      if(getDvar("debug_bmp") == "1")
         thread maps\_utility::draw_line_until_notify(self.origin + (0, 0, 32), var_4, 1, 0, 0, self, "stop_drawing_line");
 
       var_5 = randomfloatrange(2, 3);

@@ -396,7 +396,7 @@ spawn_meph() {
 
 respawn_in_meph_fight(var_0) {
   var_1 = scripts\engine\utility::getstructarray("boss_player_starts", "targetname");
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     foreach(var_3 in var_1) {
       if(positionwouldtelefrag(var_3.origin, var_0)) {
         continue;
@@ -1139,7 +1139,7 @@ weakspotmonitor(var_0) {
   var_3.model setCanDamage(1);
   for(;;) {
     var_3.model waittill("damage", var_4, var_5, var_6, var_7);
-    if(!isDefined(var_5) || var_5 == var_1.boss || !isplayer(var_5)) {
+    if(!isDefined(var_5) || var_5 == var_1.boss || !isPlayer(var_5)) {
       continue;
     }
 

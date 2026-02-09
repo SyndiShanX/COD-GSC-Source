@@ -128,7 +128,7 @@ zombie_blood_hint_watch() {
       while(isDefined(level.sam_talking) && level.sam_talking)
         wait 0.05;
 
-      if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+      if(isDefined(e_player) && isPlayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         a_player_hint[e_player.characterindex] = 1;
         set_players_dontspeak(1);
         level.sam_talking = 1;
@@ -148,7 +148,7 @@ zombie_blood_hint_watch() {
       while(isDefined(level.sam_talking) && level.sam_talking)
         wait 0.05;
 
-      if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+      if(isDefined(e_player) && isPlayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         str_vox = get_zombie_blood_hint_generic_vox();
 
         if(isDefined(str_vox)) {
@@ -382,9 +382,9 @@ setup_ee_main_devgui() {
     wait 0.05;
   }
 
-  setdvar("ee_main_progress", "off");
-  setdvar("ee_main_end_level", "off");
-  setdvar("ee_upgrade_beacon", "off");
+  setDvar("ee_main_progress", "off");
+  setDvar("ee_main_end_level", "off");
+  setDvar("ee_upgrade_beacon", "off");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/EE Main:1/Next Step:1\" \"ee_main_progress on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/EE Main:1/Upgrade Beacon:2\" \"ee_upgrade_beacon on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/EE Main:1/End Level:3\" \"ee_main_end_level on\"\n");
@@ -393,8 +393,8 @@ setup_ee_main_devgui() {
 
 watch_devgui_ee_main() {
   while(true) {
-    if(getdvar(#"_id_A6E41BC7") == "on") {
-      setdvar("ee_main_progress", "off");
+    if(getDvar(#"_id_A6E41BC7") == "on") {
+      setDvar("ee_main_progress", "off");
       level.ee_debug = 1;
       flag_set("samantha_intro_done");
 
@@ -447,20 +447,19 @@ watch_devgui_ee_main() {
       }
     }
 
-    if(getdvar(#"_id_6F30FD20") == "on") {
-      setdvar("ee_main_end_level", "off");
+    if(getDvar(#"_id_6F30FD20") == "on") {
+      setDvar("ee_main_end_level", "off");
       level setclientfield("ee_sam_portal", 2);
       complete_sidequest();
     }
 
-    if(getdvar(#"_id_6E33C5DD") == "on") {
-      setdvar("ee_upgrade_beacon", "off");
-      setdvar("force_three_robot_round", "on");
+    if(getDvar(#"_id_6E33C5DD") == "on") {
+      setDvar("ee_upgrade_beacon", "off");
+      setDvar("force_three_robot_round", "on");
       flag_set("fire_link_enabled");
       array_thread(get_players(), maps\mp\zombies\_zm_weapons::weapon_give, "beacon_zm");
     }
 
     wait 0.05;
   }
-
 }

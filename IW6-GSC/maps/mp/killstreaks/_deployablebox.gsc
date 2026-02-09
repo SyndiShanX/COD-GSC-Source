@@ -328,14 +328,14 @@ box_SetIcon(player, streakName, vOffset) {
 }
 
 box_enablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(isPlayer(player))
     self EnablePlayerUse(player);
 
   self.disabled_use_for[player GetEntityNumber()] = false;
 }
 
 box_disablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(isPlayer(player))
     self DisablePlayerUse(player);
 
   self.disabled_use_for[player GetEntityNumber()] = true;
@@ -376,7 +376,6 @@ box_handleDeathDamage(attacker, weapon, type, damage) {
   if(notifyAttacker) {
     attacker notify("destroyed_equipment");
   }
-
 }
 
 box_handleDeath() {

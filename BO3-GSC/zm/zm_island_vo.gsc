@@ -189,7 +189,7 @@ function function_7b697614(str_vo_alias, n_delay = 0, b_wait_if_busy = 0, n_prio
   self.str_vo_being_spoken = str_vo_alias;
   array::add(level.a_e_speakers, self, 1);
   var_2df3d133 = str_vo_alias + "_vo_done";
-  if(isactor(self) || isplayer(self)) {
+  if(isactor(self) || isPlayer(self)) {
     self playsoundwithnotify(str_vo_alias, var_2df3d133, "J_head");
   } else {
     self playsoundwithnotify(str_vo_alias, var_2df3d133);

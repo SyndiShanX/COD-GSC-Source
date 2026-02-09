@@ -138,7 +138,7 @@ function function_10544d8() {
     if(!zm_audio_zhd::function_8090042c()) {
       continue;
     }
-    if(!isplayer(e_attacker)) {
+    if(!isPlayer(e_attacker)) {
       continue;
     }
     if(str_means_of_death != "MOD_MELEE") {
@@ -221,7 +221,7 @@ function function_99199901() {
   self.var_48df29fd playLoopSound("zmb_egg_phone_loop", 0.05);
   while(true) {
     self.var_7f6e3a35 waittill("trigger", who);
-    if(!isplayer(who)) {
+    if(!isPlayer(who)) {
       wait(0.05);
       continue;
     }

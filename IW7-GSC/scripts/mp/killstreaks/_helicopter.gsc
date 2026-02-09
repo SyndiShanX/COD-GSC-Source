@@ -495,7 +495,7 @@ update_player_threat(var_0) {
     var_0.threatlevel = var_0.threatlevel + 100;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0.threatlevel = var_0.threatlevel + var_0.score * 4;
   }
 

@@ -82,7 +82,6 @@ achievement_dont_fire_until_you_see() {
     if(all_opened) {
       break;
     }
-
   }
 
   self giveachievement_wrapper("ZM_DONT_FIRE_UNTIL_YOU_SEE");

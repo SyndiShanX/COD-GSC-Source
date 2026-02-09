@@ -6,7 +6,7 @@
 CONST_lsr_weaponname = "maaws";
 
 monitor_lsr_missile_launch() {
-  Assert(IsPlayer(self) || IsAgent(self));
+  Assert(isPlayer(self) || IsAgent(self));
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");

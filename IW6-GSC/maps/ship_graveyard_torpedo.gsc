@@ -12,36 +12,36 @@ vehicles() {
 
 torpedo_go(var_0, var_1) {
   vehicles();
-  setdvar("dominator_speed", 5);
+  setDvar("dominator_speed", 5);
 
   if(level.gameskill == 0)
-    setdvar("dominator_speed", 4);
+    setDvar("dominator_speed", 4);
 
-  setdvar("dominator_angle", 0);
+  setDvar("dominator_angle", 0);
 
   if(!level.console && !level.player usinggamepad()) {
-    setdvar("dominator_pitch_angle_acceleration", 1.8);
-    setdvar("dominator_yaw_angle_acceleration", 1.8);
-    setdvar("dominator_max_pitch_angle_velocity", 3.5);
-    setdvar("dominator_max_yaw_angle_velocity", 3.5);
+    setDvar("dominator_pitch_angle_acceleration", 1.8);
+    setDvar("dominator_yaw_angle_acceleration", 1.8);
+    setDvar("dominator_max_pitch_angle_velocity", 3.5);
+    setDvar("dominator_max_yaw_angle_velocity", 3.5);
   } else {
-    setdvar("dominator_pitch_angle_acceleration", 1);
-    setdvar("dominator_yaw_angle_acceleration", 1);
-    setdvar("dominator_max_pitch_angle_velocity", 2);
-    setdvar("dominator_max_yaw_angle_velocity", 2);
+    setDvar("dominator_pitch_angle_acceleration", 1);
+    setDvar("dominator_yaw_angle_acceleration", 1);
+    setDvar("dominator_max_pitch_angle_velocity", 2);
+    setDvar("dominator_max_yaw_angle_velocity", 2);
   }
 
-  setdvar("domgrav", 25);
-  setdvar("domthermal", 1);
-  setdvar("dpfov", 110);
-  setdvar("dph", 440);
-  setdvar("dpw", 150);
-  setdvar("dpx", 570);
-  setdvar("dpy", 20);
-  setdvar("dp1fov", 100);
-  setdvar("dp1h", 150);
-  setdvar("dp1w", 225);
-  setdvar("dp1x", 480);
+  setDvar("domgrav", 25);
+  setDvar("domthermal", 1);
+  setDvar("dpfov", 110);
+  setDvar("dph", 440);
+  setDvar("dpw", 150);
+  setDvar("dpx", 570);
+  setDvar("dpy", 20);
+  setDvar("dp1fov", 100);
+  setDvar("dp1h", 150);
+  setDvar("dp1w", 225);
+  setDvar("dp1x", 480);
   var_2 = common_scripts\utility::get_target_ent("remote_missile_source");
   var_2.origin = var_0;
   var_2.angles = var_1;
@@ -218,7 +218,7 @@ torpedo_accel() {
   var_0 endon("movedone");
 
   for(;;) {
-    setdvar("dominator_speed", var_0.origin[2]);
+    setDvar("dominator_speed", var_0.origin[2]);
     wait 0.05;
   }
 }

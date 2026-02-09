@@ -293,7 +293,7 @@ guy_deathimate_me(guy, animpos) {
   }
 
   //	guy Unlink();
-  //	if( GetDvar( "ragdoll_enable" ) == "0" )
+  //	if( getDvar( "ragdoll_enable" ) == "0" )
   //	{
   //		guy Delete();
   //		return;
@@ -1379,7 +1379,6 @@ guy_unload(guy, pos) {
       thread guy_deathhandle(guy, pos);
       thread guy_unload_que(guy);
       guy.ridingvehicle = self;
-
     }
 
     if(IsAI(guy))
@@ -1423,7 +1422,6 @@ guy_unload(guy, pos) {
 
       guy = makerealai(guy);
     }
-
   }
 
   self.riders = array_remove(self.riders, guy);
@@ -1577,7 +1575,7 @@ animontag_ragdoll_death(guy, vehicle) {
       continue;
     if(!isDefined(attacker))
       continue;
-    if((IsPlayer(attacker))) {
+    if((isPlayer(attacker))) {
       break;
     }
   }
@@ -1848,7 +1846,7 @@ guy_blowup(guy) {
   force = (0, 0, 1);
   org = guy.origin;
 
-  if(GetDvar("ragdoll_enable") == "0") {
+  if(getDvar("ragdoll_enable") == "0") {
     guy Delete();
     return;
   }
@@ -1863,7 +1861,6 @@ guy_blowup(guy) {
     wait .05;
     force = guy.origin - org;
     guy StartRagdoll();
-
   }
   wait .05;
   force = vector_multiply(force, 20000);

@@ -111,28 +111,28 @@ popupsfromconsole() {
 
     if(reset) {
       if(medal)
-        setdvar("scr_popupmedal", 0);
+        setDvar("scr_popupmedal", 0);
 
       if(challenge)
-        setdvar("scr_popupchallenge", 0);
+        setDvar("scr_popupchallenge", 0);
 
       if(gun)
-        setdvar("scr_popupgun", 0);
+        setDvar("scr_popupgun", 0);
 
       if(rank)
-        setdvar("scr_popuprank", 0);
+        setDvar("scr_popuprank", 0);
 
       if(contractpass)
-        setdvar("scr_popupcontractpass", 0);
+        setDvar("scr_popupcontractpass", 0);
 
       if(contractfail)
-        setdvar("scr_popupcontractfail", 0);
+        setDvar("scr_popupcontractfail", 0);
 
       if(gamemodemsg)
-        setdvar("scr_gamemodeslideout", 0);
+        setDvar("scr_gamemodeslideout", 0);
 
       if(teammsg)
-        setdvar("scr_teamslideout", 0);
+        setDvar("scr_teamslideout", 0);
     }
   }
 
@@ -219,7 +219,7 @@ displayteammessagewaiter() {
       nextnotifydata = self.teammessagequeue[0];
       arrayremoveindex(self.teammessagequeue, 0, 0);
 
-      if(!isDefined(nextnotifydata.player) || !isplayer(nextnotifydata.player)) {
+      if(!isDefined(nextnotifydata.player) || !isPlayer(nextnotifydata.player)) {
         continue;
       }
       if(self isempjammed()) {

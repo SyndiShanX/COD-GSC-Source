@@ -27,8 +27,8 @@
 
 function autoexec init() {
   initzmbehaviorsandasm();
-  setdvar("tu5_zmPathDistanceCheckTolarance", 20);
-  setdvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("tu5_zmPathDistanceCheckTolarance", 20);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
   level.move_valid_poi_to_navmesh = 1;
   level.pathdist_type = 2;
 }

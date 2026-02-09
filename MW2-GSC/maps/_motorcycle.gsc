@@ -34,7 +34,7 @@ main(model, type) {
   build_deathmodel("vehicle_motorcycle_02", "vehicle_motorcycle_02");
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
 
-  //build_drive( %technical_driving_idle_forward, %technical_driving_idle_backward, 10 );
+  //build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10 );
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("axis");

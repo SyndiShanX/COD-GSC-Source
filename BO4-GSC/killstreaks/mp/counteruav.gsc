@@ -60,7 +60,6 @@ __init__() {
   if(getdvarint(#"scr_cuav_offset_debug", 0)) {
     level thread waitanddebugdrawoffsetlist();
   }
-
 }
 
 fx_flesh_hit_neck_fatal(params) {

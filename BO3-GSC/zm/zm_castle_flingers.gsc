@@ -263,7 +263,7 @@ function function_149a5187() {
 
 function function_e9d3c391(var_ca34f349, v_fling, nd_start, var_173065cc, var_df826fd8) {
   self endon("death");
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread function_149a5187();
     self enableinvulnerability();
     self.is_flung = 1;

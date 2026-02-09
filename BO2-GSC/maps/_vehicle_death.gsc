@@ -12,8 +12,9 @@
 #include maps\_f35;
 
 init() {
-  if(isassetloaded("fx", "trail/fx_trail_heli_killstreak_engine_smoke"))
+  if(isassetloaded("fx", "trail/fx_trail_heli_killstreak_engine_smoke")) {
     level.heli_crash_smoke_trail_fx = loadfx("trail/fx_trail_heli_killstreak_engine_smoke");
+  }
 }
 
 main() {
@@ -22,11 +23,13 @@ main() {
   while(isDefined(self)) {
     self waittill("death", attacker, damagefromunderneath, weaponname, point, dir);
 
-    if(isDefined(self.script_deathflag))
+    if(isDefined(self.script_deathflag)) {
       flag_set(self.script_deathflag);
+    }
 
-    if(!isDefined(self.delete_on_death))
+    if(!isDefined(self.delete_on_death)) {
       self thread play_death_audio();
+    }
 
     if(!isDefined(self)) {
       return;
@@ -35,19 +38,22 @@ main() {
     self death_cleanup_level_variables();
 
     if(is_corpse(self)) {
-      if(isDefined(self.dont_kill_riders) && !self.dont_kill_riders)
+      if(isDefined(self.dont_kill_riders) && !self.dont_kill_riders) {
         self death_cleanup_riders();
+      }
 
       self notify("delete_destructible");
       return;
     }
 
-    if(isDefined(level.vehicle_death_thread[self.vehicletype]))
+    if(isDefined(level.vehicle_death_thread[self.vehicletype])) {
       thread[[level.vehicle_death_thread[self.vehicletype]]]();
+    }
 
     if(!isDefined(self.delete_on_death)) {
-      if(isDefined(self.deathquakescale) && self.deathquakescale > 0)
+      if(isDefined(self.deathquakescale) && self.deathquakescale > 0) {
         earthquake(self.deathquakescale, self.deathquakeduration, self.origin, self.deathquakeradius);
+      }
 
       thread death_radius_damage();
     }
@@ -55,17 +61,20 @@ main() {
     is_aircraft = self.vehicleclass == "plane" || self.vehicleclass == "helicopter";
 
     if(!isDefined(self.destructibledef)) {
-      if(!is_aircraft && !(self.vehicletype == "horse" || self.vehicletype == "horse_player" || self.vehicletype == "horse_player_low" || self.vehicletype == "horse_low" || self.vehicletype == "horse_axis") && isDefined(self.deathmodel) && self.deathmodel != "")
+      if(!is_aircraft && !(self.vehicletype == "horse" || self.vehicletype == "horse_player" || self.vehicletype == "horse_player_low" || self.vehicletype == "horse_low" || self.vehicletype == "horse_axis") && isDefined(self.deathmodel) && self.deathmodel != "") {
         self thread set_death_model(self.deathmodel, self.modelswapdelay);
+      }
 
-      if(!isDefined(self.delete_on_death) && (!isDefined(self.mantled) || !self.mantled) && !isDefined(self.nodeathfx))
+      if(!isDefined(self.delete_on_death) && (!isDefined(self.mantled) || !self.mantled) && !isDefined(self.nodeathfx)) {
         thread death_fx();
+      }
 
       if(isDefined(self.delete_on_death)) {
         wait 0.05;
 
-        if(!isDefined(self.dontdisconnectpaths))
+        if(!isDefined(self.dontdisconnectpaths)) {
           self vehicle_disconnectpaths_wrapper();
+        }
 
         self freevehicle();
         self.isacorpse = 1;
@@ -76,31 +85,38 @@ main() {
       }
     }
 
-    if(isDefined(self.riders) && self.riders.size > 0)
+    if(isDefined(self.riders) && self.riders.size > 0) {
       maps\_vehicle_aianim::blowup_riders();
+    }
 
     thread death_make_badplace(self.vehicletype);
 
-    if(isDefined(level.vehicle_deathnotify) && isDefined(level.vehicle_deathnotify[self.vehicletype]))
+    if(isDefined(level.vehicle_deathnotify) && isDefined(level.vehicle_deathnotify[self.vehicletype])) {
       level notify(level.vehicle_deathnotify[self.vehicletype], attacker);
+    }
 
-    if(target_istarget(self))
+    if(target_istarget(self)) {
       target_remove(self);
+    }
 
-    if(self.classname == "script_vehicle")
+    if(self.classname == "script_vehicle") {
       self thread death_jolt(self.vehicletype);
+    }
 
-    if(do_scripted_crash())
+    if(do_scripted_crash()) {
       self thread death_update_crash(point, dir);
+    }
 
-    if(isDefined(self.turretweapon) && self.turretweapon != "")
+    if(isDefined(self.turretweapon) && self.turretweapon != "") {
       self clearturrettarget();
+    }
 
     self waittill_crash_done_or_stopped();
 
     if(isDefined(self)) {
-      while(isDefined(self) && isDefined(self.dontfreeme))
+      while(isDefined(self) && isDefined(self.dontfreeme)) {
         wait 0.05;
+      }
 
       self notify("stop_looping_death_fx");
       self notify("death_finished");
@@ -116,15 +132,17 @@ main() {
         occupants = self getvehoccupants();
 
         if(isDefined(occupants) && occupants.size) {
-          for(i = 0; i < occupants.size; i++)
+          for(i = 0; i < occupants.size; i++) {
             self useby(occupants[i]);
+          }
         }
 
         self freevehicle();
         self.isacorpse = 1;
 
-        if(self.modeldummyon)
+        if(self.modeldummyon) {
           self hide();
+        }
       }
     }
   }
@@ -136,8 +154,9 @@ do_scripted_crash() {
 
 play_death_audio() {
   if(isDefined(self) && self.vehicleclass == "helicopter") {
-    if(!isDefined(self.death_counter))
+    if(!isDefined(self.death_counter)) {
       self.death_counter = 0;
+    }
 
     if(self.death_counter == 0) {
       self.death_counter++;
@@ -157,8 +176,9 @@ play_spinning_plane_sound() {
 set_death_model(smodel, fdelay) {
   assert(isDefined(smodel));
 
-  if(isDefined(fdelay) && fdelay > 0)
+  if(isDefined(fdelay) && fdelay > 0) {
     wait(fdelay);
+  }
 
   if(!isDefined(self)) {
     return;
@@ -168,8 +188,9 @@ set_death_model(smodel, fdelay) {
   }
   emodel = get_dummy();
 
-  if(!isDefined(emodel.death_anim))
+  if(!isDefined(emodel.death_anim)) {
     emodel clearanim(%root, 0);
+  }
 
   emodel setModel(smodel);
   emodel setvehicleattachments(1);
@@ -179,8 +200,9 @@ aircraft_crash(point, dir) {
   self.crashing = 1;
 
   if(isDefined(self.unloading)) {
-    while(isDefined(self.unloading))
+    while(isDefined(self.unloading)) {
       wait 0.05;
+    }
   }
 
   if(!isDefined(self)) {
@@ -195,8 +217,9 @@ helicopter_crash(point, dir) {
   self thread play_crashing_loop();
 
   if(isDefined(self.unloading)) {
-    while(isDefined(self.unloading))
+    while(isDefined(self.unloading)) {
       wait 0.05;
+    }
   }
 
   if(!isDefined(self)) {
@@ -211,12 +234,13 @@ helicopter_crash_movement(point, dir) {
   self clearvehgoalpos();
 
   if(isDefined(level.heli_crash_smoke_trail_fx)) {
-    if(issubstr(self.vehicletype, "v78"))
+    if(issubstr(self.vehicletype, "v78")) {
       playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_origin");
-    else if(self.vehicletype == "drone_firescout_axis" || self.vehicletype == "drone_firescout_isi")
+    } else if(self.vehicletype == "drone_firescout_axis" || self.vehicletype == "drone_firescout_isi") {
       playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_main_rotor");
-    else
+    } else {
       playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_engine_left");
+    }
   }
 
   crash_zones = getstructarray("heli_crash_zone", "targetname");
@@ -225,8 +249,9 @@ helicopter_crash_movement(point, dir) {
     best_dist = 99999;
     best_idx = -1;
 
-    if(isDefined(self.a_crash_zones))
+    if(isDefined(self.a_crash_zones)) {
       crash_zones = self.a_crash_zones;
+    }
 
     for(i = 0; i < crash_zones.size; i++) {
       vec_to_crash_zone = crash_zones[i].origin - self.origin;
@@ -268,8 +293,9 @@ helicopter_crash_accel() {
   self endon("crash_done");
   self endon("crash_move_done");
 
-  if(!isDefined(self.crash_accel))
+  if(!isDefined(self.crash_accel)) {
     self.crash_accel = randomfloatrange(50, 80);
+  }
 
   while(isDefined(self)) {
     self setvehvelocity(self.velocity + anglestoup(self.angles) * self.crash_accel);
@@ -290,8 +316,9 @@ helicopter_crash_rotation(point, dir) {
   point_2d = (point[0], point[1], self.origin[2]);
   torque = (0, randomintrange(90, 180), 0);
 
-  if(self getangularvelocity()[1] < 0)
+  if(self getangularvelocity()[1] < 0) {
     torque = torque * -1;
+  }
 
   if(distance(self.origin, point_2d) > 5) {
     local_hit_point = point_2d - self.origin;
@@ -310,10 +337,11 @@ helicopter_crash_rotation(point, dir) {
     ang_vel = self getangularvelocity();
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[1] < 360 * -1)
+    if(ang_vel[1] < 360 * -1) {
       ang_vel = (ang_vel[0], 360 * -1, ang_vel[2]);
-    else if(ang_vel[1] > 360)
+    } else if(ang_vel[1] > 360) {
       ang_vel = (ang_vel[0], 360, ang_vel[2]);
+    }
 
     self setangularvelocity(ang_vel);
     wait 0.05;
@@ -327,16 +355,19 @@ helicopter_crash_zone_accel(dir) {
   ang_vel = self getangularvelocity();
   torque = torque * sign(ang_vel[1]);
 
-  if(isDefined(self.crash_zone.height))
+  if(isDefined(self.crash_zone.height)) {
     self.crash_zone.height = 0;
+  }
 
-  if(abs(self.angles[2]) < 3.0)
+  if(abs(self.angles[2]) < 3.0) {
     self.angles = (self.angles[0], self.angles[1], randomintrange(3, 6) * sign(self.angles[2]));
+  }
 
   is_vtol = issubstr(self.vehicletype, "v78");
 
-  if(is_vtol)
+  if(is_vtol) {
     torque = torque * 0.3;
+  }
 
   while(isDefined(self)) {
     assert(isDefined(self.crash_zone));
@@ -352,7 +383,6 @@ helicopter_crash_zone_accel(dir) {
       self setphysacceleration(vectorscale((0, 0, -1), 50.0));
 
       circle(self.crash_zone.origin + (0, 0, self.crash_zone.height), self.crash_zone.radius, (1, 0, 0), 0, 2);
-
     }
 
     self.crash_vel = self.crash_zone.origin - self.origin;
@@ -360,8 +390,9 @@ helicopter_crash_zone_accel(dir) {
     self.crash_vel = vectornormalize(self.crash_vel);
     self.crash_vel = self.crash_vel * (self getmaxspeed() * 0.5);
 
-    if(is_vtol)
+    if(is_vtol) {
       self.crash_vel = self.crash_vel * 0.5;
+    }
 
     crash_vel_forward = anglestoup(self.angles) * self getmaxspeed() * 2;
     crash_vel_forward = (crash_vel_forward[0], crash_vel_forward[1], 0);
@@ -375,13 +406,15 @@ helicopter_crash_zone_accel(dir) {
     ang_vel = ang_vel + torque * 0.1;
     max_angluar_vel = 200;
 
-    if(is_vtol)
+    if(is_vtol) {
       max_angluar_vel = 100;
+    }
 
-    if(ang_vel[1] < max_angluar_vel * -1)
+    if(ang_vel[1] < max_angluar_vel * -1) {
       ang_vel = (ang_vel[0], max_angluar_vel * -1, ang_vel[2]);
-    else if(ang_vel[1] > max_angluar_vel)
+    } else if(ang_vel[1] > max_angluar_vel) {
       ang_vel = (ang_vel[0], max_angluar_vel, ang_vel[2]);
+    }
 
     self setangularvelocity(ang_vel);
     wait 0.1;
@@ -396,9 +429,9 @@ helicopter_collision() {
     ang_vel = self getangularvelocity() * 0.5;
     self setangularvelocity(ang_vel);
 
-    if(normal[2] < 0.7)
+    if(normal[2] < 0.7) {
       self setvehvelocity(self.velocity + normal * 70);
-    else {
+    } else {
       createdynentandlaunch(self.deathmodel, self.origin, self.angles, self.origin, self.velocity * 0.03, self.deathfx, 1);
       self notify("crash_done");
     }
@@ -418,8 +451,9 @@ helicopter_explode(delete_me) {
   fx_origin = self gettagorigin(self.death_fx_struct.tag);
   fx_angles = self gettagangles(self.death_fx_struct.tag);
 
-  if(isDefined(self.death_fx_struct) && isDefined(self.death_fx_struct.effect))
+  if(isDefined(self.death_fx_struct) && isDefined(self.death_fx_struct.effect)) {
     playFX(self.death_fx_struct.effect, fx_origin, anglesToForward(fx_angles), anglestoup(fx_angles));
+  }
 
   if(abs(fx_origin[0]) > 65000 || abs(fx_origin[1]) > 60000 || abs(fx_origin[2]) > 30000) {
     return;
@@ -427,8 +461,9 @@ helicopter_explode(delete_me) {
   playsoundatposition("exp_veh_helicopter", fx_origin);
   self notify("snd_impact");
 
-  if(isDefined(delete_me) && delete_me == 1)
+  if(isDefined(delete_me) && delete_me == 1) {
     self delete();
+  }
 
   self thread set_death_model(self.deathmodel, self.modelswapdelay);
 }
@@ -472,8 +507,9 @@ aircraft_crash_move(point, dir) {
         break;
     }
 
-    if(b_custom_deathmodel_setup)
+    if(b_custom_deathmodel_setup) {
       self.deathmodel_attached = 1;
+    }
   }
 
   ang_vel = self getangularvelocity();
@@ -513,17 +549,19 @@ aircraft_crash_move(point, dir) {
   self thread delay_set_gravity(randomfloatrange(1.5, 3));
   torque = (0, randomintrange(-90, 90), randomintrange(90, 720));
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     torque = (torque[0], torque[1], torque[2] * -1);
+  }
 
   while(isDefined(self)) {
     ang_vel = self getangularvelocity();
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[2] < 500 * -1)
+    if(ang_vel[2] < 500 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 500 * -1);
-    else if(ang_vel[2] > 500)
+    } else if(ang_vel[2] > 500) {
       ang_vel = (ang_vel[0], ang_vel[1], 500);
+    }
 
     self setangularvelocity(ang_vel);
     wait 0.05;
@@ -570,10 +608,11 @@ helicopter_crash_move(point, dir) {
     ang_vel = self getangularvelocity();
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[1] < 360 * -1)
+    if(ang_vel[1] < 360 * -1) {
       ang_vel = (ang_vel[0], 360 * -1, ang_vel[2]);
-    else if(ang_vel[1] > 360)
+    } else if(ang_vel[1] > 360) {
       ang_vel = (ang_vel[0], 360, ang_vel[2]);
+    }
 
     self setangularvelocity(ang_vel);
     wait 0.05;
@@ -584,8 +623,9 @@ boat_crash(point, dir) {
   self.crashing = 1;
 
   if(isDefined(self.unloading)) {
-    while(isDefined(self.unloading))
+    while(isDefined(self.unloading)) {
       wait 0.05;
+    }
   }
 
   if(!isDefined(self)) {
@@ -612,10 +652,11 @@ boat_crash_movement(point, dir) {
     ang_vel = self getangularvelocity();
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[1] < 360 * -1)
+    if(ang_vel[1] < 360 * -1) {
       ang_vel = (ang_vel[0], 360 * -1, ang_vel[2]);
-    else if(ang_vel[1] > 360)
+    } else if(ang_vel[1] > 360) {
       ang_vel = (ang_vel[0], 360, ang_vel[2]);
+    }
 
     self setangularvelocity(ang_vel);
     velocity = self.velocity;
@@ -684,19 +725,21 @@ crash_path_check(node) {
     if(isDefined(targ.detoured) && targ.detoured == 0) {
       detourpath = path_detour_get_detourpath(getvehiclenode(targ.target, "targetname"));
 
-      if(isDefined(detourpath) && isDefined(detourpath.script_crashtype))
+      if(isDefined(detourpath) && isDefined(detourpath.script_crashtype)) {
         return true;
+      }
     }
 
     if(isDefined(targ.target)) {
       targ1 = getvehiclenode(targ.target, "targetname");
 
-      if(isDefined(targ1) && isDefined(targ1.target) && isDefined(targ.targetname) && targ1.target == targ.targetname)
+      if(isDefined(targ1) && isDefined(targ1.target) && isDefined(targ.targetname) && targ1.target == targ.targetname) {
         return false;
-      else if(isDefined(targ1) && targ1 == node)
+      } else if(isDefined(targ1) && targ1 == node) {
         return false;
-      else
+      } else {
         targ = targ1;
+      }
 
       continue;
     }
@@ -731,10 +774,11 @@ death_fx_thread(struct) {
   assert(isDefined(struct));
 
   if(isDefined(struct.waitdelay)) {
-    if(struct.waitdelay >= 0)
+    if(struct.waitdelay >= 0) {
       wait(struct.waitdelay);
-    else
+    } else {
       self waittill("death_finished");
+    }
   }
 
   if(!isDefined(self)) {
@@ -745,27 +789,30 @@ death_fx_thread(struct) {
     return;
   }
 
-  if(isDefined(struct.notifystring))
+  if(isDefined(struct.notifystring)) {
     self notify(struct.notifystring);
+  }
 
   emodel = get_dummy();
 
   if(isDefined(struct.effect)) {
     if(struct.beffectlooping && !isDefined(self.delete_on_death)) {
       if(isDefined(struct.tag)) {
-        if(isDefined(struct.stayontag) && struct.stayontag == 1)
+        if(isDefined(struct.stayontag) && struct.stayontag == 1) {
           thread loop_fx_on_vehicle_tag(struct.effect, struct.delay, struct.tag);
-        else
+        } else {
           thread playloopedfxontag(struct.effect, struct.delay, struct.tag);
+        }
       } else {
         forward = emodel.origin + vectorscale((0, 0, 1), 100.0) - emodel.origin;
         playFX(struct.effect, emodel.origin, forward);
       }
     } else if(isDefined(struct.tag)) {
-      if(isDefined(self.modeldummyon) && self.modeldummyon)
+      if(isDefined(self.modeldummyon) && self.modeldummyon) {
         playFXOnTag(struct.effect, deathfx_ent(), struct.tag);
-      else
+      } else {
         playFXOnTag(struct.effect, self, struct.tag);
+      }
     } else {
       forward = emodel.origin + vectorscale((0, 0, 1), 100.0) - emodel.origin;
       playFX(struct.effect, emodel.origin, forward);
@@ -773,22 +820,26 @@ death_fx_thread(struct) {
   }
 
   if(isDefined(struct.sound) && !isDefined(self.delete_on_death)) {
-    if(struct.bsoundlooping)
+    if(struct.bsoundlooping) {
       thread death_firesound(struct.sound);
-    else
+    } else {
       self play_sound_in_space(struct.sound);
+    }
   }
 }
 
 build_death_fx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring) {
-  if(!isDefined(bsoundlooping))
+  if(!isDefined(bsoundlooping)) {
     bsoundlooping = 0;
+  }
 
-  if(!isDefined(beffectlooping))
+  if(!isDefined(beffectlooping)) {
     beffectlooping = 0;
+  }
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 1;
+  }
 
   struct = spawnStruct();
   struct.effect = effect;
@@ -809,8 +860,9 @@ death_make_badplace(type) {
   }
   struct = level.vehicle_death_badplace[type];
 
-  if(isDefined(struct.delay))
+  if(isDefined(struct.delay)) {
     wait(struct.delay);
+  }
 
   if(!isDefined(self)) {
     return;
@@ -834,8 +886,9 @@ death_jolt(type) {
     if(self.isphysicsvehicle) {
       num_launch_multiplier = 1;
 
-      if(self.vehicleclass == "tank")
+      if(self.vehicleclass == "tank") {
         num_launch_multiplier = 0.1;
+      }
 
       self launchvehicle(vectorscale((0, 0, 1), 250.0) * num_launch_multiplier, (randomfloatrange(5, 10), randomfloatrange(-5, 5), 0), 1, 0, 1);
     }
@@ -846,8 +899,9 @@ death_jolt(type) {
 }
 
 deathrollon() {
-  if(self.health > 0)
+  if(self.health > 0) {
     self.rollingdeath = 1;
+  }
 }
 
 deathrolloff() {
@@ -888,8 +942,9 @@ death_cleanup_level_variables() {
   script_linkname = self.script_linkname;
   targetname = self.targetname;
 
-  if(isDefined(script_linkname))
+  if(isDefined(script_linkname)) {
     arrayremovevalue(level.vehicle_link[script_linkname], self);
+  }
 
   if(isDefined(self.script_vehiclespawngroup)) {
     if(isDefined(level.vehicle_spawngroup[self.script_vehiclespawngroup])) {
@@ -898,23 +953,27 @@ death_cleanup_level_variables() {
     }
   }
 
-  if(isDefined(self.script_vehiclestartmove))
+  if(isDefined(self.script_vehiclestartmove)) {
     arrayremovevalue(level.vehicle_startmovegroup[self.script_vehiclestartmove], self);
+  }
 
-  if(isDefined(self.script_vehiclegroupdelete))
+  if(isDefined(self.script_vehiclegroupdelete)) {
     arrayremovevalue(level.vehicle_deletegroup[self.script_vehiclegroupdelete], self);
+  }
 }
 
 death_cleanup_riders() {
   if(isDefined(self.riders)) {
     for(j = 0; j < self.riders.size; j++) {
-      if(isDefined(self.riders[j]))
+      if(isDefined(self.riders[j])) {
         self.riders[j] delete();
+      }
     }
   }
 
-  if(is_corpse(self))
+  if(is_corpse(self)) {
     self.riders = [];
+  }
 }
 
 death_radius_damage() {
@@ -923,42 +982,47 @@ death_radius_damage() {
   }
   wait 0.05;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self radiusdamage(self.origin + vectorscale((0, 0, 1), 15.0), self.radiusdamageradius, self.radiusdamagemax, self.radiusdamagemin, self, "MOD_EXPLOSIVE");
+  }
 }
 
 death_update_crash(point, dir) {
   if(!isDefined(self.destructibledef)) {
-    if(isDefined(self.script_crashtypeoverride))
+    if(isDefined(self.script_crashtypeoverride)) {
       crashtype = self.script_crashtypeoverride;
-    else if(self.vehicleclass == "plane")
+    } else if(self.vehicleclass == "plane") {
       crashtype = "aircraft";
-    else if(self.vehicleclass == "helicopter")
+    } else if(self.vehicleclass == "helicopter") {
       crashtype = "helicopter";
-    else if(self.vehicleclass == "boat")
+    } else if(self.vehicleclass == "boat") {
       crashtype = "boat";
-    else if(isDefined(self.currentnode) && crash_path_check(self.currentnode))
+    } else if(isDefined(self.currentnode) && crash_path_check(self.currentnode)) {
       crashtype = "none";
-    else
+    } else {
       crashtype = "tank";
-
-    if(crashtype == "aircraft")
-      self thread aircraft_crash(point, dir);
-
-    if(crashtype == "helicopter") {
-      if(isDefined(self.script_nocorpse))
-        self thread helicopter_explode();
-      else
-        self thread helicopter_crash(point, dir);
     }
 
-    if(crashtype == "boat")
+    if(crashtype == "aircraft") {
+      self thread aircraft_crash(point, dir);
+    }
+
+    if(crashtype == "helicopter") {
+      if(isDefined(self.script_nocorpse)) {
+        self thread helicopter_explode();
+      } else {
+        self thread helicopter_crash(point, dir);
+      }
+    }
+
+    if(crashtype == "boat") {
       self thread boat_crash(point, dir);
+    }
 
     if(crashtype == "tank") {
-      if(!isDefined(self.rollingdeath))
+      if(!isDefined(self.rollingdeath)) {
         self vehicle_setspeed(0, 25, "Dead");
-      else {
+      } else {
         self waittill("deathrolloff");
         self vehicle_setspeed(0, 25, "Dead, finished path intersection");
       }
@@ -969,11 +1033,13 @@ death_update_crash(point, dir) {
         self vehicle_setspeed(0, 10000, "deadstop");
         self notify("deadstop");
 
-        if(!isDefined(self.dontdisconnectpaths))
+        if(!isDefined(self.dontdisconnectpaths)) {
           self vehicle_disconnectpaths_wrapper();
+        }
 
-        if(isDefined(self.tankgetout) && self.tankgetout > 0)
+        if(isDefined(self.tankgetout) && self.tankgetout > 0) {
           self waittill("animsdone");
+        }
       }
     }
   }
@@ -983,8 +1049,9 @@ waittill_crash_done_or_stopped() {
   self endon("death");
 
   if(isDefined(self) && (self.vehicleclass == "plane" || self.vehicleclass == "boat")) {
-    if(isDefined(self.crashing) && self.crashing == 1)
+    if(isDefined(self.crashing) && self.crashing == 1) {
       self waittill("crash_done");
+    }
   } else {
     wait 0.2;
 
@@ -992,20 +1059,23 @@ waittill_crash_done_or_stopped() {
       self clearvehgoalpos();
       self cancelaimove();
 
-      while(isDefined(self.velocity) && lengthsquared(self.velocity) > 1.0)
+      while(isDefined(self.velocity) && lengthsquared(self.velocity) > 1.0) {
         wait 0.3;
+      }
 
       self vehicle_disconnectpaths_wrapper();
     } else {
-      while(isDefined(self) && self getspeedmph() > 0)
+      while(isDefined(self) && self getspeedmph() > 0) {
         wait 0.3;
+      }
     }
   }
 }
 
 precache_death_model_wrapper(death_model_name) {
-  if(!isDefined(self.script_string) || isDefined(self.script_string) && self.script_string != "no_deathmodel")
+  if(!isDefined(self.script_string) || isDefined(self.script_string) && self.script_string != "no_deathmodel") {
     precachemodel(death_model_name);
+  }
 }
 
 vehicle_damage_filter_damage_watcher(heavy_damage_threshold) {
@@ -1013,8 +1083,9 @@ vehicle_damage_filter_damage_watcher(heavy_damage_threshold) {
   self endon("exit_vehicle");
   self endon("end_damage_filter");
 
-  if(!isDefined(heavy_damage_threshold))
+  if(!isDefined(heavy_damage_threshold)) {
     heavy_damage_threshold = 100;
+  }
 
   while(true) {
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname);
@@ -1043,16 +1114,19 @@ vehicle_damage_filter_exit_watcher() {
   rpc("clientscripts/_vehicle", "damage_filter_disable");
   rpc("clientscripts/_vehicle", "damage_filter_off");
 
-  if(isDefined(level.player.save_visionset))
+  if(isDefined(level.player.save_visionset)) {
     level.player visionsetnaked(level.player.save_visionset, 0);
+  }
 }
 
 vehicle_damage_filter(vision_set, heavy_damage_threshold, filterid, b_use_player_damage) {
-  if(!isDefined(filterid))
+  if(!isDefined(filterid)) {
     filterid = 0;
+  }
 
-  if(!isDefined(b_use_player_damage))
+  if(!isDefined(b_use_player_damage)) {
     b_use_player_damage = 0;
+  }
 
   self endon("death");
   self endon("exit_vehicle");

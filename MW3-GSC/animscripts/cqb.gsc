@@ -9,11 +9,10 @@ _id_1075() {
   animscripts\run::_id_0FFD();
 
   if(self.a._id_0D26 != "stand") {
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
 
     if(self.a._id_0D26 == "prone") {
       animscripts\utility::_id_0F7D(1);
-
     }
     self.a._id_0D26 = "stand";
   }
@@ -25,16 +24,14 @@ _id_1075() {
 
   if(self.movemode == "walk") {
     var_1 = var_1 * 0.6;
-
   }
   if(self.stairsstate == "none") {
     var_2 = 0.3;
   } else {
     var_2 = 0.1;
-
   }
-  self setflaggedanimknoball("runanim", var_0, % walk_and_run_loops, 1, var_2, var_1, 1);
-  animscripts\run::_id_0FF7( % walk_backward, % walk_left, % walk_right);
+  self setflaggedanimknoball("runanim", var_0, %walk_and_run_loops, 1, var_2, var_1, 1);
+  animscripts\run::_id_0FF7(%walk_backward, %walk_left, %walk_right);
   thread animscripts\run::_id_0FF8("cqb");
   animscripts\notetracks::_id_0D4F(0.2, "runanim");
   thread animscripts\run::_id_0FE5();
@@ -43,25 +40,20 @@ _id_1075() {
 _id_1076() {
   if(isDefined(self._id_0C88) && isDefined(self._id_0C88["cqb"])) {
     return animscripts\run::_id_0FC2();
-
   }
   if(self.stairsstate == "up") {
     return % traverse_stair_run;
-
   }
   if(self.stairsstate == "down") {
     return % traverse_stair_run_down_01;
-
   }
   if(self.movemode == "walk") {
     return % walk_cqb_f;
-
   }
   var_0 = animscripts\utility::_id_1078(self.a._id_1077, 2);
 
   if(var_0 == 0) {
     return % run_cqb_f_search_v1;
-
   }
   return % run_cqb_f_search_v2;
 }
@@ -69,7 +61,6 @@ _id_1076() {
 _id_1079() {
   if(animscripts\move::_id_0FDE()) {
     animscripts\run::_id_0FE3();
-
   }
   animscripts\run::_id_0FE1();
 }
@@ -141,7 +132,6 @@ _id_107C() {
           var_3._id_0CB9 = undefined;
         } else {
           var_3._id_0CB9 = level._id_107B[var_9];
-
         }
         wait 0.05;
         var_1 = 1;

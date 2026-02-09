@@ -109,7 +109,7 @@ toggle_spectator(localclientnum) {
 function_5f4276b8() {
   self endon(#"stop_googles", #"death");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -295,7 +295,7 @@ do_vision_world_pulse_lerp_helper(currenttime, elapsedtime, localclientnum, dura
 }
 
 vision_pulse_owner_valid(owner) {
-  if(isDefined(owner) && isplayer(owner) && isalive(owner)) {
+  if(isDefined(owner) && isPlayer(owner) && isalive(owner)) {
     return true;
   }
 
@@ -458,7 +458,7 @@ function_9e2a452e(localclientnum, robname) {
   fadeout_duration = level.weaponvisionpulse.var_8e0b0827;
   jammed = 0;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     jammed = self clientfield::get("gps_jammer_active");
   }
 
@@ -549,7 +549,7 @@ set_reveal_enemy(localclientnum, on_off) {
 }
 
 set_reveal_self(localclientnum, on_off) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

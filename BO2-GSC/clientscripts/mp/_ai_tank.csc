@@ -54,7 +54,7 @@ play_light_fx(localclientnum) {
   for(;;) {
     level waittill_any("snap_processed", "demo_jump", "demo_player_switch");
 
-    if(isdemoplaying() && getdvar(#"ui_gametype") == "hack" && codegetclientfield(self, "ai_tank_hack_spawned") <= 0) {
+    if(isdemoplaying() && getDvar(#"ui_gametype") == "hack" && codegetclientfield(self, "ai_tank_hack_spawned") <= 0) {
       self stop_light_fx(localclientnum);
       return;
     }

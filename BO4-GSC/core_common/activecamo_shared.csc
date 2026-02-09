@@ -38,7 +38,7 @@ on_local_player_spawned(localclientnum) {
   players = getplayers(localclientnum);
 
   foreach(player in players) {
-    if(!isDefined(player) || !player isplayer() || !isalive(player)) {
+    if(!isDefined(player) || !player isPlayer() || !isalive(player)) {
       continue;
     }
 
@@ -58,7 +58,7 @@ on_local_player_spawned(localclientnum) {
 }
 
 on_weapon_change(params) {
-  if(self == level || !isplayer(self)) {
+  if(self == level || !isPlayer(self)) {
     return;
   }
 
@@ -389,14 +389,14 @@ function_c55b3123(stage, tagname, var_eb6a239c, lerptime, var_f023ca7d, var_d71e
     do {
       waitframe(1);
 
-      if(!isDefined(self) || !isplayer(self)) {
+      if(!isDefined(self) || !isPlayer(self)) {
         return;
       }
 
       currenttime = gettime();
       var_31cfb10 = var_f023ca7d;
 
-      if(!isplayer(self)) {
+      if(!isPlayer(self)) {
         return;
       }
 
@@ -436,7 +436,7 @@ function_42887bfe(stage, tagname, layer, impulse, var_d71e8c6e) {
       do {
         waitframe(1);
 
-        if(!isDefined(self) || !isplayer(self)) {
+        if(!isDefined(self) || !isPlayer(self)) {
           return;
         }
 
@@ -456,7 +456,7 @@ function_42887bfe(stage, tagname, layer, impulse, var_d71e8c6e) {
     self function_78233d29(stage.rob, tagname, var_ea35682d, tint);
     wait max(lerptime, 0.5);
 
-    if(!isDefined(self) || !isplayer(self)) {
+    if(!isDefined(self) || !isPlayer(self)) {
       return;
     }
   }
@@ -472,7 +472,7 @@ function_42887bfe(stage, tagname, layer, impulse, var_d71e8c6e) {
     do {
       waitframe(1);
 
-      if(!isDefined(self) || !isplayer(self)) {
+      if(!isDefined(self) || !isPlayer(self)) {
         return;
       }
 

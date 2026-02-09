@@ -12,7 +12,7 @@ CONST_FRIENDLY_TAG_MODEL = "prop_dogtags_friend_iw6";
 CONST_ENEMY_TAG_MODEL = "prop_dogtags_foe_iw6";
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -197,7 +197,7 @@ spawnDogTags(victim, attacker) {
 
   level.dogtags[victim.guid].attacker = attacker;
 
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     objective_position(level.dogtags[victim.guid].objId, pos);
     objective_state(level.dogtags[victim.guid].objId, "active");
     objective_player(level.dogtags[victim.guid].objId, attacker getEntityNumber());
@@ -256,7 +256,7 @@ onUse(player) {
     player incPersStat("denied", 1);
     player maps\mp\gametypes\_persistence::statSetChild("round", "denied", player.pers["denied"]);
 
-    if(IsPlayer(player))
+    if(isPlayer(player))
       player setExtraScore0(player.pers["confirmed"] + player.pers["denied"]);
 
     if(self.victim == player) {
@@ -285,7 +285,7 @@ onUse(player) {
 
     player onPickup(event);
 
-    if(IsPlayer(player)) {
+    if(isPlayer(player)) {
       player leaderDialogOnPlayer("kill_confirmed");
       player setExtraScore0(player.pers["confirmed"] + player.pers["denied"]);
     }

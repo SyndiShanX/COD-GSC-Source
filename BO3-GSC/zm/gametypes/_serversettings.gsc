@@ -21,40 +21,40 @@ function main() {
   if(level.hostname == "") {
     level.hostname = "CoDHost";
   }
-  setdvar("sv_hostname", level.hostname);
-  setdvar("ui_hostname", level.hostname);
+  setDvar("sv_hostname", level.hostname);
+  setDvar("ui_hostname", level.hostname);
   level.motd = getdvarstring("scr_motd");
   if(level.motd == "") {
     level.motd = "";
   }
-  setdvar("scr_motd", level.motd);
-  setdvar("ui_motd", level.motd);
+  setDvar("scr_motd", level.motd);
+  setDvar("ui_motd", level.motd);
   level.allowvote = getdvarstring("g_allowvote");
   if(level.allowvote == "") {
     level.allowvote = "1";
   }
-  setdvar("g_allowvote", level.allowvote);
-  setdvar("ui_allowvote", level.allowvote);
+  setDvar("g_allowvote", level.allowvote);
+  setDvar("ui_allowvote", level.allowvote);
   level.allow_teamchange = "0";
   if(sessionmodeisprivate() || !sessionmodeisonlinegame()) {
     level.allow_teamchange = "1";
   }
-  setdvar("ui_allow_teamchange", level.allow_teamchange);
+  setDvar("ui_allow_teamchange", level.allow_teamchange);
   level.friendlyfire = getgametypesetting("friendlyfiretype");
-  setdvar("ui_friendlyfire", level.friendlyfire);
+  setDvar("ui_friendlyfire", level.friendlyfire);
   if(getdvarstring("scr_mapsize") == "") {
-    setdvar("scr_mapsize", "64");
+    setDvar("scr_mapsize", "64");
   } else {
     if(getdvarfloat("scr_mapsize") >= 64) {
-      setdvar("scr_mapsize", "64");
+      setDvar("scr_mapsize", "64");
     } else {
       if(getdvarfloat("scr_mapsize") >= 32) {
-        setdvar("scr_mapsize", "32");
+        setDvar("scr_mapsize", "32");
       } else {
         if(getdvarfloat("scr_mapsize") >= 16) {
-          setdvar("scr_mapsize", "16");
+          setDvar("scr_mapsize", "16");
         } else {
-          setdvar("scr_mapsize", "8");
+          setDvar("scr_mapsize", "8");
         }
       }
     }
@@ -72,22 +72,22 @@ function updateserversettings() {
   sv_hostname = getdvarstring("sv_hostname");
   if(level.hostname != sv_hostname) {
     level.hostname = sv_hostname;
-    setdvar("ui_hostname", level.hostname);
+    setDvar("ui_hostname", level.hostname);
   }
   scr_motd = getdvarstring("scr_motd");
   if(level.motd != scr_motd) {
     level.motd = scr_motd;
-    setdvar("ui_motd", level.motd);
+    setDvar("ui_motd", level.motd);
   }
   g_allowvote = getdvarstring("g_allowvote");
   if(level.allowvote != g_allowvote) {
     level.allowvote = g_allowvote;
-    setdvar("ui_allowvote", level.allowvote);
+    setDvar("ui_allowvote", level.allowvote);
   }
   scr_friendlyfire = getgametypesetting("friendlyfiretype");
   if(level.friendlyfire != scr_friendlyfire) {
     level.friendlyfire = scr_friendlyfire;
-    setdvar("ui_friendlyfire", level.friendlyfire);
+    setDvar("ui_friendlyfire", level.friendlyfire);
   }
 }
 

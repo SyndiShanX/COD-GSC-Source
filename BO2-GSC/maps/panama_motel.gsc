@@ -65,8 +65,9 @@ motel_breach_main() {
   level.player disableweaponcycling();
   level.player setlowready(1);
 
-  if(level.player hasweapon("nightingale_dpad_sp"))
+  if(level.player hasweapon("nightingale_dpad_sp")) {
     level.player set_temp_stat(1, 1);
+  }
 
   run_scene("motel_scene");
   flag_set("motel_scene_end");
@@ -75,16 +76,17 @@ motel_breach_main() {
 clean_up_enemy_ai() {
   enemies = getaiarray("axis");
 
-  for(i = 0; i < enemies.size; i++)
+  for(i = 0; i < enemies.size; i++) {
     enemies[i] delete();
+  }
 }
 
 gun_raise(m_player_body) {
   m_player_body hide();
 
-  if(level.player hasweapon("minigun_sp") || level.player hasweapon("minigun80s_sp"))
+  if(level.player hasweapon("minigun_sp") || level.player hasweapon("minigun80s_sp")) {
     level.player disableweapons();
-  else {
+  } else {
     level.player enableweapons();
     level.player showviewmodel();
     level.player disableweaponfire();
@@ -138,10 +140,11 @@ motel_vo_nicaragua(ai_mason) {
 }
 
 next_mission(m_player_body) {
-  if(is_false(level.screen_faded))
+  if(is_false(level.screen_faded)) {
     screen_fade_out(0.5);
-  else
+  } else {
     wait 0.5;
+  }
 
   wait 0.5;
   nextmission();
@@ -214,7 +217,7 @@ motel_fail_condition() {
   flag_wait("trig_mason_to_motel");
   trig_motel_fail trigger_on();
   trig_motel_fail waittill("trigger");
-  setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
+  setDvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }

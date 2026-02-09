@@ -14,7 +14,7 @@ COLOR_ORANGE = (0.784, 0.490, 0.157);
 MIN_CAPTURE_PLAYERS = 1;
 MOMENTUM_BAR_VISIBLE = 1;
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -97,7 +97,7 @@ main() {
 
   SetDevDvar("bot_DrawSeeThrough", 0);
   SetDevDvar("bot_DrawBrokenTraversals", 0);
-  SetDvar("r_hudOutlineWidth", 1);
+  setDvar("r_hudOutlineWidth", 1);
 }
 
 initializeMatchRules() {
@@ -381,7 +381,6 @@ update_flag_outline() {
     if(neutral.size && outline_neutral >= 0) {
       self HudOutlineEnableForClients(neutral, outline_neutral, outline_depth);
     }
-
   }
 }
 
@@ -464,7 +463,6 @@ onUse(player) {
     } else {
       leaderDialogwait("mtm_secured", team);
     }
-
   }
 
   self.nextUseTime = GetTime() + 50;
@@ -487,7 +485,7 @@ giveZoneCaptureXP(touchList) {
     player = player.owner;
   }
 
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     level thread teamPlayerCardSplash("callout_securedposition", player);
   }
 
@@ -498,7 +496,7 @@ giveZoneCaptureXP(touchList) {
       player = player.owner;
     }
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
 
@@ -1467,7 +1465,7 @@ twarDebug() {
 
     if(level.spawn_version == 3) {
       if(current > level.twar_zones.size || current <= 0) {
-        SetDvar("scr_twar_debug", 0);
+        setDvar("scr_twar_debug", 0);
         continue;
       }
     } else {
@@ -1830,7 +1828,7 @@ on_minion_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, s
 
       score = int(eAttacker.minionStreak * score_multiple + base);
       score = min(score, GetDvarInt("scr_twar_score_kill_minion_max", 150));
-      SetDvar("scr_twar_score_kill_minion", score);
+      setDvar("scr_twar_score_kill_minion", score);
     }
 
     eAttacker.minionStreak++;

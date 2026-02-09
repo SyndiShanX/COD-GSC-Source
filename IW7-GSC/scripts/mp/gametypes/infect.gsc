@@ -108,18 +108,18 @@ onstartgametype() {
 updategametypedvars() {
   scripts\mp\gametypes\common::updategametypedvars();
   level.numinitialinfected = scripts\mp\utility::dvarintvalue("numInitialInfected", 1, 1, 6);
-  level.survivorprimaryweapon = getdvar("scr_infect_weaponSurvivorPrimary", "iw7_spasc");
-  level.survivorsecondaryweapon = getdvar("scr_infect_weaponSurvivorSecondary", "iw7_g18");
-  level.survivorlethal = getdvar("scr_infect_lethalSurvivor", "power_tripMine");
-  level.survivortactical = getdvar("scr_infect_tacticalSurvivor", "power_concussionGrenade");
-  level.survivorsuper = getdvar("scr_infect_superSurvivor", "super_phaseshift");
-  level.infectedprimaryweapon = getdvar("scr_infect_weaponInfectPrimary", "iw7_knife");
-  level.infectedsecondaryweapon = getdvar("scr_infect_weaponInfectSecondary", "iw7_fists");
-  level.initialprimaryweapon = getdvar("scr_infect_weaponInitialPrimary", "iw7_spasc");
-  level.initialsecondaryweapon = getdvar("scr_infect_weaponInitialSecondary", "iw7_g18");
-  level.infectedlethal = getdvar("scr_infect_lethalInfect", "power_throwingKnife");
-  level.infectedtactical = getdvar("scr_infect_tacticalInfect", "power_tacInsert");
-  level.infectedsuper = getdvar("scr_infect_superInfect", "super_reaper");
+  level.survivorprimaryweapon = getDvar("scr_infect_weaponSurvivorPrimary", "iw7_spasc");
+  level.survivorsecondaryweapon = getDvar("scr_infect_weaponSurvivorSecondary", "iw7_g18");
+  level.survivorlethal = getDvar("scr_infect_lethalSurvivor", "power_tripMine");
+  level.survivortactical = getDvar("scr_infect_tacticalSurvivor", "power_concussionGrenade");
+  level.survivorsuper = getDvar("scr_infect_superSurvivor", "super_phaseshift");
+  level.infectedprimaryweapon = getDvar("scr_infect_weaponInfectPrimary", "iw7_knife");
+  level.infectedsecondaryweapon = getDvar("scr_infect_weaponInfectSecondary", "iw7_fists");
+  level.initialprimaryweapon = getDvar("scr_infect_weaponInitialPrimary", "iw7_spasc");
+  level.initialsecondaryweapon = getDvar("scr_infect_weaponInitialSecondary", "iw7_g18");
+  level.infectedlethal = getDvar("scr_infect_lethalInfect", "power_throwingKnife");
+  level.infectedtactical = getDvar("scr_infect_tacticalInfect", "power_tacInsert");
+  level.infectedsuper = getDvar("scr_infect_superInfect", "super_reaper");
   level.infectextratimeperkill = scripts\mp\utility::dvarfloatvalue("infectExtraTimePerKill", 30, 0, 60);
   level.survivoralivescore = scripts\mp\utility::dvarintvalue("survivorAliveScore", 25, 0, 100);
   level.survivorscoretime = scripts\mp\utility::dvarfloatvalue("survivorScoreTime", 30, 0, 60);
@@ -223,7 +223,7 @@ alwaysgamemodeclass() {
 }
 
 getspawnpoint() {
-  if(isplayer(self) && self.gamemodefirstspawn) {
+  if(isPlayer(self) && self.gamemodefirstspawn) {
     self.gamemodefirstspawn = 0;
     self.pers["class"] = "gamemode";
     self.pers["lastClass"] = "";
@@ -661,22 +661,22 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   }
 
   if(self.team == "allies" && isDefined(var_1)) {
-    if(isplayer(var_1) && var_1 != self) {
+    if(isPlayer(var_1) && var_1 != self) {
       var_10 = 1;
-    } else if(level.infect_allowsuicide && var_1 == self || !isplayer(var_1)) {
+    } else if(level.infect_allowsuicide && var_1 == self || !isPlayer(var_1)) {
       var_10 = 1;
       var_11 = 1;
     }
   }
 
-  if(isplayer(var_1) && var_1.team == "allies" && var_1 != self) {
+  if(isPlayer(var_1) && var_1.team == "allies" && var_1 != self) {
     var_1 thread scripts\mp\perks\weaponpassives::func_8974(var_1, self);
     var_1 scripts\mp\utility::incperstat("killsAsSurvivor", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "killsAsSurvivor", var_1.pers["killsAsSurvivor"]);
-  } else if(isplayer(var_1) && var_1.team == "axis" && var_1 != self) {
+  } else if(isPlayer(var_1) && var_1.team == "axis" && var_1 != self) {
     var_1 scripts\mp\utility::incperstat("killsAsInfected", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "killsAsInfected", var_1.pers["killsAsInfected"]);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 scripts\mp\utility::setextrascore1(var_1.pers["killsAsInfected"]);
     }
   }

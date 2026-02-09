@@ -10,10 +10,9 @@
 #using_animtree("generic_human");
 
 ENEMY_BASE_ACCURACY = 0.6;
-
-//########################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 // VISION SETS
-//########################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 vision_chase() {
   flag_wait("visionset_chase");
@@ -31,8 +30,8 @@ vision_torture() {
   //setExpFog( 708.893, 5902.43, 0.402663, 0.456692, 0.520202, 0.721229, 0, 0.562109, 0.600449, 0.678415, (0.89008, -0.302316, -0.341119), 0, 51.1533, 1.80097 );
 }
 
-//########################################
-//########################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 movePlayerToStartPoint(sTargetname) {
   assert(isDefined(sTargetname));
@@ -397,7 +396,7 @@ faust_mission_fail() {
   wait 0.05;
   self kill(self.origin, level.player);
 
-  setdvar("ui_deadquote", "@FAVELA_ROJAS_KILLED");
+  setDvar("ui_deadquote", "@FAVELA_ROJAS_KILLED");
   maps\_utility::missionFailedWrapper();
 }
 

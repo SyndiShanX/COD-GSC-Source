@@ -451,7 +451,7 @@ function_5ab769d8(localclientnum) {
   wait 0.5;
 
   while(true) {
-    if(isplayer(self) && self function_21c0fa55()) {
+    if(isPlayer(self) && self function_21c0fa55()) {
       self playrumbleonentity(localclientnum, "zm_weap_scepter_ray_rumble");
     }
 

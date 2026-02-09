@@ -994,13 +994,13 @@ shouldrunserversideeffects() {
   }
 
   if(!isDefined(level.createfx_enabled)) {
-    level.createfx_enabled = getdvar("createfx") != "";
+    level.createfx_enabled = getDvar("createfx") != "";
   }
 
   if(level.createfx_enabled) {
     return 1;
   } else {
-    return getdvar("clientSideEffects") != "1";
+    return getDvar("clientSideEffects") != "1";
   }
 }
 

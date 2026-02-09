@@ -277,9 +277,9 @@ watch_devgui() {
     saved_dvarconfigenabled = getdvarint(#"dvarconfigenabled", 1);
 
     if(dvar_has_value("<dev string:x6b0>")) {
-      setdvar(#"dvarconfigenabled", 0);
+      setDvar(#"dvarconfigenabled", 0);
       now = getutc();
-      setdvar(#"contracts_start_time", calculate_schedule_start_time(now));
+      setDvar(#"contracts_start_time", calculate_schedule_start_time(now));
       clear_dvar("<dev string:x6b0>");
     }
 
@@ -304,7 +304,7 @@ watch_devgui() {
     }
 
     if(saved_dvarconfigenabled != getdvarint(#"dvarconfigenabled", 1)) {
-      setdvar(#"dvarconfigenabled", saved_dvarconfigenabled);
+      setDvar(#"dvarconfigenabled", saved_dvarconfigenabled);
     }
 
     clear_dvar("<dev string:x692>");
@@ -312,10 +312,10 @@ watch_devgui() {
 }
 
 update_contract_start_time(delta_days) {
-  setdvar(#"dvarconfigenabled", 0);
+  setDvar(#"dvarconfigenabled", 0);
   start_time = get_schedule_start_time();
   daily_duration = getdvarint(#"contracts_daily_duration", 60);
-  setdvar(#"contracts_start_time", start_time + daily_duration * delta_days);
+  setDvar(#"contracts_start_time", start_time + daily_duration * delta_days);
 }
 
 dvar_has_value(dvar_name) {
@@ -323,7 +323,7 @@ dvar_has_value(dvar_name) {
 }
 
 clear_dvar(dvar_name) {
-  setdvar(dvar_name, 0);
+  setDvar(dvar_name, 0);
 }
 
 get_schedule_start_time() {

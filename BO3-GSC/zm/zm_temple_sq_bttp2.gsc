@@ -131,7 +131,7 @@ function function_5ac3fada() {
       level.var_64d74143++;
       print3d(self.origin, "", vectorscale((0, 1, 0), 255), 10);
       correct = 1;
-      if(isDefined(who) && isplayer(who)) {
+      if(isDefined(who) && isPlayer(who)) {
         if(level.var_64d74143 == level.var_83becb0e) {
           who thread zm_audio::create_and_play_dialog("eggs", "quest7", 0);
         }

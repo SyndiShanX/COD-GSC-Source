@@ -1153,7 +1153,7 @@ beach_wave2_vehicle_watcher() {
   }
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0))
     level.wave2_vehiclewatcher++;
 
   if(level.wave2_vehiclewatcher == 1)
@@ -1735,7 +1735,7 @@ playerhind_kill_player_watcher() {
   }
   var_1 = getdvarint("balcony_hind_killed_player");
   var_1++;
-  setdvar("balcony_hind_killed_player", var_1);
+  setDvar("balcony_hind_killed_player", var_1);
 }
 
 beach_tank_balcony_stumble(var_0) {
@@ -2289,7 +2289,7 @@ beach_battlehinds_manager(var_0) {
     var_1 waittill("death", var_4);
     level.beach_ambient_hinds = common_scripts\utility::array_remove(level.beach_ambient_hinds, var_1);
 
-    if(isDefined(var_4) && isplayer(var_4)) {
+    if(isDefined(var_4) && isPlayer(var_4)) {
       break;
     }
 

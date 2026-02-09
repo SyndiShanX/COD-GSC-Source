@@ -7,7 +7,7 @@
 init() {
   common_scripts\utility::flag_init("ca_blockout");
   common_scripts\utility::flag_set("ca_blockout");
-  setdvar("bcs_enable", 0);
+  setDvar("bcs_enable", 0);
   delete_enemy();
   delete_multiple_trigger();
   delete_battlechatter_trigger();

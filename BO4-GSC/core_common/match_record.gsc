@@ -71,27 +71,27 @@ inc_stat(...) {
 
 get_player_index() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
-  if(isplayer(player) && isDefined(player.clientid)) {
+  if(isPlayer(player) && isDefined(player.clientid)) {
     return player.clientid;
   }
 }
 
 get_player_stat(...) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     return get_stat(#"players", player.clientid, vararg);
   }
 }
 
 set_player_stat(...) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     value = vararg[vararg.size - 1];
     arrayremoveindex(vararg, vararg.size - 1);
     return set_stat(#"players", player.clientid, vararg, value);
@@ -100,9 +100,9 @@ set_player_stat(...) {
 
 function_ded5f5b6(...) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     vec = vararg[vararg.size - 1];
     arrayremoveindex(vararg, vararg.size - 1);
     vec_0 = set_player_stat(vararg, 0, int(vec[0]));
@@ -114,9 +114,9 @@ function_ded5f5b6(...) {
 
 function_34800eec(...) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     value = vararg[vararg.size - 1];
     arrayremoveindex(vararg, vararg.size - 1);
     return inc_stat(#"players", player.clientid, vararg, value);

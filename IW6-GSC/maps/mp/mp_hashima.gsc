@@ -24,21 +24,21 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_hashima");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_diffuseColorScale", 1.75, 1);
   setdvar_cg_ng("r_specularcolorscale", 3, 8);
-  setdvar("r_ssaoFadeDepth", 1024);
+  setDvar("r_ssaoFadeDepth", 1024);
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", .3);
-  setdvar("r_reactiveMotionWindFrequencyScale", .5);
+  setDvar("r_reactiveMotionWindAmplitudeScale", .3);
+  setDvar("r_reactiveMotionWindFrequencyScale", .5);
 
-  SetDvar("r_sky_fog_intensity", "1");
-  SetDvar("r_sky_fog_min_angle", "50");
-  SetDvar("r_sky_fog_max_angle", "85");
+  setDvar("r_sky_fog_intensity", "1");
+  setDvar("r_sky_fog_min_angle", "50");
+  setDvar("r_sky_fog_max_angle", "85");
 
   if((level.ps3) || (level.xenon)) {
-    setdvar("sm_sunShadowScale", "0.7");
+    setDvar("sm_sunShadowScale", "0.7");
   }
 
   game["attackers"] = "allies";

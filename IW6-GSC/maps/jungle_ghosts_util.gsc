@@ -92,7 +92,7 @@ stream_waterfx(var_0, var_1) {
     }
     var_6 = "water_movement";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(distance(self getvelocity(), (0, 0, 0)) < 5)
         var_6 = "water_stop";
     } else if(isDefined(level._effect["water_" + self.a.movement]))
@@ -730,9 +730,9 @@ player_swim_think() {
 enable_player_swim() {
   setsaveddvar("hud_showStance", "0");
   setsaveddvar("compass", "0");
-  level.player_view_pitch_down = getdvar("player_view_pitch_down");
-  level.bg_viewbobmax = getdvar("bg_viewBobMax");
-  level.player_sprintcamerabob = getdvar("player_sprintCameraBob");
+  level.player_view_pitch_down = getDvar("player_view_pitch_down");
+  level.bg_viewbobmax = getDvar("bg_viewBobMax");
+  level.player_sprintcamerabob = getDvar("player_sprintCameraBob");
   setsaveddvar("player_view_pitch_down", 5);
   setsaveddvar("bg_viewBobMax", 0);
   level.player allowstand(1);
@@ -801,7 +801,7 @@ custom_waterfx(var_0, var_1) {
     }
     var_5 = "water_movement";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(distance(self getvelocity(), (0, 0, 0)) < 5)
         var_5 = "water_stop";
     } else if(isDefined(level._effect["water_" + self.a.movement]))
@@ -1136,7 +1136,7 @@ stop_music_jg(var_0) {
 }
 
 set_death_quote(var_0) {
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
 }
 
 give_jg_achievement() {

@@ -481,7 +481,7 @@ specialPain(anim_special) {
       break;
 
     case "cover_right_stand_A":
-      //DoPain( %corner_standR_pain_A_2_alert );
+      //DoPain(%corner_standR_pain_A_2_alert );
       handled = false;
       break;
 
@@ -635,7 +635,6 @@ crawlingPain() {
 
   if(isDefined(self.a.onback))
     return false;
-
 
   if(getDvarInt("scr_forceCrawl") == 1)
     self.forceLongDeath = 1;
@@ -824,7 +823,7 @@ crawling_stab_achievement() {
     return;
   self endon("end_dying_crawl_back_aim");
   self waittill("death", attacker, type);
-  if(!isDefined(self) || !isDefined(attacker) || !isplayer(attacker))
+  if(!isDefined(self) || !isDefined(attacker) || !isPlayer(attacker))
     return;
   //	if( type == "MOD_MELEE" )
   //		maps\_utility::giveachievement_wrapper( "NO_REST_FOR_THE_WEARY" );
@@ -1091,7 +1090,6 @@ preventPainForAShortTime(type) {
       thread printLongDeathDebugText(self.origin + (0, 0, 64), "crawl death");
       return;
     }
-
   } else if(type == "corner_grenade") {
     wait 1.0;
 
@@ -1108,7 +1106,6 @@ preventPainForAShortTime(type) {
       thread printLongDeathDebugText(self.origin + (0, 0, 64), "grenade death");
       return;
     }
-
   }
 }
 
@@ -1186,7 +1183,7 @@ CornerRightGrenadeDeath() {
 
   self setFlaggedAnimKnobAllRestart("corner_grenade_pain", %corner_standR_death_grenade_hit, %body, 1, .1);
 
-  //wait getAnimLength( %corner_standR_death_grenade_hit ) * 0.2;
+  //wait getAnimLength(%corner_standR_death_grenade_hit ) * 0.2;
   self waittillmatch("corner_grenade_pain", "dropgun");
   self animscripts\shared::DropAllAIWeapons();
 

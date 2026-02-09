@@ -6,7 +6,6 @@
 _id_6485() {
   if(!isDefined(level._id_6485)) {
     level._id_6485 = 0;
-
   }
   return level._id_6485;
 }
@@ -41,7 +40,6 @@ _id_6486(var_0, var_1, var_2) {
   }
   if(!isDefined(var_1)) {
     var_1 = 10;
-
   }
   maps\_audio::aud_send_msg("sandstorm_" + var_0);
 
@@ -65,7 +63,6 @@ _id_6486(var_0, var_1, var_2) {
         _id_5698::_id_567F(var_1, var_2);
       } else {
         _id_5698::_id_567F(var_1);
-
       }
       maps\payback_util::_id_6488(0);
       setsaveddvar("r_fog_depthhack_scale", 0.5);
@@ -143,7 +140,6 @@ _id_648E() {
     wait(self._id_648F);
   } else {
     wait 0.75;
-
   }
   _id_648D();
 }

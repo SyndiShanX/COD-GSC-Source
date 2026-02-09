@@ -233,7 +233,7 @@ sd_playerspawnedcb() {
 function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
 
-  if(isplayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"]) {
+  if(isPlayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"]) {
     scoreevents::processscoreevent(#"kill_sd", attacker, victim, weapon);
   }
 
@@ -250,7 +250,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
     }
   }
 
-  if(inbombzone && isplayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"]) {
+  if(inbombzone && isPlayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"]) {
     attacker challenges::function_2f462ffd(victim, weapon, einflictor, currentobjective);
     attacker.pers[# "objectiveekia"]++;
     attacker.objectiveekia = attacker.pers[# "objectiveekia"];
@@ -275,7 +275,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
     }
   }
 
-  if(isplayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"] && isDefined(victim.isbombcarrier) && victim.isbombcarrier == 1) {
+  if(isPlayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"] && isDefined(victim.isbombcarrier) && victim.isbombcarrier == 1) {
     victim recordkillmodifier("carrying");
     attacker recordgameevent("kill_carrier");
   }
@@ -305,7 +305,7 @@ function_a800815(victim, attacker) {
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   clientfield::set_player_uimodel("hudItems.playerLivesCount", level.numlives - self.var_a7d7e50a);
 
-  if(isDefined(self) && isDefined(attacker) && attacker != self && isplayer(attacker) && attacker.team != self.team) {
+  if(isDefined(self) && isDefined(attacker) && attacker != self && isPlayer(attacker) && attacker.team != self.team) {
     scoreevents::processscoreevent(#"eliminated_enemy", attacker, self, weapon);
     attacker contracts::function_fd9fb79b(#"contract_mp_eliminations");
 
@@ -674,7 +674,7 @@ oncantuse(player) {
 }
 
 onuseplantobject(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   self gameobjects::set_flags(1);
   self.waypoint gameobjects::hide_waypoint();
   level thread bombplanted(self, player);
@@ -721,7 +721,7 @@ onuseplantobject(player) {
 }
 
 onusedefuseobject(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   self.waypoint gameobjects::set_flags(0);
   player notify(#"bomb_defused");
 
@@ -780,7 +780,7 @@ ondrop(player) {
 }
 
 onpickup(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player.isbombcarrier = 1;
   player recordgameevent("pickup");
   self gameobjects::set_model_visibility(0);
@@ -796,7 +796,6 @@ onpickup(player) {
     globallogic_audio::leader_dialog("bombFriendlyTaken", game.attackers);
 
     print("<dev string:xb1>");
-
   }
 
   player playSound(#"fly_bomb_pickup_plr");
@@ -828,7 +827,7 @@ bombplantedmusicdelay() {
 }
 
 bombplanted(destroyedobj, player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   globallogic_utils::pausetimer();
   level.bombplanted = 1;
   player setweaponoverheating(1, 100, destroyedobj.useweapon);

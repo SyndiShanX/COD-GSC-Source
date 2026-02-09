@@ -170,7 +170,7 @@ func_8467() {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
-    if(isalive(var_3.var_43A2) && !isplayer(var_3.var_43A2)) {
+    if(isalive(var_3.var_43A2) && !isPlayer(var_3.var_43A2)) {
       continue;
     }
 
@@ -807,7 +807,7 @@ func_D966(var_0, var_1, var_2) {
   self.var_439C = var_0;
   for(;;) {
     self waittill("node_taken", var_3);
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       wait(0.05);
     }
 

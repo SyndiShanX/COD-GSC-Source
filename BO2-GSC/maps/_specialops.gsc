@@ -8,11 +8,12 @@
 #include maps\_load;
 
 main() {
-  if(issplitscreen())
+  if(issplitscreen()) {
     set_splitscreen_fog(350, 2986.33, 10000, -480, 0.805, 0.715, 0.61, 0.0, 10000);
+  }
 
   maps\_load::main();
-  setdvar("ui_specops", 1);
+  setDvar("ui_specops", 1);
   level.is_specops_level = 1;
 }
 
@@ -20,24 +21,20 @@ for_each(array, functor, unary_predicate, predicate_argument) {
   if(isDefined(functor)) {
     for(i = 0; i < array.size; i++) {
       if(isDefined(array[i])) {
-        if(!isDefined(unary_predicate) || isDefined(unary_predicate) && (isDefined(predicate_argument) && array[i][
-            [unary_predicate]
-          ](predicate_argument) || !isDefined(predicate_argument) && array[i][
-            [unary_predicate]
-          ]()))
-          array[i][
-            [functor]
-          ]();
+        if(!isDefined(unary_predicate) || isDefined(unary_predicate) && (isDefined(predicate_argument) && array[i][[unary_predicate]](predicate_argument) || !isDefined(predicate_argument) && array[i][[unary_predicate]]())) {
+          array[i][[functor]]();
+        }
       }
     }
   }
 }
 
 type_so() {
-  if(isDefined(self) && isDefined(self.classname) && isDefined(self.script_specialops) && self.script_specialops == 1)
+  if(isDefined(self) && isDefined(self.classname) && isDefined(self.script_specialops) && self.script_specialops == 1) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 type_reg() {
@@ -69,26 +66,33 @@ type_reg_vehicle() {
 }
 
 type_spawn_trigger() {
-  if(!isDefined(self.classname))
+  if(!isDefined(self.classname)) {
     return false;
+  }
 
-  if(self.classname == "trigger_multiple_spawn")
+  if(self.classname == "trigger_multiple_spawn") {
     return true;
+  }
 
-  if(self.classname == "trigger_multiple_spawn_reinforcement")
+  if(self.classname == "trigger_multiple_spawn_reinforcement") {
     return true;
+  }
 
-  if(self.classname == "trigger_multiple_friendly_respawn")
+  if(self.classname == "trigger_multiple_friendly_respawn") {
     return true;
+  }
 
-  if(isDefined(self.targetname) && self.targetname == "flood_spawner")
+  if(isDefined(self.targetname) && self.targetname == "flood_spawner") {
     return true;
+  }
 
-  if(isDefined(self.targetname) && self.targetname == "friendly_respawn_trigger")
+  if(isDefined(self.targetname) && self.targetname == "friendly_respawn_trigger") {
     return true;
+  }
 
-  if(isDefined(self.spawnflags) && self.spawnflags & 32)
+  if(isDefined(self.spawnflags) && self.spawnflags & 32) {
     return true;
+  }
 
   return false;
 }
@@ -172,14 +176,15 @@ delete_by_type(type_predicate) {
 }
 
 noteworthy_check(value) {
-  if(isDefined(self) && isDefined(self.classname) && self.classname == "script_origin")
+  if(isDefined(self) && isDefined(self.classname) && self.classname == "script_origin") {
     return false;
-  else if(isDefined(self) && isDefined(self.script_noteworthy) && self.script_noteworthy != value)
+  } else if(isDefined(self) && isDefined(self.script_noteworthy) && self.script_noteworthy != value) {
     return true;
-  else if(isDefined(self) && isDefined(self.script_gameobjectname))
+  } else if(isDefined(self) && isDefined(self.script_gameobjectname)) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 delete_by_noteworthy(level_name) {

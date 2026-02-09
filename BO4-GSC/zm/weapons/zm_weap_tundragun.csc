@@ -29,7 +29,6 @@ on_weapon_change(s_params) {
 
   if(w_new_weapon == level.w_tundragun || w_new_weapon == level.w_tundragun_upgraded) {
     iprintlnbold("<dev string:x38>");
-
   }
 }
 

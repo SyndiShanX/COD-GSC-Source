@@ -31,7 +31,6 @@ class class_358332cc {
     var_709c0a6f = 0;
     var_dad0959b = 0;
   }
-
 }
 
 autoexec init() {

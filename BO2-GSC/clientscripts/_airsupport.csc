@@ -41,11 +41,13 @@ plane_position_updater(fake_ent, plane, flybysound, flybysoundloop, lengthofflyb
         assert(isDefined(time));
 
         if(time < lengthofflyby) {
-          if(isDefined(flybysoundloop))
+          if(isDefined(flybysoundloop)) {
             soundid = playLoopSound(0, fake_ent, flybysoundloop, 0);
+          }
 
-          if(isDefined(flybysound))
+          if(isDefined(flybysound)) {
             plane playSound(0, flybysound);
+          }
 
           starttime = getrealtime();
         }
@@ -65,11 +67,11 @@ closest_point_on_line_to_point(point, linestart, lineend) {
   linemagsqrd = lengthsquared(lineend - linestart);
   t = ((point[0] - linestart[0]) * (lineend[0] - linestart[0]) + (point[1] - linestart[1]) * (lineend[1] - linestart[1]) + (point[2] - linestart[2]) * (lineend[2] - linestart[2])) / linemagsqrd;
 
-  if(t < 0.0)
+  if(t < 0.0) {
     return linestart;
-  else if(t > 1.0)
+  } else if(t > 1.0) {
     return lineend;
-  else {
+  } else {
     start_x = linestart[0] + t * (lineend[0] - linestart[0]);
     start_y = linestart[1] + t * (lineend[1] - linestart[1]);
     start_z = linestart[2] + t * (lineend[2] - linestart[2]);
@@ -119,24 +121,28 @@ planeturnleft(plane, yaw, halflife) {
   maxox = getdvarfloatdefault("scr_maxo_planex", -1.0);
   maxoy = getdvarfloatdefault("scr_maxo_planey", -1.0);
 
-  if(plane.angles[1] == 360)
+  if(plane.angles[1] == 360) {
     plane.angles = (plane.angles[0], 0, plane.angles[2]);
+  }
 
   origx = plane.origin[0];
   origy = plane.origin[1];
   accumturn = 0;
 
   for(looptime = 0.1; looptime <= halflife; looptime = looptime + 0.1) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
+    }
 
-    if(minroll != -1 && plane.angles[2] <= minroll)
+    if(minroll != -1 && plane.angles[2] <= minroll) {
       rollz = 0.0;
+    }
 
     accumturn = accumturn + yawy;
 
-    if(accumturn >= maxyaw)
+    if(accumturn >= maxyaw) {
       yawy = 0.0;
+    }
 
     plane.angles = (plane.angles[0], plane.angles[1] + yawy, plane.angles[2] + rollz);
     mathx = sin(45 * looptime / halflife) * ox;
@@ -162,16 +168,19 @@ planeturnleft(plane, yaw, halflife) {
   accumturn = 0;
 
   while(looptime < halflife + halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
+    }
 
-    if(minroll != -1 && plane.angles[2] >= 0)
+    if(minroll != -1 && plane.angles[2] >= 0) {
       rollz = 0.0;
+    }
 
     accumturn = accumturn + yawy;
 
-    if(accumturn >= maxyaw)
+    if(accumturn >= maxyaw) {
       yawy = 0.0;
+    }
 
     plane.angles = (plane.angles[0], plane.angles[1] + yawy, plane.angles[2] - rollz);
     mathx = sin(45 * looptime / halflife) * ox;
@@ -198,24 +207,28 @@ planeturnright(plane, yaw, halflife) {
   maxox = getdvarfloatdefault("scr_maxo_planex", -1.0);
   maxoy = getdvarfloatdefault("scr_maxo_planey", -1.0);
 
-  if(plane.angles[1] == 360)
+  if(plane.angles[1] == 360) {
     plane.angles = (plane.angles[0], 0, plane.angles[2]);
+  }
 
   origx = plane.origin[0];
   origy = plane.origin[1];
   accumturn = 0;
 
   for(looptime = 0.1; looptime <= halflife; looptime = looptime + 0.1) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
+    }
 
-    if(minroll != -1 && plane.angles[2] >= minroll)
+    if(minroll != -1 && plane.angles[2] >= minroll) {
       rollz = 0.0;
+    }
 
     accumturn = accumturn + yawy;
 
-    if(accumturn <= maxyaw)
+    if(accumturn <= maxyaw) {
       yawy = 0.0;
+    }
 
     plane.angles = (plane.angles[0], plane.angles[1] + yawy, plane.angles[2] + rollz);
     mathx = sin(45 * looptime / halflife) * ox;
@@ -244,16 +257,19 @@ planeturnright(plane, yaw, halflife) {
   accumturn = 0;
 
   while(looptime < halflife + halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
+    }
 
-    if(minroll != -1 && plane.angles[2] >= 0)
+    if(minroll != -1 && plane.angles[2] >= 0) {
       rollz = 0.0;
+    }
 
     accumturn = accumturn + yawy;
 
-    if(accumturn >= maxyaw)
+    if(accumturn >= maxyaw) {
       yawy = 0.0;
+    }
 
     plane.angles = (plane.angles[0], plane.angles[1] + yawy, plane.angles[2] - rollz);
     mathx = sin(45 * looptime / halflife) * ox;
@@ -292,25 +308,26 @@ debug_line(from, to, color, time) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
-    if(!isDefined(time))
+    if(!isDefined(time)) {
       time = 1000;
+    }
 
     line(from, to, color, 1, 1, time);
   }
-
 }
 
 debug_star(origin, color, time) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
-    if(!isDefined(time))
+    if(!isDefined(time)) {
       time = 1000;
+    }
 
-    if(!isDefined(color))
+    if(!isDefined(color)) {
       color = (1, 1, 1);
+    }
 
     debugstar(origin, time, color);
   }
-
 }

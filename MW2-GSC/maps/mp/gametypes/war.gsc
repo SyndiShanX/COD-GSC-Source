@@ -13,8 +13,7 @@
 	Respawning:	No wait / Near teammates
 
 	Level requirementss
-	------------------
-		Spawnpoints:
+	------------------ Spawnpoints:
 			classname		mp_tdm_spawn
 			All players spawn from these. The spawnpoint chosen is dependent on the current locations of teammates and enemies
 			at the time of spawn. Players generally spawn behind their teammates relative to the direction of enemies.
@@ -35,7 +34,7 @@ Axis players spawn away from enemies and near their team at one of these positio
 Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();

@@ -539,9 +539,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
         }
       } else if(isDefined(var_1.entanglemovetofunc)) {
         var_13 = 0;
-        if([
-            [var_1.entanglemovetofunc]
-          ](var_1, var_1F, var_7, var_0)) {
+        if([[var_1.entanglemovetofunc]](var_1, var_1F, var_7, var_0)) {
           if(var_24 <= 64) {
             var_7.origin = var_1F;
           } else {
@@ -567,7 +565,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
         var_15 = scripts\engine\utility::array_combine(level.players, [var_7]);
         var_28 = scripts\common\trace::ray_trace(var_16, var_25 + (0, 0, 16), var_15, var_10);
         if(isDefined(var_28["hittype"]) && var_28["hittype"] != "hittype_none") {
-          if(var_28["hittype"] == "hittype_entity" && isDefined(var_28["entity"]) && !isplayer(var_28["entity"])) {
+          if(var_28["hittype"] == "hittype_entity" && isDefined(var_28["entity"]) && !isPlayer(var_28["entity"])) {
             if(var_14) {
               var_7.forcerelease = 1;
               var_0 notify("item_released");
@@ -591,7 +589,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
         var_15 = scripts\engine\utility::array_combine(level.players, [var_7]);
         var_28 = scripts\common\trace::ray_trace(var_16, var_25 + (0, 0, 16), var_15, var_10);
         if(isDefined(var_28["hittype"]) && var_28["hittype"] != "hittype_none") {
-          if(var_28["hittype"] == "hittype_entity" && isDefined(var_28["entity"]) && !isplayer(var_28["entity"])) {
+          if(var_28["hittype"] == "hittype_entity" && isDefined(var_28["entity"]) && !isPlayer(var_28["entity"])) {
             if(var_14) {
               var_7.forcerelease = 1;
               var_0 notify("item_released");

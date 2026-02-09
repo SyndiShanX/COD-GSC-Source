@@ -179,7 +179,7 @@ function napalm_zombie_spawn(animname_set) {
   self.custom_location = &function_8f86441a;
   zm_spawner::zombie_spawn_init(animname_set);
   println("");
-  setdvar("", 0);
+  setDvar("", 0);
   level.var_57ecc1a3 = level.round_number;
   self.animname = "napalm_zombie";
   self thread napalm_zombie_client_flag();
@@ -291,7 +291,7 @@ function private napalmcanexplode(entity) {
       }
       continue;
     }
-    if(!isDefined(entity.favoriteenemy) || !isplayer(entity.favoriteenemy)) {
+    if(!isDefined(entity.favoriteenemy) || !isPlayer(entity.favoriteenemy)) {
       continue;
     }
     if(isDefined(entity.in_the_ground) && entity.in_the_ground) {
@@ -333,7 +333,7 @@ function napalm_zombie_death(einflictor, attacker, idamage, smeansofdeath, weapo
     playFXOnTag(level._effect["napalm_explosion"], self, "J_SpineLower");
   }
   self playSound("evt_napalm_zombie_explo");
-  if(isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker thread zm_audio::create_and_play_dialog("kill", "napalm");
   }
   level notify("napalm_death", self.explosive_volume);
@@ -344,7 +344,7 @@ function napalm_zombie_death(einflictor, attacker, idamage, smeansofdeath, weapo
   self thread _napalm_damage_zombies(zombies);
   napalm_clear_radius_fx_all_players();
   self _napalm_damage_players();
-  if(isDefined(self.attacker) && isplayer(self.attacker) && (!(isDefined(self.killed_self) && self.killed_self)) && (!(isDefined(self.shrinked) && self.shrinked))) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker) && (!(isDefined(self.killed_self) && self.killed_self)) && (!(isDefined(self.shrinked) && self.shrinked))) {
     players = level.players;
     for(i = 0; i < players.size; i++) {
       player = players[i];
@@ -516,7 +516,7 @@ function triggerdamage() {
   self endon("end_fire_effect");
   while(true) {
     self waittill("trigger", guy);
-    if(isplayer(guy)) {
+    if(isPlayer(guy)) {
       if(zombie_utility::is_player_valid(guy)) {
         debounce = 500;
         if(!isDefined(guy.last_napalm_fire_damage)) {

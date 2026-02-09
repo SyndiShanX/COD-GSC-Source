@@ -110,7 +110,7 @@ updategametypedvars() {
   level.aonrules = scripts\mp\utility::dvarintvalue("aonRules", 0, 0, 20);
   if(level.aonrules > 0) {
     level.blockweapondrops = 1;
-    level.allowsupers = setdvar("scr_dm_allowSupers", 0);
+    level.allowsupers = setDvar("scr_dm_allowSupers", 0);
     level.gesture_explode = loadfx("vfx\iw7\_requests\mp\power\vfx_exploding_drone_explode");
     return;
   }

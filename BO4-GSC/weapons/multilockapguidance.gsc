@@ -15,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   callback::on_spawned(&on_player_spawned);
-  setdvar(#"scr_max_simlocks", 3);
+  setDvar(#"scr_max_simlocks", 3);
 }
 
 on_player_spawned() {
@@ -68,7 +68,7 @@ clearaptarget(weapon, whom) {
 }
 
 event_handler[missile_fire] function_bfb94991(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

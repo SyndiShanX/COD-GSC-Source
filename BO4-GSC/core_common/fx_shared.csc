@@ -68,7 +68,6 @@ validate(fxid, origin) {
   if(!isDefined(level._effect[fxid])) {
     assertmsg("<dev string:x38>" + fxid + "<dev string:x4e>" + origin);
   }
-
 }
 
 create_loop_sound() {

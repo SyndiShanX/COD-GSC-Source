@@ -73,7 +73,7 @@ function thunder_wall_blast(attacker) {
     }
     if(v_curr_zombie_origin_sq < f_thunder_wall_range_sq) {
       a_ai_zombies[i] dodamage(a_ai_zombies[i].health, v_curr_zombie_origin, attacker, attacker, "none", "MOD_IMPACT");
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_THUNDER_WALL");
       }
       if(!(isDefined(level.aat["zm_aat_thunder_wall"].immune_result_indirect[self.archetype]) && level.aat["zm_aat_thunder_wall"].immune_result_indirect[self.archetype])) {

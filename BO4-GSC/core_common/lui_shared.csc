@@ -68,7 +68,6 @@ class cluielem {
     _uid = uid;
     var_47d8642e = 0;
   }
-
 }
 
 autoexec __init__system__() {
@@ -261,7 +260,7 @@ setup_menu(localclientnum, menu_data, previous_menu) {
     }
 
     if(isDefined(new_menu.lut_index)) {
-      setdvar(#"vc_lut", new_menu.lut_index);
+      setDvar(#"vc_lut", new_menu.lut_index);
     }
 
     if(isDefined(new_menu.camera_function)) {

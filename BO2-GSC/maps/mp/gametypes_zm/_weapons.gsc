@@ -279,28 +279,28 @@ dropweaponfordeath(attacker) {
     return;
   }
   if(!isDefined(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: not defined");
 
     return;
   }
 
   if(weapon == "none") {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: weapon == none");
 
     return;
   }
 
   if(!self hasweapon(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: don't have it anymore (" + weapon + ")");
 
     return;
   }
 
   if(!self anyammoforweaponmodes(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo for weapon modes");
 
     return;
@@ -314,7 +314,7 @@ dropweaponfordeath(attacker) {
   clip_and_stock_ammo = clipammo + stockammo;
 
   if(!clip_and_stock_ammo) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo");
 
     return;
@@ -333,7 +333,7 @@ dropweaponfordeath(attacker) {
     return;
   }
 
-  if(getdvar(#"_id_08F7FC88") == "1")
+  if(getDvar(#"_id_08F7FC88") == "1")
     println("dropped weapon: " + weapon);
 
   droplimitedweapon(weapon, self, item);
@@ -347,28 +347,28 @@ dropweaponfordeath(attacker) {
 
 dropweapontoground(weapon) {
   if(!isDefined(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: not defined");
 
     return;
   }
 
   if(weapon == "none") {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: weapon == none");
 
     return;
   }
 
   if(!self hasweapon(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: don't have it anymore (" + weapon + ")");
 
     return;
   }
 
   if(!self anyammoforweaponmodes(weapon)) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo for weapon modes");
 
     switch (weapon) {
@@ -394,7 +394,7 @@ dropweapontoground(weapon) {
   clip_and_stock_ammo = clipammo + stockammo;
 
   if(!clip_and_stock_ammo) {
-    if(getdvar(#"_id_08F7FC88") == "1")
+    if(getDvar(#"_id_08F7FC88") == "1")
       println("didn't drop weapon: no ammo");
 
     return;
@@ -407,7 +407,7 @@ dropweapontoground(weapon) {
 
   item = self dropitem(weapon);
 
-  if(getdvar(#"_id_08F7FC88") == "1")
+  if(getDvar(#"_id_08F7FC88") == "1")
     println("dropped weapon: " + weapon);
 
   droplimitedweapon(weapon, self, item);
@@ -446,7 +446,7 @@ watchpickup() {
     }
   }
 
-  if(getdvar(#"_id_08F7FC88") == "1")
+  if(getDvar(#"_id_08F7FC88") == "1")
     println("picked up weapon: " + weapname + ", " + isDefined(self.ownersattacker));
 
   assert(isDefined(player.tookweaponfrom));
@@ -809,13 +809,13 @@ watchforthrowbacks() {
 registergrenadelauncherduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
   dvarstring = "scr_" + dvarstring + "_grenadeLauncherDudTime";
 
-  if(getdvar(dvarstring) == "")
-    setdvar(dvarstring, defaultvalue);
+  if(getDvar(dvarstring) == "")
+    setDvar(dvarstring, defaultvalue);
 
   if(getdvarint(dvarstring) > maxvalue)
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   else if(getdvarint(dvarstring) < minvalue)
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
 
   level.grenadelauncherdudtimedvar = dvarstring;
   level.grenadelauncherdudtimemin = minvalue;
@@ -826,13 +826,13 @@ registergrenadelauncherduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
 registerthrowngrenadeduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
   dvarstring = "scr_" + dvarstring + "_thrownGrenadeDudTime";
 
-  if(getdvar(dvarstring) == "")
-    setdvar(dvarstring, defaultvalue);
+  if(getDvar(dvarstring) == "")
+    setDvar(dvarstring, defaultvalue);
 
   if(getdvarint(dvarstring) > maxvalue)
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   else if(getdvarint(dvarstring) < minvalue)
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
 
   level.throwngrenadedudtimedvar = dvarstring;
   level.throwngrenadedudtimemin = minvalue;
@@ -843,13 +843,13 @@ registerthrowngrenadeduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
 registerkillstreakdelay(dvarstring, defaultvalue, minvalue, maxvalue) {
   dvarstring = "scr_" + dvarstring + "_killstreakDelayTime";
 
-  if(getdvar(dvarstring) == "")
-    setdvar(dvarstring, defaultvalue);
+  if(getDvar(dvarstring) == "")
+    setDvar(dvarstring, defaultvalue);
 
   if(getdvarint(dvarstring) > maxvalue)
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   else if(getdvarint(dvarstring) < minvalue)
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
 
   level.killstreakrounddelay = getdvarint(dvarstring);
 }
@@ -1039,7 +1039,6 @@ debugline(a, b, color) {
     line(a, b, color);
     wait 0.05;
   }
-
 }
 
 onweapondamage(eattacker, einflictor, sweapon, meansofdeath, damage) {
@@ -1357,10 +1356,10 @@ weapons_get_dvar_int(dvar, def) {
 }
 
 weapons_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }
@@ -1385,7 +1384,7 @@ player_is_driver() {
 }
 
 loadout_get_class_num() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(self.class));
 
   if(isDefined(level.classtoclassnum[self.class]))

@@ -46,7 +46,6 @@ _id_4195(var_0) {
 
   while(var_0 istouching(self)) {
     wait 0.05;
-
   }
   var_0.radiation._id_4193 = 0;
   var_0.radiation._id_4196 = common_scripts\utility::array_remove(var_0.radiation._id_4196, self);
@@ -82,15 +81,12 @@ _id_4198() {
 
     for(var_6 = 0; var_6 < var_5.size; var_6++) {
       var_9 = var_9 + var_5[var_6];
-
     }
     if(var_9 < var_1) {
       var_9 = var_1;
-
     }
     if(var_9 > var_2) {
       var_9 = var_2;
-
     }
     self.radiation._id_1E43 = var_9;
     self.radiation._id_4199 = (var_9 - var_1) / var_4 * 100;
@@ -108,7 +104,6 @@ _id_4198() {
 
       if(self.radiation._id_2203 < 0) {
         self.radiation._id_2203 = 0;
-
       }
       self.radiation._id_419A = self.radiation._id_2203 / var_3 * 100;
     }
@@ -127,7 +122,6 @@ _id_419B() {
       self shellshock("radiation_med", 5);
     } else if(self.radiation._id_4199 > 25) {
       self shellshock("radiation_low", 5);
-
     }
     wait(var_0);
   }
@@ -147,7 +141,6 @@ _id_419C() {
       self.radiation.sound = "item_geigercouner_level1";
     } else {
       self.radiation.sound = "none";
-
     }
     wait 0.05;
   }
@@ -159,7 +152,6 @@ _id_419D() {
       maps\_utility::_id_13DC("_radiation_poisoning");
     } else {
       maps\_utility::_id_13DE("_radiation_poisoning");
-
     }
     wait 0.05;
   }
@@ -226,7 +218,6 @@ _id_41A0() {
       var_5 setvalue(var_1);
     } else {
       var_5 setvalue(self.radiation._id_1E43);
-
     }
     wait(var_2);
   }
@@ -242,17 +233,14 @@ _id_41A1(var_0) {
     while(var_0.radiation._id_1E43 >= 100) {
       if(var_2 <= 0 || var_2 >= 1) {
         var_3 = var_3 * -1;
-
       }
       var_2 = var_2 + var_3;
 
       if(var_2 <= 0) {
         var_2 = 0;
-
       }
       if(var_2 >= 1) {
         var_2 = 1;
-
       }
       self.color = (1, var_2, var_2);
       wait(var_1);
@@ -292,7 +280,6 @@ _id_41A2() {
         var_7 = 0;
       } else if(var_7 > 1) {
         var_7 = 1;
-
       }
       var_9 = var_2 - var_1;
       var_10 = var_1 + var_9 * (1 - var_7);
@@ -318,7 +305,6 @@ _id_41A2() {
 
     if(var_0.alpha != 0) {
       var_0 fadeoutblackout(1, 0, 0, self);
-
     }
     wait 0.05;
   }
@@ -337,7 +323,7 @@ _id_41A3() {
   }
   waittillframeend;
   var_0 = &"SCRIPT_RADIATION_DEATH";
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
 }
 
 fadeinblackout(var_0, var_1, var_2, var_3) {
@@ -362,7 +348,6 @@ _id_41A4() {
 
     if(level.script == "scoutsniper" || level.script == "co_scoutsniper") {
       level thread maps\_utility::_id_1255(maps\_utility::_id_11F4, "scoutsniper_mcm_youdaft");
-
     }
     level notify("radiation_warning");
     maps\_utility::_id_13DB("_radiation_poisoning");

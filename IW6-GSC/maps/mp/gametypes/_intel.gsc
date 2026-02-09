@@ -221,7 +221,7 @@ intelTriggerWatcher() {
   for(;;) {
     intelTrigger waittill("trigger", player);
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(isAI(player)) {
@@ -335,7 +335,7 @@ onPickupIntel() {
   randChallenge = validChallengesArray[RandomInt(validChallengesArray.size)];
   challengeNameIndex = randChallenge.challengeName;
 
-  devChallengeName = GetDvar("scr_devIntelChallengeName");
+  devChallengeName = getDvar("scr_devIntelChallengeName");
   if(devChallengeName != "temp")
     challengeNameIndex = devChallengeName;
 

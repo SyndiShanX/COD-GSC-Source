@@ -28,7 +28,6 @@ _id_4269() {
       }
     } else {
       maps\_stealth_threat_enemy::_id_4264("attack");
-
     }
     thread _id_426C();
     wait 10;
@@ -53,7 +52,6 @@ _id_4269() {
     }
     if(isDefined(self.enemy)) {
       maps\_stealth_shared_utilities::_id_41EC(self.enemy, 0);
-
     }
     self clearenemy();
     maps\_stealth_threat_enemy::_id_4264("reset");
@@ -72,18 +70,15 @@ _id_426A(var_0) {
 _id_426B(var_0) {
   if(!isDefined(var_0._id_0B6E)) {
     return 1;
-
   }
   if(!isDefined(var_0._id_0B6E._id_41ED._id_41EE[self.unique_id])) {
     var_0._id_0B6E._id_41ED._id_41EE[self.unique_id] = 0;
-
   }
   for(;;) {
     var_0._id_0B6E._id_41ED._id_41EE[self.unique_id]++;
 
     if(_id_426A(var_0)) {
       return 1;
-
     }
     var_1 = var_0._id_0B6E._id_41ED._id_41EE[self.unique_id];
     maps\_stealth_threat_enemy::_id_4264("warning" + var_1);
@@ -106,7 +101,6 @@ _id_426C() {
 
   if(isDefined(var_0)) {
     level._id_0B6E._id_1124._id_426E[self._id_204F] = var_0;
-
   }
   maps\_stealth_shared_utilities::_id_41DD("_stealth_spotted");
 }
@@ -242,13 +236,11 @@ _id_427C() {
 
   if(isDefined(self._id_1008["_stealth_behavior_first_reaction"])) {
     var_0 = maps\_utility::_id_1008("_stealth_behavior_first_reaction");
-
   }
   var_1 = 0;
 
   if(isDefined(self._id_1008["_stealth_behavior_reaction_anim"])) {
     var_0 = maps\_utility::_id_1008("_stealth_behavior_reaction_anim");
-
   }
   if(!var_0 && !var_1) {
     return;
@@ -301,7 +293,7 @@ _id_427D(var_0, var_1) {
     if(!isDefined(var_2)) {
       continue;
     }
-    if(isplayer(var_2) || isDefined(var_2.team) && var_2.team != var_3) {
+    if(isPlayer(var_2) || isDefined(var_2.team) && var_2.team != var_3) {
       break;
     }
   }
@@ -345,7 +337,6 @@ _id_425C() {
 
   if(!isDefined(level._id_0B6E._id_41D0.sound["spotted"][self._id_204F])) {
     level._id_0B6E._id_41D0.sound["spotted"][self._id_204F] = 0;
-
   }
   self._id_0B6E._id_41ED._id_4262 = spawnStruct();
   self._id_0B6E._id_41ED._id_4262._id_4263 = 0;

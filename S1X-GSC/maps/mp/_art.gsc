@@ -17,7 +17,7 @@ main() {
   }
   /$
   if(!isDefined(level.script)) {
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
   }
 
   setDevDvarIfUninitialized("scr_art_tweak", 0);
@@ -463,7 +463,7 @@ _settext(text) {
 }
 
 _clearalltextafterhudelem() {
-  if(GetDvar("netconststrings_enabled") != "0") {
+  if(getDvar("netconststrings_enabled") != "0") {
     return;
   }
   if(level._clearalltextafterhudelem) {
@@ -621,7 +621,7 @@ dumpsettings() {
   fileprint_launcher( "\tlevel.tweakfile = true;" );
   fileprint_launcher( " " );
 
-  fogpath = "maps\\createart\\" + GetDvar("scr_art_visionfile") + "_fog";
+  fogpath = "maps\\createart\\" + getDvar("scr_art_visionfile") + "_fog";
   fileprint_launcher( "\tif(IsUsingHDR())" );
   fileprint_launcher( "\t\t" + fogpath + "_hdr::SetupFog( );" );
   fileprint_launcher( "\telse" );

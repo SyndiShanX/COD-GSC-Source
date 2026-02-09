@@ -65,7 +65,6 @@ _id_42BC(var_0) {
 
   if(self.script == "flashed") {
     self waittill("stop_flashbang_effect");
-
   }
   var_2 = maps\_stealth_shared_utilities::_id_41F3(var_1, 300, 40);
 
@@ -115,15 +114,12 @@ _id_42C1(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_1)) {
     var_1 = var_4[var_0];
-
   }
   if(!isDefined(var_2)) {
     var_2 = var_5[var_0];
-
   }
   if(!isDefined(var_3)) {
     var_3 = _id_42C3(var_0);
-
   }
   maps\_stealth_shared_utilities::_id_41CF("event", var_0, var_1);
   maps\_stealth_shared_utilities::_id_41CF("animation", var_0, var_2);
@@ -131,7 +127,6 @@ _id_42C1(var_0, var_1, var_2, var_3) {
 
   if(var_3) {
     self addaieventlistener(var_0);
-
   }
   switch (var_0) {
     case "explode":

@@ -30,7 +30,6 @@ init_loadout() {
     }
   }
 }
-
 init_models_and_variables_loadout() {
   if(getDvar(#"zombiemode") == "1") {
     if(!isDefined(level.zombietron_mode)) {
@@ -364,7 +363,6 @@ init_models_and_variables_loadout() {
   set_player_interactive_model("viewmodel_usa_marine_player_legs");
   level.campaign = "american";
 }
-
 add_weapon(weapon_name, options) {
   PrecacheItem(weapon_name);
   level.player_loadout[level.player_loadout.size] = weapon_name;
@@ -373,15 +371,12 @@ add_weapon(weapon_name, options) {
   }
   level.player_loadout_options[level.player_loadout_options.size] = options;
 }
-
 set_secondary_offhand(weapon_name) {
   level.player_secondaryoffhand = weapon_name;
 }
-
 set_switch_weapon(weapon_name) {
   level.player_switchweapon = weapon_name;
 }
-
 set_action_slot(num, option1, option2) {
   if(num < 2 || num > 4) {
     if(level.script != "pby_fly") {
@@ -405,26 +400,21 @@ set_action_slot(num, option1, option2) {
   }
   level.player_actionslots[level.player_actionslots.size] = action_slot;
 }
-
 set_player_viewmodel(model) {
   PrecacheModel(model);
   level.player_viewmodel = model;
 }
-
 set_player_interactive_hands(model) {
   PrecacheModel(model);
   level.player_interactive_hands = model;
 }
-
 set_player_interactive_model(model) {
   PrecacheModel(model);
   level.player_interactive_model = model;
 }
-
 set_laststand_pistol(weapon) {
   level.laststandpistol = weapon;
 }
-
 give_loadout(wait_for_switch_weapon) {
   if(!isDefined(game["gaveweapons"])) {
     game["gaveweapons"] = 0;
@@ -505,9 +495,8 @@ give_loadout(wait_for_switch_weapon) {
   }
   self player_flag_set("loadout_given");
 }
-
 give_model(class) {
-  entity_num = self getEntityNumber();
+  entity_num = self GetEntityNumber();
   if(level.campaign == "none") {} else if(getDvar(#"zombietron") == "1") {
     switch (entity_num) {
       case 0:

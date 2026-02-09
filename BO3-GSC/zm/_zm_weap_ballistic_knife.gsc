@@ -29,7 +29,7 @@ function on_spawn(watcher, player) {
     retrievable_model.angles = angles;
     retrievable_model.weapon = watcher.weapon;
     if(isDefined(prey)) {
-      if(isplayer(prey) && player.team == prey.team) {
+      if(isPlayer(prey) && player.team == prey.team) {
         isfriendly = 1;
       } else if(isai(prey) && player.team == prey.team) {
         isfriendly = 1;
@@ -73,7 +73,7 @@ function on_spawn_retrieve_trigger(watcher, player) {
     return;
   }
   trigger_pos = [];
-  if(isDefined(prey) && (isplayer(prey) || isai(prey))) {
+  if(isDefined(prey) && (isPlayer(prey) || isai(prey))) {
     trigger_pos[0] = prey.origin[0];
     trigger_pos[1] = prey.origin[1];
     trigger_pos[2] = prey.origin[2] + 10;

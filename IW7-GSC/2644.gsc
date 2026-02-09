@@ -197,7 +197,7 @@ update_personal_encounter_performance(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

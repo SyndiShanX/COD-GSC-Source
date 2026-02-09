@@ -78,7 +78,7 @@ function init() {
   level.killstreak_init_start_time = getmillisecondsraw();
   thread debug_ricochet_protection();
   if(getdvarstring("scr_allow_killstreak_building") == "") {
-    setdvar("scr_allow_killstreak_building", "0");
+    setDvar("scr_allow_killstreak_building", "0");
   }
   level.menureferenceforkillstreak = [];
   level.numkillstreakreservedobjectives = 0;
@@ -283,7 +283,7 @@ function register_dev_dvars(killstreaktype) {
   level.killstreaks[killstreaktype].devdvar = ("" + killstreaktype) + "";
   level.killstreaks[killstreaktype].devenemydvar = ("" + killstreaktype) + "";
   level.killstreaks[killstreaktype].devtimeoutdvar = ("" + killstreaktype) + "";
-  setdvar(level.killstreaks[killstreaktype].devtimeoutdvar, 0);
+  setDvar(level.killstreaks[killstreaktype].devtimeoutdvar, 0);
   level thread register_devgui(killstreaktype);
 }
 
@@ -325,7 +325,7 @@ function devgui_scorestreak_command_debugdvar(killstreaktype, dvar) {
 }
 
 function devgui_scorestreak_dvar_toggle(killstreaktype, title, dvar) {
-  setdvar(dvar, 0);
+  setDvar(dvar, 0);
   devgui_scorestreak_command(killstreaktype, "Toggle " + title, ("toggle " + dvar) + " 1 0");
 }
 
@@ -819,7 +819,7 @@ function has_killstreak(killstreak) {
 
 function recordkillstreakbegindirect(recordstreakindex) {
   player = self;
-  if(!isplayer(player) || !isDefined(recordstreakindex)) {
+  if(!isPlayer(player) || !isDefined(recordstreakindex)) {
     return;
   }
   if(!isDefined(self.killstreakevents)) {
@@ -1688,7 +1688,7 @@ function clear_ride_intro(delay) {
 }
 
 function killstreak_debug_think() {
-  setdvar("", "");
+  setDvar("", "");
   for(;;) {
     cmd = getdvarstring("");
     switch (cmd) {
@@ -1698,7 +1698,7 @@ function killstreak_debug_think() {
       }
     }
     if(cmd != "") {
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }
@@ -1841,7 +1841,7 @@ function monitordamage(killstreak_ref, max_health, destroyed_callback, low_healt
     if(isDefined(self.invulnerable) && self.invulnerable) {
       continue;
     }
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     friendlyfire = weaponobjects::friendlyfirecheck(self.owner, attacker);
@@ -1951,7 +1951,7 @@ function ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon
   if(isDefined(self.invulnerable) && self.invulnerable) {
     return 0;
   }
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     return get_old_damage(attacker, weapon, type, damage, allow_bullet_damage);
   }
   friendlyfire = weaponobjects::friendlyfirecheck(self.owner, attacker);
@@ -1999,7 +1999,7 @@ function get_old_damage(attacker, weapon, type, damage, allow_bullet_damage) {
         damage = 0;
         break;
       }
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         hasfmj = attacker hasperk("specialty_armorpiercing");
       }
       if(isDefined(hasfmj) && hasfmj) {

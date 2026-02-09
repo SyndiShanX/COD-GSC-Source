@@ -459,7 +459,7 @@ function radius_trigger_thread() {
   self endon("death");
   while(true) {
     self waittill("trigger", player);
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     self.owner_ent notify("triggered");

@@ -210,7 +210,7 @@ zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vd
   if(!is_true(self.has_legs)) {
     return;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     for(i = 0; i < level.soul_catchers.size; i++) {
       if(self istouching(level.soul_catchers_vol[i])) {
         if(!level.soul_catchers[i].is_charged) {

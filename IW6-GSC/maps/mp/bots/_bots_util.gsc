@@ -56,7 +56,7 @@ bot_set_difficulty(difficulty) {
   assert(IsAI(self));
 
   if(IsTeamParticipant(self)) {
-    debugDifficulty = GetDvar("bot_DebugDifficulty");
+    debugDifficulty = getDvar("bot_DebugDifficulty");
     if(debugDifficulty != "default") {
       difficulty = debugDifficulty;
     }
@@ -67,7 +67,7 @@ bot_set_difficulty(difficulty) {
 
   self BotSetDifficulty(difficulty);
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self.pers["rankxp"] = self get_rank_xp_for_bot();
     self maps\mp\gametypes\_rank::playerUpdateRank();
   }
@@ -375,7 +375,6 @@ get_all_connected_nodes(nodes) {
     for(j = 0; j < linked_nodes.size; j++) {
       if(!array_contains(all_nodes, linked_nodes[j])) {
         all_nodes = array_add(all_nodes, linked_nodes[j]);
-
       }
     }
   }
@@ -833,7 +832,6 @@ bot_draw_cylinder_think(pos, rad, height, seconds, stop_notify, color, depthTest
 
     wait(0.05);
   }
-
 }
 
 bot_draw_circle(center, radius, color, depthTest, segments) {
@@ -862,7 +860,6 @@ bot_draw_circle(center, radius, color, depthTest, segments) {
 
     line(start, end, color, 1.0, depthTest);
   }
-
 }
 
 bot_get_total_gun_ammo() {
@@ -1338,7 +1335,7 @@ bot_get_client_limit() {
   maxPlayers = GetDvarInt("party_maxplayers", 0);
   maxPlayers = max(maxPlayers, GetDvarInt("party_maxPrivatePartyPlayers", 0));
 
-  if(GetDvar("squad_vs_squad") == "1" || GetDvar("squad_use_hosts_squad") == "1" || GetDvar("squad_match") == "1")
+  if(getDvar("squad_vs_squad") == "1" || getDvar("squad_use_hosts_squad") == "1" || getDvar("squad_match") == "1")
     maxPlayers = 12;
 
   if(!level.teamBased)

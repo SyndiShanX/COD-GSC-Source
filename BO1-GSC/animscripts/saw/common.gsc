@@ -7,25 +7,30 @@ main(turret) {
   self endon("killanimscript");
   assert(isDefined(turret));
   animscripts\utility::initialize("saw");
-  if(!isDefined(turret))
+  if(!isDefined(turret)) {
     return;
+  }
   self.a.special = "saw";
-  if(isDefined(turret.script_delay_min))
+  if(isDefined(turret.script_delay_min)) {
     turret_delay = turret.script_delay_min;
-  else
+  } else {
     turret_delay = maps\_mgturret::burst_fire_settings("delay");
-  if(isDefined(turret.script_delay_max))
+  }
+  if(isDefined(turret.script_delay_max)) {
     turret_delay_range = turret.script_delay_max - turret_delay;
-  else
+  } else {
     turret_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
-  if(isDefined(turret.script_burst_min))
+  }
+  if(isDefined(turret.script_burst_min)) {
     turret_burst = turret.script_burst_min;
-  else
+  } else {
     turret_burst = maps\_mgturret::burst_fire_settings("burst");
-  if(isDefined(turret.script_burst_max))
+  }
+  if(isDefined(turret.script_burst_max)) {
     turret_burst_range = turret.script_burst_max - turret_burst;
-  else
+  } else {
     turret_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
+  }
   pauseUntilTime = getTime();
   turretState = "start";
   self animscripts\shared::placeWeaponOn(self.weapon, "none");
@@ -62,20 +67,19 @@ main(turret) {
     }
   }
 }
-
 waitTimeOrUntilTurretStateChange(time, turret) {
   turret endon("turretstatechange");
   wait time;
 }
-
 fireController(turret) {
   self endon("killanimscript");
   fovdot = cos(15);
   for(;;) {
     while(isDefined(self.enemy)) {
       enemypos = self.enemy.origin;
-      if(isSentient(enemypos))
+      if(isSentient(enemypos)) {
         enemypos += (0, 0, 32);
+      }
       turretAimPos = turret getTagAngles("tag_aim");
       if(within_fov(turret.origin, turretAimPos, enemypos, fovdot) || distanceSquared(turret.origin, enemyPos) < 200 * 200) {
         if(!turret.doFiring) {
@@ -95,25 +99,24 @@ fireController(turret) {
     wait(0.05);
   }
 }
-
 turretTimer(duration, turret) {
-  if(duration <= 0)
+  if(duration <= 0) {
     return;
+  }
   self endon("killanimscript");
   turret endon("turretstatechange");
   wait(duration);
   turret notify("turretstatechange");
 }
-
 stopUsingTurretWhenNodeLost() {
   self endon("killanimscript");
   while(1) {
-    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
+    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
       self stopUseTurret();
+    }
     wait .25;
   }
 }
-
 postScriptFunc(animscript) {
   if(animscript == "pain") {
     if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 64 * 64) {
@@ -135,7 +138,6 @@ postScriptFunc(animscript) {
   self.a.usingTurret = undefined;
   self animscripts\shared::placeWeaponOn(self.weapon, "right");
 }
-
 postPainFunc(animscript) {
   assert(isDefined(self.a.usingTurret));
   assert(self.a.usingTurret.aiOwner == self);
@@ -150,32 +152,28 @@ postPainFunc(animscript) {
     self.a.usingTurret delete();
   }
 }
-
 preplacedPostScriptFunc(animscript) {
   self animscripts\shared::placeWeaponOn(self.weapon, "right");
 }
-
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectorDot(forward, normal);
   return dot >= fov;
 }
-
 #using_animtree("generic_human");
+
 DoShoot(turret) {
   self setAnim(%additive_saw_idle, 0, .1);
   self setAnim(%additive_saw_fire, 1, .1);
   turret turretDoShootAnims();
   TurretDoShoot(turret);
 }
-
 DoAim(turret) {
   self setAnim(%additive_saw_idle, 1, .1);
   self setAnim(%additive_saw_fire, 0, .1);
   turret turretDoAimAnims();
 }
-
 #using_animtree("mg42");
 TurretDoShoot(turret) {
   self endon("killanimscript");
@@ -185,12 +183,10 @@ TurretDoShoot(turret) {
     wait 0.1;
   }
 }
-
 turretDoShootAnims() {
   self setAnim(%additive_saw_idle, 0, .1);
   self setAnim(%additive_saw_fire, 1, .1);
 }
-
 turretDoAimAnims() {
   self setAnim(%additive_saw_idle, 1, .1);
   self setAnim(%additive_saw_fire, 0, .1);

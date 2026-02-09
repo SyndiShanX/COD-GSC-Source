@@ -556,7 +556,7 @@ function show_hint(equipment) {
 }
 
 show_hint_text(text, show_for_time = 3.2, font_scale = 1.25, ypos = 220) {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -744,7 +744,7 @@ function_379f6b5d(n_base_damage, var_177ec733 = 1, var_b68e56de = 1, var_694e2ce
 }
 
 function_e418901e() {
-  setdvar(#"give_equipment", "<dev string:x165>");
+  setDvar(#"give_equipment", "<dev string:x165>");
   waitframe(1);
   level flag::wait_till("<dev string:x168>");
   waitframe(1);
@@ -766,7 +766,7 @@ function_e418901e() {
         }
       }
 
-      setdvar(#"give_equipment", "<dev string:x165>");
+      setDvar(#"give_equipment", "<dev string:x165>");
     }
 
     waitframe(1);

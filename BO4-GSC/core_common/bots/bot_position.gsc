@@ -528,7 +528,7 @@ function_567289f(params, tacbundle) {
 function_d2161ccd(params, tacbundle) {
   goalinfo = self function_4794d6a3();
 
-  if(!isplayer(goalinfo.goalentity)) {
+  if(!isPlayer(goalinfo.goalentity)) {
     return 0;
   }
 
@@ -756,7 +756,6 @@ function_d0cf287b(params, tacbundle) {
 
   if(isint(center)) {
     self bot::record_text("<dev string:x170>" + center, (0, 1, 1), "<dev string:x4e>");
-
   }
 
   enemy = self.likelyenemyposition;
@@ -969,7 +968,6 @@ set_position(position, claimnode = undefined) {
       return;
     } else {
       self botprinterror("<dev string:x311>" + position);
-
     }
   }
 

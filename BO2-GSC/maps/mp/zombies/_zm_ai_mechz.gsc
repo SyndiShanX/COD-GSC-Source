@@ -42,7 +42,7 @@ precache() {
   level._effect["mech_booster_feet"] = loadfx("maps/zombie_tomb/fx_tomb_mech_jump_booster_sm");
   level._effect["mech_headlamp"] = loadfx("maps/zombie_tomb/fx_tomb_mech_head_light");
   level._effect["mech_footstep_steam"] = loadfx("maps/zombie_tomb/fx_tomb_mech_foot_step_steam");
-  setdvar("zombie_double_wide_checks", 1);
+  setDvar("zombie_double_wide_checks", 1);
   precacherumble("mechz_footsteps");
   precacheshellshock("lava_small");
 }
@@ -656,7 +656,7 @@ mechz_death() {
     level notify("last_mechz_down");
   }
 
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     event = "death";
 
     if(issubstr(self.damageweapon, "knife_ballistic_"))
@@ -1294,7 +1294,7 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   old_health_tier = int(num_tiers * self.health / self.maxhealth);
   bonename = getpartname("c_zom_mech_body", boneindex);
 
-  if(isDefined(attacker) && isalive(attacker) && isplayer(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || isDefined(attacker.personal_instakill) && attacker.personal_instakill)) {
+  if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || isDefined(attacker.personal_instakill) && attacker.personal_instakill)) {
     n_mechz_damage_percent = 1.0;
     n_mechz_headshot_modifier = 2.0;
   } else {
@@ -1361,7 +1361,7 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   }
 
   if(!isDefined(weapon) || weapon == "none") {
-    if(!isplayer(attacker))
+    if(!isPlayer(attacker))
       final_damage = 0;
   }
 

@@ -106,7 +106,7 @@ firstinit() {
   level.nextgrenadedrop = randomint(3);
   level.lastplayersighted = 100;
   anim.defaultexception = maps\mp\animscripts\zm_init::empty;
-  setdvar("scr_expDeathMayMoveCheck", "on");
+  setDvar("scr_expDeathMayMoveCheck", "on");
   anim.lastsidestepanim = 0;
   anim.meleerange = 64;
   anim.meleerangesq = anim.meleerange * anim.meleerange;

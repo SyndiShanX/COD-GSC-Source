@@ -24,7 +24,7 @@ function_7e1a12ce(radius) {
     enemy_players = self getenemiesinradius(self.origin, radius);
 
     foreach(enemy in enemy_players) {
-      if(!isplayer(enemy)) {
+      if(!isPlayer(enemy)) {
         continue;
       }
 
@@ -74,7 +74,7 @@ function_7e1a12ce(radius) {
 }
 
 function_1c169b3a(enemy, defaultdelay = 250) {
-  if(!isplayer(enemy)) {
+  if(!isPlayer(enemy)) {
     return true;
   }
 
@@ -98,7 +98,7 @@ function_1c169b3a(enemy, defaultdelay = 250) {
 }
 
 function_a4d6d6d8(enemy, var_2770319) {
-  if(!isplayer(enemy)) {
+  if(!isPlayer(enemy)) {
     return;
   }
 

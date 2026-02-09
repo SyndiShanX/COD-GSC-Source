@@ -68,7 +68,7 @@ oncarrybombpickup(var_0, var_1) {
   level notify("bomb_picked_up");
   var_0.isbombcarrier = 1;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread maps\mp\_matchdata::loggameevent("pickup", var_0.origin);
     var_0 setclientomnvar("ui_carrying_bomb", 1);
   }
@@ -238,7 +238,7 @@ onplayerplantbomb(var_0, var_1, var_2) {
   thread maps\mp\_events::bombplantevent();
   self.bombplantedtime = gettime();
 
-  if(isplayer(self) && var_0) {
+  if(isPlayer(self) && var_0) {
     self.isbombcarrier = 0;
     self setclientomnvar("ui_carrying_bomb", 0);
   }

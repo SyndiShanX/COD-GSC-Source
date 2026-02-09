@@ -223,7 +223,7 @@ function function_747a2fea() {
   self endon("death");
   while(true) {
     self waittill("damage", n_amount, e_attacker, v_direction, v_hit_location, str_mod);
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       e_attacker.use_weapon_type = str_mod;
       self thread zm_powerups::check_for_instakill(e_attacker, str_mod, v_hit_location);
     }
@@ -255,7 +255,7 @@ function function_7609fd9() {
       level notify("last_ai_down", self);
     }
   }
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       e_attacker zm_score::player_add_points("death_spider");
     }
@@ -444,9 +444,9 @@ function function_9f7a20d2() {
   level notify("hash_f96039de");
   level thread zm_audio::sndmusicsystem_playstate("spider_roundstart");
   if(isDefined(level.var_9d7b5e00)) {
-    setdvar("ai_meleeRange", level.var_9d7b5e00);
+    setDvar("ai_meleeRange", level.var_9d7b5e00);
   } else {
-    setdvar("ai_meleeRange", 100);
+    setDvar("ai_meleeRange", 100);
   }
 }
 
@@ -459,9 +459,9 @@ function function_123b370a() {
   }
   level.var_8276ee15 = 0;
   level notify("hash_daeb2e4f");
-  setdvar("ai_meleeRange", level.melee_range_sav);
-  setdvar("ai_meleeWidth", level.melee_width_sav);
-  setdvar("ai_meleeHeight", level.melee_height_sav);
+  setDvar("ai_meleeRange", level.melee_range_sav);
+  setDvar("ai_meleeWidth", level.melee_width_sav);
+  setDvar("ai_meleeHeight", level.melee_height_sav);
 }
 
 function function_1abf8192() {

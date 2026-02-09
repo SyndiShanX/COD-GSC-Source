@@ -37,7 +37,7 @@ become_price() {
   if( !isalive( self ) )
   {	
   	// the pow was killed
-  	SetDvar( "ui_deadquote", "@GULAG_PRICE_KILLED" );
+  	setDvar( "ui_deadquote", "@GULAG_PRICE_KILLED" );
   	//maps\_utility::missionFailedWrapper();
   	return;
   }
@@ -1380,7 +1380,6 @@ chase_player_dies_if_goes_wrong_way() {
     }
     wait(0.05);
   }
-
 }
 
 chase_train_chases(dist, starter) {
@@ -1963,7 +1962,6 @@ swing_light_think() {
 
     wait(1);
   }
-
 }
 
 evil_hidden_spawner() {

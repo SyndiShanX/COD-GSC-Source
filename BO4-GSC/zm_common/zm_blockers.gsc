@@ -887,7 +887,7 @@ door_opened(cost, quick_close) {
     if(self.doors.size) {
       zm_utility::play_sound_at_pos("purchase", self.origin);
 
-      if(isplayer(self.purchaser)) {
+      if(isPlayer(self.purchaser)) {
         self.purchaser util::delay(1.25, "death", &zm_audio::create_and_play_dialog, #"door", #"open");
       }
     }
@@ -1563,7 +1563,6 @@ blocker_init() {
             targets[j] hide();
 
             iprintlnbold("<dev string:x259>");
-
           }
         }
       } else if(targets[j].script_parameters == "repair_board") {

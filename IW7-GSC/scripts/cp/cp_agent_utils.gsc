@@ -282,7 +282,7 @@ default_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   }
 
   var_2 = scripts\cp\cp_damage::func_F29B(var_4, var_5, var_2, var_1, var_3, var_6, var_7, var_8, var_9, var_0);
-  if(isplayer(var_1) && !scripts\cp\utility::is_trap(var_0, var_5, var_12)) {
+  if(isPlayer(var_1) && !scripts\cp\utility::is_trap(var_0, var_5, var_12)) {
     var_2 = scripts\cp\cp_damage::scale_alien_damage_by_perks(var_1, var_2, var_4, var_5);
     var_2 = scripts\cp\cp_damage::scale_alien_damage_by_weapon_type(var_1, var_2, var_4, var_5, var_8);
   }
@@ -316,7 +316,7 @@ default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   var_13 = scripts\cp\utility::is_trap(var_0, var_5);
   if(isDefined(var_1)) {
-    if(isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isPlayer(var_1) || isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       if(!var_13) {
         var_1 scripts\cp\cp_damage::check_for_special_damage(self, var_5, var_4);
       }
@@ -570,13 +570,13 @@ process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_12 = "card_boosted";
   } else if(issubstr(var_5, "arkyellow") && var_4 == "MOD_EXPLOSIVE_BULLET" && var_8 == "none") {
     var_12 = "yellow_arcane_cp";
-  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_16) {
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_16) {
     var_12 = "high_damage";
-  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_17) {
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_17) {
     var_12 = "high_damage";
-  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
     var_12 = "high_damage";
-  } else if(isplayer(var_1) && scripts\engine\utility::istrue(var_1.deadeye_charge) && var_15) {
+  } else if(isPlayer(var_1) && scripts\engine\utility::istrue(var_1.deadeye_charge) && var_15) {
     var_12 = "dewdrops_cp";
   } else if(scripts\engine\utility::istrue(level.insta_kill)) {
     var_12 = "high_damage";

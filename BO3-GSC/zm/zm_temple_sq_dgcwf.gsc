@@ -140,7 +140,7 @@ function begin_dgcwf_vox() {
   self endon("death");
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       self stoploopsound(1);
       level.var_9fb9bcda stoploopsound(1);
       level.var_9fb9bcda delete();

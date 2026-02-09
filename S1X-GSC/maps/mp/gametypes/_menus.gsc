@@ -296,7 +296,7 @@ setTeam(selection) {
 
   if(!IsAI(self) && level.teamBased && !maps\mp\gametypes\_teams::getJoinTeamPermissions(selection)) {
     return;
-    /# println( "cant change teams here... would be good to handle this logic in menu" );
+    println("cant change teams here... would be good to handle this logic in menu");
   }
 
   if(level.inGracePeriod && !self.hasDoneCombat) {

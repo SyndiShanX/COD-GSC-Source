@@ -15,8 +15,8 @@
 #include maps\zombie_temple_pack_a_punch;
 
 main() {
-  SetDvar("ai_alternateSightLatency", 200);
-  SetDvar("ai_useCheapSight", 1);
+  setDvar("ai_alternateSightLatency", 200);
+  setDvar("ai_useCheapSight", 1);
   level._use_choke_weapon_hints = 1;
   level._use_choke_blockers = 1;
   level thread maps\zombie_temple_ffotd::main_start();
@@ -102,7 +102,6 @@ main() {
   level thread maps\zombie_temple_ffotd::main_end();
   level thread maps\zombie_temple_sq::start_temple_sidequest();
 }
-
 init_client_flags() {
   level._CF_ACTOR_IS_NAPALM_ZOMBIE = 0;
   level._CF_ACTOR_DO_NOT_USE = 1;
@@ -123,29 +122,24 @@ init_client_flags() {
   level._CF_SCRIPTMOVER_CLIENT_FLAG_SAUCE_END = 8;
   level._CF_SCRIPTMOVER_CLIENT_FLAG_WATER_TRAIL = 9;
 }
-
 temple_sidequest_of_awesome() {
   maps\zombie_temple_sq::init();
 }
-
 start_sparks() {
   wait(2);
   exploder(25);
   exploder(26);
 }
-
 init_sounds() {
   maps\_zombiemode_utility::add_sound("door_stone_disc", "zmb_door_stone_disc");
   maps\_zombiemode_utility::add_sound("door_wood", "zmb_door_wood");
   maps\_zombiemode_utility::add_sound("door_spike", "zmb_door_spike");
 }
-
 custom_add_weapons() {
   maps\_zombiemode_weapons::add_zombie_weapon("shrink_ray_zm", "shrink_ray_upgraded_zm", &"ZOMBIE_TEMPLE_SHRINK_RAY", 2000, "shrink", "", undefined);
   maps\_zombiemode_weapons::add_zombie_weapon("blow_gun_zm", "blow_gun_upgraded_zm", &"ZOMBIE_TEMPLE_BLOW_GUN", 2000, "darts", "", undefined);
   maps\_zombiemode_weapons::add_zombie_weapon("spikemore_zm", undefined, &"ZOMBIE_TEMPLE_SPIKEMORE_PURCHASE", 1000, "spikemore", "", undefined);
 }
-
 precache_assets() {
   PreCacheModel("viewmodel_usa_pow_arms");
   PreCacheModel("viewmodel_rus_prisoner_arms");
@@ -159,7 +153,6 @@ precache_assets() {
   PrecacheModel("p_lights_cagelight02_on");
   PreCacheShader("flamethrowerfx_color_distort_overlay_bloom");
 }
-
 local_zone_init() {
   add_adjacent_zone("temple_start_zone", "pressure_plate_zone", "start_to_pressure");
   add_adjacent_zone("temple_start_zone", "waterfall_upper1_zone", "start_to_waterfall_upper");
@@ -179,7 +172,6 @@ local_zone_init() {
   add_adjacent_zone("caves2_zone", "caves3_zone", "cave03_to_power");
   temple_init_zone_spawn_locations();
 }
-
 include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false, true);
@@ -258,7 +250,6 @@ include_weapons() {
   precacheItem("explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-
 include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -268,7 +259,6 @@ include_powerups() {
   include_powerup("fire_sale");
   include_powerup("free_perk");
 }
-
 add_powerups_after_round_1() {
   level.zombie_powerup_array = array_remove(level.zombie_powerup_array, "nuke");
   level.zombie_powerup_array = array_remove(level.zombie_powerup_array, "fire_sale");
@@ -281,14 +271,12 @@ add_powerups_after_round_1() {
     wait(1);
   }
 }
-
 init_weapons_locker() {
   trigger = getEnt("weapons_locker", "targetname");
   trigger SetCursorHint("HINT_NOICON");
   wallModel = getEnt(trigger.target, "targetname");
   trigger thread triggerWeaponsLockerWatch(wallModel);
 }
-
 setup_water_physics() {
   flag_wait("all_players_connected");
   players = GetPlayers();
@@ -296,7 +284,6 @@ setup_water_physics() {
     players[i] SetClientDvars("phys_buoyancy", 1);
   }
 }
-
 mergeSort(current_list, less_than) {
   if(current_list.size <= 1) {
     return current_list;
@@ -315,7 +302,6 @@ mergeSort(current_list, less_than) {
   result = merge(left, right, less_than);
   return result;
 }
-
 merge(left, right, less_than) {
   result = [];
   li = 0;
@@ -339,7 +325,6 @@ merge(left, right, less_than) {
   }
   return result;
 }
-
 double_door_fx() {
   flag_wait("cave01_to_cave02");
   door_ents = getEntArray("cave01_to_cave02_door", "targetname");
@@ -357,12 +342,10 @@ double_door_fx() {
   door_origin = (doors_x, doors_y, doors_z);
   playFX(level._effect["square_door_open"], door_origin);
 }
-
 init_rolling_doors() {
   rollingDoors = getEntArray("rolling_door", "targetname");
   array_thread(rollingDoors, ::rolling_door_think);
 }
-
 rolling_door_think() {
   self.door_moveDir = anglesToForward(self.angles);
   self.door_moveDist = self.script_float;
@@ -375,24 +358,21 @@ rolling_door_think() {
   playFX(level._effect["rolling_door_open"], self.origin);
   pi = 3.1415926;
   endOrigin = self.origin + (self.door_moveDir * self.door_moveDist);
-  self moveTo(endOrigin, self.door_moveTime, 0.1, 0.1);
+  self moveto(endOrigin, self.door_moveTime, 0.1, 0.1);
   cir = 2 * pi * self.door_radius;
   rotate = (self.door_moveDist / cir) * 360.0;
   self rotateTo(self.angles + (rotate, 0, 0), self.door_moveTime, 0.1, 0.1);
   self connectpaths();
 }
-
 player_laststand_temple(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
   if(is_true(self.riding_geyser)) {
     self unlink();
   }
   self maps\_zombiemode::player_laststand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
 }
-
 temple_poi_positioning_func(origin, forward) {
   return maps\_zombiemode_server_throttle::server_safe_ground_trace_ignore_water("poi_trace", 10, self.origin + forward + (0, 0, 10));
 }
-
 temple_powerup_fx_func() {
   self delete_powerup_fx();
   self.fx_green = maps\_zombiemode_net::network_safe_spawn("powerup_fx", 2, "script_model", self.origin);
@@ -401,12 +381,10 @@ temple_powerup_fx_func() {
   playFXOnTag(level._effect["powerup_on"], self.fx_green, "tag_origin");
   self thread delete_powerup_fx_wait();
 }
-
 delete_powerup_fx_wait() {
   self waittill("death");
   self delete_powerup_fx();
 }
-
 delete_powerup_fx() {
   if(isDefined(self.fx_green)) {
     self.fx_green Unlink();
@@ -414,7 +392,6 @@ delete_powerup_fx() {
     self.fx_green = undefined;
   }
 }
-
 init_random_perk_machines() {
   randMachines = [];
   randMachines = _add_machine(randMachines, "vending_jugg", "mus_perks_jugganog_sting", "specialty_armorvest", "mus_perks_jugganog_jingle", "jugg_perk", "zombie_vending_jugg");
@@ -475,7 +452,6 @@ init_random_perk_machines() {
     }
   }
 }
-
 _rand_perk_index(randMachines, name) {
   for(i = 0; i < randMachines.size; i++) {
     if(randMachines[i].script_string == name) {
@@ -484,11 +460,9 @@ _rand_perk_index(randMachines, name) {
   }
   return undefined;
 }
-
 perk_machines_compare_func(m1, m2) {
   return m1.allowed.size < m2.allowed.size;
 }
-
 _add_machine(machines, target, script_label, script_noteworthy, script_sound, script_string, model) {
   s = spawnStruct();
   s.target = target;
@@ -502,11 +476,9 @@ _add_machine(machines, target, script_label, script_noteworthy, script_sound, sc
   machines[machines.size] = s;
   return machines;
 }
-
 precache_player_model_override() {
   mptype\player_t5_zm_theater::precache();
 }
-
 give_player_model_override(entity_num) {
   if(isDefined(self.zm_random_char)) {
     entity_num = self.zm_random_char;
@@ -526,7 +498,6 @@ give_player_model_override(entity_num) {
       break;
   }
 }
-
 player_set_viewmodel_override(entity_num) {
   switch (self.entity_num) {
     case 0:
@@ -543,14 +514,12 @@ player_set_viewmodel_override(entity_num) {
       break;
   }
 }
-
 init_random_paths() {
   nodes = GetNodeArray("random_toggle_node", "script_noteworthy");
   for(i = 0; i < nodes.size; i++) {
     nodes[i] thread random_node_toggle(10, 20, 10, 20);
   }
 }
-
 random_node_toggle(minOn, maxOn, minOff, maxOff) {
   target = GetNode(self.target, "targetname");
   if(!isDefined(target)) {
@@ -563,7 +532,6 @@ random_node_toggle(minOn, maxOn, minOff, maxOff) {
     linknodes(self, target);
   }
 }
-
 temple_exit_level() {
   zombies = GetAiArray("axis");
   for(i = 0; i < zombies.size; i++) {
@@ -581,7 +549,6 @@ temple_exit_level() {
     }
   }
 }
-
 temple_delayed_exit() {
   self endon("death");
   while(1) {
@@ -595,7 +562,6 @@ temple_delayed_exit() {
   }
   self thread temple_find_exit_point();
 }
-
 temple_find_exit_point() {
   self endon("death");
   while(is_true(self.sliding)) {
@@ -607,8 +573,8 @@ temple_find_exit_point() {
   dist_far = 0;
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {
-    dist_zombie = distanceSquared(locs[i].origin, self.origin);
-    dist_player = distanceSquared(locs[i].origin, player.origin);
+    dist_zombie = DistanceSquared(locs[i].origin, self.origin);
+    dist_player = DistanceSquared(locs[i].origin, player.origin);
     if(dist_player > dist_far) {
       dest = i;
       dist_far = dist_player;
@@ -629,7 +595,6 @@ temple_find_exit_point() {
   }
   self thread maps\_zombiemode_spawner::find_flesh();
 }
-
 temple_offhand_weapon_overrride() {
   register_lethal_grenade_for_level("frag_grenade_zm");
   register_lethal_grenade_for_level("sticky_grenade_zm");
@@ -642,7 +607,6 @@ temple_offhand_weapon_overrride() {
   register_melee_weapon_for_level("bowie_knife_zm");
   level.zombie_melee_weapon_player_init = "knife_zm";
 }
-
 temple_shrink_ray_model_mapping_func() {
   level.shrink_models["c_viet_zombie_female"] = "c_viet_zombie_female_mini";
   level.shrink_models["c_viet_zombie_female_head"] = "c_viet_zombie_female_head_mini";
@@ -702,7 +666,6 @@ temple_shrink_ray_model_mapping_func() {
   level.shrink_models["c_viet_zombie_vc_grunt_g_upclean"] = "c_viet_zombie_vc_grunt_g_upclean_m";
   level.shrink_models["c_viet_zombie_vc_grunt_g_larmoff"] = "c_viet_zombie_vc_grunt_g_larmoff_m";
 }
-
 check_if_should_avoid_poi() {
   if(is_true(self.sliding)) {
     return true;
@@ -710,7 +673,6 @@ check_if_should_avoid_poi() {
     return false;
   }
 }
-
 zombiemode_cross_bow_fired_temple(grenade, weaponName, parent, player) {
   if(!isDefined(level.cross_bow_bolts)) {
     level.cross_bow_bolts = [];
@@ -718,7 +680,6 @@ zombiemode_cross_bow_fired_temple(grenade, weaponName, parent, player) {
   level.cross_bow_bolts[level.cross_bow_bolts.size] = grenade;
   level.cross_bow_bolts = array_removeUndefined(level.cross_bow_bolts);
 }
-
 zombie_temple_player_intersection_tracker_override(other_player) {
   if(is_true(self.riding_geyser)) {
     return true;
@@ -728,7 +689,6 @@ zombie_temple_player_intersection_tracker_override(other_player) {
   }
   return false;
 }
-
 zombie_temple_player_out_of_playable_area_monitor_callback() {
   if(is_true(self.on_slide)) {
     return false;
@@ -741,14 +701,12 @@ zombie_temple_player_out_of_playable_area_monitor_callback() {
   }
   return true;
 }
-
 temple_death_screen_cleanup() {
   self ClearClientFlag(level._CF_PLAYER_MAZE_FLOOR_RUMBLE);
   wait_network_frame();
   wait_network_frame();
   self SetBlur(0, 0.1);
 }
-
 temple_check_valid_spawn(revivee) {
   spawn_points = getstructarray("player_respawn_point", "targetname");
   zkeys = GetArrayKeys(level.zones);
@@ -770,7 +728,6 @@ temple_check_valid_spawn(revivee) {
   }
   return undefined;
 }
-
 temple_revive_solo_fx() {
   vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {

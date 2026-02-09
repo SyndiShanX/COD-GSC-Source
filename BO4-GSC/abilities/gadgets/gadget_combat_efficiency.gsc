@@ -147,7 +147,6 @@ set_gadget_combat_efficiency_status(weapon, status, time) {
   if(getdvarint(#"scr_cpower_debug_prints", 0) > 0) {
     self iprintlnbold("<dev string:x38>" + weapon.name + "<dev string:x54>" + status + timestr);
   }
-
 }
 
 function_f53ac86e() {

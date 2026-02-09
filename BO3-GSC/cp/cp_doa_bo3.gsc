@@ -47,7 +47,7 @@ function function_30fd2139() {
 }
 
 function main() {
-  setdvar("ui_allowDisplayContinue", 0);
+  setDvar("ui_allowDisplayContinue", 0);
   clientfield::register("world", "redinsExploder", 1, 2, "int");
   clientfield::register("world", "activateBanner", 1, 3, "int");
   clientfield::register("world", "pumpBannerBar", 1, 8, "float");
@@ -58,7 +58,7 @@ function main() {
   setsharedviewport(1);
   settopdowncamerayaw(0);
   function_30fd2139();
-  setdvar("bg_friendlyFireMode", 0);
+  setDvar("bg_friendlyFireMode", 0);
   level.var_7ed6996d = &init;
   level.var_fd84aa1f = &function_56600114;
   level thread namespace_693feb87::main();
@@ -82,7 +82,7 @@ function init() {
   level.doa.var_e6fd0e17 = &namespace_51bd792::function_65762352;
   rootmenu = "devgui_cmd \"Zombietron/Spawn/Enemy/";
   spawners = getspawnerarray();
-  setdvar("scr_spawn_name", "");
+  setDvar("scr_spawn_name", "");
   type = undefined;
   foreach(spawner in spawners) {
     if(isDefined(spawner.team) && spawner.team != "axis") {

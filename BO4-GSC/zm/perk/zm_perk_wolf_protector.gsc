@@ -108,7 +108,7 @@ take_perk(b_pause, str_perk, str_result, n_slot) {
 on_ai_killed(s_params) {
   player = s_params.eattacker;
 
-  if(isplayer(player) && player hasperk(#"specialty_wolf_protector") && player.var_6577c75d === 0 && player.var_815af0c3 === 0) {
+  if(isPlayer(player) && player hasperk(#"specialty_wolf_protector") && player.var_6577c75d === 0 && player.var_815af0c3 === 0) {
     if(!player.var_669304d0) {
       player.var_841cdb3 = 1;
       player thread function_ce74ad2e();
@@ -123,7 +123,7 @@ on_ai_killed(s_params) {
 on_ai_damaged(s_params) {
   player = s_params.eattacker;
 
-  if(isplayer(player) && player hasperk(#"specialty_wolf_protector") && isDefined(s_params.weapon) && player.var_6577c75d === 0 && player.var_815af0c3 === 0) {
+  if(isPlayer(player) && player hasperk(#"specialty_wolf_protector") && isDefined(s_params.weapon) && player.var_6577c75d === 0 && player.var_815af0c3 === 0) {
     var_c7364922 = s_params.idamage;
 
     if(s_params.idamage > self.health) {

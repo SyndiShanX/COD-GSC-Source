@@ -527,7 +527,6 @@ debugline(frompoint, topoint, color, durationframes) {
     line(frompoint, topoint, color);
     wait 0.05;
   }
-
 }
 
 plane_damage_monitor(isspyplane) {
@@ -540,7 +539,7 @@ plane_damage_monitor(isspyplane) {
   for(;;) {
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon);
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     friendlyfire = maps\mp\gametypes\_weaponobjects::friendlyfirecheck(self.owner, attacker);

@@ -4,7 +4,7 @@
 *********************************************/
 
 init() {
-  if(getdvar("scr_elevator_disabled") == "1") {
+  if(getDvar("scr_elevator_disabled") == "1") {
     return;
   }
 
@@ -95,7 +95,7 @@ elevator_fsm(var_0) {
         self.moveto_floor = get_initfloor();
         thread floor_override(var_2);
         waittill_or_timeout("floor_override", level.elevator_waittime);
-        if(self.floor_override && isDefined(self.overrider) && isplayer(self.overrider)) {
+        if(self.floor_override && isDefined(self.overrider) && isPlayer(self.overrider)) {
           get_floor(self.overrider);
         }
 
@@ -115,7 +115,7 @@ elevator_fsm(var_0) {
           break;
         }
 
-        if(isDefined(var_3) && isplayer(var_3) && isalive(var_3)) {
+        if(isDefined(var_3) && isPlayer(var_3) && isalive(var_3)) {
           var_4 = var_3 istouching(var_2);
           var_5 = isDefined(var_2.motion_trigger) && var_3 istouching(var_2.motion_trigger);
           var_6 = var_4 || var_5;
@@ -831,11 +831,11 @@ elevator_get_dvar_int(var_0, var_1) {
 }
 
 elevator_get_dvar(var_0, var_1) {
-  if(getdvar(var_0) != "") {
+  if(getDvar(var_0) != "") {
     return getdvarfloat(var_0);
   }
 
-  setdvar(var_0, var_1);
+  setDvar(var_0, var_1);
   return var_1;
 }
 

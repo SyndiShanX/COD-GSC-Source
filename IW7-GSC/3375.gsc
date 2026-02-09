@@ -71,7 +71,7 @@ func_2A37(var_0, var_1, var_2) {
       continue;
     }
 
-    if(isplayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3)) {
+    if(isPlayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3)) {
       var_3.padding_damage = 1;
       var_3 thread remove_padding_damage();
       var_4 = var_3 getstance();

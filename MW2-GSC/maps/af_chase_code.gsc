@@ -239,7 +239,6 @@ listen_landed() {
         zodiac_fx("player_zodiac_bumpbig");
       else
         zodiac_fx("zodiac_bumpbig");
-
     } else {
       self.event["bump"]["driver"] = true;
       self.event["bump"]["passenger"] = true;
@@ -455,7 +454,7 @@ bread_crumb_fail() {
 
   // Shepherd got away.
   level notify("stop_deadquote_for_gettingout_of_bounds");
-  SetDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_KEEP_UP");
+  setDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_KEEP_UP");
   if(level.start_point != "test_boat_current")
     missionFailedWrapper();
 }
@@ -701,7 +700,6 @@ destroy_fast(toy) {
     toy notify("damage", 160, level.player, self.origin, toy.origin, "MOD_PISTOL_BULLET", "", "");
     wait RandomFloatRange(.1, .2);
   }
-
 }
 
 raise_attacker_accuracy_on_nearby_boats() {
@@ -1373,7 +1371,6 @@ dump_on_command() {
     vehicle_dump();
     while(level.player ButtonPressed("BUTTON_B"))
       wait .05;
-
   }
 }
 
@@ -1538,14 +1535,12 @@ dialog_fire_volley_of_missiles_at_player(base_origin) {
       level.price thread generic_dialogue_queue("afchase_pri_rightright", .5);
     else
       level.price thread generic_dialogue_queue("afchase_pri_right", .5);
-
   } else {
     if(cointoss())
       level.price thread generic_dialogue_queue("afchase_pri_leftleft", .5);
     else
       level.price thread generic_dialogue_queue("afchase_pri_left", .5);
   }
-
 }
 
 fire_volley_of_missiles_at_player() {
@@ -1674,7 +1669,6 @@ flip_when_player_dies() {
   if(TEST_FLIP) {
     level.player DismountVehicle();
     level.player.drivingVehicle = level.players_boat;
-
   }
 
   wait .1;
@@ -2366,7 +2360,7 @@ trigger_open_area() {
   level.player endon("death");
   nagtime = GetTime() + 30000;
   while(1) {
-    SetDvar("ui_deadquote", "");
+    setDvar("ui_deadquote", "");
     level thread maps\_quotes::setDeadQuote();
 
     flag_clear("player_in_open");
@@ -2381,7 +2375,7 @@ trigger_open_area() {
       flag_set("player_in_open"); // done every frame to support overlap.
       level notify("new_quote_string");
       // Stay clear of open areas as much as possible!
-      SetDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
+      setDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
       wait .05;
     }
   }
@@ -2495,7 +2489,6 @@ explode_barrels_in_radius_think() {
     foreach(barrel in my_barrels)
     barrel notify("damage", 50, level.player, (0, 0, 0), barrel.origin, "MOD_EXPLOSIVE");
     wait .05;
-
   }
 }
 

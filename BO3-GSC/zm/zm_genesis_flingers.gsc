@@ -132,7 +132,7 @@ function function_e9d3c391(var_a89f74ed, v_fling, nd_start, var_173065cc) {
   if(isDefined(self.is_flung) && self.is_flung || (isDefined(self.var_8dbb72b1) && self.var_8dbb72b1[var_a89f74ed.script_string] === 1)) {
     return;
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread function_149a5187();
     self.b_invulnerable = self enableinvulnerability();
     self.var_fa1ecd39 = self.origin;

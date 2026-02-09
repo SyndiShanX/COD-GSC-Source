@@ -17,7 +17,7 @@ minefields() {
 minefield_think() {
   for(;;) {
     self waittill("trigger", var_0);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0 thread minefield_kill(self);
     }
   }

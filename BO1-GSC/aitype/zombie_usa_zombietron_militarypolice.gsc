@@ -19,11 +19,9 @@ main() {
   self setEngagementMaxDist(700.000000, 1000.000000);
   character\c_usa_militarypolice_zombietron::main();
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\c_usa_militarypolice_zombietron::precache();
   precacheItem("ak47_zm");

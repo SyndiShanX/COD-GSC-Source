@@ -81,7 +81,6 @@ teamscorelimitcheck(rulescorepercent, debug_count) {
     }
 
     debug_count = updatedebughud(debug_count, "<dev string:x5c>", int(minscorepercentageleft));
-
   }
 
   return true;
@@ -115,7 +114,6 @@ default_rules() {
         }
 
         debug_count++;
-
       }
     } else if(level.scorelimit) {
       highestscore = 0;
@@ -174,7 +172,6 @@ default_rules() {
     }
 
     debug_count = updatedebughud(debug_count, "<dev string:x113>", maxroundswon);
-
   }
 
   return true;

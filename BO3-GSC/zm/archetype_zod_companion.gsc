@@ -138,7 +138,7 @@ function zodcompanioncanjuke(entity) {
 }
 
 function zodcompanioncanpreemptivejuke(entity) {
-  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isPlayer(entity.enemy)) {
     return 0;
   }
   if(blackboard::getblackboardattribute(entity, "_stance") == "crouch") {
@@ -171,7 +171,7 @@ function zodcompanioncanpreemptivejuke(entity) {
 }
 
 function private _isvalidplayer(player) {
-  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isPlayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
   return true;
@@ -552,7 +552,7 @@ function zod_companion_revive_player(player) {
     self.var_57e708f6 = gettime() + 5000;
   }
   player notify("stop_revive_trigger");
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     player allowjump(1);
   }
   player.laststand = undefined;

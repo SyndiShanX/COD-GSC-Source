@@ -183,7 +183,7 @@ _settext(var_0) {
 }
 
 _clearalltextafterhudelem() {
-  if(getdvar("netconststrings_enabled") != "0") {
+  if(getDvar("netconststrings_enabled") != "0") {
     return;
   }
   if(level._clearalltextafterhudelem) {

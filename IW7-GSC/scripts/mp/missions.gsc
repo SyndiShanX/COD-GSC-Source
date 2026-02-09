@@ -183,7 +183,7 @@ func_D3D6() {
     return 0;
   }
 
-  if(!isplayer(self) || isai(self)) {
+  if(!isPlayer(self) || isai(self)) {
     return 0;
   }
 
@@ -1021,7 +1021,7 @@ func_B9BF() {
   self endon("disconnect");
   for(;;) {
     self waittill("survived_explosion", var_0);
-    if(isDefined(var_0) && isplayer(var_0) && self == var_0) {
+    if(isDefined(var_0) && isPlayer(var_0) && self == var_0) {
       continue;
     }
 
@@ -1135,7 +1135,7 @@ func_3C00(var_0) {
 }
 
 func_3C01(var_0) {
-  if(!isDefined(var_0.var_4F) || !isplayer(var_0.var_4F)) {
+  if(!isDefined(var_0.var_4F) || !isPlayer(var_0.var_4F)) {
     return;
   }
 
@@ -1333,7 +1333,7 @@ func_D9BC(var_0, var_1) {
 }
 
 func_3C09(var_0) {
-  if(!isDefined(var_0.var_4F) || !isplayer(var_0.var_4F)) {
+  if(!isDefined(var_0.var_4F) || !isPlayer(var_0.var_4F)) {
     return;
   }
 
@@ -1374,7 +1374,7 @@ func_D98F(var_0) {
 
 func_3BF6(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = self;
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(isexplosivedamagemod(var_3)) {
       if(var_2 < var_6.health) {
         if(isDefined(var_6)) {
@@ -1396,7 +1396,7 @@ func_3BF6(var_0, var_1, var_2, var_3, var_4, var_5) {
 func_3BF5(var_0, var_1) {
   var_2 = var_0.var_4F;
   var_3 = var_0.victim;
-  if(!isDefined(var_2) || !isplayer(var_2) || !isalive(var_2)) {
+  if(!isDefined(var_2) || !isPlayer(var_2) || !isalive(var_2)) {
     return;
   }
 
@@ -1411,7 +1411,7 @@ func_3BF5(var_0, var_1) {
 }
 
 func_3BFF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
 
@@ -1531,7 +1531,7 @@ func_3BFF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 func_3BFE(var_0, var_1) {
   var_2 = var_0.var_4F;
   var_3 = var_0.victim;
-  if(!isDefined(var_2) || !isplayer(var_2)) {
+  if(!isDefined(var_2) || !isPlayer(var_2)) {
     return;
   }
 
@@ -2786,7 +2786,7 @@ func_D378(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -2822,7 +2822,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_1.var_A686++;
   }
 
-  if(isplayer(var_1) && var_1 issprinting()) {
+  if(isPlayer(var_1) && var_1 issprinting()) {
     if(!isDefined(var_1.var_A687)) {
       var_1.var_A687 = 1;
     } else {
@@ -2856,7 +2856,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   var_9.victimonground = var_9.victim isonground();
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1.killsthislife[var_1.killsthislife.size] = var_9;
     if(isDefined(var_1.killsthislifeperweapon[var_9.sweapon])) {
       var_1.killsthislifeperweapon[var_9.sweapon]++;
@@ -3002,7 +3002,7 @@ killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) 
     return;
   }
 
-  if(isDefined(var_4) && isplayer(var_4) && !isDefined(var_1) || var_4 != var_1 && isDefined(var_7)) {
+  if(isDefined(var_4) && isPlayer(var_4) && !isDefined(var_1) || var_4 != var_1 && isDefined(var_7)) {
     var_9 = scripts\mp\utility::getweaponrootname(var_7);
     if(!isDefined(var_4.var_A6B3)) {
       var_4.var_A6B3 = [];
@@ -3262,7 +3262,7 @@ func_E75D(var_0) {
 
   for(var_3 = 0; var_3 < level.placement["all"].size; var_3++) {
     var_1.player = level.placement["all"][var_3];
-    var_1.var_13D8A = isDefined(var_0) && isplayer(var_0) && var_1.player == var_0;
+    var_1.var_13D8A = isDefined(var_0) && isPlayer(var_0) && var_1.player == var_0;
     var_1.var_CBFC = var_3;
     func_5914("roundEnd", var_1);
     var_1.player scripts\mp\contractchallenges::contractmatchend(var_1);
@@ -4707,8 +4707,8 @@ func_D3A8(var_0, var_1) {
     return;
   }
 
-  var_2 = scripts\engine\utility::ter_op(isplayer(var_1), var_1, var_1.owner);
-  if(!isDefined(var_2) || !isplayer(var_2)) {
+  var_2 = scripts\engine\utility::ter_op(isPlayer(var_1), var_1, var_1.owner);
+  if(!isDefined(var_2) || !isPlayer(var_2)) {
     return;
   }
 
@@ -4718,7 +4718,7 @@ func_D3A8(var_0, var_1) {
 }
 
 minedestroyed(var_0, var_1, var_2) {
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
 
@@ -4786,7 +4786,7 @@ func_66B8(var_0) {
 }
 
 resistedstun(var_0) {
-  if(!isDefined(var_0) || !isplayer(var_0)) {
+  if(!isDefined(var_0) || !isPlayer(var_0)) {
     return;
   }
 

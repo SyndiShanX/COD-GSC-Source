@@ -95,7 +95,7 @@ func_217F(var_0, var_1) {
 
     var_7 = gettime();
     if(var_7 != var_2) {
-      if(isplayer(var_5)) {
+      if(isPlayer(var_5)) {
         var_5 scripts\cp\cp_damage::updatedamagefeedback("hitalienarmor");
       }
 

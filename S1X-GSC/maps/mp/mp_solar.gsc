@@ -42,7 +42,7 @@ main() {
   level.droneLightSet = "mp_solar_drone";
 
   if(level.nextgen) {
-    SetDvar("sm_polygonOffsetPreset", 2);
+    setDvar("sm_polygonOffsetPreset", 2);
   }
 
   maps\mp\_water::init();

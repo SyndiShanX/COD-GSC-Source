@@ -72,7 +72,7 @@ function_eaba72c9() {
   while(true) {
     if(getdvarint(#"wz_delete_vehicles", 0) > 0) {
       function_40fc185b();
-      setdvar(#"wz_delete_vehicles", 0);
+      setDvar(#"wz_delete_vehicles", 0);
     }
 
     waitframe(1);
@@ -255,7 +255,7 @@ is_staircase_up(attackingplayer = undefined, jammer = undefined) {
   params.param1 = attackingplayer;
   params.param2 = jammer;
 
-  if(isplayer(attackingplayer)) {
+  if(isPlayer(attackingplayer)) {
     level callback::callback(#"vehicle_emped", {
       #attacker: attackingplayer, #vehicle: self
     });
@@ -538,7 +538,7 @@ function_e63726f6() {
 }
 
 function_3054737a(vehicle) {
-  if(game.state == "pregame" || !isplayer(self) || self isremotecontrolling() || isDefined(vehicle.session)) {
+  if(game.state == "pregame" || !isPlayer(self) || self isremotecontrolling() || isDefined(vehicle.session)) {
     return;
   }
 
@@ -582,7 +582,7 @@ on_vehicle_damage(params) {
     vehicle.session.var_5ba0df6e += params.idamage;
   }
 
-  if(isDefined(params) && isplayer(params.eattacker) && isDefined(params.idamage)) {
+  if(isDefined(params) && isPlayer(params.eattacker) && isDefined(params.idamage)) {
     params.eattacker stats::function_d40764f3(#"vehicle_damage", int(params.idamage));
     occupants = vehicle getvehoccupants();
 
@@ -673,7 +673,7 @@ on_player_damage(params) {
     }
   }
 
-  if(isDefined(attacker) && isDefined(attacker.usingvehicle) && attacker.usingvehicle && isplayer(attacker)) {
+  if(isDefined(attacker) && isDefined(attacker.usingvehicle) && attacker.usingvehicle && isPlayer(attacker)) {
     vehicle = attacker getvehicleoccupied();
 
     if(isDefined(vehicle)) {
@@ -784,7 +784,7 @@ function_c25f7d1(params) {
   occupants = self getvehoccupants();
 
   foreach(occupant in occupants) {
-    if(!isplayer(occupant)) {
+    if(!isPlayer(occupant)) {
       continue;
     }
 
@@ -796,7 +796,7 @@ function_c25f7d1(params) {
   occupants = self getvehoccupants();
 
   foreach(occupant in occupants) {
-    if(!isplayer(occupant)) {
+    if(!isPlayer(occupant)) {
       continue;
     }
 
@@ -832,7 +832,7 @@ function_adc0649a() {
 }
 
 event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -900,7 +900,7 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 }
 
 event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -957,7 +957,7 @@ event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 }
 
 event_handler[event_363c2131] function_3a4d53f8(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -969,7 +969,7 @@ event_handler[event_363c2131] function_3a4d53f8(eventstruct) {
 }
 
 event_handler[change_seat] function_2aa4e6cf(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -1044,7 +1044,7 @@ event_handler[change_seat] function_2aa4e6cf(eventstruct) {
 }
 
 event_handler[event_44d3f985] function_2d7f6e48(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -1091,7 +1091,7 @@ function_ef44d420(params) {
 
   if(isDefined(occupants)) {
     foreach(occupant in occupants) {
-      if(!isplayer(occupant)) {
+      if(!isPlayer(occupant)) {
         continue;
       }
 
@@ -1112,7 +1112,7 @@ function_ef44d420(params) {
 function_f6bb77f1(params) {
   driver = self getseatoccupant(0);
 
-  if(isDefined(driver) && isplayer(driver)) {
+  if(isDefined(driver) && isPlayer(driver)) {
     if(params.var_d8ceeba3) {
       self function_ee42a973(driver);
       return;
@@ -1724,7 +1724,7 @@ function_e8e41bbb() {
       if(!self.var_221879dc) {
         driver = self getseatoccupant(0);
 
-        if(isplayer(driver)) {
+        if(isPlayer(driver)) {
           self usevehicle(driver, 0);
         }
 
@@ -2087,7 +2087,7 @@ function_f46dd7b0() {
 
 function_56ee2902(state) {
   foreach(occupant in self getvehoccupants()) {
-    if(!isplayer(occupant)) {
+    if(!isPlayer(occupant)) {
       continue;
     }
 

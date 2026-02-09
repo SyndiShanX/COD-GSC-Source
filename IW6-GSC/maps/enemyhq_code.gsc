@@ -1406,7 +1406,7 @@ stream_waterfx(var_0, var_1) {
     }
     var_6 = "water_movement";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(distance(self getvelocity(), (0, 0, 0)) < 5)
         var_6 = "water_stop";
     } else if(isDefined(level._effect["water_" + self.a.movement]))
@@ -1463,7 +1463,7 @@ disable_control() {
   self notify("disable_dog_control");
   self.controlled_dog = undefined;
   self enableoffhandweapons();
-  setdvar("ui_dog_grenade", 0);
+  setDvar("ui_dog_grenade", 0);
 }
 
 set_dog_scripted_mode(var_0) {
@@ -1487,7 +1487,7 @@ handle_leave_team_fail(var_0, var_1) {
 
     while(common_scripts\utility::flag(var_0)) {
       if(var_3 >= var_2.size) {
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setDvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -1502,6 +1502,6 @@ handle_leave_team_fail(var_0, var_1) {
 handle_leave_team_too_far_fail(var_0) {
   level endon("stop_leave_fails");
   common_scripts\utility::flag_wait(var_0);
-  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setDvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }

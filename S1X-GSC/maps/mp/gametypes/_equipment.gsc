@@ -291,7 +291,6 @@ trophyActive(owner, radius, ignoreAmmo, trophyName) {
       }
     }
   }
-
 }
 
 trophySetMinDot(minDot, trophyModelForwardAngleOffset) {

@@ -90,10 +90,8 @@ function_b23e4b45() {
 
   if(!ispointonnavmesh) {
     recordsphere(self.origin, 3, (1, 0, 0), "<dev string:x38>");
-
   } else {
     recordsphere(self.origin, 3, (0, 1, 0), "<dev string:x38>");
-
   }
 
   if(!ispointonnavmesh) {
@@ -120,7 +118,6 @@ function_b23e4b45() {
           recordsphere(self.origin + (0, 0, 10), 3, (1, 0.5, 0), "<dev string:x38>");
 
           recordsphere(var_921106a1, 3, (1, 0.5, 0), "<dev string:x38>");
-
         }
       }
     }
@@ -361,7 +358,7 @@ function_d03a7fe8() {
 }
 
 function_c23ecb2(params) {
-  if(isplayer(self.owner)) {
+  if(isPlayer(self.owner)) {
     self notify(#"seeker_discharge");
     self.owner notify(#"seeker_discharge");
   }
@@ -373,7 +370,7 @@ function_c23ecb2(params) {
 }
 
 function_32e99568(params) {
-  if(isplayer(self.owner)) {
+  if(isPlayer(self.owner)) {
     self notify(#"seeker_discharge_stopped");
     self.owner notify(#"seeker_discharge_stopped");
   }
@@ -533,7 +530,6 @@ damage_armor_activati_(entity, tacpoints) {
       record3dtext("<dev string:x41>", tacpoint.origin + (0, 0, 40), (1, 1, 1), "<dev string:x38>");
 
       recordline(tacpoint.origin + (0, 0, 40), tacpoint.origin, (1, 1, 1), "<dev string:x38>");
-
     }
   }
 
@@ -596,9 +592,7 @@ function_3e16dec3(params) {
         }
       } else {
         if(isDefined(level.var_6cfbe5a)) {
-          [
-            [level.var_6cfbe5a]
-          ] - > waitinqueue(self);
+          [[level.var_6cfbe5a]] - > waitinqueue(self);
         }
 
         newpos = getclosestpointonnavmesh(self.origin, 1000, 10);
@@ -643,7 +637,7 @@ function_ab9a9770(target) {
 }
 
 function_9ba314a1(target) {
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     if(!isalive(target)) {
       return true;
     }
@@ -878,7 +872,6 @@ function_d55a99f2(var_4700521d = 500, var_53050fec = 1, var_30336a7c = 0) {
       record3dtext("<dev string:x6b>", self.origin - (0, 0, 20), (0, 0, 1));
 
       recordline(newpos, self.origin, (0, 0, 1), "<dev string:x38>");
-
     }
 
     self.origin = newpos;

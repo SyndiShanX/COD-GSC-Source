@@ -488,7 +488,6 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
     if(getdvarint(#"scr_draw_triggers", 0)) {
       level thread util::drawcylinder(var_21f4217c, 12, var_cbaaea69, undefined, "<dev string:x74>", (1, 0, 0), 0.9);
     }
-
   }
 
   if(radius >= 0.04) {
@@ -533,9 +532,7 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
 
       if(isDefined(level.playgadgetsuccess) && var_d0603aba) {
         if(isDefined(level.var_ac6052e9)) {
-          var_9194a036 = [
-            [level.var_ac6052e9]
-          ]("molotovSuccessLineCount", 0);
+          var_9194a036 = [[level.var_ac6052e9]]("molotovSuccessLineCount", 0);
         }
 
         if(affectedplayers >= (isDefined(var_9194a036) ? var_9194a036 : 3)) {
@@ -581,7 +578,6 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
   if(getdvarint(#"scr_draw_triggers", 0)) {
     level notify(#"hash_33d328e380ab0acc");
   }
-
 }
 
 stopfiresound() {
@@ -778,7 +774,7 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
     trace = bulletTrace(position, target getshootatpos(), 0, target);
 
     if(trace[# "fraction"] == 1) {
-      if(isplayer(target)) {
+      if(isPlayer(target)) {
         target thread damageinfirearea(sourcepos, killcament, trace, position, weapon, customsettings, owner);
 
         if(isDefined(owner) && util::function_fbce7263(target.team, owner.team)) {
@@ -794,7 +790,7 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
     }
   }
 
-  if(var_be45d685 && isDefined(target.var_84e41b20) && isplayer(target)) {
+  if(var_be45d685 && isDefined(target.var_84e41b20) && isPlayer(target)) {
     if(target.var_84e41b20.size == 0) {
       target.var_84e41b20 = undefined;
       target status_effect::function_408158ef(level.var_5d450296, level.var_e6a4f161);
@@ -907,7 +903,7 @@ hitpos(start, end, color) {
 }
 
 candofiredamage(killcament, victim, resetfiretime) {
-  if(isplayer(victim) && victim depthofplayerinwater() >= 1) {
+  if(isPlayer(victim) && victim depthofplayerinwater() >= 1) {
     return false;
   }
 
@@ -940,5 +936,4 @@ function_1493c734(origin, radius, color, alpha, time) {
 
     util::debug_sphere(origin, radius, color, alpha, time);
   }
-
 }

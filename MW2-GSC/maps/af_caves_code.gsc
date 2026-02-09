@@ -12,10 +12,7 @@
 #include maps\_vehicle;
 #using_animtree("generic_human");
 
-// -----------------------
-// --- PLAYER/AI STUFF ---
-// -----------------------
-teleport_to_node(node) {
+// ----------------------- // --- PLAYER/AI STUFF --- // ----------------------- teleport_to_node(node) {
   self teleport_to_origin(node.origin, node.angles);
 }
 
@@ -24,7 +21,7 @@ teleport_to_origin(origin, angles) {
     angles = (0, 0, 0);
   }
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     self ForceTeleport(groundpos(origin), angles);
     self SetGoalPos(self.origin);
   } else {
@@ -502,10 +499,7 @@ scripted_covercrouch_earlyout_notify(killNotify, ent) {
   self notify("scripted_shuffle_done");
 }
 
-// ----------------------------------
-// --- STEALTH NOSIGHT CLIP LOGIC ---
-// ----------------------------------
-clip_nosight_logic() {
+// ---------------------------------- // --- STEALTH NOSIGHT CLIP LOGIC --- // ---------------------------------- clip_nosight_logic() {
   if(isDefined(self.script_parameters)) {
     if(IsSubStr(self.script_parameters, "difficultymedium")) {
       if(level.gameskill > 1) {
@@ -543,10 +537,7 @@ clip_nosight_logic2() {
   self Delete();
 }
 
-// ---------------------
-// --- PLAYER RAPPEL ---
-// ---------------------
-delay_lerpViewAngleClamp() {
+// --------------------- // --- PLAYER RAPPEL --- // --------------------- delay_lerpViewAngleClamp() {
   wait(0.2);
   level.player LerpViewAngleClamp(1, 0.5, 0.5, 45, 45, 45, 45);
 }
@@ -773,7 +764,6 @@ af_caves_rappel_behavior() {
         if(!flag("rappel_end"))
           speaker playSound("scn_afcaves_rappel_stop_plr");
       }
-
     } else {
       animtime = player_rig GetAnimTime(far_anim);
       nobreak_speed += nobreak_rate;
@@ -1007,7 +997,7 @@ player_decent_death() {
 
   level notify("new_quote_string");
   // You did not brake in time.
-  SetDvar("ui_deadquote", &"AF_CAVES_FELL_TO_DEATH");
+  setDvar("ui_deadquote", &"AF_CAVES_FELL_TO_DEATH");
   blackout = create_client_overlay("black", 0, level.player);
   blackout FadeOverTime(1.5);
   blackout.alpha = 1;
@@ -1085,10 +1075,7 @@ liner() {
   }
 }
 
-// -----------------
-// --- STEAMROOM ---
-// -----------------
-steamroom_door_crack_open() {
+// ----------------- // --- STEAMROOM --- // ----------------- steamroom_door_crack_open() {
   door = level.steamroom_door;
 
   yawopen = -50;
@@ -1122,10 +1109,7 @@ steamroom_door_full_open() {
   door DisconnectPaths();
 }
 
-// -----------------------------
-// --- EXPLOSION EARTHQUAKES ---
-// -----------------------------
-setup_barrel_earthquake() {
+// ----------------------------- // --- EXPLOSION EARTHQUAKES --- // ----------------------------- setup_barrel_earthquake() {
   array_thread(getEntArray("explodable_barrel", "targetname"), ::barrel_earthquake_notify);
 
   level thread explosion_earthquake();
@@ -1208,10 +1192,7 @@ explosion_earthquake() {
   }
 }
 
-// ----------------------------------
-// --- CONTROL ROOM SWINGING LAMP ---
-// ----------------------------------
-hunted_hanging_light() {
+// ---------------------------------- // --- CONTROL ROOM SWINGING LAMP --- // ---------------------------------- hunted_hanging_light() {
   fx = getfx("gulag_cafe_spotlight");
   tag_origin = spawn_tag_origin();
 
@@ -1267,10 +1248,7 @@ lamp_rotates_yaw() {
   }
 }
 
-// --------------
-// --- MUSIC ---
-// --------------
-intro_music() {
+// -------------- // --- MUSIC --- // -------------- intro_music() {
   ender = "player_hooking_up";
   level endon(ender);
 
@@ -1326,10 +1304,7 @@ stealth_music() {
   MusicPlayWrapper("af_caves_stealth_busted");
 }
 
-// ----------------
-// --- TV STUFF ---
-// ----------------
-tv_cinematic_think() {
+// ---------------- // --- TV STUFF --- // ---------------- tv_cinematic_think() {
   // play cinematics on the TVs
   SetSavedDvar("cg_cinematicFullScreen", "0");
 
@@ -1377,10 +1352,7 @@ barracks_destroy_tv() // destroy it when stealth is broken or if the player pass
   light SetLightIntensity(0);
 }
 
-// ---------------------
-// --- CANYON CONVOY ---
-// ---------------------
-convoy_loop(vehicleTN, sFlagToStop, minWait, maxWait) {
+// --------------------- // --- CANYON CONVOY --- // --------------------- convoy_loop(vehicleTN, sFlagToStop, minWait, maxWait) {
   canyon_convoy = getEntArray(vehicleTN, "targetname");
   thread drone_vehicle_flood_start(canyon_convoy, "canyon_convoy", minWait, maxWait);
 
@@ -1411,10 +1383,7 @@ drone_vehicle_flood_stop(groupName) {
   level notify("stop_drone_vehicle_flood" + groupName);
 }
 
-// ------------
-// --- MISC ---
-// ------------
-get_global_fx(name) {
+// ------------ // --- MISC --- // ------------ get_global_fx(name) {
   fxName = level.global_fx[name];
   return level._effect[fxName];
 }

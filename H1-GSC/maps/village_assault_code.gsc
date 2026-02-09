@@ -44,8 +44,8 @@ precachelevelstuff() {
 }
 
 setleveldvars() {
-  if(getdvar("village_assault_debug_marker") == "")
-    setdvar("village_assault_debug_marker", "0");
+  if(getDvar("village_assault_debug_marker") == "")
+    setDvar("village_assault_debug_marker", "0");
 
   level.seekersusingcolors = 0;
   level.bmp_safety_distance = 262144;
@@ -117,7 +117,7 @@ scriptcalls() {
   thread roaming_bmp();
   thread timedautosaves();
 
-  if(getdvar("village_assault_disable_gameplay") == "1")
+  if(getDvar("village_assault_disable_gameplay") == "1")
     thread disable_gameplay();
 
   wait 6.5;
@@ -750,7 +750,7 @@ chopper_air_support() {
       wait 0.05;
     }
 
-    if(getdvar("player_sustainAmmo") == "0" && !common_scripts\utility::flag("ammo_cheat_for_chopper"))
+    if(getDvar("player_sustainAmmo") == "0" && !common_scripts\utility::flag("ammo_cheat_for_chopper"))
       var_1 = level.player getammocount("cobra_air_support");
     else {
       common_scripts\utility::flag_set("ammo_cheat_for_chopper");
@@ -874,7 +874,7 @@ chopper_air_support_friendlyfire() {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     if(isDefined(var_5) && !issubstr(tolower(var_5), "bullet")) {
@@ -905,7 +905,7 @@ chopper_air_support_call_chopper(var_0) {
     }
   }
 
-  if(getdvar("debug_chopper_air_support") == "1") {}
+  if(getDvar("debug_chopper_air_support") == "1") {}
 
   level.chopper = maps\_vehicle::spawn_vehicle_from_targetname("chopper");
   level.chopper endon("death");
@@ -975,7 +975,7 @@ should_delete_attack_coord_hint() {
 }
 
 findbestchopperwaypoint(var_0, var_1, var_2) {
-  if(getdvar("debug_chopper_air_support") == "1")
+  if(getDvar("debug_chopper_air_support") == "1")
     iprintln("chopper deciding which location to fly to");
 
   var_3 = level.player.origin;
@@ -1011,7 +1011,7 @@ findbestchopperwaypoint(var_0, var_1, var_2) {
       var_8 = var_13;
     }
 
-    if(getdvar("debug_chopper_air_support") == "1") {}
+    if(getDvar("debug_chopper_air_support") == "1") {}
   }
 
   return var_7;
@@ -1245,7 +1245,7 @@ vehicle_death_think() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(!isDefined(var_0)) {

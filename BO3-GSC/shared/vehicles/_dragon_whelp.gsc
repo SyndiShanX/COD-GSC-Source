@@ -67,7 +67,7 @@ function defaultrole() {
     self vehicle_ai::add_utility_connection("combat", "power_up", &should_go_for_power_up);
     self vehicle_ai::add_utility_connection("power_up", "combat");
   }
-  setdvar("", 0);
+  setDvar("", 0);
   self thread dragon_target_selection();
   vehicle_ai::startinitialstate("combat");
   self.starttime = gettime();
@@ -380,7 +380,7 @@ function state_death_update(params) {
   if(!isDefined(attacker)) {
     attacker = params.attacker;
   }
-  if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isplayer(attacker))) {
+  if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isPlayer(attacker))) {
     self.damage_on_death = 0;
     wait(0.05);
     attacker = params.inflictor;

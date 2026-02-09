@@ -294,7 +294,7 @@ dronehandledamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   if(self.health <= 0) {
     var_13 = var_1;
 
-    if(!isplayer(var_13)) {
+    if(!isPlayer(var_13)) {
       var_13 = level.players[0];
     }
 
@@ -302,7 +302,7 @@ dronehandledamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
       var_13 thread maps\mp\_matchdata::loggameevent("zm_tr_drone_kill", self.origin);
     }
 
-    if(isDefined(var_1) && isplayer(var_1) && !maps\mp\zombies\_util::is_true(self.skipplayervo)) {
+    if(isDefined(var_1) && isPlayer(var_1) && !maps\mp\zombies\_util::is_true(self.skipplayervo)) {
       var_1 thread playerdestroytreasuredrone();
     }
 

@@ -11,14 +11,12 @@ init() {
   precacheMenu("loadout_splitscreen");
   level thread onPlayerConnect();
 }
-
 onPlayerConnect() {
   for(;;) {
     level waittill("connecting", player);
     player thread onMenuResponse();
   }
 }
-
 onMenuResponse() {
   for(;;) {
     self waittill("menuresponse", menu, response);

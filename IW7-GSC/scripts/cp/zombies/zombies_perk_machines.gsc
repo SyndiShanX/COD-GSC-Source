@@ -113,7 +113,7 @@ init_deadeye_machines_func() {
 
 init_change_machines_func() {
   level.change_chew_explosion_func = ::change_chew_explosion;
-  var_0 = getdvar("ui_mapname");
+  var_0 = getDvar("ui_mapname");
   if(var_0 == "cp_town" || var_0 == "cp_final") {
     init_perk_machines_func("perk_machine_change");
   }
@@ -123,7 +123,7 @@ delay_rotate_func(var_0) {
   wait(var_0);
   var_1 = getent("change_chews_lower", "targetname");
   if(isDefined(var_1)) {
-    var_2 = getdvar("ui_mapname");
+    var_2 = getDvar("ui_mapname");
     if(var_2 == "cp_town") {
       var_1.angles = (0, 276, 0);
       level thread rotate_loop_by_targetname("change_chews_upper", (0, 276, 0), (348, 276, 0));
@@ -1494,7 +1494,7 @@ zap_over_time(var_0, var_1) {
 
 should_mutilate_perk_check(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   if(var_6 == "iw7_bluebolts_zm") {
-    if(isDefined(var_2) && isplayer(var_2) && var_2 scripts\cp\utility::has_zombie_perk("perk_machine_zap")) {
+    if(isDefined(var_2) && isPlayer(var_2) && var_2 scripts\cp\utility::has_zombie_perk("perk_machine_zap")) {
       return 0;
     }
   }
@@ -1578,7 +1578,7 @@ burn_loop(var_0) {
   self endon("stop_burn_loop");
   for(;;) {
     self waittill("trigger", var_1);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       continue;
     }
 

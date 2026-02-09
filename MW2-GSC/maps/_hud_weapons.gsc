@@ -211,7 +211,6 @@ updateBulletHudThink() {
 
     wait(0.05);
   }
-
 }
 
 setHudWeaponType(type) {

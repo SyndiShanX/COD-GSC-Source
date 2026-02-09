@@ -11,7 +11,7 @@ GRND_ZONE_TOUCH_RADIUS = 300;
 GRND_ZONE_DROP_RADIUS = 50;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -185,7 +185,7 @@ initFirstZone() {
 initZones() {
   level.grnd_zones = [];
 
-  if(GetDvar("mapname") == "mp_strikezone") {
+  if(getDvar("mapname") == "mp_strikezone") {
     if(isDefined(level.teleport_zone_current) && level.teleport_zone_current == "start") {
       for(i = 0; i < level.grnd_dropZones1.size; i++) {
         dropZone = level.grnd_dropZones1[i].origin;
@@ -659,7 +659,7 @@ createZones() {
 
   chestSpawns = getstructarray("sotf_chest_spawnpoint", "targetname");
 
-  if(GetDvar("mapname") == "mp_strikezone") {
+  if(getDvar("mapname") == "mp_strikezone") {
     zone2grnd_zones = [];
     zone1grnd_zones = [];
 

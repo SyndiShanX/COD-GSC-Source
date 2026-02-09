@@ -207,7 +207,6 @@ class class_dafbfd8e {
     var_3f29a509 ghost();
     var_3f29a509 notsolid();
   }
-
 }
 
 #namespace bonuszm;

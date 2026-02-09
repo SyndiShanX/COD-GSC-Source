@@ -317,7 +317,7 @@ function_70d8a7cb() {
     s_result = self waittill(#"damage");
     a_players = util::get_active_players();
 
-    if(isDefined(s_result.attacker) && isplayer(s_result.attacker) && s_result.attacker zm_utility::function_aa45670f(s_result.weapon, 0)) {
+    if(isDefined(s_result.attacker) && isPlayer(s_result.attacker) && s_result.attacker zm_utility::function_aa45670f(s_result.weapon, 0)) {
       for(i = 0; i < a_players.size; i++) {
         if(a_players[i] === s_result.attacker) {
           self playSound(#"hash_7651f08f562fc850");
@@ -762,7 +762,7 @@ function_5164d716() {
     s_notify = var_e0cc1e20 waittill(#"damage");
     var_e0cc1e20.health += s_notify.amount;
 
-    if(isDefined(s_notify.attacker) && isplayer(s_notify.attacker) && mansion_util::is_shield(s_notify.weapon) && s_notify.mod === "MOD_MELEE" && isDefined(level.n_turns) && level.n_turns > 15) {
+    if(isDefined(s_notify.attacker) && isPlayer(s_notify.attacker) && mansion_util::is_shield(s_notify.weapon) && s_notify.mod === "MOD_MELEE" && isDefined(level.n_turns) && level.n_turns > 15) {
       mdl_wheel = function_b1b02a54();
       mdl_wheel scene::play(#"p8_fxanim_zm_man_dome_crank_wheel_bundle", mdl_wheel);
       mdl_door_right = getent("mdl_telescope_observatory_door_right", "targetname");
@@ -813,7 +813,7 @@ function_3f64b455() {
       s_result = mdl_wheel waittill(#"trigger_activated");
     }
 
-    if(isplayer(s_result.e_who)) {
+    if(isPlayer(s_result.e_who)) {
       if(s_result.e_who function_39b9ecb(mdl_wheel.s_unitrigger)) {
         level.var_779d8f63--;
 
@@ -1024,7 +1024,7 @@ function_bfefc7aa() {
       continue;
     }
 
-    if(isplayer(s_notify.attacker)) {
+    if(isPlayer(s_notify.attacker)) {
       level.var_5c086e54[level.var_5c086e54.size] = level.var_779d8f63;
       mdl_base showpart(level.var_21d0f5ee[level.var_779d8f63 - 1] + "_0" + level.var_5c086e54.size);
       mdl_wheel hidepart("tag_wheel_" + level.var_21d0f5ee[level.var_779d8f63 - 1]);
@@ -1145,7 +1145,7 @@ function_d5bfc8e8() {
     e_player = s_result.inflictor;
     var_989dd232 = 0;
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       var_989dd232 = isDefined(e_player.var_4ceff143) && e_player.var_4ceff143 && s_result.mod === "MOD_MELEE" && mansion_util::is_shield(s_result.weapon);
     }
 
@@ -1183,7 +1183,7 @@ function_3d93d103() {
   self playSound(#"hash_613cef4818d77aca");
   wait 1.6;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.var_12c0dec1 = undefined;
   }
 }

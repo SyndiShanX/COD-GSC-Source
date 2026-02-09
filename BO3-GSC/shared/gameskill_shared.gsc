@@ -100,7 +100,7 @@ function pain_protection_check() {
   if(!isalive(self.enemy)) {
     return false;
   }
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return false;
   }
   if(!isalive(level.painai) || level.painai.a.script != "pain") {
@@ -116,7 +116,7 @@ function pain_protection_check() {
 }
 
 function playerhealthdebug() {
-  setdvar("", "");
+  setDvar("", "");
   waittillframeend();
   while(true) {
     while(true) {
@@ -251,7 +251,7 @@ function playerhurtcheck() {
   self.hurtagain = 0;
   for(;;) {
     self waittill("damage", amount, attacker, dir, point, mod);
-    if(isDefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker.team == self.team) {
       continue;
     }
     self.hurtagain = 1;
@@ -401,7 +401,7 @@ function reducetakecoverwarnings() {
 
 function debugtakecoverwarnings() {
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
     iprintln("", getlocalprofileint("") - 3);
@@ -683,7 +683,7 @@ function settakecoverwarnings() {
 }
 
 function increment_take_cover_warnings_on_death() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   level notify("new_cover_on_death_thread");
@@ -716,30 +716,30 @@ function update_skill_level(skill_override) {
       if(!isDefined(level.gameskill)) {
         level.gameskill = 0;
       }
-      setdvar("saved_gameskill", level.gameskill);
+      setDvar("saved_gameskill", level.gameskill);
       switch (level.gameskill) {
         case 0: {
-          setdvar("currentDifficulty", "easy");
+          setDvar("currentDifficulty", "easy");
           level.currentdifficulty = "easy";
           break;
         }
         case 1: {
-          setdvar("currentDifficulty", "normal");
+          setDvar("currentDifficulty", "normal");
           level.currentdifficulty = "normal";
           break;
         }
         case 2: {
-          setdvar("currentDifficulty", "hardened");
+          setDvar("currentDifficulty", "hardened");
           level.currentdifficulty = "hardened";
           break;
         }
         case 3: {
-          setdvar("currentDifficulty", "veteran");
+          setDvar("currentDifficulty", "veteran");
           level.currentdifficulty = "veteran";
           break;
         }
         case 4: {
-          setdvar("currentDifficulty", "realistic");
+          setDvar("currentDifficulty", "realistic");
           level.currentdifficulty = "realistic";
           break;
         }
@@ -1370,7 +1370,7 @@ function accuracy_buildup_before_fire(ai) {
   }
   while(true) {
     if(isDefined(ai.enemy)) {
-      if(isplayer(ai.enemy)) {
+      if(isPlayer(ai.enemy)) {
         if(!isDefined(ai.lastenemyshotat)) {
           ai.lastenemyshotat = ai.enemy;
           ai.buildupaccuracymodifier = 0;

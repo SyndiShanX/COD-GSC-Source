@@ -132,7 +132,7 @@ function_fb74fc5f() {
     s_waitresult = level waittill(#"hash_3042a9bf2f57ea0a");
     v_origin = s_waitresult.var_814c9389;
 
-    if(isplayer(s_waitresult.attacker)) {
+    if(isPlayer(s_waitresult.attacker)) {
       str_player_zone = s_waitresult.attacker.zone_name;
     }
 
@@ -293,7 +293,7 @@ function_51817689() {
     e_trap = s_waitresult.e_trap;
     e_player = e_trap.activated_by_player;
 
-    if(isplayer(e_player) && isactor(ai_victim)) {
+    if(isPlayer(e_player) && isactor(ai_victim)) {
       str_archetype = ai_victim.archetype;
       var_1e137cec = ai_victim.subarchetype;
 
@@ -376,7 +376,7 @@ function_5ca13573() {
 }
 
 function_4670ef4d() {
-  if(!(isDefined(isplayer(self.attacker)) && isplayer(self.attacker))) {
+  if(!(isDefined(isPlayer(self.attacker)) && isPlayer(self.attacker))) {
     return;
   }
 
@@ -412,7 +412,7 @@ function_3ce07a2b() {
     s_waitresult = self waittill(#"damage");
     e_attacker = s_waitresult.attacker;
 
-    if(!isplayer(e_attacker)) {
+    if(!isPlayer(e_attacker)) {
       continue;
     }
 

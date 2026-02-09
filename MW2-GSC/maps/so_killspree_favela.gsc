@@ -164,10 +164,8 @@ so_favela_init() {
   //array_thread( getEntArray( "curtain_pulldown", "script_noteworthy" ), ::curtain_pulldown );
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Initializations
-// ---------------------------------------------------------------------------------
-start_so_favela() {
+// --------------------------------------------------------------------------------- //	Challenge Initializations
+// --------------------------------------------------------------------------------- start_so_favela() {
   so_favela_init();
 
   thread enable_escape_warning();
@@ -298,7 +296,6 @@ enemy_remove_when_max(delay) {
 
       level thread AI_delete_when_out_of_sight(guys, 512);
     }
-
   }
 }
 

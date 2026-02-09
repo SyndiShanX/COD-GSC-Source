@@ -15,14 +15,13 @@ precache_assets() {
   level._effect["fx_slide_splash_3"] = LoadFX("maps/pow/fx_pow_cave_water_splash");
   level._effect["fx_slide_water_fall"] = LoadFX("maps/pow/fx_pow_cave_water_fall");
 }
-
 waterslide_main() {
   flag_init("waterslide_open");
   zombie_cave_slide_init();
   if(getDvar("waterslide_debug") == "") {
-    SetDvar("waterslide_debug", "0");
+    setDvar("waterslide_debug", "0");
   }
-  messageTrigger = getEnt("waterslide_message_trigger", "targetname");
+  messageTrigger = GetEnt("waterslide_message_trigger", "targetname");
   if(isDefined(messageTrigger)) {
     messageTrigger setcursorhint("HINT_NOICON");
   }
@@ -48,7 +47,6 @@ waterslide_main() {
   }
   level notify("slide_open");
 }
-
 zombie_cave_slide_init() {
   flag_init("slide_anim_change_allowed");
   level.zombies_slide_anim_change = [];
@@ -60,9 +58,8 @@ zombie_cave_slide_init() {
   level thread slide_player_exit_watch();
   level thread zombie_caveslide_anim_failsafe();
 }
-
 zombie_caveslide_anim_failsafe() {
-  trig = getEnt("zombie_cave_slide_failsafe", "targetname");
+  trig = getent("zombie_cave_slide_failsafe", "targetname");
   if(isDefined(trig)) {
     while(1) {
       trig waittill("trigger", who);
@@ -73,7 +70,6 @@ zombie_caveslide_anim_failsafe() {
     }
   }
 }
-
 slide_trig_watch() {
   slide_node = GetNode(self.target, "targetname");
   if(!isDefined(slide_node)) {
@@ -95,8 +91,8 @@ slide_trig_watch() {
     }
   }
 }
-
 #using_animtree("generic_human");
+
 cave_slide_anim_init() {
   level.scr_anim["zombie"]["fast_pull_4"] = % ai_zombie_caveslide_traverse;
   level.scr_anim["napalm_zombie"]["fast_pull_4"] = % ai_zombie_caveslide_traverse;
@@ -114,7 +110,6 @@ cave_slide_anim_init() {
   level.scr_anim["sonic_zombie"]["attracted_death_3"] = % ai_zombie_blackhole_death_preburst_v3;
   level.scr_anim["sonic_zombie"]["attracted_death_4"] = % ai_zombie_blackhole_death_preburst_v4;
 }
-
 zombie_sliding(slide_node) {
   self endon("death");
   level endon("intermission");
@@ -145,15 +140,13 @@ zombie_sliding(slide_node) {
   self.ignoreall = false;
   self thread maps\_zombiemode_spawner::find_flesh();
 }
-
 play_zombie_slide_looper() {
   self endon("death");
   level endon("intermission");
   self playLoopSound("fly_dtp_slide_loop_npc_snow", .5);
   self waittill_any("zombie_end_traverse", "death");
-  self stopLoopSound(.5);
+  self StopLoopSound(.5);
 }
-
 set_zombie_slide_anim() {
   self endon("death");
   rand = RandomIntRange(1, 4);
@@ -178,7 +171,6 @@ set_zombie_slide_anim() {
     self.needs_run_update = true;
   }
 }
-
 reset_zombie_anim() {
   self endon("death");
   level.zombies_slide_anim_change = add_to_array(level.zombies_slide_anim_change, self, false);
@@ -205,12 +197,12 @@ reset_zombie_anim() {
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl5", false);
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl_hand_1", false);
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl_hand_2", false);
-    rand_walk_anim = randomInt(legless_walk_anims.size);
+    rand_walk_anim = RandomInt(legless_walk_anims.size);
     legless_sprint_anims = [];
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl2", false);
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl3", false);
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl_sprint1", false);
-    rand_sprint_anim = randomInt(legless_sprint_anims.size);
+    rand_sprint_anim = RandomInt(legless_sprint_anims.size);
     switch (self.zombie_move_speed) {
       case "walk":
         theanim = legless_walk_anims[rand_walk_anim];
@@ -240,7 +232,6 @@ reset_zombie_anim() {
     self thread reset_zombie_anim();
   }
 }
-
 death_while_sliding() {
   self endon("death");
   if(self.animname == "sonic_zombie" || self.animname == "napalm_zombie") {
@@ -253,7 +244,6 @@ death_while_sliding() {
   }
   return death_animation;
 }
-
 gibbed_while_sliding() {
   self endon("death");
   if(self.animname == "sonic_zombie" || self.animname == "napalm_zombie") {
@@ -270,7 +260,6 @@ gibbed_while_sliding() {
     wait(0.1);
   }
 }
-
 slide_anim_change_throttle() {
   if(!isDefined(level.zombies_slide_anim_change)) {
     level.zombies_slide_anim_change = [];
@@ -284,7 +273,8 @@ slide_anim_change_throttle() {
     }
     array_zombies_allowed_to_switch = level.zombies_slide_anim_change;
     for(i = 0; i < array_zombies_allowed_to_switch.size; i++) {
-      if(isDefined(array_zombies_allowed_to_switch[i]) && IsAlive(array_zombies_allowed_to_switch[i])) {
+      if(isDefined(array_zombies_allowed_to_switch[i]) &&
+        IsAlive(array_zombies_allowed_to_switch[i])) {
         array_zombies_allowed_to_switch[i] ent_flag_set("slide_anim_change");
       }
       if(i >= int_max_num_zombies_per_frame) {
@@ -304,10 +294,9 @@ slide_anim_change_throttle() {
     wait(0.1);
   }
 }
-
 slide_player_enter_watch() {
   level endon("fake_death");
-  trig = getEnt("cave_slide_force_crouch", "targetname");
+  trig = GetEnt("cave_slide_force_crouch", "targetname");
   while(true) {
     trig waittill("trigger", who);
     if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && !is_true(who.on_slide)) {
@@ -317,9 +306,8 @@ slide_player_enter_watch() {
     }
   }
 }
-
 slide_player_exit_watch() {
-  trig = getEnt("cave_slide_force_stand", "targetname");
+  trig = GetEnt("cave_slide_force_stand", "targetname");
   while(true) {
     trig waittill("trigger", who);
     if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && is_true(who.on_slide)) {
@@ -328,7 +316,6 @@ slide_player_exit_watch() {
     }
   }
 }
-
 player_slide_watch() {
   self thread on_player_enter_slide();
   self thread player_slide_fake_death_watch();
@@ -337,7 +324,6 @@ player_slide_watch() {
     self thread on_player_exit_slide();
   }
 }
-
 player_slide_fake_death_watch() {
   self endon("death");
   self endon("disconnect");
@@ -346,7 +332,6 @@ player_slide_fake_death_watch() {
   self allowstand(true);
   self AllowProne(true);
 }
-
 on_player_enter_slide() {
   self endon("death");
   self endon("disconnect");
@@ -362,7 +347,6 @@ on_player_enter_slide() {
   self AllowProne(false);
   self SetStance("crouch");
 }
-
 on_player_exit_slide() {
   self endon("death");
   self endon("disconnect");
@@ -373,17 +357,14 @@ on_player_exit_slide() {
   }
   self thread stop_loop_sound_on_entity("evt_slideloop");
 }
-
 zombie_slide_watch() {
   self thread on_zombie_enter_slide();
   self waittill_any("water_slide_exit", "death");
   self thread on_zombie_exit_slide();
 }
-
 on_zombie_enter_slide() {
   self thread play_loop_sound_on_entity("evt_slideloop");
 }
-
 on_zombie_exit_slide() {
   self thread stop_loop_sound_on_entity("evt_slideloop");
 }

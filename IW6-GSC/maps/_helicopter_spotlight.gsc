@@ -57,7 +57,7 @@ heli_target_dialogue() {
       if(!isDefined(var_0) || var_0 != self.spottarget) {
         var_0 = self.spottarget;
 
-        if(isDefined(var_0) && isplayer(var_0))
+        if(isDefined(var_0) && isPlayer(var_0))
           return;
       }
     }

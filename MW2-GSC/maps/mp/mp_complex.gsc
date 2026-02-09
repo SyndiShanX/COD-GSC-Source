@@ -25,5 +25,5 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("compassmaxrange", "1500");
+  setDvar("compassmaxrange", "1500");
 }

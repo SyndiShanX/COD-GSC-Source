@@ -145,7 +145,7 @@ function private function_2de61c3f(slot, weapon) {
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_mrpukey");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", fired);

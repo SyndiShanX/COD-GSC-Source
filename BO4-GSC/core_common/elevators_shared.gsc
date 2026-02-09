@@ -664,7 +664,6 @@ class class_727456f3 {
     var_de7ae77 = isDefined(var_1ec3151c.var_a8a3e2f1) ? var_1ec3151c.var_a8a3e2f1 : 1;
     var_7c4021f5 = [];
   }
-
 }
 
 autoexec __init__system__() {
@@ -767,18 +766,14 @@ function_a7d817a6() {
 
       foreach(s_gameobject in var_af8a8a63) {
         if(isDefined(s_gameobject.target) && s_gameobject.target == s_instance.targetname) {
-          [
-            [s_instance.var_1313d6ba]
-          ] - > function_8986542b(s_gameobject, 0, 1);
+          [[s_instance.var_1313d6ba]] - > function_8986542b(s_gameobject, 0, 1);
           break;
         }
       }
 
       foreach(s_gameobject in var_d3c75026) {
         if(isDefined(s_gameobject.target) && s_gameobject.target == s_instance.targetname) {
-          [
-            [s_instance.var_1313d6ba]
-          ] - > function_8986542b(s_gameobject, 1, 0);
+          [[s_instance.var_1313d6ba]] - > function_8986542b(s_gameobject, 1, 0);
         }
       }
     }

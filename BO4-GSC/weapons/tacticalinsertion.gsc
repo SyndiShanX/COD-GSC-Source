@@ -237,7 +237,7 @@ spawntacticalinsertion() {
     attacker = waitresult.attacker;
     weapon = waitresult.weapon;
 
-    if(level.teambased && (!isDefined(attacker) || !isplayer(attacker) || attacker.team == self.team) && attacker != self) {
+    if(level.teambased && (!isDefined(attacker) || !isPlayer(attacker) || attacker.team == self.team) && attacker != self) {
       continue;
     }
 
@@ -290,7 +290,6 @@ cancel_button_think() {
   if(isDefined(text)) {
     text destroy();
   }
-
 }
 
 canceltackinsertionbutton() {
@@ -373,7 +372,7 @@ tacticalinsertiondestroyedbytrophysystem(attacker, trophysystem) {
 }
 
 event_handler[grenade_fire] function_73648468(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

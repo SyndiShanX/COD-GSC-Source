@@ -57,7 +57,6 @@ detroitPaladinOverrides() {
     level.orbitalsupportoverrides.topArc = -35;
     level.orbitalsupportoverrides.bottomArc = 55;
   }
-
 }
 detroitCustomKillstreakFunc() {
   level thread maps\mp\killstreaks\streak_mp_detroit::init();

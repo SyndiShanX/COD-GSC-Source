@@ -55,7 +55,6 @@ on_player_connect() {
   if(self getentnum() < 10) {
     self thread abilities_devgui_player_connect();
   }
-
 }
 
 on_player_spawned() {
@@ -101,7 +100,7 @@ on_player_disconnect() {
 }
 
 is_using_any_gadget() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return false;
   }
 
@@ -995,7 +994,6 @@ tutorial_hints(slot, weapon, var_8430d11b, var_6c65cb8d, var_eadf8864, var_be7c2
       self thread[[var_6c65cb8d]](var_8430d11b, 0, "hide_gadget_equip_hint", 7);
 
       self function_374c4352(var_8430d11b);
-
     }
 
     if(!self tutorial_timer(weapon, "recentlyReadyVoice") && isDefined(var_eadf8864)) {
@@ -1003,7 +1001,6 @@ tutorial_hints(slot, weapon, var_8430d11b, var_6c65cb8d, var_eadf8864, var_be7c2
       voiceevent(var_eadf8864, self, undefined);
 
       self function_374c4352(var_eadf8864);
-
     }
 
     wait 5;
@@ -1047,9 +1044,9 @@ abilities_print(str) {
 }
 
 abilities_devgui_init() {
-  setdvar(#"scr_abilities_devgui_cmd", "<dev string:x64>");
-  setdvar(#"scr_abilities_devgui_arg", "<dev string:x64>");
-  setdvar(#"scr_abilities_devgui_player", 0);
+  setDvar(#"scr_abilities_devgui_cmd", "<dev string:x64>");
+  setDvar(#"scr_abilities_devgui_arg", "<dev string:x64>");
+  setDvar(#"scr_abilities_devgui_player", 0);
 
   if(isdedicated()) {
     return;
@@ -1395,7 +1392,7 @@ abilities_devgui_player_disconnect() {
 }
 
 abilities_devgui_think() {
-  setdvar(#"hash_67d528f29bfc7c97", "<dev string:x64>");
+  setDvar(#"hash_67d528f29bfc7c97", "<dev string:x64>");
 
   for(;;) {
     cmd = "<dev string:x1e1>";
@@ -1442,9 +1439,9 @@ abilities_devgui_think() {
         break;
     }
 
-    setdvar(#"hash_67d528f29bfc7c97", "<dev string:x64>");
-    setdvar(#"scr_abilities_devgui_cmd", "<dev string:x64>");
-    setdvar(#"scr_abilities_devgui_player", "<dev string:x2f6>");
+    setDvar(#"hash_67d528f29bfc7c97", "<dev string:x64>");
+    setDvar(#"scr_abilities_devgui_cmd", "<dev string:x64>");
+    setDvar(#"scr_abilities_devgui_player", "<dev string:x2f6>");
     wait 0.5;
   }
 }

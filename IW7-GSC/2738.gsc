@@ -303,7 +303,7 @@ gesture_resetcoinflipgesture() {
 }
 
 getbodymodel() {
-  if(!isplayer(self) || isai(self)) {
+  if(!isPlayer(self) || isai(self)) {
     return undefined;
   }
 

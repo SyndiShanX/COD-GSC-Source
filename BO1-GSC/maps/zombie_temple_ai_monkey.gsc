@@ -7,6 +7,7 @@
 #include maps\_utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 init() {
   maps\_zombiemode_ai_monkey::init_monkey_zombie_anims();
   precache_ambient_monkey_anims();
@@ -25,23 +26,20 @@ init() {
   level.stealer_monkey_spawns = GetStructArray("stealer_monkey_spawn", "targetname");
   level.stealer_monkey_exits = GetStructArray("stealer_monkey_exit", "targetname");
   if(getDvar("monkey_steal_debug") == "") {
-    SetDvar("monkey_steal_debug", "0");
+    setDvar("monkey_steal_debug", "0");
   }
   level thread _setup_zone_info();
   level thread _watch_for_powerups();
   monkey_ambient_init();
   level thread monkey_grenade_watcher_temple();
 }
-
 monkey_grenade_watcher_temple() {
   wait_for_all_players();
   level thread maps\_zombiemode_ai_monkey::monkey_grenade_watcher();
 }
-
 monkey_templeThink(spawner) {
   self thread _monkey_TempleThinkInternal(spawner);
 }
-
 monkey_GetMonkeySpawnLocation(minDist, checkVisible, skipStartArea) {
   visitedZones = [];
   needToVisit = [];
@@ -78,7 +76,6 @@ monkey_GetMonkeySpawnLocation(minDist, checkVisible, skipStartArea) {
   }
   return undefined;
 }
-
 barrier_test(zone, ent, minDist, checkVisible) {
   if(!zone.is_active) {
     return true;
@@ -104,7 +101,6 @@ barrier_test(zone, ent, minDist, checkVisible) {
   }
   return true;
 }
-
 ent_GatherValidBarriers(zoneOverride, ignoreOccupied, ignoreVisible) {
   valid_barriers = [];
   monkeyZone = zoneOverride;
@@ -134,7 +130,6 @@ ent_GatherValidBarriers(zoneOverride, ignoreOccupied, ignoreVisible) {
   }
   return valid_barriers;
 }
-
 printText(text, red) {
   level endon("stopPrints");
   if(!isDefined(level.printOffsets)) {
@@ -156,12 +151,10 @@ printText(text, red) {
     wait .05;
   }
 }
-
 printTextStop() {
   level notify("stopPrints");
   level.printOffsets = [];
 }
-
 _get_non_visible_barriers(barriers) {
   returnBarriers = [];
   if(isDefined(barriers)) {
@@ -183,7 +176,6 @@ _get_non_visible_barriers(barriers) {
   }
   return returnBarriers;
 }
-
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);
@@ -202,14 +194,12 @@ player_can_see_me(player) {
   playerCanSeeMe = (angleFromCenter <= (playerFOV * 0.5 * (1 - banzaiVsPlayerFOVBuffer)));
   return playerCanSeeMe;
 }
-
 getBarrierAttackLocation(barrier) {
   forward = anglesToForward(barrier.angles);
   attack_location = barrier.origin + forward * 80.0;
   attack_location = (attack_location[0], attack_location[1], attack_location[2] - 30.0);
   return attack_location;
 }
-
 _ent_GetZone() {
   zoneName = self _ent_GetZoneName();
   if(isDefined(zoneName)) {
@@ -217,7 +207,6 @@ _ent_GetZone() {
   }
   return undefined;
 }
-
 _ent_GetZoneName() {
   zkeys = GetArrayKeys(level.zones);
   for(z = 0; z < zkeys.size; z++) {
@@ -232,7 +221,6 @@ _ent_GetZoneName() {
   }
   return undefined;
 }
-
 _setup_zone_info() {
   wait(1.0);
   checkEnt = spawn("script_origin", (0, 0, 0));
@@ -263,7 +251,6 @@ _setup_zone_info() {
     zone.monkey_spawners[zone.monkey_spawners.size] = level.monkey_zombie_spawners[i];
   }
 }
-
 _monkey_TempleThinkInternal(spawner) {
   self endon("death");
   spawner.count = 100;
@@ -276,7 +263,6 @@ _monkey_TempleThinkInternal(spawner) {
   self thread monkey_zombie_choose_sprint_temple();
   self thread _monkey_GotoBoards();
 }
-
 monkey_zombie_choose_run_temple(movePlayBackRate) {
   if(isDefined(moveplaybackrate)) {
     self.moveplaybackrate = movePlayBackRate;
@@ -288,7 +274,6 @@ monkey_zombie_choose_run_temple(movePlayBackRate) {
   self.crouchrun_combatanim = level.scr_anim["monkey_zombie"]["run" + rand];
   self.zombie_move_speed = "run";
 }
-
 monkey_zombie_choose_sprint_temple(movePlayBackRate) {
   if(isDefined(moveplaybackrate)) {
     self.moveplaybackrate = movePlayBackRate;
@@ -300,22 +285,22 @@ monkey_zombie_choose_sprint_temple(movePlayBackRate) {
   self.crouchrun_combatanim = level.scr_anim["monkey_zombie"]["sprint" + rand];
   self.zombie_move_speed = "sprint";
 }
-
 _monkey_zombieTempleDeathCallback() {
   self maps\_zombiemode_spawner::reset_attack_spot();
   self.grenadeAmmo = 0;
   self thread maps\_zombiemode_audio::do_zombies_playvocals("death", self.animname);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
   playFX(level._effect["monkey_death"], self.origin);
-  if(isDefined(self.attacker) && IsPlayer(self.attacker))
+  if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker maps\_zombiemode_audio::create_and_play_dialog("kill", "thief");
+  }
   if(self.damagemod == "MOD_BURNED") {
     self thread animscripts\zombie_death::flame_death_fx();
   }
   return false;
 }
-
 #using_animtree("generic_human");
+
 _monkey_GotoBoards() {
   self endon("death");
   self endon("shrink");
@@ -341,7 +326,6 @@ _monkey_GotoBoards() {
   }
   self _monkey_remove();
 }
-
 _find_chunk(barrier_chunks) {
   ASSERT(isDefined(barrier_chunks), "_zombiemode_utility::all_chunks_destroyed - Barrier chunks undefined");
   for(i = 0; i < barrier_chunks.size; i++) {
@@ -351,7 +335,6 @@ _find_chunk(barrier_chunks) {
   }
   return undefined;
 }
-
 _monkey_DestroyBoards(barrier, chunk, location) {
   chunk maps\_zombiemode_blockers::update_states("target_by_zombie");
   self Teleport(location, self.angles);
@@ -370,11 +353,9 @@ _monkey_DestroyBoards(barrier, chunk, location) {
   chunk notify("destroyed");
   wait(time);
 }
-
 _sort_by_num_boards(barriers) {
   return barriers;
 }
-
 _watch_for_powerups() {
   if(!isDefined(level.monkey_zombie_spawners) || level.monkey_zombie_spawners.size == 0) {
     return;
@@ -393,11 +374,9 @@ _watch_for_powerups() {
     }
   }
 }
-
 _canGrabPowerup(powerup) {
   return isDefined(powerup) && (!isDefined(powerup.claimed) || !powerup.claimed);
 }
-
 _grab_powerup(powerup) {
   spawner = level.monkey_zombie_spawners[0];
   monkey = spawner Stalingradspawn();
@@ -426,7 +405,6 @@ _grab_powerup(powerup) {
   monkey thread _monkey_timeout();
   monkey thread _monkey_StealPowerup();
 }
-
 _monkey_play_stolen_loop() {
   self endon("death");
   self endon("powerup_dropped");
@@ -435,7 +413,6 @@ _monkey_play_stolen_loop() {
     wait 0.845;
   }
 }
-
 _monkey_GetSpawnLocation(location) {
   best = self monkey_GetMonkeySpawnLocation(700, false, true);
   if(!isDefined(best)) {
@@ -450,7 +427,6 @@ _monkey_GetSpawnLocation(location) {
   }
   return ret;
 }
-
 _monkey_StealPowerup() {
   self endon("death");
   self endon("end_monkey_steal");
@@ -461,7 +437,6 @@ _monkey_StealPowerup() {
   self thread _monkey_PathCheck();
   self _monkey_Escape();
 }
-
 _monkey_PathCheck() {
   self notify("end_pathcheck");
   self endon("end_pathcheck");
@@ -479,7 +454,6 @@ _monkey_PathCheck() {
   self monkey_attack_player();
   self thread _monkey_StealPowerup();
 }
-
 _monkey_GrabPowerup() {
   if(isDefined(self.powerup_to_grab)) {
     self thread _monkey_watch_for_death();
@@ -506,7 +480,6 @@ _monkey_GrabPowerup() {
     self thread player_random_response_to_theft();
   }
 }
-
 player_random_response_to_theft() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -516,13 +489,11 @@ player_random_response_to_theft() {
     }
   }
 }
-
 _monkey_Grap_powerup_wait() {
   self endon("goal");
   self.powerup_to_grab waittill("death");
   self.player_stole_power_up = self.powerup_to_grab.power_up_grab_player;
 }
-
 _monkey_watch_for_death() {
   self waittill("death");
   if(isDefined(self.powerup_to_grab)) {
@@ -530,7 +501,6 @@ _monkey_watch_for_death() {
     level notify("powerup_dropped", self.powerup_to_grab);
   }
 }
-
 powerup_red(monkey) {
   monkey endon("death");
   if(isDefined(self.fx_green)) {
@@ -541,7 +511,6 @@ powerup_red(monkey) {
   self.fx_red LinkTo(self);
   playFXOnTag(level._effect["powerup_on_red"], self.fx_red, "tag_origin");
 }
-
 _monkey_Escape() {
   self endon("death");
   self endon("end_monkey_steal");
@@ -561,7 +530,7 @@ _monkey_Escape() {
     maxDist = 0.0;
     bestBarrier = undefined;
     for(i = 0; i < valid_escapes.size; i++) {
-      dist2 = distanceSquared(self.origin, valid_escapes[i].origin);
+      dist2 = DistanceSquared(self.origin, valid_escapes[i].origin);
       if(dist2 > maxDist) {
         maxDist = dist2;
         bestBarrier = valid_escapes[i];
@@ -588,7 +557,6 @@ _monkey_Escape() {
   level thread escape_monkey_counter(hasPowerUp);
   self _monkey_remove();
 }
-
 escape_monkey_counter(hasPowerUp) {
   if(!isDefined(level.monkey_escape_count)) {
     level.monkey_escape_count = 0;
@@ -602,7 +570,6 @@ escape_monkey_counter(hasPowerUp) {
     level thread launch_monkey();
   }
 }
-
 launch_monkey() {
   effectEnt = spawn("script_model", (-24, 1448, 1000));
   if(isDefined(effectEnt)) {
@@ -611,12 +578,11 @@ launch_monkey() {
     effectEnt.angles = (90, 0, 0);
     playFXOnTag(level._effect["monkey_launch"], effectEnt, "tag_origin");
     launchTime = 6;
-    effectEnt moveTo(effectEnt.origin + (0, 0, 2500), launchTime, 3);
+    effectEnt MoveTo(effectEnt.origin + (0, 0, 2500), launchTime, 3);
     wait launchTime;
     effectEnt Delete();
   }
 }
-
 _monkey_CheckPlayableArea() {
   self endon("death");
   canDamage = true;
@@ -638,7 +604,6 @@ _monkey_CheckPlayableArea() {
     wait(0.2);
   }
 }
-
 _monkey_timeout() {
   self endon("death");
   if(!isDefined(self.endTime)) {
@@ -649,11 +614,9 @@ _monkey_timeout() {
   }
   self _monkey_remove();
 }
-
 _monkey_add_time() {
   self.endTime = GetTime() + 60000;
 }
-
 _monkey_zombieTempleEscapeDeathCallback() {
   self.grenadeAmmo = 0;
   playsoundatposition("zmb_stealer_death", self.origin);
@@ -681,7 +644,6 @@ _monkey_zombieTempleEscapeDeathCallback() {
   }
   return false;
 }
-
 _monkey_temple_dragons_breath_flame_death_fx() {
   if(self.isdog) {
     return;
@@ -710,7 +672,6 @@ _monkey_temple_dragons_breath_flame_death_fx() {
   tagArray = array_randomize(tagArray);
   playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[0]);
 }
-
 _monkey_dropStolenPowerUp() {
   returnPowerUp = self.powerup;
   if(isDefined(self.powerup)) {
@@ -736,7 +697,6 @@ _monkey_dropStolenPowerUp() {
   }
   return returnPowerUp;
 }
-
 _monkey_remove(playFX) {
   self notify("remove");
   if(!isDefined(playFX)) {
@@ -752,7 +712,6 @@ _monkey_remove(playFX) {
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
   self Delete();
 }
-
 _getConnectedZoneNames(zoneName, params) {
   if(!isDefined(params.tested)) {
     params.tested = [];
@@ -775,7 +734,6 @@ _getConnectedZoneNames(zoneName, params) {
   }
   return ret;
 }
-
 _powerup_Randomize(monkey) {
   self endon("stop_randomize");
   monkey endon("remove");
@@ -821,11 +779,10 @@ _powerup_Randomize(monkey) {
     }
   }
 }
-
 array_randomize_knuth(array) {
   n = array.size;
   while(n > 0) {
-    index = randomInt(n);
+    index = RandomInt(n);
     n = n - 1;
     temp = array[index];
     array[index] = array[n];
@@ -833,7 +790,6 @@ array_randomize_knuth(array) {
   }
   return array;
 }
-
 _monkey_BindPowerup(powerup) {
   powerup Unlink();
   powerup.angles = self.angles;
@@ -842,21 +798,18 @@ _monkey_BindPowerup(powerup) {
   angles = (0, 0, 0);
   powerup LinkTo(self, "tag_origin", offset, angles);
 }
-
 _monkey_gib() {
   if(is_mature()) {
     playFX(level._effect["monkey_gib"], self.origin);
   } else {
     playFX(level._effect["monkey_gib_no_gore"], self.origin);
   }
-  self hide();
+  self Hide();
 }
-
 _monkey_TempleFling(player) {
   self.do_gib_death = true;
   self DoDamage(self.health + 666, self.origin, player);
 }
-
 _monkey_TempleSliding(slide_node) {
   self endon("death");
   level endon("intermission");
@@ -883,7 +836,6 @@ _monkey_TempleSliding(slide_node) {
   self notify("zombie_end_traverse");
   self thread _monkey_StealPowerup();
 }
-
 set_monkey_slide_anim() {
   self set_run_anim("slide");
   self.run_combatanim = level.scr_anim["monkey_zombie"]["slide"];
@@ -891,7 +843,6 @@ set_monkey_slide_anim() {
   self.crouchrun_combatanim = level.scr_anim["monkey_zombie"]["slide"];
   self.needs_run_update = true;
 }
-
 #using_animtree("critter");
 precache_ambient_monkey_anims() {
   level.scr_anim["monkey"]["calm_idle"][0] = % ai_zombie_monkey_calm_idle_03;
@@ -899,7 +850,6 @@ precache_ambient_monkey_anims() {
   level.scr_animtree["monkey"] = #animtree;
   level.scr_anim["monkey"]["shot_death"][0] = % a_monkey_shot_death;
 }
-
 monkey_ambient_init() {
   flag_init("monkey_ambient_excited");
   monkey_ambient_level_set_next_sound();
@@ -909,10 +859,9 @@ monkey_ambient_init() {
   level thread monkey_ambient_drops_remove_array();
   level thread manage_ambient_monkeys(4);
 }
-
 monkey_crowd_noise() {
-  origin1 = getEnt("evt_monkey_crowd01_origin", "targetname");
-  origin2 = getEnt("evt_monkey_crowd02_origin", "targetname");
+  origin1 = GetEnt("evt_monkey_crowd01_origin", "targetname");
+  origin2 = GetEnt("evt_monkey_crowd02_origin", "targetname");
   if(!isDefined(origin1) || !isDefined(origin2)) {
     return;
   }
@@ -923,11 +872,10 @@ monkey_crowd_noise() {
     while(flag("monkey_ambient_excited")) {
       wait .1;
     }
-    origin1 stopLoopSound(3);
-    origin2 stopLoopSound(3);
+    origin1 stoploopsound(3);
+    origin2 stoploopsound(3);
   }
 }
-
 manage_ambient_monkeys(max_monkeys) {
   checkZone = "temple_start_zone";
   level.active_monkeys = [];
@@ -961,14 +909,12 @@ manage_ambient_monkeys(max_monkeys) {
     }
   }
 }
-
 zone_is_active(zone_name) {
   if(!isDefined(level.zones) || !isDefined(level.zones[zone_name]) || !level.zones[zone_name].is_active) {
     return false;
   }
   return true;
 }
-
 cleanup_monkey() {
   self.location.monkey = undefined;
   self notify("monkey_cleanup");
@@ -976,7 +922,6 @@ cleanup_monkey() {
   self.anim_spot Delete();
   self Delete();
 }
-
 monkey_ambient_spawn() {
   self.monkey = spawn("script_model", self.origin);
   self.monkey.angles = self.angles;
@@ -998,13 +943,11 @@ monkey_ambient_spawn() {
   self.monkey thread monkey_ambient_idle();
   self.monkey thread monkey_ambient_shrink();
 }
-
 monkey_ambient_idle() {
   self.anim_spot notify("monkey_stop_loop");
   self.anim_spot thread maps\_anim::anim_loop_aligned(self, "calm_idle", "tag_origin", "monkey_stop_loop");
   self SetAnimTime(level.scr_anim["monkey"]["calm_idle"][0], RandomFloat(0.99));
 }
-
 monkey_ambient_wait_to_be_shot() {
   self endon("monkey_cleanup");
   self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, iDFlags);
@@ -1023,13 +966,11 @@ monkey_ambient_wait_to_be_shot() {
   playsoundatposition("zmb_stealer_death", self.origin);
   self startragdoll();
 }
-
 monkey_ambient_wait_for_remove() {
   self endon("monkey_cleanup");
   self endon("monkey_killed");
   wait 10;
 }
-
 monkey_ambient_drops_add_array() {
   self endon("monkey_cleanup");
   self endon("monkey_killed");
@@ -1042,7 +983,6 @@ monkey_ambient_drops_add_array() {
     }
   }
 }
-
 monkey_ambient_drops_remove_array() {
   while(1) {
     previousSize = level.monkey_drops.size;
@@ -1053,7 +993,6 @@ monkey_ambient_drops_remove_array() {
     wait .1;
   }
 }
-
 monkey_ambient_watch_for_power_up() {
   self endon("monkey_killed");
   self endon("monkey_cleanup");
@@ -1073,15 +1012,12 @@ monkey_ambient_watch_for_power_up() {
     monkey_ambient_idle();
   }
 }
-
 monkey_ambient_level_set_next_sound() {
   level.ambient_monkey_next_sound_time = GetTime() + randomFloatRange(3, 6) * 1000;
 }
-
 monkey_ambient_set_next_sound() {
   self.next_sound_time = GetTime() + randomFloatRange(6, 12) * 1000;
 }
-
 monkey_ambient_can_make_sound() {
   if(GetTime() < level.ambient_monkey_next_sound_time) {
     return false;
@@ -1091,7 +1027,6 @@ monkey_ambient_can_make_sound() {
   }
   return true;
 }
-
 monkey_ambient_noise() {
   self endon("monkey_killed");
   self endon("monkey_cleanup");
@@ -1104,7 +1039,6 @@ monkey_ambient_noise() {
     wait .1;
   }
 }
-
 monkey_ambient_excited_noise() {
   self endon("monkey_killed");
   self endon("monkey_cleanup");
@@ -1113,7 +1047,6 @@ monkey_ambient_excited_noise() {
     wait randomfloatrange(1.5, 3.0);
   }
 }
-
 monkey_ambient_play_sound(soundName) {
   while(is_true(level.monkey_ambient_sound_choke)) {
     wait_network_frame();
@@ -1123,7 +1056,6 @@ monkey_ambient_play_sound(soundName) {
   wait_network_frame();
   level.monkey_ambient_sound_choke = false;
 }
-
 monkey_ambient_shrink() {
   waitStr = self waittill_any_return("shrunk", "death", "monkey_killed", "monkey_cleanup");
   maps\_zombiemode_weap_shrink_ray::remove_shrinkable_object(self);
@@ -1132,7 +1064,6 @@ monkey_ambient_shrink() {
     self thread cleanup_monkey();
   }
 }
-
 monkey_ambient_gib_all() {
   for(i = level.active_monkeys.size - 1; i >= 0; i--) {
     monkey = level.active_monkeys[i];
@@ -1140,8 +1071,8 @@ monkey_ambient_gib_all() {
     monkey thread cleanup_monkey();
   }
 }
-
 #using_animtree("generic_human");
+
 _monkey_zombie_grenade_watcher() {
   self endon("death");
   grenade_respond_dist_sq = 120 * 120;
@@ -1161,7 +1092,7 @@ _monkey_zombie_grenade_watcher() {
           wait_network_frame();
           continue;
         }
-        grenade_dist_sq = distanceSquared(self.origin, grenade.origin);
+        grenade_dist_sq = DistanceSquared(self.origin, grenade.origin);
         if(grenade_dist_sq <= grenade_respond_dist_sq) {
           grenade.monkey = self;
           self.monkey_grenade = grenade;
@@ -1173,21 +1104,19 @@ _monkey_zombie_grenade_watcher() {
     wait_network_frame();
   }
 }
-
 monkey_zombie_grenade_response() {
   self endon("death");
   self notify("end_monkey_steal");
   self monkey_zombie_grenade_pickup();
   self thread _monkey_StealPowerup();
 }
-
 monkey_zombie_grenade_pickup() {
   self endon("death");
   pickup_dist_sq = 32 * 32;
   picked_up = false;
   while(isDefined(self.monkey_grenade)) {
     self SetGoalPos(self.monkey_grenade.origin);
-    grenade_dist_sq = distanceSquared(self.origin, self.monkey_grenade.origin);
+    grenade_dist_sq = DistanceSquared(self.origin, self.monkey_grenade.origin);
     if(grenade_dist_sq <= pickup_dist_sq) {
       self.monkey_thrower = self.monkey_grenade.thrower;
       self.monkey_grenade delete();
@@ -1211,7 +1140,6 @@ monkey_zombie_grenade_pickup() {
     self waittill("throw_done");
   }
 }
-
 monkey_zombie_grenade_throw_watcher(target, animname) {
   self endon("death");
   self waittillmatch(animname, "grenade_throw");
@@ -1225,7 +1153,6 @@ monkey_zombie_grenade_throw_watcher(target, animname) {
   grenade_type = target get_player_lethal_grenade();
   self MagicGrenadeType(grenade_type, hand_pos, velocity, fuse);
 }
-
 monkey_zombie_grenade_throw(target) {
   self endon("death");
   throw_anim = [];
@@ -1242,13 +1169,12 @@ monkey_zombie_grenade_throw(target) {
     throw_anim[throw_anim.size] = % ai_zombie_monkey_grenade_throw_back_still_03;
     throw_anim[throw_anim.size] = % ai_zombie_monkey_grenade_throw_back_still_04;
   }
-  throw_back_anim = throw_anim[randomInt(throw_anim.size)];
+  throw_back_anim = throw_anim[RandomInt(throw_anim.size)];
   self animscripted("throw_back_anim", self.origin, self.angles, throw_back_anim);
   self thread monkey_zombie_grenade_throw_watcher(target, "throw_back_anim");
   animscripts\traverse\zombie_shared::wait_anim_length(throw_back_anim, .02);
   self notify("throw_done");
 }
-
 monkey_attack_player() {
   self endon("death");
   self.attack_player = true;
@@ -1268,12 +1194,10 @@ monkey_attack_player() {
     self waittill("end_monkey_attacks");
   }
 }
-
 monkey_attack_player_wait_wrapper(player) {
   self monkey_attack_player_wait(player);
   self monkey_stop_attck_player();
 }
-
 monkey_attack_player_wait(player) {
   self endon("death");
   self endon("end_monkey_steal");
@@ -1288,7 +1212,6 @@ monkey_attack_player_wait(player) {
     wait .1;
   }
 }
-
 monkey_stop_attck_player() {
   self notify("end_monkey_attacks");
   self.ignoreall = true;
@@ -1297,7 +1220,6 @@ monkey_stop_attck_player() {
     self.attacking_player = false;
   }
 }
-
 monkey_pathing() {
   self endon("death");
   self endon("end_monkey_attacks");
@@ -1311,7 +1233,6 @@ monkey_pathing() {
     wait_network_frame();
   }
 }
-
 monkey_temple_custom_damage(player) {
   self endon("death");
   damage = self.meleeDamage;
@@ -1325,7 +1246,6 @@ monkey_temple_custom_damage(player) {
   }
   return damage;
 }
-
 monkey_obvious_vox() {
   self endon("death");
   self endon("end_monkey_attacks");

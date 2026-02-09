@@ -4,7 +4,8 @@
 ********************************************************/
 
 #include common_scripts\utility;
- //#include maps\_hud_util;
+
+/include maps\_hud_util;
 #using_animtree("sentry_gun");
 
 /*QUAKED script_model_pickup_sentry_gun (1 0 0) (-32 -16 0) (32 16 24) ORIENT_LOD NO_SHADOWNO_STATIC_SHADOWS
@@ -258,7 +259,7 @@ sentry_init(team, sentryType, owner) {
   if(!isDefined(self.damage_functions))
     self.damage_functions = [];
 
-  if(getdvar("money_enable", "0") == "1" && self.team == "axis") {
+  if(getDvar("money_enable", "0") == "1" && self.team == "axis") {
     if(isDefined(level.sentry_money_init_func))
       self thread[[level.sentry_money_init_func]]();
   }
@@ -348,7 +349,6 @@ handle_sentry_on_carrier_death(sentry) {
   if(!isSp()) {
     self thread place_sentry(sentry);
   }
-
 }
 
 kill_sentry_on_carrier_disconnect(sentry) {
@@ -570,12 +570,15 @@ sentry_overheat_debug() {
     overheat_print_r = " ]";
     if(self.overheated) {
       overheat_print_l = "{{{ ";
-      overheat_print_r = " }}}";
+      overheat_print_r = " }
     }
-
-    print3d(self.origin + (0, 0, 45), overheat_print_l + self.overheat + " / " + level.sentry_fire_time * 10 + overheat_print_r, (0 + overheat_value, 1 - overheat_value, 1 - overheat_value), 1, 0.35, 4);
-    wait 0.2;
   }
+  ";
+}
+
+print3d(self.origin + (0, 0, 45), overheat_print_l + self.overheat + " / " + level.sentry_fire_time * 10 + overheat_print_r, (0 + overheat_value, 1 - overheat_value, 1 - overheat_value), 1, 0.35, 4);
+wait 0.2;
+}
 }
 
 sentry_overheat_deactivate() {
@@ -1133,7 +1136,7 @@ sentry_health_monitor() {
   while(self.health > 0) {
     self waittill("damage", amount, attacker, direction_vec, point, type, modelName, tagName);
 
-    if(!isSP() && isDefined(attacker) && isplayer(attacker) && attacker sentry_attacker_is_friendly(self)) {
+    if(!isSP() && isDefined(attacker) && isPlayer(attacker) && attacker sentry_attacker_is_friendly(self)) {
       self.health = self.currenthealth;
       return;
     }
@@ -1142,7 +1145,7 @@ sentry_health_monitor() {
       attacker[[level.stat_track_damage_func]]();
 
     assertex(isDefined(level.func["damagefeedback"]), "damagefeedback display function is undefined");
-    if(isDefined(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isPlayer(attacker)) {
       if(!isSP())
         attacker[[level.func["damagefeedback"]]]("false");
       /* no more hit indicator in SP, commenting this out and replacing with the line above for MP only

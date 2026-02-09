@@ -62,7 +62,7 @@ class cobjective {
 
   function show(e_player) {
     if(isDefined(e_player)) {
-      assert(isplayer(e_player), "");
+      assert(isPlayer(e_player), "");
       foreach(obj_id in m_a_game_obj) {
         objective_setvisibletoplayer(obj_id, e_player);
       }
@@ -75,7 +75,7 @@ class cobjective {
 
   function hide(e_player) {
     if(isDefined(e_player)) {
-      assert(isplayer(e_player), "");
+      assert(isPlayer(e_player), "");
       foreach(obj_id in m_a_game_obj) {
         objective_setinvisibletoplayer(obj_id, e_player);
       }
@@ -164,7 +164,6 @@ class cobjective {
       }
     }
   }
-
 }
 
 class cbreadcrumbobjective: cobjective {
@@ -262,7 +261,7 @@ class cbreadcrumbobjective: cobjective {
 
   function show(e_player) {
     if(isDefined(e_player)) {
-      assert(isplayer(e_player), "");
+      assert(isPlayer(e_player), "");
       entnum = e_player getentitynumber();
       obj_id = m_a_player_game_obj[entnum];
       objective_setvisibletoplayer(obj_id, e_player);
@@ -276,7 +275,7 @@ class cbreadcrumbobjective: cobjective {
 
   function hide(e_player) {
     if(isDefined(e_player)) {
-      assert(isplayer(e_player), "");
+      assert(isPlayer(e_player), "");
       entnum = e_player getentitynumber();
       obj_id = m_a_player_game_obj[entnum];
       objective_setinvisibletoplayer(obj_id, e_player);
@@ -317,7 +316,6 @@ class cbreadcrumbobjective: cobjective {
     obj_id = m_a_game_obj[0];
     objective_setinvisibletoall(obj_id);
   }
-
 }
 
 #namespace objectives;

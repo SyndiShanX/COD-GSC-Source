@@ -207,11 +207,11 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     return;
   }
 
-  if((sMeansOfDeath == "MOD_TRIGGER_HURT") && !IsPlayer(attacker)) {
+  if((sMeansOfDeath == "MOD_TRIGGER_HURT") && !isPlayer(attacker)) {
     attacker = self;
   }
 
-  if(sMeansOfDeath == "MOD_FALLING" || IsPlayer(attacker)) {
+  if(sMeansOfDeath == "MOD_FALLING" || isPlayer(attacker)) {
     if((sMeansOfDeath == "MOD_FALLING") || (attacker == self) || (isMeleeMOD(sMeansOfDeath) && (sWeapon != "riotshield_mp")) || (sWeapon == "boost_slam_mp")) {
       self playLocalSound("mp_war_objective_lost");
 
@@ -234,10 +234,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
           }
         }
       }
-    } else if((sMeansOfDeath == "MOD_PISTOL_BULLET") || (sMeansOfDeath == "MOD_RIFLE_BULLET") || (sMeansOfDeath == "MOD_HEAD_SHOT") ||
-      (sMeansOfDeath == "MOD_PROJECTILE") || (sMeansOfDeath == "MOD_PROJECTILE_SPLASH") || (sMeansOfDeath == "MOD_EXPLOSIVE") ||
-      (sMeansOfDeath == "MOD_IMPACT") || (sMeansOfDeath == "MOD_GRENADE") || (sMeansOfDeath == "MOD_GRENADE_SPLASH") ||
-      (isMeleeMOD(sMeansOfDeath) && sWeapon == "riotshield_mp")) {
+    } else if((sMeansOfDeath == "MOD_PISTOL_BULLET") || (sMeansOfDeath == "MOD_RIFLE_BULLET") || (sMeansOfDeath == "MOD_HEAD_SHOT") || (sMeansOfDeath == "MOD_PROJECTILE") || (sMeansOfDeath == "MOD_PROJECTILE_SPLASH") || (sMeansOfDeath == "MOD_EXPLOSIVE") || (sMeansOfDeath == "MOD_IMPACT") || (sMeansOfDeath == "MOD_GRENADE") || (sMeansOfDeath == "MOD_GRENADE_SPLASH") || (isMeleeMOD(sMeansOfDeath) && sWeapon == "riotshield_mp")) {
       sWeapon = getBaseWeaponName(sWeapon);
 
       if(!IsSubStr(attacker.primaryWeapon, sWeapon)) {

@@ -37,7 +37,7 @@ kill_random_zombies(var_0) {
     if(!isDefined(var_4) || !isDefined(var_4.agent_type) || var_4.agent_type == "zombie_melee_goliath" || var_4.agent_type == "zombie_murderbot") {
       continue;
     }
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       continue;
     }
     var_4 suicide();

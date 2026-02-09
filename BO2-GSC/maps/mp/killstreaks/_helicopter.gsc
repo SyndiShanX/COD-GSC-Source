@@ -269,10 +269,10 @@ heli_get_dvar_int(dvar, def) {
 }
 
 heli_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }
@@ -988,7 +988,7 @@ heli_damage_monitor(hardpointtype) {
   for(;;) {
     self waittill("damage", damage, attacker, direction, point, type, modelname, tagname, partname, weapon);
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     heli_friendlyfire = maps\mp\gametypes\_weaponobjects::friendlyfirecheck(self.owner, attacker);
@@ -1009,7 +1009,7 @@ heli_damage_monitor(hardpointtype) {
         continue;
     }
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weapon, attacker))
         attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
 
@@ -1169,7 +1169,7 @@ heli_damage_monitor(hardpointtype) {
       continue;
     }
 
-    if(isDefined(self.owner) && isplayer(self.owner)) {
+    if(isDefined(self.owner) && isPlayer(self.owner)) {
       if(last_hit_vo + hit_vo_spacing < gettime()) {
         if(type == "MOD_PROJECTILE" || randomintrange(0, 3) == 0) {
           self.owner playlocalsound(level.heli_vo[self.team]["hit"]);

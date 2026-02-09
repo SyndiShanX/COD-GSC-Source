@@ -345,7 +345,7 @@ func_5AF8() {
 }
 
 player_casualty_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -405,7 +405,7 @@ debug_change_vo_prefix_watcher() {
           break;
       }
 
-      setdvar("scr_player_vo_prefix", 0);
+      setDvar("scr_player_vo_prefix", 0);
     }
 
     wait(1);

@@ -274,7 +274,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       }
     }
   }
-  if(isDefined(bombzone) && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(isDefined(bombzone) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     if(bombzone gameobjects::get_owner_team() != attacker.team) {
       if(!isDefined(attacker.dem_offends)) {
         attacker.dem_offends = 0;
@@ -956,7 +956,7 @@ function updateeventsperminute() {
   }
   self.numbombevents++;
   minutespassed = globallogic_utils::gettimepassed() / 60000;
-  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed["total"])) {
     minutespassed = self.timeplayed["total"] / 60;
   }
   self.eventsperminute = self.numbombevents / minutespassed;

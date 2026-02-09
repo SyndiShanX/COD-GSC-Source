@@ -16,7 +16,7 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -76,41 +76,41 @@ main() {
   maps\_utility::add_start("bridge_rescue", ::bridge_rescue_start, &"STARTS_BRIDGERESCUE");
   maps\_utility::add_start("nowhere", ::start_nowhere, &"STARTS_NOWHERE");
 
-  if(getdvar("jeepride_smoke_shadow") == "")
-    setdvar("jeepride_smoke_shadow", "off");
+  if(getDvar("jeepride_smoke_shadow") == "")
+    setDvar("jeepride_smoke_shadow", "off");
 
-  if(getdvar("jeepride_crashrepro") == "")
-    setdvar("jeepride_crashrepro", "off");
+  if(getDvar("jeepride_crashrepro") == "")
+    setDvar("jeepride_crashrepro", "off");
 
-  if(getdvar("jeepride_showhelitargets") == "")
-    setdvar("jeepride_showhelitargets", "off");
+  if(getDvar("jeepride_showhelitargets") == "")
+    setDvar("jeepride_showhelitargets", "off");
 
-  if(getdvar("jeepride_recordeffects") == "")
-    setdvar("jeepride_recordeffects", "off");
+  if(getDvar("jeepride_recordeffects") == "")
+    setDvar("jeepride_recordeffects", "off");
 
-  if(getdvar("jeepride_startgen") == "")
-    setdvar("jeepride_startgen", "off");
+  if(getDvar("jeepride_startgen") == "")
+    setDvar("jeepride_startgen", "off");
 
-  if(getdvar("jeepride_rpgbox") == "")
-    setdvar("jeepride_rpgbox", "off");
+  if(getDvar("jeepride_rpgbox") == "")
+    setDvar("jeepride_rpgbox", "off");
 
-  if(getdvar("jeepride_nobridgefx") == "")
-    setdvar("jeepride_nobridgefx", "off");
+  if(getDvar("jeepride_nobridgefx") == "")
+    setDvar("jeepride_nobridgefx", "off");
 
-  if(getdvar("jeepride_tirefx") == "")
-    setdvar("jeepride_tirefx", "off");
+  if(getDvar("jeepride_tirefx") == "")
+    setDvar("jeepride_tirefx", "off");
 
-  if(getdvar("jeepride_player_pickup") == "")
-    setdvar("jeepride_player_pickup", "off");
+  if(getDvar("jeepride_player_pickup") == "")
+    setDvar("jeepride_player_pickup", "off");
 
-  if(getdvar("jeepride_multi_shot") == "")
-    setdvar("jeepride_multi_shot", "off");
+  if(getDvar("jeepride_multi_shot") == "")
+    setDvar("jeepride_multi_shot", "off");
 
-  setdvar("use_old_uaz_anims", 1);
+  setDvar("use_old_uaz_anims", 1);
   setsaveddvar("g_DisableAntilagOnLinkedVehicles", 1);
   setsaveddvar("ragdoll_use_linear_velocity", 1);
 
-  if(getdvar("jeepride_crashrepro") == "off" && getdvar("jeepride_recordeffects") == "off")
+  if(getDvar("jeepride_crashrepro") == "off" && getDvar("jeepride_recordeffects") == "off")
     thread maps\jeepride_fx::jeepride_fxline();
 
   common_scripts\utility::array_thread(getEntArray("bridge_triggers", "script_noteworthy"), common_scripts\utility::trigger_off);
@@ -164,7 +164,7 @@ main() {
   level.vehicle_aianimthread["react"] = maps\jeepride_code::guy_react;
   level.vehicle_aianimcheck["react"] = maps\jeepride_code::guy_react_check;
 
-  if(!isDefined(level.fxplay_model) || getdvar("jeepride_crashrepro") != "off") {
+  if(!isDefined(level.fxplay_model) || getDvar("jeepride_crashrepro") != "off") {
     common_scripts\utility::array_thread(common_scripts\utility::getstructarray("ghetto_tag", "targetname"), maps\jeepride_code::ghetto_tag);
     common_scripts\utility::array_thread(getvehiclenodearray("sparks_on", "script_noteworthy"), maps\jeepride_code::trigger_sparks_on);
     common_scripts\utility::array_thread(getvehiclenodearray("sparks_off", "script_noteworthy"), maps\jeepride_code::trigger_sparks_off);
@@ -260,7 +260,7 @@ main() {
   } else
     level.createfxent = [];
 
-  if(getdvar("jeepride_startgen") != "off")
+  if(getDvar("jeepride_startgen") != "off")
     common_scripts\utility::array_thread(getvehiclenodearray("startgen", "script_noteworthy"), maps\jeepride_code::startgen);
 
   maps\_utility::delaythread(185, maps\jeepride_code::falling_bridge_price);
@@ -555,7 +555,7 @@ time_triggers() {
   if(level.start_point == "nowhere") {
     return;
   }
-  if(getdvar("start") != "wip") {
+  if(getDvar("start") != "wip") {
     thread maps\jeepride_code::delaythread_loc(12, ::autosave_now_loc, "down_the_hill");
     thread maps\jeepride_code::delaythread_loc(57, ::autosave_now_loc, "First Tunnel Exit");
     thread maps\jeepride_code::delaythread_loc(100, maps\jeepride_code::reset_autosave_condition);
@@ -1684,7 +1684,7 @@ bridge_zakhaev() {
   maps\_utility::delaythread(0.25, maps\_anim::anim_set_rate_single, var_10, "intopain", 20);
   var_0 thread maps\_anim::anim_single(var_11, "drag_player");
 
-  if(getdvar("chaplincheat") == "1")
+  if(getDvar("chaplincheat") == "1")
     thread bridge_zak_slomo_script_timed_chaplincheat();
   else
     thread bridge_zak_slomo_script_timed();
@@ -1737,7 +1737,7 @@ bridge_zakhaev() {
     var_18[var_19] linkto(var_20);
     var_18[var_19] thread end_scene_actor_unlink_on_death();
 
-    if(getdvar("jeepride_multi_shot") == "off")
+    if(getDvar("jeepride_multi_shot") == "off")
       var_18[var_19].health = 1;
     else
       var_18[var_19] thread stop_animscripted_on_damage();
@@ -2243,7 +2243,7 @@ earthquaker_small() {
 }
 
 _setblur(var_0, var_1) {
-  if(getdvar("jeepride_player_pickup") == "off")
+  if(getDvar("jeepride_player_pickup") == "off")
     setblur(var_0, var_1);
 }
 
@@ -2584,7 +2584,7 @@ shock_ondeath_loc() {
   self.specialdeath = 1;
   self waittill("death");
 
-  if(getdvar("r_texturebits") == "16") {
+  if(getDvar("r_texturebits") == "16") {
     return;
   }
   self shellshock("jeepride_ridedeath", 3);

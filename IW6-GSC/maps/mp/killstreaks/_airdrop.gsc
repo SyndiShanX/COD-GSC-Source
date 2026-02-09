@@ -572,7 +572,6 @@ crateUseTeamUpdater_multiTeams(team) {
     setUsableByOtherTeams(team);
 
     level waittill("joined_team");
-
   }
 }
 
@@ -882,7 +881,7 @@ cleanup_crate_capture() {
   }
 
   foreach(player in children) {
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(isDefined(player.isCapturingCrate) && player.isCapturingCrate) {
@@ -943,7 +942,6 @@ waitForDropCrateMsg(dropCrate, dropImpulse, dropType, crateType, optionalVelocit
     travelTime = travelDistance / GRAVITY_UNITS_PER_SECOND;
 
     dropCrate.killCamEnt MoveTo(groundTrace["position"] + CRATE_KILLCAM_OFFSET + (horizontal_offset, 0, 0), travelTime);
-
   }
 }
 
@@ -1076,7 +1074,6 @@ getFlyHeightOffset(dropSite) {
   } else {
     return heightEnt.origin[2];
   }
-
 }
 
 doFlyBy(owner, dropSite, dropYaw, dropType, heightAdjustment, crateOverride) {
@@ -1109,9 +1106,9 @@ doFlyBy(owner, dropSite, dropYaw, dropType, heightAdjustment, crateOverride) {
 
   chopper endon("death");
 
-  if(GetDvar("scr_crateOverride") != "") {
-    crateOverride = GetDvar("scr_crateOverride");
-    dropType = GetDvar("scr_crateTypeOverride");
+  if(getDvar("scr_crateOverride") != "") {
+    crateOverride = getDvar("scr_crateOverride");
+    dropType = getDvar("scr_crateTypeOverride");
   }
 
   chopper.dropType = dropType;
@@ -1656,7 +1653,7 @@ killstreakCrateThink(dropType) {
   for(;;) {
     self waittill("captured", player);
 
-    if(IsPlayer(player)) {
+    if(isPlayer(player)) {
       player SetClientOmnvar("ui_securing", 0);
       player.ui_securing = undefined;
     }

@@ -107,7 +107,6 @@ function_2c104547(s_params) {
         level.n_electric_trap_kills++;
 
         iprintln("<dev string:x91>" + level.n_electric_trap_kills);
-
       }
 
       break;
@@ -116,7 +115,6 @@ function_2c104547(s_params) {
         level.var_36067f1f++;
 
         iprintln("<dev string:xa9>" + level.var_36067f1f);
-
       }
 
       break;
@@ -125,7 +123,6 @@ function_2c104547(s_params) {
         level.var_8265e44f++;
 
         iprintln("<dev string:xbc>" + level.var_8265e44f);
-
       }
 
       break;
@@ -134,7 +131,6 @@ function_2c104547(s_params) {
         level.var_4b81bb64++;
 
         iprintln("<dev string:xd2>" + level.var_4b81bb64);
-
       }
 
       break;
@@ -143,7 +139,6 @@ function_2c104547(s_params) {
         level.var_9e22ff45++;
 
         iprintln("<dev string:xe6>" + level.var_9e22ff45);
-
       }
 
       break;
@@ -171,7 +166,7 @@ pap_watcher() {
 function_48f916b(params) {
   e_attacker = params.eattacker;
 
-  if(!isplayer(e_attacker) || !isDefined(e_attacker.var_f50a2a9b)) {
+  if(!isPlayer(e_attacker) || !isDefined(e_attacker.var_f50a2a9b)) {
     return;
   }
 
@@ -251,7 +246,7 @@ function_df71a9b9() {
     waitresults = level waittill(#"ray_gun_mk2v_stun_hit");
     e_attacker = waitresults.e_player;
 
-    if(isplayer(e_attacker) && isDefined(e_attacker.var_5e47a087)) {
+    if(isPlayer(e_attacker) && isDefined(e_attacker.var_5e47a087)) {
       a_e_zombies = getaiteamarray(level.zombie_team);
       e_attacker.var_5e47a087 = 0;
 
@@ -280,7 +275,7 @@ function_bde94bdf(params) {
     return;
   }
 
-  if(!isplayer(e_attacker) || !isDefined(e_attacker.var_31ce05fd)) {
+  if(!isPlayer(e_attacker) || !isDefined(e_attacker.var_31ce05fd)) {
     return;
   }
 

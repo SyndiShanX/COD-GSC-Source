@@ -92,7 +92,6 @@ _id_41D3(var_0) {
 _id_41D5(var_0) {
   if(var_0 == "heard_scream" || var_0 == "doFlashBanged" || var_0 == "explode") {
     return 1;
-
   }
   return 0;
 }
@@ -102,9 +101,8 @@ _id_41D6(var_0) {}
 _id_41D7(var_0) {
   setdvarifuninitialized("stealth_debug_prints", "0");
 
-  if(!isDefined(getdvar("stealth_debug_prints"))) {
-    setdvar("stealth_debug_prints", "0");
-
+  if(!isDefined(getDvar("stealth_debug_prints"))) {
+    setDvar("stealth_debug_prints", "0");
   }
   if(getdvarint("stealth_debug_prints") != 1) {
     return;
@@ -118,7 +116,6 @@ _id_41D9(var_0) {
     self._id_204F = maps\_utility::string(self._id_204F);
   } else {
     self._id_204F = "default";
-
   }
   var_1 = _id_41DB(var_0);
 
@@ -127,7 +124,6 @@ _id_41D9(var_0) {
 
     if(!isDefined(level._id_0B6E._id_1124.flags[var_0])) {
       level._id_0B6E._id_1124.flags[var_0] = [];
-
     }
     var_2 = level._id_0B6E._id_1124.flags[var_0].size;
     level._id_0B6E._id_1124.flags[var_0][var_2] = var_1;
@@ -247,13 +243,11 @@ _id_41E4() {
 
   if(isDefined(self._id_0B6E._id_41D0._id_41D4)) {
     self[[self._id_0B6E._id_41D0._id_41D4]]();
-
   }
   var_0 = self._id_0B6E._id_41D0._id_41E5;
 
   if(isDefined(var_0) && self.type != "dog" && !isDefined(self._id_11A0)) {
     self._id_11A0 = maps\_patrol::_id_2066;
-
   }
   if(isDefined(self._id_11A0) && isDefined(self.pathgoalpos)) {
     self setgoalpos(self.origin);
@@ -263,7 +257,6 @@ _id_41E4() {
   if(isDefined(self._id_2050)) {
     if(isDefined(self._id_2056)) {
       self.target = self._id_2056.targetname;
-
     }
     if(isDefined(self._id_41E6)) {
       self.target = self._id_41E6.targetname;
@@ -307,11 +300,9 @@ _id_41E7(var_0) {
 _id_41E8(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   if(isDefined(level._id_0B6E._id_41E9._id_41EA) && distancesquared(var_0, level._id_0B6E._id_41E9.origin) < 4096 && var_1 == level._id_0B6E._id_41E9.radius && var_2 == level._id_0B6E._id_41E9._id_14BE) {
     return level._id_0B6E._id_41E9._id_41EA;
-
   }
   level._id_0B6E._id_41E9.origin = var_0;
   level._id_0B6E._id_41E9.radius = var_1;
@@ -334,7 +325,6 @@ _id_41EC(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = 60;
-
   }
   wait(var_1);
 
@@ -353,7 +343,6 @@ _id_41EF() {
   if(isDefined(self._id_2050)) {
     if(isDefined(self._id_2056)) {
       self._id_2056._id_2055 = undefined;
-
     }
     self notify("release_node");
     self notify("end_patrol");
@@ -391,7 +380,6 @@ _id_41F2(var_0, var_1) {
 
   if(self.type != "dog") {
     self endon("_stealth_saw_corpse");
-
   }
   var_2 = _id_41DB("_stealth_spotted");
   level endon(var_2);
@@ -402,7 +390,6 @@ _id_41F2(var_0, var_1) {
     self setgoalnode(var_0);
   } else {
     self setgoalpos(var_1);
-
   }
   self.goalradius = 64;
   self waittill("goal");
@@ -503,7 +490,6 @@ _id_41F9(var_0) {
     var_1 = self._id_0AB6;
   } else {
     var_1 = randomint(3);
-
   }
   var_2 = "RU_" + var_1 + "_stealth_alert_r";
   common_scripts\utility::play_sound_in_space(var_2, var_0);
@@ -528,7 +514,6 @@ _id_41FB() {
 
   if(isDefined(self._id_41FC)) {
     wait(self._id_41FC);
-
   }
   if(!_id_41FD("corpse")) {
     return;
@@ -547,13 +532,11 @@ _id_41FD(var_0) {
   if(var_0 == "spotted") {
     if(level._id_0B6E._id_41D0.sound[var_0][self._id_204F]) {
       return 0;
-
     }
     level._id_0B6E._id_41D0.sound[var_0][self._id_204F] = 1;
   } else {
     if(level._id_0B6E._id_41D0.sound[var_0]) {
       return 0;
-
     }
     level._id_0B6E._id_41D0.sound[var_0] = 1;
     thread _id_41FE(var_0);
@@ -618,13 +601,11 @@ _id_4207(var_0) {
 
   if(maps\_utility::_id_1008("_stealth_behavior_first_reaction") || maps\_utility::_id_1008("_stealth_behavior_reaction_anim_in_progress")) {
     return 1;
-
   }
   _id_41EF();
 
   if(issubstr(var_0, "warning")) {
     var_0 = "warning";
-
   }
   switch (var_0) {
     case "found_corpse":
@@ -683,7 +664,6 @@ _id_420C(var_0) {
 
   if(!isDefined(var_0) || var_0 == 0) {
     self stopanimscripted();
-
   }
   _id_420B();
 }
@@ -771,11 +751,9 @@ _id_4211(var_0) {
 _id_4212() {
   if(!maps\_stealth_utility::_id_4213()) {
     return 0;
-
   }
   if(common_scripts\utility::flag("_stealth_player_nade")) {
     return 0;
-
   }
   if(common_scripts\utility::flag_exist("_radiation_poisoning")) {
     if(common_scripts\utility::flag("_radiation_poisoning")) {

@@ -797,7 +797,7 @@ func_299B() {
 
 func_EB80() {
   var_0 = scripts\engine\utility::random(self.var_1B4A);
-  if(isplayer(var_0[0])) {
+  if(isPlayer(var_0[0])) {
     scripts\sp\utility::func_1034D(var_0[1]);
   } else {
     var_0[0] scripts\sp\utility::func_10346(var_0[1]);
@@ -1606,7 +1606,7 @@ func_9C6B() {
       continue;
     }
 
-    if(isplayer(var_1.ent)) {
+    if(isPlayer(var_1.ent)) {
       return 1;
     }
   }
@@ -3173,7 +3173,7 @@ func_4FAB() {
   level.var_220A = 1;
   scripts\engine\utility::flag_set("open_room2_doors");
   scripts\engine\utility::flag_set("open_room3_doors");
-  setdvar("test_decompress", "1");
+  setDvar("test_decompress", "1");
   thread func_4FA3();
 }
 

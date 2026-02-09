@@ -5,7 +5,7 @@
 
 air_strip_secured_init() {
   level.start_point = "air_strip_secured";
-  setdvar("debug_sat_view_pip", "1");
+  setDvar("debug_sat_view_pip", "1");
   objective_add(maps\_utility::obj("rendesvouz"), "invisible", &"SATFARM_OBJ_RENDESVOUZ");
   objective_state_nomessage(maps\_utility::obj("rendesvouz"), "done");
   objective_add(maps\_utility::obj("reach_air_strip"), "invisible", &"SATFARM_OBJ_REACH_AIR_STRIP");

@@ -31,7 +31,7 @@ function main() {
   visionset_mgr::fog_vol_to_visionset_set_info(1, "cp_mi_eth_prologue", 0);
   load::main();
   util::waitforclient(0);
-  setdvar("sv_mapswitch", 1);
+  setDvar("sv_mapswitch", 1);
   namespace_ba84f16::function_7403e82b();
 }
 
@@ -125,17 +125,17 @@ function function_2e707998(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_9e6eac31(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    setdvar("player_sprintUnlimited", 0);
-    setdvar("slide_forceBaseSlide", 1);
+    setDvar("player_sprintUnlimited", 0);
+    setDvar("slide_forceBaseSlide", 1);
   } else {
-    setdvar("player_sprintUnlimited", 1);
-    setdvar("slide_forceBaseSlide", 0);
+    setDvar("player_sprintUnlimited", 1);
+    setDvar("slide_forceBaseSlide", 0);
   }
 }
 
 function player_turn_on_extra_cam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    setdvar("r_extracam_custom_aspectratio", 2.85);
+    setDvar("r_extracam_custom_aspectratio", 2.85);
     e_camera = getent(localclientnum, "s_security_cam_hallway", "targetname");
     e_camera setextracam(0);
     e_camera setextracamfocallength(0, e_camera.var_81a24d4e);

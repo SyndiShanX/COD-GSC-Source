@@ -762,20 +762,19 @@ function_ba02cfb5() {
     deathpoint = function_936b3f09(nextcenter, dir, level.deathcircle);
     sphere(deathpoint, 25 * var_36b41a8, (1, 0, 1), 1, 0, 10, 5);
   }
-
 }
 
 function_664f77db() {
   if(self.spectatorclient != -1) {
     player = getentbynum(self.spectatorclient);
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       return (player.origin[0], player.origin[1], 0);
     }
   } else if(self.currentspectatingclient != -1) {
     player = getentbynum(self.currentspectatingclient);
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       return (player.origin[0], player.origin[1], 0);
     }
   }
@@ -913,7 +912,7 @@ devgui_loop() {
       continue;
     }
 
-    setdvar(#"devgui_deathcircle", "<dev string:x519>");
+    setDvar(#"devgui_deathcircle", "<dev string:x519>");
     args = strtok(dvarstr, "<dev string:x51c>");
 
     switch (args[0]) {

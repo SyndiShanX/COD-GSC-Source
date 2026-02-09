@@ -25,9 +25,8 @@ __init__() {
   }
 
   if(!isprofilebuild()) {
-    setdvar(#"hash_5a4f3b089c68658f", 1);
+    setDvar(#"hash_5a4f3b089c68658f", 1);
   }
-
 }
 
 on_player_connect() {
@@ -46,7 +45,7 @@ add_igc(scriptid, alias) {}
 
 init_character(chrname, var_bd68a08e, var_f4aa7514 = 0) {
   assert(isentity(self), "<dev string:x38>");
-  assert(isplayer(self) || isDefined(chrname), "<dev string:x5c>");
+  assert(isPlayer(self) || isDefined(chrname), "<dev string:x5c>");
 
   if(isDefined(self)) {
     self.var_3975c22 = chrname;
@@ -196,7 +195,7 @@ play_next() {
   if(!isDefined(voice.alias) && getdvarint(#"hash_5a4f3b089c68658f", 0) == 1 || getdvarint(#"hash_71fefd466102ebff", 0) == 1) {
     tempname = self.var_3975c22;
 
-    if(!isDefined(tempname) && isplayer(self)) {
+    if(!isDefined(tempname) && isPlayer(self)) {
       tempname = self getchrname();
     }
 
@@ -342,12 +341,12 @@ mask_sound(soundent, params, var_17ee4803) {
       }
     }
   } else if(mask == # "self") {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self play_to(soundent, player);
     }
   }
 
-  if(isDefined(var_17ee4803) && isplayer(var_17ee4803)) {
+  if(isDefined(var_17ee4803) && isPlayer(var_17ee4803)) {
     self play_to(soundent, var_17ee4803);
   }
 }
@@ -421,7 +420,7 @@ play_notetrack(scriptid) {
 function_29b858dc() {
   chrname = self.var_3975c22;
 
-  if(!isDefined(chrname) && isplayer(self)) {
+  if(!isDefined(chrname) && isPlayer(self)) {
     chrname = self getchrname();
   }
 

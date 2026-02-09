@@ -76,7 +76,7 @@ function_95f96f3e(local_client_num, bundle, param) {
 }
 
 function_7181329a(entity) {
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     return false;
   }
 
@@ -112,7 +112,7 @@ function_903bbed3(local_client_num, bundle) {
     return false;
   }
 
-  if(function_5778f82(local_client_num, #"specialty_showenemyvehicles") && !isplayer(self) && function_7181329a(self)) {
+  if(function_5778f82(local_client_num, #"specialty_showenemyvehicles") && !isPlayer(self) && function_7181329a(self)) {
     return true;
   }
 

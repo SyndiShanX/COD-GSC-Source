@@ -54,9 +54,8 @@ get_level_starting_lives_remaining(var_0) {
 chaos_entities_precache() {
   if(!isDefined(level.chaos_entity_table)) {
     level.chaos_entity_table = "sp/survival_chaos_entities.csv";
-
   }
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   for(var_1 = 100; var_1 <= 1700; var_1++) {
     var_2 = get_level(var_1);
@@ -81,7 +80,6 @@ chaos_entities_precache() {
     }
     if(!isDefined(level.chaos_weapon_locations)) {
       level.chaos_weapon_locations = [];
-
     }
     precacheitem(var_3);
     level.chaos_weapon_locations[var_3] = (float(var_5[0]), float(var_5[1]), float(var_5[2]));
@@ -150,7 +148,6 @@ get_weapon_hud_icon(var_0) {
     var_1 = "specops_ui_weaponstore";
   } else if(var_0 == "RPG") {
     var_1 = "specops_ui_weaponstore";
-
   }
   return var_1;
 }
@@ -230,7 +227,6 @@ chaos_get_weapon_class(var_0) {
     var_1 = "SG";
   } else if(issubstr(var_0, "rpg")) {
     var_1 = "RPG";
-
   }
   return var_1;
 }
@@ -310,7 +306,6 @@ get_weapon_display_name(var_0) {
     var_1 = &"SO_SURVIVAL_CHAOS_PICKUP_USAS12";
   } else if(issubstr(var_0, "rpg")) {
     var_1 = &"SO_SURVIVAL_CHAOS_PICKUP_RPG";
-
   }
   return var_1;
 }
@@ -333,11 +328,10 @@ chaos_weapon_collect() {
   for(;;) {
     self.trigger waittill("trigger", var_0);
 
-    if(isplayer(var_0) && !maps\_utility::_id_1A43(var_0)) {
+    if(isPlayer(var_0) && !maps\_utility::_id_1A43(var_0)) {
       var_0 maps\_so_survival_chaos::chaoseventpopup(self.display_name, (1, 1, 1));
-
     }
-    if(!isplayer(var_0) || maps\_utility::_id_1A43(var_0) || !var_0 usebuttonpressed()) {
+    if(!isPlayer(var_0) || maps\_utility::_id_1A43(var_0) || !var_0 usebuttonpressed()) {
       continue;
     }
     var_1 = 0;
@@ -358,7 +352,6 @@ chaos_weapon_collect() {
 
       if(!isDefined(var_0.weapon_already_used)) {
         var_0.weapon_already_used = [];
-
       }
       if(!isDefined(var_0.weapon_already_used[self._id_5C39])) {
         maps\_so_survival_chaos::chaos_score_event_raise("new_weapon_collect");
@@ -380,26 +373,22 @@ chaos_weapon_collect() {
         }
       } else {
         var_7 = weaponclipsize(self._id_5C39);
-
       }
       if(issubstr(self._id_5C39, "akimbo")) {
         var_0 setweaponammoclip(self._id_5C39, var_7, "left");
         var_0 setweaponammoclip(self._id_5C39, var_7, "right");
       } else {
         var_0 setweaponammoclip(self._id_5C39, var_7);
-
       }
       var_8 = 0;
 
       if(var_0 getweaponammostock(self._id_5C39) < weaponmaxammo(self._id_5C39)) {
         var_8 = 1;
-
       }
       var_9 = weaponaltweaponname(self._id_5C39);
 
       if(var_9 != "none" && var_0 getweaponammostock(var_9) < weaponmaxammo(var_9)) {
         var_8 = 1;
-
       }
       if(self._id_5C39 == "flash_grenade" || self._id_5C39 == "claymore" || self._id_5C39 == "c4") {
         var_8 = 1;
@@ -409,19 +398,16 @@ chaos_weapon_collect() {
       if(var_8) {
         if(self._id_5C39 != "claymore" && self._id_5C39 != "c4") {
           var_0 setweaponammostock(self._id_5C39, weaponmaxammo(self._id_5C39));
-
         }
         var_9 = weaponaltweaponname(self._id_5C39);
 
         if(var_9 != "none") {
           var_0 setweaponammostock(var_9, weaponmaxammo(var_9));
-
         }
         maps\_so_survival_chaos::chaos_score_event_raise("weapon_ammo");
 
         if(self._id_5C39 != "flash_grenade" && self._id_5C39 != "claymore" && self._id_5C39 != "c4") {
           var_0 switchtoweapon(self._id_5C39);
-
         }
         var_1 = 1;
       }
@@ -440,7 +426,6 @@ chaos_weapon_collect() {
 
       if(var_2 == 1) {
         maps\_so_survival_chaos::radio_dialogue_to_player(var_0, "chaos_new_weapon", 1.0);
-
       }
       wait 25;
 
@@ -449,7 +434,6 @@ chaos_weapon_collect() {
           var_13 = weaponclipsize(self._id_5C39) - 5;
         } else {
           var_13 = weaponclipsize(self._id_5C39);
-
         }
         for(;;) {
           var_14 = 0;
@@ -495,9 +479,8 @@ chaos_weapon_collect() {
 chaos_load_drop_location() {
   if(!isDefined(level.chaos_drop_location_table)) {
     level.chaos_drop_location_table = "sp/survival_chaos_drop_locations.csv";
-
   }
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   for(var_1 = 100; var_1 <= 1700; var_1++) {
     var_2 = get_level(var_1);
@@ -517,7 +500,6 @@ chaos_load_drop_location() {
     }
     if(!isDefined(level.chaos_drop_locations)) {
       level.chaos_drop_locations = [];
-
     }
     level.chaos_drop_locations[level.chaos_drop_locations.size] = (float(var_4[0]), float(var_4[1]), float(var_4[2]));
   }
@@ -526,9 +508,8 @@ chaos_load_drop_location() {
 chaos_load_drop_item() {
   if(!isDefined(level.chaos_drop_item_table)) {
     level.chaos_drop_item_table = "sp/survival_chaos_drop_items.csv";
-
   }
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   for(var_1 = 100; var_1 <= 1700; var_1++) {
     var_2 = get_level(var_1);
@@ -547,7 +528,6 @@ chaos_load_drop_item() {
 
     if(!isDefined(level.chaos_drop_items)) {
       level.chaos_drop_items = [];
-
     }
     level.chaos_drop_items[var_4] = var_6;
   }
@@ -556,9 +536,8 @@ chaos_load_drop_item() {
 chaos_load_desired_drop_distance() {
   if(!isDefined(level.desired_drop_distance_table)) {
     level.desired_drop_distance_table = "sp/survival_chaos_drop_distance.csv";
-
   }
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   for(var_1 = 100; var_1 <= 1700; var_1++) {
     var_2 = get_drop_distance_level(var_1);
@@ -578,9 +557,8 @@ chaos_load_desired_drop_distance() {
 }
 
 chaos_is_coop() {
-  if(issplitscreen() || getdvar("coop") == "1") {
+  if(issplitscreen() || getDvar("coop") == "1") {
     return 1;
-
   }
   return 0;
 }
@@ -588,9 +566,8 @@ chaos_is_coop() {
 chaos_load_ai_size() {
   if(!isDefined(level.constant_ai_size_table)) {
     level.constant_ai_size_table = "sp/survival_chaos_constant_ai_size.csv";
-
   }
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   for(var_1 = 100; var_1 <= 1700; var_1++) {
     var_2 = get_ai_size_level(var_1);
@@ -601,7 +578,6 @@ chaos_load_ai_size() {
 
       if(!isDefined(level.map_specific_ai_size)) {
         level.map_specific_ai_size = [];
-
       }
       var_5 = "wave_" + var_3;
       level.map_specific_ai_size[var_5] = float(var_4);

@@ -12,7 +12,6 @@ main() {
   precache_createfx_fx();
   footsteps();
 }
-
 footsteps() {}
 precache_scripted_fx() {
   level._effect["edge_fog"] = LoadFX("maps/zombie/fx_fog_zombie_amb");
@@ -85,7 +84,6 @@ precache_scripted_fx() {
   level._effect["barrel_top_fire"] = loadfx("destructibles/fx_barrel_fire_top");
   level._effect["barrel_explode"] = loadfx("maps/zombie/fx_zmbtron_barrelexp");
 }
-
 precache_createfx_fx() {
   level._effect["fx_rain_sys_heavy_windy_1"] = LoadFx("env/weather/fx_rain_sys_heavy_windy_1");
   level._effect["fx_fog_low"] = loadfx("env/smoke/fx_fog_low");

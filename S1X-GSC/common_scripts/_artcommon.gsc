@@ -8,44 +8,44 @@
 setfogsliders() {
   /$
 
-  SetDevDvar("scr_fog_exp_halfplane", GetDvar("g_fogHalfDistReadOnly", 0.0));
-  SetDevDvar("scr_fog_nearplane", GetDvar("g_fogStartDistReadOnly", 0.1));
-  SetDevDvar("scr_fog_color", GetDvar("g_fogColorReadOnly", (1, 0, 0)));
-  SetDevDvar("scr_fog_color_intensity", GetDvar("g_fogColorIntensityReadOnly", 1.0));
-  SetDevDvar("scr_fog_max_opacity", GetDvar("g_fogMaxOpacityReadOnly", 1.0));
-  SetDevDvar("scr_sunFogEnabled", GetDvar("g_sunFogEnabledReadOnly", 0));
-  SetDevDvar("scr_sunFogColor", GetDvar("g_sunFogColorReadOnly", (1, 0, 0)));
-  SetDevDvar("scr_sunfogColorIntensity", GetDvar("g_sunFogColorIntensityReadOnly", 1.0));
+  SetDevDvar("scr_fog_exp_halfplane", getDvar("g_fogHalfDistReadOnly", 0.0));
+  SetDevDvar("scr_fog_nearplane", getDvar("g_fogStartDistReadOnly", 0.1));
+  SetDevDvar("scr_fog_color", getDvar("g_fogColorReadOnly", (1, 0, 0)));
+  SetDevDvar("scr_fog_color_intensity", getDvar("g_fogColorIntensityReadOnly", 1.0));
+  SetDevDvar("scr_fog_max_opacity", getDvar("g_fogMaxOpacityReadOnly", 1.0));
+  SetDevDvar("scr_sunFogEnabled", getDvar("g_sunFogEnabledReadOnly", 0));
+  SetDevDvar("scr_sunFogColor", getDvar("g_sunFogColorReadOnly", (1, 0, 0)));
+  SetDevDvar("scr_sunfogColorIntensity", getDvar("g_sunFogColorIntensityReadOnly", 1.0));
   SetDevDvar("scr_sunFogDir", GetDvarVector("g_sunFogDirReadOnly", (1, 0, 0)));
-  SetDevDvar("scr_sunFogBeginFadeAngle", GetDvar("g_sunFogBeginFadeAngleReadOnly", 0.0));
-  SetDevDvar("scr_sunFogEndFadeAngle", GetDvar("g_sunFogEndFadeAngleReadOnly", 180.0));
-  SetDevDvar("scr_sunFogScale", GetDvar("g_sunFogScaleReadOnly", 1.0));
-  SetDevDvar("scr_heightFogEnabled", GetDvar("g_heightFogEnabledReadOnly", 0));
-  SetDevDvar("scr_heightFogBaseHeight", GetDvar("g_heightFogBaseHeightReadOnly", 0));
-  SetDevDvar("scr_heightFogHalfPlaneDistance", GetDvar("g_heightFogHalfPlaneDistanceReadOnly", 1000));
+  SetDevDvar("scr_sunFogBeginFadeAngle", getDvar("g_sunFogBeginFadeAngleReadOnly", 0.0));
+  SetDevDvar("scr_sunFogEndFadeAngle", getDvar("g_sunFogEndFadeAngleReadOnly", 180.0));
+  SetDevDvar("scr_sunFogScale", getDvar("g_sunFogScaleReadOnly", 1.0));
+  SetDevDvar("scr_heightFogEnabled", getDvar("g_heightFogEnabledReadOnly", 0));
+  SetDevDvar("scr_heightFogBaseHeight", getDvar("g_heightFogBaseHeightReadOnly", 0));
+  SetDevDvar("scr_heightFogHalfPlaneDistance", getDvar("g_heightFogHalfPlaneDistanceReadOnly", 1000));
 
-  SetDevDvar("scr_skyFogIntensity", GetDvar("r_sky_fog_intensity", 0.0));
-  SetDevDvar("scr_skyFogMinAngle", GetDvar("r_sky_fog_min_angle", 0.0));
-  SetDevDvar("scr_skyFogMaxAngle", GetDvar("r_sky_fog_max_angle", 90.0));
+  SetDevDvar("scr_skyFogIntensity", getDvar("r_sky_fog_intensity", 0.0));
+  SetDevDvar("scr_skyFogMinAngle", getDvar("r_sky_fog_min_angle", 0.0));
+  SetDevDvar("scr_skyFogMaxAngle", getDvar("r_sky_fog_max_angle", 90.0));
 
-  SetDevDvar("scr_atmosFogEnabled", GetDvar("g_atmosFogEnabledReadOnly", 0));
-  SetDevDvar("scr_atmosFogSunFogColor", GetDvar("g_atmosFogSunFogColorReadOnly", (.5, .5, .5)));
-  SetDevDvar("scr_atmosFogHazeColor", GetDvar("g_atmosFogHazeColorReadOnly", (.5, .5, .5)));
-  SetDevDvar("scr_atmosFogHazeStrength", GetDvar("g_atmosFogHazeStrengthReadOnly", .5));
-  SetDevDvar("scr_atmosFogHazeSpread", GetDvar("g_atmosFogHazeSpreadReadOnly", .75));
-  SetDevDvar("scr_atmosFogExtinctionStrength", GetDvar("g_atmosFogExtinctionStrengthReadOnly", 1));
-  SetDevDvar("scr_atmosFogInScatterStrength", GetDvar("g_atmosFogInScatterStrengthReadOnly", 0));
-  SetDevDvar("scr_atmosFogHalfPlaneDistance", GetDvar("g_atmosFogHalfPlaneDistanceReadOnly", 5000));
-  SetDevDvar("scr_atmosFogStartDistance", GetDvar("g_atmosFogStartDistanceReadOnly", 0));
-  SetDevDvar("scr_atmosFogDistanceScale", GetDvar("g_atmosFogDistanceScaleReadOnly", 1));
-  SetDevDvar("scr_atmosFogSkyDistance", int(GetDvar("g_atmosFogSkyDistanceReadOnly", 100000)));
-  SetDevDvar("scr_atmosFogSkyAngularFalloffEnabled", GetDvar("g_atmosFogSkyAngularFalloffEnabledReadOnly", 0));
-  SetDevDvar("scr_atmosFogSkyFalloffStartAngle", GetDvar("g_atmosFogSkyFalloffStartAngleReadOnly", 0));
-  SetDevDvar("scr_atmosFogSkyFalloffAngleRange", GetDvar("g_atmosFogSkyFalloffAngleRangeReadOnly", 90));
+  SetDevDvar("scr_atmosFogEnabled", getDvar("g_atmosFogEnabledReadOnly", 0));
+  SetDevDvar("scr_atmosFogSunFogColor", getDvar("g_atmosFogSunFogColorReadOnly", (.5, .5, .5)));
+  SetDevDvar("scr_atmosFogHazeColor", getDvar("g_atmosFogHazeColorReadOnly", (.5, .5, .5)));
+  SetDevDvar("scr_atmosFogHazeStrength", getDvar("g_atmosFogHazeStrengthReadOnly", .5));
+  SetDevDvar("scr_atmosFogHazeSpread", getDvar("g_atmosFogHazeSpreadReadOnly", .75));
+  SetDevDvar("scr_atmosFogExtinctionStrength", getDvar("g_atmosFogExtinctionStrengthReadOnly", 1));
+  SetDevDvar("scr_atmosFogInScatterStrength", getDvar("g_atmosFogInScatterStrengthReadOnly", 0));
+  SetDevDvar("scr_atmosFogHalfPlaneDistance", getDvar("g_atmosFogHalfPlaneDistanceReadOnly", 5000));
+  SetDevDvar("scr_atmosFogStartDistance", getDvar("g_atmosFogStartDistanceReadOnly", 0));
+  SetDevDvar("scr_atmosFogDistanceScale", getDvar("g_atmosFogDistanceScaleReadOnly", 1));
+  SetDevDvar("scr_atmosFogSkyDistance", int(getDvar("g_atmosFogSkyDistanceReadOnly", 100000)));
+  SetDevDvar("scr_atmosFogSkyAngularFalloffEnabled", getDvar("g_atmosFogSkyAngularFalloffEnabledReadOnly", 0));
+  SetDevDvar("scr_atmosFogSkyFalloffStartAngle", getDvar("g_atmosFogSkyFalloffStartAngleReadOnly", 0));
+  SetDevDvar("scr_atmosFogSkyFalloffAngleRange", getDvar("g_atmosFogSkyFalloffAngleRangeReadOnly", 90));
   SetDevDvar("scr_atmosFogSunDirection", GetDvarVector("g_atmosFogSunDirectionReadOnly", (0, 0, 1)));
-  SetDevDvar("scr_atmosFogHeightFogEnabled", GetDvar("g_atmosFogHeightFogEnabledReadOnly", 0));
-  SetDevDvar("scr_atmosFogHeightFogBaseHeight", GetDvar("g_atmosFogHeightFogBaseHeightReadOnly", 0));
-  SetDevDvar("scr_atmosFogHeightFogHalfPlaneDistance", GetDvar("g_atmosFogHeightFogHalfPlaneDistanceReadOnly", 1000));
+  SetDevDvar("scr_atmosFogHeightFogEnabled", getDvar("g_atmosFogHeightFogEnabledReadOnly", 0));
+  SetDevDvar("scr_atmosFogHeightFogBaseHeight", getDvar("g_atmosFogHeightFogBaseHeightReadOnly", 0));
+  SetDevDvar("scr_atmosFogHeightFogHalfPlaneDistance", getDvar("g_atmosFogHeightFogHalfPlaneDistanceReadOnly", 1000));
   $ /
 }
 
@@ -247,12 +247,12 @@ updateFogEntFromScript() {
 fogslidercheck() {
   if(level.sunFogBeginFadeAngle >= level.sunFogEndFadeAngle) {
     level.sunFogBeginFadeAngle = level.sunFogEndFadeAngle - 1;
-    SetDvar("scr_sunFogBeginFadeAngle", level.sunFogBeginFadeAngle);
+    setDvar("scr_sunFogBeginFadeAngle", level.sunFogBeginFadeAngle);
   }
 
   if(level.sunFogEndFadeAngle <= level.sunFogBeginFadeAngle) {
     level.sunFogEndFadeAngle = level.sunFogBeginFadeAngle + 1;
-    SetDvar("scr_sunFogEndFadeAngle", level.sunFogEndFadeAngle);
+    setDvar("scr_sunFogEndFadeAngle", level.sunFogEndFadeAngle);
   }
 }
 
@@ -275,71 +275,71 @@ print_vision(vision_set) {
 
   fileprint_launcher_start_file();
 
-  fileprint_launcher( "r_glow \"" + GetDvar( "r_glowTweakEnable" ) + "\"" );
-  fileprint_launcher( "r_glowRadius0\"" + GetDvar( "r_glowTweakRadius0" ) + "\"" );
-  fileprint_launcher( "r_glowBloomPinch \"" + GetDvar( "r_glowTweakBloomPinch" ) + "\"" );
-  fileprint_launcher( "r_glowBloomCutoff\"" + GetDvar( "r_glowTweakBloomCutoff" ) + "\"" );
-  fileprint_launcher( "r_glowBloomDesaturation\"" + GetDvar( "r_glowTweakBloomDesaturation" ) + "\"" );
-  fileprint_launcher( "r_glowBloomIntensity0\"" + GetDvar( "r_glowTweakBloomIntensity0" ) + "\"" );
-  fileprint_launcher( "r_glowUseAltCutoff \"" + GetDvar( "r_glowTweakUseAltCutoff" ) + "\"" );
+  fileprint_launcher( "r_glow \"" + getDvar( "r_glowTweakEnable" ) + "\"" );
+  fileprint_launcher( "r_glowRadius0\"" + getDvar( "r_glowTweakRadius0" ) + "\"" );
+  fileprint_launcher( "r_glowBloomPinch \"" + getDvar( "r_glowTweakBloomPinch" ) + "\"" );
+  fileprint_launcher( "r_glowBloomCutoff\"" + getDvar( "r_glowTweakBloomCutoff" ) + "\"" );
+  fileprint_launcher( "r_glowBloomDesaturation\"" + getDvar( "r_glowTweakBloomDesaturation" ) + "\"" );
+  fileprint_launcher( "r_glowBloomIntensity0\"" + getDvar( "r_glowTweakBloomIntensity0" ) + "\"" );
+  fileprint_launcher( "r_glowUseAltCutoff \"" + getDvar( "r_glowTweakUseAltCutoff" ) + "\"" );
   fileprint_launcher( "" );
 
-  fileprint_launcher( "r_filmEnable\"" + GetDvar( "r_filmTweakEnable" ) + "\"" );
-  fileprint_launcher( "r_filmContrast\"" + GetDvar( "r_filmTweakContrast" ) + "\"" );
+  fileprint_launcher( "r_filmEnable\"" + getDvar( "r_filmTweakEnable" ) + "\"" );
+  fileprint_launcher( "r_filmContrast\"" + getDvar( "r_filmTweakContrast" ) + "\"" );
   if(level.currentgen) {
-    fileprint_launcher( "r_filmIntensity \"" + GetDvar( "r_filmTweakIntensity" ) + "\"" );
+    fileprint_launcher( "r_filmIntensity \"" + getDvar( "r_filmTweakIntensity" ) + "\"" );
   }
-  fileprint_launcher( "r_filmBrightness\"" + GetDvar( "r_filmTweakBrightness" ) + "\"" );
-  fileprint_launcher( "r_filmDesaturation\"" + GetDvar( "r_filmTweakDesaturation" ) + "\"" );
-  fileprint_launcher( "r_filmDesaturationDark\"" + GetDvar( "r_filmTweakDesaturationDark" ) + "\"" );
-  fileprint_launcher( "r_filmInvert\"" + GetDvar( "r_filmTweakInvert" ) + "\"" );
-  fileprint_launcher( "r_filmLightTint \"" + GetDvar( "r_filmTweakLightTint" ) + "\"" );
-  fileprint_launcher( "r_filmMediumTint\"" + GetDvar( "r_filmTweakMediumTint" ) + "\"" );
-  fileprint_launcher( "r_filmDarkTint\"" + GetDvar( "r_filmTweakDarkTint" ) + "\"" );
+  fileprint_launcher( "r_filmBrightness\"" + getDvar( "r_filmTweakBrightness" ) + "\"" );
+  fileprint_launcher( "r_filmDesaturation\"" + getDvar( "r_filmTweakDesaturation" ) + "\"" );
+  fileprint_launcher( "r_filmDesaturationDark\"" + getDvar( "r_filmTweakDesaturationDark" ) + "\"" );
+  fileprint_launcher( "r_filmInvert\"" + getDvar( "r_filmTweakInvert" ) + "\"" );
+  fileprint_launcher( "r_filmLightTint \"" + getDvar( "r_filmTweakLightTint" ) + "\"" );
+  fileprint_launcher( "r_filmMediumTint\"" + getDvar( "r_filmTweakMediumTint" ) + "\"" );
+  fileprint_launcher( "r_filmDarkTint\"" + getDvar( "r_filmTweakDarkTint" ) + "\"" );
   fileprint_launcher( " " );
 
-  fileprint_launcher( "r_primaryLightUseTweaks\"" + GetDvar( "r_primaryLightUseTweaks" ) + "\"" );
-  fileprint_launcher( "r_primaryLightTweakDiffuseStrength \"" + GetDvar( "r_primaryLightTweakDiffuseStrength" ) + "\"" );
-  fileprint_launcher( "r_primaryLightTweakSpecularStrength\"" + GetDvar( "r_primaryLightTweakSpecularStrength" ) + "\"" );
-  fileprint_launcher( "r_charLightAmbient \"" + GetDvar( "r_charLightAmbient" ) + "\"" );
+  fileprint_launcher( "r_primaryLightUseTweaks\"" + getDvar( "r_primaryLightUseTweaks" ) + "\"" );
+  fileprint_launcher( "r_primaryLightTweakDiffuseStrength \"" + getDvar( "r_primaryLightTweakDiffuseStrength" ) + "\"" );
+  fileprint_launcher( "r_primaryLightTweakSpecularStrength\"" + getDvar( "r_primaryLightTweakSpecularStrength" ) + "\"" );
+  fileprint_launcher( "r_charLightAmbient \"" + getDvar( "r_charLightAmbient" ) + "\"" );
   fileprint_launcher( " " );
 
-  fileprint_launcher( "r_viewModelPrimaryLightUseTweaks\"" + GetDvar( "r_viewModelPrimaryLightUseTweaks" ) + "\"" );
-  fileprint_launcher( "r_viewModelPrimaryLightTweakDiffuseStrength \"" + GetDvar( "r_viewModelPrimaryLightTweakDiffuseStrength" ) + "\"" );
-  fileprint_launcher( "r_viewModelPrimaryLightTweakSpecularStrength\"" + GetDvar( "r_viewModelPrimaryLightTweakSpecularStrength" ) + "\"" );
-  fileprint_launcher( "r_viewModelLightAmbient \"" + GetDvar( "r_viewModelLightAmbient" ) + "\"" );
+  fileprint_launcher( "r_viewModelPrimaryLightUseTweaks\"" + getDvar( "r_viewModelPrimaryLightUseTweaks" ) + "\"" );
+  fileprint_launcher( "r_viewModelPrimaryLightTweakDiffuseStrength \"" + getDvar( "r_viewModelPrimaryLightTweakDiffuseStrength" ) + "\"" );
+  fileprint_launcher( "r_viewModelPrimaryLightTweakSpecularStrength\"" + getDvar( "r_viewModelPrimaryLightTweakSpecularStrength" ) + "\"" );
+  fileprint_launcher( "r_viewModelLightAmbient \"" + getDvar( "r_viewModelLightAmbient" ) + "\"" );
   fileprint_launcher( " " );
 
-  fileprint_launcher( "r_volumeLightScatter \"" + GetDvar( "r_volumeLightScatterUseTweaks" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterLinearAtten\"" + GetDvar( "r_volumeLightScatterLinearAtten" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterQuadraticAtten \"" + GetDvar( "r_volumeLightScatterQuadraticAtten" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterAngularAtten \"" + GetDvar( "r_volumeLightScatterAngularAtten" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterDepthAttenNear \"" + GetDvar( "r_volumeLightScatterDepthAttenNear" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterDepthAttenFar\"" + GetDvar( "r_volumeLightScatterDepthAttenFar" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterBackgroundDistance \"" + GetDvar( "r_volumeLightScatterBackgroundDistance" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterColor\"" + GetDvar( "r_volumeLightScatterColor" ) + "\"" );
-  fileprint_launcher( "r_volumeLightScatterEv \"" + GetDvar( "r_volumeLightScatterEv" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatter \"" + getDvar( "r_volumeLightScatterUseTweaks" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterLinearAtten\"" + getDvar( "r_volumeLightScatterLinearAtten" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterQuadraticAtten \"" + getDvar( "r_volumeLightScatterQuadraticAtten" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterAngularAtten \"" + getDvar( "r_volumeLightScatterAngularAtten" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterDepthAttenNear \"" + getDvar( "r_volumeLightScatterDepthAttenNear" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterDepthAttenFar\"" + getDvar( "r_volumeLightScatterDepthAttenFar" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterBackgroundDistance \"" + getDvar( "r_volumeLightScatterBackgroundDistance" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterColor\"" + getDvar( "r_volumeLightScatterColor" ) + "\"" );
+  fileprint_launcher( "r_volumeLightScatterEv \"" + getDvar( "r_volumeLightScatterEv" ) + "\"" );
   fileprint_launcher( " " );
 
-  fileprint_launcher( "r_rimLightUseTweaks \"" + GetDvar( "r_rimLightUseTweaks" ) + "\"" );
-  fileprint_launcher( "r_rimLight0Pitch\"" + GetDvar( "r_rimLight0Pitch" ) + "\"" );
-  fileprint_launcher( "r_rimLight0Heading\"" + GetDvar( "r_rimLight0Heading" ) + "\"" );
-  fileprint_launcher( "r_rimLightDiffuseIntensity\"" + GetDvar( "r_rimLightDiffuseIntensity" ) + "\"" );
-  fileprint_launcher( "r_rimLightSpecIntensity \"" + GetDvar( "r_rimLightSpecIntensity" ) + "\"" );
-  fileprint_launcher( "r_rimLightBias\"" + GetDvar( "r_rimLightBias" ) + "\"" );
-  fileprint_launcher( "r_rimLightPower \"" + GetDvar( "r_rimLightPower" ) + "\"" );
-  fileprint_launcher( "r_rimLight0Color\"" + GetDvar( "r_rimLight0Color" ) + "\"" );
-  fileprint_launcher( "r_rimLightFalloffMaxDistance\"" + GetDvar( "r_rimLightFalloffMaxDistance" ) + "\"" );
-  fileprint_launcher( "r_rimLightFalloffMinDistance\"" + GetDvar( "r_rimLightFalloffMinDistance" ) + "\"" );
-  fileprint_launcher( "r_rimLightFalloffMinIntensity \"" + GetDvar( "r_rimLightFalloffMinIntensity" ) + "\"" );
+  fileprint_launcher( "r_rimLightUseTweaks \"" + getDvar( "r_rimLightUseTweaks" ) + "\"" );
+  fileprint_launcher( "r_rimLight0Pitch\"" + getDvar( "r_rimLight0Pitch" ) + "\"" );
+  fileprint_launcher( "r_rimLight0Heading\"" + getDvar( "r_rimLight0Heading" ) + "\"" );
+  fileprint_launcher( "r_rimLightDiffuseIntensity\"" + getDvar( "r_rimLightDiffuseIntensity" ) + "\"" );
+  fileprint_launcher( "r_rimLightSpecIntensity \"" + getDvar( "r_rimLightSpecIntensity" ) + "\"" );
+  fileprint_launcher( "r_rimLightBias\"" + getDvar( "r_rimLightBias" ) + "\"" );
+  fileprint_launcher( "r_rimLightPower \"" + getDvar( "r_rimLightPower" ) + "\"" );
+  fileprint_launcher( "r_rimLight0Color\"" + getDvar( "r_rimLight0Color" ) + "\"" );
+  fileprint_launcher( "r_rimLightFalloffMaxDistance\"" + getDvar( "r_rimLightFalloffMaxDistance" ) + "\"" );
+  fileprint_launcher( "r_rimLightFalloffMinDistance\"" + getDvar( "r_rimLightFalloffMinDistance" ) + "\"" );
+  fileprint_launcher( "r_rimLightFalloffMinIntensity \"" + getDvar( "r_rimLightFalloffMinIntensity" ) + "\"" );
   fileprint_launcher( " " );
 
-  fileprint_launcher( "r_unlitSurfaceHDRScalar \"" + GetDvar( "r_unlitSurfaceHDRScalar" ) + "\"" );
+  fileprint_launcher( "r_unlitSurfaceHDRScalar \"" + getDvar( "r_unlitSurfaceHDRScalar" ) + "\"" );
   fileprint_launcher( "" );
 
-  fileprint_launcher( "r_chromaticAberrationMode \"" + GetDvar( "r_chromaticAberration" ) + "\"" );
-  fileprint_launcher( "r_chromaticSeparation \"" + GetDvar( "r_chromaticSeparationR" ) + " " + GetDvar( "r_chromaticSeparationG" ) + " " + GetDvar( "r_chromaticSeparationB" ) + "\"" );
-  fileprint_launcher( "r_chromaticAberrationAlpha \"" + GetDvar( "r_chromaticAberrationAlpha" ) + "\"" );
+  fileprint_launcher( "r_chromaticAberrationMode \"" + getDvar( "r_chromaticAberration" ) + "\"" );
+  fileprint_launcher( "r_chromaticSeparation \"" + getDvar( "r_chromaticSeparationR" ) + " " + getDvar( "r_chromaticSeparationG" ) + " " + getDvar( "r_chromaticSeparationB" ) + "\"" );
+  fileprint_launcher( "r_chromaticAberrationAlpha \"" + getDvar( "r_chromaticAberrationAlpha" ) + "\"" );
 
   visionFileName = "\\share\\raw\\vision\\" + vision_set + ".vision";
 

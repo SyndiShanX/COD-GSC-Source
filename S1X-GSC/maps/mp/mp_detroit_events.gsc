@@ -284,7 +284,6 @@ tram_update_player_spline_control() {
           }
         }
       }
-
     }
     waitframe();
   }
@@ -345,7 +344,6 @@ tram_move(tram_speed, tram_speed_fast) {
         default:
           break;
       }
-
     }
 
     if(isDefined(rotate_yaw)) {

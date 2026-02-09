@@ -246,7 +246,7 @@ obelisk_damage_listener(var_0, var_1, var_2, var_3) {
       if(isDefined(var_16) && var_16 == "alienvanguard_projectile_mp")
         var_17 = "hitaliensoft";
 
-      if(!isplayer(var_8) && isDefined(var_8.inuseby))
+      if(!isPlayer(var_8) && isDefined(var_8.inuseby))
         var_8 = var_8.inuseby;
 
       var_8 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_17);

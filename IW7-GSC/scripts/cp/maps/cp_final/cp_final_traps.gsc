@@ -240,7 +240,7 @@ damage_enemies_in_trigger(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       if(var_4 scripts\cp\utility::is_valid_player()) {
         if(!isDefined(var_4.padding_damage)) {
           var_5 = var_4 getEye()[2] + 4;
@@ -318,7 +318,7 @@ updatefxlaserdisconnected() {}
 
 use_lasers_trap(var_0, var_1) {
   level.trapcooldownarray["laser_trap"]++;
-  var_2 = isDefined(var_1) && isplayer(var_1);
+  var_2 = isDefined(var_1) && isPlayer(var_1);
   var_3 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
   foreach(var_5 in var_3) {
     var_6 = getent(var_5.target, "targetname");
@@ -347,7 +347,7 @@ use_lasers_trap(var_0, var_1) {
 
   wait(23);
   level notify("lasers_end");
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("lasertrap_deactiveated", "zmb_comment_vo");
   }
 
@@ -479,7 +479,7 @@ spawn_brute_helmet(var_0, var_1) {
 use_blackhole_trap(var_0, var_1) {
   level endon("game_ended");
   level.trapcooldownarray["blackhole_trap"]++;
-  var_2 = isDefined(var_1) && isplayer(var_1);
+  var_2 = isDefined(var_1) && isPlayer(var_1);
   activate_trap_feedback(var_1);
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 40));
   if(var_2) {
@@ -498,7 +498,7 @@ use_blackhole_trap(var_0, var_1) {
   scripts\engine\utility::flag_set("screen_trap_active");
   thread func_2B35(var_0.var_2B30.origin, 20);
   wait(8);
-  if(isDefined(var_1) && isplayer(var_1) && scripts\engine\utility::cointoss() && scripts\engine\utility::flag("set_movie_spaceland") && !scripts\engine\utility::flag("pulled_out_helmet")) {
+  if(isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::cointoss() && scripts\engine\utility::flag("set_movie_spaceland") && !scripts\engine\utility::flag("pulled_out_helmet")) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("screentrap_item_hint", "zmb_comment_vo");
   }
 
@@ -507,7 +507,7 @@ use_blackhole_trap(var_0, var_1) {
   var_0.var_2B30.fx delete();
   scripts\engine\utility::flag_clear("screen_trap_active");
   wait(3);
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("screentrap_deactivated", "zmb_comment_vo");
   }
 
@@ -651,7 +651,7 @@ fridge_door_close() {
 use_fridge_trap(var_0, var_1) {
   level.trapcooldownarray["fridge_trap"]++;
   activate_trap_feedback(var_1);
-  var_2 = isDefined(var_1) && isplayer(var_1);
+  var_2 = isDefined(var_1) && isPlayer(var_1);
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 20));
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   if(var_2) {
@@ -780,7 +780,7 @@ fridge_frozen_damage(var_0, var_1) {
       self.marked_for_death = 1;
       self.nocorpse = 1;
       self.full_gib = 1;
-      self dodamage(self.health + 100, self.origin, scripts\engine\utility::ter_op(isDefined(var_1) && isplayer(var_1), var_1, undefined), var_0, "MOD_EXPLOSIVE", "iw7_fridgetrap_zm");
+      self dodamage(self.health + 100, self.origin, scripts\engine\utility::ter_op(isDefined(var_1) && isPlayer(var_1), var_1, undefined), var_0, "MOD_EXPLOSIVE", "iw7_fridgetrap_zm");
       playFX(scripts\engine\utility::getfx("zombie_freeze_shatter"), self.origin);
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("chumtrap_killfirm", "zmb_comment_vo");
       return;
@@ -798,7 +798,7 @@ fridge_frozen_damage(var_0, var_1) {
   }
 
   wait(8);
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_3 = var_1;
   } else {
     var_3 = undefined;
@@ -925,7 +925,7 @@ electric_trap_use(var_0, var_1) {
   }
 
   level.trapcooldownarray["electric_trap"]++;
-  var_2 = isDefined(var_1) && isplayer(var_1);
+  var_2 = isDefined(var_1) && isPlayer(var_1);
   activate_trap_feedback(var_1);
   var_3 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_5 in var_3) {
@@ -952,7 +952,7 @@ electric_trap_use(var_0, var_1) {
   level thread electric_trap_rumble();
   wait(24);
   level notify("stop_electric_trap");
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_deactivated", "zmb_comment_vo");
   }
 
@@ -975,7 +975,7 @@ electric_trap_damage(var_0, var_1) {
   var_3 = getent("electric_trap_trig", "targetname");
   for(;;) {
     var_3 waittill("trigger", var_4);
-    if(isplayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
+    if(isPlayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
       playfxontagforclients(level._effect["electric_shock_plyr"], var_4, "tag_eye", var_4);
       var_4.padding_damage = 1;
       var_4 dodamage(40, var_3.origin, var_3, var_3, "MOD_UNKNOWN", "iw7_electrotrap_zm");
@@ -994,7 +994,7 @@ electric_trap_damage(var_0, var_1) {
       }
 
       if(var_4.agent_type == "alien_goon") {
-        if(isDefined(var_1) && isplayer(var_1)) {
+        if(isDefined(var_1) && isPlayer(var_1)) {
           var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_killfirm", "zmb_comment_vo");
         }
 
@@ -1056,7 +1056,7 @@ electrocute_zombie(var_0, var_1) {
     var_0 setscriptablepartstate("electrocuted", "on");
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1 scripts\cp\utility::is_valid_player()) {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1 scripts\cp\utility::is_valid_player()) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_killfirm", "zmb_comment_vo");
     var_6 = var_1;
   } else {
@@ -1100,7 +1100,7 @@ init_rain_trap() {
 
 use_rain_trap(var_0, var_1) {
   level.trapcooldownarray["acid_rain_trap"]++;
-  var_2 = isDefined(var_1) && isplayer(var_1);
+  var_2 = isDefined(var_1) && isPlayer(var_1);
   activate_trap_feedback(var_1);
   var_3 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_5 in var_3) {
@@ -1147,7 +1147,7 @@ use_rain_trap(var_0, var_1) {
     var_13 show();
   }
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("acidrain_deactivated", "zmb_comment_vo");
   }
 
@@ -1181,7 +1181,7 @@ rain_trap_damage(var_0, var_1) {
       continue;
     }
 
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       if(isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
         playfxontagforclients(level._effect["sasquatch_rock_hit"], var_4, "tag_eye", var_4);
         var_4.padding_damage = 1;
@@ -1214,7 +1214,7 @@ delayed_cryptid_death(var_0, var_1) {
   var_0 endon("death");
   wait(randomfloat(0.5));
   var_0.marked_for_death = 1;
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_0 dodamage(var_0.health + 100, var_0.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_raintrap_zm");
     return;
   }
@@ -1233,7 +1233,7 @@ rain_dmg_zombie(var_0, var_1) {
   wait(randomfloat(2.5));
   var_0.dontmutilate = 1;
   var_0.nocorpse = 1;
-  if(isDefined(var_1) && isplayer(var_1) && var_1 scripts\cp\utility::is_valid_player(1)) {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1 scripts\cp\utility::is_valid_player(1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("acidrain_killfirm", "zmb_comment_vo");
     var_2 = var_1;
   } else {
@@ -1275,7 +1275,7 @@ listen_for_power() {
 }
 
 activate_trap_feedback(var_0) {
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     var_1 = ["fistpump", "fingercrossed", "handboom", "kissfist"];
     var_2 = scripts\engine\utility::random(var_1);
     var_3 = "iw7_" + var_2 + "_zm";

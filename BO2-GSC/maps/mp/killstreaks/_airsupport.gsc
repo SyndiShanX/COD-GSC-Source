@@ -63,7 +63,7 @@ endselectiononhostmigration() {
 }
 
 endselectionthink() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   assert(isDefined(self.selectinglocation));
   assert(self.selectinglocation == 1);
@@ -584,7 +584,6 @@ debug_print3d_simple(message, ent, offset, frames) {
     else
       thread draw_text(message, vectorscale((1, 1, 1), 0.8), ent, offset, 0);
   }
-
 }
 
 draw_text(msg, color, ent, offset, frames) {
@@ -625,7 +624,6 @@ debug_line(from, to, color, time, depthtest) {
 
     line(from, to, color, 1, depthtest, time);
   }
-
 }
 
 debug_star(origin, color, time) {
@@ -640,7 +638,6 @@ debug_star(origin, color, time) {
 
     debugstar(origin, time, color);
   }
-
 }
 
 debug_circle(origin, radius, color, time) {
@@ -655,7 +652,6 @@ debug_circle(origin, radius, color, time) {
 
     circle(origin, radius, color, 1, 1, time);
   }
-
 }
 
 debug_sphere(origin, radius, color, alpha, time) {
@@ -671,7 +667,6 @@ debug_sphere(origin, radius, color, alpha, time) {
     sides = int(10 * (1 + int(radius / 100)));
     sphere(origin, radius, color, alpha, 1, sides, time);
   }
-
 }
 
 debug_cylinder(origin, radius, height, color, mustrenderheight, time) {

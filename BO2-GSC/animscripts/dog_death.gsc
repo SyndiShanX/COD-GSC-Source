@@ -17,8 +17,9 @@ main() {
 
   self unlink();
 
-  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self)
+  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
     self.enemy.syncedmeleetarget = undefined;
+  }
 
   self clearanim(%root, 0.2);
   self setflaggedanimrestart("dog_anim", %german_shepherd_death_front, 1, 0.2, 1);

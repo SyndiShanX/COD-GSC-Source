@@ -9,6 +9,7 @@
 #include maps\_load_common;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 main(bScriptgened, bCSVgened, bsgenabled) {
   level.SPAWNFLAG_MODEL_DYNAMIC_PATH = 1;
   level.SPAWNFLAG_TRIGGER_AI_AXIS = 1;
@@ -66,19 +67,19 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   }
   level.bScriptgened = bScriptgened;
   if(getDvar(#"debug") == "") {
-    SetDvar("debug", "0");
+    setDvar("debug", "0");
   }
   if(getDvar(#"fallback") == "") {
-    SetDvar("fallback", "0");
+    setDvar("fallback", "0");
   }
   if(getDvar(#"angles") == "") {
-    SetDvar("angles", "0");
+    setDvar("angles", "0");
   }
   if(getDvar(#"noai") == "") {
-    SetDvar("noai", "off");
+    setDvar("noai", "off");
   }
   if(getDvar(#"scr_RequiredMapAspectratio") == "") {
-    SetDvar("scr_RequiredMapAspectratio", "1");
+    setDvar("scr_RequiredMapAspectratio", "1");
   }
   CreatePrintChannel("script_debug");
   if(!isDefined(anim.notetracks)) {
@@ -231,8 +232,9 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   maps\_busing::businit();
   maps\_music::music_init();
   maps\_dds::dds_init();
-  if(!isDefined(level.reviveFeature))
+  if(!isDefined(level.reviveFeature)) {
     level.reviveFeature = true;
+  }
   anim.useFacialAnims = false;
   if(!isDefined(level.missionfailed)) {
     level.missionfailed = false;
@@ -354,7 +356,8 @@ main(bScriptgened, bCSVgened, bsgenabled) {
       thread maps\_spawner::trigger_spawner(triggers[i]);
     }
   }
-  trigger_types = array("trigger_multiple", "trigger_once", "trigger_use", "trigger_use_touch", "trigger_radius", "trigger_lookat", "trigger_damage");
+  trigger_types = array(
+    "trigger_multiple", "trigger_once", "trigger_use", "trigger_use_touch", "trigger_radius", "trigger_lookat", "trigger_damage");
   for(p = 0; p < trigger_types.size; p++) {
     triggertype = trigger_types[p];
     triggers = getEntArray(triggertype, "classname");
@@ -441,13 +444,11 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   }
   PrintLn("_LOAD END TIME = " + GetTime());
 }
-
 custom_zombie_introscreen() {
   flag_wait("all_players_spawned");
   wait(1.5);
   level thread maps\_zombiemode_utility::fade_in();
 }
-
 onPlayerConnect() {
   for(;;) {
     level waittill("connecting", player);
@@ -458,18 +459,16 @@ onPlayerConnect() {
     player thread onPlayerSpawned();
     player thread onPlayerDisconnect();
     if(IsSplitScreen()) {
-      SetDvar("r_watersim", false);
+      setDvar("r_watersim", false);
     }
   }
 }
-
 onPlayerDisconnect() {
   self waittill("disconnect");
   if(IsSplitScreen()) {
-    SetDvar("r_watersim", true);
+    setDvar("r_watersim", true);
   }
 }
-
 onPlayerSpawned() {
   self endon("disconnect");
   for(;;) {
@@ -497,10 +496,10 @@ onPlayerSpawned() {
     self DetachAll();
     players = get_players();
     if(players.size == 1 && (1 != GetDvarInt(#"zombiefive_norandomchar"))) {
-      self.zm_random_char = randomInt(4);
+      self.zm_random_char = RandomInt(4);
     }
     if(isDefined(level.zombiemode_give_player_model_override)) {
-      self[[level.zombiemode_give_player_model_override]](self getEntityNumber());
+      self[[level.zombiemode_give_player_model_override]](self GetEntityNumber());
       if(isDefined(level.player_viewmodel)) {
         self SetViewModel(level.player_viewmodel);
       }
@@ -534,13 +533,12 @@ onPlayerSpawned() {
     }
   }
 }
-
 player_set_viewmodel(zm_random_solo_char) {
   if(isDefined(zm_random_solo_char)) {
     self.entity_num = zm_random_solo_char;
   }
   if(!isDefined(self.entity_num)) {
-    self.entity_num = self getEntityNumber();
+    self.entity_num = self GetEntityNumber();
   }
   if(isDefined(level.zombiemode_player_set_viewmodel_override)) {
     [[level.zombiemode_player_set_viewmodel_override]](self.entity_num);

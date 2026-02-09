@@ -312,7 +312,7 @@ heli_ai_next_loc_func(var_0, var_1, var_2) {
       }
       var_10 = var_9.origin + (0, 0, 64);
 
-      if(isai(var_9) || isplayer(var_9))
+      if(isai(var_9) || isPlayer(var_9))
         var_10 = var_9 getEye();
 
       if(self[[var_2]](var_6.origin, var_10)) {

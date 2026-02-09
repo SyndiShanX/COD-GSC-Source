@@ -8,11 +8,11 @@
 #include maps\_zombiemode_utility;
 #include maps\zombie_moon_teleporter;
 #using_animtree("generic_human");
+
 init_supersprint_anims() {
   level.scr_anim["zombie"]["sprint5"] = % ai_zombie_fast_sprint_01;
   level.scr_anim["zombie"]["sprint6"] = % ai_zombie_fast_sprint_02;
 }
-
 init_no_mans_land() {
   flag_init("enter_nml");
   flag_init("teleporter_used");
@@ -27,7 +27,7 @@ init_no_mans_land() {
   maps\_zombiemode_zone_manager::zone_init("nml_zone");
   SetSavedDvar("r_skyTransition", 1);
   teleporter_to_nml_init();
-  ent = getEnt("nml_dogs_volume", "targetname");
+  ent = getent("nml_dogs_volume", "targetname");
   ent thread check_players_in_nml_dogs_volume();
   level.num_nml_dog_targets = 0;
   get_perk_machine_ents();
@@ -37,20 +37,17 @@ init_no_mans_land() {
   level.NML_MIN_REACTION_DIST_SQ = 32 * 32;
   level.NML_MAX_REACTION_DIST_SQ = 2400 * 2400;
 }
-
 zombie_moon_start_init() {
   flag_wait("begin_spawning");
   level thread nml_dogs_init();
-  teleporter = getEnt("generator_teleporter", "targetname");
+  teleporter = getent("generator_teleporter", "targetname");
   teleporter_ending(teleporter, 0);
 }
-
 nml_dogs_init() {
   level.nml_dogs_enabled = false;
   wait(30);
   level.nml_dogs_enabled = true;
 }
-
 nml_setup_round_spawner() {
   if(isDefined(level.round_number)) {
     if(flag("between_rounds")) {
@@ -64,7 +61,6 @@ nml_setup_round_spawner() {
   level.round_spawn_func = ::nml_round_manager;
   Init_Moon_NML_Round(level.nml_last_round);
 }
-
 num_players_touching_volume(volume) {
   players = get_players();
   num_players_inside = 0;
@@ -79,14 +75,12 @@ num_players_touching_volume(volume) {
   }
   return (num_players_inside);
 }
-
 check_players_in_nml_dogs_volume() {
   while(1) {
     level.num_nml_dog_targets = num_players_touching_volume(self);
     wait(1.3);
   }
 }
-
 init_hint_hudelem(x, y, alignX, alignY, fontscale, alpha) {
   self.x = x;
   self.y = y;
@@ -96,7 +90,6 @@ init_hint_hudelem(x, y, alignX, alignY, fontscale, alpha) {
   self.alpha = alpha;
   self.sort = 20;
 }
-
 init_teleporter_message() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -107,7 +100,6 @@ init_teleporter_message() {
   }
   level.lastMessageTime = 0;
 }
-
 set_teleporter_message(message) {
   if(message != &"NULL_EMPTY") {
     level.lastMessageTime = gettime();
@@ -124,7 +116,6 @@ set_teleporter_message(message) {
     }
   }
 }
-
 Init_Moon_NML_Round(target_round) {
   zombies = GetAIArray("axis");
   if(isDefined(zombies)) {
@@ -152,7 +143,6 @@ Init_Moon_NML_Round(target_round) {
     level.chalk_hud2 SetText(" ");
   }
 }
-
 clear_nml_rounds() {
   level endon("restart_round");
   while(isDefined(level.chalk_override)) {
@@ -167,7 +157,6 @@ clear_nml_rounds() {
     wait(1.0);
   }
 }
-
 resume_moon_rounds(target_round) {
   if(target_round < 1) {
     target_round = 1;
@@ -197,7 +186,6 @@ resume_moon_rounds(target_round) {
     }
   }
 }
-
 nml_round_manager() {
   level endon("restart_round");
   level.dog_targets = getplayers();
@@ -374,7 +362,6 @@ nml_round_manager() {
     }
   }
 }
-
 nml_wave_attack(num_in_wave, spawner_name) {
   level endon("wave_attack_finished");
   level endon("restart_round");
@@ -405,14 +392,13 @@ nml_wave_attack(num_in_wave, spawner_name) {
     wait randomfloatrange(0.3, 1.0);
   }
 }
-
 spawn_a_zombie(max_zombies, spawner_zone_name, wait_delay) {
   zombies = getaispeciesarray("axis");
   if(zombies.size >= max_zombies) {
     return (undefined);
   }
   zombie_spawners = getEntArray(spawner_zone_name, "targetname");
-  spawn_point = zombie_spawners[randomInt(zombie_spawners.size)];
+  spawn_point = zombie_spawners[RandomInt(zombie_spawners.size)];
   ai = spawn_zombie(spawn_point);
   if(isDefined(ai)) {
     ai thread maps\_zombiemode::round_spawn_failsafe();
@@ -428,7 +414,6 @@ spawn_a_zombie(max_zombies, spawner_zone_name, wait_delay) {
   wait_network_frame();
   return (ai);
 }
-
 screen_shake_manager(next_round_time) {
   level endon("nml_attack_wave");
   level endon("restart_round");
@@ -440,7 +425,6 @@ screen_shake_manager(next_round_time) {
     time = gettime();
   }
 }
-
 attack_wave_screen_shake() {
   num_valid = 0;
   players = get_players();
@@ -461,29 +445,26 @@ attack_wave_screen_shake() {
   duration = 1.0;
   radius = 42 * 400;
 }
-
 rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playRumbleOnEntity(high_rumble_string);
+        players[i] playrumbleonentity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playRumbleOnEntity(low_rumble_string);
+        players[i] playrumbleonentity(low_rumble_string);
       }
     } else {
-      players[i] playRumbleOnEntity(high_rumble_string);
+      players[i] playrumbleonentity(high_rumble_string);
     }
   }
 }
-
 get_perk_machine_ents() {
   nml_position_helper = getstruct("nml_perk_location_helper", "script_noteworthy");
   nml_dist = 42 * 100;
   level.speed_cola_ents = get_vending_ents("vending_sleight", "speedcola_perk", nml_position_helper.origin, nml_dist);
   level.jugg_ents = get_vending_ents("vending_jugg", "jugg_perk", nml_position_helper.origin, nml_dist);
 }
-
 get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius) {
   names = [];
   names[0] = vending_name;
@@ -494,7 +475,9 @@ get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius) {
     for(j = 0; j < ents.size; j++) {
       ent = ents[j];
       if(isDefined(ent.script_string) && (ent.script_string == perk_script_string)) {
-        if((abs(nml_pos[0] - ent.origin[0]) < nml_radius) && (abs(nml_pos[1] - ent.origin[1]) < nml_radius) && (abs(nml_pos[2] - ent.origin[2]) < nml_radius)) {
+        if((abs(nml_pos[0] - ent.origin[0]) < nml_radius) &&
+          (abs(nml_pos[1] - ent.origin[1]) < nml_radius) &&
+          (abs(nml_pos[2] - ent.origin[2]) < nml_radius)) {
           ent_array[ent_array.size] = ent;
         }
       }
@@ -502,18 +485,16 @@ get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius) {
   }
   return (ent_array);
 }
-
 move_perk(dist, time, accel) {
   ent = level.speed_cola_ents[0];
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] + dist);
-  ent moveTo(pos, time, accel, accel);
+  ent moveto(pos, time, accel, accel);
   level.speed_cola_ents[1] trigger_off();
   ent = level.jugg_ents[0];
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] + dist);
-  ent moveTo(pos, time, accel, accel);
+  ent moveto(pos, time, accel, accel);
   level.jugg_ents[1] trigger_off();
 }
-
 perk_machines_hide(cola, jug, moving) {
   if(!isDefined(moving)) {
     moving = false;
@@ -553,7 +534,6 @@ perk_machines_hide(cola, jug, moving) {
     maps\_zombiemode_equip_hacker::register_pooled_hackable_struct(hackable, maps\_zombiemode_hackables_perks::perk_hack, maps\_zombiemode_hackables_perks::perk_hack_qualifier);
   }
 }
-
 perk_machine_show_selected(perk_index, moving) {
   switch (perk_index) {
     case 0:
@@ -564,7 +544,6 @@ perk_machine_show_selected(perk_index, moving) {
       break;
   }
 }
-
 perk_machine_arrival_update() {
   top_height = 1200;
   fall_time = 4;
@@ -594,7 +573,6 @@ perk_machine_arrival_update() {
     perk_machine_show_selected(perk_index, false);
   }
 }
-
 perk_arrive_fx(pos) {
   wait(0.15);
   playFX(level._effect["lightning_dog_spawn"], pos);
@@ -605,7 +583,6 @@ perk_arrive_fx(pos) {
   playsoundatposition("zmb_hellhound_spawn", pos);
   playsoundatposition("zmb_hellhound_bolt", pos);
 }
-
 nml_round_never_ends() {
   wait(2);
   level endon("restart_round");
@@ -618,13 +595,11 @@ nml_round_never_ends() {
     wait(1);
   }
 }
-
 nml_side_stepping_zombies() {
   level.mp_side_step = false;
   level waittill("nml_attack_wave");
   level.mp_side_step = true;
 }
-
 nml_ramp_up_zombies() {
   self endon("stop_ramp");
   level waittill("start_nml_ramp");
@@ -667,7 +642,6 @@ nml_ramp_up_zombies() {
     wait(20.0);
   }
 }
-
 nml_dog_health_increase() {
   if(level.nml_timer < 4) {
     level.nml_dog_health = 100;
@@ -681,29 +655,30 @@ nml_dog_health_increase() {
     level.nml_dog_health = 1600;
   }
 }
-
 nml_shouldSideStep() {
   if(self nml_canSideStep()) {
     return "step";
   }
   return "none";
 }
-
 nml_canSideStep() {
-  if(GetTime() - self.a.lastSideStepTime < level.NML_REACTION_INTERVAL)
+  if(GetTime() - self.a.lastSideStepTime < level.NML_REACTION_INTERVAL) {
     return false;
-  if(!isDefined(self.enemy))
+  }
+  if(!isDefined(self.enemy)) {
     return false;
-  if(self.a.pose != "stand")
+  }
+  if(self.a.pose != "stand") {
     return false;
-  distSqFromEnemy = distanceSquared(self.origin, self.enemy.origin);
+  }
+  distSqFromEnemy = DistanceSquared(self.origin, self.enemy.origin);
   if(distSqFromEnemy < level.NML_MIN_REACTION_DIST_SQ) {
     return false;
   }
   if(distSqFromEnemy > level.NML_MAX_REACTION_DIST_SQ) {
     return false;
   }
-  if(!isDefined(self.pathgoalpos) || distanceSquared(self.origin, self.pathgoalpos) < level.NML_MIN_REACTION_DIST_SQ) {
+  if(!isDefined(self.pathgoalpos) || DistanceSquared(self.origin, self.pathgoalpos) < level.NML_MIN_REACTION_DIST_SQ) {
     return false;
   }
   if(abs(self GetMotionAngle()) > 15) {

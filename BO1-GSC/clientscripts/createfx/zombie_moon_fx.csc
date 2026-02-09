@@ -1,6 +1,6 @@
 /*****************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\createfx\zombie_moon_fx.csc
+ * Script: clientscripts\createfx\zombie_moon_fx\.csc
 *****************************************************/
 
 main() {

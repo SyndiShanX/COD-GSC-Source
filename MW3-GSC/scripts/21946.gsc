@@ -15,7 +15,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2ACD(::_id_3E58);
   maps\_vehicle::_id_2A02("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, 1, 0);
   maps\_vehicle::_id_2A02(var_3[var_0], "tag_deathfx", "car_explode");
-  maps\_vehicle::_id_2AC1( % rubicon_driving_idle_forward, % rubicon_driving_idle_backward, 10);
+  maps\_vehicle::_id_2AC1(%rubicon_driving_idle_forward, %rubicon_driving_idle_backward, 10);
   maps\_vehicle::_id_2ACE(999, 500, 1500);
   maps\_vehicle::_id_2AC6("allies");
   maps\_vehicle::_id_2ACA(::_id_3A9D, ::_id_3A9C);
@@ -53,7 +53,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_driver";
   var_0[0]._id_2519 = % rubicon_mount_driver;

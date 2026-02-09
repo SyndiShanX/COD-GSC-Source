@@ -1404,7 +1404,7 @@ group_walla(var_0, var_1, var_2, var_3) {
 force_deathquote(var_0) {
   if(isDefined(var_0)) {
     level notify("new_quote_string");
-    setdvar("ui_deadquote", var_0);
+    setDvar("ui_deadquote", var_0);
   }
 }
 

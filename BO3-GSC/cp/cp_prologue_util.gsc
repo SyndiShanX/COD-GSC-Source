@@ -726,7 +726,7 @@ function function_e0f9fe98(str_door_name, b_state) {
   self endon("death");
   while(true) {
     self waittill("trigger", e_who);
-    if(isplayer(e_who)) {
+    if(isPlayer(e_who)) {
       if(!isDefined(e_who.a_doors)) {
         e_who.a_doors = [];
       }

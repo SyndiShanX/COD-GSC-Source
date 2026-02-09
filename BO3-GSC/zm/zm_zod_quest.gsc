@@ -1395,7 +1395,7 @@ function pap_chasm_killtrigger() {
   level thread function_64cb1f9b("pap_chasm_side_near", 0);
   while(true) {
     t_kill waittill("trigger", e_triggerer);
-    if(isplayer(e_triggerer)) {
+    if(isPlayer(e_triggerer)) {
       if(!(isDefined(e_triggerer.beastmode) && e_triggerer.beastmode)) {
         e_triggerer dodamage(1000000, e_triggerer.origin);
       }
@@ -1415,7 +1415,7 @@ function function_64cb1f9b(str_trigger_name, var_f8826470) {
   var_b354bc3b = getent(str_trigger_name, "targetname");
   while(true) {
     var_b354bc3b waittill("trigger", e_triggerer);
-    if(isplayer(e_triggerer)) {
+    if(isPlayer(e_triggerer)) {
       e_triggerer.var_d9394bfb = var_f8826470;
     }
   }
@@ -1502,14 +1502,14 @@ function function_c0a29676() {
 function function_11a2ca3b(val) {
   if(val) {
     level.overridezombiespawn = &function_861cf6b3;
-    setdvar("", 0);
+    setDvar("", 0);
   }
 }
 
 function function_1dadcc76(val) {
   if(val) {
     level.overridezombiespawn = undefined;
-    setdvar("", -1);
+    setDvar("", -1);
   }
 }
 

@@ -147,7 +147,6 @@ function_b156b71() {
     iprintlnbold("<dev string:x38>");
     println("<dev string:x38>");
   }
-
 }
 
 function_4e186966() {
@@ -199,7 +198,6 @@ function_977835f8() {
     if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
       debugstar(a_s_valves[i].origin, 9999);
     }
-
   }
 
   while(true) {
@@ -675,7 +673,7 @@ fishy_offering_step_1_setup(var_5ea5c94d) {
     while(true) {
       s_result = e_fish waittill(#"damage");
 
-      if(isplayer(s_result.attacker) && (util::getweaponclass(s_result.weapon) === # "weapon_sniper" || util::getweaponclass(s_result.weapon) === # "weapon_tactical")) {
+      if(isPlayer(s_result.attacker) && (util::getweaponclass(s_result.weapon) === # "weapon_sniper" || util::getweaponclass(s_result.weapon) === # "weapon_tactical")) {
         s_result.attacker util::show_hit_marker();
         s_landing = struct::get(spot.target);
         var_7a19681c = 360 / s_landing.n_move_time;
@@ -778,7 +776,7 @@ function_bf250d60() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(isplayer(s_result.attacker)) {
+    if(isPlayer(s_result.attacker)) {
       s_result.attacker util::show_hit_marker();
       var_1c07e390 = (s_landing.angles[0] - self.angles[0] + 360) / s_landing.n_move_time;
       var_a046aba8 = (s_landing.angles[1] - self.angles[1] + 360) / s_landing.n_move_time;
@@ -1068,7 +1066,6 @@ function_50f4cc80() {
         iprintlnbold(self.var_83fad8a9);
         println(self.var_83fad8a9);
       }
-
     }
   }
 
@@ -1336,7 +1333,6 @@ function_75bdcb53(mdl_car) {
     iprintlnbold("<dev string:xc9>");
     println("<dev string:xc9>");
   }
-
 }
 
 function_cd85b198() {
@@ -1381,7 +1377,7 @@ function_b9b8f31d() {
 }
 
 function_f80bde48(player) {
-  if(isplayer(player) && player getstance() === # "crouch" && player usebuttonpressed()) {
+  if(isPlayer(player) && player getstance() === # "crouch" && player usebuttonpressed()) {
     player endon(#"death", #"weapon_fired", #"weapon_ads");
     e_path = getent("berths_walk", "targetname");
 
@@ -1662,7 +1658,7 @@ function function_e01b477f(var_2cb1cbce, var_46a3f206) {
   self endon(#"death");
   waitresult = self waittill(#"damage");
 
-  if(isplayer(waitresult.attacker)) {
+  if(isPlayer(waitresult.attacker)) {
     waitresult.attacker util::show_hit_marker();
   }
 
@@ -1763,7 +1759,7 @@ function_7ae29395() {
   while(true) {
     waitresult = self.trigger waittill(#"trigger");
 
-    if(isplayer(waitresult.activator)) {
+    if(isPlayer(waitresult.activator)) {
       self.s_launcher flag::set(#"hash_2078d5bf94139877");
       var_a3c52257 = 0;
 
@@ -1978,7 +1974,7 @@ function_500ea537(params) {
   if(isalive(self) && self.archetype === # "zombie" && params.weapon === getweapon(#"hash_6a9069969e6fa287")) {
     player = params.eattacker;
 
-    if(isalive(player) && isplayer(player)) {
+    if(isalive(player) && isPlayer(player)) {
       var_fa26e2a9 = randomintrange(20000, 30000);
       n_time = gettime();
 
@@ -2031,11 +2027,11 @@ function_cc7214a9(params) {
   if(isDefined(self) && self.archetype === # "blight_father") {
     player = params.eattacker;
 
-    if(isalive(player) && isplayer(player)) {
+    if(isalive(player) && isPlayer(player)) {
       w_bowie = getweapon(#"bowie_knife");
 
       if(params.weapon === w_bowie) {
-        if(isalive(player) && isplayer(player)) {
+        if(isalive(player) && isPlayer(player)) {
           if(isDefined(self.var_c87d40c5) && self.var_c87d40c5) {
             self.var_c87d40c5 = 0;
 
@@ -2305,7 +2301,7 @@ function_ff05eb5() {
   while(true) {
     waitresult = self.t_damage waittill(#"damage");
 
-    if(waitresult.mod !== # "mod_melee" || !isplayer(waitresult.attacker)) {
+    if(waitresult.mod !== # "mod_melee" || !isPlayer(waitresult.attacker)) {
       continue;
     }
 
@@ -2372,7 +2368,7 @@ function_fd46b17e(str_notify) {
   while(isDefined(level.var_4eecfa09)) {
     waitresult = level.var_4eecfa09 waittill(#"damage");
 
-    if(waitresult.mod !== # "mod_melee" || var_52a1ab19.state === "open" || !isplayer(waitresult.attacker)) {
+    if(waitresult.mod !== # "mod_melee" || var_52a1ab19.state === "open" || !isPlayer(waitresult.attacker)) {
       continue;
     }
 

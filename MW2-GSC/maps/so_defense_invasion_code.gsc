@@ -10,9 +10,7 @@
 #include maps\_specialops;
 #include maps\_hud_util;
 
-// ---------------------------------------------------------------------------------
-
-fire_off_exploder(current) {
+// --------------------------------------------------------------------------------- fire_off_exploder(current) {
   while(1) {
     exploder(current.script_prefab_exploder);
     if(!isDefined(current.target)) {
@@ -26,9 +24,7 @@ fire_off_exploder(current) {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-create_smoke_wave(smoke_tag, dialog_wait) {
+// --------------------------------------------------------------------------------- create_smoke_wave(smoke_tag, dialog_wait) {
   // Prevent smoke from happening too frequently
   if(isDefined(level.smoke_throttle)) {
     if(!isDefined(level.smoke_wave_time))
@@ -66,9 +62,7 @@ dialog_smoke_wave_alert(dialog_wait) {
   radio_dialogue("so_def_inv_thermaloptics");
 }
 
-// ---------------------------------------------------------------------------------
-
-btr80_level_init() {
+// --------------------------------------------------------------------------------- btr80_level_init() {
   if(isDefined(level.btr80_init)) {
     return;
   }
@@ -328,7 +322,7 @@ btr80_register_death() {
     }
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker.btr80_kills++;
     attacker update_sentry_attackeraccuracy(level.aamod_btr80_kill);
   }
@@ -381,9 +375,7 @@ dialog_btr80_spotted_you_action() {
   radio_dialogue("so_def_inv_bmpspottedyou");
 }
 
-// ---------------------------------------------------------------------------------
-
-hunter_enemies_level_init() {
+// --------------------------------------------------------------------------------- hunter_enemies_level_init() {
   // Always re-init this as it can get overwritten at the end of a wave.
   set_group_advance_to_enemy_parameters(30000, 2);
 
@@ -721,7 +713,7 @@ hunter_register_turret_death() {
   if(hunter_attacker_is_player_turret(attacker)) {
     attacker.owner.turret_kills++;
     attacker.owner update_sentry_attackeraccuracy(level.aamod_sentry_kill);
-  } else if(isplayer(attacker)) {
+  } else if(isPlayer(attacker)) {
     attacker update_sentry_attackeraccuracy(level.aamod_player_kill);
   }
 }
@@ -739,7 +731,7 @@ hunter_attacker_is_player_turret(attacker) {
   if(!isDefined(attacker.owner))
     return false;
 
-  if(!isplayer(attacker.owner))
+  if(!isPlayer(attacker.owner))
     return false;
 
   return true;
@@ -845,9 +837,7 @@ dialog_hunter_enemies_setup(enemy_tag, wait_time) {
   level.scr_radio["so_def_inv_dronedirect"] = "so_def_inv_dronedirect";
 }
 
-// ---------------------------------------------------------------------------------
-
-attack_heli_init() {
+// --------------------------------------------------------------------------------- attack_heli_init() {
   if(isDefined(level.attack_heli_init)) {
     return;
   }
@@ -889,7 +879,7 @@ attack_heli_register_death() {
   level.attack_heli_count--;
   assertex((level.attack_heli_count >= 0), "Somehow the Heli population counter dropped below 0. This should never happen.");
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker.helicopter_kills++;
     attacker update_sentry_attackeraccuracy(level.aamod_heli_kill);
   }
@@ -910,9 +900,7 @@ dialog_shot_down_heli() {
   radio_dialogue("so_def_inv_niceone");
 }
 
-// ---------------------------------------------------------------------------------
-
-// Updated to be generic and not depend on specific exact stingers.
+// --------------------------------------------------------------------------------- // Updated to be generic and not depend on specific exact stingers.
 dialog_get_stinger() {
   assertex(isDefined(level.stingers) && (level.stingers.size > 0), "dialog_get_stinger() requires at least one stinger to function correctly.");
   level endon("special_op_terminated");
@@ -1038,9 +1026,7 @@ dialog_fill_nates_stinger() {
   level.nates_dialog[level.nates_dialog.size] = "so_def_inv_stingernates";
 }
 
-// ---------------------------------------------------------------------------------
-
-stinger_maintain_spawn(stinger_id) {
+// --------------------------------------------------------------------------------- stinger_maintain_spawn(stinger_id) {
   level endon("special_op_terminated");
 
   level.stingers[stinger_id] = getent(stinger_id, "script_noteworthy");
@@ -1108,9 +1094,7 @@ stinger_respawn(stinger_id, origin, angles) {
   return stinger;
 }
 
-// ---------------------------------------------------------------------------------
-
-semtex_maintain_availability() {
+// --------------------------------------------------------------------------------- semtex_maintain_availability() {
   semtex = getEntArray("weapon_semtex_grenade", "classname");
   array_thread(semtex, ::semtex_maintain_self);
 }
@@ -1140,9 +1124,7 @@ semtex_player_is_close(semtex_origin) {
   return close_players.size > 0;
 }
 
-// ---------------------------------------------------------------------------------
-
-hellfire_attack_start() {
+// --------------------------------------------------------------------------------- hellfire_attack_start() {
   if(isDefined(level.hellfire_active)) {
     return;
   }
@@ -1374,9 +1356,7 @@ hellfire_set_time_breather(time_min, time_max) {
   level.hellfire_time_breather["max"] = time_max;
 }
 
-// ---------------------------------------------------------------------------------
-
-hud_display_wavecount(wave_num) {
+// --------------------------------------------------------------------------------- hud_display_wavecount(wave_num) {
   // Little delay so the "Wave Starting in..." can be removed
   wait(1);
 
@@ -1523,9 +1503,7 @@ hud_display_enemies_pulse_vehicle(hudelem_title, hudelem_count, enemy_total) {
   hudelem_count thread so_hud_pulse_default();
 }
 
-// ---------------------------------------------------------------------------------
-
-door_diner_open() {
+// --------------------------------------------------------------------------------- door_diner_open() {
   diner_back_door = getent("diner_back_door", "targetname");
   diner_back_door rotateyaw(85, .3); //counter clockwise
   diner_back_door playSound("diner_backdoor_slams_open");
@@ -1546,9 +1524,7 @@ door_bt_locker_open() {
   BT_locker_door connectpaths();
 }
 
-// ---------------------------------------------------------------------------------
-
-so_defense_convert_enemies() {
+// --------------------------------------------------------------------------------- so_defense_convert_enemies() {
   // Convert some additional enemies over to available Gas Station enemies
   convert_enemies = getEntArray("diner_enemy_defenders", "targetname");
   convert_enemies = array_merge(convert_enemies, getEntArray("diner_enemy_counter_attack", "targetname"));

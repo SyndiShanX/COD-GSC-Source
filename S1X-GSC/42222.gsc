@@ -72,7 +72,7 @@ check_createfx_limit() {}
 check_limit_type(var_0, var_1) {}
 
 print_org(var_0, var_1, var_2, var_3) {
-  if(getdvar("debug") == "1") {
+  if(getDvar("debug") == "1") {
     return;
   }
 }
@@ -245,7 +245,7 @@ create_dynamicambience() {
   if(common_scripts\utility::issp()) {
     return;
   }
-  if(getdvar("createfx") == "on") {
+  if(getDvar("createfx") == "on") {
     common_scripts\utility::flag_wait("createfx_started");
   }
 
@@ -567,7 +567,7 @@ add_reactive_fx() {
   if(!platformmatches()) {
     return;
   }
-  if(!common_scripts\utility::issp() && getdvar("createfx") == "") {
+  if(!common_scripts\utility::issp() && getDvar("createfx") == "") {
     return;
   }
   if(!isDefined(level._fx.reactive_thread)) {
@@ -585,7 +585,7 @@ add_reactive_fx() {
 
 reactive_fx_thread() {
   if(!common_scripts\utility::issp()) {
-    if(getdvar("createfx") == "on") {
+    if(getDvar("createfx") == "on") {
       common_scripts\utility::flag_wait("createfx_started");
     }
   }

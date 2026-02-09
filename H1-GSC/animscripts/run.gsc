@@ -187,7 +187,7 @@ runngun(var_0) {
   run_playfacialanim(undefined);
   self.a.allowedpartialreloadontheruntime = gettime() + 500;
 
-  if(var_0 && isplayer(self.enemy))
+  if(var_0 && isPlayer(self.enemy))
     self updateplayersightaccuracy();
 
   return 1;
@@ -256,7 +256,7 @@ runngun_backward() {
   self setflaggedanimknob("runanim", var_0, 1, 0.3, 0.8);
   run_playfacialanim(var_0);
 
-  if(isplayer(self.enemy))
+  if(isPlayer(self.enemy))
     self updateplayersightaccuracy();
 
   animscripts\notetracks::donotetracksfortime(0.2, "runanim");

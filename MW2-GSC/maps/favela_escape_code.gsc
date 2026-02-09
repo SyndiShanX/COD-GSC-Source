@@ -126,10 +126,7 @@ triggered_hostile_burst(org) {
   level thread play_sound_in_space(burst, org.origin);
 }
 
-// -------------
-// --- MUSIC ---
-// -------------
-favesc_combat_music() {
+// ------------- // --- MUSIC --- // ------------- favesc_combat_music() {
   thread favesc_combat_music_stop();
 
   alias = "favelaescape_combat";
@@ -167,10 +164,7 @@ favesc_finalrun_music() {
   level.player play_sound_on_entity("favelaescape_ending");
 }
 
-// --------------
-// --- WALLAS ---
-// --------------
-/* megaphone processed aliases:
+// -------------- // --- WALLAS --- // -------------- /* megaphone processed aliases:
 favesc_pgm_killthemall
 favesc_pgm_wellfindyou
 favesc_pgm_nohonor
@@ -219,10 +213,7 @@ bigjump_recovery_leftside_walla() {
   play_sound_in_space("wlla_favela_escape_fallen_left", org);
 }
 
-// ------------------
-// --- RADIOTOWER ---
-// ------------------
-radiotower_runpath_dialogue() {
+// ------------------ // --- RADIOTOWER --- // ------------------ radiotower_runpath_dialogue() {
   waitflag = "runpath_dialogue_continue";
   flag_init(waitflag);
   thread radiotower_runpath_dialogue_triggerwait(waitflag);
@@ -804,10 +795,7 @@ radiotower_enemies_retreat() {
   }
 }
 
-// ---------------
-// --- STREETS ---
-// ---------------
-street_dialogue() {
+// --------------- // --- STREETS --- // --------------- street_dialogue() {
   thread street_dialogue_playerabove();
   thread street_dialogue_leftalley();
 
@@ -1094,10 +1082,7 @@ vista2_leftbalcony_enemies_magicgrenade() {
   }
 }
 
-// --------------
-// --- MARKET ---
-// --------------
-market_dialogue() {
+// -------------- // --- MARKET --- // -------------- market_dialogue() {
   thread market_dialogue_chaoticaboves();
   thread market_dialogue_rightshack();
 
@@ -1176,10 +1161,7 @@ market_door1() {
   door_kick_housespawn(door1_spawners, door1, door1_animRef, door1_physicsRef);
 }
 
-// ------------------
-// --- MARKET EVAC---
-// ------------------
-market_evac_dialogue() {
+// ------------------ // --- MARKET EVAC--- // ------------------ market_evac_dialogue() {
   flag_wait("market_evac_insidepath_start");
 
   battlechatter_off("allies");
@@ -1407,7 +1389,7 @@ fakefire_smallarms_spot(flagname) {
           }
         }
 
-        if(IsPlayer(traceEnt)) {
+        if(isPlayer(traceEnt)) {
           continue;
         }
       }
@@ -1668,10 +1650,7 @@ player_left_trigger_notify(trig) {
   self notify("left_trigger");
 }
 
-// ----------------
-// --- ROOF RUN ---
-// ----------------
-roofrun_dialogue() {
+// ---------------- // --- ROOF RUN --- // ---------------- roofrun_dialogue() {
   // "Let's go, let's go!!"level.sarge dialogue("favesc_cmt_letsgoletsgo");
 
   // "My friend, from up here, it looks like the whole village is trying to kill you!"radio_dialogue("favesc_nkl_wholevillage");
@@ -2478,10 +2457,8 @@ player_bigjump_recovery_vfx(animtime, shockfile) {
 
   SetBlur(0, .5);
 
-  /*-----------------------
-  LOOK AT HANDS, BG BLURS
-  -------------------------
-  dof_see_hands = [];
+  /*----------------------- LOOK AT HANDS, BG BLURS
+  ------------------------- dof_see_hands = [];
   dof_see_hands[ "nearStart" ] = 0;
   dof_see_hands[ "nearEnd" ] = 0;
   dof_see_hands[ "nearBlur" ] = 6;
@@ -2493,10 +2470,8 @@ player_bigjump_recovery_vfx(animtime, shockfile) {
   	
 
   flag_wait( "notetrack_player_lowerhands" );
-  /*-----------------------
-  DROP HANDS, BG COMES INTO FOCUS
-  -------------------------
-  dof_see_dudes = [];
+  /*----------------------- DROP HANDS, BG COMES INTO FOCUS
+  ------------------------- dof_see_dudes = [];
   dof_see_dudes[ "nearStart" ] = 4.7;
   dof_see_dudes[ "nearEnd" ] = 56;
   dof_see_dudes[ "nearBlur" ] = 6;
@@ -2569,14 +2544,11 @@ bigjump_angrymob(waitTime) {
   thread bigjump_recovery_rightside_walla();
   thread bigjump_recovery_leftside_walla();
 
-  // -- ground mob on right --
-  thread bigjump_angrymob_right_ground();
+  // -- ground mob on right -- thread bigjump_angrymob_right_ground();
 
-  // -- rooftop guys on left --
-  delaythread(3.5, ::bigjump_angrymob_left_roof);
+  // -- rooftop guys on left -- delaythread(3.5, ::bigjump_angrymob_left_roof);
 
-  // -- ground mob on left --
-  delaythread(7.75, ::bigjump_angrymob_left_ground);
+  // -- ground mob on left -- delaythread(7.75, ::bigjump_angrymob_left_ground);
 }
 
 bigjump_angrymob_left_roof() {
@@ -2700,10 +2672,7 @@ angrymob_animdone_think(anime, animref) {
   self.ignoreall = false;
 }
 
-// ----------------
-// --- SOLO RUN ---
-// ----------------
-solorun_chaser_spawnfunc() {
+// ---------------- // --- SOLO RUN --- // ---------------- solorun_chaser_spawnfunc() {
   if(!isDefined(level.chasers)) {
     level.chasers = [];
   }
@@ -2802,7 +2771,7 @@ solorun_timer_extend_when_close(timerTime, timerLoc) {
 }
 
 solorun_timer(iSeconds, sLabel, bUseTick) {
-  if(getdvar("notimer") == "1") {
+  if(getDvar("notimer") == "1") {
     return;
   }
   if(!isDefined(bUseTick))
@@ -2819,8 +2788,7 @@ solorun_timer(iSeconds, sLabel, bUseTick) {
   level.timer settenthstimer(iSeconds);
   level.start_time = gettime();
 
-  // -- timer expired --
-  if(bUseTick == true)
+  // -- timer expired -- if(bUseTick == true)
     thread timer_tick();
   wait(iSeconds);
 
@@ -2916,7 +2884,7 @@ solorun_player_leaves_trigger(trig) {
 
   while(1) {
     trig waittill("trigger", other);
-    if(IsPlayer(other)) {
+    if(isPlayer(other)) {
       break;
     }
     wait(0.05);
@@ -3211,19 +3179,19 @@ solorun_sprint_tracker() {
 
 sprint_hint(flagstr) {
   hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."if(!level.console) {
-    change = false;
+  change = false;
 
-    // we want the sprint command to be the one that gets displayed on PC
-    if(is_command_bound("+sprint")) {
-      change = true;
-    }
-    // if neither are bound, show the PC-specific hint
-    else if(!is_command_bound("+breath_sprint")) {
-      change = true;
-    }
+  // we want the sprint command to be the one that gets displayed on PC
+  if(is_command_bound("+sprint")) {
+    change = true;
+  }
+  // if neither are bound, show the PC-specific hint
+  else if(!is_command_bound("+breath_sprint")) {
+    change = true;
+  }
 
-    if(change) {
-      hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."}
+  if(change) {
+    hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."}
   }
 
   fontsize = 1.6;
@@ -3397,7 +3365,7 @@ player_bullet_whizby_location_trig() {
   while(1) {
     self waittill("trigger", other);
 
-    if(IsPlayer(other) && !flag("whizby_location_updating")) {
+    if(isPlayer(other) && !flag("whizby_location_updating")) {
       flag_set("whizby_location_updating");
 
       level.whizbyStarts = spots;
@@ -3479,7 +3447,7 @@ solorun_rooftop_squibs() {
       traceEnt = trace["entity"];
 
       if(isDefined(traceEnt)) {
-        if(IsPlayer(traceEnt)) {
+        if(isPlayer(traceEnt)) {
           continue;
         }
       }
@@ -3491,7 +3459,6 @@ solorun_rooftop_squibs() {
 
     wait(RandomFloatRange(burstWaitMin, burstWaitMax));
   }
-
 }
 
 solorun_rooftop_squib_offset(coord, offsetMin, offsetMax) {
@@ -3595,8 +3562,8 @@ solorun_chopperjump_killtrig() {
   while(1) {
     self waittill("trigger", other);
 
-    if(IsPlayer(other)) {
-      SetDvar("ui_deadquote", "@FAVELA_ESCAPE_DEADQUOTE_FAILED_CHOPPER_JUMP");
+    if(isPlayer(other)) {
+      setDvar("ui_deadquote", "@FAVELA_ESCAPE_DEADQUOTE_FAILED_CHOPPER_JUMP");
       maps\_utility::missionFailedWrapper();
     }
 
@@ -3882,10 +3849,7 @@ chopperjump_dialogue() {
   // "Just get us to the sub..."radio_dialogue("favesc_cmt_tothesub");
 }
 
-// -----------------
-// -- AI STUFF --
-// -----------------
-get_single_redshirt() {
+// ----------------- // -- AI STUFF -- // ----------------- get_single_redshirt() {
   guys = get_nonhero_friends();
   ASSERT(guys.size == 1);
   redshirt = guys[0];
@@ -4026,8 +3990,7 @@ bloody_pain(damage, attacker, direction_vec, point, type, modelName, tagName) {
   playFX(getfx("bodyshot"), point, backward, up);
 }
 
-// ---- door kicker guys ----
-// spawns AIs in a house and has one of them kick the door open
+// ---- door kicker guys ---- // spawns AIs in a house and has one of them kick the door open
 door_kick_housespawn(spawners, door, animRef, physicsRef) {
   spawners = array_randomize(spawners);
 
@@ -4111,8 +4074,7 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
   }
 }
 
-// ---- chaotic above shooter guys ----
-chaotic_above_shooter() {
+// ---- chaotic above shooter guys ---- chaotic_above_shooter() {
   self endon("death");
 
   animref = GetStruct(self.target, "targetname");
@@ -4129,8 +4091,7 @@ chaotic_above_shooter() {
   animref anim_generic(self, anime);
 }
 
-// ---- window smash guys ----
-window_smash_stop_inside() {
+// ---- window smash guys ---- window_smash_stop_inside() {
   self endon("death");
 
   self window_smash("window_smash_stop_inside");
@@ -4156,8 +4117,7 @@ window_smash(smashAnime) {
   animref anim_generic(self, smashAnime);
 }
 
-// ---- curtain pulldown guys ----
-curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
+// ---- curtain pulldown guys ---- curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
   if(!isDefined(bWaitForPlayer))
     bWaitForPlayer = false;
 
@@ -4627,7 +4587,7 @@ teleport_to_origin(origin, angles) {
     angles = (0, 0, 0);
   }
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     self ForceTeleport(groundpos(origin), angles);
     self SetGoalPos(self.origin);
   } else {
@@ -4708,10 +4668,7 @@ bloody_death_fx(tag, fxName) {
   playFXOnTag(fxName, self, tag);
 }
 
-// -------------------------------
-// -- FRIENDLY COLOR MANAGEMENT --
-// -------------------------------
-// kind of a fancy version of the linear friendly color management technique, in that it
+// ------------------------------- // -- FRIENDLY COLOR MANAGEMENT -- // ------------------------------- // kind of a fancy version of the linear friendly color management technique, in that it
 //supports multiple colorCode/volume combos per trigger
 // - the basic concept is that we don't want friendlies to move forward until
 // a volume associated with their colorCode is clear of enemies
@@ -4858,10 +4815,7 @@ color_flags_dupe_info(infos, colorCode) {
   return false;
 }
 
-// ----------------------
-// --- AIRLINER STUFF ---
-// ----------------------
-airliner_flyby_trigs() {
+// ---------------------- // --- AIRLINER STUFF --- // ---------------------- airliner_flyby_trigs() {
   ASSERT(isDefined(level.airliner));
   airliner_hide();
 
@@ -5057,10 +5011,7 @@ stop_sound(alias) {
   self notify("stop sound" + alias);
 }
 
-// -----------------
-// -- UTIL STUFF --
-// -----------------
-sbmodel_rotate(rotateTime, makeNotSolid) {
+// ----------------- // -- UTIL STUFF -- // ----------------- sbmodel_rotate(rotateTime, makeNotSolid) {
   if(!isDefined(makeNotSolid)) {
     makeNotSolid = false;
   }

@@ -83,7 +83,6 @@ sloth_is_pain() {
       self notify("stop_accumulation");
 
       sloth_print("pain was interrupted");
-
     }
   }
 
@@ -100,7 +99,6 @@ sloth_is_traversing() {
       self.is_traversing = 0;
 
       sloth_print("traverse was interrupted");
-
     }
   }
 
@@ -165,5 +163,4 @@ sloth_debug_context(item, dist) {
     debugstar(item.origin, 100, (1, 1, 1));
     circle(item.origin, dist, (1, 1, 1), 0, 1, 100);
   }
-
 }

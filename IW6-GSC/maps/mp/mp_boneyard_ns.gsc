@@ -27,8 +27,8 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_boneyard_ns");
   maps\mp\mp_boneyard_ns_anim::main();
 
-  SetDvar("r_lightGridEnableTweaks", 1);
-  SetDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_specularColorScale", 2, 4.5);
   setDvar("sm_sunShadowScale", 0.60);
   setDvar("sm_sunSampleSizeNear", 0.35);
@@ -853,7 +853,7 @@ fire_horiz_fire() {
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
     attacker = level.fire_horiz.player;
-    if(!isDefined(level.fire_horiz.player) || !IsPlayer(level.fire_horiz.player))
+    if(!isDefined(level.fire_horiz.player) || !isPlayer(level.fire_horiz.player))
       attacker = undefined;
 
     thread maps\mp\mp_boneyard_ns_killstreak::damage_characters(level.fire_horiz, attacker, 25);
@@ -896,7 +896,6 @@ fire_horiz_firing_fx() {
 sfx_console_beeps_start() {
   if(!isDefined(level.console_beep)) {
     level.console_beep = spawn("script_origin", (450, 1590.25, -26));
-
   }
 
   level.console_beep playLoopSound("emt_boneyard_ns_console_beep_01");

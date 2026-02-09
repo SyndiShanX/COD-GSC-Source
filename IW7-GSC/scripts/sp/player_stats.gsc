@@ -35,13 +35,13 @@ func_DEBD(var_0, var_1, var_2, var_3) {
     var_4 = self.owner;
   }
 
-  if(!isplayer(var_4)) {
+  if(!isPlayer(var_4)) {
     if(isDefined(level.var_D5ED) && level.var_D5ED) {
       var_4 = level.players[randomint(level.players.size)];
     }
   }
 
-  if(!isplayer(var_4)) {
+  if(!isPlayer(var_4)) {
     return;
   }
 
@@ -98,7 +98,7 @@ func_DEBD(var_0, var_1, var_2, var_3) {
 }
 
 func_DED8() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -173,11 +173,11 @@ func_DEC5(var_0) {
 func_F5B2() {
   var_0 = 1;
   foreach(var_2 in level.players) {
-    setdvar("stats_" + var_0 + "_kills_melee", var_2.var_10E53["kills_melee"]);
-    setdvar("stats_" + var_0 + "_kills_juggernaut", var_2.var_10E53["kills_juggernaut"]);
-    setdvar("stats_" + var_0 + "_kills_explosives", var_2.var_10E53["kills_explosives"]);
-    setdvar("stats_" + var_0 + "_kills_vehicle", var_2.var_10E53["kills_vehicle"]);
-    setdvar("stats_" + var_0 + "_kills_sentry", var_2.var_10E53["kills_sentry"]);
+    setDvar("stats_" + var_0 + "_kills_melee", var_2.var_10E53["kills_melee"]);
+    setDvar("stats_" + var_0 + "_kills_juggernaut", var_2.var_10E53["kills_juggernaut"]);
+    setDvar("stats_" + var_0 + "_kills_explosives", var_2.var_10E53["kills_explosives"]);
+    setDvar("stats_" + var_0 + "_kills_vehicle", var_2.var_10E53["kills_vehicle"]);
+    setDvar("stats_" + var_0 + "_kills_sentry", var_2.var_10E53["kills_sentry"]);
     var_3 = var_2 func_7867(5);
     foreach(var_5 in var_3) {
       var_5.accuracy = 0;
@@ -187,10 +187,10 @@ func_F5B2() {
     }
 
     for(var_7 = 1; var_7 < 6; var_7++) {
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_name", " ");
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_kills", " ");
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_shots", " ");
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + "_accuracy", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_name", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_kills", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_shots", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_accuracy", " ");
     }
 
     for(var_7 = 0; var_7 < var_3.size; var_7++) {
@@ -198,10 +198,10 @@ func_F5B2() {
         break;
       }
 
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_name", var_3[var_7].name);
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_kills", var_3[var_7].setculldist);
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_shots", var_3[var_7].var_FF04);
-      setdvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_accuracy", var_3[var_7].accuracy + "%");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_name", var_3[var_7].name);
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_kills", var_3[var_7].setculldist);
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_shots", var_3[var_7].var_FF04);
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_accuracy", var_3[var_7].accuracy + "%");
     }
 
     var_0++;

@@ -245,7 +245,7 @@ function centrifuge_damage() {
   players = getplayers();
   while(true) {
     self waittill("trigger", ent);
-    if(isplayer(ent) && ent.health > 1) {
+    if(isPlayer(ent) && ent.health > 1) {
       if(ent getstance() == "stand") {
         if(players.size == 1) {
           ent dodamage(50, ent.origin + vectorscale((0, 0, 1), 20));

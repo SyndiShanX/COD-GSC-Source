@@ -2219,12 +2219,12 @@ setThirdPersonDOF(isEnabled) {
 killTrigger(pos, radius, height) {
   trig = spawn("trigger_radius", pos, 0, radius, height);
 
-  if(getdvar("scr_killtriggerdebug") == "1")
+  if(getDvar("scr_killtriggerdebug") == "1")
     thread killTriggerDebug(pos, radius, height);
 
   for(;;) {
-    if(getdvar("scr_killtriggerradius") != "")
-      radius = int(getdvar("scr_killtriggerradius"));
+    if(getDvar("scr_killtriggerradius") != "")
+      radius = int(getDvar("scr_killtriggerradius"));
 
     trig waittill("trigger", player);
 

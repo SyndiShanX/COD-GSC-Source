@@ -140,7 +140,6 @@ StartExtraHealth() {
     TriggerFX(self.stim_fx_l);
     TriggerFX(self.stim_fx_r);
   }
-
 }
 
 StopExtraHealth(should_play_fx) {

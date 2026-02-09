@@ -348,7 +348,7 @@ function_db9410fa(e_trap) {
   if(isactor(self) && !(isDefined(self.marked_for_death) && self.marked_for_death)) {
     self.marked_for_death = 1;
 
-    if(isplayer(e_trap.activated_by_player)) {
+    if(isPlayer(e_trap.activated_by_player)) {
       e_trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
       e_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }
@@ -376,7 +376,7 @@ function_506285c3(t_damage) {
   if(isalive(self) && !(isDefined(self.var_62b59590) && self.var_62b59590)) {
     self.var_62b59590 = 1;
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(!self laststand::player_is_in_laststand() && !level flag::get("round_reset")) {
         params = getstatuseffect(#"hash_baee445ed1d9b99");
 

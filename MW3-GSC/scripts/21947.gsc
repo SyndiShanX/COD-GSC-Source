@@ -20,7 +20,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2ABE("vehicle_uaz_open_for_ride");
   maps\_vehicle::_id_2A02("explosions/small_vehicle_explosion", undefined, "explo_metal_rand");
   maps\_vehicle::_id_29F3((0, 0, 32), 300, 200, 100, 0);
-  maps\_vehicle::_id_2AC1( % uaz_driving_idle_forward, % uaz_driving_idle_backward, 10);
+  maps\_vehicle::_id_2AC1(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
   maps\_vehicle::_id_29F8(1, 1.6, 500);
   maps\_vehicle::_id_2AC5();
   maps\_vehicle::_id_2ACE(2500, 2400, 2600);
@@ -68,7 +68,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 6; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_driver";
   var_0[1]._id_24F2 = "tag_passenger";

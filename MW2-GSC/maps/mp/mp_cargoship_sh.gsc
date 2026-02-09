@@ -19,5 +19,5 @@ main() {
 
   level.airstrikeHeightScale = 2;
 
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
 }

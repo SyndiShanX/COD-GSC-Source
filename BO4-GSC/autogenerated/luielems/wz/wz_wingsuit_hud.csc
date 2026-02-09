@@ -22,7 +22,6 @@ class cwz_wingsuit_hud: cluielem {
   function setup_clientfields(uid) {
     cluielem::setup_clientfields(uid);
   }
-
 }
 
 register(uid) {

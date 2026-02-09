@@ -350,7 +350,7 @@ lavalamp_trap_attackzombies() {
     }
 
     self.var_2536 waittill("trigger", var_0);
-    if(isplayer(var_0) && isalive(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0) && !isDefined(var_0.padding_damage)) {
+    if(isPlayer(var_0) && isalive(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0) && !isDefined(var_0.padding_damage)) {
       var_0.padding_damage = 1;
       var_0 dodamage(20, var_0.origin);
       var_0 thread remove_padding_damage();

@@ -375,7 +375,7 @@ assemble_fake_body_head_arrays() {
 }
 
 is_classic() {
-  var = getdvar(#"ui_zm_gamemodegroup");
+  var = getDvar(#"ui_zm_gamemodegroup");
 
   if(var == "zclassic")
     return true;

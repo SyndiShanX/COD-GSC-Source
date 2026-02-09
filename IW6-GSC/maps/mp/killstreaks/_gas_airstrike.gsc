@@ -108,7 +108,6 @@ dropBombs(pathEnd, flyTime, beginAttackTime, owner, streakName) {
     numBombsLeft--;
     wait(timeBetweenBombs);
   }
-
 }
 
 dropOneBomb(owner, streakName) {

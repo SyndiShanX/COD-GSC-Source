@@ -18,7 +18,7 @@ main() {
   clientscripts\mp\mp_castaway_fx::main();
   thread clientscripts\mp\_audio::audio_init(0);
   thread clientscripts\mp\mp_castaway_amb::main();
-  setdvar("tu12_cg_vehicleCamAboveWater", "8");
+  setDvar("tu12_cg_vehicleCamAboveWater", "8");
   setsaveddvar("sm_sunsamplesizenear", 0.26);
   level.playerland = ::castaway_on_player_land;
   setsaveddvar("r_waterwavespeed", "1 1 1 1");

@@ -590,7 +590,7 @@ initIWCredits_spav() {
 }
 
 initIWCredits_music2() {
-  if(getdvar("ui_char_museum_mode") != "credits_black") {
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addTitleIW(&"CREDIT_CRIME_WAVE");
     addNameIW(&"CREDIT_CRIME_WAVE_LINE1");
     addNameIW(&"CREDIT_CRIME_WAVE_LINE2");
@@ -666,7 +666,7 @@ initIWCredits_music2() {
 initIWCredits_add() {
   //	Additional Sound Design, audio implementation and cinematic sound production provided by:
   addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES1");
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES3");
   else
     addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES2");
@@ -1031,7 +1031,7 @@ addLeftImage(image, width, height, delay) {
 playCredits() {
   VisionSetNaked("", 0);
 
-  mode = getdvar("ui_char_museum_mode");
+  mode = getDvar("ui_char_museum_mode");
 
   if(isDefined(mode) && mode == "credits_1") {
     hudelem = NewHudElem();
@@ -1521,7 +1521,6 @@ playCredits() {
     //wait 0.65;
     wait delay * (level.credits_speed / 22.5);
   }
-
 }
 
 delayDestroy(duration) {
@@ -1581,28 +1580,28 @@ addSubLeftNameNameName(name1, name2, name3) {
 }
 
 addImageIW(image, width, height, delay) {
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addLeftImage(image, width, height, delay);
   else
     addCenterImage(image, width, height, delay);
 }
 
 addTitleIW(title) {
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addLeftTitle(title);
   else
     addCenterHeading(title);
 }
 
 addSubTitleIW(title) {
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addSubLeftTitle(title);
   else
     addCenterHeading(title);
 }
 
 addTitleNameIW(title, name) {
-  if(getdvar("ui_char_museum_mode") != "credits_black") {
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addLeftTitle(title);
     addSpaceSmall();
     addLeftName(name);
@@ -1611,7 +1610,7 @@ addTitleNameIW(title, name) {
 }
 
 addSubTitleNameIW(title, name) {
-  if(getdvar("ui_char_museum_mode") != "credits_black") {
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addSubLeftTitle(title);
     addSpaceSmall();
     addSubLeftName(name);
@@ -1620,28 +1619,28 @@ addSubTitleNameIW(title, name) {
 }
 
 addcastIW(name, title, combo) {
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addCastName(name, title);
   else
     addCenterHeading(name);
 }
 
 addNameIW(name) {
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addLeftName(name);
   else
     addCenterName(name);
 }
 
 addSubNameIW(name) {
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addSubLeftName(name);
   else
     addCenterName(name);
 }
 
 addSpaceTitle() {
-  if(getdvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black")
     addSpace();
   else
     addSpaceSmall();

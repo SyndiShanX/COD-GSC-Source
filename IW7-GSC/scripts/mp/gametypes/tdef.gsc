@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -251,7 +251,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   }
 
   if(isDefined(level.ball.carrier)) {
-    if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != var_10.pers["team"]) {
+    if(isDefined(var_1) && isPlayer(var_1) && var_1.pers["team"] != var_10.pers["team"]) {
       if(isDefined(var_1.ball_carried) && var_12) {
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
       } else if(isDefined(var_10.ball_carried)) {

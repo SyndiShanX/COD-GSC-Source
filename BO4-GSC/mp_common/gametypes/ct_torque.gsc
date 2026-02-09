@@ -307,13 +307,12 @@ spawn_zombies(e_target, n_count, var_6448415b = 0, a_spawns, var_d0e99522 = 1, v
     zombie = undefined;
     level.var_f682cf14.origin = nd_spawn.origin + (0, 0, 32);
 
-    if(!var_d0e99522 || isplayer(e_target) && e_target function_80d68e4d(level.var_f682cf14, 0.6, 1)) {
+    if(!var_d0e99522 || isPlayer(e_target) && e_target function_80d68e4d(level.var_f682cf14, 0.6, 1)) {
       zombie = spawnactor("spawner_boct_zombie_mp", nd_spawn.origin, nd_spawn.angles, "zombie", 0, var_68863e93);
 
       if(!(isDefined(var_68863e93) && var_68863e93)) {
         iprintlnbold("<dev string:x38>");
       }
-
     }
 
     if(isalive(zombie)) {
@@ -483,7 +482,6 @@ function_5a57b177(var_f1de62b9) {
     while(!(isDefined(var_5d199101) && var_5d199101));
 
     iprintlnbold("<dev string:x69>");
-
   }
 }
 
@@ -1173,7 +1171,7 @@ function_dd64960c(a_ents) {
 
 function_d69c54a8() {
   sessionmode = currentsessionmode();
-  setdvar(#"hash_2bdefa89fdfb0546", "<dev string:x97>");
+  setDvar(#"hash_2bdefa89fdfb0546", "<dev string:x97>");
   level flag::init("<dev string:x9a>");
 
   if(sessionmode != 4) {
@@ -1318,6 +1316,6 @@ function_d69c54a8() {
         break;
     }
 
-    setdvar(#"hash_2bdefa89fdfb0546", "<dev string:x97>");
+    setDvar(#"hash_2bdefa89fdfb0546", "<dev string:x97>");
   }
 }

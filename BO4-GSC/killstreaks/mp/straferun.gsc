@@ -272,7 +272,7 @@ watchdamage() {
     damage = waitresult.amount;
     weapon = waitresult.weapon;
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
 
@@ -344,7 +344,7 @@ watchforkills() {
   for(;;) {
     waitresult = self waittill(#"killed");
 
-    if(isplayer(waitresult.victim)) {}
+    if(isPlayer(waitresult.victim)) {}
   }
 }
 

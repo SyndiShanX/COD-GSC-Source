@@ -12,7 +12,7 @@
 #include clientscripts\mp\zombies\_face_utility_zm;
 
 precache() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   if(is_true(level._zm_turned_precached)) {
@@ -26,7 +26,7 @@ precache() {
   registerclientfield("allplayers", "player_eyes_special", 5000, 1, "int", clientscripts\mp\zombies\_zm::player_eye_color_clientfield_cb, 0);
   level._effect["player_eye_glow_blue"] = loadfx("maps/zombie/fx_zombie_eye_returned_blue");
   level._effect["player_eye_glow_orng"] = loadfx("maps/zombie/fx_zombie_eye_returned_orng");
-  setdvar("aim_target_player_enabled", 1);
+  setDvar("aim_target_player_enabled", 1);
 }
 
 #using_animtree("zombie_player");
@@ -50,14 +50,14 @@ turned_face_override_func() {
 }
 
 init() {
-  var = getdvar(#"ui_gametype");
+  var = getDvar(#"ui_gametype");
 
   if(var == "zcleansed")
     precache();
 }
 
 main() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   setup_zombie_exerts();

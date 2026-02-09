@@ -9,5 +9,5 @@ main() {
   a[2] = "c_zom_cosmo_head3";
   a[3] = "c_zom_cosmo_head4";
   a[4] = "c_zom_cosmo_head3_gasmask";
-  returna;
+  return a;
 }

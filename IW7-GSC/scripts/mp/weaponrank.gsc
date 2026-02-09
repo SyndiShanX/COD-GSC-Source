@@ -158,7 +158,7 @@ getweaponrankinfomaxxp(var_0) {
 }
 
 func_8394(var_0, var_1, var_2) {
-  if(isai(self) || !isplayer(self) || !isDefined(var_2) || var_2 == 0 || !scripts\mp\utility::rankingenabled()) {
+  if(isai(self) || !isPlayer(self) || !isDefined(var_2) || var_2 == 0 || !scripts\mp\utility::rankingenabled()) {
     return;
   }
 

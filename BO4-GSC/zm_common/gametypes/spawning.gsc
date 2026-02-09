@@ -23,12 +23,12 @@ __init__() {
   level.spawnprotectiontime = getgametypesetting(#"spawnprotectiontime");
   level.spawnprotectiontimems = int((isDefined(level.spawnprotectiontime) ? level.spawnprotectiontime : 0) * 1000);
 
-  setdvar(#"scr_debug_spawn_player", "<dev string:x38>");
-  setdvar(#"scr_debug_render_spawn_data", 1);
-  setdvar(#"scr_debug_render_snapshotmode", 0);
-  setdvar(#"scr_spawn_point_test_mode", 0);
+  setDvar(#"scr_debug_spawn_player", "<dev string:x38>");
+  setDvar(#"scr_debug_render_spawn_data", 1);
+  setDvar(#"scr_debug_render_snapshotmode", 0);
+  setDvar(#"scr_spawn_point_test_mode", 0);
   level.test_spawn_point_index = 0;
-  setdvar(#"scr_debug_render_spawn_text", 1);
+  setDvar(#"scr_debug_render_spawn_text", 1);
 }
 
 init_spawn_system() {

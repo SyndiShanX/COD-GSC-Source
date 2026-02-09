@@ -42,7 +42,6 @@ finalize_init() {
     function_7364a587();
 
     thread devgui_setup();
-
   }
 }
 
@@ -248,7 +247,7 @@ function_a4c8ce2a(data) {
 
   player = data.player;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

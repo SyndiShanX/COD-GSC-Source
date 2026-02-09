@@ -149,7 +149,7 @@ doAirstrike(lifeId, origin, yaw, owner, team, streakName) {
   dangerCenter.team = team;
 
   level.artilleryDangerCenters[level.artilleryDangerCenters.size] = dangerCenter;
-  /# level thread debugArtilleryDangerCenters( streakName );
+  level thread debugArtilleryDangerCenters(streakName);
 
   callStrike(lifeId, owner, targetpos, yaw, streakName);
 
@@ -644,7 +644,7 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   if(streakName == "harrier_airstrike")
     plane thread handleHarrierAirstrikeObjectiveIcons();
 
-  if(getdvar("scr_airstrikedebug") == "1")
+  if(getDvar("scr_airstrikedebug") == "1")
     thread airstrikeLine(pathStart, pathEnd, (1, 1, 1), 20);
 
   thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount, streakName);
@@ -712,7 +712,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   killCamEnt.angles = planedir;
   killCamEnt moveTo(pathEnd + (0, 0, 100), flyTime, 0, 0);
 
-  if(getdvar("scr_airstrikedebug") == "1")
+  if(getDvar("scr_airstrikedebug") == "1")
     bomb thread traceBomb();
 
   wait .4;
@@ -765,7 +765,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
     traceHit = trace["position"];
     hitpos += traceHit;
 
-    if(getdvar("scr_airstrikedebug") == "1")
+    if(getDvar("scr_airstrikedebug") == "1")
       thread airstrikeLine(bombOrigin, traceHit, (1, 0, 0), 40);
 
     playFX(level.airstrikeexplosion, traceHit);
@@ -838,12 +838,11 @@ callStrike(lifeId, owner, coord, yaw, streakName) {
     } else {
       planeFlyHeight = heightEnt.origin[2];
 
-      if(GetDvar("mapname") == "mp_exchange")
+      if(getDvar("mapname") == "mp_exchange")
         planeFlyHeight += 1024;
 
       planeBombExplodeDistance = getExplodeDistance(planeFlyHeight);
     }
-
   } else {
     if(streakName == "harrier_airstrike") {
       thread teamPlayerCardSplash("used_harrier", owner);
@@ -893,7 +892,6 @@ callStrike(lifeId, owner, coord, yaw, streakName) {
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
     harrier = beginHarrier(lifeId, flightPath["startPoint"], coord);
     owner thread defendLocation(harrier);
-
   } else if(streakName == "stealth_airstrike") {
     flightPath = getFlightPath(coord, direction, planeHalfDistance, heightEnt, planeFlyHeight, planeFlySpeed, planeBombExplodeDistance, streakName);
 

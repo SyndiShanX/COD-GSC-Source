@@ -29,7 +29,6 @@ _id_441D(var_0) {
 
   if(isDefined(var_0)) {
     wait(randomfloat(var_0));
-
   }
   var_1 = [];
   var_1[0] = "j_hip_le";
@@ -53,7 +52,6 @@ _id_441D(var_0) {
 _id_441F(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = level._effect["flesh_hit"];
-
   }
   playFXOnTag(var_1, self, var_0);
 }
@@ -87,39 +85,30 @@ _id_4423(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_0)) {
     var_8[var_8.size] = var_0;
-
   }
   if(isDefined(var_1)) {
     var_8[var_8.size] = var_1;
-
   }
   if(isDefined(var_2)) {
     var_8[var_8.size] = var_2;
-
   }
   if(isDefined(var_3)) {
     var_8[var_8.size] = var_3;
-
   }
   if(isDefined(var_4)) {
     var_8[var_8.size] = var_4;
-
   }
   if(isDefined(var_5)) {
     var_8[var_8.size] = var_5;
-
   }
   if(isDefined(var_6)) {
     var_8[var_8.size] = var_6;
-
   }
   if(isDefined(var_7)) {
     var_8[var_8.size] = var_7;
-
   }
   if(!isDefined(level._id_4424)) {
     level._id_4424 = undefined;
-
   }
   var_9 = 0;
 
@@ -133,7 +122,6 @@ _id_4423(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         _id_4422(var_10);
       } else {
         _id_4421(var_10);
-
       }
       level._id_4424 = var_10;
       var_9 = 1;
@@ -174,7 +162,6 @@ _id_4428(var_0) {
 
   while(self istouching(var_0)) {
     wait 0.5;
-
   }
   maps\_utility::_id_26F3(0);
 }
@@ -184,7 +171,6 @@ _id_4429(var_0) {
     level._id_442A = maps\_hud_util::createicon("popmenu_bg", 650, 50);
   } else {
     level._id_442A = maps\_hud_util::createicon("popmenu_bg", 650, 30);
-
   }
   level._id_442A.hidewheninmenu = 1;
   level._id_442A maps\_hud_util::setpoint("TOP", undefined, 0, 110);
@@ -195,23 +181,18 @@ _id_4429(var_0) {
 _id_442B() {
   if(isDefined(level._id_442C)) {
     level._id_442C maps\_hud_util::destroyelem();
-
   }
   if(isDefined(level._id_442D)) {
     level._id_442D maps\_hud_util::destroyelem();
-
   }
   if(isDefined(level._id_442E)) {
     level._id_442E maps\_hud_util::destroyelem();
-
   }
   if(isDefined(level._id_442F)) {
     level._id_442F maps\_hud_util::destroyelem();
-
   }
   if(isDefined(level._id_442A)) {
     level._id_442A maps\_hud_util::destroyelem();
-
   }
   level notify("clearing_hints");
 }
@@ -231,7 +212,6 @@ _id_4430(var_0, var_1, var_2) {
     wait(var_1);
   } else {
     return;
-
   }
   level._id_4431 = undefined;
   level._id_442C fadeovertime(0.5);
@@ -288,7 +268,6 @@ _id_03BC(var_0) {
 
   if(sighttracepassed(var_1, var_2, 1, self, var_0)) {
     return 1;
-
   }
   return 0;
 }
@@ -298,7 +277,6 @@ _id_4433(var_0) {
 
   if(isDefined(self.enemy._id_3B23)) {
     var_1 = self.enemy._id_3B23 + 2500;
-
   }
   return var_1;
 }
@@ -306,7 +284,6 @@ _id_4433(var_0) {
 _id_4434() {
   if(!maps\_utility::_id_12C1()) {
     return 0;
-
   }
   if(isDefined(self.favoriteenemy.laststand) && self.favoriteenemy.laststand) {
     _id_4435();

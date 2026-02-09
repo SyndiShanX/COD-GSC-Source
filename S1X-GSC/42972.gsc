@@ -272,7 +272,7 @@ cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
   var_10 = maps\mp\_utility::strip_suffix(var_4, "_lefthand");
 
   if(maps\mp\_utility::isbulletdamage(var_3)) {
-    if(isplayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_paint_pro") && !maps\mp\_utility::iskillstreakweapon(var_4) && isplayer(var_0) && !var_0 maps\mp\_utility::_hasperk("specialty_class_lowprofile")) {
+    if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_paint_pro") && !maps\mp\_utility::iskillstreakweapon(var_4) && isPlayer(var_0) && !var_0 maps\mp\_utility::_hasperk("specialty_class_lowprofile")) {
       if(!var_0 maps\mp\perks\_perkfunctions::ispainted()) {
         var_1 maps\mp\gametypes\_missions::processchallenge("ch_bulletpaint");
       }
@@ -284,13 +284,13 @@ cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
       var_0 thread maps\mp\perks\_perkfunctions::setpainted(var_1);
     }
 
-    if(isplayer(var_1) && isDefined(var_4) && maps\mp\_utility::getweaponclass(var_4) == "weapon_sniper" && issubstr(var_4, "silencer")) {
+    if(isPlayer(var_1) && isDefined(var_4) && maps\mp\_utility::getweaponclass(var_4) == "weapon_sniper" && issubstr(var_4, "silencer")) {
       var_2 = var_2 * 0.75;
     }
 
-    if(isplayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))) {
+    if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))) {
       var_9 = var_9 + 0;
-    } else if(isplayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage"))) {
+    } else if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage"))) {
       var_9 = var_9 + var_2 * level.bulletdamagemod;
     } else if(var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_9 = var_9 - var_2 * level.armorvestmod;
@@ -304,7 +304,7 @@ cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
       }
     }
   } else if(isexplosivedamagemod(var_3)) {
-    if(isplayer(var_1) && var_1 != var_0 && (var_1 isitemunlocked("specialty_paint") && var_1 maps\mp\_utility::_hasperk("specialty_paint")) && !maps\mp\_utility::iskillstreakweapon(var_4)) {
+    if(isPlayer(var_1) && var_1 != var_0 && (var_1 isitemunlocked("specialty_paint") && var_1 maps\mp\_utility::_hasperk("specialty_paint")) && !maps\mp\_utility::iskillstreakweapon(var_4)) {
       if(!var_0 maps\mp\perks\_perkfunctions::ispainted()) {
         var_1 maps\mp\gametypes\_missions::processchallenge("ch_paint_pro");
       }
@@ -312,15 +312,15 @@ cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
       var_0 thread maps\mp\perks\_perkfunctions::setpainted(var_1);
     }
 
-    if(isplayer(var_1) && weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("_specialty_blastshield"))) {
+    if(isPlayer(var_1) && weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("_specialty_blastshield"))) {
       var_9 = var_9 + 0;
-    } else if(isplayer(var_1) && weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage")) {
+    } else if(isPlayer(var_1) && weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage")) {
       var_9 = var_9 + var_2 * level.explosivedamagemod;
     } else if(var_0 maps\mp\_utility::_hasperk("_specialty_blastshield") && isDefined(var_0.specialty_blastshield_bonus) && (var_10 != "semtex_mp" || var_2 < 125)) {
       var_9 = var_9 - int(var_2 * var_0.specialty_blastshield_bonus);
     }
 
-    if(maps\mp\_utility::iskillstreakweapon(var_4) && isplayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage")) {
+    if(maps\mp\_utility::iskillstreakweapon(var_4) && isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage")) {
       var_9 = var_9 + var_2 * level.explosivedamagemod;
     }
 

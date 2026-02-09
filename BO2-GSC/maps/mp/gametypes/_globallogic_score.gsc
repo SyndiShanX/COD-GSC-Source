@@ -490,7 +490,7 @@ _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray
 }
 
 setplayermomentumdebug() {
-  setdvar("sv_momentumPercent", 0.0);
+  setDvar("sv_momentumPercent", 0.0);
 
   while(true) {
     wait 1;
@@ -797,7 +797,7 @@ updatewinlossstats(winner) {
   }
   players = level.players;
 
-  if(!isDefined(winner) || isDefined(winner) && !isplayer(winner) && winner == "tie") {
+  if(!isDefined(winner) || isDefined(winner) && !isPlayer(winner) && winner == "tie") {
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"])) {
         continue;
@@ -807,7 +807,7 @@ updatewinlossstats(winner) {
       }
       updatetiestats(players[i]);
     }
-  } else if(isplayer(winner)) {
+  } else if(isPlayer(winner)) {
     if(level.hostforcedend && winner ishost()) {
       return;
     }
@@ -1169,7 +1169,7 @@ processkillstreakassists(attacker, inflictor, weaponname) {
     }
     activeempowner = level.empowners[assistteam];
 
-    if(isDefined(activeempowner) && isplayer(activeempowner)) {
+    if(isDefined(activeempowner) && isPlayer(activeempowner)) {
       if(isDefined(attacker) && activeempowner != attacker) {
         if(isDefined(activeempowner.emptime) && activeempowner.spawntime < activeempowner.emptime) {
           scoregiven = maps\mp\_scoreevents::processscoreevent("emp_assist", activeempowner);
@@ -1196,5 +1196,4 @@ xpratethread() {
     if(isDefined(level.teams[level.players[0].pers["team"]]))
       self maps\mp\gametypes\_rank::giverankxp("kill", int(min(getdvarint(#"_id_F8D00F60"), 50)));
   }
-
 }

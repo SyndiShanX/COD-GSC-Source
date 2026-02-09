@@ -13,7 +13,6 @@ main_start() {
   PreCacheModel("p_glo_corrugated_metal1");
   level thread spikemore_delete_all_on_end_game();
 }
-
 main_end() {
   seam_debris = spawn("script_model", (-574, -1108.5, -415));
   seam_debris setModel("p_glo_corrugated_metal1");
@@ -22,7 +21,6 @@ main_end() {
   level.timed_killbrush_in_minecart_area_geyser = maps\_zombiemode::spawn_kill_brush((1092, -1000, -100), 60, 90);
   level.player_out_of_playable_area_monitor_callback = ::zombie_temple_player_out_of_playable_area_monitor_callback;
 }
-
 spikemore_delete_all_on_end_game() {
   level waittill("end_game");
   if(!isDefined(level.spikemores)) {
@@ -32,7 +30,6 @@ spikemore_delete_all_on_end_game() {
     level.spikemores[i] delete();
   }
 }
-
 zombie_temple_player_out_of_playable_area_monitor_callback() {
   if(is_true(self.on_slide)) {
     return false;

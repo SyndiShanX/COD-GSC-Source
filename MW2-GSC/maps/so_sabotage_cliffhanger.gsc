@@ -9,11 +9,8 @@
 #include maps\_specialops;
 #include maps\so_sabotage_cliffhanger_code;
 
-// ---------------------------------------------------------------------------------
-//	Tweakables
-// ---------------------------------------------------------------------------------
-
-CONST_regular_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_REGULAR";
+// --------------------------------------------------------------------------------- //	Tweakables
+// --------------------------------------------------------------------------------- CONST_regular_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_REGULAR";
 CONST_hardened_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_HARDENED";
 CONST_veteran_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_VETERAN";
 
@@ -21,10 +18,8 @@ CONST_regular_accuracy = 2; // accuracy modifier
 CONST_hardened_accuracy = 2; // accuracy modifier
 CONST_veteran_accuracy = 1.75; // accuracy modifier
 
-// ---------------------------------------------------------------------------------
-//	Init
-// ---------------------------------------------------------------------------------
-main() {
+// --------------------------------------------------------------------------------- //	Init
+// --------------------------------------------------------------------------------- main() {
   // optimization
   setsaveddvar("sm_sunShadowScale", 0.5);
   setsaveddvar("r_lightGridEnableTweaks", 1);
@@ -86,11 +81,8 @@ main() {
   maps\_compass::setupMiniMap("compass_map_cliffhanger");
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Initializations
-// ---------------------------------------------------------------------------------
-
-start_so_sabotage() {
+// --------------------------------------------------------------------------------- //	Challenge Initializations
+// --------------------------------------------------------------------------------- start_so_sabotage() {
   spawn_funcs();
 
   assert(isDefined(level.gameskill));

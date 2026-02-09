@@ -269,7 +269,7 @@ function_7bf69748(localclientnum) {
         var_e60f94d0 = 0;
       }
     } else if(dist2 < var_572ced0c) {
-      if(!(isDefined(var_e60f94d0) && var_e60f94d0) && isplayer(self) && isalive(self)) {
+      if(!(isDefined(var_e60f94d0) && var_e60f94d0) && isPlayer(self) && isalive(self)) {
         if(!isthirdperson(localclientnum)) {
           if(!self isremotecontrolling(localclientnum)) {
             function_790443a8(localclientnum);

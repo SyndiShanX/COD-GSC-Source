@@ -726,7 +726,7 @@ kill_trigger(var_0) {
 
         if(level.player istouching(self)) {
           wait 2;
-          setdvar("ui_deadquote", &"CARRIER_FAIL_FAR_AWAY");
+          setDvar("ui_deadquote", &"CARRIER_FAIL_FAR_AWAY");
           maps\_utility::missionfailedwrapper();
         }
       }

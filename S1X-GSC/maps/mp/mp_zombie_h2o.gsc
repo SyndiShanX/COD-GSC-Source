@@ -13,8 +13,8 @@ main() {
   maps\mp\mp_zombie_h2o_sq::init_sidequest();
   level thread common_scripts\_exploder::activate_clientside_exploder(10);
   maps\mp\_compass::setupminimap("compass_map_mp_zombie_h2o");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level.dlcleaderboardnumber = 4;
@@ -818,7 +818,7 @@ zmbteleportgrenadefindzonecustom(var_0, var_1, var_2) {
 flyoverbink() {
   var_0 = "zombie_bink_env_camera_DLC4";
   var_1 = "scr_" + var_0;
-  setdvar(var_1, 0);
+  setDvar(var_1, 0);
   var_2 = "devgui_cmd \"Zombie:2/Toggle Flyover Binks/" + var_0 + "\" \"togglep " + var_1 + " 0 1\";";
   thread setupflyoveranimation("zombie_bink_env_camera_DLC4", "j_prop_1", [], var_1);
 }
@@ -841,12 +841,12 @@ setupflyoveranimation(var_0, var_1, var_2, var_3) {
     waitframe();
   }
 
-  setdvar("lui_enabled", 0);
-  setdvar("cg_drawBuildname", 0);
-  setdvar("cg_drawMapBuildInfo", 0);
-  setdvar("cg_drawversion", 0);
-  setdvar("cg_drawviewpos", 0);
-  setdvar("cg_fovScale", 1.1);
+  setDvar("lui_enabled", 0);
+  setDvar("cg_drawBuildname", 0);
+  setDvar("cg_drawMapBuildInfo", 0);
+  setDvar("cg_drawversion", 0);
+  setDvar("cg_drawviewpos", 0);
+  setDvar("cg_fovScale", 1.1);
   level.zombiegamepaused = 1;
   var_5 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 

@@ -103,9 +103,7 @@ function private evaluator_findfirstvalidanimation(entity, animations, tests) {
       valid = 1;
       animation = aliasanimations[0];
       foreach(test in tests) {
-        if(![
-            [test]
-          ](entity, animation)) {
+        if(![[test]](entity, animation)) {
           valid = 0;
           break;
         }

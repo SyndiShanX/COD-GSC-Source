@@ -547,7 +547,7 @@ function init_player_equipment() {
 }
 
 function function_f30ee99e() {
-  setdvar("", "");
+  setDvar("", "");
   wait(0.05);
   level flag::wait_till("");
   wait(0.05);
@@ -565,7 +565,7 @@ function function_f30ee99e() {
           player buy(equipment_id);
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.05);
   }

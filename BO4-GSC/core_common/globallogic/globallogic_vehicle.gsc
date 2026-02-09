@@ -242,7 +242,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
   self callback::callback(#"on_vehicle_damage", params);
   idamage = int(idamage);
 
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.pers)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.pers)) {
     if(!isDefined(eattacker.pers[# "participation"])) {
       eattacker.pers[# "participation"] = 0;
     }
@@ -255,14 +255,14 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
   if(!(isDefined(self.var_92043a49) && self.var_92043a49)) {
     driver = self getseatoccupant(0);
 
-    if(isDefined(driver) && isplayer(driver) && !isbot(driver)) {
+    if(isDefined(driver) && isPlayer(driver) && !isbot(driver)) {
       damagepct = idamage / self.maxhealth;
       damagepct = int(max(damagepct, 3));
       driver addtodamageindicator(damagepct, vdir);
     } else {
       gunner = self getseatoccupant(1);
 
-      if(isDefined(gunner) && isplayer(gunner) && !isbot(gunner)) {
+      if(isDefined(gunner) && isPlayer(gunner) && !isbot(gunner)) {
         damagepct = idamage / self.maxhealth;
         damagepct = int(max(damagepct, 3));
         gunner addtodamageindicator(damagepct, vdir);
@@ -273,7 +273,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
   var_5370b15e = idamage < self.health ? idamage : self.health;
   self globallogic_player::giveattackerandinflictorownerassist(eattacker, einflictor, var_5370b15e, smeansofdeath, weapon);
 
-  if(isplayer(eattacker) && isDefined(level.challenges_callback_vehicledamaged)) {
+  if(isPlayer(eattacker) && isDefined(level.challenges_callback_vehicledamaged)) {
     self thread[[level.challenges_callback_vehicledamaged]](eattacker, eattacker, idamage, weapon, shitloc);
   }
 
@@ -287,9 +287,8 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
   }
 
   if(getdvarint(#"g_debugdamage", 0)) {
-    println("<dev string:x73>" + selfentnum + "<dev string:x7e>" + self.health + "<dev string:x89>" + eattacker.clientid + "<dev string:x96>" + isplayer(einflictor) + "<dev string:xae>" + idamage + "<dev string:xb9>" + shitloc);
+    println("<dev string:x73>" + selfentnum + "<dev string:x7e>" + self.health + "<dev string:x89>" + eattacker.clientid + "<dev string:x96>" + isPlayer(einflictor) + "<dev string:xae>" + idamage + "<dev string:xb9>" + shitloc);
   }
-
 }
 
 callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, fouterdamage, idflags, smeansofdeath, weapon, vpoint, fradius, fconeanglecos, vconedir, psoffsettime) {
@@ -356,7 +355,7 @@ callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vd
   params.occupants = self getvehoccupants();
   eattacker = globallogic_player::figureoutattacker(eattacker);
 
-  if(isDefined(eattacker) && isplayer(eattacker) && !(isDefined(level.var_7c6454) && level.var_7c6454)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && !(isDefined(level.var_7c6454) && level.var_7c6454)) {
     globallogic_score::inctotalkills(eattacker.team);
     eattacker thread globallogic_score::givekillstats(smeansofdeath, weapon, self);
   }
@@ -392,7 +391,7 @@ callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vd
   }
 
   if(sessionmodeiscampaigngame()) {
-    if(isDefined(player) && isplayer(player) && isalive(player)) {
+    if(isDefined(player) && isPlayer(player) && isalive(player)) {
       if(weapon.isheavyweapon) {
         dialog_shared::heavyweaponkilllogic(eattacker, weapon, undefined);
       } else {
@@ -406,7 +405,7 @@ callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vd
       }
     }
 
-    if(isDefined(player) && isplayer(player) && !(isDefined(self.disable_score_events) && self.disable_score_events)) {
+    if(isDefined(player) && isPlayer(player) && !(isDefined(self.disable_score_events) && self.disable_score_events)) {
       if(!level.teambased || util::function_fbce7263(self.team, player.pers[# "team"])) {
         if(smeansofdeath == "MOD_MELEE" || smeansofdeath == "MOD_MELEE_ASSASSINATE") {
           scoreevents::processscoreevent(#"melee_kill" + self.scoretype, player, self, weapon);

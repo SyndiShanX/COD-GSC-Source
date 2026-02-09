@@ -75,7 +75,7 @@ init() {
     level.secondaryprogressbarheight = 2;
   }
 
-  setdvar(#"ui_generic_status_bar", 0);
+  setDvar(#"ui_generic_status_bar", 0);
 }
 
 on_player_connect() {

@@ -89,7 +89,7 @@ main() {
   footstep_effects();
 
   //testing in different map that doesn't have soundaliases
-  if(GetDvar("mapname") == "invasion" || GetDvar("mapname") == "so_chopper_invasion")
+  if(getDvar("mapname") == "invasion" || getDvar("mapname") == "so_chopper_invasion")
     maps\createfx\invasion_fx::main();
 
   //glass breaks when you shoot exploders

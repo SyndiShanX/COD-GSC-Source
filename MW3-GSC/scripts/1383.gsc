@@ -140,7 +140,6 @@ _id_42F2(var_0) {
 
   while(self istouching(var_0)) {
     wait 0.05;
-
   }
   maps\_utility::_id_13DE("_stealth_in_shadow");
 }
@@ -150,7 +149,6 @@ _id_42F3() {
 
   if(isDefined(self._id_1288)) {
     common_scripts\utility::flag_wait(self._id_1288);
-
   }
   waittillframeend;
   var_0 = "_stealth_spotted";
@@ -173,7 +171,6 @@ _id_42F3() {
 
   if(self.spawnflags & 1) {
     self connectpaths();
-
   }
   self delete();
 }
@@ -248,9 +245,9 @@ _id_42F8() {
   var_0["ai_eventDistGunShot"] = [];
   var_0["ai_eventDistGunShotTeam"] = [];
   var_0["ai_eventDistNewEnemy"] = [];
-  var_0["ai_eventDistDeath"]["spotted"] = getdvar("ai_eventDistDeath");
+  var_0["ai_eventDistDeath"]["spotted"] = getDvar("ai_eventDistDeath");
   var_0["ai_eventDistDeath"]["hidden"] = 512;
-  var_0["ai_eventDistPain"]["spotted"] = getdvar("ai_eventDistPain");
+  var_0["ai_eventDistPain"]["spotted"] = getDvar("ai_eventDistPain");
   var_0["ai_eventDistPain"]["hidden"] = 256;
   var_0["ai_eventDistExplosion"]["spotted"] = 4000;
   var_0["ai_eventDistExplosion"]["hidden"] = 4000;

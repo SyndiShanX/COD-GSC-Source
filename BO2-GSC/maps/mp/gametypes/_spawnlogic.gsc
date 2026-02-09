@@ -124,7 +124,6 @@ placespawnpoints(spawnpointname) {
 
     spawnpoints[index].fakeclassname = spawnpointname;
     level.extraspawnpointsused[level.extraspawnpointsused.size] = spawnpoints[index];
-
   }
 }
 
@@ -248,7 +247,8 @@ finalizespawnpointchoice(spawnpoint) {
 getbestweightedspawnpoint(spawnpoints) {
   maxsighttracedspawnpoints = 3;
 
-  for(try = 0;
+  for(
+    try = 0;
     try <= maxsighttracedspawnpoints;
     try ++) {
     bestspawnpoints = [];
@@ -279,7 +279,8 @@ getbestweightedspawnpoint(spawnpoints) {
 
     bestspawnpoint = bestspawnpoints[randomint(bestspawnpoints.size)];
 
-    if(try == maxsighttracedspawnpoints)
+    if(
+      try == maxsighttracedspawnpoints)
       return bestspawnpoint;
 
     if(isDefined(bestspawnpoint.lastsighttracetime) && bestspawnpoint.lastsighttracetime == gettime())
@@ -313,7 +314,6 @@ checkbad(spawnpoint) {
     if(losexists)
       thread badspawnline(spawnpoint.sighttracepoint, player.origin + vectorscale((0, 0, 1), 50.0), self.name, player.name);
   }
-
 }
 
 badspawnline(start, end, name1, name2) {
@@ -325,7 +325,6 @@ badspawnline(start, end, name1, name2) {
     print3d(end, name2);
     wait 0.05;
   }
-
 }
 
 storespawndata(spawnpoints, useweights, bestspawnpoint) {
@@ -659,7 +658,6 @@ drawspawndata() {
 
     wait 0.05;
   }
-
 }
 
 vectostr(vec) {
@@ -748,10 +746,10 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints) {
   if(!isDefined(spawnpoints))
     return undefined;
 
-  if(getdvar(#"scr_spawn_randomly") == "")
-    setdvar("scr_spawn_randomly", "0");
+  if(getDvar(#"scr_spawn_randomly") == "")
+    setDvar("scr_spawn_randomly", "0");
 
-  if(getdvar(#"scr_spawn_randomly") == "1")
+  if(getDvar(#"scr_spawn_randomly") == "1")
     return getspawnpoint_random(spawnpoints);
 
   if(getdvarint(#"scr_spawnsimple") > 0)
@@ -787,7 +785,6 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints) {
 
     if(level.storespawndata || level.debugspawning)
       spawnpoint.spawndata[spawnpoint.spawndata.size] = "Base weight: 0";
-
   }
 
   if(isDefined(favoredspawnpoints)) {
@@ -807,10 +804,10 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints) {
   avoidvisibleenemies(spawnpoints, 1);
   result = getspawnpoint_final(spawnpoints);
 
-  if(getdvar(#"scr_spawn_showbad") == "")
-    setdvar("scr_spawn_showbad", "0");
+  if(getDvar(#"scr_spawn_showbad") == "")
+    setDvar("scr_spawn_showbad", "0");
 
-  if(getdvar(#"scr_spawn_showbad") == "1")
+  if(getDvar(#"scr_spawn_showbad") == "1")
     checkbad(result);
 
   return result;
@@ -860,16 +857,16 @@ spawnlogic_begin() {
 }
 
 init() {
-  if(getdvar(#"scr_recordspawndata") == "")
-    setdvar("scr_recordspawndata", 0);
+  if(getDvar(#"scr_recordspawndata") == "")
+    setDvar("scr_recordspawndata", 0);
 
   level.storespawndata = getdvarint(#"scr_recordspawndata");
 
-  if(getdvar(#"scr_killbots") == "")
-    setdvar("scr_killbots", 0);
+  if(getDvar(#"scr_killbots") == "")
+    setDvar("scr_killbots", 0);
 
-  if(getdvar(#"scr_killbottimer") == "")
-    setdvar("scr_killbottimer", 0.25);
+  if(getDvar(#"scr_killbottimer") == "")
+    setDvar("scr_killbottimer", 0.25);
 
   thread loopbotspawns();
 
@@ -887,17 +884,17 @@ init() {
       level.safespawns[i] spawnpointinit();
   }
 
-  if(getdvar(#"scr_spawn_enemyavoiddist") == "")
-    setdvar("scr_spawn_enemyavoiddist", "800");
+  if(getDvar(#"scr_spawn_enemyavoiddist") == "")
+    setDvar("scr_spawn_enemyavoiddist", "800");
 
-  if(getdvar(#"scr_spawn_enemyavoidweight") == "")
-    setdvar("scr_spawn_enemyavoidweight", "0");
+  if(getDvar(#"scr_spawn_enemyavoidweight") == "")
+    setDvar("scr_spawn_enemyavoidweight", "0");
 
-  if(getdvar(#"scr_spawnsimple") == "")
-    setdvar("scr_spawnsimple", "0");
+  if(getDvar(#"scr_spawnsimple") == "")
+    setDvar("scr_spawnsimple", "0");
 
-  if(getdvar(#"scr_spawnpointdebug") == "")
-    setdvar("scr_spawnpointdebug", "0");
+  if(getDvar(#"scr_spawnpointdebug") == "")
+    setDvar("scr_spawnpointdebug", "0");
 
   if(getdvarint(#"scr_spawnpointdebug") > 0) {
     thread showdeathsdebug();
@@ -908,8 +905,8 @@ init() {
   if(level.storespawndata)
     thread allowspawndatareading();
 
-  if(getdvar(#"scr_spawnprofile") == "")
-    setdvar("scr_spawnprofile", "0");
+  if(getDvar(#"scr_spawnprofile") == "")
+    setDvar("scr_spawnprofile", "0");
 
   thread watchspawnprofile();
   thread spawngraphcheck();
@@ -937,7 +934,6 @@ watchspawnprofile() {
 
     level notify("stop_spawn_profile");
   }
-
 }
 
 spawnprofile() {
@@ -960,7 +956,6 @@ spawnprofile() {
 
     wait 0.05;
   }
-
 }
 
 spawngraphcheck() {
@@ -973,7 +968,6 @@ spawngraphcheck() {
     thread spawngraph();
     return;
   }
-
 }
 
 spawngraph() {
@@ -1058,7 +1052,6 @@ spawngraph() {
     level.players[0] drawspawngraph(fakespawnpoints, w, h, weightscale);
     wait 0.05;
   }
-
 }
 
 drawspawngraph(fakespawnpoints, w, h, weightscale) {
@@ -1140,29 +1133,28 @@ loopbotspawns() {
       }
     }
 
-    if(getdvar(#"scr_killbottimer") != "")
+    if(getDvar(#"scr_killbottimer") != "")
       wait(getdvarfloat(#"scr_killbottimer"));
     else
       wait 0.05;
   }
-
 }
 
 allowspawndatareading() {
-  setdvar("scr_showspawnid", "");
-  prevval = getdvar(#"scr_showspawnid");
-  prevrelval = getdvar(#"scr_spawnidcycle");
+  setDvar("scr_showspawnid", "");
+  prevval = getDvar(#"scr_showspawnid");
+  prevrelval = getDvar(#"scr_spawnidcycle");
   readthistime = 0;
 
   while(true) {
-    val = getdvar(#"scr_showspawnid");
+    val = getDvar(#"scr_showspawnid");
     relval = undefined;
 
     if(!isDefined(val) || val == prevval) {
-      relval = getdvar(#"scr_spawnidcycle");
+      relval = getDvar(#"scr_spawnidcycle");
 
       if(isDefined(relval) && relval != "")
-        setdvar("scr_spawnidcycle", "");
+        setDvar("scr_spawnidcycle", "");
       else {
         wait 0.5;
         continue;
@@ -1180,12 +1172,11 @@ allowspawndatareading() {
 
     thread drawspawndata();
   }
-
 }
 
 showdeathsdebug() {
   while(true) {
-    if(getdvar(#"scr_spawnpointdebug") == "0") {
+    if(getDvar(#"scr_spawnpointdebug") == "0") {
       wait 3;
       continue;
     }
@@ -1234,12 +1225,11 @@ showdeathsdebug() {
 
     wait 0.05;
   }
-
 }
 
 updatedeathinfodebug() {
   while(true) {
-    if(getdvar(#"scr_spawnpointdebug") == "0") {
+    if(getDvar(#"scr_spawnpointdebug") == "0") {
       wait 3;
       continue;
     }
@@ -1254,7 +1244,7 @@ spawnweightdebug(spawnpoints) {
   level endon("stop_spawn_weight_debug");
 
   while(true) {
-    if(getdvar(#"scr_spawnpointdebug") == "0") {
+    if(getDvar(#"scr_spawnpointdebug") == "0") {
       wait 3;
       continue;
     }
@@ -1294,12 +1284,11 @@ spawnweightdebug(spawnpoints) {
 
     wait 0.05;
   }
-
 }
 
 profiledebug() {
   while(true) {
-    if(getdvar(#"_id_6A99E750") != "1") {
+    if(getDvar(#"_id_6A99E750") != "1") {
       wait 3;
       continue;
     }
@@ -1315,7 +1304,7 @@ profiledebug() {
 }
 
 debugnearbyplayers(players, origin) {
-  if(getdvar(#"scr_spawnpointdebug") == "0") {
+  if(getDvar(#"scr_spawnpointdebug") == "0") {
     return;
   }
   starttime = gettime();
@@ -1329,7 +1318,6 @@ debugnearbyplayers(players, origin) {
     }
     wait 0.05;
   }
-
 }
 
 deathoccured(dier, killer) {}
@@ -1393,12 +1381,12 @@ ispointvulnerable(playerorigin) {
 }
 
 avoidweapondamage(spawnpoints) {
-  if(getdvar(#"_id_0FB71FB7") == "0") {
+  if(getDvar(#"_id_0FB71FB7") == "0") {
     return;
   }
   weapondamagepenalty = 100000;
 
-  if(getdvar(#"_id_76B8F046") != "" && getdvar(#"_id_76B8F046") != "0")
+  if(getDvar(#"_id_76B8F046") != "" && getDvar(#"_id_76B8F046") != "0")
     weapondamagepenalty = getdvarfloat(#"_id_76B8F046");
 
   mingrenadedistsquared = 62500;
@@ -1413,7 +1401,6 @@ avoidweapondamage(spawnpoints) {
 
         if(level.storespawndata || level.debugspawning)
           spawnpoints[i].spawndata[spawnpoints[i].spawndata.size] = "Was near grenade: -" + int(weapondamagepenalty);
-
       }
     }
   }
@@ -1533,7 +1520,6 @@ spawnpointupdate(spawnpoint) {
 
       if(debug)
         line(player.origin + vectorscale((0, 0, 1), 50.0), spawnpoint.sighttracepoint, (0.5, 1, 0.5));
-
     }
   }
 
@@ -1552,7 +1538,7 @@ spawnpointupdate(spawnpoint) {
 }
 
 getlospenalty() {
-  if(getdvar(#"_id_CACDB8AA") != "" && getdvar(#"_id_CACDB8AA") != "0")
+  if(getDvar(#"_id_CACDB8AA") != "" && getDvar(#"_id_CACDB8AA") != "0")
     return getdvarfloat(#"_id_CACDB8AA");
 
   return 100000;
@@ -1614,7 +1600,7 @@ lastminutesighttraces(spawnpoint) {
 }
 
 avoidvisibleenemies(spawnpoints, teambased) {
-  if(getdvar(#"_id_0FB71FB7") == "0") {
+  if(getDvar(#"_id_0FB71FB7") == "0") {
     return;
   }
   lospenalty = getlospenalty();
@@ -1633,7 +1619,6 @@ avoidvisibleenemies(spawnpoints, teambased) {
         spawnpoints[i].sightchecks[index] = spawnStruct();
         spawnpoints[i].sightchecks[index].penalty = penalty;
       }
-
     }
   } else {
     for(i = 0; i < spawnpoints.size; i++) {
@@ -1648,7 +1633,6 @@ avoidvisibleenemies(spawnpoints, teambased) {
         spawnpoints[i].sightchecks[index] = spawnStruct();
         spawnpoints[i].sightchecks[index].penalty = penalty;
       }
-
     }
 
     mindistteam = "all";
@@ -1684,7 +1668,6 @@ avoidvisibleenemies(spawnpoints, teambased) {
 
           if(level.storespawndata || level.debugspawning)
             spawnpoints[i].spawndata[spawnpoints[i].spawndata.size] = "Nearest enemy at " + int(spawnpoints[i].minenemydist[mindistteam]) + " units: -" + int(penalty);
-
         }
       }
     }
@@ -1692,7 +1675,7 @@ avoidvisibleenemies(spawnpoints, teambased) {
 }
 
 avoidspawnreuse(spawnpoints, teambased) {
-  if(getdvar(#"_id_0FB71FB7") == "0") {
+  if(getDvar(#"_id_0FB71FB7") == "0") {
     return;
   }
   time = gettime();
@@ -1722,7 +1705,6 @@ avoidspawnreuse(spawnpoints, teambased) {
 
         if(level.storespawndata || level.debugspawning)
           spawnpoint.spawndata[spawnpoint.spawndata.size] = "Was recently used: -" + worsen;
-
       } else
         spawnpoint.lastspawnedplayer = undefined;
 
@@ -1734,7 +1716,7 @@ avoidspawnreuse(spawnpoints, teambased) {
 }
 
 avoidsamespawn(spawnpoints) {
-  if(getdvar(#"_id_0FB71FB7") == "0") {
+  if(getDvar(#"_id_0FB71FB7") == "0") {
     return;
   }
   if(!isDefined(self.lastspawnpoint)) {

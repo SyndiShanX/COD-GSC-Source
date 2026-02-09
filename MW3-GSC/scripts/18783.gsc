@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2AC2("blackhawk", var_0, var_1, var_2);
   maps\_vehicle::_id_2AD2(::_id_2B1D);
   maps\_vehicle::_id_2ABE("vehicle_blackhawk_hero_hamburg");
-  maps\_vehicle::_id_2AC1( % bh_rotors, undefined, 0);
+  maps\_vehicle::_id_2AC1(%bh_rotors, undefined, 0);
   var_3 = [];
   var_3["vehicle_blackhawk_hero_hamburg"] = "explosions/large_vehicle_explosion";
   maps\_vehicle::_id_2A02("explosions/helicopter_explosion_secondary_small", "tag_engine_left", "blackhawk_helicopter_hit", undefined, undefined, undefined, 0.2, 1);
@@ -25,7 +25,6 @@ main(var_0, var_1, var_2) {
 
   if(var_0 == "vehicle_blackhawk_hero_hamburg" && level.script == "hamburg") {
     maps\_vehicle::_id_29F5("chopper_ride_rumble", 0.15, 4.5, 600, 1, 1);
-
   }
   maps\_vehicle::_id_2ACA(::_id_3A9D, vehicle_scripts\_littlebird::_id_3A9C);
   maps\_vehicle::_id_2ACD(vehicle_scripts\_littlebird::_id_3E58);

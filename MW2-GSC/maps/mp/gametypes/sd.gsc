@@ -19,8 +19,7 @@
 	Respawning:	Players remain dead for the round and will respawn at the beginning of the next round
 
 	Level requirements
-	------------------
-		Allied Spawnpoints:
+	------------------ Allied Spawnpoints:
 			classname		mp_sd_spawn_attacker
 			Allied players spawn from these. Place at least 16 of these relatively close together.
 
@@ -53,8 +52,7 @@
 			It gets moved to the position of the planted bomb model.
 
 	Level script requirements
-	-------------------------
-		Team Definitions:
+	------------------------- Team Definitions:
 			game["attackers"] = "allies";
 			game["defenders"] = "axis";
 			This sets which team is attacking and which team is defending. Attackers plant the bombs. Defenders protect the targets.
@@ -70,7 +68,7 @@ Attacking players spawn randomly at one of these positions at the beginning of a
 Defending players spawn randomly at one of these positions at the beginning of a round.*/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();

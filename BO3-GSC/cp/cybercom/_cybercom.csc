@@ -21,7 +21,7 @@ function autoexec __init__sytem__() {
 }
 
 function __init__() {
-  setdvar("cybercom_fastswitch_enabled", "1");
+  setDvar("cybercom_fastswitch_enabled", "1");
   level.cybercom_status = 0;
   init_clientfields();
   function_15b9d1ea();

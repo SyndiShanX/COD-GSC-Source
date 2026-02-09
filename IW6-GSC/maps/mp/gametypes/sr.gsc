@@ -14,7 +14,7 @@ CONST_ENEMY_TAG_MODEL = "prop_dogtags_foe_iw6";
 OP_HELPME_NUM_TEAMMATES = 4;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -357,7 +357,6 @@ onNormalDeath(victim, attacker, lifeId) {
 
     attacker incPersStat("defends", 1);
     attacker maps\mp\gametypes\_persistence::statSetChild("round", "defends", attacker.pers["defends"]);
-
   } else if(victim.isBombCarrier) {
     attacker incPlayerStat("bombcarrierkills", 1);
     thread maps\mp\_matchdata::logKillEvent(lifeId, "carrying");
@@ -605,7 +604,7 @@ onEndUse(team, player, result) {
     player.isPlanting = false;
   }
 
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player SetClientOmnvar("ui_bomb_planting_defusing", 0);
     player.ui_bomb_planting_defusing = undefined;
   }

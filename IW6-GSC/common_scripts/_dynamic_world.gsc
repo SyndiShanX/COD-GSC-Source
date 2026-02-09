@@ -155,7 +155,7 @@ jet_timer() {
   timelimit = max(10, match_timelimit);
   timelimit = min(timelimit, 100);
 
-  if(GetDvar("jet_flyby_timer") != "")
+  if(getDvar("jet_flyby_timer") != "")
     level.civilianJetFlyBy_timer = 5 + GetDvarInt("jet_flyby_timer");
   else
     level.civilianJetFlyBy_timer = (0.25 + RandomFloatRange(0.3, 0.7)) * 60 * timeLimit;
@@ -665,7 +665,8 @@ isInBound(ent, bounds) {
 }
 
 isInBound_single(var, v_min, v_max) {
-  if(var > v_min && var < v_max)
+  if(var > v_min &&
+    var < v_max)
     return true;
   return false;
 }
@@ -1185,7 +1186,7 @@ triggerTouchThink(enterFunc, exitFunc) {
   while(true) {
     self waittill("trigger", player);
 
-    if(!IsPlayer(player) && !isDefined(player.finished_spawning)) {
+    if(!isPlayer(player) && !isDefined(player.finished_spawning)) {
       continue;
     }
     if(!IsAlive(player)) {
@@ -1197,7 +1198,7 @@ triggerTouchThink(enterFunc, exitFunc) {
 }
 
 playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
-  if(!IsPlayer(self))
+  if(!isPlayer(self))
     self endon("death");
 
   if(!isSP())
@@ -1246,7 +1247,7 @@ movementTracker() {
     return;
   self endon("disconnect");
 
-  if(!IsPlayer(self))
+  if(!isPlayer(self))
     self endon("death");
 
   self.moveTrackers = 0;

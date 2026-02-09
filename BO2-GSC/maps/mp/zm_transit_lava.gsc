@@ -72,7 +72,7 @@ lava_damage_think() {
     if(isDefined(self.target) && !ent istouching(self.volume)) {
       continue;
     }
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       switch (self._trap_type) {
         case "fire":
         default:

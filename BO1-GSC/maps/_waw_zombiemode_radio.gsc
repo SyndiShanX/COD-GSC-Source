@@ -26,7 +26,6 @@ init() {
   array_thread(radios, ::zombie_radio_play);
   level thread stop_the_radio();
 }
-
 zombie_radio_play() {
   self setCanDamage(true);
   if(!isDefined(level.music_override)) {
@@ -43,7 +42,6 @@ zombie_radio_play() {
     }
   }
 }
-
 stop_the_radio() {
   if(!isDefined(level.music_override)) {
     level.music_override = false;

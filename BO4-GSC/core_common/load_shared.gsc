@@ -64,10 +64,10 @@ __init__() {
   }
 
   if(getdvarstring(#"scr_requiredmapaspectratio") == "") {
-    setdvar(#"scr_requiredmapaspectratio", defaultaspectratio);
+    setDvar(#"scr_requiredmapaspectratio", defaultaspectratio);
   }
 
-  setdvar(#"tu6_player_shallowwaterheight", "0.0");
+  setDvar(#"tu6_player_shallowwaterheight", "0.0");
   util::registerclientsys("levelNotify");
   level thread all_players_spawned();
   level thread keep_time();
@@ -118,7 +118,7 @@ level_notify_listener() {
         level notify(toks[0]);
       }
 
-      setdvar(#"level_notify", "<dev string:x38>");
+      setDvar(#"level_notify", "<dev string:x38>");
     }
 
     wait 0.2;
@@ -131,7 +131,7 @@ client_notify_listener() {
 
     if(val != "<dev string:x38>") {
       util::clientnotify(val);
-      setdvar(#"client_notify", "<dev string:x38>");
+      setDvar(#"client_notify", "<dev string:x38>");
     }
 
     wait 0.2;
@@ -264,7 +264,7 @@ water_think() {
     waitresult = self waittill(#"trigger");
     other = waitresult.activator;
 
-    if(!isplayer(other)) {
+    if(!isPlayer(other)) {
       continue;
     }
 
@@ -433,7 +433,7 @@ shock_onpain() {
   self endon(#"death", #"disconnect", #"killonpainmonitor");
 
   if(getdvarstring(#"blurpain") == "") {
-    setdvar(#"blurpain", "on");
+    setDvar(#"blurpain", "on");
   }
 
   while(true) {
@@ -560,12 +560,11 @@ art_review() {
       hud.hidewheninmenu = 0;
 
       if(sessionmodeiszombiesgame()) {
-        setdvar(#"zombie_cheat", 2);
+        setDvar(#"zombie_cheat", 2);
 
         if(dvarvalue == 1) {
-          setdvar(#"zombie_devgui", "<dev string:x13a>");
+          setDvar(#"zombie_devgui", "<dev string:x13a>");
         }
-
       } else {
         foreach(trig in trigger::get_all()) {
           trig triggerenable(0);

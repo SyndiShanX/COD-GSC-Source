@@ -5,11 +5,10 @@
 
 main() {
   setsaveddvar("hud_drawhud", 0);
-  level.script = tolower(getdvar("mapname"));
+  level.script = tolower(getDvar("mapname"));
 
   if(!isDefined(level._id_404D)) {
     level._id_404D = [];
-
   }
   var_0 = getEntArray("player", "classname")[0];
   setsaveddvar("g_speed", 0);
@@ -49,19 +48,15 @@ start(var_0) {
 
   if(isDefined(level._id_4052)) {
     level._id_4052 destroy();
-
   }
   if(isDefined(level._id_4053)) {
     level._id_4053 destroy();
-
   }
   if(isDefined(level._id_4054)) {
     level._id_4054 destroy();
-
   }
   if(isDefined(level._id_4055)) {
     level._id_4055 destroy();
-
   }
   if(!isDefined(var_0) || !var_0) {
     level._id_4056 = 0.5;
@@ -126,7 +121,6 @@ start(var_0) {
     if(isDefined(level._id_404E[var_1]["image"])) {
       if(level.script[0] != "m") {
         _id_4060("slide_advance");
-
       }
       wait 0.5;
       thread _id_405D(level._id_404E[var_1]["image"]);
@@ -134,7 +128,6 @@ start(var_0) {
 
     if(isDefined(level._id_404E[var_1]["dialog_wait"]) && self._id_4058[level._id_404E[var_1]["dialog_wait"]]) {
       self waittill(level._id_404E[var_1]["dialog_wait"] + "sounddone");
-
     }
     if(isDefined(level._id_404E[var_1]["dialog"])) {
       _id_4060(level._id_404E[var_1]["dialog"], level._id_404E[var_1]["dialog"] + "sounddone");
@@ -237,7 +230,6 @@ _id_405F() {
 
   if(level.script[0] != "m") {
     self playSound("stop_voice");
-
   }
   thread _id_405E("A");
   thread _id_405E("B");
@@ -252,7 +244,6 @@ end() {
 _id_4060(var_0, var_1) {
   if(isDefined(level._id_404D[var_0])) {
     iprintlnbold(level._id_404D[var_0]);
-
   }
   if(isDefined(var_1)) {
     thread _id_4061(var_0, var_1);
@@ -273,7 +264,6 @@ _id_4062() {
 
   if(level.script[0] != "m") {
     _id_4060("slide_advance");
-
   }
   wait 0.5;
   end();

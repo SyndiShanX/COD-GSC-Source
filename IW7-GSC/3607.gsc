@@ -206,7 +206,7 @@ func_A668() {
 }
 
 isusingreaper() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 

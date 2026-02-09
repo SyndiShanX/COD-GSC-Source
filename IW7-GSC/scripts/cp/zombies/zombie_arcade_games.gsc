@@ -5,8 +5,8 @@
 
 func_211C() {
   wait(10);
-  if(getdvar("zmb_arcade_test") != "") {
-    setdvar("debug_pause_spawning", 1);
+  if(getDvar("zmb_arcade_test") != "") {
+    setDvar("debug_pause_spawning", 1);
     var_0 = scripts\engine\utility::getstructarray("dance_floor_attract_spots", "targetname");
     level.players[0] setorigin(var_0[0].origin);
     level.players[0] setplayerangles(var_0[0].angles);

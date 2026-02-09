@@ -30,7 +30,7 @@ function_fcd28111(params) {
 
   activator = params.activator;
 
-  if(!isplayer(activator)) {
+  if(!isPlayer(activator)) {
     return;
   }
 

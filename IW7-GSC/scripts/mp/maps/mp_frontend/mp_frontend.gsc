@@ -7,7 +7,7 @@ func_C573() {
   level endon("game_ended");
   self endon("disconnect");
   if(!isDefined(level.console)) {
-    level.console = getdvar("consoleGame") == "true";
+    level.console = getDvar("consoleGame") == "true";
   }
 
   level.playerviewowner = self;
@@ -689,12 +689,12 @@ epictauntlistener() {
 camolistener() {}
 
 main() {
-  setdvar("match_running", 0);
+  setDvar("match_running", 0);
   scripts\mp\maps\mp_frontend\mp_frontend_precache::main();
   scripts\mp\maps\mp_frontend\gen\mp_frontend_art::main();
   scripts\mp\maps\mp_frontend\mp_frontend_fx::main();
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   func_48AE();

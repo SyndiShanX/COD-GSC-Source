@@ -20,23 +20,23 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_lonestar");
 
-  SetDvar("r_ssaofadedepth", 384);
-  SetDvar("r_ssaorejectdepth", 1152);
+  setDvar("r_ssaofadedepth", 384);
+  setDvar("r_ssaorejectdepth", 1152);
 
   setdvar_cg_ng("r_specularColorScale", 3, 15);
   setdvar_cg_ng("r_diffuseColorScale", 1.25, 3.5);
 
-  SetDvar("r_lightGridEnableTweaks", 1);
-  SetDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.5");
-    SetDvar("sm_sunsamplesizenear", ".19");
+    setDvar("sm_sunShadowScale", "0.5");
+    setDvar("sm_sunsamplesizenear", ".19");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.8");
-    SetDvar("sm_sunsamplesizenear", ".25");
+    setDvar("sm_sunShadowScale", "0.8");
+    setDvar("sm_sunsamplesizenear", ".25");
   } else {
-    SetDvar("sm_sunShadowScale", "0.9");
+    setDvar("sm_sunShadowScale", "0.9");
   }
 
   game["attackers"] = "allies";
@@ -86,7 +86,7 @@ exploder_test() {
       waitframe();
     } else {
       exploder(value);
-      SetDvar(dvar_name, default_value);
+      setDvar(dvar_name, default_value);
     }
   }
 }
@@ -125,7 +125,7 @@ exploder_trigger_run() {
 
 #using_animtree("animated_props");
 quakes() {
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -229,7 +229,7 @@ earthqauke_wait_dvar() {
     if(value == default_value) {
       waitframe();
     } else {
-      SetDvar(dvar_name, default_value);
+      setDvar(dvar_name, default_value);
       level notify("earthquake_start");
     }
   }
@@ -256,7 +256,6 @@ add_quake_scriptable(targetname, animTime, is_pre_quake) {
   } else {
     level.quake_scriptables = array_combine(level.quake_scriptables, scriptables);
   }
-
 }
 
 quake_run_scriptables(scriptables) {
@@ -585,7 +584,6 @@ quake_event_move_to(quakeTime, ent, time, delay, accel, decel, delete_at_end) {
     if(isDefined(ent))
       ent Delete();
   }
-
 }
 
 #using_animtree("animated_props");
@@ -639,7 +637,6 @@ quake_hurt_trigger(hurt_trigger, damage_rate, damage) {
     player.quake_hurt_time[ent_num] = GetTime();
 
     player DoDamage(damage, hurt_trigger.origin);
-
   }
 }
 

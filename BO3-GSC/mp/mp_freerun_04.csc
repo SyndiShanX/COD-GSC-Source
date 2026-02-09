@@ -16,8 +16,8 @@ function main() {
   namespace_c68b7fb6::main();
   namespace_8a3acb29::main();
   level._effect["blood_rain"] = "weather/fx_rain_blood_player_freerun_loop";
-  setdvar("phys_buoyancy", 1);
-  setdvar("phys_ragdoll_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
+  setDvar("phys_ragdoll_buoyancy", 1);
   load::main();
   util::waitforclient(0);
   callback::on_localplayer_spawned(&player_rain);

@@ -65,7 +65,7 @@ function_c9ff0dce() {
           self thread ct_bots::function_fd2d220e();
           break;
         case 8:
-          setdvar(#"hash_3fb2952874e511c2", #"hash_5811622173a6e63a");
+          setDvar(#"hash_3fb2952874e511c2", #"hash_5811622173a6e63a");
           break;
         default:
           self thread ct_bots::function_aa870283(0, 1, 1, 1);
@@ -792,7 +792,7 @@ function_baae9a51() {
     waitframe(1);
   }
 
-  setdvar(#"hash_3fb2952874e511c2", #"hash_5811622173a6e63a");
+  setDvar(#"hash_3fb2952874e511c2", #"hash_5811622173a6e63a");
   e_player = getplayers()[0];
   e_player ct_bots::function_26d45f32(1, 1, 1);
   e_player ct_gadgets::function_b81240c1();
@@ -1178,7 +1178,7 @@ function_1c78b967() {
   level endoncallback(&function_b8f40318, #"hash_6308f4ed0b129e5d", #"dodge_the_hellstorm_objective_success");
   e_player = ct_utils::get_player();
   e_player ct_bots::function_fd2d220e();
-  setdvar(#"hash_3fb2952874e511c2", #"");
+  setDvar(#"hash_3fb2952874e511c2", #"");
   starttime = gettime();
   n_bomb_timer = starttime + int(16 * 1000);
   setmatchflag("bomb_timer_a", 1);
@@ -1432,7 +1432,7 @@ function_1f212110(params) {
   eattacker = params.eattacker;
   weapon = params.weapon;
 
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"remote_missile");
     var_23efb519 = 10;
     var_595e41ee = 100;
@@ -1472,7 +1472,7 @@ function_bbdd4fa9() {
     ct_utils::function_e44c5b8e(#"remote_missile", 0, 1);
     level thread ct_vo::function_14b08e49(array(#"hash_44a0461092ffb316"), "stop_nag");
     kills = e_player.kills;
-    setdvar(#"hash_3e06b14c41136e95", 0);
+    setDvar(#"hash_3e06b14c41136e95", 0);
     killstreakquantity = e_player killstreaks::get_killstreak_quantity(getweapon(#"remote_missile"));
 
     if(killstreakquantity == 0) {
@@ -1743,7 +1743,7 @@ function_17ab2327() {
 function_421135df() {
   level endon(#"combattraining_logic_finished");
   sessionmode = currentsessionmode();
-  setdvar(#"hash_6f59f2ade883b8e2", "<dev string:x38>");
+  setDvar(#"hash_6f59f2ade883b8e2", "<dev string:x38>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x3b>");
@@ -1776,6 +1776,6 @@ function_421135df() {
         break;
     }
 
-    setdvar(#"hash_6f59f2ade883b8e2", "<dev string:x38>");
+    setDvar(#"hash_6f59f2ade883b8e2", "<dev string:x38>");
   }
 }

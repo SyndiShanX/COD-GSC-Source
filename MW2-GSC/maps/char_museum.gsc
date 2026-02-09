@@ -40,7 +40,7 @@ main() {
     case "free": //-> free roam
       default_start(::start_free);
       add_start("free", ::start_free, "[free_roam]", ::museum_main);
-      setdvar("start", "");
+      setDvar("start", "");
       break;
 
     case "credits_black": //-> coming from menu after never beating game
@@ -454,8 +454,8 @@ dcburning_foley(animation) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  //	self ai_next_anim( %training_intro_foley_turnaround_2 );
-  //	self ai_next_anim( %training_intro_foley_idle_talk_1 );
+  //	self ai_next_anim(%training_intro_foley_turnaround_2 );
+  //	self ai_next_anim(%training_intro_foley_idle_talk_1 );
   self ai_next_anim(%training_intro_foley_end);
 }
 

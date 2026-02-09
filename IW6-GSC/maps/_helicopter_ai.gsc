@@ -64,7 +64,7 @@ evasive_startmaneuvers(var_0, var_1) {
   var_0 notify("evasive_action_done");
   thread evasive_endmaneuvers(var_0);
 
-  if(getdvar("cobrapilot_debug") == "1")
+  if(getDvar("cobrapilot_debug") == "1")
     var_0 evasive_drawpoints(var_1);
 
   var_0 setneargoalnotifydist(1500);
@@ -84,7 +84,7 @@ evasive_startmaneuvers(var_0, var_1) {
     else if(var_1[var_3]["goalYawMethod"] == "forward")
       var_5 = var_0.angles[1];
 
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getDvar("cobrapilot_debug") == "1")
       thread maps\_utility::draw_line_until_notify(var_1[var_3]["pos"], var_1[var_3]["pos"] + anglesToForward((0, var_5, 0)) * 250, 1.0, 1.0, 0.2, var_0, "evasive_action_done");
 
     var_0 settargetyaw(var_5);
@@ -162,7 +162,7 @@ wingman_think(var_0) {
   for(;;) {
     var_12 = wingman_getgoalpos(var_1, var_2, var_3);
 
-    if(getdvar("cobrapilot_debug") == "1") {
+    if(getDvar("cobrapilot_debug") == "1") {
       thread common_scripts\utility::draw_line_for_time(level.playervehicle.origin, var_12, 0, 1, 0, var_4);
       thread common_scripts\utility::draw_line_for_time(level.playervehicle.origin, var_0.origin, 0, 0, 1, var_4);
       thread common_scripts\utility::draw_line_for_time(var_0.origin, var_12, 1, 1, 0, var_4);
@@ -205,7 +205,7 @@ wingman_think(var_0) {
       if(getplayerhelispeed() <= 30)
         var_18 = 1;
 
-      if(getdvar("cobrapilot_debug") == "1")
+      if(getDvar("cobrapilot_debug") == "1")
         iprintln("wingman speed: " + var_15 + " : " + var_18);
 
       var_0 setvehgoalpos(var_12, var_18);

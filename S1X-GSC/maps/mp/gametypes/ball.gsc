@@ -4,7 +4,7 @@
 **************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -191,7 +191,7 @@ ontimelimit() {
 
 initspawns() {
   if(level.script == "mp_refraction") {
-    setdvar("scr_disableClientSpawnTraces", "1");
+    setDvar("scr_disableClientSpawnTraces", "1");
   }
 
   level.spawnmins = (0, 0, 0);

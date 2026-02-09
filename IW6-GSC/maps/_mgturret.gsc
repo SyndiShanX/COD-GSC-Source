@@ -27,8 +27,8 @@ init_mgturretsettings() {
 }
 
 main() {
-  if(getdvar("mg42") == "")
-    setdvar("mgTurret", "off");
+  if(getDvar("mg42") == "")
+    setDvar("mgTurret", "off");
 
   level.magic_distance = 24;
   var_0 = getEntArray("turretInfo", "targetname");
@@ -271,7 +271,7 @@ random_spread(var_0) {
   self settargetentity(var_0);
 
   for(;;) {
-    if(isplayer(var_0))
+    if(isPlayer(var_0))
       var_0.origin = self.manual_target getorigin();
     else
       var_0.origin = self.manual_target.origin;
@@ -522,7 +522,7 @@ mg42_gunner_manual_think(var_0, var_1) {
   var_3 = spawn("script_model", (0, 0, 0));
   var_3.scale = 3;
 
-  if(getdvar("mg42") != "off")
+  if(getDvar("mg42") != "off")
     var_3 setModel("temp");
 
   var_3 thread temp_think(var_0, var_2);
@@ -703,7 +703,7 @@ move_use_turret(var_0, var_1, var_2) {
 }
 
 temp_think(var_0, var_1) {
-  if(getdvar("mg42") == "off") {
+  if(getDvar("mg42") == "off") {
     return;
   }
   self.targent = self;
@@ -831,7 +831,7 @@ mg42_target_drones(var_0, var_1, var_2) {
     if(!var_0) {
       var_5 = self getturretowner();
 
-      if(!isalive(var_5) || isplayer(var_5)) {
+      if(!isalive(var_5) || isPlayer(var_5)) {
         wait 0.05;
         continue;
       } else

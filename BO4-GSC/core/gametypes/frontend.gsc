@@ -40,7 +40,7 @@ callback_playerconnect() {
 }
 
 dailychallengedevguiinit() {
-  setdvar(#"daily_challenge_cmd", 0);
+  setDvar(#"daily_challenge_cmd", 0);
   num_rows = tablelookuprowcount(#"gamedata/stats/zm/statsmilestones4.csv");
 
   for(row_num = 2; row_num < num_rows; row_num++) {
@@ -52,7 +52,7 @@ dailychallengedevguiinit() {
 }
 
 function_83f052f2() {
-  setdvar(#"ct_cmd", "<dev string:x86>");
+  setDvar(#"ct_cmd", "<dev string:x86>");
   adddebugcommand("<dev string:x89>");
 }
 
@@ -68,11 +68,11 @@ function_5f1dd5aa() {
     }
 
     if(ct_cmd == "<dev string:xe5>") {
-      unlocked = getdvar(#"ui_unlock_all_ct", 0);
-      setdvar(#"ui_unlock_all_ct", !unlocked);
+      unlocked = getDvar(#"ui_unlock_all_ct", 0);
+      setDvar(#"ui_unlock_all_ct", !unlocked);
     }
 
-    setdvar(#"ct_cmd", "<dev string:x86>");
+    setDvar(#"ct_cmd", "<dev string:x86>");
   }
 }
 
@@ -93,7 +93,7 @@ dailychallengedevguithink() {
     adddebugcommand("<dev string:xfc>" + daily_challenge_stat + "<dev string:x11c>" + "<dev string:x130>");
     adddebugcommand("<dev string:x135>" + daily_challenge_index + "<dev string:x130>");
     adddebugcommand("<dev string:x17a>" + "<dev string:x130>");
-    setdvar(#"daily_challenge_cmd", 0);
+    setDvar(#"daily_challenge_cmd", 0);
   }
 }
 
@@ -104,7 +104,7 @@ function_27d2e95a() {
     return;
   }
 
-  setdvar(#"callings_cmd", "<dev string:x86>");
+  setDvar(#"callings_cmd", "<dev string:x86>");
   adddebugcommand("<dev string:x1d9>");
 
   for(seasonid = 1; seasonid <= level.callingsbundle.size; seasonid++) {
@@ -241,12 +241,12 @@ function_2cdf0184() {
       arr = strtok(str, "<dev string:x23c>");
       taskid = arr[0];
       taskid = int(taskid);
-      setdvar(#"zm_active_daily_calling", taskid);
-      setdvar(#"zm_active_event_calling", 0);
-      setdvar(#"hash_acdd08b365cb62f", 1);
+      setDvar(#"zm_active_daily_calling", taskid);
+      setDvar(#"zm_active_event_calling", 0);
+      setDvar(#"hash_acdd08b365cb62f", 1);
     }
 
-    setdvar(#"callings_cmd", "<dev string:x86>");
+    setDvar(#"callings_cmd", "<dev string:x86>");
   }
 }
 
@@ -268,7 +268,7 @@ function_41cd078d() {
 }
 
 function_e4ea0153() {
-  setdvar(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
+  setDvar(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
 
   while(true) {
     aarcmd = getdvarstring(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
@@ -289,7 +289,7 @@ function_e4ea0153() {
       function_9eac333e();
     }
 
-    setdvar(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
+    setDvar(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
     wait 0.25;
   }
 }

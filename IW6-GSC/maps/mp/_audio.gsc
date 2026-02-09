@@ -75,7 +75,6 @@ is_roomtype_valid(type) {
       AssertMsg(type + " is an Invalid Roomtype");
       break;
   }
-
 }
 
 apply_reverb(name) {

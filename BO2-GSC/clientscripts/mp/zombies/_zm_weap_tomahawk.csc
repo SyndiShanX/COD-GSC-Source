@@ -8,7 +8,7 @@
 #include clientscripts\mp\_music;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   registerclientfield("toplayer", "tomahawk_in_use", 9000, 2, "int", ::tomahawk_in_use, 0, 1);

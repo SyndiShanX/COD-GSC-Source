@@ -46,7 +46,7 @@ init() {
   SetSavedDvar("missileRemoteSpeedUp", "1000");
   SetSavedDvar("missileRemoteSpeedTargetRange", "6000 12000");
 
-  mapname = GetDvar("mapname");
+  mapname = getDvar("mapname");
   if(mapname == "zzz") {} else if(mapname == "raymetest") {
     SetSavedDvar("missileRemoteSpeedUp", "500");
     SetSavedDvar("missileRemoteSpeedTargetRange", "3000 6000");
@@ -450,7 +450,6 @@ remotemissile_radio_reminder() {
 
     remotemissile_radio("uav_online");
     self thread display_hint_timeout("hint_predator_drone_" + self get_remotemissile_actionslot(), 6);
-
   }
 }
 
@@ -796,8 +795,7 @@ UAVRemoteLauncherSequence(player, weap) {
   missile thread do_physics_impact_on_explosion(player);
 
   if(delay_switch_into_missile) {
-    // -MISSILE LAUNCHED-
-    player text_NoticeCreate(&"HELLFIRE_FIRE");
+    // -MISSILE LAUNCHED- player text_NoticeCreate(&"HELLFIRE_FIRE");
     noDamage = WaitWithAbortOnDamage(1.2);
     if(!noDamage) {
       ExitFromCamera_UAV(player, true);
@@ -944,7 +942,7 @@ missile_kill_ai(attacker) {
   if(isDefined(attacker) && isDefined(level.uav_user)) {
     if(attacker == level.uav_user || (isDefined(attacker.attacker) && attacker.attacker == level.uav_user)) {
       level.uav_killstats["ai"]++;
-      if(isplayer(level.uav_user) && level.uav_killstats["ai"] == 10)
+      if(isPlayer(level.uav_user) && level.uav_killstats["ai"] == 10)
         level.uav_user player_giveachievement_wrapper("TEN_PLUS_FOOT_MOBILES");
     }
   }
@@ -1181,7 +1179,7 @@ HudItemsHide() {
   if(level.players.size > 0) {
     for(i = 0; i < level.players.size; i++) {
       if(isDefined(level.players[i].using_uav) && level.players[i].using_uav)
-        setdvar("ui_remotemissile_playernum", (i + 1)); // 0 = no uav, 1 = player1, 2 = player2
+        setDvar("ui_remotemissile_playernum", (i + 1)); // 0 = no uav, 1 = player1, 2 = player2
     }
   } else {
     SetSavedDvar("compass", "0");
@@ -1192,7 +1190,7 @@ HudItemsHide() {
 
 HudItemsShow() {
   if(level.players.size > 0) {
-    setdvar("ui_remotemissile_playernum", 0); // 0 = no uav, 1 = player1, 2 = player2
+    setDvar("ui_remotemissile_playernum", 0); // 0 = no uav, 1 = player1, 2 = player2
   } else {
     SetSavedDvar("compass", "1");
     SetSavedDvar("ammoCounterHide", "0");
@@ -1281,7 +1279,7 @@ draw_target() {
 
   if(IsAI(self)) {
     Target_SetShader(self, "remotemissile_infantry_target");
-  } else if(IsPlayer(self)) // Make sure you add the player to the level.remote_missile_targets before use
+  } else if(isPlayer(self)) // Make sure you add the player to the level.remote_missile_targets before use
   {
     Target_SetShader(self, "hud_fofbox_self_sp");
   } else {

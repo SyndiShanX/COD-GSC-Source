@@ -106,7 +106,7 @@ player_init() {
 
 return_hud() {
   level waittill("game_ended");
-  setdvar("cg_draw2d", 1);
+  setDvar("cg_draw2d", 1);
 }
 
 onPlayerConnect() {
@@ -118,7 +118,7 @@ onPlayerConnect() {
   wait 1;
 
   player takeallweapons();
-  setdvar("cg_draw2d", 0);
+  setDvar("cg_draw2d", 0);
 
   if(!isDefined(player))
     return;
@@ -354,7 +354,6 @@ draw_radial_button(button_group) {
       // right stick debug ling
       r_radial_pos = floating_origin + radial_angle_to_vector(level.rs_angle, 2);
       line(floating_origin, r_radial_pos, (1, 1, 1), 0.05);
-
     }
     print3d(floating_origin - (0, 0, 4.5), "(A)=Select (X)=Back", (1, 1, 1), 0.5, 0.05, 1);
 
@@ -612,10 +611,10 @@ blur_sine(strength, time) {
     cos_fraction = sin(180 * fraction);
     blur_amount = strength * cos_fraction;
 
-    setdvar("r_blur", blur_amount);
+    setDvar("r_blur", blur_amount);
     wait 0.05;
   }
-  setdvar("r_blur", 0);
+  setDvar("r_blur", 0);
 }
 
 force_player_angles() {

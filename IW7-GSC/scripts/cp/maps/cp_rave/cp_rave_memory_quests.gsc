@@ -582,7 +582,7 @@ watch_for_ground_pound_on_toad() {
       self.health = 5;
     }
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       if(var_9 == "zom_groundpound_rave_mp") {
         playFX(scripts\engine\utility::getfx("zombie_freeze_shatter"), var_3);
         level.toads_killed++;
@@ -699,7 +699,7 @@ wait_for_area_cleared(var_0) {
   thread check_for_players_in_area(var_1, var_2, var_3, var_4, var_0);
   for(;;) {
     level waittill("zombie_killed", var_7, var_8, var_9, var_10);
-    if(isDefined(var_10) && isplayer(var_10)) {
+    if(isDefined(var_10) && isPlayer(var_10)) {
       if(is_in_box(var_1, var_2, var_3, var_4, var_7)) {
         var_5++;
       }
@@ -789,7 +789,7 @@ bump_check(var_0, var_1, var_2, var_3, var_4, var_5) {
 is_in_box(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [var_0, var_1, var_2, var_3];
   if(!isDefined(var_4)) {
-    if(isplayer(self) || isagent(self)) {
+    if(isPlayer(self) || isagent(self)) {
       var_4 = self.origin;
     } else {
       return 0;
@@ -1362,7 +1362,7 @@ watch_for_totem_death(var_0) {
   self endon("totem_part_complete");
   while(level.totems_killed < 8) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(!isplayer(var_2) && !isagent(var_2)) {
+    if(!isPlayer(var_2) && !isagent(var_2)) {
       continue;
     }
 

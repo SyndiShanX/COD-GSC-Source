@@ -13,7 +13,7 @@ func_F130() {
 
 func_F127(var_0, var_1, var_2, var_3) {
   var_4 = self.melee.target;
-  if(isplayer(var_4)) {
+  if(isPlayer(var_4)) {
     return 0;
   }
 

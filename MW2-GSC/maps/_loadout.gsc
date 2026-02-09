@@ -529,7 +529,6 @@ give_loadout(character_selected) {
     so_players_give_loadout();
     level.campaign = "american";
     return;
-
   }
 
   if(level.script == "killhouse") {
@@ -653,7 +652,6 @@ give_loadout(character_selected) {
       level.coop_player2 setOffhandSecondaryClass("flash");
       level.coop_player2 switchToWeapon("mp5_silencer");
       level.coop_player2 setViewmodel("viewhands_black_kit");
-
     }
 
     if(!character_selected) {
@@ -756,7 +754,6 @@ give_loadout(character_selected) {
     so_players_give_loadout();
     level.campaign = "american";
     return;
-
   }
 
   if(level.script == "armada") {
@@ -1299,7 +1296,6 @@ give_loadout(character_selected) {
       level.player2 giveWeapon("flash_grenade");
       level.player2 setOffhandSecondaryClass("flash");
       level.player2 setViewmodel("viewhands_sas_woodland");
-
     }
     return;
   }
@@ -1514,8 +1510,7 @@ give_loadout(character_selected) {
     return; // no weapons
   }
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  // level.script is not a single player level. give default weapons.
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // level.script is not a single player level. give default weapons.
   println("loadout.gsc: No level listing in _loadout.gsc, giving default guns");
   level.testmap = true;
 
@@ -1587,7 +1582,6 @@ give_loadout_specialops(character_selected) {
       player giveWeapon("c4");
       player setActionSlot(2, "weapon", "c4");
       player SetWeaponAmmoStock("c4", 5);
-
     }
     return;
   }
@@ -2141,8 +2135,7 @@ if(level.script == "so_snowrace2_cliffhanger") {
   return;
 }
 
-// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-println("loadout.gsc: No level listing in _loadout::give_loadout_specialops(), giving default guns");
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- println("loadout.gsc: No level listing in _loadout::give_loadout_specialops(), giving default guns");
 level.testmap = true;
 level.so_campaign = "ranger";
 
@@ -2481,7 +2474,7 @@ coop_gamesetup_menu() {
 
   foreach(level_string in levels_array_ac130) {
     if(is_coop() && (level_string == level.script)) {
-      pilot_num = getdvar("ui_ac130_pilot_num");
+      pilot_num = getDvar("ui_ac130_pilot_num");
 
       if(isDefined(pilot_num) && pilot_num != "0")
         level.character_switched = true;
@@ -2583,77 +2576,77 @@ setup_character_menu()
 {
 	if( level.script == "co_ac130" || level.script == "co_hunted" )
 	{
-		setdvar( "ui_character1_name", "AC130" );
-		setdvar( "ui_character1_image", "level_character_ac130" );
-		setdvar( "ui_character1_primary", "ui_transparent" );
-		setdvar( "ui_character1_inv", "ui_transparent" );
-		setdvar( "ui_character1_inv_counter", "" );
+		setDvar( "ui_character1_name", "AC130" );
+		setDvar( "ui_character1_image", "level_character_ac130" );
+		setDvar( "ui_character1_primary", "ui_transparent" );
+		setDvar( "ui_character1_inv", "ui_transparent" );
+		setDvar( "ui_character1_inv_counter", "" );
 
-		setdvar( "ui_character2_name", "James" );
-		setdvar( "ui_character2_image", "level_character_james" );
-		setdvar( "ui_character2_primary", "weapon_m4carbine" );
-		setdvar( "ui_character2_inv", "weapon_attachment_m203" );
-		setdvar( "ui_character2_inv_counter", "x10" );
+		setDvar( "ui_character2_name", "James" );
+		setDvar( "ui_character2_image", "level_character_james" );
+		setDvar( "ui_character2_primary", "weapon_m4carbine" );
+		setDvar( "ui_character2_inv", "weapon_attachment_m203" );
+		setDvar( "ui_character2_inv_counter", "x10" );
 		return;
 	}
 	else if( level.script == "co_blackout" )
 	{
-		setdvar( "ui_character1_name", "Price" );
-		setdvar( "ui_character1_image", "level_character_price" );
-		setdvar( "ui_character1_primary", "weapon_m4carbine" );
-		setdvar( "ui_character1_inv", "weapon_attachment_m203" );
-		setdvar( "ui_character1_inv_counter", "x10" );
+		setDvar( "ui_character1_name", "Price" );
+		setDvar( "ui_character1_image", "level_character_price" );
+		setDvar( "ui_character1_primary", "weapon_m4carbine" );
+		setDvar( "ui_character1_inv", "weapon_attachment_m203" );
+		setDvar( "ui_character1_inv_counter", "x10" );
 
-		setdvar( "ui_character2_name", "Gaz" );
-		setdvar( "ui_character2_image", "level_character_gaz" );
-		setdvar( "ui_character2_primary", "weapon_m14_scoped" );
-		setdvar( "ui_character2_inv", "ui_transparent" );
-		setdvar( "ui_character2_inv_counter", "" );
+		setDvar( "ui_character2_name", "Gaz" );
+		setDvar( "ui_character2_image", "level_character_gaz" );
+		setDvar( "ui_character2_primary", "weapon_m14_scoped" );
+		setDvar( "ui_character2_inv", "ui_transparent" );
+		setDvar( "ui_character2_inv_counter", "" );
 		return;
 	}
 	else if( level.script == "co_overgrown" )
 	{
-		setdvar( "ui_character1_name", "Price" );
-		setdvar( "ui_character1_image", "level_character_price" );
-		setdvar( "ui_character1_primary", "weapon_m4carbine" );
-		setdvar( "ui_character1_inv", "weapon_attachment_m203" );
-		setdvar( "ui_character1_inv_counter", "x10" );
+		setDvar( "ui_character1_name", "Price" );
+		setDvar( "ui_character1_image", "level_character_price" );
+		setDvar( "ui_character1_primary", "weapon_m4carbine" );
+		setDvar( "ui_character1_inv", "weapon_attachment_m203" );
+		setDvar( "ui_character1_inv_counter", "x10" );
 
-		setdvar( "ui_character2_name", "Gaz" );
-		setdvar( "ui_character2_image", "level_character_gaz" );
-		setdvar( "ui_character2_primary", "weapon_m14_scoped" );
-		setdvar( "ui_character2_inv", "weapon_claymore" );
-		setdvar( "ui_character2_inv_counter", "x10" );
+		setDvar( "ui_character2_name", "Gaz" );
+		setDvar( "ui_character2_image", "level_character_gaz" );
+		setDvar( "ui_character2_primary", "weapon_m14_scoped" );
+		setDvar( "ui_character2_inv", "weapon_claymore" );
+		setDvar( "ui_character2_inv_counter", "x10" );
 		return;
 	}
 	else if( level.script == "co_suburban_america" )
 	{
-		setdvar( "ui_character1_name", "Price" );
-		setdvar( "ui_character1_image", "level_character_price" );
-		setdvar( "ui_character1_primary", "weapon_m4carbine" );
-		setdvar( "ui_character1_inv", "weapon_attachment_m203" );
-		setdvar( "ui_character1_inv_counter", "x10" );
+		setDvar( "ui_character1_name", "Price" );
+		setDvar( "ui_character1_image", "level_character_price" );
+		setDvar( "ui_character1_primary", "weapon_m4carbine" );
+		setDvar( "ui_character1_inv", "weapon_attachment_m203" );
+		setDvar( "ui_character1_inv_counter", "x10" );
 
-		setdvar( "ui_character2_name", "Gaz" );
-		setdvar( "ui_character2_image", "level_character_gaz" );
-		setdvar( "ui_character2_primary", "weapon_m14_scoped" );
-		setdvar( "ui_character2_inv", "weapon_claymore" );
-		setdvar( "ui_character2_inv_counter", "x10" );
+		setDvar( "ui_character2_name", "Gaz" );
+		setDvar( "ui_character2_image", "level_character_gaz" );
+		setDvar( "ui_character2_primary", "weapon_m14_scoped" );
+		setDvar( "ui_character2_inv", "weapon_claymore" );
+		setDvar( "ui_character2_inv_counter", "x10" );
 		return;
 	}
 
 	// Default
-	setdvar( "ui_character1_name", "Price" );
-	setdvar( "ui_character1_image", "level_character_price" );
-	setdvar( "ui_character1_primary", "weapon_m4carbine" );
-	setdvar( "ui_character1_inv", "weapon_attachment_m203" );
-	setdvar( "ui_character1_inv_counter", "x10" );
+	setDvar( "ui_character1_name", "Price" );
+	setDvar( "ui_character1_image", "level_character_price" );
+	setDvar( "ui_character1_primary", "weapon_m4carbine" );
+	setDvar( "ui_character1_inv", "weapon_attachment_m203" );
+	setDvar( "ui_character1_inv_counter", "x10" );
 
-	setdvar( "ui_character2_name", "Gaz" );
-	setdvar( "ui_character2_image", "level_character_gaz" );
-	setdvar( "ui_character2_primary", "weapon_m14_scoped" );
-	setdvar( "ui_character2_inv", "weapon_claymore" );
-	setdvar( "ui_character2_inv_counter", "x10" );
+	setDvar( "ui_character2_name", "Gaz" );
+	setDvar( "ui_character2_image", "level_character_gaz" );
+	setDvar( "ui_character2_primary", "weapon_m14_scoped" );
+	setDvar( "ui_character2_inv", "weapon_claymore" );
+	setDvar( "ui_character2_inv_counter", "x10" );
 }
 
 */

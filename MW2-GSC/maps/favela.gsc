@@ -407,9 +407,7 @@ torture_sequence() {
   car_battery = spawn("script_model", battery_origin);
   car_battery.angles = battery_angles;
   car_battery setModel("machinery_car_battery");
-  //----
-
-  node anim_first_frame(guys, "torture");
+  //---- node anim_first_frame(guys, "torture");
 
   guys[2] thread torture_sequence_door(door);
 
@@ -784,7 +782,7 @@ makarov_check_player_distance() {
     d = distance(level.player.origin, self.origin);
 
     if(d > MAX_DIST) {
-      setdvar("ui_deadquote", "@FAVELA_RUNNER_GOT_AWAY");
+      setDvar("ui_deadquote", "@FAVELA_RUNNER_GOT_AWAY");
       maps\_utility::missionFailedWrapper();
       return;
     }
@@ -975,7 +973,7 @@ makarov_alley_killed(point) {
     self kill(point, level.player);
   }
 
-  setdvar("ui_deadquote", "@FAVELA_KILLED_RUNNER");
+  setDvar("ui_deadquote", "@FAVELA_KILLED_RUNNER");
   maps\_utility::missionFailedWrapper();
 }
 
@@ -984,7 +982,7 @@ makarov_gets_away() {
 
   self waittill("reached_path_end");
 
-  setdvar("ui_deadquote", "@FAVELA_RUNNER_GOT_AWAY");
+  setDvar("ui_deadquote", "@FAVELA_RUNNER_GOT_AWAY");
   maps\_utility::missionFailedWrapper();
 }
 
@@ -993,7 +991,7 @@ player_doesnt_chase() {
 
   flag_wait("runner_gets_away");
 
-  setdvar("ui_deadquote", "@FAVELA_RUNNER_GOT_AWAY");
+  setDvar("ui_deadquote", "@FAVELA_RUNNER_GOT_AWAY");
   maps\_utility::missionFailedWrapper();
 }
 

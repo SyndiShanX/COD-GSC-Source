@@ -25,7 +25,7 @@
 
 function autoexec init() {
   initzmgenesisbehaviorsandasm();
-  setdvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
   level.closest_player_override = &genesis_closest_player;
   level.pathdist_type = 2;
   level.custom_rise_func = &genesis_custom_rise_func;

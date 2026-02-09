@@ -345,10 +345,10 @@ function player_killed(attacker, killstreaktype) {
 }
 
 function say_kill_battle_chatter(attacker, weapon, victim, inflictor) {
-  if(weapon.skipbattlechatterkill || !isDefined(attacker) || !isplayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || !isDefined(victim) || !isplayer(victim) || util::isprophuntgametype()) {
+  if(weapon.skipbattlechatterkill || !isDefined(attacker) || !isPlayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || !isDefined(victim) || !isPlayer(victim) || util::isprophuntgametype()) {
     return;
   }
-  if(isDefined(inflictor) && !isplayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
+  if(isDefined(inflictor) && !isPlayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
     return;
   }
   if(weapon.inventorytype == "hero") {
@@ -610,7 +610,7 @@ function wait_play_dialog(waittime, dialogkey, dialogflags, dialogbuffer, enemy,
 function play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
   self endon("death");
   level endon("game_ended");
-  if(!isDefined(dialogkey) || !isplayer(self) || !isalive(self) || level.gameended) {
+  if(!isDefined(dialogkey) || !isPlayer(self) || !isalive(self) || level.gameended) {
     return;
   }
   if(!isDefined(dialogflags)) {
@@ -687,7 +687,7 @@ function stop_dialog() {
 function wait_playback_time(soundalias) {}
 
 function get_player_dialog_alias(dialogkey) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return undefined;
   }
   bundlename = self getmpdialogname();
@@ -1093,7 +1093,7 @@ function get_friendly_players() {
 }
 
 function can_play_dialog(teamonly) {
-  if(!isplayer(self) || !isalive(self) || self.playingdialog === 1 || self isplayerunderwater() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
+  if(!isPlayer(self) || !isalive(self) || self.playingdialog === 1 || self isplayerunderwater() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
     return false;
   }
   if(isDefined(teamonly) && !teamonly && self hasperk("specialty_quieter")) {
@@ -1185,10 +1185,10 @@ function game_end_vox(winner) {
 }
 
 function devgui_think() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   while(true) {
     wait(1);
     player = util::gethostplayer();
@@ -1246,7 +1246,7 @@ function devgui_think() {
         break;
       }
     }
-    setdvar("", "");
+    setDvar("", "");
   }
 }
 

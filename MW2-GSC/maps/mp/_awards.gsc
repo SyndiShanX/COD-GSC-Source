@@ -461,7 +461,6 @@ assignAwards() {
       for(i = 3; i < player.statprint.size; i++)
         println("Awards: [", player.name, "][", i, "] ", player.statprint[i].ref, " ", player.statprint[i].value);
     }
-
   }
 
   println("Awards: Finished assigning");
@@ -476,7 +475,7 @@ assignAward(ref) {
     foreach(player in level.players) {
       if(player.clientid == winner) {
         player giveAward(ref);
-        // /# player writeAwardLine( ref );
+        // player writeAwardLine( ref );
       }
     }
   }

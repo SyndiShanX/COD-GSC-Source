@@ -8,9 +8,9 @@
 #include animscripts\utility;
 #include maps\_anim;
 #include maps\_vehicle;
- //#include maps\af_chase_code;
-//#include maps\af_chase_zodiac;
-#include maps\af_chase_knife_fight_code;
+
+/include maps\af_chase_code; /
+include maps\af_chase_zodiac;#include maps\af_chase_knife_fight_code;
 #include maps\_hud_util;
 
 ENDING_MOVE_SPEED = 0.45;
@@ -275,7 +275,6 @@ fight_turnbuckle_idle_handle() {
     flag_waitopen("shepherd_should_do_idle_b");
     anim_node notify("player_arrived");
   }
-
 }
 
 fight_turnbuckle() {
@@ -598,7 +597,6 @@ gun_crawl() {
 
     anim_node anim_single(guys, scene);
   }
-
 }
 
 crawl_earthquake() {

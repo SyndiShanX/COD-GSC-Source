@@ -13,52 +13,52 @@
 
 init() {
   precachevehicle(get_default_vehicle_name());
-  setdvar("scr_veh_cleanupdebugprint", "0");
-  setdvar("scr_veh_driversarehidden", "1");
-  setdvar("scr_veh_driversareinvulnerable", "1");
-  setdvar("scr_veh_alive_cleanuptimemin", "119");
-  setdvar("scr_veh_alive_cleanuptimemax", "120");
-  setdvar("scr_veh_dead_cleanuptimemin", "20");
-  setdvar("scr_veh_dead_cleanuptimemax", "30");
-  setdvar("scr_veh_cleanuptime_dmgfactor_min", "0.33");
-  setdvar("scr_veh_cleanuptime_dmgfactor_max", "1.0");
-  setdvar("scr_veh_cleanuptime_dmgfactor_deadtread", "0.25");
-  setdvar("scr_veh_cleanuptime_dmgfraction_curve_begin", "0.0");
-  setdvar("scr_veh_cleanuptime_dmgfraction_curve_end", "1.0");
-  setdvar("scr_veh_cleanupabandoned", "1");
-  setdvar("scr_veh_cleanupdrifted", "1");
-  setdvar("scr_veh_cleanupmaxspeedmph", "1");
-  setdvar("scr_veh_cleanupmindistancefeet", "75");
-  setdvar("scr_veh_waittillstoppedandmindist_maxtime", "10");
-  setdvar("scr_veh_waittillstoppedandmindist_maxtimeenabledistfeet", "5");
-  setdvar("scr_veh_respawnafterhuskcleanup", "1");
-  setdvar("scr_veh_respawntimemin", "50");
-  setdvar("scr_veh_respawntimemax", "90");
-  setdvar("scr_veh_respawnwait_maxiterations", "30");
-  setdvar("scr_veh_respawnwait_iterationwaitseconds", "1");
-  setdvar("scr_veh_disablerespawn", "0");
-  setdvar("scr_veh_disableoverturndamage", "0");
-  setdvar("scr_veh_explosion_spawnfx", "1");
-  setdvar("scr_veh_explosion_doradiusdamage", "1");
-  setdvar("scr_veh_explosion_radius", "256");
-  setdvar("scr_veh_explosion_mindamage", "20");
-  setdvar("scr_veh_explosion_maxdamage", "200");
-  setdvar("scr_veh_ondeath_createhusk", "1");
-  setdvar("scr_veh_ondeath_usevehicleashusk", "1");
-  setdvar("scr_veh_explosion_husk_forcepointvariance", "30");
-  setdvar("scr_veh_explosion_husk_horzvelocityvariance", "25");
-  setdvar("scr_veh_explosion_husk_vertvelocitymin", "100");
-  setdvar("scr_veh_explosion_husk_vertvelocitymax", "200");
-  setdvar("scr_veh_explode_on_cleanup", "1");
-  setdvar("scr_veh_disappear_maxwaittime", "60");
-  setdvar("scr_veh_disappear_maxpreventdistancefeet", "30");
-  setdvar("scr_veh_disappear_maxpreventvisibilityfeet", "150");
-  setdvar("scr_veh_health_tank", "1350");
+  setDvar("scr_veh_cleanupdebugprint", "0");
+  setDvar("scr_veh_driversarehidden", "1");
+  setDvar("scr_veh_driversareinvulnerable", "1");
+  setDvar("scr_veh_alive_cleanuptimemin", "119");
+  setDvar("scr_veh_alive_cleanuptimemax", "120");
+  setDvar("scr_veh_dead_cleanuptimemin", "20");
+  setDvar("scr_veh_dead_cleanuptimemax", "30");
+  setDvar("scr_veh_cleanuptime_dmgfactor_min", "0.33");
+  setDvar("scr_veh_cleanuptime_dmgfactor_max", "1.0");
+  setDvar("scr_veh_cleanuptime_dmgfactor_deadtread", "0.25");
+  setDvar("scr_veh_cleanuptime_dmgfraction_curve_begin", "0.0");
+  setDvar("scr_veh_cleanuptime_dmgfraction_curve_end", "1.0");
+  setDvar("scr_veh_cleanupabandoned", "1");
+  setDvar("scr_veh_cleanupdrifted", "1");
+  setDvar("scr_veh_cleanupmaxspeedmph", "1");
+  setDvar("scr_veh_cleanupmindistancefeet", "75");
+  setDvar("scr_veh_waittillstoppedandmindist_maxtime", "10");
+  setDvar("scr_veh_waittillstoppedandmindist_maxtimeenabledistfeet", "5");
+  setDvar("scr_veh_respawnafterhuskcleanup", "1");
+  setDvar("scr_veh_respawntimemin", "50");
+  setDvar("scr_veh_respawntimemax", "90");
+  setDvar("scr_veh_respawnwait_maxiterations", "30");
+  setDvar("scr_veh_respawnwait_iterationwaitseconds", "1");
+  setDvar("scr_veh_disablerespawn", "0");
+  setDvar("scr_veh_disableoverturndamage", "0");
+  setDvar("scr_veh_explosion_spawnfx", "1");
+  setDvar("scr_veh_explosion_doradiusdamage", "1");
+  setDvar("scr_veh_explosion_radius", "256");
+  setDvar("scr_veh_explosion_mindamage", "20");
+  setDvar("scr_veh_explosion_maxdamage", "200");
+  setDvar("scr_veh_ondeath_createhusk", "1");
+  setDvar("scr_veh_ondeath_usevehicleashusk", "1");
+  setDvar("scr_veh_explosion_husk_forcepointvariance", "30");
+  setDvar("scr_veh_explosion_husk_horzvelocityvariance", "25");
+  setDvar("scr_veh_explosion_husk_vertvelocitymin", "100");
+  setDvar("scr_veh_explosion_husk_vertvelocitymax", "200");
+  setDvar("scr_veh_explode_on_cleanup", "1");
+  setDvar("scr_veh_disappear_maxwaittime", "60");
+  setDvar("scr_veh_disappear_maxpreventdistancefeet", "30");
+  setDvar("scr_veh_disappear_maxpreventvisibilityfeet", "150");
+  setDvar("scr_veh_health_tank", "1350");
   level.vehicle_drivers_are_invulnerable = getdvarint(#"scr_veh_driversareinvulnerable");
   level.onejectoccupants = ::vehicle_eject_all_occupants;
   level.vehiclehealths["panzer4_mp"] = 2600;
   level.vehiclehealths["t34_mp"] = 2600;
-  setdvar("scr_veh_health_jeep", "700");
+  setDvar("scr_veh_health_jeep", "700");
 
   if(init_vehicle_entities()) {
     level.vehicle_explosion_effect = loadfx("explosions/fx_large_vehicle_explosion");
@@ -328,7 +328,6 @@ init_vehicle() {
     self.maxhealth = getdvarint(#"scr_veh_health_tank");
 
     println("No health specified for vehicle type " + self.vehicletype + "! Using default...");
-
   }
 
   self.health = self.maxhealth;
@@ -398,7 +397,7 @@ player_update_vehicle_hud(show, vehicle) {
   } else if(isDefined(self.vehiclehud))
     self.vehiclehud destroyelem();
 
-  if(getdvar(#"_id_480B1A1D") != "") {
+  if(getDvar(#"_id_480B1A1D") != "") {
     if(getdvarint(#"_id_480B1A1D") != 0) {
       if(show) {
         if(!isDefined(self.vehiclehudhealthnumbers)) {
@@ -502,7 +501,6 @@ cleanup_debug_print_t() {
 
     wait 0.01;
   }
-
 }
 
 cleanup_debug_print_clearmsg_t() {
@@ -514,7 +512,6 @@ cleanup_debug_print_clearmsg_t() {
     self waittill("enter_vehicle");
     self.debug_message = undefined;
   }
-
 }
 
 cleanup_debug_print(message) {
@@ -641,7 +638,6 @@ cleanup(test_name, cleanup_dvar_name, cleanup_func) {
     self cleanup_debug_print("Cleanup disabled for " + test_name + " ( dvar = " + cleanup_dvar_name + " )");
     wait 5.0;
     keep_waiting = 1;
-
   }
 }
 
@@ -959,7 +955,6 @@ respawn_vehicle(respawn_parameters) {
 
   if(!manage_vehicles()) {
     iprintln("Vehicle can't respawn because MAX_VEHICLES has been reached and none of the vehicles could be cleaned up.");
-
   } else {
     if(isDefined(respawn_parameters.destructibledef))
       vehicle = spawnvehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.destructibledef);
@@ -1244,7 +1239,7 @@ vehicle_get_occupant_team() {
   if(occupants.size != 0) {
     occupant = occupants[0];
 
-    if(isplayer(occupant))
+    if(isPlayer(occupant))
       return occupant.team;
   }
 

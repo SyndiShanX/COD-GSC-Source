@@ -22,8 +22,9 @@ musicsavewait() {
   for(;;) {
     level waittill("save_restore");
 
-    if(level.nextmusicstate == "")
+    if(level.nextmusicstate == "") {
       level.nextmusicstate = level.activemusicstate;
+    }
 
     level.activemusicstate = "";
 
@@ -31,8 +32,9 @@ musicsavewait() {
 
     states = getarraykeys(level.musicstates);
 
-    for(i = 0; i < states.size; i++)
+    for(i = 0; i < states.size; i++) {
       stoploopsound(0, level.loopent, 0);
+    }
 
     thread updatemusic();
   }
@@ -45,12 +47,13 @@ change_music_state_from_dvar() {
   while(true) {
     current_music_state = level.activemusicstate;
     next_music_state = level.nextmusicstate;
-    new_music_state = getdvar(#"_id_39C93D95");
+    new_music_state = getDvar(#"_id_39C93D95");
 
     if(new_music_state != "" && new_music_state != current_music_state && new_music_state != next_music_state) {
       if(!isDefined(level.musicstates[new_music_state])) {
-        if(!print_msg)
+        if(!print_msg) {
           println("new music state entered '" + new_music_state + "' is not valid");
+        }
 
         print_msg = 1;
       } else {
@@ -62,7 +65,6 @@ change_music_state_from_dvar() {
 
     wait 1;
   }
-
 }
 
 musiccmdhandler(clientnum, state, oldstate) {
@@ -80,8 +82,9 @@ updatemusic() {
   level endon("save_restore");
 
   while(true) {
-    if(level.activemusicstate == level.nextmusicstate)
+    if(level.activemusicstate == level.nextmusicstate) {
       level waittill("new_music");
+    }
 
     if(level.activemusicstate == level.nextmusicstate) {
       continue;
@@ -98,22 +101,25 @@ updatemusic() {
 
     level.activemusicstate = next;
 
-    if(active != "")
+    if(active != "") {
       thread transitionout(active, next);
+    }
 
     if(level.activemusicstate != level.nextmusicstate) {
       continue;
     }
-    if(next != "")
+    if(next != "") {
       thread transitionin(active, next);
+    }
   }
 }
 
 fadeoutandstopsound(id, time) {
   rate = 0;
 
-  if(isDefined(time) && time != 0)
+  if(isDefined(time) && time != 0) {
     rate = 1.0 / time;
+  }
 
   setsoundvolumerate(id, rate);
   setsoundvolume(id, 0.0);
@@ -127,12 +133,14 @@ waitwithstatechangecheck(waittime) {
   while(getrealtime() < endwait) {
     waitrealtime(0.01);
 
-    if(level.activemusicstate != level.nextmusicstate)
+    if(level.activemusicstate != level.nextmusicstate) {
       return false;
+    }
   }
 
-  if(level.activemusicstate != level.nextmusicstate)
+  if(level.activemusicstate != level.nextmusicstate) {
     return false;
+  }
 
   return true;
 }
@@ -186,8 +194,9 @@ transitionout(previous, next) {
     if(loopalias != nextloopalias || nextoneshotalias != "") {
       stoploopsound(0, level.loopent, fadeoutloop);
 
-      if(waittilldone)
+      if(waittilldone) {
         samestate = waitwithstatechangecheck(fadeoutloop);
+      }
     } else {}
   }
 
@@ -212,8 +221,9 @@ transitionout(previous, next) {
           }
         }
 
-        if(!samestate)
+        if(!samestate) {
           fadeout = 0.01;
+        }
 
         thread fadeoutandstopsound(id, fadeout);
       }
@@ -255,15 +265,17 @@ transitionin(previous, next) {
   samestate = 1;
 
   if(startdelay > 0 && stingerid >= 0) {
-    while(startdelay > 0 && soundplaying(stingerid) && getplaybacktime(stingerid) < startdelay * 1000 && level.activemusicstate == level.nextmusicstate)
+    while(startdelay > 0 && soundplaying(stingerid) && getplaybacktime(stingerid) < startdelay * 1000 && level.activemusicstate == level.nextmusicstate) {
       wait 0.01;
+    }
 
     samestate = level.activemusicstate == level.nextmusicstate;
   }
 
   if(waittillstingerdone && level.activemusicstate == level.nextmusicstate && stingerid >= 0) {
-    while(soundplaying(stingerid) && level.activemusicstate == level.nextmusicstate)
+    while(soundplaying(stingerid) && level.activemusicstate == level.nextmusicstate) {
       wait 0.01;
+    }
 
     level.musicstates[previous].stingerid = -1;
     samestate = level.activemusicstate == level.nextmusicstate;
@@ -345,15 +357,17 @@ musicwaittillstingerdone() {
 musicstinger(stinger, delay, force) {
   assert(isDefined(level.musicdeclarename));
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0;
+  }
 
   name = level.musicdeclarename;
   level.musicstates[name].stinger = stinger;
   level.musicstates[name].startdelay = delay;
 
-  if(isDefined(force))
+  if(isDefined(force)) {
     level.musicstates[name].forcestinger = force;
+  }
 }
 
 _musicalias(alias, fadein, fadeout, loopdelay) {
@@ -370,11 +384,13 @@ _musicalias(alias, fadein, fadeout, loopdelay) {
   } else
     level.musicstates[name].loopdelay = 0;
 
-  if(!isDefined(level.musicstates[name].fadein))
+  if(!isDefined(level.musicstates[name].fadein)) {
     level.musicstates[name].fadein = 0;
+  }
 
-  if(!isDefined(level.musicstates[name].fadeout))
+  if(!isDefined(level.musicstates[name].fadeout)) {
     level.musicstates[name].fadeout = 0;
+  }
 }
 
 _musicaliasloop(alias, fadein, fadeout) {
@@ -384,11 +400,13 @@ _musicaliasloop(alias, fadein, fadeout) {
   level.musicstates[name].fadeinloop = fadein;
   level.musicstates[name].fadeoutloop = fadeout;
 
-  if(!isDefined(level.musicstates[name].fadeinloop))
+  if(!isDefined(level.musicstates[name].fadeinloop)) {
     level.musicstates[name].fadeinloop = 0;
+  }
 
-  if(!isDefined(level.musicstates[name].fadeoutloop))
+  if(!isDefined(level.musicstates[name].fadeoutloop)) {
     level.musicstates[name].fadeoutloop = 0;
+  }
 }
 
 musicaliasloop(alias, fadein, fadeout) {

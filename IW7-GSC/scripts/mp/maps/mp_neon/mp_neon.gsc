@@ -10,10 +10,10 @@ main() {
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_neon");
   level.var_C7B3 = getEntArray("OutOfBounds", "targetname");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("sm_sunSampleSizeNear", 0.705);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("sm_sunSampleSizeNear", 0.705);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

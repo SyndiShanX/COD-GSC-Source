@@ -21,7 +21,7 @@ function main() {
   namespace_8f273e4e::main();
   load::main();
   compass::setupminimap("compass_map_mp_veiled");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   spawncollision("collision_clip_wall_32x32x10", "collider", (-2091.09, 803.526, 140.663), (27, 82, -2));
   spawncollision("collision_clip_wall_32x32x10", "collider", (-1905.67, 876.398, 140.663), (27, 97, 2));
   spawncollision("collision_clip_wall_128x128x10", "collider", (881, -352, 116), (0, 0, 0));

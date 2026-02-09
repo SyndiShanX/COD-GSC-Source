@@ -30,7 +30,6 @@ main() {
 
   if(!issplitscreen()) {
     level._id_1A54 = 120;
-
   }
   level._id_1A55 = 15;
   level._id_1A56 = 30;
@@ -43,13 +42,11 @@ _id_1A58() {
 
   if(_id_1AB9() == 2) {
     precacheshader("specialty_self_revive");
-
   }
   thread _id_1A59();
 
   if(common_scripts\utility::flag_exist("slamzoom_finished") && !common_scripts\utility::flag("slamzoom_finished")) {
     common_scripts\utility::flag_wait("slamzoom_finished");
-
   }
   thread _id_1A6B("laststand_player_state_changed");
   thread _id_1A63();
@@ -73,7 +70,6 @@ _id_1A5B() {
   }
   if(!isDefined(self._id_1A5D)) {
     self._id_1A5D = self.maxhealth;
-
   }
   if(!common_scripts\utility::flag("laststand_on")) {
     return;
@@ -157,7 +153,6 @@ _id_1A62() {
 _id_1A63() {
   if(maps\_utility::_id_12C1()) {
     thread _id_1A67();
-
   }
   level._id_1A64 = 0;
 
@@ -241,7 +236,6 @@ _id_1A6C(var_0, var_1) {
     maps\_utility::_id_13DB(var_0);
   } else {
     maps\_utility::_id_1654(var_0);
-
   }
   level notify(var_1);
 }
@@ -303,7 +297,6 @@ _id_1A6E() {
 
       if(var_3) {
         var_2 notify("so_reviving");
-
       }
       var_1 = 0;
       var_4 = 1.5;
@@ -320,7 +313,6 @@ _id_1A6E() {
         if(maps\_utility::_id_1A43(self) && var_1 > var_4) {
           if(!var_3) {
             var_2 notify("so_revived");
-
           }
           var_2 notify("so_revive_success");
           _id_1A72();
@@ -336,11 +328,9 @@ _id_1A6E() {
 _id_1A71(var_0) {
   if(!self usebuttonpressed()) {
     return 0;
-
   }
   if(isDefined(var_0._id_1A6F) && var_0._id_1A6F == self) {
     return 1;
-
   }
   return 0;
 }
@@ -405,7 +395,6 @@ _id_1A77(var_0) {
 
   if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
-
   }
   self notifyonplayercommand("nag", "weapnext");
 
@@ -441,7 +430,6 @@ _id_1A79() {
     return 1;
   } else if(gettime() - self._id_1A78 < var_0) {
     return 0;
-
   }
   return 1;
 }
@@ -489,7 +477,6 @@ _id_1A7D() {
 
   while(maps\_utility::_id_1A43(self) && _id_1A7E()) {
     wait 0.05;
-
   }
   self notify("nag_cancel");
 }
@@ -497,17 +484,14 @@ _id_1A7D() {
 _id_1A7E() {
   if(isDefined(level._id_1A7F) && level._id_1A7F) {
     return 0;
-
   }
   var_0 = maps\_utility::_id_133A(self);
 
   if(var_0 _id_1A71(self)) {
     return 0;
-
   }
   if(!maps\_specialops_battlechatter::_id_132F()) {
     return 0;
-
   }
   return 1;
 }
@@ -783,11 +767,9 @@ _id_1A91(var_0, var_1, var_2, var_3) {
     var_4 = self;
   } else {
     var_4 = maps\_utility::_id_133A(self);
-
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   if(var_2 && _id_1A93()) {
     if(self._id_1A92 == 1) {
@@ -797,11 +779,9 @@ _id_1A91(var_0, var_1, var_2, var_3) {
 
   if(var_0 < var_1 * level._id_1A5E) {
     return var_4._id_1A39;
-
   }
   if(var_0 < var_1 * level._id_132E) {
     return var_4._id_1A38;
-
   }
   return var_4._id_1A36;
 }
@@ -811,7 +791,6 @@ _id_1A93() {
 
   if(var_0 _id_1A71(self)) {
     return 0;
-
   }
   if(isDefined(self._id_1A78)) {
     if(gettime() - self._id_1A78 < level._id_1A31 * 1000) {
@@ -854,11 +833,9 @@ _id_1A95() {
     self._id_023C = 1;
   } else {
     self._id_023C++;
-
   }
   if(isDefined(self._id_1A96)) {
     self notify("sentry_placement_canceled");
-
   }
   thread _id_1AA0();
 
@@ -956,7 +933,6 @@ _id_1AA2() {
 
   if(_id_1AB9() != 2) {
     wait 0.3;
-
   }
   thread _id_1AB0();
 
@@ -966,7 +942,6 @@ _id_1AA2() {
         self._id_1AA3 = 1;
       } else {
         self._id_1AA3++;
-
       }
       if(self._id_1AA3 <= 9999) {
         thread _id_1AA4();
@@ -1017,7 +992,6 @@ _id_1AA4() {
       var_2 = 1;
     } else if(gettime() - self._id_1AA5 > 3000.0) {
       var_2 = 1;
-
     }
     var_3 = common_scripts\utility::ter_op(var_2, 0.01, 0.0025);
     _id_1AAD(var_3);
@@ -1032,7 +1006,6 @@ _id_1AA6() {
 
   if(isDefined(var_0) && var_0 == "player_down_and_out") {
     self.ignoreme = 1;
-
   }
   _id_1ABE(0);
   thread _id_1AA8(0.5);
@@ -1205,7 +1178,7 @@ _id_1AB4() {
   self waittill("death", var_0, var_1, var_2);
   var_3 = 0;
 
-  if(isDefined(var_0) && isalive(var_0) && isplayer(var_0) && maps\_utility::_id_1A43(var_0)) {
+  if(isDefined(var_0) && isalive(var_0) && isPlayer(var_0) && maps\_utility::_id_1A43(var_0)) {
     if(isDefined(var_2) && weaponclass(var_2) == "pistol") {
       var_3 = 1;
     } else if(isDefined(var_1) && var_1 == "MOD_MELEE") {
@@ -1234,7 +1207,6 @@ _id_1AB5() {
 _id_1AB6() {
   if(maps\_utility::_id_133C("laststand_dying_effect")) {
     maps\_utility::_id_13DE("laststand_dying_effect");
-
   }
   self stopshellshock();
 }
@@ -1293,13 +1265,11 @@ _id_1ABC() {
 
     if(var_1 && !_id_1ABB()) {
       return 1;
-
     }
     return 0;
   } else {
     if(!_id_1ABB()) {
       return 1;
-
     }
     return 0;
   }
@@ -1308,7 +1278,6 @@ _id_1ABC() {
 _id_1ABD() {
   if(_id_1AB9() == 2 && isDefined(self._id_132B._id_1A53)) {
     return max(0, self._id_132B._id_1A53);
-
   }
   return 0;
 }
@@ -1372,7 +1341,6 @@ _id_1AC1(var_0) {
 
   if(weaponclass(var_5) == "pistol") {
     return var_5;
-
   }
   foreach(var_3 in var_1) {
     if(weaponclass(var_3) == "pistol") {
@@ -1411,15 +1379,12 @@ _id_1AC4() {
 _id_1AC5(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0 == "none") {
     return 0;
-
   }
   if(!self hasweapon(var_0)) {
     return 0;
-
   }
   return 1;
 }
@@ -1431,7 +1396,6 @@ _id_1AC6(var_0) {
     var_1 makeusable();
   } else {
     var_1 makeunusable();
-
   }
   return var_1;
 }

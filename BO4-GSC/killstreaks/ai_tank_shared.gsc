@@ -752,7 +752,7 @@ function_9868e24e(player) {
   ti = 0;
 
   foreach(enemy in enemies) {
-    if(isplayer(enemy) && util::function_fbce7263(player.team, enemy.team)) {
+    if(isPlayer(enemy) && util::function_fbce7263(player.team, enemy.team)) {
       entnum = enemy getentitynumber();
       player.var_f1470bda[entnum] = ti;
       ti++;
@@ -773,7 +773,7 @@ function_9868e24e(player) {
     enemies = getplayers();
 
     foreach(target in enemies) {
-      if(!isplayer(target) || player.team === target.team) {
+      if(!isPlayer(target) || player.team === target.team) {
         continue;
       }
 
@@ -886,7 +886,7 @@ state_driving_update(params) {
 
   driver = self getseatoccupant(0);
 
-  if(isplayer(driver)) {
+  if(isPlayer(driver)) {
     while(true) {
       driver endon(#"disconnect");
       driver util::waittill_vehicle_move_up_button_pressed();
@@ -1038,7 +1038,7 @@ function_b2cc6703(targets) {
       continue;
     }
 
-    if(isplayer(targets[idx])) {
+    if(isPlayer(targets[idx])) {
       update_player_threat(targets[idx]);
       continue;
     }
@@ -1427,7 +1427,6 @@ damage_armor_activati_(entity, tacpoints) {
       record3dtext("<dev string:x9e>", tacpoint.origin + (0, 0, 40), (1, 1, 1), "<dev string:x38>");
 
       recordline(tacpoint.origin + (0, 0, 40), tacpoint.origin, (1, 1, 1), "<dev string:x38>");
-
     }
   }
 
@@ -1564,7 +1563,6 @@ state_combat_update(params) {
         result = self waittilltimeout(randomintrange(4, 5), #"near_goal", #"stunned");
       } else {
         recordsphere(newpos, 3, (1, 0, 0), "<dev string:x38>");
-
       }
     }
 
@@ -2182,7 +2180,7 @@ tank_too_far_from_nav_mesh_abort_think() {
 }
 
 respectnottargetedbyaitankperk(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -2336,7 +2334,7 @@ shoot_targets(projectile, max_missiles) {
   enemies = getplayers();
 
   foreach(target in enemies) {
-    if(isDefined(target) && isplayer(target) && util::function_fbce7263(owner.team, target.team)) {
+    if(isDefined(target) && isPlayer(target) && util::function_fbce7263(owner.team, target.team)) {
       var_4ef4e267 = target getentitynumber();
       ti = owner.var_f1470bda[var_4ef4e267];
 

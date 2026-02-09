@@ -4,14 +4,14 @@
 *************************************************/
 
 main() {
-  setdvar("sm_sunSampleSizeNear", 0.85);
-  setdvar("r_mbVelocityScaleViewModel", 0.5);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraAccurateOcclusionThreshold", 4000);
-  setdvar("sm_roundRobinPrioritySpotShadows", 8);
-  setdvar("sm_spotUpdateLimit", 8);
-  setdvar("r_tessellationFactor", 40);
-  setdvar("r_tessellationCutoffFalloff", 256);
+  setDvar("sm_sunSampleSizeNear", 0.85);
+  setDvar("r_mbVelocityScaleViewModel", 0.5);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 4000);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
+  setDvar("r_tessellationFactor", 40);
+  setDvar("r_tessellationCutoffFalloff", 256);
   if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
   }
@@ -3822,7 +3822,7 @@ should_drop_pillage(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     return 1;
   }
 
@@ -3862,7 +3862,7 @@ cp_disco_auto_melee_agent_type_check(var_0) {
 is_in_box(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [var_0, var_1, var_2, var_3];
   if(!isDefined(var_4)) {
-    if(isplayer(self) || isagent(self)) {
+    if(isPlayer(self) || isagent(self)) {
       var_4 = self.origin;
     } else {
       return 0;

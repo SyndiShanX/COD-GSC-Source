@@ -116,7 +116,7 @@ setmeleeattackdist() {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self.enemy) && isplayer(self.enemy))
+    if(isDefined(self.enemy) && isPlayer(self.enemy))
       self.meleeattackdist = anim.dogattackplayerdist;
     else
       self.meleeattackdist = anim.dogattackaidist;
@@ -175,7 +175,7 @@ initdoganimations() {
 
   level.dog_melee_index = 0;
   level.dog_melee_timing_array = common_scripts\utility::array_randomize(var_2);
-  setdvar("friendlySaveFromDog", "0");
+  setDvar("friendlySaveFromDog", "0");
 }
 
 initdogarchetype() {

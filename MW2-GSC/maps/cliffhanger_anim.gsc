@@ -450,9 +450,7 @@ dialog() {
   level.scr_sound["price"]["cliff_pri_melee_plyr"] = "cliff_pri_melee_plyr";
 
   //PRICE OUT OF BASE DIALOG
-  //HEART BEAT SETUP---
-
-  //Soap, check your heartbeat sensor.	
+  //HEART BEAT SETUP--- //Soap, check your heartbeat sensor.	
   level.scr_sound["price"]["cliff_pri_checksensor"] = "cliff_pri_checksensor";
   level.scr_face["price"]["cliff_pri_checksensor"] = % cliff_pri_checksensor;
 
@@ -468,26 +466,22 @@ dialog() {
   level.scr_sound["price"]["cliff_pri_whitedots"] = "cliff_pri_whitedots";
   level.scr_face["price"]["cliff_pri_whitedots"] = % cliff_pri_whitedots;
 
-  //FIRST ENCOUNTER	---
-  //You take the one on the left. 	
+  //FIRST ENCOUNTER	--- //You take the one on the left. 	
   level.scr_sound["price"]["cliff_pri_youtakeleft"] = "cliff_pri_youtakeleft";
   //On three. One...two...three.	
   level.scr_sound["price"]["cliff_pri_onthree"] = "cliff_pri_onthree";
 
-  //SECOND ENCOUNTER	---
-  //Same plan.	
+  //SECOND ENCOUNTER	--- //Same plan.	
   level.scr_sound["price"]["cliff_pri_sameplan"] = "cliff_pri_sameplan";
 
-  //IVE GOT YOUR BACK	---
-  //All right, I've tapped into their comms.	
+  //IVE GOT YOUR BACK	--- //All right, I've tapped into their comms.	
   level.scr_sound["price"]["cliff_pri_tappedcomms"] = "cliff_pri_tappedcomms";
   //Picking up a lot of chatter about some bird named Pvt. Natalya. 	
   level.scr_sound["price"]["cliff_pri_pvtnatalya"] = "cliff_pri_pvtnatalya";
   //That's odd. Last I checked, they didn't allow female combatants in their army.	
   level.scr_sound["price"]["cliff_pri_femcombatants"] = "cliff_pri_femcombatants";
 
-  //STORM	---
-  //The storm's brewing up.	
+  //STORM	--- //The storm's brewing up.	
   level.scr_sound["price"]["cliff_pri_stormsbrewing"] = "cliff_pri_stormsbrewing";
 
   //ON YOUR LEFT
@@ -508,77 +502,63 @@ dialog() {
   //Target behind you.	
   level.scr_sound["price"]["cliff_pri_targetbehindyou"] = "cliff_pri_targetbehindyou";
 
-  //THEY ARE RESPAWNING---
-  //Hold up.	
+  //THEY ARE RESPAWNING--- //Hold up.	
   level.scr_sound["price"]["cliff_pri_holdup"] = "cliff_pri_holdup";
   //I'm seeing some activity on the runway.	
   level.scr_sound["price"]["cliff_pri_activityonrunway"] = "cliff_pri_activityonrunway";
   //Looks like twenty plus 'foot-mobiles' headed your way
   level.scr_sound["price"]["cliff_pri_footmobiles"] = "cliff_pri_footmobiles";
 
-  //STAY AWAY FROM BMP	---
-  //Picking up large heat signatures near the tower, could be BMPs. I'd avoid that area.
+  //STAY AWAY FROM BMP	--- //Picking up large heat signatures near the tower, could be BMPs. I'd avoid that area.
   level.scr_sound["price"]["cliff_pri_avoidarea"] = "cliff_pri_avoidarea";
 
-  //GOTO HANGER	---
-  //I'm picking more radio traffic about the satellite. Standby.	
+  //GOTO HANGER	--- //I'm picking more radio traffic about the satellite. Standby.	
   level.scr_sound["price"]["cliff_pri_radiotraffic"] = "cliff_pri_radiotraffic";
   //Got it. Sounds like the satellite's in the far hangar.	
   level.scr_sound["price"]["cliff_pri_infarhangar"] = "cliff_pri_infarhangar";
   //Race you there. Oscar Mike. Out.	
   level.scr_sound["price"]["cliff_pri_oscarmike"] = "cliff_pri_oscarmike";
 
-  //THEY FOUND A BODY	---
-  //Hold on - they've only found a body. They don't know where you are.	
+  //THEY FOUND A BODY	--- //Hold on - they've only found a body. They don't know where you are.	
   level.scr_sound["price"]["cliff_pri_foundabody"] = "cliff_pri_foundabody";
   //Looks like they've found a corpse, but they haven't seen you yet. Keep quiet.	
   level.scr_sound["price"]["cliff_pri_keepquiet"] = "cliff_pri_keepquiet";
   //Soap - they found a corpse but they're not onto you yet. Stay calm.	
   level.scr_sound["price"]["cliff_pri_staycalm"] = "cliff_pri_staycalm";
 
-  //GOOD JOB	---
-  //Nicely done.	
+  //GOOD JOB	--- //Nicely done.	
   level.scr_sound["price"]["cliff_pri_nicelydone"] = "cliff_pri_nicelydone";
 
-  //PRICE KILLED SOMEONE---
-  level.scr_sound["price"]["tango_down"] = "cliff_pri_killfirm";
+  //PRICE KILLED SOMEONE--- level.scr_sound["price"]["tango_down"] = "cliff_pri_killfirm";
 
-  //LETS SPLIT UP -----
-  //Let’s split up. I'll use the thermal scope and provide overwatch from this ridge.	
+  //LETS SPLIT UP ----- //Let’s split up. I'll use the thermal scope and provide overwatch from this ridge.	
   level.scr_sound["price"]["cliff_pri_splitup"] = "cliff_pri_splitup";
 
   //You'll be like a ghost in this blizzard, so the guards won’t see you until you’re very close.	
   level.scr_sound["price"]["cliff_pri_likeaghost"] = "cliff_pri_likeaghost";
 
-  //YOU'RE IN - PLAN B -----
-  //All right, you're in. Head to the left and plant your C4 on a fuel tank. We may need to go to ‘Plan B’ if things go south.	
+  //YOU'RE IN - PLAN B ----- //All right, you're in. Head to the left and plant your C4 on a fuel tank. We may need to go to ‘Plan B’ if things go south.	
   level.scr_sound["price"]["cliff_pri_yourein"] = "cliff_pri_yourein";
 
-  //TRUCK COMING ----
-  //There’s a truck coming! Stay out of sight.	
+  //TRUCK COMING ---- //There’s a truck coming! Stay out of sight.	
   level.scr_sound["price"]["cliff_pri_truckcoming"] = "cliff_pri_truckcoming";
 
-  //TRUCK BLOWN UP ----
-  //Gee, I wonder if they will notice a flaming wreck in the middle of the road….	
+  //TRUCK BLOWN UP ---- //Gee, I wonder if they will notice a flaming wreck in the middle of the road….	
   level.scr_sound["price"]["cliff_pri_flamingwreck"] = "cliff_pri_flamingwreck";
 
   //Stay out of sight - you’ve alerted some guards.	
   level.scr_sound["price"]["cliff_pri_outofsight"] = "cliff_pri_outofsight";
 
-  //SILENCER ADVICE ----
-  //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
+  //SILENCER ADVICE ---- //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
   level.scr_sound["price"]["cliff_pri_attractattn"] = "cliff_pri_attractattn";
 
-  //SNEAKY PROGRESS	----
-  //Pretty sneaky Soap. No one’s been alerted to your presence.	
+  //SNEAKY PROGRESS	---- //Pretty sneaky Soap. No one’s been alerted to your presence.	
   level.scr_sound["price"]["cliff_pri_prettysneaky"] = "cliff_pri_prettysneaky";
 
-  //GET INTO POSITION FIRST FOUR ----
-  //Two tangos in front.	
+  //GET INTO POSITION FIRST FOUR ---- //Two tangos in front.	
   level.scr_sound["price"]["cliff_pri_2tangosfront"] = "cliff_pri_2tangosfront";
 
-  //BMP DANGER ----
-  //That BMP’s got thermal sights – get the hell out of there!	
+  //BMP DANGER ---- //That BMP’s got thermal sights – get the hell out of there!	
   level.scr_sound["price"]["cliff_pri_getoutofthere"] = "cliff_pri_getoutofthere";
 
   //Nice work.	
@@ -751,9 +731,7 @@ dialog() {
   level.scr_radio["cliff_pri_melee_plyr"] = "cliff_pri_melee_plyr";
 
   //PRICE OUT OF BASE DIALOG
-  //HEART BEAT SETUP---
-
-  //Soap, check your heartbeat sensor.	
+  //HEART BEAT SETUP--- //Soap, check your heartbeat sensor.	
   level.scr_radio["cliff_pri_checksensor"] = "cliff_pri_checksensor";
   //You should be able to see me on the scope.	
   level.scr_radio["cliff_pri_seeme"] = "cliff_pri_seeme";
@@ -768,20 +746,17 @@ dialog() {
   //On three. One...two...three.	
   level.scr_radio["cliff_pri_onthree"] = "cliff_pri_onthree";
 
-  //SECOND ENCOUNTER	---
-  //Same plan.	
+  //SECOND ENCOUNTER	--- //Same plan.	
   level.scr_radio["cliff_pri_sameplan"] = "cliff_pri_sameplan";
 
-  //IVE GOT YOUR BACK	---
-  //All right, I've tapped into their comms.	
+  //IVE GOT YOUR BACK	--- //All right, I've tapped into their comms.	
   level.scr_radio["cliff_pri_tappedcomms"] = "cliff_pri_tappedcomms";
   //Picking up a lot of chatter about some bird named Pvt. Natalya. 	
   level.scr_radio["cliff_pri_pvtnatalya"] = "cliff_pri_pvtnatalya";
   //That's odd. Last I checked, they didn't allow female combatants in their army.	
   level.scr_radio["cliff_pri_femcombatants"] = "cliff_pri_femcombatants";
 
-  //STORM	---
-  //The storm's brewing up.	
+  //STORM	--- //The storm's brewing up.	
   level.scr_radio["cliff_pri_stormsbrewing"] = "cliff_pri_stormsbrewing";
 
   //ON YOUR LEFT
@@ -802,81 +777,67 @@ dialog() {
   //Target behind you.	
   level.scr_radio["cliff_pri_targetbehindyou"] = "cliff_pri_targetbehindyou";
 
-  //THEY ARE RESPAWNING---
-  //Hold up.	
+  //THEY ARE RESPAWNING--- //Hold up.	
   level.scr_radio["cliff_pri_holdup"] = "cliff_pri_holdup";
   //I'm seeing some activity on the runway.	
   level.scr_radio["cliff_pri_activityonrunway"] = "cliff_pri_activityonrunway";
   //Looks like twenty plus 'foot-mobiles' headed your way
   level.scr_radio["cliff_pri_footmobiles"] = "cliff_pri_footmobiles";
 
-  //STAY AWAY FROM BMP	---
-  //Picking up large heat signatures near the tower, could be BMPs. I'd avoid that area.
+  //STAY AWAY FROM BMP	--- //Picking up large heat signatures near the tower, could be BMPs. I'd avoid that area.
   level.scr_radio["cliff_pri_avoidarea"] = "cliff_pri_avoidarea";
 
-  //GOTO HANGER	---
-  //I'm picking more radio traffic about the satellite. Standby.	
+  //GOTO HANGER	--- //I'm picking more radio traffic about the satellite. Standby.	
   level.scr_radio["cliff_pri_radiotraffic"] = "cliff_pri_radiotraffic";
   //Got it. Sounds like the satellite's in the far hangar.	
   level.scr_radio["cliff_pri_infarhangar"] = "cliff_pri_infarhangar";
   //Race you there. Oscar Mike. Out.	
   level.scr_radio["cliff_pri_oscarmike"] = "cliff_pri_oscarmike";
 
-  //THEY FOUND A BODY	---
-  //Hold on - they've only found a body. They don't know where you are.	
+  //THEY FOUND A BODY	--- //Hold on - they've only found a body. They don't know where you are.	
   level.scr_radio["cliff_pri_foundabody"] = "cliff_pri_foundabody";
   //Looks like they've found a corpse, but they haven't seen you yet. Keep quiet.	
   level.scr_radio["cliff_pri_keepquiet"] = "cliff_pri_keepquiet";
   //Soap - they found a corpse but they're not onto you yet. Stay calm.	
   level.scr_radio["cliff_pri_staycalm"] = "cliff_pri_staycalm";
 
-  //GOOD JOB	---
-  //Nicely done.	
+  //GOOD JOB	--- //Nicely done.	
   level.scr_radio["cliff_pri_nicelydone"] = "cliff_pri_nicelydone";
 
-  //PRICE KILLED SOMEONE---
-  level.scr_radio["tango_down"] = "UK_pri_inform_killfirm_generic_s";
+  //PRICE KILLED SOMEONE--- level.scr_radio["tango_down"] = "UK_pri_inform_killfirm_generic_s";
 
-  //LETS SPLIT UP -----
-  //Let’s split up. I'll use the thermal scope and provide overwatch from this ridge.	
+  //LETS SPLIT UP ----- //Let’s split up. I'll use the thermal scope and provide overwatch from this ridge.	
   level.scr_radio["cliff_pri_splitup"] = "cliff_pri_splitup";
 
   //You'll be like a ghost in this blizzard, so the guards won’t see you until you’re very close.	
   level.scr_radio["cliff_pri_likeaghost"] = "cliff_pri_likeaghost";
 
-  //YOU'RE IN - PLAN B -----
-  //All right, you're in. Head to the left and plant your C4 on a fuel tank. We may need to go to ‘Plan B’ if things go south.	
+  //YOU'RE IN - PLAN B ----- //All right, you're in. Head to the left and plant your C4 on a fuel tank. We may need to go to ‘Plan B’ if things go south.	
   level.scr_radio["cliff_pri_yourein"] = "cliff_pri_yourein";
 
-  //TRUCK COMING ----
-  //There’s a truck coming! Stay out of sight.	
+  //TRUCK COMING ---- //There’s a truck coming! Stay out of sight.	
   level.scr_radio["cliff_pri_truckcoming"] = "cliff_pri_truckcoming";
 
-  //TRUCK BLOWN UP ----
-  //Gee, I wonder if they will notice a flaming wreck in the middle of the road….	
+  //TRUCK BLOWN UP ---- //Gee, I wonder if they will notice a flaming wreck in the middle of the road….	
   level.scr_radio["cliff_pri_flamingwreck"] = "cliff_pri_flamingwreck";
 
   //Stay out of sight - you’ve alerted some guards.	
   level.scr_radio["cliff_pri_outofsight"] = "cliff_pri_outofsight";
 
-  //SILENCER ADVICE ----
-  //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
+  //SILENCER ADVICE ---- //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
   level.scr_radio["cliff_pri_attractattn"] = "cliff_pri_attractattn";
 
-  //SNEAKY PROGRESS	----
-  //Pretty sneaky Soap. No one’s been alerted to your presence.	
+  //SNEAKY PROGRESS	---- //Pretty sneaky Soap. No one’s been alerted to your presence.	
   level.scr_radio["cliff_pri_prettysneaky"] = "cliff_pri_prettysneaky";
 
-  //GET INTO POSITION FIRST FOUR ----
-  //Two tangos in front.	
+  //GET INTO POSITION FIRST FOUR ---- //Two tangos in front.	
   level.scr_radio["cliff_pri_2tangosfront"] = "cliff_pri_2tangosfront";
 
   //Get over here.	
   level.scr_radio["cliff_pri_getoverhere"] = "cliff_pri_getoverhere";
   level.scr_sound["price"]["cliff_pri_getoverhere"] = "cliff_pri_getoverhere";
 
-  //BMP DANGER ----
-  //That BMP’s got thermal sights – get the hell out of there!	
+  //BMP DANGER ---- //That BMP’s got thermal sights – get the hell out of there!	
   level.scr_radio["cliff_pri_getoutofthere"] = "cliff_pri_getoutofthere";
 
   //Nice work.	
@@ -961,17 +922,13 @@ dialog() {
 
   /////////////////////////////////////////
 
-  //This is easier when you do some of the work.	--
-  level.scr_sound["price"]["cliff_pri_somework"] = "cliff_pri_somework";
+  //This is easier when you do some of the work.	-- level.scr_sound["price"]["cliff_pri_somework"] = "cliff_pri_somework";
 
-  //I guess I have to do everything?	--
-  level.scr_sound["price"]["cliff_pri_doeverything"] = "cliff_pri_doeverything";
+  //I guess I have to do everything?	-- level.scr_sound["price"]["cliff_pri_doeverything"] = "cliff_pri_doeverything";
 
-  //Never mind.	--
-  level.scr_radio["cliff_pri_nevermind"] = "cliff_pri_nevermind";
+  //Never mind.	-- level.scr_radio["cliff_pri_nevermind"] = "cliff_pri_nevermind";
 
-  //Then again, maybe not.	--
-  level.scr_radio["cliff_pri_maybenot"] = "cliff_pri_maybenot";
+  //Then again, maybe not.	-- level.scr_radio["cliff_pri_maybenot"] = "cliff_pri_maybenot";
 
   //Use the cover of the storm to enter the base. --	
   level.scr_radio["cliff_pri_coverofstorm"] = "cliff_pri_coverofstorm";

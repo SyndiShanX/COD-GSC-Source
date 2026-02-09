@@ -109,7 +109,7 @@ func_11279(var_0, var_1, var_2, var_3, var_4) {
     var_0 notify("destroyed_equipment");
   }
 
-  if(isDefined(var_0) && isplayer(var_0) && var_0 != self.owner) {
+  if(isDefined(var_0) && isPlayer(var_0) && var_0 != self.owner) {
     var_0 scripts\mp\missions::func_D991("ch_killjoy_six_ability");
   }
 
@@ -741,7 +741,7 @@ func_1128F() {
 }
 
 func_1127E(var_0) {
-  if(!isplayer(var_0) && !isagent(var_0)) {
+  if(!isPlayer(var_0) && !isagent(var_0)) {
     return 0;
   }
 

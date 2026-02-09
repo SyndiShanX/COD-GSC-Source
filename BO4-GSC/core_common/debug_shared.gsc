@@ -19,8 +19,8 @@ __init__() {
 
 devgui_debug_key_value() {
   a_keys = array("<dev string:x38>", "<dev string:x41>", "<dev string:x4c>", "<dev string:x58>", "<dev string:x6c>", "<dev string:x79>", "<dev string:x89>", "<dev string:x96>", "<dev string:x9f>");
-  setdvar(#"debug_key_value", 0);
-  setdvar(#"debug_key_value_dist", 2000);
+  setDvar(#"debug_key_value", 0);
+  setDvar(#"debug_key_value_dist", 2000);
   adddebugcommand("<dev string:xa6>");
   adddebugcommand("<dev string:xf8>");
 
@@ -35,7 +35,7 @@ devgui_debug_key_value() {
   level flag::wait_till("<dev string:x195>");
 
   while(true) {
-    debug_key_value = getdvar(#"debug_key_value", 0);
+    debug_key_value = getDvar(#"debug_key_value", 0);
 
     if(debug_key_value != 0) {
       a_ents = getEntArray();

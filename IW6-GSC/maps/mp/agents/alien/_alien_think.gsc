@@ -134,7 +134,7 @@ should_do_stun_damage(sWeapon, sMeansofDeath, eAttacker) {
   if(is_true(self.is_burning))
     return false;
 
-  if(isDefined(eAttacker) && isplayer(eAttacker) && sMeansofDeath != "MOD_MELEE") {
+  if(isDefined(eAttacker) && isPlayer(eAttacker) && sMeansofDeath != "MOD_MELEE") {
     using_primary = isDefined(sWeapon) && (sWeapon == eAttacker GetCurrentPrimaryWeapon());
 
     return using_primary && (eAttacker maps\mp\alien\_utility::has_stun_ammo());
@@ -268,7 +268,7 @@ downed_enemy_monitor() {
   self endon("death");
 
   while(true) {
-    if(!IsPlayer(self.enemy)) {
+    if(!isPlayer(self.enemy)) {
       wait 0.05;
       continue;
     }
@@ -295,10 +295,7 @@ monitor_enemy_for_downed(enemy) {
 }
 
 alien_test_loop() {
-  movePosList = [
-    (-296, 448, -352), (808, 300, -368), (1320.6, 482.8, -320)
-
-  ];
+  movePosList = [(-296, 448, -352), (808, 300, -368), (1320.6, 482.8, -320)];
 
   wait(10);
 
@@ -315,9 +312,7 @@ alien_test_loop() {
 }
 
 alien_test_jump() {
-  movePosList = [
-    (-203.3, -898, 151.03304), (-1282.2, -669.1, -26.529)
-  ];
+  movePosList = [(-203.3, -898, 151.03304), (-1282.2, -669.1, -26.529)];
 
   wait(10);
 
@@ -662,13 +657,11 @@ alien_attack(enemy, attack_type) {
       break;
     default:
       if(isDefined(level.alien_attack_override_func))
-        if([
-            [level.alien_attack_override_func]
-          ](enemy, attack_type)) {
+        if([[level.alien_attack_override_func]](enemy, attack_type)) {
           break;
         }
 
-      /# iprintln( "Invalid alien attack_type: " + attack_type );
+      iprintln("Invalid alien attack_type: " + attack_type);
       wait 1;
       break;
   }
@@ -684,7 +677,7 @@ handle_badpath(enemy) {
   enemy endon("death");
   enemy endon("disconnect");
   self endon("bad_path");
-  /# debug_alien_ai_state( "handle_badpath" );
+  debug_alien_ai_state("handle_badpath");
   self.badpath = false;
 
   if(!can_attempt_badpath_move()) {
@@ -776,7 +769,6 @@ attempt_bad_path_melee(enemy) {
       alien_attack(enemy, "swipe");
       return true;
     }
-
   }
 
   self.leapEndPos = self maps\mp\agents\alien\_alien_melee::get_leap_end_pos(1.0, LEAP_OFFSET_XY, enemy);
@@ -848,7 +840,6 @@ restart_loop_near_enemy(enemy) {
     }
     wait 0.05;
   }
-
 }
 
 set_attacking(enemy) {
@@ -1004,7 +995,7 @@ alien_pet_follow() {
 alien_wait_for_combat(enemy) {
   self endon("go to combat");
 
-  /# debug_alien_ai_state( "wait_for_combat" );
+  debug_alien_ai_state("wait_for_combat");
   self thread monitor_proximity_with_enemy(enemy);
   self thread watch_for_damage(enemy);
   self thread random_movemode_change(0, 70, 30, 1.5, 3.0);
@@ -1073,7 +1064,6 @@ alien_retreat(enemy) {
     random_array = ["elevated_delay", "cover", "cover", "cover"];
     choice = randomint(4);
     retreat_type = random_array[choice];
-
   }
 
   switch (retreat_type) {
@@ -1084,7 +1074,7 @@ alien_retreat(enemy) {
       cover_retreat(enemy, retreat_direction);
       break;
     default:
-      /# iprintln( "Invalid alien_retreat_type: " + retreat_type );
+      iprintln("Invalid alien_retreat_type: " + retreat_type);
       wait 1;
       break;
   }
@@ -1139,7 +1129,7 @@ wait_for_proximity_check_activation(enemy) {
 }
 
 elevated_delay_retreat(enemy, direction) {
-  /# debug_alien_ai_state( "elevated_delay_retreat" );
+  debug_alien_ai_state("elevated_delay_retreat");
   elevated_jump_node = self get_elevated_jump_node(enemy, direction);
   if(!isDefined(elevated_jump_node)) {
     wait 0.05;
@@ -1190,7 +1180,7 @@ get_elevated_jump_node(enemy, direction) {
 cover_retreat(enemy, direction) {
   EXTRA_COVER_NODE_AFTER_1ST_COVER = 1;
 
-  /# debug_alien_ai_state( "cover_retreat" );
+  debug_alien_ai_state("cover_retreat");
   self endon("go to combat");
 
   self thread monitor_proximity_with_enemy(enemy);
@@ -1267,7 +1257,7 @@ get_cover_node(enemy, filters) {
 }
 
 circling_retreat(enemy, direction) {
-  /# debug_alien_ai_state( "circling_retreat" );
+  debug_alien_ai_state("circling_retreat");
   self endon("go to combat");
 
   self thread monitor_proximity_with_enemy(enemy);
@@ -1276,7 +1266,7 @@ circling_retreat(enemy, direction) {
   nodes = GetNodesInRadius(enemy.origin, 800, 400, 256);
 
   if(nodes.size == 0) {
-    /#alien_path_error( "Unable to find any node within 150-unit to 800-unit radius.Talk to level designer." );
+    alien_path_error("Unable to find any node within 150-unit to 800-unit radius.Talk to level designer.");
     nodes = GetNodesInRadius(enemy.origin, 2000, 400, 256);
   }
 
@@ -1313,7 +1303,7 @@ circling_retreat(enemy, direction) {
     }
     nodes = GetNodesInRadius(enemy.origin, 800, 500, 256);
     if(nodes.size == 0) {
-      /#alien_path_error( "Unable to find any node within 500-unit to 800-unit radius.Talk to level designer." );
+      alien_path_error("Unable to find any node within 500-unit to 800-unit radius.Talk to level designer.");
       nodes = GetNodesInRadius(enemy.origin, 2000, 400, 256);
     }
 
@@ -1332,7 +1322,7 @@ circling_retreat(enemy, direction) {
 }
 
 elevated_circling_retreat(enemy, direction) {
-  /# debug_alien_ai_state( "elevated_circling_retreat" );
+  debug_alien_ai_state("elevated_circling_retreat");
   self endon("go to combat");
 
   self thread monitor_proximity_with_enemy(enemy);
@@ -1392,7 +1382,7 @@ elevated_circling_retreat(enemy, direction) {
 }
 
 close_range_retreat(enemy) {
-  /# debug_alien_ai_state( "close_range_retreat" );
+  debug_alien_ai_state("close_range_retreat");
   self endon("go to combat");
 
   self thread monitor_proximity_with_enemy(enemy);
@@ -1409,7 +1399,7 @@ close_range_retreat(enemy) {
   nodes = GetNodesInRadius(retreatLocation, 256, 0, 128, "path");
 
   if(nodes.size == 0) {
-    /#alien_path_error( "Unable to find any node within 300-unit radius.Retreat location: " + retreatLocation );
+    alien_path_error("Unable to find any node within 300-unit radius.Retreat location: " + retreatLocation);
     nodes = GetNodesInRadius(retreatLocation, 500, 256, 128, "path");
   }
 
@@ -1528,7 +1518,6 @@ get_retreat_node_rated(enemy, filters, nodes) {
       compare_vector = VectorNormalize(enemy.origin - node_origin);
     } else {
       compare_vector = VectorNormalize(node_origin - self.origin);
-
     }
 
     dot = VectorDot(target_vector, compare_vector);
@@ -1629,7 +1618,8 @@ max_traces_reached() {
 }
 
 default_approach(enemy, attack_counter) {
-  /# debug_alien_ai_state( "default_approach" ); #/ /
+  debug_alien_ai_state("default_approach");
+  /
   # debug_alien_attacker_state("attacking");
 
   approach_node = do_initial_approach(enemy);
@@ -1835,38 +1825,38 @@ find_wall_leap_node(enemy) {
 }
 
 swipe_melee(enemy) {
-  /# debug_alien_ai_state( "swipe_melee" );
+  debug_alien_ai_state("swipe_melee");
   self.melee_type = "swipe";
   alien_melee(enemy);
 }
 
 leap_melee(enemy) {
-  /# debug_alien_ai_state( "leap_melee" );
+  debug_alien_ai_state("leap_melee");
   self.melee_type = "leap";
   alien_melee(enemy);
 }
 
 wall_leap_melee(enemy) {
-  /# debug_alien_ai_state( "wall_leap_melee" );
+  debug_alien_ai_state("wall_leap_melee");
   self.melee_type = "wall";
   assert(isDefined(self.wall_leap_melee_node));
   alien_melee(enemy);
 }
 
 synch_melee(enemy) {
-  /# debug_alien_ai_state( "synch_melee" );
+  debug_alien_ai_state("synch_melee");
   self.melee_type = "synch";
   alien_melee(enemy);
 }
 
 badpath_jump(enemy) {
-  /# debug_alien_ai_state( "badpath_jump" );
+  debug_alien_ai_state("badpath_jump");
   self.melee_type = "badpath_jump";
   alien_melee(enemy);
 }
 
 swipe_static_melee(enemy) {
-  /# debug_alien_ai_state( "swipe_static_melee" );
+  debug_alien_ai_state("swipe_static_melee");
   self.melee_type = "swipe_static";
   alien_melee(enemy);
 }
@@ -2043,7 +2033,7 @@ wait_till_distance_from_enemy(max_distance, enemy) {
 }
 
 get_distance_squared_to_enemy(enemy) {
-  if(IsPlayer(enemy) && enemy IsOnLadder())
+  if(isPlayer(enemy) && enemy IsOnLadder())
     return Distance2DSquared(self.origin, enemy.origin);
 
   return DistanceSquared(self.origin, enemy.origin);
@@ -2143,7 +2133,7 @@ wait_for_valid_leap_melee(enemy) {
 }
 
 go_to_leaping_melee_position(enemy) {
-  /# debug_alien_ai_state( "go_to_leaping_melee_position" );
+  debug_alien_ai_state("go_to_leaping_melee_position");
   self ScrAgentSetGoalEntity(enemy);
   self ScrAgentSetGoalRadius(ALIEN_LEAP_MELEE_DISTANCE_MIN + ALIEN_GOAL_RADIUS_ADJUSTMENT);
 
@@ -2151,7 +2141,7 @@ go_to_leaping_melee_position(enemy) {
 }
 
 go_to_leaping_melee_node(enemy) {
-  /# debug_alien_ai_state( "go_to_leaping_melee_node (badpath)" );
+  debug_alien_ai_state("go_to_leaping_melee_node (badpath)");
   nodes = GetNodesInRadius(enemy.origin, 512.0, 200.0, 256.0, "node_jump");
   valid_nodes = [];
   enemy_eye = enemy get_eye_position();

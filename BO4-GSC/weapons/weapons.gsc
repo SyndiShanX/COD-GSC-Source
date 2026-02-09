@@ -109,7 +109,7 @@ on_player_spawned() {
 }
 
 function_878d649f(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
   if(!isDefined(level.var_94ee159)) {
     level.var_94ee159 = [];
@@ -134,7 +134,7 @@ function_878d649f(player) {
 }
 
 event_handler[weapon_change] function_edc4ebe8(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -575,7 +575,7 @@ watch_pickup() {
   var_90f043d2 = pickedupontouch && !isDefined(droppeditem);
 
   if(!var_90f043d2) {
-    if(isDefined(player) && isplayer(player)) {
+    if(isDefined(player) && isPlayer(player)) {
       if(isDefined(player.weaponpickupscount)) {
         player.weaponpickupscount++;
       } else {
@@ -658,7 +658,7 @@ event_handler[weapon_melee_charge] function_9847a517(eventstruct) {
 }
 
 function_f2c53bb2(curweapon) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -769,7 +769,7 @@ on_end_game() {
 }
 
 event_handler[grenade_pullback] function_5755a808(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -783,7 +783,7 @@ event_handler[grenade_pullback] function_5755a808(eventstruct) {
 }
 
 event_handler[missile_fire] function_f075cefa(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -843,7 +843,7 @@ watch_grenade_cancel() {
   waittillframeend();
 
   while(true) {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       return;
     }
 
@@ -1014,7 +1014,7 @@ begin_grenade_tracking() {
 event_handler[grenade_fire] function_e2b6d5a5(eventstruct) {
   self callback::callback(#"grenade_fired", eventstruct);
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -1396,7 +1396,7 @@ on_damage(eattacker, einflictor, weapon, meansofdeath, damage) {
       self.lastconcussedby = eattacker;
       break;
     default:
-      if(isDefined(level.shellshockonplayerdamage) && isplayer(self)) {
+      if(isDefined(level.shellshockonplayerdamage) && isPlayer(self)) {
         [[level.shellshockonplayerdamage]](meansofdeath, damage, weapon);
       }
 
@@ -1671,7 +1671,7 @@ drop_scavenger_for_death(attacker) {
 
   if(level.gametype == "hack") {
     item = self dropscavengeritem(getweapon(#"scavenger_item_hack"));
-  } else if(isplayer(attacker)) {
+  } else if(isPlayer(attacker)) {
     item = self dropscavengeritem(getweapon(#"scavenger_item"));
   } else {
     return;

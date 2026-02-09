@@ -170,14 +170,12 @@ flash_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwast
 render_debug_sphere(origin, color) {
   if(getdvarint(#"turret_debug", 0)) {
     sphere(origin, 2, color, 0.75, 1, 10, 100);
-
   }
 }
 
 function_7067b673(origin1, origin2, color) {
   if(getdvarint(#"turret_debug", 0)) {
     line(origin1, origin2, color, 0.75, 1, 100);
-
   }
 }
 

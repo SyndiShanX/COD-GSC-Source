@@ -112,7 +112,7 @@ function private function_f1ec3062(team, attacker) {
 }
 
 function private function_2458babe(entity) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   valid = [];
@@ -212,7 +212,7 @@ function private _activate_iff_override(slot, weapon) {
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_iffoverride");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
@@ -224,7 +224,7 @@ function private _activate_iff_override(slot, weapon) {
 function private _iff_leash_to_owner(owner) {
   self endon("death");
   self endon("iff_override_reverted");
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner endon("disconnect");
   } else {
     owner endon("death");
@@ -238,7 +238,7 @@ function private _iff_leash_to_owner(owner) {
 }
 
 function iff_vehiclecb(isactive) {
-  if(isactive && isDefined(self.iffowner) && isplayer(self.iffowner)) {
+  if(isactive && isDefined(self.iffowner) && isPlayer(self.iffowner)) {
     self clientfield::set("cybercom_setiffname", 2);
     self thread function_384a3bfb();
   } else if(!isactive && isDefined(self.iffowner)) {
@@ -259,7 +259,7 @@ function private function_384a3bfb() {
 function private _iff_overridevehicle(assignedowner) {
   self endon("death");
   wait(randomfloatrange(0, 0.75));
-  if(isplayer(assignedowner)) {
+  if(isPlayer(assignedowner)) {
     self.iff_override_cb = &iff_vehiclecb;
     self.iffowner = assignedowner;
   }

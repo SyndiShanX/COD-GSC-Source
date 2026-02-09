@@ -25,19 +25,19 @@ init() {
   precacherumble("explosion_generic");
   precacheshellshock("dog_bite");
 
-  if(getdvar(#"_id_942939D4") == "")
-    setdvar("zombie_dog_animset", "zombie");
+  if(getDvar(#"_id_942939D4") == "")
+    setDvar("zombie_dog_animset", "zombie");
 
-  if(getdvar(#"_id_CAA5B74F") == "")
-    setdvar("scr_dog_health_walk_multiplier", "4.0");
+  if(getDvar(#"_id_CAA5B74F") == "")
+    setDvar("scr_dog_health_walk_multiplier", "4.0");
 
-  if(getdvar(#"_id_C7E63BA4") == "")
-    setdvar("scr_dog_run_distance", "500");
+  if(getDvar(#"_id_C7E63BA4") == "")
+    setDvar("scr_dog_run_distance", "500");
 
-  level.melee_range_sav = getdvar(#"ai_meleeRange");
-  level.melee_width_sav = getdvar(#"ai_meleeWidth");
-  level.melee_height_sav = getdvar(#"ai_meleeHeight");
-  setdvar("dog_MeleeDamage", "100");
+  level.melee_range_sav = getDvar(#"ai_meleeRange");
+  level.melee_width_sav = getDvar(#"ai_meleeWidth");
+  level.melee_height_sav = getDvar(#"ai_meleeHeight");
+  setDvar("dog_MeleeDamage", "100");
   set_zombie_var("dog_fire_trail_percent", 50);
   level._effect["lightning_dog_spawn"] = loadfx("maps/zombie/fx_zombie_dog_lightning_buildup");
   level._effect["dog_eye_glow"] = loadfx("maps/zombie/fx_zombie_dog_eyes");
@@ -109,7 +109,7 @@ dog_round_spawning() {
   else
     max = players.size * 8;
 
-  if(getdvar(#"_id_4077D7E0") != "")
+  if(getDvar(#"_id_4077D7E0") != "")
     max = getdvarint(#"_id_4077D7E0");
 
   level.zombie_total = max;
@@ -304,7 +304,6 @@ dog_round_tracker() {
       level.next_dog_round = level.round_number + randomintrange(4, 6);
 
       get_players()[0] iprintln("Next dog round: " + level.next_dog_round);
-
     } else if(flag("dog_round")) {
       dog_round_stop();
       level.round_spawn_func = old_spawn_func;
@@ -328,9 +327,9 @@ dog_round_start() {
   clientnotify("dog_start");
 
   if(isDefined(level.dog_melee_range))
-    setdvar("ai_meleeRange", level.dog_melee_range);
+    setDvar("ai_meleeRange", level.dog_melee_range);
   else
-    setdvar("ai_meleeRange", 100);
+    setDvar("ai_meleeRange", 100);
 }
 
 dog_round_stop() {
@@ -343,9 +342,9 @@ dog_round_stop() {
   level.doground_nomusic = 0;
   level notify("dog_round_ending");
   clientnotify("dog_stop");
-  setdvar("ai_meleeRange", level.melee_range_sav);
-  setdvar("ai_meleeWidth", level.melee_width_sav);
-  setdvar("ai_meleeHeight", level.melee_height_sav);
+  setDvar("ai_meleeRange", level.melee_range_sav);
+  setDvar("ai_meleeWidth", level.melee_width_sav);
+  setDvar("ai_meleeHeight", level.melee_height_sav);
 }
 
 play_dog_round() {
@@ -384,7 +383,7 @@ dog_init() {
   self.team = level.zombie_team;
   health_multiplier = 1.0;
 
-  if(getdvar(#"_id_CAA5B74F") != "")
+  if(getDvar(#"_id_CAA5B74F") != "")
     health_multiplier = getdvarfloat(#"_id_CAA5B74F");
 
   self.maxhealth = int(level.dog_health * health_multiplier);
@@ -447,7 +446,7 @@ dog_death() {
     level notify("last_dog_down");
   }
 
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     event = "death";
 
     if(issubstr(self.damageweapon, "knife_ballistic_"))

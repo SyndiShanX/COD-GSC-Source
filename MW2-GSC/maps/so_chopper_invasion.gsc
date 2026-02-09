@@ -149,28 +149,28 @@ init_fx() {
 }
 
 so_player_selection() {
-  if(IsSplitScreen() || GetDvar("coop") == "1") {
-    level.specops_character_selector = GetDvar("coop_start");
+  if(IsSplitScreen() || getDvar("coop") == "1") {
+    level.specops_character_selector = getDvar("coop_start");
   }
 
   //
   //	// Map Restart support. Restores the start dvar on map_restart since it gets reused.
-  //	if( GetDvar( "start_backup" ) != "" )
+  //	if( getDvar( "start_backup" ) != "" )
   //	{
-  //		SetDvar( "start", GetDvar( "start_backup" ) );
+  //		setDvar( "start", getDvar( "start_backup" ) );
   //	}
   //
-  //	start_dvar = GetDvar( "start" );
+  //	start_dvar = getDvar( "start" );
   //
   //	if( start_dvar == "test_chopper" )
   //	{
   //		level.specops_character_selector = start_dvar;
-  //		SetDvar( "start_backup", level.specops_character_selector );
+  //		setDvar( "start_backup", level.specops_character_selector );
   //	}
   //
-  //	if( GetDvar( "debug_follow" ) == "" )
+  //	if( getDvar( "debug_follow" ) == "" )
   //	{
-  //		SetDvar( "debug_follow", "0" );
+  //		setDvar( "debug_follow", "0" );
   //	}
   //
 

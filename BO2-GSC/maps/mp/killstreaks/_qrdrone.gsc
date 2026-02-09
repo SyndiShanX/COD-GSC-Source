@@ -85,7 +85,7 @@ init() {
 
   set_dvar_if_unset("scr_QRDroneFlyTime", 60);
 
-  shouldtimeout = setdvar("scr_qrdrone_no_timeout", 0);
+  shouldtimeout = setDvar("scr_qrdrone_no_timeout", 0);
   maps\mp\killstreaks\_killstreaks::registerkillstreak("qrdrone_mp", "killstreak_qrdrone_mp", "killstreak_qrdrone", "qrdrone_used", ::tryuseqrdrone);
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("qrdrone_mp", "qrdrone_turret_mp");
   maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("qrdrone_mp", &"KILLSTREAK_EARNED_QRDRONE", &"KILLSTREAK_QRDRONE_NOT_AVAILABLE", &"KILLSTREAK_QRDRONE_INBOUND");
@@ -617,7 +617,7 @@ qrdrone_damagewatcher() {
   for(;;) {
     self waittill("damage", damage, attacker, dir, point, mod, model, tag, part, weapon, flags);
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     self.owner playrumbleonentity("damage_heavy");
@@ -625,7 +625,7 @@ qrdrone_damagewatcher() {
     self.damage_debug = damage + " (" + weapon + ")";
 
     if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET") {
-      if(isplayer(attacker)) {
+      if(isPlayer(attacker)) {
         if(attacker hasperk("specialty_armorpiercing"))
           damage = damage + int(damage * level.cac_armorpiercing_data);
       }
@@ -676,7 +676,7 @@ qrdrone_death(attacker, weapon, dir, damagetype) {
   if(isDefined(self.damage_fx_ent))
     self.damage_fx_ent delete();
 
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self.owner) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self.owner) {
     level thread maps\mp\_popups::displayteammessagetoall(&"SCORE_DESTROYED_QRDRONE", attacker);
 
     if(self.owner isenemyplayer(attacker)) {
@@ -954,7 +954,7 @@ qrdrone_leave_on_timeout() {
   }
 
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(waittime);
-  shouldtimeout = getdvar(#"scr_qrdrone_no_timeout");
+  shouldtimeout = getDvar(#"scr_qrdrone_no_timeout");
 
   if(shouldtimeout == "1") {
     return;

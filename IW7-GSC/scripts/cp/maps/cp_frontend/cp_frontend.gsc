@@ -131,36 +131,36 @@ func_F9DC() {
 
 func_4EA7() {
   for(;;) {
-    if(getdvar("scr_zombie_scene") != "") {
-      switch (getdvar("scr_zombie_scene")) {
+    if(getDvar("scr_zombie_scene") != "") {
+      switch (getDvar("scr_zombie_scene")) {
         case "mug_1":
           level thread func_BDA9(1);
-          setdvar("scr_zombie_scene", "");
+          setDvar("scr_zombie_scene", "");
           break;
 
         case "mug_2":
           level thread func_BDA9(2);
-          setdvar("scr_zombie_scene", "");
+          setDvar("scr_zombie_scene", "");
           break;
 
         case "mug_3":
           level thread func_BDA9(3);
-          setdvar("scr_zombie_scene", "");
+          setDvar("scr_zombie_scene", "");
           break;
 
         case "shoot_1":
           level thread func_FEC4();
-          setdvar("scr_zombie_scene", "");
+          setDvar("scr_zombie_scene", "");
           break;
 
         case "drag_1":
           level thread func_5B17();
-          setdvar("scr_zombie_scene", "");
+          setDvar("scr_zombie_scene", "");
           break;
 
         case "drag_2":
           level thread func_5B18();
-          setdvar("scr_zombie_scene", "");
+          setDvar("scr_zombie_scene", "");
           break;
       }
     }
@@ -617,27 +617,27 @@ watch_boss_battle() {
       reset_all_boss_dvars();
       switch (var_1) {
         case 0:
-          setdvar("scr_direct_to_grey", 1);
+          setDvar("scr_direct_to_grey", 1);
           break;
 
         case 1:
-          setdvar("scr_direct_to_super_slasher", 1);
+          setDvar("scr_direct_to_super_slasher", 1);
           break;
 
         case 2:
-          setdvar("scr_direct_to_rat_king", 1);
+          setDvar("scr_direct_to_rat_king", 1);
           break;
 
         case 3:
-          setdvar("scr_direct_to_crab_boss", 1);
+          setDvar("scr_direct_to_crab_boss", 1);
           break;
 
         case 4:
-          setdvar("scr_direct_to_rhino_fight", 1);
+          setDvar("scr_direct_to_rhino_fight", 1);
           break;
 
         case 5:
-          setdvar("scr_direct_to_meph_fight", 1);
+          setDvar("scr_direct_to_meph_fight", 1);
           break;
       }
     }
@@ -645,12 +645,12 @@ watch_boss_battle() {
 }
 
 reset_all_boss_dvars() {
-  setdvar("scr_direct_to_grey", 0);
-  setdvar("scr_direct_to_super_slasher", 0);
-  setdvar("scr_direct_to_rat_king", 0);
-  setdvar("scr_direct_to_crab_boss", 0);
-  setdvar("scr_direct_to_rhino_fight", 0);
-  setdvar("scr_direct_to_meph_fight", 0);
+  setDvar("scr_direct_to_grey", 0);
+  setDvar("scr_direct_to_super_slasher", 0);
+  setDvar("scr_direct_to_rat_king", 0);
+  setDvar("scr_direct_to_crab_boss", 0);
+  setDvar("scr_direct_to_rhino_fight", 0);
+  setDvar("scr_direct_to_meph_fight", 0);
 }
 
 watch_reset_boss_battle() {
@@ -659,12 +659,12 @@ watch_reset_boss_battle() {
   for(;;) {
     self waittill("luinotifyserver", var_0);
     if(var_0 == "boss_reset") {
-      setdvar("scr_direct_to_grey", 0);
-      setdvar("scr_direct_to_super_slasher", 0);
-      setdvar("scr_direct_to_rat_king", 0);
-      setdvar("scr_direct_to_crab_boss", 0);
-      setdvar("scr_direct_to_rhino_fight", 0);
-      setdvar("scr_direct_to_meph_fight", 0);
+      setDvar("scr_direct_to_grey", 0);
+      setDvar("scr_direct_to_super_slasher", 0);
+      setDvar("scr_direct_to_rat_king", 0);
+      setDvar("scr_direct_to_crab_boss", 0);
+      setDvar("scr_direct_to_rhino_fight", 0);
+      setDvar("scr_direct_to_meph_fight", 0);
     }
   }
 }
@@ -1217,13 +1217,13 @@ func_13EFF(var_0, var_1, var_2, var_3) {
 }
 
 main() {
-  setdvar("r_umbraMinObjectContribution", 10);
+  setDvar("r_umbraMinObjectContribution", 10);
   scripts\mp\maps\mp_frontend\mp_frontend_precache_cp::main();
   scripts\cp\maps\cp_frontend\cp_frontend_precache::main();
   scripts\cp\maps\cp_frontend\gen\cp_frontend_art::main();
   scripts\cp\maps\cp_frontend\cp_frontend_fx::main();
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   level.callbackplayerconnect = ::func_375B;
   update_theater_signs();
   scripts\cp_mp\frontendutils::frontend_camera_setup((0, 0, 0), (0, 0, 0));

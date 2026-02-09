@@ -561,7 +561,7 @@ function handle() {
   skiptos = get_current_skiptos(1);
   var_c61bfb3e = getdvarstring("skipto_jump");
   if(isDefined(var_c61bfb3e) && var_c61bfb3e.size) {
-    setdvar("skipto_jump", "");
+    setDvar("skipto_jump", "");
   }
   skiptos = validate_skiptos(skiptos);
   assert(isDefined(level.first_frame) && level.first_frame, "");
@@ -661,7 +661,7 @@ function devgui() {
     }
     complete = getdvarstring("skipto_complete");
     if(isDefined(complete) && complete.size) {
-      setdvar("skipto_complete", "");
+      setDvar("skipto_complete", "");
       level objective_completed(complete, getplayers()[0]);
     }
     wait(0.05);
@@ -677,7 +677,7 @@ function menu() {
   level thread watch_key_combo();
   for(;;) {
     if(isDefined(getdvarint("")) && getdvarint("")) {
-      setdvar("", 0);
+      setDvar("", 0);
       getplayers()[0] allowjump(0);
       display();
       getplayers()[0] allowjump(1);
@@ -699,7 +699,7 @@ function watch_key_combo() {
     while(!key_combo_pressed()) {
       wait(0.05);
     }
-    setdvar("debug_skipto", 1);
+    setDvar("debug_skipto", 1);
     while(key_combo_pressed()) {
       wait(0.05);
     }
@@ -1219,7 +1219,7 @@ function on_player_connect() {
 
 function objective_completed(name, player) {
   assert(isDefined(level.skipto_settings[name]), ("" + name) + "");
-  setdvar("NPCDeathTracking_Save", 1);
+  setDvar("NPCDeathTracking_Save", 1);
   foreach(var_eff42720 in level.players) {
     if(var_eff42720 istestclient()) {
       continue;
@@ -1260,7 +1260,7 @@ function private function_87fe8621() {
   assert(var_717810f.size >= 3, "");
   while(true) {
     self waittill("trigger", lead_player);
-    if(isplayer(lead_player)) {
+    if(isPlayer(lead_player)) {
       self notify("hash_c0b9931e");
       foreach(player in level.players) {
         if(player != lead_player) {
@@ -1358,7 +1358,7 @@ function private function_61843b91(var_717810f, n_player_dist) {
 }
 
 function show_level_objectives(objectives) {
-  setdvar("", 1);
+  setDvar("", 1);
   index = 0;
   foreach(name in objectives) {
     skipto_struct = level.skipto_settings[name];
@@ -1367,7 +1367,7 @@ function show_level_objectives(objectives) {
       index++;
     }
   }
-  setdvar("", 0);
+  setDvar("", 0);
 }
 
 function set_level_objective(objectives, starting, player) {
@@ -1664,7 +1664,7 @@ function function_61688376() {
 
 function function_88bd85cc() {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   if(isDefined(self.var_40ac72fa)) {
     self closeluimenu(self.var_40ac72fa);
     self freezecontrols(0);
@@ -1680,7 +1680,7 @@ function function_88bd85cc() {
 
 function function_33722592() {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   if(isDefined(self.var_a4c14d95)) {
     self closeluimenu(self.var_a4c14d95);
     self luinotifyevent(&"close_cpaar", 0);
@@ -1760,7 +1760,7 @@ function level_completed(skipto, starting) {
         switchmap_setloadingmovie(str_outro_movie);
       }
       if(!(isDefined(level.var_696b1f33) && level.var_696b1f33)) {
-        setdvar("cp_queued_level", str_next_map);
+        setDvar("cp_queued_level", str_next_map);
         var_f26d4e96 = util::get_next_safehouse(str_next_map);
         switchmap_load(var_f26d4e96);
         setskiptos("", 1);
@@ -2177,9 +2177,7 @@ function private standard_objective_done(skipto, starting, direct, player) {
       }
       if(sessionmodeiscampaignzombiesgame() && entity.script_noteworthy === "bonuszm_magicbox") {
         if(isDefined(level.bzm_cleanupmagicboxondeletioncallback)) {
-          [
-            [level.bzm_cleanupmagicboxondeletioncallback]
-          ](entity);
+          [[level.bzm_cleanupmagicboxondeletioncallback]](entity);
         }
         continue;
       }

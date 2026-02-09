@@ -94,7 +94,6 @@ flame_death_fx() {
       playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_torso\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_torso\"");
-
   }
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
@@ -120,7 +119,6 @@ flame_death_fx() {
     playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[1]);
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_zombie_md\"");
-
   }
 }
 

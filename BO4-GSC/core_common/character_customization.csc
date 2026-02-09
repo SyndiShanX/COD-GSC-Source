@@ -1417,9 +1417,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1430,9 +1428,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         params.var_99a89f83 = 1;
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1445,9 +1441,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1483,9 +1477,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1498,9 +1490,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1511,9 +1501,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1524,9 +1512,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1544,9 +1530,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         outfititems = strtok(waitresult.outfititems, ";");
 
         foreach(type, item in outfititems) {
-          [
-            [var_d0b01271]
-          ] - > function_9146bf81(int(item), type);
+          [[var_d0b01271]] - > function_9146bf81(int(item), type);
         }
 
         params = {};
@@ -1557,9 +1541,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         }
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1569,9 +1551,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         foreach(type, item in outfititems) {
           if(type != 7 && type != 1) {
-            [
-              [var_d0b01271]
-            ] - > function_9146bf81(int(item), type);
+            [[var_d0b01271]] - > function_9146bf81(int(item), type);
           }
         }
 
@@ -1579,9 +1559,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);
@@ -1594,9 +1572,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
-          [
-            [var_d0b01271]
-          ] - > function_27945cb8(1);
+          [[var_d0b01271]] - > function_27945cb8(1);
         }
 
         [[var_d0b01271]] - > update(params);

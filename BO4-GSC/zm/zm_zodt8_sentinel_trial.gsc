@@ -613,7 +613,6 @@ function_c76f5e7f() {
               iprintlnbold("<dev string:x16f>" + self.script_noteworthy);
               println("<dev string:x16f>" + self.script_noteworthy);
             }
-
           }
 
           continue;
@@ -1867,7 +1866,7 @@ function_9b60ef24() {
   while(true) {
     s_result = trigger waittill(#"trigger");
 
-    if(isDefined(s_result.activator) && isplayer(s_result.activator)) {
+    if(isDefined(s_result.activator) && isPlayer(s_result.activator)) {
       w_weapon = s_result.activator getcurrentweapon();
 
       if(w_weapon == w_earth || w_weapon == var_15b49ebc) {
@@ -2283,7 +2282,6 @@ function_50b3a576(str_planet_name, n_number) {
     iprintlnbold("<dev string:x1f4>" + str_zone);
     println("<dev string:x1f4>" + str_zone);
   }
-
 }
 
 function_699ac1b(s_result) {
@@ -2833,7 +2831,6 @@ function_acc65da4(mdl_planet) {
     level flag::set(#"hash_77f76266b597a1f7");
 
     iprintlnbold("<dev string:x230>");
-
   }
 
   if(!level flag::get(#"hash_63a102a7ae564e99")) {
@@ -2879,7 +2876,6 @@ function_647da52c(str_planet_name) {
         iprintlnbold("<dev string:x237>");
         println("<dev string:x237>");
       }
-
     }
   }
 
@@ -3015,7 +3011,6 @@ function_cfd304b3() {
     if(var_398f5909 > 0) {
       iprintlnbold(int(var_398f5909) + "<dev string:x243>");
     }
-
   }
 
   level notify(#"frozen_timeout");
@@ -3925,7 +3920,7 @@ function_c41154ec() {
 }
 
 function_8c49c8b() {
-  setdvar(#"zombie_unlock_all", 1);
+  setDvar(#"zombie_unlock_all", 1);
   players = getplayers();
   zombie_doors = getEntArray("zombie_door", "targetname");
 

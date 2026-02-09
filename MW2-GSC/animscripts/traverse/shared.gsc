@@ -115,7 +115,7 @@ DoTraverse(traverseData) {
 
   self.traverseStartZ = self.origin[2];
   if(!animHasNotetrack(traverseAnim, "traverse_align")) {
-    /# println( "^1Warning: animation ", traverseAnim, " has no traverse_align notetrack" );
+    println("^1Warning: animation ", traverseAnim, " has no traverse_align notetrack");
     self handleTraverseAlignment();
   }
 

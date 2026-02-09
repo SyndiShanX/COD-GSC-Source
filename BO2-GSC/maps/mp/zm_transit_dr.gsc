@@ -200,7 +200,7 @@ main() {
   registerclientfield("allplayers", "playerinfog", 1, 1, "int");
   level.custom_breadcrumb_store_func = ::transit_breadcrumb_store_func;
 
-  if(getdvar(#"createfx") == "1") {
+  if(getDvar(#"createfx") == "1") {
     return;
   }
   precacheshellshock("lava");
@@ -224,7 +224,7 @@ main() {
   level._zombie_custom_add_weapons = ::custom_add_weapons;
   level._allow_melee_weapon_switching = 1;
   level.uses_gumps = 1;
-  setdvar("aim_target_fixed_actor_size", 1);
+  setDvar("aim_target_fixed_actor_size", 1);
   include_weapons();
   include_powerups();
   level thread maps\mp\zm_transit_lava::lava_damage_init();
@@ -245,7 +245,7 @@ main() {
   init_zones[0] = "zone_gas";
   level thread maps\mp\zombies\_zm_zonemgr::manage_zones(init_zones);
   level.zombie_ai_limit = 24;
-  setdvar("zombiemode_path_minz_bias", 13);
+  setDvar("zombiemode_path_minz_bias", 13);
   level thread maps\mp\zm_transit_dr_ffotd::main_end();
   flag_wait("start_zombie_round_logic");
   level notify("players_done_connecting");
@@ -290,11 +290,11 @@ post_first_init() {
 }
 
 set_transit_wind() {
-  setdvar("enable_global_wind", 1);
-  setdvar("wind_global_vector", "-120 -115 -120");
-  setdvar("wind_global_low_altitude", 0);
-  setdvar("wind_global_hi_altitude", 2000);
-  setdvar("wind_global_low_strength_percent", 0.5);
+  setDvar("enable_global_wind", 1);
+  setDvar("wind_global_vector", "-120 -115 -120");
+  setDvar("wind_global_low_altitude", 0);
+  setDvar("wind_global_hi_altitude", 2000);
+  setDvar("wind_global_low_strength_percent", 0.5);
 }
 
 precache_team_characters() {
@@ -503,7 +503,7 @@ transit_zone_init() {
 }
 
 include_powerups() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -553,7 +553,7 @@ offhand_weapon_overrride() {
 }
 
 include_weapons() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("m1911_zm", 0);
@@ -746,7 +746,6 @@ zombie_transit_dr_devgui(cmd) {
     default:
       break;
   }
-
 }
 
 less_time() {

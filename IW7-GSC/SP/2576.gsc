@@ -67,11 +67,11 @@ ismeleevalid(var_0, var_1) {
     }
 
     if(isDefined(self.unittype) && self.unittype == "seeker") {
-      if(!isplayer(self.owner) && !lib_0F3D::func_B575(self.unittype)) {
+      if(!isPlayer(self.owner) && !lib_0F3D::func_B575(self.unittype)) {
         return 0;
       }
     } else {
-      if(scripts\anim\utility_common::isusingsidearm() && !isplayer(var_0)) {
+      if(scripts\anim\utility_common::isusingsidearm() && !isPlayer(var_0)) {
         return 0;
       }
 
@@ -93,7 +93,7 @@ ismeleevalid(var_0, var_1) {
     return 0;
   }
 
-  if(!isai(var_0) && !isplayer(var_0)) {
+  if(!isai(var_0) && !isPlayer(var_0)) {
     return 0;
   }
 
@@ -131,8 +131,8 @@ ismeleevalid(var_0, var_1) {
     }
   }
 
-  if(!isDefined(self.var_B622) || !self.var_B622 || !isplayer(var_0)) {
-    if(isplayer(var_0)) {
+  if(!isDefined(self.var_B622) || !self.var_B622 || !isPlayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_2 = var_0 getstance();
     } else {
       var_2 = var_1.a.pose;

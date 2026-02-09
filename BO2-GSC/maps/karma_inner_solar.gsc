@@ -60,18 +60,22 @@ skipto_inner_solar() {
   cleanup_ents("cleanup_crc");
   cleanup_ents("cleanup_construction");
 
-  for(i = 1; i <= 12; i++)
+  for(i = 1; i <= 12; i++) {
     maps\_fxanim::fxanim_deconstruct("fxanim_club_top_laser_" + i);
+  }
 
-  for(i = 1; i <= 2; i++)
+  for(i = 1; i <= 2; i++) {
     maps\_fxanim::fxanim_deconstruct("fxanim_club_dj_laser_" + i);
+  }
 
-  for(i = 1; i <= 2; i++)
+  for(i = 1; i <= 2; i++) {
     maps\_fxanim::fxanim_deconstruct("fxanim_club_bar_shelves_0" + i);
+  }
 
   if(!is_mature()) {
-    foreach(e_dancer in getEntArray("dancers", "script_noteworthy"))
-    e_dancer delete();
+    foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
+      e_dancer delete();
+    }
 
     level thread init_solar_systems();
   } else
@@ -91,8 +95,9 @@ skipto_inner_solar() {
   level thread club_fx();
   level thread populate_club();
 
-  foreach(ent in getEntArray("velvet_rope", "script_noteworthy"))
-  ent setscale(0.9);
+  foreach(ent in getEntArray("velvet_rope", "script_noteworthy")) {
+    ent setscale(0.9);
+  }
 }
 
 skipto_solar_fight() {
@@ -104,8 +109,9 @@ skipto_solar_fight() {
   cleanup_ents("cleanup_construction");
 
   if(!is_mature()) {
-    foreach(e_dancer in getEntArray("dancers", "script_noteworthy"))
-    e_dancer delete();
+    foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
+      e_dancer delete();
+    }
 
     level thread init_solar_systems();
   } else
@@ -126,8 +132,9 @@ skipto_solar_fight() {
   a_m_groups = getEntArray("m_civ_club_group1", "targetname");
   array_delete(a_m_groups);
 
-  foreach(ent in getEntArray("velvet_rope", "targetname"))
-  ent delete();
+  foreach(ent in getEntArray("velvet_rope", "targetname")) {
+    ent delete();
+  }
 
   getent("sick_girls_clip", "targetname") delete();
   level thread change_club_lights();
@@ -162,8 +169,9 @@ club_intro() {
   level.player thread inner_club_dialog();
   trigger_wait("t_club_start_harper");
 
-  if(!isDefined(level.n_aggressivecullradius))
-    level.n_aggressivecullradius = getdvar(#"_id_0EC60F96");
+  if(!isDefined(level.n_aggressivecullradius)) {
+    level.n_aggressivecullradius = getDvar(#"_id_0EC60F96");
+  }
 
   setsaveddvar("Cg_aggressivecullradius", 50);
   flag_wait("start_club_encounter");
@@ -186,8 +194,9 @@ club_intro() {
   bm_clip = getent("dance_floor_clip", "targetname");
   bm_clip delete();
 
-  foreach(ent in getEntArray("velvet_rope", "targetname"))
-  ent delete();
+  foreach(ent in getEntArray("velvet_rope", "targetname")) {
+    ent delete();
+  }
 
   clear_background_civilians();
   level thread club_drones();
@@ -233,8 +242,9 @@ club_fight() {
   level thread bar_fight_waves_think();
   wait 0.05;
 
-  foreach(ai_pmc in get_ais_from_scene("bar_fight_pmcs"))
-  ai_pmc set_blend_in_out_times(0.2);
+  foreach(ai_pmc in get_ais_from_scene("bar_fight_pmcs")) {
+    ai_pmc set_blend_in_out_times(0.2);
+  }
 
   delete_exploder(628);
   exploder(630);
@@ -286,22 +296,25 @@ dj_jump_spawn() {
 }
 
 bar_fight_spawn_cover_guys() {
-  foreach(s_pos in getstructarray("club_fight_cover_start", "targetname"))
-  s_pos thread bar_fight_cover_spawn();
+  foreach(s_pos in getstructarray("club_fight_cover_start", "targetname")) {
+    s_pos thread bar_fight_cover_spawn();
+  }
 }
 
 bar_fight_cover_spawn() {
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     wait(self.script_float);
+  }
 
   ai_guy = simple_spawn_single("club_terrorist_assault");
   ai_guy.script_noteworthy = "nodamage";
   ai_guy endon("death");
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delete")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delete") {
     ai_guy.script_string = "delete";
-  else
+  } else {
     ai_guy.script_string = "no_delete";
+  }
 
   ai_guy forceteleport(self.origin, self.angles);
   ai_guy set_goalradius(8);
@@ -319,8 +332,9 @@ bar_fight_cover_spawn() {
         nd_node = getnode(self.target, "targetname");
 
         if(isDefined(nd_node)) {
-          if(isDefined(nd_node.script_noteworthy) && nd_node.script_noteworthy == "delete")
+          if(isDefined(nd_node.script_noteworthy) && nd_node.script_noteworthy == "delete") {
             ai_guy.script_string = "delete";
+          }
 
           ai_guy notify("stop_shoot_at_target");
           ai_guy thread force_goal(nd_node, 8);
@@ -340,24 +354,28 @@ bar_fight_cover_spawn() {
 }
 
 bar_fight_spawn_wave(str_pos, n_delay, do_cleanup) {
-  if(!isDefined(do_cleanup))
+  if(!isDefined(do_cleanup)) {
     do_cleanup = 1;
+  }
 
   a_mid_positions = getstructarray(str_pos, "targetname");
   a_ai_living = getaiarray("axis");
 
   if(do_cleanup) {
     foreach(ai_guy in a_ai_living) {
-      if(isalive(ai_guy))
+      if(isalive(ai_guy)) {
         ai_guy thread delay_delete(n_delay);
+      }
     }
   }
 
-  foreach(s_pos in a_mid_positions)
-  s_pos thread bar_fight_spawn_mid();
+  foreach(s_pos in a_mid_positions) {
+    s_pos thread bar_fight_spawn_mid();
+  }
 
-  if(isDefined(n_delay))
+  if(isDefined(n_delay)) {
     wait(n_delay + 0.05);
+  }
 
   flag_set("bar_fight_cover_advance");
 }
@@ -373,8 +391,9 @@ delay_delete(n_delay) {
 }
 
 bar_fight_spawn_fore() {
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     wait(self.script_float);
+  }
 
   ai_guy = simple_spawn_single("club_terrorist_" + self.script_noteworthy);
   ai_guy forceteleport(self.origin, self.angles);
@@ -384,13 +403,15 @@ bar_fight_spawn_fore() {
 }
 
 bar_fight_spawn_mid() {
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     wait(self.script_float);
+  }
 
   ai_guy = simple_spawn_single("club_terrorist_" + self.script_noteworthy);
 
-  if(isDefined(self.script_string))
+  if(isDefined(self.script_string)) {
     ai_guy change_movemode(self.script_string);
+  }
 
   nd_node = getnode(self.target, "targetname");
   ai_guy forceteleport(self.origin, self.angles);
@@ -398,26 +419,30 @@ bar_fight_spawn_mid() {
   ai_guy set_goalradius(8);
   ai_guy force_goal(nd_node, 8);
 
-  if(isDefined(nd_node.script_noteworthy) && nd_node.script_noteworthy == "crouch")
+  if(isDefined(nd_node.script_noteworthy) && nd_node.script_noteworthy == "crouch") {
     ai_guy allowedstances("crouch");
+  }
 }
 
 bar_fight_spawn_back() {
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     wait(self.script_float);
+  }
 
   ai_guy = simple_spawn_single("club_terrorist_" + self.script_noteworthy);
 
-  if(isDefined(self.script_string))
+  if(isDefined(self.script_string)) {
     ai_guy change_movemode(self.script_string);
+  }
 
   ai_guy forceteleport(self.origin, self.angles);
   ai_guy thread shoot_at_target_untill_dead(level.player);
   ai_guy set_goalradius(8);
   nd_cover = self;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     nd_cover = getnode(self.target, "targetname");
+  }
 
   ai_guy force_goal(nd_cover, 8);
 }
@@ -433,19 +458,23 @@ club_fight_objectives() {
 }
 
 change_club_lights(n_time_floor, n_time_exposure) {
-  if(!isDefined(n_time_floor))
+  if(!isDefined(n_time_floor)) {
     n_time_floor = 0.05;
+  }
 
-  if(!isDefined(n_time_exposure))
+  if(!isDefined(n_time_exposure)) {
     n_time_exposure = 0.05;
+  }
 
   a_e_lights = getEntArray("speechlight", "targetname");
 
-  foreach(e_light in a_e_lights)
-  e_light setforcenocull();
+  foreach(e_light in a_e_lights) {
+    e_light setforcenocull();
+  }
 
-  if(!flag("run_to_bar"))
+  if(!flag("run_to_bar")) {
     array_thread(a_e_lights, ::lerp_intensity, 30, n_time_floor);
+  }
 
   thread blend_exposure_over_time(4.0, n_time_exposure);
   flag_wait("run_to_bar");
@@ -457,10 +486,11 @@ club_fx() {
   a_s_candles = getstructarray("candle_flame", "targetname");
 
   foreach(s_candle in a_s_candles) {
-    if(isDefined(s_candle.angles))
+    if(isDefined(s_candle.angles)) {
       v_forward = anglesToForward(s_candle.angles);
-    else
+    } else {
       v_forward = (1, 0, 0);
+    }
 
     level thread play_fx("kar_candle01", s_candle.origin, s_candle.angles, undefined, 0, undefined, 1);
   }
@@ -468,22 +498,26 @@ club_fx() {
   a_s_ashtrays = getstructarray("ashtray_smoke", "targetname");
 
   foreach(s_ashtray in a_s_ashtrays) {
-    if(isDefined(s_ashtray.angles))
+    if(isDefined(s_ashtray.angles)) {
       v_forward = anglesToForward(s_ashtray.angles);
-    else
+    } else {
       v_forward = (1, 0, 0);
+    }
 
     playFX(level._effect["kar_ashtray01"], s_ashtray.origin, v_forward);
   }
 
-  for(i = 1; i <= 12; i++)
+  for(i = 1; i <= 12; i++) {
     maps\_fxanim::fxanim_reconstruct("fxanim_club_top_laser_" + i);
+  }
 
-  for(i = 1; i <= 2; i++)
+  for(i = 1; i <= 2; i++) {
     maps\_fxanim::fxanim_reconstruct("fxanim_club_dj_laser_" + i);
+  }
 
-  for(i = 1; i <= 2; i++)
+  for(i = 1; i <= 2; i++) {
     maps\_fxanim::fxanim_reconstruct("fxanim_club_bar_shelves_0" + i);
+  }
 
   flag_wait("club_door_closed");
   exploder(620);
@@ -596,8 +630,9 @@ group_dancing() {
   self useanimtree(#animtree);
   wait(randomfloatrange(0.0, 1.0));
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     maps\_anim::anim_generic(self, "group_dancing2");
+  }
 
   while(true) {
     maps\_anim::anim_generic(self, "group_dancing1");
@@ -622,23 +657,27 @@ populate_club() {
   wait 0.1;
   a_models = get_model_or_models_from_scene("club_encounter_hostages_loop");
 
-  foreach(model in a_models)
-  model setforcenocull();
+  foreach(model in a_models) {
+    model setforcenocull();
+  }
 
   a_models = get_model_or_models_from_scene("club_encounter_dancers1_loop");
 
-  foreach(model in a_models)
-  model setforcenocull();
+  foreach(model in a_models) {
+    model setforcenocull();
+  }
 
   a_models = get_model_or_models_from_scene("club_encounter_dancers2_loop");
 
-  foreach(model in a_models)
-  model setforcenocull();
+  foreach(model in a_models) {
+    model setforcenocull();
+  }
 
   a_models = get_model_or_models_from_scene("club_encounter_dancers3_loop");
 
-  foreach(model in a_models)
-  model setforcenocull();
+  foreach(model in a_models) {
+    model setforcenocull();
+  }
 
   flag_wait("club_door_closed");
   wait 1;
@@ -827,8 +866,9 @@ fire_round(ai_target) {
   v_origin = self gettagorigin("TAG_FLASH");
 
   if(isDefined(ai_target)) {
-    if(isai(ai_target))
+    if(isai(ai_target)) {
       ai_target.a.nodeath = 1;
+    }
 
     v_dest = ai_target gettagorigin("J_Head");
     magicbullet("fiveseven_sp", v_origin, v_dest, self);
@@ -838,14 +878,16 @@ fire_round(ai_target) {
 
 killed_by_harper(ai_guy) {
   if(isalive(ai_guy)) {
-    if(isDefined(level.ai_harper.a_ai_targets) && isDefined(level.ai_harper.a_ai_targets[0]) && level.ai_harper.a_ai_targets[0] == ai_guy)
+    if(isDefined(level.ai_harper.a_ai_targets) && isDefined(level.ai_harper.a_ai_targets[0]) && level.ai_harper.a_ai_targets[0] == ai_guy) {
       flag_set("club_stop_timescale");
+    }
 
     ai_guy.a.nodeath = 1;
     scene_wait("bar_fight_pmcs");
 
-    if(isDefined(ai_guy))
+    if(isDefined(ai_guy)) {
       ai_guy animscripts\utility::become_corpse();
+    }
   }
 }
 
@@ -873,13 +915,15 @@ fire_at_bar() {
 }
 
 ready_explosions(b_run_immediate) {
-  if(!isDefined(b_run_immediate) || !b_run_immediate)
+  if(!isDefined(b_run_immediate) || !b_run_immediate) {
     self waittill("trigger");
+  }
 
   s_squib = getstruct(self.target, "targetname");
 
-  if(!isDefined(s_squib))
+  if(!isDefined(s_squib)) {
     s_squib = getnode(self.target, "targetname");
+  }
 
   while(isDefined(s_squib)) {
     playsoundatposition("dst_club_lights", s_squib.origin);
@@ -887,10 +931,11 @@ ready_explosions(b_run_immediate) {
     radiusdamage(s_squib.origin, 20, 500, 500, level.ai_harper);
     wait 0.3;
 
-    if(isDefined(s_squib.target))
+    if(isDefined(s_squib.target)) {
       s_squib = getstruct(s_squib.target, "targetname");
-    else
+    } else {
       break;
+    }
   }
 }
 
@@ -1038,14 +1083,16 @@ club_terrorist_think() {
 mark_as_target(str_wait_flag) {
   self endon("death");
 
-  if(isDefined(str_wait_flag))
+  if(isDefined(str_wait_flag)) {
     flag_wait(str_wait_flag);
+  }
 
   b_seen = 0;
 
   while(!b_seen) {
-    if(self cansee(level.ai_salazar) || self cansee(level.player))
+    if(self cansee(level.ai_salazar) || self cansee(level.player)) {
       b_seen = 1;
+    }
 
     wait(randomfloatrange(0.5, 1.0));
   }
@@ -1071,8 +1118,9 @@ grenade_toss() {
     v_start_pos = self.origin + vectorscale((0, 0, 1), 48.0);
     s_end_pos = getstruct("grenade_target", "targetname");
 
-    if(isalive(self))
+    if(isalive(self)) {
       self magicgrenade(v_start_pos, s_end_pos.origin, 7);
+    }
   }
 }
 
@@ -1083,8 +1131,9 @@ ai_shoot_wildly() {
   self thread shoot_at_target(e_fake, undefined, 0, 10);
   wait 8;
 
-  if(!flag("club_melee_started"))
+  if(!flag("club_melee_started")) {
     flag_set("club_terrorists_alerted");
+  }
 }
 
 harper_think() {
@@ -1116,14 +1165,17 @@ get_ai_targets(str_target_group) {
 }
 
 kill_ai_target(ai_target, n_traverse_time, n_aim_time, n_shoot_time) {
-  if(!isDefined(n_traverse_time))
+  if(!isDefined(n_traverse_time)) {
     n_traverse_time = 0.5;
+  }
 
-  if(!isDefined(n_aim_time))
+  if(!isDefined(n_aim_time)) {
     n_aim_time = 1.0;
+  }
 
-  if(!isDefined(n_shoot_time))
+  if(!isDefined(n_shoot_time)) {
     n_shoot_time = 0.05;
+  }
 
   self endon("death");
 
@@ -1140,8 +1192,9 @@ kill_ai_target(ai_target, n_traverse_time, n_aim_time, n_shoot_time) {
     magicbullet(self.weapon, self gettagorigin("tag_flash"), v_aim_point, self);
     wait 0.1;
 
-    if(isalive(ai_target))
+    if(isalive(ai_target)) {
       ai_target kill();
+    }
   }
 }
 
@@ -1226,9 +1279,9 @@ player_bar_fight() {
 }
 
 player_enable_invulnerability() {
-  if(!isDefined(level.player.fired))
+  if(!isDefined(level.player.fired)) {
     level.player dodamage(1000, level.player.origin, level.player);
-  else {
+  } else {
     level.player.fired = undefined;
     level.player enableinvulnerability();
   }
@@ -1247,11 +1300,13 @@ player_watch_for_shot() {
 }
 
 player_cover_fire_start(str_move_dialog, n_timescale_length, n_timescale_blend_out_time, do_disable_weapons, n_target_kills) {
-  if(!isDefined(do_disable_weapons))
+  if(!isDefined(do_disable_weapons)) {
     do_disable_weapons = 1;
+  }
 
-  if(!isDefined(n_target_kills))
+  if(!isDefined(n_target_kills)) {
     n_target_kills = 3;
+  }
 
   self thread player_cover_fire_kills_think(n_target_kills);
   timescale_tween(1.0, 0.2, 1.0);
@@ -1260,20 +1315,23 @@ player_cover_fire_start(str_move_dialog, n_timescale_length, n_timescale_blend_o
   self notify("cover_fire_timeout");
   timescale_tween(0.2, 1.0, 0.5);
 
-  if(isDefined(str_move_dialog))
+  if(isDefined(str_move_dialog)) {
     level.ai_harper thread say_dialog(str_move_dialog);
+  }
 
   wait(n_timescale_blend_out_time);
 
-  if(do_disable_weapons)
+  if(do_disable_weapons) {
     level.player disableweapons();
+  }
 }
 
 player_cover_fire_kills_think(n_target_kills) {
   self endon("cover_fire_timeout");
 
-  for(n_total_kills = 0; n_total_kills < n_target_kills; n_total_kills++)
+  for(n_total_kills = 0; n_total_kills < n_target_kills; n_total_kills++) {
     self waittill("player_killed_enemy");
+  }
 
   self notify("cover_fire_stop");
 }
@@ -1284,16 +1342,18 @@ final_grenade() {
 
 player_infinite_ammo() {
   while(!flag("bar_fight_movement3_done")) {
-    foreach(str_weapon in self getweaponslist())
-    self setweaponammoclip(str_weapon, weaponclipsize(str_weapon));
+    foreach(str_weapon in self getweaponslist()) {
+      self setweaponammoclip(str_weapon, weaponclipsize(str_weapon));
+    }
 
     wait 0.05;
   }
 }
 
 player_reload(ent) {
-  foreach(str_weapon in level.player getweaponslist())
-  level.player setweaponammoclip(str_weapon, 0);
+  foreach(str_weapon in level.player getweaponslist()) {
+    level.player setweaponammoclip(str_weapon, 0);
+  }
 }
 
 lights_drop() {
@@ -1331,11 +1391,13 @@ inner_club_dialog() {
 }
 
 player_whizbys_start(n_delay, n_time) {
-  if(isDefined(n_delay))
+  if(isDefined(n_delay)) {
     wait(n_delay);
+  }
 
-  foreach(s_start in getstructarray("player_whizbys1", "targetname"))
-  s_start thread player_whizby_think(n_time);
+  foreach(s_start in getstructarray("player_whizbys1", "targetname")) {
+    s_start thread player_whizby_think(n_time);
+  }
 }
 
 player_whizby_think(n_time) {
@@ -1351,8 +1413,9 @@ player_whizby_think(n_time) {
 }
 
 player_dynents_start(str_structs, n_delay, n_time) {
-  if(isDefined(n_delay))
+  if(isDefined(n_delay)) {
     wait(n_delay);
+  }
 
   if(!isDefined(level.player.club_dynents)) {
     level.player.club_dynents[0] = "p_cub_ashtray_glass";
@@ -1361,8 +1424,9 @@ player_dynents_start(str_structs, n_delay, n_time) {
     level.player.club_dynents[3] = "p6_bar_al_jinan_napkin_single";
   }
 
-  foreach(s_start in getstructarray(str_structs, "targetname"))
-  s_start thread player_dynents_think(n_time);
+  foreach(s_start in getstructarray(str_structs, "targetname")) {
+    s_start thread player_dynents_think(n_time);
+  }
 }
 
 player_dynents_think(n_time) {
@@ -1383,16 +1447,19 @@ player_dynents_think(n_time) {
 }
 
 player_physpulses_start(str_struct, n_delay) {
-  if(isDefined(n_delay))
+  if(isDefined(n_delay)) {
     wait(n_delay);
+  }
 
-  foreach(s_struct in getstructarray(str_struct, "targetname"))
-  s_struct thread player_physents_think();
+  foreach(s_struct in getstructarray(str_struct, "targetname")) {
+    s_struct thread player_physents_think();
+  }
 }
 
 player_physents_think() {
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     wait(self.script_float);
+  }
 
   if(isDefined(self.script_string) && self.script_string == "makeinvulnerable") {
     level.player enableinvulnerability();
@@ -1421,8 +1488,9 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, s
     return 0;
   }
 
-  if(!isDefined(level.club_battle_damage_time))
+  if(!isDefined(level.club_battle_damage_time)) {
     level.club_battle_damage_time = gettime();
+  }
 
   if(gettime() - level.club_battle_damage_time >= level.club_battle_damage_timeout) {
     if(level.player.health <= 5) {
@@ -1432,11 +1500,13 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, s
 
     level.club_battle_damage_time = gettime();
 
-    if(level.player attack_button_pressed())
+    if(level.player attack_button_pressed()) {
       return 0;
+    }
 
-    if(level.player is_ads())
+    if(level.player is_ads()) {
       idamage = int(idamage / 2);
+    }
 
     n_diff_scale = 1;
 
@@ -1472,8 +1542,9 @@ adjust_accuracy_for_difficulty() {
     level.player waittill_attack_button_pressed();
     self.script_accuracy = 5.0;
 
-    while(level.player attack_button_held())
+    while(level.player attack_button_held()) {
       wait 0.05;
+    }
 
     wait 0.25;
   }

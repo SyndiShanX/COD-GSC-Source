@@ -151,8 +151,7 @@ seconds(milliseconds) {
   return milliseconds / 1000;
 }
 
-// AI Section ---------------------------------------------
-ai_post_spawn() {
+// AI Section --------------------------------------------- ai_post_spawn() {
   self endon("death");
 
   if(!isDefined(self.target)) {
@@ -236,10 +235,7 @@ friendlyfire() {
   }
 }
 
-// ---------------------
-// --- CHOPPER STUFF ---
-// ---------------------
-#using_animtree("vehicles");
+// --------------------- // --- CHOPPER STUFF --- // --------------------- #using_animtree("vehicles");
 build_chopper() {
   maps\_blackhawk_minigun::main("vehicle_blackhawk_minigun_hero", "blackhawk_minigun_so");
 }
@@ -1056,8 +1052,7 @@ is_player_in_parking_lot() {
   return level.groundplayer IsTouching(GetEnt("so_parkinglot", "targetname"));
 }
 
-// TRUCK Section ------------------------------------------
-truck_init() {
+// TRUCK Section ------------------------------------------ truck_init() {
   level.truck_spawner = GetEnt("gas_station_truck", "targetname");
   level.truck_ai_spawners = getEntArray("so_truck_ai_spawner", "targetname");
 }
@@ -1086,8 +1081,7 @@ truck_brakes() {
   self set_brakes(0.5);
 }
 
-// FX -----------------------------------------------------
-smoke_mover() {
+// FX ----------------------------------------------------- smoke_mover() {
   ent = spawn("script_model", (600, -4525, 2610));
   ent.angles = (357, 179, 177);
   ent setModel("tag_origin");
@@ -1123,8 +1117,7 @@ vector2d(vec) {
   return (vec[0], vec[1], 0);
 }
 
-// Exploders ----------------------------------------------
-do_exploder_custom(current, option) {
+// Exploders ---------------------------------------------- do_exploder_custom(current, option) {
   while(1) {
     exploder_stripped(current.script_prefab_exploder, option);
     if(!isDefined(current.target)) {
@@ -1183,8 +1176,7 @@ exploder_stripped(num, option) {
   }
 }
 
-// DEBUG Section ------------------------------------------
-debug_chopper_base_path() {
+// DEBUG Section ------------------------------------------ debug_chopper_base_path() {
   if(!debug_chopper_enabled()) {
     return;
   }
@@ -1202,7 +1194,6 @@ debug_chopper_base_path() {
     Line(closest_point, closest_point + (0, 0, 1000), (1, 0.5, 0));
     Line(closest_point, level.groundplayer.origin, (1, 1, 1));
   }
-
 }
 
 // Draw the player's location with chopper flight path
@@ -1257,14 +1248,12 @@ debug_player_pos() {
       }
     }
   }
-
 }
 
 debug_trigger_everything() {
   foreach(trigger in getEntArray("trigger_multiple_spawn", "classname")) {
     trigger thread debug_trigger_everything_think();
   }
-
 }
 
 debug_trigger_everything_think() {
@@ -1333,7 +1322,6 @@ draw_linesegment_point(pos) {
     Line(pos, pos + (0, 0, 1000), (1, 1, 0.1));
     wait(0.05);
   }
-
 }
 
 // Draws the ground player's position
@@ -1342,7 +1330,6 @@ draw_player_pos(pos) {
     wait(0.05);
     Line(level.groundplayer.origin, level.groundplayer.origin + (0, 0, 1000), (0.3, 1, 0.3));
   }
-
 }
 
 // Draws all of the high objstacle points
@@ -1351,7 +1338,6 @@ draw_high_obstacles() {
   foreach(struct in structs) {
     struct thread draw_high_obstacle();
   }
-
 }
 
 draw_high_obstacle() {
@@ -1359,14 +1345,12 @@ draw_high_obstacle() {
     wait(0.05);
     Line(self.origin, self.origin + (0, 0, -5000), (1, 1, 1));
   }
-
 }
 
 debug_kill_ai() {
   foreach(ai in GetAIArray("axis")) {
     ai Kill();
   }
-
 }
 
 debug_chopper_enabled() {
@@ -1389,7 +1373,6 @@ debug_draw_chopper_line(pos, note, color) {
     wait(0.05);
     Line(pos, level.chopper.origin, color);
   }
-
 }
 
 debug_draw_enemy_direction(angle, note) {
@@ -1407,5 +1390,4 @@ debug_draw_enemy_direction(angle, note) {
     pos = level.groundplayer.origin + vector_multiply(anglesToForward(angle), 1000);
     Line(pos, level.groundplayer.origin, color);
   }
-
 }

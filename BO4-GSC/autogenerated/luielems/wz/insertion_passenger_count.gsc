@@ -26,7 +26,6 @@ class cinsertion_passenger_count: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("count", 1, 7, "int");
   }
-
 }
 
 register(uid) {

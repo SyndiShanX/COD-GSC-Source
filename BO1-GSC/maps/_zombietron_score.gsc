@@ -11,7 +11,6 @@ player_add_points(points) {
   self add_to_player_score(points);
   self.stats["score"] = self.score;
 }
-
 add_to_player_score(points) {
   lowMask = 15;
   curScore = self getscoremultiplier();
@@ -24,13 +23,11 @@ add_to_player_score(points) {
   }
   self set_player_score_hud();
 }
-
 update_hud() {
   self.revives = self.lives;
   self.assists = self.bombs;
   self.downs = self.boosters;
 }
-
 update_multiplier_bar(increment) {
   lowMask = 15;
   curScore = self getscoremultiplier();
@@ -69,7 +66,6 @@ update_multiplier_bar(increment) {
   curScore = (actual_increment << 4) + (actual_multiplier - 1);
   self setScoreMultiplier(curScore);
 }
-
 set_player_score_hud(init) {
   num = self.entity_num;
   score_diff = self.score - self.old_score;

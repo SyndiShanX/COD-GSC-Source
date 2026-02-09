@@ -166,7 +166,6 @@ script_gen_dump() {
 
   if(level.bscriptgened) {
     assertmsg("SCRIPTGEN updated: Rebuild fast file and run map again");
-
   }
 
   flag_set("scriptgen_done");
@@ -219,7 +218,6 @@ script_gen_csvdumpprintln(file, signature) {
     prefix = "string";
 
     assertmsg("string not yet supported by scriptgen");
-
   } else if(issubstr(signature, "turret")) {
     prefix = "turret";
     writtenprefix = "weapon";

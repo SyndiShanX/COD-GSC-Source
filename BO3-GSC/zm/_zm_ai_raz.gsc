@@ -179,7 +179,7 @@ function function_a33bc00f() {
   level.zombie_total = int(n_wave_count);
   if(getdvarstring("") != "" && getdvarint("") > 0) {
     level.zombie_total = getdvarint("");
-    setdvar("", 0);
+    setDvar("", 0);
   }
   wait(1);
   wait(6);
@@ -471,7 +471,7 @@ function function_f8080b7() {
       level notify("last_ai_down", self);
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       attacker zm_score::player_add_points("death_raz", self.damagemod, self.damagelocation);
     }
@@ -665,8 +665,8 @@ function function_70864ef2(var_eee0e63b) {
 
 function function_d8afb0d4(var_eee0e63b) {
   if(isDefined(var_eee0e63b) && var_eee0e63b > 0) {
-    setdvar("", var_eee0e63b);
+    setDvar("", var_eee0e63b);
   } else {
-    setdvar("", "");
+    setDvar("", "");
   }
 }

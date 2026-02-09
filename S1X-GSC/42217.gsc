@@ -338,21 +338,21 @@ prepare_option_for_change(var_0, var_1) {
   }
 
   set_option_index(var_0["name"]);
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
 }
 
 menu_fx_option_set() {
-  if(getdvar("fx") == "nil") {
+  if(getDvar("fx") == "nil") {
     return;
   }
-  if(getdvar("fx") == "del") {
+  if(getDvar("fx") == "del") {
     common_scripts\_createfx::remove_selected_option();
   } else {
     var_0 = get_selected_option();
     var_1 = undefined;
 
     if(var_0["type"] == "string") {
-      var_1 = getdvar("fx");
+      var_1 = getDvar("fx");
     }
 
     if(var_0["type"] == "int") {
@@ -372,7 +372,7 @@ menu_fx_option_set() {
       return;
     }
 
-    setdvar("fx", "nil");
+    setDvar("fx", "nil");
   }
 }
 

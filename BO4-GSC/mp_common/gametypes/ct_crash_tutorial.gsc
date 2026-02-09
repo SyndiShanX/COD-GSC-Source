@@ -38,7 +38,7 @@ init() {
   level.var_84bf013e = 1;
   level.var_30264985 = 1;
   level.var_ed73ac32 = 0;
-  setdvar(#"hash_48162cd174e3034d", 0);
+  setDvar(#"hash_48162cd174e3034d", 0);
   ability_player::register_gadget_primed_callbacks(36, &tak5_start);
   callback::on_vehicle_damage(&function_2a6fb094);
   level.var_ae120f18 = array(#"hash_73f4f0c897cb832");
@@ -161,7 +161,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(level.var_ad7c0539 === 4 && self.team === # "axis" && isplayer(attacker)) {
+  if(level.var_ad7c0539 === 4 && self.team === # "axis" && isPlayer(attacker)) {
     if(isDefined(level.var_f9242904) && level.var_f9242904 && isalive(level.players[0])) {
       function_1089714c();
       return;
@@ -524,7 +524,7 @@ function_8ab81320() {
         level.players[0] ct_utils::function_61c3d59c(#"hash_6294dadea114ab41", undefined);
         ct_utils::function_e44c5b8e(#"ai_tank_marker", 10);
         level.var_b4a06c5b = # "tank_robot";
-        setdvar(#"hash_3e06b14c41136e95", 0);
+        setDvar(#"hash_3e06b14c41136e95", 0);
         level.players[0] thread function_667b9fbc();
         level waittill(#"marker_ready");
         ct_utils::function_c2a10fc();
@@ -630,7 +630,7 @@ function_45f0ba8d() {
   while(level.var_f9242904) {
     ct_utils::function_e44c5b8e(#"ai_tank_marker", 10);
     level.var_b4a06c5b = # "tank_robot";
-    setdvar(#"hash_3e06b14c41136e95", 0);
+    setDvar(#"hash_3e06b14c41136e95", 0);
     level.players[0] thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_EarnMantis");
     level.var_37591676 = 0;
     level.players[0] ct_utils::function_80bf685b(level.var_37591676);

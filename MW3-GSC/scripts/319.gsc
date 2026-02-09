@@ -26,7 +26,6 @@ _id_1FE4(var_0) {
   }
   if(!isDefined(var_0.team)) {
     var_0.team = "allies";
-
   }
   if(isDefined(level._id_17D3)) {
     return;
@@ -62,7 +61,6 @@ _id_1FE4(var_0) {
 
     if(!isDefined(var_6)) {
       var_6 = var_0.damageweapon;
-
     }
     if(isDefined(level._id_01DC)) {
       if(isDefined(var_2.damageowner)) {
@@ -71,16 +69,14 @@ _id_1FE4(var_0) {
       }
     }
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_8 = 1;
 
       if(isDefined(var_6) && var_6 == "none") {
         var_8 = 0;
-
       }
       if(var_2 isusingturret()) {
         var_8 = 1;
-
       }
       if(isDefined(var_7)) {
         var_8 = 1;
@@ -88,7 +84,7 @@ _id_1FE4(var_0) {
     } else if(isDefined(var_2.code_classname) && var_2.code_classname == "script_vehicle") {
       var_9 = var_2 getvehicleowner();
 
-      if(isDefined(var_9) && isplayer(var_9)) {
+      if(isDefined(var_9) && isPlayer(var_9)) {
         var_8 = 1;
       }
     }
@@ -108,7 +104,6 @@ _id_1FE4(var_0) {
       var_11 = 1;
     } else {
       var_11 = issubstr(var_0.classname, "civilian");
-
     }
     var_12 = var_1 == -1;
 
@@ -136,7 +131,6 @@ _id_1FE4(var_0) {
         }
       } else {
         level.player._id_1FE1 = level.player._id_1FE1 - var_1;
-
       }
       _id_1FEC();
 
@@ -168,7 +162,6 @@ _id_1FE8(var_0) {
 
   if(isDefined(level._id_01DC) && var_0) {
     var_1 = 0;
-
   }
   if(var_1) {
     return;
@@ -184,17 +177,14 @@ _id_1FE8(var_0) {
 _id_1FEA(var_0, var_1) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   var_2 = 0;
 
   if(isDefined(var_0.damageweapon) && var_0.damageweapon == "none") {
     var_2 = 1;
-
   }
   if(isDefined(var_1) && var_1 == "MOD_GRENADE_SPLASH") {
     var_2 = 1;
-
   }
   return var_2;
 }
@@ -206,7 +196,6 @@ _id_1FEB() {
     return 1;
   } else if(var_0 - level._id_1C2B < 4500) {
     return 1;
-
   }
   return 0;
 }
@@ -214,7 +203,6 @@ _id_1FEB() {
 _id_1FEC() {
   if(level.player._id_1FE1 > level.friendlyfire["max_participation"]) {
     level.player._id_1FE1 = level.friendlyfire["max_participation"];
-
   }
   if(level.player._id_1FE1 < level.friendlyfire["min_participation"]) {
     level.player._id_1FE1 = level.friendlyfire["min_participation"];
@@ -229,7 +217,6 @@ _id_1FED() {
       level.player._id_1FE1--;
     } else if(level.player._id_1FE1 < 0) {
       level.player._id_1FE1++;
-
     }
     wait(level.friendlyfire["point_loss_interval"]);
   }
@@ -246,7 +233,6 @@ _id_1FEF() {
 _id_1FF0(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   if(level.script == "airport") {
     if(var_0) {
@@ -256,7 +242,7 @@ _id_1FF0(var_0) {
     return;
   }
 
-  if(getdvar("friendlyfire_dev_disabled") == "1") {
+  if(getDvar("friendlyfire_dev_disabled") == "1") {
     return;
   }
   level.player endon("death");
@@ -274,20 +260,18 @@ _id_1FF0(var_0) {
     return;
   }
   if(var_0) {
-    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED");
   } else if(isDefined(level._id_1FF1)) {
-    setdvar("ui_deadquote", level._id_1FF1);
+    setDvar("ui_deadquote", level._id_1FF1);
   } else if(level._id_0BA2 == "british") {
-    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
   } else if(level._id_0BA2 == "russian") {
-    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
   } else {
-    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
-
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   }
   if(isDefined(level._id_1FF2)) {
     thread maps\_load::_id_1EF6(level._id_1FF2, 64, 64, 0);
-
   }
   reconspatialevent(level.player.origin, "script_friendlyfire: civilian %d", var_0);
   maps\_utility::_id_1826();

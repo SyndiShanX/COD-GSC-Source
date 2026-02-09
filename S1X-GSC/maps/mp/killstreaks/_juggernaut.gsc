@@ -270,7 +270,6 @@ removeWeapons() {
 
     self TakeWeapon(weapon);
   }
-
 }
 
 playerSetupJuggernautExo(modules, juggType) {
@@ -433,7 +432,7 @@ juggernautModifyDamage(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoin
     finalDamage = 0;
   }
 
-  if(GetDvar("scr_goliath_god", "0") != "0") {
+  if(getDvar("scr_goliath_god", "0") != "0") {
     finalDamage = 0;
   }
 
@@ -465,7 +464,7 @@ juggernautModifyDamage(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoin
       victim SetClientOmnvar("ui_exo_suit_health", victim.mechHealth / CONST_JUGG_EXO_HEALTH);
     }
 
-    if(isDefined(eAttacker) && IsPlayer(eAttacker)) {
+    if(isDefined(eAttacker) && isPlayer(eAttacker)) {
       if(isDefined(sHitLoc) && sHitLoc == "head") {
         eAttacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("headshot");
       } else {
@@ -545,7 +544,7 @@ playerCleanupOnDeath(data) {
 
   self waittill("death", attacker, meansOfDeath, weapon);
 
-  if(isDefined(attacker) && IsPlayer(attacker) && (attacker != self)) {
+  if(isDefined(attacker) && isPlayer(attacker) && (attacker != self)) {
     attacker incPlayerStat("goliath_destroyed", 1);
     level thread maps\mp\gametypes\_rank::awardGameEvent("goliath_destroyed", attacker, weapon, self, meansOfDeath);
   }
@@ -1450,7 +1449,7 @@ attachmentDeath(data, attachment, player, attachment2) {
 
   attachment waittill("death", attacker, meansOfDeath, weapon);
 
-  if(isDefined(attacker) && IsPlayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     splash = level.juggSettings[data.juggType].splashAttachmentName;
     if(IsSubStr(attachment.attachmentType, "weakSpot")) {
       splash = level.juggSettings[data.juggType].splashWeakenedName;
@@ -1548,7 +1547,7 @@ handleAttachmentDeath(type, player, eventString) {
 
   self waittill("death", attacker, meansOfDeath, weapon);
 
-  if(!isDefined(attacker) || !IsPlayer(attacker) || (isDefined(player) && attacker == player)) {
+  if(!isDefined(attacker) || !isPlayer(attacker) || (isDefined(player) && attacker == player)) {
     return;
   }
 
@@ -1581,7 +1580,7 @@ handleAttachmentDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
 
     self.damageFade = 0.0;
 
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(attacker _hasPerk("specialty_armorpiercing")) {
         finalDamage = finalDamage * level.armorPiercingMod;
       }
@@ -2196,8 +2195,8 @@ adjustLink(item, tagName, player, startOrigin, startAngles) {
     startAngles = (0, 0, 0);
   }
   thread drawSpine(player, item);
-  SetDvar("scr_adjust_angles", "" + startAngles);
-  SetDvar("scr_adjust_origin", "" + startOrigin);
+  setDvar("scr_adjust_angles", "" + startAngles);
+  setDvar("scr_adjust_origin", "" + startOrigin);
   currentAngles = (0, 0, 0);
   currentOrigin = (0, 0, 0);
   while(true) {
@@ -2322,7 +2321,7 @@ playermech_state_manager() {
 }
 
 set_mech_state(state) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(!isDefined(state)) {
     state = "none";
@@ -2340,7 +2339,7 @@ set_mech_state(state) {
 }
 
 get_mech_state() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   if(!isDefined(self.mechUIState)) {
     return;
   }
@@ -2442,9 +2441,7 @@ playermech_invalid_weapon_instance(buttonFunc, callback) {
 
     if(self call[[buttonFunc]]()) {
       if(!buttonDown) {
-        if([
-            [callback]
-          ]()) {
+        if([[callback]]()) {
           buttonDown = true;
           self PlayLocalSound("wpn_mech_offline");
           wait 1.5;
@@ -2535,7 +2532,7 @@ state_swarm_pump() {
 }
 
 set_mech_chaingun_state(state) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(!isDefined(state)) {
     state = "none";
@@ -2554,7 +2551,7 @@ set_mech_chaingun_state(state) {
 }
 
 get_mech_chaingun_state() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   if(!isDefined(self.mechUIState)) {
     return;
   }
@@ -2570,7 +2567,7 @@ same_mech_chaingun_last_state() {
 }
 
 set_mech_rocket_state(state) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(!isDefined(state)) {
     state = "none";
@@ -2588,7 +2585,7 @@ set_mech_rocket_state(state) {
 }
 
 get_mech_rocket_state() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   if(!isDefined(self.mechUIState)) {
     return;
   }
@@ -2604,7 +2601,7 @@ same_mech_rocket_last_state() {
 }
 
 set_mech_swarm_state(state) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(!isDefined(state)) {
     state = "none";
@@ -2622,7 +2619,7 @@ set_mech_swarm_state(state) {
 }
 
 get_mech_swarm_state() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   if(!isDefined(self.mechUIState)) {
     return;
   }
@@ -2855,7 +2852,7 @@ playermech_watch_emp_grenade() {
 
   while(true) {
     self waittill("emp_grenaded", attacker);
-    if(isDefined(attacker) && IsPlayer(attacker)) {
+    if(isDefined(attacker) && isPlayer(attacker)) {
       attacker thread ch_emp_goliath_think();
     }
   }

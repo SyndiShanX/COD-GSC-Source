@@ -928,7 +928,6 @@ unlock_players() {
     if(getdvarint(#"zombie_cheat", 0) >= 1 && getdvarint(#"zombie_cheat", 0) <= 3) {
       players[i] enableinvulnerability();
     }
-
   }
 }
 

@@ -91,6 +91,5 @@ softLandingWaiter() {
     //self waittill( "damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags );
 
     //traceData = bulletTrace( self.origin, self.origin + (0,0,-100), true, self );
-
   }
 }

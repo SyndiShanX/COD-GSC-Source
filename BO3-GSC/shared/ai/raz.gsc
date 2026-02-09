@@ -534,7 +534,7 @@ function private raztorpedomovetotarget(torpedo_target) {
   }
   if(isDefined(self.torpedo_old_normal_vector)) {
     torpedo_target_point = torpedo_target.origin + vectorscale((0, 0, 1), 48);
-    if(isplayer(torpedo_target)) {
+    if(isPlayer(torpedo_target)) {
       torpedo_target_point = torpedo_target getplayercamerapos();
     }
     vector_to_target = torpedo_target_point - self.origin;
@@ -600,7 +600,7 @@ function private razknockdownzombies(target) {
   self endon("death");
   while(isDefined(self)) {
     if(isDefined(target)) {
-      if(isplayer(target)) {
+      if(isPlayer(target)) {
         torpedo_target_position = target.origin + vectorscale((0, 0, 1), 48);
       } else {
         torpedo_target_position = target.origin;

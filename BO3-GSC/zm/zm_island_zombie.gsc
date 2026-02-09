@@ -23,7 +23,7 @@
 
 function autoexec init() {
   initzmislandbehaviorsandasm();
-  setdvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
   level.closest_player_override = &island_closest_player;
   level thread update_closest_player();
   level.pathdist_type = 2;

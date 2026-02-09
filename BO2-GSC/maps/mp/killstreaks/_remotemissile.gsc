@@ -139,7 +139,6 @@ drawline(start, end, timeslice, color) {
     line(start, end, color, 0, 1);
     wait 0.05;
   }
-
 }
 
 _fire(lifeid, player, team, killstreak_id) {
@@ -734,7 +733,7 @@ targeting_hud_think(rocket) {
         if(isDefined(target) == 0) {
           continue;
         }
-        if(isplayer(target)) {
+        if(isPlayer(target)) {
           if(isalive(target)) {
             index = target.clientid;
             assert(isDefined(index));

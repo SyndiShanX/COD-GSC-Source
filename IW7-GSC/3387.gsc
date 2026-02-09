@@ -122,7 +122,7 @@ func_E5D4(var_0, var_1, var_2) {
   level endon("rocket_trap_done");
   for(;;) {
     var_0 waittill("trigger", var_3);
-    if(isplayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3) && !isDefined(var_3.padding_damage)) {
+    if(isPlayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3) && !isDefined(var_3.padding_damage)) {
       var_3.padding_damage = 1;
       var_3 dodamage(35, var_3.origin, undefined, undefined, "MOD_UNKNOWN", "iw7_rockettrap_zm");
       playfxontagforclients(level._effect["player_scr_fire"], var_3, "tag_eye", var_3);

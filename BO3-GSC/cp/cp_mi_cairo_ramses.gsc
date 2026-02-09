@@ -67,7 +67,7 @@ function main() {
   cp_mi_cairo_ramses_fx::main();
   cp_mi_cairo_ramses_sound::main();
   load::main();
-  setdvar("compassmaxrange", "12000");
+  setDvar("compassmaxrange", "12000");
   level clientfield::set("ramses_station_lamps", 1);
   execdevgui("");
   level thread set_sound_igc();

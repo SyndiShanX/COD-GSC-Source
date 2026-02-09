@@ -31,8 +31,7 @@ func_A18B(var_0, var_1, var_2) {
       return var_0;
     default:
       if(isDefined(var_2)) {
-        return [
-          }
+        return [}
           [var_2]](var_0);
 
       break;

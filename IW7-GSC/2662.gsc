@@ -47,7 +47,7 @@ func_85CE(var_0) {
   var_0 endon("death");
   var_0 waittill("missile_stuck", var_1);
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     return;
   }
   thread func_85CD(var_0, var_0.angles);
@@ -246,7 +246,7 @@ func_13B91() {
   for(;;) {
     self waittill("trigger", var_2);
 
-    if(!isplayer(var_2) && !isagent(var_2)) {
+    if(!isPlayer(var_2) && !isagent(var_2)) {
       continue;
     }
     if(!scripts\cp\utility::isreallyalive(var_2)) {
@@ -318,7 +318,7 @@ func_6312() {
     if(isDefined(self.agent_type) && self.agent_type != "zombie_brute" && self.agent_type != "zombie_grey") {
       self setscriptablepartstate("burning", "inactive", 1);
     }
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     self setscriptablepartstate("burning", "neutral", 1);
   }
 }

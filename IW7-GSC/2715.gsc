@@ -12,7 +12,7 @@ init() {
 }
 
 updatedamagefeedback(var_0, var_1, var_2, var_3, var_4) {
-  if(!isplayer(self) && !scripts\mp\utility\game::func_9EF0(self)) {
+  if(!isPlayer(self) && !scripts\mp\utility\game::func_9EF0(self)) {
     return;
   }
   if(!isDefined(var_3)) {
@@ -108,7 +108,7 @@ hudicontype(var_0) {
     var_1 = 1;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   switch (var_0) {

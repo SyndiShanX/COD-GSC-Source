@@ -1,6 +1,6 @@
 /*************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_weapons.csc
+ * Script: clientscripts\_zombiemode_weapons\.csc
 *************************************************/
 
 #include clientscripts\_utility;
@@ -16,10 +16,9 @@ weapon_box_callback(localClientNum, set, newEnt) {
     cleanup_weapon_models();
   }
 }
-
 cleanup_weapon_models() {
   if(isDefined(self.weapon_models)) {
-    players = getLocalPlayers();
+    players = getlocalplayers();
     for(index = 0; index < players.size; index++) {
       player = players[index];
       lcn = player getlocalclientnumber();
@@ -31,7 +30,6 @@ cleanup_weapon_models() {
     self.weapon_models = undefined;
   }
 }
-
 weapon_is_dual_wield(name) {
   switch (name) {
     case "cz75dw_zm":
@@ -44,7 +42,6 @@ weapon_is_dual_wield(name) {
       return false;
   }
 }
-
 weapon_floats_up() {
   self endon("end_float");
   cleanup_weapon_models();
@@ -53,7 +50,7 @@ weapon_floats_up() {
   floatHeight = 64;
   rand = treasure_chest_ChooseRandomWeapon();
   modelname = GetWeaponModel(rand);
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     lcn = player getlocalclientnumber();
@@ -61,12 +58,12 @@ weapon_floats_up() {
     self.weapon_models[lcn].angles = self.angles + (0, 180, 0);
     self.weapon_models[lcn].dw = spawn(lcn, self.weapon_models[0].origin - (3, 3, 3), "script_model");
     self.weapon_models[lcn].dw.angles = self.weapon_models[0].angles;
-    self.weapon_models[lcn].dw hide();
+    self.weapon_models[lcn].dw Hide();
     self.weapon_models[lcn] setModel(modelname);
     self.weapon_models[lcn].dw setModel(modelname);
     self.weapon_models[lcn] useweaponhidetags(rand);
-    self.weapon_models[lcn] moveTo(self.origin + (0, 0, floatHeight), 3, 2, 0.9);
-    self.weapon_models[lcn].dw moveTo(self.origin + (0, 0, floatHeight) - (3, 3, 3), 3, 2, 0.9);
+    self.weapon_models[lcn] moveto(self.origin + (0, 0, floatHeight), 3, 2, 0.9);
+    self.weapon_models[lcn].dw MoveTo(self.origin + (0, 0, floatHeight) - (3, 3, 3), 3, 2, 0.9);
   }
   for(i = 0; i < number_cycles; i++) {
     if(i < 20) {
@@ -80,7 +77,7 @@ weapon_floats_up() {
     }
     rand = treasure_chest_ChooseRandomWeapon();
     modelname = GetWeaponModel(rand);
-    players = getLocalPlayers();
+    players = getlocalplayers();
     for(index = 0; index < players.size; index++) {
       player = players[index];
       lcn = player getlocalclientnumber();
@@ -92,14 +89,13 @@ weapon_floats_up() {
           self.weapon_models[lcn].dw useweaponhidetags(rand);
           self.weapon_models[lcn].dw show();
         } else {
-          self.weapon_models[lcn].dw hide();
+          self.weapon_models[lcn].dw Hide();
         }
       }
     }
   }
   cleanup_weapon_models();
 }
-
 is_weapon_included(weapon_name) {
   if(!isDefined(level._box_weapons)) {
     return false;
@@ -111,7 +107,6 @@ is_weapon_included(weapon_name) {
   }
   return false;
 }
-
 include_weapon(weapon, in_box, func) {
   if(!isDefined(level._box_weapons)) {
     level._box_weapons = [];
@@ -124,10 +119,9 @@ include_weapon(weapon, in_box, func) {
   }
   level._box_weapons[level._box_weapons.size] = weapon;
 }
-
 treasure_chest_ChooseRandomWeapon() {
   if(!isDefined(level._box_weapons)) {
     level._box_weapons = array("python_zm", "g11_lps_zm", "famas_zm");
   }
-  return level._box_weapons[randomInt(level._box_weapons.size)];
+  return level._box_weapons[RandomInt(level._box_weapons.size)];
 }

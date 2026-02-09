@@ -109,7 +109,7 @@ function_d997ba18() {
   while(true) {
     s_notify = self waittill(#"damage");
 
-    if(isplayer(s_notify.attacker)) {
+    if(isPlayer(s_notify.attacker)) {
       self setCanDamage(0);
       self movez(self.script_int, 0.5);
       self waittill(#"movedone");
@@ -315,7 +315,7 @@ ww_quest_step5_cleanup(var_5ea5c94d, ended_early) {
 
 is_soul_capture(var_88206a50, ent) {
   if(isDefined(ent)) {
-    b_killed_by_player = isplayer(ent.attacker) || isplayer(ent.damageinflictor);
+    b_killed_by_player = isPlayer(ent.attacker) || isPlayer(ent.damageinflictor);
     var_e93788f1 = var_88206a50.var_c5e93537;
     return (b_killed_by_player && ent istouching(var_e93788f1));
   }

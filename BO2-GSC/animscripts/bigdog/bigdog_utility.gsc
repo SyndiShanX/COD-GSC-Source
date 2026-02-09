@@ -44,7 +44,7 @@ fire_grenade_at_target(target) {
 }
 
 setactivegrenadetimer(throwingat) {
-  if(isplayer(throwingat))
+  if(isPlayer(throwingat))
     self.activegrenadetimer = "player_frag_grenade_sp";
   else
     self.activegrenadetimer = "AI_frag_grenade_sp";

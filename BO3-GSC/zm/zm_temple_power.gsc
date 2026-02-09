@@ -46,7 +46,7 @@ function power_switch(trigger_name, var_1e1fc126) {
   switch_trigger setcursorhint("HINT_NOICON");
   while(true) {
     switch_trigger waittill("trigger", player);
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       level flag::set(var_1e1fc126);
       break;
     }

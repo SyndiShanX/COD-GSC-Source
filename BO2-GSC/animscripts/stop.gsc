@@ -32,12 +32,13 @@ main() {
   transitionedtoidle = gettime() < 3000;
 
   if(!transitionedtoidle) {
-    if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none")
+    if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
       transitionedtoidle = 1;
-    else if(self.weapon == "none")
+    } else if(self.weapon == "none") {
       transitionedtoidle = 1;
-    else if(angleclamp180(self gettagangles("tag_weapon")[0]) > 20)
+    } else if(angleclamp180(self gettagangles("tag_weapon")[0]) > 20) {
       transitionedtoidle = 1;
+    }
   }
 
   for(;;) {
@@ -99,12 +100,13 @@ getdesiredidlepose() {
   self animscripts\face::setidleface(anim.alertface);
   desiredpose = animscripts\utility::choosepose();
 
-  if(mynodetype == "Cover Stand" || mynodetype == "Conceal Stand")
+  if(mynodetype == "Cover Stand" || mynodetype == "Conceal Stand") {
     desiredpose = animscripts\utility::choosepose("stand");
-  else if(mynodetype == "Cover Crouch" || mynodetype == "Conceal Crouch")
+  } else if(mynodetype == "Cover Crouch" || mynodetype == "Conceal Crouch") {
     desiredpose = animscripts\utility::choosepose("crouch");
-  else if(mynodetype == "Cover Prone" || mynodetype == "Conceal Prone")
+  } else if(mynodetype == "Cover Prone" || mynodetype == "Conceal Prone") {
     desiredpose = animscripts\utility::choosepose("prone");
+  }
 
   return desiredpose;
 }
@@ -118,10 +120,11 @@ transitiontoidle() {
   waittillframeend;
   special = "";
 
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand")
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand") {
     special = "_cqb";
-  else if(self is_heavy_machine_gun() && self.a.pose == "stand")
+  } else if(self is_heavy_machine_gun() && self.a.pose == "stand") {
     special = "_hmg";
+  }
 
   if(animarrayexist("idle_trans_in" + special)) {
     if(!weaponisgasweapon(self.weapon)) {
@@ -155,10 +158,11 @@ playidle(pose, idleset) {
 
   special = "";
 
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand")
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand") {
     special = "_cqb";
-  else if(self is_heavy_machine_gun())
+  } else if(self is_heavy_machine_gun()) {
     special = "_hmg";
+  }
 
   idleanimsetarray = animarray("idle" + special);
   assert(idleanimsetarray.size > 0);
@@ -168,8 +172,9 @@ playidle(pose, idleset) {
   idleanim = idleanimarray[randomintrange(0, idleanimarray.size)];
   transtime = 0.2;
 
-  if(gettime() == self.a.scriptstarttime)
+  if(gettime() == self.a.scriptstarttime) {
     transtime = 0.5;
+  }
 
   self orientmode("face angle", self.angles[1]);
   self setflaggedanimknoballrestart("idle", idleanim, %body, 1, transtime, self.animplaybackrate);

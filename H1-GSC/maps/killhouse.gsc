@@ -23,7 +23,7 @@ player_start() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -830,13 +830,13 @@ look_training() {
   }
 
   maps\killhouse_code::clear_hints();
-  setdvar("ui_start_inverted", 0);
+  setDvar("ui_start_inverted", 0);
 
   if(level.console) {
-    if(isDefined(getdvar("input_invertPitch")) && getdvar("input_invertPitch") == "1")
-      setdvar("ui_start_inverted", 1);
-  } else if(isDefined(getdvar("ui_mousepitch")) && getdvar("ui_mousepitch") == "1")
-    setdvar("ui_start_inverted", 1);
+    if(isDefined(getDvar("input_invertPitch")) && getDvar("input_invertPitch") == "1")
+      setDvar("ui_start_inverted", 1);
+  } else if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1")
+    setDvar("ui_start_inverted", 1);
 
   wait 0.1;
   level.player luiopenmenu(&"MENU_TYPE_INVERT_AXIS");
@@ -2610,7 +2610,7 @@ cargoship_training() {
   var_10 = getent("position_six", "targetname");
   var_11 = getent("sprint", "targetname");
   var_12 = getent("final_obj", "targetname");
-  setdvar("killhouse_too_slow", "0");
+  setDvar("killhouse_too_slow", "0");
   thread maps\killhouse_aud::aud_fail_mix();
   var_13 = getent(var_7.script_noteworthy, "targetname");
   var_14 = getent(var_10.script_noteworthy, "targetname");
@@ -2888,7 +2888,7 @@ debrief() {
   level notify("okay_if_friendlies_in_line_of_fire");
 
   if(var_2 == "try_again") {
-    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_TRY_AGAIN");
+    setDvar("ui_deadquote", &"KILLHOUSE_SHIP_TRY_AGAIN");
     maps\_utility::missionfailedwrapper();
   }
 
@@ -2961,7 +2961,7 @@ monitor_vehicle_damage() {
   level endon("mission failed");
   self waittill("death", var_0, var_1, var_2);
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     thread maps\_friendlyfire::missionfail();
 }
 

@@ -24,7 +24,6 @@ init_mortars() {
   level._explosion_dust_range = [];
   level._explosion_dust_name = [];
 }
-
 set_mortar_range(mortar_name, min_range, max_range, set_default) {
   if(!isDefined(level._explosion_min_range)) {
     init_mortars();
@@ -41,7 +40,6 @@ set_mortar_range(mortar_name, min_range, max_range, set_default) {
     level._explosion_max_range[mortar_name] = max_range;
   }
 }
-
 set_mortar_damage(mortar_name, blast_radius, min_damage, max_damage, set_default) {
   if(!isDefined(level._explosion_blast_radius)) {
     init_mortars();
@@ -62,7 +60,6 @@ set_mortar_damage(mortar_name, blast_radius, min_damage, max_damage, set_default
     level._explosion_max_damage[mortar_name] = max_damage;
   }
 }
-
 set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default) {
   if(!isDefined(level._explosion_quake_power)) {
     init_mortars();
@@ -83,7 +80,6 @@ set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default
     level._explosion_quake_radius[mortar_name] = quake_radius;
   }
 }
-
 set_mortar_delays(mortar_name, min_delay, max_delay, barrage_min_delay, barrage_max_delay, set_default) {
   if(!isDefined(level._explosion_min_delay)) {
     init_mortars();
@@ -116,7 +112,6 @@ set_mortar_delays(mortar_name, min_delay, max_delay, barrage_min_delay, barrage_
     }
   }
 }
-
 set_mortar_chance(mortar_name, chance, set_default) {
   if(!isDefined(level._explosion_view_chance)) {
     init_mortars();
@@ -130,7 +125,6 @@ set_mortar_chance(mortar_name, chance, set_default) {
     level._explosion_view_chance[mortar_name] = chance;
   }
 }
-
 set_mortar_dust(mortar_name, dust_name, range) {
   if(!isDefined(level._explosion_dust_range)) {
     init_mortars();
@@ -141,7 +135,6 @@ set_mortar_dust(mortar_name, dust_name, range) {
   }
   level._explosion_dust_range[mortar_name] = range;
 }
-
 mortar_loop(mortar_name, barrage_amount, no_terrain) {
   level endon("stop_all_mortar_loops");
   assertex((isDefined(mortar_name) && (mortar_name != "")), "mortar_name not passed. pass in level script");
@@ -197,13 +190,13 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
       for(j = 0; j < barrage_amount; j++) {
         max_rangeSQ = level._explosion_max_range[mortar_name] * level._explosion_max_range[mortar_name];
         min_rangeSQ = level._explosion_min_range[mortar_name] * level._explosion_min_range[mortar_name];
-        random_num = randomInt(explosion_points.size);
+        random_num = RandomInt(explosion_points.size);
         for(i = 0; i < explosion_points.size; i++) {
           num = (i + random_num) % explosion_points.size;
           do_mortar = false;
           players = get_players();
           for(q = 0; q < players.size; q++) {
-            dist = distanceSquared(players[q] GetOrigin(), explosion_points[num].origin);
+            dist = DistanceSquared(players[q] GetOrigin(), explosion_points[num].origin);
             if(num != last_explosion && dist < max_rangeSQ && dist > min_rangeSQ) {
               if(level._explosion_view_chance[mortar_name] > 0) {
                 if(players[q] player_view_chance(level._explosion_view_chance[mortar_name], explosion_points[num].origin)) {
@@ -249,7 +242,6 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
     wait(0.05);
   }
 }
-
 player_view_chance(view_chance, explosion_point) {
   chance = RandomFloat(1);
   if(chance <= view_chance) {
@@ -259,7 +251,6 @@ player_view_chance(view_chance, explosion_point) {
   }
   return false;
 }
-
 explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_power, quake_time, quake_radius, dust_points) {
   set_mortar_damage(mortar_name, 256, 25, 400, true);
   set_mortar_quake(mortar_name, 0.15, 2, 850, true);
@@ -315,7 +306,7 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
       max_range = level._explosion_dust_range[mortar_name];
     }
     for(i = 0; i < dust_points.size; i++) {
-      if(distanceSquared(dust_points[i].origin, self.origin) < max_range * max_range) {
+      if(DistanceSquared(dust_points[i].origin, self.origin) < max_range * max_range) {
         if(isDefined(dust_points[i].script_fxid)) {
           playFX(level._effect[dust_points[i].script_fxid], dust_points[i].origin);
         } else {
@@ -328,12 +319,10 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
     temp_ent thread delete_temp_ent();
   }
 }
-
 delete_temp_ent() {
   wait(5);
   self Delete();
 }
-
 explosion_boom(mortar_name, power, time, radius, is_struct) {
   if(!isDefined(power)) {
     power = 0.15;
@@ -378,7 +367,6 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
   min_damage = level._explosion_max_damage[mortar_name];
   maps\_shellshock::main(explosion_origin, time * 4, undefined, max_damage, 1, min_damage);
 }
-
 explosion_sound(mortar_name) {
   if(level._effectType[mortar_name] == "mortar") {
     self playSound("exp_mortar_dirt");
@@ -391,7 +379,6 @@ explosion_sound(mortar_name) {
     self playSound("exp_mortar_dirt");
   }
 }
-
 explosion_incoming(mortar_name) {
   if(level._effectType[mortar_name] == "mortar") {
     self playSound("prj_mortar_incoming", "sounddone");
@@ -405,7 +392,6 @@ explosion_incoming(mortar_name) {
   }
   self waittill("sounddone");
 }
-
 setup_mortar_terrain() {
   self.has_terrain = false;
   if(isDefined(self.target)) {
@@ -419,23 +405,22 @@ setup_mortar_terrain() {
   }
   if(isDefined(self.script_hidden)) {
     if(isDefined(self.script_hidden)) {
-      self.hidden_terrain = getEnt(self.script_hidden, "targetname");
+      self.hidden_terrain = GetEnt(self.script_hidden, "targetname");
     } else if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
-      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
+      self.hidden_terrain = GetEnt(self.terrain[0].target, "targetname");
     }
     if(isDefined(self.hidden_terrain)) {
-      self.hidden_terrain hide();
+      self.hidden_terrain Hide();
     }
   } else if(isDefined(self.has_terrain)) {
     if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
-      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
+      self.hidden_terrain = GetEnt(self.terrain[0].target, "targetname");
     }
     if(isDefined(self.hidden_terrain)) {
-      self.hidden_terrain hide();
+      self.hidden_terrain Hide();
     }
   }
 }
-
 activate_mortar(range, max_damage, min_damage, quake_power, quake_time, quake_radius, bIsstruct, effect, bShellShock) {
   incoming_sound(undefined, bIsstruct);
   level notify("mortar");
@@ -469,7 +454,6 @@ activate_mortar(range, max_damage, min_damage, quake_power, quake_time, quake_ra
   self.has_terrain = false;
   mortar_boom(self.origin, quake_power, quake_time, quake_radius, effect, bIsstruct, bShellShock);
 }
-
 mortar_boom(origin, power, time, radius, effect, bIsstruct, bShellShock) {
   if(!isDefined(power)) {
     power = 0.15;
@@ -519,7 +503,6 @@ mortar_boom(origin, power, time, radius, effect, bIsstruct, bShellShock) {
     maps\_shellshock::main(origin, time * 4);
   }
 }
-
 mortar_sound(bIsstruct) {
   if(isDefined(bIsstruct) && bIsstruct == true) {
     temp_ent = spawn("script_origin", self.origin);
@@ -529,7 +512,6 @@ mortar_sound(bIsstruct) {
     self playSound("exp_mortar_dirt");
   }
 }
-
 incoming_sound(soundnum, bIsstruct) {
   currenttime = GetTime();
   if(!isDefined(level.lastmortarincomingtime)) {
@@ -552,18 +534,17 @@ incoming_sound(soundnum, bIsstruct) {
     level notify("mortar_inc_done");
   }
 }
-
 mortar_rumble_on_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playRumbleOnEntity(high_rumble_string);
+        players[i] playrumbleonentity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playRumbleOnEntity(low_rumble_string);
+        players[i] playrumbleonentity(low_rumble_string);
       }
     } else {
-      players[i] playRumbleOnEntity(high_rumble_string);
+      players[i] playrumbleonentity(high_rumble_string);
     }
   }
 }

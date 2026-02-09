@@ -177,7 +177,7 @@ function function_1abfde35(e_attacker) {
   if(!isDefined(e_attacker)) {
     return;
   }
-  if(isDefined(self.var_9a9a0f55) && isDefined(self.var_aa99de67) && isplayer(self.var_aa99de67)) {
+  if(isDefined(self.var_9a9a0f55) && isDefined(self.var_aa99de67) && isPlayer(self.var_aa99de67)) {
     e_player = self.var_aa99de67;
     if(!(isDefined(isinarray(e_player.var_59179d2c, e_attacker)) && isinarray(e_player.var_59179d2c, e_attacker))) {
       array::add(e_player.var_59179d2c, e_attacker);
@@ -193,7 +193,7 @@ function function_1abfde35(e_attacker) {
       return;
     }
   }
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
   if(self.damagemod === "MOD_MELEE" && e_attacker zm_powerups::is_insta_kill_active()) {

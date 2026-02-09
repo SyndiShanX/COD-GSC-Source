@@ -181,7 +181,7 @@ hordeEnemyKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, s
   level thread maps\mp\gametypes\horde::chanceToSpawnPickup(self);
   level notify("enemy_death");
 
-  if(IsPlayer(eAttacker)) {
+  if(isPlayer(eAttacker)) {
     awardHordeKill(eAttacker);
 
     if(eAttacker _hasPerk("specialty_triggerhappy")) {
@@ -189,7 +189,7 @@ hordeEnemyKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, s
     }
   }
 
-  if(isDefined(eAttacker) && isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner) && isDefined(eAttacker.owner.killz)) {
+  if(isDefined(eAttacker) && isDefined(eAttacker.owner) && isPlayer(eAttacker.owner) && isDefined(eAttacker.owner.killz)) {
     awardHordeKill(eAttacker.owner);
   }
 }

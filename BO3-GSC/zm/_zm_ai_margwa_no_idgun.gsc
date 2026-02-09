@@ -403,7 +403,7 @@ function private function_17627e34() {
 }
 
 function private function_1f53b1a2(modelhit, attacker) {
-  if(isplayer(attacker) && (!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) && (!(isDefined(level.var_1f6ca9c8) && level.var_1f6ca9c8))) {
+  if(isPlayer(attacker) && (!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) && (!(isDefined(level.var_1f6ca9c8) && level.var_1f6ca9c8))) {
     attacker zm_score::player_add_points("bonus_points_powerup", 500);
   }
   right = anglestoright(self.angles);
@@ -421,7 +421,7 @@ function private function_1f53b1a2(modelhit, attacker) {
   if(isDefined(self.var_26f9f957)) {
     self thread[[self.var_26f9f957]](modelhit, attacker);
   }
-  if(isplayer(attacker) && isDefined(level.hero_power_update)) {
+  if(isPlayer(attacker) && isDefined(level.hero_power_update)) {
     [[level.hero_power_update]](attacker, self);
   }
   loc struct::delete();

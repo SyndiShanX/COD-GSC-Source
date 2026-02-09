@@ -494,7 +494,7 @@ func_13596(var_0, var_1, var_2) {
 
   var_3 = length2d(level.player.origin - var_2.origin);
   var_4 = length2d(level.player.origin - var_2 scripts\anim\utility::func_7DC6(var_1));
-  var_5 = float(getdvar("g_speed")) * 0.25;
+  var_5 = float(getDvar("g_speed")) * 0.25;
   for(;;) {
     if(var_3 / var_5 > getanimlength(var_1) && var_4 / var_5 > getanimlength(var_1)) {
       break;
@@ -506,7 +506,7 @@ func_13596(var_0, var_1, var_2) {
 
     var_3 = length2d(level.player.origin - var_2.origin);
     var_4 = length2d(level.player.origin - var_2 scripts\anim\utility::func_7DC6(var_1));
-    var_5 = float(getdvar("g_speed")) * 0.25;
+    var_5 = float(getDvar("g_speed")) * 0.25;
     var_6 = getanimlength(var_0);
     wait(var_6);
   }
@@ -517,14 +517,14 @@ func_13597(var_0, var_1, var_2) {
   self endon("ambient_idle_scene_end");
   var_3 = undefined;
   var_4 = undefined;
-  var_5 = float(getdvar("g_speed")) * 0.25;
+  var_5 = float(getDvar("g_speed")) * 0.25;
   for(;;) {
     var_6 = 0;
     for(var_7 = 0; var_7 < var_2.size; var_7++) {
       var_8 = var_2[var_7];
       var_3 = length2d(level.player.origin - var_8.origin);
       var_4 = length2d(level.player.origin - var_8 scripts\anim\utility::func_7DC6(var_1[var_7]));
-      var_5 = float(getdvar("g_speed")) * 0.25;
+      var_5 = float(getDvar("g_speed")) * 0.25;
       if(var_3 / var_5 > getanimlength(var_1[var_7]) && var_4 / var_5 > getanimlength(var_1[var_7])) {
         var_6++;
       }

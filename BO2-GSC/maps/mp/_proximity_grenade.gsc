@@ -120,7 +120,7 @@ watchproximitygrenadehitplayer(owner) {
   while(true) {
     self waittill("grenade_bounce", pos, normal, ent, surface);
 
-    if(isDefined(ent) && isplayer(ent) && surface != "riotshield") {
+    if(isDefined(ent) && isPlayer(ent) && surface != "riotshield") {
       if(level.teambased && ent.team == self.owner.team) {
         continue;
       }

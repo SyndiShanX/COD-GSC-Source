@@ -21,8 +21,8 @@ function init(team) {
   game["headicon_" + team] = "faction_axis";
   level.teamprefix[team] = "vox_pm";
   level.teampostfix[team] = "axis";
-  setdvar("g_TeamName_" + team, &"MPUI_AXIS_SHORT");
-  setdvar("g_FactionName_" + team, "axis");
+  setDvar("g_TeamName_" + team, &"MPUI_AXIS_SHORT");
+  setDvar("g_FactionName_" + team, "axis");
   game["strings"][team + "_win"] = &"MP_CDP_WIN_MATCH";
   game["strings"][team + "_win_round"] = &"MP_CDP_WIN_ROUND";
   game["strings"][team + "_mission_accomplished"] = &"MP_CDP_MISSION_ACCOMPLISHED";
@@ -34,7 +34,7 @@ function init(team) {
   game["music"]["victory_" + team] = "VICTORY_PMC";
   game["icons"][team] = "faction_axis";
   game["voice"][team] = "vox_pmc_";
-  setdvar("scr_" + team, "ussr");
+  setDvar("scr_" + team, "ussr");
   level.heli_vo[team]["hit"] = "vox_rus_0_kls_attackheli_hit";
   game["flagmodels"][team] = "p7_mp_flag_axis";
   game["carry_flagmodels"][team] = "p7_mp_flag_axis_carry";

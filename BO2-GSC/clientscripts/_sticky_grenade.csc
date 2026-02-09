@@ -16,18 +16,21 @@ spawned(localclientnum, play_sound) {
   enemy = 0;
   self.fxtagname = "tag_fx";
 
-  if(self.team != player.team)
+  if(self.team != player.team) {
     enemy = 1;
+  }
 
   if(enemy) {
-    if(play_sound)
+    if(play_sound) {
       self thread loop_local_sound(localclientnum, "wpn_semtex_alert", 0.3, level._effect["grenade_enemy_light"]);
-    else
+    } else {
       playFXOnTag(localclientnum, level._effect["grenade_enemy_light"], self, self.fxtagname);
+    }
   } else if(play_sound)
     self thread loop_local_sound(localclientnum, "wpn_semtex_alert", 0.3, level._effect["grenade_friendly_light"]);
-  else
+  else {
     playFXOnTag(localclientnum, level._effect["grenade_friendly_light"], self, self.fxtagname);
+  }
 }
 
 loop_local_sound(localclientnum, alias, interval, fx) {
@@ -39,7 +42,8 @@ loop_local_sound(localclientnum, alias, interval, fx) {
     wait(interval);
     interval = interval / 1.2;
 
-    if(interval < 0.1)
+    if(interval < 0.1) {
       interval = 0.1;
+    }
   }
 }

@@ -187,7 +187,7 @@ dispatchNotify(slot) {
 }
 
 promotionSplashNotify() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -204,7 +204,7 @@ promotionSplashNotify() {
 }
 
 weaponPromotionSplashNotify() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -368,7 +368,7 @@ showNotifyMessage(notifyData) {
 }
 
 killstreakSplashNotify(splashRef, streakVal, appendString) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -396,7 +396,7 @@ killstreakSplashNotify(splashRef, streakVal, appendString) {
 defconSplashNotify(defconLevel, forceNotify) {}
 
 challengeSplashNotify(challengeRef) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -427,7 +427,7 @@ challengeSplashNotify(challengeRef) {
 }
 
 splashNotify(splashRef, optionalNumber) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -447,7 +447,7 @@ splashNotify(splashRef, optionalNumber) {
 }
 
 splashNotifyUrgent(splashRef, optionalNumber) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -468,7 +468,7 @@ splashNotifyUrgent(splashRef, optionalNumber) {
 }
 
 splashNotifyDelayed(splashRef, optionalNumber) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -491,7 +491,7 @@ splashNotifyDelayed(splashRef, optionalNumber) {
 }
 
 playerCardSplashNotify(splashRef, player, optionalNumber) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -620,7 +620,7 @@ actionNotifyMessage(actionData) {
 
       case "playercard_splash":
         if(isDefined(actionData.playerCardPlayer)) {
-          assert(IsPlayer(actionData.playerCardPlayer) || IsAgent(actionData.playerCardPlayer));
+          assert(isPlayer(actionData.playerCardPlayer) || IsAgent(actionData.playerCardPlayer));
           self SetClientOmnvar("ui_splash_playercard_idx", splashIdx);
           self SetClientOmnvar("ui_splash_playercard_clientnum", actionData.playerCardPlayer GetEntityNumber());
           if(isDefined(actionData.optionalNumber))

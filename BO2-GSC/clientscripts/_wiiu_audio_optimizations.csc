@@ -4,7 +4,7 @@
 *********************************************************/
 
 main() {
-  mapname = getdvar(#"mapname");
+  mapname = getDvar(#"mapname");
   servercore = 0;
   backendcore = 2;
   mixthreadenabled = 1;
@@ -13,8 +13,9 @@ main() {
 
   if(mapname == "mp_overflow") {}
 
-  if(mapname == "angola")
+  if(mapname == "angola") {
     maxaxppcusage = 15;
+  }
 
   setdvarbool("sd_wiiu_mix_thread_enabled", mixthreadenabled);
   setdvarint("sd_wiiu_mix_thread_core", mixthreadcore);

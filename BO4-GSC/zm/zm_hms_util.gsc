@@ -48,7 +48,7 @@ __init__() {
 function_e308175e(alias, v_pos, e_player) {
   n_wait_time = float(soundgetplaybacktime(alias)) / 1000;
 
-  if(isDefined(e_player) && isplayer(e_player) && isalive(e_player)) {
+  if(isDefined(e_player) && isPlayer(e_player) && isalive(e_player)) {
     if(isentity(self)) {
       self playsoundtoplayer(alias, e_player);
     } else {
@@ -322,7 +322,7 @@ function_b2e1326(var_58df9892, var_1dc9c1bf = 1) {
 }
 
 function_fab5fb4d(w_weapon, var_c4c6c433) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_1590457 = self aat::getaatonweapon(w_weapon, 1);
 
     if(var_1590457 === var_c4c6c433) {
@@ -682,7 +682,7 @@ devgui() {
         break;
     }
 
-    setdvar(#"hash_6c7113bf98c41367", "<dev string:x9d>");
+    setDvar(#"hash_6c7113bf98c41367", "<dev string:x9d>");
   }
 }
 

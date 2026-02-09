@@ -28,7 +28,7 @@ init() {
 }
 
 setHeadIcon(showTo, icon, offset, width, height, archived, delay, constantSize, pinToScreenEdge, fadeOutPinnedIcon, is3D, targetTag) {
-  if(IsGameParticipant(showTo) && !IsPlayer(showTo)) {
+  if(IsGameParticipant(showTo) && !isPlayer(showTo)) {
     return;
   }
 

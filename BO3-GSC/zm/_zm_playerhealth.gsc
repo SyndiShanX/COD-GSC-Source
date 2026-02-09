@@ -34,19 +34,19 @@ function __init__() {
   level.gameskill = 1;
   switch (level.gameskill) {
     case 0: {
-      setdvar("currentDifficulty", "easy");
+      setDvar("currentDifficulty", "easy");
       break;
     }
     case 1: {
-      setdvar("currentDifficulty", "normal");
+      setDvar("currentDifficulty", "normal");
       break;
     }
     case 2: {
-      setdvar("currentDifficulty", "hardened");
+      setDvar("currentDifficulty", "hardened");
       break;
     }
     case 3: {
-      setdvar("currentDifficulty", "veteran");
+      setDvar("currentDifficulty", "veteran");
       break;
     }
   }
@@ -82,7 +82,7 @@ function playerhurtcheck() {
   self.hurtagain = 0;
   for(;;) {
     self waittill("damage", amount, attacker, dir, point, mod);
-    if(isDefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker.team == self.team) {
       continue;
     }
     self.hurtagain = 1;
@@ -122,7 +122,7 @@ function playerhealthregen() {
   }
   self.bolthit = 0;
   if(getdvarstring("scr_playerInvulTimeScale") == "") {
-    setdvar("scr_playerInvulTimeScale", 1);
+    setDvar("scr_playerInvulTimeScale", 1);
   }
   playerinvultimescale = getdvarfloat("scr_playerInvulTimeScale");
   for(;;) {
@@ -347,7 +347,7 @@ function showhitlog() {}
 
 function playerhealthdebug() {
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   waittillframeend();
   while(true) {

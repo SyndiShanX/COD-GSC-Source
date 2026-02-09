@@ -77,9 +77,7 @@ function_6607df78() {
           break;
         case # "popcorn":
           ai_zombie.var_96d5504c = 1;
-          [
-            [self.var_3dd38cd4]
-          ] - > waitinqueue(ai_zombie);
+          [[self.var_3dd38cd4]] - > waitinqueue(ai_zombie);
           ai_zombie thread zm_perk_death_dash::function_c1c51837(self);
           ai_zombie.var_96d5504c = undefined;
           break;

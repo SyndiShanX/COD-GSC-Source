@@ -12,8 +12,9 @@ play_pilot_light_fx(localclientnum) {
   self endon("new_pilot_light");
   self endon("entityshutdown");
 
-  if(!isDefined(level._ft_pilot_on) || !isDefined(level._ft_pilot_on[localclientnum]))
+  if(!isDefined(level._ft_pilot_on) || !isDefined(level._ft_pilot_on[localclientnum])) {
     level._ft_pilot_on[localclientnum] = 0;
+  }
 
   while(true) {
     new_weapon = getcurrentweapon(localclientnum);

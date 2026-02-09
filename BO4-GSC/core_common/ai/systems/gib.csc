@@ -142,7 +142,7 @@ function_c0099e86(entity, gibflag) {
 }
 
 function_69db754(entity, gibflag) {
-  if(isplayer(entity) || entity isplayercorpse()) {
+  if(isPlayer(entity) || entity isplayercorpse()) {
     return function_c0099e86(entity, gibflag);
   }
 
@@ -299,7 +299,7 @@ _gibentity(localclientnum, gibflags, shouldspawngibs) {
   gibdir = undefined;
   gibdirscale = undefined;
 
-  if(isplayer(entity) || entity isplayercorpse()) {
+  if(isPlayer(entity) || entity isplayercorpse()) {
     yaw_bits = gibflags >> 9 & 8 - 1;
     yaw = getanglefrombits(yaw_bits, 3);
     gibdir = anglesToForward((0, yaw, 0));
@@ -308,7 +308,7 @@ _gibentity(localclientnum, gibflags, shouldspawngibs) {
   while(gibflags >= currentgibflag) {
     if(gibflags &currentgibflag) {
       if(currentgibflag == 2) {
-        if(isplayer(entity) || entity isplayercorpse()) {
+        if(isPlayer(entity) || entity isplayercorpse()) {
           var_c0c9eae3 = entity function_4976d5ee();
           _playgibfx(localclientnum, entity, var_c0c9eae3[# "fx"], var_c0c9eae3[# "tag"]);
         } else {
@@ -432,7 +432,7 @@ _gibclientextrainternal(localclientnum, entity, gibflag) {
 _gibhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
 
-  if(isplayer(entity) || entity isplayercorpse()) {
+  if(isPlayer(entity) || entity isplayercorpse()) {
     if(!util::is_mature() || util::is_gib_restricted_build()) {
       return;
     }

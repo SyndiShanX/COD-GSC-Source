@@ -231,7 +231,7 @@ alliesteletostartspot(var_0) {
 }
 
 teletospot(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setorigin(var_0.origin);
     self setplayerangles(var_0.angles);
   } else
@@ -1511,7 +1511,7 @@ vehicle_allow_player_death(var_0, var_1) {
   for(;;) {
     self waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
     if(isDefined(self.fakehealthinvulnerability) && self.fakehealthinvulnerability == 1) {
@@ -3295,7 +3295,7 @@ hovercraft_allow_death() {
   for(;;) {
     self.weaponclip waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
     if(var_13 == "a10_30mm_player_homecoming")
@@ -3642,7 +3642,7 @@ destructible_dragons_teeth() {
     if(!isDefined(var_10)) {
       continue;
     }
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     var_10 = tolower(var_10);
@@ -3683,7 +3683,7 @@ destructible_sandbags() {
     if(!isDefined(var_13)) {
       continue;
     }
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
     var_13 = tolower(var_13);

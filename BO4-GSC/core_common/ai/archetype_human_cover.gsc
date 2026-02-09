@@ -92,7 +92,7 @@ shouldthrowgrenadeatcovercondition(entity, throwifpossible = 0) {
     return false;
   }
 
-  if(isplayer(entity.enemy) && entity.enemy laststand::player_is_in_laststand()) {
+  if(isPlayer(entity.enemy) && entity.enemy laststand::player_is_in_laststand()) {
     return false;
   }
 
@@ -218,7 +218,7 @@ covercleanuptothrowgrenade(entity) {
 
       if(isactor(entity.enemy) && isDefined(entity.grenadeweapon)) {
         grenade = entity.enemy magicgrenadetype(entity.grenadeweapon, entity gettagorigin("j_wrist_ri"), (0, 0, 0), float(entity.grenadeweapon.aifusetime) / 1000);
-      } else if(isplayer(entity.enemy) && isDefined(entity.grenadeweapon)) {
+      } else if(isPlayer(entity.enemy) && isDefined(entity.grenadeweapon)) {
         grenade = entity.enemy magicgrenadeplayer(entity.grenadeweapon, entity gettagorigin("j_wrist_ri"), (0, 0, 0));
       }
 
@@ -260,7 +260,7 @@ shouldreturntocovercondition(entity) {
       return false;
     }
 
-    if(isDefined(entity.enemy) && isplayer(entity.enemy) && entity.enemy.health < entity.enemy.maxhealth * 0.5) {
+    if(isDefined(entity.enemy) && isPlayer(entity.enemy) && entity.enemy.health < entity.enemy.maxhealth * 0.5) {
       if(gettime() < entity.covershootstarttime + 3000) {
         return false;
       }

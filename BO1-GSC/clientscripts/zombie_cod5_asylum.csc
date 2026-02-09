@@ -1,6 +1,6 @@
 /************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cod5_asylum.csc
+ * Script: clientscripts\zombie_cod5_asylum\.csc
 ************************************************/
 
 #include clientscripts\_utility;
@@ -17,9 +17,8 @@ zombie_monitor(clientNum) {
     realwait(0.1);
   }
 }
-
 zombifyHandler(clientNum, newState, oldState) {
-  player = getLocalPlayers()[clientNum];
+  player = getlocalplayers()[clientNum];
   if(newState == "1") {
     if(!isDefined(player.zombifyFX)) {
       player.zombifyFX = 1;
@@ -34,7 +33,6 @@ zombifyHandler(clientNum, newState, oldState) {
     }
   }
 }
-
 main() {
   include_weapons();
   level._uses_crossbow = true;
@@ -47,11 +45,9 @@ main() {
   register_zombie_types();
   println("*** Client : zombie running...or is it chasing? Muhahahaha");
 }
-
 register_zombie_types() {
   character\clientscripts\c_ger_honorguard_zt::register_gibs();
 }
-
 include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
@@ -92,7 +88,6 @@ include_weapons() {
   include_weapon("m1911_upgraded_zm", false);
   include_weapon("mine_bouncing_betty", false);
 }
-
 swinging_lamp_init(clientNum) {
   if(!isDefined(clientNum)) {
     clientNum = 0;

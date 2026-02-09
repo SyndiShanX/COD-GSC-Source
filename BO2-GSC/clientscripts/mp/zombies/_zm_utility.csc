@@ -210,7 +210,7 @@ is_encounter() {
   if(is_true(level._is_encounter))
     return true;
 
-  var = getdvar(#"ui_zm_gamemodegroup");
+  var = getDvar(#"ui_zm_gamemodegroup");
 
   if(var == "zencounter") {
     level._is_encounter = 1;
@@ -222,7 +222,7 @@ is_encounter() {
 
 is_createfx_active() {
   if(!isDefined(level.createfx_enabled))
-    level.createfx_enabled = getdvar(#"createfx") != "";
+    level.createfx_enabled = getDvar(#"createfx") != "";
 
   return level.createfx_enabled;
 }
@@ -345,7 +345,7 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
 }
 
 is_classic() {
-  var = getdvar(#"ui_zm_gamemodegroup");
+  var = getDvar(#"ui_zm_gamemodegroup");
 
   if(var == "zclassic")
     return true;
@@ -360,7 +360,7 @@ is_gametype_active(a_gametypes) {
     a_gametypes = array(a_gametypes);
 
   for(i = 0; i < a_gametypes.size; i++) {
-    if(getdvar(#"g_gametype") == a_gametypes[i])
+    if(getDvar(#"g_gametype") == a_gametypes[i])
       b_is_gametype_active = 1;
   }
 

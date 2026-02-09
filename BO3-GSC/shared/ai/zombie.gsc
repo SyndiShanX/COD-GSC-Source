@@ -161,7 +161,7 @@ function archetypezombiespecialeffectsinit() {
 function private archetypezombiespecialeffectscallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   specialdayeffectchance = getdvarint("tu6_ffotd_zombieSpecialDayEffectsChance", 0);
   if(specialdayeffectchance && randomint(100) < specialdayeffectchance) {
-    if(isDefined(eattacker) && isplayer(eattacker)) {
+    if(isDefined(eattacker) && isPlayer(eattacker)) {
       self clientfield::increment("zombie_special_day");
     }
   }
@@ -298,7 +298,7 @@ function zombiegiblegscondition(behaviortreeentity) {
 
 function zombienotetrackmeleefire(entity) {
   if(isDefined(entity.aat_turned) && entity.aat_turned) {
-    if(isDefined(entity.enemy) && !isplayer(entity.enemy)) {
+    if(isDefined(entity.enemy) && !isPlayer(entity.enemy)) {
       if(entity.enemy.archetype == "zombie" && (isDefined(entity.enemy.allowdeath) && entity.enemy.allowdeath)) {
         gibserverutils::gibhead(entity.enemy);
         entity.enemy zombie_utility::gib_random_parts();
@@ -367,9 +367,7 @@ function zombietargetservice(behaviortreeentity) {
       player = zombie_utility::get_closest_valid_player(self.origin, self.ignore_player);
       if(!isDefined(player)) {
         if(isDefined(self.ignore_player)) {
-          if(isDefined(level._should_skip_ignore_player_logic) && [
-              [level._should_skip_ignore_player_logic]
-            ]()) {
+          if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
             return false;
           }
           self.ignore_player = [];
@@ -1026,7 +1024,7 @@ function private zombiegibkilledanhilateoverride(inflictor, attacker, damage, me
     gibserverutils::annihilate(self);
     return damage;
   }
-  if(isDefined(attacker) && isplayer(attacker) && (isDefined(attacker.forceanhilateondeath) && attacker.forceanhilateondeath || (isDefined(level.forceanhilateondeath) && level.forceanhilateondeath))) {
+  if(isDefined(attacker) && isPlayer(attacker) && (isDefined(attacker.forceanhilateondeath) && attacker.forceanhilateondeath || (isDefined(level.forceanhilateondeath) && level.forceanhilateondeath))) {
     self zombie_utility::gib_random_parts();
     gibserverutils::annihilate(self);
     return damage;

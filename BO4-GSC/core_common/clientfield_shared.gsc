@@ -41,9 +41,9 @@ can_set(str_field_name, n_value) {
 }
 
 set_to_player(str_field_name, n_value) {
-  assert(isplayer(self), "<dev string:x77>");
+  assert(isPlayer(self), "<dev string:x77>");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     codesetplayerstateclientfield(self, str_field_name, n_value);
   }
 }

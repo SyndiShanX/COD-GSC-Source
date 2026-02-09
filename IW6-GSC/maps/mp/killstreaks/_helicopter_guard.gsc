@@ -383,7 +383,7 @@ lbSupport_handleDamage() {
 
     modifiedDamage = damage;
 
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(attacker != self.owner && Distance2D(attacker.origin, self.origin) <= self.targettingRadius && !attacker _hasPerk("specialty_blindeye") && !(level.hardcoreMode && level.teamBased && attacker.team == self.team)) {
         self SetLookAtEnt(attacker);
         if(isDefined(self.mgTurretLeft))
@@ -400,7 +400,7 @@ lbSupport_handleDamage() {
       }
     }
 
-    if(isDefined(attacker.owner) && IsPlayer(attacker.owner)) {
+    if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
       attacker.owner maps\mp\gametypes\_damagefeedback::updateDamageFeedback("helicopter");
     }
 

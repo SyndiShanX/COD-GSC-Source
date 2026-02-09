@@ -113,7 +113,7 @@ checkroomforanim(stepanim) {
 }
 
 shouldsidestep() {
-  if(cansidestep() && isplayer(self.enemy) && self.enemy islookingat(self)) {
+  if(cansidestep() && isPlayer(self.enemy) && self.enemy islookingat(self)) {
     if(self.zombie_move_speed != "sprint" || randomfloat(1) < 0.7)
       return "step";
     else
@@ -159,7 +159,7 @@ cansidestep() {
 }
 
 shouldforwardstep() {
-  if(canforwardstep() && isplayer(self.enemy))
+  if(canforwardstep() && isPlayer(self.enemy))
     return "phase";
 
   return "none";

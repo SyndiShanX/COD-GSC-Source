@@ -47,7 +47,6 @@ init_class_table() {
       loadoutValues[field] = tableLookup(filename, 0, field, column);
 
       assert_field_valid(field, loadoutValues[field]);
-
     }
 
     personalities = StrTok(strPers, "| ");
@@ -90,7 +89,6 @@ init_template_table() {
         level.botLoadoutTemplates[strTemplateLookupName][field] = entry;
 
         assert_field_valid(field, entry);
-
       }
     }
   }
@@ -907,7 +905,7 @@ bot_loadout_choose_values(loadoutValueArray) {
 
     chosenValue = self bot_loadout_choose_from_set(valueChoices, loadoutValue, loadoutValueArray, loadoutValueName);
 
-    debugLoadoutValue = GetDvar("bot_Debug" + loadoutValueName, "");
+    debugLoadoutValue = getDvar("bot_Debug" + loadoutValueName, "");
     if(isDefined(debugLoadoutValue) && debugLoadoutValue != "")
       chosenValue = debugLoadoutValue;
 
@@ -934,7 +932,7 @@ bot_load_setup_difficulty_squad_match(game_elo) {
 bot_loadout_get_difficulty() {
   difficulty = "regular";
 
-  if(GetDvar("squad_match") == "1") {
+  if(getDvar("squad_match") == "1") {
     difficulty = bot_load_setup_difficulty_squad_match(GetSquadAssaultELO());
   } else {
     difficulty = self BotGetDifficulty();
@@ -943,7 +941,6 @@ bot_loadout_get_difficulty() {
       self maps\mp\bots\_bots_util::bot_set_difficulty("default");
       difficulty = self BotGetDifficulty();
     }
-
   }
 
   Assert(difficulty != "default");
@@ -964,15 +961,15 @@ bot_loadout_class_callback() {
   self.difficulty = difficulty;
   personality = self BotGetPersonality();
 
-  if(GetDvar("squad_match") == "1") {
+  if(getDvar("squad_match") == "1") {
     loadoutValueArray = self bot_loadout_setup_squad_match(loadoutValueArray);
     AssertEx(isDefined(loadoutValueArray), "Bot '" + self.name + "' spawning (Squad Match) with loadoutValueArray not defined");
     personality = self BotGetPersonality();
-  } else if(GetDvar("squad_vs_squad") == "1") {
+  } else if(getDvar("squad_vs_squad") == "1") {
     loadoutValueArray = self bot_loadout_setup_squad_vs_squad_match(loadoutValueArray);
     AssertEx(isDefined(loadoutValueArray), "Bot '" + self.name + "' spawning (Squad vs Squad Match) with loadoutValueArray not defined");
     personality = self BotGetPersonality();
-  } else if(GetDvar("squad_use_hosts_squad") == "1" && level.wargame_client.team == self.team) {
+  } else if(getDvar("squad_use_hosts_squad") == "1" && level.wargame_client.team == self.team) {
     loadoutValueArray = self bot_loadout_setup_wargame_match(loadoutValueArray);
     AssertEx(isDefined(loadoutValueArray), "Bot '" + self.name + "' spawning (Wargame Match) with loadoutValueArray not defined");
     personality = self BotGetPersonality();
@@ -1178,7 +1175,7 @@ bot_squad_lookup_enemy(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fie
 bot_squad_lookup(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
   bot_squad_lookup_func = ::bot_squad_lookup_ranked;
 
-  if((GetDvar("squad_match") == "1") && (self.team == "axis"))
+  if((getDvar("squad_match") == "1") && (self.team == "axis"))
     bot_squad_lookup_func = ::bot_squad_lookup_enemy;
   else if(!matchMakingGame())
     bot_squad_lookup_func = ::bot_squad_lookup_private;
@@ -1187,7 +1184,7 @@ bot_squad_lookup(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, f
 }
 
 bot_squadmember_lookup(owner, squad_slot, fieldA) {
-  if((GetDvar("squad_match") == "1") && (self.team == "axis"))
+  if((getDvar("squad_match") == "1") && (self.team == "axis"))
     return GetEnemySquadData("squadMembers", squad_slot, fieldA);
   else if(!matchMakingGame())
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, fieldA);
@@ -1275,7 +1272,7 @@ bot_loadout_copy_from_client(loadoutValueArray, owner, squad_slot, loadout_slot)
   self.playerCardPatch = self bot_squadmember_lookup(owner, squad_slot, "patch");
   self.playerCardBackground = self bot_squadmember_lookup(owner, squad_slot, "background");
 
-  if((GetDvar("squad_match") == "1") && (self.team == "axis"))
+  if((getDvar("squad_match") == "1") && (self.team == "axis"))
     self.squad_bot_dog_type = GetEnemySquadDogType();
   else
     self.squad_bot_dog_type = owner GetCommonPlayerDataReservedInt("mp_dog_type");
@@ -1286,7 +1283,7 @@ bot_loadout_copy_from_client(loadoutValueArray, owner, squad_slot, loadout_slot)
 bot_loadout_setup_squad_match(loadoutValueArray) {
   owner = level.players[0];
   foreach(player in level.players) {
-    if(!IsAI(player) && IsPlayer(player)) {
+    if(!IsAI(player) && isPlayer(player)) {
       owner = player;
       break;
     }

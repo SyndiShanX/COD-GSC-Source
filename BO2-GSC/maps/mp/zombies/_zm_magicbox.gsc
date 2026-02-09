@@ -466,7 +466,7 @@ treasure_chest_think() {
       self.weapon_out = undefined;
 
       if(isDefined(level.magic_box_grab_by_anyone) && level.magic_box_grab_by_anyone) {
-        if(isplayer(grabber))
+        if(isPlayer(grabber))
           user = grabber;
       }
 
@@ -807,7 +807,7 @@ treasure_chest_chooseweightedrandomweapon(player) {
   if(isDefined(level.customrandomweaponweights))
     keys = player[[level.customrandomweaponweights]](keys);
 
-  forced_weapon = getdvar(#"_id_45ED7744");
+  forced_weapon = getDvar(#"_id_45ED7744");
 
   if(forced_weapon != "" && isDefined(level.zombie_weapons[forced_weapon]))
     arrayinsert(keys, forced_weapon, 0);
@@ -995,7 +995,7 @@ treasure_chest_weapon_spawn(chest, player, respin) {
   if(weapon_is_dual_wield(rand))
     self.weapon_model_dw = spawn_weapon_model(rand, get_left_hand_weapon_model_name(rand), self.weapon_model.origin - vectorscale((1, 1, 1), 3.0), self.weapon_model.angles);
 
-  if(getdvar(#"magic_chest_movable") == "1" && !(isDefined(chest._box_opened_by_fire_sale) && chest._box_opened_by_fire_sale) && !(isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"]) && level.zombie_vars["zombie_powerup_fire_sale_on"] && self[[level._zombiemode_check_firesale_loc_valid_func]]())) {
+  if(getDvar(#"magic_chest_movable") == "1" && !(isDefined(chest._box_opened_by_fire_sale) && chest._box_opened_by_fire_sale) && !(isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"]) && level.zombie_vars["zombie_powerup_fire_sale_on"] && self[[level._zombiemode_check_firesale_loc_valid_func]]())) {
     random = randomint(100);
 
     if(!isDefined(level.chest_min_move_usage))

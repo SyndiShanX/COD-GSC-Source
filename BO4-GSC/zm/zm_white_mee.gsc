@@ -211,7 +211,7 @@ function_7b33625a() {
 
 function_ce7e594b() {
   foreach(player in level.players) {
-    if(isplayer(self.attacker) && !isbot(self.attacker)) {
+    if(isPlayer(self.attacker) && !isbot(self.attacker)) {
       if(isinarray(array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE", "MOD_BURNED"), self.mod)) {
         return false;
       }

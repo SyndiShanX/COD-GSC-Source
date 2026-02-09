@@ -48,7 +48,7 @@ func_13A73() {
     self waittill("teleportBeginRace");
     waittillframeend;
     if(isDefined(var_0.var_6ACF)) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         scripts\mp\hud_message::showerrormessage("MP_TELEPORT_FAILED");
       }
 

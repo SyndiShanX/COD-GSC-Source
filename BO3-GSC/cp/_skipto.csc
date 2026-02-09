@@ -444,7 +444,7 @@ function stop_objective_logic(name, starting) {
 
 function set_last_map_dvar(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   var_1df2da04 = getdvarstring("ui_mapname");
-  setdvar("last_map", var_1df2da04);
+  setDvar("last_map", var_1df2da04);
 }
 
 function private standard_objective_init(objective, starting) {}

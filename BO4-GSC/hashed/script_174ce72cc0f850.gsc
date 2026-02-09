@@ -43,10 +43,10 @@ is_soul_capture(var_88206a50, ent) {
   if(isDefined(ent)) {
     b_killed_by_player = 0;
 
-    if(isDefined(ent.attacker) && isplayer(ent.attacker)) {
+    if(isDefined(ent.attacker) && isPlayer(ent.attacker)) {
       e_player = ent.attacker;
       b_killed_by_player = 1;
-    } else if(isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) {
+    } else if(isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) {
       e_player = ent.damageinflictor;
       b_killed_by_player = 1;
     }

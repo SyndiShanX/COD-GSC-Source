@@ -182,7 +182,6 @@ dig_spots_init() {
       s_dig_spot.str_zone = "";
 
       assertmsg("Dig spot at ( " + s_dig_spot.origin[0] + ", " + s_dig_spot.origin[1] + ", " + s_dig_spot.origin[2] + ") is not in a zone.");
-
     }
 
     wait_network_frame();
@@ -717,15 +716,15 @@ dig_set_powerup_spawned(str_powerup) {
 }
 
 setup_dig_devgui() {
-  setdvar("give_shovel", "off");
-  setdvar("give_golden_shovel", "off");
-  setdvar("give_helmet", "off");
-  setdvar("spawn_max_mounds", "off");
-  setdvar("spawn_all_mounds", "off");
-  setdvar("test_blood_mounds", "off");
-  setdvar("force_weather_rain", "off");
-  setdvar("force_weather_snow", "off");
-  setdvar("force_weather_none", "off");
+  setDvar("give_shovel", "off");
+  setDvar("give_golden_shovel", "off");
+  setDvar("give_helmet", "off");
+  setDvar("spawn_max_mounds", "off");
+  setDvar("spawn_all_mounds", "off");
+  setDvar("test_blood_mounds", "off");
+  setDvar("force_weather_rain", "off");
+  setDvar("force_weather_snow", "off");
+  setDvar("force_weather_none", "off");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Digging:1/Give Shovel:1\" \"give_shovel on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Digging:1/Give Golden Shovel:2\" \"give_golden_shovel on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Digging:1/Give Helmet:3\" \"give_helmet on\"\n");
@@ -740,8 +739,8 @@ setup_dig_devgui() {
 
 watch_devgui_dig() {
   while(true) {
-    if(getdvar(#"_id_C817F0A0") == "on") {
-      setdvar("give_shovel", "off");
+    if(getDvar(#"_id_C817F0A0") == "on") {
+      setDvar("give_shovel", "off");
 
       foreach(player in getplayers()) {
         player.dig_vars["has_shovel"] = 1;
@@ -750,8 +749,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_8B880FB8") == "on") {
-      setdvar("give_golden_shovel", "off");
+    if(getDvar(#"_id_8B880FB8") == "on") {
+      setDvar("give_golden_shovel", "off");
 
       foreach(player in getplayers()) {
         player.dig_vars["has_shovel"] = 1;
@@ -762,8 +761,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_AE371CCE") == "on") {
-      setdvar("give_helmet", "off");
+    if(getDvar(#"_id_AE371CCE") == "on") {
+      setDvar("give_helmet", "off");
 
       foreach(player in getplayers()) {
         player.dig_vars["has_helmet"] = 1;
@@ -772,8 +771,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_B92412E8") == "on") {
-      setdvar("spawn_max_mounds", "off");
+    if(getDvar(#"_id_B92412E8") == "on") {
+      setDvar("spawn_max_mounds", "off");
       a_dig_spots = array_randomize(level.a_dig_spots);
 
       for(i = 0; i < a_dig_spots.size; i++) {
@@ -785,8 +784,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_76E825DB") == "on") {
-      setdvar("spawn_all_mounds", "off");
+    if(getDvar(#"_id_76E825DB") == "on") {
+      setDvar("spawn_all_mounds", "off");
       a_dig_spots = array_randomize(level.a_dig_spots);
 
       for(i = 0; i < a_dig_spots.size; i++) {
@@ -798,8 +797,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_9D237849") == "on") {
-      setdvar("test_blood_mounds", "off");
+    if(getDvar(#"_id_9D237849") == "on") {
+      setDvar("test_blood_mounds", "off");
       a_z_spots = getstructarray("zombie_blood_dig_spot", "targetname");
 
       foreach(s_spot in a_z_spots) {
@@ -811,8 +810,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_6A4B6CAC") == "on") {
-      setdvar("force_weather_rain", "off");
+    if(getDvar(#"_id_6A4B6CAC") == "on") {
+      setDvar("force_weather_rain", "off");
       level.weather_snow = 0;
       level.weather_rain = 5;
       level.weather_vision = 1;
@@ -826,8 +825,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_6A4C3129") == "on") {
-      setdvar("force_weather_snow", "off");
+    if(getDvar(#"_id_6A4C3129") == "on") {
+      setDvar("force_weather_snow", "off");
       level.weather_snow = 5;
       level.weather_rain = 0;
       level.weather_vision = 2;
@@ -841,8 +840,8 @@ watch_devgui_dig() {
       }
     }
 
-    if(getdvar(#"_id_6A497752") == "on") {
-      setdvar("force_weather_none", "off");
+    if(getDvar(#"_id_6A497752") == "on") {
+      setDvar("force_weather_none", "off");
       level.weather_snow = 0;
       level.weather_rain = 0;
       level.weather_vision = 3;
@@ -858,5 +857,4 @@ watch_devgui_dig() {
 
     wait 0.05;
   }
-
 }

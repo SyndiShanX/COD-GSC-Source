@@ -106,7 +106,7 @@ function player_shield_facing_attacker(vdir, limit) {
 
 function should_shield_absorb_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   if(isDefined(self.hasriotshield) && self.hasriotshield && isDefined(vdir)) {
-    if(isDefined(eattacker) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker))) {
+    if(isDefined(eattacker) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie || isPlayer(eattacker))) {
       if(isDefined(self.hasriotshieldequipped) && self.hasriotshieldequipped) {
         if(self player_shield_facing_attacker(vdir, 0.2)) {
           return 1;

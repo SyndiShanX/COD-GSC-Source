@@ -47,7 +47,7 @@ function spectate(localclientnum, delta_time) {
   if(!isDefined(player)) {
     return;
   }
-  if(!player isplayer()) {
+  if(!player isPlayer()) {
     return;
   }
   if(!isalive(player)) {

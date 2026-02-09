@@ -18,26 +18,26 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_prisonbreak");
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", .3);
-  setdvar("r_reactiveMotionWindFrequencyScale", .5);
+  setDvar("r_reactiveMotionWindAmplitudeScale", .3);
+  setDvar("r_reactiveMotionWindFrequencyScale", .5);
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_diffusecolorscale", 1.5, 1.8);
   setdvar_cg_ng("r_specularcolorscale", 3.0, 6.0);
-  SetDvar("r_ssaofadedepth", 1089);
-  SetDvar("r_ssaorejectdepth", 1200);
+  setDvar("r_ssaofadedepth", 1089);
+  setDvar("r_ssaorejectdepth", 1200);
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.6");
+    setDvar("sm_sunShadowScale", "0.6");
   } else if(level.xenon) {
-    setdvar("sm_sunShadowScale", "0.7");
+    setDvar("sm_sunShadowScale", "0.7");
   }
 
   if(level.ps4) {
-    setdvar("sm_sunSampleSizeNear", 0.33);
+    setDvar("sm_sunSampleSizeNear", 0.33);
   } else if(level.xb3) {
-    setdvar("sm_sunSampleSizeNear", 0.38);
+    setDvar("sm_sunSampleSizeNear", 0.38);
   }
 
   game["attackers"] = "allies";
@@ -943,7 +943,6 @@ log_pile_run() {
   foreach(node in self.nodes) {
     node ConnectNode();
   }
-
 }
 
 log_pile_clip_move(delay_time, move_time) {
@@ -1122,7 +1121,6 @@ falling_rock_kill_trigger() {
 
     RadiusDamage(player.origin, 8, 1000, 1000, self.attacker, "MOD_CRUSH");
   }
-
 }
 
 rock_slides() {

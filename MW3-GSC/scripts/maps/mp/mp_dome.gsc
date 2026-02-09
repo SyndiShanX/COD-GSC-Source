@@ -11,8 +11,8 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_dome");
   maps\mp\_compass::setupminimap("compass_map_mp_dome");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   audio_settings();

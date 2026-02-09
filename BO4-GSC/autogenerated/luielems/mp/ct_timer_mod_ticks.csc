@@ -69,7 +69,6 @@ class cct_timer_mod_ticks: cluielem {
     cluielem::add_clientfield("_state", 1, 3, "int");
     cluielem::add_clientfield("timeMod", 1, 6, "int", var_2b2f0c89);
   }
-
 }
 
 register(uid, var_2b2f0c89) {

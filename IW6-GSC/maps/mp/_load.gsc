@@ -13,7 +13,7 @@ main() {
   }
   level._loadStarted = true;
 
-  level.createFX_enabled = (getdvar("createfx") != "");
+  level.createFX_enabled = (getDvar("createfx") != "");
 
   struct_class_init();
 
@@ -80,7 +80,7 @@ main() {
     maps\mp\_createfx::createfx();
   }
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     maps\mp\gametypes\_spawnlogic::setMapCenterForDev();
     maps\mp\_global_fx::main();
     level waittill("eternity");
@@ -145,8 +145,8 @@ main() {
   setDvar("r_lightGridIntensity", 1);
   setDvar("r_lightGridContrast", 0);
 
-  SetDvar("ui_showInfo", 1);
-  SetDvar("ui_showMinimap", 1);
+  setDvar("ui_showInfo", 1);
+  setDvar("ui_showMinimap", 1);
 
   setupDestructibleKillCamEnts();
 
@@ -196,11 +196,9 @@ setupExploders() {
       else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] notsolid();
-
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploderchunk")) {
         ents[i] hide();
         ents[i] notsolid();
-
       }
     }
   }
@@ -277,7 +275,6 @@ setupExploders() {
     if(isDefined(exploder.target)) {
       org = getent(ent.v["target"], "targetname").origin;
       ent.v["angles"] = vectortoangles(org - ent.v["origin"]);
-
     }
 
     if(exploder.classname == "script_brushmodel" || isDefined(exploder.model)) {
@@ -323,7 +320,6 @@ setupDestructibleKillCamEnts() {
     dest.killCamEnt SetScriptMoverKillCam("explosive");
     dest thread deleteDestructibleKillCamEnt();
   }
-
 }
 
 deleteDestructibleKillCamEnt() {

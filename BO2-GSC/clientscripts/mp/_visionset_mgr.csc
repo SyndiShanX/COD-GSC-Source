@@ -403,7 +403,7 @@ visionset_update_cb(localclientnum, type) {
 }
 
 set_poison_overlay(amount) {
-  setdvar("r_poisonFX_debug_enable", 1);
+  setDvar("r_poisonFX_debug_enable", 1);
   setdvarfloat("r_poisonFX_pulse", 2);
   setdvarfloat("r_poisonFX_warpX", -0.3);
   setdvarfloat("r_poisonFX_warpY", 0.15);
@@ -417,7 +417,7 @@ set_poison_overlay(amount) {
 
 clear_poison_overlay() {
   setdvarfloat("r_poisonFX_debug_amount", 0);
-  setdvar("r_poisonFX_debug_enable", 0);
+  setDvar("r_poisonFX_debug_enable", 0);
 }
 
 overlay_update_cb(localclientnum, type) {
@@ -456,9 +456,7 @@ overlay_update_cb(localclientnum, type) {
     case 1:
       if(state.force_update || state.prev_slot != state.curr_slot || state.prev_lerp != state.curr_lerp) {
         if(isDefined(level.vsmgr_filter_custom_enable[curr_info.material_name]))
-          level.localplayers[localclientnum][
-            [level.vsmgr_filter_custom_enable[curr_info.material_name]]
-          ](curr_info);
+          level.localplayers[localclientnum][[level.vsmgr_filter_custom_enable[curr_info.material_name]]](curr_info);
         else {
           level.localplayers[localclientnum] set_filter_pass_material(curr_info.filter_index, curr_info.pass_index, level.filter_matid[curr_info.material_name]);
           level.localplayers[localclientnum] set_filter_pass_enabled(curr_info.filter_index, curr_info.pass_index, 1);

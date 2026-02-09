@@ -38,7 +38,6 @@ _id_156C(var_0, var_1, var_2) {
     return;
   } else if(level._id_1456._id_1561._id_1562 != "") {
     _id_1577(level._id_1456._id_1561._id_1562, var_1);
-
   }
   level._id_1456._id_1561._id_1562 = var_0;
 
@@ -51,7 +50,6 @@ _id_156C(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-
   }
   if(!isDefined(level._id_1456._id_1561._id_1563[var_0])) {
     var_4 = _id_157D(var_0);
@@ -122,7 +120,6 @@ _id_1571(var_0, var_1, var_2) {
   if(!var_3) {
     if(!isDefined(var_1)) {
       var_1 = "none";
-
     }
     level._id_1456._id_1561._id_1564._id_1565[var_0] = var_1;
   }
@@ -131,7 +128,6 @@ _id_1571(var_0, var_1, var_2) {
 _id_1572(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = "none";
-
   }
   _id_1586(var_0, "dynamic_ambience", var_1, ::_id_1582, var_2);
   level._id_1456._id_1561._id_1564._id_148D[var_0] = var_1;
@@ -140,7 +136,6 @@ _id_1572(var_0, var_1, var_2) {
 _id_1573(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = "none";
-
   }
   _id_1586(var_0, "reverb", var_1, ::_id_1583, var_2);
   level._id_1456._id_1561._id_1564._id_1566[var_0] = var_1;
@@ -149,7 +144,6 @@ _id_1573(var_0, var_1, var_2) {
 _id_1574(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = "none";
-
   }
   _id_1586(var_0, "occlusion", var_1, ::_id_1584, var_2);
   level._id_1456._id_1561._id_1564._id_14FD[var_1] = var_1;
@@ -158,7 +152,6 @@ _id_1574(var_0, var_1, var_2) {
 _id_1575(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = "none";
-
   }
   _id_1586(var_0, "mix", var_1, ::_id_1585, var_2);
   level._id_1456._id_1561._id_1564._id_14FD[var_1] = var_1;
@@ -169,7 +162,6 @@ _id_1576(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   maps\_audio::_id_156D("ZONE STOP ALL");
 
@@ -183,26 +175,21 @@ _id_1577(var_0, var_1, var_2) {
 
     if(isDefined(var_1)) {
       var_3 = var_1;
-
     }
     var_4 = level._id_1456._id_1561._id_1563[var_0];
     var_5 = 0;
 
     if(isDefined(var_2)) {
       var_5 = var_2;
-
     }
     if(var_5) {
       maps\_audio::_id_156D("ZONE STOP ZONE: " + var_0);
-
     }
     if(isDefined(var_4["streamed_ambience"])) {
       maps\_audio_stream_manager::_id_1481(var_4["streamed_ambience"], var_3);
-
     }
     if(isDefined(var_4["dynamic_ambience"])) {
       maps\_audio_dynamic_ambi::_id_14A8(var_4["dynamic_ambience"], var_3);
-
     }
     level._id_1456._id_1561._id_1563[var_0]["state"] = "stopping";
     thread _id_1587(var_0, var_3);
@@ -229,7 +216,6 @@ _id_157D(var_0) {
   }
   if(!isDefined(level._id_1456._id_1561._id_1473)) {
     level._id_1456._id_1561._id_1473 = [];
-
   }
   var_1 = [];
 
@@ -237,7 +223,6 @@ _id_157D(var_0) {
     var_1 = level._id_1456._id_1561._id_1473[var_0];
   } else {
     var_1 = _id_157E(var_0, 1);
-
   }
   if(!isDefined(var_1) || var_1.size == 0) {
     return;
@@ -250,7 +235,6 @@ _id_157D(var_0) {
       var_1["streamed_ambience"] = undefined;
     } else {
       var_1["streamed_ambience"] = level._id_1456._id_1561._id_1564._id_1565[var_0];
-
     }
     var_2 = 1;
     level._id_1456._id_1561._id_1564._id_1565[var_0] = undefined;
@@ -261,7 +245,6 @@ _id_157D(var_0) {
       var_1["dynamic_ambience"] = undefined;
     } else {
       var_1["dynamic_ambience"] = level._id_1456._id_1561._id_1564._id_148D[var_0];
-
     }
     var_2 = 1;
     level._id_1456._id_1561._id_1564._id_148D[var_0] = undefined;
@@ -272,7 +255,6 @@ _id_157D(var_0) {
       var_1["reverb"] = undefined;
     } else {
       var_1["reverb"] = level._id_1456._id_1561._id_1564._id_1566[var_0];
-
     }
     var_2 = 1;
     level._id_1456._id_1561._id_1564._id_1566[var_0] = undefined;
@@ -283,7 +265,6 @@ _id_157D(var_0) {
       var_1["occlusion"] = undefined;
     } else {
       var_1["occlusion"] = level._id_1456._id_1561._id_1564._id_1567[var_0];
-
     }
     var_2 = 1;
     level._id_1456._id_1561._id_1564._id_1567[var_0] = undefined;
@@ -294,7 +275,6 @@ _id_157D(var_0) {
       var_1["mix"] = undefined;
     } else {
       var_1["mix"] = level._id_1456._id_1561._id_1564._id_14FD[var_0];
-
     }
     var_2 = 1;
     level._id_1456._id_1561._id_1564._id_14FD[var_0] = undefined;
@@ -302,17 +282,14 @@ _id_157D(var_0) {
 
   if(var_2) {
     level._id_1456._id_1561._id_1473[var_0] = var_1;
-
   }
   var_1["name"] = var_0;
 
   if(!isDefined(var_1["priority"])) {
     var_1["priority"] = 1;
-
   }
   if(!isDefined(var_1["interrupt_fade"])) {
     var_1["interrupt_fade"] = 0.1;
-
   }
   return var_1;
 }
@@ -324,11 +301,9 @@ _id_157E(var_0, var_1) {
 
   if(var_1) {
     var_4 = _id_1580(var_3, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = _id_1580(var_2, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -345,7 +320,6 @@ _id_1580(var_0, var_1) {
   for(var_6 = 1; var_6 < var_5; var_6++) {
     if(var_3 != "comments" && var_4 != "") {
       var_2[var_3] = var_4;
-
     }
     var_3 = tablelookup(var_0, 0, "zone_names", var_6);
     var_4 = tablelookup(var_0, 0, var_1, var_6);
@@ -394,7 +368,6 @@ _id_1582(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   var_3 = level._id_1456._id_1561._id_1563[var_0]["dynamic_ambience"];
 
@@ -436,7 +409,6 @@ _id_1586(var_0, var_1, var_2, var_3, var_4) {
         level._id_1456._id_1561._id_1563[var_0][var_1] = undefined;
       } else {
         level._id_1456._id_1561._id_1563[var_0][var_1] = var_2;
-
       }
       if(var_0 == _id_1578()) {
         [[var_3]](var_0, var_4);
@@ -514,7 +486,6 @@ _id_1588(var_0, var_1) {
 
   if(var_6 != 1) {
     maps\_audio_dynamic_ambi::_id_14A6(1.0, "zone");
-
   }
   if(var_6 == 1) {
     foreach(var_9, var_8 in level._id_1456._id_148D._id_1492["zone"]) {
@@ -536,7 +507,6 @@ _id_1599(var_0, var_1) {
     var_2 = 1;
   } else if(isDefined(var_0) && !isDefined(var_1)) {
     var_2 = 1;
-
   }
   return var_2;
 }
@@ -548,7 +518,6 @@ _id_159A(var_0, var_1) {
     var_2 = 1;
   } else if(isDefined(var_1) && !isDefined(var_0)) {
     var_2 = 1;
-
   }
   return var_2;
 }
@@ -584,7 +553,6 @@ _id_159B(var_0, var_1, var_2) {
 
   if(_id_1599(var_2._id_158D, var_2._id_158E)) {
     maps\_audio_dynamic_ambi::_id_14AA(var_2._id_158D, var_0, var_2._id_158E, var_1);
-
   }
   var_7 = 0;
 
@@ -594,14 +562,12 @@ _id_159B(var_0, var_1, var_2) {
       maps\_audio::_id_1570(var_2._id_1591, 0, 0);
     } else {
       maps\_audio::_id_1570(undefined, 0, 0);
-
     }
     if(isDefined(var_2._id_1592)) {
       var_7 = 1;
       maps\_audio::_id_1570(var_2._id_1592, 1, 0);
     } else {
       maps\_audio::_id_1570(undefined, 1, 0);
-
     }
     if(!(isDefined(level._id_1456._id_159D) && level._id_1456._id_159D)) {
       if(isDefined(var_2._id_1591) || isDefined(var_2._id_1592)) {

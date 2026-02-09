@@ -13,10 +13,10 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_bog");
   game["attackers"] = "axis";
   game["defenders"] = "allies";
-  setdvar("compassmaxrange", "1800");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_tonemapHighlightRange", 0);
+  setDvar("compassmaxrange", "1800");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_tonemapHighlightRange", 0);
   thread misc_rotate_ceilingfans();
 
   if(level.gametype == "dom") {

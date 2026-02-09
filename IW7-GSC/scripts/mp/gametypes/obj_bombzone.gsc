@@ -184,7 +184,7 @@ bombzone_onenduse(var_0, var_1, var_2) {
     var_1.isplanting = 0;
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_objective_state", 0);
     var_1.ui_bomb_planting_defusing = undefined;
   }
@@ -261,7 +261,7 @@ bombzone_onuseplantobject(var_0) {
     level.bombowner = var_0;
     var_0 thread scripts\mp\utility::giveunifiedpoints("plant");
     var_0.bombplantedtime = gettime();
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0 thread scripts\mp\matchdata::loggameevent("plant", var_0.origin);
     }
   }
@@ -305,7 +305,7 @@ bombzone_onusedefuseobject(var_0) {
     var_0 scripts\mp\utility::setextrascore1(var_0.pers["defuses"]);
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread scripts\mp\matchdata::loggameevent("defuse", var_0.origin);
   }
 }
@@ -678,7 +678,7 @@ bombsitewatcher() {
 
 onpickup(var_0) {
   var_0.isbombcarrier = 1;
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread scripts\mp\matchdata::loggameevent("pickup", var_0.origin);
     scripts\mp\utility::setmlgannouncement(15, var_0.team, var_0 getentitynumber());
   }

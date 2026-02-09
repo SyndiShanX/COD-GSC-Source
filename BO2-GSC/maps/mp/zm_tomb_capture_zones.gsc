@@ -1702,7 +1702,6 @@ watch_for_open_sesame() {
     s_temp debug_set_generator_active();
     wait_network_frame();
   }
-
 }
 
 debug_watch_for_zone_capture() {
@@ -1917,7 +1916,6 @@ get_recapture_zone(s_last_recapture_zone) {
           }
         }
       }
-
     }
   }
 
@@ -2063,7 +2061,7 @@ recapture_zombie_death_func() {
   if(isDefined(self.is_recapture_zombie) && self.is_recapture_zombie) {
     level.recapture_zombies_killed++;
 
-    if(isDefined(self.attacker) && isplayer(self.attacker) && level.recapture_zombies_killed == get_recapture_zombies_needed()) {
+    if(isDefined(self.attacker) && isPlayer(self.attacker) && level.recapture_zombies_killed == get_recapture_zombies_needed()) {
       self.attacker thread delay_thread(2, ::create_and_play_dialog, "zone_capture", "recapture_prevented");
 
       foreach(player in get_players()) {

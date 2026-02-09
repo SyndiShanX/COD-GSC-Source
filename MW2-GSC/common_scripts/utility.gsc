@@ -968,7 +968,6 @@ fileprint_map_start() {
   // for the entity count
   level.fileprint_mapentcount = 0;
   fileprint_map_header(true);
-
 }
 
 fileprint_map_header(bInclude_blank_worldspawn) {
@@ -985,7 +984,6 @@ fileprint_map_header(bInclude_blank_worldspawn) {
   fileprint_map_entity_start();
   fileprint_map_keypairprint("classname", "worldspawn");
   fileprint_map_entity_end();
-
 }
 
 /*
@@ -1460,7 +1458,7 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
  */
 isSP() {
   if(!isDefined(level.isSP))
-    level.isSP = !(string_starts_with(getdvar("mapname"), "mp_"));
+    level.isSP = !(string_starts_with(getDvar("mapname"), "mp_"));
 
   return level.isSP;
 }
@@ -1513,7 +1511,6 @@ draw_line_for_time(org1, org2, r, g, b, timer) {
     line(org1, org2, (r, g, b), 1);
     wait .05;
   }
-
 }
 
 /*
@@ -1798,7 +1795,7 @@ PlayerUnlimitedAmmoThread() {
   while(1) {
     wait .5;
 
-    if(getdvar("UnlimitedAmmoOff") == "1") {
+    if(getDvar("UnlimitedAmmoOff") == "1") {
       continue;
     }
     currentWeapon = player getCurrentWeapon();
@@ -1950,22 +1947,20 @@ waittill_notify_or_timeout(msg, timer) {
 */
 
 fileprint_launcher_start_file() {
-  AssertEx(!isDefined(level.fileprint_launcher), "Can't open more than one file at a time to print through launcher.");
-  level.fileprintlauncher_linecount = 0;
-  level.fileprint_launcher = true;
-  fileprint_launcher("GAMEPRINTSTARTFILE:");
-}
+AssertEx(!isDefined(level. fileprint_launcher), "Can't open more than one file at a time to print through launcher.");
+    level.fileprintlauncher_linecount = 0; level. fileprint_launcher = true;
+    fileprint_launcher("GAMEPRINTSTARTFILE:");
+  }
 
-/*
-=============
-///ScriptDocBegin
-"Name: fileprint_launcher( <string> )""Summary: Tell launcher to append text to current open file created by fileprint_launcher_start_file(), to be closed and written with fileprint_launcher_end_file() ""Module: Print""CallOn: Level""MandatoryArg: <param1>: ""Example: fileprint_launcher( "main()" );""SPMP: both"///ScriptDocEnd
-=============
-*/
+  /*
+  =============
+  ///ScriptDocBegin
+  "Name: fileprint_launcher( <string> )""Summary: Tell launcher to append text to current open file created by fileprint_launcher_start_file(), to be closed and written with fileprint_launcher_end_file() ""Module: Print""CallOn: Level""MandatoryArg: <param1>: ""Example: fileprint_launcher( "main()" );""SPMP: both"///ScriptDocEnd
+  =============
+  */
 
-fileprint_launcher(string) {
-  assert(isDefined(level.fileprintlauncher_linecount));
-  level.fileprintlauncher_linecount++;
+  fileprint_launcher(string) {
+  assert(isDefined(level.fileprintlauncher_linecount)); level.fileprintlauncher_linecount++;
   if(level.fileprintlauncher_linecount > 200) {
     wait .05;
     level.fileprintlauncher_linecount = 0;
@@ -1981,42 +1976,42 @@ fileprint_launcher(string) {
 */
 
 fileprint_launcher_end_file(file_relative_to_game, bIsPerforceEnabled) {
-  if(!isDefined(bIsPerforceEnabled))
-    bIsPerforceEnabled = false;
+if(!isDefined(bIsPerforceEnabled))
+  bIsPerforceEnabled = false;
 
-  setDevDvarIfUninitialized("LAUNCHER_PRINT_FAIL", "0");
-  setDevDvarIfUninitialized("LAUNCHER_PRINT_SUCCESS", "0");
+setDevDvarIfUninitialized("LAUNCHER_PRINT_FAIL", "0");
+setDevDvarIfUninitialized("LAUNCHER_PRINT_SUCCESS", "0");
 
-  if(bIsPerforceEnabled)
-    fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + file_relative_to_game);
-  else
-    fileprint_launcher("GAMEPRINTENDFILE:" + file_relative_to_game);
+if(bIsPerforceEnabled)
+  fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + file_relative_to_game);
+else
+  fileprint_launcher("GAMEPRINTENDFILE:" + file_relative_to_game);
 
   // wait for launcher to tell us that it's done writing the file
   TimeOut = gettime() + 4000; // give launcher 4 seconds to print the file.
-  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
-    wait .05;
+while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getDvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
+  wait .05;
 
-  if(!(gettime() < TimeOut)) {
-    iprintlnbold("LAUNCHER_PRINT_FAIL:( TIMEOUT ): launcherconflict? restart launcher and try again? ");
-    setdevdvar("LAUNCHER_PRINT_FAIL", "0");
-    level.fileprint_launcher = undefined;
-    return false;
-  }
-
-  failvar = getdvar("LAUNCHER_PRINT_FAIL");
-  if(failvar != "0") {
-    iprintlnbold("LAUNCHER_PRINT_FAIL:( " + failvar + " ): launcherconflict? restart launcher and try again? ");
-    setdevdvar("LAUNCHER_PRINT_FAIL", "0");
-    level.fileprint_launcher = undefined;
-    return false;
-  }
-
+if(!(gettime() < TimeOut)) {
+  iprintlnbold("LAUNCHER_PRINT_FAIL:( TIMEOUT ): launcherconflict? restart launcher and try again? ");
   setdevdvar("LAUNCHER_PRINT_FAIL", "0");
-  setdevdvar("LAUNCHER_PRINT_SUCCESS", "0");
+  level. fileprint_launcher = undefined;
+  return false;
+}
 
-  level.fileprint_launcher = undefined;
-  return true;
+failvar = getDvar("LAUNCHER_PRINT_FAIL");
+if(failvar != "0") {
+  iprintlnbold("LAUNCHER_PRINT_FAIL:( " + failvar + " ): launcherconflict? restart launcher and try again? ");
+  setdevdvar("LAUNCHER_PRINT_FAIL", "0");
+  level. fileprint_launcher = undefined;
+  return false;
+}
+
+setdevdvar("LAUNCHER_PRINT_FAIL", "0");
+setdevdvar("LAUNCHER_PRINT_SUCCESS", "0");
+
+level. fileprint_launcher = undefined;
+return true;
 }
 
 /*
@@ -2172,7 +2167,6 @@ brush_throw() {
     } else {
       contact_point = ent.origin;
       throw_vec = vector_multiply(target.origin - ent.origin, self.v["physics"]);
-
     }
 
     // 		model = spawn( "script_model", startorg );
@@ -2768,7 +2762,7 @@ error(msg) {
   PrintLn("^c * ERROR * ", msg);
   waitframe();
 
-  if(GetDvar("debug") != "1")
+  if(getDvar("debug") != "1")
     AssertMsg("This is a forced error - attach the log file. \n" + msg);
 }
 

@@ -827,7 +827,7 @@ function function_82d1ad64(array) {
   }
   wait(6);
   player = array[randomintrange(0, array.size)];
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     player thread zm_audio::create_and_play_dialog("general", "mine_ride");
   }
 }

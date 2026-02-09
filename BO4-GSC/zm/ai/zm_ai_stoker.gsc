@@ -72,7 +72,6 @@ class class_264486ac {
     hittag = "";
     var_934afb38 = 0;
   }
-
 }
 
 autoexec __init__system__() {
@@ -844,7 +843,7 @@ killed_callback(e_attacker) {
 
   self val::set(#"stoker_death", "takedamage", 0);
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 

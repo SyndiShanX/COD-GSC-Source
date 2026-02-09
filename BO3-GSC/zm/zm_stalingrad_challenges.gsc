@@ -1004,7 +1004,7 @@ function function_b2413e04() {
 }
 
 function function_60e1ca5f(e_attacker) {
-  if(isDefined(self) && (self.damageweapon === level.weaponzmcymbalmonkey || self.damageweapon === level.w_cymbal_monkey_upgraded) && isplayer(e_attacker)) {
+  if(isDefined(self) && (self.damageweapon === level.weaponzmcymbalmonkey || self.damageweapon === level.w_cymbal_monkey_upgraded) && isPlayer(e_attacker)) {
     level.var_b766c4a8++;
     if(isDefined(level.var_f9c3fe97) && level.var_f9c3fe97) {
       level.var_b766c4a8 = 50;

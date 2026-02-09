@@ -1487,7 +1487,7 @@ noself_delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 issp() {
   if(!isDefined(level.issp)) {
-    level.issp = !string_starts_with(getdvar("mapname"), "mp_");
+    level.issp = !string_starts_with(getDvar("mapname"), "mp_");
   }
 
   return level.issp;
@@ -1495,7 +1495,7 @@ issp() {
 
 issp_towerdefense() {
   if(!isDefined(level.issp_towerdefense)) {
-    level.issp_towerdefense = string_starts_with(getdvar("mapname"), "so_td_");
+    level.issp_towerdefense = string_starts_with(getDvar("mapname"), "so_td_");
   }
 
   return level.issp_towerdefense;
@@ -2126,7 +2126,7 @@ fileprint_launcher_end_file( var_0, var_1 )
 
   var_2 = gettime() + 4000;
 
-  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_2) {
+  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getDvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_2) {
     wait 0.05;
   }
 
@@ -2136,7 +2136,7 @@ fileprint_launcher_end_file( var_0, var_1 )
     return 0;
   }
 
-  var_3 = getdvar("LAUNCHER_PRINT_FAIL");
+  var_3 = getDvar("LAUNCHER_PRINT_FAIL");
 
   if(var_3 != "0") {
     iprintlnbold("LAUNCHER_PRINT_FAIL:( " + var_3 + " ): launcherconflict? restart launcher and try again? ");
@@ -2760,7 +2760,7 @@ set_basic_animated_model(var_0, var_1, var_2) {
     level.anim_prop_models = [];
   }
 
-  var_3 = tolower(getdvar("mapname"));
+  var_3 = tolower(getDvar("mapname"));
   var_4 = 1;
 
   if(string_starts_with(var_3, "mp_")) {
@@ -2922,12 +2922,12 @@ convertfogtech(var_0) {
 
 set_fog_to_ent_values_dfog(var_0, var_1) {
   if(isDefined(var_0.sunfogenabled) && var_0.sunfogenabled) {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       setexpfogext(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.sunred, var_0.sungreen, var_0.sunblue, var_0.hdrsuncolorintensity, var_0.sundir, var_0.sunbeginfadeangle, var_0.sunendfadeangle, var_0.normalfogscale, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle, var_0.heightfogenabled, var_0.heightfogbaseheight, var_0.heightfoghalfplanedistance);
     } else {
       self playersetexpfogext(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.sunred, var_0.sungreen, var_0.sunblue, var_0.hdrsuncolorintensity, var_0.sundir, var_0.sunbeginfadeangle, var_0.sunendfadeangle, var_0.normalfogscale, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle, var_0.heightfogenabled, var_0.heightfogbaseheight, var_0.heightfoghalfplanedistance);
     }
-  } else if(!isplayer(self)) {
+  } else if(!isPlayer(self)) {
     setexpfogext(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle, var_0.heightfogenabled, var_0.heightfogbaseheight, var_0.heightfoghalfplanedistance);
   } else {
     self playersetexpfogext(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle, var_0.heightfogenabled, var_0.heightfogbaseheight, var_0.heightfoghalfplanedistance);
@@ -2956,7 +2956,7 @@ set_fog_to_ent_values(var_0, var_1) {
 
   if(isDefined(var_0.atmosfogenabled)) {
     if(level.nextgen && var_0.atmosfogenabled) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self playersetatmosfog(var_1, var_0.atmosfogsunfogcolor, var_0.atmosfoghazecolor, var_0.atmosfoghazestrength, var_0.atmosfoghazespread, var_0.atmosfogextinctionstrength, var_0.atmosfoginscatterstrength, var_0.atmosfoghalfplanedistance, var_0.atmosfogstartdistance, var_0.atmosfogdistancescale, int(var_0.atmosfogskydistance), var_0.atmosfogskyangularfalloffenabled, var_0.atmosfogskyfalloffstartangle, var_0.atmosfogskyfalloffanglerange, var_0.atmosfogsundirection, var_0.atmosfogheightfogenabled, var_0.atmosfogheightfogbaseheight, var_0.atmosfogheightfoghalfplanedistance);
       } else {
         setatmosfog(var_1, var_0.atmosfogsunfogcolor, var_0.atmosfoghazecolor, var_0.atmosfoghazestrength, var_0.atmosfoghazespread, var_0.atmosfogextinctionstrength, var_0.atmosfoginscatterstrength, var_0.atmosfoghalfplanedistance, var_0.atmosfogstartdistance, var_0.atmosfogdistancescale, int(var_0.atmosfogskydistance), var_0.atmosfogskyangularfalloffenabled, var_0.atmosfogskyfalloffstartangle, var_0.atmosfogskyfalloffanglerange, var_0.atmosfogsundirection, var_0.atmosfogheightfogenabled, var_0.atmosfogheightfogbaseheight, var_0.atmosfogheightfoghalfplanedistance);

@@ -397,7 +397,7 @@ function warlordshouldnormalmelee(behaviortreeentity) {
   if(behaviortreeentity.enemy ai::has_behavior_attribute("can_be_meleed") && !behaviortreeentity.enemy ai::get_behavior_attribute("can_be_meleed")) {
     return false;
   }
-  if(!isplayer(behaviortreeentity.enemy) && (!(isDefined(behaviortreeentity.enemy.magic_bullet_shield) && behaviortreeentity.enemy.magic_bullet_shield))) {
+  if(!isPlayer(behaviortreeentity.enemy) && (!(isDefined(behaviortreeentity.enemy.magic_bullet_shield) && behaviortreeentity.enemy.magic_bullet_shield))) {
     return false;
   }
   if(aiutility::hascloseenemytomeleewithrange(behaviortreeentity, 100 * 100)) {
@@ -760,7 +760,7 @@ function warlordcantacticaljuke(entity) {
 }
 
 function isenemytoolowtoattack(enemy) {
-  if(isplayer(enemy)) {
+  if(isPlayer(enemy)) {
     if(isDefined(enemy.laststand) && enemy.laststand) {
       return true;
     }
@@ -796,7 +796,7 @@ function computeattackerthreat(entity, attackerinfo) {
     return 0;
   }
   threat = 1;
-  isattackerplayer = isplayer(attackerinfo.attacker);
+  isattackerplayer = isPlayer(attackerinfo.attacker);
   if(isattackerplayer) {
     threat = threat * 10;
   }
@@ -950,7 +950,7 @@ function warlorddangerousenemyattack(entity, attacker, threat) {
 
 function warlorddamageoverride(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, timeoffset, boneindex, modelindex, surfacetype, surfacenormal) {
   entity = self;
-  if(!isplayer(eattacker)) {
+  if(!isPlayer(eattacker)) {
     idamage = int(idamage * 0.05);
   }
   if(isDefined(smeansofdeath) && (smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_EXPLOSIVE" || smeansofdeath == "MOD_GRENADE")) {

@@ -44,7 +44,6 @@ class class_7b5e0861 {
     if(isDefined(level.trapddebug) && level.trapddebug) {
       iprintlnbold("<dev string:x350>" + m_name);
     }
-
   }
 
   function function_8df621c(bundle, var_a8539bf6) {
@@ -71,7 +70,6 @@ class class_7b5e0861 {
     var_31e7e66a = bundle.var_d6011052;
     var_3efa7c17 = var_a8539bf6;
   }
-
 }
 
 autoexec __init__system__() {
@@ -162,18 +160,15 @@ function_5726a711() {
           level function_8f66239f(var_5e63b00d.script_flag_clean);
 
           var_5e63b00d function_ef942626();
-
         }
       } else {
         printerror("<dev string:x38>" + var_5e63b00d.scriptbundlename);
-
       }
 
       continue;
     }
 
     printerror("<dev string:x71>");
-
   }
 }
 
@@ -405,7 +400,7 @@ function_8ecf6615(var_3af54106) {
   teamowner = waitresult.owner;
   team = waitresult.team;
 
-  if(!isDefined(teamowner) || !isplayer(teamowner)) {
+  if(!isDefined(teamowner) || !isPlayer(teamowner)) {
     if(!isDefined(team)) {
       team = util::get_team_mapping(var_5e63b00d.var_a8539bf6.team);
     }
@@ -745,7 +740,7 @@ watcher_init(var_3af54106) {
     var_c98531e5 = owner weaponobjects::getweaponobjectwatcher(var_c29551e1);
   }
 
-  if(!isplayer(owner)) {
+  if(!isPlayer(owner)) {
     owner thread weaponobjects::watchweaponobjectspawn("grenade_fire", "death");
   }
 
@@ -756,7 +751,7 @@ function_3c3f30e3(placeable) {
   player = self;
   var_3af54106 = placeable.var_3af54106;
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     var_c98531e5 = player watcher_init(var_3af54106);
     placeable.weapon_instance = player magicgrenadeplayer(var_3af54106.m_weapon, placeable.origin, (0, 0, -1));
 
@@ -781,7 +776,7 @@ function_4a401677(var_3af54106, owner, team) {
     weapon_instance = undefined;
     var_c98531e5 = owner watcher_init(var_3af54106);
 
-    if(isplayer(owner)) {
+    if(isPlayer(owner)) {
       weapon_instance = owner magicgrenadeplayer(var_3af54106.m_weapon, var_a8539bf6.origin, (0, 0, -1));
     } else {
       weapon_instance = owner magicgrenadetype(var_3af54106.m_weapon, var_a8539bf6.origin, (0, 0, -1));
@@ -805,7 +800,6 @@ function_4a401677(var_3af54106, owner, team) {
     }
   } else {
     printerror("<dev string:x2f8>" + var_3af54106.m_name + "<dev string:x1d3>");
-
   }
 
   return var_3af54106;
@@ -856,7 +850,7 @@ turret_activate(var_3af54106, owner, team, vehicle, origin, angles, parent) {
       vehicle.owner = owner;
       vehicle.ownerentnum = owner.entnum;
 
-      if(isplayer(owner)) {
+      if(isPlayer(owner)) {
         vehicle setowner(owner);
       }
     }
@@ -967,7 +961,7 @@ vehicle_activate(var_3af54106, owner, team, vehicle, origin, angles, parent) {
       vehicle.owner = owner;
       vehicle.ownerentnum = owner.entnum;
 
-      if(isplayer(owner)) {
+      if(isPlayer(owner)) {
         vehicle setowner(owner);
       }
     }
@@ -1198,7 +1192,7 @@ debug_init() {
           break;
       }
 
-      setdvar(#"scr_trapd_int", 0);
+      setDvar(#"scr_trapd_int", 0);
     }
 
     wait 1;

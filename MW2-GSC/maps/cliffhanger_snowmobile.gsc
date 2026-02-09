@@ -23,8 +23,8 @@
 
 start_tarmac() {
   level.moto_drive = false;
-  if(getdvar("moto_drive") == "")
-    setdvar("moto_drive", "0");
+  if(getDvar("moto_drive") == "")
+    setDvar("moto_drive", "0");
   /*
   bike_animations();
   bike_driver_animations();
@@ -587,7 +587,7 @@ penalize_player_for_running_over_price(damage, attacker, direction_vec, point, t
   if(attacker != level.player.vehicle) {
     return;
   }
-  setdvar("ui_deadquote", &"CLIFFHANGER_RUN_OVER");
+  setDvar("ui_deadquote", &"CLIFFHANGER_RUN_OVER");
   missionfailedwrapper();
 }
 
@@ -714,8 +714,8 @@ price_gets_on_snowmobile(npc_snowmobile) {
 
 start_icepick() {
   level.moto_drive = false;
-  if(getdvar("moto_drive") == "")
-    setdvar("moto_drive", "0");
+  if(getDvar("moto_drive") == "")
+    setDvar("moto_drive", "0");
   /*
   bike_animations();
   bike_driver_animations();
@@ -761,8 +761,8 @@ start_icepick() {
 
 start_snowmobile(e3) {
   level.moto_drive = false;
-  if(getdvar("moto_drive") == "")
-    setdvar("moto_drive", "0");
+  if(getDvar("moto_drive") == "")
+    setDvar("moto_drive", "0");
   /*
   bike_animations();
   bike_driver_animations();
@@ -844,7 +844,6 @@ start_snowmobile(e3) {
     playermobile_spawner.angles = player_snowspawn_start.angles;
 
     level.player_snowmobile = playermobile_spawner spawn_vehicle();
-
   }
   if(level.start_point == "lake") {
     playermobile_spawner = getent("playermobile_spawner", "targetname");
@@ -1096,8 +1095,8 @@ start_avalanche() {
   */
   init_vehicle_splines();
   level.moto_drive = false;
-  if(getdvar("moto_drive") == "")
-    setdvar("moto_drive", "0");
+  if(getDvar("moto_drive") == "")
+    setDvar("moto_drive", "0");
 
   start_common_cliffhanger();
   friendly_init_cliffhanger();
@@ -1388,6 +1387,6 @@ distance_test(ent) {
 hide_snowmobile_for_antfarm() {
   flag_wait("player_rides_snowmobile");
 
-  if(getdvar("scr_hide_snowmobile") == "1")
+  if(getDvar("scr_hide_snowmobile") == "1")
     level.player_snowmobile hide();
 }

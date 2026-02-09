@@ -95,7 +95,7 @@ function setupdevgui() {
     level.doa.dev_level_skipped = world.var_e5cf1b41 * 4;
     doa_utility::debugmsg((("" + world.var_e5cf1b41) + "") + level.doa.dev_level_skipped);
     flag::clear("");
-    setdvar("", "");
+    setDvar("", "");
     wait(1);
     doa_utility::killallenemy();
     world.var_e5cf1b41 = undefined;
@@ -107,8 +107,8 @@ function setupdevgui() {
     doa_utility::debugmsg("");
   }
   if(getdvarint("scr_doa_kingme_soak_think", 0)) {
-    setdvar("scr_doa_kingme_soak_think", 0);
-    setdvar("scr_doa_soak_think", 1);
+    setDvar("scr_doa_kingme_soak_think", 0);
+    setDvar("scr_doa_soak_think", 1);
     level thread function_35d58a26();
   }
   if(getdvarint("scr_doa_soak_think", 0) && (!(isDefined(level.var_1575b6db) && level.var_1575b6db))) {
@@ -303,14 +303,14 @@ function function_f24eee41() {
 }
 
 function devguithink() {
-  setdvar("zombie_devgui", "");
-  setdvar("scr_spawn_pickup", "");
-  setdvar("scr_spawn_room_name", "");
-  setdvar("scr_spawn_room", "");
+  setDvar("zombie_devgui", "");
+  setDvar("scr_spawn_pickup", "");
+  setDvar("scr_spawn_room_name", "");
+  setDvar("scr_spawn_room", "");
   while(true) {
     if(getdvarint("scr_doa_kingme_soak_think", 0)) {
-      setdvar("scr_doa_kingme_soak_think", 0);
-      setdvar("scr_doa_soak_think", 1);
+      setDvar("scr_doa_kingme_soak_think", 0);
+      setDvar("scr_doa_soak_think", 1);
       doa_utility::debugmsg("Hail to the King baby!");
       foreach(player in namespace_831a4a7c::function_5eb6e4d1()) {
         player thread function_92c840a6();
@@ -347,36 +347,36 @@ function devguithink() {
       }
       case "uploadstat": {
         if(getdvarint("scr_doa_min_level_stat_upload", 45) == 45) {
-          setdvar("scr_doa_min_level_stat_upload", 1);
+          setDvar("scr_doa_min_level_stat_upload", 1);
           doa_utility::debugmsg("UploadStats Min Level set to 1");
         } else {
-          setdvar("scr_doa_min_level_stat_upload", 45);
+          setDvar("scr_doa_min_level_stat_upload", 45);
           doa_utility::debugmsg("UploadStats Min Level set to " + 45);
         }
         break;
       }
       case "infinite": {
-        setdvar("scr_doa_infinite_round", !getdvarint("scr_doa_infinite_round", 0));
+        setDvar("scr_doa_infinite_round", !getdvarint("scr_doa_infinite_round", 0));
         break;
       }
       case "poleme": {
-        setdvar("scr_doa_max_poles", !getdvarint("scr_doa_max_poles", 0));
+        setDvar("scr_doa_max_poles", !getdvarint("scr_doa_max_poles", 0));
         break;
       }
       case "hazardShow": {
-        setdvar("scr_doa_show_hazards", !getdvarint("scr_doa_show_hazards", 0));
+        setDvar("scr_doa_show_hazards", !getdvarint("scr_doa_show_hazards", 0));
         break;
       }
       case "bossonly": {
-        setdvar("scr_doa_onlyboss_during_challenge", !getdvarint("scr_doa_onlyboss_during_challenge", 0));
+        setDvar("scr_doa_onlyboss_during_challenge", !getdvarint("scr_doa_onlyboss_during_challenge", 0));
         break;
       }
       case "doasoak": {
-        setdvar("scr_doa_soak_think", (getdvarint("scr_doa_soak_think", 0) > 0 ? 0 : 1));
+        setDvar("scr_doa_soak_think", (getdvarint("scr_doa_soak_think", 0) > 0 ? 0 : 1));
         break;
       }
       case "doafastsoak": {
-        setdvar("scr_doa_soak_think", 2);
+        setDvar("scr_doa_soak_think", 2);
         break;
       }
       case "fixedCamDebug": {
@@ -455,8 +455,8 @@ function devguithink() {
         }
         flag::clear("doa_round_active");
         doa_utility::function_1ced251e();
-        setdvar("scr_spawn_room_name", "");
-        setdvar("scr_spawn_room", "");
+        setDvar("scr_spawn_room_name", "");
+        setDvar("scr_spawn_room", "");
         break;
       }
       case "UnderBossRound": {
@@ -503,7 +503,7 @@ function devguithink() {
       case "arena": {
         world.var_e5cf1b41 = namespace_3ca3c537::function_5835533a(getdvarstring("scr_spawn_room_name"));
         doa_utility::debugmsg((("Advance To Arena =" + getdvarstring("scr_spawn_room_name")) + " idx=") + world.var_e5cf1b41);
-        setdvar("scr_spawn_room_name", "");
+        setDvar("scr_spawn_room_name", "");
         adddebugcommand("map_restart");
         break;
       }
@@ -531,22 +531,20 @@ function devguithink() {
         level.doa.zombie_move_speed = level.doa.rules.var_e626be31 + (round_number * level.doa.var_c9e1c854);
         level.doa.zombie_health = level.doa.rules.var_6fa02512 + (round_number * level.doa.zombie_health_inc);
         doa_utility::debugmsg((("Warp To Arena =" + getdvarstring("scr_spawn_room_name")) + " idx=") + level.doa.var_b5c260bb);
-        setdvar("scr_spawn_room_name", "");
+        setDvar("scr_spawn_room_name", "");
         doa_utility::function_1ced251e();
         break;
       }
       case "aispawn": {
         if(isDefined(level.doa.var_e6fd0e17)) {
-          [
-            [level.doa.var_e6fd0e17]
-          ](getdvarstring("scr_spawn_name"));
+          [[level.doa.var_e6fd0e17]](getdvarstring("scr_spawn_name"));
         }
         break;
       }
       case "round": {
         level.doa.dev_level_skipped = getdvarint("hash_d81b6e19") - 1;
         flag::clear("doa_round_active");
-        setdvar("timescale", "10");
+        setDvar("timescale", "10");
         doa_utility::function_1ced251e();
         break;
       }
@@ -600,7 +598,7 @@ function devguithink() {
         break;
       }
     }
-    setdvar("zombie_devgui", "");
+    setDvar("zombie_devgui", "");
   }
 }
 

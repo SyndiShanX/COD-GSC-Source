@@ -760,7 +760,7 @@ func_FF9D(var_0) {
     return 0;
   }
 
-  if(getdvar("ui_mapname") == "cp_disco") {
+  if(getDvar("ui_mapname") == "cp_disco") {
     return 0;
   }
 

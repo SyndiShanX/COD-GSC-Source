@@ -971,7 +971,6 @@ TryUse_dpad_riotshield_Internal(def, rank) {
     self _giveWeapon("iw5_alienriotshield_mp");
     self SetWeaponAmmoClip("iw5_alienriotshield_mp", 10);
     self SwitchToWeapon("iw5_alienriotshield_mp");
-
   }
   if(rank == 1) {
     self _giveWeapon("iw5_alienriotshield1_mp");
@@ -993,7 +992,6 @@ TryUse_dpad_riotshield_Internal(def, rank) {
     self SetWeaponAmmoClip("iw5_alienriotshield4_mp", 25);
     self.fireShield = 1.0;
     self SwitchToWeapon("iw5_alienriotshield4_mp");
-
   }
 
   wait .5;
@@ -1096,7 +1094,6 @@ TryUse_dpad_sentry(def, rank) {
     sentryGun4[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
-
 }
 sentry_placed_listener(rank) {
   SENTRY_HEALTH_UPGRADE_SCALAR = 1.5;
@@ -1370,7 +1367,6 @@ TryUse_dpad_minigun_turret(def, rank) {
     minigunTurret4[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
-
 }
 minigun_turret_placed_listener(rank) {
   self endon("death");
@@ -1426,7 +1422,6 @@ minigun_turret_watch_ammo(ammo, player) {
   if(isDefined(self.owner) && isAlive(self.owner)) {
     self thread watch_player_disengage(player);
   }
-
 }
 
 turret_update_ammocounter(player) {
@@ -1469,7 +1464,6 @@ watch_players_onoff_turret() {
       user notify("weapon_change", user GetCurrentPrimaryWeapon());
       user hide_turret_icon();
     }
-
   }
 }
 
@@ -1487,7 +1481,6 @@ watch_player_disengage(player) {
     weapon = player GetCurrentWeapon();
     player notify("weapon_change", weapon);
   }
-
 }
 
 clear_turret_ammo_counter_on_death(user) {
@@ -1607,7 +1600,6 @@ ims_fire_cloud(targetpos, owner) {
     level thread maps\mp\alien\_collectibles::fireCloudMonitor(owner, imsFireCloudDuration, targetpos);
     level thread maps\mp\alien\_collectibles::firecloudsfx(imsFireCloudDuration, targetpos);
   }
-
 }
 
 ims_grace_period_scalar(time, owner) {

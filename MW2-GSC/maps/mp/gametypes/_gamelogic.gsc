@@ -1284,9 +1284,9 @@ Callback_StartGameType() {
   setDvar("ui_allow_teamchange", 1);
 
   if(getGametypeNumLives())
-    setdvar("g_deadChat", 0);
+    setDvar("g_deadChat", 0);
   else
-    setdvar("g_deadChat", 1);
+    setDvar("g_deadChat", 1);
 
   waveDelay = getDvarInt("scr_" + level.gameType + "_waverespawndelay");
   if(waveDelay) {

@@ -11,9 +11,7 @@
 #include maps\_vehicle;
 #include maps\_blizzard;
 
-// ---------------------------------------------------------------------------------
-
-flags_init() {
+// --------------------------------------------------------------------------------- flags_init() {
   flag_init("challenge_start");
   flag_init("sabotage_success");
   flag_init("explosives_planted");
@@ -96,8 +94,7 @@ cliffhanger_dialogue() {
   //There is a reason we brought silencers. 	
   level.scr_radio["cliff_pri_silencers"] = "cliff_pri_silencers";
 
-  //SILENCER ADVICE ----
-  //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
+  //SILENCER ADVICE ---- //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
   level.scr_radio["cliff_pri_attractattn"] = "cliff_pri_attractattn";
 
   level.stealth_broken_time = gettime();
@@ -117,9 +114,7 @@ cliffhanger_dialogue() {
   radio_dialogue("cliff_pri_keepeyeonheart");
 }
 
-// ---------------------------------------------------------------------------------
-
-camp_leaner() {
+// --------------------------------------------------------------------------------- camp_leaner() {
   node = getstruct(self.target, "targetname");
   node stealth_ai_idle_and_react(self, "lean_balcony", "lean_react");
 }
@@ -200,9 +195,7 @@ reduce_footstep_detect_dist() {
   self.footstepDetectDistSprint = 90;
 }
 
-// ---------------------------------------------------------------------------------
-
-stealth_settings() {
+// --------------------------------------------------------------------------------- stealth_settings() {
   stealth_set_default_stealth_function("cliffhanger", ::stealth_cliffhanger_clifftop);
 
   ai_event = [];
@@ -279,7 +272,7 @@ stealth_settings() {
 stealth_cliffhanger_clifftop() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
@@ -413,9 +406,7 @@ dialog_unsilenced_weapons() {
   level notify("nonsilenced_weapon_pickup");
 }
 
-// ---------------------------------------------------------------------------------
-
-so_stealth_music_control() {
+// --------------------------------------------------------------------------------- so_stealth_music_control() {
   level endon("special_op_terminated");
   level endon("stop_stealth_music");
   while(1) {
@@ -459,9 +450,7 @@ stealth_music_busted_loop() {
   	}*/
 }
 
-// ---------------------------------------------------------------------------------
-
-start_truck_patrol() {
+// --------------------------------------------------------------------------------- start_truck_patrol() {
   array_thread(getEntArray("truck_guys", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_stealth::base_truck_guys_think);
 
   flag_wait("start_truck_patrol");
@@ -605,9 +594,7 @@ dialog_jeep_stopped() {
   radio_dialogue("cliff_pri_lookingaround");
 }
 
-// ---------------------------------------------------------------------------------
-
-setup_explosives() {
+// --------------------------------------------------------------------------------- setup_explosives() {
   level.plant_targets = [];
 
   plant_targets = getEntArray("explosive_obj_model", "script_noteworthy");
@@ -711,9 +698,7 @@ explosives_planted_monitor() {
   trigger_on("player_outside_compound", "script_noteworthy");
 }
 
-// ---------------------------------------------------------------------------------
-
-wind_blown_flag_think() {
+// --------------------------------------------------------------------------------- wind_blown_flag_think() {
   animname = "flag_square";
   if(isDefined(self.script_noteworthy))
     animname = self.script_noteworthy;
@@ -739,9 +724,7 @@ flag_waves() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-force_players_prone() {
+// --------------------------------------------------------------------------------- force_players_prone() {
   if(!is_coop()) {
     return;
   }
@@ -767,9 +750,7 @@ threeD_objective_hint() {
   self.planted_model ent_flag_wait(self.plant_flag);
 }
 
-// ---------------------------------------------------------------------------------
-
-type_spawners_special() {
+// --------------------------------------------------------------------------------- type_spawners_special() {
   special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "high_threat_spawner");
   test = 0;
   if(!special_case)

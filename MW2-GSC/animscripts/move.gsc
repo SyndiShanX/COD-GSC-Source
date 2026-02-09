@@ -457,7 +457,7 @@ pathChange_canDoTurnAnim(turnAnim) {
 
   endPoint = codeMovePoint + vectornormalize(endPoint - codeMovePoint) * 20;
 
-  /# animscripts\utility::drawDebugLine( codeMovePoint, endPoint, ( 1, 1, 0 ), 20 );
+  animscripts\utility::drawDebugLine(codeMovePoint, endPoint, (1, 1, 0), 20);
 
   return self mayMoveFromPointToPoint(codeMovePoint, endPoint, true, true);
 }
@@ -549,15 +549,13 @@ tryDodgeWithAnim(dodgeAnim, dodgeAnimDelta) {
     self.moveLoopOverrideFunc = ::dodgeMoveLoopOverride;
     self notify("move_loop_restart");
 
-
-    if(getdvar("scr_debugdodge") == "1")
+    if(getDvar("scr_debugdodge") == "1")
       thread debugline(self.origin, dodgePos, (0, 1, 0), 3);
 
     return true;
   }
 
-
-  if(getdvar("scr_debugdodge") == "1")
+  if(getDvar("scr_debugdodge") == "1")
     thread debugline(self.origin, dodgePos, (0.5, 0.5, 0), 3);
 
   self pushPlayer(false);
@@ -583,7 +581,7 @@ animDodgeObstacle() {
       continue;
     }
 
-    if(getdvar("scr_debugdodge") == "1") {
+    if(getDvar("scr_debugdodge") == "1") {
       thread debugline(dodgeEnt.origin + (0, 0, 10), dodgeEntPos, (1, 1, 0), 3);
       thread debugline(self.origin, dodgeEntPos, (1, 0, 0), 3);
     }

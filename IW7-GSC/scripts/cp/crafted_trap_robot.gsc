@@ -419,7 +419,7 @@ robot_trap_attackzombies() {
     }
 
     self.var_2536 waittill("trigger", var_0);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       continue;
     }
 

@@ -519,7 +519,7 @@ function function_2dbc7cd3() {
 }
 
 function function_fe94c179(e_attacker) {
-  if(isplayer(e_attacker) && (isDefined(self.var_61f7b3a0) && self.var_61f7b3a0) && (!(isDefined(self.thrasherhasturnedberserk) && self.thrasherhasturnedberserk))) {
+  if(isPlayer(e_attacker) && (isDefined(self.var_61f7b3a0) && self.var_61f7b3a0) && (!(isDefined(self.thrasherhasturnedberserk) && self.thrasherhasturnedberserk))) {
     e_attacker notify("update_challenge_2_1");
   }
 }
@@ -533,7 +533,7 @@ function function_25c1bab7() {
 }
 
 function function_5a2a9ef9(e_attacker) {
-  if(isplayer(e_attacker) && self.archetype === "zombie" && isDefined(self.attackable)) {
+  if(isPlayer(e_attacker) && self.archetype === "zombie" && isDefined(self.attackable)) {
     if(self.attackable.scriptbundlename == "zm_island_trap_plant_attackable" || self.attackable.scriptbundlename == "zm_island_trap_plant_upgraded_attackable") {
       e_attacker notify("update_challenge_2_3");
     }
@@ -541,7 +541,7 @@ function function_5a2a9ef9(e_attacker) {
 }
 
 function function_682e6fc4(e_attacker) {
-  if(isplayer(e_attacker) && self.archetype === "zombie" && (isDefined(self.var_34d00e7) && self.var_34d00e7)) {
+  if(isPlayer(e_attacker) && self.archetype === "zombie" && (isDefined(self.var_34d00e7) && self.var_34d00e7)) {
     e_attacker notify("update_challenge_3_2");
   }
 }
@@ -555,7 +555,7 @@ function function_5a96677a() {
 }
 
 function function_905d9544(e_attacker) {
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(!e_attacker flag::get("flag_player_completed_challenge_2") && self.archetype === "zombie" && (isDefined(self.var_d07c64b6) && self.var_d07c64b6)) {
       if(isDefined(self.damagelocation) && self.damagelocation == "head" || self.damagelocation == "helmet") {
         e_attacker notify("update_challenge_2_4");

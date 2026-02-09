@@ -35,7 +35,6 @@ main(model, type, no_death) {
     build_deathfx(blackhawk_death_fx[model], undefined, "blackhawk_helicopter_crash", undefined, undefined, undefined, -1, undefined, "stop_crash_loop_sound");
 
     build_rocket_deathfx("explosions/aerial_explosion_heli_large", "tag_deathfx", "blackhawk_helicopter_crash", undefined, undefined, undefined, undefined, true, undefined, 0);
-
   }
 
   build_treadfx();

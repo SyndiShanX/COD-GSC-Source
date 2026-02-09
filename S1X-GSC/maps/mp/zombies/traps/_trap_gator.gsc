@@ -70,7 +70,7 @@ trap_gator_trigger_watch(var_0, var_1) {
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       continue;
     } else if(isDefined(var_2.inspawnanim) && var_2.inspawnanim == 1) {
       continue;
@@ -246,7 +246,7 @@ trap_gator_radius_damage(var_0) {
   var_1 = sortbydistance(var_1, var_0, 128);
 
   foreach(var_3 in var_1) {
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       if(!maps\mp\zombies\_util::isplayerinlaststand(var_3)) {
         var_3 thread trap_gator_push_players(var_0);
       }

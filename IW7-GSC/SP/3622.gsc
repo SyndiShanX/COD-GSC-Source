@@ -571,7 +571,7 @@ func_E084() {
   self notify("stop soundseeker_move_lp");
   self notify("stop soundseeker_move_servo_lp");
   level.var_F10A.var_1633 = scripts\engine\utility::array_remove(level.var_F10A.var_1633, self);
-  if(isplayer(self.owner)) {
+  if(isPlayer(self.owner)) {
     var_0 = level.player func_7B02();
     if(!var_0.size) {
       level.var_F10A.var_5AE6 = undefined;
@@ -824,7 +824,7 @@ func_F129(var_0) {
   }
 
   foreach(var_4 in var_2) {
-    if(isplayer(var_4) && scripts\sp\detonategrenades::func_385D(var_0)) {
+    if(isPlayer(var_4) && scripts\sp\detonategrenades::func_385D(var_0)) {
       func_57BB(var_0, var_4);
     }
 
@@ -901,7 +901,7 @@ func_F155(var_0) {
 
 func_F14D(var_0) {
   if(var_0) {
-    if(isDefined(self.owner) && !isplayer(self.owner)) {
+    if(isDefined(self.owner) && !isPlayer(self.owner)) {
       return;
     }
 
@@ -1136,7 +1136,7 @@ func_7C41(var_0) {
       }
     }
 
-    if(isplayer(var_11)) {
+    if(isPlayer(var_11)) {
       var_12 = var_12 * 0.99;
     }
 

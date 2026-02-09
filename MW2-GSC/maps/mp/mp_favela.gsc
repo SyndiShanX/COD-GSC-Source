@@ -30,9 +30,9 @@ main() {
       break;
   }
 
-  setdvar("r_specularcolorscale", "2.8");
-  setdvar("compassmaxrange", "1500");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.25);
-  setdvar("r_lightGridContrast", .45);
+  setDvar("r_specularcolorscale", "2.8");
+  setDvar("compassmaxrange", "1500");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.25);
+  setDvar("r_lightGridContrast", .45);
 }

@@ -19,7 +19,6 @@ main() {
       break;
   }
 }
-
 precache() {
   character\c_ger_richtofen_zt::precache();
   character\c_jap_takeo_zt::precache();

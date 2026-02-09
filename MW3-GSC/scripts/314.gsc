@@ -60,7 +60,6 @@ pipe_wait_loop() {
 
     if(var_7) {
       var_2--;
-
     }
     if(var_2 <= 0) {
       break;
@@ -73,21 +72,17 @@ pipe_wait_loop() {
 pipe_logic(var_0, var_1, var_2, var_3) {
   if(level._pipes.num_pipe_fx > 8) {
     return 0;
-
   }
   if(!isDefined(level._pipes._pipe_methods[var_2])) {
     var_1 = pipe_calc_nofx(var_1, var_2);
   } else {
     var_1 = self[[level._pipes._pipe_methods[var_2]]](var_1, var_2);
-
   }
   if(!isDefined(var_1)) {
     return 0;
-
   }
   if(isDefined(var_3.classname) && var_3.classname == "worldspawn") {
     return 0;
-
   }
   foreach(var_5 in self.pipe_fx_array) {
     if(distancesquared(var_1, var_5.origin) < 25) {
@@ -115,7 +110,6 @@ pipefx(var_0, var_1, var_2) {
 
   if(common_scripts\utility::issp() || self.script_noteworthy != "steam") {
     thread pipe_damage(var_0, var_1, var_2, var_8);
-
   }
   playFX(level._pipes._effect[self.script_noteworthy], var_0, var_1);
   wait(var_3);
@@ -146,7 +140,6 @@ pipe_damage(var_0, var_1, var_2, var_3) {
       self radiusdamage(var_4, 36, var_5, var_5 * 0.75, undefined, "MOD_TRIGGER_HURT");
     } else {
       self radiusdamage(var_4, 36, var_5, var_5 * 0.75, var_2, "MOD_TRIGGER_HURT");
-
     }
     wait 0.4;
   }
@@ -155,11 +148,9 @@ pipe_damage(var_0, var_1, var_2, var_3) {
 allow_pipe_damage() {
   if(!common_scripts\utility::issp()) {
     return 0;
-
   }
   if(!isDefined(level.pipesdamage)) {
     return 1;
-
   }
   return level.pipesdamage;
 }
@@ -199,7 +190,6 @@ precachefx() {
   foreach(var_3 in self) {
     if(var_3.script_noteworthy == "water") {
       var_3.script_noteworthy = "steam";
-
     }
     if(var_3.script_noteworthy == "steam") {
       var_3 willneverchange();

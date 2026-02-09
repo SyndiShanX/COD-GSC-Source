@@ -9,8 +9,8 @@ main() {
   build_aianims(::setanims);
   build_unload_groups(::unload_groups);
 }
-
 #using_animtree("generic_human");
+
 setanims() {}
 unload_groups() {
   unload_groups = [];

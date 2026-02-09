@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -147,7 +147,7 @@ onstartgametype() {
   initspawns();
 
   if(intiebreaker()) {
-    setdvar("bg_compassShowEnemies", 1);
+    setDvar("bg_compassShowEnemies", 1);
     var_0[0] = "war";
     maps\mp\gametypes\_gameobjects::main(var_0);
     return;
@@ -446,7 +446,7 @@ bombplanted(var_0, var_1) {
   }
   var_5 = level.sabbomb.visuals[0].origin;
   level.bombexploded = 1;
-  setdvar("ui_danger_team", "BombExploded");
+  setDvar("ui_danger_team", "BombExploded");
   setomnvar("ui_mlg_game_mode_status_1", 0);
   var_0 maps\mp\gametypes\common_bomb_gameobject::onbombexploded(var_5, 200, var_1);
   level.sabbomb maps\mp\gametypes\_gameobjects::setvisibleteam("none");
@@ -515,7 +515,7 @@ suddendeaththread() {
     level.players[var_0] thread setplayersuddendeathvalues();
   }
 
-  setdvar("bg_compassShowEnemies", 1);
+  setDvar("bg_compassShowEnemies", 1);
   maps\mp\_utility::setoverridewatchdvar("numlives", 1);
   level.sabsuddendeathtime = 90;
   var_1 = 0;

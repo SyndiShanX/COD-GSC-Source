@@ -195,7 +195,6 @@ t_rex_animate_fx(localclientnum, t_rex_head, t_rex_stand) {
 
     mintime = getdvarfloatdefault("mp_studio_trex_min_wait", mintime);
     maxtime = getdvarfloatdefault("mp_studio_trex_max_wait", maxtime);
-
   }
 }
 
@@ -218,6 +217,5 @@ brontosaurus_animate_fx(localclientnum) {
 
     mintime = getdvarfloatdefault("mp_studio_trex_min_wait", mintime);
     maxtime = getdvarfloatdefault("mp_studio_trex_max_wait", maxtime);
-
   }
 }

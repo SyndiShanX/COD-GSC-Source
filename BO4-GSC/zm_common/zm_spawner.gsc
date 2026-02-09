@@ -267,7 +267,7 @@ zombie_damage_failsafe() {
   while(true) {
     wait 0.5;
 
-    if(!isalive(self.enemy) || !isplayer(self.enemy) || !self istouching(self.enemy)) {
+    if(!isalive(self.enemy) || !isPlayer(self.enemy) || !self istouching(self.enemy)) {
       continue;
     }
 
@@ -277,7 +277,7 @@ zombie_damage_failsafe() {
     var_65a69eba = undefined;
     var_f3a1b629 = 0;
 
-    while(isalive(self.enemy) && isplayer(self.enemy) && e_enemy == self.enemy && self istouching(self.enemy) && !self.enemy laststand::player_is_in_laststand()) {
+    while(isalive(self.enemy) && isPlayer(self.enemy) && e_enemy == self.enemy && self istouching(self.enemy) && !self.enemy laststand::player_is_in_laststand()) {
       if(distancesquared(v_starting_origin, self.enemy.origin) > 60 * 60) {
         break;
       }
@@ -488,7 +488,7 @@ do_a_taunt() {
   self.old_origin = self.origin;
 
   if(getdvarstring(#"zombie_taunt_freq") == "") {
-    setdvar(#"zombie_taunt_freq", 5);
+    setDvar(#"zombie_taunt_freq", 5);
   }
 
   freq = getdvarint(#"zombie_taunt_freq", 0);
@@ -533,7 +533,7 @@ should_attack_player_thru_boards() {
   }
 
   if(getdvarstring(#"zombie_reachin_freq") == "") {
-    setdvar(#"zombie_reachin_freq", 50);
+    setDvar(#"zombie_reachin_freq", 50);
   }
 
   freq = getdvarint(#"zombie_reachin_freq", 0);
@@ -912,7 +912,7 @@ player_can_score_from_zombies() {
 }
 
 zombie_death_points(origin, mod, hit_location, attacker, inflictor, zombie, team, weapon) {
-  if(!isDefined(attacker) || !isplayer(attacker) && !isplayer(attacker.owner)) {
+  if(!isDefined(attacker) || !isPlayer(attacker) && !isPlayer(attacker.owner)) {
     return;
   }
 
@@ -1131,7 +1131,7 @@ damage_on_fire(player, weapon) {
 }
 
 player_using_hi_score_weapon(player) {
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     weapon = player getcurrentweapon();
     return (weapon == level.weaponnone || weapon.issemiauto);
   }
@@ -1218,7 +1218,7 @@ zombie_death_event(zombie) {
     zombie.damagehit_origin = attacker getweaponmuzzlepoint();
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && attacker player_can_score_from_zombies()) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker player_can_score_from_zombies()) {
     if(isDefined(zombie.script_parameters)) {
       attacker notify(#"zombie_death_params", {
         #params: zombie.script_parameters, #var_3ef38c68: isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area
@@ -1285,7 +1285,7 @@ zombie_death_event(zombie) {
     return;
   }
 
-  if(isplayer(attacker) && isDefined(attacker.n_health_on_kill)) {
+  if(isPlayer(attacker) && isDefined(attacker.n_health_on_kill)) {
     attacker.health += attacker.n_health_on_kill;
 
     if(attacker.health >= attacker.maxhealth) {
@@ -1351,7 +1351,7 @@ zombie_death_event(zombie) {
     }
 
     if(zombie.damagemod === "MOD_GRENADE" || zombie.damagemod === "MOD_GRENADE_SPLASH") {
-      if(isDefined(attacker) && isalive(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker)) {
         attacker.grenade_multikill_count++;
       }
     }
@@ -1360,7 +1360,7 @@ zombie_death_event(zombie) {
   if(!(isDefined(zombie.has_been_damaged_by_player) && zombie.has_been_damaged_by_player) && isDefined(zombie.marked_for_recycle) && zombie.marked_for_recycle) {
     level.zombie_total++;
     level.zombie_total_subtract++;
-  } else if(isDefined(zombie.attacker) && isplayer(zombie.attacker)) {
+  } else if(isDefined(zombie.attacker) && isPlayer(zombie.attacker)) {
     level.zombie_player_killed_count++;
 
     if(isDefined(zombie.sound_damage_player) && zombie.sound_damage_player == zombie.attacker) {
@@ -1444,7 +1444,7 @@ function_dce9f1a6(spots) {
       continue;
     }
 
-    if(isDefined(zombie.last_closest_player) && !isplayer(zombie.last_closest_player)) {
+    if(isDefined(zombie.last_closest_player) && !isPlayer(zombie.last_closest_player)) {
       continue;
     }
 
@@ -1623,7 +1623,6 @@ do_zombie_spawn() {
         }
 
         debugstar(loc.origin, 1000, (1, 1, 1));
-
       }
     }
 
@@ -1631,7 +1630,6 @@ do_zombie_spawn() {
       spots[spots.size] = look_loc;
 
       debugstar(look_loc.origin, 1000, (0, 1, 0));
-
     }
 
     if(spots.size <= 0) {

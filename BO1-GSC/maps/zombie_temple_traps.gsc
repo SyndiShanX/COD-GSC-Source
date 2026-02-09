@@ -12,33 +12,30 @@ init_temple_traps() {
   level thread waterfall_trap_init();
   level thread init_maze_trap();
 }
-
 trigger_wait_for_power() {
   self sethintstring(&"ZOMBIE_NEED_POWER");
   self SetCursorHint("HINT_NOICON");
   self.in_use = 0;
   flag_wait("power_on");
 }
-
 spear_trap_init() {
   spearTraps = getEntArray("spear_trap", "targetname");
   for(i = 0; i < spearTraps.size; i++) {
     spearTrap = spearTraps[i];
-    spearTrap.clip = getEnt(spearTrap.target, "targetname");
+    spearTrap.clip = GetEnt(spearTrap.target, "targetname");
     spearTrap.clip notsolid();
     spearTrap.clip connectPaths();
     spearTrap.enable_flag = spearTrap.script_noteworthy;
     spearTrap thread spear_trap_think();
   }
 }
-
 spear_trap_think() {
   if(isDefined(self.enable_flag) && !flag(self.enable_flag)) {
     flag_wait(self.enable_flag);
   }
   while(1) {
     self waittill("trigger", who);
-    if(!isDefined(who) || !IsPlayer(who) || who.sessionstate == "spectator") {
+    if(!isDefined(who) || !isPlayer(who) || who.sessionstate == "spectator") {
       continue;
     }
     for(i = 0; i < 3; i++) {
@@ -48,12 +45,10 @@ spear_trap_think() {
     }
   }
 }
-
 sprear_trap_activate_spears(audio_counter, player) {
   self spear_trap_damage_all_characters(audio_counter, player);
   self thread spear_activate(0);
 }
-
 spear_trap_damage_all_characters(audio_counter, player) {
   wait .1;
   characters = array_combine(get_players(), GetAiSpeciesArray("axis"));
@@ -62,12 +57,12 @@ spear_trap_damage_all_characters(audio_counter, player) {
     if(self spear_trap_is_character_touching(char)) {
       self thread spear_damage_character(char);
     } else if(isPlayer(char) && (audio_counter == 0) && (randomintrange(0, 101) <= 10)) {
-      if(isDefined(player) && player == char)
+      if(isDefined(player) && player == char) {
         char thread delayed_spikes_close_vox();
+      }
     }
   }
 }
-
 delayed_spikes_close_vox() {
   self notify("playing_spikes_close_vox");
   self endon("death");
@@ -77,12 +72,11 @@ delayed_spikes_close_vox() {
     self thread maps\_zombiemode_audio::create_and_play_dialog("general", "spikes_close");
   }
 }
-
 spear_damage_character(char) {
   char thread spear_trap_slow();
 }
-
 #using_animtree("generic_human");
+
 spear_trap_slow() {
   self endon("death");
   if(is_true(self.spear_trap_slow)) {
@@ -115,7 +109,6 @@ spear_trap_slow() {
   }
   self.spear_trap_slow = false;
 }
-
 spear_choke() {
   level._num_ai_released = 0;
   while(1) {
@@ -123,7 +116,6 @@ spear_choke() {
     level._num_ai_released = 0;
   }
 }
-
 _zombie_spear_trap_damage_wait() {
   self endon("death");
   if(!isDefined(level._spear_choke)) {
@@ -144,7 +136,6 @@ _zombie_spear_trap_damage_wait() {
   self stopanimscripted(.5);
   level._num_ai_released++;
 }
-
 _fake_red() {
   prompt = NewClientHudElem(self);
   prompt.alignX = "left";
@@ -164,11 +155,9 @@ _fake_red() {
   wait(fadeTime);
   prompt Destroy();
 }
-
 spear_trap_is_character_touching(char) {
   return self isTouching(char);
 }
-
 spear_activate(delay) {
   wait delay;
   if(isDefined(self.clip)) {
@@ -182,7 +171,6 @@ spear_activate(delay) {
   }
   wait .2;
 }
-
 spear_kill(magnitude) {
   self StartRagdoll();
   self launchragdoll((0, 0, 50));
@@ -190,7 +178,6 @@ spear_kill(magnitude) {
   self.a.gib_ref = "head";
   self dodamage(self.health + 666, self.origin);
 }
-
 temple_trap_move_switch() {
   trap_switch = undefined;
   for(i = 0; i < self.trap_switches.size; i++) {
@@ -200,7 +187,7 @@ temple_trap_move_switch() {
   if(isDefined(trap_switch)) {
     trap_switch playLoopSound("zmb_pressure_plate_loop");
     trap_switch waittill("movedone");
-    trap_switch stopLoopSound();
+    trap_switch stoploopsound();
     trap_switch playSound("zmb_pressure_plate_lock");
   }
   self notify("switch_activated");
@@ -210,11 +197,10 @@ temple_trap_move_switch() {
     trap_switch movey(5, .75);
     trap_switch playLoopSound("zmb_pressure_plate_loop");
     trap_switch waittill("movedone");
-    trap_switch stopLoopSound();
+    trap_switch stoploopsound();
     trap_switch playSound("zmb_pressure_plate_lock");
   }
 }
-
 waterfall_trap_init() {
   useTriggers = getEntArray("waterfall_trap", "targetname");
   for(i = 0; i < useTriggers.size; i++) {
@@ -253,7 +239,6 @@ waterfall_trap_init() {
     trapStruct waterfall_trap_think();
   }
 }
-
 waterfall_trap_think() {
   while(1) {
     self notify("trap_ready");
@@ -281,21 +266,18 @@ waterfall_trap_think() {
     }
   }
 }
-
 waterfall_screen_fx(activeTime) {
   delay = 1.5;
   wait delay;
   self.waterSheetingTime = activeTime - delay;
   self trigger_on();
 }
-
 waterfall_screen_shake(activeTime) {
   wait(1);
   for(i = 0; i < self.trap_shake.size; i++) {
     waterfall_screen_shake_single(activeTime, self.trap_shake[i].origin);
   }
 }
-
 waterfall_screen_shake_single(activeTime, origin) {
   remainingTime = 1.0;
   if(activeTime > 6.0) {
@@ -307,7 +289,6 @@ waterfall_screen_shake_single(activeTime, origin) {
     remainingTime -= 1.0;
   }
 }
-
 waterfall_trap_on() {
   soundStruct = getStruct("waterfall_trap_origin", "targetname");
   if(isDefined(soundStruct)) {
@@ -318,11 +299,9 @@ waterfall_trap_on() {
   exploder(21);
   stop_exploder(20);
 }
-
 waterfall_trap_off() {
   exploder(20);
 }
-
 waterfall_trap_damage() {
   self endon("trap_off");
   fwd = anglesToForward(self.angles);
@@ -348,14 +327,12 @@ waterfall_trap_damage() {
     }
   }
 }
-
 waterfall_trap_player(fwd, time) {
   wait(1);
   vel = self GetVelocity();
   self SetVelocity(vel + fwd * 60.0);
-  self playRumbleOnEntity("slide_rumble");
+  self PlayRumbleOnEntity("slide_rumble");
 }
-
 waterfall_trap_monkey(magnitude, dir) {
   wait(1);
   self StartRagdoll();
@@ -363,7 +340,6 @@ waterfall_trap_monkey(magnitude, dir) {
   wait_network_frame();
   self dodamage(self.health + 666, self.origin);
 }
-
 ent_in_array(ent, _array) {
   for(i = 0; i < _array.size; i++) {
     if(_array[i] == ent) {
@@ -372,7 +348,6 @@ ent_in_array(ent, _array) {
   }
   return false;
 }
-
 init_maze_trap() {
   level.mazeCells = [];
   level.mazeFloors = [];
@@ -447,12 +422,10 @@ init_maze_trap() {
   array_thread(level.mazeCells, ::maze_cell_watch);
   array_thread(level.mazeCells, ::maze_cell_debug);
 }
-
 init_client_maze_trap() {
   wait_for_all_players();
   wait 3;
 }
-
 init_maze_paths() {
   level.mazePathCounter = 0;
   level.mazePaths = [];
@@ -481,7 +454,6 @@ init_maze_paths() {
   add_maze_path(array(12, 9, 10, 13), true);
   add_maze_path(array(12, 9, 6, 7, 10, 13), true);
 }
-
 add_maze_path(path, loopback) {
   if(!isDefined(loopBack)) {
     loopBack = false;
@@ -491,7 +463,6 @@ add_maze_path(path, loopback) {
   s.loopBack = loopback;
   level.mazePaths[level.mazePaths.size] = s;
 }
-
 init_maze_mover(moveDist, moveUpTime, moveDownTime, blocksPaths, moveUpSound, moveDownSound, clipOnly) {
   self.isActive = false;
   self.activeCount = 0;
@@ -511,7 +482,6 @@ init_maze_mover(moveDist, moveUpTime, moveDownTime, blocksPaths, moveUpSound, mo
     self.alwaysActive = true;
   }
 }
-
 maze_cell_debug() {}
 _add_maze_cell(cell_index) {
   for(i = level.mazeCells.size; i < cell_index; i++) {
@@ -519,13 +489,11 @@ _add_maze_cell(cell_index) {
     level.mazeCells[i] _init_maze_cell();
   }
 }
-
 _init_maze_cell() {
   self.trigger = undefined;
   self.floor = undefined;
   self.walls = [];
 }
-
 maze_mover_active(active) {
   if(self.alwaysActive) {
     return;
@@ -575,14 +543,13 @@ maze_mover_active(active) {
     self thread _maze_mover_move(goalPos, moveTime);
   }
 }
-
 _maze_mover_move(goal, time) {
   self endon("stop_maze_mover");
   self.isMoving = true;
   if(time == 0) {
     time = .01;
   }
-  self moveTo(goal, time);
+  self moveto(goal, time);
   self waittill("movedone");
   self.isMoving = false;
   if(self.isActive) {
@@ -598,7 +565,6 @@ _maze_mover_move(goal, time) {
     }
   }
 }
-
 _maze_mover_play_fx(fx_name, offset) {
   if(isDefined(fx_name)) {
     vFwd = anglesToForward(self.angles);
@@ -609,13 +575,12 @@ _maze_mover_play_fx(fx_name, offset) {
     playFX(fx_name, org, vFwd, (0, 0, 1));
   }
 }
-
 maze_cell_watch() {
   level endon("fake_death");
   while(1) {
     self.trigger waittill("trigger", who);
     if(self.trigger.pathCount > 0) {
-      if(isplayer(who)) {
+      if(isPlayer(who)) {
         if(who is_player_maze_slow()) {
           continue;
         }
@@ -627,7 +592,7 @@ maze_cell_watch() {
         self.trigger thread zombie_normal_trigger_exit(who);
       }
     } else {
-      if(isplayer(who)) {
+      if(isPlayer(who)) {
         if(who is_player_on_path()) {
           continue;
         }
@@ -641,7 +606,6 @@ maze_cell_watch() {
     }
   }
 }
-
 zombie_mud_move_slow() {
   switch (self.zombie_move_speed) {
     case "run":
@@ -657,7 +621,6 @@ zombie_mud_move_slow() {
   }
   self.needs_run_update = true;
 }
-
 zombie_mud_move_normal() {
   switch (self.zombie_move_speed) {
     case "run":
@@ -673,7 +636,6 @@ zombie_mud_move_normal() {
   }
   self.needs_run_update = true;
 }
-
 zombie_slow_trigger_exit(zombie) {
   zombie endon("death");
   if(isDefined(zombie.mud_triggers)) {
@@ -695,15 +657,12 @@ zombie_slow_trigger_exit(zombie) {
     zombie zombie_mud_move_normal();
   }
 }
-
 zombie_on_path() {
   return (isDefined(self.path_triggers) && self.path_triggers.size > 0);
 }
-
 zombie_on_mud() {
   return (isDefined(self.mud_triggers) && self.mud_triggers.size > 0);
 }
-
 zombie_normal_trigger_exit(zombie) {
   zombie endon("death");
   if(isDefined(zombie.path_triggers)) {
@@ -722,15 +681,12 @@ zombie_normal_trigger_exit(zombie) {
   }
   zombie.path_triggers = array_remove(zombie.path_triggers, self);
 }
-
 is_player_on_path() {
   return isDefined(self.mazePathCells) && self.mazePathCells.size > 0;
 }
-
 is_player_maze_slow() {
   return isDefined(self.mazeSlowTrigger) && self.mazeSlowTrigger.size > 0;
 }
-
 maze_cell_player_enter(player) {
   if(isDefined(player.mazePathCells)) {
     if(is_in_array(player.mazePathCells, self)) {
@@ -766,7 +722,6 @@ maze_cell_player_enter(player) {
     on_maze_cell_exit();
   }
 }
-
 path_trigger_wait(player) {
   player endon("disconnect");
   player endon("fake_death");
@@ -776,7 +731,6 @@ path_trigger_wait(player) {
     wait .1;
   }
 }
-
 on_maze_cell_enter() {
   current = self;
   previous = current cell_get_previous();
@@ -788,7 +742,6 @@ on_maze_cell_enter() {
   activate_walls(current);
   activate_walls(next);
 }
-
 on_maze_cell_exit() {
   current = self;
   previous = current cell_get_previous();
@@ -800,7 +753,6 @@ on_maze_cell_exit() {
   lower_walls(current);
   lower_walls(next);
 }
-
 watch_slow_trigger_exit(player) {
   player endon("death");
   player endon("fake_death");
@@ -832,7 +784,6 @@ watch_slow_trigger_exit(player) {
     player clientnotify("sll");
   }
 }
-
 lower_walls(cell) {
   if(!isDefined(cell)) {
     return;
@@ -842,7 +793,6 @@ lower_walls(cell) {
     wall thread maze_mover_active(false);
   }
 }
-
 activate_walls(cell) {
   if(!isDefined(cell)) {
     return;
@@ -860,7 +810,6 @@ activate_walls(cell) {
     wall thread maze_mover_active(activateWall);
   }
 }
-
 raise_floor(mazeCell) {
   if(isDefined(mazeCell)) {
     mazeCell.trigger.pathCount++;
@@ -868,7 +817,6 @@ raise_floor(mazeCell) {
     level thread delete_cell_corpses(mazeCell);
   }
 }
-
 delete_cell_corpses(mazeCell) {
   bodies = getcorpsearray();
   for(i = 0; i < bodies.size; i++) {
@@ -881,7 +829,6 @@ delete_cell_corpses(mazeCell) {
     }
   }
 }
-
 delete_corpse() {
   self endon("death");
   if(is_mature()) {
@@ -891,14 +838,12 @@ delete_corpse() {
     self Delete();
   }
 }
-
 lower_floor(mazeCell) {
   if(isDefined(mazeCell)) {
     mazeCell.trigger.pathCount--;
     mazeCell.floor thread maze_mover_active(false);
   }
 }
-
 maze_cells_get_shared_wall(a, b) {
   if(!isDefined(a) || !isDefined(b)) {
     return undefined;
@@ -912,13 +857,11 @@ maze_cells_get_shared_wall(a, b) {
   }
   return undefined;
 }
-
 maze_show_starts() {
   for(i = 0; i < level.startCells.size; i++) {
     raise_floor(level.startCells[i]);
   }
 }
-
 maze_start_path() {
   level.pathActive = true;
   for(i = 0; i < level.startCells.size; i++) {
@@ -927,19 +870,16 @@ maze_start_path() {
   self maze_generate_path();
   level thread maze_path_timer(10);
 }
-
 maze_end_path() {
   level notify("maze_path_end");
   level.pathActive = false;
   level thread maze_show_starts_delayed();
 }
-
 maze_show_starts_delayed() {
   level endon("maze_all_safe");
   wait 3;
   maze_show_starts();
 }
-
 maze_path_timer(time) {
   level endon("maze_path_end");
   level endon("maze_all_safe");
@@ -951,7 +891,6 @@ maze_path_timer(time) {
   level notify("maze_timer_end");
   level thread repath_zombies_in_maze();
 }
-
 repath_zombies_in_maze() {
   wait_network_frame();
   zombies = getaiarray("axis");
@@ -971,7 +910,6 @@ repath_zombies_in_maze() {
     }
   }
 }
-
 maze_vibrate_active_floors(time) {
   level endon("maze_path_end");
   level endon("maze_all_safe");
@@ -992,20 +930,17 @@ maze_vibrate_active_floors(time) {
     wait .1;
   }
 }
-
 temple_maze_player_vibrate_on(player, endon_condition) {
   player endon(endon_condition);
   player SetClientFlag(level._CF_PLAYER_MAZE_FLOOR_RUMBLE);
   wait_network_frame();
   self thread temple_inactive_floor_rumble_cancel(player);
 }
-
 temple_maze_player_vibrate_off(player) {
   player endon("frc");
   player ClearClientFlag(level._CF_PLAYER_MAZE_FLOOR_RUMBLE);
   player notify("frc");
 }
-
 temple_inactive_floor_rumble_cancel(ent_player) {
   ent_player endon("frc");
   floor_piece = undefined;
@@ -1023,7 +958,6 @@ temple_inactive_floor_rumble_cancel(ent_player) {
   }
   ent_player notify("frc");
 }
-
 maze_vibrate_floor(time) {
   if(is_true(self.isVibrating)) {
     return;
@@ -1035,7 +969,6 @@ maze_vibrate_floor(time) {
   wait time;
   self.isVibrating = false;
 }
-
 maze_vibrate_floor_stop() {
   level waittill_any("maze_path_end", "maze_timer_end", "maze_all_safe");
   for(i = 0; i < level.mazeCells.size; i++) {
@@ -1047,7 +980,6 @@ maze_vibrate_floor_stop() {
     }
   }
 }
-
 maze_generate_path() {
   level.mazePath = [];
   for(i = 0; i < level.mazeCells.size; i++) {
@@ -1063,7 +995,6 @@ maze_generate_path() {
   }
   level.mazePathCounter++;
 }
-
 pick_random_path_index() {
   startIndex = 0;
   for(i = 0; i < level.mazeCells.size; i++) {
@@ -1101,7 +1032,6 @@ pick_random_path_index() {
   }
   return returnIndex;
 }
-
 cell_get_next() {
   index = self.pathIndex;
   if(index < level.mazePath.size - 1) {
@@ -1109,7 +1039,6 @@ cell_get_next() {
   }
   return undefined;
 }
-
 cell_get_previous() {
   index = self.pathIndex;
   if(index > 0) {
@@ -1117,7 +1046,6 @@ cell_get_previous() {
   }
   return undefined;
 }
-
 zombie_waterfall_knockdown() {
   self endon("death");
   self.lander_knockdown = 1;
@@ -1126,11 +1054,9 @@ zombie_waterfall_knockdown() {
     self[[self.thundergun_knockdown_func]](self, false);
   }
 }
-
 override_thundergun_damage_func(player, gib) {
   dmg_point = getstruct("waterfall_dmg_point", "script_noteworthy");
   self.thundergun_handle_pain_notetracks = ::handle_knockdown_pain_notetracks;
   self DoDamage(1, dmg_point.origin);
 }
-
 handle_knockdown_pain_notetracks(note) {}

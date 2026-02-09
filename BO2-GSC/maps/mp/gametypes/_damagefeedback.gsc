@@ -26,7 +26,7 @@ onplayerconnect() {
 }
 
 updatedamagefeedback(mod, inflictor, perkfeedback) {
-  if(!isplayer(self) || sessionmodeiszombiesgame()) {
+  if(!isPlayer(self) || sessionmodeiszombiesgame()) {
     return;
   }
   if(isDefined(mod) && mod != "MOD_CRUSH" && mod != "MOD_GRENADE_SPLASH" && mod != "MOD_HIT_BY_OBJECT") {
@@ -87,13 +87,13 @@ playhitsound(mod, alert) {
 }
 
 updatespecialdamagefeedback(hitent) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!isDefined(hitent)) {
     return;
   }
-  if(!isplayer(hitent)) {
+  if(!isPlayer(hitent)) {
     return;
   }
   wait 0.05;

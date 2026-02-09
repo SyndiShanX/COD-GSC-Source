@@ -8,7 +8,6 @@ main(var_0, var_1, var_2, var_3) {
     maps\_vehicle::_id_2AC2("submarine_sdv", var_0, var_1, var_2);
   } else {
     maps\_vehicle::_id_2AC2("blackshadow_730", var_0, var_1, var_2);
-
   }
   maps\_vehicle::_id_2AD2(::_id_2B1D);
   maps\_vehicle::_id_2ABE(var_0);

@@ -15,7 +15,6 @@ _id_4885(var_0, var_1) {
 
   if(isDefined(self._id_4886)) {
     self.ignoreme = self._id_4886;
-
   }
   self._id_4887 = 0;
   self setturretanim(self._id_4888);
@@ -23,7 +22,6 @@ _id_4885(var_0, var_1) {
 
   if(isDefined(self.weapon)) {
     animscripts\shared::_id_0C9B(self.weapon, "none");
-
   }
   self._id_257E = 1;
   self._id_0EED = ::_id_4895;
@@ -173,7 +171,6 @@ _id_48A0(var_0) {
       _id_48A1("right");
     } else {
       _id_48A1("left");
-
     }
     var_2 = self gettagangles(var_1);
     wait 0.05;
@@ -208,7 +205,6 @@ _id_48A3(var_0) {
         var_3 = self._id_48A5;
       } else if(var_0._id_48A2 == "left") {
         var_3 = self._id_48A6;
-
       }
       if(isDefined(var_3)) {
         self setanimlimited(self._id_489A, 1, var_1, 1);
@@ -251,7 +247,6 @@ _id_48A9(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     var_3 = self._id_48AA;
-
   }
   var_4 = maps\_vehicle_aianim::_id_2534(var_0, var_1);
   var_5 = var_0 gettagorigin(var_4._id_24F2);
@@ -304,15 +299,12 @@ _id_48AE(var_0) {
 
     if(var_0 _id_48AF(var_1) && !self.ignoreall) {
       var_0._id_488B = 1;
-
     }
     while(var_0 _id_48AF(var_1) && !self.ignoreall && !self._id_4887) {
       wait 0.05;
-
     }
     if(var_0._id_488B || self.ignoreall) {
       var_0._id_488B = 0;
-
     }
     wait 0.05;
   }
@@ -321,19 +313,15 @@ _id_48AE(var_0) {
 _id_48AF(var_0) {
   if(isDefined(self._id_48B0)) {
     return 0;
-
   }
   if(!isDefined(self._id_48A4)) {
     return 0;
-
   }
   if(!_id_48B2(var_0)) {
     return 0;
-
   }
   if(var_0 != self._id_48A4) {
     return 0;
-
   }
   return 1;
 }
@@ -358,7 +346,6 @@ _id_48B1(var_0) {
         var_3 = 1;
       } else if(isDefined(var_1) && var_1 != var_2) {
         var_3 = 1;
-
       }
       if(var_3) {
         self._id_48A4 = var_1;
@@ -374,15 +361,12 @@ _id_48B1(var_0) {
 _id_48B2(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(isDefined(var_0.ignoreme) && var_0.ignoreme) {
     return 0;
-
   }
   if(issubstr(var_0.code_classname, "actor") && !isalive(var_0)) {
     return 0;
-
   }
   return 1;
 }
@@ -393,7 +377,6 @@ _id_48B3(var_0, var_1, var_2, var_3) {
 
   if(var_4 != "manual") {
     self setmode("manual");
-
   }
   if(!isDefined(var_1) && !isDefined(var_2)) {
     var_1 = 1.5;
@@ -410,7 +393,6 @@ _id_48B3(var_0, var_1, var_2, var_3) {
     wait(randomfloatrange(var_1, var_2));
   } else {
     wait(var_1);
-
   }
   _id_48C2();
   self cleartargetentity(var_0);
@@ -525,14 +507,12 @@ _id_48C0(var_0, var_1, var_2) {
 
   if(var_0 getbarrelspinrate() > 0) {
     var_0 stopbarrelspin();
-
   }
   var_0 notify("kill_fireController");
   self notify("custom_anim");
 
   if(isDefined(var_2) && var_2) {
     var_0 _id_48C3();
-
   }
   self setanimknoblimitedrestart(self._id_489B, 1, 0.2);
   self setflaggedanimknobrestart("special_anim", var_1, 1, 0, 1);
@@ -551,7 +531,6 @@ _id_48C0(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2) {
     var_0 _id_48C6();
-
   }
   self._id_48C1 = undefined;
   self._id_4887 = 0;
@@ -611,7 +590,6 @@ _id_48C7(var_0, var_1) {
 
   if(var_2 <= var_1) {
     return 1;
-
   }
   return 0;
 }

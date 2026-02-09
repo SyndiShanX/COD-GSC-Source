@@ -10,7 +10,7 @@ main() {
   maps\mp\_load::main();
   maps\mp\_explosive_barrels::main();
   maps\mp\_compass::setupMiniMap("compass_map_mp_quarry");
-  setdvar("compassmaxrange", "2800");
+  setDvar("compassmaxrange", "2800");
 
   //setExpFog( 900, 3500, 0.631373, 0.568627, 0.54902, 1, 0 );
   //setExpFog( 900, 3500, 0.631373, 0.568627, 0.34902, 1, 0, 1, 0.803922, 0.564706, (0, .5, 1), 0, 	15.2331, 0.961894 );
@@ -24,7 +24,7 @@ main() {
   game["attackers"] = "axis";
   game["defenders"] = "allies";
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.22);
-  setdvar("r_lightGridContrast", .67);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.22);
+  setDvar("r_lightGridContrast", .67);
 }

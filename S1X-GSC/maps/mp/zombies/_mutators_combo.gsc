@@ -255,7 +255,7 @@ mutatorcomboarmoremzondamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
   if(!maps\mp\zombies\_util::checkactivemutator("combo_armor_emz")) {
     return;
   }
-  if(isDefined(self.hashelmet) && isplayer(var_1) && maps\mp\_utility::isheadshot(var_5, var_8, var_4)) {
+  if(isDefined(self.hashelmet) && isPlayer(var_1) && maps\mp\_utility::isheadshot(var_5, var_8, var_4)) {
     self.helmet_health = self.helmet_health - var_2;
 
     if(self.helmet_health <= 0) {

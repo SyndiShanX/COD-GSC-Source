@@ -249,8 +249,8 @@ path_detour_get_detourpath(detournode) {
       if(!islastnode(level.vehicle_detourpaths[detournode.script_vehicledetour][j])) {
         detourpath = level.vehicle_detourpaths[detournode.script_vehicledetour][j];
       }
-  }
     }
+  }
   return detourpath;
 }
 
@@ -712,8 +712,8 @@ vehicle_paths(node, baircraftwaitforstart) {
         self thread deathrolloff();
       }
     } else {
-        self thread deathrollon();
-      }
+      self thread deathrollon();
+    }
 
     if(isDefined(nextpoint.script_vehicleaianim)) {
       if(isDefined(nextpoint.script_parameters) && nextpoint.script_parameters == "queue") {
@@ -2393,18 +2393,18 @@ precachesetup(string, vehicle) {
     if(level.needsprecaching[i] == string) {
       matched = true;
     }
-  if(!matched) {
-    level.needsprecaching[level.needsprecaching.size] = string;
+    if(!matched) {
+      level.needsprecaching[level.needsprecaching.size] = string;
+    }
   }
 }
-  }
 
 vehicle_modelinarray(arrayofmodels, model) {
   for(i = 0; i < arrayofmodels.size; i++) {
     if(arrayofmodels[i] == model) {
       return true;
     }
-  return false;
+    return false;
   }
 }
 
@@ -2587,8 +2587,8 @@ setturretfireondrones(b) {
     for(i = 0; i < self.mgturret.size; i++) {
       self.mgturret[i].script_fireondrones = b;
     }
-}
   }
+}
 
 getnormalanimtime(animation) {
   animtime = self getanimtime(animation);
@@ -2708,11 +2708,11 @@ setup_ai() {
     if(isDefined(ai[i].script_vehicleride)) {
       level.vehicle_RideAI = array_2dadd(level.vehicle_RideAI, ai[i].script_vehicleride, ai[i]);
     } else {
-    if(isDefined(ai[i].script_vehiclewalk)) {
-      level.vehicle_WalkAI = array_2dadd(level.vehicle_WalkAI, ai[i].script_vehiclewalk, ai[i]);
+      if(isDefined(ai[i].script_vehiclewalk)) {
+        level.vehicle_WalkAI = array_2dadd(level.vehicle_WalkAI, ai[i].script_vehiclewalk, ai[i]);
+      }
     }
   }
-    }
   ai = getspawnerarray();
 
   for(i = 0; i < ai.size; i++) {
@@ -3705,9 +3705,9 @@ unload_node(node) {
         self.riders[i] thread maps\_spawner::go_to_node(pathnode);
       }
     }
-  if(self is_aircraft()) {
-    waittill_stable();
-  }
+    if(self is_aircraft()) {
+      waittill_stable();
+    }
   } else {
     self setspeed(0, 35);
   }
@@ -4226,7 +4226,7 @@ turret_deleteme(turret) {
     if(isDefined(turret.deletedelay)) {
       wait turret.deletedelay;
     }
-  turret delete();
+    turret delete();
   }
 }
 

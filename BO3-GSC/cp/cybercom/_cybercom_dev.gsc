@@ -55,8 +55,8 @@ function constantjuice() {
 }
 
 function cybercom_devguithink() {
-  setdvar("devgui_cybercore", "");
-  setdvar("devgui_cybercore_upgrade", "");
+  setDvar("devgui_cybercore", "");
+  setDvar("devgui_cybercore_upgrade", "");
   while(true) {
     cmd = getdvarstring("devgui_cybercore");
     if(cmd == "") {
@@ -66,14 +66,14 @@ function cybercom_devguithink() {
     playernum = getdvarint("scr_player_number") - 1;
     players = getplayers();
     if(playernum >= players.size) {
-      setdvar("devgui_cybercore", "");
-      setdvar("devgui_cybercore_upgrade", "");
+      setDvar("devgui_cybercore", "");
+      setDvar("devgui_cybercore_upgrade", "");
       iprintlnbold("Invalid Player specified. Use SET PLAYER NUMBER in Cybercom DEVGUI to set valid player");
       continue;
     }
     if(cmd == "juiceme") {
-      setdvar("devgui_cybercore", "");
-      setdvar("devgui_cybercore_upgrade", "");
+      setDvar("devgui_cybercore", "");
+      setDvar("devgui_cybercore_upgrade", "");
       iprintlnbold("Giving Constant Juice to all players");
       foreach(player in players) {
         player thread constantjuice();
@@ -86,8 +86,8 @@ function cybercom_devguithink() {
         player cybercom_tacrig::takeallrigabilities();
         player cybercom_gadget::takeallabilities();
       }
-      setdvar("devgui_cybercore", "");
-      setdvar("devgui_cybercore_upgrade", "");
+      setDvar("devgui_cybercore", "");
+      setDvar("devgui_cybercore_upgrade", "");
       continue;
     }
     if(cmd == "giveAll") {
@@ -95,8 +95,8 @@ function cybercom_devguithink() {
       foreach(player in players) {
         player cybercom_gadget::function_edff667f();
       }
-      setdvar("devgui_cybercore", "");
-      setdvar("devgui_cybercore_upgrade", "");
+      setDvar("devgui_cybercore", "");
+      setDvar("devgui_cybercore_upgrade", "");
       continue;
     }
     player = players[playernum];
@@ -106,22 +106,22 @@ function cybercom_devguithink() {
       iprintlnbold("Clearing abilities on player: " + playernum);
       player cybercom_tacrig::takeallrigabilities();
       player cybercom_gadget::takeallabilities();
-      setdvar("devgui_cybercore", "");
-      setdvar("devgui_cybercore_upgrade", "");
+      setDvar("devgui_cybercore", "");
+      setDvar("devgui_cybercore_upgrade", "");
       continue;
     } else {
       if(cmd == "control") {
-        setdvar("devgui_cybercore", "");
-        setdvar("devgui_cybercore_upgrade", "");
+        setDvar("devgui_cybercore", "");
+        setDvar("devgui_cybercore_upgrade", "");
         continue;
       } else {
         if(cmd == "martial") {
-          setdvar("devgui_cybercore", "");
-          setdvar("devgui_cybercore_upgrade", "");
+          setDvar("devgui_cybercore", "");
+          setDvar("devgui_cybercore_upgrade", "");
           continue;
         } else if(cmd == "chaos") {
-          setdvar("devgui_cybercore", "");
-          setdvar("devgui_cybercore_upgrade", "");
+          setDvar("devgui_cybercore", "");
+          setDvar("devgui_cybercore_upgrade", "");
           continue;
         }
       }
@@ -132,7 +132,7 @@ function cybercom_devguithink() {
       player cybercom_gadget::giveability(cmd, upgrade);
     }
     iprintlnbold(((("Adding ability on player: " + playernum) + (" --> ") + cmd) + "Upgraded:") + (upgrade ? "TRUE" : "FALSE"));
-    setdvar("devgui_cybercore", "");
-    setdvar("devgui_cybercore_upgrade", "");
+    setDvar("devgui_cybercore", "");
+    setDvar("devgui_cybercore_upgrade", "");
   }
 }

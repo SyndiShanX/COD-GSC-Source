@@ -271,7 +271,6 @@ ctw_max_fail_watch() {
     foreach(player in a_players) {
       if(distancesquared(self.origin, player.origin) < 16384) {
         iprintlnbold("Too Close to Wisp");
-
       }
     }
 
@@ -292,7 +291,6 @@ ctw_max_fail_watch() {
       flag_clear("sq_m_wisp_weak");
 
     iprintlnbold(self.n_sq_energy);
-
   }
   while(n_starter_dist < 262144);
 
@@ -322,7 +320,6 @@ debug_origin() {
     debugstar(self.origin, 1, (1, 0, 0));
     wait 0.05;
   }
-
 }
 
 ctw_find_zombies_for_powerup(v_origin, n_radius, m_ignore) {

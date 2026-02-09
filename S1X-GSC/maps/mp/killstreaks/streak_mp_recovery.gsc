@@ -360,7 +360,6 @@ GiveSuperStomp() {
     self givePerk("specialty_exo_slamboots", false);
     self.CAC_has_slam = false;
   }
-
 }
 
 GiveSuperPunch() {
@@ -401,7 +400,6 @@ TurnOnSuperFX() {
     playFXOnTag(level.mp_recovery_killstreak.exo_super_vfx, self, "j_knee_le");
     playFXOnTag(level.mp_recovery_killstreak.exo_super_vfx, self, "j_knee_ri");
   }
-
 }
 
 SetupSuperExo() {

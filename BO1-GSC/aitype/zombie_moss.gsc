@@ -19,11 +19,9 @@ main() {
   self setEngagementMaxDist(700.000000, 1000.000000);
   character\c_moss_zt::main();
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\c_moss_zt::precache();
   precacheItem("ak47_zm");

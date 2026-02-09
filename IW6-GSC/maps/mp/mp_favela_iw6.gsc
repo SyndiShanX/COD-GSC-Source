@@ -18,8 +18,8 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_favela_iw6");
 
   setdvar_cg_ng("r_specularColorScale", 2.5, 10);
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("sm_sunShadowScale", 0.55, 1);
   setdvar_cg_ng("sm_sunsamplesizenear", 0.20, 0.25);
   setDvar_cg_ng("r_reactiveMotionWindFrequencyScale", 0, 0.1);
@@ -115,7 +115,7 @@ tvs() {
 }
 
 tvs_set(targetname) {
-  /# SetDevDvarIfUninitialized( "tv_debug", 0 );
+  SetDevDvarIfUninitialized("tv_debug", 0);
   num_tv_fx = 4;
   for(i = 1; i <= num_tv_fx; i++) {
     if(!isDefined(level._effect[targetname][i])) {
@@ -160,7 +160,7 @@ tvs_set(targetname) {
     }
     wait level.tv_info.effectLength[targetname][level.tv_fx_num];
 
-    /#tvs_remaining = false;
+    tvs_remaining = false;
     foreach(tv in tvs) {
       if(tv.isHealthy == true) tvs_remaining = true;
     }
@@ -243,7 +243,7 @@ watersheet_trig_setup(trig) {
   while(true) {
     trig waittill("trigger", player);
 
-    if(IsPlayer(player) && !IsAI(player) && !(isDefined(player.inWater) && player.inWater)) {
+    if(isPlayer(player) && !IsAI(player) && !(isDefined(player.inWater) && player.inWater)) {
       player thread playerTrackWaterSheet(trig);
     }
   }
@@ -299,15 +299,15 @@ debugWatchDvars() {
     foreach(dvar, event in level.dbgDvarNotify) {
       if(GetDvarInt(dvar) > 0) {
         level notify(event);
-        SetDvar(dvar, 0);
+        setDvar(dvar, 0);
       }
     }
 
     foreach(dvar, callback in level.dbgDvarCallback) {
-      value = GetDvar(dvar);
+      value = getDvar(dvar);
       if(value != "") {
         [[callback]](value);
-        SetDvar(dvar, "");
+        setDvar(dvar, "");
       }
     }
 

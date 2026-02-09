@@ -327,36 +327,36 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
 }
 
 initPerkDvars() {
-  level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this % level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this % level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
-  level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this % level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
-  level.riotShieldMod = getIntProperty("perk_riotShield", 100) / 100;
-  level.dangerCloseMod = getIntProperty("perk_dangerClose", 100) / 100;
-  level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %}
+    level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this % level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this % level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
+    level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this % level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
+    level.riotShieldMod = getIntProperty("perk_riotShield", 100) / 100;
+    level.dangerCloseMod = getIntProperty("perk_dangerClose", 100) / 100;
+    level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %}
 
-// CAC: Selector function, calls the individual cac features according to player's class settings
-// Info: Called every time player spawns during loadout stage
-cac_selector() {
-  perks = self.specialty;
+    // CAC: Selector function, calls the individual cac features according to player's class settings
+    // Info: Called every time player spawns during loadout stage
+    cac_selector() {
+      perks = self.specialty;
 
-  /*
-  self.detectExplosives = false;
+      /*
+      self.detectExplosives = false;
 
-  if( self _hasPerk( "specialty_detectexplosive" ) )
-  	self.detectExplosives = true;
-  	
-  maps\mp\gametypes\_weapons::setupBombSquad();
-  */
-}
+      if( self _hasPerk( "specialty_detectexplosive" ) )
+      	self.detectExplosives = true;
+      	
+      maps\mp\gametypes\_weapons::setupBombSquad();
+      */
+    }
 
-gambitUseTracker() {
-  self endon("death");
-  self endon("disconnect");
-  level endon("game_ended");
+    gambitUseTracker() {
+      self endon("death");
+      self endon("disconnect");
+      level endon("game_ended");
 
-  if(getDvarInt("scr_game_perks") != 1) {
-    return;
-  }
-  gameFlagWait("prematch_done");
+      if(getDvarInt("scr_game_perks") != 1) {
+        return;
+      }
+      gameFlagWait("prematch_done");
 
-  self notifyOnPlayerCommand("gambit_on", "+frag");
-}
+      self notifyOnPlayerCommand("gambit_on", "+frag");
+    }

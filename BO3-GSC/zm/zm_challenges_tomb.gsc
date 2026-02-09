@@ -237,7 +237,7 @@ function check_stat_complete(s_stat) {
     foreach(m_board in level.a_m_challenge_boards) {
       m_board showpart(s_stat.str_glow_tag);
     }
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if((level._challenges.a_players[self.characterindex].n_completed + level._challenges.s_team.n_completed) == level._challenges.a_stats.size) {
         self notify("all_challenges_complete");
       }
@@ -597,7 +597,7 @@ function reward_points(player, s_stat) {
 }
 
 function challenges_devgui() {
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -610,7 +610,7 @@ function watch_devgui_award_challenges() {
     n_award_challenge = getdvarint("");
     if(n_award_challenge != 0) {
       devgui_award_challenge(n_award_challenge);
-      setdvar("", 0);
+      setDvar("", 0);
     }
     wait(0.5);
   }

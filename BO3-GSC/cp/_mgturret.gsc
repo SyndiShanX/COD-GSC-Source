@@ -8,7 +8,7 @@
 
 function main() {
   if(getdvarstring("mg42") == "") {
-    setdvar("mgTurret", "off");
+    setDvar("mgTurret", "off");
   }
   level.magic_distance = 24;
   turretinfos = getEntArray("turretInfo", "targetname");
@@ -238,7 +238,7 @@ function random_spread(ent) {
   self settargetentity(ent);
   self.manual_target = ent;
   while(true) {
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       ent.origin = self.manual_target getorigin();
     } else {
       ent.origin = self.manual_target.origin;

@@ -42,7 +42,7 @@ function drawenttag(num) {
     }
     ai[i] thread dragtaguntildeath(getdvarstring(""));
   }
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function drawtag(tag, opcolor) {
@@ -188,7 +188,7 @@ function setemptydvar(dvar, setting) {
   /
   #
   if(getdvarstring(dvar) == "") {
-    setdvar(dvar, setting);
+    setDvar(dvar, setting);
   }
 }
 
@@ -206,111 +206,111 @@ function debugjump(num) {
 
 function debugdvars() {
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   setemptydvar("", "");
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   level.debug_badpath = 0;
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   for(i = 1; i <= level.animsound_hudlimit; i++) {
     if((getdvarstring("" + i)) == "") {
-      setdvar("" + i, "");
+      setDvar("" + i, "");
     }
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
-    setdvar("", "");
-    setdvar("", "");
+    setDvar("", "");
+    setDvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   level.last_threat_debug = -23430;
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   waittillframeend();
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   noanimscripts = getdvarstring("") == "";
   for(;;) {
@@ -357,24 +357,24 @@ function debugdvars() {
       thread debug_nuke();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       array::thread_all(getaiarray(), &debugmisstime);
     } else if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       array::thread_all(getaiarray(), &debugmisstimeoff);
     }
     if(getdvarstring("") == "") {
       thread deathspawnerpreview();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       players = getplayers();
       for(i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       players = getplayers();
       for(i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
@@ -401,7 +401,7 @@ function debugdvars() {
       }
       players = getplayers();
       level.tracestart = players[0] getEye();
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "" && (!isDefined(level.spawn_anywhere_active) || level.spawn_anywhere_active == 0)) {
       level.spawn_anywhere_active = 1;
@@ -523,13 +523,13 @@ function debug_nuke() {
       }
     }
   }
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function debug_misstime() {}
 
 function freeplayer() {
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function deathspawnerpreview() {
@@ -599,10 +599,10 @@ function islookingatorigin(origin) {
 
 function fogcheck() {
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   close = getdvarint("");
   far = getdvarint("");
@@ -995,7 +995,7 @@ function debug_animsoundtag(tagnum) {
     return;
   }
   tag_sound(tag, tagnum - 1);
-  setdvar("" + tagnum, "");
+  setDvar("" + tagnum, "");
 }
 
 function debug_animsoundtagselected() {
@@ -1005,7 +1005,7 @@ function debug_animsoundtagselected() {
     return;
   }
   tag_sound(tag, level.animsound_selected);
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function tag_sound(tag, tagnum) {
@@ -1034,7 +1034,7 @@ function debug_animsoundsave() {
   iprintlnbold("" + filename);
   print_aliases_to_file(file);
   saved = closefile(file);
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function print_aliases_to_file(file) {
@@ -1074,7 +1074,7 @@ function print_aliases_to_file(file) {
 }
 
 function function_2ceda325() {
-  setdvar("", 0);
+  setDvar("", 0);
   if(!isDefined(level.a_npcdeaths) || getdvarint("") != 1) {
     return;
   }
@@ -1183,7 +1183,7 @@ function debug_show_viewpos() {
   hud_z.alignx = "";
   hud_z.fontscale = 1.2;
   hud_z setvalue(0);
-  setdvar("", "");
+  setDvar("", "");
   players = getplayers();
   while(true) {
     if(getdvarint("") > 0) {
@@ -1240,7 +1240,7 @@ function set_event_printname_thread(text, focus) {
   if(focus) {
     suffix = "";
   }
-  setdvar("", text);
+  setDvar("", text);
   text = ("" + text) + suffix;
   if(!isDefined(level.event_hudelem)) {
     hud = newhudelem();
@@ -1260,7 +1260,7 @@ function set_event_printname_thread(text, focus) {
     level.event_hudelem.color = (1, 1, 1);
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   level.event_hudelem settext(text);
   enabled = 1;
@@ -1765,7 +1765,7 @@ function spawn_guy_placement() {
           }
           wait(0.3);
         } else if(self buttonpressed("")) {
-          setdvar("", "");
+          setDvar("", "");
         }
       }
     }
@@ -2000,7 +2000,7 @@ function debug_info_screen(text_array, time, fade_in_bg_time, fade_out_bg_time, 
     show_black_background = 1;
   }
   if(show_black_background) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       background = hud::createicon("", 640, 480);
     } else {
       background = hud::createservericon("", 640, 480);
@@ -2026,7 +2026,7 @@ function debug_info_screen(text_array, time, fade_in_bg_time, fade_out_bg_time, 
   if(isarray(text_array)) {
     start_y = 0 - ((text_array.size * spacing) / 2);
     foreach(text in text_array) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         text_elems[text_elems.size] = hud::createfontstring("", font_size);
       } else {
         text_elems[text_elems.size] = hud::createserverfontstring("", font_size);
@@ -2034,7 +2034,7 @@ function debug_info_screen(text_array, time, fade_in_bg_time, fade_out_bg_time, 
       text_elems[text_elems.size - 1] settext(text);
     }
   } else {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       text_elems[text_elems.size] = hud::createfontstring("", font_size);
     } else {
       text_elems[text_elems.size] = hud::createserverfontstring("", font_size);

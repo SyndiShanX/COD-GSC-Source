@@ -9,7 +9,6 @@ init() {
   flag_init("path_Notviewing");
   flag_init("path_refresh");
 }
-
 main() {}
 path_enable() {
   if(getDvar(#"path_enable") != "1") {
@@ -19,13 +18,11 @@ path_enable() {
   path_waittill_enable();
   level.pathmod.alpha = 1;
 }
-
 path_waittill_enable() {
   while(getDvar(#"path_enable") != "1") {
     wait .1;
   }
 }
-
 path_viewmode() {
   wait .1;
   while(1) {
@@ -42,7 +39,6 @@ path_viewmode() {
     flag_wait("path_Notviewing");
   }
 }
-
 path_connectlines() {
   level endon("path_refresh");
   dots = [];
@@ -54,7 +50,6 @@ path_connectlines() {
     wait .05;
   }
 }
-
 path_activatebutton() {
   level endon("path_refresh");
   while(1) {
@@ -72,7 +67,6 @@ path_activatebutton() {
     }
   }
 }
-
 path_handleselectindex() {
   level endon("path_refresh");
   lastselect = level.path_selectindex;
@@ -90,7 +84,6 @@ path_handleselectindex() {
     }
   }
 }
-
 path_hudshow() {
   players = get_players();
   flag_clear("path_Notviewing");
@@ -105,7 +98,6 @@ path_hudshow() {
   players[0] freezecontrols(false);
   flag_set("path_Notviewing");
 }
-
 path_getvisible() {
   outident = undefined;
   index = undefined;
@@ -129,7 +121,6 @@ path_getvisible() {
   outvar.ident = outident;
   return outvar;
 }
-
 path_viewwait(index) {
   level endon("path_refresh");
   arrowlength = 55;
@@ -166,7 +157,6 @@ path_viewwait(index) {
     wait .05;
   }
 }
-
 plot_circle_star_fortime(radius, time, color) {
   if(!isDefined(color)) {
     color = (0, 1, 0);
@@ -195,7 +185,6 @@ plot_circle_star_fortime(radius, time, color) {
     wait hangtime;
   }
 }
-
 plot_circle_fortime(radius, time, color) {
   if(!isDefined(color)) {
     color = (0, 1, 0);
@@ -222,7 +211,6 @@ plot_circle_fortime(radius, time, color) {
     wait hangtime;
   }
 }
-
 path_select_next() {
   if(getDvar(#"path_select_next") == "") {
     return;
@@ -230,9 +218,8 @@ path_select_next() {
   if(!(level.path_selectindex == level.path_views[level.path_selectid].size)) {
     level.path_selectindex++;
   }
-  setdvar("path_select_next", "");
+  setDvar("path_select_next", "");
 }
-
 path_select_prev() {
   if(getDvar(#"path_select_prev") == "") {
     return;
@@ -240,17 +227,15 @@ path_select_prev() {
   if(!(level.path_selectindex == 0)) {
     level.path_selectindex--;
   }
-  setdvar("path_select_prev", "");
+  setDvar("path_select_prev", "");
 }
-
 path_select_new() {
   if(getDvar(#"path_select_new") == "") {
     return;
   }
   level.path_selectindex = level.path_views[level.path_selectid].size;
-  setdvar("path_select_new", "");
+  setDvar("path_select_new", "");
 }
-
 path_setid() {
   if(getDvar(#"path_setid") == "") {
     return;
@@ -258,29 +243,25 @@ path_setid() {
   level.path_selectid = path_createid(getDvar(#"path_setid"));
   level.path_selectindex = 0;
 }
-
 path_setview() {
   if(getDvar(#"path_setview") == "") {
     return;
   }
   view = path_getcurrentview();
   path_setvieworgang(view);
-  setdvar("path_setview", "");
+  setDvar("path_setview", "");
   flag_set("path_refresh");
 }
-
 path_setvieworgang(view) {
   players = get_players();
   view.origin = players[0] getEye();
   view.angles = players[0] getplayerangles();
 }
-
 path_trigger_setvieworgang(view) {
   players = get_players();
   view.origin = players[0] getEye();
   view.radius = 200;
 }
-
 path_dump() {
   if(getDvar(#"path_dump") == "") {
     return;
@@ -288,9 +269,9 @@ path_dump() {
   println(" ");
   println(" ");
   println(" ");
-  println("--------**--------");
+  println("--------******--------");
   println(" path dump");
-  println("--------**--------");
+  println("--------******--------");
   println(" ");
   println(" ");
   for(j = 0; j < level.paths_selectid_list.size; j++) {
@@ -309,9 +290,8 @@ path_dump() {
   println(" ");
   println(" ");
   println(" ");
-  setdvar("path_dump", "");
+  setDvar("path_dump", "");
 }
-
 path_help() {
   if(getDvar(#"path_help") == "") {
     return;
@@ -343,9 +323,8 @@ path_help() {
   println("path_image <materialname>");
   println(" ");
   println("Once you have all your views press the dump button, open your console.log and paste the script to your level script");
-  setdvar("path_help", "");
+  setDvar("path_help", "");
 }
-
 path_delete() {
   if(getDvar(#"path_delete") == "") {
     return;
@@ -358,16 +337,14 @@ path_delete() {
   }
   level.path_views = newarray;
   flag_set("path_refresh");
-  setdvar("path_delete", "");
+  setDvar("path_delete", "");
 }
-
 path_select_template() {
   if(getDvar(#"path_select_template") == "") {
     return;
   }
-  setdvar("path_select_template", "");
+  setDvar("path_select_template", "");
 }
-
 path_editmode_update() {
   if(getDvar(#"path_editmode") == "") {
     return;
@@ -377,17 +354,15 @@ path_editmode_update() {
   } else {
     level.path_editmode = false;
   }
-  setdvar("path_editmode", "");
+  setDvar("path_editmode", "");
 }
-
 path_image_update() {
   if(getDvar(#"path_image") == "") {
     return;
   }
   view = path_getcurrentview();
-  setdvar("path_image", "");
+  setDvar("path_image", "");
 }
-
 path_getcurrentview() {
   view = undefined;
   if(isDefined(level.path_views[level.path_selectid]) && isDefined(level.path_views[level.path_selectid][level.path_selectindex])) {
@@ -397,7 +372,6 @@ path_getcurrentview() {
   }
   return view;
 }
-
 path_trigger_newview(bScriptAdded) {
   view = spawnStruct();
   if(!bScriptAdded) {
@@ -412,7 +386,6 @@ path_trigger_newview(bScriptAdded) {
   }
   return view;
 }
-
 path_newview(bScriptAdded) {
   view = spawnStruct();
   if(!bScriptAdded) {
@@ -427,7 +400,6 @@ path_newview(bScriptAdded) {
   }
   return view;
 }
-
 path_createid(ident) {
   if(!isDefined(level.paths_selectid_list)) {
     level.paths_selectid_list = [];
@@ -440,7 +412,6 @@ path_createid(ident) {
   level.paths_selectid_list[level.paths_selectid_list.size] = ident;
   return ident;
 }
-
 path_create(position, angle, ident) {}
 path_trigger_create(position, radius, ident) {}
 islookingorg(view) {

@@ -12,21 +12,24 @@ holo_table_system_init() {
 }
 
 rotate_indefinitely(rotate_time, rotate_fwd) {
-  if(!isDefined(rotate_time))
+  if(!isDefined(rotate_time)) {
     rotate_time = 45;
+  }
 
-  if(!isDefined(rotate_fwd))
+  if(!isDefined(rotate_fwd)) {
     rotate_fwd = 1;
+  }
 
   self endon("stop_spinning");
   self endon("death");
   self endon("delete");
 
   while(true) {
-    if(rotate_fwd)
+    if(rotate_fwd) {
       self rotateyaw(360, rotate_time, 0, 0);
-    else
+    } else {
       self rotateyaw(-360, rotate_time, 0, 0);
+    }
 
     wait(rotate_time - 0.1);
   }
@@ -54,19 +57,22 @@ holo_table_run_poi(allow_player_input) {
   }
   if(allow_player_input) {
     while(true) {
-      while(distancesquared(level.player.origin, self.e_origin.origin) > 16384)
+      while(distancesquared(level.player.origin, self.e_origin.origin) > 16384) {
         wait_network_frame();
+      }
 
       while(distancesquared(level.player.origin, self.e_origin.origin) <= 16384) {
         index_change = 0;
 
-        if(level.player buttonpressed("DPAD_LEFT"))
+        if(level.player buttonpressed("DPAD_LEFT")) {
           index_change = -1;
-        else if(level.player buttonpressed("DPAD_RIGHT"))
+        } else if(level.player buttonpressed("DPAD_RIGHT")) {
           index_change = 1;
+        }
 
-        if(index_change != 0 && flag("allow_holo_table_input"))
+        if(index_change != 0 && flag("allow_holo_table_input")) {
           holo_table_change_poi(index_change, 0.5, 1);
+        }
 
         wait_network_frame();
       }
@@ -110,19 +116,20 @@ holo_table_render_pois() {
 
     wait 0.05;
   }
-
 }
 
 holo_table_change_poi(n_index_change, move_time_s, display_level_name) {
-  if(!isDefined(move_time_s))
+  if(!isDefined(move_time_s)) {
     move_time_s = 2.0;
+  }
 
-  if(!isDefined(display_level_name))
+  if(!isDefined(display_level_name)) {
     display_level_name = 0;
+  }
 
-  if(!isDefined(self.cur_poi_index))
+  if(!isDefined(self.cur_poi_index)) {
     self.cur_poi_index = 0;
-  else {
+  } else {
     n_index_change = n_index_change % self.poi_list.size;
     self.cur_poi_index = (self.cur_poi_index + n_index_change + self.poi_list.size) % self.poi_list.size;
   }
@@ -170,8 +177,9 @@ holo_table_initialize(str_hologram, str_map_center_origin) {
     holo_table.poi_list[0].origin = (0, 0, 0);
   }
 
-  if(!isDefined(level.holo_tables))
+  if(!isDefined(level.holo_tables)) {
     level.holo_tables = [];
+  }
 
   level.holo_tables[str_hologram] = holo_table;
   return display;
@@ -193,13 +201,15 @@ holo_table_boot_sequence(allow_player_input) {
 }
 
 holo_table_scale_overtime(n_time, str_display_name) {
-  if(!isDefined(str_display_name))
+  if(!isDefined(str_display_name)) {
     str_display_name = undefined;
+  }
 
   model = self;
 
-  if(isDefined(str_display_name))
+  if(isDefined(str_display_name)) {
     model = getent(str_display_name, "targetname");
+  }
 
   model setscale(self.n_start_scale);
   model show();
@@ -216,11 +226,13 @@ holo_table_scale_overtime(n_time, str_display_name) {
 }
 
 holo_table_scale_overtime_reverse(n_time, str_display_name, hide_after) {
-  if(!isDefined(str_display_name))
+  if(!isDefined(str_display_name)) {
     str_display_name = undefined;
+  }
 
-  if(!isDefined(hide_after))
+  if(!isDefined(hide_after)) {
     hide_after = 0;
+  }
 
   model = self;
 
@@ -230,8 +242,9 @@ holo_table_scale_overtime_reverse(n_time, str_display_name, hide_after) {
   if(self.n_cur_scale <= 0.1) {
     return;
   }
-  if(isDefined(str_display_name))
+  if(isDefined(str_display_name)) {
     model = getent(str_display_name, "targetname");
+  }
 
   incs = n_time / 0.05;
   inc_size = (1.0 - self.n_start_scale) / incs;
@@ -244,8 +257,9 @@ holo_table_scale_overtime_reverse(n_time, str_display_name, hide_after) {
 
   model setscale(self.n_start_scale);
 
-  if(is_true(hide_after))
+  if(is_true(hide_after)) {
     model hide();
+  }
 }
 
 holo_table_reset_display() {
@@ -264,8 +278,9 @@ set_world_map_tint(territory_index, value) {
 set_world_map_widget(territory_index, widget_on) {
   value = 0;
 
-  if(widget_on)
+  if(widget_on) {
     value = 1;
+  }
 
   territory_index = clamp(territory_index, 0, 5);
   rpc("clientscripts/frontend", "toggle_world_map_widget", territory_index, value);
@@ -274,8 +289,9 @@ set_world_map_widget(territory_index, widget_on) {
 set_world_map_marker(territory_index, marker_on) {
   value = 0;
 
-  if(marker_on)
+  if(marker_on) {
     value = 1;
+  }
 
   territory_index = clamp(territory_index, 0, 5);
   rpc("clientscripts/frontend", "toggle_world_map_marker", territory_index, value);
@@ -305,16 +321,18 @@ world_map_zoom_to(x, y, scale) {
 war_map_blink_country(territory_index, blink_color, end_blink_notify) {
   assert(isDefined(territory_index));
 
-  if(isDefined(end_blink_notify))
+  if(isDefined(end_blink_notify)) {
     level endon(end_blink_notify);
+  }
 
   blink_on = 1;
 
   while(true) {
     cur_color = 4;
 
-    if(blink_on)
+    if(blink_on) {
       cur_color = blink_color;
+    }
 
     set_world_map_tint(territory_index, cur_color);
     refresh_war_map_shader();
@@ -339,8 +357,9 @@ script_model_blink_on() {
 }
 
 holo_table_prop_blink_on(off_after_seconds) {
-  if(!isDefined(off_after_seconds))
+  if(!isDefined(off_after_seconds)) {
     off_after_seconds = undefined;
+  }
 
   for(i = 0; i < 4; i++) {
     self setclientflag(14);
@@ -358,33 +377,41 @@ holo_table_prop_blink_on(off_after_seconds) {
 }
 
 holo_table_exploder_switch(exploder_num) {
-  if(!isDefined(exploder_num))
+  if(!isDefined(exploder_num)) {
     exploder_num = undefined;
+  }
 
-  if(isDefined(level.m_table_exploder))
+  if(isDefined(level.m_table_exploder)) {
     level thread stop_exploder(level.m_table_exploder);
+  }
 
-  if(isDefined(exploder_num))
+  if(isDefined(exploder_num)) {
     level thread exploder(exploder_num);
+  }
 
   level.m_table_exploder = exploder_num;
 }
 
 holo_table_feature_prop(model_name, done_notify, scale, map_objective_list, v_offset, str_targetname, b_spin) {
-  if(!isDefined(scale))
+  if(!isDefined(scale)) {
     scale = 1.0;
+  }
 
-  if(!isDefined(map_objective_list))
+  if(!isDefined(map_objective_list)) {
     map_objective_list = undefined;
+  }
 
-  if(!isDefined(v_offset))
+  if(!isDefined(v_offset)) {
     v_offset = (0, 0, 0);
+  }
 
-  if(!isDefined(str_targetname))
+  if(!isDefined(str_targetname)) {
     str_targetname = "holo_prop";
+  }
 
-  if(!isDefined(b_spin))
+  if(!isDefined(b_spin)) {
     b_spin = 1;
+  }
 
   self endon("death");
   rotate_time = 60.0;
@@ -408,16 +435,18 @@ holo_table_feature_prop(model_name, done_notify, scale, map_objective_list, v_of
   e_spin = getent("holo_table_spin", "targetname");
   e_model = spawn_model(model_name, e_spin.origin + v_offset, e_spin.angles + extra_spin);
 
-  if(!isDefined(b_spin) || isDefined(b_spin) && b_spin)
+  if(!isDefined(b_spin) || isDefined(b_spin) && b_spin) {
     e_model thread rotate_indefinitely(rotate_time, rotate_fwd);
+  }
 
   e_model setscale(scale);
   e_model.targetname = str_targetname;
   e_model ignorecheapentityflag(1);
   e_model setclientflag(15);
 
-  if(!issubstr(model_name, "zhao"))
+  if(!issubstr(model_name, "zhao")) {
     e_model setclientflag(14);
+  }
 
   level waittill(done_notify);
 

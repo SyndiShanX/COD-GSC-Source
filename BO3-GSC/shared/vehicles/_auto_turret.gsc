@@ -189,7 +189,7 @@ function state_combat_update(params) {
             wait(waittime);
           }
         }
-        if(isDefined(self.enemy) && isplayer(self.enemy)) {
+        if(isDefined(self.enemy) && isPlayer(self.enemy)) {
           wait(randomfloatrange(0.3, 0.6));
           continue;
         }
@@ -197,7 +197,7 @@ function state_combat_update(params) {
       }
       self setturretspinning(0);
       if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
-        if(isplayer(self.enemy)) {
+        if(isPlayer(self.enemy)) {
           wait(randomfloatrange(0.5, 1.3));
         } else {
           wait(randomfloatrange(0.5, 1.3) * 2);

@@ -237,7 +237,7 @@ lower_old_perm_blockers(list) {
 }
 
 maze_debug_print(str) {
-  if(getdvar(#"_id_55B04A98") != "")
+  if(getDvar(#"_id_55B04A98") != "")
     println("Maze : " + str);
 }
 

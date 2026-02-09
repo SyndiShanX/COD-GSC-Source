@@ -12,7 +12,6 @@ init() {
     PrecacheModel("t5_weapon_ballistic_knife_blade_retrieve");
   }
 }
-
 on_spawn(watcher, player) {
   player endon("death");
   player endon("disconnect");
@@ -28,15 +27,16 @@ on_spawn(watcher, player) {
     retrievable_model.angles = angles;
     retrievable_model.name = watcher.weapon;
     if(isDefined(prey)) {
-      if(isPlayer(prey) && player.team == prey.team)
+      if(isPlayer(prey) && player.team == prey.team) {
         isFriendly = true;
-      else if(isAI(prey) && player.team == prey.team)
+      } else if(isAI(prey) && player.team == prey.team) {
         isFriendly = true;
+      }
       if(!isFriendly) {
         retrievable_model LinkTo(prey, bone);
         retrievable_model thread force_drop_knives_to_ground_on_death(player, prey);
       } else if(isFriendly) {
-        retrievable_model physicslaunch(normal, (randomInt(10), randomInt(10), randomInt(10)));
+        retrievable_model physicslaunch(normal, (randomint(10), randomint(10), randomint(10)));
         normal = (0, 0, 1);
       }
     }
@@ -53,7 +53,6 @@ on_spawn(watcher, player) {
     retrievable_model thread wait_to_show_glowing_model(prey);
   }
 }
-
 wait_to_show_glowing_model(prey) {
   level endon("game_ended");
   self endon("death");
@@ -66,15 +65,15 @@ wait_to_show_glowing_model(prey) {
   }
   glowing_retrievable_model setModel("t5_weapon_ballistic_knife_blade_retrieve");
 }
-
 on_spawn_retrieve_trigger(watcher, player) {
   player endon("death");
   player endon("disconnect");
   player endon("zmb_lost_knife");
   level endon("game_ended");
   player waittill("ballistic_knife_stationary", retrievable_model, normal, prey);
-  if(!isDefined(retrievable_model))
+  if(!isDefined(retrievable_model)) {
     return;
+  }
   vec_scale = 10;
   trigger_pos = [];
   if(isDefined(prey)) {
@@ -107,7 +106,6 @@ on_spawn_retrieve_trigger(watcher, player) {
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.weapon, watcher.pickUpSoundPlayer, watcher.pickUpSound);
   player thread watch_shutdown(pickup_trigger, retrievable_model);
 }
-
 debug_print(endpos) {
   self endon("death");
   while(true) {
@@ -115,32 +113,36 @@ debug_print(endpos) {
     wait(0.05);
   }
 }
-
 watch_use_trigger(trigger, model, callback, weapon, playerSoundOnUse, npcSoundOnUse) {
   self endon("death");
   self endon("delete");
   level endon("game_ended");
   while(true) {
     trigger waittill("trigger", player);
-    if(!IsAlive(player))
+    if(!IsAlive(player)) {
       continue;
-    if(!player IsOnGround())
+    }
+    if(!player IsOnGround()) {
       continue;
-    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam))
+    }
+    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam)) {
       continue;
-    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy))
+    }
+    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
       continue;
+    }
     if(player UseButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed()) {
-      if(isDefined(playerSoundOnUse))
+      if(isDefined(playerSoundOnUse)) {
         player playLocalSound(playerSoundOnUse);
-      if(isDefined(npcSoundOnUse))
+      }
+      if(isDefined(npcSoundOnUse)) {
         player playSound(npcSoundOnUse);
+      }
       player thread[[callback]](weapon, model, trigger);
       break;
     }
   }
 }
-
 pick_up(weapon, model, trigger) {
   current_weapon = self GetCurrentWeapon();
   if(current_weapon != weapon) {
@@ -158,7 +160,6 @@ pick_up(weapon, model, trigger) {
   model destroy_ent();
   trigger destroy_ent();
 }
-
 destroy_ent() {
   if(isDefined(self)) {
     if(isDefined(self.glowing_model)) {
@@ -167,25 +168,22 @@ destroy_ent() {
     self delete();
   }
 }
-
 watch_shutdown(trigger, model) {
   self waittill_any("death", "disconnect", "zmb_lost_knife");
   trigger destroy_ent();
   model destroy_ent();
 }
-
 drop_knives_to_ground(player) {
   player endon("death");
   player endon("zmb_lost_knife");
   for(;;) {
     level waittill("drop_objects_to_ground", origin, radius);
-    if(distanceSquared(origin, self.origin) < radius * radius) {
+    if(DistanceSquared(origin, self.origin) < radius * radius) {
       self physicslaunch((0, 0, 1), (5, 5, 5));
       self thread update_retrieve_trigger(player);
     }
   }
 }
-
 force_drop_knives_to_ground_on_death(player, prey) {
   self endon("death");
   player endon("zmb_lost_knife");
@@ -194,7 +192,6 @@ force_drop_knives_to_ground_on_death(player, prey) {
   self physicslaunch((0, 0, 1), (5, 5, 5));
   self thread update_retrieve_trigger(player);
 }
-
 update_retrieve_trigger(player) {
   self endon("death");
   player endon("zmb_lost_knife");

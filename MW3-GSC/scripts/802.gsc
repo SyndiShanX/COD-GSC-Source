@@ -8,7 +8,6 @@ main() {
 
   if(!maps\_utility::_id_0A36()) {
     maps\_blizzard_hijack::_id_566B();
-
   }
   level thread maps\_shg_fx::_id_4456();
   thread _id_589E();
@@ -190,7 +189,6 @@ _id_589F() {
     if(!common_scripts\utility::flag("hide_player_snow_footprints")) {
       if(distance(self getvelocity(), (0, 0, 0)) <= 154) {
         playFX(common_scripts\utility::getfx("footstep_snow_small"), var_2["position"], var_2["normal"], var_3);
-
       }
       if(distance(self getvelocity(), (0, 0, 0)) > 154) {
         playFX(common_scripts\utility::getfx("footstep_snow"), var_2["position"], var_2["normal"], var_3);

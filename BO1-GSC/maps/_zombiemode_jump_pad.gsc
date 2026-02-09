@@ -12,7 +12,6 @@ init() {
     level jump_pad_init();
   }
 }
-
 jump_pad_init() {
   level._jump_pad_override = [];
   jump_pad_triggers = getEntArray("trig_jump_pad", "targetname");
@@ -29,7 +28,6 @@ jump_pad_init() {
   }
   level thread jump_pad_player_variables();
 }
-
 jump_pad_player_variables() {
   flag_wait("all_players_connected");
   players = GetPlayers();
@@ -38,7 +36,6 @@ jump_pad_player_variables() {
     players[j].lander = false;
   }
 }
-
 jump_pad_think() {
   self endon("destroyed");
   end_point = undefined;
@@ -59,12 +56,11 @@ jump_pad_think() {
   }
   while(isDefined(self)) {
     self waittill("trigger", who);
-    if(IsPlayer(who)) {
+    if(isPlayer(who)) {
       self thread trigger_thread(who, ::jump_pad_start, ::jump_pad_cancel);
     }
   }
 }
-
 jump_pad_start(ent_player, endon_condition) {
   self endon("endon_condition");
   ent_player endon("left_jump_pad");
@@ -104,7 +100,7 @@ jump_pad_start(ent_player, endon_condition) {
     end_point = self[[level._jump_pad_override[self.script_parameters]]](ent_player);
   }
   if(!isDefined(end_point)) {
-    end_point = self.destination[randomInt(self.destination.size)];
+    end_point = self.destination[RandomInt(self.destination.size)];
   }
   if(isDefined(self.script_string) && isDefined(level._jump_pad_override[self.script_string])) {
     info_array = self[[level._jump_pad_override[self.script_string]]](start_point, end_point);
@@ -114,7 +110,7 @@ jump_pad_start(ent_player, endon_condition) {
     end_spot = end_point.origin;
     if(!is_true(self.script_airspeed)) {
       rand_end = (RandomFloat(-1, 1), RandomFloat(-1, 1), 0);
-      rand_scale = randomInt(100);
+      rand_scale = RandomInt(100);
       rand_spot = vector_scale(rand_end, rand_scale);
       end_spot = end_point.origin + rand_spot;
     }
@@ -179,7 +175,6 @@ jump_pad_start(ent_player, endon_condition) {
     }
   }
 }
-
 jump_pad_cancel(ent_player) {
   ent_player notify("left_jump_pad");
   if(isDefined(ent_player.poi_spot) && !is_true(ent_player._padded)) {}
@@ -192,7 +187,6 @@ jump_pad_cancel(ent_player) {
     }
   }
 }
-
 jump_pad_move(vec_direction, flt_time, struct_poi) {
   self endon("death");
   self endon("disconnect");
@@ -254,7 +248,6 @@ jump_pad_move(vec_direction, flt_time, struct_poi) {
     self.poi_spot Delete();
   }
 }
-
 failsafe_pad_poi_clean(ent_trig, ent_poi) {
   if(isDefined(ent_trig.script_wait)) {
     wait(ent_trig.script_wait);
@@ -267,7 +260,6 @@ failsafe_pad_poi_clean(ent_trig, ent_poi) {
     ent_poi Delete();
   }
 }
-
 jump_pad_enemy_follow_or_ignore(ent_poi) {
   self endon("death");
   self endon("disconnect");
@@ -283,7 +275,6 @@ jump_pad_enemy_follow_or_ignore(ent_poi) {
     }
   }
 }
-
 jump_pad_ignore_poi_cleanup(ent_poi) {
   zombies = GetAIArray("axis");
   for(i = 0; i < zombies.size; i++) {
@@ -299,13 +290,13 @@ jump_pad_ignore_poi_cleanup(ent_poi) {
     }
   }
 }
-
 stop_chasing_the_sky(ent_poi) {
   self endon("death");
   self endon("stop_chasing_the_sky");
   while(is_true(self._pad_follow)) {
     flesh = get_closest_valid_player(self.origin);
-    if(isDefined(flesh) && Distance2D(flesh.origin, self.origin) < 10 * 10 && isDefined(self.favoriteenemy) && flesh != self.favoriteenemy) {
+    if(isDefined(flesh) && Distance2D(flesh.origin, self.origin) < 10 * 10 &&
+      isDefined(self.favoriteenemy) && flesh != self.favoriteenemy) {
       self add_poi_to_ignore_list(ent_poi);
       return;
     }
@@ -315,7 +306,6 @@ stop_chasing_the_sky(ent_poi) {
   self.ignore_distance_tracking = false;
   self notify("stop_chasing_the_sky");
 }
-
 jump_pad_player_overrides(st_behavior, int_clean) {
   if(!isDefined(st_behavior) || !IsString(st_behavior)) {
     return;

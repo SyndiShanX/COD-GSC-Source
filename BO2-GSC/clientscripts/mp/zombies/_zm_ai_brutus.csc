@@ -28,12 +28,10 @@ brutus_lock_down_effects_cb(localclientnum, oldval, newval, bnewent, binitialsna
   }
   if(bnewent) {
     println("LDS: NewEnt!");
-
   }
 
   if(binitialsnap) {
     println("LDS: InitialSnap!");
-
   }
 
   player = getlocalplayer(localclientnum);

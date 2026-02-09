@@ -21,7 +21,7 @@ function __init__() {
 }
 
 function __main__() {
-  setdvar("fogtest_litfog_scriptid", 0);
+  setDvar("fogtest_litfog_scriptid", 0);
   level.var_f87fe25d = [];
   level.var_9814fc19 = 0;
   level thread function_fb5e0a7e();
@@ -70,13 +70,13 @@ function function_bd594680(var_965632d6, n_bank) {
 }
 
 function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value = -1) {
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   adddebugcommand(((((("devgui_cmd \"" + str_devgui_path) + "\" \"") + str_dvar) + " ") + n_value) + "\"\n");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }

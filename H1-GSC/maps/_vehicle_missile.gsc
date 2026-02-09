@@ -5,8 +5,8 @@
 ********************************/
 
 main() {
-  if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "")
-    setdvar("cobrapilot_surface_to_air_missiles_enabled", "1");
+  if(getDvar("cobrapilot_surface_to_air_missiles_enabled") == "")
+    setDvar("cobrapilot_surface_to_air_missiles_enabled", "1");
 
   tryreload();
   thread firemissile();
@@ -49,7 +49,7 @@ turret_think() {
 
   self.attackradius = self.attackradius * var_0;
 
-  if(getdvar("cobrapilot_debug") == "1")
+  if(getDvar("cobrapilot_debug") == "1")
     iprintln("surface-to-air missile range difficultyScaler = " + var_0);
 
   for(;;) {
@@ -79,7 +79,7 @@ turret_think() {
     if(!var_3) {
       continue;
     }
-    if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "1") {
+    if(getDvar("cobrapilot_surface_to_air_missiles_enabled") == "1") {
       self notify("shoot_target", var_1);
       self waittill("missile_fired", var_4);
 
@@ -134,7 +134,7 @@ firemissile() {
     var_1 = self fireweapon(self.missiletags[self.missilelaunchnexttag], var_0, var_2);
     var_1 thread maps\_utility::play_sound_on_tag_endon_death("weap_bm21_missile_projectile");
 
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getDvar("cobrapilot_debug") == "1")
       level thread draw_missile_target_line(var_1, var_0, var_2);
 
     if(!isDefined(var_0.incomming_missiles))

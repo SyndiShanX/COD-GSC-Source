@@ -254,8 +254,8 @@ setupexploders() {
     var_4 common_scripts\_createfx::post_entity_creation_function();
   }
 
-  if(level.createfx_enabled && getdvar("createfx_exploder_waittime") == "")
-    setdvar("createfx_exploder_waittime", 3);
+  if(level.createfx_enabled && getDvar("createfx_exploder_waittime") == "")
+    setDvar("createfx_exploder_waittime", 3);
 }
 
 setup_flag_exploders() {
@@ -971,12 +971,12 @@ shouldrunserversideeffects() {
     return 1;
 
   if(!isDefined(level.createfx_enabled))
-    level.createfx_enabled = getdvar("createfx") != "";
+    level.createfx_enabled = getDvar("createfx") != "";
 
   if(level.createfx_enabled)
     return 1;
   else
-    return getdvar("clientSideEffects") != "1";
+    return getDvar("clientSideEffects") != "1";
 }
 
 exploder_before_load(var_0, var_1, var_2) {

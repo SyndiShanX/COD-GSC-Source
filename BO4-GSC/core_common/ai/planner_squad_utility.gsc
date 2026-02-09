@@ -203,7 +203,6 @@ _debugadjustedpath(params) {
 
         record3dtext("<dev string:x45>" + pointdanger.inner, center, (1, 0, 0), "<dev string:x38>");
         record3dtext("<dev string:x4e>" + pointdanger.outer, center + (0, 0, offset), (1, 0.5, 0), "<dev string:x38>");
-
       }
     }
 
@@ -213,7 +212,6 @@ _debugadjustedpath(params) {
       currentcenter = (params.adjustedpath[currentpathsegment] + params.adjustedpath[currentpathsegment + 1]) / 2;
 
       recordsphere(currentcenter, 10, (0, 1, 0));
-
     }
   }
 }

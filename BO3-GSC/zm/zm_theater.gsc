@@ -131,7 +131,7 @@ function main() {
   init_zones[1] = "foyer2_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
   level.zombie_ai_limit = 24;
-  setdvar("hkai_pathfindIterationLimit", 1200);
+  setDvar("hkai_pathfindIterationLimit", 1200);
   level.extracam_screen = getent("movie_screen_model", "script_noteworthy");
   util::clientnotify("camera_stop");
   init_sounds();

@@ -7,15 +7,15 @@
 #include maps\_utility;
 
 main() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
   level.tweakfile = 1;
   visionsetnaked("sp_angola_burning_man", 0.1);
 }
 
 burning_man() {
   visionsetnaked("sp_angola_burning_man", 0.1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity", 4);
   n_near_start = 1;
   n_near_end = 8;
   n_far_start = 20;
@@ -25,15 +25,15 @@ burning_man() {
   n_time = 0.2;
   level.player depth_of_field_tween(n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur, n_time);
   n_exposure = 3.6;
-  setdvar("r_exposureTweak", 1);
-  setdvar("r_exposureValue", n_exposure);
+  setDvar("r_exposureTweak", 1);
+  setDvar("r_exposureValue", n_exposure);
   n_sun_sample_size = 0.25;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
 
 burning_sky() {
   visionsetnaked("sp_angola_burning_sky", 0.5);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity", 4);
   n_near_start = 0;
   n_near_end = 20;
   n_far_start = 20;
@@ -42,18 +42,18 @@ burning_sky() {
   n_far_blur = 2;
   n_time = 0.2;
   level.player depth_of_field_tween(n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur, n_time);
-  setdvar("r_exposureTweak", 1);
-  setdvar("r_exposureValue", 3.6);
+  setDvar("r_exposureTweak", 1);
+  setDvar("r_exposureValue", 3.6);
   n_sun_sample_size = 0.25;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
 
 riverbed() {
   visionsetnaked("sp_angola_riverbed", 2);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity", 4);
   level.player depth_of_field_off(0.1);
   n_exposure = 3.0;
-  setdvar("r_exposureTweak", 1);
+  setDvar("r_exposureTweak", 1);
   level thread ramp_dvar("r_exposureValue", 3.6, 3.0, 2, 0.05);
   ramp_dvar("r_lightGridContrast", -0.1, 0, 2, 0.05);
   setsaveddvar("r_lightGridEnableTweaks", 0);
@@ -63,8 +63,8 @@ riverbed() {
 
 savimbi_reveal() {
   visionsetnaked("sp_angola_savimbi_reveal", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
   level.player depth_of_field_off(0.1);
 }
 
@@ -78,14 +78,14 @@ riverbed_skipto() {
 
 savannah_start() {
   visionsetnaked("sp_angola_savannah", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
 }
 
 savannah_hill() {
   visionsetnaked("sp_angola_savannah", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
 }
 
 savimbi_ride_along_on() {
@@ -98,16 +98,16 @@ savimbi_ride_along_off() {
 
 savannah_finish() {
   visionsetnaked("sp_angola_savannah", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
 }
 
 river() {
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
   visionsetnaked("sp_angola_2_river", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
 }
 
 heli_jump() {
@@ -117,15 +117,15 @@ heli_jump() {
 
 river_barge() {
   visionsetnaked("sp_angola_2_river", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
 
 vision_find_woods(m_player_body) {
   visionsetnaked("sp_angola_2_container_in", 5.0);
-  level.map_default_sun_direction = getdvar(#"r_lightTweakSunDirection");
+  level.map_default_sun_direction = getDvar(#"r_lightTweakSunDirection");
   level thread lerp_sun_direction((-95, 48, 0), 5);
 }
 
@@ -152,8 +152,8 @@ jungle_stealth() {
   vs_trigs = getEntArray("visionset", "targetname");
   array_thread(vs_trigs, ::vision_set);
   visionsetnaked("sp_angola_2_jungle_stealth", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
@@ -162,8 +162,8 @@ village() {
   vs_trigs = getEntArray("visionset", "targetname");
   array_thread(vs_trigs, ::vision_set);
   visionsetnaked("sp_angola_2_village", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
   n_sun_sample_size = 0.5;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
@@ -172,8 +172,8 @@ jungle_escape() {
   vs_trigs = getEntArray("visionset", "targetname");
   array_thread(vs_trigs, ::vision_set);
   visionsetnaked("sp_angola_2_jungle_escape", 0.5);
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 4);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 4);
   n_sun_sample_size = 0.4;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 }
@@ -365,13 +365,13 @@ heli_run_dof_off() {
 }
 
 set_water_dvars_strafe() {
-  setdvar("r_waterwavespeed", "0.470637 0.247217 1 1");
-  setdvar("r_waterwaveamplitude", "2.8911 0 0 0");
-  setdvar("r_waterwavewavelength", "9.71035 3.4 1 1");
-  setdvar("r_waterwaveangle", "56.75 237.203 0 0");
-  setdvar("r_waterwavephase", "0 2.6 0 0");
-  setdvar("r_waterwavesteepness", "0 0 0 0");
-  setdvar("r_waterwavelength", "9.71035 3.40359 1 1");
+  setDvar("r_waterwavespeed", "0.470637 0.247217 1 1");
+  setDvar("r_waterwaveamplitude", "2.8911 0 0 0");
+  setDvar("r_waterwavewavelength", "9.71035 3.4 1 1");
+  setDvar("r_waterwaveangle", "56.75 237.203 0 0");
+  setDvar("r_waterwavephase", "0 2.6 0 0");
+  setDvar("r_waterwavesteepness", "0 0 0 0");
+  setDvar("r_waterwavelength", "9.71035 3.40359 1 1");
 }
 
 hiding_log_dof_start(m_player_body) {

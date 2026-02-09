@@ -53,7 +53,7 @@ event_handler[level_init] main(eventstruct) {
   level.var_405a6738 = 35000;
   level.var_8a390df2 = 35000;
   compass::setupminimap("");
-  setdvar(#"hash_6b51c550499b0af2", 1);
+  setDvar(#"hash_6b51c550499b0af2", 1);
   level wz_open_skyscrapers_death_circle::function_6f6f5189();
 
   if(isDefined(getgametypesetting(#"wzheavymetalheroes")) && getgametypesetting(#"wzheavymetalheroes")) {
@@ -808,7 +808,7 @@ function_38146f54() {
       continue;
     }
 
-    setdvar(#"hash_639a741f419f5790", 0);
+    setDvar(#"hash_639a741f419f5790", 0);
 
     foreach(var_f0ffe8b2 in level.var_6eef6733) {
       foreach(var_80730518 in var_f0ffe8b2) {
@@ -1191,7 +1191,7 @@ function_e8f0335f() {
         var_b3a9e916 = 0;
       }
 
-      setdvar(#"hash_796c892495c48172", var_b3a9e916);
+      setDvar(#"hash_796c892495c48172", var_b3a9e916);
 
       while(self weaponswitchbuttonpressed()) {
         waitframe(1);
@@ -1398,7 +1398,7 @@ function_97714f49() {
         tracepoint = trace[# "position"];
       }
 
-      setdvar(#"hash_5fd194403e0d175e", 0);
+      setDvar(#"hash_5fd194403e0d175e", 0);
 
       switch (getdvarint(#"hash_27e2616ae4b57202", 1)) {
         case 1:
@@ -1557,7 +1557,6 @@ function_a2b6e273() {
 
     waitframe(1);
   }
-
 }
 
 devgui_weapon_think() {
@@ -1570,7 +1569,7 @@ devgui_weapon_think() {
         break;
     }
 
-    setdvar(#"scr_give_wz_item", 0);
+    setDvar(#"scr_give_wz_item", 0);
     wait 0.5;
   }
 }
@@ -1594,12 +1593,12 @@ devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
     array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
   }
 
-  setdvar(#"scr_give_wz_item", -1);
+  setDvar(#"scr_give_wz_item", -1);
 }
 
 function_1880c93d() {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   item = wz_loadouts::_get_item(#"ultimate_turret_wz_item");
   var_fa3df96 = self item_inventory::function_e66dcff5(item);
   self item_world::function_de2018e3(item, self, var_fa3df96);

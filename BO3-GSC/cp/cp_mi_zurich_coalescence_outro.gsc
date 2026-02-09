@@ -96,7 +96,7 @@ function function_313f113(str_objective, b_starting) {
     level thread util::screen_fade_in(2, "black");
     level thread function_81b8760e();
   }
-  setdvar("r_skyRotation", 244);
+  setDvar("r_skyRotation", 244);
   if(isDefined(level.bzm_zurichdialogue23callback)) {
     level thread[[level.bzm_zurichdialogue23callback]]();
   }
@@ -884,10 +884,10 @@ function player_speed_set(n_speed, n_time) {
   n_fraction = n_range / n_cycles;
   while((abs(var_f44c8c7e - var_6d63a9b5)) > (abs(n_fraction * 1.1))) {
     var_6d63a9b5 = var_6d63a9b5 + n_fraction;
-    setdvar("g_speed", int(var_6d63a9b5));
+    setDvar("g_speed", int(var_6d63a9b5));
     wait(n_interval);
   }
-  setdvar("g_speed", var_f44c8c7e);
+  setDvar("g_speed", var_f44c8c7e);
 }
 
 function function_3ec4c691() {

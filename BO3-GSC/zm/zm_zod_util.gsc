@@ -363,13 +363,13 @@ function show_infotext_for_duration(str_infotext, n_duration) {
 }
 
 function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value = -1) {
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   adddebugcommand(((((("devgui_cmd \"" + str_devgui_path) + "\" \"") + str_dvar) + " ") + n_value) + "\"\n");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }

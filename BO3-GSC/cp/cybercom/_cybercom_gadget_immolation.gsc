@@ -114,7 +114,7 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(target.archetype == "human" || target.archetype == "human_riotshield" && isplayer(self)) {
+  if(target.archetype == "human" || target.archetype == "human_riotshield" && isPlayer(self)) {
     if(!self hascybercomability("cybercom_immolation") == 2) {
       self cybercom::function_29bf9dee(target, 2);
       return false;
@@ -156,7 +156,7 @@ function private _activate_immolation(slot, weapon) {
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_immolation");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", fired);

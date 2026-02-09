@@ -182,7 +182,7 @@ slow_player_on_damage() {
   for(;;) {
     self waittill("damage", damage, attacker);
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     self.snowmobile thread slow_down_vehicle();
@@ -420,7 +420,7 @@ player_snowmobile_downed(vehicle) {
 }
 
 put_player_back_on_snowmobile(vehicle) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isDefined(vehicle));
   assert(isDefined(vehicle.resetPos));
   assert(isDefined(vehicle.resetAng));

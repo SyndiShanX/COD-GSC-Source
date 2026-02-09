@@ -573,7 +573,7 @@ function function_b80d5548() {
 }
 
 function function_cb315e40(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(weapon) && weapon === level.weapon_dragon_gauntlet) {
       if(meansofdeath === "MOD_BURNED") {
         self.weapon_specific_fire_death_torso_fx = "dlc3/stalingrad/fx_fire_torso_zmb_green";
@@ -642,7 +642,7 @@ function function_a23fb854() {
           player function_99a68dd();
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
@@ -653,7 +653,7 @@ function function_a23fb854() {
           player.hero_power = 100;
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
@@ -664,7 +664,7 @@ function function_a23fb854() {
           player.var_9e2dd97 = 1;
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
@@ -673,21 +673,21 @@ function function_a23fb854() {
           player.var_9e2dd97 = 0;
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     string = getdvarstring("");
     if(string === "") {
       foreach(player in getplayers()) {
         player thread function_82f11e44();
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     string = getdvarstring("");
     if(string === "") {
       foreach(player in getplayers()) {
         player function_c2e5ffc1();
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.05);
   }

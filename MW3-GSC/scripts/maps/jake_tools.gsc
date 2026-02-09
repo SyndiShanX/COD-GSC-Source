@@ -30,7 +30,6 @@ _id_4841() {
 _id_4842(var_0) {
   if(!isDefined(var_0)) {
     var_0 = getEntArray("hide", "script_noteworthy");
-
   }
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
@@ -48,7 +47,6 @@ _id_4842(var_0) {
 
         if(var_2.spawnflags & 1) {
           var_2 connectpaths();
-
         }
         break;
       case "trigger_multiple_flag_looking":
@@ -126,7 +124,6 @@ _id_4846(var_0, var_1, var_2) {
     var_3 = getaiarray(var_2);
   } else {
     var_3 = getaiarray();
-
   }
   var_4 = [];
 
@@ -181,7 +178,6 @@ _id_4849(var_0, var_1) {
 
   if(var_1 == "truck") {
     var_4 _id_484A();
-
   }
   var_4 attachpath(var_2);
   var_4 startpath();
@@ -200,7 +196,6 @@ _id_484B(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_1 = getent(var_0, "targetname");
-
   }
   var_2 = getnode(var_1.target, "targetname");
   self._id_484C = var_1;
@@ -228,11 +223,9 @@ _id_484F(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_2)) {
     var_2 = 0.25;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   if(!isDefined(var_1)) {
     self notify("stop_3dprint");
@@ -283,7 +276,6 @@ _id_4853(var_0) {
   } else {
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_1[var_2] thread _id_4854(var_1);
-
     }
     var_1[0] waittill("trigger");
   }
@@ -330,7 +322,6 @@ _id_4859(var_0) {
 _id_485A(var_0) {
   if(!isDefined(self._id_485B)) {
     self._id_485B = self.threatbias;
-
   }
   self.threatbias = var_0;
 }
@@ -338,7 +329,6 @@ _id_485A(var_0) {
 _id_485C() {
   if(isDefined(self._id_485B)) {
     self.threatbias = self._id_485B;
-
   }
   self._id_485B = undefined;
 }
@@ -346,7 +336,6 @@ _id_485C() {
 _id_485D(var_0) {
   if(!isDefined(self._id_2802)) {
     self._id_2802 = self.walkdist;
-
   }
   self.walkdist = var_0;
 }
@@ -354,7 +343,6 @@ _id_485D(var_0) {
 _id_485E() {
   if(isDefined(self._id_2802)) {
     self.walkdist = self._id_2802;
-
   }
   self._id_2802 = undefined;
 }
@@ -373,7 +361,6 @@ _id_4861() {
 _id_4862(var_0) {
   if(!isDefined(self._id_404B)) {
     self._id_404B = self._id_1032;
-
   }
   self._id_1032 = var_0;
 }
@@ -381,7 +368,6 @@ _id_4862(var_0) {
 _id_4863() {
   if(isDefined(self._id_404B)) {
     self._id_1032 = self._id_404B;
-
   }
   self._id_404B = undefined;
 }
@@ -389,7 +375,6 @@ _id_4863() {
 _id_4864(var_0) {
   if(!isDefined(self._id_4865)) {
     self._id_4865 = self.maxsightdistsqrd;
-
   }
   self.maxsightdistsqrd = var_0;
 }
@@ -397,7 +382,6 @@ _id_4864(var_0) {
 _id_4866() {
   if(isDefined(self._id_4865)) {
     self.maxsightdistsqrd = self._id_4865;
-
   }
   self._id_4865 = undefined;
 }
@@ -407,7 +391,6 @@ _id_4867(var_0) {
 
   if(!isDefined(self._id_4868)) {
     self._id_4868 = self._id_4869;
-
   }
   self._id_4869 = var_0;
   self setthreatbiasgroup(var_0);
@@ -430,7 +413,6 @@ _id_486A() {
 _id_486B(var_0) {
   if(!isDefined(self._id_4048)) {
     self._id_4048 = self.goalradius;
-
   }
   self.goalradius = var_0;
 }
@@ -438,7 +420,6 @@ _id_486B(var_0) {
 _id_486C() {
   if(isDefined(self._id_4048)) {
     self.goalradius = self._id_4048;
-
   }
   self._id_4048 = undefined;
 }
@@ -446,7 +427,6 @@ _id_486C() {
 _id_486D(var_0) {
   if(!isDefined(self._id_2071)) {
     self._id_2071 = self.interval;
-
   }
   self.interval = var_0;
 }
@@ -454,7 +434,6 @@ _id_486D(var_0) {
 _id_486E() {
   if(isDefined(self._id_2071)) {
     self.interval = self._id_2071;
-
   }
   self._id_2071 = undefined;
 }
@@ -462,7 +441,6 @@ _id_486E() {
 _id_486F(var_0) {
   if(!isDefined(self._id_42D0)) {
     self._id_42D0 = self._id_20AF;
-
   }
   self._id_20AF = var_0;
 }
@@ -470,7 +448,6 @@ _id_486F(var_0) {
 _id_4870() {
   if(isDefined(self._id_42D0)) {
     self._id_20AF = self._id_42D0;
-
   }
   self._id_42D0 = undefined;
 }
@@ -482,13 +459,11 @@ _id_4871(var_0) {
     var_2 = level.player getorigin();
   } else {
     var_2 = var_0 getorigin();
-
   }
   if(isDefined(level._id_4872)) {
     var_1 = maps\_utility::_id_2288(var_2, "allies", level._id_4872);
   } else {
     var_1 = maps\_utility::_id_1EE9(var_2, "allies");
-
   }
   return var_1;
 }
@@ -511,13 +486,11 @@ _id_4874(var_0, var_1) {
 _id_4875(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = getent(var_1, "targetname");
-
   }
   if(var_0 == "all") {
     var_3 = getaiarray();
   } else {
     var_3 = getaiarray(var_0);
-
   }
   var_4 = [];
 
@@ -540,7 +513,6 @@ _id_4876(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   var_5 = undefined;
 
@@ -548,7 +520,6 @@ _id_4876(var_0, var_1, var_2, var_3) {
     var_5 = getaiarray();
   } else {
     var_5 = getaiarray(var_1);
-
   }
   if(isDefined(var_3)) {
     for(var_6 = 0; var_6 < var_3.size; var_6++) {
@@ -668,7 +639,6 @@ _id_487F(var_0) {
     }
   } else if(!isDefined(self._id_0D04)) {
     thread maps\_utility::_id_0D04();
-
   }
   self.a._id_0D11 = var_0;
 }
@@ -703,15 +673,12 @@ _id_4883() {}
 _id_4042(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   if(var_1 == 1) {
     self playSound(level.scr_sound["snd_wood_door_kick"]);
-
   }
   if(self.classname == "script_brushmodel") {
     var_3 = getent(self.target, "targetname");
@@ -785,7 +752,6 @@ debug_circle(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     wait(var_4);
-
   }
   thread debug_circle_drawlines(var_8, var_2, var_3, var_5, var_0);
 }
@@ -793,11 +759,9 @@ debug_circle(var_0, var_1, var_2, var_3, var_4, var_5) {
 debug_circle_drawlines(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   if(!isDefined(var_4)) {
     var_3 = 0;
-
   }
   for(var_5 = 0; var_5 < var_0.size; var_5++) {
     var_6 = var_0[var_5];
@@ -806,7 +770,6 @@ debug_circle_drawlines(var_0, var_1, var_2, var_3, var_4) {
       var_7 = var_0[0];
     } else {
       var_7 = var_0[var_5 + 1];
-
     }
     thread debug_line(var_6, var_7, var_1, var_2);
 
@@ -819,7 +782,6 @@ debug_circle_drawlines(var_0, var_1, var_2, var_3, var_4) {
 debug_line(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = (1, 1, 1);
-
   }
   for(var_4 = 0; var_4 < var_2 * 20; var_4++) {
     wait 0.05;

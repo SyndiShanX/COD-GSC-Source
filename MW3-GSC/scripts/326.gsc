@@ -14,7 +14,6 @@ _id_1285() {
 
   if(isDefined(var_1.script_linkto)) {
     var_5 = var_1 common_scripts\utility::get_linked_ent();
-
   }
   if(var_2.size == 1) {
     var_3 = var_2[0];
@@ -36,14 +35,12 @@ _id_1285() {
 
   if(isDefined(var_9.target)) {
     var_10 = getent(var_9.target, "targetname");
-
   }
   if(isDefined(var_10)) {
     var_1 thread _id_1294(var_10);
 
     if(!isDefined(level._id_1286)) {
       level._id_1286 = [];
-
     }
     level._id_1286[level._id_1286.size] = var_10;
   }
@@ -77,14 +74,12 @@ _id_1285() {
 
     if(isDefined(self.radius)) {
       var_13 = self.radius;
-
     }
     var_12 = spawn("trigger_radius", var_1.origin, 0, var_13, 48);
   }
 
   if(isDefined(var_5)) {
     badplace_brush(var_5 getentitynumber(), 0, var_5, "allies");
-
   }
   maps\_utility::add_spawn_function(::_id_128A, var_1, var_12, var_11, var_9, var_5);
 }
@@ -108,14 +103,12 @@ _id_128A(var_0, var_1, var_2, var_3, var_4) {
     var_0 thread maps\_anim::_id_11D6(var_6, "idle");
   } else {
     var_0 thread maps\_anim::_id_11BF(var_6, "fire_3");
-
   }
   if(isDefined(var_1)) {
     wait 0.05;
     var_1 waittill("trigger");
   } else {
     common_scripts\utility::flag_wait(self._id_1288);
-
   }
   if(var_5) {
     var_0 notify("stop_loop");
@@ -130,7 +123,6 @@ _id_128A(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(self.enemy)) {
       var_9 = self.enemy;
-
     }
     var_10 = _id_1291(var_2.angles, self.origin, var_9.origin);
 
@@ -202,7 +194,6 @@ _id_128A(var_0, var_1, var_2, var_3, var_4) {
 _id_128D(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   if(var_0) {
     if(!sighttracepassed(level.player getEye(), self getEye(), 0, self)) {
@@ -223,17 +214,14 @@ _id_128D(var_0, var_1) {
 _id_128E(var_0) {
   if(var_0 != "behind") {
     return 0;
-
   }
   var_1 = distance(self.origin, level.player.origin);
 
   if(var_1 > 250) {
     return 0;
-
   }
   if(!sighttracepassed(level.player getEye(), self getEye(), 0, self)) {
     return 0;
-
   }
   return 1;
 }
@@ -245,25 +233,20 @@ _id_128F(var_0, var_1, var_2) {
 
   if(var_2 < var_3) {
     return 0;
-
   }
   if(var_1 != level.player) {
     return 0;
-
   }
   if(var_0 != "front") {
     return 0;
-
   }
   var_6 = distance(self.origin, level.player.origin);
 
   if(var_6 < var_4) {
     return 0;
-
   }
   if(var_6 > var_5) {
     return 0;
-
   }
   return common_scripts\utility::cointoss();
 }
@@ -271,15 +254,12 @@ _id_128F(var_0, var_1, var_2) {
 _id_1290(var_0, var_1) {
   if(var_1 < 1) {
     return 0;
-
   }
   if(var_0 == "behind") {
     return 0;
-
   }
   if(randomint(100) < 25 * self.grenadeammo) {
     return 1;
-
   }
   return 0;
 }
@@ -302,7 +282,6 @@ _id_1291(var_0, var_1, var_2) {
     var_8 = "right";
   } else if(var_7 > 270) {
     var_8 = "left";
-
   }
   return var_8;
 }
@@ -333,11 +312,9 @@ _id_1295(var_0) {
 
   if(var_2 < 300) {
     var_2 = 300;
-
   }
   if(var_2 > 1000) {
     var_2 = 1000;
-
   }
   var_3 = vectornormalize(level.player.origin - var_0.origin);
   var_4 = var_3 * var_2;
@@ -377,7 +354,6 @@ _id_1297(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_0 disconnectpaths();
-
   }
   if(isDefined(var_1)) {
     badplace_delete(var_1 getentitynumber());

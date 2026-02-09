@@ -16,8 +16,8 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  SetDvar("compassmaxrange", "1900");
-  SetDvar("r_specularcolorscale", "1.86");
+  setDvar("compassmaxrange", "1900");
+  setDvar("r_specularcolorscale", "1.86");
 
   thread BreakGlass();
 }

@@ -875,7 +875,7 @@ function damagewatch(damage, attacker, direction_vec, point, meansofdeath, model
   if(!isDefined(self.owner)) {
     return;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(attacker.pers["team"] == self.owner.pers["team"]) {
       return;
     }
@@ -1342,7 +1342,7 @@ function choosefinalkillcam() {
     return;
   }
   var_81790aa5 = choosebestpropforkillcam(var_fdf4a4ec, var_94ffcd5f);
-  if(isplayer(var_81790aa5)) {
+  if(isPlayer(var_81790aa5)) {
     attackernum = var_81790aa5 getentitynumber();
   } else {
     attackernum = -1;
@@ -1526,7 +1526,7 @@ function tracktimealive() {
 
 function gamemodemodifyplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   victim = self;
-  if(isDefined(eattacker) && isplayer(eattacker) && isalive(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isalive(eattacker)) {
     if(!isDefined(eattacker.hashitplayer)) {
       eattacker.hashitplayer = 1;
     }
@@ -1809,7 +1809,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, v
     }
     thread deathicons::add(victim.body, victim, victim.team, 5);
   }
-  if(isDefined(attacker) && isplayer(attacker) && attacker != victim && victim.team != attacker.team) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != victim && victim.team != attacker.team) {
     killedbyenemy = 1;
   }
   if(killedbyenemy) {
@@ -2372,7 +2372,7 @@ function function_8d5e52a2(damage, attacker, direction_vec, point, meansofdeath,
   if(!isDefined(attacker)) {
     return;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(isDefined(self.isdying) && self.isdying) {
       return;
     }
@@ -2752,7 +2752,7 @@ function function_12f9ab17(damage, attacker, direction_vec, point, meansofdeath,
   if(!isDefined(attacker)) {
     return;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker thread damagefeedback::update();
     self.lastattacker = attacker;
     function_a88142c8(attacker);

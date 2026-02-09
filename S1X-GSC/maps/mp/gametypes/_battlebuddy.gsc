@@ -196,8 +196,7 @@ waitForBuddySpawnTimer() {
   }
 
   result = self checkBuddyspawn();
-  if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT ||
-    result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
+  if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT || result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
     self.battleBuddy displayBuddyStatusMessage(&"MP_BUDDY_ERR_COMBAT");
   } else {
     self.battleBuddy displayBuddyStatusMessage(&"MP_BUDDY_INCOMING");
@@ -208,8 +207,7 @@ waitForBuddySpawnTimer() {
 
   result = self checkBuddyspawn();
   while(result.status != BATTLEBUDDY_SPAWN_STATUS_OK) {
-    if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT ||
-      result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
+    if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT || result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
       self displayBuddyStatusMessage(&"MP_BUDDY_WAITING_COMBAT");
       self.battleBuddy displayBuddyStatusMessage(&"MP_BUDDY_ERR_COMBAT");
     } else if(result.status == BATTLEBUDDY_SPAWN_STATUS_BLOCKED) {

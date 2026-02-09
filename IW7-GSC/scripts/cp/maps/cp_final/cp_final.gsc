@@ -14,16 +14,16 @@ setuphacks() {
 }
 
 main() {
-  setdvar("sm_sunSampleSizeNear", 2.2);
-  setdvar("sm_sunCascadeSizeMultiplier1", 4);
-  setdvar("sm_sunCascadeSizeMultiplier2", 3);
-  setdvar("r_sdfShadowPenumbra", 0.4);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraAccurateOcclusionThreshold", 500);
-  setdvar("sm_roundRobinPrioritySpotShadows", 8);
-  setdvar("sm_spotUpdateLimit", 8);
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("sm_sunSampleSizeNear", 2.2);
+  setDvar("sm_sunCascadeSizeMultiplier1", 4);
+  setDvar("sm_sunCascadeSizeMultiplier2", 3);
+  setDvar("r_sdfShadowPenumbra", 0.4);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 500);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   level.skeleton_model_override = "dlc4_fullbody_zmb_skeleton";
   level.bslasherdebugger = getdvarint("debug_slasher", 0);
   scripts\cp\utility::coop_mode_enable(["pillage"]);
@@ -388,7 +388,7 @@ wait_for_pre_game_period() {
   scripts\engine\utility::flag_set("pillage_enabled");
   scripts\cp\zombies\zombie_entrances::enable_windows_in_area("facility_start");
   init_magic_wheel();
-  if(getdvar("dlc4_boss_fight") == "1" || 0) {
+  if(getDvar("dlc4_boss_fight") == "1" || 0) {
     level.debug_boss_fight = 1;
     if(0) {
       level.debug_boss_fight_skip_loadout = 1;
@@ -898,7 +898,7 @@ should_drop_pillage(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     return 1;
   }
 
@@ -1863,7 +1863,7 @@ water_triggers() {
 water_trigger() {
   for(;;) {
     self waittill("trigger", var_0);
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -2161,7 +2161,7 @@ pit_kill_trigger() {
   var_0 = getent("player_kill_trig", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 

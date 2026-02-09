@@ -133,8 +133,8 @@ bot_draw_debug_heli_nodes(nodes) {
   level endon("teleport_to_zone");
 
   while(1) {
-    draw_debug_heli_nodes = GetDvar("bot_DrawDebugSpecial") == "heli_nodes";
-    draw_debug_heli_nodes_with_vanguard_info = GetDvar("bot_DrawDebugSpecial") == "heli_nodes_vanguard_info";
+    draw_debug_heli_nodes = getDvar("bot_DrawDebugSpecial") == "heli_nodes";
+    draw_debug_heli_nodes_with_vanguard_info = getDvar("bot_DrawDebugSpecial") == "heli_nodes_vanguard_info";
     if(draw_debug_heli_nodes || draw_debug_heli_nodes_with_vanguard_info) {
       current_nodes = nodes;
       for(i = 0; i < current_nodes.size; i++) {
@@ -611,7 +611,6 @@ bot_control_vanguard() {
   self.vehicle_controlling endon("death");
   wait(0.5);
 
-  /#		
   if(!self.vehicle_controlling maps\mp\killstreaks\_vanguard::vanguard_in_range()) {
     AssertMsg("Vanguard at location " + self.vehicle_controlling.origin + " spawned in an invalid area for the Vanguard.Spawned by bot at location " + self.origin);
     self BotPressButton("use", 4.0);
@@ -700,7 +699,6 @@ bot_control_vanguard() {
           self BotPressButton("lethal");
         else if(height_difference < -10)
           self BotPressButton("tactical");
-        /#				
         if(GetDvarInt("ai_showpaths") == 1) {
           line(self.vehicle_controlling.origin, path[i].origin + (0, 0, SCR_CONST_vanguard_desired_path_height), (0, 0, 1), 1.0, false, 4);
           for(j = i; j < path.size - 1; j++) {
@@ -795,7 +793,7 @@ bot_control_vanguard() {
 vanguard_assert_on_range(vehicle) {
   vehicle waittill("death", reason);
   if(isDefined(reason)) {
-    AssertEx(reason != "range_death", "Bot drove vanguard out of range in " + getdvar("mapname"));
+    AssertEx(reason != "range_death", "Bot drove vanguard out of range in " + getDvar("mapname"));
   }
 }
 
@@ -904,7 +902,7 @@ vanguard_control_aiming() {
     }
 
     if(isDefined(enemy_chosen)) {
-      if((IsAI(enemy_chosen) || IsPlayer(enemy_chosen)) && Length(enemy_chosen GetEntityVelocity()) < 25) {
+      if((IsAI(enemy_chosen) || isPlayer(enemy_chosen)) && Length(enemy_chosen GetEntityVelocity()) < 25) {
         target_loc = enemy_chosen.origin;
       } else if(GetTime() - last_predict_enemy_time < 500) {
         if(last_enemy_predicted != enemy_chosen)
@@ -1460,7 +1458,7 @@ bot_control_odin(type) {
       desired_target = self[[level.bot_ks_funcs["odin_get_target"][type]]]();
       if(isDefined(desired_target)) {
         current_random_zone_target = undefined;
-        if(IsPlayer(desired_target))
+        if(isPlayer(desired_target))
           move_loc = self bot_odin_get_player_target_point(desired_target);
         else
           move_loc = desired_target;
@@ -1477,7 +1475,6 @@ bot_control_odin(type) {
 
         move_loc = zone_origin;
       }
-
     }
 
     marker_to_move_loc = move_loc - self.odin.targeting_marker.origin;
@@ -1937,7 +1934,6 @@ bot_control_heli_main_move_loop(type, rides_on_mesh) {
         }
       }
     }
-    /#		
     if(GetDvarInt("ai_showpaths") == 1) {
       if(isDefined(current_target))
         Line(self.vehicle_controlling.origin, current_target, (0, 0, 1), 1.0, false);

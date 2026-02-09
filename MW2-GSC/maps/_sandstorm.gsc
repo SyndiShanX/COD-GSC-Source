@@ -291,7 +291,7 @@ blizzard_level_get_count(type) {
 
 blizzard_overlay_alpha(time, alpha, skipCap) {
   player = self;
-  if(!isplayer(player))
+  if(!isPlayer(player))
     player = level.player;
 
   if(!isDefined(alpha))
@@ -320,7 +320,7 @@ blizzard_overlay_alpha(time, alpha, skipCap) {
 blizzard_overlay_clear(timer) {
   if(!isDefined(timer) || !timer) {
     player = self;
-    if(!isplayer(player))
+    if(!isPlayer(player))
       player = level.player;
     overlay = get_frozen_overlay(player);
     overlay Destroy();

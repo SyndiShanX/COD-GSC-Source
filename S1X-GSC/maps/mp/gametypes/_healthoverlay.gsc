@@ -85,7 +85,6 @@ playerHealthRegen() {
     self thread healthRegeneration(hurtTime, healthRatio);
     self thread breathingManager(hurtTime, healthRatio, damage, damage_type);
   }
-
 }
 
 breathingManager(hurtTime, healthRatio, damage, damage_type) {
@@ -102,7 +101,7 @@ breathingManager(hurtTime, healthRatio, damage, damage_type) {
     return;
   }
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -255,7 +254,7 @@ playerPainBreathingSound() {
     return;
   }
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

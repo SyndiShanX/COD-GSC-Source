@@ -105,7 +105,6 @@ alienAgentspawn(spawnOrigin, spawnAngles, alienType, introVignetteAnim) {
 
           if(GetDvarInt("alien_debug_escape") > 0)
             IPrintLnBold("^1Failed to port alien");
-
         } else {
           spawnOrigin = port_to_data[0];
           spawnAngles = port_to_data[1];
@@ -294,7 +293,6 @@ setup_watcher() {
   self thread maps\mp\_flashgrenades::MonitorFlash();
   self thread maps\mp\agents\alien\_alien_think::MonitorFlash();
 
-  /#	
   if(GetDvarInt("scr_aliendebugvelocity") == 1)
     self thread maps\mp\alien\_debug::alienDebugVelocity();
 }
@@ -460,7 +458,7 @@ resetAllScriptables(scriptable_name_list, position) {
 }
 
 playAnimOnAllScriptables(scriptable_name_list, position, scriptable_state_list) {
-  /# AssertEx( scriptable_name_list.size == scriptable_state_list.size, "The scriptable name lists and state lists have mismatch with their size near position ( " + position + " )." );
+  AssertEx(scriptable_name_list.size == scriptable_state_list.size, "The scriptable name lists and state lists have mismatch with their size near position ( " + position + " ).");
 
   for(i = 0; i < scriptable_name_list.size; i++)
     maps\mp\agents\alien\_alien_anim_utils::playAnimOnScriptable(scriptable_name_list[i], position, int(scriptable_state_list[i]));

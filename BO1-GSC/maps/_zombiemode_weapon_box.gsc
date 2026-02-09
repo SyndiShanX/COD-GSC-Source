@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  level.wepbox = getEnt("weapon_box", "targetname");
+  level.wepbox = GetEnt("weapon_box", "targetname");
   if(!isDefined(level.wepbox)) {
     return;
   }
@@ -19,7 +19,6 @@ init() {
   }
   level.wepbox thread weapon_box_update();
 }
-
 weapon_box_update() {
   while(1) {
     self waittill("trigger", player);

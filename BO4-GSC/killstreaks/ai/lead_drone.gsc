@@ -148,7 +148,7 @@ function_b2cc6703(targets) {
       continue;
     }
 
-    if(isplayer(targets[idx])) {
+    if(isPlayer(targets[idx])) {
       update_player_threat(targets[idx]);
       continue;
     }
@@ -481,7 +481,6 @@ function_5ebe7443() {
       if(isDefined(self.var_d6acaac4)) {
         recordsphere(self.protectdest, 8, (0, 1, 0), "<dev string:x73>");
         recordline(self.protectdest, self.var_d6acaac4, (0, 1, 0), "<dev string:x73>");
-
       }
     }
 

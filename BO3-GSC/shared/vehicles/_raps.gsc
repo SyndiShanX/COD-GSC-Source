@@ -70,7 +70,7 @@ function state_scripted_update(params) {
   self endon("change_state");
   self endon("death");
   driver = self getseatoccupant(0);
-  if(isplayer(driver)) {
+  if(isPlayer(driver)) {
     driver endon("disconnect");
     driver util::waittill_attack_button_pressed();
     self kill(self.origin, driver);
@@ -83,7 +83,7 @@ function state_death_update(params) {
   if(!isDefined(attacker)) {
     attacker = params.attacker;
   }
-  if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isplayer(attacker))) {
+  if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isPlayer(attacker))) {
     self.damage_on_death = 0;
     wait(0.05);
     attacker = params.inflictor;
@@ -357,7 +357,7 @@ function detonation_monitor() {
   while(true) {
     try_detonate();
     wait(0.2);
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       if(lastenemy !== self.enemy) {
         lastdisttoenemysquared = 1E+08;
         lastenemy = self.enemy;
@@ -487,7 +487,7 @@ function raps_get_target_position() {
       self setpersonalthreatbias(self.enemy, -2000, 5);
     }
   }
-  if(isDefined(enemy) && isplayer(enemy)) {
+  if(isDefined(enemy) && isPlayer(enemy)) {
     enemy_vel_offset = enemy getvelocity() * 0.5;
     enemy_look_dir_offset = anglesToForward(enemy.angles);
     if(distance2dsquared(self.origin, enemy.origin) > (500 * 500)) {
@@ -537,7 +537,7 @@ function path_update_interrupt() {
           self notify("near_goal");
         }
       }
-      if(isDefined(self.enemy) && isplayer(self.enemy) && !isDefined(self.slow_trigger)) {
+      if(isDefined(self.enemy) && isPlayer(self.enemy) && !isDefined(self.slow_trigger)) {
         forward = anglesToForward(self.enemy getplayerangles());
         dir_to_raps = self.origin - self.enemy.origin;
         speedtouse = self.settings.defaultmovespeed;

@@ -196,7 +196,7 @@ p2t1_1_destroy_cages() {
   var_10 setusefov(60);
   var_10 setuserange(50);
   var_10 waittill("trigger", var_11);
-  if(isDefined(var_11) && isplayer(var_11)) {
+  if(isDefined(var_11) && isPlayer(var_11)) {
     var_11 thread scripts\cp\cp_vo::try_to_play_vo("pam_collect_lockerkey", "disco_comment_vo");
     var_11 thread scripts\cp\cp_vo::add_to_nag_vo("missing_item_misc", "disco_comment_vo", 240, 120, 4, 1);
   }
@@ -564,7 +564,7 @@ p2t1_2_subway_locker() {
   var_3 setModel("tag_origin");
   var_3 makeusable();
   var_3 waittill("trigger", var_4);
-  if(isDefined(var_4) && isplayer(var_4)) {
+  if(isDefined(var_4) && isPlayer(var_4)) {
     var_4 thread scripts\cp\cp_vo::try_to_play_vo("pam_open_locker", "disco_comment_vo");
     level thread scripts\cp\cp_vo::remove_from_nag_vo("missing_item_misc");
   }
@@ -597,7 +597,7 @@ p2t1_3_decal_puzzle() {
   var_5 = 0;
   while(!var_5) {
     level waittill("update_graffiti", var_6, var_7);
-    if(!isDefined(var_7) || !isplayer(var_7)) {
+    if(!isDefined(var_7) || !isPlayer(var_7)) {
       continue;
     }
 
@@ -1400,7 +1400,7 @@ setup_cipher_glyphs() {
     var_1.health = 999999;
     while(!isDefined(var_4)) {
       var_1 waittill("damage", var_10, var_11, var_10, var_4);
-      if(!isplayer(var_11)) {
+      if(!isPlayer(var_11)) {
         var_4 = undefined;
         var_1.health = 999999;
         continue;
@@ -1449,7 +1449,7 @@ p2t2_6_rat_king_fight() {
 play_corresponding_vo(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  if(!isplayer(self) && !isDefined(self.vo_prefix)) {
+  if(!isPlayer(self) && !isDefined(self.vo_prefix)) {
     return;
   }
 
@@ -1798,7 +1798,7 @@ p2t3_0_missing_reel() {
   playFXOnTag(level._effect["turnstile_arm"], var_13, "tag_origin");
   var_13 makeusable();
   var_13 waittill("trigger", var_3);
-  if(isDefined(var_3) && isplayer(var_3)) {
+  if(isDefined(var_3) && isPlayer(var_3)) {
     var_3 thread scripts\cp\cp_vo::try_to_play_vo("pam_collect_turnstile", "disco_comment_vo");
     var_3 thread scripts\cp\cp_vo::add_to_nag_vo("missing_item_misc", "disco_comment_vo", 200, 120, 4, 1);
   }
@@ -2287,7 +2287,7 @@ watchforallplayersinroom() {
   for(;;) {
     wait(0.1);
     var_0 waittill("trigger", var_1);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 

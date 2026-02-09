@@ -109,7 +109,7 @@ function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sw
   if(self.archetype != "zombie") {
     return;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     for(i = 0; i < level.soul_catchers.size; i++) {
       if(self istouching(level.soul_catchers_vol[i])) {
         if(!level.soul_catchers[i].is_charged) {

@@ -565,7 +565,6 @@ debugline(frompoint, color, durationframes) {
     line(frompoint, (frompoint[0], frompoint[1], frompoint[2] + 50), color);
     wait 0.05;
   }
-
 }
 
 debugbox(frompoint, color, durationframes) {
@@ -573,7 +572,6 @@ debugbox(frompoint, color, durationframes) {
     box(frompoint, (-1, -1, -1), (1, 1, 1), 0, color);
     wait 0.05;
   }
-
 }
 
 _isopeningdoor(opening_tag) {

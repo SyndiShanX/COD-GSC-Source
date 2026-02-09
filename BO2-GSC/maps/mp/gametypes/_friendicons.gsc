@@ -7,8 +7,8 @@ init() {
   if(level.createfx_enabled || sessionmodeiszombiesgame()) {
     return;
   }
-  if(getdvar(#"scr_drawfriend") == "")
-    setdvar("scr_drawfriend", "0");
+  if(getDvar(#"scr_drawfriend") == "")
+    setDvar("scr_drawfriend", "0");
 
   level.drawfriend = getdvarint(#"scr_drawfriend");
   assert(isDefined(game["headicon_allies"]), "Allied head icons are not defined.Check the team set for the level.");

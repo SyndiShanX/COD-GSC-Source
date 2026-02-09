@@ -7,12 +7,12 @@
 #include maps\_utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 init() {
   level._effect["monkey_trail"] = loadfx("maps/zombie/fx_zombie_ape_spawn_trail");
   level.monkey_zombie_enter_level = ::monkey_cosmodrome_enter_level;
   level.monkey_round_start = ::monkey_cosmodrome_round_start;
 }
-
 monkey_cosmodrome_enter_level() {
   self endon("death");
   end = self monkey_lander_get_closest_dest();
@@ -31,21 +31,19 @@ monkey_cosmodrome_enter_level() {
   self linkto(lander);
   wait(2.5);
   lander show();
-  lander moveTo(end.origin, 0.6);
+  lander MoveTo(end.origin, 0.6);
   lander waittill("movedone");
   lander clearclientflag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_MONKEY_LANDER_FX);
   wait(2.0);
   self unlink();
   self show();
 }
-
 clear_lander() {
   wait(8.0);
   self MoveZ(-100, 0.5);
   self waittill("movedone");
   self delete();
 }
-
 monkey_lander_get_closest_dest() {
   if(!isDefined(level._lander_endarray)) {
     level._lander_endarray = [];
@@ -70,15 +68,12 @@ monkey_lander_get_closest_dest() {
   }
   return choice;
 }
-
 monkey_cosmodrome_round_start() {
   clientnotify("MRS");
 }
-
 monkey_cosmodrome_prespawn() {
   self.lander_death = ::monkey_cosmodrome_lander_death;
 }
-
 monkey_cosmodrome_failsafe() {
   self endon("death");
   while(true) {
@@ -92,7 +87,6 @@ monkey_cosmodrome_failsafe() {
   assertmsg("monkey is out of playable area at " + self.origin);
   self DoDamage(self.health + 100, self.origin);
 }
-
 monkey_cosmodrome_lander_death() {
   self maps\_zombiemode_spawner::reset_attack_spot();
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();

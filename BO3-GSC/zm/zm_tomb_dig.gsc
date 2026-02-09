@@ -673,16 +673,16 @@ function function_85eef9f2() {
 }
 
 function setup_dig_devgui() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -701,20 +701,20 @@ function setup_dig_devgui() {
 function watch_devgui_dig() {
   while(true) {
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       player = getplayers()[0];
       s_dig_spot = arraygetclosest(player.origin, level.a_dig_spots);
       level thread dig_up_zombie(player, s_dig_spot);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       foreach(player in getplayers()) {
         player.dig_vars[""] = 1;
         level clientfield::set(function_f4768ce9(player getentitynumber()), 1);
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       foreach(player in getplayers()) {
         player.dig_vars[""] = 1;
         player.dig_vars[""] = 1;
@@ -723,7 +723,7 @@ function watch_devgui_dig() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       foreach(player in getplayers()) {
         player.dig_vars[""] = 1;
         n_player = player getentitynumber() + 1;
@@ -732,7 +732,7 @@ function watch_devgui_dig() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       a_dig_spots = array::randomize(level.a_dig_spots);
       for(i = 0; i < a_dig_spots.size; i++) {
         if(isDefined(a_dig_spots[i].dug) && a_dig_spots[i].dug && level.n_dig_spots_cur <= level.n_dig_spots_max) {
@@ -743,7 +743,7 @@ function watch_devgui_dig() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       a_dig_spots = array::randomize(level.a_dig_spots);
       for(i = 0; i < a_dig_spots.size; i++) {
         if(isDefined(a_dig_spots[i].dug) && a_dig_spots[i].dug) {
@@ -754,7 +754,7 @@ function watch_devgui_dig() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       a_z_spots = struct::get_array("", "");
       foreach(s_spot in a_z_spots) {
         s_spot.m_dig = spawn("", s_spot.origin + (vectorscale((0, 0, -1), 40)));
@@ -765,7 +765,7 @@ function watch_devgui_dig() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level.weather_snow = 0;
       level.weather_rain = 5;
       level.weather_vision = 1;
@@ -779,7 +779,7 @@ function watch_devgui_dig() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level.weather_snow = 5;
       level.weather_rain = 0;
       level.weather_vision = 2;
@@ -793,7 +793,7 @@ function watch_devgui_dig() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level.weather_snow = 0;
       level.weather_rain = 0;
       level.weather_vision = 3;

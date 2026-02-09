@@ -40,7 +40,6 @@ hack_boards() {
     maps\_zombiemode_equip_hacker::register_pooled_hackable_struct(struct, ::board_hack, ::board_qualifier);
   }
 }
-
 board_hack(hacker) {
   maps\_zombiemode_equip_hacker::deregister_hackable_struct(self);
   num_chunks_checked = 0;
@@ -81,7 +80,6 @@ board_hack(hacker) {
   }
   maps\_zombiemode_equip_hacker::register_pooled_hackable_struct(self, ::board_hack, ::board_qualifier);
 }
-
 board_qualifier(player) {
   if(all_chunks_intact(self.window.barrier_chunks) || no_valid_repairable_boards(self.window.barrier_chunks)) {
     return false;

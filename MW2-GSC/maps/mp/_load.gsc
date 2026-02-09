@@ -13,7 +13,7 @@ main() {
   }
   level._loadStarted = true;
 
-  level.createFX_enabled = (getdvar("createfx") != "");
+  level.createFX_enabled = (getDvar("createfx") != "");
 
   struct_class_init();
 
@@ -82,7 +82,7 @@ main() {
   if(level.createFX_enabled)
     maps\mp\_createfx::createfx();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     maps\mp\gametypes\_spawnlogic::setMapCenterForReflections();
     maps\mp\_global_fx::main();
     level waittill("eternity");

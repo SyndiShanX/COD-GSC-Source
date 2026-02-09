@@ -146,7 +146,7 @@ function function_2fdaabf3() {
     if(isDefined(level.var_252a085b) && level.var_252a085b) {
       continue;
     }
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     if(type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_EXPLOSIVE") {

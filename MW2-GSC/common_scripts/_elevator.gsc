@@ -3,11 +3,10 @@
  * Script: common_scripts\_elevator.gsc
 ********************************************************/
 
-//#include maps\mp\_utility;
-#include common_scripts\utility;
+/include maps\mp\_utility;#include common_scripts\utility;
 
 init() {
-  if(getdvar("scr_elevator_disabled") == "1") {
+  if(getDvar("scr_elevator_disabled") == "1") {
     return;
   }
   // skip if no elevators in this level
@@ -1097,10 +1096,10 @@ elevator_get_dvar_int(dvar, def) {
 }
 
 elevator_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }

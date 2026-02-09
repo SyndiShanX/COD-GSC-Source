@@ -39,11 +39,9 @@ shutdown_battleChatter() {
   level notify("battlechatter disabled");
   anim notify("battlechatter disabled");
 }
-
 resetSayTime(name) {
   self.nextSayTimes[name] = GetTime() + 50;
 }
-
 resetSayTimes() {
   self.nextSayTime = GetTime();
   resetSayTime("threat");
@@ -53,7 +51,6 @@ resetSayTimes() {
   resetSayTime("inform");
   resetSayTime("custom");
 }
-
 init_squadBattleChatter() {}
 shutdown_squadBattleChatter() {
   squad = self;
@@ -100,7 +97,6 @@ shutdown_squadBattleChatter() {
   }
   squad.chatInitialized = false;
 }
-
 initContact(squadName) {
   if(!isDefined(self.squadList[squadName].calledOut)) {
     self.squadList[squadName].calledOut = false;
@@ -112,17 +108,14 @@ initContact(squadName) {
     self.squadList[squadName].lastContact = 0;
   }
 }
-
 shutdownContact(squadName) {
   self.squadList[squadName].calledOut = undefined;
   self.squadList[squadName].firstContact = undefined;
   self.squadList[squadName].lastContact = undefined;
 }
-
 bcsEnabled() {
   return anim.chatInitialized;
 }
-
 bcsDebugWaiter() {}
 enableBattleChatter() {}
 disableBattleChatter() {}
@@ -140,14 +133,12 @@ samePhrase(a, b) {
   }
   return true;
 }
-
 initHistory() {
   level.bcHistoryCount = 100;
   level.bcHistoryPhrases = [];
   level.bcHistoryTimes = [];
   level.bcHistoryIndex = 0;
 }
-
 addPhraseToHistory(phrase) {
   assert(isDefined(level.bcHistoryIndex));
   i = level.bcHistoryIndex;
@@ -157,10 +148,11 @@ addPhraseToHistory(phrase) {
   assert(isDefined(i));
   level.bcHistoryIndex = (i + 1) % level.bcHistoryCount;
 }
-
 isDupePhrase(phrase, threshold) {
   for(i = 0; i < level.bcHistoryCount; i++) {
-    if(isDefined(level.bcHistoryPhrases[i]) && samePhrase(level.bcHistoryPhrases[i], phrase) && GetTime() - level.bcHistoryTimes[i] < threshold) {
+    if(isDefined(level.bcHistoryPhrases[i]) &&
+      samePhrase(level.bcHistoryPhrases[i], phrase) &&
+      GetTime() - level.bcHistoryTimes[i] < threshold) {
       if(getDvar(#"debug_bclotsoprint") == "on") {
         println("BC DEBUG history skip time " + GetTime() + " " + level.bcHistoryTimes[i] + " " + (GetTime() - level.bcHistoryTimes[i]));
       }
@@ -169,7 +161,6 @@ isDupePhrase(phrase, threshold) {
   }
   return false;
 }
-
 delayed_notify(n, time, end) {
   self endon(end);
   wait(time);
@@ -177,16 +168,15 @@ delayed_notify(n, time, end) {
     self notify(n);
   }
 }
-
 nearestPlayer() {
   players = GetPlayers();
   if(players.size == 0) {
     return undefined;
   }
-  distance = distanceSquared(players[0].origin, self.origin);
+  distance = DistanceSquared(players[0].origin, self.origin);
   player = players[0];
   for(i = 1; i < players.size; i++) {
-    d = distanceSquared(players[i].origin, self.origin);
+    d = DistanceSquared(players[i].origin, self.origin);
     if(d < distance) {
       distance = d;
       player = players[i];
@@ -194,7 +184,6 @@ nearestPlayer() {
   }
   return player;
 }
-
 typeLimited(strAction, strType) {
   if(!isDefined(anim.eventTypeMinWait[strAction][strType])) {
     return (false);
@@ -207,44 +196,43 @@ typeLimited(strAction, strType) {
   }
   return (true);
 }
-
 doTypeLimit(strAction, strType) {
   if(!isDefined(anim.eventTypeMinWait[strAction][strType])) {
     return;
   }
   self.squad.nextTypeSayTimes[strAction][strType] = GetTime() + anim.eventTypeMinWait[strAction][strType];
 }
-
 bcIsSniper() {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     return (false);
   }
   return animscripts\combat_utility::isSniperRifle(self.weapon);
 }
-
 isExposed() {}
 isClaimedNodeCover() {
   node = self bcGetClaimedNode();
   if(!isDefined(node)) {
     return (false);
   }
-  if((node.type[0] == "C") && (node.type[1] == "o") && (node.type[2] == "v")) {
+  if((node.type[0] == "C") &&
+    (node.type[1] == "o") &&
+    (node.type[2] == "v")) {
     return (true);
   }
   return (false);
 }
-
 isNodeCover() {
   node = self.node;
   if(!isDefined(node)) {
     return (false);
   }
-  if((node.type[0] == "C") && (node.type[1] == "o") && (node.type[2] == "v")) {
+  if((node.type[0] == "C") &&
+    (node.type[1] == "o") &&
+    (node.type[2] == "v")) {
     return (true);
   }
   return (false);
 }
-
 isOfficer() {
   fullRank = self getRank();
   if(fullRank == "sergeant" || fullRank == "lieutenant" || fullRank == "captain" || fullRank == "sergeant") {
@@ -252,15 +240,13 @@ isOfficer() {
   }
   return (false);
 }
-
 bcGetClaimedNode() {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     node = self.node;
   } else {
     node = self GetClaimedNode();
   }
 }
-
 getName() {
   name = undefined;
   if(self.team == "axis") {
@@ -283,17 +269,14 @@ getName() {
   }
   return undefined;
 }
-
 getRank() {
   return self.airank;
 }
-
 getClosestSpeaker(strAction, strType, officerOnly) {
   speakers = self getSpeakers(strAction, strType, officerOnly);
   speaker = getClosest(self.origin, speakers);
   return (speaker);
 }
-
 getSpeakers(strAction, strType, officersOnly) {
   speakers = [];
   soldiers = GetAIArray(self.team);
@@ -317,7 +300,6 @@ getSpeakers(strAction, strType, officersOnly) {
   }
   return (speakers);
 }
-
 getArea() {
   areas = anim.areas;
   for(i = 0; i < areas.size; i++) {
@@ -327,7 +309,6 @@ getArea() {
   }
   return (undefined);
 }
-
 getLocation() {
   locations = anim.locations;
   for(i = 0; i < locations.size; i++) {
@@ -337,7 +318,6 @@ getLocation() {
   }
   return (undefined);
 }
-
 getLandmark() {
   landmarks = anim.landmarks;
   for(i = 0; i < landmarks.size; i++) {
@@ -347,7 +327,6 @@ getLandmark() {
   }
   return (undefined);
 }
-
 getDirectionCompass(vOrigin, vPoint) {
   angles = VectorToAngles(vPoint - vOrigin);
   angle = angles[1];
@@ -379,7 +358,6 @@ getDirectionCompass(vOrigin, vPoint) {
   }
   return (direction);
 }
-
 getDirectionReferenceSide(vOrigin, vPoint, vReference) {
   anglesToReference = VectorToAngles(vReference - vOrigin);
   anglesToPoint = VectorToAngles(vPoint - vOrigin);
@@ -402,7 +380,6 @@ getDirectionReferenceSide(vOrigin, vPoint, vReference) {
   }
   return (side);
 }
-
 getDirectionFacingFlank(vOrigin, vPoint, vFacing) {
   anglesToFacing = VectorToAngles(vFacing);
   anglesToPoint = VectorToAngles(vPoint - vOrigin);
@@ -420,11 +397,9 @@ getDirectionFacingFlank(vOrigin, vPoint, vFacing) {
   }
   return (direction);
 }
-
 getVectorRightAngle(vDir) {
   return (vDir[1], 0 - vDir[0], vDir[2]);
 }
-
 getVectorArrayAverage(avAngles) {
   vDominantDir = (0, 0, 0);
   for(i = 0; i < avAngles.size; i++) {
@@ -432,7 +407,6 @@ getVectorArrayAverage(avAngles) {
   }
   return (vDominantDir[0] / avAngles.size, vDominantDir[1] / avAngles.size, vDominantDir[2] / avAngles.size);
 }
-
 addAlias(name) {
   if(soundExists(name)) {
     self.soundAliases[self.soundAliases.size] = name;
@@ -442,7 +416,6 @@ addAlias(name) {
     return false;
   }
 }
-
 createChatPhrase() {
   chatPhrase = spawnStruct();
   chatPhrase.owner = self;
@@ -450,17 +423,14 @@ createChatPhrase() {
   chatPhrase.master = false;
   return chatPhrase;
 }
-
 canSeePoint(origin) {
   forward = anglesToForward(self.angles);
   return (vectordot(forward, origin - self.origin) > 0.766);
 }
-
 pointInFov(origin) {
   forward = anglesToForward(self.angles);
   return (vectordot(forward, origin - self.origin) > 0.766);
 }
-
 resetNextSayTimes(team, action) {}
 bcGetName() {
   name = undefined;
@@ -484,21 +454,25 @@ bcGetName() {
   }
   return undefined;
 }
-
 bcCanSay(eventAction, eventType, priority, modifier) {
   assert(isDefined(eventAction));
   assert(isDefined(eventType));
   isGrenade = false;
-  if(isDefined(eventAction) && eventAction == "inform" && isDefined(eventType) && eventType == "incoming" && isDefined(modifier) && modifier == "grenade") {
+  if(isDefined(eventAction) && eventAction == "inform" &&
+    isDefined(eventType) && eventType == "incoming" &&
+    isDefined(modifier) && modifier == "grenade") {
     isGrenade = true;
   }
-  if(isDefined(eventAction) && eventAction == "inform" && isDefined(eventType) && eventType == "attack" && isDefined(modifier) && modifier == "grenade") {
+  if(isDefined(eventAction) && eventAction == "inform" &&
+    isDefined(eventType) && eventType == "attack" &&
+    isDefined(modifier) && modifier == "grenade") {
     isGrenade = true;
   }
-  if(isDefined(eventAction) && eventAction == "threat" && isDefined(eventType) && eventType == "bansai") {
+  if(isDefined(eventAction) && eventAction == "threat" &&
+    isDefined(eventType) && eventType == "bansai") {
     isGrenade = true;
   }
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(getDvar(#"debug_bclotsoprint") == "on") {
       println("BC DEBUG cannot say because i'm a player " + self.bcname);
     }
@@ -559,7 +533,7 @@ bcCanSay(eventAction, eventType, priority, modifier) {
   } else {
     cullDist = 3000;
   }
-  if(distanceSquared(np.origin, self.origin) > cullDist * cullDist) {
+  if(DistanceSquared(np.origin, self.origin) > cullDist * cullDist) {
     if(getDvar(#"debug_bclotsoprint") == "on") {
       println("BC DEBUG cannot say, too far from player " + self.bcname);
     }
@@ -597,7 +571,6 @@ bcCanSay(eventAction, eventType, priority, modifier) {
   }
   return (true);
 }
-
 bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
   if(!isDefined(decCallCount)) {
     decCallCount = false;
@@ -651,7 +624,6 @@ bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
     }
   }
 }
-
 filter(potentialThreats, isThreat) {
   threats = [];
   for(i = 0; i < potentialThreats.size; i++) {
@@ -665,7 +637,6 @@ filter(potentialThreats, isThreat) {
   }
   return threats;
 }
-
 getThreat(team, threats, threatDistance, callCount) {
   players = GetPlayers();
   closest = threatDistance;
@@ -687,7 +658,6 @@ getThreat(team, threats, threatDistance, callCount) {
   }
   return threat;
 }
-
 getClosestToPlayer(list) {
   players = GetPlayers();
   closest = 0;
@@ -706,7 +676,6 @@ getClosestToPlayer(list) {
   }
   return obj;
 }
-
 getNearestTalker(origin, threat, friends, action, type, modifier) {
   talkers = [];
   for(i = 0; i < friends.size; i++) {
@@ -722,7 +691,6 @@ getNearestTalker(origin, threat, friends, action, type, modifier) {
   }
   return getClosest(origin, talkers);
 }
-
 getAlias(action, type, modifier) {
   alias = self.countryID + "_" + self.npcID;
   if(isDefined(action)) {
@@ -736,7 +704,6 @@ getAlias(action, type, modifier) {
   }
   return alias;
 }
-
 getBCLocation() {
   if(isDefined(self.node) && isDefined(self.node.script_area)) {
     return self.node.script_area;
@@ -757,14 +724,12 @@ getBCLocation() {
   }
   return undefined;
 }
-
 tryAddLocation(talker, object) {
   a = object getBCLocation();
   if(isDefined(a)) {
     self addAlias(talker getAlias("landmark", "near", a));
   }
 }
-
 tryThreat(friends, them, distance, count, filter, action, type, modifier, doLocation) {
   threat = filter(them, filter);
   threat = getThreat("allies", threat, distance, count);
@@ -787,7 +752,6 @@ tryThreat(friends, them, distance, count, filter, action, type, modifier, doLoca
   talker thread bcPlayPhrase(action, type, phrase, true);
   return true;
 }
-
 isGrenade(player) {
   if(isDefined(self.model) && self.model == "mortar_shell") {
     return false;
@@ -806,7 +770,6 @@ isGrenade(player) {
   }
   return true;
 }
-
 isMg(player) {
   if(isDefined(self.bcCalloutTime)) {
     if((GetTime() - self.bcCalloutTime) < 6000) {
@@ -820,17 +783,16 @@ isMg(player) {
   }
   return self cansee(player) || distance(player.origin, self.origin) < 300;
 }
-
 isBanzai(player) {
   playerIsTarget = false;
   if(isDefined(self.banzai) && self.banzai) {
-    if(isDefined(self.enemy) && IsPlayer(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       playerIsTarget = true;
     }
-    if(isDefined(self.target) && IsPlayer(self.target)) {
+    if(isDefined(self.target) && isPlayer(self.target)) {
       playerIsTarget = true;
     }
-    if(isDefined(self.favoriteenemy) && IsPlayer(self.favoriteenemy)) {
+    if(isDefined(self.favoriteenemy) && isPlayer(self.favoriteenemy)) {
       playerIsTarget = true;
     }
     if(!playerIsTarget) {
@@ -849,11 +811,9 @@ isBanzai(player) {
   }
   return false;
 }
-
 isInfantry(player) {
   return self cansee(player) && distance(player.origin, self.origin) < 1000;
 }
-
 getAllTurrets(team) {
   t = [];
   turrets = array_combine(getEntArray("misc_mg42", "classname"), getEntArray("misc_turret", "classname"));
@@ -865,7 +825,6 @@ getAllTurrets(team) {
   }
   return t;
 }
-
 isSurpressed(player) {
   valid = false;
   if(isDefined(self.suppressed) && self.suppressed) {
@@ -880,7 +839,6 @@ isSurpressed(player) {
   }
   return valid;
 }
-
 trySurpressed(team) {
   players = GetPlayers();
   sp = filter(team, ::isSurpressed);
@@ -894,7 +852,6 @@ trySurpressed(team) {
   talker thread bcPlayPhrase("inform", "supressed", phrase, false);
   return true;
 }
-
 findGuyToYellAt(team, notme) {
   for(i = 0; i < team.size; i++) {
     if(notme.npcID == team[i].npcID) {
@@ -909,7 +866,6 @@ findGuyToYellAt(team, notme) {
   }
   return undefined;
 }
-
 canSeeAny(team) {
   for(i = 0; i < team.size; i++) {
     if(isDefined(team[i]) && team[i] cansee(self)) {
@@ -918,7 +874,6 @@ canSeeAny(team) {
   }
   return false;
 }
-
 doReload(otherteam, talker, yellat) {
   phrase = talker createChatPhrase();
   if(isDefined(yellat)) {
@@ -936,17 +891,18 @@ doReload(otherteam, talker, yellat) {
   phrase addAlias(yellat getAlias("response", "ack", "covering"));
   yellat thread bcPlayPhrase("response", "ack", phrase, false);
 }
-
 tryReload(team, otherteam) {
   for(i = 0; i < team.size; i++) {
-    if(isDefined(team[i].bcReloadTime) && (GetTime() - team[i].bcReloadTime) < 2000 && team[i] bcCanSay("order", "action")) {
+    if(isDefined(team[i].bcReloadTime) &&
+      (GetTime() - team[i].bcReloadTime) < 2000 &&
+      team[i] bcCanSay("order", "action")
+    ) {
       thread doReload(otherteam, team[i], findGuyToYellAt(team, team[i]));
       return true;
     }
   }
   return false;
 }
-
 doOrder(talker, yellat, type, modifier) {
   phrase = talker createChatPhrase();
   if(isDefined(yellat) && RandomFloat(1) < .6) {
@@ -964,27 +920,29 @@ doOrder(talker, yellat, type, modifier) {
   phrase addAlias(yellat getAlias("response", "ack", modifier));
   yellat thread bcPlayPhrase("response", "ack", phrase, false);
 }
-
 tryOrder(team) {
   for(i = 0; i < team.size; i++) {
-    if(isDefined(team[i].bcOrderTime) && (GetTime() - team[i].bcOrderTime) > 2000) {
+    if(isDefined(team[i].bcOrderTime) &&
+      (GetTime() - team[i].bcOrderTime) > 2000
+    ) {
       team[i].bcOrderTime = undefined;
       team[i].bcOrderType = undefined;
       team[i].bcOrderModifier = undefined;
       continue;
     }
-    if(isDefined(team[i].bcOrderTime) && (GetTime() - team[i].bcOrderTime) < 2000 && team[i] bcCanSay("order", team[i].bcOrderType)) {
+    if(isDefined(team[i].bcOrderTime) &&
+      (GetTime() - team[i].bcOrderTime) < 2000 &&
+      team[i] bcCanSay("order", team[i].bcOrderType)
+    ) {
       thread doOrder(team[i], findGuyToYellAt(team, team[i]), team[i].bcOrderType, team[i].bcOrderModifier);
       return true;
     }
   }
   return false;
 }
-
 hasKill(player) {
   return isDefined(self.bcKillTime) && (GetTime() - self.bcKillTime) < 2000 && self bcCanSay("inform", "killfirm");
 }
-
 tryKill(team) {
   dude = getClosestToPlayer(filter(team, ::hasKill));
   if(!isDefined(dude)) {
@@ -1000,11 +958,9 @@ tryKill(team) {
   dude.bcKillTime = undefined;
   return true;
 }
-
 hasCasualty(player) {
   return isDefined(self.bcFriendDeathTime) && (GetTime() - self.bcFriendDeathTime) < 3000 && self bcCanSay("reaction", "casualty");
 }
-
 tryCasualty(team) {
   dude = getClosestToPlayer(filter(team, ::hasCasualty));
   if(!isDefined(dude)) {
@@ -1017,11 +973,9 @@ tryCasualty(team) {
   dude.bcFriendDeathTime = undefined;
   return true;
 }
-
 tryGrenade(player) {
   return isDefined(self.bcThrewGrenadeTime) && (GetTime() - self.bcThrewGrenadeTime) < 2000 && self bcCanSay("inform", "attack");
 }
-
 tryGrenadeInform(team) {
   dude = getClosestToPlayer(filter(team, ::hasCasualty));
   if(!isDefined(dude)) {
@@ -1034,7 +988,6 @@ tryGrenadeInform(team) {
   dude.bcThrewGrenadeTime = undefined;
   return true;
 }
-
 tryFireInform(team, others) {
   if(!isDefined(level.bcOnFireTime)) {
     return false;
@@ -1059,7 +1012,6 @@ tryFireInform(team, others) {
   talker thread bcPlayPhrase("inform", "burning", phrase, false);
   return true;
 }
-
 bccycle(team, otherteam) {
   if(!bcsEnabled()) {
     return false;
@@ -1105,7 +1057,6 @@ bccycle(team, otherteam) {
   }
   return false;
 }
-
 bcthread(us, them, talkdelay, nontalkdelay) {
   while(1) {
     wait(nontalkdelay);
@@ -1114,7 +1065,6 @@ bcthread(us, them, talkdelay, nontalkdelay) {
     }
   }
 }
-
 bcmain() {
   thread bcthread("axis", "allies", 2, 2);
   thread bcthread("allies", "axis", 1, .5);

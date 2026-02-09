@@ -574,12 +574,10 @@ func_5F8E(var_0, var_1, var_2, var_3, var_4) {
     var_19 = 0;
 
     if(isDefined(self.var_A905)) {
-      var_19 = [
-        }
+      var_19 = [}
         [level.var_5EFB]](self.var_A905, var_1);
     else if(isDefined(self.var_A906)) {
-      var_19 = [
-        }
+      var_19 = [}
         [level.var_5EFB]](self.var_A906, var_1);
 
     if(scripts\anim\utility::func_9D9B() && !self.var_5953) {
@@ -788,7 +786,7 @@ func_8A0B(var_0, var_1, var_2, var_3) {
 }
 
 func_764E() {
-  return int(getdvar("g_speed"));
+  return int(getDvar("g_speed"));
 }
 
 func_764F(var_0) {
@@ -875,7 +873,7 @@ func_267F() {
   var_0 = _getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.enemy) && isplayer(var_2.enemy)) {
+    if(isDefined(var_2.enemy) && isPlayer(var_2.enemy)) {
       return;
     }
   }

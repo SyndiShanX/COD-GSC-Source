@@ -56,16 +56,16 @@ main() {
 
 callback_actorkilled_burn_death(einflictor, eattacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
   if(isDefined(eattacker)) {
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       if(smeansofdeath == "MOD_BURNED") {
         level.n_claw_fire_kills++;
 
-        if(level.n_claw_fire_kills == 1)
+        if(level.n_claw_fire_kills == 1) {
           level.harper queue_dialog("harp_yeah_2", 1);
+        }
 
         iprintln("flame_death");
         iprintln(level.n_claw_fire_kills);
-
       }
     }
   }
@@ -83,10 +83,11 @@ on_saved_restored_surveillance() {
       if(isDefined(level.menendez)) {
         luinotifyevent(&"hud_pak_add_poi", 4, level.menendez getentitynumber(), 1, 1, recorded_data);
 
-        if(flag("xcam_off"))
+        if(flag("xcam_off")) {
           luinotifyevent(&"hud_pak_rec_visibility", 2, 0, 0);
-        else
+        } else {
           luinotifyevent(&"hud_pak_rec_visibility", 1, 1);
+        }
       }
     }
   }

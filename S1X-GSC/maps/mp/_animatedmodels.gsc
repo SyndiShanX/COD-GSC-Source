@@ -16,7 +16,6 @@ main() {
     foreach(anim_key in anim_keys) {
       PrecacheMpAnim(level.anim_prop_models[model_key][anim_key]);
     }
-
   }
 
   waittillframeend;

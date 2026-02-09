@@ -219,7 +219,7 @@ sunrise_lerp_loop() {
 
 beautiful_corner_lighting() {
   level notify("setup_initial_level_lighting");
-  var_0 = getdvar("start");
+  var_0 = getDvar("start");
   wait 0.1;
 
   switch (var_0) {

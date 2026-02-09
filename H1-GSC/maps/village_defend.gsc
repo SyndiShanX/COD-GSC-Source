@@ -122,7 +122,7 @@ main() {
   level.redshirt = getent("redshirt1", "targetname");
   maps\_utility::battlechatter_off("allies");
   maps\_utility::battlechatter_off("axis");
-  setdvar("village_defend_one_minute", "0");
+  setDvar("village_defend_one_minute", "0");
   common_scripts\utility::flag_init("intro_tank_fire_authorization");
   common_scripts\utility::flag_init("church_tower_explodes");
   common_scripts\utility::flag_init("stop_ambush_music");
@@ -212,7 +212,7 @@ main() {
     level.minigunbreachbaglimit = 10;
   }
 
-  if(getdvar("village_defend_one_minute") != "1")
+  if(getDvar("village_defend_one_minute") != "1")
     level.stopwatch = 4;
   else
     level.stopwatch = 1;
@@ -672,7 +672,7 @@ intro_ridgeline_check(var_0, var_1) {
   if(var_0 == level.price)
     common_scripts\utility::flag_set("objective_on_ridgeline");
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     common_scripts\utility::flag_set("objective_player_at_vantage_point");
 }
 
@@ -1146,7 +1146,7 @@ southern_hill_deathmonitor() {
   self waittill("death", var_0);
   common_scripts\utility::flag_set("southern_hill_action_started");
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0))
     level notify("player_killed_southern_hill_enemy");
 }
 
@@ -1476,7 +1476,7 @@ minigun_primary_attack() {
 minigun_breach_deathmonitor() {
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0))
     level notify("player_killed_minigun_breach_enemy");
 }
 
@@ -2216,7 +2216,7 @@ javelin_init() {
 }
 
 tanks_init() {
-  if(getdvar("start") != "final_battle" && getdvar("start") != "seaknight") {
+  if(getDvar("start") != "final_battle" && getDvar("start") != "seaknight") {
     common_scripts\utility::flag_wait("fall_back_to_barn");
     maps\_utility::radio_dialogue_queue("enemytanksnorth");
     maps\_utility::radio_dialogue_queue("gettothebarn");
@@ -2303,7 +2303,7 @@ tank_ping(var_0) {
 }
 
 barn_helidrop() {
-  if(getdvar("start") != "final_battle" && getdvar("start") != "javelin" && getdvar("start") != "seaknight") {
+  if(getDvar("start") != "final_battle" && getDvar("start") != "javelin" && getDvar("start") != "seaknight") {
     var_0 = getent("barn_helidrop", "targetname");
     common_scripts\utility::flag_wait("barn_assault_begins");
     var_0 waittill("trigger");
@@ -2369,7 +2369,7 @@ escape_fallback() {
 }
 
 final_battle() {
-  if(getdvar("start") != "seaknight") {
+  if(getDvar("start") != "seaknight") {
     common_scripts\utility::flag_wait("start_final_battle");
     wait 6;
     common_scripts\utility::flag_set("airstrikes_ready");
@@ -2384,8 +2384,8 @@ final_battle() {
   thread rescue_chopper();
   thread mandown_reverse_spawn();
 
-  if(getdvar("start") != "seaknight") {
-    if(getdvar("village_defend_one_minute") != "1") {
+  if(getDvar("start") != "seaknight") {
+    if(getDvar("village_defend_one_minute") != "1") {
       maps\_utility::radio_dialogue_queue("pickingupSAMs");
       thread escape_music();
       level.gaz maps\_anim::anim_single_queue(level.gaz, "thatsjustgreat");
@@ -2523,7 +2523,7 @@ objectives() {
   maps\_utility::arcademode_checkpoint(3.5, "c");
   thread farm_javelin_nag();
 
-  if(getdvar("start") != "final_battle" && getdvar("start") != "seaknight" && getdvar("start") != "javelin")
+  if(getDvar("start") != "final_battle" && getDvar("start") != "seaknight" && getDvar("start") != "javelin")
     var_2 waittill("trigger");
 
   common_scripts\utility::flag_set("farm_reached");
@@ -2766,7 +2766,7 @@ countdown_events() {
   level endon("player_made_it");
   var_0 = level.stopwatch * 60;
 
-  if(getdvar("village_defend_one_minute") != "1") {
+  if(getDvar("village_defend_one_minute") != "1") {
     wait 60;
 
     if(!common_scripts\utility::flag("reached_evac_point") && !common_scripts\utility::flag("lz_reached"))
@@ -2809,7 +2809,7 @@ countdown_events() {
     wait 3;
 
     if(!common_scripts\utility::flag("player_made_it") && isalive(level.player)) {
-      setdvar("ui_deadquote", &"VILLAGE_DEFEND_YOU_DIDNT_REACH_THE_HELICOPTER");
+      setDvar("ui_deadquote", &"VILLAGE_DEFEND_YOU_DIDNT_REACH_THE_HELICOPTER");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -2835,7 +2835,7 @@ seaknight_music() {
 }
 
 rescue_chopper() {
-  if(getdvar("village_defend_one_minute") != "1")
+  if(getDvar("village_defend_one_minute") != "1")
     common_scripts\utility::flag_wait("rescue_chopper_ingress");
 
   thread maps\village_defend_code::seaknight();
@@ -2946,7 +2946,7 @@ rescue_ride() {
 music() {
   level endon("stop_ambush_music");
 
-  if(getdvar("start") != "final_battle" && getdvar("start") != "seaknight") {
+  if(getDvar("start") != "final_battle" && getDvar("start") != "seaknight") {
     while(!common_scripts\utility::flag("stop_ambush_music")) {
       maps\_utility::musicplaywrapper("village_defend_vanguards");
       wait 85.2;

@@ -639,7 +639,6 @@ loadoutAllPerks(loadoutEquipment, loadoutPerk1, loadoutPerk2, loadoutPerk3) {
     if(self isItemUnlocked(upgrade))
       self maps\mp\perks\_perks::givePerk(upgrade);
   }
-
 }
 
 trackRiotShield() {
@@ -664,35 +663,35 @@ trackRiotShield() {
 
     if(newWeapon == "riotshield_mp") {
       // defensive check in case we somehow get an extra "weapon_change"if(self.hasRiotShieldEquipped) {
-        continue;
-      }
-      if(self.hasRiotShield)
-        self MoveShieldModel("weapon_riot_shield_mp", "tag_shield_back", "tag_weapon_left");
-      else
-        self AttachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
+      continue;
+    }
+    if(self.hasRiotShield)
+      self MoveShieldModel("weapon_riot_shield_mp", "tag_shield_back", "tag_weapon_left");
+    else
+      self AttachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
 
-      self.hasRiotShield = true;
-      self.hasRiotShieldEquipped = true;
-    } else if((self IsMantling()) && (newWeapon == "none")) {
-      // Do nothing, we want to keep that weapon on their arm.
-    } else if(self.hasRiotShieldEquipped) {
-      assert(self.hasRiotShield);
-      self.hasRiotShield = self hasWeapon("riotshield_mp");
+    self.hasRiotShield = true;
+    self.hasRiotShieldEquipped = true;
+  } else if((self IsMantling()) && (newWeapon == "none")) {
+    // Do nothing, we want to keep that weapon on their arm.
+  } else if(self.hasRiotShieldEquipped) {
+    assert(self.hasRiotShield);
+    self.hasRiotShield = self hasWeapon("riotshield_mp");
 
-      if(self.hasRiotShield)
-        self MoveShieldModel("weapon_riot_shield_mp", "tag_weapon_left", "tag_shield_back");
-      else
-        self DetachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
+    if(self.hasRiotShield)
+      self MoveShieldModel("weapon_riot_shield_mp", "tag_weapon_left", "tag_shield_back");
+    else
+      self DetachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
 
-      self.hasRiotShieldEquipped = false;
-    } else if(self.hasRiotShield) {
-      if(!self hasWeapon("riotshield_mp")) {
-        // we probably just lost all of our weapons (maybe switched classes)
-        self DetachShieldModel("weapon_riot_shield_mp", "tag_shield_back");
-        self.hasRiotShield = false;
-      }
+    self.hasRiotShieldEquipped = false;
+  } else if(self.hasRiotShield) {
+    if(!self hasWeapon("riotshield_mp")) {
+      // we probably just lost all of our weapons (maybe switched classes)
+      self DetachShieldModel("weapon_riot_shield_mp", "tag_shield_back");
+      self.hasRiotShield = false;
     }
   }
+}
 }
 
 tryAttach(placement) // deprecated; hopefully we won't need to bring this defensive function back
@@ -752,7 +751,6 @@ buildWeaponName(baseName, attachment1, attachment2) {
     if(level.letterToNumber[attachment1[0]] < level.letterToNumber[attachment2[0]]) {
       attachments[0] = attachment1;
       attachments[1] = attachment2;
-
     } else if(level.letterToNumber[attachment1[0]] == level.letterToNumber[attachment2[0]]) {
       if(level.letterToNumber[attachment1[1]] < level.letterToNumber[attachment2[1]]) {
         attachments[0] = attachment1;
@@ -922,7 +920,6 @@ onPlayerConnecting() {
     player.bombSquadIcons = [];
     player.bombSquadIds = [];
   }
-
 }
 
 fadeAway(waitDelay, fadeDelay) {

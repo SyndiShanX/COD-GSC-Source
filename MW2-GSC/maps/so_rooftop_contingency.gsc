@@ -409,9 +409,7 @@ spawn_functions() {
   GetEnt("jeep_1", "targetname") add_spawn_function(::setup_base_vehicles);
 }
 
-// AI -----------------------------------------------------
-
-so_rooftop_ai_postspawn() {
+// AI ----------------------------------------------------- so_rooftop_ai_postspawn() {
   level.hostile_count++;
 
   self thread hostile_nerf();
@@ -453,7 +451,7 @@ death_think() {
     destructible_killed = true;
   }
 
-  if(!isDefined(attacker) || !IsPlayer(attacker) || !isDefined(damage_weapon)) {
+  if(!isDefined(attacker) || !isPlayer(attacker) || !isDefined(damage_weapon)) {
     return;
   }
 
@@ -480,7 +478,7 @@ destructible_damage_monitor() {
   while(1) {
     self waittill("damage", dmg, attacker, dir, point, mod, model, tagname, partname, dflags, weapon);
 
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(isDefined(weapon)) {
         if(weapon == "remote_missile_snow") {
           self.hellfired = true;
@@ -557,9 +555,7 @@ so_intro_dialogue() {
   radio_dialogue("so_intro");
 }
 
-// Waves --------------------------------------------------
-
-wave_wiped_out() {
+// Waves -------------------------------------------------- wave_wiped_out() {
   level endon("special_op_terminated");
 
   flag_wait("waves_start");
@@ -587,7 +583,7 @@ wave_wiped_out() {
       }
 
       //level.wave_spawn_structs[level.current_wave].wave_members = undefined;
-      /# so_debug_print( "wave [" + level.current_wave + "] wiped out" );
+      so_debug_print("wave [" + level.current_wave + "] wiped out");
 
       flag_clear("wave_spawned");
       flag_set("wave_wiped_out");
@@ -668,7 +664,7 @@ wave_spawn_think() {
     wait(1); // give some time for all AI to spawn into map before monitoring population
     flag_set("wave_spawned");
 
-    /# so_debug_print( "wave [" + ( level.current_wave + 1 ) + "] spawn complete" );
+    so_debug_print("wave [" + (level.current_wave + 1) + "] spawn complete");
 
     flag_wait("wave_wiped_out");
 
@@ -883,7 +879,7 @@ player_on_roof_think() {
         guy hostile_nerf();
       }
       set_grenade_frequency(1);
-      /# so_debug_print( "player on roof" );
+      so_debug_print("player on roof");
     } else {
       foreach(guy in GetAIArray("axis")) {
         //				guy set_goal_radius( 220 );
@@ -891,7 +887,7 @@ player_on_roof_think() {
         guy.baseaccuracy = 2;
       }
       set_grenade_frequency(0.5);
-      /# so_debug_print( "player off roof" );
+      so_debug_print("player off roof");
     }
 
     wait(2);

@@ -31,10 +31,11 @@ gpr_updated(localclientnum, op, data) {
     case 3:
       val = data & 65535;
 
-      if(val == 0)
+      if(val == 0) {
         self set_bldg_orange(localclientnum);
-      else
+      } else {
         self set_bldg_green(localclientnum);
+      }
 
       break;
   }

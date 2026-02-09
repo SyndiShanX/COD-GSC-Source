@@ -26,17 +26,19 @@ main() {
   global_FX("light_pulse_red_FX_origin", "light_pulse_red_FX", "misc/light_glow_red_generic_pulse", -2);
   global_FX("light_pulse_orange_FX_origin", "light_pulse_orange_FX", "misc/light_glow_orange_generic_pulse", -2);
 }
-
 global_FX(targetname, fxName, fxFile, delay, soundalias) {
   ents = getstructarray(targetname, "targetname");
-  if(!isDefined(ents))
+  if(!isDefined(ents)) {
     return;
-  if(ents.size <= 0)
+  }
+  if(ents.size <= 0) {
     return;
+  }
   for(i = 0; i < ents.size; i++) {
     ent = ents[i] global_FX_create(fxName, fxFile, delay, soundalias);
-    if(!isDefined(ents[i].script_noteworthy))
+    if(!isDefined(ents[i].script_noteworthy)) {
       continue;
+    }
     note = ents[i].script_noteworthy;
     if(!isDefined(level._global_fx_ents[note])) {
       level._global_fx_ents[note] = [];
@@ -44,14 +46,16 @@ global_FX(targetname, fxName, fxFile, delay, soundalias) {
     level._global_fx_ents[note][level._global_fx_ents[note].size] = ent;
   }
 }
-
 global_FX_create(fxName, fxFile, delay, soundalias) {
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
-  if(!isDefined(level._effect[fxName]))
+  }
+  if(!isDefined(level._effect[fxName])) {
     level._effect[fxName] = loadfx(fxFile);
-  if(!isDefined(self.angles))
+  }
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
   if(!level.clientscripts) {
     ent = createOneshotEffect(fxName);
     ent.v["origin"] = (self.origin);

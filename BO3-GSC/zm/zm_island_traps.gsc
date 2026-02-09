@@ -359,7 +359,7 @@ function function_d6b07530() {
     self waittill("trigger", ent);
     var_df549564 = 0;
     if(level.var_dd5501c7[self.stub.target].b_on !== 1 && level.var_dd5501c7[self.stub.target].var_b44dbcd2 !== 1) {
-      if(isplayer(ent)) {
+      if(isPlayer(ent)) {
         if(self.stub.n_cost <= ent.score) {
           ent zm_score::minus_to_player_score(self.stub.n_cost);
           self playSound("evt_wall_trap_start");
@@ -539,7 +539,7 @@ function function_55a15733(var_a464d35b) {
   self endon("hash_5798c1b0");
   var_a464d35b endon("walltrap_off");
   self.var_96ff34d0 = 1;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_b14e6934 = var_a464d35b.var_d6d6c058 * 75;
     while(isalive(self) && self istouching(var_a464d35b)) {
       if(self istouching(var_a464d35b.var_d93f9cb8)) {

@@ -135,20 +135,20 @@ sentry_handledamage() {
     }
 
     var_10 = var_0;
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 scripts\cp\cp_damage::updatedamagefeedback("sentry");
       if(var_1 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
         var_10 = var_0 * level.armorpiercingmod;
       }
     }
 
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       var_1.owner scripts\cp\cp_damage::updatedamagefeedback("sentry");
     }
 
     self.var_E1 = self.var_E1 + var_10;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
+      if(isPlayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_1 notify("destroyed_killstreak");
       }
 
@@ -404,7 +404,7 @@ func_B714(var_0) {
     return undefined;
   }
 
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     var_4 = "j_spine4";
     var_5 = var_0 gettagorigin(var_4);
     if(!isDefined(var_1)) {
@@ -459,7 +459,7 @@ func_B6F1() {
 }
 
 func_B71A(var_0) {
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     if(!isalive(var_0)) {
       return 0;
     }
@@ -542,7 +542,7 @@ func_B721() {
 func_B704() {
   playFXOnTag(scripts\engine\utility::getfx("microturret_lockon"), self, "tag_flash");
   var_0 = func_B6FD();
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     thread func_B705(var_0);
   }
 
@@ -678,7 +678,7 @@ func_B6EF() {
 
 canbetargeted(var_0) {
   var_1 = 1;
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(!scripts\cp\utility::isreallyalive(var_0) || var_0.sessionstate != "playing") {
       return 0;
     }
@@ -692,15 +692,15 @@ canbetargeted(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 == self.owner) {
+  if(isPlayer(var_0) && var_0 == self.owner) {
     return 0;
   }
 
-  if(isplayer(var_0) && isDefined(var_0.spawntime) && gettime() - var_0.spawntime / 1000 <= 5) {
+  if(isPlayer(var_0) && isDefined(var_0.spawntime) && gettime() - var_0.spawntime / 1000 <= 5) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 scripts\cp\utility::_hasperk("specialty_blindeye")) {
+  if(isPlayer(var_0) && var_0 scripts\cp\utility::_hasperk("specialty_blindeye")) {
     return 0;
   }
 

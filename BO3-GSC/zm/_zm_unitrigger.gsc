@@ -104,10 +104,10 @@ function register_unitrigger_internal(unitrigger_stub, trigger_func) {
     level._unitriggers.largest_radius = min(113, unitrigger_stub.radius);
     if(isDefined(level.fixed_max_player_use_radius)) {
       if(level.fixed_max_player_use_radius > getdvarfloat("player_useRadius_zm")) {
-        setdvar("player_useRadius_zm", level.fixed_max_player_use_radius);
+        setDvar("player_useRadius_zm", level.fixed_max_player_use_radius);
       }
     } else if(level._unitriggers.largest_radius > getdvarfloat("player_useRadius_zm")) {
-      setdvar("player_useRadius_zm", level._unitriggers.largest_radius);
+      setDvar("player_useRadius_zm", level._unitriggers.largest_radius);
     }
   }
   level._unitriggers.trigger_stubs[level._unitriggers.trigger_stubs.size] = unitrigger_stub;

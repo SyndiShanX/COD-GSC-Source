@@ -287,7 +287,7 @@ function watch_player_touch() {
   self.disablefinalkillcam = 1;
   for(;;) {
     self waittill("touch", entity);
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
     }
   }
@@ -369,11 +369,11 @@ function function_a202446a(killplayers, waittime, var_24d445fd) {
         entity kill();
         continue;
       }
-      if(killplayers == 0 && isplayer(entity)) {
+      if(killplayers == 0 && isPlayer(entity)) {
         continue;
       }
       entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         corpse_delay = gettime() + 1000;
       }
     }

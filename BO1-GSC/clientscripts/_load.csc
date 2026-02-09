@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_load.csc
+ * Script: clientscripts\_load\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -14,25 +14,23 @@ levelNotifyHandler(clientNum, state, oldState) {
     level notify(state, clientNum);
   }
 }
-
 end_last_stand(clientNum) {
   self waittill("lastStandEnd");
   println("Last stand ending for client " + clientNum);
-  if(getLocalPlayers().size == 1) {
+  if(getlocalplayers().size == 1) {
     setBusState("return_default");
   }
   realwait(0.7);
   println("Gasp.");
   playSound(clientNum, "revive_gasp");
 }
-
 last_stand_thread(clientNum) {
   self thread end_last_stand(clientNum);
   self endon("lastStandEnd");
   println("*** Client : Last stand starts on client " + clientNum);
   if(isDefined(level.zombie_intermission) && level.zombie_intermission) {
     setBusState("zombie_death");
-  } else if(getLocalPlayers().size == 1) {
+  } else if(getlocalplayers().size == 1) {
     setBusState("last_stand_start");
     realWait(0.1);
     setBusState("last_stand_duration");
@@ -61,10 +59,9 @@ last_stand_thread(clientNum) {
     }
   }
 }
-
 last_stand_monitor(clientNum, state, oldState) {
-  player = getLocalPlayers()[clientNum];
-  players = getLocalPlayers();
+  player = getlocalplayers()[clientNum];
+  players = getlocalplayers();
   if(!isDefined(level._laststand)) {
     level._laststand = [];
   }
@@ -85,16 +82,15 @@ last_stand_monitor(clientNum, state, oldState) {
   } else {
     if(level._laststand[clientNum]) {
       if(isDefined(level.lslooper)) {
-        level.lslooper stopLoopSound(0.7);
+        level.lslooper stoploopsound(0.7);
       }
       player notify("lastStandEnd");
       level._laststand[clientNum] = false;
     }
   }
 }
-
 damage_visionset_think(local_client_num) {
-  player = getLocalPlayers()[local_client_num];
+  player = getlocalplayers()[local_client_num];
   player endon("disconnect");
   level endon("save_restore");
   wait(1.0);
@@ -120,7 +116,6 @@ damage_visionset_think(local_client_num) {
     realWait(0.01);
   }
 }
-
 effects_init_thread(client, notify_name) {
   if(level.zombiemode && IsSplitscreen() && client == 1) {
     level.effects_init = undefined;
@@ -134,7 +129,6 @@ effects_init_thread(client, notify_name) {
   clientscripts\_fx::fx_init(client);
   clientscripts\_ambient::init(client);
 }
-
 effects_init_failsafe() {
   wait(1);
   if(!isDefined(level.effects_init)) {
@@ -142,12 +136,10 @@ effects_init_failsafe() {
     level notify("effects_init_1");
   }
 }
-
 default_flag_change_handler(localClientNum, flag, set, newEnt) {}
 init_client_flags() {
   level.CF_PLAYER_UNDERWATER = 15;
 }
-
 register_default_vehicle_callbacks() {
   level._client_flag_callbacks["vehicle"] = [];
   register_clientflag_callback("vehicle", 0, clientscripts\_vehicle::vehicle_flag_0_handler);
@@ -163,41 +155,32 @@ register_default_vehicle_callbacks() {
   register_clientflag_callback("vehicle", 11, clientscripts\_vehicle::vehicle_flag_toggle_siren_lights_handler);
   register_clientflag_callback("vehicle", 12, clientscripts\_vehicle::vehicle_flag_toggle_interior_lights_handler);
 }
-
 register_default_actor_callbacks() {
   level._client_flag_callbacks["actor"] = [];
 }
-
 register_default_player_callbacks() {
   level._client_flag_callbacks["player"] = [];
   register_clientflag_callback("player", level.CF_PLAYER_UNDERWATER, ::player_underwater_flag_handler);
 }
-
 register_default_NA_callbacks() {
   level._client_flag_callbacks["NA"] = [];
 }
-
 register_default_general_callbacks() {
   level._client_flag_callbacks["general"] = [];
 }
-
 register_default_missile_callbacks() {
   level._client_flag_callbacks["missile"] = [];
 }
-
 register_default_scriptmover_callbacks() {
   level._client_flag_callbacks["scriptmover"] = [];
 }
-
 register_default_mg42_callbacks() {
   level._client_flag_callbacks["mg42"] = [];
 }
-
 register_default_plane_callbacks() {
   level._client_flag_callbacks["plane"] = [];
   register_clientflag_callback("plane", 6, clientscripts\_vehicle::vehicle_flag_turn_off_treadfx);
 }
-
 setup_default_client_flag_callbacks() {
   init_client_flags();
   level._client_flag_callbacks = [];
@@ -211,7 +194,6 @@ setup_default_client_flag_callbacks() {
   register_default_mg42_callbacks();
   register_default_plane_callbacks();
 }
-
 player_underwater_flag_handler(localClientNum, set, newEnt) {
   action = "SET";
   if(!set) {
@@ -231,15 +213,15 @@ player_underwater_flag_handler(localClientNum, set, newEnt) {
     }
   }
 }
-
 main() {
   clientscripts\_utility_code::struct_class_init();
   clientscripts\_utility::registerSystem("levelNotify", ::levelNotifyHandler);
   clientscripts\_utility::registerSystem("lsm", ::last_stand_monitor);
   level.createFX_enabled = (getDvar(#"createfx") != "");
   level.zombiemode = (getDvar(#"zombiemode") == "1");
-  if(!isDefined(level.scr_anim))
+  if(!isDefined(level.scr_anim)) {
     level.scr_anim[0][0] = 0;
+  }
   setup_default_client_flag_callbacks();
   clientscripts\_global_fx::main();
   clientscripts\_busing::busInit();
@@ -263,7 +245,6 @@ main() {
   level.onlineGame = GetDvarInt(#"onlinegame");
   level._load_done = 1;
 }
-
 zombie_intermission() {
   level.zombie_intermission = true;
 }

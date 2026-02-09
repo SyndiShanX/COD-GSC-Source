@@ -25,7 +25,6 @@ setup_names() {
     level.nameIndex[nationalities[i]] = 0;
   }
 }
-
 american_names() {
   add_name("american", "Adams");
   add_name("american", "Allen");
@@ -62,19 +61,15 @@ american_names() {
   add_name("american", "Thompson");
   add_name("american", "Welch");
 }
-
 british_names() {
   add_name("british", "Abbot");
 }
-
 german_names() {
   add_name("german", "Adler");
 }
-
 japanese_names() {
   add_name("japanese", "Aichi");
 }
-
 russian_names() {
   add_name("russian", "Avtamonov");
   add_name("russian", "Barzilovich");
@@ -107,21 +102,18 @@ russian_names() {
   add_name("russian", "Yoslov");
   add_name("russian", "Zubarev");
 }
-
 add_name(nationality, thename) {
   level.names[nationality][level.names[nationality].size] = thename;
 }
-
 randomize_name_list(nationality) {
   size = level.names[nationality].size;
   for(i = 0; i < size; i++) {
-    switchwith = randomInt(size);
+    switchwith = RandomInt(size);
     temp = level.names[nationality][i];
     level.names[nationality][i] = level.names[nationality][switchwith];
     level.names[nationality][switchwith] = temp;
   }
 }
-
 get_name(override) {
   if(!isDefined(override) && level.script == "credits") {
     self.airank = "private";
@@ -153,7 +145,6 @@ get_name(override) {
   }
   self notify("set name and rank");
 }
-
 add_override_name_func(nationality, func) {
   if(!isDefined(level._override_name_funcs)) {
     level._override_name_funcs = [];
@@ -161,7 +152,6 @@ add_override_name_func(nationality, func) {
   AssertEx(!isDefined(level._override_name_funcs[nationality]), "Setting a name override function twice.");
   level._override_name_funcs[nationality] = func;
 }
-
 get_name_for_nationality(nationality) {
   assertex(isDefined(level.nameIndex[nationality]), nationality);
   if(isDefined(level._override_name_funcs) && isDefined(level._override_name_funcs[nationality])) {
@@ -177,7 +167,7 @@ get_name_for_nationality(nationality) {
   if(isDefined(level._override_rank_func)) {
     self[[level._override_rank_func]](lastname);
   } else {
-    rank = randomInt(100);
+    rank = RandomInt(100);
     if(rank > 20) {
       fullname = "Pvt. " + lastname;
       self.airank = "private";
@@ -191,7 +181,6 @@ get_name_for_nationality(nationality) {
     self.name = fullname;
   }
 }
-
 getRankFromName(name) {
   if(!isDefined(name)) {
     self.airank = ("private");

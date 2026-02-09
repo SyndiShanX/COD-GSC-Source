@@ -74,7 +74,7 @@ function_e86e864b() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(zm_orange_util::function_fe8ee9f0(s_result.weapon, 0) && isplayer(s_result.attacker) && !isbot(s_result.attacker)) {
+    if(zm_orange_util::function_fe8ee9f0(s_result.weapon, 0) && isPlayer(s_result.attacker) && !isbot(s_result.attacker)) {
       s_result.attacker notify(#"hash_2a12c37201945891");
     }
   }
@@ -522,7 +522,7 @@ function_c7b3bfea() {
 }
 
 function_5b264d4d(s_result) {
-  if(isplayer(s_result.eattacker)) {
+  if(isPlayer(s_result.eattacker)) {
     s_result.eattacker.var_5fe30ecb = [];
   }
 }

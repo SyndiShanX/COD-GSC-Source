@@ -263,9 +263,7 @@ is_point_in_valid_place(var_0, var_1) {
   if(isDefined(level.invalidcranevolumes)) {
     if(isDefined(level.is_in_crane_box_func)) {
       foreach(var_3 in level.invalidcranevolumes) {
-        if([
-            [level.is_in_crane_box_func]
-          ](var_3[0], var_3[1], var_0)) {
+        if([[level.is_in_crane_box_func]](var_3[0], var_3[1], var_0)) {
           return 0;
         }
       }
@@ -275,9 +273,7 @@ is_point_in_valid_place(var_0, var_1) {
   if(isDefined(level.invalidtranspondervolumes)) {
     if(isDefined(level.is_in_box_func)) {
       foreach(var_3 in level.invalidtranspondervolumes) {
-        if([
-            [level.is_in_box_func]
-          ](var_3[0], var_3[1], var_3[2], var_3[3], var_0)) {
+        if([[level.is_in_box_func]](var_3[0], var_3[1], var_3[2], var_3[3], var_0)) {
           return 0;
         }
       }
@@ -305,9 +301,7 @@ final_location_check() {
   if(isDefined(level.invalidcranevolumes)) {
     if(isDefined(level.is_in_crane_box_func)) {
       foreach(var_2 in level.invalidcranevolumes) {
-        if([
-            [level.is_in_crane_box_func]
-          ](var_2[0], var_2[1], var_0)) {
+        if([[level.is_in_crane_box_func]](var_2[0], var_2[1], var_0)) {
           var_3 = find_closest_crane_teleport(var_0);
           self dontinterpolate();
           self setorigin(var_3);
@@ -375,7 +369,7 @@ create_valid_patch_node(var_0, var_1) {
 
 is_in_basic_box(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
-    if(isplayer(self) || isagent(self)) {
+    if(isPlayer(self) || isagent(self)) {
       var_2 = self.origin;
     } else {
       return 0;

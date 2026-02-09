@@ -34,7 +34,6 @@ class lookaround {
   constructor() {
     var_268b3fe5 = gettime() + randomintrange(4500, 6500);
   }
-
 }
 
 class class_bd3490ad {}
@@ -47,7 +46,6 @@ class class_9fa5eb75 {
     adjustmentstarted = 0;
     var_425c4c8b = 1;
   }
-
 }
 
 init() {
@@ -420,7 +418,7 @@ get_favorite_enemy() {
 }
 
 get_last_valid_position() {
-  if(isplayer(self) && isDefined(self.last_valid_position)) {
+  if(isPlayer(self) && isDefined(self.last_valid_position)) {
     return self.last_valid_position;
   }
 
@@ -647,7 +645,7 @@ dogpreemptivejuketerminate(entity) {
 }
 
 function_6c2426d3(entity) {
-  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isPlayer(entity.enemy)) {
     return false;
   }
 
@@ -707,7 +705,7 @@ function_3089bb44(entity) {
     predictedenemypos = entity.enemy.origin;
     distancesq = distancesquared(entity.origin, entity.enemy.origin);
 
-    if(isplayer(entity.enemy) && distancesq >= 100 * 100) {
+    if(isPlayer(entity.enemy) && distancesq >= 100 * 100) {
       if(entity.enemy issprinting()) {
         enemyvelocity = vectornormalize(entity.enemy getvelocity());
         var_7a61ad67 = vectornormalize(entity getvelocity());
@@ -773,7 +771,6 @@ function_b1eb29d8(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     distance = distance(entity.origin, animendpos);
     recordcircle(animendpos, 3, (0, 1, 0), "<dev string:x71>");
     record3dtext("<dev string:x7a>" + distance, animendpos, (0, 1, 0), "<dev string:x71>");
-
   }
 }
 
@@ -784,7 +781,7 @@ function_a5923bea(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   if(isDefined(entity.enemy) && !entity.meleeinfo.adjustmentstarted && entity.meleeinfo.var_425c4c8b && currentanimtime >= entity.meleeinfo.var_98bc84b7) {
     predictedenemypos = entity.enemy.origin;
 
-    if(isplayer(entity.enemy)) {
+    if(isPlayer(entity.enemy)) {
       velocity = entity.enemy getvelocity();
 
       if(length(velocity) > 0) {

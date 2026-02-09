@@ -15,13 +15,13 @@ init() {
     return;
   }
 
-  if(getdvar("scr_os_pickupweaponrespawntime") == "")
-    setdvar("scr_os_pickupweaponrespawntime", "15");
+  if(getDvar("scr_os_pickupweaponrespawntime") == "")
+    setDvar("scr_os_pickupweaponrespawntime", "15");
 
   level.pickupweaponrespawntime = getdvarfloat("scr_os_pickupweaponrespawntime");
 
-  if(getdvar("scr_os_pickupperkrespawntime") == "")
-    setdvar("scr_os_pickupperkrespawntime", "25");
+  if(getDvar("scr_os_pickupperkrespawntime") == "")
+    setDvar("scr_os_pickupperkrespawntime", "25");
 
   level.pickupperkrespawntime = getdvarfloat("scr_os_pickupperkrespawntime");
   oldschoolloadout();

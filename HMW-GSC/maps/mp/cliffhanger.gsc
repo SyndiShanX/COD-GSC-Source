@@ -6,12 +6,12 @@ main() {
   maps\mp\_load::main();
   maps\mp\_compass::setupminimap("compass_map_cliffhanger");
   maps\createart\cliffhanger_art::main();
-  setdvar("r_tessellation", 0);
-  setdvar("r_drawSun", 0);
-  setdvar("compassmaxrange", "2000");
-  setdvar("r_filmusetweaks", 0);
-  setdvar("r_fog", "1");
-  setdvar("r_umbra", "1");
+  setDvar("r_tessellation", 0);
+  setDvar("r_drawSun", 0);
+  setDvar("compassmaxrange", "2000");
+  setDvar("r_filmusetweaks", 0);
+  setDvar("r_fog", "1");
+  setDvar("r_umbra", "1");
 
   define_cliffhanger_fog();
   thread weather_changes();
@@ -33,7 +33,6 @@ weather_changes() {
 
     wait FOG_TRAMSITION_DELAY;
   }
-
 }
 
 define_cliffhanger_fog() {

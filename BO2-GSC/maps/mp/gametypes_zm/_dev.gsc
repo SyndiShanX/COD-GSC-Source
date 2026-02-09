@@ -11,12 +11,11 @@ init() {
     updatedevsettingszm();
     wait 0.5;
   }
-
 }
 
 updatedevsettingszm() {
   if(level.players.size > 0) {
-    if(getdvar(#"r_streamDumpDistance") == "3") {
+    if(getDvar(#"r_streamDumpDistance") == "3") {
       if(!isDefined(level.streamdumpteamindex))
         level.streamdumpteamindex = 0;
       else
@@ -55,7 +54,7 @@ updatedevsettingszm() {
       }
 
       if(numpoints == 0) {
-        setdvar("r_streamDumpDistance", "0");
+        setDvar("r_streamDumpDistance", "0");
         level.streamdumpteamindex = -1;
       } else {
         averageorigin = (0, 0, 0);
@@ -69,9 +68,8 @@ updatedevsettingszm() {
         level.players[0] setplayerangles(averageangles);
         level.players[0] setorigin(averageorigin);
         wait 0.05;
-        setdvar("r_streamDumpDistance", "2");
+        setDvar("r_streamDumpDistance", "2");
       }
     }
   }
-
 }

@@ -305,7 +305,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
     return;
   }
 
-  if(isDefined(eattacker) && isplayer(eattacker) && !weapon_utils::ismeleemod(smeansofdeath)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && !weapon_utils::ismeleemod(smeansofdeath)) {
     var_8f516911 = function_b576d3d(weapon, shitloc);
     idamage *= var_8f516911;
   }
@@ -313,13 +313,13 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   idamage = function_182d09fd(eattacker, idamage);
   startedinlaststand = 0;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     startedinlaststand = self laststand::player_is_in_laststand();
   }
 
   println("<dev string:x5c>" + idamage + "<dev string:x79>");
 
-  if(isDefined(eattacker) && isplayer(eattacker) && eattacker.sessionteam == self.sessionteam && !eattacker hasperk(#"specialty_playeriszombie") && !(isDefined(self.is_zombie) && self.is_zombie)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && eattacker.sessionteam == self.sessionteam && !eattacker hasperk(#"specialty_playeriszombie") && !(isDefined(self.is_zombie) && self.is_zombie)) {
     idamage = self process_friendly_fire_callbacks(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex);
 
     if(self != eattacker && !level.friendlyfire) {
@@ -405,13 +405,13 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   println("<dev string:x132>");
   var_ca70d16a = 0;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_ca70d16a = !startedinlaststand && self laststand::player_is_in_laststand();
   }
 
   bb::logdamage(eattacker, self, weapon, idamage, smeansofdeath, shitloc, self.health <= 0, var_ca70d16a);
 
-  if(isplayer(eattacker) && idamage > 0 && !(isDefined(self.var_265cb589) && self.var_265cb589) && !(isDefined(level.var_dc60105c) && level.var_dc60105c)) {
+  if(isPlayer(eattacker) && idamage > 0 && !(isDefined(self.var_265cb589) && self.var_265cb589) && !(isDefined(level.var_dc60105c) && level.var_dc60105c)) {
     eattacker util::show_hit_marker(var_ca70d16a);
   }
 }
@@ -1051,7 +1051,7 @@ player_revive_monitor() {
       reviver zm_score::player_add_points("reviver", points);
       self.score_lost_when_downed = 0;
 
-      if(isplayer(reviver) && reviver != self) {
+      if(isPlayer(reviver) && reviver != self) {
         reviver zm_stats::increment_challenge_stat(#"survivalist_revive", undefined, 1);
         reviver zm_stats::increment_challenge_stat(#"hash_79ba5b62b95a7eb6", undefined, 1);
         reviver zm_stats::function_c0c6ab19(#"revives", 1, 1);
@@ -1616,7 +1616,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     }
 
     if(smeansofdeath != "MOD_FALLING") {
-      if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker)) {
+      if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isPlayer(eattacker)) {
         self playrumbleonentity("damage_heavy");
       }
 
@@ -1730,7 +1730,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
   }
 
   if(level.scr_zm_ui_gametype == "zcleansed" && idamage > 0) {
-    if(isDefined(eattacker) && isplayer(eattacker) && eattacker.team != self.team && (!(isDefined(self.laststand) && self.laststand) && !self laststand::player_is_in_laststand() || !isDefined(self.last_player_attacker))) {
+    if(isDefined(eattacker) && isPlayer(eattacker) && eattacker.team != self.team && (!(isDefined(self.laststand) && self.laststand) && !self laststand::player_is_in_laststand() || !isDefined(self.last_player_attacker))) {
       if(isDefined(eattacker.maxhealth) && isDefined(eattacker.is_zombie) && eattacker.is_zombie) {
         eattacker.health = eattacker.maxhealth;
       }

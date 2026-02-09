@@ -228,10 +228,11 @@ createfx_setup() {
   add_gump_function("la_1_gump_1c", ::createfx_setup_gump1c);
   add_gump_function("la_1_gump_1d", ::createfx_setup_gump1d);
   exploder(1001);
-  level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
+  level.skipto_point = tolower(getDvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "")
+  if(level.skipto_point == "") {
     level.skipto_point = "intro";
+  }
 
   maps\la_utility::load_gumps();
 }

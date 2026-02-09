@@ -128,9 +128,9 @@ function raps_round_start() {
   level notify("raps_round_starting");
   level thread zm_audio::sndmusicsystem_playstate("meatball_start");
   if(isDefined(level.raps_melee_range)) {
-    setdvar("ai_meleeRange", level.raps_melee_range);
+    setDvar("ai_meleeRange", level.raps_melee_range);
   } else {
-    setdvar("ai_meleeRange", 100);
+    setDvar("ai_meleeRange", 100);
   }
 }
 
@@ -142,9 +142,9 @@ function raps_round_stop() {
   }
   level.rapsround_nomusic = 0;
   level notify("raps_round_ending");
-  setdvar("ai_meleeRange", level.melee_range_sav);
-  setdvar("ai_meleeWidth", level.melee_width_sav);
-  setdvar("ai_meleeHeight", level.melee_height_sav);
+  setDvar("ai_meleeRange", level.melee_range_sav);
+  setDvar("ai_meleeWidth", level.melee_width_sav);
+  setDvar("ai_meleeHeight", level.melee_height_sav);
 }
 
 function raps_round_spawning() {
@@ -168,7 +168,7 @@ function raps_round_spawning() {
   level.zombie_total = int(n_wave_count);
   if(getdvarstring("") != "" && getdvarint("") > 0) {
     level.zombie_total = getdvarint("");
-    setdvar("", 0);
+    setDvar("", 0);
   }
   wait(1);
   elemental_round_fx();
@@ -607,7 +607,7 @@ function raps_death() {
       level notify("last_ai_down", self);
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       attacker zm_score::player_add_points("death_raps", 70);
     }

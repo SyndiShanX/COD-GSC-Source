@@ -186,7 +186,7 @@ empexplosiondamageents(owner, weapon, origin, radius, damageplayers) {
   }
 
   foreach(ent in ents) {
-    if(!damageplayers && isplayer(ent)) {
+    if(!damageplayers && isPlayer(ent)) {
       continue;
     }
 
@@ -195,7 +195,7 @@ empexplosiondamageents(owner, weapon, origin, radius, damageplayers) {
 }
 
 event_handler[grenade_fire] function_b18444ea(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

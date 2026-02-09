@@ -54,7 +54,7 @@ bot_set_difficulty(var_0, var_1) {
   var_3 = self botgetdifficulty();
   self botsetdifficulty(var_0);
 
-  if(isplayer(self) && var_3 != var_0) {
+  if(isPlayer(self) && var_3 != var_0) {
     maps\mp\_utility::set_rank_xp_and_prestige_for_bot();
     var_4 = maps\mp\gametypes\_rank::getrankforxp(maps\mp\gametypes\_rank::gettotalxp());
     self.pers["rank"] = var_4;

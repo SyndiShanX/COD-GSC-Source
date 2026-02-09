@@ -248,8 +248,9 @@ asd_intro() {
   vh_asd = spawn_vehicle_from_targetname("metal_storm_intro");
   vh_asd thread intro_asd_think();
 
-  foreach(ai_guard in a_ai_guards)
-  ai_guard thread asd_intro_guard_think(vh_asd);
+  foreach(ai_guard in a_ai_guards) {
+    ai_guard thread asd_intro_guard_think(vh_asd);
+  }
 }
 
 asd_intro_guard_think(vh_asd) {
@@ -278,8 +279,9 @@ little_bird_objectives() {
 
 spawn_func_asd() {
   if(self.team == "axis") {
-    if(!isDefined(self.radius))
+    if(!isDefined(self.radius)) {
       self.radius = 800;
+    }
 
     self thread maps\_metal_storm::metalstorm_set_team("team3");
     self setthreatbiasgroup("ship_drones");
@@ -288,8 +290,9 @@ spawn_func_asd() {
       nd_target = getnode(self.target, "targetname");
       n_radius = self.radius;
 
-      if(isDefined(nd_target.radius))
+      if(isDefined(nd_target.radius)) {
         n_radius = nd_target.radius;
+      }
 
       self thread maps\_vehicle::defend(nd_target.origin, n_radius);
     } else
@@ -323,8 +326,9 @@ e9_bunker_right_begin_trigger(str_category) {
   t_trigger waittill("trigger");
   a_ents = getEntArray("e9_bunker_rpg_spawner", "targetname");
 
-  if(isDefined(a_ents))
+  if(isDefined(a_ents)) {
     simple_spawn_script_delay(a_ents);
+  }
 
   level thread civilian_rocks_execution_anim(0.01, str_category);
 }
@@ -354,15 +358,17 @@ e9_bunker_enemy_management(str_category) {
   if(flag("flag_use_left_bunker_spawners")) {
     a_ents = getEntArray("e9_bunker_left_flank_spawner", "targetname");
 
-    if(isDefined(a_ents))
+    if(isDefined(a_ents)) {
       simple_spawn_script_delay(a_ents);
+    }
   }
 
   if(flag("flag_use_right_bunker_spawners")) {
     a_ents = getEntArray("e9_right_rocks_wave1_spawner", "targetname");
 
-    if(isDefined(a_ents))
+    if(isDefined(a_ents)) {
       simple_spawn_script_delay(a_ents);
+    }
   }
 }
 
@@ -396,30 +402,35 @@ e9_start_player_rushers(str_category) {
   sp_rusher = getent("e9_start_player_hurryup_1", "targetname");
   e_ai = simple_spawn_single(sp_rusher);
 
-  if(isDefined(e_ai))
+  if(isDefined(e_ai)) {
     e_ai thread aggressive_runner(str_category);
+  }
 
   wait 12;
   sp_rusher = getent("e9_start_player_hurryup_2", "targetname");
   e_ai = simple_spawn_single(sp_rusher);
 
-  if(isDefined(e_ai))
+  if(isDefined(e_ai)) {
     e_ai thread aggressive_runner(str_category);
+  }
 }
 
 e9_bridge_runners(delay, str_category) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   a_runners = getEntArray("e9_bridge_runner", "targetname");
 
-  if(isDefined(a_runners))
+  if(isDefined(a_runners)) {
     simple_spawn_script_delay(a_runners);
+  }
 }
 
 e9_start_balcony_death_event(start_delay, battle_time) {
-  if(isDefined(start_delay) && start_delay > 0)
+  if(isDefined(start_delay) && start_delay > 0) {
     wait(start_delay);
+  }
 
   a_sp_friendlys = getEntArray("e9_start_friendly_balcony_victim", "targetname");
   a_ai_friendlys = simple_spawn(a_sp_friendlys);
@@ -429,8 +440,9 @@ e9_start_balcony_death_event(start_delay, battle_time) {
     for(i = 0; i < a_sp_enemys.size; i++) {
       ai_enemy = simple_spawn_single(a_sp_enemys[i]);
 
-      if(isDefined(ai_enemy) && isalive(ai_enemy))
+      if(isDefined(ai_enemy) && isalive(ai_enemy)) {
         ai_enemy thread force_fire_at_balcony_friendly(a_ai_friendlys[i], a_sp_friendlys[0].target, a_sp_friendlys[1].target);
+      }
     }
   }
 
@@ -541,8 +553,9 @@ e9_keep_player_busy_at_start_trigger(delay, str_category) {
         num_axis = 0;
         a_axis = getaiarray("axis");
 
-        if(isDefined(a_axis))
+        if(isDefined(a_axis)) {
           num_axis = a_axis.size;
+        }
 
         if(num_axis <= min_axis_alive) {
           if(dt > min_spawn_wait_time) {
@@ -554,23 +567,27 @@ e9_keep_player_busy_at_start_trigger(delay, str_category) {
               a_ai = array_randomize(a_ai);
               size = a_ai.size;
 
-              if(size > 4)
+              if(size > 4) {
                 size = 4;
+              }
 
-              for(i = 0; i < size; i++)
+              for(i = 0; i < size; i++) {
                 a_ai[i] thread aggressive_runner(str_category);
+              }
             }
           }
         }
 
-        if(flag("flag_bunker_snipers_active"))
+        if(flag("flag_bunker_snipers_active")) {
           return;
+        }
       }
 
-      if(dt < min_spawn_wait_time)
+      if(dt < min_spawn_wait_time) {
         delay = min_spawn_wait_time - dt;
-      else
+      } else {
         delay = randomfloatrange(1.0, 3.0);
+      }
 
       wait(delay);
     }
@@ -584,8 +601,9 @@ e9_left_staircase_climbing_trigger(delay, str_category_startup) {
   t_trigger waittill("trigger");
   a_ents = getEntArray("e9_stairs_start_left_climbing_spawner", "targetname");
 
-  if(isDefined(a_ents))
+  if(isDefined(a_ents)) {
     simple_spawn_script_delay(a_ents, ::spawn_fn_ai_run_to_target, 0, str_category_startup, 0, 0, 0);
+  }
 }
 
 e9_sundeck_west_rpg(delay, str_category) {
@@ -595,8 +613,9 @@ e9_sundeck_west_rpg(delay, str_category) {
   t_trigger waittill("trigger");
   a_spawners = getEntArray("e9_left_stairs_rpg_spawner", "targetname");
 
-  if(isDefined(a_spawners))
+  if(isDefined(a_spawners)) {
     simple_spawn_script_delay(a_spawners);
+  }
 }
 
 e9_manager_upper_left_stairs(str_category) {
@@ -606,8 +625,9 @@ e9_manager_upper_left_stairs(str_category) {
   level thread e9_civ_bridge_to_stairs();
   a_spawners = getEntArray("e9_left_staircase_begins_spawner", "targetname");
 
-  if(isDefined(a_spawners))
+  if(isDefined(a_spawners)) {
     simple_spawn_script_delay(a_spawners);
+  }
 
   str_spawn_manager = "e9_manager_upper_left_stairs";
   level.stairs_spawn_manager = str_spawn_manager;
@@ -624,8 +644,9 @@ e9_left_upper_tunnel_spawner(str_category) {
   t_trigger waittill("trigger");
   a_runners = getEntArray("e9_left_stairs_enter_tunnel_spawner", "targetname");
 
-  if(isDefined(a_runners))
+  if(isDefined(a_runners)) {
     simple_spawn_script_delay(a_runners, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 0, 0);
+  }
 }
 
 entity_fake_tracers(ent_target) {
@@ -662,8 +683,9 @@ karma_fake_tracer(start_pos, end_pos, alive_time) {
 }
 
 make_ent_ignore_battle(str_targetname, use_magic_shield, delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   e_ent = getent(str_targetname, "targetname");
 
@@ -677,13 +699,13 @@ make_ent_ignore_battle(str_targetname, use_magic_shield, delay) {
     if(isDefined(use_magic_shield)) {}
   } else {
     iprintlnbold("Ent " + str_targetname + " is missing and cannot be set to ignore.");
-
   }
 }
 
 make_ent_a_battle_target(str_targetname, magic_bullet_shield, delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   e_ent = getent(str_targetname, "targetname");
   e_ent.takedamage = 1;
@@ -737,8 +759,9 @@ e9_setup_balcony_explosion_blocker_triggers() {
   e_triggers = getEntArray("e9_balcony_explosion_blocker_trigger", "targetname");
 
   if(isDefined(e_triggers)) {
-    for(i = 0; i < e_triggers.size; i++)
+    for(i = 0; i < e_triggers.size; i++) {
       e_triggers[i] thread e9_balcony_blocker_trigger();
+    }
   }
 }
 
@@ -747,8 +770,9 @@ e9_balcony_blocker_trigger() {
   self waittill("trigger");
   delay = 0.01;
 
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     delay = self.script_delay;
+  }
 
   level thread defalco_blows_up_building(delay);
   wait 1.5;
@@ -762,8 +786,9 @@ e9_player_reaches_bottom_left_stairs_trigger(delay, str_category) {
   e_trigger waittill("trigger");
 
   if(isDefined(level.stairs_spawn_manager)) {
-    if(is_spawn_manager_enabled(level.stairs_spawn_manager))
+    if(is_spawn_manager_enabled(level.stairs_spawn_manager)) {
       spawn_manager_kill(level.stairs_spawn_manager);
+    }
   }
 }
 
@@ -775,8 +800,9 @@ e9_stairs_by_blockage_trigger(delay, str_category) {
   event9_save("e9_upper_left_stairs");
   a_spawners = getEntArray("e9_north_cliff_west_spawner", "targetname");
 
-  if(isDefined(a_spawners))
+  if(isDefined(a_spawners)) {
     simple_spawn_script_delay(a_spawners);
+  }
 
   simple_spawn("e9_north_cliff_west_rusher", ::aggressive_runner, str_category);
 }
@@ -787,8 +813,9 @@ defalco_blows_up_building(delay) {
   level thread balcony_blowup_effects();
   m_pristine = getent("sundeck_deck_explosion", "targetname");
 
-  if(isDefined(m_pristine))
+  if(isDefined(m_pristine)) {
     m_pristine delete();
+  }
 
   v_pos = (-777, 1501, -3068);
   scale = 0.45;
@@ -831,26 +858,30 @@ e9_post_ms_left_begin_trigger(str_category) {
   event9_save("e9_post_metal_storm");
   a_holders = getEntArray("e9_post_ms_left_begin_hold_spawner", "targetname");
 
-  if(isDefined(a_holders))
+  if(isDefined(a_holders)) {
     simple_spawn(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 0, 0);
+  }
 
   a_spawners = getEntArray("e9_post_ms_left_begin_regular_spawner", "targetname");
 
-  if(isDefined(a_spawners))
+  if(isDefined(a_spawners)) {
     simple_spawn(a_spawners, ::spawn_fn_ai_run_to_target, 0, str_category, 0, 0, 0);
+  }
 
   sp_rushers = getEntArray("e9_post_ms_left_begin_rusher_spawner", "targetname");
   a_ai = simple_spawn(sp_rushers);
 
   if(isDefined(a_ai)) {
-    for(i = 0; i < a_ai.size; i++)
+    for(i = 0; i < a_ai.size; i++) {
       a_ai[i] thread aggressive_runner(str_category);
+    }
   }
 
   a_holders = getEntArray("e9_post_ms_left_begin_prone_spawner", "targetname");
 
-  if(isDefined(a_holders))
+  if(isDefined(a_holders)) {
     simple_spawn(a_holders, ::spawn_fn_ai_run_to_prone_node, 1, str_category, 0, 0);
+  }
 }
 
 e9_post_ms_right_begin_trigger(str_category) {
@@ -860,20 +891,23 @@ e9_post_ms_right_begin_trigger(str_category) {
   event9_save("e9_post_metal_storm");
   a_holders = getEntArray("e9_post_ms_right_begin_hold_spawner", "targetname");
 
-  if(isDefined(a_holders))
+  if(isDefined(a_holders)) {
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 0, 0);
+  }
 
   a_spawners = getEntArray("e9_post_ms_right_begin_regular_spawner", "targetname");
 
-  if(isDefined(a_spawners))
+  if(isDefined(a_spawners)) {
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 0, str_category, 0, 0, 0);
+  }
 
   sp_rushers = getEntArray("e9_post_ms_right_begin_rusher_spawner", "targetname");
   a_ai = simple_spawn(sp_rushers);
 
   if(isDefined(a_ai)) {
-    for(i = 0; i < a_ai.size; i++)
+    for(i = 0; i < a_ai.size; i++) {
       a_ai[i] thread aggressive_runner(str_category);
+    }
   }
 }
 
@@ -881,8 +915,9 @@ civilians_injured_from_battle_anim() {
   level thread run_scene("sundeck_civ_injured_and_helper_idle");
   a_ais = get_model_or_models_from_scene("sundeck_civ_injured_and_helper_idle");
 
-  foreach(ai in a_ais)
-  ai add_cleanup_ent("sundeck_intro");
+  foreach(ai in a_ais) {
+    ai add_cleanup_ent("sundeck_intro");
+  }
 }
 
 civilians_running_from_battle_anim() {
@@ -890,13 +925,15 @@ civilians_running_from_battle_anim() {
   flag_wait("sundeck_civ_injured_and_helper_started");
   a_ais = get_ais_from_scene("sundeck_civ_injured_and_helper");
 
-  foreach(ai in a_ais)
-  ai add_cleanup_ent("sundeck_intro");
+  foreach(ai in a_ais) {
+    ai add_cleanup_ent("sundeck_intro");
+  }
 }
 
 civilian_group4_waiting_to_escape_anim(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   flag_wait("karma_2_gump_sundeck");
   level thread run_scene_and_delete("scene_civilian_group4_escape_begin_loop");
@@ -908,8 +945,9 @@ civilian_group4_waiting_to_escape_anim(delay) {
 }
 
 civilian_left_stairs_group1_anim(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   flag_wait("karma_2_gump_sundeck");
   level thread run_scene_and_delete("scene_civilian_left_stairs_group1_begin_loop");
@@ -952,8 +990,9 @@ civilian_left_stairs_group1_anim(delay) {
 }
 
 civilian_left_stairs_group2_anim(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   flag_wait("karma_2_gump_sundeck");
   level thread run_scene_and_delete("scene_civilian_left_stairs_group2_begin_loop");
@@ -968,8 +1007,9 @@ civilian_left_stairs_group2_anim(delay) {
 }
 
 civilian_balcony_fling_anim(delay, str_category) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   flag_wait("karma_2_gump_sundeck");
   str_scene_name = "scene_e9_start_balcony_fling";
@@ -979,8 +1019,9 @@ civilian_balcony_fling_anim(delay, str_category) {
 }
 
 civilian_rocks_execution_anim(delay, str_category_snipers) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   str_civilian_killed_targetname = "civ_executed_on_rocks_ai";
   str_executioner_targetname = "guard_rocks_executioner_ai";
@@ -988,8 +1029,9 @@ civilian_rocks_execution_anim(delay, str_category_snipers) {
   run_scene("sundeck_rocks_execution");
   e_dead_civ = getent(str_civilian_killed_targetname, "targetname");
 
-  if(isalive(e_dead_civ))
+  if(isalive(e_dead_civ)) {
     e_dead_civ ragdoll_death();
+  }
 
   nd_node = getnode("executioner_cover_node", "targetname");
   e_executioner = getent("guard_rocks_executioner_ai", "targetname");
@@ -1006,8 +1048,9 @@ civilian_rocks_execution_anim(delay, str_category_snipers) {
 }
 
 e9_balcony_blowup_stairs_stumble_anim(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   flag_wait("karma_2_gump_sundeck");
   run_scene("scene_e9_balcony_blowup_stairs_stumble");
@@ -1100,10 +1143,11 @@ nag_move_forward(n_wait_min, n_wait_max) {
   a_salazar_nag[5] = "sala_defalco_s_getting_aw_0";
 
   while(true) {
-    if(cointoss())
+    if(cointoss()) {
       level.ai_harper queue_dialog(a_harper_nag[randomint(a_harper_nag.size)], 0, undefined, undefined, 0);
-    else
+    } else {
       level.ai_salazar queue_dialog(a_salazar_nag[randomint(a_salazar_nag.size)], 0, undefined, undefined, 0);
+    }
 
     wait(randomfloatrange(n_wait_min, n_wait_max));
   }
@@ -1118,8 +1162,9 @@ e9_post_ms_background_enemy_rusher_control(str_category) {
     for(i = 0; i < a_enemy_spawners.size; i++) {
       e_ai = simple_spawn_single(a_enemy_spawners[i]);
 
-      if(isDefined(e_ai))
+      if(isDefined(e_ai)) {
         e_ai thread aggressive_runner(str_category);
+      }
 
       delay = randomfloatrange(0.1, 0.4);
       wait(delay);
@@ -1174,11 +1219,13 @@ fallback_monitor(str_aigroup, n_kill_limit, str_fallback_extra1, str_fallback_ex
   waittill_ai_group_amount_killed(str_aigroup, n_kill_limit);
   flag_set(str_fallback);
 
-  if(isDefined(str_fallback_extra1))
+  if(isDefined(str_fallback_extra1)) {
     flag_set(str_fallback_extra1 + "_fallback");
+  }
 
-  if(isDefined(str_fallback_extra2))
+  if(isDefined(str_fallback_extra2)) {
     flag_set(str_fallback_extra2 + "_fallback");
+  }
 }
 
 pmc_asd_alert() {
@@ -1200,8 +1247,9 @@ sec_explosion() {
 }
 
 pmc_defalco_extract_init() {
-  foreach(e_trig in getEntArray("pmc_defalco_extract_trigger", "targetname"))
-  e_trig thread pmc_defalco_extract_think();
+  foreach(e_trig in getEntArray("pmc_defalco_extract_trigger", "targetname")) {
+    e_trig thread pmc_defalco_extract_think();
+  }
 }
 
 pmc_defalco_extract_think() {

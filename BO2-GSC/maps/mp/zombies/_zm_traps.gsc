@@ -401,7 +401,7 @@ trap_damage() {
   while(true) {
     self waittill("trigger", ent);
 
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       switch (self._trap_type) {
         case "electric":
           ent thread player_elec_damage();

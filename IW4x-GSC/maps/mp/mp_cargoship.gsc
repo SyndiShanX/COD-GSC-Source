@@ -17,9 +17,9 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_cargoship");
 
-  setdvar("r_specularcolorscale", "1.5");
+  setDvar("r_specularcolorscale", "1.5");
 
   level.airstrikeHeightScale = 2;
 
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
 }

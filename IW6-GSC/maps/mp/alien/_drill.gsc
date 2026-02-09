@@ -81,9 +81,7 @@ drill_out_of_playable() {
       }
     }
     wait(0.1);
-
   }
-
 }
 
 init_drill_drop_loc() {
@@ -343,7 +341,6 @@ drop_drill_on_disconnect() {
     }
     player setLowerMessage("drill_overboard", &"ALIEN_COLLECTIBLES_DRILL_OUTOFPLAY", 4);
   }
-
 }
 
 CONST_DRILL_TELEPORT_RANGE = 1250;
@@ -520,7 +517,6 @@ watch_to_repair(hive_struct) {
 
     wait 1.0;
   }
-
 }
 
 set_drill_state_plant(pos, owner) {
@@ -963,7 +959,6 @@ handle_bomb_damage() {
           level thread maps\mp\alien\_music_and_dialog::playVOForDrillDamaged();
 
         last_damage_time = GetTime();
-
       }
     }
   }
@@ -1136,7 +1131,6 @@ cancel_repair_on_hive_death(player) {
 
     player.isRepairing = false;
   }
-
 }
 
 DRILL_USE_DISTANCE = 18496;
@@ -1283,7 +1277,6 @@ watchBomb() {
       alienbomb.team = self.team;
 
       alienbomb thread watchBombStuck(self);
-
     }
   }
 }
@@ -1432,7 +1425,6 @@ remove_headicons_from_players() {
       }
     }
   }
-
 }
 
 remove_spawner() {
@@ -1692,9 +1684,7 @@ wait_for_drill_plant() {
           player EnableWeaponSwitch();
         }
 
-        if(!isDefined(level.non_player_drill_plant_check) || ![
-            [level.non_player_drill_plant_check]
-          ]()) {
+        if(!isDefined(level.non_player_drill_plant_check) || ![[level.non_player_drill_plant_check]]()) {
           player SwitchToWeapon(player.lastweapon);
         }
 

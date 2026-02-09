@@ -22,13 +22,13 @@ debugDvars() {
 
 debugDvar_Internal(dvar, action_func) {
   level endon("host_migration_begin");
-  SetDvar(dvar, "off");
+  setDvar(dvar, "off");
 
   while(true) {
-    if(GetDvar(dvar) != "off") {
+    if(getDvar(dvar) != "off") {
       [[action_func]]();
       wait(0.05);
-      SetDvar(dvar, "off");
+      setDvar(dvar, "off");
     }
 
     wait 0.2;
@@ -401,7 +401,7 @@ self_revive_activated() {
 
 devgui_giveskillpoints() {
   while(1) {
-    if(getdvar("scr_giveabilitypoint") == "") {
+    if(getDvar("scr_giveabilitypoint") == "") {
       wait .05;
       continue;
     }
@@ -498,12 +498,12 @@ debug_print_weapon_shots(weapon_ref) {
 
 devgui_SetPrestigeNerf() {
   while(true) {
-    if(getdvar("scr_setprestigenerf") == "") {
+    if(getDvar("scr_setprestigenerf") == "") {
       waitframe();
       continue;
     }
 
-    nerf_reference = getdvar("scr_setprestigenerf");
+    nerf_reference = getDvar("scr_setprestigenerf");
 
     foreach(player in level.players)
     player maps\mp\alien\_prestige::activate_nerf(nerf_reference);
@@ -562,7 +562,7 @@ notEnoughDebugAliens() {
 }
 
 addAlienAgentWithOverride() {
-  alien_type_override = GetDvar("alien_type_override");
+  alien_type_override = getDvar("alien_type_override");
 
   if(alien_type_override != "") {
     alien = maps\mp\gametypes\aliens::addAlienAgent("axis", undefined, undefined, alien_type_override);
@@ -864,7 +864,6 @@ run_spawn_test() {
     if(!isDefined(spawn_node)) {
       wait .1;
       continue;
-
     }
     alien_type = GetAlienSpawnType();
     intro_vignette_anim = get_intro_vignette_anim(spawn_node.script_noteworthy, alien_type);
@@ -904,7 +903,7 @@ drawLineAtSpawnTargetLoc() {
 }
 
 GetAlienSpawnType() {
-  spawn_type = GetDvar("alien_type_override", "wave goon");
+  spawn_type = getDvar("alien_type_override", "wave goon");
   spawn_type = StrTok(spawn_type, " ");
   return (spawn_type[1]);
 }

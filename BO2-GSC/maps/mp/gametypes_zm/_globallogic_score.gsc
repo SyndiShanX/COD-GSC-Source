@@ -171,7 +171,7 @@ _setplayermomentum(player, momentum) {
 _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {}
 
 setplayermomentumdebug() {
-  setdvar("sv_momentumPercent", 0.0);
+  setDvar("sv_momentumPercent", 0.0);
 
   while(true) {
     wait 1;
@@ -413,7 +413,7 @@ updatewinlossstats(winner) {
   }
   players = level.players;
 
-  if(!isDefined(winner) || isDefined(winner) && !isplayer(winner) && winner == "tie") {
+  if(!isDefined(winner) || isDefined(winner) && !isPlayer(winner) && winner == "tie") {
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"])) {
         continue;
@@ -423,7 +423,7 @@ updatewinlossstats(winner) {
       }
       updatetiestats(players[i]);
     }
-  } else if(isplayer(winner)) {
+  } else if(isPlayer(winner)) {
     if(level.hostforcedend && winner ishost()) {
       return;
     }

@@ -303,12 +303,12 @@ getApproachPoint(node, approachtype) {
 checkApproachPreConditions() {
   // if we're going to do a negotiation, we want to wait until it's over and move.gsc is called again
   if(isDefined(self getnegotiationstartnode())) {
-    /# debug_arrival( "Not doing approach: path has negotiation start node" );
+    debug_arrival("Not doing approach: path has negotiation start node");
     return false;
   }
 
   if(isDefined(self.disableArrivals) && self.disableArrivals) {
-    /# debug_arrival( "Not doing approach: self.disableArrivals is true" );
+    debug_arrival("Not doing approach: self.disableArrivals is true");
     return false;
   }
 
@@ -319,7 +319,7 @@ checkApproachPreConditions() {
 
   /*if( self shouldCQB() )
   {
-  	/# debug_arrival("Not doing approach: self.cqbwalking is true");
+  	debug_arrival("Not doing approach: self.cqbwalking is true");
   	return false;
   }*/
 
@@ -334,13 +334,13 @@ checkApproachConditions(approachType, approach_dir, node) {
   if(approachType == "stand" || approachType == "crouch") {
     assert(isDefined(node));
     if(AbsAngleClamp180(vectorToYaw(approach_dir) - node.angles[1] + 180) < 60) {
-      /# debug_arrival( "approach aborted: approach_dir is too far forward for node type " + node.type );
+      debug_arrival("approach aborted: approach_dir is too far forward for node type " + node.type);
       return false;
     }
   }
 
   if(self isThreatenedByEnemy() || (isDefined(self.lastApproachAbortTime) && self.lastApproachAbortTime + 500 > getTime())) {
-    /# debug_arrival( "approach aborted: nearby enemy threat" );
+    debug_arrival("approach aborted: nearby enemy threat");
     return false;
   }
 
@@ -411,7 +411,7 @@ setupApproachNode(firstTime) {
     }
   }
 
-  /# setupApproachNode_debugInfo( self, approachType, approach_dir, approachNodeYaw, node );
+  setupApproachNode_debugInfo(self, approachType, approach_dir, approachNodeYaw, node);
 
   if(!checkApproachConditions(approachType, approach_dir, node)) {
     return;
@@ -421,18 +421,18 @@ setupApproachNode(firstTime) {
 
 coverApproachLastMinuteCheck(approachPoint, approachFinalYaw, approachType, approachNumber, requiredYaw) {
   if(isDefined(self.disableArrivals) && self.disableArrivals) {
-    /# debug_arrival( "approach aborted at last minute: self.disableArrivals is true" );
+    debug_arrival("approach aborted at last minute: self.disableArrivals is true");
     return false;
   }
 
   // so we don't make guys turn around when they're (smartly) facing their enemy as they walk away
   if(abs(self getMotionAngle()) > 45 && isDefined(self.enemy) && vectorDot(anglesToForward(self.angles), vectorNormalize(self.enemy.origin - self.origin)) > .8) {
-    /# debug_arrival( "approach aborted at last minute: facing enemy instead of current motion angle" );
+    debug_arrival("approach aborted at last minute: facing enemy instead of current motion angle");
     return false;
   }
 
   if(self.a.pose != "stand" || (self.a.movement != "run" && !(self isCQBWalkingOrFacingEnemy()))) {
-    /# debug_arrival( "approach aborted at last minute: not standing and running" );
+    debug_arrival("approach aborted at last minute: not standing and running");
     return false;
   }
 
@@ -441,7 +441,7 @@ coverApproachLastMinuteCheck(approachPoint, approachFinalYaw, approachType, appr
     if(isDefined(self.enemy) && self canSee(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 256 * 256) {
       // check if enemy is in frontish of us
       if(vectorDot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0) {
-        /# debug_arrival( "aborting approach at last minute: don't want to turn back to nearby enemy" );
+        debug_arrival("aborting approach at last minute: don't want to turn back to nearby enemy");
         return false;
       }
     }
@@ -449,7 +449,7 @@ coverApproachLastMinuteCheck(approachPoint, approachFinalYaw, approachType, appr
 
   // make sure the path is still clear
   if(!checkCoverEnterPos(approachPoint, approachFinalYaw, approachType, approachNumber, false)) {
-    /# debug_arrival( "approach blocked at last minute" );
+    debug_arrival("approach blocked at last minute");
     return false;
   }
 
@@ -498,12 +498,12 @@ startCoverApproach(approachType, approachPoint, approachNodeYaw, approachFinalYa
   result = self CheckArrivalEnterPositions(approachPoint, approachFinalYaw, approachType, approach_dir, maxDirections, excludeDir, arrivalFromFront);
 
   if(result.approachNumber < 0) {
-    /# debug_arrival( "approach aborted: " + result.failure );
+    debug_arrival("approach aborted: " + result.failure);
     return;
   }
 
   approachNumber = result.approachNumber;
-  /# debug_arrival( "approach success: dir " + approachNumber );
+  debug_arrival("approach success: dir " + approachNumber);
 
   if(level.newArrivals && approachNumber <= 6 && arrivalFromFront) {
     self endon("goal_changed");
@@ -519,19 +519,19 @@ startCoverApproach(approachType, approachPoint, approachNodeYaw, approachFinalYa
     approachWaitTillClose(node, self.arrivalStartDist);
 
     if(!(self maymovetopoint(approachPoint))) {
-      /# debug_arrival( "approach blocked at last minute" );
+      debug_arrival("approach blocked at last minute");
       self.arrivalStartDist = undefined;
       return;
     }
 
     if(result.approachNumber < 0) {
-      /# debug_arrival( "final approach aborted: " + result.failure );
+      debug_arrival("final approach aborted: " + result.failure);
       self.arrivalStartDist = undefined;
       return;
     }
 
     approachNumber = result.approachNumber;
-    /# debug_arrival( "final approach success: dir " + approachNumber );
+    debug_arrival("final approach success: dir " + approachNumber);
 
     requiredYaw = approachFinalYaw - anim.coverTransAngles[approachType][approachNumber];
   } else {
@@ -559,7 +559,7 @@ CheckArrivalEnterPositions(approachpoint, approachYaw, approachtype, approach_di
   sortNodeTransitionAngles(angleDataObj, maxDirections);
 
   resultobj = spawnStruct();
-  /#resultobj.data = [];
+  resultobj.data = [];
 
   arrivalPos = (0, 0, 0);
   resultobj.approachNumber = -1;
@@ -572,14 +572,14 @@ CheckArrivalEnterPositions(approachpoint, approachYaw, approachtype, approach_di
     resultobj.approachNumber = angleDataObj.transIndex[i];
 
     if(!self checkCoverEnterPos(approachpoint, approachYaw, approachtype, resultobj.approachNumber, arrivalFromFront)) {
-      /#resultobj.data[ resultobj.data.size ] = "approach blocked: dir " + resultobj.approachNumber;
+      resultobj.data[resultobj.data.size] = "approach blocked: dir " + resultobj.approachNumber;
       continue;
     }
     break;
   }
 
   if(i > numAttempts) {
-    /#resultobj.failure = numAttempts + " direction attempts failed";
+    resultobj.failure = numAttempts + " direction attempts failed";
     resultobj.approachNumber = -1;
     return resultobj;
   }
@@ -589,7 +589,7 @@ CheckArrivalEnterPositions(approachpoint, approachYaw, approachtype, approach_di
   distToAnimStart = distanceSquared(approachpoint, self.coverEnterPos);
   if(distToApproachPoint < distToAnimStart * 2 * 2) {
     if(distToApproachPoint < distToAnimStart) {
-      /#resultobj.failure = "too close to destination";
+      resultobj.failure = "too close to destination";
       resultobj.approachNumber = -1;
       return resultobj;
     }
@@ -604,7 +604,7 @@ CheckArrivalEnterPositions(approachpoint, approachYaw, approachtype, approach_di
 
       if(cosAngle < 0.707) // 0.707 == cos( 45 )
       {
-        /#resultobj.failure = "angle to start of animation is too great (angle of " + acos( cosAngle ) + " > 45)";
+        resultobj.failure = "angle to start of animation is too great (angle of " + acos(cosAngle) + " > 45)";
         resultobj.approachNumber = -1;
         return resultobj;
       }
@@ -654,12 +654,12 @@ watchGoalChanged() {
 
 exposedApproachConditionCheck(node, goalMatchesNode) {
   if(!isDefined(self.pathGoalPos)) {
-    /# debug_arrival( "Aborting exposed approach because I have no path" );
+    debug_arrival("Aborting exposed approach because I have no path");
     return false;
   }
 
   if(isDefined(self.disableArrivals) && self.disableArrivals) {
-    /# debug_arrival( "Aborting exposed approach because self.disableArrivals is true" );
+    debug_arrival("Aborting exposed approach because self.disableArrivals is true");
     return false;
   }
 
@@ -668,24 +668,24 @@ exposedApproachConditionCheck(node, goalMatchesNode) {
       return false;
   } else {
     if(!self.faceMotion && (!isDefined(node) || node.type == "Path")) {
-      /# debug_arrival( "Aborting exposed approach because not facing motion and not going to a node" );
+      debug_arrival("Aborting exposed approach because not facing motion and not going to a node");
       return false;
     }
 
     if(self.a.pose != "stand") {
-      /# debug_arrival( "approach aborted at last minute: not standing" );
+      debug_arrival("approach aborted at last minute: not standing");
       return false;
     }
   }
 
   if(self isThreatenedByEnemy() || (isDefined(self.lastApproachAbortTime) && self.lastApproachAbortTime + 500 > getTime())) {
-    /# debug_arrival( "approach aborted: nearby enemy threat" );
+    debug_arrival("approach aborted: nearby enemy threat");
     return false;
   }
 
   // only do an arrival if we have a clear path
   if(!self maymovetopoint(self.pathGoalPos)) {
-    /#debug_arrival( "Aborting exposed approach: maymove check failed" );
+    debug_arrival("Aborting exposed approach: maymove check failed");
     return false;
   }
 
@@ -720,7 +720,7 @@ exposedApproachWaitTillClose() {
     if(waittime < .05)
       waittime = .05;
 
-    // /#self thread animscripts\shared::showNoteTrack("wait " + waittime);
+    // self thread animscripts\shared::showNoteTrack("wait " + waittime);
     wait waittime;
   }
 }
@@ -806,7 +806,7 @@ doLastMinuteExposedApproach() {
   self.approachNumber = angleDataObj.transIndex[best];
   self.approachType = approachType;
 
-  /# debug_arrival( "Doing exposed approach in direction " + self.approachNumber );	
+  debug_arrival("Doing exposed approach in direction " + self.approachNumber);
 
   approachAnim = anim.coverTrans[approachType][self.approachNumber];
 
@@ -820,7 +820,7 @@ doLastMinuteExposedApproach() {
     wait .05;
 
   if(isDefined(self.arrivalStartDist) && self.arrivalStartDist < animDist + allowedError) {
-    /# debug_arrival( "Aborting exposed approach because cover arrival dist is shorter" );
+    debug_arrival("Aborting exposed approach because cover arrival dist is shorter");
     return;
   }
 
@@ -829,7 +829,7 @@ doLastMinuteExposedApproach() {
   }
   dist = distance(self.origin, self.pathGoalPos);
   if(abs(dist - animDist) > allowedError) {
-    /# debug_arrival( "Aborting exposed approach because distance difference exceeded allowed error: " + dist + " more than " + allowedError + " from " + animDist );
+    debug_arrival("Aborting exposed approach because distance difference exceeded allowed error: " + dist + " more than " + allowedError + " from " + animDist);
     return;
   }
 
@@ -846,7 +846,7 @@ doLastMinuteExposedApproach() {
     if(!isDefined(self.faceEnemyArrival) || self.faceMotion) {
       requiredYaw = facingYaw - yawToMakeDeltaMatchUp;
       if(AbsAngleClamp180(requiredYaw - self.angles[1]) > 30) {
-        /# debug_arrival( "Aborting exposed approach because angle change was too great" );
+        debug_arrival("Aborting exposed approach because angle change was too great");
         return;
       }
     } else {
@@ -876,37 +876,37 @@ startMoveTransitionPreConditions() {
   // if we don't know where we're going, we can't check if it's a good idea to do the exit animation
   // (and it's probably not)
   if(!isDefined(self.pathGoalPos)) {
-    /# debug_arrival( "not exiting cover (ent " + self getentnum() + "): self.pathGoalPos is undefined" );
+    debug_arrival("not exiting cover (ent " + self getentnum() + "): self.pathGoalPos is undefined");
     return false;
   }
 
   if(!self shouldFaceMotion()) {
-    /# debug_arrival( "not exiting cover (ent " + self getentnum() + "): self.faceMotion is false" );
+    debug_arrival("not exiting cover (ent " + self getentnum() + "): self.faceMotion is false");
     return false;
   }
 
   if(self.a.pose == "prone") {
-    /# debug_arrival( "not exiting cover (ent " + self getentnum() + "): self.a.pose is \"prone\"" );
+    debug_arrival("not exiting cover (ent " + self getentnum() + "): self.a.pose is \"prone\"");
     return false;
   }
 
   if(isDefined(self.disableExits) && self.disableExits) {
-    /# debug_arrival( "not exiting cover (ent " + self getentnum() + "): self.disableExits is true" );
+    debug_arrival("not exiting cover (ent " + self getentnum() + "): self.disableExits is true");
     return false;
   }
 
   if(self.stairsState != "none") {
-    /# debug_arrival( "not exiting cover (ent " + self getentnum() + "): on stairs" );
+    debug_arrival("not exiting cover (ent " + self getentnum() + "): on stairs");
     return false;
   }
 
   if(!self isStanceAllowed("stand") && !isDefined(self.heat)) {
-    /# debug_arrival( "not exiting cover (ent " + self getentnum() + "): not allowed to stand" );
+    debug_arrival("not exiting cover (ent " + self getentnum() + "): not allowed to stand");
     return false;
   }
 
   if(distanceSquared(self.origin, self.pathGoalPos) < 10000) {
-    /# debug_arrival( "not exiting cover (ent " + self getentnum() + "): too close to goal" );
+    debug_arrival("not exiting cover (ent " + self getentnum() + "): too close to goal");
     return false;
   }
 
@@ -915,18 +915,18 @@ startMoveTransitionPreConditions() {
 
 startMoveTransitionConditions(exittype, exitNode) {
   if(!isDefined(exittype)) {
-    /# debug_arrival( "aborting exit: not supported for node type " + exitNode.type );
+    debug_arrival("aborting exit: not supported for node type " + exitNode.type);
     return false;
   }
 
   // since we transition directly into a standing run anyway, // we might as well just use the standing exits when crouching too
   if(exittype == "exposed" || isDefined(self.heat)) {
     if(self.a.pose != "stand" && self.a.pose != "crouch") {
-      /# debug_arrival( "exposed exit aborted because anim_pose is not \"stand\" or \"crouch\"" );
+      debug_arrival("exposed exit aborted because anim_pose is not \"stand\" or \"crouch\"");
       return false;
     }
     if(self.a.movement != "stop") {
-      /# debug_arrival( "exposed exit aborted because anim_movement is not \"stop\"" );
+      debug_arrival("exposed exit aborted because anim_movement is not \"stop\"");
       return false;
     }
   }
@@ -934,7 +934,7 @@ startMoveTransitionConditions(exittype, exitNode) {
   // don't do an exit away from an enemy that we would otherwise face as we moved away from them
   if(!isDefined(self.heat) && isDefined(self.enemy) && vectorDot(self.lookaheaddir, self.enemy.origin - self.origin) < 0) {
     if(self canSeeEnemyFromExposed() && distanceSquared(self.origin, self.enemy.origin) < 300 * 300) {
-      /# debug_arrival( "aborting exit: don't want to turn back to nearby enemy" );
+      debug_arrival("aborting exit: don't want to turn back to nearby enemy");
       return false;
     }
   }
@@ -1070,7 +1070,7 @@ startMoveTransition() {
     }
   }
 
-  /# self startMoveTransition_debugInfo( exittype, exityaw );
+  self startMoveTransition_debugInfo(exittype, exityaw);
 
   if(!self startMoveTransitionConditions(exittype, exitNode)) {
     return;
@@ -1104,22 +1104,22 @@ startMoveTransition() {
       break;
     }
 
-    /# debug_arrival( "exit blocked: dir " + approachNumber );
+    debug_arrival("exit blocked: dir " + approachNumber);
   }
 
   if(i > numAttempts) {
-    /# debug_arrival( "aborting exit: too many exit directions blocked" );
+    debug_arrival("aborting exit: too many exit directions blocked");
     return;
   }
 
   // if AI is closer to destination than exitPos is, don't do exit
   allowedDistSq = distanceSquared(self.origin, self.coverExitPos) * 1.25 * 1.25;
   if(distanceSquared(self.origin, self.pathgoalpos) < allowedDistSq) {
-    /# debug_arrival( "exit failed, too close to destination" );
+    debug_arrival("exit failed, too close to destination");
     return;
   }
 
-  /# debug_arrival( "exit success: dir " + approachNumber );
+  debug_arrival("exit success: dir " + approachNumber);
   self doCoverExitAnimation(exittype, approachNumber);
 }
 

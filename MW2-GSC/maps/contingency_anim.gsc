@@ -53,11 +53,11 @@ ride_uaz_door() {
   /*
   	flag_wait( "wait_for_player" );
   	anim_model = self maps\_vehicle_aianim::getanimatemodel();
-  	anim_model maps\_vehicle_aianim::setanimrestart_once( %uaz_passenger_exit_into_stand_door, false );
+  	anim_model maps\_vehicle_aianim::setanimrestart_once(%uaz_passenger_exit_into_stand_door, false );
 
   	flag_wait( "uaz_mounted" );
-  	anim_model ClearAnim( %uaz_passenger_exit_into_stand_door, 0 );
-  	anim_model maps\_vehicle_aianim::setanimrestart_once( %uaz_passenger_enter_from_huntedrun_door, true );
+  	anim_model ClearAnim(%uaz_passenger_exit_into_stand_door, 0 );
+  	anim_model maps\_vehicle_aianim::setanimrestart_once(%uaz_passenger_enter_from_huntedrun_door, true );
   */
 }
 
@@ -297,8 +297,7 @@ dialog() {
   //level.scr_sound[ "price" ][ "cliff_pri_noidea" ]				 = "cliff_pri_noidea";
   //level.scr_radio[ "outrunthem" ] = "cliff_pri_outrunthem";
 
-  //IN ----
-  //Soap, I've found Roach. He appears to be intact.	
+  //IN ---- //Soap, I've found Roach. He appears to be intact.	
   level.scr_sound["price"]["cont_pri_foundroach"] = "cont_pri_foundroach";
   level.scr_radio["cont_pri_foundroach"] = "cont_pri_foundroach";
   //We're going to head northwest to the sub base, over.
@@ -315,16 +314,14 @@ dialog() {
   //I'm working on it. Out.	
   level.scr_radio["cont_cmt_workingonit"] = "cont_cmt_workingonit";
 
-  //IN ----
-  //Roach, follow me and stay out of sight.	
+  //IN ---- //Roach, follow me and stay out of sight.	
   level.scr_radio["cont_pri_outofsight"] = "cont_pri_outofsight";
   //Contact.Enemy patrol 30 meters to our front.	
   level.scr_radio["cont_pri_30metersfront"] = "cont_pri_30metersfront";
   //Let's follow them quietly, and pick off any stragglers.	
   level.scr_radio["cont_pri_pickoffstragglers"] = "cont_pri_pickoffstragglers";
 
-  //IN ----
-  //Convoy coming, get out of sight.	
+  //IN ---- //Convoy coming, get out of sight.	
   level.scr_sound["price"]["cont_pri_convoycoming"] = "cont_pri_convoycoming";
   level.scr_radio["cont_pri_convoycoming"] = "cont_pri_convoycoming";
   //Let them pass.	
@@ -338,8 +335,7 @@ dialog() {
   level.scr_sound["price"]["cont_cmt_rogerthat"] = "cont_cmt_rogerthat";
   level.scr_radio["cont_cmt_rogerthat"] = "cont_cmt_rogerthat";
 
-  //IN ----
-  //Looks like they saw your parachute. 	
+  //IN ---- //Looks like they saw your parachute. 	
   level.scr_radio["cont_pri_yourparachute"] = "cont_pri_yourparachute";
   //Let's keep moving. 	
   level.scr_radio["cont_pri_keepmoving"] = "cont_pri_keepmoving";
@@ -356,8 +352,7 @@ dialog() {
   ///////////////////////
   ///// MISC STEALTH
 
-  //STEALTH BROKEN! ----
-  //We're spotted! Go loud! Take them out! 	
+  //STEALTH BROKEN! ---- //We're spotted! Go loud! Take them out! 	
   level.scr_radio["cont_pri_goloud"] = "cont_pri_goloud";
   //They're on to us! Open fire!	
   level.scr_radio["cont_pri_ontous"] = "cont_pri_ontous";
@@ -365,12 +360,9 @@ dialog() {
   level.scr_radio["cont_pri_werespotted"] = "cont_pri_werespotted";
 
   //first stragglers
-  //Patience…don't do anything stupid.	-----
-  level.scr_radio["cont_pri_patience"] = "cont_pri_patience";
-  //We'll have to take 'em out at the same time.	-----
-  level.scr_radio["cont_pri_sametime"] = "cont_pri_sametime";
-  //Now's your chance. Take one of 'em out. 	----
-  level.scr_radio["cont_pri_yourchance"] = "cont_pri_yourchance";
+  //Patience…don't do anything stupid.	----- level.scr_radio["cont_pri_patience"] = "cont_pri_patience";
+  //We'll have to take 'em out at the same time.	----- level.scr_radio["cont_pri_sametime"] = "cont_pri_sametime";
+  //Now's your chance. Take one of 'em out. 	---- level.scr_radio["cont_pri_yourchance"] = "cont_pri_yourchance";
 
   //STEALTH TIPS
   //Don't get so close.	
@@ -382,8 +374,7 @@ dialog() {
   //I'm in position - take the shot when you're ready.
   level.scr_radio["cont_pri_whenyoureready"] = "cont_pri_whenyoureready";
 
-  //STEALTH RECOVERY	-----
-  //What the hell was that? You trying to get us killed?	
+  //STEALTH RECOVERY	----- //What the hell was that? You trying to get us killed?	
   level.scr_radio["cont_pri_getuskilled"] = "cont_pri_getuskilled";
   //Does the word stealth mean anything to you?	
   level.scr_radio["cont_pri_thewordstealth"] = "cont_pri_thewordstealth";
@@ -399,8 +390,7 @@ dialog() {
   //Move.	
   level.scr_radio["cont_pri_move"] = "cont_pri_move";
 
-  //ALERTED ALONG THE ROAD	----
-  //Quick! Hide in the woods! You alerted one of them!	
+  //ALERTED ALONG THE ROAD	---- //Quick! Hide in the woods! You alerted one of them!	
   level.scr_radio["cont_pri_hideinwoods"] = "cont_pri_hideinwoods";
   //Get into the woods! Hide!	
   level.scr_radio["cont_pri_getintowoods"] = "cont_pri_getintowoods";
@@ -413,14 +403,12 @@ dialog() {
   //They're splitting up. Take him down.	
   level.scr_radio["cont_pri_splittingup"] = "cont_pri_splittingup";
 
-  //GOOD JOB	----
-  //Beautiful.	
+  //GOOD JOB	---- //Beautiful.	
   level.scr_radio["cont_pri_beautiful"] = "cont_pri_beautiful";
   //Good shot.	
   level.scr_radio["cont_pri_goodshot"] = "cont_pri_goodshot";
 
-  //PRICE KILLS	-----
-  //Got one.	
+  //PRICE KILLS	----- //Got one.	
   level.scr_radio["cont_pri_gotone"] = "cont_pri_gotone";
   //He's down. 	
   level.scr_radio["cont_pri_hesdown2"] = "cont_pri_hesdown2";
@@ -444,22 +432,16 @@ dialog() {
   level.scr_radio["cont_pri_hesalerted"] = "cont_pri_hesalerted";
 
   //WOODS PATROL CALLOUTS
-  //Dog patrol.	------
-  level.scr_radio["cont_pri_dogpatrol"] = "cont_pri_dogpatrol";
-  //Three man patrol dead ahead.	-----
-  level.scr_radio["cont_pri_3manpatrol"] = "cont_pri_3manpatrol";
-  //Large patrol at 12 o'clock.	-----
-  level.scr_radio["cont_pri_largepatrol12"] = "cont_pri_largepatrol12";
-  //We got another dog patrol.	-----
-  level.scr_radio["cont_pri_anotherdogpatrol"] = "cont_pri_anotherdogpatrol";
+  //Dog patrol.	------ level.scr_radio["cont_pri_dogpatrol"] = "cont_pri_dogpatrol";
+  //Three man patrol dead ahead.	----- level.scr_radio["cont_pri_3manpatrol"] = "cont_pri_3manpatrol";
+  //Large patrol at 12 o'clock.	----- level.scr_radio["cont_pri_largepatrol12"] = "cont_pri_largepatrol12";
+  //We got another dog patrol.	----- level.scr_radio["cont_pri_anotherdogpatrol"] = "cont_pri_anotherdogpatrol";
   //Another patrol up ahead.	
   level.scr_radio["cont_pri_anotherpatrol"] = "cont_pri_anotherpatrol";
 
   //YOUR DECISION
-  //Take them out or leave them be. It's your call.	------
-  level.scr_radio["cont_pri_yourcall"] = "cont_pri_yourcall";
-  //We can't slip by them. Get ready to take them out quickly.	------
-  level.scr_radio["cont_pri_cantslipby"] = "cont_pri_cantslipby";
+  //Take them out or leave them be. It's your call.	------ level.scr_radio["cont_pri_yourcall"] = "cont_pri_yourcall";
+  //We can't slip by them. Get ready to take them out quickly.	------ level.scr_radio["cont_pri_cantslipby"] = "cont_pri_cantslipby";
   //Take them out or go around.	
   level.scr_radio["cont_pri_outoraround"] = "cont_pri_outoraround";
 

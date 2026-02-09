@@ -44,12 +44,11 @@ main() {
         //			if(!success)
         //				self interruptPoint();	// We couldn't shoot for some reason, so now would be a good time to run for cover.
         nextaction = ("crouch");
-
       }
     } else if(nextaction == ("crouch")) {
       timer = gettime() + randomint(2000) + 2000;
       while(timer > gettime()) {
-        /#thread [[ anim.println ]]( "ExposedCombat - Crouched combat" );
+        thread[[anim.println]]("ExposedCombat - Crouched combat");
 
         //				self animscripts\aim::aim();
         success = ShootVolley();
@@ -57,7 +56,6 @@ main() {
           continue;
         nextaction = ("stand");
       }
-
     }
   }
 }
@@ -86,7 +84,7 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     self setFlaggedAnimKnobRestart("shootdone", anim_autofire, 1, .05, animRate);
     numShots = randomint(8) + 6;
     enemyAngle = animscripts\utility::AbsYawToEnemy();
-    /#thread [[ anim.locspam ]]( "c16a" );
+    thread[[anim.locspam]]("c16a");
     for(i = 0;
       (i < numShots && self.bulletsInClip > 0 && enemyAngle < 20); i++) {
       self waittillmatch("shootdone", "fire");
@@ -120,7 +118,7 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
       else
         self shoot();
       self decrementBulletsInClip();
-      /#thread [[ anim.locspam ]]( "c17.1b" );
+      thread[[anim.locspam]]("c17.1b");
       shootTime = animscripts\weaponList::shootAnimTime();
       quickTime = animscripts\weaponList::waitAfterShot();
       wait quickTime;

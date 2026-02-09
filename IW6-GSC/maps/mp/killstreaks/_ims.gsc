@@ -333,7 +333,6 @@ ims_handleDeath() {
 
     self notify("deleting");
     wait(1.0);
-
   } else if(isDefined(self.immediateDeath)) {
     playFX(getfx("ims_explode_mp"), self.origin + (0, 0, 10));
     self notify("deleting");
@@ -564,7 +563,6 @@ updateIMSPlacement(ims) {
         ims setModel(level.imsSettings[ims.imsType].modelPlacementFailed);
         self ForceUseHintOn(level.imsSettings[ims.imsType].cannotPlaceString);
       }
-
     }
 
     lastCanPlaceIMS = ims.canBePlaced;
@@ -604,7 +602,6 @@ ims_onEnterRide(carrier) {
     }
     wait 0.1;
   }
-
 }
 
 ims_onGameEnded(carrier) {
@@ -721,7 +718,6 @@ debug_draw() {
         Print3d(start, result["surfacetype"], (1, 1, 1), 1, 1, 10);
         drawLine(start, end, 1.0, (1, 0, 0));
       }
-
     }
 
     wait(1.0);
@@ -825,7 +821,7 @@ ims_attackTargets() {
 
     self.attackTrigger waittill("trigger", targetEnt);
 
-    if(IsPlayer(targetEnt)) {
+    if(isPlayer(targetEnt)) {
       if(isDefined(self.owner) && targetEnt == self.owner) {
         continue;
       }
@@ -1033,7 +1029,6 @@ imsCreateExplosiveWithKillCam() {
     expl LinkTo(self);
     self.explosive1 = expl;
   }
-
 }
 
 imsOpenDoor(explNum, config, immediate) {

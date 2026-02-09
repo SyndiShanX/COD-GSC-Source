@@ -21,8 +21,9 @@ main() {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 1; i++)
+  for(i = 0; i < 1; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[0].idle = % crew_bike_m72_drive_straight;
@@ -56,18 +57,21 @@ ai_ride_and_shoot() {
   self.max_bike_aim_angle_delta = 30;
   self.max_bike_side_yaw_angle = 90;
 
-  if(!isDefined(self.max_bike_total_yaw_angle))
+  if(!isDefined(self.max_bike_total_yaw_angle)) {
     self.max_bike_total_yaw_angle = self.max_bike_side_yaw_angle + self.max_bike_aim_yaw_angle;
+  }
 
   self.max_bike_roll_angle = 30;
 
-  if(!isDefined(self.min_blindspot_time))
+  if(!isDefined(self.min_blindspot_time)) {
     self.min_blindspot_time = 0.5;
+  }
 
   blindspottime = 0;
 
-  if(!isDefined(level.ai_motorcycle_death_launch_vector))
+  if(!isDefined(level.ai_motorcycle_death_launch_vector)) {
     level.ai_motorcycle_death_launch_vector = (200, 200, 40);
+  }
 
   self maps\_utility::disable_pain();
   self maps\_utility::disable_react();
@@ -102,11 +106,13 @@ ai_ride_and_shoot() {
         aimdelta = yawaimweight - self.prevbikeryawaimweight;
         maxweightchange = self.max_bike_aim_angle_delta / self.max_bike_aim_yaw_angle;
 
-        if(abs(aimdelta) > maxweightchange)
+        if(abs(aimdelta) > maxweightchange) {
           yawaimweight = self.prevbikeryawaimweight + maxweightchange * sign(aimdelta);
+        }
 
-        if(yawaimweight > 1)
+        if(yawaimweight > 1) {
           yawaimweight = 1;
+        }
 
         if(yawtoenemy < 0) {
           self setanimlimited(%moto_aim_4, yawaimweight, 0.05);
@@ -118,14 +124,16 @@ ai_ride_and_shoot() {
 
         pitchaimweight = abs(pitchtoenemy / self.max_bike_aim_pitch_angle);
 
-        if(abs(pitchaimweight) > 1)
+        if(abs(pitchaimweight) > 1) {
           pitchaimweight = sign(pitchaimweight);
+        }
 
         aimdelta = pitchaimweight - self.prevbikerpitchaimweight;
         maxweightchange = self.max_bike_aim_angle_delta / self.max_bike_aim_pitch_angle;
 
-        if(abs(aimdelta) > maxweightchange)
+        if(abs(aimdelta) > maxweightchange) {
           pitchaimweight = self.prevbikerpitchaimweight + maxweightchange * sign(aimdelta);
+        }
 
         if(pitchtoenemy < 0) {
           self setanimlimited(%moto_aim_2, pitchaimweight, 0.05);
@@ -152,10 +160,11 @@ ai_ride_and_shoot() {
     } else if(self.bikerisarmed)
       self ai_ride_and_shoot_gun_putaway();
 
-    if(self.bikerisarmed)
+    if(self.bikerisarmed) {
       self ai_ride_and_shoot_aim_idle();
-    else
+    } else {
       self ai_ride_and_shoot_idle();
+    }
 
     wait 0.05;
   }
@@ -179,8 +188,9 @@ ai_ride_and_shoot_linkto_bike() {
 }
 
 ai_ride_and_shoot_aiming_on(sideanimweight) {
-  if(!isDefined(sideanimweight))
+  if(!isDefined(sideanimweight)) {
     sideanimweight = 0;
+  }
 
   if(sideanimweight < 0) {
     sideanimweight = abs(sideanimweight);
@@ -189,20 +199,22 @@ ai_ride_and_shoot_aiming_on(sideanimweight) {
     self setanimknoblimited(%crew_bike_m72_aim_l_6, sideanimweight, 0);
     self setanimknoblimited(%crew_bike_m72_aim_l_8, sideanimweight, 0);
 
-    if(sideanimweight > 0.5)
+    if(sideanimweight > 0.5) {
       self setflaggedanimlimited("fireAnim", %crew_bike_m72_l_fire, sideanimweight, 0);
-    else
+    } else {
       self setanimlimited(%crew_bike_m72_l_fire, sideanimweight, 0);
+    }
   } else {
     self setanimknoblimited(%crew_bike_m72_aim_r_2, sideanimweight, 0);
     self setanimknoblimited(%crew_bike_m72_aim_r_4, sideanimweight, 0);
     self setanimknoblimited(%crew_bike_m72_aim_r_6, sideanimweight, 0);
     self setanimknoblimited(%crew_bike_m72_aim_r_8, sideanimweight, 0);
 
-    if(sideanimweight > 0.5)
+    if(sideanimweight > 0.5) {
       self setflaggedanimlimited("fireAnim", %crew_bike_m72_r_fire, sideanimweight, 0);
-    else
+    } else {
       self setanimlimited(%crew_bike_m72_r_fire, sideanimweight, 0);
+    }
   }
 
   self setanimlimited(%crew_bike_m72_aim_f_2, 1 - sideanimweight, 0);
@@ -211,10 +223,11 @@ ai_ride_and_shoot_aiming_on(sideanimweight) {
   self setanimlimited(%crew_bike_m72_aim_f_8, 1 - sideanimweight, 0);
 
   if(sideanimweight < 1) {
-    if(sideanimweight < 0.5)
+    if(sideanimweight < 0.5) {
       self setflaggedanimlimited("fireAnim", %crew_bike_m72_f_fire, 1 - sideanimweight, 0);
-    else
+    } else {
       self setanimlimited(%crew_bike_m72_f_fire, 1 - sideanimweight, 0);
+    }
   }
 
   self animscripts\weaponlist::refillclip();
@@ -242,8 +255,9 @@ ai_ride_and_shoot_aim_idle(blendtime) {
   realyawtoenemy = self getyawtoorigin(self.shootent.origin);
   sideanimweight = realyawtoenemy / self.max_bike_side_yaw_angle;
 
-  if(abs(sideanimweight) > 1)
+  if(abs(sideanimweight) > 1) {
     sideanimweight = sign(sideanimweight);
+  }
 
   if(self.prevsideanimweight == sideanimweight) {
     return;
@@ -251,8 +265,9 @@ ai_ride_and_shoot_aim_idle(blendtime) {
   self.prevsideanimweight = sideanimweight;
   ai_ride_and_shoot_aiming_on(sideanimweight);
 
-  if(!isDefined(blendtime))
+  if(!isDefined(blendtime)) {
     blendtime = 0.05;
+  }
 
   if(sideanimweight < 0) {
     sideanimweight = abs(sideanimweight);
@@ -269,8 +284,9 @@ ai_ride_and_shoot_aim_idle(blendtime) {
 ai_ride_and_shoot_lean() {
   rollanimweight = abs(self.ridingvehicle.angles[2]) / self.max_bike_roll_angle;
 
-  if(rollanimweight > 1)
+  if(rollanimweight > 1) {
     rollanimweight = 1;
+  }
 
   if(self.bikerisaiming) {
     if(self.ridingvehicle.angles[2] < 0) {
@@ -314,8 +330,9 @@ ai_ride_and_shoot_gun_putaway(aimforwardtime) {
   self notify("stopShooting");
   self setanim(%moto_fire, 0, 0);
 
-  if(!isDefined(aimforwardtime))
+  if(!isDefined(aimforwardtime)) {
     aimforwardtime = 0.3;
+  }
 
   self setanimlimited(%moto_aim_4, 0, aimforwardtime);
   self setanimlimited(%moto_aim_6, 0, aimforwardtime);
@@ -350,8 +367,9 @@ ai_ride_and_shoot_jump() {
     self notify("stopShooting");
     self setflaggedanimknoballrestart("jump", %crew_bike_m72_jump_start_armed, %body, 1, 0.2, 1);
 
-    while(!self.bikershouldland)
+    while(!self.bikershouldland) {
       wait 0.05;
+    }
 
     self setflaggedanimknoballrestart("jump", %crew_bike_m72_jump_land_armed, %body, 1, 0.2, 1);
     self waittillmatch("jump", "end");
@@ -361,8 +379,9 @@ ai_ride_and_shoot_jump() {
   } else {
     self setflaggedanimknoballrestart("jump", %crew_bike_m72_jump_start_unarmed, %body, 1, 0.2, 1);
 
-    while(!self.bikershouldland)
+    while(!self.bikershouldland) {
       wait 0.05;
+    }
 
     self setflaggedanimknoballrestart("jump", %crew_bike_m72_jump_land_unarmed, %body, 1, 0.2, 1);
     self waittillmatch("jump", "end");
@@ -371,10 +390,11 @@ ai_ride_and_shoot_jump() {
 
   self.bikershouldjump = 0;
 
-  if(self.bikerisarmed && isDefined(self.shootent))
+  if(self.bikerisarmed && isDefined(self.shootent)) {
     self ai_ride_and_shoot_aim_idle();
-  else
+  } else {
     self ai_ride_and_shoot_idle();
+  }
 }
 
 ai_ride_and_shoot_watch_jump() {

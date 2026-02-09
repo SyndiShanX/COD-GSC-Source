@@ -32,5 +32,4 @@ main() {
 
   if(common_scripts\utility::shouldRunServerSideEffects())
     maps\createfx\mp_crash_tropical_fx::main();
-
 }

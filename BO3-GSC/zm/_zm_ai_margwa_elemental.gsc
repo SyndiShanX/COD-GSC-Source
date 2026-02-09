@@ -1134,7 +1134,7 @@ function function_16cddcb6() {
   }
   while(isDefined(self)) {
     self waittill("damage", n_damage, e_attacker);
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       var_b5f846f3 = var_b5f846f3 + n_damage;
       if(var_b5f846f3 >= var_b52ddb1c) {
         self detonate();
@@ -1357,22 +1357,22 @@ function function_15492d9b() {
     string = getdvarstring("");
     if(string === "") {
       level thread function_a06aa49e();
-      setdvar("", "");
+      setDvar("", "");
     }
     string = getdvarstring("");
     if(string === "") {
       level thread function_50a5b7b6();
-      setdvar("", "");
+      setDvar("", "");
     }
     string = getdvarstring("");
     if(string === "") {
       level thread function_d11bf3e();
-      setdvar("", "");
+      setDvar("", "");
     }
     string = getdvarstring("");
     if(string === "") {
       level thread function_156bbea2();
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.05);
   }

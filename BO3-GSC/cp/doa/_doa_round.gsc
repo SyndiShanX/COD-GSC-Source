@@ -492,7 +492,7 @@ function private function_d9345c74() {
   if(isDefined(level.doa.dev_level_skipped)) {
     if(level.doa.round_number > level.doa.dev_level_skipped) {
       level.doa.dev_level_skipped = undefined;
-      setdvar("", "");
+      setDvar("", "");
     }
   }
   if(isDefined(level.doa.teleporter)) {

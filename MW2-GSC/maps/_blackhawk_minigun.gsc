@@ -76,7 +76,7 @@ set_vehicle_anims(positions) {
   return positions;
 }
 
-//#using_animtree( "fastrope" );
+/using_animtree( "fastrope" );
 //setplayer_anims( positions )
 //{
 //	positions[ 3 ].player_idle = %bh_player_idle;
@@ -110,7 +110,8 @@ set_vehicle_anims(positions) {
 //	return positions;
 //}
 
-//#using_animtree( "generic_human" );
+/
+using_animtree("generic_human");
 //
 //set_coop_player_anims( positions )
 //{
@@ -274,8 +275,7 @@ set_attached_models() {
 //	position = 3;
 //	AssertMessage = "In order for the player to fastrope out of the heli at " + self.origin + ", it must have at least one vehicle rider in script_startingposition '" + position + "' with script_drone set to '1' and 'drone_delete_on_unload' set to '1'";
 //	self endon( "death" );
-//	/*-----------------------
-//	FIND THE RIDER THE PLAYER WILL POSESS
+//	/*----------------------- //	FIND THE RIDER THE PLAYER WILL POSESS
 //	-------------------------*/
 //	dummy = undefined;
 //	assertex( isDefined( self.riders ), AssertMessage );
@@ -293,8 +293,7 @@ set_attached_models() {
 //	assertex( !isai( dummy ), AssertMessage );
 //	animpos = maps\_vehicle_aianim::anim_pos( self, position );
 //
-//	/*-----------------------
-//	HIDE THE DUMMY RIDER
+//	/*----------------------- //	HIDE THE DUMMY RIDER
 //	-------------------------*/
 //	dummy notsolid();
 //	dummy notify( "newanim" );
@@ -308,8 +307,7 @@ set_attached_models() {
 //	animtime = getanimlength( animpos.getout );
 //	animtime -= animfudgetime;
 //
-//	/*-----------------------
-//	LERP PLAYER VIEW TO DUMMY FASTROPING
+//	/*----------------------- //	LERP PLAYER VIEW TO DUMMY FASTROPING
 //	-------------------------*/
 //	self waittill( "unloading" );
 //	self player_dismount_blackhawk_gun();
@@ -349,7 +347,6 @@ player_mount_blackhawk_gun(nolerp, player, hide_hud) {
     player disableWeapons();
     //lerp_player_view_to_tag( player, tag, lerptime, fraction, right_arc, left_arc, top_arc, bottom_arc )
     self lerp_player_view_to_tag(player, "tag_player", 1, 1, 30, 30, 30, 30);
-
   }
 
   self useby(player);
@@ -385,14 +382,14 @@ hud_hide(state) {
     setsaveddvar("ui_hidemap", 1);
     SetSavedDvar("hud_showStance", "0");
     SetSavedDvar("compass", "0");
-    SetDvar("old_compass", "0");
+    setDvar("old_compass", "0");
     SetSavedDvar("ammoCounterHide", "1");
   } else {
     setsaveddvar("ui_hidemap", 0);
     setSavedDvar("hud_drawhud", "1");
     SetSavedDvar("hud_showStance", "1");
     SetSavedDvar("compass", "1");
-    SetDvar("old_compass", "1");
+    setDvar("old_compass", "1");
     SetSavedDvar("ammoCounterHide", "0");
   }
 }

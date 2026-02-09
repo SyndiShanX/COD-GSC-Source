@@ -285,7 +285,7 @@ func_BED1() {
   var_4 = 5;
   setomnvar("zm_neil_progress", level.var_C1E1 / var_4);
   level.neil.upper_body func_BEDF("happy");
-  if(getdvar("challenge_prep_time") != "") {
+  if(getDvar("challenge_prep_time") != "") {
     wait(3);
   } else {
     wait(28);
@@ -871,7 +871,7 @@ func_A56E(var_0) {
       continue;
     }
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_2 dodamage(5, var_0);
       var_2.padding_damage = 1;
       var_2 setvelocity(vectornormalize(var_2.origin - var_0) * 100);

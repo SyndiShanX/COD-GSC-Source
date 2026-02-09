@@ -32,12 +32,11 @@ main(origin, duration, shock_range, nMaxDamageBase, nRanDamageBase, nMinDamageBa
     }
   }
 }
-
 shellshock_thread(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed, customShellShock, stanceLockDuration) {
   origin = self GetOrigin() + (0, 8, 2);
   range = 320;
   if(isDefined(nRanDamageBase) && nRanDamageBase > 0) {
-    maxdamage = nMaxDamageBase + randomInt(nRanDamageBase);
+    maxdamage = nMaxDamageBase + RandomInt(nRanDamageBase);
   } else {
     maxdamage = nMaxDamageBase;
   }
@@ -65,7 +64,6 @@ shellshock_thread(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExp
     self AllowCrouch(true);
   }
 }
-
 playerHitable(duration) {
   self.shellshocked = true;
   self.ignoreme = true;
@@ -75,13 +73,11 @@ playerHitable(duration) {
   self.shellshocked = false;
   self.ignoreme = false;
 }
-
 endOnDeath() {
   self waittill("death");
   waittillframeend;
   self notify("end_explode");
 }
-
 grenade_earthQuake() {
   self thread endOnDeath();
   self endon("end_explode");
@@ -89,7 +85,6 @@ grenade_earthQuake() {
   PlayRumbleOnPosition("grenade_rumble", position);
   Earthquake(0.5, 0.5, position, 1000);
 }
-
 c4_earthQuake() {
   self thread endOnDeath();
   self endon("end_explode");
@@ -97,7 +92,6 @@ c4_earthQuake() {
   PlayRumbleOnPosition("grenade_rumble", position);
   Earthquake(0.5, 0.5, position, 1000);
 }
-
 satchel_earthQuake() {
   self thread endOnDeath();
   self endon("end_explode");
@@ -105,17 +99,14 @@ satchel_earthQuake() {
   PlayRumbleOnPosition("grenade_rumble", position);
   Earthquake(0.5, 0.5, position, 1000);
 }
-
 barrel_earthQuake() {
   PlayRumbleOnPosition("grenade_rumble", self.origin);
   Earthquake(0.5, 0.5, self.origin, 1000);
 }
-
 artillery_earthQuake() {
   PlayRumbleOnPosition("artillery_rumble", self.origin);
   earthquake(0.7, 0.5, self.origin, 800);
 }
-
 rocket_earthQuake() {
   self thread endOnDeath();
   self endon("end_explode");
@@ -123,7 +114,6 @@ rocket_earthQuake() {
   PlayRumbleOnPosition("grenade_rumble", position);
   Earthquake(0.5, 0.5, position, 1000);
 }
-
 explosive_bolt_earthQuake() {
   self thread endOnDeath();
   self endon("end_explode");

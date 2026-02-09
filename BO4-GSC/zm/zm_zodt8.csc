@@ -57,9 +57,9 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "water_splashies", 1, 1, "counter", &water_splashies, 0, 0);
   clientfield::register("toplayer", "water_drippies", 1, 1, "int", &water_drippies, 0, 0);
   clientfield::register("actor", "sndActorUnderwater", 1, 1, "int", &sndactorunderwater, 0, 1);
-  setdvar(#"player_shallowwaterwadescale", 1);
-  setdvar(#"player_waistwaterwadescale", 1);
-  setdvar(#"player_deepwaterwadescale", 1);
+  setDvar(#"player_shallowwaterwadescale", 1);
+  setDvar(#"player_waistwaterwadescale", 1);
+  setDvar(#"player_deepwaterwadescale", 1);
   level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
   level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
@@ -263,8 +263,8 @@ function_94a217a5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 init_water() {
-  setdvar(#"phys_buoyancy", 1);
-  setdvar(#"hash_7016ead6b3c7a246", 1);
+  setDvar(#"phys_buoyancy", 1);
+  setDvar(#"hash_7016ead6b3c7a246", 1);
   elmids("e_wave_water_mid", 3);
 }
 
@@ -379,7 +379,7 @@ tilt(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimej
     }
   }
 
-  setdvar(#"phys_gravity_dir", (0, 0, 1));
+  setDvar(#"phys_gravity_dir", (0, 0, 1));
   function_bc159e32(localclientnum, 0);
   function_ca443a8f(localclientnum, 0);
   function_1862912(localclientnum, 0);

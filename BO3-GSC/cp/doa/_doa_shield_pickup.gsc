@@ -112,7 +112,7 @@ function private function_80bf1f40(player, note, sfx, var_5e61e69d, mod = "MOD_C
   player endon(note);
   while(true) {
     self waittill("trigger", guy);
-    if(isplayer(guy)) {
+    if(isPlayer(guy)) {
       continue;
     }
     if(isDefined(guy.boss) && guy.boss) {
@@ -401,7 +401,7 @@ function private function_92374630(player) {
   player endon("disconnect");
   while(true) {
     self waittill("trigger", guy);
-    if(isplayer(guy)) {
+    if(isPlayer(guy)) {
       continue;
     }
     if(isDefined(guy.boss) && guy.boss) {

@@ -157,9 +157,9 @@ init() {
   level.turrets_headicon_offset["microwave"] = vectorscale((0, 0, 1), 80.0);
   level.turrets_hacker_trigger_width = 72;
   level.turrets_hacker_trigger_height = 96;
-  setdvar("scr_turret_no_timeout", 0);
-  setdvar("turret_sentryTargetTime", 1500);
-  setdvar("turret_TargetLeadBias", 1.5);
+  setDvar("scr_turret_no_timeout", 0);
+  setDvar("turret_sentryTargetTime", 1500);
+  setDvar("turret_TargetLeadBias", 1.5);
   registerclientfield("turret", "turret_microwave_sounds", 1000, 1, "int");
 }
 
@@ -783,14 +783,14 @@ watchdamage() {
     }
     allowperks = 1;
 
-    if(!isplayer(attacker)) {
-      if(isDefined(attacker.owner) && isplayer(attacker.owner)) {
+    if(!isPlayer(attacker)) {
+      if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
         attacker = attacker.owner;
         allowperks = 0;
       }
     }
 
-    if(isplayer(attacker) && level.teambased && isDefined(attacker.team) && self.team == attacker.team && level.friendlyfire == 0) {
+    if(isPlayer(attacker) && level.teambased && isDefined(attacker.team) && self.team == attacker.team && level.friendlyfire == 0) {
       continue;
     }
     if(!level.teambased && !level.hardcoremode) {
@@ -819,7 +819,7 @@ watchdamage() {
       else if((type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") && damage != 0 && weaponname != "emp_grenade_mp" && !isexplosivebulletweapon(weaponname))
         self.damagetaken = self.damagetaken + self.explosivedamagereduction * damage;
       else if(type == "MOD_MELEE") {
-        if(isplayer(attacker))
+        if(isPlayer(attacker))
           attacker playlocalsound("fly_riotshield_impact_knife");
 
         continue;
@@ -926,7 +926,7 @@ watchturretlifespan(turret) {
     wait 1.0;
   }
 
-  shouldtimeout = getdvar(#"scr_turret_no_timeout");
+  shouldtimeout = getDvar(#"scr_turret_no_timeout");
 
   if(shouldtimeout == "1") {
     return;
@@ -1349,7 +1349,7 @@ doesmicrowaveturretaffectentity(entity) {
   if(!isalive(entity))
     return false;
 
-  if(!isplayer(entity) && !isai(entity))
+  if(!isPlayer(entity) && !isai(entity))
     return false;
 
   if(isDefined(self.carried) && self.carried)
@@ -1420,7 +1420,7 @@ microwaveentity(entity) {
     entity dodamage(damage, self.origin, self.owner, self, 0, "MOD_TRIGGER_HURT", 0, "microwave_turret_mp");
     entity.microwaveeffect++;
 
-    if(isplayer(entity) && !entity isremotecontrolling()) {
+    if(isPlayer(entity) && !entity isremotecontrolling()) {
       if(entity.microwaveeffect % 2 == 1) {
         if(distancesquared(entity.origin, self.origin) > level.microwave_radius * 2 / 3 * (level.microwave_radius * 2 / 3)) {
           entity shellshock("mp_radiation_low", 1.5);
@@ -1496,7 +1496,7 @@ doesmicrowaveturretaffectdog(entity) {
   if(!isalive(entity))
     return false;
 
-  if(!isplayer(entity) && !isai(entity))
+  if(!isPlayer(entity) && !isai(entity))
     return false;
 
   if(isDefined(self.carried) && self.carried)
@@ -1846,7 +1846,7 @@ disabletriggerthink(trigger, owner) {
       }
     }
 
-    if(isDefined(self.owner) && isplayer(self.owner)) {
+    if(isDefined(self.owner) && isPlayer(self.owner)) {
       owner = self.owner;
 
       if(self.turrettype == "sentry")
@@ -1920,7 +1920,7 @@ candisable(player, owner, weapon_check) {
   if(!isDefined(player))
     return false;
 
-  if(!isplayer(player))
+  if(!isPlayer(player))
     return false;
 
   if(!isalive(player))
@@ -2158,14 +2158,14 @@ addnoturrettrigger(position, radius, height) {
 }
 
 turret_debug_box(origin, mins, maxs, color) {
-  debug_turret = getdvar(#"_id_94A738D1");
+  debug_turret = getDvar(#"_id_94A738D1");
 
   if(debug_turret == "1")
     box(origin, mins, maxs, 0, color, 1, 1, 300);
 }
 
 turret_debug_line(start, end, color) {
-  debug_turret = getdvar(#"_id_94A738D1");
+  debug_turret = getDvar(#"_id_94A738D1");
 
   if(debug_turret == "1")
     line(start, end, color, 1, 1, 300);

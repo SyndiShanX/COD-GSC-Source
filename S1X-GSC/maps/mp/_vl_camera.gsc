@@ -168,14 +168,14 @@ setup_camparams() {
   if(mode == LUI_MODE_PRELOBBY) {
     camParams.mode = "game_lobby";
     start_prelobby_anims();
-    SetDVar("virtualLobbyReady", "0");
+    setDvar("virtualLobbyReady", "0");
   } else {
     camParams.mode = "transition";
     camParams.tgt_camoffset_ratio = camParams.CAMOFFSET_RATIO_LOBBY;
     camParams.cur_camoffset_ratio = camParams.tgt_camoffset_ratio;
     start_lobby_anims();
     if(GetDVarInt("virtualLobbyReady", 0) == 0) {
-      SetDVar("virtualLobbyReady", "1");
+      setDvar("virtualLobbyReady", "1");
     }
     if(mode == LUI_MODE_CAC) {
       self thread delayed_luinotifyserver(0.1, "cac", 0);
@@ -292,7 +292,6 @@ vlobby_handle_mode_change(mode, newmode, camParams) {
     } else if(mode == "prelobby_members") {} else if(mode == "prelobby_loadout") {} else if(mode == "prelobby_loot") {} else if(newmode == "game_lobby") {
       player SetDefaultPostFX();
     } else if(mode == "startmenu") {} else if(mode == "transition") {}
-
   }
 }
 
@@ -389,7 +388,7 @@ vlobby_player() {
   } else {
     level.needToPresent = true;
   }
-  SetDvar("virtuallobbymembers", level.xuid2ownerId.size);
+  setDvar("virtuallobbymembers", level.xuid2ownerId.size);
 
   player.cao_agent = player spawn_an_avatar(cao_spawnpoint, primary_weapon, player.secondaryWeapon, primWeap, player.loadoutEquipment, player.loadoutOffhand, player.perks, player.sessionCostume, player.name, 0, true);
   setEntPlayerXuidForEmblem(player.cao_agent, xuid);
@@ -492,17 +491,17 @@ vlobby_player() {
       if(!fly) {
         fly = true;
 
-        SetDvar("r_dof_enable", "0");
+        setDvar("r_dof_enable", "0");
 
-        SetDvar("lui_enabled", "0");
+        setDvar("lui_enabled", "0");
         level.debug_fly = undefined;
         player AllowFire(true);
       }
       player debug_fly(camera);
     } else if(fly) {
-      SetDvar("r_dof_enable", "1");
+      setDvar("r_dof_enable", "1");
 
-      SetDvar("lui_enabled", "1");
+      setDvar("lui_enabled", "1");
       fly = false;
       camera.origin = camera.startorigin;
       camera.angles = camera.startangles;
@@ -979,7 +978,7 @@ lobby_update_group_new(camera, targetAvatar, camParams, spawnpoint) {
 
   if(GetDVarInt("virtualLobbyReady", 0) == 0) {
     wait 1.0;
-    SetDVar("virtualLobbyReady", "1");
+    setDvar("virtualLobbyReady", "1");
     thread SetVirtualLobbyPresentable();
   }
 }
@@ -991,7 +990,7 @@ SetVirtualLobbyPresentable() {
   if((level.vlavatars.size > 0) && isDefined(level.vlavatars[0]) && isDefined(level.vlavatars[0].primaryweapon) && IsWeaponLoaded(level.vlavatars[0].primaryweapon)) {
     level.needToPresent = undefined;
     wait 0.5;
-    SetDVar("virtualLobbyPresentable", "1");
+    setDvar("virtualLobbyPresentable", "1");
   } else {
     level.needToPresent = true;
   }
@@ -1002,7 +1001,7 @@ ResetVirtualLobbyPresentable() {
   level endon("cancel_vlp");
   level.needToPresent = undefined;
   wait 0.25;
-  SetDVar("virtualLobbyPresentable", "0");
+  setDvar("virtualLobbyPresentable", "0");
 }
 
 MovePlayerEyeToCam(camera) {
@@ -1015,7 +1014,7 @@ MovePlayerEyeToCam(camera) {
 
 GetAspectRatio() {
   AspectRatioData = spawnStruct();
-  Resolution = GetDvar("r_mode", "1280x720 [16:9]");
+  Resolution = getDvar("r_mode", "1280x720 [16:9]");
   Width_X_Height = StrTok(Resolution, " ");
   ResolutionArray = StrTok(Width_X_Height[0], "x");
   AspectRatioData.Width = stringToFloat(ResolutionArray[0]);
@@ -1476,7 +1475,6 @@ vl_give_weapons(player, agent) {
         agent.akimboWeaponEnt hide();
         agent.akimboWeaponEnt HideAllParts();
       }
-
     }
     if(agent.secondaryWeapon != "none") {
       if(IsSubStr(agent.secondaryWeapon, "combatknife")) {
@@ -1508,7 +1506,6 @@ vl_give_weapons(player, agent) {
       }
     }
   }
-
 }
 
 AttachPrimaryWeapon(agent) {
@@ -1579,7 +1576,6 @@ ShowPrimaryDelayed(agent) {
     agent.primaryWeaponEnt show();
     agent.primaryWeaponEnt ShowAllParts();
   }
-
 }
 
 vl_avatar_costume(agent, costume, setcostume) {
@@ -1681,7 +1677,6 @@ monitor_class_select_or_weapon_change(ownerid) {
 
 monitor_cac_set_weapon(ownerid, newWeaponName) {
   ignore = "";
-  /#			
   if(newWeaponName != "none") {
     ignore = tablelookup("mp/statstable.csv", 4, newWeaponName, 51);
   }
@@ -2073,7 +2068,7 @@ monitor_member_class_changes() {
         if(!isDefined(level.xuid2ownerId[entry.xuid])) {
           ownerId = add_avatar(entry.xuid);
           vlprint("PartyMemberClassChange " + entry.xuid + " : " + primaryWeapon + "," + secondaryWeapon + "," + lethal + "," + tactical + "\n");
-          SetDvar("virtuallobbymembers", level.xuid2ownerId.size);
+          setDvar("virtuallobbymembers", level.xuid2ownerId.size);
           spawnpoint = maps\mp\gametypes\vlobby::getSpawnPoint(ownerId);
 
           spawn_an_avatar(spawnpoint, primaryWeapon, secondaryWeapon, weaponName, lethal, tactical, perks, costume, entry.name, ownerId, false);
@@ -2087,7 +2082,6 @@ monitor_member_class_changes() {
             vl_avatar_costume(caoAgent, level.vlavatars[ownerId].costume);
             costumeFound = caoAgent maps\mp\gametypes\_teams::playerCostume();
           }
-
         } else {
           ownerId = level.xuid2ownerId[entry.xuid];
           avatar = level.vlavatars[ownerId];
@@ -2372,7 +2366,7 @@ monitor_debug_addfakemembers(player, camParams) {
       avatar.membertimeout = GetTime() + 3600000;
       SetEntPlayerXuidForEmblem(avatar, xuid);
       level.vl_fakemembers++;
-      SetDvar("scr_vl_addfakemembers", toString(GetDvarInt("scr_vl_addfakemembers", 1) - 1));
+      setDvar("scr_vl_addfakemembers", toString(GetDvarInt("scr_vl_addfakemembers", 1) - 1));
     }
     if(GetDvarInt("scr_vl_addfakemembers", 0) < 0) {
       foreach(oId in level.fake_ownerids) {
@@ -2380,12 +2374,11 @@ monitor_debug_addfakemembers(player, camParams) {
         level.vl_fakemembers--;
       }
       level.fake_ownerids = [];
-      SetDvar("scr_vl_addfakemembers", "0");
+      setDvar("scr_vl_addfakemembers", "0");
       level.vl_focus = 0;
     }
     wait 0.05;
   }
-
 }
 
 monitor_member_focus_change() {
@@ -2643,7 +2636,7 @@ remove_avatar(ownerId) {
   level.xuid2ownerId[xuid] = undefined;
   level.avatarInfo[ownerId].timeToDelete = 0;
   level.avatarInfo[ownerId].avatar = undefined;
-  SetDvar("virtuallobbymembers", level.xuid2ownerId.size);
+  setDvar("virtuallobbymembers", level.xuid2ownerId.size);
   agent = level.vlavatars[ownerId];
   level.vlavatars[ownerId] = undefined;
   if(level.vl_focus == ownerId) {

@@ -20,7 +20,7 @@ __init__() {
 
 flip_skybox(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    setdvar(#"r_skytransition", 1);
+    setDvar(#"r_skytransition", 1);
   }
 }
 

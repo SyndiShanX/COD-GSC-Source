@@ -48,7 +48,6 @@ __main__() {
     level thread function_e95f47c2();
 
     level thread devgui();
-
   }
 }
 
@@ -100,7 +99,7 @@ function_cfe06357(attacker) {
 
   level.var_17bf15ba clientfield::set("" + # "hash_59e8c30d5e28dad3", 0);
 
-  if(isplayer(attacker) && !(isDefined(attacker.var_ccd959e1) && attacker.var_ccd959e1)) {
+  if(isPlayer(attacker) && !(isDefined(attacker.var_ccd959e1) && attacker.var_ccd959e1)) {
     if(!isDefined(level.var_1cd9760e)) {
       level.var_1cd9760e = attacker;
     }
@@ -310,7 +309,7 @@ devgui() {
         break;
     }
 
-    setdvar(#"hash_83ca4038b5f2453", "<dev string:x24d>");
+    setDvar(#"hash_83ca4038b5f2453", "<dev string:x24d>");
   }
 }
 

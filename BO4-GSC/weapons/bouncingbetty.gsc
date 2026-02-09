@@ -129,7 +129,7 @@ trackusedonhack() {
 }
 
 trackbouncingbettyasused() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self stats::function_e24eec31(getweapon(#"bouncingbetty"), #"used", 1);
   }
 }

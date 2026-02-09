@@ -53,5 +53,5 @@ main() {
   level.explo_nums["rocket_explo"]["crash_03a"] = 3;
   level.explo_nums["rocket_explo"]["crash_03b"] = undefined;
   level.explo_nums["rocket_explo"]["crash_04"] = 4;
-  setdvar("r_specularColorScale", 3.05);
+  setDvar("r_specularColorScale", 3.05);
 }

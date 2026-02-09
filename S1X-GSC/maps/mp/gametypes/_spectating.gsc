@@ -225,7 +225,6 @@ updateSpectatedLoadoutWeapon(baseOmnvar, weapon, attachments) {
     if(!isDefined(attachment)) attachment = 0;
     self SetClientOmnvar(baseOmnvar + "attachment_" + i, attachment);
   }
-
 }
 
 updateSpectatedLoadout(spectatedPlayer) {
@@ -272,5 +271,4 @@ updateSpectatedLoadout(spectatedPlayer) {
     if(!isDefined(perk)) perk = 0;
     self SetClientOmnvar("ui_mlg_loadout_perk_" + i, perk);
   }
-
 }

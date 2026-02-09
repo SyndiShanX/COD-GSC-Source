@@ -40,7 +40,7 @@ function trap_trigger() {
   level endon("hash_20531487");
   while(true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-    if(isplayer(attacker) && (dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       self.owner_ent notify("triggered", attacker);
       return;
     }
@@ -87,7 +87,7 @@ function function_8feeec3c() {
   self setModel(self.tile);
   self notify("done");
   level.var_5f315f0b++;
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(level.var_5f315f0b < level.var_13439433) {
       if(randomintrange(0, 101) <= 75) {
         attacker thread zm_audio::create_and_play_dialog("eggs", "quest6", randomintrange(0, 4));

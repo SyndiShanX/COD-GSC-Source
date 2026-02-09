@@ -82,7 +82,6 @@ balloons() {
 
   if(!isDefined(level.remote_uav)) {
     level.remote_uav = [];
-
   }
   var_0 = getEntArray("balloon_volume", "targetname");
 
@@ -186,7 +185,6 @@ animal_race_victory(var_0) {
 
   if(isDefined(var_0._id_18F5)) {
     thread create_exploder_play_fx(var_0._id_18F5);
-
   }
   foreach(var_2 in level.animal_marquee_lights) {}
   var_2 setModel("marquee_lights_yellow_flashing_fast");
@@ -219,7 +217,6 @@ monitor_catcher_damage(var_0) {
 
     if(isDefined(var_0._id_18F5)) {
       thread create_exploder_play_fx(var_0._id_18F5);
-
     }
     wait 3;
   }

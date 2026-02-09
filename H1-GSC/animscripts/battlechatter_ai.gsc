@@ -19,7 +19,7 @@ addtosystem(var_0) {
   self.enemyclass = "infantry";
   self.calledout = [];
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.battlechatter = 0;
     self.type = "human";
     return;
@@ -430,7 +430,7 @@ flexiblethreatwaiter() {
           continue;
         }
 
-        if(getdvar("bcs_threatLimitTargettedBySelf") == "on") {
+        if(getDvar("bcs_threatLimitTargettedBySelf") == "on") {
           if(!isDefined(self.members[var_2].enemy) || var_0[var_3] != self.members[var_2].enemy) {
             continue;
           }
@@ -439,8 +439,8 @@ flexiblethreatwaiter() {
         } else if(!self.members[var_2] cansee(var_0[var_3])) {
           continue;
         }
-        if(getdvar("bcs_threatLimitSpeakerDist") != "off") {
-          var_4 = int(getdvar("bcs_threatLimitSpeakerDist"));
+        if(getDvar("bcs_threatLimitSpeakerDist") != "off") {
+          var_4 = int(getDvar("bcs_threatLimitSpeakerDist"));
 
           if(distance(level.player.origin, self.members[var_2].origin) > var_4)
             continue;
@@ -468,24 +468,24 @@ filterthreats(var_0) {
     if(!var_0[var_2].battlechatter) {
       continue;
     }
-    if(getdvar("bcs_threatLimitTargetingPlayer") == "on") {
+    if(getDvar("bcs_threatLimitTargetingPlayer") == "on") {
       if(!isDefined(var_0[var_2].enemy) || var_0[var_2].enemy != level.player)
         continue;
     }
 
-    if(getdvar("bcs_threatLimitInPlayerFOV") == "on") {
+    if(getDvar("bcs_threatLimitInPlayerFOV") == "on") {
       if(!level.player animscripts\battlechatter::pointinfov(var_0[var_2].origin))
         continue;
     }
 
-    if(getdvar("bcs_threatLimitThreatDist") != "off") {
-      var_3 = int(getdvar("bcs_threatLimitThreatDist"));
+    if(getDvar("bcs_threatLimitThreatDist") != "off") {
+      var_3 = int(getDvar("bcs_threatLimitThreatDist"));
 
       if(distance(level.player.origin, var_0[var_2].origin) > var_3)
         continue;
     }
 
-    if(getdvar("bcs_threatLimitInLocation") == "on") {
+    if(getDvar("bcs_threatLimitInLocation") == "on") {
       if(!isDefined(var_0[var_2] animscripts\battlechatter::getlocation()) && !isDefined(var_0[var_2] animscripts\battlechatter::getlandmark()))
         continue;
     }
@@ -503,7 +503,7 @@ randomthreatwaiter() {
   anim endon("squad deleted " + self.squadname);
 
   for(;;) {
-    if(getdvar("bcs_enable") == "off") {
+    if(getDvar("bcs_enable") == "off") {
       wait 1.0;
       continue;
     }
@@ -604,7 +604,7 @@ aiofficerorders() {
     self.squad waittill("squad chat initialized");
 
   for(;;) {
-    if(getdvar("bcs_enable") == "off") {
+    if(getDvar("bcs_enable") == "off") {
       wait 1.0;
       continue;
     }
@@ -621,7 +621,7 @@ aigrenadedangerwaiter() {
   for(;;) {
     self waittill("grenade danger", var_0);
 
-    if(getdvar("bcs_enable") == "off") {
+    if(getDvar("bcs_enable") == "off") {
       continue;
     }
     if(!isDefined(var_0) || var_0.model != "projectile_m67fraggrenade") {
@@ -639,7 +639,7 @@ aiflankerwaiter() {
   for(;;) {
     level waittill("flanker", var_0);
 
-    if(getdvar("bcs_enable") == "off") {
+    if(getDvar("bcs_enable") == "off") {
       continue;
     }
     if(isDefined(self.customchatevent)) {
@@ -661,7 +661,7 @@ aidisplacewaiter() {
   for(;;) {
     self waittill("trigger");
 
-    if(getdvar("bcs_enable") == "off") {
+    if(getDvar("bcs_enable") == "off") {
       continue;
     }
     if(gettime() < self.a.paintime + 4000) {

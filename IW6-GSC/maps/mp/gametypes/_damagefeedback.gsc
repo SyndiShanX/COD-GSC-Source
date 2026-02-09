@@ -10,7 +10,7 @@ updateDamageFeedback(typeHit) {
   if(isDefined(level.damageFeedbackNoSound) && level.damageFeedbackNoSound)
     noSound = true;
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   switch (typeHit) {
@@ -59,7 +59,7 @@ hudIconType(typeHit) {
   if(isDefined(level.damageFeedbackNoSound) && level.damageFeedbackNoSound)
     noSound = true;
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   switch (typeHit) {

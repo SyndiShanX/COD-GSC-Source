@@ -189,7 +189,7 @@ func_E873(var_0) {
   self give_left_powers("runanim", %run_n_gun, 1, 0.3, 0.8);
   func_E80F(undefined);
   self.a.var_1C8D = gettime() + 500;
-  if(var_0 && isplayer(self.enemy)) {
+  if(var_0 && isPlayer(self.enemy)) {
     self func_83CE();
   }
 
@@ -201,7 +201,7 @@ func_E874() {
   var_0 = scripts\anim\utility::func_B027("run_n_gun", "move_back");
   self give_left_powers("runanim", var_0, 1, 0.3, 0.8);
   func_E80F(var_0);
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     self func_83CE();
   }
 

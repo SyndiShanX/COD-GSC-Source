@@ -102,7 +102,7 @@ function main() {
   include_weapons();
   zm_genesis_flingers::main();
   zm_genesis_apothicon_god::main();
-  setdvar("waypointVerticalSeparation", -2001);
+  setDvar("waypointVerticalSeparation", -2001);
   zm_genesis_wearables::function_ad78a144();
   clientfield::register("clientuimodel", "zmInventory.widget_shield_parts", 12000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_dragon_strike", 12000, 1, "int", undefined, 0, 0);

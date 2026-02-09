@@ -870,7 +870,7 @@ fell_in_water_fail(var_0) {
   var_1 rotateto((0, 270, 0), 3);
 
   if(!common_scripts\utility::flag("missionfailed"))
-    setdvar("ui_deadquote", "");
+    setDvar("ui_deadquote", "");
 
   level thread maps\_utility::missionfailedwrapper();
 }

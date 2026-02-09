@@ -12,7 +12,7 @@ func_8197(var_0) {
 }
 
 getjointype() {
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     return randomfloatrange(self.enemy.gs.var_B750, self.enemy.gs.var_B461);
   }
 
@@ -280,7 +280,7 @@ func_6D98() {
 
 func_6D99(var_0, var_1, var_2, var_3) {
   self endon("enemy");
-  if(isplayer(self.enemy) && self.var_FED7 == "full" || self.var_FED7 == "semi") {
+  if(isPlayer(self.enemy) && self.var_FED7 == "full" || self.var_FED7 == "semi") {
     level endon("player_becoming_invulnerable");
   }
 
@@ -313,7 +313,7 @@ func_6D99(var_0, var_1, var_2, var_3) {
     }
 
     shootatshootentorpos();
-    if(isplayer(self.enemy) && self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable")) {
+    if(isPlayer(self.enemy) && self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable")) {
       if(randomint(3) == 0) {
         self.bulletsinclip--;
       }
@@ -462,7 +462,7 @@ func_11814() {
 
 func_F62B(var_0) {
   self.var_1652 = spawnStruct();
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     self.var_1652.isplayertimer = 1;
     self.var_1652.player = var_0;
     self.var_1652.timername = self.grenadeweapon;
@@ -510,7 +510,7 @@ func_7EE9(var_0) {
 }
 
 func_453D(var_0) {
-  if(!isplayer(var_0) && self gettargetchargepos()) {
+  if(!isPlayer(var_0) && self gettargetchargepos()) {
     if(gettime() < func_7EE9(self.var_1652)) {
       if(level.player.ignoreme) {
         return var_0;

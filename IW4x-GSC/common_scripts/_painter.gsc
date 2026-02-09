@@ -350,8 +350,7 @@ setcurrentgroup(group) {
 
   for(i = 1; i < level.spam_group_hudelems.size - div; i++) {
     if(index + i > keys.size - 1) {
-      //-- --
-      level.spam_group_hudelems[div - i] _settext(".");
+      //-- -- level.spam_group_hudelems[div - i] _settext(".");
       continue;
     }
     level.spam_group_hudelems[div - i] _settext(keys[index + i]);
@@ -687,7 +686,6 @@ orient_model() {
   if(group.bFacade) {
     self.angles = flat_angle(vectortoangles(self.origin - level.painter_player getEye()));
     self addyaw(90);
-
   }
 
   assert(isDefined(group.angleoffset) && isDefined(group.angleoffset[self.model]));
@@ -773,7 +771,6 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
       model = spam_modelattrace(countourtrace, getmodel);
       model orient_model();
       models[models.size] = model;
-
     }
   return models;
 }
@@ -859,134 +856,131 @@ spam_model_erase(trace) {
 }
 
 dump_models() {
-  if(!level.spamed_models.size)
-    return;
-  fileprint_launcher_start_file();
-  fileprint_map_start();
-  for(i = 0; i < level.spamed_models.size; i++) {
-    origin = fileprint_radiant_vec(level.spamed_models[i].origin); // convert these vectors to mapfile keypair format
-    angles = fileprint_radiant_vec(level.spamed_models[i].angles);
+    if(!level.spamed_models.size)
+      return;
+    fileprint_launcher_start_file();
+    fileprint_map_start();
+    for(i = 0; i < level.spamed_models.size; i++) {
+      origin = fileprint_radiant_vec(level.spamed_models[i].origin); // convert these vectors to mapfile keypair format
+      angles = fileprint_radiant_vec(level.spamed_models[i].angles);
 
-    fileprint_map_entity_start();
-    if(isDefined(level.spamed_models[i].modelusesprefab) && level.spamed_models[i].modelusesprefab) {
-      fileprint_map_keypairprint("classname", "misc_prefab");
-      fileprint_map_keypairprint("model", "prefabs/misc_models/" + level.spamed_models[i].model + ".map");
-    } else {
-      fileprint_map_keypairprint("classname", "misc_model");
-      fileprint_map_keypairprint("model", level.spamed_models[i].model);
+      fileprint_map_entity_start();
+      if(isDefined(level.spamed_models[i].modelusesprefab) && level.spamed_models[i].modelusesprefab) {
+        fileprint_map_keypairprint("classname", "misc_prefab");
+        fileprint_map_keypairprint("model", "prefabs/misc_models/" + level.spamed_models[i].model + ".map");
+      } else {
+        fileprint_map_keypairprint("classname", "misc_model");
+        fileprint_map_keypairprint("model", level.spamed_models[i].model);
+      }
+      fileprint_map_keypairprint("origin", origin);
+      fileprint_map_keypairprint("angles", angles);
+      fileprint_map_keypairprint("spammed_model", level.spam_model_current_group);
+      fileprint_map_entity_end();
     }
-    fileprint_map_keypairprint("origin", origin);
-    fileprint_map_keypairprint("angles", angles);
-    fileprint_map_keypairprint("spammed_model", level.spam_model_current_group);
-    fileprint_map_entity_end();
-  }
-  map_path = level.script + "_modeldump.map";
-  if(!fileprint_launcher_end_file("/map_source/" + map_path, false))
-    return;
-  launcher_write_clipboard(map_path);
-  array_thread(level.spamed_models, ::deleteme);
-  level.spamed_models = [];
-}
-
-draw_axis(org, angles) {
-  range = 32;
-  forward = range * anglesToForward(angles);
-  right = range * anglestoright(angles);
-  up = range * anglestoup(angles);
-  line(org, org + forward, (1, 0, 0), 1);
-  line(org, org + up, (0, 1, 0), 1);
-  line(org, org + right, (0, 0, 1), 1);
-}
-
-_newhudelem() {
-  if(!isDefined(level.scripted_elems))
-    level.scripted_elems = [];
-  elem = newhudelem();
-  level.scripted_elems[level.scripted_elems.size] = elem;
-  return elem;
-}
-
-_settext(text) {
-  self.realtext = text;
-  self settext("_");
-  self thread _clearalltextafterhudelem();
-  sizeofelems = 0;
-  foreach(elem in level.scripted_elems) {
-    if(isDefined(elem.realtext)) {
-      sizeofelems += elem.realtext.size;
-      elem settext(elem.realtext);
+    map_path = level.script + "_modeldump.map";
+    if(! fileprint_launcher_end_file("/map_source/" + map_path, false))
+      return; launcher_write_clipboard(map_path); array_thread(level.spamed_models, ::deleteme); level.spamed_models = [];
     }
-  }
-  println("SIze of elems: " + sizeofelems);
-}
 
-controler_hud_add(identifier, inc, initial_text, initial_description_text, initial_value) {
-  startx = 520;
-  if(is_mp())
-    startx = 630;
-  starty = 120;
-  space = 18;
-  basealpha = .8;
-  denradoffset = 20;
-  descriptionscale = 1.4;
-  if(!isDefined(initial_text))
-    initial_text = "";
+    draw_axis(org, angles) {
+      range = 32;
+      forward = range * anglesToForward(angles);
+      right = range * anglestoright(angles);
+      up = range * anglestoup(angles);
+      line(org, org + forward, (1, 0, 0), 1);
+      line(org, org + up, (0, 1, 0), 1);
+      line(org, org + right, (0, 0, 1), 1);
+    }
 
-  if(!isDefined(level.hud_controler) || !isDefined(level.hud_controler[identifier])) {
-    level.hud_controler[identifier] = _newhudelem();
-    description = _newhudelem();
-  } else
-    description = level.hud_controler[identifier].description;
+    _newhudelem() {
+      if(!isDefined(level.scripted_elems))
+        level.scripted_elems = [];
+      elem = newhudelem();
+      level.scripted_elems[level.scripted_elems.size] = elem;
+      return elem;
+    }
 
-  level.hud_controler[identifier].location = 0;
-  level.hud_controler[identifier].alignX = "right";
-  level.hud_controler[identifier].alignY = "middle";
-  level.hud_controler[identifier].foreground = 1;
-  level.hud_controler[identifier].fontscale = 1.5;
-  level.hud_controler[identifier].sort = 20;
-  level.hud_controler[identifier].alpha = basealpha;
-  level.hud_controler[identifier].x = startx + denradoffset;
-  level.hud_controler[identifier].y = starty + (inc * space);
-  level.hud_controler[identifier] _settext(initial_text);
-  level.hud_controler[identifier].base_button_text = initial_text;
+    _settext(text) {
+      self.realtext = text;
+      self settext("_");
+      self thread _clearalltextafterhudelem();
+      sizeofelems = 0;
+      foreach(elem in level.scripted_elems) {
+        if(isDefined(elem.realtext)) {
+          sizeofelems += elem.realtext.size;
+          elem settext(elem.realtext);
+        }
+      }
+      println("SIze of elems: " + sizeofelems);
+    }
 
-  description.location = 0;
-  description.alignX = "left";
-  description.alignY = "middle";
-  description.foreground = 1;
-  description.fontscale = descriptionscale;
-  description.sort = 20;
-  description.alpha = basealpha;
-  description.x = startx + denradoffset;
-  description.y = starty + (inc * space);
-  if(isDefined(initial_value))
-    description setvalue(initial_value);
-  if(isDefined(initial_description_text))
-    description _settext(initial_description_text);
-  level.hud_controler[identifier].description = description;
-}
+    controler_hud_add(identifier, inc, initial_text, initial_description_text, initial_value) {
+      startx = 520;
+      if(is_mp())
+        startx = 630;
+      starty = 120;
+      space = 18;
+      basealpha = .8;
+      denradoffset = 20;
+      descriptionscale = 1.4;
+      if(!isDefined(initial_text))
+        initial_text = "";
 
-controler_hud_update_text(hudid, text) {
-  if(is_mp()) {
-    level.hud_controler[hudid] _settext(level.hud_controler[hudid].base_button_text + text);
-    level.hud_controler[hudid].description _settext("");
-  } else
-    level.hud_controler[hudid].description _settext(text);
-}
+      if(!isDefined(level.hud_controler) || !isDefined(level.hud_controler[identifier])) {
+        level.hud_controler[identifier] = _newhudelem();
+        description = _newhudelem();
+      } else
+        description = level.hud_controler[identifier].description;
 
-controler_hud_update_button(hudid, text) {
-  level.hud_controler[hudid] _settext(text);
-}
+      level.hud_controler[identifier].location = 0;
+      level.hud_controler[identifier].alignX = "right";
+      level.hud_controler[identifier].alignY = "middle";
+      level.hud_controler[identifier].foreground = 1;
+      level.hud_controler[identifier].fontscale = 1.5;
+      level.hud_controler[identifier].sort = 20;
+      level.hud_controler[identifier].alpha = basealpha;
+      level.hud_controler[identifier].x = startx + denradoffset;
+      level.hud_controler[identifier].y = starty + (inc * space);
+      level.hud_controler[identifier] _settext(initial_text);
+      level.hud_controler[identifier].base_button_text = initial_text;
 
-_clearalltextafterhudelem() {
-  if(level._clearalltextafterhudelem)
-    return;
-  level._clearalltextafterhudelem = true;
-  self clearalltextafterhudelem();
-  wait .05;
-  level._clearalltextafterhudelem = false;
-}
+      description.location = 0;
+      description.alignX = "left";
+      description.alignY = "middle";
+      description.foreground = 1;
+      description.fontscale = descriptionscale;
+      description.sort = 20;
+      description.alpha = basealpha;
+      description.x = startx + denradoffset;
+      description.y = starty + (inc * space);
+      if(isDefined(initial_value))
+        description setvalue(initial_value);
+      if(isDefined(initial_description_text))
+        description _settext(initial_description_text);
+      level.hud_controler[identifier].description = description;
+    }
 
-is_mp() {
-  return issubstr(level.script, "mp_");
-}
+    controler_hud_update_text(hudid, text) {
+      if(is_mp()) {
+        level.hud_controler[hudid] _settext(level.hud_controler[hudid].base_button_text + text);
+        level.hud_controler[hudid].description _settext("");
+      } else
+        level.hud_controler[hudid].description _settext(text);
+    }
+
+    controler_hud_update_button(hudid, text) {
+      level.hud_controler[hudid] _settext(text);
+    }
+
+    _clearalltextafterhudelem() {
+      if(level._clearalltextafterhudelem)
+        return;
+      level._clearalltextafterhudelem = true;
+      self clearalltextafterhudelem();
+      wait .05;
+      level._clearalltextafterhudelem = false;
+    }
+
+    is_mp() {
+      return issubstr(level.script, "mp_");
+    }

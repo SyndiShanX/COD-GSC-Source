@@ -202,7 +202,7 @@ function_817220a9(a_ents) {
   while(true) {
     s_result = a_ents[# "arm_grasp"] waittill(#"damage");
 
-    if(isplayer(s_result.attacker) && isalive(s_result.attacker)) {
+    if(isPlayer(s_result.attacker) && isalive(s_result.attacker)) {
       if(isDefined(s_result.attacker.var_7e008e0c) && s_result.attacker.var_7e008e0c > 0) {
         n_points = 10 * s_result.attacker.var_7e008e0c;
       } else {
@@ -228,7 +228,7 @@ function_1abf5396(var_cba19e17) {
   while(true) {
     waitresult = self waittill(#"trigger");
 
-    if(isplayer(waitresult.activator) && var_cba19e17.var_ead5d884) {
+    if(isPlayer(waitresult.activator) && var_cba19e17.var_ead5d884) {
       waitresult.activator dodamage(10, waitresult.activator.origin);
       waitresult.activator clientfield::increment_to_player("" + # "hash_257c215ab25a21c5");
       waitresult.activator playsoundtoplayer(#"hash_75318bcffca7ff06", waitresult.activator);
@@ -245,7 +245,7 @@ function_b5ac159d() {
   while(true) {
     s_result = self.t_arm waittill(#"trigger");
 
-    if(isplayer(s_result.activator)) {
+    if(isPlayer(s_result.activator)) {
       self thread scene::init();
       self.t_arm setinvisibletoall();
     }

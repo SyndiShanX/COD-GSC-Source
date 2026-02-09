@@ -327,7 +327,7 @@ function get_current_track_time(player) {
 
 function watchcheckpointtrigger() {
   self waittill("trigger", player);
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     if(level.frgame.activespawnpoint != self) {
       checkpoint_index = self.checkpointindex;
       current_time = get_current_track_time(player);
@@ -361,7 +361,7 @@ function watchcheckpointtrigger() {
 function watchdeathtrigger() {
   while(true) {
     self waittill("trigger", player);
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player faultdeath();
     }
   }
@@ -403,7 +403,7 @@ function watchgoaltrigger() {
   level notify("watch_goal_trigger");
   level endon("watch_goal_trigger");
   self waittill("trigger", player);
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     player playsoundtoplayer("uin_freerun_finish", player);
     player take_all_player_weapons(1, 0);
     new_record = add_current_run_to_high_scores(player);
@@ -923,7 +923,7 @@ function watchtutorialtrigger() {
   level endon("stop_tutorials");
   while(true) {
     self waittill("trigger", player);
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player thread start_tutorial(self.script_noteworthy);
       self triggerenable(0);
     }

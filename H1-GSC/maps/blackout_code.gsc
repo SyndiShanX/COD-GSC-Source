@@ -202,7 +202,7 @@ chess_guys() {
     return;
   }
   level._stealth.logic.ai_event["ai_eventDistBullet"] = [];
-  level._stealth.logic.ai_event["ai_eventDistBullet"]["spotted"] = getdvar("ai_eventDistBullet");
+  level._stealth.logic.ai_event["ai_eventDistBullet"]["spotted"] = getDvar("ai_eventDistBullet");
   level._stealth.logic.ai_event["ai_eventDistBullet"]["alert"] = 200;
   level._stealth.logic.ai_event["ai_eventDistBullet"]["hidden"] = 200;
   maps\_stealth_logic::stealth_detect_ranges_set(undefined, undefined, undefined);
@@ -1276,7 +1276,7 @@ set_flag_on_player_damage(var_0) {
     if(!isalive(var_2)) {
       continue;
     }
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     thread set_flag_and_die(var_0, var_4);
@@ -2175,7 +2175,7 @@ hut_friendlies_chats_about_russians() {
   level._stealth.logic.ai_event["ai_eventDistPain"]["alert"] = 200;
   level._stealth.logic.ai_event["ai_eventDistPain"]["hidden"] = 200;
   level._stealth.logic.ai_event["ai_eventDistBullet"] = [];
-  level._stealth.logic.ai_event["ai_eventDistBullet"]["spotted"] = getdvar("ai_eventDistBullet");
+  level._stealth.logic.ai_event["ai_eventDistBullet"]["spotted"] = getDvar("ai_eventDistBullet");
   level._stealth.logic.ai_event["ai_eventDistBullet"]["alert"] = 64;
   level._stealth.logic.ai_event["ai_eventDistBullet"]["hidden"] = 64;
   maps\_stealth_logic::stealth_detect_ranges_set(undefined, var_0, undefined);
@@ -2357,7 +2357,7 @@ informant_org() {
 
 vip_death() {
   self waittill("death");
-  setdvar("ui_deadquote", &"BLACKOUT_THE_INFORMANT_WAS_KILLED");
+  setDvar("ui_deadquote", &"BLACKOUT_THE_INFORMANT_WAS_KILLED");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -3567,7 +3567,7 @@ macmillan_proud_hook() {
   if(!isalive(var_0)) {
     return;
   }
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
   if(!isDefined(var_2)) {

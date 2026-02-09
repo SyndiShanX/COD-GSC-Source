@@ -410,7 +410,7 @@ runZoneThink(zone) {
     if(IsAgent(player)) {
       continue;
     }
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(player.isScoring) {

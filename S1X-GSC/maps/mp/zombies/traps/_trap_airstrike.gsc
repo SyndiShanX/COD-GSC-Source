@@ -90,7 +90,7 @@ trap_airstrike_radius_damage(var_0) {
       continue;
     }
 
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       if(!maps\mp\zombies\_util::isplayerinlaststand(var_5)) {
         if(common_scripts\utility::array_contains(var_3, var_5)) {
           var_6 = var_5.health * 0.5;

@@ -292,7 +292,7 @@ random_spread(ent) {
   self settargetentity(ent);
 
   while(1) {
-    if(isplayer(ent))
+    if(isPlayer(ent))
       ent.origin = self.manual_target getorigin();
     else
       ent.origin = self.manual_target.origin;
@@ -543,7 +543,7 @@ mg42_gunner_manual_think(mg42, trigger) {
 
   tempmodel = spawn("script_model", (0, 0, 0));
   tempmodel.scale = 3;
-  if(getdvar("mg42") != "off")
+  if(getDvar("mg42") != "off")
     tempmodel setModel("temp");
   tempmodel thread temp_think(mg42, targ_org);
   level thread kill_objects(self, "death", targ_org, tempmodel);
@@ -611,7 +611,7 @@ mg42_gunner_manual_think(mg42, trigger) {
         while((player_safe()) && (isDefined(level.player_covertrigger.target)) && (gettime() < shoot_timer)) {
           target = getEntArray(level.player_covertrigger.target, "targetname");
           target = target[randomint(target.size)];
-          targ_org.origin = target.origin +  (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
+          targ_org.origin = target.origin + (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
 
           wait(0.1);
         }
@@ -655,7 +655,7 @@ mg42_gunner_manual_think(mg42, trigger) {
         if(isDefined(level.player_covertrigger)) {
           target = getEntArray(level.player_covertrigger.target, "targetname");
           target = target[randomint(target.size)];
-          targ_org.origin = target.origin +  (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
+          targ_org.origin = target.origin + (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
           mg42 settargetentity(targ_org);
           tempmodel.targent = targ_org;
           wait(randomfloat(1));
@@ -699,7 +699,6 @@ shoot_mg42_script_targets(targets) {
       }
 
       targ_filled[self.gun_targ] = true;
-
     }
   }
 }
@@ -719,7 +718,7 @@ move_use_turret(mg42, aitype, target) {
 }
 
 temp_think(mg42, targ) {
-  if(getdvar("mg42") == "off") {
+  if(getDvar("mg42") == "off") {
     return;
   }
   self.targent = self;
@@ -821,7 +820,6 @@ mg42_target_drones(nonai, team, fakeowner) {
       self setmode("manual");
       while(!isDefined(self.fakeowner))
         wait .2;
-
     } else if(nonai)
       self setmode("auto_nonai");
     else
@@ -836,7 +834,7 @@ mg42_target_drones(nonai, team, fakeowner) {
 
     if(!nonai) {
       turretowner = self getturretowner();
-      if(!isalive(turretowner) || isplayer(turretowner)) {
+      if(!isalive(turretowner) || isPlayer(turretowner)) {
         wait .05;
         continue;
       } else
@@ -879,7 +877,6 @@ mg42_target_drones(nonai, team, fakeowner) {
         self.dronefailed = false;
         wait .05;
         continue;
-
       }
       target waittill_any("death", "drone_mg42_fail");
       waittillframeend;
@@ -1019,7 +1016,6 @@ saw_mgTurretLink(nodes) {
   foreach(turret in turrets) {
     assertMsg("ERROR: turret at " + turret.origin + " could not link to any node!");
   }
-
 }
 
 auto_mgTurretLink(nodes) {
@@ -1564,7 +1560,6 @@ use_the_turret(spot) {
     spot restoredefaultdroppitch();
     return false;
   }
-
 }
 
 get_portable_mg_spot(ent) {
@@ -1612,36 +1607,30 @@ find_connected_turrets(connection_type) {
   // find turrets that share the same keys
   for(i = 0; i < spot_exports.size; i++) {
     export = spot_exports[i];
-    if(spots[
-        export] == self.turret) {
+    if(spots[export] == self.turret) {
       continue;
     }
     keys = getArrayKeys(self.turret.shared_turrets[connection_type]);
     for(p = 0; p < keys.size; p++) {
       // go through each key that the turret the guy is currently on has, // and see if any turrets share keys.
       // cast export as a string because arraykeys returns strings
-      if(spots[
-          export].export+"" != keys[p]) {
+      if(spots[export].export+"" != keys[p]) {
         continue;
       }
       // somebody else has this one or they're running to it
-      if(isDefined(spots[
-          export].reserved)) {
+      if(isDefined(spots[export].reserved)) {
         continue;
       }
       // some random AI has this node already, probably doing cover there
-      if(isDefined(taken_nodes[spots[
-          export].node.origin + ""])) {
+      if(isDefined(taken_nodes[spots[export].node.origin + ""])) {
         continue;
       }
       // don't pick one that is outside the goalradius
-      if(distance(self.goalpos, spots[
-          export].origin) > self.goalradius) {
+      if(distance(self.goalpos, spots[export].origin) > self.goalradius) {
         continue;
       }
       // this spot is usable				
-      usable_spots[usable_spots.size] = spots[
-        export];
+      usable_spots[usable_spots.size] = spots[export];
     }
   }
 

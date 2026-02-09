@@ -4,23 +4,23 @@
 **************************************/
 
 artstartvisionfileexport() {
-  common_scripts\utility::fileprint_launcher_start_file();
+  common_scripts\utility:: fileprint_launcher_start_file();
 }
 
 artendvisionfileexport() {
-  return common_scripts\utility::fileprint_launcher_end_file("\\share\\raw\\vision\\" + level.script + ".vision", 1);
+  return common_scripts\utility:: fileprint_launcher_end_file("\\share\\raw\\vision\\" + level.script + ".vision", 1);
 }
 
 artstartfogfileexport() {
-  common_scripts\utility::fileprint_launcher_start_file();
+  common_scripts\utility:: fileprint_launcher_start_file();
 }
 
 artendfogfileexport() {
-  return common_scripts\utility::fileprint_launcher_end_file("\\share\\raw\\maps\\createart\\" + level.script + "_art.gsc", 1);
+  return common_scripts\utility:: fileprint_launcher_end_file("\\share\\raw\\maps\\createart\\" + level.script + "_art.gsc", 1);
 }
 
 artcommonfxprintln(var_0) {
-  common_scripts\utility::fileprint_launcher(var_0);
+  common_scripts\utility:: fileprint_launcher(var_0);
 }
 
 setfogsliders() {}
@@ -62,7 +62,6 @@ limit(var_0) {
 
   if(var_0 < var_1 && var_0 > var_1 * -1) {
     var_0 = 0;
-
   }
   return var_0;
 }
@@ -80,17 +79,17 @@ updatefogfromscript() {
 }
 
 artfxprintlnfog() {
-  common_scripts\utility::fileprint_launcher("");
-  common_scripts\utility::fileprint_launcher("\t//************************************** Fog section * ");
-  common_scripts\utility::fileprint_launcher("");
-  common_scripts\utility::fileprint_launcher("\tsetDevDvar( \"scr_fog_disable\", \"" + getdvarint("scr_fog_disable") + "\"" + " );");
-  common_scripts\utility::fileprint_launcher("");
+  common_scripts\utility:: fileprint_launcher("");
+    common_scripts\utility:: fileprint_launcher("\t//************************************** Fog section * ");
+    common_scripts\utility:: fileprint_launcher("");
+    common_scripts\utility:: fileprint_launcher("\tsetDevDvar( \"scr_fog_disable\", \"" + getdvarint("scr_fog_disable") + "\"" + " );");
+    common_scripts\utility:: fileprint_launcher("");
 
-  if(!getdvarint("scr_fog_disable")) {
-    if(level.sunfogenabled) {
-      common_scripts\utility::fileprint_launcher("\tsetExpFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogcolor[0] + ", " + level.fogcolor[1] + ", " + level.fogcolor[2] + ", " + level.fogmaxopacity + ", 0, " + level.sunfogcolor[0] + ", " + level.sunfogcolor[1] + ", " + level.sunfogcolor[2] + ", (" + level.sunfogdir[0] + ", " + level.sunfogdir[1] + ", " + level.sunfogdir[2] + "), " + level.sunfogbeginfadeangle + ", " + level.sunfogendfadeangle + ", " + level.sunfogscale + " );");
-    } else {
-      common_scripts\utility::fileprint_launcher("\tsetExpFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogcolor[0] + ", " + level.fogcolor[1] + ", " + level.fogcolor[2] + ", " + level.fogmaxopacity + ", 0 );");
+    if(!getdvarint("scr_fog_disable")) {
+      if(level.sunfogenabled) {
+        common_scripts\utility:: fileprint_launcher("\tsetExpFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogcolor[0] + ", " + level.fogcolor[1] + ", " + level.fogcolor[2] + ", " + level.fogmaxopacity + ", 0, " + level.sunfogcolor[0] + ", " + level.sunfogcolor[1] + ", " + level.sunfogcolor[2] + ", (" + level.sunfogdir[0] + ", " + level.sunfogdir[1] + ", " + level.sunfogdir[2] + "), " + level.sunfogbeginfadeangle + ", " + level.sunfogendfadeangle + ", " + level.sunfogscale + " );");
+      } else {
+        common_scripts\utility:: fileprint_launcher("\tsetExpFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogcolor[0] + ", " + level.fogcolor[1] + ", " + level.fogcolor[2] + ", " + level.fogmaxopacity + ", 0 );");
+      }
     }
-  }
 }

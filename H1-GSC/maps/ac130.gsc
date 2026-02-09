@@ -18,13 +18,13 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
 
-  if(getdvar("ac130_gameplay_enabled") == "")
-    setdvar("ac130_gameplay_enabled", "1");
+  if(getDvar("ac130_gameplay_enabled") == "")
+    setDvar("ac130_gameplay_enabled", "1");
 
   setexpfog(1000, 17300, 0.0, 0.0, 0.0, 0, 0, 0);
   setsaveddvar("scr_dof_enable", "0");
@@ -108,7 +108,7 @@ gameplay_start() {
 gameplay_chuch() {
   thread maps\ac130_code::autosavefriendlycountcheck("church");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     maps\ac130_code::resetplayerkillcount();
     maps\ac130_code::spawn_ac130_vehicle("first_truck_spawn_trigger");
     wait 5;
@@ -126,7 +126,7 @@ gameplay_chuch() {
 
   thread maps\_ac130::moveplanetowaypoint("ac130_waypoint_fight2");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     maps\ac130_code::resetplayerkillcount();
     maps\ac130_code::stop_enemies("first_shack_spawner_trigger");
     maps\ac130_code::spawn_enemies("house2_spawner_trigger");
@@ -137,14 +137,14 @@ gameplay_chuch() {
 
   maps\ac130_code::move_friendlies("friendly_location_03");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     wait 12;
     maps\ac130_code::stop_enemies("church_spawner_trigger");
   }
 
   maps\ac130_code::move_friendlies("friendly_location_04");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     maps\ac130_code::spawn_ac130_vehicle("long_road_truck_spawn_trigger");
     wait 12;
     maps\ac130_code::stop_enemies("house1_spawner_trigger");
@@ -160,7 +160,7 @@ gameplay_fields() {
   thread maps\_ac130::moveplanetowaypoint("ac130_waypoint_field1");
   maps\ac130_code::move_friendlies("friendly_location_05");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     maps\ac130_code::resetplayerkillcount();
     wait 8;
     maps\ac130_code::spawn_enemies("field1_spawner_trigger");
@@ -193,7 +193,7 @@ gameplay_hijack() {
   var_0[0] = [];
   var_0[1] = [];
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     var_1 = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(5);
 
     foreach(var_3 in var_1) {
@@ -287,7 +287,7 @@ gameplay_hijack() {
     level.getaway_vehicle_2 thread maps\ac130_code::mission_fail_vehicle_death();
   }
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     if(var_0[1].size > 0)
       common_scripts\utility::waittill_multiple_ents(level.getaway_vehicle_1, "hijack_done", level.getaway_vehicle_2, "hijack_done");
     else
@@ -300,7 +300,7 @@ gameplay_hijack() {
   thread maps\_ac130::ac130_move_out();
   wait 17.0;
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     level.getaway_vehicle_1 resumespeed(5);
     wait 1.3;
     level.getaway_vehicle_2 resumespeed(5);
@@ -310,7 +310,7 @@ gameplay_hijack() {
 gameplay_ambush() {
   thread maps\_ac130::moveplanetowaypoint("ac130_waypoint_ambush");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     wait 5;
     maps\ac130_code::spawn_ac130_vehicle("ambush_truck1_spawn_trigger");
     maps\ac130_code::spawn_enemies("ambush_rooftop_spawn_trigger");
@@ -323,7 +323,7 @@ gameplay_ambush() {
   thread maps\_ac130::ac130_move_in();
   thread maps\ac130_code::autosavefriendlycountcheck("ambush");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     maps\ac130_code::spawn_enemies("ambush_rpg_spawn_trigger3");
     wait 5;
     maps\ac130_code::spawn_enemies("ambush_rpg_spawn_trigger2");
@@ -352,7 +352,7 @@ gameplay_junkyard1() {
   wait 5;
   thread maps\ac130_code::autosavefriendlycountcheck("junkyard");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     maps\ac130_code::resetplayerkillcount();
     common_scripts\utility::array_thread(getaiarray("axis"), maps\_utility::self_delete);
     maps\ac130_code::spawn_enemies("junkyard_spawn_trigger1");
@@ -380,7 +380,7 @@ gameplay_junkyard2() {
   maps\ac130_code::move_friendlies("friendly_location_08");
   thread maps\ac130_code::autosavefriendlycountcheck("junkyard2");
 
-  if(getdvar("ac130_gameplay_enabled") == "1") {
+  if(getDvar("ac130_gameplay_enabled") == "1") {
     maps\ac130_code::resetplayerkillcount();
     maps\ac130_code::spawn_enemies("junkyard2_spawn_trigger1");
     maps\ac130_code::spawn_ac130_vehicle("junkyard_truck2_spawn_trigger");
@@ -421,7 +421,7 @@ dontshoot(var_0) {
 }
 
 dialog_opening() {
-  if(getdvar("ac130_enabled") == "0") {
+  if(getDvar("ac130_enabled") == "0") {
     return;
   }
   common_scripts\utility::array_thread(getaiarray(), ::dontshoot, 1);
@@ -451,7 +451,7 @@ dialog_church_spotted() {
 }
 
 dialog_cleared_to_engage() {
-  if(getdvar("ac130_alternate_controls") == "1")
+  if(getDvar("ac130_alternate_controls") == "1")
     maps\ac130_code::hintprint(&"SCRIPT_PLATFORM_AC130_HINT_ZOOM_AND_FIRE");
 
   maps\_ac130::playsoundoverradio(level.scr_sound["tvo"]["ac130_tvo_vehiclemovingnow"], 1);

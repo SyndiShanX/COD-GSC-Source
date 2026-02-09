@@ -203,7 +203,7 @@ function_5742754c() {
     waitresult = trigger waittill(#"touch");
     player = waitresult.entity;
 
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
 

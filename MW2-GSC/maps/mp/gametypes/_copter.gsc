@@ -89,7 +89,7 @@ createCopter(location, team, damagetrig) {
   scriptorigin.dontascend = false;
 
   scriptorigin.health = 2000;
-  if(getdvar("scr_copter_health") != "")
+  if(getDvar("scr_copter_health") != "")
     scriptorigin.health = getdvarfloat("scr_copter_health");
 
   scriptorigin.team = team;
@@ -451,7 +451,7 @@ copterShoot() {
 
       if(vectordot(curdir, enemydir) > cosThreshold) {
         canseetarget = bullettracepassed(mypos, enemypos, false, undefined);
-        if(!canseetarget && isplayer(self.desiredDirEntity) && isalive(self.desiredDirEntity))
+        if(!canseetarget && isPlayer(self.desiredDirEntity) && isalive(self.desiredDirEntity))
           canseetarget = bullettracepassed(mypos, self.desiredDirEntity getEye(), false, undefined);
         if(canseetarget) {
           // shoot.
@@ -487,288 +487,288 @@ copterShoot() {
   }
 }
 myMagicBullet(pos, dir) {
-  damage = 20;
-  if(getdvar("scr_copter_damage") != "")
-    damage = getdvarint("scr_copter_damage");
+    damage = 20;
+    if(getDvar("scr_copter_damage") != "")
+      damage = getdvarint("scr_copter_damage");
 
-  // for now just shoot from origin
-  trace = bulletTrace(pos, pos + vecscale(dir, 10000), true, undefined);
-  if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
-    // hurt entity shot at
-    trace["entity"] thread[[level.callbackPlayerDamage]](self, // eInflictor The entity that causes the damage.(e.g. a turret)
-      self, // eAttacker The entity that is attacking.
-      damage, // iDamage Integer specifying the amount of damage done
-      0, // iDFlags Integer specifying flags that are to be applied to the damage
-      "MOD_RIFLE_BULLET", // sMeansOfDeath Integer specifying the method of death
-      "copter", // sWeapon The weapon number of the weapon used to inflict the damage
-      self.origin, // vPoint The point the damage is from?
-      dir, // vDir The direction of the damage
-      "none", // sHitLoc The location of the hit
-      0 // psOffsetTime The time offset for the damage);
-  }
-  //line(pos, trace["position"], (1,1,1));
-}
+    // for now just shoot from origin
+    trace = bulletTrace(pos, pos + vecscale(dir, 10000), true, undefined);
+    if(isDefined(trace["entity"]) && isPlayer(trace["entity"]) && isalive(trace["entity"])) {
+      // hurt entity shot at
+      trace["entity"] thread[[level.callbackPlayerDamage]](self, // eInflictor The entity that causes the damage.(e.g. a turret)
+        self, // eAttacker The entity that is attacking.
+        damage, // iDamage Integer specifying the amount of damage done
+        0, // iDFlags Integer specifying flags that are to be applied to the damage
+        "MOD_RIFLE_BULLET", // sMeansOfDeath Integer specifying the method of death
+        "copter", // sWeapon The weapon number of the weapon used to inflict the damage
+        self.origin, // vPoint The point the damage is from?
+        dir, // vDir The direction of the damage
+        "none", // sHitLoc The location of the hit
+        0 // psOffsetTime The time offset for the damage);
+      }
+      //line(pos, trace["position"], (1,1,1));
+    }
 
-setCopterDest(newlocation, descend, dontascend) {
-  self.finalDest = getAboveBuildingsLocation(newlocation);
-  if(isDefined(descend) && descend)
-    self.finalZDest = newlocation[2];
-  else
-    self.finalZDest = self.finalDest[2];
-
-  self.intransit = true;
-  self.dontascend = false;
-  if(isDefined(dontascend))
-    self.dontascend = dontascend;
-}
-notifyArrived() {
-  wait .05;
-  self notify("arrived");
-}
-
-vecscale(vec, scalar) {
-  return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
-}
-
-abs(x) {
-  if(x < 0)
-    return 0 - x;
-  return x;
-}
-
-copterMove() {
-  self endon("death");
-
-  if(isDefined(self.copterMoveRunning))
-    return;
-  self.copterMoveRunning = true;
-
-  self.intransit = false;
-  interval = .15;
-  zinterp = .1;
-  tiltamnt = 0;
-  while(1) {
-    horizDistSquared = distanceSquared((self.origin[0], self.origin[1], 0), (self.finalDest[0], self.finalDest[1], 0));
-
-    doneMoving = horizDistSquared < 10 * 10;
-
-    //if(!doneMoving)
-    {
-      nearDest = (horizDistSquared < 256 * 256);
+    setCopterDest(newlocation, descend, dontascend) {
+      self.finalDest = getAboveBuildingsLocation(newlocation);
+      if(isDefined(descend) && descend)
+        self.finalZDest = newlocation[2];
+      else
+        self.finalZDest = self.finalDest[2];
 
       self.intransit = true;
+      self.dontascend = false;
+      if(isDefined(dontascend))
+        self.dontascend = dontascend;
+    }
+    notifyArrived() {
+      wait .05;
+      self notify("arrived");
+    }
 
-      desiredZ = 0;
+    vecscale(vec, scalar) {
+      return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
+    }
 
-      // movement
-      movingHorizontally = true;
-      movingVertically = false;
-      if(self.dontascend)
-        movingVertically = true;
-      else {
-        // if we're not near our horizontal goal position
-        if(!nearDest) {
-          // get the z position we *want* to have before moving horizontally
-          desiredZ = getAboveBuildingsLocation(self.origin)[2];
-          movingHorizontally = (abs(self.origin[2] - desiredZ) <= 256); // we're moving horizontally if we're up high enough to do so
-          movingVertically = !movingHorizontally; // we're moving vertically if we aren't
+    abs(x) {
+      if(x < 0)
+        return 0 - x;
+      return x;
+    }
+
+    copterMove() {
+      self endon("death");
+
+      if(isDefined(self.copterMoveRunning))
+        return;
+      self.copterMoveRunning = true;
+
+      self.intransit = false;
+      interval = .15;
+      zinterp = .1;
+      tiltamnt = 0;
+      while(1) {
+        horizDistSquared = distanceSquared((self.origin[0], self.origin[1], 0), (self.finalDest[0], self.finalDest[1], 0));
+
+        doneMoving = horizDistSquared < 10 * 10;
+
+        //if(!doneMoving)
+        {
+          nearDest = (horizDistSquared < 256 * 256);
+
+          self.intransit = true;
+
+          desiredZ = 0;
+
+          // movement
+          movingHorizontally = true;
+          movingVertically = false;
+          if(self.dontascend)
+            movingVertically = true;
+          else {
+            // if we're not near our horizontal goal position
+            if(!nearDest) {
+              // get the z position we *want* to have before moving horizontally
+              desiredZ = getAboveBuildingsLocation(self.origin)[2];
+              movingHorizontally = (abs(self.origin[2] - desiredZ) <= 256); // we're moving horizontally if we're up high enough to do so
+              movingVertically = !movingHorizontally; // we're moving vertically if we aren't
+            }
+            // if we are near our horizontal goal position
+            else
+              movingVertically = true;
+          }
+
+          // determine our destination
+          if(movingHorizontally) {
+            if(movingVertically)
+              thisDest = (self.finalDest[0], self.finalDest[1], self.finalZDest);
+            else
+              thisDest = self.finalDest;
+          } else {
+            assert(movingVertically);
+            thisDest = (self.origin[0], self.origin[1], desiredZ);
+          }
+
+          movevec = thisDest - self.origin;
+
+          idealAccel = vecscale(thisDest - (self.origin + vecscale(self.vel, level.copter_accellookahead)), interval);
+          vlen = veclength(idealAccel);
+          if(vlen > level.copter_maxaccel) {
+            idealAccel = vecscale(idealAccel, level.copter_maxaccel / vlen);
+          }
+
+          self.vel = self.vel + idealAccel;
+          vlen = veclength(self.vel);
+          if(vlen > level.copter_maxvel) {
+            self.vel = vecscale(self.vel, level.copter_maxvel / vlen);
+          }
+
+          thisDest = self.origin + vecscale(self.vel, interval);
+
+          self moveto(thisDest, interval * .999);
+
+          speed = veclength(self.vel);
+
+          if(isDefined(self.desiredDirEntity) && isDefined(self.desiredDirEntity.origin)) {
+            self.destDir = vectornormalize((self.desiredDirEntity.origin + self.desiredDirEntityOffset) - (self.origin + level.copterCenterOffset));
+          } else if(isDefined(self.desiredDir)) {
+            self.destDir = self.desiredDir;
+          } else if(movingVertically) {
+            self.destDir = anglesToForward(self.angles);
+            self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0));
+          } else {
+            tiltamnt = speed / level.copter_maxvel;
+            tiltamnt = (tiltamnt - .1) / .9;
+            if(tiltamnt < 0) tiltamnt = 0;
+
+            self.destDir = movevec;
+            self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0)); // remove z component
+            tiltamnt = tiltamnt * (1 - (vectorAngle(anglesToForward(self.angles), self.destDir) / 180));
+            self.destDir = vectornormalize((self.destDir[0], self.destDir[1], tiltamnt * -.4)); // tilt forward while moving
+          }
         }
-        // if we are near our horizontal goal position
-        else
-          movingVertically = true;
+        /*else {
+        	if(self.intransit) {
+        		self.intransit = false;
+        		self.dontascend = false;
+        		
+        		// if we descended to get to this point, we'll be ascending to get out
+        		if(self.finalZDest != self.finalDest[2])
+        			self.ascending = true;
+        		
+        		self notify("arrived");
+        	}
+        	
+        	if(isDefined(self.desiredDir))
+        		self.destDir = self.desiredDir;
+        	else {
+        		self.destDir = anglesToForward(self.angles);
+        		self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0));
+        	}
+        }*/
+
+        // rotation
+        newdir = self.destDir;
+        //line(self.origin + level.copterCenterOffset, self.origin + level.copterCenterOffset + vecscale(self.destDir,10000), (1,0,0));
+        if(newdir[2] < -.4) { // *never* look too far down
+          newdir = vectornormalize((newdir[0], newdir[1], -.4));
+        }
+        //line(self.origin + level.copterCenterOffset, self.origin + level.copterCenterOffset + vecscale(newdir,10000), (1,1,0));
+
+        copterangles = self.angles;
+        copterangles = combineangles(copterangles, (0, 90, 0));
+        olddir = anglesToForward(copterangles);
+
+        thisRotSpeed = level.copter_rotspeed;
+        //if(movelen < 256)
+        //	thisRotSpeed = thisRotSpeed * movelen / 256;
+
+        olddir2d = vectornormalize((olddir[0], olddir[1], 0));
+        newdir2d = vectornormalize((newdir[0], newdir[1], 0));
+
+        angle = vectorAngle(olddir2d, newdir2d);
+        angle3d = vectorAngle(olddir, newdir);
+
+        if(angle > .001 && thisRotSpeed > .001) {
+          thisangle = thisRotSpeed * interval;
+          if(thisangle > angle)
+            thisangle = angle;
+
+          newdir2d = vectorTowardsOtherVector(olddir2d, newdir2d, thisangle);
+          oldz = olddir[2] / veclength((olddir[0], olddir[1], 0));
+          newz = newdir[2] / veclength((newdir[0], newdir[1], 0));
+          interpz = oldz + (newz - oldz) * (thisangle / angle);
+          newdir = vectornormalize((newdir2d[0], newdir2d[1], interpz));
+
+          copterangles = vectorToAngles(newdir);
+          copterangles = combineangles(copterangles, (0, -90, 0));
+          self rotateto(copterangles, interval * .999);
+        } else if(angle3d > .001 && thisRotSpeed > .001) {
+          // need to rotate vertically
+          thisangle = thisRotSpeed * interval;
+          if(thisangle > angle3d)
+            thisangle = angle3d;
+
+          newdir = vectorTowardsOtherVector(olddir, newdir, thisangle);
+          newdir = vectornormalize(newdir);
+
+          copterangles = vectorToAngles(newdir);
+          copterangles = combineangles(copterangles, (0, -90, 0));
+          self rotateto(copterangles, interval * .999);
+        }
+
+        wait interval;
+      }
+    }
+
+    copterDamage(damagetrig) {
+      self endon("passive");
+
+      while(1) {
+        damagetrig waittill("damage", amount, attacker);
+
+        // disallow friendly fire
+        if(isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.team) {
+          continue;
+        }
+        self.health -= amount;
+        if(self.health <= 0) {
+          self thread copterDie();
+          return;
+        }
+        //iprintln("OW ", amount);
+      }
+    }
+
+    copterDie() {
+      self endon("passive");
+
+      self notify("death");
+      self.dead = true;
+
+      self thread copterExplodeFX();
+
+      // crash.
+      interval = .2;
+      rottime = 15;
+      self rotateyaw(360 + randomfloat(360), rottime);
+      self rotatepitch(360 + randomfloat(360), rottime);
+      self rotateroll(360 + randomfloat(360), rottime);
+      while(1) {
+        self.vel = self.vel + vecscale((0, 0, -200), interval);
+        newpos = self.origin + vecscale(self.vel, interval);
+
+        // check for collision with ground
+        pathclear = bullettracepassed(self.origin, newpos, false, undefined);
+        if(!pathclear) {
+          break;
+        }
+
+        self moveto(newpos, interval * .999);
+
+        wait(interval);
       }
 
-      // determine our destination
-      if(movingHorizontally) {
-        if(movingVertically)
-          thisDest = (self.finalDest[0], self.finalDest[1], self.finalZDest);
-        else
-          thisDest = self.finalDest;
-      } else {
-        assert(movingVertically);
-        thisDest = (self.origin[0], self.origin[1], desiredZ);
+      playFX(level.copterfinalexplosion, self.origin);
+      playsoundatpos(self.origin, "mp_copter_explosion");
+      self notify("finaldeath");
+
+      deleteCopter();
+    }
+    deleteCopter() {
+      if(isDefined(self.damagetrig)) {
+        self.damagetrig notify("unlink");
+        self.damagetrig = undefined;
       }
+      self.copter delete();
+      self delete();
+    }
+    copterExplodeFX() {
+      self endon("finaldeath");
 
-      movevec = thisDest - self.origin;
-
-      idealAccel = vecscale(thisDest - (self.origin + vecscale(self.vel, level.copter_accellookahead)), interval);
-      vlen = veclength(idealAccel);
-      if(vlen > level.copter_maxaccel) {
-        idealAccel = vecscale(idealAccel, level.copter_maxaccel / vlen);
-      }
-
-      self.vel = self.vel + idealAccel;
-      vlen = veclength(self.vel);
-      if(vlen > level.copter_maxvel) {
-        self.vel = vecscale(self.vel, level.copter_maxvel / vlen);
-      }
-
-      thisDest = self.origin + vecscale(self.vel, interval);
-
-      self moveto(thisDest, interval * .999);
-
-      speed = veclength(self.vel);
-
-      if(isDefined(self.desiredDirEntity) && isDefined(self.desiredDirEntity.origin)) {
-        self.destDir = vectornormalize((self.desiredDirEntity.origin + self.desiredDirEntityOffset) - (self.origin + level.copterCenterOffset));
-      } else if(isDefined(self.desiredDir)) {
-        self.destDir = self.desiredDir;
-      } else if(movingVertically) {
-        self.destDir = anglesToForward(self.angles);
-        self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0));
-      } else {
-        tiltamnt = speed / level.copter_maxvel;
-        tiltamnt = (tiltamnt - .1) / .9;
-        if(tiltamnt < 0) tiltamnt = 0;
-
-        self.destDir = movevec;
-        self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0)); // remove z component
-        tiltamnt = tiltamnt * (1 - (vectorAngle(anglesToForward(self.angles), self.destDir) / 180));
-        self.destDir = vectornormalize((self.destDir[0], self.destDir[1], tiltamnt * -.4)); // tilt forward while moving
+      while(1) {
+        playFX(level.copterexplosion, self.origin);
+        self playSound("mp_copter_explosion");
+        wait .5 + randomfloat(1);
       }
     }
-    /*else {
-    	if(self.intransit) {
-    		self.intransit = false;
-    		self.dontascend = false;
-    		
-    		// if we descended to get to this point, we'll be ascending to get out
-    		if(self.finalZDest != self.finalDest[2])
-    			self.ascending = true;
-    		
-    		self notify("arrived");
-    	}
-    	
-    	if(isDefined(self.desiredDir))
-    		self.destDir = self.desiredDir;
-    	else {
-    		self.destDir = anglesToForward(self.angles);
-    		self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0));
-    	}
-    }*/
-
-    // rotation
-    newdir = self.destDir;
-    //line(self.origin + level.copterCenterOffset, self.origin + level.copterCenterOffset + vecscale(self.destDir,10000), (1,0,0));
-    if(newdir[2] < -.4) { // *never* look too far down
-      newdir = vectornormalize((newdir[0], newdir[1], -.4));
-    }
-    //line(self.origin + level.copterCenterOffset, self.origin + level.copterCenterOffset + vecscale(newdir,10000), (1,1,0));
-
-    copterangles = self.angles;
-    copterangles = combineangles(copterangles, (0, 90, 0));
-    olddir = anglesToForward(copterangles);
-
-    thisRotSpeed = level.copter_rotspeed;
-    //if(movelen < 256)
-    //	thisRotSpeed = thisRotSpeed * movelen / 256;
-
-    olddir2d = vectornormalize((olddir[0], olddir[1], 0));
-    newdir2d = vectornormalize((newdir[0], newdir[1], 0));
-
-    angle = vectorAngle(olddir2d, newdir2d);
-    angle3d = vectorAngle(olddir, newdir);
-
-    if(angle > .001 && thisRotSpeed > .001) {
-      thisangle = thisRotSpeed * interval;
-      if(thisangle > angle)
-        thisangle = angle;
-
-      newdir2d = vectorTowardsOtherVector(olddir2d, newdir2d, thisangle);
-      oldz = olddir[2] / veclength((olddir[0], olddir[1], 0));
-      newz = newdir[2] / veclength((newdir[0], newdir[1], 0));
-      interpz = oldz + (newz - oldz) * (thisangle / angle);
-      newdir = vectornormalize((newdir2d[0], newdir2d[1], interpz));
-
-      copterangles = vectorToAngles(newdir);
-      copterangles = combineangles(copterangles, (0, -90, 0));
-      self rotateto(copterangles, interval * .999);
-    } else if(angle3d > .001 && thisRotSpeed > .001) {
-      // need to rotate vertically
-      thisangle = thisRotSpeed * interval;
-      if(thisangle > angle3d)
-        thisangle = angle3d;
-
-      newdir = vectorTowardsOtherVector(olddir, newdir, thisangle);
-      newdir = vectornormalize(newdir);
-
-      copterangles = vectorToAngles(newdir);
-      copterangles = combineangles(copterangles, (0, -90, 0));
-      self rotateto(copterangles, interval * .999);
-    }
-
-    wait interval;
-  }
-}
-
-copterDamage(damagetrig) {
-  self endon("passive");
-
-  while(1) {
-    damagetrig waittill("damage", amount, attacker);
-
-    // disallow friendly fire
-    if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.team) {
-      continue;
-    }
-    self.health -= amount;
-    if(self.health <= 0) {
-      self thread copterDie();
-      return;
-    }
-    //iprintln("OW ", amount);
-  }
-}
-
-copterDie() {
-  self endon("passive");
-
-  self notify("death");
-  self.dead = true;
-
-  self thread copterExplodeFX();
-
-  // crash.
-  interval = .2;
-  rottime = 15;
-  self rotateyaw(360 + randomfloat(360), rottime);
-  self rotatepitch(360 + randomfloat(360), rottime);
-  self rotateroll(360 + randomfloat(360), rottime);
-  while(1) {
-    self.vel = self.vel + vecscale((0, 0, -200), interval);
-    newpos = self.origin + vecscale(self.vel, interval);
-
-    // check for collision with ground
-    pathclear = bullettracepassed(self.origin, newpos, false, undefined);
-    if(!pathclear) {
-      break;
-    }
-
-    self moveto(newpos, interval * .999);
-
-    wait(interval);
-  }
-
-  playFX(level.copterfinalexplosion, self.origin);
-  playsoundatpos(self.origin, "mp_copter_explosion");
-  self notify("finaldeath");
-
-  deleteCopter();
-}
-deleteCopter() {
-  if(isDefined(self.damagetrig)) {
-    self.damagetrig notify("unlink");
-    self.damagetrig = undefined;
-  }
-  self.copter delete();
-  self delete();
-}
-copterExplodeFX() {
-  self endon("finaldeath");
-
-  while(1) {
-    playFX(level.copterexplosion, self.origin);
-    self playSound("mp_copter_explosion");
-    wait .5 + randomfloat(1);
-  }
-}

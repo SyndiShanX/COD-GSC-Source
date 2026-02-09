@@ -195,7 +195,6 @@ setDoubleLoad() {
       }
     }
   }
-
 }
 
 unsetDoubleLoad() {
@@ -822,7 +821,7 @@ GlowStickEnemyUseListener(owner) {
 }
 
 setPainted(attacker) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(attacker.specialty_paint_time) && !self _hasPerk("specialty_coldblooded")) {
       self.painted = true;
       self setPerk("specialty_radararrow", true, false);
@@ -1038,7 +1037,7 @@ unsetJuicedOnDeath() {
 setLightArmorHP(newValue) {
   if(isDefined(newValue)) {
     self.lightArmorHP = newValue;
-    if(IsPlayer(self) && isDefined(self.maxLightArmorHP) && self.maxLightArmorHP > 0) {
+    if(isPlayer(self) && isDefined(self.maxLightArmorHP) && self.maxLightArmorHP > 0) {
       lightArmorPercent = clamp(self.lightArmorHP / self.maxLightArmorHP, 0, 1);
       self SetClientOmnvar("ui_light_armor_percent", lightArmorPercent);
     }

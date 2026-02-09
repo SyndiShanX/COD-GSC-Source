@@ -8,7 +8,7 @@
 #include clientscripts\mp\zombies\_zm_equipment;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   if(!clientscripts\mp\zombies\_zm_equipment::is_equipment_included("equip_hacker_zm")) {

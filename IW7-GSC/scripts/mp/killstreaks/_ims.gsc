@@ -679,7 +679,7 @@ func_9362() {
     }
 
     self.var_2536 waittill("trigger", var_0);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(isDefined(self.owner) && var_0 == self.owner) {
         continue;
       }

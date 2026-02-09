@@ -54,7 +54,7 @@ main() {
   level.statstable = "mp\statstable.csv";
   level.game_mode_statstable = "cp\zombies\mode_string_tables\zombies_statstable.csv";
   level.game_mode_attachment_map = "cp\zombies\zombie_attachmentmap.csv";
-  var_0 = getdvar("ui_mapname");
+  var_0 = getDvar("ui_mapname");
   level.power_up_table = "cp\zombies\" + var_0 + "_loot.csv";
   scripts\mp\passives::init();
   scripts\cp\cp_weapon::weaponsinit();
@@ -508,7 +508,7 @@ player_hotjoin() {
     self.wave_num_when_joined = level.wave_num;
   }
 
-  var_0 = getdvar("ui_mapname");
+  var_0 = getDvar("ui_mapname");
   if(var_0 == "cp_rave") {
     disablepaspeaker("pa_speaker_stage_2");
     disablepaspeaker("pa_speaker_path");
@@ -578,7 +578,7 @@ player_hotjoin() {
   wait(3);
   scripts\cp\zombies\zombies_consumables::init_player_consumables();
   scripts\cp\zombies\zombie_afterlife_arcade::init_soul_power(self);
-  if(getdvar("ui_gametype") == "zombie") {
+  if(getDvar("ui_gametype") == "zombie") {
     self setclientomnvar("zombie_wave_number", level.wave_num);
   }
 
@@ -668,7 +668,7 @@ onspawnplayer() {
   }
 
   thread scripts\cp\zombies\zombies_weapons::reload_watcher();
-  if(getdvar("ui_mapname") == "cp_zmb") {
+  if(getDvar("ui_mapname") == "cp_zmb") {
     thread func_9B1A();
   }
 
@@ -1108,7 +1108,7 @@ zombie_player_connect_black_screen() {
   }
 
   var_0 = 2;
-  var_1 = getdvar("ui_mapname");
+  var_1 = getDvar("ui_mapname");
   if(var_1 == "cp_town" && !self issplitscreenplayer() && !isDefined(level.cp_town_bink_played) && !scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
     wait(2);
     self playlocalsound("mus_zombies_title_splash");
@@ -1260,7 +1260,7 @@ dev_damage_show_damage_numbers() {
 }
 
 precachelb() {
-  var_0 = " LB_" + getdvar("ui_mapname");
+  var_0 = " LB_" + getDvar("ui_mapname");
   if(scripts\cp\utility::isplayingsolo()) {
     var_0 = var_0 + "_SOLO";
   } else {

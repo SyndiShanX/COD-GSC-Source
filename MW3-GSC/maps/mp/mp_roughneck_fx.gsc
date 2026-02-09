@@ -24,8 +24,7 @@ main() {
   level._effect["mp_rn_steamjet"] = loadfx("maps/mp_roughneck/mp_rn_steamjet");
   level._effect["mp_rn_dripshvy"] = loadfx("maps/mp_roughneck/mp_rn_dripshvy");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_roughneck_fx::main();
   }
-
 }

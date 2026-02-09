@@ -112,7 +112,7 @@ function_67189b6b(localclientnum, newval) {
     item_world::function_b78a9820(localclientnum);
     player = function_5c10bd79(localclientnum);
 
-    if(isplayer(player) && distance2dsquared(self.origin, player.origin) <= 1350 * 1350) {
+    if(isPlayer(player) && distance2dsquared(self.origin, player.origin) <= 1350 * 1350) {
       player.var_506495f9 = 1;
     }
 
@@ -219,7 +219,7 @@ function_e7bb925a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   level.var_624588d5[level.var_624588d5.size] = self;
   player = function_5c10bd79(localclientnum);
 
-  if(isplayer(player) && distance2dsquared(self.origin, player.origin) <= 1350 * 1350) {
+  if(isPlayer(player) && distance2dsquared(self.origin, player.origin) <= 1350 * 1350) {
     item_world::function_a4886b1e(localclientnum, undefined, self);
   }
 }

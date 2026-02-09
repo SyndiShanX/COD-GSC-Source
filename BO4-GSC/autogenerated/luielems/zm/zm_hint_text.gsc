@@ -41,7 +41,6 @@ class czm_hint_text: cluielem {
     cluielem::add_clientfield("_state", 1, 1, "int");
     cluielem::function_dcb34c80("string", "text", 1);
   }
-
 }
 
 register(uid) {

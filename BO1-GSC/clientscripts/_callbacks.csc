@@ -1,6 +1,6 @@
 /****************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_callbacks.csc
+ * Script: clientscripts\_callbacks\.csc
 ****************************************/
 
 #include clientscripts\_utility;
@@ -22,20 +22,16 @@ statechange(clientNum, system, newState) {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
   }
 }
-
 maprestart() {
   println("*** Client script VM map restart.");
 }
-
 glass_smash(org, dir) {
   level notify("glass_smash", org, dir);
 }
-
 init_fx(clientNum) {
   waitforclient(clientNum);
   clientscripts\_fx::fx_init(clientNum);
 }
-
 AddCallback(event, func) {
   AssertEx(isDefined(event), "Trying to set a callback on an undefined event.");
   if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event])) {
@@ -43,7 +39,6 @@ AddCallback(event, func) {
   }
   level._callbacks[event] = add_to_array(level._callbacks[event], func, false);
 }
-
 Callback(event, clientNum) {
   if(isDefined(level._callbacks) && isDefined(level._callbacks[event])) {
     for(i = 0; i < level._callbacks[event].size; i++) {
@@ -54,7 +49,6 @@ Callback(event, clientNum) {
     }
   }
 }
-
 localclientconnect(clientNum) {
   println("*** Client script VM : Local client connect " + clientNum);
   level.usetreadfx = 1;
@@ -70,39 +64,35 @@ localclientconnect(clientNum) {
   level notify("connected", clientNum);
   level thread localclientconnect_callback(clientNum);
 }
-
 localclientconnect_callback(clientNum) {
   wait .01;
-  player = getLocalPlayers()[clientNum];
+  player = GetLocalPlayers()[clientNum];
   player Callback("on_player_connect", clientNum);
 }
-
 localclientdisconnect(clientNum) {
   println("*** Client script VM : Local client disconnect " + clientNum);
 }
-
 playerspawned(localClientNum) {
   self endon("entityshutdown");
   self thread clientscripts\_flamethrower_plight::play_pilot_light_fx(localClientNum);
-  if(isDefined(level._faceAnimCBFunc))
+  if(isDefined(level._faceAnimCBFunc)) {
     self thread[[level._faceAnimCBFunc]](localClientNum);
-  if(isDefined(level._playerCBFunc))
+  }
+  if(isDefined(level._playerCBFunc)) {
     self thread[[level._playerCBFunc]](localClientNum);
+  }
   level thread localclientspawned_callback(localClientNum);
 }
-
 localclientspawned_callback(localClientNum) {
   wait .01;
-  player = getLocalPlayers()[localClientNum];
+  player = GetLocalPlayers()[localClientNum];
   player Callback("playerspawned", localClientNum);
 }
-
 CodeCallback_GibEvent(localClientNum, type, locations) {
   if(isDefined(level._gibEventCBFunc)) {
     self thread[[level._gibEventCBFunc]](localClientNum, type, locations);
   }
 }
-
 get_gib_def() {
   if(!isDefined(level._gibbing_actor_models)) {
     return -1;
@@ -115,7 +105,6 @@ get_gib_def() {
   }
   return -1;
 }
-
 entityspawned(localClientNum) {
   self endon("entityshutdown");
   if(!isDefined(self.type)) {
@@ -189,15 +178,16 @@ entityspawned(localClientNum) {
     self thread vehicle_clientmain(localClientNum);
   } else if(self.type == "actor" && GetDvarInt(#"zombiemode") > 0) {
     if(isDefined(level._zombieCBFunc)) {
-      players = getLocalPlayers();
+      players = GetLocalPlayers();
       for(i = 0; i < players.size; i++) {
         self thread[[level._zombieCBFunc]](i);
       }
     }
   }
   if(self.type == "actor") {
-    if(isDefined(level._faceAnimCBFunc))
+    if(isDefined(level._faceAnimCBFunc)) {
       self thread[[level._faceAnimCBFunc]](localClientNum);
+    }
     if(localClientNum == 0) {
       self._gib_def = get_gib_def();
       if(self._gib_def == -1) {
@@ -208,13 +198,11 @@ entityspawned(localClientNum) {
   self.entity_spawned = true;
   self notify("entity_spawned");
 }
-
 entityshutdown_callback(localClientNum, entity) {
   if(isDefined(level._entityShutDownCBFunc)) {
     [[level._entityShutDownCBFunc]](localClientNum, entity);
   }
 }
-
 airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittype) {
   pos = (x, y, z);
   switch (teamFaction) {
@@ -286,19 +274,22 @@ airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
     println("");
   }
 }
-
 scriptmodelspawned(local_client_num, ent, destructable_index) {
-  if(destructable_index == 0)
+  if(destructable_index == 0) {
     return;
-  if(!isDefined(level.createFXent))
+  }
+  if(!isDefined(level.createFXent)) {
     return;
+  }
   fixed = false;
   for(i = 0; i < level.createFXent.size; i++) {
-    if(level.createFXent[i].v["type"] != "exploder")
+    if(level.createFXent[i].v["type"] != "exploder") {
       continue;
+    }
     exploder = level.createFXent[i];
-    if(!isDefined(exploder.needs_fixup))
+    if(!isDefined(exploder.needs_fixup)) {
       continue;
+    }
     if(exploder.needs_fixup == destructable_index) {
       exploder.v["angles"] = VectorToAngles(ent.origin - exploder.v["origin"]);
       exploder clientscripts\_fx::set_forward_and_up_vectors();
@@ -307,10 +298,10 @@ scriptmodelspawned(local_client_num, ent, destructable_index) {
     }
   }
 }
-
 callback_activate_exploder(exploder_id) {
-  if(!isDefined(level._exploder_ids))
+  if(!isDefined(level._exploder_ids)) {
     return;
+  }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
   for(i = 0; i < keys.size; i++) {
@@ -326,10 +317,10 @@ callback_activate_exploder(exploder_id) {
   println("*** Client callback - activate exploder " + exploder_id + " : " + exploder);
   clientscripts\_fx::activate_exploder(exploder);
 }
-
 callback_deactivate_exploder(exploder_id) {
-  if(!isDefined(level._exploder_ids))
+  if(!isDefined(level._exploder_ids)) {
     return;
+  }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
   for(i = 0; i < keys.size; i++) {
@@ -345,23 +336,21 @@ callback_deactivate_exploder(exploder_id) {
   println("*** Client callback - deactivate exploder " + exploder_id + " : " + exploder);
   clientscripts\_fx::deactivate_exploder(exploder);
 }
-
 level_notify(notify_name, param1, param2) {
   level notify(notify_name, param1, param2);
 }
-
 sound_notify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
     entity playSound(client_num, "fly_dog_step_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
-  if(prefix != "sound")
+  if(prefix != "sound") {
     return false;
+  }
   alias = "aml" + getsubstr(note, 5);
   entity play_dog_sound(client_num, alias);
 }
-
 dog_sound_print(message) {}
 play_dog_sound(localClientNum, sound, position) {
   dog_sound_print("SOUND " + sound);
@@ -370,7 +359,6 @@ play_dog_sound(localClientNum, sound, position) {
   }
   return self playSound(localClientNum, sound);
 }
-
 client_flag_callback(localClientNum, flag, set, newEnt) {
   if((self.type == "vehicle" || self.type == "actor" || self.type == "missle") && !isDefined(self.entity_spawned)) {
     self waittill("entity_spawned");
@@ -379,55 +367,45 @@ client_flag_callback(localClientNum, flag, set, newEnt) {
     self thread[[level._client_flag_callbacks[self.type][flag]]](localClientNum, set, newEnt);
   } else {}
 }
-
 client_flagasval_callback(localClientNum, val) {
   if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type])) {
     self thread[[level._client_flagasval_callbacks[self.type]]](localClientNum, val);
   }
 }
-
 CodeCallback_PlayerFootstep(client_num, player, movementtype, ground_type, firstperson, quiet) {
   clientscripts\_footsteps::playerFootstep(client_num, player, movementtype, ground_type, firstperson, quiet);
 }
-
 CodeCallback_CreatingCorpse(localClientNum, player) {
   player notify("face", "face_death");
 }
-
 CodeCallback_PlayerJump(client_num, player, ground_type, firstperson, quiet) {
   clientscripts\_footsteps::playerJump(client_num, player, ground_type, firstperson, quiet);
 }
-
 CodeCallback_PlayerLand(client_num, player, ground_type, firstperson, quiet, damagePlayer) {
   clientscripts\_footsteps::playerLand(client_num, player, ground_type, firstperson, quiet, damagePlayer);
 }
-
 CodeCallback_PlayerFoliage(client_num, player, firstperson, quiet) {
   clientscripts\_footsteps::playerFoliage(client_num, player, firstperson, quiet);
 }
-
 AddPlayWeaponDeathEffectsCallback(weaponname, func) {
   if(!isDefined(level._playweapondeatheffectscallbacks)) {
     level._playweapondeatheffectscallbacks = [];
   }
   level._playweapondeatheffectscallbacks[weaponname] = func;
 }
-
-CodeCallback_PlayWeaponDeathEffects(localClientNum, weaponname, userdata) {
+CodeCallback_PlayWeaponDeathEffects(localclientnum, weaponname, userdata) {
   if(isDefined(level._playweapondeatheffectscallbacks) && isDefined(level._playweapondeatheffectscallbacks[weaponname])) {
-    self thread[[level._playweapondeatheffectscallbacks[weaponname]]](localClientNum, weaponname, userdata);
+    self thread[[level._playweapondeatheffectscallbacks[weaponname]]](localclientnum, weaponname, userdata);
   }
 }
-
 AddPlayWeaponDamageEffectsCallback(weaponname, func) {
   if(!isDefined(level._playweapondamageeffectscallbacks)) {
     level._playweapondamageeffectscallbacks = [];
   }
   level._playweapondamageeffectscallbacks[weaponname] = func;
 }
-
-CodeCallback_PlayWeaponDamageEffects(localClientNum, weaponname, userdata) {
+CodeCallback_PlayWeaponDamageEffects(localclientnum, weaponname, userdata) {
   if(isDefined(level._playweapondamageeffectscallbacks) && isDefined(level._playweapondamageeffectscallbacks[weaponname])) {
-    self thread[[level._playweapondamageeffectscallbacks[weaponname]]](localClientNum, weaponname, userdata);
+    self thread[[level._playweapondamageeffectscallbacks[weaponname]]](localclientnum, weaponname, userdata);
   }
 }

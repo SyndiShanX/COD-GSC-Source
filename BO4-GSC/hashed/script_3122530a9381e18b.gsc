@@ -163,7 +163,6 @@ function_130ea633() {
 start_step_2() {
   if(zm_white_main_quest::function_6cebbce1()) {
     iprintlnbold("<dev string:x65>");
-
   }
 
   while(zm_white_main_quest::function_6cebbce1()) {

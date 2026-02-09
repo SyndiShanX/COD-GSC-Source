@@ -525,7 +525,7 @@ function function_329f82a0() {
     target = level.sniper_boss.lase_ent.lase_override;
     fwd = anglesToForward(level.sniper_boss.angles);
     target_org = target.origin + vectorscale((0, 0, 1), 10);
-    if(isplayer(target)) {
+    if(isPlayer(target)) {
       var_f769885c = (0, 0, 0);
       accuracy = target function_3375c23();
       accuracy = accuracy * 100;
@@ -544,7 +544,7 @@ function function_6ea369f7() {
   trig = getent("sniper_alley", "targetname");
   while(!level flag::get("end_battle")) {
     trig waittill("trigger", who);
-    if(isplayer(who) && isalive(who)) {
+    if(isPlayer(who) && isalive(who)) {
       if(!isDefined(level.sniper_boss.player_target)) {
         function_6485b136(who, 2);
       }

@@ -21,21 +21,18 @@ main() {
   self thread watch_for_cockpit_switch();
   self thread create_tutorial_hud();
 }
-
 precache_models() {
   PreCacheModel("t5_veh_helo_hind_cockpitview");
   PreCacheModel("t5_veh_helo_hind_ckpitdmg0");
   PreCacheModel("t5_veh_helo_hind_ckpitdmg1");
   PreCacheModel("t5_veh_helo_hind_ckpitdmg2");
 }
-
 precache_weapons() {
   PreCacheItem("hind_minigun_pilot");
   PreCacheItem("hind_rockets");
   PreCacheRumble("minigun_rumble");
   PreCacheRumble("damage_light");
 }
-
 precache_hud() {
   PreCacheShader("hud_hind_cannon01");
   PreCacheShader("hud_hind_cannon02");
@@ -46,7 +43,6 @@ precache_hud() {
   PreCacheShader("hud_hind_rocket_border_left");
   PreCacheShader("hud_hind_rocket_border_right");
 }
-
 watch_for_cockpit_switch() {
   self endon("death");
   self endon("animated_switch");
@@ -56,7 +52,7 @@ watch_for_cockpit_switch() {
     while(true) {
       self waittill("enter_vehicle", player);
       self HidePart("tag_instrument_warning", "t5_veh_helo_hind_cockpitview");
-      if(isDefined(player) && IsPlayer(player)) {
+      if(isDefined(player) && isPlayer(player)) {
         self setModel(self.cockpit_models[self.current_cockpit_state]);
         self.console_model = maps\_utility::spawn("script_model", self.origin);
         self.console_model setModel("t5_veh_helo_hind_ckpitdmg0");
@@ -77,7 +73,7 @@ watch_for_cockpit_switch() {
     }
     while(true) {
       self waittill("exit_vehicle", player);
-      if(isDefined(player) && IsPlayer(player)) {
+      if(isDefined(player) && isPlayer(player)) {
         self notify("hind weapons disabled");
         self setModel("t5_veh_helo_hind_blockout");
         break;
@@ -85,7 +81,6 @@ watch_for_cockpit_switch() {
     }
   }
 }
-
 flash_warning_indicator() {
   self endon("stop_warning_indicator");
   self thread stop_warning_indicator();
@@ -96,13 +91,11 @@ flash_warning_indicator() {
     wait(0.2);
   }
 }
-
 stop_warning_indicator() {
   self waittill("stop_warning_indicator");
   waittillframeend;
   self HidePart("tag_instrument_warning", "t5_veh_helo_hind_cockpitview");
 }
-
 next_cockpit_damage_state() {
   self.current_cockpit_state++;
   AssertEx(self.current_cockpit_state <= self.console_models.size, "Tried to switch the hind to a cockpit damage state that does not exist");
@@ -153,7 +146,6 @@ next_cockpit_damage_state() {
     return false;
   }
 }
-
 debug_cycle_damage_states() {
   self endon("death");
   while(1) {
@@ -164,29 +156,24 @@ debug_cycle_damage_states() {
     }
   }
 }
-
 hind_weapons_think() {
   self thread watch_weapon_systems();
 }
-
 disable_driver_weapons() {
   self notify("hind weapons disabled");
   self disable_driver_turret();
   self DisableGunnerFiring(0, true);
   player = get_players()[0];
-  player stopLoopSound();
+  player stoploopsound();
 }
-
 enable_driver_weapons() {
   self enable_driver_turret();
   self thread watch_for_rocket_firing();
 }
-
 watch_weapon_systems() {
   self thread watch_for_rockets();
   self thread watch_for_minigun();
 }
-
 watch_for_rockets() {
   self endon("death");
   while(true) {
@@ -194,7 +181,6 @@ watch_for_rockets() {
     self switchto_rockets();
   }
 }
-
 watch_for_minigun() {
   self endon("death");
   while(true) {
@@ -202,19 +188,16 @@ watch_for_minigun() {
     self switchto_minigun();
   }
 }
-
 switchto_rockets() {
   self SetVehWeapon("hind_rockets");
   players = get_players();
-  players[0] setClientDvar("vehHelicopterHeadSwayDontSwayTheTurret", 0);
+  players[0] SetClientDvar("vehHelicopterHeadSwayDontSwayTheTurret", 0);
 }
-
 switchto_minigun() {
   self SetVehWeapon("hind_minigun_pilot");
   players = get_players();
-  players[0] setClientDvar("vehHelicopterHeadSwayDontSwayTheTurret", 0);
+  players[0] SetClientDvar("vehHelicopterHeadSwayDontSwayTheTurret", 0);
 }
-
 create_tutorial_hud(no_wait) {
   if(!isDefined(no_wait)) {
     self waittill("enter_vehicle");
@@ -269,7 +252,6 @@ create_tutorial_hud(no_wait) {
     level.rocket_hud SetText("[{+speed_throw}] rocket pods - [{+usereload}] reload");
   }
 }
-
 update_tutorial_hud() {
   if(self.tut_hud["fly_controls"]) {
     level.fly_up_hud SetText("Press [{+smoke}] to fly up");
@@ -292,7 +274,6 @@ update_tutorial_hud() {
     level.rocket_hud SetText("");
   }
 }
-
 destroy_tutorial_hud() {
   self waittill("exit_vehicle");
   self thread create_tutorial_hud();
@@ -301,7 +282,6 @@ destroy_tutorial_hud() {
   level.fire_hud Destroy();
   level.rocket_hud Destroy();
 }
-
 watch_for_rocket_firing() {
   self endon("death");
   self endon("hind weapons disabled");
@@ -323,7 +303,6 @@ watch_for_rocket_firing() {
     self notify("fire_rockets");
   }
 }
-
 fire_rockets() {
   self endon("death");
   self endon("hind weapons disabled");
@@ -341,7 +320,6 @@ fire_rockets() {
     wait(.05);
   }
 }
-
 arm_rockets() {
   self ent_flag_wait("arming_rockets");
   armed_rockets = [];
@@ -378,7 +356,6 @@ arm_rockets() {
   self waittill("fire_rockets");
   return armed_rockets;
 }
-
 reload_chopper_sounds() {
   if(!isDefined(level.reload_string)) {
     level.reload_string = "left";
@@ -391,7 +368,6 @@ reload_chopper_sounds() {
     level.reload_string = "left";
   }
 }
-
 advance_pod_index() {
   if(self._rocket_pods.pod_index == self._rocket_pods.pods.size - 1) {
     self._rocket_pods.pod_index = 0;
@@ -399,21 +375,18 @@ advance_pod_index() {
     self._rocket_pods.pod_index++;
   }
 }
-
 arm_single_rocket(rocket, time) {
   self endon("fire_rockets");
   wait(time);
   rocket.is_armed = true;
   return rocket;
 }
-
 setup_rockets() {
   self.armed_rockets = 0;
   self add_rocket_pod(self, "tag_flash_gunner1", 4);
   self add_rocket_pod(create_right_rocket_pod(), undefined, 4);
   self track_available_rockets();
 }
-
 add_rocket_pod(entity, tag, num_rockets) {
   if(!isDefined(self._rocket_pods)) {
     self._rocket_pods = spawnStruct();
@@ -441,13 +414,11 @@ add_rocket_pod(entity, tag, num_rockets) {
   }
   self._rocket_pods.pods[pod_index].rockets = rockets;
 }
-
 track_available_rockets() {
   AssertEx(isDefined(self._rocket_pods.free_rockets), "Hind rockets don't have a defined ammo amount");
   self thread rocket_reload();
   self thread rocket_reload_button();
 }
-
 rocket_regen() {
   self endon("death");
   self endon("hind weapons disabled");
@@ -462,7 +433,6 @@ rocket_regen() {
     }
   }
 }
-
 rocket_reload() {
   self endon("death");
   self endon("hind weapons disabled");
@@ -485,7 +455,6 @@ rocket_reload() {
     }
   }
 }
-
 rocket_reload_button() {
   self endon("death");
   self endon("hind weapons disabled");
@@ -511,7 +480,6 @@ rocket_reload_button() {
     }
   }
 }
-
 cleanup_rocket_pods() {
   self waittill("death");
   for(pod_index = 0; pod_index < self._rocket_pods.pods.size; pod_index++) {
@@ -521,7 +489,6 @@ cleanup_rocket_pods() {
   }
   self._rocket_pods Delete();
 }
-
 create_right_rocket_pod() {
   rocket_pod_origin = self GetTagOrigin("tag_flash_gunner1");
   rocket_pod_offset = self.origin - rocket_pod_origin;
@@ -530,7 +497,6 @@ create_right_rocket_pod() {
   rocket_pod LinkTo(self);
   return rocket_pod;
 }
-
 get_rocket_pod_fire_pos(pod_index) {
   pod = self._rocket_pods.pods[pod_index];
   pos = pod.ent.origin;
@@ -539,7 +505,6 @@ get_rocket_pod_fire_pos(pod_index) {
   }
   return pos;
 }
-
 fire_rocket(rocket) {
   trace_origin = self GetTagOrigin("tag_flash");
   trace_angles = self GetTagAngles("tag_flash");
@@ -549,19 +514,18 @@ fire_rocket(rocket) {
   trace_direction = self GetTagAngles("tag_barrel");
   trace_direction = anglesToForward(trace_direction) * 5000;
   trace = bulletTrace(trace_origin, trace_origin + trace_direction, false, self);
-  trace_dist_sq = distanceSquared(trace_origin, trace["position"]);
+  trace_dist_sq = DistanceSquared(trace_origin, trace["position"]);
   if(trace_dist_sq < 5000 * 5000 && trace_dist_sq > 500 * 500) {
     end_origin = trace["position"];
   } else {
     end_origin = start_origin + (forward * 1000);
   }
-  get_players()[0] playRumbleOnEntity("damage_light");
+  get_players()[0] PlayRumbleOnEntity("damage_light");
   MagicBullet("hind_rockets", start_origin, end_origin, self);
   rocket.is_armed = false;
   self notify("fired_rocket");
   wait(self._rocket_pods.fire_wait);
 }
-
 update_rocket_hud(rocket_count, ammo_left, reloading) {
   if(isDefined(self.rocket_reloading) && self.rocket_reloading && !isDefined(reloading)) {
     return;
@@ -597,7 +561,6 @@ update_rocket_hud(rocket_count, ammo_left, reloading) {
     level._rocket_hud_ammo SetText("Rocket Ammo: " + ammo_left);
   }
 }
-
 hud_rocket_create() {
   if(!isDefined(self.rocket_hud)) {
     self.rocket_hud = [];
@@ -731,7 +694,6 @@ hud_rocket_create() {
   self thread hud_rocket_think();
   self thread hud_rocket_destroy();
 }
-
 hud_rocket_destroy() {
   self waittill("hind weapons disabled");
   self.rocket_hud["border_left"] Destroy();
@@ -746,7 +708,6 @@ hud_rocket_destroy() {
   self.rocket_hud["ammo6"] Destroy();
   self.rocket_hud["ammo8"] Destroy();
 }
-
 hud_rocket_think() {
   self waittill("activate_hud");
   self endon("hind weapons disabled");
@@ -769,7 +730,6 @@ hud_rocket_think() {
     wait(0.05);
   }
 }
-
 hud_minigun_create() {
   if(!isDefined(self.minigun_hud)) {
     self.minigun_hud = [];
@@ -803,13 +763,11 @@ hud_minigun_create() {
   self thread hud_minigun_think();
   self thread hud_minigun_destroy();
 }
-
 hud_minigun_destroy() {
   self waittill("hind weapons disabled");
   self.minigun_hud["gun"] Destroy();
   self.minigun_hud["button"] Destroy();
 }
-
 minigun_sound() {
   self waittill("activate_hud");
   self endon("hind weapons disabled");
@@ -822,11 +780,10 @@ minigun_sound() {
       wait(0.05);
       player playLoopSound("wpn_hind_pilot_fire_loop_plr");
     }
-    player stopLoopSound();
+    player stoploopsound();
     player playSound("wpn_hind_pilot_stop_plr");
   }
 }
-
 hud_minigun_think() {
   self waittill("activate_hud");
   self endon("hind weapons disabled");
@@ -851,11 +808,10 @@ hud_minigun_think() {
     self.minigun_hud["gun"] SetShader("hud_hind_cannon01", 64, 64);
     self.minigun_hud["gun"] fadeOverTime(0.05);
     self.minigun_hud["gun"].alpha = 0.55;
-    player stopLoopSound();
+    player stoploopsound();
     player playSound("wpn_hind_pilot_stop_plr");
   }
 }
-
 make_player_usable() {
   self endon("disable player entry");
   init_player_anims();
@@ -865,7 +821,7 @@ make_player_usable() {
   }
   while(1) {
     self.enter_trig waittill("trigger", who);
-    if(IsPlayer(who)) {
+    if(isPlayer(who)) {
       if(who GetStance() != "stand") {
         while(who.divetoprone) {
           wait(0.2);
@@ -886,11 +842,9 @@ make_player_usable() {
     }
   }
 }
-
 make_player_unusable() {
   self notify("disable player entry");
 }
-
 swap_for_interior(guy, no_attach) {
   level.animating_helicopter setModel("t5_veh_helo_hind_cockpitview");
   if(!isDefined(no_attach) || !no_attach) {
@@ -905,19 +859,17 @@ swap_for_interior(guy, no_attach) {
   level.animating_helicopter notify("switch_climbin_anim");
   level.animating_helicopter = undefined;
 }
-
 swap_for_exterior(guy) {
   level.animating_helicopter setModel("t5_veh_helo_hind_blockout");
   level.animating_helicopter notify("switch_climbout_anim");
   level.animating_helicopter = undefined;
 }
-
 #using_animtree("player");
 player_enter_animation(player) {
   player AllowPickupWeapons(false);
   player_body = spawn_anim_model("hind_body", player.origin, player.angles);
   self.player_body = player_body;
-  player_body hide();
+  player_body Hide();
   player_body LinkTo(self, "origin_animate_jnt");
   self notify("playing takeoff animation");
   self thread maps\_anim::anim_single_aligned(player_body, "playable_hind_climbin", "origin_animate_jnt");
@@ -934,14 +886,13 @@ player_enter_animation(player) {
   player notify("playable_hind_climbin");
   player AllowPickupWeapons(true);
 }
-
 player_exit_animation(player) {
   self notify("animated_switch");
   level.animating_helicopter = self;
   if(!isDefined(self.player_body)) {
     player_body = spawn_anim_model("hind_body", player.origin, player.angles);
     self.player_body = player_body;
-    player_body hide();
+    player_body Hide();
     player_body LinkTo(self, "origin_animate_jnt");
   } else {
     player_body = self.player_body;
@@ -965,7 +916,6 @@ player_exit_animation(player) {
   player_trace = bulletTrace(trace_start, trace_end, false, self);
   player SetOrigin(player_trace["position"]);
 }
-
 init_player_anims() {
   AssertEX(isDefined(level.player_interactive_model), "The playable hind requires that you set a player_interactive_model in _loadout.gsc");
   level.scr_animtree["hind_body"] = #animtree;
@@ -975,7 +925,6 @@ init_player_anims() {
   level.scr_anim["hind_body"]["playable_hind_climbout"] = % int_pow_b03_cockpit_exit;
   maps\_anim::addNotetrack_customFunction("hind_body", "swap", ::swap_for_exterior, "playable_hind_climbout");
 }
-
 #using_animtree("vehicles");
 init_vehicle_anims() {
   level.scr_anim["hind"]["climbout_exterior"] = % v_pow_b03_hind_exit_exterior;
@@ -984,31 +933,26 @@ init_vehicle_anims() {
   level.scr_anim["hind"]["climbin_interior"] = % v_pow_b03_hind_climbin_interior;
   level.scr_anim["hind"]["landed"] = % v_pow_b03_hind_landed;
 }
-
 exterior_window_anim() {
   self ClearAnim(level.scr_anim["hind"]["landed"], 0);
   self SetAnim(level.scr_anim["hind"]["climbin_exterior"], 1);
   self waittill("switch_climbin_anim");
   self interior_window_anim();
 }
-
 interior_window_anim() {
   self ClearAnim(level.scr_anim["hind"]["climbin_exterior"], .15);
   self SetAnim(level.scr_anim["hind"]["climbin_interior"], 1);
   self waittill("player_entered");
 }
-
 interior_window_anim_exit() {
   self ClearAnim(level.scr_anim["hind"]["landed"], 0);
   self AnimScripted("hind_exit_anim", self.origin, self.angles, level.scr_anim["hind"]["climbout_interior"]);
   self waittill("playable_hind_climbout");
   self exterior_window_anim_exit();
 }
-
 exterior_window_anim_exit() {
   self AnimScripted("hind_exit_anim", self.origin, self.angles, level.scr_anim["hind"]["climbout_exterior"]);
 }
-
 landed_animation() {
   self SetAnim(level.scr_anim["hind"]["landed"], 1);
 }

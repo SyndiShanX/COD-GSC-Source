@@ -15,12 +15,10 @@ main() {
   level thread init_slow_trigger();
   level thread init_code_structs();
 }
-
 init_code_triggers() {
   triggers = getEntArray("code_trigger", "targetname");
   array_thread(triggers, ::trigger_code);
 }
-
 trigger_code() {
   code = self.script_noteworthy;
   if(!isDefined(code)) {
@@ -38,7 +36,6 @@ trigger_code() {
     who thread watch_for_code_touching_trigger(code, self);
   }
 }
-
 watch_for_code_touching_trigger(code, trigger) {
   trigger.players = array_add(trigger.players, self);
   self thread watch_for_code(code);
@@ -51,7 +48,6 @@ watch_for_code_touching_trigger(code, trigger) {
     trigger.players = array_remove(trigger.players, self);
   }
 }
-
 code_trigger_activated(who) {
   switch (self.script_string) {
     case "cash":
@@ -60,7 +56,6 @@ code_trigger_activated(who) {
     default:
   }
 }
-
 touching_trigger(trigger) {
   self endon("code_trigger_end");
   while(self isTouching(trigger)) {
@@ -68,7 +63,6 @@ touching_trigger(trigger) {
   }
   self notify("stopped_touching_trigger");
 }
-
 watch_for_code(code) {
   self endon("code_trigger_end");
   codes = strTok(code, " ");
@@ -89,7 +83,6 @@ watch_for_code(code) {
     wait .1;
   }
 }
-
 button_not_pressed(button, time) {
   endTime = gettime() + time * 1000;
   while(getTime() < endTime) {
@@ -100,7 +93,6 @@ button_not_pressed(button, time) {
   }
   return false;
 }
-
 button_pressed(button, time) {
   endTime = gettime() + time * 1000;
   while(getTime() < endTime) {
@@ -111,7 +103,6 @@ button_pressed(button, time) {
   }
   return false;
 }
-
 init_slow_trigger() {
   flag_wait("all_players_connected");
   players = get_players();
@@ -129,7 +120,6 @@ init_slow_trigger() {
     trig thread trigger_slow_touched_wait();
   }
 }
-
 trigger_slow_touched_wait() {
   while(1) {
     self waittill("trigger", player);
@@ -138,7 +128,6 @@ trigger_slow_touched_wait() {
     wait 0.1;
   }
 }
-
 trigger_slow_ent(player, endon_condition) {
   player endon(endon_condition);
   if(isDefined(player)) {
@@ -157,7 +146,6 @@ trigger_slow_ent(player, endon_condition) {
     player setvelocity((0, 0, 0));
   }
 }
-
 trigger_unslow_ent(player) {
   player endon("enter_slowTrigger");
   if(isDefined(player)) {
@@ -175,7 +163,6 @@ trigger_unslow_ent(player) {
     player SetMoveSpeedScale(1.0);
   }
 }
-
 init_corpse_triggers() {}
 trigger_corpse() {
   if(!isDefined(self.script_string)) {
@@ -195,11 +182,9 @@ trigger_corpse() {
     wait .3;
   }
 }
-
 trigger_corpse_activated() {
   iprintlnbold("Corpse Trigger Activated");
 }
-
 init_water_drop_triggers() {
   triggers = getEntArray("water_drop_trigger", "script_noteworthy");
   for(i = 0; i < triggers.size; i++) {
@@ -218,7 +203,6 @@ init_water_drop_triggers() {
     trig thread water_drop_trigger_think();
   }
 }
-
 water_drop_trigger_think() {
   flag_wait("all_players_connected");
   wait(1.0);
@@ -237,7 +221,6 @@ water_drop_trigger_think() {
     }
   }
 }
-
 water_drop_trig_entered(player, endon_string) {
   player endon(endon_string);
   player notify("water_drop_trig_enter");
@@ -268,7 +251,6 @@ water_drop_trig_entered(player, endon_string) {
     }
   }
 }
-
 water_drop_trig_exit(player) {
   if(!isDefined(player.water_drop_ents)) {
     player.water_drop_ents = [];
@@ -287,7 +269,6 @@ water_drop_trig_exit(player) {
     }
   }
 }
-
 water_drop_remove(delay) {
   self endon("death");
   self endon("disconnect");
@@ -295,7 +276,6 @@ water_drop_remove(delay) {
   wait delay;
   self setwaterdrops(0);
 }
-
 player_get_num_water_drops() {
   if(self.water_drop_ents.size > 0) {
     return 50;
@@ -303,12 +283,10 @@ player_get_num_water_drops() {
     return 0;
   }
 }
-
 init_code_structs() {
   structs = getStructArray("code_struct", "targetname");
   array_thread(structs, ::structs_code);
 }
-
 structs_code() {
   code = self.script_noteworthy;
   if(!isDefined(code)) {
@@ -348,7 +326,6 @@ structs_code() {
     wait .5;
   }
 }
-
 code_entry(player) {
   self endon("end_code_struct");
   player endon("death");
@@ -370,7 +347,6 @@ code_entry(player) {
     wait .1;
   }
 }
-
 code_reward(player) {
   switch (self.reward) {
     case "cash":
@@ -382,7 +358,6 @@ code_reward(player) {
     default:
   }
 }
-
 is_player_in_radius(player) {
   if(!is_player_valid(player)) {
     return false;
@@ -395,7 +370,6 @@ is_player_in_radius(player) {
   }
   return true;
 }
-
 intermission_rumble_clean_up() {
   self endon("irt");
   level waittill("intermission");

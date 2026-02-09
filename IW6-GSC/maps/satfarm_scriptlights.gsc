@@ -13,7 +13,7 @@ init_lights() {
 }
 
 intro_cargo_light_test() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   common_scripts\utility::waitframe();

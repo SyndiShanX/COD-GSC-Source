@@ -15,11 +15,11 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_trailerpark");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  //	setdvar( "r_specularcolorscale", "1.7" );
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  //	setDvar( "r_specularcolorscale", "1.7" );
+  setDvar("r_lightGridIntensity", 1.33);
 
-  setdvar("compassmaxrange", "1700");
+  setDvar("compassmaxrange", "1700");
 
   AmbientPlay("ambient_mp_trailerpark");
 

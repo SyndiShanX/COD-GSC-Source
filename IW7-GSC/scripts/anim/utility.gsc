@@ -558,7 +558,7 @@ func_3928() {
     return 1;
   }
 
-  return isplayer(self.enemy);
+  return isPlayer(self.enemy);
 }
 
 func_13110() {

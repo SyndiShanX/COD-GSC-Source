@@ -10,7 +10,6 @@ main() {
   self.voice = "german";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_zom_moon_pressure_suit_body_zombie");
   precacheModel("c_zom_moon_pressure_suit_helm");

@@ -120,7 +120,7 @@ squadmate_agent_think() {
 on_agent_squadmate_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   maps\mp\agents\_agents::on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
 
-  if(isplayer(var_1) && isDefined(self.owner) && var_1 != self.owner) {
+  if(isPlayer(var_1) && isDefined(self.owner) && var_1 != self.owner) {
     self.owner maps\mp\_utility::leaderdialogonplayer("squad_killed");
     maps\mp\gametypes\_damage::onkillstreakkilled(var_1, var_4, var_3, var_2, "destroyed_squad_mate");
   }

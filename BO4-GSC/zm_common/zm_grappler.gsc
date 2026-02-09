@@ -75,7 +75,7 @@ start_grapple(prone_2_run_roll, e_grapplee, n_type, n_speed = 1800) {
     var_7fdf7771 = var_5f04bf66 - e_grapplee.origin;
     e_beamend.origin = e_grapplee.origin;
 
-    if(isplayer(e_grapplee)) {
+    if(isPlayer(e_grapplee)) {
       e_grapplee playerlinkto(e_beamend, "tag_origin");
     } else {
       e_grapplee linkto(e_beamend);
@@ -154,7 +154,7 @@ function_a60cb756(var_b4666218, var_e9f8c8f3) {
 
     self.var_564dec14 = var_b4666218;
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self freezecontrols(var_b4666218);
       self setplayercollision(!var_b4666218);
 

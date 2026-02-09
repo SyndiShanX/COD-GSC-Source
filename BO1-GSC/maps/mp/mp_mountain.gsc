@@ -27,7 +27,7 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_MAPNAME_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_MAPNAME_E";
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
-  SetDvar("scr_spawn_enemy_influencer_radius", 1620);
+  setDvar("scr_spawn_enemy_influencer_radius", 1620);
   level thread gondola_sway();
   level thread glass_exploder_init();
   glasses = GetStructArray("glass_shatter_on_spawn", "targetname");
@@ -35,7 +35,6 @@ main() {
     RadiusDamage(glasses[i].origin, 64, 101, 100);
   }
 }
-
 devgui_mountain(cmd) {
   for(;;) {
     wait(0.5);
@@ -47,13 +46,12 @@ devgui_mountain(cmd) {
         level notify(devgui_string);
         break;
     }
-    SetDvar("devgui_notify", "");
+    setDvar("devgui_notify", "");
   }
 }
-
 gondola_sway() {
   level endon("gondola_triggered");
-  gondola_cab = getEnt("gondola_cab", "targetname");
+  gondola_cab = GetEnt("gondola_cab", "targetname");
   while(1) {
     randomSwingAngle = RandomFloatRange(2, 5);
     randomSwingTime = RandomFloatRange(2, 3);
@@ -65,15 +63,16 @@ gondola_sway() {
     wait(randomSwingTime);
   }
 }
-
 glass_exploder_init() {
   single_exploders = [];
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
-    if(ent.v["type"] != "exploder")
+    }
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
     if(ent.v["exploder"] == 201 || ent.v["exploder"] == 202) {
       ent thread glass_group_exploder_think();
     } else if(ent.v["exploder"] >= 101 && ent.v["exploder"] <= 106) {
@@ -84,13 +83,12 @@ glass_exploder_init() {
   }
   level thread glass_exploder_think(single_exploders);
 }
-
 glass_group_exploder_think() {
   thresholdSq = 160 * 160;
   count = 0;
   for(;;) {
     level waittill("glass_smash", origin);
-    if(distanceSquared(self.v["origin"], origin) < thresholdSq) {
+    if(DistanceSquared(self.v["origin"], origin) < thresholdSq) {
       count++;
     }
     if(count >= 3) {
@@ -99,7 +97,6 @@ glass_group_exploder_think() {
     }
   }
 }
-
 glass_exploder_think(exploders) {
   thresholdSq = 160 * 160;
   if(exploders.size <= 0) {
@@ -116,7 +113,7 @@ glass_exploder_think(exploders) {
       if(isDefined(exploders[i].glass_broken)) {
         continue;
       }
-      distSq = distanceSquared(exploders[i].v["origin"], origin);
+      distSq = DistanceSquared(exploders[i].v["origin"], origin);
       if(distSq > thresholdSq) {
         continue;
       }

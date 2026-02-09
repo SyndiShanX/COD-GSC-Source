@@ -221,8 +221,7 @@ getcratetypefordroptype(var_0) {
     case "dronedrop":
     default:
       if(isDefined(level.getrandomcratetypeforgamemode)) {
-        return [
-          }
+        return [}
           [level.getrandomcratetypeforgamemode]](var_0);
 
       return getrandomcratetype(var_0);
@@ -985,7 +984,7 @@ killplayerfromcrate_fastvelocitypush() {
   for(;;) {
     self waittill("player_pushed", var_0, var_1);
 
-    if(isplayer(var_0) || isagent(var_0)) {
+    if(isPlayer(var_0) || isagent(var_0)) {
       if(var_1[2] < -20) {
         killplayerfromcrate_dodamage(var_0);
       }
@@ -1009,7 +1008,7 @@ cleanup_crate_capture() {
     return;
   }
   foreach(var_2 in var_0) {
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     if(isDefined(var_2.iscapturingcrate) && var_2.iscapturingcrate) {
@@ -2199,7 +2198,7 @@ killstreakcratethink(var_0) {
   for(;;) {
     self waittill("captured", var_4);
 
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       var_4 setclientomnvar("ui_securing", 0);
       var_4.ui_securing = undefined;
     }
@@ -2299,7 +2298,7 @@ killstreakbombcratethink(var_0) {
 
   self waittill("captured", var_4);
 
-  if(isplayer(var_4)) {
+  if(isPlayer(var_4)) {
     var_4 setclientomnvar("ui_securing", 0);
     var_4.ui_securing = undefined;
   }

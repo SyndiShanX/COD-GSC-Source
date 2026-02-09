@@ -53,7 +53,7 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   var_15 = scripts\engine\utility::istrue(var_1.inlaststand);
   var_10 = scripts\engine\utility::istrue(var_12.is_suicide_bomber);
   var_3 = var_3 | 4;
-  var_11 = isDefined(var_1) && isplayer(var_1);
+  var_11 = isDefined(var_1) && isPlayer(var_1);
   var_12 = scripts\engine\utility::isbulletdamage(var_4) || var_4 == "MOD_EXPLOSIVE_BULLET" && var_8 != "none";
   var_13 = var_12 && scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
   var_14 = scripts\engine\utility::istrue(self.battleslid);
@@ -450,7 +450,7 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   }
 
   var_2 = int(min(var_2, self.health));
-  if(isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1)) {
+  if(isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1)) {
     playFX(level._effect["melee_impact"], self gettagorigin("j_neck"), vectortoangles(self.origin - var_1.origin), anglestoup(self.angles), var_1);
   }
 
@@ -564,9 +564,9 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     self.scrnfx = undefined;
   }
 
-  if(issubstr(var_4, "iw7_knife") && isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
+  if(issubstr(var_4, "iw7_knife") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
-  } else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
+  } else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
   } else if(issubstr(var_4, "golf") || issubstr(var_4, "machete") || issubstr(var_4, "spiked_bat") || issubstr(var_4, "two_headed_axe")) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
@@ -577,7 +577,7 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     self.linked_to_boat = undefined;
   }
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     if(isDefined(var_1.name)) {
       if(var_1.name == var_1.owner.itemtype) {
         if(isDefined(var_1.owner.killswithitem[var_1.owner.itemtype])) {
@@ -602,7 +602,7 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(scripts\engine\utility::istrue(self.marked_shared_fate_fnf)) {
       self.marked_shared_fate_fnf = 0;
       var_1.marked_ents = scripts\engine\utility::array_remove(var_1.marked_ents, self);
@@ -658,7 +658,7 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
   if(isDefined(var_1.team)) {
     if(var_1.team == "allies") {
-      if(!isplayer(var_1)) {
+      if(!isPlayer(var_1)) {
         for(var_9 = 0; var_9 < level.revocatorownercount; var_9++) {
           if(!isDefined(level.revocatorkills[level.revocatorkills[var_9].name])) {
             level.revocatorkills[level.revocatorkills[var_9].name] = 1;
@@ -684,7 +684,7 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   var_15 = 0;
   var_10 = 0;
   var_11 = scripts\engine\utility::istrue(self.is_suicide_bomber);
-  if(isDefined(level.updaterecentkills_func) && isplayer(var_1)) {
+  if(isDefined(level.updaterecentkills_func) && isPlayer(var_1)) {
     var_1 thread[[level.updaterecentkills_func]](self, var_4);
   }
 
@@ -698,7 +698,7 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 thread scripts\cp\utility::add_to_notify_queue("zombie_killed", self, self.origin, var_4, var_3);
   }
 
@@ -751,7 +751,7 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     level thread[[level.quest_death_update_func]](self);
   }
 
-  if(isplayer(var_1) && isDefined(level.updateonkillpassivesfunc)) {
+  if(isPlayer(var_1) && isDefined(level.updateonkillpassivesfunc)) {
     level thread[[level.updateonkillpassivesfunc]](var_4, var_1, self, var_3, var_6);
   }
 
@@ -894,17 +894,13 @@ disco_process_kill_rewards(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       if(!var_9 && !var_15) {
-        if(scripts\engine\utility::flag_exist("can_drop_coins") && scripts\engine\utility::flag("can_drop_coins") && isDefined(level.crafting_item_drop_func) && scripts\engine\utility::istrue([
-            [level.crafting_item_drop_func]
-          ](var_6, self.origin, var_1))) {
+        if(scripts\engine\utility::flag_exist("can_drop_coins") && scripts\engine\utility::flag("can_drop_coins") && isDefined(level.crafting_item_drop_func) && scripts\engine\utility::istrue([[level.crafting_item_drop_func]](var_6, self.origin, var_1))) {
           level.last_drop_time = gettime();
           return;
         }
 
         if(isDefined(level.loot_func) && scripts\engine\utility::flag_exist("zombie_drop_powerups") && scripts\engine\utility::flag("zombie_drop_powerups")) {
-          [
-            [level.loot_func]
-          ](var_6, self.origin, var_1);
+          [[level.loot_func]](var_6, self.origin, var_1);
           return;
         }
 
@@ -1012,7 +1008,7 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
     } else if(var_15) {
       if(var_11) {
         if(scripts\cp\utility::is_ricochet_damage()) {
-          if(isplayer(var_1) && isDefined(var_8) && var_8 != "shield") {
+          if(isPlayer(var_1) && isDefined(var_8) && var_8 != "shield") {
             if(isDefined(var_0)) {
               var_1 dodamage(var_2, var_1.origin - (0, 0, 50), var_1, var_0, var_4);
             } else {
@@ -1118,7 +1114,7 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
       var_21 = 0;
     } else if(var_1 scripts\cp\utility::agentisfnfimmune()) {
       var_21 = 0;
-    } else if(isplayer(var_12) && isplayer(var_1)) {
+    } else if(isPlayer(var_12) && isPlayer(var_1)) {
       var_21 = 0;
     } else {
       var_21 = 1;

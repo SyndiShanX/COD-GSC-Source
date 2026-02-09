@@ -24,15 +24,17 @@
 setup_basic_scene() {
   ambient_scene_list = [];
 
-  for(i = 1; i <= 5; i++)
+  for(i = 1; i <= 5; i++) {
     ambient_scene_list[ambient_scene_list.size] = "ambient_0" + i;
+  }
 
   if(!isDefined(level.m_bridge_workers)) {
     level.m_bridge_workers = [];
     num_worker_scenes = 3;
 
-    if(randomfloat(2.0) <= 1.0)
+    if(randomfloat(2.0) <= 1.0) {
       num_worker_scenes = 4;
+    }
 
     for(i = 0; i < num_worker_scenes; i++) {
       ambient_scene = random(ambient_scene_list);
@@ -47,8 +49,9 @@ setup_basic_scene() {
   setup_war_map(level_num + 1);
   level_list = get_strikeforce_available_level_list(level_num + 1);
 
-  if(get_campaign_state() != 0 && (level_list.size != 0 || frontend_just_finished_rts()))
+  if(get_campaign_state() != 0 && (level_list.size != 0 || frontend_just_finished_rts())) {
     level thread run_scene("sf_briggs_idle");
+  }
 
   use_vtol = frontend_should_use_vtol(level_num + 1);
 
@@ -67,8 +70,9 @@ setup_basic_scene() {
     }
   } else if(get_campaign_state() == 0 || level_num == 0)
     warp_to_player_start();
-  else
+  else {
     warp_to_random_player_start();
+  }
 
   if(is_true(level.player.is_glove_shown)) {
     player_body = getent("player_body", "targetname");
@@ -84,8 +88,9 @@ setup_basic_scene() {
     level thread run_scene("data_glove_idle");
     wait 0.1;
 
-    if(isDefined(player_body))
+    if(isDefined(player_body)) {
       player_body maps\_anim::anim_set_blend_in_time(old_blend_time);
+    }
   }
 
   wait_network_frame();
@@ -93,8 +98,9 @@ setup_basic_scene() {
   show_holotable_fuzz(0);
 
   if(get_campaign_state() != 0) {
-    if(frontend_just_finished_rts())
+    if(frontend_just_finished_rts()) {
       level thread frontend_rts_level_respond();
+    }
   }
 }
 
@@ -105,12 +111,13 @@ frontend_rts_level_respond() {
   last_level = get_level_number_completed();
   cur_level = last_level + 1;
   map_list = get_strikeforce_available_level_list(cur_level);
-  last_map = getdvar(#"_id_D614D075");
+  last_map = getDvar(#"_id_D614D075");
   success = rts_map_completed(last_map);
   color_id = 2;
 
-  if(success)
+  if(success) {
     color_id = 3;
+  }
 
   warmap_offset = level.m_rts_warmap_offset[last_map];
   map_id = level.m_rts_map_id[last_map];
@@ -121,20 +128,23 @@ frontend_rts_level_respond() {
     level thread war_map_blink_country(map_id, color_id, "stop_war_blink");
   }
 
-  if(isDefined(warmap_offset))
+  if(isDefined(warmap_offset)) {
     world_map_zoom_to(warmap_offset[0], warmap_offset[1], warmap_offset[2]);
+  }
 
   positive_lines = array("brig_nice_work_mason_0", "brig_i_knew_i_could_rely_0", "brig_hell_of_a_job_there_0", "brig_that_s_what_i_like_t_0", "brig_that_s_how_we_get_sh_0", "brig_that_was_one_for_the_0");
   negative_lines = array("brig_what_the_fuck_was_th_0", "brig_i_ve_never_seen_such_0", "brig_that_was_a_full_scal_0", "brig_what_the_hell_went_w_0", "brig_we_ll_talk_about_thi_0", "brig_i_m_disappointed_and_0");
   response_line = undefined;
 
-  if(success)
+  if(success) {
     response_line = random(positive_lines);
-  else
+  } else {
     response_line = random(negative_lines);
+  }
 
-  if(isDefined(response_line))
+  if(isDefined(response_line)) {
     level.player thread say_dialog(response_line, 2.0);
+  }
 
   wait 2.0;
   run_scene("player_look_at_war_map");
@@ -143,8 +153,9 @@ frontend_rts_level_respond() {
   if(isDefined(map_id)) {
     set_world_map_marker(map_id, 0);
 
-    if(!success)
+    if(!success) {
       set_world_map_widget(map_id, 1);
+    }
   }
 
   world_map_zoom_to(0.0, 0.0, 1.0);
@@ -154,13 +165,15 @@ frontend_rts_level_respond() {
 hide_holo_table_props() {
   props = getEntArray("holo_table_prop", "script_noteworthy");
 
-  foreach(prop in props)
-  prop hide();
+  foreach(prop in props) {
+    prop hide();
+  }
 }
 
 frontend_do_save(force) {
-  if(!isDefined(force))
+  if(!isDefined(force)) {
     force = 0;
+  }
 
   if(force || getdvarint(#"_id_26C61C3F") != 0) {
     do_frontend_save = getdvarint(#"_id_E42F28A4");
@@ -177,10 +190,11 @@ frontend_do_save(force) {
 }
 
 frontend_just_finished_rts() {
-  str_prev_level = getdvar(#"_id_D614D075");
+  str_prev_level = getDvar(#"_id_D614D075");
 
-  if(!isDefined(str_prev_level))
+  if(!isDefined(str_prev_level)) {
     return 0;
+  }
 
   return issubstr(str_prev_level, "so_rts");
 }
@@ -198,8 +212,9 @@ warp_to_random_player_start() {
 }
 
 warp_to_player_start(warp_targetname) {
-  if(!isDefined(warp_targetname))
+  if(!isDefined(warp_targetname)) {
     warp_targetname = "default_player_start";
+  }
 
   s_warp = getstruct(warp_targetname);
   skipto_teleport_players(warp_targetname);
@@ -230,10 +245,11 @@ init_viewarm() {
 data_glove_input_button() {
   pressed = 0;
 
-  if(!level.console && !level.player gamepadusedlast())
+  if(!level.console && !level.player gamepadusedlast()) {
     pressed = level.player buttonpressed("MOUSE1") || level.player buttonpressed("ESCAPE") || level.player buttonpressed("ENTER");
-  else
+  } else {
     pressed = level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_B") || level.player buttonpressed("BUTTON_X") || level.player buttonpressed("BUTTON_Y");
+  }
 
   return pressed;
 }
@@ -245,8 +261,9 @@ data_glove_input() {
     if(data_glove_input_button()) {
       run_scene("data_glove_input");
 
-      while(data_glove_input_button())
+      while(data_glove_input_button()) {
         wait_network_frame();
+      }
     }
 
     wait_network_frame();
@@ -256,8 +273,9 @@ data_glove_input() {
 strikeforce_get_num_levels_till_gone(campaign_level_num, rts_level_name) {
   end_level = int(tablelookup("sp/levelLookup.csv", 1, rts_level_name, 14));
 
-  if(campaign_level_num >= end_level)
+  if(campaign_level_num >= end_level) {
     return -1;
+  }
 
   cur_level_type = "";
   chances_remaining = 0;
@@ -285,9 +303,9 @@ frontend_should_use_vtol(cur_level) {
 
   println("vtollevel: cur_level: " + cur_level);
 
-  if(cur_level > last_level_num)
+  if(cur_level > last_level_num) {
     return false;
-  else {
+  } else {
     blackout_level_num = int(tablelookup("sp/levelLookup.csv", 1, "blackout", 0));
     return cur_level > blackout_level_num;
   }
@@ -301,10 +319,11 @@ get_campaign_state() {
 stop_credits_button() {
   pressed = 0;
 
-  if(!level.console && !level.player gamepadusedlast())
+  if(!level.console && !level.player gamepadusedlast()) {
     pressed = level.player buttonpressed("MOUSE1");
-  else
+  } else {
     pressed = level.player buttonpressed(getenterbutton());
+  }
 
   return pressed;
 }
@@ -350,16 +369,18 @@ scene_glasses_on() {
 }
 
 turn_on_glasses(glasses_on) {
-  if(!isDefined(glasses_on))
+  if(!isDefined(glasses_on)) {
     glasses_on = 1;
+  }
 
   level endon("disconnect");
   flag_wait("frontend_scene_ready");
   level.e_player_align.origin = level.player.origin;
   level.e_player_align.angles = (level.player.angles[0], level.player.angles[1], 0);
 
-  if(!flag("lockout_screen_skipped") && !flag("lockout_screen_skipped_freeroam"))
+  if(!flag("lockout_screen_skipped") && !flag("lockout_screen_skipped_freeroam")) {
     level thread scene_glasses_on();
+  }
 
   level thread control_vision_set_glasses();
   flag_wait_any("lockout_screen_passed", "lockout_screen_skipped", "lockout_screen_skipped_freeroam");
@@ -372,10 +393,11 @@ turn_on_glasses(glasses_on) {
     maps\_glasses::play_bootup();
   }
 
-  skipanim = getdvar(#"_id_D614D075") != "";
+  skipanim = getDvar(#"_id_D614D075") != "";
 
-  if(!flag("lockout_screen_skipped_freeroam"))
+  if(!flag("lockout_screen_skipped_freeroam")) {
     level.player toggle_viewarm(1, skipanim);
+  }
 
   level thread run_glasses_input();
 }
@@ -414,14 +436,16 @@ attach_data_pads() {
 }
 
 toggle_viewarm(do_show, skipanim) {
-  if(!isDefined(skipanim))
+  if(!isDefined(skipanim)) {
     skipanim = 0;
+  }
 
   if(!isDefined(self.is_glove_shown)) {
     return;
   }
-  if(!isDefined(do_show))
+  if(!isDefined(do_show)) {
     do_show = !self.is_glove_shown;
+  }
 
   if(self.is_glove_shown == do_show) {
     return;
@@ -430,10 +454,11 @@ toggle_viewarm(do_show, skipanim) {
   use_vtol = frontend_should_use_vtol(level_num + 1);
 
   if(do_show) {
-    if(use_vtol)
+    if(use_vtol) {
       visionsetnaked("sp_front_end_menu_vtol", 1.0);
-    else
+    } else {
       visionsetnaked("sp_front_end_menu", 1.0);
+    }
 
     level.e_player_align.origin = level.player.origin;
     level.e_player_align.angles = (level.player.angles[0], level.player.angles[1], 0);
@@ -608,10 +633,11 @@ listen_for_launchlevel_messages() {
       level thread maps\createart\frontend_art::run_war_room_mixers();
       flag_set("briefing_active");
 
-      if(str_action_arg == "so_tut_mp_drone")
-        level_for_briefing = getdvar(#"_id_D614D075");
-      else
+      if(str_action_arg == "so_tut_mp_drone") {
+        level_for_briefing = getDvar(#"_id_D614D075");
+      } else {
         level_for_briefing = str_action_arg;
+      }
 
       show_holotable_fuzz(1);
       show_globe(0, 1);
@@ -675,18 +701,21 @@ cm_input_watcher() {
   while(true) {
     for(i = 0; i < buttons.size; i++) {
       if(level.player buttonpressed(buttons[i])) {
-        while(level.player buttonpressed(buttons[i]))
+        while(level.player buttonpressed(buttons[i])) {
           wait 0.05;
+        }
 
-        if(lvl[lvl_index] == i)
+        if(lvl[lvl_index] == i) {
           lvl_index++;
-        else
+        } else {
           lvl_index = 0;
+        }
 
-        if(unit[unit_index] == i)
+        if(unit[unit_index] == i) {
           unit_index++;
-        else
+        } else {
           unit_index = 0;
+        }
 
         if(version[version_index] == i) {
           version_index++;
@@ -712,7 +741,7 @@ cm_input_watcher() {
     }
 
     if(version_index >= version.size) {
-      iprintln(getdvar(#"version"));
+      iprintln(getDvar(#"version"));
       return;
     }
 
@@ -733,8 +762,8 @@ listen_for_campaign_state_change() {
           level thread play_intro_movie();
           break;
         case "stop":
-          setdvar("ui_aarmapname", "");
-          setdvar("ui_mapname", "");
+          setDvar("ui_aarmapname", "");
+          setDvar("ui_mapname", "");
           break;
       }
     }
@@ -791,8 +820,9 @@ skip_intro_prompt() {
 
   level notify("intro_movie_abort");
 
-  if(isDefined(level.intro_cin_id))
+  if(isDefined(level.intro_cin_id)) {
     stop3dcinematic(level.intro_cin_id);
+  }
 
   rpc("clientscripts/frontend", "start_env_movie");
   setmusicstate("FRONT_END_MAIN");
@@ -805,11 +835,12 @@ skip_intro_prompt() {
 credits_scroll_with_movies_sequence() {
   level endon("credits_abort");
 
-  if(!level.ps3)
+  if(!level.ps3) {
     flag_wait("save_complete");
+  }
 
   luinotifyevent(&"start_credits");
-  setdvar("r_loadingScreen", 1);
+  setDvar("r_loadingScreen", 1);
   setculldist(0.1);
   menendez_alive = !level.player get_story_stat("MENENDEZ_DEAD_IN_HAITI");
   jr_alive = !level.player get_story_stat("MASONJR_DEAD_IN_HAITI");
@@ -922,13 +953,14 @@ credits_scroll_with_movies_sequence() {
   level.iscinematicwebm = 0;
   wait 0.1;
   luinotifyevent(&"stop_credits");
-  setdvar("r_loadingScreen", 0);
+  setDvar("r_loadingScreen", 0);
   level.menustate = 1;
   toggle_main_menu();
   setculldist(10000);
 
-  if(level.ps3)
+  if(level.ps3) {
     frontend_do_save();
+  }
 }
 
 credits_sequence1(str_movie_1_name, str_movie_2_name, str_movie_3_name, str_movie_4_name, str_movie_5_name, str_movie_6_name, str_movie_7_name, music_num, check_for_webm) {
@@ -1021,8 +1053,9 @@ waitforendcreditschangemusic() {
   level.menustate = 1;
   toggle_main_menu();
 
-  if(level.ps3)
+  if(level.ps3) {
     frontend_do_save();
+  }
 
   rpc("clientscripts/frontend_amb", "sndStopCreditsMusic");
   setmusicstate("FRONT_END_MAIN");
@@ -1035,12 +1068,13 @@ credits_sequence1_abort() {
   level waittill("credits_skip");
   level notify("credits_sequence1_skip");
 
-  if(isDefined(level.credits_cin_id))
+  if(isDefined(level.credits_cin_id)) {
     stop3dcinematic(level.credits_cin_id);
+  }
 
   level.credits_cin_id = undefined;
   setdvarint("ui_creditMovieNack", 1);
-  setdvar("ui_creditSkipTo", "scroll_sequence_1");
+  setDvar("ui_creditSkipTo", "scroll_sequence_1");
   level notify("credits_sequence1_done");
 }
 
@@ -1049,7 +1083,7 @@ credits_sequence1a_abort() {
   level endon("credits_sequence2");
   level waittill("credits_skip");
   level notify("credits_sequence1a_skip");
-  setdvar("ui_creditSkipTo", "credits_movie_8");
+  setDvar("ui_creditSkipTo", "credits_movie_8");
   level notify("credits_sequence1a_done");
 }
 
@@ -1059,12 +1093,13 @@ credits_sequence2_abort() {
   level waittill("credits_skip");
   level notify("credits_sequence2_skip");
 
-  if(isDefined(level.credits_cin_id))
+  if(isDefined(level.credits_cin_id)) {
     stop3dcinematic(level.credits_cin_id);
+  }
 
   level.credits_cin_id = undefined;
   setdvarint("ui_creditMovieNack", 1);
-  setdvar("ui_creditSkipTo", "scroll_sequence_2");
+  setDvar("ui_creditSkipTo", "scroll_sequence_2");
   level notify("credits_sequence2_done");
 }
 
@@ -1073,7 +1108,7 @@ credits_sequence2a_abort() {
   level endon("credits_sequence3");
   level waittill("credits_skip");
   level notify("credits_sequence2a_skip");
-  setdvar("ui_creditSkipTo", "credits_movie_9");
+  setDvar("ui_creditSkipTo", "credits_movie_9");
   level notify("credits_sequence2a_done");
 }
 
@@ -1081,8 +1116,9 @@ credits_sequence3_abort() {
   level endon("credits_movie_complete");
   level waittill("credits_skip");
 
-  if(isDefined(level.credits_cin_id))
+  if(isDefined(level.credits_cin_id)) {
     stop3dcinematic(level.credits_cin_id);
+  }
 
   rpc("clientscripts/frontend", "start_env_movie");
   setmusicstate("FRONT_END_MAIN");
@@ -1111,10 +1147,11 @@ build_globe() {
 }
 
 toggle_hologram_fx(fx_on) {
-  if(fx_on)
+  if(fx_on) {
     holo_table_exploder_switch(113);
-  else
+  } else {
     holo_table_exploder_switch(undefined);
+  }
 }
 
 process_globe_glow() {
@@ -1138,8 +1175,9 @@ process_globe_glow() {
 }
 
 show_holotable_fuzz(do_show) {
-  if(!isDefined(do_show))
+  if(!isDefined(do_show)) {
     do_show = 1;
+  }
 
   fuzz = getent("holotable_static", "targetname");
 
@@ -1148,23 +1186,27 @@ show_holotable_fuzz(do_show) {
   }
   fuzz ignorecheapentityflag(1);
 
-  if(do_show)
+  if(do_show) {
     fuzz setclientflag(15);
-  else
+  } else {
     fuzz clearclientflag(15);
+  }
 
   fuzz.shown = do_show;
 }
 
 show_globe(do_show, toggle_countries, ambient_spin) {
-  if(!isDefined(do_show))
+  if(!isDefined(do_show)) {
     do_show = 1;
+  }
 
-  if(!isDefined(toggle_countries))
+  if(!isDefined(toggle_countries)) {
     toggle_countries = 0;
+  }
 
-  if(!isDefined(ambient_spin))
+  if(!isDefined(ambient_spin)) {
     ambient_spin = 0;
+  }
 
   globe = getent("world_globe", "targetname");
 
@@ -1173,15 +1215,16 @@ show_globe(do_show, toggle_countries, ambient_spin) {
     globe.glow_ring thread process_globe_glow();
   }
 
-  if(!ambient_spin)
+  if(!ambient_spin) {
     globe notify("stop_spinning");
-  else {
+  } else {
     globe notify("kill_globe_marker_fx");
     globe thread rotate_indefinitely(120);
   }
 
-  if(!isDefined(level.m_globe_shown))
+  if(!isDefined(level.m_globe_shown)) {
     level.m_globe_shown = !do_show;
+  }
 
   if(do_show != level.m_globe_shown) {
     if(do_show) {
@@ -1215,8 +1258,9 @@ show_globe(do_show, toggle_countries, ambient_spin) {
 globe_show_map(map_name) {
   angles = level.m_rts_map_angle[map_name];
 
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = (0, 0, 0);
+  }
 
   globe = getent("world_globe", "targetname");
   disputed_territory = level.m_rts_territory[map_name];
@@ -1228,8 +1272,9 @@ globe_show_map(map_name) {
     hide = 1;
 
     if(isDefined(disputed_territory)) {
-      if(territory.script_noteworthy == disputed_territory)
+      if(territory.script_noteworthy == disputed_territory) {
         hide = 0;
+      }
     }
 
     if(hide) {
@@ -1253,10 +1298,11 @@ globe_show_map(map_name) {
 frontend_get_hub_number(current_level) {
   hub_number = int(tablelookup("sp/levelLookup.csv", 0, current_level, 17));
 
-  if(!isDefined(hub_number))
+  if(!isDefined(hub_number)) {
     hub_number = 0;
-  else if(hub_number <= 0)
+  } else if(hub_number <= 0) {
     hub_number = 0;
+  }
 
   return hub_number;
 }
@@ -1266,8 +1312,9 @@ teardown_basic_scene() {
   hide_holo_table_props();
   briggs = getent("briggs_ai", "targetname");
 
-  if(isDefined(briggs))
+  if(isDefined(briggs)) {
     briggs delete();
+  }
 
   briggs_spawner = getent("briggs", "targetname");
   briggs_spawner.count = 1;
@@ -1290,22 +1337,24 @@ frontend_run_scene() {
 
     if(level.menustate != 4) {
       if(get_campaign_state() == 1) {
-        level_num = int(tablelookup("sp/levelLookup.csv", 1, getdvar(#"ui_mapname"), 0));
+        level_num = int(tablelookup("sp/levelLookup.csv", 1, getDvar(#"ui_mapname"), 0));
         luinotifyevent(&"frontend_restore2", 1, is_any_new_strikeforce_maps(level_num) ? 1 : 0);
       }
     }
 
     flag_set("frontend_scene_ready");
 
-    if(get_campaign_state() != 0)
+    if(get_campaign_state() != 0) {
       wait 0.5;
+    }
 
     fade_in(0.5);
     level waittill("frontend_refresh_scene");
     flag_clear("frontend_scene_ready");
 
-    if(level.menustate != 4 && level.menustate != -1)
+    if(level.menustate != 4 && level.menustate != -1) {
       fade_out(0.5);
+    }
 
     teardown_basic_scene();
   }
@@ -1320,30 +1369,34 @@ frontend_watch_resume() {
 }
 
 flag_is_set_and_defined(flag_name) {
-  if(!isDefined(flag_name))
+  if(!isDefined(flag_name)) {
     return 0;
-  else
+  } else {
     return flag(flag_name);
+  }
 }
 
 frontend_platform_skip_button_check() {
-  if(!level.console && !level.player gamepadusedlast())
+  if(!level.console && !level.player gamepadusedlast()) {
     return level.player buttonpressed("MOUSE1") || level.player buttonpressed("ENTER") || level.player buttonpressed("ESCAPE");
-  else
+  } else {
     return level.player buttonpressed(getenterbutton());
+  }
 }
 
 frontend_watch_scene_skip(level_name) {
   wait 4.0;
   luinotifyevent(&"show_skip_prompt");
 
-  while(frontend_platform_skip_button_check())
+  while(frontend_platform_skip_button_check()) {
     wait_network_frame();
+  }
 
   while(true) {
     if(frontend_platform_skip_button_check()) {
-      while(frontend_platform_skip_button_check())
+      while(frontend_platform_skip_button_check()) {
         wait_network_frame();
+      }
 
       break;
     }
@@ -1357,11 +1410,13 @@ frontend_watch_scene_skip(level_name) {
 }
 
 fade_out(n_time) {
-  if(!isDefined(n_time))
+  if(!isDefined(n_time)) {
     n_time = 1.0;
+  }
 
-  if(!isDefined(level.hudalpha))
+  if(!isDefined(level.hudalpha)) {
     level.hudalpha = 0;
+  }
 
   if(level.hudalpha == 0) {
     hud = get_fade_hud("black");
@@ -1380,11 +1435,13 @@ fade_out(n_time) {
 }
 
 fade_in(n_time) {
-  if(!isDefined(n_time))
+  if(!isDefined(n_time)) {
     n_time = 1.0;
+  }
 
-  if(!isDefined(level.hudalpha))
+  if(!isDefined(level.hudalpha)) {
     level.hudalpha = 0;
+  }
 
   if(level.hudalpha == 1) {
     hud = get_fade_hud("black");
@@ -1400,8 +1457,9 @@ fade_in(n_time) {
 
     level.hudalpha = 0;
 
-    if(isDefined(level.fade_hud))
+    if(isDefined(level.fade_hud)) {
       level.fade_hud destroy();
+    }
   }
 }
 
@@ -1420,9 +1478,9 @@ setup_war_map(cur_level) {
     color_id = 4;
     map_done = level.player get_story_stat(stat_id);
 
-    if(campaign_state == 0)
+    if(campaign_state == 0) {
       color_id = 4;
-    else if(map_done != 0) {
+    } else if(map_done != 0) {
       color_id = 3;
       num_claimed++;
     } else if(num_tokens == 0)
@@ -1442,14 +1500,15 @@ setup_war_map(cur_level) {
     set_world_map_widget(map_id, 0);
   }
 
-  if(campaign_state == 0)
+  if(campaign_state == 0) {
     set_world_map_tint(4, 4);
-  else if(num_tokens == 0 || num_fallen >= 3)
+  } else if(num_tokens == 0 || num_fallen >= 3) {
     set_world_map_tint(4, 2);
-  else if(num_claimed >= 3)
+  } else if(num_claimed >= 3) {
     set_world_map_tint(4, 3);
-  else
+  } else {
     set_world_map_tint(4, 0);
+  }
 
   set_world_map_marker(4, 0);
   set_world_map_widget(4, 0);
@@ -1468,28 +1527,33 @@ frontend_run_ospreys() {
 }
 
 frontend_delete_ospreys() {
-  if(isDefined(level.m_ospreys))
+  if(isDefined(level.m_ospreys)) {
     array_delete(level.m_ospreys);
+  }
 
   level.m_ospreys = undefined;
 }
 
 player_boat_sim(angle_min, angle_max, time) {
-  if(!isDefined(angle_min))
+  if(!isDefined(angle_min)) {
     angle_min = 0.5;
+  }
 
-  if(!isDefined(angle_max))
+  if(!isDefined(angle_max)) {
     angle_max = 1.0;
+  }
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 4.0;
+  }
 
   wait 1;
   self notify("stop_boat_sim");
   self endon("stop_boat_sim");
 
-  if(!isDefined(self.m_ground_ref))
+  if(!isDefined(self.m_ground_ref)) {
     self.m_ground_ref = spawn_model("tag_origin", self.origin);
+  }
 
   self playersetgroundreferenceent(self.m_ground_ref);
 
@@ -1506,8 +1570,9 @@ player_boat_sim(angle_min, angle_max, time) {
 stop_player_boat_sim() {
   self notify("stop_boat_sim");
 
-  if(isDefined(self.m_ground_ref))
+  if(isDefined(self.m_ground_ref)) {
     self.m_ground_ref rotateto((0, 0, 0), 4.0, 2.0, 2.0);
+  }
 }
 
 frontend_run_osprey() {
@@ -1532,7 +1597,7 @@ frontend_run_osprey() {
 }
 
 frontend_setup_devgui() {
-  setdvar("cmd_skipto", "");
+  setDvar("cmd_skipto", "");
   adddebugcommand("devgui_cmd \"|Frontend|/Toggle Freeroam:1\" \"cmd_skipto freeroam\"\n");
   adddebugcommand("devgui_cmd \"|Frontend|/Phase Intro:2/None:1\" \"cmd_skipto hub_none\"\n");
   adddebugcommand("devgui_cmd \"|Frontend|/Phase Intro:2/HUB A:2\" \"cmd_skipto hub_a\"\n");
@@ -1557,7 +1622,7 @@ frontend_watch_devgui() {
   level.m_debug_phase = "hub_none";
 
   while(true) {
-    cmd_skipto = getdvar(#"_id_4D60CDD2");
+    cmd_skipto = getDvar(#"_id_4D60CDD2");
 
     if(cmd_skipto != "") {
       if(issubstr(cmd_skipto, "so_rts")) {
@@ -1673,16 +1738,16 @@ frontend_watch_devgui() {
           cur_val = level.player get_story_stat(stat_to_swap) != 0;
           level.player set_story_stat(stat_to_swap, !cur_val);
 
-          if(cur_val)
+          if(cur_val) {
             iprintlnbold("Stat now FALSE");
-          else
+          } else {
             iprintlnbold("Stat now TRUE");
+          }
         }
       }
     }
 
-    setdvar("cmd_skipto", "");
+    setDvar("cmd_skipto", "");
     wait 0.05;
   }
-
 }

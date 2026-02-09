@@ -352,7 +352,7 @@ func_DCF7() {
   var_0 = self getweaponammoclip(self.mainweapon);
   for(;;) {
     self waittill("weapon_fired", var_1);
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       level thread scripts\mp\battlechatter_mp::saytoself(self.enemy, "plr_killstreak_target");
     }
 
@@ -449,7 +449,7 @@ func_DCF9() {
       thread playvoice(1, "vox_c8_seeking");
     }
 
-    if(isDefined(self.enemy) && isalive(self.enemy) && isplayer(self.enemy) && !self.enemy func_8181("specialty_blindeye")) {
+    if(isDefined(self.enemy) && isalive(self.enemy) && isPlayer(self.enemy) && !self.enemy func_8181("specialty_blindeye")) {
       if(!self botcanseeentity(self.enemy)) {
         func_DCF8(self.enemy);
       }
@@ -1092,7 +1092,7 @@ func_13996() {
       }
     }
 
-    if(isplayer(var_2) && var_2 != self) {
+    if(isPlayer(var_2) && var_2 != self) {
       var_7 = "callout_destroyed_remote_c8";
       var_8 = scripts\mp\killstreak_loot::getrarityforlootitem(self.var_DCFC.streakinfo.variantid);
       if(var_8 != "") {
@@ -1221,7 +1221,7 @@ func_13ACD(var_0) {
   for(;;) {
     var_0 waittill("victim_damaged", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     if(var_3 == var_0 && var_2 != var_0 && var_6 == "MOD_MELEE") {
-      if(isplayer(var_2)) {
+      if(isPlayer(var_2)) {
         var_12 = anglesToForward(var_0 getplayerangles());
         var_13 = var_0.origin;
         var_14 = var_0 gettagorigin("c8_shield_le") + (0, 0, 20) + var_12 * 200;

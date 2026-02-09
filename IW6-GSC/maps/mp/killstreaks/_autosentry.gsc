@@ -813,7 +813,6 @@ updateSentryPlacement(sentryGun) {
 
     if(isDefined(placement["entity"])) {
       sentryGun.moving_platform = placement["entity"];
-
     } else {
       sentryGun.moving_platform = undefined;
     }
@@ -1007,7 +1006,6 @@ sentry_timeOut() {
   lifeSpan = level.sentrySettings[self.sentryType].timeOut;
   if(!is_aliens()) {
     lifeSpan = GetDvarFloat("scr_sentry_timeout");
-
   }
 
   while(lifeSpan) {

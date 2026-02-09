@@ -407,7 +407,6 @@ debug_print_ent_array(array, name) {
 
     println("" + i + ": uniqueid: " + array[i].uniqueid + "fxid: " + array[i].v["fxid"]);
   }
-
 }
 
 debug_print_latest_state(type) {

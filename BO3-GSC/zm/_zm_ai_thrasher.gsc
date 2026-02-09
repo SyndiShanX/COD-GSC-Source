@@ -671,7 +671,7 @@ function function_70622dc9() {
 function function_871a3bd5() {
   self waittill("death", e_attacker);
   arrayremovevalue(level.var_35a5aa88, self);
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       e_attacker zm_score::player_add_points("death_thrasher", self.damagemod, self.damagelocation, 1);
     }

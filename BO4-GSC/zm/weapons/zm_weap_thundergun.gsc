@@ -51,12 +51,12 @@ thundergun_devgui_dvar_think() {
     return;
   }
 
-  setdvar(#"scr_thundergun_cylinder_radius", zombie_utility::get_zombie_var(#"thundergun_cylinder_radius"));
-  setdvar(#"scr_thundergun_fling_range", zombie_utility::get_zombie_var(#"thundergun_fling_range"));
-  setdvar(#"scr_thundergun_gib_range", zombie_utility::get_zombie_var(#"thundergun_gib_range"));
-  setdvar(#"scr_thundergun_gib_damage", zombie_utility::get_zombie_var(#"thundergun_gib_damage"));
-  setdvar(#"scr_thundergun_knockdown_range", zombie_utility::get_zombie_var(#"thundergun_knockdown_range"));
-  setdvar(#"scr_thundergun_knockdown_damage", zombie_utility::get_zombie_var(#"thundergun_knockdown_damage"));
+  setDvar(#"scr_thundergun_cylinder_radius", zombie_utility::get_zombie_var(#"thundergun_cylinder_radius"));
+  setDvar(#"scr_thundergun_fling_range", zombie_utility::get_zombie_var(#"thundergun_fling_range"));
+  setDvar(#"scr_thundergun_gib_range", zombie_utility::get_zombie_var(#"thundergun_gib_range"));
+  setDvar(#"scr_thundergun_gib_damage", zombie_utility::get_zombie_var(#"thundergun_gib_damage"));
+  setDvar(#"scr_thundergun_knockdown_range", zombie_utility::get_zombie_var(#"thundergun_knockdown_range"));
+  setDvar(#"scr_thundergun_knockdown_damage", zombie_utility::get_zombie_var(#"thundergun_knockdown_damage"));
 
   for(;;) {
     zombie_utility::set_zombie_var(#"thundergun_cylinder_radius", getdvarint(#"scr_thundergun_cylinder_radius", 0));

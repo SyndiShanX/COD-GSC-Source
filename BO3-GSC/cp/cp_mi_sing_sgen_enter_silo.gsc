@@ -116,7 +116,7 @@ function function_8cf3dc94(a_ents) {
 function player_data_aquired(a_ents) {
   wait(2.5);
   foreach(e_in_scene in a_ents) {
-    if(isplayer(e_in_scene)) {
+    if(isPlayer(e_in_scene)) {
       e_in_scene cybercom::cybercom_armpulse(1);
       e_in_scene clientfield::set_to_player("sndCCHacking", 2);
       e_in_scene util::delay(1, "death", &clientfield::increment_to_player, "hack_dni_fx");
@@ -292,7 +292,7 @@ function dust_fx_follow() {
   t_dust endon("death");
   while(true) {
     t_dust waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       t_dust setinvisibletoplayer(who);
       who clientfield::set_to_player("dust_motes", 1);
     }

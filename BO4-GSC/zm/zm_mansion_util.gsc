@@ -133,13 +133,13 @@ function_5f42b3e2(s_anim) {
 
   s_anim scene::play(var_3c828299, self);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self notify(#"hash_18259ed594f164dc");
     s_anim thread scene::play(var_c2852abc, self);
     self waittill(#"hash_770bb1239dc37ad0", #"disconnect");
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     s_anim scene::play(var_39e963ce, self);
     self notify(#"hash_18259ed594f164dc");
   }
@@ -332,7 +332,7 @@ function_da5cd631(v_spin = (0, 0, 180)) {
 }
 
 function_9e147e0c(s_params) {
-  if(self.archetype === # "werewolf" && isplayer(s_params.eattacker)) {
+  if(self.archetype === # "werewolf" && isPlayer(s_params.eattacker)) {
     s_params.eattacker thread function_6e9bca65(s_params.weapon);
 
     if(s_params.eattacker zm_utility::function_aa45670f(s_params.weapon, 0)) {
@@ -360,7 +360,7 @@ function_9e147e0c(s_params) {
     return;
   }
 
-  if(self.archetype === # "nosferatu" && isplayer(s_params.eattacker) && !(isDefined(level.var_f1028094[# "hash_2464612c580fec24"]) && level.var_f1028094[# "hash_2464612c580fec24"])) {
+  if(self.archetype === # "nosferatu" && isPlayer(s_params.eattacker) && !(isDefined(level.var_f1028094[# "hash_2464612c580fec24"]) && level.var_f1028094[# "hash_2464612c580fec24"])) {
     s_params.eattacker thread function_9e4c5bfb();
   }
 }

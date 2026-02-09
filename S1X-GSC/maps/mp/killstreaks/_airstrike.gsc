@@ -124,7 +124,7 @@ doAirstrike(lifeId, origin, yaw, owner, team, streakName, modules) {
   dangerCenter.team = team;
 
   level.artilleryDangerCenters[level.artilleryDangerCenters.size] = dangerCenter;
-  /# level thread debugArtilleryDangerCenters( streakName );
+  level thread debugArtilleryDangerCenters(streakName);
 
   harrierEnt = callStrike(lifeId, owner, targetpos, yaw, streakName, modules);
 
@@ -475,7 +475,7 @@ spawnAirstrikePlane(lifeId, owner, bombsite, startPoint, direction, streakName, 
     plane thread airstrike_flares_monitor();
   }
   plane thread handleDeath();
-  /# plane thread planeDebugCrash();
+  plane thread planeDebugCrash();
 
   plane playLoopSound("bombrun_jet_dist_loop");
   plane.lifeId = lifeId;
@@ -1296,9 +1296,9 @@ planeDebugCrash() {
   self endon("airstrike_complete");
 
   while(true) {
-    if(GetDvar("scr_airstrike_crash", "0") != "0") {
+    if(getDvar("scr_airstrike_crash", "0") != "0") {
       self thread crashPlane();
-      SetDvar("scr_airstrike_crash", "0");
+      setDvar("scr_airstrike_crash", "0");
     }
 
     waitframe();

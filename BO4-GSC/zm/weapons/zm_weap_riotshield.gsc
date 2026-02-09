@@ -168,7 +168,7 @@ function_d987f765() {
   while(true) {
     s_waitresult = level waittill(#"carpenter_started");
 
-    if(zm_powerups::function_cfd04802(#"carpenter") && isplayer(s_waitresult.var_264cf1f9)) {
+    if(zm_powerups::function_cfd04802(#"carpenter") && isPlayer(s_waitresult.var_264cf1f9)) {
       if(isDefined(s_waitresult.var_264cf1f9.hasriotshield) && s_waitresult.var_264cf1f9.hasriotshield && isDefined(s_waitresult.var_264cf1f9.player_shield_reset_health)) {
         s_waitresult.var_264cf1f9[[s_waitresult.var_264cf1f9.player_shield_reset_health]]();
       }

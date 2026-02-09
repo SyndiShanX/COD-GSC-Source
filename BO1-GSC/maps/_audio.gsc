@@ -11,19 +11,16 @@ main() {
   array_thread(getEntArray("audio_sound_trigger", "targetname"), ::thread_sound_trigger);
   thread fadeinSound();
 }
-
 fadeinSound() {
   flag_wait("all_players_connected");
   get_players()[0] playSound("uin_transition_" + level.script);
 }
-
 wait_until_first_player() {
   players = get_players();
   if(!isDefined(players[0])) {
     level waittill("first_player_ready");
   }
 }
-
 thread_sound_trigger() {
   self waittill("trigger");
   struct_targs = getstructarray(self.target, "targetname");
@@ -57,7 +54,6 @@ thread_sound_trigger() {
     }
   }
 }
-
 spawn_line_sound(sound) {
   startOfLine = self;
   if(!isDefined(startOfLine)) {
@@ -87,7 +83,6 @@ spawn_line_sound(sound) {
     assertmsg("_audio::spawn_line_sound(): Could not find end of line entity! Aborting...");
   }
 }
-
 line_sound_player() {
   self endon("end line sound");
   if(isDefined(self.script_looping)) {
@@ -96,14 +91,13 @@ line_sound_player() {
     self playSound(self.script_sound);
   }
 }
-
 move_sound_along_line() {
   self endon("end line sound");
   wait_until_first_player();
   closest_dist = undefined;
   while(1) {
     self closest_point_on_line_to_point(get_players()[0].origin, self.start, self.end);
-    closest_dist = distanceSquared(get_players()[0].origin, self.origin);
+    closest_dist = DistanceSquared(get_players()[0].origin, self.origin);
     if(closest_dist > 1024 * 1024) {
       wait(2);
     } else if(closest_dist > 512 * 512) {
@@ -113,11 +107,11 @@ move_sound_along_line() {
     }
   }
 }
-
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   self endon("end line sound");
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
-  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) / (LineMagSqrd);
+  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) /
+    (LineMagSqrd);
   if(t < 0.0) {
     self.origin = LineStart;
   } else if(t > 1.0) {
@@ -129,7 +123,6 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
     self.origin = (start_x, start_y, start_z);
   }
 }
-
 static_sound_random_play(soundpoint) {
   wait(RandomIntRange(1, 5));
   if(!isDefined(self.script_wait_min)) {
@@ -143,11 +136,9 @@ static_sound_random_play(soundpoint) {
     soundpoint playSound(self.script_sound);
   }
 }
-
 static_sound_loop_play(soundpoint) {
   self playLoopSound(self.script_sound);
 }
-
 get_number_variants(aliasPrefix) {
   for(i = 0; i < 100; i++) {
     if(!SoundExists(aliasPrefix + "_" + i)) {
@@ -155,7 +146,6 @@ get_number_variants(aliasPrefix) {
     }
   }
 }
-
 create_2D_sound_list(sound_alias) {
   player = getplayers();
   if(!isDefined(sound_alias)) {
@@ -179,12 +169,10 @@ create_2D_sound_list(sound_alias) {
   player[0] waittill("sound_done");
   level notify("2D_sound_finished");
 }
-
 switch_music_wait(music_state, waittime) {
   wait(waittime);
   setmusicstate(music_state);
 }
-
 missile_audio_watcher() {
   self endon("disconnect");
   self endon("death");
@@ -206,12 +194,10 @@ missile_audio_watcher() {
     }
   }
 }
-
 missionFailWatcher() {
   level waittill("missionfailed");
   self notify("death_notify");
 }
-
 death_sounds() {
   self thread missionFailWatcher();
   self waittill_either("death_notify", "death");

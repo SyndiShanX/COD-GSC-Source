@@ -558,7 +558,7 @@ function private function_2d73d3d9(upgraded) {
 }
 
 function private bzmoncybercomoncallback(player) {
-  assert(isplayer(player));
+  assert(isPlayer(player));
   if(!isDefined(player.var_cc7a6101)) {
     return;
   }

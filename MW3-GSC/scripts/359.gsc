@@ -15,7 +15,6 @@ _id_204E(var_0) {
 
   if(isDefined(self._id_204F)) {
     [[level._id_1C4D["_patrol_endon_spotted_flag"]]]();
-
   }
   thread _id_206E();
   thread _id_206D();
@@ -40,7 +39,6 @@ _id_204E(var_0) {
 
   if(isDefined(var_0)) {
     self.target = var_0;
-
   }
   if(isDefined(self.target)) {
     var_3 = 1;
@@ -88,7 +86,6 @@ _id_204E(var_0) {
   for(;;) {
     while(isDefined(var_10._id_2055)) {
       wait 0.05;
-
     }
     var_7._id_2055 = undefined;
     var_7 = var_10;
@@ -101,22 +98,18 @@ _id_204E(var_0) {
       self.goalradius = var_7.radius;
     } else {
       self.goalradius = 32;
-
     }
     self waittill("goal");
     var_7 notify("trigger", self);
 
     if(isDefined(var_7._id_2057)) {
       common_scripts\utility::flag_set(var_7._id_2057);
-
     }
     if(isDefined(var_7._id_2058)) {
       maps\_utility::_id_13DC(var_7._id_2058);
-
     }
     if(isDefined(var_7._id_2059)) {
       common_scripts\utility::flag_clear(var_7._id_2059);
-
     }
     var_11 = var_7[[var_1[var_8][var_3]]]();
 
@@ -131,7 +124,6 @@ _id_204E(var_0) {
 
     if(isDefined(var_7._id_1288)) {
       common_scripts\utility::flag_wait(var_7._id_1288);
-
     }
     var_7 maps\_utility::script_delay();
     var_12 = animscripts\reactions::_id_0F20;
@@ -140,11 +132,9 @@ _id_204E(var_0) {
     if(isDefined(var_13)) {
       if(!isDefined(self._id_205C)) {
         _id_2061(var_13, var_12, var_7);
-
       }
       if(isDefined(var_7._id_205D)) {
         self orientmode("face angle", var_7.angles[1]);
-
       }
       self._id_205E = 1;
       var_14 = var_9[var_13];
@@ -217,7 +207,7 @@ _id_2065() {
     var_0 = self.a._id_0C6D["stance_change"];
 
     if(isDefined(var_0)) {
-      self setflaggedanimknoballrestart("stand_up", var_0, % root, 1);
+      self setflaggedanimknoballrestart("stand_up", var_0, %root, 1);
       animscripts\shared::_id_0C51("stand_up");
     }
   }
@@ -229,7 +219,7 @@ _id_2066() {
   self orientmode("face current");
   _id_2065();
   var_0 = level._id_0C59["generic"]["patrol_radio_in_clear"];
-  self setflaggedanimknoballrestart("radio", var_0, % root, 1);
+  self setflaggedanimknoballrestart("radio", var_0, %root, 1);
   animscripts\shared::_id_0C51("radio");
   _id_2067();
 }
@@ -254,7 +244,7 @@ _id_2067() {
     self orientmode("face current");
     _id_2065();
     var_4 = level._id_0C59["generic"]["patrol_turn180"];
-    self setflaggedanimknoballrestart("move", var_4, % root, 1);
+    self setflaggedanimknoballrestart("move", var_4, %root, 1);
 
     if(animhasnotetrack(var_4, "code_move")) {
       animscripts\shared::_id_0C51("move");
@@ -271,13 +261,11 @@ _id_2068() {
 
   if(isDefined(self._id_2069)) {
     var_0 = self._id_2069;
-
   }
   var_1 = undefined;
 
   if(isDefined(self._id_206A)) {
     var_1 = self._id_206A;
-
   }
   maps\_utility::_id_140A(var_0, var_1);
 }
@@ -287,7 +275,6 @@ _id_206B() {
 
   if(isDefined(self._id_206C)) {
     self._id_206C endon("death");
-
   }
   self waittill("enemy");
 }
@@ -324,7 +311,6 @@ _id_206E() {
 
   if(isDefined(self._id_2071)) {
     self.interval = self._id_2071;
-
   }
   self._id_0FC6 = 1;
 
@@ -344,7 +330,6 @@ _id_1411() {
 
   if(isDefined(self.target)) {
     var_0 = getEntArray(self.target, "targetname");
-
   }
   return var_0;
 }
@@ -354,7 +339,6 @@ _id_1410() {
 
   if(isDefined(self.target)) {
     var_0 = getnodearray(self.target, "targetname");
-
   }
   return var_0;
 }
@@ -364,7 +348,6 @@ _id_140F() {
 
   if(isDefined(self.target)) {
     var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
-
   }
   return var_0;
 }
@@ -435,7 +418,6 @@ _id_2076() {
 
   if(isDefined(self._id_204F)) {
     [[level._id_1C4D["_patrol_endon_spotted_flag"]]]();
-
   }
   self._id_206C endon("death");
   thread _id_206E();
@@ -448,7 +430,6 @@ _id_2076() {
 
   if(vectordot(var_1, var_2) > 0) {
     var_3 = "right";
-
   }
   wait 1;
   thread _id_207F();
@@ -462,13 +443,11 @@ _id_2076() {
 
       if(var_3 == "null") {
         var_3 = "back";
-
       }
       var_3 = _id_207E(var_0, var_3);
       self._id_2077 = var_0[var_3].origin;
     } else {
       self._id_2077 = self.origin;
-
     }
     self setgoalpos(self._id_2077);
     wait 0.05;
@@ -555,7 +534,6 @@ _id_207E(var_0, var_1) {
     }
     if(self maymovetopoint(var_0[var_3].origin)) {
       return var_3;
-
     }
     var_0[var_3]._id_207B = 1;
   }
@@ -589,7 +567,6 @@ _id_207F(var_0) {
 
   if(!isDefined(var_0)) {
     var_0 = 200;
-
   }
   maps\_utility::_id_2080();
 
@@ -634,7 +611,6 @@ _id_2081(var_0, var_1) {
       if(var_3 < squared(16)) {
         if(self._id_0FC6 > 0.4) {
           self._id_0FC6 = self._id_0FC6 - 0.05;
-
         }
         continue;
       }
@@ -642,7 +618,6 @@ _id_2081(var_0, var_1) {
       if(var_3 > squared(48)) {
         if(self._id_0FC6 < 1.8) {
           self._id_0FC6 = self._id_0FC6 + 0.05;
-
         }
         continue;
       }
@@ -653,11 +628,9 @@ _id_2081(var_0, var_1) {
 
   if(!isDefined(var_0)) {
     var_0 = 16;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 48;
-
   }
   var_4 = var_0 * var_0;
   var_5 = var_1 * var_1;
@@ -675,7 +648,6 @@ _id_2081(var_0, var_1) {
     if(var_3 < var_4) {
       if(self._id_0FC6 > 0.4) {
         self._id_0FC6 = self._id_0FC6 - 0.05;
-
       }
       continue;
     }
@@ -683,7 +655,6 @@ _id_2081(var_0, var_1) {
     if(var_3 > var_5) {
       if(self._id_0FC6 < 0.75) {
         self._id_0FC6 = self._id_0FC6 + 0.05;
-
       }
       continue;
     }

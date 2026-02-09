@@ -101,7 +101,6 @@ drawline(start, end, timeslice, color) {
     line(start, end, color, 0, 1);
     wait 0.05;
   }
-
 }
 
 _fire(lifeid, player, team, origin, angles, targetpos) {

@@ -82,7 +82,7 @@ on_localclient_connect(localclientnum) {
 }
 
 on_death(params) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

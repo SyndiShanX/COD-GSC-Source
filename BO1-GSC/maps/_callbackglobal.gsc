@@ -19,7 +19,6 @@ init() {
   level.rankedMatch = (level.onlineGame);
   level.profileLoggedIn = (getDvar(#"xblive_loggedin") == "1");
 }
-
 SetupCallbacks() {
   level.otherPlayersSpectate = false;
   level.spawnPlayer = ::spawnPlayer;
@@ -46,24 +45,23 @@ SetupCallbacks() {
   level._callbacks["on_actor_killed"] = [];
   level._callbacks["on_vehicle_damage"] = [];
   level._callbacks["on_save_restored"] = [];
-  if(!isDefined(level.onMenuMessage))
+  if(!isDefined(level.onMenuMessage)) {
     level.onMenuMessage = ::blank;
-  if(!isDefined(level.onDec20Message))
+  }
+  if(!isDefined(level.onDec20Message)) {
     level.onDec20Message = ::blank;
+  }
 }
-
 AddCallback(event, func) {
   AssertEx(isDefined(event), "Trying to set a callback on an undefined event.");
   AssertEx(isDefined(level._callbacks[event]), "Trying to set callback for unknown event '" + event + "'.");
   level._callbacks[event] = add_to_array(level._callbacks[event], func, false);
 }
-
 RemoveCallback(event, func) {
   AssertEx(isDefined(event), "Trying to remove a callback on an undefined event.");
   AssertEx(isDefined(level._callbacks[event]), "Trying to remove callback for unknown event '" + event + "'.");
   level._callbacks[event] = array_remove(level._callbacks[event], func, true);
 }
-
 Callback(event) {
   AssertEx(isDefined(level._callbacks[event]), "Must init callback array before trying to call it.");
   for(i = 0; i < level._callbacks[event].size; i++) {
@@ -73,12 +71,10 @@ Callback(event) {
     }
   }
 }
-
 blank(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {}
 Callback_CurveNotify(string, curveId, nodeIndex) {
   level notify(string, curveId, nodeIndex);
 }
-
 Callback_StartGameType() {}
 BriefInvulnerability() {
   self endon("disconnect");
@@ -90,7 +86,6 @@ BriefInvulnerability() {
     }
   }
 }
-
 Callback_SaveRestored() {
   players = get_players();
   level.debug_player = players[0];
@@ -103,17 +98,16 @@ Callback_SaveRestored() {
     if(isDefined(player)) {
       player thread BriefInvulnerability();
       if(isDefined(player.savedVisionSet)) {
-        player visionSetNaked(player.savedVisionSet, 0.1);
+        player VisionSetNaked(player.savedVisionSet, 0.1);
       }
       if(getDvar(#"zombiemode") != "1") {
-        dvarName = "player" + player getEntityNumber() + "downs";
+        dvarName = "player" + player GetEntityNumber() + "downs";
         player.downs = getdvarint(dvarName);
       }
     }
   }
   level Callback("on_save_restored");
 }
-
 Player_BreadCrumb_Reset(position, angles) {
   if(!isDefined(angles)) {
     angles = (0, 0, 0);
@@ -136,7 +130,6 @@ Player_BreadCrumb_Reset(position, angles) {
     }
   }
 }
-
 Player_BreadCrumb_Update() {
   self endon("disconnect");
   drop_distance = 70;
@@ -146,7 +139,7 @@ Player_BreadCrumb_Update() {
   if(!isDefined(level._player_breadcrumbs)) {
     Player_BreadCrumb_Reset(self.origin, self.angles);
   }
-  num = self getEntityNumber();
+  num = self GetEntityNumber();
   while(1) {
     wait 1;
     dist_squared = distancesquared(self.origin, level.playerPrevOrigin0);
@@ -175,7 +168,6 @@ Player_BreadCrumb_Update() {
     }
   }
 }
-
 SetPlayerSpawnPos() {
   players = get_players();
   player = players[0];
@@ -204,7 +196,6 @@ SetPlayerSpawnPos() {
     spawn_angles = player.angles;
   }
 }
-
 Callback_PlayerConnect() {
   thread first_player_connect();
   self waittill("begin");
@@ -257,10 +248,9 @@ Callback_PlayerConnect() {
   }
   self setClientDvar("ui_allow_loadoutchange", "1");
   self thread[[level.spawnClient]]();
-  dvarName = "player" + self getEntityNumber() + "downs";
-  setdvar(dvarName, self.downs);
+  dvarName = "player" + self GetEntityNumber() + "downs";
+  setDvar(dvarName, self.downs);
 }
-
 reset_clientdvars() {
   if(isDefined(level.reset_clientdvars)) {
     self[[level.reset_clientdvars]]();
@@ -272,11 +262,9 @@ reset_clientdvars() {
   self AllowSpectateTeam("freelook", false);
   self AllowSpectateTeam("none", false);
 }
-
 Callback_PlayerDisconnect() {
   self Callback("on_player_disconnect");
 }
-
 Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   if(isDefined(self.overridePlayerDamage)) {
     iDamage = self[[self.overridePlayerDamage]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime);
@@ -307,7 +295,13 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
       if(self != eAttacker) {
         println("Exiting - players can't hut each other.");
         return;
-      } else if(sMeansOfDeath != "MOD_GRENADE_SPLASH" && sMeansOfDeath != "MOD_GRENADE" && sMeansOfDeath != "MOD_EXPLOSIVE" && sMeansOfDeath != "MOD_PROJECTILE" && sMeansOfDeath != "MOD_PROJECTILE_SPLASH" && sMeansOfDeath != "MOD_BURNED" && sMeansOfDeath != "MOD_SUICIDE") {
+      } else if(sMeansOfDeath != "MOD_GRENADE_SPLASH" &&
+        sMeansOfDeath != "MOD_GRENADE" &&
+        sMeansOfDeath != "MOD_EXPLOSIVE" &&
+        sMeansOfDeath != "MOD_PROJECTILE" &&
+        sMeansOfDeath != "MOD_PROJECTILE_SPLASH" &&
+        sMeansOfDeath != "MOD_BURNED" &&
+        sMeansOfDeath != "MOD_SUICIDE") {
         println("Exiting - damage type verbotten.");
         return;
       }
@@ -327,8 +321,10 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   }
   self maps\_dds::update_player_damage(eAttacker);
   if(iDamage >= self.health) {
-    if((sMeansOfDeath == "MOD_CRUSH") && isDefined(eAttacker) && isDefined(eAttacker.classname) && (eAttacker.classname == "script_vehicle")) {
-      SetDvar("ui_deadquote", "@SCRIPT_MOVING_VEHICLE_DEATH");
+    if((sMeansOfDeath == "MOD_CRUSH") &&
+      isDefined(eAttacker) && isDefined(eAttacker.classname) &&
+      (eAttacker.classname == "script_vehicle")) {
+      setDvar("ui_deadquote", "@SCRIPT_MOVING_VEHICLE_DEATH");
     }
   }
   if(is_true(level.disable_player_damage_knockback)) {
@@ -337,11 +333,9 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   PrintLn("Finishplayerdamagage wrapper.");
   self finishPlayerDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime);
 }
-
 finishPlayerDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   self finishPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime);
 }
-
 incrGrenadeKillCount() {
   if(!isPlayer(self)) {
     return;
@@ -356,7 +350,6 @@ incrGrenadeKillCount() {
   wait(0.25);
   self.grenadeKillCounter--;
 }
-
 Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   self endon("death");
   if(isDefined(self.overrideActorDamage)) {
@@ -420,27 +413,23 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
   }
   self finishActorDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime);
 }
-
 finishActorDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   self finishActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime);
 }
-
 Callback_RevivePlayer() {
   self endon("disconnect");
   self RevivePlayer();
 }
-
 Callback_PlayerLastStand(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
   self endon("disconnect");
   self Callback("on_player_last_stand");
   [[maps\_laststand::PlayerLastStand]](eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
 }
-
 Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
   self thread[[level.onPlayerKilled]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   self.downs++;
-  dvarName = "player" + self getEntityNumber() + "downs";
-  setdvar(dvarName, self.downs);
+  dvarName = "player" + self GetEntityNumber() + "downs";
+  setDvar(dvarName, self.downs);
   if(isDefined(level.player_killed_shellshock)) {
     self ShellShock(level.player_killed_shellshock, 3);
   } else {
@@ -470,7 +459,6 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
     return;
   }
 }
-
 Callback_ActorKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime) {
   if(isDefined(self.overrideActorKilled)) {
     self[[self.overrideActorKilled]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime);
@@ -479,7 +467,6 @@ Callback_ActorKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir
   }
   self Callback("on_actor_killed");
 }
-
 Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName) {
   self endon("death");
   if(isDefined(self.overrideVehicleDamage)) {
@@ -497,11 +484,10 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
   }
   self finishVehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName, false);
 }
-
 spawnClient() {
   self endon("disconnect");
   self endon("end_respawn");
-  println("**spawnClient**");
+  println("*************************spawnClient****");
   self unlink();
   if(isDefined(self.spectate_cam)) {
     self.spectate_cam delete();
@@ -512,7 +498,6 @@ spawnClient() {
     self thread[[level.spawnPlayer]]();
   }
 }
-
 spawnPlayer(spawnOnHost) {
   self endon("disconnect");
   self endon("spawned_spectator");
@@ -532,7 +517,7 @@ spawnPlayer(spawnOnHost) {
   self.hasSpawned = true;
   self.spawnTime = getTime();
   self.afk = false;
-  println("**spawnPlayer**");
+  println("*************************spawnPlayer****");
   self detachAll();
   if(isDefined(level.custom_spawnPlayer)) {
     self[[level.custom_spawnPlayer]]();
@@ -561,12 +546,11 @@ spawnPlayer(spawnOnHost) {
   }
   self notify("spawned_player");
 }
-
 synchronize_players() {
   if(!isDefined(level.flag) || !isDefined(level.flag["all_players_connected"])) {
-    println("^1**ERROR: You must call _load::main() if you don't want bad coop things to happen!**");
-    println("^1**ERROR: You must call _load::main() if you don't want bad coop things to happen!**");
-    println("^1**ERROR: You must call _load::main() if you don't want bad coop things to happen!**");
+    println("^1****ERROR: You must call _load::main() if you don't want bad coop things to happen!****");
+    println("^1****ERROR: You must call _load::main() if you don't want bad coop things to happen!****");
+    println("^1****ERROR: You must call _load::main() if you don't want bad coop things to happen!****");
     return;
   }
   if(GetNumConnectedPlayers() == GetNumExpectedPlayers()) {
@@ -598,7 +582,6 @@ synchronize_players() {
     background Destroy();
   }
 }
-
 spawnSpectator() {
   self endon("disconnect");
   self endon("spawned_spectator");
@@ -622,7 +605,7 @@ spawnSpectator() {
   self.hasSpawned = true;
   self.spawnTime = getTime();
   self.afk = false;
-  println("**spawnSpectator**");
+  println("*************************spawnSpectator***");
   self detachAll();
   if(isDefined(level.onSpawnSpectator)) {
     self[[level.onSpawnSpectator]]();
@@ -632,14 +615,12 @@ spawnSpectator() {
   flag_wait("all_players_connected");
   self notify("spawned_spectator");
 }
-
 setSpectatePermissions() {
   self AllowSpectateTeam("allies", true);
   self AllowSpectateTeam("axis", false);
   self AllowSpectateTeam("freelook", false);
   self AllowSpectateTeam("none", false);
 }
-
 spawnIntermission() {
   self notify("spawned");
   self notify("end_respawn");
@@ -655,7 +636,6 @@ spawnIntermission() {
   [[level.onSpawnIntermission]]();
   self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
 }
-
 default_onSpawnPlayer() {}
 default_onPostSpawnPlayer() {}
 default_onSpawnSpectator() {}
@@ -666,12 +646,11 @@ default_onSpawnIntermission() {
     println("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
     return;
   }
-  spawnpoint = spawnpoints[randomInt(spawnpoints.size)];
+  spawnpoint = spawnpoints[RandomInt(spawnpoints.size)];
   if(isDefined(spawnpoint)) {
     self spawn(spawnpoint.origin, spawnpoint.angles);
   }
 }
-
 first_player_connect() {
   waittillframeend;
   if(isDefined(self)) {
@@ -689,9 +668,8 @@ first_player_connect() {
     }
   }
 }
-
 setSpawnVariables() {
   resetTimeout();
   self StopShellshock();
-  self stopRumble("damage_heavy");
+  self StopRumble("damage_heavy");
 }

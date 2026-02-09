@@ -231,7 +231,6 @@ createExplosiveDrone(bRecreate, startPosition, startAngles, DroneType) {
     } else {
       startPos = self.origin;
     }
-
   } else {
     startPos = startPosition;
     targetPos = startPosition;
@@ -272,7 +271,6 @@ createExplosiveDrone(bRecreate, startPosition, startAngles, DroneType) {
   drone.fx_tag0 = undefined;
   if(isDefined(drone.type)) {
     if(drone.type == "explosive_drone") {}
-
   }
 
   drone.maxTrackingRange = 2000;
@@ -365,7 +363,6 @@ explosiveDrone_enemy_lightFX() {
       wait 0.15;
       PlayFXOnTagForClients(level.explosiveDroneSettings.fxId_enemy_light, self, "TAG_BEACON", player);
     }
-
   }
 }
 
@@ -411,7 +408,6 @@ drone_thrusterFXExplosive() {
 
     wait(1.1);
   }
-
 }
 
 drone_thrusterFX_side_threaded(player) {
@@ -573,7 +569,6 @@ startExplosiveDrone(drone) {
     if(drone.type == "explosive_drone") {
       drone thread CheckForExplosiveGoalExplosive();
     }
-
   }
 }
 CheckForExplosiveGoalExplosive() {
@@ -635,7 +630,6 @@ TurnOnDangerLightsExplosive() {
   if(isDefined(self)) {}
   wait(0.15);
   if(isDefined(self)) {}
-
 }
 explosiveDrone_followTarget() {
   level endon("game_ended");
@@ -1089,7 +1083,6 @@ explosiveDrone_grenade_stunBegin() {
   if(isDefined(level.explosiveDroneSettings.fxId_sparks)) {
     playFXOnTag(level.explosiveDroneSettings.fxId_sparks, self, "TAG_BEACON");
   }
-
 }
 
 explosiveDrone_stunBegin() {
@@ -1333,7 +1326,6 @@ startGrenadeLightFX() {
     }
     wait ExplosiveDroneFXLoopWaitTime;
   }
-
 }
 
 FXblink(blink_fx, explosiveDrone, tag, player_to_show) {

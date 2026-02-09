@@ -43,7 +43,7 @@ on_player_killed() {
   weapon = params.sweapon;
   means = params.smeansofdeath;
 
-  if(!isplayer(attacker) || !isDefined(weapon)) {
+  if(!isPlayer(attacker) || !isDefined(weapon)) {
     return;
   }
 

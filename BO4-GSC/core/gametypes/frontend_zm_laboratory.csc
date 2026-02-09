@@ -161,7 +161,7 @@ function_1a17b820(localclientnum) {
 
     if(var_8de02736) {
       function_3dd68dd9(localclientnum);
-      setdvar(#"hash_56728884d2904809", 0);
+      setDvar(#"hash_56728884d2904809", 0);
       wait 0.5;
     }
   }

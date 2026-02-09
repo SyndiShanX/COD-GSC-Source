@@ -348,7 +348,7 @@ function function_6e38e085() {
   var_d93f9cb8 = getent("boat_death", "targetname");
   while(true) {
     var_d93f9cb8 waittill("trigger", e_who);
-    if(isplayer(e_who) && (!(isDefined(e_who.var_a98632dd) && e_who.var_a98632dd))) {
+    if(isPlayer(e_who) && (!(isDefined(e_who.var_a98632dd) && e_who.var_a98632dd))) {
       e_who.var_a98632dd = 1;
       e_who thread function_1bbe32e1();
       if(!level flag::get("solo_game")) {
@@ -1164,7 +1164,7 @@ function function_e20ecfa4() {
 }
 
 function function_16155679(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isDefined(weapon.isriotshield) && weapon.isriotshield && (isDefined(attacker.var_36c3d64a) && attacker.var_36c3d64a) && !isplayer(self)) {
+  if(isDefined(weapon.isriotshield) && weapon.isriotshield && (isDefined(attacker.var_36c3d64a) && attacker.var_36c3d64a) && !isPlayer(self)) {
     attacker zm_bgb_pop_shocks::electrocute_actor(self);
     attacker notify("hash_aacf862e");
     attacker zm_island_vo::function_1881817("kill", "shield_electric");
@@ -1173,7 +1173,7 @@ function function_16155679(inflictor, attacker, damage, flags, meansofdeath, wea
 }
 
 function function_a7a11020(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(isDefined(weapon.isriotshield) && weapon.isriotshield && (isDefined(eattacker.var_36c3d64a) && eattacker.var_36c3d64a) && !isplayer(self)) {
+  if(isDefined(weapon.isriotshield) && weapon.isriotshield && (isDefined(eattacker.var_36c3d64a) && eattacker.var_36c3d64a) && !isPlayer(self)) {
     if(level.var_335f95e4 === self && level flag::get("spider_from_mars_trapped_in_raised_cage")) {
       return 0;
     }
@@ -1184,7 +1184,7 @@ function function_a7a11020(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function function_d68f2492(eattacker, idamage, shitloc, smeansofdeath) {
-  if(isDefined(self.var_36c3d64a) && self.var_36c3d64a && !isplayer(eattacker)) {
+  if(isDefined(self.var_36c3d64a) && self.var_36c3d64a && !isPlayer(eattacker)) {
     self zm_bgb_pop_shocks::electrocute_actor(eattacker);
   }
 }

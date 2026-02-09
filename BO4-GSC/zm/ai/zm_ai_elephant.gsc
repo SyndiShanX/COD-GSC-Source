@@ -291,7 +291,7 @@ function_6b086058(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     return 0;
   }
 
-  if(isDefined(attacker) && !isplayer(attacker)) {
+  if(isDefined(attacker) && !isPlayer(attacker)) {
     return 0;
   }
 
@@ -340,7 +340,6 @@ function_6b086058(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 
       if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
         iprintlnbold("<dev string:x57>");
-
       }
 
       return 0;

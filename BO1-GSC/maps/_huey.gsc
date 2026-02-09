@@ -10,13 +10,12 @@ main() {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_unload_groups(::unload_groups);
 }
-
 precache_submodels() {}
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   for(i = 0; i < 9; i++) {
@@ -60,7 +59,6 @@ setanims() {
   positions[7].waiting = % ai_huey_passenger_waiting;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

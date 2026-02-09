@@ -228,7 +228,7 @@ function private function_e1aad2b1() {
 }
 
 function function_a8d8b9c7() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   if(self function_3955ccef()) {
     self setdstat("PlayerStatsByMap", getrootmapname(), "allCollectiblesCollected", 1);
     self notify("give_achievement", "CP_MISSION_COLLECTIBLES");

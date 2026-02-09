@@ -110,7 +110,6 @@ function_ec73770b(local_client_num) {
         if(getdvarint(#"hash_45f38774fd8ac214", 0) > 0) {
           sphere(mountable_point, 2, (0.1, 0.9, 0.1), 0.8, 1, 16, 1);
         }
-
       } else if(objective_state(local_client_num, obj_id) != "invisible") {
         objective_setstate(local_client_num, obj_id, "invisible");
       }

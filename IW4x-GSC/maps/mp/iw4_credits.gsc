@@ -12,7 +12,7 @@ main() {
   game["defenders"] = "axis";
 
   maps\mp\_compass::setupMiniMap("compass_map_hunted");
-  setdvar("compassmaxrange", "4000");
+  setDvar("compassmaxrange", "4000");
 
   array_thread(getEntArray("compassTriggers", "targetname"), ::compass_triggers_think);
 }

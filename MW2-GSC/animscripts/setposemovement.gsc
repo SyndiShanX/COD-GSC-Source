@@ -49,11 +49,8 @@ InitPoseMovementFunctions() {
   anim.SetPoseMovementFnArray["prone"]["run"] = ::BeginProneRun;
 }
 
-//--------------------------------------------------------------------------------
-// Standing poses
-//--------------------------------------------------------------------------------
-
-BeginStandStop() {
+//-------------------------------------------------------------------------------- // Standing poses
+//-------------------------------------------------------------------------------- BeginStandStop() {
   switch (self.a.pose) {
     case "stand":
       switch (self.a.movement) {
@@ -184,10 +181,8 @@ BeginStandRun() {
   return true;
 }
 
-//--------------------------------------------------------------------------------
-// Crouching functions
-//--------------------------------------------------------------------------------
-BeginCrouchStop() {
+//-------------------------------------------------------------------------------- // Crouching functions
+//-------------------------------------------------------------------------------- BeginCrouchStop() {
   switch (self.a.pose) {
     case "stand":
       switch (self.a.movement) {
@@ -312,11 +307,8 @@ BeginCrouchRun() {
   return true;
 }
 
-//--------------------------------------------------------------------------------
-// Prone Functions
-//--------------------------------------------------------------------------------
-
-BeginProneStop() {
+//-------------------------------------------------------------------------------- // Prone Functions
+//-------------------------------------------------------------------------------- BeginProneStop() {
   switch (self.a.pose) {
     case "stand":
       switch (self.a.movement) {
@@ -459,11 +451,8 @@ BeginProneRun() {
   return true;
 }
 
-//--------------------------------------------------------------------------------
-// Standing support functions
-//--------------------------------------------------------------------------------
-
-PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
+//-------------------------------------------------------------------------------- // Standing support functions
+//-------------------------------------------------------------------------------- PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
   endTime = gettime() + crossblendTime * 1000;
 
   if(isarray(transAnim))
@@ -587,14 +576,10 @@ CrouchToStand() {
 
     PlayTransitionAnimation(%crouch2stand, "stand", "stop", undefined, standSpeed);
   }
-
 }
 
-//--------------------------------------------------------------------------------
-// Crouched Support Functions
-//--------------------------------------------------------------------------------
-
-CrouchToCrouchWalk() {
+//-------------------------------------------------------------------------------- // Crouched Support Functions
+//-------------------------------------------------------------------------------- CrouchToCrouchWalk() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToCrouchWalk " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToCrouchWalk " + self.a.movement);
 
@@ -745,11 +730,8 @@ ProneToStandWalk() {
   BlendIntoStandWalk();
 }
 
-//--------------------------------------------------------------------------------
-// Prone Support Functions
-//--------------------------------------------------------------------------------
-
-ProneToProneMove(movement) {
+//-------------------------------------------------------------------------------- // Prone Support Functions
+//-------------------------------------------------------------------------------- ProneToProneMove(movement) {
   // (The parameter "movement" is just used for setting the state variable, since prone guys move the same whether
   // "walking" or "running".
   assertEX(self.a.pose == "prone", "SetPoseMovement::ProneToProneMove " + self.a.pose);
@@ -893,11 +875,8 @@ CrouchRunToProneRun() {
   ProneToProneRun();
 }
 
-//--------------------------------------------------------------------------------
-// General support functions
-//--------------------------------------------------------------------------------
-
-PlayTransitionAnimationThread_WithoutWaitSetStates(transAnim, endPose, endMovement, finalAnim, rate) {
+//-------------------------------------------------------------------------------- // General support functions
+//-------------------------------------------------------------------------------- PlayTransitionAnimationThread_WithoutWaitSetStates(transAnim, endPose, endMovement, finalAnim, rate) {
   self endon("killanimscript"); // the threaded one needs this or it wont die
   self endon("entered_pose" + endPose);
   PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, false);
@@ -938,7 +917,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
   if(!isDefined(self.a.movement))
     self.movement = "undefined";
   debugIdentifier = "";
-  /#debugIdentifier = self.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
+  debugIdentifier = self.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone2", undefined, debugIdentifier);
 
   // In case we finished earlier than we expected (eg the animation was already playing before we started), // set the variables and kill the other thread.

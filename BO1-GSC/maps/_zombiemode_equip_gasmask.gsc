@@ -7,6 +7,7 @@
 #include common_scripts\utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 init() {
   if(!maps\_zombiemode_equipment::is_equipment_included("equip_gasmask_zm")) {
     return;
@@ -16,27 +17,25 @@ init() {
   PreCacheItem("lower_equip_gasmask_zm");
   level thread gasmask_on_player_connect();
 }
-
 gasmask_on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
   }
 }
-
 gasmask_removed_watcher_thread() {
   self notify("only_one_gasmask_removed_thread");
   self endon("only_one_gasmask_removed_thread");
   self endon("disconnect");
   self waittill("equip_gasmask_zm_taken");
   if(isDefined(level.zombiemode_gasmask_reset_player_model)) {
-    ent_num = self getEntityNumber();
+    ent_num = self GetEntityNumber();
     if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
     }
     self[[level.zombiemode_gasmask_reset_player_model]](ent_num);
   }
   if(isDefined(level.zombiemode_gasmask_reset_player_viewmodel)) {
-    ent_num = self getEntityNumber();
+    ent_num = self GetEntityNumber();
     if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
     }
@@ -44,7 +43,6 @@ gasmask_removed_watcher_thread() {
   }
   self clearclientflag(level._CF_PLAYER_GASMASK_OVERLAY);
 }
-
 gasmask_activation_watcher_thread() {
   self endon("zombified");
   self endon("disconnect");
@@ -53,14 +51,14 @@ gasmask_activation_watcher_thread() {
   self thread remove_gasmask_on_player_bleedout();
   self thread remove_gasmask_on_game_over();
   if(isDefined(level.zombiemode_gasmask_set_player_model)) {
-    ent_num = self getEntityNumber();
+    ent_num = self GetEntityNumber();
     if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
     }
     self[[level.zombiemode_gasmask_set_player_model]](ent_num);
   }
   if(isDefined(level.zombiemode_gasmask_set_player_viewmodel)) {
-    ent_num = self getEntityNumber();
+    ent_num = self GetEntityNumber();
     if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
     }
@@ -72,7 +70,7 @@ gasmask_activation_watcher_thread() {
       self increment_is_drinking();
       self SetActionSlot(1, "");
       if(isDefined(level.zombiemode_gasmask_set_player_model)) {
-        ent_num = self getEntityNumber();
+        ent_num = self GetEntityNumber();
         if(isDefined(self.zm_random_char)) {
           ent_num = self.zm_random_char;
         }
@@ -85,7 +83,7 @@ gasmask_activation_watcher_thread() {
       self increment_is_drinking();
       self SetActionSlot(1, "");
       if(isDefined(level.zombiemode_gasmask_set_player_model)) {
-        ent_num = self getEntityNumber();
+        ent_num = self GetEntityNumber();
         if(isDefined(self.zm_random_char)) {
           ent_num = self.zm_random_char;
         }
@@ -106,7 +104,7 @@ gasmask_activation_watcher_thread() {
         self setactionslot(1, "weapon", "equip_gasmask_zm");
         self notify("equipment_select_response_done");
         continue;
-      } else if(isDefined(self.prev_weapon_before_equipment_change) && self hasWeapon(self.prev_weapon_before_equipment_change)) {
+      } else if(isDefined(self.prev_weapon_before_equipment_change) && self HasWeapon(self.prev_weapon_before_equipment_change)) {
         if(self.prev_weapon_before_equipment_change != self GetCurrentWeapon()) {
           self SwitchToWeapon(self.prev_weapon_before_equipment_change);
           self waittill("weapon_change_complete");
@@ -130,21 +128,17 @@ gasmask_activation_watcher_thread() {
     self notify("equipment_select_response_done");
   }
 }
-
 remove_gasmask_on_player_bleedout() {
   self endon("equip_gasmask_zm_taken");
   self waittill("bled_out");
   self clearclientflag(level._CF_PLAYER_GASMASK_OVERLAY);
 }
-
 remove_gasmask_on_game_over() {
   self endon("equip_gasmask_zm_taken");
   level waittill("pre_end_game");
   self clearclientflag(level._CF_PLAYER_GASMASK_OVERLAY);
 }
-
 gasmask_active() {
   return (self maps\_zombiemode_equipment::is_equipment_active("equip_gasmask_zm"));
 }
-
 gasmask_debug_print(msg, color) {}

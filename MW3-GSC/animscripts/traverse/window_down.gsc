@@ -16,7 +16,7 @@ main() {
   var_3 = self getnegotiationstartnode();
   self orientmode("face angle", var_3.angles[1]);
   var_4 = var_3._id_1EFA - var_3.origin[2];
-  self setflaggedanimknoballrestart("traverse", var_0, % body, 1, 0.15, 1);
+  self setflaggedanimknoballrestart("traverse", var_0, %body, 1, 0.15, 1);
   thread animscripts\notetracks::_id_239E("traverse", "stop_traverse_notetracks");
   wait 1.5;
   var_5 = (0, var_3.angles[1], 0);
@@ -52,10 +52,9 @@ main() {
 
   if(isDefined(self.groundtype)) {
     self playSound("Land_" + self.groundtype);
-
   }
   self notify("stop_traverse_notetracks");
-  self setflaggedanimknoballrestart("traverse", var_1, % body, 1, 0.15, 1);
+  self setflaggedanimknoballrestart("traverse", var_1, %body, 1, 0.15, 1);
   self traversemode("gravity");
   animscripts\shared::_id_0C51("traverse");
 }

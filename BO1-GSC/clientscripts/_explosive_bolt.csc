@@ -1,6 +1,6 @@
 /*********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_explosive_bolt.csc
+ * Script: clientscripts\_explosive_bolt\.csc
 *********************************************/
 
 main() {
@@ -9,7 +9,6 @@ main() {
   PrintLn("crossbow_enemy_light :" + level._effect["crossbow_enemy_light"]);
   PrintLn("crossbow_friendly_light :" + level._effect["crossbow_friendly_light"]);
 }
-
 spawned(localClientNum, play_sound, bool_monkey_bolt) {
   PrintLn("explosive bolt spawned");
   player = GetLocalPlayer(localClientNum);
@@ -41,7 +40,6 @@ spawned(localClientNum, play_sound, bool_monkey_bolt) {
     }
   }
 }
-
 loop_local_sound(localClientNum, alias, interval, fx) {
   self endon("entityshutdown");
   while(1) {

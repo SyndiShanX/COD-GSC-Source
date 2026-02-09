@@ -39,9 +39,9 @@ func_49C3() {
 
 func_position_player_get(var_0) {
   if(distancesquared(var_0, level.player.origin) > 4096) {
-    setdvar("createfx_playerpos_x", level.player.origin[0]);
-    setdvar("createfx_playerpos_y", level.player.origin[1]);
-    setdvar("createfx_playerpos_z", level.player.origin[2]);
+    setDvar("createfx_playerpos_x", level.player.origin[0]);
+    setDvar("createfx_playerpos_y", level.player.origin[1]);
+    setDvar("createfx_playerpos_z", level.player.origin[2]);
   }
 
   return level.player.origin;

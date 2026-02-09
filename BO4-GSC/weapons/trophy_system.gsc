@@ -469,7 +469,7 @@ watchtrophysystemdamage(watcher) {
     attacker = self[[level.figure_out_attacker]](waitresult.attacker);
     damage = weapons::function_74bbb3fa(damage, weapon, self.weapon);
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
 

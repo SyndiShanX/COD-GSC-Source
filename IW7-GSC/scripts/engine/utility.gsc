@@ -1238,7 +1238,7 @@ delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
 issp() {
   if(!isDefined(level.issp)) {
-    var_0 = getdvar("mapname");
+    var_0 = getDvar("mapname");
     var_1 = "";
 
     for(var_2 = 0; var_2 < min(var_0.size, 3); var_2++) {
@@ -1252,12 +1252,12 @@ issp() {
 }
 
 iscp() {
-  return string_starts_with(getdvar("mapname"), "cp_");
+  return string_starts_with(getDvar("mapname"), "cp_");
 }
 
 issp_towerdefense() {
   if(!isDefined(level.issp_towerdefense)) {
-    level.issp_towerdefense = string_starts_with(getdvar("mapname"), "so_td_");
+    level.issp_towerdefense = string_starts_with(getDvar("mapname"), "so_td_");
   }
 
   return level.issp_towerdefense;
@@ -2255,54 +2255,54 @@ waittill_notify_and_time(var_0, var_1) {
 }
 
 fileprint_launcher_start_file() {
-  level.fileprintlauncher_linecount = 0;
-  level.fileprint_launcher = 1;
-  fileprint_launcher("GAMEPRINTSTARTFILE:");
+level.fileprintlauncher_linecount = 0;
+level. fileprint_launcher = 1;
+fileprint_launcher("GAMEPRINTSTARTFILE:");
 }
 
 fileprint_launcher(var_0) {
-  level.fileprintlauncher_linecount++;
+level.fileprintlauncher_linecount++;
 
-  if(level.fileprintlauncher_linecount > 200) {
-    wait 0.05;
-    level.fileprintlauncher_linecount = 0;
-  }
+if(level.fileprintlauncher_linecount > 200) {
+  wait 0.05;
+  level.fileprintlauncher_linecount = 0;
+}
 }
 
 fileprint_launcher_end_file(var_0, var_1) {
-  if(!isDefined(var_1)) {
-    var_1 = 0;
-  }
+if(!isDefined(var_1)) {
+  var_1 = 0;
+}
 
-  if(var_1) {
-    fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + var_0);
-  } else {
-    fileprint_launcher("GAMEPRINTENDFILE:" + var_0);
-  }
+if(var_1) {
+  fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + var_0);
+} else {
+  fileprint_launcher("GAMEPRINTENDFILE:" + var_0);
+}
 
-  var_2 = gettime() + 4000;
+var_2 = gettime() + 4000;
 
-  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_2) {
-    wait 0.05;
-  }
+while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getDvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_2) {
+  wait 0.05;
+}
 
-  if(!(gettime() < var_2)) {
-    iprintlnbold("LAUNCHER_PRINT_FAIL:(TIMEOUT): launcherconflict? restart launcher and try again? ");
-    level.fileprint_launcher = undefined;
-    return 0;
-  }
+if(!(gettime() < var_2)) {
+  iprintlnbold("LAUNCHER_PRINT_FAIL:(TIMEOUT): launcherconflict? restart launcher and try again? ");
+  level. fileprint_launcher = undefined;
+  return 0;
+}
 
-  var_3 = getdvar("LAUNCHER_PRINT_FAIL");
+var_3 = getDvar("LAUNCHER_PRINT_FAIL");
 
-  if(var_3 != "0") {
-    iprintlnbold("LAUNCHER_PRINT_FAIL:(" + var_3 + "): launcherconflict? restart launcher and try again? ");
-    level.fileprint_launcher = undefined;
-    return 0;
-  }
+if(var_3 != "0") {
+  iprintlnbold("LAUNCHER_PRINT_FAIL:(" + var_3 + "): launcherconflict? restart launcher and try again? ");
+  level. fileprint_launcher = undefined;
+  return 0;
+}
 
-  iprintlnbold("Launcher write to file successful!");
-  level.fileprint_launcher = undefined;
-  return 1;
+iprintlnbold("Launcher write to file successful!");
+level. fileprint_launcher = undefined;
+return 1;
 }
 
 launcher_write_clipboard(var_0) {
@@ -2843,7 +2843,7 @@ add_init_script(var_0, var_1) {
 func_D959() {}
 
 func_C953() {
-  if(getdvar("g_connectpaths") == "2") {
+  if(getDvar("g_connectpaths") == "2") {
     level waittill("eternity");
   }
 }
@@ -3350,7 +3350,7 @@ getpredictedaimyawtoshootentorpos(var_0, var_1, var_2) {
 
   var_3 = (0, 0, 0);
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_3 = var_1 getvelocity();
   } else if(isai(var_1)) {
     var_3 = var_1.velocity;
@@ -3371,7 +3371,7 @@ getpredictedaimyawtoshootentorpos3d(var_0, var_1, var_2) {
 
   var_3 = (0, 0, 0);
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_3 = var_1 getvelocity();
   } else if(isai(var_1)) {
     var_3 = var_1.velocity;
@@ -3392,7 +3392,7 @@ getpredictedaimpitchtoshootentorpos3d(var_0, var_1, var_2) {
 
   var_3 = (0, 0, 0);
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_3 = var_1 getvelocity();
   } else if(isai(var_1)) {
     var_3 = var_1.velocity;
@@ -3452,7 +3452,7 @@ player_is_in_jackal() {
 
 set_createfx_enabled() {
   if(!isDefined(level.createfx_enabled)) {
-    level.createfx_enabled = getdvar("createfx") != "";
+    level.createfx_enabled = getDvar("createfx") != "";
   }
 }
 

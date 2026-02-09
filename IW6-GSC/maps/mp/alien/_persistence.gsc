@@ -578,7 +578,6 @@ award_completion_tokens() {
 
     if(getDvar("alien_debug_eog") == "1")
       iprintln("Hardcore Bonus Token Awarded!");
-
   }
 
   if(level.all_challenge_completed) {
@@ -596,7 +595,6 @@ award_completion_tokens() {
 
     if(getDvar("alien_debug_eog") == "1")
       iprintln("Active Relics Bonus Token Awarded!");
-
   }
 
   if(1 < self get_player_escaped()) {
@@ -606,7 +604,6 @@ award_completion_tokens() {
 
         if(getDvar("alien_debug_eog") == "1")
           iprintln("New Player Assist Bonus Token Awarded!");
-
       }
     }
   }
@@ -830,7 +827,6 @@ weapons_tracking_init() {
       base_weapon = get_base_weapon_name(weapon_ref);
 
       self.persistence_weaponstats[base_weapon] = true;
-
     }
   }
 
@@ -966,7 +962,7 @@ update_weaponstats_kills(weapon_ref, kills) {
 }
 
 update_weaponstats(stat_type, weapon_ref, stat, value) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   base_weapon = get_base_weapon_name(weapon_ref);
@@ -1026,7 +1022,7 @@ resource_tracking_init() {
 }
 
 update_resource_stats(track_type, resource, count) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   assertex(isDefined(resource), "resource reference string invalid");
@@ -1290,7 +1286,6 @@ give_player_xp(xp) {
   new_xp = old_xp + xp;
   new_prestige = 0;
 
-  /#	
   if(getDvar("alien_debug_xp") == "1")
     IPrintLn("+" + xp + "xp [" + new_xp + "]");
 
@@ -1324,11 +1319,10 @@ give_player_xp(xp) {
       self notify("ranked_up", new_rank);
       self update_player_session_rankup();
 
-      /#		if( getDvar( "alien_debug_xp" ) == "1" )
-      IPrintLnbold("Ranked up: Lv." + new_rank + " [XP: " + new_xp + "]");
+      if(getDvar("alien_debug_xp") == "1")
+        IPrintLnbold("Ranked up: Lv." + new_rank + " [XP: " + new_xp + "]");
 
       self award_rank_up_tokens(old_rank);
-
     }
 
     self SetRank(self get_player_rank(), self get_player_prestige());

@@ -483,7 +483,6 @@ islocationgood(location, context) {
       if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
         sphere(location, radius, (0, 0, 1), 1, 1, 10, 1);
       }
-
     }
   }
 
@@ -735,9 +734,7 @@ supplydropwatcher(package_contents_id, trigger_event, supplydropweapon, context)
 
     if(isDefined(self) && issupplydropweapon) {
       if(isDefined(context)) {
-        if(!isDefined(player.markerposition) || !(isDefined(context.islocationgood) && [
-            [context.islocationgood]
-          ](player.markerposition, context))) {
+        if(!isDefined(player.markerposition) || !(isDefined(context.islocationgood) && [[context.islocationgood]](player.markerposition, context))) {
           if(isDefined(level.killstreakcorebundle.ksinvalidlocationsound)) {
             player playsoundtoplayer(level.killstreakcorebundle.ksinvalidlocationsound, player);
           }
@@ -877,14 +874,14 @@ crateactivate(hacker) {
       objective_add(enemycrateobjid, "invisible", self.origin);
       objective_setstate(enemycrateobjid, "active");
 
-      if(isplayer(self.owner)) {
+      if(isPlayer(self.owner)) {
         objective_setinvisibletoplayer(enemycrateobjid, self.owner);
       }
 
       self.enemyobjid[self.enemyobjid.size] = enemycrateobjid;
     }
 
-    if(isplayer(self.owner)) {
+    if(isPlayer(self.owner)) {
       objective_setvisibletoplayer(crateobjid, self.owner);
     }
 
@@ -915,7 +912,7 @@ crateactivate(hacker) {
     }
   }
 
-  if(isDefined(self.owner) && isplayer(self.owner) && isbot(self.owner)) {
+  if(isDefined(self.owner) && isPlayer(self.owner) && isbot(self.owner)) {
     self.owner notify(#"bot_crate_landed", {
       #crate: self
     });
@@ -1630,7 +1627,7 @@ cratedroptogroundtrace(start) {
   end = start + (0, 0, -8000);
   trace = bulletTrace(start, end, 1, self, 0, 1);
 
-  if(isDefined(trace[# "entity"]) && isplayer(trace[# "entity"]) && isalive(trace[# "entity"])) {
+  if(isDefined(trace[# "entity"]) && isPlayer(trace[# "entity"]) && isalive(trace[# "entity"])) {
     player = trace[# "entity"];
 
     if(player.sessionstate != "playing") {
@@ -2022,7 +2019,7 @@ spawn_helicopter(owner, team, origin, angles, vehicledef, targetname, killstreak
   chopper setowner(owner);
 
   if(!isDefined(chopper)) {
-    if(isplayer(owner)) {
+    if(isPlayer(owner)) {
       killstreakrules::killstreakstop("supply_drop", team, killstreak_id);
       self iprintlnbold(#"hash_7a1ca44da026f58c");
       self notify(#"cleanup_marker");
@@ -2064,7 +2061,7 @@ spawn_helicopter(owner, team, origin, angles, vehicledef, targetname, killstreak
   chopper setneargoalnotifydist(40);
   target_set(chopper, (0, 0, -25));
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     chopper thread refcountdecchopper(team, killstreak_id);
   }
 
@@ -2891,7 +2888,7 @@ refcountdecchopper(team, killstreak_id) {
 }
 
 supply_drop_dev_gui() {
-  setdvar(#"scr_supply_drop_gui", "<dev string:x6d>");
+  setDvar(#"scr_supply_drop_gui", "<dev string:x6d>");
 
   while(true) {
     wait 0.5;

@@ -957,9 +957,7 @@ function margwadamage(inflictor, attacker, damage, dflags, mod, weapon, point, d
           attacker show_hit_marker();
           if(headclosest.health <= 0) {
             if(isDefined(level.margwa_head_kill_weapon_check)) {
-              [
-                [level.margwa_head_kill_weapon_check]
-              ](self, weapon);
+              [[level.margwa_head_kill_weapon_check]](self, weapon);
             }
             if(self margwakillhead(headclosest.model, attacker)) {
               return self.health;
@@ -990,9 +988,7 @@ function margwadamage(inflictor, attacker, damage, dflags, mod, weapon, point, d
         attacker show_hit_marker();
         if(headinfo.health <= 0) {
           if(isDefined(level.margwa_head_kill_weapon_check)) {
-            [
-              [level.margwa_head_kill_weapon_check]
-            ](self, weapon);
+            [[level.margwa_head_kill_weapon_check]](self, weapon);
           }
           if(self margwakillhead(modelhit, attacker)) {
             return self.health;

@@ -1,22 +1,22 @@
 init() {
-  setdvar("r_smodelinstancedthreshold", 2);
-  setdvar("r_primaryLightUseTweaks", 0);
-  setdvar("r_primaryLightTweakDiffuseStrength", 0);
-  setdvar("r_primaryLightTweakSpecularStrength", 0);
-  setdvar("r_viewModelPrimaryLightUseTweaks", 0);
-  setdvar("r_viewModelPrimaryLightTweakDiffuseStrength", 0);
-  setdvar("r_viewModelPrimaryLightTweakSpecularStrength", 1);
-  setdvar("r_colorScaleUseTweaks", 0);
-  setdvar("r_diffuseColorScale", 0);
-  setdvar("r_specularColorScale", 0);
-  setdvar("r_veil", 0);
-  setdvar("r_veilusetweaks", 0);
-  setdvar("r_veilStrength", 0.087);
-  setdvar("r_veilBackgroundStrength", 0.913);
+  setDvar("r_smodelinstancedthreshold", 2);
+  setDvar("r_primaryLightUseTweaks", 0);
+  setDvar("r_primaryLightTweakDiffuseStrength", 0);
+  setDvar("r_primaryLightTweakSpecularStrength", 0);
+  setDvar("r_viewModelPrimaryLightUseTweaks", 0);
+  setDvar("r_viewModelPrimaryLightTweakDiffuseStrength", 0);
+  setDvar("r_viewModelPrimaryLightTweakSpecularStrength", 1);
+  setDvar("r_colorScaleUseTweaks", 0);
+  setDvar("r_diffuseColorScale", 0);
+  setDvar("r_specularColorScale", 0);
+  setDvar("r_veil", 0);
+  setDvar("r_veilusetweaks", 0);
+  setDvar("r_veilStrength", 0.087);
+  setDvar("r_veilBackgroundStrength", 0.913);
 }
 
 is_iw4_map() {
-  map = getdvar("mapname");
+  map = getDvar("mapname");
   switch (map) {
     case "mp_rust":
     case "mp_afghan":

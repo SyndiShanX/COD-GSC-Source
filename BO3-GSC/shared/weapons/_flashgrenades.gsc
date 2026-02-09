@@ -74,7 +74,7 @@ function monitorflash_internal(amount_distance, amount_angle, attacker, direct_o
   }
   if(hurtvictim) {
     if(self util::mayapplyscreeneffect() || (!direct_on_player && self isremotecontrolling())) {
-      if(isDefined(attacker) && self != attacker && isplayer(attacker)) {
+      if(isDefined(attacker) && self != attacker && isPlayer(attacker)) {
         attacker addweaponstat(getweapon("flash_grenade"), "hits", 1);
         attacker addweaponstat(getweapon("flash_grenade"), "used", 1);
       }

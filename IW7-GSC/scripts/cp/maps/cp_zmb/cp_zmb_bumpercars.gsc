@@ -73,7 +73,7 @@ activate_bumper_car(var_0) {
           continue;
         }
 
-        if(isplayer(var_4[var_6]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::istrue(var_4[var_6]["entity"].isreviving)) {
+        if(isPlayer(var_4[var_6]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::istrue(var_4[var_6]["entity"].isreviving)) {
           var_5 = 1;
         }
       }
@@ -127,7 +127,7 @@ activate_bumper_car(var_0) {
           continue;
         }
 
-        if(isplayer(var_4[var_6]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::istrue(var_4[var_6]["entity"].isreviving)) {
+        if(isPlayer(var_4[var_6]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::istrue(var_4[var_6]["entity"].isreviving)) {
           var_5 = 1;
         }
       }
@@ -207,11 +207,11 @@ kill_zombies() {
       continue;
     }
 
-    if(!isplayer(var_0) && !scripts\cp\utility::should_be_affected_by_trap(var_0)) {
+    if(!isPlayer(var_0) && !scripts\cp\utility::should_be_affected_by_trap(var_0)) {
       continue;
     }
 
-    if((isplayer(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0)) || var_0.team == "allies") {
+    if((isPlayer(var_0) && !scripts\cp\cp_laststand::player_in_laststand(var_0)) || var_0.team == "allies") {
       var_0 thread push_and_damage_player(self);
       continue;
     }
@@ -248,7 +248,7 @@ push_and_damage_player(var_0) {
   self setorigin(var_1[0].origin, 0);
   self setvelocity(vectornormalize(self.origin - var_0.origin) * 300 + (0, 0, 100));
   wait(0.1);
-  if(isplayer(self) && !scripts\engine\utility::istrue(self.isrewinding)) {
+  if(isPlayer(self) && !scripts\engine\utility::istrue(self.isrewinding)) {
     self dodamage(self.health + 100, var_0.origin);
   }
 

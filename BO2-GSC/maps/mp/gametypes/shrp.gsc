@@ -60,9 +60,9 @@ main() {
 }
 
 onstartgametype() {
-  setdvar("scr_disable_weapondrop", 1);
-  setdvar("scr_xpscale", 0);
-  setdvar("ui_guncycle", 0);
+  setDvar("scr_disable_weapondrop", 1);
+  setDvar("scr_xpscale", 0);
+  setDvar("ui_guncycle", 0);
   makedvarserverinfo("ui_guncycle", 0);
   setclientnamemode("auto_change");
   setobjectivetext("allies", &"OBJECTIVES_SHRP");
@@ -164,7 +164,7 @@ getrandomgunfromprogression() {
   if(isDefined(level.gunprogression))
     size = level.gunprogression.size;
 
-  debug_weapon = getdvar(#"_id_1C6DE858");
+  debug_weapon = getDvar(#"_id_1C6DE858");
 
   allowproneblock = 1;
   players = get_players();
@@ -289,7 +289,7 @@ waitlongdurationwithhostmigrationpause(nextguncycletime, duration) {
     maps\mp\gametypes\_hostmigration::waittillhostmigrationstarts((endtime - gettime()) / 1000);
 
     if(isDefined(level.hostmigrationtimer)) {
-      setdvar("ui_guncycle", 0);
+      setDvar("ui_guncycle", 0);
       timepassed = maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
       totaltimepassed = totaltimepassed + timepassed;
       endtime = endtime + timepassed;
@@ -298,7 +298,7 @@ waitlongdurationwithhostmigrationpause(nextguncycletime, duration) {
       println("[SHRP] totatTimePassed = " + totaltimepassed);
       println("[SHRP] level.discardTime = " + level.discardtime);
 
-      setdvar("ui_guncycle", nextguncycletime + totaltimepassed);
+      setDvar("ui_guncycle", nextguncycletime + totaltimepassed);
     }
   }
 
@@ -308,7 +308,7 @@ waitlongdurationwithhostmigrationpause(nextguncycletime, duration) {
 
 guncyclewaiter(nextguncycletime, waittime) {
   continuecycling = 1;
-  setdvar("ui_guncycle", nextguncycletime);
+  setDvar("ui_guncycle", nextguncycletime);
   level.guncycletimer settimer(waittime);
   level.guncycletimer.alpha = 1;
   timepassed = waitlongdurationwithhostmigrationpause(nextguncycletime, (nextguncycletime - gettime()) / 1000 - 6);
@@ -385,7 +385,7 @@ chooserandomguns() {
         lastmultiplier = 1;
 
       level.sharpshootermultiplier = 2;
-      setdvar("ui_guncycle", 0);
+      setDvar("ui_guncycle", 0);
       level.guncycletimer.alpha = 0;
 
       for(i = 0; i < level.players.size; i++)
@@ -459,7 +459,7 @@ takeoldweapons() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if(isDefined(level.sharpshootermultiplier) && level.sharpshootermultiplier == 2) {
       if(!isDefined(attacker.pers["x2kills"]))
         attacker.pers["x2kills"] = 1;

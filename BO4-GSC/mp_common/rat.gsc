@@ -22,16 +22,16 @@ __init__() {
   level.rat.deathcount = 0;
   addratscriptcmd("<dev string:x38>", &rscaddenemy);
   addratscriptcmd("<dev string:x43>", &function_50634409);
-  setdvar(#"rat_death_count", 0);
+  setDvar(#"rat_death_count", 0);
 }
 
 function_50634409(params) {
   player = util::gethostplayerforbots();
-  setdvar(#"bot_allowmovement", 0);
-  setdvar(#"bot_pressattackbtn", 0);
-  setdvar(#"bot_pressmeleebtn", 0);
-  setdvar(#"scr_botsallowkillstreaks", 0);
-  setdvar(#"bot_allowgrenades", 0);
+  setDvar(#"bot_allowmovement", 0);
+  setDvar(#"bot_pressattackbtn", 0);
+  setDvar(#"bot_pressmeleebtn", 0);
+  setDvar(#"scr_botsallowkillstreaks", 0);
+  setDvar(#"bot_allowgrenades", 0);
   team = bot::devgui_relative_team(player, "<dev string:x53>");
   bot = level bot::add_bot(team);
 }
@@ -85,5 +85,5 @@ testenemy(team) {
 deathcounter() {
   self waittill(#"death");
   level.rat.deathcount++;
-  setdvar(#"rat_death_count", level.rat.deathcount);
+  setDvar(#"rat_death_count", level.rat.deathcount);
 }

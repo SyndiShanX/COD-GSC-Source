@@ -86,7 +86,7 @@ function_17c51c94(monkey, ent) {
     return false;
   }
 
-  if((isplayer(ent) || isactor(ent)) && util::function_fbce7263(ent.team, monkey.team)) {
+  if((isPlayer(ent) || isactor(ent)) && util::function_fbce7263(ent.team, monkey.team)) {
     return true;
   }
 

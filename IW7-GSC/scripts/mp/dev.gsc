@@ -41,7 +41,7 @@ func_A5AC() {
 
   var_0 = undefined;
   foreach(var_2 in level.characters) {
-    if(isplayer(var_2) && !isbot(var_2)) {
+    if(isPlayer(var_2) && !isbot(var_2)) {
       var_0 = var_2;
       break;
     }
@@ -147,12 +147,12 @@ func_53EC() {
 
 func_53E5() {
   for(;;) {
-    var_0 = getdvar("scr_givepowerprimary", "");
+    var_0 = getDvar("scr_givepowerprimary", "");
     if(var_0 != "") {
       func_53E4(var_0, "primary");
     }
 
-    var_0 = getdvar("scr_givepowersecondary", "");
+    var_0 = getDvar("scr_givepowersecondary", "");
     if(var_0 != "") {
       func_53E4(var_0, "secondary");
     }
@@ -177,7 +177,7 @@ func_53E4(var_0, var_1) {
 }
 
 devlistinventory() {
-  var_0 = getdvar("scr_list_inventory", "");
+  var_0 = getDvar("scr_list_inventory", "");
   if(var_0 != "") {
     var_1 = devfindhost();
     if(!isDefined(var_1)) {
@@ -219,7 +219,7 @@ devprintweaponlist(var_0, var_1, var_2) {
 func_53E6() {
   var_0 = getdvarint("scr_super_short_cooldown", 0);
   for(;;) {
-    var_1 = getdvar("scr_givesuper", "");
+    var_1 = getDvar("scr_givesuper", "");
     if(var_1 != "") {
       var_2 = devfindhost();
       var_2 scripts\mp\supers::stopridingvehicle(var_1);
@@ -268,9 +268,9 @@ devfindhost() {
 }
 
 func_53F0() {
-  var_0 = getdvar("scr_debug_streak_passive", "none");
+  var_0 = getDvar("scr_debug_streak_passive", "none");
   for(;;) {
-    var_1 = getdvar("scr_debug_streak_passive", "none");
+    var_1 = getDvar("scr_debug_streak_passive", "none");
     if(var_0 != var_1) {
       iprintlnbold("All Killstreaks from the DevGui will have " + var_1);
       var_0 = var_1;
@@ -304,7 +304,7 @@ watchsuperdelaycancel() {
 
 watchslowmo() {
   for(;;) {
-    if(getdvar("scr_slowmo") != "") {
+    if(getDvar("scr_slowmo") != "") {
       break;
     }
 
@@ -318,7 +318,7 @@ watchslowmo() {
 
 func_53E2() {
   for(;;) {
-    if(getdvar("scr_jt_devbroshot") != "") {
+    if(getDvar("scr_jt_devbroshot") != "") {
       iprintlnbold(" BRO ");
       level.doingbroshot = scripts\mp\broshot::initbroshot();
       if(level.doingbroshot) {

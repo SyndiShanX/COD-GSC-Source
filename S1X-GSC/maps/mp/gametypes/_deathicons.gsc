@@ -30,7 +30,7 @@ addDeathIcon(entity, dyingplayer, team, timeout, attacker) {
     return;
   }
 
-  if(isDefined(attacker) && IsPlayer(attacker) && (attacker _hasPerk("specialty_silentkill"))) {
+  if(isDefined(attacker) && isPlayer(attacker) && (attacker _hasPerk("specialty_silentkill"))) {
     return;
   }
 

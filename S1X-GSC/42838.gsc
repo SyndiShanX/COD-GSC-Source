@@ -6,7 +6,7 @@
 init() {
   level._threatdetection = spawnStruct();
   level._threatdetection.default_style = "stencil_outline";
-  level._threatdetection.activestyle = getdvar("threat_detection_highlight_style", level._threatdetection.default_style);
+  level._threatdetection.activestyle = getDvar("threat_detection_highlight_style", level._threatdetection.default_style);
   level thread onplayerconnect();
   level thread watchagentspawn();
 }
@@ -53,7 +53,7 @@ changethreatstyle(var_0) {
 }
 
 getthreatstyle() {
-  var_0 = getdvar("threat_detection_highlight_style", level._threatdetection.default_style);
+  var_0 = getDvar("threat_detection_highlight_style", level._threatdetection.default_style);
 
   if(var_0 != level._threatdetection.activestyle) {
     changethreatstyle(var_0);
@@ -310,7 +310,7 @@ addthreatevent(var_0, var_1, var_2, var_3, var_4, var_5) {
       self._threatdetection.showlist[var_16].losendtime = var_8;
       self._threatdetection.showlist[var_16].eventtype = var_2;
 
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         if(!isDefined(var_5) || var_5) {
           self playlocalsound("flag_spawned");
         }
@@ -318,7 +318,7 @@ addthreatevent(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(var_4) {
       visitfxent(::visitorupdatemarkerpos, ::getfriendlymarker, undefined);
     }
@@ -607,7 +607,7 @@ monitorthreathighlight() {
 
       var_17 = bulletTrace(var_16.player.origin + var_0, self.origin + var_0, 1, var_16.player);
 
-      if(var_17["fraction"] < 1 && !isplayer(var_17["entity"])) {
+      if(var_17["fraction"] < 1 && !isPlayer(var_17["entity"])) {
         showthreat(var_16.player, ::getfriendlymarker, ::gethostilemarker, ::visitorshowtoplayer);
         prepare_show_threat(var_1, var_10, var_16.player);
         var_1 = 0;

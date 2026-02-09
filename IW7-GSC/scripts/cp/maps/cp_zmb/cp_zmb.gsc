@@ -5,16 +5,16 @@
 
 main() {
   registerscriptedagents();
-  setdvar("sm_sunSampleSizeNear", 0.6);
-  setdvar("sm_spotDistCull", 6100);
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 4);
-  setdvar("r_umbraAccurateOcclusionThreshold", 512);
-  setdvar("sm_roundRobinPrioritySpotShadows", 8);
-  setdvar("sm_spotUpdateLimit", 8);
+  setDvar("sm_sunSampleSizeNear", 0.6);
+  setDvar("sm_spotDistCull", 6100);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraAccurateOcclusionThreshold", 512);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
   precache();
-  setdvar("player_limitedMovementLeftStickInputScale", 0);
+  setDvar("player_limitedMovementLeftStickInputScale", 0);
   scripts\cp\utility::coop_mode_enable(["portal"]);
   level.avoidance_radius = 15;
   level.suicider_avoidance_radius = 40;
@@ -309,7 +309,7 @@ picturewaitfordamage(var_0) {
   var_1 = spawnfx(level._effect["neil_repair_sparks"], var_0.origin);
   for(;;) {
     var_0 waittill("damage", var_2, var_3);
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       var_3 playlocalsound("song_quest_mw1_step_notify");
       triggerfx(var_1);
       var_0.health = 0;
@@ -342,7 +342,7 @@ waitfordamage(var_0) {
   var_1 = spawnfx(level._effect["neil_repair_sparks"], var_0.origin);
   for(;;) {
     var_0 waittill("damage", var_2, var_3);
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       var_3 playlocalsound("song_quest_mw2_step_notify");
       triggerfx(var_1);
       var_0.health = 0;
@@ -427,7 +427,7 @@ boat_area_kill_trigger() {
   var_0 = getent("player_kill_trig", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 
@@ -522,7 +522,7 @@ gametype_level_init() {
 cp_zmb_zombie_init() {
   level.initial_active_volumes = ["front_gate"];
   level.escape_interaction_registration_func = ::remove_escape_entities;
-  if(getdvar("createfx") != "") {
+  if(getDvar("createfx") != "") {
     level thread free_ents_for_createfx();
   }
 }
@@ -582,7 +582,7 @@ setup_slide() {
       continue;
     }
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1.onslide = 1;
       var_1 thread player_down_slide(var_0);
     }
@@ -829,7 +829,7 @@ gator_mouth_crush(var_0, var_1, var_2, var_3) {
   level endon("deactivate_gator_mouth");
   for(;;) {
     var_1 waittill("trigger", var_4);
-    if(isplayer(var_4) && var_4 scripts\cp\utility::is_valid_player()) {
+    if(isPlayer(var_4) && var_4 scripts\cp\utility::is_valid_player()) {
       var_1 notify("stop_twitch");
       var_1 playSound("croc_trap_bite_tick_tock");
       var_1 playSound("croc_trap_trigger_switch");
@@ -913,7 +913,7 @@ mouth_trig_kill(var_0) {
   var_1 = gettime() + 250;
   while(gettime() < var_1) {
     self waittill("trigger", var_2);
-    if(isplayer(var_2) && scripts\cp\cp_laststand::player_in_laststand(var_2)) {
+    if(isPlayer(var_2) && scripts\cp\cp_laststand::player_in_laststand(var_2)) {
       continue;
     }
 
@@ -1260,7 +1260,7 @@ shredder_battery_spawn() {
   var_0 linkto(self, "tag", (-80, 0, 15), (0, 0, 0));
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(isDefined(var_2) && isplayer(var_2)) {
+    if(isDefined(var_2) && isPlayer(var_2)) {
       if(distancesquared(var_0.origin, var_4) < 400) {
         var_0 thread knock_off_battery(self);
         break;
@@ -1383,7 +1383,7 @@ pick_up_battery() {
   self endon("death");
   for(;;) {
     self waittill("trigger", var_0);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       break;
     }
   }
@@ -2364,7 +2364,7 @@ cp_zmb_should_drop_pillage(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     return 1;
   }
 
@@ -2690,7 +2690,7 @@ setupinvalidvolumes() {
 vectors_are_in_box(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [var_0, var_1, var_2, var_3];
   if(!isDefined(var_4)) {
-    if(isplayer(self) || isagent(self)) {
+    if(isPlayer(self) || isagent(self)) {
       var_4 = self.origin;
     } else {
       return 0;

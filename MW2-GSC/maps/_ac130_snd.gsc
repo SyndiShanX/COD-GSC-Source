@@ -6,19 +6,13 @@
 #include maps\_utility;
 
 main() {
-  //-------------------------------------------------------------------------------------------------
-
-  // 1 ) Check your fire, you're shootin' at friendlies - watch for the blinking strobes those are our guys!
+  //------------------------------------------------------------------------------------------------- // 1 ) Check your fire, you're shootin' at friendlies - watch for the blinking strobes those are our guys!
   // 2 ) Uh, you're firing too close to the friendlies, I repeat, you're firing too close to the friendlies. Watch for those IR strobes.
   // 3 ) Be careful! You almost killed our guys there!
   level.scr_sound["fco"]["ac130_fco_firingtoclose"] = "ac130_fco_firingtoclose";
 
-  //-------------------------------------------------------------------------------------------------
-
-  //CONTEXT SENSATIVE DIALOG
-  //-------------------------------------------------------------------------------------------------
-
-  add_context_sensative_dialog("ai", "in_sight", 0, "ac130_fco_moreenemy"); // More enemy personnel.
+  //------------------------------------------------------------------------------------------------- //CONTEXT SENSATIVE DIALOG
+  //------------------------------------------------------------------------------------------------- add_context_sensative_dialog("ai", "in_sight", 0, "ac130_fco_moreenemy"); // More enemy personnel.
   add_context_sensative_dialog("ai", "in_sight", 1, "ac130_fco_getthatguy"); // Get that guy.
   add_context_sensative_dialog("ai", "in_sight", 2, "ac130_fco_guymovin"); // Roger, guy movin'.
   add_context_sensative_dialog("ai", "in_sight", 3, "ac130_fco_getperson"); // Get that person.

@@ -30,7 +30,7 @@ on_player_spawned(localclientnum) {
 }
 
 on_player_shutdown(localclientnum) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self notify(#"stopfacialthread");
     corpse = self getplayercorpse();
 
@@ -169,7 +169,7 @@ updatefacialanimforplayer(localclientnum, player) {
     return;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

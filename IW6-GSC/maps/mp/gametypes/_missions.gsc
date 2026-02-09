@@ -179,7 +179,7 @@ monitorBlastShieldSurvival() {
   for(;;) {
     self waittill("survived_explosion", attacker);
 
-    if(isDefined(attacker) && IsPlayer(attacker) && self == attacker) {
+    if(isDefined(attacker) && isPlayer(attacker) && self == attacker) {
       continue;
     }
     if(self IsItemUnlocked("_specialty_blastshield") && self _hasPerk("_specialty_blastshield"))
@@ -560,13 +560,11 @@ ch_kills(data, time) {
     if(level.teamCount[data.victim.pers["team"]] > 3 && player.killedPlayers.size == 4 && player.ch_tangoDownComplete == false) {
       player processChallenge("ch_tangodown");
       player.ch_tangoDownComplete = true;
-
     }
 
     if(level.teamCount[data.victim.pers["team"]] > 3 && player.killedPlayersCurrent.size == 4 && player.ch_extremeCrueltyComplete == false) {
       player processChallenge("ch_extremecruelty");
       player.ch_extremeCrueltyComplete = true;
-
     }
   }
 
@@ -1841,7 +1839,6 @@ monitorFallDistance() {
 
       if(falldist / 12.0 > 30 && !isAlive(self))
         self processChallenge("ch_goodbye");
-
     }
     wait .05;
   }
@@ -2056,7 +2053,7 @@ processChallenge_regularMP(baseName, progressInc, forceSetProgress) {
   if(!self rankingEnabled()) {
     return;
   }
-  if(!IsPlayer(self) || IsAI(self)) {
+  if(!isPlayer(self) || IsAI(self)) {
     return;
   }
   if(!isDefined(progressInc))

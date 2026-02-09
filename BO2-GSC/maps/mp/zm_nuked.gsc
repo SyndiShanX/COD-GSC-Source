@@ -85,7 +85,7 @@ main() {
   precachemodel("fx_axis_createfx");
   maps\mp\zombies\_load::main();
 
-  if(getdvar(#"createfx") == "1") {
+  if(getDvar(#"createfx") == "1") {
     return;
   }
   maps\mp\teams\_teamset_cdc::level_init();
@@ -167,7 +167,7 @@ main() {
   if(level.round_number == 1 && is_true(level.enable_magic) && level.gamedifficulty != 0)
     level thread sndmusiceastereggs();
 
-  setdvar("zombiemode_path_minz_bias", 28);
+  setDvar("zombiemode_path_minz_bias", 28);
   level.speed_change_round = 15;
   level.speed_change_max = 5;
   level thread nuked_update_traversals();

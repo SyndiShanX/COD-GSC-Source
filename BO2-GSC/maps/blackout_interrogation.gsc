@@ -114,7 +114,7 @@ run_mason_interrogation_room() {
   scene_interrogation();
   clientnotify("argument_done");
   level.salazar custom_ai_weapon_loadout("hk416_sp", undefined, "fiveseven_sp");
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureTweak", 0);
   stop_exploder(439);
   delete_exploder(439);
   clean_up_mason_interrogation_room();
@@ -390,15 +390,17 @@ set_loadout_offset(str_weapon_full, s_anchor, str_origin) {
 
   if(a_tokens.size > 2) {
     for(i = 1; i < a_tokens.size; i++) {
-      if(a_tokens[i] != "sp" && !issubstr(a_tokens[i], "+"))
+      if(a_tokens[i] != "sp" && !issubstr(a_tokens[i], "+")) {
         str_weapon = str_weapon + ("_" + a_tokens[i]);
+      }
     }
   }
 
-  if(str_origin == "player_primary_loadout_spot")
+  if(str_origin == "player_primary_loadout_spot") {
     b_left_side = 1;
-  else
+  } else {
     b_left_side = 0;
+  }
 
   b_use_offset = 1;
 
@@ -665,22 +667,22 @@ set_loadout_offset(str_weapon_full, s_anchor, str_origin) {
   }
 
   if(b_use_offset) {
-    if(v_origin[0] > 170)
+    if(v_origin[0] > 170) {
       v_origin = (v_origin[0] - 39.5, v_origin[1], v_origin[2]);
+    }
 
     v_offset_origin = v_origin - s_anchor.origin;
     self.origin = self.origin + v_offset_origin;
 
-    if(b_left_side)
+    if(b_left_side) {
       v_debug_color = (1, 0, 0);
-    else
+    } else {
       v_debug_color = (0, 0, 1);
+    }
 
     debugstar(self.origin, 1000, v_debug_color);
-
   } else {
     iprintlnbold(str_weapon + " is not supported by set_loadout_offset()");
-
   }
 }
 
@@ -741,8 +743,9 @@ friendlies_focus_fire_on_turret_after_time() {
     vh_turret = get_ent("observation_hallway_turret", "targetname");
     vh_turret.health = 10;
 
-    while(is_alive(vh_turret))
+    while(is_alive(vh_turret)) {
       level.salazar shoot_at_target(vh_turret, undefined, 0, 2);
+    }
   }
 }
 
@@ -769,15 +772,17 @@ redshirt_rushes_turret() {
       ai_user clear_force_color();
       ai_user thread force_goal(nd_death);
 
-      if(isDefined(vh_turret))
+      if(isDefined(vh_turret)) {
         vh_turret maps\_turret::set_turret_target(ai_user, (0, 0, 0), 0);
+      }
     }
 
     flag_wait("observation_turret_killed");
     setenablenode(nd_safe_spot, 1);
 
-    if(isalive(ai_user))
+    if(isalive(ai_user)) {
       ai_user set_force_color(str_color);
+    }
   }
 }
 
@@ -785,8 +790,9 @@ hallway_front_rush() {
   a_enemies = get_ai_group_ai("obs_hallway_group_front");
 
   foreach(enemy in a_enemies) {
-    if(isalive(enemy))
+    if(isalive(enemy)) {
       enemy maps\_rusher::rush();
+    }
 
     wait 10;
   }
@@ -823,8 +829,9 @@ init_doors() {
   collision linkto(hallway_door, "tag_origin");
   glass_list = getEntArray("interrogation_mirror_broken", "targetname");
 
-  foreach(glass in glass_list)
-  glass hide();
+  foreach(glass in glass_list) {
+    glass hide();
+  }
 
   level thread run_masons_quarters();
 }
@@ -843,8 +850,9 @@ interrogation_menendez_bleed() {
 interrogation_camera() {
   a_m_camera = getEntArray("security_intro_camera", "targetname");
 
-  foreach(m_camera in a_m_camera)
-  play_fx("camera_recording", m_camera.origin, m_camera.angles, "stop_record");
+  foreach(m_camera in a_m_camera) {
+    play_fx("camera_recording", m_camera.origin, m_camera.angles, "stop_record");
+  }
 
   flag_wait("intro_disable_camera");
   level notify("stop_record");
@@ -860,27 +868,27 @@ interrogation_handcuffs() {
 
 notetrack_lights_out(ai_menendez) {
   clientnotify("INT_out");
-  setdvar("r_exposureTweak", 1);
-  setdvar("r_exposureValue", 10.0);
+  setDvar("r_exposureTweak", 1);
+  setDvar("r_exposureValue", 10.0);
 }
 
 notetrack_lights_on(ai_menendez) {
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureTweak", 0);
   clientnotify("interrogation_light");
   stop_exploder(1000);
 }
 
 notetrack_light_flicker(ai_menendez) {
-  setdvar("r_exposureTweak", 1);
+  setDvar("r_exposureTweak", 1);
   clientnotify("INT_flick");
   blend_exposure_over_time(1.0, 0.5);
   blend_exposure_over_time(7.0, 0.2);
   blend_exposure_over_time(level.m_original_exposure, 3.0);
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureTweak", 0);
 }
 
 notetrack_interrogation_explosion(m_player_body) {
-  setdvar("r_exposureTweak", 1);
+  setDvar("r_exposureTweak", 1);
   clientnotify("INT_flick");
   playsoundatposition("exp_carrier_impact", (0, 0, 0));
   level.player playrumbleonentity("artillery_rumble");
@@ -888,7 +896,7 @@ notetrack_interrogation_explosion(m_player_body) {
   blend_exposure_over_time(1.0, 0.5);
   blend_exposure_over_time(4.0, 0.2);
   blend_exposure_over_time(level.m_original_exposure, 3.0);
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureTweak", 0);
 }
 
 notetrack_table_shake(ai_menendez) {
@@ -899,8 +907,9 @@ notetrack_table_shake(ai_menendez) {
 interrogation_break_mirror(ai_salazar) {
   broken_glass_brushes = getEntArray("interrogation_mirror_broken", "targetname");
 
-  foreach(brush in broken_glass_brushes)
-  brush show();
+  foreach(brush in broken_glass_brushes) {
+    brush show();
+  }
 
   exploder(999);
   level.player lerpviewangleclamp(3.0, 0.5, 0.5, 0, 0, 0, 0);
@@ -982,8 +991,9 @@ scene_interrogation() {
   ais = get_ais_from_scene("intro_fight");
 
   foreach(ai in ais) {
-    if(issubstr(ai.targetname, "mirror"))
+    if(issubstr(ai.targetname, "mirror")) {
       ai.name = "";
+    }
   }
 
   mirror_menendez = getent("menendez_ai", "targetname");
@@ -1060,10 +1070,11 @@ get_mirror_cam_offset() {
   v_vake = self.s_fake_mirror.origin;
   v_reflection = v_player - v_mirror;
 
-  if(self.is_reflected_over_y)
+  if(self.is_reflected_over_y) {
     v_reflection = (-1 * v_reflection[0], v_reflection[1], v_reflection[2]);
-  else
+  } else {
     v_reflection = (v_reflection[0], -1 * v_reflection[1], v_reflection[2]);
+  }
 
   return v_reflection;
 }
@@ -1249,8 +1260,9 @@ notetrack_prestige_sailor_shot(ai_sailor) {
   v_end = ai_sailor gettagorigin("J_Head");
   magicbullet("fiveseven_sp", v_start, v_end);
 
-  if(is_mature())
+  if(is_mature()) {
     playFXOnTag(level._effect["menendez_shoots_guard"], ai_sailor, "J_Head");
+  }
 
   exploder(439);
   m_player_body = get_model_or_models_from_scene("intro_fight", "player_body");

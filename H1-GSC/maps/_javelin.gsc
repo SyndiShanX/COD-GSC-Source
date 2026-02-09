@@ -98,7 +98,7 @@ setnoclearance() {
   var_5[3] = (-40, 0, 40);
   var_5[4] = (40, 0, 40);
 
-  if(getdvar("missileDebugDraw") == "1")
+  if(getDvar("missileDebugDraw") == "1")
     var_6 = 1;
   else
     var_6 = 0;

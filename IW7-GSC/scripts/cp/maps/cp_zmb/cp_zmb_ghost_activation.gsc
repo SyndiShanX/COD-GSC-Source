@@ -201,7 +201,7 @@ get_1_9_8_4_kills_on_dance_floor() {
 }
 
 check_kill_on_dance_floor(var_0, var_1) {
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     var_2 = get_dance_floor_tile_color(var_0.origin);
     if(is_correct_color(var_2)) {
       update_kill_order_on_dance_floor();

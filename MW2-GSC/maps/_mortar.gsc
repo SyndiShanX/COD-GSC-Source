@@ -145,7 +145,6 @@ script_mortargroup_style() {
       models[i] delete();
 
       //			mortars[mortars.size] = models[i];
-
     }
   for(i = 0; i < mortars.size; i++) {
     mortars[i] hide();
@@ -161,7 +160,6 @@ script_mortargroup_style() {
       if(!isDefined(level.mortars[triggers[i].script_mortargroup]))
         level.mortars[triggers[i].script_mortargroup] = [];
       mortartrigs[mortartrigs.size] = triggers[i];
-
     }
   for(i = 0; i < mortartrigs.size; i++) {
     mortartrigs[i].mortargroup = 0;
@@ -176,7 +174,6 @@ script_mortargroup_style() {
     level.mortarzone = mortartrig.script_mortargroup;
     mortartrig thread script_mortargroup_mortarzone();
     lasttrig = mortartrig;
-
   }
 }
 
@@ -211,7 +208,6 @@ script_mortargroup_mortarzone() {
       if(count < barragesize) {
         wait(randomfloat(.5));
         count++;
-
       } else {
         count = 0;
         barragesize = 2 + randomint(4);
@@ -229,7 +225,6 @@ script_mortargroup_mortarzone() {
         nonbarragesize = randomint(2) + 3;
         continue;
       }
-
     }
     mortarsinfront = [];
     pick = randomint(level.mortars[self.script_mortargroup].size);
@@ -244,7 +239,6 @@ script_mortargroup_mortarzone() {
         normalvec = vectornormalize(level.mortars[self.script_mortargroup][i].origin - level.player.origin);
         if(vectordot(playerforward, normalvec) > 0.3)
           points[points.size] = i;
-
       }
       if(points.size > 0)
         pick = points[randomint(points.size)];
@@ -260,11 +254,9 @@ script_mortargroup_mortarzone() {
         if(isDefined(target)) {
           target notify("trigger");
           level notify("timed barrage finished");
-
         }
       }
       break;
-
     }
   }
 }
@@ -296,7 +288,6 @@ script_mortargroup_mortar_group() {
       continue;
     level notify("mortarzone", self);
     self waittill("wait again");
-
   }
 }
 
@@ -437,14 +428,12 @@ bunker_style_mortar_explode(min, max) {
   if(!isDefined(self)) {
     return;
   }
-  /*-----------------------
-  ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN PLAYER FOV
+  /*----------------------- ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN PLAYER FOV
   -------------------------*/
   if((isDefined(level.mortarWithinFOV)) && (self mortar_within_player_fov(level.mortarWithinFOV) == false)) {
     return;
   }
-  /*-----------------------
-  ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN RADIUS
+  /*----------------------- ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN RADIUS
   -------------------------*/
   if(isDefined(level.mortar_min_dist))
     min_dist = level.mortar_min_dist;
@@ -456,8 +445,7 @@ bunker_style_mortar_explode(min, max) {
   if(distSquared > min_dist_squared) {
     return;
   }
-  /*-----------------------
-  IF IT'S A TRIGGER RADIUS, DO DAMAGE TO BUST UP DESTRUCTIBLES
+  /*----------------------- IF IT'S A TRIGGER RADIUS, DO DAMAGE TO BUST UP DESTRUCTIBLES
   -------------------------*/
   //trigger radius are put around destructibles that you want damaged if the player is looking at it
   if((isDefined(self.classname)) && (self.classname == "trigger_radius")) {
@@ -467,15 +455,13 @@ bunker_style_mortar_explode(min, max) {
       return;
     }
   }
-  /*-----------------------
-  OTHERWISE, PLAY CEILING DUST
+  /*----------------------- OTHERWISE, PLAY CEILING DUST
   -------------------------*/
   else {
     playFX(level._effect["mortar"][self.script_fxid], self.origin);
     if(distSquared < 262144) //only play sound when within 512
       thread play_sound_in_space("emt_single_ceiling_debris", self.origin);
   }
-
 }
 
 bog_style_mortar() {
@@ -759,7 +745,6 @@ setup_mortar_terrain() {
     if(isDefined(self.hidden_terrain))
       self.hidden_terrain hide();
   }
-
 }
 
 activate_mortar(range, max_damage, min_damage, fQuakepower, iQuaketime, iQuakeradius, bIsstruct) {

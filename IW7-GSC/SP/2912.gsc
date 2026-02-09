@@ -38,7 +38,7 @@ func_96D9() {
   }
 
   func_DEA9();
-  setdvar("player_death_animated", 1);
+  setDvar("player_death_animated", 1);
   level.player scripts\sp\utility::func_65E0("finished_death_anim");
   var_3 = scripts\engine\utility::random(level.player.var_E6.var_47["stand"]);
   setdvarifuninitialized("player_death_last_anim", var_3);
@@ -51,9 +51,9 @@ func_DEA9() {
   func_DED1("explosive_up", "ges_player_death_frag_1", ["player_death_explosive_up", "plr_death_explosion"], ::func_69FD);
   func_DED1("crouch_fall_left", "ges_player_death_crouch_drop1", ["player_death_crouch_fall_left", "plr_death_flop"], ::func_69FD);
   func_DED1("zerog_back", "ges_player_death_zerog_01", ["player_death_zerog_back", "plr_death_generic"], undefined, 1);
-  setdvar("ui_deadquote_v1", 0);
-  setdvar("ui_deadquote_v2", 0);
-  setdvar("ui_deadquote_v3", 0);
+  setDvar("ui_deadquote_v1", 0);
+  setDvar("ui_deadquote_v2", 0);
+  setDvar("ui_deadquote_v3", 0);
 }
 
 func_DED1(var_0, var_1, var_2, var_3, var_4) {
@@ -160,7 +160,7 @@ main() {
   }
 
   setomnvar("ui_player_dead", 0);
-  setdvar("player_death_animated", 1);
+  setDvar("player_death_animated", 1);
   scripts\sp\analytics::func_D37D();
   finishplayerdeath(scripts\sp\utility::func_93AB());
 }
@@ -199,7 +199,7 @@ func_12849(var_0, var_1, var_2, var_3, var_4, var_5) {
     return 0;
   }
 
-  setdvar("player_death_last_anim", var_6.var_7789);
+  setDvar("player_death_last_anim", var_6.var_7789);
   var_8 = func_96DE(var_0, var_4, var_6.var_1C4B);
   if(var_8) {
     thread func_77B0(var_6, var_3);
@@ -524,7 +524,7 @@ func_ECC6() {
 }
 
 func_2BC7() {
-  setdvar("player_did_helmet_death", 0);
+  setDvar("player_did_helmet_death", 0);
   level.player.var_E6.var_91AF = [];
   var_0 = ["blood_splat1", "blood_splat2", "blood_drip", "blood_splat_large", "death_overlay"];
   foreach(var_2 in var_0) {
@@ -577,7 +577,7 @@ func_CFAE() {
 }
 
 func_8DDF() {
-  setdvar("player_did_helmet_death", 1);
+  setDvar("player_did_helmet_death", 1);
   var_0 = randomfloatrange(-3, -1);
   var_1 = randomfloatrange(-1, 12);
   var_2 = randomfloatrange(-13, 20);
@@ -848,9 +848,9 @@ func_F32F() {
     scripts\engine\utility::waitframe();
   }
 
-  setdvar("ui_deadquote_v1", var_3);
-  setdvar("ui_deadquote_v2", getdvarint("ui_deadquote_v1"));
-  setdvar("ui_deadquote_v3", getdvarint("ui_deadquote_v2"));
+  setDvar("ui_deadquote_v1", var_3);
+  setDvar("ui_deadquote_v2", getdvarint("ui_deadquote_v1"));
+  setDvar("ui_deadquote_v3", getdvarint("ui_deadquote_v2"));
   setomnvar("ui_death_hint", var_3);
 }
 

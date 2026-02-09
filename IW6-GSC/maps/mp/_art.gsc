@@ -22,7 +22,7 @@ main() {
   tess_init();
 
   if(!isDefined(level.script))
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
 }
 
 initTweaks() {
@@ -54,7 +54,7 @@ initTweaks() {
   update_current_vision_set_dvars();
 
   if(!isDefined(level.current_vision_set))
-    level.current_vision_set = GetDvar("r_artTweaksLastVisionSet", "");
+    level.current_vision_set = getDvar("r_artTweaksLastVisionSet", "");
 
   IPrintLnBold("ART TWEAK ENABLED");
   hud_init();
@@ -108,7 +108,7 @@ tweakart() {
 }
 
 tess_init() {
-  using_tessellation = GetDvar("r_tessellation");
+  using_tessellation = getDvar("r_tessellation");
   if(using_tessellation == "") {
     return;
   }
@@ -120,8 +120,8 @@ tess_init() {
   level.tess.cutoff_falloff_current = GetDvarFloat("r_tessellationCutoffFalloffBase", 320.0);
   level.tess.cutoff_falloff_goal = level.tess.cutoff_falloff_current;
   level.tess.time_remaining = 0.0;
-  SetDvar("r_tessellationCutoffDistance", level.tess.cutoff_distance_current);
-  SetDvar("r_tessellationCutoffFalloff", level.tess.cutoff_falloff_current);
+  setDvar("r_tessellationCutoffDistance", level.tess.cutoff_distance_current);
+  setDvar("r_tessellationCutoffFalloff", level.tess.cutoff_falloff_current);
 
   thread tess_update();
 }
@@ -151,10 +151,10 @@ tess_update() {
     }
 
     if(cutoff_distance_old != level.tess.cutoff_distance_current) {
-      SetDvar("r_tessellationCutoffDistance", level.tess.cutoff_distance_current);
+      setDvar("r_tessellationCutoffDistance", level.tess.cutoff_distance_current);
     }
     if(cutoff_falloff_old != level.tess.cutoff_falloff_current) {
-      SetDvar("r_tessellationCutoffFalloff", level.tess.cutoff_falloff_current);
+      setDvar("r_tessellationCutoffFalloff", level.tess.cutoff_falloff_current);
     }
   }
 }
@@ -247,7 +247,6 @@ updateFogFromScript() {
     if(isDefined(level.parse_fog_func))
       set_fog_to_ent_values(ent, 0);
   }
-
 }
 
 update_current_vision_set_dvars() {
@@ -492,5 +491,4 @@ create_vision_set_fog(fogsetName) {
 
   level.vision_set_fog[ToLower(fogsetName)] = ent;
   return ent;
-
 }

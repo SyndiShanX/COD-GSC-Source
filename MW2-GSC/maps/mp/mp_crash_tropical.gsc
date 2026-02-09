@@ -12,17 +12,17 @@ main() {
   maps\mp\_load::main();
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_crash_dlc");
-  setdvar("compassmaxrange", "1600");
+  setDvar("compassmaxrange", "1600");
 
   AmbientPlay("ambient_mp_favela");
 
   game["attackers"] = "axis";
   game["defenders"] = "allies";
 
-  setdvar("r_specularcolorscale", "2.117");
-  setdvar("r_diffusecolorscale", "1.35");
+  setDvar("r_specularcolorscale", "2.117");
+  setDvar("r_diffusecolorscale", "1.35");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.10);
-  setdvar("r_lightGridContrast", 1);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.10);
+  setDvar("r_lightGridContrast", 1);
 }

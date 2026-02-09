@@ -512,7 +512,7 @@ function_5d55ce5f() {
 
   while(true) {
     cmd = getdvarstring(#"hash_655adfd9dc05d377", "<dev string:xb8>");
-    setdvar(#"hash_655adfd9dc05d377", "<dev string:xb8>");
+    setDvar(#"hash_655adfd9dc05d377", "<dev string:xb8>");
 
     switch (cmd) {
       case # "cycle_altar":

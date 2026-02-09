@@ -54,7 +54,7 @@ deployed_off(slot, weapon) {
 }
 
 spawned(type) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   playsoundatposition(#"hash_7245f25f5953631c", self.origin);
   player = self;
   bundle = level.killstreaks[type].script_bundle;
@@ -287,7 +287,7 @@ function_8296c0eb(owner) {
     return false;
   }
 
-  if(!isplayer(owner)) {
+  if(!isPlayer(owner)) {
     return false;
   }
 
@@ -453,10 +453,10 @@ function_d86da2e8(params) {
 
   function_3fda709e(self.script_owner, 0);
 
-  if(isDefined(params.eattacker) && isplayer(params.eattacker)) {
+  if(isDefined(params.eattacker) && isPlayer(params.eattacker)) {
     bundle = self killstreak_bundles::function_48e9536e();
 
-    if(isDefined(params.weapon) && params.weapon != getweapon(#"dog_ai_defaultmelee") && isplayer(params.eattacker)) {
+    if(isDefined(params.weapon) && params.weapon != getweapon(#"dog_ai_defaultmelee") && isPlayer(params.eattacker)) {
       if(isDefined(self.script_owner)) {
         self.script_owner globallogic_score::function_5829abe3(params.eattacker, params.weapon, getweapon("dog_ai_defaultmelee"));
       }

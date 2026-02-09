@@ -20,7 +20,6 @@ init() {
   level.forcedEnd = false;
   level.hostForcedEnd = false;
 }
-
 forceEnd() {
   if(level.hostForcedEnd || level.forcedEnd) {
     return;
@@ -37,7 +36,6 @@ forceEnd() {
   setDvar("ui_text_endreason", endString);
   thread endGame(endString);
 }
-
 endGameMessage(endReasonText) {
   self endon("disconnect");
   if(level.splitscreen && !isDefined(level.zombietron_mode)) {
@@ -62,7 +60,6 @@ endGameMessage(endReasonText) {
     players[0] clearclientflag(level._ZT_PLAYER_CF_SHOW_SCORES);
   }
 }
-
 endGame(endReasonText) {
   if(game["state"] == "postgame") {
     return;
@@ -97,7 +94,6 @@ endGame(endReasonText) {
   logString("game ended");
   exitLevel(false);
 }
-
 roundEndWait(defaultDelay, matchBonus) {
   notifiesDone = false;
   while(!notifiesDone) {
@@ -129,13 +125,11 @@ roundEndWait(defaultDelay, matchBonus) {
     wait(0.5);
   }
 }
-
 freezePlayerForRoundEnd() {
   self closeMenu();
   self closeInGameMenu();
   self freezeControls(true);
 }
-
 roundEndDOF(time) {
   self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
 }

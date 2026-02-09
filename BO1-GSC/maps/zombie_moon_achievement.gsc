@@ -12,7 +12,6 @@ init() {
   level thread achievement_ground_control();
   level thread onPlayerConnect();
 }
-
 onPlayerConnect() {
   for(;;) {
     level waittill("connecting", player);
@@ -22,7 +21,6 @@ onPlayerConnect() {
     player thread achievement_fully_armed();
   }
 }
-
 achievement_set_interim_sidequest_stat_for_all_players(stat_name) {
   if(maps\_cheat::is_cheating() || flag("has_cheated")) {
     return;
@@ -38,7 +36,6 @@ achievement_set_interim_sidequest_stat_for_all_players(stat_name) {
     players[i] maps\_zombiemode::zombieStatSet(stat_name, (players[i] maps\_zombiemode::zombieStatGet(stat_name) + 1));
   }
 }
-
 achievement_moon_sidequest() {
   level endon("end_game");
   level waittill("moon_sidequest_reveal_achieved");
@@ -53,7 +50,6 @@ achievement_moon_sidequest() {
     level givegamerpicture_wrapper("DLC5_SIDEQUEST_TOTAL", true);
   }
 }
-
 achievement_ground_control() {
   level endon("end_game");
   flag_wait("teleporter_digger_hacked_before_breached");
@@ -61,13 +57,11 @@ achievement_ground_control() {
   flag_wait("biodome_digger_hacked_before_breached");
   level giveachievement_wrapper("DLC5_ZOM_GROUND_CONTROL", true);
 }
-
 achievement_one_small_hack() {
   level endon("end_game");
   self waittill("successful_hack");
   self giveachievement_wrapper("DLC5_ZOM_ONE_SMALL_HACK");
 }
-
 achievement_one_giant_leap() {
   level endon("end_game");
   self waittill("one_giant_leap");
@@ -83,7 +77,6 @@ achievement_one_giant_leap() {
     }
   }
 }
-
 achievement_perks_in_space() {
   level endon("end_game");
   self.perks_in_space_list = [];
@@ -106,7 +99,6 @@ achievement_perks_in_space() {
     }
   }
 }
-
 achievement_fully_armed() {
   level endon("end_game");
   while(true) {

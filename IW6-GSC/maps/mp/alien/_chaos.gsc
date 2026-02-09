@@ -51,7 +51,7 @@ init() {
   reset_alien_kill_streak();
   load_vfx();
   add_extra_spawn_locations();
-  /#reset_chaos_no_fail();
+  reset_chaos_no_fail();
 
   common_scripts\utility::flag_init(CONST_COMBO_FREEZE_FLAG);
   common_scripts\utility::flag_init(CONST_GRACE_PERIOD_OVER_FLAG);
@@ -1252,7 +1252,6 @@ refill_pistol_ammo() {
         self SetWeaponAmmoStock(current_weapon, current_stock + 1);
         wait 0.05;
       }
-
     }
   }
 }

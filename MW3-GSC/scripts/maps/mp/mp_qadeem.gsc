@@ -10,10 +10,10 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_qadeem");
   maps\mp\_compass::setupminimap("compass_map_mp_qadeem");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_diffuseColorScale", 1.32);
-  setdvar("r_specularColorScale", 3.25);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_diffuseColorScale", 1.32);
+  setDvar("r_specularColorScale", 3.25);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   thread maps\mp\_utility::killtrigger((-678, 1968, 56), 40, 72);
@@ -64,7 +64,7 @@ watchplayerenterwater() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       if(isDefined(var_0.helitype) && var_0.helitype == "remote_uav") {
         wait 0.5;
         var_0 notify("death");
@@ -78,7 +78,6 @@ watchplayerenterwater() {
       continue;
     } else {
       playFXOnTag(level._effect["water_bubbles_random_runner_qad"], var_0, "tag_origin");
-
     }
     if(!isalive(var_0)) {
       continue;
@@ -99,7 +98,6 @@ playerunderwater(var_0) {
 
   if(!maps\mp\_utility::isusingremote()) {
     self shellshock("default", 8);
-
   }
   var_1 = self.origin;
   var_2 = self.angles;
@@ -130,25 +128,21 @@ waitcarryobjects() {
   if(level.gametype == "sd") {
     while(!isDefined(level.sdbomb)) {
       wait 0.05;
-
     }
     level.sdbomb thread watchcarryobjects();
   } else if(level.gametype == "sab") {
     while(!isDefined(level.sabbomb)) {
       wait 0.05;
-
     }
     level.sabbomb thread watchcarryobjects();
   } else if(level.gametype == "tdef") {
     while(!isDefined(level.gameflag)) {
       wait 0.05;
-
     }
     level.gameflag thread watchcarryobjects();
   } else if(level.gametype == "ctf") {
     while(!isDefined(level.teamflags) || !isDefined(level.teamflags[game["defenders"]]) || !isDefined(level.teamflags[game["attackers"]])) {
       wait 0.05;
-
     }
     level.teamflags[game["defenders"]] thread watchcarryobjects();
     level.teamflags[game["attackers"]] thread watchcarryobjects();
@@ -158,7 +152,6 @@ waitcarryobjects() {
 watchcarryobjects() {
   if(!isDefined(level.nodroptriggers)) {
     getnodrops();
-
   }
   for(;;) {
     self waittill("dropped");
@@ -212,7 +205,6 @@ movecarryobject(var_0, var_1) {
 spawn_blocker_collision(var_0, var_1) {
   while(!isDefined(level.airdropcratecollision)) {
     wait 0.05;
-
   }
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("tag_origin");

@@ -93,7 +93,7 @@ softsighttest(var_0) {
 }
 
 func_10FAD() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

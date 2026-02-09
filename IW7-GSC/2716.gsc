@@ -29,7 +29,7 @@ func_17C1(var_0, var_1, var_2, var_3) {
   wait 0.05;
   scripts\mp\utility\game::func_13842();
 
-  if(getdvar("ui_hud_showdeathicons") == "0") {
+  if(getDvar("ui_hud_showdeathicons") == "0") {
     return;
   }
   if(level.hardcoremode) {

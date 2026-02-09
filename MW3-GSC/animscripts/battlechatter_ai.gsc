@@ -14,12 +14,11 @@ _id_0AA9(var_0) {
   }
   if(!isDefined(self._id_0A7A._id_0AAB) || !self._id_0A7A._id_0AAB) {
     self._id_0A7A animscripts\battlechatter::_id_0AAC();
-
   }
   self._id_0AAD = "infantry";
   self._id_0AAE = [];
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self._id_0AAF = 0;
     self._id_0AB0 = 0;
     self.type = "human";
@@ -74,7 +73,6 @@ _id_0AA9(var_0) {
     }
   } else {
     _id_0ABA();
-
   }
   thread _id_0AC0();
   _id_0ACA();
@@ -84,7 +82,6 @@ _id_0AA9(var_0) {
 _id_0AB7() {
   if(!getdvarint("bcs_forceEnglish", 0)) {
     return 0;
-
   }
   switch (level.script) {
     case "pmc_strike":
@@ -111,11 +108,9 @@ _id_0AB8() {
     }
   } else if((self.team == "axis" || self.team == "team3") && !_id_0AB9(self._id_0AB4)) {
     thread _id_0ABD();
-
   }
   if(self.team == level.player.team) {
     thread _id_0B31();
-
   }
   wait(var_0);
   thread _id_0ABE();
@@ -124,7 +119,6 @@ _id_0AB8() {
 _id_0AB9(var_0) {
   if(var_0 == "UK" || var_0 == "US" || var_0 == "NS" || var_0 == "TF" || var_0 == "SS") {
     return 1;
-
   }
   return 0;
 }
@@ -252,7 +246,6 @@ _id_0ACA() {
   if(self.voice != "shadowcompany") {
     if(self.voice != "british" && self.voice != "pmc") {
       animscripts\battlechatter::_id_0ACF("ai_obvious");
-
     }
     animscripts\battlechatter::_id_0ACF("ai_contact_clock");
     animscripts\battlechatter::_id_0ACF("ai_target_clock");
@@ -274,7 +267,6 @@ _id_0ACA() {
 
       if(self.voice != "british" && self.voice != "pmc") {
         animscripts\battlechatter::_id_0ACF("player_obvious");
-
       }
       animscripts\battlechatter::_id_0ACF("player_object_clock");
 
@@ -293,19 +285,16 @@ _id_0ACA() {
     self._id_0AAF = 0;
   } else {
     self._id_0AAF = level._id_0AAF[self.team];
-
   }
   if(animscripts\battlechatter::_id_0AD2()) {
     self._id_0AB0 = 1;
   } else {
     self._id_0AB0 = 0;
-
   }
   if(level._id_0AD3) {
     maps\_utility::_id_0AD4(1);
   } else {
     maps\_utility::_id_0AD4(0);
-
   }
   self._id_0AAB = 1;
 }
@@ -317,7 +306,7 @@ _id_0AD5(var_0, var_1, var_2) {
   if(!animscripts\battlechatter::_id_0AD6("threat", var_0, var_2)) {
     return;
   }
-  if(animscripts\battlechatter::_id_0AD7(var_1) && !isplayer(var_1)) {
+  if(animscripts\battlechatter::_id_0AD7(var_1) && !isPlayer(var_1)) {
     return;
   }
   var_3 = animscripts\battlechatter::_id_0AD8("threat", var_0, var_2);
@@ -330,7 +319,6 @@ _id_0AD5(var_0, var_1, var_2) {
 
   if(isDefined(var_1._id_0A7A)) {
     self._id_0A7A animscripts\battlechatter::_id_0ADA(var_1._id_0A7A._id_0A66, self);
-
   }
   self._id_0AC6["threat"] = undefined;
   self._id_0AC6["threat"] = var_3;
@@ -356,7 +344,7 @@ _id_0ADC(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!animscripts\battlechatter::_id_0AD6("response", var_0, var_3, var_1)) {
     return;
   }
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     if(animscripts\battlechatter::_id_0ADD(var_2)) {
       return;
     }
@@ -366,11 +354,9 @@ _id_0ADC(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     var_7._id_0ADE = var_4;
-
   }
   if(isDefined(var_5)) {
     var_7.location = var_5;
-
   }
   var_7._id_0ADF = var_2;
   var_7._id_0AE0 = var_1;
@@ -452,7 +438,6 @@ _id_0AE8() {
       var_1 = self._id_0A6C;
     } else {
       var_1 = self._id_0A6B;
-
     }
     var_2 = [];
 
@@ -510,11 +495,9 @@ _id_0AEF(var_0) {
 
   if(distancesquared(level.player.origin, var_0.origin) > var_1) {
     return 0;
-
   }
   if(!level.player animscripts\battlechatter::_id_0B1E(var_0)) {
     return 0;
-
   }
   return 1;
 }
@@ -553,7 +536,6 @@ _id_0B1F() {
         if(!isDefined(var_5)) {
           if(var_6 == 0) {
             var_0 = [];
-
           }
           continue;
         }
@@ -565,7 +547,7 @@ _id_0B1F() {
           continue;
         }
         if(!var_3 cansee(var_5)) {
-          if(isplayer(var_5)) {
+          if(isPlayer(var_5)) {
             continue;
           }
           if(var_5.team == level.player.team) {
@@ -594,7 +576,6 @@ _id_0B21() {
   if(isalive(var_0) && issentient(var_0) && isDefined(var_0._id_0A7A) && var_0._id_0AAF) {
     if(isDefined(var_0._id_0AAE[var_0._id_0A7A._id_0A66])) {
       var_0._id_0AAE[var_0._id_0A7A._id_0A66] = undefined;
-
     }
     if(!isDefined(var_0._id_0AAD)) {
       return;
@@ -632,7 +613,7 @@ _id_0B24() {
   if(!isDefined(var_0._id_0AB4) || var_0._id_0AB4 != "NS") {
     return;
   }
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_0 thread _id_0B25();
   }
 }
@@ -650,10 +631,9 @@ _id_0B26() {
 
   if(!isDefined(self._id_0A7A._id_0AAB)) {
     self._id_0A7A waittill("squad chat initialized");
-
   }
   for(;;) {
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getDvar("bcs_enable", "on") == "off") {
       wait 1.0;
       continue;
     }
@@ -670,7 +650,7 @@ _id_0B27() {
   for(;;) {
     self waittill("grenade danger", var_0);
 
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getDvar("bcs_enable", "on") == "off") {
       continue;
     }
     if(!isDefined(var_0) || var_0.model != "projectile_m67fraggrenade") {
@@ -689,7 +669,7 @@ _id_0B28() {
   for(;;) {
     self waittill("trigger");
 
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getDvar("bcs_enable", "on") == "off") {
       continue;
     }
     if(gettime() < self.a._id_0B29 + 4000) {
@@ -744,7 +724,6 @@ _id_0B2A(var_0) {
 _id_0B2E() {
   if(self._id_0AB4 == "SS") {
     return 0;
-
   }
   return 1;
 }
@@ -752,7 +731,6 @@ _id_0B2E() {
 _id_0B2F() {
   if(self._id_0AB4 == "US") {
     return 1;
-
   }
   return 0;
 }
@@ -787,7 +765,7 @@ _id_0B31() {
     if(!animscripts\battlechatter::_id_0AAA()) {
       continue;
     }
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(_id_0B35(var_0, var_1)) {
@@ -808,7 +786,7 @@ _id_0B33() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       if(_id_0B34(var_4)) {
         _id_0B32();
       }
@@ -819,7 +797,6 @@ _id_0B33() {
 _id_0B34(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   switch (var_0) {
     case "MOD_IMPACT":
@@ -839,11 +816,9 @@ _id_0B35(var_0, var_1) {
 
   if(distancesquared(var_0.origin, self.origin) < var_2) {
     return 0;
-
   }
   if(var_1 > var_3) {
     return 0;
-
   }
   return 1;
 }
@@ -864,11 +839,9 @@ _id_0B37() {
 
   if(!animscripts\battlechatter::_id_0AAA()) {
     return 0;
-
   }
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   return 0;
 }
@@ -963,7 +936,6 @@ _id_0B3F(var_0) {
 _id_0B40(var_0) {
   if(!isDefined(level._id_0B3E)) {
     _id_0B3D();
-
   }
   var_0 = tolower(var_0);
   var_1 = anim._id_0B41 + "custom battlechatter phrase '" + var_0 + "' isn't valid.look at _utility::custom_battlechatter_init_valid_phrases(), or the util script documentation for custom_battlechatter(), for a list of valid phrases.";
@@ -971,7 +943,6 @@ _id_0B40(var_0) {
 
   if(!_id_0B3F(var_0)) {
     return 0;
-
   }
   var_3 = animscripts\battlechatter::_id_0B2C(24, 512, "response");
   _id_0B44();
@@ -980,7 +951,6 @@ _id_0B40(var_0) {
     case "order_move_combat":
       if(!_id_0B2E()) {
         return 0;
-
       }
       animscripts\battlechatter::_id_0B43(self._id_0B42, var_3);
       _id_0B48();
@@ -988,7 +958,6 @@ _id_0B40(var_0) {
     case "order_move_noncombat":
       if(!_id_0B2F()) {
         return 0;
-
       }
       _id_0B49();
       break;
@@ -1045,13 +1014,11 @@ _id_0B4E(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_2._id_0ACB = gettime() + var_0;
-
   }
   if(isDefined(var_1)) {
     var_2.type = var_1;
   } else {
     var_2.type = "custom";
-
   }
   self._id_0AC6["custom"] = undefined;
   self._id_0AC6["custom"] = var_2;

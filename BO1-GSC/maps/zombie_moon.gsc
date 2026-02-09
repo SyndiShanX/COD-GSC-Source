@@ -125,10 +125,10 @@ main() {
   level thread setup_fields();
   level thread maps\zombie_moon_ffotd::main_end();
   level thread wait_for_end_game();
-  level.tunnel_6_destroyed = getEnt("tunnel_6_destroyed", "targetname");
-  level.tunnel_6_destroyed hide();
-  level.tunnel_11_destroyed = getEnt("tunnel_11_destroyed", "targetname");
-  level.tunnel_11_destroyed hide();
+  level.tunnel_6_destroyed = GetEnt("tunnel_6_destroyed", "targetname");
+  level.tunnel_6_destroyed Hide();
+  level.tunnel_11_destroyed = GetEnt("tunnel_11_destroyed", "targetname");
+  level.tunnel_11_destroyed Hide();
   level.perk_lost_func = ::moon_perk_lost;
   level._black_hole_bomb_poi_override = ::moon_black_hole_bomb_poi;
   level.check_valid_spawn_override = ::moon_respawn_override;
@@ -139,12 +139,10 @@ main() {
   level.zombie_speed_up = ::moon_speed_up;
   level.ai_astro_explode = ::moon_push_zombies_when_astro_explodes;
 }
-
 moon_push_zombies_when_astro_explodes(position) {
   level.quantum_bomb_cached_closest_zombies = undefined;
   self thread maps\_zombiemode_weap_quantum_bomb::quantum_bomb_zombie_fling_result(position);
 }
-
 moon_post_respawn_callback() {
   self clearclientflag(level._CF_PLAYER_GASMASK_OVERLAY);
   if(flag("enter_nml")) {
@@ -156,17 +154,14 @@ moon_post_respawn_callback() {
     self maps\_zombiemode_equipment::set_equipment_invisibility_to_player("equip_hacker_zm", false);
   }
 }
-
 setup_fields() {
   flag_wait("power_on");
   exploder(140);
 }
-
 no_mans_land_power() {
   level thread turn_area51_perks_on();
   level notify("Pack_A_Punch_on");
 }
-
 turn_area51_perks_on() {
   machine = getEntArray("vending_sleight", "targetname");
   for(i = 0; i < machine.size; i++) {
@@ -180,7 +175,6 @@ turn_area51_perks_on() {
   }
   level notify("specialty_armorvest_power_on");
 }
-
 init_hackables() {
   level thread maps\_zombiemode_hackables_wallbuys::hack_wallbuys();
   level thread maps\_zombiemode_hackables_perks::hack_perks();
@@ -193,19 +187,16 @@ init_hackables() {
   level thread packapunch_hack_think();
   level thread pack_gate_poi_init();
 }
-
 hacker_hides_blocker_trigger_thread() {
   self endon("death");
   maps\_zombiemode_equip_hacker::hide_hint_when_hackers_active();
 }
-
 zombie_moon_player_out_of_playable_area_monitor_callback() {
   if(is_true(self._padded)) {
     return false;
   }
   return true;
 }
-
 moon_create_life_trigs() {}
 packapunch_hack_think() {
   flag_init("packapunch_hacked");
@@ -224,7 +215,6 @@ packapunch_hack_think() {
     maps\_zombiemode_equip_hacker::register_pooled_hackable_struct(level._pack_hack_struct, maps\_zombiemode_hackables_packapunch::packapunch_hack);
   }
 }
-
 pack_gate_poi_init() {
   pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
   for(i = 0; i < pack_zombieland_poi.size; i++) {
@@ -232,9 +222,8 @@ pack_gate_poi_init() {
     pack_zombieland_poi[i] thread create_zombie_point_of_interest_attractor_positions(4, 45);
   }
 }
-
 pack_gate_poi_activate(time) {
-  pack_enclosure = getEnt("pack_enclosure", "targetname");
+  pack_enclosure = GetEnt("pack_enclosure", "targetname");
   pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
   players = get_players();
   num_players_inside = 0;
@@ -269,7 +258,6 @@ pack_gate_poi_activate(time) {
     pack_zombieland_poi[i] deactivate_zombie_point_of_interest();
   }
 }
-
 switch_between_zland_poi() {
   self endon("death");
   level endon("packapunch_hacked");
@@ -290,7 +278,6 @@ switch_between_zland_poi() {
     poi_array = array_randomize(poi_array);
   }
 }
-
 remove_ignore_on_poi(poi_array) {
   self endon("death");
   level waittill("stop_pack_poi");
@@ -299,7 +286,6 @@ remove_ignore_on_poi(poi_array) {
   }
   self._poi_pack_set = 0;
 }
-
 activate_zombieland_poi_positions(time) {
   level endon("stop_pack_poi");
   pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
@@ -308,7 +294,6 @@ activate_zombieland_poi_positions(time) {
     poi activate_zombie_point_of_interest();
   }
 }
-
 watch_for_exit(poi_array) {
   while(players_in_zombieland() && !flag("packapunch_hacked")) {
     wait(0.1);
@@ -318,9 +303,8 @@ watch_for_exit(poi_array) {
     poi_array[i] deactivate_zombie_point_of_interest();
   }
 }
-
 players_in_zombieland() {
-  pack_enclosure = getEnt("pack_enclosure", "targetname");
+  pack_enclosure = GetEnt("pack_enclosure", "targetname");
   players = get_players();
   num_players_inside = 0;
   for(i = 0; i < players.size; i++) {
@@ -333,20 +317,18 @@ players_in_zombieland() {
   }
   return true;
 }
-
 check_for_avoid_poi() {
   if(is_true(self.in_pack_enclosure)) {
     return true;
   }
   return false;
 }
-
 pack_gate_activate() {
   time = 1;
   self NotSolid();
   if(isDefined(self.script_vector)) {
     self playSound("amb_teleporter_gate_start");
-    self moveTo(self.startpos + self.script_vector, time);
+    self MoveTo(self.startpos + self.script_vector, time);
     self thread pack_gate_closed();
     flag_wait("packapunch_hacked");
     self NotSolid();
@@ -354,11 +336,10 @@ pack_gate_activate() {
       self ConnectPaths();
     }
     self playSound("amb_teleporter_gate_start");
-    self moveTo(self.startpos, time);
+    self MoveTo(self.startpos, time);
     self thread maps\_zombiemode_blockers::door_solid_thread();
   }
 }
-
 pack_gate_closed() {
   self waittill("movedone");
   self.door_moving = undefined;
@@ -379,12 +360,11 @@ pack_gate_closed() {
     wait(1);
   }
 }
-
 moon_nml_bhb_present() {
   self endon("death");
   nml_bhb = undefined;
   pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
-  pack_enclosure = getEnt("pack_enclosure", "targetname");
+  pack_enclosure = GetEnt("pack_enclosure", "targetname");
   while(!flag("packapunch_hacked")) {
     zombie_pois = getEntArray("zombie_poi", "script_noteworthy");
     for(i = 0; i < zombie_pois.size; i++) {
@@ -414,13 +394,12 @@ moon_nml_bhb_present() {
   }
   return false;
 }
-
 moon_zmb_and_bhb_touching_trig(ent_bhb) {
   self endon("death");
   if(!isDefined(ent_bhb)) {
     return false;
   }
-  pack_trig = getEnt("pack_enclosure", "targetname");
+  pack_trig = GetEnt("pack_enclosure", "targetname");
   if(self IsTouching(pack_trig) && isDefined(ent_bhb) && ent_bhb IsTouching(pack_trig)) {
     return true;
   } else if(!self IsTouching(pack_trig) && isDefined(ent_bhb) && !ent_bhb IsTouching(pack_trig)) {
@@ -428,7 +407,6 @@ moon_zmb_and_bhb_touching_trig(ent_bhb) {
   }
   return false;
 }
-
 moon_zombieland_ignore_poi() {
   self endon("death");
   nml_poi_array = getEntArray("zombieland_poi", "targetname");
@@ -454,11 +432,9 @@ moon_zombieland_ignore_poi() {
     self remove_poi_from_ignore_list(nml_poi_array[x]);
   }
 }
-
 moon_sidequest_of_awesome() {
   maps\zombie_moon_sq::init();
 }
-
 zombie_moon_gravity_init() {}
 zombie_earth_gravity_init() {}
 init_clientflags() {
@@ -471,7 +447,6 @@ init_clientflags() {
   level._CLIENTFLAG_PLAYER_GASP_RUMBLE = 2;
   level._CF_ACTOR_CLIENT_FLAG_CTT = 2;
 }
-
 precache_items() {
   flag_init("between_rounds");
   PreCacheModel("viewmodel_usa_pow_arms");
@@ -499,20 +474,19 @@ precache_items() {
   PreCacheModel("P_zom_moon_earth");
   PreCacheModel("P_zom_moon_earth_dest");
 }
-
 vision_set_init() {
   flag_wait("all_players_connected");
   players = getplayers();
   for(i = 0; i < players.size; i++) {
-    players[i] visionSetNaked("zombie_moonHanger18", 0.5);
+    players[i] VisionSetNaked("zombie_moonHanger18", 0.5);
   }
 }
-
 moon_round_think_func() {
   for(;;) {
     maxreward = 50 * level.round_number;
-    if(maxreward > 500)
+    if(maxreward > 500) {
       maxreward = 500;
+    }
     level.zombie_vars["rebuild_barrier_cap_per_round"] = maxreward;
     level.pro_tips_start_time = GetTime();
     level.zombie_last_run_time = GetTime();
@@ -570,7 +544,6 @@ moon_round_think_func() {
     flag_clear("between_rounds");
   }
 }
-
 moon_zone_init() {
   flag_init("always_on");
   flag_set("always_on");
@@ -604,19 +577,17 @@ moon_zone_init() {
   add_adjacent_zone("airlock_labs_2_biodome", "forest_zone", "enter_forest_east");
   add_adjacent_zone("enter_forest_east_zone", "generator_exit_east_zone", "dig_enter_east");
 }
-
 init_strings() {
   PrecacheString(&"ZOMBIE_PARIS_TRANSPORTER_WAITING");
   PrecacheString(&"ZOMBIE_PARIS_TRANSPORTER_ACTIVATED");
   PrecacheString(&"ZOMBIE_PARIS_TRANSPORTER_ABORTED");
 }
-
 #using_animtree("generic_human");
+
 anim_override_func() {
   level.scr_anim["zombie"]["walk3"] = % ai_zombie_walk_v2;
   level.scr_anim["zombie"]["run6"] = % ai_zombie_run_v2;
 }
-
 include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false);
@@ -693,11 +664,9 @@ include_weapons() {
   maps\_zombiemode_weapons::add_limited_weapon("microwavegundw_zm", 1);
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-
 precache_player_model_override() {
   mptype\player_t5_zm_moon::precache();
 }
-
 give_player_model_override(entity_num) {
   if(!isDefined(level._override_num_chars_connected)) {
     level._override_num_chars_connected = 0;
@@ -732,7 +701,6 @@ give_player_model_override(entity_num) {
   }
   level._num_overriden_models++;
 }
-
 player_set_viewmodel_override(entity_num) {
   if(isDefined(self.zm_random_char)) {
     entity_num = self.zm_random_char;
@@ -754,7 +722,6 @@ player_set_viewmodel_override(entity_num) {
       break;
   }
 }
-
 gasmask_get_head_model(entity_num, gasmask_active) {
   if(gasmask_active) {
     return "c_zom_moon_pressure_suit_helm";
@@ -770,13 +737,11 @@ gasmask_get_head_model(entity_num, gasmask_active) {
       return "c_ger_richtofen_dlc5_head";
   }
 }
-
 gasmask_change_player_headmodel(entity_num, gasmask_active) {
   self Detach(self.headModel, "");
   self.headModel = gasmask_get_head_model(entity_num, gasmask_active);
   self Attach(self.headModel, "", true);
 }
-
 gasmask_set_player_model(entity_num) {
   player_is_nikolai = false;
   if(1 == entity_num) {
@@ -789,12 +754,10 @@ gasmask_set_player_model(entity_num) {
     self Attach(self.headModel, "", true);
   }
 }
-
 gasmask_set_player_viewmodel(entity_num) {
   self SetViewModel("viewmodel_zom_pressure_suit_arms");
   self clientnotify("gmsk");
 }
-
 gasmask_reset_player_model(entity_num) {
   if(isDefined(self.zm_random_char)) {
     entity_num = self.zm_random_char;
@@ -815,7 +778,6 @@ gasmask_reset_player_model(entity_num) {
       break;
   }
 }
-
 gasmask_reset_player_set_viewmodel(entity_num) {
   if(isDefined(self.zm_random_char)) {
     entity_num = self.zm_random_char;
@@ -839,7 +801,6 @@ gasmask_reset_player_set_viewmodel(entity_num) {
       break;
   }
 }
-
 moon_offhand_weapon_overrride() {
   register_lethal_grenade_for_level("frag_grenade_zm");
   register_lethal_grenade_for_level("sticky_grenade_zm");
@@ -856,7 +817,6 @@ moon_offhand_weapon_overrride() {
   register_equipment_for_level("equip_hacker_zm");
   level.zombie_equipment_player_init = undefined;
 }
-
 offhand_weapon_give_override(str_weapon) {
   self endon("death");
   if(is_tactical_grenade(str_weapon) && isDefined(self get_player_tactical_grenade()) && !self is_player_tactical_grenade(str_weapon)) {
@@ -873,7 +833,6 @@ offhand_weapon_give_override(str_weapon) {
   }
   return false;
 }
-
 include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -891,18 +850,15 @@ include_powerups() {
   include_powerup("lose_perk");
   include_powerup("empty_clip");
 }
-
 include_equipment_for_level() {
   include_equipment("equip_gasmask_zm");
   include_equipment("equip_hacker_zm");
 }
-
 init_sounds() {
   maps\_zombiemode_utility::add_sound("break_stone", "break_stone");
 }
-
 electric_switch() {
-  trig = getEnt("use_elec_switch", "targetname");
+  trig = getent("use_elec_switch", "targetname");
   trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
   trig setcursorhint("HINT_NOICON");
   level thread wait_for_power();
@@ -915,7 +871,6 @@ electric_switch() {
   Objective_State(8, "done");
   user thread delayed_poweron_vox();
 }
-
 delayed_poweron_vox() {
   self endon("death");
   self endon("disconnect");
@@ -924,9 +879,8 @@ delayed_poweron_vox() {
     self thread maps\_zombiemode_audio::create_and_play_dialog("general", "poweron");
   }
 }
-
 wait_for_power() {
-  master_switch = getEnt("elec_switch", "targetname");
+  master_switch = getent("elec_switch", "targetname");
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
@@ -949,13 +903,11 @@ wait_for_power() {
   playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
   master_switch playSound("zmb_turn_on");
 }
-
 moon_devgui(cmd) {}
 custom_add_weapons() {
   maps\_zombiemode_weapons::add_zombie_weapon("microwavegundw_zm", "microwavegundw_upgraded_zm", &"ZOMBIE_WEAPON_MICROWAVEGUN_DW", 10, "microwave", "", undefined);
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_quantum_bomb", undefined, &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "quantum", "", undefined);
 }
-
 moon_zombie_death_response() {
   self StartRagdoll();
   rag_x = RandomIntRange(-50, 50);
@@ -982,7 +934,6 @@ moon_zombie_death_response() {
   self LaunchRagdoll(dir);
   return false;
 }
-
 setup_water_physics() {
   flag_wait("all_players_connected");
   players = GetPlayers();
@@ -990,9 +941,8 @@ setup_water_physics() {
     players[i] SetClientDvars("phys_buoyancy", 1);
   }
 }
-
 cliff_fall_death() {
-  trig = getEnt("cliff_fall_death", "targetname");
+  trig = GetEnt("cliff_fall_death", "targetname");
   if(isDefined(trig)) {
     while(true) {
       trig waittill("trigger", who);
@@ -1002,7 +952,6 @@ cliff_fall_death() {
     }
   }
 }
-
 insta_kill_player() {
   self endon("disconnect");
   if(is_true(self.insta_killed)) {
@@ -1022,13 +971,13 @@ insta_kill_player() {
           if(!isDefined(point)) {
             points = getstruct("bridge_zone", "script_noteworthy");
             spawn_points = getstructarray(points.target, "targetname");
-            num = self getEntityNumber();
+            num = self getentitynumber();
             point = spawn_points[num];
           }
         } else {
           points = getstruct("bridge_zone", "script_noteworthy");
           spawn_points = getstructarray(points.target, "targetname");
-          num = self getEntityNumber();
+          num = self getentitynumber();
           point = spawn_points[num];
         }
         self dodamage(self.health + 1000, (0, 0, 0));
@@ -1056,7 +1005,6 @@ insta_kill_player() {
     self.insta_killed = false;
   }
 }
-
 moon_respawn_override(player) {
   if(flag("both_tunnels_breached")) {
     point = moon_digger_respawn(player);
@@ -1069,7 +1017,6 @@ moon_respawn_override(player) {
   }
   return undefined;
 }
-
 is_player_killable(player, checkIgnoreMeFlag) {
   if(!isDefined(player)) {
     return false;
@@ -1077,7 +1024,7 @@ is_player_killable(player, checkIgnoreMeFlag) {
   if(!IsAlive(player)) {
     return false;
   }
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
   if(player.sessionstate == "spectator") {
@@ -1094,7 +1041,6 @@ is_player_killable(player, checkIgnoreMeFlag) {
   }
   return true;
 }
-
 moon_digger_respawn(revivee) {
   spawn_points = getstructarray("player_respawn_point", "targetname");
   if(level.zones["airlock_west2_zone"].is_enabled) {
@@ -1124,12 +1070,10 @@ moon_digger_respawn(revivee) {
   }
   return undefined;
 }
-
 moon_reset_respawn_overide() {
   level waittill("between_round_over");
   level.check_valid_spawn_override = undefined;
 }
-
 init_extra_blackhole_anims() {
   level.scr_anim["quad_zombie"]["slow_pull_1"] = % ai_zombie_quad_blackhole_crawl_slow_v1;
   level.scr_anim["quad_zombie"]["slow_pull_2"] = % ai_zombie_quad_blackhole_crawl_slow_v2;
@@ -1153,7 +1097,6 @@ init_extra_blackhole_anims() {
   level.scr_anim["quad_zombie"]["crawler_black_hole_death_2"] = % ai_zombie_quad_blackhole_death_v2;
   level.scr_anim["quad_zombie"]["crawler_black_hole_death_3"] = % ai_zombie_quad_blackhole_death_v2;
 }
-
 blackhole_bomb_area_check() {
   black_hole_teleport_structs = undefined;
   org = spawn("script_origin", (0, 0, 0));
@@ -1217,7 +1160,6 @@ blackhole_bomb_area_check() {
   org delete();
   return black_hole_teleport_structs;
 }
-
 get_blackholebomb_destination_point(black_hole_teleport_structs, ent_player) {
   player_zones = getEntArray("player_volume", "script_noteworthy");
   valid_struct = undefined;
@@ -1245,9 +1187,8 @@ get_blackholebomb_destination_point(black_hole_teleport_structs, ent_player) {
     }
   }
 }
-
 blackhole_bomb_in_invalid_area(grenade, model, player) {
-  invalid_area = getEnt("bhb_invalid_area", "targetname");
+  invalid_area = getent("bhb_invalid_area", "targetname");
   if(model istouching(invalid_area)) {
     level thread maps\_zombiemode_weap_black_hole_bomb::black_hole_bomb_stolen_by_sam(player, model);
     return true;
@@ -1255,39 +1196,33 @@ blackhole_bomb_in_invalid_area(grenade, model, player) {
     return false;
   }
 }
-
 quantum_bomb_prevent_player_getting_teleported_override(position) {
   if(is_true(self._padded)) {
     return true;
   }
   return false;
 }
-
 wait_for_end_game() {
   level waittill("intermission");
   level clientnotify("EDR");
 }
-
 moon_perk_lost(perk) {
   self maps\_zombiemode_perks::update_perk_hud();
 }
-
 moon_black_hole_bomb_poi() {
-  astro = getEnt("astronaut_zombie_ai", "targetname");
+  astro = getent("astronaut_zombie_ai", "targetname");
   if(isDefined(astro)) {
     astro add_poi_to_ignore_list(self);
   }
 }
-
 end_game_vision_and_fog_fix() {
   level waittill("end_game");
   clientnotify("ZEG");
 }
-
 moon_bhb_poi_control() {
   self endon("death");
   moon_pois = getEntArray("zombie_poi", "script_noteworthy");
-  pack_enclosure = getEnt("pack_enclosure", "targetname");
+  pack_enclosure = GetEnt("pack_enclosure", "targetname");
   if(!isDefined(moon_pois) || moon_pois.size == 0) {
     return undefined;
   }
@@ -1305,7 +1240,6 @@ moon_bhb_poi_control() {
   self._bhb_pull = 0;
   return undefined;
 }
-
 moon_bhb_choice(ent_poi) {
   bhb_position = [];
   bhb_position[0] = groundpos(ent_poi.origin + (0, 0, 100));
@@ -1318,13 +1252,11 @@ moon_bhb_choice(ent_poi) {
   }
   return bhb_position;
 }
-
 override_quad_explosion(quad) {
   if(isDefined(quad.in_low_gravity) && quad.in_low_gravity == 1) {
     quad.can_explode = false;
   }
 }
-
 moon_speed_up() {
   if(is_true(self.in_low_gravity)) {
     self.zombie_move_speed = "sprint";

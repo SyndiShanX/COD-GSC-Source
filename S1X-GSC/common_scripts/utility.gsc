@@ -1567,7 +1567,7 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
 
 isSP() {
   if(!isDefined(level.isSP)) {
-    level.isSP = !(string_starts_with(getdvar("mapname"), "mp_"));
+    level.isSP = !(string_starts_with(getDvar("mapname"), "mp_"));
   }
 
   return level.isSP;
@@ -1575,7 +1575,7 @@ isSP() {
 
 isSP_TowerDefense() {
   if(!isDefined(level.isSP_TowerDefense)) {
-    level.isSP_TowerDefense = string_starts_with(getdvar("mapname"), "so_td_");
+    level.isSP_TowerDefense = string_starts_with(getDvar("mapname"), "so_td_");
   }
 
   return level.isSP_TowerDefense;
@@ -1665,7 +1665,6 @@ draw_line_for_time(org1, org2, r, g, b, timer, depthTest) {
     line(org1, org2, (r, g, b), 1, depthTest);
     wait .05;
   }
-
 }
 
 table_combine(table1, table2) {
@@ -2023,7 +2022,7 @@ PlayerUnlimitedAmmoThread() {
   while(1) {
     wait .5;
 
-    if(getdvar("UnlimitedAmmoOff") == "1") {
+    if(getDvar("UnlimitedAmmoOff") == "1") {
       continue;
     }
 
@@ -2049,7 +2048,6 @@ PlayerUnlimitedAmmoThread() {
       }
     }
   }
-
 }
 
 isUsabilityEnabled() {
@@ -2271,7 +2269,7 @@ fileprint_launcher_start_file()
         }
 
         TimeOut = gettime() + 4000;
-        while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut) {
+        while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getDvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut) {
           wait .05;
         }
 
@@ -2282,7 +2280,7 @@ fileprint_launcher_start_file()
           return false;
         }
 
-        failvar = getdvar("LAUNCHER_PRINT_FAIL");
+        failvar = getDvar("LAUNCHER_PRINT_FAIL");
         if(failvar != "0") {
           iprintlnbold("LAUNCHER_PRINT_FAIL:( " + failvar + " ): launcherconflict? restart launcher and try again? ");
           setdevdvar("LAUNCHER_PRINT_FAIL", "0");
@@ -2629,10 +2627,9 @@ fileprint_launcher_start_file()
         PrintLn("^c * ERROR * ", msg);
         waitframe();
 
-        if(GetDvar("debug") != "1") {
+        if(getDvar("debug") != "1") {
           AssertMsg("This is a forced error - attach the log file. \n" + msg);
         }
-
       }
 
       create_dvar(var, val) {
@@ -2932,7 +2929,7 @@ fileprint_launcher_start_file()
           level.anim_prop_models = [];
         }
 
-        mapname = tolower(getdvar("mapname"));
+        mapname = tolower(getDvar("mapname"));
         SP = true;
         if(string_starts_with(mapname, "mp_")) {
           SP = false;
@@ -2943,7 +2940,6 @@ fileprint_launcher_start_file()
         } else {
           level.anim_prop_models[model]["basic"] = mpanimstring;
         }
-
       }
 
       getClosest(org, array, maxdist) {
@@ -3157,7 +3153,6 @@ fileprint_launcher_start_file()
             } else {
               SetAtmosFog(transition_time, ent.atmosFogSunFogColor, ent.atmosFogHazeColor, ent.atmosFogHazeStrength, ent.atmosFogHazeSpread, ent.atmosFogExtinctionStrength, ent.atmosFogInScatterStrength, ent.atmosFogHalfPlaneDistance, ent.atmosFogStartDistance, ent.atmosFogDistanceScale, int(ent.atmosFogSkyDistance), ent.atmosFogSkyAngularFalloffEnabled, ent.atmosFogSkyFalloffStartAngle, ent.atmosFogSkyFalloffAngleRange, ent.atmosFogSunDirection, ent.atmosFogHeightFogEnabled, ent.atmosFogHeightFogBaseHeight, ent.atmosFogHeightFogHalfPlaneDistance);
             }
-
           } else {
             SetAtmosFogDvarsOnly(ent.atmosFogEnabled, ent.atmosFogSunFogColor, ent.atmosFogHazeColor, ent.atmosFogHazeStrength, ent.atmosFogHazeSpread, ent.atmosFogExtinctionStrength, ent.atmosFogInScatterStrength, ent.atmosFogHalfPlaneDistance, ent.atmosFogStartDistance, ent.atmosFogDistanceScale, int(ent.atmosFogSkyDistance), ent.atmosFogSkyAngularFalloffEnabled, ent.atmosFogSkyFalloffStartAngle, ent.atmosFogSkyFalloffAngleRange, ent.atmosFogSunDirection, ent.atmosFogHeightFogEnabled, ent.atmosFogHeightFogBaseHeight, ent.atmosFogHeightFogHalfPlaneDistance);
 
@@ -3183,11 +3178,7 @@ fileprint_launcher_start_file()
 
         for(i = 0; i < array.size - 1; i++) {
           for(j = i + 1; j < array.size; j++) {
-            if(array[j][
-                [compare_func]
-              ]() < array[i][
-                [compare_func]
-              ]()) {
+            if(array[j][[compare_func]]() < array[i][[compare_func]]()) {
               ref = array[j];
               array[j] = array[i];
               array[i] = ref;
@@ -3211,9 +3202,7 @@ fileprint_launcher_start_file()
         for(j = 1; j < array.size; j++) {
           key = array[j];
           for(i = j - 1;
-            (i >= 0) && ![
-              [compare_func]
-            ](array[i], key); i--) {
+            (i >= 0) && ![[compare_func]](array[i], key); i--) {
             array[i + 1] = array[i];
           }
           array[i + 1] = key;

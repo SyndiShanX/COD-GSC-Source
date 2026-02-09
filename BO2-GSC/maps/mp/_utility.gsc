@@ -49,11 +49,9 @@ error(msg) {
   println("^c*ERROR* ", msg);
   wait 0.05;
 
-  if(getdvar(#"_id_0F49A52C") != "1") {
+  if(getDvar(#"_id_0F49A52C") != "1") {
     assertmsg("This is a forced error - attach the log file");
-
   }
-
 }
 
 warning(msg) {
@@ -640,8 +638,8 @@ _playlocalsound(soundalias) {
 dvarintvalue(dvar, defval, minval, maxval) {
   dvar = "scr_" + level.gametype + "_" + dvar;
 
-  if(getdvar(dvar) == "") {
-    setdvar(dvar, defval);
+  if(getDvar(dvar) == "") {
+    setDvar(dvar, defval);
     return defval;
   }
 
@@ -654,15 +652,15 @@ dvarintvalue(dvar, defval, minval, maxval) {
   else
     return value;
 
-  setdvar(dvar, value);
+  setDvar(dvar, value);
   return value;
 }
 
 dvarfloatvalue(dvar, defval, minval, maxval) {
   dvar = "scr_" + level.gametype + "_" + dvar;
 
-  if(getdvar(dvar) == "") {
-    setdvar(dvar, defval);
+  if(getDvar(dvar) == "") {
+    setDvar(dvar, defval);
     return defval;
   }
 
@@ -675,7 +673,7 @@ dvarfloatvalue(dvar, defval, minval, maxval) {
   else
     return value;
 
-  setdvar(dvar, value);
+  setDvar(dvar, value);
   return value;
 }
 
@@ -1087,7 +1085,6 @@ plot_points(plotpoints, r, g, b, timer) {
     line(lastpoint, plotpoints[i], (r, g, b), 1, timer);
     lastpoint = plotpoints[i];
   }
-
 }
 
 player_flag_wait(msg) {
@@ -1218,7 +1215,7 @@ getclientsysstate(ssysname) {
 
 clientnotify(event) {
   if(level.clientscripts) {
-    if(isplayer(self))
+    if(isPlayer(self))
       maps\mp\_utility::setclientsysstate("levelNotify", event, self);
     else
       maps\mp\_utility::setclientsysstate("levelNotify", event);
@@ -1622,20 +1619,20 @@ set_dvar_if_unset(dvar, value, reset) {
   if(!isDefined(reset))
     reset = 0;
 
-  if(reset || getdvar(dvar) == "") {
-    setdvar(dvar, value);
+  if(reset || getDvar(dvar) == "") {
+    setDvar(dvar, value);
     return value;
   }
 
-  return getdvar(dvar);
+  return getDvar(dvar);
 }
 
 set_dvar_float_if_unset(dvar, value, reset) {
   if(!isDefined(reset))
     reset = 0;
 
-  if(reset || getdvar(dvar) == "")
-    setdvar(dvar, value);
+  if(reset || getDvar(dvar) == "")
+    setDvar(dvar, value);
 
   return getdvarfloat(dvar);
 }
@@ -1644,8 +1641,8 @@ set_dvar_int_if_unset(dvar, value, reset) {
   if(!isDefined(reset))
     reset = 0;
 
-  if(reset || getdvar(dvar) == "") {
-    setdvar(dvar, value);
+  if(reset || getDvar(dvar) == "") {
+    setDvar(dvar, value);
     return int(value);
   }
 
@@ -1681,11 +1678,10 @@ drawcylinder_think(pos, rad, height, seconds, stop_notify) {
 
     wait 0.05;
   }
-
 }
 
 is_bot() {
-  return isplayer(self) && isDefined(self.pers["isBot"]) && self.pers["isBot"] != 0;
+  return isPlayer(self) && isDefined(self.pers["isBot"]) && self.pers["isBot"] != 0;
 }
 
 add_trigger_to_ent(ent) {
@@ -1948,12 +1944,12 @@ waittillnotmoving() {
 
 mayapplyscreeneffect() {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   return !isDefined(self.viewlockedentity);
 }
 
 getdvarfloatdefault(dvarname, defaultvalue) {
-  value = getdvar(dvarname);
+  value = getDvar(dvarname);
 
   if(value != "")
     return float(value);
@@ -1962,7 +1958,7 @@ getdvarfloatdefault(dvarname, defaultvalue) {
 }
 
 getdvarintdefault(dvarname, defaultvalue) {
-  value = getdvar(dvarname);
+  value = getDvar(dvarname);
 
   if(value != "")
     return int(value);
@@ -2223,14 +2219,14 @@ registerscorelimit(minvalue, maxvalue) {
   level.scorelimit = clamp(getgametypesetting("scoreLimit"), minvalue, maxvalue);
   level.scorelimitmin = minvalue;
   level.scorelimitmax = maxvalue;
-  setdvar("ui_scorelimit", level.scorelimit);
+  setDvar("ui_scorelimit", level.scorelimit);
 }
 
 registertimelimit(minvalue, maxvalue) {
   level.timelimit = clamp(getgametypesetting("timeLimit"), minvalue, maxvalue);
   level.timelimitmin = minvalue;
   level.timelimitmax = maxvalue;
-  setdvar("ui_timelimit", level.timelimit);
+  setDvar("ui_timelimit", level.timelimit);
 }
 
 registernumlives(minvalue, maxvalue) {
@@ -2276,7 +2272,7 @@ getclientfieldtoplayer(field_name) {
 isenemyplayer(player) {
   assert(isDefined(player));
 
-  if(!isplayer(player))
+  if(!isPlayer(player))
     return false;
 
   if(level.teambased) {
@@ -2307,7 +2303,7 @@ getweaponclass(weapon) {
 }
 
 ispressbuild() {
-  buildtype = getdvar(#"_id_19B966D7");
+  buildtype = getDvar(#"_id_19B966D7");
 
   if(isDefined(buildtype) && buildtype == "press")
     return true;

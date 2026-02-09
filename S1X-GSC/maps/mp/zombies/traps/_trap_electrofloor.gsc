@@ -55,7 +55,7 @@ trap_electrofloor_trigger_watch(var_0) {
       if(!isDefined(var_5) || !isalive(var_5)) {
         continue;
       }
-      if(isplayer(var_5)) {
+      if(isPlayer(var_5)) {
         continue;
       }
       if(isDefined(var_5.inspawnanim) && var_5.inspawnanim == 1) {
@@ -106,7 +106,7 @@ removeelectrobuff(var_0) {
 }
 
 electrofloorplayer() {
-  if(isplayer(self) && maps\mp\_utility::isreallyalive(self)) {
+  if(isPlayer(self) && maps\mp\_utility::isreallyalive(self)) {
     if(isDefined(self.exosuitonline) && self.exosuitonline) {
       thread maps\mp\zombies\_mutators::mutatoremz_applyemp();
       playFX(level._effect["mut_emz_attack_sm"], self.origin);

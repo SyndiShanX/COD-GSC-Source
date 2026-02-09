@@ -47,7 +47,7 @@ function_4458377c() {
 
       e_player = arraygetclosest(ai.origin, getplayers());
 
-      if(isplayer(e_player) && distance(ai.origin, e_player.origin) > 100) {
+      if(isPlayer(e_player) && distance(ai.origin, e_player.origin) > 100) {
         ai thread function_fe65f5a6(randomfloatrange(1.25, 1.5), e_player);
       } else if(math::cointoss(20)) {
         ai thread function_fe65f5a6(randomfloatrange(1.1, 1.25), e_player);

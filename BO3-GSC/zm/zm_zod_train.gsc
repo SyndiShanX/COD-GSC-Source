@@ -1549,7 +1549,7 @@ function debug_go_to_train() {
 }
 
 function train_devgui() {
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1568,15 +1568,11 @@ function train_devgui() {
           break;
         }
         case "": {
-          [
-            [level.o_zod_train]
-          ] - > open_doors();
+          [[level.o_zod_train]] - > open_doors();
           break;
         }
         case "": {
-          [
-            [level.o_zod_train]
-          ] - > close_doors();
+          [[level.o_zod_train]] - > close_doors();
           break;
         }
         case "": {
@@ -1587,7 +1583,7 @@ function train_devgui() {
           break;
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     util::wait_network_frame();
   }

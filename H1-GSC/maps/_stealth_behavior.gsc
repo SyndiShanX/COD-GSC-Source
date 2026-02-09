@@ -230,13 +230,13 @@ system_state_spotted() {
 system_state_alert() {
   level._stealth.behavior.sound["spotted"] = 0;
   maps\_utility::battlechatter_off("axis");
-  setdvar("bcs_stealth", "");
+  setDvar("bcs_stealth", "");
 }
 
 system_state_hidden() {
   level._stealth.behavior.sound["spotted"] = 0;
   maps\_utility::battlechatter_off("axis");
-  setdvar("bcs_stealth", "1");
+  setDvar("bcs_stealth", "1");
   animscripts\battlechatter::resetnextsaytimes("allies", "threat");
 }
 

@@ -69,17 +69,14 @@ hacker_debug() {
             col = hackable.custom_debug_color;
 
           print3d(hackable.origin, "+", col, 1, 1);
-
         } else {
           print3d(hackable.origin, "+", vectorscale((0, 0, 1), 255.0), 1, 1);
-
         }
 
         continue;
       }
 
       print3d(hackable.origin, "+", vectorscale((1, 0, 0), 255.0), 1, 1);
-
     }
 
     wait 0.1;

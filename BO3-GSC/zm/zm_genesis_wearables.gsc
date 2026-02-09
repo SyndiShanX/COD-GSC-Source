@@ -708,16 +708,16 @@ function function_716f6548() {
 }
 
 function function_9d85b9ce(e_attacker) {
-  if(isDefined(level.var_5317b760) && level.var_5317b760 && isplayer(e_attacker)) {
+  if(isDefined(level.var_5317b760) && level.var_5317b760 && isPlayer(e_attacker)) {
     if(zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod)) {
       level.var_98fdd784 = self.origin;
       level notify("hash_e8c3642d");
     }
   }
-  if(isplayer(e_attacker) && (isDefined(e_attacker.var_adaec269) && e_attacker.var_adaec269)) {
+  if(isPlayer(e_attacker) && (isDefined(e_attacker.var_adaec269) && e_attacker.var_adaec269)) {
     e_attacker notify("hash_ab106e77");
   }
-  if(isplayer(e_attacker) && (isDefined(level.var_26af7b39) && level.var_26af7b39) && (isDefined(level.var_a5d2ba4) && level.var_a5d2ba4)) {
+  if(isPlayer(e_attacker) && (isDefined(level.var_26af7b39) && level.var_26af7b39) && (isDefined(level.var_a5d2ba4) && level.var_a5d2ba4)) {
     var_46927a7e = getent("apothicon_belly_center", "targetname");
     if(e_attacker istouching(var_46927a7e) && self istouching(var_46927a7e)) {
       if(isDefined(self.archetype)) {
@@ -787,11 +787,11 @@ function function_9d85b9ce(e_attacker) {
 }
 
 function function_cb27f92e(mod, hit_location, hit_origin, player, amount, weapon, direction_vec, tagname, modelname, partname, dflags, inflictor, chargelevel) {
-  if(isplayer(player) && (isDefined(player.var_e8e8daad) && player.var_e8e8daad)) {
+  if(isPlayer(player) && (isDefined(player.var_e8e8daad) && player.var_e8e8daad)) {
     n_amount = amount / 2;
     self dodamage(n_amount, hit_origin, player);
   }
-  if(isplayer(player) && (isDefined(player.var_15c79ed8) && player.var_15c79ed8)) {
+  if(isPlayer(player) && (isDefined(player.var_15c79ed8) && player.var_15c79ed8)) {
     if(isDefined(self.archetype) && self.archetype == "apothicon_fury") {
       n_amount = amount / 2;
       self dodamage(n_amount, hit_origin, player);

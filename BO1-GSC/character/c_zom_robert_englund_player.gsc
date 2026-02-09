@@ -8,7 +8,6 @@ main() {
   self.voice = "american";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_zom_robert_englund_fb_player");
 }

@@ -128,9 +128,7 @@ func_12F4E(var_0) {
     foreach(var_3, var_2 in self.var_D41E) {
       if(isDefined(var_2) && scripts\mp\utility::isreallyalive(var_2) && var_2 istouching(self.var_1157D)) {
         if(isDefined(self.var_C5B8)) {
-          [
-            [self.var_C5B8]
-          ](self, var_2);
+          [[self.var_C5B8]](self, var_2);
         }
 
         continue;
@@ -139,9 +137,7 @@ func_12F4E(var_0) {
       self.var_D41E[var_3] = undefined;
       if(isDefined(var_2)) {
         if(isDefined(self.var_C5B6)) {
-          [
-            [self.var_C5B6]
-          ](self, var_2);
+          [[self.var_C5B6]](self, var_2);
         }
       }
     }

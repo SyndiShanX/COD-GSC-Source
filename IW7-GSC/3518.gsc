@@ -612,7 +612,7 @@ func_DFAB(var_0, var_1, var_2) {
     if(level.teambased && (!isDefined(var_5.team) || var_5.team == self.team)) {
       continue;
     }
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       if(!scripts\mp\utility\game::isreallyalive(var_5)) {
         continue;
       }
@@ -654,7 +654,7 @@ func_DFAB(var_0, var_1, var_2) {
       continue;
     }
 
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       var_9 = isDefined(var_5.spawntime) && (gettime() - var_5.spawntime) / 1000 <= 5;
       var_10 = var_5 scripts\mp\utility\game::_hasperk("specialty_blindeye");
       var_11 = 0;
@@ -747,7 +747,7 @@ remoteuav_markplayer(var_0) {
   level endon("game_ended");
   var_0.var_12AF4 = self;
 
-  if(isplayer(var_0) && !var_0 scripts\mp\utility\game::isusingremote()) {
+  if(isPlayer(var_0) && !var_0 scripts\mp\utility\game::isusingremote()) {
     var_0 playlocalsound("player_hit_while_ads_hurt");
     var_0 thread scripts\mp\flashgrenades::func_20CA(2.0, 1.0);
     var_0 thread scripts\mp\rank::scoreeventpopup("marked_by_remote_uav");
@@ -760,12 +760,12 @@ remoteuav_markplayer(var_0) {
   remoteuav_dialog("tag");
 
   if(level.gametype != "dm") {
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       thread scripts\mp\utility\game::giveunifiedpoints("kill");
     }
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 setperk("specialty_radarblip", 1);
   } else {
     if(isDefined(var_0.uavtype)) {
@@ -838,7 +838,7 @@ func_DFAC(var_0) {
   }
 
   if(isDefined(var_0)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       var_2 = self.guid;
     } else if(isDefined(self.birthtime)) {
       var_2 = self.birthtime;
@@ -857,7 +857,7 @@ func_DFAC(var_0) {
     }
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self unsetperk("specialty_radarblip", 1);
   } else {
     if(isDefined(self.var_DFAF)) {

@@ -95,7 +95,7 @@ function onstartgametype() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || attacker.team == self.team) {
+  if(!isPlayer(attacker) || attacker.team == self.team) {
     return;
   }
   level thread dogtags::spawn_dog_tag(self, attacker, &onuse, 1);

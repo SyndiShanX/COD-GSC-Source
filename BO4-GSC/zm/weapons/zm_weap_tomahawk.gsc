@@ -662,7 +662,7 @@ calculate_tomahawk_damage(ai_target_zombie, n_tomahawk_power, tomahawk) {
 }
 
 function_c34db78(einflictor, eattacker, idamage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === # "spoon" && isplayer(eattacker)) {
+  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === # "spoon" && isPlayer(eattacker)) {
     self.var_12745932 = 1;
   }
 

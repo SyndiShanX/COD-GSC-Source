@@ -113,7 +113,7 @@ function_97f8efcd(localclientnum) {
 }
 
 function_f451b137() {
-  if(isDefined(self) && isplayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     self.tube1 = 0;
     self.tube2 = 0;
     self.tube3 = 0;
@@ -467,7 +467,7 @@ function_1451e44e() {
 }
 
 function_172e72fa() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     nixie_tube_cage = getdynent("nixie_tube_cage");
 
     if(isDefined(nixie_tube_cage)) {

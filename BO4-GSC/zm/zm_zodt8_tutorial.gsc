@@ -249,7 +249,7 @@ on_player_spawned() {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     assert(!isDefined(level.tutorialplayer));
     level.tutorialplayer = self;
     self endon(#"disconnect");

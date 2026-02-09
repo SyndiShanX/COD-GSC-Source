@@ -11,7 +11,6 @@ _id_1006() {
 _id_1007() {
   if(!isDefined(self._id_0B6E)) {
     return 0;
-
   }
   if(isDefined(self._id_1008) && isDefined(self._id_1008["_stealth_enabled"]) && self._id_1008["_stealth_enabled"]) {
     if(isDefined(self._id_1008["_stealth_attack"]) && !self._id_1008["_stealth_attack"]) {
@@ -25,19 +24,15 @@ _id_1007() {
 _id_1009() {
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   if(isDefined(self._id_100A)) {
     return 0;
-
   }
   if(_id_1007()) {
     return 0;
-
   }
   if(!_id_1073(self.enemy)) {
     return 0;
-
   }
   _id_100B();
 
@@ -58,7 +53,6 @@ _id_100B() {
 _id_100F() {
   if(!_id_1016()) {
     return 0;
-
   }
   self._id_100C._id_100D = 1;
 
@@ -72,7 +66,6 @@ _id_100F() {
       self._id_100C.func = self._id_1010;
     } else {
       self._id_100C.func = ::_id_1029;
-
     }
     return 1;
   }
@@ -97,21 +90,17 @@ _id_1013() {
 
   if(!isDefined(var_3)) {
     return 0;
-
   }
   if(abs(self._id_100C.startpos[2] - var_3[2]) > 51.2) {
     return 0;
-
   }
   if(abs(self.origin[2] - var_3[2]) > 51.2) {
     return 0;
-
   }
   self._id_100C.startpos = var_3;
 
   if(!self maymovetopoint(self._id_100C.startpos, 1, var_0)) {
     return 0;
-
   }
   if(isDefined(self._id_100C._id_1015)) {
     var_4 = self._id_100C.startpos - self._id_100C.target.origin;
@@ -131,11 +120,9 @@ _id_1013() {
 
   if(!self maymovefrompointtopoint(self._id_100C.startpos, var_7, 1, 0)) {
     return 0;
-
   }
   if(!self maymovefrompointtopoint(var_7, self._id_100C.target.origin, 1, 1)) {
     return 0;
-
   }
   return 1;
 }
@@ -143,115 +130,92 @@ _id_1013() {
 _id_1016() {
   if(!isDefined(self._id_100C.target)) {
     return 0;
-
   }
   var_0 = self._id_100C.target;
 
   if(isDefined(var_0._id_100A)) {
     return 0;
-
   }
   var_1 = distancesquared(self.origin, var_0.origin);
 
   if(isDefined(self._id_1017)) {
     var_2 = self._id_1017;
-  } else if(isplayer(var_0)) {
+  } else if(isPlayer(var_0)) {
     var_2 = 40000;
   } else {
     var_2 = 25600;
-
   }
   if(!self._id_100C._id_100D && var_1 > var_2) {
     return 0;
-
   }
   if(!isalive(self)) {
     return 0;
-
   }
   if(isDefined(self.a._id_1018) && self.a._id_1019 >= gettime() + 50) {
     return 0;
-
   }
   if(isDefined(self._id_1011) && isDefined(self._id_1012) && gettime() < self._id_1011 && self._id_1012 == var_0) {
     return 0;
-
   }
   if(isDefined(self.a._id_0D29) || self.a._id_0D26 == "prone") {
     return 0;
-
   }
   if(animscripts\utility::_id_0C95()) {
     return 0;
-
   }
   if(isDefined(self.grenade) && self.frontshieldanglecos == 1) {
     return 0;
-
   }
   if(!isalive(var_0)) {
     return 0;
-
   }
   if(isDefined(var_0._id_0FA0) || isDefined(var_0.ignoreme) && var_0.ignoreme) {
     return 0;
-
   }
-  if(!isai(var_0) && !isplayer(var_0)) {
+  if(!isai(var_0) && !isPlayer(var_0)) {
     return 0;
-
   }
   if(isai(var_0)) {
     if(var_0 isinscriptedstate()) {
       return 0;
-
     }
     if(var_0 maps\_utility::_id_0D69() || var_0.delayeddeath) {
       return 0;
     }
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_3 = var_0 getstance();
   } else {
     var_3 = var_0.a._id_0D26;
-
   }
   if(var_3 != "stand" && var_3 != "crouch") {
     return 0;
-
   }
   if(isDefined(self._id_0D04) && isDefined(var_0._id_0D04)) {
     return 0;
-
   }
   if(isDefined(var_0.grenade)) {
     return 0;
-
   }
   if(self._id_100C._id_100E) {
     var_4 = 110;
   } else {
     var_4 = 60;
-
   }
   var_5 = angleclamp180(self.angles[1] - animscripts\utility::_id_101A(var_0.origin));
 
   if(abs(var_5) > var_4) {
     return 0;
-
   }
   if(var_1 <= 4096) {
     return 1;
-
   }
   if(self._id_100C._id_100E) {
     return 0;
-
   }
   if(isDefined(self._id_101B) && isDefined(self._id_101C) && gettime() < self._id_101B && self._id_101C == var_0) {
     return 0;
-
   }
   return 1;
 }
@@ -264,7 +228,7 @@ _id_101D() {
 #using_animtree("generic_human");
 
 _id_101F() {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self._id_100C._id_101E = undefined;
   self.a._id_0D2B = "stop";
   self orientmode("face default");
@@ -297,7 +261,6 @@ _id_1024() {
 
   if(var_0 > 4096 && isDefined(self._id_1022) && isDefined(self._id_1023) && gettime() < self._id_1022 && self._id_1023 == self._id_100C.target) {
     return 0;
-
   }
   return 1;
 }
@@ -305,15 +268,12 @@ _id_1024() {
 _id_1025() {
   if(isDefined(self._id_100C.target._id_0D04)) {
     return 0;
-
   }
   if(!_id_1024()) {
     return 0;
-
   }
   if(isDefined(self._id_100C.target._id_1026)) {
     return 0;
-
   }
   return _id_102B();
 }
@@ -321,11 +281,10 @@ _id_1025() {
 _id_1027() {
   if(isDefined(self._id_1017)) {
     var_0 = self._id_1017;
-  } else if(isplayer(self._id_100C.target)) {
+  } else if(isPlayer(self._id_100C.target)) {
     var_0 = 40000;
   } else {
     var_0 = 25600;
-
   }
   if(distancesquared(self.origin, self._id_100C.target.origin) > var_0) {
     self._id_100C._id_1028 = gettime() + 3000;
@@ -339,7 +298,6 @@ _id_1029() {
 
   if(isDefined(self._id_100C.target)) {
     _id_1027();
-
   }
   while(isDefined(self._id_100C.target)) {
     if(!_id_102D()) {
@@ -354,7 +312,7 @@ _id_1029() {
 
     animscripts\battlechatter_ai::_id_0B37();
     self orientmode("face point", self._id_100C.target.origin);
-    self setflaggedanimknoballrestart("meleeanim", % melee_1, % body, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("meleeanim", %melee_1, %body, 1, 0.2, 1);
     self._id_100C._id_100E = 1;
 
     if(!_id_102A()) {
@@ -372,12 +330,10 @@ _id_102A() {
 
     if(var_0 == "end") {
       return 1;
-
     }
     if(var_0 == "stop") {
       if(!_id_100F()) {
         return 0;
-
       }
       if(self._id_100C.func != ::_id_1029) {
         return 1;
@@ -400,11 +356,9 @@ _id_102A() {
 _id_102B() {
   if(!isDefined(self._id_100C.target)) {
     return 0;
-
   }
   if(!_id_1016()) {
     return 0;
-
   }
   var_0 = vectornormalize(self._id_100C.target.origin - self.origin);
   self._id_100C.startpos = self._id_100C.target.origin - 40.0 * var_0;
@@ -419,12 +373,11 @@ _id_102C(var_0, var_1) {
 _id_102D() {
   if(!_id_102B()) {
     return 0;
-
   }
   var_0 = _id_102C(self.origin, self._id_100C.target.origin);
 
   if(var_0 <= 4096) {
-    self setflaggedanimknoball("readyanim", % stand_2_melee_1, % body, 1, 0.3, 1);
+    self setflaggedanimknoball("readyanim", %stand_2_melee_1, %body, 1, 0.3, 1);
     animscripts\shared::_id_0C51("readyanim");
     return 1;
   }
@@ -432,26 +385,25 @@ _id_102D() {
   _id_102E();
   var_1 = self._id_100C.target.origin;
   var_2 = 0.1;
-  var_3 = length(getmovedelta( % run_2_melee_charge, 0, 1));
+  var_3 = length(getmovedelta(%run_2_melee_charge, 0, 1));
   var_4 = 32;
   var_5 = 48.0 + var_4 + var_3;
   var_6 = var_5 * var_5;
   var_7 = 64 + var_4;
   var_8 = var_7 * var_7;
-  var_9 = getanimlength( % run_2_melee_charge) * 1000;
+  var_9 = getanimlength(%run_2_melee_charge) * 1000;
   var_10 = var_9 - 100;
   var_11 = var_9 - 200;
   var_12 = 0;
   var_13 = undefined;
   var_14 = % run_lowready_f;
 
-  if(isplayer(self._id_100C.target) && self._id_100C.target == self.enemy) {
+  if(isPlayer(self._id_100C.target) && self._id_100C.target == self.enemy) {
     self orientmode("face enemy");
   } else {
     self orientmode("face point", self._id_100C.target.origin);
-
   }
-  self setflaggedanimknoball("chargeanim", var_14, % body, 1, 0.3, 1);
+  self setflaggedanimknoball("chargeanim", var_14, %body, 1, 0.3, 1);
   var_15 = 0;
 
   for(;;) {
@@ -461,7 +413,7 @@ _id_102D() {
     if(!var_15) {
       if(var_17) {
         _id_101D();
-        self setflaggedanimknoballrestart("chargeanim", % run_2_melee_charge, % body, 1, 0.2, 1);
+        self setflaggedanimknoballrestart("chargeanim", %run_2_melee_charge, %body, 1, 0.2, 1);
         var_12 = var_16;
         var_15 = 1;
       }
@@ -470,7 +422,7 @@ _id_102D() {
 
       if(var_16 - var_12 >= var_10 || !var_17 && !var_18) {
         _id_101D();
-        self setflaggedanimknoball("chargeanim", var_14, % body, 1, 0.3, 1);
+        self setflaggedanimknoball("chargeanim", var_14, %body, 1, 0.3, 1);
         var_15 = 0;
       }
     }
@@ -488,7 +440,7 @@ _id_102D() {
     var_20 = self._id_100C.target.origin + var_19 * var_11;
     var_13 = _id_102C(self.origin, var_20);
 
-    if(var_15 && var_0 <= var_8 && (gettime() - var_12 >= var_10 || !isplayer(self._id_100C.target))) {
+    if(var_15 && var_0 <= var_8 && (gettime() - var_12 >= var_10 || !isPlayer(self._id_100C.target))) {
       break;
     }
 
@@ -505,9 +457,8 @@ _id_102D() {
 _id_102E() {
   if(!isDefined(self.a._id_102F)) {
     self.a._id_102F = 0;
-
   }
-  if(isDefined(self.enemy) && isplayer(self.enemy) || randomint(3) == 0) {
+  if(isDefined(self.enemy) && isPlayer(self.enemy) || randomint(3) == 0) {
     if(gettime() > self.a._id_102F) {
       animscripts\face::_id_0C41("meleecharge");
       self.a._id_102F = gettime() + 8000;
@@ -520,11 +471,9 @@ _id_1030(var_0) {
 
   if(self._id_100C._id_100E) {
     var_1 = var_1 + 50;
-
   }
   if(abs(var_0) < var_1) {
     return 0;
-
   }
   var_2 = self._id_100C.target;
   _id_103C();
@@ -546,21 +495,17 @@ _id_1034(var_0) {
 
   if(self._id_100C._id_100E) {
     var_1 = var_1 + 50;
-
   }
   if(abs(var_0) < var_1) {
     return 0;
-
   }
   var_2 = self._id_100C.target;
 
   if(isDefined(var_2._id_0D04)) {
     return 0;
-
   }
   if(isDefined(var_2._id_1035)) {
     return 0;
-
   }
   self._id_100C.winner = 1;
   self._id_100C._id_1032 = % bog_melee_r_attack;
@@ -572,17 +517,14 @@ _id_1034(var_0) {
 _id_1036(var_0) {
   if(-90 > var_0 || var_0 > 0) {
     return 0;
-
   }
   var_1 = self._id_100C.target;
 
   if(isDefined(var_1._id_0D04)) {
     return 0;
-
   }
   if(isDefined(var_1._id_1035)) {
     return 0;
-
   }
   self._id_100C.winner = 1;
   self._id_100C._id_1032 = % melee_sync_attack;
@@ -687,11 +629,9 @@ _id_103F() {
 
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(distancesquared(var_0.origin, self._id_100C.target.origin) > 16 && isDefined(self._id_100C.target.a._id_0CF8) && (self._id_100C.target.a._id_0CF8 != "hide" && self._id_100C.target.a._id_0CF8 != "lean")) {
     return 0;
-
   }
   var_1 = vectortoangles(self.origin - var_0.origin);
   var_2 = angleclamp180(var_0.angles[1] - var_1[1]);
@@ -714,28 +654,22 @@ _id_1040() {
 
   if(!isai(var_0) || var_0.type != "human") {
     return 0;
-
   }
   if(self.stairsstate != "none" || var_0.stairsstate != "none") {
     return 0;
-
   }
   if(isDefined(self._id_1035) && isDefined(var_0._id_1035)) {
     return 0;
-
   }
   if(isDefined(self._id_0D04) && isDefined(var_0._id_0D04)) {
     return 0;
-
   }
   if(isDefined(self._id_1035) && isDefined(var_0._id_0D04) || isDefined(var_0._id_1035) && isDefined(self._id_0D04)) {
     return 0;
-
   }
   if(isDefined(self._id_1026)) {
     if(![[self._id_1026]]()) {
       return 0;
-
     }
     self._id_100C._id_1041 = 1;
   } else if(isDefined(var_0._id_1026)) {
@@ -745,14 +679,12 @@ _id_1040() {
   } else {
     if(!_id_103A()) {
       return 0;
-
     }
     self._id_100C._id_1041 = 0;
   }
 
   if(!isDefined(var_0._id_100C._id_103E)) {
     var_0._id_100C._id_103E = var_0.angles[1];
-
   }
   self._id_100C._id_1042 = self._id_100C.startpos - var_0.origin;
   return 1;
@@ -828,7 +760,6 @@ _id_104D(var_0) {
 
   if(isDefined(var_0)) {
     var_0 notify("end_melee");
-
   }
   self notify("end_melee");
 }
@@ -836,11 +767,9 @@ _id_104D(var_0) {
 _id_104E(var_0, var_1) {
   if(isDefined(var_1) && var_1 <= gettime()) {
     return 0;
-
   }
   if(!_id_1016()) {
     return 0;
-
   }
   var_2 = self._id_100C.target;
   var_3 = distancesquared(var_2.origin, var_0);
@@ -849,17 +778,14 @@ _id_104E(var_0, var_1) {
     var_4 = 256;
   } else {
     var_4 = 1296;
-
   }
   if(var_3 > var_4) {
     return 0;
-
   }
   self._id_100C.startpos = var_2.origin + self._id_100C._id_1042;
 
   if(!_id_1013()) {
     return 0;
-
   }
   return 1;
 }
@@ -869,14 +795,12 @@ _id_104F(var_0) {
 
   if(var_1 < 64 && abs(self._id_100C.startpos[2] - self.origin[2]) < 64) {
     return 1;
-
   }
   var_2 = distancesquared((var_0[0], var_0[1], 0), (self._id_100C.startpos[0], self._id_100C.startpos[1], 0));
   var_3 = distancesquared((self.origin[0], self.origin[1], 0), (self._id_100C.target.origin[0], self._id_100C.target.origin[1], 0));
 
   if(var_2 > var_3 && abs(self._id_100C.target.origin[2] - self.origin[2]) < 64) {
     return 1;
-
   }
   return 0;
 }
@@ -898,11 +822,10 @@ _id_1050(var_0) {
 _id_1051() {
   if(!_id_1016()) {
     return 0;
-
   }
   _id_101D();
-  self clearanim( % body, 0.2);
-  self setanimknoball(animscripts\run::_id_0FC2(), % body, 1, 0.2);
+  self clearanim(%body, 0.2);
+  self setanimknoball(animscripts\run::_id_0FC2(), %body, 1, 0.2);
   self animmode("zonly_physics");
   self.keepclaimednode = 1;
   var_0 = gettime() + 1500;
@@ -911,7 +834,6 @@ _id_1051() {
   while(_id_104E(var_1, var_0)) {
     if(_id_104F(var_1)) {
       return _id_1050(var_1);
-
     }
     self orientmode("face point", self._id_100C.startpos);
     wait 0.05;
@@ -935,27 +857,24 @@ _id_1052() {
     self orientmode("face angle", self._id_100C._id_103E);
   } else {
     self orientmode("face current");
-
   }
   self.a._id_0D26 = "stand";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
 
   if(isDefined(self._id_100C._id_1048)) {
     _id_1054();
-
   }
-  self setflaggedanimknoballrestart("meleeAnim", self._id_100C._id_1032, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("meleeAnim", self._id_100C._id_1032, %body, 1, 0.2);
   var_0 = animscripts\shared::_id_0C51("meleeAnim", ::_id_1068);
 
   if(var_0 == "melee_death" && isDefined(self._id_100C._id_1053)) {
     _id_105A();
-    self setflaggedanimknoballrestart("meleeAnim", self._id_100C._id_1033, % body, 1, 0.2);
+    self setflaggedanimknoballrestart("meleeAnim", self._id_100C._id_1033, %body, 1, 0.2);
     var_0 = animscripts\shared::_id_0C51("meleeAnim", ::_id_1068);
   }
 
   if(isDefined(self._id_100C) && isDefined(self._id_100C._id_1048)) {
     self kill();
-
   }
   self.keepclaimednode = 0;
 }
@@ -999,11 +918,9 @@ _id_105C() {
 _id_105D() {
   if(!isDefined(self._id_100C._id_1033)) {
     return 0;
-
   }
   if(!isDefined(self._id_100C._id_105E)) {
     return 0;
-
   }
   return 1;
 }
@@ -1036,7 +953,6 @@ _id_1063() {
   }
   if(isDefined(self.syncedmeleetarget)) {
     self.syncedmeleetarget _id_1064();
-
   }
   _id_1064();
 }
@@ -1065,7 +981,6 @@ _id_1065() {
 _id_1066() {
   if(animhasnotetrack(self._id_100C._id_1032, "melee_death")) {
     return 0;
-
   }
   return isDefined(self._id_100C._id_1048);
 }
@@ -1098,7 +1013,6 @@ _id_1068(var_0) {
   } else if(var_0 == "melee_death") {
     if(isDefined(self._id_100C._id_1053)) {
       return var_0;
-
     }
     _id_1067();
 
@@ -1156,7 +1070,6 @@ _id_106E() {
   }
   if(isDefined(self._id_100C._id_101E)) {
     _id_101F();
-
   }
   var_0 = self getdroptofloorposition();
 
@@ -1168,7 +1081,6 @@ _id_106E() {
 _id_106F() {
   if(isDefined(self._id_100C._id_1069)) {
     self detach("weapon_parabolic_knife", "TAG_INHAND", 1);
-
   }
   if(isalive(self)) {
     _id_105A();
@@ -1198,7 +1110,6 @@ _id_1072() {
 
   if(isDefined(self._id_100C._id_1049)) {
     self._id_100C._id_1049 notify("partner_end_melee");
-
   }
   _id_1074(self._id_100C.target);
 }
@@ -1206,11 +1117,9 @@ _id_1072() {
 _id_1073(var_0) {
   if(isDefined(self._id_100C)) {
     return 0;
-
   }
   if(isDefined(var_0._id_100C)) {
     return 0;
-
   }
   self._id_100C = spawnStruct();
   var_0._id_100C = spawnStruct();

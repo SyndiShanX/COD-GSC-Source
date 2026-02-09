@@ -16,7 +16,7 @@ callback_hostmigration() {
   }
 
   level.hostmigrationtimer = 1;
-  setdvar("ui_inhostmigration", 1);
+  setDvar("ui_inhostmigration", 1);
   level.hostmigration = 1;
   level notify("host_migration_begin");
   scripts\mp\gamelogic::func_12F45();
@@ -27,7 +27,7 @@ callback_hostmigration() {
     }
     var_1 thread hostmigrationtimerthink();
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 setclientomnvar("ui_session_state", var_1.sessionstate);
     }
   }
@@ -35,13 +35,13 @@ callback_hostmigration() {
   level endon("host_migration_begin");
   hostmigrationwait();
   level.hostmigrationtimer = undefined;
-  setdvar("ui_inhostmigration", 0);
+  setDvar("ui_inhostmigration", 0);
   visionsetthermal(game["thermal_vision"]);
   level.hostmigration = 0;
   level notify("host_migration_end");
   scripts\mp\gamelogic::func_12F45();
   level thread scripts\mp\gamelogic::updategameevents();
-  setdvar("match_running", 1);
+  setDvar("match_running", 1);
 }
 
 hostmigrationconnectwatcher() {
@@ -50,7 +50,7 @@ hostmigrationconnectwatcher() {
   level waittill("connected", var_0);
   var_0 thread hostmigrationtimerthink();
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 setclientomnvar("ui_session_state", var_0.sessionstate);
   }
 }
@@ -87,11 +87,11 @@ hostmigrationname(var_0) {
     var_1 = var_0.entity_number;
   }
 
-  if(isplayer(var_0) && isDefined(var_0.name)) {
+  if(isPlayer(var_0) && isDefined(var_0.name)) {
     var_2 = var_0.name;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return "player <" + var_2 + ">";
   }
 

@@ -226,7 +226,7 @@ function_c723e684(var_a276c861) {
 
 is_soul_capture(var_88206a50, ent) {
   if(isDefined(ent) && ent.subarchetype === # "zombie_electric") {
-    b_killed_by_player = isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor);
+    b_killed_by_player = isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor);
     var_e93788f1 = var_88206a50.e_vol;
     return (b_killed_by_player && ent istouching(var_e93788f1));
   }

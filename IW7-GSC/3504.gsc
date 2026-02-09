@@ -368,7 +368,7 @@ func_C1CE(var_0) {
     visionsetalternate(-2, 1.5);
   }
 
-  setdvar("r_materialBloomHQScriptMasterEnable", 0);
+  setDvar("r_materialBloomHQScriptMasterEnable", 0);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
   level notify("nuke_aftermath_post_started");
   level waittill("nuke_death");
@@ -403,7 +403,7 @@ func_C1B8(var_0) {
   if(isDefined(level.var_C1C5.player)) {
     foreach(var_3 in level.characters) {
       if(func_C1B3(var_3, var_1)) {
-        if(isplayer(var_3)) {
+        if(isPlayer(var_3)) {
           var_3.nuked = 1;
 
           if(scripts\mp\utility\game::isreallyalive(var_3)) {

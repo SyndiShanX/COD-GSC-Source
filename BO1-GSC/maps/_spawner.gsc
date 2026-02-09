@@ -11,8 +11,9 @@
 main() {
   CreateThreatBiasGroup("allies");
   CreateThreatBiasGroup("axis");
-  if(level.script != "frontend" && !isDefined(level.zombietron_mode))
+  if(level.script != "frontend" && !isDefined(level.zombietron_mode)) {
     precachemodel("grenade_bag");
+  }
   level._nextcoverprint = 0;
   level._ai_group = [];
   level.killedaxis = 0;
@@ -48,7 +49,6 @@ main() {
   }
   level thread trigger_spawner_monitor();
 }
-
 precache_player_weapon_drops(weapon_names) {
   level.ai_classname_in_level_keys = getarraykeys(level.ai_classname_in_level);
   for(i = 0; i < level.ai_classname_in_level_keys.size; i++) {
@@ -67,7 +67,6 @@ precache_player_weapon_drops(weapon_names) {
   }
   level.ai_classname_in_level_keys = undefined;
 }
-
 process_deathflags() {
   keys = getarraykeys(level.deathflags);
   level.deathflags = [];
@@ -81,12 +80,10 @@ process_deathflags() {
     }
   }
 }
-
 spawn_guys_until_death_or_no_count() {
   self endon("death");
   self waittill("count_gone");
 }
-
 deathflag_check_count() {
   self endon("death");
   waittillframeend;
@@ -95,7 +92,6 @@ deathflag_check_count() {
   }
   self notify("count_gone");
 }
-
 ai_deathflag() {
   level.deathflags[self.script_deathflag]["ai"][self.ai_number] = self;
   ai_number = self.ai_number;
@@ -108,7 +104,6 @@ ai_deathflag() {
   level.deathflags[deathflag]["ai"][ai_number] = undefined;
   update_deathflag(deathflag);
 }
-
 spawner_deathflag() {
   level.deathflags[self.script_deathflag] = true;
   waittillframeend;
@@ -124,7 +119,6 @@ spawner_deathflag() {
   level.deathflags[deathflag]["spawners"][id] = undefined;
   update_deathflag(deathflag);
 }
-
 update_deathflag(deathflag) {
   level notify("updating_deathflag_" + deathflag);
   level endon("updating_deathflag_" + deathflag);
@@ -139,7 +133,6 @@ update_deathflag(deathflag) {
   }
   flag_set(deathflag);
 }
-
 outdoor_think(trigger) {
   assert(trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_AXIS) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_ALLIES) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_NEUTRAL), "trigger_outdoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
   trigger endon("death");
@@ -153,7 +146,6 @@ outdoor_think(trigger) {
     guy.wantShotgun = false;
   }
 }
-
 indoor_think(trigger) {
   assert(trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_AXIS) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_ALLIES) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_NEUTRAL), "trigger_indoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
   trigger endon("death");
@@ -167,7 +159,6 @@ indoor_think(trigger) {
     guy.wantShotgun = true;
   }
 }
-
 trigger_spawner_monitor() {
   println("Trigger spawner monitor running...");
   level._numTriggerSpawned = 0;
@@ -177,7 +168,6 @@ trigger_spawner_monitor() {
     level._numTriggerSpawned = 0;
   }
 }
-
 ok_to_trigger_spawn(forceChoke) {
   if(isDefined(forceChoke)) {
     choked = forceChoke;
@@ -211,7 +201,6 @@ ok_to_trigger_spawn(forceChoke) {
   }
   return true;
 }
-
 trigger_spawner(trigger) {
   assertEx(isDefined(trigger.target), "Triggers with flag TRIGGER_SPAWN at " + trigger.origin + " must target at least one spawner.");
   trigger endon("death");
@@ -222,7 +211,6 @@ trigger_spawner(trigger) {
   }
   array_thread(spawners, ::trigger_spawner_spawns_guys);
 }
-
 trigger_spawner_spawns_guys() {
   self endon("death");
   if(IsSubStr(self.classname, "actor")) {
@@ -241,7 +229,6 @@ trigger_spawner_spawns_guys() {
     level._numTriggerSpawned++;
   }
 }
-
 flood_spawner_scripted(spawners) {
   assertex(isDefined(spawners) && spawners.size, "Script tried to flood spawn without any spawners");
   array_thread(spawners, ::flood_spawner_init);
@@ -249,7 +236,6 @@ flood_spawner_scripted(spawners) {
     array_thread(spawners, ::flood_spawner_think);
   }
 }
-
 reincrement_count_if_deleted(spawner) {
   spawner endon("death");
   self waittill("death");
@@ -257,7 +243,6 @@ reincrement_count_if_deleted(spawner) {
     spawner.count++;
   }
 }
-
 kill_trigger(trigger) {
   if(!isDefined(trigger)) {
     return;
@@ -267,12 +252,10 @@ kill_trigger(trigger) {
   }
   trigger Delete();
 }
-
 kill_spawner_trigger(trigger) {
   trigger waittill("trigger");
   kill_spawnernum(trigger.script_killspawner);
 }
-
 empty_spawner(trigger) {
   emptyspawner = trigger.script_emptyspawner;
   trigger waittill("trigger");
@@ -292,12 +275,10 @@ empty_spawner(trigger) {
   }
   trigger notify("deleted spawners");
 }
-
 waittillDeathOrPainDeath() {
   self endon("death");
   self waittill("pain_death");
 }
-
 drop_gear() {
   team = self.team;
   waittillDeathOrPainDeath();
@@ -315,15 +296,14 @@ drop_gear() {
   if(level.nextGrenadeDrop > 0) {
     return;
   }
-  level.nextGrenadeDrop = 2 + randomInt(2);
+  level.nextGrenadeDrop = 2 + RandomInt(2);
   max = 25;
   min = 12;
-  spawn_grenade_bag(self.origin + (randomInt(max) - min, randomInt(max) - min, 2) + (0, 0, 42), (0, randomInt(360), 0), self.team);
+  spawn_grenade_bag(self.origin + (RandomInt(max) - min, RandomInt(max) - min, 2) + (0, 0, 42), (0, RandomInt(360), 0), self.team);
 }
-
 random_tire(start, end) {
   model = spawn("script_model", (0, 0, 0));
-  model.angles = (0, randomInt(360), 0);
+  model.angles = (0, randomint(360), 0);
   dif = randomfloat(1);
   model.origin = start * dif + end * (1 - dif);
   model setModel("com_junktire");
@@ -333,7 +313,6 @@ random_tire(start, end) {
   wait(randomintrange(8, 12));
   model delete();
 }
-
 spawn_grenade_bag(origin, angles, team) {
   if(!isDefined(level.grenade_cache) || !isDefined(level.grenade_cache[team])) {
     level.grenade_cache_index[team] = 0;
@@ -352,7 +331,6 @@ spawn_grenade_bag(origin, angles, team) {
   grenade.count = count;
   grenade setModel("grenade_bag");
 }
-
 dronespawn_setstruct(spawner) {
   if(dronespawn_check()) {
     return;
@@ -364,14 +342,12 @@ dronespawn_setstruct(spawner) {
     guy delete();
   }
 }
-
 dronespawn_check() {
   if(isDefined(level.dronestruct[self.classname])) {
     return true;
   }
   return false;
 }
-
 dronespawn_setstruct_from_guy(guy) {
   if(!isDefined(guy)) {
     return;
@@ -390,7 +366,6 @@ dronespawn_setstruct_from_guy(guy) {
   struct.weapon = guy.weapon;
   level.dronestruct[guy.classname] = struct;
 }
-
 empty() {}
 spawn_prethink() {
   assert(self != level);
@@ -438,7 +413,6 @@ spawn_prethink() {
     spawn thread spawn_think(self);
   }
 }
-
 spawn_think(spawner) {
   assert(self != level);
   level.ai_classname_in_level[self.classname] = true;
@@ -457,7 +431,6 @@ spawn_think(spawner) {
   self thread run_spawn_functions(spawner);
   assert(isDefined(self.team));
 }
-
 run_spawn_functions(spawner) {
   self endon("death");
   waittillframeend;
@@ -479,7 +452,6 @@ run_spawn_functions(spawner) {
   self.spawn_funcs = undefined;
   self.spawn_funcs = undefined;
 }
-
 living_ai_prethink() {
   if(isDefined(self.script_deathflag)) {
     level.deathflags[self.script_deathflag] = true;
@@ -488,7 +460,6 @@ living_ai_prethink() {
     crawl_through_targets_to_init_flags();
   }
 }
-
 crawl_through_targets_to_init_flags() {
   array = get_node_funcs_based_on_target();
   if(isDefined(array)) {
@@ -499,7 +470,6 @@ crawl_through_targets_to_init_flags() {
     }
   }
 }
-
 spawn_think_action(spawner_targetname) {
   if(getDvar(#"zombiemode") == "0") {
     self thread maps\_serverfaceanim::init_serverfaceanim();
@@ -709,11 +679,9 @@ spawn_think_action(spawner_targetname) {
   }
   self maps\_dds::dds_ai_init();
 }
-
 set_default_covering_fire() {
   self.provideCoveringFire = self.team == "allies" && self.fixedNode;
 }
-
 flag_turret_for_use(ai) {
   self endon("death");
   if(!self.flagged_for_use) {
@@ -726,37 +694,29 @@ flag_turret_for_use(ai) {
   }
   println("Turret was already flagged for use");
 }
-
 set_goal_volume() {
   self endon("death");
   waittillframeend;
   self SetGoalVolume(level.goalVolumes[self.script_goalvolume]);
 }
-
 get_target_ents(target) {
   return getEntArray(target, "targetname");
 }
-
 get_target_nodes(target) {
   return getnodearray(target, "targetname");
 }
-
 get_target_structs(target) {
   return getstructarray(target, "targetname");
 }
-
 node_has_radius(node) {
   return isDefined(node.radius) && node.radius != 0;
 }
-
 go_to_origin(node, optional_arrived_at_node_func) {
   self go_to_node(node, "origin", optional_arrived_at_node_func);
 }
-
 go_to_struct(node, optional_arrived_at_node_func) {
   self go_to_node(node, "struct", optional_arrived_at_node_func);
 }
-
 go_to_node(node, goal_type, optional_arrived_at_node_func) {
   self endon("death");
   if(isDefined(self.used_an_mg42)) {
@@ -772,7 +732,6 @@ go_to_node(node, goal_type, optional_arrived_at_node_func) {
   }
   go_to_node_using_funcs(array["node"], array["get_target_func"], array["set_goal_func_quits"], optional_arrived_at_node_func);
 }
-
 spawner_targets_init() {
   allnodes = GetAllNodes();
   level.script_spawner_targets_nodes = [];
@@ -782,7 +741,6 @@ spawner_targets_init() {
     }
   }
 }
-
 go_to_spawner_target(target_names) {
   self endon("death");
   self notify("go_to_spawner_target");
@@ -832,12 +790,10 @@ go_to_spawner_target(target_names) {
   }
   self set_goalradius_based_on_settings(goal);
 }
-
 release_spawner_target_node(node) {
   self waittill_any("death", "goal_changed");
   node.node_claimed = undefined;
 }
-
 get_spawner_target_nodes(group) {
   if(group == "") {
     return [];
@@ -853,7 +809,6 @@ get_spawner_target_nodes(group) {
   }
   return nodes;
 }
-
 empty_arrived_func(node) {}
 get_least_used_from_array(array) {
   assertex(array.size > 0, "Somehow array had zero entrees");
@@ -874,7 +829,6 @@ get_least_used_from_array(array) {
   level.go_to_node_arrays[targetname] = newarray;
   return first;
 }
-
 go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arrived_at_node_func, require_player_dist) {
   self endon("stop_going_to_node");
   self endon("death");
@@ -882,10 +836,11 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     node = get_least_used_from_array(node);
     player_wait_dist = require_player_dist;
     if(isDefined(node.script_requires_player)) {
-      if(node.script_requires_player > 1)
+      if(node.script_requires_player > 1) {
         player_wait_dist = node.script_requires_player;
-      else
+      } else {
         player_wait_dist = 256;
+      }
       node.script_requires_player = false;
     }
     self set_goalradius_based_on_settings(node);
@@ -904,13 +859,15 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
       flag_set(node.script_flag_clear);
     }
     if(isDefined(node.script_ent_flag_set)) {
-      if(!self flag_exists(node.script_ent_flag_set))
+      if(!self flag_exists(node.script_ent_flag_set)) {
         AssertEx("Tried to set a ent flag" + node.script_ent_flag_set + "on a node, but it doesnt exist.");
+      }
       self ent_flag_set(node.script_ent_flag_set);
     }
     if(isDefined(node.script_ent_flag_clear)) {
-      if(!self flag_exists(node.script_ent_flag_clear))
+      if(!self flag_exists(node.script_ent_flag_clear)) {
         AssertEx("Tried to clear a ent flag" + node.script_ent_flag_clear + "on a node, but it doesnt exist.");
+      }
       self ent_flag_clear(node.script_ent_flag_clear);
     }
     if(targets_and_uses_turret(node)) {
@@ -967,28 +924,31 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     }
     node = nextNode_array;
   }
-  if(isDefined(self.arrived_at_end_node_func))
+  if(isDefined(self.arrived_at_end_node_func)) {
     [[self.arrived_at_end_node_func]](node);
+  }
   self notify("reached_path_end");
-  if(isDefined(self.delete_on_path_end))
+  if(isDefined(self.delete_on_path_end)) {
     self Delete();
+  }
   self set_goalradius_based_on_settings(node);
 }
-
 go_to_node_wait_for_player(node, get_target_func, dist) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin))
+    if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin)) {
       return true;
+    }
   }
   vec = anglesToForward(self.angles);
   if(isDefined(node.target)) {
     temp = [[get_target_func]](node.target);
-    if(temp.size == 1)
+    if(temp.size == 1) {
       vec = vectornormalize(temp[0].origin - node.origin);
-    else if(isDefined(node.angles))
+    } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
+    }
   } else if(isDefined(node.angles))
     vec = anglesToForward(node.angles);
   vec2 = [];
@@ -998,26 +958,25 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
   }
   for(i = 0; i < vec2.size; i++) {
     value = vec2[i];
-    if(vectordot(vec, value) > 0)
+    if(vectordot(vec, value) > 0) {
       return true;
+    }
   }
   dist2rd = dist * dist;
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(distancesquared(player.origin, self.origin) < dist2rd)
+    if(distancesquared(player.origin, self.origin) < dist2rd) {
       return true;
+    }
   }
   return false;
 }
-
 go_to_node_set_goal_pos(ent) {
   self set_goal_pos(ent.origin);
 }
-
 go_to_node_set_goal_node(node) {
   self set_goal_node(node);
 }
-
 targets_and_uses_turret(node) {
   if(!isDefined(node.target)) {
     return false;
@@ -1033,14 +992,12 @@ targets_and_uses_turret(node) {
   thread use_a_turret(turret);
   return true;
 }
-
 remove_crawled(ent) {
   waittillframeend;
   if(isDefined(ent)) {
     ent.crawled = undefined;
   }
 }
-
 crawl_target_and_init_flags(ent, get_func) {
   oldsize = 0;
   targets = [];
@@ -1071,7 +1028,6 @@ crawl_target_and_init_flags(ent, get_func) {
     ent = targets[index];
   }
 }
-
 get_node_funcs_based_on_target(node, goal_type) {
   get_target_func["origin"] = ::get_target_ents;
   get_target_func["node"] = ::get_target_nodes;
@@ -1106,7 +1062,6 @@ get_node_funcs_based_on_target(node, goal_type) {
   array["set_goal_func_quits"] = set_goal_func_quits[goal_type];
   return array;
 }
-
 set_goalradius_based_on_settings(node) {
   self endon("death");
   waittillframeend;
@@ -1123,12 +1078,10 @@ set_goalradius_based_on_settings(node) {
     self thread force_goal();
   }
 }
-
 reachPathEnd() {
   self waittill("goal");
   self notify("reached_path_end");
 }
-
 autoTarget(targets) {
   for(;;) {
     user = self GetTurretOwner();
@@ -1144,7 +1097,6 @@ autoTarget(targets) {
     wait(2 + RandomFloat(1));
   }
 }
-
 manualTarget(targets) {
   for(;;) {
     self SetTargetEntity(random(targets));
@@ -1153,7 +1105,6 @@ manualTarget(targets) {
     wait(2 + RandomFloat(1));
   }
 }
-
 use_a_turret(turret) {
   if(self.team == "axis" && self.health == 150) {
     self.health = 100;
@@ -1181,7 +1132,6 @@ use_a_turret(turret) {
   }
   turret notify("startfiring");
 }
-
 fallback_spawner_think(num, node_array, ignoreWhileFallingBack) {
   self endon("death");
   level.max_fallbackers[num] += self.count;
@@ -1204,13 +1154,11 @@ fallback_spawner_think(num, node_array, ignoreWhileFallingBack) {
     spawn thread fallback_ai_think(num, node_array, "is spawner", ignoreWhileFallingBack);
   }
 }
-
 fallback_ai_think_death(ai, num) {
   ai waittill("death");
   level.current_fallbackers[num]--;
   level notify(("fallbacker_died" + num));
 }
-
 fallback_ai_think(num, node_array, spawner, ignoreWhileFallingBack) {
   if((!isDefined(self.fallback)) || (!isDefined(self.fallback[num]))) {
     self.fallback[num] = true;
@@ -1226,7 +1174,6 @@ fallback_ai_think(num, node_array, spawner, ignoreWhileFallingBack) {
   }
   level thread fallback_ai_think_death(self, num);
 }
-
 fallback_death(ai, num) {
   ai waittill("death");
   if(isDefined(ai.fallback_node)) {
@@ -1234,7 +1181,6 @@ fallback_death(ai, num) {
   }
   level notify(("fallback_reached_goal" + num));
 }
-
 fallback_goal(ignoreWhileFallingBack) {
   self waittill("goal");
   self.ignoresuppression = false;
@@ -1244,7 +1190,6 @@ fallback_goal(ignoreWhileFallingBack) {
   self notify("fallback_notify");
   self notify("stop_coverprint");
 }
-
 fallback_interrupt() {
   self notify("stop_fallback_interrupt");
   self endon("stop_fallback_interrupt");
@@ -1261,7 +1206,6 @@ fallback_interrupt() {
     }
   }
 }
-
 fallback_ai(num, node_array, ignoreWhileFallingBack) {
   self notify("stop_going_to_node");
   self endon("stop_going_to_node");
@@ -1270,7 +1214,7 @@ fallback_ai(num, node_array, ignoreWhileFallingBack) {
   node = undefined;
   while(1) {
     ASSERTEX((node_array.size >= level.current_fallbackers[num]), "Number of fallbackers exceeds number of fallback nodes for fallback # " + num + ". Add more fallback nodes or reduce possible fallbackers.");
-    node = node_array[randomInt(node_array.size)];
+    node = node_array[RandomInt(node_array.size)];
     if(!isDefined(node.fallback_occupied) || !node.fallback_occupied) {
       node.fallback_occupied = true;
       self.fallback_node = node;
@@ -1297,7 +1241,6 @@ fallback_ai(num, node_array, ignoreWhileFallingBack) {
   self waittill("fallback_notify");
   level notify(("fallback_reached_goal" + num));
 }
-
 coverprint(org) {
   self endon("fallback_notify");
   self endon("stop_coverprint");
@@ -1308,7 +1251,6 @@ coverprint(org) {
     maps\_spawner::waitframe();
   }
 }
-
 fallback_overmind(num, group, ignoreWhileFallingBack, percent) {
   fallback_nodes = undefined;
   nodes = GetAllNodes();
@@ -1321,7 +1263,6 @@ fallback_overmind(num, group, ignoreWhileFallingBack, percent) {
     level thread fallback_overmind_internal(num, group, fallback_nodes, ignoreWhileFallingBack, percent);
   }
 }
-
 fallback_overmind_internal(num, group, fallback_nodes, ignoreWhileFallingBack, percent) {
   level.current_fallbackers[num] = 0;
   level.max_fallbackers[num] = 0;
@@ -1398,7 +1339,6 @@ fallback_overmind_internal(num, group, fallback_nodes, ignoreWhileFallingBack, p
     }
   }
 }
-
 fallback_text(fallbackers, start, end) {
   if(GetTime() <= level._nextcoverprint) {
     return;
@@ -1407,11 +1347,10 @@ fallback_text(fallbackers, start, end) {
     if(!IsAlive(fallbackers[i])) {
       continue;
     }
-    level._nextcoverprint = GetTime() + 2500 + randomInt(2000);
+    level._nextcoverprint = GetTime() + 2500 + RandomInt(2000);
     return;
   }
 }
-
 fallback_wait(num, group, ignoreWhileFallingBack, percent) {
   level endon(("fallbacker_trigger" + num));
   if(getDvar(#"fallback") == "1") {
@@ -1444,7 +1383,6 @@ fallback_wait(num, group, ignoreWhileFallingBack, percent) {
   println(deadfallbackers, " fallbackers have died, time to retreat");
   level notify(("fallbacker_trigger" + num));
 }
-
 fallback_think(trigger) {
   ignoreWhileFallingBack = false;
   if(isDefined(trigger.script_ignoreall) && trigger.script_ignoreall) {
@@ -1461,7 +1399,6 @@ fallback_think(trigger) {
   level notify(("fallbacker_trigger" + trigger.script_fallback));
   kill_trigger(trigger);
 }
-
 fallback_add_previous_group(num, node_array) {
   if(!isDefined(level.current_fallbackers[num - 1])) {
     return;
@@ -1483,23 +1420,19 @@ fallback_add_previous_group(num, node_array) {
     }
   }
 }
-
 delete_me() {
   maps\_spawner::waitframe();
   self Delete();
 }
-
 waitframe() {
   wait(0.05);
 }
-
 friendly_mg42_death_notify(guy, mg42) {
   mg42 endon("friendly_finished_using_mg42");
   guy waittill("death");
   mg42 notify("friendly_finished_using_mg42");
   println("^a guy using gun died");
 }
-
 friendly_mg42_wait_for_use(mg42) {
   mg42 endon("friendly_finished_using_mg42");
   self.useable = true;
@@ -1513,7 +1446,6 @@ friendly_mg42_wait_for_use(mg42) {
   self notify("stopped_use_turret");
   mg42 notify("friendly_finished_using_mg42");
 }
-
 friendly_mg42_useable(mg42, node) {
   if(self.useable) {
     return false;
@@ -1540,14 +1472,12 @@ friendly_mg42_useable(mg42, node) {
   }
   return true;
 }
-
 friendly_mg42_endtrigger(mg42, guy) {
   mg42 endon("friendly_finished_using_mg42");
   self waittill("trigger");
   println("^a Told friendly to leave the MG42 now");
   mg42 notify("friendly_finished_using_mg42");
 }
-
 noFour() {
   self endon("death");
   self waittill("goal");
@@ -1556,7 +1486,6 @@ noFour() {
     self.goalradius = 400;
   }
 }
-
 friendly_mg42_think(mg42, node) {
   self endon("death");
   mg42 endon("friendly_finished_using_mg42");
@@ -1585,7 +1514,7 @@ friendly_mg42_think(mg42, node) {
   self thread friendly_mg42_cleanup(mg42);
   self USeturret(mg42);
   if(isDefined(mg42.target)) {
-    stoptrigger = getEnt(mg42.target, "targetname");
+    stoptrigger = GetEnt(mg42.target, "targetname");
     if(isDefined(stoptrigger)) {
       stoptrigger thread friendly_mg42_endtrigger(mg42, self);
     }
@@ -1605,13 +1534,11 @@ friendly_mg42_think(mg42, node) {
   }
   mg42 notify("friendly_finished_using_mg42");
 }
-
 friendly_mg42_cleanup(mg42) {
   self endon("death");
   mg42 waittill("friendly_finished_using_mg42");
   self friendly_mg42_doneUsingTurret();
 }
-
 friendly_mg42_doneUsingTurret() {
   self endon("death");
   turret = self.friendly_mg42;
@@ -1645,7 +1572,6 @@ friendly_mg42_doneUsingTurret() {
   }
   self.goalradius = oldradius;
 }
-
 tanksquish() {
   if(isDefined(level.noTankSquish)) {
     assertex(level.noTankSquish, "level.noTankSquish must be true or undefined");
@@ -1681,7 +1607,6 @@ tanksquish() {
     return;
   }
 }
-
 spawnWaypointFriendlies() {
   self.count = 1;
   spawn = self spawn_ai();
@@ -1690,7 +1615,6 @@ spawnWaypointFriendlies() {
   }
   spawn.friendlyWaypoint = true;
 }
-
 goalVolumes() {
   volumes = getEntArray("info_volume", "classname");
   level.deathchain_goalVolume = [];
@@ -1705,7 +1629,6 @@ goalVolumes() {
     }
   }
 }
-
 aigroup_init(aigroup, spawner) {
   if(!isDefined(level._ai_group[aigroup])) {
     level._ai_group[aigroup] = spawnStruct();
@@ -1725,7 +1648,6 @@ aigroup_init(aigroup, spawner) {
     spawner thread aigroup_spawnerthink(level._ai_group[aigroup]);
   }
 }
-
 aigroup_spawnerthink(tracker) {
   self endon("death");
   self.decremented = false;
@@ -1747,7 +1669,6 @@ aigroup_spawnerthink(tracker) {
   self.decremented = true;
   tracker.spawnercount--;
 }
-
 aigroup_spawnerdeath(tracker) {
   self waittill("death");
   if(self.decremented) {
@@ -1755,7 +1676,6 @@ aigroup_spawnerdeath(tracker) {
   }
   tracker.spawnercount--;
 }
-
 aigroup_spawnerempty(tracker) {
   self endon("death");
   self waittill("emptied spawner");
@@ -1766,7 +1686,6 @@ aigroup_spawnerempty(tracker) {
   self.decremented = true;
   tracker.spawnercount--;
 }
-
 aigroup_soldierthink(tracker) {
   tracker.aicount++;
   tracker.ai[tracker.ai.size] = self;
@@ -1778,7 +1697,6 @@ aigroup_soldierthink(tracker) {
   tracker.aicount--;
   tracker.killed_count++;
 }
-
 set_ai_group_cleared_flag(tracker) {
   waittillframeend;
   while(true) {
@@ -1789,7 +1707,6 @@ set_ai_group_cleared_flag(tracker) {
     wait .05;
   }
 }
-
 flood_trigger_think(trigger) {
   assertEX(isDefined(trigger.target), "flood_spawner at " + trigger.origin + " without target");
   floodSpawners = getEntArray(trigger.target, "targetname");
@@ -1804,18 +1721,15 @@ flood_trigger_think(trigger) {
     array_thread(floodSpawners, ::flood_spawner_think, trigger);
   }
 }
-
 flood_spawner_init(spawner) {
   assertex(self has_spawnflag(level.SPAWNFLAG_ACTOR_SPAWNER), "Spawner at origin" + self.origin + "/" + (self GetOrigin()) + " is not a spawner!");
 }
-
 trigger_requires_player(trigger) {
   if(!isDefined(trigger)) {
     return false;
   }
   return isDefined(trigger.script_requires_player);
 }
-
 flood_spawner_think(trigger) {
   self endon("death");
   self notify("stop current floodspawner");
@@ -1859,7 +1773,6 @@ flood_spawner_think(trigger) {
     }
   }
 }
-
 player_saw_kill(guy, attacker) {
   if(isDefined(self.script_force_count)) {
     if(self.script_force_count) {
@@ -1870,12 +1783,12 @@ player_saw_kill(guy, attacker) {
     return false;
   }
   if(IsAlive(attacker)) {
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       return true;
     }
     players = get_players();
     for(q = 0; q < players.size; q++) {
-      if(distanceSquared(attacker.origin, players[q].origin) < 200 * 200) {
+      if(DistanceSquared(attacker.origin, players[q].origin) < 200 * 200) {
         return true;
       }
     }
@@ -1896,7 +1809,6 @@ player_saw_kill(guy, attacker) {
   }
   return bulletTracePassed(closest_player getEye(), guy getEye(), false, undefined);
 }
-
 show_bad_path() {}
 objective_event_init(trigger) {
   flag = trigger get_trigger_flag();
@@ -1908,8 +1820,8 @@ objective_event_init(trigger) {
   }
   flag_set(flag);
 }
-
 #using_animtree("generic_human");
+
 spawner_dronespawn(spawner) {
   assert(isDefined(level.dronestruct[spawner.classname]));
   struct = level.dronestruct[spawner.classname];
@@ -1963,7 +1875,6 @@ spawner_dronespawn(spawner) {
   spawner notify("drone_spawned", drone);
   return drone;
 }
-
 spawner_make_real_ai(drone) {
   if(!isDefined(drone.spawner)) {
     println("----failed dronespawned guy info----");

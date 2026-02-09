@@ -344,7 +344,7 @@ on_agent_player_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 on_agent_player_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
 
-  if(isplayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner) && (!isDefined(self.nonkillstreakagent) || !self.nonkillstreakagent)) {
+  if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner) && (!isDefined(self.nonkillstreakagent) || !self.nonkillstreakagent)) {
     maps\mp\gametypes\_damage::onkillstreakkilled(var_1, var_4, var_3, var_2, "destroyed_squad_mate");
   }
 

@@ -21,7 +21,6 @@ zombie_tracking_init() {
     wait(10);
   }
 }
-
 delete_zombie_noone_looking(how_close) {
   self endon("death");
   if(!isDefined(how_close)) {
@@ -65,7 +64,6 @@ delete_zombie_noone_looking(how_close) {
     }
   }
 }
-
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);

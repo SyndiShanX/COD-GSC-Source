@@ -189,7 +189,7 @@ SetupOrbitalStrike(lifeId, modules) {
     OrbitalStrike.fireDuration *= 2;
   }
 
-  if(GetDvar("scr_orbital_laser_timeout", "0") != "0") {
+  if(getDvar("scr_orbital_laser_timeout", "0") != "0") {
     OrbitalStrike.fireDuration = GetDvarFloat("scr_orbital_laser_timeout");
   }
 
@@ -222,7 +222,7 @@ onPlayerConnect(OrbitalStrike, owner) {
 }
 
 zoomSlam(orbitalStrike) {
-  if(GetDvar("scr_orbital_laser_ground", "0") != "0") {
+  if(getDvar("scr_orbital_laser_ground", "0") != "0") {
     return;
   }
 
@@ -415,7 +415,7 @@ PlayerControlOrbitalStrike(OrbitalStrike) {
   self thread LeaveOrbitalStrikeEarly(OrbitalStrike);
   self thread playInteriorSound(OrbitalStrike);
 
-  if(GetDvar("scr_orbital_laser_ground", "0") != "0") {
+  if(getDvar("scr_orbital_laser_ground", "0") != "0") {
     self thread WeaponSetup(OrbitalStrike);
     return;
   }
@@ -472,7 +472,7 @@ CancelPossessButtonPressMonitor() {
 }
 
 activateThermal() {
-  if(GetDvar("scr_orbital_laser_ground", "0") != "0") {
+  if(getDvar("scr_orbital_laser_ground", "0") != "0") {
     return;
   }
 
@@ -639,7 +639,7 @@ MonitorOrbitalStrikeWeapon(OrbitalStrike) {
 
   chargeTime = CONST_laser_chargeup_time;
 
-  if(GetDvar("scr_orbital_laser_chargetime", "0") != "0") {
+  if(getDvar("scr_orbital_laser_chargetime", "0") != "0") {
     chargeTime = GetDvarFloat("scr_orbital_laser_chargetime");
   }
 
@@ -700,7 +700,7 @@ StartLaserSounds(OrbitalStrike) {
   OrbitalStrike thread playLoopSoundToPlayers("vulcan_beam_loop_plr", undefined, localPlayers);
   OrbitalStrike thread playLoopSoundToPlayers(beamLoopSound, undefined, localPlayers);
 
-  if(GetDvar("scr_orbital_laser_ground", "0") != "0") {
+  if(getDvar("scr_orbital_laser_ground", "0") != "0") {
     return;
   }
 
@@ -755,7 +755,7 @@ StopLaserSounds(OrbitalStrike) {
     if(self.ControllingOrbitalLaser) {
       playLocalSounds = true;
 
-      if(GetDvar("scr_orbital_laser_ground", "0") != "0") {
+      if(getDvar("scr_orbital_laser_ground", "0") != "0") {
         playLocalSounds = false;
       }
 
@@ -1023,7 +1023,7 @@ PlayWarmupSounds(OrbitalStrike, quick) {
     OrbitalStrike.WeaponTag04.targetedEnt PlaySoundOnMovingEnt(npcSound);
   }
 
-  if(GetDvar("scr_orbital_laser_ground", "0") != "0") {
+  if(getDvar("scr_orbital_laser_ground", "0") != "0") {
     return;
   }
 
@@ -1226,7 +1226,7 @@ GiveControlBack(OrbitalStrike) {
     self setThirdPersonDOF(true);
   }
 
-  if(GetDvar("scr_orbital_laser_ground", "0") != "0") {
+  if(getDvar("scr_orbital_laser_ground", "0") != "0") {
     self notify("player_control_strike_over");
     return;
   }

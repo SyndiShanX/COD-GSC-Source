@@ -80,7 +80,7 @@ function reset_being_microwaved() {
 
 function activatemicrowaveturret() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   killstreakid = self killstreakrules::killstreakstart("microwave_turret", player.team, 0, 0);
   if(killstreakid == -1) {
     return false;
@@ -104,7 +104,7 @@ function activatemicrowaveturret() {
 
 function onplaceturret(turret) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   if(isDefined(turret.vehicle)) {
     turret.vehicle.origin = turret.origin;
     turret.vehicle.angles = turret.angles;
@@ -183,11 +183,11 @@ function onturretdeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vd
     turretvehicle.parentstruct placeables::forceshutdown();
     if(turretvehicle.parentstruct.killstreaktimedout === 1 && isDefined(turretvehicle.owner)) {
       turretvehicle.owner globallogic_audio::play_taacom_dialog("timeout", turretvehicle.parentstruct.killstreaktype);
-    } else if(isDefined(eattacker) && isplayer(eattacker) && isDefined(turretvehicle.owner) && eattacker != turretvehicle.owner) {
+    } else if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(turretvehicle.owner) && eattacker != turretvehicle.owner) {
       turretvehicle.parentstruct killstreaks::play_destroyed_dialog_on_owner(turretvehicle.parentstruct.killstreaktype, turretvehicle.parentstruct.killstreakid);
     }
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(eattacker))) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(eattacker))) {
     scoreevents::processscoreevent("destroyed_microwave_turret", eattacker, self.owner, weapon);
     eattacker challenges::destroyscorestreak(weapon, 0, 1, 0);
     eattacker challenges::destroynonairscorestreak_poststatslock(weapon);
@@ -331,7 +331,7 @@ function microwaveentity(entity) {
   turret endon("microwave_turret_shutdown");
   entity endon("disconnect");
   entity endon("death");
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity endon("joined_team");
     entity endon("joined_spectators");
   }
@@ -342,7 +342,7 @@ function microwaveentity(entity) {
   shellshockscalar = 1;
   viewkickscalar = 1;
   damagescalar = 1;
-  if(isplayer(entity) && entity hasperk("specialty_microwaveprotection")) {
+  if(isPlayer(entity) && entity hasperk("specialty_microwaveprotection")) {
     shellshockscalar = getdvarfloat("specialty_microwaveprotection_shellshock_scalar", 0.5);
     viewkickscalar = getdvarfloat("specialty_microwaveprotection_viewkick_scalar", 0.5);
     damagescalar = getdvarfloat("specialty_microwaveprotection_damage_scalar", 0.5);
@@ -378,7 +378,7 @@ function microwaveentity(entity) {
     entity.microwaveeffect++;
     entity.lastmicrowavedby = turret.owner;
     time = gettime();
-    if(isplayer(entity) && !entity isremotecontrolling()) {
+    if(isPlayer(entity) && !entity isremotecontrolling()) {
       if((time - (isDefined(entity.microwaveshellshockandviewkicktime) ? entity.microwaveshellshockandviewkicktime : 0)) > 950) {
         if((entity.microwaveeffect % 2) == 1) {
           if(distancesquared(entity.origin, turret.origin) > ((750 * 2) / 3) * ((750 * 2) / 3)) {
@@ -397,7 +397,7 @@ function microwaveentity(entity) {
         }
       }
     }
-    if(isplayer(entity) && (entity.microwaveeffect % 3) == 2) {
+    if(isPlayer(entity) && (entity.microwaveeffect % 3) == 2) {
       scoreevents::processscoreevent("hpm_suppress", turret.owner, entity, turretweapon);
     }
     wait(0.5);
@@ -409,7 +409,7 @@ function microwaveturretaffectsentity(entity) {
   if(!isalive(entity)) {
     return false;
   }
-  if(!isplayer(entity) && !isai(entity)) {
+  if(!isPlayer(entity) && !isai(entity)) {
     return false;
   }
   if(entity.ignoreme === 1) {

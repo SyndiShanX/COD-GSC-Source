@@ -237,7 +237,7 @@ watchpronetouch() {
   for(;;) {
     self waittill("touch", entity);
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       if(entity.origin[2] < 940) {
         if(entity getstance() == "prone")
           entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_HIT_BY_OBJECT", 0, "gondola_mp");
@@ -554,7 +554,7 @@ cablecar_move_think(kill_trigger, checkmoving) {
         continue;
       }
 
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         if(entity getstance() == "prone") {
           if(entity isonground() == 0)
             destroycorpses = 1;
@@ -592,7 +592,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {

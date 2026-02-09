@@ -42,7 +42,6 @@ dog_dvar_updater() {
     level.dog_debug = dog_get_dvar_int("debug_dogs", "0");
     wait 1;
   }
-
 }
 
 spawned(localclientnum) {
@@ -113,7 +112,6 @@ enemywatcher(localclientnum) {
         self thread playlockonsounds(localclientnum);
     } else
       dog_print("NEW ENEMY CLEARED");
-
   }
 }
 
@@ -259,7 +257,7 @@ dog_get_dvar_int(dvar, def) {
 }
 
 dog_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else
     return def;

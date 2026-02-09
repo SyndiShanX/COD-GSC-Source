@@ -15,7 +15,6 @@ radiation() {
 
     thread onPlayerConnect();
   }
-
 }
 
 onPlayerConnect() {

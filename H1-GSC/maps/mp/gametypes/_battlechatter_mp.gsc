@@ -33,7 +33,7 @@ init() {
     level.voice_count[var_5]["fe"] = 0;
   }
 
-  var_6 = getdvar("g_gametype");
+  var_6 = getDvar("g_gametype");
   level.istactical = 1;
 
   if(var_6 == "war" || var_6 == "conf" || var_6 == "dom")

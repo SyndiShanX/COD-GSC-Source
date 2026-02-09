@@ -135,7 +135,7 @@ zodcompanioncanjuke(entity) {
 }
 
 zodcompanioncanpreemptivejuke(entity) {
-  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isPlayer(entity.enemy)) {
     return false;
   }
 
@@ -178,7 +178,7 @@ zodcompanioncanpreemptivejuke(entity) {
 }
 
 _isvalidplayer(player) {
-  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isPlayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
 

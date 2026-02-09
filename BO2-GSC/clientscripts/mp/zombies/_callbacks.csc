@@ -26,7 +26,6 @@ statechange(clientnum, system, newstate) {
     [[level._systemstates[system].callback]](clientnum, newstate);
   else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
-
   }
 }
 

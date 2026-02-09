@@ -249,66 +249,65 @@ Callback_PlayerConnect() {
   if(isDefined(info_player_spawn) && info_player_spawn.size > 0) {
     players = get_players();
     if(isDefined(players) && (players.size != 0)) // || players[0] == self ) ) {
-    {
-    }
-      if(players[0] == self) {
-        println("2:Setting player origin to info_player_start " + info_player_spawn[0].origin);
-        self setOrigin(info_player_spawn[0].origin);
-        self setPlayerAngles(info_player_spawn[0].angles);
-        self thread Player_BreadCrumb_Update();
-      } else {
-        println("Callback_PlayerConnect:Setting player origin near host position " + players[0].origin);
-        self SetPlayerSpawnPos();
-        self thread Player_BreadCrumb_Update();
-      }
-    } else {
-      println("Callback_PlayerConnect:Setting player origin to info_player_start " + info_player_spawn[0].origin);
+    {}
+    if(players[0] == self) {
+      println("2:Setting player origin to info_player_start " + info_player_spawn[0].origin);
       self setOrigin(info_player_spawn[0].origin);
       self setPlayerAngles(info_player_spawn[0].angles);
       self thread Player_BreadCrumb_Update();
+    } else {
+      println("Callback_PlayerConnect:Setting player origin near host position " + players[0].origin);
+      self SetPlayerSpawnPos();
+      self thread Player_BreadCrumb_Update();
     }
+  } else {
+    println("Callback_PlayerConnect:Setting player origin to info_player_start " + info_player_spawn[0].origin);
+    self setOrigin(info_player_spawn[0].origin);
+    self setPlayerAngles(info_player_spawn[0].angles);
+    self thread Player_BreadCrumb_Update();
   }
+}
 
-  if(!isDefined(self.flag)) {
-    self.flag = [];
-    self.flags_lock = [];
-  }
+if(!isDefined(self.flag)) {
+  self.flag = [];
+  self.flags_lock = [];
+}
 
-  if(!isDefined(self.flag["player_has_red_flashing_overlay"])) {
-    self player_flag_init("player_has_red_flashing_overlay");
-    self player_flag_init("player_is_invulnerable");
-  }
+if(!isDefined(self.flag["player_has_red_flashing_overlay"])) {
+  self player_flag_init("player_has_red_flashing_overlay");
+  self player_flag_init("player_is_invulnerable");
+}
 
-  if(!isDefined(self.flag["loadout_given"])) {
-    self player_flag_init("loadout_given");
-  }
+if(!isDefined(self.flag["loadout_given"])) {
+  self player_flag_init("loadout_given");
+}
 
-  self player_flag_clear("loadout_given");
+self player_flag_clear("loadout_given");
 
-  if(getDvar("r_reflectionProbeGenerate") == "1") {
-    waittillframeend;
+if(getDvar("r_reflectionProbeGenerate") == "1") {
+  waittillframeend;
 
-    self thread spawnPlayer();
-    return;
-  }
+  self thread spawnPlayer();
+  return;
+}
 
-  if(!isDefined(level.spawnClient)) {
-    waittillframeend;
+if(!isDefined(level.spawnClient)) {
+  waittillframeend;
 
-    self thread spawnPlayer();
-    return;
-  }
+  self thread spawnPlayer();
+  return;
+}
 
-  self setClientDvar("ui_allow_loadoutchange", "1");
+self setClientDvar("ui_allow_loadoutchange", "1");
 
-  self thread[[level.spawnClient]]();
+self thread[[level.spawnClient]]();
 
-  dvarName = "player" + self GetEntityNumber() + "downs";
-  setDvar(dvarName, self.downs);
+dvarName = "player" + self GetEntityNumber() + "downs";
+setDvar(dvarName, self.downs);
 
-  if(getdebugdvar("replay_debug") == "1") {
-    println("File: _callbackglobal.gsc. Function: Callback_PlayerConnect() - COMPLETE\n");
-  }
+if(getdebugdvar("replay_debug") == "1") {
+  println("File: _callbackglobal.gsc. Function: Callback_PlayerConnect() - COMPLETE\n");
+}
 }
 
 reset_clientdvars() {

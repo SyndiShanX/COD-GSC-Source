@@ -365,7 +365,6 @@ ambientpackagecmdhandler(clientnum, state, oldstate) {
 
     if(split_state.size != 3) {
       println("*** Client : Malformed arguements to ambient packages " + state);
-
     } else {
       command = split_state[0];
       package = split_state[1];
@@ -423,7 +422,6 @@ ambientroomcmdhandler(clientnum, state, oldstate) {
 
     if(split_state.size != 3) {
       println("*** Client : Malformed arguements to ambient packages " + state);
-
     } else {
       command = split_state[0];
       room = split_state[1];

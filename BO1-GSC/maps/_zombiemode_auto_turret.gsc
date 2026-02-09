@@ -35,7 +35,6 @@ init() {
     level.auto_turret_array[i] thread auto_turret_think();
   }
 }
-
 auto_turret_think() {
   if(!isDefined(self.target)) {
     return;
@@ -92,17 +91,15 @@ auto_turret_think() {
     self enable_trigger();
   }
 }
-
 activate_move_handle() {
   if(isDefined(self.handle)) {
-    self.handle rotatePitch(160, .5);
+    self.handle rotatepitch(160, .5);
     self.handle waittill("rotatedone");
     self notify("switch_activated");
     self waittill("turret_deactivated");
-    self.handle rotatePitch(-160, .5);
+    self.handle rotatepitch(-160, .5);
   }
 }
-
 play_no_money_turret_dialog() {}
 auto_turret_activate() {
   self endon("turret_deactivated");
@@ -144,7 +141,6 @@ auto_turret_activate() {
   wait(level.auto_turret_timeout);
   self auto_turret_deactivate();
 }
-
 auto_turret_deactivate() {
   self.turret_active = false;
   self.curr_time = -1;
@@ -153,7 +149,6 @@ auto_turret_deactivate() {
   self.turret_fx delete();
   self notify("turret_deactivated");
 }
-
 auto_turret_update_timeout() {
   self endon("turret_deactivated");
   while(self.curr_time > 0) {

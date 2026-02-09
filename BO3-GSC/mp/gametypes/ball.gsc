@@ -263,7 +263,7 @@ function ballovertimeround2_ontimelimit() {
       print("");
     }
   }
-  setdvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
+  setDvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
   thread globallogic::endgame(winner, game["strings"]["time_limit_reached"]);
 }
 
@@ -305,7 +305,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(isDefined(self.carryobject)) {
     otherteam = util::getotherteam(self.team);
     self recordgameevent("return");
-    if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
       attacker recordgameevent("kill_carrier");
       if(attacker.team != self.team) {
         scoreevents::processscoreevent("kill_ball_carrier", attacker, undefined, weapon);
@@ -342,7 +342,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   }
   victim = self;
   foreach(ball_goal in level.ball_goals) {
-    if(isDefined(attacker) && isDefined(attacker.team) && attacker != victim && isDefined(victim.team) && isplayer(attacker)) {
+    if(isDefined(attacker) && isDefined(attacker.team) && attacker != victim && isDefined(victim.team) && isPlayer(attacker)) {
       dist_to_goal = distance2dsquared(attacker.origin, ball_goal.origin);
       victim_dist_to_goal = distance2dsquared(victim.origin, ball_goal.origin);
       if(dist_to_goal < level.defaultoffenseradiussq || victim_dist_to_goal < level.defaultoffenseradiussq) {
@@ -678,7 +678,7 @@ function can_use_ball(player) {
   if(isDefined(ball)) {
     end = (ball.origin[0], ball.origin[1], ball.origin[2] + 5);
   }
-  if(isDefined(self.carrier) && isplayer(self.carrier)) {
+  if(isDefined(self.carrier) && isPlayer(self.carrier)) {
     end = self.carrier getEye();
   }
   first_skip_ent = ball;

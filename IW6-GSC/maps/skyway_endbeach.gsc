@@ -304,7 +304,7 @@ rorke_approach_footsteps(var_0) {
 end_credits() {
   level notify("start_end_credits");
   thread end_credits_music();
-  setdvar("credits_active", 1);
+  setDvar("credits_active", 1);
   wait 7;
   maps\_credits::playcredits();
   level notify("stop_end_credits_music");
@@ -317,8 +317,8 @@ pit_of_despair(var_0) {
   level.player playSound("scn_sw_pit");
   lerpsunangles(getmapsunangles(), (-25.325, -52.2257, 0), 0.05);
   setsunlight(1, 1, 1);
-  var_1 = getdvar("r_diffusecolorscale");
-  var_2 = getdvar("r_specularcolorscale");
+  var_1 = getDvar("r_diffusecolorscale");
+  var_2 = getDvar("r_specularcolorscale");
   var_3 = maps\_utility::spawn_anim_model("sun_pit");
   var_4 = maps\_utility::spawn_anim_model("moon_pit");
   var_5 = maps\_utility::spawn_anim_model("moonlight_pit");

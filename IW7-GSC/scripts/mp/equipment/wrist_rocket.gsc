@@ -46,7 +46,7 @@ wristrocket_watchstuck() {
   self.owner endon("disconnect");
   self playLoopSound("wrist_rocket_fire_tail");
   self waittill("missile_stuck", var_0);
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     self.owner scripts\mp\weapons::grenadestuckto(self, var_0);
   }
 

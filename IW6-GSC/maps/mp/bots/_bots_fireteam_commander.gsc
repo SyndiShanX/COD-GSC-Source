@@ -233,7 +233,6 @@ commander_handle_notify_quick(response, sendToBotAI) {
       break;
     case "tactic_war_hyg":
       break;
-
   }
 
   if(string_starts_with(response, "tactic_")) {
@@ -446,7 +445,6 @@ commander_wait_connect() {
 
         player thread onFirstSpawnedPlayer();
         player thread commander_monitor_tactics();
-
       }
     }
     wait(0.05);
@@ -775,7 +773,7 @@ wait_commander_takeover_bot() {
 }
 
 bot_wait_here() {
-  if(!isDefined(self) || !IsPlayer(self) || !IsBot(self)) {
+  if(!isDefined(self) || !isPlayer(self) || !IsBot(self)) {
     return;
   }
   self notify("wait_here");
@@ -807,7 +805,7 @@ bot_wait_free_to_move() {
 }
 
 bot_free_to_move() {
-  if(!isDefined(self) || !IsPlayer(self) || !IsBot(self)) {
+  if(!isDefined(self) || !isPlayer(self) || !IsBot(self)) {
     return;
   }
   self BotSetFlag("disable_movement", false);

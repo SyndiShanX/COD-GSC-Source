@@ -171,7 +171,6 @@ gameplay_logic(gametype) {
     level.ground_player = level.player;
     maps\_nightvision::main();
     level.player set_vision_set_player("hunted", 0);
-
   }
 
   battlechatter_on("allies");
@@ -272,11 +271,11 @@ move_hunters_to_new_goal(closest_goal) {
 move_deadlier_hunters_to_new_goal(closest_goal) {
   waittillframeend;
   //Sent half the enemies to player, and the other half to set goal, foreach(enemy in level.hunter_enemies) {
-    if(RandomInt(100) < CONST_specop_difficulty)
-      enemy setgoalpos(closest_goal.origin);
-    else
-      enemy setgoalentity(level.ground_player);
-  }
+  if(RandomInt(100) < CONST_specop_difficulty)
+    enemy setgoalpos(closest_goal.origin);
+  else
+    enemy setgoalentity(level.ground_player);
+}
 }
 
 ShouldBreakAC130HintPrint() {
@@ -372,7 +371,7 @@ waittill_checkpoint_hit(flag_name) {
     level.checkpoint_timer destroy();
   level notify("kill_checkpoint_timer");
 
-  /*if( getdvar( "do_saves" ) == "1" )
+  /*if( getDvar( "do_saves" ) == "1" )
   	thread autosave_by_name( "checkpoint" );*/
 }
 
@@ -381,8 +380,7 @@ checkpoint_timer_logic(iSeconds, sLabel, timer_expired_string) {
   //killTimer();
   level endon("kill_checkpoint_timer");
 
-  /*-----------------------
-  TIMER SETUP
+  /*----------------------- TIMER SETUP
   -------------------------*/
   level.hudTimerIndex = 20;
   level.checkpoint_timer = maps\_hud_util::get_countdown_hud(-250, 120);
@@ -391,8 +389,7 @@ checkpoint_timer_logic(iSeconds, sLabel, timer_expired_string) {
   level.checkpoint_timer.label = sLabel;
   level.checkpoint_timer settenthstimer(iSeconds);
 
-  /*-----------------------
-  TIMER EXPIRED
+  /*----------------------- TIMER EXPIRED
   -------------------------*/
   wait(iSeconds);
 
@@ -624,7 +621,7 @@ enemy_monitor() {
 
 spawn_enemy_group() {
   if(level.selection >= level.enemy_force.size) {
-    if(getdvar("no_respawn") == "1")
+    if(getDvar("no_respawn") == "1")
       return;
     else
       level.selection = 0;
@@ -706,8 +703,7 @@ bridge_timer_logic(iSeconds, sLabel, bUseTick) {
   killTimer();
   level endon("kill_timer");
 
-  /*-----------------------
-  TIMER SETUP
+  /*----------------------- TIMER SETUP
   -------------------------*/
   level.hudTimerIndex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(-250, 100);
@@ -716,8 +712,7 @@ bridge_timer_logic(iSeconds, sLabel, bUseTick) {
   level.timer settenthstimer(iSeconds);
   level.start_time = gettime();
 
-  /*-----------------------
-  TIMER EXPIRED
+  /*----------------------- TIMER EXPIRED
   -------------------------*/
   if(bUseTick == true)
     thread timer_tick();
@@ -837,7 +832,7 @@ set_thermal_LOD() {
 /*
 hint( text, timeOut, double_line )
 {
-	if( getdvar( "chaplincheat" ) == "1" )
+	if( getDvar( "chaplincheat" ) == "1" )
 		return;
 
 	clear_hints();

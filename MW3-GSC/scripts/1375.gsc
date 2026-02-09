@@ -26,7 +26,6 @@ _id_4238() {
     self.grenadeammo = self._id_0B6E._id_41D0._id_4237;
   } else {
     self.grenadeammo = 3;
-
   }
   self.ignoreme = 0;
   self pushplayer(0);
@@ -47,7 +46,6 @@ _id_4239(var_0) {
 
   if(isDefined(var_0)) {
     self orientmode("face angle", var_0[1] + 20);
-
   }
   thread maps\_anim::_id_11CC(self, "gravity", var_1);
   var_2 = getanimlength(maps\_utility::_id_26EC(var_1));

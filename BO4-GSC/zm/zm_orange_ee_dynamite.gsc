@@ -212,7 +212,7 @@ function_8427e524() {
     self clientfield::set("" + # "hash_6adfdd12c9656e1c", 0);
 
     if(self.water_damage === 1) {
-      self.e_killer = isplayer(self.attacker) ? self.attacker : self.last_closest_player;
+      self.e_killer = isPlayer(self.attacker) ? self.attacker : self.last_closest_player;
       self thread function_8f6cb08();
     } else {
       if(self.b_cleaned_up !== 1) {

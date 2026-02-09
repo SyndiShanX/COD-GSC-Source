@@ -676,7 +676,7 @@ function_249b5556(n_damage) {
     s_result = self.var_b1224954 waittill(#"trigger");
 
     if(isDefined(s_result.activator)) {
-      if(!isplayer(s_result.activator)) {
+      if(!isPlayer(s_result.activator)) {
         ai_zombie = s_result.activator;
 
         if(!isalive(ai_zombie)) {
@@ -697,9 +697,7 @@ function_249b5556(n_damage) {
 
         if(!(isDefined(ai_zombie.var_47d982a1) && ai_zombie.var_47d982a1) && isalive(ai_zombie)) {
           zm_transform::function_5db4f2f5(ai_zombie);
-          [
-            [level.var_844d377c]
-          ] - > waitinqueue(ai_zombie);
+          [[level.var_844d377c]] - > waitinqueue(ai_zombie);
 
           if(!isDefined(ai_zombie)) {
             continue;

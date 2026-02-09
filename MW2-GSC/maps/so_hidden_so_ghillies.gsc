@@ -9,10 +9,8 @@
 #include maps\_specialops;
 #include maps\so_hidden_so_ghillies_code;
 
-// ---------------------------------------------------------------------------------
-//	Init
-// ---------------------------------------------------------------------------------
-main() {
+// --------------------------------------------------------------------------------- //	Init
+// --------------------------------------------------------------------------------- main() {
   level.so_compass_zoom = "far";
 
   default_start(::start_so_hidden);
@@ -37,10 +35,8 @@ main() {
   thread maps\so_ghillies_amb::main();
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Initializations
-// ---------------------------------------------------------------------------------
-start_so_hidden() {
+// --------------------------------------------------------------------------------- //	Challenge Initializations
+// --------------------------------------------------------------------------------- start_so_hidden() {
   start_so_hidden_basics();
 
   thread enable_patrol_enemies_crates();
@@ -305,13 +301,8 @@ so_hidden_setup_veteran() {
   level.ghillie_crouch_chance = 0.0;
 }
 
-// ---------------------------------------------------------------------------------
-//	Enable/Disable events
-// ---------------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------------
-
-enable_patrol_enemies_crates() {
+// --------------------------------------------------------------------------------- //	Enable/Disable events
+// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- enable_patrol_enemies_crates() {
   thread create_patrol_enemies("patrol_enemy_crates", "patrol_enemies_spawn_crates");
 }
 
@@ -331,9 +322,7 @@ enable_patrol_enemies_barn() {
   thread create_patrol_enemies("patrol_enemy_barn", "patrol_enemies_spawn_barn");
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_ghillie_enemies_crates() {
+// --------------------------------------------------------------------------------- enable_ghillie_enemies_crates() {
   thread create_ghillie_enemies("ghillie_enemy_crates", "ghillie_enemies_spawn_crates");
 }
 
@@ -345,9 +334,7 @@ enable_ghillie_enemies_houses() {
   thread create_ghillie_enemies("ghillie_enemy_houses", "ghillie_enemies_spawn_houses");
 }
 
-// ---------------------------------------------------------------------------------
-
-enable_stealth() {
+// --------------------------------------------------------------------------------- enable_stealth() {
   thread turn_on_stealth();
 }
 
@@ -355,9 +342,7 @@ enable_radiation() {
   thread turn_on_radiation();
 }
 
-// ---------------------------------------------------------------------------------
-
-custom_eog_summary() {
+// --------------------------------------------------------------------------------- custom_eog_summary() {
   enemies_left = level.enemies_spawned;
   foreach(player in level.players) {
     enemies_left -= player.kills_stealth;
@@ -374,9 +359,7 @@ custom_eog_summary() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-stealth_achievement() {
+// --------------------------------------------------------------------------------- stealth_achievement() {
   flag_wait("so_hidden_complete");
 
   if(!stealth_achieved()) {

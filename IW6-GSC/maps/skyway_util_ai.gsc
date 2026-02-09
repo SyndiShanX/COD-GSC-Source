@@ -295,7 +295,7 @@ add_to_group(var_0) {
 opfor_killer_tracker() {
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0))
     level.killer_tracker = 0;
   else
     level.killer_tracker = level.killer_tracker + 1;

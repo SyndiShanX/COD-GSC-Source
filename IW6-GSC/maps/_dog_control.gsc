@@ -47,7 +47,7 @@ enable_dog_control(var_0) {
 
   self takeweapon("flash_grenade");
   self.controlled_dog.dog_marker = common_scripts\utility::spawn_tag_origin();
-  setdvar("ui_dog_grenade", 1);
+  setDvar("ui_dog_grenade", 1);
   thread ui_dog_grenade_logic();
 
   if(level.xb3)
@@ -59,7 +59,7 @@ disable_dog_control() {
   self.controlled_dog = undefined;
   self.controlled_dog.dog_marker delete();
   self enableoffhandweapons();
-  setdvar("ui_dog_grenade", 0);
+  setDvar("ui_dog_grenade", 0);
 }
 
 listen_for_dog_commands(var_0) {
@@ -626,7 +626,7 @@ chopper_air_support_activate() {
       var_4[var_9].trace = bulletTrace(var_10, var_10 + var_7 * var_2, 0, undefined);
       var_4[var_9].length = distancesquared(var_10, var_4[var_9].trace["position"]);
 
-      if(getdvar("village_assault_debug_marker") == "1")
+      if(getDvar("village_assault_debug_marker") == "1")
         thread common_scripts\utility::draw_line_for_time(var_10, var_4[var_9].trace["position"], 1, 1, 1, 0.05);
     }
 
@@ -641,7 +641,7 @@ chopper_air_support_activate() {
       var_12[var_14] = var_4[var_9].trace["position"];
       var_13[var_14] = var_4[var_9].trace["normal"];
 
-      if(getdvar("village_assault_debug_marker") == "1")
+      if(getDvar("village_assault_debug_marker") == "1")
         thread common_scripts\utility::draw_line_for_time(level.player get_eye(), var_12[var_14], 0, 1, 0, 0.05);
     }
 
@@ -666,7 +666,7 @@ chopper_air_support_activate() {
       var_16 = var_13[0];
     }
 
-    if(getdvar("village_assault_debug_marker") == "1")
+    if(getDvar("village_assault_debug_marker") == "1")
       thread common_scripts\utility::draw_line_for_time(level.player get_eye(), var_15, 1, 0, 0, 0.05);
 
     thread drawchopperattackarrow(var_15, var_16, var_5);
@@ -807,9 +807,9 @@ ui_dog_grenade_logic() {
 
   for(;;) {
     self.controlled_dog maps\_utility::ent_flag_wait_either("pause_dog_command", "dog_cooldown");
-    setdvar("ui_dog_grenade", 0);
+    setDvar("ui_dog_grenade", 0);
     self.controlled_dog maps\_utility::ent_flag_waitopen("pause_dog_command");
     self.controlled_dog maps\_utility::ent_flag_waitopen("dog_cooldown");
-    setdvar("ui_dog_grenade", 1);
+    setDvar("ui_dog_grenade", 1);
   }
 }

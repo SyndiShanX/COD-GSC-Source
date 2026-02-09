@@ -22,7 +22,7 @@ player_start() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -120,7 +120,7 @@ main() {
   setsaveddvar("compass", 0);
   setsaveddvar("ammoCounterHide", 1);
   setsaveddvar("hud_showStance", 0);
-  level.cinematicvar = getdvar("cg_cinematicFullScreen");
+  level.cinematicvar = getDvar("cg_cinematicFullScreen");
   maps\_utility::enable_scuff_footsteps_sound(0);
 }
 
@@ -221,7 +221,7 @@ execintro() {
   maps\_utility::delaythread(1, ::ziptie, "ziptie1a", undefined, 45);
   maps\_utility::delaythread(1, maps\_vehicle::spawn_vehicle_from_targetname_and_drive, "intro_heli");
   thread playmirrorvideo();
-  level.oldnearclip = getdvar("r_znear");
+  level.oldnearclip = getDvar("r_znear");
   setsaveddvar("r_znear", 2.0);
   var_0 = getent("car_events_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("intro_leftguard", "targetname", 1);
@@ -1042,7 +1042,7 @@ h1_grabbedfromcar_depthoffield() {
   level.player setphysicaldepthoffield(4.0, 28, 4.0, 4.0);
   thread h1_kickinface_fadeout();
   wait 0.35;
-  level.oldnearclip2 = getdvar("r_znear");
+  level.oldnearclip2 = getDvar("r_znear");
   setsaveddvar("r_znear", 0.01);
   level.player setphysicaldepthoffield(4.5, 10, 4.0, 4.0);
   wait 0.35;

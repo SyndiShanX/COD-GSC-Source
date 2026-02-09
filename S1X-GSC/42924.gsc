@@ -4,17 +4,17 @@
 **************************************/
 
 init() {
-  level.hostname = getdvar("sv_hostname");
+  level.hostname = getDvar("sv_hostname");
 
   if(level.hostname == "") {
     level.hostname = "CoDHost";
   }
 
-  setdvar("sv_hostname", level.hostname);
+  setDvar("sv_hostname", level.hostname);
   level.allowvote = getdvarint("g_allowvote", 1);
-  setdvar("g_allowvote", level.allowvote);
+  setDvar("g_allowvote", level.allowvote);
   level.friendlyfire = maps\mp\gametypes\_tweakables::gettweakablevalue("team", "fftype");
-  constraingametype(getdvar("g_gametype"));
+  constraingametype(getDvar("g_gametype"));
 
   for(;;) {
     updateserversettings();
@@ -23,7 +23,7 @@ init() {
 }
 
 updateserversettings() {
-  var_0 = getdvar("sv_hostname");
+  var_0 = getDvar("sv_hostname");
 
   if(level.hostname != var_0) {
     level.hostname = var_0;

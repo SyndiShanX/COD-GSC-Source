@@ -50,8 +50,8 @@ func_F6BD() {
   level.splitscreen = issplitscreen();
   level.onlinegame = getdvarint("onlinegame");
   level.rankedmatch = (level.onlinegame && !getdvarint("xblive_privatematch")) || getdvarint("force_ranking");
-  level.script = tolower(getdvar("mapname"));
-  level.gametype = tolower(getdvar("ui_gametype"));
+  level.script = tolower(getDvar("mapname"));
+  level.gametype = tolower(getDvar("ui_gametype"));
   level.teamnamelist = ["axis", "allies"];
   level.otherteam["allies"] = "axis";
   level.otherteam["axis"] = "allies";
@@ -59,7 +59,7 @@ func_F6BD() {
   level.teambased = 1;
   level.objectivebased = 0;
   level.func = [];
-  level.createfx_enabled = getdvar("createfx") != "";
+  level.createfx_enabled = getDvar("createfx") != "";
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   level.hardcoremode = 0;
@@ -68,24 +68,24 @@ func_F6BD() {
 }
 
 func_F6BA() {
-  setdvar("ui_inhostmigration", 0);
-  setdvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
-  setdvar("sm_sunShadowScale", 1);
-  setdvar("r_specularcolorscale", 2.5);
-  setdvar("r_diffusecolorscale", 1);
-  setdvar("r_lightGridEnableTweaks", 0);
-  setdvar("r_lightGridIntensity", 1);
-  setdvar("bg_compassShowEnemies", getdvar("scr_game_forceuav"));
-  setdvar("isMatchMakingGame", scripts\cp\utility::matchmakinggame());
-  setdvar("ui_overtime", 0);
-  setdvar("ui_allow_teamchange", 1);
-  setdvar("g_deadChat", 1);
-  setdvar("min_wait_for_players", 5);
-  setdvar("ui_friendlyfire", 0);
-  setdvar("cg_drawFriendlyHUDGrenades", 0);
-  setdvar("cg_drawCrosshair", scripts\engine\utility::ter_op(level.hardcoremode == 1, 0, 1));
-  setdvar("cg_drawCrosshairNames", 1);
-  setdvar("cg_drawFriendlyNamesAlways", 0);
+  setDvar("ui_inhostmigration", 0);
+  setDvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
+  setDvar("sm_sunShadowScale", 1);
+  setDvar("r_specularcolorscale", 2.5);
+  setDvar("r_diffusecolorscale", 1);
+  setDvar("r_lightGridEnableTweaks", 0);
+  setDvar("r_lightGridIntensity", 1);
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
+  setDvar("isMatchMakingGame", scripts\cp\utility::matchmakinggame());
+  setDvar("ui_overtime", 0);
+  setDvar("ui_allow_teamchange", 1);
+  setDvar("g_deadChat", 1);
+  setDvar("min_wait_for_players", 5);
+  setDvar("ui_friendlyfire", 0);
+  setDvar("cg_drawFriendlyHUDGrenades", 0);
+  setDvar("cg_drawCrosshair", scripts\engine\utility::ter_op(level.hardcoremode == 1, 0, 1));
+  setDvar("cg_drawCrosshairNames", 1);
+  setDvar("cg_drawFriendlyNamesAlways", 0);
 }
 
 setupcallbacks() {
@@ -302,7 +302,7 @@ func_10D9F() {
 }
 
 func_100BC() {
-  return !level.console && getdvar("dedicated") == "dedicated LAN server" || getdvar("dedicated") == "dedicated internet server";
+  return !level.console && getDvar("dedicated") == "dedicated LAN server" || getDvar("dedicated") == "dedicated internet server";
 }
 
 func_132A3() {
@@ -315,7 +315,7 @@ func_132A3() {
       exitlevel(0);
     }
 
-    if(getdvar("dedicated") != "dedicated LAN server" && getdvar("dedicated") != "dedicated internet server") {
+    if(getDvar("dedicated") != "dedicated LAN server" && getDvar("dedicated") != "dedicated internet server") {
       exitlevel(0);
     }
 
@@ -413,7 +413,7 @@ initclientdvars() {
 initclientdvarssplitscreenspecific() {
   if(level.splitscreen || self issplitscreenplayer()) {
     self setclientdvars("cg_fovscale", "0.75");
-    setdvar("r_materialBloomHQScriptMasterEnable", 0);
+    setDvar("r_materialBloomHQScriptMasterEnable", 0);
     return;
   }
 
@@ -787,23 +787,23 @@ func_503E() {
   }
 
   level.hostmigrationtimer = 1;
-  setdvar("ui_inhostmigration", 1);
+  setDvar("ui_inhostmigration", 1);
   level notify("host_migration_begin");
   foreach(var_1 in level.characters) {
     if(isDefined(var_1)) {
       var_1 thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
     }
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 setclientomnvar("ui_session_state", var_1.sessionstate);
     }
   }
 
-  setdvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   level endon("host_migration_begin");
   scripts\cp\cp_hostmigration::hostmigrationwait();
   level.hostmigrationtimer = undefined;
-  setdvar("ui_inhostmigration", 0);
+  setDvar("ui_inhostmigration", 0);
   if(isDefined(level.hostmigrationend)) {
     level thread[[level.hostmigrationend]]();
   }
@@ -813,7 +813,7 @@ func_503E() {
 
 func_97F7() {
   var_0 = getEntArray("destructable", "targetname");
-  if(getdvar("scr_destructables") == "0") {
+  if(getDvar("scr_destructables") == "0") {
     for(var_1 = 0; var_1 < var_0.size; var_1++) {
       var_0[var_1] delete();
     }

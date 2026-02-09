@@ -269,7 +269,7 @@ water_vox() {
 }
 
 taking_fire_vox(params) {
-  if(isDefined(params.eattacker) && (isai(params.eattacker) || isvehicle(params.eattacker) || isplayer(params.eattacker))) {
+  if(isDefined(params.eattacker) && (isai(params.eattacker) || isvehicle(params.eattacker) || isPlayer(params.eattacker))) {
     if(isDefined(params.eattacker.team) && util::function_fbce7263(self.team, params.eattacker.team)) {
       takingfire_cooldown = "taking_fire_vo_" + string(self.team);
 
@@ -433,7 +433,7 @@ heavyweaponkilllogic(attacker, weapon, victim) {
 }
 
 playkillbattlechatter(attacker, weapon, victim, einflictor) {
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     level thread say_kill_battle_chatter(attacker, weapon, victim, einflictor);
   }
 
@@ -444,11 +444,11 @@ playkillbattlechatter(attacker, weapon, victim, einflictor) {
 }
 
 say_kill_battle_chatter(attacker, weapon, victim, inflictor) {
-  if(weapon.skipbattlechatterkill || !isDefined(attacker) || !isplayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || !isDefined(victim) || !isplayer(victim)) {
+  if(weapon.skipbattlechatterkill || !isDefined(attacker) || !isPlayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || !isDefined(victim) || !isPlayer(victim)) {
     return;
   }
 
-  if(isDefined(inflictor) && !isplayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
+  if(isDefined(inflictor) && !isPlayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
     return;
   }
 
@@ -484,7 +484,7 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor) {
 }
 
 event_handler[missile_fire] function_28a568b9(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -504,7 +504,7 @@ event_handler[missile_fire] function_28a568b9(eventstruct) {
 }
 
 event_handler[grenade_fire] function_54ca82b9(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -558,7 +558,7 @@ incoming_projectile_alert(thrower, projectile, dialogkey, waittime) {
 }
 
 event_handler[grenade_stuck] function_2ad593d8(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -760,7 +760,7 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     return;
   }
 
-  if(!isDefined(dialogkey) || !isplayer(self) || !isalive(self) || level.gameended) {
+  if(!isDefined(dialogkey) || !isPlayer(self) || !isalive(self) || level.gameended) {
     return;
   }
 
@@ -870,7 +870,7 @@ stop_dialog() {
 wait_playback_time(soundalias) {}
 
 get_player_dialog_alias(dialogkey) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return undefined;
   }
 
@@ -1245,7 +1245,7 @@ get_friendly_players() {
 }
 
 can_play_dialog(teamonly) {
-  if(!isplayer(self) || !isalive(self) || self.playingdialog === 1 || self isplayerunderwater() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
+  if(!isPlayer(self) || !isalive(self) || self.playingdialog === 1 || self isplayerunderwater() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
     return false;
   }
 
@@ -1305,7 +1305,7 @@ check_boost_start_conversation() {
   playerindex = 1;
 
   foreach(player in players) {
-    if(!isDefined(player) || !isplayer(player)) {
+    if(!isDefined(player) || !isPlayer(player)) {
       continue;
     }
 
@@ -1314,7 +1314,7 @@ check_boost_start_conversation() {
     for(i = playerindex; i < players.size; i++) {
       playeri = players[i];
 
-      if(!isDefined(playeri) || !isplayer(playeri)) {
+      if(!isDefined(playeri) || !isPlayer(playeri)) {
         continue;
       }
 
@@ -1361,10 +1361,10 @@ game_end_vox(winner, tie) {
 }
 
 devgui_think() {
-  setdvar(#"devgui_mpdialog", "<dev string:xbc>");
-  setdvar(#"testalias_player", "<dev string:xbf>");
-  setdvar(#"testalias_taacom", "<dev string:xdc>");
-  setdvar(#"testalias_commander", "<dev string:xf8>");
+  setDvar(#"devgui_mpdialog", "<dev string:xbc>");
+  setDvar(#"testalias_player", "<dev string:xbf>");
+  setDvar(#"testalias_taacom", "<dev string:xdc>");
+  setDvar(#"testalias_commander", "<dev string:xf8>");
 
   while(true) {
     wait 1;
@@ -1417,7 +1417,7 @@ devgui_think() {
         break;
     }
 
-    setdvar(#"devgui_mpdialog", "<dev string:xbc>");
+    setDvar(#"devgui_mpdialog", "<dev string:xbc>");
   }
 }
 

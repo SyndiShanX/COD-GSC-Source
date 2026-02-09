@@ -1,6 +1,6 @@
 /*****************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_meatshield.csc
+ * Script: clientscripts\_meatshield\.csc
 *****************************************/
 
 #include clientscripts\_utility;
@@ -10,25 +10,20 @@ main() {
   init_flags();
   _meatshield_flag_funcs();
 }
-
 init_flags() {
   level.CLIENT_ENABLE_EAR_BLOOD = 0;
 }
-
 _meatshield_flag_funcs() {
   register_clientflag_callback("actor", level.CLIENT_ENABLE_EAR_BLOOD, ::actor_flag_meatshield_earblood_handler);
 }
-
 actor_flag_meatshield_earblood_handler(localClientNum, set, newEnt) {
   init_shaderconstants(localClientNum);
   println("client flag callback good");
   self _meatshield_enable_ear_blood(localClientNum, set);
 }
-
 init_shaderconstants(localClientNum) {
   self mapshaderconstant(localClientNum, 0, "scriptVector0");
 }
-
 _meatshield_enable_ear_blood(localClientNum, set) {
   dimSpecular = 0;
   println("in set of meatshield_enable_ear_blood");

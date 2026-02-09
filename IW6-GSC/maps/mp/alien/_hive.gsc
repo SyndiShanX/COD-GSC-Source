@@ -81,7 +81,6 @@ regular_hive_listener(get_score_component_list_func) {
 
       println("CYCLE_COUNT_DEBUG -- > Spawning Door Event " + self.target);
     }
-
   }
 
   if(!self is_door())
@@ -268,7 +267,7 @@ monitor_attackable_ent_damage(blocker_hive) {
     if(isDefined(weapon) && weapon == "iw6_alienpanzerfaust3_mp")
       self DoDamage(damage, self.origin, attacker, attacker, "MOD_PROJECTILE_SPLASH");
 
-    if(isDefined(attacker) && isalive(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker)) {
       if(!isDefined(attacker.hive_damage))
         attacker.hive_damage = 0;
 
@@ -287,10 +286,10 @@ monitor_attackable_ent_damage(blocker_hive) {
       }
     }
 
-    if(isDefined(attacker.owner) && isalive(attacker.owner) && isplayer(attacker.owner))
+    if(isDefined(attacker.owner) && isalive(attacker.owner) && isPlayer(attacker.owner))
       attacker = attacker.owner;
 
-    if(isDefined(attacker) && isalive(attacker) && isplayer(attacker))
+    if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker))
       attacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback("standard");
 
     if(!stageOnePainReached && self.health < stageOnePainThreshold) {

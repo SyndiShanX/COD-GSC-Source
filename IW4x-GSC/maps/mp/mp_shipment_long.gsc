@@ -16,10 +16,10 @@ main() {
   game["attackers"] = "axis";
   game["defenders"] = "allies";
 
-  setdvar("r_specularcolorscale", "1");
-  setdvar("r_diffusecolorscale", "0.8");
+  setDvar("r_specularcolorscale", "1");
+  setDvar("r_diffusecolorscale", "0.8");
 
-  setdvar("compassmaxrange", "1400");
+  setDvar("compassmaxrange", "1400");
 
   //Too lazy to set up Head Quarters!
   if(getDvar("g_gametype") != "koth")
@@ -35,20 +35,16 @@ deleteChaModels() {
   domSpawns = getEntArray("mp_dom_spawn", "targetname");
   tdmSpawns = getEntArray("mp_tdm_spawn", "targetname");
 
-  // ---- DEFINING GAMETYPE OBJECTS ----
+  // ---- DEFINING GAMETYPE OBJECTS ---- universalExploderAB = getEntArray("exploder", "targetname");
 
-  universalExploderAB = getEntArray("exploder", "targetname");
-
-  // - CTF -
-  flagRemoveAllies = getEntArray("ctf_flag_allies", "targetname");
+  // - CTF - flagRemoveAllies = getEntArray("ctf_flag_allies", "targetname");
   flagTrigRemoveAllies = getEntArray("ctf_trig_allies", "targetname");
   flagZoneRemoveAllies = getEntArray("ctf_zone_allies", "targetname");
   flagRemoveAxis = getEntArray("ctf_flag_axis", "targetname");
   flagTrigRemoveAxis = getEntArray("ctf_trig_axis", "targetname");
   flagZoneRemoveAxis = getEntArray("ctf_zone_axis", "targetname");
 
-  // - DD -
-  ddbombzonesTouchAB = getEntArray("dd_bombzone", "targetname");
+  // - DD - ddbombzonesTouchAB = getEntArray("dd_bombzone", "targetname");
   ddbombzonesModelA = getEntArray("pf408_auto1", "targetname");
   ddbombzonesTrigA = getEntArray("pf408_auto2", "targetname");
   ddbombzonesModelB = getEntArray("pf409_auto1", "targetname");
@@ -56,12 +52,10 @@ deleteChaModels() {
   ddbombzonesCollA = getEntArray("dd_bombzone_clip_a", "targetname");
   ddbombzonesCollB = getEntArray("dd_bombzone_clip_b", "targetname");
 
-  // - Dom -
-  flagPrimary = getEntArray("flag_primary", "targetname");
+  // - Dom - flagPrimary = getEntArray("flag_primary", "targetname");
   flagDescriptor = getEntArray("flag_descriptor", "targetname");
 
-  // - Sab -
-  sabbombzonesColl = getEntArray("sab_bomb_col", "targetname");
+  // - Sab - sabbombzonesColl = getEntArray("sab_bomb_col", "targetname");
   sabbombzonesTouchAllies = getEntArray("sab_bomb_allies", "targetname");
   sabbombzonesDefuseAllies = getEntArray("sab_bomb_defuse_allies", "targetname");
   sabbombzonesSiteModelAllies = getEntArray("pf397_auto1", "targetname");
@@ -69,8 +63,7 @@ deleteChaModels() {
   sabbombzonesDefuseAxis = getEntArray("sab_bomb_defuse_axis", "targetname");
   sabbombzonesSiteModelAxis = getEntArray("pf398_auto1", "targetname");
 
-  // - SnD -
-  bombzonesTouchAB = getEntArray("bombzone", "targetname");
+  // - SnD - bombzonesTouchAB = getEntArray("bombzone", "targetname");
   bombzonesCollAB = getEntArray("bomb_col", "targetname");
   bombzonesModelA = getEntArray("pf393_auto1", "targetname");
   bombzonesTrigA = getEntArray("pf393_auto2", "targetname");

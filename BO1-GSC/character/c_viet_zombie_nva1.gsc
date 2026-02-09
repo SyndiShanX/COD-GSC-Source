@@ -29,7 +29,6 @@ main() {
   self.gibSpawn4 = "c_viet_zombie_vc_llegspawn";
   self.gibSpawnTag4 = "J_Knee_LE";
 }
-
 precache() {
   precacheModel("c_viet_zombie_nva1_body");
   precacheModel("c_viet_zombie_nva1_head1");

@@ -27,7 +27,6 @@ main() {
   self.gibSpawn4 = "c_viet_zombie_vc_llegspawn";
   self.gibSpawnTag4 = "J_Knee_LE";
 }
-
 precache() {
   codescripts\character::precacheModelArray(xmodelalias\c_viet_zombie_vc_body_alias::main());
   precacheModel("c_viet_zombie_vc_grunt_head");

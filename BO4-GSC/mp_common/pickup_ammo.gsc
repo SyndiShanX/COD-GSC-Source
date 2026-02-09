@@ -82,7 +82,7 @@ function_4827d817(weapon) {
 }
 
 function_5bb13b48(player) {
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     var_bd3d7a99 = 0;
     primaries = player getweaponslistprimaries();
 

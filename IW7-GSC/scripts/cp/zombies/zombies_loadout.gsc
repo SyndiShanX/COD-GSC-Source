@@ -189,7 +189,7 @@ setmodelfromcustomization(var_0) {
 }
 
 get_player_character_num() {
-  var_1 = getdvar("ui_mapname");
+  var_1 = getDvar("ui_mapname");
   if(isDefined(self.var_CFC4)) {
     return self.var_CFC4;
   }
@@ -455,7 +455,7 @@ updatemovespeedscale() {
 getplayerspeedbyweapon(var_0) {
   var_1 = 1;
   self.weaponlist = self getweaponslistprimaries();
-  if(getdvar("normalize_movement_speed", "on") == "on") {
+  if(getDvar("normalize_movement_speed", "on") == "on") {
     return 1;
   }
 

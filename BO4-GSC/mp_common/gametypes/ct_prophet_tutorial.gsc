@@ -1696,7 +1696,7 @@ function_8259415c(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 }
 
 function_45b5da97(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  if(isplayer(einflictor)) {
+  if(isPlayer(einflictor)) {
     level.var_e0532484 = 1;
     self vehicle_ai::set_state("death");
   }
@@ -1842,7 +1842,7 @@ function_980638c8(params) {
   eattacker = params.eattacker;
   weapon = params.weapon;
 
-  if(isplayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
+  if(isPlayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
     level notify(#"hash_1dc7d838ff48073d");
     level notify(#"hash_60e26e14a51c5211");
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"dart");
@@ -1941,7 +1941,7 @@ function_222141a5(var_58d9f1c6 = 1) {
 function_324c6d8c() {
   level endon(#"combattraining_logic_finished");
   sessionmode = currentsessionmode();
-  setdvar(#"hash_42113ca5668d7812", "<dev string:x38>");
+  setDvar(#"hash_42113ca5668d7812", "<dev string:x38>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x3b>");
@@ -1996,6 +1996,6 @@ function_324c6d8c() {
         break;
     }
 
-    setdvar(#"hash_42113ca5668d7812", "<dev string:x38>");
+    setDvar(#"hash_42113ca5668d7812", "<dev string:x38>");
   }
 }

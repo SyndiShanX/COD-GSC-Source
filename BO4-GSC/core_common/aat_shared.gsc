@@ -68,7 +68,7 @@ function_33f0ddd3(s_event) {
 
 setup_devgui() {
   waittillframeend();
-  setdvar(#"aat_acquire_devgui", "<dev string:x38>");
+  setDvar(#"aat_acquire_devgui", "<dev string:x38>");
   aat_devgui_base = "<dev string:x3b>";
 
   foreach(key, v in level.aat) {
@@ -98,7 +98,7 @@ aat_devgui_think() {
       }
     }
 
-    setdvar(#"aat_acquire_devgui", "<dev string:x38>");
+    setDvar(#"aat_acquire_devgui", "<dev string:x38>");
     wait 0.5;
   }
 }
@@ -175,7 +175,7 @@ function_3895d220(weapon) {
 }
 
 aat_response(death, inflictor, attacker, damage, flags, mod, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(!isplayer(attacker) || !isDefined(attacker.aat) || !isDefined(weapon)) {
+  if(!isPlayer(attacker) || !isDefined(attacker.aat) || !isDefined(weapon)) {
     return;
   }
 
@@ -253,7 +253,6 @@ aat_response(death, inflictor, attacker, damage, flags, mod, weapon, vpoint, vdi
     success = 1;
 
     attacker thread aat_set_debug_text(name, 1, 0, 0);
-
   }
 
   if(!success) {
@@ -290,7 +289,7 @@ aat_response(death, inflictor, attacker, damage, flags, mod, weapon, vpoint, vdi
   attacker.aat_cooldown_start[name] = now;
   self thread[[level.aat[name].result_func]](death, attacker, mod, weapon);
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker playlocalsound(level.aat[name].damage_feedback_sound);
   }
 }

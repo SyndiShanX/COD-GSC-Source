@@ -116,7 +116,7 @@ disable_sniper_glint() {
 clockwork_timer(var_0, var_1, var_2) {
   level endon("kill_timer");
 
-  if(getdvar("notimer") == "1") {
+  if(getDvar("notimer") == "1") {
     return;
   }
   if(!isDefined(var_2))
@@ -445,7 +445,7 @@ hold_fire_unless_ads(var_0) {
 blend_movespeedscale_custom(var_0, var_1) {
   var_2 = self;
 
-  if(!isplayer(var_2))
+  if(!isPlayer(var_2))
     var_2 = level.player;
 
   var_2 notify("blend_movespeedscale_custom");
@@ -1820,8 +1820,8 @@ fail_on_player_kill() {
     self.health = 250;
     self waittill("death", var_0);
 
-    if(isDefined(var_0) && isplayer(var_0)) {
-      setdvar("ui_deadquote", &"CLOCKWORK_YOU_KILLED_A_CIVILIAN");
+    if(isDefined(var_0) && isPlayer(var_0)) {
+      setDvar("ui_deadquote", &"CLOCKWORK_YOU_KILLED_A_CIVILIAN");
       maps\_utility::missionfailedwrapper();
       wait 20;
     }

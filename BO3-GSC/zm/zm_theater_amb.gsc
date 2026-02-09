@@ -275,7 +275,7 @@ function function_47cc6622(var_6140b6dd, var_8e7ce497) {
     n_count = 0;
     while(n_count < var_6140b6dd[var_918879b9]) {
       var_8e7ce497 waittill("damage", damage, attacker, dir, loc, str_type, model, tag, part, weapon, flags);
-      if(!isDefined(attacker) || !isplayer(attacker)) {
+      if(!isDefined(attacker) || !isPlayer(attacker)) {
         continue;
       }
       if(isDefined(str_type) && str_type != "MOD_MELEE") {

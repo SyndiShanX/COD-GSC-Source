@@ -426,7 +426,7 @@ damagetracker() {
     self.wasdamaged = 1;
     var_10 = var_0;
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
 
       if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
@@ -458,7 +458,7 @@ damagetracker() {
     }
 
     if(self.damagetaken >= self.maxhealth) {
-      if(isplayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
+      if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
         var_1 notify("destroyed_killstreak", var_9);
         thread scripts\mp\utility\game::teamplayercardsplash("callout_destroyed_remote_mortar", var_1);
         var_1 thread scripts\mp\utility\game::giveunifiedpoints("kill", var_9, 50);

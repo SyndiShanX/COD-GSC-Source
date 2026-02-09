@@ -66,7 +66,7 @@ ending_start() {
 
 ending() {
   common_scripts\utility::flag_wait("garage_done");
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   thread maps\flood_swept::swept_water_toggle("swim", "hide");
   thread maps\flood_swept::swept_water_toggle("debri_bridge", "hide");
   thread maps\flood_swept::swept_water_toggle("ending_water", "show");
@@ -177,7 +177,7 @@ final_sequence_fail_condition() {
   level endon("missionfailed");
   level endon("vignette_ending_player_jumped_flag");
   wait 6.0;
-  setdvar("ui_deadquote", &"FLOOD_ENDING_JUMP_FAIL");
+  setDvar("ui_deadquote", &"FLOOD_ENDING_JUMP_FAIL");
   level thread maps\_utility::missionfailedwrapper();
 }
 
@@ -296,7 +296,7 @@ ending_player_failed_qte_0(var_0) {
   playFXOnTag(level._effect["fx_usp_muzzle_flash"], level.ending_gun, "tag_flash");
   magicbullet("p226", level.ending_gun gettagorigin("tag_flash"), level.player getEye());
   level.player playrumbleonentity("damage_heavy");
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   level thread maps\_utility::missionfailedwrapper();
 }
 
@@ -421,7 +421,7 @@ ending_player_qte_failure_logic() {
 
   if(var_1 == level.player && !common_scripts\utility::flag("already_failing")) {
     common_scripts\utility::flag_set("already_failing");
-    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
     level thread maps\_utility::missionfailedwrapper();
   }
 }

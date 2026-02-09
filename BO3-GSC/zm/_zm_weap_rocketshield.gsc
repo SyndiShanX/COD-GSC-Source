@@ -49,7 +49,7 @@ function __main__() {
   zm_equipment::register_for_level("zod_riotshield_upgraded");
   zm_equipment::include("zod_riotshield_upgraded");
   zm_equipment::set_ammo_driven("zod_riotshield_upgraded", level.weaponriotshieldupgraded.startammo, 1);
-  setdvar("juke_enabled", 1);
+  setDvar("juke_enabled", 1);
   zombie_utility::set_zombie_var("riotshield_fling_damage_shield", 100);
   zombie_utility::set_zombie_var("riotshield_knockdown_damage_shield", 15);
   zombie_utility::set_zombie_var("riotshield_juke_damage_shield", 0);

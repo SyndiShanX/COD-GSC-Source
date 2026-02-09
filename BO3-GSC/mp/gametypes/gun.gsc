@@ -160,7 +160,7 @@ function function_990f40f7() {
 function onstartgametype() {
   level.gungamekillscore = rank::getscoreinfovalue("kill_gun");
   util::registerscorelimit(level.gunprogression.size * level.gungamekillscore, level.gunprogression.size * level.gungamekillscore);
-  setdvar("ui_weapon_tiers", level.gunprogression.size);
+  setDvar("ui_weapon_tiers", level.gunprogression.size);
   setclientnamemode("auto_change");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
@@ -215,7 +215,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     self thread demoteplayer();
     return;
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(attacker == self) {
       self thread demoteplayer(attacker);
       return;
@@ -237,7 +237,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 }
 
 function onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer)) {
+  if(isDefined(winningplayer) && isPlayer(winningplayer)) {
     [[level._setplayerscore]](winningplayer, [[level._getplayerscore]](winningplayer) + level.gungamekillscore);
   }
 }

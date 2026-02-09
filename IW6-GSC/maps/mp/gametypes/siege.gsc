@@ -19,7 +19,7 @@ CONST_USE_TIME = 10;
 CONST_MAX_FLAGPOS_COL = 10;
 
 main() {
-  if(GetDvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -783,7 +783,7 @@ onUseUpdate(team, progress, change) {
 }
 
 onEndUse(team, player, success) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player SetClientOmnvar("ui_dom_securing", 0);
     player.ui_dom_securing = undefined;
   }
@@ -883,7 +883,7 @@ onOneLeftEvent(team) {
 }
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
-  if(!IsPlayer(attacker) || attacker.team == self.team) {
+  if(!isPlayer(attacker) || attacker.team == self.team) {
     return;
   }
   awardedAssault = false;
@@ -1226,7 +1226,7 @@ giveFlagCaptureXP(touchList) {
 
   level.lastCapTime = GetTime();
 
-  if(IsPlayer(first_player)) {
+  if(isPlayer(first_player)) {
     level thread teamPlayerCardSplash("callout_securedposition" + self.label, first_player);
 
     first_player thread maps\mp\_matchdata::logGameEvent("capture", first_player.origin);
@@ -1238,7 +1238,7 @@ giveFlagCaptureXP(touchList) {
     if(isDefined(player.owner))
       player = player.owner;
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     player thread maps\mp\gametypes\_hud_message::splashNotify("capture", maps\mp\gametypes\_rank::getScoreInfoValue("capture"));

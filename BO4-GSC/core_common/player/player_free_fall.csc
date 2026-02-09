@@ -60,7 +60,7 @@ function_40635b9a(var_dbb94a) {
 }
 
 function_26d46af3(eventstruct) {
-  if(!(isplayer(self) || self isplayercorpse())) {
+  if(!(isPlayer(self) || self isplayercorpse())) {
     return;
   }
 
@@ -106,7 +106,7 @@ function_26d46af3(eventstruct) {
 }
 
 function_c9a18304(eventstruct) {
-  if(!(isplayer(self) || self isplayercorpse())) {
+  if(!(isPlayer(self) || self isplayercorpse())) {
     return;
   }
 

@@ -88,7 +88,7 @@ class cmobilearmory {
       if(!isDefined(var_ab455203)) {
         break;
       }
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         function_69cca2a0(var_ab455203);
       }
     }
@@ -285,7 +285,6 @@ class cmobilearmory {
     var_bd13c94b thread function_e76edd0b(var_ab455203);
     var_ab455203 thread function_71f6269a(var_bd13c94b);
   }
-
 }
 
 #namespace mobile_armory;

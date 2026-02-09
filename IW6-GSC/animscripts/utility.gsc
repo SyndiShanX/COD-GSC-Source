@@ -1023,7 +1023,7 @@ cansuppressenemyfromexposed() {
     return 0;
   }
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return aisuppressai();
 
   if(isDefined(self.node)) {
@@ -1049,7 +1049,7 @@ cansuppressenemy() {
     return 0;
   }
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return aisuppressai();
 
   var_0 = self getmuzzlepos();
@@ -1228,7 +1228,7 @@ canthrowgrenade() {
   if(self.script_forcegrenade)
     return 1;
 
-  return isplayer(self.enemy);
+  return isPlayer(self.enemy);
 }
 
 usingboltactionweapon() {

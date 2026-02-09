@@ -5,7 +5,7 @@
 
 // face.gsc
 // Supposed to handle all facial and dialogue animations from regular scripts.
-//#using_animtree ("generic_human"); - This file doesn't call animations directly.
+/using_animtree ("generic_human"); - This file doesn't call animations directly.
 
 InitCharacterFace() {
   if(!anim.useFacialAnims) {
@@ -187,11 +187,8 @@ ChooseAnimFromSet(animSet) {
   */
 }
 
-//-----------------------------------------------------
-// Housekeeping functions - these are for internal use
-//-----------------------------------------------------
-
-// PlayIdleFace doesn't force an idle animation to play - it will interrupt a current idle animation, but it
+//----------------------------------------------------- // Housekeeping functions - these are for internal use
+//----------------------------------------------------- // PlayIdleFace doesn't force an idle animation to play - it will interrupt a current idle animation, but it
 // won't play over a more important animation, like dialogue.
 PlayIdleFace() {
   return; // Idle facial animations are now in the full - body animations.
@@ -303,7 +300,6 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       self.faceWaiting[i - 1]["notifyNum"] = self.faceWaiting[i]["notifyNum"];
     }
     self.faceWaiting[self.faceWaiting.size - 1] = undefined;
-
   } else if(importance >= self.a.currentDialogImportance) {
     // End any threads that are waiting on current facial animations or sounds.
     self notify("end current face");

@@ -20,12 +20,12 @@ function __init__() {
   callback::on_connecting(&on_player_connecting);
   level.spawnprotectiontime = getgametypesetting("spawnprotectiontime");
   level.spawnprotectiontimems = int((isDefined(level.spawnprotectiontime) ? level.spawnprotectiontime : 0) * 1000);
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   level.test_spawn_point_index = 0;
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function init_spawn_system() {

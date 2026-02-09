@@ -8,8 +8,7 @@ main() {
 
   level._effect["test_effect"] = loadfx("misc/moth_runner");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_terminal_cls_fx::main();
   }
-
 }

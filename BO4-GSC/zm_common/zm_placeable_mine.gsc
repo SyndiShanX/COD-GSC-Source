@@ -276,7 +276,7 @@ placeable_mine_damage() {
 
     self.health = self.maxhealth;
 
-    if(!isplayer(waitresult.attacker)) {
+    if(!isPlayer(waitresult.attacker)) {
       continue;
     }
 
@@ -381,7 +381,7 @@ placeable_mine_detonate(attacker, weapon, target) {
     return;
   }
 
-  if(isDefined(self.owner) && isplayer(self.owner)) {
+  if(isDefined(self.owner) && isPlayer(self.owner)) {
     self detonate(self.owner);
     return;
   }

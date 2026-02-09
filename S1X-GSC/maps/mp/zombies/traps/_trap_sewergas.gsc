@@ -70,7 +70,7 @@ trap_sewergas_trigger_watch(var_0) {
       if(!var_5 istouching(var_0)) {
         continue;
       }
-      if(isplayer(var_5)) {
+      if(isPlayer(var_5)) {
         continue;
       }
       if(isDefined(var_5.inspawnanim) && var_5.inspawnanim == 1) {

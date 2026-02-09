@@ -221,7 +221,7 @@ func_80E7() {
 }
 
 getjointype() {
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     return randomfloatrange(self.enemy.gs.var_B750, self.enemy.gs.var_B461);
   } else {
     return randomfloatrange(anim.var_B750, anim.var_B461);

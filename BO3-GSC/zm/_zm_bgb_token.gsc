@@ -89,7 +89,7 @@ function function_c2f81136(increment) {
 
 function private setup_devgui() {
   waittillframeend();
-  setdvar("", "");
+  setDvar("", "");
   bgb_devgui_base = "";
   adddebugcommand(((bgb_devgui_base + "") + "") + "");
   level thread bgb_token_devgui_think();
@@ -101,7 +101,7 @@ function private bgb_token_devgui_think() {
     if(bgb_award_token_dvar != "") {
       level.players[0] bgb_token_give_to_player();
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }

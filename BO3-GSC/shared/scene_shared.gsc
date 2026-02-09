@@ -159,9 +159,7 @@ class csceneobject: cscriptbundleobjectbase {
     if(!(isDefined(_s.player) && _s.player) && (!(isDefined(_s.sharedigc) && _s.sharedigc)) && (!(isDefined(_s.keepwhileskipping) && _s.keepwhileskipping)) && (isDefined([[_o_bundle]] - > is_skipping_scene()) && [[_o_bundle]] - > is_skipping_scene()) && (isDefined(_s.deletewhenfinished) && _s.deletewhenfinished)) {
       if(!animhasimportantnotifies(animation)) {
         if(!isspawner(_e)) {
-          b_allows_multiple = [
-            [scene()]
-          ] - > allows_multiple();
+          b_allows_multiple = [[scene()]] - > allows_multiple();
           e = scene::get_existing_ent(_str_name, b_allows_multiple);
           if(isDefined(e)) {
             return false;
@@ -244,7 +242,7 @@ class csceneobject: cscriptbundleobjectbase {
   }
 
   function get_lerp_time() {
-    if(isplayer(_e)) {
+    if(isPlayer(_e)) {
       return true;
     }
     return true;
@@ -503,15 +501,13 @@ class csceneobject: cscriptbundleobjectbase {
           _e show();
         }
         n_lerp = get_lerp_time();
-        if(isplayer(_e) && !_o_bundle._s scene::is_igc()) {
+        if(isPlayer(_e) && !_o_bundle._s scene::is_igc()) {
           n_camera_tween = get_camera_tween();
           if(n_camera_tween > 0) {
             _e startcameratween(n_camera_tween);
           }
         }
-        if(![
-            [_o_bundle]
-          ] - > has_next_scene()) {
+        if(![[_o_bundle]] - > has_next_scene()) {
           n_blend_out = (isai(_e) ? 0.2 : 0);
         } else {
           n_blend_out = 0;
@@ -535,11 +531,7 @@ class csceneobject: cscriptbundleobjectbase {
           }
         }
         current_playing_anim = animation;
-        if(isDefined([
-            [_o_bundle]
-          ] - > is_skipping_scene()) && [
-            [_o_bundle]
-          ] - > is_skipping_scene() && n_rate != 0) {
+        if(isDefined([[_o_bundle]] - > is_skipping_scene()) && [[_o_bundle]] - > is_skipping_scene() && n_rate != 0) {
           thread skip_scene(1);
         }
         _e animation::play(animation, align, tag, n_rate, n_blend, n_blend_out, n_lerp, n_time, _s.showweaponinfirstperson);
@@ -671,14 +663,8 @@ class csceneobject: cscriptbundleobjectbase {
     player thread scene::scene_enable_player_stuff(!(isDefined(_s.showhud) && _s.showhud));
     if(![[_o_bundle]] - > has_next_scene()) {
       if([[_o_bundle]] - > is_player_anim_ending_early()) {
-        if(!([
-            [_o_bundle]
-          ] - > is_skipping_scene()) && [
-            [_o_bundle]
-          ] - > is_scene_shared_sequence()) {
-          [
-            [_o_bundle]
-          ] - > init_scene_sequence_started(0);
+        if(!([[_o_bundle]] - > is_skipping_scene()) && [[_o_bundle]] - > is_scene_shared_sequence()) {
+          [[_o_bundle]] - > init_scene_sequence_started(0);
         }
         _o_bundle thread cscene::_stop_camera_anim_on_player(player);
       } else if(_o_bundle._s scene::is_igc()) {
@@ -727,12 +713,12 @@ class csceneobject: cscriptbundleobjectbase {
               }
             }
           } else {
-            player = (isplayer(_player) ? _player : _e);
+            player = (isPlayer(_player) ? _player : _e);
             _finish_player(player);
           }
         }
         if(isDefined(_s.removeweapon) && _s.removeweapon && (!(isDefined(_e._scene_old_gun_removed) && _e._scene_old_gun_removed))) {
-          if(isplayer(_e)) {
+          if(isPlayer(_e)) {
             if(getdvarint("") > 0) {
               printtoprightln("" + (isDefined(_s.name) ? _s.name : _s.model));
             }
@@ -743,7 +729,7 @@ class csceneobject: cscriptbundleobjectbase {
             _e animation::attach_weapon();
           }
         }
-        if(!isplayer(_e)) {
+        if(!isPlayer(_e)) {
           if(isDefined(_e)) {
             _e sethighdetail(0);
           }
@@ -869,14 +855,12 @@ class csceneobject: cscriptbundleobjectbase {
     if(isDefined(_e._o_scene)) {
       foreach(obj in _e._o_scene._a_objects) {
         if(obj._e === _e) {
-          [
-            [obj]
-          ] - > finish();
+          [[obj]] - > finish();
           break;
         }
       }
     }
-    if(!isai(_e) && !isplayer(_e)) {
+    if(!isai(_e) && !isPlayer(_e)) {
       if(!is_player() || (!(isDefined(_s.newplayermethod) && _s.newplayermethod))) {
         if(is_player_model()) {
           scene::prepare_player_model_anim(_e);
@@ -914,12 +898,12 @@ class csceneobject: cscriptbundleobjectbase {
         _e disconnectpaths(2, 0);
       }
     } else if(!is_shared_player()) {
-      player = (isplayer(_player) ? _player : _e);
+      player = (isPlayer(_player) ? _player : _e);
       _prepare_player(player);
     }
     if(isDefined(_s.removeweapon) && _s.removeweapon) {
       if(!(isDefined(_e.gun_removed) && _e.gun_removed)) {
-        if(isplayer(_e)) {
+        if(isPlayer(_e)) {
           _e player::take_weapons();
         } else {
           _e animation::detach_weapon();
@@ -947,7 +931,7 @@ class csceneobject: cscriptbundleobjectbase {
       }
     }
     if(_o_bundle._s scene::is_igc() || [[_o_bundle]] - > has_player()) {
-      if(!isplayer(_e)) {
+      if(!isPlayer(_e)) {
         _e sethighdetail(1);
       }
     }
@@ -962,7 +946,7 @@ class csceneobject: cscriptbundleobjectbase {
       _e delete();
     }
     if(is_player()) {
-      if(isplayer(_e)) {
+      if(isPlayer(_e)) {
         _player = _e;
       } else {
         n_player = getdvarint("scene_debug_player", 0);
@@ -994,7 +978,7 @@ class csceneobject: cscriptbundleobjectbase {
           if(!isDefined(e) && isDefined(_s.name)) {
             e = scene::get_existing_ent(_s.name, b_allows_multiple);
           }
-          if(isplayer(e)) {
+          if(isPlayer(e)) {
             if(!(isDefined(_s.newplayermethod) && _s.newplayermethod)) {
               e = undefined;
             }
@@ -1056,20 +1040,14 @@ class csceneobject: cscriptbundleobjectbase {
         if(isDefined(_s.name)) {
           _str_name = (_s.name + "_gen") + level.scene_object_id;
         } else {
-          _str_name = (([
-            [scene()]
-          ] - > get_name()) + "_noname") + level.scene_object_id;
+          _str_name = (([[scene()]] - > get_name()) + "_noname") + level.scene_object_id;
         }
         level.scene_object_id++;
       } else {
         if(isDefined(_s.name)) {
           _str_name = _s.name;
         } else {
-          _str_name = (([
-            [scene()]
-          ] - > get_name()) + "_noname") + ([
-            [scene()]
-          ] - > get_object_id());
+          _str_name = (([[scene()]] - > get_name()) + "_noname") + ([[scene()]] - > get_object_id());
         }
       }
     }
@@ -1173,7 +1151,7 @@ class csceneobject: cscriptbundleobjectbase {
           player stopanimscripted(0.2);
         }
       } else if(!(isDefined(_s.diewhenfinished) && _s.diewhenfinished) || !b_finished) {
-        if(!b_dont_clear_anim || isplayer(_e)) {
+        if(!b_dont_clear_anim || isPlayer(_e)) {
           _e stopanimscripted(0.2);
         }
       }
@@ -1294,7 +1272,6 @@ class csceneobject: cscriptbundleobjectbase {
     _assign_unique_name();
     return self;
   }
-
 }
 
 class cscene: cscriptbundlebase {
@@ -1345,11 +1322,9 @@ class cscene: cscriptbundlebase {
       }
       return;
     }
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       if(!(isDefined(_s.disablesceneskipping) && _s.disablesceneskipping) && !is_skipping_scene()) {
-        if([
-            [scene_object]
-          ] - > is_shared_player() || _s scene::is_igc()) {
+        if([[scene_object]] - > is_shared_player() || _s scene::is_igc()) {
           if(_str_state != "init" || (isDefined(scene_object._s.initanim) || isDefined(scene_object._s.initanimloop))) {
             init_scene_sequence_started(1);
           }
@@ -1569,9 +1544,7 @@ class cscene: cscriptbundlebase {
   function is_scene_shared() {
     if(!(isDefined(_s.skip_scene) && _s.skip_scene) && !_s scene::is_igc()) {
       foreach(o_scene_object in _a_objects) {
-        if(o_scene_object._is_valid && [
-            [o_scene_object]
-          ] - > is_shared_player()) {
+        if(o_scene_object._is_valid && [[o_scene_object]] - > is_shared_player()) {
           b_shared_player = 1;
         }
       }
@@ -1797,9 +1770,7 @@ class cscene: cscriptbundlebase {
       scene_stopping = 1;
       if(isDefined(_a_objects) && !b_finished) {
         foreach(o_obj in _a_objects) {
-          if(isDefined(o_obj) && !([
-              [o_obj]
-            ] - > in_a_different_scene())) {
+          if(isDefined(o_obj) && !([[o_obj]] - > in_a_different_scene())) {
             thread[[o_obj]] - > stop(b_clear);
           }
         }
@@ -2046,11 +2017,7 @@ class cscene: cscriptbundlebase {
     xcam_players = [];
     if(isDefined(_s.linkxcamtooneplayer) && _s.linkxcamtooneplayer) {
       foreach(o_obj in _a_objects) {
-        if(isDefined(o_obj) && [
-            [o_obj]
-          ] - > is_player() && !([
-            [o_obj]
-          ] - > is_shared_player())) {
+        if(isDefined(o_obj) && [[o_obj]] - > is_player() && !([[o_obj]] - > is_shared_player())) {
           if(!isDefined(xcam_players)) {
             xcam_players = [];
           } else if(!isarray(xcam_players)) {
@@ -2321,7 +2288,7 @@ class cscene: cscriptbundlebase {
   }
 
   function _is_ent_player(ent) {
-    return isplayer(ent);
+    return isPlayer(ent);
   }
 
   function _assign_ents_by_type(&a_objects, &a_ents, str_type, func_test) {
@@ -2329,9 +2296,7 @@ class cscene: cscriptbundlebase {
       a_objects_of_type = get_objects(str_type);
       if(a_objects_of_type.size) {
         foreach(ent in arraycopy(a_ents)) {
-          if(isDefined(func_test) && [
-              [func_test]
-            ](ent)) {
+          if(isDefined(func_test) && [[func_test]](ent)) {
             obj = array::pop_front(a_objects_of_type);
             if(isDefined(obj)) {
               obj._e = ent;
@@ -2532,11 +2497,7 @@ class cscene: cscriptbundlebase {
       _e_root.scenes[_e_root.scenes.size] = self;
       a_objs = get_valid_object_defs();
       foreach(s_obj in a_objs) {
-        cscriptbundlebase::add_object([[
-            [
-              [self]
-            ] - > new_object()
-          ]] - > first_init(s_obj, self));
+        cscriptbundlebase::add_object([[[[self]] - > new_object()]] - > first_init(s_obj, self));
       }
       _n_request_time = gettime();
       if(!(isDefined(_s.dontsync) && _s.dontsync)) {
@@ -2621,7 +2582,6 @@ class cawarenesssceneobject: cscriptbundleobjectbase, csceneobject {
     }
     thread csceneobject::finish();
   }
-
 }
 
 class cawarenessscene: cscriptbundlebase, cscene {
@@ -2660,7 +2620,6 @@ class cawarenessscene: cscriptbundlebase, cscene {
   function new_object() {
     return new cawarenesssceneobject();
   }
-
 }
 
 #namespace scene;
@@ -2739,7 +2698,7 @@ function synced_delete() {
   if(isDefined(self.script_animname)) {
     self.script_animname = self.script_animname + "_sync_deleting";
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     sethideonclientwhenscriptedanimcompleted(self);
     self stopanimscripted();
   } else {
@@ -2927,7 +2886,7 @@ function _trigger_init(trig) {
   trig trigger::wait_till();
   a_ents = [];
   if(get_player_count(self.scriptbundlename) > 0) {
-    if(isplayer(trig.who)) {
+    if(isPlayer(trig.who)) {
       a_ents[0] = trig.who;
     }
   }
@@ -2940,7 +2899,7 @@ function _trigger_play(trig) {
     trig trigger::wait_till();
     a_ents = [];
     if(get_player_count(self.scriptbundlename) > 0) {
-      if(isplayer(trig.who)) {
+      if(isPlayer(trig.who)) {
         a_ents[0] = trig.who;
       }
     }
@@ -3108,11 +3067,11 @@ function private _load_female_scene(s_bundle, a_ents) {
   }
   if(b_has_player) {
     e_player = undefined;
-    if(isplayer(a_ents)) {
+    if(isPlayer(a_ents)) {
       e_player = a_ents;
     } else if(isarray(a_ents)) {
       foreach(ent in a_ents) {
-        if(isplayer(ent)) {
+        if(isPlayer(ent)) {
           e_player = ent;
           break;
         }
@@ -3121,7 +3080,7 @@ function private _load_female_scene(s_bundle, a_ents) {
     if(!isDefined(e_player)) {
       e_player = level.activeplayers[0];
     }
-    if(isplayer(e_player) && e_player util::is_female()) {
+    if(isPlayer(e_player) && e_player util::is_female()) {
       if(isDefined(s_bundle.femalebundle)) {
         s_female_bundle = struct::get_script_bundle("scene", s_bundle.femalebundle);
         if(isDefined(s_female_bundle)) {
@@ -3593,9 +3552,7 @@ function _skip_scene(skipped_scene_name, b_sequence, b_player_scene, b_check_lin
           b_shared_scene = 1;
         } else {
           if(!isDefined(skipped_scene_name)) {
-            if([
-                [o_scene]
-              ] - > is_scene_shared()) {
+            if([[o_scene]] - > is_scene_shared()) {
               if(isDefined(o_scene._s.disablesceneskipping) && o_scene._s.disablesceneskipping) {
                 return 2;
               }

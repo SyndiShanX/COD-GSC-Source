@@ -589,7 +589,7 @@ player_clock_tick_sfx(var_0) {
 
 timer_progress(var_0, var_1, var_2, var_3) {
   var_4 = level.puzzles_duration;
-  if(getdvar("scr_puzzles_timer", "") != "") {
+  if(getDvar("scr_puzzles_timer", "") != "") {
     var_4 = 500000;
   }
 
@@ -1217,7 +1217,7 @@ keyconversiontomorse(var_0) {
 watch_for_containment_trigger() {
   for(;;) {
     self waittill("trigger", var_0);
-    if(isplayer(var_0) && var_0 scripts\cp\utility::is_valid_player()) {
+    if(isPlayer(var_0) && var_0 scripts\cp\utility::is_valid_player()) {
       scripts\engine\utility::waitframe();
       continue;
     }
@@ -1976,7 +1976,7 @@ deal_venomx_damage_to_enemies(var_0, var_1) {
       continue;
     }
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       continue;
     }
 
@@ -3981,7 +3981,7 @@ activatefiguredamage(var_0, var_1, var_2) {
   var_2 endon("end_thread_for_" + var_2.model);
   for(;;) {
     var_2 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
 

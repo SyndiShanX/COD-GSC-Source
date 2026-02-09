@@ -63,7 +63,7 @@ function_5517e41a(player) {
 on_ai_killed(s_params) {
   e_attacker = s_params.einflictor;
 
-  if(isDefined(e_attacker) && isplayer(e_attacker.player_owner) && e_attacker.player_owner hasperk(#"specialty_mod_wolf_protector")) {
+  if(isDefined(e_attacker) && isPlayer(e_attacker.player_owner) && e_attacker.player_owner hasperk(#"specialty_mod_wolf_protector")) {
     if(level.active_powerups.size < 75) {
       if(math::cointoss(25)) {
         roll = randomintrangeinclusive(0, 100);

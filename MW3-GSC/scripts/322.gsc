@@ -13,11 +13,9 @@ main() {
 
   if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
-
   }
   if(!isDefined(level._id_1E40)) {
     level._id_1E40 = [];
-
   }
   var_0 = getEntArray("animated_model", "targetname");
   common_scripts\utility::array_thread(var_0, ::_id_1E46);
@@ -74,7 +72,6 @@ _id_1E46() {
 _id_1E47(var_0, var_1) {
   if(var_0.size <= 0) {
     return 0;
-
   }
   foreach(var_3 in var_0) {
     if(var_3 == var_1) {

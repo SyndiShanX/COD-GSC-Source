@@ -33,11 +33,11 @@ getanimentrycount() {
 }
 
 func_B64E(var_0, var_1, var_2, var_3) {
-  return isplayer(self.melee.target);
+  return isPlayer(self.melee.target);
 }
 
 func_B608(var_0, var_1, var_2, var_3) {
-  if(isplayer(self.melee.target)) {
+  if(isPlayer(self.melee.target)) {
     var_4 = self.origin;
     var_5 = self.melee.target.origin;
     if(int(var_5[2]) > int(var_4[2]) + 1) {
@@ -283,7 +283,7 @@ func_B61D(var_0, var_1, var_2, var_3) {
 
 func_B60D(var_0, var_1, var_2, var_3) {
   if(isDefined(anim)) {
-    if(isplayer(self.melee.target)) {
+    if(isPlayer(self.melee.target)) {
       level.var_B5F7[self.unittype] = gettime();
     } else {
       level.var_B5F8[self.unittype] = gettime();

@@ -6,7 +6,7 @@
 #include common_scripts\utility;
 
 init() {
-  if(getdvar("scr_elevator_disabled") == "1") {
+  if(getDvar("scr_elevator_disabled") == "1") {
     return;
   }
 
@@ -361,7 +361,6 @@ listen_for(msg) {
       mainframe playSound("elev_run_end");
       mainframe playSound("elev_bell_ding");
     }
-
   }
 }
 
@@ -956,10 +955,10 @@ elevator_get_dvar_int(dvar, def) {
 }
 
 elevator_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "") {
+  if(getDvar(dvar) != "") {
     return getdvarfloat(dvar);
   } else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }

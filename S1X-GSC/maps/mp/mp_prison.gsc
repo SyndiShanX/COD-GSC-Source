@@ -18,8 +18,8 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_prison");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -399,7 +399,6 @@ resetRotateGateConstant() {
   foreach(gate in level.mp_prison_killstreak.rotating_gate_constant) {
     gate thread gateFxOff();
   }
-
 }
 
 resetRotateGates() {
@@ -542,7 +541,6 @@ gasFieldsOn() {
   foreach(trigger in gasFields) {
     trigger trigger_on();
   }
-
 }
 
 gasFieldsOff() {
@@ -551,7 +549,6 @@ gasFieldsOff() {
   foreach(trigger in gasFields) {
     trigger trigger_off();
   }
-
 }
 
 soundWatcher(soundOrg) {

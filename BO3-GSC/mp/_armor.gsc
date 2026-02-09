@@ -14,7 +14,7 @@
 function setlightarmorhp(newvalue) {
   if(isDefined(newvalue)) {
     self.lightarmorhp = newvalue;
-    if(isplayer(self) && isDefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
+    if(isPlayer(self) && isDefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
       lightarmorpercent = math::clamp(self.lightarmorhp / self.maxlightarmorhp, 0, 1);
       self setcontrolleruimodelvalue("hudItems.armorPercent", lightarmorpercent);
     }

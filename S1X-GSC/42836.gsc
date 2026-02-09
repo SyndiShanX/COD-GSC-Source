@@ -32,7 +32,7 @@ target_enhancer_think() {
       continue;
     }
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       childthread maps\mp\_threatdetection::detection_highlight_hud_effect(self, 0.05, 1);
     }
 

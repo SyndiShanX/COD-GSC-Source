@@ -121,7 +121,7 @@ function function_e14a508d() {
 }
 
 function function_e93a75b6(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(isDefined(eattacker) && !isplayer(eattacker)) {
+  if(isDefined(eattacker) && !isPlayer(eattacker)) {
     idamage = self.health + 1;
   }
   return idamage;
@@ -667,7 +667,7 @@ function function_b8c0a930() {
 }
 
 function function_9b720436(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(isDefined(eattacker) && isplayer(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker)) {
     if(idamage <= 1 || (isDefined(weapon) && weapon.isemp)) {
       idamage = 0;
     }
@@ -1226,7 +1226,7 @@ function function_a3dbf6a2() {
   level.var_3dce3f88 movez(270, 16.3);
   level.var_3dce3f88 thread function_5bd223b0();
   wait(16.3 - 2);
-  setdvar("grenadeAllowRigidBodyPhysics", "1");
+  setDvar("grenadeAllowRigidBodyPhysics", "1");
   level notify("hash_b100689e");
   level.var_b100689e = 1;
 }
@@ -1287,7 +1287,7 @@ function function_17ecef2() {
 
 function function_10ffa58e(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if((self.health - idamage) <= 0) {
-    if(isDefined(eattacker) && isplayer(eattacker)) {
+    if(isDefined(eattacker) && isPlayer(eattacker)) {
       eattacker notify("hash_38f375b6");
     }
   }
@@ -1406,7 +1406,7 @@ function function_51da5fc6() {
   level.var_3dce3f88 waittill("movedone");
   level.var_3dce3f88 scene::init("cin_pro_08_01_liftescape_vign_lift_doorsopen", level.e_lift);
   snd_lift stoploopsound(0.1);
-  setdvar("grenadeAllowRigidBodyPhysics", "0");
+  setDvar("grenadeAllowRigidBodyPhysics", "0");
   open_time = 1.5;
   level thread function_45ed0d4b(1, open_time);
   wait(open_time + 0.1);
@@ -1570,7 +1570,7 @@ function function_5517d018() {
   for(i = 0; i < a_ai.size; i++) {
     if(isalive(a_ai[i]) && a_ai[i] istouching(e_volume)) {
       a_ai[i] kill();
-      if(isplayer(e_who)) {
+      if(isPlayer(e_who)) {
         namespace_61c634f2::function_d248b92b(e_who);
       }
     }

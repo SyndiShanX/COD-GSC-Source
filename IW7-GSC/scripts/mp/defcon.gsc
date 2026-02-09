@@ -12,7 +12,7 @@ init() {
     game["defcon"] = 4;
   }
 
-  setdvar("scr_defcon", game["defcon"]);
+  setDvar("scr_defcon", game["defcon"]);
   level.var_5059[5] = 0;
   level.var_5059[4] = 0;
   level.var_5059[3] = -1;
@@ -85,7 +85,7 @@ func_12E87(var_0, var_1, var_2) {
   var_3 = game["defcon"];
   game["defcon"] = var_0;
   level.var_C2A7 = level.var_5057[var_0];
-  setdvar("scr_defcon", game["defcon"]);
+  setDvar("scr_defcon", game["defcon"]);
   if(isDefined(var_1)) {
     var_1 notify("changed_defcon");
   }

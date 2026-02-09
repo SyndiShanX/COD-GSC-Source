@@ -35,15 +35,13 @@ idle_c4_drone_anims() {
 }
 
 friendly_anims() {
-  /*-----------------------
-  HOSTAGES
+  /*----------------------- HOSTAGES
   -------------------------*/
   //level.scr_anim[ "generic" ][ "hostage_chair_idle" ][ 0 ]			= %hostage_chair_idle;
   //level.scr_anim[ "generic" ][ "hostage_chair_idle" ][ 1 ]			= %hostage_chair_twitch;
   //level.scr_anim[ "generic" ][ "hostage_chair_idle" ][ 2 ]			= %hostage_chair_twitch2;
 
-  /*-----------------------
-  UNDERWATER
+  /*----------------------- UNDERWATER
   -------------------------*/
   level.scr_anim["sdv01_pilot"]["sdv_ride_in"] = % oilrig_sub_A_disembark_1;
   level.scr_anim["sdv01_copilot"]["sdv_ride_in"] = % oilrig_sub_A_disembark_2;
@@ -54,8 +52,7 @@ friendly_anims() {
   level.scr_anim["sdv02_swimmer1"]["sdv_ride_in"] = % oilrig_sub_B_disembark_3;
   level.scr_anim["sdv02_swimmer2"]["sdv_ride_in"] = % oilrig_sub_B_disembark_4;
 
-  /*-----------------------
-  WATER SURFACE
+  /*----------------------- WATER SURFACE
   -------------------------*/
   level.scr_anim["sdv01_pilot"]["surface_idle"][0] = % oilrig_sub_A_idle_1;
   level.scr_anim["sdv01_copilot"]["surface_idle"][0] = % oilrig_sub_A_idle_2;
@@ -66,8 +63,7 @@ friendly_anims() {
   level.scr_anim["sdv02_swimmer1"]["surface_idle"][0] = % oilrig_sub_B_idle_3;
   level.scr_anim["sdv02_swimmer2"]["surface_idle"][0] = % oilrig_sub_B_idle_4;
 
-  /*-----------------------
-  STEALTH KILL
+  /*----------------------- STEALTH KILL
   -------------------------*/
   level.scr_anim["hostile_stealthkill_player"]["grate_idle"][0] = % oilrig_underwater_guard_2_idle;
   level.scr_anim["hostile_stealthkill_friendly"]["grate_idle"][0] = % oilrig_underwater_guard_1_idle;
@@ -80,27 +76,23 @@ friendly_anims() {
   addNotetrack_customFunction("hostile_stealthkill_player", "splash", maps\oilrig_fx::underwater_struggle);
   addNotetrack_customFunction("hostile_stealthkill_friendly", "blood", maps\oilrig_fx::underwater_bleedout);
 
-  /*-----------------------
-  HELP OUT OF WATER
+  /*----------------------- HELP OUT OF WATER
   -------------------------*/
   level.scr_anim["water_helper_01"]["surface_helpout"] = % oilrig_helpout_1;
   level.scr_anim["water_helper_02"]["surface_helpout"] = % oilrig_helpout_2;
 
-  /*-----------------------
-  HOSTAGE EVAC ANIMS
+  /*----------------------- HOSTAGE EVAC ANIMS
   -------------------------*/
   level.scr_anim["manhandle_soldier_walk"]["prisoner_manhandle_walk"] = % prisoner_pickup2walk_soldier;
   level.scr_anim["manhandle_prisoner_walk"]["prisoner_manhandle_walk"] = % prisoner_pickup2walk_prisoner;
   level.scr_anim["manhandle_soldier_run"]["prisoner_manhandle_run"] = % prisoner_pickup2run_soldier;
   level.scr_anim["manhandle_prisoner_run"]["prisoner_manhandle_run"] = % prisoner_pickup2run_prisoner;
 
-  /*-----------------------
-  CQB
+  /*----------------------- CQB
   -------------------------*/
   level.scr_anim["generic"]["stand_exposed_wave_move_up"] = % stand_exposed_wave_move_up;
 
-  /*-----------------------
-  C4 PLANT
+  /*----------------------- C4 PLANT
   -------------------------*/
   level.scr_anim["generic"]["execution_slamwall_hostage_death"] = % execution_slamwall_hostage_death;
   level.scr_anim["generic"]["run_death_roll"] = % run_death_roll;
@@ -108,8 +100,7 @@ friendly_anims() {
   level.scr_anim["generic"]["C4_plant_start"] = % explosive_plant_knee;
   level.scr_anim["generic"]["C4_plant"] = % explosive_plant_knee;
 
-  /*-----------------------
-  C4 PLANT
+  /*----------------------- C4 PLANT
   -------------------------*/
   level.scr_anim["generic"]["railing_execute_reach"] = % covercrouch_aim5;
   level.scr_anim["generic"]["railing_execute_idle"][0] = % covercrouch_aim5;
@@ -150,8 +141,7 @@ anims() {
   addNotetrack_customFunction("generic", "over_solid", maps\oilrig::ai_rappel_over_ground_death_anim, "oilrig_rappel_2_crouch");
   addNotetrack_customFunction("generic", "feet_on_ground", maps\oilrig::ai_rappel_reset_death_anim, "oilrig_rappel_over_rail_R");
   addNotetrack_customFunction("generic", "feet_on_ground", maps\oilrig::ai_rappel_reset_death_anim, "oilrig_rappel_2_crouch");
-  /*-----------------------
-  PATROL
+  /*----------------------- PATROL
   -------------------------*/
 
   level.scr_anim["generic"]["patrol_walk"] = % patrol_bored_patrolwalk;
@@ -256,14 +246,12 @@ anims() {
 }
 
 dialogue() {
-  /*-----------------------
-  TO ADD
+  /*----------------------- TO ADD
   -------------------------*/
   //Command 	The sooner we get the hostages, the sooner we can send reinforcements to take care of the SAM sites, over."	oilrig_sbc_sooner	Friendly breaching dialogue (all radio headset)	
   //level.scr_radio[ "oilrig_sbc_sooner" ] = "oilrig_sbc_sooner";
 
-  /*-----------------------
-  UNDERWATER SEQUENCE
+  /*----------------------- UNDERWATER SEQUENCE
   -------------------------*/
   //"Sub Command: USS Indiana actual to drydock shelter. We have a go."level.scr_radio["oilrig_sbc_drydock"] = "oilrig_sbc_drydock";
 
@@ -305,8 +293,7 @@ dialogue() {
 
   //"Sub Officer: Depth 10 meters."//level.scr_radio[ "oilrig_sbo_depth10" ] = "oilrig_sbo_depth10";
 
-  /*-----------------------
-  INTRO GERMAN CONVERSATION
+  /*----------------------- INTRO GERMAN CONVERSATION
   -------------------------*/
   //ENEMY COMMAND (German radio): Team one patroling the perimeter. We've got two on the lower deck.
   //level.scr_sound[ "oilrig_enc_lowerdeck" ] = "oilrig_enc_lowerdeck";
@@ -367,8 +354,7 @@ dialogue() {
   //***Merc 1		True, but the metal in this structure supposedly causes interference for this motion detector, which gives us some chance to fight back
   level.scr_radio["oilrig_mrc1_patrolchange"] = "oilrig_mrc1_patrolchange";
 
-  /*-----------------------
-  INTRO STEALTH KILL DIALOGUE
+  /*----------------------- INTRO STEALTH KILL DIALOGUE
   -------------------------*/
   //In position. Let's take them out together. On your go.	
   level.scr_radio["oilrig_nsl_outtogether_00"] = "oilrig_nsl_outtogether";
@@ -382,8 +368,7 @@ dialogue() {
   //In position...on your go.	
   level.scr_radio["oilrig_nsl_outtogether_03"] = "oilrig_nsl_inposition";
 
-  /*-----------------------
-  INTRO STEALTH KILL FINISHED DIALOGUE
+  /*----------------------- INTRO STEALTH KILL FINISHED DIALOGUE
   -------------------------*/
   //SEAL LEADER (radio): Two hostiles down in section 1-alpha. Moving up to section 2.
   level.scr_radio["oilrig_nsl_sect1alpha"] = "oilrig_nsl_sect1alpha";
@@ -396,8 +381,7 @@ dialogue() {
   //SEAL LEADER (radio): Free to engage. Suppressed weapons only.
   level.scr_radio["oilrig_nsl_suppweapons"] = "oilrig_nsl_suppweapons";
 
-  /*-----------------------
-  UP THE STAIRS AMPED UP
+  /*----------------------- UP THE STAIRS AMPED UP
   -------------------------*/
   //Cpt. MacTavish			Ready weapons.	
   level.scr_radio["oilrig_nsl_readyweapons"] = "oilrig_nsl_readyweapons";
@@ -414,8 +398,7 @@ dialogue() {
   //Cpt. MacTavish			Get ready.		stealthy, commanding	
   level.scr_radio["oilrig_nsl_getready"] = "oilrig_nsl_getready";
 
-  /*-----------------------
-  BREACHING DIALOGUE
+  /*----------------------- BREACHING DIALOGUE
   -------------------------*/
 
   //"Sub Command: Civilian hostages hostages at your position, watch your fire."//radio_dialogue( "oilrig_sbc_civilhostages" );
@@ -560,8 +543,7 @@ dialogue() {
   level.scr_sound["generic"]["oilrig_hst1_5lang"] = "oilrig_hst1_5lang";
   level.scr_sound["generic"]["oilrig_hst1_5lang2"] = "oilrig_hst1_5lang2";
 
-  /*-----------------------
-  NAGS TO MOVE FROM BREACH 1 TO 2
+  /*----------------------- NAGS TO MOVE FROM BREACH 1 TO 2
   -------------------------*/
   //***Cpt. MacTavish			All teams move out.			
   //level.scr_radio[ "oilrig_deck2_movenag_00" ] = "oilrig_nsl_allteamsmove";
@@ -581,8 +563,7 @@ dialogue() {
   //***Cpt. MacTavish			Let's move - we've got more hostages on the upper decks.		stealthy, commanding	
   level.scr_radio["oilrig_deck2_movenag_02"] = "oilrig_nsl_letsmove";
 
-  /*-----------------------
-  MANHANDLER NAGS TO MOVE FROM BREACH 1 TO 2
+  /*----------------------- MANHANDLER NAGS TO MOVE FROM BREACH 1 TO 2
   -------------------------*/
   //***Robot	Get topside, we got this area covered.	
   //level.scr_radio[ "room1_manhandler_nag_01" ] = "oilrig_ns2_regrouptopside";
@@ -597,8 +578,7 @@ dialogue() {
   //***Robot	4Roach, get moving topside, this area is secure.			
   level.scr_radio["room1_manhandler_nag_02"] = "oilrig_ns2_getmoving";
 
-  /*-----------------------
-  MOVING TO OUTER DECKS
+  /*----------------------- MOVING TO OUTER DECKS
   -------------------------*/
   //"Sub Command: Enemy helo patroling the perimeter. Keep a low profile, Hotel Six."//radio_dialogue( "oilrig_sbc_lowprofile" );
   level.scr_radio["oilrig_sbc_lowprofile"] = "oilrig_sbc_lowprofile";
@@ -636,8 +616,7 @@ dialogue() {
   //"Seal Leader: We've been detected."//radio_dialogue( "oilrig_nsl_detected" );
   level.scr_radio["dialogue_heli_spotted_03"] = "oilrig_nsl_detected";
 
-  /*-----------------------
-  AMBUSH SEQUENCE
+  /*----------------------- AMBUSH SEQUENCE
   -------------------------*/
 
   //"Sub Command: Hotel Six, The remaining hostages are at your position."level.scr_radio["oilrig_sbc_hostatposition"] = "oilrig_sbc_hostatposition";
@@ -695,8 +674,7 @@ dialogue() {
 
   //"Seal Leader: Do it."level.scr_radio["oilrig_nsl_doit"] = "oilrig_nsl_doit";
 
-  /*-----------------------
-  BALLS OUT START
+  /*----------------------- BALLS OUT START
   -------------------------*/
 
   //"Seal Leader: Control, this is Hotel Six, all hostages secured, but our cover is blown."level.scr_radio["oilrig_nsl_coverblown"] = "oilrig_nsl_coverblown";
@@ -719,8 +697,7 @@ dialogue() {
   //Cpt. MacTavish			CentCom needs us to take the top deck ASAP so they can send in the Marines. Move.	
   level.scr_radio["oilrig_nsl_centcom"] = "oilrig_nsl_centcom";
 
-  /*-----------------------
-  STAIRS TO DECK 2
+  /*----------------------- STAIRS TO DECK 2
   -------------------------*/
   //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."//radio_dialogue( "oilrig_sbc_gettolz" );
   level.scr_radio["oilrig_sbc_gettolz"] = "oilrig_sbc_gettolz";
@@ -728,8 +705,7 @@ dialogue() {
   //"Seal Leader: Copy that."//radio_dialogue( "oilrig_nsl_copythat2" );
   level.scr_radio["oilrig_nsl_copythat2"] = "oilrig_nsl_copythat2";
 
-  /*-----------------------
-  HELICPTER ALERT
+  /*----------------------- HELICPTER ALERT
   -------------------------*/
   //Peasant	7	1	Enemy helicopter! Get down get down!	oilrig_ns1_getdown	Under heavy fire, surprised, shouting	
   level.scr_radio["oilrig_ambush_helo_alert_00"] = "oilrig_ns1_getdown";
@@ -740,8 +716,7 @@ dialogue() {
   //Peasant	7	3	Attack heli 12 o'clock, find some cover!	oilrig_ns1_attackheli	Under heavy fire, surprised, shouting
   level.scr_radio["oilrig_ambush_helo_alert_02"] = "oilrig_ns1_attackheli";
 
-  /*-----------------------
-  FLANKING DIALOGUE (HALLWAYS/STAIRS)
+  /*----------------------- FLANKING DIALOGUE (HALLWAYS/STAIRS)
   -------------------------*/
   //***Cpt. MacTavish			Split up. We can flank through these hallways.	
   level.scr_radio["oilrig_nsl_splitup"] = "oilrig_nsl_splitup";
@@ -749,8 +724,7 @@ dialogue() {
   //***Cpt. MacTavish			Fan out and flank them.	
   level.scr_radio["oilrig_nsl_outflank"] = "oilrig_nsl_outflank";
 
-  /*-----------------------
-  MCTAVISH LEADS THE WAY
+  /*----------------------- MCTAVISH LEADS THE WAY
   -------------------------*/
   //Cpt. MacTavish			The clock's ticking. We need to get topside and secure any remaining hostages before we call in the Marines.	
   level.scr_radio["oilrig_nsl_clocksticking"] = "oilrig_nsl_clocksticking";
@@ -758,8 +732,7 @@ dialogue() {
   //Cpt. MacTavishLet's go! Those hostages aren't going to rescue themselves.	
   level.scr_radio["oilrig_nsl_rescuethemselves"] = "oilrig_nsl_rescuethemselves";
 
-  /*-----------------------
-  HELICOPTER NAGS (WITHOUT ROCKET)
+  /*----------------------- HELICOPTER NAGS (WITHOUT ROCKET)
   -------------------------*/
   //Seal Leader			Find some heavy ordinance to take down that bird.	
   level.scr_radio["oilrig_nsl_takeoutbird_00"] = "oilrig_nsl_takeoutbird1";
@@ -776,8 +749,7 @@ dialogue() {
   //Seal Leader			We've gotta neutralize that Littlebird. Keep an eye out for any heavy artillery and take it out.	
   level.scr_radio["oilrig_nsl_takeoutbird_04"] = "oilrig_nsl_takeoutbird5";
 
-  /*-----------------------
-  HELICOPTER NAGS (WITH ROCKET)
+  /*----------------------- HELICOPTER NAGS (WITH ROCKET)
   -------------------------*/
   //Bring down that Littlebird, it's got us pinned.	
   level.scr_radio["oilrig_nsl_takeoutbird_withrocket_00"] = "oilrig_nsl_takeoutbird6";
@@ -791,8 +763,7 @@ dialogue() {
   //I want heavy weapons fire on that chopper NOW.	
   level.scr_radio["oilrig_nsl_takeoutbird_withrocket_03"] = "oilrig_nsl_takeoutbird9";
 
-  /*-----------------------
-  FRIENDLIES FIRING MISSILES
+  /*----------------------- FRIENDLIES FIRING MISSILES
   -------------------------*/
   //Firing AT4.	
   level.scr_radio["oilrig_ns2_fireat4_00"] = "oilrig_ns2_fireat4";
@@ -803,8 +774,7 @@ dialogue() {
   //I can't get a clear shot.	
   level.scr_radio["oilrig_ns2_fireat4_02"] = "oilrig_ns2_clearshot";
 
-  /*-----------------------
-  THERMAL
+  /*----------------------- THERMAL
   -------------------------*/
   //Cpt. MacTavish	All teams be advised: these guys are a step up - they're using thermal optics to see through the smoke.
   level.scr_radio["oilrig_use_thermal_00"] = "oilrig_nsl_seethrusmoke";
@@ -818,8 +788,7 @@ dialogue() {
   //Enemies are using thermal optics...Switching to thermal scope…
   level.scr_radio["oilrig_find_thermal_01"] = "oilrig_ns3_switching";
 
-  /*-----------------------
-  APPROACHING DECK 3 DERRICK ROOM
+  /*----------------------- APPROACHING DECK 3 DERRICK ROOM
   -------------------------*/
   //Sub Command			Hotel Six, be advised, hostages have been confirmed at your location along with possible explosives, over.		Intense, military orders	
   level.scr_radio["oilrig_sbc_hostconfirmed"] = "oilrig_sbc_hostconfirmed";
@@ -827,8 +796,7 @@ dialogue() {
   //Cpt. MacTavish			Copy that. All teams check your fire - we don't know what's behind these doors.		Intense, military orders	
   level.scr_radio["oilrig_nsl_behinddoors"] = "oilrig_nsl_behinddoors";
 
-  /*-----------------------
-  HELICOPTER ATTABOYS
+  /*----------------------- HELICOPTER ATTABOYS
   -------------------------*/
   //Robot			Nice shooting Roach.	oilrig_ns3_tacoman	Calm	
   level.scr_radio["oilrig_heli_grats_00"] = "oilrig_ns2_tacoman";
@@ -848,8 +816,7 @@ dialogue() {
   //Seal 3	That helo is history. Nice shot.	
   level.scr_radio["oilrig_heli_grats_05"] = "oilrig_ns3_niceshot";
 
-  /*-----------------------
-  FUEL TANKS
+  /*----------------------- FUEL TANKS
   -------------------------*/
   //XXX TO IMPLEMENT
   //Aim for those fuel tanks.	
@@ -867,8 +834,7 @@ dialogue() {
   //Put some fire on those fuel storage tanks.	
   level.scr_radio["oilrig_fueltanks_03"] = "oilrig_nsl_firefuelstorage";
 
-  /*-----------------------
-  ENEMY POPPING SMOKE
+  /*----------------------- ENEMY POPPING SMOKE
   -------------------------*/
   //	//Seal 2 They're popping smoke.	oilrig_ns2_popsmoke
   level.scr_radio["oilrig_enemy_smoke_00"] = "oilrig_ns2_popsmoke";
@@ -885,8 +851,7 @@ dialogue() {
   //	//Seal 2 Hostiles are popping smoke.	
   level.scr_radio["oilrig_enemy_smoke_04"] = "oilrig_ns2_hostpopsmoke";
 
-  /*-----------------------
-  END OF LEVEL
+  /*----------------------- END OF LEVEL
   -------------------------*/
   //***Cpt. MacTavish			Control, all hostages have been secured. I repeat - all hostages secured. Proceeding to LZ Bravo, over.	
   level.scr_radio["oilrig_nsl_allhostsec"] = "oilrig_nsl_allhostsec";
@@ -894,8 +859,7 @@ dialogue() {
   //***Sub Command			Good job, Hotel Six. Marine reinforcements are inserting now to dismantle the SAM sites. Get your team ready for phase two of the operation. Out.	
   level.scr_radio["oilrig_sbc_phase2"] = "oilrig_sbc_phase2";
 
-  /*-----------------------
-  RADIO FLAVOR
+  /*----------------------- RADIO FLAVOR
   -------------------------*/
 
   //***Marine HQ			Hunter Two-Two, this is Punisher Actual. GOPLAT secure. All EOD teams are cleared for landing.
@@ -925,14 +889,12 @@ dialogue() {
   //***Marine HQ			Punisher Actual to all strike teams - all SAM sites neutralized, repeat, all SAM sites have been neutralized. Blue sky in effect.
   level.scr_radio["oilrig_rmv_samsitesneut"] = "oilrig_rmv_samsitesneut";
 
-  /*-----------------------
-  MARINES SECURING SITES
+  /*----------------------- MARINES SECURING SITES
   -------------------------*/
   //Marine 1			I want these SAMs secure in five! Let's go! Move move!
   level.scr_sound["oilrig_gm1_samssecure"] = "oilrig_gm1_samssecure";
 
-  /*-----------------------
-  MERC BREACH DIALOGUE
+  /*----------------------- MERC BREACH DIALOGUE
   -------------------------*/
   //Merc 3	KILL THE HOSTAGES!!!
   level.scr_sound["oilrig_mrc_killhostages_room_100_00"] = "oilrig_mrc3_killhostages2";
@@ -946,8 +908,7 @@ dialogue() {
   //Merc 1 KILL THEM!!!	
   level.scr_sound["oilrig_mrc_killhostages_room_200_01"] = "oilrig_mrc1_killthem";
 
-  /*-----------------------
-  MERC AMBIENT COMM CHATTER
+  /*----------------------- MERC AMBIENT COMM CHATTER
   -------------------------*/
   //moving in
   level.scr_sound["oilrig_merc_chatter_00"] = "oilrig_mrc1_movingin";
@@ -1013,8 +974,7 @@ dialogue() {
   //Watch your corners.	
   level.scr_sound["oilrig_merc_chatter_20"] = "oilrig_mrc3_watchcorners";
 
-  /*-----------------------
-  NOT USED
+  /*----------------------- NOT USED
   -------------------------*/
   //	Peasant	11	"In position."	oilrig_ns1_inposition	Friendly breaching dialogue (all radio headset)	SUBTITLE_OILRIG_NS1_INPOSITION
   //	Cherub	12	"In position."	oilrig_ns2_inposition	Friendly breaching dialogue (all radio headset)	SUBTITLE_OILRIG_NS2_INPOSITION
@@ -1090,8 +1050,7 @@ blackhawk_anims() {
 
 #using_animtree("generic_human");
 scuba_gear_anims() {
-  /*-----------------------
-  GEAR REMOVAL
+  /*----------------------- GEAR REMOVAL
   -------------------------*/
   level.scr_anim["generic"]["oilrig_seal_surface_fins_off"] = % oilrig_seal_surface_fins_off;
   level.scr_anim["generic"]["oilrig_seal_surface_mask_off"] = % oilrig_seal_surface_mask_off;

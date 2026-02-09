@@ -8,6 +8,7 @@
 #include animscripts\Combat_utility;
 #include common_scripts\Utility;
 #using_animtree("generic_human");
+
 main() {
   prof_begin("animscript_init");
   self.a = spawnStruct();
@@ -106,7 +107,6 @@ main() {
   self.a.allow_shooting = false;
   prof_end("animscript_init");
 }
-
 setNameAndRank() {
   self endon("death");
   if(!isDefined(level.loadoutComplete)) {
@@ -114,23 +114,19 @@ setNameAndRank() {
   }
   self maps\_names::get_name();
 }
-
 DoNothing() {}
 SetupUniqueAnims() {
   if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate)) {
     set_anim_playback_rate();
   }
 }
-
 set_anim_playback_rate() {
   self.animplaybackrate = 0.9 + RandomFloat(0.2);
   self.moveplaybackrate = 1;
 }
-
 infiniteLoop(one, two, three, whatever) {
   anim waittill("new exceptions");
 }
-
 empty(one, two, three, whatever) {}
 clearEnemy() {
   self notify("stop waiting for enemy to die");
@@ -140,7 +136,6 @@ clearEnemy() {
   self.sightTime = 0;
   self.sightEnemy = undefined;
 }
-
 previewSightPos() {}
 previewAccuracy() {}
 trackVelocity() {
@@ -150,12 +145,10 @@ trackVelocity() {
     wait(0.2);
   }
 }
-
 deathNotify() {
   self waittill("death", other);
   self notify(anim.scriptChange);
 }
-
 setupHats() {
   anim.noHat = [];
   addNoHat("character_british_africa_price");
@@ -231,23 +224,18 @@ setupHats() {
   addFatGuy("character_russian_trench_a");
   addFatGuy("character_german_normandy_fat_injured");
 }
-
 addNoHat(model) {
   anim.noHat[model] = 1;
 }
-
 addNoHatClassname(model) {
   anim.noHatClassname[model] = 1;
 }
-
 addMetalHat(model) {
   anim.metalHat[model] = 1;
 }
-
 addFatGuy(model) {
   anim.fatGuy[model] = 1;
 }
-
 initWindowTraverse() {
   level.window_down_height[0] = -36.8552;
   level.window_down_height[1] = -27.0095;
@@ -262,7 +250,6 @@ initWindowTraverse() {
   level.window_down_height[10] = 298.971;
   level.window_down_height[11] = 330.681;
 }
-
 initMoveStartStopTransitions() {
   transTypes = [];
   transTypes[0] = "left";
@@ -551,15 +538,12 @@ initMoveStartStopTransitions() {
     }
   }
 }
-
 getExitSplitTime(approachType, dir) {
   return anim.coverExitSplit[approachType][dir];
 }
-
 getTransSplitTime(approachType, dir) {
   return anim.coverTransSplit[approachType][dir];
 }
-
 firstInit() {
   if(isDefined(anim.NotFirstTime)) {
     return;
@@ -575,7 +559,7 @@ firstInit() {
   if(!isDefined(anim.dog_hits_before_kill)) {
     anim.dog_hits_before_kill = 1;
   }
-  level.nextGrenadeDrop = randomInt(3);
+  level.nextGrenadeDrop = RandomInt(3);
   level.lastPlayerSighted = 100;
   anim.defaultException = animscripts\zombie_init::empty;
   anim.sniperRifles = [];
@@ -589,7 +573,7 @@ firstInit() {
   anim.sniperRifles["m40a3"] = 1;
   anim.sniperRifles["remington700"] = 1;
   anim.sniperRifles["barrett"] = 1;
-  SetDvar("scr_expDeathMayMoveCheck", "on");
+  setDvar("scr_expDeathMayMoveCheck", "on");
   maps\_names::setup_names();
   anim.lastSideStepAnim = 0;
   anim.meleeRange = 64;
@@ -677,12 +661,11 @@ firstInit() {
   anim.lastCarExplosionTime = -100000;
   setupRandomTable();
 }
-
 onPlayerConnect() {
   player = self;
   firstInit();
   player.invul = false;
-  println("**init::onPlayerConnect");
+  println("*************************************init::onPlayerConnect");
   player thread animscripts\battlechatter::player_init();
   player thread animscripts\combat_utility::player_init();
   player thread maps\_serverfaceanim::init_serverfaceanim();
@@ -690,7 +673,6 @@ onPlayerConnect() {
   player thread animscripts\squadManager::addPlayerToSquad();
   player thread animscripts\battleChatter_ai::addToSystem();
 }
-
 setNextPlayerGrenadeTime() {
   waittillframeend;
   if(isDefined(anim.playerGrenadeRangeTime)) {
@@ -710,7 +692,6 @@ setNextPlayerGrenadeTime() {
     anim.grenadeTimers["player_double_grenade"] = randomIntRange(minTime, maxTime);
   }
 }
-
 beginGrenadeTracking() {
   self endon("death");
   for(;;) {
@@ -718,7 +699,6 @@ beginGrenadeTracking() {
     grenade thread grenade_earthQuake();
   }
 }
-
 setupRandomTable() {
   anim.randomIntTableSize = 60;
   anim.randomIntTable = [];
@@ -726,19 +706,17 @@ setupRandomTable() {
     anim.randomIntTable[i] = i;
   }
   for(i = 0; i < anim.randomIntTableSize; i++) {
-    switchwith = randomInt(anim.randomIntTableSize);
+    switchwith = RandomInt(anim.randomIntTableSize);
     temp = anim.randomIntTable[i];
     anim.randomIntTable[i] = anim.randomIntTable[switchwith];
     anim.randomIntTable[switchwith] = temp;
   }
 }
-
 endOnDeath() {
   self waittill("death");
   waittillframeend;
   self notify("end_explode");
 }
-
 grenade_earthQuake() {
   self thread endOnDeath();
   self endon("end_explode");
@@ -746,7 +724,6 @@ grenade_earthQuake() {
   PlayRumbleOnPosition("grenade_rumble", position);
   earthquake(0.3, 0.5, position, 400);
 }
-
 onDeath() {
   self waittill("death");
   if(!isDefined(self)) {

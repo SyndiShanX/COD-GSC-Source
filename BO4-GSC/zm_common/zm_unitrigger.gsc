@@ -208,10 +208,10 @@ register_unitrigger_internal(unitrigger_stub, trigger_func) {
 
     if(isDefined(level.fixed_max_player_use_radius)) {
       if(level.fixed_max_player_use_radius > getdvarfloat(#"player_useradius_zm", 0)) {
-        setdvar(#"player_useradius_zm", level.fixed_max_player_use_radius);
+        setDvar(#"player_useradius_zm", level.fixed_max_player_use_radius);
       }
     } else if(level._unitriggers.largest_radius > getdvarfloat(#"player_useradius_zm", 0)) {
-      setdvar(#"player_useradius_zm", level._unitriggers.largest_radius);
+      setDvar(#"player_useradius_zm", level._unitriggers.largest_radius);
     }
   }
 
@@ -1088,7 +1088,6 @@ debug_unitriggers() {
 
     waitframe(1);
   }
-
 }
 
 debug_trigger(trigger, var_5ca10e3c, color) {
@@ -1100,10 +1099,8 @@ debug_trigger(trigger, var_5ca10e3c, color) {
 
     if(distancesquared(var_5ca10e3c, trigger.origin) > 16) {
       line(var_5ca10e3c, torigin, color, 0, 1);
-
     } else {
       sphere(var_5ca10e3c, 4, color, 1, 1, 10, 1);
-
     }
 
     forward = anglesToForward(tangles);

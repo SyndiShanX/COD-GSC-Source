@@ -43,7 +43,7 @@ mechz_claw_release(bopenclaw) {
   self.explosive_dmg_taken_on_grab_start = undefined;
 
   if(isDefined(self.e_grabbed)) {
-    if(isplayer(self.e_grabbed)) {
+    if(isPlayer(self.e_grabbed)) {
       self.e_grabbed setclientfieldtoplayer("mechz_grab", 0);
       self.e_grabbed allowcrouch(1);
       self.e_grabbed allowprone(1);
@@ -71,7 +71,7 @@ mechz_claw_shot_pain_reaction() {
 }
 
 ent_released_from_claw_grab_achievement(e_releaser, e_held_by_mechz) {
-  if(isDefined(e_releaser) && isDefined(e_held_by_mechz) && isplayer(e_releaser) && isplayer(e_held_by_mechz)) {
+  if(isDefined(e_releaser) && isDefined(e_held_by_mechz) && isPlayer(e_releaser) && isPlayer(e_held_by_mechz)) {
     if(e_releaser == e_held_by_mechz)
       e_releaser notify("mechz_grab_released_self");
     else
@@ -258,7 +258,7 @@ claw_grapple() {
     if(!isDefined(self.flamethrower_trigger))
       self mechz_flamethrower_initial_setup();
 
-    if(isplayer(self.e_grabbed) && is_player_valid(self.e_grabbed))
+    if(isPlayer(self.e_grabbed) && is_player_valid(self.e_grabbed))
       self.e_grabbed thread mechz_unlink_on_laststand(self);
     else if(isai(self.e_grabbed))
       self.e_grabbed thread mechz_zombie_flamethrower_gib(self);

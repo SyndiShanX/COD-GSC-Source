@@ -216,7 +216,6 @@ run_spawn_functions() {
     self.spawn_funcs = undefined;
 
     self.spawn_funcs = var_f9bfb16c;
-
   }
 
   if(isDefined(self.archetype) && isDefined(level.spawn_funcs[self.archetype + "_post"])) {

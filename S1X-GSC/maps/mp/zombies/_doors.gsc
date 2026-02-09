@@ -288,7 +288,7 @@ run_door_trap_trigger() {
     if(!self.trapactive) {
       continue;
     }
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       continue;
     }
     if(var_1 maps\mp\zombies\_util::isdoortrapimmune()) {
@@ -332,7 +332,7 @@ run_door_trap_trigger() {
 }
 
 door_trap_kill(var_0) {
-  if(!isDefined(var_0) || isplayer(var_0)) {
+  if(!isDefined(var_0) || isPlayer(var_0)) {
     return;
   }
   if(var_0 maps\mp\zombies\_util::isdoortrapimmune()) {

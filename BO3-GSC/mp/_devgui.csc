@@ -289,9 +289,9 @@ function watch_devgui() {
     }
     saved_dvarconfigenabled = getdvarint("", 1);
     if(dvar_has_value("")) {
-      setdvar("", 0);
+      setDvar("", 0);
       now = getutc();
-      setdvar("", calculate_schedule_start_time(now));
+      setDvar("", calculate_schedule_start_time(now));
       clear_dvar("");
     }
     if(dvar_has_value("")) {
@@ -311,17 +311,17 @@ function watch_devgui() {
       clear_dvar("");
     }
     if(saved_dvarconfigenabled != getdvarint("", 1)) {
-      setdvar("", saved_dvarconfigenabled);
+      setDvar("", saved_dvarconfigenabled);
     }
     clear_dvar("");
   }
 }
 
 function update_contract_start_time(delta_days) {
-  setdvar("", 0);
+  setDvar("", 0);
   start_time = get_schedule_start_time();
   daily_duration = getdvarint("", 60);
-  setdvar("", start_time + (daily_duration * delta_days));
+  setDvar("", start_time + (daily_duration * delta_days));
 }
 
 function dvar_has_value(dvar_name) {
@@ -329,7 +329,7 @@ function dvar_has_value(dvar_name) {
 }
 
 function clear_dvar(dvar_name) {
-  setdvar(dvar_name, 0);
+  setDvar(dvar_name, 0);
 }
 
 function get_schedule_start_time() {

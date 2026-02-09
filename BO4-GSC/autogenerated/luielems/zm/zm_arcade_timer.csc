@@ -46,7 +46,6 @@ class czm_arcade_timer: cluielem {
     cluielem::add_clientfield("minutes", 1, 4, "int", var_359a4d9a);
     cluielem::function_dcb34c80("string", "title", 1);
   }
-
 }
 
 register(uid, var_8fd8bfaa, var_b1de907e, var_359a4d9a, var_395b3059) {

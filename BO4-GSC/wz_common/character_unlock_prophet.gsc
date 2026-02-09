@@ -37,7 +37,7 @@ function_1c4b5097(item) {
 }
 
 on_drop_item(params) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -55,7 +55,7 @@ function_798820a9(item) {
   self endon("3da3c6e1687182e2");
   self endon(#"hash_249a493b6d9b422c", #"dropped_prophet_item", #"disonnect", #"death");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

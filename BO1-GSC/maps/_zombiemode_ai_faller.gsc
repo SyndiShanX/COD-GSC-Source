@@ -7,6 +7,7 @@
 #include common_scripts\utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 faller_init() {
   level._zombie_fall_anims["zombie"] = [];
   level._zombie_fall_anims["zombie"]["default"] = % ai_zombie_jump_down_72;
@@ -21,7 +22,6 @@ faller_init() {
   level.zombie_custom_think_logic = ::check_do_zombie_fall;
   level thread setup_faller_locations();
 }
-
 setup_faller_locations() {
   flag_wait("zones_initialized");
   zkeys = GetArrayKeys(level.zones);
@@ -35,7 +35,6 @@ setup_faller_locations() {
     }
   }
 }
-
 get_available_fall_locations() {
   level.zombie_fall_spawners = [];
   zone = level.zones[self.zone_name];
@@ -55,7 +54,6 @@ get_available_fall_locations() {
   }
   return level.zombie_fall_spawners;
 }
-
 round_spawning_fall_test() {
   while(true) {
     spawn_points = [];
@@ -69,7 +67,7 @@ round_spawning_fall_test() {
     bestPoint = undefined;
     bestDist = 0.0;
     for(i = 0; i < spawn_points.size; i++) {
-      checkDist = distanceSquared(spawn_points[i].origin, player.origin);
+      checkDist = DistanceSquared(spawn_points[i].origin, player.origin);
       if(!isDefined(bestPoint) || checkDist < bestDist) {
         bestPoint = spawn_points[i];
         bestDist = checkDist;
@@ -82,7 +80,6 @@ round_spawning_fall_test() {
     wait 5;
   }
 }
-
 check_do_zombie_fall() {
   if((GetDvarInt(#"zombie_fall_test") || (isDefined(self.script_string) && self.script_string == "faller"))) {
     self thread do_zombie_fall();
@@ -90,7 +87,6 @@ check_do_zombie_fall() {
   }
   return false;
 }
-
 zombie_faller_delete() {
   level.zombie_total++;
   self maps\_zombiemode_spawner::reset_attack_spot();
@@ -100,7 +96,6 @@ zombie_faller_delete() {
   }
   self Delete();
 }
-
 parse_script_parameters() {
   if(isDefined(self.script_parameters)) {
     parms = strtok(self.script_parameters, ";");
@@ -116,7 +111,6 @@ parse_script_parameters() {
     }
   }
 }
-
 setup_deathfunc() {
   self endon("death");
   while(!is_true(self.zombie_init_done)) {
@@ -124,7 +118,6 @@ setup_deathfunc() {
   }
   self.deathFunction = ::zombie_fall_death_func;
 }
-
 do_zombie_fall() {
   self endon("death");
   self thread setup_deathfunc();
@@ -140,7 +133,7 @@ do_zombie_fall() {
   if(spots.size < 1) {
     self unlink();
     self.anchor delete();
-    self hide();
+    self Hide();
     self delayThread(0.1, ::zombie_faller_delete);
     return;
   } else if(GetDvarInt(#"zombie_fall_test")) {
@@ -148,7 +141,7 @@ do_zombie_fall() {
     spot = undefined;
     bestDist = 0.0;
     for(i = 0; i < spots.size; i++) {
-      checkDist = distanceSquared(spots[i].origin, player.origin);
+      checkDist = DistanceSquared(spots[i].origin, player.origin);
       if(!isDefined(spot) || checkDist < bestDist) {
         spot = spots[i];
         bestDist = checkDist;
@@ -165,8 +158,8 @@ do_zombie_fall() {
   }
   anim_org = spot.origin;
   anim_ang = spot.angles;
-  self hide();
-  self.anchor moveTo(anim_org, .05);
+  self Hide();
+  self.anchor moveto(anim_org, .05);
   self.anchor waittill("movedone");
   target_org = maps\_zombiemode_spawner::get_desired_origin();
   if(isDefined(target_org)) {
@@ -182,7 +175,6 @@ do_zombie_fall() {
   self thread zombie_faller_death_wait();
   self thread zombie_faller_do_fall();
 }
-
 zombie_faller_do_fall() {
   self endon("death");
   emerge_anim = self get_fall_emerge_anim();
@@ -248,7 +240,6 @@ zombie_faller_do_fall() {
   self.no_powerups = false;
   self notify("zombie_custom_think_done", spot.script_noteworthy);
 }
-
 zombie_fall_loop() {
   self endon("death");
   self setFlaggedAnimKnobRestart("fall_loop", self.fall_anim, 1, 0.20, 1.0);
@@ -261,12 +252,10 @@ zombie_fall_loop() {
     wait .05;
   }
 }
-
 zombie_land() {
   self setFlaggedAnimKnobRestart("land", self.landAnim, 1, 0.20, 1.0);
   wait(GetAnimLength(self.landAnim));
 }
-
 zombie_faller_always_drop() {
   if(isDefined(self.zombie_faller_location.drop_now)) {
     if(self.zombie_faller_location.drop_now == true) {
@@ -275,7 +264,6 @@ zombie_faller_always_drop() {
   }
   return false;
 }
-
 zombie_faller_drop_not_occupied() {
   if(is_true(self.zombie_faller_location.drop_not_occupied)) {
     if(isDefined(self.zone_name) && isDefined(level.zones[self.zone_name])) {
@@ -284,14 +272,12 @@ zombie_faller_drop_not_occupied() {
   }
   return false;
 }
-
 zombie_faller_watch_all_players() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     self thread zombie_faller_watch_player(players[i]);
   }
 }
-
 zombie_faller_watch_player(player) {
   self endon("falling");
   self endon("death");
@@ -342,7 +328,6 @@ zombie_faller_watch_player(player) {
     wait .1;
   }
 }
-
 zombie_fall_wait() {
   self endon("falling");
   self endon("death");
@@ -366,12 +351,10 @@ zombie_fall_wait() {
     }
   }
 }
-
 zombie_fall_should_attack(spot) {
   victims = zombie_fall_get_vicitims(spot);
   return victims.size > 0;
 }
-
 zombie_fall_get_vicitims(spot) {
   ret = [];
   players = GetPlayers();
@@ -397,38 +380,31 @@ zombie_fall_get_vicitims(spot) {
   }
   return ret;
 }
-
 get_fall_emerge_anim(spot) {
   return level._zombie_fall_anims[self.animname]["emerge"];
 }
-
 get_fall_anim(spot) {
   return level._zombie_fall_anims[self.animname]["fall"];
 }
-
 get_attack_anim(spot) {
   return random(level._zombie_fall_anims[self.animname]["attack"]);
 }
-
 zombie_faller_enable_location() {
   if(isDefined(self.zombie_faller_location)) {
     self.zombie_faller_location.is_enabled = true;
     self.zombie_faller_location = undefined;
   }
 }
-
 zombie_faller_death_wait() {
   self waittill("death");
   self endon("falling");
   self zombie_faller_enable_location();
 }
-
 zombie_fall_death_func() {
   self animmode("noclip");
   self.deathanim = level._zombie_fall_anims["zombie"]["emerge_death"];
   return self maps\_zombiemode_spawner::zombie_death_animscript();
 }
-
 zombie_fall_death(zombie, spot) {
   zombie endon("fall_anim_finished");
   while(zombie.health > 1) {
@@ -437,7 +413,6 @@ zombie_fall_death(zombie, spot) {
   zombie StopAnimScripted();
   spot notify("stop_zombie_fall_fx");
 }
-
 _damage_mod_to_damage_type(type) {
   toks = strtok(type, "_");
   if(toks.size < 2) {
@@ -450,7 +425,6 @@ _damage_mod_to_damage_type(type) {
   returnStr = tolower(returnStr);
   return returnStr;
 }
-
 zombie_fall_fx(zombie) {
   self thread zombie_fall_dust_fx(zombie);
   self thread zombie_fall_burst_fx();
@@ -462,7 +436,6 @@ zombie_fall_fx(zombie) {
     wait 1;
   }
 }
-
 zombie_fall_burst_fx() {
   self endon("stop_zombie_fall_fx");
   self endon("fall_anim_finished");
@@ -470,7 +443,6 @@ zombie_fall_burst_fx() {
   wait(.25);
   playFX(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
 }
-
 zombie_fall_dust_fx(zombie) {
   dust_tag = "J_SpineUpper";
   self endon("stop_zombie_fall_dust_fx");
@@ -482,12 +454,10 @@ zombie_fall_dust_fx(zombie) {
     wait dust_interval;
   }
 }
-
 stop_zombie_fall_dust_fx(zombie) {
   zombie waittill("death");
   self notify("stop_zombie_fall_dust_fx");
 }
-
 handle_fall_notetracks(note, spot) {
   if(note == "deathout") {
     self.deathFunction = ::faller_death_ragdoll;
@@ -499,13 +469,11 @@ handle_fall_notetracks(note, spot) {
     }
   }
 }
-
 faller_death_ragdoll() {
   self StartRagdoll();
   self launchragdoll((0, 0, -1));
   return self maps\_zombiemode_spawner::zombie_death_animscript();
 }
-
 hide_pop() {
   self endon("death");
   wait(0.5);
@@ -513,7 +481,6 @@ hide_pop() {
     self Show();
   }
 }
-
 in_player_fov(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);
@@ -532,7 +499,6 @@ in_player_fov(player) {
   inPlayerFov = (angleFromCenter <= (playerFOV * 0.5 * (1 - banzaiVsPlayerFOVBuffer)));
   return inPlayerFov;
 }
-
 potentially_visible(how_close) {
   if(!isDefined(how_close)) {
     how_close = 1000;

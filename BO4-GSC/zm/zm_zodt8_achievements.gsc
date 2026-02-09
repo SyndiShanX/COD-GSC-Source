@@ -33,7 +33,7 @@ on_player_connect() {
 }
 
 on_ai_killed(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     params.eattacker thread function_e7750e06(params);
 
     if(self.archetype == # "zombie" || self.archetype == # "catalyst") {

@@ -234,11 +234,11 @@ function_90a37da4(s_params) {
     self clientfield::set("" + # "zombie_spectral_key_stun", 0);
   }
 
-  if(isplayer(s_params.eattacker) && (s_params.weapon == level.var_d7e67022 || s_params.weapon == level.var_637136f3 || s_params.weapon == level.var_4e845c84 || s_params.weapon == level.var_58e17ce3)) {
+  if(isPlayer(s_params.eattacker) && (s_params.weapon == level.var_d7e67022 || s_params.weapon == level.var_637136f3 || s_params.weapon == level.var_4e845c84 || s_params.weapon == level.var_58e17ce3)) {
     self zm_trial_restrict_loadout::function_bb33631e(#"spoon");
   }
 
-  if(isplayer(s_params.eattacker) && (s_params.weapon == level.var_d7e67022 || s_params.weapon == level.var_637136f3) && s_params.smeansofdeath === "MOD_ELECTROCUTED") {
+  if(isPlayer(s_params.eattacker) && (s_params.weapon == level.var_d7e67022 || s_params.weapon == level.var_637136f3) && s_params.smeansofdeath === "MOD_ELECTROCUTED") {
     s_params.eattacker thread function_b952c1b(self);
   }
 }
@@ -252,11 +252,11 @@ function_a8b4c2a7(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     return 0;
   }
 
-  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === # "spoon" && isplayer(eattacker)) {
+  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === # "spoon" && isPlayer(eattacker)) {
     self.var_12745932 = 1;
   }
 
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     if(self.animname === "zombie_eaten" && !(isDefined(self.allowdeath) && self.allowdeath) && self.health <= 1) {
       if((weapon == level.var_d7e67022 || weapon == level.var_637136f3) && meansofdeath === "MOD_ELECTROCUTED") {
         if(self clientfield::get("" + # "zombie_spectral_key_stun")) {
@@ -714,7 +714,7 @@ zombie_knockdown(player, gib) {
 
 function_68871817(e_attacker) {
   if(isDefined(self)) {
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       w_damage = e_attacker getcurrentweapon();
     } else {
       w_damage = undefined;
@@ -1357,14 +1357,12 @@ function_265e517c(e_player) {
 render_debug_sphere(origin, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
     sphere(origin, 2, color, 0.75, 1, 10, 100);
-
   }
 }
 
 function_7067b673(origin1, origin2, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
     line(origin1, origin2, color, 0.75, 1, 100);
-
   }
 }
 

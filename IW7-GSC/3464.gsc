@@ -457,7 +457,7 @@ sentrymodifydamage(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_0, var_1, var_2, var_5, self.maxhealth, 2, 3, 4);
 
-  if(isDefined(var_0) && isplayer(var_0) && scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0) && scripts\mp\equipment\phase_shift::isentityphaseshifted(var_0)) {
     var_5 = 0;
   }
 
@@ -492,7 +492,7 @@ sentryhandledeathdamage(var_0, var_1, var_2, var_3) {
     var_9 = var_0;
 
     if(isDefined(var_9) && isDefined(self.owner)) {
-      if(isDefined(var_0.owner) && isplayer(var_0.owner)) {
+      if(isDefined(var_0.owner) && isPlayer(var_0.owner)) {
         var_9 = var_0.owner;
       }
 

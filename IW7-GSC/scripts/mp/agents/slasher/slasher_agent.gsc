@@ -24,7 +24,7 @@ func_FAB0() {
 }
 
 func_FACE(var_0) {
-  var_1 = getdvar("ui_mapname");
+  var_1 = getDvar("ui_mapname");
   if(var_1 == "cp_final") {
     self setModel("body_final_slasher");
   } else {
@@ -148,7 +148,7 @@ setupagent() {
   self.footstepdetectdistsprint = 2500;
   self.var_71D0 = ::shouldslasherplaypainanim;
   self.precacheleaderboards = 1;
-  var_0 = getdvar("ui_mapname");
+  var_0 = getDvar("ui_mapname");
   if(var_0 != "cp_final") {
     self setethereal(1);
   }
@@ -169,7 +169,7 @@ turn_on_saw_blade_after_time(var_0) {
   self endon("death");
   wait(var_0);
   self setscriptablepartstate("slasher_saw", "active");
-  var_1 = getdvar("ui_mapname");
+  var_1 = getDvar("ui_mapname");
   if(var_1 == "cp_final") {
     return;
   }

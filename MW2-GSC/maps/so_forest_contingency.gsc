@@ -78,8 +78,7 @@ main() {
   animscripts\dog\dog_init::initDogAnimations();
   maps\_patrol_anims::main();
 
-  //SILENCER ADVICE ----
-  //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
+  //SILENCER ADVICE ---- //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
   level.scr_radio["so_for_cont_pri_attractattn"] = "so_for_cont_pri_attractattn";
 
   // original contingency threat bias setup
@@ -258,8 +257,7 @@ enemy_nerf() {
 start_so_forest() {
   so_forest_init();
 
-  // ----- modified original contingency functions -----
-  maps\contingency::sight_ranges_foggy_woods();
+  // ----- modified original contingency functions ----- maps\contingency::sight_ranges_foggy_woods();
   thread maps\contingency::dialog_russians_looking_for_you();
   thread woods_first_patrol_cqb();
   thread woods_second_dog_patrol();
@@ -375,7 +373,7 @@ stealth_woods() {
 
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   switch (self.team) {
@@ -467,7 +465,7 @@ monitor_stealth_kills() {
   if(!isDefined(killer)) {
     return;
   }
-  if(isplayer(killer)) {
+  if(isPlayer(killer)) {
     level.enemies_killed++;
     flag_set("enemy_killed");
 

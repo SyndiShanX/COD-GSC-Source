@@ -137,7 +137,7 @@ func_9DA2(var_0, var_1) {
     return 0;
   }
 
-  if(!isai(var_0) && !isplayer(var_0)) {
+  if(!isai(var_0) && !isPlayer(var_0)) {
     return 0;
   }
 
@@ -167,7 +167,7 @@ func_9DA2(var_0, var_1) {
     }
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_2 = var_0 getstance();
   } else {
     var_2 = var_1.a.pose;

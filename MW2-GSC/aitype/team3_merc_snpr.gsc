@@ -65,7 +65,5 @@ precache() {
   precacheItem("pp2000");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_sniper_glint::main();
-  //----------------
-}
+  //---------------- maps\_sniper_glint::main();
+  //---------------- }

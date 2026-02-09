@@ -48,7 +48,6 @@ checksurfacetypeiscorrect(movetype, surfacetype) {
 
     println("***End");
   }
-
 }
 
 playerjump(client_num, player, surfacetype, firstperson, quiet, islouder) {
@@ -56,7 +55,6 @@ playerjump(client_num, player, surfacetype, firstperson, quiet, islouder) {
     surfacetype = player.audiomaterialoverride;
 
     checksurfacetypeiscorrect("step_run", surfacetype);
-
   }
 
   sound_alias = level.playerfootsounds["step_run"][surfacetype][firstperson][islouder];
@@ -68,7 +66,6 @@ playerland(client_num, player, surfacetype, firstperson, quiet, damageplayer, is
     surfacetype = player.audiomaterialoverride;
 
     checksurfacetypeiscorrect("land", surfacetype);
-
   }
 
   sound_alias = level.playerfootsounds["land"][surfacetype][firstperson][islouder];

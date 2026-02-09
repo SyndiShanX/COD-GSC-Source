@@ -56,7 +56,7 @@ player_pick_up_monitor(var_0, var_1) {
 }
 
 player_picking_up_item(var_0, var_1) {
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return 0;
   }
 

@@ -423,10 +423,10 @@ function private function_f70dd749() {
   if(!isDefined(self.enemy)) {
     return true;
   }
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return true;
   }
-  if(isDefined(self.melee) && isDefined(self.melee.target) && isplayer(self.melee.target)) {
+  if(isDefined(self.melee) && isDefined(self.melee.target) && isPlayer(self.melee.target)) {
     return false;
   }
   playerproximity = self function_2808d83d();

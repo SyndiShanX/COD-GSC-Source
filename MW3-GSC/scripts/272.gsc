@@ -6,7 +6,6 @@
 _id_1C5B() {
   if(!isDefined(level._id_1C5C)) {
     _id_1C65();
-
   }
   level._id_0A82 = 1;
   level notify("loadout complete");
@@ -52,7 +51,6 @@ _id_1C5F() {
 _id_1C63() {
   if(isDefined(level._id_1C64)) {
     return level._id_1C64;
-
   }
   return level.script;
 }
@@ -62,7 +60,6 @@ _id_1C65(var_0) {
 
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   level._id_1C66 = var_0;
   var_2 = [];
@@ -70,15 +67,12 @@ _id_1C65(var_0) {
 
   if(maps\_utility::_id_12C1()) {
     level._id_1337 _id_1C5D();
-
   }
   if(!isDefined(game["expectedlevel"])) {
     game["expectedlevel"] = "";
-
   }
   if(!isDefined(level._id_0BA2)) {
     level._id_0BA2 = "american";
-
   }
   if(common_scripts\utility::string_starts_with(level.script, "pmc_")) {
     level.player setviewmodel("viewmodel_base_viewhands");
@@ -397,7 +391,7 @@ _id_1C6D(var_0) {
     level._id_1338 = "delta";
 
     if(maps\_utility::_id_12C1()) {
-      if(getdvar("coop_start") == "so_char_host") {
+      if(getDvar("coop_start") == "so_char_host") {
         var_9 = 0;
         var_10 = 1;
       } else {
@@ -769,7 +763,6 @@ _id_1C79() {
 
   if(maps\_utility::_id_0A36()) {
     level.player giveweapon("m1014");
-
   }
   level.player giveweapon("mp5");
   level.player switchtoweapon("mp5");
@@ -788,7 +781,6 @@ _id_1C7A(var_0) {
     _id_1C90("mp5");
   } else {
     _id_1C90("m1014");
-
   }
   _id_1C9C(var_0);
 }
@@ -796,7 +788,6 @@ _id_1C7A(var_0) {
 _id_1C7B(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   level.player endon("death");
 
@@ -826,15 +817,12 @@ _id_1C7B(var_0, var_1) {
 _id_1C7C(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   if(!isDefined(game["weaponstates"])) {
     return 0;
-
   }
   if(!isDefined(game["weaponstates"][var_0])) {
     return 0;
-
   }
   level.player takeallweapons();
 
@@ -867,7 +855,6 @@ _id_1C7C(var_0, var_1) {
 
     if(isDefined(level._id_1C7D[var_3])) {
       level.player switchtooffhand(var_3);
-
     }
     var_3 = game["weaponstates"][var_0]["current"];
 
@@ -1062,11 +1049,10 @@ _id_1C87() {
 
   foreach(var_6 in var_9) {
     if(maps\_utility::_id_12C1() && var_6 == level.script) {
-      var_11 = getdvar("ui_ac130_pilot_num");
+      var_11 = getDvar("ui_ac130_pilot_num");
 
       if(isDefined(var_11) && var_11 != "0") {
         level._id_1C62 = 1;
-
       }
       common_scripts\utility::flag_set("character_selected");
     }
@@ -1076,11 +1062,9 @@ _id_1C87() {
 _id_1C88() {
   if(level._id_1C89 == "so_char_host") {
     return level.players[0];
-
   }
   if(level._id_1C89 == "so_char_client") {
     return level.players[1];
-
   }
   return level.players[0];
 }
@@ -1106,35 +1090,27 @@ _id_1C8B(var_0) {
 
   if(!isDefined(level._id_1C8D)) {
     level._id_1C8D = [];
-
   }
   if(!isDefined(level._id_1C8E)) {
     level._id_1C8E = [];
-
   }
   if(!isDefined(level._id_1C8C)) {
     level._id_1C8C = [];
-
   }
   if(!isDefined(level._id_1C8F)) {
     level._id_1C8F = [];
-
   }
   if(!isDefined(level._id_1C90)) {
     level._id_1C90 = [];
-
   }
   if(!isDefined(level._id_1C91)) {
     level._id_1C91 = [];
-
   }
   if(!isDefined(level._id_1C92)) {
     level._id_1C92 = [];
-
   }
   if(!isDefined(level._id_1C93)) {
     level._id_1C93 = [];
-
   }
   level._id_1C8D[var_0] = [];
   level._id_1C8F[var_0] = [];
@@ -1146,7 +1122,6 @@ _id_1C94(var_0) {
 
   if(!level._id_1C66) {
     precacheitem(var_0);
-
   }
   level._id_1C8C[var_1][var_0] = 1;
 }
@@ -1171,7 +1146,6 @@ _id_1C8E(var_0) {
 
   if(!level._id_1C66) {
     precachemodel(var_0);
-
   }
   level._id_1C8E[var_1] = var_0;
 }
@@ -1193,13 +1167,11 @@ _id_1C93(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_4._id_1C96 = var_2;
-
   }
   if(isDefined(level._id_1C93[var_3])) {
     var_5 = level._id_1C93[var_3].size;
   } else {
     var_5 = 0;
-
   }
   level._id_1C93[var_3][var_5] = var_4;
 }
@@ -1211,7 +1183,7 @@ _id_1C97(var_0) {
 
   if(isDefined(level._id_1C91[var_0])) {
     var_1 maps\_utility::_id_1C67(level._id_1C91[var_0]);
-    var_1 setanim( % code, 1, 0);
+    var_1 setanim(%code, 1, 0);
   }
 
   var_2 = getarraykeys(level._id_1C8C[var_0]);
@@ -1226,15 +1198,12 @@ _id_1C97(var_0) {
 
   if(isDefined(level._id_1C8F[var_0])) {
     var_1 setoffhandsecondaryclass("flash");
-
   }
   if(isDefined(level._id_1C93[var_0])) {
     var_1 _id_1C98(var_0);
-
   }
   if(isDefined(level._id_1C90[var_0])) {
     var_1 switchtoweapon(level._id_1C90[var_0]);
-
   }
   if(isDefined(level._id_1C8E[var_0])) {
     var_1 setviewmodel(level._id_1C8E[var_0]);

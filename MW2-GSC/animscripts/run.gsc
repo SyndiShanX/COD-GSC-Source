@@ -180,7 +180,7 @@ RunNGun(validTarget) {
 
   self.a.allowedPartialReloadOnTheRunTime = gettime() + 500;
 
-  if(validTarget && isplayer(self.enemy))
+  if(validTarget && isPlayer(self.enemy))
     self updatePlayerSightAccuracy();
 
   return true;
@@ -196,7 +196,7 @@ RunNGun_Backward() {
 
   self setFlaggedAnimKnob("runanim", %combatwalk_B, 1, 0.3, 0.8);
 
-  if(isplayer(self.enemy))
+  if(isPlayer(self.enemy))
     self updatePlayerSightAccuracy();
 
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
@@ -340,7 +340,7 @@ GetMovePlaybackRate() {
 }
 
 MoveStandCombatNormal() {
-  //self clearanim( %walk_and_run_loops, 0.2 );
+  //self clearanim(%walk_and_run_loops, 0.2 );
 
   rate = GetMovePlaybackRate();
 
@@ -796,33 +796,33 @@ shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTa
 }
 
 interceptNotetracksForWeaponSwitch(notetrack) {
-  if(notetrack == "gun_2_chest" || notetrack == "gun_2_back")
-    return true; // "don't do the default behavior for this notetrack"}
+    if(notetrack == "gun_2_chest" || notetrack == "gun_2_back")
+      return true; // "don't do the default behavior for this notetrack"}
 
-watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {
-  self endon("killanimscript");
-  self endon("movemode");
-  self endon("switchEnded");
+    watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {
+      self endon("killanimscript");
+      self endon("movemode");
+      self endon("switchEnded");
 
-  self waittillmatch(flagName, dropGunNotetrack);
+      self waittillmatch(flagName, dropGunNotetrack);
 
-  animscripts\shared::placeWeaponOn(self.weapon, putGunOnTag);
-  self thread shotgunSwitchFinish(newGun);
+      animscripts\shared::placeWeaponOn(self.weapon, putGunOnTag);
+      self thread shotgunSwitchFinish(newGun);
 
-  self waittillmatch(flagName, pickupNewGunNotetrack);
-  self notify("complete_weapon_switch");
-}
+      self waittillmatch(flagName, pickupNewGunNotetrack);
+      self notify("complete_weapon_switch");
+    }
 
-shotgunSwitchFinish(newGun) {
-  self endon("death");
+    shotgunSwitchFinish(newGun) {
+      self endon("death");
 
-  self waittill_any("killanimscript", "movemode", "switchEnded", "complete_weapon_switch");
+      self waittill_any("killanimscript", "movemode", "switchEnded", "complete_weapon_switch");
 
-  self.lastweapon = self.weapon;
+      self.lastweapon = self.weapon;
 
-  animscripts\shared::placeWeaponOn(newGun, "right");
-  assert(self.weapon == newGun); // placeWeaponOn should have handled this
+      animscripts\shared::placeWeaponOn(newGun, "right");
+      assert(self.weapon == newGun); // placeWeaponOn should have handled this
 
-  // reset ammo (assume fully loaded weapon)
-  self.bulletsInClip = weaponClipSize(self.weapon);
-}
+      // reset ammo (assume fully loaded weapon)
+      self.bulletsInClip = weaponClipSize(self.weapon);
+    }

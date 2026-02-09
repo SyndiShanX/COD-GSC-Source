@@ -53,7 +53,7 @@ function _on_connect() {}
 function _on(slot, weapon) {
   cybercom::function_adc40f11(weapon, 1);
   level thread spawn_smokescreen(self, self hascybercomability("cybercom_smokescreen") == 2);
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_smokescreen");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
@@ -112,7 +112,7 @@ function private _cloudcreate(origin, weapon, createionfield) {
   cloud thread _deleteaftertime(getdvarint("scr_smokescreen_duration", 7));
   cloud thread _scaleovertime(getdvarint("scr_smokescreen_duration", 7), 1, 2);
   cloud setteam(self.team);
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     cloud setowner(self);
   }
   cloud.durationleft = getdvarint("scr_smokescreen_duration", 7);

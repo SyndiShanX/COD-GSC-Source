@@ -227,7 +227,7 @@ a10_warthog_strafe(var_0, var_1, var_2, var_3) {
   }
 
   level.player.a10_lastweapon = level.player getcurrentweapon();
-  setdvar("hideHudFast", 1);
+  setDvar("hideHudFast", 1);
   setsaveddvar("ammoCounterHide", 1);
   level.player.dont_allow_ammo_cache = 1;
   level.player disableweaponswitch();
@@ -459,7 +459,7 @@ a10_strafe_cleanup(var_0, var_1, var_2, var_3) {
   level.player common_scripts\utility::delaycall(1, ::enableweaponswitch);
   level.player common_scripts\utility::delaycall(1, ::enableweaponpickup);
   level.player common_scripts\utility::delaycall(1, ::allowmelee, 1);
-  setdvar("hideHudFast", 0);
+  setDvar("hideHudFast", 0);
   setsaveddvar("ammoCounterHide", 0);
   level.player.dont_allow_ammo_cache = undefined;
 }

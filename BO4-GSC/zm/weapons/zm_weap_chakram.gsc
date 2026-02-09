@@ -580,7 +580,7 @@ function_3adb0798(e_target, n_kills) {
       return 0;
     }
 
-    if(isplayer(e_target)) {
+    if(isPlayer(e_target)) {
       var_2f067119 = e_target gettagorigin("tag_weapon_left");
 
       if(!isDefined(var_2f067119)) {
@@ -608,7 +608,7 @@ function_3adb0798(e_target, n_kills) {
       var_81b38250 = distance(self.e_seeker.origin, v_target);
       n_travel_time = var_81b38250 * var_ece935b3 / var_e68de849;
       self.e_seeker moveto(v_target, n_travel_time);
-    } else if(isplayer(e_target)) {
+    } else if(isPlayer(e_target)) {
       self playSound(#"hash_2c86fd203e33ce7c");
       self.e_seeker.origin = self gettagorigin("tag_weapon_left");
       a_e_powerups = array::remove_undefined(self.e_seeker.var_fee68611);

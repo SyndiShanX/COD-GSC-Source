@@ -341,7 +341,7 @@ getwholescenedurationmin(var_0) {
 }
 
 func_13151(var_0, var_1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 

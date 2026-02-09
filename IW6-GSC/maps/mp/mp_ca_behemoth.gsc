@@ -19,23 +19,23 @@ main() {
 
   behemothSetMiniMap("compass_map_mp_ca_behemoth");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
-  setdvar("bucket", 1);
+  setDvar("bucket", 1);
 
   setdvar_cg_ng("r_specularColorScale", 1.4, 10.75);
   setdvar_cg_ng("r_diffuseColorScale", 1.72, 2.25);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.55");
-    SetDvar("sm_sunsamplesizenear", ".15");
+    setDvar("sm_sunShadowScale", "0.55");
+    setDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.56" + "");
-    SetDvar("sm_sunsamplesizenear", ".22");
+    setDvar("sm_sunShadowScale", "0.56" + "");
+    setDvar("sm_sunsamplesizenear", ".22");
   } else {
-    SetDvar("sm_sunShadowScale", "0.9");
-    SetDvar("sm_sunsamplesizenear", ".27");
+    setDvar("sm_sunShadowScale", "0.9");
+    setDvar("sm_sunsamplesizenear", ".27");
   }
 
   game["attackers"] = "allies";
@@ -94,7 +94,6 @@ update_fan() {
     trigger_box setCanDamage(false);
 
     self RotateYaw(RandomFloat(360), 1.0, 0, .75);
-
   }
 }
 
@@ -490,7 +489,6 @@ setup_mover_nodes() {
       } else
         good_to_go = 0;
     }
-
   }
 }
 

@@ -30,7 +30,7 @@ on_player_downed() {
   if(isDefined(self.laststandparams)) {
     attacker = self.laststandparams.attacker;
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       return;
     }
 

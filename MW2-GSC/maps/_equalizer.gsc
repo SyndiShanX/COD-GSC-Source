@@ -11,22 +11,19 @@ loadPresets() {
   // see _ambient.gsc for defining specialized filters
 
   // sample test eq filters
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  // up to three bands( 0, 1, 2 ) for a filter
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // up to three bands( 0, 1, 2 ) for a filter
   // filter types are: lowshelf, highshelf, bell, lowpass, highpass
   // freq ranges from 20 Hz to 20 kHz
   // gain has no code restricted range, but should probably be between + / - 18 dB
   // q must be > 0 and has no code restricted max
 
   // example of a three band filter
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  // defineFilter( "test", 0, "lowshelf", 3000, 6, 2 );
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // defineFilter( "test", 0, "lowshelf", 3000, 6, 2 );
   // defineFilter( "test", 1, "highshelf", 3000, -12, 2 );
   // defineFilter( "test", 2, "bell", 1500, 6, 3 );
 
   // example of a single band filter
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  // defineFilter( "single", 0, "highpass", 10000, 1, 1 );
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // defineFilter( "single", 0, "highpass", 10000, 1, 1 );
 
   //***********************************************************
 

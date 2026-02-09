@@ -764,7 +764,7 @@ func_8A0B(var_0, var_1, var_2, var_3) {
 }
 
 func_764E() {
-  return int(getdvar("g_speed"));
+  return int(getDvar("g_speed"));
 }
 
 func_764F(var_0) {
@@ -848,7 +848,7 @@ func_267F() {
 
   var_0 = getaiarray("axis");
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.enemy) && isplayer(var_2.enemy)) {
+    if(isDefined(var_2.enemy) && isPlayer(var_2.enemy)) {
       return;
     }
   }

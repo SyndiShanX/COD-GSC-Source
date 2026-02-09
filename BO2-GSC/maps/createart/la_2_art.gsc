@@ -9,8 +9,8 @@
 
 main(n_fog_blend_time) {
   level.tweakfile = 1;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   b_blend_exposure = 0;
 
   if(isDefined(n_fog_blend_time)) {
@@ -23,8 +23,8 @@ main(n_fog_blend_time) {
   if(b_blend_exposure)
     level thread blend_exposure_over_time(n_exposure, n_fog_blend_time);
   else {
-    setdvar("r_exposureTweak", 1);
-    setdvar("r_exposureValue", n_exposure);
+    setDvar("r_exposureTweak", 1);
+    setDvar("r_exposureValue", n_exposure);
   }
 
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
@@ -63,14 +63,14 @@ blend_exposure_over_time(n_exposure_final, n_time) {
   n_exposure_current = getdvarfloat(#"r_exposureValue");
   n_exposure_change_total = n_exposure_final - n_exposure_current;
   n_exposure_change_per_frame = n_exposure_change_total / n_frames;
-  setdvar("r_exposureTweak", 1);
+  setDvar("r_exposureTweak", 1);
 
   for(i = 0; i < n_frames; i++) {
-    setdvar("r_exposureValue", n_exposure_current + n_exposure_change_per_frame * i);
+    setDvar("r_exposureValue", n_exposure_current + n_exposure_change_per_frame * i);
     wait 0.05;
   }
 
-  setdvar("r_exposureValue", n_exposure_final);
+  setDvar("r_exposureValue", n_exposure_final);
 }
 
 fog_intro() {
@@ -115,26 +115,26 @@ enter_jet_hud(m_player_body) {
 }
 
 eject() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
 }
 
 outro() {
-  setdvar("r_rimIntensity", 5);
+  setDvar("r_rimIntensity", 5);
   setsaveddvar("sm_sunSampleSizeNear", 0.5);
-  level.map_default_sun_direction = getdvar(#"r_lightTweakSunDirection");
+  level.map_default_sun_direction = getDvar(#"r_lightTweakSunDirection");
   setsaveddvar("r_lightTweakSunDirection", (-20, 50, 0));
   level.player visionsetnaked("sp_la_2_end", 1);
-  setdvar("r_rimIntensity_debug", 0);
+  setDvar("r_rimIntensity_debug", 0);
 }
 
 outro_samuels() {
-  setdvar("r_rimIntensity", 5);
+  setDvar("r_rimIntensity", 5);
   setsaveddvar("sm_sunSampleSizeNear", 0.5);
-  level.map_default_sun_direction = getdvar(#"r_lightTweakSunDirection");
+  level.map_default_sun_direction = getDvar(#"r_lightTweakSunDirection");
   setsaveddvar("r_lightTweakSunDirection", (-45, 53, 0));
   level.player visionsetnaked("sp_la_2_end", 1);
-  setdvar("r_rimIntensity_debug", 0);
+  setDvar("r_rimIntensity_debug", 0);
 }
 
 crash_eject(m_player_body) {

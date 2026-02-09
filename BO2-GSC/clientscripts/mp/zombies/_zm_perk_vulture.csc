@@ -569,7 +569,6 @@ vulture_vision_enable(localclientnumber) {
       str_perk_machine_fx = "vulture_perk_machine_glow_speed";
 
       println("ZM PERK VULTURE >> perk machine with name '" + a_keys[i] + "' is missing vulture perk fx!");
-
     }
 
     if(a_keys[i] == "specialty_weapupgrade" || a_keys[i] == "specialty_nomotionsensor" || !self hasperk(localclientnumber, a_keys[i])) {

@@ -101,7 +101,7 @@ function function_f34bd805(str_piece) {
   if(self == level) {
     a_players = level.players;
   } else {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       a_players = array(self);
     } else {
       return;

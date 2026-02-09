@@ -4,14 +4,14 @@
 *********************************************/
 
 init() {
-  setdvar("match_running", 1);
+  setDvar("match_running", 1);
   level.splitscreen = issplitscreen();
   scripts\mp\utility::func_F305();
   level.onlinegame = getdvarint("onlinegame");
   level.rankedmatch = (level.onlinegame && !getdvarint("xblive_privatematch")) || getdvarint("force_ranking");
   scripts\mp\utility::func_F7F1();
-  level.script = tolower(getdvar("mapname"));
-  level.gametype = tolower(getdvar("g_gametype"));
+  level.script = tolower(getDvar("mapname"));
+  level.gametype = tolower(getDvar("g_gametype"));
   level.teamnamelist = ["axis", "allies"];
   level.otherteam["allies"] = "axis";
   level.otherteam["axis"] = "allies";
@@ -36,7 +36,7 @@ init() {
   level.var_D420 = [];
   func_DEEC();
   if(scripts\mp\utility::matchmakinggame()) {
-    var_0 = " LB_MAP_" + getdvar("ui_mapname");
+    var_0 = " LB_MAP_" + getDvar("ui_mapname");
     var_1 = "";
     var_2 = "";
     var_2 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
@@ -90,14 +90,14 @@ func_9694(var_0) {
 
 func_DEEC() {
   setomnvar("ui_bomb_timer", 0);
-  if(getdvar("r_reflectionProbeGenerate") != "1") {
+  if(getDvar("r_reflectionProbeGenerate") != "1") {
     setomnvar("ui_nuke_end_milliseconds", 0);
   }
 
-  setdvar("ui_danger_team", "");
-  setdvar("ui_inhostmigration", 0);
-  setdvar("ui_override_halftime", 0);
-  setdvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
+  setDvar("ui_danger_team", "");
+  setDvar("ui_inhostmigration", 0);
+  setDvar("ui_override_halftime", 0);
+  setDvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
 }
 
 setupcallbacks() {

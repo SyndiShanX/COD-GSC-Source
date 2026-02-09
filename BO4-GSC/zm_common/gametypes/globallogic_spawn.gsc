@@ -258,7 +258,7 @@ _spawnplayer() {
 
   print("<dev string:x43>" + self.origin[0] + "<dev string:x48>" + self.origin[1] + "<dev string:x48>" + self.origin[2] + "<dev string:x4c>");
 
-  setdvar(#"scr_selecting_location", "");
+  setDvar(#"scr_selecting_location", "");
   self zm_utility::set_max_health();
 
   if(game.state == "postgame") {

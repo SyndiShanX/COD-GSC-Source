@@ -38,7 +38,6 @@ onPlayerSpawned() {
 
   for(;;) {
     self waittill("spawned_player");
-
   }
 }
 
@@ -108,7 +107,6 @@ watchSoflamUsage() {
 
     wait(0.05);
   }
-
 }
 
 playLockSound() {
@@ -162,7 +160,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (300, 0, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -171,7 +168,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (0, 300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -180,7 +176,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (0, -300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -189,7 +184,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (300, 300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -198,7 +192,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (-300, 0, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -207,7 +200,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (-300, -300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -216,7 +208,6 @@ attackLasedTarget(targPoint) {
       foundAngle = true;
       startPos = targPoint + (300, -300, upQuantity);
     }
-
   }
 
   if(!foundAngle) {
@@ -284,7 +275,6 @@ loopTriggeredEffect(effect, missile) {
     TriggerFX(effect);
     wait(0.05);
   }
-
 }
 
 lasedMissileDistance(remote) {
@@ -520,7 +510,7 @@ damageTracker() {
 
     modifiedDamage = damage;
 
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 
       if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
@@ -557,7 +547,6 @@ damageTracker() {
         attacker thread maps\mp\gametypes\_rank::giveRankXP("kill", 50, weapon, meansOfDeath);
         attacker thread maps\mp\gametypes\_rank::xpEventPopup("destroyed_remote_mortar");
         thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, attacker, damage, meansOfDeath, weapon);
-
       }
 
       if(isDefined(self.owner))

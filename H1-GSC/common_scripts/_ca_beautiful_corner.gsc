@@ -5,7 +5,7 @@
 ***************************************************/
 
 initialize() {
-  if(getdvar("beautiful_corner") != "1") {
+  if(getDvar("beautiful_corner") != "1") {
     cleanup();
     return 0;
   }

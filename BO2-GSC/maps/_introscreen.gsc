@@ -15,8 +15,9 @@ main() {
   precachestring(&"hud_close_title_card");
   precachestring(&"hud_add_title_line");
 
-  if(getdvar(#"_id_CCAFCC91") == "")
-    setdvar("introscreen", "1");
+  if(getDvar(#"_id_CCAFCC91") == "") {
+    setDvar("introscreen", "1");
+  }
 
   level.splitscreen = getdvarint(#"splitscreen");
   level.hidef = getdvarint(#"hiDef");
@@ -127,26 +128,31 @@ introscreen_lui_typewriter_delay(level_prefix, number_of_lines, totaltime, delay
   waittillframeend;
   skipintro = 0;
 
-  if(isDefined(level.start_point))
+  if(isDefined(level.start_point)) {
     skipintro = level.start_point != "default";
+  }
 
-  if(isDefined(level.skipto_point))
+  if(isDefined(level.skipto_point)) {
     skipintro = !maps\_skipto::is_default_skipto();
+  }
 
-  if(getdvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled)
+  if(getDvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled) {
     skipintro = 1;
+  }
 
   if(skipintro) {
-    if(isDefined(level.introblackbacking))
+    if(isDefined(level.introblackbacking)) {
       level.introblackbacking destroy();
+    }
 
     flag_wait("all_players_connected");
 
     if(isDefined(level.custom_introscreen)) {
       [[level.custom_introscreen]](istring(level_prefix), number_of_lines, totaltime, text_color);
 
-      if(!isDefined(level.texture_wait_was_called))
+      if(!isDefined(level.texture_wait_was_called)) {
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+      }
 
       return;
     }
@@ -166,8 +172,9 @@ introscreen_lui_typewriter_delay(level_prefix, number_of_lines, totaltime, delay
   if(isDefined(level.custom_introscreen)) {
     [[level.custom_introscreen]](istring(level_prefix), number_of_lines, totaltime, text_color);
 
-    if(!isDefined(level.texture_wait_was_called))
+    if(!isDefined(level.texture_wait_was_called)) {
       iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+    }
 
     return;
   }
@@ -188,15 +195,17 @@ introscreen_lui_typewriter_delay(level_prefix, number_of_lines, totaltime, delay
 
   flag_wait("all_players_connected");
 
-  if(!isDefined(level.introscreen_dontfreezcontrols))
+  if(!isDefined(level.introscreen_dontfreezcontrols)) {
     freezecontrols_all(1);
+  }
 
   level._introscreen = 1;
   wait 0.5;
   level.introstring = [];
 
-  if(!isDefined(totaltime))
+  if(!isDefined(totaltime)) {
     totaltime = 14.25;
+  }
 
   decay_start = int(1000 * totaltime);
   totalpausetime = 0;
@@ -209,18 +218,20 @@ introscreen_lui_typewriter_delay(level_prefix, number_of_lines, totaltime, delay
   } else {
     wait(totaltime - totalpausetime);
 
-    if(isDefined(delay_after_text))
+    if(isDefined(delay_after_text)) {
       wait(delay_after_text);
-    else
+    } else {
       wait 2.5;
+    }
   }
 
   waittill_textures_loaded();
 
-  if(isDefined(level.introscreen_shader_fadeout_time))
+  if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblackbacking fadeovertime(level.introscreen_shader_fadeout_time);
-  else
+  } else {
     level.introblackbacking fadeovertime(1.5);
+  }
 
   level.introblackbacking.alpha = 0;
   flag_set("starting final intro screen fadeout");
@@ -248,8 +259,9 @@ introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, 
   horz_align = "center";
   vert_align = "middle";
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "lower_left";
+  }
 
   if(isDefined(type)) {
     switch (type) {
@@ -264,10 +276,11 @@ introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, 
   }
 
   if(!isDefined(scale)) {
-    if(level.splitscreen && !level.hidef)
+    if(level.splitscreen && !level.hidef) {
       fontscale = 2.5;
-    else
+    } else {
       fontscale = 1.5;
+    }
   } else
     fontscale = scale;
 
@@ -289,14 +302,17 @@ introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, 
   level.introstring[index] fadeovertime(1.2);
   level.introstring[index].alpha = 1;
 
-  if(isDefined(font))
+  if(isDefined(font)) {
     level.introstring[index].font = font;
+  }
 
-  if(isDefined(color))
+  if(isDefined(color)) {
     level.introstring[index].color = color;
+  }
 
-  if(isDefined(level.introstring_text_color))
+  if(isDefined(level.introstring_text_color)) {
     level.introstring[index].color = level.introstring_text_color;
+  }
 }
 
 introscreen_create_typewriter_line(string, letter_time, decay_start_time, decay_duration, color, type, font) {
@@ -326,8 +342,9 @@ introscreen_create_typewriter_line(string, letter_time, decay_start_time, decay_
   horz_align = "center";
   vert_align = "middle";
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "lower_left";
+  }
 
   if(isDefined(type)) {
     switch (type) {
@@ -342,10 +359,11 @@ introscreen_create_typewriter_line(string, letter_time, decay_start_time, decay_
   }
 
   if(!isDefined(scale)) {
-    if(level.splitscreen && !level.hidef)
+    if(level.splitscreen && !level.hidef) {
       fontscale = 2.5;
-    else
+    } else {
       fontscale = 1.5;
+    }
   } else
     fontscale = scale;
 
@@ -367,14 +385,17 @@ introscreen_create_typewriter_line(string, letter_time, decay_start_time, decay_
   level.introstring[index] fadeovertime(1.2);
   level.introstring[index].alpha = 1;
 
-  if(isDefined(font))
+  if(isDefined(font)) {
     level.introstring[index].font = font;
+  }
 
-  if(isDefined(color))
+  if(isDefined(color)) {
     level.introstring[index].color = color;
+  }
 
-  if(isDefined(level.introstring_text_color))
+  if(isDefined(level.introstring_text_color)) {
     level.introstring[index].color = level.introstring_text_color;
+  }
 }
 
 introscreen_create_line(string, type, scale, font, color) {
@@ -394,8 +415,9 @@ introscreen_create_line(string, type, scale, font, color) {
   horz_align = "center";
   vert_align = "middle";
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "lower_left";
+  }
 
   if(isDefined(type)) {
     switch (type) {
@@ -410,10 +432,11 @@ introscreen_create_line(string, type, scale, font, color) {
   }
 
   if(!isDefined(scale)) {
-    if(level.splitscreen && !level.hidef)
+    if(level.splitscreen && !level.hidef) {
       fontscale = 2.75;
-    else
+    } else {
       fontscale = 1.75;
+    }
   } else
     fontscale = scale;
 
@@ -433,11 +456,13 @@ introscreen_create_line(string, type, scale, font, color) {
   level.introstring[index] fadeovertime(1.2);
   level.introstring[index].alpha = 1;
 
-  if(isDefined(font))
+  if(isDefined(font)) {
     level.introstring[index].font = font;
+  }
 
-  if(isDefined(color))
+  if(isDefined(color)) {
     level.introstring[index].color = color;
+  }
 }
 
 introscreen_fadeouttext() {
@@ -448,8 +473,9 @@ introscreen_fadeouttext() {
 
   wait 1.5;
 
-  for(i = 0; i < level.introstring.size; i++)
+  for(i = 0; i < level.introstring.size; i++) {
     level.introstring[i] destroy();
+  }
 
   wait 0.25;
 }
@@ -459,26 +485,31 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
   waittillframeend;
   skipintro = 0;
 
-  if(isDefined(level.start_point))
+  if(isDefined(level.start_point)) {
     skipintro = level.start_point != "default";
+  }
 
-  if(isDefined(level.skipto_point))
+  if(isDefined(level.skipto_point)) {
     skipintro = !maps\_skipto::is_default_skipto();
+  }
 
-  if(getdvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled)
+  if(getDvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled) {
     skipintro = 1;
+  }
 
   if(skipintro) {
-    if(isDefined(level.introblackbacking))
+    if(isDefined(level.introblackbacking)) {
       level.introblackbacking destroy();
+    }
 
     flag_wait("all_players_connected");
 
     if(isDefined(level.custom_introscreen)) {
       [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
-      if(!isDefined(level.texture_wait_was_called))
+      if(!isDefined(level.texture_wait_was_called)) {
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+      }
 
       return;
     }
@@ -498,8 +529,9 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
   if(isDefined(level.custom_introscreen)) {
     [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
-    if(!isDefined(level.texture_wait_was_called))
+    if(!isDefined(level.texture_wait_was_called)) {
       iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+    }
 
     return;
   }
@@ -511,32 +543,38 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
     level.introblackbacking.horzalign = "fullscreen";
     level.introblackbacking.vertalign = "fullscreen";
 
-    if(!isDefined(level.introscreen_shader))
+    if(!isDefined(level.introscreen_shader)) {
       level.introblackbacking setshader("white", 640, 480);
-    else if(level.introscreen_shader != "none")
+    } else if(level.introscreen_shader != "none") {
       level.introblackbacking setshader(level.introscreen_shader, 640, 480);
+    }
   }
 
   flag_wait("all_players_connected");
 
-  if(!isDefined(level.introscreen_dontfreezcontrols))
+  if(!isDefined(level.introscreen_dontfreezcontrols)) {
     freezecontrols_all(1);
+  }
 
   level._introscreen = 1;
   wait 0.5;
   level.introstring = [];
 
-  if(!isDefined(pausetime))
+  if(!isDefined(pausetime)) {
     pausetime = 0.75;
+  }
 
-  if(!isDefined(totaltime))
+  if(!isDefined(totaltime)) {
     totaltime = 14.25;
+  }
 
-  if(!isDefined(time_to_redact))
+  if(!isDefined(time_to_redact)) {
     time_to_redact = 0.525 * totaltime;
+  }
 
-  if(!isDefined(rubout_time))
+  if(!isDefined(rubout_time)) {
     rubout_time = 1;
+  }
 
   start_rubout_time = int(time_to_redact * 1000);
   totalpausetime = 0;
@@ -589,18 +627,20 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
   } else {
     wait(totaltime - totalpausetime);
 
-    if(isDefined(delay_after_text))
+    if(isDefined(delay_after_text)) {
       wait(delay_after_text);
-    else
+    } else {
       wait 2.5;
+    }
   }
 
   waittill_textures_loaded();
 
-  if(isDefined(level.introscreen_shader_fadeout_time))
+  if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblackbacking fadeovertime(level.introscreen_shader_fadeout_time);
-  else
+  } else {
     level.introblackbacking fadeovertime(1.5);
+  }
 
   level.introblackbacking.alpha = 0;
   flag_set("starting final intro screen fadeout");
@@ -616,26 +656,31 @@ introscreen_typewriter_delay(string1, string2, string3, string4, string5, letter
   waittillframeend;
   skipintro = 0;
 
-  if(isDefined(level.start_point))
+  if(isDefined(level.start_point)) {
     skipintro = level.start_point != "default";
+  }
 
-  if(isDefined(level.skipto_point))
+  if(isDefined(level.skipto_point)) {
     skipintro = !maps\_skipto::is_default_skipto();
+  }
 
-  if(getdvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled)
+  if(getDvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled) {
     skipintro = 1;
+  }
 
   if(skipintro) {
-    if(isDefined(level.introblackbacking))
+    if(isDefined(level.introblackbacking)) {
       level.introblackbacking destroy();
+    }
 
     flag_wait("all_players_connected");
 
     if(isDefined(level.custom_introscreen)) {
       [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
-      if(!isDefined(level.texture_wait_was_called))
+      if(!isDefined(level.texture_wait_was_called)) {
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+      }
 
       return;
     }
@@ -655,8 +700,9 @@ introscreen_typewriter_delay(string1, string2, string3, string4, string5, letter
   if(isDefined(level.custom_introscreen)) {
     [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
-    if(!isDefined(level.texture_wait_was_called))
+    if(!isDefined(level.texture_wait_was_called)) {
       iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+    }
 
     return;
   }
@@ -677,24 +723,29 @@ introscreen_typewriter_delay(string1, string2, string3, string4, string5, letter
 
   flag_wait("all_players_connected");
 
-  if(!isDefined(level.introscreen_dontfreezcontrols))
+  if(!isDefined(level.introscreen_dontfreezcontrols)) {
     freezecontrols_all(1);
+  }
 
   level._introscreen = 1;
   wait 0.5;
   level.introstring = [];
 
-  if(!isDefined(letter_time))
+  if(!isDefined(letter_time)) {
     letter_time = 0.1;
+  }
 
-  if(!isDefined(decay_duration))
+  if(!isDefined(decay_duration)) {
     decay_duration = 0.5;
+  }
 
-  if(!isDefined(pausetime))
+  if(!isDefined(pausetime)) {
     pausetime = 1.5;
+  }
 
-  if(!isDefined(totaltime))
+  if(!isDefined(totaltime)) {
     totaltime = 14.25;
+  }
 
   letter_time = int(1000 * letter_time);
   decay_duration = int(1000 * decay_duration);
@@ -743,18 +794,20 @@ introscreen_typewriter_delay(string1, string2, string3, string4, string5, letter
   } else {
     wait(totaltime - totalpausetime);
 
-    if(isDefined(delay_after_text))
+    if(isDefined(delay_after_text)) {
       wait(delay_after_text);
-    else
+    } else {
       wait 2.5;
+    }
   }
 
   waittill_textures_loaded();
 
-  if(isDefined(level.introscreen_shader_fadeout_time))
+  if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblackbacking fadeovertime(level.introscreen_shader_fadeout_time);
-  else
+  } else {
     level.introblackbacking fadeovertime(1.5);
+  }
 
   level.introblackbacking.alpha = 0;
   flag_set("starting final intro screen fadeout");
@@ -770,14 +823,17 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   waittillframeend;
   skipintro = 0;
 
-  if(isDefined(level.start_point))
+  if(isDefined(level.start_point)) {
     skipintro = level.start_point != "default";
+  }
 
-  if(isDefined(level.skipto_point))
+  if(isDefined(level.skipto_point)) {
     skipintro = !maps\_skipto::is_default_skipto();
+  }
 
-  if(getdvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled)
+  if(getDvar(#"_id_CCAFCC91") == "0" || level.createfx_enabled) {
     skipintro = 1;
+  }
 
   if(skipintro) {
     flag_wait("all_players_connected");
@@ -785,8 +841,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
     if(isDefined(level.custom_introscreen)) {
       [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
-      if(!isDefined(level.texture_wait_was_called))
+      if(!isDefined(level.texture_wait_was_called)) {
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+      }
 
       return;
     }
@@ -806,8 +863,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   if(isDefined(level.custom_introscreen)) {
     [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
-    if(!isDefined(level.texture_wait_was_called))
+    if(!isDefined(level.texture_wait_was_called)) {
       iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
+    }
 
     return;
   }
@@ -818,53 +876,63 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   level.introblackbacking.horzalign = "fullscreen";
   level.introblackbacking.vertalign = "fullscreen";
 
-  if(!isDefined(level.introscreen_shader))
+  if(!isDefined(level.introscreen_shader)) {
     level.introblackbacking setshader("black", 640, 480);
-  else if(level.introscreen_shader != "none")
+  } else if(level.introscreen_shader != "none") {
     level.introblackbacking setshader(level.introscreen_shader, 640, 480);
+  }
 
-  if(!isDefined(skipwait))
+  if(!isDefined(skipwait)) {
     flag_wait("all_players_connected");
+  }
 
-  if(!isDefined(level.introscreen_dontfreezcontrols))
+  if(!isDefined(level.introscreen_dontfreezcontrols)) {
     freezecontrols_all(1);
+  }
 
   level._introscreen = 1;
 
-  if(isDefined(skipwait))
+  if(isDefined(skipwait)) {
     flag_wait("all_players_connected");
+  }
 
   wait 0.5;
   level.introstring = [];
 
-  if(isDefined(string1))
+  if(isDefined(string1)) {
     introscreen_create_line(string1);
+  }
 
-  if(isDefined(pausetime1))
+  if(isDefined(pausetime1)) {
     wait(pausetime1);
-  else
+  } else {
     wait 2;
+  }
 
-  if(isDefined(string2))
+  if(isDefined(string2)) {
     introscreen_create_line(string2);
+  }
 
-  if(isDefined(string3))
+  if(isDefined(string3)) {
     introscreen_create_line(string3);
+  }
 
   if(isDefined(string4)) {
-    if(isDefined(pausetime2))
+    if(isDefined(pausetime2)) {
       wait(pausetime2);
-    else
+    } else {
       wait 2;
+    }
 
     introscreen_create_line(string4);
   }
 
   if(isDefined(string5)) {
-    if(isDefined(pausetime2))
+    if(isDefined(pausetime2)) {
       wait(pausetime2);
-    else
+    } else {
       wait 2;
+    }
 
     introscreen_create_line(string5);
   }
@@ -876,10 +944,11 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
     flag_wait(level.introscreen_waitontext_flag);
   }
 
-  if(isDefined(timebeforefade))
+  if(isDefined(timebeforefade)) {
     wait(timebeforefade);
-  else
+  } else {
     wait 3;
+  }
 
   waittill_textures_loaded();
   level.introblackbacking fadeovertime(1.5);
@@ -893,16 +962,18 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
 }
 
 introscreen_player_connect() {
-  if(isDefined(level._introscreen) && level._introscreen)
+  if(isDefined(level._introscreen) && level._introscreen) {
     self freezecontrols(1);
+  }
 }
 
 introscreen_report_disconnected_clients() {
   flag_wait("introscreen_complete");
 
   if(isDefined(level._disconnected_clients)) {
-    for(i = 0; i < level._disconnected_clients.size; i++)
+    for(i = 0; i < level._disconnected_clients.size; i++) {
       reportclientdisconnected(level._disconnected_clients[i]);
+    }
   }
 }
 

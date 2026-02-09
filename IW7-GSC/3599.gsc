@@ -157,7 +157,7 @@ watchforincidentalplayerdamage(var_0) {
 
     var_6 = scripts\mp\weapons::getempdamageents(self.origin, 76.8, 0);
     foreach(var_8 in var_6) {
-      if(!isDefined(var_8) || !isDefined(var_8.owner) || isplayer(var_8)) {
+      if(!isDefined(var_8) || !isDefined(var_8.owner) || isPlayer(var_8)) {
         continue;
       }
 
@@ -195,7 +195,7 @@ watchfordirectplayerdamage(var_0, var_1) {
       continue;
     }
 
-    if(!isplayer(var_3) && !isagent(var_3)) {
+    if(!isPlayer(var_3) && !isagent(var_3)) {
       continue;
     }
 

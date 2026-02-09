@@ -190,7 +190,7 @@ function function_e5e94978() {
   self endon("death");
   while(isalive(self)) {
     self waittill("damage");
-    if(isplayer(self.attacker)) {
+    if(isPlayer(self.attacker)) {
       if(zm_spawner::player_using_hi_score_weapon(self.attacker)) {
         str_notify = "damage";
       } else {
@@ -209,7 +209,7 @@ function function_e5e94978() {
 
 function function_1dcdd145() {
   self waittill("death");
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       self.attacker zm_score::player_add_points("death", self.damagemod, self.damagelocation, undefined, self.team, self.damageweapon);
     }

@@ -28,17 +28,16 @@ mechz_debug() {
       }
     }
   }
-
 }
 
 setup_devgui() {
-  setdvar("spawn_Mechz", "off");
-  setdvar("force_mechz_jump", "off");
-  setdvar("test_mechz_tank", "off");
-  setdvar("test_mechz_robot", "off");
-  setdvar("reset_mechz_thinking", "off");
-  setdvar("test_mechz_sprint", "off");
-  setdvar("mechz_force_behavior", "none");
+  setDvar("spawn_Mechz", "off");
+  setDvar("force_mechz_jump", "off");
+  setDvar("test_mechz_tank", "off");
+  setDvar("test_mechz_robot", "off");
+  setDvar("reset_mechz_thinking", "off");
+  setDvar("test_mechz_sprint", "off");
+  setDvar("mechz_force_behavior", "none");
   setdvarint("mechz_behavior_orient", 0);
   setdvarint("mechz_behavior_dist", 300);
   adddebugcommand("devgui_cmd \"Zombies/Zombie Spawning:2/Spawn Zombie:1/Mech Zombie:1\" \"spawn_Mechz on\"\n");
@@ -71,7 +70,7 @@ setup_devgui() {
 
 watch_devgui_mechz() {
   while(true) {
-    if(getdvar(#"_id_877D2B64") == "on") {
+    if(getDvar(#"_id_877D2B64") == "on") {
       mechz_health_increases();
       level.mechz_left_to_spawn = 1;
 
@@ -79,12 +78,12 @@ watch_devgui_mechz() {
         level.round_number++;
 
       level notify("spawn_mechz");
-      setdvar("spawn_Mechz", "off");
+      setDvar("spawn_Mechz", "off");
       level.mechz_last_spawn_round = 0;
     }
 
-    if(getdvar(#"_id_7D9211F9") != "none") {
-      behavior = getdvar(#"_id_7D9211F9");
+    if(getDvar(#"_id_7D9211F9") != "none") {
+      behavior = getDvar(#"_id_7D9211F9");
       zombies = getaiarray("axis");
 
       for(i = 0; i < zombies.size; i++) {
@@ -92,11 +91,11 @@ watch_devgui_mechz() {
           zombies[i] thread mechz_force_behavior(behavior);
       }
 
-      setdvar("mechz_force_behavior", "none");
+      setDvar("mechz_force_behavior", "none");
     }
 
-    if(getdvar(#"_id_BD7CA008") == "on") {
-      setdvar("test_mechz_tank", "off");
+    if(getDvar(#"_id_BD7CA008") == "on") {
+      setDvar("test_mechz_tank", "off");
       mechz = undefined;
       zombies = getaiarray("axis");
 
@@ -115,8 +114,8 @@ watch_devgui_mechz() {
       mechz setgoalpos(mechz.goal_pos);
     }
 
-    if(getdvar(#"_id_6CF3EB40") == "on") {
-      setdvar("test_mechz_robot", "off");
+    if(getDvar(#"_id_6CF3EB40") == "on") {
+      setDvar("test_mechz_robot", "off");
       mechz = undefined;
       zombies = getaiarray("axis");
 
@@ -135,8 +134,8 @@ watch_devgui_mechz() {
       mechz setgoalpos(mechz.goal_pos);
     }
 
-    if(getdvar(#"_id_0DE1409A") == "on") {
-      setdvar("test_mechz_sprint", "off");
+    if(getDvar(#"_id_0DE1409A") == "on") {
+      setDvar("test_mechz_sprint", "off");
       zombies = getaiarray("axis");
 
       for(i = 0; i < zombies.size; i++) {
@@ -145,8 +144,8 @@ watch_devgui_mechz() {
       }
     }
 
-    if(getdvar(#"_id_772BCD39") == "on") {
-      setdvar("reset_mechz_thinking", "off");
+    if(getDvar(#"_id_772BCD39") == "on") {
+      setDvar("reset_mechz_thinking", "off");
       zombies = getaiarray("axis");
 
       for(i = 0; i < zombies.size; i++) {
@@ -159,7 +158,6 @@ watch_devgui_mechz() {
 
     wait 0.1;
   }
-
 }
 
 mechz_force_behavior(behavior) {
@@ -194,7 +192,6 @@ mechz_force_behavior(behavior) {
     self.force_behavior = 0;
     self notify("kill_force_behavior");
   }
-
 }
 
 get_behavior_orient() {
@@ -231,7 +228,6 @@ align_test_struct() {
     level.test_align_struct.angles = get_behavior_orient();
     wait 0.05;
   }
-
 }
 
 scripted_behavior(anim_scripted_name, notify_name) {
@@ -248,7 +244,6 @@ mechz_force_jump_in() {
     wait 0.2;
     self scripted_behavior("zm_spawn", "jump_anim");
   }
-
 }
 
 mechz_force_jump_out() {
@@ -265,7 +260,6 @@ mechz_force_jump_out() {
     self show();
     self scripted_behavior("zm_fly_in", "jump_anim");
   }
-
 }
 
 #using_animtree("mechz_claw");
@@ -359,7 +353,6 @@ mechz_force_claw_attack() {
 
     self scripted_behavior("zm_flamethrower_claw_victim", "flamethrower_anim");
   }
-
 }
 
 mechz_force_damage_armor() {
@@ -427,5 +420,4 @@ mechz_force_melee() {
     wait 0.2;
     self scripted_behavior("zm_melee_stand", "melee_anim");
   }
-
 }

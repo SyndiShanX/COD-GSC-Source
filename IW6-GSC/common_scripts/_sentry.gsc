@@ -387,7 +387,7 @@ sentry_death_wait() {
   if(common_scripts\utility::issp())
     self call[[level.freeentitysentient_func]]();
 
-  if(!common_scripts\utility::issp() && isDefined(var_0) && isplayer(var_0)) {
+  if(!common_scripts\utility::issp() && isDefined(var_0) && isPlayer(var_0)) {
     if(isDefined(self.owner))
       self.owner thread[[level.leaderdialogonplayer_func]]("destroy_sentry", "sentry_status");
 
@@ -423,7 +423,7 @@ sentry_death_wait() {
 
   level.placed_sentry = common_scripts\utility::array_remove(level.placed_sentry, self);
 
-  if(!common_scripts\utility::issp() || getdvar("specialops") == "1")
+  if(!common_scripts\utility::issp() || getDvar("specialops") == "1")
     thread removedeadsentry();
 }
 
@@ -506,7 +506,7 @@ sentry_player_use_wait() {
   self.ignoreme = 1;
   self setCanDamage(0);
 
-  if(isDefined(self.carrier) && isplayer(self.carrier))
+  if(isDefined(self.carrier) && isPlayer(self.carrier))
     self.carrier allowlean(0);
 
   self makeunusable();
@@ -563,7 +563,7 @@ place_sentry(var_0) {
     level endon("end_game");
   }
 
-  if(isDefined(var_0.carrier) && isplayer(var_0.carrier))
+  if(isDefined(var_0.carrier) && isPlayer(var_0.carrier))
     var_0.carrier allowlean(1);
 
   self.placingsentry = undefined;
@@ -661,11 +661,14 @@ sentry_overheat_debug() {
 
     if(self.overheated) {
       var_1 = "{{{ ";
-      var_2 = " }}}";
+      var_2 = " }
     }
-
-    wait 0.2;
   }
+  ";
+}
+
+wait 0.2;
+}
 }
 
 sentry_overheat_deactivate() {
@@ -1214,7 +1217,7 @@ sentry_health_monitor() {
   while(self.health > 0) {
     self waittill("damage", var_5, var_0, var_6, var_7, var_1, var_8, var_9);
 
-    if(isDefined(var_0) && !isplayer(var_0)) {
+    if(isDefined(var_0) && !isPlayer(var_0)) {
       var_2 = var_2 + var_5;
       var_3 = var_3 + (gettime() - var_4);
       var_4 = gettime();
@@ -1240,7 +1243,7 @@ sentry_health_monitor() {
       }
     }
 
-    if(!common_scripts\utility::issp() && isDefined(var_0) && isplayer(var_0) && var_0 sentry_attacker_is_friendly(self)) {
+    if(!common_scripts\utility::issp() && isDefined(var_0) && isPlayer(var_0) && var_0 sentry_attacker_is_friendly(self)) {
       self.health = self.currenthealth;
       return;
     }
@@ -1248,7 +1251,7 @@ sentry_health_monitor() {
     if(isDefined(level.stat_track_damage_func) && isDefined(var_0))
       var_0[[level.stat_track_damage_func]]();
 
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       if(!common_scripts\utility::issp())
         var_0[[level.func["damagefeedback"]]]("false");
       else if(is_specialop())
@@ -1470,7 +1473,7 @@ sentry_attacker_can_get_xp(var_0) {
   if(!isDefined(self))
     return 0;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return 0;
 
   if(!isDefined(level.onxpevent))
@@ -1495,7 +1498,7 @@ sentry_attacker_is_friendly(var_0) {
   if(!isDefined(self))
     return 0;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return 0;
 
   if(!level.teambased)

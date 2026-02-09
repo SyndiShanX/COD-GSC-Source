@@ -640,7 +640,7 @@ function function_7b697614(str_vo_alias, n_delay = 0, b_wait_if_busy = 0, n_prio
   } else {
     if(var_248b6239 == 0) {
       var_2df3d133 = str_vo_alias + "_vo_done";
-      if(isactor(self) || isplayer(self)) {
+      if(isactor(self) || isPlayer(self)) {
         self playsoundwithnotify(str_vo_alias, var_2df3d133, "J_head");
       } else {
         self playsoundwithnotify(str_vo_alias, var_2df3d133);
@@ -1009,7 +1009,7 @@ function function_edee8c1e() {
 function function_5b684ae5() {
   while(true) {
     level waittill("trap_kill", e_zombie, var_f1c4d54d);
-    var_ecf98bb6 = (isplayer(var_f1c4d54d) ? var_f1c4d54d : var_f1c4d54d.activated_by_player);
+    var_ecf98bb6 = (isPlayer(var_f1c4d54d) ? var_f1c4d54d : var_f1c4d54d.activated_by_player);
     e_zombie function_52f36cdc("generic", var_ecf98bb6);
   }
 }
@@ -1362,7 +1362,7 @@ function function_6a2d6df(str_type, var_614a7182 = 30) {
 }
 
 function function_f7879c72(e_attacker) {
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
   if(isDefined(self.archetype)) {

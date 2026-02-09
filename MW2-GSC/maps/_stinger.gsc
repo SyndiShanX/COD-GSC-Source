@@ -81,15 +81,12 @@ StingerIRTLoop() {
   for(;;) {
     wait 0.05;
 
-    //-------------------------
-    // Four possible states:
+    //------------------------- // Four possible states:
     //No missile in the tube, so CLU will not search for targets.
     //		CLU has a lock.
     //		CLU is locking on to a target.
     //		CLU is searching for a target to begin locking on to.
-    //-------------------------
-
-    if(self.stinger.stingerLockFinalized) {
+    //------------------------- if(self.stinger.stingerLockFinalized) {
       if(!self IsStillValidTarget(self.stinger.stingerTarget)) {
         self ClearIRTarget();
         continue;
@@ -204,7 +201,6 @@ SetTargetTooClose(ent) {
     self.stinger.targettoclose = false;
     self WeaponLockTargetTooClose(false);
   }
-
 }
 
 LoopLocalSeekSound(alias, interval) {

@@ -48,7 +48,6 @@ draw_line_toshootpos() {
       Line(self.zodiac_enemy.origin, self.origin, (0, 1, 0), 1);
     wait .05;
   }
-
 }
 
 endthink() // this function is not called right now, but it should be if an AI ever gets off a zodiac.
@@ -132,7 +131,6 @@ think() {
     }
 
     wait .1;
-
   }
 
   self waittill("forever");

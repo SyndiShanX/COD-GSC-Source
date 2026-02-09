@@ -101,7 +101,6 @@ setupExploders() {
       if(!isDefined(potentialExploders[i].angles))
         potentialExploders[i].angles = (0, 0, 0);
       script_exploders[script_exploders.size] = potentialExploders[i];
-
     }
   }
 
@@ -292,11 +291,9 @@ show_exploder_models_proc(num) {
 
         if(isDefined(ent.brush_shown))
           ent.model Show();
-
       }
     }
   }
-
 }
 
 stop_exploder_proc(num) {
@@ -388,7 +385,6 @@ hide_exploder_models_proc(num) {
       }
       if(isDefined(ent.model))
         ent.model Hide();
-
     }
   }
 
@@ -562,7 +558,6 @@ brush_throw() {
     } else {
       contact_point = ent.origin;
       throw_vec = ((target.origin - ent.origin) * self.v["physics"]);
-
     }
     self.model PhysicsLaunchClient(contact_point, throw_vec);
     return;
@@ -801,12 +796,12 @@ shouldRunServerSideEffects() {
     return true;
 
   if(!isDefined(level.createFX_enabled))
-    level.createFX_enabled = (GetDvar("createfx") != "");
+    level.createFX_enabled = (getDvar("createfx") != "");
 
   if(level.createFX_enabled)
     return true;
   else
-    return GetDvar("clientSideEffects") != "1";
+    return getDvar("clientSideEffects") != "1";
 }
 
 exploder_before_load(num, players, startTime) {

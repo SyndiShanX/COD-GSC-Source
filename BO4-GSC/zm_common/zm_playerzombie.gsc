@@ -111,7 +111,7 @@ playerzombie_player_damage() {
     attacker = waitresult.attacker;
     amount = waitresult.amount;
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       waitframe(1);
       continue;
     }

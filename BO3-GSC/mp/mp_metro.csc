@@ -21,8 +21,8 @@ function main() {
   level.domflagcapfxoverride = &dom_flag_cap_fx_override;
   util::waitforclient(0);
   level.endgamexcamname = "ui_cam_endgame_mp_metro";
-  setdvar("phys_buoyancy", 1);
-  setdvar("phys_ragdoll_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
+  setDvar("phys_ragdoll_buoyancy", 1);
 }
 
 function train_countdown(localclientnum) {

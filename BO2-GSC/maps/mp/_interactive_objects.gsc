@@ -97,7 +97,7 @@ explodable_barrel_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !isplayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker)
@@ -218,7 +218,7 @@ flammable_crate_think() {
   for(;;) {
     self waittill("damage", amount, attacker, direction_vec, p, type);
 
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !isplayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker)

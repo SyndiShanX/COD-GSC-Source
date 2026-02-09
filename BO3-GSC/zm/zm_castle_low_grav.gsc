@@ -126,13 +126,13 @@ function function_e49e9c09() {
 }
 
 function function_554db684() {
-  setdvar("wallrun_enabled", 1);
-  setdvar("doublejump_enabled", 1);
-  setdvar("playerEnergy_enabled", 1);
-  setdvar("bg_lowGravity", 300);
-  setdvar("wallRun_maxTimeMs_zm", 10000);
-  setdvar("playerEnergy_maxReserve_zm", 200);
-  setdvar("wallRun_peakTest_zm", 0);
+  setDvar("wallrun_enabled", 1);
+  setDvar("doublejump_enabled", 1);
+  setDvar("playerEnergy_enabled", 1);
+  setDvar("bg_lowGravity", 300);
+  setDvar("wallRun_maxTimeMs_zm", 10000);
+  setDvar("playerEnergy_maxReserve_zm", 200);
+  setDvar("wallRun_peakTest_zm", 0);
   level.var_a75d7260 = getent("trig_low_gravity_zone", "targetname");
   level thread function_fceff7eb();
 }
@@ -219,7 +219,7 @@ function function_c3f6aa22() {
           self clientfield::set_to_player("player_postfx", 1);
           self thread function_e997f73a();
           if(getdvarint("") > 0) {
-            setdvar("", getdvarint(""));
+            setDvar("", getdvarint(""));
           }
         }
         wait(0.1);
@@ -527,7 +527,7 @@ function function_30b0d4ab(n_wait_time) {
 function trigger_damage() {
   while(true) {
     self waittill("trigger", e_who);
-    if(isplayer(e_who) && (!(isDefined(e_who.var_c54a399c) && e_who.var_c54a399c))) {
+    if(isPlayer(e_who) && (!(isDefined(e_who.var_c54a399c) && e_who.var_c54a399c))) {
       e_who dodamage(25, e_who.origin, undefined, undefined, "none", "MOD_MELEE");
       e_who.var_c54a399c = 1;
       e_who thread function_266e5562();

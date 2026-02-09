@@ -29,9 +29,9 @@ DynamicEvent(dynamicEventStartFunc, dynamicEventResetFunc, dynamicEventEndFunc) 
   }
 
   SetDvarIfUninitialized("scr_dynamic_event_state", "on");
-  if(getdvar("scr_dynamic_event_state", "on") == "off") {
+  if(getDvar("scr_dynamic_event_state", "on") == "off") {
     return;
-  } else if(getdvar("scr_dynamic_event_state", "on") == "endstate") {
+  } else if(getDvar("scr_dynamic_event_state", "on") == "endstate") {
     if(isDefined(dynamicEventEndFunc)) {
       level[[dynamicEventEndFunc]]();
     }
@@ -81,7 +81,7 @@ handle_sd_dynamicEvent(dynamicEventStartFunc, dynamicEventEndFunc) {
     game["dynamicEvent_sd_round_counter"]++;
   }
 
-  /#level thread debug_watch_dynamicEvent_start_now( dynamicEventStartFunc );
+  level thread debug_watch_dynamicEvent_start_now(dynamicEventStartFunc);
 
   if(!game["dynamicEvent_isInOvertime"] && game["dynamicEvent_Overtime"]) {
     game["dynamicEvent_sd_round_counter"] = 0;
@@ -164,7 +164,7 @@ handle_dynamicEvent(dynamicEventStartFunc, dynamicEventResetFunc, doScoreCheck) 
   }
 
   while(isDefined(dynamicEventResetFunc)) {
-    SetDvar("scr_dynamic_event_start_now", 0);
+    setDvar("scr_dynamic_event_start_now", 0);
     while(!GetDvarInt("scr_dynamic_event_start_now", 0)) {
       waitframe();
     }
@@ -172,7 +172,7 @@ handle_dynamicEvent(dynamicEventStartFunc, dynamicEventResetFunc, doScoreCheck) 
     level notify("dynamic_event_reset");
     level[[dynamicEventResetFunc]]();
 
-    SetDvar("scr_dynamic_event_start_now", 0);
+    setDvar("scr_dynamic_event_start_now", 0);
     while(!GetDvarInt("scr_dynamic_event_start_now", 0)) {
       waitframe();
     }

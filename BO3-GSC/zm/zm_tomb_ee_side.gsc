@@ -171,7 +171,7 @@ function wagon_fire_trigger_watch() {
   var_2499bc6a = level.a_elemental_staffs_upgraded["staff_water_upgraded"].w_weapon;
   while(true) {
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon);
-    if(isplayer(attacker) && (weapon == var_83560def || weapon == var_2499bc6a)) {
+    if(isPlayer(attacker) && (weapon == var_83560def || weapon == var_2499bc6a)) {
       level.n_wagon_fires_out++;
       if(!level flag::get("ee_wagon_timer_start")) {
         level flag::set("ee_wagon_timer_start");
@@ -373,7 +373,7 @@ function bunker_volume_death_check() {
   volume = getent(volume_name, "targetname");
   assert(isDefined(volume), volume_name + "");
   attacker = self.attacker;
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(attacker.sq_one_inch_punch_stage == 5 && (self.damagemod == "MOD_MELEE" || self.damageweapon.name == "tomb_shield")) {
       if(self istouching(volume)) {
         self clientfield::set("ee_zombie_tablet_fx", 1);
@@ -407,7 +407,7 @@ function church_volume_death_check() {
   volume = getent(volume_name, "targetname");
   assert(isDefined(volume), volume_name + "");
   attacker = self.attacker;
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(attacker.sq_one_inch_punch_stage == 2 && (self.damagemod == "MOD_MELEE" || self.damageweapon.name == "tomb_shield")) {
       if(self istouching(volume)) {
         self clientfield::set("ee_zombie_tablet_fx", 1);

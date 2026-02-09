@@ -7,19 +7,17 @@
 
 _id_400A() {
   self endon("killanimscript");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 
   if(animscripts\utility::_id_0A69()) {
     var_0 = "idle_combat";
   } else {
     var_0 = "idle_noncombat";
-
   }
   var_1 = undefined;
 
   if(isDefined(self._id_1032) && isDefined(level._id_0C59[self._id_1032])) {
     var_1 = level._id_0C59[self._id_1032][var_0];
-
   }
   if(!isDefined(var_1)) {
     if(!isDefined(level._id_0C59["default_civilian"])) {
@@ -31,7 +29,7 @@ _id_400A() {
   thread _id_400B();
 
   for(;;) {
-    self setflaggedanimknoball("idle", common_scripts\utility::random(var_1), % root, 1, 0.2, 1);
+    self setflaggedanimknoball("idle", common_scripts\utility::random(var_1), %root, 1, 0.2, 1);
     self waittillmatch("idle", "end");
   }
 }

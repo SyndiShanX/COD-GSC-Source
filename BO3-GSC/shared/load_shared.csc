@@ -35,13 +35,13 @@ function first_frame() {
 function init_push_out_threshold() {
   push_out_threshold = getdvarfloat("tu16_physicsPushOutThreshold", -1);
   if(push_out_threshold != -1) {
-    setdvar("tu16_physicsPushOutThreshold", 20);
+    setDvar("tu16_physicsPushOutThreshold", 20);
   }
 }
 
 function art_review() {
   if(getdvarstring("art_review") == "") {
-    setdvar("art_review", "0");
+    setDvar("art_review", "0");
   }
   if(getdvarstring("art_review") == "1") {
     level waittill("forever");

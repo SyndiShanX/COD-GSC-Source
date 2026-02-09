@@ -19,12 +19,12 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_greenband");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_diffuseColorScale", 1.5);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_diffuseColorScale", 1.5);
 
-  setdvar("r_gunSightColorEntityScale", "7");
-  setdvar("r_gunSightColorNoneScale", "0.8");
+  setDvar("r_gunSightColorEntityScale", "7");
+  setDvar("r_gunSightColorNoneScale", "0.8");
 
   level.ospvisionset = "(mp_greenband_osp)";
   level.osplightset = "(mp_greenband_osp)";

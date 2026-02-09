@@ -141,7 +141,7 @@ function private _activate_sensory_overload(slot, weapon) {
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_sensoryoverload");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
@@ -212,7 +212,7 @@ function sensory_overload(attacker, var_7d4fd98c) {
       self.var_d90f9ddb = 1;
     }
   }
-  if(isplayer(attacker) && attacker hascybercomability("cybercom_sensoryoverload") == 2) {
+  if(isPlayer(attacker) && attacker hascybercomability("cybercom_sensoryoverload") == 2) {
     self playSound("gdt_sensory_feedback_start");
     self playLoopSound("gdt_sensory_feedback_lp_upg", 0.5);
     self clientfield::set("sensory_overload", 2);

@@ -133,7 +133,7 @@ give_player_shiv() {
 grief_treasure_chest_init() {
   chest1 = getstruct("start_chest", "script_noteworthy");
   chest2 = getstruct("cafe_chest", "script_noteworthy");
-  setdvar("disableLookAtEntityLogic", 1);
+  setDvar("disableLookAtEntityLogic", 1);
   level.chests = [];
   level.chests[level.chests.size] = chest1;
   level.chests[level.chests.size] = chest2;

@@ -26,7 +26,6 @@ class cmp_infect_timer: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("infectionTimeRemaining", 15000, 4, "int", 0);
   }
-
 }
 
 register(uid) {

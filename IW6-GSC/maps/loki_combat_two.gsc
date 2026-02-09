@@ -1357,7 +1357,7 @@ fail_if_player_too_far() {
   level endon("charge_set");
   var_0 = getent("player_too_far", "targetname");
   var_0 waittill("trigger");
-  setdvar("ui_deadquote", &"LOKI_BOUNDS_FAIL");
+  setDvar("ui_deadquote", &"LOKI_BOUNDS_FAIL");
   level thread maps\_utility::missionfailedwrapper();
 }
 

@@ -8,8 +8,8 @@
 
 main() {
   level.tweakfile = 1;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 15);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 15);
   visionsetnaked("sp_panama_default", 5);
 }
 
@@ -26,15 +26,15 @@ checkpoint() {
 }
 
 docks() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   setsaveddvar("sm_sunSampleSizeNear", 1.9);
   visionsetnaked("sp_panama3_docks", 0.5);
 }
 
 sniper() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   visionsetnaked("sp_panama3_sniper", 0.5);
   setsaveddvar("r_lightTweakSunLight", 18);
 }
@@ -52,9 +52,9 @@ basement() {
 }
 
 set_water_dvar() {
-  setdvar("r_waterwaveangle", "0 130 0 0");
-  setdvar("r_waterwavewavelength", "230 321 0 0");
-  setdvar("r_waterwavespeed", "0.39 0.54 0 0");
+  setDvar("r_waterwaveangle", "0 130 0 0");
+  setDvar("r_waterwavewavelength", "230 321 0 0");
+  setDvar("r_waterwavespeed", "0.39 0.54 0 0");
 }
 
 dof_mason_jump(m_player_body) {

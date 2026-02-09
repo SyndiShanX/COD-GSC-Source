@@ -24,7 +24,7 @@
 #include maps\mp\gametypes\_rank;
 
 main() {
-  if(getdvar(#"mapname") == "mp_background") {
+  if(getDvar(#"mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -39,8 +39,8 @@ main() {
   level.scoreroundbased = getgametypesetting("roundscorecarry") == 0;
   maps\mp\gametypes\_globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
 
-  if(getdvar(#"scr_ctf_spawnPointFacingAngle") == "")
-    setdvar("scr_ctf_spawnPointFacingAngle", "0");
+  if(getDvar(#"scr_ctf_spawnPointFacingAngle") == "")
+    setDvar("scr_ctf_spawnPointFacingAngle", "0");
 
   level.teambased = 1;
   level.overrideteamscore = 1;
@@ -887,7 +887,7 @@ getotherflag(flag) {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     flagteam = "invalidTeam";
     inflagzone = 0;
     defendedflag = 0;
@@ -898,7 +898,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       flagorigin = level.neutralflag.carrier.origin;
       iscarried = 1;
 
-      if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+      if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
         if(isDefined(level.neutralflag.carrier.attackerdata)) {
           if(level.neutralflag.carrier != attacker) {
             if(isDefined(level.neutralflag.carrier.attackerdata[self.clientid]))
@@ -933,7 +933,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
         defendedflag = 1;
     }
 
-    if(inflagzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+    if(inflagzone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
       if(defendedflag) {
         attacker.pers["defends"]++;
         attacker.defends = attacker.pers["defends"];
@@ -966,7 +966,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
   if(!isDefined(self.isflagcarrier) || !self.isflagcarrier) {
     return;
   }
-  if(isDefined(attacker) && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     if(isDefined(self.flagcarried)) {
       for(index = 0; index < level.flags.size; index++) {
         currentflag = level.flags[index];

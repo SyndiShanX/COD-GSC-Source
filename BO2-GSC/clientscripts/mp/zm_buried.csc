@@ -72,7 +72,7 @@ main() {
   level thread buried_watch_for_power();
   level thread init_fog_vol_to_visionset();
 
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   if(is_gametype_active("zclassic")) {
@@ -96,7 +96,7 @@ register_client_fields() {
 
 flashlight_init() {
   level.flashlight_fx = [];
-  setdvar("r_enableFlashlight", "1");
+  setDvar("r_enableFlashlight", "1");
   level.oil_lamp_life_time = 300;
   level.flashlight_flicker1_starts = 0.5;
   level.flashlight_flicker2_starts = 0.75;
@@ -108,7 +108,7 @@ flashlight_init() {
 
 player_flashlight_flicker_update(life_left_frac) {
   self endon("player_remove_flashlight");
-  setdvar("r_flashLightFlickerRate", "10");
+  setDvar("r_flashLightFlickerRate", "10");
   wait 0.01;
   full_flicker = "0.1";
   flicker1 = "0.25";
@@ -152,30 +152,30 @@ player_flashlight_flicker_update(life_left_frac) {
 
   if(wait_full > 0) {
     self.sndlightent playLoopSound("zmb_lantern_plr_loop_1", 0.05);
-    setdvar("r_flashLightFlickerAmount", full_flicker);
+    setDvar("r_flashLightFlickerAmount", full_flicker);
     wait(wait_full);
   }
 
   if(wait_flicker1 > 0) {
     self.sndlightent playLoopSound("zmb_lantern_plr_loop_2", 0.05);
-    setdvar("r_flashLightFlickerAmount", flicker1);
+    setDvar("r_flashLightFlickerAmount", flicker1);
     wait(wait_flicker1);
   }
 
   if(wait_flicker2 > 0) {
     self.sndlightent playLoopSound("zmb_lantern_plr_loop_3", 0.05);
-    setdvar("r_flashLightFlickerAmount", flicker2);
+    setDvar("r_flashLightFlickerAmount", flicker2);
     wait(wait_flicker2);
   }
 
   self.sndlightent playLoopSound("zmb_lantern_plr_loop_4", 0.05);
-  setdvar("r_flashLightFlickerAmount", flicker3);
+  setDvar("r_flashLightFlickerAmount", flicker3);
   wait(wait_flicker3);
 }
 
 flashlight_toggle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(is_true(0)) {
-    if(self isplayer() && self islocalplayer() && !isdemoplaying() && isDefined(self getlocalclientnumber()) && localclientnum == self getlocalclientnumber()) {
+    if(self isPlayer() && self islocalplayer() && !isdemoplaying() && isDefined(self getlocalclientnumber()) && localclientnum == self getlocalclientnumber()) {
       if(!isDefined(self.sndlightent)) {
         self.sndlightent = spawn(0, self.origin, "script_origin");
         self.sndlightent linkto(self, "tag_origin");
@@ -452,7 +452,7 @@ start_zombie_stuff() {
   clientscripts\mp\zombies\_zm_weap_tazer_knuckles::init();
   clientscripts\mp\zombies\_zm_weap_slowgun::init();
 
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   if(level.scr_zm_ui_gametype == "zclassic") {
@@ -477,7 +477,7 @@ init_clientflag_variables() {}
 register_clientflag_callbacks() {}
 
 init_level_specific_wall_buy_fx() {
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   level._effect["an94_zm_fx"] = loadfx("maps/zombie/fx_zmb_wall_buy_an94");
@@ -488,10 +488,10 @@ init_level_specific_wall_buy_fx() {
 }
 
 include_weapons() {
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("claymore_zm", 0);
@@ -802,7 +802,7 @@ buried_sq_maxis_eye_glow_override(localclientnum, oldval, newval, bnewent, binit
 }
 
 buried_sq_richtofen_player_eyes_stuhlinger(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     if(localclientnum == self getlocalclientnumber())
       return;
   }

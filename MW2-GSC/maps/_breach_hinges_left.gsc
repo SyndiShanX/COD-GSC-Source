@@ -7,8 +7,7 @@
 main() {
   //level.door_objmodel = "com_door_breach_left_obj";
   //precacheModel( level.door_objmodel );
-  /*-----------------------
-  SHOTGUN BREACH A (HINGE SHOOT #1)
+  /*----------------------- SHOTGUN BREACH A (HINGE SHOOT #1)
   -------------------------*/
 
   level.scr_anim["generic"]["shotgunhinges_breach_left_stack_start_01"] = % breach_sh_breacherL1_idle;

@@ -13,11 +13,11 @@ setkillcamerastyle(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 prekillcamnotify(var_0, var_1, var_2, var_3) {
-  if(isplayer(self) && isDefined(var_1) && isplayer(var_1)) {
+  if(isPlayer(self) && isDefined(var_1) && isPlayer(var_1)) {
     var_4 = gettime();
     waittillframeend;
 
-    if(isplayer(self) && isDefined(var_1) && isplayer(var_1)) {
+    if(isPlayer(self) && isDefined(var_1) && isPlayer(var_1)) {
       var_4 = (gettime() - var_4) / 1000;
       var_5 = maps\mp\gametypes\_playerlogic::gatherclassweapons();
       var_6 = var_1 loadcustomizationplayerview(var_2 + var_4, var_3, var_5);
@@ -35,7 +35,7 @@ prekillcamnotify(var_0, var_1, var_2, var_3) {
 }
 
 killcamtime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(getdvar("scr_killcam_time") == "") {
+  if(getDvar("scr_killcam_time") == "") {
     var_7 = maps\mp\_utility::strip_suffix(var_1, "_lefthand");
 
     if(var_5 || var_1 == "artillery_mp")
@@ -106,7 +106,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   level.numplayerswaitingtoenterkillcam--;
   var_20 = killcamtime(var_3, var_4, var_8, var_11, var_12, var_18, level.showingfinalkillcam);
 
-  if(getdvar("scr_killcam_posttime") == "")
+  if(getDvar("scr_killcam_posttime") == "")
     var_21 = 2;
   else {
     var_21 = getdvarfloat("scr_killcam_posttime");
@@ -136,12 +136,12 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   if(isagent(var_13) && !isDefined(var_13.isactive)) {
     return;
   }
-  if(isplayer(var_14))
+  if(isPlayer(var_14))
     self setclientomnvar("ui_killcam_victim_id", var_14 getentitynumber());
   else
     self setclientomnvar("ui_killcam_victim_id", -1);
 
-  if(isplayer(var_13))
+  if(isPlayer(var_13))
     self setclientomnvar("ui_killcam_killedby_id", var_13 getentitynumber());
   else if(isagent(var_13))
     self setclientomnvar("ui_killcam_killedby_id", -1);
@@ -183,7 +183,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
     }
   }
 
-  if(isplayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2)
+  if(isPlayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2)
     self setclientomnvar("ui_killcam_killedby_nemesis", 1);
   else
     self setclientomnvar("ui_killcam_killedby_nemesis", 0);
@@ -209,7 +209,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   var_27 = gettime();
   self notify("begin_killcam", var_27);
 
-  if(!isagent(var_13) && isDefined(var_13) && isplayer(var_14))
+  if(!isagent(var_13) && isDefined(var_13) && isPlayer(var_14))
     var_13 visionsyncwithplayer(var_14);
 
   maps\mp\_utility::updatesessionstate("spectator");
@@ -389,7 +389,7 @@ killcamcleanup(var_0) {
   self setclientomnvar("ui_killcam_end_milliseconds", 0);
   self.killcam = undefined;
 
-  if(isDefined(self.killcamstartedtimedeciseconds) && isplayer(self) && isDefined(self.lifeid) && maps\mp\_matchdata::canloglife(self.lifeid)) {
+  if(isDefined(self.killcamstartedtimedeciseconds) && isPlayer(self) && isDefined(self.lifeid) && maps\mp\_matchdata::canloglife(self.lifeid)) {
     var_1 = maps\mp\_utility::gettimepasseddecisecondsincludingrounds();
     setmatchdata("lives", self.lifeid, "killcamWatchTimeDeciSeconds", maps\mp\_utility::clamptobyte(var_1 - self.killcamstartedtimedeciseconds));
   }

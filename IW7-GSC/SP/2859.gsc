@@ -760,7 +760,7 @@ func_BC82() {
       self moveto(var_23, self.var_B04E);
     }
 
-    if(getdvar("debug_fakeactor") == "1") {}
+    if(getDvar("debug_fakeactor") == "1") {}
 
     wait(self.var_B04E);
   }
@@ -1015,9 +1015,9 @@ func_77C8(var_0) {
   }
 
   var_3 = distance(self.origin, self.var_1A2C.origin);
-  var_4 = getaccuracyfraction(self.weapon, var_3, isplayer(self.var_1A2C));
+  var_4 = getaccuracyfraction(self.weapon, var_3, isPlayer(self.var_1A2C));
   var_5 = "stand";
-  if(isplayer(self.var_1A2C)) {
+  if(isPlayer(self.var_1A2C)) {
     var_5 = self.var_1A2C getstance();
   } else if(isai(self.var_1A2C)) {
     var_5 = self.var_1A2C.a.pose;
@@ -1031,7 +1031,7 @@ func_77C8(var_0) {
   }
 
   var_7 = 1;
-  if(isplayer(self.var_1A2C)) {
+  if(isPlayer(self.var_1A2C)) {
     var_8 = level.player getnormalizedmovement();
     var_7 = 1 - length(var_8) * 0.3;
   } else if(isai(self.var_1A2C)) {}
@@ -1048,7 +1048,7 @@ func_6ADC(var_0, var_1, var_2, var_3) {
 }
 
 func_7CDD(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(func_9C07()) {
       var_1 = 50;
     } else {
@@ -1103,7 +1103,7 @@ func_1A2E() {
       func_F5BF(1);
     }
 
-    if(getdvar("debug_fakeactor") == "1") {
+    if(getDvar("debug_fakeactor") == "1") {
       var_12 = self gettagangles("tag_origin");
       scripts\engine\utility::draw_angles(var_12, self gettagorigin("tag_origin"));
     }
@@ -1671,7 +1671,7 @@ func_4D23() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
     self.var_A8A3 = var_4;
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       var_1 setclientomnvar("damage_feedback_notify", gettime());
     }
 

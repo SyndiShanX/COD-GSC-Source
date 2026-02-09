@@ -156,7 +156,6 @@ function_56ed19d9() {
     wait self.var_27405e0f;
   } else {
     iprintlnbold("<dev string:x38>" + self.var_8701e993);
-
   }
 
   self notify(self.var_b9d55f30);
@@ -535,7 +534,7 @@ function_b86d3b7d() {
 
 function_dfd7add4() {
   sessionmode = currentsessionmode();
-  setdvar(#"hash_31b5762ac1fb40cf", "<dev string:x77>");
+  setDvar(#"hash_31b5762ac1fb40cf", "<dev string:x77>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x7a>");
@@ -556,6 +555,6 @@ function_dfd7add4() {
         break;
     }
 
-    setdvar(#"hash_31b5762ac1fb40cf", "<dev string:x77>");
+    setDvar(#"hash_31b5762ac1fb40cf", "<dev string:x77>");
   }
 }

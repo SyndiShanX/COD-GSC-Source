@@ -664,7 +664,7 @@ func_D54B() {
     return;
   }
 
-  if(func_117ED(var_0) && !isplayer(var_0)) {
+  if(func_117ED(var_0) && !isPlayer(var_0)) {
     return;
   }
 
@@ -673,7 +673,7 @@ func_D54B() {
   var_2 = self.var_3D4C["threat"].var_68BA;
   switch (var_2) {
     case "infantry":
-      if((scripts\engine\utility::player_is_in_jackal() && var_0 == level.player) || !var_0 scripts\anim\battlechatter_ai::func_1A1B() && isplayer(var_0) || (!var_0 scripts\anim\battlechatter_ai::func_1A1B() && !isDefined(var_0 getturret())) || var_0 scripts\anim\battlechatter_ai::func_1A1B()) {
+      if((scripts\engine\utility::player_is_in_jackal() && var_0 == level.player) || !var_0 scripts\anim\battlechatter_ai::func_1A1B() && isPlayer(var_0) || (!var_0 scripts\anim\battlechatter_ai::func_1A1B() && !isDefined(var_0 getturret())) || var_0 scripts\anim\battlechatter_ai::func_1A1B()) {
         if(isDefined(self._blackboard)) {
           self._blackboard.var_28DE = var_0;
         }
@@ -1714,12 +1714,12 @@ func_C6E2(var_0) {
 
 func_128A8(var_0, var_1) {
   if(randomint(100) > level.var_68AE["response"]["order"]) {
-    if(!isDefined(var_1) || isDefined(var_1) && !isplayer(var_1)) {
+    if(!isDefined(var_1) || isDefined(var_1) && !isPlayer(var_1)) {
       return;
     }
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && isDefined(level.player.var_29AE)) {
+  if(isDefined(var_1) && isPlayer(var_1) && isDefined(level.player.var_29AE)) {
     var_0 func_180F();
     var_0.var_299D = level.player;
     return;
@@ -2085,7 +2085,7 @@ cansay(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(!isDefined(level.player.var_28CF) || isDefined(level.player.var_28CF) && !level.player.var_28CF && isplayer(self)) {
+  if(!isDefined(level.player.var_28CF) || isDefined(level.player.var_28CF) && !level.player.var_28CF && isPlayer(self)) {
     return 0;
   }
 
@@ -2231,7 +2231,7 @@ func_7EA1(var_0) {
 }
 
 func_9DF3(var_0) {
-  if(getdvar("bcs_filter" + var_0, "off") == "on" || getdvar("bcs_filter" + var_0, "off") == "1") {
+  if(getDvar("bcs_filter" + var_0, "off") == "on" || getDvar("bcs_filter" + var_0, "off") == "1") {
     return 1;
   }
 
@@ -2282,7 +2282,7 @@ func_29AB() {
     return 0;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return 0;
   }
 
@@ -2349,7 +2349,7 @@ func_9EC2() {
 }
 
 func_29A6() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return self.node;
   }
 
@@ -2566,7 +2566,7 @@ location_get_last_callout_time(var_0) {
 
 getrelativeangles(var_0) {
   var_1 = var_0.angles;
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_2 = var_0 func_29A6();
     if(isDefined(var_2)) {
       var_1 = var_2.angles;
@@ -2951,7 +2951,7 @@ cansayname(var_0) {
   }
 
   var_1 = undefined;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_1 = "UN_plr_name_" + var_0.var_29AD;
   } else {
     var_1 = self.var_46BC + "_" + self.npcid + "_name_" + var_0.var_29AD;

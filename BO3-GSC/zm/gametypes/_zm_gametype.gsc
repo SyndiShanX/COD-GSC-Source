@@ -68,8 +68,8 @@ function main() {
   level.dontshowendreason = 1;
   level.forceallallies = 1;
   level.allow_teamchange = 0;
-  setdvar("scr_disable_team_selection", 1);
-  setdvar("scr_disable_weapondrop", 1);
+  setDvar("scr_disable_team_selection", 1);
+  setDvar("scr_disable_weapondrop", 1);
   level.onstartgametype = &onstartgametype;
   level.onspawnplayer = &globallogic::blank;
   level.onspawnplayerunified = &onspawnplayerunified;

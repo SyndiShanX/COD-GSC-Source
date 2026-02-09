@@ -23,10 +23,10 @@ init() {
 
 customteam_init() {
   if(getdvarstring(#"g_customteamname_allies") != "") {
-    setdvar(#"g_teamname_allies", getdvarstring(#"g_customteamname_allies"));
+    setDvar(#"g_teamname_allies", getdvarstring(#"g_customteamname_allies"));
   }
 
   if(getdvarstring(#"g_customteamname_axis") != "") {
-    setdvar(#"g_teamname_axis", getdvarstring(#"g_customteamname_axis"));
+    setDvar(#"g_teamname_axis", getdvarstring(#"g_customteamname_axis"));
   }
 }

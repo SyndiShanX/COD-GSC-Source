@@ -876,7 +876,7 @@ function_d2278936(e_player) {
 }
 
 function_be3fbc6f(s_params) {
-  if(self.subarchetype === # "crimson_nosferatu" && isplayer(s_params.eattacker) && level flag::get("flag_crimson_nosferatu_set_intro") && !level flag::get("flag_player_grabbed_nosferatu_material")) {
+  if(self.subarchetype === # "crimson_nosferatu" && isPlayer(s_params.eattacker) && level flag::get("flag_crimson_nosferatu_set_intro") && !level flag::get("flag_player_grabbed_nosferatu_material")) {
     s_loc = spawnStruct();
     s_loc.origin = self.origin;
     s_loc.angles = self.angles;

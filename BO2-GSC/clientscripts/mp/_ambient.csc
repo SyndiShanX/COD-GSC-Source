@@ -250,7 +250,6 @@ ambient_fakefire_think(point) {
     default:
 
       assertmsg("Ambient Fakefire: Weapon Info '" + point.weaponinfo + "' is not recognized.");
-
   }
 
   while(true) {

@@ -1098,7 +1098,7 @@ function player_safezone_watcher_trigger() {
   self endon("death");
   while(true) {
     self waittill("trigger", player);
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       self.b_safezone = 1;
       player notify("safezone_trigger");
       self thread player_safezone_watcher_trigger_end(player);
@@ -1381,7 +1381,7 @@ function player_rain_intensity(str_intensity) {
       player.b_rain_on = 1;
       player clientfield::set_to_player("player_rain", n_rain);
     }
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     self.b_rain_on = 1;
     self clientfield::set_to_player("player_rain", n_rain);
   }
@@ -1525,7 +1525,7 @@ function dynamic_run_speed(var_c047ec73 = 250, var_3b15866b = var_c047ec73 * 0.5
     e_player = arraygetclosest(v_goal, level.players);
     e_closest = arraygetclosest(v_goal, array(e_player, self));
     n_dist = distance2dsquared(self.origin, e_player.origin);
-    is_behind = isplayer(e_closest);
+    is_behind = isPlayer(e_closest);
     if(n_dist < (var_3b15866b * var_3b15866b) || is_behind) {
       self ai::set_behavior_attribute("cqb", 0);
       self ai::set_behavior_attribute("sprint", 1);

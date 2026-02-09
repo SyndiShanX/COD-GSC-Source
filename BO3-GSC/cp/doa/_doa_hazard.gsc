@@ -261,7 +261,7 @@ function private function_323a3e31() {
   while(true) {
     self waittill("trigger", guy);
     if(isDefined(guy) && isalive(guy) && (isDefined(guy.takedamage) && guy.takedamage) && (!(isDefined(guy.boss) && guy.boss)) && (!(isDefined(guy.in_water) && guy.in_water))) {
-      if(isplayer(guy)) {
+      if(isPlayer(guy)) {
         if(isDefined(guy.doa) && isDefined(guy.doa.vehicle)) {
           guy notify("hash_d28ba89d");
         }
@@ -294,7 +294,7 @@ function private function_6ec8176a() {
       if(isDefined(self.script_parameters) && isDefined(guy.doa)) {
         guy.doa.var_bac6a79 = self.script_parameters;
       }
-      if(isplayer(guy)) {
+      if(isPlayer(guy)) {
         guy notify("hash_d28ba89d");
       }
       guy dodamage(guy.health + 500, guy.origin);
@@ -313,10 +313,10 @@ function private function_70dbf276() {
       if(isDefined(self.script_parameters)) {
         var_bac6a79 = self.script_parameters;
       }
-      if(!isplayer(guy)) {
+      if(!isPlayer(guy)) {
         var_c99d2b6d = "spawn_at_safe";
       }
-      if(isplayer(guy)) {
+      if(isPlayer(guy)) {
         guy notify("hash_d28ba89d");
       }
       switch (var_c99d2b6d) {
@@ -329,7 +329,7 @@ function private function_70dbf276() {
           break;
         }
       }
-      if(isplayer(guy)) {
+      if(isPlayer(guy)) {
         guy setorigin(spot);
         continue;
       }

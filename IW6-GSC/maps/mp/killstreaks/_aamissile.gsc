@@ -128,7 +128,6 @@ MissileEyes(player, rocket) {
 
     if(getDvarInt("camera_thirdPerson"))
       player setThirdPersonDOF(true);
-
   }
 
   player clearUsingRemote();

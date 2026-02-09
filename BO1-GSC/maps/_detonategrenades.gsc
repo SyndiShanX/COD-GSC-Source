@@ -9,7 +9,6 @@
 init() {
   level._effect["claymore_laser"] = loadfx("weapon/claymore/fx_claymore_laser");
 }
-
 watchGrenadeUsage() {
   level.satchelexplodethisframe = false;
   self endon("death");
@@ -34,17 +33,17 @@ watchGrenadeUsage() {
     }
   }
 }
-
 begin_smoke_grenade_tracking() {
   self waittill("grenade_fire", grenade, weaponName);
-  if(!isDefined(level.smokegrenades))
+  if(!isDefined(level.smokegrenades)) {
     level.smokegrenades = 0;
-  if(level.smokegrenades > 2 && getDvar(#"player_sustainAmmo") != "0")
+  }
+  if(level.smokegrenades > 2 && getDvar(#"player_sustainAmmo") != "0") {
     grenade delete();
-  else
+  } else {
     grenade thread smoke_grenade_death();
+  }
 }
-
 begin_mortar_tracking() {
   self endon("death");
   self endon("disconnect");
@@ -53,26 +52,22 @@ begin_mortar_tracking() {
     mortar thread mortar_death();
   }
 }
-
 mortar_death() {
   self waittill_not_moving();
   earthquake(.55, 3, self.origin, 1500);
   PlayRumbleOnPosition("explosion_generic", self.origin);
 }
-
 smoke_grenade_death() {
   level.smokegrenades++;
   wait 50;
   level.smokegrenades--;
 }
-
 begin_grenade_tracking() {
   self endon("death");
   self waittill("grenade_fire", grenade, weaponName);
   self maps\_dds::dds_notify_grenade(weaponName, (self.team == "allies"), false);
   self.throwingGrenade = false;
 }
-
 watch_for_throwbacks() {
   self endon("death");
   self endon("disconnect");
@@ -82,19 +77,18 @@ watch_for_throwbacks() {
       self.gotPullbackNotify = false;
       continue;
     }
-    if(!isSubStr(weapname, "frag"))
+    if(!isSubStr(weapname, "frag")) {
       continue;
+    }
     grenade.threwBack = true;
     self maps\_dds::dds_notify_grenade(weapname, (self.team == "allies"), true);
   }
 }
-
 begin_satchel_tracking() {
   self endon("death");
   self waittill_any("grenade_fire", "weapon_change");
   self.throwingGrenade = false;
 }
-
 watch_satchel() {
   while(1) {
     self waittill("grenade_fire", satchel, weapname);
@@ -105,7 +99,6 @@ watch_satchel() {
     }
   }
 }
-
 watch_claymores() {
   self endon("spawned_player");
   self endon("disconnect");
@@ -119,7 +112,6 @@ watch_claymores() {
     }
   }
 }
-
 claymore_detonation() {
   self endon("death");
   self waittill_not_moving();
@@ -132,37 +124,41 @@ claymore_detonation() {
   }
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateRadius), spawnFlag, detonateRadius, detonateRadius * 2);
   self thread delete_claymores_on_death(damagearea);
-  if(!isDefined(level.claymores))
+  if(!isDefined(level.claymores)) {
     level.claymores = [];
+  }
   level.claymores = array_add(level.claymores, self);
-  if(level.claymores.size > 15 && getDvar(#"player_sustainAmmo") != "0")
+  if(level.claymores.size > 15 && getDvar(#"player_sustainAmmo") != "0") {
     level.claymores[0] delete();
+  }
   while(1) {
     damagearea waittill("trigger", ent);
-    if(isDefined(self.owner) && ent == self.owner)
+    if(isDefined(self.owner) && ent == self.owner) {
       continue;
-    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow)
+    }
+    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow) {
       continue;
+    }
     if(ent damageConeTrace(self.origin, self) > 0) {
       self playSound("claymore_activated_SP");
       wait 0.4;
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self detonate(self.owner);
-      else
+      } else {
         self detonate(undefined);
+      }
       return;
     }
   }
 }
-
 delete_claymores_on_death(ent) {
   self waittill("death");
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
-
 watch_satchel_detonation() {
   self endon("death");
   while(1) {
@@ -172,14 +168,14 @@ watch_satchel_detonation() {
       note = weap + "_detonated";
       self notify(note);
       for(i = 0; i < self.satchelarray.size; i++) {
-        if(isDefined(self.satchelarray[i]))
+        if(isDefined(self.satchelarray[i])) {
           self.satchelarray[i] thread wait_and_detonate(0.1);
+        }
       }
       self.satchelarray = [];
     }
   }
 }
-
 wait_and_detonate(delay) {
   self endon("death");
   wait delay;
@@ -187,7 +183,6 @@ wait_and_detonate(delay) {
   self detonate();
   self delete();
 }
-
 satchel_damage() {
   self.health = 100;
   self setCanDamage(true);
@@ -196,49 +191,51 @@ satchel_damage() {
   attacker = undefined;
   while(1) {
     self waittill("damage", amount, attacker);
-    if(!isplayer(attacker))
+    if(!isPlayer(attacker)) {
       continue;
+    }
     break;
   }
-  if(level.satchelexplodethisframe)
+  if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  else
+  } else {
     wait .05;
-  if(!isDefined(self))
+  }
+  if(!isDefined(self)) {
     return;
+  }
   level.satchelexplodethisframe = true;
   thread reset_satchel_explode_this_frame();
   self detonate(attacker);
 }
-
 reset_satchel_explode_this_frame() {
   wait .05;
   level.satchelexplodethisframe = false;
 }
-
 saydamaged(orig, amount) {
   for(i = 0; i < 60; i++) {
     print3d(orig, "damaged! " + amount);
     wait .05;
   }
 }
-
 play_claymore_effects() {
   self endon("death");
   self waittill_not_moving();
   playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
 }
-
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
-  if(!isDefined(startRadius))
+  }
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    if(!isalive(players[i]) || players[i].sessionstate != "playing")
+    if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
+    }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
@@ -278,12 +275,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
   }
   return ents;
 }
-
 weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
   trace = bulletTrace(midpos, to, false, ignore);
@@ -297,25 +294,25 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
   }
   return (trace["fraction"] == 1);
 }
-
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
   if(self.isPlayer) {
     self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0);
+    self.entity thread[[level.callbackPlayerDamage]](
+      eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0
+    );
   } else {
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp"))
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
       return;
+    }
     self.entity damage_notify_wrapper(iDamage, eAttacker);
   }
 }
-
 debugline(a, b, color) {
   for(i = 0; i < 30 * 20; i++) {
     line(a, b, color);
     wait .05;
   }
 }
-
 onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage) {
   self endon("death");
   switch (sWeapon) {

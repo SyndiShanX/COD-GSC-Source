@@ -99,7 +99,7 @@ function function_4fef5e4() {
   level endon("chem_door_open");
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       who kill();
     }
   }

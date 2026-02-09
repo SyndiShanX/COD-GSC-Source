@@ -122,7 +122,7 @@ function geyser_watch_for_player() {
   level endon("fake_death");
   while(true) {
     self waittill("trigger", who);
-    if(!isplayer(who)) {
+    if(!isPlayer(who)) {
       continue;
     }
     if(who.sessionstate == "spectator") {

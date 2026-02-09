@@ -50,7 +50,7 @@ function function_ffedfe48(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_dadd24b7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   str_tag_name = "";
-  if(self isplayer()) {
+  if(self isPlayer()) {
     str_tag_name = "j_spinelower";
   } else {
     str_tag_name = "tag_brain";

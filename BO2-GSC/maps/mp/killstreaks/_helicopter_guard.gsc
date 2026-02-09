@@ -28,8 +28,8 @@ init() {
   registerkillstreakdialog("helicopter_guard_mp", "mpl_killstreak_lbguard_strt", "kls_littlebird_used", "", "kls_littlebird_enemy", "", "kls_littlebird_ready");
   registerkillstreakdevdvar("helicopter_guard_mp", "scr_givehelicopterguard");
   setkillstreakteamkillpenaltyscale("helicopter_guard_mp", 0.0);
-  shouldtimeout = setdvar("scr_heli_guard_no_timeout", 0);
-  debuglittlebird = setdvar("scr_heli_guard_debug", 0);
+  shouldtimeout = setDvar("scr_heli_guard_no_timeout", 0);
+  debuglittlebird = setDvar("scr_heli_guard_debug", 0);
   level._effect["heli_guard_light"]["friendly"] = loadfx("light/fx_vlight_mp_escort_eye_grn");
   level._effect["heli_guard_light"]["enemy"] = loadfx("light/fx_vlight_mp_escort_eye_red");
 
@@ -173,7 +173,7 @@ startheliguardsupport(littlebird, lifeid) {
   littlebird setspeed(littlebird.speed, 80, 30);
   littlebird waittill("goal");
 
-  if(getdvar(#"scr_heli_guard_debug") == "1")
+  if(getDvar(#"scr_heli_guard_debug") == "1")
     debug_no_fly_zones();
 
   littlebird thread heliguardsupport_followplayer();
@@ -312,7 +312,7 @@ heliguardsupport_watchtimeout() {
   timeout = getdvarfloat(#"scr_lbguard_timeout");
 
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(timeout);
-  shouldtimeout = getdvar(#"scr_heli_guard_no_timeout");
+  shouldtimeout = getDvar(#"scr_heli_guard_no_timeout");
 
   if(shouldtimeout == "1") {
     return;
@@ -339,7 +339,7 @@ heliguardsupport_watchownerdamage() {
   while(true) {
     self.owner waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, weapon, idflags);
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(attacker != self.owner && distance2d(attacker.origin, self.origin) <= self.targettingradius && attacker cantargetplayerwithspecialty()) {
         self setlookatent(attacker);
         self setgunnertargetent(attacker, vectorscale((0, 0, 1), 50.0), 0);
@@ -502,12 +502,12 @@ heliguardsupport_getclosestnode(pos) {
 }
 
 littlebird_debug_text(string) {
-  if(getdvar(#"scr_heli_guard_debug") == "1")
+  if(getDvar(#"scr_heli_guard_debug") == "1")
     iprintln(string);
 }
 
 littlebird_debug_line(start, end, color) {
-  if(getdvar(#"scr_heli_guard_debug") == "1")
+  if(getDvar(#"scr_heli_guard_debug") == "1")
     line(start, end, color, 1, 1, 300);
 }
 
@@ -542,7 +542,6 @@ heli_path_debug() {
       }
     }
   }
-
 }
 
 heliguardsupport_getclosestlinkednode(pos) {

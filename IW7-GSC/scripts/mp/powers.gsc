@@ -155,7 +155,7 @@ func_8090(var_0) {
   }
 
   var_1 = self.powers[var_0];
-  var_2 = getdvar("scr_debug_power_passive");
+  var_2 = getDvar("scr_debug_power_passive");
   if(isDefined(var_2)) {
     var_3 = func_8091(var_0, var_2);
     if(isDefined(var_3)) {

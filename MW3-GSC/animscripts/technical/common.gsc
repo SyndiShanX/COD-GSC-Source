@@ -16,25 +16,21 @@ main(var_0) {
     var_1 = var_0.script_delay_min;
   } else {
     var_1 = maps\_mgturret::_id_2277("delay");
-
   }
   if(isDefined(var_0.script_delay_max)) {
     var_2 = var_0.script_delay_max - var_1;
   } else {
     var_2 = maps\_mgturret::_id_2277("delay_range");
-
   }
   if(isDefined(var_0._id_2279)) {
     var_3 = var_0._id_2279;
   } else {
     var_3 = maps\_mgturret::_id_2277("burst");
-
   }
   if(isDefined(var_0._id_227A)) {
     var_4 = var_0._id_227A - var_3;
   } else {
     var_4 = maps\_mgturret::_id_2277("burst_range");
-
   }
   var_5 = gettime();
   var_6 = "start";
@@ -185,14 +181,14 @@ _id_6479(var_0) {
 #using_animtree("generic_human");
 
 _id_227C(var_0) {
-  self setanim( % additive_saw_idle, 0, 0.1);
-  self setanim( % additive_saw_fire, 1, 0.1);
+  self setanim(%additive_saw_idle, 0, 0.1);
+  self setanim(%additive_saw_fire, 1, 0.1);
   _id_647A(var_0);
 }
 
 _id_48B6(var_0) {
-  self setanim( % additive_saw_idle, 1, 0.1);
-  self setanim( % additive_saw_fire, 0, 0.1);
+  self setanim(%additive_saw_idle, 1, 0.1);
+  self setanim(%additive_saw_fire, 0, 0.1);
 }
 
 _id_647A(var_0) {
@@ -209,11 +205,11 @@ _id_647A(var_0) {
 #using_animtree("mg42");
 
 _id_647B() {
-  self setanim( % additive_saw_idle, 0, 0.1);
-  self setanim( % additive_saw_fire, 1, 0.1);
+  self setanim(%additive_saw_idle, 0, 0.1);
+  self setanim(%additive_saw_fire, 1, 0.1);
 }
 
 _id_647C() {
-  self setanim( % additive_saw_idle, 1, 0.1);
-  self setanim( % additive_saw_fire, 0, 0.1);
+  self setanim(%additive_saw_idle, 1, 0.1);
+  self setanim(%additive_saw_fire, 0, 0.1);
 }

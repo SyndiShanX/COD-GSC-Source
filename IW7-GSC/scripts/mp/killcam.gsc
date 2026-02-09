@@ -81,7 +81,7 @@ func_7F32(var_0, var_1, var_2) {
 
     case "ball_drone_projectile_mp":
     case "ball_drone_gun_mp":
-      if(isplayer(var_0) && isDefined(var_0.balldrone) && isDefined(var_0.balldrone.turret) && isDefined(var_0.balldrone.turret.killcament)) {
+      if(isPlayer(var_0) && isDefined(var_0.balldrone) && isDefined(var_0.balldrone.turret) && isDefined(var_0.balldrone.turret.killcament)) {
         return var_0.balldrone.turret.killcament;
       }
       break;
@@ -248,7 +248,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   wait(0.05);
   level.var_C23C--;
-  if(getdvar("scr_killcam_time") == "") {
+  if(getDvar("scr_killcam_time") == "") {
     if(var_7 == "artillery_mp" || var_7 == "stealth_bomb_mp" || var_7 == "warhawk_mortar_mp") {
       var_15 = gettime() - var_4 / 1000 - var_8 - 0.1;
     } else if(var_8 == "remote_mortar_missile_mp") {
@@ -286,7 +286,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
     }
   }
 
-  if(getdvar("scr_killcam_posttime") == "") {
+  if(getDvar("scr_killcam_posttime") == "") {
     if(isDefined(var_0) && var_0 == var_12) {
       var_16 = 3.5;
     } else {
@@ -313,7 +313,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
     self setclientomnvar("post_game_state", 3);
   }
 
-  if(isplayer(var_12)) {
+  if(isPlayer(var_12)) {
     self setclientomnvar("ui_killcam_killedby_id", var_12 getentitynumber());
     self setclientomnvar("ui_killcam_victim_id", var_13 getentitynumber());
     self gettweakablelastvalue(var_12);

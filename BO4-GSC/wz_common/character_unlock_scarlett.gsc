@@ -33,7 +33,7 @@ on_player_killed() {
   inflictor = self.laststandparams.einflictor;
   mod = self.laststandparams.smeansofdeath;
 
-  if(!isplayer(attacker) || !isvehicle(inflictor) || mod !== "MOD_CRUSH") {
+  if(!isPlayer(attacker) || !isvehicle(inflictor) || mod !== "MOD_CRUSH") {
     return;
   }
 

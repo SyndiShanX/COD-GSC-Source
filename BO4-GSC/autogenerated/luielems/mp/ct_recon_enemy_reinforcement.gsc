@@ -19,7 +19,6 @@ class class_27e8fec4: cluielem {
   function setup_clientfields(uid) {
     cluielem::setup_clientfields(uid);
   }
-
 }
 
 register(uid) {

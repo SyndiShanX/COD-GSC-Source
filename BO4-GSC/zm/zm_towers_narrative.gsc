@@ -774,7 +774,7 @@ function_d6357bd4(s_params) {
   str_mod = s_params.smeansofdeath;
   var_10280e3c = getent("e_challenge_center_stage", "targetname");
 
-  if(self.archetype == # "blight_father" && isDefined(self.var_2c2980d3) && self.var_2c2980d3 && self istouching(var_10280e3c) && isplayer(e_player) && e_player istouching(var_10280e3c) && str_mod === "MOD_UNKNOWN" && isDefined(e_player.var_a70d2cfe) && e_player.var_a70d2cfe) {
+  if(self.archetype == # "blight_father" && isDefined(self.var_2c2980d3) && self.var_2c2980d3 && self istouching(var_10280e3c) && isPlayer(e_player) && e_player istouching(var_10280e3c) && str_mod === "MOD_UNKNOWN" && isDefined(e_player.var_a70d2cfe) && e_player.var_a70d2cfe) {
     level flag::set(#"hash_7b6594521dfb7bb1");
   }
 }

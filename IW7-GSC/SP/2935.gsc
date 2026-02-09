@@ -16,12 +16,12 @@ main() {
     level.var_19C9 = 0;
   }
 
-  if(getdvar("fallback") == "") {
-    setdvar("fallback", "0");
+  if(getDvar("fallback") == "") {
+    setDvar("fallback", "0");
   }
 
-  if(getdvar("noai") == "") {
-    setdvar("noai", "off");
+  if(getDvar("noai") == "") {
+    setDvar("noai", "off");
   }
 
   precachemodel("grenade_bag");
@@ -1008,7 +1008,7 @@ func_4E47() {
 
         var_0 = var_0.var_4F;
       } else if(isDefined(var_0.owner)) {
-        if(isai(var_0) && isplayer(var_0.owner)) {
+        if(isai(var_0) && isPlayer(var_0.owner)) {
           var_3 = "friendly";
         }
 
@@ -1022,7 +1022,7 @@ func_4E47() {
       }
 
       var_4 = 0;
-      if(isplayer(var_0)) {
+      if(isPlayer(var_0)) {
         var_4 = 1;
       }
 
@@ -1043,7 +1043,7 @@ func_1931() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     self.var_C873 = var_0;
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       var_10 = var_1 getcurrentweapon();
       if(isDefined(var_10) && scripts\sp\utility::isprimaryweapon(var_10) && isDefined(var_4) && var_4 == "MOD_PISTOL_BULLET" || var_4 == "MOD_RIFLE_BULLET") {
         var_1 thread scripts\sp\player_stats::func_DED8();
@@ -2371,7 +2371,7 @@ func_6F4C(var_0) {
         continue;
       }
 
-      if(isplayer(var_4)) {
+      if(isPlayer(var_4)) {
         var_2 = 1;
       } else if(!isDefined(var_4.var_9F73) || !var_4.var_9F73) {
         continue;
@@ -2620,7 +2620,7 @@ func_13840(var_0) {
 func_6F4D(var_0) {
   thread func_6F4E();
   self waittill("death", var_1);
-  var_2 = isalive(var_1) && isplayer(var_1);
+  var_2 = isalive(var_1) && isPlayer(var_1);
   if(!var_2 && isDefined(var_1) && var_1.classname == "worldspawn") {
     var_2 = 1;
   }
@@ -2859,7 +2859,7 @@ func_BC9F(var_0) {
       continue;
     }
 
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       if(self.enemy scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") || scripts\engine\utility::flag("player_flashed")) {
         self.logstring = 0;
         for(;;) {
@@ -3019,7 +3019,7 @@ func_D27A(var_0, var_1) {
   }
 
   if(isalive(var_1)) {
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       return 1;
     }
 

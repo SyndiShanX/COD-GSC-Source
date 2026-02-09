@@ -141,7 +141,7 @@ block_until_ground_collapse(var_0) {
       var_3 = 0;
 
     if(var_2) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         if(abs(self.origin[2] - var_4["position"][2]) > var_0 && self isonground()) {
           maps\flood_util::jkuprint("PLAYER FALLING! " + var_4["surfacetype"] + " " + (self.origin[2] - var_4["position"][2]));
           player_ground_collapse();
@@ -152,7 +152,7 @@ block_until_ground_collapse(var_0) {
         break;
       }
     } else if(var_3) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         if(abs(self.origin[2] - var_5["position"][2]) > var_0 && self isonground()) {
           maps\flood_util::jkuprint("PLAYER FALLING! " + var_5["surfacetype"] + " " + (self.origin[2] - var_5["position"][2]));
           player_ground_collapse();
@@ -162,7 +162,7 @@ block_until_ground_collapse(var_0) {
         maps\flood_util::jkuprint("AI FALLING! " + var_5["surfacetype"] + " " + (self.origin[2] - var_5["position"][2]));
         break;
       }
-    } else if(isplayer(self)) {
+    } else if(isPlayer(self)) {
       player_ground_collapse();
       break;
     } else if(isai(self)) {

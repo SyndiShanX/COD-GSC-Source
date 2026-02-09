@@ -14,22 +14,25 @@ precache_gib_fx() {
   level._effect["animscript_gib_fx"] = LoadFx("weapon/bullet/fx_flesh_gib_fatal_01_mp");
   level._effect["animscript_gibtrail_fx"] = LoadFx("trail/fx_trail_blood_streak_mp");
 }
-
 do_gib(iDamage, sMeansOfDeath, weapon) {
-  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon))
+  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon)) {
     return true;
+  }
   return false;
 }
-
 do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
-  if(weapon == "m8_white_smoke_mp")
+  if(weapon == "m8_white_smoke_mp") {
     return false;
-  if(weapon == "tabun_gas_mp")
+  }
+  if(weapon == "tabun_gas_mp") {
     return false;
-  if(weapon == "signal_flare_mp")
+  }
+  if(weapon == "signal_flare_mp") {
     return false;
-  if(weapon == "molotov_mp")
+  }
+  if(weapon == "molotov_mp") {
     return false;
+  }
   if(sMeansOfDeath == "MOD_EXPLOSIVE" || sMeansOfDeath == "MOD_GRENADE" || sMeansOfDeath == "MOD_GRENADE_SPLASH" || sMeansOfDeath == "MOD_PROJECTILE" || sMeansOfDeath == "MOD_PROJECTILE_SPLASH" || sMeansOfDeath == "MOD_SUICIDE") {
     if(iDamage >= self.maxhealth) {
       return true;
@@ -37,25 +40,27 @@ do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
   }
   return false;
 }
-
 is_weapon_shotgun(sWeapon) {
-  if(WeaponClass(sWeapon) == "spread")
+  if(WeaponClass(sWeapon) == "spread") {
     return true;
+  }
   return false;
 }
-
 do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
-  if(!isDefined(vAttackerOrigin))
+  if(!isDefined(vAttackerOrigin)) {
     return false;
-  if(!isDefined(sHitLoc))
+  }
+  if(!isDefined(sHitLoc)) {
     return false;
-  if(sMeansOfDeath == "MOD_MELEE")
+  }
+  if(sMeansOfDeath == "MOD_MELEE") {
     return false;
+  }
   shotty_gib = is_weapon_shotgun(sWeapon);
   if(iDamage < 35 && !shotty_gib) {
     return false;
   }
-  distSquared = distanceSquared(self.origin, vAttackerOrigin);
+  distSquared = DistanceSquared(self.origin, vAttackerOrigin);
   maxDist = 300;
   gib_chance = 50;
   if(shotty_gib) {
@@ -66,7 +71,7 @@ do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
     } else if(distSquared < 270 * 270) {
       gib_chance = 50;
     } else if(distSquared < 330 * 330) {
-      if(randomInt(100) < 50) {
+      if(RandomInt(100) < 50) {
         gib_chance = 50;
       } else {
         return false;
@@ -84,12 +89,11 @@ do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
   } else {
     return false;
   }
-  if(distSquared < maxDist * maxDist && randomInt(100) < gib_chance && GetTime() > level.lastGibTime + level.gibDelay) {
+  if(distSquared < maxDist * maxDist && RandomInt(100) < gib_chance && GetTime() > level.lastGibTime + level.gibDelay) {
     return true;
   }
   return false;
 }
-
 get_explosion_gib_ref(direction) {
   if(GetTime() > level.lastGibTime + level.gibDelay && level.totalGibs > 0) {
     level.totalGibs--;
@@ -138,10 +142,9 @@ get_explosion_gib_ref(direction) {
     self.gib_ref = undefined;
   }
 }
-
 get_gib_ref_by_direction(damageyaw) {
   gib_debug_print("gibs: damageyaw " + damageyaw);
-  if(randomInt(5) == 0 || damageyaw == 0) {
+  if(randomint(5) == 0 || damageyaw == 0) {
     gib_debug_print("gibs: gib_ref UP");
     get_explosion_gib_ref("up");
   } else
@@ -159,7 +162,6 @@ get_gib_ref_by_direction(damageyaw) {
     get_explosion_gib_ref("left");
   }
 }
-
 gib_debug_print(text) {}
 gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin) {
   if(do_explosive_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin)) {
@@ -222,11 +224,11 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
   self setModel(limb_data["body_model"]);
   self Attach(limb_data["legs_model"]);
-  if(gib_ref == "no_legs")
+  if(gib_ref == "no_legs") {
     return true;
+  }
   return false;
 }
-
 get_limb_data(gib_ref) {
   temp_array = [];
   torsoDmg1_defined = isDefined(self.torsoDmg1);
@@ -310,7 +312,6 @@ get_limb_data(gib_ref) {
     return undefined;
   }
 }
-
 throw_gib(spawn_models, spawn_tags, velocities) {
   if(velocities.size < 1) {
     return;
@@ -321,16 +322,13 @@ throw_gib(spawn_models, spawn_tags, velocities) {
     CreateDynEntAndLaunch(spawn_models[i], origin, angles, origin, velocities[i], level._effect["animscript_gibtrail_fx"]);
   }
 }
-
 gib_delete() {
   wait(10 + RandomFloat(5));
   self Delete();
 }
-
 get_random(array) {
-  return array[randomInt(array.size)];
+  return array[RandomInt(array.size)];
 }
-
 set_last_gib_time() {
   level notify("stop_last_gib_time");
   level endon("stop_last_gib_time");
@@ -338,7 +336,6 @@ set_last_gib_time() {
   level.lastGibTime = GetTime();
   level.totalGibs = RandomIntRange(level.minGibs, level.maxGibs);
 }
-
 get_bullet_gib_ref(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDir) {
   self.gib_ref = undefined;
   level.lastGibTime = GetTime();

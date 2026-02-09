@@ -28,7 +28,7 @@ setlevelmlgcam(var_0, var_1) {
     var_2 = var_2 - 4;
   }
 
-  var_3 = tolower(getdvar("mapname"));
+  var_3 = tolower(getDvar("mapname"));
   var_4 = tablelookup(var_1, 0, var_3, var_2 * 2 + 1);
 
   if(var_4 != "") {

@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -603,7 +603,7 @@ awardcapturepoints(var_0, var_1) {
       for(var_6 = 0; var_6 < var_5.size; var_6++) {
         var_7 = var_4[var_5[var_6]].player;
 
-        if(!isplayer(var_7)) {
+        if(!isPlayer(var_7)) {
           continue;
         }
         var_7 thread maps\mp\_events::holdhardpointevent();
@@ -821,7 +821,7 @@ getnextzonefromqueue() {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(maps\mp\gametypes\_damage::isfriendlyfire(self, var_1)) {
@@ -881,7 +881,7 @@ updatecapsperminute(var_0) {
   self.numcaps++;
   var_1 = maps\mp\_utility::gettimepassed() / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed["total"]))
+  if(isPlayer(self) && isDefined(self.timeplayed["total"]))
     var_1 = max(self.timeplayed["total"], 1) / 60;
 
   self.capsperminute = self.numcaps / var_1;

@@ -42,7 +42,7 @@ func_13D18() {
       continue;
     }
 
-    if(gettime() - var_0 > 190 && !scripts\mp\utility::isusingremote() && getdvar("scr_whizby_off") == "") {
+    if(gettime() - var_0 > 190 && !scripts\mp\utility::isusingremote() && getDvar("scr_whizby_off") == "") {
       thread func_13D17(var_1);
       var_0 = gettime();
     }

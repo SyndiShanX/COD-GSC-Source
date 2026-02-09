@@ -14,13 +14,11 @@ _id_3F64(var_0) {
 _id_3F65() {
   if(getdvarint("survival_chaos") == 1) {
     thread maps\_so_survival_chaos::chaos_pre_preload();
-
   }
   _id_03BE::main();
 
   if(!isDefined(level.loadout_table)) {
     level.loadout_table = "sp/survival_waves.csv";
-
   }
   level._id_3BD7 = "remote_missile_survival";
   level._id_12DB = _id_061C::_id_3D5C;
@@ -52,7 +50,6 @@ _id_3F65() {
 
   if(getdvarint("survival_chaos") == 1) {
     thread maps\_so_survival_chaos::chaos_preload();
-
   }
   precachemenu("so_survival_dvar_reset");
 }
@@ -73,7 +70,7 @@ hurtplayersthink(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isDefined(var_1) && isplayer(var_1) && var_1 == self) {
+    if(isDefined(var_1) && isPlayer(var_1) && var_1 == self) {
       break;
     }
   }
@@ -123,7 +120,6 @@ _id_3F67() {
 
   if(getdvarint("survival_chaos") != 1) {
     _id_0627::_id_3F3A();
-
   }
   _id_0628::_id_3E4B();
   maps\_audio::_id_1719();
@@ -153,7 +149,6 @@ _id_3F69() {
 
   if(var_4 == 1) {
     return int(var_8);
-
   }
   var_9 = var_4 * 1000;
   var_10 = int(var_9 + var_8);
@@ -177,15 +172,12 @@ _id_16C2() {
 
   if(var_4 < 10) {
     var_4 = "0" + var_4;
-
   }
   if(var_3 < 10) {
     var_3 = "0" + var_3;
-
   }
   if(var_2 < 10) {
     var_2 = "0" + var_2;
-
   }
   var_5 = var_4 + ":" + var_3 + ":" + var_2 + "." + var_1;
   var_6 = _id_3F69();
@@ -200,7 +192,6 @@ _id_16C2() {
 
     if(isDefined(var_14)) {
       var_14 = var_14 + "%";
-
     }
     var_15 = var_8._id_18D3["credits"];
     var_16 = _id_3F6A(var_8, "credits");
@@ -211,7 +202,7 @@ _id_16C2() {
     var_8 maps\_utility::_id_25DC(level._id_17F6);
 
     if(maps\_utility::_id_12C1()) {
-      setdvar("ui_hide_hint", 1);
+      setDvar("ui_hide_hint", 1);
       var_8 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER");
       var_8 maps\_utility::_id_16C7("@SO_SURVIVAL_PERFORMANCE_KILLS", var_9, var_10);
       var_8 maps\_utility::_id_16C7("@SO_SURVIVAL_PERFORMANCE_HEADSHOT", var_11, var_12);
@@ -224,7 +215,7 @@ _id_16C2() {
       continue;
     }
 
-    setdvar("ui_hide_hint", 0);
+    setDvar("ui_hide_hint", 0);
     var_8 maps\_utility::_id_16C7("@SO_SURVIVAL_PERFORMANCE_KILLS", var_9);
     var_8 maps\_utility::_id_16C7("@SO_SURVIVAL_PERFORMANCE_HEADSHOT", var_11);
     var_8 maps\_utility::_id_16C7("@SO_SURVIVAL_PERFORMANCE_ACCURACY", var_13);
@@ -245,7 +236,6 @@ _id_3F6C() {
     thread maps\_so_survival_chaos::chaos_wave();
   } else {
     thread _id_3D47();
-
   }
   thread _id_3FB8();
   thread _id_3FB1();
@@ -259,7 +249,6 @@ _id_3F6D() {
     objective_add(1, "active", &"SO_SURVIVAL_CHAOS_OBJECTIVE");
   } else {
     objective_add(1, "active", &"SO_SURVIVAL_SURVIVAL_OBJECTIVE");
-
   }
   objective_current_nomessage(1);
 }
@@ -269,7 +258,6 @@ _id_3F6E() {
 
   if(!common_scripts\utility::flag("start_survival")) {
     common_scripts\utility::flag_wait("start_survival");
-
   }
   if(!common_scripts\utility::flag("so_player_death_nofail")) {
     return;
@@ -403,13 +391,11 @@ _id_3F72(var_0) {
 
     if(var_3 == "pistol") {
       level._id_1AB1 = var_1;
-
     }
     if(var_2 == "max") {
       self setweaponammostock(var_1, weaponmaxammo(var_1));
     } else {
       self setweaponammostock(var_1, int(var_2));
-
     }
     if(var_0 == "weapon_1") {
       self switchtoweapon(var_1);
@@ -428,7 +414,6 @@ _id_3F73(var_0) {
       self setweaponammostock(var_1, weaponmaxammo(var_1));
     } else {
       self setweaponammostock(var_1, int(var_2));
-
     }
     if(var_1 == "flash_grenade") {
       self setoffhandsecondaryclass("flash");
@@ -490,7 +475,6 @@ _id_3F79() {
 
   if(!isDefined(self._id_3F7A)) {
     self._id_3F7A = [];
-
   }
   var_0 = self getweaponslistprimaries();
 
@@ -530,11 +514,9 @@ _id_3F79() {
 _id_3F7B(var_0) {
   if(weaponclass(var_0) == "none" || weaponclass(var_0) == "rocketlauncher" || weaponclass(var_0) == "item") {
     return 0;
-
   }
   if(weaponinventorytype(var_0) != "primary") {
     return 0;
-
   }
   return 1;
 }
@@ -542,15 +524,12 @@ _id_3F7B(var_0) {
 _id_3F7C(var_0) {
   if(!isDefined(self._id_3F7A)) {
     return 0;
-
   }
   if(!isDefined(self._id_3F7A[var_0])) {
     return 0;
-
   }
   if(gettime() - self._id_3F7A[var_0] <= 10000) {
     return 1;
-
   }
   return 0;
 }
@@ -563,11 +542,9 @@ _id_3F7D(var_0) {
 
   if(var_1 == var_3) {
     return 0;
-
   }
   if(var_2 <= 0) {
     return 0;
-
   }
   var_5 = var_3 - var_1;
   var_6 = 0;
@@ -576,7 +553,6 @@ _id_3F7D(var_0) {
     var_6 = var_2;
   } else {
     var_6 = var_5;
-
   }
   self setweaponammoclip(var_0, var_1 + var_6);
   self setweaponammostock(var_0, var_2 - var_6);
@@ -586,7 +562,6 @@ _id_3F7D(var_0) {
 _id_3F07(var_0) {
   if(!isDefined(self._id_3F7A)) {
     self._id_3F7A = [];
-
   }
   self._id_3F7A[var_0] = gettime();
 }
@@ -710,7 +685,6 @@ _id_3D47() {
 
   if(!common_scripts\utility::flag("start_survival")) {
     common_scripts\utility::flag_set("start_survival");
-
   }
   level notify("wave_started", level._id_17F6);
   setsaveddvar("bg_viewKickScale", "0.2");
@@ -747,17 +721,14 @@ _id_3D47() {
 
     if(var_0[0] > 0) {
       thread _id_3F8D(1, var_0[0]);
-
     }
     if(_id_3F8F(level._id_17F6)) {
       thread _id_3F90();
-
     }
     level thread _id_3F82();
 
     for(var_11 = getaiarray("axis").size + _id_061C::_id_3DC3(); var_11 > 4; var_11 = getaiarray("axis").size + _id_061C::_id_3DC3()) {
       level common_scripts\utility::waittill_any_timeout(1.0, "axis_died");
-
     }
     common_scripts\utility::flag_set("aggressive_mode");
     _id_0610::_id_3B72(0, _id_061C::_id_3D7A);
@@ -771,7 +742,6 @@ _id_3D47() {
 
     for(var_11 = getaiarray("axis").size + _id_061C::_id_3DC3(); var_11 > 0; var_11 = getaiarray("axis").size + _id_061C::_id_3DC3()) {
       level common_scripts\utility::waittill_any_timeout(1.0, "axis_died");
-
     }
     level._id_3B85 = _id_061C::_id_3D72;
     level._id_3D48 = _id_061C::_id_3D72;
@@ -842,7 +812,6 @@ _id_3F83(var_0, var_1) {
     self notifyonplayercommand("survival_player_ready", "+stance");
   } else {
     self notifyonplayercommand("survival_player_ready", "skip");
-
   }
   self waittill("survival_player_ready");
 
@@ -850,7 +819,6 @@ _id_3F83(var_0, var_1) {
     level._id_3F85 = 1;
   } else {
     level._id_3F85++;
-
   }
   self._id_3F84 maps\_specialops::_id_185C(1);
 
@@ -861,7 +829,6 @@ _id_3F83(var_0, var_1) {
 
     if(isDefined(var_3) && isDefined(var_3._id_3F84)) {
       var_3._id_3F84.label = &"SO_SURVIVAL_PARTNER_READY";
-
     }
     self._id_3F84 = maps\_specialops::_id_16B6(-2, var_2, &"SO_SURVIVAL_READY_UP_WAIT", self, 1);
     self._id_3F84 _id_3F86();
@@ -939,7 +906,6 @@ _id_3F8C(var_0, var_1) {
 
   if(maps\_utility::_id_12C1()) {
     var_2[var_2.size] = level.players[1];
-
   }
   var_3 = _id_061C::_id_3DF5(var_0);
   var_4 = _id_0618::_id_3E3A(var_3)[0];
@@ -955,7 +921,6 @@ _id_3F8C(var_0, var_1) {
       var_7 = var_4 maps\_utility::_id_166F();
     } else {
       var_7 = var_4 maps\_utility::_id_166F(1);
-
     }
     if(isDefined(var_7)) {
       var_7 setthreatbiasgroup("axis");
@@ -1031,7 +996,6 @@ _id_3F8F(var_0) {
 
   if(isDefined(var_1) || isDefined(var_2)) {
     return 1;
-
   }
   return 0;
 }
@@ -1041,7 +1005,6 @@ _id_3F90() {
 
   if(level._id_3D47[level._id_17F6]._id_3D4F && common_scripts\utility::flag_exist("aggressive_mode") && !common_scripts\utility::flag("aggressive_mode")) {
     common_scripts\utility::flag_wait("aggressive_mode");
-
   }
   level notify("boss_spawning", level._id_17F6);
   level._id_3D64 = [];
@@ -1053,7 +1016,6 @@ _id_3F90() {
       _id_3F91(var_0, 0);
     } else {
       _id_3F91(var_0, 1);
-
     }
     if(level._id_3D64.size && isDefined(var_1)) {
       level common_scripts\utility::waittill_any_timeout(30, "juggernaut_jumpedout");
@@ -1063,7 +1025,6 @@ _id_3F90() {
 
   if(isDefined(var_1)) {
     thread _id_3F92(var_1, !isDefined(var_0));
-
   }
   common_scripts\utility::flag_set("bosses_spawned");
 }
@@ -1176,7 +1137,6 @@ _id_3F97() {
 
     if(var_0["total"]) {
       thread maps\_utility::_id_12BE("personal_wave_reward", var_0["total"]);
-
     }
     thread _id_3FD3(var_0);
     level waittill("wave_started");
@@ -1260,7 +1220,7 @@ _id_3F9E() {
   var_0 = 0;
   self waittill("death", var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-  if(_id_0618::_id_0A32() && isplayer(var_1)) {
+  if(_id_0618::_id_0A32() && isPlayer(var_1)) {
     var_8 = "player.performance array is missing headshot setting";
     var_1._id_3F95["headshot"]++;
     var_1._id_18D3["headshot"]++;
@@ -1276,7 +1236,6 @@ _id_3F9F() {
     self._id_3FA0 = self._id_3F16["points"];
   } else {
     self._id_3FA0 = 0;
-
   }
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
@@ -1326,7 +1285,7 @@ _id_3FA3() {
   for(;;) {
     level waittill("specops_player_kill", var_0);
 
-    if(isDefined(var_0) && isplayer(var_0) && var_0 == self) {
+    if(isDefined(var_0) && isPlayer(var_0) && var_0 == self) {
       self._id_3F95["kill"]++;
       self._id_18D3["kill"]++;
     }
@@ -1348,7 +1307,6 @@ _id_3FA4() {
 
     if(var_0 == 9) {
       thread maps\_specialops::_id_01DF("SURVIVOR");
-
     }
     if(var_0 == 14) {
       thread maps\_specialops::_id_01DF("UNSTOPPABLE");
@@ -1394,7 +1352,6 @@ _id_3FA8() {
 
   if(!isDefined(self._id_3FA9)) {
     self._id_3FA9 = 0;
-
   }
   self._id_3FAA = [];
   self._id_3F98 = 0;
@@ -1414,15 +1371,12 @@ _id_3FA8() {
         var_1++;
       } else {
         var_1 = var_1 - 2;
-
       }
       if(self.health < 40) {
         var_1--;
-
       }
       if(self.stats["kills"] - var_2 > 0) {
         var_1 = var_1 + (self.stats["kills"] - var_2);
-
       }
       if(var_1 <= 0 || level._id_3F51 || maps\_utility::_id_133C("laststand_downed") && maps\_utility::_id_1008("laststand_downed")) {
         var_1 = 0;
@@ -1514,7 +1468,6 @@ _id_3FB2() {
       thread _id_3FBA(self._id_3FB4, self._id_12CF);
     } else {
       thread _id_3FBA(self._id_3FB4, var_1);
-
     }
     self notify("deposit_credits", var_1);
   }
@@ -1533,7 +1486,6 @@ _id_3FB5() {
       thread _id_3FBA(self._id_3FB4, self._id_12CF);
     } else {
       thread _id_3FBA(self._id_3FB4, var_1);
-
     }
     self notify("deposit_credits", var_1, var_0);
   }
@@ -1560,7 +1512,6 @@ _id_3FB7(var_0) {
     var_1 = "so_survival_boss_music_02";
   } else {
     var_1 = "so_survival_boss_music_01";
-
   }
   var_2 = maps\_utility::_id_142C(var_1) + 2;
 
@@ -1585,7 +1536,6 @@ _id_3FB8() {
 
     if(getdvarint("survival_chaos") != 1) {
       var_1 thread _id_3FCD();
-
     }
     var_1 thread _id_3C63();
     var_1 thread _id_3FC8();
@@ -1642,7 +1592,6 @@ _id_3FBE(var_0, var_1) {
 
     if(1) {
       var_4 = common_scripts\utility::waittill_any_timeout(1.75, "wave_started");
-
     }
     if(isDefined(var_4) && var_4 == "wave_started") {
       var_0 thread maps\_hud_util::fade_over_time(0.0, 0.0);
@@ -1664,13 +1613,11 @@ _id_3FBF() {
     self._id_3FC1 = 112 + (self == level.player) * 27;
   } else {
     self._id_3FC1 = 196;
-
   }
   if(getdvarint("survival_chaos") == 1) {
     self._id_3FC2 = 38;
   } else {
     self._id_3FC2 = 28;
-
   }
   self._id_3FC3 = _id_3FCF(self._id_3FC0, self._id_3FC1);
   self._id_3FC3 setshader("teamperk_blast_shield", self._id_3FC2, self._id_3FC2);
@@ -1686,7 +1633,6 @@ _id_3FBF() {
         var_0 = 250;
       } else {
         var_0 = 100;
-
       }
       var_1 = _id_0618::_id_3E41(self._id_3F16["points"] / (var_0 / 2), 0, 1);
       var_2 = 1 - _id_0618::_id_3E41((self._id_3F16["points"] - var_0 / 2) / (var_0 / 2), 0, 1);
@@ -1702,7 +1648,6 @@ _id_3FBF() {
       }
     } else {
       self._id_3FC3.alpha = 0;
-
     }
     common_scripts\utility::waittill_any("damage", "health_update");
   }
@@ -1746,7 +1691,6 @@ _id_3FC6(var_0) {
     self._id_3FC7 setvalue(self._id_3F16["points"]);
   } else {
     self._id_3FC7 setvalue(0);
-
   }
   var_1 = 14;
 
@@ -1769,7 +1713,6 @@ _id_3FC6(var_0) {
 
       if(var_1 > 0) {
         var_1 = var_1 - 0.5;
-
       }
       if(self._id_3F16["points"] <= 0) {
         var_3 = 0.5;
@@ -1814,13 +1757,11 @@ _id_3C63() {
     self._id_3FC9._id_3FCA = -138 + level.perk_offset;
   } else {
     self._id_3FC9._id_3FCA = -138;
-
   }
   if(issplitscreen()) {
     self._id_3FC9._id_3FCB = 112 + (self == level.player) * 27;
   } else {
     self._id_3FC9._id_3FCB = 196;
-
   }
   self._id_3FC9._id_3FCC = 28;
   self._id_3FC9.icon = _id_3FCF(self._id_3FC9._id_3FCA, self._id_3FC9._id_3FCB);
@@ -1844,7 +1785,6 @@ _id_3FCD() {
     self._id_3FCE._id_3FCB = 112 + (self == level.player) * 27;
   } else {
     self._id_3FCE._id_3FCB = 196;
-
   }
   self._id_3FCE._id_3FCC = 28;
   self._id_3FCE.icon = _id_3FCF(self._id_3FCE._id_3FCA, self._id_3FCE._id_3FCB);
@@ -1916,7 +1856,6 @@ fontpulseinit(var_0) {
     self.maxfontscale = min(var_0, 6.3);
   } else {
     self.maxfontscale = min(self.fontscale * 2, 6.3);
-
   }
   self.inframes = 2;
   self.outframes = 4;
@@ -1946,7 +1885,6 @@ matchstarttimer_internal(var_0, var_1) {
       var_1.alpha = 0;
     } else {
       var_1.alpha = 1;
-
     }
     foreach(var_3 in level.players) {}
     var_3 playSound("so_countdown_beep");
@@ -1980,7 +1918,6 @@ _id_3FD3(var_0) {
 
   if(maps\_utility::_id_12C1()) {
     waittillframeend;
-
   }
   foreach(var_4, var_2 in self._id_3F95) {
     maps\_specialops::_id_18A7("surHUD_performance", var_4, self._id_3F95[var_4]);
@@ -2003,7 +1940,6 @@ _id_3FD4(var_0) {
 
   if(!maps\_utility::_id_12C1()) {
     var_2 = "SOLO";
-
   }
   foreach(var_5, var_4 in var_0) {
     if(var_5 == "total") {
@@ -2051,7 +1987,6 @@ _id_3FD8(var_0) {
 
   if(!isDefined(var_0.duration)) {
     var_0.duration = 1.5;
-
   }
   var_0._id_3E20 = (0.15, 0.35, 0.85);
   var_0._id_3E21 = (0.95, 0.95, 0.95);

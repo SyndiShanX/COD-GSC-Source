@@ -160,7 +160,7 @@ archetypezombiespecialeffectscallback(einflictor, eattacker, idamage, idflags, s
   specialdayeffectchance = getdvarint(#"tu6_ffotd_zombiespecialdayeffectschance", 0);
 
   if(specialdayeffectchance && randomint(100) < specialdayeffectchance) {
-    if(isDefined(eattacker) && isplayer(eattacker)) {
+    if(isDefined(eattacker) && isPlayer(eattacker)) {
       self clientfield::increment("zombie_special_day");
     }
   }
@@ -261,7 +261,7 @@ zombienotetrackmeleefire(entity) {
   entity.melee_cooldown = gettime() + getdvarfloat(#"scr_zombiemeleecooldown", 1) * 1000;
 
   if(isDefined(entity.aat_turned) && entity.aat_turned) {
-    if(isDefined(entity.enemy) && isalive(entity.enemy) && !isplayer(entity.enemy)) {
+    if(isDefined(entity.enemy) && isalive(entity.enemy) && !isPlayer(entity.enemy)) {
       if(isDefined(entity.var_16d0eb06) && isDefined(entity.enemy.var_6d23c054) && entity.enemy.var_6d23c054) {
         if(isDefined(entity.var_443d78cc)) {
           e_attacker = entity.var_443d78cc;
@@ -305,7 +305,6 @@ zombienotetrackmeleefire(entity) {
 
   if(isDefined(entity.ai.var_80045105)) {
     record3dtext("<dev string:x38>" + gettime() - entity.ai.var_80045105, self.origin, (1, 0, 0), "<dev string:x45>", entity);
-
   }
 
   if(isDefined(level.custom_melee_fire)) {
@@ -742,7 +741,7 @@ zombieshouldjumpmeleecondition(entity) {
   }
 
   if(entity.enemy isonground()) {
-    if(isplayer(entity.enemy) && entity.enemy isplayerswimming()) {
+    if(isPlayer(entity.enemy) && entity.enemy isplayerswimming()) {
       waterheight = getwaterheight(entity.enemy.origin);
 
       if(waterheight - entity.enemy.origin[2] < 24) {
@@ -1354,7 +1353,7 @@ zombiegibkilledanhilateoverride(inflictor, attacker, damage, meansofdeath, weapo
     return damage;
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && (isDefined(attacker.forceanhilateondeath) && attacker.forceanhilateondeath || isDefined(level.forceanhilateondeath) && level.forceanhilateondeath)) {
+  if(isDefined(attacker) && isPlayer(attacker) && (isDefined(attacker.forceanhilateondeath) && attacker.forceanhilateondeath || isDefined(level.forceanhilateondeath) && level.forceanhilateondeath)) {
     self zombie_utility::gib_random_parts();
     gibserverutils::annihilate(self);
     return damage;

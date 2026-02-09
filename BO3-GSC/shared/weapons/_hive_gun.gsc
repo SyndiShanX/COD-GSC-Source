@@ -299,14 +299,14 @@ function firefly_damage_target(target) {
   target playSound("wpn_gelgun_hive_attack");
   target notify("snd_burn_scream");
   remaining_hits = 10;
-  if(!isplayer(target)) {
+  if(!isPlayer(target)) {
     remaining_hits = 4;
   }
   while(remaining_hits > 0) {
     wait(damage_delay);
     target dodamage(damage, self.origin, self.owner, self, "", "MOD_IMPACT", 0, weapon);
     remaining_hits = remaining_hits - 1;
-    if(isalive(target) && isplayer(target)) {
+    if(isalive(target) && isPlayer(target)) {
       bodytype = target getcharacterbodytype();
       if(bodytype >= 0) {
         bodytypefields = getcharacterfields(bodytype, currentsessionmode());
@@ -318,7 +318,7 @@ function firefly_damage_target(target) {
       } else {
         playFXOnTag("weapon/fx_hero_firefly_blood_os", target, "J_SpineLower");
       }
-    } else if(!isplayer(target)) {
+    } else if(!isPlayer(target)) {
       playFXOnTag("weapon/fx_hero_firefly_sparks_os", target, "tag_origin");
     }
   }
@@ -329,7 +329,7 @@ function firefly_watch_for_target_death(target) {
   if(isalive(target)) {
     target util::waittill_any("death", "flashback", "game_ended");
   }
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     target clientfield::set_to_player("fireflies_attacking", 0);
     target clientfield::set_to_player("fireflies_chasing", 0);
   }
@@ -339,7 +339,7 @@ function firefly_watch_for_target_death(target) {
 function firefly_watch_for_game_ended(target) {
   self endon("death");
   level waittill("game_ended");
-  if(isalive(target) && isplayer(target)) {
+  if(isalive(target) && isPlayer(target)) {
     target clientfield::set_to_player("fireflies_attacking", 0);
     target clientfield::set_to_player("fireflies_chasing", 0);
   }
@@ -350,7 +350,7 @@ function firefly_death() {
   println("" + self getentnum());
   self clientfield::set("firefly_state", 5);
   self playSound("wpn_gelgun_hive_die");
-  if(isDefined(self.target_entity) && isplayer(self.target_entity)) {
+  if(isDefined(self.target_entity) && isPlayer(self.target_entity)) {
     self.target_entity clientfield::set_to_player("fireflies_attacking", 0);
     self.target_entity clientfield::set_to_player("fireflies_chasing", 0);
   }
@@ -384,7 +384,7 @@ function firefly_attack(target, state) {
   target endon("entering_last_stand");
   self thread firefly_killcam_stop();
   self clientfield::set("firefly_state", state);
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     target clientfield::set_to_player("fireflies_attacking", 1);
   }
   target_origin = target.origin + vectorscale((0, 0, 1), 50);
@@ -410,7 +410,7 @@ function firefly_attack(target, state) {
 
 function get_crumb_position(target) {
   height = 50;
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     stance = target getstance();
     if(stance == "crouch") {
       height = 30;
@@ -490,7 +490,7 @@ function firefly_chase(target) {
   target endon("death");
   target endon("entering_last_stand");
   self clientfield::set("firefly_state", 2);
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     target clientfield::set_to_player("fireflies_chasing", 1);
   }
   max_distance = 500;

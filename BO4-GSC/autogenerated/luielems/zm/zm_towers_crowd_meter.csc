@@ -94,7 +94,6 @@ class czm_towers_crowd_meter: cluielem {
     cluielem::add_clientfield("_state", 1, 4, "int");
     cluielem::add_clientfield("visible", 1, 1, "int", var_6ad1a3bb);
   }
-
 }
 
 register(uid, var_6ad1a3bb) {

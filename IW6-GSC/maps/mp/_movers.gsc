@@ -735,7 +735,7 @@ script_mover_has_parent_moved(parent) {
 }
 
 script_mover_use_can_link(ent) {
-  if(!IsPlayer(self))
+  if(!isPlayer(self))
     return true;
 
   if(!isDefined(ent))
@@ -760,7 +760,7 @@ script_mover_use_can_link(ent) {
 }
 
 script_mover_link_to_use_object(player) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player maps\mp\_movers::script_mover_start_use(self);
 
     playerMover = player GetMovingPlatformParent();

@@ -41,7 +41,7 @@ function start_grapple(var_683c052c, var_a2613153, n_type, n_speed = 1800) {
     var_b7c15e33 waittill("movedone");
     var_8986f6e8 = var_c35f0f99 - var_a2613153.origin;
     var_b7c15e33.origin = var_a2613153.origin;
-    if(isplayer(var_a2613153)) {
+    if(isPlayer(var_a2613153)) {
       var_a2613153 playerlinkto(var_b7c15e33, "tag_origin");
     } else {
       var_a2613153 linkto(var_b7c15e33);
@@ -92,7 +92,7 @@ function private function_63b4b8a5(var_365c612) {
   }
   if(var_365c612 != (isDefined(self.var_14f171d3) && self.var_14f171d3)) {
     self.var_14f171d3 = var_365c612;
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self util::freeze_player_controls(var_365c612);
       self setplayercollision(!var_365c612);
       if(var_365c612) {

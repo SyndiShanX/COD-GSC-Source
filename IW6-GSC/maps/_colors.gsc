@@ -152,7 +152,7 @@ goto_current_colorindex() {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
 
-    if(isalive(var_3.color_user) && !isplayer(var_3.color_user)) {
+    if(isalive(var_3.color_user) && !isPlayer(var_3.color_user)) {
       continue;
     }
     thread ai_sets_goal_with_delay(var_3);
@@ -763,7 +763,7 @@ process_color_order_to_ai(var_0, var_1, var_2) {
   for(;;) {
     self waittill("node_taken", var_3);
 
-    if(isplayer(var_3))
+    if(isPlayer(var_3))
       wait 0.05;
 
     var_0 = get_best_available_new_colored_node();

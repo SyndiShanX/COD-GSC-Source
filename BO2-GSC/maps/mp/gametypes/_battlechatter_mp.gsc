@@ -61,25 +61,25 @@ init() {
   level.bcsounds["inform_need"] = "need";
   level.bcsounds["scream"] = "scream";
   level.bcsounds["fire"] = "fire";
-  setdvar("bcmp_weapon_delay", "2000");
-  setdvar("bcmp_weapon_fire_probability", "80");
-  setdvar("bcmp_weapon_reload_probability", "60");
-  setdvar("bcmp_weapon_fire_threat_probability", "80");
-  setdvar("bcmp_sniper_kill_probability", "20");
-  setdvar("bcmp_ally_kill_probability", "60");
-  setdvar("bcmp_killstreak_incoming_probability", "100");
-  setdvar("bcmp_perk_call_probability", "100");
-  setdvar("bcmp_incoming_grenade_probability", "5");
-  setdvar("bcmp_toss_grenade_probability", "20");
-  setdvar("bcmp_toss_trophy_probability", "80");
-  setdvar("bcmp_kill_inform_probability", "40");
-  setdvar("bcmp_pain_small_probability", "0");
-  setdvar("bcmp_breathing_probability", "0");
-  setdvar("bcmp_pain_delay", ".5");
-  setdvar("bcmp_last_stand_delay", "3");
-  setdvar("bcmp_breathing_delay", "");
-  setdvar("bcmp_enemy_contact_delay", "30");
-  setdvar("bcmp_enemy_contact_level_delay", "15");
+  setDvar("bcmp_weapon_delay", "2000");
+  setDvar("bcmp_weapon_fire_probability", "80");
+  setDvar("bcmp_weapon_reload_probability", "60");
+  setDvar("bcmp_weapon_fire_threat_probability", "80");
+  setDvar("bcmp_sniper_kill_probability", "20");
+  setDvar("bcmp_ally_kill_probability", "60");
+  setDvar("bcmp_killstreak_incoming_probability", "100");
+  setDvar("bcmp_perk_call_probability", "100");
+  setDvar("bcmp_incoming_grenade_probability", "5");
+  setDvar("bcmp_toss_grenade_probability", "20");
+  setDvar("bcmp_toss_trophy_probability", "80");
+  setDvar("bcmp_kill_inform_probability", "40");
+  setDvar("bcmp_pain_small_probability", "0");
+  setDvar("bcmp_breathing_probability", "0");
+  setDvar("bcmp_pain_delay", ".5");
+  setDvar("bcmp_last_stand_delay", "3");
+  setDvar("bcmp_breathing_delay", "");
+  setDvar("bcmp_enemy_contact_delay", "30");
+  setDvar("bcmp_enemy_contact_level_delay", "15");
   level.bcweapondelay = getdvarint(#"bcmp_weapon_delay");
   level.bcweaponfireprobability = getdvarint(#"bcmp_weapon_fire_probability");
   level.bcweaponreloadprobability = getdvarint(#"bcmp_weapon_reload_probability");
@@ -484,7 +484,7 @@ killedbysniper(sniper) {
 playerkilled(attacker) {
   self endon("disconnect");
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   waittillframeend;

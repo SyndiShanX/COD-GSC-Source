@@ -29,7 +29,6 @@ class class_c40841ac {
     adjustmentstarted = 0;
     var_425c4c8b = 1;
   }
-
 }
 
 autoexec registerbehaviorscriptfunctions() {
@@ -83,7 +82,6 @@ autoexec registerbehaviorscriptfunctions() {
   if(isarchetypeloaded(#"tiger")) {
     level thread function_1e4eb5f0();
   }
-
 }
 
 function_1637910a() {
@@ -205,7 +203,7 @@ is_target_valid(tiger, target) {
   }
 
   if(!(tiger.team == # "allies")) {
-    if(!isplayer(target) && sessionmodeiszombiesgame()) {
+    if(!isPlayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
 
@@ -214,11 +212,11 @@ is_target_valid(tiger, target) {
     }
   }
 
-  if(isplayer(target) && target.sessionstate == "spectator") {
+  if(isPlayer(target) && target.sessionstate == "spectator") {
     return 0;
   }
 
-  if(isplayer(target) && target.sessionstate == "intermission") {
+  if(isPlayer(target) && target.sessionstate == "intermission") {
     return 0;
   }
 
@@ -238,7 +236,7 @@ is_target_valid(tiger, target) {
     return 0;
   }
 
-  if(isplayer(target) && isDefined(level.is_player_valid_override)) {
+  if(isPlayer(target) && isDefined(level.is_player_valid_override)) {
     return [[level.is_player_valid_override]](target);
   }
 
@@ -291,7 +289,7 @@ get_favorite_enemy(tiger) {
 }
 
 get_last_valid_position() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return self.last_valid_position;
   }
 
@@ -487,7 +485,7 @@ function_66063225(behaviortreeentity) {
 }
 
 use_low_attack() {
-  if(!isDefined(self.enemy) || !isplayer(self.enemy)) {
+  if(!isDefined(self.enemy) || !isPlayer(self.enemy)) {
     return false;
   }
 
@@ -676,7 +674,6 @@ function_a4f5b046(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     distance = distance(entity.origin, animendpos);
     recordcircle(animendpos, 3, (0, 1, 0), "<dev string:x57>");
     record3dtext("<dev string:x60>" + distance, animendpos, (0, 1, 0), "<dev string:x57>");
-
   }
 }
 
@@ -693,7 +690,7 @@ function_2e8439bf(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   if(isDefined(self.enemy) && !self.meleeinfo.adjustmentstarted && self.meleeinfo.var_425c4c8b && currentanimtime >= self.meleeinfo.var_98bc84b7) {
     predictedenemypos = entity.enemy.origin;
 
-    if(isplayer(entity.enemy)) {
+    if(isPlayer(entity.enemy)) {
       velocity = entity.enemy getvelocity();
 
       if(length(velocity) >= 0) {
@@ -850,7 +847,7 @@ function_dc8e2d7d(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
 
 function_ef12c1d9(entity) {
   if(isDefined(entity.aat_turned) && entity.aat_turned) {
-    if(isDefined(entity.favoriteenemy) && !isplayer(entity.favoriteenemy)) {
+    if(isDefined(entity.favoriteenemy) && !isPlayer(entity.favoriteenemy)) {
       if(isDefined(entity.var_16d0eb06) && (isDefined(entity.favoriteenemy.var_6d23c054) && entity.favoriteenemy.var_6d23c054 || isDefined(entity.favoriteenemy.var_7672fb41) && entity.favoriteenemy.var_7672fb41)) {
         if(isDefined(entity.var_443d78cc)) {
           e_attacker = entity.var_443d78cc;
@@ -904,7 +901,6 @@ function_33958f06(entity) {
 function_16bc9556(entity) {
   if(function_ef12c1d9(entity)) {
     record3dtext("<dev string:xa1>", self.origin, (1, 0, 0), "<dev string:x4e>", entity);
-
   } else {
     hitent = entity melee();
     entity.melee_notetrack = 1;
@@ -1012,15 +1008,13 @@ function_1e4eb5f0() {
           break;
         default:
           if(isDefined(level.var_3d89b095)) {
-            [
-              [level.var_3d89b095]
-            ](cmd);
+            [[level.var_3d89b095]](cmd);
           }
 
           break;
       }
     }
 
-    setdvar(#"hash_3b467d1615c469f8", "<dev string:x60>");
+    setDvar(#"hash_3b467d1615c469f8", "<dev string:x60>");
   }
 }

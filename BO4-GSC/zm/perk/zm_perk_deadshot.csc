@@ -59,7 +59,7 @@ player_deadshot_perk_handler(localclientnum, oldval, newval, bnewent, binitialsn
 }
 
 is_local_player(player) {
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return 0;
   }
 

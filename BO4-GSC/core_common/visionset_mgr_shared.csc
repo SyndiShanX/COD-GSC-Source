@@ -450,7 +450,7 @@ killcam_visionset_vehicle_mismatch(visionset_to, visionset_vehicle, vehicletype)
 
 killcam_visionset_player_mismatch(visionset_to, visionset_vehicle) {
   if(visionset_to == visionset_vehicle) {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       return true;
     }
   }
@@ -515,21 +515,21 @@ visionset_update_cb(localclientnum, type) {
 }
 
 set_poison_overlay(amount) {
-  setdvar(#"r_poisonfx_debug_enable", 1);
-  setdvar(#"r_poisonfx_pulse", 2);
-  setdvar(#"r_poisonfx_warpx", -0.3);
-  setdvar(#"r_poisonfx_warpy", 0.15);
-  setdvar(#"r_poisonfx_dvisiona", 0);
-  setdvar(#"r_poisonfx_dvisionx", 0);
-  setdvar(#"r_poisonfx_dvisiony", 0);
-  setdvar(#"r_poisonfx_blurmin", 0);
-  setdvar(#"r_poisonfx_blurmax", 3);
-  setdvar(#"r_poisonfx_debug_amount", amount);
+  setDvar(#"r_poisonfx_debug_enable", 1);
+  setDvar(#"r_poisonfx_pulse", 2);
+  setDvar(#"r_poisonfx_warpx", -0.3);
+  setDvar(#"r_poisonfx_warpy", 0.15);
+  setDvar(#"r_poisonfx_dvisiona", 0);
+  setDvar(#"r_poisonfx_dvisionx", 0);
+  setDvar(#"r_poisonfx_dvisiony", 0);
+  setDvar(#"r_poisonfx_blurmin", 0);
+  setDvar(#"r_poisonfx_blurmax", 3);
+  setDvar(#"r_poisonfx_debug_amount", amount);
 }
 
 clear_poison_overlay() {
-  setdvar(#"r_poisonfx_debug_amount", 0);
-  setdvar(#"r_poisonfx_debug_enable", 0);
+  setDvar(#"r_poisonfx_debug_amount", 0);
+  setDvar(#"r_poisonfx_debug_enable", 0);
 }
 
 overlay_update_cb(localclientnum, type) {

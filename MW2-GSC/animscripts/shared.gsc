@@ -1633,7 +1633,7 @@ moveToOriginOverTime(origin, time) {
   }
 
   if(distSq > 16 * 16 && !self mayMoveToPoint(origin)) {
-    /# println( "^1Warning: AI starting behavior for node at " + origin + " but could not move to that point." );
+    println("^1Warning: AI starting behavior for node at " + origin + " but could not move to that point.");
     return;
   }
 

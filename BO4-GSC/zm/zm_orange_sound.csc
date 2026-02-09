@@ -41,7 +41,6 @@ startzmbspawnersoundloops() {
   if(getdvarint(#"debug_audio", 0) > 0) {
     println("<dev string:x7f>");
   }
-
 }
 
 soundloopthink() {

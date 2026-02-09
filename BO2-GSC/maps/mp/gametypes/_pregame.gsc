@@ -39,8 +39,8 @@ main() {
   game["dialog"]["defense_obj"] = "generic_boost";
   setscoreboardcolumns("score", "kills", "deaths", "kdratio", "assists");
 
-  if(getdvar(#"party_minplayers") == "")
-    setdvar("party_minplayers", 4);
+  if(getDvar(#"party_minplayers") == "")
+    setDvar("party_minplayers", 4);
 
   level.pregame_minplayers = getdvarint(#"party_minplayers");
   setmatchtalkflag("EveryoneHearsEveryone", 1);
@@ -208,7 +208,7 @@ pregamemain() {
     }
 
     if(getdvarint(#"scr_pregame_abort") > 0) {
-      setdvar("scr_pregame_abort", 0);
+      setDvar("scr_pregame_abort", 0);
       break;
     }
 
@@ -257,7 +257,7 @@ ontimelimit() {
   }
 
   makedvarserverinfo("ui_text_endreason", game["strings"]["pregame_time_limit_reached"]);
-  setdvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
+  setDvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
   thread maps\mp\gametypes\_globallogic::endgame(winner, game["strings"]["pregame_time_limit_reached"]);
 }
 

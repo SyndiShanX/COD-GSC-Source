@@ -1244,9 +1244,7 @@ watchmagicboxtrigger(var_0, var_1) {
         var_25 = var_24[1];
 
         if(isDefined(var_0.magicboxcanpickupfunc)) {
-          if(![
-              [var_0.magicboxcanpickupfunc]
-            ](var_25))
+          if(![[var_0.magicboxcanpickupfunc]](var_25))
             var_22 = "nothing";
         } else {
           var_14 = var_25 getcurrentprimaryweapon();

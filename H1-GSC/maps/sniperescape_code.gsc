@@ -704,7 +704,7 @@ countdown(var_0) {
     common_scripts\utility::flag_wait_or_timeout("player_enters_fairgrounds", var_1);
 
     if(!common_scripts\utility::flag("player_enters_fairgrounds")) {
-      setdvar("ui_deadquote", &"SNIPERESCAPE_FAILED_TO_EVAC");
+      setDvar("ui_deadquote", &"SNIPERESCAPE_FAILED_TO_EVAC");
       maps\_utility::missionfailedwrapper();
       return;
     }
@@ -802,7 +802,7 @@ kill_shielded_price() {
 }
 
 player_too_far_from_macmillan_fail() {
-  setdvar("ui_deadquote", &"SNIPERESCAPE_TOO_FAR_FROM_MACMILLAN");
+  setDvar("ui_deadquote", &"SNIPERESCAPE_TOO_FAR_FROM_MACMILLAN");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -810,7 +810,7 @@ price_dies() {
   if(isalive(level.price))
     level.price kill((0, 0, 0));
 
-  setdvar("ui_deadquote", &"SNIPERESCAPE_CPT_MACMILLAN_DIED");
+  setDvar("ui_deadquote", &"SNIPERESCAPE_CPT_MACMILLAN_DIED");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1899,7 +1899,7 @@ player_picks_up_price() {
   var_0 = "wounded_pickup";
 
   if(getdvarint("use_old_crash_pickup") != 1) {
-    level.oldnearclip = getdvar("r_znear");
+    level.oldnearclip = getDvar("r_znear");
     setsaveddvar("r_znear", 1.0);
   }
 
@@ -1943,7 +1943,7 @@ player_picks_up_price() {
     level.player unlink();
     var_2 delete();
 
-    if(getdvar("no_heli_protection") == "")
+    if(getDvar("no_heli_protection") == "")
       level.player setorigin((3577, -8420, 0.125));
 
     if(getdvarint("use_old_crash_pickup") != 1) {
@@ -3018,8 +3018,8 @@ spooky_dog() {
   var_0 = getent("spooky_dog_spawner", "targetname");
   common_scripts\utility::flag_wait("spawn_spooky_dog");
 
-  if(getdvar("player_hasnt_been_spooked") == "") {
-    setdvar("player_hasnt_been_spooked", "1");
+  if(getDvar("player_hasnt_been_spooked") == "") {
+    setDvar("player_hasnt_been_spooked", "1");
     var_0 thread maps\_utility::add_spawn_function(::spooky_dog_spawns);
   } else {
     var_1 = getent("dog_tele", "targetname");
@@ -3897,7 +3897,7 @@ price_warns_player() {
       if(!isalive(var_2[var_3].enemy)) {
         continue;
       }
-      if(!isplayer(var_2[var_3].enemy)) {
+      if(!isPlayer(var_2[var_3].enemy)) {
         continue;
       }
       if(isalive(var_1) && var_2[var_3] == var_1) {
@@ -4590,7 +4590,7 @@ should_break_where_is_he() {
 
 set_c4_throw_binding() {
   var_0 = 0;
-  var_1 = getdvar("gpad_buttonsConfig");
+  var_1 = getDvar("gpad_buttonsConfig");
 
   if(isDefined(var_1)) {
     if(issubstr(var_1, "_alt"))

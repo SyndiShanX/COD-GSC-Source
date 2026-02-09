@@ -2144,9 +2144,9 @@ irish_luck_choose_random_consumable(var_0) {
 
   for(;;) {
     var_4 = scripts\engine\utility::random(level.irish_luck_consumables);
-    if(getdvar("irish_luck_debug", "") != "") {
+    if(getDvar("irish_luck_debug", "") != "") {
       var_0.stored_fnf = [];
-      var_5 = getdvar("irish_luck_debug", "");
+      var_5 = getDvar("irish_luck_debug", "");
       foreach(var_8, var_7 in level.irish_luck_consumables) {
         if(var_8 == var_5) {
           var_4 = level.irish_luck_consumables[var_8];
@@ -2457,9 +2457,7 @@ move_ent_function(var_0, var_1) {
     if(!isDefined(self.twister_array_zombie[var_2]) && var_2 >= self.twister_array_zombie.size) {
       if(self.twister_array_zombie.size > 0) {
         if(isDefined(self.twister_array_zombie[0])) {
-          if([
-              [level.active_volume_check]
-            ](self.twister_array_zombie[0])) {
+          if([[level.active_volume_check]](self.twister_array_zombie[0])) {
             var_0 moveto(self.twister_array_zombie[0], 0.5, 0.25, 0);
           } else {
             var_3 = getclosestpointonnavmesh(self.twister_array_zombie[0]) + (0, 10, 0);

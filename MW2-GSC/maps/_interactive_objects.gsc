@@ -7,11 +7,8 @@
 #include common_scripts\utility;
 
 main() {
-  // -- -- -- -- -- -- -- -- --
-  // EFECTS DEFINITIONS
-  // -- -- -- -- -- -- -- -- --
-
-  flag_init("no_ai_tv_damage");
+  // -- -- -- -- -- -- -- -- -- // EFECTS DEFINITIONS
+  // -- -- -- -- -- -- -- -- -- flag_init("no_ai_tv_damage");
   qBarrels = false;
 
   barrels = getEntArray("explodable_barrel", "targetname");
@@ -99,20 +96,10 @@ main() {
     level.breakables_fx["security_camera_explode"] = loadfx("props/securitycamera_explosion");
   }
 
-  // -- -- -- -- -- -- -- -- --
-  // -- -- -- -- -- -- -- -- --
-
-  // -- -- -- -- -- -- -- -- -
-  // SOUND DEFINITIONS
-  // -- -- -- -- -- -- -- -- -
-  level.barrelExpSound = "barrel_mtl_explode";
-  // -- -- -- -- -- -- -- -- -
-  // -- -- -- -- -- -- -- -- -
-
-  // -- -- -- -- -- -- -
-  // MISC SETTINGS
-  // -- -- -- -- -- -- -
-  maxBrokenPieces = 25;
+  // -- -- -- -- -- -- -- -- -- // -- -- -- -- -- -- -- -- -- // -- -- -- -- -- -- -- -- - // SOUND DEFINITIONS
+  // -- -- -- -- -- -- -- -- - level.barrelExpSound = "barrel_mtl_explode";
+  // -- -- -- -- -- -- -- -- - // -- -- -- -- -- -- -- -- - // -- -- -- -- -- -- - // MISC SETTINGS
+  // -- -- -- -- -- -- - maxBrokenPieces = 25;
   level.breakables_peicesCollide["orange vase"] = true;
   level.breakables_peicesCollide["green vase"] = true;
   level.breakables_peicesCollide["bottle"] = true;
@@ -121,10 +108,7 @@ main() {
   //* * * * * * * * * * * * * IF YOU PUT THIS BACK IN - SEARCH FOR "PLATE WAIT" AND PUT THAT BACK IN TOO * * * * * * * * * * * * *
 
   level.barrelHealth = 150;
-  // -- -- -- -- -- -- -
-  // -- -- -- -- -- -- -
-
-  level.precachemodeltype = [];
+  // -- -- -- -- -- -- - // -- -- -- -- -- -- - level.precachemodeltype = [];
   level.barrelExplodingThisFrame = false;
   level.breakables_clip = [];
   level.breakables_clip = getEntArray("vase_break_remove", "targetname");
@@ -256,7 +240,7 @@ tv_damage() {
       if(!isalive(other)) {
         continue;
       }
-      if(!isplayer(other))
+      if(!isPlayer(other))
         continue;
     }
 
@@ -633,7 +617,7 @@ explodable_barrel_explode() {
 
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker))
+    if(isPlayer(attacker))
       arcadeMode_kill(self.origin, "rifle", 150);
   }
 
@@ -653,7 +637,6 @@ explodable_barrel_explode() {
 
     self.origin = pos;
     self.angles += (0, 0, 90);
-
   }
   wait 0.05;
   level.barrelExplodingThisFrame = false;
@@ -714,7 +697,7 @@ helmet_logic() {
 
   direction_vec = vectornormalize(self.origin - direction_org);
 
-  if(!isDefined(self.dontremove) && isplayer(ent)) {
+  if(!isDefined(self.dontremove) && isPlayer(ent)) {
     self thread animscripts\death::helmetLaunch(direction_vec);
     return;
   }

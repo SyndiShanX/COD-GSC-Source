@@ -115,7 +115,6 @@ create_fx_menu() {
     } else
       menu_fx_type();
   }
-
 }
 
 exit_menu() {
@@ -273,7 +272,6 @@ change_ent_type(newtype) {
     for(i = 0; i < level.selected_fx_ents.size; i++)
       change_effect_to_exploder(level.selected_fx_ents[i]);
   }
-
 }
 
 menu_init() {
@@ -382,19 +380,19 @@ prepare_option_for_change(option, drawncount) {
 
   level.createfx_inputlocked = 1;
   set_option_index(option["name"]);
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
   level.createfxhudelements[drawncount + 1][0].color = (1, 1, 0);
 }
 
 menu_fx_option_set() {
-  if(getdvar(#"fx") == "nil") {
+  if(getDvar(#"fx") == "nil") {
     return;
   }
   option = get_selected_option();
   setting = undefined;
 
   if(option["type"] == "string")
-    setting = getdvar(#"fx");
+    setting = getDvar(#"fx");
 
   if(option["type"] == "int")
     setting = getdvarint(#"fx");
@@ -403,7 +401,7 @@ menu_fx_option_set() {
     setting = getdvarfloat(#"fx");
 
   if(option["type"] == "vector") {
-    setting = getdvar(#"fx");
+    setting = getDvar(#"fx");
     temparray = strtok(setting, " ");
 
     if(temparray.size == 3)
@@ -512,7 +510,6 @@ set_option_index(name) {
     level.selected_fx_option_index = i;
     return;
   }
-
 }
 
 get_selected_option() {
@@ -538,7 +535,6 @@ get_option(name) {
     if(level.createfx_options[i]["name"] == name)
       return level.createfx_options[i];
   }
-
 }
 
 display_fx_info(ent) {
@@ -590,7 +586,6 @@ display_fx_info(ent) {
     set_fx_hudelement("Origin: " + ent.v["origin"]);
     set_fx_hudelement("Angles: " + ent.v["angles"]);
   }
-
 }
 
 display_fx_add_options(ent) {
@@ -656,7 +651,6 @@ add_option_to_selected_entities(option) {
     if(mask(option["mask"], ent.v["type"]))
       ent.v[option["name"]] = option["default"];
   }
-
 }
 
 menunone() {
@@ -696,7 +690,6 @@ draw_effects_list(title) {
     current_page = level.effect_list_offset / level.effect_list_offset_max + 1;
     set_fx_hudelement("(<-) Page " + current_page + " of " + pages + " (->)");
   }
-
 }
 
 increment_list_offset() {

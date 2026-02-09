@@ -75,8 +75,9 @@ mason_woods_freakout_setup() {
   sp_pdf add_spawn_function(::woods_freakout_pdf_run_to_mission, nd_goal);
   e_stables_clip = getent("clip_barn_door", "targetname");
 
-  if(isDefined(e_stables_clip))
+  if(isDefined(e_stables_clip)) {
     e_stables_clip delete();
+  }
 }
 
 mason_woods_freakout_begin() {
@@ -105,8 +106,9 @@ mason_woods_freakout_begin() {
   scene_wait("woods_freakout");
   flag_set("mason_woods_freakout_complete");
 
-  if(!flag("player_entered_mission_precourtyard"))
+  if(!flag("player_entered_mission_precourtyard")) {
     trigger_use("mason_post_woods_freakout_colortrigger");
+  }
 
   woods_freakout_cleanup();
   autosave_by_name("mason_woods_freakout_complete");
@@ -134,10 +136,11 @@ woods_freakout_remove_set_low_ready() {
   e_trigger = getent("mason_near_woods_freakout", "targetname");
 
   while(!flag("menendez_scene_complete")) {
-    if(self istouching(e_trigger))
+    if(self istouching(e_trigger)) {
       self setlowready(1);
-    else
+    } else {
       self setlowready(0);
+    }
 
     wait 1.0;
   }
@@ -199,8 +202,9 @@ mason_point_of_no_return_cleanup() {
   fxanim_deconstructions_for_mason_side1();
   vh_truck = getent("mason_truck", "targetname");
 
-  if(isDefined(vh_truck))
+  if(isDefined(vh_truck)) {
     vh_truck delete();
+  }
 
   maps\nicaragua_mason_hill::mason_hill_stop_exploders();
   delete_scene_all("mason_truck_pdf_corpse");

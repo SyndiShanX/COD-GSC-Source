@@ -825,13 +825,13 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_5, self);
   var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
 
-  if(isplayer(var_1) && var_1 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
+  if(isPlayer(var_1) && var_1 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
     var_12 = int(var_2 * level.armorpiercingmod);
     var_2 = var_2 + var_12;
   }
 
   if(self.health <= var_2) {
-    if(isplayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
+    if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
       thread scripts\mp\utility\game::teamplayercardsplash("callout_destroyed_harrier", var_1);
       var_1 thread scripts\mp\utility\game::giveunifiedpoints("kill", var_5);
       var_1 notify("destroyed_killstreak");

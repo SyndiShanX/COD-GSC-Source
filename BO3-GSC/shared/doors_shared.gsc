@@ -460,18 +460,14 @@ function door_open_update(c_door) {
     if(!c_door flag::get("open")) {
       if(!c_door flag::get("locked")) {
         if(b_hold_open || b_auto_close) {
-          [
-            [c_door]
-          ] - > open();
+          [[c_door]] - > open();
           if(b_hold_open) {
             e_who player_freeze_in_place(1);
             e_who disableweapons();
             e_who disableoffhandweapons();
           }
           door_wait_until_clear(c_door, e_who);
-          [
-            [c_door]
-          ] - > close();
+          [[c_door]] - > close();
           if(b_hold_open) {
             wait(0.05);
             c_door flag::wait_till_clear("animating");
@@ -483,16 +479,12 @@ function door_open_update(c_door) {
           if(str_unlock_method == "key") {
             if(e_who player_has_key("door")) {
               e_who player_take_key("door");
-              [
-                [c_door]
-              ] - > open();
+              [[c_door]] - > open();
             } else {
               iprintlnbold("You need a key.");
             }
           } else {
-            [
-              [c_door]
-            ] - > open();
+            [[c_door]] - > open();
           }
         }
       }
@@ -609,7 +601,7 @@ function door_wait_until_clear(c_door, e_triggerer) {
     e_temp_trigger = spawn("trigger_radius", v_pos, 0, n_radius, n_height);
     e_trigger = e_temp_trigger;
   }
-  if(isplayer(e_triggerer) && (isDefined(c_door.m_s_bundle.door_use_hold) && c_door.m_s_bundle.door_use_hold)) {
+  if(isPlayer(e_triggerer) && (isDefined(c_door.m_s_bundle.door_use_hold) && c_door.m_s_bundle.door_use_hold)) {
     c_door.m_e_trigger door_wait_until_user_release(c_door, e_triggerer);
   }
   e_trigger trigger_wait_until_clear(c_door);
@@ -717,7 +709,7 @@ function give_ai_key_internal(n_timeout_sec, str_key_type) {
   e_trigger endon("death");
   while(true) {
     e_trigger waittill("trigger", e_who);
-    if(isplayer(e_who)) {
+    if(isPlayer(e_who)) {
       e_who give_player_key(str_key_type);
       break;
     }

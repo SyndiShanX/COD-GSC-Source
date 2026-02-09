@@ -35,7 +35,6 @@ main() {
   missionSettings add_level("outro", false, "", true, undefined, undefined, false);
   level.missionSettings = missionSettings;
 }
-
 _nextmission() {
   level.nextmission = true;
   players = get_players();
@@ -54,8 +53,8 @@ _nextmission() {
     maps\_hud_message::waitTillNotifiesDone();
   }
   SetSavedDvar("ui_nextMission", "1");
-  SetDvar("ui_showPopup", "0");
-  SetDvar("ui_popupString", "");
+  setDvar("ui_showPopup", "0");
+  setDvar("ui_popupString", "");
   if(!isDefined(level_index)) {
     return;
   }
@@ -159,7 +158,6 @@ _nextmission() {
     }
   }
 }
-
 prefetch_next() {
   level_index = level.missionSettings get_level_index(level.script);
   if(isDefined(level_index)) {
@@ -168,19 +166,18 @@ prefetch_next() {
       nextlevel_name = level.missionSettings get_level_name(nextlevel_index);
       if(issubstr(nextlevel_name, "so_narrative")) {
         nextlevel_index++;
-        if(nextlevel_index < level.missionSettings.levels.size)
+        if(nextlevel_index < level.missionSettings.levels.size) {
           prefetchLevel(level.missionSettings get_level_name(nextlevel_index));
+        }
       } else {
         prefetchLevel(nextlevel_name);
       }
     }
   }
 }
-
 get_level_completed(level_index) {
   return Int(getDvar(#"mis_difficulty")[level_index]);
 }
-
 set_level_completed(level_index) {
   levelOffset = level_index;
   missionString = getDvar(#"mis_difficulty");
@@ -198,7 +195,6 @@ set_level_completed(level_index) {
   }
   set_mission_dvar("mis_difficulty", newString);
 }
-
 set_mission_dvar(dvar, string) {
   if(maps\_cheat::is_cheating() || flag("has_cheated")) {
     return;
@@ -208,7 +204,6 @@ set_mission_dvar(dvar, string) {
   }
   SetMissionDvar(dvar, string);
 }
-
 get_lowest_skill() {
   missionString = getDvar(#"mis_difficulty");
   lowestSkill = 4;
@@ -219,13 +214,11 @@ get_lowest_skill() {
   }
   return (lowestSkill);
 }
-
 create_mission() {
   mission = spawnStruct();
   mission.levels = [];
   return (mission);
 }
-
 add_level(levelName, keepWeapons, achievement, skip_success, veteran_achievement, campaign, coop) {
   assert(isDefined(keepweapons));
   level_index = self.levels.size;
@@ -238,7 +231,6 @@ add_level(levelName, keepWeapons, achievement, skip_success, veteran_achievement
   self.levels[level_index].campaign = campaign;
   self.levels[level_index].coop = coop;
 }
-
 get_level_index(levelName) {
   for(i = 0; i < self.levels.size; i++) {
     if(self.levels[i].name != levelName) {
@@ -248,23 +240,18 @@ get_level_index(levelName) {
   }
   return (undefined);
 }
-
 get_level_name(level_index) {
   return (self.levels[level_index].name);
 }
-
 get_keep_weapons(level_index) {
   return (self.levels[level_index].keepWeapons);
 }
-
 get_achievement(level_index) {
   return (self.levels[level_index].achievement);
 }
-
 get_level_veteran_award(level_index) {
   return (self.levels[level_index].veteran_achievement);
 }
-
 has_level_veteran_award(level_index) {
   if(isDefined(self.levels[level_index].veteran_achievement)) {
     return (true);
@@ -272,7 +259,6 @@ has_level_veteran_award(level_index) {
     return (false);
   }
 }
-
 has_achievement(level_index) {
   if(isDefined(self.levels[level_index].achievement)) {
     return (true);
@@ -280,7 +266,6 @@ has_achievement(level_index) {
     return (false);
   }
 }
-
 is_campaign_complete(level_index) {
   campaign = self.levels[level_index].campaign;
   count = 0;
@@ -302,11 +287,9 @@ is_campaign_complete(level_index) {
     return false;
   }
 }
-
 get_campaign(level_index) {
   return (self.levels[level_index].campaign);
 }
-
 get_coop(level_index) {
   if(self get_level_name(level_index) == "credits") {
     return false;
@@ -316,7 +299,6 @@ get_coop(level_index) {
   }
   return self.levels[level_index].coop;
 }
-
 get_first_coop_index() {
   for(i = 0; i < level.missionSettings.levels.size; i++) {
     if(self get_coop(i)) {
@@ -325,7 +307,6 @@ get_first_coop_index() {
   }
   return -1;
 }
-
 has_campaign(level_index) {
   if(isDefined(self.levels[level_index].campaign)) {
     return (true);
@@ -333,7 +314,6 @@ has_campaign(level_index) {
     return (false);
   }
 }
-
 check_other_hasLevelVeteranAchievement(level_index) {
   for(i = 0; i < self.levels.size; i++) {
     if(i == level_index) {
@@ -350,14 +330,12 @@ check_other_hasLevelVeteranAchievement(level_index) {
   }
   return true;
 }
-
 skip_success(level_index) {
   if(!isDefined(self.levels[level_index].skip_success)) {
     return false;
   }
   return true;
 }
-
 force_all_complete() {
   println("tada!");
   missionString = getDvar(#"mis_difficulty");
@@ -365,12 +343,10 @@ force_all_complete() {
     set_level_completed(index);
   }
 }
-
 clearall() {
   SetMissionDvar("mis_difficulty", "00000000000000000000000000000000000000000000000000");
   SetMissionDvar("mis_01", 1);
 }
-
 credits_end() {
   ChangeLevel("");
 }

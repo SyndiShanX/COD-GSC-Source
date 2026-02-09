@@ -521,7 +521,7 @@ function artillery_fx_logic_ee(sp_giant_robot, grenade) {
 }
 
 function homing_beacon_vo() {
-  if(isDefined(self.owner) && isplayer(self.owner)) {
+  if(isDefined(self.owner) && isPlayer(self.owner)) {
     n_time = gettime();
     if(isDefined(self.time_thrown)) {
       if(n_time < (self.time_thrown + 3000)) {
@@ -744,13 +744,13 @@ function function_45216da2() {
 }
 
 function private setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value = -1) {
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   adddebugcommand(((((("devgui_cmd \"" + str_devgui_path) + "\" \"") + str_dvar) + " ") + n_value) + "\"\n");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }

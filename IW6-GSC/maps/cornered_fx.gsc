@@ -204,7 +204,7 @@ main() {
   if(!getdvarint("r_reflectionProbeGenerate")) {
     maps\createfx\cornered_fx::main();
 
-    if(getdvar("createfx") == "")
+    if(getDvar("createfx") == "")
       grab_firework_effects();
 
     maps\createfx\cornered_sound::main();

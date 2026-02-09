@@ -185,7 +185,7 @@ juggRemover() {
   self.isJuggernautRecon = false;
   self.isJuggernautManiac = false;
   self.isJuggernautLevelCustom = false;
-  if(IsPlayer(self))
+  if(isPlayer(self))
     self SetClientOmnvar("ui_juggernaut", 0);
 
   self unsetPerk("specialty_radarjuggernaut", true);
@@ -199,7 +199,7 @@ juggRemoveOnGameEnded() {
 
   level waittill("game_ended");
 
-  if(IsPlayer(self))
+  if(isPlayer(self))
     self SetClientOmnvar("ui_juggernaut", 0);
 }
 

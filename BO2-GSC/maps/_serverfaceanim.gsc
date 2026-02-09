@@ -92,8 +92,9 @@ wait_for_face_event() {
       if(isDefined(level.face_event_handler.events[face_notify])) {
         forced = 0;
 
-        if(isDefined(level.face_event_handler.forced[face_notify]))
+        if(isDefined(level.face_event_handler.forced[face_notify])) {
           forced = level.face_event_handler.forced[face_notify];
+        }
 
         ent sendfaceevent(level.face_event_handler.events[face_notify], forced);
       }

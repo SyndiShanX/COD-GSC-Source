@@ -9,11 +9,11 @@ main() {
   thread maps\_credits::playcredits();
   thread maps\simplecredits_code::createblackoverlay();
   thread maps\simplecredits_code::createskipcredits();
-  setdvar("credits_load", "0");
-  setdvar("credits_active", "1");
+  setDvar("credits_load", "0");
+  setDvar("credits_active", "1");
   level.credits_active = 1;
 
-  if(getdvar("credits_frommenu") == "1")
+  if(getDvar("credits_frommenu") == "1")
     level.credits_frommenu = 1;
 
   common_scripts\utility::flag_init("credits_ended");
@@ -158,7 +158,7 @@ quitcredits() {
   var_1.alpha = 1;
   musicstop(var_0);
   wait(var_0);
-  setdvar("credits_active", "0");
+  setDvar("credits_active", "0");
 
   if(isDefined(level.credits_frommenu))
     changelevel("");

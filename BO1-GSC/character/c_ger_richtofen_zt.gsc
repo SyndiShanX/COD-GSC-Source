@@ -12,7 +12,6 @@ main() {
   self.voice = "german";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_ger_richtofen_body");
   precacheModel("c_ger_richtofen_head");

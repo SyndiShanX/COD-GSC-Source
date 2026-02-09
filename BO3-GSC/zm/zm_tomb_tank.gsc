@@ -139,7 +139,7 @@ function draw_tank_tag(tag, opcolor) {
 }
 
 function tank_debug_tags() {
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   level flag::wait_till("");
   a_spots = struct::get_array("", "");
@@ -1476,12 +1476,12 @@ function enemy_location_override() {
     }
   }
   if(self.var_13ed8adf === level.time && isDefined(location)) {
-    if(isplayer(enemy) && location == enemy.origin) {
+    if(isPlayer(enemy) && location == enemy.origin) {
       self zm_utility::approximate_path_dist(enemy);
     } else {
       pathdistance(self.origin, location, 1, self, level.pathdist_type);
     }
-  } else if(isplayer(enemy) && isDefined(enemy.last_valid_position) && location === enemy.origin) {
+  } else if(isPlayer(enemy) && isDefined(enemy.last_valid_position) && location === enemy.origin) {
     location = enemy.last_valid_position;
   }
   return location;

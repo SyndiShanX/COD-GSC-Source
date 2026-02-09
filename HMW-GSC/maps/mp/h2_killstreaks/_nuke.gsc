@@ -175,7 +175,7 @@ nukeEffects() {
     playerForward = VectorNormalize(playerForward);
 
     nukeDistance = 5000;
-    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	
+    nukeDistance = getDvarInt("scr_nukeDistance");
 
     nukeEnt = spawn("script_model", player.origin + vector_multiply(playerForward, nukeDistance));
     nukeEnt setModel("tag_origin");

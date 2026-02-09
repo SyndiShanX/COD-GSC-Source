@@ -59,7 +59,7 @@ result(death, attacker, mod, weapon) {
     }
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker zm_stats::increment_challenge_stat(#"zombie_hunter_brain_decay");
     self.var_443d78cc = attacker;
   }

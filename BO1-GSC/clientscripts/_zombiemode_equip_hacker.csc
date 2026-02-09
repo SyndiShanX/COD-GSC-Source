@@ -1,6 +1,6 @@
 /******************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_equip_hacker.csc
+ * Script: clientscripts\_zombiemode_equip_hacker\.csc
 ******************************************************/
 
 #include clientscripts\_utility;
@@ -15,10 +15,9 @@ init() {
   }
   level thread player_init();
 }
-
 player_init() {
   waitforclient(0);
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
   }

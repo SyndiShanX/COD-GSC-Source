@@ -71,7 +71,6 @@ class cluielemimage: cluielem {
     cluielem::add_clientfield("blue", 1, 4, "float");
     cluielem::function_dcb34c80("material", "material", 1);
   }
-
 }
 
 set_color(player, red, green, blue) {

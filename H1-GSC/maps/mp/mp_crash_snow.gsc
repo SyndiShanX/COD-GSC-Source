@@ -22,8 +22,8 @@ main() {
   game["defenders"] = "axis";
   game["allies_soldiertype"] = "desert";
   game["axis_soldiertype"] = "desert";
-  setdvar("r_specularcolorscale", "1");
-  setdvar("compassmaxrange", "1600");
+  setDvar("r_specularcolorscale", "1");
+  setDvar("compassmaxrange", "1600");
   level thread light_delete();
   level thread onplayerconnect();
 }

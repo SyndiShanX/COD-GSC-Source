@@ -141,7 +141,7 @@ pillage_init() {
   }
 
   foreach(index, area in level.pillage_areas) {
-    if(GetDvar("scr_debug_pillage") != "1") {
+    if(getDvar("scr_debug_pillage") != "1") {
       level.pillage_areas[index]["easy"] = remove_random_pillage_spots(level.pillage_areas[index]["easy"]);
       level.pillage_areas[index]["medium"] = remove_random_pillage_spots(level.pillage_areas[index]["medium"]);
       level.pillage_areas[index]["hard"] = remove_random_pillage_spots(level.pillage_areas[index]["hard"]);
@@ -149,7 +149,6 @@ pillage_init() {
     level thread create_pillage_spots(level.pillage_areas[index]["easy"]);
     level thread create_pillage_spots(level.pillage_areas[index]["medium"]);
     level thread create_pillage_spots(level.pillage_areas[index]["hard"]);
-
   }
 
   build_pillageitem_arrays("easy");
@@ -209,7 +208,6 @@ get_hintstring_for_pillaged_item(string) {
   if(isDefined(level.get_hintstring_for_pillaged_item_func)) {
     return [[level.get_hintstring_for_pillaged_item_func]](string);
   }
-
 }
 
 get_hintstring_for_item_pickup(string) {
@@ -286,7 +284,6 @@ get_hintstring_for_item_pickup(string) {
   if(isDefined(level.get_hintstring_for_item_pickup_func)) {
     return [[level.get_hintstring_for_item_pickup_func]](string);
   }
-
 }
 
 remove_random_pillage_spots(pillage_spot_array) {
@@ -351,7 +348,6 @@ create_pillage_spots(pillage_spot_array) {
     if(index % 2 == 0)
       wait(.05);
   }
-
 }
 
 pillage_spot_think() {
@@ -360,7 +356,7 @@ pillage_spot_think() {
   while(1) {
     self.pillage_trigger waittill("trigger", user);
 
-    if(!isplayer(user)) {
+    if(!isPlayer(user)) {
       continue;
     }
     if(user is_holding_deployable() || user has_special_weapon()) {
@@ -380,9 +376,7 @@ pillage_spot_think() {
 
     if(!isDefined(self.searched)) {
       if(isDefined(level.locker_key_check_func)) {
-        if([
-            [level.locker_key_check_func]
-          ](user))
+        if([[level.locker_key_check_func]](user))
           continue;
       }
 
@@ -403,7 +397,6 @@ pillage_spot_think() {
             if(user get_player_currency() < user.maxcurrency) {
               user give_player_currency(pillaged_item.count, undefined, undefined, true);
               self delete_pillage_trigger();
-
             } else {
               self.pillage_trigger setModel(level.pillageInfo.money_stack);
               string = get_hintstring_for_item_pickup(pillaged_item.type);
@@ -476,7 +469,7 @@ pillage_spot_think() {
 
             attach_found = user get_attachment_for_weapon();
 
-            if(getdvar("scr_force_pillageitem") != "") {
+            if(getDvar("scr_force_pillageitem") != "") {
               attach_found = pillaged_item.forced_attachment;
               SetDevDvar("scr_force_pillageitem", "");
             }
@@ -590,11 +583,9 @@ pillage_spot_think() {
           if(isDefined(self.pillage_trigger))
             self.pillage_trigger drop_pillage_item_on_ground();
         }
-
       } else {
         self.pillage_trigger makeUsable();
         self.enabled = true;
-
       }
     } else {
       if(isDefined(self.pillageinfo)) {
@@ -657,7 +648,6 @@ pillage_spot_think() {
               } else {
                 user setLowerMessage("too_many", &"ALIEN_COLLECTIBLES_SOFLAM_HAD", 3);
               }
-
             }
             break;
 
@@ -763,184 +753,184 @@ delete_pillage_trigger() {
 }
 
 get_pillaged_item(pillage_spot, player) {
-  /# if( getdvar ( "scr_force_pillageitem" ) != "") {
-  item = getdvar("scr_force_pillageitem");
-  pillaged_item = spawnStruct();
-  pillaged_item.type = "attachment";
-  pillaged_item.forced_attachment = item;
-  return pillaged_item;
-}
+  if(getdvar("scr_force_pillageitem") != "") {
+    item = getDvar("scr_force_pillageitem");
+    pillaged_item = spawnStruct();
+    pillaged_item.type = "attachment";
+    pillaged_item.forced_attachment = item;
+    return pillaged_item;
+  }
 
-if(getdvar("scr_force_pillageitem_type") != "") {
-  item = getdvar("scr_force_pillageitem_type");
+  if(getDvar("scr_force_pillageitem_type") != "") {
+    item = getDvar("scr_force_pillageitem_type");
+
+    pillaged_item = spawnStruct();
+
+    switch (item) {
+      case "soflam":
+      case "pet_leash":
+      case "maxammo":
+      case "clip":
+      case "specialammo":
+      case "flare":
+      case "trophy":
+      case "grenade":
+      case "locker_key":
+      case "locker_weapon":
+      case "intel":
+        pillaged_item.type = item;
+        pillaged_item.count = 1;
+        break;
+
+      case "alienclaymore_mp":
+      case "alienbetty_mp":
+      case "alienmortar_shell_mp":
+        pillaged_item.type = "explosive";
+        pillaged_item.explosive_type = item;
+        pillaged_item.count = 1;
+        break;
+
+      case "money":
+        money_to_give = 500;
+        pillaged_item.type = "money";
+        pillaged_item.count = money_to_give;
+
+      case "crafting":
+        pillaged_item.type = "crafting";
+    }
+
+    SetDevDvar("scr_force_pillageitem_type", "");
+    return pillaged_item;
+  }
+
+  exclusion_list = [];
+
+  if(check_for_existing_pet_bombs() > 1)
+    exclusion_list[exclusion_list.size] = "pet_leash";
+
+  if(!(player can_use_attachment()))
+    exclusion_list[exclusion_list.size] = "attachment";
+
+  if(isDefined(level.intel_pillage_allowed_func) && !(player[[level.intel_pillage_allowed_func]]()))
+    exclusion_list[exclusion_list.size] = "intel";
+
+  if(!player should_find_crafting_items()) {
+    exclusion_list[exclusion_list.size] = "crafting";
+  }
+
+  item = get_random_pillage_item(level.pillageitems[pillage_spot.pillage_type], exclusion_list);
+  repeat_count = 0;
+  while(isDefined(player.last_item) && player.last_item == item) {
+    item = get_random_pillage_item(level.pillageitems[pillage_spot.pillage_type], exclusion_list);
+    repeat_count++;
+
+    if(repeat_count % 10 == 0) {
+      break;
+    }
+  }
+  player.last_item = item;
+
+  if(isDefined(pillage_spot.default_item_type)) {
+    item = pillage_spot.default_item_type;
+  }
 
   pillaged_item = spawnStruct();
 
   switch (item) {
+    case "attachment":
+      pillaged_item.type = "attachment";
+      break;
+
     case "soflam":
-    case "pet_leash":
-    case "maxammo":
+      pillaged_item.type = "soflam";
+      break;
+
+    case "explosive":
+
+      switch (randomint(3)) {
+        case 0:
+          pillaged_item.type = "grenade";
+          pillaged_item.count = 2;
+          break;
+
+        case 1:
+          if(pillage_spot.pillage_type != "easy") {
+            pillaged_item.explosive_type = choose_random_explosive_type();
+            pillaged_item.type = "explosive";
+            pillaged_item.count = 2;
+          } else {
+            pillaged_item.type = "flare";
+            pillaged_item.count = 1;
+          }
+          break;
+
+        case 2:
+          pillaged_item.type = "flare";
+          pillaged_item.count = 1;
+          break;
+      }
+      break;
+
     case "clip":
-    case "specialammo":
-    case "flare":
-    case "trophy":
-    case "grenade":
-    case "locker_key":
-    case "locker_weapon":
-    case "intel":
-      pillaged_item.type = item;
+      pillaged_item.type = "clip";
       pillaged_item.count = 1;
       break;
 
-    case "alienclaymore_mp":
-    case "alienbetty_mp":
-    case "alienmortar_shell_mp":
-      pillaged_item.type = "explosive";
-      pillaged_item.explosive_type = item;
+    case "maxammo":
+      pillaged_item.type = "maxammo";
       pillaged_item.count = 1;
       break;
 
     case "money":
-      money_to_give = 500;
+      money_to_give = 50 + (randomint(2) * 50);
+
+      if(pillage_spot.pillage_type == "medium")
+        money_to_give = 200 + (randomint(2) * 50);
+
+      if(pillage_spot.pillage_type == "hard")
+        money_to_give = 500;
+
       pillaged_item.type = "money";
       pillaged_item.count = money_to_give;
+      break;
+
+    case "pet_leash":
+      pillaged_item.type = "pet_leash";
+      pillaged_item.count = 1;
+      break;
+
+    case "trophy":
+      pillaged_item.type = "trophy";
+      pillaged_item.count = 1;
+      break;
+
+    case "specialammo":
+      pillaged_item.type = "specialammo";
+      break;
 
     case "crafting":
       pillaged_item.type = "crafting";
+      break;
+
+    case "locker_weapon":
+      pillaged_item.type = "locker_weapon";
+      pillaged_item.count = 1;
+      break;
+
+    case "locker_key":
+      pillaged_item.type = "locker_key";
+      pillaged_item.count = 1;
+      break;
+
+    case "intel":
+      pillaged_item.type = "intel";
+      pillaged_item.count = 1;
+      break;
   }
 
-  SetDevDvar("scr_force_pillageitem_type", "");
-  return pillaged_item;
-}
+  player PlayLocalSound("extinction_item_pickup");
 
-exclusion_list = [];
-
-if(check_for_existing_pet_bombs() > 1)
-  exclusion_list[exclusion_list.size] = "pet_leash";
-
-if(!(player can_use_attachment()))
-  exclusion_list[exclusion_list.size] = "attachment";
-
-if(isDefined(level.intel_pillage_allowed_func) && !(player[[level.intel_pillage_allowed_func]]()))
-  exclusion_list[exclusion_list.size] = "intel";
-
-if(!player should_find_crafting_items()) {
-  exclusion_list[exclusion_list.size] = "crafting";
-}
-
-item = get_random_pillage_item(level.pillageitems[pillage_spot.pillage_type], exclusion_list);
-repeat_count = 0;
-while(isDefined(player.last_item) && player.last_item == item) {
-  item = get_random_pillage_item(level.pillageitems[pillage_spot.pillage_type], exclusion_list);
-  repeat_count++;
-
-  if(repeat_count % 10 == 0) {
-    break;
-  }
-}
-player.last_item = item;
-
-if(isDefined(pillage_spot.default_item_type)) {
-  item = pillage_spot.default_item_type;
-}
-
-pillaged_item = spawnStruct();
-
-switch (item) {
-  case "attachment":
-    pillaged_item.type = "attachment";
-    break;
-
-  case "soflam":
-    pillaged_item.type = "soflam";
-    break;
-
-  case "explosive":
-
-    switch (randomint(3)) {
-      case 0:
-        pillaged_item.type = "grenade";
-        pillaged_item.count = 2;
-        break;
-
-      case 1:
-        if(pillage_spot.pillage_type != "easy") {
-          pillaged_item.explosive_type = choose_random_explosive_type();
-          pillaged_item.type = "explosive";
-          pillaged_item.count = 2;
-        } else {
-          pillaged_item.type = "flare";
-          pillaged_item.count = 1;
-        }
-        break;
-
-      case 2:
-        pillaged_item.type = "flare";
-        pillaged_item.count = 1;
-        break;
-    }
-    break;
-
-  case "clip":
-    pillaged_item.type = "clip";
-    pillaged_item.count = 1;
-    break;
-
-  case "maxammo":
-    pillaged_item.type = "maxammo";
-    pillaged_item.count = 1;
-    break;
-
-  case "money":
-    money_to_give = 50 + (randomint(2) * 50);
-
-    if(pillage_spot.pillage_type == "medium")
-      money_to_give = 200 + (randomint(2) * 50);
-
-    if(pillage_spot.pillage_type == "hard")
-      money_to_give = 500;
-
-    pillaged_item.type = "money";
-    pillaged_item.count = money_to_give;
-    break;
-
-  case "pet_leash":
-    pillaged_item.type = "pet_leash";
-    pillaged_item.count = 1;
-    break;
-
-  case "trophy":
-    pillaged_item.type = "trophy";
-    pillaged_item.count = 1;
-    break;
-
-  case "specialammo":
-    pillaged_item.type = "specialammo";
-    break;
-
-  case "crafting":
-    pillaged_item.type = "crafting";
-    break;
-
-  case "locker_weapon":
-    pillaged_item.type = "locker_weapon";
-    pillaged_item.count = 1;
-    break;
-
-  case "locker_key":
-    pillaged_item.type = "locker_key";
-    pillaged_item.count = 1;
-    break;
-
-  case "intel":
-    pillaged_item.type = "intel";
-    pillaged_item.count = 1;
-    break;
-}
-
-player PlayLocalSound("extinction_item_pickup");
-
-return (pillaged_item);
+  return (pillaged_item);
 }
 
 get_random_pillage_item(item_list, exclusion_list) {
@@ -1038,7 +1028,6 @@ try_to_give_player_explosives(pillage_spot) {
       pillage_spot.pillageinfo.item = weapon_to_swap;
       pillage_spot.pillageinfo.ammo = self.swapped_weapon_ammocount;
       pillage_spot.pillage_trigger drop_pillage_item_on_ground();
-
     }
   }
 }
@@ -1302,7 +1291,7 @@ get_attachment_for_weapon() {
 }
 
 check_upgrade_return_attchment(attachment_array, baseweapon) {
-  map_name = GetDvar("ui_mapname");
+  map_name = getDvar("ui_mapname");
   attach_found = random(attachment_array);
   while(attach_found == "alienmuzzlebrake" || attach_found == "xmags") {
     if(attach_found == "alienmuzzlebrake") {
@@ -1536,7 +1525,7 @@ useHoldThink(player, useTime) {
     player.pillage_spot.useTime = level.pillageinfo.default_use_time;
   }
 
-  if(IsPlayer(player))
+  if(isPlayer(player))
     player thread personalUseBar(self);
 
   player.hasprogressbar = true;
@@ -1593,7 +1582,7 @@ useHoldThinkLoop(player, ent, dist_check) {
 debug_pillage_spots() {
   wait 5;
   while(1) {
-    if(GetDvar("scr_debug_pillage") != "1") {
+    if(getDvar("scr_debug_pillage") != "1") {
       wait 1;
       continue;
     }
@@ -1636,7 +1625,6 @@ debug_pillage_spots() {
         if(Distance(level.players[0].origin, spot.origin) < 1500)
           Print3d(spot.origin + (0, 0, 20), text, color, 1, 1, 20);
       }
-
     }
 
     waitframe();
@@ -1701,7 +1689,6 @@ get_possible_attachments_by_weaponclass(weaponClass, baseweapon) {
       attachments = [];
       return attachments;
   }
-
 }
 
 cangive_ammo_clip() {
@@ -1779,7 +1766,6 @@ give_ammo_clip() {
       }
 
       return;
-
     }
   } else {
     current_stock_ammo = self GetWeaponAmmoStock(weapon);
@@ -1949,7 +1935,6 @@ re_distribute_pillage_spots() {
       level thread create_pillage_spots(level.pillage_areas[index]["easy"]);
       level thread create_pillage_spots(level.pillage_areas[index]["medium"]);
       level thread create_pillage_spots(level.pillage_areas[index]["hard"]);
-
     }
   }
 }
@@ -2001,7 +1986,6 @@ remove_used_pillage_spots(pillage_spot_array) {
         pillage_spot_array[i].searched = undefined;
         pillage_spot_array[i].enabled = undefined;
       }
-
     }
 
     if(i % 2 == 0)
@@ -2089,7 +2073,6 @@ get_crafting_ingredient() {
         } else {
           ingredient_list = array_combine(player.swappable_crafting_ingredient_list, ingredient_list);
         }
-
       }
     }
   }
@@ -2156,7 +2139,6 @@ give_crafting_item(crafting_item) {
     if(isAlive(self) && !self is_in_laststand())
       self IPrintLnBold(&"ALIEN_CRAFTING_OPEN_MENU");
   }
-
 }
 
 get_crafting_item_slot(crafting_item) {

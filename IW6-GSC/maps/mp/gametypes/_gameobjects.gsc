@@ -144,7 +144,6 @@ createCarryObject(ownerTeam, trigger, visuals, offset) {
     objective_team(carryObject.teamObjIds[teamName], teamName);
     carryObject.objPoints[teamName] = maps\mp\gametypes\_objpoints::createTeamObjpoint("objpoint_" + teamName + "_" + carryObject.entNum, carryObject.curOrigin + offset, teamName, undefined);
     carryObject.objPoints[teamName].alpha = 0;
-
   }
 
   carryObject.carrier = undefined;
@@ -1098,7 +1097,7 @@ triggerTouchThink(object) {
   object updateUseRate();
 
   while(isReallyAlive(self) && isDefined(object.trigger) && self isTouching(object.trigger) && !level.gameEnded && object.useTime) {
-    if(IsPlayer(self)) {
+    if(isPlayer(self)) {
       self updateUIProgress(object, true);
       self updateProxBar(object, false);
     }
@@ -1106,7 +1105,7 @@ triggerTouchThink(object) {
   }
 
   if(isDefined(self)) {
-    if(IsPlayer(self)) {
+    if(isPlayer(self)) {
       self updateUIProgress(object, false);
       self updateProxBar(object, true);
     }
@@ -1398,7 +1397,7 @@ updateUseRate() {
 
 useHoldThink(player) {
   player notify("use_hold");
-  if(IsPlayer(player))
+  if(isPlayer(player))
     player playerLinkTo(self.trigger);
   else
     player LinkTo(self.trigger);
@@ -1452,7 +1451,6 @@ useHoldThink(player) {
         player switch_to_last_weapon(lastWeapon);
       else
         player takeWeapon(useWeapon);
-
     } else {
       player _enableWeapon();
     }

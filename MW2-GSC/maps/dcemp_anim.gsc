@@ -460,8 +460,7 @@ linebook() {
   level.scr_radio["dcemp_iss_notscheduled"] = "dcemp_iss_notscheduled";
   //ISS, Houston. Standby. We may have a problem here.
   level.scr_radio["dcemp_hsc_standby"] = "dcemp_hsc_standby";
-  //Houston, this is ISS Control, uh... any word on the-
-  level.scr_radio["dcemp_iss_anyword"] = "dcemp_iss_anyword";
+  //Houston, this is ISS Control, uh... any word on the- level.scr_radio["dcemp_iss_anyword"] = "dcemp_iss_anyword";
 
   level.scr_radio["scn_dcemp_iss_helmet_breathe_slow"] = "scn_dcemp_iss_helmet_breathe_slow";
   level.scr_radio["scn_dcemp_iss_helmet_breathe_fast"] = "scn_dcemp_iss_helmet_breathe_fast";

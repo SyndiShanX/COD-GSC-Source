@@ -398,7 +398,7 @@ initial_weak_spot_damage_monitor(var_0, var_1) {
         continue;
       }
 
-      if(!isplayer(var_3)) {
+      if(!isPlayer(var_3)) {
         continue;
       }
 
@@ -530,7 +530,7 @@ weak_spot_damage_monitor(var_0, var_1, var_2, var_3) {
         continue;
       }
 
-      if(!isplayer(var_5)) {
+      if(!isPlayer(var_5)) {
         continue;
       }
 
@@ -1287,7 +1287,7 @@ soul_key_pick_up_monitor(var_0, var_1) {
   var_0 sethintstring(&"CP_RAVE_PICK_UP_SOUL_KEY");
   for(;;) {
     var_0 waittill("trigger", var_2);
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       stop_spawn_wave();
       var_2 playlocalsound("part_pickup");
       scripts\cp\zombies\directors_cut::give_dc_player_extra_xp_for_carrying_newb();

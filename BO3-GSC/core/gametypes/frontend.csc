@@ -405,12 +405,8 @@ class cmegachewfactory {
         self thread set_megachew_factory_gears_anim_state(localclientnum, 0);
         set_megachew_factory_doors_anim_state(localclientnum, 0);
         for(i = 1; i <= 3; i++) {
-          [
-            [m_a_o_megachewvat[i - 1]]
-          ] - > set_vat_state(localclientnum, 0, 0);
-          [
-            [m_a_o_megachewvatdialset[i - 1]]
-          ] - > set_power(0);
+          [[m_a_o_megachewvat[i - 1]]] - > set_vat_state(localclientnum, 0, 0);
+          [[m_a_o_megachewvatdialset[i - 1]]] - > set_power(0);
         }
         for(i = 1; i <= 3; i++) {
           self thread set_megachew_factory_carousel_anim_state(localclientnum, i, 0);
@@ -421,12 +417,8 @@ class cmegachewfactory {
         self thread show_random_starting_gumballs_on_carousels(localclientnum);
         for(i = 0; i < 3; i++) {
           b_vat_is_powered = vat_is_powered(i);
-          [
-            [m_a_o_megachewvat[i]]
-          ] - > set_vat_state(localclientnum, 1, b_vat_is_powered);
-          [
-            [m_a_o_megachewvatdialset[i]]
-          ] - > set_power(b_vat_is_powered);
+          [[m_a_o_megachewvat[i]]] - > set_vat_state(localclientnum, 1, b_vat_is_powered);
+          [[m_a_o_megachewvatdialset[i]]] - > set_power(b_vat_is_powered);
         }
         self thread set_megachew_factory_gears_anim_state(localclientnum, 1);
         wait(0.2);
@@ -452,36 +444,24 @@ class cmegachewfactory {
         self thread set_megachew_factory_gears_anim_state(localclientnum, 2);
         wait(0.25);
         for(i = 0; i < 3; i++) {
-          [
-            [m_a_o_megachewvat[i]]
-          ] - > set_steam_fx(localclientnum, 0);
-          [
-            [m_a_o_megachewvatdialset[i]]
-          ] - > set_power(0);
+          [[m_a_o_megachewvat[i]]] - > set_steam_fx(localclientnum, 0);
+          [[m_a_o_megachewvatdialset[i]]] - > set_power(0);
         }
         wait(0.25);
         play_powerup_activation_fx(localclientnum);
         if(m_b_power_boost) {
           wait(0.125);
           for(i = 0; i < 3; i++) {
-            [
-              [m_a_o_megachewvat[i]]
-            ] - > set_vat_state(localclientnum, 0, 1);
-            [
-              [m_a_o_megachewvatdialset[i]]
-            ] - > set_power(1);
+            [[m_a_o_megachewvat[i]]] - > set_vat_state(localclientnum, 0, 1);
+            [[m_a_o_megachewvatdialset[i]]] - > set_power(1);
           }
         }
         for(i = 1; i <= 3; i++) {
-          [
-            [m_a_o_megachewvat[i - 1]]
-          ] - > set_electrode_fx(localclientnum, 0);
+          [[m_a_o_megachewvat[i - 1]]] - > set_electrode_fx(localclientnum, 0);
         }
         for(i = 1; i <= 3; i++) {
           if(vat_should_launch_result(i - 1)) {
-            [
-              [m_a_o_megachewvatdialset[i - 1]]
-            ] - > set_visibility_of_dials_attached_to_dome(0);
+            [[m_a_o_megachewvatdialset[i - 1]]] - > set_visibility_of_dials_attached_to_dome(0);
             self thread set_megachew_factory_dome_anim_state(localclientnum, i, 3);
           }
         }
@@ -503,20 +483,14 @@ class cmegachewfactory {
         }
         for(i = 1; i <= 3; i++) {
           if(vat_should_launch_result(i - 1)) {
-            [
-              [m_a_o_megachewvatdialset[i - 1]]
-            ] - > set_visibility_of_dials_attached_to_dome(1);
+            [[m_a_o_megachewvatdialset[i - 1]]] - > set_visibility_of_dials_attached_to_dome(1);
           }
         }
         for(i = 0; i < 3; i++) {
-          [
-            [m_a_o_megachewvat[i]]
-          ] - > set_light_fx(localclientnum, 0);
+          [[m_a_o_megachewvat[i]]] - > set_light_fx(localclientnum, 0);
         }
         for(i = 0; i < 3; i++) {
-          [
-            [m_a_o_megachewcarousels[i]]
-          ] - > detach_all_models_from_carousel();
+          [[m_a_o_megachewcarousels[i]]] - > detach_all_models_from_carousel();
         }
         break;
       }
@@ -529,9 +503,7 @@ class cmegachewfactory {
           self thread set_megachew_factory_dome_anim_state(localclientnum, i, 2);
         }
         for(i = 0; i < 3; i++) {
-          [
-            [m_a_o_megachewcarousels[i]]
-          ] - > detach_all_models_from_carousel();
+          [[m_a_o_megachewcarousels[i]]] - > detach_all_models_from_carousel();
         }
         break;
       }
@@ -831,9 +803,7 @@ class cmegachewfactory {
       for(i = 0; i < 3; i++) {
         if(!isDefined(m_a_o_megachewcarousels[i])) {
           m_a_o_megachewcarousels[i] = new cmegachewcarousel();
-          [
-            [m_a_o_megachewcarousels[i]]
-          ] - > init(localclientnum, i + 1);
+          [[m_a_o_megachewcarousels[i]]] - > init(localclientnum, i + 1);
         }
       }
     }
@@ -842,9 +812,7 @@ class cmegachewfactory {
       for(i = 0; i < 3; i++) {
         if(!isDefined(m_a_o_megachewvat[i])) {
           m_a_o_megachewvat[i] = new cmegachewvat();
-          [
-            [m_a_o_megachewvat[i]]
-          ] - > init(localclientnum, i + 1);
+          [[m_a_o_megachewvat[i]]] - > init(localclientnum, i + 1);
         }
       }
     }
@@ -853,9 +821,7 @@ class cmegachewfactory {
       for(i = 0; i < 3; i++) {
         if(!isDefined(m_a_o_megachewvatdialset[i])) {
           m_a_o_megachewvatdialset[i] = new cmegachewvatdialset();
-          [
-            [m_a_o_megachewvatdialset[i]]
-          ] - > init(localclientnum, i + 1);
+          [[m_a_o_megachewvatdialset[i]]] - > init(localclientnum, i + 1);
         }
       }
     }
@@ -938,7 +904,6 @@ class cmegachewfactory {
     self thread set_megachew_factory_anim_state(localclientnum, 0);
     change_button_selected(localclientnum, 0);
   }
-
 }
 
 class cmegachewcounter {
@@ -1024,7 +989,6 @@ class cmegachewcounter {
     }
     update_number_display(localclientnum);
   }
-
 }
 
 class cmegachewvat {
@@ -1218,7 +1182,6 @@ class cmegachewvat {
     m_b_vat_is_spinning = 0;
     m_b_vat_is_powered = 0;
   }
-
 }
 
 class cmegachewcarousel {
@@ -1537,7 +1500,6 @@ class cmegachewbuttons {
     }
     change_button_selected(localclientnum, 1);
   }
-
 }
 
 #namespace frontend;
@@ -1889,7 +1851,7 @@ function close_zm_buildkits(localclientnum, menu_data) {
 
 function open_zm_bgb(localclientnum, menu_data) {
   level.n_old_spotshadow = getdvarint("r_maxSpotShadowUpdates");
-  setdvar("r_maxSpotShadowUpdates", 24);
+  setDvar("r_maxSpotShadowUpdates", 24);
   level.weapon_position = struct::get(menu_data.target_name);
   playradiantexploder(localclientnum, "zm_gum_room");
   playradiantexploder(localclientnum, "zm_gum_kick");
@@ -1899,14 +1861,14 @@ function close_zm_bgb(localclientnum, menu_data) {
   level.weapon_position = struct::get("paintshop_weapon_position");
   killradiantexploder(localclientnum, "zm_gum_room");
   killradiantexploder(localclientnum, "zm_gum_kick");
-  setdvar("r_maxSpotShadowUpdates", level.n_old_spotshadow);
+  setDvar("r_maxSpotShadowUpdates", level.n_old_spotshadow);
   enablefrontendlockedweaponoverlay(localclientnum, 0);
   enablefrontendtokenlockedweaponoverlay(localclientnum, 0);
 }
 
 function open_zm_bgb_factory(localclientnum, menu_data) {
   level.n_old_spotshadow = getdvarint("r_maxSpotShadowUpdates");
-  setdvar("r_maxSpotShadowUpdates", 24);
+  setDvar("r_maxSpotShadowUpdates", 24);
   level.weapon_position = struct::get(menu_data.target_name);
   playradiantexploder(localclientnum, "zm_gum_room");
   playradiantexploder(localclientnum, "zm_gum_kick");
@@ -1921,7 +1883,7 @@ function close_zm_bgb_factory(localclientnum, menu_data) {
   level.weapon_position = struct::get("paintshop_weapon_position");
   killradiantexploder(localclientnum, "zm_gum_room");
   killradiantexploder(localclientnum, "zm_gum_kick");
-  setdvar("r_maxSpotShadowUpdates", level.n_old_spotshadow);
+  setDvar("r_maxSpotShadowUpdates", level.n_old_spotshadow);
   enablefrontendlockedweaponoverlay(localclientnum, 0);
   enablefrontendtokenlockedweaponoverlay(localclientnum, 0);
 }
@@ -2014,21 +1976,21 @@ function open_blackmarket(localclientnum, menu_data) {
     level.r_volumetric_lighting_lights_skip_samples = getdvarint("r_volumetric_lighting_lights_skip_samples");
     level.r_volumetric_lighting_max_spot_samples = getdvarint("r_volumetric_lighting_max_spot_samples");
   }
-  setdvar("r_volumetric_lighting_upsample_depth_threshold", 0.001);
-  setdvar("r_volumetric_lighting_blur_depth_threshold", 1300);
-  setdvar("r_volumetric_lighting_lights_skip_samples", 0);
-  setdvar("r_volumetric_lighting_max_spot_samples", 40);
+  setDvar("r_volumetric_lighting_upsample_depth_threshold", 0.001);
+  setDvar("r_volumetric_lighting_blur_depth_threshold", 1300);
+  setDvar("r_volumetric_lighting_lights_skip_samples", 0);
+  setDvar("r_volumetric_lighting_max_spot_samples", 40);
   level thread wait_for_black_market_notifies(localclientnum);
 }
 
 function close_blackmarket(localclientnum, menu_data) {
-  setdvar("r_volumetric_lighting_upsample_depth_threshold", 0.01);
-  setdvar("r_volumetric_lighting_blur_depth_threshold", 2000);
-  setdvar("r_volumetric_lighting_lights_skip_samples", 1);
-  setdvar("r_volumetric_lighting_max_spot_samples", 8);
+  setDvar("r_volumetric_lighting_upsample_depth_threshold", 0.01);
+  setDvar("r_volumetric_lighting_blur_depth_threshold", 2000);
+  setDvar("r_volumetric_lighting_lights_skip_samples", 1);
+  setDvar("r_volumetric_lighting_max_spot_samples", 8);
   if(ispc()) {
-    setdvar("r_volumetric_lighting_lights_skip_samples", level.r_volumetric_lighting_lights_skip_samples);
-    setdvar("r_volumetric_lighting_max_spot_samples", level.r_volumetric_lighting_max_spot_samples);
+    setDvar("r_volumetric_lighting_lights_skip_samples", level.r_volumetric_lighting_lights_skip_samples);
+    setDvar("r_volumetric_lighting_max_spot_samples", level.r_volumetric_lighting_max_spot_samples);
   }
   if(isDefined(level.cyclehandle)) {
     crate = getent(localclientnum, "mp_frontend_blackmarket_crate", "targetname");

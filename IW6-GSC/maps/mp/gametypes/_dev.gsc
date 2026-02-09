@@ -148,7 +148,6 @@ init() {
     wait .05;
     updateDevSettings();
   }
-
 }
 
 devShowSpawnUpdate() {
@@ -169,17 +168,17 @@ updateDevSettings() {
   updateMinimapSetting();
   updateHordeSettings();
 
-  if(GetDvar("scr_devSetFriendlyScore") != "") {
+  if(getDvar("scr_devSetFriendlyScore") != "") {
     score = GetDvarInt("scr_devSetFriendlyScore");
     maps\mp\gametypes\_gamescore::_setTeamScore("allies", score);
   }
 
-  if(GetDvar("scr_devSetEnemyScore") != "") {
+  if(getDvar("scr_devSetEnemyScore") != "") {
     score = GetDvarInt("scr_devSetEnemyScore");
     maps\mp\gametypes\_gamescore::_setTeamScore("axis", score);
   }
 
-  dvar_scr_test_weapon = GetDvar("scr_test_weapon");
+  dvar_scr_test_weapon = getDvar("scr_test_weapon");
   if(dvar_scr_test_weapon != "") {
     foreach(player in level.players) {
       player thread initForWeaponTests();
@@ -189,7 +188,7 @@ updateDevSettings() {
     SetDevDvar("scr_test_weapon", "");
   }
 
-  if(GetDvar("scr_dump_ranks") != "") {
+  if(getDvar("scr_dump_ranks") != "") {
     SetDevDvar("scr_dump_ranks", "");
 
     for(rId = 0; rId <= level.maxRank; rId++) {
@@ -201,7 +200,7 @@ updateDevSettings() {
     }
   }
 
-  if(GetDvar("scr_list_weapons") != "") {
+  if(getDvar("scr_list_weapons") != "") {
     foreach(baseWeapon, _ in level.baseWeaponList)
     iPrintLn(baseWeapon);
 
@@ -228,7 +227,7 @@ updateDevSettings() {
     SetDevDvar("scr_setdefcon", "");
   }
 
-  dvar_scr_givekillstreak = GetDvar("scr_givekillstreak");
+  dvar_scr_givekillstreak = getDvar("scr_givekillstreak");
   if(dvar_scr_givekillstreak != "") {
     streakName = dvar_scr_givekillstreak;
 
@@ -277,14 +276,14 @@ updateDevSettings() {
   streakName = undefined;
   streakType = undefined;
   giving_to_bots = false;
-  dvar_scr_devgivecarepackage = GetDvar("scr_devgivecarepackage");
-  dvar_scr_testclients_givecarepackage = GetDvar("scr_testclients_givecarepackage");
+  dvar_scr_devgivecarepackage = getDvar("scr_devgivecarepackage");
+  dvar_scr_testclients_givecarepackage = getDvar("scr_testclients_givecarepackage");
   if(dvar_scr_devgivecarepackage != "") {
     streakName = dvar_scr_devgivecarepackage;
-    streakType = GetDvar("scr_devgivecarepackagetype");
+    streakType = getDvar("scr_devgivecarepackagetype");
   } else if(dvar_scr_testclients_givecarepackage != "") {
     streakName = dvar_scr_testclients_givecarepackage;
-    streakType = GetDvar("scr_testclients_givecarepackagetype");
+    streakType = getDvar("scr_testclients_givecarepackagetype");
     giving_to_bots = true;
   }
 
@@ -328,8 +327,8 @@ updateDevSettings() {
     }
   }
 
-  if(GetDvar("scr_showcard") != "") {
-    tokens = strTok(GetDvar("scr_showcard"), " ");
+  if(getDvar("scr_showcard") != "") {
+    tokens = strTok(getDvar("scr_showcard"), " ");
 
     if(tokens.size) {
       playerName = tokens[0];
@@ -354,7 +353,7 @@ updateDevSettings() {
     SetDevDvar("scr_showcard", "");
   }
 
-  dvar_scr_usekillstreak = GetDvar("scr_usekillstreak");
+  dvar_scr_usekillstreak = getDvar("scr_usekillstreak");
   if(dvar_scr_usekillstreak != "") {
     tokens = strTok(dvar_scr_usekillstreak, " ");
 
@@ -405,8 +404,8 @@ updateDevSettings() {
     SetDevDvar("scr_usekillstreak", "");
   }
 
-  if(GetDvar("scr_playertoorigin") != "") {
-    tokens = strTok(GetDvar("scr_playertoorigin"), " ");
+  if(getDvar("scr_playertoorigin") != "") {
+    tokens = strTok(getDvar("scr_playertoorigin"), " ");
 
     newOrigin = (int(tokens[0]), int(tokens[1]), int(tokens[2]));
 
@@ -421,8 +420,8 @@ updateDevSettings() {
     SetDevDvar("scr_playertoorigin", "");
   }
 
-  if(GetDvar("scr_useGambit") != "") {
-    tokens = strTok(GetDvar("scr_useGambit"), " ");
+  if(getDvar("scr_useGambit") != "") {
+    tokens = strTok(getDvar("scr_useGambit"), " ");
 
     if(tokens.size > 1) {
       playerName = tokens[0];
@@ -446,21 +445,21 @@ updateDevSettings() {
     SetDevDvar("scr_useGambit", "");
   }
 
-  if(GetDvar("scr_levelnotify") != "") {
-    level notify(GetDvar("scr_levelnotify"));
+  if(getDvar("scr_levelnotify") != "") {
+    level notify(getDvar("scr_levelnotify"));
     SetDevDvar("scr_levelnotify", "");
   }
 
-  if(getdvar("scr_giveperk") != "") {
-    perk = getdvar("scr_giveperk");
+  if(getDvar("scr_giveperk") != "") {
+    perk = getDvar("scr_giveperk");
 
     for(i = 0; i < level.players.size; i++)
       level.players[i] thread givePerk(perk, false);
 
     SetDevDvar("scr_giveperk", "");
   }
-  if(getdvar("scr_takeperk") != "") {
-    perk = getdvar("scr_takeperk");
+  if(getDvar("scr_takeperk") != "") {
+    perk = getDvar("scr_takeperk");
     for(i = 0; i < level.players.size; i++) {
       level.players[i] unsetPerk(perk, true);
       level.players[i].extraPerks[perk] = undefined;
@@ -468,15 +467,15 @@ updateDevSettings() {
     SetDevDvar("scr_takeperk", "");
   }
 
-  if(GetDvar("scr_x_kills_y") != "") {
-    nameTokens = strTok(GetDvar("scr_x_kills_y"), " ");
+  if(getDvar("scr_x_kills_y") != "") {
+    nameTokens = strTok(getDvar("scr_x_kills_y"), " ");
     if(nameTokens.size > 1)
       thread xKillsY(nameTokens[0], nameTokens[1]);
 
     SetDevDvar("scr_x_kills_y", "");
   }
 
-  if(GetDvar("scr_enemykillhost") != "") {
+  if(getDvar("scr_enemykillhost") != "") {
     hostPlayer = undefined;
     enemyPlayer = undefined;
     foreach(player in level.players) {
@@ -509,12 +508,12 @@ updateDevSettings() {
     SetDevDvar("scr_enemykillhost", "");
   }
 
-  if(GetDvar("scr_drop_weapon") != "") {
-    weapon = spawn("weapon_" + GetDvar("scr_drop_weapon"), level.players[0].origin);
+  if(getDvar("scr_drop_weapon") != "") {
+    weapon = spawn("weapon_" + getDvar("scr_drop_weapon"), level.players[0].origin);
     SetDevDvar("scr_drop_weapon", "");
   }
 
-  if(GetDvar("scr_set_rank") != "") {
+  if(getDvar("scr_set_rank") != "") {
     level.players[0].pers["rank"] = 0;
     level.players[0].pers["rankxp"] = 0;
 
@@ -540,21 +539,21 @@ updateDevSettings() {
     }
   }
 
-  if(GetDvar("scr_givexp") != "") {
+  if(getDvar("scr_givexp") != "") {
     level.players[0] thread maps\mp\gametypes\_rank::giveRankXP("challenge", GetDvarInt("scr_givexp"));
 
     SetDevDvar("scr_givexp", "");
   }
 
-  if(GetDvar("scr_do_notify") != "") {
+  if(getDvar("scr_do_notify") != "") {
     for(i = 0; i < level.players.size; i++)
-      level.players[i] maps\mp\gametypes\_hud_message::oldNotifyMessage(GetDvar("scr_do_notify"), GetDvar("scr_do_notify"), game["icons"]["allies"]);
+      level.players[i] maps\mp\gametypes\_hud_message::oldNotifyMessage(getDvar("scr_do_notify"), getDvar("scr_do_notify"), game["icons"]["allies"]);
 
-    announcement(GetDvar("scr_do_notify"));
+    announcement(getDvar("scr_do_notify"));
     SetDevDvar("scr_do_notify", "");
   }
 
-  if(GetDvar("scr_spam_splashes") != "") {
+  if(getDvar("scr_spam_splashes") != "") {
     foreach(player in level.players) {
       player thread maps\mp\gametypes\_hud_message::splashNotifyDelayed("longshot");
       player thread maps\mp\gametypes\_hud_message::splashNotifyDelayed("headshot");
@@ -571,7 +570,7 @@ updateDevSettings() {
     SetDevDvar("scr_spam_splashes", "");
   }
 
-  if(GetDvar("scr_spam_usedsplash") != "") {
+  if(getDvar("scr_spam_usedsplash") != "") {
     foreach(player in level.players) {
       level thread teamPlayerCardSplash("used_uplink", player, player.team);
       level thread teamPlayerCardSplash("used_jammer", player, player.team);
@@ -589,7 +588,7 @@ updateDevSettings() {
     SetDevDvar("scr_spam_usedsplash", "");
   }
 
-  if(GetDvar("scr_spam_eventsplash") != "") {
+  if(getDvar("scr_spam_eventsplash") != "") {
     foreach(player in level.players) {
       level thread teamPlayerCardSplash("callout_firstblood", player);
       level thread teamPlayerCardSplash("callout_lastenemyalive", player);
@@ -604,7 +603,7 @@ updateDevSettings() {
     SetDevDvar("scr_spam_eventsplash", "");
   }
 
-  if(GetDvar("scr_spam_pointspopup") != "") {
+  if(getDvar("scr_spam_pointspopup") != "") {
     notBot = level.players[0];
     foreach(player in level.players) {
       if(!isDefined(player.pers["isBot"]) || (isDefined(player.pers["isBot"]) && !player.pers["isBot"])) {
@@ -618,7 +617,7 @@ updateDevSettings() {
     SetDevDvar("scr_spam_pointspopup", "");
   }
 
-  if(GetDvar("scr_spam_boteventsplash") != "") {
+  if(getDvar("scr_spam_boteventsplash") != "") {
     notBot = level.players[0];
     foreach(player in level.players) {
       if(!isDefined(player.pers["isBot"]) || (isDefined(player.pers["isBot"]) && !player.pers["isBot"])) {
@@ -642,7 +641,7 @@ updateDevSettings() {
     SetDevDvar("scr_spam_boteventsplash", "");
   }
 
-  if(GetDvar("scr_spam_ranksplash") != "") {
+  if(getDvar("scr_spam_ranksplash") != "") {
     foreach(player in level.players) {
       player thread rankSplash(5, 2.0);
     }
@@ -650,7 +649,7 @@ updateDevSettings() {
     SetDevDvar("scr_spam_ranksplash", "");
   }
 
-  if(GetDvar("scr_spam_weaponranksplash") != "") {
+  if(getDvar("scr_spam_weaponranksplash") != "") {
     foreach(player in level.players) {
       player thread weaponRankSplash(5, 2.0);
     }
@@ -658,8 +657,8 @@ updateDevSettings() {
     SetDevDvar("scr_spam_weaponranksplash", "");
   }
 
-  if(GetDvar("scr_show_splash") != "") {
-    splashName = "ch_" + GetDvar("scr_show_splash");
+  if(getDvar("scr_show_splash") != "") {
+    splashName = "ch_" + getDvar("scr_show_splash");
     splashValue = 1;
     splashType = tableLookup("mp/splashTable.csv", 0, splashName, 11);
 
@@ -712,7 +711,7 @@ updateDevSettings() {
     SetDevDvar("scr_show_splash", "");
   }
 
-  if(GetDvar("scr_spam_obit") != "") {
+  if(getDvar("scr_spam_obit") != "") {
     for(i = 0; i < 10; i++) {
       IPrintLn("hateURFace killed testURFace");
       wait(1.0);
@@ -721,7 +720,7 @@ updateDevSettings() {
     SetDevDvar("scr_spam_obit", "");
   }
 
-  if(GetDvar("scr_spam_player_promoted") != "") {
+  if(getDvar("scr_spam_player_promoted") != "") {
     for(i = 0; i < 10; i++) {
       foreach(player in level.players) {
         newRankName = player maps\mp\gametypes\_rank::getRankInfoFull(i + 2);
@@ -733,13 +732,13 @@ updateDevSettings() {
     SetDevDvar("scr_spam_player_promoted", "");
   }
 
-  if(GetDvar("scr_spam_earned_unlock") != "") {
+  if(getDvar("scr_spam_earned_unlock") != "") {
     level.players[0] thread unlockSplash(5, int(TableLookup("mp/splashTable.csv", 0, "earned_unlock", 4)) + 1);
 
     SetDevDvar("scr_spam_earned_unlock", "");
   }
 
-  if(GetDvar("scr_spam_earned_killstreak") != "") {
+  if(getDvar("scr_spam_earned_killstreak") != "") {
     foreach(player in level.players) {
       player thread killstreakSplash(5, int(TableLookup("mp/splashTable.csv", 0, "guard_dog", 4)) + 1);
     }
@@ -747,14 +746,14 @@ updateDevSettings() {
     SetDevDvar("scr_spam_earned_killstreak", "");
   }
 
-  if(GetDvar("scr_addlower") != "") {
+  if(getDvar("scr_addlower") != "") {
     foreach(player in level.players)
     player thread testLowerMessage();
 
     SetDevDvar("scr_addlower", "");
   }
 
-  if(GetDvar("scr_entdebug") != "") {
+  if(getDvar("scr_entdebug") != "") {
     ents = getEntArray();
     level.entArray = [];
     level.entCounts = [];
@@ -779,19 +778,19 @@ updateDevSettings() {
     }
   }
 
-  if(GetDvar("scr_sre") != "") {
+  if(getDvar("scr_sre") != "") {
     assertmsg("Testing script runtime error");
     SetDevDvar("scr_sre", "");
   }
 
-  if(GetDvar("scr_testmigration") != "") {
+  if(getDvar("scr_testmigration") != "") {
     SetDevDvar("scr_testmigration", "");
     thread maps\mp\gametypes\_hostmigration::Callback_HostMigration();
     thread hostMigrationEndTimer_dev();
   }
 
-  if(GetDvar("scr_show_endgameupdate") != "") {
-    promotion = (GetDvar("scr_show_endgameupdate") == "2");
+  if(getDvar("scr_show_endgameupdate") != "") {
+    promotion = (getDvar("scr_show_endgameupdate") == "2");
 
     foreach(player in level.players)
     player thread testEndGameUpdate(promotion);
@@ -799,16 +798,16 @@ updateDevSettings() {
     SetDevDvar("scr_show_endgameupdate", "");
   }
 
-  if(GetDvar("scr_goto_spawn") != "") {
-    if(GetDvar("scr_goto_spawn") == "next")
+  if(getDvar("scr_goto_spawn") != "") {
+    if(getDvar("scr_goto_spawn") == "next")
       gotoNextspawn();
-    else if(GetDvar("scr_goto_spawn") == "prev")
+    else if(getDvar("scr_goto_spawn") == "prev")
       gotoPrevspawn();
 
     SetDevDvar("scr_goto_spawn", "");
   }
 
-  if(GetDvar("scr_showOrigin") != "") {
+  if(getDvar("scr_showOrigin") != "") {
     ent = undefined;
 
     if(isDefined(level.player))
@@ -859,7 +858,7 @@ updateDevSettings() {
     switch (intel) {
       case 1:
         name = "none";
-        if(isDefined(level.intelEnt) && isDefined(level.intelEnt["owner"]) && IsPlayer(level.intelEnt["owner"]))
+        if(isDefined(level.intelEnt) && isDefined(level.intelEnt["owner"]) && isPlayer(level.intelEnt["owner"]))
           name = level.intelEnt["owner"].name;
 
         IPrintLnBold(name);
@@ -1252,7 +1251,7 @@ addTestClients() {
   fullBots = testClients_SpawnFullBots();
 
   if(testclients) {
-    SetDvar("bot_DisableAutoConnect", "1");
+    setDvar("bot_DisableAutoConnect", "1");
   }
 
   if(fullBots)
@@ -1343,13 +1342,13 @@ haveTestClientKillPlayer() {
 
 haveTestClientCallKillstreak() {
   for(;;) {
-    if(getdvar("scr_testclients_givekillstreak") != "") {
+    if(getDvar("scr_testclients_givekillstreak") != "") {
       break;
     }
     wait 1;
   }
 
-  killstreak = GetDvar("scr_testclients_givekillstreak");
+  killstreak = getDvar("scr_testclients_givekillstreak");
   SetDevDvar("scr_testclients_givekillstreak", "");
 
   notBot = level.players[0];
@@ -1488,13 +1487,13 @@ waitResetDvar(waitTime, dvarName, dvarValue) {
 
 haveTestClientPlantExplosive() {
   for(;;) {
-    if(GetDvar("scr_testclients_plantexplosive") != "") {
+    if(getDvar("scr_testclients_plantexplosive") != "") {
       break;
     }
     wait 1;
   }
 
-  explosive = GetDvar("scr_testclients_plantexplosive");
+  explosive = getDvar("scr_testclients_plantexplosive");
   SetDevDvar("scr_testclients_plantexplosive", "");
 
   notBot = level.players[0];
@@ -1563,13 +1562,13 @@ haveTestClientThrowDeployableVest() {
 
 addTestClientJuggernaut() {
   for(;;) {
-    if(GetDvar("scr_testclients_jugg") != "") {
+    if(getDvar("scr_testclients_jugg") != "") {
       break;
     }
     wait 1;
   }
 
-  juggType = GetDvar("scr_testclients_jugg");
+  juggType = getDvar("scr_testclients_jugg");
   SetDevDvar("scr_testclients_jugg", "");
 
   notBot = level.players[0];
@@ -1683,7 +1682,7 @@ warpEnemies() {
 
   notBot = undefined;
   foreach(character in level.characters) {
-    if(IsPlayer(character) && !IsBot(character)) {
+    if(isPlayer(character) && !IsBot(character)) {
       notBot = character;
       break;
     }
@@ -1716,7 +1715,7 @@ warpFriendlies() {
 
   notBot = undefined;
   foreach(character in level.characters) {
-    if(IsPlayer(character) && !IsBot(character)) {
+    if(isPlayer(character) && !IsBot(character)) {
       notBot = character;
       break;
     }
@@ -1738,13 +1737,13 @@ warpFriendlies() {
 
 giveEquipment() {
   for(;;) {
-    if(GetDvar("scr_giveequipment") != "") {
+    if(getDvar("scr_giveequipment") != "") {
       break;
     }
     wait 1;
   }
 
-  equipment = GetDvar("scr_giveequipment");
+  equipment = getDvar("scr_giveequipment");
 
   if(isDefined(equipment)) {
     foreach(player in level.players) {
@@ -1761,13 +1760,13 @@ giveEquipment() {
 
 giveSpecialGrenade() {
   for(;;) {
-    if(GetDvar("scr_givespecialgrenade") != "") {
+    if(getDvar("scr_givespecialgrenade") != "") {
       break;
     }
     wait 1;
   }
 
-  equipment = GetDvar("scr_givespecialgrenade");
+  equipment = getDvar("scr_givespecialgrenade");
 
   if(isDefined(equipment)) {
     foreach(player in level.players) {
@@ -2072,13 +2071,13 @@ printPerks() {
 
 devGivePerks() {
   while(true) {
-    if(GetDvar("scr_devgiveperk") != "") {
+    if(getDvar("scr_devgiveperk") != "") {
       break;
     }
     wait 1;
   }
 
-  perk = GetDvar("scr_devgiveperk");
+  perk = getDvar("scr_devgiveperk");
   foreach(player in level.players) {
     player thread givePerk(perk, false);
   }
@@ -2163,7 +2162,7 @@ devHurtPlayerReset() {
 
 devHurtPlayerDirectional() {
   while(true) {
-    if(GetDvar("scr_devhurtplayerdirectional") != "") {
+    if(getDvar("scr_devhurtplayerdirectional") != "") {
       break;
     }
     wait 1;
@@ -2182,7 +2181,7 @@ devHurtPlayerDirectional() {
   bot = getBot(notBot);
 
   if(isDefined(bot)) {
-    switch (GetDvar("scr_devhurtplayerdirectional")) {
+    switch (getDvar("scr_devhurtplayerdirectional")) {
       case "right100":
         bot SetOrigin(notbot.origin + (0, 0, 5) + (AnglesToRight(notbot.angles) * 100));
         break;
@@ -2232,9 +2231,9 @@ getBot(notBot, spawn_ai_bots_normally) {
   if(!isDefined(bot)) {
     if(isDefined(spawn_ai_bots_normally) && spawn_ai_bots_normally && BotAutoConnectEnabled() == 1 && testClients_SpawnFullBots()) {
       if(GetDvarInt("bot_MaxNumAllyBots") == 0)
-        SetDvar("bot_MaxNumAllyBots", 1);
+        setDvar("bot_MaxNumAllyBots", 1);
       else if(GetDvarInt("bot_MaxNumEnemyBots") == 0)
-        SetDvar("bot_MaxNumAllyBots", 1);
+        setDvar("bot_MaxNumAllyBots", 1);
       else
         Assert("unreachable");
     } else {
@@ -2722,7 +2721,7 @@ devPredatorMissileDebugDraw() {
 
 devPrintDailyWeeklyChallenges() {
   while(true) {
-    if(GetDvar("scr_devPrintDailyWeeklyChallenges") != "") {
+    if(getDvar("scr_devPrintDailyWeeklyChallenges") != "") {
       break;
     }
     wait 1;
@@ -2732,13 +2731,13 @@ devPrintDailyWeeklyChallenges() {
     if(isDefined(player.pers["isBot"]) && player.pers["isBot"]) {
       continue;
     }
-    if(GetDvar("scr_devPrintDailyWeeklyChallenges") == "daily") {
+    if(getDvar("scr_devPrintDailyWeeklyChallenges") == "daily") {
       PrintLn(player.name);
       foreach(challenge, value in player.challengedata) {
         if(IsSubStr(challenge, "_daily") && value)
           PrintLn("Daily: " + challenge);
       }
-    } else if(GetDvar("scr_devPrintDailyWeeklyChallenges") == "weekly") {
+    } else if(getDvar("scr_devPrintDailyWeeklyChallenges") == "weekly") {
       PrintLn(player.name);
       foreach(challenge, value in player.challengedata) {
         if(IsSubStr(challenge, "_weekly") && value)
@@ -2870,7 +2869,6 @@ updateReflectionProbe() {
 
     wait(0.05);
   }
-
 }
 
 reflectionProbeButtons() {
@@ -2891,7 +2889,6 @@ reflectionProbeButtons() {
 
     wait .05;
   }
-
 }
 
 gotoNextspawn() {
@@ -2949,7 +2946,6 @@ devAlienGivePlayersMoney() {
     SetDevDvar("scr_givealienmoney", "0");
     wait(.05);
   }
-
 }
 
 spam_points_popup() {

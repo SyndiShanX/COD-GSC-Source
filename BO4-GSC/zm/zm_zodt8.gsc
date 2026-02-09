@@ -88,9 +88,9 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "water_splashies", 1, 1, "counter");
   clientfield::register("toplayer", "water_drippies", 1, 1, "int");
   clientfield::register("actor", "sndActorUnderwater", 1, 1, "int");
-  setdvar(#"player_shallowwaterwadescale", 1);
-  setdvar(#"player_waistwaterwadescale", 1);
-  setdvar(#"player_deepwaterwadescale", 1);
+  setDvar(#"player_shallowwaterwadescale", 1);
+  setDvar(#"player_waistwaterwadescale", 1);
+  setDvar(#"player_deepwaterwadescale", 1);
   scene::add_scene_func("p8_fxanim_zm_zod_skybox_bundle", &function_5988b12, "init");
   scene::add_scene_func(#"p8_fxanim_zm_zod_tentacle_bundle", &function_42cfb9f0);
   level scene::init("p8_fxanim_zm_zod_skybox_bundle");
@@ -312,8 +312,8 @@ autoexec opt_in() {
   level.var_5bfd847e = # "hash_7bef4c44b5d916bc";
   level.pack_a_punch_camo_index = 146;
   level.pack_a_punch_camo_index_number_variants = 5;
-  setdvar(#"hash_558e57dbb6559778", 1);
-  setdvar(#"r_lightingsunshadowcachedynamicsiegedistance", 3000);
+  setDvar(#"hash_558e57dbb6559778", 1);
+  setDvar(#"r_lightingsunshadowcachedynamicsiegedistance", 3000);
   level flag::init("forecastle_cargo_hatch_destroyed");
   level flag::init("water_drained_fore");
   level flag::init("water_drained_aft");
@@ -1004,7 +1004,7 @@ offhand_weapon_give_override(str_weapon) {
 zone_init() {
   level flag::init("always_on");
   level flag::set("always_on");
-  setdvar(#"hash_6ec233a56690f409", 1);
+  setDvar(#"hash_6ec233a56690f409", 1);
   zm_zonemgr::zone_init("zone_forecastle_upper");
   level.disable_kill_thread = 1;
   zm_zonemgr::add_adjacent_zone("zone_forecastle_upper", "zone_forecastle_lower", "always_on", 0);
@@ -1309,7 +1309,6 @@ function_d2ba8baa() {
     if(getdvarint(#"hash_1f8efa579fee787c", 0)) {
       iprintlnbold("<dev string:xd6>");
     }
-
   }
 
   if(a_s_spawn_locs.size) {
@@ -1495,7 +1494,6 @@ function_994c6ce1() {
     if(getdvarint(#"hash_1f8efa579fee787c", 0)) {
       iprintlnbold("<dev string:x196>");
     }
-
   }
 
   return true;
@@ -1600,7 +1598,7 @@ on_player_spawned() {
   level flag::wait_till(#"start_zombie_round_logic");
   level flag::wait_till(#"water_initialized");
 
-  if(isalive(self) && isplayer(self)) {
+  if(isalive(self) && isPlayer(self)) {
     self thread function_5ef52c07();
     self thread function_4ec55dd();
     self thread function_51581a6c();
@@ -1881,7 +1879,7 @@ function_255747bd() {
     trigger = trigger::wait_till("trig_lounge_vo", "targetname");
     player = trigger.who;
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       b_played = player zm_audio::create_and_play_dialog(#"location_enter", #"lounge");
 
       if(isDefined(b_played) && b_played) {

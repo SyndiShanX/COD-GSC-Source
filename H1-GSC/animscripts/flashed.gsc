@@ -8,7 +8,7 @@
 
 init_animset_flashed() {
   var_0 = [];
-  var_0["flashed"] = [ % exposed_flashbang_v2, %exposed_flashbang_v4];
+  var_0["flashed"] = [%exposed_flashbang_v2, %exposed_flashbang_v4];
   var_0["flashed"] = common_scripts\utility::array_randomize(var_0["flashed"]);
   anim.archetypes["soldier"]["flashed"] = var_0;
   anim.flashanimindex["soldier"] = 0;

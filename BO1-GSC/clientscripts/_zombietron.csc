@@ -1,6 +1,6 @@
 /*****************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombietron.csc
+ * Script: clientscripts\_zombietron\.csc
 *****************************************/
 
 #include clientscripts\_music;
@@ -30,14 +30,12 @@ main() {
   level._gib_overload_func = ::gib_handler;
   level._gibEventCBFunc = ::on_gib_event;
 }
-
 vehicle_spawned_callback(localClientNum) {
   if(self.vehicletype == "tank_t55_mini") {
     self thread collisionHandler(localClientNum);
     self thread jump_landing_thread(localClientNum);
   }
 }
-
 collisionHandler(localClientNum) {
   self endon("entityshutdown");
   while(1) {
@@ -47,15 +45,14 @@ collisionHandler(localClientNum) {
       player = getlocalplayer(driver_local_client);
       if(isDefined(player)) {
         if(hit_intensity > 15) {
-          player playRumbleOnEntity(driver_local_client, "damage_heavy");
+          player PlayRumbleOnEntity(driver_local_client, "damage_heavy");
         } else {
-          player playRumbleOnEntity(driver_local_client, "damage_light");
+          player PlayRumbleOnEntity(driver_local_client, "damage_light");
         }
       }
     }
   }
 }
-
 jump_landing_thread(localClientNum) {
   self endon("entityshutdown");
   while(1) {
@@ -64,20 +61,18 @@ jump_landing_thread(localClientNum) {
     if(isDefined(driver_local_client)) {
       player = getlocalplayer(driver_local_client);
       if(isDefined(player)) {
-        player playRumbleOnEntity(driver_local_client, "damage_heavy");
+        player PlayRumbleOnEntity(driver_local_client, "damage_heavy");
       }
     }
   }
 }
-
 lightning_flash(intensity_low, intensity_high, lightningdir) {
   lightningintensity = RandomFloatRange(intensity_low, intensity_high);
   lightningexposure = 2;
   SetSavedDvar("r_lightTweakSunLight", lightningintensity);
   SetSavedDvar("r_lightTweakSunDirection", lightningdir);
-  SetDvar("r_exposureValue", lightningexposure);
+  setDvar("r_exposureValue", lightningexposure);
 }
-
 lighting_flash_cycle(intensity_low, intensity_high, min_flash_time, max_flash_time, flash_wait_time_min, flash_wait_time_max) {
   flash_time = RandomFloatRange(min_flash_time, max_flash_time);
   oldlight = GetDvarFloat("r_lightTweakSunLight");
@@ -91,11 +86,10 @@ lighting_flash_cycle(intensity_low, intensity_high, min_flash_time, max_flash_ti
     wait(flash_wait_time);
     SetSavedDvar("r_lightTweakSunLight", oldlight);
     SetSavedDvar("r_lightTweakSunDirection", oldsundir);
-    SetDvar("r_exposureValue", oldexposure);
+    setDvar("r_exposureValue", oldexposure);
     flash_time = flash_time - flash_wait_time;
   }
 }
-
 lightning(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -110,7 +104,6 @@ lightning(localClientNum, set, newEnt) {
     level thread lighting_flash_cycle(intensity_low, intensity_high, min_flash_time, max_flash_time, flash_wait_time_min, flash_wait_time_max);
   }
 }
-
 show_scores(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -124,7 +117,6 @@ show_scores(localClientNum, set, newEnt) {
     HideScores(localClientNum);
   }
 }
-
 zombie_helicopter_kill(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -153,7 +145,6 @@ zombie_helicopter_kill(localClientNum, set, newEnt) {
     CreateDynEntAndLaunch(0, level.head_model, origin, angles, contactPoint, launchDir, level._effect["animscript_gibtrail_fx"]);
   }
 }
-
 heli_pilot(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -164,7 +155,6 @@ heli_pilot(localClientNum, set, newEnt) {
     level._heli_pilot_ent = undefined;
   }
 }
-
 init_client_flag_callbacks() {
   register_clientflag_callback("actor", level._ZT_ACTOR_CF_GIB_DEATH_P1, ::gib_death_1);
   register_clientflag_callback("actor", level._ZT_ACTOR_CF_GIB_DEATH_P2, ::gib_death_2);
@@ -182,22 +172,19 @@ init_client_flag_callbacks() {
   register_clientflag_callback("player", level._ZT_PLAYER_CF_LIGHTNING, ::lightning);
   register_clientflag_callback("player", level._ZT_PLAYER_CF_SHOW_SCORES, ::show_scores);
 }
-
 update_player_profile(localClientNum, set, newEnt) {
   PrintLn("*** Update player profile. ***");
   UpdateGamerProfile(localClientNum);
 }
-
 randomize_array(array) {
   for(i = 0; i < array.size; i++) {
-    j = randomInt(array.size);
+    j = RandomInt(array.size);
     temp = array[i];
     array[i] = array[j];
     array[j] = temp;
   }
   return array;
 }
-
 flame_death_fx() {
   self endon("entityshutdown");
   if(isDefined(self.is_on_fire) && self.is_on_fire) {
@@ -226,7 +213,6 @@ flame_death_fx() {
     playFXOnTag(0, level._effect["character_fire_death_sm"], self, tagArray[1]);
   }
 }
-
 zombie_launch_and_burn(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -248,7 +234,6 @@ zombie_launch_and_burn(localClientNum, set, newEnt) {
   }
   self thread flame_death_fx();
 }
-
 smartbomb_handler(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -265,25 +250,23 @@ smartbomb_handler(localClientNum, set, newEnt) {
   bomb = spawn(0, origin, "script_model");
   bomb setModel(level.bomb_model);
   bomb.angles = (90, 0, 0);
-  bomb moveTo(self.origin, 0.3, 0, 0);
+  bomb MoveTo(self.origin, 0.3, 0, 0);
   playSound(0, "zmb_nuke_incoming", self.origin);
   bomb waittill("movedone");
   playSound(0, "zmb_nuke_impact", self.origin);
   playFX(0, level._effect["bomb"], self.origin);
   bomb Delete();
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     players[i] EarthQuake(1.0, 0.8, self.origin, 1000);
   }
 }
-
 trap_tear_down_monitor(parent) {
   self endon("done");
   parent waittill("entityshutdown");
   self notify("torn_down");
   self Delete();
 }
-
 fx_tear_down_monitor() {
   self waittill("entityshutdown");
   if(isDefined(self.fx)) {
@@ -295,13 +278,12 @@ fx_tear_down_monitor() {
     self.fx2 = undefined;
   }
 }
-
 electrap_loop_sound(parent) {
   self endon("torn_down");
   self playLoopSound("zmb_hazard_loop", .5);
   self waittill("deactivate");
   self notify("done");
-  self stopLoopSound(0.5);
+  self stoploopsound(0.5);
   if(isDefined(self.fx)) {
     self.fx Delete();
     self.fx = undefined;
@@ -312,12 +294,10 @@ electrap_loop_sound(parent) {
   }
   self Delete();
 }
-
 get_camera_launch_direction() {
   pos = GetDvarVector("player_topDownCamCenterPos") + GetDvarVector("player_topDownCamOffset");
   return VectorNormalize(pos - self.origin);
 }
-
 gib_handler(type, locations) {
   if(type == "up") {
     up = get_camera_launch_direction();
@@ -325,7 +305,6 @@ gib_handler(type, locations) {
   }
   return false;
 }
-
 electrap_handler(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -365,7 +344,6 @@ electrap_handler(localClientNum, set, newEnt) {
     }
   }
 }
-
 get_pickup_type_from_model(model) {
   ret = "NA";
   switch (model) {
@@ -436,25 +414,22 @@ get_pickup_type_from_model(model) {
   }
   return (ret);
 }
-
 pickup_tear_down_monitor(parent) {
   self endon("done");
   parent waittill("entityshutdown");
   self notify("torn_down");
-  self stopLoopSound(0.5);
+  self stoploopsound(0.5);
   self Delete();
 }
-
 pickup_loop_sound(parent, sound) {
   self endon("torn_down");
   self thread pickup_tear_down_monitor(parent);
   self playLoopSound(sound, .5);
   self waittill("picked_up");
   self notify("done");
-  self stopLoopSound(0.5);
+  self stoploopsound(0.5);
   self Delete();
 }
-
 powerup(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -553,7 +528,6 @@ powerup(localClientNum, set, newEnt) {
     }
   }
 }
-
 sacred_cow(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -565,7 +539,6 @@ sacred_cow(localClientNum, set, newEnt) {
   playFXOnTag(localClientNum, level._effect["powerup_on"], self, "J_Wrist_RI");
   playFXOnTag(localClientNum, level._effect["torch_light"], self, "J_Tail2");
 }
-
 zombie_blood(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -576,7 +549,6 @@ zombie_blood(localClientNum, set, newEnt) {
     }
   }
 }
-
 gib_death(localClientNum, set, newEnt, player) {
   if(set) {
     if(is_mature()) {
@@ -584,35 +556,30 @@ gib_death(localClientNum, set, newEnt, player) {
     }
   }
 }
-
 gib_death_1(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
   }
   gib_death(localClientNum, set, newEnt, 1);
 }
-
 gib_death_2(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
   }
   gib_death(localClientNum, set, newEnt, 2);
 }
-
 gib_death_3(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
   }
   gib_death(localClientNum, set, newEnt, 3);
 }
-
 gib_death_4(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
   }
   gib_death(localClientNum, set, newEnt, 4);
 }
-
 init_client_flags() {
   level._ZT_ACTOR_CF_GIB_DEATH_P1 = 2;
   level._ZT_ACTOR_CF_GIB_DEATH_P2 = 3;
@@ -630,7 +597,6 @@ init_client_flags() {
   level._ZT_PLAYER_CF_SHOW_SCORES = 13;
   level._ZT_PLAYER_CF_START_SMART_BOMB = 14;
 }
-
 createZombieEyes(localClientNum) {
   if(isDefined(self._eyeArray)) {
     if(!isDefined(self._eyeArray[localClientNum])) {
@@ -639,7 +605,6 @@ createZombieEyes(localClientNum) {
     }
   }
 }
-
 deleteZombieEyes(localClientNum) {
   if(isDefined(self._eyeArray)) {
     if(isDefined(self._eyeArray[localClientNum])) {
@@ -648,16 +613,13 @@ deleteZombieEyes(localClientNum) {
     }
   }
 }
-
 on_player_connect(localClientNum) {
   ForceGameModeMappings(localClientNum, "zombietron");
 }
-
 on_player_spawn(localClientNum) {
   ForceGameModeMappings(localClientNum, "zombietron");
   self mapshaderconstant(localClientNum, 0, "scriptVector0", 1.0, -1.0, 0.0, 0.0);
 }
-
 on_zombie_spawn(localClientNum) {
   if(!isDefined(self._eyeArray)) {
     self._eyeArray = [];
@@ -666,12 +628,12 @@ on_zombie_spawn(localClientNum) {
   if(isDefined(self) && self haseyes()) {
     self createZombieEyes(localClientNum);
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self mapshaderconstant(localClientNum, 0, "scriptVector0", -4.0, -1.0, 0.0, -1.0);
+  }
 }
-
 zombie_eye_callback(localClientNum, hasEyes) {
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     if(hasEyes) {
       self createZombieEyes(i);
@@ -680,14 +642,12 @@ zombie_eye_callback(localClientNum, hasEyes) {
     }
   }
 }
-
 mark_piece_gibbed(piece_index) {
   if(!isDefined(self.gibbed_pieces)) {
     self.gibbed_pieces = [];
   }
   self.gibbed_pieces[self.gibbed_pieces.size] = piece_index;
 }
-
 has_gibbed_piece(piece_index) {
   if(!isDefined(self.gibbed_pieces)) {
     return false;
@@ -699,15 +659,13 @@ has_gibbed_piece(piece_index) {
   }
   return false;
 }
-
 do_gib_fx(tag) {
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     playFXOnTag(i, level._effect["animscript_gib_fx"], self, tag);
   }
   playSound(0, "zmb_death_gibs", self gettagorigin(tag));
 }
-
 do_gib(model, tag) {
   start_pos = self gettagorigin(tag);
   wait(0.03);
@@ -723,7 +681,6 @@ do_gib(model, tag) {
   CreateDynEntAndLaunch(0, model, end_pos, self gettagangles(tag), start_pos, forward, level._effect["animscript_gibtrail_fx"], 1);
   self do_gib_fx(tag);
 }
-
 on_gib_event(localClientNum, type, locations) {
   if(localClientNum != 0) {
     return;

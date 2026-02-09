@@ -80,7 +80,7 @@ func_D559(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   var_5 = 1;
-  if((scripts\asm\asm_bb::bb_meleechargerequested(var_0, var_1, var_2, var_3) || scripts\asm\asm_bb::bb_meleerequested(var_0, var_1, var_2, var_3)) && isDefined(self.melee.target) && isplayer(self.melee.target)) {
+  if((scripts\asm\asm_bb::bb_meleechargerequested(var_0, var_1, var_2, var_3) || scripts\asm\asm_bb::bb_meleerequested(var_0, var_1, var_2, var_3)) && isDefined(self.melee.target) && isPlayer(self.melee.target)) {
     var_5 = 2;
   }
 

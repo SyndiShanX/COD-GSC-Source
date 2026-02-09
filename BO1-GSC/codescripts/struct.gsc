@@ -6,16 +6,14 @@
 InitStructs() {
   level.struct = [];
 }
-
 CreateStruct() {
   struct = spawnStruct();
   level.struct[level.struct.size] = struct;
   return struct;
 }
-
 FindStruct(position) {
   for(i = 0; i < level.struct.size; i++) {
-    if(distanceSquared(level.struct[i].origin, position) < 1) {
+    if(DistanceSquared(level.struct[i].origin, position) < 1) {
       return level.struct[i];
     }
   }

@@ -103,7 +103,7 @@ FirePod(weaponType, player, node, streakName, modules, drone, startPos, excluded
     excludedCrateTypes = [];
   }
 
-  /# debugPlacementLine( startPos, targetPos, ( 0, 1, 0 ) );
+  debugPlacementLine(startPos, targetPos, (0, 1, 0));
   podrocket = MagicBullet(weaponType, startPos, targetPos, player);
 
   if(!isDefined(podrocket)) {
@@ -756,7 +756,7 @@ carepackageDroneDebugPathing() {
   restartPathing = true;
   nextGoalTime = GetTime();
 
-  while(GetDvar("scr_ocp_debugDelivery", "0") != "0") {
+  while(getDvar("scr_ocp_debugDelivery", "0") != "0") {
     while(true) {
       alive = isReallyAlive(goalClient);
       if(!alive) {
@@ -779,11 +779,11 @@ carepackageDroneDebugPathing() {
       waitframe();
     }
 
-    while(GetDvar("scr_ocp_debugDeliveryNext") == "0") {
+    while(getDvar("scr_ocp_debugDeliveryNext") == "0") {
       waitframe();
     }
 
-    SetDvar("scr_ocp_debugDeliveryNext", "0");
+    setDvar("scr_ocp_debugDeliveryNext", "0");
 
     toOwner = !toOwner;
 
@@ -802,7 +802,7 @@ carepackageDroneFindOwner() {
   self endon("death");
   self endon("delivered");
 
-  if(GetDvar("scr_ocp_debugDelivery", "0") != "0") {
+  if(getDvar("scr_ocp_debugDelivery", "0") != "0") {
     self carepackageDroneDebugPathing();
   }
 
@@ -895,8 +895,8 @@ drone_stopThrusterEffects() {
 
 debugDestroyCarepackages() {
   while(true) {
-    if(GetDvar("scr_ocp_destroyall", "0") != "0") {
-      SetDvar("scr_ocp_destroyall", "0");
+    if(getDvar("scr_ocp_destroyall", "0") != "0") {
+      setDvar("scr_ocp_destroyall", "0");
       foreach(crate in level.carePackages) {
         crate maps\mp\killstreaks\_airdrop::deleteCrate();
       }

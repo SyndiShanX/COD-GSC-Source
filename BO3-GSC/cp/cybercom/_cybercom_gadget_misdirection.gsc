@@ -74,7 +74,7 @@ function _on(slot, weapon) {
   }
   cybercom::function_adc40f11(weapon, result);
   self.cybercom.is_primed = 0;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_misdirection");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);

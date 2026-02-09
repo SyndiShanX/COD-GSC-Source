@@ -21,7 +21,7 @@ autoexec __init__system__() {
 
 __init__() {
   if(getdvarstring(#"debug_anim_shared", "") == "") {
-    setdvar(#"debug_anim_shared", "");
+    setDvar(#"debug_anim_shared", "");
   }
 
   setup_notetracks();
@@ -151,7 +151,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
   if(b_link) {
     if(isactor(self)) {
       self forceteleport(v_origin, v_angles);
-    } else if(isplayer(self)) {
+    } else if(isPlayer(self)) {
       self setorigin(v_origin);
       self setplayerangles(v_angles);
     } else {
@@ -170,7 +170,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
     if(n_lerp > 0) {
       if(isactor(self)) {
         self forceteleport(prevorigin, prevangles);
-      } else if(isplayer(self)) {
+      } else if(isPlayer(self)) {
         self setorigin(prevorigin);
         self setplayerangles(prevangles);
       } else {
@@ -182,7 +182,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
 
   self animscripted(animation, v_origin, v_angles, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon, var_f4b34dc1, paused);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     set_player_clamps();
   }
 
@@ -300,7 +300,7 @@ teleport(animation, v_origin_or_ent, v_angles_or_tag, time = 0) {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setorigin(v_pos);
     self setplayerangles(v_ang);
     return;

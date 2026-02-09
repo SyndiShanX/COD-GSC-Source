@@ -265,9 +265,9 @@ system_default_event_distances() {
   var_0["ai_eventDistGunShot"] = [];
   var_0["ai_eventDistGunShotTeam"] = [];
   var_0["ai_eventDistNewEnemy"] = [];
-  var_0["ai_eventDistDeath"]["spotted"] = getdvar("ai_eventDistDeath");
+  var_0["ai_eventDistDeath"]["spotted"] = getDvar("ai_eventDistDeath");
   var_0["ai_eventDistDeath"]["hidden"] = 512;
-  var_0["ai_eventDistPain"]["spotted"] = getdvar("ai_eventDistPain");
+  var_0["ai_eventDistPain"]["spotted"] = getDvar("ai_eventDistPain");
   var_0["ai_eventDistPain"]["hidden"] = 256;
   var_0["ai_eventDistExplosion"]["spotted"] = 4000;
   var_0["ai_eventDistExplosion"]["hidden"] = 4000;

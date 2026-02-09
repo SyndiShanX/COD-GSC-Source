@@ -29,8 +29,8 @@ init_level_specific_audio() {
   flag_init("maxis_crafted_intro_done");
   level.oh_shit_vo_cooldown = 0;
   level.remove_perk_vo_delay = 1;
-  setdvar("zombie_kills", "5");
-  setdvar("zombie_kill_timer", "6");
+  setDvar("zombie_kills", "5");
+  setDvar("zombie_kill_timer", "6");
 
   if(is_classic()) {
     level._audio_custom_response_line = ::tomb_audio_custom_response_line;
@@ -344,7 +344,7 @@ tomb_custom_crawler_spawned_vo() {
 
   if(isDefined(self.a.gib_ref) && isalive(self)) {
     if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "right_leg" || self.a.gib_ref == "left_leg") {
-      if(isDefined(self.attacker) && isplayer(self.attacker)) {
+      if(isDefined(self.attacker) && isPlayer(self.attacker)) {
         if(isDefined(self.attacker.crawler_created_vo_cooldown) && self.attacker.crawler_created_vo_cooldown) {
           return;
         }
@@ -602,7 +602,7 @@ discover_dig_site_trigger_touch() {
   while(true) {
     self waittill("trigger", player);
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       if(!(isDefined(player.dontspeak) && player.dontspeak)) {
         player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "discover_dig_site");
         maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.stub);
@@ -658,13 +658,13 @@ discover_pack_a_punch() {
 }
 
 can_player_speak() {
-  return isplayer(self) && !(isDefined(self.dontspeak) && self.dontspeak) && self getclientfieldtoplayer("isspeaking") == 0;
+  return isPlayer(self) && !(isDefined(self.dontspeak) && self.dontspeak) && self getclientfieldtoplayer("isspeaking") == 0;
 }
 
 maxis_audio_log_think() {
   self waittill("trigger", player);
 
-  if(!isplayer(player) || !is_player_valid(player)) {
+  if(!isPlayer(player) || !is_player_valid(player)) {
     return;
   }
   level thread play_maxis_audio_log(self.stub.origin, self.stub.script_int);
@@ -1761,7 +1761,7 @@ watch_one_shot_samantha_clue(str_line, str_notify, str_endon) {
     if(level.next_samantha_clue_time > gettime()) {
       continue;
     }
-    if(!isplayer(e_player)) {
+    if(!isPlayer(e_player)) {
       a_players = getplayers();
 
       foreach(player in a_players) {
@@ -1772,7 +1772,7 @@ watch_one_shot_samantha_clue(str_line, str_notify, str_endon) {
       }
     }
 
-    if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"] && flag("samantha_intro_done")) {
+    if(isDefined(e_player) && isPlayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"] && flag("samantha_intro_done")) {
       flag_waitopen("story_vo_playing");
       flag_set("story_vo_playing");
 

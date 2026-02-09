@@ -219,7 +219,6 @@ cloud_monitor(attacker, position, weapname) {
       if(isDefined(agent) && isAlive(agent) && agent isTouching(effectArea)) {
         agents_touching[agents_touching.size] = agent;
       }
-
     }
 
     foreach(agent in agents_touching) {

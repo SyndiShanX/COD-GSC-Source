@@ -27,23 +27,23 @@ main() {
 
   maps\mp\_load::main();
   maps\mp\_compass::setupMiniMap("compass_map_mp_frag");
-  setdvar("r_ssaoFadeDepth", 1024);
+  setDvar("r_ssaoFadeDepth", 1024);
 
   if(!level.console) {
-    SetDvar("r_lightGridEnableTweaks", 1);
-    SetDvar("r_lightGridIntensity", 1.33);
+    setDvar("r_lightGridEnableTweaks", 1);
+    setDvar("r_lightGridIntensity", 1.33);
 
     setdvar_cg_ng("r_diffuseColorScale", 1.37, 1);
     setdvar_cg_ng("r_specularcolorscale", 3, 9);
   } else {
-    SetDvar("r_lightGridEnableTweaks", 1);
-    SetDvar("r_lightGridIntensity", 1.33);
-    SetDvar("r_diffuseColorScale", 1.37);
-    SetDvar("r_specularcolorscale", 2);
+    setDvar("r_lightGridEnableTweaks", 1);
+    setDvar("r_lightGridIntensity", 1.33);
+    setDvar("r_diffuseColorScale", 1.37);
+    setDvar("r_specularcolorscale", 2);
   }
 
   if(!is_gen4()) {
-    SetDvar("sm_sunShadowScale", "0.8");
+    setDvar("sm_sunShadowScale", "0.8");
   }
 
   game["attackers"] = "allies";

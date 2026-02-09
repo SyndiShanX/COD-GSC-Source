@@ -52,7 +52,6 @@ setup_bot_hp() {
       assertmsg("Zone " + i + " at location " + zone.origin + " needs at least 3 nodes in its trigger_multiple");
       return;
     }
-
   }
 
   bot_cache_entrances_to_hardpoints(true);

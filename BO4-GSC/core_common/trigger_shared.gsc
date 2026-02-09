@@ -128,7 +128,7 @@ look_trigger(trigger) {
     waitresult = trigger waittill(#"trigger");
     e_other = waitresult.activator;
 
-    if(isplayer(e_other)) {
+    if(isPlayer(e_other)) {
       while(isDefined(e_other) && e_other istouching(trigger)) {
         if(e_other util::is_looking_at(e_target, trigger.script_dot, isDefined(trigger.script_trace) && trigger.script_trace) && (!b_ads_check || !e_other util::is_ads())) {
           trigger notify(#"trigger_look", waitresult);

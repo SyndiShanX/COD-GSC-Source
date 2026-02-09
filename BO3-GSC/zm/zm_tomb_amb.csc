@@ -151,7 +151,7 @@ function function_6576aaa4() {
   self thread function_74c85975();
   while(true) {
     self waittill("trigger", who);
-    if(who isplayer() && (!(isDefined(who.var_c7721e47) && who.var_c7721e47))) {
+    if(who isPlayer() && (!(isDefined(who.var_c7721e47) && who.var_c7721e47))) {
       self.players++;
       who.var_c7721e47 = 1;
       self thread function_8e8fcdfc(who);
@@ -306,7 +306,7 @@ function init() {
   init_heli_sound_values("qrdrone", "turbine_moving", 30, 0, 0.9, 20, 0.9, 1.1);
   init_heli_sound_values("qrdrone", "turn", 5, 0, 1, 1, 1, 1);
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   level thread command_parser();
 }
@@ -412,7 +412,7 @@ function command_parser() {
           }
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.1);
   }

@@ -11,7 +11,6 @@
 main() {
   camsys_init();
 }
-
 main2() {}
 createcam_precache() {}
 remove_player_weapons() {}
@@ -24,7 +23,6 @@ add_shot_type(name) {
   }
   level.shottypes[level.shottypes.size] = name;
 }
-
 setup_menus() {}
 setup_menu_buttons() {}
 create_track() {}
@@ -103,7 +101,6 @@ get_square_points(origin, square_width) {
   points[7] = origin + (square_width * -1, square_width, square_width * -1);
   return points;
 }
-
 draw_all_targets() {}
 draw_target(num) {}
 edit_help(msg) {}

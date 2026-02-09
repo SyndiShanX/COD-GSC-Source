@@ -29,12 +29,12 @@ function death_monitor() {
 
 function setdvars_based_on_varibles() {
   for(index = 0; index < level.cheatdvars.size; index++) {
-    setdvar(level.cheatdvars[index], level.cheatstates[level.cheatdvars[index]]);
+    setDvar(level.cheatdvars[index], level.cheatstates[level.cheatdvars[index]]);
   }
 }
 
 function addcheat(toggledvar, cheatfunc) {
-  setdvar(toggledvar, 0);
+  setDvar(toggledvar, 0);
   level.cheatstates[toggledvar] = getdvarint(toggledvar);
   level.cheatfuncs[toggledvar] = cheatfunc;
   if(level.cheatstates[toggledvar]) {

@@ -237,7 +237,7 @@ function announceroundwinner(winner, delay) {
   if(delay > 0) {
     wait(delay);
   }
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
   if(isDefined(level.teams[winner])) {
@@ -255,7 +255,7 @@ function announcegamewinner(winner, delay) {
   if(delay > 0) {
     wait(delay);
   }
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
   if(isDefined(level.teams[winner])) {
@@ -608,7 +608,7 @@ function set_music_on_player(state, save_state, return_state, wait_time) {
   if(sessionmodeiszombiesgame()) {
     return;
   }
-  assert(isplayer(self));
+  assert(isPlayer(self));
   if(!isDefined(save_state)) {
     save_state = 0;
     if(getdvarint("") > 0) {

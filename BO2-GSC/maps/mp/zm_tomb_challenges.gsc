@@ -159,7 +159,7 @@ footprint_zombie_killed(attacker) {
   a_volumes = getEntArray("foot_box_volume", "script_noteworthy");
 
   foreach(e_volume in a_volumes) {
-    if(self istouching(e_volume) && isDefined(attacker) && isplayer(attacker)) {
+    if(self istouching(e_volume) && isDefined(attacker) && isPlayer(attacker)) {
       self setclientfield("foot_print_box_fx", 1);
       m_box = getent(e_volume.target, "targetname");
       m_box notify("soul_absorbed", attacker);

@@ -242,7 +242,7 @@ bot_infect_find_node_can_see_ent(var_0, var_1) {
       var_7 = self getEye() - self.origin;
       var_8 = var_6.origin + var_7;
       var_9 = var_0.origin;
-      if(isplayer(var_0)) {
+      if(isPlayer(var_0)) {
         var_9 = var_0 scripts\mp\utility::getstancecenter();
       }
 

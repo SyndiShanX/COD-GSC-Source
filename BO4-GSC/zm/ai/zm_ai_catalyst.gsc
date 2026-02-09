@@ -254,7 +254,7 @@ killed_callback(e_attacker) {
     return;
   }
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 
@@ -1115,7 +1115,7 @@ function_b2090194(var_3d9951bb) {
 }
 
 function_439c457c(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(self.catalyst_type) && isDefined(weapon) && isDefined(attacker.var_b01de37)) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(self.catalyst_type) && isDefined(weapon) && isDefined(attacker.var_b01de37)) {
     weapon_root = aat::function_702fb333(weapon);
 
     if(self.catalyst_type === attacker.var_b01de37[weapon_root]) {
@@ -1353,7 +1353,7 @@ function_1a0ae193() {
 
     if(getdvarstring(#"hash_403368b958977fcb", "<dev string:x1fe>") != "<dev string:x1fe>") {
       function_fa69f8d2(int(getdvarstring(#"hash_403368b958977fcb")));
-      setdvar(#"hash_403368b958977fcb", "<dev string:x1fe>");
+      setDvar(#"hash_403368b958977fcb", "<dev string:x1fe>");
     }
   }
 }

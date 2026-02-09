@@ -60,7 +60,7 @@ setentityheadicon(team, owner, offset, icon, constant_size, off) {
     icon = game["entity_headicon_" + team];
 
   if(isDefined(owner) && !level.teambased) {
-    if(!isplayer(owner)) {
+    if(!isPlayer(owner)) {
       assert(isDefined(owner.owner), "entity has to have an owner if it's not a player");
       owner = owner.owner;
     }

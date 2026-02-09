@@ -76,7 +76,6 @@ setupEggForMap(eggName) {
     }
 
     thread eggDebug();
-
   }
 }
 
@@ -91,7 +90,7 @@ eggTrackHits() {
 
     playFX(getfx("vfx_alien_easter_egg_hit"), point, anglesToForward(direction), AnglesToUp(direction));
 
-    if(IsPlayer(attacker) && !IsAI(attacker)) {
+    if(isPlayer(attacker) && !IsAI(attacker)) {
       attackerNum = attacker getUniqueId();
 
       if(!isDefined(level.eggHits[attackerNum])) {
@@ -100,7 +99,6 @@ eggTrackHits() {
       }
     }
   }
-
 }
 
 eggRegisterHit(damage, attacker, direction, point, type) {
@@ -147,7 +145,6 @@ eggSetCompletedForMap(mapName) {
         self maps\mp\gametypes\_hud_message::playerCardSplashNotify("dlc_eggAllFound_" + packNum, self);
         self thread maps\mp\gametypes\_rank::giveRankXP("dlc_egg_hunt");
       }
-
     }
 
     self PlayLocalSound("ui_extinction_egg_splash");
@@ -198,15 +195,15 @@ eggDebugPlayer() {
   SetDvarIfUninitialized("scr_egg_clear", 0);
 
   while(true) {
-    mapName = GetDvar("scr_egg_set");
+    mapName = getDvar("scr_egg_set");
     if(mapName != "") {
       self eggSetCompletedForMap(mapName);
-      SetDvar("scr_egg_set", "");
+      setDvar("scr_egg_set", "");
     }
 
     if(GetDvarInt("scr_egg_clear") != 0) {
       self SetRankedPlayerDataReservedInt(CONST_EGG_ID, 0);
-      SetDvar("scr_egg_clear", 0);
+      setDvar("scr_egg_clear", 0);
       level.eggHits = [];
 
       ch_setState(CONST_ALL_EGG_CHALLENGE, 0);
@@ -223,7 +220,7 @@ eggDebugPlayer() {
         }
       }
 
-      SetDvar("scr_egg_pack_set", "");
+      setDvar("scr_egg_pack_set", "");
     }
 
     wait(0.25);

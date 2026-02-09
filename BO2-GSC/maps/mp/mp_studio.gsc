@@ -17,7 +17,7 @@ main() {
   maps\mp\_load::main();
   maps\mp\_compass::setupminimap("compass_map_mp_studio");
   maps\mp\mp_studio_amb::main();
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
@@ -99,7 +99,7 @@ damagetarget(dir) {
       case 2:
         rotation = 1;
 
-        if(isDefined(attacker) && isplayer(attacker)) {
+        if(isDefined(attacker) && isPlayer(attacker)) {
           yaw = get2dyaw(attacker.origin, self.origin);
 
           if(attacker.angles[1] > yaw)
@@ -273,7 +273,7 @@ movement_process() {
       if(isDefined(entity.targetname) && (entity.targetname == "alleyTarget_Cover" || entity.targetname == "alleyTarget_Path")) {
         continue;
       }
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         continue;
       }
       if(!entity istouching(self)) {
@@ -318,7 +318,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {

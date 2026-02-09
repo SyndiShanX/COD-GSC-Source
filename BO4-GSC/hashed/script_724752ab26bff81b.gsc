@@ -236,7 +236,7 @@ function_56d2143b() {
 
 is_soul_capture(var_88206a50, ent) {
   if(isDefined(ent)) {
-    b_killed_by_player = isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor);
+    b_killed_by_player = isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor);
     var_e93788f1 = var_88206a50.var_c5e93537;
     return (b_killed_by_player && ent istouching(var_e93788f1));
   }
@@ -292,7 +292,6 @@ function_6d5a79fe(var_5ea5c94d, ended_early) {
     }
 
     iprintlnbold("<dev string:x38>" + level.var_276bd207[0] + level.var_276bd207[1] + level.var_276bd207[2] + level.var_276bd207[3]);
-
   }
 }
 
@@ -415,7 +414,7 @@ function_7d123028() {
     s_notify = self waittill(#"trigger_activated");
     e_player = s_notify.e_who;
 
-    if(isplayer(e_player) && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== # "zhield_riot_dw") {
+    if(isPlayer(e_player) && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== # "zhield_riot_dw") {
       function_75e61716(e_player);
     }
   }
@@ -524,7 +523,6 @@ function_47181de() {
   if(!isDefined(n_slot)) {
     iprintln("<dev string:x46>");
   }
-
 }
 
 function_a9051a62() {
@@ -622,7 +620,6 @@ function_cf5be182() {
   if(!isDefined(n_slot)) {
     iprintln("<dev string:x84>");
   }
-
 }
 
 function_5c934f81(n_state) {

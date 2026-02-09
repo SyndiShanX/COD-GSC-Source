@@ -243,7 +243,7 @@ snowmobile_loop_passenger_shooting() {
     self setanimlimited(animarray("add_aim_backright_left"), left_steering, leanblendtime);
     self setanimlimited(animarray("add_aim_backright_right"), right_steering, leanblendtime);
 
-    if(isplayer(self.enemy))
+    if(isPlayer(self.enemy))
       self updateplayersightaccuracy();
 
     wait(0.05);
@@ -421,7 +421,7 @@ snowmobile_shoot() {
     }
 
     self animscripts\combat_utility::shootUntilShootBehaviorChange();
-    //	self clearAnim( %exposed_modern, 0.2 );
+    //	self clearAnim(%exposed_modern, 0.2 );
   }
 }
 

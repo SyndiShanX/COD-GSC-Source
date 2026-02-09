@@ -112,16 +112,12 @@ function player_handle_black_hole_bomb() {
         model._new_ground_trace = 1;
         grenade resetmissiledetonationtime();
         if(isDefined(level.black_hole_bomb_loc_check_func)) {
-          if([
-              [level.black_hole_bomb_loc_check_func]
-            ](grenade, model, info)) {
+          if([[level.black_hole_bomb_loc_check_func]](grenade, model, info)) {
             continue;
           }
         }
         if(isDefined(level._blackhole_bomb_valid_area_check)) {
-          if([
-              [level._blackhole_bomb_valid_area_check]
-            ](grenade, model, self)) {
+          if([[level._blackhole_bomb_valid_area_check]](grenade, model, self)) {
             continue;
           }
         }
@@ -399,7 +395,7 @@ function black_hole_bomb_trigger_monitor(ent_trigger) {
   ent_trigger endon("black_hole_complete");
   while(true) {
     ent_trigger waittill("trigger", ent_player);
-    if(isplayer(ent_player) && !ent_player isonground() && (!(isDefined(ent_player.lander) && ent_player.lander))) {
+    if(isPlayer(ent_player) && !ent_player isonground() && (!(isDefined(ent_player.lander) && ent_player.lander))) {
       ent_trigger thread black_hole_teleport_trigger_thread(ent_player, &black_hole_time_before_teleport, &black_hole_teleport_cancel);
     }
     wait(0.1);

@@ -330,12 +330,12 @@ function function_fec7f142() {
     level.var_9bbfcb9 = 1;
     while(true) {
       if(isDefined(self.var_98e1d15) && self.var_98e1d15) {
-        if(isplayer(e_player)) {
+        if(isPlayer(e_player)) {
           e_player notify("hash_e95dda8e");
         }
         break;
       } else if(isDefined(self.var_a7dffe09) && self.var_a7dffe09) {
-        if(isplayer(e_player)) {
+        if(isPlayer(e_player)) {
           e_player notify("hash_6a24d908");
         }
         break;
@@ -744,7 +744,7 @@ function zombie_blood_soul_streak_fx(v_origin, v_angles, v_endpos, time) {
 
 function function_6301de9e(v_pos, v_angles) {
   self waittill("death", e_attacker);
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(isDefined(level.var_7b91fc17)) {
       var_f5f4e9cc = level.var_7b91fc17;
       if(var_f5f4e9cc.var_3f80e7e8 < 200) {

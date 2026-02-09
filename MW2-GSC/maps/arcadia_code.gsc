@@ -456,7 +456,7 @@ laser_designate_target() {
 
   level notify("laser_coordinates_received");
 
-  if(getdvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1")
     thread draw_line_for_time(viewpoint, viewpoint + (0, 0, 100), 1, 0, 0, 20);
 
   // Check if we are supposed to be targeting for artillery now
@@ -949,7 +949,6 @@ sun_blocker() {
     // once we go back out to the main area block the sun again
     flag_waitopen("remove_sun_blocker");
   }
-
 }
 
 harriers() {
@@ -1252,7 +1251,7 @@ pool() {
 
   while(1) {
     trigger waittill("trigger", player);
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     while(player isTouching(trigger)) {

@@ -72,7 +72,7 @@ is_challenge_active() {
 on_hero_ability_kill(ability, victimability) {
   player = self;
 
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
 
@@ -138,7 +138,6 @@ function check_blackjack_challenge() {
     player stats::function_dad108fa(#"blackjack_challenge", 1);
 
     debug_print_earned();
-
   }
 }
 
@@ -160,7 +159,7 @@ challenge_kills(data) {
     return;
   }
 
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
 
@@ -262,7 +261,7 @@ challenge_game_ended(data) {
     return;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -288,7 +287,7 @@ challenge_round_ended(data) {
     return;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

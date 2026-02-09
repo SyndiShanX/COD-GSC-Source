@@ -24,7 +24,7 @@ __init__() {
 }
 
 function_b3681acb() {
-  if(getdvar(#"scr_debug_character_unlocks", 0) == 1) {
+  if(getDvar(#"scr_debug_character_unlocks", 0) == 1) {
     return true;
   }
 
@@ -253,7 +253,7 @@ function_20b0ca2e(unlock_name) {
 }
 
 function_54fc60f5(player, character) {
-  if(isDefined(player) && isplayer(player) && isDefined(character)) {
+  if(isDefined(player) && isPlayer(player) && isDefined(character)) {
     player_xuid = player getxuid(1);
 
     if(isDefined(player_xuid)) {
@@ -313,7 +313,7 @@ function_fb689837() {
 }
 
 on_drop_inventory(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -336,7 +336,7 @@ on_drop_inventory(player) {
 }
 
 on_player_disconnect() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

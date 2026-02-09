@@ -101,9 +101,9 @@ createFxLogic() {
   if(!isDefined(level._effect))
     level._effect = [];
 
-  if(GetDvar("createfx_map") == "")
+  if(getDvar("createfx_map") == "")
     SetDevDvar("createfx_map", level.script);
-  else if(GetDvar("createfx_map") == level.script)
+  else if(getDvar("createfx_map") == level.script)
     [[level.func_position_player]]();
 
   level.createFxHudElements = [];

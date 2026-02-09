@@ -14,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  setdvar(#"hash_35dbebb08d656926", 0);
+  setDvar(#"hash_35dbebb08d656926", 0);
   callback::on_spawned(&function_59d3154f);
 }
 

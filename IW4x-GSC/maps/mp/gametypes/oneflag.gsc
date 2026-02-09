@@ -44,8 +44,8 @@ main() {
   game["dialog"]["offense_obj"] = "capture_obj";
   game["dialog"]["defense_obj"] = "capture_obj";
 
-  if(getdvar("scr_oneflag_returntime") == "")
-    setdvar("scr_oneflag_returntime", "15");
+  if(getDvar("scr_oneflag_returntime") == "")
+    setDvar("scr_oneflag_returntime", "15");
   level.flagReturnTime = getdvarint("scr_oneflag_returntime");
 }
 

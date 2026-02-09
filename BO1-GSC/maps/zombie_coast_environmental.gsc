@@ -12,7 +12,6 @@ main() {
   level.scr_anim["boat"]["boat_anim"][0] = % fxanim_zom_ship_lifeboat_anim;
   level thread environmental_entities();
 }
-
 environmental_entities() {
   level waittill("start_of_round");
   hook = getEntArray("fxanim_zom_ship_crane01_hook_mod", "targetname");
@@ -24,7 +23,6 @@ environmental_entities() {
     boat[i] thread animate_environmental_object("boat", "boat_anim");
   }
 }
-
 #using_animtree("fxanim_props_dlc3");
 animate_environmental_object(animname, animation) {
   self.animname = animname;

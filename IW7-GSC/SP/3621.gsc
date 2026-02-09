@@ -7,11 +7,11 @@ func_7977() {
   var_0 = level.var_612D.var_A925;
   var_1 = 0;
   var_2 = undefined;
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     var_1 = 1;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_2 = scripts\engine\utility::ter_op(var_1, level.player.var_612D.var_4A6E, 0.2);
   } else {
     switch (tolower(self.unittype)) {
@@ -300,7 +300,7 @@ func_106C1(var_0) {
 
   for(;;) {
     self.trigger waittill("trigger", var_2);
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       if(scripts\sp\detonategrenades::func_385D(level.var_612D.var_4BF1 + (0, 0, 40))) {
         var_2 thread func_5781(self);
       } else if(getdvarint("debug_emp")) {
@@ -343,7 +343,7 @@ func_5781(var_0) {
   }
 
   self.var_A979 = gettime();
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     thread func_D044(var_0);
     return;
   }

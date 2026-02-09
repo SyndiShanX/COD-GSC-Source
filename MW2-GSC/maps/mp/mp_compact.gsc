@@ -15,10 +15,10 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_compact");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.10);
-  setdvar("r_lightGridContrast", 1);
-  setdvar("compassmaxrange", "1700");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.10);
+  setDvar("r_lightGridContrast", 1);
+  setDvar("compassmaxrange", "1700");
 
   ambientPlay("ambient_mp_compact");
 
@@ -32,13 +32,13 @@ main() {
 
 doMagnet() {
   strength = 18000;
-  if(getdvar("scr_compact_magnet_strength") != "")
+  if(getDvar("scr_compact_magnet_strength") != "")
     strength = getdvarfloat("scr_compact_magnet_strength");
   if(strength == 0) {
     return;
   }
   radius = 250;
-  if(getdvar("scr_compact_magnet_radius") != "")
+  if(getDvar("scr_compact_magnet_radius") != "")
     radius = getdvarfloat("scr_compact_magnet_radius");
   if(radius <= 0) {
     return;

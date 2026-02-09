@@ -67,7 +67,7 @@ debug_challenges_by_name() {
   while(true) {
     wait(0.1);
 
-    challenge_name = GetDvar("debug_challenges_by_name", "");
+    challenge_name = getDvar("debug_challenges_by_name", "");
     if(challenge_name == "") {
       continue;
     } else {
@@ -97,7 +97,7 @@ onPlayerConnect() {
       continue;
     }
 
-    if(IsPlayer(player) && !IsAgent(player) && !isAI(player) && !IsTestClient(player)) {
+    if(isPlayer(player) && !IsAgent(player) && !isAI(player) && !IsTestClient(player)) {
       if(getDvarInt("debug_challenges", 0) == 1)
     }
     player thread debug_challenges_by_name();
@@ -137,7 +137,6 @@ onPlayerConnect() {
     player NotifyOnPlayerCommand("jumped", "+goStand");
     player thread monitorMantle();
   }
-
 }
 
 onPlayerSpawned() {
@@ -196,7 +195,7 @@ monitorBlastShieldSurvival() {
   for(;;) {
     self waittill("survived_explosion", attacker);
 
-    if(isDefined(attacker) && IsPlayer(attacker) && self == attacker) {
+    if(isDefined(attacker) && isPlayer(attacker) && self == attacker) {
       continue;
     }
 
@@ -329,8 +328,7 @@ ch_vehicle_kills(data) {
 
   player = data.attacker;
 
-  if(!isDefined(player.pers[data.sWeapon + "_streak"]) ||
-    (isDefined(player.pers[data.sWeapon + "_streakTime"]) && GetTime() - player.pers[data.sWeapon + "_streakTime"] > 7000)) {
+  if(!isDefined(player.pers[data.sWeapon + "_streak"]) || (isDefined(player.pers[data.sWeapon + "_streakTime"]) && GetTime() - player.pers[data.sWeapon + "_streakTime"] > 7000)) {
     player.pers[data.sWeapon + "_streak"] = 0;
     player.pers[data.sWeapon + "_streakTime"] = GetTime();
   }
@@ -1424,7 +1422,6 @@ ch_kills(data) {
     if(isSubstr(baseWeapon, "combatknife")) {
       player notify("increment_knife_kill");
     }
-
   }
 
   if(isSubStr(MoD, "MOD_IMPACT") && !was_environment_weap && !was_killstreak_weap) {
@@ -2032,7 +2029,7 @@ playerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeap
   ads_ratio = 0;
   if(isDefined(data.eInflictor) && isDefined(data.eInflictor.firedAds)) {
     ads_ratio = data.eInflictor.firedAds;
-  } else if(isDefined(attacker) && IsPlayer(attacker)) {
+  } else if(isDefined(attacker) && isPlayer(attacker)) {
     ads_ratio = attacker PlayerAds();
   }
 
@@ -2501,7 +2498,7 @@ processChallenge(baseName, progressInc, forceSetProgress) {
 
   if((level.players.size < 2) && !getdvarint("force_ranking")) {
     debug_challenges = undefined;
-    /# debug_challenges = getDvarInt( "debug_challenges", 0 );
+    debug_challenges = getDvarInt("debug_challenges", 0);
     if(isDefined(debug_challenges)) {
       if(debug_challenges == 0) {
         return;
@@ -2922,7 +2919,7 @@ buildChallengeTableInfo(tableName, typeId) {
 
 buildChallegeInfo() {
   level.challengeInfo = [];
-  if(GetDvar("virtualLobbyActive") == "1") {
+  if(getDvar("virtualLobbyActive") == "1") {
     return;
   }
 

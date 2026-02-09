@@ -316,7 +316,7 @@ givehardpoint(streakName, streakCost) {
   if(!maps\mp\_utility::is_true(level.killstreaksenabled)) {
     return;
   }
-  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0) {
+  if(getDvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0) {
     return;
   }
   if(!isDefined(level.hardpointitems[streakName]) || !level.hardpointitems[streakName]) {
@@ -617,7 +617,7 @@ killstreakLeaderDialog(streakName) {
 }
 
 killstreakhit(var_0, var_1, var_2) {
-  if(isDefined(var_1) && isplayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
+  if(isDefined(var_1) && isPlayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
     if((level.teambased && var_2.owner.team != var_0.team || !level.teambased) && var_0 != var_2.owner) {
       if(maps\mp\_utility::iskillstreakweapon(var_1)) {
         return;

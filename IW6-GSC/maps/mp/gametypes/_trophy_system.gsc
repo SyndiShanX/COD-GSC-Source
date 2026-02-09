@@ -125,9 +125,7 @@ trophyUseListener(owner) {
       cannot_pick_up = undefined;
 
       foreach(offhandweapon in offhandweapons) {
-        if(offhandweapon == "alienflare_mp" || offhandweapon == "alientrophy_mp" || offhandweapon == "alienthrowingknife_mp" || (isDefined(level.trophy_use_pickupfunc) && [
-            [level.trophy_use_pickupfunc]
-          ](offhandweapon))) {
+        if(offhandweapon == "alienflare_mp" || offhandweapon == "alientrophy_mp" || offhandweapon == "alienthrowingknife_mp" || (isDefined(level.trophy_use_pickupfunc) && [[level.trophy_use_pickupfunc]](offhandweapon))) {
           ammo_count = owner GetAmmoCount(offhandweapon);
           if(ammo_count > 0) {
             owner setLowerMessage("slots_full", &"ALIEN_COLLECTIBLES_TACTICAL_FULL", 3);

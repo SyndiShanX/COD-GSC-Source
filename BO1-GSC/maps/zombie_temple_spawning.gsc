@@ -10,7 +10,7 @@
 #include maps\_zombiemode;
 
 temple_init_zone_spawn_locations() {
-  level.main_spawner = getEnt("main_zombie_spawner", "targetname");
+  level.main_spawner = GetEnt("main_zombie_spawner", "targetname");
   AssertEX(isDefined(level.main_spawner), "No spawner defined for map");
   zkeys = GetArrayKeys(level.zones);
   for(z = 0; z < zkeys.size; z++) {
@@ -26,14 +26,12 @@ temple_init_zone_spawn_locations() {
     }
   }
 }
-
 temple_ignore_spawner(spawner) {
   if(spawner.classname == "actor_zombie_smoker") {
     return true;
   }
   return false;
 }
-
 temple_manage_zones(zkeys) {
   player_on_waterslide = false;
   players = GetPlayers();
@@ -55,7 +53,6 @@ temple_manage_zones(zkeys) {
     }
   }
 }
-
 temple_create_spawner_list(zkeys) {
   temple_manage_zones(zkeys);
   level.enemy_spawns = [];
@@ -91,7 +88,8 @@ temple_create_spawner_list(zkeys) {
       if(zone.is_occupied) {
         for(x = 0; x < level.monkey_zombie_spawners.size; x++) {
           spawner = level.monkey_zombie_spawners[x];
-          if(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy == zoneName && isDefined(zone.barriers) && zone.barriers.size > 0) {
+          if(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy == zoneName &&
+            isDefined(zone.barriers) && zone.barriers.size > 0) {
             level.monkey_spawns[level.monkey_spawns.size] = spawner;
           }
         }
@@ -99,14 +97,12 @@ temple_create_spawner_list(zkeys) {
     }
   }
 }
-
 temple_round_prestart() {
   if(GetDvarInt(#"zombie_fall_test")) {
     level.round_spawn_func = maps\_zombiemode_ai_faller::round_spawning_fall_test;
   }
   wait(2);
 }
-
 temple_round_spawning() {
   level endon("intermission");
   level endon("end_of_round");
@@ -160,11 +156,11 @@ temple_round_spawning() {
       ASSERTMSG("No active spawners in the map.Check to see if the zone is active and if it's pointing to spawners.");
       return;
     }
-    spawn_point = level.enemy_spawn_locations[randomInt(level.enemy_spawn_locations.size)];
+    spawn_point = level.enemy_spawn_locations[RandomInt(level.enemy_spawn_locations.size)];
     if(!isDefined(old_spawn)) {
       old_spawn = spawn_point;
     } else if(Spawn_point == old_spawn) {
-      spawn_point = level.enemy_spawn_locations[randomInt(level.enemy_spawn_locations.size)];
+      spawn_point = level.enemy_spawn_locations[RandomInt(level.enemy_spawn_locations.size)];
     }
     old_spawn = spawn_point;
     ai = _try_spawn_napalm(spawn_point);
@@ -186,11 +182,9 @@ temple_round_spawning() {
     wait_network_frame();
   }
 }
-
 _setup_spawner(spawn_point) {
   level.main_spawner.script_string = spawn_point.script_string;
 }
-
 zombie_speed_up_temple() {
   if(level.round_number <= 3) {
     return;
@@ -220,7 +214,6 @@ zombie_speed_up_temple() {
     zombies = GetAiSpeciesArray("axis", "all");
   }
 }
-
 temple_round_wait() {
   wait(1);
   while(get_enemy_count() || level.zombie_total > 0 || level.intermission) {
@@ -230,7 +223,6 @@ temple_round_wait() {
     wait(1.0);
   }
 }
-
 enemies_still_alive() {
   enemies = [];
   enemies = GetAiSpeciesArray("axis", "all");
@@ -241,11 +233,9 @@ enemies_still_alive() {
   }
   return false;
 }
-
 _update_napalm_variables() {
   level.zombiesLeftBeforeNapalmSpawn = RandomIntRange(int(level.zombie_total * 0.25), int(level.zombie_total * 0.75));
 }
-
 _try_spawn_napalm(spawn_point) {
   if(!isDefined(level.napalmZombiesEnabled) || level.napalmZombiesEnabled == false || level.napalm_zombie_spawners.size == 0) {
     return undefined;
@@ -283,7 +273,6 @@ _try_spawn_napalm(spawn_point) {
   }
   return ai;
 }
-
 _get_non_visible_spawn_point() {
   players = get_players();
   player = random(players);
@@ -302,7 +291,6 @@ _get_non_visible_spawn_point() {
   }
   return undefined;
 }
-
 _get_special_spawn_point() {
   occupiedPoints = [];
   activePoints = [];
@@ -326,7 +314,6 @@ _get_special_spawn_point() {
   }
   return random(points);
 }
-
 _can_spawn_napalm() {
   forceSpawn = flag("zombie_napalm_force_spawn");
   if(GetDvarInt("zombiemode_debug_napalm") != 0) {
@@ -344,20 +331,18 @@ _can_spawn_napalm() {
   }
   return level.zombie_total < level.zombiesLeftBeforeNapalmSpawn;
 }
-
 _update_monkey_variables() {
   level.monkeysSpawnedThisRound = 0;
   level.zombiesLeftBeforeMonkeySpawn = RandomIntRange(int(level.zombie_total * 0.75), level.zombie_total);
   level.monkey_zombie_health = level.zombie_health;
 }
-
 _try_spawn_monkey() {
   if(!isDefined(level.monkey_spawns) || level.monkey_spawns.size == 0) {
     return undefined;
   }
   ai = undefined;
   if(_can_spawn_monkey()) {
-    spawner = level.monkey_spawns[randomInt(level.monkey_spawns.size)];
+    spawner = level.monkey_spawns[RandomInt(level.monkey_spawns.size)];
     ai = spawner Stalingradspawn();
     if(!spawn_failed(ai)) {
       ai maps\zombie_temple_ai_monkey::monkey_TempleThink(spawner);
@@ -366,15 +351,12 @@ _try_spawn_monkey() {
   }
   return ai;
 }
-
 _can_spawn_monkey() {
   return false;
 }
-
 _update_sonic_variables() {
   level.zombiesLeftBeforeSonicSpawn = RandomIntRange(int(level.zombie_total * 0.25), int(level.zombie_total * 0.75));
 }
-
 _try_spawn_sonic(spawn_point) {
   if(!isDefined(level.sonicZombiesEnabled) || level.sonicZombiesEnabled == false || level.sonic_zombie_spawners.size == 0) {
     return undefined;
@@ -412,7 +394,6 @@ _try_spawn_sonic(spawn_point) {
   }
   return ai;
 }
-
 _can_spawn_sonic() {
   if(GetDvarInt("zombiemode_debug_sonic") != 0) {
     return true;
@@ -422,7 +403,6 @@ _can_spawn_sonic() {
   }
   return level.zombie_total < level.zombiesLeftBeforeSonicSpawn;
 }
-
 _try_spawn_zombie(spawn_point) {
   level.main_spawner.script_string = spawn_point.script_string;
   level.main_spawner.target = spawn_point.target;
@@ -435,7 +415,6 @@ _try_spawn_zombie(spawn_point) {
   }
   return ai;
 }
-
 zombie_tracking_init() {
   flag_wait("all_players_connected");
   while(true) {
@@ -450,7 +429,6 @@ zombie_tracking_init() {
     wait(10);
   }
 }
-
 delete_zombie_noone_looking(how_close) {
   self endon("death");
   if(!isDefined(how_close)) {
@@ -497,7 +475,6 @@ delete_zombie_noone_looking(how_close) {
     }
   }
 }
-
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);

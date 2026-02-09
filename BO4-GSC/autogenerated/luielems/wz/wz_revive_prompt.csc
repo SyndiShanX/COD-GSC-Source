@@ -46,7 +46,6 @@ class cwz_revive_prompt: cluielem {
     cluielem::add_clientfield("reviveProgress", 1, 5, "float", var_d65e5a18);
     cluielem::add_clientfield("cowardsWay", 17000, 1, "int", var_7cb8f98a);
   }
-
 }
 
 register(uid, var_c05c67e2, healthcallback, var_d65e5a18, var_f228b5fa, var_7cb8f98a) {

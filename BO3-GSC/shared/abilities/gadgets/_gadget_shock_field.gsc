@@ -69,7 +69,7 @@ function shock_field_think(slot, weapon) {
     }
     entities = getdamageableentarray(self.origin, weapon.gadget_shockfield_radius);
     foreach(entity in entities) {
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         if(self getentitynumber() == entity getentitynumber()) {
           continue;
         }

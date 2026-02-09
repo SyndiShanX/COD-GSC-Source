@@ -14,12 +14,11 @@ precache_ape_fx() {
   level._effect["ape_impact"] = LoadFx("maps/zombie/fx_zombie_flesh_hit_ape");
   level._effect["ape_lightning_spawn"] = LoadFx("maps/zombie/fx_zombie_dog_lightning_buildup");
 }
-
 init(spawners) {
   array_thread(spawners, ::add_spawn_function, maps\_zombietron_ai_ape::ape_prespawn);
 }
-
 #using_animtree("generic_human");
+
 ape_prespawn() {
   self.animname = "ape_zombie";
   self.script_noteworthy = "ape_zombie";
@@ -76,7 +75,6 @@ ape_prespawn() {
   }
   self notify("zombie_init_done");
 }
-
 ape_zombie_idle_setup() {
   self.a.array["turn_left_45"] = % exposed_tracking_turn45L;
   self.a.array["turn_left_90"] = % exposed_tracking_turn90L;
@@ -90,7 +88,6 @@ ape_zombie_idle_setup() {
   self.a.array["straight_level"] = % ai_zombie_simianaut_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
-
 init_ape_zombie_anims() {
   level.scr_anim["ape_zombie"]["death1"] = % ai_zombie_boss_death;
   level.scr_anim["ape_zombie"]["death2"] = % ai_zombie_boss_death_a;
@@ -218,7 +215,6 @@ init_ape_zombie_anims() {
   level._zombie_board_taunt["ape_zombie"][6] = % ai_zombie_taunts_5e;
   level._zombie_board_taunt["ape_zombie"][7] = % ai_zombie_taunts_5f;
 }
-
 ape_damage_event(zombie) {
   while(isAlive(zombie)) {
     zombie waittill("damage", damage, attacker, direction, point, type);
@@ -227,21 +223,19 @@ ape_damage_event(zombie) {
     }
   }
 }
-
 ape_death_event(zombie) {
   zombie waittill("death");
   if(!isDefined(zombie)) {
     return;
   }
   zombie playSound("zmb_simianaut_death");
-  if(isDefined(zombie.attacker) && isplayer(zombie.attacker)) {
+  if(isDefined(zombie.attacker) && isPlayer(zombie.attacker)) {
     zombie.attacker maps\_zombietron_score::player_add_points(level.zombie_vars["zombie_points_boss"]);
   }
   level thread maps\_zombietron_pickups::spawn_uber_prizes(RandomFloatRange(0.5, 1) * (9 * level.zombie_vars["max_prize_inc_range"]), zombie.origin, true);
   level.total_boss_killed++;
   flag_set("boss_is_dead");
 }
-
 set_ape_run_cycle() {
   self endon("death");
   while(true) {
@@ -279,7 +273,6 @@ set_ape_run_cycle() {
     wait(0.05);
   }
 }
-
 ape_move_to_drop(drop_origin, waitflag) {
   self endon("death");
   self endon("drop_me");
@@ -288,7 +281,6 @@ ape_move_to_drop(drop_origin, waitflag) {
     wait 0.05;
   }
 }
-
 ape_think() {
   self endon("death");
   spawnOrigin = self.origin;
@@ -299,7 +291,7 @@ ape_think() {
   self.meleeAttackDist = 64;
   self.pissedOff = 0;
   self.maxsightdistsqrd = 96 * 96;
-  visionSetNaked("huey_city", 1);
+  VisionSetNaked("huey_city", 1);
   maps\createart\zombietron_art::do_single_lightning();
   playFX(level._effect["ape_lightning_spawn"], spawnOrigin);
   playsoundatposition("zmb_ape_prespawn", spawnOrigin);
@@ -331,7 +323,7 @@ ape_think() {
       if(isDefined(self.favoriteenemy.tank)) {
         specialAttackChance += 15;
       }
-      if(randomInt(100) < specialAttackChance) {
+      if(RandomInt(100) < specialAttackChance) {
         self notify("stop_find_flesh");
         self notify("killanimscript");
         time = getAnimLength(%ai_zombie_simianaut_taunt);
@@ -356,7 +348,7 @@ ape_think() {
       if(isDefined(self.favoriteenemy.heli)) {
         specialAttackChance += 45;
       }
-      if(randomInt(100) < specialAttackChance) {
+      if(RandomInt(100) < specialAttackChance) {
         self notify("stop_find_flesh");
         self notify("killanimscript");
         time = getAnimLength(%ai_zombie_simianaut_chest_beat);
@@ -391,12 +383,11 @@ ape_think() {
       }
     } else {
       players = GetPlayers();
-      self.favoriteenemy = players[randomInt(players.size)];
+      self.favoriteenemy = players[RandomInt(players.size)];
     }
     wait(1);
   }
 }
-
 move_to_position_over_time(destination, timeMS, elevationDelta) {
   self endon("death");
   frames = timeMS / 50;
@@ -443,13 +434,12 @@ move_to_position_over_time(destination, timeMS, elevationDelta) {
     }
   }
 }
-
 #using_animtree("generic_human");
+
 ape_taunt_deleter() {
   level waittill_any("exit_taken_fadeout", "ape_exited");
   self delete();
 }
-
 ape_shielder() {
   level endon("exit_taken");
   level endon("ape_exited");
@@ -458,7 +448,6 @@ ape_shielder() {
     wait 3;
   }
 }
-
 ape_KillOnProximity() {
   level endon("exit_taken");
   level endon("ape_exited");
@@ -472,7 +461,6 @@ ape_KillOnProximity() {
     wait 0.05;
   }
 }
-
 ape_you_greedy_mf(exit) {
   self notify("ape_stop_being_greedy");
   self endon("ape_stop_being_greedy");
@@ -489,7 +477,6 @@ ape_you_greedy_mf(exit) {
     wait 0.05;
   }
 }
-
 ape_taunt_go(destination, player, boss_battle) {
   level endon("exit_taken");
   level endon("round_is_active");
@@ -500,14 +487,14 @@ ape_taunt_go(destination, player, boss_battle) {
   ape thread ape_shielder();
   ape thread ape_taunt_deleter();
   current_spawners = maps\_zombietron_main::get_all_the_map_spawners();
-  spawn_point = current_spawners[randomInt(current_spawners.size)];
+  spawn_point = current_spawners[RandomInt(current_spawners.size)];
   exit_points = [];
   for(i = 0; i < current_spawners.size; i++) {
     if(current_spawners[i] != spawn_point) {
       exit_points[exit_points.size] = current_spawners[i];
     }
   }
-  exit_spawn_point = exit_points[randomInt(exit_points.size)];
+  exit_spawn_point = exit_points[RandomInt(exit_points.size)];
   ape thread ape_you_greedy_mf(exit_spawn_point.origin);
   ape forceTeleport(spawn_point.origin);
   ape set_run_anim("sprint3");
@@ -538,7 +525,7 @@ ape_taunt_go(destination, player, boss_battle) {
     if(pickupsItems.size == 0) {
       break;
     }
-    targetPickup = pickupsItems[randomInt(pickupsItems.size)];
+    targetPickup = pickupsItems[RandomInt(pickupsItems.size)];
     if(isDefined(targetPickup)) {
       exit_spawn_point = get_closest_to(targetPickup.origin, exit_points);
       ape thread ape_you_greedy_mf(exit_spawn_point.origin);
@@ -555,7 +542,6 @@ ape_taunt_go(destination, player, boss_battle) {
   wait 1;
   assertex(!isDefined(ape), "ape not deleted");
 }
-
 ape_taunt_player() {
   level.scr_anim["ape_zombie"]["chest_beat"] = % ai_zombie_simianaut_chest_beat;
   lastRound = 0;
@@ -575,13 +561,13 @@ ape_taunt_player() {
     } else {
       percentMod = level.zombie_vars["boss_taunt_percent_per_level"] + (level.round_number - lastRound) * level.zombie_vars["boss_taunt_percent_per_level"];
     }
-    if(randomInt(100) < percentMod) {
+    if(RandomInt(100) < percentMod) {
       lastRound = level.round_number;
       runToTarget = level.arenas[level.current_arena] + "_pickup";
       run_locations = GetStructArray(runToTarget, "targetname");
       players = GetPlayers();
       if(players.size > 1) {
-        player = players[randomInt(players.size)];
+        player = players[RandomInt(players.size)];
       } else {
         player = players[0];
       }

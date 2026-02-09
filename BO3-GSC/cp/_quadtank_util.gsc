@@ -48,7 +48,7 @@ function function_82f5563d(var_ac4390f) {
 }
 
 function function_610493ff(obj, params) {
-  if(isplayer(params.eattacker) && self quadtank::trophy_disabled() && issubstr(params.smeansofdeath, "BULLET")) {
+  if(isPlayer(params.eattacker) && self quadtank::trophy_disabled() && issubstr(params.smeansofdeath, "BULLET")) {
     player = params.eattacker;
     if(isDefined(player.var_d4b7c617)) {
       player.var_d4b7c617 = player.var_d4b7c617 + params.idamage;
@@ -70,7 +70,7 @@ function function_d9337df(var_ac4390f) {
   self endon("hash_d9337df");
   while(true) {
     var_ac4390f waittill("damage", n_damage, e_attacker, direction_vec, v_impact_point, damagetype, modelname, tagname, partname, weapon, idflags);
-    if(weapon.weapclass === "rocketlauncher" && isplayer(e_attacker)) {
+    if(weapon.weapclass === "rocketlauncher" && isPlayer(e_attacker)) {
       var_ac4390f notify("hash_d9337df");
       self notify("hash_d9337df");
     }

@@ -744,7 +744,7 @@ start_overlay(var_0) {
 }
 
 get_overlay(var_0) {
-  if(isplayer(self))
+  if(isPlayer(self))
     var_1 = self;
   else
     var_1 = level.player;

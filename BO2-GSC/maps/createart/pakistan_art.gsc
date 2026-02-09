@@ -7,13 +7,13 @@
 #include maps\_utility;
 
 main() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 15);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 15);
   visionsetnaked("sp_pakistan_default", 2);
 }
 
 set_water_dvars_flatten_surface() {
-  setdvar("r_waterwaveamplitude", "0 0 0 0");
+  setDvar("r_waterwaveamplitude", "0 0 0 0");
 }
 
 turn_on_claw_vision() {
@@ -29,25 +29,25 @@ turn_off_claw_vision() {
 }
 
 alley() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   visionsetnaked("sp_pakistan_default", 2);
 }
 
 drone_stealth() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   visionsetnaked("sp_pakistan_default", 2);
 }
 
 bank() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   visionsetnaked("sp_pakistan_default", 2);
 }
 
 sewer() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 8);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 8);
   visionsetnaked("sp_pakistan_default", 2);
 }

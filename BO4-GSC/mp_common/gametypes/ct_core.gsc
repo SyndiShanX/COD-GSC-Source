@@ -49,13 +49,13 @@ function_46e95cc7() {
   util::registerroundlimit(0, 10);
   util::registerroundwinlimit(0, 10);
   util::registernumlives(0, 100);
-  setdvar(#"com_pausesupported", 1);
-  setdvar(#"custom_killstreak_mode", 0);
-  setdvar(#"hash_48162cd174e3034d", 1);
-  setdvar(#"scr_scorestreaks", 0);
-  setdvar(#"bot_maxfree", 0);
-  setdvar(#"bot_maxallies", 0);
-  setdvar(#"bot_maxaxis", 0);
+  setDvar(#"com_pausesupported", 1);
+  setDvar(#"custom_killstreak_mode", 0);
+  setDvar(#"hash_48162cd174e3034d", 1);
+  setDvar(#"scr_scorestreaks", 0);
+  setDvar(#"bot_maxfree", 0);
+  setDvar(#"bot_maxallies", 0);
+  setDvar(#"bot_maxaxis", 0);
   level.usingscorestreaks = 0;
   level.disablescoreevents = 1;
   level.disablemomentum = 1;
@@ -83,9 +83,9 @@ function_1dd43d36(spawn_weapon) {
   }
 
   player setplayerrenderoptions(0);
-  var_e6b5e0d7 = getdvar(#"hash_3fb2952874e511c2");
+  var_e6b5e0d7 = getDvar(#"hash_3fb2952874e511c2");
   hands_weapon = ct_utils::function_84adcd1f();
-  s_weaponprimary = getdvar(#"hash_4b0035c0038e0762");
+  s_weaponprimary = getDvar(#"hash_4b0035c0038e0762");
 
   if(isDefined(s_weaponprimary)) {
     attachments = [];
@@ -97,8 +97,8 @@ function_1dd43d36(spawn_weapon) {
         attachments = array(attachments);
       }
 
-      if(!isinarray(attachments, getdvar(#"hash_721ee06404866532" + i))) {
-        attachments[attachments.size] = getdvar(#"hash_721ee06404866532" + i);
+      if(!isinarray(attachments, getDvar(#"hash_721ee06404866532" + i))) {
+        attachments[attachments.size] = getDvar(#"hash_721ee06404866532" + i);
       }
     }
 
@@ -141,7 +141,7 @@ function_1dd43d36(spawn_weapon) {
 
   player giveweapon(spawn_weapon);
   player loadout::function_442539("primary", spawn_weapon);
-  var_670cba7 = getdvar(#"hash_6dcfed2e90bdae6e");
+  var_670cba7 = getDvar(#"hash_6dcfed2e90bdae6e");
 
   if(isDefined(var_670cba7)) {
     attachments = [];
@@ -153,8 +153,8 @@ function_1dd43d36(spawn_weapon) {
         attachments = array(attachments);
       }
 
-      if(!isinarray(attachments, getdvar(#"hash_c7f896e4dff882e" + i))) {
-        attachments[attachments.size] = getdvar(#"hash_c7f896e4dff882e" + i);
+      if(!isinarray(attachments, getDvar(#"hash_c7f896e4dff882e" + i))) {
+        attachments[attachments.size] = getDvar(#"hash_c7f896e4dff882e" + i);
       }
     }
 
@@ -279,7 +279,7 @@ function_1e84c767() {
   level waittill(#"custom_draft_completed", #"draft_complete");
   level.usingmomentum = 0;
   level.var_90bb9821 = 0;
-  setdvar(#"scr_disablechallenges", 1);
+  setDvar(#"scr_disablechallenges", 1);
   level flag::init("bot_init_complete");
   level thread ct_bots::function_fa0d912f(17);
 
@@ -431,7 +431,7 @@ function_e9b83be8() {
   if(isDefined(fields) && isDefined(fields.intromovie) && function_a1fb023a(fields.var_5331abe0)) {
     e_player = getplayers(#"allies")[0];
 
-    if(isDefined(e_player) && isplayer(e_player)) {
+    if(isDefined(e_player) && isPlayer(e_player)) {
       e_player function_95e72b33(fields.intromovie);
     }
   }
@@ -444,7 +444,7 @@ function_588a84ce() {
   if(isDefined(fields) && isDefined(fields.var_55f31ab6) && function_a1fb023a(fields.var_148d6d91)) {
     e_player = getplayers(#"allies")[0];
 
-    if(isDefined(e_player) && isplayer(e_player)) {
+    if(isDefined(e_player) && isPlayer(e_player)) {
       e_player function_95e72b33(fields.var_55f31ab6);
     }
   }

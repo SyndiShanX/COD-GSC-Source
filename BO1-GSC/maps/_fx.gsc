@@ -10,17 +10,16 @@
 OneShotfx(fxId, fxPos, waittime, fxPos2) {}
 OneShotfxthread() {
   maps\_spawner::waitframe();
-  if(self.v["delay"] > 0)
+  if(self.v["delay"] > 0) {
     wait self.v["delay"];
+  }
   create_triggerfx();
 }
-
 create_triggerfx() {
   self.looper = spawnFx_wrapper(self.v["fxid"], self.v["origin"], self.v["forward"], self.v["up"]);
   triggerFx(self.looper, self.v["delay"]);
   create_loopsound();
 }
-
 loopfx(fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout) {
   println("Loopfx is deprecated!");
   ent = createLoopEffect(fxId);
@@ -31,12 +30,10 @@ loopfx(fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout) {
   }
   ent.v["delay"] = waittime;
 }
-
 create_looper() {
   self.looper = playLoopedFx(level._effect[self.v["fxid"]], self.v["delay"], self.v["origin"], 0, self.v["forward"], self.v["up"]);
   create_loopsound();
 }
-
 create_loopsound() {
   self notify("stop_loop");
   if(isDefined(self.v["soundalias"]) && (self.v["soundalias"] != "nil")) {
@@ -55,11 +52,9 @@ create_loopsound() {
     }
   }
 }
-
 stop_loopsound() {
   self notify("stop_loop");
 }
-
 loopfxthread() {
   maps\_spawner::waitframe();
   if(isDefined(self.fxStart)) {
@@ -85,30 +80,26 @@ loopfxthread() {
     }
   }
 }
-
 loopfxStop(timeout) {
   self endon("death");
   wait(timeout);
   self.looper delete();
 }
-
 loopSound(sound, Pos, waittime) {
   level thread loopSoundthread(sound, Pos, waittime);
 }
-
 loopSoundthread(sound, pos, waittime) {
   org = spawn("script_origin", (pos));
   org.origin = pos;
   org playLoopSound(sound);
 }
-
 setup_fx() {
   if((!isDefined(self.script_fxid)) || (!isDefined(self.script_fxcommand)) || (!isDefined(self.script_delay))) {
     return;
   }
   org = undefined;
   if(isDefined(self.target)) {
-    ent = getEnt(self.target, "targetname");
+    ent = getent(self.target, "targetname");
     if(isDefined(ent)) {
       org = ent.origin;
     }
@@ -132,7 +123,6 @@ setup_fx() {
   }
   self delete();
 }
-
 soundfx(fxId, fxPos, endonNotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxPos;
@@ -141,18 +131,15 @@ soundfx(fxId, fxPos, endonNotify) {
     org thread soundfxDelete(endonNotify);
   }
 }
-
 soundfxDelete(endonNotify) {
   level waittill(endonNotify);
   self delete();
 }
-
 rainfx(fxId, fxId2, fxPos) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxPos;
   org thread rainLoop(fxId, fxId2);
 }
-
 rainLoop(hardRain, lightRain) {
   self endon("death");
   blend = spawn("sound_blend", (0.0, 0.0, 0.0));
@@ -222,12 +209,10 @@ rainLoop(hardRain, lightRain) {
     rain = change;
   }
 }
-
 blendDelete(blend) {
   self waittill("death");
   blend delete();
 }
-
 spawnFX_wrapper(fx_id, origin, forward, up) {
   fx_object = SpawnFx(level._effect[fx_id], origin, forward, up);
   return fx_object;

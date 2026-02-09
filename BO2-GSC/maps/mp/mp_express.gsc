@@ -48,11 +48,11 @@ levelspawndvars(reset_dvars) {
 }
 
 devgui_express() {
-  setdvar("devgui_notify", "");
+  setDvar("devgui_notify", "");
 
   for(;;) {
     wait 0.5;
-    devgui_string = getdvar(#"devgui_notify");
+    devgui_string = getDvar(#"devgui_notify");
 
     switch (devgui_string) {
       case "":
@@ -64,8 +64,7 @@ devgui_express() {
         break;
     }
 
-    if(getdvar(#"devgui_notify") != "")
-      setdvar("devgui_notify", "");
+    if(getDvar(#"devgui_notify") != "")
+      setDvar("devgui_notify", "");
   }
-
 }

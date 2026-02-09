@@ -1,6 +1,6 @@
 /***************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\createfx\zombie_cod5_prototype_fx.csc
+ * Script: clientscripts\createfx\zombie_cod5_prototype_fx\.csc
 ***************************************************************/
 
 main() {

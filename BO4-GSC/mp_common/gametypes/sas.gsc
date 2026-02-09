@@ -176,7 +176,7 @@ giveperks() {
 
 onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   if(weapon == level.weapon_sas_primary_weapon && smeansofdeath == "MOD_IMPACT") {
-    if(isDefined(eattacker) && isplayer(eattacker)) {
+    if(isDefined(eattacker) && isPlayer(eattacker)) {
       if(!isDefined(eattacker.pers[# "sticks"])) {
         eattacker.pers[# "sticks"] = 1;
       } else {
@@ -191,7 +191,7 @@ onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, v
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if(weapon_utils::ismeleemod(smeansofdeath)) {
       attacker globallogic_score::givepointstowin(int(level.pointspermeleekill));
       scoreevents::processscoreevent(#"hash_6c8030eb05b53d5a", attacker, self, weapon);

@@ -1402,7 +1402,7 @@ function_5b807116(localclientnum) {
   while(true) {
     e_player = function_5c10bd79(localclientnum);
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       n_dist = distance2dsquared(self.origin, e_player.origin);
 
       if(n_dist <= 512 * 512) {

@@ -160,9 +160,7 @@ evaluator_findfirstvalidanimation(entity, animations, tests) {
       animation = aliasanimations[0];
 
       foreach(test in tests) {
-        if(![
-            [test]
-          ](entity, animation)) {
+        if(![[test]](entity, animation)) {
           valid = 0;
           break;
         }

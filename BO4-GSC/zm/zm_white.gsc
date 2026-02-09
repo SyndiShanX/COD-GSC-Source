@@ -142,7 +142,7 @@ event_handler[level_init] main(eventstruct) {
   level zm_white_computer_system::preload();
   level zm_white_cheat_codes::init();
   load::main();
-  setdvar(#"zombie_unlock_all", 0);
+  setDvar(#"zombie_unlock_all", 0);
   level.zones = [];
   level.zone_manager_init_func = &zm_white_zones::zone_init;
   init_zones[0] = "zone_security_checkpoint";
@@ -1019,6 +1019,6 @@ white_devgui() {
         break;
     }
 
-    setdvar(#"zm_white_devgui_cmd", "<dev string:x413>");
+    setDvar(#"zm_white_devgui_cmd", "<dev string:x413>");
   }
 }

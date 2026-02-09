@@ -52,7 +52,7 @@ wood_think() {
 
   self waittill("trigger", other);
 
-  if(isplayer(other))
+  if(isPlayer(other))
     org = other getorigin();
   else
     org = other.origin;

@@ -139,11 +139,11 @@ init() {
   if(level.oldschool) {
     print("<dev string:x38>");
 
-    setdvar(#"jump_height", 64);
-    setdvar(#"jump_slowdownenable", 0);
-    setdvar(#"bg_falldamageminheight", 256);
-    setdvar(#"bg_falldamagemaxheight", 512);
-    setdvar(#"player_clipsizemultiplier", 2);
+    setDvar(#"jump_height", 64);
+    setDvar(#"jump_slowdownenable", 0);
+    setDvar(#"bg_falldamageminheight", 256);
+    setDvar(#"bg_falldamagemaxheight", 512);
+    setDvar(#"player_clipsizemultiplier", 2);
   }
 
   if(!isDefined(game.tiebreaker)) {
@@ -159,19 +159,19 @@ init() {
 }
 
 registerdvars() {
-  if(!isDefined(getdvar(#"scr_oldschool"))) {
-    setdvar(#"scr_oldschool", 0);
+  if(!isDefined(getDvar(#"scr_oldschool"))) {
+    setDvar(#"scr_oldschool", 0);
   }
 
-  if(!isDefined(getdvar(#"ui_guncycle"))) {
-    setdvar(#"ui_guncycle", 0);
+  if(!isDefined(getDvar(#"ui_guncycle"))) {
+    setDvar(#"ui_guncycle", 0);
   }
 
-  if(!isDefined(getdvar(#"ui_weapon_tiers"))) {
-    setdvar(#"ui_weapon_tiers", 0);
+  if(!isDefined(getDvar(#"ui_weapon_tiers"))) {
+    setDvar(#"ui_weapon_tiers", 0);
   }
 
-  setdvar(#"ui_text_endreason", "");
+  setDvar(#"ui_text_endreason", "");
   setmatchflag("bomb_timer", 0);
   level.vehicledamagescalar = getdvarfloat(#"scr_vehicle_damage_scalar", 1);
   level.fire_audio_repeat_duration = getdvarint(#"fire_audio_repeat_duration", 0);
@@ -325,7 +325,6 @@ forceend(hostsucks = 0) {
     } else {
       print("<dev string:x68>");
     }
-
   }
 
   level.forcedend = 1;
@@ -340,7 +339,7 @@ forceend(hostsucks = 0) {
   }
 
   setmatchflag("disableIngameMenu", 1);
-  setdvar(#"ui_text_endreason", endstring);
+  setDvar(#"ui_text_endreason", endstring);
   thread endgame(winner, endstring);
 }
 
@@ -362,7 +361,6 @@ killserverpc() {
     } else {
       print("<dev string:x68>");
     }
-
   }
 
   level.forcedend = 1;
@@ -451,9 +449,7 @@ dodeadeventupdates() {
       if(alldeadteamcount() == level.teams.size - 1) {
         foreach(team, _ in level.teams) {
           if(!isteamalldead(team)) {
-            [
-              [level.onlastteamaliveevent]
-            ](team);
+            [[level.onlastteamaliveevent]](team);
             return true;
           }
         }
@@ -461,9 +457,7 @@ dodeadeventupdates() {
     } else {
       foreach(team, _ in level.teams) {
         if(isteamalldead(team)) {
-          [
-            [level.ondeadevent]
-          ](team);
+          [[level.ondeadevent]](team);
           return true;
         }
       }
@@ -705,7 +699,7 @@ endgame(winner, endreasontext) {
   game.state = "postgame";
   level.gameendtime = gettime();
   level.gameended = 1;
-  setdvar(#"g_gameended", 1);
+  setDvar(#"g_gameended", 1);
   level.ingraceperiod = 0;
   level notify(#"game_ended");
   level.allowbattlechatter[# "bc"] = 0;
@@ -910,7 +904,7 @@ checkscorelimit() {
       return 0;
     }
   } else {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       return 0;
     }
 
@@ -937,7 +931,7 @@ updategametypedvars() {
 
     if(timelimit != level.timelimit) {
       level.timelimit = timelimit;
-      setdvar(#"ui_timelimit", level.timelimit);
+      setDvar(#"ui_timelimit", level.timelimit);
       level notify(#"update_timelimit");
     }
 
@@ -946,7 +940,7 @@ updategametypedvars() {
 
     if(scorelimit != level.scorelimit) {
       level.scorelimit = scorelimit;
-      setdvar(#"ui_scorelimit", level.scorelimit);
+      setDvar(#"ui_scorelimit", level.scorelimit);
       level notify(#"update_scorelimit");
     }
 
@@ -1244,7 +1238,7 @@ checkteamscorelimitsoon(team) {
 }
 
 checkplayerscorelimitsoon() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(level.scorelimit <= 0) {
     return;
@@ -1347,9 +1341,9 @@ graceperiod() {
 }
 
 watchmatchendingsoon() {
-  setdvar(#"xblive_matchendingsoon", 0);
+  setDvar(#"xblive_matchendingsoon", 0);
   level waittill(#"match_ending_soon");
-  setdvar(#"xblive_matchendingsoon", 1);
+  setDvar(#"xblive_matchendingsoon", 1);
 }
 
 assertteamvariables() {}
@@ -1399,7 +1393,7 @@ callback_startgametype() {
       game.state = "playing";
     }
 
-    setdvar(#"cg_thirdpersonangle", 354);
+    setDvar(#"cg_thirdpersonangle", 354);
     game.strings[# "press_to_spawn"] = # "hash_203ff65a4ee460e6";
 
     if(level.teambased) {
@@ -1474,7 +1468,7 @@ callback_startgametype() {
 
   level.skipvote = 0;
   level.gameended = 0;
-  setdvar(#"g_gameended", 0);
+  setDvar(#"g_gameended", 0);
   level.objidstart = 0;
   level.forcedend = 0;
   level.hostforcedend = 0;
@@ -1587,19 +1581,19 @@ callback_startgametype() {
   level.killstreaksenabled = 1;
 
   if(getdvarstring(#"scr_game_rankenabled") == "") {
-    setdvar(#"scr_game_rankenabled", 1);
+    setDvar(#"scr_game_rankenabled", 1);
   }
 
   level.rankenabled = getdvarint(#"scr_game_rankenabled", 0);
 
   if(getdvarstring(#"scr_game_medalsenabled") == "") {
-    setdvar(#"scr_game_medalsenabled", 1);
+    setDvar(#"scr_game_medalsenabled", 1);
   }
 
   level.medalsenabled = getdvarint(#"scr_game_medalsenabled", 0);
 
   if(level.hardcoremode && level.rankedmatch && getdvarstring(#"scr_game_friendlyfiredelay") == "") {
-    setdvar(#"scr_game_friendlyfiredelay", 1);
+    setDvar(#"scr_game_friendlyfiredelay", 1);
   }
 
   level.friendlyfiredelay = getdvarint(#"scr_game_friendlyfiredelay", 0);
@@ -1624,7 +1618,6 @@ callback_startgametype() {
   if(getdvarint(#"scr_hostmigrationtest", 0) == 1) {
     thread forcedebughostmigration();
   }
-
 }
 
 forcedebughostmigration() {
@@ -1640,13 +1633,13 @@ function registerfriendlyfiredelay(dvarstring, defaultvalue, minvalue, maxvalue)
   dvarstring = "scr_" + dvarstring + "_friendlyFireDelayTime";
 
   if(getdvarstring(dvarstring) == "") {
-    setdvar(dvarstring, defaultvalue);
+    setDvar(dvarstring, defaultvalue);
   }
 
   if(getdvarint(dvarstring, 0) > maxvalue) {
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   } else if(getdvarint(dvarstring, 0) < minvalue) {
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
   }
 
   level.friendlyfiredelaytime = getdvarint(dvarstring, 0);
@@ -1686,7 +1679,7 @@ getkillstreaks(player) {
     killstreak[killstreaknum] = "killstreak_null";
   }
 
-  if(isplayer(player) && !level.oldschool && level.disablecac != 1 && !isbot(player) && isDefined(player.killstreak)) {
+  if(isPlayer(player) && !level.oldschool && level.disablecac != 1 && !isbot(player) && isDefined(player.killstreak)) {
     currentkillstreak = 0;
 
     for(killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
@@ -1706,7 +1699,6 @@ updaterankedmatch(winner) {
       level.hostforcedend = 1;
 
       print("<dev string:xbe>");
-
     }
   }
 }

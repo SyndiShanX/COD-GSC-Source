@@ -146,7 +146,7 @@ function _setplayermomentum(player, momentum) {
 function _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {}
 
 function setplayermomentumdebug() {
-  setdvar("", 0);
+  setDvar("", 0);
   while(true) {
     wait(1);
     momentumpercent = getdvarfloat("", 0);

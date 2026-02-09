@@ -29,7 +29,6 @@ on_weapon_change(s_params) {
 
   if(w_new_weapon == level.w_thundergun || w_new_weapon == level.w_thundergun_upgraded) {
     iprintlnbold("<dev string:x38>");
-
   }
 }
 

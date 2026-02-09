@@ -8,8 +8,8 @@
 
 main() {
   level.tweakfile = 1;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 15);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 15);
 }
 
 vision_set_trigger_think() {
@@ -38,8 +38,8 @@ vision_set_change(str_vision_set) {
   switch (str_vision_set) {
     case "sp_karma_flyin_desat":
       n_vs_time = 0.0;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       setsaveddvar("sm_sunSampleSizeNear", 0.5);
       setsaveddvar("sm_sunAlwaysCastsShadow", 1);
       break;
@@ -48,71 +48,71 @@ vision_set_change(str_vision_set) {
       break;
     case "sp_karma_intro":
       n_vs_time = 3;
-      setdvar("r_rimIntensity_debug", 2);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 2);
+      setDvar("r_rimIntensity", 15);
       setsaveddvar("sm_sunAlwaysCastsShadow", 0);
       wait 5;
       break;
     case "sp_karma_IntroGlassesTint":
       n_vs_time = 0.8;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       break;
     case "sp_karma_IntroGlassesOn":
       n_vs_time = 4;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       break;
     case "sp_karma_security":
       n_vs_time = 3;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 6);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 6);
       break;
     case "sp_karma_elevators":
       n_vs_time = 2;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 6);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 6);
       break;
     case "sp_karma_vista":
       n_vs_time = 3;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 6);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 6);
       break;
     case "sp_karma_lobby":
       n_vs_time = 3;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 6);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 6);
       break;
     case "sp_karma_elevator_atrium":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 4);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 4);
       break;
     case "sp_karma_entertainmentdeck01":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 4.5);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 4.5);
       setsaveddvar("sm_sunSampleSizeNear", 0.5);
       break;
     case "sp_karma_ClubMain":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 50);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 50);
       break;
     case "sp_karma_construction":
       n_vs_time = 3;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 3);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 3);
       break;
     case "sp_karma_crc":
       n_vs_time = 3;
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 3);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 3);
       break;
     case "sp_karma_crc_screens":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 1);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 1);
       break;
     case "sp_karma_office":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 3);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 3);
       break;
   }
 
@@ -210,8 +210,8 @@ vtol_dof_1(ent) {}
 vtol_dof_2(ent) {
   visionsetnaked("sp_karma_vtol_interior", 0.5);
   n_vs_time = 1.5;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 6);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 6);
 }
 
 vtol_dof_3(ent) {

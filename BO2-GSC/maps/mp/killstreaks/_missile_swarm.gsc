@@ -378,7 +378,7 @@ target_sounds(targetent) {
   self thread reset_sound_blocker(targetent);
   self thread target_stop_sounds(targetent);
 
-  if(isplayer(targetent))
+  if(isPlayer(targetent))
     targetent playlocalsound(level.missiledronesoundstart);
 
   self playSound(level.missiledronesoundstart);
@@ -387,7 +387,7 @@ target_sounds(targetent) {
 target_stop_sounds(targetent) {
   targetent waittill_any("disconnect", "death", "joined_team");
 
-  if(isDefined(targetent) && isplayer(targetent))
+  if(isDefined(targetent) && isPlayer(targetent))
     targetent stoplocalsound(level.missiledronesoundstart);
 }
 

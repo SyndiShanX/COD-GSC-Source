@@ -26,7 +26,6 @@ _id_0FB9() {
         _id_0FDC();
       } else {
         _id_0FED();
-
       }
       break;
     case "crouch":
@@ -37,7 +36,6 @@ _id_0FB9() {
         _id_0FEE();
       } else {
         _id_0FEF();
-
       }
       break;
     default:
@@ -54,7 +52,6 @@ _id_0FB9() {
 _id_0FC2() {
   if(!isDefined(self.a._id_0CA6)) {
     return % run_lowready_f;
-
   }
   if(!self.facemotion) {
     if(self.stairsstate == "none" || abs(self getmotionangle()) > 45) {
@@ -66,7 +63,6 @@ _id_0FC2() {
     return animscripts\utility::_id_0FC3("stairs_up");
   } else if(self.stairsstate == "down") {
     return animscripts\utility::_id_0FC3("stairs_down");
-
   }
   return animscripts\utility::_id_0FC3("straight");
 }
@@ -74,7 +70,6 @@ _id_0FC2() {
 _id_0FC4() {
   if(!isDefined(self.a._id_0CA6)) {
     return % crouch_fastwalk_f;
-
   }
   return animscripts\utility::_id_0FC3("crouch");
 }
@@ -89,20 +84,20 @@ _id_0FC7() {
   if(!isDefined(self._id_0FC8)) {
     self notify("stop_move_anim_update");
     self._id_0FC9 = undefined;
-    self clearanim( % combatrun_backward, 0.2);
-    self clearanim( % combatrun_right, 0.2);
-    self clearanim( % combatrun_left, 0.2);
-    self clearanim( % w_aim_2, 0.2);
-    self clearanim( % w_aim_4, 0.2);
-    self clearanim( % w_aim_6, 0.2);
-    self clearanim( % w_aim_8, 0.2);
+    self clearanim(%combatrun_backward, 0.2);
+    self clearanim(%combatrun_right, 0.2);
+    self clearanim(%combatrun_left, 0.2);
+    self clearanim(%w_aim_2, 0.2);
+    self clearanim(%w_aim_4, 0.2);
+    self clearanim(%w_aim_6, 0.2);
+    self clearanim(%w_aim_8, 0.2);
     self._id_0FC8 = 1;
   }
 }
 
 _id_0FCA() {
   if(isDefined(self._id_0FC8)) {
-    self clearanim( % run_n_gun, 0.2);
+    self clearanim(%run_n_gun, 0.2);
     self._id_0FC8 = undefined;
   }
 
@@ -124,7 +119,7 @@ _id_0FC8(var_0) {
   var_6 = self._id_0CA3;
 
   if(!var_0 || squared(var_1) > var_4 * var_4) {
-    self clearanim( % add_fire, 0);
+    self clearanim(%add_fire, 0);
 
     if(squared(self._id_0FCB) < var_6 * var_6) {
       self._id_0FCB = 0;
@@ -171,27 +166,25 @@ _id_0FC8(var_0) {
     }
   }
 
-  self setflaggedanimknob("runanim", % run_n_gun, 1, 0.3, 0.8);
+  self setflaggedanimknob("runanim", %run_n_gun, 1, 0.3, 0.8);
   self.a._id_0FCC = gettime() + 500;
 
-  if(var_0 && isplayer(self.enemy)) {
+  if(var_0 && isPlayer(self.enemy)) {
     self updateplayersightaccuracy();
-
   }
   return 1;
 }
 
 _id_0FCD() {
   _id_0FC7();
-  self setflaggedanimknob("runanim", % combatwalk_b, 1, 0.3, 0.8);
+  self setflaggedanimknob("runanim", %combatwalk_b, 1, 0.3, 0.8);
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     self updateplayersightaccuracy();
-
   }
   animscripts\notetracks::_id_0D4F(0.2, "runanim");
   thread _id_0FE5();
-  self clearanim( % combatwalk_b, 0.2);
+  self clearanim(%combatwalk_b, 0.2);
 }
 
 _id_0FCE() {
@@ -228,7 +221,6 @@ _id_0F1D() {
 
   if(var_0 == anim._id_0F1E) {
     var_0 = (var_0 + 1) % anim._id_0F1D.size;
-
   }
   anim._id_0F1E = var_0;
   var_1 = anim._id_0F1D[var_0];
@@ -256,11 +248,9 @@ _id_0FD5() {
 
   if(isDefined(self.grenade)) {
     var_0 = animscripts\utility::_id_0FC3("sprint_short");
-
   }
   if(!isDefined(var_0)) {
     var_0 = animscripts\utility::_id_0FC3("sprint");
-
   }
   return var_0;
 }
@@ -268,11 +258,9 @@ _id_0FD5() {
 _id_0FD6() {
   if(isDefined(self._id_0FD7)) {
     return 1;
-
   }
   if(isDefined(self.grenade) && isDefined(self.enemy) && self.frontshieldanglecos == 1) {
     return distancesquared(self.origin, self.enemy.origin) > 90000;
-
   }
   return 0;
 }
@@ -280,18 +268,15 @@ _id_0FD6() {
 _id_0FD8() {
   if(isDefined(self._id_0FD9)) {
     return 0;
-
   }
   if(!self.facemotion || self.stairsstate != "none") {
     return 0;
-
   }
   var_0 = gettime();
 
   if(isDefined(self._id_0FDA)) {
     if(var_0 < self._id_0FDA) {
       return 1;
-
     }
     if(var_0 - self._id_0FDA < 6000) {
       return 0;
@@ -300,7 +285,6 @@ _id_0FD8() {
 
   if(!isDefined(self.enemy) || !issentient(self.enemy)) {
     return 0;
-
   }
   if(randomint(100) < 25 && self lastknowntime(self.enemy) + 2000 > var_0) {
     self._id_0FDA = var_0 + 2000 + randomint(1000);
@@ -315,14 +299,13 @@ _id_0FDB() {
 
   if(self.lookaheadhitsstairs && self.stairsstate == "none" && self.lookaheaddist < 300) {
     var_0 = var_0 * 0.75;
-
   }
   return var_0;
 }
 
 _id_0FDC() {
   var_0 = _id_0FDB();
-  self setanimknob( % combatrun, 1.0, 0.5, var_0);
+  self setanimknob(%combatrun, 1.0, 0.5, var_0);
   var_1 = 0;
 
   if(isDefined(self._id_0FD1) && gettime() - self._id_0FD1 < 100 && randomfloat(1) < self.a._id_0FDD) {
@@ -354,7 +337,6 @@ _id_0FDC() {
     }
   } else if(isDefined(self._id_0FCB) && self._id_0FCB != 0) {
     var_1 = _id_0FC8(0);
-
   }
   if(!var_1) {
     _id_0FCA();
@@ -368,7 +350,6 @@ _id_0FDC() {
       var_2 = animscripts\utility::_id_0FC3("sprint_short");
     } else {
       var_2 = _id_0FC2();
-
     }
     self setflaggedanimknoblimited("runanim", var_2, 1, 0.1, 1, 1);
     _id_0FF7(animscripts\utility::_id_0FC3("move_b"), animscripts\utility::_id_0FC3("move_l"), animscripts\utility::_id_0FC3("move_r"), self._id_0FE0);
@@ -391,10 +372,10 @@ _id_0FE1() {
   self setdefaultaimlimits();
 
   if(!isDefined(self._id_0C82) || !isDefined(self._id_0C82["walk_aims"])) {
-    self setanimlimited( % walk_aim_2);
-    self setanimlimited( % walk_aim_4);
-    self setanimlimited( % walk_aim_6);
-    self setanimlimited( % walk_aim_8);
+    self setanimlimited(%walk_aim_2);
+    self setanimlimited(%walk_aim_4);
+    self setanimlimited(%walk_aim_6);
+    self setanimlimited(%walk_aim_8);
   } else {
     self setanimlimited(self._id_0C82["walk_aims"]["walk_aim_2"]);
     self setanimlimited(self._id_0C82["walk_aims"]["walk_aim_4"]);
@@ -402,7 +383,7 @@ _id_0FE1() {
     self setanimlimited(self._id_0C82["walk_aims"]["walk_aim_8"]);
   }
 
-  animscripts\track::_id_0CAA( % w_aim_2, % w_aim_4, % w_aim_6, % w_aim_8);
+  animscripts\track::_id_0CAA(%w_aim_2, %w_aim_4, %w_aim_6, %w_aim_8);
 }
 
 _id_0FE2() {
@@ -451,7 +432,6 @@ _id_0D60() {
 
   if(animscripts\utility::_id_0D61(var_0[1] - var_1[1]) > 15) {
     return 0;
-
   }
   return animscripts\utility::_id_0D61(var_0[0] - var_1[0]) <= 20;
 }
@@ -459,7 +439,6 @@ _id_0D60() {
 _id_0FE9() {
   if((!isDefined(self._id_0FCB) || self._id_0FCB == 0) && abs(self getmotionangle()) > self._id_0CA1) {
     return 0;
-
   }
   return 1;
 }
@@ -467,13 +446,11 @@ _id_0FE9() {
 _id_0FEA() {
   if(180 - abs(self getmotionangle()) >= 45) {
     return 0;
-
   }
   var_0 = _id_0FEC(0.2);
 
   if(abs(var_0) > 30) {
     return 0;
-
   }
   return 1;
 }
@@ -493,21 +470,19 @@ _id_0FEC(var_0) {
 
 _id_0FED() {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
+  self clearanim(%combatrun, 0.6);
   var_0 = _id_0FDB();
-  self setanimknoball( % combatrun, % body, 1, 0.2, var_0);
+  self setanimknoball(%combatrun, %body, 1, 0.2, var_0);
 
   if(_id_0FD6()) {
     var_1 = _id_0FD5();
   } else {
     var_1 = _id_0FC2();
-
   }
   if(self.stairsstate == "none") {
     var_2 = 0.3;
   } else {
     var_2 = 0.1;
-
   }
   self setflaggedanimknob("runanim", var_1, 1, var_2, 1, 1);
   _id_0FF7(animscripts\utility::_id_0FC3("move_b"), animscripts\utility::_id_0FC3("move_l"), animscripts\utility::_id_0FC3("move_r"));
@@ -517,7 +492,7 @@ _id_0FED() {
 
 _id_0FEE() {
   self endon("movemode");
-  self setflaggedanimknoball("runanim", self._id_0FC0, % body, 1, 0.4, self._id_0FC6);
+  self setflaggedanimknoball("runanim", self._id_0FC0, %body, 1, 0.4, self._id_0FC6);
   animscripts\shared::_id_0C51("runanim");
 }
 
@@ -525,8 +500,8 @@ _id_0FEF() {
   self endon("movemode");
   var_0 = _id_0FC4();
   self setanimknob(var_0, 1, 0.4);
-  thread _id_0FF9("crouchrun", var_0, % crouch_fastwalk_b, % crouch_fastwalk_l, % crouch_fastwalk_r);
-  self setflaggedanimknoball("runanim", % crouchrun, % body, 1, 0.2, self._id_0FC6);
+  thread _id_0FF9("crouchrun", var_0, %crouch_fastwalk_b, %crouch_fastwalk_l, %crouch_fastwalk_r);
+  self setflaggedanimknoball("runanim", %crouchrun, %body, 1, 0.2, self._id_0FC6);
   animscripts\notetracks::_id_0D4F(0.2, "runanim");
 }
 
@@ -540,41 +515,32 @@ _id_0FF0() {
     }
   } else if(!animscripts\combat_utility::_id_0F08(0.5)) {
     return 0;
-
   }
   if(isDefined(self.grenade)) {
     return 0;
-
   }
   if(!self.facemotion || self.stairsstate != "none") {
     return 0;
-
   }
   if(isDefined(self._id_0FF1) || isDefined(self._id_0FF2)) {
     return 0;
-
   }
   if(_id_0FEB() && !animscripts\combat_utility::_id_0F08(0)) {
     return 0;
-
   }
   if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536) {
     return 0;
-
   }
   var_1 = angleclamp180(self getmotionangle());
 
   if(abs(var_1) > 25) {
     return 0;
-
   }
   if(!animscripts\utility::_id_0EE3()) {
     return 0;
-
   }
   if(!_id_0FF6()) {
     return 0;
-
   }
   _id_0FF3();
   self notify("abort_reload");
@@ -586,7 +552,7 @@ _id_0FF3() {
   self endon("movemode");
   self orientmode("face motion");
   var_0 = "reload_" + animscripts\combat_utility::_id_0FF4();
-  self setflaggedanimknoballrestart(var_0, % run_lowready_reload, % body, 1, 0.25);
+  self setflaggedanimknoballrestart(var_0, %run_lowready_reload, %body, 1, 0.25);
   self._id_0FF5 = 1;
   _id_0FF7(animscripts\utility::_id_0FC3("move_b"), animscripts\utility::_id_0FC3("move_l"), animscripts\utility::_id_0FC3("move_r"));
   thread _id_0FF8("run");
@@ -595,23 +561,20 @@ _id_0FF3() {
 }
 
 _id_0FF6() {
-  var_0 = self getanimtime( % walk_and_run_loops);
-  var_1 = getanimlength( % run_lowready_f) / 3.0;
+  var_0 = self getanimtime(%walk_and_run_loops);
+  var_1 = getanimlength(%run_lowready_f) / 3.0;
   var_0 = var_0 * 3.0;
 
   if(var_0 > 3) {
     var_0 = var_0 - 2.0;
   } else if(var_0 > 2) {
     var_0 = var_0 - 1.0;
-
   }
   if(var_0 < 0.15 / var_1) {
     return 1;
-
   }
   if(var_0 > 1 - 0.3 / var_1) {
     return 1;
-
   }
   return 0;
 }
@@ -619,7 +582,6 @@ _id_0FF6() {
 _id_0FF7(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = 1;
-
   }
   self setanimknoblimited(var_0, 1, 0.1, var_3, 1);
   self setanimknoblimited(var_1, 1, 0.1, var_3, 1);
@@ -627,7 +589,7 @@ _id_0FF7(var_0, var_1, var_2, var_3) {
 }
 
 _id_0FF8(var_0) {
-  _id_0FF9(var_0, % combatrun_forward, % combatrun_backward, % combatrun_left, % combatrun_right);
+  _id_0FF9(var_0, %combatrun_forward, %combatrun_backward, %combatrun_left, %combatrun_right);
 }
 
 _id_0FF9(var_0, var_1, var_2, var_3, var_4) {
@@ -682,20 +644,16 @@ _id_0FFD() {
 
   if(var_0 == var_1) {
     return 0;
-
   }
   if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536) {
     return 0;
-
   }
   if(animscripts\utility::_id_0C95()) {
     return 0;
-
   }
   if(self.weapon == self.primaryweapon) {
     if(!var_0) {
       return 0;
-
     }
     if(animscripts\utility::_id_0CEA(self.secondaryweapon)) {
       return 0;
@@ -703,7 +661,6 @@ _id_0FFD() {
   } else {
     if(var_0) {
       return 0;
-
     }
     if(animscripts\utility::_id_0CEA(self.primaryweapon)) {
       return 0;
@@ -714,17 +671,14 @@ _id_0FFD() {
 
   if(abs(var_2) > 25) {
     return 0;
-
   }
   if(!_id_0FF6()) {
     return 0;
-
   }
   if(var_0) {
-    _id_1000("shotgunPullout", % shotgun_cqbrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
+    _id_1000("shotgunPullout", %shotgun_cqbrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
   } else {
-    _id_1000("shotgunPutaway", % shotgun_cqbrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
-
+    _id_1000("shotgunPutaway", %shotgun_cqbrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
   }
   self notify("switchEnded");
   return 1;
@@ -732,7 +686,7 @@ _id_0FFD() {
 
 _id_1000(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("movemode");
-  self setflaggedanimknoballrestart(var_0, var_1, % body, 1, 0.25);
+  self setflaggedanimknoballrestart(var_0, var_1, %body, 1, 0.25);
   self._id_0FF5 = 1;
   _id_0FF7(animscripts\utility::_id_0FC3("move_b"), animscripts\utility::_id_0FC3("move_l"), animscripts\utility::_id_0FC3("move_r"));
   thread _id_0FF8("run");

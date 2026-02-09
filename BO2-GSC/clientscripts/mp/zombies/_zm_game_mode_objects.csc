@@ -126,7 +126,7 @@ door_init(team, doornum) {
   doors = [];
   spots = [];
   signs = [];
-  location = getdvar(#"ui_zm_mapstartlocation");
+  location = getDvar(#"ui_zm_mapstartlocation");
 
   for(i = 0; i < level.struct.size; i++) {
     if(!isDefined(level.struct[i].name)) {

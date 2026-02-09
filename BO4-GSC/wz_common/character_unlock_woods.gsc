@@ -61,7 +61,7 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -78,7 +78,7 @@ event_handler[change_seat] function_2aa4e6cf(eventstruct) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

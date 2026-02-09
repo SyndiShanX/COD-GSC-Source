@@ -20,7 +20,7 @@ function autoexec __init__sytem__() {
 }
 
 function __init__() {
-  setdvar("", "");
+  setDvar("", "");
   level.zdraw = spawnStruct();
   function_3e630288();
   function_aa8545fe();
@@ -94,7 +94,7 @@ function function_41fec76e() {
       function_404ac348();
       params = strtok(cmd, "");
       function_4282fd75(params, 0, 1);
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }

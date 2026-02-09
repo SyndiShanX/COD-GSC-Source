@@ -117,7 +117,7 @@ event_handler[event_cf200f34] function_209450ae(eventstruct) {
   position = eventstruct.position;
   direction = eventstruct.dir;
 
-  if(!isplayer(attacker) || !isDefined(weapon) || !isDefined(position) || !isDefined(direction)) {
+  if(!isPlayer(attacker) || !isDefined(weapon) || !isDefined(position) || !isDefined(direction)) {
     return;
   }
 
@@ -161,7 +161,7 @@ on_player_killed() {
   attacker = self.laststandparams.attacker;
   weapon = self.laststandparams.sweapon;
 
-  if(!isplayer(attacker) || !isDefined(weapon)) {
+  if(!isPlayer(attacker) || !isDefined(weapon)) {
     return;
   }
 

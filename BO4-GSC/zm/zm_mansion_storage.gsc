@@ -202,7 +202,7 @@ function_56c97aea() {
   while(true) {
     s_waitresult = self waittill(#"trigger");
 
-    if(isplayer(s_waitresult.activator)) {
+    if(isPlayer(s_waitresult.activator)) {
       e_book = self.stub.related_parent;
       level.var_969e8ac2 notify(#"hash_59cef06ae393749f", {
         #var_f9ba056c: e_book.var_a0639b8c, #array_index: e_book.var_60f4d369, #var_537e3893: e_book.script_noteworthy, #activator: s_waitresult.activator
@@ -306,7 +306,6 @@ function_941b297c(var_22c00989) {
   if(!isDefined(mdl_powerup)) {
     assert(0, "<dev string:x38>");
   }
-
 }
 
 function_94a403a4(var_1c855a0d) {
@@ -393,7 +392,6 @@ function_c63076b4(var_2afee46 = 1) {
       level.a_s_barrels[i].e_drip.script_int = i;
       level.a_s_barrels[i].e_drip thread mansion_jordans::function_95b6c945();
     }
-
   }
 }
 
@@ -412,7 +410,7 @@ function_85e39c4d() {
   while(true) {
     s_notify = self.t_trig waittill(#"damage");
 
-    if(isplayer(s_notify.attacker) && s_notify.mod === "MOD_MELEE") {
+    if(isPlayer(s_notify.attacker) && s_notify.mod === "MOD_MELEE") {
       level.a_s_spigots[level.a_s_spigots.size] = self;
       level.var_a54c0174++;
 
@@ -598,7 +596,6 @@ function_cf048af(oldval, newval) {
         level.var_f3047a76 = 1;
 
         iprintln("<dev string:xa6>");
-
       }
     }
 

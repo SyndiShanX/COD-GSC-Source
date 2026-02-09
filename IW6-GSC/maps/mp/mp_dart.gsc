@@ -24,18 +24,18 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_dart");
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.6");
+    setDvar("sm_sunShadowScale", "0.6");
   } else if(level.xenon) {
-    setdvar("sm_sunShadowScale", "0.7");
+    setDvar("sm_sunShadowScale", "0.7");
   }
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   setdvar_cg_ng("r_specularColorScale", 1.5, 10);
   setdvar_cg_ng("r_diffuseColorScale", 1.48, 1.7325);
-  SetDvar("r_ssaofadedepth", 1089);
-  SetDvar("r_ssaorejectdepth", 1200);
+  setDvar("r_ssaofadedepth", 1089);
+  setDvar("r_ssaorejectdepth", 1200);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";

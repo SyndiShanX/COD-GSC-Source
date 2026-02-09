@@ -12,16 +12,13 @@
 #include maps\so_download_arcadia_code;
 
 main() {
-  // ------------- TWEAKABLES -------------
-  level.DOWNLOAD_TIME = 60; // how long it takes to download the files at each spot
+  // ------------- TWEAKABLES ------------- level.DOWNLOAD_TIME = 60; // how long it takes to download the files at each spot
   level.DOWNLOAD_INTERRUPT_RADIUS = 256; // how close to the download an enemy has to be to "interrupt" it
   level.NEARBY_CHARGE_RADIUS = 1000; // radius around the download from which we'll pull existing enemies to charge the download spot
   level.NUM_ENEMIES_LEFT_TOLERANCE = 0; // how many guys we will tolerate still being alive in a wave before it's done
   level.NUM_FILES_MIN = 900;
   level.NUM_FILES_MAX = 2400;
-  // --------------------------------------
-
-  level.friendlyfire_warnings = true;
+  // -------------------------------------- level.friendlyfire_warnings = true;
   so_download_arcadia_init_flags();
 
   so_download_arcadia_precache();
@@ -303,12 +300,12 @@ so_download_arcadia_intro_dialogue() {
   //	if( dvar <= 0 )
   //	{
   //		doExtraDialogue = true;
-  //		SetDvar( "so_download_arcadia_introdialogue", 5 );
+  //		setDvar( "so_download_arcadia_introdialogue", 5 );
   //	}
   //	else
   //	{
   //		dvar--;
-  //		SetDvar( "so_download_arcadia_introdialogue", dvar );
+  //		setDvar( "so_download_arcadia_introdialogue", dvar );
   //	}
   //	
   //	if( doExtraDialogue )

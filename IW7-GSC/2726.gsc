@@ -24,7 +24,7 @@ init() {
 }
 
 setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(scripts\mp\utility\game::isgameparticipant(var_0) && !isplayer(var_0)) {
+  if(scripts\mp\utility\game::isgameparticipant(var_0) && !isPlayer(var_0)) {
     return;
   }
   if(!isDefined(self.entityheadicons)) {
@@ -55,7 +55,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
     var_10 = 1;
   }
 
-  if(!isplayer(var_0) && var_0 == "none") {
+  if(!isPlayer(var_0) && var_0 == "none") {
     foreach(var_13, var_12 in self.entityheadicons) {
       if(isDefined(var_12)) {
         var_12 destroy();
@@ -64,7 +64,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
       self.entityheadicons[var_13] = undefined;
     }
   } else {
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(isDefined(self.entityheadicons[var_0.guid])) {
         self.entityheadicons[var_0.guid] destroy();
         self.entityheadicons[var_0.guid] = undefined;
@@ -122,11 +122,11 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
     var_12 thread keeppositioned(self, var_2, var_6);
     thread destroyiconsondeath();
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_12 thread destroyonownerdisconnect(var_0);
     }
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       var_12 thread destroyonownerdisconnect(self);
     }
   }

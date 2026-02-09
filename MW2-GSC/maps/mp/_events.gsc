@@ -192,7 +192,6 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     }
 
     self thread checkMatchDataKills(killId, victim, weapon, meansOfDeath);
-
   }
 
   if(!isDefined(self.killedPlayers[victimGuid]))

@@ -95,7 +95,7 @@ endselectiononhostmigration() {
 }
 
 endselectionthink() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   assert(isDefined(self.selectinglocation));
   assert(self.selectinglocation == 1);
@@ -735,12 +735,10 @@ entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
           }
         } else {
           debug_star(pos, (1, 0, 0), debug_display_time);
-
         }
       }
     } else {
       debug_star(ent.entity.origin + (0, 0, assumed_ceiling_height), (1, 0, 0), debug_display_time);
-
     }
   }
 
@@ -938,7 +936,6 @@ debug_plane_line(flytime, flyspeed, pathstart, pathend) {
   for(i = 0; i < flytime; i++) {
     thread debug_star(pathstart + vectorscale(delta, i * flyspeed), (1, 0, 0));
   }
-
 }
 
 debug_draw_bomb_explosion(prevpos) {

@@ -288,7 +288,7 @@ onStartGameType() {
 }
 
 initHordeSettings() {
-  SetDvar("g_keyboarduseholdtime", 250);
+  setDvar("g_keyboarduseholdtime", 250);
 
   level.hordeDropLocations = getstructarray("horde_drop", "targetname");
   AssertEx(isDefined(level.hordeDropLocations) && (level.hordeDropLocations.size > 11), "map needs horde game objects");
@@ -508,7 +508,7 @@ onSpawnFinished() {
     self GiveMaxAmmo(level.playerStartWeaponName);
     self thread playerAmmoRegen(level.playerStartWeaponName);
 
-    if(IsPlayer(self)) {
+    if(isPlayer(self)) {
       self SetWeaponAmmoClip(CONST_PLAYER_START_LETHAL, 1);
       self SetWeaponAmmoClip(CONST_PLAYER_START_TACTICAL, 1);
       self givePerk("specialty_pistoldeath", false);
@@ -1428,7 +1428,7 @@ initSpawns() {
 }
 
 getSpawnPoint() {
-  if(self.gameModefirstSpawn && IsPlayer(self)) {
+  if(self.gameModefirstSpawn && isPlayer(self)) {
     self maps\mp\gametypes\_menus::addToTeam(level.playerTeam, true);
   }
 
@@ -1485,7 +1485,7 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
   if(isDefined(eAttacker) && isDefined(eAttacker.team) && (eAttacker.team == victim.team))
     return 0;
 
-  if(isDefined(eAttacker) && IsPlayer(eAttacker)) {
+  if(isDefined(eAttacker) && isPlayer(eAttacker)) {
     if((victim == eAttacker) && isKillstreakWeapon(sWeapon))
       iDamage = 0;
 
@@ -1525,7 +1525,7 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
     }
   }
 
-  if(isDefined(eAttacker) && isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner)) {
+  if(isDefined(eAttacker) && isDefined(eAttacker.owner) && isPlayer(eAttacker.owner)) {
     bIsAgent = false;
 
     if(isKillstreakWeapon(sWeapon))
@@ -1539,7 +1539,7 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
     eAttacker.owner givePointsForDamage(victim, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, bIsAgent);
   }
 
-  if(IsPlayer(victim) || isOnHumanTeam(victim)) {
+  if(isPlayer(victim) || isOnHumanTeam(victim)) {
     if(isPlayerInLastStand(victim) && !(victim touchingBadTrigger()))
       return 0;
 
@@ -1549,7 +1549,7 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
     if(sWeapon == "semtexproj_mp")
       iDamage = iDamage * 3;
 
-    if(IsPlayer(victim)) {
+    if(isPlayer(victim)) {
       iDamage = int(iDamage * CONST_PLAYER_DAMAGE_SCALE);
     } else {
       iDamage = int(iDamage * getAgentDamageScalar());
@@ -1570,7 +1570,7 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
       if(IsAgent(victim))
         iDamage = 0;
 
-      if(IsPlayer(victim))
+      if(isPlayer(victim))
         iDamage = int(iDamage * 0.9);
     }
 
@@ -1665,7 +1665,7 @@ onNormalDeath(victim, attacker, lifeId) {
 }
 
 removePerkHUD(player) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player SetClientOmnvar("ui_horde_update_perk", 0);
     player.horde_perks = [];
   }
@@ -1780,7 +1780,7 @@ removePickup(pickup) {
 }
 
 weaponPickup(player) {
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   weaponName = getPlayerWeaponHorde(player);

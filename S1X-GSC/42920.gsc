@@ -139,7 +139,7 @@ portableradardamagelistener(var_0) {
       self.damagetaken = self.maxhealth + 1;
     }
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_2 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("portable_radar");
     }
 

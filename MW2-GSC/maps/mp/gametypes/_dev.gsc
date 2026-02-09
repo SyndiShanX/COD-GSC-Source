@@ -56,7 +56,6 @@ init() {
     updateDevSettings();
     wait .05;
   }
-
 }
 
 updateDevSettings() {
@@ -297,16 +296,16 @@ updateDevSettings() {
     setDevDvar("scr_levelnotify", "");
   }
 
-  if(getdvar("scr_giveperk") != "") {
-    perk = getdvar("scr_giveperk");
+  if(getDvar("scr_giveperk") != "") {
+    perk = getDvar("scr_giveperk");
 
     for(i = 0; i < level.players.size; i++)
       level.players[i] thread maps\mp\perks\_perks::givePerk(perk);
 
     setDevDvar("scr_giveperk", "");
   }
-  if(getdvar("scr_takeperk") != "") {
-    perk = getdvar("scr_takeperk");
+  if(getDvar("scr_takeperk") != "") {
+    perk = getDvar("scr_takeperk");
     for(i = 0; i < level.players.size; i++) {
       level.players[i] unsetPerk(perk, true);
       level.players[i].extraPerks[perk] = undefined;
@@ -558,533 +557,531 @@ giveExtraPerks() {
 }
 
 xKillsY(attackerName, victimName) {
-  attacker = undefined;
-  victim = undefined;
+    attacker = undefined;
+    victim = undefined;
 
-  for(index = 0; index < level.players.size; index++) {
-    if(level.players[index].name == attackerName)
-      attacker = level.players[index];
-    else if(level.players[index].name == victimName)
-      victim = level.players[index];
-  }
-
-  if(!isAlive(attacker) || !isAlive(victim)) {
-    return;
-  }
-  victim thread[[level.callbackPlayerDamage]](attacker, // eInflictor The entity that causes the damage.(e.g. a turret)
-    attacker, // eAttacker The entity that is attacking.
-    500, // iDamage Integer specifying the amount of damage done
-    0, // iDFlags Integer specifying flags that are to be applied to the damage
-    "MOD_RIFLE_BULLET", // sMeansOfDeath Integer specifying the method of death
-    "scar_mp", // sWeapon The weapon number of the weapon used to inflict the damage
-    (0, 0, 0), // vPoint The point the damage is from?
-    (0, 0, 0), // vDir The direction of the damage
-    "none", // sHitLoc The location of the hit
-    0 // psOffsetTime The time offset for the damage);
-}
-
-updateMinimapSetting() {
-  // use 0 for no required map aspect ratio.
-  requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio", 1);
-
-  if(!isDefined(level.minimapheight)) {
-    setDevDvar("scr_minimap_height", "0");
-    level.minimapheight = 0;
-  }
-  minimapheight = getdvarfloat("scr_minimap_height");
-  if(minimapheight != level.minimapheight) {
-    if(isDefined(level.minimaporigin)) {
-      level.minimapplayer unlink();
-      level.minimaporigin delete();
-      level notify("end_draw_map_bounds");
+    for(index = 0; index < level.players.size; index++) {
+      if(level.players[index].name == attackerName)
+        attacker = level.players[index];
+      else if(level.players[index].name == victimName)
+        victim = level.players[index];
     }
 
-    if(minimapheight > 0) {
-      level.minimapheight = minimapheight;
+    if(!isAlive(attacker) || !isAlive(victim)) {
+      return;
+    }
+    victim thread[[level.callbackPlayerDamage]](attacker, // eInflictor The entity that causes the damage.(e.g. a turret)
+      attacker, // eAttacker The entity that is attacking.
+      500, // iDamage Integer specifying the amount of damage done
+      0, // iDFlags Integer specifying flags that are to be applied to the damage
+      "MOD_RIFLE_BULLET", // sMeansOfDeath Integer specifying the method of death
+      "scar_mp", // sWeapon The weapon number of the weapon used to inflict the damage
+      (0, 0, 0), // vPoint The point the damage is from?
+      (0, 0, 0), // vDir The direction of the damage
+      "none", // sHitLoc The location of the hit
+      0 // psOffsetTime The time offset for the damage);
+    }
 
-      players = getEntArray("player", "classname");
-      if(players.size > 0) {
-        player = players[0];
+    updateMinimapSetting() {
+      // use 0 for no required map aspect ratio.
+      requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
-        corners = getEntArray("minimap_corner", "targetname");
-        if(corners.size == 2) {
-          viewpos = (corners[0].origin + corners[1].origin);
-          viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
-
-          maxcorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
-          mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
-          if(corners[1].origin[0] > corners[0].origin[0])
-            maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          else
-            mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
-          if(corners[1].origin[1] > corners[0].origin[1])
-            maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          else
-            mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
-
-          viewpostocorner = maxcorner - viewpos;
-          viewpos = (viewpos[0], viewpos[1], viewpos[2] + minimapheight);
-
-          origin = spawn("script_origin", player.origin);
-
-          northvector = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
-          eastvector = (northvector[1], 0 - northvector[0], 0);
-          disttotop = vectordot(northvector, viewpostocorner);
-          if(disttotop < 0)
-            disttotop = 0 - disttotop;
-          disttoside = vectordot(eastvector, viewpostocorner);
-          if(disttoside < 0)
-            disttoside = 0 - disttoside;
-
-          // extend map bounds to meet the required aspect ratio
-          if(requiredMapAspectRatio > 0) {
-            mapAspectRatio = disttoside / disttotop;
-            if(mapAspectRatio < requiredMapAspectRatio) {
-              incr = requiredMapAspectRatio / mapAspectRatio;
-              disttoside *= incr;
-              addvec = vecscale(eastvector, vectordot(eastvector, maxcorner - viewpos) * (incr - 1));
-              mincorner -= addvec;
-              maxcorner += addvec;
-            } else {
-              incr = mapAspectRatio / requiredMapAspectRatio;
-              disttotop *= incr;
-              addvec = vecscale(northvector, vectordot(northvector, maxcorner - viewpos) * (incr - 1));
-              mincorner -= addvec;
-              maxcorner += addvec;
-            }
-          }
-
-          if(level.console) {
-            aspectratioguess = 16.0 / 9.0;
-            // .8 would be .75 but it needs to be bigger because of safe area
-            angleside = 2 * atan(disttoside * .8 / minimapheight);
-            angletop = 2 * atan(disttotop * aspectratioguess * .8 / minimapheight);
-          } else {
-            aspectratioguess = 4.0 / 3.0;
-            angleside = 2 * atan(disttoside / minimapheight);
-            angletop = 2 * atan(disttotop * aspectratioguess / minimapheight);
-          }
-          if(angleside > angletop)
-            angle = angleside;
-          else
-            angle = angletop;
-
-          znear = minimapheight - 1000;
-          if(znear < 16) znear = 16;
-          if(znear > 10000) znear = 10000;
-
-          player playerlinkto(origin);
-          origin.origin = viewpos + (0, 0, -62);
-          origin.angles = (90, getnorthyaw(), 0);
-
-          player TakeAllWeapons();
-          player _giveWeapon("defaultweapon_mp");
-          player setclientdvar("cg_drawgun", "0");
-          player setclientdvar("cg_draw2d", "0");
-          player setclientdvar("cg_drawfps", "0");
-          player setclientdvar("fx_enable", "0");
-          player setclientdvar("r_fog", "0");
-          player setclientdvar("r_highLodDist", "0"); // (turns of lods)
-          player setclientdvar("r_znear", znear); // (reduces z-fighting)
-          player setclientdvar("r_lodscale", "0");
-          player setclientdvar("cg_drawversion", "0");
-          player setclientdvar("sm_enable", "1");
-          setDevDvar("player_view_pitch_down", "90");
-          setDevDvar("player_view_pitch_up", "0");
-          player setclientdvar("cg_fov", angle);
-          player setclientdvar("cg_fovmin", "1");
-
-          // hide 3D icons
-          if(isDefined(level.objPoints)) {
-            for(i = 0; i < level.objPointNames.size; i++) {
-              if(isDefined(level.objPoints[level.objPointNames[i]]))
-                level.objPoints[level.objPointNames[i]] destroy();
-            }
-            level.objPoints = [];
-            level.objPointNames = [];
-          }
-
-          level.minimapplayer = player;
-          level.minimaporigin = origin;
-
-          thread drawMiniMapBounds(viewpos, mincorner, maxcorner);
-
-          wait .05;
-
-          player setplayerangles(origin.angles);
-        } else
-          println("^1Error: There are not exactly 2 \"minimap_corner\" entities in the level.");
-      } else
+      if(!isDefined(level.minimapheight)) {
         setDevDvar("scr_minimap_height", "0");
+        level.minimapheight = 0;
+      }
+      minimapheight = getdvarfloat("scr_minimap_height");
+      if(minimapheight != level.minimapheight) {
+        if(isDefined(level.minimaporigin)) {
+          level.minimapplayer unlink();
+          level.minimaporigin delete();
+          level notify("end_draw_map_bounds");
+        }
+
+        if(minimapheight > 0) {
+          level.minimapheight = minimapheight;
+
+          players = getEntArray("player", "classname");
+          if(players.size > 0) {
+            player = players[0];
+
+            corners = getEntArray("minimap_corner", "targetname");
+            if(corners.size == 2) {
+              viewpos = (corners[0].origin + corners[1].origin);
+              viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
+
+              maxcorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
+              mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
+              if(corners[1].origin[0] > corners[0].origin[0])
+                maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
+              else
+                mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
+              if(corners[1].origin[1] > corners[0].origin[1])
+                maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
+              else
+                mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
+
+              viewpostocorner = maxcorner - viewpos;
+              viewpos = (viewpos[0], viewpos[1], viewpos[2] + minimapheight);
+
+              origin = spawn("script_origin", player.origin);
+
+              northvector = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
+              eastvector = (northvector[1], 0 - northvector[0], 0);
+              disttotop = vectordot(northvector, viewpostocorner);
+              if(disttotop < 0)
+                disttotop = 0 - disttotop;
+              disttoside = vectordot(eastvector, viewpostocorner);
+              if(disttoside < 0)
+                disttoside = 0 - disttoside;
+
+              // extend map bounds to meet the required aspect ratio
+              if(requiredMapAspectRatio > 0) {
+                mapAspectRatio = disttoside / disttotop;
+                if(mapAspectRatio < requiredMapAspectRatio) {
+                  incr = requiredMapAspectRatio / mapAspectRatio;
+                  disttoside *= incr;
+                  addvec = vecscale(eastvector, vectordot(eastvector, maxcorner - viewpos) * (incr - 1));
+                  mincorner -= addvec;
+                  maxcorner += addvec;
+                } else {
+                  incr = mapAspectRatio / requiredMapAspectRatio;
+                  disttotop *= incr;
+                  addvec = vecscale(northvector, vectordot(northvector, maxcorner - viewpos) * (incr - 1));
+                  mincorner -= addvec;
+                  maxcorner += addvec;
+                }
+              }
+
+              if(level.console) {
+                aspectratioguess = 16.0 / 9.0;
+                // .8 would be .75 but it needs to be bigger because of safe area
+                angleside = 2 * atan(disttoside * .8 / minimapheight);
+                angletop = 2 * atan(disttotop * aspectratioguess * .8 / minimapheight);
+              } else {
+                aspectratioguess = 4.0 / 3.0;
+                angleside = 2 * atan(disttoside / minimapheight);
+                angletop = 2 * atan(disttotop * aspectratioguess / minimapheight);
+              }
+              if(angleside > angletop)
+                angle = angleside;
+              else
+                angle = angletop;
+
+              znear = minimapheight - 1000;
+              if(znear < 16) znear = 16;
+              if(znear > 10000) znear = 10000;
+
+              player playerlinkto(origin);
+              origin.origin = viewpos + (0, 0, -62);
+              origin.angles = (90, getnorthyaw(), 0);
+
+              player TakeAllWeapons();
+              player _giveWeapon("defaultweapon_mp");
+              player setclientdvar("cg_drawgun", "0");
+              player setclientdvar("cg_draw2d", "0");
+              player setclientdvar("cg_drawfps", "0");
+              player setclientdvar("fx_enable", "0");
+              player setclientdvar("r_fog", "0");
+              player setclientdvar("r_highLodDist", "0"); // (turns of lods)
+              player setclientdvar("r_znear", znear); // (reduces z-fighting)
+              player setclientdvar("r_lodscale", "0");
+              player setclientdvar("cg_drawversion", "0");
+              player setclientdvar("sm_enable", "1");
+              setDevDvar("player_view_pitch_down", "90");
+              setDevDvar("player_view_pitch_up", "0");
+              player setclientdvar("cg_fov", angle);
+              player setclientdvar("cg_fovmin", "1");
+
+              // hide 3D icons
+              if(isDefined(level.objPoints)) {
+                for(i = 0; i < level.objPointNames.size; i++) {
+                  if(isDefined(level.objPoints[level.objPointNames[i]]))
+                    level.objPoints[level.objPointNames[i]] destroy();
+                }
+                level.objPoints = [];
+                level.objPointNames = [];
+              }
+
+              level.minimapplayer = player;
+              level.minimaporigin = origin;
+
+              thread drawMiniMapBounds(viewpos, mincorner, maxcorner);
+
+              wait .05;
+
+              player setplayerangles(origin.angles);
+            } else
+              println("^1Error: There are not exactly 2 \"minimap_corner\" entities in the level.");
+          } else
+            setDevDvar("scr_minimap_height", "0");
+        }
+      }
     }
-  }
-}
 
-vecscale(vec, scalar) {
-  return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
-}
-
-drawMiniMapBounds(viewpos, mincorner, maxcorner) {
-  level notify("end_draw_map_bounds");
-  level endon("end_draw_map_bounds");
-
-  viewheight = (viewpos[2] - maxcorner[2]);
-
-  north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
-
-  diaglen = length(mincorner - maxcorner);
-
-  /*diagonal = maxcorner - mincorner;
-  side = vecscale(north, vectordot(diagonal, north));
-  	
-  origcorner0 = mincorner;
-  origcorner1 = mincorner + side;
-  origcorner2 = maxcorner;
-  origcorner3 = maxcorner - side;*/
-
-  mincorneroffset = (mincorner - viewpos);
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
-  mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800);
-  maxcorneroffset = (maxcorner - viewpos);
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
-  maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800);
-
-  diagonal = maxcorner - mincorner;
-  side = vecscale(north, vectordot(diagonal, north));
-  sidenorth = vecscale(north, abs(vectordot(diagonal, north)));
-
-  corner0 = mincorner;
-  corner1 = mincorner + side;
-  corner2 = maxcorner;
-  corner3 = maxcorner - side;
-
-  toppos = vecscale(mincorner + maxcorner, .5) + vecscale(sidenorth, .51);
-  textscale = diaglen * .003;
-
-  while(1) {
-    line(corner0, corner1, (0, 1, 0));
-    line(corner1, corner2, (0, 1, 0));
-    line(corner2, corner3, (0, 1, 0));
-    line(corner3, corner0, (0, 1, 0));
-
-    /*line(origcorner0, origcorner1, (1,0,0));
-    line(origcorner1, origcorner2, (1,0,0));
-    line(origcorner2, origcorner3, (1,0,0));
-    line(origcorner3, origcorner0, (1,0,0));*/
-
-    print3d(toppos, "This Side Up", (1, 1, 1), 1, textscale);
-
-    wait .05;
-  }
-}
-
-addTestClients() {
-  wait 5;
-
-  for(;;) {
-    if(getdvarInt("scr_testclients") > 0) {
-      break;
-    }
-    wait 1;
-  }
-
-  //	for( index = 1; index < 24; index++ )
-  //		kick( index );
-
-  testclients = getdvarInt("scr_testclients");
-  setDevDvar("scr_testclients", 0);
-  for(i = 0; i < testclients; i++) {
-    ent[i] = addtestclient();
-
-    if(!isDefined(ent[i])) {
-      println("Could not add test client");
-      wait 1;
-      continue;
+    vecscale(vec, scalar) {
+      return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
     }
 
-    ent[i].pers["isBot"] = true;
-    ent[i] thread TestClient("autoassign");
-  }
+    drawMiniMapBounds(viewpos, mincorner, maxcorner) {
+      level notify("end_draw_map_bounds");
+      level endon("end_draw_map_bounds");
 
-  if(matchMakingGame())
-    setMatchData("hasBots", true);
+      viewheight = (viewpos[2] - maxcorner[2]);
 
-  thread addTestClients();
-}
+      north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
 
-TestClient(team) {
-  self endon("disconnect");
+      diaglen = length(mincorner - maxcorner);
 
-  while(!isDefined(self.pers["team"]))
-    wait .05;
+      /*diagonal = maxcorner - mincorner;
+      side = vecscale(north, vectordot(diagonal, north));
+      	
+      origcorner0 = mincorner;
+      origcorner1 = mincorner + side;
+      origcorner2 = maxcorner;
+      origcorner3 = maxcorner - side;*/
 
-  self notify("menuresponse", game["menu_team"], team);
-  wait 0.5;
+      mincorneroffset = (mincorner - viewpos);
+      mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+      mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800);
+      maxcorneroffset = (maxcorner - viewpos);
+      maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+      maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800);
 
-  while(1) {
-    //class = level.classMap[randomInt( level.classMap.size )];
-    class = "class" + randomInt(5);
+      diagonal = maxcorner - mincorner;
+      side = vecscale(north, vectordot(diagonal, north));
+      sidenorth = vecscale(north, abs(vectordot(diagonal, north)));
 
-    self notify("menuresponse", "changeclass", class);
+      corner0 = mincorner;
+      corner1 = mincorner + side;
+      corner2 = maxcorner;
+      corner3 = maxcorner - side;
 
-    self waittill("spawned_player");
-    wait(0.10);
-  }
-}
+      toppos = vecscale(mincorner + maxcorner, .5) + vecscale(sidenorth, .51);
+      textscale = diaglen * .003;
 
-showSpawnpoint(spawnpoint, classname, color) {
-  center = spawnpoint.origin;
-  forward = anglesToForward(spawnpoint.angles);
-  right = anglestoright(spawnpoint.angles);
+      while(1) {
+        line(corner0, corner1, (0, 1, 0));
+        line(corner1, corner2, (0, 1, 0));
+        line(corner2, corner3, (0, 1, 0));
+        line(corner3, corner0, (0, 1, 0));
 
-  forward = common_scripts\utility::vector_multiply(forward, 16);
-  right = common_scripts\utility::vector_multiply(right, 16);
+        /*line(origcorner0, origcorner1, (1,0,0));
+        line(origcorner1, origcorner2, (1,0,0));
+        line(origcorner2, origcorner3, (1,0,0));
+        line(origcorner3, origcorner0, (1,0,0));*/
 
-  a = center + forward - right;
-  b = center + forward + right;
-  c = center - forward + right;
-  d = center - forward - right;
+        print3d(toppos, "This Side Up", (1, 1, 1), 1, textscale);
 
-  thread lineUntilNotified(a, b, color, 0);
-  thread lineUntilNotified(b, c, color, 0);
-  thread lineUntilNotified(c, d, color, 0);
-  thread lineUntilNotified(d, a, color, 0);
-
-  thread lineUntilNotified(a, a + (0, 0, 72), color, 0);
-  thread lineUntilNotified(b, b + (0, 0, 72), color, 0);
-  thread lineUntilNotified(c, c + (0, 0, 72), color, 0);
-  thread lineUntilNotified(d, d + (0, 0, 72), color, 0);
-
-  a = a + (0, 0, 72);
-  b = b + (0, 0, 72);
-  c = c + (0, 0, 72);
-  d = d + (0, 0, 72);
-
-  thread lineUntilNotified(a, b, color, 0);
-  thread lineUntilNotified(b, c, color, 0);
-  thread lineUntilNotified(c, d, color, 0);
-  thread lineUntilNotified(d, a, color, 0);
-
-  center = center + (0, 0, 36);
-  arrow_forward = anglesToForward(spawnpoint.angles);
-  arrowhead_forward = anglesToForward(spawnpoint.angles);
-  arrowhead_right = anglestoright(spawnpoint.angles);
-
-  arrow_forward = common_scripts\utility::vector_multiply(arrow_forward, 32);
-  arrowhead_forward = common_scripts\utility::vector_multiply(arrowhead_forward, 24);
-  arrowhead_right = common_scripts\utility::vector_multiply(arrowhead_right, 8);
-
-  a = center + arrow_forward;
-  b = center + arrowhead_forward - arrowhead_right;
-  c = center + arrowhead_forward + arrowhead_right;
-
-  thread lineUntilNotified(center, a, (1, 1, 1), 0);
-  thread lineUntilNotified(a, b, (1, 1, 1), 0);
-  thread lineUntilNotified(a, c, (1, 1, 1), 0);
-
-  foreach(alternate in spawnpoint.alternates) {
-    thread lineUntilNotified(spawnpoint.origin, alternate, color, 0);
-  }
-
-  thread print3DUntilNotified(spawnpoint.origin + (0, 0, 72), classname, color, 1, 1);
-}
-
-showSpawnpoints() {
-  if(isDefined(level.spawnpoints)) {
-    foreach(spawnpoint in level.spawnpoints) {
-      showSpawnpoint(spawnpoint, spawnpoint.classname, (1, 1, 1));
+        wait .05;
+      }
     }
-  }
-  if(isDefined(level.extraspawnpointsused)) {
-    foreach(spawnpoint in level.extraspawnpointsused) {
-      showSpawnpoint(spawnpoint, spawnpoint.fakeclassname, (.5, .5, .5));
+
+    addTestClients() {
+      wait 5;
+
+      for(;;) {
+        if(getdvarInt("scr_testclients") > 0) {
+          break;
+        }
+        wait 1;
+      }
+
+      //	for( index = 1; index < 24; index++ )
+      //		kick( index );
+
+      testclients = getdvarInt("scr_testclients");
+      setDevDvar("scr_testclients", 0);
+      for(i = 0; i < testclients; i++) {
+        ent[i] = addtestclient();
+
+        if(!isDefined(ent[i])) {
+          println("Could not add test client");
+          wait 1;
+          continue;
+        }
+
+        ent[i].pers["isBot"] = true;
+        ent[i] thread TestClient("autoassign");
+      }
+
+      if(matchMakingGame())
+        setMatchData("hasBots", true);
+
+      thread addTestClients();
     }
-  }
-}
 
-print3DUntilNotified(origin, text, color, alpha, scale) {
-  level endon("hide_spawnpoints");
+    TestClient(team) {
+      self endon("disconnect");
 
-  for(;;) {
-    print3d(origin, text, color, alpha, scale);
-    wait .05;
-  }
-}
+      while(!isDefined(self.pers["team"]))
+        wait .05;
 
-lineUntilNotified(start, end, color, depthTest) {
-  level endon("hide_spawnpoints");
+      self notify("menuresponse", game["menu_team"], team);
+      wait 0.5;
 
-  for(;;) {
-    line(start, end, color, depthTest);
-    wait .05;
-  }
-}
+      while(1) {
+        //class = level.classMap[randomInt( level.classMap.size )];
+        class = "class" + randomInt(5);
 
-hideSpawnpoints() {
-  level notify("hide_spawnpoints");
-}
+        self notify("menuresponse", "changeclass", class);
 
-initForWeaponTests() {
-  if(isDefined(self.initForWeaponTests)) {
-    return;
-  }
-  self.initForWeaponTests = true;
+        self waittill("spawned_player");
+        wait(0.10);
+      }
+    }
 
-  self thread changeCamoListener();
-  self thread thirdPersonToggle();
+    showSpawnpoint(spawnpoint, classname, color) {
+      center = spawnpoint.origin;
+      forward = anglesToForward(spawnpoint.angles);
+      right = anglestoright(spawnpoint.angles);
 
-  self waittill("death");
-  self.initForWeaponTests = undefined;
-}
+      forward = common_scripts\utility::vector_multiply(forward, 16);
+      right = common_scripts\utility::vector_multiply(right, 16);
 
-setTestWeapon(weaponName) {
-  if(!isDefined(level.baseWeaponList[weaponName])) {
-    self iPrintLnBold("Unknown weapon: " + weaponName);
-    return;
-  }
+      a = center + forward - right;
+      b = center + forward + right;
+      c = center - forward + right;
+      d = center - forward - right;
 
-  self notify("new_test_weapon");
-  self.baseWeapon = weaponName;
-  self thread weaponChangeListener();
+      thread lineUntilNotified(a, b, color, 0);
+      thread lineUntilNotified(b, c, color, 0);
+      thread lineUntilNotified(c, d, color, 0);
+      thread lineUntilNotified(d, a, color, 0);
 
-  self updateTestWeapon();
-}
+      thread lineUntilNotified(a, a + (0, 0, 72), color, 0);
+      thread lineUntilNotified(b, b + (0, 0, 72), color, 0);
+      thread lineUntilNotified(c, c + (0, 0, 72), color, 0);
+      thread lineUntilNotified(d, d + (0, 0, 72), color, 0);
 
-thirdPersonToggle() {
-  self endon("death");
-  self notifyOnPlayerCommand("dpad_down", "+actionslot 2");
+      a = a + (0, 0, 72);
+      b = b + (0, 0, 72);
+      c = c + (0, 0, 72);
+      d = d + (0, 0, 72);
 
-  thirdPersonElem = self createFontString("default", 1.5);
-  thirdPersonElem setPoint("TOPRIGHT", "TOPRIGHT", 0, 72 + 260);
-  thirdPersonElem setText("3rd Person: " + getDvarInt("camera_thirdPerson") + "[{+actionslot 2}]");
-  self thread destroyOnDeath(thirdPersonElem);
+      thread lineUntilNotified(a, b, color, 0);
+      thread lineUntilNotified(b, c, color, 0);
+      thread lineUntilNotified(c, d, color, 0);
+      thread lineUntilNotified(d, a, color, 0);
 
-  for(;;) {
-    self waittill("dpad_down");
+      center = center + (0, 0, 36);
+      arrow_forward = anglesToForward(spawnpoint.angles);
+      arrowhead_forward = anglesToForward(spawnpoint.angles);
+      arrowhead_right = anglestoright(spawnpoint.angles);
 
-    setDvar("camera_thirdPerson", !getDvarInt("camera_thirdPerson"));
+      arrow_forward = common_scripts\utility::vector_multiply(arrow_forward, 32);
+      arrowhead_forward = common_scripts\utility::vector_multiply(arrowhead_forward, 24);
+      arrowhead_right = common_scripts\utility::vector_multiply(arrowhead_right, 8);
 
-    thirdPersonElem setText("3rd Person: " + getDvarInt("camera_thirdPerson") + "[{+actionslot 2}]");
-  }
-}
+      a = center + arrow_forward;
+      b = center + arrowhead_forward - arrowhead_right;
+      c = center + arrowhead_forward + arrowhead_right;
 
-changeCamoListener() {
-  self endon("death");
-  self notifyOnPlayerCommand("dpad_up", "+actionslot 1");
+      thread lineUntilNotified(center, a, (1, 1, 1), 0);
+      thread lineUntilNotified(a, b, (1, 1, 1), 0);
+      thread lineUntilNotified(a, c, (1, 1, 1), 0);
 
-  camoList = [];
+      foreach(alternate in spawnpoint.alternates) {
+        thread lineUntilNotified(spawnpoint.origin, alternate, color, 0);
+      }
 
-  for(rowIndex = 0; tableLookupByRow("mp/camoTable.csv", rowIndex, 1) != ""; rowIndex++)
-    camoList[camoList.size] = tableLookupByRow("mp/camoTable.csv", rowIndex, 1);
+      thread print3DUntilNotified(spawnpoint.origin + (0, 0, 72), classname, color, 1, 1);
+    }
 
-  self.camoIndex = 0;
+    showSpawnpoints() {
+      if(isDefined(level.spawnpoints)) {
+        foreach(spawnpoint in level.spawnpoints) {
+          showSpawnpoint(spawnpoint, spawnpoint.classname, (1, 1, 1));
+        }
+      }
+      if(isDefined(level.extraspawnpointsused)) {
+        foreach(spawnpoint in level.extraspawnpointsused) {
+          showSpawnpoint(spawnpoint, spawnpoint.fakeclassname, (.5, .5, .5));
+        }
+      }
+    }
 
-  camoElem = self createFontString("default", 1.5);
-  camoElem setPoint("TOPRIGHT", "TOPRIGHT", 0, 52 + 260);
-  camoElem setText("Camo: " + tableLookup("mp/camoTable.csv", 0, self.camoIndex, 1) + "[{+actionslot 1}]");
-  self thread destroyOnDeath(camoElem);
+    print3DUntilNotified(origin, text, color, alpha, scale) {
+      level endon("hide_spawnpoints");
 
-  for(;;) {
-    self waittill("dpad_up");
+      for(;;) {
+        print3d(origin, text, color, alpha, scale);
+        wait .05;
+      }
+    }
 
-    self.camoIndex++;
-    if(self.camoIndex > (camoList.size - 1))
+    lineUntilNotified(start, end, color, depthTest) {
+      level endon("hide_spawnpoints");
+
+      for(;;) {
+        line(start, end, color, depthTest);
+        wait .05;
+      }
+    }
+
+    hideSpawnpoints() {
+      level notify("hide_spawnpoints");
+    }
+
+    initForWeaponTests() {
+      if(isDefined(self.initForWeaponTests)) {
+        return;
+      }
+      self.initForWeaponTests = true;
+
+      self thread changeCamoListener();
+      self thread thirdPersonToggle();
+
+      self waittill("death");
+      self.initForWeaponTests = undefined;
+    }
+
+    setTestWeapon(weaponName) {
+      if(!isDefined(level.baseWeaponList[weaponName])) {
+        self iPrintLnBold("Unknown weapon: " + weaponName);
+        return;
+      }
+
+      self notify("new_test_weapon");
+      self.baseWeapon = weaponName;
+      self thread weaponChangeListener();
+
+      self updateTestWeapon();
+    }
+
+    thirdPersonToggle() {
+      self endon("death");
+      self notifyOnPlayerCommand("dpad_down", "+actionslot 2");
+
+      thirdPersonElem = self createFontString("default", 1.5);
+      thirdPersonElem setPoint("TOPRIGHT", "TOPRIGHT", 0, 72 + 260);
+      thirdPersonElem setText("3rd Person: " + getDvarInt("camera_thirdPerson") + "[{+actionslot 2}]");
+      self thread destroyOnDeath(thirdPersonElem);
+
+      for(;;) {
+        self waittill("dpad_down");
+
+        setDvar("camera_thirdPerson", !getDvarInt("camera_thirdPerson"));
+
+        thirdPersonElem setText("3rd Person: " + getDvarInt("camera_thirdPerson") + "[{+actionslot 2}]");
+      }
+    }
+
+    changeCamoListener() {
+      self endon("death");
+      self notifyOnPlayerCommand("dpad_up", "+actionslot 1");
+
+      camoList = [];
+
+      for(rowIndex = 0; tableLookupByRow("mp/camoTable.csv", rowIndex, 1) != ""; rowIndex++)
+        camoList[camoList.size] = tableLookupByRow("mp/camoTable.csv", rowIndex, 1);
+
       self.camoIndex = 0;
 
-    camoElem setText("Camo: " + tableLookup("mp/camoTable.csv", 0, self.camoIndex, 1) + "[{+actionslot 1}]");
-    self updateTestWeapon();
-  }
-}
+      camoElem = self createFontString("default", 1.5);
+      camoElem setPoint("TOPRIGHT", "TOPRIGHT", 0, 52 + 260);
+      camoElem setText("Camo: " + tableLookup("mp/camoTable.csv", 0, self.camoIndex, 1) + "[{+actionslot 1}]");
+      self thread destroyOnDeath(camoElem);
 
-weaponChangeListener() {
-  self endon("death");
-  self endon("new_test_weapon");
+      for(;;) {
+        self waittill("dpad_up");
 
-  self notifyOnPlayerCommand("next_weapon", "weapnext");
+        self.camoIndex++;
+        if(self.camoIndex > (camoList.size - 1))
+          self.camoIndex = 0;
 
-  if(!isDefined(self.weaponElem)) {
-    self.weaponElem = self createFontString("default", 1.5);
-    self.weaponElem setPoint("TOPRIGHT", "TOPRIGHT", 0, 32 + 260);
-    self thread destroyOnDeath(self.weaponElem);
-  }
-  self.variantIndex = 0;
-
-  self.weaponElem setText("Weapon: " + level.baseWeaponList[self.baseWeapon].variants[self.variantIndex] + "[{weapnext}]");
-
-  for(;;) {
-    self waittill("next_weapon");
-
-    self.variantIndex++;
-    if(self.variantIndex > (level.baseWeaponList[self.baseWeapon].variants.size - 1))
-      self.variantIndex = 0;
-
-    self.weaponElem setText("Weapon: " + level.baseWeaponList[self.baseWeapon].variants[self.variantIndex] + "[{weapnext}]");
-    self updateTestWeapon();
-  }
-}
-
-destroyOnDeath(hudElem) {
-  self waittill("death");
-
-  hudElem destroy();
-}
-
-updateTestWeapon() {
-  self takeAllWeapons();
-
-  wait(0.05);
-
-  weaponName = level.baseWeaponList[self.baseWeapon].variants[self.variantIndex];
-
-  self _giveWeapon(weaponName, int(self.camoIndex));
-  self switchToWeapon(weaponName);
-  self giveMaxAmmo(weaponName);
-}
-
-onPlayerConnect() {
-  for(;;) {
-    level waittill("connected", player);
-
-    player thread updateReflectionProbe();
-  }
-}
-
-updateReflectionProbe() {
-  for(;;) {
-    if(getDvarInt("debug_reflection") == 1) {
-      if(!isDefined(self.debug_reflectionobject)) {
-        self.debug_reflectionobject = spawn("script_model", self getEye() + (vector_multiply(anglesToForward(self.angles), 100)));
-        self.debug_reflectionobject setModel("test_sphere_silver");
-        self.debug_reflectionobject.origin = self getEye() + (vector_multiply(anglesToForward(self getplayerangles()), 100));
-        self thread reflectionProbeButtons();
+        camoElem setText("Camo: " + tableLookup("mp/camoTable.csv", 0, self.camoIndex, 1) + "[{+actionslot 1}]");
+        self updateTestWeapon();
       }
-    } else if(getDvarInt("debug_reflection") == 0) {
-      if(isDefined(self.debug_reflectionobject))
-        self.debug_reflectionobject delete();
     }
 
-    wait(0.05);
-  }
+    weaponChangeListener() {
+      self endon("death");
+      self endon("new_test_weapon");
 
-}
+      self notifyOnPlayerCommand("next_weapon", "weapnext");
 
-reflectionProbeButtons() {
-  offset = 100;
-  offsetinc = 50;
+      if(!isDefined(self.weaponElem)) {
+        self.weaponElem = self createFontString("default", 1.5);
+        self.weaponElem setPoint("TOPRIGHT", "TOPRIGHT", 0, 32 + 260);
+        self thread destroyOnDeath(self.weaponElem);
+      }
+      self.variantIndex = 0;
 
-  while(getDvarInt("debug_reflection") == 1) {
-    if(self buttonpressed("BUTTON_X"))
-      offset += offsetinc;
-    if(self buttonpressed("BUTTON_Y"))
-      offset -= offsetinc;
-    if(offset > 1000)
-      offset = 1000;
-    if(offset < 64)
-      offset = 64;
+      self.weaponElem setText("Weapon: " + level.baseWeaponList[self.baseWeapon].variants[self.variantIndex] + "[{weapnext}]");
 
-    self.debug_reflectionobject.origin = self getEye() + (vector_multiply(anglesToForward(self getplayerangles()), offset));
+      for(;;) {
+        self waittill("next_weapon");
 
-    wait .05;
-  }
+        self.variantIndex++;
+        if(self.variantIndex > (level.baseWeaponList[self.baseWeapon].variants.size - 1))
+          self.variantIndex = 0;
 
-}
+        self.weaponElem setText("Weapon: " + level.baseWeaponList[self.baseWeapon].variants[self.variantIndex] + "[{weapnext}]");
+        self updateTestWeapon();
+      }
+    }
+
+    destroyOnDeath(hudElem) {
+      self waittill("death");
+
+      hudElem destroy();
+    }
+
+    updateTestWeapon() {
+      self takeAllWeapons();
+
+      wait(0.05);
+
+      weaponName = level.baseWeaponList[self.baseWeapon].variants[self.variantIndex];
+
+      self _giveWeapon(weaponName, int(self.camoIndex));
+      self switchToWeapon(weaponName);
+      self giveMaxAmmo(weaponName);
+    }
+
+    onPlayerConnect() {
+      for(;;) {
+        level waittill("connected", player);
+
+        player thread updateReflectionProbe();
+      }
+    }
+
+    updateReflectionProbe() {
+      for(;;) {
+        if(getDvarInt("debug_reflection") == 1) {
+          if(!isDefined(self.debug_reflectionobject)) {
+            self.debug_reflectionobject = spawn("script_model", self getEye() + (vector_multiply(anglesToForward(self.angles), 100)));
+            self.debug_reflectionobject setModel("test_sphere_silver");
+            self.debug_reflectionobject.origin = self getEye() + (vector_multiply(anglesToForward(self getplayerangles()), 100));
+            self thread reflectionProbeButtons();
+          }
+        } else if(getDvarInt("debug_reflection") == 0) {
+          if(isDefined(self.debug_reflectionobject))
+            self.debug_reflectionobject delete();
+        }
+
+        wait(0.05);
+      }
+    }
+
+    reflectionProbeButtons() {
+      offset = 100;
+      offsetinc = 50;
+
+      while(getDvarInt("debug_reflection") == 1) {
+        if(self buttonpressed("BUTTON_X"))
+          offset += offsetinc;
+        if(self buttonpressed("BUTTON_Y"))
+          offset -= offsetinc;
+        if(offset > 1000)
+          offset = 1000;
+        if(offset < 64)
+          offset = 64;
+
+        self.debug_reflectionobject.origin = self getEye() + (vector_multiply(anglesToForward(self getplayerangles()), offset));
+
+        wait .05;
+      }
+    }

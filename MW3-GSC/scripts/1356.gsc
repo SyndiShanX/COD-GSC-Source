@@ -17,23 +17,18 @@ main(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_0)) {
     var_6 = var_0;
-
   }
   if(isDefined(var_1)) {
     var_7 = var_1;
-
   }
   if(isDefined(var_2)) {
     var_8 = var_2;
-
   }
   if(isDefined(var_4)) {
     var_9 = var_4;
-
   }
   if(isDefined(var_3)) {
     var_10 = var_3;
-
   }
   for(var_11 = 0; var_11 < var_5.size; var_11++) {
     var_5[var_11] thread _id_409D(var_6, var_7, var_8, var_10, var_9);
@@ -52,7 +47,6 @@ _id_409D(var_0, var_1, var_2, var_3, var_4) {
 
   if(cos(var_8) < 0) {
     self._id_298F = -1 * self._id_298F;
-
   }
   var_10 = spawn("script_origin", var_5);
   self linkto(var_10);

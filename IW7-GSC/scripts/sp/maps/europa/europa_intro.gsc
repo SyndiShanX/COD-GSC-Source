@@ -2185,7 +2185,7 @@ func_4202(var_0) {
     earthquake(1, 1, level.player.origin, 200);
     level.player func_8244("damage_heavy");
     lib_0B60::func_F322("EUROPA_BOOST_DEATH_HINT");
-    setdvar("player_death_animated", 0);
+    setDvar("player_death_animated", 0);
     level.player func_81D0();
     level.player stoprumble("damage_heavy");
   }

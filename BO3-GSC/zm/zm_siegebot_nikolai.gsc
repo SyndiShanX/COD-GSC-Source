@@ -486,7 +486,7 @@ function attack_thread_gun() {
         break;
       }
       self vehicle_ai::fire_for_time(1 + randomfloat(0.4), 1);
-      if(isDefined(e_enemy) && isplayer(e_enemy)) {
+      if(isDefined(e_enemy) && isPlayer(e_enemy)) {
         wait(0.6 + randomfloat(0.2));
       }
       wait(0.1);
@@ -566,7 +566,7 @@ function function_86cc3c11() {
 }
 
 function function_b9b039e0(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(!isplayer(eattacker)) {
+  if(!isPlayer(eattacker)) {
     return false;
   }
   if(level flag::get("world_is_paused")) {
@@ -984,7 +984,7 @@ function is_valid_target(target) {
   if(isDefined(target.ignoreme) && target.ignoreme || target.health <= 0) {
     return false;
   }
-  if(isplayer(target) && target laststand::player_is_in_laststand()) {
+  if(isPlayer(target) && target laststand::player_is_in_laststand()) {
     return false;
   }
   if(issentient(target) && (target isnotarget() || !isalive(target))) {

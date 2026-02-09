@@ -58,7 +58,7 @@ function registerremoteweapon(weaponname, hintstring, usecallback, endusecallbac
 
 function useremoteweapon(weapon, weaponname, immediate, allowmanualdeactivation = 1, always_allow_ride = 0) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   weapon.remoteowner = player;
   weapon.inittime = gettime();
   weapon.remotename = weaponname;

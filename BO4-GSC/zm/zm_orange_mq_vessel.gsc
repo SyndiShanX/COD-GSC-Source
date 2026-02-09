@@ -212,7 +212,7 @@ cover_think() {
   while(true) {
     s_result = trigger waittill(#"damage");
 
-    if(isplayer(s_result.attacker) && s_result.mod == "MOD_MELEE") {
+    if(isPlayer(s_result.attacker) && s_result.mod == "MOD_MELEE") {
       break;
     }
   }

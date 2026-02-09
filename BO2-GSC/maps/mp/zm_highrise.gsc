@@ -68,8 +68,8 @@ survival_init() {
 }
 
 zclassic_preinit() {
-  setdvar("player_sliding_velocity_cap", 80.0);
-  setdvar("player_sliding_wishspeed", 800.0);
+  setDvar("player_sliding_velocity_cap", 80.0);
+  setDvar("player_sliding_wishspeed", 800.0);
   registerclientfield("scriptmover", "clientfield_escape_pod_tell_fx", 5000, 1, "int");
   registerclientfield("scriptmover", "clientfield_escape_pod_sparks_fx", 5000, 1, "int");
   registerclientfield("scriptmover", "clientfield_escape_pod_impact_fx", 5000, 1, "int");
@@ -143,12 +143,12 @@ main() {
   level.hostmigration_ai_link_entity_callback = maps\mp\zm_highrise_elevators::get_link_entity_for_host_migration;
   maps\mp\zombies\_load::main();
 
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.25);
-  setdvar("r_lightGridContrast", -0.25);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.25);
+  setDvar("r_lightGridContrast", -0.25);
   maps\mp\gametypes_zm\_spawning::level_use_unified_spawning(1);
   level.givecustomloadout = ::givecustomloadout;
   level.custom_player_fake_death = ::zm_player_fake_death;
@@ -219,10 +219,10 @@ main() {
     if(is_classic())
       level.zombie_ai_limit = 20;
 
-    setdvar("fx_marks_draw", 0);
-    setdvar("disable_rope", 1);
-    setdvar("cg_disableplayernames", 1);
-    setdvar("disableLookAtEntityLogic", 1);
+    setDvar("fx_marks_draw", 0);
+    setDvar("disable_rope", 1);
+    setDvar("cg_disableplayernames", 1);
+    setDvar("disableLookAtEntityLogic", 1);
   } else
     level.zombie_ai_limit = 24;
 
@@ -499,7 +499,7 @@ pers_treasure_chest_get_weapons_array_highrise() {
 
 watch_lightpower_devgui() {
   while(true) {
-    powercmd = getdvar(#"_id_0A84512A");
+    powercmd = getDvar(#"_id_0A84512A");
 
     if(isDefined(powercmd) && powercmd != "") {
       if(powercmd == "on")
@@ -507,12 +507,11 @@ watch_lightpower_devgui() {
       else
         clientnotify("pwo");
 
-      setdvar("zombie_devgui_hrpowerlighting", "");
+      setDvar("zombie_devgui_hrpowerlighting", "");
     }
 
     wait 1.0;
   }
-
 }
 
 setup_leapers() {
@@ -940,7 +939,6 @@ zombie_highrise_devgui(cmd) {
     default:
       break;
   }
-
 }
 
 pick_up_keys() {
@@ -964,7 +962,6 @@ pick_up_keys() {
       }
     }
   }
-
 }
 
 highrise_zone_init() {
@@ -1073,7 +1070,7 @@ give_personality_characters() {
   self.favorite_wall_weapons_list = [];
   self.talks_in_danger = 0;
 
-  if(getdvar(#"_id_40772CF1") != "")
+  if(getDvar(#"_id_40772CF1") != "")
     self.characterindex = getdvarint(#"_id_40772CF1");
 
   switch (self.characterindex) {
@@ -1348,7 +1345,7 @@ player_force_from_prone() {
   while(true) {
     self waittill("trigger", who);
 
-    if(who getstance() == "prone" && isplayer(who))
+    if(who getstance() == "prone" && isPlayer(who))
       who setstance("crouch");
 
     wait 0.1;

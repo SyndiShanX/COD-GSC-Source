@@ -45,7 +45,7 @@ on_ai_killed(params) {
     return;
   }
 
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     attacker = params.eattacker;
     bathtub = struct::get(#"zombie_bathub", "targetname");
 
@@ -73,7 +73,7 @@ on_player_item_pickup(params) {
 
   item = params.item;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(item.var_cd8fb96) && item.var_cd8fb96) {
       zombie_arm = getent("zombie_arm", "targetname");
 

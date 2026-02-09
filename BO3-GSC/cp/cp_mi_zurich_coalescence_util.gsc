@@ -284,7 +284,7 @@ function function_be06d646() {
 function falling_death_think() {
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who) && (!(isDefined(who.is_falling_to_death) && who.is_falling_to_death))) {
+    if(isPlayer(who) && (!(isDefined(who.is_falling_to_death) && who.is_falling_to_death))) {
       who thread player_falls_to_death();
     }
     util::wait_network_frame();
@@ -1166,7 +1166,7 @@ function function_16f4964d() {
   self endon("death");
   while(isDefined(self)) {
     self waittill("damage", n_damage, e_attacker);
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       level.var_71aac273++;
     }
     if(level.var_71aac273 >= 4) {
@@ -1192,7 +1192,7 @@ function t_skipto_init() {
 function t_skipto() {
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       str_objective = self.script_objective;
       if(!isDefined(str_objective)) {
         str_objective = "zurich";
@@ -1266,7 +1266,7 @@ function function_dd842585(str_objective, var_ed1d0e16, str_trig) {
   var_50f524fe = getent(str_trig, "targetname");
   while(true) {
     var_50f524fe waittill("trigger", who);
-    if(isplayer(who) && (!(isDefined(who.teleporting) && who.teleporting))) {
+    if(isPlayer(who) && (!(isDefined(who.teleporting) && who.teleporting))) {
       who thread function_c51939f4(str_objective, var_ed1d0e16);
       who function_b0f0dd1f(0);
     }
@@ -1629,8 +1629,8 @@ function function_3adbd846(str_val, str_key = "targetname", var_34b81fdb = 0) {
     t_trig endon("death");
     while(true) {
       t_trig waittill("trigger", e_triggerer);
-      var_ccf2685a = isDefined(e_triggerer.owner) && isplayer(e_triggerer.owner);
-      if(isplayer(e_triggerer) || var_ccf2685a) {
+      var_ccf2685a = isDefined(e_triggerer.owner) && isPlayer(e_triggerer.owner);
+      if(isPlayer(e_triggerer) || var_ccf2685a) {
         break;
       }
     }
@@ -1898,7 +1898,7 @@ function function_b0f0dd1f(is_on, str_effect) {
   if(is_on && isDefined(str_effect)) {
     switch (str_effect) {
       case "regular_snow": {
-        if(isplayer(self)) {
+        if(isPlayer(self)) {
           self clientfield::set_to_player("player_weather", 1);
         } else {
           foreach(player in level.players) {
@@ -1908,7 +1908,7 @@ function function_b0f0dd1f(is_on, str_effect) {
         break;
       }
       case "light_snow": {
-        if(isplayer(self)) {
+        if(isPlayer(self)) {
           self clientfield::set_to_player("player_weather", 4);
         } else {
           foreach(player in level.players) {
@@ -1918,7 +1918,7 @@ function function_b0f0dd1f(is_on, str_effect) {
         break;
       }
       case "red_rain": {
-        if(isplayer(self)) {
+        if(isPlayer(self)) {
           self clientfield::set_to_player("player_weather", 2);
         } else {
           foreach(player in level.players) {
@@ -1928,7 +1928,7 @@ function function_b0f0dd1f(is_on, str_effect) {
         break;
       }
       case "reverse_snow": {
-        if(isplayer(self)) {
+        if(isPlayer(self)) {
           self clientfield::set_to_player("player_weather", 3);
         } else {
           foreach(player in level.players) {
@@ -1939,7 +1939,7 @@ function function_b0f0dd1f(is_on, str_effect) {
       }
     }
   } else {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self clientfield::set_to_player("player_weather", 0);
     } else {
       foreach(player in level.players) {
@@ -1991,7 +1991,7 @@ function function_11b424e5(is_on) {
   if(sessionmodeiscampaignzombiesgame()) {
     return;
   }
-  if(isDefined(is_on) && !isplayer(self)) {
+  if(isDefined(is_on) && !isPlayer(self)) {
     if(is_on) {
       level.var_60bad7a5 = 1;
       array::run_all(level.players, &util::set_low_ready, 1);
@@ -2207,7 +2207,7 @@ function function_6d571441() {
     self waittill("damage", n_damage, e_attacker, $_, $_, str_damage_type);
     self.health = self.health + n_damage;
     var_a4a673a9 = str_damage_type == "MOD_PROJECTILE" || str_damage_type === "MOD_EXPLOSIVE";
-    if(isplayer(e_attacker) && var_a4a673a9) {
+    if(isPlayer(e_attacker) && var_a4a673a9) {
       self.var_7a04481c = self.var_7a04481c - n_damage;
     }
     if(self.var_7a04481c <= 0) {
@@ -2370,7 +2370,7 @@ function function_9f90bc0f(a_ents, str_notify) {
   a_ents = array::remove_undefined(a_ents);
   if(a_ents.size) {
     foreach(e_ent in a_ents) {
-      if(!isplayer(e_ent)) {
+      if(!isPlayer(e_ent)) {
         e_ent delete();
       }
     }

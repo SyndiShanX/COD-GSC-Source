@@ -529,7 +529,6 @@ updateKillstreaks(keepCurrent) {
     self.killstreakIndexWeapon = undefined;
     self.pers["lastEarnedStreak"] = undefined;
     self updateStreakSlots();
-
   }
 }
 
@@ -1124,7 +1123,7 @@ giveKillstreak(streakName, isEarned, awardXp, owner, slotNumber, streakID) {
     self_pers_killstreak_index.lifeId = self.pers["deaths"];
 
   AssertEx(isDefined(self), "Player to be rewarded is undefined");
-  AssertEx(IsPlayer(self), "Somehow a non player ent is receiving a killstreak reward");
+  AssertEx(isPlayer(self), "Somehow a non player ent is receiving a killstreak reward");
   AssertEx(isDefined(self.streakType), "Player: " + self.name + " doesn't have a streakType defined");
 
   if(self.streakType == "specialist" && index != KILLSTREAK_GIMME_SLOT) {
@@ -1233,7 +1232,7 @@ isHoldingWeapon(weapon) {
 getStreakCost(streakName) {
   cost = int(getKillstreakKills(streakName));
 
-  if(isDefined(self) && IsPlayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     if(isSpecialistKillstreak(streakName)) {
       if(isDefined(self.pers["gamemodeLoadout"])) {
         if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak1"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak1"] == streakName)
@@ -1951,7 +1950,7 @@ copy_killstreak_status(from, noTransfer) {
   if(!isDefined(noTransfer) || noTransfer == false) {
     allEntities = getEntArray();
     foreach(ent in allEntities) {
-      if(!isDefined(ent) || IsPlayer(ent)) {
+      if(!isDefined(ent) || isPlayer(ent)) {
         continue;
       }
       if(isDefined(ent.owner) && ent.owner == from) {

@@ -14,11 +14,13 @@ clocks_init(clientnum) {
   curr_time = getsystemtime();
   hours = curr_time[0];
 
-  if(hours > 12)
+  if(hours > 12) {
     hours = hours - 12;
+  }
 
-  if(hours == 0)
+  if(hours == 0) {
     hours = 12;
+  }
 
   minutes = curr_time[1];
   seconds = curr_time[2];
@@ -113,23 +115,27 @@ clock_run(time_values) {
         break;
     }
 
-    if(hour < 1)
+    if(hour < 1) {
       hour = hour + 12;
+    }
 
-    if(hour > 12)
+    if(hour > 12) {
       hour = hour - 12;
+    }
 
     time_values["hand_time"] = hour;
   }
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.1;
+  }
 
   self rotatepitch(time_values["hand_time"] * time_values["rotate"], 0.05);
   self waittill("rotatedone");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.1;
+  }
 
   if(isDefined(time_values["first_rotate"])) {
     self rotatepitch(time_values["first_rotate"], 0.05);
@@ -142,8 +148,9 @@ clock_run(time_values) {
     curr_time = getsystemtime();
 
     if(prev_time != curr_time) {
-      while(!clienthassnapshot(0))
+      while(!clienthassnapshot(0)) {
         wait 0.1;
+      }
 
       self rotatepitch(time_values["rotate_bit"], 0.05);
       prev_time = curr_time;

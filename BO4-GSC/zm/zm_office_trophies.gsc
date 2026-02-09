@@ -146,7 +146,7 @@ function_1ac7a037() {
 function_60f79e9c(params) {
   e_attacker = params.eattacker;
 
-  if(!isDefined(e_attacker) || !isDefined(e_attacker.var_32ab02ea) || !isplayer(e_attacker)) {
+  if(!isDefined(e_attacker) || !isDefined(e_attacker.var_32ab02ea) || !isPlayer(e_attacker)) {
     return;
   }
 
@@ -242,7 +242,6 @@ player_teleport_watcher() {
     self function_3db52483();
 
     iprintln("<dev string:x16a>" + self.var_23688a5e.size);
-
   }
 
   iprintlnbold("<dev string:x38>" + "<dev string:x183>");

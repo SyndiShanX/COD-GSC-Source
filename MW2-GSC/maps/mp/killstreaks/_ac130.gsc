@@ -146,11 +146,8 @@ init_sounds() {
   setAC130Ambience("ambient_ac130_int1");
 
   level.scr_sound["foo"]["bar"] = "";
-  //-------------------------------------------------------------------------------------------------
-  //CONTEXT SENSATIVE DIALOG
-  //-------------------------------------------------------------------------------------------------
-
-  add_context_sensative_dialog("ai", "in_sight", 0, "ac130_fco_moreenemy"); // More enemy personnel.
+  //------------------------------------------------------------------------------------------------- //CONTEXT SENSATIVE DIALOG
+  //------------------------------------------------------------------------------------------------- add_context_sensative_dialog("ai", "in_sight", 0, "ac130_fco_moreenemy"); // More enemy personnel.
   add_context_sensative_dialog("ai", "in_sight", 1, "ac130_fco_getthatguy"); // Get that guy.
   add_context_sensative_dialog("ai", "in_sight", 2, "ac130_fco_guymovin"); // Roger, guy movin'.
   add_context_sensative_dialog("ai", "in_sight", 3, "ac130_fco_getperson"); // Get that person.
@@ -996,7 +993,7 @@ context_Sensative_Dialog_Guy_Crawling() {
     level waittill("ai_crawling", guy);
 
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog", 0) == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog", 0) == "1")
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (0, 1, 0));
     }
 
@@ -1009,9 +1006,8 @@ context_Sensative_Dialog_Guy_Pain() {
 
   for(;;) {
     level waittill("ai_pain", guy);
-    /#		
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog") == "1")
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 0, 0));
     }
 
@@ -1028,7 +1024,7 @@ context_Sensative_Dialog_Secondary_Explosion_Vehicle() {
     wait 1;
 
     if(isDefined(vehicle_origin)) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog") == "1")
         thread debug_line(level.ac130player.origin, vehicle_origin, 5.0, (0, 0, 1));
     }
 
@@ -1051,18 +1047,16 @@ context_Sensative_Dialog_Kill(guy, attacker) {
   if(!isDefined(attacker)) {
     return;
   }
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   level.enemiesKilledInTimeWindow++;
   level notify("enemy_killed");
 
-  /#	
   if((isDefined(guy)) && (isDefined(guy.origin))) {
-    if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+    if(getDvar("ac130_debug_context_sensative_dialog") == "1")
       thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 1, 0));
   }
-
 }
 
 context_Sensative_Dialog_Kill_Thread() {

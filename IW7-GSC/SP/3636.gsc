@@ -56,7 +56,7 @@ func_2A35() {
 }
 
 func_2A2B() {
-  setdvar("hideHudFast", 1);
+  setDvar("hideHudFast", 1);
   setomnvar("ui_hide_weapon_info", 1);
   var_0 = [];
   var_1 = scripts\sp\hud_util::func_499B("alien_icon_craft_battery", 15, 15);
@@ -76,7 +76,7 @@ func_2A2B() {
 }
 
 func_2A2C(var_0) {
-  setdvar("hideHudFast", 0);
+  setDvar("hideHudFast", 0);
   setsaveddvar("hud_showStance", 1);
   setomnvar("ui_hide_weapon_info", 0);
   foreach(var_2 in var_0) {

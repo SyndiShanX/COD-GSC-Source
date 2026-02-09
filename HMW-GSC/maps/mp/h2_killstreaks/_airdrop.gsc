@@ -143,7 +143,7 @@ init() {
   if(!level.airDropCrates.size) {
     level.airDropCrates = level.oldAirDropCrates;
 
-    switch (getdvar("mapname")) {
+    switch (getDvar("mapname")) {
       case "mp_backlot":
       case "mp_bloc":
       case "mp_bog":
@@ -296,7 +296,6 @@ getCrateTypeForDropType(dropType) {
       //	return "nuke";
     default:
       return getRandomCrateType("airdrop_marker_mp");
-
   }
 }
 
@@ -656,7 +655,6 @@ setSelfAndEnemyUsable(owner) {
     else
       self enablePlayerUse(player);
   }
-
 }
 
 setUnUsable(team) {
@@ -779,7 +777,6 @@ getFlyHeightOffset(dropSite) {
   } else {
     return heightEnt.origin[2];
   }
-
 }
 
 /**********************************************************

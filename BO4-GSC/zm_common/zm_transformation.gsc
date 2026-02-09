@@ -525,7 +525,7 @@ transform(id, var_c2a69066, var_2cf708f4 = 1) {
 }
 
 function_a51fe6f9(params, new_ai) {
-  if(isDefined(new_ai) && isalive(new_ai) && new_ai.allowdeath && isDefined(params.eattacker) && isplayer(params.eattacker)) {
+  if(isDefined(new_ai) && isalive(new_ai) && new_ai.allowdeath && isDefined(params.eattacker) && isPlayer(params.eattacker)) {
     new_ai kill(undefined, params.eattacker, params.einflictor, params.weapon, 0, 1);
   }
 }
@@ -666,7 +666,7 @@ devgui() {
       continue;
     }
 
-    setdvar(#"hash_439ed91bbc9ac4c0", "<dev string:x103>");
+    setDvar(#"hash_439ed91bbc9ac4c0", "<dev string:x103>");
     cmd = strtok(cmd, "<dev string:x5db>");
 
     switch (cmd[0]) {

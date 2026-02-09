@@ -83,7 +83,7 @@ func_8FDE(var_0, var_1) {
 clear_debris(var_0, var_1) {
   scripts\engine\utility::flag_set("can_drop_coins");
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     playsoundatpos((var_0.origin[0], var_0.origin[1], var_1.origin[2] + 40), "rave_doorbuy_med");
     var_1 playlocalsound("purchase_generic");
   } else {

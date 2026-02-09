@@ -10,11 +10,9 @@
 menu(name) {
   return level.create_fx_menu == name;
 }
-
 setmenu(name) {
   level.create_fx_menu = name;
 }
-
 create_fx_menu() {
   if(button_is_clicked("escape", "x")) {
     exit_menu();
@@ -81,18 +79,15 @@ create_fx_menu() {
     }
   }
 }
-
 exit_menu() {
   clear_fx_hudElements();
   clear_entity_selection();
   update_selected_entities();
   setmenu("none");
 }
-
 get_last_selected_entity() {
   return level.selected_fx_ents[level.selected_fx_ents.size - 1];
 }
-
 menu_fx_creation() {
   count = 0;
   picked_fx = undefined;
@@ -130,7 +125,6 @@ menu_fx_creation() {
   }
   finish_creating_entity(ent);
 }
-
 finish_creating_entity(ent) {
   ent.v["angles"] = vectortoangles((ent.v["origin"] + (0, 0, 100)) - ent.v["origin"]);
   assert(isDefined(ent));
@@ -141,7 +135,6 @@ finish_creating_entity(ent) {
   update_selected_entities();
   setMenu("none");
 }
-
 change_effect_to_oneshot(ent) {
   if(ent.v["type"] == "exploder") {
     ent.v["exploder"] = undefined;
@@ -153,7 +146,6 @@ change_effect_to_oneshot(ent) {
   }
   ent.v["type"] = "oneshotfx";
 }
-
 change_effect_to_loop(ent) {
   if(ent.v["type"] == "exploder") {
     ent.v["exploder"] = undefined;
@@ -165,7 +157,6 @@ change_effect_to_loop(ent) {
   }
   ent.v["type"] = "loopfx";
 }
-
 change_effect_to_exploder(ent) {
   ent.v["type"] = "exploder";
   ent.v["soundalias"] = "nil";
@@ -175,7 +166,6 @@ change_effect_to_exploder(ent) {
   ent.v["exploder"] = 1;
   ent.v["exploder_type"] = "normal";
 }
-
 change_ent_type(newtype) {
   if(newtype == "oneshotfx") {
     for(i = 0; i < level.selected_fx_ents.size; i++) {
@@ -191,7 +181,6 @@ change_ent_type(newtype) {
     }
   }
 }
-
 menu_init() {
   level.createFX_options = [];
   addOption("string", "type", "Type", "oneshotfx", "fx");
@@ -234,15 +223,12 @@ menu_init() {
   level.createfxMasks["soundfx"] = [];
   level.createfxMasks["soundfx"]["soundalias"] = true;
 }
-
 get_last_selected_ent() {
   return level.selected_fx_ents[level.selected_fx_ents.size - 1];
 }
-
 entities_are_selected() {
   return level.selected_fx_ents.size > 0;
 }
-
 menu_change_selected_fx() {
   if(!level.selected_fx_ents.size) {
     return;
@@ -274,7 +260,6 @@ menu_change_selected_fx() {
     }
   }
 }
-
 prepare_option_for_change(option, drawnCount) {
   if(option["name"] == "fxid") {
     setMenu("change_fxid");
@@ -288,10 +273,9 @@ prepare_option_for_change(option, drawnCount) {
   createfx_centerprint("To change " + option["description"] + " on selected entities, type /fx newvalue");
   level.createfx_inputlocked = true;
   set_option_index(option["name"]);
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
   level.createFxHudElements[drawnCount + 3][0].color = (1, 1, 0);
 }
-
 menu_fx_option_set() {
   if(getDvar(#"fx") == "nil") {
     return;
@@ -309,7 +293,6 @@ menu_fx_option_set() {
   }
   apply_option_to_selected_fx(option, setting);
 }
-
 menu_fx_type() {
   clear_fx_hudElements();
   set_fx_hudElement("Change effect type to:");
@@ -331,7 +314,6 @@ menu_fx_type() {
     update_selected_entities();
   }
 }
-
 apply_option_to_selected_fx(option, setting) {
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
@@ -342,7 +324,6 @@ apply_option_to_selected_fx(option, setting) {
   update_selected_entities();
   clear_settable_fx();
 }
-
 set_option_index(name) {
   for(i = 0; i < level.createFX_options.size; i++) {
     if(level.createFX_options[i]["name"] != name) {
@@ -352,15 +333,12 @@ set_option_index(name) {
     return;
   }
 }
-
 get_selected_option() {
   return level.createFX_options[level.selected_fx_option_index];
 }
-
 mask(type, name) {
   return isDefined(level.createfxMasks[type][name]);
 }
-
 addOption(type, name, description, defaultSetting, mask) {
   option = [];
   option["type"] = type;
@@ -370,7 +348,6 @@ addOption(type, name, description, defaultSetting, mask) {
   option["mask"] = mask;
   level.createFX_options[level.createFX_options.size] = option;
 }
-
 get_option(name) {
   for(i = 0; i < level.createFX_options.size; i++) {
     if(level.createFX_options[i]["name"] == name) {
@@ -378,7 +355,6 @@ get_option(name) {
     }
   }
 }
-
 display_fx_info(ent) {
   if(!menu("none")) {
     return;
@@ -429,7 +405,6 @@ display_fx_info(ent) {
     }
   }
 }
-
 display_fx_add_options(ent) {
   assert(menu("add_options"));
   assert(entities_are_selected());
@@ -476,7 +451,6 @@ display_fx_add_options(ent) {
   }
   set_fx_hudElement("(x) Exit >");
 }
-
 add_option_to_selected_entities(option) {
   setting = undefined;
   for(i = 0; i < level.selected_fx_ents.size; i++) {
@@ -486,13 +460,11 @@ add_option_to_selected_entities(option) {
     }
   }
 }
-
 menuNone() {
   level.effect_list_offset = 0;
   clear_fx_hudElements();
   setMenu("none");
 }
-
 draw_effects_list() {
   clear_fx_hudElements();
   set_fx_hudElement("Pick an effect:");
@@ -514,15 +486,12 @@ draw_effects_list() {
     set_fx_hudElement("(->) Next Page >");
   }
 }
-
 increment_list_offset() {
   level.effect_list_offset += level.effect_list_offset_max;
 }
-
 decrement_list_offset() {
   level.effect_list_offset += level.effect_list_offset_max;
 }
-
 get_level_ambient_fx() {
   if(!isDefined(level._effect_keys)) {
     keys = getarraykeys(level._effect);
@@ -540,7 +509,6 @@ get_level_ambient_fx() {
   }
   return level._effect_keys;
 }
-
 get_distance_from_ent(ent) {
   players = get_players();
   return distance(players[0].origin, ent.v["origin"]);

@@ -74,7 +74,7 @@ DoDeathReactionAnim( deathAnim )
 
 	self setFlaggedAnimKnobAll( "deathanim", deathAnim, %body, 1, 1, rate, true );
 
-//	self animscripts\run::SetMoveNonForwardAnims( %walk_backward, %walk_left, %walk_right );
+//	self animscripts\run::SetMoveNonForwardAnims(%walk_backward, %walk_left, %walk_right );
 //	self thread animscripts\run::SetCombatStandMoveAnimWeights( "walk" );
 
 	self animscripts\shared::DoNoteTracks( "deathanim" );

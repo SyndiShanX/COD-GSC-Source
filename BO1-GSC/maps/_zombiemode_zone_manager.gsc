@@ -14,14 +14,12 @@ init() {
     level.create_spawner_list_func = ::create_spawner_list;
   }
 }
-
 zone_is_enabled(zone_name) {
   if(!isDefined(level.zones) || !isDefined(level.zones[zone_name]) || !level.zones[zone_name].is_enabled) {
     return false;
   }
   return true;
 }
-
 get_players_in_zone(zone_name) {
   if(!zone_is_enabled(zone_name)) {
     return false;
@@ -31,13 +29,13 @@ get_players_in_zone(zone_name) {
   players = get_players();
   for(i = 0; i < zone.volumes.size; i++) {
     for(j = 0; j < players.size; j++) {
-      if(players[j] IsTouching(zone.volumes[i]))
+      if(players[j] IsTouching(zone.volumes[i])) {
         num_in_zone++;
+      }
     }
   }
   return num_in_zone;
 }
-
 player_in_zone(zone_name) {
   if(!zone_is_enabled(zone_name)) {
     return false;
@@ -46,13 +44,13 @@ player_in_zone(zone_name) {
   players = get_players();
   for(i = 0; i < zone.volumes.size; i++) {
     for(j = 0; j < players.size; j++) {
-      if(players[j] IsTouching(zone.volumes[i]) && !(players[j].sessionstate == "spectator"))
+      if(players[j] IsTouching(zone.volumes[i]) && !(players[j].sessionstate == "spectator")) {
         return true;
+      }
     }
   }
   return false;
 }
-
 deactivate_initial_barrier_goals() {
   special_goals = GetStructArray("exterior_goal", "targetname");
   for(i = 0; i < special_goals.size; i++) {
@@ -62,7 +60,6 @@ deactivate_initial_barrier_goals() {
     }
   }
 }
-
 zone_init(zone_name) {
   if(isDefined(level.zones[zone_name])) {
     return;
@@ -110,7 +107,6 @@ zone_init(zone_name) {
     }
   }
 }
-
 reinit_zone_spawners() {
   zkeys = GetArrayKeys(level.zones);
   for(i = 0; i < level.zones.size; i++) {
@@ -121,9 +117,7 @@ reinit_zone_spawners() {
       for(j = 0; j < spawners.size; j++) {
         spawner = spawners[j];
         if(isDefined(level.ignore_spawner_func)) {
-          ignore = [
-            [level.ignore_spawner_func]
-          ](spawner);
+          ignore = [[level.ignore_spawner_func]](spawner);
           if(!ignore) {
             zone.spawners[zone.spawners.size] = spawner;
           }
@@ -134,7 +128,6 @@ reinit_zone_spawners() {
     }
   }
 }
-
 enable_zone(zone_name) {
   AssertEx(isDefined(level.zones) && isDefined(level.zones[zone_name]), "enable_zone: zone has not been initialized");
   if(level.zones[zone_name].is_enabled) {
@@ -154,7 +147,6 @@ enable_zone(zone_name) {
     entry_points[i] trigger_on();
   }
 }
-
 make_zone_adjacent(main_zone_name, adj_zone_name, flag_name) {
   main_zone = level.zones[main_zone_name];
   if(!isDefined(main_zone.adjacent_zones[adj_zone_name])) {
@@ -175,7 +167,6 @@ make_zone_adjacent(main_zone_name, adj_zone_name, flag_name) {
     adj_zone.flags[size] = flag_name;
   }
 }
-
 add_zone_flags(wait_flag, add_flags) {
   if(!IsArray(add_flags)) {
     temp = add_flags;
@@ -191,7 +182,6 @@ add_zone_flags(wait_flag, add_flags) {
   }
   level.zone_flags[wait_flag] = add_flags;
 }
-
 add_adjacent_zone(zone_name_a, zone_name_b, flag_name, one_way) {
   if(!isDefined(one_way)) {
     one_way = false;
@@ -206,7 +196,6 @@ add_adjacent_zone(zone_name_a, zone_name_b, flag_name, one_way) {
     make_zone_adjacent(zone_name_b, zone_name_a, flag_name);
   }
 }
-
 setup_zone_flag_waits() {
   flags = [];
   zkeys = GetArrayKeys(level.zones);
@@ -224,7 +213,6 @@ setup_zone_flag_waits() {
     level thread zone_flag_wait(flags[i]);
   }
 }
-
 zone_flag_wait(flag_name) {
   if(!isDefined(level.flag[flag_name])) {
     flag_init(flag_name);
@@ -275,7 +263,6 @@ zone_flag_wait(flag_name) {
     }
   }
 }
-
 connect_zones(zone_name_a, zone_name_b, one_way) {
   if(!isDefined(one_way)) {
     one_way = false;
@@ -295,7 +282,6 @@ connect_zones(zone_name_a, zone_name_b, one_way) {
     }
   }
 }
-
 manage_zones(initial_zone) {
   AssertEx(isDefined(initial_zone), "You must specify an initial zone to manage");
   deactivate_initial_barrier_goals();
@@ -337,7 +323,8 @@ manage_zones(initial_zone) {
         a_zone_is_active = true;
         azkeys = GetArrayKeys(zone.adjacent_zones);
         for(az = 0; az < zone.adjacent_zones.size; az++) {
-          if(zone.adjacent_zones[azkeys[az]].is_connected && level.zones[azkeys[az]].is_enabled) {
+          if(zone.adjacent_zones[azkeys[az]].is_connected &&
+            level.zones[azkeys[az]].is_enabled) {
             level.zones[azkeys[az]].is_active = true;
           }
         }
@@ -356,7 +343,6 @@ manage_zones(initial_zone) {
     wait(1);
   }
 }
-
 create_spawner_list(zkeys) {
   level.enemy_spawns = [];
   level.enemy_dog_locations = [];

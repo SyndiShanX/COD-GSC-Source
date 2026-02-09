@@ -337,12 +337,12 @@ function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   var_9000ab2 = isDefined(level.brutus_damage_percent) ? level.brutus_damage_percent : 0.5;
   var_81dcad68 = 1.5;
 
-  if(isplayer(attacker) && attacker infection::is_infected()) {
+  if(isPlayer(attacker) && attacker infection::is_infected()) {
     return 0;
   }
 
   if(self.invulnerabletime > gettime()) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker util::show_hit_marker();
     }
 

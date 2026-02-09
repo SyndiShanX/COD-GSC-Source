@@ -19,7 +19,7 @@ __init__() {
     return;
   }
 
-  setdvar(#"hash_211a0d7f1fd46cfa", 0);
+  setDvar(#"hash_211a0d7f1fd46cfa", 0);
   wz_revive_prompt::register("wz_revive_prompt_1");
   wz_revive_prompt::register("wz_revive_prompt_2");
   wz_revive_prompt::register("wz_revive_prompt_3");
@@ -45,7 +45,7 @@ wait_and_set_revive_shader_constant() {
 }
 
 laststand_bleed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(newval != oldval && newval && isplayer(self)) {
+  if(newval != oldval && newval && isPlayer(self)) {
     self util::waittill_dobj(localclientnum);
 
     if(isDefined(self)) {

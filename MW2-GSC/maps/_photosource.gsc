@@ -22,7 +22,6 @@ init() {
 }
 
 main() {
-
   if(!isDefined(level.flag) || !isDefined(level.flag["psource_refresh"])) {
     flag_init("psource_refresh");
     flag_init("psource_Notviewing");
@@ -33,18 +32,18 @@ main() {
   precacheshader("psourcecreate");
   precacheshader("psourcemodify");
 
-  setdvar("psource_image", "");
-  setdvar("psource_delete", "");
+  setDvar("psource_image", "");
+  setDvar("psource_delete", "");
 
-  setdvar("psource_editmode", "");
-  setdvar("psource_image", "");
-  setdvar("psource_select_next", "");
-  setdvar("psource_select_prev", "");
-  setdvar("psource_setview", "");
-  setdvar("psource_help", "");
-  setdvar("psource_dump", "");
-  setdvar("psource_select_new", "");
-  setdvar("psource_enable", "0");
+  setDvar("psource_editmode", "");
+  setDvar("psource_image", "");
+  setDvar("psource_select_next", "");
+  setDvar("psource_select_prev", "");
+  setDvar("psource_setview", "");
+  setDvar("psource_help", "");
+  setDvar("psource_dump", "");
+  setDvar("psource_select_new", "");
+  setDvar("psource_enable", "0");
 
   level.photosourcemodsize = 35;
   level.photosourcemod = newhudelem();
@@ -91,11 +90,10 @@ main() {
     psource_help();
     wait .05;
   }
-
 }
 
 psource_enable() {
-  if(getdvar("psource_enable") != "1") {
+  if(getDvar("psource_enable") != "1") {
     flag_set("psource_refresh"); // makes everything stop drawing.
     level.photosourcemod.alpha = 0;
     level.photosource.alpha = 0;
@@ -105,7 +103,7 @@ psource_enable() {
 }
 
 psource_waittill_enable() {
-  while(getdvar("psource_enable") != "1")
+  while(getDvar("psource_enable") != "1")
     wait .1;
 }
 
@@ -135,7 +133,6 @@ psource_activatebutton() {
     if(isDefined(pick)) {
       level.psource_selectindex = pick;
       level.psource_views[pick] thread psource_hudshow();
-
     }
     while(level.player usebuttonpressed())
       wait .05;
@@ -156,7 +153,6 @@ psource_handleselectindex() {
     lastselect = level.psource_selectindex;
     if(isDefined(level.psource_views[lastselect]))
       level.psource_views[lastselect] thread psource_hudshow();
-
   }
 }
 
@@ -193,7 +189,6 @@ psource_getvisible() {
       if(newdist < dist) {
         dist = newdist;
         index = i;
-
       }
     }
   }
@@ -310,36 +305,36 @@ psource_hudshow() {
 }
 
 psource_select_next() {
-  if(getdvar("psource_select_next") == "")
+  if(getDvar("psource_select_next") == "")
     return;
   if(!(level.psource_selectindex == level.psource_views.size))
     level.psource_selectindex++;
 
-  setdvar("psource_select_next", "");
+  setDvar("psource_select_next", "");
 }
 
 psource_select_prev() {
-  if(getdvar("psource_select_prev") == "")
+  if(getDvar("psource_select_prev") == "")
     return;
   if(!(level.psource_selectindex == 0))
     level.psource_selectindex--;
-  setdvar("psource_select_prev", "");
+  setDvar("psource_select_prev", "");
 }
 
 psource_select_new() {
-  if(getdvar("psource_select_new") == "")
+  if(getDvar("psource_select_new") == "")
     return;
   level.psource_selectindex = level.psource_views.size;
-  setdvar("psource_select_new", "");
+  setDvar("psource_select_new", "");
 }
 
 psource_setview() {
-  if(getdvar("psource_setview") == "")
+  if(getDvar("psource_setview") == "")
     return;
   view = psource_getcurrentview();
   //	view.temp_image = "case";
   psource_setvieworgang(view);
-  setdvar("psource_setview", "");
+  setDvar("psource_setview", "");
 }
 
 psource_setvieworgang(view) {
@@ -348,7 +343,7 @@ psource_setvieworgang(view) {
 }
 
 psource_dump() {
-  if(getdvar("psource_dump") == "")
+  if(getDvar("psource_dump") == "")
     return;
   println(" ");
   println(" ");
@@ -365,11 +360,11 @@ psource_dump() {
   println(" ");
   println(" ");
   println(" ");
-  setdvar("psource_dump", "");
+  setDvar("psource_dump", "");
 }
 
 psource_help() {
-  if(getdvar("psource_help") == "")
+  if(getDvar("psource_help") == "")
     return;
   println(" ");
   println(" ");
@@ -398,11 +393,11 @@ psource_help() {
   println("psource_image <materialname>");
   println(" ");
   println("Once you have all your views press the dump button, open your console.log and paste the script to your level script");
-  setdvar("psource_help", "");
+  setDvar("psource_help", "");
 }
 
 psource_delete() {
-  if(getdvar("psource_delete") == "")
+  if(getDvar("psource_delete") == "")
     return;
   newarray = [];
   for(i = 0; i < level.psource_views.size; i++)
@@ -410,32 +405,32 @@ psource_delete() {
       newarray[newarray.size] = level.psource_views[i];
   level.psource_views = newarray;
   flag_set("psource_refresh");
-  setdvar("psource_delete", "");
+  setDvar("psource_delete", "");
 }
 
 psource_select_template() {
-  if(getdvar("psource_select_template") == "")
+  if(getDvar("psource_select_template") == "")
     return;
-  setdvar("psource_select_template", "");
+  setDvar("psource_select_template", "");
 }
 
 psource_editmode_update() {
-  if(getdvar("psource_editmode") == "")
+  if(getDvar("psource_editmode") == "")
     return;
   if(!level.psource_editmode)
     level.psource_editmode = true;
   else
     level.psource_editmode = false;
-  setdvar("psource_editmode", "");
+  setDvar("psource_editmode", "");
 }
 
 psource_image_update() {
-  if(getdvar("psource_image") == "")
+  if(getDvar("psource_image") == "")
     return;
   view = psource_getcurrentview();
-  view.image = getdvar("psource_image");
+  view.image = getDvar("psource_image");
   view.temp_image = "case"; // this is what will show when a new material is created( can't load mid level )
-  setdvar("psource_image", "");
+  setDvar("psource_image", "");
 }
 
 psource_getcurrentview() {
@@ -456,7 +451,6 @@ psource_newview(bScriptAdded) {
   if(!bScriptAdded) {
     view.temp_image = "case";
     psource_setvieworgang(view);
-
   }
   if(isDefined(level.psource_views[level.psource_selectindex]))
     level.psource_views[level.psource_selectindex] delete();

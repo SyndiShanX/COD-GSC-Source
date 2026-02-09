@@ -18,7 +18,7 @@ addtosystem(var_0) {
   self.enemyclass = "infantry";
   self.calledout = [];
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.battlechatter = 0;
     self.flavorbursts = 0;
     self.type = "human";
@@ -327,7 +327,7 @@ addthreatevent(var_0, var_1, var_2) {
   if(!animscripts\battlechatter::cansay("threat", var_0, var_2)) {
     return;
   }
-  if(animscripts\battlechatter::threatwasalreadycalledout(var_1) && !isplayer(var_1)) {
+  if(animscripts\battlechatter::threatwasalreadycalledout(var_1) && !isPlayer(var_1)) {
     return;
   }
   var_3 = animscripts\battlechatter::createchatevent("threat", var_0, var_2);
@@ -365,7 +365,7 @@ addresponseevent_internal(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!animscripts\battlechatter::cansay("response", var_0, var_3, var_1)) {
     return;
   }
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     if(animscripts\battlechatter::isusingsamevoice(var_2))
       return;
   }
@@ -590,7 +590,7 @@ squadthreatwaiter() {
           continue;
         }
         if(!var_3 cansee(var_5)) {
-          if(isplayer(var_5)) {
+          if(isPlayer(var_5)) {
             continue;
           }
           if(var_5.team == level.player.team) {
@@ -662,7 +662,7 @@ aideathenemy() {
   if(!isDefined(var_0.countryid)) {
     return;
   }
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     if(var_0.countryid == "GS" || var_0.countryid == "GM" || var_0.countryid == "GL")
       var_0 thread aikilleventthread();
   }
@@ -811,7 +811,7 @@ player_friendlyfire_waiter() {
     if(!animscripts\battlechatter::bcsenabled()) {
       continue;
     }
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       if(anim.countryids[self.voice] == "GM" && animscripts\battlechatter::cansay("reaction", "takingfire", 1.0, undefined))
         addreactionevent("takingfire", undefined, var_0, 1.0);
 
@@ -836,7 +836,7 @@ player_friendlyfire_waiter_damage() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       if(damage_is_valid_for_friendlyfire_warning(var_4))
         player_friendlyfire_addreactionevent();
     }

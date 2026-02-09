@@ -397,7 +397,7 @@ patrolfield() {
   self setscriptablepartstate("thrusters", "slow", 0);
   for(;;) {
     var_0 = undefined;
-    if(isDefined(self.patroltarget) && isalive(self.patroltarget) && isplayer(self.patroltarget) && !self.patroltarget func_8181("specialty_blindeye")) {
+    if(isDefined(self.patroltarget) && isalive(self.patroltarget) && isPlayer(self.patroltarget) && !self.patroltarget func_8181("specialty_blindeye")) {
       if(!jackalcanseeenemy(self.patroltarget) || distance2dsquared(self.origin, self.patroltarget.origin) > 4194304) {
         jackalmovetoenemy(self.patroltarget);
       }
@@ -1086,7 +1086,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
   scripts\mp\damage::logattackerkillstreak(self, var_2, var_1, var_7, var_6, var_4, var_10, undefined, var_11, var_3, var_5);
   if(self.health <= var_2) {
-    if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
+    if(isPlayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
       var_12 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
       var_13 = "callout_destroyed_harrier";
       if(var_12 != "") {

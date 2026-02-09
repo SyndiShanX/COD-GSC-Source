@@ -211,10 +211,11 @@ skipto_karma() {
 load_gumps_karma() {
   screen_fade_out(0);
 
-  if(is_after_skipto("mall"))
+  if(is_after_skipto("mall")) {
     load_gump("karma_2_gump_sundeck");
-  else
+  } else {
     load_gump("karma_2_gump_mall");
+  }
 
   screen_fade_in(0);
 }
@@ -223,8 +224,9 @@ skipto_cleanup() {
   skipto = level.skipto_point;
   load_gumps_karma();
 
-  if(skipto == "club exit")
+  if(skipto == "club exit") {
     screen_fade_out(0);
+  }
 
   skip_objective(level.obj_security);
   skip_objective(level.obj_enter_crc);
@@ -293,8 +295,9 @@ spawn_func_harper() {
   level.ai_harper = self;
   flag_wait("level.player");
 
-  if(level.player get_story_stat("HARPER_SCARRED"))
+  if(level.player get_story_stat("HARPER_SCARRED")) {
     self setModel("c_usa_unioninsp_harper_scar_cin_fb");
+  }
 }
 
 spawn_func_salazar() {

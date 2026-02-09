@@ -13,16 +13,16 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   if(getdvarstring("") == "" || getdvarstring("") == "") {
-    setdvar("", 0);
+    setDvar("", 0);
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "" && isDefined(level.script)) {
-    setdvar("", level.script);
+    setDvar("", level.script);
   }
   if(!isDefined(level.dofdefault)) {
     level.dofdefault["nearStart"] = 0;
@@ -74,9 +74,9 @@ function setfogsliders() {
     halfplane = 10000001;
     nearplane = 10000000;
   }
-  setdvar("", halfplane);
-  setdvar("", nearplane);
-  setdvar("", (((red + "") + green) + "") + blue);
+  setDvar("", halfplane);
+  setDvar("", nearplane);
+  setDvar("", (((red + "") + green) + "") + blue);
 }
 
 function tweakart() {
@@ -84,20 +84,20 @@ function tweakart() {
     level.tweakfile = 0;
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
-    setdvar("", "");
-    setdvar("", "");
-    setdvar("", "");
+    setDvar("", "");
+    setDvar("", "");
+    setDvar("", "");
+    setDvar("", "");
   }
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", level.dofdefault[""]);
-  setdvar("", level.dofdefault[""]);
-  setdvar("", level.dofdefault[""]);
-  setdvar("", level.dofdefault[""]);
-  setdvar("", level.dofdefault[""]);
-  setdvar("", level.dofdefault[""]);
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", level.dofdefault[""]);
+  setDvar("", level.dofdefault[""]);
+  setDvar("", level.dofdefault[""]);
+  setDvar("", level.dofdefault[""]);
+  setDvar("", level.dofdefault[""]);
+  setDvar("", level.dofdefault[""]);
   file = undefined;
   filename = undefined;
   tweak_toggle = 1;
@@ -109,20 +109,20 @@ function tweakart() {
     if(tweak_toggle) {
       tweak_toggle = 0;
       fogsettings = getfogsettings();
-      setdvar("", fogsettings[0]);
-      setdvar("", fogsettings[1]);
-      setdvar("", fogsettings[3]);
-      setdvar("", fogsettings[2]);
-      setdvar("", (((fogsettings[4] + "") + fogsettings[5]) + "") + fogsettings[6]);
-      setdvar("", fogsettings[7]);
-      setdvar("", (((fogsettings[8] + "") + fogsettings[9]) + "") + fogsettings[10]);
+      setDvar("", fogsettings[0]);
+      setDvar("", fogsettings[1]);
+      setDvar("", fogsettings[3]);
+      setDvar("", fogsettings[2]);
+      setDvar("", (((fogsettings[4] + "") + fogsettings[5]) + "") + fogsettings[6]);
+      setDvar("", fogsettings[7]);
+      setDvar("", (((fogsettings[8] + "") + fogsettings[9]) + "") + fogsettings[10]);
       level.fogsundir = [];
       level.fogsundir[0] = fogsettings[11];
       level.fogsundir[1] = fogsettings[12];
       level.fogsundir[2] = fogsettings[13];
-      setdvar("", fogsettings[14]);
-      setdvar("", fogsettings[15]);
-      setdvar("", fogsettings[16]);
+      setDvar("", fogsettings[14]);
+      setDvar("", fogsettings[15]);
+      setDvar("", fogsettings[16]);
     }
     level.fogexphalfplane = getdvarfloat("");
     level.fogexphalfheight = getdvarfloat("");
@@ -141,7 +141,7 @@ function tweakart() {
     level.sunendangle = getdvarfloat("");
     level.fogmaxopacity = getdvarfloat("");
     if(getdvarint("")) {
-      setdvar("", "");
+      setDvar("", "");
       println("");
       players = getplayers();
       dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
@@ -170,27 +170,27 @@ function tweakart() {
 function fovslidercheck() {
   if(level.dofdefault[""] >= level.dofdefault[""]) {
     level.dofdefault[""] = level.dofdefault[""] - 1;
-    setdvar("", level.dofdefault[""]);
+    setDvar("", level.dofdefault[""]);
   }
   if(level.dofdefault[""] <= level.dofdefault[""]) {
     level.dofdefault[""] = level.dofdefault[""] + 1;
-    setdvar("", level.dofdefault[""]);
+    setDvar("", level.dofdefault[""]);
   }
   if(level.dofdefault[""] >= level.dofdefault[""]) {
     level.dofdefault[""] = level.dofdefault[""] - 1;
-    setdvar("", level.dofdefault[""]);
+    setDvar("", level.dofdefault[""]);
   }
   if(level.dofdefault[""] <= level.dofdefault[""]) {
     level.dofdefault[""] = level.dofdefault[""] + 1;
-    setdvar("", level.dofdefault[""]);
+    setDvar("", level.dofdefault[""]);
   }
   if(level.dofdefault[""] >= level.dofdefault[""]) {
     level.dofdefault[""] = level.dofdefault[""] - 0.1;
-    setdvar("", level.dofdefault[""]);
+    setDvar("", level.dofdefault[""]);
   }
   if(level.dofdefault[""] <= level.dofdefault[""]) {
     level.dofdefault[""] = level.dofdefault[""] + 1;
-    setdvar("", level.dofdefault[""]);
+    setDvar("", level.dofdefault[""]);
   }
 }
 
@@ -218,6 +218,6 @@ function dumpsettings() {
     println("");
     println("");
     println("");
-    setdvar("", "");
+    setDvar("", "");
   }
 }

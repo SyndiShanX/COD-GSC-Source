@@ -303,7 +303,7 @@ debugdrawweightedpoint(entity, point, weight, lowestvalue, highestvalue) {
 }
 
 delete_all_ai_corpses() {
-  setdvar(#"debug_ai_clear_corpses", 0);
+  setDvar(#"debug_ai_clear_corpses", 0);
   corpses = getcorpsearray();
 
   foreach(corpse in corpses) {

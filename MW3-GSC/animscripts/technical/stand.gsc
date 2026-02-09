@@ -20,7 +20,7 @@ main() {
 }
 
 _id_685F() {
-  self setflaggedanimknoballrestart("painanim", % technical_turret_pain, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("painanim", %technical_turret_pain, %body, 1, 0.1, 1);
   animscripts\shared::_id_0C51("painanim");
 }
 

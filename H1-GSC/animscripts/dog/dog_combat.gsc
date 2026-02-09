@@ -10,7 +10,7 @@ main() {
   if(!isalive(self.enemy))
     combatidle();
   else {
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       meleebiteattackplayer();
       return;
     }
@@ -54,7 +54,7 @@ killplayer() {
   self.meleeingplayer dog_player_kill(self);
   self.meleeingplayer shellshock("default", 5);
   waittillframeend;
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   thread dog_death_hud(self.meleeingplayer, var_1);
 }
 
@@ -195,7 +195,7 @@ handlemeleebiteattacknotetracks(var_0) {
       var_1 = dogmelee();
 
       if(isDefined(var_1)) {
-        if(isplayer(var_1)) {
+        if(isPlayer(var_1)) {
           if(getdvarint("survival_chaos") != 1) {
             var_1 shellshock("dog_bite", 1);
             thread knockoutofads(var_1);
@@ -242,7 +242,7 @@ handlemeleefinishattacknotetracks(var_0) {
       var_1 = addsafetyhealth();
       var_2 = dogmelee();
 
-      if(isDefined(var_2) && isplayer(var_2) && isalive(self.meleeingplayer)) {
+      if(isDefined(var_2) && isPlayer(var_2) && isalive(self.meleeingplayer)) {
         if(var_1)
           removesafetyhealth();
 
@@ -332,7 +332,7 @@ meleebiteattackplayer() {
       break;
     }
 
-    if(!isplayer(self.enemy)) {
+    if(!isPlayer(self.enemy)) {
       break;
     }
 

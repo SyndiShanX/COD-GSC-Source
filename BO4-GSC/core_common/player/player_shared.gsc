@@ -20,10 +20,10 @@ __init__() {
   clientfield::register("world", "gameplay_started", 1, 1, "int");
   clientfield::register("toplayer", "gameplay_allows_deploy", 1, 1, "int");
   clientfield::register("toplayer", "player_dof_settings", 1, 2, "int");
-  setdvar(#"hash_256144ebda864b87", 1);
+  setDvar(#"hash_256144ebda864b87", 1);
 
   if(!isDefined(getdvarint(#"hash_8351525729015ab", 0))) {
-    setdvar(#"hash_8351525729015ab", 0);
+    setDvar(#"hash_8351525729015ab", 0);
   }
 }
 
@@ -673,7 +673,7 @@ init_heal(var_cd7b9255, var_e9c4ebeb) {
 }
 
 figure_out_attacker(eattacker) {
-  if(isDefined(eattacker) && !isplayer(eattacker)) {
+  if(isDefined(eattacker) && !isPlayer(eattacker)) {
     team = self.team;
 
     if(isDefined(eattacker.script_owner)) {

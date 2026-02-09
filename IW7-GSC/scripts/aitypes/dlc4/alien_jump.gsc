@@ -54,7 +54,7 @@ func_7A7A(var_0, var_1, var_2, var_3) {
     var_3 = 1.0;
   }
 
-  if(isplayer(var_2)) {
+  if(isPlayer(var_2)) {
     var_5 = var_2 getvelocity();
     var_6 = 200.0;
 

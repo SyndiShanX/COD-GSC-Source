@@ -15,7 +15,7 @@ main() {
   game["defenders"] = "axis";
   game["allies_soldiertype"] = "woodland";
   game["axis_soldiertype"] = "woodland";
-  setdvar("compassmaxrange", "2000");
+  setDvar("compassmaxrange", "2000");
   maps\mp\_fx_trigger::main();
   level replace_turrets();
   level.dd_flip_respawns = 1;

@@ -90,7 +90,6 @@ setup_craftfoundry(craftfoundry) {
       }
 
       function_e197bb07(craftfoundry);
-
     }
   }
 }
@@ -127,7 +126,6 @@ setup_tables() {
     unitrigger thread function_356e77bd();
 
     level thread function_3012605d(unitrigger);
-
   }
 }
 
@@ -198,7 +196,6 @@ function_b18074d0(name) {
       function_728a82e0(blueprint);
 
       level thread function_e5af6b6e(blueprint);
-
     }
   } else {
     assertmsg("<dev string:xaa>" + name);
@@ -1507,7 +1504,7 @@ devgui_get_players() {
 }
 
 devgui_think() {
-  setdvar(#"hash_7c8c0c3f35357a53", "<dev string:x1be>");
+  setDvar(#"hash_7c8c0c3f35357a53", "<dev string:x1be>");
   util::waittill_can_add_debug_command();
   str_cmd = "<dev string:x27b>";
   adddebugcommand(str_cmd);
@@ -1524,7 +1521,7 @@ devgui_think() {
     if(var_cf5ebef8 != "<dev string:x1be>") {
       table_id = int(var_cf5ebef8);
       array::thread_all(devgui_get_players(), &function_fe738a08, table_id);
-      setdvar(#"hash_43086839e587cc6c", "<dev string:x1be>");
+      setDvar(#"hash_43086839e587cc6c", "<dev string:x1be>");
     }
 
     component = getdvarstring(#"hash_3a357be22156749e");
@@ -1532,7 +1529,7 @@ devgui_think() {
     if(component != "<dev string:x1be>") {
       w_comp = get_component(component);
       array::thread_all(devgui_get_players(), &function_3e29352d, w_comp);
-      setdvar(#"hash_3a357be22156749e", "<dev string:x1be>");
+      setDvar(#"hash_3a357be22156749e", "<dev string:x1be>");
     }
 
     wait 1;

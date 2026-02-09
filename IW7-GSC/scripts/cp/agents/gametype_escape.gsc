@@ -966,7 +966,7 @@ dev_damage_show_damage_numbers() {
 }
 
 precachelb() {
-  var_0 = " LB_" + getdvar("ui_mapname");
+  var_0 = " LB_" + getDvar("ui_mapname");
   if(scripts\cp\utility::isplayingsolo()) {
     var_0 = var_0 + "_SOLO";
   } else {

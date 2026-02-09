@@ -39,7 +39,7 @@ main() {
   if(isDefined(self.node) && self.node.type == "Ambush" && self nearNode(self.node))
     self.ambushNode = self.node;
 
-  if(getdvar("scr_testgrenadethrows") == "on")
+  if(getDvar("scr_testgrenadethrows") == "on")
     testGrenadeThrowAnimOffsets();
 
   self transitionToCombat();
@@ -124,7 +124,7 @@ testGrenadeThrowAnimOffsets() {
     endpos = startpos + forward * offset[0] - right * offset[1] + (0, 0, 1) * offset[2];
     thread debugLine(startpos, endpos, (1, 1, 1), 20);
 
-    println("addGrenadeThrowAnimOffset( %", throwAnim, ", ", offset, " );");
+    println("addGrenadeThrowAnimOffset(%", throwAnim, ", ", offset, " );");
 
     self detach(model, tag);
 

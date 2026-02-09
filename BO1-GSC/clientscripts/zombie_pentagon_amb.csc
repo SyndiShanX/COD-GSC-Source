@@ -1,6 +1,6 @@
 /*************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_pentagon_amb.csc
+ * Script: clientscripts\zombie_pentagon_amb\.csc
 *************************************************/
 
 #include clientscripts\_utility;
@@ -52,7 +52,6 @@ main() {
   level thread play_elevator2_audio();
   level thread play_minigun_loop();
 }
-
 play_elevator1_audio() {
   while(1) {
     level waittill("ele1");
@@ -60,13 +59,12 @@ play_elevator1_audio() {
     playSound(0, "evt_elevator_office_start", ent.origin);
     ent playLoopSound("evt_elevator_office_run", 1);
     level waittill("ele1e");
-    ent stopLoopSound(1);
+    ent stoploopsound(1);
     playSound(0, "evt_elevator_office_stop", ent.origin);
     wait(1);
     ent Delete();
   }
 }
-
 play_elevator2_audio() {
   while(1) {
     level waittill("ele2");
@@ -74,13 +72,12 @@ play_elevator2_audio() {
     playSound(0, "evt_elevator_freight_start", ent.origin);
     ent playLoopSound("evt_elevator_freight_run", 1);
     level waittill("ele2e");
-    ent stopLoopSound(1);
+    ent stoploopsound(1);
     playSound(0, "evt_elevator_freight_stop", ent.origin);
     wait(1);
     ent Delete();
   }
 }
-
 play_minigun_loop() {
   while(1) {
     level waittill("minis");
@@ -88,7 +85,7 @@ play_minigun_loop() {
     ent playLoopSound("zmb_insta_kill_loop");
     level waittill("minie");
     playSound(0, "zmb_insta_kill", (0, 0, 0));
-    ent stopLoopSound(.5);
+    ent stoploopsound(.5);
     wait(.5);
     ent Delete();
   }

@@ -457,7 +457,7 @@ function treasure_chest_think() {
       self waittill("trigger", grabber);
       self.weapon_out = undefined;
       if(isDefined(level.magic_box_grab_by_anyone) && level.magic_box_grab_by_anyone) {
-        if(isplayer(grabber)) {
+        if(isPlayer(grabber)) {
           user = grabber;
         }
       }
@@ -840,9 +840,7 @@ function decide_hide_show_hint(endon_notify, second_endon_notify, onlyplayer, ca
       } else {
         players = getplayers();
         for(i = 0; i < players.size; i++) {
-          if(players[i] can_buy_weapon() && (!isDefined(can_buy_weapon_extra_check_func) || players[i][
-              [can_buy_weapon_extra_check_func]
-            ](self.weapon)) && !players[i] bgb::is_enabled("zm_bgb_disorderly_combat")) {
+          if(players[i] can_buy_weapon() && (!isDefined(can_buy_weapon_extra_check_func) || players[i][[can_buy_weapon_extra_check_func]](self.weapon)) && !players[i] bgb::is_enabled("zm_bgb_disorderly_combat")) {
             self setinvisibletoplayer(players[i], 0);
             continue;
           }
@@ -1044,7 +1042,7 @@ function treasure_chest_weapon_spawn(chest, player, respin) {
       self.weapon_model_dw delete();
       self.weapon_model_dw = undefined;
     }
-    if(isplayer(chest.chest_user) && chest.chest_user bgb::is_enabled("zm_bgb_unbearable")) {
+    if(isPlayer(chest.chest_user) && chest.chest_user bgb::is_enabled("zm_bgb_unbearable")) {
       level.chest_accessed = 0;
       chest.unbearable_respin = 1;
       chest.chest_user notify("zm_bgb_unbearable", chest);

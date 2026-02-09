@@ -241,7 +241,6 @@ getBestHeight(centerPoint) {
     }
     if(trace["position"][2] + 145 > bestHeight) {
       bestHeight = trace["position"][2] + 145;
-
     }
   }
 
@@ -369,7 +368,6 @@ restockPlayerHealth() {
 
     self.owner.health = 100;
   }
-
 }
 
 giveGunnerPerks() {
@@ -581,7 +579,6 @@ heliReturnToDropsite() {
 
     DropOffNodeOrig = closestNode.origin;
     DropOffNodeOrig += (0, 0, 1500);
-
   } else if(closestNode.origin[2] > self.origin[2]) {
     DropOffNodeOrig = closestNode.origin;
   } else {
@@ -635,7 +632,6 @@ heliMovementControl() {
 
     wait 0.05;
   }
-
 }
 
 heliFreeMovementControl() {
@@ -650,7 +646,6 @@ heliFreeMovementControl() {
 
     wait 0.05;
   }
-
 }
 
 manualMoveFree(direction) {
@@ -901,9 +896,7 @@ giveCoolAssGun() {
     }
 
     wait(0.05);
-
   }
-
 }
 
 restockOwnerAmmo() {

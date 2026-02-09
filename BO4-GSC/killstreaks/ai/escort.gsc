@@ -171,7 +171,6 @@ function_cb4925e3(tacpoints) {
     record3dtext("<dev string:x38>", tacpoint.origin + (0, 0, 40), (1, 1, 1), "<dev string:x40>");
 
     recordline(tacpoint.origin + (0, 0, 40), tacpoint.origin, (1, 1, 1), "<dev string:x40>");
-
   }
 
   return validpoints;
@@ -236,7 +235,6 @@ function_b6f15bda() {
         tacpoints = tacticalquery(self.ai.escort.var_db083d2c, cylinder, self, var_8f3583cf, var_84e7232, var_56bd1bef);
       } else {
         recordsphere(var_84e7232, 8, (1, 0, 0), "<dev string:x40>");
-
       }
     }
   }

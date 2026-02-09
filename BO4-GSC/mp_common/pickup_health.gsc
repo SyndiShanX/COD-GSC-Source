@@ -86,7 +86,7 @@ healingdone() {
 }
 
 function_5bb13b48(player) {
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     if(player function_dd4bf8ac(1)) {
       if(isDefined(self.objectiveid)) {
         objective_setinvisibletoplayer(self.objectiveid, player);

@@ -76,7 +76,7 @@ prematch_init() {
 }
 
 function_6eeb5130(a_ents) {
-  setdvar(#"hash_14d0ca427f597ef5", 1);
+  setDvar(#"hash_14d0ca427f597ef5", 1);
 }
 
 function_6e9fced0(a_ents) {

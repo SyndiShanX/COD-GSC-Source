@@ -13,20 +13,16 @@ anim_reach(ents, scene, animname_override) {
   ents = build_ent_array(ents);
   do_anim_reach(ents, scene, undefined, animname_override, false);
 }
-
 anim_reach_aligned(ents, scene, tag, animname_override) {
   ents = build_ent_array(ents);
   do_anim_reach(ents, scene, tag, animname_override, true);
 }
-
 anim_generic_reach(ents, scene) {
   anim_reach(ents, scene, "generic");
 }
-
 anim_generic_reach_aligned(ents, scene, tag) {
   anim_reach_aligned(ents, scene, tag, "generic");
 }
-
 anim_reach_idle(guys, scene, idle) {
   guys = build_ent_array(guys);
   ent = spawnStruct();
@@ -38,7 +34,6 @@ anim_reach_idle(guys, scene, idle) {
     ent waittill("reach_idle_goal");
   }
 }
-
 anim_teleport(ents, scene, tag, animname_override) {
   ents = build_ent_array(ents);
   pos = get_anim_position(tag);
@@ -54,17 +49,14 @@ anim_teleport(ents, scene, tag, animname_override) {
     }
   }
 }
-
 anim_single(ents, scene, animname_override) {
   ents = build_ent_array(ents);
   do_anim_single(ents, scene, undefined, animname_override, false);
 }
-
 anim_single_aligned(ents, scene, tag, animname_override) {
   ents = build_ent_array(ents);
   do_anim_single(ents, scene, tag, animname_override, true);
 }
-
 anim_first_frame(ents, scene, tag, animname_override) {
   pos_array = get_anim_position(tag);
   org = pos_array["origin"];
@@ -72,15 +64,12 @@ anim_first_frame(ents, scene, tag, animname_override) {
   ents = build_ent_array(ents);
   array_levelthread(ents, ::anim_first_frame_on_guy, scene, org, angles, animname_override);
 }
-
 anim_generic(ents, scene) {
   anim_single(ents, scene, "generic");
 }
-
 anim_generic_aligned(ents, scene, tag) {
   anim_single_aligned(ents, scene, tag, "generic");
 }
-
 anim_loop(ents, scene, ender, animname_override) {
   ents = build_ent_array(ents);
   guyPackets = [];
@@ -92,11 +81,9 @@ anim_loop(ents, scene, ender, animname_override) {
   }
   anim_loop_packet(guyPackets, scene, ender, animname_override);
 }
-
 anim_generic_loop(ents, scene, ender) {
   anim_loop(ents, scene, ender, "generic");
 }
-
 anim_loop_aligned(ents, scene, tag, ender, animname_override) {
   ents = build_ent_array(ents);
   guyPackets = [];
@@ -110,11 +97,9 @@ anim_loop_aligned(ents, scene, tag, ender, animname_override) {
   Assert(isDefined(self.angles), "Alignment node does not have angles specified.");
   anim_loop_packet(guyPackets, scene, ender, animname_override);
 }
-
 anim_generic_loop_aligned(ents, scene, tag, ender) {
   anim_loop_aligned(ents, scene, tag, ender, "generic");
 }
-
 anim_custom_animmode(ents, custom_animmode, scene, tag, animname_override) {
   ents = build_ent_array(ents);
   array = get_anim_position(tag);
@@ -127,15 +112,12 @@ anim_custom_animmode(ents, custom_animmode, scene, tag, animname_override) {
   ents[0] wait_until_anim_finishes(scene);
   self notify(scene);
 }
-
 anim_generic_custom_animmode(ents, custom_animmode, scene, tag) {
   anim_custom_animmode(ents, custom_animmode, scene, tag, "generic");
 }
-
 anim_set_time(guys, scene, time) {
   array_thread(guys, ::anim_self_set_time, scene, time);
 }
-
 addNotetrack_dialogue(animname, notetrack, scene, soundalias, pg_soundalias) {
   num = 0;
   if(isDefined(level.scr_notetrack[animname])) {
@@ -146,7 +128,6 @@ addNotetrack_dialogue(animname, notetrack, scene, soundalias, pg_soundalias) {
   level.scr_notetrack[animname][num]["pg_dialog"] = pg_soundalias;
   level.scr_notetrack[animname][num]["scene"] = scene;
 }
-
 removeNotetrack_dialogue(animname, notetrack, scene, soundalias) {
   assertex(isDefined(level.scr_notetrack[animname]), "Animname not found in scr_notetrack.");
   tmp_array = [];
@@ -172,7 +153,6 @@ removeNotetrack_dialogue(animname, notetrack, scene, soundalias) {
   assertex(tmp_array.size < level.scr_notetrack[animname].size, "Notetrack not found.");
   level.scr_notetrack[animname] = tmp_array;
 }
-
 addNotetrack_sound(animname, notetrack, scene, soundalias) {
   array = [];
   array["notetrack"] = notetrack;
@@ -191,14 +171,12 @@ addNotetrack_sound(animname, notetrack, scene, soundalias) {
   }
   level.scr_notetrack[animname][level.scr_notetrack[animname].size] = array;
 }
-
 addOnStart_animSound(animname, scene, soundalias) {
   if(!isDefined(level.scr_animSound[animname])) {
     level.scr_animSound[animname] = [];
   }
   level.scr_animSound[animname][scene] = soundalias;
 }
-
 addNotetrack_animSound(animname, scene, notetrack, soundalias) {
   if(!isDefined(level.scr_notetrack[animname])) {
     level.scr_notetrack[animname] = [];
@@ -210,7 +188,6 @@ addNotetrack_animSound(animname, scene, notetrack, soundalias) {
   array["scene"] = scene;
   level.scr_notetrack[animname][level.scr_notetrack[animname].size] = array;
 }
-
 addNotetrack_attach(animname, notetrack, model, tag, scene) {
   num = 0;
   if(isDefined(level.scr_notetrack[animname])) {
@@ -224,7 +201,6 @@ addNotetrack_attach(animname, notetrack, model, tag, scene) {
   }
   level.scr_notetrack[animname][num]["scene"] = scene;
 }
-
 addNotetrack_detach(animname, notetrack, model, tag, scene) {
   num = 0;
   if(isDefined(level.scr_notetrack[animname])) {
@@ -238,7 +214,6 @@ addNotetrack_detach(animname, notetrack, model, tag, scene) {
   }
   level.scr_notetrack[animname][num]["scene"] = scene;
 }
-
 addNotetrack_fov(animname, notetrack, scene) {
   num = 0;
   if(isDefined(level.scr_notetrack[animname])) {
@@ -251,7 +226,6 @@ addNotetrack_fov(animname, notetrack, scene) {
   }
   level.scr_notetrack[animname][num]["scene"] = scene;
 }
-
 addNotetrack_customFunction(animname, notetrack, function, scene) {
   if(!isDefined(level.scr_notetrack)) {
     level.scr_notetrack[animname] = [];
@@ -267,19 +241,23 @@ addNotetrack_customFunction(animname, notetrack, function, scene) {
   }
   level.scr_notetrack[animname][num]["scene"] = scene;
 }
-
 notetrack_customfunction_exists(animname, notetrack, function, scene) {
   if(isDefined(level.scr_notetrack) && isDefined(level.scr_notetrack[animname])) {
     keys = GetArrayKeys(level.scr_notetrack[animname]);
     for(i = 0; i < keys.size; i++) {
-      if(isDefined(level.scr_notetrack[animname][keys[i]]) && isDefined(level.scr_notetrack[animname][keys[i]]["notetrack"]) && isDefined(level.scr_notetrack[animname][keys[i]]["scene"]) && isDefined(level.scr_notetrack[animname][keys[i]]["function"]) && level.scr_notetrack[animname][keys[i]]["notetrack"] == notetrack && level.scr_notetrack[animname][keys[i]]["scene"] == scene && level.scr_notetrack[animname][keys[i]]["function"] == function) {
+      if(isDefined(level.scr_notetrack[animname][keys[i]]) &&
+        isDefined(level.scr_notetrack[animname][keys[i]]["notetrack"]) &&
+        isDefined(level.scr_notetrack[animname][keys[i]]["scene"]) &&
+        isDefined(level.scr_notetrack[animname][keys[i]]["function"]) &&
+        level.scr_notetrack[animname][keys[i]]["notetrack"] == notetrack &&
+        level.scr_notetrack[animname][keys[i]]["scene"] == scene &&
+        level.scr_notetrack[animname][keys[i]]["function"] == function) {
         return true;
       }
     }
   }
   return false;
 }
-
 addNotetrack_flag(animname, notetrack, flag, scene) {
   if(!isDefined(level.scr_notetrack[animname])) {
     level.scr_notetrack[animname] = [];
@@ -296,7 +274,6 @@ addNotetrack_flag(animname, notetrack, flag, scene) {
     flag_init(flag);
   }
 }
-
 addNotetrack_FXOnTag(animname, scene, notetrack, effect, tag, on_threader) {
   if(!isDefined(level.scr_notetrack) || !isDefined(level.scr_notetrack[animname])) {
     level.scr_notetrack[animname] = [];
@@ -312,7 +289,6 @@ addNotetrack_FXOnTag(animname, scene, notetrack, effect, tag, on_threader) {
   }
   level.scr_notetrack[animname][level.scr_notetrack[animname].size] = add_note;
 }
-
 addNotetrack_exploder(animname, notetrack, exploder, scene) {
   if(!isDefined(level.scr_notetrack[animname])) {
     level.scr_notetrack[animname] = [];
@@ -326,7 +302,6 @@ addNotetrack_exploder(animname, notetrack, exploder, scene) {
   addNote["scene"] = scene;
   level.scr_notetrack[animname][level.scr_notetrack[animname].size] = addNote;
 }
-
 addNotetrack_stop_exploder(animname, notetrack, exploder, scene) {
   if(!isDefined(level.scr_notetrack[animname])) {
     level.scr_notetrack[animname] = [];
@@ -340,21 +315,17 @@ addNotetrack_stop_exploder(animname, notetrack, exploder, scene) {
   addNote["scene"] = scene;
   level.scr_notetrack[animname][level.scr_notetrack[animname].size] = addNote;
 }
-
 set_animname(ents, animname) {
   for(i = 0; i < ents.size; i++) {
     ents[i].animname = animname;
   }
 }
-
 anim_set_blend_in_time(time) {
   self._anim_blend_in_time = time;
 }
-
 anim_set_blend_out_time(time) {
   self._anim_blend_out_time = time;
 }
-
 get_anim(scene, animname) {
   if(!isDefined(animname)) {
     animname = self.animname;
@@ -362,13 +333,12 @@ get_anim(scene, animname) {
   if(isDefined(level.scr_anim[animname])) {
     if(IsArray(level.scr_anim[animname][scene])) {
       total_anims = level.scr_anim[animname][scene].size;
-      anim_index = randomInt(total_anims);
+      anim_index = RandomInt(total_anims);
       return level.scr_anim[animname][scene][anim_index];
     }
     return level.scr_anim[animname][scene];
   }
 }
-
 init() {
   if(!isDefined(level.scr_special_notetrack)) {
     level.scr_special_notetrack = [];
@@ -401,7 +371,6 @@ init() {
     level.scr_radio = [];
   }
 }
-
 build_ent_array(ents) {
   ent_array = [];
   if(IsArray(ents)) {
@@ -411,12 +380,10 @@ build_ent_array(ents) {
   }
   return ent_array;
 }
-
 wait_until_anim_finishes(scene) {
   self endon("finished_custom_animmode" + scene);
   self waittill("death");
 }
-
 endonRemoveAnimActive(endonString, guyPackets) {
   self endon("newAnimActive");
   self waittill(endonString);
@@ -431,7 +398,6 @@ endonRemoveAnimActive(endonString, guyPackets) {
     assert(guy._animactive >= 0);
   }
 }
-
 debug_check(ents, scene, animname_override) {}
 is_a_sound_only_scene(scene, animname) {
   if(!isDefined(animname)) {
@@ -458,7 +424,6 @@ is_a_sound_only_scene(scene, animname) {
   }
   return (has_sound);
 }
-
 assert_existance_of_anim(scene, animname) {}
 anim_first_frame_on_guy(guy, scene, org, angles, animname_override) {
   guy.first_frame_time = GetTime();
@@ -475,7 +440,6 @@ anim_first_frame_on_guy(guy, scene, org, angles, animname_override) {
     guy SetAnimKnob(animation, 1, 0, 0);
   }
 }
-
 anim_custom_animmode_on_guy(guy, custom_animmode, scene, org, angles, animname_override) {
   animname = undefined;
   if(isDefined(animname_override)) {
@@ -492,7 +456,6 @@ anim_custom_animmode_on_guy(guy, custom_animmode, scene, org, angles, animname_o
   guy._animname = animname;
   guy AnimCustom(get_overloaded_func("animscripts\animmode", "main"));
 }
-
 anim_loop_packet(guyPackets, scene, ender, animname_override) {
   if(!isDefined(ender)) {
     ender = "stop_loop";
@@ -567,7 +530,9 @@ anim_loop_packet(guyPackets, scene, ender, animname_override) {
       } else {
         animname = guy.animname;
       }
-      if((isDefined(level.scr_face[animname])) && (isDefined(level.scr_face[animname][scene])) && (isDefined(level.scr_face[animname][scene][idleanim]))) {
+      if((isDefined(level.scr_face[animname])) &&
+        (isDefined(level.scr_face[animname][scene])) &&
+        (isDefined(level.scr_face[animname][scene][idleanim]))) {
         doFacialanim = true;
         facialAnim = level.scr_face[animname][scene][idleanim];
       }
@@ -580,14 +545,17 @@ anim_loop_packet(guyPackets, scene, ender, animname_override) {
         doDialogue = true;
         dialogue = level.scr_sound[animname][scene + "_pg"][idleanim];
       }
-      if(isDefined(level.scr_animSound[animname]) && isDefined(level.scr_animSound[animname][idleanim + scene])) {
+      if(isDefined(level.scr_animSound[animname]) &&
+        isDefined(level.scr_animSound[animname][idleanim + scene])) {
         guy playSound(level.scr_animSound[animname][idleanim + scene]);
       }
-      if((isDefined(level.scr_anim[animname])) && (isDefined(level.scr_anim[animname][scene]))) {
+      if((isDefined(level.scr_anim[animname])) &&
+        (isDefined(level.scr_anim[animname][scene]))) {
         doAnimation = true;
       }
       if(doAnimation) {
-        if(guy.classname == "script_vehicle" && (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
+        if(guy.classname == "script_vehicle" &&
+          (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
           guy.origin = org;
           guy.angles = angles;
           guy SetFlaggedAnimKnobRestart(anim_string, level.scr_anim[animname][scene][idleanim], 1, 0.2, 1);
@@ -620,19 +588,16 @@ anim_loop_packet(guyPackets, scene, ender, animname_override) {
     }
   }
 }
-
 start_notetrack_wait(guy, anim_string, scene, animname) {
   guy notify("stop_sequencing_notetracks");
   thread notetrack_wait(guy, anim_string, scene, animname);
 }
-
 anim_single_failsafeOnGuy(owner, scene) {}
 anim_single_failsafe(guy, scene) {
   for(i = 0; i < guy.size; i++) {
     guy[i] thread anim_single_failsafeOnGuy(self, scene);
   }
 }
-
 do_anim_single(guys, scene, tag, animname_override, aligned) {
   pos = get_anim_position(tag);
   org = pos["origin"];
@@ -675,7 +640,6 @@ do_anim_single(guys, scene, tag, animname_override, aligned) {
   }
   self notify(scene);
 }
-
 anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, tracker) {
   guy = guys[index];
   guy endon("death");
@@ -704,7 +668,8 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
   } else {
     animname = guy.animname;
   }
-  if((isDefined(level.scr_face[animname])) && (isDefined(level.scr_face[animname][scene]))) {
+  if((isDefined(level.scr_face[animname])) &&
+    (isDefined(level.scr_face[animname][scene]))) {
     doFacialanim = true;
     facialAnim = level.scr_face[animname][scene];
   }
@@ -717,10 +682,12 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
     doDialogue = true;
     dialogue = level.scr_sound[animname][scene + "_pg"];
   }
-  if((isDefined(level.scr_look[animname])) && (isDefined(level.scr_look[animname][scene]))) {
+  if((isDefined(level.scr_look[animname])) &&
+    (isDefined(level.scr_look[animname][scene]))) {
     doLook = true;
   }
-  if(isDefined(level.scr_animSound[animname]) && isDefined(level.scr_animSound[animname][scene])) {
+  if(isDefined(level.scr_animSound[animname]) &&
+    isDefined(level.scr_animSound[animname][scene])) {
     guy playSound(level.scr_animSound[animname][scene]);
   }
   animation = guy get_anim(scene, animname_override);
@@ -733,7 +700,8 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
       tracker.scriptedAnimationTime = animtime;
       tracker.scriptedAnimationIndex = index;
     }
-    if(guy.classname == "script_vehicle" && (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
+    if(guy.classname == "script_vehicle" &&
+      (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
       veh_org = GetStartOrigin(org, angles, animation);
       veh_ang = GetStartAngles(org, angles, animation);
       guy.origin = veh_org;
@@ -786,7 +754,6 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
   }
   assertex(isDefined(animation) || doLook || doFacialanim || doDialogue || doText, "Tried to do anim scene " + scene + " on guy with animname " + animname + ", but he didn't have that anim scene.");
 }
-
 wait_for_foot_sync() {
   self endon("death");
   self endon("foot_sync_timeout");
@@ -794,7 +761,6 @@ wait_for_foot_sync() {
   self waittillmatch("runanim", "footstep_left_large");
   self notify("foot_sync");
 }
-
 wait_for_foot_sync_timeout() {
   self endon("foot_sync");
   self endon("death");
@@ -803,37 +769,31 @@ wait_for_foot_sync_timeout() {
   }
   self notify("foot_sync_timeout");
 }
-
 anim_deathNotify(guy, scene) {
   self endon(scene);
   guy waittill("death");
   self notify(scene);
 }
-
 anim_facialEndNotify(guy, scene) {
   self endon(scene);
   guy waittillmatch("face_done_" + scene, "end");
   self notify(scene);
 }
-
 anim_dialogueEndNotify(guy, scene) {
   self endon(scene);
   guy waittill("single dialogue");
   self notify(scene);
 }
-
 anim_animationEndNotify(guy, scene) {
   self endon(scene);
   guy waittillmatch("single anim", "end");
   self notify(scene);
 }
-
 animscriptDoNoteTracksThread(guy, animstring, scene) {
   guy endon("stop_sequencing_notetracks");
   guy endon("death");
   guy DoNoteTracks(animstring);
 }
-
 add_animsound(newSound) {
   for(i = 0; i < level.animsound_hudlimit; i++) {
     if(isDefined(self.animsounds[i])) {
@@ -854,7 +814,6 @@ add_animsound(newSound) {
   }
   self.animSounds[index] = newSound;
 }
-
 animSound_exists(scene, notetrack) {
   keys = GetArrayKeys(self.animSounds);
   for(i = 0; i < keys.size; i++) {
@@ -870,7 +829,6 @@ animSound_exists(scene, notetrack) {
   }
   return false;
 }
-
 animsound_tracker(scene, notetrack, animname) {
   add_to_animsound();
   if(notetrack == "end") {
@@ -886,7 +844,6 @@ animsound_tracker(scene, notetrack, animname) {
   newTrack.end_time = GetTime() + 60000;
   add_animsound(newTrack);
 }
-
 animsound_start_tracker(scene, animname) {
   add_to_animsound();
   newSound = spawnStruct();
@@ -899,7 +856,6 @@ animsound_start_tracker(scene, animname) {
   }
   add_animsound(newSound);
 }
-
 animsound_start_tracker_loop(scene, loop, animname) {
   add_to_animsound();
   scene = loop + scene;
@@ -913,7 +869,6 @@ animsound_start_tracker_loop(scene, loop, animname) {
   }
   add_animsound(newSound);
 }
-
 notetrack_wait(guy, msg, scene, animname_override) {
   guy endon("stop_sequencing_notetracks");
   guy endon("death");
@@ -1002,7 +957,7 @@ notetrack_wait(guy, msg, scene, animname_override) {
                 lerp_time = Int(tokens[2]);
                 get_players()[0] thread lerp_fov_overtime(lerp_time, new_fov, 1);
               } else {
-                get_players()[0] setClientDvar("cg_fov", new_fov);
+                get_players()[0] SetClientDvar("cg_fov", new_fov);
               }
             } else {
               Assert(ToLower(tokens[1]) == "reset");
@@ -1011,7 +966,7 @@ notetrack_wait(guy, msg, scene, animname_override) {
                 lerp_time = Int(tokens[2]);
                 get_players()[0] thread lerp_fov_overtime(lerp_time, 65, 1);
               } else {
-                get_players()[0] setClientDvar("cg_fov", 65);
+                get_players()[0] SetClientDvar("cg_fov", 65);
               }
             }
           }
@@ -1030,8 +985,10 @@ notetrack_wait(guy, msg, scene, animname_override) {
           } else if(isDefined(scr_notetrack["delete model"])) {
             anim_removeModel(guy, scr_notetrack);
           }
-          if((isDefined(scr_notetrack["selftag"])) && (isDefined(scr_notetrack["effect"]))) {
-            playFXOnTag(level._effect[scr_notetrack["effect"]], guy, scr_notetrack["selftag"]);
+          if((isDefined(scr_notetrack["selftag"])) &&
+            (isDefined(scr_notetrack["effect"]))) {
+            playFXOnTag(
+              level._effect[scr_notetrack["effect"]], guy, scr_notetrack["selftag"]);
           }
           if(isDefined(scr_notetrack["tag"]) && isDefined(scr_notetrack["effect"])) {
             playFXOnTag(level._effect[scr_notetrack["effect"]], tag_owner, scr_notetrack["tag"]);
@@ -1054,7 +1011,6 @@ notetrack_wait(guy, msg, scene, animname_override) {
     }
   }
 }
-
 anim_addModel(guy, array) {
   if(!isDefined(guy.ScriptModel)) {
     guy.ScriptModel = [];
@@ -1065,7 +1021,6 @@ anim_addModel(guy, array) {
   guy.ScriptModel[index].origin = guy GetTagOrigin(array["selftag"]);
   guy.ScriptModel[index].angles = guy GetTagAngles(array["selftag"]);
 }
-
 anim_removeModel(guy, array) {
   for(i = 0; i < guy.ScriptModel.size; i++) {
     if(isDefined(array["explosion"])) {
@@ -1078,7 +1033,6 @@ anim_removeModel(guy, array) {
     guy.scriptModel[i] delete();
   }
 }
-
 anim_facial(guy, i, dialogueString, animname) {
   facialAnim = undefined;
   if(isDefined(level.scr_notetrack[animname][i]["facial"])) {
@@ -1092,7 +1046,6 @@ anim_facial(guy, i, dialogueString, animname) {
   }
   guy SaySpecificDialogue(facialAnim, dialogue, 1.0);
 }
-
 gun_pickup_left() {
   if(!isDefined(self.gun_on_ground)) {
     return;
@@ -1101,7 +1054,6 @@ gun_pickup_left() {
   self.dropWeapon = true;
   self animscripts\shared::placeWeaponOn(self.weapon, "left");
 }
-
 gun_pickup_right() {
   if(!isDefined(self.gun_on_ground)) {
     return;
@@ -1110,7 +1062,6 @@ gun_pickup_right() {
   self.dropWeapon = true;
   self animscripts\shared::placeWeaponOn(self.weapon, "right");
 }
-
 gun_leave_behind(scr_notetrack) {
   if(isDefined(self.gun_on_ground)) {
     return;
@@ -1124,10 +1075,9 @@ gun_leave_behind(scr_notetrack) {
   self animscripts\shared::placeWeaponOn(self.weapon, "none");
   self.dropWeapon = false;
 }
-
 anim_weight(animname, scene) {
   total_anims = level.scr_anim[animname][scene].size;
-  idleanim = randomInt(total_anims);
+  idleanim = RandomInt(total_anims);
   if(total_anims > 1) {
     weights = 0;
     anim_weight = 0;
@@ -1153,7 +1103,6 @@ anim_weight(animname, scene) {
   }
   return idleanim;
 }
-
 get_anim_position(tag) {
   org = undefined;
   angles = undefined;
@@ -1169,7 +1118,6 @@ get_anim_position(tag) {
   array["origin"] = org;
   return array;
 }
-
 do_anim_reach(guys, scene, tag, animname_override, aligned) {
   array = get_anim_position(tag);
   org = array["origin"];
@@ -1205,7 +1153,6 @@ do_anim_reach(guys, scene, tag, animname_override, aligned) {
     threads--;
   }
 }
-
 anim_spawner_teleport(guy, scene, tag) {
   pos = get_anim_position(tag);
   org = pos["origin"];
@@ -1216,13 +1163,11 @@ anim_spawner_teleport(guy, scene, tag) {
     guy[i].origin = startorg;
   }
 }
-
 reach_death_notify(guy) {
   self endon("reach_notify");
   self waittill_any("death", "_anim_reach", "_anim_playing", "_anim_stopped");
   self notify("reach_notify");
 }
-
 begin_anim_reach(guy, tracker, startorg, disablearrivals, aligned) {
   guy endon("death");
   guy notify("stop_going_to_node");
@@ -1233,7 +1178,8 @@ begin_anim_reach(guy, tracker, startorg, disablearrivals, aligned) {
   guy._anim_old_disablearrivals = guy.disablearrivals;
   guy._anim_old_fixednode = guy.fixednode;
   goal = startorg;
-  if(vector_compare(self.origin, startorg) && isDefined(self.type) && GetSubStr(self.type, 0, 5) == "Cover") {
+  if(vector_compare(self.origin, startorg) &&
+    isDefined(self.type) && GetSubStr(self.type, 0, 5) == "Cover") {
     guy.a.coverIdleOnly = true;
     disablearrivals = false;
     goal = self;
@@ -1257,7 +1203,6 @@ begin_anim_reach(guy, tracker, startorg, disablearrivals, aligned) {
   guy waittill("goal");
   tracker notify("reach_notify");
 }
-
 end_anim_reach() {
   self endon("death");
   self waittill_any("_anim_reach", "_anim_playing", "_anim_stopped");
@@ -1268,17 +1213,14 @@ end_anim_reach() {
   self._anim_old_fixednode = undefined;
   self._anim_old_disablearrivals = undefined;
 }
-
 get_animtree(guy) {
   for(i = 0; i < guy.size; i++) {
     guy[i] UseAnimTree(level.scr_animtree[guy[i].animname]);
   }
 }
-
 SetAnimTree() {
   self UseAnimTree(level.scr_animtree[self.animname]);
 }
-
 anim_single_queue(guy, scene, tag) {
   assertex(isDefined(scene), "Tried to do anim_single_queue without passing a scene name (scene)");
   if(isDefined(guy.last_queue_time)) {
@@ -1287,13 +1229,11 @@ anim_single_queue(guy, scene, tag) {
   function_stack(::anim_single_aligned, guy, scene, tag);
   guy.last_queue_time = GetTime();
 }
-
 anim_pushPlayer(guy) {
   for(i = 0; i < guy.size; i++) {
     guy[i] PushPlayer(true);
   }
 }
-
 addNotetrack_custom(animname, scene, notetrack, index1_str, index1_val, index2_str, index2_val) {
   if(!isDefined(level.scr_notetrack[animname])) {
     level.scr_notetrack[animname] = [];
@@ -1308,7 +1248,6 @@ addNotetrack_custom(animname, scene, notetrack, index1_str, index1_val, index2_s
   }
   level.scr_notetrack[animname][num] = add_note;
 }
-
 anim_ents(ents, scene, tag, animname) {
   ents = build_ent_array(ents);
   pos = get_anim_position(tag);
@@ -1344,8 +1283,8 @@ anim_ents(ents, scene, tag, animname) {
     self notify(scene);
   }
 }
-
 #using_animtree("generic_human");
+
 anim_look(guy, scene, array) {
   guy endon("death");
   self endon(scene);
@@ -1378,7 +1317,6 @@ anim_look(guy, scene, array) {
     wait(changeTime);
   }
 }
-
 anim_facialAnim(guy, scene, faceanim) {
   guy endon("death");
   self endon(scene);
@@ -1391,7 +1329,6 @@ anim_facialAnim(guy, scene, faceanim) {
   guy setflaggedanimknobrestart("face_done_" + scene, faceanim, 1, 0, 1);
   thread clearFaceAnimOnAnimdone(guy, "face_done_" + scene, scene);
 }
-
 anim_facialFiller(msg, lookTarget) {
   self endon("death");
   changeTime = 0.05;
@@ -1410,7 +1347,6 @@ anim_facialFiller(msg, lookTarget) {
   changeTime = 0.3;
   self ClearAnim(%scripted_look_straight, changeTime);
 }
-
 set_talker_until_msg(msg, talkanim) {
   self endon(msg);
   for(;;) {
@@ -1418,7 +1354,6 @@ set_talker_until_msg(msg, talkanim) {
     wait(0.05);
   }
 }
-
 talk_for_time(timer) {
   self endon("death");
   talkAnim = % generic_talker_allies;
@@ -1432,13 +1367,11 @@ talk_for_time(timer) {
   self ClearAnim(%scripted_talking, 0.1);
   self ClearAnim(%scripted_look_straight, changeTime);
 }
-
 GetYawAngles(angles1, angles2) {
   yaw = angles1[1] - angles2[1];
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 chatAtTarget(msg, lookTarget) {
   self endon(msg);
   self endon("death");
@@ -1491,7 +1424,6 @@ chatAtTarget(msg, lookTarget) {
     wait(changeTime);
   }
 }
-
 lookRecenter(msg) {
   self endon("newLookTarget");
   self endon("death");
@@ -1503,7 +1435,6 @@ lookRecenter(msg) {
   wait(0.2);
   self ClearAnim(%scripted_look_straight, 0.2);
 }
-
 lookLine(org, msg) {
   self notify("lookline");
   self endon("lookline");
@@ -1514,14 +1445,12 @@ lookLine(org, msg) {
     wait(0.05);
   }
 }
-
 reach_idle(guy, scene, idle, ent) {
   anim_reach_aligned(guy, scene);
   ent.count--;
   ent notify("reach_idle_goal");
   anim_loop(guy, idle);
 }
-
 delayedDialogue(scene, doAnimation, dialogue, animationName) {
   assertex(animhasnotetrack(animationName, "dialog"), "Animation " + scene + " does not have a dialog notetrack.");
   self waittillmatch("face_done_" + scene, "dialog");
@@ -1531,14 +1460,12 @@ delayedDialogue(scene, doAnimation, dialogue, animationName) {
     self SaySpecificDialogue(undefined, dialogue, 1.0, "single dialogue");
   }
 }
-
 clearFaceAnimOnAnimdone(guy, msg, scene) {
   guy endon("death");
   guy waittillmatch(msg, "end");
   changeTime = 0.3;
   guy ClearAnim(%scripted_look_straight, changeTime);
 }
-
 anim_start_pos(ents, scene, tag) {
   ents = build_ent_array(ents);
   pos = get_anim_position(tag);
@@ -1546,7 +1473,6 @@ anim_start_pos(ents, scene, tag) {
   angles = pos["angles"];
   array_thread(ents, ::set_start_pos, scene, org, angles);
 }
-
 set_start_pos(scene, org, angles, animname_override) {
   if(IsSentient(self)) {
     origin = GetStartOrigin(org, angles, get_anim(scene, animname_override));
@@ -1557,7 +1483,6 @@ set_start_pos(scene, org, angles, animname_override) {
     self.angles = GetStartAngles(org, angles, get_anim(scene, animname_override));
   }
 }
-
 add_to_animsound() {
   if(!isDefined(self.animSounds)) {
     self.animSounds = [];
@@ -1573,11 +1498,9 @@ add_to_animsound() {
     level.animSounds[level.animSounds.size] = self;
   }
 }
-
 anim_self_set_time(scene, time) {
   self SetAnimTime(self getanim(scene), time);
 }
-
 last_anim_time_check() {
   if(!isDefined(self.last_anim_time)) {
     self.last_anim_time = GetTime();
@@ -1589,42 +1512,36 @@ last_anim_time_check() {
   }
   self.last_anim_time = time;
 }
-
 loopanim_sound_exists(animname, scene, idleanim) {
   if(isDefined(level.scr_sound[animname]) && isDefined(level.scr_sound[animname][scene]) && isDefined(level.scr_sound[animname][scene][idleanim])) {
     return true;
   }
   return false;
 }
-
 pg_loopanim_sound_exists(animname, scene, idleanim) {
   if(isDefined(level.scr_sound[animname]) && isDefined(level.scr_sound[animname][scene + "_pg"]) && isDefined(level.scr_sound[animname][scene + "_pg"][idleanim])) {
     return true;
   }
   return false;
 }
-
 sound_exists(animname, scene) {
   if(isDefined(level.scr_sound[animname]) && isDefined(level.scr_sound[animname][scene])) {
     return true;
   }
   return false;
 }
-
 animation_exists(animname, scene) {
   if(isDefined(level.scr_anim[animname]) && isDefined(level.scr_anim[animname][scene])) {
     return true;
   }
   return false;
 }
-
 pg_sound_exists(animname, scene) {
   if(isDefined(level.scr_sound[animname]) && isDefined(level.scr_sound[animname][scene + "_pg"])) {
     return true;
   }
   return false;
 }
-
 earlyout_animscripted(animation, cut_time, blend_time) {
   DEFAULT_CUT_TIME = 0.3;
   self endon("death");

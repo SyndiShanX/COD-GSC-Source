@@ -53,7 +53,6 @@ function_4ac6cf37(var_5ea5c94d) {
     playsoundatposition(#"hash_4ff9e8e25196f463", (0, 0, 0));
 
     iprintlnbold("<dev string:x38>");
-
   }
 }
 

@@ -386,7 +386,7 @@ event_handler[entity_spawned] codecallback_entityspawned(eventstruct) {
 }
 
 event_handler[enter_vehicle] codecallback_entervehicle(eventstruct) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.var_69b47c50)) {
       self[[level.var_69b47c50]](eventstruct.localclientnum, eventstruct.vehicle);
     }
@@ -402,7 +402,7 @@ event_handler[enter_vehicle] codecallback_entervehicle(eventstruct) {
 }
 
 event_handler[exit_vehicle] codecallback_exitvehicle(eventstruct) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.var_db2ec524)) {
       self[[level.var_db2ec524]](eventstruct.localclientnum, eventstruct.vehicle);
     }
@@ -731,13 +731,13 @@ fade_to_black_for_x_sec(startwait, blackscreenwait, fadeintime, fadeouttime, sha
 }
 
 event_handler[ui_fadeblackscreen] codecallback_fadeblackscreen(eventstruct) {
-  if(isDefined(self) && isplayer(self) && !isbot(self) && self function_21c0fa55()) {
+  if(isDefined(self) && isPlayer(self) && !isbot(self) && self function_21c0fa55()) {
     self thread fade_to_black_for_x_sec(0, eventstruct.duration, eventstruct.blend, eventstruct.blend);
   }
 }
 
 event_handler[event_40f83b44] function_4b5ab05f(eventstruct) {
-  if(isDefined(self) && isplayer(self) && !isbot(self) && self function_21c0fa55()) {
+  if(isDefined(self) && isPlayer(self) && !isbot(self) && self function_21c0fa55()) {
     self thread fade_to_black_for_x_sec(0, eventstruct.duration, eventstruct.blend_out, eventstruct.blend_in);
   }
 }

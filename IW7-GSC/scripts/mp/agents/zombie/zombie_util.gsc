@@ -59,7 +59,7 @@ blendlinktoplayerviewmotion(var_0) {
         var_1 = var_2.origin;
       }
     }
-  } else if(isplayer(var_0) && var_0 isjumping() || var_0 ishighjumping()) {
+  } else if(isPlayer(var_0) && var_0 isjumping() || var_0 ishighjumping()) {
     if(!isDefined(var_0.var_D399)) {
       var_0.var_D399 = 0;
     }
@@ -185,9 +185,7 @@ func_7FB1(var_0, var_1) {
       var_8 = var_2[var_12];
       if(!isDefined(var_11) && gettime() - var_8.var_11931 >= self.var_B641) {
         if(isDefined(level.var_12892) && isDefined(level.var_12892[self.agent_type])) {
-          [
-            [level.var_12892[self.agent_type]]
-          ](var_8, var_3, self.var_252B, self.fgetarg);
+          [[level.var_12892[self.agent_type]]](var_8, var_3, self.var_252B, self.fgetarg);
         } else {
           func_12892(var_8, var_3, self.var_252B, self.fgetarg);
         }
@@ -458,7 +456,7 @@ func_9DE0(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_3 = var_0 getvelocity()[2];
     if(abs(var_3) > 12) {
       return 0;
@@ -624,7 +622,7 @@ func_13D9A() {
 
 func_13D9B() {
   var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq;
-  if(!var_0 && isplayer(self.curmeleetarget) || isagent(self.curmeleetarget)) {
+  if(!var_0 && isPlayer(self.curmeleetarget) || isagent(self.curmeleetarget)) {
     var_1 = undefined;
     var_1 = self.curmeleetarget func_845B();
     if(isDefined(var_1) && isDefined(var_1.var_336) && var_1.var_336 == "care_package") {
@@ -632,7 +630,7 @@ func_13D9B() {
     }
   }
 
-  if(!var_0 && isplayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
+  if(!var_0 && isPlayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
     if(length(self getvelocity()) < 5) {
       var_0 = distancesquared(self.origin, self.curmeleetarget.origin) <= self.meleeradiusbasesq * 4;
     }
@@ -690,7 +688,7 @@ func_A00D(var_0) {
   var_1 = 0;
   var_2 = var_0[2] - self.origin[2];
   var_1 = var_2 <= self.var_2539 && var_2 >= self.var_253A;
-  if(!var_1 && isplayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
+  if(!var_1 && isPlayer(self.curmeleetarget) && scripts\engine\utility::istrue(self.curmeleetarget.var_9E46)) {
     if(length(self getvelocity()) < 5) {
       var_1 = var_2 <= self.var_2539 * 2 && var_2 >= self.var_253A;
     }
@@ -718,11 +716,11 @@ func_9E97() {
 ismeleeblocked_default() {
   var_0 = self.origin + (0, 0, self.var_B5F9);
   var_1 = self.curmeleetarget.origin + (0, 0, self.var_B5F9);
-  if(!isplayer(self.curmeleetarget) && !isai(self.curmeleetarget)) {
+  if(!isPlayer(self.curmeleetarget) && !isai(self.curmeleetarget)) {
     return 0;
   }
 
-  if(isplayer(self.curmeleetarget)) {
+  if(isPlayer(self.curmeleetarget)) {
     if(self.curmeleetarget isusingturret()) {
       return 0;
     }

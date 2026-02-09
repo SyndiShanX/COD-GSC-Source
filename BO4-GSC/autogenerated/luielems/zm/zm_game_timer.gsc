@@ -36,7 +36,6 @@ class czm_game_timer: cluielem {
     cluielem::add_clientfield("minutes", 1, 9, "int");
     cluielem::add_clientfield("showzero", 1, 1, "int");
   }
-
 }
 
 register(uid) {

@@ -631,5 +631,4 @@ class careadefend {
     m_b_started = 0;
     update_usetrigger_hintstring();
   }
-
 }

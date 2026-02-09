@@ -1558,7 +1558,7 @@ gunship_attack() {
     }
   }
 
-  var_3 = getdvar("ai_friendlyFireBlockDuration");
+  var_3 = getDvar("ai_friendlyFireBlockDuration");
   setsaveddvar("ai_friendlyFireBlockDuration", 0);
   thread player_handle_speed_for_knockdown();
   thread allies_gunship_run();
@@ -1937,7 +1937,7 @@ gunship_death() {
         wait 1;
 
         if(isalive(self) && self istouching(var_3)) {
-          setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
+          setDvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
           maps\_utility::missionfailedwrapper();
           self kill();
         }
@@ -1947,7 +1947,7 @@ gunship_death() {
     if(var_1 >= 30.0) {
       maps\carrier_code::gunship_line_attack_death();
       wait 1;
-      setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
+      setDvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
       maps\_utility::missionfailedwrapper();
       self kill();
     }
@@ -2044,7 +2044,7 @@ kill_trigger(var_0, var_1, var_2, var_3) {
 
         if(level.player is_touching_any(var_0)) {
           wait 1;
-          setdvar("ui_deadquote", &"CARRIER_FAIL_FAR_AWAY");
+          setDvar("ui_deadquote", &"CARRIER_FAIL_FAR_AWAY");
           maps\_utility::missionfailedwrapper();
         }
       }

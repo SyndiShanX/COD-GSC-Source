@@ -139,7 +139,6 @@ _id_3F71() {
 
   if(isDefined(level.players[1])) {
     level._id_4BFB = 0;
-
   }
   foreach(var_1 in level.players) {
     var_1 takeallweapons();
@@ -155,7 +154,6 @@ _id_3F71() {
 _id_4BFF(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   objective_add(maps\_utility::_id_2816(var_0), "active", var_1);
   objective_current(maps\_utility::_id_2816(var_0));
@@ -205,7 +203,6 @@ _id_4C02() {
 
   if(!level._id_4BFB) {
     var_1 = getEntArray("exit_hint_multi", "targetname");
-
   }
   var_2 = [];
 
@@ -252,7 +249,6 @@ _id_4C06(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     objective_setpointertextoverride(3, &"SO_ZODIAC2_NY_HARBOR_HINT_EXIT");
-
   }
   while(distance(self.origin, var_3.origin) > 96) {
     wait 0.05;
@@ -459,7 +455,6 @@ _id_4C18() {
 
       while(var_0 istouching(self)) {
         wait 0.05;
-
       }
       self allowprone(1);
     }
@@ -509,7 +504,6 @@ _id_4BF0(var_0, var_1) {
 
   if(isarray(maps\_utility::_id_270F(var_1))) {
     var_1 = var_1 + "_nl";
-
   }
   var_0 maps\_anim::_id_11C0(var_2, var_1);
   var_2 notsolid();
@@ -535,7 +529,6 @@ _id_4C1F() {
 
   if(level.gameskill > 1) {
     maps\_utility::_id_1A5A("axis", ::_id_02B0);
-
   }
   level._id_4C20 = _id_4C6D(undefined, "thermite_entrance", undefined, 75);
   level._id_4C20 _id_4C25("hatch_open");
@@ -551,7 +544,6 @@ _id_02B0() {
 
   if(isDefined(self)) {
     self.ignoreall = 1;
-
   }
   common_scripts\utility::flag_wait("start_jet_strafe");
   wait 1.25;
@@ -596,7 +588,6 @@ _id_4C23() {
 
       while(common_scripts\utility::flag("laststand_downed")) {
         wait 0.05;
-
       }
       var_0.origin = (50, 50, 50);
     }
@@ -618,7 +609,6 @@ _id_4C24(var_0) {
 _id_4C25(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 75;
-
   }
   level._id_4656 = self[0];
   level._id_4656._id_4C26 = [];
@@ -649,7 +639,6 @@ _id_4C28() {
     var_1 = getEntArray("multi_player", "script_noteworthy");
   } else {
     var_1 = getEntArray("single_player", "script_noteworthy");
-
   }
   foreach(var_3 in var_1) {}
   var_3 delete();
@@ -753,7 +742,6 @@ _id_4C33(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = 50;
-
   }
   while(!level._id_4656._id_4C34) {
     wait 0.05;
@@ -804,7 +792,6 @@ _id_4C33(var_0, var_1, var_2) {
 _id_4C36(var_0) {
   if(isDefined(var_0)) {
     var_0 delete();
-
   }
   if(isDefined(level._id_4656)) {
     level._id_4656 hide();
@@ -814,7 +801,6 @@ _id_4C36(var_0) {
 _id_4C37(var_0) {
   if(isDefined(var_0)) {
     var_0 delete();
-
   }
   self forceusehintoff();
 }
@@ -822,7 +808,6 @@ _id_4C37(var_0) {
 _id_4C38(var_0) {
   if(isDefined(var_0)) {
     var_0 delete();
-
   }
   level._id_4656 _id_40CB();
   self forceusehintoff();
@@ -1033,7 +1018,6 @@ _id_4C4E() {
 _id_4C50(var_0) {
   if(isDefined(var_0)) {
     var_0 delete();
-
   }
   if(level._id_4C4A._id_41B4 > 0) {
     level._id_4C4A thread _id_4C55();
@@ -1078,7 +1062,6 @@ _id_4C53(var_0) {
 _id_4C54() {
   while(!level._id_4C4F) {
     wait 0.05;
-
   }
   self playLoopSound("sub_emt_vent_steamy");
   var_0 = _id_4C9A(self);
@@ -1303,7 +1286,6 @@ _id_4C63(var_0) {
       var_1 notsolid();
     } else {
       var_1 solid();
-
     }
     if(common_scripts\utility::flag("door_3_is_open") && !_id_4C64(var_2)) {
       var_1 solid();
@@ -1404,7 +1386,6 @@ _id_4C68(var_0, var_1, var_2, var_3, var_4) {
 _id_4C69() {
   while(isDefined(self) && self.health > 10) {
     wait 0.05;
-
   }
   if(isDefined(self)) {
     self stopanimscripted();
@@ -1436,7 +1417,6 @@ _id_4C6D(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_0)) {
     var_0 = var_5.size;
-
   }
   foreach(var_7 in var_5) {}
   var_7 hide();
@@ -1453,7 +1433,6 @@ _id_4C6D(var_0, var_1, var_2, var_3) {
 _id_4C6E(var_0) {
   if(isDefined(var_0)) {
     level waittill(var_0);
-
   }
   var_1 = self gettagangles("tag_fx");
   var_2 = anglestoup(var_1);
@@ -1472,14 +1451,12 @@ _id_4C6E(var_0) {
 _id_4C6F() {
   if(!isDefined(self._id_4C34)) {
     self._id_4C34 = 0;
-
   }
   while(!self._id_4C34) {
     if(isDefined(self)) {
       thread maps\_utility::play_sound_on_entity("veh_mine_beep");
     } else {
       break;
-
     }
     wait 1;
   }
@@ -1499,7 +1476,6 @@ _id_4C70(var_0, var_1) {
 
           if(level.bombs == 1) {
             level notify("one_bomb_left");
-
           }
           if(level.bombs == var_1.size) {
             level notify("one_bomb_defused");
@@ -1560,7 +1536,6 @@ _id_4C75() {
       level._id_4C74 _id_4C76(0);
     } else {
       level._id_4C74 _id_4C76(1);
-
     }
     wait 0.05;
   }
@@ -1581,7 +1556,6 @@ _id_4C77(var_0, var_1) {
 
   while(level._id_4C4F) {
     wait 0.5;
-
   }
   if(!common_scripts\utility::flag(var_1)) {
     var_3 = blackout(&"SO_ZODIAC2_NY_HARBOR_HINT_FAIL");
@@ -1896,7 +1870,6 @@ _id_4C8F(var_0) {
   for(var_2 = 0; var_2 < var_1; var_2++) {
     if(isDefined(var_0)) {
       _id_4C2F("mp7_reflex", 15, var_0.origin, self);
-
     }
     wait 0.05;
   }
@@ -1954,7 +1927,6 @@ _id_4C92(var_0) {
 
       if(level._id_4C93 == level.players.size) {
         common_scripts\utility::flag_set("close_hatch");
-
       }
       break;
     }
@@ -2069,7 +2041,6 @@ _id_4C9F(var_0) {
       var_3[var_4] = 1;
     } else {
       wait 4;
-
     }
     var_2[var_2.size] = _id_4B5B(var_0[var_4][0]);
     _id_4B61(var_0[var_4][1]);
@@ -2456,11 +2427,9 @@ _id_4CA3(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   var_0 = var_0 + 2;
   var_5 = undefined;
@@ -2469,7 +2438,6 @@ _id_4CA3(var_0, var_1, var_2, var_3, var_4) {
     var_5 = maps\_hud_util::_id_09A5(-60, undefined, var_3, 1);
   } else {
     var_5 = maps\_hud_util::_id_09A5(-60, undefined, undefined, 1);
-
   }
   var_5.alignx = "center";
   var_5.aligny = "top";
@@ -2487,7 +2455,6 @@ _id_4CA3(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     var_5.label = var_2;
-
   }
   if(!isDefined(var_4) || !var_4) {
     if(isDefined(var_3)) {
@@ -2551,7 +2518,6 @@ _id_4CA8(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_2)) {
     var_2 = &"SPECIAL_OPS_STARTING_IN";
-
   }
   var_5 = _id_4CA3(0, -60, var_2, var_4);
   var_5 setpulsefx(50, var_0 * 1000, 500);
@@ -2563,7 +2529,6 @@ _id_4CA8(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_1) && var_1) {
     level._id_16CF = gettime();
-
   }
   thread _id_4CA9(var_5, var_6);
 }
@@ -2571,7 +2536,6 @@ _id_4CA8(var_0, var_1, var_2, var_3, var_4) {
 _id_4CA9(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     common_scripts\utility::flag_wait(var_2);
-
   }
   wait 1;
 
@@ -2731,7 +2695,7 @@ _id_4CB2() {
   var_0 = getent("smoke_kills_vol", "targetname");
   self waittill("death", var_1, var_2, var_3);
 
-  if(isplayer(var_1) && var_0 istouching(self)) {
+  if(isPlayer(var_1) && var_0 istouching(self)) {
     var_1._id_16C0++;
     var_1 notify("bonus1_count", var_1._id_16C0);
   }
@@ -2740,11 +2704,9 @@ _id_4CB2() {
 _id_4CB3(var_0, var_1) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(!isDefined(var_1)) {
     return 0;
-
   }
   if(var_0 == "MOD_MELEE") {
     return 1;

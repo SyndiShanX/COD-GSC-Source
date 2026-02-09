@@ -12,13 +12,11 @@ _id_68B1(var_0, var_1) {
     level._id_68B2 = "viewhands_player_udt";
   } else {
     level._id_68B2 = var_0;
-
   }
   if(!isDefined(var_1)) {
     level._id_68B3 = "vehicle_zodiac_viewmodel";
   } else {
     level._id_68B3 = var_1;
-
   }
   level._id_68B4 = "viewmodel_miniUZI";
   level._id_68B5 = "uzi";
@@ -57,7 +55,6 @@ _id_68B9(var_0, var_1) {
 
   if(!isDefined(var_1) || !isDefined(var_0)) {
     var_3 thread _id_68BE(var_2, var_0, var_1);
-
   }
   var_3 thread _id_68C3(var_2);
   var_3 thread _id_68C6(var_2, var_1);
@@ -100,7 +97,6 @@ _id_68BE(var_0, var_1, var_2) {
     var_8 = "player";
   } else {
     var_8 = "price";
-
   }
   if(!isDefined(var_1)) {
     var_3["price"] = 1000000;
@@ -130,7 +126,6 @@ _id_68BE(var_0, var_1, var_2) {
 
     if(var_8 == "price") {
       var_13 = level._id_4877;
-
     }
     var_14 = var_13.origin;
     var_15 = var_7["player"];
@@ -151,12 +146,10 @@ _id_68BE(var_0, var_1, var_2) {
       if(isDefined(var_17._id_0EF1)) {
         if(var_17._id_0EF1 == level._id_68C2) {
           var_9 = var_3[var_8];
-
         }
         var_9 = var_4[var_8];
       } else {
         var_9 = var_5[var_8];
-
       }
       var_19 = distancesquared(var_18, var_14);
 
@@ -239,7 +232,6 @@ _id_68C5(var_0, var_1) {
 
   if(common_scripts\utility::flag("player_can_die_on_zodiac")) {
     maps\_utility::_id_1887();
-
   }
   wait 1.0;
 }
@@ -269,7 +261,6 @@ _id_68C7(var_0, var_1) {
 
       if(isDefined(level._id_68B8[var_4])) {
         var_4 = level._id_68B8[var_4];
-
       }
       var_0 playSound(var_4);
       continue;
@@ -385,7 +376,6 @@ _id_68CF(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     return var_3;
-
   }
   var_11 = var_0 gettagangles("tag_flash");
   var_12 = anglesToForward(var_11);
@@ -433,7 +423,6 @@ _id_68D4() {
 
   while(maps\_utility::_id_26AD(self.origin, 0.5)) {
     wait 0.05;
-
   }
   self._id_439F = 1;
 }
@@ -443,11 +432,9 @@ _id_68D5(var_0, var_1, var_2) {
 
   if(!isDefined(var_3["entity"])) {
     return 0;
-
   }
   if(var_3["entity"] != var_0) {
     return 0;
-
   }
   return 1;
 }
@@ -460,7 +447,6 @@ _id_68D6(var_0) {
     magicbullet(level._id_68B5, var_1, var_1 + (0, 0, 255), self);
   } else {
     magicbullet(level._id_68B5, var_1, var_2.origin, self);
-
   }
   playFXOnTag(level._id_68B6, var_0, "tag_flash");
   playFXOnTag(level._id_68B7, var_0, "tag_brass");
@@ -471,7 +457,6 @@ _id_68D6(var_0) {
   }
   if(!isai(var_2._id_2816)) {
     var_2._id_2816 notify("damage", 50, level.player, self.origin, var_2._id_2816.origin, "MOD_PISTOL_BULLET", "", "");
-
   }
   if(isDefined(var_2._id_68D0)) {
     _id_68D7(var_2._id_2816);
@@ -548,7 +533,6 @@ _id_68D9(var_0) {
         var_0 setanimknoblimitedrestart(var_0 maps\_utility::_id_1281("uzi_last_fire"), 1.0, 0.0, 1.0);
       } else {
         var_0 setanimknoblimitedrestart(var_0 maps\_utility::_id_1281("uzi_fire"), 1.0, 0.0, 1.0);
-
       }
       _id_68D6(var_0);
       wait 0.05;
@@ -608,7 +592,6 @@ _id_68DB(var_0, var_1) {
 _id_68DC() {
   if(!level.console) {
     return self attackbuttonpressed();
-
   }
   return self vehicleattackbuttonpressed();
 }
@@ -645,7 +628,6 @@ _id_6870() {
 _id_68DD() {
   if(!isDefined(level.player.vehicle)) {
     return 1;
-
   }
   return common_scripts\utility::flag("player_shot_on_zodiac");
 }
@@ -653,7 +635,6 @@ _id_68DD() {
 _id_68DE() {
   if(!isDefined(level.player.vehicle)) {
     return 1;
-
   }
   return level.player.vehicle.veh_speed > 10;
 }
@@ -675,7 +656,6 @@ _id_68DF(var_0) {
       }
     } else {
       var_0._id_68E0 = 0;
-
     }
     wait 1;
   }
@@ -693,7 +673,6 @@ _id_68E1() {
 _id_68E2() {
   if(!isDefined(self.vehicle)) {
     return 1;
-
   }
   return self.vehicle._id_68E0 < 3;
 }

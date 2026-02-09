@@ -5,13 +5,13 @@
 
 main() {
   level.tweakfile = true;
-  setdvar("scr_fog_exp_halfplane", "3759.28");
-  setdvar("scr_fog_exp_halfheight", "243.735");
-  setdvar("scr_fog_nearplane", "601.593");
-  setdvar("scr_fog_red", "0.806694");
-  setdvar("scr_fog_green", "0.962521");
-  setdvar("scr_fog_blue", "0.9624");
-  setdvar("scr_fog_baseheight", "-475.268");
+  setDvar("scr_fog_exp_halfplane", "3759.28");
+  setDvar("scr_fog_exp_halfheight", "243.735");
+  setDvar("scr_fog_nearplane", "601.593");
+  setDvar("scr_fog_red", "0.806694");
+  setDvar("scr_fog_green", "0.962521");
+  setDvar("scr_fog_blue", "0.9624");
+  setDvar("scr_fog_baseheight", "-475.268");
   start_dist = 433.577;
   half_dist = 482.154;
   half_height = 30960.7;
@@ -31,7 +31,7 @@ main() {
   time = 0;
   max_fog_opacity = 0.881155;
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
-  visionSetNaked("zombie_pentagon", 0);
+  visionsetnaked("zombie_pentagon", 0);
   SetSavedDvar("r_lightGridEnableTweaks", 1);
   SetSavedDvar("r_lightGridIntensity", 1.3);
   SetSavedDvar("r_lightGridContrast", .15);

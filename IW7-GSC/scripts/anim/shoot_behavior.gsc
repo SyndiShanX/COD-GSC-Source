@@ -344,7 +344,7 @@ func_DD7D() {
     return 0;
   }
 
-  if(isplayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
+  if(isPlayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
     if(gettime() < self.var_4740 + 3000) {
       return 0;
     }
@@ -392,7 +392,7 @@ func_8C4D() {
 }
 
 func_FFC6() {
-  return level.var_7683 == 3 && isplayer(self.enemy);
+  return level.var_7683 == 3 && isPlayer(self.enemy);
 }
 
 func_F842() {

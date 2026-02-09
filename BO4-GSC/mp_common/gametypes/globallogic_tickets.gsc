@@ -82,7 +82,7 @@ setup_death_penalties(team) {
 on_player_killed() {
   player = self;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

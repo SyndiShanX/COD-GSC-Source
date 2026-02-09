@@ -195,7 +195,7 @@ ch_hardpoints(var_0) {
 }
 
 ch_vehicle_kills(var_0) {
-  if(!isDefined(var_0.attacker) || !isplayer(var_0.attacker)) {
+  if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker)) {
     return;
   }
   if(!maps\mp\_utility::iskillstreakweapon(var_0.sweapon)) {
@@ -253,7 +253,7 @@ ch_vehicle_kills(var_0) {
 }
 
 ch_vehicle_killed(var_0) {
-  if(!isDefined(var_0.attacker) || !isplayer(var_0.attacker)) {
+  if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker)) {
     return;
   }
   var_1 = var_0.attacker;
@@ -356,7 +356,7 @@ ishighestscoringplayer(var_0) {
 ch_kills(var_0) {
   var_0.victim playerdied();
 
-  if(!isDefined(var_0.attacker) || !isplayer(var_0.attacker))
+  if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker))
     return;
   else
     var_1 = var_0.attacker;
@@ -1058,7 +1058,7 @@ ch_roundwin(var_0) {
 }
 
 playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -1078,7 +1078,7 @@ playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.shitloc = var_5;
   var_6.victimonground = var_6.victim isonground();
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_6.attackerinlaststand = isDefined(var_6.attacker.laststand);
     var_6.attackeronground = var_6.attacker isonground();
     var_6.attackerstance = var_6.attacker getstance();
@@ -1112,7 +1112,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9.duetodisconnect = var_8;
   var_9.victimonground = var_9.victim isonground();
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_9.attackerinlaststand = isDefined(var_9.attacker.laststand);
     var_9.attackeronground = var_9.attacker isonground();
     var_9.attackerstance = var_9.attacker getstance();
@@ -1126,7 +1126,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   if(isDefined(var_9.einflictor) && isDefined(var_9.einflictor.firedads))
     var_10 = var_9.einflictor.firedads;
-  else if(isDefined(var_1) && isplayer(var_1))
+  else if(isDefined(var_1) && isPlayer(var_1))
     var_10 = var_1 playerads();
 
   var_9.was_ads = 0;
@@ -1214,7 +1214,7 @@ roundend(var_0) {
   } else {
     for(var_3 = 0; var_3 < level.placement["all"].size; var_3++) {
       var_1.player = level.placement["all"][var_3];
-      var_1.winner = isDefined(var_0) && isplayer(var_0) && var_1.player == var_0;
+      var_1.winner = isDefined(var_0) && isPlayer(var_0) && var_1.player == var_0;
       var_1.place = var_3;
       domissioncallback("roundEnd", var_1);
     }
@@ -1902,7 +1902,7 @@ buildchallengetableinfo(var_0, var_1) {
 buildchallegeinfo() {
   level.challengeinfo = [];
 
-  if(getdvar("virtualLobbyActive") == "1") {
+  if(getDvar("virtualLobbyActive") == "1") {
     return;
   }
   var_0 = 0;

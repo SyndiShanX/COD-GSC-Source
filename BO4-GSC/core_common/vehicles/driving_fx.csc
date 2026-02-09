@@ -9,7 +9,7 @@
 #namespace driving_fx;
 
 event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

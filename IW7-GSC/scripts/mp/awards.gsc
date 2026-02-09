@@ -199,7 +199,7 @@ func_B8E6(var_0) {
 }
 
 givemidmatchaward(var_0, var_1, var_2, var_3) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

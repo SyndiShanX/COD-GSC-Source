@@ -7,6 +7,7 @@
 #include common_scripts\utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 init() {
   if(!maps\_zombiemode_equipment::is_equipment_included("equip_hacker_zm")) {
     return;
@@ -22,7 +23,6 @@ init() {
     level thread hacker_debug();
   }
 }
-
 hacker_round_reward() {
   while(1) {
     level waittill("end_of_round");
@@ -47,7 +47,6 @@ hacker_round_reward() {
     }
   }
 }
-
 hacker_debug() {
   while(1) {
     for(i = 0; i < level._hackable_objects.size; i++) {
@@ -69,7 +68,6 @@ hacker_debug() {
     wait(0.1);
   }
 }
-
 hacker_trigger_pool_think() {
   if(!isDefined(level._zombie_hacker_trigger_pool_size)) {
     level._zombie_hacker_trigger_pool_size = 8;
@@ -92,7 +90,6 @@ hacker_trigger_pool_think() {
     wait(0.1);
   }
 }
-
 destroy_pooled_items() {
   pool_active = false;
   for(i = 0; i < level._hacker_pool.size; i++) {
@@ -101,7 +98,6 @@ destroy_pooled_items() {
   }
   level._hacker_pool = [];
 }
-
 sweep_pooled_items() {
   new_hacker_pool = [];
   for(i = 0; i < level._hacker_pool.size; i++) {
@@ -114,7 +110,6 @@ sweep_pooled_items() {
   }
   level._hacker_pool = new_hacker_pool;
 }
-
 should_pooled_object_exist() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -134,7 +129,6 @@ should_pooled_object_exist() {
   }
   return false;
 }
-
 add_eligable_pooled_items() {
   candidates = [];
   for(i = 0; i < level._hackable_objects.size; i++) {
@@ -167,7 +161,6 @@ add_eligable_pooled_items() {
     level._hacker_pool[level._hacker_pool.size] = candidate;
   }
 }
-
 any_hackers_active() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -177,7 +170,6 @@ any_hackers_active() {
   }
   return false;;
 }
-
 register_hackable(name, callback_func, qualifier_func) {
   structs = getstructarray(name, "script_noteworthy");
   if(!isDefined(structs)) {
@@ -189,7 +181,7 @@ register_hackable(name, callback_func, qualifier_func) {
       structs[i]._hack_qualifier_func = qualifier_func;
       structs[i].pooled = level._hacker_pooled;
       if(isDefined(structs[i].targetname)) {
-        structs[i].hacker_target = getEnt(structs[i].targetname, "targetname");
+        structs[i].hacker_target = GetEnt(structs[i].targetname, "targetname");
       }
       level._hackable_objects[level._hackable_objects.size] = structs[i];
       if(isDefined(level._hacker_pooled)) {
@@ -200,14 +192,13 @@ register_hackable(name, callback_func, qualifier_func) {
     }
   }
 }
-
 register_hackable_struct(struct, callback_func, qualifier_func) {
   if(!is_in_array(level._hackable_objects, struct)) {
     struct._hack_callback_func = callback_func;
     struct._hack_qualifier_func = qualifier_func;
     struct.pooled = level._hacker_pooled;
     if(isDefined(struct.targetname)) {
-      struct.hacker_target = getEnt(struct.targetname, "targetname");
+      struct.hacker_target = GetEnt(struct.targetname, "targetname");
     }
     level._hackable_objects[level._hackable_objects.size] = struct;
     if(isDefined(level._hacker_pooled)) {
@@ -216,19 +207,16 @@ register_hackable_struct(struct, callback_func, qualifier_func) {
     struct thread hackable_object_thread();
   }
 }
-
 register_pooled_hackable_struct(struct, callback_func, qualifier_func) {
   level._hacker_pooled = true;
   register_hackable_struct(struct, callback_func, qualifier_func);
   level._hacker_pooled = undefined;
 }
-
 register_pooled_hackable(name, callback_func, qualifier_func) {
   level._hacker_pooled = true;
   register_hackable(name, callback_func, qualifier_func);
   level._hacker_pooled = undefined;
 }
-
 deregister_hackable_struct(struct) {
   if(is_in_array(level._hackable_objects, struct)) {
     new_list = [];
@@ -249,7 +237,6 @@ deregister_hackable_struct(struct) {
     level._hackable_objects = new_list;
   }
 }
-
 deregister_hackable(noteworthy) {
   new_list = [];
   for(i = 0; i < level._hackable_objects.size; i++) {
@@ -267,7 +254,6 @@ deregister_hackable(noteworthy) {
   }
   level._hackable_objects = new_list;
 }
-
 hack_trigger_think() {
   while(1) {
     players = get_players();
@@ -291,7 +277,6 @@ hack_trigger_think() {
     wait(0.1);
   }
 }
-
 is_facing(facee) {
   orientation = self getPlayerAngles();
   forwardVec = anglesToForward(orientation);
@@ -307,7 +292,6 @@ is_facing(facee) {
   }
   return (dotProduct > dot_limit);
 }
-
 can_hack(hackable) {
   if(!isAlive(self)) {
     return false;
@@ -365,11 +349,9 @@ can_hack(hackable) {
   }
   return true;
 }
-
 is_hacking(hackable) {
   return (can_hack(hackable) && self UseButtonPressed());
 }
-
 set_hack_hint_string() {
   if(isDefined(self._trigger)) {
     if(isDefined(self.custom_string)) {
@@ -383,7 +365,6 @@ set_hack_hint_string() {
     }
   }
 }
-
 tidy_on_deregister(hackable) {
   self endon("clean_up_tidy_up");
   hackable waittill("hackable_deregistered");
@@ -394,7 +375,6 @@ tidy_on_deregister(hackable) {
     self.hackerTextHud destroy();
   }
 }
-
 hacker_do_hack(hackable) {
   timer = 0;
   hacked = false;
@@ -438,7 +418,7 @@ hacker_do_hack(hackable) {
       break;
     }
   }
-  self stopLoopSound(.5);
+  self stoploopsound(.5);
   if(hacked) {
     self playSound("vox_mcomp_hack_success");
   } else {
@@ -457,14 +437,12 @@ hacker_do_hack(hackable) {
   self notify("clean_up_tidy_up");
   return hacked;
 }
-
 lowreadywatcher(player) {
   player endon("disconnected");
   self endon("kill_lowreadywatcher");
   self waittill("hackable_deregistered");
   player setlowready(0);
 }
-
 hackable_object_thread() {
   self endon("hackable_deregistered");
   height = 72;
@@ -547,7 +525,6 @@ hackable_object_thread() {
     }
   }
 }
-
 hacker_on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
@@ -563,12 +540,10 @@ hacker_on_player_connect() {
     struct thread player_hack_disconnect_watcher(player);
   }
 }
-
 player_hack_disconnect_watcher(player) {
   player waittill("disconnect");
   deregister_hackable_struct(self);
 }
-
 player_hack(hacker) {
   if(isDefined(self.entity)) {
     self.entity maps\_zombiemode_score::player_add_points("hacker_transfer", 500);
@@ -577,7 +552,6 @@ player_hack(hacker) {
     hacker thread maps\_zombiemode_audio::create_and_play_dialog("general", "hack_plr");
   }
 }
-
 player_qualifier(player) {
   if(player == self.entity) {
     return false;
@@ -593,7 +567,6 @@ player_qualifier(player) {
   }
   return true;
 }
-
 hide_hint_when_hackers_active(custom_logic_func, custom_logic_func_param) {
   invis_to_any = 0;
   while(1) {
@@ -622,5 +595,4 @@ hide_hint_when_hackers_active(custom_logic_func, custom_logic_func_param) {
     wait(0.1);
   }
 }
-
 hacker_debug_print(msg, color) {}

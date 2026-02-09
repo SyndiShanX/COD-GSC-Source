@@ -10,7 +10,6 @@ _id_3C52() {}
 _id_3C53(var_0) {
   if(self hasperk(var_0, 1)) {
     return 1;
-
   }
   self clearperks();
 
@@ -141,7 +140,6 @@ _id_3C64() {
 
     while(common_scripts\utility::flag("HUD_taking_perk")) {
       wait 0.05;
-
     }
     wait 1;
     common_scripts\utility::flag_clear("HUD_giving_perk");
@@ -157,7 +155,6 @@ _id_3C65() {
 
     while(common_scripts\utility::flag("HUD_giving_perk")) {
       wait 0.05;
-
     }
     wait 1;
     common_scripts\utility::flag_clear("HUD_taking_perk");

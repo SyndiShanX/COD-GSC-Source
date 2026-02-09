@@ -23,7 +23,7 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_downhill_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_downhill");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";

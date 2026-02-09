@@ -578,7 +578,7 @@ create_and_play_dialog(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_10 = level.vox.speaker[self.zmbvoxid].prefixes[var_12[0]];
   var_8 = level.vox.speaker[self.zmbvoxid].alias[var_0][var_1];
 
-  if(isplayer(self) || maps\mp\zombies\_util::is_true(self.fakeplayer)) {
+  if(isPlayer(self) || maps\mp\zombies\_util::is_true(self.fakeplayer)) {
     if(self.sessionstate != "playing") {
       return 0;
     }
@@ -1023,7 +1023,7 @@ player_cured() {
 }
 
 zombie_hurt(var_0, var_1) {
-  if(isDefined(var_0) && isplayer(var_0) && var_1 < self.health) {
+  if(isDefined(var_0) && isPlayer(var_0) && var_1 < self.health) {
     if(var_0 isjumping()) {
       var_0 thread playerlaugh();
     } else if(isDefined(self.agent_type) && self.agent_type == "zombie_host") {
@@ -1238,7 +1238,7 @@ arenearbyspeakersactive() {
     if(self == var_5) {
       continue;
     }
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       if(var_5.sessionstate != "playing" || maps\mp\zombies\_util::isplayerinlaststand(var_5)) {
         continue;
       }
@@ -1715,7 +1715,7 @@ getanycharacterbyprefixexcept(var_0) {
 }
 
 play_weapon_vo(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_0 = getweaponbasename(var_0);

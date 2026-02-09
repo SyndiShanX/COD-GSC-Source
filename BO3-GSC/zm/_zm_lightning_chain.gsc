@@ -242,7 +242,7 @@ function private lc_do_damage(source_enemy, arc_num, player, params) {
       self.deathpoints_already_given = 1;
       player zm_score::player_add_points("death", "", "");
     }
-    if(isDefined(params.challenge_stat_name) && isDefined(player) && isplayer(player)) {
+    if(isDefined(params.challenge_stat_name) && isDefined(player) && isPlayer(player)) {
       player zm_stats::increment_challenge_stat(params.challenge_stat_name);
     }
   }

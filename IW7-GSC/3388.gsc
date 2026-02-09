@@ -121,15 +121,15 @@ kill_zombies(var_0, var_1) {
   var_2 = var_0.var_1270F;
   for(;;) {
     var_2 waittill("trigger", var_3);
-    if(!isplayer(var_3) && !scripts\cp\utility::should_be_affected_by_trap(var_3, undefined, 1) && isDefined(var_3.agent_type) && var_3.agent_type != "zombie_brute") {
+    if(!isPlayer(var_3) && !scripts\cp\utility::should_be_affected_by_trap(var_3, undefined, 1) && isDefined(var_3.agent_type) && var_3.agent_type != "zombie_brute") {
       continue;
     }
 
-    if(!isDefined(var_3.agent_type) && !isplayer(var_3)) {
+    if(!isDefined(var_3.agent_type) && !isPlayer(var_3)) {
       continue;
     }
 
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       var_3 dodamage(25, self.body.origin);
       var_3 setvelocity(vectornormalize(var_3.origin - self.body.origin) * 500);
       continue;

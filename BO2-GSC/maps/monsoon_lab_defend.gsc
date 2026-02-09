@@ -129,8 +129,9 @@ lab_defend_main() {
   level thread blast_doors_close();
   level.isaac thread isaac_defend_scene();
 
-  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on"))
+  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
     level.player ent_flag_clear("camo_suit_on");
+  }
 
   run_scene("player_isaac_interact");
   level.player setlowready(1);
@@ -141,8 +142,9 @@ lab_defend_main() {
 watch_assault_shield_damage() {
   self waittill("damage", idamage, eattacker, direction, point, type, tagname, modelname, partname, weaponname);
 
-  if(weaponname == "riotshield_sp" && eattacker == level.player)
+  if(weaponname == "riotshield_sp" && eattacker == level.player) {
     idamage = self.health + 30;
+  }
 
   return idamage;
 }
@@ -171,8 +173,9 @@ blast_doors_close() {
   e_lab_blast_doors disconnectpaths();
   a_blast_door_nodes = getnodearray("blast_door_nodes", "targetname");
 
-  foreach(node in a_blast_door_nodes)
-  node node_disconnect_from_path();
+  foreach(node in a_blast_door_nodes) {
+    node node_disconnect_from_path();
+  }
 
   end_scene("cower_3_loop");
   delete_scene_all("cower_3_loop");
@@ -417,8 +420,9 @@ lab_defend_event_timer() {
   a_lab_defend_spawners = getEntArray("lab_defend_spawners", "script_noteworthy");
 
   foreach(spawner in a_lab_defend_spawners) {
-    if(isDefined(spawner))
+    if(isDefined(spawner)) {
       spawner delete();
+    }
 
     wait 0.05;
   }
@@ -426,8 +430,9 @@ lab_defend_event_timer() {
   a_last_stand_enemies = getEntArray("last_stand_enemies", "script_noteworthy");
 
   foreach(spawner in a_last_stand_enemies) {
-    if(isDefined(spawner))
+    if(isDefined(spawner)) {
       spawner delete();
+    }
 
     wait 0.05;
   }
@@ -442,14 +447,16 @@ lab_defend_event_timer() {
 
   vh_right_defend_turret = getent("right_defend_turret", "targetname");
 
-  if(isDefined(vh_right_defend_turret))
+  if(isDefined(vh_right_defend_turret)) {
     vh_right_defend_turret notify("death");
+  }
 
   wait 1;
   vh_left_defend_turret = getent("left_defend_turret", "targetname");
 
-  if(isDefined(vh_left_defend_turret))
+  if(isDefined(vh_left_defend_turret)) {
     vh_left_defend_turret notify("death");
+  }
 
   wait 0.05;
   a_ai_axis = getaiarray("axis");
@@ -457,8 +464,9 @@ lab_defend_event_timer() {
   a_defend_asds = getEntArray("defend_asds", "script_noteworthy");
 
   foreach(asd in a_defend_asds) {
-    if(issentient(asd))
+    if(issentient(asd)) {
       asd notify("death");
+    }
   }
 
   level.salazar queue_dialog("sala_we_re_clear_0", 0.25);
@@ -473,8 +481,9 @@ asd_wall_crash() {
   flag_wait("start_asd_wall_crash");
   defend_crash_hide = getEntArray("defend_crash_hide", "targetname");
 
-  foreach(piece in defend_crash_hide)
-  piece hide();
+  foreach(piece in defend_crash_hide) {
+    piece hide();
+  }
 
   m_defend_crash_hide = getent("defend_crash_hide", "targetname");
   m_defend_crash_hide connectpaths();
@@ -484,8 +493,9 @@ asd_wall_crash() {
   level.player playrumbleonentity("damage_heavy");
   n_distance = distancesquared(s_wall_blast_pos.origin, level.player.origin);
 
-  if(n_distance < 400)
+  if(n_distance < 400) {
     level.player kill();
+  }
 
   exploder(2000);
   level notify("fxanim_defend_room_01_start");
@@ -501,8 +511,9 @@ asd_wall_crash() {
   s_wall_blast_pos = getstruct("wall_blast_pos", "targetname");
   n_distance = distancesquared(s_wall_blast_pos.origin, level.player.origin);
 
-  if(n_distance < 240)
+  if(n_distance < 240) {
     level.player kill();
+  }
 }
 
 init_defend_left_asd() {
@@ -586,14 +597,16 @@ asd_intro_destruction() {
   level.player playrumbleonentity("damage_heavy");
   defend_pillar_hide = getEntArray("defend_pillar_hide", "targetname");
 
-  foreach(piece in defend_pillar_hide)
-  piece hide();
+  foreach(piece in defend_pillar_hide) {
+    piece hide();
+  }
 
   level notify("fxanim_defend_room_02_start");
   defend_pillar_show = getEntArray("defend_pillar_show", "targetname");
 
-  foreach(piece in defend_pillar_show)
-  piece show();
+  foreach(piece in defend_pillar_show) {
+    piece show();
+  }
 }
 
 ceiling_rappelers() {

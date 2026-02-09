@@ -6,10 +6,11 @@
 #include maps\_vehicle;
 
 main() {
-  if(self.vehicletype == "jeep_ultimate")
+  if(self.vehicletype == "jeep_ultimate") {
     build_aianims(::setanims, ::set_vehicle_anims_ultimate);
-  else
+  } else {
     build_aianims(::setanims, ::set_vehicle_anims);
+  }
 
   build_unload_groups(::unload_groups);
 }
@@ -37,8 +38,9 @@ set_vehicle_anims_ultimate(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 4; i++)
+  for(i = 0; i < 4; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

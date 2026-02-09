@@ -316,7 +316,6 @@ player_look() {
     avogadro_print("player_look ignored");
     self avogadro_exit("chamber");
   }
-
 }
 
 chase_player() {
@@ -1093,7 +1092,6 @@ avogadro_pain_watcher() {
     self.in_pain = 0;
 
     avogadro_print("in_pain for too long");
-
   }
 }
 
@@ -1132,7 +1130,7 @@ avogadro_pain(einflictor) {
     self notify("stop_bus_attack");
     level notify("avogadro_defeated");
 
-    if(isDefined(einflictor) && isplayer(einflictor)) {
+    if(isDefined(einflictor) && isPlayer(einflictor)) {
       einflictor maps\mp\zombies\_zm_stats::increment_client_stat("avogadro_defeated", 0);
       einflictor maps\mp\zombies\_zm_stats::increment_player_stat("avogadro_defeated");
     }
@@ -1215,7 +1213,7 @@ avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
     return false;
 
   if(smeansofdeath == "MOD_MELEE") {
-    if(isplayer(einflictor)) {
+    if(isPlayer(einflictor)) {
       if(isDefined(einflictor.avogadro_melee_time)) {}
 
       if(self.shield) {
@@ -1244,13 +1242,12 @@ avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
 
       avogadro_print("hit_by_melee: " + self.hit_by_melee);
 
-      if(isplayer(einflictor)) {
+      if(isPlayer(einflictor)) {
         einflictor thread do_player_general_vox("general", "avogadro_wound", 30, 35);
         level notify("avogadro_stabbed", self);
       }
     } else {
       avogadro_print("shield up, no damage");
-
     }
   } else
     self update_damage_absorbed(idamage);
@@ -1267,7 +1264,6 @@ update_damage_absorbed(damage) {
       self.hit_by_melee--;
 
       avogadro_print("regen - hit_by_melee: " + self.hit_by_melee);
-
     }
   }
 }
@@ -1321,7 +1317,6 @@ avogadro_debug_axis() {
 
     wait 0.1;
   }
-
 }
 
 avogadro_print(str) {

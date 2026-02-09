@@ -32,7 +32,7 @@ init_shared(var_4b51853b) {
   level.var_87226c31.var_925bbb2 = [];
   level.var_87226c31.objectivezones = [];
   level.var_94029383 = &function_4ee7d46a;
-  setdvar(#"hash_430cc236fe8b2561", 8);
+  setDvar(#"hash_430cc236fe8b2561", 8);
   ability_player::register_gadget_should_notify(37, 1);
   weaponobjects::function_e6400478(#"eq_concertina_wire", &function_57955e51, 1);
   callback::on_spawned(&on_player_spawned);
@@ -45,7 +45,7 @@ init_shared(var_4b51853b) {
   clientfield::register("scriptmover", "concertinaWireDroopyBits", 1, 3, "int");
   level.var_87226c31.var_ff1a491d = level.var_87226c31.bundle.var_76d79155 * level.var_87226c31.bundle.var_76d79155;
   level.var_87226c31.bucklerweapon = getweapon(#"sig_buckler_turret");
-  setdvar(#"hash_753335900deb89ea", 25);
+  setDvar(#"hash_753335900deb89ea", 25);
 }
 
 startgametype() {
@@ -84,7 +84,7 @@ onplayerkilled(s_params) {
   weapon = s_params.weapon;
   var_4fd6205f = isDefined(self.var_c6a21b50.owner) ? self.var_c6a21b50.owner == s_params.eattacker : 0;
 
-  if(!isDefined(s_params.eattacker) || !isplayer(s_params.eattacker)) {
+  if(!isDefined(s_params.eattacker) || !isPlayer(s_params.eattacker)) {
     return;
   }
 
@@ -477,7 +477,7 @@ ondamage() {
   while(true) {
     waitresult = self waittill(#"damage");
 
-    if(isDefined(waitresult.attacker) && isplayer(waitresult.attacker) && getdvarint(#"survival_prototype", 0) == 0) {
+    if(isDefined(waitresult.attacker) && isPlayer(waitresult.attacker) && getdvarint(#"survival_prototype", 0) == 0) {
       if(waitresult.amount > 0 && damagefeedback::dodamagefeedback(waitresult.weapon, waitresult.attacker)) {
         waitresult.attacker damagefeedback::update(waitresult.mod, waitresult.inflictor, undefined, waitresult.weapon, self);
       }
@@ -681,7 +681,7 @@ function_f067d867(concertinawire) {
     waitresult = concertinawire.trigger waittill(#"trigger");
     player = waitresult.activator;
 
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       isenemy = isDefined(concertinawire.owner) && isDefined(player.owner) && (!level.teambased || util::function_fbce7263(player.team, concertinawire.owner.team)) && player.owner != concertinawire.owner;
 
       if(isDefined(player.killstreaktype) && (player.killstreaktype == "recon_car" || player.killstreaktype == "inventory_recon_car") && isenemy) {

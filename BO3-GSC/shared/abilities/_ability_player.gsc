@@ -94,7 +94,7 @@ function on_player_disconnect() {
 }
 
 function is_using_any_gadget() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return false;
   }
   for(i = 0; i < 3; i++) {
@@ -552,9 +552,9 @@ function abilities_print(str) {
 }
 
 function abilities_devgui_init() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", 0);
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", 0);
   if(isdedicated()) {
     return;
   }
@@ -668,7 +668,7 @@ function abilities_devgui_think() {
         break;
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }
@@ -705,7 +705,7 @@ function abilities_devgui_handle_player_command(cmd, playercallback, pcb_param) 
   } else {
     array::thread_all(getplayers(), playercallback, pcb_param);
   }
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function abilities_devgui_power_fill() {

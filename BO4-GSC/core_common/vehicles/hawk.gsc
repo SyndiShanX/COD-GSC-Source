@@ -34,7 +34,7 @@ hawk_initialize() {
 }
 
 event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -51,7 +51,7 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 }
 
 event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -111,7 +111,7 @@ on_vehicle_killed(params) {
   if(isDefined(params)) {
     attacker = params.eattacker;
 
-    if(isDefined(attacker) && isplayer(attacker) && isDefined(self.team) && self.team !== attacker.team) {
+    if(isDefined(attacker) && isPlayer(attacker) && isDefined(self.team) && self.team !== attacker.team) {
       if(isDefined(self.owner)) {
         self.owner thread killstreaks::play_taacom_dialog("hawkWeaponDestroyedEnemy");
       }

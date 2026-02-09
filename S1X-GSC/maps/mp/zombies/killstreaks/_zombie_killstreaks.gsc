@@ -637,7 +637,7 @@ moneycratethink(var_0) {
 modifydamagekillstreak(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_2;
 
-  if(isplayer(var_1) && isagent(var_0)) {
+  if(isPlayer(var_1) && isagent(var_0)) {
     if(maps\mp\zombies\_util::is_true(self.resistanttosquadmatedamage)) {
       return int(var_5 * 0.5);
     } else {

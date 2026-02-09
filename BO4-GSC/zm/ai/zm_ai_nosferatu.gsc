@@ -217,7 +217,7 @@ function_a13721f(inflictor, attacker, damage, idflags, meansofdeath, weapon, poi
     damage = 0;
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(weapon) && attacker zm_utility::function_aa45670f(weapon, 0)) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(weapon) && attacker zm_utility::function_aa45670f(weapon, 0)) {
     if(gettime() >= self.ai.var_9465ce93) {
       self.ai.var_9465ce93 = gettime() + randomintrange(4500, 5500);
       self clientfield::increment("nfrtu_silver_hit_fx");
@@ -660,7 +660,6 @@ function_76d6482e(entity) {
   if(var_c9528359 == 0) {
     iprintlnbold("<dev string:xf3>");
   }
-
 }
 
 function_13b48cdd(var_c9528359, queryresult) {

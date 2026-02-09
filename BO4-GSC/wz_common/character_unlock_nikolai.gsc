@@ -31,7 +31,7 @@ function_2613aeec(enabled) {
 }
 
 function_19a80b40(var_a0ffe134) {
-  if(!isplayer(self) || !isDefined(var_a0ffe134)) {
+  if(!isPlayer(self) || !isDefined(var_a0ffe134)) {
     return;
   }
 
@@ -73,7 +73,7 @@ function_8bf71bd6() {
 
   player = self.var_38af96b9.originalowner;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

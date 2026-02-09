@@ -390,7 +390,7 @@ function wait_for_first_stepon() {
   level endon("hash_be6d0796");
   while(true) {
     self waittill("trigger", who);
-    if(isDefined(who) && isplayer(who)) {
+    if(isDefined(who) && isPlayer(who)) {
       who thread zm_audio::create_and_play_dialog("eggs", "quest1", 1);
       break;
     }

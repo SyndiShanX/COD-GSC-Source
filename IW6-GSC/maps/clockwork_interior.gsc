@@ -597,7 +597,7 @@ handle_drilling(var_0, var_1) {
           level.player playrumbleonentity("drill_through");
 
           if(level.drill_bink) {
-            setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_BACKPLATE");
+            setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_BACKPLATE");
             maps\_utility::missionfailedwrapper();
           } else
             wait 10;
@@ -1870,14 +1870,14 @@ catch_interrupt_notify() {
 catch_death_notify() {
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0))
     self notify("death_by_player");
 }
 
 catch_damage_notify() {
   self waittill("damage", var_0, var_1);
 
-  if(isDefined(var_1) && isplayer(var_1))
+  if(isDefined(var_1) && isPlayer(var_1))
     self notify("damage_by_player");
 }
 

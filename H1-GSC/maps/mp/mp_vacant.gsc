@@ -13,8 +13,8 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_vacant_dlc");
   game["attackers"] = "axis";
   game["defenders"] = "allies";
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   thread delete_botconnect_clip();
   maps\mp\_utility::hardpointtriggerswap((718, -571, 4), "patch_hp_zone_trigger_3");
 }

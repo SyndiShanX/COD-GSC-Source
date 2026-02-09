@@ -214,7 +214,6 @@ removeDisconnectedPlayerFromPlacement() {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
-
 }
 
 updatePlacement() {

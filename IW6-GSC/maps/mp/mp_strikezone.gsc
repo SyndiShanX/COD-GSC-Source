@@ -41,15 +41,15 @@ main() {
 
   level.vision_set_stage = 0;
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", .3);
-  setdvar("r_reactiveMotionWindFrequencyScale", .5);
+  setDvar("r_reactiveMotionWindAmplitudeScale", .3);
+  setDvar("r_reactiveMotionWindFrequencyScale", .5);
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_diffuseColorScale", 1.639, 1.5);
   setdvar_cg_ng("r_specularcolorscale", 2.5, 3);
-  setdvar("r_ssaorejectdepth", 1500);
-  setdvar("r_ssaofadedepth", 1200);
+  setDvar("r_ssaorejectdepth", 1500);
+  setDvar("r_ssaofadedepth", 1200);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -58,9 +58,9 @@ main() {
   game["axis_outfit"] = "desert";
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.6");
+    setDvar("sm_sunShadowScale", "0.6");
   } else if(level.xenon) {
-    setdvar("sm_sunShadowScale", "0.7");
+    setDvar("sm_sunShadowScale", "0.7");
   }
 
   level.pre_org = getstruct("world_origin_pre", "targetname");
@@ -98,7 +98,7 @@ vision_set_stage_test() {
       waitframe();
     } else {
       set_vision_set_stage(value, GetDvarFloat("vision_set_stage_fade_time"));
-      SetDvar(dvar_name, default_value);
+      setDvar(dvar_name, default_value);
     }
   }
 }
@@ -524,7 +524,6 @@ generic_swing_ents() {
 
     pivot ScriptModelPlayAnim(swing_anims[swing.script_noteworthy]);
   }
-
 }
 
 fall_objects() {

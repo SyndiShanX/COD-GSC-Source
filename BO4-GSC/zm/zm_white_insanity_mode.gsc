@@ -155,7 +155,6 @@ insanity_mode_step1_setup(var_5ea5c94d) {
         level flag::clear(#"hash_13cf89176254a394");
 
         iprintlnbold("<dev string:x38>");
-
       }
     }
   }
@@ -340,7 +339,6 @@ function_3d4b148b() {
     arrayremovevalue(level.var_c2511d7b, s_waitresult.e_who);
 
     iprintlnbold("<dev string:x145>" + level.var_c2511d7b.size);
-
   }
 
   level flag::set(#"hash_7cd09ec15b9808a9");

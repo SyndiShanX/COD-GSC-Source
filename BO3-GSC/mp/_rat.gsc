@@ -21,7 +21,7 @@ function __init__() {
   level.rat.common.gethostplayer = &util::gethostplayer;
   level.rat.deathcount = 0;
   rat_shared::addratscriptcmd("", &rscaddenemy);
-  setdvar("", 0);
+  setDvar("", 0);
 }
 
 function rscaddenemy(params) {
@@ -61,5 +61,5 @@ function testenemy(team) {
 function deathcounter() {
   self waittill("death");
   level.rat.deathcount++;
-  setdvar("", level.rat.deathcount);
+  setDvar("", level.rat.deathcount);
 }

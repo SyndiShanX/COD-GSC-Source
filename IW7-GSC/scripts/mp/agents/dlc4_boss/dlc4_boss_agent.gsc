@@ -142,7 +142,7 @@ func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_2 = 0;
   }
 
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     var_2 = 0;
   }
 
@@ -170,7 +170,7 @@ ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
     return;
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
   }
 

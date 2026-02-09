@@ -1453,7 +1453,7 @@ vehicle_kill() {
           self.damage_type = undefined;
       }
 
-      if(maps\_utility::is_specialop() && !maps\_utility::is_survival() && isDefined(var_4) && isplayer(var_4)) {
+      if(maps\_utility::is_specialop() && !maps\_utility::is_survival() && isDefined(var_4) && isPlayer(var_4)) {
         if(var_4.team != self.script_team)
           var_4 thread maps\_utility::givexp("kill", 500);
 
@@ -1797,7 +1797,7 @@ vehicle_do_crash_hold_and_check_should_end() {
 }
 
 vehicle_do_crash_helicopter(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     self.achievement_attacker = var_0;
     thread maps\_utility::arcademode_kill(self.origin, "explosive", 1000);
   }
@@ -3053,7 +3053,7 @@ damage_hint_bullet_only() {
   while(isDefined(self)) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(isDefined(self.has_semtex_on_it)) {
@@ -3093,7 +3093,7 @@ damage_hints() {
   while(isDefined(self)) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(isDefined(self.has_semtex_on_it)) {
@@ -4070,7 +4070,7 @@ vehicle_shoot_shock() {
   if(!isDefined(level.vehicle_shoot_shock[self.classname])) {
     return;
   }
-  if(getdvar("disable_tank_shock_minspec") == "1") {
+  if(getDvar("disable_tank_shock_minspec") == "1") {
     return;
   }
   self endon("death");
@@ -4344,7 +4344,7 @@ is_invulnerable_from_ai(var_0) {
 }
 
 attacker_troop_isonmyteam(var_0) {
-  if(isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isplayer(var_0))
+  if(isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isPlayer(var_0))
     return 1;
   else if(isai(var_0) && var_0.team == self.script_team)
     return 1;

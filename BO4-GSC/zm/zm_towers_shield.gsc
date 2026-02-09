@@ -352,7 +352,7 @@ function_618e1db4(weapon) {
 function_f3137e13(s_params) {
   e_attacker = s_params.eattacker;
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 
@@ -398,7 +398,7 @@ function_2a9a30bb(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
     return;
   }
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -447,7 +447,7 @@ function_3c6df289(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
     return;
   }
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -623,7 +623,7 @@ function_a9311397() {
     e_attacker = s_waitresult.attacker;
     w_weapon = s_waitresult.weapon;
 
-    if(isplayer(e_attacker) && w_weapon === level.var_c9d375dc.firestorm_weapon) {
+    if(isPlayer(e_attacker) && w_weapon === level.var_c9d375dc.firestorm_weapon) {
       if(!isDefined(e_attacker.var_12c9426e)) {
         e_attacker.var_12c9426e = [];
       } else if(!isarray(e_attacker.var_12c9426e)) {
@@ -726,7 +726,7 @@ function_4284585f(b_skipped = 0) {
 function_a11cc995(s_params) {
   e_attacker = s_params.eattacker;
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 

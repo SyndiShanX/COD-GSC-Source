@@ -51,7 +51,6 @@ _id_4284(var_0) {
 
   if(isDefined(self._id_4285)) {
     self.fixednode = self._id_4285;
-
   }
   thread maps\_utility::_id_0D72(1);
 
@@ -95,7 +94,6 @@ _id_425C() {
 
   if(self.type == "dog") {
     _id_4286();
-
   }
   self._id_0B6E._id_423A = spawnStruct();
   thread maps\_stealth_shared_utilities::_id_41E3();
@@ -104,7 +102,6 @@ _id_425C() {
 _id_4286() {
   if(threatbiasgroupexists("dog")) {
     self setthreatbiasgroup("dog");
-
   }
   if(isDefined(self.enemy) || isDefined(self.favoriteenemy)) {
     return;

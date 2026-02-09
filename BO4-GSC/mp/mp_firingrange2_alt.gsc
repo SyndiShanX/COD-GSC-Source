@@ -263,7 +263,7 @@ damagetarget(dir) {
       case 2:
         rotation = 1;
 
-        if(isDefined(level.attacker) && isplayer(level.attacker)) {
+        if(isDefined(level.attacker) && isPlayer(level.attacker)) {
           yaw = get2dyaw(level.attacker.origin, self.origin);
 
           if(level.attacker.angles[1] > yaw) {

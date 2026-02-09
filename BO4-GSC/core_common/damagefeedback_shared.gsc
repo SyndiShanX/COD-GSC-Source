@@ -73,7 +73,7 @@ hit_alert_sfx_cp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
       hitalias = # "chr_hitmarker_human";
     } else if(isbot(victim)) {
       hitalias = # "chr_hitmarker_human";
-    } else if(isplayer(victim)) {
+    } else if(isPlayer(victim)) {
       hitalias = # "chr_hitmarker_human";
     }
 
@@ -132,7 +132,7 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
             hitalias = # "mpl_hit_alert_clone";
           } else if(isDefined(victim) && isDefined(victim.var_342564dd) && victim.var_342564dd) {
             hitalias = # "mpl_hit_alert_rad";
-          } else if(isDefined(victim) && isplayer(victim) && isDefined(victim.carryobject) && isDefined(victim.carryobject.hitsound) && isDefined(perkfeedback) && perkfeedback == "armor") {
+          } else if(isDefined(victim) && isPlayer(victim) && isDefined(victim.carryobject) && isDefined(victim.carryobject.hitsound) && isDefined(perkfeedback) && perkfeedback == "armor") {
             hitalias = victim.carryobject.hitsound;
           } else if(mod == "MOD_BURNED") {
             hitalias = # "mpl_hit_alert_burn";
@@ -227,7 +227,7 @@ function_34fbafdc(weapon, mod) {
 }
 
 update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fatal, idflags, var_594a2d34) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -278,7 +278,7 @@ update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fata
 
   damagestage = 1;
 
-  if(isDefined(level.growing_hitmarker) && isDefined(victim) && (sessionmodeiscampaigngame() || isplayer(victim))) {
+  if(isDefined(level.growing_hitmarker) && isDefined(victim) && (sessionmodeiscampaigngame() || isPlayer(victim))) {
     damagestage = damage_feedback_get_stage(victim, fatal);
   }
 
@@ -300,7 +300,7 @@ update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fata
 
   var_32f65675 = 0;
 
-  if(isDefined(victim) && damagestage == 5 && isDefined(level.var_b1ad0b64) && !(isDefined(level.skiplaststand) && level.skiplaststand) && !(isDefined(victim.laststand) && victim.laststand) && isplayer(victim)) {
+  if(isDefined(victim) && damagestage == 5 && isDefined(level.var_b1ad0b64) && !(isDefined(level.skiplaststand) && level.skiplaststand) && !(isDefined(victim.laststand) && victim.laststand) && isPlayer(victim)) {
     var_32f65675 = 1;
   }
 
@@ -320,7 +320,7 @@ update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fata
 
   self playhitmarker(hitalias, damagestage, perkfeedback, is_dead, var_594a2d34, is_vehicle, var_32f65675, is_friendly);
 
-  if(isDefined(inflictor) && isplayer(inflictor)) {
+  if(isDefined(inflictor) && isPlayer(inflictor)) {
     inflictor playrumbleonentity("hitmarker_rumble");
   }
 
@@ -346,7 +346,7 @@ update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fata
     self.hud_damagefeedback setshader(#"damage_feedback", 24, 48);
   }
 
-  if(isDefined(self.hud_damagefeedback) && isDefined(level.growing_hitmarker) && isDefined(victim) && (sessionmodeiscampaigngame() || isplayer(victim))) {
+  if(isDefined(self.hud_damagefeedback) && isDefined(level.growing_hitmarker) && isDefined(victim) && (sessionmodeiscampaigngame() || isPlayer(victim))) {
     self thread damage_feedback_growth(victim, mod, weapon);
     return;
   }
@@ -358,7 +358,6 @@ update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fata
     self.hud_damagefeedback fadeovertime(1);
     self.hud_damagefeedback.alpha = 0;
   }
-
 }
 
 damage_feedback_get_stage(victim, fatal) {
@@ -435,7 +434,7 @@ kill_hitmarker_fade() {
 }
 
 update_override(icon, sound, additional_icon) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -459,7 +458,6 @@ update_override(icon, sound, additional_icon) {
     self.hud_damagefeedback_additional fadeovertime(1);
     self.hud_damagefeedback_additional.alpha = 0;
   }
-
 }
 
 dodamagefeedback(weapon, einflictor, idamage, smeansofdeath) {

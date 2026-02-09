@@ -5,7 +5,7 @@
 
 setskill(var_0) {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   if(!isDefined(var_0) || var_0 == 0) {
     if(isDefined(level.gameskill)) {
@@ -57,7 +57,7 @@ setskill(var_0) {
   setdvarifuninitialized("autodifficulty_playerDeathTimer", 0);
   anim.run_accuracy = 0.5;
   anim.walk_accuracy = 0.8;
-  setdvar("autodifficulty_frac", 0);
+  setDvar("autodifficulty_frac", 0);
   level.difficultysettings_frac_data_points = [];
 
   foreach(var_2 in level.players) {
@@ -193,7 +193,7 @@ setskill(var_0) {
 
   updategameskill();
   updatealldifficulty();
-  setdvar("autodifficulty_original_setting", level.gameskill);
+  setDvar("autodifficulty_original_setting", level.gameskill);
 }
 
 init_screeneffect_vars() {
@@ -445,7 +445,7 @@ pain_protection_check() {
   if(!isalive(self.enemy))
     return 0;
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return 0;
 
   if(!isalive(level.painai) || level.painai.script != "pain")
@@ -466,7 +466,7 @@ set_accuracy_based_on_situation() {
     return;
   }
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     resetmissdebouncetime();
 
     if(self.a.misstime > gettime()) {
@@ -499,7 +499,7 @@ setsniperaccuracy() {
   self.snipershotcount++;
   var_0 = level.gameskill;
 
-  if(isplayer(self.enemy))
+  if(isPlayer(self.enemy))
     var_0 = self.enemy.gameskill;
 
   if(shouldforcesnipermissshot()) {
@@ -553,7 +553,7 @@ waittimeifplayerishit() {
   if(!isalive(self.enemy))
     return var_0;
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return var_0;
 
   if(self.enemy maps\_utility::ent_flag("player_is_invulnerable"))
@@ -584,7 +584,7 @@ resetmisstime() {
   if(!isalive(self.enemy)) {
     return;
   }
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     self.accuracy = self.baseaccuracy;
     return;
   }
@@ -1386,7 +1386,7 @@ auto_adjust_difficulty_track_player_death() {
   level.player waittill("death");
   var_0 = getdvarint("autodifficulty_playerDeathTimer");
   var_0 = var_0 - 60;
-  setdvar("autodifficulty_playerDeathTimer", var_0);
+  setDvar("autodifficulty_playerDeathTimer", var_0);
 }
 
 auto_adjust_difficulty_track_player_shots() {
@@ -1571,15 +1571,15 @@ hud_debug_add_second_string(var_0, var_1) {
 
 aa_init_stats() {
   level.sp_stat_tracking_func = ::auto_adjust_new_zone;
-  setdvar("aa_player_kills", "0");
-  setdvar("aa_enemy_deaths", "0");
-  setdvar("aa_enemy_damage_taken", "0");
-  setdvar("aa_player_damage_taken", "0");
-  setdvar("aa_player_damage_dealt", "0");
-  setdvar("aa_ads_damage_dealt", "0");
-  setdvar("aa_time_tracking", "0");
-  setdvar("aa_deaths", "0");
-  setdvar("player_cheated", 0);
+  setDvar("aa_player_kills", "0");
+  setDvar("aa_enemy_deaths", "0");
+  setDvar("aa_enemy_damage_taken", "0");
+  setDvar("aa_player_damage_taken", "0");
+  setDvar("aa_player_damage_dealt", "0");
+  setDvar("aa_ads_damage_dealt", "0");
+  setDvar("aa_time_tracking", "0");
+  setDvar("aa_deaths", "0");
+  setDvar("player_cheated", 0);
   level.auto_adjust_results = [];
   thread aa_time_tracking();
   thread aa_player_health_tracking();
@@ -1649,19 +1649,19 @@ auto_adjust_new_zone(var_0) {
   level.auto_adjust_flags[var_0] = 0;
   common_scripts\utility::flag_wait(var_0);
 
-  if(getdvar("aa_zone" + var_0) == "") {
-    setdvar("aa_zone" + var_0, "on");
+  if(getDvar("aa_zone" + var_0) == "") {
+    setDvar("aa_zone" + var_0, "on");
     level.auto_adjust_flags[var_0] = 1;
     aa_update_flags();
-    setdvar("start_time" + var_0, getdvar("aa_time_tracking"));
-    setdvar("starting_player_kills" + var_0, getdvar("aa_player_kills"));
-    setdvar("starting_deaths" + var_0, getdvar("aa_deaths"));
-    setdvar("starting_ads_damage_dealt" + var_0, getdvar("aa_ads_damage_dealt"));
-    setdvar("starting_player_damage_dealt" + var_0, getdvar("aa_player_damage_dealt"));
-    setdvar("starting_player_damage_taken" + var_0, getdvar("aa_player_damage_taken"));
-    setdvar("starting_enemy_damage_taken" + var_0, getdvar("aa_enemy_damage_taken"));
-    setdvar("starting_enemy_deaths" + var_0, getdvar("aa_enemy_deaths"));
-  } else if(getdvar("aa_zone" + var_0) == "done") {
+    setDvar("start_time" + var_0, getDvar("aa_time_tracking"));
+    setDvar("starting_player_kills" + var_0, getDvar("aa_player_kills"));
+    setDvar("starting_deaths" + var_0, getDvar("aa_deaths"));
+    setDvar("starting_ads_damage_dealt" + var_0, getDvar("aa_ads_damage_dealt"));
+    setDvar("starting_player_damage_dealt" + var_0, getDvar("aa_player_damage_dealt"));
+    setDvar("starting_player_damage_taken" + var_0, getDvar("aa_player_damage_taken"));
+    setDvar("starting_enemy_damage_taken" + var_0, getDvar("aa_enemy_damage_taken"));
+    setDvar("starting_enemy_deaths" + var_0, getDvar("aa_enemy_deaths"));
+  } else if(getDvar("aa_zone" + var_0) == "done") {
     return;
   }
   common_scripts\utility::flag_waitopen(var_0);
@@ -1669,7 +1669,7 @@ auto_adjust_new_zone(var_0) {
 }
 
 auto_adust_zone_complete(var_0) {
-  setdvar("aa_zone" + var_0, "done");
+  setDvar("aa_zone" + var_0, "done");
   var_1 = getdvarfloat("start_time" + var_0);
   var_2 = getdvarint("starting_player_kills" + var_0);
   var_3 = getdvarint("aa_enemy_deaths" + var_0);
@@ -1748,12 +1748,12 @@ aa_update_flags() {}
 
 aa_add_event(var_0, var_1) {
   var_2 = getdvarint(var_0);
-  setdvar(var_0, var_2 + var_1);
+  setDvar(var_0, var_2 + var_1);
 }
 
 aa_add_event_float(var_0, var_1) {
   var_2 = getdvarfloat(var_0);
-  setdvar(var_0, var_2 + var_1);
+  setDvar(var_0, var_2 + var_1);
 }
 
 return_false(var_0) {
@@ -1764,7 +1764,7 @@ player_attacker(var_0) {
   if([[level.custom_player_attacker]](var_0))
     return 1;
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     return 1;
 
   if(!isDefined(var_0.car_damage_owner_recorder))

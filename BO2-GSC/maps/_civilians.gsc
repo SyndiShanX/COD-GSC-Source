@@ -16,8 +16,9 @@ init_civilians() {
   civilians = [];
 
   for(i = 0; i < ai.size; i++) {
-    if(issubstr(tolower(ai[i].classname), "civilian"))
+    if(issubstr(tolower(ai[i].classname), "civilian")) {
       civilians[civilians.size] = ai[i];
+    }
   }
 
   array_thread(civilians, ::add_spawn_function, ::civilian_spawn_init);
@@ -68,10 +69,11 @@ handle_civilian_sounds() {
       continue;
     }
 
-    if(self.civiliansex == "male")
+    if(self.civiliansex == "male") {
       self playSound("chr_civ_scream_male");
-    else
+    } else {
       self playSound("chr_civ_scream_female");
+    }
 
     wait(randomintrange(2, 5));
   }
@@ -82,8 +84,9 @@ setup_civilian_attributes() {
   tokens = strtok(classname, "_");
   self.civiliansex = "male";
 
-  if(issubstr(classname, "female"))
+  if(issubstr(classname, "female")) {
     self.civiliansex = "female";
+  }
 
   self.nationality = "default";
 }

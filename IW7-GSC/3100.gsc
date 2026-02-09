@@ -300,7 +300,7 @@ death_monitor() {
   }
 
   if(func_FF6C(var_6, var_2, var_5)) {
-    var_12 = [ % jackal_death_01, %jackal_death_02, %jackal_death_03, %jackal_death_04];
+    var_12 = [%jackal_death_01, %jackal_death_02, %jackal_death_03, %jackal_death_04];
     level.var_A8D7++;
 
     if(level.var_A8D7 >= var_12.size) {

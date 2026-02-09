@@ -35,16 +35,16 @@ default_onforfeit(team) {
   endreason = &"";
 
   if(level.multiteam) {
-    setdvar("ui_text_endreason", game["strings"]["other_teams_forfeited"]);
+    setDvar("ui_text_endreason", game["strings"]["other_teams_forfeited"]);
     endreason = game["strings"]["other_teams_forfeited"];
     winner = team;
   } else if(!isDefined(team)) {
-    setdvar("ui_text_endreason", game["strings"]["players_forfeited"]);
+    setDvar("ui_text_endreason", game["strings"]["players_forfeited"]);
     endreason = game["strings"]["players_forfeited"];
     winner = level.players[0];
   } else if(isDefined(level.teams[team])) {
     endreason = game["strings"][team + "_forfeited"];
-    setdvar("ui_text_endreason", endreason);
+    setDvar("ui_text_endreason", endreason);
     winner = getwinningteamfromloser(team);
   } else {
     assert(isDefined(team), "Forfeited team is not defined");
@@ -54,7 +54,7 @@ default_onforfeit(team) {
 
   level.forcedend = 1;
 
-  if(isplayer(winner))
+  if(isPlayer(winner))
     logstring("forfeit, win: " + winner getxuid() + "(" + winner.name + ")");
   else
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("forfeit", winner);
@@ -67,13 +67,13 @@ default_ondeadevent(team) {
     eliminatedstring = game["strings"][team + "_eliminated"];
     iprintln(eliminatedstring);
     makedvarserverinfo("ui_text_endreason", eliminatedstring);
-    setdvar("ui_text_endreason", eliminatedstring);
+    setDvar("ui_text_endreason", eliminatedstring);
     winner = getwinningteamfromloser(team);
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("team eliminated", winner);
     thread maps\mp\gametypes\_globallogic::endgame(winner, eliminatedstring);
   } else {
     makedvarserverinfo("ui_text_endreason", game["strings"]["tie"]);
-    setdvar("ui_text_endreason", game["strings"]["tie"]);
+    setDvar("ui_text_endreason", game["strings"]["tie"]);
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("tie");
 
     if(level.teambased)
@@ -88,13 +88,13 @@ default_onlastteamaliveevent(team) {
     eliminatedstring = game["strings"]["enemies_eliminated"];
     iprintln(eliminatedstring);
     makedvarserverinfo("ui_text_endreason", eliminatedstring);
-    setdvar("ui_text_endreason", eliminatedstring);
+    setDvar("ui_text_endreason", eliminatedstring);
     winner = maps\mp\gametypes\_globallogic::determineteamwinnerbygamestat("teamScores");
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("team eliminated", winner);
     thread maps\mp\gametypes\_globallogic::endgame(winner, eliminatedstring);
   } else {
     makedvarserverinfo("ui_text_endreason", game["strings"]["tie"]);
-    setdvar("ui_text_endreason", game["strings"]["tie"]);
+    setDvar("ui_text_endreason", game["strings"]["tie"]);
     maps\mp\gametypes\_globallogic_utils::logteamwinstring("tie");
 
     if(level.teambased)
@@ -151,7 +151,7 @@ default_ontimelimit() {
   }
 
   makedvarserverinfo("ui_text_endreason", game["strings"]["time_limit_reached"]);
-  setdvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
+  setDvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
   thread maps\mp\gametypes\_globallogic::endgame(winner, game["strings"]["time_limit_reached"]);
 }
 
@@ -174,7 +174,7 @@ default_onscorelimit() {
   }
 
   makedvarserverinfo("ui_text_endreason", game["strings"]["score_limit_reached"]);
-  setdvar("ui_text_endreason", game["strings"]["score_limit_reached"]);
+  setDvar("ui_text_endreason", game["strings"]["score_limit_reached"]);
   thread maps\mp\gametypes\_globallogic::endgame(winner, game["strings"]["score_limit_reached"]);
   return true;
 }
@@ -201,7 +201,6 @@ default_onspawnintermission() {
     self spawn(spawnpoint.origin, spawnpoint.angles);
   else {
     maps\mp\_utility::error("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
-
   }
 }
 

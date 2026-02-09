@@ -799,7 +799,7 @@ func_F331(var_0, var_1) {
 }
 
 func_8DA7(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     self.var_C720 = var_0;
   }
 
@@ -1594,7 +1594,7 @@ func_4CFC() {
   while(isDefined(self)) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(isDefined(self.var_8BA9)) {
@@ -1634,7 +1634,7 @@ func_4CFD() {
   while(isDefined(self)) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(isDefined(self.var_8BA9)) {
@@ -2435,7 +2435,7 @@ func_9C29(var_0) {
 }
 
 func_24DE(var_0) {
-  if(isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isPlayer(var_0)) {
     return 1;
   } else if(isai(var_0) && var_0.team == self.script_team) {
     return 1;

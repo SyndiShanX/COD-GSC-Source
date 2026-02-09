@@ -13,7 +13,7 @@ bridge_main() {
 
   waitframe();
 
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   level.bridge_device = spawnStruct();
@@ -199,7 +199,7 @@ checkDbgDvar(dvarName, callback, notifyStr) {
     if(isDefined(notifyStr))
       level notify(notifyStr);
 
-    SetDvar(dvarName, 0);
+    setDvar(dvarName, 0);
   }
 }
 

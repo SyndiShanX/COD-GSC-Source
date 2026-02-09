@@ -146,7 +146,7 @@ function cic_turret_fireupdate() {
   while(true) {
     if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
       self.turretrotscale = 1;
-      if(cant_see_enemy_count > 0 && isplayer(self.enemy)) {
+      if(cant_see_enemy_count > 0 && isPlayer(self.enemy)) {
         cic_turret_alert_sound();
         wait(0.5);
       }
@@ -159,14 +159,14 @@ function cic_turret_fireupdate() {
         } else {
           self cleartargetentity();
         }
-        if(isDefined(self.enemy) && isplayer(self.enemy)) {
+        if(isDefined(self.enemy) && isPlayer(self.enemy)) {
           wait(randomfloatrange(0.3, 0.6));
           continue;
         }
         wait(randomfloatrange(0.3, 0.6) * 2);
       }
       if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
-        if(isplayer(self.enemy)) {
+        if(isPlayer(self.enemy)) {
           wait(randomfloatrange(0.5, 1.3));
         } else {
           wait(randomfloatrange(0.5, 1.3) * 2);
@@ -333,7 +333,7 @@ function cic_turret_fire_for_time(totalfiretime) {
     wait(0.5);
   }
   firechance = 2;
-  if(isDefined(self.enemy) && isplayer(self.enemy)) {
+  if(isDefined(self.enemy) && isPlayer(self.enemy)) {
     firechance = 1;
   }
   firecount = 1;
@@ -409,7 +409,7 @@ function cicturretcallback_vehicledamage(einflictor, eattacker, idamage, idflags
     idamage = int(idamage * 3);
     self thread cic_turret_stunned();
   }
-  if(!isplayer(eattacker)) {
+  if(!isPlayer(eattacker)) {
     idamage = int(idamage / 4);
   }
   return idamage;

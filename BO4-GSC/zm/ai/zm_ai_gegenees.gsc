@@ -598,7 +598,7 @@ gegeneestargetservice(entity) {
 
   goalent = entity.favoriteenemy;
 
-  if(isplayer(goalent)) {
+  if(isPlayer(goalent)) {
     goalent = zm_ai_utility::function_a2e8fd7b(entity, entity.favoriteenemy);
   }
 
@@ -703,7 +703,7 @@ function_c3c86ec1(entity) {
 
   record3dtext("<dev string:x38>", self.origin, (1, 0, 0), "<dev string:x40>", entity);
 
-  if(isDefined(hitent) && isplayer(hitent)) {
+  if(isDefined(hitent) && isPlayer(hitent)) {
     entity function_376a5549(hitent);
     hitent clientfield::increment_to_player("gegenees_damage_cf");
   }
@@ -928,7 +928,7 @@ function_a231dd3b(s_params) {
     level thread zm_powerups::specific_powerup_drop(self.var_d0686fde, self.origin, undefined, undefined, undefined, undefined, undefined, undefined, 0, 1);
   }
 
-  if(!isplayer(s_params.eattacker)) {
+  if(!isPlayer(s_params.eattacker)) {
     return;
   }
 }
@@ -978,6 +978,6 @@ function_c03e8d05() {
       }
     }
 
-    setdvar(#"hash_6e55ca7eb0bc5180", "<dev string:x1aa>");
+    setDvar(#"hash_6e55ca7eb0bc5180", "<dev string:x1aa>");
   }
 }

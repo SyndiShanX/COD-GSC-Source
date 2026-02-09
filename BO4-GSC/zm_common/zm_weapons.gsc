@@ -474,7 +474,6 @@ add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, weaponvoresp
   if(isDefined(level.devgui_add_weapon) && (!is_ee || getdvarint(#"zm_debug_ee", 0))) {
     level thread[[level.devgui_add_weapon]](weapon, upgrade, in_box, cost, weaponvo, weaponvoresp, ammo_cost);
   }
-
 }
 
 is_weapon_included(weapon) {

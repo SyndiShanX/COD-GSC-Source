@@ -29,7 +29,7 @@
 #namespace prop_controls;
 
 notifyonplayercommand(command, key) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self thread function_255e9614(command, key);
 }
 
@@ -187,7 +187,6 @@ addupperrighthudelem(label, value, text, labelpc) {
     hudelem.label = label;
   } else if(isDefined(text)) {
     hudelem settext(text);
-
   }
 
   if(isDefined(value)) {
@@ -231,7 +230,6 @@ cleanuppropcontrolshudondeath() {
 safedestroy(hudelem) {
   if(isDefined(hudelem)) {
     hudelem destroy();
-
   }
 }
 
@@ -743,7 +741,6 @@ get_ground_normal(traceignore, debug) {
 
       sphere(point, 3, (1, 0, 0));
     }
-
   }
 
   function_c0665212(0);
@@ -877,14 +874,14 @@ flashlockpropkey() {
 }
 
 function_56cae8fa() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   start = self.origin;
   end = start + (0, 0, -2000);
   return playerphysicstrace(start, end);
 }
 
 function_97f02d5c() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   start = self.origin;
   end = start + (0, 0, -2000);
   trace = bulletTrace(start, end, 0, self.prop);
@@ -1186,7 +1183,7 @@ damageclonewatch(damage, attacker, direction_vec, point, meansofdeath, modelname
     return;
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(isDefined(self.isdying) && self.isdying) {
       return;
     }

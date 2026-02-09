@@ -197,7 +197,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(!isDefined(attacker)) {
     return;
   }
-  wassuicide = attacker == self || !isplayer(attacker);
+  wassuicide = attacker == self || !isPlayer(attacker);
   if(wassuicide) {
     return;
   }

@@ -549,7 +549,7 @@ watchdeployedriotshielddamage() {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       if(level.teambased && var_3.team == self.owner.team && var_3 != self.owner) {
         continue;
       }

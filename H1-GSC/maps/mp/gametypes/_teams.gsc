@@ -27,22 +27,22 @@ initscoreboard() {
   if(maps\mp\_utility::invirtuallobby()) {
     return;
   }
-  setdvar("g_TeamName_Allies", getteamshortname("allies"));
-  setdvar("g_TeamIcon_Allies", getteamicon("allies"));
-  setdvar("g_TeamIcon_MyAllies", getteamicon("allies"));
-  setdvar("g_TeamIcon_EnemyAllies", getteamicon("allies"));
+  setDvar("g_TeamName_Allies", getteamshortname("allies"));
+  setDvar("g_TeamIcon_Allies", getteamicon("allies"));
+  setDvar("g_TeamIcon_MyAllies", getteamicon("allies"));
+  setDvar("g_TeamIcon_EnemyAllies", getteamicon("allies"));
   var_0 = getteamcolor("allies");
-  setdvar("g_ScoresColor_Allies", var_0[0] + " " + var_0[1] + " " + var_0[2]);
-  setdvar("g_TeamName_Axis", getteamshortname("axis"));
-  setdvar("g_TeamIcon_Axis", getteamicon("axis"));
-  setdvar("g_TeamIcon_MyAxis", getteamicon("axis"));
-  setdvar("g_TeamIcon_EnemyAxis", getteamicon("axis"));
+  setDvar("g_ScoresColor_Allies", var_0[0] + " " + var_0[1] + " " + var_0[2]);
+  setDvar("g_TeamName_Axis", getteamshortname("axis"));
+  setDvar("g_TeamIcon_Axis", getteamicon("axis"));
+  setDvar("g_TeamIcon_MyAxis", getteamicon("axis"));
+  setDvar("g_TeamIcon_EnemyAxis", getteamicon("axis"));
   var_0 = getteamcolor("axis");
-  setdvar("g_ScoresColor_Axis", var_0[0] + " " + var_0[1] + " " + var_0[2]);
-  setdvar("g_ScoresColor_Spectator", ".25 .25 .25");
-  setdvar("g_ScoresColor_Free", ".76 .78 .10");
-  setdvar("g_teamTitleColor_MyTeam", ".6 .8 .6");
-  setdvar("g_teamTitleColor_EnemyTeam", "1 .45 .5");
+  setDvar("g_ScoresColor_Axis", var_0[0] + " " + var_0[1] + " " + var_0[2]);
+  setDvar("g_ScoresColor_Spectator", ".25 .25 .25");
+  setDvar("g_ScoresColor_Free", ".76 .78 .10");
+  setDvar("g_teamTitleColor_MyTeam", ".6 .8 .6");
+  setDvar("g_teamTitleColor_EnemyTeam", "1 .45 .5");
 }
 
 onplayerconnect() {
@@ -379,7 +379,7 @@ verifycostume() {
     else {
       self.costume = getdefaultcostume();
 
-      if(isplayer(self))
+      if(isPlayer(self))
         maps\mp\gametypes\_class::cao_setactivecostume(self.costume);
 
       self.sessioncostume = self.costume;

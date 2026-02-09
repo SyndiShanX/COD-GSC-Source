@@ -10,11 +10,12 @@
 #include maps\_zombietron_utility;
 #include maps\_busing;
 #using_animtree("generic_human");
+
 actor_idle() {
   self.animname = "actor";
   level endon("introduction_complete");
   while(isDefined(self)) {
-    switch (randomInt(3)) {
+    switch (RandomInt(3)) {
       case 0:
         level.scr_anim["actor"]["idle"] = % ai_civ_gen_casual_stand_idle;
         break;
@@ -28,20 +29,17 @@ actor_idle() {
     self maps\_anim::anim_single(self, "idle");
   }
 }
-
 ape_intro_exit(origin) {
   self thread maps\_zombietron_ai_ape::ape_shielder();
   self SetGoalPos(origin);
   self waittill("goal");
   level notify("ape_exited");
 }
-
 tutorial_exit_watch(trigger) {
   level waittill_any("exit_taken");
   level.abort_tutorial = true;
   trigger notify("trigger");
 }
-
 game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2, instruction3, p1, p2, p3) {
   instruct1 = undefined;
   instruct2 = undefined;
@@ -87,10 +85,11 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct1.y -= 90;
     instruct1.color = (1.0, 0.84, 0.0);
     instruct1.alpha = 0;
-    if(isDefined(p1))
+    if(isDefined(p1)) {
       instruct1 SetText(instruction1, p1);
-    else
+    } else {
       instruct1 SetText(instruction1);
+    }
     instruct1 FadeOverTime(1);
     instruct1.alpha = 1;
     instruct1.hidewheninmenu = true;
@@ -107,10 +106,11 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct2.y -= 60;
     instruct2.color = (1.0, 0.84, 0.0);
     instruct2.alpha = 0;
-    if(isDefined(p2))
+    if(isDefined(p2)) {
       instruct2 SetText(instruction2, p2);
-    else
+    } else {
       instruct2 SetText(instruction2);
+    }
     instruct2 FadeOverTime(2);
     instruct2.alpha = 1;
     instruct2.hidewheninmenu = true;
@@ -127,10 +127,11 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct3.y -= 30;
     instruct3.color = (1.0, 0.84, 0.0);
     instruct3.alpha = 0;
-    if(isDefined(p3))
+    if(isDefined(p3)) {
       instruct3 SetText(instruction3, p3);
-    else
+    } else {
       instruct3 SetText(instruction3);
+    }
     instruct3 FadeOverTime(3);
     instruct3.alpha = 1;
     instruct3.hidewheninmenu = true;
@@ -181,7 +182,6 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
   DestroyHudElem(instruct2);
   DestroyHudElem(instruct3);
 }
-
 game_skipPage_watcher() {
   level endon("exit_taken");
   player = GetPlayers()[0];
@@ -193,12 +193,10 @@ game_skipPage_watcher() {
     wait 0.05;
   }
 }
-
 loc_random_offset(loc) {
   loc += (RandomFloatRange(-64, 64), RandomFloatRange(-64, 64), 0);
   return loc;
 }
-
 game_tutorial_go() {
   level endon("exit_taken");
   level thread game_skipPage_watcher();
@@ -226,7 +224,6 @@ game_tutorial_go() {
   level game_tutorial_render_instructions(7, 8, &"ZOMBIETRON_INSTRUCTION12");
   level game_tutorial_render_instructions(8, 8, &"ZOMBIETRON_INSTRUCTION13");
 }
-
 begin_game_tutorial() {
   title1 = NewHudElem(level);
   title1.alignX = "center";
@@ -284,22 +281,21 @@ begin_game_tutorial() {
     level thread game_tutorial_go();
   }
 }
-
 end_game_introduction(player) {
   level waittill("end_the_intro");
   player thread maps\_zombietron_pickups::update_drop_bomb();
   player thread maps\_zombietron_pickups::update_drop_booster();
-  exit = getEnt("ape_spawn_point", "script_noteworthy");
-  ape = getEnt("the_ape", "script_noteworthy");
+  exit = GetEnt("ape_spawn_point", "script_noteworthy");
+  ape = GetEnt("the_ape", "script_noteworthy");
   if(!isDefined(ape)) {
     ape = simple_spawn_single("ape_taunt", maps\_zombietron_ai_ape::ape_prespawn);
     ape.script_noteworthy = "the_ape";
     ape.takedamage = false;
     ape thread maps\_zombietron_ai_ape::ape_you_greedy_mf(exit.origin);
     ape thread maps\_zombietron_ai_ape::ape_taunt_deleter();
-    spot = getEnt("ape_intro_spot", "script_noteworthy");
+    spot = GetEnt("ape_intro_spot", "script_noteworthy");
     ape forceTeleport(spot.origin, spot.angles);
-    level thread maps\_zombietron_pickups::spawn_treasures(spot.origin, 5 + randomInt(5));
+    level thread maps\_zombietron_pickups::spawn_treasures(spot.origin, 5 + RandomInt(5));
     level waittill("fade_in_complete");
     level.scr_anim["ape_zombie"]["chest_beat"] = % ai_zombie_simianaut_chest_beat;
     ape thread maps\_anim::anim_single(ape, "chest_beat");
@@ -324,7 +320,6 @@ end_game_introduction(player) {
   fade_in();
   level notify("introduction_complete");
 }
-
 introduction_abort_watcher() {
   level endon("end_the_intro");
   level.skip_msg = NewHudElem(level);
@@ -341,7 +336,7 @@ introduction_abort_watcher() {
   level.skip_msg.hidewheninmenu = true;
   while(1) {
     if(self UseButtonPressed()) {
-      princess = getEnt("princess", "script_noteworthy");
+      princess = GetEnt("princess", "script_noteworthy");
       princess startragdoll();
       princess launchragdoll((0, 0, 200));
       maps\_zombietron_pickups::clear_all_pickups();
@@ -353,13 +348,11 @@ introduction_abort_watcher() {
     wait 0.05;
   }
 }
-
 game_introduction(player) {
   level endon("end_the_intro");
   wait 0.1;
   level notify("end_the_intro");
 }
-
 begin_game_introduction(player) {
   player.lives = 1;
   player.bombs = 0;
@@ -370,7 +363,6 @@ begin_game_introduction(player) {
   level thread end_game_introduction(player);
   level waittill("introduction_complete");
 }
-
 hide_temple_props(hide) {
   if(hide == "none") {
     statue_heads = getEntArray("temple_head", "targetname");
@@ -380,33 +372,33 @@ hide_temple_props(hide) {
         statue_heads[i] SetScale(3.0);
       }
     }
-    podium = getEnt("temple_podium_first_place", "targetname");
+    podium = GetEnt("temple_podium_first_place", "targetname");
     if(isDefined(podium)) {
-      podium hide();
+      podium Hide();
       if(!isDefined(podium.old_origin)) {
         podium.old_origin = podium.origin;
         podium.origin += (0, 0, -500);
       }
     }
-    podium = getEnt("temple_podium_second_place", "targetname");
+    podium = GetEnt("temple_podium_second_place", "targetname");
     if(isDefined(podium)) {
-      podium hide();
+      podium Hide();
       if(!isDefined(podium.old_origin)) {
         podium.old_origin = podium.origin;
         podium.origin += (0, 0, -500);
       }
     }
-    podium = getEnt("temple_podium_third_place", "targetname");
+    podium = GetEnt("temple_podium_third_place", "targetname");
     if(isDefined(podium)) {
-      podium hide();
+      podium Hide();
       if(!isDefined(podium.old_origin)) {
         podium.old_origin = podium.origin;
         podium.origin += (0, 0, -500);
       }
     }
-    podium = getEnt("temple_podium_last_place", "targetname");
+    podium = GetEnt("temple_podium_last_place", "targetname");
     if(isDefined(podium)) {
-      podium hide();
+      podium Hide();
       if(!isDefined(podium.old_origin)) {
         podium.old_origin = podium.origin;
         podium.origin += (0, 0, -500);
@@ -417,10 +409,10 @@ hide_temple_props(hide) {
     statue_heads = getEntArray("temple_head", "targetname");
     if(isDefined(statue_heads)) {
       for(i = 0; i < statue_heads.size; i++) {
-        statue_heads[i] hide();
+        statue_heads[i] Hide();
       }
     }
-    podium = getEnt("temple_podium_first_place", "targetname");
+    podium = GetEnt("temple_podium_first_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -428,7 +420,7 @@ hide_temple_props(hide) {
         podium.old_origin = undefined;
       }
     }
-    podium = getEnt("temple_podium_second_place", "targetname");
+    podium = GetEnt("temple_podium_second_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -436,7 +428,7 @@ hide_temple_props(hide) {
         podium.old_origin = undefined;
       }
     }
-    podium = getEnt("temple_podium_third_place", "targetname");
+    podium = GetEnt("temple_podium_third_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -444,7 +436,7 @@ hide_temple_props(hide) {
         podium.old_origin = undefined;
       }
     }
-    podium = getEnt("temple_podium_last_place", "targetname");
+    podium = GetEnt("temple_podium_last_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -454,7 +446,6 @@ hide_temple_props(hide) {
     }
   }
 }
-
 actor_end_bubbles(place) {
   level endon("summary_complete");
   level waittill("summary_ready");
@@ -537,13 +528,12 @@ actor_end_bubbles(place) {
       break;
   }
 }
-
 actor_end_idle(place) {
   self.animname = "actor";
   level endon("summary_complete");
   if(place == 0) {}
   while(isDefined(self)) {
-    switch (randomInt(3)) {
+    switch (RandomInt(3)) {
       case 0:
         level.scr_anim["actor"]["idle"] = % ai_civ_gen_casual_stand_idle;
         break;
@@ -557,7 +547,6 @@ actor_end_idle(place) {
     self maps\_anim::anim_single(self, "idle");
   }
 }
-
 end_of_game_summary_begin() {
   level endon("end_the_summary");
   zombies = GetAISpeciesArray("axis", "all");
@@ -580,7 +569,7 @@ end_of_game_summary_begin() {
     players[i] setClientDvars("player_topDownCamMode", 4, "player_topDownCamCenterPos", camera_center, "player_TopDownCamAngles", camera_angles, "cg_fov", 65, "hud_drawHUD", "0", "cl_scoreDraw", "0");
   }
   hide_temple_props("end");
-  spotlight = getEnt("temple_light_spot", "targetname");
+  spotlight = GetEnt("temple_light_spot", "targetname");
   spotlight setModel("tag_origin");
   playFXOnTag(level._effect["spot_light"], spotlight, "tag_origin");
   if(isDefined(level.weatherFx)) {
@@ -592,23 +581,25 @@ end_of_game_summary_begin() {
   color = "0.9 0.84 0";
   light = "15";
   exposure = "1";
-  visionSetNaked("zombietron_afternoon_death", 0);
+  VisionSetNaked("zombietron_afternoon_death", 0);
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setClientDvars("r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure);
+    players[i] setClientDvars(
+      "r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure
+    );
   }
   players = sort_by_score(GetPlayers());
   pads = [];
   dudes = [];
   for(i = 0; i < players.size; i++) {
     tname = "temple_player_spot" + (i + 1);
-    padSite = getEnt(tname, "targetname");
+    padSite = GetEnt(tname, "targetname");
     if(isDefined(padSite)) {
       dudes[i] = spawn("script_model", padSite.origin);
       dudes[i].angles = padSite.angles;
       dudes[i].score = players[i].score;
       dudes[i].script_noteworthy = "fake_player";
-      switch (players[i] getEntityNumber()) {
+      switch (players[i] GetEntityNumber()) {
         case 0:
           dudes[i] setModel("c_usa_blackops_body3_fb");
           break;
@@ -651,7 +642,7 @@ end_of_game_summary_begin() {
   level thread maps\_zombietron_pickups::spawn_uber_prizes(20 * level.zombie_vars["max_prize_inc_range"], prizePoint, true, (0, 0, 20));
   level thread maps\_zombietron_pickups::spawn_treasures(dudes[0].origin, 4, 24, true);
   wait 10;
-  apeSpot = getEnt("temple_ape_spot", "targetname");
+  apeSpot = GetEnt("temple_ape_spot", "targetname");
   playFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
   playsoundatposition("zmb_ape_prespawn", apeSpot.origin);
   wait(.5);
@@ -710,7 +701,6 @@ end_of_game_summary_begin() {
   wait 1.5;
   level notify("end_the_summary");
 }
-
 ape_you_greedy_mf(exit) {
   self endon("end_the_summary");
   self endon("death");
@@ -722,10 +712,9 @@ ape_you_greedy_mf(exit) {
     }
   }
 }
-
 end_of_game_summary_end(lastArena, old_camera_angles, old_camera_offset) {
   level waittill("end_the_summary");
-  ape = getEnt("the_ape", "script_noteworthy");
+  ape = GetEnt("the_ape", "script_noteworthy");
   if(isDefined(ape)) {
     ape delete();
   }
@@ -753,7 +742,6 @@ end_of_game_summary_end(lastArena, old_camera_angles, old_camera_offset) {
   maps\_zombietron_pickups::clear_all_pickups();
   level notify("summary_complete");
 }
-
 end_of_game_summary() {
   level notify("exit_taken");
   level notify("stop_spawning_pickups");
@@ -761,7 +749,6 @@ end_of_game_summary() {
   level thread end_of_game_summary_begin();
   level waittill("summary_complete");
 }
-
 summary_abort_watcher() {
   level endon("end_the_summary");
   players = sort_by_score(GetPlayers());
@@ -795,7 +782,6 @@ summary_abort_watcher() {
     wait 0.05;
   }
 }
-
 bubble_message(text, x, y, time, param) {
   font_size = 2;
   bubblehud = create_simple_hud();

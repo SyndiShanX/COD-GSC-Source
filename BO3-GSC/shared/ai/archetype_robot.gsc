@@ -779,7 +779,7 @@ function robotcantacticaljuke(entity) {
 }
 
 function robotcanpreemptivejuke(entity) {
-  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isPlayer(entity.enemy)) {
     return 0;
   }
   if(blackboard::getblackboardattribute(entity, "_stance") == "crouch") {
@@ -905,7 +905,7 @@ function private robotdonttakecover(entity) {
 }
 
 function private _isvalidplayer(player) {
-  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isPlayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
   return true;
@@ -2027,7 +2027,7 @@ function private robotdestructdeathoverride(inflictor, attacker, damage, meansof
 function private robotdamageoverride(inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   entity = self;
   if(hitloc != "helmet" || hitloc != "head" || hitloc != "neck") {
-    if(isDefined(attacker) && !isplayer(attacker) && !isvehicle(attacker)) {
+    if(isDefined(attacker) && !isPlayer(attacker) && !isvehicle(attacker)) {
       dist = distancesquared(entity.origin, attacker.origin);
       if(dist < 65536) {
         damage = int(damage * 10);

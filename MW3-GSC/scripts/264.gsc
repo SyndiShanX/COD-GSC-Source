@@ -125,7 +125,6 @@ main(var_0) {
 
   if(var_8.size) {
     level.player setorigin(maps\_utility::_id_0AE9(level.player.origin, var_8).origin);
-
   }
   for(;;) {
     wait 0.05;
@@ -139,7 +138,6 @@ hack_start() {
 
   while(!isDefined(_id_1B78())) {
     wait 0.05;
-
   }
   wait 0.05;
   level._id_1B58 = _id_1B78();
@@ -193,7 +191,6 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
     var_11 = _id_1B34();
   } else {
     var_11 = level._id_1B5E[var_0]._id_1B32;
-
   }
   level._id_1B5E[var_0].location = 0;
   level._id_1B5E[var_0].alignx = "right";
@@ -217,11 +214,9 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_11 setvalue(var_4);
-
   }
   if(isDefined(var_3)) {
     var_11 _id_1B36(var_3);
-
   }
   level._id_1B5E[var_0]._id_1B32 = var_11;
 }
@@ -250,7 +245,6 @@ _id_1B2C() {
       var_1[var_7].alpha = 1;
     } else {
       var_1[var_7].alpha = var_6;
-
     }
     var_1[var_7].x = 0;
     var_1[var_7].y = var_4;
@@ -258,7 +252,6 @@ _id_1B2C() {
 
     if(var_7 == var_3) {
       var_5 = var_5 * -1;
-
     }
     var_6 = var_6 + var_5;
     var_4 = var_4 - var_2;
@@ -359,7 +352,6 @@ _id_1B3B(var_0) {
 
   for(var_4 = 0; var_4 < level._id_1B5F.size; var_4++) {
     level._id_1B5F[var_4] clearalltextafterhudelem();
-
   }
   level._id_1B5F[var_3] _id_1B36("^3" + _id_1B7F(var_1[var_2]));
 
@@ -399,7 +391,6 @@ _id_1B38() {
 
   if(var_0 == var_1.size) {
     var_0 = 0;
-
   }
   _id_1B3B(var_1[var_0]);
 }
@@ -417,7 +408,6 @@ _id_1B39() {
 
   if(var_0 < 0) {
     var_0 = var_1.size - 1;
-
   }
   _id_1B3B(var_1[var_0]);
 }
@@ -425,11 +415,9 @@ _id_1B39() {
 _id_1B66(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   precachemodel(var_0);
 
@@ -463,7 +451,6 @@ _id_1B6B() {
 
         while(self buttonpressed(var_2)) {
           wait 0.05;
-
         }
         [[level._id_1B6C[var_2]]]();
         wait 0.05;
@@ -522,7 +509,6 @@ _id_1B73(var_0) {
 
   if(isDefined(var_5)) {
     var_4 = var_5;
-
   }
   return _id_1B82(var_4) + level._id_1B51;
 }
@@ -557,7 +543,6 @@ _id_1B74(var_0, var_1) {
 
     if(var_10["fraction"] == 1) {
       var_12 = 0.51;
-
     }
     var_0 = var_0 + var_12 * var_11;
 
@@ -581,7 +566,6 @@ _id_1B74(var_0, var_1) {
 
     if(var_10["fraction"] < 1) {
       var_15 = var_10["position"] - var_11 * 0.5 + var_7 * -0.9;
-
     }
     return var_15;
   }
@@ -592,7 +576,6 @@ _id_1B74(var_0, var_1) {
 _id_1B75(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   var_1 = level._id_1B57;
   var_2 = common_scripts\utility::flat_angle(level.player getplayerangles());
@@ -637,19 +620,16 @@ _id_1B76(var_0, var_1, var_2) {
     var_4.origin = var_0;
   } else {
     var_4 = spawn("script_model", var_0);
-
   }
   var_4 notsolid();
 
   if(!var_2) {
     var_4 setModel(var_3.model);
-
   }
   var_4.angles = var_1;
 
   if(var_3.model == "node_pathnode") {
     var_4.angles = (0, 0, 0);
-
   }
   if(!var_2) {
     _id_1B8F(var_4);
@@ -679,7 +659,6 @@ _id_1B79() {
 
   if(isDefined(level._id_1B5C)) {
     var_0 = level._id_1B5C;
-
   }
   if(isDefined(level._id_1B57["entity"])) {
     var_0 = level._id_1B57["entity"];
@@ -716,11 +695,9 @@ _id_1B57() {
 _id_1B7E() {
   if(!isDefined(level._id_1B57["normal"])) {
     return 0;
-
   }
   if(_id_1B81(level._id_1B57)) {
     return 0;
-
   }
   var_0 = vectortoangles(level._id_1B57["normal"]);
   var_1 = common_scripts\utility::flat_angle(var_0);
@@ -737,7 +714,6 @@ _id_1B7F(var_0) {
 
   for(var_2 = 5; var_2 < var_0.size; var_2++) {
     var_1 = var_1 + var_0[var_2];
-
   }
   return var_1;
 }
@@ -747,7 +723,6 @@ _id_1B80(var_0, var_1, var_2, var_3) {
 
   if(_id_1B81(var_4)) {
     var_4 = bulletTrace(var_0, var_1, var_2, var_4["entity"]);
-
   }
   return var_4;
 }
@@ -759,7 +734,6 @@ _id_1B81(var_0) {
 _id_1B82(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = -100000;
-
   }
   return _id_1B80(var_0, var_0 + (0, 0, var_1), 0, self)["position"];
 }
@@ -780,7 +754,6 @@ _id_1B84(var_0, var_1) {
     var_3--;
   } else if(var_4 > 0.5) {
     var_3++;
-
   }
   return var_3 * var_1;
 }
@@ -819,7 +792,6 @@ _id_1B87(var_0) {
 
       if(var_6 < 0.05) {
         var_1 = 6;
-
       }
       if(var_6 < var_2) {
         var_3 = var_5;
@@ -829,13 +801,11 @@ _id_1B87(var_0) {
 
   if(!isDefined(var_3)) {
     return 0;
-
   }
   level._id_1B54 = var_3;
 
   if(var_1 >= 2) {
     return 1;
-
   }
   return 0;
 }
@@ -856,7 +826,6 @@ _id_1B89() {
 
   if(level._id_1B53 != 0) {
     var_0 = "^1";
-
   }
   level._id_1B5E["gridsize"]._id_1B32 _id_1B36(var_0 + level._id_1B53);
 }
@@ -864,13 +833,11 @@ _id_1B89() {
 _id_1B8A() {
   if(!level._id_1B53) {
     level._id_1B53 = 64;
-
   }
   level._id_1B53 = level._id_1B53 * 2;
 
   if(level._id_1B53 > 256) {
     level._id_1B53 = 256;
-
   }
   _id_1B89();
 }
@@ -883,7 +850,6 @@ _id_1B8B() {
 
   if(level._id_1B53 < 64) {
     level._id_1B53 = 0;
-
   }
   _id_1B89();
 }
@@ -893,7 +859,6 @@ _id_1B8C() {
     level._id_1B53 = 0;
   } else {
     level._id_1B53 = 256;
-
   }
   _id_1B89();
 }
@@ -922,7 +887,6 @@ _id_1B8F(var_0) {
 
   if(isDefined(var_1._id_1B90)) {
     var_1._id_1B90._id_1B7B = undefined;
-
   }
   var_1 thread _id_1BA8(var_0);
 }
@@ -1073,7 +1037,6 @@ _id_1BA6() {
 _id_1B34() {
   if(!isDefined(level._id_1BA7)) {
     level._id_1BA7 = [];
-
   }
   var_0 = newhudelem();
   level._id_1BA7[level._id_1BA7.size] = var_0;
@@ -1110,7 +1073,6 @@ _id_1BA9() {
 
   if(level._id_1B4C == level._id_1B46) {
     level._id_1B4C = 0;
-
   }
   var_0 = level._id_1B47[level._id_1B4C];
   return var_0;
@@ -1119,7 +1081,6 @@ _id_1BA9() {
 _id_1BAA(var_0) {
   if(isDefined(level._id_0C59["generic"][var_0.model])) {
     return 1;
-
   }
   return 0;
 }

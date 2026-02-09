@@ -358,9 +358,6 @@ revive_trigger_think() {
       }
 
       if(players[i] can_revive(self) || (is_sumpf == 1 && d > 20)) {
-
-      }
-      {
         self.revivetrigger setHintString(&"GAME_BUTTON_TO_REVIVE_PLAYER");
         break;
       }

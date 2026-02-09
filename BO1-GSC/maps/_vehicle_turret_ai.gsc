@@ -21,7 +21,6 @@ enable_turret(turret_index, weapon_type, enemy_team, optional_wait_min, optional
   }
   self thread turret_ai_thread(turret_index, weapon_type, enemy_team, optional_wait_min, optional_wait_max);
 }
-
 disable_turret(turret_index) {
   if(!isDefined(self.turret_ai_array)) {
     init_turret_info();
@@ -33,7 +32,6 @@ disable_turret(turret_index) {
   self.turret_ai_array[turret_index].enabled = false;
   self clearGunnerTarget(turret_index);
 }
-
 init_turret_info() {
   self.turret_ai_array = [];
   for(i = 0; i < 4; i++) {
@@ -51,7 +49,6 @@ init_turret_info() {
     self.turret_ai_array[i].rest_angle = AngleClamp180(fire_angles[1] - self.angles[1]);
   }
 }
-
 fire_turret_for_time(turret_index, time) {
   if(!isDefined(self.turret_ai_array)) {
     init_turret_info();
@@ -90,7 +87,6 @@ fire_turret_for_time(turret_index, time) {
     }
   }
 }
-
 kill_audio_ent(audio_ent) {
   self endon("stop_audio_delete");
   self waittill("death");
@@ -99,7 +95,6 @@ kill_audio_ent(audio_ent) {
     audio_ent Delete();
   }
 }
-
 turret_ai_thread(turret_index, weapon_type, enemy_team, optional_wait_min, optional_wait_max) {
   self endon("death");
   weapon = self SeatGetWeapon(turret_index + 1);
@@ -147,11 +142,9 @@ turret_ai_thread(turret_index, weapon_type, enemy_team, optional_wait_min, optio
     }
   }
 }
-
 score_angle(target_ent, turret_index) {
   return (score_angle_position(target_ent.origin, turret_index));
 }
-
 score_angle_position(origin, turret_index) {
   if(!isDefined(self.turret_ai_array)) {
     init_turret_info();
@@ -165,16 +158,14 @@ score_angle_position(origin, turret_index) {
   }
   return -1000;
 }
-
 score_distance(target_ent) {
   max_range = 3000 * 3000;
-  dist2 = distanceSquared(target_ent.origin, self.origin);
+  dist2 = DistanceSquared(target_ent.origin, self.origin);
   if(dist2 < max_range) {
     return (dist2 / max_range) * 100;
   }
   return -1000;
 }
-
 score_special(target_ent, turret_index) {
   for(i = 0; i < 4; i++) {
     if(isDefined(self.turret_ai_array[i].target_ent) && i != turret_index) {
@@ -185,7 +176,6 @@ score_special(target_ent, turret_index) {
   }
   return 0;
 }
-
 choose_target(turret_index, enemy_team) {
   if(!isDefined(self.turret_ai_array)) {
     init_turret_info();
@@ -225,14 +215,12 @@ choose_target(turret_index, enemy_team) {
     return false;
   }
 }
-
 burst_fire(turret_index, bullet_count, interval) {
   for(i = 0; i < bullet_count; i++) {
     self fireGunnerWeapon(turret_index);
     wait interval;
   }
 }
-
 burst_fire_rebirthbtr(turret_index, bullet_count, interval) {
   for(i = 0; i < bullet_count; i++) {
     self fireGunnerWeapon(turret_index);
@@ -240,7 +228,6 @@ burst_fire_rebirthbtr(turret_index, bullet_count, interval) {
     wait interval;
   }
 }
-
 flame_fire(turret_index, interval) {
   while(interval > 0) {
     self fireGunnerWeapon(turret_index);
@@ -249,7 +236,6 @@ flame_fire(turret_index, interval) {
   }
   self StopFireWeapon(turret_index);
 }
-
 score_target(target_array, turret_index) {
   if(!isDefined(target_array) || !isDefined(turret_index)) {
     return;
@@ -268,7 +254,6 @@ score_target(target_array, turret_index) {
     return best_target;
   }
 }
-
 setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
   self endon("death");
   if(!isDefined(target_radius)) {
@@ -284,8 +269,9 @@ setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
       best_target = undefined;
       fov = GetDvarFloat(#"cg_fov");
       for(i = 0; i < ai.size; i++) {
-        if(target_isincircle(ai[i], driver, fov, target_radius))
+        if(target_isincircle(ai[i], driver, fov, target_radius)) {
           best_target = ai[i];
+        }
       }
       if(isDefined(driver_turret)) {
         if(isDefined(best_target)) {
@@ -306,7 +292,6 @@ setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
     }
   }
 }
-
 update_forced_gunner_targets() {
   if(isDefined(self._forced_target_ent_array)) {
     self._forced_target_ent_array = remove_dead_from_array(self._forced_target_ent_array);
@@ -314,7 +299,6 @@ update_forced_gunner_targets() {
     turret_debug_message("_vehicle_turret_ai couldn't update_forced_gunner_targets since none exist. ");
   }
 }
-
 set_forced_target(target_array) {
   if(isDefined(target_array)) {
     forced_targets = [];
@@ -338,7 +322,6 @@ set_forced_target(target_array) {
     }
   }
 }
-
 clear_forced_target(target_to_remove) {
   if(isDefined(self._forced_target_ent_array)) {
     if(isDefined(target_to_remove)) {
@@ -356,5 +339,4 @@ clear_forced_target(target_to_remove) {
     turret_debug_message("_vehicle_turret_ai tried to clear_forced_target, but no targets existed. ");
   }
 }
-
 turret_debug_message(debug_string) {}

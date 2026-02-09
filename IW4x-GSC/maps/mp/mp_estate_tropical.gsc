@@ -17,13 +17,13 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("r_specularcolorscale", "3");
-  setdvar("r_diffusecolorscale", "1.5");
-  setdvar("sm_sunsamplesizenear", "0.38");
+  setDvar("r_specularcolorscale", "3");
+  setDvar("r_diffusecolorscale", "1.5");
+  setDvar("sm_sunsamplesizenear", "0.38");
 
-  setdvar("compassmaxrange", "3500");
+  setDvar("compassmaxrange", "3500");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.3);
-  setdvar("r_lightGridContrast", 0);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.3);
+  setDvar("r_lightGridContrast", 0);
 }

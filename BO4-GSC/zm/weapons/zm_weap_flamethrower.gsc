@@ -142,7 +142,7 @@ function_82f451d4() {
 }
 
 on_armor_kill(s_params) {
-  if(isplayer(s_params.eattacker) && is_flamethrower_weapon(s_params.weapon, 1) && !(isDefined(self.var_d9e7a08a) && self.var_d9e7a08a) && s_params.smeansofdeath == "MOD_BURNED") {
+  if(isPlayer(s_params.eattacker) && is_flamethrower_weapon(s_params.weapon, 1) && !(isDefined(self.var_d9e7a08a) && self.var_d9e7a08a) && s_params.smeansofdeath == "MOD_BURNED") {
     e_player = s_params.eattacker;
     var_d695a618 = 50 - e_player zm_armor::get(#"hero_weapon_armor");
 
@@ -157,7 +157,7 @@ on_armor_kill(s_params) {
 }
 
 function_f63feeb6(einflictor, eattacker, idamage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(einflictor) && !(isDefined(self.var_95468c43) && self.var_95468c43) && meansofdeath === "MOD_BURNED") {
+  if(isPlayer(einflictor) && !(isDefined(self.var_95468c43) && self.var_95468c43) && meansofdeath === "MOD_BURNED") {
     self thread function_d8ee4d6a(eattacker);
   }
 
@@ -165,12 +165,12 @@ function_f63feeb6(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     self.var_b364c165 = 1;
   }
 
-  if(isplayer(einflictor) && meansofdeath === "MOD_BURNED" && !(isDefined(self.is_on_fire) && self.is_on_fire)) {
+  if(isPlayer(einflictor) && meansofdeath === "MOD_BURNED" && !(isDefined(self.is_on_fire) && self.is_on_fire)) {
     var_bb6709b6 = zm_equipment::function_379f6b5d(16);
     self namespace_9ff9f642::burn(weapon.name, eattacker, weapon, var_bb6709b6);
   }
 
-  if(isplayer(einflictor) && !(isDefined(self.var_d9e7a08a) && self.var_d9e7a08a) && meansofdeath === "MOD_BURNED") {
+  if(isPlayer(einflictor) && !(isDefined(self.var_d9e7a08a) && self.var_d9e7a08a) && meansofdeath === "MOD_BURNED") {
     if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
       return self.health;
     }

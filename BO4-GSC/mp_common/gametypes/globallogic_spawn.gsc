@@ -777,12 +777,12 @@ spawnplayer() {
     }
   }
 
-  if(!isDefined(getdvar(#"scr_showperksonspawn"))) {
-    setdvar(#"scr_showperksonspawn", 0);
+  if(!isDefined(getDvar(#"scr_showperksonspawn"))) {
+    setDvar(#"scr_showperksonspawn", 0);
   }
 
   if(level.hardcoremode) {
-    setdvar(#"scr_showperksonspawn", 0);
+    setDvar(#"scr_showperksonspawn", 0);
   }
 
   if(getdvarint(#"scr_showperksonspawn", 0) == 1 && !gamestate::is_game_over()) {
@@ -809,7 +809,7 @@ spawnplayer() {
 
   print("<dev string:xdb>" + self.origin[0] + "<dev string:xe0>" + self.origin[1] + "<dev string:xe0>" + self.origin[2] + "<dev string:xe4>");
 
-  setdvar(#"scr_selecting_location", "");
+  setDvar(#"scr_selecting_location", "");
 
   if(gamestate::is_game_over()) {
     assert(!level.intermission);

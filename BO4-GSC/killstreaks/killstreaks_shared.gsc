@@ -118,7 +118,6 @@ register_ui(killstreak_type, killstreak_menu) {
   if(level.killstreaks[killstreak_type].uiname == "<dev string:x74>") {
     level.killstreaks[killstreak_type].uiname = killstreak_menu;
   }
-
 }
 
 killstreak_init(killstreak_type) {
@@ -401,7 +400,7 @@ register_dev_dvars(killstreaktype) {
   level.killstreaks[killstreaktype].devdvar = "<dev string:x2df>" + killstreaktype + "<dev string:x2e6>";
   level.killstreaks[killstreaktype].devenemydvar = "<dev string:x2df>" + killstreaktype + "<dev string:x2ee>";
   level.killstreaks[killstreaktype].devtimeoutdvar = "<dev string:x2df>" + killstreaktype + "<dev string:x2fb>";
-  setdvar(level.killstreaks[killstreaktype].devtimeoutdvar, 0);
+  setDvar(level.killstreaks[killstreaktype].devtimeoutdvar, 0);
   level thread register_devgui(killstreaktype);
 }
 
@@ -442,7 +441,7 @@ devgui_scorestreak_command_debugdvar(killstreaktype, dvar) {
 }
 
 function devgui_scorestreak_dvar_toggle(killstreaktype, title, dvar) {
-  setdvar(dvar, 0);
+  setDvar(dvar, 0);
   devgui_scorestreak_command(killstreaktype, "Toggle " + title, "toggle " + dvar + " 1 0");
 }
 
@@ -1107,7 +1106,7 @@ has_killstreak(killstreak) {
 recordkillstreakbegindirect(killstreak, recordstreakindex) {
   player = self;
 
-  if(!isplayer(player) || !isDefined(recordstreakindex)) {
+  if(!isPlayer(player) || !isDefined(recordstreakindex)) {
     return;
   }
 
@@ -1351,7 +1350,7 @@ get_killstreak_momentum_cost(player, killstreak) {
     return 0;
   }
 
-  if(!isDefined(killstreak) || !isDefined(player) || !isplayer(player)) {
+  if(!isDefined(killstreak) || !isDefined(player) || !isPlayer(player)) {
     return 0;
   }
 
@@ -1983,7 +1982,7 @@ initialspawnprotection() {
 }
 
 killstreak_debug_think() {
-  setdvar(#"debug_killstreak", "<dev string:x74>");
+  setDvar(#"debug_killstreak", "<dev string:x74>");
 
   for(;;) {
     cmd = getdvarstring(#"debug_killstreak");
@@ -1995,7 +1994,7 @@ killstreak_debug_think() {
     }
 
     if(cmd != "<dev string:x74>") {
-      setdvar(#"debug_killstreak", "<dev string:x74>");
+      setDvar(#"debug_killstreak", "<dev string:x74>");
     }
 
     wait 0.5;
@@ -2087,7 +2086,7 @@ monitordamage(killstreak_ref, max_health, destroyed_callback, low_health, low_he
       continue;
     }
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
 
@@ -2193,7 +2192,7 @@ monitordamage(killstreak_ref, max_health, destroyed_callback, low_health, low_he
 }
 
 function_73566ec7(attacker, weapon, owner) {
-  if(!isDefined(self) || isDefined(self.var_c5bb583d) && self.var_c5bb583d || !isDefined(attacker) || !isplayer(attacker) || !isDefined(self.killstreaktype) || self.team === attacker.team) {
+  if(!isDefined(self) || isDefined(self.var_c5bb583d) && self.var_c5bb583d || !isDefined(attacker) || !isPlayer(attacker) || !isDefined(self.killstreaktype) || self.team === attacker.team) {
     return;
   }
 
@@ -2213,7 +2212,7 @@ function_73566ec7(attacker, weapon, owner) {
       }
 
       foreach(assister in self.attackers) {
-        if(assister == attacker || !isplayer(assister) || !util::function_fbce7263(self.team, assister.team)) {
+        if(assister == attacker || !isPlayer(assister) || !util::function_fbce7263(self.team, assister.team)) {
           continue;
         }
 
@@ -2260,7 +2259,7 @@ ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon, max_hea
     return 0;
   }
 
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     return get_old_damage(attacker, weapon, type, damage, allow_bullet_damage);
   }
 
@@ -2328,7 +2327,7 @@ get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damag
         break;
       }
 
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         hasfmj = attacker hasperk(#"specialty_armorpiercing");
       }
 
@@ -3026,7 +3025,6 @@ configure_team_internal(owner, ishacked) {
   if(ishacked == 0) {
     killstreak.originalowner = owner;
     killstreak.originalteam = owner.team;
-
   } else {
     assert(killstreak.killstreakteamconfigured, "<dev string:x57d>");
   }
@@ -3173,7 +3171,7 @@ override_entity_camera_in_demo(killstreaktype, value, isinventory) {
 }
 
 update_player_threat(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

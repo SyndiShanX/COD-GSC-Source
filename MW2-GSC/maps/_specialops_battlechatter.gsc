@@ -313,7 +313,7 @@ friendlyfire_is_valid(damage, attacker, type) {
     return false;
   }
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return false;
   }
 
@@ -352,7 +352,7 @@ friendlyfire_whizby_tracking() {
 }
 
 friendlyfire_whizby_is_valid(shooter, whizByOrigin) {
-  if(!IsPlayer(shooter)) {
+  if(!isPlayer(shooter)) {
     return false;
   }
 

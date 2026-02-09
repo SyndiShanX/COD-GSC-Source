@@ -13,14 +13,14 @@ init() {
   game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
   precachestring(&"MP_AUTOBALANCE_NOW");
 
-  if(getdvar(#"scr_teambalance") == "")
-    setdvar("scr_teambalance", "0");
+  if(getDvar(#"scr_teambalance") == "")
+    setDvar("scr_teambalance", "0");
 
   level.teambalance = getdvarint(#"scr_teambalance");
   level.teambalancetimer = 0;
 
-  if(getdvar(#"scr_timeplayedcap") == "")
-    setdvar("scr_timeplayedcap", "1800");
+  if(getDvar(#"scr_timeplayedcap") == "")
+    setDvar("scr_timeplayedcap", "1800");
 
   level.timeplayedcap = int(getdvarint(#"scr_timeplayedcap"));
   level.freeplayers = [];

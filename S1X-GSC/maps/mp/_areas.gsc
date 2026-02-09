@@ -57,6 +57,5 @@ softLandingWaiter() {
     if(!isDefined(trigger.destructible)) {
       continue;
     }
-
   }
 }

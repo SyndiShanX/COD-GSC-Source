@@ -23,7 +23,6 @@ main() {
     level._id_4075 = var_0;
   } else {
     level._id_4075 = 0;
-
   }
   var_1 = spawnStruct();
   var_1._id_4076 = [];
@@ -53,7 +52,6 @@ _id_4078(var_0) {
 
     if(level._id_4074 > 3) {
       level._id_4074 = 1;
-
     }
     var_1 = level._id_4074;
   }

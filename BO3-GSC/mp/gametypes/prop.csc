@@ -65,7 +65,7 @@ function function_8ef128e8(localclientnum, player) {
   }
   ents = getEntArray(localclientnum);
   foreach(ent in ents) {
-    if(!ent isplayer() && isDefined(ent.owner) && ent.owner == player && ent function_c5c7c3ef(player)) {
+    if(!ent isPlayer() && isDefined(ent.owner) && ent.owner == player && ent function_c5c7c3ef(player)) {
       return ent;
     }
   }
@@ -186,7 +186,7 @@ function function_4ff87091(localclientnum) {
   if(isDefined(self.prop)) {
     return 1;
   }
-  if(self isplayer()) {
+  if(self isPlayer()) {
     self.prop = function_8ef128e8(localclientnum, self);
     return isDefined(self.prop);
   }

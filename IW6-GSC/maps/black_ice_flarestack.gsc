@@ -223,7 +223,7 @@ event_flarestack_enter_fail_watcher() {
     }
   }
 
-  setdvar("ui_deadquote", &"BLACK_ICE_FLARESTACK_FAIL_ENEMY_KILL");
+  setDvar("ui_deadquote", &"BLACK_ICE_FLARESTACK_FAIL_ENEMY_KILL");
   level.player setclienttriggeraudiozone("blackice_flarestack_fail", 0.1);
   maps\_utility::missionfailedwrapper();
 }

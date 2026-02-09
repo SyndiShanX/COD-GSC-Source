@@ -502,15 +502,14 @@ function_c0257c1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_466c2fa3(level._effect["<dev string:x38>" + newval], newval);
 
     level thread function_5545acc1(newval);
-
   }
 }
 
 function_ec12026f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(function_8b1a219a()) {
-      self.basefov = getdvar(#"cg_fov_default", 90);
-      setdvar(#"cg_fov_default", 80);
+      self.basefov = getDvar(#"cg_fov_default", 90);
+      setDvar(#"cg_fov_default", 80);
     }
 
     return;
@@ -518,7 +517,7 @@ function_ec12026f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(function_8b1a219a()) {
     if(isDefined(self.basefov)) {
-      setdvar(#"cg_fov_default", self.basefov);
+      setDvar(#"cg_fov_default", self.basefov);
     }
   }
 }

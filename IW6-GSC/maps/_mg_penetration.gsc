@@ -65,7 +65,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(var_0) {
     wait 0.1;
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     self endon("saw_enemy");
     var_3 = var_1 getEye();
     var_2 = vectortoangles(var_3 - var_0.origin);

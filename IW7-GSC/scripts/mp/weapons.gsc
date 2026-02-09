@@ -709,7 +709,7 @@ func_13BAB(var_0, var_1, var_2, var_3, var_4) {
   var_10 = var_9[0]["entity"];
   var_11 = var_9[0]["normal"];
   var_12 = var_9[0]["position"];
-  if(isDefined(var_10) && isplayer(var_10)) {
+  if(isDefined(var_10) && isPlayer(var_10)) {
     return;
   } else {
     var_13 = var_2 - 2 * vectordot(var_2, var_11) * var_11;
@@ -905,7 +905,7 @@ glprox_trygetweaponname(var_0) {
 glprox_modifieddamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = var_0;
   var_4 = scripts\mp\utility::getweaponbasedsmokegrenadecount(var_4);
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     return var_7;
   }
 
@@ -2098,7 +2098,7 @@ func_DAD5(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("death");
   var_1 waittill("missile_stuck", var_2);
-  if(isDefined(var_2) && isplayer(var_2) || isagent(var_2)) {
+  if(isDefined(var_2) && isPlayer(var_2) || isagent(var_2)) {
     var_1 detonate(var_0);
   }
 }
@@ -2120,11 +2120,11 @@ throwingknifeused(var_0, var_1, var_2) {
 
   var_5 = isDefined(var_4) && var_4 == "tag_flicker";
   var_6 = isDefined(var_4) && var_4 == "tag_weapon";
-  if(isDefined(var_3) && isplayer(var_3) || isagent(var_3) && var_5) {
+  if(isDefined(var_3) && isPlayer(var_3) || isagent(var_3) && var_5) {
     var_3 notify("shield_hit", var_1);
   }
 
-  if(isDefined(var_3) && isplayer(var_3) || isagent(var_3) && !var_6 && !var_5) {
+  if(isDefined(var_3) && isPlayer(var_3) || isagent(var_3) && !var_6 && !var_5) {
     if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_3, var_1)) {
       var_1 delete();
       return;
@@ -2154,7 +2154,7 @@ throwingknifeused(var_0, var_1, var_2) {
     }
 
     var_7 waittill("trigger", var_8);
-    if(!isplayer(var_8) || !scripts\mp\utility::isreallyalive(var_8)) {
+    if(!isPlayer(var_8) || !scripts\mp\utility::isreallyalive(var_8)) {
       continue;
     }
 
@@ -2660,7 +2660,7 @@ watchmissileusage() {
         break;
     }
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       var_0.adsfire = scripts\mp\utility::func_9EE8();
     }
 
@@ -3460,7 +3460,7 @@ func_3343() {
 
   for(;;) {
     self waittill("damage", var_2, var_0, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(!isplayer(var_0) && !isagent(var_0)) {
+    if(!isPlayer(var_0) && !isagent(var_0)) {
       continue;
     }
 
@@ -3514,7 +3514,7 @@ func_3343() {
     self.damagedby = var_0;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback("c4");
     if(var_0 != self.owner && var_0.team != self.owner.team) {
       if(var_10 != "trophy_mp") {
@@ -3946,7 +3946,7 @@ explosivehandlemovers(var_0, var_1) {
 }
 
 explosivetrigger(var_0, var_1, var_2) {
-  if(isplayer(var_0) && var_0 scripts\mp\utility::_hasperk("specialty_delaymine")) {
+  if(isPlayer(var_0) && var_0 scripts\mp\utility::_hasperk("specialty_delaymine")) {
     var_0 thread scripts\mp\missions::func_127BC();
     var_0 notify("triggeredExpl", var_2);
     var_1 = level.delayminetime;
@@ -4757,7 +4757,7 @@ getplayerspeedbyweapon(var_0) {
 }
 
 stancerecoiladjuster() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -4856,7 +4856,7 @@ semtexused(var_0) {
   var_0.originalowner = self;
   var_0 waittill("missile_stuck", var_1);
   var_0 thread scripts\mp\shellshock::grenade_earthquake();
-  if(isplayer(var_1) || isagent(var_1)) {
+  if(isPlayer(var_1) || isagent(var_1)) {
     grenadestuckto(var_0, var_1);
   }
 
@@ -5219,7 +5219,7 @@ minedamagemonitor() {
   for(;;) {
     self waittill("damage", var_4, var_0, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10);
     var_12 = scripts\mp\utility::func_13CA1(var_12, var_10);
-    if(!isplayer(var_0) && !isagent(var_0)) {
+    if(!isPlayer(var_0) && !isagent(var_0)) {
       continue;
     }
 
@@ -5275,7 +5275,7 @@ minedamagemonitor() {
     self.killcament.damagedby = var_0;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_3);
     if(var_0 != self.owner && var_0.team != self.owner.team) {
       var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
@@ -5743,7 +5743,7 @@ func_B8F7(var_0) {
     var_1 = 0;
   }
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_1 = 0;
   }
 
@@ -5788,7 +5788,7 @@ minedamagedebug(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 minedamageheightpassed(var_0, var_1) {
-  if(isplayer(var_1) && isalive(var_1) && var_1.sessionstate == "playing") {
+  if(isPlayer(var_1) && isalive(var_1) && var_1.sessionstate == "playing") {
     var_2 = var_1 scripts\mp\utility::getstancecenter();
   } else if(var_2.classname == "misc_turret") {
     var_2 = var_2.origin + (0, 0, 32);
@@ -6325,7 +6325,7 @@ grenadestuckto(var_0, var_1, var_2) {
 }
 
 func_85DE(var_0, var_1) {
-  if(isplayer(var_1) && isDefined(var_0)) {
+  if(isPlayer(var_1) && isDefined(var_0)) {
     var_1 scripts\mp\hud_message::showsplash(var_0, undefined, self);
   }
 
@@ -6637,7 +6637,7 @@ func_20E4() {
   self endon("death");
   self endon("disconnect");
   wait(0.1);
-  if(isDefined(self) && isplayer(self) && !isbot(self)) {
+  if(isDefined(self) && isPlayer(self) && !isbot(self)) {
     self playlocalsound("sonic_shotgun_debuff");
     self setsoundsubmix("sonic_shotgun_impact");
   }
@@ -6770,7 +6770,7 @@ watchgrenadeaxepickup(var_0, var_1) {
   }
 
   self waittill("missile_stuck", var_2, var_3);
-  if(isDefined(var_2) && isplayer(var_2) || isagent(var_2)) {
+  if(isDefined(var_2) && isPlayer(var_2) || isagent(var_2)) {
     var_4 = var_3 == "tag_flicker";
     var_5 = var_3 == "tag_top_flicker";
     var_6 = var_2 scripts\mp\utility::_hasperk("specialty_rearguard") && var_3 == "tag_origin";
@@ -6783,7 +6783,7 @@ watchgrenadeaxepickup(var_0, var_1) {
         relaunchaxe(self.weapon_name, var_9, 1);
         return;
       }
-    } else if(!scripts\mp\utility::istrue(var_8) && isplayer(var_3) && !scripts\mp\utility::isreallyalive(var_3) && level.mapname == "mp_neon" || scripts\mp\utility::istrue(level.var_DC24)) {
+    } else if(!scripts\mp\utility::istrue(var_8) && isPlayer(var_3) && !scripts\mp\utility::isreallyalive(var_3) && level.mapname == "mp_neon" || scripts\mp\utility::istrue(level.var_DC24)) {
       return;
     }
   }
@@ -6843,7 +6843,7 @@ watchaxeautopickup(var_0, var_1) {
   var_2 endon("death");
   for(;;) {
     var_2 waittill("trigger", var_0);
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 

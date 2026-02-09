@@ -95,7 +95,7 @@ logpowerupevent(powerup, optplayer, eventname) {
   playerspawnid = -1;
   playername = "";
 
-  if(isDefined(optplayer) && isplayer(optplayer)) {
+  if(isDefined(optplayer) && isPlayer(optplayer)) {
     playerspawnid = getplayerspawnid(optplayer);
     playername = optplayer.name;
   }

@@ -67,7 +67,7 @@ function _on(slot, weapon) {
   cybercom::function_adc40f11(weapon, 1);
   self thread spawn_firefly_swarm(self hascybercomability("cybercom_fireflyswarm") == 2);
   self notify("bhtn_action_notify", "firefly_deploy");
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_fireflyswarm");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
@@ -151,7 +151,7 @@ function spawn_firefly_swarm(upgraded, targetent, swarms = getdvarint("scr_firef
   if(!isvehicle(self)) {
     s_anim_pos = spawnStruct();
     s_anim_pos.owner = self;
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       origin = self getEye();
       angles = self getplayerangles();
     } else {
@@ -544,7 +544,7 @@ function swarm_attack_think(params) {
         self function_cb5f9a2(target);
       }
     }
-  } else if(isplayer(target)) {
+  } else if(isPlayer(target)) {
     self setgoal(self.targetent.origin + vectorscale((0, 0, 1), 48), 1, self.goalradius);
     badplace_cylinder("swarmBP_" + self.swarm_id, 0, target.origin, 256, 80, "axis");
     self.badplace = 1;
@@ -705,7 +705,7 @@ function private _reacttoswarm(swarm, reactionanims, weapon) {
 function swarm_delete() {
   if(isDefined(self)) {
     self notify("swarm_is_dead");
-    if(isDefined(self.targetent) && !isplayer(self.targetent)) {
+    if(isDefined(self.targetent) && !isPlayer(self.targetent)) {
       self.targetent clientfield::set("firefly_state", 5);
       self.targetent.swarm = undefined;
       self.targetent.swarm_coolofftime = gettime() + 2000;
@@ -736,7 +736,7 @@ function swarm_dead_think(params) {
   } else {
     self clientfield::set("firefly_state", 10);
   }
-  if(isDefined(self.targetent) && !isplayer(self.targetent)) {
+  if(isDefined(self.targetent) && !isPlayer(self.targetent)) {
     self.targetent clientfield::set("firefly_state", 5);
     self.targetent.swarm = undefined;
     self.targetent.swarm_coolofftime = gettime() + 2000;

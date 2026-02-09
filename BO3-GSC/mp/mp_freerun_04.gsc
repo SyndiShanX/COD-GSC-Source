@@ -16,9 +16,9 @@ function main() {
   namespace_c68b7fb6::main();
   namespace_8a3acb29::main();
   load::main();
-  setdvar("glassMinVelocityToBreakFromJump", "380");
-  setdvar("glassMinVelocityToBreakFromWallRun", "180");
-  setdvar("compassmaxrange", "2100");
+  setDvar("glassMinVelocityToBreakFromJump", "380");
+  setDvar("glassMinVelocityToBreakFromWallRun", "180");
+  setDvar("compassmaxrange", "2100");
 }
 
 function precache() {}

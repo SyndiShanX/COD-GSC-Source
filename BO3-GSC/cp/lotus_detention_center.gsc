@@ -1092,7 +1092,7 @@ function dc4_enemy_sponge() {
 }
 
 function dc4_enemy_sponge_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, weapon, v_point, v_dir, str_hit_loc, psoffsettime, boneindex, n_model_index) {
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     n_damage = 0;
   }
   return n_damage;
@@ -1148,7 +1148,7 @@ function rap_damage_override(e_inflictor, e_attacker, n_damage, n_idflags, str_m
   if(isDefined(str_means_of_death) && str_means_of_death == "MOD_UNKNOWN") {
     n_damage = n_damage;
   } else {
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       n_damage = n_damage * 0.09;
     } else {
       n_damage = 0;

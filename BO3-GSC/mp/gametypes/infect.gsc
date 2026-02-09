@@ -246,7 +246,7 @@ function function_8dde4d1f() {
 function function_f72d8c1c(team, name) {
   var_19719540 = "g_customTeamName_" + team;
   if(getdvarstring(var_19719540) == "") {
-    setdvar(var_19719540, name);
+    setDvar(var_19719540, name);
   }
 }
 
@@ -390,9 +390,9 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     if(level.friendlyfire > 0 && isDefined(attacker.team) && attacker.team == self.team) {
       processkill = 0;
     } else {
-      if(isplayer(attacker) && attacker != self) {
+      if(isPlayer(attacker) && attacker != self) {
         processkill = 1;
-      } else if(level.infect_allowsuicide && (attacker == self || !isplayer(attacker))) {
+      } else if(level.infect_allowsuicide && (attacker == self || !isPlayer(attacker))) {
         processkill = 1;
         wassuicide = 1;
       }
@@ -1062,14 +1062,14 @@ function function_e7129db9(var_5d733658) {
 }
 
 function function_fb550fe9(dvarname, var_c0c93d2) {
-  setdvar(dvarname, "");
+  setDvar(dvarname, "");
   while(true) {
     wait(0.05);
     dvarvalue = getdvarstring(dvarname);
     if(dvarvalue == "") {
       continue;
     }
-    setdvar(dvarname, "");
+    setDvar(dvarname, "");
     tokens = strtok(dvarvalue, "");
     if(!isDefined(tokens) || tokens.size < 1) {
       continue;

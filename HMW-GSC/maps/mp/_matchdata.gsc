@@ -26,15 +26,15 @@ init() {
   level.maxloadouts = 10;
   level thread gameendlistener();
 
-  if(getdvar("virtualLobbyActive") != "1")
+  if(getDvar("virtualLobbyActive") != "1")
     level thread reconlogplayerinfo();
 }
 
 matchstarted() {
-  if(getdvar("virtualLobbyActive") == "1") {
+  if(getDvar("virtualLobbyActive") == "1") {
     return;
   }
-  if(getdvar("mapname") == getdvar("virtualLobbyMap")) {
+  if(getDvar("mapname") == getDvar("virtualLobbyMap")) {
     return;
   }
   sysprint("MatchStarted: Completed");
@@ -206,7 +206,7 @@ logplayerxp(var_0, var_1) {
 }
 
 logcompletedchallenge(var_0) {
-  if(!isplayer(self) || !canlogclient(self) || isbot(self)) {
+  if(!isPlayer(self) || !canlogclient(self) || isbot(self)) {
     return;
   }
   var_1 = getmatchdata("players", self.clientid, "challengeCount");
@@ -334,13 +334,13 @@ recon_log_loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
 }
 
 logplayerandkilleradsandfov(var_0, var_1) {
-  if(!canlogclient(self) || isplayer(var_1) && !canlogclient(var_1) || !canloglife(var_0)) {
+  if(!canlogclient(self) || isPlayer(var_1) && !canlogclient(var_1) || !canloglife(var_0)) {
     return;
   }
   if(var_0 >= level.maxlives) {
     return;
   }
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(var_1 playerads() > 0.5)
       setmatchdata("lives", var_0, "killerWasADS", 1);
 
@@ -473,10 +473,10 @@ determineweaponnameandattachments(var_0, var_1) {
 }
 
 logfirefightshotshits(var_0, var_1) {
-  if(!canlogclient(self) || isplayer(var_1) && !canlogclient(var_1) || !canloglife(var_0)) {
+  if(!canlogclient(self) || isPlayer(var_1) && !canlogclient(var_1) || !canloglife(var_0)) {
     return;
   }
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(var_0 >= level.maxlives) {
@@ -499,12 +499,12 @@ logplayerandkillerstanceandmotionstate(var_0, var_1) {
   if(!canloglife(var_0)) {
     return;
   }
-  if(isplayer(self) && canlogclient(self)) {
+  if(isPlayer(self) && canlogclient(self)) {
     var_2 = getstanceandmotionstateforplayer(self);
     setmatchdata("lives", var_0, "victimStanceAndMotionState", var_2);
   }
 
-  if(isplayer(var_1) && canlogclient(var_1)) {
+  if(isPlayer(var_1) && canlogclient(var_1)) {
     var_2 = getstanceandmotionstateforplayer(var_1);
     setmatchdata("lives", var_0, "killerStanceAndMotionState", var_2);
   }
@@ -514,12 +514,12 @@ logassists(var_0, var_1) {
   if(!canloglife(var_0)) {
     return;
   }
-  if(isplayer(self) && canlogclient(self)) {
+  if(isPlayer(self) && canlogclient(self)) {
     if(isDefined(self.attackerdata)) {
       var_2 = 0;
 
       foreach(var_4 in self.attackerdata) {
-        if(isplayer(var_4.attackerent)) {
+        if(isPlayer(var_4.attackerent)) {
           if(var_4.attackerent != var_1) {
             setmatchdata("lives", var_0, "assists", var_2, "assistingPlayerIndex", var_4.attackerent.clientid);
             setmatchdata("lives", var_0, "assists", var_2, "damage", maps\mp\_utility::clamptobyte(var_4.damage));
@@ -541,10 +541,10 @@ logassists(var_0, var_1) {
 }
 
 logspecialassists(var_0, var_1) {
-  if(!isplayer(self) || !canlogclient(self)) {
+  if(!isPlayer(self) || !canlogclient(self)) {
     return;
   }
-  if(!isplayer(var_0) || !canlogclient(var_0)) {
+  if(!isPlayer(var_0) || !canlogclient(var_0)) {
     return;
   }
   var_2 = self.lifeid;
@@ -575,7 +575,7 @@ logspecialassists(var_0, var_1) {
 }
 
 logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!canlogclient(self) || isplayer(var_1) && !canlogclient(var_1) || !canloglife(var_0)) {
+  if(!canlogclient(self) || isPlayer(var_1) && !canlogclient(var_1) || !canloglife(var_0)) {
     return;
   }
   if(var_0 >= level.maxlives) {
@@ -637,7 +637,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   setmatchdata("lives", var_0, "meansOfDeath", var_3);
   var_14 = 2;
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     setmatchdata("lives", var_0, "killer", var_1.clientid);
     setmatchdata("lives", var_0, "killerLifeIndex", var_1.lifeid);
     setmatchdata("lives", var_0, "killerPos", 0, int(var_1.origin[0]));
@@ -675,7 +675,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   setmatchdata("lives", var_0, "victimAngles", 2, int(self.angles[2]));
   var_17 = "world";
 
-  if(isplayer(var_1))
+  if(isPlayer(var_1))
     var_17 = var_1.name;
 
   var_18 = 1;
@@ -683,7 +683,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_20 = maps\mp\_utility::isaiteamparticipant(self);
   var_21 = 0;
 
-  if(isplayer(var_1))
+  if(isPlayer(var_1))
     var_21 = maps\mp\_utility::isaiteamparticipant(var_1);
 
   var_22 = length(self.origin - var_1.origin);
@@ -693,7 +693,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_26 = -1;
   var_27 = gettime();
 
-  if(isplayer(var_1))
+  if(isPlayer(var_1))
     var_24 = var_1 playerads();
 
   var_28 = var_1.clientid;
@@ -723,7 +723,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(self.spawninfo) && isDefined(self.spawninfo.spawntime))
     var_25 = (var_27 - self.spawninfo.spawntime) / 1000.0;
 
-  if(isDefined(var_1.spawninfo) && isDefined(var_1.spawninfo.spawntime) && isplayer(var_1))
+  if(isDefined(var_1.spawninfo) && isDefined(var_1.spawninfo.spawntime) && isPlayer(var_1))
     var_26 = (var_27 - var_1.spawninfo.spawntime) / 1000.0;
 
   reconspatialevent(self.origin, "script_mp_playerdeath: player_name %s, life_id %d, angles %v, death_dot %f, is_jugg %b, is_killstreak %b, mod %s, gameTime %d, spawnToDeathTime %f, attackerAliveTime %f, attacker_life_id %d", self.name, self.lifeid, self.angles, var_14, var_1 maps\mp\_utility::isjuggernaut(), maps\mp\_utility::iskillstreakweapon(var_8.weaponnamefull), var_3, var_27, var_25, var_26, var_29);
@@ -754,7 +754,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
   }
 
-  if(isplayer(var_1) && var_26 <= 3.0) {
+  if(isPlayer(var_1) && var_26 <= 3.0) {
     if(!isDefined(level.matchdata["badSpawnKilledTooFastCount"]))
       level.matchdata["badSpawnKilledTooFastCount"] = 1;
     else
@@ -844,7 +844,7 @@ endofgamesummarylogger() {
     }
 
     var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "gameMode", level.gametype);
-    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "map", tolower(getdvar("mapname")));
+    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "map", tolower(getDvar("mapname")));
 
     if(maps\mp\_utility::matchmakinggame()) {
       var_6 = level.gametype;

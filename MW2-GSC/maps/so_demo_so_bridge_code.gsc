@@ -10,9 +10,7 @@
 #include maps\_specialops;
 #include maps\_hud_util;
 
-// ---------------------------------------------------------------------------------
-
-track_infinite_ammo_time() {
+// --------------------------------------------------------------------------------- track_infinite_ammo_time() {
   level.normal_time = 0;
   level.infinite_time = 0;
 
@@ -27,9 +25,7 @@ track_infinite_ammo_time() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-register_bridge_enemy() {
+// --------------------------------------------------------------------------------- register_bridge_enemy() {
   if(!isDefined(level.bridge_enemies)) {
     level.bridge_enemies = 0;
     level.enemy_list = [];
@@ -49,9 +45,7 @@ register_bridge_enemy() {
   player.target_reminder_time = gettime();
 }
 
-// ---------------------------------------------------------------------------------
-
-player_refill_ammo() {
+// --------------------------------------------------------------------------------- player_refill_ammo() {
   level endon("special_op_terminated");
 
   while(true) {
@@ -123,9 +117,7 @@ player_wait_for_fire() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-vehicle_alive_think() {
+// --------------------------------------------------------------------------------- vehicle_alive_think() {
   level endon("special_op_terminated");
 
   if(!isDefined(level.vehicles_alive))
@@ -143,7 +135,7 @@ vehicle_alive_think() {
   level.vehicles_alive--;
   level.vehicle_list = array_remove(level.vehicle_list, self);
 
-  if(isDefined(attacker) && IsPlayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker.target_reminder_time = gettime();
   } else {
     foreach(player in level.players)
@@ -169,7 +161,7 @@ vehicle_track_damage() {
       continue;
     }
 
-    if(isplayer(attacker))
+    if(isPlayer(attacker))
       attacker.vehicle_damage += damage;
     else
       attacker.owner.vehicle_damage += damage;
@@ -182,7 +174,7 @@ vehicle_attacker_is_player(attacker) {
     return false;
 
   // Player attacker...
-  if(isplayer(attacker))
+  if(isPlayer(attacker))
     return true;
 
   // Player's turret attacker
@@ -192,7 +184,7 @@ vehicle_attacker_is_player(attacker) {
     return false;
   if(!isDefined(attacker.owner))
     return false;
-  if(!isplayer(attacker.owner))
+  if(!isPlayer(attacker.owner))
     return false;
 
   return true;
@@ -206,13 +198,11 @@ vehicle_get_slide_car(car_id) {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-// Run on an individual player to help them out.
+// --------------------------------------------------------------------------------- // Run on an individual player to help them out.
 hud_display_cars_hint() {
   level endon("special_op_terminated");
 
-  assertex(isplayer(self), "hud_display_cars_help() can only be called on players.");
+  assertex(isPlayer(self), "hud_display_cars_help() can only be called on players.");
   gameskill = self get_player_gameskill();
   self.target_reminder_time = gettime();
   self.target_help_time = 20000;
@@ -249,9 +239,7 @@ hud_disable_cars_hint() {
   return (self.target_reminder_time > player_time_test);
 }
 
-// ---------------------------------------------------------------------------------
-
-hud_display_car_locations() {
+// --------------------------------------------------------------------------------- hud_display_car_locations() {
   level endon("special_op_terminated");
 
   while(!flag("so_demoman_complete")) {
@@ -296,9 +284,7 @@ hud_show_target_icon(vehicle) {
   icon Destroy();
 }
 
-// ---------------------------------------------------------------------------------
-
-hud_display_car_objectives() {
+// --------------------------------------------------------------------------------- hud_display_car_objectives() {
   level endon("special_op_terminated");
 
   Objective_SetPointerTextOverride(1, &"SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
@@ -347,9 +333,7 @@ hud_hide_car_objectives() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-hud_display_cars_remaining() {
+// --------------------------------------------------------------------------------- hud_display_cars_remaining() {
   self.car_title = so_create_hud_item(3, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_VEHICLES", self);
   self.car_count = so_create_hud_item(3, so_hud_ypos(), undefined, self);
   self.car_count.alignx = "left";

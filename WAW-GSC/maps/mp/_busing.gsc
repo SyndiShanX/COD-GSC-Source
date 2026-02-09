@@ -1,19 +1,16 @@
-
 #include maps\mp\_utility;
 
-busInit()
-{
-	assert(level.clientscripts);
+busInit() {
+  assert(level.clientscripts);
 
-	level.busState = "";
-	registerClientSys("busCmd");
+  level.busState = "";
+  registerClientSys("busCmd");
 
-	//setBusState("map_load");
+  //setBusState("map_load");
 }
 
-setBusState(state)
-{
-	if(level.busState != state)
-		setClientSysState("busCmd", state );
-	level.busState = state;
+setBusState(state) {
+  if(level.busState != state)
+    setClientSysState("busCmd", state);
+  level.busState = state;
 }

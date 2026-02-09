@@ -175,7 +175,7 @@ _settext(var_0) {
 }
 
 _clearalltextafterhudelem() {
-  if(getdvar("netconststrings_enabled") != "0") {
+  if(getDvar("netconststrings_enabled") != "0") {
     return;
   }
   if(level._clearalltextafterhudelem) {
@@ -326,45 +326,45 @@ button_down(var_0, var_1) {
 dumpsettings() {}
 
 artstartvisionfileexport() {
-  common_scripts\utility::fileprint_launcher_start_file();
+  common_scripts\utility:: fileprint_launcher_start_file();
 }
 
 artendvisionfileexport() {
-  return common_scripts\utility::fileprint_launcher_end_file("\\share\\raw\\vision\\" + level.script + ".vision", 1);
+  return common_scripts\utility:: fileprint_launcher_end_file("\\share\\raw\\vision\\" + level.script + ".vision", 1);
 }
 
 artstartfogfileexport() {
-  common_scripts\utility::fileprint_launcher_start_file();
+  common_scripts\utility:: fileprint_launcher_start_file();
 }
 
 artendfogfileexport() {
-  return common_scripts\utility::fileprint_launcher_end_file("\\share\\raw\\maps\\createart\\" + level.script + "_art.gsc", 1);
+  return common_scripts\utility:: fileprint_launcher_end_file("\\share\\raw\\maps\\createart\\" + level.script + "_art.gsc", 1);
 }
 
 artfxprintlnfog() {
-    common_scripts\utility::fileprint_launcher("");
-    common_scripts\utility::fileprint_launcher("\t\/* Fog section * ");
-    common_scripts\utility::fileprint_launcher("");
-    common_scripts\utility::fileprint_launcher("\tsetDevDvar(\"scr_fog_disable\", \"" + getdvarint("scr_fog_disable") + "\"" + ");");
-    common_scripts\utility::fileprint_launcher("");
-    common_scripts\utility::fileprint_launcher("\t\$");
+  common_scripts\utility:: fileprint_launcher("");
+    common_scripts\utility:: fileprint_launcher("\t\/* Fog section * ");
+    common_scripts\utility:: fileprint_launcher("");
+    common_scripts\utility:: fileprint_launcher("\tsetDevDvar(\"scr_fog_disable\", \"" + getdvarint("scr_fog_disable") + "\"" + ");");
+    common_scripts\utility:: fileprint_launcher("");
+    common_scripts\utility:: fileprint_launcher("\t\$");
 
     if(isusinghdr())
-      common_scripts\utility::fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog_hdr::main;");
-    else
-      common_scripts\utility::fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog::main;");
+      common_scripts\utility:: fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog_hdr::main;");
+      else
+        common_scripts\utility:: fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog::main;");
 
-    common_scripts\utility::fileprint_launcher("\t$\");
-    }
+        common_scripts\utility:: fileprint_launcher("\t$\");
+}
 
-    art_print_fog() {}
+art_print_fog() {}
 
-    create_light_set(var_0) {
-      if(!isDefined(level.light_set))
-        level.light_set = [];
+create_light_set(var_0) {
+  if(!isDefined(level.light_set))
+    level.light_set = [];
 
-      var_1 = spawnStruct();
-      var_1.name = var_0;
-      level.light_set[var_0] = var_1;
-      return var_1;
-    }
+  var_1 = spawnStruct();
+  var_1.name = var_0;
+  level.light_set[var_0] = var_1;
+  return var_1;
+}

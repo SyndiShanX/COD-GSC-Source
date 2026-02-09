@@ -205,9 +205,9 @@ init() {
   level.dropteam = getdvarint(#"sv_maxclients", 0);
   level.infinalkillcam = 0;
   level.new_health_model = getdvarint(#"new_health_model", 1) > 0;
-  setdvar(#"bg_boastenabled", getgametypesetting(#"boastenabled"));
-  setdvar(#"hash_e099986c072eb0f", getgametypesetting(#"hash_104f124f56f0f20a"));
-  setdvar(#"hash_553ad8f9db24bf22", int(1000 * getgametypesetting(#"hash_1614b9cbe0df6f75")));
+  setDvar(#"bg_boastenabled", getgametypesetting(#"boastenabled"));
+  setDvar(#"hash_e099986c072eb0f", getgametypesetting(#"hash_104f124f56f0f20a"));
+  setDvar(#"hash_553ad8f9db24bf22", int(1000 * getgametypesetting(#"hash_1614b9cbe0df6f75")));
   function_9afe34e3();
   gameobjects::register_allowed_gameobject(level.gametype);
 
@@ -327,9 +327,9 @@ registerdvars() {
   level.vehicledamagescalar = getdvarfloat(#"scr_vehicle_damage_scalar", 1);
   level.fire_audio_repeat_duration = getdvarint(#"fire_audio_repeat_duration", 0);
   level.fire_audio_random_max_duration = getdvarint(#"fire_audio_random_max_duration", 0);
-  setdvar(#"g_customteamname_allies", "");
-  setdvar(#"g_customteamname_axis", "");
-  setdvar(#"hash_8351525729015ab", 1);
+  setDvar(#"g_customteamname_allies", "");
+  setDvar(#"g_customteamname_axis", "");
+  setDvar(#"hash_8351525729015ab", 1);
 }
 
 setroundswonuimodels() {
@@ -868,9 +868,7 @@ dodeadeventupdates() {
           level callback::callback(#"on_team_eliminated", team);
 
           if(isDefined(level.ondeadevent)) {
-            [
-              [level.ondeadevent]
-            ](team);
+            [[level.ondeadevent]](team);
           }
         }
       }
@@ -1530,7 +1528,7 @@ getroundlength() {
 waitanduploadstats(player, waittime) {
   wait waittime;
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     uploadstats(player);
   }
 }
@@ -1556,7 +1554,7 @@ awardotherlootxp() {
     return 0;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return 0;
   }
 
@@ -1679,7 +1677,7 @@ function_d8d30361(var_c1e98979) {
   level.gameendtime = gettime();
   level.gameended = 1;
   level.var_8a3a9ca4.roundend = gettime();
-  setdvar(#"g_gameended", 1);
+  setDvar(#"g_gameended", 1);
   round::function_897438f4(var_c1e98979);
 
   rat::function_65e13d0f();
@@ -2413,7 +2411,7 @@ checkscorelimit() {
       return 0;
     }
   } else {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       return 0;
     }
 
@@ -2459,7 +2457,7 @@ checkroundscorelimit() {
       return 0;
     }
   } else {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       return 0;
     }
 
@@ -2989,7 +2987,6 @@ updatealivetimes(team) {
   if(getdvarint(#"hash_7d48f244ba0d0b2d", 0)) {
     iprintln("<dev string:x8b>" + level.alivetimesaverage[# "allies"] + "<dev string:xa3>" + level.alivetimesaverage[# "axis"]);
   }
-
 }
 
 updateallalivetimes() {
@@ -3022,7 +3019,7 @@ checkteamscorelimitsoon(team) {
 }
 
 checkplayerscorelimitsoon() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(level.scorelimit <= 0) {
     return;
@@ -3118,9 +3115,7 @@ timelimitclock() {
 
         while(!level.timerstopped && oldtimeleftint == timeleftint && timeleftint > 0) {
           waitframe(1);
-          timeleftint = [
-            [level.get_tickets_as_time]
-          ]();
+          timeleftint = [[level.get_tickets_as_time]]();
         }
       }
 
@@ -3432,9 +3427,9 @@ graceperiod() {
 }
 
 watchmatchendingsoon() {
-  setdvar(#"xblive_matchendingsoon", 0);
+  setDvar(#"xblive_matchendingsoon", 0);
   level waittill(#"match_ending_soon");
-  setdvar(#"xblive_matchendingsoon", 1);
+  setDvar(#"xblive_matchendingsoon", 1);
 }
 
 anyteamhaswavedelay() {
@@ -3539,7 +3534,6 @@ function_b9b7618() {
     if(prematchperiodoverride >= 0) {
       level.prematchperiod = prematchperiodoverride;
     }
-
   } else {
     if(!level.splitscreen) {
       level.prematchperiod = getgametypesetting(#"preroundperiod");
@@ -3550,7 +3544,6 @@ function_b9b7618() {
     if(preroundperiodoverride >= 0) {
       level.prematchperiod = preroundperiodoverride;
     }
-
   }
 
   if(!isDefined(game.timepassed)) {
@@ -3565,7 +3558,7 @@ function_b9b7618() {
   level.skipvote = 0;
   level.gameended = 0;
   level.exitlevel = 0;
-  setdvar(#"g_gameended", 0);
+  setDvar(#"g_gameended", 0);
   level.objidstart = 0;
   level.forcedend = 0;
   level.hostforcedend = 0;
@@ -3643,7 +3636,7 @@ function_b9b7618() {
   level.voip.killershearvictim = getgametypesetting(#"voipkillershearvictim");
   level.voip.partychat = getgametypesetting(#"hash_33bc6781006ae83d");
   level.droppedtagrespawn = getgametypesetting(#"droppedtagrespawn");
-  setdvar(#"g_allowlaststandforactiveclients", getgametypesetting(#"allowlaststandforactiveclients"));
+  setDvar(#"g_allowlaststandforactiveclients", getgametypesetting(#"allowlaststandforactiveclients"));
 
   if(isDefined(level.droppedtagrespawn) && level.droppedtagrespawn) {
     dogtags::init();
@@ -3748,19 +3741,19 @@ function_b9b7618() {
   level.missilelockplayspacecheckextraradius = 18000;
 
   if(getdvarstring(#"scr_game_rankenabled") == "") {
-    setdvar(#"scr_game_rankenabled", 1);
+    setDvar(#"scr_game_rankenabled", 1);
   }
 
   level.rankenabled = getdvarint(#"scr_game_rankenabled", 0);
 
   if(getdvarstring(#"scr_game_medalsenabled") == "") {
-    setdvar(#"scr_game_medalsenabled", 1);
+    setDvar(#"scr_game_medalsenabled", 1);
   }
 
   level.medalsenabled = getdvarint(#"scr_game_medalsenabled", 0);
 
   if(level.hardcoremode && level.rankedmatch && getdvarstring(#"scr_game_friendlyfiredelay") == "") {
-    setdvar(#"scr_game_friendlyfiredelay", 1);
+    setDvar(#"scr_game_friendlyfiredelay", 1);
   }
 
   level.friendlyfiredelay = getdvarint(#"scr_game_friendlyfiredelay", 0);
@@ -3810,7 +3803,6 @@ callback_startgametype() {
   if(getdvarint(#"scr_hostmigrationtest", 0) == 1) {
     thread forcedebughostmigration();
   }
-
 }
 
 function_54b079aa() {
@@ -3842,13 +3834,13 @@ function registerfriendlyfiredelay(dvarstring, defaultvalue, minvalue, maxvalue)
   dvarstring = "scr_" + dvarstring + "_friendlyFireDelayTime";
 
   if(getdvarstring(dvarstring) == "") {
-    setdvar(dvarstring, defaultvalue);
+    setDvar(dvarstring, defaultvalue);
   }
 
   if(getdvarint(dvarstring, 0) > maxvalue) {
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   } else if(getdvarint(dvarstring, 0) < minvalue) {
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
   }
 
   level.friendlyfiredelaytime = getdvarint(dvarstring, 0);
@@ -3869,7 +3861,7 @@ getkillstreaks(player) {
     killstreak[killstreaknum] = "killstreak_null";
   }
 
-  if(isplayer(player) && level.disableclassselection != 1 && !isbot(player) && isDefined(player.killstreak)) {
+  if(isPlayer(player) && level.disableclassselection != 1 && !isbot(player) && isDefined(player.killstreak)) {
     currentkillstreak = 0;
 
     for(killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
@@ -3889,7 +3881,6 @@ updaterankedmatch(outcome) {
       level.hostforcedend = 1;
 
       print("<dev string:xc3>");
-
     }
   }
 
@@ -4033,7 +4024,7 @@ shake_and_rumble(n_delay, shake_size, shake_time, rumble_num) {
 }
 
 doweaponspecifickilleffects(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  if(weapon.name == "hero_pineapplegun" && isplayer(attacker) && smeansofdeath == "MOD_GRENADE") {
+  if(weapon.name == "hero_pineapplegun" && isPlayer(attacker) && smeansofdeath == "MOD_GRENADE") {
     attacker playlocalsound(#"wpn_pineapple_grenade_explode_flesh_2d");
   }
 }
@@ -4047,7 +4038,7 @@ function_e050e788(weapon, attacker, einflictor, smeansofdeath) {
     return false;
   }
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return false;
   }
 
@@ -4089,7 +4080,7 @@ doweaponspecificcorpseeffects(body, einflictor, attacker, idamage, smeansofdeath
     return;
   }
 
-  if(weapon.isheavyweapon && isplayer(attacker)) {
+  if(weapon.isheavyweapon && isPlayer(attacker)) {
     if(weapon.name == # "hero_firefly_swarm") {
       value = randomint(2) + 1;
 

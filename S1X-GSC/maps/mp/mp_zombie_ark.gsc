@@ -92,7 +92,7 @@ spawnkilltriggerthink(var_0, var_1, var_2) {
   for(;;) {
     var_3 waittill("trigger", var_4);
 
-    if(isDefined(var_4) && isplayer(var_4) && isDefined(var_4.health)) {
+    if(isDefined(var_4) && isPlayer(var_4) && isDefined(var_4.health)) {
       var_4 dodamage(var_4.health + 999, var_3.origin);
     }
   }
@@ -174,7 +174,7 @@ disablepronevolumecheck() {
     for(;;) {
       var_2 waittill("trigger", var_3);
 
-      if(isplayer(var_3)) {
+      if(isPlayer(var_3)) {
         var_3 thread disableprone(var_2);
       }
     }
@@ -690,7 +690,7 @@ zombiearkgivecustomcharacter(var_0) {
 }
 
 zombiearkfilterstartspawns(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return var_0;
   }
 
@@ -709,7 +709,7 @@ zombiearkfilterstartspawns(var_0) {
 }
 
 zombiearkfilterrespawns(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return var_0;
   }
 
@@ -896,7 +896,7 @@ agentshouldragdollimmediately(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 flyoverbink() {
   var_0 = "zombie_bink_env_camera_DLC3";
   var_1 = "scr_" + var_0;
-  setdvar(var_1, 0);
+  setDvar(var_1, 0);
   var_2 = "devgui_cmd \"Zombie:2/Toggle Flyover Binks/" + var_0 + "\" \"togglep " + var_1 + " 0 1\";";
   thread setupflyoveranimation("zombie_bink_env_camera_DLC3", "j_prop_1", ["open_doors", "trigger_decontamination"], var_1);
 }
@@ -919,12 +919,12 @@ setupflyoveranimation(var_0, var_1, var_2, var_3) {
     waitframe();
   }
 
-  setdvar("lui_enabled", 0);
-  setdvar("cg_drawBuildname", 0);
-  setdvar("cg_drawMapBuildInfo", 0);
-  setdvar("cg_drawversion", 0);
-  setdvar("cg_drawviewpos", 0);
-  setdvar("cg_fovScale", 1.1);
+  setDvar("lui_enabled", 0);
+  setDvar("cg_drawBuildname", 0);
+  setDvar("cg_drawMapBuildInfo", 0);
+  setDvar("cg_drawversion", 0);
+  setDvar("cg_drawviewpos", 0);
+  setDvar("cg_fovScale", 1.1);
   level.zombiegamepaused = 1;
   var_5 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 

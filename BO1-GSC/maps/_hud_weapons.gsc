@@ -11,25 +11,21 @@ registerWeaponInfo(name, string, type, clip) {
   level.weaponInfo[name]["string"] = string;
   precacheString(string);
 }
-
 isWeaponRegistered(name) {
-  if(!isDefined(level.weaponInfo[name]))
+  if(!isDefined(level.weaponInfo[name])) {
     return false;
+  }
   return true;
 }
-
 getWeaponInfoType(name) {
   return level.weaponInfo[name]["type"];
 }
-
 getWeaponInfoClip(name) {
   return level.weaponInfo[name]["clip"];
 }
-
 getWeaponInfoString(name) {
   return level.weaponInfo[name]["string"];
 }
-
 init() {
   precacheShader("hud_bullets_rifle");
   precacheShader("hud_bullets_pistol");
@@ -90,10 +86,10 @@ init() {
   registerWeaponInfo("uzi", &"WEAPON_UZI", "smg", 32);
   self initWeaponHUD();
 }
-
 initWeaponHUD() {
-  if(!isDefined(self.hud_bullets))
+  if(!isDefined(self.hud_bullets)) {
     self.hud_bullets = [];
+  }
   if(!isDefined(self.hud_bullets[0])) {
     self.hud_bullets[0] = createIcon(undefined, 24, 96);
     self.hud_bullets[0] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
@@ -123,7 +119,6 @@ initWeaponHUD() {
   }
   self thread updateBulletHudThink();
 }
-
 updateBulletHudThink() {
   self endon("death");
   lastAmmoCount = -1;
@@ -148,13 +143,14 @@ updateBulletHudThink() {
     wait(0.05);
   }
 }
-
 setHudWeaponType(type) {
   self.pers["weaponType"] = type;
-  if(!isDefined(self.hud_bullets))
+  if(!isDefined(self.hud_bullets)) {
     return;
-  for(index = 0; index < self.hud_bullets.size; index++)
+  }
+  for(index = 0; index < self.hud_bullets.size; index++) {
     self.hud_bullets[index].alpha = 0;
+  }
   switch (type) {
     case "pistol":
       self.hud_bullets[0] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
@@ -192,23 +188,23 @@ setHudWeaponType(type) {
       for(index = 0; index < 5; index++) {
         self.hud_bullets[index] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6 + xOffset, -70);
         self.hud_bullets[index].alpha = 1;
-        if(index % 2)
+        if(index % 2) {
           self.hud_bullets[index] setIconShader("hud_bullets_support_back");
-        else
+        } else {
           self.hud_bullets[index] setIconShader("hud_bullets_support_front");
+        }
         xOffset -= 14;
       }
       break;
   }
 }
-
 getHudWeaponType() {
   return (self.pers["weaponType"]);
 }
-
 updateHudWeaponAmmo(weapon, ammoCount) {
-  if(!isDefined(self.hud_bullets))
+  if(!isDefined(self.hud_bullets)) {
     return;
+  }
   switch (self getHudWeaponType()) {
     case "pistol":
       baseDiff = 15 - getWeaponInfoClip(weapon);
@@ -247,12 +243,13 @@ updateHudWeaponAmmo(weapon, ammoCount) {
       diff = baseDiff + diff;
       bulletOffset = 20;
       for(index = 4; index >= 0; index--) {
-        if(diff > bulletOffset)
+        if(diff > bulletOffset) {
           self.hud_bullets[index].alpha = 0;
-        else if((bulletOffset - diff) <= 20)
+        } else if((bulletOffset - diff) <= 20) {
           self.hud_bullets[index].alpha = level.bulletAlphas[diff - (bulletOffset - 20)];
-        else
+        } else {
           self.hud_bullets[index].alpha = 1;
+        }
         bulletOffset += 20;
       }
       break;

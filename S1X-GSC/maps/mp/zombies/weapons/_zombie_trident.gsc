@@ -153,7 +153,7 @@ firetrident() {
           }
 
           foreach(var_34 in var_28) {
-            if(isplayer(var_34)) {
+            if(isPlayer(var_34)) {
               continue;
             }
             if(!isalive(var_34)) {
@@ -242,7 +242,7 @@ tridentdamageent(var_0, var_1, var_2, var_3) {
   if(!isalive(var_0)) {
     return;
   }
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return;
   }
   if(isagent(var_0)) {

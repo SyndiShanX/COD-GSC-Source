@@ -21,27 +21,33 @@ init_color_grouping(nodes) {
   volumes = getEntArray("info_volume", "classname");
 
   for(i = 0; i < nodes.size; i++) {
-    if(isDefined(nodes[i].script_color_allies))
+    if(isDefined(nodes[i].script_color_allies)) {
       nodes[i] add_node_to_global_arrays(nodes[i].script_color_allies, "allies");
+    }
 
-    if(isDefined(nodes[i].script_color_axis))
+    if(isDefined(nodes[i].script_color_axis)) {
       nodes[i] add_node_to_global_arrays(nodes[i].script_color_axis, "axis");
+    }
   }
 
   for(i = 0; i < triggers.size; i++) {
-    if(isDefined(triggers[i].script_color_allies))
+    if(isDefined(triggers[i].script_color_allies)) {
       triggers[i] thread trigger_issues_orders(triggers[i].script_color_allies, "allies");
+    }
 
-    if(isDefined(triggers[i].script_color_axis))
+    if(isDefined(triggers[i].script_color_axis)) {
       triggers[i] thread trigger_issues_orders(triggers[i].script_color_axis, "axis");
+    }
   }
 
   for(i = 0; i < volumes.size; i++) {
-    if(isDefined(volumes[i].script_color_allies))
+    if(isDefined(volumes[i].script_color_allies)) {
       volumes[i] add_volume_to_global_arrays(volumes[i].script_color_allies, "allies");
+    }
 
-    if(isDefined(volumes[i].script_color_axis))
+    if(isDefined(volumes[i].script_color_axis)) {
       volumes[i] add_volume_to_global_arrays(volumes[i].script_color_allies, "axis");
+    }
   }
 
   level.colornodes_debug_array = [];
@@ -132,7 +138,7 @@ goto_current_colorindex() {
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
 
-    if(isalive(node.color_user) && !isplayer(node.color_user)) {
+    if(isalive(node.color_user) && !isPlayer(node.color_user)) {
       continue;
     }
     self thread ai_sets_goal_with_delay(node);
@@ -204,30 +210,34 @@ trigger_issues_orders(color_team, team) {
       continue;
     }
 
-    if(!isDefined(self.color_enabled) || isDefined(self.color_enabled) && self.color_enabled)
+    if(!isDefined(self.color_enabled) || isDefined(self.color_enabled) && self.color_enabled) {
       activate_color_trigger_internal(colorcodes, colors, team, colorcodesbycolorindex);
+    }
 
     trigger_auto_disable();
   }
 }
 
 trigger_auto_disable() {
-  if(!isDefined(self.script_color_stay_on))
+  if(!isDefined(self.script_color_stay_on)) {
     self.script_color_stay_on = 0;
+  }
 
   if(!isDefined(self.color_enabled)) {
-    if(is_true(self.script_color_stay_on))
+    if(is_true(self.script_color_stay_on)) {
       self.color_enabled = 1;
-    else
+    } else {
       self.color_enabled = 0;
+    }
   }
 }
 
 activate_color_trigger(team) {
-  if(team == "allies")
+  if(team == "allies") {
     self thread get_colorcodes_and_activate_trigger(self.script_color_allies, team);
-  else
+  } else {
     self thread get_colorcodes_and_activate_trigger(self.script_color_axis, team);
+  }
 }
 
 get_colorcodes_and_activate_trigger(color_team, team) {
@@ -245,8 +255,9 @@ activate_color_trigger_internal(colorcodes, colors, team, colorcodesbycolorindex
     }
     arrayremovevalue(level.arrays_of_colorcoded_spawners[team][colorcodes[i]], undefined);
 
-    for(p = 0; p < level.arrays_of_colorcoded_spawners[team][colorcodes[i]].size; p++)
+    for(p = 0; p < level.arrays_of_colorcoded_spawners[team][colorcodes[i]].size; p++) {
       level.arrays_of_colorcoded_spawners[team][colorcodes[i]][p].currentcolorcode = colorcodes[i];
+    }
   }
 
   for(i = 0; i < colors.size; i++) {
@@ -287,24 +298,27 @@ activate_color_trigger_internal(colorcodes, colors, team, colorcodesbycolorindex
 }
 
 same_color_code_as_last_time(team, color) {
-  if(!isDefined(level.lastcolorforced[team][color]))
+  if(!isDefined(level.lastcolorforced[team][color])) {
     return false;
+  }
 
   return level.lastcolorforced[team][color] == level.currentcolorforced[team][color];
 }
 
 process_cover_node_with_last_in_mind_allies(node, lastcolor) {
-  if(issubstr(node.script_color_allies, lastcolor))
+  if(issubstr(node.script_color_allies, lastcolor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  else
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
+  }
 }
 
 process_cover_node_with_last_in_mind_axis(node, lastcolor) {
-  if(issubstr(node.script_color_axis, lastcolor))
+  if(issubstr(node.script_color_axis, lastcolor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  else
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
+  }
 }
 
 process_cover_node(node, null) {
@@ -331,11 +345,13 @@ prioritize_colorcoded_nodes(team, colorcode, color) {
   ent.cover_nodes_first = array_randomize(ent.cover_nodes_first);
   nodes = ent.cover_nodes_first;
 
-  for(i = 0; i < ent.cover_nodes_last.size; i++)
+  for(i = 0; i < ent.cover_nodes_last.size; i++) {
     nodes[nodes.size] = ent.cover_nodes_last[i];
+  }
 
-  for(i = 0; i < ent.path_nodes.size; i++)
+  for(i = 0; i < ent.path_nodes.size; i++) {
     nodes[nodes.size] = ent.path_nodes[i];
+  }
 
   level.arrays_of_colorcoded_nodes[team][colorcode] = nodes;
 }
@@ -362,8 +378,9 @@ issue_leave_node_order_to_ai_and_get_ai(colorcode, color, team) {
   if(!ai.size) {
     return;
   }
-  for(i = 0; i < ai.size; i++)
+  for(i = 0; i < ai.size; i++) {
     ai[i] left_color_node();
+  }
 
   return ai;
 }
@@ -375,8 +392,9 @@ issue_color_order_to_ai(colorcode, color, team, ai) {
 
   level.colornodes_debug_array[team][colorcode] = nodes;
 
-  if(nodes.size < ai.size)
+  if(nodes.size < ai.size) {
     println("^3Warning, ColorNumber system tried to make " + ai.size + " AI go to " + nodes.size + " nodes.");
+  }
 
   counter = 0;
   ai_count = ai.size;
@@ -393,8 +411,9 @@ issue_color_order_to_ai(colorcode, color, team, ai) {
     closestai take_color_node(node, colorcode, self, counter);
     counter++;
 
-    if(!ai.size)
+    if(!ai.size) {
       return;
+    }
   }
 }
 
@@ -435,11 +454,13 @@ player_color_node() {
 }
 
 color_node_finds_a_user() {
-  if(isDefined(self.script_color_allies))
+  if(isDefined(self.script_color_allies)) {
     color_node_finds_user_from_colorcodes(self.script_color_allies, "allies");
+  }
 
-  if(isDefined(self.script_color_axis))
+  if(isDefined(self.script_color_axis)) {
     color_node_finds_user_from_colorcodes(self.script_color_axis, "axis");
+  }
 }
 
 color_node_finds_user_from_colorcodes(colorcodestring, team) {
@@ -477,8 +498,9 @@ color_node_finds_user_for_colorcode(colorcode, team) {
 }
 
 occupies_colorcode(colorcode) {
-  if(!isDefined(self.currentcolorcode))
+  if(!isDefined(self.currentcolorcode)) {
     return false;
+  }
 
   return self.currentcolorcode == colorcode;
 }
@@ -487,8 +509,9 @@ ai_sets_goal_with_delay(node) {
   self endon("death");
   delay = my_current_node_delays();
 
-  if(delay)
+  if(delay) {
     wait(delay);
+  }
 
   ai_sets_goal(node);
 }
@@ -498,8 +521,9 @@ ai_sets_goal(node) {
   set_goal_and_volume(node);
   volume = level.colorcoded_volumes[self.team][self.currentcolorcode];
 
-  if(isDefined(self.script_careful) && self.script_careful)
+  if(isDefined(self.script_careful) && self.script_careful) {
     thread careful_logic(node, volume);
+  }
 }
 
 set_goal_and_volume(node) {
@@ -509,13 +533,15 @@ set_goal_and_volume(node) {
     self._colors_go_line = undefined;
   }
 
-  if(isDefined(node.script_sprint) && node.script_sprint)
+  if(isDefined(node.script_sprint) && node.script_sprint) {
     self thread color_sprint_to_goal(node);
+  }
 
-  if(isDefined(node.script_forcegoal) && node.script_forcegoal)
+  if(isDefined(node.script_forcegoal) && node.script_forcegoal) {
     self thread color_force_goal(node);
-  else
+  } else {
     self set_goal_node(node);
+  }
 
   if(!self.fixednode) {
     assert(isDefined(node.radius), "Node at origin " + node.origin + " has no .radius.");
@@ -525,15 +551,17 @@ set_goal_and_volume(node) {
 
   volume = level.colorcoded_volumes[self.team][self.currentcolorcode];
 
-  if(isDefined(volume))
+  if(isDefined(volume)) {
     self setfixednodesafevolume(volume);
-  else
+  } else {
     self clearfixednodesafevolume();
+  }
 
-  if(isDefined(node.fixednodesaferadius))
+  if(isDefined(node.fixednodesaferadius)) {
     self.fixednodesaferadius = node.fixednodesaferadius;
-  else
+  } else {
     self.fixednodesaferadius = 64;
+  }
 }
 
 color_force_goal(node) {
@@ -603,8 +631,9 @@ isknownenemyinradius_tmp(node_origin, safe_radius) {
   ai = getaiarray("axis");
 
   for(i = 0; i < ai.size; i++) {
-    if(distance2d(ai[i].origin, node_origin) < safe_radius)
+    if(distance2d(ai[i].origin, node_origin) < safe_radius) {
       return true;
+    }
   }
 
   return false;
@@ -632,8 +661,9 @@ wait_until_an_enemy_is_in_safe_area(node, volume) {
 }
 
 my_current_node_delays() {
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return 0;
+  }
 
   return self.node script_delay();
 }
@@ -643,17 +673,20 @@ process_color_order_to_ai(node, trigger, counter) {
   self endon("stop_color_move");
   self endon("death");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger script_delay();
+  }
 
   if(isDefined(trigger)) {
-    if(isDefined(trigger.script_flag_wait))
+    if(isDefined(trigger.script_flag_wait)) {
       flag_wait(trigger.script_flag_wait);
+    }
   }
 
   if(!my_current_node_delays()) {
-    if(isDefined(counter))
+    if(isDefined(counter)) {
       wait(counter * randomfloatrange(0.2, 0.35));
+    }
   }
 
   self ai_sets_goal(node);
@@ -662,16 +695,18 @@ process_color_order_to_ai(node, trigger, counter) {
   for(;;) {
     self waittill("node_taken", taker);
 
-    if(taker == self)
+    if(taker == self) {
       wait 0.05;
+    }
 
     node = get_best_available_new_colored_node();
 
     if(isDefined(node)) {
       assert(!isalive(node.color_user), "Node already had color user!");
 
-      if(isalive(self.color_node.color_user) && self.color_node.color_user == self)
+      if(isalive(self.color_node.color_user) && self.color_node.color_user == self) {
         self.color_node.color_user = undefined;
+      }
 
       self.color_node = node;
       node.color_user = self;
@@ -688,8 +723,9 @@ get_best_available_colored_node() {
   assert(nodes.size > 0, "Tried to make guy with export " + self.export+" go to forcecolor " + self.script_forcecolor + " but there are no nodes of that color enabled");
 
   for(i = 0; i < nodes.size; i++) {
-    if(!isalive(nodes[i].color_user))
+    if(!isalive(nodes[i].color_user)) {
       return nodes[i];
+    }
   }
 }
 
@@ -702,8 +738,9 @@ get_best_available_new_colored_node() {
   nodes = get_array_of_closest(self.origin, nodes);
 
   for(i = 0; i < nodes.size; i++) {
-    if(!isalive(nodes[i].color_user))
+    if(!isalive(nodes[i].color_user)) {
       return nodes[i];
+    }
   }
 }
 
@@ -723,8 +760,9 @@ process_stop_short_of_node(node) {
   wait_for_killanimscript_or_time(1);
   newtime = gettime();
 
-  if(newtime - currenttime >= 1000)
+  if(newtime - currenttime >= 1000) {
     reached_node_but_could_not_claim_it(node);
+  }
 }
 
 wait_for_killanimscript_or_time(timer) {
@@ -764,8 +802,9 @@ decrementcolorusers(node) {
 
 colorislegit(color) {
   for(i = 0; i < level.colorlist.size; i++) {
-    if(color == level.colorlist[i])
+    if(color == level.colorlist[i]) {
       return true;
+    }
   }
 
   return false;
@@ -802,8 +841,9 @@ left_color_node() {
   if(!isDefined(self.color_node)) {
     return;
   }
-  if(isDefined(self.color_node.color_user) && self.color_node.color_user == self)
+  if(isDefined(self.color_node.color_user) && self.color_node.color_user == self) {
     self.color_node.color_user = undefined;
+  }
 
   self.color_node = undefined;
   self notify("stop_color_move");
@@ -822,8 +862,9 @@ getcolornumberarray() {
     array["colorTeam"] = self.script_color_allies;
   }
 
-  if(!isDefined(array["colorTeam"]))
+  if(!isDefined(array["colorTeam"])) {
     array = undefined;
+  }
 
   return array;
 }
@@ -838,8 +879,9 @@ removespawnerfromcolornumberarray() {
   colorteam = colornumberarray["colorTeam"];
   colors = strtok(colorteam, " ");
 
-  for(i = 0; i < colors.size; i++)
+  for(i = 0; i < colors.size; i++) {
     arrayremovevalue(level.arrays_of_colorcoded_spawners[team][colors[i]], self);
+  }
 }
 
 add_cover_node(type) {
@@ -860,8 +902,9 @@ colornode_spawn_reinforcement(classname, fromcolor) {
   level endon("kill_color_replacements");
   reinforcement = spawn_hidden_reinforcement(classname, fromcolor);
 
-  if(isDefined(level.friendly_startup_thread))
+  if(isDefined(level.friendly_startup_thread)) {
     reinforcement thread[[level.friendly_startup_thread]]();
+  }
 
   reinforcement thread colornode_replace_on_death();
 }
@@ -883,8 +926,9 @@ colornode_replace_on_death() {
   color = self.script_forcecolor;
   waittillframeend;
 
-  if(isalive(self))
+  if(isalive(self)) {
     self waittill("death");
+  }
 
   color_order = level.current_color_order;
 
@@ -893,11 +937,13 @@ colornode_replace_on_death() {
   }
   thread colornode_spawn_reinforcement(classname, self.script_forcecolor);
 
-  if(isDefined(self) && isDefined(self.script_forcecolor))
+  if(isDefined(self) && isDefined(self.script_forcecolor)) {
     color = self.script_forcecolor;
+  }
 
-  if(isDefined(self) && isDefined(self.origin))
+  if(isDefined(self) && isDefined(self.origin)) {
     origin = self.origin;
+  }
 
   for(;;) {
     if(get_color_from_order(color, color_order) == "none") {
@@ -922,22 +968,26 @@ colornode_replace_on_death() {
     }
     correct_colored_guy set_force_color(color);
 
-    if(isDefined(level.friendly_promotion_thread))
+    if(isDefined(level.friendly_promotion_thread)) {
       correct_colored_guy[[level.friendly_promotion_thread]](color);
+    }
 
     color = color_order[color];
   }
 }
 
 get_color_from_order(color, color_order) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     return "none";
+  }
 
-  if(!isDefined(color_order))
+  if(!isDefined(color_order)) {
     return "none";
+  }
 
-  if(!isDefined(color_order[color]))
+  if(!isDefined(color_order[color])) {
     return "none";
+  }
 
   return color_order[color];
 }
@@ -978,8 +1028,9 @@ friendly_spawner_vision_checker() {
 
       successes++;
 
-      if(successes < 3)
+      if(successes < 3) {
         continue;
+      }
     }
 
     if(player_sees_spawner) {
@@ -992,28 +1043,30 @@ friendly_spawner_vision_checker() {
 get_color_spawner(classname, fromcolor) {
   specificfromcolor = 0;
 
-  if(isDefined(level.respawn_spawners_specific) && isDefined(level.respawn_spawners_specific[fromcolor]))
+  if(isDefined(level.respawn_spawners_specific) && isDefined(level.respawn_spawners_specific[fromcolor])) {
     specificfromcolor = 1;
+  }
 
   if(!isDefined(level.respawn_spawner)) {
     if(!isDefined(fromcolor) || !specificfromcolor) {
       assertmsg("Tried to spawn a guy but neither level.respawn_spawner or level.respawn_spawners_specific is defined.Either set it to a spawner or use targetname trigger_friendly_respawn triggers.HINT: has the player hit a friendly_respawn_trigger for ALL allied color groups in the map by the time the player has reached this point?");
-
     }
   }
 
   if(!isDefined(classname)) {
-    if(isDefined(fromcolor) && specificfromcolor)
+    if(isDefined(fromcolor) && specificfromcolor) {
       return level.respawn_spawners_specific[fromcolor];
-    else
+    } else {
       return level.respawn_spawner;
+    }
   }
 
   spawners = getEntArray("color_spawner", "targetname");
   class_spawners = [];
 
-  for(i = 0; i < spawners.size; i++)
+  for(i = 0; i < spawners.size; i++) {
     class_spawners[spawners[i].classname] = spawners[i];
+  }
 
   spawner = undefined;
   keys = getarraykeys(class_spawners);
@@ -1027,16 +1080,18 @@ get_color_spawner(classname, fromcolor) {
   }
 
   if(!isDefined(spawner)) {
-    if(isDefined(fromcolor) && specificfromcolor)
+    if(isDefined(fromcolor) && specificfromcolor) {
       return level.respawn_spawners_specific[fromcolor];
-    else
+    } else {
       return level.respawn_spawner;
+    }
   }
 
-  if(isDefined(fromcolor) && specificfromcolor)
+  if(isDefined(fromcolor) && specificfromcolor) {
     spawner.origin = level.respawn_spawners_specific[fromcolor].origin;
-  else
+  } else {
     spawner.origin = level.respawn_spawner.origin;
+  }
 
   return spawner;
 }
@@ -1047,8 +1102,9 @@ spawn_hidden_reinforcement(classname, fromcolor) {
 
   for(;;) {
     if(!flag("respawn_friendlies")) {
-      if(!isDefined(level.friendly_respawn_vision_checker_thread))
+      if(!isDefined(level.friendly_respawn_vision_checker_thread)) {
         thread friendly_spawner_vision_checker();
+      }
 
       for(;;) {
         flag_wait_either("player_looks_away_from_spawner", "respawn_friendlies");
@@ -1065,8 +1121,9 @@ spawn_hidden_reinforcement(classname, fromcolor) {
     spawner = get_color_spawner(classname, fromcolor);
     spawner.count = 1;
 
-    while(!level ok_to_trigger_spawn(1))
+    while(!level ok_to_trigger_spawn(1)) {
       wait_network_frame();
+    }
 
     spawner script_wait();
     spawn = spawner spawn_ai();
@@ -1094,8 +1151,9 @@ spawn_hidden_reinforcement(classname, fromcolor) {
     fromcolor = level.current_color_order[fromcolor];
   }
 
-  if(isDefined(fromcolor))
+  if(isDefined(fromcolor)) {
     spawn set_force_color(fromcolor);
+  }
 
   thread lock_spawner_for_awhile();
   return spawn;

@@ -18,7 +18,7 @@ init() {
   level.streakSupportQueueAxis = [];
   level.streakSupporDisabledCount = [];
 
-  SetDvar("scr_coop_util_delay", "1");
+  setDvar("scr_coop_util_delay", "1");
 }
 
 promptForStreakSupport(streakTeam, joinText, splashRef, needSupportVO, buddyJoinedVO, streakPlayer, joinedVO) {
@@ -408,7 +408,7 @@ playerHandleJoining(streakPrompt, useTime) {
 }
 
 useHoldThink(player, useTimeMS, streakPrompt) {
-  Assert(IsPlayer(player));
+  Assert(isPlayer(player));
 
   player PlayerLinkTo(streakPrompt);
   player PlayerLinkedOffsetEnable();

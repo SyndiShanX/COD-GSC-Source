@@ -186,8 +186,7 @@ jet_init() {
   foreach(flash_fx in self.flash_fxs)
   flash_fx.origin += negative_vec;
 
-  // -------------- flight time and vector calculation -------------
-  jet_origin = self.origin; // origin is the nose of the jet
+  // -------------- flight time and vector calculation ------------- jet_origin = self.origin; // origin is the nose of the jet
   jet_flyto_pos = self.jet_flyto.origin;
   self.jet_fly_vec = jet_flyto_pos - jet_origin;
 
@@ -211,7 +210,7 @@ jet_timer() {
   timelimit = max(10, match_timelimit);
   timelimit = min(timelimit, 100);
 
-  if(getdvar("jet_flyby_timer") != "")
+  if(getDvar("jet_flyby_timer") != "")
     level.civilianJetFlyBy_timer = 5 + getdvarint("jet_flyby_timer");
   else
     level.civilianJetFlyBy_timer = (0.25 + randomFloatRange(0.3, 0.7)) * 60 * timeLimit; // seconds into the match when jet flys by
@@ -743,7 +742,8 @@ isInBound(ent, bounds) {
 }
 
 isInBound_single(var, v_min, v_max) {
-  if(var > v_min && var < v_max)
+  if(var > v_min &&
+    var < v_max)
     return true;
   return false;
 }

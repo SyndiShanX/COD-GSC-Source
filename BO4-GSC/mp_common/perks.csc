@@ -173,7 +173,7 @@ function get_players(local_client_num) {
 
   if(isDefined(entities)) {
     foreach(ent in entities) {
-      if(isplayer(ent)) {
+      if(isPlayer(ent)) {
         players[players.size] = ent;
       }
     }
@@ -396,7 +396,7 @@ gettrackerfxposition(local_client_num) {
     fwd = vel;
   }
 
-  if(isplayer(self) && self isplayerwallrunning()) {
+  if(isPlayer(self) && self isplayerwallrunning()) {
     if(self isplayerwallrunningright()) {
       up = vectorcross(up, fwd);
     } else {
@@ -479,7 +479,7 @@ monitor_detectnearbyenemies(local_client_num) {
 
     localplayer = function_5c10bd79(local_client_num);
 
-    if(isDefined(localplayer) && isplayer(localplayer) && isalive(localplayer)) {
+    if(isDefined(localplayer) && isPlayer(localplayer) && isalive(localplayer)) {
       var_99edc583 = localplayer function_fd82b127();
     } else {
       var_99edc583 = 0;
@@ -487,7 +487,7 @@ monitor_detectnearbyenemies(local_client_num) {
 
     range = var_99edc583 * 0.5;
 
-    if(!isDefined(localplayer) || !isplayer(localplayer) || function_5778f82(local_client_num, #"specialty_detectnearbyenemies") == 0 || function_1cbf351b(local_client_num) == 1 || isalive(localplayer) == 0) {
+    if(!isDefined(localplayer) || !isPlayer(localplayer) || function_5778f82(local_client_num, #"specialty_detectnearbyenemies") == 0 || function_1cbf351b(local_client_num) == 1 || isalive(localplayer) == 0) {
       setuimodelvalue(var_e4ed29e4, 0);
       previousenemydetectedbitfield = 0;
 
@@ -552,7 +552,7 @@ monitor_detectnearbyenemies(local_client_num) {
         player = sixthsenseent.owner;
       }
 
-      if(isplayer(player) && player hasperk(local_client_num, #"specialty_sixthsensejammer")) {
+      if(isPlayer(player) && player hasperk(local_client_num, #"specialty_sixthsensejammer")) {
         bundle = var_c394e130;
       }
 
@@ -565,7 +565,7 @@ monitor_detectnearbyenemies(local_client_num) {
         if(speed >= bundle.var_293163bd) {
           movement_type = sixthsenseent getmovementtype();
 
-          if(isplayer(player) && (player isplayerswimming() || player function_d76efdcc())) {
+          if(isPlayer(player) && (player isplayerswimming() || player function_d76efdcc())) {
             movement_type = "";
           }
 

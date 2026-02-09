@@ -46,7 +46,7 @@ setentityheadicon(team, owner, objective) {
 
   if(isDefined(objective)) {
     if(isDefined(owner) && !level.teambased) {
-      if(!isplayer(owner)) {
+      if(!isPlayer(owner)) {
         assert(isDefined(owner.owner), "<dev string:x38>");
         owner = owner.owner;
       }

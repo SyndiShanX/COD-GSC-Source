@@ -23,10 +23,10 @@ position_player() {
 }
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -37,14 +37,14 @@ main() {
   setsaveddvar("compassMaxRange", 2000);
   setsaveddvar("vehicle_pathSmooth", "0");
 
-  if(getdvar("bog_camerashake") == "")
-    setdvar("bog_camerashake", "1");
+  if(getDvar("bog_camerashake") == "")
+    setDvar("bog_camerashake", "1");
 
-  if(getdvar("ragdoll_deaths") == "")
-    setdvar("ragdoll_deaths", "1");
+  if(getDvar("ragdoll_deaths") == "")
+    setDvar("ragdoll_deaths", "1");
 
-  if(getdvar("debug_airlift") == "")
-    setdvar("debug_airlift", "0");
+  if(getDvar("debug_airlift") == "")
+    setDvar("debug_airlift", "0");
 
   initprecache();
   level.allcarsdamagedbyplayer = 1;
@@ -578,7 +578,7 @@ intro_flyover() {
   maps\_utility::delaythread(0, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 3);
   maps\_utility::delaythread(13, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 5);
 
-  if(getdvar("airlift_min_spec") != "1")
+  if(getDvar("airlift_min_spec") != "1")
     maps\_utility::delaythread(25, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 6);
 
   maps\_utility::delaythread(18, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 2);
@@ -590,17 +590,17 @@ intro_flyover() {
   wait 6;
   wait 8.5;
 
-  if(getdvar("airlift_min_spec") != "1")
+  if(getDvar("airlift_min_spec") != "1")
     maps\jake_tools::triggeractivate("trig_spawn_drones_bridge_side");
 
   wait 6;
 
-  if(getdvar("airlift_min_spec") != "1")
+  if(getDvar("airlift_min_spec") != "1")
     maps\jake_tools::triggeractivate("trig_spawn_drones_bridge");
 
   wait 6;
 
-  if(getdvar("airlift_min_spec") != "1")
+  if(getDvar("airlift_min_spec") != "1")
     maps\_utility::delaythread(0, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 16);
 
   common_scripts\utility::flag_set("aa_bridge_to_gas_station_section");
@@ -728,7 +728,7 @@ plaza_flyover() {
   wait 1;
   maps\jake_tools::triggeractivate("trig_spawn_plaza_roof_01");
 
-  if(getdvar("airlift_min_spec") != "1") {
+  if(getDvar("airlift_min_spec") != "1") {
     maps\_utility::delaythread(3.6, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 25);
     maps\_utility::delaythread(3.2, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 26);
     maps\_utility::delaythread(3.6, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 27);
@@ -865,7 +865,7 @@ tank_crush_plaza() {
   maps\_utility::delaythread(10.9, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 13);
   maps\_utility::delaythread(21, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 45);
 
-  if(getdvar("airlift_min_spec") != "1") {
+  if(getDvar("airlift_min_spec") != "1") {
     maps\_utility::delaythread(23, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 46);
     maps\_utility::delaythread(36, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 47);
     maps\_utility::delaythread(38.8, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 48);
@@ -893,7 +893,7 @@ plaza_building_assault() {
   thread plaza_at4_sequence();
   wait 4;
 
-  if(getdvar("airlift_min_spec") != "1")
+  if(getDvar("airlift_min_spec") != "1")
     maps\jake_tools::triggeractivate("trig_spawn_drones_plaza_allies");
 }
 
@@ -1225,7 +1225,7 @@ smoketown_land() {
   soundscripts\_snd::snd_message("aud_add_smoketown_operation_mix");
   common_scripts\utility::flag_wait("player_constrction_dialogue_spoken");
 
-  if(getdvar("airlift_min_spec") != "1")
+  if(getDvar("airlift_min_spec") != "1")
     maps\_utility::delaythread(0, maps\_vehicle::create_vehicle_from_spawngroup_and_gopath, 41);
 
   common_scripts\utility::flag_wait("player_middle_construction");
@@ -2438,7 +2438,7 @@ cobrapilot_think() {
   level.player playerlinktodelta(level.eplayerview, "tag_player", 1, 0, 0, 0, 0);
   common_scripts\utility::flag_set("pilot_taken_from_cockpit");
   level.eplayerview show();
-  level.oldnearclip = getdvar("r_znear");
+  level.oldnearclip = getDvar("r_znear");
   setsaveddvar("r_znear", 1.0);
   level.crashnode notify("stop_idle_pilot");
   cobrapilot_change_facial_anim("wounded_pullout_facial", 0);
@@ -2762,7 +2762,7 @@ nuke_choppers_think() {
   self endon("death");
   self notify("stop_default_behavior");
 
-  if(getdvar("debug_airlift") == "1")
+  if(getDvar("debug_airlift") == "1")
     thread maps\jake_tools::print3dthread(self.vehicle_spawner.targetname, undefined, 3.5, 100);
 
   self waittill("crash");
@@ -3246,12 +3246,12 @@ vehicle_turret_think() {
           var_6 = common_scripts\utility::within_fov(var_5, level.seaknight.angles + (0, -90, 0), self.origin, level.cosine["45"]);
 
         if(var_6) {
-          if(getdvar("debug_airlift") == "1")
+          if(getDvar("debug_airlift") == "1")
             thread maps\jake_tools::print3dthread("firing at player", undefined, 3.5, 100);
 
           if(!self.turretfiring)
             thread vehicle_fire_main_cannon();
-        } else if(getdvar("debug_airlift") == "1")
+        } else if(getDvar("debug_airlift") == "1")
           self notify("stop_3dprint");
       }
 
@@ -3702,7 +3702,7 @@ mission_failed_out_of_time() {
   level notify("mission failed");
   soundscripts\_snd::snd_message("aud_add_failure_mix");
   musicstop(1);
-  setdvar("ui_deadquote", &"AIRLIFT_RAN_OUT_OF_TIME");
+  setDvar("ui_deadquote", &"AIRLIFT_RAN_OUT_OF_TIME");
   maps\_utility::missionfailedwrapper();
   level notify("kill_timer");
 }
@@ -4674,10 +4674,10 @@ seaknight_death_think() {
 }
 
 view_kick_change() {
-  var_0 = getdvar("bg_viewKickScale");
-  var_1 = getdvar("bg_viewKickMax");
-  var_2 = getdvar("bg_viewKickMin");
-  var_3 = getdvar("bg_viewKickRandom");
+  var_0 = getDvar("bg_viewKickScale");
+  var_1 = getDvar("bg_viewKickMax");
+  var_2 = getDvar("bg_viewKickMin");
+  var_3 = getDvar("bg_viewKickRandom");
   setsaveddvar("bg_viewKickScale", 0.3);
   setsaveddvar("bg_viewKickMax", "20");
   level waittill("player_off_turret");
@@ -4693,7 +4693,7 @@ shotfired() {
   for(;;) {
     level.seaknight waittill("projectile_impact", var_0, var_1, var_2);
 
-    if(getdvar("ragdoll_deaths") == "1")
+    if(getDvar("ragdoll_deaths") == "1")
       thread shotfiredphysicssphere(var_1);
 
     wait 0.05;
@@ -4837,7 +4837,7 @@ flight_flags_think() {
     self waittill("trigger", var_3);
 
     if(maps\_vehicle::vehicle_spawner_has_targetname(var_3, var_1)) {
-      if(getdvar("debug_airlift") == "1")
+      if(getDvar("debug_airlift") == "1")
         thread maps\jake_tools::print3dthread(var_2, undefined, 5);
 
       common_scripts\utility::flag_set(var_2);

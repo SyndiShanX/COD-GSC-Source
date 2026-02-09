@@ -11,15 +11,15 @@ main() {
   maps\mp\_load::main();
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_terminal");
-  setdvar("compassmaxrange", "2000");
+  setDvar("compassmaxrange", "2000");
 
   ambientPlay("ambient_mp_airport");
 
   VisionSetNaked("mp_terminal");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.22);
-  setdvar("r_lightGridContrast", .6);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.22);
+  setDvar("r_lightGridContrast", .6);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";

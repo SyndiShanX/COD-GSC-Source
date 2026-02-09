@@ -25,12 +25,12 @@
 setup_devgui() {
   execdevgui("devgui_zombie_tomb");
   level.custom_devgui = ::zombie_devgui_tomb;
-  setdvar("complete_puzzles1", "off");
-  setdvar("complete_puzzles2", "off");
-  setdvar("open_all_teleporters", "off");
-  setdvar("show_craftable_locations", "off");
-  setdvar("show_morse_code", "off");
-  setdvar("sam_intro_skip", "off");
+  setDvar("complete_puzzles1", "off");
+  setDvar("complete_puzzles2", "off");
+  setDvar("open_all_teleporters", "off");
+  setDvar("show_craftable_locations", "off");
+  setDvar("show_morse_code", "off");
+  setDvar("sam_intro_skip", "off");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Quest:1/Open All Teleporters:1\" \"open_all_teleporters on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Quest:1/Skip Chamber Puzzles:2\" \"complete_puzzles1 on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Quest:1/Skip Top-side Puzzles:3\" \"complete_puzzles2 on\"\n");
@@ -66,7 +66,6 @@ zombie_devgui_tomb(cmd) {
       level notify("force_zone_recapture", int(getsubstr(cmd_strings[0], 21)));
       break;
   }
-
 }
 
 watch_for_upgraded_staffs() {
@@ -92,27 +91,26 @@ watch_for_upgraded_staffs() {
       }
     }
   }
-
 }
 
 watch_devgui_complete_puzzles() {
   while(true) {
-    if(getdvar(#"_id_BB20372B") == "on" || getdvar(#"_id_BB20372C") == "on") {
+    if(getDvar(#"_id_BB20372B") == "on" || getDvar(#"_id_BB20372C") == "on") {
       flag_set("air_puzzle_1_complete");
       flag_set("ice_puzzle_1_complete");
       flag_set("electric_puzzle_1_complete");
       flag_set("fire_puzzle_1_complete");
       flag_set("chamber_puzzle_cheat");
-      setdvar("complete_puzzles1", "off");
+      setDvar("complete_puzzles1", "off");
       level notify("open_all_gramophone_doors");
     }
 
-    if(getdvar(#"_id_A3C6E365") == "on") {
+    if(getDvar(#"_id_A3C6E365") == "on") {
       flag_set("show_morse_code");
-      setdvar("show_morse_code", "off");
+      setDvar("show_morse_code", "off");
     }
 
-    if(getdvar(#"_id_BB20372C") == "on") {
+    if(getDvar(#"_id_BB20372C") == "on") {
       flag_set("air_puzzle_2_complete");
       flag_set("ice_puzzle_2_complete");
       flag_set("electric_puzzle_2_complete");
@@ -122,26 +120,25 @@ watch_devgui_complete_puzzles() {
       flag_set("staff_water_zm_upgrade_unlocked");
       flag_set("staff_fire_zm_upgrade_unlocked");
       flag_set("staff_lightning_zm_upgrade_unlocked");
-      setdvar("complete_puzzles2", "off");
+      setDvar("complete_puzzles2", "off");
     }
 
-    if(getdvar(#"_id_273EAFA7") == "on") {
+    if(getDvar(#"_id_273EAFA7") == "on") {
       flag_set("samantha_intro_done");
-      setdvar("sam_intro_skip", "off");
+      setDvar("sam_intro_skip", "off");
     }
 
-    if(getdvar(#"_id_B7590487") == "on") {
+    if(getDvar(#"_id_B7590487") == "on") {
       maps\mp\zm_tomb_teleporter::stargate_teleport_enable(1);
       maps\mp\zm_tomb_teleporter::stargate_teleport_enable(2);
       maps\mp\zm_tomb_teleporter::stargate_teleport_enable(3);
       maps\mp\zm_tomb_teleporter::stargate_teleport_enable(4);
-      setdvar("open_all_teleporters", "off");
+      setDvar("open_all_teleporters", "off");
       flag_set("activate_zone_chamber");
     }
 
     wait 0.5;
   }
-
 }
 
 get_teleport_fx_from_enum(n_enum) {
@@ -159,7 +156,7 @@ get_teleport_fx_from_enum(n_enum) {
 }
 
 watch_devgui_quadrotor() {
-  while(getdvar(#"_id_7D075455") != "on")
+  while(getDvar(#"_id_7D075455") != "on")
     wait 0.1;
 
   players = getplayers();
@@ -173,7 +170,6 @@ watch_devgui_quadrotor() {
     player set_equipment_invisibility_to_player("equip_dieseldrone_zm", 1);
     player setactionslot(1, "weapon", "equip_dieseldrone_zm");
   }
-
 }
 
 include_craftable(craftable_struct) {
@@ -650,7 +646,7 @@ puzzle_debug_position(string_to_show, color, origin, str_dvar, n_show_time) {
     color = vectorscale((1, 1, 1), 255.0);
 
   if(isDefined(str_dvar)) {
-    while(getdvar(#"_id_93087F74") != "on")
+    while(getDvar(#"_id_93087F74") != "on")
       wait 1.0;
   }
 
@@ -671,7 +667,6 @@ puzzle_debug_position(string_to_show, color, origin, str_dvar, n_show_time) {
       }
     }
   }
-
 }
 
 placeholder_puzzle_delete_ent(str_flag_name) {
@@ -914,7 +909,7 @@ rotate_skydome() {
     if(level.sky_rotation < 0)
       level.sky_rotation = level.sky_rotation + 360;
 
-    setdvar("r_skyRotation", level.sky_rotation);
+    setDvar("r_skyRotation", level.sky_rotation);
     wait 0.1;
   }
 }

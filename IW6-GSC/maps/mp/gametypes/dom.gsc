@@ -11,7 +11,7 @@ CONST_DOM_TRAP_TIME = 40000;
 CONST_USE_TIME = 10;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -398,7 +398,7 @@ giveFlagAssistedCapturePoints(touchlist) {
     if(isDefined(player.owner))
       player = player.owner;
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     player maps\mp\_events::giveObjectivePointStreaks();
@@ -418,7 +418,7 @@ statusDialog(dialog, team, forceDialog) {
 }
 
 onEndUse(team, player, success) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player SetClientOmnvar("ui_dom_securing", 0);
     player.ui_dom_securing = undefined;
   }
@@ -441,7 +441,6 @@ onEndUse(team, player, success) {
   } else {
     array_remove(level.axisCapturing, self.label);
   }
-
 }
 
 resetFlagBaseEffect() {
@@ -501,7 +500,7 @@ giveFlagCaptureXP(touchList) {
 
   level.lastCapTime = GetTime();
 
-  if(IsPlayer(first_player)) {
+  if(isPlayer(first_player)) {
     level thread teamPlayerCardSplash("callout_securedposition" + self.label, first_player);
 
     first_player thread maps\mp\_matchdata::logGameEvent("capture", first_player.origin);
@@ -513,7 +512,7 @@ giveFlagCaptureXP(touchList) {
     if(isDefined(player.owner))
       player = player.owner;
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     player thread maps\mp\gametypes\_hud_message::SplashNotify("capture", maps\mp\gametypes\_rank::getScoreInfoValue("capture"));
@@ -758,7 +757,7 @@ domDebug() {
   heightOffsetNames = (0, 0, 64);
 
   while(true) {
-    if(getdvar("scr_domdebug") != "1") {
+    if(getDvar("scr_domdebug") != "1") {
       wait(1);
       continue;
     }
@@ -766,7 +765,7 @@ domDebug() {
     SetDevDvar("scr_showspawns", "1");
 
     while(true) {
-      if(getdvar("scr_domdebug") != "1") {
+      if(getDvar("scr_domdebug") != "1") {
         SetDevDvar("scr_showspawns", "0");
         break;
       }

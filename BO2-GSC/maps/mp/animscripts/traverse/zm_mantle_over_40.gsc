@@ -33,7 +33,6 @@ main() {
           traversealias = self[[level.zm_mantle_over_40_move_speed_override]]();
         else {
           assertmsg("Zombie '" + self.classname + "' move speed of '" + self.zombie_move_speed + "' is not supported for mantle_over_40.");
-
         }
     }
   } else {

@@ -122,10 +122,8 @@ special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
       }
 
       if(isDefined(level.crystal_check_func)) {
-        if(isplayer(var_1) && isDefined(var_5) && var_5 != "none") {
-          var_11 = [
-            [level.crystal_check_func]
-          ](self, var_5);
+        if(isPlayer(var_1) && isDefined(var_5) && var_5 != "none") {
+          var_11 = [[level.crystal_check_func]](self, var_5);
           if(var_11) {
             self.nocorpse = 1;
             self.near_crystal = 1;
@@ -514,7 +512,7 @@ run_fire_pool(var_0, var_1, var_2, var_3) {
     if(isDefined(var_5.rocket_feet)) {
       wait(0.1);
       continue;
-    } else if(isplayer(var_5)) {
+    } else if(isPlayer(var_5)) {
       if(var_2 == var_5 && !scripts\engine\utility::istrue(var_3) && !isDefined(var_5.burning)) {
         if(!scripts\engine\utility::istrue(var_5.inlaststand)) {
           var_5.burning = 1;

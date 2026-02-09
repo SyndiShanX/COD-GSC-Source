@@ -1531,7 +1531,7 @@ function_78986232(params) {
   eattacker = params.eattacker;
   weapon = params.weapon;
 
-  if(isplayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
+  if(isPlayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"straferun");
     var_23efb519 = 13;
     var_595e41ee = 100;
@@ -1836,7 +1836,7 @@ function_2969ccb4(var_43d50d89 = 1, var_463b195d = 1) {
 
 function_41dcd216() {
   sessionmode = currentsessionmode();
-  setdvar(#"hash_5b3b4d1a60845a9b", "<dev string:xaf>");
+  setDvar(#"hash_5b3b4d1a60845a9b", "<dev string:xaf>");
   level flag::init("<dev string:x38>");
 
   if(sessionmode != 4) {
@@ -1905,7 +1905,7 @@ function_41dcd216() {
         break;
     }
 
-    setdvar(#"hash_5b3b4d1a60845a9b", "<dev string:xaf>");
+    setDvar(#"hash_5b3b4d1a60845a9b", "<dev string:xaf>");
   }
 }
 

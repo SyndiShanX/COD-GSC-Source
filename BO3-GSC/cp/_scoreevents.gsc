@@ -67,7 +67,7 @@ function scoreeventactorkill(data, time) {
   if(!isDefined(attacker)) {
     return;
   }
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(isDefined(data.weapon)) {

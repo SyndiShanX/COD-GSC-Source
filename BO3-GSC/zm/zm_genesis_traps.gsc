@@ -278,7 +278,7 @@ function function_1f2a0da5(var_c4f1ee44, e_player) {
   self endon("trap_done");
   while(true) {
     self waittill("trigger", e_who);
-    if(isplayer(e_who)) {
+    if(isPlayer(e_who)) {
       e_who thread do_player_damage();
     } else {
       e_who thread function_af6b7901(var_c4f1ee44, e_player);

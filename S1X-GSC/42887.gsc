@@ -366,7 +366,7 @@ trophydamage(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     if(!maps\mp\gametypes\_weapons::friendlyfirecheck(self.owner, var_2)) {
@@ -409,7 +409,7 @@ trophydamage(var_0) {
 
     self.damagetaken = self.damagetaken + var_1;
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_2 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("trophy");
     }
 

@@ -116,11 +116,11 @@ function main() {
   level.var_83a34f19 = 0;
   level.var_e9c73e06 = 0;
   level.var_7a6087fd = 0;
-  setdvar("dynEnt_spawnedLimit", 400);
-  setdvar("cg_disableearthquake", 1);
-  setdvar("scr_use_digital_blood_enabled", 0);
-  setdvar("ik_enable_ai_terrain", 0);
-  setdvar("r_newLensFlares", 0);
+  setDvar("dynEnt_spawnedLimit", 400);
+  setDvar("cg_disableearthquake", 1);
+  setDvar("scr_use_digital_blood_enabled", 0);
+  setDvar("ik_enable_ai_terrain", 0);
+  setDvar("r_newLensFlares", 0);
   level thread function_ae0a4fc5();
   level thread function_d5eb029a();
 }
@@ -199,7 +199,7 @@ function function_ae0a4fc5() {
       if(isDefined(player.doa)) {
         continue;
       }
-      if(!player isplayer()) {
+      if(!player isPlayer()) {
         continue;
       }
       if(player islocalplayer() && isspectating(player getlocalclientnumber())) {
@@ -287,7 +287,7 @@ function function_e63081e8(localclientnum, oldval, newval, bnewent, binitialsnap
   debugmsg("" + newval);
   if(newval) {
     if(newval && getlocalplayers().size > 1) {
-      setdvar("r_splitScreenExpandFull", 0);
+      setDvar("r_splitScreenExpandFull", 0);
     }
     if(isDefined(level.doa.var_6e0195ea)) {
       stopradiantexploder(localclientnum, level.doa.var_6e0195ea);
@@ -297,7 +297,7 @@ function function_e63081e8(localclientnum, oldval, newval, bnewent, binitialsnap
     debugmsg((("" + level.doa.var_6e0195ea) + "") + localclientnum);
     playradiantexploder(localclientnum, level.doa.var_6e0195ea);
   } else {
-    setdvar("r_splitScreenExpandFull", 1);
+    setDvar("r_splitScreenExpandFull", 1);
     if(isDefined(level.doa.var_6e0195ea)) {
       stopradiantexploder(localclientnum, level.doa.var_6e0195ea);
       level.doa.var_6e0195ea = undefined;
@@ -1044,9 +1044,9 @@ function changecamera(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     return;
   }
   enablevr();
-  setdvar("g_vrGameMode", 2);
-  setdvar("cg_disableearthquake", 1);
-  setdvar("vr_eyeScale", 0.3);
+  setDvar("g_vrGameMode", 2);
+  setDvar("cg_disableearthquake", 1);
+  setDvar("vr_eyeScale", 0.3);
   if(!isDefined(self.var_44509e49)) {
     self.var_44509e49 = 0;
   }
@@ -1159,7 +1159,7 @@ function function_12c2fbcb() {
       debugmsg((((("" + (isDefined(self.name) ? self.name : "")) + "") + self.entnum) + "") + (isDefined(self.doa.player) ? self.doa.player getentitynumber() : -1));
     self cameraforcedisablescriptcam(0);
     self camerasetupdatecallback(&namespace_ad544aeb::function_d207ecc1);
-    setdvar("vr_playerScale", 30);
+    setDvar("vr_playerScale", 30);
     setfriendlynamedraw(0);
     if(self islocalplayer()) {
       self.var_44509e49 = namespace_3ca3c537::function_9f1a0b26(0);
@@ -1195,7 +1195,7 @@ function function_c33d3992(localclientnum) {
     debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }
-  if(!self isplayer()) {
+  if(!self isPlayer()) {
     debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }

@@ -11,7 +11,7 @@ init() {
   level.splitscreen = isSplitScreen();
   level.ps3 = (getDvar("ps3Game") == "true");
   level.xenon = (getDvar("xenonGame") == "true");
-  level.console = GetDvar("consoleGame") == "true";
+  level.console = getDvar("consoleGame") == "true";
 
   level.onlineGame = IsOnlineGame();
   level.rankedMatch = (level.onlineGame && !getDvarInt("xblive_privatematch"));
@@ -93,7 +93,7 @@ init() {
   precacheModel("tag_origin");
 
   if(!level.practiceRound && (matchMakingGame() || (level.gametype == "horde" && level.onlineGame))) {
-    mapLeaderboard = " LB_MAP_" + getdvar("ui_mapname");
+    mapLeaderboard = " LB_MAP_" + getDvar("ui_mapname");
 
     gamemodeLeaderboard = " LB_GM_" + level.gametype;
 
@@ -160,10 +160,10 @@ runLevelAndQuit() {
 registerDvars() {
   SetOmnvar("ui_bomb_timer", 0);
   SetOmnvar("ui_nuke_end_milliseconds", 0);
-  SetDvar("ui_danger_team", "");
-  SetDvar("ui_inhostmigration", 0);
+  setDvar("ui_danger_team", "");
+  setDvar("ui_inhostmigration", 0);
 
-  SetDvar("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
+  setDvar("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
 }
 
 SetupCallbacks() {

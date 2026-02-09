@@ -46,7 +46,5 @@ precache() {
   precacheItem("usp_silencer");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_sniper_glint::main();
-  //----------------
-}
+  //---------------- maps\_sniper_glint::main();
+  //---------------- }

@@ -91,7 +91,7 @@ function main() {
   level thread function_d87a7dcc();
   level thread function_6ac83719();
   level thread function_73cc64f1(0);
-  setdvar("dlc5_get_client_weapon_from_entitystate", 1);
+  setDvar("dlc5_get_client_weapon_from_entitystate", 1);
   level thread zm_moon_ffotd::main_end();
 }
 

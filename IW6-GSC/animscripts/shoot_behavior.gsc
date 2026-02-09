@@ -345,7 +345,7 @@ readytoreturntocover() {
   if(gettime() < self.coverposestablishedtime + 800)
     return 0;
 
-  if(isplayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
+  if(isPlayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
     if(gettime() < self.coverposestablishedtime + 3000)
       return 0;
   }
@@ -390,7 +390,7 @@ havenothingtoshoot() {
 }
 
 shouldbeajerk() {
-  return level.gameskill == 3 && isplayer(self.enemy);
+  return level.gameskill == 3 && isPlayer(self.enemy);
 }
 
 setshootstyleforvisibleenemy() {

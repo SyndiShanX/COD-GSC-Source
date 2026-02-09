@@ -48,7 +48,7 @@ init_sidequest() {
 }
 
 createfxhidesidquestents() {
-  if(getdvar("createfx") != "" || getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("createfx") != "" || getDvar("r_reflectionProbeGenerate") == "1") {
     var_0 = getEntArray("sqSecurityField", "targetname");
 
     foreach(var_2 in var_0) {
@@ -637,7 +637,7 @@ handlearm(var_0) {
 }
 
 armdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     self.currentdamage = self.currentdamage + var_2;
     self notify("handlePain");
   }
@@ -1849,7 +1849,7 @@ teleportequippickup() {
   for(;;) {
     self.trigger waittill("trigger", var_1);
 
-    if(isplayer(var_1) && var_1 playercanpickupteleportequipment()) {
+    if(isPlayer(var_1) && var_1 playercanpickupteleportequipment()) {
       var_1 playergiveitem("teleportEquipment");
       var_1 thread playerdoteleportpickupsound();
       thread removeteleportequip(self);
@@ -2583,7 +2583,7 @@ doobstaclecourselavavo() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isplayer(var_1) || !var_1 playerisintoxicated()) {
+    if(!isPlayer(var_1) || !var_1 playerisintoxicated()) {
       continue;
     }
     if(var_1 playerplaysqvo(17) || var_1 playerplaysqvo(18)) {
@@ -2608,7 +2608,7 @@ doobstaclecoursecrouchvo() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isplayer(var_1) || !var_1 playerisintoxicated()) {
+    if(!isPlayer(var_1) || !var_1 playerisintoxicated()) {
       continue;
     }
     if(var_1 playerplaysqvo(20)) {
@@ -2633,7 +2633,7 @@ doobstaclecoursemazevo() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isplayer(var_1) || !var_1 playerisintoxicated()) {
+    if(!isPlayer(var_1) || !var_1 playerisintoxicated()) {
       continue;
     }
     if(var_1 playerplaysqvo(21)) {
@@ -2894,7 +2894,7 @@ switchpickup() {
   for(;;) {
     self.trigger waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0 playergiveitem("switch");
       var_0 thread maps\mp\mp_zombie_ark_aud::switch_pickup();
       maps\mp\zombies\_zombies_sidequests::stage_completed("code3", "stage2");
@@ -3035,7 +3035,7 @@ chumwaters() {
         level.zmbwaterchummed = 1;
         level thread doshark();
 
-        if(isDefined(var_5) && isplayer(var_5)) {
+        if(isDefined(var_5) && isPlayer(var_5)) {
           var_5 thread playerplaychumwatervo();
         }
 

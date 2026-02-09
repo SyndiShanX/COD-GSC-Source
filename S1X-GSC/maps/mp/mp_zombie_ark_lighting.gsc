@@ -9,6 +9,6 @@ main() {
 
 set_level_lighting_values() {
   if(isusinghdr()) {
-    setdvar("r_disablelightsets", 0);
+    setDvar("r_disablelightsets", 0);
   }
 }

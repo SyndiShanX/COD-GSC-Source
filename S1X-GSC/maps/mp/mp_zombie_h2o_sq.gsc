@@ -433,7 +433,7 @@ endgametohardmode(var_0, var_1, var_2) {
     return;
   }
   game["state"] = "postgame";
-  setdvar("ui_game_state", "postgame");
+  setDvar("ui_game_state", "postgame");
   level.zmbtransitiontohardmode = 1;
   level.gameendtime = gettime();
   level.gameended = 1;
@@ -475,7 +475,7 @@ endgametohardmode(var_0, var_1, var_2) {
 
     maps\mp\gametypes\_gamescore::updateteamscore("axis");
     maps\mp\gametypes\_gamescore::updateteamscore("allies");
-  } else if(isDefined(var_0) && isplayer(var_0)) {
+  } else if(isDefined(var_0) && isPlayer(var_0)) {
     game["roundsWon"][var_0.guid]++;
   }
 
@@ -490,9 +490,9 @@ endgametohardmode(var_0, var_1, var_2) {
     }
   }
 
-  setdvar("g_deadChat", 1);
-  setdvar("ui_allow_teamchange", 0);
-  setdvar("bg_compassShowEnemies", 0);
+  setDvar("g_deadChat", 1);
+  setDvar("ui_allow_teamchange", 0);
+  setDvar("bg_compassShowEnemies", 0);
   maps\mp\gametypes\_gamelogic::freezeallplayers(1.0, 1);
 
   if(!maps\mp\_utility::wasonlyround() && !var_2) {
@@ -521,7 +521,7 @@ endgametohardmode(var_0, var_1, var_2) {
 
       level notify("restarting");
       game["state"] = "playing";
-      setdvar("ui_game_state", "playing");
+      setDvar("ui_game_state", "playing");
       map_restart(1);
       return;
     }
@@ -783,7 +783,7 @@ endgametohardmode(var_0, var_1, var_2) {
 
   if(isDefined(level.ishorde) && level.ishorde) {
     if(isDefined(level.zombiescompleted) && level.zombiescompleted) {
-      setdvar("cg_drawCrosshair", 1);
+      setDvar("cg_drawCrosshair", 1);
     }
   }
 
@@ -802,7 +802,7 @@ endgametohardmode(var_0, var_1, var_2) {
   game["state"] = "playing";
   game["start_in_zmb_hard_mode"] = 1;
   game["gamestarted"] = undefined;
-  setdvar("ui_game_state", "playing");
+  setDvar("ui_game_state", "playing");
   map_restart(1);
 }
 
@@ -939,7 +939,7 @@ valvedamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
   if(isDefined(var_4) && isexplosivedamagemod(var_4)) {
     return;
   }
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
   self.angles = (self.angles[0], self.angles[1], self.angles[2] + 6.0);
@@ -2694,7 +2694,7 @@ jumpquest_reset(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(level.jumpquest.stagecurrent > 0) {
@@ -3295,13 +3295,13 @@ playerrewardprizestage12() {
     level.zmbsqcharacterskilled++;
 
     if(level.zmbsqcharacterskilled == 3) {
-      if(isplayer(var_0)) {
+      if(isPlayer(var_0)) {
         var_0 thread playerrewardweaponupgrade();
       }
     }
 
     level thread dokillplayerozvo();
-  } else if(isplayer(var_0) && var_0 != self) {
+  } else if(isPlayer(var_0) && var_0 != self) {
     if(!isDefined(level.zmbsqrewardprizes)) {
       level.zmbsqrewardprizes = 1;
     } else if(level.zmbsqrewardprizes < 3) {
@@ -4418,7 +4418,7 @@ monitorplayersleavebusarena() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       level notify("bus_round_complete");
       return;
     }
@@ -4675,21 +4675,21 @@ spawncharactersstage15() {
     var_8 = getcharacterbyindex(3, level.zmbsqcharacters);
   }
 
-  if(isplayer(var_8)) {
+  if(isPlayer(var_8)) {
     var_8 maps\mp\zombies\_util::setcharacteraudio(3, 1);
   }
 
-  var_9 = !isplayer(var_8);
+  var_9 = !isPlayer(var_8);
   var_10 = "janitor";
 
-  if(maps\mp\zombies\_util::is_true(var_8.exosuitonline) || !isplayer(var_8)) {
+  if(maps\mp\zombies\_util::is_true(var_8.exosuitonline) || !isPlayer(var_8)) {
     var_10 = "janitor_exo";
   }
 
   var_8 thread maps\mp\zombies\_util::setcharactermodel(var_10, 1, var_9);
   level waittill("bus_round_complete");
 
-  if(isplayer(var_8)) {
+  if(isPlayer(var_8)) {
     if(isalive(var_8)) {
       var_10 = "pilot";
 

@@ -60,7 +60,7 @@ function_1c4b5097(item) {
 }
 
 on_drop_item(params) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

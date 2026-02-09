@@ -202,7 +202,7 @@ function chambers_init() {
 function monitor_chamber_death_trigs() {
   while(true) {
     self waittill("trigger", ent);
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       ent.bleedout_time = 0;
     }
     ent dodamage(ent.health + 666, ent.origin);
@@ -691,7 +691,7 @@ function staff_biplane_drop_pieces(a_staff_pieces) {
 }
 
 function aircrystalbiplanecallback_vehicledamage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, vdamageorigin, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name, vsurfacenormal) {
-  if(isplayer(e_attacker) && self.vehicletype == "biplane_zm" && !self flag::get("biplane_down")) {
+  if(isPlayer(e_attacker) && self.vehicletype == "biplane_zm" && !self flag::get("biplane_down")) {
     self flag::set("biplane_down");
     level notify("biplane_down");
   }
@@ -938,7 +938,7 @@ function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sw
     return;
   }
   n_max_dist_sq = 9000000;
-  if(isplayer(attacker) || sweapon == level.var_653c9585) {
+  if(isPlayer(attacker) || sweapon == level.var_653c9585) {
     if(!level flag::get("fire_puzzle_1_complete")) {
       zm_tomb_quest_fire::sacrifice_puzzle_zombie_killed(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime);
     }

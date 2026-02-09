@@ -9,7 +9,6 @@ _id_40A4(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = level.players;
-
   }
   foreach(var_3 in var_1) {}
   thread _id_40A5(var_3, 3);
@@ -18,7 +17,6 @@ _id_40A4(var_0, var_1) {
 
   if(isDefined(var_0.speed)) {
     var_5 = var_0.speed;
-
   }
   self setairresistance(30);
   self vehicle_setspeed(var_5, 40, level._id_28F3);
@@ -28,13 +26,11 @@ _id_40A4(var_0, var_1) {
 _id_40A5(var_0, var_1, var_2) {
   var_0 thread _id_40A7(self);
 
-  if(getdvar("fastrope_arms") == "") {
-    setdvar("fastrope_arms", "0");
-
+  if(getDvar("fastrope_arms") == "") {
+    setDvar("fastrope_arms", "0");
   }
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   var_3 = undefined;
 
@@ -59,7 +55,6 @@ _id_40A5(var_0, var_1, var_2) {
     var_0 playerlinkto(var_3, "tag_player", 0.35, 120, 28, 30, 30, 0);
   } else {
     var_0 playerlinkto(var_3, "tag_player", 0.35, 60, 28, 30, 30, 0);
-
   }
   var_0 freezecontrols(0);
   var_3 hide();
@@ -67,9 +62,8 @@ _id_40A5(var_0, var_1, var_2) {
   var_6 = var_6 - var_2;
   self waittill("unloading");
 
-  if(getdvar("fastrope_arms") != "0") {
+  if(getDvar("fastrope_arms") != "0") {
     var_3 show();
-
   }
   var_0 disableweapons();
   wait(var_6);
@@ -139,7 +133,6 @@ _id_40A9(var_0, var_1) {
 
   if(isDefined(var_1)) {
     maps\_vehicle::_id_2AF5(level._id_2AF1._id_250B, var_1);
-
   }
   var_4 = maps\_vehicle::_id_211F(level._id_2AF1);
   var_4 thread _id_40A4(var_3, var_0);

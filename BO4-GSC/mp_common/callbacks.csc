@@ -83,7 +83,7 @@ playerspawned(localclientnum) {
 entityspawned(localclientnum) {
   self endon(#"death");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level._clientfaceanimonplayerspawned)) {
       self thread[[level._clientfaceanimonplayerspawned]](localclientnum);
     }

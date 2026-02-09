@@ -8,6 +8,7 @@
 #include maps\_zombiemode_utility;
 #include animscripts\zombie_Utility;
 #using_animtree("generic_human");
+
 init() {
   level.zombie_init_done = ::zombie_moon_init_done;
   level thread init_low_gravity_anims();
@@ -20,7 +21,6 @@ init() {
   level thread update_zombie_gravity_transition();
   level thread watch_player_grenades();
 }
-
 init_low_gravity_anims() {
   level.scr_anim["zombie"]["walk_moon1"] = % ai_zombie_walk_moon_v1;
   level.num_anim["zombie"]["walk"] = 1;
@@ -52,7 +52,6 @@ init_low_gravity_anims() {
   level.scr_anim["quad_zombie"]["sprint_moon3"] = % ai_zombie_quad_crawl_sprint_moon_3;
   level.num_anim["quad_zombie"]["sprint"] = 3;
 }
-
 init_low_gravity_fx() {
   keys = GetArrayKeys(level.zones);
   for(i = 0; i < level.zones.size; i++) {
@@ -62,18 +61,16 @@ init_low_gravity_fx() {
     ZeroGravityVolumeOn(keys[i]);
   }
 }
-
 gravity_trigger() {
   while(1) {
     self waittill("trigger", who);
-    if(!isplayer(who)) {
+    if(!isPlayer(who)) {
       self thread trigger_thread(who, ::gravity_zombie_in, ::gravity_zombie_out);
     } else {
       self thread trigger_thread(who, ::gravity_player_in, ::gravity_player_out);
     }
   }
 }
-
 gravity_zombie_in(ent, endon_condition) {
   if(!isDefined(ent.in_low_gravity)) {
     ent.in_low_gravity = 0;
@@ -81,7 +78,6 @@ gravity_zombie_in(ent, endon_condition) {
   ent.in_low_gravity++;
   ent SetClientFlag(level._ZOMBIE_ACTOR_FLAG_LOW_GRAVITY);
 }
-
 gravity_zombie_out(ent) {
   if(ent.in_low_gravity > 0) {
     ent.in_low_gravity--;
@@ -90,15 +86,12 @@ gravity_zombie_out(ent) {
     }
   }
 }
-
 gravity_player_in(ent, endon_condition) {
   ent setplayergravity(136);
 }
-
 gravity_player_out(ent) {
   ent clearplayergravity();
 }
-
 gravity_zombie_update(low_gravity, force_update) {
   if(!isDefined(self.animname)) {
     return;
@@ -128,7 +121,6 @@ gravity_zombie_update(low_gravity, force_update) {
     }
   }
 }
-
 gravity_zombie_death_response() {
   if(!isDefined(self.in_low_gravity) || self.in_low_gravity == 0) {
     return false;
@@ -158,7 +150,6 @@ gravity_zombie_death_response() {
   self LaunchRagdoll(dir);
   return false;
 }
-
 zombie_moon_is_low_gravity_zone(zone_name) {
   zone = getEntArray(zone_name, "targetname");
   if(isDefined(zone[0].script_string) && zone[0].script_string == "lowgravity") {
@@ -166,7 +157,6 @@ zombie_moon_is_low_gravity_zone(zone_name) {
   }
   return false;
 }
-
 zombie_moon_check_zone() {
   self endon("death");
   wait_network_frame();
@@ -188,14 +178,12 @@ zombie_moon_check_zone() {
     self gravity_zombie_update(0);
   }
 }
-
 zombie_moon_init_done() {
   self.crawl_anim_override = ::zombie_moon_crawl_anim_override;
   self thread zombie_moon_check_zone();
   self thread zombie_watch_nogravity();
   self thread zombie_watch_run_notetracks();
 }
-
 zombie_low_gravity_locomotion() {
   self endon("death");
   gravity_str = undefined;
@@ -217,7 +205,6 @@ zombie_low_gravity_locomotion() {
     self.needs_run_update = true;
   }
 }
-
 zombie_watch_nogravity() {
   self endon("death");
   _OFF_GROUND_MAX = 32;
@@ -234,7 +221,6 @@ zombie_watch_nogravity() {
     wait(0.2);
   }
 }
-
 zombie_watch_run_notetracks() {
   self endon("death");
   while(1) {
@@ -251,7 +237,6 @@ zombie_watch_run_notetracks() {
     }
   }
 }
-
 reset_zombie_anim() {
   self endon("death");
   theanim = undefined;
@@ -276,12 +261,12 @@ reset_zombie_anim() {
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl5", false);
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl_hand_1", false);
     legless_walk_anims = add_to_array(legless_walk_anims, "crawl_hand_2", false);
-    rand_walk_anim = randomInt(legless_walk_anims.size);
+    rand_walk_anim = RandomInt(legless_walk_anims.size);
     legless_sprint_anims = [];
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl2", false);
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl3", false);
     legless_sprint_anims = add_to_array(legless_sprint_anims, "crawl_sprint1", false);
-    rand_sprint_anim = randomInt(legless_sprint_anims.size);
+    rand_sprint_anim = RandomInt(legless_sprint_anims.size);
     switch (self.zombie_move_speed) {
       case "walk":
         theanim = legless_walk_anims[rand_walk_anim];
@@ -311,7 +296,6 @@ reset_zombie_anim() {
     self thread reset_zombie_anim();
   }
 }
-
 zombie_moon_update_player_gravity() {
   flag_wait("all_players_connected");
   LOW_G = 136;
@@ -345,7 +329,6 @@ zombie_moon_update_player_gravity() {
     wait_network_frame();
   }
 }
-
 zombie_moon_update_player_float() {
   flag_wait("all_players_connected");
   players = getplayers();
@@ -353,14 +336,13 @@ zombie_moon_update_player_float() {
     players[i] thread zombie_moon_player_float();
   }
 }
-
 zombie_moon_player_float() {
   self endon("death");
   self endon("disconnect");
   boost_chance = 40;
   while(1) {
     if(is_player_valid(self) && is_true(self.in_low_gravity) && self IsOnGround() && self IsSprinting()) {
-      boost = randomInt(100);
+      boost = RandomInt(100);
       if(boost < boost_chance) {
         time = RandomFloatRange(0.75, 1.25);
         wait(time);
@@ -384,7 +366,6 @@ zombie_moon_player_float() {
     wait_network_frame();
   }
 }
-
 check_player_gravity() {
   flag_wait("all_players_connected");
   players = getplayers();
@@ -392,7 +373,6 @@ check_player_gravity() {
     players[i] thread low_gravity_watch();
   }
 }
-
 low_gravity_watch() {
   self endon("death");
   self endon("disconnect");
@@ -488,18 +468,16 @@ low_gravity_watch() {
     nextTime = GetTime();
   }
 }
-
 remove_blur(time) {
   self endon("disconnect");
   wait(time);
   self SetBlur(0, 0.1);
   self clearclientflag(level._CLIENTFLAG_PLAYER_GASP_RUMBLE);
 }
-
 airless_vox_without_repeat() {
   self endon("death");
   self endon("disconnect");
-  entity_num = self getEntityNumber();
+  entity_num = self GetEntityNumber();
   if(isDefined(self.zm_random_char)) {
     entity_num = self.zm_random_char;
   }
@@ -519,7 +497,6 @@ airless_vox_without_repeat() {
     self.airless_vox_in_progess = false;
   }
 }
-
 update_zombie_locomotion() {
   flag_wait("power_on");
   player_zones = getEntArray("player_volume", "script_noteworthy");
@@ -542,7 +519,6 @@ update_zombie_locomotion() {
     }
   }
 }
-
 update_low_gravity_fx() {
   flag_wait("power_on");
   keys = GetArrayKeys(level.zones);
@@ -556,7 +532,6 @@ update_low_gravity_fx() {
     }
   }
 }
-
 watch_player_grenades() {
   flag_wait("all_players_connected");
   players = getplayers();
@@ -564,7 +539,6 @@ watch_player_grenades() {
     players[i] thread player_throw_grenade();
   }
 }
-
 player_throw_grenade() {
   self endon("disconnect");
   while(1) {
@@ -572,7 +546,6 @@ player_throw_grenade() {
     grenade thread watch_grenade_gravity();
   }
 }
-
 watch_grenade_gravity() {
   self endon("death");
   self endon("explode");
@@ -609,18 +582,16 @@ watch_grenade_gravity() {
     wait(0.25);
   }
 }
-
 update_zombie_gravity_transition() {
   airlock_doors = getEntArray("zombie_door_airlock", "script_noteworthy");
   for(i = 0; i < airlock_doors.size; i++) {
     airlock_doors[i] thread zombie_airlock_think();
   }
 }
-
 zombie_airlock_think() {
   while(1) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       continue;
     }
     if(!flag("power_on")) {
@@ -657,7 +628,6 @@ zombie_airlock_think() {
     }
   }
 }
-
 zone_breached(zone_name) {
   zones = getEntArray(zone_name, "targetname");
   zombies = GetAIArray("axis");
@@ -679,7 +649,6 @@ zone_breached(zone_name) {
     }
   }
 }
-
 zombie_moon_crawl_anim_override() {
   player_volumes = getEntArray("player_volume", "script_noteworthy");
   if(!is_true(level.on_the_moon)) {

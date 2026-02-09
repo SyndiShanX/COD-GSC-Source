@@ -245,7 +245,7 @@ bridge_device_mortar_hit_nuke(owner, mortar_model) {
   oversplash_radius = det_radius + 3.0 * self.device_det_splash;
 
   foreach(agent in level.participants) {
-    if(IsPlayer(agent) && (agent.sessionstate != "playing")) {
+    if(isPlayer(agent) && (agent.sessionstate != "playing")) {
       continue;
     }
     agent thread update_bridge_event_player_effects(self.device_model.origin, det_radius, oversplash_radius, self.end_of_match_volley);
@@ -463,7 +463,7 @@ redriver_detecthit_churchbell() {
   sound_alias = bell_sound_alias(self.script_noteworthy);
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, hit_point, type);
-    if(!isDefined(attacker) || !IsPlayer(attacker))
+    if(!isDefined(attacker) || !isPlayer(attacker))
       continue;
     current_weapon = attacker GetCurrentWeapon();
     if(!isDefined(current_weapon) || (WeaponClass(current_weapon) != "sniper"))

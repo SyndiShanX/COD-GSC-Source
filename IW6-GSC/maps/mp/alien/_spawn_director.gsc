@@ -336,12 +336,13 @@ populate_lane_spawners() {
   foreach(index, lane in level.lanes) {
     laneStruct = getstruct(index, "targetname");
 
-    /# AssertEx( isDefined( laneStruct), "Can't find struct in level for lane: " + index ); #/ /
+    AssertEx(isDefined(laneStruct), "Can't find struct in level for lane: " + index);
+    /
     # AssertEx(isDefined(laneStruct.script_linkTo), "Missing script_linkTo KVP for lane: " + index);
 
     linkedSpawners = laneStruct get_links();
 
-    /# AssertEx( linkedSpawners.size > 0, "No attached spawners for lane: " + index );
+    AssertEx(linkedSpawners.size > 0, "No attached spawners for lane: " + index);
 
     foreach(spawnerName in linkedSpawners) {
       spawners = find_spawners_by_script_name(spawnerName);
@@ -374,7 +375,7 @@ load_spawn_events_from_table(cycle_data) {
     }
 
     cycleNum = int(cycle) - 1;
-    /# AssertEx( cycleNum >= -1 && cycleNum < level.cycle_data.spawn_cycles.size, "Spawn event cycle " + cycle + " references non-existent cycle!" );
+    AssertEx(cycleNum >= -1 && cycleNum < level.cycle_data.spawn_cycles.size, "Spawn event cycle " + cycle + " references non-existent cycle!");
 
     spawnEvent = spawnStruct();
     spawnEvent.activation_notify = tablelookup(level.alien_cycle_table, TABLE_INDEX, entryIndex, TABLE_SPAWN_EVENT_NOTIFY);
@@ -472,7 +473,7 @@ monitor_debug_dvar() {
   level thread debug_queue_monitor();
 
   while(true) {
-    waveDebugValues = strtok(GetDvar("scr_alienwavedebug", "-1 0.0"), " ");
+    waveDebugValues = strtok(getDvar("scr_alienwavedebug", "-1 0.0"), " ");
     AssertEx(waveDebugValues.size == 2, "Invalid entry for scr_alienwavedebug dvar! Should be integer value for cycle number, and float value (0.0 - 1.0) for intensity level. ( scr_alienwavedebug \"4 0.5\" )");
     waveDebugCycle = int(waveDebugValues[0]) - 1;
     if(waveDebugCycle >= 0) {
@@ -550,7 +551,6 @@ print_cycle_rewards() {
       }
     }
     println(" Cycle " + index + ": " + total_min + " (Min), " + total_max + " (Max)");
-
   }
 }
 
@@ -636,12 +636,12 @@ sort_array(array, sort_func, beginning_index, pass_through_parameter_list) {
 }
 
 sort_intensity_levels_func(test_entry, base_entry, pass_through_parameter_list) {
-  /#Assert( isDefined( test_entry.intensityThreshold ) && isDefined( base_entry.intensityThreshold ) );
+  Assert(isDefined(test_entry.intensityThreshold) && isDefined(base_entry.intensityThreshold));
   return test_entry.intensityThreshold > base_entry.intensityThreshold;
 }
 
 sort_encounter_level_activation_time_func(test_entry, base_entry, pass_through_parameter_list) {
-  /#Assert( isDefined( test_entry.activation_time ) && isDefined( base_entry.activation_time ) );
+  Assert(isDefined(test_entry.activation_time) && isDefined(base_entry.activation_time));
 
   return test_entry.activation_time > base_entry.activation_time;
 }
@@ -725,7 +725,7 @@ build_spawn_zones(cycle_data) {
   cycle_data.spawn_zones = [];
 
   foreach(zone in spawnZones) {
-    /# AssertEx( !spawn_zone_exists( zone.script_linkName, cycle_data ), "Spawn zone with script_linkName of " + zone.script_linkName + " defined multiple times!" );
+    AssertEx(!spawn_zone_exists(zone.script_linkName, cycle_data), "Spawn zone with script_linkName of " + zone.script_linkName + " defined multiple times!");
 
     zoneInfo = spawnStruct();
     zoneInfo.zone_name = zone.script_linkName;
@@ -741,7 +741,6 @@ build_spawn_zones(cycle_data) {
   foreach(zone in cycle_data.spawn_zones) {
     AssertEx(zone.spawn_nodes.size > 0, "Spawn zone " + zone.zone_name + " does not have any linked spawners!");
   }
-
 }
 
 put_spawnLocations_into_cycle_data(spawnLocations, cycle_data) {
@@ -764,7 +763,7 @@ put_spawnLocations_into_cycle_data(spawnLocations, cycle_data) {
     }
     linkedZones = location get_links();
     foreach(zone in linkedZones) {
-      /#assertex( isDefined( cycle_data.spawn_zones[zone] ), "Invalid linked spawn zone: " + zone );
+      assertex(isDefined(cycle_data.spawn_zones[zone]), "Invalid linked spawn zone: " + zone);
       locationIndex = cycle_data.spawn_zones[zone].spawn_nodes.size;
       cycle_data.spawn_zones[zone].spawn_nodes[locationIndex] = locationInfo;
     }
@@ -1117,7 +1116,6 @@ spawn_event_wave_block(spawnedAliens, activation_notify) {
   if(GetDvarInt("scr_alienspawneventinfo", 0) == 1) {
     debug_print("Spawn event wave finished blocking");
   }
-
 }
 
 spawn_event_delayed_wave_spawn(wave, activation_notify, lanes) {
@@ -1285,7 +1283,6 @@ intensity_monitor_update_loop() {
         level notify("intensity_level_changed");
 
       level.current_intensity_level = intensityLevel;
-
     } else {
       last_intensity_update_time = currentTime;
     }
@@ -1437,7 +1434,7 @@ get_random_type_from_current_intensity() {
 respawn_threshold_monitor() {
   level endon("end cycle");
   level endon("intensity_level_changed");
-  /#level endon( "debug_mode_activated" );
+  level endon("debug_mode_activated");
 
   while(true) {
     if(level.current_intensity_level >= 0 && level.intensity_spawning_paused_count == 0) {
@@ -1752,7 +1749,6 @@ spawn_ground_aliens(desired_spawn_amount, alien_type, spawn_notify_func) {
     desired_spawn_amount -= 1;
 
     wait RandomFloatRange(MIN_INTERVAL, MAX_INTERVAL);
-
   }
 }
 
@@ -2009,7 +2005,7 @@ get_current_drill_state() {
 }
 
 get_override_lane_entry(override_lanes) {
-  /# Assert( override_lanes.size > 0 );
+  Assert(override_lanes.size > 0);
 
   if(!isDefined(level.override_lane_index))
     return get_random_entry(override_lanes);
@@ -2213,7 +2209,6 @@ find_safe_spawn_spot_with_volumes(player_volumes, type_name, override_last_used_
     spawnLocationInfo = find_random_spawn_node(level.cycle_data.spawn_zones[zone.name].spawn_nodes, type_name, override_last_used_spawn_duration, ::is_safe_spawn_location, playersToTest, override_sort_func);
     if(spawnLocationInfo["validNode"])
       return spawnLocationInfo;
-
   }
 
   spawnLocationInfo = find_random_spawn_node(level.cycle_data.spawner_list, type_name, override_last_used_spawn_duration, ::filter_spawn_point_by_distance_from_player, undefined, override_sort_func);
@@ -2418,7 +2413,6 @@ set_cycle_scalars(cycle_num) {
     level.cycle_reward_scalar = level.cycle_data.cycle_scalars[cycle_num].reward;
     level.cycle_score_scalar = level.cycle_data.cycle_scalars[cycle_num].score;
   }
-
 }
 
 init_spawn_node_info(cycle_data) {

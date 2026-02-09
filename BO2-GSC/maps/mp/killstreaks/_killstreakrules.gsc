@@ -242,7 +242,7 @@ killstreakstop(hardpointtype, team, id) {
     if(isDefined(recordstreakindex)) {
       if(isDefined(self.owner))
         self.owner recordkillstreakendevent(recordstreakindex);
-      else if(isplayer(self))
+      else if(isPlayer(self))
         self recordkillstreakendevent(recordstreakindex);
     }
   }
@@ -328,5 +328,4 @@ killstreak_debug_text(text) {
     else if(level.killstreak_rule_debug == 2.0)
       iprintlnbold("KSR: " + text);
   }
-
 }

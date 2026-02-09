@@ -161,7 +161,7 @@ function_af221ee1(s_params) {
     return;
   }
 
-  if(isplayer(s_params.eattacker)) {
+  if(isPlayer(s_params.eattacker)) {
     if(function_c740060f(s_params.weapon, 1)) {
       if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
         if(isDefined(level.no_gib_in_wolf_area) && isDefined(self[[level.no_gib_in_wolf_area]]()) && self[[level.no_gib_in_wolf_area]]()) {

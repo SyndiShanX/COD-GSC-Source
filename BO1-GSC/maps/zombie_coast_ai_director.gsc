@@ -7,6 +7,7 @@
 #include maps\_utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 init() {
   PreCacheRumble("damage_heavy");
   level.max_director_zombies = 0;
@@ -26,7 +27,6 @@ init() {
   level._effect["director_glow_docile"] = loadfx("maps/zombie/fx_zmb_director_glow_docile");
   level thread coast_director_fx();
 }
-
 FIX_bad_dog_location() {
   locations = getstructarray("shipback_near_zone_spawners_dog");
   bad_org = (-1800.2, -1613, 344.1);
@@ -38,13 +38,11 @@ FIX_bad_dog_location() {
     }
   }
 }
-
 coast_director_fx() {
   level waittill("fade_introblack");
   level thread FIX_bad_dog_location();
   exploder(900);
 }
-
 coast_spawn_heuristic(spawner) {
   if(isDefined(spawner.last_spawn_time) && (GetTime() - spawner.last_spawn_time < 30000)) {
     return -1;
@@ -66,13 +64,11 @@ coast_spawn_heuristic(spawner) {
   }
   return score;
 }
-
 coast_director_start() {
   level waittill("fade_in_complete");
   wait(6.0);
   level.max_director_zombies = 1;
 }
-
 coast_director_init() {
   self endon("death");
   if(isDefined(level._audio_director_vox)) {
@@ -87,7 +83,6 @@ coast_director_init() {
   self.find_exit_point = ::coast_director_find_exit_point;
   self thread coast_director_failsafe();
 }
-
 coast_director_entered_water(trigger) {
   self endon("death");
   self.water_trigger = trigger;
@@ -98,7 +93,6 @@ coast_director_entered_water(trigger) {
   self thread maps\_zombiemode_ai_director::director_calmed();
   self thread check_for_close_players();
 }
-
 coast_director_exited_water() {
   self endon("death");
   if(!is_true(self.defeated)) {
@@ -110,12 +104,10 @@ coast_director_exited_water() {
   }
   self.water_trigger = undefined;
 }
-
 coast_director_enter_level() {
   self endon("death");
   self coast_director_water_rise(self.angles, self.origin);
 }
-
 coast_director_water_rise_fx(angles, fx_pos, anim_time) {
   self endon("death");
   ENTER_DIST = 295;
@@ -133,11 +125,10 @@ coast_director_water_rise_fx(angles, fx_pos, anim_time) {
   playFXOnTag(level._effect["director_water_trail"], trail, "tag_origin");
   forward = VectorNormalize(anglesToForward(angles));
   end = org + vector_scale(forward, ENTER_DIST);
-  trail moveTo(end, anim_time);
+  trail moveto(end, anim_time);
   trail waittill("movedone");
   trail delete();
 }
-
 coast_director_water_on_screen() {
   wait(0.5);
   players = GetPlayers();
@@ -150,14 +141,12 @@ coast_director_water_on_screen() {
     wait_network_frame();
   }
 }
-
 coast_director_water_drops_on_screen() {
   self endon("disconnect");
   self SetWaterDrops(50);
   wait(10.0);
   self SetWaterDrops(0);
 }
-
 coast_director_water_rise(angles, origin) {
   self endon("death");
   ENTER_HEIGHT = 82;
@@ -177,7 +166,7 @@ coast_director_water_rise(angles, origin) {
   playsoundatposition("zmb_director_bubble_effect", fx_pos);
   players = getplayers();
   for(i = 0; i < players.size; i++) {
-    players[i] playRumbleOnEntity("explosion_generic");
+    players[i] PlayRumbleOnEntity("explosion_generic");
   }
   water_pos = origin - (0, 0, ENTER_HEIGHT);
   water_pos -= vector_scale(forward, ENTER_DIST);
@@ -200,7 +189,6 @@ coast_director_water_rise(angles, origin) {
   self.goalradius = 90;
   self.on_break = undefined;
 }
-
 coast_director_delay_weapon() {
   self endon("death");
   if(is_true(self.has_weapon)) {
@@ -211,7 +199,6 @@ coast_director_delay_weapon() {
   self maps\_zombiemode_ai_director::director_add_weapon();
   self.has_weapon = true;
 }
-
 coast_director_get_reentry_point() {
   location = [];
   for(i = 0; i < level.water.size; i++) {
@@ -226,14 +213,12 @@ coast_director_get_reentry_point() {
   location = array_randomize(location);
   return location[0];
 }
-
 coast_director_reenter_level() {
   self endon("death");
   point = coast_director_get_reentry_point();
   angles = point.angles + (0, 180, 0);
   self coast_director_water_rise(angles, point.origin);
 }
-
 coast_director_exit_level(exit, calm) {
   self endon("death");
   self endon("stop_exit");
@@ -291,7 +276,6 @@ coast_director_exit_level(exit, calm) {
   self.exit = undefined;
   self.calm = undefined;
 }
-
 coast_director_exit_fx(anim_time) {
   self endon("death");
   EXIT_DIST = 295;
@@ -303,11 +287,10 @@ coast_director_exit_fx(anim_time) {
   playFXOnTag(level._effect["director_water_trail"], trail, "tag_origin");
   forward = VectorNormalize(anglesToForward(self.angles));
   end = self.origin + vector_scale(forward, EXIT_DIST);
-  trail moveTo(end, anim_time);
+  trail moveto(end, anim_time);
   trail waittill("movedone");
   trail delete();
 }
-
 coast_director_find_exit() {
   location = undefined;
   dist = 1000000;
@@ -326,7 +309,6 @@ coast_director_find_exit() {
   }
   return location;
 }
-
 coast_director_sliding(slide_node) {
   self endon("death");
   if(is_true(self.is_sliding)) {
@@ -362,13 +344,11 @@ coast_director_sliding(slide_node) {
     self.following_player = false;
   }
 }
-
 coast_director_delay_transition(time) {
   self.ignore_transition = true;
   wait(time);
   self.ignore_transition = undefined;
 }
-
 coast_director_choose_run() {
   if(is_true(self.is_sliding)) {
     self set_run_anim("slide");
@@ -380,17 +360,15 @@ coast_director_choose_run() {
   }
   return false;
 }
-
 check_for_close_players() {
   players = GetPlayers();
   for(i = 0; i < players.size; i++) {
-    if(distanceSquared(self.origin, players[i].origin) <= 600 * 600) {
+    if(DistanceSquared(self.origin, players[i].origin) <= 600 * 600) {
       players[i] thread maps\_zombiemode_audio::create_and_play_dialog("director", "water");
       break;
     }
   }
 }
-
 coast_director_find_exit_point() {
   self endon("death");
   self endon("director_exit");
@@ -407,8 +385,8 @@ coast_director_find_exit_point() {
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {
-    dist_zombie = distanceSquared(locs[i].origin, endPos);
-    dist_player = distanceSquared(locs[i].origin, player.origin);
+    dist_zombie = DistanceSquared(locs[i].origin, endPos);
+    dist_player = DistanceSquared(locs[i].origin, player.origin);
     if(dist_zombie < dist_player) {
       dest = i;
       break;
@@ -438,7 +416,6 @@ coast_director_find_exit_point() {
   }
   self.solo_last_stand = undefined;
 }
-
 coast_director_failsafe() {
   self endon("death");
   _MIN_DIST = 16 * 16;
@@ -446,7 +423,7 @@ coast_director_failsafe() {
   while(1) {
     old_org = self.origin;
     wait(1);
-    d = distanceSquared(old_org, self.origin);
+    d = DistanceSquared(old_org, self.origin);
     if(d < _MIN_DIST) {
       self.failsafe++;
     } else {

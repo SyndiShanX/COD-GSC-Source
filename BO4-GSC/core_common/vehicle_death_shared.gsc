@@ -19,7 +19,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  setdvar(#"debug_crash_type", -1);
+  setDvar(#"debug_crash_type", -1);
   callback::on_vehicle_damage(&on_vehicle_damage);
 }
 
@@ -458,7 +458,6 @@ helicopter_crash_zone_accel(dir) {
       self setphysacceleration((0, 0, -50));
 
       circle(self.crash_zone.origin + (0, 0, self.crash_zone.height), self.crash_zone.radius, (1, 0, 0), 0, 2);
-
     }
 
     self.crash_vel = self.crash_zone.origin - self.origin;
@@ -1161,7 +1160,6 @@ watch_for_crash_detour_scene(nd_crash_path) {
 
   if(str_result === "stopped_while_crashing" && isDefined(nd_crash)) {
     iprintln("<dev string:x38>" + nd_crash.origin + "<dev string:x74>");
-
   }
 
   if(isDefined(s_crash_scene) && isDefined(s_crash_scene.scriptbundlename)) {

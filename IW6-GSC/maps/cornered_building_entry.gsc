@@ -3064,7 +3064,7 @@ inverted_rappel_combat() {
   maps\_utility::array_spawn_function_targetname("rappel_balcony_enemies", ::rappel_balcony_setup);
   common_scripts\utility::flag_wait("spawn_balcony_enemies");
   level.rappel_balcony_enemies = maps\_utility::array_spawn_targetname("rappel_balcony_enemies");
-  var_1 = getdvar("ragdoll_max_life");
+  var_1 = getDvar("ragdoll_max_life");
   setsaveddvar("ragdoll_max_life", 20000);
   thread allies_help_when_player_shoots_balcony_enemies();
   level.rappel_balcony_enemies = maps\_utility::array_removedead_or_dying(level.rappel_balcony_enemies);
@@ -3219,7 +3219,7 @@ watch_for_death_achievement() {
   level endon("sleeping_guy_awake");
   self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     self kill();
     level.player maps\_utility::player_giveachievement_wrapper("LEVEL_7A");
   }

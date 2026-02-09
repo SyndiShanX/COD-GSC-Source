@@ -120,9 +120,9 @@ function intro_reflection_extracam(localclientnum, oldval, newval, bnewent, bini
   if(newval == 1) {
     assert(isDefined(level.e_train_extra_cam), "");
     level.e_train_extra_cam setextracam(0);
-    setdvar("r_extracam_custom_aspectratio", 0.769);
+    setDvar("r_extracam_custom_aspectratio", 0.769);
   } else {
-    setdvar("r_extracam_custom_aspectratio", -1);
+    setDvar("r_extracam_custom_aspectratio", -1);
     if(isDefined(level.e_train_extra_cam)) {
       level.e_train_extra_cam delete();
     }

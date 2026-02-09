@@ -62,7 +62,7 @@ function should_play_sound(mod) {
 }
 
 function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(isDefined(self.nohitmarkers) && self.nohitmarkers) {
@@ -112,10 +112,10 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
             if(isDefined(victim) && (isDefined(victim.isaiclone) && victim.isaiclone)) {
               hitalias = "mpl_hit_alert_clone";
             } else {
-              if(isDefined(victim) && isplayer(victim) && victim flagsys::get("gadget_armor_on") && armor::armor_should_take_damage(inflictor, weapon, mod, shitloc)) {
+              if(isDefined(victim) && isPlayer(victim) && victim flagsys::get("gadget_armor_on") && armor::armor_should_take_damage(inflictor, weapon, mod, shitloc)) {
                 hitalias = "mpl_hit_alert_armor";
               } else {
-                if(isDefined(victim) && isplayer(victim) && isDefined(victim.carryobject) && isDefined(victim.carryobject.hitsound) && isDefined(perkfeedback) && perkfeedback == "armor") {
+                if(isDefined(victim) && isPlayer(victim) && isDefined(victim.carryobject) && isDefined(victim.carryobject.hitsound) && isDefined(perkfeedback) && perkfeedback == "armor") {
                   hitalias = victim.carryobject.hitsound;
                 } else {
                   if(mod == "MOD_BURNED") {
@@ -183,7 +183,7 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
     return;
   }
   damagestage = 1;
-  if(isDefined(level.growing_hitmarker) && isDefined(victim) && isplayer(victim)) {
+  if(isDefined(level.growing_hitmarker) && isDefined(victim) && isPlayer(victim)) {
     damagestage = damage_feedback_get_stage(victim);
   }
   self playhitmarker(hitalias, damagestage, perkfeedback, damage_feedback_get_dead(victim, mod, weapon, damagestage));
@@ -210,7 +210,7 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
   } else if(isDefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
   }
-  if(isDefined(self.hud_damagefeedback) && isDefined(level.growing_hitmarker) && isDefined(victim) && isplayer(victim)) {
+  if(isDefined(self.hud_damagefeedback) && isDefined(level.growing_hitmarker) && isDefined(victim) && isPlayer(victim)) {
     self thread damage_feedback_growth(victim, mod, weapon);
   } else if(isDefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback.x = -12;
@@ -275,7 +275,7 @@ function kill_hitmarker_fade() {
 }
 
 function update_override(icon, sound, additional_icon) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self playlocalsound(sound);
@@ -298,13 +298,13 @@ function update_override(icon, sound, additional_icon) {
 }
 
 function update_special(hitent) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!isDefined(hitent)) {
     return;
   }
-  if(!isplayer(hitent)) {
+  if(!isPlayer(hitent)) {
     return;
   }
   wait(0.05);

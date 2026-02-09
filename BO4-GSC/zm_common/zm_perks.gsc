@@ -176,7 +176,6 @@ on_player_connect() {
       }
     } else {
       iprintlnbold("<dev string:x38>" + self.name + "<dev string:x59>");
-
     }
 
     if(!zm_custom::function_d9f0defb(str_perk)) {
@@ -394,7 +393,6 @@ electric_perks_dialog() {
         self notify(#"warning_dialog");
 
         iprintlnbold("<dev string:xe1>");
-
       }
     }
   }
@@ -422,7 +420,7 @@ function_6f418fda(perk) {
 }
 
 vending_trigger_can_player_use(player, var_93e7ba4f) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
 
@@ -1308,9 +1306,7 @@ function_5296af32(player) {
         if(isint(level._custom_perks[perk].cost)) {
           cost = level._custom_perks[perk].cost;
         } else {
-          cost = [
-            [level._custom_perks[perk].cost]
-          ]();
+          cost = [[level._custom_perks[perk].cost]]();
         }
       }
 
@@ -2091,9 +2087,7 @@ function_b7f2c635(player) {
         n_cost = level function_44915d1(perk, n_slot);
 
         if(isDefined(level.var_256aa316)) {
-          var_c591876d = [
-            [level.var_256aa316]
-          ](perk);
+          var_c591876d = [[level.var_256aa316]](perk);
         } else {
           var_c591876d = level._custom_perks[perk].hint_string;
         }
@@ -2369,7 +2363,6 @@ function_d11d4952() {
         self notify(#"warning_dialog");
 
         iprintlnbold("<dev string:xe1>");
-
       }
     }
   }
@@ -3504,13 +3497,11 @@ register_actor_damage_override(str_perk, actor_damage_override_func) {
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(isDefined(attacker.var_466b927f) && isarray(attacker.var_466b927f)) {
       foreach(str_perk in attacker.var_466b927f) {
         if(isDefined(level.var_f5021cbd[str_perk])) {
-          damage = [
-            [level.var_f5021cbd[str_perk]]
-          ](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
+          damage = [[level.var_f5021cbd[str_perk]]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
         }
       }
     }
@@ -3518,9 +3509,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     if(isDefined(attacker.var_67ba1237) && isarray(attacker.var_67ba1237)) {
       foreach(str_perk in attacker.var_67ba1237) {
         if(isDefined(level.var_f5021cbd[str_perk])) {
-          damage = [
-            [level.var_f5021cbd[str_perk]]
-          ](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
+          damage = [[level.var_f5021cbd[str_perk]]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
         }
       }
     }
@@ -3884,7 +3873,7 @@ function_545a79c() {
       }
     }
 
-    setdvar(#"zombie_vapor_devgui", "<dev string:x16a7>");
+    setDvar(#"zombie_vapor_devgui", "<dev string:x16a7>");
     wait 0.5;
   }
 }

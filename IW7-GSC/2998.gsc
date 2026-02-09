@@ -3335,7 +3335,7 @@ func_B887(var_0) {
     var_0 waittill("damage", var_5, var_6, var_7, var_8, var_9);
 
     if(isDefined(var_6) && isDefined(var_6.team) && isDefined(var_0.owner.team) && var_6.team != var_0.owner.team) {
-      if(isplayer(var_6)) {
+      if(isPlayer(var_6)) {
         var_4++;
       }
 

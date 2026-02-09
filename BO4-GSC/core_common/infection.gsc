@@ -109,7 +109,7 @@ give_loadout() {
 }
 
 reset_character() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     assert(0);
     return;
   }

@@ -17,7 +17,7 @@ init() {
 
   level.KS_MODULES_TABLE = "mp/killstreakModules.csv";
   level.KS_MODULE_REF_COLUMN = 1;
-  /# level.KS_MODULE_NAME_COLUMN = 2;
+  level.KS_MODULE_NAME_COLUMN = 2;
   level.KS_MODULE_KILLSTREAK_REF_COLUMN = 4;
   level.KS_MODULE_ADDED_POINTS_COLUMN = 5;
   level.KS_MODULE_SLOT_COLUMN = 6;

@@ -637,7 +637,7 @@ treasure_chest_think() {
   user zm_stats::function_c0c6ab19(#"weapons_bought", 1, 1);
   user contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, #"zstandard");
 
-  if(isplayer(self.chest_user)) {
+  if(isPlayer(self.chest_user)) {
     self.chest_user util::delay(0, "death", &zm_audio::create_and_play_dialog, #"box", #"interact");
     level notify(#"hash_39b0256c6c9885fc", {
       #e_player: self.chest_user
@@ -744,7 +744,7 @@ treasure_chest_think() {
       self.weapon_out = undefined;
 
       if(isDefined(level.magic_box_grab_by_anyone) && level.magic_box_grab_by_anyone || isDefined(self.var_481aa649) && self.var_481aa649) {
-        if(isplayer(grabber)) {
+        if(isPlayer(grabber)) {
           user = grabber;
         }
       }
@@ -1381,9 +1381,7 @@ decide_hide_show_hint(endon_notify, second_endon_notify, onlyplayer, can_buy_wea
       players = getplayers();
 
       for(i = 0; i < players.size; i++) {
-        if(players[i] can_buy_weapon(var_5429ee1f) && (!isDefined(can_buy_weapon_extra_check_func) || players[i][
-            [can_buy_weapon_extra_check_func]
-          ](self.weapon)) && !players[i] bgb::is_enabled(#"zm_bgb_disorderly_combat")) {
+        if(players[i] can_buy_weapon(var_5429ee1f) && (!isDefined(can_buy_weapon_extra_check_func) || players[i][[can_buy_weapon_extra_check_func]](self.weapon)) && !players[i] bgb::is_enabled(#"zm_bgb_disorderly_combat")) {
           self setinvisibletoplayer(players[i], 0);
           continue;
         }
@@ -1734,7 +1732,7 @@ treasure_chest_weapon_spawn(chest, player, respin) {
       self.weapon_model_dw = undefined;
     }
 
-    if(isplayer(chest.chest_user)) {
+    if(isPlayer(chest.chest_user)) {
       if(chest.chest_user bgb::is_enabled(#"zm_bgb_unbearable")) {
         level.chest_accessed = 0;
         chest.unbearable_respin = 1;
@@ -1947,7 +1945,7 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
   } else if(zm_weapons::is_wonder_weapon(weapon)) {
     str_vo_line = # "wonder";
 
-    if(isplayer(var_75c86f89) && var_75c86f89 != self) {
+    if(isPlayer(var_75c86f89) && var_75c86f89 != self) {
       var_75c86f89 zm_utility::giveachievement_wrapper("zm_trophy_straw_purchase");
     }
   } else if(weapon === getweapon(#"homunculus") || weapon === getweapon(#"cymbal_monkey")) {

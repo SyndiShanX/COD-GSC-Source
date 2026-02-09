@@ -41,7 +41,7 @@ func_13B01(var_0, var_1) {
   for(;;) {
     self waittill("player_killstreak_death", var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(var_3 != self && isplayer(var_3)) {
+    if(var_3 != self && isPlayer(var_3)) {
       var_3 notify("destroyed_killstreak", var_7);
       var_3 scripts\mp\utility\game::giveunifiedpoints("destroyed_" + var_1);
       thread scripts\mp\utility\game::teamplayercardsplash("callout_destroyed_" + var_1, var_3);

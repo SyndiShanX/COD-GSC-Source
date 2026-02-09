@@ -47,7 +47,7 @@ function register() {
 }
 
 function function_b0f1e452() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     watcher = self weaponobjects::createproximityweaponobjectwatcher("electroball_grenade", self.team);
   } else {
     watcher = self weaponobjects::createproximityweaponobjectwatcher("electroball_grenade", level.zombie_team);
@@ -74,7 +74,7 @@ function function_b0f1e452() {
 
 function function_f424c33d(watcher, owner) {
   self thread setupkillcament();
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner addweaponstat(self.weapon, "used", 1);
   }
   if(isDefined(self.weapon) && self.weapon.proximitydetonation > 0) {
@@ -106,7 +106,7 @@ function watchproximitygrenadehitplayer(owner) {
   self setteam(owner.team);
   while(true) {
     self waittill("grenade_bounce", pos, normal, ent, surface);
-    if(isDefined(ent) && isplayer(ent) && surface != "riotshield") {
+    if(isDefined(ent) && isPlayer(ent) && surface != "riotshield") {
       if(level.teambased && ent.team == self.owner.team) {
         continue;
       }
@@ -204,7 +204,7 @@ function watch_death() {
 }
 
 function on_player_spawned() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread function_b0f1e452();
     self thread begin_other_grenade_tracking();
     self thread function_62ffcc2c();

@@ -20,7 +20,7 @@ move_player_to_start_point(var_0) {
 actor_teleport(var_0, var_1) {
   var_2 = getent(var_1, "targetname");
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 setplayerangles(var_2.angles);
     var_0 setorigin(var_2.origin);
   } else if(isai(var_0))

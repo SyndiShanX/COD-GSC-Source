@@ -171,7 +171,7 @@ function_f0b2e300() {
 
 function_c41ad9f9() {
   var_ce0426e0 = (function_6e9af98a(7, 10), function_bb7cbe85(5, 7), function_5f1710a5(0, 0));
-  var_b0befc80 = getdvar(#"hash_15fba4abe8704cb8", 0);
+  var_b0befc80 = getDvar(#"hash_15fba4abe8704cb8", 0);
 
   if(isDefined(var_b0befc80) && var_b0befc80) {
     var_ce0426e0 = getdvarvector(#"hash_cbccd885e75d219", (10, 5, 2));

@@ -22,7 +22,6 @@ class cprototype_self_revive: cluielem {
   function setup_clientfields(uid) {
     cluielem::setup_clientfields(uid);
   }
-
 }
 
 register(uid) {

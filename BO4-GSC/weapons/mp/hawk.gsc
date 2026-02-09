@@ -265,11 +265,11 @@ watch_destroyed(vehicle) {
 }
 
 function_17b75237(attacker, victim, weapon, attackerweapon, meansofdeath) {
-  if(!isDefined(victim) || !isplayer(victim)) {
+  if(!isDefined(victim) || !isPlayer(victim)) {
     return false;
   }
 
-  if(!isDefined(attacker) || !isplayer(attacker) || !isDefined(attacker.var_13c51aa5)) {
+  if(!isDefined(attacker) || !isPlayer(attacker) || !isDefined(attacker.var_13c51aa5)) {
     return false;
   }
 
@@ -500,7 +500,7 @@ getvalidtargets(hawk, &stance_offsets) {
   var_d691d922 = int((isDefined(bundle.var_ab326589) ? bundle.var_ab326589 : 0) * 1000);
 
   foreach(player in enemies) {
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
 
@@ -596,7 +596,7 @@ create_missile_hud(vehicle, var_a33bcd86) {
   ti = 0;
 
   foreach(enemy in enemies) {
-    if(isplayer(enemy) && player.team != enemy.team) {
+    if(isPlayer(enemy) && player.team != enemy.team) {
       entnum = enemy getentitynumber();
       player.var_13c51aa5[entnum] = ti;
       ti++;
@@ -611,7 +611,7 @@ create_missile_hud(vehicle, var_a33bcd86) {
 }
 
 function_903cf6aa() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -627,7 +627,7 @@ function_903cf6aa() {
 }
 
 function_3e6a41b7() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -734,7 +734,7 @@ function_9ace0fb6(targets) {
         continue;
       }
 
-      if(!isplayer(target)) {
+      if(!isPlayer(target)) {
         continue;
       }
 

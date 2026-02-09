@@ -147,7 +147,7 @@ function function_52073baf() {
     self setCanDamage(1);
     self.health = 999999;
     self waittill("damage", n_damage, e_attacker, $_, $_, str_damage_type);
-    if(isplayer(e_attacker)) {
+    if(isPlayer(e_attacker)) {
       level notify("hash_443f3c33");
       self setCanDamage(0);
       level waittill("hash_2fa6d91");

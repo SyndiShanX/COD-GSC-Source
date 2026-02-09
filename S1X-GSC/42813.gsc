@@ -101,7 +101,7 @@ monitorflash() {
         var_4 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("flash");
         var_11 = self;
 
-        if(isplayer(var_4) && var_4 isitemunlocked("specialty_paint") && var_4 maps\mp\_utility::_hasperk("specialty_paint")) {
+        if(isPlayer(var_4) && var_4 isitemunlocked("specialty_paint") && var_4 maps\mp\_utility::_hasperk("specialty_paint")) {
           if(!var_11 maps\mp\perks\_perkfunctions::ispainted()) {
             var_4 maps\mp\gametypes\_missions::processchallenge("ch_paint_pro");
           }

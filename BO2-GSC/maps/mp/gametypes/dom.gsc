@@ -22,7 +22,7 @@
 #include maps\mp\gametypes\_hostmigration;
 
 main() {
-  if(getdvar(#"mapname") == "mp_background") {
+  if(getDvar(#"mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -338,13 +338,13 @@ getunownedflagneareststart(team, excludeflag) {
 
 domdebug() {
   while(true) {
-    if(getdvar(#"_id_9F76D073") != "1") {
+    if(getDvar(#"_id_9F76D073") != "1") {
       wait 2;
       continue;
     }
 
     while(true) {
-      if(getdvar(#"_id_9F76D073") != "1") {
+      if(getDvar(#"_id_9F76D073") != "1") {
         break;
       }
 
@@ -443,7 +443,7 @@ onuse(player) {
   player logstring("flag captured: " + self.label);
   self maps\mp\gametypes\_gameobjects::setownerteam(team);
   self.visuals[0] setModel(level.flagmodel[team]);
-  setdvar("scr_obj" + self maps\mp\gametypes\_gameobjects::getlabel(), team);
+  setDvar("scr_obj" + self maps\mp\gametypes\_gameobjects::getlabel(), team);
   self resetflagbaseeffect();
   level.usestartspawns = 0;
   assert(team != "neutral");
@@ -587,7 +587,6 @@ give_capture_credit(touchlist, string, lastownerteam, isbflag) {
       player_from_touchlist addplayerstatwithgametype("CAPTURES", 1);
     } else {
       player_from_touchlist iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU CAPTURE CREDIT AS BOOSTING PREVENTION");
-
     }
 
     level thread maps\mp\_popups::displayteammessagetoall(string, player_from_touchlist);
@@ -688,7 +687,7 @@ onroundswitch() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     scoreeventprocessed = 0;
 
     if(attacker.touchtriggers.size && attacker.pers["team"] != self.pers["team"]) {
@@ -731,7 +730,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
           offendedflag = 1;
       }
 
-      if(inflagzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+      if(inflagzone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
         if(offendedflag) {
           if(!isDefined(attacker.dom_defends))
             attacker.dom_defends = 0;
@@ -748,7 +747,6 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
             break;
           } else {
             attacker iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU DEFENSIVE CREDIT AS BOOSTING PREVENTION");
-
           }
         }
 
@@ -773,7 +771,6 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
             break;
           } else {
             attacker iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU OFFENSIVE CREDIT AS BOOSTING PREVENTION");
-
           }
         }
       }
@@ -1207,7 +1204,7 @@ updatecapsperminute(lastownerteam) {
   self.numcaps++;
   minutespassed = maps\mp\gametypes\_globallogic_utils::gettimepassed() / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed["total"]))
+  if(isPlayer(self) && isDefined(self.timeplayed["total"]))
     minutespassed = self.timeplayed["total"] / 60;
 
   self.capsperminute = self.numcaps / minutespassed;

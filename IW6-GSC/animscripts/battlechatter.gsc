@@ -585,7 +585,7 @@ playthreatevent() {
   if(!isalive(var_0)) {
     return;
   }
-  if(threatwasalreadycalledout(var_0) && !isplayer(var_0)) {
+  if(threatwasalreadycalledout(var_0) && !isPlayer(var_0)) {
     return;
   }
   anim thread lockaction(self, "threat");
@@ -593,7 +593,7 @@ playthreatevent() {
 
   switch (self.chatqueue["threat"].eventtype) {
     case "infantry":
-      if(isplayer(var_0) || !isDefined(var_0 getturret()))
+      if(isPlayer(var_0) || !isDefined(var_0 getturret()))
         var_1 = threatinfantry(var_0);
       else {}
 
@@ -914,7 +914,7 @@ getthreatinfantrycallouttype(var_0) {
   var_8 = getdistanceyards(var_7.origin, var_0.origin);
   self.possiblethreatcallouts = [];
 
-  if(!isplayer(var_0) && var_0 animscripts\utility::usingrocketlauncher())
+  if(!isPlayer(var_0) && var_0 animscripts\utility::usingrocketlauncher())
     addpossiblethreatcallout("rpg");
 
   if(!isDefined(var_1) && var_0 isexposed(0))
@@ -1417,11 +1417,11 @@ orderdisplace(var_0) {
 
 tryorderto(var_0, var_1) {
   if(randomint(100) > anim.eventchance["response"]["order"]) {
-    if(!isDefined(var_1) || isDefined(var_1) && !isplayer(var_1))
+    if(!isDefined(var_1) || isDefined(var_1) && !isPlayer(var_1))
       return;
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && isDefined(level.player.bcnameid)) {
+  if(isDefined(var_1) && isPlayer(var_1) && isDefined(level.player.bcnameid)) {
     var_0 addplayernamealias();
     var_0.looktarget = level.player;
   } else if(isDefined(var_1) && cansayname(var_1)) {
@@ -1674,7 +1674,7 @@ cansay(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(isplayer(self))
+  if(isPlayer(self))
     return 0;
 
   if(distance(level.player.origin, self.origin) > level.bcs_maxtalkingdistsqrdfromplayer)
@@ -1804,7 +1804,7 @@ geteventstate(var_0) {
 }
 
 isfiltered(var_0) {
-  if(getdvar("bcs_filter" + var_0, "off") == "on" || getdvar("bcs_filter" + var_0, "off") == "1")
+  if(getDvar("bcs_filter" + var_0, "off") == "on" || getDvar("bcs_filter" + var_0, "off") == "1")
     return 1;
 
   return 0;
@@ -1840,7 +1840,7 @@ dotypelimit(var_0, var_1) {
 }
 
 bcissniper() {
-  if(isplayer(self))
+  if(isPlayer(self))
     return 0;
 
   if(isexposed())
@@ -1899,7 +1899,7 @@ isofficer() {
 }
 
 bcgetclaimednode() {
-  if(isplayer(self))
+  if(isPlayer(self))
     return self.node;
   else
     return animscripts\utility::getclaimednode();
@@ -2103,7 +2103,7 @@ location_get_last_callout_time(var_0) {
 getrelativeangles(var_0) {
   var_1 = var_0.angles;
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_2 = var_0 bcgetclaimednode();
 
     if(isDefined(var_2))
@@ -2785,7 +2785,7 @@ squadcanburst(var_0) {
 candoflavorburst() {
   var_0 = 0;
 
-  if(!isplayer(self) && isalive(self) && self.classname != "actor_enemy_dog" && level.flavorbursts[self.team] && voicecanburst() && self.flavorbursts)
+  if(!isPlayer(self) && isalive(self) && self.classname != "actor_enemy_dog" && level.flavorbursts[self.team] && voicecanburst() && self.flavorbursts)
     var_0 = 1;
 
   return var_0;

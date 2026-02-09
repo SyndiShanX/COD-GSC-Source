@@ -590,9 +590,9 @@ func_A19D(var_0) {
   }
 
   if(var_0) {
-    setdvar("scr_jackalDemigod", 1);
+    setDvar("scr_jackalDemigod", 1);
   } else {
-    setdvar("scr_jackalDemigod", 0);
+    setDvar("scr_jackalDemigod", 0);
   }
 }
 
@@ -4822,8 +4822,8 @@ func_DBDC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     return;
   }
   level.var_58DB = 1;
-  var_10["r_mbenable"] = getdvar("r_mbenable");
-  var_10["r_mbRadialOverridePosition"] = getdvar("r_mbRadialOverridePosition");
+  var_10["r_mbenable"] = getDvar("r_mbenable");
+  var_10["r_mbRadialOverridePosition"] = getDvar("r_mbRadialOverridePosition");
   var_10["r_mbRadialOverridePositionActive"] = getdvarint("r_mbRadialOverridePositionActive");
   var_10["r_mbradialoverridestrength"] = getdvarfloat("r_mbradialoverridestrength");
   var_10["r_mbradialoverrideradius"] = getdvarfloat("r_mbradialoverrideradius");

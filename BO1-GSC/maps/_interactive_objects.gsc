@@ -247,20 +247,19 @@ main() {
   array_thread(getEntArray("explodable_tarpcrate", "targetname"), ::explodable_tarpcrate_think);
   array_thread(getEntArray("explodable_tarpcrate", "script_noteworthy"), ::explodable_tarpcrate_think);
 }
-
 glass_logic() {
   direction_vec = undefined;
   crackedContents = undefined;
   cracked = undefined;
   glasshealth = 0;
   if(isDefined(self.target)) {
-    cracked = getEnt(self.target, "targetname");
+    cracked = getent(self.target, "targetname");
     assertex(isDefined(cracked), "Destructible glass at origin( " + self.origin + " ) has a target but the cracked version doesn't exist");
   }
   if(isDefined(self.script_linkTo)) {
     links = self get_links();
     assert(isDefined(links));
-    object = getEnt(links[0], "script_linkname");
+    object = getent(links[0], "script_linkname");
     self linkto(object);
   }
   assertex(isDefined(self.destructible_type), "Destructible glass at origin( " + self.origin + " ) doesnt have a destructible_type");
@@ -330,13 +329,11 @@ glass_logic() {
   glass_play_break_fx(self getorigin(), self.destructible_type, direction_vec);
   self delete();
 }
-
 glass_play_break_fx(origin, info, direction_vec) {
   thread play_sound_in_space(level._glass_info[info]["breaksnd"], origin);
   playFX(level._glass_info[info]["breakfx"], origin, direction_vec);
   level notify("glass_shatter");
 }
-
 oil_spill_think() {
   self.end = getstruct(self.target, "targetname");
   self.start = getstruct(self.end.target, "targetname");
@@ -345,14 +342,14 @@ oil_spill_think() {
     self.barrel.oilspill = true;
     self thread oil_spill_burn_after();
   }
-  self.extra = getEnt(self.target, "targetname");
+  self.extra = getent(self.target, "targetname");
   self setCanDamage(true);
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -375,14 +372,13 @@ oil_spill_think() {
   wait 10;
   self delete();
 }
-
 oil_spill_burn_after() {
   while(1) {
     self.barrel waittill("damage", amount, attacker, direction_vec, P, type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.barrel.script_selfisattacker) && self.barrel.script_selfisattacker) {
@@ -394,7 +390,6 @@ oil_spill_burn_after() {
   }
   self radiusdamage(self.start.origin, 4, 10, 10, self.damageOwner);
 }
-
 oil_spill_burn(P, dest) {
   forward = vectornormalize(dest - P);
   dist = distance(p, dest);
@@ -442,13 +437,11 @@ oil_spill_burn(P, dest) {
     self.barrel dodamage((80 + randomfloat(10)), P);
   }
 }
-
 oil_spill_burn_section(P) {
   count = 0;
   time = 0;
   playFX(level.breakables_fx["oilspill"]["burn"], P);
 }
-
 explodable_barrel_think() {
   if(self.classname != "script_model") {
     return;
@@ -468,7 +461,8 @@ explodable_barrel_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && (!IsPlayer(attacker) && (isDefined(attacker.classname) && attacker.classname != "worldspawn"))) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && (!isPlayer(attacker) &&
+        (isDefined(attacker.classname) && attacker.classname != "worldspawn"))) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -485,7 +479,6 @@ explodable_barrel_think() {
     }
   }
 }
-
 explodable_barrel_burn() {
   count = 0;
   startedfx = false;
@@ -518,7 +511,6 @@ explodable_barrel_burn() {
   }
   self thread explodable_barrel_explode();
 }
-
 explodable_barrel_explode() {
   self notify("exploding");
   self notify("death");
@@ -553,14 +545,14 @@ explodable_barrel_explode() {
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       arcademode_assignpoints("arcademode_score_explodableitem", attacker);
     }
   }
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("global_explosive_barrel_d");
   } else {
     self setModel("global_explosive_barrel_d");
@@ -574,7 +566,6 @@ explodable_barrel_explode() {
   waittillframeend;
   level.barrelExplodingThisFrame = false;
 }
-
 explodable_oiltank_think() {
   if(self.classname != "script_model") {
     return;
@@ -594,7 +585,7 @@ explodable_oiltank_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -611,7 +602,6 @@ explodable_oiltank_think() {
     }
   }
 }
-
 explodable_oiltank_burn() {
   count = 0;
   startedfx = false;
@@ -643,7 +633,6 @@ explodable_oiltank_burn() {
   }
   self thread explodable_oiltank_explode();
 }
-
 explodable_oiltank_explode() {
   self notify("exploding");
   self notify("death");
@@ -678,14 +667,14 @@ explodable_oiltank_explode() {
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       arcademode_assignpoints("arcademode_score_explodableitem", attacker);
     }
   }
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("static_peleliu_oiltanker_d");
   } else {
     self setModel("static_peleliu_oiltanker_d");
@@ -699,7 +688,6 @@ explodable_oiltank_explode() {
   wait 0.05;
   level.barrelExplodingThisFrame = false;
 }
-
 explodable_oiltank_small_think() {
   if(self.classname != "script_model") {
     return;
@@ -719,7 +707,7 @@ explodable_oiltank_small_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -736,7 +724,6 @@ explodable_oiltank_small_think() {
     }
   }
 }
-
 explodable_oiltank_small_burn() {
   count = 0;
   startedfx = false;
@@ -766,7 +753,6 @@ explodable_oiltank_small_burn() {
   }
   self thread explodable_oiltank_small_explode();
 }
-
 explodable_oiltank_small_explode() {
   self notify("exploding");
   self notify("death");
@@ -801,14 +787,14 @@ explodable_oiltank_small_explode() {
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       arcademode_assignpoints("arcademode_score_explodableitem", attacker);
     }
   }
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("static_peleliu_propane_d");
   } else {
     self setModel("static_peleliu_propane_d");
@@ -822,7 +808,6 @@ explodable_oiltank_small_explode() {
   wait 0.05;
   level.barrelExplodingThisFrame = false;
 }
-
 explodable_bagofbarrels_think() {
   if(self.classname != "script_model") {
     return;
@@ -842,7 +827,7 @@ explodable_bagofbarrels_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -859,7 +844,6 @@ explodable_bagofbarrels_think() {
     }
   }
 }
-
 explodable_bagofbarrels_burn() {
   self endon("death");
   count = 0;
@@ -890,7 +874,6 @@ explodable_bagofbarrels_burn() {
   }
   self thread explodable_bagofbarrels_explode();
 }
-
 explodable_bagofbarrels_explode() {
   self notify("exploding");
   self notify("death");
@@ -921,14 +904,14 @@ explodable_bagofbarrels_explode() {
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       arcademode_assignpoints("arcademode_score_explodableitem", attacker);
     }
   }
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("dest_merchantship_net_barrels_dmg1");
   } else {
     self setModel("dest_merchantship_net_barrels_dmg1");
@@ -942,7 +925,6 @@ explodable_bagofbarrels_explode() {
   wait 0.05;
   level.barrelExplodingThisFrame = false;
 }
-
 explodable_bagofcrates_think() {
   if(self.classname != "script_model") {
     return;
@@ -962,7 +944,7 @@ explodable_bagofcrates_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -979,7 +961,6 @@ explodable_bagofcrates_think() {
     }
   }
 }
-
 explodable_bagofcrates_burn() {
   count = 0;
   startedfx = false;
@@ -1009,7 +990,6 @@ explodable_bagofcrates_burn() {
   }
   self thread explodable_bagofcrates_explode();
 }
-
 explodable_bagofcrates_explode() {
   self notify("exploding");
   self notify("death");
@@ -1040,14 +1020,14 @@ explodable_bagofcrates_explode() {
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       arcademode_assignpoints("arcademode_score_explodableitem", attacker);
     }
   }
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("dest_merchantship_net_crates_dmg1");
   } else {
     self setModel("dest_merchantship_net_crates_dmg1");
@@ -1061,7 +1041,6 @@ explodable_bagofcrates_explode() {
   wait 0.05;
   level.barrelExplodingThisFrame = false;
 }
-
 explodable_liferaft_think() {
   if(self.classname != "script_model") {
     return;
@@ -1081,7 +1060,7 @@ explodable_liferaft_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -1098,7 +1077,6 @@ explodable_liferaft_think() {
     }
   }
 }
-
 explodable_liferaft_burn() {
   count = 0;
   startedfx = false;
@@ -1116,8 +1094,9 @@ explodable_liferaft_burn() {
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20)
+    if(count > 20) {
       count = 0;
+    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
@@ -1127,7 +1106,6 @@ explodable_liferaft_burn() {
   }
   self thread explodable_liferaft_explode();
 }
-
 explodable_liferaft_explode() {
   self notify("exploding");
   self notify("death");
@@ -1158,14 +1136,14 @@ explodable_liferaft_explode() {
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       arcademode_assignpoints("arcademode_score_explodableitem", attacker);
     }
   }
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("dest_merchantship_lifeboat_dmg1");
   } else {
     self setModel("dest_merchantship_lifeboat_dmg1");
@@ -1179,7 +1157,6 @@ explodable_liferaft_explode() {
   wait 0.05;
   level.barrelExplodingThisFrame = false;
 }
-
 explodable_tarpcrate_think() {
   if(self.classname != "script_model") {
     return;
@@ -1199,7 +1176,7 @@ explodable_tarpcrate_think() {
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -1216,7 +1193,6 @@ explodable_tarpcrate_think() {
     }
   }
 }
-
 explodable_tarpcrate_burn() {
   count = 0;
   startedfx = false;
@@ -1246,7 +1222,6 @@ explodable_tarpcrate_burn() {
   }
   self thread explodable_tarpcrate_explode();
 }
-
 explodable_tarpcrate_explode() {
   self notify("exploding");
   self notify("death");
@@ -1277,14 +1252,14 @@ explodable_tarpcrate_explode() {
   attacker = undefined;
   if(isDefined(self.damageOwner)) {
     attacker = self.damageOwner;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       arcademode_assignpoints("arcademode_score_explodableitem", attacker);
     }
   }
   level.lastExplodingBarrel["time"] = getTime();
   level.lastExplodingBarrel["origin"] = self.origin + (0, 0, 30);
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("static_peleliu_crate_tarp_d");
   } else {
     self setModel("static_peleliu_crate_tarp_d");
@@ -1298,7 +1273,6 @@ explodable_tarpcrate_explode() {
   wait 0.05;
   level.barrelExplodingThisFrame = false;
 }
-
 flammable_crate_think() {
   if(self.classname != "script_model") {
     return;
@@ -1322,7 +1296,7 @@ flammable_crate_think() {
     if(type != "MOD_BURNED" && type != "MOD_EXPLOSIVE" && type != "MOD_PROJECTILE_SPLASH" && type != "MOD_PROJECTILE" && type != "MOD_GRENADE_SPLASH" && type != "MOD_GRENADE") {
       continue;
     }
-    if(isDefined(self.script_requires_player) && self.script_requires_player && !IsPlayer(attacker)) {
+    if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
@@ -1339,7 +1313,6 @@ flammable_crate_think() {
     }
   }
 }
-
 flammable_crate_burn() {
   count = 0;
   startedfx = false;
@@ -1369,7 +1342,6 @@ flammable_crate_burn() {
   }
   self thread flammable_crate_explode();
 }
-
 flammable_crate_explode() {
   self notify("exploding");
   self notify("death");
@@ -1402,10 +1374,10 @@ flammable_crate_explode() {
     attacker = self.damageOwner;
   }
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     arcademode_assignpoints("arcademode_score_explodableitem", attacker);
   }
-  if(randomInt(2) == 0) {
+  if(randomint(2) == 0) {
     self setModel("global_flammable_crate_jap_piece01_d");
   } else {
     self setModel("global_flammable_crate_jap_piece01_d");
@@ -1419,7 +1391,6 @@ flammable_crate_explode() {
   wait 0.05;
   level.barrelExplodingThisFrame = false;
 }
-
 shuddering_entity_think() {
   assert(self.classname == "script_model");
   helmet = false;
@@ -1437,7 +1408,6 @@ shuddering_entity_think() {
     self waittill("rotatedone");
   }
 }
-
 tincan_think() {
   if(self.classname != "script_model") {
     return;
@@ -1445,7 +1415,7 @@ tincan_think() {
   self setCanDamage(true);
   self waittill("damage", damage, ent);
   if(isSentient(ent)) {
-    direction_org = ((ent getEye()) - (0, 0, (randomInt(50) + 50)));
+    direction_org = ((ent getEye()) - (0, 0, (randomint(50) + 50)));
   } else {
     direction_org = ent.origin;
   }
@@ -1455,7 +1425,6 @@ tincan_think() {
   playFX(level.breakables_fx["tincan"], self.origin, direction_vec);
   self delete();
 }
-
 helmet_pop() {
   if(self.classname != "script_model") {
     return;
@@ -1464,7 +1433,6 @@ helmet_pop() {
   self setCanDamage(true);
   self thread helmet_logic();
 }
-
 helmet_logic() {
   self waittill("damage", damage, ent);
   if(isSentient(ent)) {
@@ -1486,7 +1454,6 @@ helmet_logic() {
   self.dontremove = false;
   self notify("ok_remove");
 }
-
 allowBreak(ent) {
   if(!isDefined(level.breakingEnts)) {
     return true;
@@ -1503,14 +1470,12 @@ allowBreak(ent) {
   }
   return true;
 }
-
 breakable_think_triggered(eBreakable) {
   for(;;) {
     self waittill("trigger", other);
     eBreakable damage_notify_wrapper(100, other);
   }
 }
-
 breakable_think() {
   if(self.classname != "script_model") {
     return;
@@ -1642,7 +1607,7 @@ breakable_think() {
     return;
   }
   if(isDefined(self.target)) {
-    trig = getEnt(self.target, "targetname");
+    trig = getent(self.target, "targetname");
     if((isDefined(trig)) && (trig.classname == "trigger_multiple")) {
       trig thread breakable_think_triggered(self);
     }
@@ -1650,7 +1615,6 @@ breakable_think() {
   self setCanDamage(true);
   self thread breakable_logic(type);
 }
-
 breakable_logic(type) {
   ent = undefined;
   for(;;) {
@@ -1688,7 +1652,7 @@ breakable_logic(type) {
       } else {
         soundAlias = "bullet_large_vase";
       }
-      fx = level.breakables_fx["box"][randomInt(level.breakables_fx["box"].size)];
+      fx = level.breakables_fx["box"][randomint(level.breakables_fx["box"].size)];
       hasDependant = true;
       break;
     case "bottle":
@@ -1729,7 +1693,6 @@ breakable_logic(type) {
     self notify("ok_remove");
   }
 }
-
 xenon_auto_aim() {
   if((isDefined(level.console_auto_aim)) && (level.console_auto_aim.size > 0)) {
     self.autoaim = getClosestAccurantEnt(self.origin, level.console_auto_aim);
@@ -1739,14 +1702,12 @@ xenon_auto_aim() {
     self thread xenon_remove_auto_aim();
   }
 }
-
 xenon_auto_aim_stop_logic() {
   self notify("entered_xenon_auto_aim_stop_logic");
   self endon("entered_xenon_auto_aim_stop_logic");
   self.autoaim waittill("xenon_auto_aim_stop_logic");
   self.dontremove = undefined;
 }
-
 xenon_remove_auto_aim(wait_message) {
   self thread xenon_auto_aim_stop_logic();
   self endon("xenon_auto_aim_stop_logic");
@@ -1762,7 +1723,6 @@ xenon_remove_auto_aim(wait_message) {
   }
   self delete();
 }
-
 xenon_enable_auto_aim(wait_message) {
   self endon("xenon_auto_aim_stop_logic");
   self endon("death");
@@ -1779,10 +1739,9 @@ xenon_enable_auto_aim(wait_message) {
   }
   self enableAimAssist();
 }
-
 breakable_clip() {
   if(isDefined(self.target)) {
-    targ = getEnt(self.target, "targetname");
+    targ = getent(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
       self.remove = targ;
       return;
@@ -1795,7 +1754,6 @@ breakable_clip() {
     level.breakables_clip = array_remove(level.breakables_clip, self.remove);
   }
 }
-
 getFurthestEnt(org, array) {
   if(array.size < 1) {
     return;
@@ -1812,7 +1770,6 @@ getFurthestEnt(org, array) {
   }
   return ent;
 }
-
 getClosestEnt(org, array) {
   if(array.size < 1) {
     return;
@@ -1829,7 +1786,6 @@ getClosestEnt(org, array) {
   }
   return ent;
 }
-
 make_broken_peices(wholepiece, type) {
   rt = anglesToRight(wholepiece.angles);
   fw = anglesToForward(wholepiece.angles);
@@ -1982,7 +1938,6 @@ make_broken_peices(wholepiece, type) {
     }
   }
 }
-
 list_add(model) {
   if(isDefined(level._breakable_utility_modelarray[level._breakable_utility_modelindex])) {
     level._breakable_utility_modelarray[level._breakable_utility_modelindex] delete();
@@ -1993,7 +1948,6 @@ list_add(model) {
     level._breakable_utility_modelindex = 0;
   }
 }
-
 pieces_move(origin) {
   self endon("do not kill");
   if(isDefined(self.type) && self.type == "bottle_bot") {
@@ -2008,20 +1962,20 @@ pieces_move(origin) {
     x = 1;
     y = 1;
     z = 1;
-    if(randomInt(100) > 50) {
+    if(randomint(100) > 50) {
       x = -1;
     }
-    if(randomInt(100) > 50) {
+    if(randomint(100) > 50) {
       y = -1;
     }
-    if(randomInt(100) > 50) {
+    if(randomint(100) > 50) {
       z = -1;
     }
     org rotatevelocity((250 * x, 250 * y, randomfloat(100) * z), 2, 0, .5);
   } else if(isDefined(self.type) && self.type == "plate") {
     vec = vectornormalize(end - origin);
     vec = vector_scale(vec, 125 + randomfloat(25));
-    if(randomInt(100) > 50) {
+    if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
     } else {
       org rotateroll(800 + randomfloat(4000), 5, 0, 0);
@@ -2029,7 +1983,7 @@ pieces_move(origin) {
   } else {
     vec = vectornormalize(end - origin);
     vec = vector_scale(vec, 60 + randomfloat(50));
-    if(randomInt(100) > 50) {
+    if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);
     } else {
       org rotateroll(800 + randomfloat(1000), 5, 0, 0);
@@ -2042,7 +1996,6 @@ pieces_move(origin) {
   }
   org delete();
 }
-
 pieces_collision(height) {
   self endon("death");
   wait .1;
@@ -2056,7 +2009,6 @@ pieces_collision(height) {
   self notify("do not kill");
   self unlink();
 }
-
 addpiece(rt, fw, up, xs, ys, zs, wholepiece, angles, model) {
   scale = 1;
   x = rt;
@@ -2073,7 +2025,6 @@ addpiece(rt, fw, up, xs, ys, zs, wholepiece, angles, model) {
   list_add(part);
   return part;
 }
-
 getClosestAccurantEnt(org, array) {
   if(array.size < 1) {
     return;

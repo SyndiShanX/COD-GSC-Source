@@ -8,8 +8,8 @@
 
 main() {
   level.tweakfile = 1;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 15);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 15);
   set_default_visionset();
   run_thread_on_targetname("vision_trigger", ::vision_set_trigger_think);
 }
@@ -32,16 +32,16 @@ vision_set_trigger_think() {
 vision_set_change(str_vision_set) {
   switch (str_vision_set) {
     case "sp_nicaragua_josephina":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 1);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 1);
       break;
     case "sp_nicaragua_stables":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       break;
     case "sp_nicaragua_cocainebunker":
-      setdvar("r_rimIntensity_debug", 1);
-      setdvar("r_rimIntensity", 15);
+      setDvar("r_rimIntensity_debug", 1);
+      setDvar("r_rimIntensity", 15);
       break;
   }
 
@@ -93,15 +93,15 @@ blend_exposure_over_time(n_exposure_final, n_time) {
   n_exposure_current = getdvarfloat(#"r_exposureValue");
   n_exposure_change_total = n_exposure_final - n_exposure_current;
   n_exposure_change_per_frame = n_exposure_change_total / n_frames;
-  setdvar("r_exposureTweak", 1);
+  setDvar("r_exposureTweak", 1);
 
   for(i = 0; i < n_frames; i++) {
-    setdvar("r_exposureValue", n_exposure_current + n_exposure_change_per_frame * i);
+    setDvar("r_exposureValue", n_exposure_current + n_exposure_change_per_frame * i);
     wait 0.05;
   }
 
-  setdvar("r_exposureValue", n_exposure_final);
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureValue", n_exposure_final);
+  setDvar("r_exposureTweak", 0);
 }
 
 bunker_lights_flicker() {

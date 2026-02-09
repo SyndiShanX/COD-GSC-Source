@@ -186,7 +186,7 @@ nuked_population_sign_think(n_base = 99) {
 
 set_dvar_float_if_unset(dvar, value, reset = 0) {
   if(reset || getdvarstring(dvar) == "") {
-    setdvar(dvar, value);
+    setDvar(dvar, value);
   }
 
   return getdvarfloat(dvar, 0);

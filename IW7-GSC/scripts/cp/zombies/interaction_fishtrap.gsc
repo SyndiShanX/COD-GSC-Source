@@ -75,14 +75,14 @@ fish_trap_damage(var_0, var_1) {
   var_0 endon("trap_done");
   for(;;) {
     var_0.dmg_trig waittill("trigger", var_2);
-    if(isplayer(var_2) && isalive(var_2) && !scripts\cp\cp_laststand::player_in_laststand(var_2) && !isDefined(var_2.padding_damage)) {
+    if(isPlayer(var_2) && isalive(var_2) && !scripts\cp\cp_laststand::player_in_laststand(var_2) && !isDefined(var_2.padding_damage)) {
       var_2.padding_damage = 1;
       var_2 dodamage(5, var_2.origin);
       var_2 thread remove_padding_damage();
       continue;
     }
 
-    if(!isplayer(var_2) && !isDefined(var_2.marked_for_death) && isagent(var_2) && isalive(var_2) && scripts\engine\utility::istrue(var_2.isactive)) {
+    if(!isPlayer(var_2) && !isDefined(var_2.marked_for_death) && isagent(var_2) && isalive(var_2) && scripts\engine\utility::istrue(var_2.isactive)) {
       if(isDefined(var_2.agent_type) && var_2.agent_type == "zombie_sasquatch" || var_2.agent_type == "slasher") {
         continue;
       }

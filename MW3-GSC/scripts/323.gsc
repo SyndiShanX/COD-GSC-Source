@@ -13,7 +13,6 @@ script_print_fx() {
     var_0 = getent(self.target).origin;
   } else {
     var_0 = "undefined";
-
   }
   if(self.script_fxcommand == "OneShotfx") {}
 
@@ -158,12 +157,11 @@ _id_1E54(var_0) {
 
   if(isDefined(var_0._id_1662)) {
     var_1 = var_0._id_1662;
-
   }
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_2 setwatersheeting(1, var_1);
       wait(var_1 * 0.2);
     }

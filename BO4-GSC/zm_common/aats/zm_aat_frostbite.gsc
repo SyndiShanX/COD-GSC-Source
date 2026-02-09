@@ -55,7 +55,7 @@ result(death, attacker, mod, weapon) {
 function_a2e05e6(e_attacker) {
   n_current_time = float(gettime()) / 1000;
 
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(!isDefined(e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"])) {
       return true;
     } else if(isDefined(e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"] + 30) {
@@ -75,7 +75,7 @@ function_158a3a18(attacker, mod, weapon, var_e1ec1eee = 0) {
     return;
   }
 
-  if(!isDefined(weapon) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(weapon) || !isDefined(attacker) || !isPlayer(attacker)) {
     return;
   }
 
@@ -139,7 +139,7 @@ frostbite_explosion(var_4589e270, var_23255fc5, attacker, mod, weapon) {
 
   var_4589e270 clientfield::increment("zm_aat_frostbite_explosion_clientfield");
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"] = float(gettime()) / 1000;
     attacker zm_stats::increment_challenge_stat(#"zombie_hunter_frostbite");
   }
@@ -177,7 +177,7 @@ function_11c85ac6(var_23255fc5, e_attacker, weapon) {
   n_damage = 20000;
   self dodamage(n_damage, var_23255fc5, e_attacker, undefined, "none", "MOD_AAT", 0, weapon);
 
-  if(!isalive(self) && isplayer(e_attacker)) {
+  if(!isalive(self) && isPlayer(e_attacker)) {
     e_attacker zm_stats::increment_challenge_stat(#"zombie_hunter_frostbite");
   }
 }

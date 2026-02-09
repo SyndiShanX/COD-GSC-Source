@@ -69,8 +69,7 @@ dialogue_crash_site() {
 
   flag_wait("crash_actors_ready");
 
-  /*-----------------------
-  RADIO CHATTER
+  /*----------------------- RADIO CHATTER
   -------------------------*/
   //Overlord (HQ Radio)	Dagger Two-One, this is Overlord. Do you copy, over?	
   radio_dialogue("dcburn_hqr_doyoucopy");
@@ -101,8 +100,7 @@ dialogue_crash_site() {
   //Cpl. Dunn	Target! 11 o'clock! Range, fifty meters!	
   level.friendly02 thread dialogue_queue("dcburn_cpd_target11");
 
-  /*-----------------------
-  REDSHIRT COMES OVER TO GIVE WEAPON
+  /*----------------------- REDSHIRT COMES OVER TO GIVE WEAPON
   -------------------------*/
   flag_wait("crash_redshirt_speaks");
   //Take this and stay down
@@ -118,8 +116,7 @@ dialogue_crash_site() {
   wait(1);
   //level.friendly03.soundOrg delete();
 
-  /*-----------------------
-  REDSHIRT KILLED
+  /*----------------------- REDSHIRT KILLED
   -------------------------*/
   //Ranger 1	McCord! Reloading, cover me!	
   crash_chatter_org_left delaycall(1, ::playsound, "dcburn_ar1_reloadingcover");
@@ -161,8 +158,7 @@ dialogue_crash_site() {
   //Sgt. Foley	Sandler! Sound off!	
   level.teamleader thread dialogue_queue("dcburn_mcy_soundoff");
 
-  /*-----------------------
-  END
+  /*----------------------- END
   -------------------------*/
   flag_wait("end_sequence_starting");
 
@@ -190,8 +186,7 @@ entity_delete_on_flag(sFlag) {
 AAA_sequence_player_crash_site() {
   level.player enableinvulnerability();
   //thread player_dryfire();
-  /*-----------------------
-  SETUP CRASH SITE
+  /*----------------------- SETUP CRASH SITE
   -------------------------*/
   level.noMaxMortarDist = true;
   level.playerMortarFovOffset = (0, 0, 0);
@@ -199,8 +194,7 @@ AAA_sequence_player_crash_site() {
 
   crash_node = getent("crash_node", "targetname");
 
-  /*-----------------------
-  PLAYER MOVEMENT
+  /*----------------------- PLAYER MOVEMENT
   -------------------------*/
   movement_grid = crash_site_player_and_heli_setup();
 
@@ -208,8 +202,7 @@ AAA_sequence_player_crash_site() {
   if(level.script == "dcburning")
     thread autosave_now(true);
 
-  /*-----------------------
-  VISUAL CHANGES
+  /*----------------------- VISUAL CHANGES
   -------------------------*/
   setsaveddvar("sm_sunSampleSizeNear", 0.25); // ground
   setsaveddvar("sm_sunShadowScale", 1); // default
@@ -220,8 +213,7 @@ AAA_sequence_player_crash_site() {
   }
   music_stop();
 
-  /*-----------------------
-  EFFECTS
+  /*----------------------- EFFECTS
   -------------------------*/
   if(level.script == "dc_burning") {
     array_thread(level.effects_ww2, ::pauseEffect);
@@ -234,8 +226,7 @@ AAA_sequence_player_crash_site() {
     level.black_overlay.foreground = false;
   }
 
-  /*-----------------------
-  FRIENDLIES
+  /*----------------------- FRIENDLIES
   -------------------------*/
   anim_actors_rescue = [];
 
@@ -261,8 +252,7 @@ AAA_sequence_player_crash_site() {
   level.friendly02 set_flavorbursts(false);
   level.friendly03 set_flavorbursts(false);
 
-  /*-----------------------
-  CRASH ANIM SETUP
+  /*----------------------- CRASH ANIM SETUP
   -------------------------*/
   crash_node = getent("crash_node", "targetname");
 
@@ -302,23 +292,20 @@ AAA_sequence_player_crash_site() {
   flag_set("obj_heli_ride_complete");
   wait(4);
 
-  /*-----------------------
-  ENEMIES AND VEHICLES
+  /*----------------------- ENEMIES AND VEHICLES
   -------------------------*/
   spawn_trigger_dummy_crashsite("dummy_spawner_axis_crash_flood");
   axis_crash_drones = getEntArray("axis_crash_drones", "targetname");
   thread drone_flood_start_crashsite(axis_crash_drones, "axis_crash_drones");
 
-  /*-----------------------
-  FADE UP FROM BLACK
+  /*----------------------- FADE UP FROM BLACK
   -------------------------*/
   flag_set("crash_fade_up");
   delaythread(8, maps\_mortar::bog_style_mortar_on, 3);
   level.black_overlay fadeOverTime(2);
   level.black_overlay.alpha = 0;
 
-  /*-----------------------
-  REDSHIRT TRIES TO RESCUE, DIES
+  /*----------------------- REDSHIRT TRIES TO RESCUE, DIES
   -------------------------*/
   level.friendly03 show();
   hostiles_drones_crash_site_01 = array_spawn(getEntArray("hostiles_drones_crash_site_01", "targetname"));
@@ -332,8 +319,7 @@ AAA_sequence_player_crash_site() {
   level.friendly03 thread delete_at_end_of_anim();
   crash_node thread anim_single(anim_actors_rescue, "dcburning_BHrescue");
 
-  /*-----------------------
-  MACEY AND DUNN COME UP AND FIGHT FROM VEHICLE
+  /*----------------------- MACEY AND DUNN COME UP AND FIGHT FROM VEHICLE
   -------------------------*/
   anim_actors_leader_and_dunn = [];
   anim_actors_leader_and_dunn[0] = level.teamleader;
@@ -366,8 +352,7 @@ AAA_sequence_player_crash_site() {
   //}
 
   flag_set("end_sequence_starting");
-  /*-----------------------
-  PLAYER WORKING ON SECOND CLIP
+  /*----------------------- PLAYER WORKING ON SECOND CLIP
   -------------------------*/
   delaythread(2, maps\_mortar::bog_style_mortar_off, 3);
   crash_node thread anim_single(anim_actors_leader_and_dunn, "dcburning_BHrescue_laststand");
@@ -384,8 +369,7 @@ AAA_sequence_player_crash_site() {
 
   level.black_overlay destroy();
 
-  /*-----------------------
-  CUT TO WHITE
+  /*----------------------- CUT TO WHITE
   -------------------------*/
   crash_end_scene();
 }
@@ -413,7 +397,7 @@ player_crash_gun_behavior() {
   setSavedDvar("hud_drawhud", "1");
   SetSavedDvar("hud_showStance", "1");
   SetSavedDvar("compass", "1");
-  SetDvar("old_compass", "1");
+  setDvar("old_compass", "1");
   SetSavedDvar("ammoCounterHide", "0");
   level.player allowcrouch(true);
 
@@ -679,8 +663,7 @@ btr80s_end_think() {
 }
 
 player_crash_vision() {
-  /*-----------------------
-  HIDE HUD
+  /*----------------------- HIDE HUD
   -------------------------*/
   SetBlur(3, .1);
   setsaveddvar("ui_hidemap", 1);
@@ -703,8 +686,7 @@ player_crash_vision() {
   SetBlur(3, .5);
 
   flag_wait("notetrack_player_raisehands");
-  /*-----------------------
-  LOOK AT HANDS, BG BLURS
+  /*----------------------- LOOK AT HANDS, BG BLURS
   -------------------------*/
   dof_see_hands = [];
   dof_see_hands["nearStart"] = 0;
@@ -717,8 +699,7 @@ player_crash_vision() {
   SetBlur(0, 3);
 
   flag_wait("notetrack_player_lowerhands");
-  /*-----------------------
-  DROP HANDS, BG COMES INTO FOCUS
+  /*----------------------- DROP HANDS, BG COMES INTO FOCUS
   -------------------------*/
   dof_see_dudes = [];
   dof_see_dudes["nearStart"] = 4.7;
@@ -730,8 +711,7 @@ player_crash_vision() {
   //thread blend_dof( dof_see_hands, dof_see_dudes, 5 );
   thread blend_dof(dof_see_hands, dof_start, 6);
 
-  /*-----------------------
-  TRANSITION BACK INTO DEFAULT DOF
+  /*----------------------- TRANSITION BACK INTO DEFAULT DOF
   -------------------------*/
   //iprintLnBold( "Go back into default DOF" );
   //thread blend_dof( dof_see_dudes, dof_start, 3 );
@@ -910,7 +890,7 @@ AI_axis_crash_think() {
   self.aggressivemode = true; //dont linger at cover when you cant see your enemy
 
   self waittill("death", attacker);
-  if((isDefined(attacker)) && (isplayer(attacker)))
+  if((isDefined(attacker)) && (isPlayer(attacker)))
     level.lasttimePlayerKilledEnemy = getTime();
 }
 
@@ -972,9 +952,9 @@ player_blackhawk_health_tweaks() {
 
   old_longRegenTime = level.player.gs.longRegenTime;
   old_deathInvulnerableTime = level.player.deathInvulnerableTime; //2500
-  old_bg_viewKickScale = getdvar("bg_viewKickScale"); // 0.8
-  old_bg_viewKickMax = getdvar("bg_viewKickMax"); // 90
-  old_bg_viewKickMin = getdvar("bg_viewKickMin"); // 5
+  old_bg_viewKickScale = getDvar("bg_viewKickScale"); // 0.8
+  old_bg_viewKickMax = getDvar("bg_viewKickMax"); // 90
+  old_bg_viewKickMin = getDvar("bg_viewKickMin"); // 5
   level.player ent_flag_clear("near_death_vision_enabled");
 
   level.player.gs.longRegenTime = 500;
@@ -1093,8 +1073,7 @@ crash_anims() {
   //Sgt. Foley	Corporal, hang on!!!	
   level.scr_sound["crash_leader"]["dcburn_mcy_hangon"] = "dcburn_mcy_hangon";
 
-  /*-----------------------
-  MORTAR EFFECTS &SOUNDS
+  /*----------------------- MORTAR EFFECTS &SOUNDS
   -------------------------*/
   level._effect["mortar"]["bunker_ceiling"] = loadfx("dust/ceiling_dust_bunker");
   level._effect["mortar"]["bunker_ceiling_green"] = loadfx("dust/ceiling_dust_bunker_green");
@@ -1110,13 +1089,11 @@ crash_anims() {
   level.scr_sound["mortar"]["concrete"] = "mortar_explosion_dirt";
   level.scr_sound["mortar"]["mud"] = "mortar_explosion_water";
 
-  /*-----------------------
-  NUKE FX
+  /*----------------------- NUKE FX
   -------------------------*/
   level._effect["nuke_flash"] = loadfx("explosions/nuke_flash");
 
-  /*-----------------------
-  NOT CURRENTLY USED
+  /*----------------------- NOT CURRENTLY USED
   -------------------------*/
   //	//Marine 2	Javelins! 12 O'Clock!	
   //	level.scr_radio[ "dcburn_javelins_incoming_00" ] = "dcburn_gm2_javelins12";
@@ -1305,7 +1282,6 @@ vehicle_delete_crashsite() {
       if(isDefined(turret))
         turret delete();
     }
-
   }
   self delete();
 }
@@ -1319,7 +1295,6 @@ drone_flood_start_crashsite(aSpawners, groupName) {
       spawner add_abort(::waittill_msg, "death");
       add_func(::dronespawn, spawner);
       thread do_wait();
-
     }
     wait(randomfloatrange(5, 6));
   }

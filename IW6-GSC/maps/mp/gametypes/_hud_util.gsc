@@ -364,7 +364,6 @@ createServerBar(color, width, height, flashFrac, team, selected) {
   barElem.hidden = false;
   if(isDefined(flashFrac)) {
     barElem.flashFrac = flashFrac;
-
   }
 
   if(isDefined(team))
@@ -402,7 +401,6 @@ createBar(color, width, height, flashFrac) {
   barElem.hidden = false;
   if(isDefined(flashFrac)) {
     barElem.flashFrac = flashFrac;
-
   }
 
   barElemBG = newClientHudElem(self);
@@ -521,7 +519,6 @@ showElem() {
     self.bar.hidden = false;
     if(self.bar.alpha != 1)
       self.bar.alpha = 1;
-
   } else {
     if(self.alpha != 1)
       self.alpha = 1;

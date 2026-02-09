@@ -10,5 +10,5 @@
 
 main() {
   level thread clientscripts\mp\zombies\_zm_game_mode_objects::init_game_mode_objects("turned", "diner");
-  setdvar("aim_target_player_enabled", 1);
+  setDvar("aim_target_player_enabled", 1);
 }

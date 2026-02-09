@@ -13,7 +13,6 @@ _id_40AB(var_0, var_1, var_2, var_3) {
 _id_40AC(var_0) {
   if(!isDefined(level.weaponinfo[var_0])) {
     return 0;
-
   }
   return 1;
 }
@@ -94,7 +93,6 @@ init() {
 _id_40B1() {
   if(!isDefined(self._id_40B2)) {
     self._id_40B2 = [];
-
   }
   if(!isDefined(self._id_40B2[0])) {
     self._id_40B2[0] = maps\_hud_util::createicon(undefined, 24, 96);
@@ -169,7 +167,6 @@ _id_40B4(var_0) {
   }
   for(var_1 = 0; var_1 < self._id_40B2.size; var_1++) {
     self._id_40B2[var_1].alpha = 0;
-
   }
   switch (var_0) {
     case "pistol":
@@ -214,7 +211,6 @@ _id_40B4(var_0) {
           self._id_40B2[var_1] maps\_hud_util::seticonshader("hud_bullets_support_back");
         } else {
           self._id_40B2[var_1] maps\_hud_util::seticonshader("hud_bullets_support_front");
-
         }
         var_2 = var_2 - 14;
       }
@@ -276,7 +272,6 @@ _id_40B6(var_0, var_1) {
           self._id_40B2[var_7].alpha = level._id_40B0[var_3 - (var_6 - 20)];
         } else {
           self._id_40B2[var_7].alpha = 1;
-
         }
         var_6 = var_6 + 20;
       }

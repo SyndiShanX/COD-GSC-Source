@@ -1157,7 +1157,7 @@ bot_squad_lookup_enemy(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 bot_squad_lookup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = ::bot_squad_lookup_ranked;
-  if(getdvar("squad_match") == "1" && self.team == "axis") {
+  if(getDvar("squad_match") == "1" && self.team == "axis") {
     var_7 = ::bot_squad_lookup_enemy;
   } else if(!scripts\mp\utility::matchmakinggame()) {
     var_7 = ::bot_squad_lookup_private;
@@ -1167,7 +1167,7 @@ bot_squad_lookup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 bot_squadmember_lookup(var_0, var_1, var_2) {
-  if(getdvar("squad_match") == "1" && self.team == "axis") {
+  if(getDvar("squad_match") == "1" && self.team == "axis") {
     return getenemysquaddata("squadMembers", var_1, var_2);
   }
 

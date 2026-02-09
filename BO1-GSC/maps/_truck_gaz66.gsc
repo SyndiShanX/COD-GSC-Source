@@ -14,7 +14,6 @@ main(model, type) {
   }
   self thread attach_truck_bed();
 }
-
 attach_truck_bed() {
   bed_base = "t5_veh_gaz66_flatbed";
   bed_dead = "t5_veh_gaz66_flatbed_dead";
@@ -89,7 +88,6 @@ attach_truck_bed() {
       break;
   }
 }
-
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   positions[0].sittag = "tag_driver";
@@ -110,8 +108,8 @@ set_vehicle_anims(positions) {
   positions[1].vehicle_getoutanim = % v_gaz63_passenger_door_open;
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   num_positions = 10;
@@ -160,7 +158,6 @@ setanims() {
   positions[9].idle = % crew_truck_guy4_sit_idle;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];
@@ -197,12 +194,11 @@ unload_groups() {
   unload_groups["default"] = unload_groups["passengers"];
   return unload_groups;
 }
-
 #using_animtree("generic_human");
+
 set_gunner_vehicle_anims(positions) {
   return positions;
 }
-
 set_gunner_anims() {
   positions = [];
   num_positions = 3;

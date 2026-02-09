@@ -495,7 +495,6 @@ function_320393b9() {
   if(var_68daafed == 0) {
     println("<dev string:xd3>");
   }
-
 }
 
 function_fdabbb8a() {

@@ -1,13 +1,13 @@
 /********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_destructibles.csc
+ * Script: clientscripts\_destructibles\.csc
 ********************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_lights;
 
 destructible_thread(client_num) {
-  owner = getLocalPlayers()[client_num];
+  owner = getlocalplayers()[client_num];
   if(isDefined(owner)) {
     if(!isDefined(self.script_light_label)) {
       return;
@@ -27,7 +27,6 @@ destructible_thread(client_num) {
     return;
   }
 }
-
 init(client_num) {
   if(IsSplitScreenHost(client_num)) {
     level._num_lit_destructibles = 0;

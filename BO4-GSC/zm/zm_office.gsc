@@ -396,7 +396,7 @@ function_4a3d7c9e(trigger) {
       continue;
     }
 
-    if(!isplayer(s_result.who)) {
+    if(!isPlayer(s_result.who)) {
       continue;
     }
 
@@ -598,6 +598,6 @@ office_devgui() {
         break;
     }
 
-    setdvar(#"zm_office_devgui_cmd", "<dev string:x1a9>");
+    setDvar(#"zm_office_devgui_cmd", "<dev string:x1a9>");
   }
 }

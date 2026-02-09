@@ -37,7 +37,7 @@ _id_2092() {
 
 _id_2093(var_0) {
   self endon("killanimscript");
-  self setflaggedanimknoball("flashed_anim", var_0, % body, 0.2, randomfloatrange(0.9, 1.1));
+  self setflaggedanimknoball("flashed_anim", var_0, %body, 0.2, randomfloatrange(0.9, 1.1));
   animscripts\shared::_id_0C51("flashed_anim");
 }
 
@@ -67,7 +67,6 @@ _id_2096(var_0, var_1) {
 
   if(self.a._id_0D26 == "prone") {
     animscripts\utility::_id_0F7D(1);
-
   }
   self.a._id_0D26 = "stand";
   self.allowdeath = 1;

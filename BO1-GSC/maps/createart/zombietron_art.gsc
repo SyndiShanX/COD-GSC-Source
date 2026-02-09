@@ -18,7 +18,6 @@ do_single_lightning() {
     players[0] ClearClientFlag(level._ZT_PLAYER_CF_LIGHTNING);
   }
 }
-
 do_lightning_loop() {
   level endon("end_lightning");
   while(1) {
@@ -26,41 +25,40 @@ do_lightning_loop() {
     do_single_lightning();
   }
 }
-
 setup_random_sun() {
   dir = "-45 135 0";
   color = "0.75 0.75 0.75";
   light = "8";
   exposure = "1.1";
   level.is_nighttime = undefined;
-  visionSetNaked("zombietron_morning", 0);
+  VisionSetNaked("zombietron_morning", 0);
   if(level.arena_round_number == 1) {
     dir = "-35 110 0";
     color = "0.95 0.76 0.57";
     light = "8";
     exposure = "1.1";
-    visionSetNaked("zombietron_morning", 0);
+    VisionSetNaked("zombietron_morning", 0);
   }
   if(level.arena_round_number == 2) {
     dir = "-59 113 0";
     color = "1 0.96 0.87";
     light = "12";
     exposure = "1.1";
-    visionSetNaked("zombietron_day", 0);
+    VisionSetNaked("zombietron_day", 0);
   }
   if(level.arena_round_number == 3) {
     dir = "-15 113 0";
     color = "0.99 0.41 0";
     light = "12";
     exposure = "1.3";
-    visionSetNaked("zombietron_afternoon", 0);
+    VisionSetNaked("zombietron_afternoon", 0);
   }
   if(level.arena_round_number == 4) {
     dir = "-38 107 0";
     color = "0 0.4 0.9";
     light = "15";
     exposure = "1.2";
-    visionSetNaked("zombietron_evening", 0);
+    VisionSetNaked("zombietron_evening", 0);
     level.is_nighttime = true;
   }
   if(level.current_arena == maps\_zombietron_main::arena_findIndexByName("island")) {
@@ -188,7 +186,7 @@ setup_random_sun() {
       dir = "-14.2 85.3 0";
       color = "0.001 0.4 0.99";
       exposure = "1";
-      visionSetNaked("zombietron_evening_rooftop", 0);
+      VisionSetNaked("zombietron_evening_rooftop", 0);
     }
   }
   if(level.current_arena == maps\_zombietron_main::arena_findIndexByName("street")) {
@@ -293,26 +291,26 @@ setup_random_sun() {
     color = "0 0.4 0.9";
     light = "15";
     exposure = "0.79";
-    visionSetNaked("zombietron_evening", 0);
+    VisionSetNaked("zombietron_evening", 0);
   }
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setClientDvars("r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure);
+    players[i] setClientDvars(
+      "r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure
+    );
   }
 }
-
 setup_flashlights() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     playFXOnTag(level._effect["flashlight"], players[i], "tag_flash");
   }
 }
-
 do_2d_rain_audio() {
   sound_ent = spawn("script_origin", (0, 0, 0));
   sound_ent playLoopSound("amb_rain_2d", 2);
   level waittill("end_lightning");
-  sound_ent stopLoopSound(2);
+  sound_ent StopLoopSound(2);
   wait(2);
   sound_ent Delete();
 }

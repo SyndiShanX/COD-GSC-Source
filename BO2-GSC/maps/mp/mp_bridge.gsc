@@ -24,7 +24,7 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_bridge_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_bridge");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
@@ -69,9 +69,9 @@ main() {
   maps\mp\gametypes\_spawning::level_use_unified_spawning(1);
   registerclientfield("scriptmover", "police_car_lights", 1, 1, "int");
   level thread destructible_lights();
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 2.0);
-  setdvar("r_lightGridContrast", 0.0);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 2.0);
+  setDvar("r_lightGridContrast", 0.0);
   level.ragdoll_override = ::ragdoll_override;
   level.overrideplayerdeathwatchtimer = ::leveloverridetime;
   level.useintermissionpointsonwavespawn = ::useintermissionpointsonwavespawn;

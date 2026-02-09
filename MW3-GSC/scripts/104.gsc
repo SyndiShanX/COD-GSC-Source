@@ -18,13 +18,11 @@ _id_147D(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_1)) {
     var_5 = max(var_1, 0);
-
   }
   var_6 = 1.0;
 
   if(isDefined(var_4)) {
     var_6 = max(var_4, 0);
-
   }
   _id_1489(level._id_1456._id_1478._id_147C.prev, level._id_1456._id_1478._id_147C._id_147A.name, level._id_1456._id_1478._id_147C._id_147A._id_147F, level._id_1456._id_1478._id_147C._id_147A._id_147E);
   _id_1489(level._id_1456._id_1478._id_147C._id_147A, var_0, var_6, var_5);
@@ -36,19 +34,16 @@ _id_1480(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_1)) {
     var_5 = max(var_1, 0);
-
   }
   var_6 = 1.0;
 
   if(isDefined(var_2)) {
     var_6 = var_2;
-
   }
   var_7 = 1.0;
 
   if(isDefined(var_3)) {
     var_7 = max(var_3, 0);
-
   }
   _id_1489(level._id_1456._id_1478._id_1479.prev, level._id_1456._id_1478._id_1479._id_147A.name, level._id_1456._id_1478._id_1479._id_147A._id_147F, level._id_1456._id_1478._id_1479._id_147A._id_147E);
   _id_1489(level._id_1456._id_1478._id_1479._id_147A, var_0, var_7, var_5);
@@ -67,14 +62,12 @@ _id_1481(var_0, var_1) {
 
     if(isDefined(var_1)) {
       var_2 = max(var_1, 0);
-
     }
     if(level._id_1456._id_1478._id_147C._id_147A.name == var_0) {
       level._id_1456._id_1478._id_147C._id_147A = level._id_1456._id_1478._id_147C.prev;
       _id_148B(level._id_1456._id_1478._id_147C.prev);
     } else if(level._id_1456._id_1478._id_147C.prev.name == var_0) {
       _id_148B(level._id_1456._id_1478._id_147C.prev);
-
     }
     ambientstop(var_2, var_0);
   }
@@ -85,14 +78,12 @@ _id_1482(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = max(var_1, 0);
-
   }
   if(level._id_1456._id_1478._id_1479._id_147A.name == var_0) {
     level._id_1456._id_1478._id_1479._id_147A = level._id_1456._id_1478._id_1479.prev;
     _id_148B(level._id_1456._id_1478._id_1479.prev);
   } else if(level._id_1456._id_1478._id_147C.prev.name == var_0) {
     _id_148B(level._id_1456._id_1478._id_1479.prev);
-
   }
   musicstop(var_2, var_0);
 }
@@ -102,7 +93,6 @@ _id_1483(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   ambientstop(var_1);
 }
@@ -112,7 +102,6 @@ _id_1484(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   _id_148B(level._id_1456._id_1478._id_1479._id_147A);
   _id_148B(level._id_1456._id_1478._id_1479.prev);

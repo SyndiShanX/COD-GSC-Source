@@ -32,16 +32,18 @@ grid_shader_enable_drone() {
   clientscripts\_filter::set_filter_hud_projected_grid_radius(level.localplayers[0], 0, 240);
   level.grid_shader_enabled = 1;
 
-  if(level.wiiu)
+  if(level.wiiu) {
     setsaveddvar("wiiu_disableYellowDot", 1);
+  }
 }
 
 grid_shader_disable_drone() {
   clientscripts\_filter::disable_filter_hud_projected_grid(level.localplayers[0], 0);
   level.grid_shader_enabled = 0;
 
-  if(level.wiiu)
+  if(level.wiiu) {
     setsaveddvar("wiiu_disableYellowDot", 0);
+  }
 }
 
 toggle_grid_shader_god_rod() {

@@ -111,7 +111,7 @@ init_color_grouping(var_0) {
 
   thread player_color_node();
 
-  if(getdvar("shownodecolors") == "1")
+  if(getDvar("shownodecolors") == "1")
     thread shownodecolors();
 }
 

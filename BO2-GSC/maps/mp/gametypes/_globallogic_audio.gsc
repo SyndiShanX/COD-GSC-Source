@@ -236,7 +236,6 @@ suspensemusic(random) {
 
       if(getdvarint(#"_id_0BC4784C") > 0)
         println("Music System - Starting random underscore");
-
     }
   }
 }
@@ -252,7 +251,7 @@ announceroundwinner(winner, delay) {
   if(delay > 0)
     wait(delay);
 
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
   if(isDefined(level.teams[winner])) {
@@ -270,7 +269,7 @@ announcegamewinner(winner, delay) {
   if(delay > 0)
     wait(delay);
 
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
   if(isDefined(level.teams[winner])) {
@@ -567,7 +566,6 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - team undefined: Setting to both");
-
   }
 
   if(!isDefined(save_state)) {
@@ -575,7 +573,6 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - save_sate undefined: Setting to false");
-
   }
 
   if(!isDefined(return_state)) {
@@ -583,7 +580,6 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - Music System - return_state undefined: Setting to false");
-
   }
 
   if(!isDefined(wait_time)) {
@@ -591,7 +587,6 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - wait_time undefined: Setting to 0");
-
   }
 
   for(i = 0; i < level.players.size; i++) {
@@ -607,7 +602,6 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
 
       if(getdvarint(#"_id_0BC4784C") > 0)
         println("Music System - Setting Music State " + state + " On player " + player getentitynumber());
-
     }
   }
 }
@@ -618,14 +612,13 @@ set_music_on_player(state, save_state, return_state, wait_time) {
   if(sessionmodeiszombiesgame()) {
     return;
   }
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!isDefined(save_state)) {
     save_state = 0;
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - Music System - save_sate undefined: Setting to false");
-
   }
 
   if(!isDefined(return_state)) {
@@ -633,7 +626,6 @@ set_music_on_player(state, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - Music System - return_state undefined: Setting to false");
-
   }
 
   if(!isDefined(wait_time)) {
@@ -641,7 +633,6 @@ set_music_on_player(state, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - wait_time undefined: Setting to 0");
-
   }
 
   if(!isDefined(state)) {
@@ -649,7 +640,6 @@ set_music_on_player(state, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - state undefined: Setting to UNDERSCORE");
-
   }
 
   maps\mp\_music::setmusicstate(state, self);
@@ -659,7 +649,6 @@ set_music_on_player(state, save_state, return_state, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - Saving Music State " + self.pers["music"].returnstate + " On " + self getentitynumber());
-
   }
 
   self.pers["music"].previousstate = self.pers["music"].currentstate;
@@ -682,7 +671,6 @@ return_music_state_player(wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - wait_time undefined: Setting to 0");
-
   }
 
   self set_next_music_state(self.pers["music"].returnstate, wait_time);
@@ -694,7 +682,6 @@ return_music_state_team(team, wait_time) {
 
     if(getdvarint(#"_id_0BC4784C") > 0)
       println("Music System - wait_time undefined: Setting to 0");
-
   }
 
   for(i = 0; i < level.players.size; i++) {
@@ -710,7 +697,6 @@ return_music_state_team(team, wait_time) {
 
       if(getdvarint(#"_id_0BC4784C") > 0)
         println("Music System - Setting Music State " + self.pers["music"].returnstate + " On player " + player getentitynumber());
-
     }
   }
 }
@@ -729,7 +715,6 @@ set_next_music_state(nextstate, wait_time) {
     return;
 
     println("Music System - Music state in que");
-
   } else {
     self.pers["music"].inque = 1;
 

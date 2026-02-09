@@ -184,7 +184,7 @@ function_e8f819b0() {
     s_notify = self waittill(#"damage");
     self.health += s_notify.amount;
 
-    if(isplayer(s_notify.attacker)) {
+    if(isPlayer(s_notify.attacker)) {
       self stoploopsound();
       self hide();
       str_scene = "p8_fxanim_zm_man_wm_stick_0" + self.script_int + "_bundle";

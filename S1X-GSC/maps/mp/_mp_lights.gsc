@@ -32,7 +32,6 @@ init() {
   for(i = 0; i < triggers.size; i++) {
     level thread sun_shadow_trigger(triggers[i]);
   }
-
 }
 
 set_smdvars(sunenable, sunshadowscale, spotlimit, sunsamplesizenear, qualityspotshadow) {

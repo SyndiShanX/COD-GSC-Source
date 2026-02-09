@@ -38,7 +38,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     return;
   }
 
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
 
@@ -118,7 +118,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
   params.psoffsettime = psoffsettime;
 
   if(!(idflags & 8192)) {
-    if(isplayer(eattacker) && isDefined(eattacker.pers)) {
+    if(isPlayer(eattacker) && isDefined(eattacker.pers)) {
       if(!isDefined(eattacker.pers[# "participation"])) {
         eattacker.pers[# "participation"] = 0;
       }
@@ -129,11 +129,11 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     prevhealthratio = self.health / self.maxhealth;
     isshootingownclone = 0;
 
-    if(isDefined(self.isaiclone) && self.isaiclone && isplayer(eattacker) && self.owner == eattacker) {
+    if(isDefined(self.isaiclone) && self.isaiclone && isPlayer(eattacker) && self.owner == eattacker) {
       isshootingownclone = 1;
     }
 
-    if(level.teambased && isplayer(eattacker) && self != eattacker && !util::function_fbce7263(self.team, eattacker.pers[# "team"]) && !isshootingownclone) {
+    if(level.teambased && isPlayer(eattacker) && self != eattacker && !util::function_fbce7263(self.team, eattacker.pers[# "team"]) && !isshootingownclone) {
       friendlyfire = [[level.figure_out_friendly_fire]](self, eattacker);
 
       if(friendlyfire == 0) {
@@ -214,7 +214,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
   self thread weapons::on_damage(eattacker, einflictor, weapon, smeansofdeath, idamage);
 
   if(getdvarint(#"g_debugdamage", 0)) {
-    println("<dev string:x38>" + self getentitynumber() + "<dev string:x41>" + self.health + "<dev string:x4c>" + eattacker.clientid + "<dev string:x59>" + isplayer(einflictor) + "<dev string:x71>" + idamage + "<dev string:x7c>" + shitloc);
+    println("<dev string:x38>" + self getentitynumber() + "<dev string:x41>" + self.health + "<dev string:x4c>" + eattacker.clientid + "<dev string:x59>" + isPlayer(einflictor) + "<dev string:x71>" + idamage + "<dev string:x7c>" + shitloc);
   }
 
   if(true) {
@@ -222,7 +222,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     lpselfteam = self.team;
     lpattackerteam = "";
 
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       lpattacknum = eattacker getentitynumber();
       var_c8fa9c41 = 0;
       lpattackguid = eattacker getguid();

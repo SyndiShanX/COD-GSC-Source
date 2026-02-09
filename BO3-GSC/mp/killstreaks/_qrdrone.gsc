@@ -553,13 +553,13 @@ function qrdrone_damagewatcher() {
   damage_taken = 0;
   for(;;) {
     self waittill("damage", damage, attacker, dir, point, mod, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     self.owner playrumbleonentity("damage_heavy");
     self.damage_debug = ((damage + "") + weapon.name) + "";
     if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET") {
-      if(isplayer(attacker)) {
+      if(isPlayer(attacker)) {
         if(attacker hasperk("specialty_armorpiercing")) {
           damage = damage + (int(damage * level.cac_armorpiercing_data));
         }
@@ -606,7 +606,7 @@ function qrdrone_death(attacker, weapon, dir, damagetype) {
   if(isDefined(self.damage_fx_ent)) {
     self.damage_fx_ent delete();
   }
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self.owner) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self.owner) {
     level thread popups::displayteammessagetoall(&"SCORE_DESTROYED_QRDRONE", attacker);
     if(self.owner util::isenemyplayer(attacker)) {
       attacker challenges::destroyedqrdrone(damagetype, weapon);

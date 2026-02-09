@@ -4,31 +4,28 @@
 **************************************/
 
 setModelFromArray(a) {
-  self setModel(a[randomInt(a.size)]);
+  self setModel(a[randomint(a.size)]);
 }
-
 precacheModelArray(a) {
-  for(i = 0; i < a.size; i++)
+  for(i = 0; i < a.size; i++) {
     precacheModel(a[i]);
+  }
 }
-
 randomElement(a) {
-  return a[randomInt(a.size)];
+  return a[randomint(a.size)];
 }
-
 attachFromArray(a) {
   self attach(randomElement(a), "", true);
 }
-
 new() {
   self detachAll();
   oldGunHand = self.anim_gunHand;
-  if(!isDefined(oldGunHand))
+  if(!isDefined(oldGunHand)) {
     return;
+  }
   self.anim_gunHand = "none";
   self[[anim.PutGunInHand]](oldGunHand);
 }
-
 save() {
   info["gunHand"] = self.anim_gunHand;
   info["gunInHand"] = self.anim_gunInHand;
@@ -47,7 +44,6 @@ save() {
   }
   return info;
 }
-
 load(info) {
   self detachAll();
   self.anim_gunHand = info["gunHand"];
@@ -62,26 +58,27 @@ load(info) {
     println("Load: Guy had no name!");
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for(i = 0; i < attachSize; i++)
+  for(i = 0; i < attachSize; i++) {
     self attach(attachInfo[i]["model"], attachInfo[i]["tag"]);
+  }
 }
-
 precache(info) {
-  if(isDefined(info["name"]))
+  if(isDefined(info["name"])) {
     println("Precache: Guy has name ", info["name"]);
-  else
+  } else {
     println("Precache: Guy had no name!");
+  }
   precacheModel(info["model"]);
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for(i = 0; i < attachSize; i++)
+  for(i = 0; i < attachSize; i++) {
     precacheModel(attachInfo[i]["model"]);
+  }
 }
-
 get_random_character(amount) {
   self_info = strtok(self.classname, "_");
   if(self_info.size <= 2) {
-    return randomInt(amount);
+    return randomint(amount);
   }
   group = "auto";
   index = undefined;
@@ -105,7 +102,7 @@ get_random_character(amount) {
   if(!isDefined(index)) {
     index = get_least_used_index(prefix, group);
     if(!isDefined(index)) {
-      index = randomInt(5000);
+      index = randomint(5000);
     }
   }
   while(index >= amount) {
@@ -114,7 +111,6 @@ get_random_character(amount) {
   level.character_index_cache[prefix][group][index]++;
   return index;
 }
-
 get_least_used_index(prefix, group) {
   lowest_indices = [];
   lowest_use = level.character_index_cache[prefix][group][0];
@@ -132,13 +128,11 @@ get_least_used_index(prefix, group) {
   assertex(lowest_indices.size, "Tried to spawn a character but the lowest indices didn't exist");
   return random(lowest_indices);
 }
-
 initialize_character_group(prefix, group, amount) {
   for(i = 0; i < amount; i++) {
     level.character_index_cache[prefix][group][i] = 0;
   }
 }
-
 random(array) {
-  return array[randomInt(array.size)];
+  return array[randomint(array.size)];
 }

@@ -138,8 +138,8 @@ initializegametypesettings() {
 onstartgametype() {
   if([[level.checkforovertime]]()) {
     game["status"] = "overtime";
-    setdvar("ui_overtime", 1);
-    setdvar("overtimeTimeLimit", 3.5);
+    setDvar("ui_overtime", 1);
+    setDvar("overtimeTimeLimit", 3.5);
   }
 
   if(!isDefined(game["switchedsides"]))
@@ -1599,7 +1599,7 @@ damagewatch(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
   if(!isDefined(self.owner)) {
     return;
   }
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(var_1.pers["team"] == self.owner.pers["team"]) {
       return;
     }
@@ -1678,7 +1678,7 @@ districtrestrictedarea() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(!isalive(var_1)) {
@@ -1971,7 +1971,7 @@ gamemodemodifyplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   if(maps\mp\_utility::is_true(level.propsinvuln) && isDefined(var_0.team) && var_0.team == game["defenders"])
     return 0;
 
-  if(isDefined(var_1) && isplayer(var_1) && isalive(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1) && isalive(var_1)) {
     if(level.matchrules_damagemultiplier)
       var_2 = var_2 * level.matchrules_damagemultiplier;
 
@@ -2166,7 +2166,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   else
     thread maps\mp\gametypes\_deathicons::adddeathicon(var_10.body, var_10, var_10.team, 5.0, var_1, 0);
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1 != var_10 && var_10.team != var_1.team)
+  if(isDefined(var_1) && isPlayer(var_1) && var_1 != var_10 && var_10.team != var_1.team)
     var_11 = 1;
 
   if(var_11)

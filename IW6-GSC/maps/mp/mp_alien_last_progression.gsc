@@ -921,9 +921,7 @@ handle_non_linear_jump_to_start() {
         foreach(var_6 in var_4.outpost_encounters) {
           if(var_6.type == "transition") {
             var_6.completed = 1;
-            [
-              [var_6.opener_func]
-            ](var_6, 0);
+            [[var_6.opener_func]](var_6, 0);
             wait 0.1;
           }
         }

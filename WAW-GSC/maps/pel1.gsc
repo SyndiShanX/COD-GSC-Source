@@ -2109,8 +2109,7 @@ event1_floating_bodies() {
     bodyA[i] = spawn_fake_guy_lvt(body_points[i].origin + (0, 0, -15), body_points[i].angles, 1, "blah", "floater", 0);
     bodyA[i].targetname = "floating_body";
 
-    if(rand == 0 || rand == 1) {
-    } else {}
+    if(rand == 0 || rand == 1) {} else {}
     wait 0.3;
     bodyA[i] startragdoll();
   }

@@ -60,8 +60,8 @@ __init__() {
 
   level.weaponsuicide = getweapon(#"death_self");
 
-  if(!isDefined(getdvar(#"revive_trigger_radius"))) {
-    setdvar(#"revive_trigger_radius", 75);
+  if(!isDefined(getDvar(#"revive_trigger_radius"))) {
+    setDvar(#"revive_trigger_radius", 75);
   }
 
   if(!isDefined(level.var_3ea7f9f4)) {
@@ -79,7 +79,7 @@ on_spawned() {
 }
 
 player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if("zcleansed" == level.gametype) {
       demo::kill_bookmark(attacker, self, einflictor);
       potm::kill_bookmark(attacker, self, einflictor);
@@ -226,7 +226,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shit
   if(isDefined(self.is_zombie) && self.is_zombie) {
     self takeallweapons();
 
-    if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
       attacker notify(#"killed_a_zombie_player", einflictor);
     }
   } else {
@@ -273,7 +273,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shit
 function_70fcc093() {
   if(isDefined(level.var_e1d82d33)) {
     foreach(player in util::get_active_players(self.team)) {
-      if(isplayer(player) && player != self) {
+      if(isPlayer(player) && player != self) {
         s_path = generatenavmeshpath(self.origin, player.origin);
 
         if(isDefined(s_path)) {
@@ -1129,7 +1129,7 @@ function_8fd9d8b9(e_reviver) {
   });
 
   if(!isDefined(self.var_6d772cb) && !(isDefined(self.var_54cb40e6) && self.var_54cb40e6)) {
-    if(isplayer(e_reviver) && isDefined(e_reviver.var_c107ed3)) {
+    if(isPlayer(e_reviver) && isDefined(e_reviver.var_c107ed3)) {
       self thread zm_audio::create_and_play_dialog(#"revive", e_reviver.var_c107ed3, undefined, 1);
     }
   }
@@ -1285,7 +1285,7 @@ revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
   e_revivee thread laststand::revive_hud_show_n_fade(#"hash_12e2c5e29f8ce6ad", 3, self);
   e_revivee.revivetrigger sethintstring("");
 
-  if(isplayer(e_revivee)) {
+  if(isPlayer(e_revivee)) {
     e_revivee startrevive(self);
     e_revivee.var_c6a6f334 = 1;
   }
@@ -1323,7 +1323,7 @@ revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
   }
 
   if(!(isDefined(e_revivee.revivetrigger.auto_revive) && e_revivee.revivetrigger.auto_revive) && !revived) {
-    if(isplayer(e_revivee)) {
+    if(isPlayer(e_revivee)) {
       e_revivee stoprevive(self);
     }
   }
@@ -1428,7 +1428,7 @@ function_48ce762a(param) {
 revive_success(reviver, b_track_stats = 1, var_c0ab6a65) {
   level endon(#"end_game");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self notify(#"player_revived", {
       #reviver: reviver
     });
@@ -1437,7 +1437,7 @@ revive_success(reviver, b_track_stats = 1, var_c0ab6a65) {
 
   self thread function_8fd9d8b9(reviver);
 
-  if(isplayer(reviver) && isDefined(b_track_stats) && b_track_stats) {
+  if(isPlayer(reviver) && isDefined(b_track_stats) && b_track_stats) {
     reviver xp_revive_once_per_round(self);
 
     if(!(isDefined(level.isresetting_grief) && level.isresetting_grief)) {
@@ -1470,7 +1470,7 @@ revive_internal(reviver, b_track_stats, var_c0ab6a65 = 0) {
 
   self allowjump(1);
 
-  if(isplayer(reviver)) {
+  if(isPlayer(reviver)) {
     reviver notify(#"player_did_a_revive", {
       #revived_player: self
     });
@@ -1530,7 +1530,7 @@ xp_revive_once_per_round(player_being_revived) {
 
 revive_force_revive(reviver) {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(self laststand::player_is_in_laststand());
   self thread revive_success(reviver);
 }

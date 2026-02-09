@@ -13,7 +13,6 @@ main() {
   level._effect["battlefield_smokebank_S"] = loadfx("smoke/battlefield_smokebank_S");
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_crash_fx::main();
-
 }

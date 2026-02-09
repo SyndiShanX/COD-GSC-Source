@@ -364,9 +364,9 @@ onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     }
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && !isDefined(self.loadstartpointtransients)) {
+  if(isDefined(var_1) && isPlayer(var_1) && !isDefined(self.loadstartpointtransients)) {
     var_11 = isDefined(self.curmeleetarget) && self.curmeleetarget == var_1;
-    var_12 = isDefined(self.curmeleetarget) && !isplayer(self.curmeleetarget);
+    var_12 = isDefined(self.curmeleetarget) && !isPlayer(self.curmeleetarget);
     if(var_11 || var_12) {
       if(distancesquared(self.origin, var_1.origin) <= self.var_4D45) {
         scripts\mp\agents\zombie\zombie_util::func_F702(var_1);
@@ -687,7 +687,7 @@ func_7E78(var_0, var_1, var_2) {
   }
 
   var_4 = 1;
-  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_1) && isDefined(var_4) && !iskillstreakweapon(var_1)) {
+  if(isDefined(var_0) && isPlayer(var_0) && isDefined(var_1) && isDefined(var_4) && !iskillstreakweapon(var_1)) {
     var_4 = func_3E61(var_0, var_1, var_4);
     return var_4;
   }
@@ -1157,9 +1157,7 @@ func_13F55() {
         }
       } else if(isDefined(self.speedup)) {
         if(isDefined(level.var_BCE5[self.agent_type])) {
-          self.moveratescale = [
-            [level.var_BCE5[self.agent_type]]
-          ]();
+          self.moveratescale = [[level.var_BCE5[self.agent_type]]]();
         } else {
           self.moveratescale = 1;
         }
@@ -1287,7 +1285,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       self playSound("zmb_clown_explode");
     }
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       scripts\common\fx::playfxnophase(level._effect["suicide_zmb_death"], self.origin + (0, 0, 50), anglesToForward(self.angles), anglestoup(self.angles));
     } else {
       scripts\common\fx::playfxnophase(level._effect["suicide_zmb_explode"], self.origin + (0, 0, 50), anglesToForward(self.angles), anglestoup(self.angles));

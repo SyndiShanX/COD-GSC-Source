@@ -14,12 +14,12 @@ mainDebug() {
     thread camera();
 
   if(GetDebugDvar("debug_corner") == "")
-    SetDvar("debug_corner", "off");
+    setDvar("debug_corner", "off");
   else
   if(GetDebugDvar("debug_corner") == "on")
     debug_corner();
 
-  if(GetDvar("chain") == "1")
+  if(getDvar("chain") == "1")
     thread debugchains();
 
   thread debugDvars();
@@ -28,13 +28,13 @@ mainDebug() {
 
   thread watchMinimap();
 
-  if(GetDvar("level_transition_test") != "off")
+  if(getDvar("level_transition_test") != "off")
     thread complete_me();
 
-  if(GetDvar("level_completeall") != "off")
+  if(getDvar("level_completeall") != "off")
     maps\_endmission::force_all_complete();
 
-  if(GetDvar("level_clear_all") != "off")
+  if(getDvar("level_clear_all") != "off")
     maps\_endmission::clearall();
 
   //	thread playerNode();
@@ -57,7 +57,7 @@ debugchains() {
   count = 0;
 
   while(1) {
-    if(GetDvar("chain") == "1") {
+    if(getDvar("chain") == "1") {
       for(i = 0; i < fnodes.size; i++) {
         if(Distance(level.player GetOrigin(), fnodes[i].origin) < 1500) {
           Print3d(fnodes[i].origin, "yo", (0.2, 0.8, 0.5), 0.45);
@@ -78,7 +78,6 @@ debugchains() {
         if(isDefined(node))
           Line(friends[i].origin + (0, 0, 35), node.origin, (0.2, 0.5, 0.8), 0.5);
       }
-
     }
     waitframe();
   }
@@ -199,7 +198,7 @@ drawEntTag(num) {
       continue;
     ai[i] thread dragTagUntilDeath(GetDebugDvar("debug_tag"));
   }
-  SetDvar("debug_enttag", "");
+  setDvar("debug_enttag", "");
 }
 
 drawTag(tag, opcolor, drawtime) {
@@ -509,7 +508,7 @@ debugMisstimeOff() {
 
 setEmptyDvar(dvar, setting) {
   if(GetDebugDvar(dvar) == "")
-    SetDvar(dvar, setting);
+    setDvar(dvar, setting);
 }
 
 debugJump(num) {
@@ -521,11 +520,9 @@ debugJump(num) {
     Line(level.player.origin, ai[i].origin, (0.2, 0.3, 1.0));
     return;
   }
-
 }
 
 debugDvars() {
-
   create_dvar("chasecam", "0");
   create_dvar("viewfx", "");
   create_dvar("debug_badpath_time", 5000);
@@ -534,110 +531,110 @@ debugDvars() {
   create_dvar("vehicle_info", 0);
   create_dvar("getdot", 0);
 
-  if(GetDvar("level_transition_test") == "")
-    SetDvar("level_transition_test", "off");
+  if(getDvar("level_transition_test") == "")
+    setDvar("level_transition_test", "off");
 
-  if(GetDvar("level_completeall") == "")
-    SetDvar("level_completeall", "off");
+  if(getDvar("level_completeall") == "")
+    setDvar("level_completeall", "off");
 
-  if(GetDvar("level_clear_all") == "")
-    SetDvar("level_clear_all", "off");
+  if(getDvar("level_clear_all") == "")
+    setDvar("level_clear_all", "off");
 
   waittillframeend; // for vars to get init'd elsewhere
   setEmptyDvar("debug_accuracypreview", "off");
 
   if(GetDebugDvar("debug_lookangle") == "")
-    SetDvar("debug_lookangle", "off");
+    setDvar("debug_lookangle", "off");
 
   if(GetDebugDvar("debug_grenademiss") == "")
-    SetDvar("debug_grenademiss", "off");
+    setDvar("debug_grenademiss", "off");
 
   if(GetDebugDvar("debug_enemypos") == "")
-    SetDvar("debug_enemypos", "-1");
+    setDvar("debug_enemypos", "-1");
 
   if(GetDebugDvar("debug_dotshow") == "")
-    SetDvar("debug_dotshow", "-1");
+    setDvar("debug_dotshow", "-1");
 
   if(GetDebugDvar("debug_stopenemypos") == "")
-    SetDvar("debug_stopenemypos", "-1");
+    setDvar("debug_stopenemypos", "-1");
 
   if(GetDebugDvar("debug_replayenemypos") == "")
-    SetDvar("debug_replayenemypos", "-1");
+    setDvar("debug_replayenemypos", "-1");
 
   if(GetDebugDvar("debug_tag") == "")
-    SetDvar("debug_tag", "");
+    setDvar("debug_tag", "");
 
   if(GetDebugDvar("debug_arrivals") == "")
-    SetDvar("debug_arrivals", "");
+    setDvar("debug_arrivals", "");
 
   if(GetDebugDvar("debug_chatlook") == "")
-    SetDvar("debug_chatlook", "");
+    setDvar("debug_chatlook", "");
 
   if(GetDebugDvar("debug_vehicletag") == "")
-    SetDvar("debug_vehicletag", "");
+    setDvar("debug_vehicletag", "");
 
   if(GetDebugDvar("debug_colorfriendlies") == "")
-    SetDvar("debug_colorfriendlies", "off");
+    setDvar("debug_colorfriendlies", "off");
 
   if(GetDebugDvar("debug_animreach") == "")
-    SetDvar("debug_animreach", "off");
+    setDvar("debug_animreach", "off");
 
   if(GetDebugDvar("debug_hatmodel") == "")
-    SetDvar("debug_hatmodel", "on");
+    setDvar("debug_hatmodel", "on");
 
   if(GetDebugDvar("debug_trace") == "")
-    SetDvar("debug_trace", "off");
+    setDvar("debug_trace", "off");
 
   level.debug_badpath = false;
   if(GetDebugDvar("debug_badpath") == "")
-    SetDvar("debug_badpath", "off");
+    setDvar("debug_badpath", "off");
 
   if(GetDebugDvar("anim_lastsightpos") == "")
-    SetDvar("debug_lastsightpos", "off");
+    setDvar("debug_lastsightpos", "off");
 
   if(GetDebugDvar("debug_dog_sound") == "")
-    SetDvar("debug_dog_sound", "");
+    setDvar("debug_dog_sound", "");
 
-  if(GetDvar("debug_nuke") == "")
-    SetDvar("debug_nuke", "off");
+  if(getDvar("debug_nuke") == "")
+    setDvar("debug_nuke", "off");
 
   if(GetDebugDvar("debug_deathents") == "on")
-    SetDvar("debug_deathents", "off");
+    setDvar("debug_deathents", "off");
 
-  if(GetDvar("debug_jump") == "")
-    SetDvar("debug_jump", "");
+  if(getDvar("debug_jump") == "")
+    setDvar("debug_jump", "");
 
-  if(GetDvar("debug_hurt") == "")
-    SetDvar("debug_hurt", "");
+  if(getDvar("debug_hurt") == "")
+    setDvar("debug_hurt", "");
 
   if(GetDebugDvar("animsound") == "")
-    SetDvar("animsound", "off");
-  if(GetDvar("tag") == "")
-    SetDvar("tag", "");
+    setDvar("animsound", "off");
+  if(getDvar("tag") == "")
+    setDvar("tag", "");
 
   for(i = 1; i <= level.animsound_hudlimit; i++) {
-    if(GetDvar("tag" + i) == "")
-      SetDvar("tag" + i, "");
+    if(getDvar("tag" + i) == "")
+      setDvar("tag" + i, "");
   }
 
   if(GetDebugDvar("animsound_save") == "")
-    SetDvar("animsound_save", "");
+    setDvar("animsound_save", "");
 
   if(GetDebugDvar("debug_depth") == "")
-    SetDvar("debug_depth", "");
+    setDvar("debug_depth", "");
 
   if(GetDebugDvar("debug_colornodes") == "")
-    SetDvar("debug_colornodes", "");
+    setDvar("debug_colornodes", "");
 
   if(GetDebugDvar("debug_reflection") == "")
-    SetDvar("debug_reflection", "0");
+    setDvar("debug_reflection", "0");
 
   if(GetDebugDvar("debug_fxlighting") == "")
-    SetDvar("debug_fxlighting", "0");
+    setDvar("debug_fxlighting", "0");
 
   level.last_threat_debug = -23430;
   if(GetDebugDvar("debug_threat") == "")
-    SetDvar("debug_threat", "-1");
+    setDvar("debug_threat", "-1");
 
   PreCacheModel("test_sphere_silver");
 
@@ -663,13 +660,13 @@ debugDvars() {
 
   level.debug_fxlighting = 0;
 
-  //if( GetDvar( "debug_character_count" ) == "" )
-  //	SetDvar( "debug_character_count", "off" );
+  //if( getDvar( "debug_character_count" ) == "" )
+  //	setDvar( "debug_character_count", "off" );
 
   //	thread hatmodel();	
   //thread debug_character_count();
 
-  noAnimscripts = GetDvar("debug_noanimscripts") == "on";
+  noAnimscripts = getDvar("debug_noanimscripts") == "on";
   for(;;) {
     if(GetDebugDvarInt("getdot") > 0) {
       draw_dot_for_ent(GetDebugDvarInt("getdot"));
@@ -677,10 +674,10 @@ debugDvars() {
 
     if(GetDvarInt("viewfx")) {
       viewfx();
-      SetDvar("viewfx", "");
+      setDvar("viewfx", "");
     }
 
-    if(GetDvar("debug_hud") != "") {
+    if(getDvar("debug_hud") != "") {
       if(isDefined(level.amb_hud)) {
         foreach(hud_array in level.amb_hud) {
           foreach(hud in hud_array) {
@@ -716,50 +713,50 @@ debugDvars() {
 
     thread debug_animSound();
 
-    if(GetDvar("tag") != "")
+    if(getDvar("tag") != "")
       thread debug_animSoundTagSelected();
 
     for(i = 1; i <= level.animsound_hudlimit; i++) {
-      if(GetDvar("tag" + i) != "")
+      if(getDvar("tag" + i) != "")
         thread debug_animSoundTag(i);
     }
 
     if(GetDebugDvar("animsound_save") != "")
       thread debug_animSoundSave();
 
-    if(GetDvar("debug_nuke") != "off") {
+    if(getDvar("debug_nuke") != "off") {
       thread debug_nuke();
     }
 
     if(GetDebugDvar("debug_misstime") == "on") {
-      SetDvar("debug_misstime", "start");
+      setDvar("debug_misstime", "start");
       array_thread(GetAIArray(), ::debugMisstime);
     } else
     if(GetDebugDvar("debug_misstime") == "off") {
-      SetDvar("debug_misstime", "start");
+      setDvar("debug_misstime", "start");
       array_thread(GetAIArray(), ::debugMisstimeOff);
     }
 
     if(GetDebugDvar("debug_deathents") == "on")
       thread deathspawnerPreview();
 
-    if(GetDvar("debug_hurt") == "on") {
-      SetDvar("debug_hurt", "off");
+    if(getDvar("debug_hurt") == "on") {
+      setDvar("debug_hurt", "off");
       level.player DoDamage(50, (324234, 3423423, 2323));
     }
 
-    if(GetDvar("debug_hurt") == "on") {
-      SetDvar("debug_hurt", "off");
+    if(getDvar("debug_hurt") == "on") {
+      setDvar("debug_hurt", "off");
       level.player DoDamage(50, (324234, 3423423, 2323));
     }
 
-    if(GetDvar("debug_depth") == "on") {
+    if(getDvar("debug_depth") == "on") {
       thread fogcheck();
     }
 
     if(GetDebugDvarInt("vehicle_info")) {
       random_noteworthy = RandomInt(34234) + "_" + RandomInt(23423);
-      SetDvar("vehicle_info", 0);
+      setDvar("vehicle_info", 0);
       vehicles = getEntArray("script_vehicle", "code_classname");
       foreach(vehicle in vehicles) {
         if(!isDefined(vehicle))
@@ -779,19 +776,19 @@ debugDvars() {
 
     if(GetDebugDvarInt("debug_enemypos") != -1) {
       thread debug_enemypos(GetDebugDvarInt("debug_enemypos"));
-      SetDvar("debug_enemypos", "-1");
+      setDvar("debug_enemypos", "-1");
     }
     if(GetDebugDvarInt("debug_stopenemypos") != -1) {
       thread debug_stopenemypos(GetDebugDvarInt("debug_stopenemypos"));
-      SetDvar("debug_stopenemypos", "-1");
+      setDvar("debug_stopenemypos", "-1");
     }
 
-    if(!noAnimscripts && GetDvar("debug_noanimscripts") == "on") {
+    if(!noAnimscripts && getDvar("debug_noanimscripts") == "on") {
       anim.defaultException = animscripts\init::infiniteLoop;
       noAnimscripts = true;
     }
 
-    if(noAnimscripts && GetDvar("debug_noanimscripts") == "off") {
+    if(noAnimscripts && getDvar("debug_noanimscripts") == "off") {
       anim.defaultException = animscripts\init::empty;
       anim notify("new exceptions");
       noAnimscripts = false;
@@ -801,7 +798,7 @@ debugDvars() {
       if(!isDefined(level.traceStart))
         thread showDebugTrace();
       level.traceStart = level.player getEye();
-      SetDvar("debug_trace", "off");
+      setDvar("debug_trace", "off");
     }
 
     debug_reflection();
@@ -810,7 +807,6 @@ debugDvars() {
 
     wait(0.05);
   }
-
 }
 
 remove_reflection_objects() {
@@ -824,7 +820,6 @@ remove_reflection_objects() {
   if(level.debug_reflection == 1 || level.debug_reflection == 3) {
     level.debug_reflectionobject Delete();
   }
-
 }
 
 create_reflection_objects() {
@@ -833,7 +828,6 @@ create_reflection_objects() {
     level.debug_reflection_objects[i] = spawn("script_model", reflection_locs[i]);
     level.debug_reflection_objects[i] setModel("test_sphere_silver");
   }
-
 }
 
 create_reflection_object() {
@@ -863,7 +857,6 @@ debug_reflection() {
     remove_reflection_objects();
     level.debug_reflection = 0;
   }
-
 }
 
 debug_reflection_buttons() {
@@ -888,14 +881,12 @@ debug_reflection_buttons() {
     //			}
     wait .05;
   }
-
 }
 
 remove_fxlighting_object() {
   if(level.debug_fxlighting == 1) {
     level.debug_fxlightingobject Delete();
   }
-
 }
 
 create_fxlighting_object() {
@@ -913,7 +904,6 @@ play_fxlighting_fx() {
     playFXOnTag(getfx("lighting_fraction"), self, "tag_origin");
     wait(0.1);
   }
-
 }
 
 debug_fxlighting() {
@@ -924,7 +914,6 @@ debug_fxlighting() {
     remove_fxlighting_object();
     level.debug_fxlighting = 0;
   }
-
 }
 
 debug_fxlighting_buttons() {
@@ -947,7 +936,6 @@ debug_fxlighting_buttons() {
     level.debug_fxlightingobject LinkTo(level.player);
     wait .05;
   }
-
 }
 
 showDebugTrace() {
@@ -1002,7 +990,6 @@ hatmodel() {
     }
     wait(15);
   }
-
 }
 
 debug_character_count() {
@@ -1058,7 +1045,7 @@ debug_character_count() {
 
   lastdvar = "off";
   for(;;) {
-    dvar = GetDvar("debug_character_count");
+    dvar = getDvar("debug_character_count");
     if(dvar == "off") {
       if(dvar != lastdvar) {
         drones.alpha = 0;
@@ -1078,7 +1065,6 @@ debug_character_count() {
         vehicles.alpha = 1;
         total.alpha = 1;
         lastdvar = dvar;
-
       }
     }
     //drones
@@ -1108,7 +1094,7 @@ nuke() {
 }
 
 debug_nuke() {
-  dvar = GetDvar("debug_nuke");
+  dvar = getDvar("debug_nuke");
   if(dvar == "on") {
     ai = GetAISpeciesArray("bad_guys", "all");
     for(i = 0; i < ai.size; i++)
@@ -1124,7 +1110,7 @@ debug_nuke() {
     for(i = 0; i < ai.size; i++)
       ai[i] nuke();
   }
-  SetDvar("debug_nuke", "off");
+  setDvar("debug_nuke", "off");
 }
 
 debug_missTime() {}
@@ -1140,7 +1126,7 @@ camera() {
   for(;;) {
     if(GetDebugDvar("camera") != "on") {
       if(GetDebugDvar("camera") != "off")
-        SetDvar("camera", "off");
+        setDvar("camera", "off");
       wait(1);
       continue;
     }
@@ -1207,11 +1193,11 @@ camera() {
 }
 
 freePlayer() {
-  SetDvar("cl_freemove", "0");
+  setDvar("cl_freemove", "0");
 }
 
 setPlayerToCamera(camera) {
-  SetDvar("cl_freemove", "2");
+  setDvar("cl_freemove", "2");
   SetDebugAngles(camera.angles);
   SetDebugOrigin(camera.origin + (0, 0, -60));
 }
@@ -1225,15 +1211,15 @@ setPlayerToCamera(camera) {
 //	wait( 1 );
 	mintime = 0;
 	linker = false;
-	while( GetDvar( "camera" ) == "on" )
+	while( getDvar( "camera" ) == "on" )
 	{
 		for( i=0;i<level.camera.size;i++ )
 		{
-			if( GetDvar( "camera" ) != "on" )
+			if( getDvar( "camera" ) != "on" )
 				break;
 
-			SetDvar( "nextcamera", "on" );
-			SetDvar( "lastcamera", "on" );
+			setDvar( "nextcamera", "on" );
+			setDvar( "lastcamera", "on" );
 
 			level.player SetOrigin( level.camera[ i ].origin );
 			level.player LinkTo( level.camera[ i ] );
@@ -1254,13 +1240,13 @@ setPlayerToCamera(camera) {
 					timer = mintime;
 				}
 
-				if( GetDvar( "camera" ) != "on" )
+				if( getDvar( "camera" ) != "on" )
 					break;
 
-				if( GetDvar( "nextcamera" ) == "1" )
+				if( getDvar( "nextcamera" ) == "1" )
 					break;
 
-				if( GetDvar( "lastcamera" ) == "1" )
+				if( getDvar( "lastcamera" ) == "1" )
 				{
 					i-=2;
 					if( i < 0 )
@@ -1271,7 +1257,7 @@ setPlayerToCamera(camera) {
 				waitframe();
 			}
 
-			if(( GetDvar( "nextcamera" ) == "1" ) ||( GetDvar( "lastcamera" ) == "1" ) )
+			if(( getDvar( "nextcamera" ) == "1" ) ||( getDvar( "lastcamera" ) == "1" ) )
 				mintime = GetTime() + 500000;
 		}
 	}
@@ -1283,10 +1269,10 @@ setPlayerToCamera(camera) {
 
 anglescheck() {
   while(1) {
-    if(GetDvar("angles", "0") == "1") {
+    if(getDvar("angles", "0") == "1") {
       PrintLn("origin " + level.player GetOrigin());
       PrintLn("angles " + level.player.angles);
-      SetDvar("angles", "0");
+      setDvar("angles", "0");
     }
     wait(1);
   }
@@ -1295,7 +1281,7 @@ anglescheck() {
 dolly() {
   if(!isDefined(level.dollyTime))
     level.dollyTime = 5;
-  SetDvar("dolly", "");
+  setDvar("dolly", "");
   thread dollyStart();
   thread dollyEnd();
   thread dollyGo();
@@ -1303,9 +1289,9 @@ dolly() {
 
 dollyStart() {
   while(1) {
-    if(GetDvar("dolly") == "start") {
+    if(getDvar("dolly") == "start") {
       level.dollystart = level.player.origin;
-      SetDvar("dolly", "");
+      setDvar("dolly", "");
     }
     wait(1);
   }
@@ -1313,9 +1299,9 @@ dollyStart() {
 
 dollyEnd() {
   while(1) {
-    if(GetDvar("dolly") == "end") {
+    if(getDvar("dolly") == "end") {
       level.dollyend = level.player.origin;
-      SetDvar("dolly", "");
+      setDvar("dolly", "");
     }
     wait(1);
   }
@@ -1324,8 +1310,8 @@ dollyEnd() {
 dollyGo() {
   while(1) {
     wait(1);
-    if(GetDvar("dolly") == "go") {
-      SetDvar("dolly", "");
+    if(getDvar("dolly") == "go") {
+      setDvar("dolly", "");
       if(!isDefined(level.dollystart)) {
         PrintLn("NO Dolly Start!");
         continue;
@@ -1426,7 +1412,7 @@ updateMinimapSetting() {
   requiredMapAspectRatio = GetDvarFloat("scr_requiredMapAspectRatio", 1);
 
   if(!isDefined(level.minimapheight)) {
-    SetDvar("scr_minimap_height", "0");
+    setDvar("scr_minimap_height", "0");
     level.minimapheight = 0;
   }
   minimapheight = GetDvarFloat("scr_minimap_height");
@@ -1706,11 +1692,11 @@ try_to_draw_line_to_node() {
 }
 
 fogcheck() {
-  if(GetDvar("depth_close") == "")
-    SetDvar("depth_close", "0");
+  if(getDvar("depth_close") == "")
+    setDvar("depth_close", "0");
 
-  if(GetDvar("depth_far") == "")
-    SetDvar("depth_far", "1500");
+  if(getDvar("depth_far") == "")
+    setDvar("depth_far", "1500");
 
   close = GetDvarInt("depth_close");
   far = GetDvarInt("depth_far");
@@ -1778,7 +1764,7 @@ displayThreat(entity, entityGroup) {
   timer = 1 * 20;
   col = (1, 0.5, 0.2);
   col2 = (0.2, 0.5, 1);
-  pacifist = !isplayer(self) && self.pacifist;
+  pacifist = !isPlayer(self) && self.pacifist;
 
   for(i = 0; i <= timer; i++) {
     Print3d(self.origin + (0, 0, 65), "Him to Me:", col, 3);
@@ -2156,7 +2142,6 @@ debug_animSound() {
   if(is_tagged) {
     draw_animsounds_in_hud();
   }
-
 }
 
 draw_animsounds_in_hud() {
@@ -2353,7 +2338,7 @@ display_animSound() {
 }
 
 debug_animSoundTag(tagnum) {
-  tag = GetDvar("tag" + tagnum);
+  tag = getDvar("tag" + tagnum);
   if(tag == "") {
     IPrintLnBold("Enter the soundalias with /tag# aliasname");
     return;
@@ -2361,11 +2346,11 @@ debug_animSoundTag(tagnum) {
 
   tag_sound(tag, tagnum - 1);
 
-  SetDvar("tag" + tagnum, "");
+  setDvar("tag" + tagnum, "");
 }
 
 debug_animSoundTagSelected() {
-  tag = GetDvar("tag");
+  tag = getDvar("tag");
   if(tag == "") {
     IPrintLnBold("Enter the soundalias with /tag aliasname");
     return;
@@ -2373,7 +2358,7 @@ debug_animSoundTagSelected() {
 
   tag_sound(tag, level.animsound_selected);
 
-  SetDvar("tag", "");
+  setDvar("tag", "");
 }
 
 tag_sound(tag, tagnum) {
@@ -2413,7 +2398,7 @@ debug_animSoundSave() {
   IPrintLnBold("Saved to " + filename);
   print_aliases_to_file(file);
   saved = CloseFile(file);
-  SetDvar("animsound_save", "");
+  setDvar("animsound_save", "");
 }
 
 print_aliases_to_file(file) {
@@ -2497,9 +2482,9 @@ print3ddraw(org, text, color) {
 }
 
 complete_me() {
-  if(GetDvar("credits_active") == "1") {
+  if(getDvar("credits_active") == "1") {
     wait 7;
-    SetDvar("credits_active", "0");
+    setDvar("credits_active", "0");
     maps\_endmission::credits_end();
     return;
   }
@@ -2618,7 +2603,6 @@ draw_dot_for_ent(entnum) {
       continue;
     guy draw_dot_for_guy();
   }
-
 }
 
 draw_dot_for_guy() {

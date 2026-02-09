@@ -23,7 +23,6 @@ main() {
   self SetFlaggedAnimRestart("dog_pain_anim", anim.dogAnims[self.animSet].pain[pain_set][pain_direction], 1, 0.2, 1);
   self animscripts\zombie_shared::DoNoteTracksForTime(0.2, "dog_pain_anim");
 }
-
 getAnimDirection(damageyaw) {
   if((damageyaw > 135) || (damageyaw <= -135)) {
     return 2;

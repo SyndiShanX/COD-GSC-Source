@@ -14,8 +14,8 @@
 function main() {
   namespace_b046f355::main();
   namespace_db5bc658::main();
-  setdvar("phys_buoyancy", 1);
-  setdvar("phys_ragdoll_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
+  setDvar("phys_ragdoll_buoyancy", 1);
   load::main();
   util::waitforclient(0);
 }

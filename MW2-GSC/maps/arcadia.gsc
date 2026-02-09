@@ -81,11 +81,8 @@ main() {
   flag_init("foley_leaves_panic_room");
   flag_init("disable_stryker_dialog");
 
-  //--------------------------------
-  // Friendlies and Friendly Respawn
-  //--------------------------------
-
-  level.foley = getent("foley", "script_noteworthy");
+  //-------------------------------- // Friendlies and Friendly Respawn
+  //-------------------------------- level.foley = getent("foley", "script_noteworthy");
   assert(isAlive(level.foley));
   level.foley.animname = "foley";
   level.foley magic_bullet_shield();
@@ -107,10 +104,8 @@ main() {
   set_empty_promotion_order("b");
   array_thread(friends, ::replace_on_death);
 
-  //--------------------------------
-  // spawners with script_parameters get processed on spawn
-  //--------------------------------
-  all_axis_spawners = getspawnerteamarray("axis");
+  //-------------------------------- // spawners with script_parameters get processed on spawn
+  //-------------------------------- all_axis_spawners = getspawnerteamarray("axis");
   script_parameter_spawners = [];
   foreach(spawner in all_axis_spawners) {
     if(!isDefined(spawner.script_parameters))
@@ -119,10 +114,8 @@ main() {
   }
   array_spawn_function(script_parameter_spawners, ::process_ai_script_parameters);
 
-  //--------------------------------
-  // Spawn Stryker vehicle
-  //--------------------------------
-  level.stryker = spawn_vehicle_from_targetname_and_drive("stryker");
+  //-------------------------------- // Spawn Stryker vehicle
+  //-------------------------------- level.stryker = spawn_vehicle_from_targetname_and_drive("stryker");
   //level.stryker.veh_pathtype = "follow";
   level.stryker.vehicle_stays_alive = true;
   level.stryker vehPhys_DisableCrashing();
@@ -148,10 +141,8 @@ main() {
 
   set_cull_dist(9000);
 
-  //--------------------------------
-  // Array / Spawn threads
-  //--------------------------------
-  array_spawn_function_noteworthy("drop_plane", ::drop_plane);
+  //-------------------------------- // Array / Spawn threads
+  //-------------------------------- array_spawn_function_noteworthy("drop_plane", ::drop_plane);
   run_thread_on_targetname("sentry_activate", ::sentry_activate_trigger);
   run_thread_on_targetname("vehicle_path_disconnector", ::vehicle_path_disconnector);
   run_thread_on_targetname("delete_ai_trigger", ::delete_ai_trigger);
@@ -165,10 +156,8 @@ main() {
   add_hint_string("use_laser", &"ARCADIA_LASER_HINT", ::should_stop_laser_hint);
   add_hint_string("use_laser_golf", &"ARCADIA_LASER_HINT_GOLFCOURSE", ::should_stop_laser_golf_hint);
 
-  //--------------------------------
-  // Level threads
-  //--------------------------------
-  thread civilian_car();
+  //-------------------------------- // Level threads
+  //-------------------------------- thread civilian_car();
   thread checkpoint_cleared_dialog();
   thread checkpoint_cleared_dialog_ac130();
   thread laser_targeting_device(level.player);
@@ -194,10 +183,8 @@ main() {
   thread set_culldist_first_bridge();
   thread undo_culldist_mansion();
 
-  //--------------------------------
-  // Make friendlies less accurate so the AI will fight longer without player interaction
-  //--------------------------------
-  wait 0.05;
+  //-------------------------------- // Make friendlies less accurate so the AI will fight longer without player interaction
+  //-------------------------------- wait 0.05;
   friendlies = getaiarray("allies");
   foreach(friend in friendlies)
   friend.baseaccuracy = 0.4;
@@ -542,7 +529,6 @@ second_street_friendlies() {
     }
     friend thread set_force_color("g");
   }
-
 }
 
 dialog_enemies_yellow_house() {

@@ -23,7 +23,7 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_uplink_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_uplink");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   registerclientfield("world", "trigger_lightning", 1, 1, "int");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";

@@ -98,7 +98,7 @@ function zombie_death_gib(e_attacker, w_weapon) {
   }
   gibserverutils::giblegs(self);
   self dodamage(self.health, self.origin, e_attacker);
-  if(isDefined(e_attacker) && isplayer(e_attacker)) {
+  if(isDefined(e_attacker) && isPlayer(e_attacker)) {
     e_attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_BLAST_FURNACE");
   }
 }

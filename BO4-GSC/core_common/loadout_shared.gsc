@@ -45,7 +45,7 @@ isprimarydamage(meansofdeath) {
 }
 
 cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor) {
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(victim) || !isDefined(attacker) || !isPlayer(attacker)) {
     return damage;
   }
 
@@ -62,7 +62,6 @@ cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, infl
     if(getdvarint(#"scr_perkdebug", 0)) {
       println("<dev string:x38>" + attacker.name + "<dev string:x42>");
     }
-
   } else {
     final_damage = old_damage;
   }

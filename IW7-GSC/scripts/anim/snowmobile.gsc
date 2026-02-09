@@ -205,7 +205,7 @@ func_103CD() {
     self func_82AC(scripts\anim\utility::func_1F64("add_aim_backright_center"), var_2, var_0);
     self func_82AC(scripts\anim\utility::func_1F64("add_aim_backright_left"), var_3, var_0);
     self func_82AC(scripts\anim\utility::func_1F64("add_aim_backright_right"), var_4, var_0);
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       self func_83CE();
     }
 

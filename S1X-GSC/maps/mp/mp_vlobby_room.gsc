@@ -129,7 +129,6 @@ vl_handle_mode_change(mode, newmode, camParams) {
     player SetDefaultDOF();
     player SetDefaultPostFX();
   }
-
 }
 
 SetDefaultPostFX() {

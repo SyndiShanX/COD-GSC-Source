@@ -14,7 +14,7 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_rust");
 
-  setdvar("compassmaxrange", "1400");
+  setDvar("compassmaxrange", "1400");
 
   ambientPlay("ambient_mp_duststorm");
 

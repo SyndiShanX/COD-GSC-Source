@@ -15,7 +15,6 @@ main() {
     default:
 
       assertmsg("Traversal: 'jump_across_120' doesn't support entity type '" + self.type + "'.");
-
   }
 }
 

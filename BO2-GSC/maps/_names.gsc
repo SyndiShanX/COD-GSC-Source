@@ -14,8 +14,9 @@ initialize_nationality(str_nationality) {
   if(!isDefined(level.names[str_nationality])) {
     level.names[str_nationality] = [];
 
-    if(str_nationality != "civilian")
+    if(str_nationality != "civilian") {
       add_nationality_names(str_nationality);
+    }
 
     randomize_name_list(str_nationality);
     level.nameindex[str_nationality] = 0;
@@ -483,9 +484,9 @@ get_name(override) {
   }
 
   if(isDefined(self.script_friendname)) {
-    if(self.script_friendname == "none")
+    if(self.script_friendname == "none") {
       self.name = "";
-    else {
+    } else {
       self.name = self.script_friendname;
       getrankfromname(self.name);
     }
@@ -526,13 +527,13 @@ get_name(override) {
     str_nationality = "panamanian";
   } else if(self is_lapd_member(str_classname))
     str_nationality = "police";
-  else if(self is_seal_member(str_classname))
+  else if(self is_seal_member(str_classname)) {
     str_nationality = "seal";
-  else if(self is_navy_member(str_classname))
+  } else if(self is_navy_member(str_classname)) {
     str_nationality = "navy";
-  else if(self is_security_member(str_classname))
+  } else if(self is_security_member(str_classname)) {
     str_nationality = "security";
-  else if(issubstr(str_classname, "_soviet_")) {
+  } else if(issubstr(str_classname, "_soviet_")) {
     self.airank = "none";
     str_nationality = "russian";
   } else if(issubstr(str_classname, "_yemeni_") || issubstr(str_classname, "_terrorist_yemen_")) {
@@ -546,17 +547,19 @@ get_name(override) {
 }
 
 get_ai_classname() {
-  if(isDefined(self.dr_ai_classname))
+  if(isDefined(self.dr_ai_classname)) {
     str_classname = tolower(self.dr_ai_classname);
-  else
+  } else {
     str_classname = tolower(self.classname);
+  }
 
   return str_classname;
 }
 
 add_override_name_func(nationality, func) {
-  if(!isDefined(level._override_name_funcs))
+  if(!isDefined(level._override_name_funcs)) {
     level._override_name_funcs = [];
+  }
 
   assert(!isDefined(level._override_name_funcs[nationality]), "Setting a name override function twice.");
   level._override_name_funcs[nationality] = func;
@@ -579,12 +582,13 @@ get_name_for_nationality(nationality) {
   level.nameindex[nationality] = (level.nameindex[nationality] + 1) % level.names[nationality].size;
   lastname = level.names[nationality][level.nameindex[nationality]];
 
-  if(!isDefined(lastname))
+  if(!isDefined(lastname)) {
     lastname = "";
+  }
 
-  if(isDefined(level._override_rank_func))
+  if(isDefined(level._override_rank_func)) {
     self[[level._override_rank_func]](lastname);
-  else if(isDefined(self.airank) && self.airank == "none") {
+  } else if(isDefined(self.airank) && self.airank == "none") {
     self.name = lastname;
     return;
   } else {
@@ -636,43 +640,49 @@ get_name_for_nationality(nationality) {
 }
 
 is_seal_member(str_classname) {
-  if(issubstr(str_classname, "_seal_"))
+  if(issubstr(str_classname, "_seal_")) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 is_navy_member(str_classname) {
-  if(issubstr(str_classname, "_navy_"))
+  if(issubstr(str_classname, "_navy_")) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 is_lapd_member(str_classname) {
-  if(issubstr(str_classname, "_lapd_") || issubstr(str_classname, "_swat_"))
+  if(issubstr(str_classname, "_lapd_") || issubstr(str_classname, "_swat_")) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 is_security_member(str_classname) {
-  if(issubstr(str_classname, "_security_"))
+  if(issubstr(str_classname, "_security_")) {
     return true;
+  }
 
   return false;
 }
 
 is_special_agent_member(str_classname) {
-  if(issubstr(str_classname, "_sstactical_"))
+  if(issubstr(str_classname, "_sstactical_")) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 getrankfromname(name) {
-  if(!isDefined(name))
+  if(!isDefined(name)) {
     self.airank = "private";
+  }
 
   tokens = strtok(name, " ");
   assert(tokens.size);
@@ -710,8 +720,9 @@ issubstr_match_any(str_match, str_search_array) {
   assert(str_search_array.size, "String array is empty");
 
   foreach(str_search in str_search_array) {
-    if(issubstr(str_match, str_search))
+    if(issubstr(str_match, str_search)) {
       return true;
+    }
   }
 
   return false;

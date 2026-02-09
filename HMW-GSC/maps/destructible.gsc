@@ -36,7 +36,7 @@ warn_about_old_destructible() {
 find_destructibles() {
   var_0 = [];
 
-  switch (getdvar("mapname")) {
+  switch (getDvar("mapname")) {
     case "mp_interchange":
       var_0[var_0.size] = (4172.8, -1887, 345.9);
       var_0[var_0.size] = (4070.5, -2049.2, 349.2);
@@ -66,7 +66,7 @@ find_destructibles() {
   var_1 = getEntArray("destructible_vehicle", "targetname");
 
   foreach(var_3 in var_1) {
-    switch (getdvar("mapname")) {
+    switch (getDvar("mapname")) {
       case "mp_interchange":
         if(var_3.origin[2] > 150.0) {
           var_4 = 0;
@@ -587,11 +587,11 @@ destructible_think() {
       continue;
     }
     if(common_scripts\utility::isSP()) {
-      if(isDefined(var_5) && isplayer(var_5))
+      if(isDefined(var_5) && isPlayer(var_5))
         self.damageOwner = var_5;
-    } else if(isDefined(var_5) && isplayer(var_5))
+    } else if(isDefined(var_5) && isPlayer(var_5))
       self.damageOwner = var_5;
-    else if(isDefined(var_5) && isDefined(var_5.gunner) && isplayer(var_5.gunner))
+    else if(isDefined(var_5) && isDefined(var_5.gunner) && isPlayer(var_5.gunner))
       self.damageOwner = var_5.gunner;
 
     var_7 = getDamageType(var_7);
@@ -643,7 +643,7 @@ is_shotgun_damage(var_0, var_1) {
 
   var_2 = undefined;
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     var_2 = var_0 getcurrentweapon();
   else if(isDefined(level.enable_ai_shotgun_destructible_damage) && level.enable_ai_shotgun_destructible_damage) {
     if(isDefined(var_0.weapon))
@@ -773,7 +773,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
       if(var_23) {
         if(isDefined(var_5)) {
-          if(isplayer(var_5))
+          if(isPlayer(var_5))
             self.player_damage = self.player_damage + var_0;
           else if(var_5 != self)
             self.non_player_damage = self.non_player_damage + var_0;
@@ -1211,7 +1211,7 @@ isAttackerValid(var_0, var_1, var_2) {
     return 1;
 
   if(var_3 == "no_player") {
-    if(!isplayer(var_2))
+    if(!isPlayer(var_2))
       return 1;
 
     if(!isDefined(var_2.damageIsFromPlayer))
@@ -1220,7 +1220,7 @@ isAttackerValid(var_0, var_1, var_2) {
     if(var_2.damageIsFromPlayer == 0)
       return 1;
   } else if(var_3 == "player_only") {
-    if(isplayer(var_2))
+    if(isPlayer(var_2))
       return 1;
 
     if(isDefined(var_2.damageIsFromPlayer) && var_2.damageIsFromPlayer)
@@ -1908,7 +1908,7 @@ get_player_touching(var_0) {
 }
 
 is_so() {
-  return getdvar("specialops") == "1";
+  return getDvar("specialops") == "1";
 }
 
 destructible_handles_collision_brushes() {

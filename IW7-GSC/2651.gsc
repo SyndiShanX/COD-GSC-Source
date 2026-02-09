@@ -469,7 +469,7 @@ laststandwaittillrevivebyteammate(var_0, var_1) {
     if(var_2 ismeleeing()) {
       continue;
     }
-    if(!isplayer(var_2) && !scripts\engine\utility::is_true(var_2.can_revive)) {
+    if(!isPlayer(var_2) && !scripts\engine\utility::is_true(var_2.can_revive)) {
       continue;
     }
     var_3 = getrevivetimescaler(var_2, var_0);
@@ -501,7 +501,7 @@ laststandwaittillrevivebyteammate(var_0, var_1) {
       record_revive_success(var_2, var_0);
       var_2 notify("revive_teammate", var_0);
 
-      if(isplayer(var_2) && scripts\engine\utility::is_true(var_2.can_give_revive_xp)) {
+      if(isPlayer(var_2) && scripts\engine\utility::is_true(var_2.can_give_revive_xp)) {
         var_2.can_give_revive_xp = 0;
         var_2 scripts\cp\cp_persistence::give_player_xp(int(250), 1);
       }
@@ -537,7 +537,7 @@ func_B529(var_0, var_1) {
 }
 
 record_revive_success(var_0, var_1) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\cp\cp_merits::processmerit("mt_reviver");
     var_0 scripts\cp\cp_persistence::increment_player_career_revives(var_0);
     var_0 scripts\cp\cp_merits::processmerit("mt_revives");
@@ -860,7 +860,7 @@ revive_use_hold_think(var_0, var_1, var_2, var_3) {
   var_5 = 0;
   enable_on_world_progress_bar_for_other_players(var_0, var_1);
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_0 notify("reviving");
   }
 
@@ -922,7 +922,7 @@ enter_revive_use_hold_think(var_0, var_1, var_2, var_3) {
   var_1 setclientomnvar("ui_securing", 3);
   var_0.being_revived = 1;
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 getweaponvariantattachments(var_2);
     var_1 getweaponrootname();
     var_1 scripts\cp\powers\coop_powers::power_disablepower();
@@ -942,7 +942,7 @@ wait_for_exit_revive_use_hold_think(var_0, var_1, var_2, var_3) {
 
   var_1.isreviving = 0;
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 stop_revive_gesture(var_1, var_3);
     var_1 setclientomnvar("ui_securing", 0);
     var_1 scripts\cp\powers\coop_powers::power_enablepower();

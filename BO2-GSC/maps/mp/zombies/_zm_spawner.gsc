@@ -60,7 +60,7 @@ init() {
     }
   }
 
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
 
   if(!isDefined(level.attack_player_thru_boards_range))
     level.attack_player_thru_boards_range = 109.8;
@@ -101,7 +101,7 @@ player_attacks_enemy(player, amount, type, point) {
 }
 
 player_attacker(attacker) {
-  if(isplayer(attacker))
+  if(isPlayer(attacker))
     return true;
 
   return false;
@@ -269,7 +269,7 @@ zombie_damage_failsafe() {
   while(true) {
     wait 0.5;
 
-    if(!isDefined(self.enemy) || !isplayer(self.enemy)) {
+    if(!isDefined(self.enemy) || !isPlayer(self.enemy)) {
       continue;
     }
     if(self istouching(self.enemy)) {
@@ -278,7 +278,7 @@ zombie_damage_failsafe() {
       if(!continue_failsafe_damage)
         wait 5;
 
-      if(!isDefined(self.enemy) || !isplayer(self.enemy) || self.enemy hasperk("specialty_armorvest")) {
+      if(!isDefined(self.enemy) || !isPlayer(self.enemy) || self.enemy hasperk("specialty_armorvest")) {
         continue;
       }
       if(self istouching(self.enemy) && !self.enemy maps\mp\zombies\_zm_laststand::player_is_in_laststand() && isalive(self.enemy)) {
@@ -694,8 +694,8 @@ do_a_taunt() {
   }
   self.old_origin = self.origin;
 
-  if(getdvar(#"_id_6896A7C3") == "")
-    setdvar("zombie_taunt_freq", "5");
+  if(getDvar(#"_id_6896A7C3") == "")
+    setDvar("zombie_taunt_freq", "5");
 
   freq = getdvarint(#"_id_6896A7C3");
 
@@ -733,8 +733,8 @@ should_attack_player_thru_boards() {
       return false;
   }
 
-  if(getdvar(#"_id_4A4203B1") == "")
-    setdvar("zombie_reachin_freq", "50");
+  if(getDvar(#"_id_4A4203B1") == "")
+    setDvar("zombie_reachin_freq", "50");
 
   freq = getdvarint(#"_id_4A4203B1");
   players = get_players();
@@ -1145,7 +1145,7 @@ damage_over_time(dmg, delay, attacker, means_of_death) {
   if(!isalive(self)) {
     return;
   }
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     attacker = self;
 
   if(!isDefined(means_of_death))
@@ -1167,7 +1167,7 @@ head_should_gib(attacker, type, point) {
   if(self.head_gibbed)
     return false;
 
-  if(!isDefined(attacker) || !isplayer(attacker))
+  if(!isDefined(attacker) || !isPlayer(attacker))
     return false;
 
   weapon = attacker getcurrentweapon();
@@ -1356,7 +1356,7 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
-    if(!isDefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isPlayer(attacker))
       return false;
 
     weapon = attacker getcurrentweapon();
@@ -1367,7 +1367,7 @@ zombie_should_gib(amount, attacker, type) {
     if(weaponisgasweapon(self.weapon))
       return false;
   } else if(type == "MOD_PROJECTILE") {
-    if(isDefined(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isPlayer(attacker)) {
       weapon = attacker getcurrentweapon();
 
       if(weapon == "slipgun_zm" || weapon == "slipgun_upgraded_zm")
@@ -1461,7 +1461,7 @@ zombie_delay_powerup_drop(origin) {
 }
 
 zombie_death_points(origin, mod, hit_location, attacker, zombie, team) {
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     return;
   }
   if(zombie_can_drop_powerups(zombie)) {
@@ -1861,7 +1861,7 @@ zombie_death_event(zombie) {
   if(!isDefined(zombie.damagehit_origin) && isDefined(attacker))
     zombie.damagehit_origin = attacker getweaponmuzzlepoint();
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(level.pers_upgrade_carpenter) && level.pers_upgrade_carpenter)
       maps\mp\zombies\_zm_pers_upgrades::pers_zombie_death_location_check(attacker, zombie.origin);
 
@@ -1956,7 +1956,7 @@ zombie_death_event(zombie) {
   if(!(isDefined(zombie.has_been_damaged_by_player) && zombie.has_been_damaged_by_player) && (isDefined(zombie.marked_for_recycle) && zombie.marked_for_recycle)) {
     level.zombie_total++;
     level.zombie_total_subtract++;
-  } else if(isDefined(zombie.attacker) && isplayer(zombie.attacker)) {
+  } else if(isDefined(zombie.attacker) && isPlayer(zombie.attacker)) {
     level.zombie_player_killed_count++;
 
     if(isDefined(zombie.sound_damage_player) && zombie.sound_damage_player == zombie.attacker) {
@@ -1996,7 +1996,7 @@ zombie_gut_explosion() {
 }
 
 zombie_death_achievement_sliquifier_check(e_player, e_zombie) {
-  if(!isplayer(e_player)) {
+  if(!isPlayer(e_player)) {
     return;
   }
   if(isDefined(e_zombie)) {

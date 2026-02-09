@@ -648,7 +648,7 @@ function_6ad96295(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -693,7 +693,7 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 }
 
 event_handler[change_seat] function_124469f4(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

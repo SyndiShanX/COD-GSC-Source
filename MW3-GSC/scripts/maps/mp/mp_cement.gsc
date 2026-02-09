@@ -6,7 +6,6 @@
 main() {
   if(!isDefined(level.func)) {
     level.func = [];
-
   }
   level.func["precacheMpAnim"] = ::precachempanim;
   level.func["scriptModelPlayAnim"] = ::scriptmodelplayanim;
@@ -18,14 +17,13 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_cement");
   maps\mp\_compass::setupminimap("compass_map_mp_cement");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.5");
+    setDvar("sm_sunShadowScale", "0.5");
   } else {
-    setdvar("sm_sunShadowScale", "0.8");
-
+    setDvar("sm_sunShadowScale", "0.8");
   }
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -40,7 +38,6 @@ main() {
 spawn_blocker_collision(var_0, var_1) {
   while(!isDefined(level.airdropcratecollision)) {
     wait 0.05;
-
   }
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("tag_origin");

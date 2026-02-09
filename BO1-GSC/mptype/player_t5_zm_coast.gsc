@@ -19,7 +19,6 @@ main() {
       break;
   }
 }
-
 precache() {
   character\c_zom_sarah_michelle_gellar_player::precache();
   character\c_zom_robert_englund_player::precache();

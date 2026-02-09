@@ -306,7 +306,8 @@ spawn_world_item(dropToGround, needPressXToUse) {
 
   self notify("spawned");
 
-  /#/ / debug
+  / /
+  debug
   if(getdvarint("debug_collectibles") == 1)
     maps\mp\alien\_debug::debug_collectible(self);
 
@@ -422,7 +423,6 @@ item_pickup_listener() {
       level waittill("alien_cycle_ended");
 
       self.data["respawn_count"]--;
-
     }
 
     return;
@@ -446,7 +446,7 @@ loot_pickup_listener(item_owner, touch) {
   while(true) {
     self.use_ent waittill("trigger", owner);
 
-    if(!isDefined(owner) || !isplayer(owner)) {
+    if(!isDefined(owner) || !isPlayer(owner)) {
       wait 0.05;
       continue;
     }
@@ -461,7 +461,7 @@ loot_pickup_listener(item_owner, touch) {
       continue;
     }
 
-    if(getdvarint("debug_collectibles") == 1 && isLoot && isDefined(item_owner) && item_owner != owner && isplayer(item_owner) && isplayer(owner)) {
+    if(getdvarint("debug_collectibles") == 1 && isLoot && isDefined(item_owner) && item_owner != owner && isPlayer(item_owner) && isPlayer(owner)) {
       IPrintLn(owner.name + " took " + item_owner.name + "'s loot [" + self.item_ref + "]");
     }
 
@@ -486,7 +486,7 @@ loot_pickup_timeout(owner, loot_timeout) {
 
   if(getdvarint("debug_collectibles") == 1) {
     player_name = "unknown player";
-    if(isDefined(owner) && isplayer(owner) && isDefined(owner.name))
+    if(isDefined(owner) && isPlayer(owner) && isDefined(owner.name))
       player_name = owner.name;
 
     iprintln(player_name + "'s loot [" + self.item_ref + "] timed out");
@@ -700,9 +700,7 @@ give_weapon(item, is_locker_weapon) {
         }
 
         if(isDefined(level.custom_give_weapon_func)) {
-          should_take_weapon_test = [
-            [level.custom_give_weapon_func]
-          ](max_primaries);
+          should_take_weapon_test = [[level.custom_give_weapon_func]](max_primaries);
           if(isDefined(should_take_weapon_test))
             should_take_weapon = should_take_weapon_test;
         }
@@ -761,7 +759,6 @@ give_weapon(item, is_locker_weapon) {
       self setLowerMessage("ammo_taken", &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
 
       self take_player_currency(cost, false, "weapon", weapon_ref);
-
     } else {
       if(!has_special_ammo) {
         self clearLowerMessage("ammo_warn");
@@ -1144,7 +1141,7 @@ explodeOnDamage(should_explode_on_hive_explode) {
       break;
     }
 
-    if(!isPlayer(attacker) && !isplayer(attacker.owner)) {
+    if(!isPlayer(attacker) && !isPlayer(attacker.owner)) {
       continue;
     }
     if(isDefined(type) && type == "MOD_MELEE") {

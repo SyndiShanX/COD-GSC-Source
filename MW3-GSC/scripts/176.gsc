@@ -6,7 +6,6 @@
 _id_15A1() {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   level._id_1456._id_1479 = spawnStruct();
   level._id_1456._id_1479._id_15A2 = [];
@@ -25,7 +24,6 @@ _id_15A7(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_1)) {
     var_8 = var_1;
-
   }
   var_9 = 2.0;
 
@@ -43,7 +41,6 @@ _id_15A7(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     var_10 = var_3;
-
   }
   _id_15AC(var_7["name"], var_8, var_9, var_10, var_4);
 }
@@ -58,7 +55,6 @@ _id_15A8(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   _id_15AD(var_1);
 }
@@ -72,7 +68,6 @@ _id_15AA() {
 
   if(_id_15A9()) {
     var_0 = _id_15AF(level._id_1456._id_1479._id_15A3);
-
   }
   return var_0;
 }
@@ -99,7 +94,6 @@ _id_15AC(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_5 = var_4;
-
   }
   if(var_0 == level._id_1456._id_1479._id_15A3 && !var_5) {
     return;
@@ -114,7 +108,6 @@ _id_15AC(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_9)) {
       var_10 = var_9["alias"];
-
     }
     maps\_audio_stream_manager::_id_1480(var_8["alias"], var_1, var_2, var_3, var_10);
   }

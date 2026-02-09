@@ -132,8 +132,8 @@ init() {
   level._zombie_gib_piece_index_head = 5;
   level._zombie_gib_piece_index_guts = 6;
   level._zombie_gib_piece_index_hat = 7;
-  setdvar(#"cg_healthperbar", 50);
-  setdvar(#"hash_52a4767bd6da84f1", 0);
+  setDvar(#"cg_healthperbar", 50);
+  setDvar(#"hash_52a4767bd6da84f1", 0);
   callback::add_callback(#"on_localclient_connect", &basic_player_connect);
   callback::on_spawned(&function_92f0c63);
   callback::on_spawned(&player_umbrahotfixes);
@@ -1105,13 +1105,13 @@ function_92f0c63(localclientnum) {
 laststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   function_92f0c63(localclientnum);
 
-  if(isplayer(self) && self function_21c0fa55() && !isdemoplaying()) {
+  if(isPlayer(self) && self function_21c0fa55() && !isdemoplaying()) {
     if(localclientnum === self getlocalclientnumber()) {
       self zm_audio::sndzmblaststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
     }
   }
 
-  if(isplayer(self) && self function_21c0fa55()) {
+  if(isPlayer(self) && self function_21c0fa55()) {
     controller_model = getuimodelforcontroller(localclientnum);
     laststand_model = createuimodel(controller_model, "ZMHud.lastStand");
     setuimodelvalue(laststand_model, newval);
@@ -1147,7 +1147,7 @@ function_a1ab192(var_6142f944, str_bundle) {
     return false;
   }
 
-  if(isplayer(self) || self function_21c0fa55() || isdemoplaying()) {
+  if(isPlayer(self) || self function_21c0fa55() || isdemoplaying()) {
     return false;
   }
 

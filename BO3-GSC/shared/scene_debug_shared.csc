@@ -19,7 +19,7 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   if(getdvarstring("", "") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   level thread run_scene_tests();
   level thread toggle_scene_menu();
@@ -53,7 +53,7 @@ function run_scene_tests() {
     str_scene = getdvarstring("");
     str_mode = tolower(getdvarstring("", ""));
     if(str_scene != "") {
-      setdvar("", "");
+      setDvar("", "");
       clear_old_ents(str_scene);
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "");
@@ -77,7 +77,7 @@ function run_scene_tests() {
     }
     str_scene = getdvarstring("");
     if(str_scene != "") {
-      setdvar("", "");
+      setDvar("", "");
       clear_old_ents(str_scene);
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "");
@@ -93,7 +93,7 @@ function run_scene_tests() {
     }
     str_scene = getdvarstring("");
     if(str_scene != "") {
-      setdvar("", "");
+      setDvar("", "");
       level stop(str_scene, 1);
     }
     wait(0.016);
@@ -109,7 +109,7 @@ function clear_old_ents(str_scene) {
 }
 
 function toggle_scene_menu() {
-  setdvar("", 0);
+  setDvar("", 0);
   n_scene_menu_last = -1;
   while(true) {
     n_scene_menu = getdvarstring("");
@@ -128,7 +128,7 @@ function toggle_scene_menu() {
           default: {
             level flagsys::clear("");
             level notify("scene_menu_cleanup");
-            setdvar("", 1);
+            setDvar("", 1);
           }
         }
         n_scene_menu_last = n_scene_menu;
@@ -166,7 +166,7 @@ function display_scene_menu(str_type) {
   level endon("scene_menu_cleanup");
   waittillframeend();
   level flagsys::set("");
-  setdvar("", 0);
+  setDvar("", 0);
   level thread display_mode();
   a_scenedefs = get_scenedefs(str_type);
   if(str_type == "") {
@@ -233,22 +233,22 @@ function display_scene_menu(str_type) {
       }
     }
     if(level.localplayers[0] buttonpressed("")) {
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("")) {
       if(names[selected] == "") {
-        setdvar("", 0);
+        setDvar("", 0);
       } else {
         if(is_scene_playing(names[selected])) {
-          setdvar("", names[selected]);
+          setDvar("", names[selected]);
         } else {
           if(is_scene_initialized(names[selected])) {
-            setdvar("", names[selected]);
+            setDvar("", names[selected]);
           } else {
             if(has_init_state(names[selected])) {
-              setdvar("", names[selected]);
+              setDvar("", names[selected]);
             } else {
-              setdvar("", names[selected]);
+              setDvar("", names[selected]);
             }
           }
         }

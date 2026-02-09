@@ -19,7 +19,7 @@ main() {
   thread clientscripts\mp\_audio::audio_init(0);
   thread clientscripts\mp\mp_raid_amb::main();
   setsaveddvar("compassmaxrange", "2100");
-  setdvar("tu7_cg_deathCamAboveWater", "8");
+  setDvar("tu7_cg_deathCamAboveWater", "8");
   waitforclient(0);
 
   println("*** Client : mp_raid running...");

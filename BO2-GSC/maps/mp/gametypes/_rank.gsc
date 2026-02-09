@@ -144,7 +144,7 @@ getcodpointscapped(incodpoints) {
 registerscoreinfo(type, value, label) {
   overridedvar = "scr_" + level.gametype + "_score_" + type;
 
-  if(getdvar(overridedvar) != "")
+  if(getDvar(overridedvar) != "")
     value = getdvarint(overridedvar);
 
   if(type == "kill") {

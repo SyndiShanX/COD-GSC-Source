@@ -1,6 +1,6 @@
 /***************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_spikemore.csc
+ * Script: clientscripts\_zombiemode_spikemore\.csc
 ***************************************************/
 
 #include clientscripts\_utility;
@@ -19,12 +19,10 @@ init() {
   level.spikemore_detectionDot = cos(level.spikemore_detectionAngle);
   level.spikemore_projectile_speed = 1500;
 }
-
 _set_recently_fired(origin, angles) {
   level.recent_spikemore_fire_origin = origin;
   level.recent_spikemore_fire_angels = angles;
 }
-
 spikemore_detonate(local_client_num, int_set, ent_new) {
   playSound(local_client_num, "wpn_spikemore_impact", self.origin);
   println("Client Spikemore detonate: " + local_client_num);
@@ -41,7 +39,6 @@ spikemore_detonate(local_client_num, int_set, ent_new) {
     }
   }
 }
-
 _spawn_spear(local_client_num, trace, angles) {
   dist = Distance(trace["position"], level.recent_spikemore_fire_origin);
   time = dist / level.spikemore_projectile_speed;
@@ -51,7 +48,6 @@ _spawn_spear(local_client_num, trace, angles) {
   e setModel("t5_weapon_bamboo_spear_spikemore_small");
   delayed_remove(e);
 }
-
 spikemore_add_spikes(local_client_num, int_set, ent_new) {
   println("Client Spikemore add spikes");
   j = [];
@@ -73,19 +69,16 @@ spikemore_add_spikes(local_client_num, int_set, ent_new) {
     self thread delayed_remove_or_ent_shutdown(e);
   }
 }
-
 spikemore_waittill_notify_or_timeout(msg, timer) {
   self endon(msg);
   wait(timer);
 }
-
 delayed_remove_or_ent_shutdown(ent) {
   self spikemore_waittill_notify_or_timeout("entityshutdown", 10);
   if(isDefined(ent)) {
     ent Delete();
   }
 }
-
 delayed_remove(ent) {
   wait(10.0);
   if(isDefined(ent)) {

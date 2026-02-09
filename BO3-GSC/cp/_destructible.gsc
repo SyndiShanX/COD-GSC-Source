@@ -164,7 +164,7 @@ function event_callback(destructible_event, attacker, weapon) {
       break;
     }
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker matchrecordincrementcheckpointstat(skipto::function_52c50cb8(), "destructibles_destroyed");
   }
   bb::logexplosionevent(self, attacker, destructible_event, explosion_radius);

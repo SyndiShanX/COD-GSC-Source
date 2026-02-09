@@ -142,7 +142,7 @@ start_carpenter(var_264cf1f9, var_ea1d8f06 = 1) {
   carp_ent waittill(#"sound_done");
 
   if(var_ea1d8f06) {
-    if(zm_powerups::function_cfd04802(#"carpenter") && isplayer(var_264cf1f9)) {
+    if(zm_powerups::function_cfd04802(#"carpenter") && isPlayer(var_264cf1f9)) {
       var_264cf1f9 zm_score::player_add_points("carpenter_powerup", 200, undefined, undefined, undefined, undefined, 1);
     } else {
       foreach(e_player in level.players) {

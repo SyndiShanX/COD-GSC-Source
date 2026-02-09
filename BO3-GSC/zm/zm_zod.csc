@@ -369,7 +369,7 @@ function devgui_lightning_test(localclientnum, oldval, newval, bnewent, binitial
 }
 
 function function_f650f42a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     if(!isDefined(self getlocalclientnumber()) || localclientnum == self getlocalclientnumber()) {
       return;
     }

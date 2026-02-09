@@ -28,7 +28,6 @@ _id_6506() {
 
   if(!maps\_utility::_id_0A36()) {
     maps\payback_fx_sp::_id_6504();
-
   }
   wait 2;
   thread maps\payback_sandstorm::_id_6509();
@@ -63,7 +62,6 @@ _id_650A() {
 
   if(!maps\_utility::_id_0A36()) {
     maps\payback_fx_sp::_id_6504();
-
   }
   wait 2;
   thread maps\payback_sandstorm::_id_6509();
@@ -346,7 +344,7 @@ _id_6520() {
   magicbullet("ak47", level._id_64A5 getEye() + (0, 0, 10), level._id_64A5 getEye());
   level._id_64A5 kill();
   wait 1;
-  setdvar("ui_deadquote", "@PAYBACK_NIKOLAI_KILLED");
+  setDvar("ui_deadquote", "@PAYBACK_NIKOLAI_KILLED");
   maps\_utility::_id_1826();
 }
 
@@ -531,7 +529,7 @@ _id_652E() {
       level.player enabledeathshield(0);
       level.player._id_652F = 0;
       level.player disableinvulnerability();
-      setdvar("ui_deadquote", "@PAYBACK_KEEP_UP");
+      setDvar("ui_deadquote", "@PAYBACK_KEEP_UP");
       magicbullet("ak47", level.player.origin + (0, 50, 200), level.player.origin);
       wait 0.05;
       magicbullet("ak47", level.player.origin + (0, 40, 220), level.player.origin);
@@ -559,7 +557,7 @@ _id_6530() {
   wait 7;
   level.player disableinvulnerability();
   wait 7;
-  setdvar("ui_deadquote", "@PAYBACK_KEEP_UP");
+  setDvar("ui_deadquote", "@PAYBACK_KEEP_UP");
   magicbullet("ak47", level.player.origin + (0, 50, 200), level.player.origin);
   wait 0.05;
   magicbullet("ak47", level.player.origin + (0, 40, 220), level.player.origin);
@@ -619,7 +617,6 @@ _id_6531() {
 
   if(!common_scripts\utility::flag("price_check_anim_ref_4")) {
     var_7 maps\_anim::_id_1247(level._id_4877, "payback_escape_forward_wave_right_price");
-
   }
   level._id_4877.goalradius = 64;
   level._id_4877 setgoalnode(var_8);
@@ -655,7 +652,6 @@ _id_6532() {
 
   if(!common_scripts\utility::flag("soap_check_anim_ref_2")) {
     var_1 maps\_anim::_id_1247(level._id_54E0, "payback_escape_turn_shoot_wave_soap");
-
   }
   var_2 maps\_anim::_id_124A(level._id_54E0, "payback_escape_hood_slide_soap");
 
@@ -668,13 +664,11 @@ _id_6532() {
 
   if(!common_scripts\utility::flag("soap_check_anim_ref_4")) {
     var_3 maps\_anim::_id_1247(level._id_54E0, "payback_escape_forward_wave_left_soap");
-
   }
   var_4 maps\_anim::_id_124A(level._id_54E0, "payback_escape_turn_shoot_wave_soap");
 
   if(!common_scripts\utility::flag("soap_check_anim_ref_5")) {
     var_4 maps\_anim::_id_1247(level._id_54E0, "payback_escape_turn_shoot_wave_soap");
-
   }
   level._id_54E0.goalradius = 64;
   level._id_54E0 setgoalnode(var_5);
@@ -835,7 +829,7 @@ _id_654A() {
   if(!common_scripts\utility::flag("player_in_escape_jeep")) {
     level.player disableinvulnerability();
     level.player enabledeathshield(0);
-    setdvar("ui_deadquote", "@PAYBACK_RUN_TO_JEEP");
+    setDvar("ui_deadquote", "@PAYBACK_RUN_TO_JEEP");
     magicbullet("ak47", level.player.origin + (0, 50, 200), level.player.origin);
     wait 0.05;
     magicbullet("ak47", level.player.origin + (0, 40, 220), level.player.origin);
@@ -863,7 +857,6 @@ _id_654B() {
 
     if(isalive(level._id_654C)) {
       level._id_654C maps\_vehicle::_id_2A11();
-
     }
     wait 1;
     objective_state(maps\_utility::_id_2816("obj_rescue"), "done");
@@ -906,7 +899,7 @@ _id_654F() {
   if(!common_scripts\utility::flag("player_in_escape_jeep")) {
     level.player disableinvulnerability();
     level.player enabledeathshield(0);
-    setdvar("ui_deadquote", "@PAYBACK_RUN_TO_JEEP");
+    setDvar("ui_deadquote", "@PAYBACK_RUN_TO_JEEP");
     magicbullet("ak47", level.player.origin + (0, 50, 200), level.player.origin);
     wait 0.05;
     magicbullet("ak47", level.player.origin + (0, 40, 220), level.player.origin);
@@ -1100,7 +1093,6 @@ _id_6562() {
 
   if(!isDefined(level._id_64A5)) {
     maps\payback_util::_id_594A("nikolai", "s3_rescue_nikolai");
-
   }
   level._id_64A5 maps\_utility::_id_1057();
   level._id_64A5._id_0D68 = 1;
@@ -1137,7 +1129,6 @@ _id_6563() {
 
       while(level.player istouching(var_0) && level.player worldpointinreticle_circle(level._id_64A5.origin, var_1, 120)) {
         wait 0.5;
-
       }
       level.player enableweapons();
       setsaveddvar("objectiveHide", 0);
@@ -1157,7 +1148,6 @@ _id_6564() {
 
       while(level.player istouching(var_0)) {
         wait 0.05;
-
       }
       level.player._id_20F2._id_22FC = 0.1;
     }
@@ -1184,7 +1174,6 @@ _id_6565(var_0, var_1) {
 
       while(level.player istouching(var_0) && level.player worldpointinreticle_circle(var_1.origin, var_2, 160)) {
         wait 0.05;
-
       }
       level.player.ignoreme = 1;
       level.player enabledeathshield(1);
@@ -1376,7 +1365,7 @@ _id_6571() {
   common_scripts\utility::flag_wait("carry_warn");
   level thread maps\_utility::_id_11F4(var_1);
   common_scripts\utility::flag_wait("carry_kill");
-  setdvar("ui_deadquote", "@PAYBACK_STAY_WITH_TEAM");
+  setDvar("ui_deadquote", "@PAYBACK_STAY_WITH_TEAM");
   maps\_utility::_id_1826();
 }
 
@@ -1405,7 +1394,6 @@ _id_6573(var_0) {
 
   if(isDefined(level.stance_carry)) {
     level.stance_carry destroy();
-
   }
   setsaveddvar("hud_showStance", "0");
   level.stance_carry = newhudelem();
@@ -1425,7 +1413,6 @@ _id_6573(var_0) {
 _id_6574() {
   if(isDefined(level.stance_carry)) {
     level.stance_carry destroy();
-
   }
   setsaveddvar("hud_showStance", "1");
 }
@@ -1575,7 +1562,6 @@ _id_6580() {
         if(!isDefined(self._id_164F) || self._id_164F != "force") {
           while(vectordot(vectornormalize(var_0.origin - level.player.origin), anglesToForward(level.player.angles)) > 0.5) {
             wait 0.1;
-
           }
           magicbullet("rpg_straight", var_0.origin, var_1.origin);
         }
@@ -1590,7 +1576,6 @@ _id_6581(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     if(!isDefined(var_1)) {
       var_1 = "rescue_protect_from_rpg_till";
-
     }
     var_0 thread maps\_utility::_id_1424(var_1, var_2);
   }
@@ -1599,7 +1584,6 @@ _id_6581(var_0, var_1, var_2) {
     var_0 waittill(var_1);
   } else {
     return;
-
   }
   missile_deleteattractor(var_3);
 }

@@ -66,7 +66,7 @@ on_player_killed() {
 
   attacker = self.laststandparams.attacker;
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 

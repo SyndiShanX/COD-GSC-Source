@@ -8,6 +8,7 @@
 #include maps\_zombiemode_utility;
 #include maps\_zombiemode_net;
 #using_animtree("generic_human");
+
 init() {
   if(!maps\_zombiemode_weapons::is_weapon_included("thundergun_zm")) {
     return;
@@ -34,14 +35,12 @@ init() {
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "left_arm";
   level thread thundergun_on_player_connect();
 }
-
 thundergun_on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
     player thread wait_for_thundergun_fired();
   }
 }
-
 wait_for_thundergun_fired() {
   self endon("disconnect");
   self waittill("spawned_player");
@@ -56,7 +55,6 @@ wait_for_thundergun_fired() {
     }
   }
 }
-
 thundergun_fired() {
   PhysicsExplosionCylinder(self.origin, 600, 240, 1);
   if(!isDefined(level.thundergun_knockdown_enemies)) {
@@ -77,7 +75,6 @@ thundergun_fired() {
   level.thundergun_fling_enemies = [];
   level.thundergun_fling_vecs = [];
 }
-
 thundergun_get_enemies_in_range() {
   view_pos = self GetWeaponMuzzlePoint();
   zombies = get_array_of_closest(view_pos, GetAiSpeciesArray("axis", "all"), undefined, undefined, level.zombie_vars["thundergun_knockdown_range"]);
@@ -95,7 +92,7 @@ thundergun_get_enemies_in_range() {
       continue;
     }
     test_origin = zombies[i] getcentroid();
-    test_range_squared = distanceSquared(view_pos, test_origin);
+    test_range_squared = DistanceSquared(view_pos, test_origin);
     if(test_range_squared > knockdown_range_squared) {
       zombies[i] thundergun_debug_print("range", (1, 0, 0));
       return;
@@ -107,7 +104,7 @@ thundergun_get_enemies_in_range() {
       continue;
     }
     radial_origin = PointOnSegmentNearestToPoint(view_pos, end_pos, test_origin);
-    if(distanceSquared(test_origin, radial_origin) > cylinder_radius_squared) {
+    if(DistanceSquared(test_origin, radial_origin) > cylinder_radius_squared) {
       zombies[i] thundergun_debug_print("cylinder", (1, 0, 0));
       continue;
     }
@@ -137,7 +134,6 @@ thundergun_get_enemies_in_range() {
     }
   }
 }
-
 thundergun_debug_print(msg, color) {}
 thundergun_fling_zombie(player, fling_vec, index) {
   if(!isDefined(self) || !IsAlive(self)) {
@@ -161,7 +157,6 @@ thundergun_fling_zombie(player, fling_vec, index) {
     self.thundergun_death = true;
   }
 }
-
 thundergun_knockdown_zombie(player, gib) {
   self endon("death");
   playsoundatposition("vox_thundergun_forcehit", self.origin);
@@ -180,22 +175,18 @@ thundergun_knockdown_zombie(player, gib) {
   self.thundergun_handle_pain_notetracks = ::handle_thundergun_pain_notetracks;
   self DoDamage(level.zombie_vars["thundergun_knockdown_damage"], player.origin, player);
 }
-
 handle_thundergun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
     playFX(level._effect["thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), AnglesToUp(self.angles));
     self playSound("fly_thundergun_forcehit");
   }
 }
-
 is_thundergun_damage() {
   return isDefined(self.damageweapon) && (self.damageweapon == "thundergun_zm" || self.damageweapon == "thundergun_upgraded_zm");
 }
-
 enemy_killed_by_thundergun() {
   return (isDefined(self.thundergun_death) && self.thundergun_death == true);
 }
-
 thundergun_sound_thread() {
   self endon("disconnect");
   self waittill("spawned_player");
@@ -208,11 +199,10 @@ thundergun_sound_thread() {
       self playLoopSound("tesla_idle", 0.25);
     } else {
       self notify("weap_away");
-      self stopLoopSound(0.25);
+      self StopLoopSound(0.25);
     }
   }
 }
-
 setup_thundergun_vox(player, fling, gib, knockdown) {
   if(!isDefined(self) || !IsAlive(self)) {
     return;

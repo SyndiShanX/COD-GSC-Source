@@ -19,14 +19,12 @@ main()
 	// define a filter and give it a name
 	// or use one of the presets( see _equalizer.gsc )
 	// arguments are: name, band, type, freq, gain, q
-	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-	// maps\_equalizer::defineFilter( "test", 0, "lowshelf", 3000, 6, 2 );
+	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // maps\_equalizer::defineFilter( "test", 0, "lowshelf", 3000, 6, 2 );
 	// maps\_equalizer::defineFilter( "test", 1, "highshelf", 3000, -12, 2 );
 	// maps\_equalizer::defineFilter( "test", 2, "bell", 1500, 6, 3 );
 	
 	// attach the filter to a region and channel
-	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-	add_channel_to_filter( track, channel )	
+	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- add_channel_to_filter( track, channel )	
 
 		
 	ambientDelay( "exterior", 1.3, 3.4 );// Trackname, min and max delay between ambient events
@@ -347,7 +345,6 @@ use_eq_settings(track, eqIndex) {
     }
   }
 
-  /#	
   set_hud_track("eq_" + eqIndex, track);
 }
 
@@ -479,7 +476,7 @@ ambient_trigger() {
     ambience = tokens[0];
     for(;;) {
       self waittill("trigger", other);
-      assertEx(isplayer(other), "Non - player entity touched an ambient trigger.");
+      assertEx(isPlayer(other), "Non - player entity touched an ambient trigger.");
       set_ambience_single(ambience);
     }
   }
@@ -515,7 +512,7 @@ ambient_trigger() {
 
   for(;;) {
     self waittill("trigger", other);
-    assertEx(isplayer(other), "Non - player entity touched an ambient trigger.");
+    assertEx(isPlayer(other), "Non - player entity touched an ambient trigger.");
 
     progress = undefined;
     while(other istouching(self)) {
@@ -533,7 +530,7 @@ ambient_trigger() {
 
     // when you leave the trigger set it to whichever point it was closest too
     // or to the inner_ambience( usually "exterior" ) if self.targetname == "ambient_exit"if(progress > cap)
-      progress = 1;
+    progress = 1;
     else
       progress = 0;
 
@@ -553,7 +550,7 @@ ambient_end_trigger_think(start, end, dist, inner_ambience, outer_ambience) {
   self endon("death");
   for(;;) {
     self waittill("trigger", other);
-    assertEx(isplayer(other), "Non - player entity touched an ambient trigger.");
+    assertEx(isPlayer(other), "Non - player entity touched an ambient trigger.");
     ambient_trigger_sets_ambience_levels(start, end, dist, inner_ambience, outer_ambience);
   }
 }
@@ -844,7 +841,6 @@ clear_hud(msg) {
   foreach(hud in level.amb_hud[msg]) {
     hud.alpha = 0;
   }
-
 }
 
 ambience_hud(progress) {
@@ -860,7 +856,7 @@ ambience_hud(progress) {
 }
 
 debug_hud_disabled() {
-  if(getdvar("loc_warnings", 0) == "1")
+  if(getDvar("loc_warnings", 0) == "1")
     return true;
   if(getdvarint("debug_hud"))
     return true;
@@ -926,5 +922,4 @@ hud_hide_with_cg_draw_hud() {
       }
     }
   }
-
 }

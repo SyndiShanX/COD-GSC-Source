@@ -924,9 +924,9 @@ func_D1A1() {
 
 func_4EED() {
   self endon("player_exit_jackal");
-  setdvar("scr_givejackal", "none");
-  setdvar("scr_jackalDemigod", 0);
-  var_0 = getdvar("scr_givejackal");
+  setDvar("scr_givejackal", "none");
+  setDvar("scr_jackalDemigod", 0);
+  var_0 = getDvar("scr_givejackal");
 
   for(;;) {
     wait 0.5;
@@ -934,7 +934,7 @@ func_4EED() {
     if(!scripts\sp\utility::func_D123()) {
       continue;
     }
-    var_1 = getdvar("scr_givejackal");
+    var_1 = getDvar("scr_givejackal");
     var_1 = tolower(var_1);
 
     if(var_1 == var_0) {

@@ -13,12 +13,10 @@ main() {
   }
   build_unload_groups(::unload_groups);
 }
-
 #using_animtree("tank");
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("vehicles");
 set_vehicle_anims_ultimate(positions) {
   positions[0].sittag = "tag_driver";
@@ -31,12 +29,13 @@ set_vehicle_anims_ultimate(positions) {
   positions[1].vehicle_getoutanim = % v_jeep_passenger_door_open;
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
-  for(i = 0; i < 4; i++)
+  for(i = 0; i < 4; i++) {
     positions[i] = spawnStruct();
+  }
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
   positions[2].sittag = "tag_passenger2";
@@ -103,7 +102,6 @@ setanims() {
   positions[3].getin_fast = % crew_jeep1_passenger3_climbin_fast;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

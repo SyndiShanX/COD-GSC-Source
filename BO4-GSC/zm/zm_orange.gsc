@@ -146,7 +146,7 @@ event_handler[level_init] main(eventstruct) {
   level zm_orange_trophies::init();
   level zm_orange_trials::preload();
   load::main();
-  setdvar(#"zombie_unlock_all", 0);
+  setDvar(#"zombie_unlock_all", 0);
   level.zones = [];
   level.zone_manager_init_func = &zm_orange_zones::zone_init;
   init_zones[0] = "docks_1";

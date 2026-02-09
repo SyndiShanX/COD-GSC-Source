@@ -30,7 +30,7 @@ onspawn(watcher, player) {
     retrievable_model.targetname = "sticky_weapon";
 
     if(isDefined(prey)) {
-      if(level.teambased && isplayer(prey) && player.team == prey.team)
+      if(level.teambased && isPlayer(prey) && player.team == prey.team)
         isfriendly = 1;
       else if(level.teambased && isai(prey) && player.team == prey.aiteam)
         isfriendly = 1;
@@ -100,7 +100,7 @@ onspawnretrievetrigger(watcher, player) {
   vec_scale = 10;
   trigger_pos = [];
 
-  if(isDefined(prey) && (isplayer(prey) || isai(prey))) {
+  if(isDefined(prey) && (isPlayer(prey) || isai(prey))) {
     trigger_pos[0] = prey.origin[0];
     trigger_pos[1] = prey.origin[1];
     trigger_pos[2] = prey.origin[2] + vec_scale;

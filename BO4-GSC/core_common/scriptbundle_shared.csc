@@ -119,7 +119,6 @@ class cscriptbundlebase {
   }
 
   function on_error(e) {}
-
 }
 
 error_on_screen(str_msg) {

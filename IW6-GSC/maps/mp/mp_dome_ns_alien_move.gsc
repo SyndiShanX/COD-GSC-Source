@@ -361,7 +361,6 @@ HandleFootstepNotetracks(note, animState, animIndex, animTime) {
         moveType = "run";
 
       self PlaySoundOnMovingEnt("alien_minion_footstep");
-
     }
 
     return true;

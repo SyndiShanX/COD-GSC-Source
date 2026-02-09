@@ -321,7 +321,7 @@ enemy_corpse_alert_level() {
   else
     var_0 = common_scripts\utility::random(level.players);
 
-  if(!isDefined(var_0._stealth) && !isplayer(var_0)) {
+  if(!isDefined(var_0._stealth) && !isPlayer(var_0)) {
     return;
   }
   if(!isDefined(var_0._stealth.logic.spotted_list[self.unique_id]))

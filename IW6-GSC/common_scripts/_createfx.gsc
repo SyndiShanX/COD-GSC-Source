@@ -66,7 +66,7 @@ createLoopSound() {
   ent.v["angles"] = (0, 0, 0);
   ent.v["origin"] = (0, 0, 0);
   ent.v["server_culled"] = 1;
-  if(getdvar("serverCulledSounds") != "1")
+  if(getDvar("serverCulledSounds") != "1")
     ent.v["server_culled"] = 0;
   ent.drawn = true;
   return ent;
@@ -229,9 +229,9 @@ createFxLogic() {
     level._effect = [];
   }
 
-  if(GetDvar("createfx_map") == "") {
+  if(getDvar("createfx_map") == "") {
     SetDevDvar("createfx_map", get_template_level());
-  } else if(GetDvar("createfx_map") == get_template_level()) {
+  } else if(getDvar("createfx_map") == get_template_level()) {
     [[level.func_position_player]]();
   }
 
@@ -247,10 +247,10 @@ createFxLogic() {
   SetDevDvar("fx", "nil");
   SetDevDvar("select_by_substring", "");
 
-  if(GetDvar("createfx_use_f4") == "")
+  if(getDvar("createfx_use_f4") == "")
     SetDevDvar("createfx_use_f4", "0");
 
-  if(GetDvar("createfx_no_autosave") == "")
+  if(getDvar("createfx_no_autosave") == "")
     SetDevDvar("createfx_no_autosave", "0");
 
   level.createfx_draw_enabled = true;
@@ -417,7 +417,6 @@ handle_selected_ents(changedSelectedEnts) {
 
       if(level.selectedRotate_pitch != 0 || level.selectedRotate_yaw != 0 || level.selectedRotate_roll != 0)
         changedSelectedEnts = true;
-
     } else {
       set_tool_hudelem("Mode:", "move");
       selectedMove_vector = get_selected_move_vector();
@@ -480,7 +479,6 @@ modify_rate() {
     } else {
       level._createfx.rate += 0.1;
     }
-
   } else if(button_is_clicked("-")) {
     if(shift_held) {
       level._createfx.rate -= 1;
@@ -965,7 +963,6 @@ draw_axis() {
   if(isDefined(self.v["soundalias"])) {
     DrawSoundShape(self.v["origin"], self.v["angles"], self.v["soundalias"], (1, 0, 1), 1);
   }
-
 }
 
 draw_cross() {
@@ -1527,7 +1524,6 @@ add_button(name) {
     if(level.player buttonPressed(name)) {
       level.buttonIsHeld[name] = true;
       level.buttonClick[name] = true;
-
     }
   } else {
     if(!level.player buttonPressed(name)) {
@@ -1756,12 +1752,12 @@ set_tool_hudelem(var, value) {
 }
 
 select_by_substring() {
-  substring = GetDvar("select_by_substring");
+  substring = getDvar("select_by_substring");
   if(substring == "") {
     return false;
   }
 
-  SetDvar("select_by_substring", "");
+  setDvar("select_by_substring", "");
 
   index_array = [];
   foreach(i, ent in level.createFXent) {

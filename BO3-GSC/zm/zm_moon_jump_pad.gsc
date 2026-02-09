@@ -438,7 +438,7 @@ function moon_jump_pad_cushion_sound_init() {
 function moon_jump_pad_cushion_play_sound() {
   while(isDefined(self)) {
     self waittill("trigger", who);
-    if(isplayer(who) && (isDefined(who._padded) && who._padded)) {
+    if(isPlayer(who) && (isDefined(who._padded) && who._padded)) {
       self playSound("evt_jump_pad_land");
     }
   }

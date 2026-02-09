@@ -206,17 +206,17 @@ delayThread_proc(func, timer, param1, param2, param3, param4) {
   if(isDefined(param4)) {
     thread[[func]](param1, param2, param3, param4);
   } else {
-  if(isDefined(param3)) {
-    thread[[func]](param1, param2, param3);
-  }
+    if(isDefined(param3)) {
+      thread[[func]](param1, param2, param3);
+    }
   } else {
-  if(isDefined(param2)) {
-    thread[[func]](param1, param2);
-  }
+    if(isDefined(param2)) {
+      thread[[func]](param1, param2);
+    }
   } else {
-  if(isDefined(param1)) {
-    thread[[func]](param1);
-  }
+    if(isDefined(param1)) {
+      thread[[func]](param1);
+    }
   } else {
     thread[[func]]();
   }
@@ -383,17 +383,17 @@ function_stack_proc(caller, func, param1, param2, param3, param4) {
     if(isDefined(param4)) {
       caller[[func]](param1, param2, param3, param4);
     } else {
-    if(isDefined(param3)) {
-      caller[[func]](param1, param2, param3);
-    }
+      if(isDefined(param3)) {
+        caller[[func]](param1, param2, param3);
+      }
     } else {
-    if(isDefined(param2)) {
-      caller[[func]](param1, param2);
-    }
+      if(isDefined(param2)) {
+        caller[[func]](param1, param2);
+      }
     } else {
-    if(isDefined(param1)) {
-      caller[[func]](param1);
-    }
+      if(isDefined(param1)) {
+        caller[[func]](param1);
+      }
     } else {
       caller[[func]]();
     }

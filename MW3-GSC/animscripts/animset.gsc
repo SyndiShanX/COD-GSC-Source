@@ -91,10 +91,10 @@ _id_0C6C() {
   anim._id_0C68["add_aim_right"] = % pistol_stand_aim_6_add;
   anim._id_0C68["straight_level"] = % pistol_stand_aim_5;
   anim._id_0C68["fire"] = % pistol_stand_fire_a;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % pistol_stand_fire_a);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % pistol_stand_reload_a);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%pistol_stand_fire_a);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%pistol_stand_reload_a);
   anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D();
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
   _id_0C8A();
   anim._id_0C68["add_turn_aim_up"] = % pistol_stand_aim_8_alt;
   anim._id_0C68["add_turn_aim_down"] = % pistol_stand_aim_2_alt;
@@ -111,10 +111,10 @@ _id_0C6F() {
   anim._id_0C68["add_aim_right"] = % rpg_stand_aim_6;
   anim._id_0C68["straight_level"] = % rpg_stand_aim_5;
   anim._id_0C68["fire"] = % rpg_stand_fire;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % exposed_shoot_semi1);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % rpg_stand_reload);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%exposed_shoot_semi1);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%rpg_stand_reload);
   anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D();
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % rpg_stand_idle);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%rpg_stand_idle);
   _id_0C8D();
   _id_0C8B();
   _id_0C92();
@@ -129,11 +129,11 @@ _id_0C71() {
   anim._id_0C68["add_aim_right"] = % shotgun_aim_6;
   anim._id_0C68["straight_level"] = % shotgun_aim_5;
   anim._id_0C68["fire"] = % exposed_shoot_auto_v3;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % shotgun_stand_fire_1a, % shotgun_stand_fire_1b);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%shotgun_stand_fire_1a, %shotgun_stand_fire_1b);
   _id_0C8E();
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % shotgun_stand_reload_a, % shotgun_stand_reload_b, % shotgun_stand_reload_c, % shotgun_stand_reload_c, % shotgun_stand_reload_c);
-  anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D( % shotgun_stand_reload_a, % shotgun_stand_reload_b);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%shotgun_stand_reload_a, %shotgun_stand_reload_b, %shotgun_stand_reload_c, %shotgun_stand_reload_c, %shotgun_stand_reload_c);
+  anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D(%shotgun_stand_reload_a, %shotgun_stand_reload_b);
   _id_0C8D();
   _id_0C8B();
   _id_0C92();
@@ -148,11 +148,11 @@ _id_0C73() {
   anim._id_0C68["add_aim_right"] = % cqb_stand_aim6;
   anim._id_0C68["straight_level"] = % cqb_stand_aim5;
   anim._id_0C68["fire"] = % exposed_shoot_auto_v3;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % exposed_shoot_semi1);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%exposed_shoot_semi1);
   _id_0C8E();
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % cqb_stand_reload_steady);
-  anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D( % cqb_stand_reload_knee);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%cqb_stand_reload_steady);
+  anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D(%cqb_stand_reload_knee);
   _id_0C8D();
   _id_0C8B();
   _id_0C92();
@@ -167,10 +167,10 @@ _id_0C75() {
   anim._id_0C68["add_aim_right"] = % heat_stand_aim_6;
   anim._id_0C68["straight_level"] = % heat_stand_aim_5;
   anim._id_0C68["fire"] = % heat_stand_fire_auto;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % heat_stand_fire_single);
-  _id_0C8F( % heat_stand_fire_burst);
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % heat_stand_idle, % heat_stand_scana, % heat_stand_scanb);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % heat_exposed_reload);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%heat_stand_fire_single);
+  _id_0C8F(%heat_stand_fire_burst);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%heat_stand_idle, %heat_stand_scana, %heat_stand_scanb);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%heat_exposed_reload);
   anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D();
   _id_0C8D();
   anim._id_0C68["turn_left_45"] = % heat_stand_turn_l;
@@ -193,12 +193,12 @@ _id_0C77() {
   anim._id_0C68["add_aim_right"] = % exposed_aim_6;
   anim._id_0C68["straight_level"] = % exposed_aim_5;
   anim._id_0C68["fire"] = % exposed_shoot_auto_v3;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % exposed_shoot_semi1);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%exposed_shoot_semi1);
   _id_0C8E();
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
-  anim._id_0C68["exposed_grenade"] = animscripts\utility::_id_0C6D( % exposed_grenadethrowb, % exposed_grenadethrowc);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % exposed_reload);
-  anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D( % exposed_reloadb);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
+  anim._id_0C68["exposed_grenade"] = animscripts\utility::_id_0C6D(%exposed_grenadethrowb, %exposed_grenadethrowc);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%exposed_reload);
+  anim._id_0C68["reload_crouchhide"] = animscripts\utility::_id_0C6D(%exposed_reloadb);
   _id_0C8D();
   _id_0C8B();
   _id_0C92();
@@ -213,10 +213,10 @@ _id_0C79() {
   anim._id_0C68["add_aim_right"] = % exposed_crouch_aim_6;
   anim._id_0C68["straight_level"] = % exposed_crouch_aim_5;
   anim._id_0C68["fire"] = % exposed_crouch_shoot_auto_v2;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % exposed_crouch_shoot_semi1);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%exposed_crouch_shoot_semi1);
   _id_0C90();
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % exposed_crouch_reload);
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%exposed_crouch_reload);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
   _id_0C8D();
   _id_0C8C();
   _id_0C93();
@@ -231,9 +231,9 @@ _id_0C7B() {
   anim._id_0C68["add_aim_right"] = % rpg_crouch_aim_6;
   anim._id_0C68["straight_level"] = % rpg_crouch_aim_5;
   anim._id_0C68["fire"] = % rpg_crouch_fire;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % rpg_crouch_fire);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % rpg_crouch_reload);
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % rpg_crouch_idle);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%rpg_crouch_fire);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%rpg_crouch_reload);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%rpg_crouch_idle);
   _id_0C8D();
   _id_0C8C();
   _id_0C93();
@@ -248,10 +248,10 @@ _id_0C7D() {
   anim._id_0C68["add_aim_right"] = % exposed_crouch_aim_6;
   anim._id_0C68["straight_level"] = % exposed_crouch_aim_5;
   anim._id_0C68["fire"] = % exposed_crouch_shoot_auto_v2;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % shotgun_crouch_fire);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%shotgun_crouch_fire);
   _id_0C90();
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % shotgun_crouch_reload);
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%shotgun_crouch_reload);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
   _id_0C8D();
   _id_0C8C();
   _id_0C93();
@@ -266,8 +266,8 @@ _id_0C7F() {
   anim._id_0C68["add_aim_right"] = % prone_aim_6_add;
   anim._id_0C68["straight_level"] = % prone_aim_5;
   anim._id_0C68["fire"] = % prone_fire_1;
-  anim._id_0C68["single"] = animscripts\utility::_id_0C6D( % prone_fire_1);
-  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D( % prone_reload);
+  anim._id_0C68["single"] = animscripts\utility::_id_0C6D(%prone_fire_1);
+  anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(%prone_reload);
   anim._id_0C68["burst2"] = % prone_fire_burst;
   anim._id_0C68["burst3"] = % prone_fire_burst;
   anim._id_0C68["burst4"] = % prone_fire_burst;
@@ -277,7 +277,7 @@ _id_0C7F() {
   anim._id_0C68["semi3"] = % prone_fire_burst;
   anim._id_0C68["semi4"] = % prone_fire_burst;
   anim._id_0C68["semi5"] = % prone_fire_burst;
-  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D( % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3);
+  anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
   _id_0C8D();
   anim._id_0C65._id_0C80 = anim._id_0C68;
 }
@@ -291,7 +291,6 @@ _id_0C83(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     anim._id_0C68["straight_level"] = var_1;
-
   }
   if(isDefined(var_0)) {
     anim._id_0C68["fire"] = var_0;
@@ -301,7 +300,6 @@ _id_0C83(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(var_2);
-
   }
   if(isDefined(var_3)) {
     anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(var_3);
@@ -326,11 +324,9 @@ _id_0C86(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     anim._id_0C68["exposed_idle"] = animscripts\utility::_id_0C6D(var_1);
-
   }
   if(isDefined(var_2)) {
     anim._id_0C68["reload"] = animscripts\utility::_id_0C6D(var_2);
-
   }
   self._id_0C85 = anim._id_0C68;
 }
@@ -467,7 +463,6 @@ _id_0C94() {
 _id_0C99() {
   if(animscripts\utility::_id_0C95()) {
     animscripts\shared::_id_0C9B(self.primaryweapon, "right");
-
   }
   if(isDefined(self._id_0C85)) {
     self.a._id_0C6D = self._id_0C85;
@@ -483,7 +478,6 @@ _id_0C99() {
 _id_0C9C() {
   if(animscripts\utility::_id_0C95()) {
     animscripts\shared::_id_0C9B(self.primaryweapon, "right");
-
   }
   self.a._id_0C6D = anim._id_0C65._id_0C80;
 }
@@ -525,7 +519,6 @@ _id_0CA5() {
 _id_0CA7() {
   if(self.weapon != self.primaryweapon) {
     return animscripts\utility::_id_0CA8("reload");
-
   }
   if(isDefined(self.node)) {
     if(self nearclaimnodeandangle()) {
@@ -535,7 +528,6 @@ _id_0CA7() {
         var_0 = % heat_cover_reload_r;
       } else if(self.node.type == "Cover Right") {
         var_0 = % heat_cover_reload_l;
-
       }
       if(isDefined(var_0)) {
         return var_0;

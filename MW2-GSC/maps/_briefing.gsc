@@ -10,7 +10,7 @@ MISSION BRIEFING
 main() {
   setsaveddvar("hud_drawhud", 0);
 
-  level.script = tolower(getdvar("mapname"));
+  level.script = tolower(getDvar("mapname"));
   if(!isDefined(level.tmpmsg))
     level.tmpmsg = [];
 
@@ -149,7 +149,6 @@ start(fFadeTime) {
     } else if(soundplaying) {
       self waittill(level.slide[i]["dialog"] + "sounddone");
     }
-
   }
 }
 

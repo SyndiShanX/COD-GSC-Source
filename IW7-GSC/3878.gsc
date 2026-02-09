@@ -288,7 +288,7 @@ func_117C6() {
     foreach(var_8, var_6 in self.var_10E6D.var_729B) {
       if(var_2 < var_6.end && issentient(var_6.ent) && !self cansee(var_6.ent)) {
         var_7 = self func_84E9(var_6.ent);
-        if(isplayer(var_6.ent)) {
+        if(isPlayer(var_6.ent)) {
           var_6.ent thread func_117D0(1, max(var_6.ent.var_10E6D.var_B4CB, var_7));
         }
 

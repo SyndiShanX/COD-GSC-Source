@@ -283,7 +283,7 @@ function_db610082() {
 }
 
 function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebcb86d6, var_b85996d4, var_159ce525, var_ddd319d6, var_d2314927) {
-  var_8d3f5b7d = isalive(attacker) && isplayer(attacker);
+  var_8d3f5b7d = isalive(attacker) && isPlayer(attacker);
   var_201ce857 = var_8d3f5b7d && attacker zm_powerups::is_insta_kill_active();
   var_84ed9a13 = function_de3dda83(var_5457dc44, hitloc, point, var_ebcb86d6);
   registerzombie_bgb_used_reinforce = isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1;
@@ -360,7 +360,7 @@ function_de3dda83(var_5457dc44, hitloc, point, var_ebcb86d6) {
 }
 
 function_a2e8fd7b(entity, player, var_3f120c4d = 4) {
-  assert(isplayer(player), "<dev string:x67>");
+  assert(isPlayer(player), "<dev string:x67>");
 
   if(getdvarint(#"zm_zone_pathing", 1)) {
     zone_path = zm_zonemgr::function_54fc7938(player, entity);

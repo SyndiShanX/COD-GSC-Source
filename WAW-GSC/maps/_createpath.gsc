@@ -434,7 +434,7 @@ path_delete() {
     if(i != level.path_selectindex) {
       newarray[newarray.size] = level.path_views[level.path_selectid][i];
     }
-  level.path_views = newarray;
+    level.path_views = newarray;
   }
   flag_set("path_refresh");
   setDvar("path_delete", "");

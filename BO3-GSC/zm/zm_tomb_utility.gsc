@@ -34,38 +34,38 @@
 #namespace zm_tomb_utility;
 
 function setup_devgui() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   execdevgui("");
   zm_devgui::add_custom_devgui_callback(&zombie_devgui_tomb);
   adddebugcommand("");
@@ -149,12 +149,12 @@ function function_23eb2509() {
     if(getdvarstring("") != "") {
       n_zone = int(getdvarstring(""));
       level notify("force_zone_capture", n_zone);
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") != "") {
       n_zone = int(getdvarstring(""));
       level notify("force_zone_recapture", n_zone);
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }
@@ -164,7 +164,7 @@ function function_6f935c89() {
   while(true) {
     if(getdvarstring("") == "") {
       zm_tomb_capture_zones::function_b0debead();
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }
@@ -199,7 +199,7 @@ function function_d88b52e6() {
       level flag::set("");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
@@ -208,7 +208,7 @@ function function_d88b52e6() {
       level waittill("hash_e6967d42");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
@@ -217,7 +217,7 @@ function function_d88b52e6() {
       level waittill("hash_4c5352e3");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
@@ -234,7 +234,7 @@ function function_d88b52e6() {
       level waittill("hash_7bcf8600");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
@@ -244,7 +244,7 @@ function function_d88b52e6() {
       level waittill("hash_4f3f0441");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
@@ -253,7 +253,7 @@ function function_d88b52e6() {
       level waittill("hash_8b0d379e");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
@@ -262,7 +262,7 @@ function function_d88b52e6() {
       level waittill("hash_ee01811f");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "" || getdvarstring("") == "") {
@@ -271,13 +271,13 @@ function function_d88b52e6() {
       level waittill("hash_7f00c03c");
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
       level waittill("hash_738ebd3d");
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }
@@ -291,12 +291,12 @@ function watch_devgui_complete_puzzles() {
       level flag::set("");
       level flag::set("");
       level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
       level notify("open_all_gramophone_doors");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
@@ -308,78 +308,78 @@ function watch_devgui_complete_puzzles() {
       level flag::set("");
       level flag::set("");
       level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
-      setdvar("", "");
-    }
-    if(getdvarstring("") == "") {
-      level flag::set("");
-      level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
       level flag::set("");
-      level flag::set("");
-      setdvar("", "");
-    }
-    if(getdvarstring("") == "") {
-      level flag::set("");
-      setdvar("", "");
-    }
-    if(getdvarstring("") == "") {
-      level flag::set("");
-      level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
       level flag::set("");
       level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
-      setdvar("", "");
-    }
-    if(getdvarstring("") == "") {
-      level flag::set("");
-      level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
       level flag::set("");
-      level flag::set("");
-      setdvar("", "");
-    }
-    if(getdvarstring("") == "") {
-      level flag::set("");
-      setdvar("", "");
-    }
-    if(getdvarstring("") == "") {
-      level flag::set("");
-      level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
       level flag::set("");
       level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       level flag::set("");
-      setdvar("", "");
+      setDvar("", "");
+    }
+    if(getdvarstring("") == "") {
+      level flag::set("");
+      level flag::set("");
+      setDvar("", "");
+    }
+    if(getdvarstring("") == "") {
+      level flag::set("");
+      level flag::set("");
+      level flag::set("");
+      setDvar("", "");
+    }
+    if(getdvarstring("") == "") {
+      level flag::set("");
+      setDvar("", "");
+    }
+    if(getdvarstring("") == "") {
+      level flag::set("");
+      level flag::set("");
+      setDvar("", "");
+    }
+    if(getdvarstring("") == "") {
+      level flag::set("");
+      level flag::set("");
+      level flag::set("");
+      setDvar("", "");
+    }
+    if(getdvarstring("") == "") {
+      level flag::set("");
+      setDvar("", "");
     }
     if(getdvarstring("") == "") {
       zm_tomb_teleporter::stargate_teleport_enable(1);
       zm_tomb_teleporter::stargate_teleport_enable(2);
       zm_tomb_teleporter::stargate_teleport_enable(3);
       zm_tomb_teleporter::stargate_teleport_enable(4);
-      setdvar("", "");
+      setDvar("", "");
       level flag::set("");
     }
     wait(0.5);
@@ -1137,7 +1137,7 @@ function rotate_skydome() {
     if(level.sky_rotation < 0) {
       level.sky_rotation = level.sky_rotation + 360;
     }
-    setdvar("r_skyRotation", level.sky_rotation);
+    setDvar("r_skyRotation", level.sky_rotation);
     wait(0.1);
   }
 }

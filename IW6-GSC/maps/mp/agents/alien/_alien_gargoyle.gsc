@@ -601,7 +601,7 @@ handlestunnotetracks(var_0, var_1, var_2, var_3) {
 stun_enemy(var_0) {
   var_1 = 3.0;
 
-  if(isplayer(var_0) && isalive(var_0))
+  if(isPlayer(var_0) && isalive(var_0))
     maps\mp\agents\alien\_alien_melee::melee_dodamage(var_0, "swipe");
 }
 

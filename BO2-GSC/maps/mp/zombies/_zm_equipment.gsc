@@ -617,7 +617,6 @@ equipment_drop(equipment) {
     equipment_drop_to_planted(equipment, self);
 
     println("ZM EQUIPMENT: " + self.name + " drop to planted " + equipment + "\\n");
-
   } else if(isDefined(level.zombie_equipment[equipment].drop_fn)) {
     if(isDefined(self.current_equipment) && self.current_equipment == equipment)
       self equipment_to_deployed(equipment);
@@ -633,7 +632,6 @@ equipment_drop(equipment) {
     }
 
     println("ZM EQUIPMENT: " + self.name + " dropped " + equipment + "\\n");
-
   } else
     self equipment_take();
 
@@ -1278,7 +1276,6 @@ debughealth() {
 
     wait 0.05;
   }
-
 }
 
 item_choke() {
@@ -1392,8 +1389,8 @@ attack_item(item) {
   self thread attack_item_stop(item);
   self thread attack_item_interrupt(item);
 
-  if(getdvar(#"_id_FA9CEAA6") == "")
-    setdvar("zombie_equipment_attack_freq", "15");
+  if(getDvar(#"_id_FA9CEAA6") == "")
+    setDvar("zombie_equipment_attack_freq", "15");
 
   freq = getdvarint(#"_id_FA9CEAA6");
   self.doing_equipment_attack = 1;

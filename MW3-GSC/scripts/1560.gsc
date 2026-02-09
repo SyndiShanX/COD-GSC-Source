@@ -39,7 +39,6 @@ _id_3E0F() {
 
     if(isDefined(level._id_3BF5["ai"])) {
       var_6 = level._id_3BF5["ai"];
-
     }
     if(var_6 == 0) {
       continue;
@@ -67,7 +66,6 @@ _id_3E0F() {
 
       if(var_1 >= var_0.size) {
         var_1 = 0;
-
       }
       continue;
     }
@@ -78,7 +76,6 @@ _id_3E0F() {
 
       if(var_3 >= var_2.size) {
         var_3 = 0;
-
       }
       continue;
     } else {
@@ -115,7 +112,6 @@ _id_3E12() {
 
     if(isDefined(level._id_3BF3)) {
       var_1 = level._id_3BF3.origin;
-
     }
     var_2 = maps\_utility::_id_0AE9(var_1, var_0);
     var_3 = var_2.origin;
@@ -143,7 +139,6 @@ _id_3E14(var_0) {
 
   if(!isDefined(var_0.type)) {
     var_0.type = "";
-
   }
   var_1 = var_0.duration;
   var_2 = 0.15;
@@ -164,26 +159,22 @@ _id_3E14(var_0) {
 
   if(isDefined(var_0._id_3E1C)) {
     self._id_3E15 setvalue(var_0._id_3E1C);
-
   }
   self._id_3E15 setpulsefx(int(5 * var_1), int(var_1 * 1000), 1000);
   var_4 = self._id_3E15.font;
 
   if(isDefined(var_0._id_3E1D)) {
     self._id_3E15.font = var_0._id_3E1D;
-
   }
   var_5 = var_0._id_3E1B;
 
   if(isDefined(var_0._id_3E1E)) {
     self._id_3E15.label = var_0._id_3E1E;
-
   }
   var_6 = self._id_3E15.basefontscale;
 
   if(isDefined(var_0._id_3E1F)) {
     self._id_3E15.basefontscale = var_0._id_3E1F;
-
   }
   var_7 = self._id_3E15.glowcolor;
   var_8 = self._id_3E15.glowalpha;
@@ -216,19 +207,16 @@ _id_3E14(var_0) {
 
     if(isDefined(var_0._id_3E22)) {
       self._id_3E16 setvalue(var_0._id_3E22);
-
     }
     var_11 = self._id_3E16.font;
 
     if(isDefined(var_0._id_3E23)) {
       self._id_3E16.font = var_0._id_3E23;
-
     }
     var_12 = self._id_3E16.basefontscale;
 
     if(isDefined(var_0._id_3E24)) {
       self._id_3E16.basefontscale = var_0._id_3E24;
-
     }
     if(isDefined(var_0._id_3E25) && (!isstring(var_0._id_3E25) || var_0._id_3E25 != "")) {
       var_3[var_3.size] = self._id_3E17;
@@ -313,7 +301,6 @@ _id_3E14(var_0) {
     maps\_utility::_id_25E4(var_0._id_3E32, var_1);
   } else {
     wait(var_1);
-
   }
   if(isDefined(var_0._id_3E33)) {
     foreach(var_14 in var_3) {}
@@ -342,11 +329,9 @@ _id_3E14(var_0) {
 
   if(isDefined(var_11)) {
     self._id_3E16.font = var_11;
-
   }
   if(isDefined(var_12)) {
     self._id_3E16.basefontscale = var_12;
-
   }
   self._id_12C6 = 0;
 }
@@ -366,7 +351,6 @@ _id_3E36() {
       }
     } else {
       var_3 = 10;
-
     }
     var_4 = 0;
     var_5 = "objective";
@@ -558,7 +542,6 @@ transitionreset() {
     self.label = &"";
   } else if(self.elemtype == "icon") {
     self setshader(self.shader, self.width, self.height);
-
   }
   self.alpha = 0;
 }
@@ -595,7 +578,6 @@ transitionpulsefxin(var_0, var_1) {
 transitionslidein(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = "left";
-
   }
   switch (var_1) {
     case "left":
@@ -620,7 +602,6 @@ transitionslidein(var_0, var_1) {
 transitionslideout(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = "left";
-
   }
   var_2 = self.xoffset;
   var_3 = self.yoffset;
@@ -729,7 +710,6 @@ _id_3E3B(var_0) {
     self.grenadeweapon = "flash_grenade";
   } else {
     self.grenadeweapon = "fraggrenade";
-
   }
   self.grenadeammo = 2;
   self._id_20B5 = 1;
@@ -767,11 +747,9 @@ _id_3E3C() {
 _id_0A32() {
   if(isDefined(self._id_0A33) && self._id_0A33) {
     return 1;
-
   }
   if(!isDefined(self.damagelocation)) {
     return 0;
-
   }
   return self.damagelocation == "helmet" || self.damagelocation == "head" || self.damagelocation == "neck";
 }
@@ -791,15 +769,12 @@ _id_3DE1(var_0, var_1) {
 
   if(isDefined(var_3)) {
     var_2._id_2189 = var_3;
-
   }
   while(isDefined(var_2._id_2973)) {
     wait 0.05;
-
   }
   if(isDefined(var_1)) {
     var_2.origin = var_1;
-
   }
   var_4 = maps\_vehicle::_id_2A99(var_0);
   return var_4;
@@ -842,7 +817,6 @@ _id_3DCE(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3._id_2511 = var_1;
-
   }
   maps\_utility::_id_2683(var_3);
   return var_3;
@@ -888,7 +862,6 @@ _id_3E3E(var_0, var_1, var_2) {
       case "script_unload":
         while(!isDefined(var_9._id_2954)) {
           var_9 = common_scripts\utility::getstruct(var_9.target, "targetname");
-
         }
         if(!isDefined(var_9._id_2954)) {
           continue;
@@ -897,7 +870,6 @@ _id_3E3E(var_0, var_1, var_2) {
       case "script_stopnode":
         while(!isDefined(var_9._id_295D)) {
           var_9 = common_scripts\utility::getstruct(var_9.target, "targetname");
-
         }
         if(!isDefined(var_9._id_295D)) {
           continue;
@@ -1046,11 +1018,9 @@ _id_3E46() {
 _id_3E48(var_0, var_1, var_2) {
   if(!isDefined(level._id_3E47)) {
     level._id_3E47 = [];
-
   }
   if(!isDefined(level._id_3E49)) {
     level._id_3E49 = [];
-
   }
   var_3 = self.origin + var_0 + (0, 0, var_1);
   var_4 = self.origin + var_0;

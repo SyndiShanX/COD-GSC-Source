@@ -341,7 +341,7 @@ loadout_clearweapons() {
   resetactionslots();
   resetfunctionality();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     scripts\mp\killstreaks\emp_common::func_E24E();
   }
 }
@@ -1495,7 +1495,7 @@ giveloadout(var_0, var_1, var_2) {
 loadout_giveextraweapons(var_0) {}
 
 func_AE38(var_0, var_1) {
-  if(!isplayer(self) && !isalive(self)) {
+  if(!isPlayer(self) && !isalive(self)) {
     return;
   }
   if(getdvarint("com_codcasterEnabled", 0) == 1) {

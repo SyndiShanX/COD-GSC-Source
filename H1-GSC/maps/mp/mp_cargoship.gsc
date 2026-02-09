@@ -16,10 +16,10 @@ main() {
   game["axis_soldiertype"] = "woodland";
   thread animated_cranes();
   thread animated_boats_precache();
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_tonemapHighlightRange", 0);
-  setdvar("compassmaxrange", "2100");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_tonemapHighlightRange", 0);
+  setDvar("compassmaxrange", "2100");
   misc_rotate_fans();
   maps\mp\_fx_trigger::main();
 

@@ -1230,7 +1230,7 @@ huditemshide() {
   if(level.players.size > 0) {
     for(var_0 = 0; var_0 < level.players.size; var_0++) {
       if(isDefined(level.players[var_0].using_uav) && level.players[var_0].using_uav)
-        setdvar("ui_remotemissile_playernum", var_0 + 1);
+        setDvar("ui_remotemissile_playernum", var_0 + 1);
     }
   } else {
     setsaveddvar("compass", "0");
@@ -1241,7 +1241,7 @@ huditemshide() {
 
 huditemsshow() {
   if(level.players.size > 0)
-    setdvar("ui_remotemissile_playernum", 0);
+    setDvar("ui_remotemissile_playernum", 0);
   else {
     setsaveddvar("compass", "1");
     setsaveddvar("ammoCounterHide", "0");
@@ -1317,7 +1317,7 @@ draw_target() {
       target_setshader(self, "remotemissile_infantry_target_2plr");
     else
       target_setshader(self, "remotemissile_infantry_target");
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     if(isDefined(self.is_controlling_uav) && self.is_controlling_uav)
       target_setshader(self, "hud_fofbox_self_sp");
     else {}

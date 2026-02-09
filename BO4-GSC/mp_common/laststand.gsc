@@ -56,8 +56,8 @@ __init__() {
   level thread revive_hud_think();
   level.var_91c33dcb = getscriptbundle(#"finishers");
 
-  if(!isDefined(getdvar(#"revive_trigger_radius"))) {
-    setdvar(#"revive_trigger_radius", 100);
+  if(!isDefined(getDvar(#"revive_trigger_radius"))) {
+    setDvar(#"revive_trigger_radius", 100);
   }
 
   callback::on_spawned(&on_player_spawned);
@@ -70,7 +70,7 @@ __init__() {
 
   level thread force_last_stand();
 
-  setdvar(#"g_revivetime", getgametypesetting(#"laststandrevivetime"));
+  setDvar(#"g_revivetime", getgametypesetting(#"laststandrevivetime"));
 }
 
 function_feb3e91d() {
@@ -214,7 +214,7 @@ function_dc7906e8(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   self.var_bfc8055f.attackernum = isDefined(attacker) ? attacker getentitynumber() : -1;
   self.laststandparams.attackerorigin = attacker.origin;
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     self.laststandparams.attackerangles = attacker getplayerangles();
   } else {
     self.laststandparams.attackerangles = attacker.angles;
@@ -277,7 +277,7 @@ function_463b3f65() {
     if(getdvarstring(#"scr_last_stand", "<dev string:x38>") == "<dev string:x3b>") {
       self notify(#"auto_revive");
       waittillframeend();
-      setdvar(#"scr_last_stand", "<dev string:x38>");
+      setDvar(#"scr_last_stand", "<dev string:x38>");
       return;
     }
 
@@ -298,12 +298,12 @@ force_last_stand() {
       trace = bulletTrace(eye, eye + dir, 1, host);
       target = trace[# "entity"];
 
-      if(!isDefined(target) || !isplayer(target)) {
+      if(!isDefined(target) || !isPlayer(target)) {
         target = host;
       }
 
       target dodamage(target.health, target.origin);
-      setdvar(#"scr_last_stand", "<dev string:x38>");
+      setDvar(#"scr_last_stand", "<dev string:x38>");
     }
 
     wait 0.1;
@@ -402,7 +402,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
 
   obituary(self, attacker, level.weaponnone, "MOD_DOWNED");
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(util::function_fbce7263(attacker.team, self.team) && !function_7afe7d1e(attacker, self)) {
       scoreevents::processscoreevent(#"downed_enemy", attacker, self, weapon);
     }
@@ -552,7 +552,7 @@ laststand_bleedout_damage() {
       self.var_1cc38de0 = 1;
       vattacker = isDefined(waitresult.eattacker) ? waitresult.eattacker : self;
       self.var_a1d415ee = {
-        #einflictor: waitresult.einflictor, #attacker: waitresult.eattacker, #attackerorigin: vattacker.origin, #attackerangles: isplayer(vattacker) ? vattacker getplayerangles() : vattacker.angles, #idamage: waitresult.idamage, #smeansofdeath: waitresult.smeansofdeath, #sweapon: waitresult.weapon, #vdir: waitresult.vdir, #shitloc: waitresult.shitloc, #matchtime: function_f8d53445()
+        #einflictor: waitresult.einflictor, #attacker: waitresult.eattacker, #attackerorigin: vattacker.origin, #attackerangles: isPlayer(vattacker) ? vattacker getplayerangles() : vattacker.angles, #idamage: waitresult.idamage, #smeansofdeath: waitresult.smeansofdeath, #sweapon: waitresult.weapon, #vdir: waitresult.vdir, #shitloc: waitresult.shitloc, #matchtime: function_f8d53445()
       };
       self notify(#"update_bleedout");
     }
@@ -655,7 +655,7 @@ bleed_out() {
     self suicide();
   }
 
-  if(getdvarint(#"hash_62b8db0428755a32", 1) && isplayer(self)) {
+  if(getdvarint(#"hash_62b8db0428755a32", 1) && isPlayer(self)) {
     var_d7e063c = getdvarfloat(#"hash_44de9418bb6289ac", 1.5);
     self playsoundtoplayer(#"hash_11d39dca0f911535", self);
     self lui::screen_fade(var_d7e063c, 1, 0, "black", 0);
@@ -1074,7 +1074,7 @@ revive_do_revive(playerbeingrevived) {
   playerbeingrevived.revivetrigger.beingrevived = 1;
   playerbeingrevived.revivetrigger sethintstring("");
 
-  if(isplayer(playerbeingrevived)) {
+  if(isPlayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
   }
 
@@ -1133,7 +1133,7 @@ revive_do_revive(playerbeingrevived) {
     }
 
     if(!(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive) && !revived) {
-      if(isplayer(playerbeingrevived)) {
+      if(isPlayer(playerbeingrevived)) {
         playerbeingrevived stoprevive(self);
       }
     }
@@ -1215,7 +1215,7 @@ auto_revive(reviver) {
 }
 
 revive_success(reviver, b_track_stats = 1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self notify(#"player_revived", {
       #reviver: reviver
     });
@@ -1236,7 +1236,7 @@ revive_success(reviver, b_track_stats = 1) {
     potm::bookmark(#"player_revived", gettime(), reviver, self);
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self allowjump(1);
   }
 
@@ -1332,7 +1332,7 @@ faderevivemessageover(playertorevive, time) {
 }
 
 function_ecdd4b27() {
-  if(!isplayer(self) || isDefined(self.var_d75a6ff5)) {
+  if(!isPlayer(self) || isDefined(self.var_d75a6ff5)) {
     return;
   }
 
@@ -1342,7 +1342,7 @@ function_ecdd4b27() {
 }
 
 function_1e8018b0() {
-  if(!isplayer(self) || !isDefined(self.var_d75a6ff5)) {
+  if(!isPlayer(self) || !isDefined(self.var_d75a6ff5)) {
     return;
   }
 

@@ -10,10 +10,10 @@ main() {
   level func_D80C();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_rivet");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraaccurateocclusionthreshold", 500);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraaccurateocclusionthreshold", 500);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -205,7 +205,7 @@ func_D80C() {
 }
 
 func_E563() {
-  if(getdvar("r_reflectionProbeGenerate") != "1") {
+  if(getDvar("r_reflectionProbeGenerate") != "1") {
     level thread func_FA3A();
     level thread func_F03C();
     level thread func_1DA5();
@@ -474,7 +474,7 @@ func_6D22() {
 
       if(scripts\mp\utility::isreallyalive(var_0)) {
         var_0 dodamage(var_0.maxhealth, self.origin, var_0, undefined, "MOD_EXPLOSIVE");
-        if(isplayer(var_0) || isagent(var_0)) {
+        if(isPlayer(var_0) || isagent(var_0)) {
           thread func_57D4(var_0 func_8113());
         }
       }

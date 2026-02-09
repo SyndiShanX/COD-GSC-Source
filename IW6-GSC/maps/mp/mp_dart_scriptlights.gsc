@@ -252,7 +252,6 @@ mp_dart_generic_flicker() {
           if(isDefined(self.unlit_models)) {
             foreach(unlit_model in self.unlit_models) {
               unlit_model hide();
-
             }
           }
         }

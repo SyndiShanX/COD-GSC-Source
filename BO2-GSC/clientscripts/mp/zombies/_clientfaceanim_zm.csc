@@ -29,9 +29,9 @@ init_clientfaceanim() {
 }
 
 doface(localclientnum) {
-  if(self isplayer()) {
+  if(self isPlayer()) {
     while(true) {
-      if(self isplayer()) {
+      if(self isPlayer()) {
         self thread processfaceevents(localclientnum);
         self waittill("respawn");
 

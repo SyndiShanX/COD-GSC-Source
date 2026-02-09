@@ -188,7 +188,7 @@ func_E24D(var_0, var_1, var_2, var_3) {
     } else {
       if(isDefined(var_0.target)) {
         var_8 = var_0.target.origin;
-        if(isplayer(var_0.target)) {
+        if(isPlayer(var_0.target)) {
           var_7 = var_0.target getvelocity();
           if(var_7 == (0, 0, 0)) {
             var_7 = undefined;
@@ -236,7 +236,7 @@ func_E24D(var_0, var_1, var_2, var_3) {
 func_36DA(var_0) {
   if(isDefined(self.var_45E2.var_45DA) && gettime() - self.var_45E2.var_45DA >= 100) {
     var_1 = gettime() - self.var_45E2.var_45DA;
-    if(isDefined(var_0.target) && isplayer(var_0.target)) {
+    if(isDefined(var_0.target) && isPlayer(var_0.target)) {
       self func_857A("lock");
     } else {
       self func_857A("interpolate");
@@ -260,7 +260,7 @@ func_36DA(var_0) {
 
   var_6 = var_5 * self.var_45E2.var_45DC - self.var_45E2.var_45DB + self.var_45E2.var_45DB;
   var_4 = var_2.pos + self.var_45E2.var_45DE * var_6;
-  if(isDefined(var_1.target) && isplayer(var_1.target)) {
+  if(isDefined(var_1.target) && isPlayer(var_1.target)) {
     self func_857A("interpolate");
   }
 
@@ -313,7 +313,7 @@ func_45E5(var_0) {
   } else if(scripts\engine\utility::istrue(self.var_45E2.var_103A6)) {
     self func_857A("interpolate");
     self.var_45E2.var_103A6 = undefined;
-    if(isDefined(var_0.target) && isplayer(var_0.target) && self cansee(var_0.target)) {
+    if(isDefined(var_0.target) && isPlayer(var_0.target) && self cansee(var_0.target)) {
       func_E24D(var_0, var_2, undefined, 1);
     }
   }

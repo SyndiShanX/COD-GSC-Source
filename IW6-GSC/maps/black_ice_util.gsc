@@ -33,7 +33,7 @@ fire_death_watcher(var_0, var_1) {
 
     if(isDefined(var_1) && var_1.classname != "worldspawn") {
       if(var_1 == level._fire_damage_ent && self.health - var_0 <= 0) {
-        setdvar("ui_deadquote", &"BLACK_ICE_DEATH_FIRE");
+        setDvar("ui_deadquote", &"BLACK_ICE_DEATH_FIRE");
         maps\_utility::missionfailedwrapper();
       }
     }
@@ -656,7 +656,7 @@ ai_stairs_proc(var_0, var_1) {
   self endon("death");
   self.instairstrig = 1;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     thread maps\_utility::blend_movespeedscale(0.6);
   else {
     if(!isDefined(var_1) && isDefined(self.cqbwalking)) {
@@ -669,7 +669,7 @@ ai_stairs_proc(var_0, var_1) {
   }
 
   while(self istouching(var_0)) {
-    if(isplayer(self) && !isDefined(self.stairs_low_speed)) {
+    if(isPlayer(self) && !isDefined(self.stairs_low_speed)) {
       var_2 = common_scripts\utility::getclosest(self.origin, level._allies, 128);
 
       if(isDefined(var_2) && common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_2.origin, 0)) {
@@ -681,7 +681,7 @@ ai_stairs_proc(var_0, var_1) {
     wait 0.05;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(self.stairs_low_speed))
       thread maps\_utility::blend_movespeedscale_default(0.4);
     else

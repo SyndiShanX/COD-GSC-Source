@@ -76,7 +76,7 @@ function function_89f596d9() {
 }
 
 function function_171499d7(params) {
-  if(isplayer(params.eattacker) && !isvehicle(self)) {
+  if(isPlayer(params.eattacker) && !isvehicle(self)) {
     if(params.einflictor.targetname === "destructible") {
       params.eattacker accolades::increment("MISSION_AQUIFER_CHALLENGE10");
     }
@@ -88,7 +88,7 @@ function function_6be65617(params) {
     callback::remove_on_ai_killed(&function_6be65617);
     return;
   }
-  if(isplayer(params.eattacker) && !isvehicle(self) && level flag::get("destroy_defenses2")) {
+  if(isPlayer(params.eattacker) && !isvehicle(self) && level flag::get("destroy_defenses2")) {
     if(isDefined(params.eattacker.pvtol) && params.eattacker islinkedto(params.eattacker.pvtol)) {
       params.eattacker accolades::increment("MISSION_AQUIFER_CHALLENGE11");
     }
@@ -96,7 +96,7 @@ function function_6be65617(params) {
 }
 
 function function_c7122e75(params) {
-  if(isplayer(params.eattacker) && !isvehicle(self) && self.team !== "allies") {
+  if(isPlayer(params.eattacker) && !isvehicle(self) && self.team !== "allies") {
     if(isDefined(params.eattacker.pvtol) && params.eattacker islinkedto(params.eattacker.pvtol)) {
       params.eattacker function_c27610f9("aq_thirty_kill_vtol", &function_b49b24ca);
     }
@@ -108,7 +108,7 @@ function function_b49b24ca() {
 }
 
 function function_9cda9485(params) {
-  if(isplayer(params.eattacker) && isDefined(self.archetype) && self.archetype == "hunter") {
+  if(isPlayer(params.eattacker) && isDefined(self.archetype) && self.archetype == "hunter") {
     if(isDefined(params.eattacker.pvtol) && params.eattacker islinkedto(params.eattacker.pvtol)) {
       params.eattacker function_c27610f9("aq_three_hunters_vtol", &function_ff25056a);
     }
@@ -130,7 +130,7 @@ function function_a8831ac1() {
 }
 
 function function_5ae2cb8a(params) {
-  if(isplayer(params.eattacker) && isDefined(self.archetype) && self.archetype == "quadtank") {
+  if(isPlayer(params.eattacker) && isDefined(self.archetype) && self.archetype == "quadtank") {
     if(isDefined(params.weapon) && params.weapon.name != "vtol_fighter_player_turret") {
       level.var_67a0c1e2 = 1;
     }
@@ -142,7 +142,7 @@ function function_282c46db() {
 }
 
 function function_eab778af(params) {
-  if(isplayer(params.eattacker) && !isvehicle(self)) {
+  if(isPlayer(params.eattacker) && !isvehicle(self)) {
     if(isDefined(params.eattacker.pvtol) && params.eattacker islinkedto(params.eattacker.pvtol) && params.weapon.type == "projectile") {
       if(!isDefined(params.eattacker.var_be2c6b19) || params.eattacker.var_be2c6b19 != gettime()) {
         params.eattacker.var_be2c6b19 = gettime();
@@ -161,7 +161,7 @@ function function_a3f650bc() {
 }
 
 function function_e3e41d63(params) {
-  if(isplayer(params.eattacker) && !isvehicle(self)) {
+  if(isPlayer(params.eattacker) && !isvehicle(self)) {
     player = params.eattacker;
     if(isDefined(player.var_2aec500b)) {
       return;
@@ -263,7 +263,7 @@ function function_dcb19e2a() {
 }
 
 function function_3718be07(params) {
-  if(isplayer(params.eattacker) && (self.targetname == "res_vtol1_vh" || self.targetname == "res_vtol2_vh" || self.targetname == "port_vtol1_vh" || self.targetname == "port_vtol2_vh" || self.targetname == "lcombat_dropoff_vtol_vh")) {
+  if(isPlayer(params.eattacker) && (self.targetname == "res_vtol1_vh" || self.targetname == "res_vtol2_vh" || self.targetname == "port_vtol1_vh" || self.targetname == "port_vtol2_vh" || self.targetname == "lcombat_dropoff_vtol_vh")) {
     level function_c27610f9("aq_vtol_drop_block");
   }
 }

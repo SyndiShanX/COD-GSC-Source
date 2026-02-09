@@ -82,7 +82,6 @@ class cluielemimage: cluielem {
     cluielem::add_clientfield("blue", 1, 4, "float", bluecallback);
     cluielem::function_dcb34c80("material", "material", 1);
   }
-
 }
 
 register(uid, xcallback, ycallback, widthcallback, heightcallback, fadeovertimecallback, alphacallback, redcallback, greencallback, bluecallback, materialcallback) {

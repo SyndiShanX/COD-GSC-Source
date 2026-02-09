@@ -5,10 +5,10 @@
 
 init() {
   precacheshader("damage_feedback_thin");
-  setdvar("scr_damagefeedback", "1");
+  setDvar("scr_damagefeedback", "1");
 
-  if(getdvar("scr_damagefeedback") == "") {
-    setdvar("scr_damagefeedback", "0");
+  if(getDvar("scr_damagefeedback") == "") {
+    setDvar("scr_damagefeedback", "0");
   }
 
   if(!getdvarint("scr_damagefeedback", 0)) {
@@ -38,7 +38,7 @@ func_4D4C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   if(!getdvarint("scr_damagefeedback", 0)) {
     return;
   }
-  if(!isDefined(var_1) || !isplayer(var_1) && !var_1 func_9EF8() || var_1 == self || var_0 <= 0) {
+  if(!isDefined(var_1) || !isPlayer(var_1) && !var_1 func_9EF8() || var_1 == self || var_0 <= 0) {
     return;
   }
   var_10 = "standard";
@@ -81,7 +81,7 @@ func_4D4B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
 }
 
 updatedamagefeedback(var_0, var_1, var_2, var_3, var_4) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!isDefined(var_3)) {

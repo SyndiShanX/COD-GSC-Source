@@ -324,7 +324,7 @@ func_B6EB() {
 
 func_B6EC() {
   var_0 = weaponfiretime("micro_turret_gun_mp");
-  if(isDefined(self.var_1A4A) && isplayer(self.var_1A4A)) {
+  if(isDefined(self.var_1A4A) && isPlayer(self.var_1A4A)) {
     level thread scripts\mp\battlechatter_mp::saytoself(self.var_1A4A, "plr_killstreak_target");
   }
 
@@ -412,7 +412,7 @@ func_B722() {
 
 func_B704() {
   var_0 = func_B6FD();
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     thread func_B705(var_0);
   }
 
@@ -582,7 +582,7 @@ func_B714(var_0) {
   var_1 = undefined;
   var_2 = physics_createcontents(["physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_ainosight", "physicscontents_sky"]);
   var_3 = self gettagorigin("tag_dummy");
-  if(isplayer(var_0) || isagent(var_0) && !scripts\mp\utility::func_9F72(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0) && !scripts\mp\utility::func_9F72(var_0)) {
     var_4 = "j_spine4";
     var_5 = var_0 gettagorigin(var_4);
     if(!isDefined(var_1) && !scripts\mp\utility::func_C7A0(var_3, var_5)) {
@@ -673,7 +673,7 @@ func_B71A(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     if(!scripts\mp\utility::isreallyalive(var_0)) {
       return 0;
     }

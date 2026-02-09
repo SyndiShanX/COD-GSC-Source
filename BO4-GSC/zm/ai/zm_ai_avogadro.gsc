@@ -204,7 +204,6 @@ function private function_d60f39c2(entity, player, duration, color) {
           retreat = " retreat";
 
           line(level.e_avogadro.var_77ef4a35.origin, end, (1, 1, 0));
-
         }
 
         var_1fee3f71 = "";
@@ -217,13 +216,11 @@ function private function_d60f39c2(entity, player, duration, color) {
         sphere(end, 2, color, 1, 0, 4, 1);
         distance = distance(start, end);
         print3d(end + (0, 0, 30), "<dev string:x135>" + distance + retreat + var_1fee3f71, color, 1, 1, 1);
-
       }
 
       if(var_b90a4dc9 == 4 && isDefined(level.avogadro_outro_location)) {
         line(level.avogadro_outro_location.origin, end, (1, 0, 0));
         sphere(level.avogadro_outro_location.origin, sqrt(10000), (1, 0, 0), 0.4, 0, 8, 1);
-
       }
     }
 
@@ -236,7 +233,7 @@ function private function_d60f39c2(entity, player, duration, color) {
 function_ed39491e(var_b90a4dc9) {
   self.var_b90a4dc9 = var_b90a4dc9;
 
-  setdvar(#"hash_4fad1b23f14d5bc4", var_b90a4dc9);
+  setDvar(#"hash_4fad1b23f14d5bc4", var_b90a4dc9);
 
   switch (self.var_b90a4dc9) {
     case 0:
@@ -669,7 +666,7 @@ function_315c9db0(entity, asmstatename) {
 }
 
 function_f4fc9e92(entity) {
-  if(isDefined(entity.favoriteenemy) && isplayer(entity.favoriteenemy) && !zm_utility::is_player_valid(entity.favoriteenemy, 1)) {
+  if(isDefined(entity.favoriteenemy) && isPlayer(entity.favoriteenemy) && !zm_utility::is_player_valid(entity.favoriteenemy, 1)) {
     entity.favoriteenemy = undefined;
   }
 
@@ -829,7 +826,6 @@ function_a9be3eba(entity) {
 
           recordline(entity.origin, endpoint, (1, 0, 0));
           recordsphere(endpoint, 15, (1, 0, 0));
-
         }
       }
     }

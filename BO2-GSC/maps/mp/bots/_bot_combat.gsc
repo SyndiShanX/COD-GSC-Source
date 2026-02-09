@@ -27,7 +27,7 @@ bot_combat_think(damage, attacker, direction) {
 
     if(bot_has_enemy()) {
       if(getdvarint(#"bot_IgnoreHumans")) {
-        if(isplayer(self.bot.threat.entity) && !self.bot.threat.entity is_bot())
+        if(isPlayer(self.bot.threat.entity) && !self.bot.threat.entity is_bot())
           self bot_combat_idle();
       }
     }
@@ -329,7 +329,7 @@ bot_combat_melee(weapon) {
     frames = 4;
     prediction = self predictposition(self.bot.threat.entity, frames);
 
-    if(!isplayer(self.bot.threat.entity)) {
+    if(!isPlayer(self.bot.threat.entity)) {
       height = self.bot.threat.entity getcentroid()[2] - prediction[2];
       return prediction + (0, 0, height);
     } else
@@ -519,7 +519,7 @@ bot_has_enemy() {
 
 threat_is_player() {
   ent = self.bot.threat.entity;
-  return isDefined(ent) && isplayer(ent);
+  return isDefined(ent) && isPlayer(ent);
 }
 
 threat_is_dog() {
@@ -578,7 +578,7 @@ bot_best_enemy() {
   ent = self.bot.threat.entity;
 
   if(isDefined(ent)) {
-    if(isplayer(ent) || isai(ent)) {
+    if(isPlayer(ent) || isai(ent)) {
       dot = bot_dot_product(ent.origin);
 
       if(dot >= fov) {
@@ -597,7 +597,7 @@ bot_best_enemy() {
     if(threat_should_ignore(enemy)) {
       continue;
     }
-    if(!isplayer(enemy) && enemy.classname != "grenade") {
+    if(!isPlayer(enemy) && enemy.classname != "grenade") {
       if(level.gametype == "hack") {
         if(enemy.classname == "script_vehicle")
           continue;
@@ -639,7 +639,7 @@ bot_best_enemy() {
 }
 
 threat_requires_rocket(enemy) {
-  if(!isDefined(enemy) || isplayer(enemy))
+  if(!isDefined(enemy) || isPlayer(enemy))
     return false;
 
   if(isDefined(enemy.helitype) && enemy.helitype == "qrdrone")
@@ -659,7 +659,7 @@ threat_requires_rocket(enemy) {
 }
 
 threat_is_warthog(enemy) {
-  if(!isDefined(enemy) || isplayer(enemy))
+  if(!isDefined(enemy) || isPlayer(enemy))
     return false;
 
   if(enemy.classname == "script_vehicle" && enemy.vehicleclass == "plane")
@@ -735,7 +735,7 @@ bot_update_cover() {
     }
   }
 
-  if(!isplayer(enemy)) {
+  if(!isPlayer(enemy)) {
     return;
   }
   dot = enemy bot_dot_product(self.origin);
@@ -1025,7 +1025,7 @@ bot_should_hip_fire() {
 
   class = weaponclass(weapon);
 
-  if(isplayer(enemy) && class == "spread")
+  if(isPlayer(enemy) && class == "spread")
     return true;
 
   distsq = distancesquared(self.origin, enemy.origin);
@@ -1113,7 +1113,7 @@ bot_nearest_node(origin) {
 }
 
 bot_lookat_entity(entity) {
-  if(isplayer(entity) && entity getstance() != "prone") {
+  if(isPlayer(entity) && entity getstance() != "prone") {
     if(distancesquared(self.origin, entity.origin) < 65536) {
       origin = entity getcentroid() + vectorscale((0, 0, 1), 10.0);
       self lookat(origin);

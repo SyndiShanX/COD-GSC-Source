@@ -23,15 +23,15 @@ main() {
   maps\mp\_load::main();
   mp_dome_ns_flag_init();
 
-  SetDvar("r_globalGenericMaterialScale", 4.0);
+  setDvar("r_globalGenericMaterialScale", 4.0);
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_dome_ns");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", 0.4);
-  SetDvar("r_reactiveMotionPlayerRadius", 20.0);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 0.4);
+  setDvar("r_reactiveMotionPlayerRadius", 20.0);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -43,14 +43,13 @@ main() {
   maps\mp\mp_alien_weapon::init();
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.3");
-    SetDvar("sm_sunsamplesizenear", ".15");
+    setDvar("sm_sunShadowScale", "0.3");
+    setDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.55" + "");
-    SetDvar("sm_sunsamplesizenear", ".25");
+    setDvar("sm_sunShadowScale", "0.55" + "");
+    setDvar("sm_sunsamplesizenear", ".25");
   } else {
-    SetDvar("sm_sunShadowScale", "1.0");
-
+    setDvar("sm_sunShadowScale", "1.0");
   }
 
   setdvar_cg_ng("r_specularColorScale", 3.0, 7.5);
@@ -243,7 +242,6 @@ crane_platform() {
       anim_length = GetAnimLength(%mp_dome_ns_crane_cargo_01_gate);
       percent = GetNotetrackTimes(%mp_dome_ns_crane_cargo_01_gate, "gate_open");
       time = anim_length * percent[0];
-
     } else {
       triggerB playSound("scn_crane_button_activate");
       triggerB MakeUnusable();
@@ -293,7 +291,6 @@ crane_platform() {
       sfx_time = anim_length - time;
       crane_audio_org thread sfx_crane_stop(sfx_time, 1.8);
       platform_sfx_origin thread sfx_crane_stop_impt(sfx_time, 0.4);
-
     }
 
     wait(anim_length - time);
@@ -541,10 +538,8 @@ crane_damage_manager(hitEnt) {
       hitEnt DoDamage(1000, hitEnt.origin, self, self, "MOD_CRUSH");
     else
       hitEnt DoDamage(1000, hitEnt.origin, level.triggerer, self, "MOD_CRUSH");
-
   } else {
     hitEnt DoDamage(1000, hitEnt.origin, undefined, undefined, "MOD_CRUSH");
-
   }
 }
 
@@ -566,7 +561,7 @@ clean_tube_watcher() {
     agents_in_trigger = trigger GetIsTouchingEntities(agents);
 
     foreach(agent in agents_in_trigger) {
-      if(IsPlayer(agent))
+      if(isPlayer(agent))
         agent.drones_disabled = true;
       agent thread enable_drones_watcher(trigger);
     }
@@ -747,7 +742,6 @@ watch_for_dome_ns_alien_dog_crate() {
         maps\mp\killstreaks\_airdrop::changeCrateWeight("airdrop_assault", "dome_seekers", DOME_NS_ALIEN_DOG_WEIGHT);
       } else {
         game["player_holding_level_killstreak"] = true;
-
       }
     }
   }

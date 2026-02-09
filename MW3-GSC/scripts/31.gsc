@@ -58,7 +58,6 @@ create_fx_menu() {
     if(menu("none")) {
       if(common_scripts\_createfx::button_is_clicked("m")) {
         increment_list_offset();
-
       }
       menu_change_selected_fx();
 
@@ -120,7 +119,6 @@ menu_fx_creation() {
 
     if(var_4 == 10) {
       var_4 = 0;
-
     }
     if(common_scripts\_createfx::button_is_clicked(var_4 + "")) {
       var_1 = var_2[var_3];
@@ -147,11 +145,9 @@ menu_fx_creation() {
 
   if(menu("create_loopfx")) {
     var_5 = common_scripts\utility::createloopeffect(var_1);
-
   }
   if(menu("create_oneshot")) {
     var_5 = common_scripts\utility::createoneshoteffect(var_1);
-
   }
   finish_creating_entity(var_5);
 }
@@ -186,7 +182,6 @@ menu_init() {
 
   if(!level.mp_createfx) {
     addoption("string", "rumble", "Rumble", "nil", "exploder");
-
   }
   addoption("string", "ender", "Level notify for ending 2nd FX", "nil", "exploder");
   addoption("string", "soundalias", "Soundalias", "nil", "all");
@@ -194,7 +189,6 @@ menu_init() {
 
   if(!level.mp_createfx) {
     addoption("int", "stoppable", "Can be stopped from script", "1", "all");
-
   }
   level.effect_list_offset = 0;
   level.effect_list_offset_max = 10;
@@ -253,7 +247,6 @@ menu_change_selected_fx() {
 
     if(var_5 == 10) {
       var_5 = 0;
-
     }
     if(common_scripts\_createfx::button_is_clicked(var_5 + "")) {
       prepare_option_for_change(var_4, var_1);
@@ -277,28 +270,25 @@ prepare_option_for_change(var_0, var_1) {
   common_scripts\_createfx::createfx_centerprint("To change " + var_0["description"] + " on selected entities, type /fx newvalue");
   level.createfx_inputlocked = 1;
   set_option_index(var_0["name"]);
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
   level.createfxhudelements[var_1 + 3][0].color = (1, 1, 0);
 }
 
 menu_fx_option_set() {
-  if(getdvar("fx") == "nil") {
+  if(getDvar("fx") == "nil") {
     return;
   }
   var_0 = get_selected_option();
   var_1 = undefined;
 
   if(var_0["type"] == "string") {
-    var_1 = getdvar("fx");
-
+    var_1 = getDvar("fx");
   }
   if(var_0["type"] == "int") {
     var_1 = getdvarint("fx");
-
   }
   if(var_0["type"] == "float") {
     var_1 = getdvarfloat("fx");
-
   }
   apply_option_to_selected_fx(var_0, var_1);
 }
@@ -390,7 +380,6 @@ display_fx_info(var_0) {
 
     if(var_1 > level.effect_list_offset_max) {
       common_scripts\_createfx::set_fx_hudelement("(m) More >");
-
     }
     common_scripts\_createfx::set_fx_hudelement("(a) Add >");
     common_scripts\_createfx::set_fx_hudelement("(x) Exit >");
@@ -426,7 +415,6 @@ display_fx_add_options(var_0) {
 
   if(level.effect_list_offset >= level.createfx_options.size) {
     level.effect_list_offset = 0;
-
   }
   for(var_4 = 0; var_4 < level.createfx_options.size; var_4++) {
     var_5 = level.createfx_options[var_4];
@@ -450,7 +438,6 @@ display_fx_add_options(var_0) {
 
     if(var_6 == 10) {
       var_6 = 0;
-
     }
     if(common_scripts\_createfx::button_is_clicked(var_6 + "")) {
       add_option_to_selected_entities(var_5);
@@ -464,7 +451,6 @@ display_fx_add_options(var_0) {
 
   if(var_1 > level.effect_list_offset_max) {
     common_scripts\_createfx::set_fx_hudelement("(m) More >");
-
   }
   common_scripts\_createfx::set_fx_hudelement("(x) Exit >");
 }
@@ -496,7 +482,6 @@ draw_effects_list() {
 
   if(level.effect_list_offset >= var_2.size) {
     level.effect_list_offset = 0;
-
   }
   for(var_3 = level.effect_list_offset; var_3 < var_2.size; var_3++) {
     var_0 = var_0 + 1;

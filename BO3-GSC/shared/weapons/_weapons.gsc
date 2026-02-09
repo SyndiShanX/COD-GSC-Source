@@ -311,7 +311,7 @@ function watch_pickup() {
   weapon = self.item;
   self waittill("trigger", player, droppeditem, pickedupontouch);
   if(1) {
-    if(isDefined(player) && isplayer(player)) {
+    if(isDefined(player) && isPlayer(player)) {
       if(isDefined(player.weaponpickupscount)) {
         player.weaponpickupscount++;
       } else {
@@ -1164,7 +1164,7 @@ function drop_scavenger_for_death(attacker) {
   if(level.gametype == "hack") {
     item = self dropscavengeritem(getweapon("scavenger_item_hack"));
   } else {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       item = self dropscavengeritem(getweapon("scavenger_item"));
     } else {
       return;

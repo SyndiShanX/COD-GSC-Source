@@ -1981,9 +1981,7 @@ func_94F1(var_0) {
       if(isDefined(level.var_462E[var_5])) {
         var_6 = level.var_462E[var_5];
         if(isDefined(var_6) && isDefined(var_6.init_func)) {
-          [
-            [var_6.init_func]
-          ](var_0);
+          [[var_6.init_func]](var_0);
         }
       }
 

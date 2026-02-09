@@ -26,11 +26,11 @@ is_target_valid(target) {
     return false;
   }
 
-  if(isplayer(target) && target.sessionstate == "spectator") {
+  if(isPlayer(target) && target.sessionstate == "spectator") {
     return false;
   }
 
-  if(isplayer(target) && target.sessionstate == "intermission") {
+  if(isPlayer(target) && target.sessionstate == "intermission") {
     return false;
   }
 
@@ -54,7 +54,7 @@ is_target_valid(target) {
     return false;
   }
 
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     if(target isplayerswimming()) {
       return false;
     }
@@ -126,7 +126,7 @@ function_84235351(attack_origin, var_edc20efd) {
       continue;
     }
 
-    if(isplayer(target) && target isgrappling()) {
+    if(isPlayer(target) && target isgrappling()) {
       continue;
     }
 
@@ -135,7 +135,7 @@ function_84235351(attack_origin, var_edc20efd) {
     }
 
     dist_squared = distancesquared(attack_origin, target.origin);
-    var_e294ac7d = isplayer(target) ? target function_d730727f() : 1;
+    var_e294ac7d = isPlayer(target) ? target function_d730727f() : 1;
     var_97f7ad10 = var_e0c224a4 * var_e294ac7d;
 
     if(dist_squared > var_97f7ad10) {

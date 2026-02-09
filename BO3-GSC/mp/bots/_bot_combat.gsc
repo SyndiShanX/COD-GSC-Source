@@ -65,7 +65,7 @@ function mp_post_combat() {
 }
 
 function threat_requires_launcher(enemy) {
-  if(!isDefined(enemy) || isplayer(enemy)) {
+  if(!isDefined(enemy) || isPlayer(enemy)) {
     return false;
   }
   killstreaktype = undefined;

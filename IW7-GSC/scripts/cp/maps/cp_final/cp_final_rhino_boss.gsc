@@ -1807,7 +1807,7 @@ rhino_fight_over() {
   level.no_loot_drop = undefined;
   restorelnfinteractions();
   stopcinematicforall();
-  setdvar("bg_cinematicFullscreen", 1);
+  setDvar("bg_cinematicFullscreen", 1);
   preloadcinematicforall("sysload_o1");
   level thread delay_give_rewards();
   level notify("add_hidden_song_to_playlist");
@@ -1859,7 +1859,7 @@ rhino_fight_over() {
     level thread resume_cp_final();
   }
 
-  setdvar("bg_cinematicFullscreen", 0);
+  setDvar("bg_cinematicFullscreen", 0);
   if(isDefined(level.rhino_lnf_fx)) {
     level.rhino_lnf_fx delete();
   }

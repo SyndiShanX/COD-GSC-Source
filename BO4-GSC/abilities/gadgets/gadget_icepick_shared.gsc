@@ -179,7 +179,7 @@ on_player_killed(params) {
   }
 
   if(isDefined(self.var_c1911c44) && self.var_c1911c44) {
-    if(isDefined(self.var_982faa7c) && isplayer(self.var_982faa7c)) {
+    if(isDefined(self.var_982faa7c) && isPlayer(self.var_982faa7c)) {
       self.var_982faa7c clientfield::set_to_player("hackedvehpostfx", 0);
     }
 
@@ -270,7 +270,7 @@ function_14151f16(entity, canhack) {
 function_808efdee(hacker, entity) {
   entityweapon = findweapon(entity);
 
-  if((!isDefined(entityweapon) || entityweapon == level.weaponnone) && !isplayer(entity)) {
+  if((!isDefined(entityweapon) || entityweapon == level.weaponnone) && !isPlayer(entity)) {
     return false;
   }
 
@@ -286,11 +286,11 @@ function_808efdee(hacker, entity) {
     return false;
   }
 
-  if(!isplayer(entity) && !entityweapon.ishackable) {
+  if(!isPlayer(entity) && !entityweapon.ishackable) {
     return false;
   }
 
-  if(isDefined(entity.ishacked) && entity.ishacked && !isplayer(entity)) {
+  if(isDefined(entity.ishacked) && entity.ishacked && !isPlayer(entity)) {
     return false;
   }
 
@@ -301,7 +301,7 @@ function_8d50c205(left, right) {
   leftweapon = findweapon(left);
   rightweapon = findweapon(right);
 
-  if(isplayer(left) || isplayer(right) || leftweapon.var_8134b209 == rightweapon.var_8134b209) {
+  if(isPlayer(left) || isPlayer(right) || leftweapon.var_8134b209 == rightweapon.var_8134b209) {
     return (left getentitynumber() < right getentitynumber());
   }
 
@@ -311,7 +311,7 @@ function_8d50c205(left, right) {
 function_ab1f58d0(entity) {
   entityweapon = findweapon(entity);
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     settingsbundle = function_13f4415c();
     return settingsbundle.var_4d1cd723;
   } else if(isDefined(entityweapon)) {
@@ -479,7 +479,7 @@ function_aaf0a382(entities, player, max) {
       continue;
     }
 
-    if(!isplayer(entity)) {
+    if(!isPlayer(entity)) {
       entityweapon = findweapon(entity);
       var_e8e3cc00 += entityweapon.var_df381b5d;
     }
@@ -498,7 +498,7 @@ function_2b2ed159(entity, attackingplayer) {
   var_7570395 = 0;
   attackingplayer.var_e989badb = entity;
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity clientfield::set("hackStatus", 1);
     attackingplayer clientfield::set_to_player("currentlybeinghackedplayer", entity getentitynumber());
   } else {
@@ -549,7 +549,7 @@ function_2b2ed159(entity, attackingplayer) {
 
   if(!isDefined(entity) || !isDefined(attackingplayer) || isDefined(entity.canthack) && entity.canthack) {
     if(var_7570395) {
-      if(isDefined(originalowner) && isplayer(originalowner)) {
+      if(isDefined(originalowner) && isPlayer(originalowner)) {
         originalowner clientfield::set_to_player("hackedvehpostfx", 0);
       }
 
@@ -571,7 +571,7 @@ function_2b2ed159(entity, attackingplayer) {
 
   attackingplayer.var_86f63ff1++;
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     targetname = # "player";
     playernum = entity.entnum;
     thread function_39026c34(attackingplayer, entity, 1);
@@ -598,7 +598,7 @@ function_2b2ed159(entity, attackingplayer) {
 }
 
 function_4802ca63(str_notify) {
-  if(str_notify != # "hash_7b4714f415b8f49e" || !isDefined(self) || !isplayer(self)) {
+  if(str_notify != # "hash_7b4714f415b8f49e" || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -609,7 +609,7 @@ function_4802ca63(str_notify) {
   self.var_c1911c44 = 0;
   level.var_fdb0a658 = 0;
 
-  if(isDefined(self.var_982faa7c) && isplayer(self.var_982faa7c)) {
+  if(isDefined(self.var_982faa7c) && isPlayer(self.var_982faa7c)) {
     self.var_982faa7c clientfield::set_to_player("hackedvehpostfx", 0);
     self.var_982faa7c = undefined;
   }
@@ -618,7 +618,7 @@ function_4802ca63(str_notify) {
 function_4a82368f(entity, owner) {
   assert(isDefined(owner));
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner clientfield::set_to_player("hackedvehpostfx", 1);
   }
 
@@ -628,13 +628,13 @@ function_4a82368f(entity, owner) {
     return;
   }
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner clientfield::set_to_player("hackedvehpostfx", 0);
   }
 }
 
 function_29f4ff02(attackingplayer, entity) {
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     return;
   }
 
@@ -923,7 +923,7 @@ function_f1148c2c(player) {
     player waittilltimeout(1, #"weapon_change_complete");
   }
 
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     starthack(player);
   }
 }

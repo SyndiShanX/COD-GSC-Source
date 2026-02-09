@@ -110,7 +110,7 @@ func_A86F(var_0, var_1, var_2) {
   var_3 thread func_A870(var_1, var_2, 1, var_0);
   for(;;) {
     var_3 waittill("trigger", var_5);
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       continue;
     }
 

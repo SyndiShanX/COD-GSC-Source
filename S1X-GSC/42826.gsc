@@ -69,7 +69,7 @@ m990_hit(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     self.primer = common_scripts\utility::spawn_tag_origin();
 
-    if(isDefined(var_3) && (isplayer(var_3) || isagent(var_3))) {
+    if(isDefined(var_3) && (isPlayer(var_3) || isagent(var_3))) {
       self.primer.origin = var_1 + var_4;
       self.primer.angles = vectortoangles(var_4 * -1);
     } else {
@@ -83,7 +83,7 @@ m990_hit(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(var_3)) {
       var_7 = var_3;
 
-      if(isplayer(var_3) || isagent(var_3)) {
+      if(isPlayer(var_3) || isagent(var_3)) {
         if(isalive(var_3)) {
           thread transfer_primer_to_corpse(var_3, var_5);
         } else {

@@ -38,7 +38,7 @@ cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   var_11 = scripts\engine\utility::istrue(var_1.inlaststand);
   var_12 = scripts\engine\utility::istrue(var_12.is_suicide_bomber);
   var_3 = var_3 | 4;
-  var_13 = isDefined(var_1) && isplayer(var_1);
+  var_13 = isDefined(var_1) && isPlayer(var_1);
   var_14 = scripts\engine\utility::isbulletdamage(var_4) || var_4 == "MOD_EXPLOSIVE_BULLET" && var_8 != "none";
   var_15 = var_14 && scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
   var_16 = scripts\engine\utility::istrue(self.battleslid);
@@ -354,7 +354,7 @@ cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   }
 
   var_2 = int(min(var_2, self.health));
-  if(isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1)) {
+  if(isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1)) {
     playFX(level._effect["melee_impact"], self gettagorigin("j_neck"), vectortoangles(self.origin - var_1.origin), anglestoup(self.angles), var_1);
   }
 
@@ -834,15 +834,15 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     self.activated_slomo_sphere = undefined;
   }
 
-  if(issubstr(var_4, "iw7_knife") && isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
+  if(issubstr(var_4, "iw7_knife") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
-  } else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
+  } else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
   } else if(issubstr(var_4, "golf") || issubstr(var_4, "machete") || issubstr(var_4, "spiked_bat") || issubstr(var_4, "two_headed_axe")) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && scripts\engine\utility::istrue(self.entangled) && !scripts\engine\utility::istrue(var_1.hasghostentangled)) {
+  if(isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::istrue(self.entangled) && !scripts\engine\utility::istrue(var_1.hasghostentangled)) {
     thread entanglezombie(self, var_1);
   }
 
@@ -851,7 +851,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     self.linked_to_boat = undefined;
   }
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     if(isDefined(var_1.name)) {
       if(var_1.name == var_1.owner.itemtype) {
         if(isDefined(var_1.owner.killswithitem[var_1.owner.itemtype])) {
@@ -882,7 +882,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(scripts\engine\utility::istrue(self.marked_shared_fate_fnf)) {
       self.marked_shared_fate_fnf = 0;
       var_1.marked_ents = scripts\engine\utility::array_remove(var_1.marked_ents, self);
@@ -947,7 +947,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
   if(isDefined(var_1.team)) {
     if(var_1.team == "allies") {
-      if(!isplayer(var_1)) {
+      if(!isPlayer(var_1)) {
         for(var_9 = 0; var_9 < level.revocatorownercount; var_9++) {
           if(!isDefined(level.revocatorkills[level.revocatorkills[var_9].name])) {
             level.revocatorkills[level.revocatorkills[var_9].name] = 1;
@@ -976,7 +976,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   var_14 = 0;
   var_15 = 0;
   var_16 = scripts\engine\utility::istrue(self.is_suicide_bomber);
-  if(isDefined(level.updaterecentkills_func) && isplayer(var_1)) {
+  if(isDefined(level.updaterecentkills_func) && isPlayer(var_1)) {
     var_1 thread[[level.updaterecentkills_func]](self, var_4);
   }
 
@@ -1000,7 +1000,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(isDefined(level.on_zombie_killed_quests_func)) {
       [[level.on_zombie_killed_quests_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     }
@@ -1065,7 +1065,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     level thread[[level.quest_death_update_func]](self);
   }
 
-  if(isplayer(var_1) && isDefined(level.updateonkillpassivesfunc)) {
+  if(isPlayer(var_1) && isDefined(level.updateonkillpassivesfunc)) {
     level thread[[level.updateonkillpassivesfunc]](var_4, var_1, self, var_3, var_6);
   }
 
@@ -1087,7 +1087,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   self.upgraded_dischord_spin = undefined;
   self.shredder_death = undefined;
   self.near_medusa = undefined;
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges)) {
       if(isDefined(level.cryptidkillswithvenomx)) {
         if(level.splchosenagent == "cryptids" && self.agent_type == "alien_goon" || self.agent_type == "alien_phantom") {
@@ -1110,11 +1110,11 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   }
 
   if(self.agent_type == "alien_goon" || self.agent_type == "alien_phantom" || self.agent_type == "alien_rhino") {
-    if(getdvar("scr_easy_egg_drop", "") != "") {
+    if(getDvar("scr_easy_egg_drop", "") != "") {
       level thread scripts\cp\maps\cp_final\cp_final_venomx_quest::spawn_egg_interaction_for_players(self.origin);
     } else if(randomint(100) > 90) {
       var_18 = 0;
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         var_19 = var_1 getweaponslistall();
         foreach(var_1B in var_19) {
           if(issubstr(var_1B, "venomx")) {
@@ -1142,7 +1142,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   scripts\cp\cp_merits::process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   if(isDefined(var_1.owner)) {
     var_1.owner scripts\cp\utility::bufferednotify("kill_event_buffered", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, self.agent_type);
-  } else if(isplayer(var_1)) {
+  } else if(isPlayer(var_1)) {
     var_1 scripts\cp\utility::bufferednotify("kill_event_buffered", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, self.agent_type);
   }
 
@@ -1220,7 +1220,7 @@ callback_finalzombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
     } else if(var_15) {
       if(var_10) {
         if(scripts\cp\utility::is_ricochet_damage()) {
-          if(isplayer(var_1) && isDefined(var_8) && var_8 != "shield") {
+          if(isPlayer(var_1) && isDefined(var_8) && var_8 != "shield") {
             if(isDefined(var_0)) {
               var_1 dodamage(var_2, var_1.origin - (0, 0, 50), var_1, var_0, var_4);
             } else {
@@ -1332,7 +1332,7 @@ callback_finalzombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
     var_1F = 0;
     if(isDefined(var_1.agent_type) && var_1.agent_type == "crab_mini" || var_1.agent_type == "crab_brute" || var_1 scripts\cp\utility::agentisfnfimmune() || var_1.agent_type == "alien_goon") {
       var_1F = 0;
-    } else if(isplayer(var_12) && isplayer(var_1)) {
+    } else if(isPlayer(var_12) && isPlayer(var_1)) {
       var_1F = 0;
     } else {
       var_1F = 1;
@@ -1507,13 +1507,13 @@ slasher_processdamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
     var_12 = "hitalienarmor";
   } else if(var_10 || var_11 || var_12 || var_14) {
     var_12 = "card_boosted";
-  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_16) {
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_16) {
     var_12 = "high_damage";
-  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_17) {
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_17) {
     var_12 = "high_damage";
-  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
     var_12 = "high_damage";
-  } else if(isplayer(var_1) && scripts\engine\utility::istrue(var_1.deadeye_charge) && var_15) {
+  } else if(isPlayer(var_1) && scripts\engine\utility::istrue(var_1.deadeye_charge) && var_15) {
     var_12 = "special_weapon";
   }
 

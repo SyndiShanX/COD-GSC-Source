@@ -26,11 +26,9 @@ _id_1640(var_0, var_1, var_2, var_3) {
       var_5 = var_5 + randomfloatrange(var_2, var_3);
     } else {
       var_5 = var_5 + var_2;
-
     }
     if(var_5 == 0) {
       var_5 = var_5 + 0.0000001;
-
     }
     for(var_7 = (var_6 - var_4) * (1 / var_5); var_5 > 0 && !maps\_utility::_id_1008("stop_flicker"); var_5 = var_5 - 0.05) {
       self setlightcolor(var_4 + var_7 * var_5);
@@ -62,7 +60,7 @@ _id_1641(var_0) {
 }
 
 _id_1642() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -102,7 +100,7 @@ _id_1642() {
 }
 
 _id_1643() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -175,13 +173,12 @@ _id_1644(var_0) {
 
   if(isDefined(var_3)) {
     var_2[0] = var_3;
-
   }
   return var_2;
 }
 
 _id_1645() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -205,7 +202,6 @@ _id_1645() {
           self._id_1647[0] = var_1;
         } else {
           self._id_1647[self._id_1647.size] = var_1;
-
         }
         continue;
       }
@@ -215,7 +211,6 @@ _id_1645() {
           self._id_1648[0] = var_1;
         } else {
           self._id_1648[self._id_1648.size] = var_1;
-
         }
         self._id_164D = var_1;
         continue;
@@ -232,11 +227,9 @@ _id_1645() {
 
   if(isDefined(self.script_noteworthy)) {
     self._id_164C = getEntArray(self.script_noteworthy, "targetname");
-
   }
   if(!self._id_164C.size && !isDefined(self._id_164B)) {
     self._id_164C = _id_1644(self.origin);
-
   }
   for(var_3 = 0; var_3 < self._id_164C.size; var_3++) {
     if(_id_163F(self._id_164C[var_3])) {
@@ -251,13 +244,11 @@ _id_1645() {
         self._id_1647[0] = var_4;
       } else {
         self._id_1647[self._id_1647.size] = var_4;
-
       }
       if(!isDefined(self._id_1648)) {
         self._id_1648[0] = getent(var_4.target, "targetname");
       } else {
         self._id_1648[self._id_1648.size] = getent(var_4.target, "targetname");
-
       }
       self._id_1646 = 1;
     }
@@ -491,7 +482,6 @@ _id_1659(var_0, var_1) {
         var_4 = randomfloatrange(0, 0.3);
       } else {
         var_4 = var_2;
-
       }
       self setlightintensity(var_4);
     }
@@ -532,7 +522,6 @@ _id_165B(var_0, var_1, var_2, var_3) {
 
     if(var_5 > var_2) {
       var_5 = var_5 - var_2;
-
     }
     if(isDefined(var_3)) {
       if(common_scripts\utility::flag(var_3)) {
@@ -545,11 +534,9 @@ _id_165B(var_0, var_1, var_2, var_3) {
 _id_165C(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   thread _id_165D(var_0, var_1, var_2, var_3);
 }
@@ -638,7 +625,6 @@ _id_1660() {
 
       for(var_7 = 0; var_7 < var_2.size; var_7++) {
         var_6[var_7] = var_2[var_7] * (var_4 / var_5) + var_3[var_7] * ((var_5 - var_4) / var_5);
-
       }
       self setlightcolor((var_6[0], var_6[1], var_6[2]));
       wait 0.05;
@@ -651,7 +637,6 @@ _id_1661(var_0) {
 
   if(isDefined(var_0._id_1662)) {
     var_1 = var_0._id_1662;
-
   }
   for(;;) {
     var_0 waittill("trigger", var_2);
@@ -668,25 +653,20 @@ _id_1663(var_0) {
 
   if(isDefined(self._id_1664)) {
     var_1 = self._id_1664;
-
   }
   if(isDefined(self._id_1665)) {
     var_2 = self._id_1665;
-
   }
   if(isDefined(self._id_1666)) {
     var_3 = self._id_1666;
-
   }
   if(isDefined(self._id_1667)) {
     var_4 = self._id_1667;
-
   }
   var_4 = min(max(0.016, var_4), 32);
 
   if(isDefined(self._id_1668)) {
     var_5 = self._id_1668;
-
   }
   var_6 = getdvarint("sm_sunenable", 1);
   var_7 = getdvarfloat("sm_sunshadowscale", 1.0);

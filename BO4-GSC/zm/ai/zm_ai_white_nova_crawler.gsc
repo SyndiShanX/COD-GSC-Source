@@ -208,7 +208,6 @@ function_536a70c5() {
 
       sphere(centroid, 10, color, 0.5, 0, 8, 1);
     }
-
   }
 }
 
@@ -228,7 +227,6 @@ function_e5ffb77c(start, end, duration) {
     print3d(end + (0, 0, 30), "<dev string:x115>" + distance, (1, 0, 0), 1, 1, 1);
     current_time -= 1;
   }
-
 }
 
 function_debf98ad(location, radius, duration) {
@@ -239,7 +237,6 @@ function_debf98ad(location, radius, duration) {
     sphere(location, radius, (0, 1, 0), 0.1, 0, 8, 1);
     current_time -= 1;
   }
-
 }
 
 function_80c8bbd3(entity) {
@@ -350,7 +347,7 @@ function_561b76c5() {
     self.var_463fafcf = 0;
   }
 
-  if(isDefined(self.favoriteenemy) && isplayer(self.favoriteenemy) && self.var_463fafcf < gettime()) {
+  if(isDefined(self.favoriteenemy) && isPlayer(self.favoriteenemy) && self.var_463fafcf < gettime()) {
     self.var_561b76c5 = self.favoriteenemy islookingat(self);
     self.var_463fafcf = gettime() + 50;
   }
@@ -505,7 +502,7 @@ function_9fcedb9c(entity, asmstatename) {
 function_ac651298(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(self.archetype == # "nova_crawler" && isDefined(self.var_b421bafe) && self.var_b421bafe && self.var_71841cf9 == -1) {
     self.var_71841cf9 = gettime() + randomfloatrange(1, 3) * 1000;
-  } else if(self.archetype == # "nova_crawler" && isDefined(self.subarchetype) && self.subarchetype == # "blue_nova_crawler" && !isplayer(attacker)) {
+  } else if(self.archetype == # "nova_crawler" && isDefined(self.subarchetype) && self.subarchetype == # "blue_nova_crawler" && !isPlayer(attacker)) {
     return 0;
   }
 
@@ -923,7 +920,6 @@ function_b262d632(start, end, duration) {
     sphere(self.origin, 3, (1, 1, 0), 1, 0, 8, 1);
     current_time -= 1;
   }
-
 }
 
 shoot_spore(spore, target) {

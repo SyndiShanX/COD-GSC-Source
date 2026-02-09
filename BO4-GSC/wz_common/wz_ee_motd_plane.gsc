@@ -134,7 +134,7 @@ function_37401a52() {
         }
       }
 
-      setdvar(#"hash_533e1b9932a65628", 0);
+      setDvar(#"hash_533e1b9932a65628", 0);
     }
 
     waitframe(1);

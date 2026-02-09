@@ -143,7 +143,7 @@ squadmate_agent_think() {
 on_agent_squadmate_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration) {
   self maps\mp\agents\_agents::on_humanoid_agent_killed_common(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration, false);
 
-  if(IsPlayer(eAttacker) && isDefined(self.owner) && eAttacker != self.owner) {
+  if(isPlayer(eAttacker) && isDefined(self.owner) && eAttacker != self.owner) {
     self.owner leaderDialogOnPlayer("squad_killed");
     self maps\mp\gametypes\_damage::onKillstreakKilled(eAttacker, sWeapon, sMeansOfDeath, iDamage, "destroyed_squad_mate");
   }

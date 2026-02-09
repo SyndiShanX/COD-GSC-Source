@@ -215,7 +215,7 @@ function watchplacement(placeable) {
 
 function watchcarrycancelevents(placeable) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   placeable endon("cancelled");
   placeable endon("placed");
   player util::waittill_any("death", "emp_jammed", "emp_grenaded", "disconnect", "joined_team");
@@ -250,7 +250,7 @@ function onemp(attacker) {
 function cancelonplayerdisconnect(placeable) {
   placeable endon("hacked");
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   placeable endon("cancelled");
   placeable endon("death");
   player util::waittill_any("disconnect", "joined_team");
@@ -343,7 +343,7 @@ function watchownergameevents() {
 function shutdownoncancelevent(placeable) {
   placeable endon("hacked");
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   placeable util::waittill_any("cancelled", "death");
   if(isDefined(player) && isDefined(placeable) && placeable.held === 1) {
     player sethintstring("");

@@ -23,7 +23,6 @@ door_struct_debug() {
     }
   }
 }
-
 hack_doors(targetname, door_activate_func) {
   if(!isDefined(targetname)) {
     targetname = "zombie_door";
@@ -49,20 +48,17 @@ hack_doors(targetname, door_activate_func) {
     door thread watch_door_for_open(struct);
   }
 }
-
 hide_door_buy_when_hacker_active(door_struct) {
   self endon("death");
   self endon("door_hacked");
   self endon("door_opened");
   maps\_zombiemode_equip_hacker::hide_hint_when_hackers_active();
 }
-
 watch_door_for_open(door_struct) {
   self waittill("door_opened");
   self endon("door_hacked");
   remove_all_door_hackables_that_target_door(door_struct.door);
 }
-
 door_hack(hacker) {
   self.door notify("door_hacked");
   self.door notify("kill_door_think");
@@ -70,7 +66,6 @@ door_hack(hacker) {
   self.door[[self.door_activate_func]]();
   self.door._door_open = true;
 }
-
 remove_all_door_hackables_that_target_door(door) {
   candidates = [];
   for(i = 0; i < level._hackable_objects.size; i++) {

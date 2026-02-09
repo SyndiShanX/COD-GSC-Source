@@ -339,5 +339,5 @@ init() {
   registerTweakable("hardpoint", "allowhelicopter", "scr_hardpoint_allowhelicopter", 1);
 
   registerTweakable("hud", "showobjicons", "ui_hud_showobjicons", 1);
-  SetDvar("ui_hud_showobjicons", 1);
+  setDvar("ui_hud_showobjicons", 1);
 }

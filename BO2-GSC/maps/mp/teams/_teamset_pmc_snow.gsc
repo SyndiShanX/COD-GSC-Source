@@ -25,10 +25,10 @@ init(team) {
   game["headicon_" + team] = "faction_pmc";
   level.teamprefix[team] = "vox_pm";
   level.teampostfix[team] = "pmc";
-  setdvar("g_TeamName_" + team, &"MPUI_PMC_SHORT");
-  setdvar("g_TeamColor_" + team, "0.65 0.57 0.41");
-  setdvar("g_ScoresColor_" + team, "0.65 0.57 0.41");
-  setdvar("g_FactionName_" + team, "rus_pmc");
+  setDvar("g_TeamName_" + team, &"MPUI_PMC_SHORT");
+  setDvar("g_TeamColor_" + team, "0.65 0.57 0.41");
+  setDvar("g_ScoresColor_" + team, "0.65 0.57 0.41");
+  setDvar("g_FactionName_" + team, "rus_pmc");
   game["strings"][team + "_win"] = &"MP_PMC_WIN_MATCH";
   game["strings"][team + "_win_round"] = &"MP_PMC_WIN_ROUND";
   game["strings"][team + "_mission_accomplished"] = &"MP_PMC_MISSION_ACCOMPLISHED";
@@ -40,7 +40,7 @@ init(team) {
   game["music"]["victory_" + team] = "VICTORY_PMC";
   game["icons"][team] = "faction_pmc";
   game["voice"][team] = "vox_pmc_";
-  setdvar("scr_" + team, "ussr");
+  setDvar("scr_" + team, "ussr");
   level.heli_vo[team]["hit"] = "vox_rus_0_kls_attackheli_hit";
   game["flagmodels"][team] = "mp_flag_axis_2";
   game["carry_flagmodels"][team] = "mp_flag_axis_2_carry";

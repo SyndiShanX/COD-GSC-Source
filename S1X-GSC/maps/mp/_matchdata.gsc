@@ -36,19 +36,18 @@ init() {
 
   level thread gameEndListener();
 
-  if(GetDvar("virtualLobbyActive") != "1") {
+  if(getDvar("virtualLobbyActive") != "1") {
     level thread reconLogPlayerInfo();
   }
-
 }
 
 matchStarted() {
-  if(GetDvar("virtualLobbyActive") == "1") {
-    PrintLn("_matchdata::matchStarted() -- skipping because GetDvar('virtualLobbyActive') == '1'");
+  if(getDvar("virtualLobbyActive") == "1") {
+    PrintLn("_matchdata::matchStarted() -- skipping because getDvar('virtualLobbyActive') == '1'");
     return;
   }
-  if(GetDvar("mapname") == getdvar("virtualLobbyMap")) {
-    PrintLn("_matchdata::matchStarted() -- skipping because GetDvar('mapname') == getdvar('virtualLobbyMap')");
+  if(getDvar("mapname") == getDvar("virtualLobbyMap")) {
+    PrintLn("_matchdata::matchStarted() -- skipping because getDvar('mapname') == getDvar('virtualLobbyMap')");
     return;
   }
 
@@ -120,10 +119,7 @@ accumulatePlayerPingData() {
         continue;
       }
 
-      if(!isDefined(player.pers["pingAccumulation"]) ||
-        !isDefined(player.pers["minPing"]) ||
-        !isDefined(player.pers["maxPing"]) ||
-        !isDefined(player.pers["pingSampleCount"])) {
+      if(!isDefined(player.pers["pingAccumulation"]) || !isDefined(player.pers["minPing"]) || !isDefined(player.pers["maxPing"]) || !isDefined(player.pers["pingSampleCount"])) {
         continue;
       }
       currentPing = player GetCurrentPing();
@@ -243,7 +239,6 @@ logPlayerLife(died) {
       xp = clampToShort(self.pers["summary"]["xp"] - self.xpAtLifeStart);
       setMatchData("lives", self.lifeId, "xpEarnedDuringThisLife", xp);
     }
-
   }
 
 }
@@ -649,7 +644,6 @@ logPlayerAndKillerADSandFOV(lifeId, killer) {
   if(self PlayerAds() > 0.5) {
     setMatchData("lives", lifeId, "victimWasADS", true);
   }
-
 }
 
 logPlayerAndKillerShieldCloakHoverActive(lifeId, killer) {
@@ -707,10 +701,7 @@ determineWeaponNameAndAttachments(weaponNameFull, primaryWeapon) {
 
   weaponName = "";
 
-  if(isDefined(weaponType) && (weaponType == "primary" || weaponType == "altmode") && (weaponClass == "pistol" ||
-      weaponClass == "smg" || weaponClass == "rifle" || weaponClass == "spread" || weaponClass == "mg" ||
-      weaponClass == "grenade" || weaponClass == "rocketlauncher" || weaponClass == "sniper" ||
-      weaponClass == "cone" || weaponClass == "beam" || weaponClass == "shield")) {
+  if(isDefined(weaponType) && (weaponType == "primary" || weaponType == "altmode") && (weaponClass == "pistol" || weaponClass == "smg" || weaponClass == "rifle" || weaponClass == "spread" || weaponClass == "mg" || weaponClass == "grenade" || weaponClass == "rocketlauncher" || weaponClass == "sniper" || weaponClass == "cone" || weaponClass == "beam" || weaponClass == "shield")) {
     if(weaponType == "altmode") {
       if(isDefined(primaryWeapon)) {
         weaponNameFull = primaryWeapon;
@@ -818,7 +809,6 @@ logFirefightShotsHits(lifeId, killer) {
   if(isDefined(self.enemyHitCounts) && isDefined(self.enemyHitCounts[killer.guid]) && self.enemyHitCounts[killer.guid] > 0) {
     setMatchData("lives", lifeId, "killerHits", clampToByte(self.enemyHitCounts[killer.guid]));
   }
-
 }
 
 logPlayerAndKillerStanceAndMotionState(lifeId, attacker) {
@@ -834,7 +824,6 @@ logPlayerAndKillerStanceAndMotionState(lifeId, attacker) {
     stanceAndMotionState = GetStanceAndMotionStateForPlayer(attacker);
     setMatchData("lives", lifeId, "killerStanceAndMotionState", stanceAndMotionState);
   }
-
 }
 
 logAssists(lifeId, attacker) {
@@ -881,10 +870,7 @@ logSpecialAssists(attacker, xpevent) {
     return;
   }
 
-  if(xpevent == "assist_emp" ||
-    xpevent == "assist_uav" ||
-    xpevent == "assist_uav_plus" ||
-    xpevent == "assist_riot_shield") {
+  if(xpevent == "assist_emp" || xpevent == "assist_uav" || xpevent == "assist_uav_plus" || xpevent == "assist_riot_shield") {
     for(i = 0; i < 5; i++) {
       assistingPlayerIndex = getMatchData("lives", lifeId, "assists", i, "assistingPlayerIndex");
       if(assistingPlayerIndex == attacker.clientid || assistingPlayerIndex == 255) {
@@ -1038,7 +1024,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sKillersWeapon, sKiller
   setMatchData("lives", lifeId, "victimAngles", 2, int(self.angles[2]));
 
   attacker_name = "world";
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker_name = attacker.name;
   }
 
@@ -1047,7 +1033,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sKillersWeapon, sKiller
   bIsBot = IsAITeamParticipant(self);
 
   bKillerIsbot = false;
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     bKillerIsbot = IsAITeamParticipant(attacker);
   }
 
@@ -1058,7 +1044,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sKillersWeapon, sKiller
   spawnToKillTime = -1;
   gameTime = GetTime();
 
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     adsFrac = attacker PlayerAds();
   }
   attacker_clientid = attacker.clientid;
@@ -1090,7 +1076,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sKillersWeapon, sKiller
     spawnToDeathTime = (gameTime - self.spawnInfo.spawnTime) / 1000.0;
   }
 
-  if(isDefined(attacker.spawnInfo) && isDefined(attacker.spawnInfo.spawnTime) && IsPlayer(attacker)) {
+  if(isDefined(attacker.spawnInfo) && isDefined(attacker.spawnInfo.spawnTime) && isPlayer(attacker)) {
     spawnToKillTime = (gameTime - attacker.spawnInfo.spawnTime) / 1000.0;
   }
 
@@ -1126,7 +1112,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sKillersWeapon, sKiller
     }
   }
 
-  if(IsPlayer(attacker) && spawnToKillTime <= 3.0 && !(killerWeaponAndAttachments.weaponName == "sentry_minigun_mp")) {
+  if(isPlayer(attacker) && spawnToKillTime <= 3.0 && !(killerWeaponAndAttachments.weaponName == "sentry_minigun_mp")) {
     if(!isDefined(level.matchData["badSpawnKilledTooFastCount"])) {
       level.matchData["badSpawnKilledTooFastCount"] = 1;
     } else {
@@ -1216,15 +1202,12 @@ endOfGameSummaryLogger() {
     }
 
     player setCommonPlayerData("round", "gameMode", level.gametype);
-    player setCommonPlayerData("round", "map", ToLower(GetDvar("mapname")));
+    player setCommonPlayerData("round", "map", ToLower(getDvar("mapname")));
   }
 }
 
 logPlayerPing(player) {
-  if(!isDefined(player.pers["maxPing"]) ||
-    !isDefined(player.pers["minPing"]) ||
-    !isDefined(player.pers["pingAccumulation"]) ||
-    !isDefined(player.pers["pingSampleCount"])) {
+  if(!isDefined(player.pers["maxPing"]) || !isDefined(player.pers["minPing"]) || !isDefined(player.pers["pingAccumulation"]) || !isDefined(player.pers["pingSampleCount"])) {
     return;
   }
 

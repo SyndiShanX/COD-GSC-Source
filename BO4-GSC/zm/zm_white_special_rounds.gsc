@@ -1517,7 +1517,7 @@ function_6acd363d(is_completed) {
 }
 
 function_7ca1064d(s_params) {
-  if(isplayer(s_params.eattacker) && level.var_bf802299 === 0) {
+  if(isPlayer(s_params.eattacker) && level.var_bf802299 === 0) {
     level thread zm_powerups::specific_powerup_drop("full_ammo", self.origin, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
     level.var_bf802299 = 1;
     wait 5;
@@ -1579,7 +1579,6 @@ function_696a0eca() {
         n_time_remaining = 5 - var_e6da0a39;
         iprintlnbold("<dev string:x350>" + n_time_remaining + "<dev string:x36f>");
       }
-
     }
 
     wait 1;
@@ -1870,7 +1869,7 @@ function_b448360c() {
   var_51fb0ec7 = [];
   e_target = zm_hms_util::function_3815943c();
 
-  if(isplayer(self.last_closest_player)) {
+  if(isPlayer(self.last_closest_player)) {
     e_target = self.last_closest_player;
   }
 

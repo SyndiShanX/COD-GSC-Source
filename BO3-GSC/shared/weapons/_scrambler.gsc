@@ -83,7 +83,7 @@ function watchscramblerdamage(watcher) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     if(level.teambased && attacker.team == self.owner.team && attacker != self.owner) {
@@ -103,7 +103,7 @@ function watchscramblerdamage(watcher) {
         }
       }
     }
-    if(isplayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
+    if(isPlayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
       continue;
     }
     if(type == "MOD_MELEE" || weapon.isemp) {

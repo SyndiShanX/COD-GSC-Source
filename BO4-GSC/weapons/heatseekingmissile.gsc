@@ -17,7 +17,7 @@ init_shared() {
   callback::on_spawned(&on_player_spawned);
   level.fx_flare = "killstreaks/fx8_atkchpr_chaff";
 
-  setdvar(#"scr_freelock", 0);
+  setDvar(#"scr_freelock", 0);
 }
 
 on_player_spawned() {
@@ -83,7 +83,7 @@ event_handler[missile_fire] function_a3d258b6(eventstruct) {
   thread debug_missile(missile);
 
   if(weapon.lockontype == "Legacy Single") {
-    if(isplayer(self) && isDefined(self.stingertarget) && self.stingerlockfinalized) {
+    if(isPlayer(self) && isDefined(self.stingertarget) && self.stingerlockfinalized) {
       self.stingertarget function_a439ae56(missile, weapon, self);
       return;
     }
@@ -493,7 +493,7 @@ getbeststingertarget(weapon) {
         }
 
         if(self insidestingerreticledetect(target, subtarget, weapon)) {
-          if(isDefined(target.owner) && self != target.owner || isplayer(target) && self != target) {
+          if(isDefined(target.owner) && self != target.owner || isPlayer(target) && self != target) {
             if(!isDefined(self.is_valid_target_for_stinger_override) || self[[self.is_valid_target_for_stinger_override]](target)) {
               if(!isentity(target) || isalive(target)) {
                 targetsvalid[targetsvalid.size] = target;
@@ -873,9 +873,7 @@ setfriendlyflags(weapon, target) {
         } else if(isDefined(target.usevtoltime) && isDefined(level.vtol) && isDefined(level.vtol.totalrockethits) && isDefined(level.vtol.missiletodestroy)) {
           self settargetedmissilesremaining(weapon, level.vtol.missiletodestroy - level.vtol.totalrockethits);
         } else {
-          maxhealth = [
-            [level.killstreakmaxhealthfunction]
-          ](killstreaktype);
+          maxhealth = [[level.killstreakmaxhealthfunction]](killstreaktype);
           damagetaken = target.damagetaken;
 
           if(!isDefined(damagetaken) && isDefined(target.parentstruct)) {
@@ -1044,7 +1042,7 @@ _incomingmissile(missile, attacker) {
   self.incoming_missile++;
   self.incoming_missile_owner[attacker_entnum]++;
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker lockedon(self, 1);
   }
 
@@ -1056,7 +1054,7 @@ _targetmissiletracker(missile, attacker) {
   missile endon(#"death");
   self waittill(#"death");
 
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(self)) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(self)) {
     attacker lockedon(self, 0);
   }
 }
@@ -1072,7 +1070,7 @@ _incomingmissiletracker(missile, attacker) {
     self.incoming_missile_owner[attacker_entnum] = undefined;
   }
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker lockedon(self, 0);
   }
 
@@ -1151,7 +1149,7 @@ _missiledetonate(attacker, weapon, range, mindamage, maxdamage, allowdirectdamag
 
   attackerentity = attacker;
 
-  if(function_3132f113(attacker) || isDefined(attacker) && !isplayer(attacker) && !isalive(attacker)) {
+  if(function_3132f113(attacker) || isDefined(attacker) && !isPlayer(attacker) && !isalive(attacker)) {
     attackerentity = undefined;
   }
 

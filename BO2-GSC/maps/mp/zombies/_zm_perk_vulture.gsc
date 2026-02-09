@@ -296,7 +296,7 @@ delay_showing_vulture_ent(player, v_moveto_pos, str_model, func) {
 
   self show();
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     self setinvisibletoall();
     self setvisibletoplayer(player);
   }
@@ -422,7 +422,7 @@ _vulture_spawn_fx(str_identifier, v_fx_origin, str_bonus, e_temp) {
 
   e_temp thread delay_showing_vulture_ent(self, v_fx_origin, "tag_origin", ::clientfield_set_vulture_stink_enabled);
 
-  if(isplayer(self))
+  if(isPlayer(self))
     self waittill_any(str_identifier, "disconnect", "vulture_perk_lost");
   else
     self waittill(str_identifier);
@@ -783,7 +783,6 @@ give_bonus_ammo() {
 
       vulture_debug_text(str_weapon_current + " bullets given: " + n_ammo_refunded);
     }
-
   }
 }
 
@@ -882,7 +881,7 @@ add_zombie_eye_glow() {
 zombies_drop_stink_on_death() {
   self vulture_clientfield_actor_clear("vulture_eye_glow");
 
-  if(isDefined(self.attacker) && isplayer(self.attacker) && self.attacker hasperk("specialty_nomotionsensor"))
+  if(isDefined(self.attacker) && isPlayer(self.attacker) && self.attacker hasperk("specialty_nomotionsensor"))
     self thread do_vulture_death(self.attacker);
   else if(isDefined(self.is_stink_zombie) && self.is_stink_zombie && isDefined(self.stink_ent)) {
     str_identifier = "_" + self getentitynumber() + "_" + gettime();
@@ -1093,7 +1092,6 @@ _get_zombie_exit_point() {
 
     if(getdvarint(#"_id_38E68F2B"))
       debugstar(a_exit_points[i].origin, 200, (1, 0, 0));
-
   }
 
   return nd_best;
@@ -1271,7 +1269,6 @@ _show_debug_location() {
 
     wait 0.05;
   }
-
 }
 
 handle_custom_weapon_refunds(str_weapon) {

@@ -73,8 +73,8 @@ anims() {
   level.scr_anim["frnd"]["wounded_cockpit_wave_over"] = % airlift_pilot_seeyou;
   level.scr_anim["frnd"]["wounded_cockpit_idle"][0] = % airlift_pilot_idle;
   level.scr_anim["frnd"]["wounded_putdown"] = % airlift_pilot_putdown;
-  level.scr_anim["frnd"]["carry_run"] = [ % h1_airlift_pilot_carry_run];
-  level.scr_anim["frnd"]["carry_idle"] = [ % h1_airlift_pilot_carry_idle];
+  level.scr_anim["frnd"]["carry_run"] = [%h1_airlift_pilot_carry_run];
+  level.scr_anim["frnd"]["carry_idle"] = [%h1_airlift_pilot_carry_idle];
   level.scr_animtree["frnd"] = #animtree;
   level.scr_model["frnd"] = "body_sp_cobra_pilot_desert_velinda_burned";
   level.scr_anim["frnd"]["wounded_pullout_facial"] = % airlift_pilot_facial_getout;
@@ -198,8 +198,8 @@ dialogue() {
 player_anims() {
   level.scr_anim["player_carry"]["wounded_pullout"] = % airlift_player_getout;
   level.scr_anim["player_carry"]["wounded_putdown"] = % airlift_player_putdown;
-  level.scr_anim["player_carry"]["carry_idle"] = [ % h1_airlift_player_carry_idle];
-  level.scr_anim["player_carry"]["carry_run"] = [ % h1_airlift_player_carry_run];
+  level.scr_anim["player_carry"]["carry_idle"] = [%h1_airlift_player_carry_idle];
+  level.scr_anim["player_carry"]["carry_run"] = [%h1_airlift_player_carry_run];
   maps\_anim::addnotetrack_animsound("player_carry", "carry_run", "drag_step_right", "airlift_plr_footstep_dragR");
   maps\_anim::addnotetrack_animsound("player_carry", "carry_run", "drag_step_left", "airlift_plr_footstep_dragL");
   level.scr_animtree["player_carry"] = #animtree;
@@ -210,7 +210,7 @@ player_anims() {
   level.scr_animtree["player_viewhands"] = #animtree;
   level.scr_model["player_viewhands"] = "viewhands_player_usmc";
   level.scr_anim["player_viewhands"]["turret_intro_anim"] = % h1_airlift_intro_player;
-  level.scr_anim["player_viewhands"]["turret_idle_anim"] = [ % h1_ch46_turret_player_idle];
+  level.scr_anim["player_viewhands"]["turret_idle_anim"] = [%h1_ch46_turret_player_idle];
   level.scr_anim["player_viewhands"]["turret_fire_anim"] = % h1_ch46_turret_player_fire;
 }
 

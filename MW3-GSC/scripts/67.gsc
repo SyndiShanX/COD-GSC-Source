@@ -26,7 +26,6 @@ _id_0B51() {
 
     if(var_6.size > 1) {
       var_6 = maps\_utility::_id_0B53(var_6);
-
     }
     var_3._id_0B54 = var_6;
   }

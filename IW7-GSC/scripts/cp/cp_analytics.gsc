@@ -12,7 +12,7 @@ init_matchdata(var_0, var_1) {
   setmatchdatadef(var_0);
   setclientmatchdatadef(var_1);
   setmatchdata("commonMatchData", "map", level.script);
-  setmatchdata("commonMatchData", "gametype", getdvar("ui_gametype"));
+  setmatchdata("commonMatchData", "gametype", getDvar("ui_gametype"));
   setmatchdata("commonMatchData", "buildVersion", getbuildversion());
   setmatchdata("commonMatchData", "buildNumber", getbuildnumber());
   setmatchdata("commonMatchData", "utcStartTimeSeconds", getsystemtime());

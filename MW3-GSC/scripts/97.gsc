@@ -22,7 +22,6 @@ init() {
 
   for(var_0 = 0; var_0 <= level.maxrank; var_0++) {
     precacheshader(tablelookup("sp/rankTable.csv", 0, var_0, 6));
-
   }
   var_1 = 0;
 
@@ -106,7 +105,6 @@ _id_12D3() {
     self._id_12D4.alpha = 0;
   } else {
     self._id_12D4.alpha = 0.65;
-
   }
   self._id_12D4 setshader("gradient_fadein", _id_12D5(), 4);
 }
@@ -122,13 +120,11 @@ _id_12D5() {
 _id_12D6() {
   if(!isDefined(level.scoreinfo) || !isDefined(level.scoreinfo.size)) {
     level.scoreinfo = [];
-
   }
   level.xpscale = 1;
 
   if(level.console) {
     level.xpscale = 1;
-
   }
   registerscoreinfo("kill", 100);
   registerscoreinfo("headshot", 100);
@@ -144,7 +140,6 @@ _id_12D9() {
 
   if(isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "worldspawn" && isDefined(self._id_0D7A)) {
     var_0 = self._id_0D7A;
-
   }
   _id_12DA(var_0);
 }
@@ -168,7 +163,7 @@ _id_12DA(var_0) {
     }
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(isDefined(level._id_12DB)) {
       var_0 thread[[level._id_12DB]](self);
     } else {
@@ -177,7 +172,7 @@ _id_12DA(var_0) {
   }
 
   if(maps\_utility::_id_12DC()) {
-    if(isai(var_0) && !var_0 isbadguy() && isDefined(var_0.owner) && isplayer(var_0.owner)) {
+    if(isai(var_0) && !var_0 isbadguy() && isDefined(var_0.owner) && isPlayer(var_0.owner)) {
       if(isDefined(level._id_12DB)) {
         var_0.owner thread[[level._id_12DB]](self);
       } else {
@@ -186,12 +181,12 @@ _id_12DA(var_0) {
     }
   }
 
-  if(!isplayer(var_0) && !isai(var_0)) {
+  if(!isPlayer(var_0) && !isai(var_0)) {
     return;
   }
   if(!var_0 isbadguy() && isDefined(self._id_12DD) && self._id_12DD.size) {
     for(var_1 = 0; var_1 < self._id_12DD.size; var_1++) {
-      if(isplayer(self._id_12DD[var_1]) && self._id_12DD[var_1] != var_0) {
+      if(isPlayer(self._id_12DD[var_1]) && self._id_12DD[var_1] != var_0) {
         if(isDefined(self._id_12DE)) {
           self._id_12DD[var_1] thread maps\_utility::_id_12BE("assist", self._id_12DE);
           continue;
@@ -206,15 +201,12 @@ _id_12DA(var_0) {
 _id_12DF(var_0) {
   if(!isDefined(var_0.targetname)) {
     return 0;
-
   }
   if(issubstr(var_0.targetname, "destructible")) {
     return 1;
-
   }
   if(common_scripts\utility::string_starts_with(var_0.targetname, "sentry_")) {
     return 1;
-
   }
   return 0;
 }
@@ -278,11 +270,9 @@ _id_12E4(var_0, var_1) {
 
   if(self._id_12CE["rankxp"] <= level._id_01DA) {
     self setplayerdata("experience", self._id_12CE["rankxp"]);
-
   }
   if(self._id_12CE["rankxp"] > level._id_01DA) {
     self setplayerdata("experience", level._id_01DA);
-
   }
   waittillframeend;
   self notify("xp_updated", var_0);
@@ -338,14 +328,12 @@ updaterank() {
 
   if(var_0 == self._id_12CE["rank"]) {
     return 0;
-
   }
   var_1 = self._id_12CE["rank"];
   var_2 = self._id_12CE["rank"];
 
   for(self._id_12CE["rank"] = var_0; var_2 <= var_0; var_2++) {
     self._id_12EE = 1;
-
   }
   return 1;
 }
@@ -367,7 +355,6 @@ updaterankannouncehud() {
 
   if(common_scripts\utility::flag_exist("special_op_final_xp_given") && common_scripts\utility::flag("special_op_final_xp_given")) {
     level._id_12F5 = int(max(0, var_1.duration - 2));
-
   }
   thread notifymessage(var_1);
 
@@ -398,7 +385,6 @@ stringtofloat(var_0) {
 
     for(var_4 = 0; var_4 < var_1[1].size; var_4++) {
       var_3 = var_3 * 0.1;
-
     }
     var_2 = var_2 + int(var_1[1]) * var_3;
   }
@@ -416,14 +402,12 @@ actionnotifymessage(var_0) {
       self showhudsplash(var_0.name, var_0.slot, var_0.optionalnumber);
     } else {
       self showhudsplash(var_0.name, var_0.slot);
-
     }
     self.doingsplash[var_1] = var_0;
     var_2 = stringtofloat(tablelookup("sp/splashTable.csv", 0, var_0.name, 4));
 
     if(isDefined(var_0.sound)) {
       self playlocalsound(var_0.sound);
-
     }
     self notify("actionNotifyMessage" + var_1);
     self endon("actionNotifyMessage" + var_1);
@@ -455,7 +439,6 @@ actionnotify(var_0) {
 
   if(!isDefined(var_0.type)) {
     var_0.type = "";
-
   }
   if(!isDefined(self.doingsplash[var_1])) {
     thread actionnotifymessage(var_0);
@@ -477,11 +460,9 @@ actionnotify(var_0) {
   if(var_0.type == "challenge" || var_0.type == "killstreak") {
     if(var_0.type == "killstreak") {
       removetypefromqueue("killstreak", var_1);
-
     }
     for(var_2 = self.splashqueue[var_1].size; var_2 > 0; var_2--) {
       self.splashqueue[var_1][var_2] = self.splashqueue[var_1][var_2 - 1];
-
     }
     self.splashqueue[var_1][0] = var_0;
   } else {
@@ -498,19 +479,16 @@ shownotifymessage(var_0) {
     var_1 = var_0.duration;
   } else {
     var_1 = 4.0;
-
   }
   thread resetoncancel();
 
   if(isDefined(var_0.sound)) {
     self playlocalsound(var_0.sound);
-
   }
   if(isDefined(var_0.glowcolor)) {
     var_2 = var_0.glowcolor;
   } else {
     var_2 = (0.3, 0.6, 0.3);
-
   }
   var_3 = self.notifytitle;
 
@@ -519,13 +497,11 @@ shownotifymessage(var_0) {
       self.notifytitle.label = var_0.titlelabel;
     } else {
       self.notifytitle.label = &"";
-
     }
     if(isDefined(var_0.titlelabel) && !isDefined(var_0.titleisstring)) {
       self.notifytitle setvalue(var_0.titletext);
     } else {
       self.notifytitle settext(var_0.titletext);
-
     }
     self.notifytitle setpulsefx(100, int(var_1 * 1000), 1000);
     self.notifytitle.glowcolor = var_2;
@@ -537,13 +513,11 @@ shownotifymessage(var_0) {
       self.notifytext.label = var_0.textlabel;
     } else {
       self.notifytext.label = &"";
-
     }
     if(isDefined(var_0.textlabel) && !isDefined(var_0._id_12F4)) {
       self.notifytext setvalue(var_0.notifytext);
     } else {
       self.notifytext settext(var_0.notifytext);
-
     }
     self.notifytext setpulsefx(100, int(var_1 * 1000), 1000);
     self.notifytext.glowcolor = var_2;
@@ -558,7 +532,6 @@ shownotifymessage(var_0) {
       self.notifytext2.label = var_0.text2label;
     } else {
       self.notifytext2.label = &"";
-
     }
     self.notifytext2 settext(var_0.notifytext2);
     self.notifytext2 setpulsefx(100, int(var_1 * 1000), 1000);
@@ -578,7 +551,6 @@ shownotifymessage(var_0) {
     self.notifyicon.alpha = 0;
   } else {
     waitrequirevisibility(var_1);
-
   }
   self notify("notifyMessageDone");
   self._id_12C6 = 0;
@@ -601,7 +573,6 @@ waitrequirevisibility(var_0) {
 
   while(!canreadtext()) {
     wait(var_1);
-
   }
   while(var_0 > 0) {
     wait(var_1);
@@ -615,7 +586,6 @@ waitrequirevisibility(var_0) {
 canreadtext() {
   if(isflashbanged()) {
     return 0;
-
   }
   return 1;
 }
@@ -629,7 +599,6 @@ dispatchnotify(var_0) {
 
   for(var_2 = 1; var_2 < self.splashqueue[var_0].size; var_2++) {
     self.splashqueue[var_0][var_2 - 1] = self.splashqueue[var_0][var_2];
-
   }
   self.splashqueue[var_0][var_2 - 1] = undefined;
 
@@ -686,7 +655,6 @@ getrankforxp(var_0) {
   while(isDefined(var_2) && var_2 != "") {
     if(var_0 < getrankinfominxp(var_1) + getrankinfoxpamt(var_1)) {
       return var_1;
-
     }
     var_1++;
 

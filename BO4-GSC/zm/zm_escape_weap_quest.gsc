@@ -138,7 +138,7 @@ function_d2093ddd(willbekilled, inflictor, attacker, damage, flags, mod, weapon,
     return;
   }
 
-  if(isplayer(attacker) && (isDefined(willbekilled) && willbekilled || damage >= self.health)) {
+  if(isPlayer(attacker) && (isDefined(willbekilled) && willbekilled || damage >= self.health)) {
     for(i = 0; i < level.var_4952e1.size; i++) {
       if(self istouching(level.var_b5ca4338[i])) {
         if(!level.var_4952e1[i].is_charged && !(isDefined(level.var_4952e1[i].var_aa1a7f2e) && level.var_4952e1[i].var_aa1a7f2e) && level.var_4952e1[i].var_43bd3b5 < 6) {
@@ -598,7 +598,7 @@ function_6300f001() {
   var_fd22f9df = struct::get("tom_pil");
   mdl_tomahawk = var_fd22f9df.scene_ents[# "prop 2"];
 
-  while(isplayer(self)) {
+  while(isPlayer(self)) {
     if(isDefined(var_6668e57a)) {
       if(level flag::get(#"soul_catchers_charged") && !self hasweapon(getweapon(#"tomahawk_t8")) && !self hasweapon(getweapon(#"tomahawk_t8_upgraded"))) {
         if(!self flag::exists(#"hash_120fbb364796cd32") && !self flag::exists(#"hash_11ab20934759ebc3") || !self flag::get(#"hash_120fbb364796cd32") || self flag::get(#"hash_11ab20934759ebc3")) {

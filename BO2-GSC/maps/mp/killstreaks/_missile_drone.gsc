@@ -190,7 +190,6 @@ drone_target_search(hardpointtype) {
       self.goal.origin = (self.origin[0] + direction[0], self.origin[1] + direction[1], level.missile_drone_origin[2]);
 
       debug_line(self.origin, self.goal.origin, (1, 1, 0), 5000);
-
     } else {
       currentangles = self.angles;
       direction = vectornormalize(anglesToForward(self.angles));
@@ -198,7 +197,6 @@ drone_target_search(hardpointtype) {
       self.goal.origin = (level.missile_drone_origin[0] + direction[0], level.missile_drone_origin[1] + direction[1], level.missile_drone_origin[2]);
 
       debug_line(self.origin, self.goal.origin, (0, 1, 1), 5000);
-
     }
 
     if(isDefined(target)) {
@@ -333,13 +331,12 @@ projectile_find_target_player(owner, mincos) {
   target = [];
   players = self get_array_sorted_dot_prod(get_players(), mincos);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     startoffset = self getplayerviewheight();
     startorigin = (self.origin[0], self.origin[1], self.origin[2] + startoffset);
     startangles = self getplayerangles();
 
     debug_star(startorigin, (0, 0, 1), 1000);
-
   } else {
     startorigin = self.origin;
     startangles = self.angles;
@@ -458,10 +455,10 @@ watchdamage() {
   for(;;) {
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname);
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
-    if(isplayer(attacker) && level.teambased && isDefined(attacker.team) && self.team == attacker.team && level.friendlyfire == 0) {
+    if(isPlayer(attacker) && level.teambased && isDefined(attacker.team) && self.team == attacker.team && level.friendlyfire == 0) {
       continue;
     }
     if(self.owner isenemyplayer(attacker)) {
@@ -474,7 +471,7 @@ watchdamage() {
 }
 
 get_array_sorted_dot_prod(array, mincos) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     org = self.origin;
     angles = self getplayerangles();
     assert(isDefined(angles));

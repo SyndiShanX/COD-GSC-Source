@@ -21,12 +21,12 @@
 #namespace namespace_bb5d050c;
 
 function main() {
-  setdvar("doa_redins_rally", 0);
+  setDvar("doa_redins_rally", 0);
   level.var_2eda2d85 = &function_62423327;
   level.var_1f314fb9 = &function_4eb73a5;
   namespace_e8effba5::main();
   namespace_4fca3ee8::main();
-  setdvar("bg_friendlyFireMode", 0);
+  setDvar("bg_friendlyFireMode", 0);
   clientfield::register("world", "redinsExploder", 1, 2, "int", &function_1dd0a889, 0, 0);
   clientfield::register("world", "activateBanner", 1, 3, "int", &function_99e9c8d, 0, 0);
   clientfield::register("world", "pumpBannerBar", 1, 8, "float", &function_98982de8, 0, 0);
@@ -268,7 +268,7 @@ function function_c8020bd9(localclientnum) {
   foreach(player in getplayers(localclientnum)) {
     setuimodelvalue(getuimodel(level.var_b9d30140[player getentitynumber()], "generic_txt"), "");
   }
-  setdvar("doa_redins_rally", 0);
+  setDvar("doa_redins_rally", 0);
   setuimodelvalue(createuimodel(level.var_7e2a814c, "driving"), 0);
 }
 
@@ -367,7 +367,7 @@ function function_787f2b69(localclientnum) {
   level thread function_c8020bd9(localclientnum);
   setuimodelvalue(getuimodel(level.var_7e2a814c, "redins"), "1");
   setuimodelvalue(createuimodel(level.var_7e2a814c, "driving"), 1);
-  setdvar("doa_redins_rally", 1);
+  setDvar("doa_redins_rally", 1);
   level thread function_ec984567();
   while(true) {
     for(i = 0; i < 4; i++) {

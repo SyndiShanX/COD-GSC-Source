@@ -19,8 +19,7 @@ get_aerial_offset() {
 
 get_group_connect_dist() {
   if(isDefined(level.aerial_pathnode_group_connect_dist)) {
-    if(level.nextgen) {
-    } else {}
+    if(level.nextgen) {} else {}
 
     return level.aerial_pathnode_group_connect_dist;
   } else {
@@ -36,9 +35,9 @@ calculate_aerial_pathnodes() {
   if(isDefined(level.calculated_aerial_nodes_in_progress) || isDefined(level.calculated_aerial_nodes_done)) {
     return;
   }
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
-  if(var_0 == getdvar("virtualLobbyMap") || var_0 == "mp_character_room" || getdvarint("virtualLobbyActive") == 1) {
+  if(var_0 == getDvar("virtualLobbyMap") || var_0 == "mp_character_room" || getdvarint("virtualLobbyActive") == 1) {
     return;
   }
   level.calculated_aerial_nodes_in_progress = 1;

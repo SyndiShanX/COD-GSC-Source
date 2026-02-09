@@ -41,7 +41,7 @@ function_cef412a7(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     idamage = self.health + 1;
   }
 
-  if(isplayer(eattacker) && eattacker infection::is_infected()) {
+  if(isPlayer(eattacker) && eattacker infection::is_infected()) {
     return 0;
   }
 
@@ -240,7 +240,7 @@ function_4cc712c8(behaviortreeentity) {
 }
 
 use_low_attack() {
-  if(!isDefined(self.enemy) || !isplayer(self.enemy)) {
+  if(!isDefined(self.enemy) || !isPlayer(self.enemy)) {
     return false;
   }
 

@@ -162,7 +162,7 @@ main() {
   level._effect["gulag_clouds"] = LoadFX("weather/gulag_clouds");
 
   if(!isDefined(level.script))
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
 
   if(!getdvarint("r_reflectionProbeGenerate"))
     maps\createfx\gulag_fx::main();

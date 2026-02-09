@@ -1083,7 +1083,6 @@ heli_damage_monitor() {
 
         validAttacker thread maps\mp\gametypes\_rank::giveRankXP("kill", xpVal);
         thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, validAttacker, damage, type);
-
       }
     }
   }

@@ -137,7 +137,7 @@ function_6f34f900() {
     s_info = self waittill(#"trigger");
     e_player = s_info.activator;
 
-    if(!isplayer(e_player)) {
+    if(!isPlayer(e_player)) {
       continue;
     }
 
@@ -187,7 +187,7 @@ damage(e_trap) {
 
   self.marked_for_death = 1;
 
-  if(isDefined(e_trap.activated_by_player) && isplayer(e_trap.activated_by_player)) {
+  if(isDefined(e_trap.activated_by_player) && isPlayer(e_trap.activated_by_player)) {
     e_trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     e_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
   }
@@ -226,7 +226,7 @@ player_damage(t_damage) {
 }
 
 function_373d49f(v_dest, n_time = 1, n_accel = 0, var_99997505 = 0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_3fba37cd = util::spawn_model("tag_origin", self.origin, self.angles);
     self linkto(var_3fba37cd);
     var_3fba37cd moveto(v_dest, n_time, n_accel, var_99997505);

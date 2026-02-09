@@ -787,7 +787,7 @@ function_39f9d433() {
   e_player ct_bots::function_fd2d220e(0);
   waitframe(1);
   ct_utils::function_c2a10fc();
-  setdvar(#"hash_3e06b14c41136e95", 0);
+  setDvar(#"hash_3e06b14c41136e95", 0);
   ct_utils::function_e44c5b8e(#"overwatch_helicopter", 25);
   e_player thread ct_utils::function_68848e5("overwatch_helicopter");
   level.var_28cfc859 = 50;
@@ -995,9 +995,9 @@ function_79d4c106() {
   var_7d5a0f5e = e_player gamepadusedlast() ? # "hash_1c41d4b9d00defa5" : # "hash_7a1505df3fd0ed5b";
   e_player thread ct_utils::function_61c3d59c(var_7d5a0f5e, undefined);
   level thread ct_vo::function_14b08e49(array(#"hash_2613f24ad4fa5cbc"), "stop_nag");
-  setdvar(#"hash_3e06b14c41136e95", 0);
+  setDvar(#"hash_3e06b14c41136e95", 0);
   e_player waittill(#"hash_7b84cc3c326479a6");
-  setdvar(#"hash_3e06b14c41136e95", 1);
+  setDvar(#"hash_3e06b14c41136e95", 1);
   level notify(#"stop_nag");
   ct_utils::function_daa27144();
   ct_utils::function_c2a10fc();

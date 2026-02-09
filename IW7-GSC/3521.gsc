@@ -96,7 +96,7 @@ func_13BB0(var_0, var_1) {
   self.var_AD32 = var_4;
   self getweaponweight(var_4, "tag_origin", 0.5);
 
-  if(isDefined(var_3.var_1155F) && isplayer(var_3.var_1155F)) {
+  if(isDefined(var_3.var_1155F) && isPlayer(var_3.var_1155F)) {
     var_3 linkto(var_3.var_1155F);
     thread func_13B79(var_3);
 

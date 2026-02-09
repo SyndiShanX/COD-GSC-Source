@@ -91,7 +91,6 @@ _id_12B5() {
 
       if(var_5 != "") {
         level.challengeinfo[var_3]["requirement"] = var_5;
-
       }
       var_3 = tablelookupbyrow(var_1, var_4, 0);
     }
@@ -109,7 +108,6 @@ challengesplashnotify(var_0) {
 
   if(var_2 == 0) {
     var_2 = 1;
-
   }
   var_3 = spawnStruct();
   var_3.type = "challenge";
@@ -156,7 +154,6 @@ giverankxpafterwait(var_0, var_1) {
 processchallenge(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   var_3 = getchallengestatus(var_0);
 
@@ -172,7 +169,6 @@ processchallenge(var_0, var_1, var_2) {
     var_5 = var_1;
   } else {
     var_5 = var_4 + var_1;
-
   }
   var_6 = level.challengeinfo[var_0]["targetval"][var_3];
 
@@ -181,11 +177,9 @@ processchallenge(var_0, var_1, var_2) {
     var_5 = var_6;
   } else {
     var_7 = 0;
-
   }
   if(var_4 < var_5) {
     ch_setprogress(var_0, var_5);
-
   }
   if(var_7) {
     thread giverankxpafterwait(var_0, var_3);

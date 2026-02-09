@@ -343,7 +343,7 @@ domeleedamage(var_0, var_1, var_2) {
     return;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(var_0 scripts\engine\utility::isprotectedbyaxeblock(self)) {
       return;
     }
@@ -423,7 +423,7 @@ func_252F(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) || isai(var_0)) {
+  if(isPlayer(var_0) || isai(var_0)) {
     if(scripts\engine\utility::istrue(self.var_29D2) && !scripts\engine\utility::istrue(self.dismember_crawl)) {
       var_1 = [];
       var_1[0] = self;

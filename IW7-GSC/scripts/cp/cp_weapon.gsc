@@ -1049,7 +1049,7 @@ stancerecoiladjuster() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -1534,13 +1534,13 @@ isinvalidzone(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 placeequipmentfailed(var_0, var_1, var_2, var_3) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self playlocalsound("scavenger_pack_pickup");
   }
 
   if(scripts\engine\utility::istrue(var_1)) {
     var_4 = undefined;
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self playlocalsound("ww_magicbox_laughter");
       if(isDefined(var_3)) {
         var_4 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"), var_2, self, anglesToForward(var_3), anglestoup(var_3));
@@ -1675,7 +1675,7 @@ mineproximitytrigger(var_0) {
   self.damagearea = var_2;
   for(;;) {
     var_2 waittill("trigger", var_3);
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       wait(0.05);
       continue;
     }
@@ -1910,11 +1910,11 @@ throwingknifeused(var_0, var_1, var_2) {
   var_1 waittill("missile_stuck", var_3, var_4);
   var_5 = isDefined(var_4) && var_4 == "tag_flicker";
   var_6 = isDefined(var_4) && var_4 == "tag_weapon";
-  if(isDefined(var_3) && isplayer(var_3) || isagent(var_3) && var_5) {
+  if(isDefined(var_3) && isPlayer(var_3) || isagent(var_3) && var_5) {
     var_3 notify("shield_hit", var_1);
   }
 
-  if(isDefined(var_3) && isplayer(var_3) || isagent(var_3) && !var_6 && !var_5) {
+  if(isDefined(var_3) && isPlayer(var_3) || isagent(var_3) && !var_6 && !var_5) {
     if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(var_3, var_1)) {
       var_1 delete();
       return;
@@ -1974,7 +1974,7 @@ hudicontype(var_0) {
     var_1 = 1;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -2233,7 +2233,7 @@ minedamagemonitor() {
       break;
     }
 
-    if(!isplayer(var_0) && !isagent(var_0)) {
+    if(!isPlayer(var_0) && !isagent(var_0)) {
       continue;
     }
 
@@ -2272,7 +2272,7 @@ minedamagemonitor() {
     self.damagedby = var_0;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\cp\cp_damage::updatedamagefeedback("bouncing_betty");
   }
 
@@ -2400,7 +2400,7 @@ claymoredetonation(var_0) {
 }
 
 explosivetrigger(var_0, var_1, var_2) {
-  if(isplayer(var_0) && var_0 scripts\cp\utility::_hasperk("specialty_delaymine")) {
+  if(isPlayer(var_0) && var_0 scripts\cp\utility::_hasperk("specialty_delaymine")) {
     var_0 notify("triggeredExpl", var_2);
     var_1 = level.delayminetime;
   }
@@ -3097,7 +3097,7 @@ create_zombie_base_to_unique_map(var_0, var_1, var_2, var_3) {
 }
 
 getattachmentlistuniquenames(var_0) {
-  var_1 = getdvar("g_gametype");
+  var_1 = getDvar("g_gametype");
   var_2 = [];
   var_3 = 0;
   for(var_4 = tablelookup(var_0, 0, var_3, 4); var_4 != ""; var_4 = tablelookup(var_0, 0, var_3, 4)) {
@@ -4072,7 +4072,7 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       var_11 = "";
-      if(isDefined(var_8) && isplayer(var_8)) {
+      if(isDefined(var_8) && isPlayer(var_8)) {
         var_11 = var_8 scripts\cp\utility::getuniqueid();
       }
 
@@ -4363,7 +4363,7 @@ is_holding_pistol(var_0) {
 }
 
 get_weapon_level(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return int(1);
   }
 

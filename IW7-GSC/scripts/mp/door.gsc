@@ -444,7 +444,7 @@ return_triggerer(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_2);
     if(isDefined(var_0.prone_only) && var_0.prone_only == 1) {
-      if(isplayer(var_2)) {
+      if(isPlayer(var_2)) {
         var_3 = var_2 getstance();
         if(var_3 != "prone") {
           continue;

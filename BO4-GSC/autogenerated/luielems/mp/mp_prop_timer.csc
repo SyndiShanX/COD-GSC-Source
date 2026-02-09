@@ -34,7 +34,6 @@ class cmp_prop_timer: cluielem {
     cluielem::add_clientfield("timeRemaining", 16000, 5, "int", var_43c7e6f7);
     cluielem::add_clientfield("isProp", 16000, 1, "int", var_6fb92716);
   }
-
 }
 
 register(uid, var_43c7e6f7, var_6fb92716) {

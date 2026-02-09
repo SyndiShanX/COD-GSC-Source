@@ -35,7 +35,7 @@
 #namespace ct_torque_tutorial;
 
 init() {
-  setdvar(#"compassmaxrange", "3600");
+  setDvar(#"compassmaxrange", "3600");
   level.var_ae120f18 = array("vox_tvoi_tutor_torq_start_0");
   level.var_bb9429c2 = level.var_c8b46e18;
   level.onconcertinawireplaced = &on_concertinawire_placed;
@@ -1684,7 +1684,7 @@ function_78986232(params) {
   eattacker = params.eattacker;
   weapon = params.weapon;
 
-  if(isplayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
+  if(isPlayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"swat_team");
     var_23efb519 = 10;
     var_595e41ee = 150;

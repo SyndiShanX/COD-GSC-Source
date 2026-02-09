@@ -23,7 +23,6 @@ main() {
       var_1 delete();
     } else {
       wait 0.5;
-
     }
     return;
   }
@@ -32,9 +31,8 @@ main() {
 
   if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
     self.enemy.syncedmeleetarget = undefined;
-
   }
-  self clearanim( % root, 0.2);
-  self setflaggedanimrestart("dog_anim", % german_shepherd_death_front, 1, 0.2, 1);
+  self clearanim(%root, 0.2);
+  self setflaggedanimrestart("dog_anim", %german_shepherd_death_front, 1, 0.2, 1);
   animscripts\shared::_id_0C51("dog_anim");
 }

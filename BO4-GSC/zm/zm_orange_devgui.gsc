@@ -153,6 +153,6 @@ devgui() {
         break;
     }
 
-    setdvar(#"zm_orange_debug_cmd", "<dev string:x8e8>");
+    setDvar(#"zm_orange_debug_cmd", "<dev string:x8e8>");
   }
 }

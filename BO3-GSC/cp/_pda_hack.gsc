@@ -230,7 +230,6 @@ class chackableobject {
     enable_hacking();
     self thread thread_hacking_progress();
   }
-
 }
 
 #namespace _pda_hack;

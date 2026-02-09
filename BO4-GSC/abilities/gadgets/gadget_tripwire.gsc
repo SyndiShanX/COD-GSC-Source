@@ -119,7 +119,7 @@ function_9366bdf9(tripwire, owner) {
   enemyplayers = owner getenemiesinradius(tripwire.origin, [[level.var_ac6052e9]]("tripwireThreatRadius", 500));
 
   foreach(enemy in enemyplayers) {
-    if(!isplayer(enemy)) {
+    if(!isPlayer(enemy)) {
       continue;
     }
 
@@ -335,7 +335,7 @@ function_430b5b99(entity, tripmine) {
     return false;
   }
 
-  if(!isplayer(entity) && !isvehicle(entity) && !isai(entity) && !entity ismovingplatform() && !(isDefined(entity.var_4f564337) && entity.var_4f564337)) {
+  if(!isPlayer(entity) && !isvehicle(entity) && !isai(entity) && !entity ismovingplatform() && !(isDefined(entity.var_4f564337) && entity.var_4f564337)) {
     return false;
   }
 
@@ -350,16 +350,16 @@ function_430b5b99(entity, tripmine) {
       owner = entity getseatoccupant(0);
     }
 
-    if(isplayer(owner) && !util::function_fbce7263(owner.team, tripmine.team)) {
+    if(isPlayer(owner) && !util::function_fbce7263(owner.team, tripmine.team)) {
       return false;
     }
   }
 
-  if(isplayer(entity) && entity hasperk(#"specialty_nottargetedbytripwire")) {
+  if(isPlayer(entity) && entity hasperk(#"specialty_nottargetedbytripwire")) {
     return false;
   }
 
-  if(isplayer(entity) && entity isjuking()) {
+  if(isPlayer(entity) && entity isjuking()) {
     return false;
   }
 
@@ -759,7 +759,7 @@ function_7a905654(watcher) {
       continue;
     }
 
-    if(level.teambased && isplayer(attacker)) {
+    if(level.teambased && isPlayer(attacker)) {
       if(!(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner !== attacker) {
         continue;
       }

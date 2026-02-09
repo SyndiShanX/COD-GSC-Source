@@ -181,9 +181,7 @@ powerup_hud_monitor() {
         }
 
         if(isDefined(level.var_209e0eb4)) {
-          if(![
-              [level.var_209e0eb4]
-            ](player)) {
+          if(![[level.var_209e0eb4]](player)) {
             continue;
           }
         }
@@ -1069,9 +1067,9 @@ powerup_grab(powerup_team) {
     for(i = 0; i < grabbers.size; i++) {
       grabber = grabbers[i];
 
-      if(isalive(grabber.owner) && isplayer(grabber.owner)) {
+      if(isalive(grabber.owner) && isPlayer(grabber.owner)) {
         player = grabber.owner;
-      } else if(isplayer(grabber)) {
+      } else if(isPlayer(grabber)) {
         player = grabber;
       }
 
@@ -1087,7 +1085,7 @@ powerup_grab(powerup_team) {
         continue;
       }
 
-      if((self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink") && (!isplayer(grabber) || player laststand::player_is_in_laststand() || player usebuttonpressed() && player zm_utility::in_revive_trigger() || player bgb::is_enabled(#"zm_bgb_disorderly_combat"))) {
+      if((self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink") && (!isPlayer(grabber) || player laststand::player_is_in_laststand() || player usebuttonpressed() && player zm_utility::in_revive_trigger() || player bgb::is_enabled(#"zm_bgb_disorderly_combat"))) {
         continue;
       }
 
@@ -1150,7 +1148,7 @@ powerup_grab(powerup_team) {
           player recordmapevent(23, gettime(), grabber.origin, level.round_number, self.hash_id);
         }
 
-        if(should_award_stat(self.powerup_name) && isplayer(player)) {
+        if(should_award_stat(self.powerup_name) && isPlayer(player)) {
           player zm_stats::increment_client_stat("drops");
           player zm_stats::increment_player_stat("drops");
           player zm_stats::forced_attachment("boas_drops");
@@ -1212,9 +1210,7 @@ powerup_grab(powerup_team) {
               level thread[[level.powerup_intro_vox]](self);
               return;
             } else if(isDefined(level.powerup_vo_available)) {
-              can_say_vo = [
-                [level.powerup_vo_available]
-              ]();
+              can_say_vo = [[level.powerup_vo_available]]();
 
               if(!can_say_vo) {
                 self thread powerup_delete_delayed();
@@ -1309,7 +1305,7 @@ get_closest_window_repair(windows, origin) {
 powerup_vo(type) {
   self endon(#"disconnect");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -1812,7 +1808,7 @@ time_remaining_on_powerup(player_team, str_powerup) {
   zombie_utility::set_zombie_var_team(str_index_on, player_team, 0);
   e_player = getplayers()[0];
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     e_player playsoundtoteam(str_sound_off, player_team);
   }
 

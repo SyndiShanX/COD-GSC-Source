@@ -28,12 +28,12 @@ main() {
   setsaveddvar("r_waterwaveamplitude", "1 0 0 0");
   setsaveddvar("r_waterwavenormalscale", 0.25);
   setsaveddvar("sm_sunsamplesizenear", 0.35);
-  setdvar("tu6_player_shallowWaterHeight", "10.5");
-  setdvar("bg_plantInWaterDepth", "11");
-  setdvar("tu7_cg_deathCamAboveWater", "8");
-  setdvar("scr_hydro_water_rush_speed", "4");
-  setdvar("scr_hydro_water_rush_up_time", "8");
-  setdvar("scr_hydro_water_rush_down_time", "4.5");
+  setDvar("tu6_player_shallowWaterHeight", "10.5");
+  setDvar("bg_plantInWaterDepth", "11");
+  setDvar("tu7_cg_deathCamAboveWater", "8");
+  setDvar("scr_hydro_water_rush_speed", "4");
+  setDvar("scr_hydro_water_rush_up_time", "8");
+  setDvar("scr_hydro_water_rush_down_time", "4.5");
   waitforclient(0);
 
   println("*** Client : mp_hydro running...");

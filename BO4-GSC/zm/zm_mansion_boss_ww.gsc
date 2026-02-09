@@ -59,7 +59,6 @@ __init__() {
   if(getdvarint(#"zm_debug_ee", 0)) {
     level thread function_5d346946();
   }
-
 }
 
 init_flags() {
@@ -955,7 +954,7 @@ function_c1b6e914() {
     ents = arraysortclosest(ents, self.origin, undefined, 0, 100);
 
     foreach(ent in ents) {
-      if(isplayer(ent) && distance2dsquared(ent.origin, self.origin) < 6400) {
+      if(isPlayer(ent) && distance2dsquared(ent.origin, self.origin) < 6400) {
         if(!zombie_utility::is_player_valid(ent, 0, 0) || isDefined(ent.var_b1663467) && ent.var_b1663467) {
           continue;
         }
@@ -1204,7 +1203,7 @@ function_bb528a4b(n_stage) {
       n_damage *= 0.1;
     }
 
-    if(isplayer(e_inflictor) && isDefined(w_weapon) && isDefined(e_inflictor zm_utility::function_aa45670f(w_weapon, 0)) && e_inflictor zm_utility::function_aa45670f(w_weapon, 0)) {
+    if(isPlayer(e_inflictor) && isDefined(w_weapon) && isDefined(e_inflictor zm_utility::function_aa45670f(w_weapon, 0)) && e_inflictor zm_utility::function_aa45670f(w_weapon, 0)) {
       n_damage *= 1.05;
     }
 
@@ -1218,7 +1217,7 @@ function_bb528a4b(n_stage) {
       n_damage = var_6e859516;
     }
 
-    if(isalive(s_notify.attacker) && isplayer(s_notify.attacker) && !(isDefined(self.var_a58d72c0) && self.var_a58d72c0)) {
+    if(isalive(s_notify.attacker) && isPlayer(s_notify.attacker) && !(isDefined(self.var_a58d72c0) && self.var_a58d72c0)) {
       self.var_35eb7b2a = gettime() + 1000;
       s_notify.attacker playhitmarker(undefined, 5, undefined, 1, 0);
       s_notify.attacker thread zm_audio::sndplayerhitalert_playSound("zmb_hit_alert_hallion");
@@ -1261,7 +1260,7 @@ function_68af48a0() {
   level endon(#"hash_38f29f9cb03586ea", #"end_game", #"intermission");
   self endon(#"death");
 
-  if(isplayer(self) && !(isDefined(level.var_f1028094[# "hash_648770ea260c72e8"]) && level.var_f1028094[# "hash_648770ea260c72e8"])) {
+  if(isPlayer(self) && !(isDefined(level.var_f1028094[# "hash_648770ea260c72e8"]) && level.var_f1028094[# "hash_648770ea260c72e8"])) {
     level.var_f1028094[# "hash_648770ea260c72e8"] = 1;
     n_character_index = self zm_characters::function_d35e4c92();
     str_vo = "vox_werewolf_health_25_plr_" + n_character_index + "_0";
@@ -1393,7 +1392,7 @@ function_a430c55f() {
     waitresult = self waittill(#"trigger");
     e_player = waitresult.activator;
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       self.stub.var_235457fd = 0;
 
       if(self.stub.e_statue.var_ae187a59 == 4) {
@@ -1808,7 +1807,7 @@ function_e9b8eaff(e_attacker) {
     return;
   }
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 

@@ -534,7 +534,6 @@ npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
       else
         ai[i] delete();
     }
-
   }
 
   //	//Delete alll the hostages
@@ -547,7 +546,6 @@ npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
   //				aHostages[i] delete();
   //		}
   //	}
-
 }
 
 getDudeFromArray(aSpawnArray, sScript_Noteworthy) {
@@ -713,8 +711,7 @@ AA_door_functions() {
 }
 
 door_open(sType, bPlaySound, bPlayDefaultFx) {
-  /*-----------------------
-  VARIABLE SETUP
+  /*----------------------- VARIABLE SETUP
   -------------------------*/
   if(!isDefined(bPlaySound))
     bPlaySound = true;
@@ -732,8 +729,7 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
     eExploder = getent(blocker.script_linkto, "script_linkname");
     assertex(isDefined(eExploder), "A script_model door blocker needs to script_linkTo an exploder to play particles when opened. Targetname:" + self.targetname);
   }
-  /*-----------------------
-  OPEN DOOR, CONNECT PATHS, PLAY FX
+  /*----------------------- OPEN DOOR, CONNECT PATHS, PLAY FX
   -------------------------*/
   switch (sType) {
     case "explosive":
@@ -758,8 +754,7 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
       self door_connectpaths();
       break;
   }
-  /*-----------------------
-  PLAY EXPLODER IN CASE FX ARTISTS WANT TO ADD
+  /*----------------------- PLAY EXPLODER IN CASE FX ARTISTS WANT TO ADD
   -------------------------*/
   iExploderNum = eExploder.script_exploder;
   assertEx((isDefined(iExploderNum)), "There is no exploder number in the key 'script_exploder'");

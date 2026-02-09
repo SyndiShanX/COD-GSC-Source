@@ -1170,7 +1170,6 @@ getNextRelevantDialog() {
     } else {
       return level.alliesCapturing[self.leaderDialogQueue];
     }
-
   }
 }
 
@@ -1457,12 +1456,12 @@ registerScoreLimitDvar(dvarString, defaultValue) {
 
 registerTimeLimitDvar(dvarString, defaultValue) {
   registerWatchDvarFloat("timelimit", defaultValue);
-  SetDvar("ui_timelimit", getTimeLimit());
+  setDvar("ui_timelimit", getTimeLimit());
 }
 
 registerHalfTimeDvar(dvarString, defaultValue) {
   registerWatchDvarInt("halftime", defaultValue);
-  SetDvar("ui_halftime", getHalfTime());
+  setDvar("ui_halftime", getHalfTime());
 }
 
 registerNumLivesDvar(dvarString, defaultValue) {
@@ -1470,7 +1469,7 @@ registerNumLivesDvar(dvarString, defaultValue) {
 }
 
 setOverTimeLimitDvar(value) {
-  SetDvar("overtimeTimeLimit", value);
+  setDvar("overtimeTimeLimit", value);
 }
 
 get_damageable_player(player, playerpos) {
@@ -2228,7 +2227,7 @@ _setAbility(abilityName, useSlot) {
 
   self.abilities[abilityName] = true;
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.abilitySetFuncs[abilityName])) {
       self thread[[level.abilitySetFuncs[abilityName]]]();
     }
@@ -2240,7 +2239,7 @@ _setAbility(abilityName, useSlot) {
 _unsetAbility(abilityName) {
   self.abilities[abilityName] = undefined;
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.abilityUnsetFuncs[abilityName])) {
       self thread[[level.abilityUnsetFuncs[abilityName]]]();
     }
@@ -2250,7 +2249,7 @@ _unsetAbility(abilityName) {
 }
 
 _clearAbilities() {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.abilityUnsetFuncs[self.pers["ability"]])) {
       self[[level.abilityUnsetFuncs[self.pers["ability"]]]]();
     }
@@ -2376,7 +2375,7 @@ _timeout_pause_on_death_and_prematch(delay, ent) {
 
   inc = 0.05;
   while(delay > 0) {
-    if(IsPlayer(ent) && !isReallyAlive(ent)) {
+    if(isPlayer(ent) && !isReallyAlive(ent)) {
       ent waittill("spawned_player");
     }
     if(GetDvarInt("ui_inprematch")) {
@@ -2957,7 +2956,7 @@ isBulletDamage(meansofdeath) {
 }
 
 isFMJDamage(sWeapon, sMeansOfDeath, attacker) {
-  return isDefined(attacker) && IsPlayer(attacker) && attacker _hasPerk("specialty_bulletpenetration") && isDefined(sMeansOfDeath) && isBulletDamage(sMeansOfDeath);
+  return isDefined(attacker) && isPlayer(attacker) && attacker _hasPerk("specialty_bulletpenetration") && isDefined(sMeansOfDeath) && isBulletDamage(sMeansOfDeath);
 }
 
 initLevelFlags() {
@@ -3109,7 +3108,7 @@ teamPlayerCardSplash(splash, owner, team, optionalNumber) {
       continue;
     }
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
 
@@ -3438,7 +3437,7 @@ touchingBadTrigger() {
     }
   }
 
-  if(getdvar("g_gametype") == "hp" && isDefined(level.zone) && isDefined(level.zone.trig) && self isTouching(level.zone.trig)) {
+  if(getDvar("g_gametype") == "hp" && isDefined(level.zone) && isDefined(level.zone.trig) && self isTouching(level.zone.trig)) {
     return true;
   }
 
@@ -3456,13 +3455,13 @@ setThirdPersonDOF(isEnabled) {
 killTrigger(pos, radius, height) {
   trig = spawn("trigger_radius", pos, 0, radius, height);
 
-  if(getdvar("scr_killtriggerdebug") == "1") {
+  if(getDvar("scr_killtriggerdebug") == "1") {
     thread killTriggerDebug(pos, radius, height);
   }
 
   for(;;) {
-    if(getdvar("scr_killtriggerradius") != "") {
-      radius = int(getdvar("scr_killtriggerradius"));
+    if(getDvar("scr_killtriggerradius") != "") {
+      radius = int(getDvar("scr_killtriggerradius"));
     }
 
     trig waittill("trigger", player);
@@ -3957,7 +3956,6 @@ lightWeightScalar(power) {
 }
 
 allowTeamChoice() {
-  /#	
   if(GetDvarInt("scr_skipclasschoice", 0) > 0) {
     return 0;
   }
@@ -3969,7 +3967,6 @@ allowTeamChoice() {
 }
 
 allowClassChoice() {
-  /#	
   if(GetDvarInt("scr_skipclasschoice", 0) > 0) {
     return 0;
   }
@@ -4032,7 +4029,7 @@ setCommonRulesFromMatchRulesData(skipFriendlyFire) {
   level.customClassPickCount = GetMatchRulesData("commonOption", "classPickCount");
 
   SetDynamicDvar("scr_game_high_jump", GetMatchRulesData("commonOption", "highJump"));
-  SetDynamicDvar("jump_slowdownEnable", GetDvar("scr_game_high_jump") == "0");
+  SetDynamicDvar("jump_slowdownEnable", getDvar("scr_game_high_jump") == "0");
 
   SetDynamicDvar("scr_game_hardpoints", 1);
 
@@ -4063,7 +4060,7 @@ setCommonRulesFromMatchRulesData(skipFriendlyFire) {
     SetDynamicDvar("scr_game_forceuav", 0);
   }
 
-  SetDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
 }
 
 reInitializeMatchRulesOnMigration() {
@@ -4276,7 +4273,7 @@ IsTeamParticipant(ent) {
     return true;
   }
 
-  if(IsPlayer(ent)) {
+  if(isPlayer(ent)) {
     return true;
   }
 
@@ -4300,7 +4297,7 @@ IsGameParticipant(ent) {
     return true;
   }
 
-  if(IsPlayer(ent)) {
+  if(isPlayer(ent)) {
     return true;
   }
 
@@ -4430,33 +4427,33 @@ set_rank_xp_and_prestige_for_bot() {
 
 set_console_status() {
   if(!isDefined(level.Console)) {
-    level.Console = GetDvar("consoleGame") == "true";
+    level.Console = getDvar("consoleGame") == "true";
   } else {
-    AssertEx(level.Console == (GetDvar("consoleGame") == "true"), "Level.console got set incorrectly.");
+    AssertEx(level.Console == (getDvar("consoleGame") == "true"), "Level.console got set incorrectly.");
   }
 
   if(!isDefined(level.xenon)) {
-    level.xenon = GetDvar("xenonGame") == "true";
+    level.xenon = getDvar("xenonGame") == "true";
   } else {
-    AssertEx(level.xenon == (GetDvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
+    AssertEx(level.xenon == (getDvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
   }
 
   if(!isDefined(level.ps3)) {
-    level.ps3 = GetDvar("ps3Game") == "true";
+    level.ps3 = getDvar("ps3Game") == "true";
   } else {
-    AssertEx(level.ps3 == (GetDvar("ps3Game") == "true"), "Level.ps3 got set incorrectly.");
+    AssertEx(level.ps3 == (getDvar("ps3Game") == "true"), "Level.ps3 got set incorrectly.");
   }
 
   if(!isDefined(level.xb3)) {
-    level.xb3 = GetDvar("xb3Game") == "true";
+    level.xb3 = getDvar("xb3Game") == "true";
   } else {
-    AssertEx(level.xb3 == (GetDvar("xb3Game") == "true"), "Level.xb3 got set incorrectly.");
+    AssertEx(level.xb3 == (getDvar("xb3Game") == "true"), "Level.xb3 got set incorrectly.");
   }
 
   if(!isDefined(level.ps4)) {
-    level.ps4 = GetDvar("ps4Game") == "true";
+    level.ps4 = getDvar("ps4Game") == "true";
   } else {
-    AssertEx(level.ps4 == (GetDvar("ps4Game") == "true"), "Level.ps4 got set incorrectly.");
+    AssertEx(level.ps4 == (getDvar("ps4Game") == "true"), "Level.ps4 got set incorrectly.");
   }
 }
 
@@ -4477,9 +4474,9 @@ setdvar_cg_ng(dvar_name, current_gen_val, next_gen_val) {
   AssertEx(isDefined(level.console) && isDefined(level.xb3) && isDefined(level.ps4), "Expected platform defines to be complete.");
 
   if(is_gen4()) {
-    setdvar(dvar_name, next_gen_val);
+    setDvar(dvar_name, next_gen_val);
   } else {
-    setdvar(dvar_name, current_gen_val);
+    setDvar(dvar_name, current_gen_val);
   }
 }
 
@@ -4521,7 +4518,7 @@ revertVisionSetForPlayer(time) {
 }
 
 set_light_set_for_player(lightset) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -4534,7 +4531,7 @@ set_light_set_for_player(lightset) {
 }
 
 clear_light_set_for_player() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -4550,7 +4547,7 @@ clear_light_set_for_player() {
 }
 
 light_set_override_for_player(lightset_name, enable_duration, lightset_duration, disable_duration) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

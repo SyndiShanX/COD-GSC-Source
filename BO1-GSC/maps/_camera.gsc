@@ -11,5 +11,4 @@ main(model, type) {
   build_localinit(::init_local);
   build_deathmodel("vehicle_camera");
 }
-
 init_local() {}

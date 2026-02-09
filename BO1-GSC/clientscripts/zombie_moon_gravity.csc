@@ -1,6 +1,6 @@
 /*************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_moon_gravity.csc
+ * Script: clientscripts\zombie_moon_gravity\.csc
 *************************************************/
 
 #include clientscripts\_utility;
@@ -9,7 +9,6 @@
 init() {
   level.low_gravity_default = -136;
 }
-
 zombie_low_gravity(local_client_num, set, newEnt) {
   self endon("death");
   self endon("entityshutdown");

@@ -79,7 +79,7 @@ function function_b67d38c4() {
 }
 
 function function_6b1e8f3c(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(isDefined(params.weapon) && (params.smeansofdeath == "MOD_PISTOL_BULLET" || params.smeansofdeath == "MOD_RIFLE_BULLET")) {
       if(isDefined(params.eattacker.var_f329477a)) {
         if(params.eattacker.var_f329477a == params.eattacker._bbdata["shots"]) {
@@ -132,7 +132,7 @@ function function_3bf99ff5() {
 
 function function_25a5bc35(params) {
   if(self.archetype == "robot" && self.movemode == "run") {
-    if(isplayer(params.eattacker)) {
+    if(isPlayer(params.eattacker)) {
       if(function_3dc86a1(params)) {
         params.eattacker notify("hash_55b52735");
       }
@@ -170,7 +170,7 @@ function function_c05b6c67() {
 }
 
 function function_d77515b3(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(self.archetype == "robot") {
       if(params.shitloc == "head" || params.shitloc == "helmet" || params.shitloc == "neck") {
         if(!params.eattacker.var_ad8b41e2) {
@@ -199,7 +199,7 @@ function function_6a1ab5fc() {
 }
 
 function function_94847029(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(!level flag::get("exterior_gone_hot")) {
       params.eattacker notify("hash_8ff5db7c");
     }
@@ -215,7 +215,7 @@ function function_b2309b8() {
 }
 
 function function_52b96b46(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(!level flag::get("exterior_gone_hot")) {
       if(self.scoretype == "_sniper") {
         params.eattacker notify("hash_4a89e4c7");
@@ -233,7 +233,7 @@ function function_6a2780bc() {
 }
 
 function function_707a731a(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     var_701fc082 = params.eattacker.origin;
     var_b0bb8558 = self.origin;
     if(distance(var_701fc082, var_b0bb8558) > 2500) {
@@ -251,7 +251,7 @@ function function_5335c37e() {
 }
 
 function function_e7cebc20(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(params.smeansofdeath == "MOD_ELECTROCUTED") {
       if(isDefined(params.eattacker.var_e6cc8b44)) {
         if(params.eattacker.var_e6cc8b44 == params.einflictor) {
@@ -342,7 +342,7 @@ function function_d669046f() {
 }
 
 function function_89c51083(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(!params.eattacker isonground()) {
       if(params.weapon.weapclass == "rocketlauncher") {
         if(isDefined(params.eattacker.var_9dbb738f)) {

@@ -8,7 +8,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -299,13 +299,13 @@ getUnownedFlagNearestStart(team, excludeFlag) {
 
 domDebug() {
   while(1) {
-    if(getdvar("scr_domdebug") != "1") {
+    if(getDvar("scr_domdebug") != "1") {
       wait 2;
       continue;
     }
 
     while(1) {
-      if(getdvar("scr_domdebug") != "1") {
+      if(getDvar("scr_domdebug") != "1") {
         break;
       }
       // show flag connections and each flag's spawnpoints

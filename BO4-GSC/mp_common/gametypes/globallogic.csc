@@ -70,12 +70,12 @@ __init__() {
     level.var_90bb9821 = getgametypesetting(#"playermaxhealth") - 150;
   }
 
-  setdvar(#"bg_boastenabled", getgametypesetting(#"boastenabled"));
+  setDvar(#"bg_boastenabled", getgametypesetting(#"boastenabled"));
   boastallowcam = getgametypesetting(#"boastallowcam");
-  setdvar(#"hash_23c5d7207ebc0bf9", boastallowcam);
-  setdvar(#"hash_62833d3c5e6d7380", boastallowcam);
-  setdvar(#"hash_e099986c072eb0f", getgametypesetting(#"hash_104f124f56f0f20a"));
-  setdvar(#"hash_553ad8f9db24bf22", int(1000 * getgametypesetting(#"hash_1614b9cbe0df6f75")));
+  setDvar(#"hash_23c5d7207ebc0bf9", boastallowcam);
+  setDvar(#"hash_62833d3c5e6d7380", boastallowcam);
+  setDvar(#"hash_e099986c072eb0f", getgametypesetting(#"hash_104f124f56f0f20a"));
+  setDvar(#"hash_553ad8f9db24bf22", int(1000 * getgametypesetting(#"hash_1614b9cbe0df6f75")));
   callback::on_spawned(&on_player_spawned);
   display_transition::init_shared();
 }

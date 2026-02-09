@@ -183,14 +183,14 @@ function __init__() {
 }
 
 function init() {
-  setdvar("doublejump_enabled", 0);
-  setdvar("juke_enabled", 0);
-  setdvar("playerEnergy_enabled", 0);
-  setdvar("wallrun_enabled", 0);
-  setdvar("sprintLeap_enabled", 0);
-  setdvar("traverse_mode", 2);
-  setdvar("weaponrest_enabled", 0);
-  setdvar("ui_allowDisplayContinue", 1);
+  setDvar("doublejump_enabled", 0);
+  setDvar("juke_enabled", 0);
+  setDvar("playerEnergy_enabled", 0);
+  setDvar("wallrun_enabled", 0);
+  setDvar("sprintLeap_enabled", 0);
+  setDvar("traverse_mode", 2);
+  setDvar("weaponrest_enabled", 0);
+  setDvar("ui_allowDisplayContinue", 1);
   if(!isDefined(level.killstreakweapons)) {
     level.killstreakweapons = [];
   }
@@ -455,7 +455,7 @@ function onallplayersready() {
   }
   setinitialplayersconnected();
   level flag::set("all_players_connected");
-  setdvar("all_players_are_connected", "1");
+  setDvar("all_players_are_connected", "1");
   println("");
   if(1 == getnumconnectedplayers() && getdvarint("scr_zm_enable_bots") == 1) {
     level thread add_bots();
@@ -620,9 +620,9 @@ function add_bots() {
   }
   wait(4);
   zbot_spawn();
-  setdvar("bot_AllowMovement", "1");
-  setdvar("bot_PressAttackBtn", "1");
-  setdvar("bot_PressMeleeBtn", "1");
+  setDvar("bot_AllowMovement", "1");
+  setDvar("bot_PressAttackBtn", "1");
+  setDvar("bot_PressMeleeBtn", "1");
   while(getplayers().size < 2) {
     wait(0.05);
   }
@@ -933,22 +933,22 @@ function init_player_levelvars() {
 
 function init_dvars() {
   if(getdvarstring("zombie_debug") == "") {
-    setdvar("zombie_debug", "0");
+    setDvar("zombie_debug", "0");
   }
   if(getdvarstring("scr_zm_enable_bots") == "") {
-    setdvar("scr_zm_enable_bots", "0");
+    setDvar("scr_zm_enable_bots", "0");
   }
   if(getdvarstring("zombie_cheat") == "") {
-    setdvar("zombie_cheat", "0");
+    setDvar("zombie_cheat", "0");
   }
   if(getdvarstring("zombiemode_debug_zombie_count") == "") {
-    setdvar("zombiemode_debug_zombie_count", "0");
+    setDvar("zombiemode_debug_zombie_count", "0");
   }
   if(level.script != "zombie_cod5_prototype") {
-    setdvar("magic_chest_movable", "1");
+    setDvar("magic_chest_movable", "1");
   }
-  setdvar("revive_trigger_radius", "75");
-  setdvar("scr_deleteexplosivesonspawn", "0");
+  setDvar("revive_trigger_radius", "75");
+  setDvar("scr_deleteexplosivesonspawn", "0");
 }
 
 function init_function_overrides() {
@@ -1006,11 +1006,11 @@ function breakafter(time, damage, piece) {
 
 function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, vsurfacenormal) {
   startedinlaststand = 0;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     startedinlaststand = self laststand::player_is_in_laststand();
   }
   println(("" + idamage) + "");
-  if(isDefined(eattacker) && isplayer(eattacker) && eattacker.sessionteam == self.sessionteam && !eattacker hasperk("specialty_playeriszombie") && (!(isDefined(self.is_zombie) && self.is_zombie))) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && eattacker.sessionteam == self.sessionteam && !eattacker hasperk("specialty_playeriszombie") && (!(isDefined(self.is_zombie) && self.is_zombie))) {
     self process_friendly_fire_callbacks(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex);
     if(self != eattacker) {
       println("");
@@ -1058,7 +1058,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
   }
   println("");
   wasdowned = 0;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     wasdowned = !startedinlaststand && self laststand::player_is_in_laststand();
   }
   if(isDefined(eattacker)) {
@@ -1632,7 +1632,7 @@ function player_revive_monitor() {
       println("" + points);
       reviver zm_score::player_add_points("reviver", points);
       self.score_lost_when_downed = 0;
-      if(isplayer(reviver) && reviver != self) {
+      if(isPlayer(reviver) && reviver != self) {
         reviver zm_stats::increment_challenge_stat("SURVIVALIST_REVIVE");
       }
     }
@@ -3089,7 +3089,7 @@ function playerzombie_player_damage() {
   self.zombiehealth = level.zombie_health;
   while(true) {
     self waittill("damage", amount, attacker, directionvec, point, type);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       wait(0.05);
       continue;
     }
@@ -3342,7 +3342,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
     }
     if(smeansofdeath != "MOD_FALLING") {
       self thread playswipesound(smeansofdeath, eattacker);
-      if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker)) {
+      if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isPlayer(eattacker)) {
         self playrumbleonentity("damage_heavy");
       }
       if(isDefined(eattacker.is_zombie) && eattacker.is_zombie) {
@@ -3435,7 +3435,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
     level waittill("forever");
   }
   if(level.scr_zm_ui_gametype == "zcleansed" && idamage > 0) {
-    if(isDefined(eattacker) && isplayer(eattacker) && eattacker.team != self.team && (!(isDefined(self.laststand) && self.laststand) && !self laststand::player_is_in_laststand() || !isDefined(self.last_player_attacker))) {
+    if(isDefined(eattacker) && isPlayer(eattacker) && eattacker.team != self.team && (!(isDefined(self.laststand) && self.laststand) && !self laststand::player_is_in_laststand() || !isDefined(self.last_player_attacker))) {
       if(isDefined(eattacker.maxhealth) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie)) {
         eattacker.health = eattacker.maxhealth;
       }
@@ -3642,7 +3642,7 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
     }
   }
   attacker thread zm_audio::sndplayerhitalert(self, meansofdeath, inflictor, weapon);
-  if(!isplayer(attacker) && isDefined(self.non_attacker_func)) {
+  if(!isPlayer(attacker) && isDefined(self.non_attacker_func)) {
     if(isDefined(self.non_attack_func_takes_attacker) && self.non_attack_func_takes_attacker) {
       return self[[self.non_attacker_func]](damage, weapon, attacker);
     }
@@ -3699,12 +3699,12 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
       }
     }
   }
-  if(isDefined(inflictor) && isplayer(attacker) && attacker == inflictor) {
+  if(isDefined(inflictor) && isPlayer(attacker) && attacker == inflictor) {
     if(meansofdeath == "MOD_HEAD_SHOT" || meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_RIFLE_BULLET") {
       attacker.hits++;
     }
   }
-  if(isDefined(level.headshots_only) && level.headshots_only && isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(level.headshots_only) && level.headshots_only && isDefined(attacker) && isPlayer(attacker)) {
     if(meansofdeath == "MOD_MELEE" && (shitloc == "head" || shitloc == "helmet")) {
       return int(final_damage);
     }
@@ -3776,7 +3776,7 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
   if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
     attacker = attacker.owner;
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     multiplier = 1;
     if(zm_utility::is_headshot(weapon, shitloc, smeansofdeath)) {
       multiplier = 1.5;

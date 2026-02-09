@@ -2141,7 +2141,7 @@ torpedo_the_ship() {
     wait 0.5;
     maps\ship_graveyard_util::force_deathquote(&"SHIP_GRAVEYARD_HINT_TORPEDO");
     maps\_utility::missionfailedwrapper();
-    setdvar("shpg_torpedo_tries", 1);
+    setDvar("shpg_torpedo_tries", 1);
   }
 }
 
@@ -3353,7 +3353,7 @@ end_surface() {
   level.player allowcrouch(0);
   level.player allowprone(0);
   level.player allowjump(0);
-  level.player_view_pitch_down = getdvar("player_view_pitch_down");
+  level.player_view_pitch_down = getDvar("player_view_pitch_down");
   setsaveddvar("player_view_pitch_down", 5);
   level.player enableslowaim(0.5, 0.5);
   level.player disableweapons();

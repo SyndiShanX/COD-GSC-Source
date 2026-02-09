@@ -156,7 +156,7 @@ magic_stealth_shot(var_0, var_1) {
 dog_stealth() {
   maps\_stealth_utility::stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   thread dog_stealth_visibility();
@@ -280,7 +280,7 @@ dialog_player_kill() {
   if(!maps\_stealth_utility::stealth_is_everything_normal()) {
     return;
   }
-  if(isplayer(var_1) || var_1 == level.dog) {
+  if(isPlayer(var_1) || var_1 == level.dog) {
     wait 1;
 
     if(!maps\_stealth_utility::stealth_is_everything_normal()) {

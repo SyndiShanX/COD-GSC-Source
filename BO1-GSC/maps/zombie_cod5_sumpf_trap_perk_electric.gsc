@@ -19,7 +19,6 @@ init_elec_trap_trigs() {
     wait_network_frame();
   }
 }
-
 electric_trap_dialog() {
   self endon("warning_dialog");
   level endon("switch_flipped");
@@ -44,7 +43,6 @@ electric_trap_dialog() {
     }
   }
 }
-
 electric_trap_think() {
   self sethintstring(&"WAW_ZOMBIE_BUTTON_NORTH_FLAMES");
   self setCursorHint("HINT_NOICON");
@@ -71,7 +69,7 @@ electric_trap_think() {
           who maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
           self trigger_off();
           level thread maps\zombie_cod5_sumpf::turnLightRed(self.script_string);
-          self.zombie_dmg_trig = getEnt(self.target, "targetname");
+          self.zombie_dmg_trig = getent(self.target, "targetname");
           self.zombie_dmg_trig trigger_on();
           self thread activate_electric_trap(who);
           self waittill("elec_done");
@@ -89,7 +87,7 @@ electric_trap_think() {
           wait(90);
           self trigger_on();
           level thread maps\zombie_cod5_sumpf::turnLightGreen(self.script_string);
-          pa_system = getEnt("speaker_by_log", "targetname");
+          pa_system = getent("speaker_by_log", "targetname");
           playsoundatposition("warning", pa_system.origin);
           self notify("available");
           self.in_use = 0;
@@ -98,40 +96,38 @@ electric_trap_think() {
     }
   }
 }
-
 electric_trap_move_switch(parent) {
-  tswitch = getEnt(parent.script_linkto, "script_linkname");
+  tswitch = getent(parent.script_linkto, "script_linkname");
   if(tswitch.script_linkname == "110") {
-    tswitch rotatePitch(180, .5);
+    tswitch rotatepitch(180, .5);
     tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
-    tswitch rotatePitch(-180, .5);
+    tswitch rotatepitch(-180, .5);
   } else if(tswitch.script_linkname == "111") {
-    tswitch rotatePitch(180, .5);
+    tswitch rotatepitch(180, .5);
     tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
-    tswitch rotatePitch(-180, .5);
+    tswitch rotatepitch(-180, .5);
   } else if(tswitch.script_linkname == "112") {
-    tswitch rotatePitch(180, .5);
+    tswitch rotatepitch(180, .5);
     tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
-    tswitch rotatePitch(-180, .5);
+    tswitch rotatepitch(-180, .5);
   } else if(tswitch.script_linkname == "113") {
-    tswitch rotatePitch(180, .5);
+    tswitch rotatepitch(180, .5);
     tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
-    tswitch rotatePitch(-180, .5);
+    tswitch rotatepitch(-180, .5);
   }
 }
-
 activate_electric_trap(who) {
   clientnotify(self.target);
   fire_points = getstructarray(self.target, "targetname");
@@ -142,7 +138,6 @@ activate_electric_trap(who) {
   self.zombie_dmg_trig thread elec_barrier_damage(who);
   level waittill("arc_done");
 }
-
 electric_trap_fx(notify_ent) {
   self.tag_origin = spawn("script_model", self.origin);
   self.tag_origin playSound("zmb_elec_start");
@@ -150,13 +145,12 @@ electric_trap_fx(notify_ent) {
   self thread play_electrical_sound();
   wait(25);
   if(isDefined(self.script_sound)) {
-    self.tag_origin stopLoopSound();
+    self.tag_origin stoploopsound();
   }
   self.tag_origin delete();
   notify_ent notify("elec_done");
   level notify("arc_done");
 }
-
 play_electrical_sound() {
   level endon("arc_done");
   while(1) {
@@ -164,11 +158,10 @@ play_electrical_sound() {
     playsoundatposition("zmb_elec_arc", self.origin);
   }
 }
-
 elec_barrier_damage(who) {
   while(1) {
     self waittill("trigger", ent);
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       ent thread player_elec_damage();
     } else {
       if(ent.isdog && is_magic_bullet_shield_enabled(ent)) {
@@ -176,13 +169,12 @@ elec_barrier_damage(who) {
       }
       if(!isDefined(ent.marked_for_death)) {
         ent.marked_for_death = true;
-        ent thread zombie_elec_death(randomInt(100));
+        ent thread zombie_elec_death(randomint(100));
         who.trapped_used[self.targetname] = level.round_number;
       }
     }
   }
 }
-
 play_elec_vocals() {
   if(isDefined(self)) {
     org = self.origin;
@@ -192,7 +184,6 @@ play_elec_vocals() {
     playsoundatposition("zmb_exp_jib_zombie", org);
   }
 }
-
 player_elec_damage() {
   self endon("death");
   self endon("disconnect");
@@ -218,7 +209,6 @@ player_elec_damage() {
     }
   }
 }
-
 zombie_elec_death(flame_chance) {
   self endon("death");
   if(flame_chance > 90 && level.burning_zombies.size < 6) {
@@ -235,9 +225,9 @@ zombie_elec_death(flame_chance) {
     refs[4] = "left_leg";
     refs[5] = "no_legs";
     refs[6] = "head";
-    self.a.gib_ref = refs[randomInt(refs.size)];
+    self.a.gib_ref = refs[randomint(refs.size)];
     playsoundatposition("zmb_zombie_arc", self.origin);
-    if(randomInt(100) > 40) {
+    if(randomint(100) > 40) {
       if(!flag("dog_round")) {
         self thread electroctute_death_fx();
       }
@@ -248,13 +238,11 @@ zombie_elec_death(flame_chance) {
   }
   self dodamage(self.health + 666, self.origin);
 }
-
 zombie_flame_watch() {
   self waittill("death");
-  self stopLoopSound();
+  self stoploopsound();
   level.burning_zombies = array_remove_nokeys(level.burning_zombies, self);
 }
-
 electroctute_death_fx() {
   self endon("death");
   if(isDefined(self.is_electrocuted) && self.is_electrocuted) {
@@ -292,12 +280,11 @@ electroctute_death_fx() {
     playFXOnTag(level._effect["elec_sm"], self, tagArray[1]);
   }
 }
-
 electrocute_timeout() {
   self endon("death");
   self playLoopSound("amb_fire_manager_0");
   wait 12;
-  self stopLoopSound();
+  self stoploopsound();
   if(isDefined(self) && isalive(self)) {
     self.is_electrocuted = false;
     self notify("stop_flame_damage");

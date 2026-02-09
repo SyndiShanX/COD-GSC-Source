@@ -14,7 +14,7 @@ main() {
   game["defenders"] = "allies";
   game["allies_soldiertype"] = "desert";
   game["axis_soldiertype"] = "desert";
-  setdvar("compassmaxrange", "1800");
+  setDvar("compassmaxrange", "1800");
   thread misc_rotate_ceilingfans();
   thread movehpvisuals();
 }

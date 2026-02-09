@@ -135,8 +135,9 @@ run_mason_bridge() {
     bridge_turret.delete_on_death = 1;
     bridge_turret notify("death");
 
-    if(!isalive(bridge_turret))
+    if(!isalive(bridge_turret)) {
       bridge_turret delete();
+    }
   }
 
   flag_set("holo_table_off");
@@ -172,8 +173,9 @@ play_lockout_bink(m_player_body) {
   m_console_dark hide();
   m_console_bink show();
 
-  if(isDefined(m_console_bink.n_bink_id))
+  if(isDefined(m_console_bink.n_bink_id)) {
     stop3dcinematic(m_console_bink.n_bink_id);
+  }
 
   play_movie_on_surface("blackout_lockout", 0, 0);
   m_console_dark show();
@@ -229,8 +231,9 @@ moment_stairfall() {
   m_clip disconnectpaths();
   trigger = getent("reveal_color_trigger", "targetname");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger trigger_use();
+  }
 }
 
 moment_stairfall_die(ai_navy) {
@@ -350,8 +353,9 @@ kill_remaining_enemies() {
       ally shoot_at_target(enemy, "J_head", 0.0, 1.0);
     }
 
-    if(isalive(enemy))
+    if(isalive(enemy)) {
       enemy bloody_death();
+    }
   }
 }
 
@@ -379,8 +383,9 @@ get_catwalk_ally_victims(force_all) {
   color_friendlies = get_all_force_color_friendlies();
   other_friendlies = [];
 
-  if(is_true(force_all) || flag("spec_ops_line_delivered"))
+  if(is_true(force_all) || flag("spec_ops_line_delivered")) {
     other_friendlies = get_ai_group_ai("catwalk_snipers");
+  }
 
   all_friendlies = arraycombine(color_friendlies, other_friendlies, 1, 0);
   return all_friendlies;
@@ -402,8 +407,9 @@ catwalk_random_shooting() {
     num_enemies = enemies.size;
     f_scale = num_enemies / 10.0;
 
-    if(f_scale > 1.0)
+    if(f_scale > 1.0) {
       f_scale = 1.0;
+    }
 
     wait_min = lerpfloat(0.05, 0.3, 1.0 - f_scale);
     wait_max = wait_min * 1.25;
@@ -415,13 +421,14 @@ catwalk_random_shooting() {
       if(rand_chance(0.1)) {
         friendlies = get_catwalk_ally_victims();
 
-        if(friendlies.size > 0)
+        if(friendlies.size > 0) {
           ai_target = random(friendlies);
+        }
       }
 
-      if(isalive(ai_target))
+      if(isalive(ai_target)) {
         hit_pos = ai_target gettagorigin("J_head");
-      else {
+      } else {
         rand_pct = randomfloat(1.0);
         hit_pos = lerpvector(nearest[0].origin, nearest[1].origin, rand_pct);
         hit_pos = hit_pos + (0, 0, randomfloatrange(-12, 12));
@@ -430,8 +437,9 @@ catwalk_random_shooting() {
       s_source = get_furthest_offscreen(sources);
       magicbullet("hk416_sp", s_source.origin, hit_pos);
 
-      if(i % 2 == 0)
+      if(i % 2 == 0) {
         wait(randomfloatrange(wait_min, wait_max));
+      }
     }
   }
 }
@@ -547,8 +555,9 @@ bridge_turret_bloodbath_setup(ai_guy) {
 }
 
 override_bridge_bloodbath(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(!self.ignoreme)
+  if(!self.ignoreme) {
     playFX(level._effect["cic_turret_bloodbath"], vpoint, vdir);
+  }
 
   return true;
 }
@@ -669,13 +678,15 @@ alt_bridge_breadcrumb() {
 }
 
 open_catwalk_door(do_open) {
-  if(!isDefined(do_open))
+  if(!isDefined(do_open)) {
     do_open = 1;
+  }
 
   catwalk_door = getent("catwalk_door_collision", "targetname");
 
-  if(!isDefined(catwalk_door.is_open))
+  if(!isDefined(catwalk_door.is_open)) {
     catwalk_door.is_open = 0;
+  }
 
   if(catwalk_door.is_open == do_open) {
     return;
@@ -787,8 +798,9 @@ ziptie_intro_then_loop(str_scene) {
   trigger_wait("double_stairs_mid");
   e_model = get_model_or_models_from_scene(str_scene + "_loop", str_scene);
 
-  if(isDefined(e_model))
+  if(isDefined(e_model)) {
     e_model delete();
+  }
 
   end_scene(str_scene + "_loop");
 }
@@ -824,8 +836,9 @@ spawn_deck_spec_ops_battle() {
     wait 0.15;
   }
 
-  if(flag("spec_ops_started"))
+  if(flag("spec_ops_started")) {
     level thread dialog_seal_support_objective();
+  }
 
   trigger_wait("security_breadcrumb");
 
@@ -860,8 +873,9 @@ waittill_spawn_manager_spawns_x_more(str_spawn_manager, num_extra_spawns) {
   spawn_managers = maps\_spawn_manager::get_spawn_manager_array(str_spawn_manager);
   prev_count = spawn_managers[0].spawncount;
 
-  while(spawn_managers[0].spawncount < prev_count + num_extra_spawns)
+  while(spawn_managers[0].spawncount < prev_count + num_extra_spawns) {
     wait 0.25;
+  }
 }
 
 spec_ops_battle_finish() {
@@ -1070,8 +1084,9 @@ bridge_catwalk_jetpack_ai(str_flag) {
 
         a_ai = getaiarray("axis", "allies");
 
-        if(a_ai.size < 20)
+        if(a_ai.size < 20) {
           level thread maps\_jetpack_ai::create_jetpack_ai(s_align, "pmc_jetpack_guy");
+        }
 
         wait(randomfloatrange(2, 3));
       }
@@ -1088,8 +1103,9 @@ bridge_catwalk_jetpack_ai(str_flag) {
 }
 
 bridge_catwalk_jetpack_drones(str_flag, str_targetname) {
-  if(!isDefined(str_targetname))
+  if(!isDefined(str_targetname)) {
     str_targetname = "port_vista_drone_jetpack_spot";
+  }
 
   a_s_landing_spot = getstructarray(str_targetname, "targetname");
 
@@ -1102,8 +1118,9 @@ bridge_catwalk_jetpack_drones(str_flag, str_targetname) {
 
         a_ai = getaiarray("axis", "allies");
 
-        if(a_ai.size < 10)
+        if(a_ai.size < 10) {
           level thread maps\_jetpack_ai::create_jetpack_ai(s_align, "pmc_jetpack_guy", 1);
+        }
 
         wait(randomfloatrange(1, 3));
       }

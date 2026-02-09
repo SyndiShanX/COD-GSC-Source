@@ -75,7 +75,7 @@ function initturret() {
 
 function activateturret() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   killstreakid = self killstreakrules::killstreakstart("autoturret", player.team, 0, 0);
   if(killstreakid == -1) {
     return false;
@@ -97,7 +97,7 @@ function activateturret() {
 
 function onplaceturret(turret) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   if(isDefined(turret.vehicle)) {
     turret.vehicle.origin = turret.origin;
     turret.vehicle.angles = turret.angles;
@@ -249,7 +249,7 @@ function ondeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, sh
       turretvehicle.parentstruct killstreaks::play_destroyed_dialog_on_owner(turretvehicle.parentstruct.killstreaktype, turretvehicle.parentstruct.killstreakid);
     }
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(eattacker))) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(eattacker))) {
     scoreevents::processscoreevent("destroyed_sentry_gun", eattacker, self, weapon);
     eattacker challenges::destroyscorestreak(weapon, turretvehicle.controlled, 1, 0);
     eattacker challenges::destroynonairscorestreak_poststatslock(weapon);
@@ -281,7 +281,7 @@ function onshutdown(turret) {
 
 function startturretremotecontrol(turretvehicle) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   turretvehicle disable(0);
   turretvehicle usevehicle(player, 0);
   turretvehicle clientfield::set("vehicletransition", 1);

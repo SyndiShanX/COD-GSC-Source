@@ -20,7 +20,7 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_mirage_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_mirage");
-  setdvar("compassmaxrange", "2400");
+  setDvar("compassmaxrange", "2400");
   visionsetnaked("mp_mirage", 1);
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";

@@ -169,7 +169,7 @@ remote_killstreak_copilot(voice) {
 remote_killstreak_abort() {
   level endon("remote_end");
   assert(isDefined(self.owner));
-  assert(isplayer(self.owner));
+  assert(isPlayer(self.owner));
   self.owner waittill_any("disconnect", "joined_team", "joined_spectators");
   self thread remote_killstreak_end(0, 1);
 }
@@ -205,7 +205,7 @@ remote_owner_exit() {
 remote_killstreak_game_end() {
   level endon("remote_end");
   assert(isDefined(self.owner));
-  assert(isplayer(self.owner));
+  assert(isPlayer(self.owner));
   level waittill("game_ended");
   self thread remote_killstreak_end();
 }
@@ -579,7 +579,7 @@ remote_damage_think() {
     if(!heli_friendlyfire) {
       continue;
     }
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback(meansofdeath);
 
       if(attacker hasperk("specialty_armorpiercing")) {

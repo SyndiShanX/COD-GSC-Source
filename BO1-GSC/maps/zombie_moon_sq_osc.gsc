@@ -70,7 +70,6 @@ init() {
   level thread osc_button_cover_setup();
   declare_sidequest_stage("sq", "osc", ::init_stage, ::stage_logic, ::exit_stage);
 }
-
 osc_button_cover_setup() {
   flag_wait("all_players_connected");
   for(i = 0; i < level._osc_rbs.size; i++) {
@@ -95,20 +94,17 @@ osc_button_cover_setup() {
   }
   level._osc_rbs_totalrot = level._osc_rbs[0].cover_close - level._osc_rbs[0].cover_open;
 }
-
 exit_stage(success) {}
 stage_logic() {
   level waittill("release_complete");
   stage_completed("sq", "osc");
 }
-
 init_stage() {
   level thread moon_jolie_greet();
   level thread moon_rb_dist_think();
   level thread moon_open_access();
   level thread moon_keyhole();
 }
-
 moon_rb_dist_think() {
   level endon("end_game");
   level endon(level._osc_flags[1]);
@@ -128,7 +124,8 @@ moon_rb_dist_think() {
     rotation_offset = level._osc_rbs_totalrot * scale;
     for(i = 0; i < level._osc_rbs.size; i++) {
       level._osc_rbs[i].cover.angles = level._osc_rbs[i].cover_close - rotation_offset;
-      if(level._osc_rbs[i].cover.angles == level._osc_rbs[i].cover_close && level._lid_close_sound == 0) {
+      if(level._osc_rbs[i].cover.angles == level._osc_rbs[i].cover_close &&
+        level._lid_close_sound == 0) {
         level._lid_close_sound = 1;
         level._osc_rbs[i].cover thread rb_cover_sound();
       }
@@ -137,7 +134,6 @@ moon_rb_dist_think() {
     level._osc_check = undefined;
   }
 }
-
 rb_cover_sound() {
   for(i = 0; i < level._osc_rbs.size; i++) {
     level._osc_rbs[i].cover playSound("evt_sq_rbs_close");
@@ -148,7 +144,6 @@ rb_cover_sound() {
   wait(30);
   level._lid_close_sound = 0;
 }
-
 play_rb_cover_player_vox(ent) {
   level notify("prevent_dupe_rb_cover_vox");
   level endon("prevent_dupe_rb_cover_vox");
@@ -156,7 +151,6 @@ play_rb_cover_player_vox(ent) {
   player = get_closest_player(ent.origin);
   player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 0);
 }
-
 moon_jolie_greet() {
   if(!isDefined(level._osc_rb_jolie_spots) || level._osc_rb_jolie_spots.size == 0) {
     PrintLn("$$$$ Missing jolie spots $$$$");
@@ -210,7 +204,6 @@ moon_jolie_greet() {
     }
   }
 }
-
 moon_jolie_access(ent_hacker) {
   level thread play_moon_jolie_access_vox(ent_hacker);
   level._lid_close_sound = 1;
@@ -221,7 +214,7 @@ moon_jolie_access(ent_hacker) {
   random_array = level._osc_st;
   random_array = array_randomize(random_array);
   for(j = 0; j < 4; j++) {
-    PrintLn("** register hackable terminal hackable.");
+    PrintLn("*** register hackable terminal hackable.");
     random_array[j].focus._light = spawn("script_model", random_array[j].focus._light_spot.origin);
     random_array[j].focus._light.angles = random_array[j].focus._light_spot.angles;
     random_array[j].focus._light setModel("zombie_trap_switch_light_on_green");
@@ -234,7 +227,6 @@ moon_jolie_access(ent_hacker) {
   level thread moon_bad_jolie();
   array_thread(random_array, ::moon_jolie_timer_vox);
 }
-
 moon_jolie_work(ent_hacker) {
   level._osc_terms++;
   if(isDefined(self._light)) {
@@ -248,19 +240,17 @@ moon_jolie_work(ent_hacker) {
   }
   maps\_zombiemode_equip_hacker::deregister_hackable_struct(self);
 }
-
 moon_good_jolie() {
   level endon("jolie_fail");
   level endon("jolie_pass");
   level endon(level._osc_flags[1]);
   while(level._osc_terms < 4) {
-    PrintLn("** osc terms : " + level._osc_terms);
+    PrintLn("**** osc terms : " + level._osc_terms);
     wait(0.1);
   }
   flag_set(level._osc_flags[3]);
   level notify("jolie_pass");
 }
-
 moon_bad_jolie() {
   level endon("jolie_fail");
   level endon("jolie_pass");
@@ -270,7 +260,6 @@ moon_bad_jolie() {
   level notify("jolie_fail");
   level thread comp_fail_vox();
 }
-
 moon_jolie_timer_vox() {
   level endon("jolie_fail");
   level endon("jolie_pass");
@@ -301,7 +290,6 @@ moon_jolie_timer_vox() {
     wait(1);
   }
 }
-
 moon_open_access() {
   button_triggers = [];
   flag_wait(level._osc_flags[1]);
@@ -339,7 +327,6 @@ moon_open_access() {
     }
   }
 }
-
 moon_access_granted(int_hits) {
   level endon("end_game");
   flag_wait(level._osc_flags[1]);
@@ -353,7 +340,6 @@ moon_access_granted(int_hits) {
     wait(0.1);
   }
 }
-
 moon_hit_reaction() {
   level endon("end_game");
   level endon(level._osc_flags[9]);
@@ -374,14 +360,12 @@ moon_hit_reaction() {
     }
   }
 }
-
 moon_keyhole() {
   flag_wait(level._osc_flags[9]);
   level._osc_cap RotateRoll(180, 1.0);
   level._osc_cap waittill("rotatedone");
   flag_set(level._osc_flags[10]);
 }
-
 hacker_debug(msg, color) {}
 play_moon_jolie_access_vox(who) {
   for(i = 0; i < level._osc_rbs.size; i++) {
@@ -392,7 +376,6 @@ play_moon_jolie_access_vox(who) {
     who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 9);
   }
 }
-
 play_moon_pass_vox(who) {
   playsoundatposition("vox_mcomp_quest_step5_26", self.origin);
   for(i = 0; i < level._osc_rbs.size; i++) {
@@ -403,7 +386,6 @@ play_moon_pass_vox(who) {
     who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 12);
   }
 }
-
 comp_fail_vox() {
   for(i = 0; i < level._osc_rbs.size; i++) {
     level._osc_rbs[i].cover playSound("vox_mcomp_quest_step5_8", "rbs_sounddone");

@@ -9,7 +9,7 @@
 trackrounds_think()
 
 {
-  if(GetDvar("mapname") == getdvar("virtualLobbyMap")) {
+  if(getDvar("mapname") == getDvar("virtualLobbyMap")) {
     return;
   }
 
@@ -76,7 +76,7 @@ toggle_has_trackrounds(weapon)
 set_painted_trackrounds(attacker)
 
 {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(self.painted_tracked) && self.painted_tracked) {
       return;
     }

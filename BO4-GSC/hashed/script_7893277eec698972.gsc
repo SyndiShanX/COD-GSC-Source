@@ -240,7 +240,6 @@ step_3_setup(var_a276c861) {
         level.var_f9f50915.mdl_chest playLoopSound(#"hash_326fef81e2be51bb", 2);
 
         iprintlnbold("<dev string:x38>");
-
       }
 
       level.var_e2ce1fe1++;

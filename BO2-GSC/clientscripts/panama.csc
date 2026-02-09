@@ -29,8 +29,9 @@ main() {
 }
 
 toggle_extra_cam(localclientnum, set, newent) {
-  if(!isDefined(level.extracamactive))
+  if(!isDefined(level.extracamactive)) {
     level.extracamactive = 0;
+  }
 
   if(!level.extracamactive && set) {
     println("**** extra cam on - client****");

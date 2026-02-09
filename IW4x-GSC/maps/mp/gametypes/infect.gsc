@@ -92,8 +92,8 @@ onStartGameType() {
   level.blockWeaponDrops = true;
   level.infect_allowSuicide = false;
 
-  SetDvar("ui_allow_teamchange", 0);
-  SetDvar("scr_teambalance", 0);
+  setDvar("ui_allow_teamchange", 0);
+  setDvar("scr_teambalance", 0);
 
   level.infect_timerDisplay = createServerTimer("objective", 1.4);
   level.infect_timerDisplay setPoint("TOPLEFT", "TOPLEFT", 115, 5);
@@ -146,7 +146,6 @@ getSpawnPoint() {
       maps\mp\gametypes\_menus::addToTeam("allies", true);
 
     thread onPlayerDisconnect();
-
   }
 
   if(level.inGracePeriod) {

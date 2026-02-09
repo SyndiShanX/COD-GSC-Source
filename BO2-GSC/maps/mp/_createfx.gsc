@@ -22,26 +22,26 @@ createfx() {
   precachemodel("fx_axis_createfx");
   precacheshader("black");
 
-  if(getdvar(#"createfx_scaleid") == "")
-    setdvar("createfx_scaleid", "0.5");
+  if(getDvar(#"createfx_scaleid") == "")
+    setDvar("createfx_scaleid", "0.5");
 
-  if(getdvar(#"createfx_print_frames") == "")
-    setdvar("createfx_print_frames", "3");
+  if(getDvar(#"createfx_print_frames") == "")
+    setDvar("createfx_print_frames", "3");
 
-  if(getdvar(#"createfx_drawaxis") == "")
-    setdvar("createfx_drawaxis", "1");
+  if(getDvar(#"createfx_drawaxis") == "")
+    setDvar("createfx_drawaxis", "1");
 
-  if(getdvar(#"createfx_drawaxis_range") == "")
-    setdvar("createfx_drawaxis_range", "2000");
+  if(getDvar(#"createfx_drawaxis_range") == "")
+    setDvar("createfx_drawaxis_range", "2000");
 
-  if(getdvar(#"createfx_autosave_time") == "")
-    setdvar("createfx_autosave_time", "300");
+  if(getDvar(#"createfx_autosave_time") == "")
+    setDvar("createfx_autosave_time", "300");
 
-  if(getdvar(#"createfx_oneshot_min_delay") == "")
-    setdvar("createfx_oneshot_min_delay", "-100");
+  if(getDvar(#"createfx_oneshot_min_delay") == "")
+    setDvar("createfx_oneshot_min_delay", "-100");
 
-  if(getdvar(#"createfx_oneshot_max_delay") == "")
-    setdvar("createfx_oneshot_max_delay", "-15");
+  if(getDvar(#"createfx_oneshot_max_delay") == "")
+    setDvar("createfx_oneshot_max_delay", "-15");
 
   flag_init("createfx_saving");
 
@@ -130,7 +130,6 @@ fx_init() {
       delete_arrays_in_sp();
 
       println("We're not in MP!");
-
     }
   }
 
@@ -168,7 +167,7 @@ createeffect(type, fxid) {
   ent = undefined;
 
   if(!isDefined(level.createfx_enabled))
-    level.createfx_enabled = getdvar(#"createfx") != "";
+    level.createfx_enabled = getDvar(#"createfx") != "";
 
   if(!isDefined(level.createfxent))
     level.createfxent = [];
@@ -237,9 +236,9 @@ createfxlogic() {
   if(!isDefined(level._effect))
     level._effect = [];
 
-  if(getdvar(#"createfx_map") == "")
-    setdvar("createfx_map", level.script);
-  else if(getdvar(#"createfx_map") == level.script) {
+  if(getDvar(#"createfx_map") == "")
+    setDvar("createfx_map", level.script);
+  else if(getDvar(#"createfx_map") == level.script) {
     if(!ismp()) {
       playerpos = [];
       playerpos[0] = getdvarint(#"_id_274F266C");
@@ -269,7 +268,7 @@ createfxlogic() {
   stroffsety[1] = 1;
   stroffsetx[2] = -2;
   stroffsety[2] = 1;
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
   crosshair = newdebughudelem();
   crosshair.location = 0;
   crosshair.alignx = "center";
@@ -666,7 +665,6 @@ manipulate_createfx_ents(highlightedent, leftclick, leftheld, ctrlheld, colors, 
         printup = (0, 0, 15 * scale);
 
         print3d(ent.v["origin"] + printright + printup, ent.v["fxid"], colors[ent.v["type"]][colorindex], ent.textalpha, scale, print_frames);
-
       }
     }
   }
@@ -710,14 +708,13 @@ manipulate_createfx_ents(highlightedent, leftclick, leftheld, ctrlheld, colors, 
       printup = (0, 0, 15 * scale);
 
       print3d(highlightedent.v["origin"] + printright + printup, highlightedent.v["fxid"], colors[highlightedent.v["type"]][colorindex], highlightedent.textalpha, scale, 1);
-
     }
   }
 }
 
 clear_settable_fx() {
   level.createfx_inputlocked = 0;
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
   level.selected_fx_option_index = undefined;
   reset_fx_hud_colors();
 }
@@ -1227,7 +1224,6 @@ set_anglemod_move_vector() {
     } else
       level.selectedrotate_roll = 0;
   }
-
 }
 
 cfxprintln(file, string) {
@@ -1379,7 +1375,6 @@ generate_fx_log(type, autosave) {
     println("CreateFX entities placed: " + (level.createfxent.size - level.non_fx_ents));
     return 0;
   }
-
 }
 
 get_fx_options(ent) {
@@ -1971,7 +1966,7 @@ draw_distance() {
   last_pos = (0, 0, 0);
 
   if(getdvarint(#"createfx_drawdist") == 0)
-    setdvar("createfx_drawdist", "1500");
+    setDvar("createfx_drawdist", "1500");
 
   player = get_players()[0];
 
@@ -2076,10 +2071,8 @@ createfx_emergency_backup() {
 
   if(file_error) {
     iprintln("Error saving to backup.gsc.All is lost!");
-
   } else {
     println("^5#### CREATEFX EMERGENCY BACKUP END ####");
-
   }
 
   flag_clear("createfx_saving");
@@ -2419,7 +2412,6 @@ handle_camera() {
 
     wait 0.05;
   }
-
 }
 
 camera_hud_toggle(text) {

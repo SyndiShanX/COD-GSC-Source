@@ -23,21 +23,21 @@ function __init__() {
 }
 
 function enableclassicmode() {
-  setdvar("bg_t7BlockMeleeUsageTime", 100);
-  setdvar("doublejump_enabled", 0);
-  setdvar("wallRun_enabled", 0);
-  setdvar("slide_maxTime", 550);
-  setdvar("playerEnergy_slideEnergyEnabled", 0);
-  setdvar("trm_maxSideMantleHeight", 0);
-  setdvar("trm_maxBackMantleHeight", 0);
-  setdvar("player_swimming_enabled", 0);
-  setdvar("player_swimHeightRatio", 0.9);
-  setdvar("player_sprintSpeedScale", 1.5);
-  setdvar("jump_slowdownEnable", 1);
-  setdvar("player_sprintUnlimited", 0);
-  setdvar("sprint_allowRestore", 0);
-  setdvar("sprint_allowReload", 0);
-  setdvar("sprint_allowRechamber", 0);
-  setdvar("cg_blur_time", 500);
-  setdvar("tu11_enableClassicMode", 1);
+  setDvar("bg_t7BlockMeleeUsageTime", 100);
+  setDvar("doublejump_enabled", 0);
+  setDvar("wallRun_enabled", 0);
+  setDvar("slide_maxTime", 550);
+  setDvar("playerEnergy_slideEnergyEnabled", 0);
+  setDvar("trm_maxSideMantleHeight", 0);
+  setDvar("trm_maxBackMantleHeight", 0);
+  setDvar("player_swimming_enabled", 0);
+  setDvar("player_swimHeightRatio", 0.9);
+  setDvar("player_sprintSpeedScale", 1.5);
+  setDvar("jump_slowdownEnable", 1);
+  setDvar("player_sprintUnlimited", 0);
+  setDvar("sprint_allowRestore", 0);
+  setDvar("sprint_allowReload", 0);
+  setDvar("sprint_allowRechamber", 0);
+  setDvar("cg_blur_time", 500);
+  setDvar("tu11_enableClassicMode", 1);
 }

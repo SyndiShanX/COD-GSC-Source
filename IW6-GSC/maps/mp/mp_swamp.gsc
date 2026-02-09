@@ -30,14 +30,14 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_swamp");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  SetDvar("r_tessellationCutoffFalloffBase", 600);
-  SetDvar("r_tessellationCutoffDistanceBase", 1600);
-  SetDvar("r_tessellationCutoffFalloff", 600);
-  SetDvar("r_tessellationCutoffDistance", 1600);
-  SetDvar("r_reactiveMotionWindFrequencyScale", 0.1);
-  SetDvar("r_reactiveMotionWindAmplitudeScale", 0.5);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_tessellationCutoffFalloffBase", 600);
+  setDvar("r_tessellationCutoffDistanceBase", 1600);
+  setDvar("r_tessellationCutoffFalloff", 600);
+  setDvar("r_tessellationCutoffDistance", 1600);
+  setDvar("r_reactiveMotionWindFrequencyScale", 0.1);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 0.5);
   setdvar_cg_ng("sm_sunShadowScale", 0.25, 1);
   setdvar_cg_ng("fx_alphaThreshold", 5, 0);
 

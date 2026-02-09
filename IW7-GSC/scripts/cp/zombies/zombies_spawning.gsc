@@ -129,7 +129,7 @@ func_15FD() {
   self.volume = self.script_area;
   for(;;) {
     self waittill("trigger", var_0);
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -1077,7 +1077,7 @@ func_6731(var_0) {
     var_2 = 70;
     for(;;) {
       self waittill("trigger", var_3);
-      if(!isplayer(var_3)) {
+      if(!isPlayer(var_3)) {
         wait(0.1);
         var_1 = var_1 + 0.1;
         if(var_1 >= var_2) {
@@ -1092,7 +1092,7 @@ func_6731(var_0) {
   } else {
     for(;;) {
       self waittill("trigger", var_3);
-      if(!isplayer(var_3)) {
+      if(!isPlayer(var_3)) {
         continue;
       } else {
         break;
@@ -1289,7 +1289,7 @@ func_10927() {
 }
 
 respawning_special_zombie() {
-  if(getdvar("ui_mapname") != "cp_final") {
+  if(getDvar("ui_mapname") != "cp_final") {
     return 0;
   }
 
@@ -1387,7 +1387,7 @@ killplayersifonhead(var_0) {
       if(distance2dsquared(var_3.origin, var_0.origin) <= 1024) {
         if(!var_3 isonground() && var_3.origin[2] > var_0.origin[2]) {
           var_4 = scripts\common\trace::capsule_trace(var_0 gettagorigin("tag_eye"), var_0 gettagorigin("tag_eye") + (0, 0, 56), 32, 64, undefined, var_0);
-          if(isDefined(var_4["entity"]) && isplayer(var_4["entity"]) && !var_4["entity"] isonground()) {
+          if(isDefined(var_4["entity"]) && isPlayer(var_4["entity"]) && !var_4["entity"] isonground()) {
             var_4["entity"] dodamage(10000, var_0.origin, var_4["entity"], var_4["entity"], "MOD_UNKNOWN", "frag_grenade_zm");
           }
         }
@@ -1419,7 +1419,7 @@ func_CCBB() {
 }
 
 func_C212() {
-  if(getdvar("ui_mapname") == "cp_rave" || getdvar("ui_mapname") == "cp_disco") {
+  if(getDvar("ui_mapname") == "cp_rave" || getDvar("ui_mapname") == "cp_disco") {
     return 0;
   }
 
@@ -2699,7 +2699,7 @@ func_E81B() {
         var_2++;
       }
 
-      if(getdvar("ui_gametype") == "zombie" && scripts\cp\utility::isplayingsolo() || level.only_one_player) {
+      if(getDvar("ui_gametype") == "zombie" && scripts\cp\utility::isplayingsolo() || level.only_one_player) {
         if(isDefined(level.players[0])) {
           if(level.wave_num == 2) {
             level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("zombiehealth", 7);
@@ -2714,7 +2714,7 @@ func_E81B() {
         }
       }
 
-      if(getdvar("ui_gametype") == "zombie" && !scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+      if(getDvar("ui_gametype") == "zombie" && !scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
         foreach(var_4 in level.players) {
           var_4 setclientomnvar("zombie_wave_number", level.wave_num);
           var_4 scripts\cp\cp_merits::processmerit("mt_highest_round");
@@ -2957,7 +2957,7 @@ func_FF9D(var_0) {
     return 0;
   }
 
-  if(getdvar("ui_mapname") == "cp_disco") {
+  if(getDvar("ui_mapname") == "cp_disco") {
     return 0;
   }
 
@@ -3585,7 +3585,7 @@ func_7D87() {
 
 func_FF55(var_0) {
   if(getdvarint("scr_active_volume_check") == 1) {
-    if(isplayer(var_0) && !scripts\cp\loot::is_in_active_volume(var_0.origin)) {
+    if(isPlayer(var_0) && !scripts\cp\loot::is_in_active_volume(var_0.origin)) {
       return 1;
     }
   }

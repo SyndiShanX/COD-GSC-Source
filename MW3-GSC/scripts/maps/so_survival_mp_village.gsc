@@ -15,7 +15,6 @@ main() {
 
   if(!level.console) {
     setsaveddvar("r_ssaoStrength", 0);
-
   }
   ambientplay("ambient_mp_village");
   maps\_utility::set_vision_set("mp_village", 0);

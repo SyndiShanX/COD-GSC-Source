@@ -52,9 +52,9 @@ function main() {
 }
 
 function onstartgametype() {
-  setdvar("scr_disable_weapondrop", 1);
-  setdvar("scr_xpscalemp", 0);
-  setdvar("ui_guncycle", 0);
+  setDvar("scr_disable_weapondrop", 1);
+  setDvar("scr_xpscalemp", 0);
+  setDvar("ui_guncycle", 0);
   setclientnamemode("auto_change");
   util::setobjectivetext("allies", &"OBJECTIVES_SHRP");
   util::setobjectivetext("axis", &"OBJECTIVES_SHRP");
@@ -232,14 +232,14 @@ function waitlongdurationwithhostmigrationpause(nextguncycletime, duration) {
   while(gettime() < endtime) {
     hostmigration::waittillhostmigrationstarts((endtime - gettime()) / 1000);
     if(isDefined(level.hostmigrationtimer)) {
-      setdvar("ui_guncycle", 0);
+      setDvar("ui_guncycle", 0);
       timepassed = hostmigration::waittillhostmigrationdone();
       totaltimepassed = totaltimepassed + timepassed;
       endtime = endtime + timepassed;
       println("" + timepassed);
       println("" + totaltimepassed);
       println("" + level.discardtime);
-      setdvar("ui_guncycle", nextguncycletime + totaltimepassed);
+      setDvar("ui_guncycle", nextguncycletime + totaltimepassed);
     }
   }
   hostmigration::waittillhostmigrationdone();
@@ -248,7 +248,7 @@ function waitlongdurationwithhostmigrationpause(nextguncycletime, duration) {
 
 function guncyclewaiter(nextguncycletime, waittime) {
   continuecycling = 1;
-  setdvar("ui_guncycle", nextguncycletime);
+  setDvar("ui_guncycle", nextguncycletime);
   level.guncycletimer settimer(waittime);
   level.guncycletimer.alpha = 1;
   timepassed = waitlongdurationwithhostmigrationpause(nextguncycletime, ((nextguncycletime - gettime()) / 1000) - 6);
@@ -315,7 +315,7 @@ function chooserandomguns() {
           lastmultiplier = 1;
         }
         level.sharpshootermultiplier = 2;
-        setdvar("ui_guncycle", 0);
+        setDvar("ui_guncycle", 0);
         level.guncycletimer.alpha = 0;
         for(i = 0; i < level.players.size; i++) {
           level.players[i] thread wager::queue_popup(&"MP_SHRP_RND", 0, &"MP_SHRP_FINAL_MULTIPLIER", "wm_shrp_rnd");
@@ -384,7 +384,7 @@ function takeoldweapons() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if(isDefined(level.sharpshootermultiplier) && level.sharpshootermultiplier == 2) {
       if(!isDefined(attacker.pers["x2kills"])) {
         attacker.pers["x2kills"] = 1;

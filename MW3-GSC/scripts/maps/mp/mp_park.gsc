@@ -10,9 +10,9 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_park");
   maps\mp\_compass::setupminimap("compass_map_mp_park");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("sm_sunShadowScale", "0.8");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("sm_sunShadowScale", "0.8");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 

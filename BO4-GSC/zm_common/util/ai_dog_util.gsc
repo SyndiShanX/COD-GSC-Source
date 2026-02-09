@@ -452,7 +452,7 @@ dog_death() {
     level notify(#"last_dog_down");
   }
 
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     event = "death";
 
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {

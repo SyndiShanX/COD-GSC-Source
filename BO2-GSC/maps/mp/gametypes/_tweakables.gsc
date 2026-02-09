@@ -109,7 +109,7 @@ gettweakablevalue(category, name) {
 
   overridedvar = "scr_" + level.gametype + "_" + category + "_" + name;
 
-  if(getdvar(overridedvar) != "")
+  if(getDvar(overridedvar) != "")
     return getdvarint(overridedvar);
 
   assert(isDefined(value));
@@ -182,7 +182,7 @@ settweakablevalue(category, name, value) {
       break;
   }
 
-  setdvar(dvar, value);
+  setDvar(dvar, value);
 }
 
 settweakablelastvalue(category, name, value) {
@@ -218,12 +218,12 @@ settweakablelastvalue(category, name, value) {
 
 registertweakable(category, name, dvar, value) {
   if(isstring(value)) {
-    if(getdvar(dvar) == "")
-      setdvar(dvar, value);
+    if(getDvar(dvar) == "")
+      setDvar(dvar, value);
     else
-      value = getdvar(dvar);
-  } else if(getdvar(dvar) == "")
-    setdvar(dvar, value);
+      value = getDvar(dvar);
+  } else if(getDvar(dvar) == "")
+    setDvar(dvar, value);
   else
     value = getdvarint(dvar);
 

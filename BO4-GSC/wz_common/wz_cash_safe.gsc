@@ -235,13 +235,13 @@ function_a6eac3b7() {
       continue;
     }
 
-    setdvar(#"devgui_deathcircle", "<dev string:x38>");
+    setDvar(#"devgui_deathcircle", "<dev string:x38>");
     args = strtok(dvarstr, "<dev string:x3b>");
 
     if(args.size == 2) {
       player = getentbynum(int(args[0]));
 
-      if(isplayer(player)) {
+      if(isPlayer(player)) {
         [[level._setteamscore]](player.team, [[level._getteamscore]](player.team) + int(args[1]));
       }
     }

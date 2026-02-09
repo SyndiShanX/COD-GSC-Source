@@ -16,25 +16,25 @@ testdvars() {
   wait 5;
 
   for(;;) {
-    if(getdvar(#"scr_testdvar") != "") {
+    if(getDvar(#"scr_testdvar") != "") {
       break;
     }
 
     wait 1;
   }
 
-  tokens = strtok(getdvar(#"scr_testdvar"), " ");
+  tokens = strtok(getDvar(#"scr_testdvar"), " ");
   dvarname = tokens[0];
   dvarvalue = tokens[1];
-  setdvar(dvarname, dvarvalue);
-  setdvar("scr_testdvar", "");
+  setDvar(dvarname, dvarvalue);
+  setDvar("scr_testdvar", "");
   thread testdvars();
 }
 
 equipment_dev_gui() {
   equipment = [];
   equipment[1] = "satchel_charge_sp";
-  setdvar("scr_give_equipment", "");
+  setDvar("scr_give_equipment", "");
 
   while(true) {
     wait 0.5;
@@ -49,25 +49,26 @@ equipment_dev_gui() {
         players[i] setactionslot(1, "weapon", equipment[devgui_int]);
       }
 
-      setdvar("scr_give_equipment", "0");
+      setDvar("scr_give_equipment", "0");
     }
   }
 
 }
 
 perk_dev_gui() {
-  setdvar("scr_give_perk", "");
+  setDvar("scr_give_perk", "");
 
   while(true) {
     wait 0.5;
 
-    if(getdvar(#"scr_giveperk") != "") {
+    if(getDvar(#"scr_giveperk") != "") {
       players = get_players();
 
-      for(i = 0; i < players.size; i++)
-        players[i] setperk(getdvar(#"scr_giveperk"));
+      for(i = 0; i < players.size; i++) {
+        players[i] setperk(getDvar(#"scr_giveperk"));
+      }
 
-      setdvar("scr_giveperk", "");
+      setDvar("scr_giveperk", "");
     }
   }
 

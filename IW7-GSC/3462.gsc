@@ -671,11 +671,11 @@ callstrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     } else {
       var_12 = var_7.origin[2];
 
-      if(getdvar("mapname") == "mp_exchange") {
+      if(getDvar("mapname") == "mp_exchange") {
         var_12 = var_12 + 1024;
       }
 
-      if(getdvar("mapname") == "mp_rally") {
+      if(getDvar("mapname") == "mp_rally") {
         var_12 = var_12 + 2500;
       }
 
@@ -695,7 +695,7 @@ callstrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     } else {
       var_12 = var_7.origin[2];
 
-      if(getdvar("mapname") == "mp_rally") {
+      if(getDvar("mapname") == "mp_rally") {
         var_12 = var_12 + 2500;
       }
 

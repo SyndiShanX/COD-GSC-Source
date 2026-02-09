@@ -52,7 +52,6 @@ class class_60aca60a {
     currentstate = "engage_center";
     var_85a7b7d2 = gettime();
   }
-
 }
 
 autoexec __init__system__() {
@@ -110,7 +109,7 @@ function_fe5b1120(helicopter, attackingplayer) {
 
 createremoteweapontrigger(hintstring) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   weapon = spawnStruct();
   weapon.remoteowner = player;
   weapon.inittime = gettime();
@@ -299,11 +298,11 @@ swatshouldmelee(entity) {
     return false;
   }
 
-  if(!isactor(entity.enemy) && !isplayer(entity.enemy)) {
+  if(!isactor(entity.enemy) && !isPlayer(entity.enemy)) {
     return false;
   }
 
-  if(isplayer(entity.enemy) && entity.enemy getstance() == "prone") {
+  if(isPlayer(entity.enemy) && entity.enemy getstance() == "prone") {
     return false;
   }
 
@@ -383,7 +382,7 @@ function_fb9f1f3b(entity) {
     return false;
   }
 
-  if(!issentient(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!issentient(entity.enemy) || !isPlayer(entity.enemy)) {
     function_91228fe2(entity);
     return false;
   }
@@ -477,7 +476,6 @@ function_fb9f1f3b(entity) {
       record3dtext("<dev string:x38>" + direction, newspot + (0, 0, 10), (0, 0, 1), "<dev string:x3b>");
       recordline(entity.origin, newspot, (0, 0, 1), "<dev string:x3b>");
       recordcircle(newspot, 8, (0, 0, 1), "<dev string:x3b>");
-
     } else {
       cylinder = ai::t_cylinder(entity.ai.var_5cb410bc.centerpos, entity.goalradius, 40);
       var_c5139037 = ai::t_cylinder(entity.ai.var_5cb410bc.centerpos, 60, 40);
@@ -492,7 +490,6 @@ function_fb9f1f3b(entity) {
         record3dtext("<dev string:x44>", tacpoint.origin + (0, 0, 10), (0, 0, 1), "<dev string:x3b>");
         recordline(entity.origin, tacpoint.origin, (0, 0, 1), "<dev string:x3b>");
         recordcircle(tacpoint.origin, 8, (0, 0, 1), "<dev string:x3b>");
-
       }
     }
   }
@@ -597,7 +594,7 @@ function_6f7a6cbc(params) {
   }
 
   if(isDefined(params.eattacker)) {
-    if(isplayer(params.eattacker)) {
+    if(isPlayer(params.eattacker)) {
       luinotifyevent(#"player_callout", 2, #"hash_4fb540af669c6500", params.eattacker.entnum);
       params.eattacker battlechatter::function_dd6a6012("swat_team", params.weapon);
       self killstreaks::function_73566ec7(params.eattacker, params.weapon, self.script_owner);
@@ -727,20 +724,18 @@ function_ace0a9bc() {
       if(isDefined(self.likelyenemyposition)) {
         recordline(self.origin, self.likelyenemyposition, (0, 0, 1), "<dev string:x3b>");
         recordcircle(self.likelyenemyposition, 8, (0, 0, 1), "<dev string:x3b>");
-
       }
 
       if(isDefined(self.enemy)) {
         recordline(self.origin + (0, 0, 70), self.enemy.origin + (0, 0, 70), (1, 0, 0), "<dev string:x3b>");
         recordcircle(self.enemy.origin + (0, 0, 70), 8, (1, 0, 0), "<dev string:x3b>");
 
-        if(isplayer(self.enemy)) {
+        if(isPlayer(self.enemy)) {
           pathdata = generatenavmeshpath(self.origin, self.enemy.origin, self);
           pathdistance = pathdata.pathdistance;
           path = pathdata.pathpoints;
           path::function_3c367117(path, (0, 0, 1), (1, 0, 0), (1, 0.5, 0));
         }
-
       }
     }
 
@@ -797,7 +792,7 @@ function_67260255(swat, helicopter, killstreak_id) {
       helicopter.owner globallogic_audio::play_taacom_dialog("destroyed", "swat_team");
     }
 
-    if(isDefined(params) && isplayer(params.attacker)) {
+    if(isDefined(params) && isPlayer(params.attacker)) {
       luinotifyevent(#"player_callout", 2, #"hash_6aba3ca683926a75", params.attacker.entnum);
     }
   }
@@ -1474,7 +1469,6 @@ debug_water(tpoint) {
     record3dtext("<dev string:xf5>", tpoint.origin + (0, 0, 40), (1, 1, 1), "<dev string:x3b>");
 
     recordline(tpoint.origin + (0, 0, 40), tpoint.origin, (1, 1, 1), "<dev string:x3b>");
-
   }
 }
 
@@ -1891,7 +1885,7 @@ function_d1c52e08() {
   while(true) {
     waittillframeend();
 
-    if(isDefined(self.enemy) && isplayer(self.enemy) && self cansee(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy) && self cansee(self.enemy)) {
       self.holdfire = !self targetting_delay::function_1c169b3a(self.enemy);
     } else {
       self.holdfire = 0;
@@ -2061,7 +2055,7 @@ swat_loop(killstreak_id) {
   self thread swat_escort(0);
   self waittill(#"payload_delivered");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(!self gamepadusedlast()) {
       self.var_6c0553ea.remoteweapon = self createremoteweapontrigger(#"hash_167e638f51287532");
     } else {

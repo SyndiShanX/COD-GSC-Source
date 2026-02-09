@@ -635,7 +635,7 @@ cliffhanger_tarmac_main() {
     return;
   level.price endon("death");
 
-  setdvar("player_has_witnessed_capture", ""); // cleanup on aisle 5
+  setDvar("player_has_witnessed_capture", ""); // cleanup on aisle 5
 
   flag_set("tarmac_escape");
   flag_init("price_reaches_bottom");

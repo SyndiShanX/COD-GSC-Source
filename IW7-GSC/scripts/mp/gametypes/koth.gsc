@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -765,7 +765,7 @@ movezoneaftertime(var_0) {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!isplayer(var_1) || var_1.team == self.team) {
+  if(!isPlayer(var_1) || var_1.team == self.team) {
     return;
   }
 
@@ -830,7 +830,7 @@ give_capture_credit(var_0, var_1, var_2, var_3) {
     var_4 = var_4.owner;
   }
 
-  if(isplayer(var_4)) {
+  if(isPlayer(var_4)) {
     if(!isscoreboosting(var_4)) {
       var_4 thread scripts\mp\matchdata::loggameevent("capture", var_4.origin);
       var_4 thread scripts\mp\awards::givemidmatchaward("mode_hp_secure");
@@ -924,7 +924,7 @@ updatecapsperminute(var_0) {
 
   self.numcaps++;
   var_1 = scripts\mp\utility::gettimepassed() / -5536;
-  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed["total"])) {
     var_1 = self.timeplayed["total"] / 60;
   }
 

@@ -127,7 +127,7 @@ playerdepotprocesslui(var_0, var_1) {
 }
 
 getdepotstate() {
-  return getdvar("vlDepotState");
+  return getDvar("vlDepotState");
 }
 
 setdepotstate(var_0) {
@@ -260,7 +260,7 @@ playerdepot_dof() {
 
 playerenterdepot(var_0) {
   self endon("leave_depot");
-  setdvar("vlDepotEnabled", 1);
+  setDvar("vlDepotEnabled", 1);
 
   if(!maps\mp\_utility::is_true(level.in_depot)) {
     while(!getdvarint("vlDepotLoaded", 0) || !getdvarint("virtualLobbyPresentable"))
@@ -322,7 +322,7 @@ playerenterdepot(var_0) {
 playerleavedepot(var_0) {
   self notify("leave_depot");
   level notify("leave_depot");
-  setdvar("vlDepotEnabled", 0);
+  setDvar("vlDepotEnabled", 0);
 
   if(!maps\mp\_utility::is_true(level.in_depot)) {
     if(!maps\mp\_utility::is_true(level.depotinitialized))
@@ -358,7 +358,7 @@ playerleavedepot(var_0) {
 playerreturntodepot(var_0) {
   maps\mp\_vl_base::playersetfovscale(1.0);
 
-  if(getdvar("vlDepotState") == "pause") {
+  if(getDvar("vlDepotState") == "pause") {
     if(level.camparams.camera.depotpos == "crate")
       setdepotstate("purchaseidle");
     else
@@ -939,7 +939,7 @@ depotanimstatemachine() {
   maps\mp\_utility::waittillplayersnextsnapshot(self);
 
   for(;;) {
-    var_3 = getdvar("vlDepotState");
+    var_3 = getDvar("vlDepotState");
     var_4 = 0;
 
     if(var_3 != var_0 || level.depotstatefinished && var_3 != "pause" || var_4) {
@@ -951,7 +951,7 @@ depotanimstatemachine() {
 
       if(var_0 != "") {
         self[[level.depotstates[var_0].stateendedfunc]]();
-        var_3 = getdvar("vlDepotState");
+        var_3 = getDvar("vlDepotState");
       }
 
       if(maps\mp\_utility::is_true(level.depotstates[var_3].nochecknecessary) || self[[level.depotstates[var_3].canswitchtostatefunc]](var_0)) {
@@ -1142,7 +1142,7 @@ depotopenlootcrate() {
   level.depotcrate scriptmodelplayanimdeltamotionfrompos("h1_vlobby_armory_lootcrate_crack_open", level.depotcrate.originalorigin, level.depotcrate.originalangles, "crate_anim");
   level.depotcrate playSound("h1_ui_loot_box_latch");
   level.depotcrate waittillmatch("crate_anim", "end");
-  var_0 = getdvar("vlDepotState");
+  var_0 = getDvar("vlDepotState");
 
   if(var_0 != "purchasefail") {
     if(var_0 == "purchase") {
@@ -1155,12 +1155,12 @@ depotopenlootcrate() {
       level.depotcrate scriptmodelplayanimdeltamotionfrompos("h1_vlobby_armory_lootcrate_crack_idle", level.depotcrate.originalorigin, level.depotcrate.originalangles);
       level.depotcrate playLoopSound("h1_ui_lootbox_rattle");
 
-      while(getdvar("vlDepotState") == "purchasewait")
+      while(getDvar("vlDepotState") == "purchasewait")
         waitframe();
     }
 
     level.depotcrate stoploopsound();
-    var_0 = getdvar("vlDepotState");
+    var_0 = getDvar("vlDepotState");
 
     if(var_0 == "purchaseconfirm") {
       if(!isDefined(level.depotlootrarities))

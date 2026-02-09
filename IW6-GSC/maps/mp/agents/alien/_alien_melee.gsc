@@ -304,7 +304,6 @@ get_melee_position(timeUntilAttack, offset, enemy, tracking_amount) {
 
   leapEndPos = DropPosToGround(leapEndPos, dropDistance);
 
-  /#	
   if(!isDefined(leapEndPos)) {
     println("get_melee_position: Failed to DropPosToGround: " + enemy.origin);
   } else {
@@ -417,7 +416,6 @@ melee_ChooseJumpArrival(jumpInfo, jumpAnimStates) {
       jumpAnimStates.landAnimState = "attack_leap_swipe_left";
       jumpAnimStates.landAnimEntry = GetRandomAnimEntry("attack_leap_swipe_left");
     }
-
   }
 }
 
@@ -645,7 +643,7 @@ melee_DoDamage(enemy, melee_type) {
       damage_amount *= 6;
   }
 
-  if(IsPlayer(enemy)) {
+  if(isPlayer(enemy)) {
     enemy_blocked = self check_for_block(enemy);
     player_meleeing = self check_for_player_meleeing(enemy);
     if(enemy_blocked || player_meleeing) {
@@ -966,7 +964,6 @@ check_for_block(player) {
       if(weapon_list.size > 0 && front_block) {
         player SwitchToWeapon(weapon_list[0]);
       }
-
     }
     return true;
   }

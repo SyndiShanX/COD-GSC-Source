@@ -71,7 +71,6 @@ class cct_shared_aar_medals: cluielem {
     cluielem::function_dcb34c80("string", "medalSilverThreshold", 1);
     cluielem::function_dcb34c80("string", "medalBronzeThreshold", 1);
   }
-
 }
 
 register(uid, var_a6bba632, var_da3b1805, var_17bf2e2a) {

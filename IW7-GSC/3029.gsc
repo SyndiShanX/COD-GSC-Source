@@ -333,7 +333,7 @@ func_D184(var_0) {
 #using_animtree("jackal");
 
 func_7929() {
-  var_0 = [[ % jackal_pilot_strike_death, %jackal_vehicle_strike_death, 1], [ % heist_mons_attack_plr_flight_failtoeject, %heist_mons_attack_jackal_flight_failtoeject, 3.5], [ % jackal_pilot_assault_death, %jackal_vehicle_assault_death, 1], [ % jackal_pilot_assault_death01, %jackal_vehicle_assault_death01, 3.5], [ % jackal_pilot_assault_death02, %jackal_vehicle_assault_death02, 3], [ % jackal_pilot_assault_death03, %jackal_vehicle_assault_death03, 1], [ % jackal_pilot_assault_death04, %jackal_vehicle_assault_death04, 1]];
+  var_0 = [[%jackal_pilot_strike_death, %jackal_vehicle_strike_death, 1], [%heist_mons_attack_plr_flight_failtoeject, %heist_mons_attack_jackal_flight_failtoeject, 3.5], [%jackal_pilot_assault_death, %jackal_vehicle_assault_death, 1], [%jackal_pilot_assault_death01, %jackal_vehicle_assault_death01, 3.5], [%jackal_pilot_assault_death02, %jackal_vehicle_assault_death02, 3], [%jackal_pilot_assault_death03, %jackal_vehicle_assault_death03, 1], [%jackal_pilot_assault_death04, %jackal_vehicle_assault_death04, 1]];
   return scripts\engine\utility::random(var_0);
 }
 

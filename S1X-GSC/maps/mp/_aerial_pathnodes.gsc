@@ -50,8 +50,8 @@ calculate_aerial_pathnodes() {
     return;
   }
 
-  mapname = GetDvar("mapname");
-  if(mapname == getdvar("virtualLobbyMap") || mapname == "mp_character_room" || GetDvarInt("virtualLobbyActive") == 1) {
+  mapname = getDvar("mapname");
+  if(mapname == getDvar("virtualLobbyMap") || mapname == "mp_character_room" || GetDvarInt("virtualLobbyActive") == 1) {
     return;
   }
 
@@ -375,7 +375,7 @@ draw_debug_aerial_nodes() {
   draw_time = 0.5;
 
   while(1) {
-    ai_showNodesAerial = GetDvar("ai_showNodesAerial");
+    ai_showNodesAerial = getDvar("ai_showNodesAerial");
     if(ai_showNodesAerial == "1" || ai_showNodesAerial == "2") {
       max_dist_sq = squared(GetDvarFloat("ai_ShowNodesDist"));
       player = maps\mp\gametypes\_dev::getNotBot();

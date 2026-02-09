@@ -5,12 +5,12 @@
 ********************************/
 
 vl_init() {
-  setdvar("r_dof_physical_enable", 1);
-  setdvar("r_dof_physical_bokehEnable", 1);
-  setdvar("r_adaptiveSubdiv", 0);
-  setdvar("r_eyePupil", 0.15);
-  setdvar("r_uiblurdstmode", 3);
-  setdvar("r_blurdstgaussianblurradius", 1.5);
+  setDvar("r_dof_physical_enable", 1);
+  setDvar("r_dof_physical_bokehEnable", 1);
+  setDvar("r_adaptiveSubdiv", 0);
+  setDvar("r_eyePupil", 0.15);
+  setDvar("r_uiblurdstmode", 3);
+  setDvar("r_blurdstgaussianblurradius", 1.5);
   level.vl_onspawnplayer = ::onspawnplayer;
   level.partymembers_cb = ::party_members;
   level.vlavatars = [];
@@ -21,7 +21,7 @@ vl_init() {
   level.vl_loadoutfunc = ::getloadoutvl;
   level.vl_setup = 0;
   level.agent_funcs["player"]["on_killed"] = ::on_agent_player_killed;
-  setdvar("virtuallobbymembers", 0);
+  setDvar("virtuallobbymembers", 0);
   maps\mp\_vl_avatar::init_avatar();
   maps\mp\_vl_firingrange::init_firingrange();
   maps\mp\_vl_camera::init_camera();
@@ -64,7 +64,7 @@ playerprocessluiservernotify(var_0, var_1) {
 
 playerluistart() {
   var_0 = getdvarint("virtualLobbyMode", 0);
-  var_1 = getdvar("virtualLobbyModeData", "");
+  var_1 = getDvar("virtualLobbyModeData", "");
 
   if(var_0 == 2) {
     var_2 = 0;
@@ -91,9 +91,9 @@ playerluistart() {
 }
 
 playerluistartupcaocollections(var_0) {
-  var_1 = getdvar("virtualLobbyModeChannel");
-  var_2 = getdvar("virtualLobbyModeChannel2");
-  var_3 = getdvar("virtualLobbyModeData2");
+  var_1 = getDvar("virtualLobbyModeChannel");
+  var_2 = getDvar("virtualLobbyModeChannel2");
+  var_3 = getDvar("virtualLobbyModeData2");
   var_4 = strtok(var_3, "_");
   var_5 = int(var_4[0]);
   thread playerprocessluiservernotify("cao", var_5);
@@ -168,7 +168,7 @@ vlobby_player() {
   thread setvirtuallobbypresentable();
 
   if(getdvarint("virtualLobbyReady", 0) == 0)
-    setdvar("virtualLobbyReady", "1");
+    setDvar("virtualLobbyReady", "1");
 
   level.vl_setup = 1;
 }
@@ -339,10 +339,10 @@ playermonitorswitchtofiringrange() {
         var_0 showviewmodel();
         maps\mp\_vl_firingrange::enter_firingrange(var_0);
         var_0 clientclearsoundsubmix("mp_no_foley", 1);
-        setdvar("r_dof_physical_bokehEnable", 0);
-        setdvar("r_dof_physical_enable", 0);
-        setdvar("r_uiblurdstmode", 0);
-        setdvar("r_blurdstgaussianblurradius", 1);
+        setDvar("r_dof_physical_bokehEnable", 0);
+        setDvar("r_dof_physical_enable", 0);
+        setDvar("r_uiblurdstmode", 0);
+        setDvar("r_blurdstgaussianblurradius", 1);
       } else if(var_1 == 0 && level.in_firingrange) {
         var_0 hideviewmodel();
         var_0 maps\mp\_vl_firingrange::firingrangecleanup();
@@ -355,10 +355,10 @@ playermonitorswitchtofiringrange() {
         var_0 notify("enter_lobby");
         enter_vlobby(var_0);
         var_0 clientaddsoundsubmix("mp_no_foley", 1);
-        setdvar("r_dof_physical_enable", 1);
-        setdvar("r_dof_physical_bokehEnable", 1);
-        setdvar("r_uiblurdstmode", 3);
-        setdvar("r_blurdstgaussianblurradius", 1.5);
+        setDvar("r_dof_physical_enable", 1);
+        setDvar("r_dof_physical_bokehEnable", 1);
+        setDvar("r_uiblurdstmode", 3);
+        setDvar("r_blurdstgaussianblurradius", 1.5);
       }
     }
 
@@ -694,7 +694,7 @@ getyawrotationangle(var_0, var_1) {
 
   if(var_4 != 0) {
     var_0.mouserot = angleclamp(var_0.mouserot + var_4);
-    setdvar("ui_mouse_char_rot", 0);
+    setDvar("ui_mouse_char_rot", 0);
   }
 
   var_5 = getangleadd(var_0.rotateyawdata, var_3, var_1);
@@ -820,14 +820,14 @@ setvirtuallobbypresentable() {
     waitframe();
 
   wait 0.5;
-  setdvar("virtualLobbyPresentable", "1");
+  setDvar("virtualLobbyPresentable", "1");
 }
 
 resetvirtuallobbypresentable() {
   level notify("cancel_vlp");
   level endon("cancel_vlp");
   wait 0.25;
-  setdvar("virtualLobbyPresentable", "0");
+  setDvar("virtualLobbyPresentable", "0");
 }
 
 isweaponloaded(var_0, var_1, var_2) {
@@ -993,7 +993,7 @@ memberclasschanges(var_0) {
       var_5 = maps\mp\_vl_avatar::getnewlobbyavatarownerid(var_3.xuid);
       var_24 = maps\mp\gametypes\vlobby::getspawnpoint(getconstlocalplayer());
       var_4 = maps\mp\_vl_avatar::spawn_an_avatar(var_1, var_24, var_20, var_22, var_23, var_3._id_A7E7, var_5, 0);
-      setdvar("virtuallobbymembers", level.vlavatars.size);
+      setDvar("virtuallobbymembers", level.vlavatars.size);
       thread setvirtuallobbypresentable();
       var_4._id_A7EA = var_16;
       var_4 _meth_8577(var_19);

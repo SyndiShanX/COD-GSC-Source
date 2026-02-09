@@ -326,7 +326,6 @@ function_4696e086(var_5c0c59ca = undefined, var_64d0790a = undefined) {
     n_random_int = randomintrange(0, 10000);
 
     iprintlnbold("<dev string:xee>" + n_random_int + "<dev string:x109>");
-
   }
 
   if(isDefined(var_5c0c59ca) && isDefined(var_64d0790a)) {

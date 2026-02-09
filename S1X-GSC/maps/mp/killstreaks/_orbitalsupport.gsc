@@ -242,7 +242,7 @@ setOrbitalSupportPlayer(player, modules) {
     duration += CONST_ORBITALSUPPORT_MODULE_TIME_BONUS;
   }
 
-  if(GetDvar("scr_paladin_timeout", "0") != "0") {
+  if(getDvar("scr_paladin_timeout", "0") != "0") {
     duration = GetDvarFloat("scr_paladin_timeout", duration);
   }
 
@@ -533,7 +533,7 @@ testCrashing() {
       continue;
     }
 
-    SetDvar("scr_paladin_crash", "0");
+    setDvar("scr_paladin_crash", "0");
 
     level thread crashPlane();
 
@@ -575,7 +575,7 @@ orbitalsupport_spawn() {
   level.orbitalsupport_big_turret = spawnOrbitalSupportTurret("orbitalsupport_big_turret_mp", "orbitalsupport_big_turret", "tag_orbitalsupport_biggun", false);
   level.orbitalsupport_buddy_turret = spawnOrbitalSupportTurret("orbitalsupport_buddy_turret_mp", "orbitalsupport_small_turret", "tag_orbitalsupport_mediumgun2", true);
 
-  if(GetDvar("scr_paladin_debug_entry", "0") != "0") {
+  if(getDvar("scr_paladin_debug_entry", "0") != "0") {
     debugEntrance();
   }
 
@@ -583,7 +583,7 @@ orbitalsupport_spawn() {
 }
 
 debugEntrance() {
-  while(GetDvar("scr_paladin_debug_entry", "0") != "0") {
+  while(getDvar("scr_paladin_debug_entry", "0") != "0") {
     level.orbitalsupport_planeModel moveOrbitalSupportToDestination(false);
 
     wait 1;
@@ -731,7 +731,7 @@ playerSwitchToTurret(turret) {
   self Unlink();
   level thread handleTurretSoundEnt(turret);
 
-  if(GetDvar("scr_paladin_stay_on_ground", "0") != "0") {
+  if(getDvar("scr_paladin_stay_on_ground", "0") != "0") {
     return;
   }
 
@@ -786,7 +786,7 @@ handleTurretSoundEnt(turret) {
   turret notify("startHandleSoundEnt");
   turret endon("startHandleSoundEnt");
 
-  if(GetDvar("scr_paladin_stay_on_ground", "0") != "0") {
+  if(getDvar("scr_paladin_stay_on_ground", "0") != "0") {
     return;
   }
 
@@ -839,7 +839,7 @@ playerSwitchToMediumTurret() {
 }
 
 playerGetTurretEndpoint(isBuddy) {
-  if(GetDvar("scr_paladin_stay_on_ground", "0") != "0" && self == level.player) {
+  if(getDvar("scr_paladin_stay_on_ground", "0") != "0" && self == level.player) {
     start = self getEye();
     dir = anglesToForward(self GetPlayerAngles());
     end = start + (dir * 3000);
@@ -1171,8 +1171,7 @@ updateShootingLocation() {
     point = trace["position"];
 
     level.orbitalsupport_targetEnt.origin = point;
-    /#		
-    if(GetDvar("scr_paladin_stay_on_ground", "0") != "0" && self == level.player) {
+    if(getDvar("scr_paladin_stay_on_ground", "0") != "0" && self == level.player) {
       start = self getEye();
       dir = anglesToForward(self GetPlayerAngles());
       end = start + (dir * 3000);
@@ -1606,7 +1605,7 @@ setRandomOrbitalSupportStartPosition() {
   level.orbitalsupport_planeModel.origin -= VectorNormalize(-1 * AnglesToRight(level.orbitalsupport_planeModel GetTagAngles("tag_origin"))) * radius_modifier;
   level.orbitalsupport_planemodel.origin += (0, 0, height_modifier);
 
-  if(GetDvar("scr_paladin_center", "0") != "0") {
+  if(getDvar("scr_paladin_center", "0") != "0") {
     level.orbitalsupport_planemodel.origin = (0, 0, height_modifier);
   }
 
@@ -1896,7 +1895,7 @@ playerFireSounds(sound2d, sound3d, isBuddy, index) {
 
   turret.soundEnts[index] PlaySoundOnMovingEnt(sound3d);
 
-  if(GetDvar("scr_paladin_stay_on_ground", "0") != "0") {
+  if(getDvar("scr_paladin_stay_on_ground", "0") != "0") {
     return;
   }
 
@@ -1988,7 +1987,7 @@ testOSPFlares(player) {
       continue;
     }
 
-    SetDvar("scr_osp_flares", "0");
+    setDvar("scr_osp_flares", "0");
 
     if(cur == "none") {
       player SetClientOmnvar("ui_warbird_flares", 3);

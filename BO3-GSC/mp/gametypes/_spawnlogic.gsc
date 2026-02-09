@@ -21,14 +21,14 @@ function __init__() {
 
 function init() {
   if(getdvarstring("") == "") {
-    setdvar("", 0);
+    setDvar("", 0);
   }
   level.storespawndata = getdvarint("");
   if(getdvarstring("") == "") {
-    setdvar("", 0);
+    setDvar("", 0);
   }
   if(getdvarstring("") == "") {
-    setdvar("", 0.25);
+    setDvar("", 0.25);
   }
   thread loop_bot_spawns();
   level.spawnlogic_deaths = [];
@@ -48,16 +48,16 @@ function init() {
     }
   }
   if(getdvarstring("scr_spawn_enemyavoiddist") == "") {
-    setdvar("scr_spawn_enemyavoiddist", "800");
+    setDvar("scr_spawn_enemyavoiddist", "800");
   }
   if(getdvarstring("scr_spawn_enemyavoidweight") == "") {
-    setdvar("scr_spawn_enemyavoidweight", "0");
+    setDvar("scr_spawn_enemyavoidweight", "0");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarint("") > 0) {
     thread show_deaths_debug();
@@ -68,7 +68,7 @@ function init() {
     thread allow_spawn_data_reading();
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   thread watch_spawn_profile();
   thread spawn_graph_check();
@@ -243,9 +243,7 @@ function get_spawnpoint_final(spawnpoints, useweights, predictedspawn, isintermm
         if(positionwouldtelefrag(spawnpoints[i].origin)) {
           continue;
         }
-        if(isDefined(level.var_6f13f156) && ![
-            [level.var_6f13f156]
-          ](spawnpoints[i], predictedspawn)) {
+        if(isDefined(level.var_6f13f156) && ![[level.var_6f13f156]](spawnpoints[i], predictedspawn)) {
           continue;
         }
         bestspawnpoint = spawnpoints[i];
@@ -255,9 +253,7 @@ function get_spawnpoint_final(spawnpoints, useweights, predictedspawn, isintermm
     if(!isDefined(bestspawnpoint)) {
       if(isDefined(self.lastspawnpoint) && !positionwouldtelefrag(self.lastspawnpoint.origin)) {
         for(i = 0; i < spawnpoints.size; i++) {
-          if(isDefined(level.var_6f13f156) && ![
-              [level.var_6f13f156]
-            ](spawnpoints[i], predictedspawn)) {
+          if(isDefined(level.var_6f13f156) && ![[level.var_6f13f156]](spawnpoints[i], predictedspawn)) {
             continue;
           }
           if(spawnpoints[i] == self.lastspawnpoint) {
@@ -291,7 +287,8 @@ function finalize_spawnpoint_choice(spawnpoint, predictedspawn) {
 
 function get_best_weighted_spawnpoint(spawnpoints) {
   maxsighttracedspawnpoints = 3;
-  for(try = 0;
+  for(
+    try = 0;
     try <= maxsighttracedspawnpoints;
     try ++) {
     bestspawnpoints = [];
@@ -318,7 +315,8 @@ function get_best_weighted_spawnpoint(spawnpoints) {
       return undefined;
     }
     bestspawnpoint = bestspawnpoints[randomint(bestspawnpoints.size)];
-    if(try == maxsighttracedspawnpoints) {
+    if(
+      try == maxsighttracedspawnpoints) {
       return bestspawnpoint;
     }
     if(isDefined(bestspawnpoint.lastsighttracetime) && bestspawnpoint.lastsighttracetime == gettime()) {
@@ -730,7 +728,7 @@ function get_spawnpoint_near_team(spawnpoints, favoredspawnpoints) {
     return undefined;
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
     return get_spawnpoint_random(spawnpoints);
@@ -780,7 +778,7 @@ function get_spawnpoint_near_team(spawnpoints, favoredspawnpoints) {
   avoid_visible_enemies(spawnpoints, 1);
   result = get_spawnpoint_final(spawnpoints);
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
     check_bad(result);
@@ -1022,7 +1020,7 @@ function loop_bot_spawns() {
 }
 
 function allow_spawn_data_reading() {
-  setdvar("", "");
+  setDvar("", "");
   prevval = getdvarstring("");
   prevrelval = getdvarstring("");
   readthistime = 0;
@@ -1032,7 +1030,7 @@ function allow_spawn_data_reading() {
     if(!isDefined(val) || val == prevval) {
       relval = getdvarstring("");
       if(isDefined(relval) && relval != "") {
-        setdvar("", "");
+        setDvar("", "");
       } else {
         wait(0.5);
         continue;

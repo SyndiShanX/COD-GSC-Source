@@ -135,9 +135,7 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
     if(isDefined(previous_menu_info.custom_close_fn)) {
       if(isarray(previous_menu_info.custom_close_fn)) {
         foreach(fn in previous_menu_info.custom_close_fn) {
-          [
-            [fn]
-          ](localclientnum, previous_menu_info);
+          [[fn]](localclientnum, previous_menu_info);
         }
       } else {
         [[previous_menu_info.custom_close_fn]](localclientnum, previous_menu_info);
@@ -188,9 +186,7 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
     if(isDefined(new_menu.custom_open_fn)) {
       if(isarray(new_menu.custom_open_fn)) {
         foreach(fn in new_menu.custom_open_fn) {
-          [
-            [fn]
-          ](localclientnum, new_menu);
+          [[fn]](localclientnum, new_menu);
         }
       } else {
         [[new_menu.custom_open_fn]](localclientnum, new_menu);

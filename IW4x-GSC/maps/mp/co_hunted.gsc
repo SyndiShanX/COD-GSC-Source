@@ -24,7 +24,7 @@ main() {
   game["defenders"] = "axis";
 
   maps\mp\_compass::setupMiniMap("compass_map_hunted");
-  setdvar("compassmaxrange", "3000");
+  setDvar("compassmaxrange", "3000");
 
   if(level.hunted_weather == 0)
     ambientPlay("ambient_mp_rural", 0);

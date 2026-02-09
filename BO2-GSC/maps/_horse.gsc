@@ -17,8 +17,9 @@ main() {
   self.disable_make_useable = 0;
   self.disable_weapon_changes = 0;
 
-  if(!isDefined(level.horse_in_combat))
+  if(!isDefined(level.horse_in_combat)) {
     build_aianims(::setanims);
+  }
 
   build_unload_groups(::unload_groups);
   level.vehicle_death_thread[self.vehicletype] = ::horse_death;
@@ -31,9 +32,9 @@ main() {
 
   level._effect["horse_hits_ground"] = loadfx("env/dirt/fx_afgh_sand_horse_impact");
 
-  if(isDefined(self.script_string))
+  if(isDefined(self.script_string)) {
     self setModel(self.script_string);
-  else if(issubstr(self.vehicletype, "low")) {
+  } else if(issubstr(self.vehicletype, "low")) {
     idx = randomint(level.horse_model_variants["low"].size);
     self setModel(level.horse_model_variants["low"][idx]);
   } else {
@@ -55,8 +56,9 @@ choose_sprint_anim() {
   self.sprint_anim = level.horse_sprint_anims[level.horse_sprint_idx];
   level.horse_sprint_idx++;
 
-  if(level.horse_sprint_idx > 3)
+  if(level.horse_sprint_idx > 3) {
     level.horse_sprint_idx = 0;
+  }
 }
 
 precache_models() {
@@ -107,7 +109,6 @@ debug_horse() {
 
     wait 0.05;
   }
-
 }
 
 #using_animtree("generic_human");
@@ -769,11 +770,13 @@ set_visionset_run(visionset_name, visionset_fade) {
 }
 
 scale_wait(x1, x2, y1, y2, z) {
-  if(z < x1)
+  if(z < x1) {
     z = x1;
+  }
 
-  if(z > x2)
+  if(z > x2) {
     z = x2;
+  }
 
   dx = x2 - x1;
   n = (z - x1) / dx;
@@ -794,40 +797,47 @@ gallop_driving() {
   self endon("no_driver");
 
   while(true) {
-    if(abs(self getspeed()) < 0.1)
+    if(abs(self getspeed()) < 0.1) {
       wait 0.01;
-    else if(abs(self getspeed()) >= 0.1) {
+    } else if(abs(self getspeed()) >= 0.1) {
       if(self getspeedmph() < 22) {
-        if(!self.isjumping)
+        if(!self.isjumping) {
           self playSound("fly_horse_hoofhit_t_plr_01");
+        }
 
         wait(self get_wait() * 1.3);
 
-        if(!self.isjumping)
+        if(!self.isjumping) {
           self playSound("fly_horse_hoofhit_t_plr_02");
+        }
 
         wait(self get_wait() * 1.3);
 
-        if(!self.isjumping)
+        if(!self.isjumping) {
           self playSound("fly_horse_hoofhit_t_plr_03");
+        }
 
         wait(self get_wait() * 1.3);
       } else if(self getspeedmph() >= 22) {
-        if(!self.isjumping)
+        if(!self.isjumping) {
           self playSound("fly_horse_hoofhit_g_plr_01");
+        }
 
         wait(self get_wait());
 
-        if(!self.isjumping)
+        if(!self.isjumping) {
           self playSound("fly_horse_hoofhit_g_plr_02");
+        }
 
         wait(self get_wait());
 
-        if(!self.isjumping)
+        if(!self.isjumping) {
           self playSound("fly_gear_run_plr");
+        }
 
-        if(!self.isjumping)
+        if(!self.isjumping) {
           self playSound("fly_horse_hoofhit_g_plr_03");
+        }
 
         wait(self get_wait() * 2);
       }
@@ -856,17 +866,19 @@ horse_breathing() {
   while(true) {
     speed = self getspeedmph();
 
-    if(speed <= self.speed_idle)
+    if(speed <= self.speed_idle) {
       speed = 1;
+    }
 
     wait_time = 1.5 / speed;
     wait(wait_time);
     self veh_toggle_exhaust_fx(1);
 
-    if(wait_time >= 1.5)
+    if(wait_time >= 1.5) {
       self.soundsnout playSound("chr_horse_breath_i_mono");
-    else if(wait_time < 1.5)
+    } else if(wait_time < 1.5) {
       self.soundsnout playSound("chr_horse_breath_t_mono");
+    }
 
     wait 1;
     self veh_toggle_exhaust_fx(0);
@@ -876,12 +888,14 @@ horse_breathing() {
 #using_animtree("horse");
 
 update_idle_anim() {
-  if(self.current_anim_speed != level.idle)
+  if(self.current_anim_speed != level.idle) {
     self.idle_state = 0;
+  }
 
   if(self.current_anim_speed != level.idle || gettime() >= self.idle_end_time) {
-    if(self.current_anim_speed == level.idle)
+    if(self.current_anim_speed == level.idle) {
       self.idle_state = self.idle_anim_finished_state;
+    }
 
     idle_struct = level.horse_idles[self.idle_state];
     anim_index = randomint(idle_struct.animations.size);
@@ -889,10 +903,11 @@ update_idle_anim() {
 
     if(isDefined(driver)) {
       if(!isai(driver)) {
-        if(randomint(100) > 50)
+        if(randomint(100) > 50) {
           idle_struct = level.horse_idles[0];
-        else
+        } else {
           idle_struct = level.horse_idles[3];
+        }
 
         anim_index = 0;
       }
@@ -907,18 +922,20 @@ update_idle_anim() {
     idle_ai_anim = idle_struct.ai_animations[anim_index];
     idle_player_anim = idle_struct.player_animations[anim_index];
 
-    if(isDefined(idle_struct.transitions[anim_index]))
+    if(isDefined(idle_struct.transitions[anim_index])) {
       self.idle_anim_finished_state = idle_struct.transitions[anim_index];
-    else
+    } else {
       self.idle_anim_finished_state = self.idle_state;
+    }
 
     self.idle_end_time = gettime() + getanimlength(idle_anim) * 1000;
     self.current_anim = idle_anim;
     self.rider_nextanimation = idle_ai_anim;
     self setanimknoballrestart(idle_anim, %root, 1, 0.2, 1);
 
-    if(isDefined(driver) && isDefined(driver.update_idle_anim))
+    if(isDefined(driver) && isDefined(driver.update_idle_anim)) {
       driver[[driver.update_idle_anim]](idle_struct, anim_index);
+    }
   }
 
   self.current_anim_speed = level.idle;
@@ -929,8 +946,9 @@ horse_rearback() {
   self ent_flag_set("pause_animation");
   driver = self get_driver();
 
-  if(isDefined(driver) && isDefined(driver.update_rearback_anim))
+  if(isDefined(driver) && isDefined(driver.update_rearback_anim)) {
     driver thread[[driver.update_rearback_anim]](self);
+  }
 
   self setanimknoballrestart(level.horse_anims[level.rearback], %root, 1, 0.2, 1);
   len = getanimlength(level.horse_anims[level.rearback]);
@@ -955,8 +973,9 @@ horse_stop() {
   self ent_flag_set("pause_animation");
   driver = self get_driver();
 
-  if(isDefined(driver) && isDefined(driver.update_stop_anim))
+  if(isDefined(driver) && isDefined(driver.update_stop_anim)) {
     driver thread[[driver.update_stop_anim]]();
+  }
 
   stop_in = % a_horse_short_stop_init;
   stop_out = % a_horse_short_stop_finish;
@@ -975,16 +994,18 @@ horse_animating() {
   level.loco_motion = 2;
   self.state_loco = level.loco_idle;
 
-  if(getdvarint(#"_id_92A3625D") == 0)
+  if(getdvarint(#"_id_92A3625D") == 0) {
     setdvarint("scr_horse_speed", 0);
+  }
 
   while(true) {
     speed = self getspeedmph();
     angular_velocity = self getangularvelocity();
     turning_speed = abs(angular_velocity[2]);
 
-    if(getdvarint(#"_id_92A3625D") > 0)
+    if(getdvarint(#"_id_92A3625D") > 0) {
       speed = getdvarint(#"_id_92A3625D");
+    }
 
     if(isDefined(self.horse_animating_override)) {
       self thread[[self.horse_animating_override]]();
@@ -994,8 +1015,9 @@ horse_animating() {
     if(isDefined(self.current_anim)) {
       self.current_time = self getanimtime(self.current_anim);
 
-      if(self.current_time > 1)
+      if(self.current_time > 1) {
         self.current_time = 0;
+      }
     }
 
     if(self.ent_flag["mounting_horse"] || self.ent_flag["dismounting_horse"] || self.ent_flag["playing_scripted_anim"] || self.ent_flag["pause_animation"]) {} else if(speed < -0.05) {
@@ -1006,21 +1028,24 @@ horse_animating() {
       self setanimknoball(level.horse_anims[level.reverse], %root, 1, 0.2, anim_rate);
       driver = self get_driver();
 
-      if(isDefined(driver) && isDefined(driver.update_reverse_anim))
+      if(isDefined(driver) && isDefined(driver.update_reverse_anim)) {
         driver[[driver.update_reverse_anim]](anim_rate);
+      }
     } else if(speed < 2 && turning_speed > 0.2) {
       anim_rate = turning_speed;
       anim_index = 1;
 
-      if(angular_velocity[2] <= 0)
+      if(angular_velocity[2] <= 0) {
         anim_index = 2;
+      }
 
       self.current_anim = level.horse_anims[level.idle][anim_index];
       self setanimknoball(level.horse_anims[level.idle][anim_index], %root, 1, 0.2, anim_rate);
       driver = self get_driver();
 
-      if(isDefined(driver) && isDefined(driver.update_turn_anim))
+      if(isDefined(driver) && isDefined(driver.update_turn_anim)) {
         driver[[driver.update_turn_anim]](anim_rate, anim_index);
+      }
 
       self.current_anim_speed = level.idle;
       self.idle_end_time = 0;
@@ -1042,44 +1067,50 @@ update_run_anim(speed) {
   prev_anim_delta = level.horse_speeds[self.current_anim_speed] - level.horse_speeds[self.current_anim_speed - 1];
   prev_anim_speed = level.horse_speeds[self.current_anim_speed] - prev_anim_delta * 0.6;
 
-  if(speed > next_anim_speed)
+  if(speed > next_anim_speed) {
     self.current_anim_speed++;
-  else if(speed < prev_anim_speed)
+  } else if(speed < prev_anim_speed) {
     self.current_anim_speed--;
+  }
 
-  if(self.current_anim_speed <= level.idle)
+  if(self.current_anim_speed <= level.idle) {
     self.current_anim_speed = level.walk;
+  }
 
   anim_rate = speed / level.horse_speeds[self.current_anim_speed];
   anim_rate = clamp(anim_rate, 0.5, 1.35);
   self.current_anim = level.horse_anims[self.current_anim_speed][0];
 
-  if(self.current_anim_speed == level.sprint && isDefined(self.sprint_anim))
+  if(self.current_anim_speed == level.sprint && isDefined(self.sprint_anim)) {
     self.current_anim = self.sprint_anim;
+  }
 
   self setanimknoball(self.current_anim, get_horse_root(), 1, 0.2, anim_rate);
   driver = self get_driver();
 
-  if(isDefined(driver) && isDefined(driver.update_run_anim))
+  if(isDefined(driver) && isDefined(driver.update_run_anim)) {
     driver[[driver.update_run_anim]](anim_rate, self);
+  }
 }
 
 update_horse_fx(speed) {
-  if(!isDefined(self.current_fx_speed))
+  if(!isDefined(self.current_fx_speed)) {
     self.current_fx_speed = speed;
-  else if(self.current_fx_speed == speed)
+  } else if(self.current_fx_speed == speed) {
     return;
-  else
+  } else {
     self.current_fx_speed = speed;
+  }
 
   player = get_players()[0];
 
-  if(speed == level.trot)
+  if(speed == level.trot) {
     player thread horse_fx("player_dust_riding_trot");
-  else if(speed == level.run || speed == level.sprint)
+  } else if(speed == level.run || speed == level.sprint) {
     player thread horse_fx("player_dust_riding_gallup");
-  else
+  } else {
     player thread horse_fx();
+  }
 }
 
 horse_fx(fx_name) {
@@ -1128,39 +1159,45 @@ horse_death() {
     }
   }
 
-  if(isDefined(self.death_anim))
+  if(isDefined(self.death_anim)) {
     death_anim = self.death_anim;
+  }
 
   if(isDefined(death_anim)) {
     self setflaggedanimknoball("horse_death", death_anim, %root, 1, 0.2, 1);
     driver = self get_driver();
 
     if(isDefined(driver)) {
-      if(isai(driver))
+      if(isai(driver)) {
         driver.explosion_death_override = death_ai_anim;
+      }
     }
 
     self animscripts\shared::donotetracks("horse_death", ::handle_horse_death_fx);
     self waittillmatch("horse_death", "stop");
 
-    if(self.classname == "script_vehicle")
+    if(self.classname == "script_vehicle") {
       self vehicle_setspeed(0, 25, "Dead");
+    }
   }
 
   self.dontfreeme = undefined;
 }
 
 handle_horse_death_fx(str_notetrack) {
-  if(str_notetrack == "hitground")
+  if(str_notetrack == "hitground") {
     playFX(level._effect["horse_hits_ground"], self.origin);
+  }
 }
 
 weapon_needs_left_hand_on_horse(weapon) {
-  if(issubstr(weapon, "+tacknife"))
+  if(issubstr(weapon, "+tacknife")) {
     return true;
+  }
 
-  if(issubstr(weapon, "+"))
+  if(issubstr(weapon, "+")) {
     weapon = strtok(weapon, "+")[0];
+  }
 
   switch (weapon) {
     case "870mcs_sp":
@@ -1197,10 +1234,11 @@ watch_for_weapon_switch_left_hand(driver) {
     needs_left = weapon_needs_left_hand_on_horse(new_weapon);
     driver update_view_hands(!needs_left);
 
-    if(needs_left)
+    if(needs_left) {
       self.driver.body hide();
-    else
+    } else {
       self.driver.body show();
+    }
   }
 }
 
@@ -1223,8 +1261,9 @@ horse_turn180() {
   self ent_flag_set("pause_animation");
   driver = self get_driver();
 
-  if(isDefined(driver) && isDefined(driver.update_turn180_anim))
+  if(isDefined(driver) && isDefined(driver.update_turn180_anim)) {
     driver thread[[driver.update_turn180_anim]](self);
+  }
 
   self animscripted("horse_180turn", self.origin, self.angles, level.horse_anims[level.turn_180]);
   len = getanimlength(level.horse_anims[level.turn_180]);
@@ -1239,10 +1278,11 @@ waitch_for_180turn(driver) {
   self endon("no_driver");
 
   while(true) {
-    if(driver jumpbuttonpressed())
+    if(driver jumpbuttonpressed()) {
       self horse_turn180();
-    else
+    } else {
       wait 0.05;
+    }
   }
 }
 
@@ -1251,8 +1291,9 @@ watch_for_rolled_over(driver) {
   self endon("no_driver");
 
   while(isDefined(driver)) {
-    if(abs(self.angles[2]) > 55)
+    if(abs(self.angles[2]) > 55) {
       driver dodamage(50, self.origin);
+    }
 
     wait 0.1;
   }
@@ -1285,16 +1326,19 @@ watch_for_sprint(driver) {
     bpressingsprint = self.driver sprintbuttonpressed();
 
     if(is_true(self.needs_sprint_release)) {
-      if(!bpressingsprint)
+      if(!bpressingsprint) {
         self.needs_sprint_release = 0;
+      }
     }
 
-    if(bcanstartsprint && bpressingsprint && is_sprint_allowed() && !self.is_boosting && !self.needs_sprint_release)
+    if(bcanstartsprint && bpressingsprint && is_sprint_allowed() && !self.is_boosting && !self.needs_sprint_release) {
       self sprint_start(driver);
+    }
 
     if(self.is_boosting) {
-      if(!is_true(level.horse_sprint_unlimited))
+      if(!is_true(level.horse_sprint_unlimited)) {
         self.sprint_meter = self.sprint_meter - sprint_drain_rate * 0.05;
+      }
 
       throttle = self getthrottle();
 
@@ -1303,33 +1347,39 @@ watch_for_sprint(driver) {
         bmeterempty = 1;
         self sprint_end(driver);
       } else if(throttle < 0.3 || self.driver attackbuttonpressed() || speed < self.min_sprint_speed || self.driver adsbuttonpressed() || self.driver changeseatbuttonpressed() || absangleclamp180(self.driver getplayerangles()[1] - self.angles[1]) > 60 || !self.needs_sprint_release && bpressingsprint) {
-        if(self.driver changeseatbuttonpressed())
+        if(self.driver changeseatbuttonpressed()) {
           wait 0.1;
+        }
 
         self sprint_end(driver);
       } else {
         self setvehmaxspeed(self.max_sprint_speed);
 
-        if(speed < self.max_sprint_speed)
+        if(speed < self.max_sprint_speed) {
           self launchvehicle(forward * 160 * 0.05);
+        }
       }
     } else {
-      if(!is_true(level.horse_sprint_unlimited))
+      if(!is_true(level.horse_sprint_unlimited)) {
         self.sprint_meter = self.sprint_meter + sprint_recover_rate * 0.05;
-
-      if(bmeterempty) {
-        if(self.sprint_meter > self.sprint_meter_min)
-          bmeterempty = 0;
       }
 
-      if(self.sprint_meter > self.sprint_meter_max)
+      if(bmeterempty) {
+        if(self.sprint_meter > self.sprint_meter_min) {
+          bmeterempty = 0;
+        }
+      }
+
+      if(self.sprint_meter > self.sprint_meter_max) {
         self.sprint_meter = self.sprint_meter_max;
+      }
 
       if(isDefined(level.horse_override_max_speed)) {
         self setvehmaxspeed(level.horse_override_max_speed);
 
-        if(speed > level.horse_override_max_speed)
+        if(speed > level.horse_override_max_speed) {
           self launchvehicle(forward * -80 * 0.05);
+        }
       } else {
         max_speed = self.max_speed;
         self setvehmaxspeed(max_speed);
@@ -1337,12 +1387,14 @@ watch_for_sprint(driver) {
         if(driver playerads() > 0.3) {
           max_speed = max_speed * 0.65;
 
-          if(speed > max_speed + 2)
+          if(speed > max_speed + 2) {
             self setvehmaxspeed(self.max_speed * 0.8);
+          }
         }
 
-        if(speed > max_speed)
+        if(speed > max_speed) {
           self launchvehicle(forward * -80 * 0.05);
+        }
       }
     }
 
@@ -1351,10 +1403,11 @@ watch_for_sprint(driver) {
 }
 
 is_sprint_allowed() {
-  if(isDefined(level.horse_allow_sprint))
+  if(isDefined(level.horse_allow_sprint)) {
     return level.horse_allow_sprint;
-  else
+  } else {
     return 1;
+  }
 }
 
 allow_horse_sprint(b_allow_sprint) {
@@ -1393,8 +1446,9 @@ horse_is_exit_position_ok() {
   end = start + right * -15;
   results = physicstraceex(start, end, vectorscale((-1, -1, 0), 14.0), (14, 14, 60), self, 1);
 
-  if(results["fraction"] == 1)
+  if(results["fraction"] == 1) {
     return true;
+  }
 
   start = self.origin + vectorscale((0, 0, 1), 15.0) + right * 10;
   end = start + right * 15;
@@ -1418,8 +1472,9 @@ watch_mounting() {
   self endon("death");
   flag_wait("all_players_connected");
 
-  if(!self.disable_make_useable)
+  if(!self.disable_make_useable) {
     self makevehicleusable();
+  }
 
   self setvehicleavoidance(1, undefined, 1);
   self.ignore_death_jolt = 1;
@@ -1427,7 +1482,7 @@ watch_mounting() {
   while(true) {
     self waittill("trigger", useent);
 
-    if(!isplayer(useent)) {
+    if(!isPlayer(useent)) {
       continue;
     }
     self setvehicleavoidance(1, undefined, 2);
@@ -1452,13 +1507,15 @@ watch_mounting() {
     if(is_true(self.disable_mount_anim)) {
       println("horse mounting anim disabled");
 
-      if(!self.disable_weapon_changes)
+      if(!self.disable_weapon_changes) {
         self.driver disableweapons();
+      }
 
       self.driver.body unlink();
 
-      if(!self.disable_weapon_changes)
+      if(!self.disable_weapon_changes) {
         self.driver enableweapons();
+      }
 
       mount_anim = level.horse_player_anims[10][self.driver.side];
       org = getstartorigin(self.origin, self.angles, mount_anim);
@@ -1473,10 +1530,11 @@ watch_mounting() {
       self.driver mount(self);
     }
 
-    if(need_left_hand)
+    if(need_left_hand) {
       self.driver.body hide();
-    else
+    } else {
       self.driver.body show();
+    }
 
     self makevehicleusable();
     self useby(self.driver);
@@ -1489,11 +1547,13 @@ watch_mounting() {
     self.idle_end_time = 0;
     self thread horse_fx();
 
-    if(is_true(self.disable_mount_anim))
+    if(is_true(self.disable_mount_anim)) {
       self thread delay_body();
+    }
 
-    if(!self.disable_make_useable)
+    if(!self.disable_make_useable) {
       self makevehicleusable();
+    }
 
     while(true) {
       self waittill("trigger", useent);
@@ -1526,8 +1586,9 @@ watch_mounting() {
     self.driver.body notify("stop_player_ride");
     self.driver disableweapons();
 
-    if(is_true(self.disable_mount_anim)) {} else if(!self.driver isthrowinggrenade())
+    if(is_true(self.disable_mount_anim)) {} else if(!self.driver isthrowinggrenade()) {
       self.driver waittill("weapon_change");
+    }
 
     self useby(self.driver);
     self.driver allowjump(1);
@@ -1538,8 +1599,9 @@ watch_mounting() {
     if(is_true(self.disable_mount_anim)) {
       println("horse mounting anim disabled");
 
-      if(!self.disable_weapon_changes)
+      if(!self.disable_weapon_changes) {
         self.driver disableweapons();
+      }
 
       self.driver unlink();
       self.driver.body unlink();
@@ -1549,15 +1611,17 @@ watch_mounting() {
       self.driver.body linkto(self.driver);
       wait_network_frame();
 
-      if(!self.disable_weapon_changes)
+      if(!self.disable_weapon_changes) {
         self.driver enableweapons();
+      }
 
       self horse_update_reigns(0);
     } else
       self.driver dismount(self);
 
-    if(!self.disable_make_useable)
+    if(!self.disable_make_useable) {
       self makevehicleusable();
+    }
 
     self setbrake(0);
     self notify("no_driver");
@@ -1575,24 +1639,27 @@ set_mount_direction(horse, mount_org) {
   side = 0;
   dot = vectordot(horse_facing, horse_player);
 
-  if(dot > 0)
+  if(dot > 0) {
     side = 1;
+  }
 
   self.side = side;
 }
 
 update_view_hands(no_left) {
-  if(no_left)
+  if(no_left) {
     self setviewmodel(level.player_viewmodel_noleft);
-  else
+  } else {
     self setviewmodel(level.player_viewmodel);
+  }
 }
 
 ready_horse() {
-  if(is_true(level.horse_in_combat))
+  if(is_true(level.horse_in_combat)) {
     self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], %root, 1, 0.2, 0);
-  else
+  } else {
     self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], %root, 1, 0.2, 0);
+  }
 }
 
 horse_update_reigns(hide) {
@@ -1616,16 +1683,18 @@ horse_wait_for_reigns(notifyname, hide) {
 mount(horse) {
   horse ent_flag_set("mounting_horse");
 
-  if(!horse.disable_weapon_changes)
+  if(!horse.disable_weapon_changes) {
     self disableweapons();
+  }
 
   self freezecontrols(1);
 
   if(self getstance() != "stand") {
     self setstance("stand");
 
-    while(self getstance() != "stand")
+    while(self getstance() != "stand") {
       wait 0.05;
+    }
   }
 
   horse thread ready_horse();
@@ -1635,8 +1704,9 @@ mount(horse) {
   self.body.angles = self.angles;
   mount_anim = level.horse_player_anims[level.mount][self.side];
 
-  if(is_true(level.horse_in_combat))
+  if(is_true(level.horse_in_combat)) {
     mount_anim = level.horse_player_anims[10][self.side];
+  }
 
   self startcameratween(0.3);
   self.body setanim(mount_anim, 1, 0, 0);
@@ -1644,8 +1714,9 @@ mount(horse) {
   wait 0.05;
   horse_mount_anim = level.horse_anims[level.mount][self.side];
 
-  if(is_true(level.horse_in_combat))
+  if(is_true(level.horse_in_combat)) {
     horse_mount_anim = level.horse_anims[10][self.side];
+  }
 
   horse setflaggedanimknoballrestart("mount_horse", horse_mount_anim, %root, 1, 0, 1);
   horse thread horse_wait_for_reigns("mount_horse", 1);
@@ -1655,14 +1726,15 @@ mount(horse) {
   self.body stopanimscripted();
   self unlink();
 
-  if(!horse.disable_weapon_changes)
+  if(!horse.disable_weapon_changes) {
     self enableweapons();
+  }
 
   self.body linkto(horse, "tag_origin");
   self freezecontrols(0);
   self.is_on_horse = 1;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.my_horse = horse;
     self thread set_horseback_melee_values();
   }
@@ -1680,34 +1752,39 @@ dismount(horse) {
   if(self.health <= 0) {
     return;
   }
-  if(!horse.disable_weapon_changes)
+  if(!horse.disable_weapon_changes) {
     self disableweapons();
+  }
 
   self startcameratween(0.1);
   self playerlinktoabsolute(self.body, "tag_player");
 
   if(is_true(level.horse_in_combat)) {
-    if(isDefined(horse.dismount_right))
+    if(isDefined(horse.dismount_right)) {
       horse_dismount_anim = level.horse_anims[11][1];
-    else
+    } else {
       horse_dismount_anim = level.horse_anims[11][0];
+    }
   } else if(isDefined(horse.dismount_right))
     horse_dismount_anim = level.horse_anims[level.dismount][1];
-  else
+  else {
     horse_dismount_anim = level.horse_anims[level.dismount][0];
+  }
 
   horse setflaggedanimknoball("horse_dismount", horse_dismount_anim, %root, 1, 0.2, 1);
   horse thread horse_wait_for_reigns("horse_dismount", 0);
 
   if(is_true(level.horse_in_combat)) {
-    if(isDefined(horse.dismount_right))
+    if(isDefined(horse.dismount_right)) {
       player_dismount_anim = level.horse_player_anims[11][1];
-    else
+    } else {
       player_dismount_anim = level.horse_player_anims[11][0];
+    }
   } else if(isDefined(horse.dismount_right))
     player_dismount_anim = level.horse_player_anims[level.dismount][1];
-  else
+  else {
     player_dismount_anim = level.horse_player_anims[level.dismount][0];
+  }
 
   level.dismount_time = gettime();
   self.body animscripted("dismount", horse.origin, horse.angles, player_dismount_anim, "normal", %root, 1, 0.2);
@@ -1729,7 +1806,7 @@ dismount(horse) {
   horse makevehicleusable();
   self.is_on_horse = 0;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread reset_player_melee_values();
     self.my_horse = undefined;
   }
@@ -1738,17 +1815,19 @@ dismount(horse) {
 }
 
 get_driver() {
-  if(isDefined(self.driver) && isDefined(self.driver.body))
+  if(isDefined(self.driver) && isDefined(self.driver.body)) {
     return self.driver.body;
-  else if(isDefined(self.riders) && self.riders.size > 0 && (!isDefined(self.unloadque) || self.unloadque.size == 0))
+  } else if(isDefined(self.riders) && self.riders.size > 0 && (!isDefined(self.unloadque) || self.unloadque.size == 0)) {
     return self.riders[0];
+  }
 
   return undefined;
 }
 
 is_on_horseback() {
-  if(!isDefined(self.is_on_horse))
+  if(!isDefined(self.is_on_horse)) {
     return 0;
+  }
 
   return self.is_on_horse;
 }
@@ -1794,8 +1873,9 @@ get_horse_root() {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 1; i++)
+  for(i = 0; i < 1; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[0].getin = % ai_horse_rider_get_on_leftside;
@@ -1860,7 +1940,7 @@ horse_actor_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweap
       player = getplayers()[0];
       player playrumbleonentity("damage_heavy");
 
-      if(isplayer(eattacker)) {
+      if(isPlayer(eattacker)) {
         eattacker playSound("evt_horse_trample_ai");
 
         if(self.team == "axis" && !isDefined(self.killed_by_horse)) {
@@ -1899,8 +1979,9 @@ horsecallback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdea
       if(abs(self.angles[2]) > 35) {
         damage = idamage;
 
-        if(damage < 30)
+        if(damage < 30) {
           damage = 30;
+        }
 
         driver dodamage(damage, eattacker.origin, eattacker);
       } else if(eattacker.vehicleclass == "tank") {

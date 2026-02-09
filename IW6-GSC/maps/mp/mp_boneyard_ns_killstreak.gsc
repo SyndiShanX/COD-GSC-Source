@@ -249,7 +249,7 @@ ks_vertical_fire() {
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
     attacker = level.ks_vertical.player;
-    if(!isDefined(level.ks_vertical.player) || !IsPlayer(level.ks_vertical.player))
+    if(!isDefined(level.ks_vertical.player) || !isPlayer(level.ks_vertical.player))
       attacker = undefined;
 
     thread damage_characters(level.ks_vertical, attacker, 90);
@@ -309,7 +309,7 @@ damage_characters(rocket, attacker, damage) {
 
   foreach(victim in victims) {
     if(can_kill_character(rocket, victim)) {
-      if(IsPlayer(victim))
+      if(isPlayer(victim))
         if(isDefined(rocket.player) && victim == rocket.player)
           victim maps\mp\gametypes\_damage::finishPlayerDamageWrapper(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0, 0);
         else
@@ -320,7 +320,7 @@ damage_characters(rocket, attacker, damage) {
       else
         victim maps\mp\agents\_agents::on_agent_player_damaged(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
     } else if(isDefined(victim) && isReallyAlive(victim)) {
-      if(IsPlayer(victim))
+      if(isPlayer(victim))
         victim maps\mp\gametypes\_damage::Callback_PlayerDamage(undefined, undefined, 1, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
       else
         victim maps\mp\agents\_agents::on_agent_player_damaged(undefined, undefined, 1, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
@@ -328,7 +328,6 @@ damage_characters(rocket, attacker, damage) {
 
     wait(0.05);
   }
-
 }
 
 can_kill_character(rocket, victim) {

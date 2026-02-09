@@ -35,7 +35,7 @@ main() {
   setsaveddvar("cg_foliagesnd_alias", "clkw_foot_foliage_player");
   maps\clockwork_scriptedlights::main();
   maps\_utility::setsaveddvar_cg_ng("fx_alphathreshold", 9, 9);
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
   thread fx_aurora_anim();
   thread maps\clockwork_fx::fx_checkpoint_states();
   maps\hud_outline_objective::outline_enable();

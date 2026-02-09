@@ -389,7 +389,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
     self botclearscriptgoal();
     var_18 = "";
     if(isDefined(self.cur_defend_node) || isDefined(self.cur_defend_point_override)) {
-      if(var_17 && scripts\mp\bots\_bots_util::bot_is_protecting() && !isplayer(var_0) && isDefined(self.defend_entrance_index)) {
+      if(var_17 && scripts\mp\bots\_bots_util::bot_is_protecting() && !isPlayer(var_0) && isDefined(self.defend_entrance_index)) {
         var_19 = bot_get_ambush_trap_item("trap_directional", "trap", "c4");
         if(isDefined(var_19)) {
           var_1A = scripts\mp\bots\_bots_util::bot_get_entrances_for_stance_and_index(undefined, self.defend_entrance_index);

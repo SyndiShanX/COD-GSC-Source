@@ -111,8 +111,7 @@ onBeginCarrying(streakName, placeable, allowCancel) {
     if(!isDefined(placeable)) {
       self _enableWeapon();
       return true;
-    } else if((result == "cancelPlaceable" && allowCancel) ||
-      result == "force_cancel_placement") {
+    } else if((result == "cancelPlaceable" && allowCancel) || result == "force_cancel_placement") {
       placeable onCancel(streakName, result == "force_cancel_placement" && !isDefined(placeable.firstPlacement));
       return false;
     } else if(placeable.canBePlaced) {

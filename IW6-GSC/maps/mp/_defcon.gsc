@@ -16,9 +16,9 @@ init() {
   if(!isDefined(game["defcon"]))
     game["defcon"] = 4;
 
-  SetDvar("scr_defcon", game["defcon"]);
+  setDvar("scr_defcon", game["defcon"]);
 
-  /# setDevDvarIfUninitialized( "scr_defconStreak", 10 );	
+  setDevDvarIfUninitialized("scr_defconStreak", 10);
 
   level.defconStreakAdd[5] = 0;
   level.defconStreakAdd[4] = 0;

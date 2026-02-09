@@ -862,7 +862,7 @@ func_85FF(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getmeleetarget();
   if(!isDefined(var_4)) {
     self orientmode("face angle abs", self.angles);
-  } else if(isplayer(var_4) && isDefined(self.enemy) && var_4 == self.enemy) {
+  } else if(isPlayer(var_4) && isDefined(self.enemy) && var_4 == self.enemy) {
     self orientmode("face enemy");
   } else {
     var_5 = var_4.origin - self.origin;
@@ -1030,7 +1030,7 @@ func_FE3A(var_0) {
   var_0 endon("stop_shock_arc_trigger_monitor");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 

@@ -31,7 +31,7 @@ turn_on_flood_room_trigger() {
   var_0 = getent("flood_room_tunnel_trigger", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       break;
     }
   }

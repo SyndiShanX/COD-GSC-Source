@@ -219,7 +219,6 @@ debug_tag(str_tag) {
     debugstar(self gettagorigin(str_tag), 1, (1, 0, 0));
     wait 0.05;
   }
-
 }
 
 sq_ml_spawn_lever(n_index) {
@@ -264,7 +263,6 @@ sq_ml_show_lever_debug(v_spot, n_index) {
     print3d(self.origin, "" + n_index, (0, 1, 0), 1, 2);
     wait 0.05;
   }
-
 }
 
 #using_animtree("fxanim_props_dlc3");

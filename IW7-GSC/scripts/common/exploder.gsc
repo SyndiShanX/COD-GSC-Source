@@ -904,7 +904,7 @@ shouldrunserversideeffects() {
     return 1;
   }
 
-  return getdvar("clientSideEffects") != "1";
+  return getDvar("clientSideEffects") != "1";
 }
 
 exploder_before_load(var_0, var_1, var_2) {

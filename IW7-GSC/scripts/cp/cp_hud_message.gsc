@@ -17,7 +17,7 @@ onplayerconnect() {
 }
 
 showkillstreaksplash(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -63,7 +63,7 @@ showsplash(var_0, var_1, var_2) {
 }
 
 showsplashinternal(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

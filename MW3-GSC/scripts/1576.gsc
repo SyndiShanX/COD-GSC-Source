@@ -8,7 +8,6 @@ _id_3E4B() {
     chaos_dialog_radio_setup();
   } else {
     _id_3E55();
-
   }
   thread _id_3E4C();
   thread _id_3E4E();
@@ -34,7 +33,6 @@ _id_3E4C() {
         maps\_utility::_id_11F4("so_hq_mission_intro");
       } else {
         maps\_utility::_id_11F4("so_hq_mission_intro_sp");
-
       }
       continue;
     }
@@ -49,7 +47,6 @@ _id_3E4C() {
       }
     } else {
       var_3 = _id_061C::_id_3E03(var_1);
-
     }
     if(isDefined(var_3) && var_3 != "") {
       if(isDefined(level._id_11BB["so_hq_enemy_intel_" + var_3])) {
@@ -64,7 +61,6 @@ _id_3E4D(var_0, var_1) {
 
   if(!isDefined(var_2) || !var_2.size) {
     return undefined;
-
   }
   foreach(var_4 in var_2) {
     if(!isDefined(var_1[var_4])) {
@@ -118,7 +114,6 @@ _id_3E4E() {
       if(var_2.size == 1) {
         if(isDefined(level._id_11BB["so_hq_boss_intel_" + var_2[0]])) {
           maps\_utility::_id_11F4("so_hq_boss_intel_" + var_2[0]);
-
         }
         continue;
       }
@@ -208,7 +203,6 @@ _id_3E53() {
       thread _id_00D7();
     } else if(var_1 == "a_sentry_died") {
       thread _id_00D6();
-
     }
     var_0 = var_1;
   }

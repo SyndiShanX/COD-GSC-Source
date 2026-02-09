@@ -15,7 +15,6 @@ init_elevator() {
   flag_wait("all_players_connected");
   init_temple_geyser();
 }
-
 init_temple_geyser() {
   level.geysers = getEntArray("temple_geyser", "targetname");
   for(i = 0; i < level.geysers.size; i++) {
@@ -36,13 +35,13 @@ init_temple_geyser() {
     if(!isDefined(geyserTrigger.top.angles)) {
       geyserTrigger.top.angles = (0, 0, 0);
     }
-    geyserTrigger.trigger_dust = getEnt("trigger_" + geyserTrigger.script_noteworthy + "_dust", "targetname");
+    geyserTrigger.trigger_dust = getent("trigger_" + geyserTrigger.script_noteworthy + "_dust", "targetname");
     if(isDefined(geyserTrigger.trigger_dust)) {
       geyserTrigger.trigger_dust thread geyser_trigger_dust_think();
     }
     if(isDefined(geyserTrigger.script_noteworthy)) {
       flag_init(geyserTrigger.script_noteworthy + "_active");
-      blocker = getEnt(geyserTrigger.script_noteworthy + "_blocker", "targetname");
+      blocker = GetEnt(geyserTrigger.script_noteworthy + "_blocker", "targetname");
       if(isDefined(blocker)) {
         geyserTrigger thread geyser_blocker_think(blocker);
       }
@@ -53,7 +52,6 @@ init_temple_geyser() {
     }
   }
 }
-
 alternate_geysers() {
   currentGeyser = undefined;
   level waittill("geyser_enabled");
@@ -76,12 +74,10 @@ alternate_geysers() {
     level waittill("between_round_over");
   }
 }
-
 geyser_start() {
   self.geyser_active = false;
   self thread geyser_watch_for_player();
 }
-
 geyser_watch_for_zombies() {
   self endon("geyser_end");
   while(1) {
@@ -94,7 +90,6 @@ geyser_watch_for_zombies() {
     }
   }
 }
-
 geyser_watch_for_player() {
   self endon("geyser_end");
   level endon("intermission");
@@ -138,12 +133,10 @@ geyser_watch_for_player() {
     }
   }
 }
-
 geyser_activate(playersTouching) {
   self geyser_erupt(playersTouching);
   wait 5;
 }
-
 geyser_erupt(playersTouching) {
   self.geyser_active = true;
   if(isDefined(self.trigger_dust)) {
@@ -169,7 +162,6 @@ geyser_erupt(playersTouching) {
   }
   self.geyser_active = false;
 }
-
 player_geyser_move(geyser) {
   self endon("death");
   self endon("disconnect");
@@ -222,13 +214,11 @@ player_geyser_move(geyser) {
   wait(0.1);
   self.riding_geyser = false;
 }
-
 player_geyser_move_wait(waitTime) {
   self endon("death");
   self endon("player_downed");
   wait waitTime;
 }
-
 geyser_erupt_old(playersTouching) {
   self.geyser_active = true;
   self thread geyser_fx();
@@ -264,7 +254,6 @@ geyser_erupt_old(playersTouching) {
   self notify("stop_geyser_fx");
   self.geyser_active = false;
 }
-
 geyser_fx() {
   self thread geyser_earthquake();
   fxObj = spawnFX(level._effect["fx_ztem_geyser"], self.bottom.origin);
@@ -273,7 +262,6 @@ geyser_fx() {
   wait 5;
   fxObj Delete();
 }
-
 geyser_earthquake() {
   self endon("stop_geyser_fx");
   while(1) {
@@ -281,14 +269,12 @@ geyser_earthquake() {
     wait .1;
   }
 }
-
 zombie_geyser_kill() {
   self StartRagdoll();
   self launchragdoll((0, 0, 1) * 300);
   wait_network_frame();
   self dodamage(self.health + 666, self.origin);
 }
-
 geyser_blocker_think(blocker) {
   switch (self.script_noteworthy) {
     case "start_geyser":
@@ -309,7 +295,6 @@ geyser_blocker_think(blocker) {
   self.enabled = true;
   level notify("geyser_enabled", self);
 }
-
 geyser_sounds(struct_name, sfx_start, sfx_loop, sfx_loop_delay) {
   sound_struct = getstruct(struct_name, "targetname");
   if(isDefined(sound_struct)) {
@@ -324,9 +309,8 @@ geyser_sounds(struct_name, sfx_start, sfx_loop, sfx_loop_delay) {
     }
   }
 }
-
 geyser_blocker_remove() {
-  clip = getEnt(self.target, "targetname");
+  clip = GetEnt(self.target, "targetname");
   clip Delete();
   struct = spawnStruct();
   struct.origin = self.origin + (0, 0, 500);
@@ -336,13 +320,11 @@ geyser_blocker_remove() {
   self.script_fxid = "large_ceiling_dust";
   self maps\_zombiemode_blockers::debris_move(struct);
 }
-
 geyser_trigger_dust_activate() {
   self trigger_on();
   wait(3);
   self trigger_off();
 }
-
 geyser_trigger_dust_think() {
   while(1) {
     self waittill("trigger", player);
@@ -353,7 +335,6 @@ geyser_trigger_dust_think() {
     }
   }
 }
-
 #using_animtree("zombie_coast");
 init_geyser_anims() {
   level.geyser_anims = [];

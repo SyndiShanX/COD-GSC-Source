@@ -16,8 +16,8 @@ _id_3FE6(var_0, var_1) {
   var_3 = var_2._id_1EFA - var_2.origin[2];
   thread _id_3FE7(var_3 - var_1);
   var_4 = 0.15;
-  self clearanim( % body, var_4);
-  self setflaggedanimknoballrestart("traverse", var_0, % root, 1, var_4, 1);
+  self clearanim(%body, var_4);
+  self setflaggedanimknoballrestart("traverse", var_0, %root, 1, var_4, 1);
   var_5 = 0.2;
   var_6 = 0.2;
   thread animscripts\notetracks::_id_239E("traverse", "no clear");
@@ -62,13 +62,11 @@ _id_3FE8(var_0, var_1, var_2, var_3) {
   }
   if(var_1 > 0) {
     wait(var_1);
-
   }
   var_4 = (0, 0, var_0 / var_2);
 
   if(isDefined(var_3) && var_3 < 1.0) {
     self setflaggedanimknoball("traverseAnim", self._id_3FEA, self._id_3FE9, 1, 0.2, var_3);
-
   }
   for(var_5 = 0; var_5 < var_2; var_5++) {
     self forceteleport(self.origin + var_4);
@@ -97,7 +95,6 @@ _id_3FEB(var_0) {
 
   if(!animhasnotetrack(var_3, "traverse_align")) {
     _id_3FF3();
-
   }
   var_5 = 0;
 
@@ -114,11 +111,10 @@ _id_3FEB(var_0) {
     }
   } else if(isDefined(var_0["traverseSound"])) {
     thread maps\_utility::play_sound_on_entity(var_0["traverseSound"]);
-
   }
   self._id_3FEA = var_3;
   self._id_3FE9 = % body;
-  self setflaggedanimknoballrestart("traverseAnim", var_3, % body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("traverseAnim", var_3, %body, 1, 0.2, 1);
   self._id_3FEF = 0;
   self._id_3FF0 = var_0["interruptDeathAnim"];
   animscripts\shared::_id_0C51("traverseAnim", ::_id_3FF1);
@@ -188,7 +184,6 @@ _id_3FF4() {
     var_10 = var_8 / var_4;
   } else {
     var_10 = 1;
-
   }
   var_11 = (var_7 - var_5) / 3.0;
   var_12 = ceil(var_11 * 20);
@@ -225,7 +220,7 @@ _id_3FF7(var_0, var_1) {
   self orientmode("face angle", var_2.angles[1]);
   var_3 = var_2._id_1EFA - var_2.origin[2];
   thread _id_3FE7(var_3 - var_1);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("dog_traverse", anim._id_3AF6[var_0], 1, 0.2, 1);
   animscripts\shared::_id_0C51("dog_traverse");
   self._id_3B58 = 1;
@@ -240,7 +235,7 @@ _id_3FF8(var_0, var_1) {
   self._id_3FEA = anim._id_3AF6["jump_down_40"];
   self._id_3FE9 = % root;
   thread _id_3FE8(40.0 - var_3, 0.1, var_0, var_1);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("traverseAnim", self._id_3FEA, 1, 0.2, 1);
   animscripts\shared::_id_0C51("traverseAnim");
   self clearanim(self._id_3FEA, 0);
@@ -256,7 +251,7 @@ _id_3FF9(var_0, var_1) {
   var_2 = self getnegotiationstartnode();
   self orientmode("face angle", var_2.angles[1]);
   thread _id_3FE8(var_0 - 40.0, 0.2, var_1);
-  self clearanim( % root, 0.25);
+  self clearanim(%root, 0.25);
   self setflaggedanimrestart("traverseAnim", anim._id_3AF6["jump_up_40"], 1, 0.2, 1);
   animscripts\shared::_id_0C51("traverseAnim");
   self clearanim(anim._id_3AF6["jump_up_40"], 0);
@@ -273,11 +268,10 @@ _id_0176(var_0, var_1) {
 
   if(!isDefined(var_2._id_1EFA)) {
     var_2._id_1EFA = var_2.origin[2];
-
   }
   var_3 = var_2._id_1EFA - var_2.origin[2];
   thread _id_3FE7(var_3 - var_1);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("dog_traverse", anim._id_3AF6[var_0], 1, 0.2, 1);
   animscripts\shared::_id_0C51("dog_traverse");
   self._id_3B58 = 1;

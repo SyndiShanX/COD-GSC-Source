@@ -124,7 +124,6 @@ zm_mantle_over_40_move_speed_override() {
     default:
 
       assertmsg("Zombie move speed of '" + self.zombie_move_speed + "' is not supported for mantle_over_40.");
-
   }
 
   return traversealias;
@@ -157,17 +156,16 @@ draw_tank_tag(tag, opcolor) {
 
     wait 0.05;
   }
-
 }
 
 tank_debug_tags() {
-  setdvar("debug_tank", "off");
+  setDvar("debug_tank", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/Tank Debug:5\" \"debug_tank on\"\n");
   flag_wait("start_zombie_round_logic");
   a_spots = getstructarray("tank_jump_down_spots", "script_noteworthy");
 
   while(true) {
-    if(getdvar(#"_id_55B41FB9") == "on") {
+    if(getDvar(#"_id_55B41FB9") == "on") {
       if(!(isDefined(self.tags_drawing) && self.tags_drawing)) {
         foreach(s_tag in self.a_tank_tags)
         self thread draw_tank_tag(s_tag);
@@ -192,7 +190,6 @@ tank_debug_tags() {
 
     wait 0.05;
   }
-
 }
 
 tank_jump_down_store_offset(s_pos) {
@@ -1139,9 +1136,8 @@ update_zombie_goal_pos(str_position, stop_notify) {
     if(isDefined(s_script_origin)) {
       v_origin = level.vh_tank tank_get_jump_down_offset(s_script_origin);
 
-      if(getdvar(#"_id_55B41FB9") == "on")
+      if(getDvar(#"_id_55B41FB9") == "on")
         line(self.origin + vectorscale((0, 0, 1), 30.0), v_origin);
-
     } else
       v_origin = level.vh_tank gettagorigin(str_position);
 

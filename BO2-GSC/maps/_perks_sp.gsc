@@ -20,10 +20,10 @@ cac_get_dvar_int(dvar, def) {
 }
 
 cac_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "") {
     return getdvarfloat(dvar);
-  else {
-    setdvar(dvar, def);
+  } else {
+    setDvar(dvar, def);
     return def;
   }
 }
@@ -52,8 +52,9 @@ perks_init(usehud) {
   level.icon_fullbright_alpha = 0.85;
   level.icon_halfbright_alpha = 0.2;
 
-  if(!isDefined(level.player_perk_slots))
+  if(!isDefined(level.player_perk_slots)) {
     level.player_perk_slots = 3;
+  }
 
   foreach(player in getplayers()) {
     player.perk_slots = [];
@@ -98,8 +99,9 @@ perks_init(usehud) {
 
 find_perk(ref) {
   foreach(perk in self.perk_refs) {
-    if(perk.ref == ref)
+    if(perk.ref == ref) {
       return perk;
+    }
   }
 
   return undefined;
@@ -107,8 +109,9 @@ find_perk(ref) {
 
 find_free_slot() {
   for(i = 0; i < level.player_perk_slots; i++) {
-    if(self.perk_slots[i].ref == "")
+    if(self.perk_slots[i].ref == "") {
       return i;
+    }
   }
 
   return undefined;
@@ -118,8 +121,9 @@ find_slot_by_ref(ref) {
   assert(isDefined(ref), "Invalid perk ref passed into find_slot_by_ref" + ref);
 
   for(i = 0; i < level.player_perk_slots; i++) {
-    if(self.perk_slots[i].ref == ref)
+    if(self.perk_slots[i].ref == ref) {
       return i;
+    }
   }
 
   return undefined;
@@ -133,11 +137,13 @@ give_perk(give_ref) {
   perk = self find_perk(give_ref);
   assert(isDefined(perk), "Undefined/unsupported perk. " + give_ref);
 
-  if(has_perk(give_ref))
+  if(has_perk(give_ref)) {
     return true;
+  }
 
-  if(!isDefined(self find_free_slot()))
+  if(!isDefined(self find_free_slot())) {
     return false;
+  }
 
   slot = self find_free_slot();
   assert(isDefined(slot));
@@ -171,8 +177,9 @@ perk_expire_watcher() {
         current_time = gettime();
         done = 0;
 
-        if(current_time > self.perk_slots[i].expire)
+        if(current_time > self.perk_slots[i].expire) {
           take_perk_by_slot(i);
+        }
       }
     }
 
@@ -196,16 +203,19 @@ take_perk(take_ref) {
 }
 
 take_perk_by_slot(slot) {
-  if(self.perk_slots[slot].ref != "")
+  if(self.perk_slots[slot].ref != "") {
     take_perk(self.perk_slots[slot].ref);
+  }
 }
 
 take_all_perks() {
-  foreach(perk in self.perk_refs)
-  self unsetperk(perk.ref);
+  foreach(perk in self.perk_refs) {
+    self unsetperk(perk.ref);
+  }
 
-  for(i = 0; i < level.player_perk_slots; i++)
+  for(i = 0; i < level.player_perk_slots; i++) {
     take_perk_by_slot(i);
+  }
 }
 
 show_perks() {}
@@ -219,8 +229,9 @@ update_on_give_perk() {
     self waittill("give_perk", ref);
     self flag_set("HUD_giving_perk");
 
-    while(self flag("HUD_taking_perk"))
+    while(self flag("HUD_taking_perk")) {
       wait 0.05;
+    }
 
     wait 1;
     self flag_clear("HUD_giving_perk");
@@ -234,8 +245,9 @@ update_on_take_perk() {
     self waittill("take_perk", ref);
     self flag_set("HUD_taking_perk");
 
-    while(self flag("HUD_giving_perk"))
+    while(self flag("HUD_giving_perk")) {
       wait 0.05;
+    }
 
     wait 1;
     self flag_clear("HUD_taking_perk");

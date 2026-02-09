@@ -267,7 +267,7 @@ enemynotify() {
     if(!isalive(self.enemy)) {
       continue;
     }
-    while(isplayer(self.enemy)) {
+    while(isPlayer(self.enemy)) {
       if(animscripts\utility::hasenemysightpos())
         level.lastplayersighted = gettime();
 
@@ -304,7 +304,7 @@ firstinit() {
   level.lastplayersighted = 100;
   anim.defaultexception = ::empty;
   initdeveloperdvars();
-  setdvar("scr_expDeathMayMoveCheck", "on");
+  setDvar("scr_expDeathMayMoveCheck", "on");
   maps\_names::setup_names();
   anim.animflagnameindex = 0;
   animscripts\init_move_transitions::initmovestartstoptransitions();

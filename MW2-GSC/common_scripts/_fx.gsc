@@ -20,7 +20,7 @@ initFX() {
   waittillframeend; // Wait another frame so effects can be loaded based on start functions. Without this FX are initialiazed before they are defined by start functions.
   level.exploderFunction = ::exploder_after_load;
 
-  /# setDevDvarIfUninitialized( "scr_map_exploder_dump", 0 );
+  setDevDvarIfUninitialized("scr_map_exploder_dump", 0);
 
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
@@ -36,7 +36,7 @@ initFX() {
 }
 
 print_org(fxcommand, fxId, fxPos, waittime) {
-  if(GetDvar("debug") == "1") {
+  if(getDvar("debug") == "1") {
     println("{");
     println("\"origin\" \"" + fxPos[0] + " " + fxPos[1] + " " + fxPos[2] + "\"");
     println("\"classname\" \"script_model\"");

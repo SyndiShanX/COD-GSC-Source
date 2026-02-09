@@ -120,7 +120,7 @@ zombie_dog_audio_monitor() {
       case "attack_hit":
         var_1 = var_0[1];
 
-        if(isDefined(var_1) && isplayer(var_1)) {
+        if(isDefined(var_1) && isPlayer(var_1)) {
           if(isalive(var_1)) {
             var_1 playlocalsound("zmb_dog_bite_wound");
           } else {

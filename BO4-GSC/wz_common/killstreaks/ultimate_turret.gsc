@@ -168,7 +168,7 @@ onturretdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, v
       turretvehicle.var_7eb3ebd5[einflictor getentitynumber()] = # "damage";
       turretvehicle targetting_delay::function_a4d6d6d8(einflictor);
     }
-  } else if(isalive(eattacker) && issentient(eattacker) && !(isplayer(eattacker) && eattacker isremotecontrolling()) && is_valid_target(eattacker, turretvehicle.team)) {
+  } else if(isalive(eattacker) && issentient(eattacker) && !(isPlayer(eattacker) && eattacker isremotecontrolling()) && is_valid_target(eattacker, turretvehicle.team)) {
     turretvehicle.favoriteenemy = eattacker;
     turretvehicle.var_c8072bcc = gettime();
     turretvehicle.var_7eb3ebd5[eattacker getentitynumber()] = # "damage";
@@ -189,7 +189,7 @@ onturretdeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitl
   turretvehicle.dead = 1;
   eattacker = turretvehicle[[level.figure_out_attacker]](eattacker);
 
-  if(isDefined(eattacker) && isplayer(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker)) {
     if(isDefined(level.var_bbc796bf) && isDefined(turretvehicle.owner) && turretvehicle.owner != eattacker) {
       turretvehicle[[level.var_bbc796bf]](eattacker, weapon);
     }
@@ -241,7 +241,7 @@ get_killstreak_bundle() {
 
 is_valid_target(potential_target, friendly_team) {
   if(isDefined(potential_target)) {
-    if(isplayer(potential_target) && isDefined(potential_target.laststand) && potential_target.laststand) {
+    if(isPlayer(potential_target) && isDefined(potential_target.laststand) && potential_target.laststand) {
       return false;
     }
 

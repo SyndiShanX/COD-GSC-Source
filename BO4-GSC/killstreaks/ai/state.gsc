@@ -68,7 +68,6 @@ set_state(state) {
     self notify(#"state_changed", state);
 
     self thread function_3a57bb58();
-
   }
 }
 

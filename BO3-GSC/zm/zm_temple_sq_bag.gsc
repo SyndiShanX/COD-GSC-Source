@@ -234,7 +234,7 @@ function give_me_the_boom_stick() {
   not_given = 1;
   while(not_given) {
     level._give_trig waittill("trigger", who);
-    if(isplayer(who) && zombie_utility::is_player_valid(who) && isDefined(who._has_dynamite) && who._has_dynamite) {
+    if(isPlayer(who) && zombie_utility::is_player_valid(who) && isDefined(who._has_dynamite) && who._has_dynamite) {
       who._has_dynamite = undefined;
       who zm_sidequests::remove_sidequest_icon("sq", "dynamite");
       not_given = 0;
@@ -333,7 +333,7 @@ function gong_resonate(player) {
   if(level._num_gongs == 4) {
     level thread resonate_runner();
   }
-  if(isDefined(player) && isplayer(player)) {
+  if(isDefined(player) && isPlayer(player)) {
     if(self.right_gong && level._num_gongs == 1) {
       player thread zm_audio::create_and_play_dialog("eggs", "quest8", 1);
     } else {

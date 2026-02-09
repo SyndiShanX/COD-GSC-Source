@@ -240,7 +240,6 @@ class cct_shared_ingame_objective: cluielem {
     cluielem::function_dcb34c80("string", "objectiveText", 1);
     cluielem::add_clientfield("objpoints", 1, 11, "int", var_ea26adc8);
   }
-
 }
 
 register(uid, var_a584bc49, var_ea26adc8) {

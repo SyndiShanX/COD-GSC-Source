@@ -299,7 +299,6 @@ _id_435A() {
         maps\_utility::_id_11F4("cliff_pri_truckcomingback");
       } else {
         maps\_utility::_id_11F4("cliff_pri_truckiscoming");
-
       }
       var_0 = 0;
       wait 10;

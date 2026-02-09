@@ -35,7 +35,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     return;
   }
 
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon) && isDefined(poster_trigger)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon) && isDefined(poster_trigger)) {
     if(isDefined(eventstruct.projectile)) {
       projectile = eventstruct.projectile;
       player_dist = distance(poster_trigger.origin, self.origin);

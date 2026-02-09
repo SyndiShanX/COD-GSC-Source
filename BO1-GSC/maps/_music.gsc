@@ -10,9 +10,9 @@ music_init() {
   level.musicState = "";
   registerClientSys("musicCmd");
 }
-
 setMusicState(state) {
-  if(level.musicState != state)
+  if(level.musicState != state) {
     setClientSysState("musicCmd", state);
+  }
   level.musicState = state;
 }

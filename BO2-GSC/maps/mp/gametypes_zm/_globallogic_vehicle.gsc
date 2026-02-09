@@ -15,7 +15,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
   if(game["state"] == "postgame") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   if(!isDefined(vdir))
@@ -57,15 +57,15 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
     idamage = idamage * level.vehicledamagescalar;
     idamage = int(idamage);
 
-    if(isplayer(eattacker))
+    if(isPlayer(eattacker))
       eattacker.pers["participation"]++;
 
     prevhealthratio = self.health / self.maxhealth;
 
-    if(isDefined(self.owner) && isplayer(self.owner))
+    if(isDefined(self.owner) && isPlayer(self.owner))
       team = self.owner.pers["team"];
 
-    if(level.teambased && isplayer(eattacker) && team == eattacker.pers["team"]) {
+    if(level.teambased && isPlayer(eattacker) && team == eattacker.pers["team"]) {
       if(level.friendlyfire == 0) {
         if(!allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, sweapon)) {
           return;
@@ -108,7 +108,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
       if(idamage < 1)
         idamage = 1;
 
-      if(isDefined(eattacker) && isplayer(eattacker) && isDefined(sweapon))
+      if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(sweapon))
         eattacker thread maps\mp\gametypes_zm\_weapons::checkhit(sweapon);
 
       if(issubstr(smeansofdeath, "MOD_GRENADE") && isDefined(einflictor.iscooked))
@@ -137,14 +137,14 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
   }
 
   if(getdvarint(#"g_debugDamage"))
-    println("actor:" + self getentitynumber() + " health:" + self.health + " attacker:" + eattacker.clientid + " inflictor is player:" + isplayer(einflictor) + " damage:" + idamage + " hitLoc:" + shitloc);
+    println("actor:" + self getentitynumber() + " health:" + self.health + " attacker:" + eattacker.clientid + " inflictor is player:" + isPlayer(einflictor) + " damage:" + idamage + " hitLoc:" + shitloc);
 
   if(1) {
     lpselfnum = self getentitynumber();
     lpselfteam = "";
     lpattackerteam = "";
 
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       lpattacknum = eattacker getentitynumber();
       lpattackguid = eattacker getguid();
       lpattackname = eattacker.name;
@@ -170,7 +170,7 @@ callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, foute
   if(game["state"] == "postgame") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   friendly = 0;
@@ -194,7 +194,7 @@ callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, foute
 
     occupant_team = undefined;
 
-    if(level.teambased && isplayer(eattacker) && occupant_team == eattacker.pers["team"]) {
+    if(level.teambased && isPlayer(eattacker) && occupant_team == eattacker.pers["team"]) {
       if(level.friendlyfire == 0) {
         if(!allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, sweapon)) {
           return;

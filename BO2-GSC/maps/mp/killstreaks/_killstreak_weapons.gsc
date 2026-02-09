@@ -39,7 +39,7 @@ init() {
   level.killstreakicons["killstreak_m220_tow_drop_mp"] = "hud_ks_tv_guided_marker";
   level.killstreakicons["killstreak_m220_tow_mp"] = "hud_ks_tv_guided_missile";
   level thread onplayerconnect();
-  setdvar("scr_HeldKillstreak_Penalty", 0);
+  setDvar("scr_HeldKillstreak_Penalty", 0);
 }
 
 onplayerconnect() {

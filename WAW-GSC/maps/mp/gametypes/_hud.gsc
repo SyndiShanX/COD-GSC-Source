@@ -31,23 +31,20 @@ static const char *g_he_font[] =
 	"objective",	// HE_FONT_OBJECTIVE
 };
 
-
 // These values correspond to the defines in q_shared.h
 static const char *g_he_alignx[] =
 {
-	"left",   // HE_ALIGN_LEFT
+	"left", // HE_ALIGN_LEFT
 	"center", // HE_ALIGN_CENTER
-	"right",  // HE_ALIGN_RIGHT
+	"right",// HE_ALIGN_RIGHT
 };
-
 
 static const char *g_he_aligny[] =
 {
-	"top",    // HE_ALIGN_TOP
+	"top",// HE_ALIGN_TOP
 	"middle", // HE_ALIGN_MIDDLE
 	"bottom", // HE_ALIGN_BOTTOM
 };
-
 
 // These values correspond to the defines in menudefinition.h
 static const char *g_he_horzalign[] =
@@ -63,7 +60,6 @@ static const char *g_he_horzalign[] =
 };
 cassert( ARRAY_COUNT( g_he_horzalign ) == HORIZONTAL_ALIGN_MAX + 1 );
 
-
 static const char *g_he_vertalign[] =
 {
 	"subtop",			// VERTICAL_ALIGN_SUBTOP
@@ -78,139 +74,121 @@ static const char *g_he_vertalign[] =
 cassert( ARRAY_COUNT( g_he_vertalign ) == VERTICAL_ALIGN_MAX + 1 );
 */
 
-init()
-{
-	precacheShader( "progress_bar_bg" );
-	precacheShader( "progress_bar_fg" );
-	precacheShader( "progress_bar_fill" );
-	precacheShader( "score_bar_bg" );
-	precacheShader( "score_bar_allies" );
-	precacheShader( "score_bar_opfor" );
-	
-	level.uiParent = spawnstruct();
-	level.uiParent.horzAlign = "left";
-	level.uiParent.vertAlign = "top";
-	level.uiParent.alignX = "left";
-	level.uiParent.alignY = "top";
-	level.uiParent.x = 0;
-	level.uiParent.y = 0;
-	level.uiParent.width = 0;
-	level.uiParent.height = 0;
-	level.uiParent.children = [];
-	
-	level.fontHeight = 12;
-	
-	level.hud["allies"] = spawnstruct();
-	level.hud["axis"] = spawnstruct();
-	
-	// we can, of course, separate out the following constants for splitscreen.	
-	// primary progress bars are for things like capturing flags or planting bombs - big, important things that happen as you play a gametype
-	level.primaryProgressBarY = -61; // from center
-	level.primaryProgressBarX = 0;
-	level.primaryProgressBarHeight = 9; //28; // this is the height and width of the whole progress bar, including the outline. the part that actually moves is 2 pixels smaller.
-	level.primaryProgressBarWidth = 120;
-	level.primaryProgressBarTextY = -75;
-	level.primaryProgressBarTextX = 0;
-	level.primaryProgressBarFontSize = 1.4;
-	
-	if ( level.splitscreen )
-	{
-		// (x offset avoids overlapping radar on top left screen)
-		level.primaryProgressBarX = 20;
-		level.primaryProgressBarTextX = 20;
-		
-		level.primaryProgressBarY = 15;
-		level.primaryProgressBarTextY = 0;
-		level.primaryProgressBarHeight = 2;
-	}
+init() {
+  precacheShader("progress_bar_bg");
+  precacheShader("progress_bar_fg");
+  precacheShader("progress_bar_fill");
+  precacheShader("score_bar_bg");
+  precacheShader("score_bar_allies");
+  precacheShader("score_bar_opfor");
 
-	level.teamProgressBarY = 32; // 205;
-	level.teamProgressBarHeight = 14;
-	level.teamProgressBarWidth = 192;
-	level.teamProgressBarTextY = 8; // 155;
-	level.teamProgressBarFontSize = 1.65;
+  level.uiParent = spawnStruct();
+  level.uiParent.horzAlign = "left";
+  level.uiParent.vertAlign = "top";
+  level.uiParent.alignX = "left";
+  level.uiParent.alignY = "top";
+  level.uiParent.x = 0;
+  level.uiParent.y = 0;
+  level.uiParent.width = 0;
+  level.uiParent.height = 0;
+  level.uiParent.children = [];
 
-	if ( getDvar( "ui_score_bar" ) == "" )
-		setDvar( "ui_score_bar", 0 );
+  level.fontHeight = 12;
 
-	setDvar( "ui_generic_status_bar", 0 );
+  level.hud["allies"] = spawnStruct();
+  level.hud["axis"] = spawnStruct();
 
-	if ( level.splitscreen )
-	{
-		level.lowerTextYAlign = "BOTTOM";
-		level.lowerTextY = -42;
-		level.lowerTextFontSize = 1.4;
-	}
-	else
-	{
-		level.lowerTextYAlign = "CENTER";
-		level.lowerTextY = 70;
-		level.lowerTextFontSize = 2;
-	}
+  // we can, of course, separate out the following constants for splitscreen.	
+  // primary progress bars are for things like capturing flags or planting bombs - big, important things that happen as you play a gametype
+  level.primaryProgressBarY = -61; // from center
+  level.primaryProgressBarX = 0;
+  level.primaryProgressBarHeight = 9; //28; // this is the height and width of the whole progress bar, including the outline. the part that actually moves is 2 pixels smaller.
+  level.primaryProgressBarWidth = 120;
+  level.primaryProgressBarTextY = -75;
+  level.primaryProgressBarTextX = 0;
+  level.primaryProgressBarFontSize = 1.4;
+
+  if(level.splitscreen) {
+    // (x offset avoids overlapping radar on top left screen)
+    level.primaryProgressBarX = 20;
+    level.primaryProgressBarTextX = 20;
+
+    level.primaryProgressBarY = 15;
+    level.primaryProgressBarTextY = 0;
+    level.primaryProgressBarHeight = 2;
+  }
+
+  level.teamProgressBarY = 32; // 205;
+  level.teamProgressBarHeight = 14;
+  level.teamProgressBarWidth = 192;
+  level.teamProgressBarTextY = 8; // 155;
+  level.teamProgressBarFontSize = 1.65;
+
+  if(getDvar("ui_score_bar") == "")
+    setDvar("ui_score_bar", 0);
+
+  setDvar("ui_generic_status_bar", 0);
+
+  if(level.splitscreen) {
+    level.lowerTextYAlign = "BOTTOM";
+    level.lowerTextY = -42;
+    level.lowerTextFontSize = 1.4;
+  } else {
+    level.lowerTextYAlign = "CENTER";
+    level.lowerTextY = 70;
+    level.lowerTextFontSize = 2;
+  }
 }
 
+showClientScoreBar(time) {
+  self notify("showClientScoreBar");
+  self endon("showClientScoreBar");
+  self endon("death");
+  self endon("disconnect");
 
-showClientScoreBar( time )
-{
-	self notify ( "showClientScoreBar" );
-	self endon ( "showClientScoreBar" );
-	self endon ( "death" );
-	self endon ( "disconnect" );
-	
-	self setClientDvar( "ui_score_bar", 1 );
-	wait ( time );
-	self setClientDvar( "ui_score_bar", 0 );
+  self setClientDvar("ui_score_bar", 1);
+  wait(time);
+  self setClientDvar("ui_score_bar", 0);
 }
 
+showClientGenericMessageBar(time, message) {
+  self notify("showClientGenericMessageBar");
+  self endon("showClientGenericMessageBar");
+  self endon("disconnect");
 
-showClientGenericMessageBar( time, message )
-{
-	self notify ( "showClientGenericMessageBar" );
-	self endon ( "showClientGenericMessageBar" );
-	self endon ( "disconnect" );
-	
-	if ( isDefined( time ) && isDefined( message ) )
-	{
-		self setClientDvar( "ui_generic_status_bar", 1 );
-		self setClientDvar( "generic_status_bar_message", message );
-		wait ( time );
-		self setClientDvar( "ui_generic_status_bar", 0 );
-	}
-	else
-	{
-		self setClientDvar( "ui_generic_status_bar", 0 );
-	}
+  if(isDefined(time) && isDefined(message)) {
+    self setClientDvar("ui_generic_status_bar", 1);
+    self setClientDvar("generic_status_bar_message", message);
+    wait(time);
+    self setClientDvar("ui_generic_status_bar", 0);
+  } else {
+    self setClientDvar("ui_generic_status_bar", 0);
+  }
 }
 
-
-fontPulseInit()
-{
-	self.baseFontScale = self.fontScale;
-	self.maxFontScale = self.fontScale * 2;
-	self.inFrames = 3;
-	self.outFrames = 5;
+fontPulseInit() {
+  self.baseFontScale = self.fontScale;
+  self.maxFontScale = self.fontScale * 2;
+  self.inFrames = 3;
+  self.outFrames = 5;
 }
 
+fontPulse(player) {
+  self notify("fontPulse");
+  self endon("fontPulse");
+  player endon("disconnect");
+  player endon("joined_team");
+  player endon("joined_spectators");
 
-fontPulse(player)
-{
-	self notify ( "fontPulse" );
-	self endon ( "fontPulse" );
-	player endon("disconnect");
-	player endon("joined_team");
-	player endon("joined_spectators");
-	
-	scaleRange = self.maxFontScale - self.baseFontScale;
-	
-	while ( self.fontScale < self.maxFontScale )
-	{
-		self.fontScale = min( self.maxFontScale, self.fontScale + (scaleRange / self.inFrames) );
-		wait 0.05;
-	}
-		
-	while ( self.fontScale > self.baseFontScale )
-	{
-		self.fontScale = max( self.baseFontScale, self.fontScale - (scaleRange / self.outFrames) );
-		wait 0.05;
-	}
+  scaleRange = self.maxFontScale - self.baseFontScale;
+
+  while(self.fontScale < self.maxFontScale) {
+    self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
+    wait 0.05;
+  }
+
+  while(self.fontScale > self.baseFontScale) {
+    self.fontScale = max(self.baseFontScale, self.fontScale - (scaleRange / self.outFrames));
+    wait 0.05;
+  }
 }

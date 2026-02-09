@@ -67,14 +67,14 @@ function_8e0401ab(params) {
     a_players = util::get_active_players();
     var_fc97ca4d = array::random(a_players);
 
-    if(isplayer(var_fc97ca4d)) {
+    if(isPlayer(var_fc97ca4d)) {
       var_fc97ca4d zm_score::minus_to_player_score(level.var_a58dc99e, 1);
     }
 
     return;
   }
 
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     params.eattacker zm_score::minus_to_player_score(level.var_a58dc99e, 1);
   }
 }

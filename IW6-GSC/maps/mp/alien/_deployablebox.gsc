@@ -351,14 +351,14 @@ box_SetIcon(player, streakName, vOffset) {
 }
 
 box_enablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(isPlayer(player))
     self EnablePlayerUse(player);
 
   self.disabled_use_for[player GetEntityNumber()] = false;
 }
 
 box_disablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(isPlayer(player))
     self DisablePlayerUse(player);
 
   self.disabled_use_for[player GetEntityNumber()] = true;
@@ -620,7 +620,7 @@ box_ModelTeamUpdater(showForTeam) {
 }
 
 useHoldThink(player, useTime) {
-  if(IsPlayer(player))
+  if(isPlayer(player))
     player playerLinkTo(self);
   else
     player LinkTo(self);
@@ -639,7 +639,7 @@ useHoldThink(player, useTime) {
 
   player disable_weapon_timeout((useTime + 0.05), "deployable_weapon_management");
 
-  if(IsPlayer(player))
+  if(isPlayer(player))
     player thread personalUseBar(self);
 
   result = useHoldThinkLoop(player);

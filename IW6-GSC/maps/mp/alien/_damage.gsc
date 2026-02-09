@@ -99,7 +99,7 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
         }
 
         if(is_ricochet_damage()) {
-          if(isDefined(eAttacker) && IsPlayer(eAttacker) && isDefined(sHitLoc) && sHitLoc != "shield") {
+          if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(sHitLoc) && sHitLoc != "shield") {
             if(isDefined(eInflictor))
               eAttacker DoDamage(iDamage, (eAttacker.origin - (0, 0, 50)), eAttacker, eInflictor, sMeansOfDeath);
             else
@@ -496,7 +496,6 @@ scale_alien_damage_by_perks(eAttacker, iDamage, sMeansOfDeath, sWeapon) {
   if(sMeansOfDeath == "MOD_MELEE") {
     if(WeaponType(sWeapon) == "riotshield") {
       eAttacker riotshieldAmmoTracker();
-
     }
 
     playFXOnTag(level._effect["melee_blood"], eAttacker, "tag_weapon_right");
@@ -742,7 +741,6 @@ check_for_special_damage(enemy, sWeapon, sMeansOfDeath) {
         enemy thread catch_alien_on_fire(self);
         break;
     }
-
   } else {
     baseweapon = getRawBaseWeaponName(sWeapon);
     if(isDefined(self.special_ammocount) && isDefined(self.special_ammocount[baseweapon]) && self.special_ammocount[baseweapon] > 0) {}

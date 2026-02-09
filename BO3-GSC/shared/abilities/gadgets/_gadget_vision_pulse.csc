@@ -109,7 +109,7 @@ function do_vision_world_pulse(localclientnum) {
 }
 
 function vision_pulse_owner_valid(owner) {
-  if(isDefined(owner) && owner isplayer() && isalive(owner)) {
+  if(isDefined(owner) && owner isPlayer() && isalive(owner)) {
     return true;
   }
   return false;

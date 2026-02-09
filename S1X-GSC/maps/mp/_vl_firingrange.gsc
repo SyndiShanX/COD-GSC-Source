@@ -484,7 +484,6 @@ MonitorShotsFired(player) {
       level.firingrange.ShouldUpDateLuaDisplay = true;
       level.firingrange.ShotsFired = ShotsFired;
     }
-
   }
 }
 
@@ -629,7 +628,6 @@ StartRound(RoundNumber) {
     self SetClientOmnvar("ui_vlobby_round_state", 1);
     self thread activate_targets(RoundNumber);
   }
-
 }
 ShowRoundMeshMesh(RoundNumber) {
   level endon("shutdown_hologram");
@@ -1424,7 +1422,6 @@ firing_range_setup_target_logic() {
       } else {
         LogicEntGroupArray[RoundNumber] = add_to_array(LogicEntGroupArray[RoundNumber], ent);
       }
-
     }
   }
   return LogicEntGroupArray;
@@ -1552,7 +1549,6 @@ target_reset() {
   if(isDefined(self.aimassist_target)) {
     self.aimassist_target disableAimAssist();
   }
-
 }
 
 lerp_spot_intensity(targetname, time, endintensity) {
@@ -1607,7 +1603,6 @@ monitor_weapon_ammo_count(weapon) {
     }
     wait(0.5);
   }
-
 }
 
 RiotShieldCleanup() {
@@ -1680,10 +1675,7 @@ monitor_grenade_count(weapon, isOffhand) {
 
   isVarGrenade = false;
   weapon_short = maps\mp\_utility::strip_suffix(weapon, "_lefthand");
-  if(weapon_short == "smoke_grenade_var_mp" ||
-    weapon_short == "stun_grenade_var_mp" ||
-    weapon_short == "emp_grenade_var_mp" ||
-    weapon_short == "paint_grenade_var_mp") {
+  if(weapon_short == "smoke_grenade_var_mp" || weapon_short == "stun_grenade_var_mp" || weapon_short == "emp_grenade_var_mp" || weapon_short == "paint_grenade_var_mp") {
     isVarGrenade = true;
   }
 

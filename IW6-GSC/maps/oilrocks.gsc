@@ -26,7 +26,7 @@ main() {
   if(level.xenon)
     setsaveddvar("r_texFilterProbeBilinear", 1);
 
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
   maps\oilrocks_audio::main();
   thread maps\oilrocks_achievement::main();
 }

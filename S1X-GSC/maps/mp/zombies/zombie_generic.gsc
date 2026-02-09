@@ -179,7 +179,7 @@ zombie_audio_monitor() {
 
         var_2 = var_0[1];
 
-        if(isDefined(var_2) && isplayer(var_2)) {
+        if(isDefined(var_2) && isPlayer(var_2)) {
           if(isalive(var_2)) {
             if(maps\mp\zombies\_util::getzombieslevelnum() == 4 && self.agent_type == "zombie_boss_oz_stage2") {
               var_2 playlocalsound("zmb_hit_oz_boss");

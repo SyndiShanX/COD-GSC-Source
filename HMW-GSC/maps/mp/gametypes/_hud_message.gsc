@@ -51,7 +51,7 @@ init() {
   level.lua_splash_type_playercard = 6;
   level.lua_splash_type_deathstreak = 7;
   level thread onplayerconnect();
-  setdvar("scr_lua_splashes", "1");
+  setDvar("scr_lua_splashes", "1");
 }
 
 onplayerconnect() {
@@ -336,7 +336,7 @@ shownotifymessage(notifyData) {
 }
 
 killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -371,7 +371,7 @@ killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
 }
 
 deathstreaksplashnotify(perk) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -400,7 +400,7 @@ deathstreaksplashnotify(perk) {
 }
 
 stucksplashnotify(isVictim) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -431,7 +431,7 @@ stucksplashnotify(isVictim) {
 }
 
 challengesplashnotify(challengeRef, originalState, newState) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -488,7 +488,7 @@ medalsplashnotify(splashRef) {
 }
 
 splashnotify(splash, optionalNumber, optionalKillstreakSlot) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(getdvarint("scr_lua_splashes")) {
@@ -527,7 +527,7 @@ splashnotify(splash, optionalNumber, optionalKillstreakSlot) {
 }
 
 rankupsplashnotify(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");

@@ -9,7 +9,7 @@
 
 hack_packapunch() {
   vending_weapon_upgrade_trigger = getEntArray("zombie_vending_upgrade", "targetname");
-  perk = getEnt(vending_weapon_upgrade_trigger[0].target, "targetname");
+  perk = getent(vending_weapon_upgrade_trigger[0].target, "targetname");
   if(isDefined(perk)) {
     struct = spawnStruct();
     struct.origin = perk.origin + (AnglesToRight(perk.angles) * 26) + (0, 0, 48);
@@ -22,7 +22,6 @@ hack_packapunch() {
     level._pack_hack_struct pack_trigger_think();
   }
 }
-
 pack_trigger_think() {
   while(1) {
     flag_wait("enter_nml");
@@ -32,7 +31,6 @@ pack_trigger_think() {
     }
   }
 }
-
 packapunch_hack(hacker) {
   maps\_zombiemode_equip_hacker::deregister_hackable_struct(level._pack_hack_struct);
   level._pack_hack_struct.script_int = 0;

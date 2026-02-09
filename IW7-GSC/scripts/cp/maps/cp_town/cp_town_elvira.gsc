@@ -450,7 +450,7 @@ elvira_idle_loop() {
   level notify("elvira_stop_talk_loop");
   level endon("elvira_summoned");
   level endon("elvira_stop_idle_loop");
-  var_0 = [ % iw7_cp_elvira_idle_01, %iw7_cp_elvira_idle_02];
+  var_0 = [%iw7_cp_elvira_idle_01, %iw7_cp_elvira_idle_02];
   var_1 = ["IW7_cp_elvira_idle_01", "IW7_cp_elvira_idle_02"];
   for(;;) {
     var_2 = scripts\engine\utility::random(var_1);
@@ -492,7 +492,7 @@ elvira_talk_loop() {
   level notify("elvira_stop_idle_loop");
   level endon("elvira_summoned");
   level endon("elvira_stop_talk_loop");
-  var_0 = [ % iw7_cp_elvira_talk_01, %iw7_cp_elvira_talk_02, %iw7_cp_elvira_talk_03, %iw7_cp_elvira_talk_04];
+  var_0 = [%iw7_cp_elvira_talk_01, %iw7_cp_elvira_talk_02, %iw7_cp_elvira_talk_03, %iw7_cp_elvira_talk_04];
   var_1 = ["IW7_cp_elvira_talk_01", "IW7_cp_elvira_talk_02", "IW7_cp_elvira_talk_03", "IW7_cp_elvira_talk_04"];
   var_2 = 0;
   for(;;) {

@@ -168,7 +168,6 @@ zm_mantle_over_40_move_speed_override() {
     default:
 
       assertmsg("Zombie move speed of '" + self.zombie_move_speed + "' is not supported for mantle_over_40.");
-
   }
 
   return traversealias;
@@ -361,7 +360,6 @@ busschedulethink() {
         }
 
         println("^2Bus Debug: Player(s) Are In The Same Zone As Bus (" + zonename + ")");
-
       }
     }
 
@@ -383,7 +381,6 @@ busschedulethink() {
       continue;
     } else {
       println("^2Bus Debug: Bus Will Consider Stopping, Someone Is Nearby.");
-
     }
 
     if(level.busschedule busschedulegetisambushstop(self.destinationindex)) {
@@ -613,7 +610,6 @@ debug_busnear() {
     line(inside_pos - side_proj, inside_pos + side_proj, (1, 1, 1), 1, 0, 2);
     line(plow_pos - side_proj, plow_pos + side_proj, (1, 1, 1), 1, 0, 2);
   }
-
 }
 
 debug_zombieonbus(zombie) {
@@ -635,7 +631,6 @@ debug_zombieonbus(zombie) {
     else
       line(zombie_origin_proj, zombie_origin, (1, 0, 0), 1, 0, 2);
   }
-
 }
 
 busupdatenearzombies() {
@@ -898,7 +893,6 @@ busupdatenearequipment() {
       item maps\mp\zombies\_zm_equipment::item_damage(10000);
 
       println("^2Bus hit an item.");
-
     }
   }
 }
@@ -1030,7 +1024,6 @@ busupdatespeed() {
     msgtext = "speed " + self getspeedmph();
     print3d(msgorigin, msgtext, (1, 1, 1), 1, 0.5, 2);
   }
-
 }
 
 bus_power_off() {

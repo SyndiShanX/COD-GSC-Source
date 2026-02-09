@@ -200,9 +200,9 @@ func_AE39() {
 
   setomnvar("ui_open_loadout_menu", 0);
   setsaveddvar("selectingLoadout", "0");
-  setdvar("loadout_chosen", 1);
-  setdvar("loadout_level_name", level.script);
-  setdvar("loadout_start_point", level.var_10CDA);
+  setDvar("loadout_chosen", 1);
+  setDvar("loadout_level_name", level.script);
+  setDvar("loadout_start_point", level.var_10CDA);
   scripts\engine\utility::waitframe();
   map_restart();
   wait(3);

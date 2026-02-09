@@ -63,7 +63,7 @@ give_attacker_kill_rewards(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isplayer(var_0) && (!isDefined(var_0.owner) || !isplayer(var_0.owner))) {
+  if(!isPlayer(var_0) && (!isDefined(var_0.owner) || !isPlayer(var_0.owner))) {
     return;
   }
   var_14 = 0;

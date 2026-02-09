@@ -38,7 +38,7 @@ function ai_puppeteer_think() {
 
 function ai_puppeteer() {
   player = undefined;
-  while(!isplayer(player)) {
+  while(!isPlayer(player)) {
     player = getplayers()[0];
     wait(0.05);
   }

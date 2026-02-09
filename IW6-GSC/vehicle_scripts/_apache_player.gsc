@@ -911,7 +911,7 @@ monitorhealth_ondeath() {
   if(isDefined(level.lastplayerapachedamage) && gettime() - level.lastplayerapachedamage < 4000)
     maps\_player_death::grenade_death_hint(&"OILROCKS_KILLED_BY_MISSILE", &"OILROCKS_HINT_APACHE_FLARES");
   else
-    setdvar("ui_deadquote", "");
+    setDvar("ui_deadquote", "");
 
   maps\_utility::missionfailedwrapper();
 }

@@ -172,7 +172,7 @@ function giveperks() {
 
 function onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   if(weapon == level.weapon_sas_primary_weapon && smeansofdeath == "MOD_IMPACT") {
-    if(isDefined(eattacker) && isplayer(eattacker)) {
+    if(isDefined(eattacker) && isPlayer(eattacker)) {
       if(!isDefined(eattacker.pers["sticks"])) {
         eattacker.pers["sticks"] = 1;
       } else {
@@ -195,7 +195,7 @@ function onplayerscore(event, player, victim) {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if(weapon_utils::ismeleemod(smeansofdeath)) {
       attacker globallogic_score::givepointstowin(level.pointspermeleekill);
       onplayerscore(undefined, attacker, undefined);
@@ -303,7 +303,7 @@ function setupteam(team) {
 }
 
 function onstartgametype() {
-  setdvar("tu29_gametypeOverridesGadget", 1);
+  setDvar("tu29_gametypeOverridesGadget", 1);
   setclientnamemode("auto_change");
   spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);

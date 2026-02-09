@@ -162,17 +162,13 @@ squadmemberthink() {
             self setgoal(self.enemy);
           }
 
-          [
-            [squad]
-          ] - > addsquadbreadcrumbs(self);
+          [[squad]] - > addsquadbreadcrumbs(self);
         } else {
           recordline(self.origin, squadleader.origin, (0, 1, 0), "<dev string:x38>", self);
 
           recordenttext(self.squadname + "<dev string:x50>", self, (0, 1, 0), "<dev string:x38>");
 
-          followposition = [
-            [squad]
-          ] - > getsquadbreadcrumb();
+          followposition = [[squad]] - > getsquadbreadcrumb();
           followdistsq = distance2dsquared(self.goalpos, followposition);
 
           if(isDefined(squadleader.enemy)) {

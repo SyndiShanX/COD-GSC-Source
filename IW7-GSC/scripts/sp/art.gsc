@@ -25,7 +25,7 @@ main() {
   }
 
   if(!isDefined(level.script)) {
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
   }
 }
 
@@ -78,20 +78,20 @@ func_583A(var_0, var_1) {
 }
 
 func_5843() {
-  if(getdvar("scr_dof_enable") == "") {
+  if(getDvar("scr_dof_enable") == "") {
     setsaveddvar("scr_dof_enable", "1");
   }
 
-  setdvar("ads_dof_tracedist", 8192);
-  setdvar("ads_dof_maxEnemyDist", 10000);
-  setdvar("ads_dof_playerForgetEnemyTime", 5000);
-  setdvar("ads_dof_nearStartScale", 0.25);
-  setdvar("ads_dof_nearEndScale", 0.85);
-  setdvar("ads_dof_farStartScale", 1.15);
-  setdvar("ads_dof_farEndScale", 3);
-  setdvar("ads_dof_nearBlur", 4);
-  setdvar("ads_dof_farBlur", 1.5);
-  setdvar("ads_dof_debug", 0);
+  setDvar("ads_dof_tracedist", 8192);
+  setDvar("ads_dof_maxEnemyDist", 10000);
+  setDvar("ads_dof_playerForgetEnemyTime", 5000);
+  setDvar("ads_dof_nearStartScale", 0.25);
+  setDvar("ads_dof_nearEndScale", 0.85);
+  setDvar("ads_dof_farStartScale", 1.15);
+  setDvar("ads_dof_farEndScale", 3);
+  setDvar("ads_dof_nearBlur", 4);
+  setDvar("ads_dof_farBlur", 1.5);
+  setDvar("ads_dof_debug", 0);
   level.var_5832 = [];
   level.var_5832["base"] = [];
   level.var_5832["base"]["current"] = [];
@@ -473,7 +473,7 @@ func_584E() {
 }
 
 func_11715() {
-  var_0 = getdvar("r_tessellation");
+  var_0 = getDvar("r_tessellation");
   if(var_0 == "") {
     return;
   }
@@ -541,13 +541,13 @@ func_1121E(var_0, var_1) {
     var_6 = level.var_11220[var_0].weaponisauto;
     var_7 = min(float(var_5 / var_3), 1);
     var_8 = var_4 + var_6 - var_4 * var_7;
-    setdvar("r_sunflare_position", var_8);
+    setDvar("r_sunflare_position", var_8);
     setsunflareposition(var_8);
     wait(0.05);
     var_5 = gettime() - var_2;
   }
 
-  setdvar("r_sunflare_position", level.var_11220[var_0].weaponisauto);
+  setDvar("r_sunflare_position", level.var_11220[var_0].weaponisauto);
   setsunflareposition(var_6);
 }
 

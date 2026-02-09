@@ -95,7 +95,6 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
 
           line(self.var_b20b0960.origin, var_b43bc141, (1, 0, 1));
           record3dtext("<dev string:xae>" + height_difference, self.var_b20b0960.origin, (1, 1, 1), "<dev string:xb1>");
-
         }
 
         var_3a080e11 = function_61418721(var_8e89eaf2, var_6f06d19d, var_ca144d1e);
@@ -113,7 +112,6 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
         sphere(var_6f06d19d, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
         sphere(var_ca144d1e, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
         record3dtext("<dev string:xae>" + var_c246e8d5, var_8e89eaf2 + var_c246e8d5, (1, 1, 1), "<dev string:xb1>");
-
       }
 
       for(var_31120f24 = vnd_start; isDefined(var_31120f24.target); var_31120f24 = var_bb4eaebf) {
@@ -122,7 +120,6 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
         sphere(var_31120f24.origin, 5, (1, 1, 0), 1, 0, 8, 1);
         sphere(var_bb4eaebf.origin, 5, (1, 1, 0), 1, 0, 8, 1);
         line(var_31120f24.origin, var_bb4eaebf.origin, (1, 1, 0));
-
       }
     }
   }
@@ -183,7 +180,6 @@ function_d31cb502(entity, asmstatename) {
       } else {
         self thread function_dc61ccae(entity.vnd_start);
       }
-
     } else if(isDefined(entity.var_b20b0960.var_d4b82e45) && entity.var_b20b0960.var_d4b82e45 == 1) {
       result = 4;
     }

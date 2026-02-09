@@ -537,7 +537,7 @@ function watch_hit_players() {
   self endon("stationary");
   while(isDefined(self)) {
     self waittill("grenade_bounce", pos, normal, ent);
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       ent explosiondamage(25, pos);
     }
   }
@@ -2658,10 +2658,10 @@ function player_hide_craftable_parts_ui_after_duration(str_widget_clientuimodel,
 }
 
 function run_craftables_devgui() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   while(true) {
     craftable_id = getdvarstring("");
     if(craftable_id != "") {
@@ -2675,7 +2675,7 @@ function run_craftables_devgui() {
           player thread player_take_piece(piece_spawn);
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
@@ -2684,7 +2684,7 @@ function run_craftables_devgui() {
           player zm_equipment::buy(equipment_id);
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     craftable_id = getdvarstring("", "");
     if(craftable_id != "") {
@@ -2702,7 +2702,7 @@ function run_craftables_devgui() {
       } else {
         iprintlnbold("");
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     craftable_id = getdvarstring("", "");
     if(craftable_id != "") {
@@ -2727,7 +2727,7 @@ function run_craftables_devgui() {
         } else {
           iprintlnbold("");
         }
-        setdvar("", "");
+        setDvar("", "");
       }
     }
     wait(0.05);

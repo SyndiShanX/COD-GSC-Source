@@ -137,7 +137,7 @@ brute_goon_summon() {
 
 get_num_guys_to_brute_spawn() {
   var_0 = num_goons_to_spawn();
-  var_1 = getdvar("crab_brute_action", "none");
+  var_1 = getDvar("crab_brute_action", "none");
   if(var_1 == "summon") {
     var_0 = 2;
   }
@@ -428,7 +428,7 @@ egg_sac_damage_monitor(var_0, var_1) {
     var_0 waittill("damage", var_2, var_3);
     var_0.health = 999999;
     var_0.fake_health = var_0.fake_health - var_2;
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       scripts\cp\maps\cp_town\cp_town_crab_boss_escort::show_hit_marker(var_0, var_3);
     }
 
@@ -437,7 +437,7 @@ egg_sac_damage_monitor(var_0, var_1) {
     }
   }
 
-  if(isDefined(var_3) && isplayer(var_3)) {
+  if(isDefined(var_3) && isPlayer(var_3)) {
     var_3 scripts\cp\cp_merits::processmerit("mt_dlc3_eggs_killed");
     level.current_enemy_deaths = level.current_enemy_deaths + 1;
   }

@@ -381,7 +381,7 @@ func_6D9C() {
     }
     self.var_2536 waittill("trigger", var_0);
 
-    if(isplayer(var_0) || isDefined(var_0.pet) || isDefined(var_0.agent_type) && var_0.agent_type == "the_hoff") {
+    if(isPlayer(var_0) || isDefined(var_0.pet) || isDefined(var_0.agent_type) && var_0.agent_type == "the_hoff") {
       continue;
     }
     var_1 = var_0.origin + (0, 0, 50);

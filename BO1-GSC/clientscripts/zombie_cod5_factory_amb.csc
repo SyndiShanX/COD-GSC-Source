@@ -1,6 +1,6 @@
 /*****************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cod5_factory_amb.csc
+ * Script: clientscripts\zombie_cod5_factory_amb\.csc
 *****************************************************/
 
 #include clientscripts\_utility;
@@ -55,7 +55,6 @@ main() {
   thread power_audio_2d();
   thread linkall_2d();
 }
-
 start_lights() {
   level waittill("pl1");
   array_thread(getstructarray("dyn_light", "targetname"), ::light_sound);
@@ -63,14 +62,12 @@ start_lights() {
   array_thread(getstructarray("dyn_generator", "targetname"), ::generator_sound);
   array_thread(getstructarray("dyn_breakers", "targetname"), ::breakers_sound);
 }
-
 light_sound() {
   if(isDefined(self)) {
     playSound(0, "light_start", self.origin);
     e1 = clientscripts\_audio::playloopat(0, "light", self.origin);
   }
 }
-
 generator_sound() {
   if(isDefined(self)) {
     wait(3);
@@ -79,33 +76,31 @@ generator_sound() {
     g1 = clientscripts\_audio::playloopat(0, "gen_loop", self.origin, 1);
   }
 }
-
 breakers_sound() {
   if(isDefined(self)) {
     playSound(0, "break_start", self.origin);
     b1 = clientscripts\_audio::playloopat(0, "break_loop", self.origin, 2);
   }
 }
-
 switch_progress_sound() {
   if(isDefined(self.script_noteworthy)) {
-    if(self.script_noteworthy == "1")
+    if(self.script_noteworthy == "1") {
       time = .5;
-    else if(self.script_noteworthy == "2")
+    } else if(self.script_noteworthy == "2") {
       time = 1;
-    else if(self.script_noteworthy == "3")
+    } else if(self.script_noteworthy == "3") {
       time = 1.5;
-    else if(self.script_noteworthy == "4")
+    } else if(self.script_noteworthy == "4") {
       time = 2;
-    else if(self.script_noteworthy == "5")
+    } else if(self.script_noteworthy == "5") {
       time = 2.5;
-    else
+    } else {
       time = 0;
+    }
     wait(time);
     playSound(0, "switch_progress", self.origin);
   }
 }
-
 homepad_loop() {
   level waittill("pap1");
   homepad = getstruct("homepad_power_looper", "targetname");
@@ -117,7 +112,6 @@ homepad_loop() {
     clientscripts\_audio::playloopat(0, "break_arc", home_breaker.origin, 1);
   }
 }
-
 teleport_pad_init(pad) {
   telepad = getstructarray("telepad_" + pad, "targetname");
   telepad_loop = getstructarray("telepad_" + pad + "_looper", "targetname");
@@ -127,11 +121,9 @@ teleport_pad_init(pad) {
   array_thread(telepad, ::teleportation_audio, pad);
   array_thread(homepad, ::teleportation_audio, pad);
 }
-
 telepad_loop() {
   clientscripts\_audio::playloopat(0, "power_loop", self.origin, 1);
 }
-
 teleportation_audio(pad) {
   teleport_delay = 2;
   while(1) {
@@ -150,14 +142,12 @@ teleportation_audio(pad) {
     }
   }
 }
-
 pa_init(pad) {
   pa_sys = getstructarray("pa_system", "targetname");
   array_thread(pa_sys, ::pa_teleport, pad);
   array_thread(pa_sys, ::pa_countdown, pad);
   array_thread(pa_sys, ::pa_countdown_success, pad);
 }
-
 pa_single_init() {
   pa_sys = getstructarray("pa_system", "targetname");
   array_thread(pa_sys, ::pa_electric_trap, "bridge");
@@ -166,7 +156,6 @@ pa_single_init() {
   array_thread(pa_sys, ::pa_level_start);
   array_thread(pa_sys, ::pa_power_on);
 }
-
 pa_countdown(pad) {
   level endon("scd" + pad);
   while(1) {
@@ -189,14 +178,12 @@ pa_countdown(pad) {
   }
   wait(1);
 }
-
 pa_countdown_success(pad) {
   level waittill("scd" + pad);
   playSound(0, "pa_buzz", self.origin);
   wait(1.2);
   self pa_play_dialog("pa_audio_act_pad_" + pad);
 }
-
 pa_teleport(pad) {
   while(1) {
     level waittill("tpc" + pad);
@@ -206,7 +193,6 @@ pa_teleport(pad) {
     self pa_play_dialog("pa_teleport_finish");
   }
 }
-
 pa_electric_trap(location) {
   while(1) {
     level waittill(location);
@@ -219,7 +205,6 @@ pa_electric_trap(location) {
     self thread pa_play_dialog("pa_trap_active_" + location);
   }
 }
-
 pa_play_dialog(alias) {
   if(!isDefined(self.pa_is_speaking)) {
     self.pa_is_speaking = 0;
@@ -233,7 +218,6 @@ pa_play_dialog(alias) {
     self.pa_is_speaking = 0;
   }
 }
-
 teleport_2d() {
   while(1) {
     level waittill("t2d");
@@ -241,24 +225,20 @@ teleport_2d() {
     playSound(0, "teleport_2d_rear", (0, 0, 0));
   }
 }
-
 power_audio_2d() {
   wait(2);
   playSound(0, "power_down_2d", (0, 0, 0));
   level waittill("pl1");
   playSound(0, "power_up_2d", (0, 0, 0));
 }
-
 linkall_2d() {
   level waittill("pap1");
   playSound(0, "linkall_2d", (0, 0, 0));
 }
-
 pole_fx_audio_init(pad) {
   pole = getstructarray("pole_fx_" + pad, "targetname");
   array_thread(pole, ::pole_fx_audio, pad);
 }
-
 pole_fx_audio(pad) {
   level waittill("scd" + pad);
   while(1) {
@@ -267,14 +247,12 @@ pole_fx_audio(pad) {
     realwait(randomintrange(2, 7));
   }
 }
-
 pa_level_start() {
   wait(2);
   playSound(0, "pa_buzz", self.origin);
   wait(1.2);
   self pa_play_dialog("pa_level_start");
 }
-
 pa_power_on() {
   level waittill("pl1");
   playSound(0, "pa_buzz", self.origin);

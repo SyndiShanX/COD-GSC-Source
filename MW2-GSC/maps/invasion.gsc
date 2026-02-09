@@ -10,7 +10,7 @@
 #include maps\invasion_anim;
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   setsaveddvar("r_specularcolorscale", "2.3");
@@ -336,7 +336,7 @@ sentry_init_owner() {
   while(1) {
     self waittill("trigger", ent);
 
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       break;
     }
   }
@@ -348,12 +348,12 @@ turret_spotlight() {
   vehicle_lights_on("spotlight spotlight_turret");
 }
 
-//#using_animtree( "vehicles" );
+/using_animtree( "vehicles" );
 //animate_btr80( humvee_opening_node )
 //{
 //	humvee_opening_node anim_single_solo( level.humvee_destroyer, "invasion_opening_BTR" );
 //	level.humvee_destroyer anim_stopanimscripted();
-//	//level.humvee_destroyer ClearAnim( %invasion_opening_BTR, 0);
+//	//level.humvee_destroyer ClearAnim(%invasion_opening_BTR, 0);
 //	level.humvee_destroyer thread humvee_destroyer_fires_at_pillars_and_player();
 //}
 
@@ -1713,7 +1713,7 @@ handler_defend_BT() {
     level.attack_heli waittill("death", attacker);
   flag_set("first_attack_heli_dead");
 
-  if(isDefined(attacker) && isplayer(attacker))
+  if(isDefined(attacker) && isPlayer(attacker))
     thread dialog_shot_down_heli();
   thread autosave_by_name("heli_death");
 
@@ -1732,7 +1732,7 @@ handler_defend_BT() {
     level.attack_heli waittill("death", attacker);
   flag_set("second_attack_heli_dead");
 
-  if(isDefined(attacker) && isplayer(attacker))
+  if(isDefined(attacker) && isPlayer(attacker))
     thread dialog_shot_down_heli();
   thread autosave_by_name("heli_death");
 
@@ -2085,7 +2085,6 @@ setup_remote_missile_target_guy() {
   if(isDefined(self.ridingvehicle)) {
     self endon("death");
     self waittill("jumpedout");
-
   }
   self maps\_remotemissile::setup_remote_missile_target();
 }
@@ -5234,7 +5233,7 @@ truck_group_enemies_setup() {
 BT_nates_attackers_setup() {
   while(1) {
     self waittill("enemy");
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       self.goalradius = 3000;
       break;
     }
@@ -5244,7 +5243,7 @@ BT_nates_attackers_setup() {
 alley_nates_attackers_setup() {
   while(1) {
     self waittill("enemy");
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       self.goalradius = 3000;
       break;
     }
@@ -5562,7 +5561,7 @@ paradrops_ambient() {
 
     wait 20; //was 30
 
-    if(GetDvar("invasion_minspec") == "1")
+    if(getDvar("invasion_minspec") == "1")
       wait 80;
   }
 }
@@ -6184,7 +6183,6 @@ house_destroyer_move() {
   bmp_bad_places = getEntArray("bmp_bad_places", "script_noteworthy");
   foreach(place in bmp_bad_places) {
     BadPlace_Cylinder("", 20, place.origin, place.radius, 300);
-
   }
 
   flag_set("house_destroyer_moving_back");

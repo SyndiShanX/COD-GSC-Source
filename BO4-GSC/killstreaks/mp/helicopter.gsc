@@ -28,7 +28,7 @@ __init__() {
 }
 
 function_6af968ce(attacker, weapon, mod) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(!isDefined(self.owner) || self.owner util::isenemyplayer(attacker)) {
       attacker battlechatter::function_dd6a6012(self.killstreaktype, weapon);
       self killstreaks::function_73566ec7(attacker, weapon, self.owner);

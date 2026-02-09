@@ -97,7 +97,6 @@ class cbridge {
     m_e_pull_target clientfield::set("bminteract", 3);
     self thread bridge_connect(m_door_array[0], m_door_array[1]);
   }
-
 }
 
 #namespace zm_zod_bridges;

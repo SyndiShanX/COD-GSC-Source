@@ -17,7 +17,7 @@ init() {
   level.cheatstates = [];
   level.cheatfuncs = [];
   level.cheatdvars = [];
-  level.cheatbobamporiginal = getdvar("bg_bobAmplitudeStanding");
+  level.cheatbobamporiginal = getDvar("bg_bobAmplitudeStanding");
   level.cheatshowslowmohint = 0;
   level.cheattires = [];
   level.cheattires_max = 90;
@@ -40,7 +40,7 @@ init() {
   thread death_monitor();
   common_scripts\utility::flag_init("disable_slowmo_cheat");
 
-  if(getdvar("credits_active") == "1") {
+  if(getDvar("credits_active") == "1") {
     return;
   }
   level.player thread specialfeaturesmenu();
@@ -59,16 +59,16 @@ death_monitor() {
 
 setdvars_based_on_varibles() {
   for(var_0 = 0; var_0 < level.cheatdvars.size; var_0++)
-    setdvar(level.cheatdvars[var_0], level.cheatstates[level.cheatdvars[var_0]]);
+    setDvar(level.cheatdvars[var_0], level.cheatstates[level.cheatdvars[var_0]]);
 
   if(!isDefined(level.credits_active) || !level.credits_active) {
-    setdvar("credits_active", "0");
-    setdvar("credits_load", "0");
+    setDvar("credits_active", "0");
+    setDvar("credits_load", "0");
   }
 }
 
 getcheatvalue(var_0) {
-  var_1 = getdvarint(var_0, 0) && getdvar("arcademode") != "1";
+  var_1 = getdvarint(var_0, 0) && getDvar("arcademode") != "1";
   return var_1;
 }
 
@@ -462,7 +462,7 @@ chaplinmode(var_0) {
   }
   if(var_0) {
     setsaveddvar("chaplincheat", "1");
-    level.cheatbobamporiginal = getdvar("bg_weaponBobAmplitudeStanding");
+    level.cheatbobamporiginal = getDvar("bg_weaponBobAmplitudeStanding");
     setsaveddvar("bg_weaponBobAmplitudeStanding", "0.08 0.04");
     setomnvar("ui_ragtimewarefare_overlay", 1);
     level.visionsets["chaplin"] = 1;
@@ -521,16 +521,16 @@ chaplin_titlecard_create_text(var_0) {
 }
 
 chaplin_titlecard(var_0) {
-  if(getdvar("chaplincheat") != "1") {
+  if(getDvar("chaplincheat") != "1") {
     return;
   }
-  if(getdvar("cheat_chaplin_titlecardshowing") == "1") {
+  if(getDvar("cheat_chaplin_titlecardshowing") == "1") {
     return;
   }
   if(common_scripts\utility::flag("disable_slowmo_cheat")) {
     return;
   }
-  setdvar("cheat_chaplin_titlecardshowing", 1);
+  setDvar("cheat_chaplin_titlecardshowing", 1);
   var_1 = chaplin_titlecard_create_background();
   var_2 = chaplin_titlecard_create_text(var_0);
   settimescale(0.05);
@@ -538,7 +538,7 @@ chaplin_titlecard(var_0) {
   settimescale(1);
   var_1 destroy();
   var_2 destroy();
-  setdvar("cheat_chaplin_titlecardshowing", 0);
+  setDvar("cheat_chaplin_titlecardshowing", 0);
 }
 
 chaplin_proc() {
@@ -550,7 +550,7 @@ chaplin_proc() {
     wait 0.5;
 
     if(!common_scripts\utility::flag("disable_slowmo_cheat")) {
-      if(getdvar("cheat_chaplin_titlecardshowing") == "1") {
+      if(getDvar("cheat_chaplin_titlecardshowing") == "1") {
         settimescale(0.05);
         continue;
       }

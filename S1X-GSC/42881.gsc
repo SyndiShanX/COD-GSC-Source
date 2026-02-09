@@ -2210,7 +2210,7 @@ applyloadout() {
     if(!isDefined(self.costume)) {
       if(maps\mp\_utility::practiceroundgame()) {
         self.costume = maps\mp\gametypes\_teams::getpracticeroundcostume();
-      } else if(isplayer(self)) {
+      } else if(isPlayer(self)) {
         self.costume = cao_getactivecostume();
         checkforcostumeset();
       } else if(isagent(self) && self.agent_type == "player") {
@@ -2224,7 +2224,7 @@ applyloadout() {
       } else {
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
 
-        if(isplayer(self)) {
+        if(isPlayer(self)) {
           cao_setactivecostume(self.costume);
         }
 

@@ -45,7 +45,7 @@ init() {
     if(level.gameType == "war" || level.gameType == "conf" || level.gameType == "cranked")
       level thread maps\mp\gametypes\_spawnfactor::spawnFrontLineThink();
   } else {
-    anchorSpawnActive = Int(GetDvar("scr_anchorSpawns"));
+    anchorSpawnActive = Int(getDvar("scr_anchorSpawns"));
 
     if(level.gameType == "war" || level.gameType == "conf" || level.gameType == "cranked")
       level thread maps\mp\gametypes\_spawnfactor::correctHomogenization();
@@ -100,7 +100,6 @@ eyesOnSightChecks(player) {
         break;
       }
       player MarkForEyesOn(sighted);
-
     } else {
       player MarkForEyesOn(false);
       player notify("eyesOff");
@@ -212,7 +211,6 @@ addSpawnPoints(team, spawnPointName, isSetOptional) {
       level.spawnpoints[level.spawnpoints.size] = spawnpoint;
 
       bbprint("spawns", "name %s x %f y %f z %f", "initialized", spawnpoint.origin[0], spawnpoint.origin[1], spawnpoint.origin[2]);
-
     }
 
     level.teamSpawnPoints[team][level.teamSpawnPoints[team].size] = spawnPoint;
@@ -393,7 +391,7 @@ removeFromParticipantsArray() {
 }
 
 addToCharactersArray() {
-  assert(IsPlayer(self) || IsBot(self) || IsAgent(self));
+  assert(isPlayer(self) || IsBot(self) || IsAgent(self));
 
   if(is_aliens()) {
     for(entry = 0; entry < level.characters.size; entry++) {
@@ -446,7 +444,6 @@ spawnPointUpdate() {
 
     wait(0.05);
   }
-
 }
 
 getActivePlayerList() {
@@ -456,7 +453,7 @@ getActivePlayerList() {
     if(!isReallyAlive(character)) {
       continue;
     }
-    if(IsPlayer(character) && character.sessionstate != "playing") {
+    if(isPlayer(character) && character.sessionstate != "playing") {
       continue;
     }
     if(character maps\mp\killstreaks\_killstreaks::isUsingHeliSniper() && isDefined(character.chopper) && (!isDefined(character.chopper.movedLow) || !character.chopper.movedLow)) {

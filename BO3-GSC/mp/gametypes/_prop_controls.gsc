@@ -30,7 +30,7 @@
 #namespace namespace_4c773ed3;
 
 function notifyonplayercommand(command, key) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self thread function_e17a8f06(command, key);
 }
 
@@ -755,14 +755,14 @@ function flashlockpropkey() {
 }
 
 function function_fd824ee5() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   start = self.origin;
   end = start + (vectorscale((0, 0, -1), 2000));
   return playerphysicstrace(start, end);
 }
 
 function function_b9733d59() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   start = self.origin;
   end = start + (vectorscale((0, 0, -1), 2000));
   trace = bulletTrace(start, end, 0, self.prop);
@@ -1037,7 +1037,7 @@ function damageclonewatch(damage, attacker, direction_vec, point, meansofdeath, 
   if(!isDefined(attacker)) {
     return;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(isDefined(self.isdying) && self.isdying) {
       return;
     }

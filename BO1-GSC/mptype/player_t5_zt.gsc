@@ -19,7 +19,6 @@ main() {
       break;
   }
 }
-
 precache() {
   character\c_usa_sog2_zt::precache();
   character\c_zom_blue_guy_zt::precache();

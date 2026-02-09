@@ -30,8 +30,7 @@ main() {
   setsaveddvar("r_lightGridIntensity", 1.2);
   setsaveddvar("r_lightGridContrast", 0);
 
-  /*-----------------------
-  PIT SCORING/TIMING
+  /*----------------------- PIT SCORING/TIMING
   -------------------------*/
   level.targets_hit_with_melee = 0;
   level.patrolDudes = [];
@@ -52,8 +51,7 @@ main() {
   level.color["red"] = (1, 0, 0);
   level.color["blue"] = (.1, .3, 1);
 
-  /*-----------------------
-  STARTS
+  /*----------------------- STARTS
   -------------------------*/
   add_start("timed_ads", ::start_timed_ads, "timed_ads");
   add_start("bullet_penetration", ::start_bullet_penetration, "bullet_penetration");
@@ -155,8 +153,7 @@ main() {
   flag_init("player_done_with_course");
   flag_init("end_sequence_starting");
 
-  /*-----------------------
-  POP-UP TARGETS
+  /*----------------------- POP-UP TARGETS
   -------------------------*/
   level.penetration_targets = [];
   level.grenade_targets = [];
@@ -178,8 +175,7 @@ main() {
   target_friendly = getEntArray("target_friendly", "script_noteworthy");
   level.targets = array_merge(target_enemy, target_friendly);
   level.speakers = getEntArray("speakers", "targetname");
-  /*-----------------------
-  WEAPONS
+  /*----------------------- WEAPONS
   -------------------------*/
   level.fragsGlowing = false;
   level.gunPrimary = "m4_grunt";
@@ -194,8 +190,7 @@ main() {
   level.cosine["45"] = cos(45);
   level.cosine["90"] = cos(90);
 
-  /*-----------------------
-  SPAWNER THREADS
+  /*----------------------- SPAWNER THREADS
   -------------------------*/
   aVehicleSpawners = maps\_vehicle::_getvehiclespawnerarray();
   array_thread(aVehicleSpawners, ::add_spawn_function, ::vehicle_think);
@@ -203,8 +198,7 @@ main() {
   array_spawn_function_noteworthy("patrol", ::AI_patrol_think);
   array_spawn_function_noteworthy("runners", ::AI_runners_think);
 
-  /*-----------------------
-  KEY FRIENDLIES
+  /*----------------------- KEY FRIENDLIES
   -------------------------*/
   level.foley = spawn_targetname("foley", true);
   level.foley.animname = "foley";
@@ -258,8 +252,7 @@ main() {
     level.player takeAllWeapons();
   }
 
-  /*-----------------------
-  AMBIENT AI
+  /*----------------------- AMBIENT AI
   -------------------------*/
   if(!is_specialop()) {
     level.ambientai = array_spawn(getEntArray("friendlies_ambient", "targetname"), true);
@@ -309,8 +302,7 @@ never_run_out_of_ammo() {
 
 vars_for_after_main() {
   wait(.5);
-  /*-----------------------
-  PUT TOTAL PIT ENEMIES/CIVVIES IN A VARIABLE
+  /*----------------------- PUT TOTAL PIT ENEMIES/CIVVIES IN A VARIABLE
   -------------------------*/
   level.totalPitEnemies = level.courseEnemies.size;
   level.totalPitCivvies = level.courseFriendlies.size;
@@ -457,37 +449,31 @@ firing_range_init() {
 }
 
 firing_range_anims() {
-  /*-----------------------
-  FOLEY AND TRAINEES DO INTRO ANIMS
+  /*----------------------- FOLEY AND TRAINEES DO INTRO ANIMS
   -------------------------*/
   level.foley.animnode anim_single_solo(level.foley, "training_intro_begining"); //specific one-off anim
 
-  /*-----------------------
-  FOLEY GOES INTO IDLE (TRAINEE AND TRANS ALREADY IDLING)
+  /*----------------------- FOLEY GOES INTO IDLE (TRAINEE AND TRANS ALREADY IDLING)
   -------------------------*/
   level.foley.animnode thread anim_loop_solo(level.foley, "training_intro_idle", "stop_idle");
 
-  /*-----------------------
-  FOLEY TURNS
+  /*----------------------- FOLEY TURNS
   -------------------------*/
   flag_wait("foley_turns_for_hip_demo");
   level.foley.animnode notify("stop_idle");
   level.foley.animnode anim_single_solo(level.foley, "training_intro_foley_turnaround_1");
 
-  /*-----------------------
-  FOLEY GOES INTO IDLE
+  /*----------------------- FOLEY GOES INTO IDLE
   -------------------------*/
   level.foley.animnode thread anim_loop_solo(level.foley, "training_intro_idle", "stop_idle");
 
-  /*-----------------------
-  FOLEY TALKS A BIT
+  /*----------------------- FOLEY TALKS A BIT
   -------------------------*/
   flag_wait("hip_fire_done");
   level.foley.animnode notify("stop_idle");
   level.foley.animnode anim_single_solo(level.foley, "training_intro_foley_idle_talk_1");
 
-  /*-----------------------
-  FOLEY TURNS AROUND
+  /*----------------------- FOLEY TURNS AROUND
   -------------------------*/
   level.foley.animnode anim_single_solo(level.foley, "training_intro_foley_turnaround_2");
   level.foley.animnode thread anim_loop_solo(level.foley, "training_intro_idle", "stop_idle");
@@ -509,8 +495,7 @@ firing_range_hip_and_ads() {
   player_needs_to_pickup_primary_weapon = true;
 
   thread firing_range_anims();
-  /*-----------------------
-  FOLEY INTRO DIALOGUE
+  /*----------------------- FOLEY INTRO DIALOGUE
   -------------------------*/
   //Sgt. FoleyWelcome to pull-the-trigger 101. 	
   flag_wait("ps_train_fly_welcome");
@@ -538,8 +523,7 @@ firing_range_hip_and_ads() {
 
   flag_set("foley_turns_for_hip_demo");
 
-  /*-----------------------
-  PICK UP THE WEAPON
+  /*----------------------- PICK UP THE WEAPON
   -------------------------*/
   if(!player_has_primary_weapon()) {
     registerObjective("obj_rifle", &"TRAINER_PICK_UP_A_RIFLE_FROM", getEnt("range_rifle", "script_noteworthy"));
@@ -569,7 +553,6 @@ firing_range_hip_and_ads() {
     //Sgt. FoleyGrab that weapon off the table and fire at some targets downrange.	
     level.foley dialogue_execute("train_fly_fireattargets");
     level.foley thread nag_till_flag_set("nag_rifle_pickup_0", 2, "player_picked_up_rifle");
-
   } else {
     player_needs_to_pickup_primary_weapon = false;
   }
@@ -578,8 +561,7 @@ firing_range_hip_and_ads() {
     wait .05;
   }
   flag_set("player_picked_up_rifle");
-  /*-----------------------
-  FIRE FROM THE HIP
+  /*----------------------- FIRE FROM THE HIP
   -------------------------*/
   //Shoot each target while firing from the hip.
   if(player_needs_to_pickup_primary_weapon == false) {
@@ -590,8 +572,7 @@ firing_range_hip_and_ads() {
     setObjectiveLocation("obj_rifle", getEnt("firing_range", "targetname"));
   }
 
-  /*-----------------------
-  FACE THE TARGETS HINT
+  /*----------------------- FACE THE TARGETS HINT
   -------------------------*/
   if(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"])) {
     //Sgt. Foley	Turn around and fire at the targets.	
@@ -600,16 +581,14 @@ firing_range_hip_and_ads() {
 
   thread delaythread(8, ::turnaround_hint_if_flag_not_set, "player_facing_targets_for_hip_fire");
 
-  /*-----------------------
-  FIRE FROM THE HIP TARGETS POP UP
+  /*----------------------- FIRE FROM THE HIP TARGETS POP UP
   -------------------------*/
   while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"])) {
     wait 0.05;
   }
   flag_set("player_facing_targets_for_hip_fire");
 
-  /*-----------------------
-  FIRE FROM THE HIP HINT
+  /*----------------------- FIRE FROM THE HIP HINT
   -------------------------*/
   clear_hints();
 
@@ -629,8 +608,7 @@ firing_range_hip_and_ads() {
   clear_hints();
 
   playerIsInverted = undefined;
-  /*-----------------------
-  INVERT CONTROLS?
+  /*----------------------- INVERT CONTROLS?
   -------------------------*/
   setDvar("ui_start_inverted", 0);
   if(level.Console) {
@@ -638,7 +616,7 @@ firing_range_hip_and_ads() {
       setDvar("ui_start_inverted", 1);
   } else // PC
   {
-    if(isDefined(getdvar("ui_mousepitch")) && getdvar("ui_mousepitch") == "1")
+    if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1")
       setDvar("ui_start_inverted", 1);
   }
   wait .1; // make sure dvar is set
@@ -661,27 +639,24 @@ firing_range_hip_and_ads() {
       playerIsInvertedAfterFirstMenu = true;
   } else // PC
   {
-    if(isDefined(getdvar("ui_mousepitch")) && getdvar("ui_mousepitch") == "1")
+    if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1")
       playerIsInvertedAfterFirstMenu = true;
   }
 
-  /*-----------------------
-  DO A FEW MORE TARGETS IF PLAYER CHOSE TO INVERT
+  /*----------------------- DO A FEW MORE TARGETS IF PLAYER CHOSE TO INVERT
   -------------------------*/
   if(response == "try_invert") {
     //Foley: Let's try a few more.	
     level.foley thread dialogue_execute("train_fly_tryafew");
 
-    /*-----------------------
-    FIRE FROM THE HIP HINT
+    /*----------------------- FIRE FROM THE HIP HINT
     -------------------------*/
     if(level.Xenon)
       thread keyHint("hip_attack");
     else
       thread keyHint("pc_hip_attack"); // PC and PS3 are both press
 
-    /*-----------------------
-    FIRE FROM THE HIP TARGETS POP UP
+    /*----------------------- FIRE FROM THE HIP TARGETS POP UP
     -------------------------*/
     while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"]))
       wait 0.05;
@@ -694,8 +669,7 @@ firing_range_hip_and_ads() {
     level.player notify("did_action_stop_ads");
     clear_hints();
 
-    /*-----------------------
-    DID THE PLAYER SWAP INVERSION FROM THE MAIN MENU DURING EXCERCISE?
+    /*----------------------- DID THE PLAYER SWAP INVERSION FROM THE MAIN MENU DURING EXCERCISE?
     -------------------------*/
     playerIsInvertedAfterTryingAgain = false;
     if(level.Console) {
@@ -703,12 +677,11 @@ firing_range_hip_and_ads() {
         playerIsInvertedAfterTryingAgain = true;
     } else // PC
     {
-      if(isDefined(getdvar("ui_mousepitch")) && getdvar("ui_mousepitch") == "1")
+      if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1")
         playerIsInvertedAfterTryingAgain = true;
     }
 
-    /*-----------------------
-    ONLY SHOW THE MENU TO KEEP CONTROLS IF PLAYER HASN'T SCREWED WITH MAIN MENU
+    /*----------------------- ONLY SHOW THE MENU TO KEEP CONTROLS IF PLAYER HASN'T SCREWED WITH MAIN MENU
     -------------------------*/
 
     if(playerIsInvertedAfterFirstMenu == playerIsInvertedAfterTryingAgain) {
@@ -724,20 +697,17 @@ firing_range_hip_and_ads() {
       setblur(0, .2);
       level.player freezecontrols(false);
     }
-
   }
 
   setObjectiveState("obj_rifle", "done");
 
-  /*-----------------------
-  CROSSHAIR SPREAD HINT
+  /*----------------------- CROSSHAIR SPREAD HINT
   -------------------------*/
   // Notice that your crosshair expands as you fire.\nThe bigger the crosshairs, the less accurate you are.
   //double_line = true;
   //thread killhouse_hint(&"TRAINER_HINT_CROSSHAIR_CHANGES", 6, double_line );
 
-  /*-----------------------
-  ADS TRAINING
+  /*----------------------- ADS TRAINING
   -------------------------*/
   flag_set("hip_fire_done");
   //Sgt. FoleySee what I mean? He sprayed bullets all over the damn place.	
@@ -844,8 +814,7 @@ nag_reset_can_talk_flag(sFlagToWaitFor) {
 cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustShootThroughPlywood, bInOrder) {
   numberOfTagretsHit = 0;
 
-  /*-----------------------
-  IF NEED TO DO IN A CERTAIN ORDER, USE SCRIPT_GROUP NUMBER
+  /*----------------------- IF NEED TO DO IN A CERTAIN ORDER, USE SCRIPT_GROUP NUMBER
   -------------------------*/
   if(isDefined(bInOrder)) {
     newArray = [];
@@ -858,8 +827,7 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
     }
     targets = newArray;
   }
-  /*-----------------------
-  LOOP THROUGH TARGETS TILL KILLED ENOUGH
+  /*----------------------- LOOP THROUGH TARGETS TILL KILLED ENOUGH
   -------------------------*/
   while(true) {
     wait(0.05);
@@ -877,8 +845,7 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
       target notify("pop_up");
       target waittill("hit");
 
-      /*-----------------------
-      DO WE NEED TO CROUCH?
+      /*----------------------- DO WE NEED TO CROUCH?
       -------------------------*/
       if(isDefined(mustCrouch)) {
         if(level.player GetStance() == "crouch") {
@@ -888,11 +855,9 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
           level notify("player_needs_to_crouch");
           continue;
         }
-
       }
 
-      /*-----------------------
-      DO WE NEED TO ADS OR FIRE FROM THE HIP?
+      /*----------------------- DO WE NEED TO ADS OR FIRE FROM THE HIP?
       -------------------------*/
       if(isDefined(mustADS)) {
         if(mustADS == false) {
@@ -903,7 +868,6 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
             thread keyHint("stop_ads", undefined, true);
             level notify("player_needs_to_fire_from_the_hip");
           }
-
         }
         if(mustADS == true) {
           if(level.player isADS()) {
@@ -919,8 +883,7 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
           }
         }
       }
-      /*-----------------------
-      DO WE NEED TO SHOOT THROUGH PLYWOOD?
+      /*----------------------- DO WE NEED TO SHOOT THROUGH PLYWOOD?
       -------------------------*/
       if(isDefined(mustShootThroughPlywood)) {
         waittillframeend;
@@ -938,8 +901,7 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
     }
   }
 
-  /*-----------------------
-  ENOUGH KILLED...RESET ALL TARGETS
+  /*----------------------- ENOUGH KILLED...RESET ALL TARGETS
   -------------------------*/
   array_thread(targets, ::target_reset_manual);
 }
@@ -966,15 +928,13 @@ AA_timed_ADS_init() {
 
 timed_ads_anims() {
   flag_wait("foley_done_talking_from_hip_ads_training");
-  /*-----------------------
-  FOLEY GOES INTO IDLE
+  /*----------------------- FOLEY GOES INTO IDLE
   -------------------------*/
   level.foley.animnode notify("stop_idle");
   level.foley.animnode thread anim_loop_solo(level.foley, "training_intro_idle", "stop_idle");
 
   flag_wait("aa_timed_shooting_training");
-  /*-----------------------
-  FOLEY TURNS AROUND
+  /*----------------------- FOLEY TURNS AROUND
   -------------------------*/
   level.foley.animnode notify("stop_idle");
   level.foley.animnode anim_single_solo(level.foley, "training_intro_foley_turnaround_1");
@@ -989,8 +949,7 @@ timed_ads_anims() {
 firing_range_timed_ads() {
   flag_wait("firing_range_hip_and_ads_done");
   thread timed_ads_anims();
-  /*-----------------------
-  ADS TARGET SWITCHING - TIMED
+  /*----------------------- ADS TARGET SWITCHING - TIMED
   -------------------------*/
   thread autosave_by_name("timed_ads");
 
@@ -1070,8 +1029,7 @@ firing_range_timed_ads() {
 
     level waittill("a timed target has been hit");
 
-    /*-----------------------
-    WAIT FOR 10 SECONDS OR UNTIL TOO MANY HIT FROM THE HIP
+    /*----------------------- WAIT FOR 10 SECONDS OR UNTIL TOO MANY HIT FROM THE HIP
     -------------------------*/
     level waittill_notify_or_timeout("player_has_hit_too_many_from_hip", 10);
 
@@ -1090,8 +1048,7 @@ firing_range_timed_ads() {
 
     array_thread(level.firingRangeTimedTargets, ::target_reset_manual);
 
-    /*-----------------------
-    FAILED - TOO SLOW OR NOT ENOUGH IN ADS
+    /*----------------------- FAILED - TOO SLOW OR NOT ENOUGH IN ADS
     -------------------------*/
     if(level.num_hit_with_ads < 4) {
       //Sgt. Foley	Do it again. You can snap to new targets by quickly engaging and releasing your aim.
@@ -1120,16 +1077,14 @@ firing_range_timed_ads() {
     }
   }
 
-  /*-----------------------
-  PASSED TIMED ADS
+  /*----------------------- PASSED TIMED ADS
   -------------------------*/
   wait 1;
 
   setObjectiveState("obj_timed_rifle", "done");
   array_thread(level.firingRangeTimedTargets, ::target_reset_manual);
 
-  /*-----------------------
-  ADS TARGET SWITCHING - COMPLETE
+  /*----------------------- ADS TARGET SWITCHING - COMPLETE
   -------------------------*/
   wait 0.5;
   flag_clear("aa_timed_shooting_training");
@@ -1203,15 +1158,13 @@ penetration_anims() {
   }
 
   flag_wait("foley_done_talking_from_timed_ads_training");
-  /*-----------------------
-  FOLEY GOES INTO IDLE
+  /*----------------------- FOLEY GOES INTO IDLE
   -------------------------*/
   level.foley.animnode notify("stop_idle");
   level.foley.animnode thread anim_loop_solo(level.foley, "training_intro_idle", "stop_idle");
 
   flag_wait("foley_turns_for_penetration_demo");
-  /*-----------------------
-  FOLEY TURNS AROUND
+  /*----------------------- FOLEY TURNS AROUND
   -------------------------*/
   level.foley.animnode notify("stop_idle");
   level.foley.animnode anim_single_solo(level.foley, "training_intro_foley_turnaround_1");
@@ -1270,7 +1223,7 @@ raisePlywoodWalls() {
       continue;
     if(!isDefined(type))
       continue;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       level.lastTimePlywoodWasHit = gettime();
     }
   }
@@ -1302,15 +1255,13 @@ frags_anims() {
   if(!flag("foley_turns_for_frag_demo")) {
     level.foley.animnode anim_single_solo(level.foley, "training_intro_foley_idle_talk_2");
 
-    /*-----------------------
-    FOLEY GOES INTO IDLE
+    /*----------------------- FOLEY GOES INTO IDLE
     -------------------------*/
     level.foley.animnode thread anim_loop_solo(level.foley, "training_intro_idle", "stop_idle");
   }
 
   flag_wait("foley_turns_for_frag_demo");
-  /*-----------------------
-  FOLEY TURNS AROUND
+  /*----------------------- FOLEY TURNS AROUND
   -------------------------*/
   if(!flag("firing_range_frags_done")) {
     level.foley.animnode notify("stop_idle");
@@ -1328,8 +1279,7 @@ firing_range_frags() {
 
   thread autosave_by_name("frags");
   thread frags_anims();
-  /*-----------------------
-  PICKUP SOME FRAGS
+  /*----------------------- PICKUP SOME FRAGS
   -------------------------*/
   wait(1);
   //Sgt. Foley	Last but not least, you need to know how to toss a frag grenade.	
@@ -1351,8 +1301,7 @@ firing_range_frags() {
   while(level.player GetWeaponAmmoStock("fraggrenade") < 3)
     wait(0.05);
 
-  /*-----------------------
-  THROW A FRAG INTO THE SPOT...
+  /*----------------------- THROW A FRAG INTO THE SPOT...
   -------------------------*/
   if(alreadyHadFrags) {
     registerObjective("obj_frags", &"TRAINER_THROW_A_GRENADE_INTO", getEnt("firing_range", "targetname"));
@@ -1368,8 +1317,7 @@ firing_range_frags() {
 
   thread frag_nags();
 
-  /*-----------------------
-  WAITTILL FRAG SUCCESS
+  /*----------------------- WAITTILL FRAG SUCCESS
   -------------------------*/
   numberOfTagretsToHit = 1;
   mustADS = undefined;
@@ -1443,7 +1391,6 @@ player_frag_usage_monitor() {
     wait(5);
     flag_clear("player_just_threw_a_frag");
   }
-
 }
 set_flag_when_hit_by_grenade(sFlagToSet) {
   level endon(sFlagToSet);
@@ -1470,8 +1417,7 @@ target_pop_up_continuously(sFlagToStop) {
 //	
 //	thread autosave_now( "frag_training" );
 //	
-//	/*-----------------------
-//	PICKUP SOME FRAGS
+//	/*----------------------- //	PICKUP SOME FRAGS
 //	-------------------------*/	
 //	level.foley dialogue_execute( "Last but not least, you need to know how to toss a frag." );
 //	
@@ -1493,8 +1439,7 @@ target_pop_up_continuously(sFlagToStop) {
 //		wait ( 0.05 );
 //	
 //
-//	/*-----------------------
-//	THROW A FRAG INTO THE SPOT...
+//	/*----------------------- //	THROW A FRAG INTO THE SPOT...
 //	-------------------------*/	
 //	level.foley thread dialogue_execute( "Toss a grenade into one of those mortar craters." );
 //	if( alreadyHadFrags )
@@ -1508,8 +1453,7 @@ target_pop_up_continuously(sFlagToStop) {
 //		setObjectiveState( "obj_frags", "current" );
 //	}
 //
-//	/*-----------------------
-//	WAITTILL FRAG SUCCESS
+//	/*----------------------- //	WAITTILL FRAG SUCCESS
 //	-------------------------*/	
 //	
 //	grenade_damage_triggers = getEntArray( "grenade_damage_trigger", "targetname" );
@@ -1678,8 +1622,7 @@ go_to_pit_anims() {
 }
 
 AA_find_the_pit_sequence() {
-  /*-----------------------
-  SIDEARM TRAINING SETUP
+  /*----------------------- SIDEARM TRAINING SETUP
   -------------------------*/
   level.pitguy.isidling = true;
   level.pitguygun show();
@@ -1694,8 +1637,7 @@ AA_find_the_pit_sequence() {
   level.translator delaythread(level.translatordelay, ::dialogue_execute, "train_fly_fragstendtoroll");
   level.foley dialogue_execute("train_fly_fragstendtoroll");
 
-  /*-----------------------
-  FOLEY STEPS AWAY
+  /*----------------------- FOLEY STEPS AWAY
   -------------------------*/
   blocker_range = getent("blocker_range", "targetname");
   blocker_range hide_entity();
@@ -1726,8 +1668,7 @@ AA_find_the_pit_sequence() {
   flag_wait("player_at_pit_stairs");
   setObjectiveLocation("obj_course_locate", getent("origin_sidearm_table", "targetname"));
 
-  /*-----------------------
-  SIDEARM TRAINING
+  /*----------------------- SIDEARM TRAINING
   -------------------------*/
   flag_wait("player_entering_course");
   flag_set("obj_go_to_the_pit_done");
@@ -1863,8 +1804,7 @@ AA_pit_sequence() {
     wait(3);
   }
 
-  /*-----------------------
-  PIT GUY OPENS CASE AND SHOWS MORE WEAPONRY
+  /*----------------------- PIT GUY OPENS CASE AND SHOWS MORE WEAPONRY
   -------------------------*/
 
   //Cpl. Dunn	Smile for the cameras and don't miss.. Shepard and the rest of the brass are scouting for a shooter for some special op.	
@@ -1880,8 +1820,7 @@ AA_pit_sequence() {
   level.pitguy.animnode anim_single(level.pitActors, "training_pit_open_case");
   level.pitguy.animnode thread anim_loop(level.pitActors, "training_pit_stand_idle", "stop_idle");
 
-  /*-----------------------
-  TELEPORT PIT GUY WHILE PLAYER IS RUNNING COURSE
+  /*----------------------- TELEPORT PIT GUY WHILE PLAYER IS RUNNING COURSE
   -------------------------*/
   flag_wait("player_course_stairs2");
   level.pitguy.animnode notify("stop_idle");
@@ -1914,8 +1853,7 @@ spawn_pitguy() {
 }
 
 pit_cases_and_door() {
-  /*-----------------------
-  PIT GUY OPENS CASE AND SHOWS MORE WEAPONRY
+  /*----------------------- PIT GUY OPENS CASE AND SHOWS MORE WEAPONRY
   -------------------------*/
   flag_wait("case_flip_01");
   level.pit_case_01 playSound("scn_trainer_case_open1");
@@ -1933,8 +1871,7 @@ pit_cases_and_door() {
 
   flag_wait("player_course_stairs2");
 
-  /*-----------------------
-  MORE WEAPONRY ON TABLE BY THE TIME THE PLAYER GETS BACK
+  /*----------------------- MORE WEAPONRY ON TABLE BY THE TIME THE PLAYER GETS BACK
   -------------------------*/
   pit_weapons_table = getEntArray("pit_weapons_table", "script_noteworthy");
   array_thread(pit_weapons_table, ::weapons_show);
@@ -1944,14 +1881,13 @@ course_loop_think() {
   level endon("clear_course");
   level endon("mission failed");
   numTimesPlayed = 0;
-  setdvar("killhouse_too_slow", "0");
+  setDvar("killhouse_too_slow", "0");
   level.first_time = true;
   previous_time = 0;
   previous_selection = "none";
   clear_hints();
   numberOfTimesRun = 0;
-  /*-----------------------
-  COURSE LOOPS
+  /*----------------------- COURSE LOOPS
   -------------------------*/
   while(true) {
     if(level.first_time) {
@@ -1973,13 +1909,11 @@ course_loop_think() {
       //			}
     }
 
-    /*-----------------------
-    WAIT UNTILL PLAYER HAS FULL AMMO
+    /*----------------------- WAIT UNTILL PLAYER HAS FULL AMMO
     -------------------------*/
     //TODO
 
-    /*-----------------------
-    SPECIFIC DIALOGUE FOR FIRST-TIMERS
+    /*----------------------- SPECIFIC DIALOGUE FOR FIRST-TIMERS
     -------------------------*/
     if(level.first_time) {
       //level.price execDialog( "ropedeck" );	// On my go, I want you to rope down to the deck and rush to position 1.
@@ -1989,8 +1923,7 @@ course_loop_think() {
 
     thread dialogue_nag_start_course(level.first_time);
 
-    /*-----------------------
-    COURSE OBJECTIVE
+    /*----------------------- COURSE OBJECTIVE
     -------------------------*/
     if(level.first_time) {
       level.objectiveRegroup = 0;
@@ -1998,14 +1931,12 @@ course_loop_think() {
       setObjectiveState("obj_course", "current");
     }
 
-    /*-----------------------
-    RESET CQB COURSE AND OPEN DOOR
+    /*----------------------- RESET CQB COURSE AND OPEN DOOR
     -------------------------*/
     course_triggers_01 = getEntArray("course_triggers_01", "script_noteworthy");
     array_notify(course_triggers_01, "activate");
 
-    /*-----------------------
-    COURSE START
+    /*----------------------- COURSE START
     -------------------------*/
     flag_wait("player_has_started_course");
     flag_clear("dunn_finished_with_difficulty_selection_dialogue");
@@ -2040,8 +1971,7 @@ course_loop_think() {
       org delaythread(3, ::play_sound_in_space, "train_ar5_comeon");
     }
 
-    /*-----------------------
-    TOP OFF PLAYER WEAPONS
+    /*----------------------- TOP OFF PLAYER WEAPONS
     -------------------------*/
     playerPrimaryWeapons = level.player GetWeaponsListPrimaries();
     if(playerPrimaryWeapons.size > 0) {
@@ -2067,8 +1997,7 @@ course_loop_think() {
     flag_wait("player_course_03a");
     setObjectiveLocation("obj_course", getEnt("origin_course_03", "targetname"));
 
-    /*-----------------------
-    MELEE TARGET
+    /*----------------------- MELEE TARGET
     -------------------------*/
     flag_wait("player_course_stairs2");
 
@@ -2087,16 +2016,14 @@ course_loop_think() {
 
     setObjectiveLocation("obj_course", getEnt("origin_course_05", "targetname"));
 
-    /*-----------------------
-    SPRINT TO FINISH
+    /*----------------------- SPRINT TO FINISH
     -------------------------*/
     flag_wait_either("player_course_end_02", "course_end_targets_dead");
 
     flag_wait("player_course_end_03");
     flag_clear("player_has_started_course");
 
-    /*-----------------------
-    SPRINT LOGIC LOOP - MUST SPRINT TO EXIT
+    /*----------------------- SPRINT LOGIC LOOP - MUST SPRINT TO EXIT
     -------------------------*/
     first_sprint_try = true;
     iNag_didnt_sprint_number = 0;
@@ -2109,8 +2036,7 @@ course_loop_think() {
       thread player_sprint_monitor();
       clear_hints();
 
-      /*-----------------------
-      SETUP SPRINT DETECTORS
+      /*----------------------- SETUP SPRINT DETECTORS
       -------------------------*/
       notify_on_sprint();
       thread flag_on_notify("sprinted");
@@ -2141,8 +2067,7 @@ course_loop_think() {
       flag_wait("player_sprint_door_close");
 
       if(!flag("sprinted")) {
-        /*-----------------------
-        PLAYER DIDN'T SPRINT
+        /*----------------------- PLAYER DIDN'T SPRINT
         -------------------------*/
         setObjectiveLocation("obj_course", getEnt("origin_course_sprint", "targetname"));
         level.gate_cqb_exit thread door_close(undefined, true);
@@ -2165,8 +2090,7 @@ course_loop_think() {
     //if( !flag( "player_course_end" ) )
     //thread second_sprint_hint();
 
-    /*-----------------------
-    COURSE END
+    /*----------------------- COURSE END
     -------------------------*/
     flag_wait("player_course_end");
     course_end_blocker = getent("course_end_blocker", "targetname");
@@ -2218,7 +2142,6 @@ course_loop_think() {
       level.player UploadTime("LB_KILLHOUSE", final_time);
 
       thread try_again();
-
     }
 
     level.pitguy dialogue_execute(selection);
@@ -2229,8 +2152,7 @@ course_loop_think() {
 
     level.gate_cqb_enter thread door_open();
 
-    /*-----------------------
-    DO IT AGAIN, OR EXIT?
+    /*----------------------- DO IT AGAIN, OR EXIT?
     -------------------------*/
     if(level.recommendedDifficulty != 1000) {
       if(!flag("player_has_started_course")) {
@@ -2252,7 +2174,6 @@ course_loop_think() {
     }
 
     level.first_time = false;
-
   }
 }
 
@@ -2300,8 +2221,7 @@ try_again() {
   level notify("try_again_thread");
   level endon("try_again_thread");
 
-  /*-----------------------
-  MENU POPUP FOR DIFFICULTY SELECTION
+  /*----------------------- MENU POPUP FOR DIFFICULTY SELECTION
   -------------------------*/
   flag_wait_either("player_entering_course", "player_course_looking_down_hall_to_exit");
   level.player freezecontrols(true);
@@ -2423,8 +2343,7 @@ dialogue_course() {
   thread dialogue_course_hurry_up();
   thread dialogue_course_ADS_nag();
 
-  /*-----------------------
-  COURSE START
+  /*----------------------- COURSE START
   -------------------------*/
   level.pitguy stopsounds();
   if(flag("can_talk")) {
@@ -2434,8 +2353,7 @@ dialogue_course() {
     flag_set("can_talk");
   }
 
-  /*-----------------------
-  FIRST AREA CLEARED/PASSED BY
+  /*----------------------- FIRST AREA CLEARED/PASSED BY
   -------------------------*/
   flag_wait_either("player_course_03a", "course_start_targets_dead");
   if(flag("course_start_targets_dead")) {
@@ -2453,8 +2371,7 @@ dialogue_course() {
       flag_set("can_talk");
     }
   }
-  /*-----------------------
-  SECOND AREA CLEARED/PASSED BY
+  /*----------------------- SECOND AREA CLEARED/PASSED BY
   -------------------------*/
   flag_wait_either("player_course_stairs2", "course_first_floor_targets_dead");
   if(flag("course_first_floor_targets_dead")) {
@@ -2465,14 +2382,12 @@ dialogue_course() {
       flag_set("can_talk");
     }
   }
-  /*-----------------------
-  UP THE STAIRS
+  /*----------------------- UP THE STAIRS
   -------------------------*/
   flag_wait("player_course_stairs2");
   thread melee_nag();
 
-  /*-----------------------
-  SECOND FLOOR CLEARED/PASSED BY
+  /*----------------------- SECOND FLOOR CLEARED/PASSED BY
   -------------------------*/
   flag_wait_either("player_course_jumped_down", "course_second_floor_targets_dead");
   if(flag("course_second_floor_targets_dead")) {
@@ -2484,8 +2399,7 @@ dialogue_course() {
     }
   }
 
-  /*-----------------------
-  LAST AREA
+  /*----------------------- LAST AREA
   -------------------------*/
   flag_wait("player_course_jumped_down");
   flag_set("no_more_course_nags");
@@ -2496,8 +2410,7 @@ dialogue_course() {
     flag_set("can_talk");
   }
 
-  /*-----------------------
-  SPRINT TO FINISH
+  /*----------------------- SPRINT TO FINISH
   -------------------------*/
   flag_wait("player_course_end_03");
 }
@@ -2805,15 +2718,13 @@ AA_ending_init() {
 end_sequence() {
   // Regroup with your team
 
-  /*-----------------------
-  SETUP ACTORS
+  /*----------------------- SETUP ACTORS
   -------------------------*/
   array = getaiarray();
   guys_to_delete = [];
   foreach(dude in array) {
     if(!isDefined(dude.script_parameters))
       guys_to_delete[guys_to_delete.size] = dude;
-
   }
   drones_to_delete = array_merge(level.drones["allies"].array, level.drones["axis"].array);
   drones_to_delete = array_merge(drones_to_delete, level.drones["neutral"].array);
@@ -2878,8 +2789,7 @@ end_sequence() {
   hummer_actors_main_anim_ent anim_first_frame(hummer_actors_main, "hummer_sequence");
   array_call(hummer_actors_main, ::hide);
 
-  /*-----------------------
-  PLAYER LEAVING COURSE
+  /*----------------------- PLAYER LEAVING COURSE
   -------------------------*/
   flag_wait("player_exiting_course_00");
   //thread autosave_now( true );
@@ -2902,8 +2812,7 @@ end_sequence() {
   level notify("kill_timer");
   level notify("clear_course");
 
-  /*-----------------------
-  END SEQUENCE
+  /*----------------------- END SEQUENCE
   -------------------------*/
   thread spawn_vehicles_from_targetname_and_drive("heli_group_01");
 
@@ -2926,8 +2835,7 @@ end_sequence() {
   thread maps\trainer_fx::hummer_steam();
   wait(10);
 
-  /*-----------------------
-  FADE OUT
+  /*----------------------- FADE OUT
   -------------------------*/
   black_overlay = create_client_overlay("black", 0, level.player);
   black_overlay fadeOverTime(1);
@@ -2950,7 +2858,6 @@ lerp_player_moverate(desiredRate, transitionTime) {
     time += .05;
     wait(.05);
   }
-
 }
 
 sirens() {
@@ -2963,7 +2870,6 @@ sirens() {
     }
     wait(3);
   }
-
 }
 
 radio_end() {
@@ -3032,8 +2938,7 @@ target_triggers_think() {
     }
   }
 
-  /*-----------------------
-  ADD TO TOTAL COURSE TARGETS, IF THERE ARE ANY
+  /*----------------------- ADD TO TOTAL COURSE TARGETS, IF THERE ARE ANY
   -------------------------*/
   if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "course_triggers_01")) {
     level.courseFriendlies = array_merge(level.courseFriendlies, self.targetsFriendly);
@@ -3052,15 +2957,14 @@ target_triggers_think() {
 target_think(targetType) {
   //self ==> the script brushmodel target
 
-  if(getdvar("trainer_debug") == "1") {
+  if(getDvar("trainer_debug") == "1") {
     self.orgEnt = getEnt(self.target, "targetname");
     aim_assist_target = getEnt(self.orgEnt.target, "targetname");
     aim_assist_target hide();
     return;
   }
 
-  /*-----------------------
-  SETUP BRUSHMODEL TARGET AND ALL ENTITIES
+  /*----------------------- SETUP BRUSHMODEL TARGET AND ALL ENTITIES
   -------------------------*/
   self.meleeonly = undefined;
   self.orgEnt = getEnt(self.target, "targetname");
@@ -3098,8 +3002,7 @@ target_think(targetType) {
     level.hip_targets[level.hip_targets.size] = self;
   }
 
-  /*-----------------------
-  SETUP LATERALLY MOVING TARGETS
+  /*----------------------- SETUP LATERALLY MOVING TARGETS
   -------------------------*/
   if((isDefined(self.script_parameters)) && (self.script_parameters == "use_rail")) {
     aim_assist_target linkTo(self);
@@ -3124,8 +3027,7 @@ target_think(targetType) {
   }
 
   while(true) {
-    /*-----------------------
-    TARGET POPS UP WHEN TRIGGERED
+    /*----------------------- TARGET POPS UP WHEN TRIGGERED
     -------------------------*/
     self waittill("pop_up");
 
@@ -3159,8 +3061,7 @@ target_think(targetType) {
       self thread target_lateral_movement();
     }
 
-    /*-----------------------
-    TARGET IS DAMAGED, OR TOLD TO GO BACK DOWN VIA SCRIPT/FLAGS
+    /*----------------------- TARGET IS DAMAGED, OR TOLD TO GO BACK DOWN VIA SCRIPT/FLAGS
     -------------------------*/
     while(true) {
       self waittill("damage", amount, attacker, direction_vec, point, type);
@@ -3205,7 +3106,7 @@ target_think(targetType) {
         break;
       }
 
-      if(isplayer(attacker)) {
+      if(isPlayer(attacker)) {
         if(isDefined(self.meleeonly)) {
           if(type != "MOD_MELEE")
             continue;
@@ -3264,8 +3165,7 @@ target_think(targetType) {
       }
     }
 
-    /*-----------------------
-    TARGET OUT OF PLAY TILL TOLD TO POP UP AGAIN
+    /*----------------------- TARGET OUT OF PLAY TILL TOLD TO POP UP AGAIN
     -------------------------*/
     if(isDefined(self.meleeonly)) {
       self.meleeonly = true;
@@ -3291,7 +3191,6 @@ target_think(targetType) {
       self.orgEnt rotatePitch(-90, 0.25);
     self setCanDamage(false);
     wait .25;
-
   }
 }
 
@@ -3353,7 +3252,6 @@ target_lateral_movement() {
     dummy moveTo(self.lateralStartPosition.origin, self.lateralMoveTime);
     wait(self.lateralMoveTime);
   }
-
 }
 
 dummy_delete_when_target_goes_back_down(dummy) {
@@ -3403,8 +3301,7 @@ target_go_back_down_when_flag_is_set(sFlag) {
     return;
   }
 
-  /*-----------------------
-  TARGET GOES BACK DOWN PREMATURELY IF FLAG IS SET
+  /*----------------------- TARGET GOES BACK DOWN PREMATURELY IF FLAG IS SET
   -------------------------*/
   self endon("target_going_back_down");
   flag_wait(sFlag);
@@ -3973,7 +3870,6 @@ keyHint(actionName, timeOut, doubleline, alwaysDisplay) {
 
     clear_hints();
   }
-
 }
 
 clear_hints_on_flag(msg) {
@@ -4411,7 +4307,6 @@ updateKeysForBindings() {
     for(index = 0; index < level.specialKeys.size; index++) {
       setKeyForBinding(getCommandFromKey(level.specialKeys[index]), level.specialKeys[index]);
     }
-
   }
 }
 
@@ -4572,7 +4467,6 @@ make_door_from_prefab(sTargetname) {
       door_trigger = ent;
       continue;
     }
-
   }
 
   foreach(model in door_models)
@@ -4645,19 +4539,16 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
   eGoal = undefined;
   sAnimGo = undefined;
   looping = false;
-  /*-----------------------
-  DOES AI HAVE A GOAL NODE?
+  /*----------------------- DOES AI HAVE A GOAL NODE?
   -------------------------*/
   if(isDefined(self.target))
     eGoal = getnode(self.target, "targetname");
 
-  /*-----------------------
-  CLEANUP PROPS AND ANIMATION NODE WHEN DEAD
+  /*----------------------- CLEANUP PROPS AND ANIMATION NODE WHEN DEAD
   -------------------------*/
   self thread ai_ambient_cleanup();
 
-  /*-----------------------
-  GO AHEAD AND PLAY LOOPING IDLE (IF ANIM IS LOOPING)
+  /*----------------------- GO AHEAD AND PLAY LOOPING IDLE (IF ANIM IS LOOPING)
   -------------------------*/
   if(isarray(level.scr_anim["generic"][sAnim])) {
     looping = true;
@@ -4676,25 +4567,21 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     else
       sAnimGo = undefined;
   }
-  /*-----------------------
-  FREEZE FRAME AT START OF ANIM (IF IT'S NOT A LOOP)
+  /*----------------------- FREEZE FRAME AT START OF ANIM (IF IT'S NOT A LOOP)
   -------------------------*/
   else
     self.eAnimEnt anim_generic_first_frame(self, sAnim);
 
-  /*-----------------------
-  WAIT FOR A FLAG (IF DEFINED IN THE SPAWNER) THEN PLAY ANIM
+  /*----------------------- WAIT FOR A FLAG (IF DEFINED IN THE SPAWNER) THEN PLAY ANIM
   -------------------------*/
   if(isDefined(self.script_flag)) {
     if(isDefined(sFailSafeFlag))
       flag_wait_either(self.script_flag, sFailSafeFlag);
     else
       flag_wait(self.script_flag);
-
   }
 
-  /*-----------------------
-  IF HEADED TO A GOAL NODE LATER....
+  /*----------------------- IF HEADED TO A GOAL NODE LATER....
   -------------------------*/
   if(isDefined(eGoal)) {
     self.disablearrivals = true;
@@ -4709,8 +4596,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     self.eAnimEnt anim_generic(self, sAnimGo);
   }
 
-  /*-----------------------
-  DO CUSTOM SHIT BASED ON ANIMNAME
+  /*----------------------- DO CUSTOM SHIT BASED ON ANIMNAME
   -------------------------*/
   switch (sAnim) {
     case "civilian_run_2_crawldeath":
@@ -4718,8 +4604,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
       break;
   }
 
-  /*-----------------------
-  FINISH ANIM THEN RUN TO A NODE
+  /*----------------------- FINISH ANIM THEN RUN TO A NODE
   -------------------------*/
   if(isDefined(eGoal)) {
     self setgoalnode(eGoal);
@@ -4731,14 +4616,12 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
       self cqb_walk("off");
   }
 
-  /*-----------------------
-  FINISH ANIM THEN PLAY LOOPING IDLE
+  /*----------------------- FINISH ANIM THEN PLAY LOOPING IDLE
   -------------------------*/
   else if(isDefined(level.scr_anim["generic"][sAnim + "_idle"]))
     self.eAnimEnt thread anim_generic_loop(self, sAnim + "_idle", "stop_idle");
 
-  /*-----------------------
-  PLAY MORTAR REACTIONS IF AVAILABLE
+  /*----------------------- PLAY MORTAR REACTIONS IF AVAILABLE
   -------------------------*/
   if(anim_exists(sAnim + "_react")) {
     if(!looping)
@@ -4759,7 +4642,6 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
       else
         anim_generic(self, sAnimReact2);
       thread anim_generic_loop(self, sAnim, "stop_idle");
-
     }
   }
 }
@@ -4781,8 +4663,7 @@ AI_patrol_think() {
 }
 
 ai_ambient_noprop_think() {
-  /*-----------------------
-  GLOBAL SCRIPT TO HANDLE ALL AMMBIENT GUYS
+  /*----------------------- GLOBAL SCRIPT TO HANDLE ALL AMMBIENT GUYS
   -------------------------*/
   self endon("death");
   assert(isDefined(self.animation)); //must be defined in the spawner
@@ -4792,8 +4673,7 @@ ai_ambient_noprop_think() {
     self.eAnimEnt = self.spawner;
 
   sFailSafeFlag = undefined;
-  /*-----------------------
-  SPECIAL CASES
+  /*----------------------- SPECIAL CASES
   -------------------------*/
   switch (sAnim) {
     case "training_humvee_repair":
@@ -5064,8 +4944,7 @@ accuracy_bonus() {
   level.bonus_time = undefined;
   level.pitaccuracy = undefined;
 
-  /*-----------------------
-  GET TOTAL PLAYER AMMO
+  /*----------------------- GET TOTAL PLAYER AMMO
   -------------------------*/
   level.guns = level.player GetWeaponsListPrimaries();
   level.gun0 = level.player GetWeaponAmmoStock(level.guns[0]);
@@ -5075,13 +4954,11 @@ accuracy_bonus() {
   level.starting_ammo = level.gun0 + level.gun1 + level.gunc0 + level.gunc1;
   //iprintlnbold ( "starting_ammo " +starting_ammo );
 
-  /*-----------------------
-  COURSE FINISHED
+  /*----------------------- COURSE FINISHED
   -------------------------*/
   level waittill("test_cleared");
 
-  /*-----------------------
-  FIGURE OUT BONUS
+  /*----------------------- FIGURE OUT BONUS
   -------------------------*/
   level.guns = level.player GetWeaponsListPrimaries();
   level.gun0 = level.player GetWeaponAmmoStock(level.guns[0]);
@@ -5091,8 +4968,7 @@ accuracy_bonus() {
   level.ending_ammo = level.gun0 + level.gun1 + level.gunc0 + level.gunc1;
   //iprintlnbold ( "ending_ammo " +ending_ammo );
 
-  /*-----------------------
-  HOW MUCH AMMO USED?
+  /*----------------------- HOW MUCH AMMO USED?
   -------------------------*/
   bullets_used_by_player = level.starting_ammo - level.ending_ammo;
   //iprintlnbold ( "ammo used: " +bullets_used_by_player );
@@ -5101,8 +4977,7 @@ accuracy_bonus() {
 
   //iprintlnbold ( "Enemy targets killed: " +enemy_targets_killed );
 
-  /*-----------------------
-  ACCURACY PERCENTAGE
+  /*----------------------- ACCURACY PERCENTAGE
   -------------------------*/
   if((enemy_targets_killed == 0) || (bullets_used_by_player == 0)) {
     level.pitaccuracy = 0;
@@ -5111,8 +4986,7 @@ accuracy_bonus() {
     level.pitaccuracy = roundDecimalPlaces(level.pitaccuracy, 0);
   }
 
-  /*-----------------------
-  ACCURACY BONUS TIME
+  /*----------------------- ACCURACY BONUS TIME
   -------------------------*/
   if(level.pitaccuracy == 0) {
     level.bonus_time = 0;
@@ -5122,7 +4996,6 @@ accuracy_bonus() {
     }
     level.bonus_time = (level.pitaccuracy / 0.2) / 100;
     level.bonus_time = roundDecimalPlaces(level.bonus_time, 1);
-
   }
 
   level notify("accuracy_bonus");
@@ -5133,9 +5006,7 @@ killTimer(best_time, deck) {
   //Enemies Killed:		5/12
   //Civilians Killed:		0/8
 
-  //------------------------------------
-
-  //Enemies missed penalty	10.00 sec
+  //------------------------------------ //Enemies missed penalty	10.00 sec
   //Civilians killed penalty	20.00 sec
   //Accuracy					37% //Accuracy bonus			00.00 sec
 
@@ -5156,8 +5027,7 @@ killTimer(best_time, deck) {
   level notify("kill_timer");
   clear_timer_elems();
 
-  /*-----------------------
-  PRINT BASE TIME
+  /*----------------------- PRINT BASE TIME
   -------------------------*/
   time = ((gettime() - level.start_time) / 1000);
   time = roundDecimalPlaces(time, 2);
@@ -5166,16 +5036,14 @@ killTimer(best_time, deck) {
   level.HUDtimer.y = 55;
   level.HUDtimer setValue(time);
 
-  /*-----------------------
-  PRINT ENEMIES KILLED
+  /*----------------------- PRINT ENEMIES KILLED
   -------------------------*/
   level.HUDenemiesKilled = get_pit_hud();
   level.HUDenemiesKilled.label = &"TRAINER_ENEMIES_KILLED";
   level.HUDenemiesKilled setValue(enemies_hit);
   level.HUDenemiesKilled.y = 70;
 
-  /*-----------------------
-  PRINT CIVVIES KILLED
+  /*----------------------- PRINT CIVVIES KILLED
   -------------------------*/
   level.HUDcivviesKilled = get_pit_hud();
   level.HUDcivviesKilled.label = &"TRAINER_CIVVIES_KILLED";
@@ -5184,8 +5052,7 @@ killTimer(best_time, deck) {
 
   level waittill("accuracy_bonus");
 
-  /*-----------------------
-  PRINT ACCURACY AND BONUS TIME
+  /*----------------------- PRINT ACCURACY AND BONUS TIME
   -------------------------*/
   level.HUDaccuracy = get_pit_hud();
   level.HUDaccuracy.y = 115;
@@ -5202,8 +5069,7 @@ killTimer(best_time, deck) {
     level.HUDaccuracybonus setValue(level.bonus_time);
   }
 
-  /*-----------------------
-  PRINT MISSED ENEMIES PENALTY
+  /*----------------------- PRINT MISSED ENEMIES PENALTY
   -------------------------*/
   level.HUDmissedenemypenalty = get_pit_hud();
   level.HUDmissedenemypenalty.y = 145;
@@ -5218,8 +5084,7 @@ killTimer(best_time, deck) {
     //timepenaltyForKilledCivvies
     level.HUDmissedenemypenalty setValue(missed_enemies_penalty);
   }
-  /*-----------------------
-  PRINT KILLED FRIENDLIES PENALTY
+  /*----------------------- PRINT KILLED FRIENDLIES PENALTY
   -------------------------*/
   level.HUDkilledcivviespenalty = get_pit_hud();
   level.HUDkilledcivviespenalty.y = 160;
@@ -5233,8 +5098,7 @@ killTimer(best_time, deck) {
     level.HUDkilledcivviespenalty setValue(killed_civvies_penalty);
   }
 
-  /*-----------------------
-  PRINT FINAL TIME SCORE
+  /*----------------------- PRINT FINAL TIME SCORE
   -------------------------*/
   level.HUDfinaltime = get_pit_hud();
   level.HUDfinaltime.y = 190;
@@ -5251,16 +5115,14 @@ killTimer(best_time, deck) {
   level.HUDfinaltime.label = &"TRAINER_YOUR_FINAL_TIME";
   level.HUDfinaltime setValue(final_time);
 
-  /*-----------------------
-  PRINT IW BEST TIME
+  /*----------------------- PRINT IW BEST TIME
   -------------------------*/
   //	level.IW_best = get_pit_hud();	
   //	level.IW_best.y = 115;
   //	level.IW_best.label = &"TRAINER_IW_BEST_TIME";
   //	level.IW_best setValue ( best_time );
 
-  /*-----------------------
-  PRINT RECOMMENDED DIFFICULTY
+  /*----------------------- PRINT RECOMMENDED DIFFICULTY
   -------------------------*/
   level.recommended_label = get_pit_hud();
   level.recommended_label SetPulseFX(30, 900000, 700); // something, decay start, decay duration
@@ -5289,19 +5151,19 @@ killTimer(best_time, deck) {
     level.recommended.label = &"TRAINER_RECOMMENDED_TRY_AGAIN";
     level.recommendedDifficulty = 1000;
   } else if(final_time > level.timeEasy) {
-    setdvar("recommended_gameskill", "0");
+    setDvar("recommended_gameskill", "0");
     level.recommended.label = &"TRAINER_RECOMMENDED_EASY";
     level.recommendedDifficulty = 0;
   } else if(final_time > level.timeRegular) {
-    setdvar("recommended_gameskill", "1");
+    setDvar("recommended_gameskill", "1");
     level.recommended.label = &"TRAINER_RECOMMENDED_NORMAL";
     level.recommendedDifficulty = 1;
   } else if(final_time > level.timeHard) {
-    setdvar("recommended_gameskill", "2");
+    setDvar("recommended_gameskill", "2");
     level.recommended.label = &"TRAINER_RECOMMENDED_HARD";
     level.recommendedDifficulty = 2;
   } else {
-    setdvar("recommended_gameskill", "3");
+    setDvar("recommended_gameskill", "3");
     level.recommended.label = &"TRAINER_RECOMMENDED_VETERAN";
     level.recommendedDifficulty = 3;
   }
@@ -5355,7 +5217,6 @@ dialog_end_of_course(numberOfTimesRun) {
       iRand = randomintrange(1, 3);
       dialogueLine = "end_of_course_vet_0" + iRand;
       break;
-
   }
   return dialogueLine;
 }
@@ -5466,8 +5327,7 @@ second_sprint_hint() {
 }
 
 startTimer(timelimit) {
-  /*-----------------------
-  SETUP
+  /*----------------------- SETUP
   -------------------------*/
   clear_timer_elems();
   // destroy timer and thread if objectives completed within limit
@@ -5475,8 +5335,7 @@ startTimer(timelimit) {
   level.hudTimerIndex = 20; //what the hell is this for?
   level.start_time = gettime();
 
-  /*-----------------------
-  YOUR TIME
+  /*----------------------- YOUR TIME
   -------------------------*/
   // Timer size and positioning
   level.HUDtimer = maps\_hud_util::get_countdown_hud();
@@ -5484,30 +5343,26 @@ startTimer(timelimit) {
   level.HUDtimer settenthstimerUp(.05);
   level.HUDtimer.y = 55;
 
-  /*-----------------------
-  PRINT ENEMIES KILLED
+  /*----------------------- PRINT ENEMIES KILLED
   -------------------------*/
   level.HUDenemiesKilled = maps\_hud_util::get_countdown_hud();
   level.HUDenemiesKilled.label = &"TRAINER_ENEMIES_KILLED";
   level.HUDenemiesKilled setValue(level.targets_hit);
   level.HUDenemiesKilled.y = 70;
 
-  /*-----------------------
-  PRINT CIVVIES KILLED
+  /*----------------------- PRINT CIVVIES KILLED
   -------------------------*/
   level.HUDcivviesKilled = maps\_hud_util::get_countdown_hud();
   level.HUDcivviesKilled.label = &"TRAINER_CIVVIES_KILLED";
   level.HUDcivviesKilled setValue(level.friendlies_hit);
   level.HUDcivviesKilled.y = 85;
 
-  /*-----------------------
-  TIMER EXPIRED
+  /*----------------------- TIMER EXPIRED
   -------------------------*/
   wait(timelimit);
   //flag_set ( "timer_expired" );
 
-  /*-----------------------
-  GET RID OF HUD ELEMENT AND FAIL THE MISSION
+  /*----------------------- GET RID OF HUD ELEMENT AND FAIL THE MISSION
   -------------------------*/
   level.HUDtimer destroy();
   level thread mission_failed_out_of_time();
@@ -5527,7 +5382,7 @@ mission_failed_out_of_time() {
   //level.pitguy thread dialogue_execute( selection );
 
   failures = getdvarint("killhouse_too_slow");
-  setdvar("killhouse_too_slow", (failures + 1));
+  setDvar("killhouse_too_slow", (failures + 1));
 
   level notify("mission failed");
   if(!flag("player_course_end"))
@@ -5782,7 +5637,7 @@ weaponfire_failure() {
       if(flag("player_in_camp")) {
         //mission fail
         wait(.5);
-        SetDvar("ui_deadquote", &"TRAINER_MISSION_FAIL_FIRE_IN_CAMP");
+        setDvar("ui_deadquote", &"TRAINER_MISSION_FAIL_FIRE_IN_CAMP");
         maps\_utility::missionFailedWrapper();
         level notify("mission failed");
       } else {

@@ -674,17 +674,17 @@ run_spawn_functions() {
     if(isDefined(func["param4"])) {
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
     } else {
-    if(isDefined(func["param3"])) {
-      thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
-    }
+      if(isDefined(func["param3"])) {
+        thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
+      }
     } else {
-    if(isDefined(func["param2"])) {
-      thread[[func["function"]]](func["param1"], func["param2"]);
-    }
+      if(isDefined(func["param2"])) {
+        thread[[func["function"]]](func["param1"], func["param2"]);
+      }
     } else {
-    if(isDefined(func["param1"])) {
-      thread[[func["function"]]](func["param1"]);
-    }
+      if(isDefined(func["param1"])) {
+        thread[[func["function"]]](func["param1"]);
+      }
     } else {
       thread[[func["function"]]]();
     }
@@ -695,17 +695,17 @@ run_spawn_functions() {
     if(isDefined(func["param4"])) {
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
     } else {
-    if(isDefined(func["param3"])) {
-      thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
-    }
+      if(isDefined(func["param3"])) {
+        thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
+      }
     } else {
-    if(isDefined(func["param2"])) {
-      thread[[func["function"]]](func["param1"], func["param2"]);
-    }
+      if(isDefined(func["param2"])) {
+        thread[[func["function"]]](func["param1"], func["param2"]);
+      }
     } else {
-    if(isDefined(func["param1"])) {
-      thread[[func["function"]]](func["param1"]);
-    }
+      if(isDefined(func["param1"])) {
+        thread[[func["function"]]](func["param1"]);
+      }
     } else {
       thread[[func["function"]]]();
     }

@@ -41,7 +41,6 @@ class czm_towers_pap_hud: cluielem {
     cluielem::add_clientfield("zeus_acquired", 1, 1, "int");
     cluielem::add_clientfield("odin_acquired", 1, 1, "int");
   }
-
 }
 
 register(uid) {

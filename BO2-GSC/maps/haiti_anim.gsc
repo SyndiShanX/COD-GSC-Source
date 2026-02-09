@@ -310,7 +310,6 @@ show_numbers() {
 
       if(isDefined(vtol)) {
         print3d(vtol.origin, i + 1, (0, 1, 0), 1, 10, 1);
-
       }
     }
 
@@ -407,8 +406,9 @@ intro_flak(ent) {
     wait(randomfloatrange(3, 4));
     index++;
 
-    if(index == structs.size)
+    if(index == structs.size) {
       index = 0;
+    }
   }
 }
 
@@ -424,8 +424,9 @@ intro_flak_hatch_open() {
   level.player thread rumble_loop(3, 0.1);
   index++;
 
-  if(index == structs.size)
+  if(index == structs.size) {
     index = 0;
+  }
 
   wait 3;
   playFX(level._effect["flak_explode"], structs[index].origin);
@@ -435,8 +436,9 @@ intro_flak_hatch_open() {
   level.player thread rumble_loop(3, 0.1);
   index++;
 
-  if(index == structs.size)
+  if(index == structs.size) {
     index = 0;
+  }
 
   wait 1;
   playFX(level._effect["flak_explode"], structs[index].origin);
@@ -446,8 +448,9 @@ intro_flak_hatch_open() {
   level.player thread rumble_loop(3, 0.1);
   index++;
 
-  if(index == structs.size)
+  if(index == structs.size) {
     index = 0;
+  }
 
   wait 2;
   playFX(level._effect["flak_explode"], structs[index].origin);
@@ -457,8 +460,9 @@ intro_flak_hatch_open() {
   level.player thread rumble_loop(3, 0.1);
   index++;
 
-  if(index == structs.size)
+  if(index == structs.size) {
     index = 0;
+  }
 
   level waittill("vtol_explode");
   wait 5;
@@ -471,8 +475,9 @@ intro_flak_hatch_open() {
     wait(randomfloatrange(3, 4));
     index++;
 
-    if(index == structs.size)
+    if(index == structs.size) {
       index = 0;
+    }
   }
 }
 

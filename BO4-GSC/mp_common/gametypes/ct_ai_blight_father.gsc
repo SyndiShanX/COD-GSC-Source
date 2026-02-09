@@ -560,7 +560,7 @@ function_cacd1506(var_84ed9a13, entity, inflictor, attacker, damage, flags, mean
 function_6f109d76(ai) {}
 
 function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebcb86d6, var_b85996d4, var_159ce525, var_ddd319d6, var_d2314927) {
-  var_8d3f5b7d = isalive(attacker) && isplayer(attacker);
+  var_8d3f5b7d = isalive(attacker) && isPlayer(attacker);
 
   if(isDefined(var_ebcb86d6)) {
     var_84ed9a13 = var_ebcb86d6;
@@ -713,7 +713,7 @@ function_8fe8a946(entity) {
     return false;
   }
 
-  if(!isplayer(entity.favoriteenemy)) {
+  if(!isPlayer(entity.favoriteenemy)) {
     return false;
   }
 
@@ -872,7 +872,7 @@ function_b2be1340(starting_health) {
   while(self.n_health > 0) {
     s_notify = self.trigger waittill(#"damage");
 
-    if(isDefined(s_notify.attacker) && isplayer(s_notify.attacker) && s_notify.amount > 0) {
+    if(isDefined(s_notify.attacker) && isPlayer(s_notify.attacker) && s_notify.amount > 0) {
       self.n_health -= s_notify.amount;
     }
   }
@@ -931,10 +931,10 @@ function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   }
 
   if(isDefined(self.missile_target) && isDefined(self.var_209ff2fa)) {
-    if(isplayer(self.missile_target) && isDefined(self.missile_target.usingvehicle) && self.missile_target.usingvehicle) {
+    if(isPlayer(self.missile_target) && isDefined(self.missile_target.usingvehicle) && self.missile_target.usingvehicle) {
       vehicle = self.missile_target getvehicleoccupied();
       var_6d0a510 = vehicle.origin;
-    } else if(isplayer(self.missile_target)) {
+    } else if(isPlayer(self.missile_target)) {
       var_6d0a510 = self.missile_target getplayercamerapos();
     } else {
       var_6d0a510 = self.missile_target getcentroid();

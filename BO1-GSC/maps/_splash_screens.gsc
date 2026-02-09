@@ -40,21 +40,18 @@ main() {
   destroy_all();
   unfreeze_players();
 }
-
 freeze_players() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] freezecontrols(true);
   }
 }
-
 unfreeze_players() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] freezecontrols(false);
   }
 }
-
 wait_for_x_press() {
   wait(5);
   breakme = false;
@@ -68,7 +65,6 @@ wait_for_x_press() {
     wait(0.05);
   }
 }
-
 create_screen_generic() {
   level.screen_generic = NewHudElem();
   level.screen_generic.x = 0;
@@ -79,7 +75,6 @@ create_screen_generic() {
   level.screen_generic.alpha = 1;
   level.screen_generic.sort = 1;
 }
-
 create_hudelem(x, y, alignX, alignY, horzAlign, vertAlign, foreground, alpha, fontscale) {
   new_elem = NewHudElem();
   new_elem.x = x;
@@ -93,7 +88,6 @@ create_hudelem(x, y, alignX, alignY, horzAlign, vertAlign, foreground, alpha, fo
   new_elem.fontscale = fontscale;
   return new_elem;
 }
-
 create_splash_hudelems() {
   level.press_x_hud = create_hudelem(0, 360, "center", "top", "center", "top", true, 1, 2);
   level.press_x_hud setText("Press X to Start");
@@ -108,7 +102,6 @@ create_splash_hudelems() {
   level.instructions_elem9 = create_hudelem(0, 300, "center", "top", "center", "top", true, 1, 1.5);
   level.instructions_elem10 = create_hudelem(0, 320, "center", "top", "center", "top", true, 1, 1.5);
 }
-
 destroy_all() {
   level.screen_generic fadeOvertime(3);
   level.screen_generic.alpha = 0;
@@ -124,7 +117,6 @@ destroy_all() {
   level.instructions_elem10 destroy();
   level.press_x_hud destroy();
 }
-
 set_text_creek_1() {
   level.instructions_elem setText("UP A CREEK");
   level.instructions_elem2 setText("Scripting: 1st pass for beats 1, 2, 3, 5 and 6");
@@ -137,7 +129,6 @@ set_text_creek_1() {
   level.instructions_elem9 setText("Playable Feature: Drivable Boat/platform and Exploration");
   level.instructions_elem10 setText("Playable Feature: Create A Class");
 }
-
 set_text_crossroads() {
   level.instructions_elem setText("CROSSROADS");
   level.instructions_elem2 setText("Scripting: 1st pass for beats 1, 2, 3, 5 and 6");
@@ -150,7 +141,6 @@ set_text_crossroads() {
   level.instructions_elem9 setText("Playable Feature: Core movement = Door Breaching");
   level.instructions_elem10 setText("Playable Feature: Platform Bus Rail and Sonic Tracking");
 }
-
 set_text_flashpoint() {
   level.instructions_elem setText("FLASHPOINT");
   level.instructions_elem2 setText("Scripting: 1st pass for beats 1 to 7");
@@ -163,7 +153,6 @@ set_text_flashpoint() {
   level.instructions_elem9 setText("");
   level.instructions_elem10 setText("Playable Feature: Zip Line, Beat 5");
 }
-
 set_text_fullahead() {
   level.instructions_elem setText("FULLAHEAD");
   level.instructions_elem2 setText("Scripting: 1st pass from beat 2 to beat 8");
@@ -176,7 +165,6 @@ set_text_fullahead() {
   level.instructions_elem9 setText("Do you want to see Beat 1 geo?: Use - jump to Start - exterior");
   level.instructions_elem10 setText("");
 }
-
 set_text_quagmire() {
   level.instructions_elem setText("QUAGMIRE");
   level.instructions_elem2 setText("Scripting: 1st pass from beat 1 to beat 8");
@@ -189,7 +177,6 @@ set_text_quagmire() {
   level.instructions_elem9 setText("Playable Feature: Core movement = Door Breaching");
   level.instructions_elem10 setText("Playable Feature: Helicopter platform");
 }
-
 set_text_inc_squad_urban() {
   level.instructions_elem setText("INCUBATOR: SQUAD CONTROL");
   level.instructions_elem2 setText("Sprint: Week 3");

@@ -91,7 +91,6 @@ main(painter_spmp) {
       level.dummynode[i] = spawn("script_origin", (0, 0, 0));
       level.dummynode[i].dummynode = true;
       level.dummyguy_index_max++;
-
     }
   }
   level.dummyguy_index = 0;
@@ -387,8 +386,7 @@ setcurrentgroup(group) {
 
   for(i = 1; i < level.group_hudelems.size - div; i++) {
     if(index - i < 0) {
-      //-- --
-      level.group_hudelems[div + i] _settext("-- --");
+      //-- -- level.group_hudelems[div + i] _settext("-- --");
       continue;
     }
     level.group_hudelems[div + i] _settext(gettext_nonode(keys[index - i]));
@@ -396,12 +394,10 @@ setcurrentgroup(group) {
 
   for(i = 1; i < level.group_hudelems.size - div; i++) {
     if(index + i > keys.size - 1) {
-      //-- --
-      level.group_hudelems[div - i] _settext("-- --");
+      //-- -- level.group_hudelems[div - i] _settext("-- --");
       continue;
     }
     level.group_hudelems[div - i] _settext(gettext_nonode(keys[index + i]));
-
   }
   group = getcurrent_groupstruct();
   level.node_grid = group.grid_size;
@@ -477,7 +473,6 @@ button_modifier() {
       assert(isDefined(level.button_modifier_release_func));
       [[level.button_modifier_release_func[button]]]();
       wait .05;
-
     }
     wait .05;
   }
@@ -697,7 +692,6 @@ place_node_erase() {
   if(isDefined(node.has_dummy_guy)) {
     node.has_dummy_guy hide();
     node.has_dummy_guy.is_hidden = true;
-
   }
   node delete();
   level.noder_node_delete = true; // tells thread that's got all the nodes to get all the nodes again.
@@ -729,14 +723,13 @@ dump_nodes() {
   filepath = "/map_source/" + level.script + "_node_dump.map";
   fileprintsuccess = fileprint_launcher_end_file(filepath, false);
 
-  if(fileprintsuccess) {
-    launcher_write_clipboard(filepath);
-    array_thread(level.placed_nodes, ::deleteme);
-    level.placed_nodes = [];
-    hud_update_placed_model_count();
-  }
+    if(fileprintsuccess) {
+      launcher_write_clipboard(filepath);
+      array_thread(level.placed_nodes, ::deleteme);
+      level.placed_nodes = [];
+      hud_update_placed_model_count();
+    }
   thread manage_nearnodes();
-
 }
 
 player_view_trace() {
@@ -812,7 +805,6 @@ draw_grid(origin, bpreview) {
       if(x != gridlines) {
         Line(origin + (x * level.node_grid, y * level.node_grid, 0), origin + ((x + 1) * level.node_grid, y * level.node_grid, 0), gridcolor, true);
         //				groundpos_line( offsetorigin + ( x * level.node_grid, y * level.node_grid, 0 ), offsetorigin + ( ( x + 1 ) * level.node_grid, y * level.node_grid, 0 ), gridcolor, true );
-
       }
       if(y != gridlines) {
         Line(origin + (x * level.node_grid, y * level.node_grid, 0), origin + (x * level.node_grid, (y + 1) * level.node_grid, 0), gridcolor, true);
@@ -1206,7 +1198,6 @@ manage_nearnodes() {
         count = 0;
         break;
       }
-
     }
     wait .05;
   }

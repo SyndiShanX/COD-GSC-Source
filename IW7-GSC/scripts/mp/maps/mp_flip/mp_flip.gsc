@@ -10,11 +10,11 @@ main() {
   scripts\mp\load::main();
   level.var_C7B3 = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_flip");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("pmovePerfSkipWorldUpVolumeCheck", 0);
-  setdvar("deploy_allowInWater", 1);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("pmovePerfSkipWorldUpVolumeCheck", 0);
+  setDvar("deploy_allowInWater", 1);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

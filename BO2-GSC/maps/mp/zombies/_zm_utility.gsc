@@ -21,7 +21,7 @@
 init_utility() {}
 
 is_classic() {
-  var = getdvar(#"ui_zm_gamemodegroup");
+  var = getDvar(#"ui_zm_gamemodegroup");
 
   if(var == "zclassic")
     return true;
@@ -30,7 +30,7 @@ is_classic() {
 }
 
 is_standard() {
-  var = getdvar(#"ui_gametype");
+  var = getDvar(#"ui_gametype");
 
   if(var == "zstandard")
     return true;
@@ -43,7 +43,7 @@ convertsecondstomilliseconds(seconds) {
 }
 
 is_player() {
-  return isplayer(self) || isDefined(self.pers) && (isDefined(self.pers["isBot"]) && self.pers["isBot"]);
+  return isPlayer(self) || isDefined(self.pers) && (isDefined(self.pers["isBot"]) && self.pers["isBot"]);
 }
 
 lerp(chunk) {
@@ -328,7 +328,7 @@ no_valid_repairable_boards(barrier, barrier_chunks) {
 }
 
 is_survival() {
-  var = getdvar(#"ui_zm_gamemodegroup");
+  var = getDvar(#"ui_zm_gamemodegroup");
 
   if(var == "zsurvival")
     return true;
@@ -340,7 +340,7 @@ is_encounter() {
   if(isDefined(level._is_encounter) && level._is_encounter)
     return true;
 
-  var = getdvar(#"ui_zm_gamemodegroup");
+  var = getDvar(#"ui_zm_gamemodegroup");
 
   if(var == "zencounter") {
     level._is_encounter = 1;
@@ -622,7 +622,6 @@ debug_draw_attractor_positions() {
     if(!isDefined(self))
       return;
   }
-
 }
 
 get_zombie_point_of_interest(origin, poi_array) {
@@ -1066,7 +1065,7 @@ is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(!isalive(player))
     return 0;
 
-  if(!isplayer(player))
+  if(!isPlayer(player))
     return 0;
 
   if(isDefined(player.is_zombie) && player.is_zombie == 1)
@@ -2130,7 +2129,6 @@ hudelem_count() {
     println("HudElems: " + level.hudelem_count + "[Peak: " + max + "]");
     wait 0.05;
   }
-
 }
 
 debug_round_advancer() {
@@ -2152,7 +2150,6 @@ print_run_speed(speed) {
     print3d(self.origin + vectorscale((0, 0, 1), 64.0), speed, (1, 1, 1));
     wait 0.05;
   }
-
 }
 
 draw_line_ent_to_ent(ent1, ent2) {
@@ -2166,7 +2163,6 @@ draw_line_ent_to_ent(ent1, ent2) {
     line(ent1.origin, ent2.origin);
     wait 0.05;
   }
-
 }
 
 draw_line_ent_to_pos(ent, pos, end_on) {
@@ -2184,7 +2180,6 @@ draw_line_ent_to_pos(ent, pos, end_on) {
     line(ent.origin, pos);
     wait 0.05;
   }
-
 }
 
 debug_print(msg) {
@@ -2203,7 +2198,6 @@ debug_blocker(pos, rad, height) {
     wait 0.05;
     drawcylinder(pos, rad, height);
   }
-
 }
 
 drawcylinder(pos, rad, height) {
@@ -2217,7 +2211,6 @@ drawcylinder(pos, rad, height) {
     line(pos + (cos(theta) * currad, sin(theta) * currad, curheight), pos + (cos(theta2) * currad, sin(theta2) * currad, curheight));
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta) * currad, sin(theta) * currad, curheight));
   }
-
 }
 
 print3d_at_pos(msg, pos, thread_endon, offset) {
@@ -2235,7 +2228,6 @@ print3d_at_pos(msg, pos, thread_endon, offset) {
     print3d(self.origin + offset, msg);
     wait 0.05;
   }
-
 }
 
 debug_breadcrumbs() {
@@ -2254,7 +2246,6 @@ debug_breadcrumbs() {
 
     wait 0.05;
   }
-
 }
 
 debug_attack_spots_taken() {
@@ -2283,7 +2274,6 @@ debug_attack_spots_taken() {
     msg = "" + count + " / " + self.attack_spots_taken.size;
     print3d(self.origin, msg);
   }
-
 }
 
 float_print3d(msg, time) {
@@ -2296,7 +2286,6 @@ float_print3d(msg, time) {
     print3d(self.origin + offset, msg, (1, 1, 1));
     wait 0.05;
   }
-
 }
 
 do_player_vo(snd, variation_count) {
@@ -2327,7 +2316,7 @@ stop_magic_bullet_shield() {
 
 magic_bullet_shield() {
   if(!(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)) {
-    if(isai(self) || isplayer(self)) {
+    if(isai(self) || isPlayer(self)) {
       self.magic_bullet_shield = 1;
 
       level thread debug_magic_bullet_shield_death(self);
@@ -2345,7 +2334,6 @@ magic_bullet_shield() {
       self.attackeraccuracy = 0.1;
     } else {
       assertmsg("magic_bullet_shield does not support entity of classname '" + self.classname + "'.");
-
     }
   }
 }
@@ -2473,7 +2461,6 @@ print3d_ent(text, color, scale, offset, end_msg, overwrite) {
     print3d(self.origin + offset, self._debug_print3d_msg, color, scale);
     wait 0.05;
   }
-
 }
 
 isexplosivedamage(meansofdeath) {
@@ -2586,8 +2573,8 @@ shock_onpain() {
   self notify("stop_shock_onpain");
   self endon("stop_shock_onpain");
 
-  if(getdvar(#"blurpain") == "")
-    setdvar("blurpain", "on");
+  if(getDvar(#"blurpain") == "")
+    setDvar("blurpain", "on");
 
   while(true) {
     oldhealth = self.health;
@@ -2614,7 +2601,7 @@ shock_onpain() {
       }
 
       self shock_onexplosion(damage, shocktype, shocklight);
-    } else if(getdvar(#"blurpain") == "on")
+    } else if(getDvar(#"blurpain") == "on")
       self shellshock("pain", 0.5);
   }
 }
@@ -2667,7 +2654,6 @@ decrement_is_drinking() {
     self.is_drinking--;
   else {
     assertmsg("making is_drinking less than 0");
-
   }
 
   if(self.is_drinking == 0) {
@@ -3224,7 +3210,7 @@ giveachievement_wrapper(achievement, all_players) {
       }
     }
   } else {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       println("^1self needs to be a player for _utility::giveachievement_wrapper()");
 
       return;
@@ -3430,12 +3416,10 @@ ent_flag_init(message, val) {
     self.ent_flag[message] = 1;
 
     self.ent_flags_lock[message] = 1;
-
   } else {
     self.ent_flag[message] = 0;
 
     self.ent_flags_lock[message] = 0;
-
   }
 }
 
@@ -3564,9 +3548,7 @@ track_players_intersection_tracker() {
           continue;
         }
         if(isDefined(level.player_intersection_tracker_override)) {
-          if(players[i][
-              [level.player_intersection_tracker_override]
-            ](players[j]))
+          if(players[i][[level.player_intersection_tracker_override]](players[j]))
             continue;
         }
 
@@ -3604,7 +3586,7 @@ track_players_intersection_tracker() {
 }
 
 get_eye() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     linked_ent = self getlinkedent();
 
     if(isDefined(linked_ent) && getdvarint(#"_id_5AEFD7E9") > 0) {
@@ -3620,7 +3602,7 @@ get_eye() {
 }
 
 is_player_looking_at(origin, dot, do_trace, ignore_ent) {
-  assert(isplayer(self), "player_looking_at must be called on a player.");
+  assert(isPlayer(self), "player_looking_at must be called on a player.");
 
   if(!isDefined(dot))
     dot = 0.7;
@@ -4270,7 +4252,7 @@ is_gametype_active(a_gametypes) {
     a_gametypes = array(a_gametypes);
 
   for(i = 0; i < a_gametypes.size; i++) {
-    if(getdvar(#"g_gametype") == a_gametypes[i])
+    if(getDvar(#"g_gametype") == a_gametypes[i])
       b_is_gametype_active = 1;
   }
 
@@ -4279,7 +4261,7 @@ is_gametype_active(a_gametypes) {
 
 is_createfx_active() {
   if(!isDefined(level.createfx_enabled))
-    level.createfx_enabled = getdvar(#"createfx") != "";
+    level.createfx_enabled = getDvar(#"createfx") != "";
 
   return level.createfx_enabled;
 }

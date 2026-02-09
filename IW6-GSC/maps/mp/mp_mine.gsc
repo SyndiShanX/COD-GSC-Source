@@ -23,14 +23,14 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_mine");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  SetDvar("r_tessellationCutoffFalloffBase", 600);
-  SetDvar("r_tessellationCutoffDistanceBase", 2000);
-  SetDvar("r_tessellationCutoffFalloff", 600);
-  SetDvar("r_tessellationCutoffDistance", 2000);
-  SetDvar("r_reactiveMotionWindFrequencyScale", 0.1);
-  SetDvar("sm_sunSampleSizeNear", 0.43);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_tessellationCutoffFalloffBase", 600);
+  setDvar("r_tessellationCutoffDistanceBase", 2000);
+  setDvar("r_tessellationCutoffFalloff", 600);
+  setDvar("r_tessellationCutoffDistance", 2000);
+  setDvar("r_reactiveMotionWindFrequencyScale", 0.1);
+  setDvar("sm_sunSampleSizeNear", 0.43);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -247,7 +247,6 @@ setupElevator() {
     level updateBFlagFxPos(false, false);
     wait WAITTIME;
   }
-
 }
 
 blockerConnect(BLOCKENT) {
@@ -289,7 +288,6 @@ elevatorStartGears(floorName) {
 
     self maps\mp\_elevator_v2::elevatorBlockPath("elevatorMid");
   }
-
 }
 
 MINE_CART_SLOW_SPEED_LIMIT = 250;
@@ -350,7 +348,6 @@ MineCartSetup(CartName, FirstNode, LinkedModels, DamageTrigger, insideTriggerNam
       thread MineCartElevatorMove(MINE_CART_SPEED);
     }
     MINE_CART_DESTINATION = MineCartMove(MINE_CART, MINE_CART_DESTINATION, MINE_CART_SPEED);
-
   }
 }
 
@@ -420,7 +417,7 @@ setupMineCartFrontTrigger(frontTrigger) {
   while(true) {
     frontTrigger waittill("trigger", otherPlayer);
 
-    if(IsPlayer(otherPlayer) || IsAgent(otherPlayer)) {
+    if(isPlayer(otherPlayer) || IsAgent(otherPlayer)) {
       if(isReallyAlive(otherPlayer) && self.speed >= MINE_CART_SLOW_SPEED_LIMIT) {
         if(otherPlayer IsMantling()) {
           continue;
@@ -475,7 +472,7 @@ setupMineCartInsideTrigger(insideTrigger) {
   while(true) {
     insideTrigger waittill("trigger", player);
 
-    if(IsPlayer(player) && isReallyAlive(player)) {
+    if(isPlayer(player) && isReallyAlive(player)) {
       entNum = player GetEntityNumber();
 
       if(!isDefined(self.playersInCart[entNum])) {
@@ -645,7 +642,7 @@ ambientAnimations() {
 wildlife() {
   thread maps\interactive_models\vulture_mp::vulture_circling((565, -1870, 1500), 3);
   thread maps\interactive_models\vulture_mp::vulture_circling((-300, 1210, 1650), 2);
-  /#thread maps\interactive_models\vulture_mp::vultures_toggle_thread();
+  thread maps\interactive_models\vulture_mp::vultures_toggle_thread();
 
   thread maps\interactive_models\batcave::vfxBatCaveWaitInit("bats_flyaway_1", 1, "vfx_bats_flyaway_1", (-2028.06, 464.427, 413.921));
   thread maps\interactive_models\batcave::vfxBatCaveWaitInit("bats_flyaway_2", 2, "vfx_bats_flyaway_2", (-264.3, 927.7, 397.8), 2);
@@ -663,7 +660,7 @@ crushPlayerInTrigger() {
 
       player notify("notify_moving_platform_invalid");
 
-      if(IsPlayer(player) || IsAgent(player)) {
+      if(isPlayer(player) || IsAgent(player)) {
         thread cleanupCrushedbody(player GetCorpseEntity());
       }
     }
@@ -683,7 +680,7 @@ cleanupCrushedBody(body) {
 }
 
 cart_unresolved_collision_func(player, bAllowSuicide) {
-  if(IsPlayer(player) && player IsLinked()) {
+  if(isPlayer(player) && player IsLinked()) {
     player Unlink();
   }
 
@@ -700,7 +697,7 @@ setupPushTrigger(triggerName, pushAngles) {
   while(true) {
     trigger waittill("trigger", player);
 
-    if(IsPlayer(player) || IsAgent(player)) {
+    if(isPlayer(player) || IsAgent(player)) {
       if(player IsLinked()) {
         player Unlink();
         player.startUseMover = undefined;
@@ -708,7 +705,6 @@ setupPushTrigger(triggerName, pushAngles) {
 
       dir = 100 * anglesToForward(pushAngles);
       player SetVelocity(dir);
-
     }
 
     wait 0.1;

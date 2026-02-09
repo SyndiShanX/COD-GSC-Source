@@ -21,19 +21,19 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     if(!common_scripts\utility::flag_exist("_cloaked_stealth_enabled"))
       common_scripts\utility::flag_init("_cloaked_stealth_enabled");
 
     return;
   }
 
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
 
-  setdvar("use_old_meleestruggle", 1);
+  setDvar("use_old_meleestruggle", 1);
   setsaveddvar("r_specularColorScale", "2.42");
   var_0 = getent("real", "targetname");
   level.player setplayerangles(var_0.angles);
@@ -1496,7 +1496,7 @@ runout() {
 
 bcs_disabler() {
   wait 0.05;
-  setdvar("bcs_enable", "off");
+  setDvar("bcs_enable", "off");
 }
 
 move_in_on_goal(var_0) {
@@ -1538,7 +1538,7 @@ shanty_run_drop_weapon() {
     }
     var_0 thread maps\_utility::ignore_triggers(1.0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       break;
     }
   }

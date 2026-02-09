@@ -41,13 +41,13 @@ function init() {
   level.dog_spawners = [];
   level flag::init("dog_clips");
   if(getdvarstring("zombie_dog_animset") == "") {
-    setdvar("zombie_dog_animset", "zombie");
+    setDvar("zombie_dog_animset", "zombie");
   }
   if(getdvarstring("scr_dog_health_walk_multiplier") == "") {
-    setdvar("scr_dog_health_walk_multiplier", "4.0");
+    setDvar("scr_dog_health_walk_multiplier", "4.0");
   }
   if(getdvarstring("scr_dog_run_distance") == "") {
-    setdvar("scr_dog_run_distance", "500");
+    setDvar("scr_dog_run_distance", "500");
   }
   level.melee_range_sav = getdvarstring("ai_meleeRange");
   level.melee_width_sav = getdvarstring("ai_meleeWidth");
@@ -341,9 +341,9 @@ function dog_round_start() {
   level thread zm_audio::sndmusicsystem_playstate("dog_start");
   util::clientnotify("dog_start");
   if(isDefined(level.dog_melee_range)) {
-    setdvar("ai_meleeRange", level.dog_melee_range);
+    setDvar("ai_meleeRange", level.dog_melee_range);
   } else {
-    setdvar("ai_meleeRange", 100);
+    setDvar("ai_meleeRange", 100);
   }
 }
 
@@ -353,9 +353,9 @@ function dog_round_stop() {
   level flag::clear("dog_clips");
   level notify("dog_round_ending");
   util::clientnotify("dog_stop");
-  setdvar("ai_meleeRange", level.melee_range_sav);
-  setdvar("ai_meleeWidth", level.melee_width_sav);
-  setdvar("ai_meleeHeight", level.melee_height_sav);
+  setDvar("ai_meleeRange", level.melee_range_sav);
+  setDvar("ai_meleeWidth", level.melee_width_sav);
+  setDvar("ai_meleeHeight", level.melee_height_sav);
 }
 
 function play_dog_round() {
@@ -433,7 +433,7 @@ function dog_death() {
     level.last_dog_origin = self.origin;
     level notify("last_ai_down", self);
   }
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     event = "death";
     if(self.damageweapon.isballisticknife) {
       event = "ballistic_knife_death";

@@ -336,7 +336,7 @@ _force_goal(s_tracker, goto, b_shoot = 1, str_end_on, b_keep_colors = 0, b_shoul
   self val::set(#"ai_forcegoal", "ignoreme", 1);
   self disable_pain();
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self pushplayer(1);
   }
 
@@ -350,7 +350,7 @@ _force_goal(s_tracker, goto, b_shoot = 1, str_end_on, b_keep_colors = 0, b_shoul
     colors::enable();
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self pushplayer(0);
   }
 

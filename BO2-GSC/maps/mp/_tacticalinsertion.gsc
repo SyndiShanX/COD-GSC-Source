@@ -217,7 +217,7 @@ spawntacticalinsertion() {
   while(true) {
     self.tacticalinsertion waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname, idflags);
 
-    if(level.teambased && (!isDefined(attacker) || !isplayer(attacker) || attacker.team == self.team) && attacker != self) {
+    if(level.teambased && (!isDefined(attacker) || !isPlayer(attacker) || attacker.team == self.team) && attacker != self) {
       continue;
     }
     if(attacker != self) {

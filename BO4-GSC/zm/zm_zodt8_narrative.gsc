@@ -165,7 +165,7 @@ function_c3a5f1fe(a_ents) {
     s_result = e_raven waittill(#"damage");
 
     if(s_result.weapon === w_weapon || s_result.weapon === var_eb115bf1) {
-      if(isalive(s_result.attacker) && isplayer(s_result.attacker)) {
+      if(isalive(s_result.attacker) && isPlayer(s_result.attacker)) {
         s_result.attacker util::show_hit_marker(1);
         break;
       }
@@ -378,7 +378,7 @@ function_ad05f6f3() {
   while(isDefined(self)) {
     s_result = self waittill(#"damage");
 
-    if(isplayer(s_result.attacker)) {
+    if(isPlayer(s_result.attacker)) {
       break;
     }
   }
@@ -476,7 +476,7 @@ function_7c9ab1ea(t_flag, var_f96aafd8) {
   while(true) {
     s_result = t_flag waittill(#"trigger");
 
-    if(isDefined(s_result.activator) && isplayer(s_result.activator)) {
+    if(isDefined(s_result.activator) && isPlayer(s_result.activator)) {
       self rotateroll(360, 0.25);
       self waittill(#"rotatedone");
 
@@ -747,7 +747,7 @@ function_678d6318() {
     s_result = s_trigger_loc waittill(#"trigger_activated");
     player = s_result.e_who;
 
-    if(isalive(player) && isplayer(player)) {
+    if(isalive(player) && isPlayer(player)) {
       if(isDefined(player.e_storm) && isDefined(s_unitrigger.trigger)) {
         if(player.e_storm istouching(s_unitrigger.trigger)) {
           break;

@@ -68,7 +68,7 @@ enemy_watcher() {
       wait(0.2);
     }
 
-    if(isDefined(self.enemy) && isplayer(self.enemy) && isDefined(self.enemy.tags_carried) && self.enemy.tags_carried >= 3 && self botcanseeentity(self.enemy) && distance(self.origin, self.enemy.origin) <= 500) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy) && isDefined(self.enemy.tags_carried) && self.enemy.tags_carried >= 3 && self botcanseeentity(self.enemy) && distance(self.origin, self.enemy.origin) <= 500) {
       self getpassivestruct("meleeChargeDist", 500);
       self botsetflag("prefer_melee", 1);
       self botsetflag("throw_knife_melee", level.mugger_throwing_knife_mug_frac > 0);
@@ -133,7 +133,7 @@ bot_find_visible_tags_mugger(var_0, var_1) {
     var_3 = scripts\engine\utility::array_combine(level.dogtags, level.mugger_extra_tags);
     foreach(var_5 in var_3) {
       if(var_5 scripts\mp\gameobjects::caninteractwith(self.team)) {
-        if(isplayer(self) || distancesquared(self.origin, var_5.curorigin) < 1000000) {
+        if(isPlayer(self) || distancesquared(self.origin, var_5.curorigin) < 1000000) {
           if(scripts\mp\bots\gametype_conf::bot_is_tag_visible(var_5, var_0, var_1)) {
             var_6 = spawnStruct();
             var_6.origin = var_5.curorigin;
@@ -167,7 +167,7 @@ tag_watcher() {
       continue;
     }
 
-    if(isDefined(self.enemy) && isplayer(self.enemy) && self botcanseeentity(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy) && self botcanseeentity(self.enemy)) {
       continue;
     }
 

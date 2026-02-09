@@ -423,8 +423,7 @@ do_anim(name) {
   ent ent_flag_set("do_anim");
 }
 
-//---------------------------------------------------------------------------------------------------
-delete_civ_on_goal() {
+//--------------------------------------------------------------------------------------------------- delete_civ_on_goal() {
   self endon("death");
 
   self waittill("reached_path_end");
@@ -486,7 +485,7 @@ spawner_trig_think() {
   while(1) {
     self waittill("trigger", other);
 
-    if(IsPlayer(other) && level.activeRoom != room) {
+    if(isPlayer(other) && level.activeRoom != room) {
       self spawn_museum_dudes();
 
       while(other IsTouching(self)) {
@@ -876,7 +875,7 @@ panic_icon() {
   while(true) {
     trigger waittill("trigger", other);
 
-    if(!isplayer(other)) {
+    if(!isPlayer(other)) {
       continue;
     }
     while(other IsTouching(trigger)) {

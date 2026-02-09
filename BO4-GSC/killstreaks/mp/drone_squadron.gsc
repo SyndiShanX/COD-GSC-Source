@@ -110,7 +110,7 @@ calcspawnorigin(origin, angles) {
       mask = 1 | 2;
       trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
 
-      if(isDefined(trace[# "entity"]) && isplayer(trace[# "entity"])) {
+      if(isDefined(trace[# "entity"]) && isPlayer(trace[# "entity"])) {
         continue;
       }
 
@@ -169,7 +169,7 @@ calcspawnorigin(origin, angles) {
 }
 
 function_d52c51c6(killstreaktype) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
 
   if(!isnavvolumeloaded()) {
@@ -366,7 +366,7 @@ watchgameended() {
 
 function_97bbef8(drone_squadron) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   drone_squadron usevehicle(player, 0);
   drone_squadron clientfield::set("vehicletransition", 1);
   drone_squadron thread audio::sndupdatevehiclecontext(1);
@@ -466,7 +466,7 @@ function_c94a0c4d(params) {
   attacker = self[[level.figure_out_attacker]](attacker);
 
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       scoreevents::processscoreevent(#"hash_8bf3519db5f0fd4", attacker, self.owner, weapon);
     }
   }
@@ -482,7 +482,7 @@ watchdeath() {
   attacker = self[[level.figure_out_attacker]](attacker);
 
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       challenges::destroyedaircraft(attacker, weapon, drone_squadron.controlled === 1, 1);
       attacker challenges::addflyswatterstat(weapon, self);
       drone_squadron killstreaks::function_73566ec7(attacker, weapon, drone_squadron.owner);

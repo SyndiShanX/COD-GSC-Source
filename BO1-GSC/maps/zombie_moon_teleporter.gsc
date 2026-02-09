@@ -10,7 +10,7 @@
 #include maps\zombie_moon_wasteland;
 
 teleporter_function(name) {
-  teleporter = getEnt(name, "targetname");
+  teleporter = getent(name, "targetname");
   teleport_time = 0;
   str = name + "_bottom_name";
   fx_bottom = getstruct(str, "targetname");
@@ -75,17 +75,16 @@ teleporter_function(name) {
     wait(0.5);
   }
 }
-
 valid_players_teleport() {
   players = get_players();
   valid_players = 0;
   for(i = 0; i < players.size; i++) {
-    if(is_player_teleport_valid(players[i]))
+    if(is_player_teleport_valid(players[i])) {
       valid_players += 1;
+    }
   }
   return valid_players;
 }
-
 is_player_teleport_valid(player) {
   if(!isDefined(player)) {
     return false;
@@ -93,7 +92,7 @@ is_player_teleport_valid(player) {
   if(!IsAlive(player)) {
     return false;
   }
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
   if(player.sessionstate == "spectator") {
@@ -107,7 +106,6 @@ is_player_teleport_valid(player) {
   }
   return true;
 }
-
 get_teleporter_target_positions(teleporter_ent, name) {
   target_positions = [];
   if((isDefined(teleporter_ent.script_noteworthy)) && (teleporter_ent.script_noteworthy == "enter_no_mans_land")) {
@@ -125,15 +123,13 @@ get_teleporter_target_positions(teleporter_ent, name) {
   }
   return (target_positions);
 }
-
 get_teleporter_dest_ent_name() {
   index = level.nml_teleporter_dest_index;
   str = level.nml_teleporter_dest_names[index];
   return (str);
 }
-
 teleport_player_to_target(player, target_positions) {
-  player_index = player getEntityNumber();
+  player_index = player GetEntityNumber();
   target_ent = undefined;
   for(i = 0; i < target_positions.size; i++) {
     if(isDefined(target_positions[i].script_int) && target_positions[i].script_int == player_index + 1) {
@@ -156,14 +152,12 @@ teleport_player_to_target(player, target_positions) {
     level thread turn_override_off();
   }
 }
-
 turn_override_off() {
   level notify("no_multiple_overrides");
   level endon("no_multiple_overrides");
   wait(15);
   level.skit_vox_override = false;
 }
-
 teleporter_starting(teleporter_ent) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -176,7 +170,6 @@ teleporter_starting(teleporter_ent) {
     if(teleporter_ent.script_noteworthy == "enter_no_mans_land") {}
   }
 }
-
 teleporter_check_for_endgame() {
   level waittill_any("end_game", "track_nml_time");
   level.nml_best_time = GetTime() - level.nml_start_time;
@@ -196,7 +189,6 @@ teleporter_check_for_endgame() {
     level.nml_jugg = 44;
   }
 }
-
 display_time_survived() {
   players = get_players();
   level.nml_best_time = GetTime() - level.nml_start_time;
@@ -245,7 +237,6 @@ display_time_survived() {
   }
   level.left_nomans_land = 2;
 }
-
 teleporter_ending(teleporter_ent, was_aborted) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -297,19 +288,18 @@ teleporter_ending(teleporter_ent, was_aborted) {
     }
   }
 }
-
 teleporter_to_nml_init() {
   level.teleporter_to_nml_gate_height = 140;
-  level.teleporter_to_nml_gate_ent = getEnt("teleporter_gate", "targetname");
+  level.teleporter_to_nml_gate_ent = getent("teleporter_gate", "targetname");
   level.teleporter_to_nml_gate_open = 0;
   level.teleporter_to_nml_powerdown_time = 120;
-  level.teleporter_to_nml_gate2_ent = getEnt("teleporter_gate_top", "targetname");
+  level.teleporter_to_nml_gate2_ent = getent("teleporter_gate_top", "targetname");
   level.teleporter_to_nml_gate2_height = 256;
-  level.teleporter_exit_nml_gate_ent = getEnt("bunker_gate", "targetname");
+  level.teleporter_exit_nml_gate_ent = getent("bunker_gate", "targetname");
   level.teleporter_exit_nml_gate_height = -195;
   level.teleporter_exit_nml_gate_open = 1;
   level.teleporter_exit_nml_powerdown_time = 75;
-  level.teleporter_exit_nml_gate2_ent = getEnt("bunker_gate_2", "targetname");
+  level.teleporter_exit_nml_gate2_ent = getent("bunker_gate_2", "targetname");
   level.teleporter_exit_nml_gate2_height = -96;
   level.teleporter_gate_move_time = 3;
   init_teleporter_lights();
@@ -317,11 +307,9 @@ teleporter_to_nml_init() {
   level thread teleporter_exit_nml_think();
   level thread teleporter_waiting_for_electric();
 }
-
 teleporter_waiting_for_electric() {
   teleporter_to_nml_gate_move(1);
 }
-
 teleporter_to_nml_gate_move(open_it) {
   if((level.teleporter_to_nml_gate_open && open_it) || (!level.teleporter_to_nml_gate_open && !open_it)) {
     return;
@@ -339,10 +327,10 @@ teleporter_to_nml_gate_move(open_it) {
   ent playSound("amb_teleporter_gate_start");
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
-  ent moveTo(pos, time, accel, accel);
+  ent moveto(pos, time, accel, accel);
   ent thread play_stopmoving_sounds();
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] + gate_height);
-  ent2 moveTo(pos2, time, accel, accel);
+  ent2 moveto(pos2, time, accel, accel);
   if(open_it) {
     ent connectpaths();
   } else {
@@ -354,7 +342,6 @@ teleporter_to_nml_gate_move(open_it) {
     teleporter_lights_red();
   }
 }
-
 init_teleporter_lights() {
   level.teleporter_lights = [];
   level.teleporter_lights[level.teleporter_lights.size] = "zapper_teleport_opening_1";
@@ -362,19 +349,16 @@ init_teleporter_lights() {
   level.teleporter_lights[level.teleporter_lights.size] = "zapper_teleport_opening_3";
   level.teleporter_lights[level.teleporter_lights.size] = "zapper_teleport_opening_4";
 }
-
 teleporter_lights_red() {
   for(i = 0; i < level.teleporter_lights.size; i++) {
     zapper_light_red(level.teleporter_lights[i], "targetname");
   }
 }
-
 teleporter_lights_green() {
   for(i = 0; i < level.teleporter_lights.size; i++) {
     zapper_light_green(level.teleporter_lights[i], "targetname");
   }
 }
-
 teleporter_to_nml_power_down() {
   teleporter_to_nml_gate_move(0);
   if(flag("teleporter_used") && is_true(level.first_teleporter_use)) {
@@ -428,7 +412,6 @@ teleporter_to_nml_power_down() {
     wait(1);
   }
 }
-
 teleporter_exit_nml_think() {
   wait(3);
   level thread teleporter_exit_nml_gate_move(0);
@@ -446,7 +429,6 @@ teleporter_exit_nml_think() {
     level thread teleporter_exit_nml_gate_move(0);
   }
 }
-
 teleporter_exit_nml_gate_move(open_it) {
   if((level.teleporter_exit_nml_gate_open && open_it) || (!level.teleporter_exit_nml_gate_open && !open_it)) {
     return;
@@ -465,9 +447,9 @@ teleporter_exit_nml_gate_move(open_it) {
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   ent2 = level.teleporter_exit_nml_gate2_ent;
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] - gate2_height);
-  ent2 moveTo(pos2, time, accel, accel);
+  ent2 moveto(pos2, time, accel, accel);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
-  ent moveTo(pos, time, accel, accel);
+  ent moveto(pos, time, accel, accel);
   ent thread play_stopmoving_sounds();
   if(open_it) {
     ent connectpaths();
@@ -476,9 +458,8 @@ teleporter_exit_nml_gate_move(open_it) {
     ent disconnectpaths();
   }
 }
-
 play_stopmoving_sounds() {
   self waittill("movedone");
-  self stopLoopSound(.5);
+  self stoploopsound(.5);
   self playSound("amb_teleporter_gate_stop");
 }

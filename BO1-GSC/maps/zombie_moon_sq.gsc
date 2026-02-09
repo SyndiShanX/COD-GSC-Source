@@ -50,13 +50,11 @@ init() {
   maps\zombie_moon_sq_be::init();
   precache_sidequest_assets();
 }
-
 reward() {
   level notify("moon_sidequest_achieved");
   players = get_players();
   array_thread(players, ::give_perk_reward);
 }
-
 watch_for_respawn() {
   self endon("disconnect");
   while(1) {
@@ -65,7 +63,6 @@ watch_for_respawn() {
     self SetMaxHealth(level.zombie_vars["zombie_perk_juggernaut_health"]);
   }
 }
-
 give_perk_reward() {
   if(isDefined(self._retain_perks)) {
     return;
@@ -87,7 +84,6 @@ give_perk_reward() {
   self._retain_perks = true;
   self thread watch_for_respawn();
 }
-
 start_moon_sidequest() {
   flag_wait("all_players_spawned");
   while(level._num_overriden_models < (GetNumExpectedPlayers())) {
@@ -95,14 +91,13 @@ start_moon_sidequest() {
   }
   sidequest_start("sq");
 }
-
 init_sidequest() {
   players = get_players();
   level._all_previous_done = false;
   level._zombiemode_sidequest_icon_offset = -32;
   for(i = 0; i < players.size; i++) {
-    entnum = players[i] getEntityNumber();
-    PrintLn("** entnum " + entnum);
+    entnum = players[i] GetEntityNumber();
+    PrintLn("**** entnum " + entnum);
     if(isDefined(players[i].zm_random_char)) {
       entnum = players[i].zm_random_char;
     }
@@ -137,7 +132,6 @@ init_sidequest() {
   }
   level thread rocket_raise();
 }
-
 rocket_test() {
   flag_wait("power_on");
   wait(5);
@@ -148,7 +142,6 @@ rocket_test() {
   level notify("rl");
   level thread do_launch();
 }
-
 rocket_raise(player_num) {
   rockets = getEntArray("vista_rocket", "targetname");
   array_thread(rockets, ::nml_show_hide);
@@ -157,24 +150,22 @@ rocket_raise(player_num) {
     level clientnotify("R_R");
     rockets[i] playSound("evt_rocket_move_up");
     s = getstruct(rockets[i].target, "targetname");
-    rockets[i] moveTo(s.origin, 4);
+    rockets[i] MoveTo(s.origin, 4);
     rockets[i] RotateTo((0, 0, 0), 4);
   }
   level waittill("rl");
   array_thread(rockets, ::launch);
 }
-
 nml_show_hide() {
   level endon("intermission");
   self endon("death");
   while(1) {
     flag_wait("enter_nml");
-    self hide();
+    self Hide();
     flag_waitopen("enter_nml");
     self Show();
   }
 }
-
 launch() {
   level clientnotify("R_L");
   wait(RandomFloatRange(0.1, 1));
@@ -208,7 +199,6 @@ launch() {
     origin_animate Delete();
   }
 }
-
 sidequest_logic() {
   level thread sq_flatcard_logic();
   flag_wait("power_on");
@@ -229,7 +219,6 @@ sidequest_logic() {
   flag_wait("be2");
   level thread do_launch();
 }
-
 do_launch() {
   play_sound_2d("vox_xcomp_quest_step8_4");
   wait(10);
@@ -250,7 +239,6 @@ do_launch() {
   level thread play_end_lines_in_order();
   reward();
 }
-
 play_end_lines_in_order() {
   level.skit_vox_override = true;
   players = get_players();
@@ -282,11 +270,10 @@ play_end_lines_in_order() {
   }
   level.skit_vox_override = false;
 }
-
 get_specific_player(num) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    ent_num = players[i] getEntityNumber();
+    ent_num = players[i] GetEntityNumber();
     if(isDefined(players[i].zm_random_char)) {
       ent_num = players[i].zm_random_char;
     }
@@ -296,7 +283,6 @@ get_specific_player(num) {
   }
   return undefined;
 }
-
 maxis_story_vox() {
   s = getstruct("sq_vg_final", "targetname");
   level.skit_vox_override = true;
@@ -308,14 +294,12 @@ maxis_story_vox() {
   level.skit_vox_override = false;
   stage_start("sq", "ss2");
 }
-
 be() {
   stage_start("be", "stage_one");
   level waittill("sq_sc2_over");
   wait(2.0);
   stage_start("be", "stage_two");
 }
-
 tanks() {
   flag_wait("complete_be_1");
   wait(4.0);
@@ -324,39 +308,33 @@ tanks() {
   flag_wait("vg_charged");
   stage_start("tanks", "ctt2");
 }
-
 cassimir() {
   stage_start("ctvg", "build");
   level waittill("ctvg_build_over");
   wait(5.0);
   stage_start("ctvg", "charge");
 }
-
 cheat_complete_stage() {
   level endon("reset_sundial");
   while(1) {
     if(getDvar("cheat_sq") != "") {
       if(isDefined(level._last_stage_started)) {
-        SetDvar("cheat_sq", "");
+        setDvar("cheat_sq", "");
         stage_completed("sq", level._last_stage_started);
       }
     }
     wait(0.1);
   }
 }
-
 generic_stage_start() {
   level._stage_active = true;
 }
-
 generic_stage_complete() {
   level._stage_active = false;
 }
-
 complete_sidequest() {
   level thread sidequest_done();
 }
-
 sidequest_done() {}
 get_variant_from_entity_num(player_number) {
   if(!isDefined(player_number)) {
@@ -379,7 +357,6 @@ get_variant_from_entity_num(player_number) {
   }
   return post_fix;
 }
-
 sq_flatcard_logic() {
   nml_set = false;
   while(true) {

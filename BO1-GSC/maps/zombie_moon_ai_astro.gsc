@@ -11,15 +11,13 @@
 init() {
   level.astro_zombie_enter_level = ::moon_astro_enter_level;
 }
-
 zombie_set_fake_playername() {
   self SetHUDWarningType("zombie_friend");
   self setzombiename("SpaceZom");
 }
-
 moon_astro_enter_level() {
   self endon("death");
-  self hide();
+  self Hide();
   self.entered_level = true;
   astro_struct = self moon_astro_get_spawn_struct();
   if(isDefined(astro_struct)) {
@@ -36,7 +34,6 @@ moon_astro_enter_level() {
   wait_network_frame();
   self Show();
 }
-
 play_line_if_player_can_see() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -49,7 +46,6 @@ play_line_if_player_can_see() {
     }
   }
 }
-
 moon_astro_get_spawn_struct() {
   keys = GetArrayKeys(level.zones);
   for(i = 0; i < level.zones.size; i++) {

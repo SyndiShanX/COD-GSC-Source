@@ -13,7 +13,7 @@ friendly_visibility_logic() {
   self endon("pain_death");
   var_0 = self._stealth.logic.current_stance_func;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     thread player_movespeed_calc_loop();
 
   for(;;) {
@@ -183,7 +183,7 @@ friendly_init() {
   self._stealth = spawnStruct();
   self._stealth.logic = spawnStruct();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
 

@@ -700,27 +700,27 @@ function function_161eeb8e(cmd) {
 
 function setup_devgui() {
   level.var_6708aa9c = 0;
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -748,114 +748,114 @@ function setup_devgui() {
 function function_58ab8a92() {
   while(true) {
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_797b2641();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_9d5d7bb3(0);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_9d5d7bb3(1);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_9d5d7bb3(2);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_9d5d7bb3(3);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_9d5d7bb3(4);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       level thread function_5b312f();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_f0357d95();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_d360e7c6();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_d9e82452();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_b8df7e30(1);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_b8df7e30(0);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_83393018(0);
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_83393018(1);
     }
     if(getdvarstring("") == "") {
       level.var_ee92e6f7 = 1;
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_55336afe();
     }
     if(getdvarstring("") == "") {
       level.var_ee92e6f7 = 1;
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_c0e05145();
     }
     if(getdvarstring("") == "") {
       level.var_ee92e6f7 = 1;
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_c28796c3();
     }
     if(getdvarstring("") == "") {
       level.var_ee92e6f7 = 1;
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_f567fa2e();
     }
     if(getdvarstring("") == "") {
       level.var_ee92e6f7 = 1;
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_502e7927();
     }
     if(getdvarstring("") == "") {
       level.var_ee92e6f7 = 1;
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_a53ed1da();
     }
     if(getdvarstring("") == "") {
       level.var_ee92e6f7 = 1;
-      setdvar("", "");
+      setDvar("", "");
       iprintlnbold("");
       function_8a5ca1ef();
     }

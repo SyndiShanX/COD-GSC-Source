@@ -47,7 +47,6 @@ _id_40BF() {
 
   if(var_1 < 0) {
     var_2 = self.a;
-
   }
   var_1 = abs(1 - abs(var_1));
   self._id_40C1 = physicstrace(self._id_1F49, self._id_1F49 + (0, 0, -80))[2];
@@ -83,13 +82,11 @@ _id_40C5(var_0) {
     var_2 = self.up;
   } else {
     var_2 = vectorfromlinetopoint(self.a, self.b, var_0);
-
   }
   var_3 = var_0[2] - self._id_40C1;
 
   if(var_3 < 0.02) {
     var_3 = 0;
-
   }
   var_4 = var_3 / (self._id_40C2 - self._id_40C1) * self._id_1542;
 

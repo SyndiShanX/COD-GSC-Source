@@ -498,7 +498,7 @@ dog_health_regen() {
 }
 
 trackattackerdamage(attacker, weapon) {
-  if(!isDefined(attacker) || !isplayer(attacker) || !isDefined(self.script_owner)) {
+  if(!isDefined(attacker) || !isPlayer(attacker) || !isDefined(self.script_owner)) {
     return;
   }
   if(level.teambased && attacker.team == self.script_owner.team || attacker == self) {
@@ -541,7 +541,7 @@ dog_health_regen_think(delay, interval, regen_interval) {
 selfdefensechallenge() {
   self waittill("death", attacker);
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(self.script_owner) && self.script_owner == attacker) {
       return;
     }
@@ -575,7 +575,7 @@ flash_dogs(area) {
     if(dog istouching(area)) {
       do_flash = 1;
 
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         if(level.teambased && dog.aiteam == self.team)
           do_flash = 0;
         else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner)
@@ -594,11 +594,11 @@ flash_dogs(area) {
 }
 
 devgui_dog_think() {
-  setdvar("devgui_dog", "");
+  setDvar("devgui_dog", "");
   debug_patrol = 0;
 
   for(;;) {
-    cmd = getdvar(#"devgui_dog");
+    cmd = getDvar(#"devgui_dog");
 
     switch (cmd) {
       case "spawn_friendly":
@@ -640,11 +640,10 @@ devgui_dog_think() {
     }
 
     if(cmd != "")
-      setdvar("devgui_dog", "");
+      setDvar("devgui_dog", "");
 
     wait 0.5;
   }
-
 }
 
 devgui_dog_spawn(team) {
@@ -679,7 +678,6 @@ devgui_dog_spawn(team) {
     dog clearentityowner();
     dog notify("clear_owner");
   }
-
 }
 
 devgui_dog_camera() {
@@ -729,7 +727,6 @@ devgui_dog_camera() {
     level.devgui_dog_camera = undefined;
     player cameraactivate(0);
   }
-
 }
 
 devgui_crate_spawn() {
@@ -802,7 +799,6 @@ dog_debug_patrol(node1, node2) {
     self waittill_any("goal", "bad_path");
     wait 1;
   }
-
 }
 
 devgui_debug_route() {
@@ -821,5 +817,4 @@ devgui_debug_route() {
     dogs[0] notify("debug_patrol");
     dogs[0] thread dog_debug_patrol(nodes[0], nodes[1]);
   }
-
 }

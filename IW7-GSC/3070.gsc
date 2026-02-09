@@ -737,7 +737,7 @@ isnondismemberedmeleevsplayer(var_0) {
     return level.failure;
   }
 
-  if(!isplayer(self.melee.target)) {
+  if(!isPlayer(self.melee.target)) {
     return level.failure;
   }
 

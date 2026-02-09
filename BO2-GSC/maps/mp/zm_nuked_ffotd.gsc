@@ -18,7 +18,7 @@ main_start() {
 }
 
 main_end() {
-  setdvar("zombiemode_path_minz_bias", 28);
+  setDvar("zombiemode_path_minz_bias", 28);
   collision7 = spawn("script_model", (-490, 963, 63));
   collision7 setModel("collision_player_256x256x10");
   collision7.angles = (0, 25.2, -90);

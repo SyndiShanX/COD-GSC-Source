@@ -50,7 +50,7 @@ player_fails_if_he_kills_me(damage, attacker, direction_vec, point, type, modelN
 
   wait(1);
   // Friendly fire will not be tolerated!
-  SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+  setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
   maps\_utility::missionFailedWrapper();
 }
 
@@ -417,7 +417,6 @@ front_vehicle() {
     flag_wait("player_humvee_stops_for_officers");
     wait(3);
     self Vehicle_SetSpeed(0, 10, 10);
-
   }
 
   flag_wait("slam_hood");
@@ -621,7 +620,6 @@ bridge_layer_think() {
       }
       wait(0.05);
     }
-
   } else {
     org thread anim_single(guys, "bridge_lower");
 
@@ -820,7 +818,7 @@ fail_if_player_doesnt_defend_bridge() {
 
 bridge_layer_explodes() {
   // The bridge layer was destroyed.
-  SetDvar("ui_deadquote", &"ROADKILL_BRIDGELAYER_DESTROYED");
+  setDvar("ui_deadquote", &"ROADKILL_BRIDGELAYER_DESTROYED");
   delayThread(3, ::missionFailedWrapper);
 
   explosion_fx = getfx("bmp_explosion");
@@ -2691,7 +2689,6 @@ ride_killer() {
     if(!isDefined(guy.dont_ride_kill))
       guy Kill();
   }
-
 }
 
 friendly_crash_think() {
@@ -2784,7 +2781,6 @@ roadkill_ride_kill_drones() {
     else
       drone Delete();
   }
-
 }
 
 die_after_awhile() {
@@ -3226,7 +3222,8 @@ axis_flee_riverbank()
 			{
 				touching_house = true;
 				break;
-			}	
+			}
+	
 		}
 
 		if( touching_house )
@@ -3934,7 +3931,7 @@ fail_player_for_excessive_firing() {
   }
 
   // An unsanctioned discharge will not be tolerated.
-  SetDvar("ui_deadquote", &"ROADKILL_SHOT_TOO_MUCH");
+  setDvar("ui_deadquote", &"ROADKILL_SHOT_TOO_MUCH");
   missionFailedWrapper();
 }
 
@@ -4048,7 +4045,6 @@ roadkill_bomb_physics_explosion() {
 
     wait(0.05);
   }
-
 }
 
 street_walk_scene() {
@@ -4367,7 +4363,7 @@ player_dies_to_attackers() {
   eyepos = level.player getEye();
   org = undefined;
 
-  SetDvar("ui_deadquote", &"ROADKILL_GOT_SNIPED");
+  setDvar("ui_deadquote", &"ROADKILL_GOT_SNIPED");
 
   // try to find an org that could see the player
   foreach(org in level.player_killer_orgs) {
@@ -4452,7 +4448,7 @@ riverbank_bmp_is_shot_at() {
 
     oldHealth = self.health;
     self waittill("damage", dmg, attacker, one, two, weapType);
-    if(isDefined(attacker.classname) && !isplayer(attacker)) {
+    if(isDefined(attacker.classname) && !isPlayer(attacker)) {
       self.health = oldHealth;
       continue;
     }
@@ -6554,7 +6550,7 @@ shepdamage_bullet_thread() {
     self waittill("bullethit", other);
     if(other == level.player) {
       // Friendly fire will not be tolerated!
-      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+      setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
       missionfailedwrapper();
     }
   }
@@ -6570,7 +6566,7 @@ shepdamage_damage_thread() {
     }
     if(attacker == level.player) {
       // Friendly fire will not be tolerated!
-      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+      setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
       missionfailedwrapper();
     }
   }
@@ -7271,7 +7267,7 @@ civ_hit(amt, attacker, force, b, c, d, e) {
   }
   wait(1.5);
   // You are not authorized to fire on unarmed targets.
-  SetDvar("ui_deadquote", &"ROADKILL_SHOT_UNARMED");
+  setDvar("ui_deadquote", &"ROADKILL_SHOT_UNARMED");
   missionFailedWrapper();
 }
 
@@ -7490,7 +7486,6 @@ other_two_guys_say_huah() {
     if(index >= lines.size)
       return;
   }
-
 }
 
 foley_gets_eyes_on_school_dialogue() {
@@ -7522,7 +7517,6 @@ school_badguy_cleanup() {
   foreach(guy in ai) {
     guy delete();
   }
-
 }
 
 arab_line(msg) {

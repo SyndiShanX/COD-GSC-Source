@@ -6,7 +6,7 @@
 #namespace loot;
 
 function_13afbf2d(lootid, name) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

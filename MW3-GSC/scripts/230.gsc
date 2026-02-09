@@ -4,15 +4,13 @@
 **************************************/
 
 main() {
-  if(getdvar("scr_cmd_plr_sun") == "") {}
+  if(getDvar("scr_cmd_plr_sun") == "") {}
 
-  if(getdvar("scr_dof_enable") == "") {
+  if(getDvar("scr_dof_enable") == "") {
     setsaveddvar("scr_dof_enable", "1");
-
   }
-  if(getdvar("scr_cinematic_autofocus") == "") {
-    setdvar("scr_cinematic_autofocus", "1");
-
+  if(getDvar("scr_cinematic_autofocus") == "") {
+    setDvar("scr_cinematic_autofocus", "1");
   }
   setdvarifuninitialized("scr_glowTweakEnable", 1);
   setdvarifuninitialized("scr_glowTweakRadius0", 7);
@@ -46,7 +44,6 @@ main() {
 
   if(!isDefined(level._id_1AE1)) {
     level._id_1AE1 = [];
-
   }
   if(!isDefined(level._id_1AE2)) {
     level._id_1AE2 = spawnStruct();
@@ -75,7 +72,7 @@ main() {
   thread tweakart();
 
   if(!isDefined(level.script)) {
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
   }
 }
 
@@ -86,15 +83,12 @@ _id_1AE7(var_0, var_1) {
 
   if(!var_2) {
     var_2 = level.player buttonpressed(var_1);
-
   }
   if(!isDefined(level._id_1AE0[var_0])) {
     level._id_1AE0[var_0] = 0;
-
   }
   if(gettime() < level._id_1AE0[var_0]) {
     return 0;
-
   }
   level._id_1AE0[var_0] = gettime() + 400;
   return var_2;
@@ -103,7 +97,6 @@ _id_1AE7(var_0, var_1) {
 _id_1AE8(var_0) {
   if(!isDefined(level._id_1AE1)) {
     level._id_1AE1 = [];
-
   }
   var_1 = spawnStruct();
   var_1.name = var_0;
@@ -167,84 +160,81 @@ _id_1AF8() {
   if(!isDefined(var_0._id_1AF9)) {
     return;
   }
-  var_0._id_1AFA = getdvar("r_glowTweakEnable");
-  var_0._id_1AFB = getdvar("r_glowTweakRadius0");
-  var_0._id_1AFC = getdvar("r_glowTweakBloomCutoff");
-  var_0._id_1AFD = getdvar("r_glowTweakBloomDesaturation");
-  var_0._id_1AFE = getdvar("r_glowTweakBloomIntensity0");
-  var_0._id_1AFF = getdvar("r_filmTweakEnable");
-  var_0._id_1B00 = getdvar("r_filmTweakContrast");
-  var_0._id_1B01 = getdvar("r_filmTweakBrightness");
-  var_0._id_1B02 = getdvar("r_filmTweakDesaturation");
-  var_0._id_1B03 = getdvar("r_filmTweakDesaturationDark");
-  var_0._id_1B04 = getdvar("r_filmTweakInvert");
-  var_0._id_1B05 = getdvar("r_filmTweakLightTint");
-  var_0._id_1B06 = getdvar("r_filmTweakMediumTint");
-  var_0._id_1B07 = getdvar("r_filmTweakDarkTint");
-  var_0._id_1B08 = getdvar("r_primaryLightUseTweaks");
-  var_0._id_1B09 = getdvar("r_primaryLightTweakDiffuseStrength");
-  var_0._id_1B0A = getdvar("r_primaryLightTweakSpecularStrength");
+  var_0._id_1AFA = getDvar("r_glowTweakEnable");
+  var_0._id_1AFB = getDvar("r_glowTweakRadius0");
+  var_0._id_1AFC = getDvar("r_glowTweakBloomCutoff");
+  var_0._id_1AFD = getDvar("r_glowTweakBloomDesaturation");
+  var_0._id_1AFE = getDvar("r_glowTweakBloomIntensity0");
+  var_0._id_1AFF = getDvar("r_filmTweakEnable");
+  var_0._id_1B00 = getDvar("r_filmTweakContrast");
+  var_0._id_1B01 = getDvar("r_filmTweakBrightness");
+  var_0._id_1B02 = getDvar("r_filmTweakDesaturation");
+  var_0._id_1B03 = getDvar("r_filmTweakDesaturationDark");
+  var_0._id_1B04 = getDvar("r_filmTweakInvert");
+  var_0._id_1B05 = getDvar("r_filmTweakLightTint");
+  var_0._id_1B06 = getDvar("r_filmTweakMediumTint");
+  var_0._id_1B07 = getDvar("r_filmTweakDarkTint");
+  var_0._id_1B08 = getDvar("r_primaryLightUseTweaks");
+  var_0._id_1B09 = getDvar("r_primaryLightTweakDiffuseStrength");
+  var_0._id_1B0A = getDvar("r_primaryLightTweakSpecularStrength");
 }
 
 fovslidercheck() {
   if(level._id_1436["nearStart"] >= level._id_1436["nearEnd"]) {
     level._id_1436["nearStart"] = level._id_1436["nearEnd"] - 1;
-    setdvar("scr_dof_nearStart", level._id_1436["nearStart"]);
+    setDvar("scr_dof_nearStart", level._id_1436["nearStart"]);
   }
 
   if(level._id_1436["nearEnd"] <= level._id_1436["nearStart"]) {
     level._id_1436["nearEnd"] = level._id_1436["nearStart"] + 1;
-    setdvar("scr_dof_nearEnd", level._id_1436["nearEnd"]);
+    setDvar("scr_dof_nearEnd", level._id_1436["nearEnd"]);
   }
 
   if(level._id_1436["farStart"] >= level._id_1436["farEnd"]) {
     level._id_1436["farStart"] = level._id_1436["farEnd"] - 1;
-    setdvar("scr_dof_farStart", level._id_1436["farStart"]);
+    setDvar("scr_dof_farStart", level._id_1436["farStart"]);
   }
 
   if(level._id_1436["farEnd"] <= level._id_1436["farStart"]) {
     level._id_1436["farEnd"] = level._id_1436["farStart"] + 1;
-    setdvar("scr_dof_farEnd", level._id_1436["farEnd"]);
+    setDvar("scr_dof_farEnd", level._id_1436["farEnd"]);
   }
 
   if(level._id_1436["farBlur"] >= level._id_1436["nearBlur"]) {
     level._id_1436["farBlur"] = level._id_1436["nearBlur"] - 0.1;
-    setdvar("scr_dof_farBlur", level._id_1436["farBlur"]);
+    setDvar("scr_dof_farBlur", level._id_1436["farBlur"]);
   }
 
   if(level._id_1436["farStart"] <= level._id_1436["nearEnd"]) {
     level._id_1436["farStart"] = level._id_1436["nearEnd"] + 1;
-    setdvar("scr_dof_farStart", level._id_1436["farStart"]);
+    setDvar("scr_dof_farStart", level._id_1436["farStart"]);
   }
 }
 
 _id_1B0C() {
   if(level.sunfogbeginfadeangle >= level.sunfogendfadeangle) {
     level.sunfogbeginfadeangle = level.sunfogendfadeangle - 1;
-    setdvar("scr_sunFogBeginFadeAngle", level.sunfogbeginfadeangle);
+    setDvar("scr_sunFogBeginFadeAngle", level.sunfogbeginfadeangle);
   }
 
   if(level.sunfogendfadeangle <= level.sunfogbeginfadeangle) {
     level.sunfogendfadeangle = level.sunfogbeginfadeangle + 1;
-    setdvar("scr_sunFogEndFadeAngle", level.sunfogendfadeangle);
+    setDvar("scr_sunFogEndFadeAngle", level.sunfogendfadeangle);
   }
 }
 
 _id_1B0D() {
   if(!isDefined(level._id_1AE4)) {
     level._id_1AE4 = [];
-
   }
   var_0 = getEntArray("trigger_multiple_visionset", "classname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_visionset)) {
       _id_1B10(var_2.script_visionset);
-
     }
     if(isDefined(var_2._id_1B0E)) {
       _id_1B10(var_2._id_1B0E);
-
     }
     if(isDefined(var_2._id_1B0F)) {
       _id_1B10(var_2._id_1B0F);
@@ -280,27 +270,27 @@ _id_1B15() {
   if(!isDefined(var_0.name)) {
     return;
   }
-  common_scripts\utility::fileprint_launcher_start_file();
-  common_scripts\utility::fileprint_launcher("r_glow\"" + getdvar("r_glowTweakEnable") + "\"");
-  common_scripts\utility::fileprint_launcher("r_glowRadius0 \"" + getdvar("r_glowTweakRadius0") + "\"");
-  common_scripts\utility::fileprint_launcher("r_glowBloomCutoff \"" + getdvar("r_glowTweakBloomCutoff") + "\"");
-  common_scripts\utility::fileprint_launcher("r_glowBloomDesaturation \"" + getdvar("r_glowTweakBloomDesaturation") + "\"");
-  common_scripts\utility::fileprint_launcher("r_glowBloomIntensity0 \"" + getdvar("r_glowTweakBloomIntensity0") + "\"");
-  common_scripts\utility::fileprint_launcher(" ");
-  common_scripts\utility::fileprint_launcher("r_filmEnable\"" + getdvar("r_filmTweakEnable") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmContrast\"" + getdvar("r_filmTweakContrast") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmBrightness\"" + getdvar("r_filmTweakBrightness") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmDesaturation\"" + getdvar("r_filmTweakDesaturation") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmDesaturationDark\"" + getdvar("r_filmTweakDesaturationDark") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmInvert\"" + getdvar("r_filmTweakInvert") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmLightTint \"" + getdvar("r_filmTweakLightTint") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmMediumTint\"" + getdvar("r_filmTweakMediumTint") + "\"");
-  common_scripts\utility::fileprint_launcher("r_filmDarkTint\"" + getdvar("r_filmTweakDarkTint") + "\"");
-  common_scripts\utility::fileprint_launcher(" ");
-  common_scripts\utility::fileprint_launcher("r_primaryLightUseTweaks\"" + getdvar("r_primaryLightUseTweaks") + "\"");
-  common_scripts\utility::fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + getdvar("r_primaryLightTweakDiffuseStrength") + "\"");
-  common_scripts\utility::fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + getdvar("r_primaryLightTweakSpecularStrength") + "\"");
-  common_scripts\utility::fileprint_launcher_end_file("\\share\\raw\\vision\\" + var_0.name + ".vision", 1);
+  common_scripts\utility:: fileprint_launcher_start_file();
+    common_scripts\utility:: fileprint_launcher("r_glow\"" + getDvar("r_glowTweakEnable") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_glowRadius0 \"" + getDvar("r_glowTweakRadius0") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_glowBloomCutoff \"" + getDvar("r_glowTweakBloomCutoff") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_glowBloomDesaturation \"" + getDvar("r_glowTweakBloomDesaturation") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_glowBloomIntensity0 \"" + getDvar("r_glowTweakBloomIntensity0") + "\"");
+    common_scripts\utility:: fileprint_launcher(" ");
+    common_scripts\utility:: fileprint_launcher("r_filmEnable\"" + getDvar("r_filmTweakEnable") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmContrast\"" + getDvar("r_filmTweakContrast") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmBrightness\"" + getDvar("r_filmTweakBrightness") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmDesaturation\"" + getDvar("r_filmTweakDesaturation") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmDesaturationDark\"" + getDvar("r_filmTweakDesaturationDark") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmInvert\"" + getDvar("r_filmTweakInvert") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmLightTint \"" + getDvar("r_filmTweakLightTint") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmMediumTint\"" + getDvar("r_filmTweakMediumTint") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_filmDarkTint\"" + getDvar("r_filmTweakDarkTint") + "\"");
+    common_scripts\utility:: fileprint_launcher(" ");
+    common_scripts\utility:: fileprint_launcher("r_primaryLightUseTweaks\"" + getDvar("r_primaryLightUseTweaks") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + getDvar("r_primaryLightTweakDiffuseStrength") + "\"");
+    common_scripts\utility:: fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + getDvar("r_primaryLightTweakSpecularStrength") + "\"");
+    common_scripts\utility:: fileprint_launcher_end_file("\\share\\raw\\vision\\" + var_0.name + ".vision", 1);
 }
 
 _id_1B16() {
@@ -308,69 +298,54 @@ _id_1B16() {
     if(!isDefined(var_1.name)) {
       continue;
     }
-    common_scripts\utility::fileprint_launcher("\tent = maps\\_utility::create_vision_set_fog( \"" + var_1.name + "\" );");
+    common_scripts\utility:: fileprint_launcher("\tent = maps\\_utility::create_vision_set_fog( \"" + var_1.name + "\" );");
 
-    if(isDefined(var_1.startdist)) {
-      common_scripts\utility::fileprint_launcher("\tent.startDist = " + var_1.startdist + ";");
-
-    }
+      if(isDefined(var_1.startdist)) {
+        common_scripts\utility:: fileprint_launcher("\tent.startDist = " + var_1.startdist + ";");
+      }
     if(isDefined(var_1.halfwaydist)) {
-      common_scripts\utility::fileprint_launcher("\tent.halfwayDist = " + var_1.halfwaydist + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.halfwayDist = " + var_1.halfwaydist + ";");
     }
     if(isDefined(var_1.red)) {
-      common_scripts\utility::fileprint_launcher("\tent.red = " + var_1.red + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.red = " + var_1.red + ";");
     }
     if(isDefined(var_1.green)) {
-      common_scripts\utility::fileprint_launcher("\tent.green = " + var_1.green + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.green = " + var_1.green + ";");
     }
     if(isDefined(var_1.blue)) {
-      common_scripts\utility::fileprint_launcher("\tent.blue = " + var_1.blue + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.blue = " + var_1.blue + ";");
     }
     if(isDefined(var_1.maxopacity)) {
-      common_scripts\utility::fileprint_launcher("\tent.maxOpacity = " + var_1.maxopacity + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.maxOpacity = " + var_1.maxopacity + ";");
     }
     if(isDefined(var_1.transitiontime)) {
-      common_scripts\utility::fileprint_launcher("\tent.transitionTime = " + var_1.transitiontime + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.transitionTime = " + var_1.transitiontime + ";");
     }
     if(isDefined(var_1.sunfogenabled)) {
-      common_scripts\utility::fileprint_launcher("\tent.sunFogEnabled = " + var_1.sunfogenabled + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.sunFogEnabled = " + var_1.sunfogenabled + ";");
     }
     if(isDefined(var_1._id_1AF0)) {
-      common_scripts\utility::fileprint_launcher("\tent.sunRed = " + var_1._id_1AF0 + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.sunRed = " + var_1._id_1AF0 + ";");
     }
     if(isDefined(var_1._id_1AF1)) {
-      common_scripts\utility::fileprint_launcher("\tent.sunGreen = " + var_1._id_1AF1 + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.sunGreen = " + var_1._id_1AF1 + ";");
     }
     if(isDefined(var_1._id_1AF2)) {
-      common_scripts\utility::fileprint_launcher("\tent.sunBlue = " + var_1._id_1AF2 + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.sunBlue = " + var_1._id_1AF2 + ";");
     }
     if(isDefined(var_1._id_1AF3)) {
-      common_scripts\utility::fileprint_launcher("\tent.sunDir = " + var_1._id_1AF3 + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.sunDir = " + var_1._id_1AF3 + ";");
     }
     if(isDefined(var_1._id_1AF4)) {
-      common_scripts\utility::fileprint_launcher("\tent.sunBeginFadeAngle = " + var_1._id_1AF4 + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.sunBeginFadeAngle = " + var_1._id_1AF4 + ";");
     }
     if(isDefined(var_1._id_1AF5)) {
-      common_scripts\utility::fileprint_launcher("\tent.sunEndFadeAngle = " + var_1._id_1AF5 + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.sunEndFadeAngle = " + var_1._id_1AF5 + ";");
     }
     if(isDefined(var_1._id_1AF6)) {
-      common_scripts\utility::fileprint_launcher("\tent.normalFogScale = " + var_1._id_1AF6 + ";");
-
+      common_scripts\utility:: fileprint_launcher("\tent.normalFogScale = " + var_1._id_1AF6 + ";");
     }
-    common_scripts\utility::fileprint_launcher(" ");
+    common_scripts\utility:: fileprint_launcher(" ");
   }
 }
 
@@ -379,7 +354,7 @@ _id_1B17() {
     if(!isDefined(var_1.name)) {
       continue;
     }
-    common_scripts\utility::fileprint_launcher("rawfile,vision/" + var_1.name + ".vision");
+    common_scripts\utility:: fileprint_launcher("rawfile,vision/" + var_1.name + ".vision");
   }
 }
 
@@ -388,8 +363,8 @@ _id_1B18(var_0, var_1, var_2, var_3) {
   level._id_1B1A = var_1;
   level._id_1B1B = var_2;
   level._id_1B1C = var_3;
-  setdvar("r_lighttweaksunlight", level._id_1B1A);
-  setdvar("r_lighttweakdiffusefraction", level._id_1B1C);
+  setDvar("r_lighttweaksunlight", level._id_1B1A);
+  setDvar("r_lighttweakdiffusefraction", level._id_1B1C);
   var_4 = "up";
 
   for(;;) {
@@ -399,13 +374,11 @@ _id_1B18(var_0, var_1, var_2, var_3) {
 
     if(var_7) {
       var_6 = var_6 * -1;
-
     }
     if(var_4 == "up") {
       var_8 = var_5 + scale(30) + var_6;
     } else {
       var_8 = var_5 - scale(30) + var_6;
-
     }
     if(var_8 >= level._id_1B19) {
       var_8 = level._id_1B19;
@@ -434,10 +407,10 @@ _id_1B1D(var_0, var_1, var_2) {
   while(var_1 > 0) {
     var_1 = var_1 - var_2;
     var_3 = var_3 + var_5;
-    setdvar("r_lighttweaksunlight", var_3);
+    setDvar("r_lighttweaksunlight", var_3);
     var_6 = (var_3 - level._id_1B1A) / (level._id_1B19 - level._id_1B1A);
     var_7 = level._id_1B1B + (level._id_1B1C - level._id_1B1B) * var_6;
-    setdvar("r_lighttweakdiffusefraction", var_7);
+    setDvar("r_lighttweakdiffusefraction", var_7);
     wait(var_2);
   }
 }
@@ -450,10 +423,10 @@ _id_1B1E(var_0, var_1, var_2) {
   while(var_1 > 0) {
     var_1 = var_1 - var_2;
     var_3 = var_3 - var_5;
-    setdvar("r_lighttweaksunlight", var_3);
+    setDvar("r_lighttweaksunlight", var_3);
     var_6 = (var_3 - level._id_1B1A) / (level._id_1B19 - level._id_1B1A);
     var_7 = level._id_1B1B + (level._id_1B1C - level._id_1B1B) * var_6;
-    setdvar("r_lighttweakdiffusefraction", var_7);
+    setDvar("r_lighttweakdiffusefraction", var_7);
     wait(var_2);
   }
 }
@@ -517,7 +490,6 @@ _id_1B23() {
       var_15 = distance(var_6, var_2["position"]);
     } else {
       var_15 = distance(var_6, var_9);
-
     }
     _id_1B27("nearStart", 1, 200);
     _id_1B27("nearEnd", var_15, 200);
@@ -576,7 +548,6 @@ _id_1B24() {
 
     if(var_12 - 30 < var_7) {
       var_7 = var_12 - 30;
-
     }
     if(var_12 + 30 > var_8) {
       var_8 = var_12 + 30;
@@ -591,7 +562,6 @@ _id_1B24() {
       var_7 = 50;
     } else if(var_7 > 512) {
       var_7 = 512;
-
     }
     if(var_8 > 2500) {
       var_8 = 2500;
@@ -604,15 +574,12 @@ _id_1B24() {
 
   if(var_7 > var_13) {
     var_7 = var_13 - 30;
-
   }
   if(var_7 < 1) {
     var_7 = 1;
-
   }
   if(var_8 < var_13) {
     var_8 = var_13;
-
   }
   _id_1B26(var_0, 1, var_7, var_8, var_8 * 4, 6, 1.8);
 }
@@ -639,11 +606,9 @@ _id_1B25(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_11 < 2500) {
       var_11 = 2500;
-
     }
     if(var_11 - 30 < var_5) {
       var_5 = var_11 - 30;
-
     }
     if(var_11 + 30 > var_6) {
       var_6 = var_11 + 30;
@@ -656,7 +621,6 @@ _id_1B25(var_0, var_1, var_2, var_3, var_4) {
   } else {
     if(var_5 < 50) {
       var_5 = 50;
-
     }
     if(var_6 > 2500) {
       var_6 = 2500;
@@ -669,23 +633,18 @@ _id_1B25(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_12 < 2500) {
     var_12 = 2500;
-
   }
   if(var_5 > var_12) {
     var_5 = var_12 - 30;
-
   }
   if(var_5 < 1) {
     var_5 = 1;
-
   }
   if(var_6 < var_12) {
     var_6 = var_12;
-
   }
   if(var_7 >= var_5) {
     var_7 = var_5 - 1;
-
   }
   _id_1B26(var_4, var_7, var_5, var_6, var_6 * 4, 4, 1.8);
 }
@@ -718,7 +677,6 @@ _id_1B27(var_0, var_1, var_2) {
       var_3 = var_2;
     } else if(var_3 < 1) {
       var_3 = 1;
-
     }
     if(self._id_1B21[var_0] - var_3 < var_1) {
       self._id_1B21[var_0] = var_1;
@@ -734,7 +692,6 @@ _id_1B27(var_0, var_1, var_2) {
       var_3 = var_2;
     } else if(var_3 < 1) {
       var_3 = 1;
-
     }
     if(self._id_1B21[var_0] + var_3 > var_1) {
       self._id_1B21[var_0] = var_1;
@@ -768,27 +725,21 @@ _id_1B2A() {
 _id_1B2B() {
   if(level._id_1436["nearStart"] != getdvarint("scr_dof_nearStart")) {
     return 0;
-
   }
   if(level._id_1436["nearEnd"] != getdvarint("scr_dof_nearEnd")) {
     return 0;
-
   }
   if(level._id_1436["farStart"] != getdvarint("scr_dof_farStart")) {
     return 0;
-
   }
   if(level._id_1436["farEnd"] != getdvarint("scr_dof_farEnd")) {
     return 0;
-
   }
   if(level._id_1436["nearBlur"] != getdvarint("scr_dof_nearBlur")) {
     return 0;
-
   }
   if(level._id_1436["farBlur"] != getdvarint("scr_dof_farBlur")) {
     return 0;
-
   }
   return 1;
 }
@@ -815,7 +766,6 @@ _id_1B2C() {
       var_1[var_7].alpha = 1;
     } else {
       var_1[var_7].alpha = var_6;
-
     }
     var_1[var_7].x = 20;
     var_1[var_7].y = var_4;
@@ -823,7 +773,6 @@ _id_1B2C() {
 
     if(var_7 == var_3) {
       var_5 = var_5 * -1;
-
     }
     var_6 = var_6 + var_5;
     var_4 = var_4 - var_2;
@@ -866,14 +815,12 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_2)) {
     var_2 = "";
-
   }
   if(!isDefined(level._id_1B31) || !isDefined(level._id_1B31[var_0])) {
     level._id_1B31[var_0] = _id_1B34();
     var_11 = _id_1B34();
   } else {
     var_11 = level._id_1B31[var_0]._id_1B32;
-
   }
   level._id_1B31[var_0].location = 0;
   level._id_1B31[var_0].alignx = "right";
@@ -898,11 +845,9 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_11 setvalue(var_4);
-
   }
   if(isDefined(var_3)) {
     var_11 _id_1B36(var_3);
-
   }
   level._id_1B31[var_0]._id_1B32 = var_11;
 }
@@ -910,7 +855,6 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
 _id_1B34() {
   if(!isDefined(level._id_1B35)) {
     level._id_1B35 = [];
-
   }
   var_0 = newhudelem();
   level._id_1B35[level._id_1B35.size] = var_0;

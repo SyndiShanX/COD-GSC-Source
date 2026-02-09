@@ -17,11 +17,7 @@ shellshockOnDamage(cause, damage) {
     return;
   }
 
-  if(cause == "MOD_EXPLOSIVE" ||
-    cause == "MOD_GRENADE" ||
-    cause == "MOD_GRENADE_SPLASH" ||
-    cause == "MOD_PROJECTILE" ||
-    cause == "MOD_PROJECTILE_SPLASH") {
+  if(cause == "MOD_EXPLOSIVE" || cause == "MOD_GRENADE" || cause == "MOD_GRENADE_SPLASH" || cause == "MOD_PROJECTILE" || cause == "MOD_PROJECTILE_SPLASH") {
     if(damage > 10) {
       if(!_hasPerk("specialty_hard_shell")) {
         self shellshock("frag_grenade_mp", 0.5);

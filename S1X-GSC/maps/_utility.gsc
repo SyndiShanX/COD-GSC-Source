@@ -27,8 +27,8 @@ set_HudOutline(sType, depth_enable) {
 }
 
 is_coop() {
-  if(IsSplitScreen() || (GetDvar("coop") == "1")) {
-    AssertEx(isDefined(level.player2), "In co-op mode but level.player2 is undefined. IsSplitScreen=" + IsSplitScreen() + " coop dvar=" + GetDvar("coop"));
+  if(IsSplitScreen() || (getDvar("coop") == "1")) {
+    AssertEx(isDefined(level.player2), "In co-op mode but level.player2 is undefined. IsSplitScreen=" + IsSplitScreen() + " coop dvar=" + getDvar("coop"));
     return true;
   }
 
@@ -48,7 +48,7 @@ is_coop_online() {
 }
 
 is_player_down(player) {
-  AssertEx(isDefined(player) && IsPlayer(player), "is_player_down() requires a valid player to test.");
+  AssertEx(isDefined(player) && isPlayer(player), "is_player_down() requires a valid player to test.");
 
   if(player ent_flag_exist("laststand_downed")) {
     return player ent_flag("laststand_downed");
@@ -62,7 +62,7 @@ is_player_down(player) {
 }
 
 is_player_down_and_out(player) {
-  assertex(isDefined(player) && isplayer(player), "is_player_down_and_out() requires a valid player to test.");
+  assertex(isDefined(player) && isPlayer(player), "is_player_down_and_out() requires a valid player to test.");
 
   if(!isDefined(player.down_part2_proc_ran)) {
     return false;
@@ -72,7 +72,7 @@ is_player_down_and_out(player) {
 }
 
 killing_will_down(player) {
-  AssertEx(isDefined(player) && IsPlayer(player), "Invalid player.");
+  AssertEx(isDefined(player) && isPlayer(player), "Invalid player.");
 
   if(laststand_enabled()) {
     AssertEx(isDefined(level.laststand_initialized) && isDefined(level.laststand_kill_will_down_func), "Laststand not initialized.");
@@ -183,7 +183,7 @@ set_vision_set(visionset, transition_time) {
   }
 
   VisionSetNaked(visionset, transition_time);
-  SetDvar("vision_set_current", visionset);
+  setDvar("vision_set_current", visionset);
 }
 
 set_vision_set_player(visionset, transition_time) {
@@ -905,7 +905,7 @@ get_progress(start, end, org, dist) {
 
 can_see_origin(origin, test_characters) {
   AssertEx(isDefined(origin), "can_see_origin() requires a valid origin to be passed in.");
-  AssertEx(IsPlayer(self) || IsAI(self), "can_see_origin() can only be called on a player or AI.");
+  AssertEx(isPlayer(self) || IsAI(self), "can_see_origin() can only be called on a player or AI.");
 
   if(!isDefined(test_characters)) {
     test_characters = true;
@@ -953,12 +953,10 @@ magic_bullet_death_detection() {
 
   self waittill("death");
   if(isDefined(self)) {
-    AssertEx(0, "Magic bullet shield guy with export(" +
-    }
+    AssertEx(0, "Magic bullet shield guy with export(" + }
     export +") enuNum(" + entnum + ") died some how.");
   else {
-    AssertEx(0, "Magic bullet shield guy with export(" +
-    }
+    AssertEx(0, "Magic bullet shield guy with export(" + }
     export +") enuNum(" + entnum + ") died, most likely deleted from spawning guys.");
 
   export =
@@ -966,7 +964,7 @@ magic_bullet_death_detection() {
 }
 
 magic_bullet_shield(no_death_detection) {
-  AssertEx(!IsPlayer(self), "magic_bullet_shield is only valid for AI. Use EnableInvulnerability, EnableDeathShield or EnableHealthShield for a player");
+  AssertEx(!isPlayer(self), "magic_bullet_shield is only valid for AI. Use EnableInvulnerability, EnableDeathShield or EnableHealthShield for a player");
 
   if(IsAI(self)) {
     AssertEx(IsAlive(self), "Tried to do magic_bullet_shield on a dead or undefined guy.");
@@ -1180,7 +1178,7 @@ never_saw_it_coming() {
 }
 
 check_man_overboard() {
-  if(GetDvar("mapname", "undefined") != "sanfran_b") {
+  if(getDvar("mapname", "undefined") != "sanfran_b") {
     return;
   }
   if(!isDefined(level.player.man_overboard) || !level.player.man_overboard) {
@@ -1323,7 +1321,7 @@ waittill_dmg_timeout(timeOut, string1) {
 }
 
 shock_ondeath() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   PreCacheShellShock("default");
   self waittill("death");
@@ -1332,7 +1330,7 @@ shock_ondeath() {
     return;
   }
 
-  if(GetDvar("r_texturebits") == "16") {
+  if(getDvar("r_texturebits") == "16") {
     return;
   }
   self ShellShock("default", 3);
@@ -2104,7 +2102,6 @@ draw_line(org1, org2, r, g, b) {
     Line(org1, org2, (r, g, b), 1);
     wait .05;
   }
-
 }
 
 draw_line_to_ent_for_time(org1, ent, r, g, b, timer) {
@@ -2132,7 +2129,6 @@ draw_line_from_ent_to_ent_for_time(ent1, ent2, r, g, b, timer) {
     Line(ent1.origin, ent2.origin, (r, g, b), 1);
     wait .05;
   }
-
 }
 
 draw_line_from_ent_to_ent_until_notify(ent1, ent2, r, g, b, notifyEnt, notifyString) {
@@ -2148,7 +2144,6 @@ draw_line_from_ent_to_ent_until_notify(ent1, ent2, r, g, b, notifyEnt, notifyStr
     Line(ent1.origin, ent2.origin, (r, g, b), 0.05);
     wait .05;
   }
-
 }
 
 draw_line_until_notify(org1, org2, r, g, b, notifyEnt, notifyString) {
@@ -2475,8 +2470,8 @@ set_friendlyfire_warnings(state) {
 }
 
 dds_set_player_character_name(hero_name) {
-  if(!IsPlayer(self)) {
-    /#PrintLn( "dds 'dds_set_player_character_name' function was not called on a player. No changes made." );
+  if(!isPlayer(self)) {
+    PrintLn("dds 'dds_set_player_character_name' function was not called on a player. No changes made.");
     return;
   }
 
@@ -2485,10 +2480,10 @@ dds_set_player_character_name(hero_name) {
     case "hudson":
     case "reznov":
       level.dds.player_character_name = GetSubStr(hero_name, 0, 3);
-      /#PrintLn( "dds setting player name to '" + level.dds.player_character_name + "'" );
+      PrintLn("dds setting player name to '" + level.dds.player_character_name + "'");
       break;
     default:
-      /#printLn( "dds: '" + hero_name + "' not a valid player name; setting to 'mason' (mas)" );
+      printLn("dds: '" + hero_name + "' not a valid player name; setting to 'mason' (mas)");
       level.dds.player_character_name = "mas";
       break;
   }
@@ -2503,7 +2498,7 @@ dds_exclude_this_ai(bExclude) {
       self.dds_disable = false;
     }
   } else {
-    /#PrintLn( "Tried to mark an entity for DDS removal that was not an AI or not alive." );
+    PrintLn("Tried to mark an entity for DDS removal that was not an AI or not alive.");
   }
 }
 
@@ -2910,7 +2905,7 @@ missionFailedWrapper() {
     return;
   }
 
-  if(GetDvar("failure_disabled") == "1") {
+  if(getDvar("failure_disabled") == "1") {
     return;
   }
 
@@ -3158,7 +3153,7 @@ get_color_nodes_from_trigger() {
 }
 
 flashRumbleLoop(duration) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   goalTime = GetTime() + duration * 1000;
 
@@ -3232,14 +3227,14 @@ nineBangHandler(origin, percent_distance, percent_angle, attacker, team) {
 }
 
 flashMonitor() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   self endon("death");
 
   for(;;) {
     self waittill("flashbang", origin, percent_distance, percent_angle, attacker, team);
 
-    if("1" == GetDvar("noflash")) {
+    if("1" == getDvar("noflash")) {
       continue;
     }
 
@@ -3315,7 +3310,7 @@ flashMonitor() {
 }
 
 flashNearbyAllies(baseDuration, team) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   wait .05;
 
@@ -3445,7 +3440,6 @@ ignoreAllEnemies(qTrue) {
 
       SetThreatBias(keys[i], "ignore_everybody", 0);
     }
-
   } else {
     num = undefined;
     AssertEx(isDefined(self.old_threat_bias_group), "You can't use ignoreAllEnemies( false ) on an AI that has never ran ignoreAllEnemies( true )");
@@ -3489,7 +3483,7 @@ groundpos(origin) {
 }
 
 change_player_health_packets(num) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   self.player_health_packets += num;
   self notify("update_health_packets");
@@ -4604,7 +4598,7 @@ fire_radius(origin, radius) {
 
   for(;;) {
     trigger waittill("trigger", other);
-    AssertEx(IsPlayer(other), "Tried to burn a non player in a fire");
+    AssertEx(isPlayer(other), "Tried to burn a non player in a fire");
     level.player DoDamage(5, origin);
   }
 }
@@ -4640,8 +4634,7 @@ set_goalradius(radius) {
 try_forever_spawn() {
   export = self.export;
   for(;;) {
-    AssertEx(isDefined(self), "Spawner with export " +
-      export +" was deleted.");
+    AssertEx(isDefined(self), "Spawner with export " + export +" was deleted.");
     guy = self Dospawn();
     if(spawn_failed(guy)) {
       wait(1);
@@ -4760,8 +4753,7 @@ set_generic_run_anim_array(anime, weights, alwaysRunForward) {
 
   AssertEx(!isDefined(weights) || isarray(level.scr_anim["generic"][weights]), "weights needs to be an array of animation weights (ascending order)");
 
-  AssertEx(isarray(level.scr_anim["generic"][anime]) ||
-    !isDefined(weights), "its not valid to pass in a weights param and not an array of anims to run");
+  AssertEx(isarray(level.scr_anim["generic"][anime]) || !isDefined(weights), "its not valid to pass in a weights param and not an array of anims to run");
 
   AssertEx(!isDefined(weights) || (level.scr_anim["generic"][weights].size == level.scr_anim["generic"][anime].size), "the weights array must equal the size of the anims array");
 
@@ -5374,7 +5366,7 @@ enable_bulletwhizbyreaction() {
 }
 
 clear_dvar(msg) {
-  SetDvar(msg, "");
+  setDvar(msg, "");
 }
 
 set_fixednode_true() {
@@ -5835,7 +5827,7 @@ set_grenadeammo(count) {
 }
 
 get_player_feet_from_view() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   tagorigin = self.origin;
   upvec = AnglesToUp(self GetPlayerAngles());
@@ -5856,45 +5848,45 @@ set_baseaccuracy(val) {
 
 set_console_status() {
   if(!isDefined(level.Console)) {
-    level.Console = GetDvar("consoleGame") == "true";
+    level.Console = getDvar("consoleGame") == "true";
   } else {
-    AssertEx(level.Console == (GetDvar("consoleGame") == "true"), "Level.console got set incorrectly.");
+    AssertEx(level.Console == (getDvar("consoleGame") == "true"), "Level.console got set incorrectly.");
   }
 
   if(!isDefined(level.xenon)) {
-    level.xenon = GetDvar("xenonGame") == "true";
+    level.xenon = getDvar("xenonGame") == "true";
   } else {
-    AssertEx(level.xenon == (GetDvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
+    AssertEx(level.xenon == (getDvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
   }
 
   if(!isDefined(level.ps3)) {
-    level.ps3 = GetDvar("ps3Game") == "true";
+    level.ps3 = getDvar("ps3Game") == "true";
   } else {
-    AssertEx(level.ps3 == (GetDvar("ps3Game") == "true"), "Level.ps3 got set incorrectly.");
+    AssertEx(level.ps3 == (getDvar("ps3Game") == "true"), "Level.ps3 got set incorrectly.");
   }
 
   if(!isDefined(level.wiiu)) {
-    level.wiiu = GetDvar("wiiuGame") == "true";
+    level.wiiu = getDvar("wiiuGame") == "true";
   } else {
-    AssertEx(level.wiiu == (GetDvar("wiiuGame") == "true"), "Level.wiiu got set incorrectly.");
+    AssertEx(level.wiiu == (getDvar("wiiuGame") == "true"), "Level.wiiu got set incorrectly.");
   }
 
   if(!isDefined(level.pccg)) {
-    level.pccg = GetDvar("pccgGame") == "true";
+    level.pccg = getDvar("pccgGame") == "true";
   } else {
-    AssertEx(level.pccg == (GetDvar("pccgGame") == "true"), "Level.pccg got set incorrectly.");
+    AssertEx(level.pccg == (getDvar("pccgGame") == "true"), "Level.pccg got set incorrectly.");
   }
 
   if(!isDefined(level.xb3)) {
-    level.xb3 = GetDvar("xb3Game") == "true";
+    level.xb3 = getDvar("xb3Game") == "true";
   } else {
-    AssertEx(level.xb3 == (GetDvar("xb3Game") == "true"), "Level.xb3 got set incorrectly.");
+    AssertEx(level.xb3 == (getDvar("xb3Game") == "true"), "Level.xb3 got set incorrectly.");
   }
 
   if(!isDefined(level.ps4)) {
-    level.ps4 = GetDvar("ps4Game") == "true";
+    level.ps4 = getDvar("ps4Game") == "true";
   } else {
-    AssertEx(level.ps4 == (GetDvar("ps4Game") == "true"), "Level.ps4 got set incorrectly.");
+    AssertEx(level.ps4 == (getDvar("ps4Game") == "true"), "Level.ps4 got set incorrectly.");
   }
 
   if(!isDefined(level.pc)) {
@@ -6035,7 +6027,7 @@ _kill() {
 }
 
 kill_wrapper() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(flag_exist("special_op_terminated") && flag("special_op_terminated")) {
       return false;
     }
@@ -6124,7 +6116,7 @@ getmodel(str) {
 }
 
 isADS() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   return (self PlayerAds() > 0.5);
 }
 
@@ -6581,7 +6573,7 @@ waterfx(endflag, soundalias) {
 
     fx = "water_movement";
 
-    if(IsPlayer(self)) {
+    if(isPlayer(self)) {
       if(Distance(self GetVelocity(), (0, 0, 0)) < 5) {
         fx = "water_stop";
       }
@@ -6705,7 +6697,7 @@ normal_friendly_fire_penalty() {
 }
 
 getPlayerClaymores() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   heldweapons = self GetWeaponsListAll();
   stored_ammo = [];
@@ -6879,7 +6871,7 @@ add_earthquake(name, mag, duration, radius) {
 }
 
 arcadeMode() {
-  return GetDvar("arcademode") == "1";
+  return getDvar("arcademode") == "1";
 }
 
 arcadeMode_stop_timer() {
@@ -6989,7 +6981,7 @@ player_is_near_live_grenade() {
     for(playerIndex = 0; playerIndex < level.players.size; playerIndex++) {
       player = level.players[playerIndex];
       if(DistanceSquared(grenade.origin, player.origin) < (275 * 275)) {
-        /# maps\_autosave::AutoSavePrint( "autosave failed: live grenade too close to player" );
+        maps\_autosave::AutoSavePrint("autosave failed: live grenade too close to player");
         return true;
       }
     }
@@ -7233,7 +7225,7 @@ get_drones_with_targetname(sTargetname) {
 
 get_other_player(player) {
   Assert(is_coop());
-  Assert(isDefined(player) && isplayer(player));
+  Assert(isDefined(player) && isPlayer(player));
 
   foreach(other_player in level.players) {
     if(player == other_player) {
@@ -7442,7 +7434,7 @@ waittill_true_goal(origin, radius) {
 }
 
 player_speed_percent(percent, time) {
-  currspeed = Int(GetDvar("g_speed"));
+  currspeed = Int(getDvar("g_speed"));
   if(!isDefined(level.player.g_speed)) {
     level.player.g_speed = currspeed;
   }
@@ -7454,7 +7446,7 @@ player_speed_percent(percent, time) {
 
 blend_movespeedscale_percent(percent, time) {
   player = self;
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     player = level.player;
   }
 
@@ -7468,7 +7460,7 @@ blend_movespeedscale_percent(percent, time) {
 }
 
 player_speed_set(speed, time) {
-  currspeed = Int(GetDvar("g_speed"));
+  currspeed = Int(getDvar("g_speed"));
   if(!isDefined(level.player.g_speed)) {
     level.player.g_speed = currspeed;
   }
@@ -7486,7 +7478,7 @@ player_bob_scale_set(scale, time) {
 
 blend_movespeedscale(scale, time) {
   player = self;
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     player = level.player;
   }
 
@@ -7535,7 +7527,7 @@ player_speed_default(time) {
 
 blend_movespeedscale_default(time) {
   player = self;
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     player = level.player;
   }
 
@@ -7550,7 +7542,7 @@ blend_movespeedscale_default(time) {
 }
 
 teleport_ent(ent) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self SetOrigin(ent.origin);
     self SetPlayerAngles(ent.angles);
   } else {
@@ -7563,7 +7555,7 @@ teleport_to_ent_tag(ent, tag) {
   angles = ent GetTagAngles(tag);
   self DontInterpolate();
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self SetOrigin(position);
     self SetPlayerAngles(angles);
   } else if(IsAI(self)) {
@@ -7593,7 +7585,7 @@ IsSliding() {
 }
 
 BeginSliding(velocity, allowedAcceleration, dampening) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   player = self;
 
   player thread play_sound_on_entity("foot_slide_plr_start");
@@ -7640,7 +7632,7 @@ BeginSliding(velocity, allowedAcceleration, dampening) {
 }
 
 EndSliding() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
   player = self;
 
   Assert(isDefined(player.slideModel));
@@ -7858,7 +7850,7 @@ get_player_from_self() {
 }
 
 get_player_gameskill() {
-  AssertEx(IsPlayer(self), "get_player_gameskill() can only be called on a player.");
+  AssertEx(isPlayer(self), "get_player_gameskill() can only be called on a player.");
   return Int(self GetPlayerSetting("gameskill"));
 }
 
@@ -8660,7 +8652,7 @@ init_self_visionset() {
 }
 
 vision_set_changes(vision_set, transition_time) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     vision_set_initd = true;
     if(!isDefined(level.vision_set_transition_ent)) {
       level.vision_set_transition_ent = spawnStruct();
@@ -8687,7 +8679,7 @@ vision_set_changes(vision_set, transition_time) {
     }
 
     level.lvl_visionset = vision_set;
-    SetDvar("vision_set_current", vision_set);
+    setDvar("vision_set_current", vision_set);
   } else {
     self init_self_visionset();
 
@@ -8807,7 +8799,7 @@ delete_interactives_in_volumes(volumes) {
 }
 
 mask_exploders_in_volume(volumes) {
-  if(GetDvar("createfx") != "") {
+  if(getDvar("createfx") != "") {
     return;
   }
 
@@ -8916,7 +8908,6 @@ delete_destructibles_in_volumes(volumes, dodelayed) {
       }
     }
   }
-
 }
 
 delete_exploders_in_volumes(volumes, dodelayed) {
@@ -9199,7 +9190,7 @@ player_rides_in_humvee(seat, rider, right, left, up, down) {
   if(!isDefined(rider)) {
     rider = level.player;
   }
-  assert(isplayer(rider));
+  assert(isPlayer(rider));
 
   rider AllowCrouch(false);
   rider AllowProne(false);
@@ -9263,7 +9254,7 @@ player_leaves_humvee(skip_offset) {
 
   org = self;
   rider = level.player;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     rider = self;
     org = rider.humvee_org;
   }
@@ -9407,7 +9398,7 @@ ignorerandombulletdamage_drone_proc() {
   while(1) {
     self waittill("damage", damage, attacker);
 
-    if(!isplayer(attacker) && IsSentient(attacker)) {
+    if(!isPlayer(attacker) && IsSentient(attacker)) {
       if(isDefined(attacker.enemy) && attacker.enemy != self) {
         continue;
       }
@@ -9602,13 +9593,13 @@ obj_exists(msg) {
 }
 
 player_mount_vehicle(vehicle) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self MountVehicle(vehicle);
   self.drivingVehicle = vehicle;
 }
 
 player_dismount_vehicle() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self DismountVehicle();
   self.drivingVehicle = undefined;
 }
@@ -9939,7 +9930,7 @@ remove_damagefeedback() {
 }
 
 is_demo() {
-  if(GetDvar("e3demo") == "1") {
+  if(getDvar("e3demo") == "1") {
     return true;
   }
 
@@ -10558,9 +10549,9 @@ setdvar_cg_ng(dvar_name, current_gen_val, next_gen_val) {
   AssertEx(isDefined(level.console) && isDefined(level.xb3) && isDefined(level.ps4), "Expected platform defines to be complete.");
 
   if(is_gen4()) {
-    setdvar(dvar_name, next_gen_val);
+    setDvar(dvar_name, next_gen_val);
   } else {
-    setdvar(dvar_name, current_gen_val);
+    setDvar(dvar_name, current_gen_val);
   }
 }
 
@@ -10823,17 +10814,17 @@ getDvarIntDefault(dvarName, defaultValue) {
 
 ui_action_slot_force_active_on(slot) {
   dvarName = "ui_actionslot_" + slot + "_forceActive";
-  SetDvar(dvarName, "on");
+  setDvar(dvarName, "on");
 }
 
 ui_action_slot_force_active_off(slot) {
   dvarName = "ui_actionslot_" + slot + "_forceActive";
-  SetDvar(dvarName, "turn_off");
+  setDvar(dvarName, "turn_off");
 }
 
 ui_action_slot_force_active_one_time(slot) {
   dvarName = "ui_actionslot_" + slot + "_forceActive";
-  SetDvar(dvarName, "onetime");
+  setDvar(dvarName, "onetime");
 }
 
 HasTag(model, tag) {

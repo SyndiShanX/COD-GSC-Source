@@ -127,7 +127,7 @@ function zombie_blood_hint_watch() {
       while(isDefined(level.sam_talking) && level.sam_talking) {
         wait(0.05);
       }
-      if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+      if(isDefined(e_player) && isPlayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         a_player_hint[e_player.characterindex] = 1;
         zm_tomb_vo::set_players_dontspeak(1);
         level.sam_talking = 1;
@@ -146,7 +146,7 @@ function zombie_blood_hint_watch() {
       while(isDefined(level.sam_talking) && level.sam_talking) {
         wait(0.05);
       }
-      if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+      if(isDefined(e_player) && isPlayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         str_vox = get_zombie_blood_hint_generic_vox();
         if(isDefined(str_vox)) {
           zm_tomb_vo::set_players_dontspeak(1);
@@ -382,9 +382,9 @@ function setup_ee_main_devgui() {
     }
     wait(0.05);
   }
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -394,7 +394,7 @@ function setup_ee_main_devgui() {
 function watch_devgui_ee_main() {
   while(true) {
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level.ee_debug = 1;
       level flag::set("");
       switch (level._cur_stage_name) {
@@ -455,13 +455,13 @@ function watch_devgui_ee_main() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level clientfield::set("", 2);
       complete_sidequest();
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
-      setdvar("", "");
+      setDvar("", "");
+      setDvar("", "");
       level flag::set("");
       array::thread_all(getplayers(), &zm_weapons::weapon_give, "");
     }

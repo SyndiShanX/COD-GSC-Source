@@ -30,7 +30,6 @@ class cwavemanager {
     var_a709a080 = 0;
     var_6da7cde5 = 1;
   }
-
 }
 
 class class_2443998c {
@@ -41,7 +40,6 @@ class class_2443998c {
     var_bcd4e683 = 0;
     var_bb290b79 = [];
   }
-
 }
 
 #namespace wave_manager;
@@ -52,7 +50,6 @@ class class_8e39177 {
   constructor() {
     a_params = [];
   }
-
 }
 
 #namespace wave_manager_sys;
@@ -65,7 +62,7 @@ __init__() {
   level.var_ca74a4bc = [];
   level.a_s_wave_managers = [];
 
-  setdvar(#"hash_1feb7de8a9fa6573", -1);
+  setDvar(#"hash_1feb7de8a9fa6573", -1);
   level thread debug_think();
 }
 
@@ -248,7 +245,6 @@ debug_think() {
 
         if(isDefined(var_dcd6c23.var_3844e966)) {
           sphere(var_dcd6c23.var_3844e966.origin, 30, (0, 0, 1), 1, 0, 20, 1);
-
         }
 
         if(isDefined(var_dcd6c23.var_246fb97f) && isarray(var_dcd6c23.var_246fb97f)) {
@@ -256,7 +252,6 @@ debug_think() {
             sphere(var_fa24a14b.origin, 4, (0, 1, 0), 1, 0, 8, 1);
             print3d(var_fa24a14b.origin + (0, 0, 10), function_9e72a96(var_fa24a14b.archetype), (0, 1, 0), 1, 0.5, 1);
             line(var_fa24a14b.origin, var_fa24a14b.origin + (0, 0, 45), (0, 1, 0), 1, 0, 1);
-
           }
         }
       }
@@ -586,7 +581,6 @@ think(var_dcd6c23) {
 
       println("<dev string:x1ec>" + var_f5d6a44e + 1 + "<dev string:x211>");
       iprintln("<dev string:x1ec>" + var_f5d6a44e + 1 + "<dev string:x211>");
-
     }
 
     while(true) {

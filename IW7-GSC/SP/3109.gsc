@@ -148,7 +148,7 @@ func_13940() {
   for(;;) {
     self waittill("bad_path");
     if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.owner) {
-      if(isDefined(self.var_728A) || isplayer(self.bt.var_F15D)) {
+      if(isDefined(self.var_728A) || isPlayer(self.bt.var_F15D)) {
         if(isDefined(self.var_A9CB)) {
           self.func_8425 = 1;
           self func_8481(self.var_A9CB);
@@ -248,7 +248,7 @@ func_F177(var_0) {
 
 func_13850(var_0) {
   if(!isalive(self.bt.var_F15D)) {
-    if(isplayer(self.bt.var_F15D)) {
+    if(isPlayer(self.bt.var_F15D)) {
       self func_8481(self.origin);
     }
 
@@ -267,7 +267,7 @@ func_13850(var_0) {
   }
 
   var_2 = 72;
-  if(isplayer(self.bt.var_F15D)) {
+  if(isPlayer(self.bt.var_F15D)) {
     var_2 = 25;
   }
 
@@ -308,7 +308,7 @@ func_8420() {
     return;
   }
 
-  if(isplayer(self.bt.var_F15D)) {
+  if(isPlayer(self.bt.var_F15D)) {
     if(self.bt.var_F15D == self.owner) {
       self.var_6D = 120;
     } else {
@@ -410,7 +410,7 @@ func_DED7(var_0) {
   self.bt.var_1154B = gettime();
   var_0.var_F126 = self;
   self notify("set_bt_target");
-  if(isai(var_0) && isDefined(self.owner) && isplayer(self.owner)) {
+  if(isai(var_0) && isDefined(self.owner) && isPlayer(self.owner)) {
     thread func_F120(var_0);
   }
 

@@ -16,11 +16,10 @@ player_healthbar_update() {
   while(true) {
     player_health_ratio = self.health / self.maxhealth;
 
-    SetDvar("alien_player_health", self.health / self.maxhealth);
+    setDvar("alien_player_health", self.health / self.maxhealth);
 
     while(player_health_ratio == (self.health / self.maxhealth))
       wait 0.1;
-
   }
 }
 
@@ -109,7 +108,7 @@ restore_client_fog(transition_time) {
 }
 
 ent_flag_wait(msg) {
-  if(isplayer(self))
+  if(isPlayer(self))
     self endon("disconnect");
 
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
@@ -119,7 +118,7 @@ ent_flag_wait(msg) {
 }
 
 ent_flag_wait_either(flag1, flag2) {
-  if(isplayer(self))
+  if(isPlayer(self))
     self endon("disconnect");
 
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
@@ -135,7 +134,7 @@ ent_flag_wait_either(flag1, flag2) {
 }
 
 ent_flag_wait_or_timeout(flagname, timer) {
-  if(isplayer(self))
+  if(isPlayer(self))
     self endon("disconnect");
 
   AssertEx((!IsSentient(self) && isDefined(self)) || IsAlive(self), "Attempt to check a flag on entity that is not alive or removed");
@@ -466,11 +465,10 @@ always_play_pain_sound(anime) {
   if(!AnimHasNotetrack(anime, "alien_pain_light") && !AnimHasNoteTrack(anime, "alien_pain_heavy")) {
     self PlaySoundOnMovingEnt("alien_pain_light");
   }
-
 }
 
 register_pain(anim_entry) {
-  /# AssertEx( !isDefined( self.pain_registered ) || !self.pain_registered, "Shouldn't be able to register a pain when one already registered!" );
+  AssertEx(!isDefined(self.pain_registered) || !self.pain_registered, "Shouldn't be able to register a pain when one already registered!");
   self.pain_registered = true;
   self thread pain_interval_monitor(anim_entry);
 }
@@ -685,7 +683,6 @@ should_store_ammo_check(exclude_type, special_ammo_weapon) {
       }
       return true;
   }
-
 }
 
 is_ammo_already_stored(weaponName) {
@@ -765,7 +762,6 @@ give_special_ammo_by_weaponclass(boxent, primary_weapon, pillage) {
         }
 
         return (int(WeaponMaxAmmo(primary_weapon) * 0.2));
-
       } else {
         return (int(WeaponMaxAmmo(primary_weapon) * ratio));
       }
@@ -773,7 +769,6 @@ give_special_ammo_by_weaponclass(boxent, primary_weapon, pillage) {
     default:
       return 0;
   }
-
 }
 
 player_has_specialized_ammo(special_ammo_weapon) {
@@ -1333,7 +1328,6 @@ special_ammo_weapon_fire_monitor(special_ammo_type) {
       }
     }
   }
-
 }
 
 disable_special_ammo() {
@@ -1438,9 +1432,7 @@ enable_special_ammo() {
       self.has_incendiary_ammo = true;
 
     self SetClientOmnvar("ui_alien_specialammo", icon_index);
-
   }
-
 }
 
 show_turret_icon(value) {
@@ -1809,7 +1801,6 @@ weapon_change_monitor() {
         }
       }
     }
-
   }
 
 }
@@ -2157,7 +2148,6 @@ base_scope_weapon_attachment(weaponname) {
     default:
       break;
   }
-
 }
 
 can_hypno(attacker, petTrapKill, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, inflictor) {
@@ -2187,7 +2177,7 @@ has_fragile_relic_and_is_sprinting() {
 }
 
 update_player_initial_spawn_info(coordinate, angles) {
-  /#AssertEx( isDefined( coordinate) && isDefined( angles ), "Both coordinate and angles need to be defined" );
+  AssertEx(isDefined(coordinate) && isDefined(angles), "Both coordinate and angles need to be defined");
 
   level.playerInitialSpawnOriginOverride = coordinate;
   level.playerInitialSpawnAnglesOverride = angles;

@@ -18,8 +18,7 @@ _id_6507(var_0) {
   thread _id_6765();
 
   if(!isDefined(var_0)) {
-    var_0 = getdvar("start");
-
+    var_0 = getDvar("start");
   }
   switch (var_0) {
     case "s3_escape":
@@ -57,7 +56,6 @@ _id_6764() {
 
   if(!common_scripts\utility::flag("stop_construction_anims")) {
     _id_5F06("tree_med", "script_noteworthy");
-
   }
   common_scripts\utility::flag_wait("start_construction_anims");
 
@@ -73,7 +71,6 @@ _id_6764() {
 
   if(!common_scripts\utility::flag("stop_sandstorm_anims")) {
     _id_5F06("tree_heavy", "script_noteworthy");
-
   }
   common_scripts\utility::flag_wait("start_sandstorm_anims");
 
@@ -286,7 +283,6 @@ _id_676B(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     wait(var_2);
-
   }
   self._id_1032 = var_0;
   self useanimtree(level._id_1245[self._id_1032]);
@@ -430,7 +426,6 @@ _id_6777() {
 _id_6778(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = getEntArray("payback_wires_wind_" + var_1, "script_noteworthy");
-
   }
   var_2 = [];
 
@@ -454,7 +449,6 @@ _id_6778(var_0, var_1) {
 
         if(isDefined(var_4.script_delay)) {
           var_6 = var_4.script_delay;
-
         }
         var_6 = randomfloatrange(var_6, var_6 + 0.25);
         var_4 thread _id_676B("payback_wires_short", "wind_" + var_1 + "_" + var_5, var_6);
@@ -468,7 +462,6 @@ _id_6778(var_0, var_1) {
 
         if(isDefined(var_4.script_delay)) {
           var_6 = var_4.script_delay;
-
         }
         var_6 = randomfloatrange(var_6, var_6 + 0.25);
         var_4 thread _id_676B("payback_wires_long", "wind_" + var_1 + "_" + var_5, var_6);
@@ -829,7 +822,6 @@ _id_6790() {
 
     if(isDefined(var_2._id_164F)) {
       var_3 = float(var_2._id_164F);
-
     }
     var_4 = (1, 0, 0);
 
@@ -837,7 +829,6 @@ _id_6790() {
       var_4 = anglesToForward(var_2.angles);
     } else {
       var_4 = level._id_678F;
-
     }
     var_5 = var_4 * var_3;
     var_2 physicslaunchserver(var_2.origin, var_5);
@@ -865,7 +856,6 @@ _id_6791(var_0, var_1, var_2) {
 
     if(isDefined(var_5.angles)) {
       var_3.angles = var_5.angles;
-
     }
     var_4 = var_3;
   } else {
@@ -876,7 +866,6 @@ _id_6791(var_0, var_1, var_2) {
 
     if(isDefined(var_5.angles)) {
       var_4.angles = var_5.angles;
-
     }
     var_4 attach(var_1, "J_prop_1");
 
@@ -908,7 +897,6 @@ _id_6791(var_0, var_1, var_2) {
     var_4 playLoopSound(var_4._id_6792);
   } else {
     iprintlnbold("rolling_object_trigger() model '" + var_4._id_1032 + "' with no soundalias defined! please contact audio department with asset request!");
-
   }
   var_13 = var_5;
 

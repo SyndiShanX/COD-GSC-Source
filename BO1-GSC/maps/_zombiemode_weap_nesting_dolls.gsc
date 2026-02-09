@@ -24,7 +24,6 @@ init() {
   setup_nesting_dolls_data();
   PreCacheItem("zombie_nesting_doll_single");
 }
-
 setup_nesting_dolls_data() {
   if(isDefined(level.nesting_dolls_override_setup)) {
     [[level.nesting_dolls_override_setup]]();
@@ -68,11 +67,9 @@ setup_nesting_dolls_data() {
   PreCacheModel("t5_nesting_bomb_world_doll3_richtofen");
   PreCacheModel("t5_nesting_bomb_world_doll4_richtofen");
 }
-
 nesting_dolls_exists() {
   return isDefined(level.zombie_weapons["zombie_nesting_dolls"]);
 }
-
 player_give_nesting_dolls() {
   self nesting_dolls_create_randomized_indices(0);
   start_cammo = level.nesting_dolls_data[self.nesting_dolls_randomized_indices[0][0]].id;
@@ -80,7 +77,6 @@ player_give_nesting_dolls() {
   self set_player_tactical_grenade("zombie_nesting_dolls");
   self thread player_handle_nesting_dolls();
 }
-
 #using_animtree("zombie_cymbal_monkey");
 player_handle_nesting_dolls() {
   self notify("starting_nesting_dolls");
@@ -98,7 +94,6 @@ player_handle_nesting_dolls() {
     wait(0.05);
   }
 }
-
 doll_spawner(start_grenade) {
   self endon("disconnect");
   self endon("death");
@@ -122,7 +117,6 @@ doll_spawner(start_grenade) {
     num_dolls++;
   }
 }
-
 doll_spawner_cluster(start_grenade) {
   self endon("disconnect");
   self endon("death");
@@ -147,7 +141,6 @@ doll_spawner_cluster(start_grenade) {
     wait(0.25);
   }
 }
-
 doll_do_damage(origin, owner, id, index) {
   self waittill("explode");
   zombies = GetAiSpeciesArray("axis", "all");
@@ -164,7 +157,6 @@ doll_do_damage(origin, owner, id, index) {
   }
   RadiusDamage(origin, level.nesting_dolls_damage_radius, 95000, 95000, owner, "MOD_GRENADE_SPLASH", "zombie_nesting_doll_single");
 }
-
 randomize_angles(angles) {
   random_yaw = RandomIntRange(-45, 45);
   random_pitch = RandomIntRange(-45, -35);
@@ -172,7 +164,6 @@ randomize_angles(angles) {
   return_angles = angles + random;
   return return_angles;
 }
-
 get_random_launch_velocity(doll_origin, angles) {
   angles = randomize_angles(angles);
   trace_dist = level.nesting_dolls_launch_speed * level.nesting_dolls_launch_peak_time;
@@ -187,7 +178,6 @@ get_random_launch_velocity(doll_origin, angles) {
   }
   return (0, 0, level.nesting_dolls_launch_speed);
 }
-
 get_cluster_launch_velocity(angles, index) {
   random_pitch = RandomIntRange(-45, -35);
   offsets = array(45, 0, -45);
@@ -196,7 +186,6 @@ get_cluster_launch_velocity(angles, index) {
   grenade_vel = dir * level.nesting_dolls_launch_speed;
   return grenade_vel;
 }
-
 get_launch_velocity(doll_origin, range) {
   velocity = (0, 0, 0);
   target = get_doll_best_doll_target(doll_origin, range);
@@ -209,12 +198,10 @@ get_launch_velocity(doll_origin, range) {
   }
   return velocity;
 }
-
 get_target_leading_pos() {
   position = self.origin;
   return position;
 }
-
 spawn_doll_model(id, index, parent) {
   self hide();
   self.doll_model = spawn("script_model", self.origin);
@@ -229,7 +216,6 @@ spawn_doll_model(id, index, parent) {
   playFXOnTag(level.nesting_dolls_data[data_index].trailFx, self.doll_model, "tag_origin");
   self.doll_model thread nesting_dolls_cleanup(self);
 }
-
 doll_behavior_explode_when_stopped(parent, doll_id, index) {
   velocitySq = 10000 * 10000;
   oldPos = self.origin;
@@ -253,12 +239,10 @@ doll_behavior_explode_when_stopped(parent, doll_id, index) {
     }
   }
 }
-
 nesting_dolls_end_achievement_tracking(doll_id) {
   wait(level.nesting_dolls_det_time + 0.1);
   self notify("end_achievement_tracker" + doll_id);
 }
-
 get_player_aim_best_doll_target(range) {
   view_pos = self GetWeaponMuzzlePoint();
   zombies = get_array_of_closest(view_pos, GetAiSpeciesArray("axis", "all"), undefined, undefined, (range * 1.1));
@@ -275,7 +259,7 @@ get_player_aim_best_doll_target(range) {
       continue;
     }
     test_origin = zombies[i] getcentroid();
-    test_range_squared = distanceSquared(view_pos, test_origin);
+    test_range_squared = DistanceSquared(view_pos, test_origin);
     if(test_range_squared > range_squared) {
       return;
     }
@@ -297,7 +281,6 @@ get_player_aim_best_doll_target(range) {
   }
   return best_target;
 }
-
 get_doll_best_doll_target(origin, range) {
   zombies = GetAIArray("axis");
   if(zombies.size > 0) {
@@ -313,7 +296,6 @@ get_doll_best_doll_target(origin, range) {
   }
   return undefined;
 }
-
 nesting_dolls_cleanup(parent) {
   while(true) {
     if(!isDefined(parent)) {
@@ -323,7 +305,6 @@ nesting_dolls_cleanup(parent) {
     wait(0.05);
   }
 }
-
 do_nesting_dolls_sound(model, info) {
   monk_scream_vox = false;
   if(level.music_override == false) {
@@ -336,7 +317,6 @@ do_nesting_dolls_sound(model, info) {
     play_sound_in_space("zmb_vox_monkey_explode", position);
   }
 }
-
 get_thrown_nesting_dolls() {
   self endon("disconnect");
   self endon("starting_nesting_dolls");
@@ -348,7 +328,6 @@ get_thrown_nesting_dolls() {
     wait(0.05);
   }
 }
-
 nesting_dolls_debug_print(msg, color) {}
 nesting_dolls_tesla_nearby_zombies(doll) {
   wait(level.nesting_dolls_launch_peak_time);
@@ -360,17 +339,15 @@ nesting_dolls_tesla_nearby_zombies(doll) {
     zombie_sort[i] thread maps\_zombiemode_weap_tesla::tesla_damage_init("head", centroid, self);
   }
 }
-
 nesting_dolls_play_tesla_bolt(origin, target_origin) {
   fxOrg = spawn("script_model", origin);
   fxOrg setModel("tag_origin");
   fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
   playsoundatposition("wpn_tesla_bounce", fxOrg.origin);
-  fxOrg moveTo(target_origin, 0.25);
+  fxOrg MoveTo(target_origin, 0.25);
   fxOrg waittill("movedone");
   fxOrg delete();
 }
-
 nesting_dolls_set_id() {
   if(!isDefined(self.doll_id)) {
     self.doll_id = 0;
@@ -381,7 +358,6 @@ nesting_dolls_set_id() {
     self.doll_id = 0;
   }
 }
-
 nesting_dolls_track_achievement(doll_id) {
   self endon("end_achievement_tracker" + doll_id);
   if(!isDefined(self.nesting_dolls_tracker)) {
@@ -394,7 +370,6 @@ nesting_dolls_track_achievement(doll_id) {
     self.nesting_dolls_tracker[doll_id][i] = 0;
   }
 }
-
 nesting_dolls_check_achievement(doll_id) {
   self waittill("end_achievement_tracker" + doll_id);
   min_kills_per_doll = 1;
@@ -404,7 +379,6 @@ nesting_dolls_check_achievement(doll_id) {
     }
   }
 }
-
 nesting_dolls_create_randomized_indices(id) {
   if(!isDefined(self.nesting_dolls_randomized_indices)) {
     self.nesting_dolls_randomized_indices = [];
@@ -412,7 +386,6 @@ nesting_dolls_create_randomized_indices(id) {
   base_indices = array(0, 1, 2, 3);
   self.nesting_dolls_randomized_indices[id] = array_randomize(base_indices);
 }
-
 nesting_dolls_setup_next_doll_throw() {
   self endon("death");
   self endon("disconnect");
@@ -422,7 +395,7 @@ nesting_dolls_setup_next_doll_throw() {
     next_id = 0;
   }
   self nesting_dolls_create_randomized_indices(next_id);
-  if(self hasWeapon("zombie_nesting_dolls")) {
+  if(self HasWeapon("zombie_nesting_dolls")) {
     cammo = level.nesting_dolls_data[self.nesting_dolls_randomized_indices[next_id][0]].id;
     self UpdateWeaponOptions("zombie_nesting_dolls", self CalcWeaponOptions(cammo));
   }

@@ -4290,7 +4290,6 @@ tough_friendly_biometrics(guy) {
   if(guy == "ozone") {
     //death notification dialogue for ozone
   }
-
 }
 
 tough_friendly_kill() {
@@ -5105,9 +5104,9 @@ dsm_destruction_damage_detect() {
 
     if(level.dsmHealth <= 0) {
       if(attacker == level.player) {
-        setdvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_PLAYER");
+        setDvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_PLAYER");
       } else {
-        setdvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_AI_GUNFIRE");
+        setDvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_AI_GUNFIRE");
       }
 
       level notify("dsm_has_been_destroyed");
@@ -5189,7 +5188,7 @@ dsm_suicide_bombing( org, dsm )
 	
 	//wait 0.5;
 	
-	setdvar( "ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_AI_DETONATION" );
+	setDvar( "ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_AI_DETONATION" );
 	missionFailedWrapper();	
 }
 
@@ -5468,7 +5467,7 @@ abandonment_failure() {
   radio_dialogue("est_gst_destroyedthedsm");
   radio_dialogue_stop();
 
-  setdvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_DESERTION");
+  setDvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_DESERTION");
 
   missionFailedWrapper();
 
@@ -5555,7 +5554,7 @@ estate_autosave_proximity_threat_func(enemy) {
     v_dist = abs(enemy.origin[2] - player.origin[2]);
 
     if(dist < 360 && v_dist < 200) {
-      /# maps\_autosave::AutoSavePrint( "autosave failed: AI too close to player" );
+      maps\_autosave::AutoSavePrint("autosave failed: AI too close to player");
       return "return";
     } else
     if(dist < 1000) {

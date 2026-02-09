@@ -17,7 +17,7 @@ main() {
     return;
   }
 
-  if(isplayer(self.enemy))
+  if(isPlayer(self.enemy))
     self meleeBiteAttackPlayer();
   else
     self meleeStruggleVsAI();
@@ -199,7 +199,7 @@ handleMeleeBiteAttackNoteTracks(note) {
       hitEnt = self dogMelee();
 
       if(isDefined(hitEnt)) {
-        if(isplayer(hitEnt)) {
+        if(isPlayer(hitEnt)) {
           hitEnt shellshock("dog_bite", 1);
           thread KnockOutOfADS(hitEnt);
         }
@@ -244,7 +244,7 @@ handleMeleeFinishAttackNoteTracks(note) {
       healthAdded = addSafetyHealth();
 
       hitEnt = self dogMelee();
-      if(isDefined(hitEnt) && isplayer(hitEnt) && isalive(self.meleeingPlayer)) {
+      if(isDefined(hitEnt) && isPlayer(hitEnt) && isalive(self.meleeingPlayer)) {
         if(healthAdded)
           removeSafetyHealth();
 
@@ -341,7 +341,6 @@ set_melee_timer() {
     wait(0.25);
     introblack destroy();
   }
-
 }
 
 playerDogInit() {
@@ -833,10 +832,8 @@ set_melee_early(pressed_too_soon) {
   }
 }
 
-// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-//
-// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-#using_animtree("generic_human");
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- //
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- #using_animtree("generic_human");
 
 meleeStruggleVsDog() {
   self endon("killanimscript");
@@ -996,10 +993,8 @@ playerDone_anim_laststand() {
   self setanimknobrestart(%player_3rd_dog_knockdown_laststand, 1, 0, 1);
 }
 
-// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-//
-// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-#using_animtree("player");
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- //
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- #using_animtree("player");
 
 PlayerView_spawn(dog) {
   playerView = spawn("script_model", dog.meleeingPlayer.origin);

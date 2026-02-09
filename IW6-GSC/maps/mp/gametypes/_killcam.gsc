@@ -31,7 +31,7 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
 
   assert(IsGameParticipant(attacker));
 
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     self SetClientOmnvar("ui_killcam_killedby_id", attacker GetEntityNumber());
     self SetClientOmnvar("ui_killcam_victim_id", victim GetEntityNumber());
     self LoadCustomizationPlayerView(attacker);

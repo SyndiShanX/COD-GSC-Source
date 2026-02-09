@@ -64,8 +64,8 @@ check_for_trap_master_achievement(var_0) {
 trap_debug_devgui() {
   for(;;) {
     wait(1);
-    if(getdvar("scr_craft_pickup") != "") {
-      var_0 = getdvar("scr_craft_pickup");
+    if(getDvar("scr_craft_pickup") != "") {
+      var_0 = getDvar("scr_craft_pickup");
       switch (var_0) {
         case "freeze":
           var_1 = scripts\engine\utility::getstruct("trap_freeze_part", "script_noteworthy");
@@ -88,7 +88,7 @@ trap_debug_devgui() {
           break;
       }
 
-      setdvar("scr_craft_pickup", "");
+      setDvar("scr_craft_pickup", "");
     }
   }
 }
@@ -250,7 +250,7 @@ electric_trap_damage(var_0, var_1) {
       continue;
     }
 
-    if(isplayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
+    if(isPlayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
       playsoundatpos(var_4.origin, "trap_electric_shock");
       playfxontagforclients(level._effect["electric_shock_plyr"], var_4, "tag_eye", var_4);
       var_4.padding_damage = 1;
@@ -497,7 +497,7 @@ freeze_players() {
       continue;
     }
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(!scripts\engine\utility::istrue(var_0.padding_damage)) {
         var_0.padding_damage = 1;
         var_0 dodamage(10, self.origin, self, self, "MOD_UNKNOWN", "iw7_electrictrap_zm");
@@ -654,7 +654,7 @@ pool_dmg_players(var_0) {
       continue;
     }
 
-    if(isplayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3) && !isDefined(var_3.padding_damage)) {
+    if(isPlayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3) && !isDefined(var_3.padding_damage)) {
       playsoundatpos(var_3.origin, "trap_electric_shock");
       playfxontagforclients(level._effect["electric_shock_plyr"], var_3, "tag_eye", var_3);
       var_3.padding_damage = 1;
@@ -820,7 +820,7 @@ propane_dmg_players(var_0, var_1) {
       continue;
     }
 
-    if(isplayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3) && !isDefined(var_3.padding_damage)) {
+    if(isPlayer(var_3) && isalive(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3) && !isDefined(var_3.padding_damage)) {
       playfxontagforclients(level._effect["player_scr_fire"], var_3, "tag_eye", var_3);
       var_3.padding_damage = 1;
       var_3 dodamage(20, var_1.origin + (0, 0, 30), var_2, var_2, "MOD_UNKNOWN", "iw7_electrictrap_zm");
@@ -894,7 +894,7 @@ elvira_trap_dmg(var_0) {
       continue;
     }
 
-    if(isplayer(var_2) && isalive(var_2) && !scripts\cp\cp_laststand::player_in_laststand(var_2) && !isDefined(var_2.padding_damage)) {
+    if(isPlayer(var_2) && isalive(var_2) && !scripts\cp\cp_laststand::player_in_laststand(var_2) && !isDefined(var_2.padding_damage)) {
       var_2.padding_damage = 1;
       var_2 dodamage(20, var_1.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_electrictrap_zm");
       var_2 thread remove_padding_damage();

@@ -17,7 +17,6 @@ class class_d5e9830e {
     tags = [];
     shaderconst = 0;
   }
-
 }
 
 autoexec main() {

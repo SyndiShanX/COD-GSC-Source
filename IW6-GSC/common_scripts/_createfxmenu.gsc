@@ -177,7 +177,6 @@ menu_add_options() {
   display_fx_add_options(get_last_selected_ent());
   if(next_button()) {
     increment_list_offset();
-
   }
 }
 
@@ -314,17 +313,17 @@ prepare_option_for_change(option, drawnCount) {
   }
 
   set_option_index(option["name"]);
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
 }
 
 menu_fx_option_set() {
-  if(getdvar("fx") == "nil") {
+  if(getDvar("fx") == "nil") {
     return;
   }
   option = get_selected_option();
   setting = undefined;
   if(option["type"] == "string")
-    setting = getdvar("fx");
+    setting = getDvar("fx");
   if(option["type"] == "int")
     setting = getdvarint("fx");
   if(option["type"] == "float")

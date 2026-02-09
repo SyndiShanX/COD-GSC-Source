@@ -32,7 +32,7 @@ __init__() {
   callback::on_player_killed(&on_player_killed);
   callback::on_disconnect(&on_player_disconnect);
   level.var_fa5cacde = getgametypesetting(#"hash_77b7734750cd75e9");
-  setdvar(#"bot_maxmantleheight", 200);
+  setDvar(#"bot_maxmantleheight", 200);
 
   level thread devgui_bot_loop();
   level thread bot_joinleave_loop();
@@ -1114,7 +1114,7 @@ devgui_bot_loop() {
     level notify(#"devgui_bot", {
       #host: host, #args: args
     });
-    setdvar(#"devgui_bot", "<dev string:x38>");
+    setDvar(#"devgui_bot", "<dev string:x38>");
   }
 }
 
@@ -1331,7 +1331,7 @@ devgui_tpose(host, botarg) {
   bots = devgui_get_bots(host, botarg);
 
   foreach(bot in bots) {
-    setdvar(#"bg_boastenabled", 1);
+    setDvar(#"bg_boastenabled", 1);
     bot playboast("dev_boast_tpose");
   }
 }
@@ -1515,13 +1515,13 @@ function_7090aa98() {
 }
 
 function_5524bfd5(companionname) {
-  setdvar(#"companion", companionname);
+  setDvar(#"companion", companionname);
 }
 
 function_263ca697() {
   weapon = self getcurrentweapon();
-  setdvar(#"bot_spawn_weapon", getweaponname(weapon.rootweapon));
-  setdvar(#"hash_c6e51858c88a5ee", util::function_2146bd83(weapon));
+  setDvar(#"bot_spawn_weapon", getweaponname(weapon.rootweapon));
+  setDvar(#"hash_c6e51858c88a5ee", util::function_2146bd83(weapon));
   bots = get_bots();
 
   foreach(bot in bots) {

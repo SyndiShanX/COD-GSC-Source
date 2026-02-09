@@ -94,14 +94,16 @@ feedfacialrec(elem, tag) {
   i = 0;
 
   while(true) {
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       elem.label = tablelookup("sp/argus_boot.csv", 0, i, 1) + "\\n";
+    }
 
     wait 0.0225;
     i++;
 
-    if(i >= 371)
+    if(i >= 371) {
       i = 0;
+    }
   }
 }
 
@@ -326,8 +328,9 @@ onargusnotify(localclientnum, argusid, usertag, message) {
         case "soldier4":
         case "soldier5":
         case "soldier6":
-          if(!within_fov(level.localplayers[localclientnum] getEye(), level.localplayers[localclientnum] getplayerangles(), argusgetorigin(argusid), cos(2.3)))
+          if(!within_fov(level.localplayers[localclientnum] getEye(), level.localplayers[localclientnum] getplayerangles(), argusgetorigin(argusid), cos(2.3))) {
             return 0;
+          }
 
           break;
       }
@@ -353,8 +356,9 @@ onargusnotify(localclientnum, argusid, usertag, message) {
             return 0;
           }
 
-          if(!level.is_bink_playing)
+          if(!level.is_bink_playing) {
             level thread run_facial_recognition(argusid, usertag);
+          }
 
           break;
       }
@@ -373,8 +377,9 @@ onargusnotify(localclientnum, argusid, usertag, message) {
         case "soldier4":
         case "soldier5":
         case "soldier6":
-          if(level.is_bink_playing)
+          if(level.is_bink_playing) {
             cancel_facial_recognition();
+          }
 
           break;
       }
@@ -509,8 +514,9 @@ start_extra_cam(localclientnum, set, newent) {
 
   level.extra_cam_enabled = set;
 
-  if(level.wiiu)
+  if(level.wiiu) {
     setsaveddvar("wiiu_disableYellowDot", set);
+  }
 }
 
 start_sw_cam(fade_in_time, hold_static_time, static_time) {
@@ -518,14 +524,17 @@ start_sw_cam(fade_in_time, hold_static_time, static_time) {
   level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 0, level.pip_opacity);
   level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 1, level.pip_squash);
 
-  if(!isDefined(fade_in_time))
+  if(!isDefined(fade_in_time)) {
     fade_in_time = 2.0;
+  }
 
-  if(!isDefined(hold_static_time))
+  if(!isDefined(hold_static_time)) {
     hold_static_time = 0.6;
+  }
 
-  if(!isDefined(static_time))
+  if(!isDefined(static_time)) {
     static_time = 2.2;
+  }
 
   level thread fade_in_sw_extra_cam(fade_in_time, hold_static_time, static_time);
 }
@@ -550,14 +559,16 @@ fade_out_sw_extra_cam(fade_out_time, hold_static_time, static_time) {
   while(time < static_time) {
     time = (getrealtime() - start_time) / 1000;
 
-    if(time > static_time)
+    if(time > static_time) {
       time = static_time;
+    }
 
     frac = (static_time - time) / static_time;
     fuzz = frac;
 
-    if(fuzz < 0.01)
+    if(fuzz < 0.01) {
       fuzz = 0.01;
+    }
 
     level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 0, alpha);
     level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 2, fuzz);
@@ -571,8 +582,9 @@ fade_out_sw_extra_cam(fade_out_time, hold_static_time, static_time) {
   while(time < fade_out_time) {
     time = (getrealtime() - start_time) / 1000;
 
-    if(time > fade_out_time)
+    if(time > fade_out_time) {
       time = fade_out_time;
+    }
 
     alpha = (fade_out_time - time) / fade_out_time;
     level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 0, alpha);
@@ -585,8 +597,9 @@ fire_crates() {
   level waittill("crates_on_fire");
   a_e_crates = getdynentarray("grenade_room_crate");
 
-  for(i = 0; i < a_e_crates.size; i++)
+  for(i = 0; i < a_e_crates.size; i++) {
     playfxondynent(level._effect["fire_crate"], a_e_crates[i]);
+  }
 }
 
 setgrappeltarget(b_state) {
@@ -636,20 +649,23 @@ cleanup_underwater_dynents() {
   level waittill("clean_under_phy");
   a_e_dynents = getdynentarray("underwater_phys_ent");
 
-  foreach(e_dynent in a_e_dynents)
-  setdynentenabled(e_dynent, 0);
+  foreach(e_dynent in a_e_dynents) {
+    setdynentenabled(e_dynent, 0);
+  }
 
   level waittill("clean_gren_phy");
   a_e_dynents = getdynentarray("grenade_phys_ent");
 
-  foreach(e_dynent in a_e_dynents)
-  setdynentenabled(e_dynent, 0);
+  foreach(e_dynent in a_e_dynents) {
+    setdynentenabled(e_dynent, 0);
+  }
 
   level waittill("clean_fire_phy");
   a_e_dynents = getdynentarray("firewater_phys_ent");
 
-  foreach(e_dynent in a_e_dynents)
-  setdynentenabled(e_dynent, 0);
+  foreach(e_dynent in a_e_dynents) {
+    setdynentenabled(e_dynent, 0);
+  }
 }
 
 underwater_blur() {
@@ -721,8 +737,9 @@ surveillance_box_position_think() {
 }
 
 toggle_water_fx_actor(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     self.fx_handle = playFXOnTag(localclientnum, level._effect["water_wake"], self, "tag_origin");
-  else
+  } else {
     deletefx(localclientnum, self.fx_handle);
+  }
 }

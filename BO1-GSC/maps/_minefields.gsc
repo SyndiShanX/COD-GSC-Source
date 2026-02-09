@@ -12,26 +12,27 @@ main() {
     minefields[i] thread minefield_think();
   }
 }
-
 minefield_think() {
   while(1) {
     self waittill("trigger", other);
-    if(isSentient(other))
+    if(isSentient(other)) {
       other thread minefield_kill(self);
+    }
   }
 }
-
 minefield_kill(trigger) {
-  if(isDefined(self.minefield))
+  if(isDefined(self.minefield)) {
     return;
+  }
   self.minefield = true;
   self playSound("minefield_click");
   wait(.5);
   wait(randomFloat(.2));
-  if(!(isDefined(self)))
+  if(!(isDefined(self))) {
     return;
+  }
   if(self istouching(trigger)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       level notify("mine death");
       self playSound("explo_mine");
     } else

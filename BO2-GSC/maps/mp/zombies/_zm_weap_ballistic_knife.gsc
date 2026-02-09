@@ -34,7 +34,7 @@ on_spawn(watcher, player) {
     retrievable_model.name = watcher.weapon;
 
     if(isDefined(prey)) {
-      if(isplayer(prey) && player.team == prey.team)
+      if(isPlayer(prey) && player.team == prey.team)
         isfriendly = 1;
       else if(isai(prey) && player.team == prey.team)
         isfriendly = 1;
@@ -83,7 +83,7 @@ on_spawn_retrieve_trigger(watcher, player) {
   }
   trigger_pos = [];
 
-  if(isDefined(prey) && (isplayer(prey) || isai(prey))) {
+  if(isDefined(prey) && (isPlayer(prey) || isai(prey))) {
     trigger_pos[0] = prey.origin[0];
     trigger_pos[1] = prey.origin[1];
     trigger_pos[2] = prey.origin[2] + 10;
@@ -133,7 +133,6 @@ debug_print(endpos) {
     print3d(endpos, "pickup_trigger");
     wait 0.05;
   }
-
 }
 
 watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, npcsoundonuse) {

@@ -38,10 +38,11 @@ setmeleeattackdist() {
   self endon("death");
 
   while(true) {
-    if(isDefined(self.enemy) && isplayer(self.enemy))
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       self.meleeattackdist = anim.dogattackplayerdist;
-    else
+    } else {
       self.meleeattackdist = anim.dogattackaidist;
+    }
 
     self waittill("enemy");
   }
@@ -90,12 +91,13 @@ initdoganimations() {
   level._effect["dog_rip_throat"] = loadfx("misc/fx_dog_rip_throat");
   array = [];
 
-  for(i = 0; i <= 5; i++)
+  for(i = 0; i <= 5; i++) {
     array[array.size] = i / 5;
+  }
 
   level.dog_melee_index = 0;
   level.dog_melee_timing_array = array_randomize(array);
   level.lastdogmeleeplayertime = 0;
   level.dogmeleeplayercounter = 0;
-  setdvar("friendlySaveFromDog", "0");
+  setDvar("friendlySaveFromDog", "0");
 }

@@ -120,7 +120,7 @@ water_trigger_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       entity playSound("mpl_splash_death");
       playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 10.0));
     }

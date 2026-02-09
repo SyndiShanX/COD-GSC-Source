@@ -929,7 +929,7 @@ function onroundswitch() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || (level.capturetime && !self.touchtriggers.size && !attacker.touchtriggers.size) || attacker.pers["team"] == self.pers["team"]) {
+  if(!isPlayer(attacker) || (level.capturetime && !self.touchtriggers.size && !attacker.touchtriggers.size) || attacker.pers["team"] == self.pers["team"]) {
     return;
   }
   medalgiven = 0;
@@ -1076,7 +1076,7 @@ function updatecapsperminute(lastownerteam) {
   }
   self.numcaps++;
   minutespassed = globallogic_utils::gettimepassed() / 60000;
-  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed["total"])) {
     minutespassed = self.timeplayed["total"] / 60;
   }
   self.capsperminute = (minutespassed ? self.numcaps / minutespassed : 0);

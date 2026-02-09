@@ -980,7 +980,6 @@ handleprop() {
   if(getdvarint(#"hash_41fd7f61c0fc49af", 0) == 1) {
     self thread function_63d4897();
   }
-
 }
 
 on_player_loadout() {
@@ -1183,7 +1182,7 @@ damagewatch(damage, attacker, direction_vec, point, meansofdeath, modelname, tag
     return;
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(attacker.pers[# "team"] == self.owner.pers[# "team"]) {
       return;
     }
@@ -1883,7 +1882,7 @@ choosefinalkillcam() {
 
   var_c0cc60e6 = choosebestpropforkillcam(var_545f0775, var_57713248);
 
-  if(isplayer(var_c0cc60e6)) {
+  if(isPlayer(var_c0cc60e6)) {
     attackernum = var_c0cc60e6 getentitynumber();
   } else {
     attackernum = -1;
@@ -2103,7 +2102,7 @@ tracktimealive() {
 gamemodemodifyplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   victim = self;
 
-  if(isDefined(eattacker) && isplayer(eattacker) && isalive(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isalive(eattacker)) {
     if(!isDefined(eattacker.hashitplayer)) {
       eattacker.hashitplayer = 1;
     }
@@ -2457,7 +2456,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     level.prop_controls mp_prop_controls::close(self);
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && attacker != victim && victim.team != attacker.team) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != victim && victim.team != attacker.team) {
     killedbyenemy = 1;
   }
 
@@ -3159,7 +3158,7 @@ function_c3c0cc83(damage, attacker, direction_vec, point, meansofdeath, modelnam
     return;
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(isDefined(self.isdying) && self.isdying) {
       return;
     }
@@ -3571,7 +3570,7 @@ function_80334286(damage, attacker, direction_vec, point, meansofdeath, modelnam
     return;
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker thread damagefeedback::update();
     self.lastattacker = attacker;
     function_45080877(attacker);

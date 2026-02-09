@@ -43,7 +43,6 @@ class class_a504b9a3 {
     var_190509f3 = 0;
     var_9177748f = gettime();
   }
-
 }
 
 autoexec main() {
@@ -109,7 +108,7 @@ function_67525edc(dustball) {
   enemies = util::function_81ccf6d3(self.team);
 
   foreach(target in enemies) {
-    if(isplayer(target)) {
+    if(isPlayer(target)) {
       distsq = distancesquared(dustball.origin, target.origin);
 
       if(distsq <= 150 * 150) {
@@ -259,7 +258,6 @@ function_8d7ad318(launchpos, trajectory, targetpos) {
     recordline(point, targetpos, (0, 1, 1), "<dev string:x41>");
     waitframe(1);
   }
-
 }
 
 function_4b28fc8c(entity) {
@@ -315,7 +313,7 @@ function_df15eebf(entity) {
   foreach(target in enemies) {
     dist = distance(self.origin, target.origin);
 
-    if(isplayer(target) && dist < 600) {
+    if(isPlayer(target) && dist < 600) {
       params = getstatuseffect(#"hash_2c80515d8ac9f1b4");
       weapon = getweapon(#"zombie_ai_defaultmelee");
       target status_effect::status_effect_apply(params, weapon, entity, 0, 500);
@@ -361,7 +359,7 @@ function_2328518e(entity) {
   foreach(target in enemies) {
     dist = distance(self.origin, target.origin);
 
-    if(isplayer(target) && dist < 450) {
+    if(isPlayer(target) && dist < 450) {
       params = getstatuseffect(#"hash_2c80515d8ac9f1b4");
       weapon = getweapon("zombie_ai_defaultmelee");
       target status_effect::status_effect_apply(params, weapon, entity, 0, 500);
@@ -832,7 +830,6 @@ function_670bff63() {
 
       record3dtext("<dev string:x4a>" + dist, self.origin, (0, 1, 0), "<dev string:x38>");
       recordcircle(self.favoriteenemy.origin, 4, (0, 1, 1), "<dev string:x41>");
-
     }
 
     waitframe(1);
@@ -1119,7 +1116,6 @@ function_e864f0da(elephant, damage, attacker, point, dir, var_88cb1bf9) {
 
     if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
       iprintlnbold("<dev string:x63>");
-
     }
 
     function_74fba881(elephant);
@@ -1164,7 +1160,7 @@ function_ee23b15d(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     return 0;
   }
 
-  if(isDefined(attacker) && !isplayer(attacker)) {
+  if(isDefined(attacker) && !isPlayer(attacker)) {
     return 0;
   }
 
@@ -1186,7 +1182,7 @@ function_ee23b15d(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 }
 
 function_cfe82365(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isDefined(attacker) && !isplayer(attacker)) {
+  if(isDefined(attacker) && !isPlayer(attacker)) {
     return 0;
   }
 
@@ -1429,7 +1425,6 @@ function_ce8fe2b0(entity, splitorigin) {
     }
   } else {
     recordsphere(launchpoint, 15, (0, 0, 0), "<dev string:x41>");
-
   }
 
   wait 0.5;
@@ -1672,18 +1667,15 @@ function_f8145b00(entity) {
 
             if(!isDefined(path) || !isDefined(path.pathpoints) || path.pathpoints.size == 0) {
               recordsphere(targetpos, 8, (0.1, 0.1, 0.1), "<dev string:x41>");
-
             } else {
               entity setgoal(targetpos);
 
               recordsphere(targetpos, 8, (0, 0, 1), "<dev string:x41>");
 
               recordline(entity.ai.var_a504b9a3.var_86d0fc5, targetpos, (1, 0, 0), "<dev string:x41>");
-
             }
           } else {
             recordsphere(targetpos, 8, (0.1, 0.1, 0.1), "<dev string:x41>");
-
           }
         }
       }
@@ -1730,7 +1722,7 @@ is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
     return 0;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return 0;
   }
 
@@ -1901,7 +1893,7 @@ setup_devgui() {
   adddebugcommand("<dev string:x78b>");
 
   while(true) {
-    setdvar(#"hash_7a7fc216709f1aa4", "<dev string:x4a>");
+    setDvar(#"hash_7a7fc216709f1aa4", "<dev string:x4a>");
     wait 0.2;
     cmd = getdvarstring(#"hash_7a7fc216709f1aa4", "<dev string:x4a>");
 
@@ -1982,13 +1974,13 @@ setup_devgui() {
         break;
       case # "hash_6f54f417f7b5ac51":
         level flag::set(#"hash_37071af70fe7a9f2");
-        setdvar(#"hash_3065419bcba97739", 1);
+        setDvar(#"hash_3065419bcba97739", 1);
         break;
       case # "hash_484a268dfc6c97aa":
-        setdvar(#"zombie_default_max", 0);
-        setdvar(#"hash_2b64162aa40fe2bb", 1);
+        setDvar(#"zombie_default_max", 0);
+        setDvar(#"hash_2b64162aa40fe2bb", 1);
         level flag::set(#"hash_37071af70fe7a9f2");
-        setdvar(#"hash_3065419bcba97739", 1);
+        setDvar(#"hash_3065419bcba97739", 1);
         break;
       case # "hash_1b7f90925f6498e3":
         elephants = getaiarchetypearray(#"elephant");

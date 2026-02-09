@@ -63,7 +63,7 @@ function jump_pad_think() {
   }
   while(isDefined(self)) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       self thread delayed_jump_pad_start(who);
     }
   }

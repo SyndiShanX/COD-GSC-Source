@@ -70,7 +70,7 @@ init() {
   }
 
   common_scripts\_bcs_location_trigs::bcs_location_trigs_init();
-  var_6 = getdvar("g_gametype");
+  var_6 = getDvar("g_gametype");
   level.istactical = 1;
 
   if(var_6 == "war" || var_6 == "kc" || var_6 == "dom") {

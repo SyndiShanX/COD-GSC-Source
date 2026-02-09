@@ -71,7 +71,6 @@ TimeUntilspawn(includeTeamkillDelay) {
 
     if(isDefined(self.setSpawnPoint))
       respawnDelay += level.tiSpawnDelay;
-
   }
 
   waveBased = (getDvarInt("scr_" + level.gameType + "_waverespawndelay") > 0);
@@ -133,7 +132,6 @@ spawnClient() {
 
       if(!self.hasSpawned && self.pers["teamkills"] <= level.maxAllowedTeamkills)
         self.pers["teamKillPunish"] = false;
-
     } else if(isRoundBased() && !isLastRound()) {
       if(isDefined(self.tagAvailable) && self.tagAvailable) {
         setLowerMessage("spawn_info", game["strings"]["spawn_tag_wait"]);
@@ -625,7 +623,6 @@ spawnPlayer(fauxSpawn) {
     self SetClientOmnvar("cam_scene_name", "battle_spawn");
     self SetClientOmnvar("cam_scene_lead", self.battleBuddy getEntityNumber());
     self SetClientOmnvar("cam_scene_support", self getEntityNumber());
-
   } else if(isDefined(self.heliSpawning) && (!isDefined(self.firstSpawn) || isDefined(self.firstSpawn) && self.firstSpawn) && level.prematchPeriod > 0 && self.team == "allies") {
     while(!isDefined(level.alliesChopper))
       wait 0.1;
@@ -634,7 +631,6 @@ spawnPlayer(fauxSpawn) {
     spawnAngles = level.alliesChopper.angles;
 
     self.firstSpawn = false;
-
   } else if(isDefined(self.heliSpawning) && (!isDefined(self.firstSpawn) || isDefined(self.firstSpawn) && self.firstSpawn) && level.prematchPeriod > 0 && self.team == "axis") {
     while(!isDefined(level.axisChopper))
       wait 0.1;
@@ -643,7 +639,6 @@ spawnPlayer(fauxSpawn) {
     spawnAngles = level.axisChopper.angles;
 
     self.firstSpawn = false;
-
   } else {
     spawnPoint = self[[level.getSpawnPoint]]();
 
@@ -1009,7 +1004,6 @@ spawnIntermission() {
     self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
   } else {
     level notify("scoreboard_displaying");
-
   }
 }
 
@@ -1146,7 +1140,7 @@ initClientDvarsSplitScreenSpecific() {
   if(level.splitScreen || self IsSplitscreenPlayer()) {
     self SetClientDvars("cg_hudGrenadeIconHeight", "37.5", "cg_hudGrenadeIconWidth", "37.5", "cg_hudGrenadeIconOffset", "75", "cg_hudGrenadePointerHeight", "18", "cg_hudGrenadePointerWidth", "37.5", "cg_hudGrenadePointerPivot", "18 40.5", "cg_fovscale", "0.75");
 
-    SetDvar("r_materialBloomHQScriptMasterEnable", 0);
+    setDvar("r_materialBloomHQScriptMasterEnable", 0);
   } else {
     self SetClientDvars("cg_hudGrenadeIconHeight", "25", "cg_hudGrenadeIconWidth", "25", "cg_hudGrenadeIconOffset", "50", "cg_hudGrenadePointerHeight", "12", "cg_hudGrenadePointerWidth", "25", "cg_hudGrenadePointerPivot", "12 27", "cg_fovscale", "1");
   }
@@ -1261,7 +1255,7 @@ Callback_PlayerConnect() {
   if(!is_aliens())
     self initPlayerStats();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1")
     level waittill("eternity");
 
   self.guid = self getUniqueId();
@@ -1472,10 +1466,8 @@ Callback_PlayerConnect() {
         self[[level.autoassign]]();
     } else
       self maps\mp\gametypes\_menus::beginClassChoice();
-
   }
 
-  /#	
   assert(self.connectTime == getTime());
 }
 
@@ -1855,7 +1847,6 @@ addToAliveCount() {
 
 incrementAliveCount(teamAdding) {
   level.aliveCount[teamAdding]++;
-  /#	
   if(!isDefined(level.alive_players))
     level.alive_players = [];
   if(!isDefined(level.alive_players[teamAdding]))
@@ -1867,7 +1858,6 @@ incrementAliveCount(teamAdding) {
   if(level.alive_players[teamAdding].size != level.aliveCount[teamAdding]) {
     AssertMsg("WARNING: level.alive_players and level.aliveCount are out of sync!");
   }
-
 }
 
 removeFromAliveCount(disconnected) {
@@ -1884,7 +1874,6 @@ removeFromAliveCount(disconnected) {
     self maps\mp\gametypes\_playerlogic::removeAllFromLivesCount();
   } else if(isDefined(self.switching_teams)) {
     self.pers["lives"]--;
-
   }
 
   self decrementAliveCount(teamRemoving);
@@ -1893,7 +1882,6 @@ removeFromAliveCount(disconnected) {
 
 decrementAliveCount(teamRemoving) {
   level.aliveCount[teamRemoving]--;
-  /#	
   for(i = 0; i < level.alive_players[teamRemoving].size; i++) {
     if(level.alive_players[teamRemoving][i] == self) {
       level.alive_players[teamRemoving][i] = level.alive_players[teamRemoving][level.alive_players[teamRemoving].size - 1];
@@ -1905,7 +1893,6 @@ decrementAliveCount(teamRemoving) {
   if(level.alive_players[teamRemoving].size != level.aliveCount[teamRemoving]) {
     AssertMsg("WARNING: level.alive_players and level.aliveCount are out of sync!");
   }
-
 }
 
 addToLivesCount() {

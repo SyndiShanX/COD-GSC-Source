@@ -218,7 +218,6 @@ watchForTeamChange() {
 
         self SetClientOmnvar("ui_options_menu", 2);
       }
-
     } else {
       self SetClientOmnvar("ui_spectator_selected", -1);
       self.spectating_actively = false;
@@ -314,7 +313,7 @@ setTeam(selection) {
 
   if(!IsAI(self) && level.teamBased && !maps\mp\gametypes\_teams::getJoinTeamPermissions(selection)) {
     return;
-    /# println( "cant change teams here... would be good to handle this logic in menu" );
+    println("cant change teams here... would be good to handle this logic in menu");
   }
 
   if(level.inGracePeriod && !self.hasDoneCombat)
@@ -573,7 +572,7 @@ addToTeam(team, firstConnect, changeTeamsWithoutRespawning) {
 
   self.team = team;
 
-  if((GetDvar("squad_vs_squad") == "1")) {
+  if((getDvar("squad_vs_squad") == "1")) {
     if(!isAI(self)) {
       if(team == "allies") {
         if(!isDefined(level.squad_vs_squad_allies_client))
@@ -585,14 +584,14 @@ addToTeam(team, firstConnect, changeTeamsWithoutRespawning) {
     }
   }
 
-  if((GetDvar("squad_match") == "1")) {
+  if((getDvar("squad_match") == "1")) {
     if(!isAI(self) && self isHost()) {
       if(!isDefined(level.squad_match_client))
         level.squad_match_client = self;
     }
   }
 
-  if((GetDvar("squad_use_hosts_squad") == "1")) {
+  if((getDvar("squad_use_hosts_squad") == "1")) {
     if(!isAI(self) && self isHost()) {
       if(!isDefined(level.wargame_client))
         level.wargame_client = self;

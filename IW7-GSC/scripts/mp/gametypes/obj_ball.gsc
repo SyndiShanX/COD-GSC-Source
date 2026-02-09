@@ -331,7 +331,7 @@ ball_can_pickup(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(!var_0 scripts\engine\utility::isweaponallowed()) {
       return 0;
     }
@@ -484,7 +484,7 @@ ball_on_pickup(var_0) {
       }
 
       var_0 thread scripts\mp\awards::givemidmatchaward("mode_uplink_intercept");
-      if(isplayer(var_0)) {
+      if(isPlayer(var_0)) {
         var_0 thread scripts\mp\matchdata::loggameevent("pickup_interception", var_0.origin);
       }
     }
@@ -494,7 +494,7 @@ ball_on_pickup(var_0) {
       scripts\mp\utility::statusdialog("enemy_own_drone", var_8);
     }
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0 thread scripts\mp\matchdata::loggameevent("pickup", var_0.origin);
     }
   }
@@ -996,7 +996,7 @@ ball_pass_projectile(var_0, var_1, var_2) {
   var_9 = scripts\common\trace::sphere_trace(var_7, var_8, level.balltraceradius, var_0, level.ballphysicscontentoverride, 0);
   var_10 = 1;
   if(var_9["fraction"] < 1 || !scripts\mp\utility::isreallyalive(var_1)) {
-    if(var_9["hittype"] == "hittype_entity" && isDefined(var_9["entity"]) && isplayer(var_9["entity"])) {
+    if(var_9["hittype"] == "hittype_entity" && isDefined(var_9["entity"]) && isPlayer(var_9["entity"])) {
       var_10 = max(0.1, 0.7 * var_9["fraction"]);
     } else {
       var_10 = 0.7 * var_9["fraction"];
@@ -1095,7 +1095,7 @@ validatepasstarget(var_0, var_1, var_2) {
     var_10 = var_5 * 30;
     var_11 = var_4 + var_10;
     var_12 = scripts\common\trace::sphere_trace(var_11, var_6, level.balltraceradius, var_1, level.ballphysicscontentoverride, 0);
-    if((isDefined(var_12["entity"]) && isplayer(var_12["entity"])) || var_12["fraction"] > 0.8) {
+    if((isDefined(var_12["entity"]) && isPlayer(var_12["entity"])) || var_12["fraction"] > 0.8) {
       var_2.pass_dot = var_9;
       var_0.lastvalidpassorg = var_4;
       var_0.lastvalidpassdir = var_5;
@@ -1462,7 +1462,7 @@ ball_physics_touch_cant_pickup_player(var_0) {
       continue;
     }
 
-    if(!isplayer(var_3) && !isagent(var_3)) {
+    if(!isPlayer(var_3) && !isagent(var_3)) {
       continue;
     }
 

@@ -159,7 +159,7 @@ function wait_for_use(monitor) {
   }
   while(true) {
     self waittill("trigger", who);
-    while(isplayer(who) && who istouching(self)) {
+    while(isPlayer(who) && who istouching(self)) {
       if(who usebuttonpressed()) {
         level flag::set("rerouted_power");
         monitor playSound("zmb_ee_monitor_button");
@@ -220,7 +220,7 @@ function wait_for_sync_use(ss, button) {
   ss.pressed = 0;
   while(true) {
     self waittill("trigger", who);
-    while(isplayer(who) && who istouching(self)) {
+    while(isPlayer(who) && who istouching(self)) {
       if(who usebuttonpressed()) {
         level notify("sync_button_pressed");
         button playSound("zmb_ee_syncbutton_button");

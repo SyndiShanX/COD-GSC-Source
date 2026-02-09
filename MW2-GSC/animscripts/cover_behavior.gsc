@@ -73,7 +73,7 @@ main(behaviorCallbacks) {
   // if we break out of cover mode after this time, we will get a grace period during which we can melee charge the player
   self.meleeCoverChargeMinTime = behaviorStartTime + MELEE_GRACE_PERIOD_REQUIRED_TIME;
 
-  if(getdvar("scr_coveridle") == "1")
+  if(getDvar("scr_coveridle") == "1")
     self.coverNode.script_onlyidle = true;
 
   self thread watchSuppression();
@@ -654,7 +654,7 @@ enemyIsHiding() {
   if(self.enemy isFlashed())
     return true;
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
       return true;
   } else {

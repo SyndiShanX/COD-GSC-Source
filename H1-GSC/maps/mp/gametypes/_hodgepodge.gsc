@@ -503,7 +503,7 @@ onmmplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
   if(!isDefined(var_1)) {
     return;
   }
-  var_10 = var_1 == self || !isplayer(var_1);
+  var_10 = var_1 == self || !isPlayer(var_1);
 
   if(var_10 && !level.mm_allowsuicide) {
     return;
@@ -906,7 +906,7 @@ onsniperonlyplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   if(!isDefined(var_1)) {
     return;
   }
-  var_11 = var_1 == self || !isplayer(var_1);
+  var_11 = var_1 == self || !isPlayer(var_1);
 
   if(var_11) {
     return;

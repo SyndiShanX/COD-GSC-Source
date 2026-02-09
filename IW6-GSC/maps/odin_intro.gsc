@@ -230,7 +230,7 @@ player_too_far_death() {
     else {
       common_scripts\utility::flag_set("mission_failed");
       level notify("new_quote_string");
-      setdvar("ui_deadquote", "@ODIN_FAIL_STRAY_INTRO");
+      setDvar("ui_deadquote", "@ODIN_FAIL_STRAY_INTRO");
       maps\_utility::missionfailedwrapper();
     }
 

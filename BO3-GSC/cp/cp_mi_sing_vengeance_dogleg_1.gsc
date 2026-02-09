@@ -504,7 +504,7 @@ function function_dc4e86b5(enemy_array) {
   level endon("hash_e9ff59d5");
   level endon("hash_8a3b89d3");
   self waittill("damage", damage, attacker);
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     foreach(enemy in enemy_array) {
       if(isDefined(enemy)) {
         enemy thread stealth_level::function_959a64c9();

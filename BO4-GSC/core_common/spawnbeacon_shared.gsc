@@ -358,7 +358,7 @@ freespawnbeaconspawnlist(spawnlistname) {
 }
 
 gadget_spawnbeacon_on(slot, playerweapon) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self notify(#"start_killstreak", {
     #weapon: playerweapon
   });

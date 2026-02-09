@@ -306,7 +306,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
   self.wasdamaged = 1;
   var_12 = var_2;
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
     if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
       if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
@@ -315,7 +315,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     }
   }
 
-  if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+  if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
     var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
   }
 
@@ -347,7 +347,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
   self.var_E1 = self.var_E1 + var_12;
   if(self.var_E1 >= self.maxhealth) {
-    if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
+    if(isPlayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
       self.var_1D41 = 1;
       var_1 notify("destroyed_helicopter");
       var_1 notify("destroyed_killstreak", var_5);

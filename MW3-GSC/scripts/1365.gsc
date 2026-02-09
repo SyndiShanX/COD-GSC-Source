@@ -32,11 +32,9 @@ _id_4175() {
 
   if(isDefined(self._id_3C98._id_4176)) {
     self._id_3C98._id_4176 destroy();
-
   }
   if(isDefined(self._id_3C98._id_4177)) {
     self._id_3C98._id_4177 destroy();
-
   }
   self._id_3C98 = undefined;
 }
@@ -54,7 +52,6 @@ _id_4178(var_0) {
       self._id_3C98._id_416D = self._id_3C98._id_416D + self._id_3C98._id_416F;
     } else {
       self._id_3C98._id_416D = self._id_3C98._id_416D - self._id_3C98._id_4170;
-
     }
     self._id_3C98._id_416D = clamp(self._id_3C98._id_416D, 1, self._id_3C98._id_416E);
     _id_4179();
@@ -74,7 +71,6 @@ _id_417A() {
 
   if(maps\_utility::_id_12C1()) {
     var_0 = 70;
-
   }
   var_1 = -10;
   var_2 = -152 + var_0;
@@ -122,7 +118,6 @@ overheated(var_0) {
 
   if(isDefined(var_0.mgturret)) {
     var_0.mgturret[0] turretfiredisable();
-
   }
   var_1 = gettime();
   var_2 = self._id_3C98._id_4172;
@@ -147,7 +142,6 @@ overheated(var_0) {
 
   if(isDefined(var_0.mgturret)) {
     var_0.mgturret[0] turretfireenable();
-
   }
   level._id_1C4F = undefined;
   self._id_3C98.overheated = 0;
@@ -198,7 +192,6 @@ _id_417B(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self._id_3C98._id_4177 fadeovertime(var_1);
-
   }
   if(isDefined(self._id_3C98._id_4177.color)) {
     self._id_3C98._id_4177.color = (var_5[0], var_5[1], var_5[2]);

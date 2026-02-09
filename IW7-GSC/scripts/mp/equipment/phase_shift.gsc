@@ -203,7 +203,7 @@ isentityphaseshifted(var_0) {
     return;
   }
 
-  var_1 = (isplayer(var_0) || isagent(var_0)) && var_0 isinphase();
+  var_1 = (isPlayer(var_0) || isagent(var_0)) && var_0 isinphase();
   var_2 = isDefined(var_0.var_FF03) && var_0.var_FF03 == 1;
   return var_1 || var_2;
 }

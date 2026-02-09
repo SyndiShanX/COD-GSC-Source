@@ -701,7 +701,7 @@ turret_modifydamage(var_0, var_1, var_2, var_3) {
     var_4 = -1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_4 = -1;
   }
 
@@ -721,7 +721,7 @@ onturretdeath(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(level.ishorde) && level.ishorde) {
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       var_0 = var_0.owner;
     }
   }

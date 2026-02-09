@@ -214,7 +214,7 @@ gump_watch_trigger(localclientnum) {
   while(true) {
     self waittill("trigger", who);
 
-    if(who isplayer() && isDefined(self.script_string)) {
+    if(who isPlayer() && isDefined(self.script_string)) {
       if(same_player(who, playerbeingspectated(0))) {
         machinelocal.gumpnamequeued[0] = self.script_string;
         self thread trigger_thread(who, ::enter_gump_trigger0);
@@ -233,22 +233,22 @@ gump_watch_trigger(localclientnum) {
 }
 
 enter_gump_trigger0(player) {
-  if(player isplayer())
+  if(player isPlayer())
     thread load_gump_for_player(0, self.script_string);
 }
 
 enter_gump_trigger1(player) {
-  if(player isplayer())
+  if(player isPlayer())
     thread load_gump_for_player(1, self.script_string);
 }
 
 enter_gump_trigger2(player) {
-  if(player isplayer())
+  if(player isPlayer())
     thread load_gump_for_player(2, self.script_string);
 }
 
 enter_gump_trigger3(player) {
-  if(player isplayer())
+  if(player isPlayer())
     thread load_gump_for_player(3, self.script_string);
 }
 

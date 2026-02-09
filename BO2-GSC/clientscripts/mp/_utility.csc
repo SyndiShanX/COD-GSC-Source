@@ -626,7 +626,7 @@ is_false(check) {
 }
 
 getdvarfloatdefault(dvarname, defaultvalue) {
-  value = getdvar(dvarname);
+  value = getDvar(dvarname);
 
   if(value != "")
     return float(value);
@@ -635,7 +635,7 @@ getdvarfloatdefault(dvarname, defaultvalue) {
 }
 
 getdvarintdefault(dvarname, defaultvalue) {
-  value = getdvar(dvarname);
+  value = getDvar(dvarname);
 
   if(value != "")
     return int(value);
@@ -652,7 +652,6 @@ debug_line(from, to, color, time) {
 
     line(from, to, color, 1, 1, time);
   }
-
 }
 
 debug_star(origin, color, time) {
@@ -667,7 +666,6 @@ debug_star(origin, color, time) {
 
     debugstar(origin, time, color);
   }
-
 }
 
 initutility() {
@@ -892,7 +890,7 @@ lerpdvar(str_dvar, n_val, n_lerp_time, b_saved_dvar) {
       continue;
     }
 
-    setdvar(str_dvar, n_curr_val);
+    setDvar(str_dvar, n_curr_val);
   }
   while(n_time_delta < n_lerp_time);
 }
@@ -930,7 +928,7 @@ serverlerpdvar(localclientnum, str_dvar, n_val, n_lerp_time, b_saved_dvar) {
       continue;
     }
 
-    setdvar(str_dvar, n_curr_val);
+    setDvar(str_dvar, n_curr_val);
   }
   while(n_time_delta < n_lerp_time);
 }

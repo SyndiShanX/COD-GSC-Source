@@ -90,7 +90,6 @@ designator_WaitForWeaponChange(designatorName) {
 designator_RemoveDesignatorAndRestorePreviousWeapon(designatorName) {
   if(self HasWeapon(designatorName)) {
     self TakeWeapon(designatorName);
-
   }
 }
 

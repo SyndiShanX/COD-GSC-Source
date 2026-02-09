@@ -19,9 +19,7 @@ STEPS TO GET GAGS_HELI_RIDE_IN_BLACKHAWK IN GAME:
 1) put this in your GSC before _load::main():
 	maps\_blackhawk::main( "vehicle_blackhawk" );
 2) create a helicopter path with a targetname "heli_ride_in"3) On the node that you wish to have the helicopter unload, add the keypair "script_unload" "1"4) call this function when you are ready to ride. dig into that function for all the available knobs.
-	heli = maps\_heli_ride::ride_start();"	
-	
-default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"default:"classname" "misc_prefab"default:"model" "prefabs\script_gags\heli_ride_in_blackhawk.map"*/
+	heli = maps\_heli_ride::ride_start();"default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"default:"classname" "misc_prefab"default:"model" "prefabs\script_gags\heli_ride_in_blackhawk.map"*/
 
 /*DISABLED gags_heli-ride-in_blackhawk_us (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -29,9 +27,7 @@ STEPS TO GET GAGS_HELI_RIDE_IN_BLACKHAWK IN GAME:
 1) put this in your GSC before _load::main():
 	maps\_blackhawk::main( "vehicle_blackhawk" );
 2) create a helicopter path with a targetname "heli_ride_in"3) On the node that you wish to have the helicopter unload, add the keypair "script_unload" "1"4) call this function when you are ready to ride. dig into that function for all the available knobs.
-	heli = maps\_heli_ride::ride_start();"	
-	
-default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"default:"classname" "misc_prefab"default:"model" "prefabs\script_gags\heli_ride_in_blackhawk_us.map"*/
+	heli = maps\_heli_ride::ride_start();"default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"default:"classname" "misc_prefab"default:"model" "prefabs\script_gags\heli_ride_in_blackhawk_us.map"*/
 
 //===========================================================================
 //== FRIENDLY CHOPPER RIDE-IN==
@@ -66,8 +62,8 @@ ride_setup(startnode, players_array) {
 attach_player(player, position, animfudgetime) {
   player thread player_in_heli(self);
 
-  if(getdvar("fastrope_arms") == "")
-    setdvar("fastrope_arms", "0");
+  if(getDvar("fastrope_arms") == "")
+    setDvar("fastrope_arms", "0");
   if(!isDefined(animfudgetime))
     animfudgetime = 0;
 
@@ -118,7 +114,7 @@ attach_player(player, position, animfudgetime) {
   animtime -= animfudgetime;
   self waittill("unloading");
 
-  if(getdvar("fastrope_arms") != "0")
+  if(getDvar("fastrope_arms") != "0")
     guy show();
   player disableweapons();
   // 	guy waittill( "jumpedout" );

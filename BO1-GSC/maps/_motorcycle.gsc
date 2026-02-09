@@ -12,8 +12,8 @@
 main() {
   build_aianims(::setanims, ::set_vehicle_anims);
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   for(i = 0; i < 9; i++) {
@@ -25,16 +25,13 @@ setanims() {
   positions[0].getout = % crew_bike_m72_drive_straight;
   return positions;
 }
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 ride_and_shoot(bike) {
   self.ridingvehicle = bike;
   self AnimCustom(::ai_ride_and_shoot);
 }
-
 ai_ride_and_shoot() {
   self endon("death");
   self endon("start_ragdoll");
@@ -144,7 +141,6 @@ ai_ride_and_shoot() {
     wait(0.05);
   }
 }
-
 ai_ride_stop_riding() {
   self endon("death");
   self endon("start_ragdoll");
@@ -152,7 +148,6 @@ ai_ride_stop_riding() {
   self ClearAnim(%root, 0);
   self Unlink();
 }
-
 ai_ride_and_shoot_linkto_bike() {
   assert(isDefined(self.ridingvehicle));
   tag_driver_origin = self.ridingvehicle GetTagOrigin("tag_driver");
@@ -161,7 +156,6 @@ ai_ride_and_shoot_linkto_bike() {
   self LinkTo(self.ridingvehicle, "tag_driver");
   self ClearAnim(%root, 0);
 }
-
 ai_ride_and_shoot_aiming_on(sideAnimWeight) {
   if(!isDefined(sideAnimWeight)) {
     sideAnimWeight = 0;
@@ -201,7 +195,6 @@ ai_ride_and_shoot_aiming_on(sideAnimWeight) {
   }
   self animscripts\weaponList::RefillClip();
 }
-
 ai_ride_and_shoot_idle() {
   if(self.bikerShouldJump) {
     self ai_ride_and_shoot_jump();
@@ -212,7 +205,6 @@ ai_ride_and_shoot_idle() {
   rollAnimWeight = 0;
   self SetAnim(%crew_bike_m72_drive_straight, 1 - rollAnimWeight, 0.2, 1);
 }
-
 ai_ride_and_shoot_aim_idle(blendTime) {
   if(self.bikerShouldJump) {
     self ai_ride_and_shoot_jump();
@@ -243,7 +235,6 @@ ai_ride_and_shoot_aim_idle(blendTime) {
   }
   self SetAnim(%crew_bike_m72_aim_f_5, 1 - sideAnimWeight, blendTime, 1);
 }
-
 ai_ride_and_shoot_lean() {
   rollAnimWeight = abs(self.ridingvehicle.angles[2]) / self.max_bike_roll_angle;
   if(rollAnimWeight > 1) {
@@ -268,7 +259,6 @@ ai_ride_and_shoot_lean() {
   }
   return rollAnimWeight;
 }
-
 ai_ride_and_shoot_gun_pullout() {
   self SetFlaggedAnimKnobAllRestart("ride", %crew_bike_m72_aim_gun_pullot, %body, 1, 0.2, 1);
   self waittillmatch("ride", "end");
@@ -288,7 +278,6 @@ ai_ride_and_shoot_gun_pullout() {
     self ai_ride_and_shoot_gun_putaway(0);
   }
 }
-
 ai_ride_and_shoot_gun_putaway(aimForwardTime) {
   self notify("stopShooting");
   self SetAnim(%moto_fire, 0, 0);
@@ -306,7 +295,6 @@ ai_ride_and_shoot_gun_putaway(aimForwardTime) {
   self.bikerIsArmed = false;
   self ai_ride_and_shoot_idle();
 }
-
 ai_ride_and_shoot_gun_shoot() {
   self endon("death");
   self endon("stopShooting");
@@ -318,7 +306,6 @@ ai_ride_and_shoot_gun_shoot() {
     wait(0.05);
   }
 }
-
 ai_ride_and_shoot_jump() {
   self endon("death");
   self endon("start_ragdoll");
@@ -349,7 +336,6 @@ ai_ride_and_shoot_jump() {
     self ai_ride_and_shoot_idle();
   }
 }
-
 ai_ride_and_shoot_watch_jump() {
   self endon("death");
   self endon("start_ragdoll");
@@ -362,7 +348,6 @@ ai_ride_and_shoot_watch_jump() {
     self.bikerShouldJump = false;
   }
 }
-
 ai_ride_and_shoot_gun_blindfire() {
   self notify("stopShooting");
   if(!self.bikerIsArmed) {
@@ -381,12 +366,10 @@ ai_ride_and_shoot_gun_blindfire() {
   self thread ai_ride_and_shoot_gun_shoot();
   self.prevSideAnimWeight = 99999;
 }
-
 ai_ride_and_shoot_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   self.deathFunction = ::ai_ride_and_shoot_ragdoll_death;
   return self.health + 10;
 }
-
 ai_ride_and_shoot_ragdoll_death() {
   self.a.doingRagdollDeath = true;
   self animscripts\shared::DropAllAIWeapons();

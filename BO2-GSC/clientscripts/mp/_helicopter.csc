@@ -161,7 +161,6 @@ startfx(localclientnum) {
       self.exhaustrightfxhandle = playFXOnTag(localclientnum, self.exhaustfx, self, "tag_engine_right");
   } else {
     println("Client: _helicopter.csc - startfx() - exhaust rotor fx is not loaded");
-
   }
 
   if(isDefined(self.vehicletype)) {

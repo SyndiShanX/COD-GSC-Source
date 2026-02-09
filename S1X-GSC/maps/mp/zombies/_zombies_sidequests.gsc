@@ -425,7 +425,7 @@ radius_trigger_thread() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     self.owner_ent notify("triggered");
@@ -758,15 +758,11 @@ fake_use(var_0, var_1, var_2, var_3, var_4, var_5) {
           var_8 = 1;
 
           if(isDefined(var_1) && isDefined(var_2)) {
-            var_8 = level.players[var_7][
-              }
-              [var_1]
-          ](var_2);
+            var_8 = level.players[var_7][}
+              [var_1]](var_2);
           else if(isDefined(var_1)) {
-            var_8 = level.players[var_7][
-              }
-              [var_1]
-          ]();
+            var_8 = level.players[var_7][}
+              [var_1]]();
 
           if(var_8) {
             self notify(var_0, level.players[var_7]);

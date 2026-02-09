@@ -763,7 +763,7 @@ hk_modulates_track_offset() {
 hk_moves() {
   self endon("death");
   //level endon( "bad_heli_goes_to_death_position" );
-  /# flag_assert( "bad_heli_goes_to_death_position" );
+  flag_assert("bad_heli_goes_to_death_position");
 
   self Vehicle_SetSpeed(120, 50, 50);
   self.track_offset = 0;

@@ -17,9 +17,9 @@ init() {
 }
 
 customteam_init() {
-  if(getdvar(#"g_customTeamName_Allies") != "")
-    setdvar("g_TeamName_Allies", getdvar(#"g_customTeamName_Allies"));
+  if(getDvar(#"g_customTeamName_Allies") != "")
+    setDvar("g_TeamName_Allies", getDvar(#"g_customTeamName_Allies"));
 
-  if(getdvar(#"g_customTeamName_Axis") != "")
-    setdvar("g_TeamName_Axis", getdvar(#"g_customTeamName_Axis"));
+  if(getDvar(#"g_customTeamName_Axis") != "")
+    setDvar("g_TeamName_Axis", getDvar(#"g_customTeamName_Axis"));
 }

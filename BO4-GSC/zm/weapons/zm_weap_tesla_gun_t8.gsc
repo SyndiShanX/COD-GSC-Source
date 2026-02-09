@@ -51,7 +51,7 @@ on_weapon_change(s_params) {
 }
 
 function_de59b16a(e_source, str_mod, var_8e05c280) {
-  if(isplayer(e_source) && (str_mod == "MOD_PROJECTILE" || str_mod == "MOD_PROJECTILE_SPLASH") && !self ai::is_stunned()) {
+  if(isPlayer(e_source) && (str_mod == "MOD_PROJECTILE" || str_mod == "MOD_PROJECTILE_SPLASH") && !self ai::is_stunned()) {
     e_source.tesla_enemies_hit = 1;
     self lightning_chain::arc_damage(self, e_source, 1, var_8e05c280);
   }

@@ -41,7 +41,7 @@ func_C7D3() {
   level.player takeallweapons();
   level.player setclientomnvar("ui_hide_hud", 1);
   scripts\engine\utility::flag_set("start_decompress_player");
-  setdvar("skip_outro", "0");
+  setDvar("skip_outro", "0");
   var_0 = scripts\sp\hud_util::func_7B4F();
   var_0.alpha = 1;
   level.player func_82C0("europa_suck_out_hit_fade_to_black", 0);
@@ -589,7 +589,7 @@ func_11628() {
   var_1 = scripts\engine\utility::getstructarray("outro_spot", "targetname");
   foreach(var_3 in var_1) {
     foreach(var_5 in var_0) {
-      if(isplayer(var_5) && var_3.script_noteworthy == "player") {
+      if(isPlayer(var_5) && var_3.script_noteworthy == "player") {
         var_5 setorigin(var_3.origin);
         var_5 setplayerangles(var_3.angles);
         var_5 freezecontrols(1);

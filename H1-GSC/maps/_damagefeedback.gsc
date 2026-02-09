@@ -97,14 +97,14 @@ updatedamagefeedbacksnd(var_0) {
   if(isDefined(var_0) && isDefined(var_0.disabledamagefeedbacksnd) && var_0.disabledamagefeedbacksnd) {
     return;
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_1 = "SP_hit_alert_npc";
 
     if(soundexists(var_1)) {
       level.player playlocalsound(var_1);
       return;
     }
-  } else if(isplayer(var_0))
+  } else if(isPlayer(var_0))
     return;
 }
 
@@ -112,7 +112,7 @@ updatedamagefeedbackhud(var_0, var_1) {
   if(!maps\_utility::is_damagefeedback_hud_enabled()) {
     return;
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_2 = 1;

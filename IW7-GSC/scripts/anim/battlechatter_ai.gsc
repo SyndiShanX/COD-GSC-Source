@@ -19,7 +19,7 @@ func_185D(var_0) {
 
   self.var_6552 = "infantry";
   self.var_376A = [];
-  if(isplayer(self) || scripts\engine\utility::player_is_in_jackal() && self == level.var_D127) {
+  if(isPlayer(self) || scripts\engine\utility::player_is_in_jackal() && self == level.var_D127) {
     self.var_28CF = 0;
     self.var_6EE9 = 0;
     self.type = "human";
@@ -361,7 +361,7 @@ func_183F(var_0, var_1, var_2) {
     return;
   }
 
-  if(scripts\anim\battlechatter::func_117ED(var_1) && !isplayer(var_1)) {
+  if(scripts\anim\battlechatter::func_117ED(var_1) && !isPlayer(var_1)) {
     return;
   }
 
@@ -406,7 +406,7 @@ func_1821(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     if(scripts\anim\battlechatter::func_9FC7(var_2)) {
       return;
     }
@@ -659,7 +659,7 @@ func_10AFB() {
           }
 
           if(!var_4 func_29A2(var_6)) {
-            if((scripts\engine\utility::player_is_in_jackal() && var_6 == level.var_D127) || !scripts\engine\utility::player_is_in_jackal() && isplayer(var_6)) {
+            if((scripts\engine\utility::player_is_in_jackal() && var_6 == level.var_D127) || !scripts\engine\utility::player_is_in_jackal() && isPlayer(var_6)) {
               continue;
             }
 
@@ -850,7 +850,7 @@ func_1A0C() {
     return;
   }
 
-  if(isalive(var_0) && !isplayer(var_0) && isDefined(var_0.var_10AC8) && var_0.var_28CF) {
+  if(isalive(var_0) && !isPlayer(var_0) && isDefined(var_0.var_10AC8) && var_0.var_28CF) {
     if(isDefined(var_0.var_376A) && isDefined(var_0.var_376A[var_0.var_10AC8.var_10AEE])) {
       var_0.var_376A[var_0.var_10AC8.var_10AEE] = undefined;
     }
@@ -1148,7 +1148,7 @@ func_D085() {
       continue;
     }
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       if(level.var_46BD[self.voice] == "GM" && scripts\anim\battlechatter::cansay("reaction", "takingfire", 1, undefined)) {
         func_181C("takingfire", undefined, var_0, 1);
       }

@@ -27,13 +27,13 @@ init() {
   level.b_movie = 0;
   level.forcedplayerteam = # "allies";
   level.var_b0fade70 = 1;
-  setdvar(#"botfill", 0);
+  setDvar(#"botfill", 0);
 
   if(isDefined(level.is_dm) && level.is_dm) {
-    setdvar(#"bot_maxfree", 10);
+    setDvar(#"bot_maxfree", 10);
   } else {
-    setdvar(#"bot_maxallies", 5);
-    setdvar(#"bot_maxaxis", 5);
+    setDvar(#"bot_maxallies", 5);
+    setDvar(#"bot_maxaxis", 5);
   }
 
   callback::add_callback(#"on_end_game", &on_end_game);
@@ -65,10 +65,10 @@ init() {
 }
 
 on_end_game(params) {
-  setdvar(#"botfill", 0);
-  setdvar(#"bot_maxfree", 0);
-  setdvar(#"bot_maxallies", 0);
-  setdvar(#"bot_maxaxis", 0);
+  setDvar(#"botfill", 0);
+  setDvar(#"bot_maxfree", 0);
+  setDvar(#"bot_maxallies", 0);
+  setDvar(#"bot_maxaxis", 0);
   callback::remove_callback(#"on_end_game", &on_end_game);
 }
 
@@ -280,7 +280,7 @@ function_6cc515f7(str_difficulty) {
 function_ccc3b1e3(var_d6602dc0) {
   e_player = getplayers(#"allies")[0];
 
-  if(isDefined(e_player) && isplayer(e_player)) {
+  if(isDefined(e_player) && isPlayer(e_player)) {
     e_player function_95e72b33(var_d6602dc0);
   }
 }
@@ -503,7 +503,7 @@ function_d8cdeb6a(n_index) {
 }
 
 function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(self.team !== attacker.team && !isbot(attacker) && isplayer(attacker)) {
+  if(self.team !== attacker.team && !isbot(attacker) && isPlayer(attacker)) {
     if(level.ct_difficulty == "hard") {
       if(attacker newvalueoptions(#"veteran_kills") < level.var_f0b5757d) {
         attacker function_9401373f(#"veteran_kills", 1);

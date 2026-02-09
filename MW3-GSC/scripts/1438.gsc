@@ -15,7 +15,7 @@ _id_43D4(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
   } else if(var_0) {
-    if(getdvar("player_vehicle_dismountable") == "off") {
+    if(getDvar("player_vehicle_dismountable") == "off") {
       self makeunusable();
     }
   }
@@ -33,11 +33,10 @@ _id_43D4(var_0) {
 
     var_1 = self getvehicleowner();
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       thread _id_43DA();
     } else {
       thread _id_43D5();
-
     }
     if(var_0) {
       break;
@@ -59,11 +58,9 @@ _id_43D5() {
 
   if(isDefined(level._id_43D7)) {
     level._id_43D7 destroy();
-
   }
   if(isDefined(level._id_43D8)) {
     level._id_43D8 destroy();
-
   }
   if(isDefined(level._id_43D9)) {
     level._id_43D9 destroy();
@@ -97,7 +94,6 @@ _id_43DD() {
     self.health = 1300;
   } else {
     self.health = 2000;
-
   }
   if(isDefined(self._id_163B)) {
     self.health = self.health + self._id_163B;
@@ -155,11 +151,10 @@ _id_43DF() {
 
   if(self.vehicletype == "crusader_player") {
     self setModel("vehicle_crusader2_viewmodel");
-
   }
   var_2 = gettime();
 
-  if(getdvar("debug_vehiclegod") != "off") {
+  if(getDvar("debug_vehiclegod") != "off") {
     for(;;) {
       self waittill("damage");
       self.health = self.maxhealth;
@@ -171,9 +166,8 @@ _id_43DF() {
 
   for(;;) {
     if(self._id_43E1) {
-      if(getdvar("debug_vehicleplayerhealth") != "off") {
+      if(getDvar("debug_vehicleplayerhealth") != "off") {
         iprintlnbold("playervehicles health: ", self.health - self._id_163B);
-
       }
       self._id_43E1 = 0;
       var_2 = gettime() + var_1;
@@ -186,11 +180,10 @@ _id_43DF() {
         self.health = self._id_43E0;
       } else {
         self.health = self.health + var_0;
-
       }
       var_3 = gettime() + 250;
 
-      if(getdvar("debug_vehicleplayerhealth") != "off") {
+      if(getDvar("debug_vehicleplayerhealth") != "off") {
         iprintlnbold("playervehicles health: ", self.health - self._id_163B);
       }
     }
@@ -232,7 +225,7 @@ _id_43E4() {
 }
 
 _id_43E5() {
-  if(getdvar("player_vehicle_dismountable") != "off") {
+  if(getDvar("player_vehicle_dismountable") != "off") {
     return;
   }
   level endon("player exited vehicle");
@@ -241,7 +234,6 @@ _id_43E5() {
 
   if(isDefined(level._id_43D9)) {
     level._id_43D9 destroy();
-
   }
   level._id_43D9 = newhudelem();
   level._id_43D9.x = -32;
@@ -291,7 +283,6 @@ _id_2334() {
     if(var_4 < 0.75 || var_2) {
       if(!var_2) {
         var_2 = 1;
-
       }
       var_6 = 1.0 - var_4 + var_3;
       var_0 fadeovertime(0.05);
@@ -313,7 +304,6 @@ _id_2334() {
         wait(var_5 * 0.5 - 0.1);
       } else {
         wait(var_5 * 0.5 - 0.1);
-
       }
       continue;
     }

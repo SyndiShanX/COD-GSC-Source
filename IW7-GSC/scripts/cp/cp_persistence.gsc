@@ -44,7 +44,7 @@ set_player_currency(var_0) {
 }
 
 give_player_currency(var_0, var_1, var_2, var_3, var_4) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -535,7 +535,7 @@ update_weaponstats_kills(var_0, var_1) {
 }
 
 update_weaponstats(var_0, var_1, var_2, var_3) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -911,7 +911,7 @@ update_lb_aliensession_escape(var_0, var_1) {
 }
 
 update_alien_kill_sessionstats(var_0, var_1) {
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
 

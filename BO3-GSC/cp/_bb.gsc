@@ -44,7 +44,7 @@ function private function_b918cb9(player) {
 }
 
 function logmatchsummary(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   var_4b34a5fc = 1;
@@ -129,7 +129,7 @@ function logmatchsummary(player) {
 
 function logobjectivestatuschange(objectivename, player, status) {
   playerid = -1;
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     playerid = getplayerspawnid(player);
   } else {
     return;
@@ -166,7 +166,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
   var_5833b024 = "";
   aiattackercombatmode = "";
   if(isDefined(attacker)) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attackerid = getplayerspawnid(attacker);
       attackertype = "_player";
       attackername = attacker.name;
@@ -191,7 +191,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
     }
   }
   if(isDefined(victim)) {
-    if(isplayer(victim)) {
+    if(isPlayer(victim)) {
       victimid = getplayerspawnid(victim);
       victimtype = "_player";
       victimname = victim.name;
@@ -232,7 +232,7 @@ function logplayermapnotification(notificationtype, player) {
     playerid = player.actor_id;
     playertype = "_ai";
     playerposition = player.origin;
-  } else if(isplayer(player)) {
+  } else if(isPlayer(player)) {
     playerid = getplayerspawnid(player);
     playertype = "_player";
     playerposition = player.origin;
@@ -250,7 +250,7 @@ function logcybercomevent(player, event, gadget) {
     userid = player.actor_id;
     usertype = "_ai";
     userposition = player.origin;
-  } else if(isplayer(player)) {
+  } else if(isPlayer(player)) {
     userid = getplayerspawnid(player);
     usertype = "_player";
     userposition = player.origin;
@@ -268,7 +268,7 @@ function logexplosionevent(destructible_ent, attacker, logexplosionevent, radius
     attackerid = attacker.actor_id;
     attackertype = "_ai";
     attackerposition = attacker.origin;
-  } else if(isplayer(attacker)) {
+  } else if(isPlayer(attacker)) {
     attackerid = getplayerspawnid(attacker);
     attackertype = "_player";
     attackerposition = attacker.origin;

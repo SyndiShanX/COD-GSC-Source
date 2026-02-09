@@ -16,7 +16,7 @@ function function_6f199738() {
 }
 
 function function_17186302() {
-  setdvar("", 0);
+  setDvar("", 0);
   while(true) {
     if(isDefined(level.var_a9e78bf7) && getdvarstring("") == "") {
       printtoprightln(("" + "") + level.var_a9e78bf7[""]);
@@ -56,7 +56,7 @@ function function_17186302() {
 }
 
 function function_10489e30() {
-  setdvar("", 0);
+  setDvar("", 0);
   while(true) {
     if(getdvarstring("") == "" || (isDefined(level.var_5deb2d16) && level.var_5deb2d16)) {
       skiptos = getskiptos();
@@ -89,7 +89,7 @@ function function_10489e30() {
 }
 
 function function_a2a8d5a6() {
-  setdvar("", 0);
+  setDvar("", 0);
   nodes = getallnodes();
   while(true) {
     if(getdvarstring("") == "") {
@@ -107,7 +107,7 @@ function function_a2a8d5a6() {
         println("" + animscript);
       }
     }
-    setdvar("", 0);
+    setDvar("", 0);
     wait(0.1);
   }
 }

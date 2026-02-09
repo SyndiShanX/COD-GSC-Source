@@ -308,7 +308,7 @@ function function_e421dd3f() {
   var_9e5ac8d1 = getent("trig_mechz_ee_a10", "targetname");
   var_9e5ac8d1 waittill("trigger", e_who);
   s_spawn_pos = arraygetclosest(e_who.origin, level.zm_loc_types["mechz_location"]);
-  if(isplayer(e_who) && isDefined(s_spawn_pos)) {
+  if(isPlayer(e_who) && isDefined(s_spawn_pos)) {
     ai_mechz = zm_castle_mechz::function_314d744b(0, s_spawn_pos, 1);
     ai_mechz.no_damage_points = 1;
     ai_mechz.deathpoints_already_given = 1;

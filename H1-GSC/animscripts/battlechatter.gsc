@@ -8,10 +8,10 @@ init_battlechatter() {
   if(isDefined(anim.chatinitialized) && anim.chatinitialized) {
     return;
   }
-  if(getdvar("bcs_enable") == "")
-    setdvar("bcs_enable", "on");
+  if(getDvar("bcs_enable") == "")
+    setDvar("bcs_enable", "on");
 
-  if(getdvar("bcs_enable") == "off") {
+  if(getDvar("bcs_enable") == "off") {
     anim.chatinitialized = 0;
     anim.player.chatinitialized = 0;
     return;
@@ -20,50 +20,50 @@ init_battlechatter() {
   anim.chatinitialized = 1;
   anim.player.chatinitialized = 0;
 
-  if(getdvar("bcs_filterThreat") == "")
-    setdvar("bcs_filterThreat", "off");
+  if(getDvar("bcs_filterThreat") == "")
+    setDvar("bcs_filterThreat", "off");
 
-  if(getdvar("bcs_filterInform") == "")
-    setdvar("bcs_filterInform", "off");
+  if(getDvar("bcs_filterInform") == "")
+    setDvar("bcs_filterInform", "off");
 
-  if(getdvar("bcs_filterOrder") == "")
-    setdvar("bcs_filterOrder", "off");
+  if(getDvar("bcs_filterOrder") == "")
+    setDvar("bcs_filterOrder", "off");
 
-  if(getdvar("bcs_filterReaction") == "")
-    setdvar("bcs_filterReaction", "off");
+  if(getDvar("bcs_filterReaction") == "")
+    setDvar("bcs_filterReaction", "off");
 
-  if(getdvar("bcs_filterResponse") == "")
-    setdvar("bcs_filterResponse", "off");
+  if(getDvar("bcs_filterResponse") == "")
+    setDvar("bcs_filterResponse", "off");
 
-  if(getdvar("bcs_threatLimitTargettedBySelf") == "")
-    setdvar("bcs_threatLimitTargettedBySelf", "off");
+  if(getDvar("bcs_threatLimitTargettedBySelf") == "")
+    setDvar("bcs_threatLimitTargettedBySelf", "off");
 
-  if(getdvar("bcs_threatLimitTargetingPlayer") == "")
-    setdvar("bcs_threatLimitTargetingPlayer", "off");
+  if(getDvar("bcs_threatLimitTargetingPlayer") == "")
+    setDvar("bcs_threatLimitTargetingPlayer", "off");
 
-  if(getdvar("bcs_threatLimitInPlayerFOV") == "")
-    setdvar("bcs_threatLimitInPlayerFOV", "on");
+  if(getDvar("bcs_threatLimitInPlayerFOV") == "")
+    setDvar("bcs_threatLimitInPlayerFOV", "on");
 
-  if(getdvar("bcs_threatLimitInLocation") == "")
-    setdvar("bcs_threatLimitInLocation", "on");
+  if(getDvar("bcs_threatLimitInLocation") == "")
+    setDvar("bcs_threatLimitInLocation", "on");
 
-  if(getdvar("bcs_threatLimitSpeakerDist") == "")
-    setdvar("bcs_threatLimitSpeakerDist", "512");
+  if(getDvar("bcs_threatLimitSpeakerDist") == "")
+    setDvar("bcs_threatLimitSpeakerDist", "512");
 
-  if(getdvar("bcs_threatLimitThreatDist") == "")
-    setdvar("bcs_threatLimitThreatDist", "2048");
+  if(getDvar("bcs_threatLimitThreatDist") == "")
+    setDvar("bcs_threatLimitThreatDist", "2048");
 
-  if(getdvar("bcs_threatPlayerRelative") == "")
-    setdvar("bcs_threatPlayerRelative", "off");
+  if(getDvar("bcs_threatPlayerRelative") == "")
+    setDvar("bcs_threatPlayerRelative", "off");
 
-  if(getdvar("debug_bcprint") == "")
-    setdvar("debug_bcprint", "off");
+  if(getDvar("debug_bcprint") == "")
+    setDvar("debug_bcprint", "off");
 
-  if(getdvar("debug_bcshowqueue") == "")
-    setdvar("debug_bcshowqueue", "off");
+  if(getDvar("debug_bcshowqueue") == "")
+    setDvar("debug_bcshowqueue", "off");
 
-  if(getdvar("debug_bcprintdump") == "")
-    setdvar("debug_bcprintdump", "off");
+  if(getDvar("debug_bcprintdump") == "")
+    setDvar("debug_bcprintdump", "off");
 
   anim.countryids["british"] = "UK";
   anim.countryids["american"] = "US";
@@ -362,10 +362,10 @@ bcsenabled() {
 }
 
 bcsdebugwaiter() {
-  var_0 = getdvar("bcs_enable");
+  var_0 = getDvar("bcs_enable");
 
   for(;;) {
-    var_1 = getdvar("bcs_enable");
+    var_1 = getDvar("bcs_enable");
 
     if(var_1 != var_0) {
       switch (var_1) {
@@ -1006,7 +1006,7 @@ playphrase(var_0, var_1) {
     var_3 = gettime();
 
     if(var_0.master && self.team == "allies") {
-      if(getdvar("bcs_threatPlayerRelative") == "on") {
+      if(getDvar("bcs_threatPlayerRelative") == "on") {
         if(strfind(var_0.soundaliases[var_2], "_direction_")) {
           if(isDefined(var_0.threatent))
             var_0.soundaliases[var_2] = var_0 getdirectionaliasplayerrelative(var_0.threatent);
@@ -1290,7 +1290,7 @@ geteventstate(var_0) {
 }
 
 isfiltered(var_0) {
-  if(getdvar("bcs_filter" + var_0) == "on" || getdvar("bcs_filter" + var_0) == "1")
+  if(getDvar("bcs_filter" + var_0) == "on" || getDvar("bcs_filter" + var_0) == "1")
     return 1;
 
   return 0;
@@ -1326,7 +1326,7 @@ dotypelimit(var_0, var_1) {
 }
 
 bcissniper() {
-  if(isplayer(self))
+  if(isPlayer(self))
     return 0;
 
   if(isexposed())
@@ -1399,7 +1399,7 @@ isofficer() {
 }
 
 bcgetclaimednode() {
-  if(isplayer(self))
+  if(isPlayer(self))
     var_0 = self.node;
   else
     var_0 = animscripts\utility::getclaimednode();
@@ -1819,7 +1819,7 @@ pointinfov(var_0) {
 }
 
 battlechatter_canprint() {
-  if(getdvar("debug_bcprint") == self.team || getdvar("debug_bcprint") == "all")
+  if(getDvar("debug_bcprint") == self.team || getDvar("debug_bcprint") == "all")
     return 1;
 
   return 0;
@@ -1842,7 +1842,7 @@ battlechatter_print_internal(var_0, var_1) {
 }
 
 battlechatter_canprintdump() {
-  return getdvar("debug_bcprintdump") == "on";
+  return getDvar("debug_bcprintdump") == "on";
 }
 
 battlechatter_printdump(var_0) {}
@@ -2044,7 +2044,7 @@ getdirectionfacingangle(var_0, var_1, var_2) {
 getrelativeangles(var_0) {
   var_1 = var_0.angles;
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_2 = var_0 bcgetclaimednode();
 
     if(isDefined(var_2))

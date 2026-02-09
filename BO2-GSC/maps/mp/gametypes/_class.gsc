@@ -124,8 +124,8 @@ create_class_exclusion_list() {
 
   level.attachmentexclusions = [];
 
-  for(currentdvar = 0; getdvar(#"_id_7F6F03E6" + currentdvar) != ""; currentdvar++)
-    level.attachmentexclusions[currentdvar] = getdvar(#"_id_7F6F03E6" + currentdvar);
+  for(currentdvar = 0; getDvar(#"_id_7F6F03E6" + currentdvar) != ""; currentdvar++)
+    level.attachmentexclusions[currentdvar] = getDvar(#"_id_7F6F03E6" + currentdvar);
 }
 
 is_item_excluded(itemindex) {
@@ -810,16 +810,16 @@ cac_get_dvar_int(dvar, def) {
 }
 
 cac_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }
 
 cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor) {
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker))
+  if(!isDefined(victim) || !isDefined(attacker) || !isPlayer(attacker))
     return damage;
 
   if(!isDefined(damage) || !isDefined(meansofdeath) || !isDefined(weapon))
@@ -833,13 +833,11 @@ cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, infl
 
     if(getdvarint(#"_id_5ABA6445"))
       println("Perk/> " + attacker.name + "'s bullet damage did extra damage to vehicle");
-
   } else if(attacker hasperk("specialty_explosivedamage") && isplayerexplosiveweapon(weapon, meansofdeath)) {
     final_damage = damage * (100 + level.cac_explosivedamage_data) / 100;
 
     if(getdvarint(#"_id_5ABA6445"))
       println("Perk/> " + attacker.name + "'s explosive damage did extra damage to vehicle");
-
   } else
     final_damage = old_damage;
 
@@ -852,12 +850,12 @@ cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, infl
 cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
   assert(isDefined(victim));
   assert(isDefined(attacker));
-  assert(isplayer(victim));
+  assert(isPlayer(victim));
 
   if(victim == attacker)
     return damage;
 
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     return damage;
 
   if(damage <= 0)
@@ -874,32 +872,27 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
     if(victim hasperk("specialty_armorvest") && !isheaddamage(hitloc)) {
       if(debug)
         println("Perk/> " + victim.name + "'s armor countered " + attacker.name + "'s increased bullet damage");
-
     } else {
       final_damage = damage * (100 + level.cac_bulletdamage_data) / 100;
 
       if(debug)
         println("Perk/> " + attacker.name + "'s bullet damage did extra damage to " + victim.name);
-
     }
   } else if(victim hasperk("specialty_armorvest") && isprimarydamage(mod) && !isheaddamage(hitloc)) {
     final_damage = damage * (level.cac_armorvest_data * 0.01);
 
     if(debug)
       println("Perk/> " + attacker.name + "'s bullet damage did less damage to " + victim.name);
-
   } else if(victim hasperk("specialty_fireproof") && isfiredamage(weapon, mod)) {
     final_damage = damage * ((100 - level.cac_fireproof_data) / 100);
 
     if(debug)
       println("Perk/> " + attacker.name + "'s flames did less damage to " + victim.name);
-
   } else if(attacker hasperk("specialty_explosivedamage") && isplayerexplosiveweapon(weapon, mod)) {
     final_damage = damage * (100 + level.cac_explosivedamage_data) / 100;
 
     if(debug)
       println("Perk/> " + attacker.name + "'s explosive damage did extra damage to " + victim.name);
-
   } else if(victim hasperk("specialty_flakjacket") && isexplosivedamage(weapon, mod) && !victim grenadestuck(inflictor)) {
     cac_data = level.hardcoremode ? level.cac_flakjacket_hardcore_data : level.cac_flakjacket_data;
 
@@ -912,7 +905,6 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
 
     if(debug)
       println("Perk/> " + victim.name + "'s flak jacket decreased " + attacker.name + "'s grenade damage");
-
   }
 
   victim.cac_debug_damage_type = tolower(mod);

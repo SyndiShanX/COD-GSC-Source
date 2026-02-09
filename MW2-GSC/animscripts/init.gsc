@@ -7,15 +7,13 @@
 //=====================
 //
 // Anim variables
-// --------------
-// Anim variables keep track of what the character is doing with respect to his
+// -------------- // Anim variables keep track of what the character is doing with respect to his
 // animations.They know if he's standing, crouching, kneeling, walking, running, etc, // so that he can play appropriate transitions to get to the animation he wants.
 // anim_movement - "stop", "walk", "run"// anim_pose - "stand", "crouch", "prone", some others for pain poses.
 // I'm putting functions to do the basic animations to change these variables in
 // SetPoseMovement.gsc, //
 // Error Reporting
-// ---------------
-// To report a script error condition (similar to assert(0)), I assign a non-existent variable to
+// --------------- // To report a script error condition (similar to assert(0)), I assign a non-existent variable to
 // the variable homemade_errorI use the name of the non-existent variable to try to explain the
 // error.For example:
 // 		homemade_error = Unexpected_anim_pose_value + self.a.pose;
@@ -189,11 +187,11 @@ main() {
   if(!isDefined(self.script_forcegrenade))
     self.script_forcegrenade = 0;
 
-  /# self.a.lastDebugPrint = "";
+  self.a.lastDebugPrint = "";
 
   SetupUniqueAnims();
 
-  /# thread animscripts\utility::UpdateDebugInfo();
+  thread animscripts\utility::UpdateDebugInfo();
 
   self animscripts\weaponList::RefillClip(); // Start with a full clip.
 
@@ -377,7 +375,7 @@ enemyNotify() {
     self waittill("enemy");
     if(!isalive(self.enemy))
       continue;
-    while(isplayer(self.enemy)) {
+    while(isPlayer(self.enemy)) {
       if(hasEnemySightPos())
         level.lastPlayerSighted = gettime();
       wait(2);
@@ -421,7 +419,7 @@ firstInit() {
 
   initDeveloperDvars();
 
-  setdvar("scr_expDeathMayMoveCheck", "on");
+  setDvar("scr_expDeathMayMoveCheck", "on");
 
   maps\_names::setup_names();
 
@@ -506,18 +504,18 @@ firstInit() {
 
 initDeveloperDvars() {
   if(getdebugdvar("debug_noanimscripts") == "")
-    setdvar("debug_noanimscripts", "off");
+    setDvar("debug_noanimscripts", "off");
   else if(getdebugdvar("debug_noanimscripts") == "on")
     anim.defaultException = animscripts\init::infiniteLoop;
 
   if(getdebugdvar("debug_grenadehand") == "")
-    setdvar("debug_grenadehand", "off");
+    setDvar("debug_grenadehand", "off");
   if(getdebugdvar("anim_dotshow") == "")
-    setdvar("anim_dotshow", "-1");
+    setDvar("anim_dotshow", "-1");
   if(getdebugdvar("anim_debug") == "")
-    setdvar("anim_debug", "");
+    setDvar("anim_debug", "");
   if(getdebugdvar("debug_misstime") == "")
-    setdvar("debug_misstime", "");
+    setDvar("debug_misstime", "");
 }
 
 initBattlechatter() {

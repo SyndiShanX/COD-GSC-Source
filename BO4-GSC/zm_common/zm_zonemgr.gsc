@@ -300,7 +300,7 @@ function_adc70eee(location, zone_name, ignore_enabled_check = 0) {
 }
 
 entity_in_zone(zone_name, ignore_enabled_check = 0) {
-  if(isplayer(self) && self.sessionstate == "spectator") {
+  if(isPlayer(self) && self.sessionstate == "spectator") {
     return false;
   }
 
@@ -330,7 +330,7 @@ entity_in_zone(zone_name, ignore_enabled_check = 0) {
 }
 
 entity_in_active_zone(ignore_enabled_check = 0) {
-  if(isplayer(self) && self.sessionstate == "spectator") {
+  if(isPlayer(self) && self.sessionstate == "spectator") {
     return false;
   }
 
@@ -1296,7 +1296,6 @@ function private function_8a9003ae() {
 
           line(var_db6c400c, node_location, line_color, 1, 0, 1);
           sphere(node_location, 6, sphere_color, 1, 0, 10, 1);
-
         }
       }
     }
@@ -1304,10 +1303,10 @@ function private function_8a9003ae() {
 }
 
 function_54fc7938(player_ent, var_5d02daa5) {
-  assert(isplayer(player_ent));
+  assert(isPlayer(player_ent));
   assert(isentity(var_5d02daa5) || ishash(var_5d02daa5) || isstring(var_5d02daa5));
 
-  if(isplayer(player_ent)) {
+  if(isPlayer(player_ent)) {
     ent_number = player_ent getentitynumber();
 
     if(isentity(var_5d02daa5)) {

@@ -257,7 +257,6 @@ loadoutFakePerks(loadoutStreakType, loadoutAmmoType) {
     default:
       self.streakType = "assault";
   }
-
 }
 
 getLoadoutStreakTypeFromStreakType(streakType) {
@@ -904,7 +903,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
 
   primaryName = buildWeaponName(loadoutPrimary, attachments, self.loadoutPrimaryCamo, self.loadoutPrimaryReticle);
 
-  primaryName = GetDvar("dbg_spawn_weap", primaryName);
+  primaryName = getDvar("dbg_spawn_weap", primaryName);
 
   self _giveWeapon(primaryName);
 

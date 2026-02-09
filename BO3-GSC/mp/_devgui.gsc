@@ -26,21 +26,21 @@ function autoexec __init__sytem__() {
 }
 
 function __init__() {
-  setdvar("", "");
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   level.attachment_cycling_dvars = [];
   level.attachment_cycling_dvars[level.attachment_cycling_dvars.size] = "";
   level.attachment_cycling_dvars[level.attachment_cycling_dvars.size] = "";
@@ -48,12 +48,12 @@ function __init__() {
   level.attachment_cycling_dvars[level.attachment_cycling_dvars.size] = "";
   level.attachment_cycling_dvars[level.attachment_cycling_dvars.size] = "";
   level.attachment_cycling_dvars[level.attachment_cycling_dvars.size] = "";
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   level.acv_cycling_dvars = [];
   level.acv_cycling_dvars[level.acv_cycling_dvars.size] = "";
   level.acv_cycling_dvars[level.acv_cycling_dvars.size] = "";
@@ -112,7 +112,7 @@ function devgui_player_spawn_think() {
         player.resurrect_angles = player.angles;
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }
@@ -135,7 +135,7 @@ function devgui_vehicle_spawn_think() {
           }
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.05);
   }
@@ -274,7 +274,7 @@ function devgui_weapon_think() {
     if(weapon_name != "") {
       devgui_handle_player_command(&devgui_give_weapon, weapon_name);
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }
@@ -361,8 +361,8 @@ function devgui_attachment_cosmetic_variant_think() {
 }
 
 function devgui_attachment_cycling_clear(index) {
-  setdvar(level.attachment_cycling_dvars[index], "");
-  setdvar(level.acv_cycling_dvars[index], 0);
+  setDvar(level.attachment_cycling_dvars[index], "");
+  setDvar(level.acv_cycling_dvars[index], 0);
 }
 
 function devgui_attachment_cycling_update() {
@@ -431,7 +431,7 @@ function devgui_attachment_cycling_update() {
 function devgui_attachment_cycling_think() {
   for(;;) {
     state = getdvarstring("");
-    setdvar("", "");
+    setDvar("", "");
     if(issubstr(state, "")) {
       if("" == state) {
         for(i = 0; i < 6; i++) {
@@ -480,7 +480,7 @@ function devgui_give_weapon(weapon_name) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_give_ammo");
   self endon("devgui_give_ammo");
@@ -550,7 +550,7 @@ function devgui_update_attachment_cosmetic_variant(attachment_1, attachment_2) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   currentweapon = self getcurrentweapon();
   variant_index = getdvarint("");
@@ -579,7 +579,7 @@ function devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) 
   } else {
     array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
   }
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function init_debug_center_screen() {
@@ -590,14 +590,14 @@ function init_debug_center_screen() {
         thread debug_center_screen();
         zero_idle_movement = getdvarstring("");
         if(isDefined(zero_idle_movement) && zero_idle_movement == "") {
-          setdvar("", "");
+          setDvar("", "");
           zero_idle_movement = "";
         }
       }
     } else {
       level notify("hash_8e42baed");
       if(zero_idle_movement == "") {
-        setdvar("", "");
+        setDvar("", "");
         zero_idle_movement = "";
       }
     }

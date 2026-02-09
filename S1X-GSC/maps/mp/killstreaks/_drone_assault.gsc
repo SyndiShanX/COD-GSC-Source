@@ -99,7 +99,6 @@ tryUseAssaultDrone(lifeId, modules) {
   }
 
   hasAIOption = array_contains(modules, "assault_ugv_ai");
-  /#	
   hasAIOption = hasAIOption || SCR_CONST_DEBUG_ENABLE_AI;
 
   if(!hasAIOption) {
@@ -134,7 +133,6 @@ tryUseAssaultDrone(lifeId, modules) {
 
 CreateAssaultUav(lifeId, modules, spawnOrigin, spawnAngles) {
   hasTurret = array_contains(modules, "assault_ugv_mg") || array_contains(modules, "assault_ugv_rockets") || array_contains(modules, "mp_terrace");
-  /#	
   hasTurret = hasTurret || SCR_CONST_DEBUG_ENABLE_MG || SCR_CONST_DEBUG_ENABLE_ROCKETS;
 
   mp_terrace = array_contains(modules, "mp_terrace");
@@ -147,7 +145,7 @@ CreateAssaultUav(lifeId, modules, spawnOrigin, spawnAngles) {
     lifespan = 45;
   }
 
-  if(GetDvar("scr_assault_drone_time", "0") != "0") {
+  if(getDvar("scr_assault_drone_time", "0") != "0") {
     lifespan = GetDvarFloat("scr_assault_drone_time");
   }
 
@@ -237,27 +235,21 @@ SetupCommonAssaultDroneProperties(vehicle, lifeId, lifespan, modules) {
   vehicle.mp_terrace = array_contains(modules, "mp_terrace");
 
   vehicle.hardened = array_contains(modules, "assault_ugv_hardened");
-  /#	
   vehicle.hardened = vehicle.hardened || SCR_CONST_DEBUG_ENABLE_HARDENED;
 
   vehicle.hasMG = array_contains(modules, "assault_ugv_mg") || vehicle.mp_terrace;
-  /#	
   vehicle.hasMG = vehicle.hasMG || SCR_CONST_DEBUG_ENABLE_MG;
 
   vehicle.hasRockets = array_contains(modules, "assault_ugv_rockets");
-  /#	
   vehicle.hasRockets = vehicle.hasRockets || SCR_CONST_DEBUG_ENABLE_ROCKETS;
 
   vehicle.hasCloak = array_contains(modules, "assault_ugv_cloak");
-  /#	
   vehicle.hasCloak = vehicle.hasCloak || SCR_CONST_DEBUG_ENABLE_CLOAK;
 
   vehicle.hasAIOption = array_contains(modules, "assault_ugv_ai");
-  /#	
   vehicle.hasAIOption = vehicle.hasAIOption || SCR_CONST_DEBUG_ENABLE_AI;
 
   vehicle.hasARHud = array_contains(modules, "assault_ugv_ar_hud") || vehicle.mp_terrace;
-  /#	
   vehicle.hasARHud = vehicle.hasARHud || SCR_CONST_DEBUG_ENABLE_AR_HUD;
 
   vehicle.hasTurret = (vehicle.hasMG || vehicle.hasRockets);
@@ -760,7 +752,6 @@ AssaultHudSetup(vehicle) {
   self maps\mp\killstreaks\_aerial_utility::playerEnableStreakStatic();
 
   self SetClientOmnvar("ui_assaultdrone_countdown", vehicle.endTime);
-  /#	
   if(SCR_CONST_DEBUG_INFINITE || GetDvarInt("scr_drone_assault_infinite", 0)) {
     self SetClientOmnvar("ui_assaultdrone_countdown", 0);
   }
@@ -865,7 +856,6 @@ onAssaultDroneDeath(attacker, weapon, meansOfDeath, damage) {
 AssaultHandleTimeoutWarning(vehicle, lifespan) {
   vehicle endon("death");
 
-  /#	
   if(SCR_CONST_DEBUG_INFINITE || GetDvarInt("scr_drone_assault_infinite", 0)) {
     return;
   }

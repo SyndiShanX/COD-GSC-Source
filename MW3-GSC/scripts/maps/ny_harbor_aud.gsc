@@ -12,7 +12,6 @@ main() {
 
   if(!isDefined(level._id_16F5)) {
     level._id_16F5 = spawnStruct();
-
   }
   common_scripts\utility::flag_init("aud_player_tunnel_spline");
   common_scripts\utility::flag_init("aud_flag_player_underwater");
@@ -163,7 +162,6 @@ _id_4481(var_0, var_1) {
         maps\_audio_mix_manager::_id_1520("mute_all", var_4);
       } else {
         _id_448B("mus_sub_scuttle_announcement", 0);
-
       }
       break;
     case "start_escape_on_zodiacs":
@@ -216,7 +214,6 @@ _id_4481(var_0, var_1) {
 
       if(var_6 == "nyhb_sub_interior_flooded") {
         _id_448B("mus_sub_interior_flooded");
-
       }
       level._id_16F5._id_496A = 80;
       break;
@@ -231,7 +228,6 @@ _id_4481(var_0, var_1) {
 
       if(var_5 == "nyhb_sub_interior_pre_missileroom") {
         thread _id_4994();
-
       }
       break;
     case "exit_nyhb_sub_interior_missileroom1":
@@ -250,7 +246,6 @@ _id_4481(var_0, var_1) {
         level._id_16F5._id_496A = 20;
       } else {
         level._id_16F5._id_496A = 40;
-
       }
       break;
     case "exit_nyhb_sub_interior_controlroom":
@@ -260,7 +255,6 @@ _id_4481(var_0, var_1) {
         level._id_16F5._id_496A = 20;
       } else {
         level._id_16F5._id_496A = 40;
-
       }
       break;
     case "enter_nyhb_surface_battle":
@@ -297,7 +291,6 @@ _id_4481(var_0, var_1) {
 
       if(var_5 == "nyhb_zodiac_ride") {
         maps\_audio::_id_1570("harb_zodiac_pier");
-
       }
       break;
     case "exit_nyhb_surface_pier":
@@ -305,7 +298,6 @@ _id_4481(var_0, var_1) {
 
       if(var_6 == "nyhb_zodiac_ride") {
         maps\_audio::_id_172B();
-
       }
       break;
     case "enter_nyhb_zodiac_ride":
@@ -313,7 +305,6 @@ _id_4481(var_0, var_1) {
 
       if(var_5 == "nyhb_surface_pier") {
         maps\_audio::_id_172B();
-
       }
       break;
     case "exit_nyhb_zodiac_ride":
@@ -321,7 +312,6 @@ _id_4481(var_0, var_1) {
 
       if(var_6 == "nyhb_surface_pier") {
         maps\_audio::_id_1570("harb_zodiac_pier");
-
       }
       break;
     case "enter_nyhb_underwater_open":
@@ -400,7 +390,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_12)) {
         maps\_audio::_id_15D7("oscar_torpedoes_st", var_12);
-
       }
       break;
     case "torpedo_2":
@@ -457,7 +446,6 @@ _id_4481(var_0, var_1) {
     case "slava_missile_launch":
       if(!common_scripts\utility::flag("player_on_boat")) {
         _id_49D5(var_1[0]);
-
       }
       break;
     case "slava_missile_explode":
@@ -620,7 +608,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_20)) {
         thread _id_49B9(var_20, "skybattle_f15_flyby_1", 10000);
-
       }
       break;
     case "spawn_f15_fighters_3_4":
@@ -628,7 +615,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_20)) {
         thread _id_49B9(var_20, "skybattle_f15_flyby_3", 12000);
-
       }
       break;
     case "spawn_ship_squeeze_hind":
@@ -636,7 +622,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_21)) {
         thread _id_49B9(var_21, "skybattle_hind_flyby_1", 800);
-
       }
       break;
     case "tomahawk_the_hind":
@@ -657,7 +642,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_20)) {
         thread _id_49B9(var_20, "skybattle_f15_flyby_5", 900);
-
       }
       break;
     case "spawn_f15_fighter_6":
@@ -665,7 +649,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_20)) {
         thread _id_49B9(var_20, "skybattle_f15_flyby_6", 1000);
-
       }
       break;
     case "dvora_1":
@@ -890,7 +873,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_21)) {
         thread _id_49B9(var_21, "skybattle_hind_flyby_2", 4500);
-
       }
       break;
     case "spawn_hind_flyby_6":
@@ -898,7 +880,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_21)) {
         thread _id_49B9(var_21, "skybattle_hind_flyby_3", 3000);
-
       }
       break;
     case "spawn_flyby_chinook_left":
@@ -906,7 +887,6 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_31)) {
         thread _id_49B9(var_31, "chinook_flyby_1", 4500);
-
       }
       break;
     case "spawn_flyby_chinook_right":
@@ -940,7 +920,6 @@ _id_4481(var_0, var_1) {
 
         if(!isDefined(level._id_16F5._id_4976)) {
           level._id_16F5._id_4976 = 0;
-
         }
         if(level._id_16F5._id_4976 < 3 && var_35 < 1000000) {
           level._id_16F5._id_4976++;
@@ -965,7 +944,6 @@ _id_4481(var_0, var_1) {
 
         while(isDefined(var_36)) {
           wait 0.25;
-
         }
         level._id_16F5._id_4977 = undefined;
       }
@@ -980,7 +958,6 @@ _id_4481(var_0, var_1) {
 
         while(isDefined(var_36)) {
           wait 0.25;
-
         }
         level._id_16F5._id_4978 = undefined;
       }
@@ -1002,7 +979,6 @@ _id_448C(var_0, var_1) {
 
   if(getsubstr(var_0, 0, 4) != "mus_") {
     return 0;
-
   }
   level notify("kill_other_music");
   level endon("kill_other_music");
@@ -1776,7 +1752,6 @@ _id_49B4() {
 
   if(isDefined(level._id_16F5._id_49B0)) {
     var_0 = level._id_16F5._id_49B0;
-
   }
   return var_0;
 }
@@ -1790,7 +1765,6 @@ _id_49B6(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   thread maps\_audio_vehicles::_id_15F4("sdv_motor_player", var_1);
   thread maps\_audio_vehicles::_id_15F4("sdv_water_player", var_1);
@@ -1813,20 +1787,17 @@ _id_49B9(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     var_5 = var_3;
-
   }
   var_6 = 0;
 
   if(isDefined(var_4)) {
     var_6 = var_4;
-
   }
   while(isDefined(var_0)) {
     if(var_6) {
       var_7 = distance(var_0.origin, level.player.origin);
     } else {
       var_7 = distance2d(var_0.origin, level.player.origin);
-
     }
     if(var_5) {}
 
@@ -1939,26 +1910,22 @@ _id_49C0(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0)) {
     var_4 = var_0;
-
   }
   var_5 = 1.0;
 
   if(isDefined(var_1)) {
     var_5 = var_1;
-
   }
   var_6 = 0.0;
 
   if(isDefined(var_3)) {
     var_6 = var_3;
-
   }
   _id_49C6(var_4, var_5, var_6);
   var_7 = 5.0;
 
   if(isDefined(var_2)) {
     var_7 = var_2;
-
   }
   common_scripts\utility::flag_wait("aud_engine_stop_monitor");
   wait 5.0;
@@ -1995,7 +1962,6 @@ _id_49C2() {
     self._id_49C4 = 0;
   } else {
     self._id_49C4 = 1;
-
   }
   var_9 = vectornormalize(var_9);
   var_11 = vectordot(var_7, var_9);
@@ -2101,7 +2067,6 @@ _id_49C9(var_0, var_1, var_2) {
 _id_49CA() {
   if(!isDefined(level._id_16F5._id_49CB)) {
     thread _id_49CF();
-
   }
   var_0 = level._id_16F5._id_49CC;
 
@@ -2138,7 +2103,6 @@ _id_49CF() {
 _id_49D4(var_0) {
   if(!isDefined(level._id_16F5._id_49CB)) {
     _id_49CF();
-
   }
   if(var_0 != level._id_16F5._id_49D1) {
     level._id_16F5._id_49D1 = var_0;
@@ -2179,7 +2143,6 @@ _id_49D7(var_0) {
 _id_49D8(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(level._id_16F5._id_49D9)) {
     level._id_16F5._id_49D9 = 0;
-
   }
   var_5 = gettime();
 

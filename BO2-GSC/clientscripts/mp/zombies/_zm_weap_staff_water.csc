@@ -9,7 +9,7 @@
 #include clientscripts\mp\zm_tomb;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   registerclientfield("scriptmover", "staff_blizzard_fx", 14000, 1, "int", ::staff_blizzard_fx, 1);

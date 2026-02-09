@@ -67,7 +67,7 @@ on_player_connect() {
 }
 
 on_ai_killed(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     attacker = params.eattacker;
 
     if("_zombie" === self.scoretype) {
@@ -86,7 +86,7 @@ on_ai_killed(params) {
 
 on_vehicle_killed(params) {
   if(isDefined(params)) {
-    if(isplayer(params.eattacker)) {
+    if(isPlayer(params.eattacker)) {
       attacker = params.eattacker;
 
       if(!attacker util::isenemyteam(self.team)) {
@@ -116,7 +116,7 @@ on_player_killed() {
   attacker = self.laststandparams.attacker;
   weapon = self.laststandparams.sweapon;
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 
@@ -353,7 +353,7 @@ function_e49226a4() {
   self endon(#"death");
   wait 10;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.var_6f3e3a9c = undefined;
   }
 }
@@ -362,7 +362,7 @@ function_db2da6f7() {
   self endon(#"disconnect");
   wait 0.25;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.var_c9daf540 = undefined;
   }
 }
@@ -374,7 +374,7 @@ on_player_damage(params) {
 
   attacker = params.eattacker;
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(attacker != self) {
       if(!isDefined(self.var_9a787df5)) {
         self.var_9a787df5 = [];
@@ -389,7 +389,7 @@ on_player_downed() {
   if(isDefined(self.laststandparams)) {
     attacker = self.laststandparams.attacker;
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       return;
     }
 
@@ -549,7 +549,7 @@ function_1d4c6768(slot) {
 }
 
 function_bd3ddb14(e_player) {
-  if(!isplayer(e_player)) {
+  if(!isPlayer(e_player)) {
     return;
   }
 
@@ -557,7 +557,7 @@ function_bd3ddb14(e_player) {
 }
 
 function_d9ae19f0(e_player) {
-  if(!isplayer(e_player)) {
+  if(!isPlayer(e_player)) {
     return;
   }
 
@@ -633,7 +633,7 @@ function_28ba0ba6() {
 function_362499ea(params) {
   player = params.attacker;
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     vehicle = params.vehicle;
 
     if(player util::isenemyteam(vehicle.team)) {
@@ -647,7 +647,7 @@ function_362499ea(params) {
 }
 
 function_cdc4c709() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -666,7 +666,7 @@ on_player_item_pickup(params) {
 
   item = params.item;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itementry = item.itementry;
 
     if(itementry.itemtype == # "backpack") {
@@ -708,7 +708,7 @@ function_9d4c3c52(params) {
 
   item = params.item;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itementry = item.itementry;
 
     if(itementry.itemtype == # "armor_shard") {
@@ -934,7 +934,7 @@ on_vehicle_enter(vehicle, player, seatindex) {
 function_6fcfeebb(player) {
   self endon(#"death");
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -963,7 +963,7 @@ on_stash_open(params) {
 
   activator = params.activator;
 
-  if(isplayer(activator)) {
+  if(isPlayer(activator)) {
     if(isDefined(self.birthtime)) {
       activator increment_wz_contract(#"hash_20b07175517ed179");
     }

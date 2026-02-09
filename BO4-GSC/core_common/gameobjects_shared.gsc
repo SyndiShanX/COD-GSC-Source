@@ -67,7 +67,6 @@ class cinteractobj {
     if(getdvarint(#"scr_debug_gameobjects", 0)) {
       iprintlnbold("<dev string:x324>");
     }
-
   }
 
   function function_aa070e6f(e_player) {
@@ -318,7 +317,6 @@ class cinteractobj {
       if(isentity(e_object)) {
         println("<dev string:x37f>" + m_s_bundle.str_tag + "<dev string:x394>" + e_object.model);
       }
-
     }
 
     m_n_trigger_height = m_s_bundle.n_trigger_height;
@@ -424,7 +422,6 @@ class cinteractobj {
     self create_gameobject_trigger();
     self thread function_768739b6();
   }
-
 }
 
 autoexec __init__system__() {
@@ -879,7 +876,7 @@ function_9e7fca5f() {
     s_waitresult = self.mdl_gameobject waittill(#"gameobject_end_use_player");
 
     foreach(s_scene in self.var_abba8d92) {
-      if(isplayer(s_waitresult.player) && scene::get_player_count(s_scene.scriptbundlename) >= 1) {
+      if(isPlayer(s_waitresult.player) && scene::get_player_count(s_scene.scriptbundlename) >= 1) {
         s_waitresult.player animation::stop(0);
         s_scene thread scene::play(s_waitresult.player);
         continue;
@@ -1455,7 +1452,7 @@ set_dropped(var_e329a2fa) {
     endorigin = self.curorigin - (0, 0, 20);
   }
 
-  if(isplayer(var_e329a2fa)) {
+  if(isPlayer(var_e329a2fa)) {
     var_88760a3b = var_e329a2fa;
   } else {
     var_88760a3b = self.carrier;
@@ -2911,7 +2908,7 @@ continue_trigger_touch_think(team, object) {
     return false;
   }
 
-  var_47a62b7b = isvehicle(self) || isplayer(self) && self isinvehicle() && !self function_a867284b();
+  var_47a62b7b = isvehicle(self) || isPlayer(self) && self isinvehicle() && !self function_a867284b();
 
   if(var_47a62b7b && !(isDefined(level.b_allow_vehicle_proximity_pickup) && level.b_allow_vehicle_proximity_pickup) && !(isDefined(object.b_allow_vehicle_proximity_pickup) && object.b_allow_vehicle_proximity_pickup)) {
     return false;
@@ -2999,7 +2996,7 @@ trigger_touch_think(object) {
   }
 
   if(isDefined(object.objectiveid) && object.type != "carryObject") {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       objective_setplayerusing(object.objectiveid, self);
     } else {
       objective_setplayerusing(object.objectiveid, self.owner);
@@ -3034,7 +3031,7 @@ trigger_touch_think(object) {
     self.touchtriggers[object.entnum] = undefined;
 
     if(isDefined(object.objectiveid) && object.type != "carryObject") {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         objective_clearplayerusing(object.objectiveid, self);
       } else {
         objective_clearplayerusing(object.objectiveid, self.owner);
@@ -3571,7 +3568,7 @@ hide_waypoint(e_player) {
   }
 
   if(isDefined(e_player)) {
-    if(!isplayer(e_player)) {
+    if(!isPlayer(e_player)) {
       assert(0, "<dev string:xd3>");
       return;
     }
@@ -3591,7 +3588,7 @@ show_waypoint(e_player) {
   }
 
   if(isDefined(e_player)) {
-    if(!isplayer(e_player)) {
+    if(!isPlayer(e_player)) {
       assert(0, "<dev string:x112>");
       return;
     }
@@ -3862,7 +3859,7 @@ get_objective_ids(team) {
 }
 
 gameobject_is_player_looking_at(origin, dot, do_trace, ignore_ent, ignore_trace_distance) {
-  assert(isplayer(self), "<dev string:x151>");
+  assert(isPlayer(self), "<dev string:x151>");
 
   if(!isDefined(dot)) {
     dot = 0.7;
@@ -4164,21 +4161,21 @@ is_friendly_team(team) {
 }
 
 can_touch(sentient) {
-  var_47a62b7b = isvehicle(sentient) || isplayer(sentient) && sentient isinvehicle() && !sentient function_a867284b();
+  var_47a62b7b = isvehicle(sentient) || isPlayer(sentient) && sentient isinvehicle() && !sentient function_a867284b();
 
   if(var_47a62b7b && !(isDefined(level.b_allow_vehicle_proximity_pickup) && level.b_allow_vehicle_proximity_pickup) && !(isDefined(self.b_allow_vehicle_proximity_pickup) && self.b_allow_vehicle_proximity_pickup)) {
     return false;
   }
 
   if(isDefined(level.b_allow_vehicle_proximity_pickup) && level.b_allow_vehicle_proximity_pickup || isDefined(self.b_allow_vehicle_proximity_pickup) && self.b_allow_vehicle_proximity_pickup) {
-    if(!isplayer(sentient) && !isvehicle(sentient)) {
+    if(!isPlayer(sentient) && !isvehicle(sentient)) {
       return false;
     }
-  } else if(!isplayer(sentient)) {
+  } else if(!isPlayer(sentient)) {
     return false;
   }
 
-  if(isplayer(sentient)) {
+  if(isPlayer(sentient)) {
     if(!function_dfec159b(sentient)) {
       return false;
     }
@@ -4230,7 +4227,7 @@ can_interact_with(sentient) {
     }
   }
 
-  if(isDefined(self.requiredweapon) && isplayer(sentient)) {
+  if(isDefined(self.requiredweapon) && isPlayer(sentient)) {
     player = sentient;
 
     if(!player hasweapon(self.requiredweapon)) {
@@ -4709,8 +4706,8 @@ function_73944efe(touchlist, touch) {
     return undefined;
   }
 
-  if(!isplayer(touch.player)) {
-    if(isDefined(touch.player.owner) && isplayer(touch.player.owner)) {
+  if(!isPlayer(touch.player)) {
+    if(isDefined(touch.player.owner) && isPlayer(touch.player.owner)) {
       if(array::find(touchlist, touch.player.owner) == undefined) {
         return touch.player.owner;
       }

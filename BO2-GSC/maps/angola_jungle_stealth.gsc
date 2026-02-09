@@ -134,8 +134,9 @@ main() {
   level thread fail_player_for_moving_to_escape_early();
   level.ai_hudson thread hudson_jungle_stealth_logic();
 
-  if(isDefined(level.m_player_rig))
+  if(isDefined(level.m_player_rig)) {
     level.m_player_rig unlink();
+  }
 
   level.ai_woods unlink();
   level thread run_scene("j_stealth_player_picks_up_woods");
@@ -146,8 +147,9 @@ main() {
   level thread enemy_detects_player_vo();
   level thread end_dialogue_when_stealth_breaks();
 
-  if(isDefined(level.main_barge))
+  if(isDefined(level.main_barge)) {
     level.main_barge delete();
+  }
 
   load_gump("angola_2_gump_village");
   battlechatter_off("axis");
@@ -238,8 +240,9 @@ angola_jungle_stealth_log_objectives() {
   flag_wait("mason_run_to_log_cover");
   flag_wait("hudson_child_soldier_intro_move_to_cover_started");
 
-  if(stealth_safe_to_save())
+  if(stealth_safe_to_save()) {
     autosave_by_name("before_log_scene");
+  }
 
   wait 6;
   level notify("hudson_under_log");
@@ -267,8 +270,9 @@ angola_jungle_stealth_log_objectives() {
   set_objective(level.obj_dont_get_discovered, undefined);
   flag_set("js_mason_in_position_in_building");
 
-  if(stealth_safe_to_save())
+  if(stealth_safe_to_save()) {
     autosave_by_name("mason_at_stealth_house_enter");
+  }
 
   flag_wait("js_stealth_house_complete");
   wait 0.1;
@@ -352,8 +356,9 @@ hudsun_approaches_child_solider_encounter() {
   time = getanimlength(%ch_ang_07_02_hiding_spot_hault_hudson);
   flag_wait_or_timeout("hudson_child_soldier_intro_move_to_cover_done", time);
 
-  if(!flag("watch_1st_child_soldier_encounter_started"))
+  if(!flag("watch_1st_child_soldier_encounter_started")) {
     level thread run_scene("hudson_waits_in_cover_for_player_to_take_cover");
+  }
 
   flag_wait("js_child_soldier_scene_complete");
   end_scene("hudson_waits_in_cover_for_player_to_take_cover");
@@ -377,8 +382,9 @@ hault_enemy_before_log_scene() {
   level endon("fail_before_log");
   run_scene("hault_guy");
 
-  if(!flag("js_mason_in_cover_behind_log"))
+  if(!flag("js_mason_in_cover_behind_log")) {
     level thread run_scene("wait_guy");
+  }
 }
 
 stair_enemy_for_log_scene_logic() {
@@ -422,8 +428,9 @@ waiting_for_stealth_move_to_house() {
   flag_wait("js_child_soldier_scene_complete");
   level thread hudson_waiting_for_stealth_move_to_house();
 
-  if(stealth_safe_to_save())
+  if(stealth_safe_to_save()) {
     autosave_by_name("child_soldier_reveal_started");
+  }
 
   level thread child_guards_after_log_scene("child_guards_a", "trig_child_guards_a");
   level thread child_guards_after_log_scene("child_guards_b", "trig_child_guards_b");
@@ -438,10 +445,11 @@ waiting_for_stealth_move_to_house() {
   str_crouch_flag = "player_obeys_stealth_command";
   flag_clear(str_crouch_flag);
 
-  if(!level.console && !level.player gamepadusedlast())
+  if(!level.console && !level.player gamepadusedlast()) {
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 6, str_crouch_flag);
-  else
+  } else {
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 6, str_crouch_flag);
+  }
 
   str_area_safe = "area_clear";
   level thread fail_mission_if_not_in_crouch_cover(str_area_safe, 7.0, 1.5, 3.5);
@@ -468,8 +476,9 @@ stealth_log_monitor_player_crouch() {
   level endon("js_player_enters_stealth_house");
 
   while(true) {
-    if(is_mason_stealth_crouched() && !flag("player_obeys_stealth_command"))
+    if(is_mason_stealth_crouched() && !flag("player_obeys_stealth_command")) {
       flag_set("player_obeys_stealth_command");
+    }
 
     wait 0.05;
   }
@@ -485,8 +494,9 @@ patrol_director() {
   ai_director.ignoreall = 1;
   ai_director thread patroller_logic("director_start", 1);
 
-  if(isDefined(ai_director) && isalive(ai_director))
+  if(isDefined(ai_director) && isalive(ai_director)) {
     level thread enemy_vo_post_log_pre_house(ai_director);
+  }
 
   level waittill("fail_after_log");
   ai_director.ignoreall = 0;
@@ -518,8 +528,9 @@ guard_c_logic(str_scene) {
 }
 
 stealth1_bad_dudes_wave1(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   a_nodes = [];
   a_nodes[0] = "go_house_wave1_a1";
@@ -539,8 +550,9 @@ stealth1_bad_dudes_wave1(delay) {
 }
 
 stealth1_bad_dudes_wave2(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   a_nodes = [];
   a_nodes[0] = "go_house_wave2_a1";
@@ -555,8 +567,9 @@ stealth1_bad_dudes_wave2(delay) {
 }
 
 stealth1_bad_dudes_wave3(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   a_nodes = [];
   a_nodes[0] = "go_house_wave3_a1";
@@ -604,8 +617,9 @@ fail_player_if_not_in_house(delay) {
   level.player endon("death");
   level endon("js_player_enters_stealth_house");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   if(!flag("js_player_enters_stealth_house")) {
     spawners = getEntArray("fail_player_outside_house_spawners", "targetname");
@@ -622,16 +636,18 @@ fail_player_if_not_in_house(delay) {
 hudson_after_log_anim_dialog(delay) {
   level endon("end_dialogue_broken_stealth");
 
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   level.ai_hudson say_dialog("huds_stay_low_keep_your_0");
   wait 3.5;
   run_scene_and_delete("hudson_rockhide_dont_move");
   wait 4;
 
-  if(is_mason_stealth_crouched())
+  if(is_mason_stealth_crouched()) {
     run_scene_and_delete("hudson_rockhide_on_my_lead");
+  }
 
   wait 2;
   run_scene_and_delete("hudson_rockhide_now");
@@ -641,8 +657,9 @@ hudson_after_log_anim_dialog(delay) {
 enter_house_dialog(delay) {
   level endon("end_dialogue_broken_stealth");
 
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 }
 
 waiting_for_move_to_dense_foliage_area() {
@@ -693,20 +710,22 @@ begin_monitoring_stealth_house_failure(str_area_safe) {
 in_house_dialog(delay) {
   level endon("end_dialogue_broken_stealth");
 
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   wait 1;
   level.ai_hudson say_dialog("huds_don_t_move_more_pa_0");
   wait 2.5;
 
-  if(is_mason_stealth_crouched())
+  if(is_mason_stealth_crouched()) {
     level.ai_hudson say_dialog("huds_i_ll_scout_ahead_w_0");
-  else {
+  } else {
     level.ai_hudson say_dialog("huds_dammit_mason_keep_0");
 
-    while(!is_mason_stealth_crouched())
+    while(!is_mason_stealth_crouched()) {
       wait 0.05;
+    }
 
     wait 1.0;
     level.ai_hudson say_dialog("huds_i_ll_scout_ahead_w_0");
@@ -743,10 +762,11 @@ hudson_waiting_for_dense_foliage_move() {
   str_crouch_flag = "player_obeys_stealth_command";
 
   if(!is_mason_stealth_crouched()) {
-    if(!level.console && !level.player gamepadusedlast())
+    if(!level.console && !level.player gamepadusedlast()) {
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 4, str_crouch_flag);
-    else
+    } else {
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 4, str_crouch_flag);
+    }
   }
 
   str_category = "dummy_category";
@@ -790,8 +810,9 @@ missionary_patroller() {
 }
 
 stealth2_bad_dudes_wave1(delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   a_nodes = [];
   a_nodes[0] = "go_bushes_wave1_a1_node";
@@ -806,8 +827,9 @@ stealth2_bad_dudes_wave1(delay) {
 }
 
 stealth2_bad_dudes_wave2(delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   a_nodes = [];
   a_nodes[0] = "go_bushes_wave2_a1_node";
@@ -899,8 +921,9 @@ fail_beach_action() {
   flag_set("fail_beach");
   a_ledge_clips = getEntArray("ledge_clip", "targetname");
 
-  foreach(m_ledge_clip in a_ledge_clips)
-  m_ledge_clip delete();
+  foreach(m_ledge_clip in a_ledge_clips) {
+    m_ledge_clip delete();
+  }
 
   set_objective(level.obj_escape_jungle, undefined, "delete");
 }
@@ -909,16 +932,19 @@ fail_beach_enemy_logic() {
   self endon("death");
   self.goalradius = 16;
 
-  if(isDefined(level.ai_hudson))
+  if(isDefined(level.ai_hudson)) {
     level.ai_hudson.ignoreme = 1;
+  }
 
   e_target = level.player;
 
-  if(!isDefined(self.script_noteworthy) && randomint(2) == 0)
+  if(!isDefined(self.script_noteworthy) && randomint(2) == 0) {
     e_target = level.ai_hudson;
+  }
 
-  if(!isDefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy)) {
     self chase_after_target(e_target);
+  }
 }
 
 fail_valley() {
@@ -977,8 +1003,9 @@ fail_after_log(str_volume) {
   level endon("js_moving_to_stealth_house_enter");
   e_volume = getent(str_volume, "targetname");
 
-  while(level.player istouching(e_volume) && !flag("js_player_fails_stealth"))
+  while(level.player istouching(e_volume) && !flag("js_player_fails_stealth")) {
     wait 0.05;
+  }
 
   level thread fail_after_log_action();
 }
@@ -1003,8 +1030,9 @@ clean_up_fail_valley() {
   t_fail_valley delete();
   a_spawners = getEntArray("enemy_fail_valley", "targetname");
 
-  foreach(sp_enemy in a_spawners)
-  sp_enemy delete();
+  foreach(sp_enemy in a_spawners) {
+    sp_enemy delete();
+  }
 }
 
 clean_up_in_house() {
@@ -1028,8 +1056,9 @@ clean_up_in_house() {
   t_fail_before_log delete();
   a_spawners = getEntArray("enemy_fail_before_log", "targetname");
 
-  foreach(sp_enemy in a_spawners)
-  sp_enemy delete();
+  foreach(sp_enemy in a_spawners) {
+    sp_enemy delete();
+  }
 
   delete_scene("child_guards_a", 1);
   delete_scene("child_guards_b", 1);
@@ -1063,20 +1092,25 @@ child_soldier_do_not_shoot_player() {
   level notify("stealth_broken");
   self notify("end_patrol");
 
-  if(!self get_pacifist())
+  if(!self get_pacifist()) {
     self set_pacifist(1);
+  }
 
-  if(!isDefined(self.ignoreall) || !self.ignoreall)
+  if(!isDefined(self.ignoreall) || !self.ignoreall) {
     self.ignoreall = 1;
+  }
 
-  if(!isDefined(self.ignoreme) || !self.ignoreme)
+  if(!isDefined(self.ignoreme) || !self.ignoreme) {
     self.ignoreme = 1;
+  }
 
-  if(!isDefined(self.disablearrivals) || !self.disablearrivals)
+  if(!isDefined(self.disablearrivals) || !self.disablearrivals) {
     self.disablearrivals = 1;
+  }
 
-  if(!isDefined(self.disableexits) || !self.disableexits)
+  if(!isDefined(self.disableexits) || !self.disableexits) {
     self.disableexits = 1;
+  }
 
   self magic_bullet_shield();
 
@@ -1086,8 +1120,9 @@ child_soldier_do_not_shoot_player() {
     self force_goal(volume.origin, 64, 0);
 
     while(true) {
-      if(self istouching(volume) && !level.player is_player_looking_at(self.origin, 0.75))
+      if(self istouching(volume) && !level.player is_player_looking_at(self.origin, 0.75)) {
         self delete();
+      }
 
       wait 0.15;
     }
@@ -1121,8 +1156,9 @@ end_dialogue_when_stealth_breaks() {
   level notify("end_dialogue_broken_stealth");
   level.ai_hudson anim_stopanimscripted();
 
-  if(!flag("fail_beach"))
+  if(!flag("fail_beach")) {
     level.ai_hudson stopsounds();
+  }
 }
 
 enemy_vo_post_log_pre_house(patrol_director) {
@@ -1141,8 +1177,9 @@ child_search_party_vo() {
   children = [];
 
   foreach(guy in guys) {
-    if(issubstr(guy.classname, "child"))
+    if(issubstr(guy.classname, "child")) {
       children[children.size] = guy;
+    }
   }
 
   lines = array("chi0_spread_out_0", "chi1_check_the_long_grass_0", "chi2_keep_looking_they_0", "chi3_they_may_be_long_gon_0", "chi0_nothing_over_here_0", "chi1_this_area_is_clear_0", "chi2_they_may_have_made_i_0", "chi3_shhh_listen_0", "chi0_they_could_be_anywhe_0");
@@ -1173,22 +1210,25 @@ enemy_detects_player_vo() {
   level endon("tall_grass_stealth_done");
   wait_for_stealth_to_break();
 
-  if(!flag("fail_beach"))
+  if(!flag("fail_beach")) {
     level.ai_hudson say_dialog("huds_shit_they_ve_spott_0");
+  }
 
   adult_lines = array("cub0_over_here_0", "cub1_i_ve_found_them_0", "cub2_they_re_here_0", "cub3_i_ve_got_them_0");
   child_lines = array("chi0_over_here_0", "chi1_i_ve_found_them_0", "chi2_americans_0", "chi0_they_re_over_here_0", "chi1_here_here_0", "chi2_the_americans_are_he_0");
 
-  for(guys = getaiarray("axis"); guys.size <= 1; guys = getaiarray("axis"))
+  for(guys = getaiarray("axis"); guys.size <= 1; guys = getaiarray("axis")) {
     wait 0.05;
+  }
 
   counter = 0;
   arraysort(guys, level.player.origin, 1);
 
   while(counter < 2) {
     if(issubstr(guys[counter].classname, "child")) {
-      if(isDefined(guys[counter]) && isalive(guys[counter]))
+      if(isDefined(guys[counter]) && isalive(guys[counter])) {
         guys[counter] say_dialog(child_lines[randomint(child_lines.size)]);
+      }
     } else if(isDefined(guys[counter]) && isalive(guys[counter]))
       guys[counter] say_dialog(adult_lines[randomint(adult_lines.size)]);
 

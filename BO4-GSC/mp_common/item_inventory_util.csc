@@ -294,13 +294,13 @@ function_4bd83c04(item) {
 }
 
 get_loot_weapons() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!(isDefined(getgametypesetting(#"wzlootlockers")) ? getgametypesetting(#"wzlootlockers") : 0)) {
     return array();
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return array();
   }
 

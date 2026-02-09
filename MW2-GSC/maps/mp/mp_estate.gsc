@@ -16,14 +16,14 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("r_specularcolorscale", "1.17");
-  setdvar("compassmaxrange", "3500");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.3);
-  setdvar("r_lightGridContrast", 0);
+  setDvar("r_specularcolorscale", "1.17");
+  setDvar("compassmaxrange", "3500");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.3);
+  setDvar("r_lightGridContrast", 0);
 
   if(level.ps3)
-    setdvar("sm_sunShadowScale", "0.5"); // ps3 optimization
+    setDvar("sm_sunShadowScale", "0.5"); // ps3 optimization
   else
-    setdvar("sm_sunShadowScale", "0.7"); // optimization
+    setDvar("sm_sunShadowScale", "0.7"); // optimization
 }

@@ -328,7 +328,7 @@ radiation_kill() {
   }
   waittillframeend;
   var_0 = &"SCRIPT_RADIATION_DEATH";
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
 }
 
 fadeinblackout(var_0, var_1, var_2, var_3) {

@@ -90,7 +90,6 @@ setup_bot_sd() {
       wait(5);
       assertmsg("S&D BombZones need a label of'_a'or'_b'");
     }
-
   }
 
   if(!sd_has_fatal_error) {
@@ -105,7 +104,7 @@ bot_sd_debug() {
     wait(0.05);
 
   while(1) {
-    if(GetDvar("bot_DrawDebugGametype") == "sd") {
+    if(getDvar("bot_DrawDebugGametype") == "sd") {
       foreach(bombZone in level.bombZones) {
         foreach(node in bombZone.botTargets) {
           bot_draw_cylinder(node.origin, 8, 10, 0.05, undefined, (0, 1, 0), 1, 4);
@@ -234,14 +233,12 @@ atk_bomber_update() {
   if(isDefined(level.sdBomb) && isDefined(level.sdBomb.carrier) && IsAlive(level.sdBomb.carrier) && level.sdBomb.carrier != self) {
     wait(0.50 + 0.15 + 0.05);
 
-    /#		
     if(IsAlive(level.sdBomb.carrier) && level.sdBomb.carrier != self) {
       println("Current self role is " + self.role);
       println("level.sdBomb.carrier is " + level.sdBomb.carrier.name);
       println("level.sdBomb.carrier.role is " + ter_op(isDefined(level.sdBomb.carrier.role), level.sdBomb.carrier.role, "undefined"));
       AssertMsg("bot " + self.name + " still processing atk_bomber script, even though bomb was stolen from him.See console log");
     }
-
   }
 
   if(!self.isBombCarrier && !level.multiBomb) {
@@ -948,7 +945,6 @@ initialize_sd_role() {
           self.defend_zone = possible_zones[1];
         else
           self.defend_zone = Random(possible_zones);
-
       }
     }
   }
@@ -1176,7 +1172,6 @@ bot_sd_ai_director_update() {
           Assert(isDefined(atk_bomber_roles[0]));
           Assert(carriers[0] == level.sdBomb.carrier);
           Assert(carriers[0] == atk_bomber_roles[0]);
-
         }
       }
     }

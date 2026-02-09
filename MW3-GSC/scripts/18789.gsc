@@ -16,7 +16,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2ACE(999, 500, 1500);
   maps\_vehicle::_id_2AC6("allies");
   maps\_vehicle::_id_2ACA(::_id_3A9D, ::_id_3A9C);
-  maps\_vehicle::_id_2AC1( % sniper_escape_ch46_rotors, undefined, 0);
+  maps\_vehicle::_id_2AC1(%sniper_escape_ch46_rotors, undefined, 0);
   maps\_vehicle::_id_2ACD(::_id_3E58);
   var_3 = randomfloatrange(0, 1);
   var_4 = maps\_vehicle::_id_2B1A(var_0, var_2);
@@ -42,10 +42,10 @@ _id_3A9C(var_0) {
   var_0[1]._id_2525 = 0;
   var_0[1]._id_2581 = "seaknight_door_open";
   var_0[1]._id_2527 = "seaknight_door_close";
-  var_0[1].delay = getanimlength( % ch46_doors_open) - 1.7;
-  var_0[2].delay = getanimlength( % ch46_doors_open) - 1.7;
-  var_0[3].delay = getanimlength( % ch46_doors_open) - 1.7;
-  var_0[4].delay = getanimlength( % ch46_doors_open) - 1.7;
+  var_0[1].delay = getanimlength(%ch46_doors_open) - 1.7;
+  var_0[2].delay = getanimlength(%ch46_doors_open) - 1.7;
+  var_0[3].delay = getanimlength(%ch46_doors_open) - 1.7;
+  var_0[4].delay = getanimlength(%ch46_doors_open) - 1.7;
   return var_0;
 }
 
@@ -56,7 +56,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 6; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_0F59[0] = % seaknight_pilot_idle;
   var_0[0]._id_0F59[1] = % seaknight_pilot_switches;

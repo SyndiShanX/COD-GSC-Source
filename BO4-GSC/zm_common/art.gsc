@@ -76,9 +76,9 @@ setfogsliders() {
     nearplane = 10000000;
   }
 
-  setdvar(#"scr_fog_exp_halfplane", halfplane);
-  setdvar(#"scr_fog_nearplane", nearplane);
-  setdvar(#"scr_fog_color", red + " " + green + " " + blue);
+  setDvar(#"scr_fog_exp_halfplane", halfplane);
+  setDvar(#"scr_fog_nearplane", nearplane);
+  setDvar(#"scr_fog_color", red + " " + green + " " + blue);
 }
 
 tweakart() {
@@ -87,21 +87,21 @@ tweakart() {
   }
 
   if(getdvarstring(#"scr_fog_baseheight") == "<dev string:x38>") {
-    setdvar(#"scr_fog_exp_halfplane", 500);
-    setdvar(#"scr_fog_exp_halfheight", 500);
-    setdvar(#"scr_fog_nearplane", 0);
-    setdvar(#"scr_fog_baseheight", 0);
+    setDvar(#"scr_fog_exp_halfplane", 500);
+    setDvar(#"scr_fog_exp_halfheight", 500);
+    setDvar(#"scr_fog_nearplane", 0);
+    setDvar(#"scr_fog_baseheight", 0);
   }
 
-  setdvar(#"scr_fog_fraction", 1);
-  setdvar(#"scr_art_dump", 0);
-  setdvar(#"scr_art_sun_fog_dir_set", 0);
-  setdvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
-  setdvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
-  setdvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
-  setdvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
-  setdvar(#"scr_dof_nearblur", level.dofdefault[# "nearblur"]);
-  setdvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
+  setDvar(#"scr_fog_fraction", 1);
+  setDvar(#"scr_art_dump", 0);
+  setDvar(#"scr_art_sun_fog_dir_set", 0);
+  setDvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
+  setDvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
+  setDvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+  setDvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
+  setDvar(#"scr_dof_nearblur", level.dofdefault[# "nearblur"]);
+  setDvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
   file = undefined;
   filename = undefined;
   tweak_toggle = 1;
@@ -115,20 +115,20 @@ tweakart() {
     if(tweak_toggle) {
       tweak_toggle = 0;
       fogsettings = getfogsettings();
-      setdvar(#"scr_fog_nearplane", fogsettings[0]);
-      setdvar(#"scr_fog_exp_halfplane", fogsettings[1]);
-      setdvar(#"scr_fog_exp_halfheight", fogsettings[3]);
-      setdvar(#"scr_fog_baseheight", fogsettings[2]);
-      setdvar(#"scr_fog_color", fogsettings[4] + "<dev string:x3b>" + fogsettings[5] + "<dev string:x3b>" + fogsettings[6]);
-      setdvar(#"scr_fog_color_scale", fogsettings[7]);
-      setdvar(#"scr_sun_fog_color", fogsettings[8] + "<dev string:x3b>" + fogsettings[9] + "<dev string:x3b>" + fogsettings[10]);
+      setDvar(#"scr_fog_nearplane", fogsettings[0]);
+      setDvar(#"scr_fog_exp_halfplane", fogsettings[1]);
+      setDvar(#"scr_fog_exp_halfheight", fogsettings[3]);
+      setDvar(#"scr_fog_baseheight", fogsettings[2]);
+      setDvar(#"scr_fog_color", fogsettings[4] + "<dev string:x3b>" + fogsettings[5] + "<dev string:x3b>" + fogsettings[6]);
+      setDvar(#"scr_fog_color_scale", fogsettings[7]);
+      setDvar(#"scr_sun_fog_color", fogsettings[8] + "<dev string:x3b>" + fogsettings[9] + "<dev string:x3b>" + fogsettings[10]);
       level.fogsundir = [];
       level.fogsundir[0] = fogsettings[11];
       level.fogsundir[1] = fogsettings[12];
       level.fogsundir[2] = fogsettings[13];
-      setdvar(#"scr_sun_fog_start_angle", fogsettings[14]);
-      setdvar(#"scr_sun_fog_end_angle", fogsettings[15]);
-      setdvar(#"scr_fog_max_opacity", fogsettings[16]);
+      setDvar(#"scr_sun_fog_start_angle", fogsettings[14]);
+      setDvar(#"scr_sun_fog_end_angle", fogsettings[15]);
+      setDvar(#"scr_fog_max_opacity", fogsettings[16]);
     }
 
     level.fogexphalfplane = getdvarfloat(#"scr_fog_exp_halfplane", 0);
@@ -149,7 +149,7 @@ tweakart() {
     level.fogmaxopacity = getdvarfloat(#"scr_fog_max_opacity", 0);
 
     if(getdvarint(#"scr_art_sun_fog_dir_set", 0)) {
-      setdvar(#"scr_art_sun_fog_dir_set", 0);
+      setDvar(#"scr_art_sun_fog_dir_set", 0);
       println("<dev string:x3f>");
       players = getplayers();
       dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
@@ -182,37 +182,37 @@ tweakart() {
 function fovslidercheck() {
   if(level.dofdefault[# "nearstart"] >= level.dofdefault[# "nearend"]) {
     level.dofdefault[# "nearstart"] = level.dofdefault[# "nearend"] - 1;
-    setdvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
+    setDvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
   }
 
   if(level.dofdefault[# "nearend"] <= level.dofdefault[# "nearstart"]) {
     level.dofdefault[# "nearend"] = level.dofdefault[# "nearstart"] + 1;
-    setdvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
+    setDvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
   }
 
   if(level.dofdefault[# "farstart"] >= level.dofdefault[# "farend"]) {
     level.dofdefault[# "farstart"] = level.dofdefault[# "farend"] - 1;
-    setdvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+    setDvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
   }
 
   if(level.dofdefault[# "farend"] <= level.dofdefault[# "farstart"]) {
     level.dofdefault[# "farend"] = level.dofdefault[# "farstart"] + 1;
-    setdvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
+    setDvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
   }
 
   if(level.dofdefault[# "farblur"] >= level.dofdefault[# "nearblur"]) {
     level.dofdefault[# "farblur"] = level.dofdefault[# "nearblur"] - 0.1;
-    setdvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
+    setDvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
   }
 
   if(level.dofdefault[# "farstart"] <= level.dofdefault[# "nearend"]) {
     level.dofdefault[# "farstart"] = level.dofdefault[# "nearend"] + 1;
-    setdvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+    setDvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
   }
 }
 
 dumpsettings() {
-  if(getdvar(#"scr_art_dump", 0)) {
+  if(getDvar(#"scr_art_dump", 0)) {
     println("<dev string:x6f>" + level.fognearplane + "<dev string:x80>");
     println("<dev string:x84>" + level.fogexphalfplane + "<dev string:x80>");
     println("<dev string:x94>" + level.fogexphalfheight + "<dev string:x80>");
@@ -235,6 +235,6 @@ dumpsettings() {
     println("<dev string:x196>");
     println("<dev string:x1f4>");
     println("<dev string:x24a>");
-    setdvar(#"scr_art_dump", 0);
+    setDvar(#"scr_art_dump", 0);
   }
 }

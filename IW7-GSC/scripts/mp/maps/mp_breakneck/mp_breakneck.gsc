@@ -10,14 +10,14 @@ main() {
   level func_D80C();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_breakneck");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 4);
-  setdvar("r_umbraShadowCasters", 1);
-  setdvar("sm_roundRobinPrioritySpotShadows", 8);
-  setdvar("r_umbraAccurateOcclusionThreshold", 400);
-  setdvar("sm_sunCascadeSizeMultiplier1", 3);
-  setdvar("sm_sunCascadeSizeMultiplier2", 2);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraShadowCasters", 1);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 400);
+  setDvar("sm_sunCascadeSizeMultiplier1", 3);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -153,7 +153,7 @@ killtriggerloop(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(isDefined(var_1)) {
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         var_1 suicide();
         continue;
       }
@@ -189,7 +189,7 @@ func_D80C() {
 }
 
 func_2FBC() {
-  if(getdvar("r_reflectionProbeGenerate") != "1") {
+  if(getDvar("r_reflectionProbeGenerate") != "1") {
     thread func_CDA4("mp_breakneck_collision_bink_01");
     thread func_FA92();
     thread func_226A();

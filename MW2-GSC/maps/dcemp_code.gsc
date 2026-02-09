@@ -26,9 +26,7 @@ CONST_ISS_INPUT_RATE_Y = .5;
 CONST_ISS_INPUT_DEC_Y = .05;
 CONST_ISS_INPUT_ACC_Y_MIN = 1;
 
-//<---------------------------------
-
-/************************************************************************************************************/
+//<--------------------------------- /************************************************************************************************************/
 
 /*													INTRO													*/
 /************************************************************************************************************/
@@ -593,7 +591,6 @@ heli_spark_effects() {
     playFXOnTag(getfx("powerline_runner_oneshot"), self, "tag_engine_left");
     wait(RandomFloatRange(.15, .25));
   }
-
 }
 
 attackheli_spotlight_flicker() {
@@ -1233,7 +1230,6 @@ street_crash_helis() {
     playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
   }
-
 }
 
 #using_animtree("vehicles");
@@ -1376,7 +1372,6 @@ street_crash_helis_anim() {
     playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
   }
-
 }
 
 street_heli_crash_secondaries_2() {
@@ -1431,7 +1426,6 @@ street_trees() {
 
     part movegravity(vec, time);
     part rotatevelocity(rot, time, 0, time);
-
   }
 
   wait time;

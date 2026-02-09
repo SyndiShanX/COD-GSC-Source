@@ -83,9 +83,9 @@ function main() {
   level flag::init("bsp_swap_ready");
   level flag::init("initial_streamer_ready");
   level._loadstarted = 1;
-  setdvar("playerEnenergy_enabled", 0);
-  setdvar("r_waterFogTest", 0);
-  setdvar("tu6_player_shallowWaterHeight", "0.0");
+  setDvar("playerEnenergy_enabled", 0);
+  setDvar("r_waterFogTest", 0);
+  setDvar("tu6_player_shallowWaterHeight", "0.0");
   setgametypesetting("trm_maxHeight", 144);
   level.aitriggerspawnflags = getaitriggerflags();
   level.vehicletriggerspawnflags = getvehicletriggerflags();
@@ -110,7 +110,7 @@ function main() {
 }
 
 function function_13c5b077() {
-  setdvar("ui_allowDisplayContinue", 0);
+  setDvar("ui_allowDisplayContinue", 0);
 }
 
 function function_73adcefc() {
@@ -119,7 +119,7 @@ function function_73adcefc() {
 
 function function_c32ba481(var_87423d00 = 0.5, v_color = (0, 0, 0)) {
   level util::streamer_wait(undefined, undefined, undefined, 0);
-  setdvar("ui_allowDisplayContinue", 1);
+  setDvar("ui_allowDisplayContinue", 1);
   if(isloadingcinematicplaying()) {
     do {
       wait(0.05);
@@ -199,7 +199,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
   if(self laststand::player_is_in_laststand()) {
     return 0;
   }
-  if(level.teambased && isplayer(eattacker) && self != eattacker && self.team == eattacker.team) {
+  if(level.teambased && isPlayer(eattacker) && self != eattacker && self.team == eattacker.team) {
     if(level.friendlyfire == 0) {
       return 0;
     }
@@ -546,7 +546,7 @@ function onallplayersready() {
   }
   while(var_f862b7b1 < var_91f98264 || player_count_actual < var_91f98264);
   setinitialplayersconnected();
-  setdvar("all_players_are_connected", "1");
+  setDvar("all_players_are_connected", "1");
   printtoprightln("", (1, 1, 1));
   disablegrenadesuicide();
   level flag::set("all_players_connected");

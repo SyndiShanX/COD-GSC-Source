@@ -101,7 +101,7 @@ function function_a880fdea(entity) {
 function function_ebcb7adc(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(self.awarenesslevelcurrent != "combat" && idamage > 10) {
     myeye = self getEye();
-    if(isplayer(einflictor) && isDefined(vpoint) && distancesquared(vpoint, myeye) < 100) {
+    if(isPlayer(einflictor) && isDefined(vpoint) && distancesquared(vpoint, myeye) < 100) {
       return self.health + 1;
     }
   }

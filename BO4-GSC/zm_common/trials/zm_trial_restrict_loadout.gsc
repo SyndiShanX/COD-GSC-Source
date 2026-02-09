@@ -615,7 +615,7 @@ function_5fbf572(weapon, var_2f0cc3aa = 0) {
   }
 
   if(is_active(1) || zm_trial_disable_hero_weapons::is_active() || self isweaponlocked(weapon)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self zm_trial_util::function_97444b02();
     }
 

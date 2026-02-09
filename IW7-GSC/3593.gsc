@@ -104,7 +104,7 @@ func_127D8() {
     var_5 = "hitequip";
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_5);
   }
 
@@ -254,7 +254,7 @@ tripmine_testlethaltriggerbeam(var_0, var_1, var_2) {
   var_3 = var_2.origin;
   var_4 = var_2.origin;
   var_5 = 16;
-  if(isplayer(var_2) || isagent(var_2)) {
+  if(isPlayer(var_2) || isagent(var_2)) {
     var_3 = var_2 gettagorigin("j_helmet");
   } else if(isDefined(var_2.streakname) && var_2.streakname == "venom") {
     var_3 = var_2.origin + (0, 0, 15);
@@ -307,7 +307,7 @@ func_127F7() {
     }
 
     var_3 = var_2.origin;
-    if(isplayer(var_2) || isagent(var_2)) {
+    if(isPlayer(var_2) || isagent(var_2)) {
       var_3 = var_2 getEye();
     }
 
@@ -348,7 +348,7 @@ func_127E4(var_0, var_1) {
     return 0;
   }
 
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     if(scripts\mp\utility::func_9F72(var_0)) {
       return 0;
     }

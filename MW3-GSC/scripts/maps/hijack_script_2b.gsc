@@ -218,7 +218,6 @@ _id_59CA() {
 
   if(isDefined(var_10)) {
     var_10 maps\_utility::_id_2703();
-
   }
   common_scripts\utility::flag_set("flag_red_leave_tarmac_combat");
   thread maps\_utility::_id_1425("wave3_done");
@@ -262,7 +261,6 @@ _id_59CD() {
 
   if(isDefined(var_0)) {
     var_0 maps\_utility::_id_2703();
-
   }
   level._id_58D2.ignoreall = 1;
 
@@ -274,7 +272,7 @@ _id_59CD() {
 _id_59CE() {
   var_0 = getent("combat_scene_fail_trigger", "targetname");
   common_scripts\utility::flag_wait("tarmac_combat_level_fail");
-  setdvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
+  setDvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
   level notify("mission failed");
   maps\_utility::_id_1826();
 }
@@ -313,7 +311,7 @@ _id_59D0(var_0) {
     self waittill("damage", var_1, var_2);
     level._id_58D2.ignoreall = 0;
 
-    if(isDefined(var_2) && isplayer(var_2)) {
+    if(isDefined(var_2) && isPlayer(var_2)) {
       foreach(var_4 in var_0) {
         if(isDefined(var_4) && isalive(var_4)) {
           var_4 clearentitytarget(level._id_59CC);
@@ -392,11 +390,9 @@ _id_59D3(var_0, var_1) {
 _id_59D4(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = 3;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   self.ignoreall = 1;
   self clearenemy();
@@ -405,7 +401,6 @@ _id_59D4(var_0, var_1) {
     self waittill("goal");
   } else {
     wait(var_0);
-
   }
   if(isDefined(self) && isalive(self)) {
     if(var_1) {

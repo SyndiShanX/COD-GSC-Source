@@ -31,7 +31,6 @@ class czm_trial_timer: cluielem {
     cluielem::function_dcb34c80("string", "timer_text", 1);
     cluielem::add_clientfield("under_round_rules", 5000, 1, "int");
   }
-
 }
 
 register(uid) {

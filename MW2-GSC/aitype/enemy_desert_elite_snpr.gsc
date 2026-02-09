@@ -53,7 +53,5 @@ precache() {
   precacheItem("glock");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_sniper_glint::main();
-  //----------------
-}
+  //---------------- maps\_sniper_glint::main();
+  //---------------- }

@@ -1,9 +1,8 @@
 #include maps\mp\animscripts\traverse\shared;
 
-main()
-{
-	self.traverseDeath = 1;
-//	self advancedTraverse2( %traverse90, 96 );
+main() {
+  self.traverseDeath = 1;
+  //	self advancedTraverse2(%traverse90, 96 );
 }
 
 /*
@@ -22,7 +21,7 @@ advancedTraverse2(traverseAnim, normalHeight)
 	
 	// orient to the Negotiation start node
 	startnode = self getnegotiationstartnode();
-	assert( isdefined( startnode ) );
+	assert( isDefined( startnode ) );
 	self OrientMode( "face angle", startnode.angles[1] );
 	realHeight = startnode.traverse_height - startnode.origin[2];
 	
@@ -31,7 +30,7 @@ advancedTraverse2(traverseAnim, normalHeight)
 	self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %body, 1, 0.15, 1);
 	timer = gettime();
 	self thread animscripts\shared::DoNoteTracksForever( "traverse", "no clear", ::handle_death );
-	if (!animhasnotetrack(traverseAnim, "gravity on"))
+	if(!animhasnotetrack(traverseAnim, "gravity on"))
 	{
 		timer = 1.23;
 		timerOffset = 0.2;
@@ -44,13 +43,13 @@ advancedTraverse2(traverseAnim, normalHeight)
 	{
 		self waittillmatch("traverse","gravity on");
 		self traverseMode("gravity");
-		if (!animhasnotetrack(traverseAnim, "blend"))
+		if(!animhasnotetrack(traverseAnim, "blend"))
 			wait (0.2);
 		else
 		self waittillmatch("traverse","blend");
 	}
 	
-	if ( self.health == 1 )
+	if( self.health == 1 )
 		return;
 
 	self.a.movement = self.old_anim_movement;
@@ -63,20 +62,19 @@ advancedTraverse2(traverseAnim, normalHeight)
 	thread animscripts\run::MakeRunSounds ( "killSoundThread" );
 }
 
-
 handle_death( note )
 {
 	println( note );
 
-	if ( note != "traverse_death" )
+	if( note != "traverse_death" )
 		return;
 
 	self endon( "killanimscript" );
 
-	if ( self.health == 1 )
+	if( self.health == 1 )
 	{
 		self.a.nodeath = true;
-		if ( self.traverseDeath > 1 )
+		if( self.traverseDeath > 1 )
 			self setFlaggedAnimKnobAll( "deathanim", %traverse90_end_death, %body, 1, .2, 1 );
 		else
 			self setFlaggedAnimKnobAll( "deathanim", %traverse90_start_death, %body, 1, .2, 1 );

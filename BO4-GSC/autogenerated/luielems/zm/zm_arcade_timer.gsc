@@ -41,7 +41,6 @@ class czm_arcade_timer: cluielem {
     cluielem::add_clientfield("minutes", 1, 4, "int");
     cluielem::function_dcb34c80("string", "title", 1);
   }
-
 }
 
 set_timer(player, var_c895e25d, var_b1100790) {

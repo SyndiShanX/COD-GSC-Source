@@ -8,6 +8,7 @@
 #include animscripts\anims;
 #include maps\_utility;
 #using_animtree("generic_human");
+
 MoveWalk() {
   desiredPose = self animscripts\utility::choosePose();
   switch (desiredPose) {
@@ -34,7 +35,6 @@ MoveWalk() {
       break;
   }
 }
-
 DoWalkAnim(walkAnim) {
   self endon("movemode");
   self SetFlaggedAnimKnobAll("walkanim", walkAnim, %body, 1, 1.2, 1);
@@ -43,17 +43,16 @@ DoWalkAnim(walkAnim) {
   }
   self animscripts\shared::DoNoteTracksForTime(0.2, "walkanim");
 }
-
 getStandWalkAnim() {
   if((isDefined(self.walk_combatanim)) && (self animscripts\utility::IsInCombat())) {
-    rand = randomInt(10);
+    rand = RandomInt(10);
     if((rand < 2) && (isDefined(self.walk_combatanim2))) {
       return self.walk_combatanim2;
     } else {
       return self.walk_combatanim;
     }
   } else if((isDefined(self.walk_noncombatanim)) && (!self animscripts\utility::IsInCombat())) {
-    rand = randomInt(10);
+    rand = RandomInt(10);
     if((rand < 2) && (isDefined(self.walk_noncombatanim2))) {
       return self.walk_noncombatanim2;
     } else {

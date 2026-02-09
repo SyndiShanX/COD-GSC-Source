@@ -135,11 +135,11 @@ function init() {
   level.oldschool = getdvarint("scr_oldschool") == 1;
   if(level.oldschool) {
     print("");
-    setdvar("jump_height", 64);
-    setdvar("jump_slowdownEnable", 0);
-    setdvar("bg_fallDamageMinHeight", 256);
-    setdvar("bg_fallDamageMaxHeight", 512);
-    setdvar("player_clipSizeMultiplier", 2);
+    setDvar("jump_height", 64);
+    setDvar("jump_slowdownEnable", 0);
+    setDvar("bg_fallDamageMinHeight", 256);
+    setDvar("bg_fallDamageMaxHeight", 512);
+    setDvar("player_clipSizeMultiplier", 2);
   }
   precache_mp_leaderboards();
   if(!isDefined(game["tiebreaker"])) {
@@ -161,33 +161,33 @@ function init() {
 
 function registerdvars() {
   if(getdvarstring("scr_oldschool") == "") {
-    setdvar("scr_oldschool", "0");
+    setDvar("scr_oldschool", "0");
   }
   if(getdvarstring("ui_guncycle") == "") {
-    setdvar("ui_guncycle", 0);
+    setDvar("ui_guncycle", 0);
   }
   if(getdvarstring("ui_weapon_tiers") == "") {
-    setdvar("ui_weapon_tiers", 0);
+    setDvar("ui_weapon_tiers", 0);
   }
-  setdvar("ui_text_endreason", "");
+  setDvar("ui_text_endreason", "");
   setmatchflag("bomb_timer", 0);
   if(getdvarstring("scr_vehicle_damage_scalar") == "") {
-    setdvar("scr_vehicle_damage_scalar", "1");
+    setDvar("scr_vehicle_damage_scalar", "1");
   }
   level.vehicledamagescalar = getdvarfloat("scr_vehicle_damage_scalar");
   level.fire_audio_repeat_duration = getdvarint("fire_audio_repeat_duration");
   level.fire_audio_random_max_duration = getdvarint("fire_audio_random_max_duration");
   teamname = getcustomteamname(level.teamindex["allies"]);
   if(isDefined(teamname)) {
-    setdvar("g_customTeamName_Allies", teamname);
+    setDvar("g_customTeamName_Allies", teamname);
   } else {
-    setdvar("g_customTeamName_Allies", "");
+    setDvar("g_customTeamName_Allies", "");
   }
   teamname = getcustomteamname(level.teamindex["axis"]);
   if(isDefined(teamname)) {
-    setdvar("g_customTeamName_Axis", teamname);
+    setDvar("g_customTeamName_Axis", teamname);
   } else {
-    setdvar("g_customTeamName_Axis", "");
+    setDvar("g_customTeamName_Axis", "");
   }
 }
 
@@ -383,7 +383,7 @@ function forceend(hostsucks) {
     }
   }
   setmatchflag("disableIngameMenu", 1);
-  setdvar("ui_text_endreason", endstring);
+  setDvar("ui_text_endreason", endstring);
   thread endgame(winner, endstring);
 }
 
@@ -510,9 +510,7 @@ function dodeadeventupdates() {
     } else {
       foreach(team in level.teams) {
         if(isteamalldead(team)) {
-          [
-            [level.ondeadevent]
-          ](team);
+          [[level.ondeadevent]](team);
           return true;
         }
       }
@@ -1146,7 +1144,7 @@ function endgame(winner, endreasontext, endimage) {
   game["state"] = "postgame";
   level.gameendtime = gettime();
   level.gameended = 1;
-  setdvar("g_gameEnded", 1);
+  setDvar("g_gameEnded", 1);
   level.ingraceperiod = 0;
   level notify("game_ended");
   level.allowbattlechatter = [];
@@ -1325,7 +1323,7 @@ function checkscorelimit() {
       return false;
     }
   } else {
-    if(!isplayer(self)) {
+    if(!isPlayer(self)) {
       return false;
     }
     if(self.pointstowin < level.scorelimit) {
@@ -1346,14 +1344,14 @@ function updategametypedvars() {
     timelimit = [[level.gettimelimit]]();
     if(timelimit != level.timelimit) {
       level.timelimit = timelimit;
-      setdvar("ui_timelimit", level.timelimit);
+      setDvar("ui_timelimit", level.timelimit);
       level notify("update_timelimit");
     }
     thread checktimelimit();
     scorelimit = math::clamp(getgametypesetting("scoreLimit"), level.scorelimitmin, level.scorelimitmax);
     if(scorelimit != level.scorelimit) {
       level.scorelimit = scorelimit;
-      setdvar("ui_scorelimit", level.scorelimit);
+      setDvar("ui_scorelimit", level.scorelimit);
       level notify("update_scorelimit");
     }
     thread checkscorelimit();
@@ -1654,7 +1652,7 @@ function checkteamscorelimitsoon(team) {
 }
 
 function checkplayerscorelimitsoon() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   if(level.scorelimit <= 0) {
     return;
   }
@@ -1823,9 +1821,9 @@ function graceperiod() {
 }
 
 function watchmatchendingsoon() {
-  setdvar("xblive_matchEndingSoon", 0);
+  setDvar("xblive_matchEndingSoon", 0);
   level waittill("match_ending_soon", reason);
-  setdvar("xblive_matchEndingSoon", 1);
+  setDvar("xblive_matchEndingSoon", 1);
 }
 
 function anyteamhaswavedelay() {
@@ -1864,7 +1862,7 @@ function callback_startgametype() {
     if(!isDefined(game["state"])) {
       game["state"] = "playing";
     }
-    setdvar("cg_thirdPersonAngle", 354);
+    setDvar("cg_thirdPersonAngle", 354);
     game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
     if(level.teambased) {
       game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
@@ -1941,7 +1939,7 @@ function callback_startgametype() {
   }
   level.skipvote = 0;
   level.gameended = 0;
-  setdvar("g_gameEnded", 0);
+  setDvar("g_gameEnded", 0);
   level.objidstart = 0;
   level.forcedend = 0;
   level.hostforcedend = 0;
@@ -1953,11 +1951,11 @@ function callback_startgametype() {
     }
   }
   if(getdvarstring("scr_max_rank") == "") {
-    setdvar("scr_max_rank", "0");
+    setDvar("scr_max_rank", "0");
   }
   level.rankcap = getdvarint("scr_max_rank");
   if(getdvarstring("scr_min_prestige") == "") {
-    setdvar("scr_min_prestige", "0");
+    setDvar("scr_min_prestige", "0");
   }
   level.minprestige = getdvarint("scr_min_prestige");
   level.usestartspawns = 1;
@@ -2046,15 +2044,15 @@ function callback_startgametype() {
   globallogic_score::updateallteamscores();
   level.killstreaksenabled = 1;
   if(getdvarstring("scr_game_rankenabled") == "") {
-    setdvar("scr_game_rankenabled", 1);
+    setDvar("scr_game_rankenabled", 1);
   }
   level.rankenabled = getdvarint("scr_game_rankenabled");
   if(getdvarstring("scr_game_medalsenabled") == "") {
-    setdvar("scr_game_medalsenabled", 1);
+    setDvar("scr_game_medalsenabled", 1);
   }
   level.medalsenabled = getdvarint("scr_game_medalsenabled");
   if(level.hardcoremode && level.rankedmatch && getdvarstring("scr_game_friendlyFireDelay") == "") {
-    setdvar("scr_game_friendlyFireDelay", 1);
+    setDvar("scr_game_friendlyFireDelay", 1);
   }
   level.friendlyfiredelay = getdvarint("scr_game_friendlyFireDelay");
   [[level.onstartgametype]]();
@@ -2090,12 +2088,12 @@ function forcedebughostmigration() {
 function registerfriendlyfiredelay(dvarstring, defaultvalue, minvalue, maxvalue) {
   dvarstring = ("scr_" + dvarstring) + "_friendlyFireDelayTime";
   if(getdvarstring(dvarstring) == "") {
-    setdvar(dvarstring, defaultvalue);
+    setDvar(dvarstring, defaultvalue);
   }
   if(getdvarint(dvarstring) > maxvalue) {
-    setdvar(dvarstring, maxvalue);
+    setDvar(dvarstring, maxvalue);
   } else if(getdvarint(dvarstring) < minvalue) {
-    setdvar(dvarstring, minvalue);
+    setDvar(dvarstring, minvalue);
   }
   level.friendlyfiredelaytime = getdvarint(dvarstring);
 }
@@ -2128,7 +2126,7 @@ function getkillstreaks(player) {
   for(killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
     killstreak[killstreaknum] = "killstreak_null";
   }
-  if(isplayer(player) && !level.oldschool && level.disableclassselection != 1 && isDefined(player.killstreak)) {
+  if(isPlayer(player) && !level.oldschool && level.disableclassselection != 1 && isDefined(player.killstreak)) {
     currentkillstreak = 0;
     for(killstreaknum = 0; killstreaknum < level.maxkillstreaks; killstreaknum++) {
       if(isDefined(player.killstreak[killstreaknum])) {

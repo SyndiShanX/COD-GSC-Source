@@ -30,7 +30,7 @@ function_930e5d42(localclientnum) {
 }
 
 function_dbd63244() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(self function_da43934d()) {
     return self getEye();

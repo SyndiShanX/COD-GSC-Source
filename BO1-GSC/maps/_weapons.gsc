@@ -14,7 +14,6 @@ init() {
   maps\_flamethrower_plight::init();
   maps\_ballistic_knife::init();
 }
-
 on_player_connect() {
   while(true) {
     level waittill("connecting", player);
@@ -23,7 +22,6 @@ on_player_connect() {
     player thread on_player_spawned();
   }
 }
-
 on_player_spawned() {
   self endon("disconnect");
   self endon("death");
@@ -35,7 +33,6 @@ on_player_spawned() {
     self thread watch_grenade_usage();
   }
 }
-
 watch_weapon_usage() {
   self endon("death");
   self endon("disconnect");
@@ -60,7 +57,6 @@ watch_weapon_usage() {
     self waittill("end_firing");
   }
 }
-
 watch_grenade_usage() {
   self endon("death");
   self endon("disconnect");
@@ -73,7 +69,6 @@ watch_grenade_usage() {
     self begin_grenade_tracking();
   }
 }
-
 begin_grenade_tracking() {
   self endon("death");
   self endon("disconnect");
@@ -97,7 +92,6 @@ begin_grenade_tracking() {
   }
   self.throwingGrenade = false;
 }
-
 begin_other_grenade_tracking() {
   self notify("grenadeTrackingStart");
   self endon("grenadeTrackingStart");
@@ -124,17 +118,19 @@ begin_other_grenade_tracking() {
     }
   }
 }
-
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
-  if(!isDefined(startRadius))
+  }
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
   players = GetPlayers();
   for(i = 0; i < players.size; i++) {
-    if(!isalive(players[i]) || players[i].sessionstate != "playing")
+    if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
+    }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
@@ -200,31 +196,32 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
   }
   return ents;
 }
-
 weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
   trace = bulletTrace(midpos, to, false, ignore);
   return (trace["fraction"] == 1);
 }
-
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
   if(self.isPlayer) {
     self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0, 0);
+    self.entity thread[[level.callbackPlayerDamage]](
+      eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0, 0
+    );
   } else if(IsAlive(self.entity)) {
     self.entity DoDamage(iDamage, damagepos, eAttacker, eInflictor, sMeansOfDeath, 0);
   } else {
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "mine_bouncing_betty_mp"))
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "mine_bouncing_betty_mp")) {
       return;
+    }
     self.entity damage_notify_wrapper(iDamage, eAttacker, (0, 0, 0), (0, 0, 0), "mod_explosive", "", "");
   }
 }
-
 watchSmokeGrenadeDetonation() {
   self waittill("explode", position, surface);
   smokeSound = spawn("script_origin", (0, 0, 1));
@@ -233,7 +230,7 @@ watchSmokeGrenadeDetonation() {
   smokeSound playLoopSound("wpn_smoke_hiss_lp");
   wait(6);
   playsoundatposition("wpn_smoke_hiss_end", position);
-  smokeSound stopLoopSound(.5);
+  smokeSound StopLoopSound(.5);
   wait(.5);
   smokeSound delete();
 }

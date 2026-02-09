@@ -169,7 +169,7 @@ box_lock_action() {
     return;
   }
 
-  setdvar("magic_chest_movable", "0");
+  setDvar("magic_chest_movable", "0");
 
   sloth_print("box will not move");
 

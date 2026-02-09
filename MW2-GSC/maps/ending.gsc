@@ -107,9 +107,9 @@ main() {
 
   weapons = level.player GetWeaponsListAll();
   if(isDefined(weapons) && weapons.size)
-    setdvar("ui_char_museum_mode", "credits_1");
+    setDvar("ui_char_museum_mode", "credits_1");
 
-  level.level_mode = getdvar("ui_char_museum_mode");
+  level.level_mode = getDvar("ui_char_museum_mode");
   SetSavedDvar("ui_hidemap", "1");
 
   if(level.level_mode == "credits_1") {
@@ -164,5 +164,4 @@ ending_music() {
       AssertMsg("Unhandled start point " + level.start_point);
       break;
   }
-
 }

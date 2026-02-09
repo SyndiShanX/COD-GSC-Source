@@ -219,25 +219,23 @@ sloth_update_double_wide() {
   if(is_true(self.ignore_double_wide) || self.is_inside) {
     if(self.using_double_wide) {
       self.using_double_wide = 0;
-      setdvar("zombie_double_wide_checks", 0);
+      setDvar("zombie_double_wide_checks", 0);
       self setphysparams(15, 0, 73);
 
       setdvarint("scr_sloth_debug_width", 15);
       setdvarint("scr_sloth_debug_height", 73);
       self.debug_width = getdvarint(#"_id_2443DFBB");
       self.debug_height = getdvarint(#"_id_897C9AB4");
-
     }
   } else if(!self.using_double_wide) {
     self.using_double_wide = 1;
-    setdvar("zombie_double_wide_checks", 1);
+    setDvar("zombie_double_wide_checks", 1);
     self setphysparams(25, 0, 73);
 
     setdvarint("scr_sloth_debug_width", 25);
     setdvarint("scr_sloth_debug_height", 73);
     self.debug_width = getdvarint(#"_id_2443DFBB");
     self.debug_height = getdvarint(#"_id_897C9AB4");
-
   }
 }
 
@@ -522,7 +520,6 @@ setup_door_markers() {
         level.jail_door = level.sloth_doors[idx];
 
         level.jail_barricade = barricade;
-
       }
 
       idx++;
@@ -556,13 +553,13 @@ watch_barricade() {
     self waittill("trigger", who);
     should_break = isDefined(level.sloth) && who == level.sloth && who.state == "berserk" && is_true(who.run_berserk);
 
-    if(isplayer(who) && is_true(level.devgui_break)) {
+    if(isPlayer(who) && is_true(level.devgui_break)) {
       level.devgui_break = 0;
       should_break = 1;
     }
 
     if(should_break) {
-      if(!isplayer(who)) {
+      if(!isPlayer(who)) {
         who sloth_set_state("crash", 1);
         level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("sloth_escape");
       }
@@ -844,7 +841,6 @@ unregister_candy_context(name) {
     arrayremovevalue(level.candy_context, remove_context, 1);
 
     sloth_print(remove_context.name + " removed from candy context");
-
   }
 }
 
@@ -1502,12 +1498,11 @@ update_berserk() {
 
     if(is_true(hit_ent.is_zombie))
       return;
-    else if(isplayer(hit_ent)) {
+    else if(isPlayer(hit_ent)) {
       if(!is_true(self.slowing)) {
         hit_ent dodamage(hit_ent.health, hit_ent.origin);
 
         sloth_print("hit player");
-
       }
 
       return;
@@ -1655,7 +1650,6 @@ sloth_set_state(state, param2) {
       self.state = state;
 
       sloth_print("change state to " + self.state);
-
     }
   }
 }
@@ -1868,7 +1862,6 @@ sloth_debug_barricade() {
     closest = player get_facing_barricade(1);
     wait 1;
   }
-
 }
 
 get_facing_barricade(ignore_segment_dist) {
@@ -1879,7 +1872,7 @@ get_facing_barricade(ignore_segment_dist) {
   closest_dot_facing = 0;
   closest_segment_point = undefined;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     angles = self getplayerangles();
     vec_forward = vectornormalize(anglesToForward(flat_angle(angles)));
   } else {
@@ -1949,7 +1942,6 @@ get_facing_barricade(ignore_segment_dist) {
 
     if(getdvarint(#"_id_B6252E7C") == 3)
       line(self.origin, ground_pos, (1, 1, 1), 1, 0, 60);
-
   }
 
   return closest;
@@ -1999,7 +1991,6 @@ barricade_assist() {
 
     if(getdvarint(#"_id_B6252E7C") == 2)
       line(self.origin, ground_pos, (1, 1, 1), 1, 0, 500);
-
   }
 }
 
@@ -2817,7 +2808,6 @@ protect_action() {
 
         if(getdvarint(#"_id_B6252E7C") == 2)
           line(self.origin, self.target_zombie.origin, (0, 1, 0), 1, 0, 6);
-
       }
     } else {
       dist = distancesquared(self.origin, self.candy_player.origin);
@@ -3180,7 +3170,7 @@ is_facing(facee, dot_limit) {
   if(!isDefined(dot_limit))
     dot_limit = 0.7;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     orientation = self getplayerangles();
   else
     orientation = self.angles;
@@ -3442,7 +3432,6 @@ sloth_debug_axis() {
     self.debug_axis setModel("fx_axis_createfx");
     self.debug_axis linkto(self, "tag_weapon_right");
   }
-
 }
 
 sloth_debug_doors() {
@@ -3451,13 +3440,11 @@ sloth_debug_doors() {
       foreach(door in level.sloth_doors) {
         debugstar(door.origin, 100, (1, 1, 1));
         circle(door.origin, 120, (1, 1, 1), 0, 1, 100);
-
       }
     }
 
     wait 1;
   }
-
 }
 
 sloth_debug_buildables() {
@@ -3476,7 +3463,6 @@ sloth_debug_buildables() {
 
       foreach(zone in level.sloth_buildable_zones) {
         debugstar(zone.stub.origin, 100, (1, 1, 1));
-
       }
     } else if(is_true(self.devgui_buildable)) {
       self.devgui_buildable = 0;
@@ -3489,7 +3475,6 @@ sloth_debug_buildables() {
 
     wait 1;
   }
-
 }
 
 sloth_debug_input() {
@@ -3512,7 +3497,6 @@ sloth_debug_input() {
 
     wait 0.1;
   }
-
 }
 
 sloth_devgui_teleport() {
@@ -3583,7 +3567,6 @@ sloth_devgui_context() {
     sloth.context_debug = 1;
     sloth check_contextual_actions();
   }
-
 }
 
 sloth_devgui_booze() {
@@ -3594,7 +3577,6 @@ sloth_devgui_booze() {
     sloth stop_action();
     sloth sloth_set_state("berserk", player);
   }
-
 }
 
 sloth_devgui_candy() {
@@ -3605,7 +3587,6 @@ sloth_devgui_candy() {
     sloth stop_action();
     sloth sloth_set_state("eat", player);
   }
-
 }
 
 sloth_devgui_warp_to_jail() {
@@ -3639,20 +3620,18 @@ sloth_devgui_make_crawler() {
     zombie thread maps\mp\animscripts\zm_run::needsdelayedupdate();
     zombie thread maps\mp\animscripts\zm_death::do_gib();
   }
-
 }
 
 sloth_devgui_double_wide() {
-  if(getdvar(#"zombie_double_wide_checks") == "1") {
-    setdvar("zombie_double_wide_checks", 0);
+  if(getDvar(#"zombie_double_wide_checks") == "1") {
+    setDvar("zombie_double_wide_checks", 0);
     iprintln("double wide disabled");
     level.devgui_double_wide = 0;
   } else {
-    setdvar("zombie_double_wide_checks", 1);
+    setDvar("zombie_double_wide_checks", 1);
     iprintln("double wide enabled");
     level.devgui_double_wide = 1;
   }
-
 }
 
 sloth_devgui_update_phys_params() {
@@ -3668,5 +3647,4 @@ sloth_devgui_update_phys_params() {
 
     wait 0.2;
   }
-
 }

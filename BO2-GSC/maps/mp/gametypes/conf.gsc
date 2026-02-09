@@ -116,7 +116,7 @@ onstartgametype() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || attacker.team == self.team) {
+  if(!isPlayer(attacker) || attacker.team == self.team) {
     return;
   }
   level thread spawndogtags(self, attacker);

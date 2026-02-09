@@ -46,7 +46,7 @@ setMeleeAttackDist() {
   self endon("death");
 
   while(1) {
-    if(isDefined(self.enemy) && isplayer(self.enemy))
+    if(isDefined(self.enemy) && isPlayer(self.enemy))
       self.meleeAttackDist = anim.dogAttackPlayerDist;
     else
       self.meleeAttackDist = anim.dogAttackAIDist;
@@ -83,8 +83,8 @@ initDogAnimations() {
   anim.dogStoppingDistSq = lengthSquared(getmovedelta(%german_shepherd_run_stop, 0, 1) * 1.2);
   anim.dogStartMoveDist = length(getmovedelta(%german_shepherd_run_start, 0, 1));
 
-  // notetime = getNotetrackTimes( %german_shepherd_attack_player, "dog_melee" );
-  // anim.dogAttackPlayerDist = length( getmovedelta( %german_shepherd_attack_player, 0, notetime[ 0 ] ) );
+  // notetime = getNotetrackTimes(%german_shepherd_attack_player, "dog_melee" );
+  // anim.dogAttackPlayerDist = length( getmovedelta(%german_shepherd_attack_player, 0, notetime[ 0 ] ) );
   anim.dogAttackPlayerDist = 102; // hard code for now, above is not accurate.
 
   offset = getstartorigin((0, 0, 0), (0, 0, 0), %german_shepherd_attack_AI_01_start_a);
@@ -134,5 +134,5 @@ initDogAnimations() {
   level.dog_melee_index = 0;
   level.dog_melee_timing_array = maps\_utility::array_randomize(array);
 
-  setdvar("friendlySaveFromDog", "0");
+  setDvar("friendlySaveFromDog", "0");
 }

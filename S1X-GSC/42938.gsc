@@ -549,8 +549,7 @@ sentry_setcancelled() {
 }
 
 sentry_setcarried(var_0) {
-  if(isDefined(self.originalowner)) {
-    } else {}
+  if(isDefined(self.originalowner)) {} else {}
 
   self setModel(level.sentrysettings[self.sentrytype].modelplacement);
   self setsentrycarrier(var_0);

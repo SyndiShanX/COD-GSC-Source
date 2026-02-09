@@ -68,7 +68,7 @@ function is_challenge_active() {
 
 function on_hero_ability_kill(ability, victimability) {
   player = self;
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
   if(!isDefined(player.isroulette) || !player.isroulette) {
@@ -138,7 +138,7 @@ function challenge_kills(data) {
   if(!isDefined(weapon) || weapon == level.weaponnone) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
   if(attackeristhief) {
@@ -278,7 +278,7 @@ function challenge_game_ended(data) {
   if(!isDefined(player)) {
     return;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   if(player util::is_bot()) {
@@ -298,7 +298,7 @@ function challenge_round_ended(data) {
   if(!isDefined(player)) {
     return;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   if(player util::is_bot()) {

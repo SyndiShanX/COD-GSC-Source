@@ -68,7 +68,7 @@ function function_677ed44f(weapon) {
     self notify(weapon.name + "_fired");
     level notify(weapon.name + "_fired");
     wait(0.05);
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       itemindex = getitemindexfromref("cybercom_rapidstrike");
       if(isDefined(itemindex)) {
         self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", 1);

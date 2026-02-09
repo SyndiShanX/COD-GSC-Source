@@ -406,7 +406,6 @@ ReconHudSetup(vehicle) {
   self maps\mp\killstreaks\_aerial_utility::playerEnableStreakStatic();
 
   self SetClientOmnvar("ui_recondrone_countdown", vehicle.endTime);
-  /#	
   if(SCR_CONST_DEBUG_INFINITE || GetDvarInt("scr_drone_recon_infinite", 0)) {
     self SetClientOmnvar("ui_recondrone_countdown", 0);
   }

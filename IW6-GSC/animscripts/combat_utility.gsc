@@ -12,7 +12,7 @@ gettargetangleoffset(var_0) {
 }
 
 getsniperburstdelaytime() {
-  if(isplayer(self.enemy))
+  if(isPlayer(self.enemy))
     return randomfloatrange(self.enemy.gs.min_sniper_burst_delay_time, self.enemy.gs.max_sniper_burst_delay_time);
   else
     return randomfloatrange(anim.min_sniper_burst_delay_time, anim.max_sniper_burst_delay_time);
@@ -62,7 +62,7 @@ cheatammoifnecessary() {
     return 0;
 
   if(self.team != "allies") {
-    if(!isplayer(self.enemy))
+    if(!isPlayer(self.enemy))
       return 0;
 
     if(self.enemy maps\_utility::ent_flag("player_is_invulnerable"))
@@ -218,7 +218,6 @@ aimidlethread(var_0) {
       var_4 = animscripts\utility::animarraypickrandom("exposed_idle");
     else {
       wait 0.5;
-
     }
 
     if(var_4 == var_1)
@@ -297,7 +296,7 @@ fireuntiloutofammo_waittillended() {
 fireuntiloutofammointernal(var_0, var_1, var_2, var_3) {
   self endon("enemy");
 
-  if(isplayer(self.enemy) && (self.shootstyle == "full" || self.shootstyle == "semi"))
+  if(isPlayer(self.enemy) && (self.shootstyle == "full" || self.shootstyle == "semi"))
     level endon("player_becoming_invulnerable");
 
   if(var_2) {
@@ -329,7 +328,7 @@ fireuntiloutofammointernal(var_0, var_1, var_2, var_3) {
 
     shootatshootentorpos();
 
-    if(isplayer(self.enemy) && self.enemy maps\_utility::ent_flag("player_is_invulnerable")) {
+    if(isPlayer(self.enemy) && self.enemy maps\_utility::ent_flag("player_is_invulnerable")) {
       if(randomint(3) == 0)
         self.bulletsinclip--;
     } else
@@ -555,7 +554,7 @@ throwgrenadeatplayerasap_combat_utility() {
 setactivegrenadetimer(var_0) {
   self.activegrenadetimer = spawnStruct();
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     self.activegrenadetimer.isplayertimer = 1;
     self.activegrenadetimer.player = var_0;
     self.activegrenadetimer.timername = self.grenadeweapon;
@@ -600,7 +599,7 @@ getgrenadetimertime(var_0) {
 }
 
 considerchangingtarget(var_0) {
-  if(!isplayer(var_0) && self isbadguy()) {
+  if(!isPlayer(var_0) && self isbadguy()) {
     if(gettime() < getgrenadetimertime(self.activegrenadetimer)) {
       if(level.player.ignoreme)
         return var_0;
@@ -704,7 +703,7 @@ trygrenade(var_0, var_1) {
     if(!checkgrenadethrowdist())
       return 0;
 
-    if(isplayer(self.enemy) && maps\_utility::is_player_down(self.enemy))
+    if(isPlayer(self.enemy) && maps\_utility::is_player_down(self.enemy))
       return 0;
 
     if(animscripts\utility::canseeenemyfromexposed()) {

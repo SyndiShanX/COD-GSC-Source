@@ -13,7 +13,7 @@ CONST_HOSTIL_LOCK = "hud_fofbox_hostile_ms_target";
 CONST_SELF = "hud_fofbox_self";
 
 init() {
-  SetDvar("missileRemoteSteerPitchRange", "60 87");
+  setDvar("missileRemoteSteerPitchRange", "60 87");
 
   level._missile_strike_setting = [];
 
@@ -445,7 +445,6 @@ WatchForExtraMissileFire(MasterRocket, MissileWeapon) {
 
     wait(0.1);
   }
-
 }
 
 EnableBoost(MasterRocket) {
@@ -1260,7 +1259,7 @@ targeting_hud_think(rocket, MissileWeapon) {
         break;
       }
 
-      if((IsPlayer(player) || IsAgent(player)) && player_is_valid_target(player)) {
+      if((isPlayer(player) || IsAgent(player)) && player_is_valid_target(player)) {
         HUDicon.x = player.origin[0];
         HUDicon.y = player.origin[1];
         HUDicon.z = player.origin[2];

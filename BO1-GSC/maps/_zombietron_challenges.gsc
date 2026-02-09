@@ -111,32 +111,31 @@ main() {
     moss.spawner_secondary_chance = level.zombie_vars["moss_martyrdom_chance"];
   }
 }
-
 init_sounds() {}
 has_challenge_occured(type) {
   for(i = 0; i < level.ChallengeEvents.size; i++) {
     challenge = level.ChallengeEvents[i];
-    if(!isDefined(challenge.round))
+    if(!isDefined(challenge.round)) {
       continue;
+    }
     if(challenge.type == type && challenge.round < level.round_number) {
       return true;
     }
   }
   return false;
 }
-
 is_this_a_challenge_round(roundNum) {
   for(i = 0; i < level.ChallengeEvents.size; i++) {
     challenge = level.ChallengeEvents[i];
-    if(!isDefined(challenge.round))
+    if(!isDefined(challenge.round)) {
       continue;
+    }
     if(challenge.round == roundNum) {
       return true;
     }
   }
   return false;
 }
-
 get_challenge_by_type(type) {
   for(i = 0; i < level.ChallengeEvents.size; i++) {
     challenge = level.ChallengeEvents[i];
@@ -146,7 +145,6 @@ get_challenge_by_type(type) {
   }
   return undefined;
 }
-
 try_to_start_challenge_round(roundNum) {
   if(!is_this_a_challenge_round(roundNum)) {
     return;
@@ -154,8 +152,9 @@ try_to_start_challenge_round(roundNum) {
   level.challenge = undefined;
   for(i = 0; i < level.ChallengeEvents.size; i++) {
     level.challenge = level.ChallengeEvents[i];
-    if(!isDefined(level.challenge.round))
+    if(!isDefined(level.challenge.round)) {
       continue;
+    }
     if(level.challenge.round == roundNum) {
       break;
     }
@@ -189,7 +188,6 @@ try_to_start_challenge_round(roundNum) {
   level.challenge = undefined;
   SetAILimit(level.default_ai_limit);
 }
-
 boss_battle_challenge() {
   self endon("death");
   health = self.health;
@@ -224,7 +222,7 @@ boss_battle_challenge() {
     }
     while(burst) {
       spawn_locations = level.current_spawners[level.current_wave.spawn_side];
-      spawn_point = spawn_locations[randomInt(spawn_locations.size)];
+      spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
       maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, type);
       burst--;
       wait 0.05;
@@ -232,7 +230,6 @@ boss_battle_challenge() {
     wait RandomIntRange(5, 12);
   }
 }
-
 barrel_blow_think(life) {
   self endon("death");
   curTime = GetTime();
@@ -252,7 +249,6 @@ barrel_blow_think(life) {
   }
   self notify("damage");
 }
-
 barrel_bomb_think() {
   self thread barrel_blow_think(RandomIntRange(6, 12));
   self setCanDamage(true);
@@ -267,11 +263,11 @@ barrel_bomb_think() {
   playsoundatposition("exp_tron_barrel", self.origin);
   self Delete();
 }
-
 barrel_burst(which) {
   self endon("exit_taken");
-  if(flag(which))
+  if(flag(which)) {
     return;
+  }
   flag_set(which);
   barrelSpawns = [];
   if(which == "barrel_burst1") {
@@ -280,15 +276,15 @@ barrel_burst(which) {
     barrelSpawns = getEntArray("barrel_drop_2", "targetname");
   }
   if(maps\_zombietron_challenges::is_this_a_challenge_round(level.round_number)) {
-    number = randomInt(barrelSpawns.size);
+    number = RandomInt(barrelSpawns.size);
     waitTime = RandomFloatRange(number, 20);
   } else {
-    number = randomInt(2);
+    number = RandomInt(2);
     waitTime = RandomFloatRange(30, 60);
   }
   while(number) {
     level ok_to_spawn(0.5);
-    spawn_point = barrelSpawns[randomInt(barrelSpawns.size)];
+    spawn_point = barrelSpawns[RandomInt(barrelSpawns.size)];
     barrel = spawn("script_model", spawn_point.origin);
     barrel setModel(level.red_barrel_model);
     if(which == "barrel_burst1") {
@@ -305,7 +301,6 @@ barrel_burst(which) {
   wait waitTime;
   flag_clear(which);
 }
-
 barrel_dropper() {
   self endon("exit_taken");
   btrig1 = getEnt("barrel_drop_1_trig", "targetname");
@@ -325,7 +320,6 @@ barrel_dropper() {
     wait 0.05;
   }
 }
-
 barrel_challenge_monitor() {
   challenge = maps\_zombietron_challenges::get_challenge_by_type("barrel");
   while(1) {

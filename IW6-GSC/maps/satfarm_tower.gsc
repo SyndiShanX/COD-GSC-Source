@@ -2234,7 +2234,7 @@ train_car() {
 
   if(!common_scripts\utility::flag("player_train_trigger")) {
     if(isalive(level.player)) {
-      setdvar("ui_deadquote", &"SATFARM_FAIL_TRAIN");
+      setDvar("ui_deadquote", &"SATFARM_FAIL_TRAIN");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -2320,7 +2320,7 @@ player_falls_on_tracks() {
   for(;;) {
     if(level.player istouching(var_0)) {
       if(isalive(level.player)) {
-        setdvar("ui_deadquote", &"SATFARM_FAIL_TRAIN");
+        setDvar("ui_deadquote", &"SATFARM_FAIL_TRAIN");
         maps\_utility::missionfailedwrapper();
       }
     }
@@ -2428,7 +2428,7 @@ train_nag() {
 
 animate_allies_to_train() {
   level endon("warehouse_end");
-  var_0 = getdvar("ai_friendlyFireBlockDuration");
+  var_0 = getDvar("ai_friendlyFireBlockDuration");
   setsaveddvar("ai_friendlyFireBlockDuration", 0);
   self pushplayer(1);
   maps\_utility::disable_ai_color();
@@ -2642,7 +2642,7 @@ tower_to_bridge_deploy_bink() {
   level.player.ignoreme = 1;
   setsaveddvar("compass", 0);
   common_scripts\utility::waitframe();
-  setdvar("paris_transition_movie", "1");
+  setDvar("paris_transition_movie", "1");
   setsaveddvar("ui_nextMission", "1");
   maps\_utility::nextmission();
 }

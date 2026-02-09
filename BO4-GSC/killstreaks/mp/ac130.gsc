@@ -485,7 +485,7 @@ function_6650cc9c(missile, bundle, beep_alias) {
 watchplayerteamchangethread(ac130) {
   ac130 notify(#"mothership_team_change");
   ac130 endon(#"mothership_team_change");
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   player endon(#"gunner_left");
   player waittill(#"joined_team", #"disconnect", #"joined_spectators");
@@ -500,7 +500,7 @@ watchplayerteamchangethread(ac130) {
 watchplayerexitrequestthread(player) {
   player notify(#"watchplayerexitrequestthread_singleton");
   player endon(#"watchplayerexitrequestthread_singleton");
-  assert(isplayer(player));
+  assert(isPlayer(player));
   ac130 = self;
   level endon(#"game_ended");
   player endon(#"disconnect", #"gunner_left");
@@ -527,7 +527,7 @@ watchplayerexitrequestthread(player) {
 }
 
 function_4d980695(isowner) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   level.ac130.occupied = 1;
   player util::setusingremote("ac130");

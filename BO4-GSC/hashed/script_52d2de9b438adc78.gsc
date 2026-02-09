@@ -338,7 +338,7 @@ event_handler[grenade_fire] function_cb63f633(eventstruct) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

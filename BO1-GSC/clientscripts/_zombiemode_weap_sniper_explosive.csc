@@ -1,6 +1,6 @@
 /***************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_weap_sniper_explosive.csc
+ * Script: clientscripts\_zombiemode_weap_sniper_explosive\.csc
 ***************************************************************/
 
 #include clientscripts\_utility;
@@ -18,15 +18,13 @@ init() {
   level._effect["sniper_explosive_death_mist"] = loadfx("maps/zombie/fx_zmb_coast_jackal_death");
   level thread player_init();
 }
-
 player_init() {
   waitforclient(0);
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
   }
 }
-
 sniper_explosive_death_response(localClientNum, set, newEnt) {
   if(localClientNum != 0) {
     return;
@@ -35,7 +33,7 @@ sniper_explosive_death_response(localClientNum, set, newEnt) {
     return;
   }
   tag_pos = self gettagorigin("J_SpineLower");
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     self clientscripts\_zombiemode::deleteZombieEyes(i);
     playFX(i, level._effect["sniper_explosive_death_mist"], tag_pos);

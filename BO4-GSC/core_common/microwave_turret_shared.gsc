@@ -56,7 +56,6 @@ stopmicrowave() {
     }
 
     turret notify(#"stop_turret_debug");
-
   }
 }
 
@@ -128,7 +127,7 @@ microwaveentity(entity) {
   turret endon(#"microwave_turret_shutdown", #"death");
   entity endon(#"disconnect", #"death");
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity endon(#"joined_team", #"joined_spectators");
   }
 
@@ -140,7 +139,7 @@ microwaveentity(entity) {
   viewkickscalar = 1;
   damagescalar = 1;
 
-  if(isplayer(entity) && entity hasperk(#"specialty_microwaveprotection")) {
+  if(isPlayer(entity) && entity hasperk(#"specialty_microwaveprotection")) {
     shellshockscalar = getdvarfloat(#"specialty_microwaveprotection_shellshock_scalar", 0.5);
     viewkickscalar = getdvarfloat(#"specialty_microwaveprotection_viewkick_scalar", 0.5);
     damagescalar = getdvarfloat(#"specialty_microwaveprotection_damage_scalar", 0.5);
@@ -187,7 +186,7 @@ microwaveentity(entity) {
     entity.lastmicrowavedby = turret.owner;
     time = gettime();
 
-    if(isplayer(entity) && !entity isremotecontrolling()) {
+    if(isPlayer(entity) && !entity isremotecontrolling()) {
       if(time - (isDefined(entity.microwaveshellshockandviewkicktime) ? entity.microwaveshellshockandviewkicktime : 0) > 950) {
         if(entity.microwaveeffect % 2 == 1) {
           if(distancesquared(entity.origin, turret.origin) > 750 * 2 / 3 * 750 * 2 / 3) {
@@ -206,7 +205,7 @@ microwaveentity(entity) {
       }
     }
 
-    if(isplayer(entity) && entity.microwaveeffect % 3 == 2) {
+    if(isPlayer(entity) && entity.microwaveeffect % 3 == 2) {
       scoreevents::processscoreevent(#"hpm_suppress", turret.owner, entity, turretweapon);
     }
 
@@ -221,7 +220,7 @@ microwaveturretaffectsentity(entity) {
     return false;
   }
 
-  if(!isplayer(entity) && !isai(entity)) {
+  if(!isPlayer(entity) && !isai(entity)) {
     return false;
   }
 

@@ -6,6 +6,7 @@
 #include animscripts\utility;
 #include animscripts\traverse\zombie_shared;
 #using_animtree("generic_human");
+
 main() {
   if(isDefined(self.is_zombie) && self.is_zombie) {
     if(isDefined(level.scr_anim[self.animname]["zipline_traverse_lighthouse"])) {
@@ -17,7 +18,6 @@ main() {
     }
   }
 }
-
 zipline_traverse_lighthouse(traverse_anim) {
   traverseData = [];
   traverseData["traverseAnim"] = traverse_anim;

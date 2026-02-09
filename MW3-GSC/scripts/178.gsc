@@ -6,7 +6,6 @@
 _id_15C1() {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   if(!isDefined(level._id_1456._id_15C2)) {
     level._id_1456._id_15C2 = spawnStruct();
@@ -41,11 +40,9 @@ _id_15D6(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(level._id_1456._id_15C2._id_15D1[var_0])) {
     _id_15F4(var_0);
-
   }
   if(isDefined(var_4)) {
     thread maps\_audio::_id_15D7(var_4, var_2, undefined, undefined, var_5);
-
   }
   level._id_1456._id_15C2._id_15D1[var_0] = [];
   level._id_1456._id_15C2._id_15D1[var_0]["entity"] = var_2;
@@ -113,7 +110,6 @@ _id_15D6(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(isDefined(var_3)) {
       var_9._id_15E0 = var_3;
-
     }
     foreach(var_18, var_11 in var_8) {
       switch (var_11[0]) {
@@ -231,7 +227,6 @@ _id_15D6(var_0, var_1, var_2, var_3, var_4, var_5) {
               var_17._id_15E6 = var_15;
             } else {
               var_17._id_15F0 = var_15;
-
             }
             if(!isDefined(level._id_1456._id_15C2._id_15D0[var_15])) {
               var_16 = [];
@@ -260,7 +255,6 @@ _id_15F1(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = max(0.1, var_0);
-
   }
   foreach(var_3 in level._id_1456._id_15C2._id_15F2) {
     if(var_3.size > 0) {
@@ -277,7 +271,6 @@ _id_15F4(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = max(0.01, var_1);
-
   }
   if(isDefined(level._id_1456._id_15C2._id_15D1[var_0])) {
     level notify("aud_veh_stop_" + var_0);
@@ -307,7 +300,6 @@ _id_15F4(var_0, var_1) {
 _id_15F5(var_0, var_1, var_2) {
   if(!isDefined(self._id_15F6)) {
     self._id_15F6 = [];
-
   }
   self._id_15F6[var_0] = spawnStruct();
   self._id_15F6[var_0]._id_15F7 = var_1;
@@ -344,7 +336,6 @@ _id_15FC(var_0) {
 _id_15FD(var_0) {
   if(self._id_15FA) {
     _id_15FC(0.0);
-
   }
   self playSound(var_0, "sounddone");
   thread _id_15F9();
@@ -353,19 +344,15 @@ _id_15FD(var_0) {
 _id_15FE(var_0) {
   if(!isDefined(level._id_1456._id_15C2._id_15FF)) {
     level._id_1456._id_15C2._id_15FF = [];
-
   }
   if(!isDefined(level._id_1456._id_15C2._id_1600)) {
     level._id_1456._id_15C2._id_1600 = [];
-
   }
   if(!isDefined(level._id_1456._id_15C2._id_1601)) {
     level._id_1456._id_15C2._id_1601 = [];
-
   }
   if(!isDefined(level._id_1456._id_15C2._id_1602)) {
     level._id_1456._id_15C2._id_1602 = [];
-
   }
   level._id_1456._id_15C2._id_15FF[var_0] = [];
   level._id_1456._id_15C2._id_1601[var_0] = 0;
@@ -378,11 +365,9 @@ _id_1603(var_0) {
 
   if(isDefined(level._id_1456._id_15C2._id_15D3[var_0]) && level._id_1456._id_15C2._id_15D3[var_0] && _id_1604(var_0)) {
     var_1 = 1;
-
   }
   if(isDefined(level._id_1456._id_15C2._id_15D4[var_0]) && level._id_1456._id_15C2._id_15D4[var_0] && _id_1605(var_0)) {
     var_1 = 1;
-
   }
   return var_1;
 }
@@ -390,7 +375,6 @@ _id_1603(var_0) {
 _id_1604(var_0) {
   if(level._id_1456._id_15C2._id_15FF[var_0].size > 0) {
     return 1;
-
   }
   return 0;
 }
@@ -398,7 +382,6 @@ _id_1604(var_0) {
 _id_1605(var_0) {
   if(level._id_1456._id_15C2._id_1600[var_0].size > 0) {
     return 1;
-
   }
   return 0;
 }
@@ -440,7 +423,6 @@ _id_160A(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_4 = var_3;
-
   }
   var_5 = spawn("script_origin", var_1.origin);
   var_5 linkto(var_1, "tag_origin", (var_4, 0, 0), (0, 0, 0));
@@ -456,7 +438,6 @@ _id_160C(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_4 = var_3;
-
   }
   var_5 = spawn("script_origin", var_1.origin);
   var_5 linkto(var_1, "tag_origin", (var_4, 0, 0), (0, 0, 0));
@@ -475,7 +456,6 @@ _id_160D(var_0) {
 
   if(isDefined(level._id_1456._id_15C2._id_15D2[var_0])) {
     level._id_1456._id_15C2._id_15D2[var_0] = undefined;
-
   }
   self delete();
 }
@@ -487,7 +467,6 @@ _id_160E(var_0) {
 
   if(isDefined(level._id_1456._id_15C2._id_15D2[var_0])) {
     level._id_1456._id_15C2._id_15D2[var_0] = undefined;
-
   }
   self delete();
 }
@@ -495,13 +474,11 @@ _id_160E(var_0) {
 _id_160F(var_0, var_1, var_2) {
   if(isDefined(level._id_1456._id_15C2._id_15D2[var_2])) {
     level._id_1456._id_15C2._id_15D2[var_2] = undefined;
-
   }
   var_3 = 0.1;
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-
   }
   level._id_1456._id_15C2._id_1600[var_2][var_0._id_160B] = undefined;
   var_0 scalevolume(0.0, var_3 + 0.05);
@@ -515,13 +492,11 @@ _id_160F(var_0, var_1, var_2) {
 _id_1610(var_0, var_1, var_2) {
   if(isDefined(level._id_1456._id_15C2._id_15D2[var_2])) {
     level._id_1456._id_15C2._id_15D2[var_2] = undefined;
-
   }
   var_3 = 0.1;
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-
   }
   level._id_1456._id_15C2._id_15FF[var_2][var_0._id_160B] = undefined;
   var_0 scalevolume(0.0, var_3 + 0.05);
@@ -562,7 +537,6 @@ _id_1611(var_0) {
       var_2 = var_2 + var_8 * (var_13 - var_2);
     } else {
       var_2 = var_2 + var_6 * (var_13 - var_2);
-
     }
     var_14 = var_2 - var_3;
     var_3 = var_2;
@@ -710,11 +684,9 @@ _id_1616(var_0) {
         var_13 = var_11;
       } else {
         var_13 = _id_1622(var_0);
-
       }
       if(level._id_1456._id_15C2._id_15CE) {
         iprintln("throttle: " + var_13);
-
       }
       var_12 = var_12 * var_13;
     }
@@ -732,11 +704,9 @@ _id_1616(var_0) {
       }
     } else {
       var_2 = var_12;
-
     }
     if(isDefined(var_0._id_15E2)) {
       [[var_0._id_15E2]](var_8, var_2);
-
     }
     foreach(var_15 in var_0._id_15DF) {}
     thread _id_1618(var_15, var_0, var_2, var_1, var_9);
@@ -762,7 +732,6 @@ _id_1618(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_0._id_15F0)) {
     var_6 = maps\_audio::_id_15B3(var_2, level._id_1456._id_15C2._id_15D0[var_0._id_15F0]);
-
   }
   var_7 = 0;
   var_8 = 0;
@@ -774,7 +743,6 @@ _id_1618(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_1._id_15ED)) {
       var_11 = var_1._id_15ED;
-
     }
     if(var_10 - var_9 < var_11 * 1000) {
       var_7 = 1;
@@ -793,7 +761,6 @@ _id_1618(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_1._id_15EC)) {
       var_12 = var_1._id_15EC;
-
     }
     var_6 = var_6 * var_12;
   }
@@ -813,7 +780,6 @@ _id_1618(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_1.offset)) {
       var_15 = var_1.offset;
-
     }
     level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] linkto(var_1.vehicle, "tag_origin", (var_15, 0, 0), (0, 0, 0));
     level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] playLoopSound(var_0._id_15EF);
@@ -823,7 +789,6 @@ _id_1618(var_0, var_1, var_2, var_3, var_4) {
   } else {
     if(isDefined(var_5)) {
       level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] setpitch(var_5, var_1._id_15DE);
-
     }
     if(isDefined(var_6)) {
       level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] scalevolume(var_6, var_1._id_15DE);
@@ -836,13 +801,11 @@ _id_1619(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_4 = "tag_origin";
-
   }
   var_5 = 0;
 
   if(isDefined(var_3)) {
     var_5 = var_3;
-
   }
   if(isDefined(level._id_1456._id_15C2._id_15D1[var_0])) {
     foreach(var_8, var_7 in level._id_1456._id_15C2._id_15D1[var_0]) {
@@ -880,7 +843,6 @@ _id_161D(var_0) {
 
   if(level._id_1456._id_15C2._id_15CA) {
     iprintln("tilt: " + var_2);
-
   }
   return var_2;
 }
@@ -894,11 +856,9 @@ _id_161E(var_0) {
     var_2 = var_1[[var_3]]();
   } else {
     var_2 = var_0.vehicle vehicle_getspeed();
-
   }
   if(level._id_1456._id_15C2._id_15C9) {
     iprintln("speed: " + var_2);
-
   }
   return var_2;
 }
@@ -909,7 +869,6 @@ _id_161F(var_0) {
 
   if(level._id_1456._id_15C2._id_15C9) {
     iprintln("yaw: " + var_2);
-
   }
   return var_2;
 }
@@ -920,7 +879,6 @@ _id_1620(var_0) {
 
   if(level._id_1456._id_15C2._id_15CC) {
     iprintln("roll: " + var_2);
-
   }
   return var_2;
 }
@@ -959,7 +917,6 @@ _id_1622(var_0) {
     }
   } else {
     var_2 = var_1 vehicle_getthrottle();
-
   }
   return var_2;
 }
@@ -1021,7 +978,6 @@ _id_1635(var_0) {
     if(var_5 >= var_4) {
       if(isDefined(self._id_1624._id_1627) && self._id_162D) {
         self._id_1630._id_1631 thread _id_1636(0.5);
-
       }
       if(self._id_162B) {
         self._id_162B = 0;
@@ -1043,11 +999,9 @@ _id_1635(var_0) {
         if(!var_3) {
           if(isDefined(self._id_1624._id_1625)) {
             self._id_1630._id_1632 thread _id_1637(var_1);
-
           }
           if(isDefined(self._id_1624._id_1626)) {
             self._id_1630._id_1633 thread _id_1637(var_1);
-
           }
           var_3 = 1;
         }
@@ -1064,15 +1018,12 @@ _id_1635(var_0) {
 
       if(isDefined(self._id_1624._id_1629)) {
         self._id_1630._id_1634 playSound(self._id_1624._id_1629);
-
       }
       if(isDefined(self._id_1624._id_1625)) {
         self._id_1630._id_1632 thread _id_1636(0.5);
-
       }
       if(isDefined(self._id_1624._id_1625)) {
         self._id_1630._id_1633 thread _id_1636(0.1);
-
       }
       return;
     }
@@ -1090,7 +1041,6 @@ _id_1637(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   self scalevolume(0.0);
   wait 0.05;
@@ -1135,7 +1085,6 @@ _id_163A(var_0) {
 
   if(isDefined(var_0)) {
     common_scripts\utility::play_sound_in_space(var_0, self.origin);
-
   }
   self notify("ceanup_sound_ents");
 }
@@ -1145,24 +1094,20 @@ _id_163C(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_3)) {
     var_6 = var_3;
-
   }
   var_7 = 0;
 
   if(isDefined(var_4)) {
     var_7 = var_4;
-
   }
   while(isDefined(var_0)) {
     if(var_7) {
       var_8 = distance(var_0.origin, level.player.origin);
     } else {
       var_8 = distance2d(var_0.origin, level.player.origin);
-
     }
     if(var_6) {
       iprintln("Distance: " + var_8);
-
     }
     if(var_8 < var_2) {
       var_9 = spawn("script_origin", var_0.origin);
@@ -1176,7 +1121,6 @@ _id_163C(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(var_10 == "deathspin") {
         if(isDefined(var_5)) {
           thread common_scripts\utility::play_sound_in_space(var_5, var_9.origin);
-
         }
         var_9 scalevolume(0.0, 0.3);
         wait 0.4;

@@ -192,7 +192,7 @@ sndslidetrigger() {
   while(true) {
     trig waittill("trigger", who);
 
-    if(who isplayer() && !is_true(who.issliding)) {
+    if(who isPlayer() && !is_true(who.issliding)) {
       who.issliding = 1;
       who thread sndslidetriggeraudio(trig);
       who thread sndslidewoodaudio(trig);

@@ -6,35 +6,27 @@
 init() {
   if(!isDefined(level._id_11B6)) {
     level._id_11B6 = [];
-
   }
   if(!isDefined(level._id_11B7)) {
     level._id_11B7 = [];
-
   }
   if(!isDefined(level._id_11B8)) {
     level._id_11B8 = [];
-
   }
   if(!isDefined(level._id_11B9)) {
     level._id_11B9 = [];
-
   }
   if(!isDefined(level.scr_sound)) {
     level.scr_sound = [];
-
   }
   if(!isDefined(level._id_11BB)) {
     level._id_11BB = [];
-
   }
   if(!isDefined(level._id_11BC)) {
     level._id_11BC = [];
-
   }
   if(!isDefined(level._id_0C59)) {
     level._id_0C59[0][0] = 0;
-
   }
   if(!isDefined(level._id_11BB)) {
     level._id_11BB = [];
@@ -192,7 +184,6 @@ _id_11D0(var_0, var_1, var_2) {
 _id_11D1(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = self._id_1032;
-
   }
   var_2 = 0;
 
@@ -243,7 +234,6 @@ _id_11D2(var_0, var_1, var_2, var_3, var_4) {
     var_5 = var_4;
   } else {
     var_5 = var_0._id_1032;
-
   }
   var_0 _id_1275(var_1, var_2, var_3, var_5);
 
@@ -267,11 +257,9 @@ _id_11D4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_9 = var_5;
   } else {
     var_9 = var_0._id_1032;
-
   }
   if(!isDefined(var_8) || !var_8) {
     var_0 _id_1275(var_2, var_3, var_4, var_5, var_6);
-
   }
   var_0._id_0C60 = var_1;
   var_0._id_11D5 = var_2;
@@ -312,7 +300,6 @@ _id_11D8(var_0, var_1, var_2, var_3) {
     }
     if(!isDefined(var_6._id_0BA3)) {
       var_6._id_0BA3 = 0;
-
     }
     var_6 endon("death");
     var_6._id_0BA3++;
@@ -322,7 +309,6 @@ _id_11D8(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_2)) {
     var_2 = "stop_loop";
-
   }
   thread _id_11BD(var_2, var_0);
   self endon(var_2);
@@ -333,7 +319,6 @@ _id_11D8(var_0, var_1, var_2, var_3) {
     var_10 = var_3;
   } else {
     var_10 = var_8._id_1032;
-
   }
   var_11 = 0;
   var_12 = 0;
@@ -372,7 +357,6 @@ _id_11D8(var_0, var_1, var_2, var_3) {
         var_27 = var_3;
       } else {
         var_27 = var_6._id_1032;
-
       }
       if(isDefined(level._id_11B7[var_27]) && isDefined(level._id_11B7[var_27][var_1]) && isDefined(level._id_11B7[var_27][var_1][var_11])) {
         var_21 = 1;
@@ -386,11 +370,9 @@ _id_11D8(var_0, var_1, var_2, var_3) {
 
       if(isDefined(level._id_11B9[var_27]) && isDefined(level._id_11B9[var_27][var_11 + var_1])) {
         var_6 playSound(level._id_11B9[var_27][var_11 + var_1]);
-
       }
       if(isDefined(level._id_0C59[var_27]) && isDefined(level._id_0C59[var_27][var_1]) && (!isai(var_6) || !var_6 maps\_utility::_id_0D69())) {
         var_23 = 1;
-
       }
       if(var_23) {
         var_6 _id_1282();
@@ -415,7 +397,6 @@ _id_11D8(var_0, var_1, var_2, var_3) {
           }
         } else {
           var_6 maps\_utility::play_sound_on_entity(var_26);
-
         }
         var_15 = var_29;
       }
@@ -451,7 +432,6 @@ _id_11DC(var_0, var_1) {
 _id_11DD(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   _id_11DF(var_0, var_1, var_2, var_3, var_4);
 }
@@ -469,7 +449,6 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
     }
     if(!isDefined(var_7._id_0BA3)) {
       var_7._id_0BA3 = 0;
-
     }
     var_7._id_0BA3++;
   }
@@ -497,7 +476,6 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
       var_25 = var_4;
     } else {
       var_25 = var_7._id_1032;
-
     }
     if(isDefined(level._id_11B7[var_25]) && isDefined(level._id_11B7[var_25][var_1])) {
       var_19 = 1;
@@ -512,16 +490,14 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(level._id_0C59[var_25]) && isDefined(level._id_0C59[var_25][var_1]) && (!isai(var_7) || !var_7 maps\_utility::_id_0D69())) {
       var_21 = 1;
-
     }
     if(isDefined(level._id_11B9[var_25]) && isDefined(level._id_11B9[var_25][var_1])) {
       var_7 playSound(level._id_11B9[var_25][var_1]);
-
     }
     if(var_21) {
       var_7 _id_1282();
 
-      if(isplayer(var_7)) {
+      if(isPlayer(var_7)) {
         var_26 = level._id_0C59[var_25]["root"];
         var_7 setanim(var_26, 0, 0.2);
         var_27 = level._id_0C59[var_25][var_1];
@@ -531,7 +507,6 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
         var_7 setflaggedanim(var_17, var_27, 1, 0.2);
       } else {
         var_7 animscripted(var_17, var_10, var_11, level._id_0C59[var_25][var_1]);
-
       }
       var_28 = getanimlength(level._id_0C59[var_25][var_1]);
 
@@ -548,7 +523,6 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
       if(var_19) {
         if(var_20) {
           var_7 thread _id_1271(var_1, var_19, var_23, level._id_11B7[var_25][var_1]);
-
         }
         thread _id_1269(var_7, var_1, level._id_11B7[var_25][var_1]);
         var_15 = var_29;
@@ -561,7 +535,6 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
         }
       } else {
         var_7 thread maps\_utility::play_sound_on_entity(var_23, "single dialogue");
-
       }
       var_14 = var_29;
     }
@@ -588,14 +561,13 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
     if(!isDefined(var_7)) {
       continue;
     }
-    if(isplayer(var_7)) {
+    if(isPlayer(var_7)) {
       var_25 = undefined;
 
       if(isDefined(var_4)) {
         var_25 = var_4;
       } else {
         var_25 = var_7._id_1032;
-
       }
       if(isDefined(level._id_0C59[var_25][var_1])) {
         var_26 = level._id_0C59[var_25]["root"];
@@ -641,7 +613,6 @@ _id_11E3(var_0, var_1, var_2, var_3) {
     var_0 stopanimscripted();
   } else {
     var_0 waittillmatch("single anim", "end");
-
   }
   self notify(var_1);
 }
@@ -755,7 +726,6 @@ _id_11F0(var_0, var_1, var_2, var_3, var_4) {
     var_5 = var_2;
   } else {
     var_5 = self;
-
   }
   var_6 = undefined;
 
@@ -763,7 +733,6 @@ _id_11F0(var_0, var_1, var_2, var_3, var_4) {
     var_6 = var_4;
   } else {
     var_6 = var_0._id_1032;
-
   }
   var_7 = spawnStruct();
   var_7._id_11F1 = [];
@@ -772,7 +741,6 @@ _id_11F0(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_6) && isDefined(level._id_11B6[var_6])) {
     if(isDefined(level._id_11B6[var_6][var_3])) {
       var_8[var_3] = level._id_11B6[var_6][var_3];
-
     }
     if(isDefined(level._id_11B6[var_6]["any"])) {
       var_8["any"] = level._id_11B6[var_6]["any"];
@@ -855,15 +823,12 @@ _id_11F0(var_0, var_1, var_2, var_3, var_4) {
 _id_11F5(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0["function"])) {
     self thread[[var_0["function"]]](var_1);
-
   }
   if(isDefined(var_0["flag"])) {
     common_scripts\utility::flag_set(var_0["flag"]);
-
   }
   if(isDefined(var_0["flag_clear"])) {
     common_scripts\utility::flag_clear(var_0["flag_clear"]);
-
   }
   if(isDefined(var_0["attach gun left"])) {
     var_1 _id_11F9();
@@ -885,7 +850,6 @@ _id_11F5(var_0, var_1, var_2, var_3) {
       var_1 attach(var_0["attach model"], var_0["selftag"]);
     } else {
       var_3 attach(var_0["attach model"], var_0["tag"]);
-
     }
     return;
   }
@@ -902,7 +866,6 @@ _id_11F5(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0["sound"])) {
     var_1 thread maps\_utility::play_sound_on_tag(var_0["sound"], undefined, 1);
-
   }
   if(!var_2._id_11F2) {
     if(isDefined(var_0["dialog"]) && isDefined(var_2._id_11F1[var_0["dialog"]])) {
@@ -916,12 +879,10 @@ _id_11F5(var_0, var_1, var_2, var_3) {
     _id_11F6(var_1, var_0);
   } else if(isDefined(var_0["delete model"])) {
     _id_11F8(var_1, var_0);
-
   }
   if(isDefined(var_0["selftag"])) {
     if(isDefined(var_0["effect"])) {
       playFXOnTag(level._effect[var_0["effect"]], var_1, var_0["selftag"]);
-
     }
     if(isDefined(var_0["stop_effect"])) {
       stopFXOnTag(level._effect[var_0["stop_effect"]], var_1, var_0["selftag"]);
@@ -930,7 +891,6 @@ _id_11F5(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0["tag"]) && isDefined(var_0["effect"])) {
     playFXOnTag(level._effect[var_0["effect"]], var_3, var_0["tag"]);
-
   }
   if(isDefined(var_0["selftag"]) && isDefined(var_0["effect_looped"])) {
     playFXOnTag(level._effect[var_0["effect_looped"]], var_1, var_0["selftag"]);
@@ -940,7 +900,6 @@ _id_11F5(var_0, var_1, var_2, var_3) {
 _id_11F6(var_0, var_1) {
   if(!isDefined(var_0._id_11F7)) {
     var_0._id_11F7 = [];
-
   }
   var_2 = var_0._id_11F7.size;
   var_0._id_11F7[var_2] = spawn("script_model", (0, 0, 0));
@@ -991,7 +950,6 @@ _id_11FC(var_0) {
 
   if(isDefined(var_0["suspend"])) {
     var_3 = var_0["suspend"];
-
   }
   var_4 = spawn("weapon_" + self.weapon, var_1, var_3);
   var_4.angles = var_2;
@@ -1106,7 +1064,6 @@ _id_1204(var_0) {
 
       if(isDefined(var_5._id_1229)) {
         var_6 = var_5._id_1229;
-
       }
       var_7 = distance(var_5.origin, var_6);
       var_2[var_5.unique_id] = var_7;
@@ -1133,7 +1090,6 @@ _id_1204(var_0) {
         var_11 = var_1;
       } else if(var_11 < var_1 * -1) {
         var_11 = var_1 * -1;
-
       }
       var_5._id_0FC6 = 1 + var_11;
     }
@@ -1169,13 +1125,11 @@ _id_122B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   foreach(var_14 in var_0) {
     if(isDefined(var_6)) {
       var_14.scriptedarrivalent = self;
-
     }
     if(isDefined(var_3)) {
       var_15 = var_3;
     } else {
       var_15 = var_14._id_1032;
-
     }
     if(isDefined(level._id_0C59[var_15][var_1])) {
       if(isarray(level._id_0C59[var_15][var_1])) {
@@ -1185,7 +1139,6 @@ _id_122B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     } else {
       var_16 = var_8;
-
     }
     var_12++;
     var_14 thread _id_1236(var_10, var_16, var_4, var_5);
@@ -1392,7 +1345,6 @@ _id_1246(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   _id_11DD(var_5, var_1, var_2, var_3, var_4);
 }
@@ -1481,11 +1433,9 @@ _id_1250(var_0, var_1) {
 _id_1252(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   if(isDefined(var_0._id_1253)) {
     maps\_utility::_id_1254(var_0._id_1253, 0.5);
-
   }
   maps\_utility::_id_1255(::_id_1246, var_0, var_1, var_2, var_3);
 
@@ -1499,17 +1449,14 @@ _id_1256(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   if(isDefined(var_0._id_1253)) {
     maps\_utility::_id_1254(var_0._id_1253, 0.5);
-
   }
   if(isDefined(var_4)) {
     maps\_utility::_id_1257(var_4, ::_id_1246, var_0, var_1, var_2, var_3, "generic");
   } else {
     maps\_utility::_id_1255(::_id_1246, var_0, var_1, var_2, var_3, "generic");
-
   }
   if(isalive(var_0)) {
     var_0._id_1253 = gettime();
@@ -1545,15 +1492,12 @@ _id_125C(var_0, var_1, var_2) {
 
   if(!isDefined(level._id_11B6)) {
     level._id_11B6 = [];
-
   }
   if(!isDefined(level._id_11B6[var_0])) {
     level._id_11B6[var_0] = [];
-
   }
   if(!isDefined(level._id_11B6[var_0][var_2])) {
     level._id_11B6[var_0][var_2] = [];
-
   }
   if(!isDefined(level._id_11B6[var_0][var_2][var_1])) {
     level._id_11B6[var_0][var_2][var_1] = [];
@@ -1571,7 +1515,6 @@ _id_125D(var_0, var_1, var_2, var_3) {
 _id_125E(var_0) {
   if(!isDefined(var_0)) {
     return "any";
-
   }
   return var_0;
 }
@@ -1579,7 +1522,6 @@ _id_125E(var_0) {
 _id_125F(var_0, var_1, var_2) {
   if(!isDefined(level._id_11B9[var_0])) {
     level._id_11B9[var_0] = [];
-
   }
   level._id_11B9[var_0][var_1] = var_2;
 }
@@ -1624,7 +1566,6 @@ _id_1263(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_5["suspend"] = var_3;
-
   }
   level._id_11B6[var_0][var_2][var_1][var_4] = var_5;
 }
@@ -1694,7 +1635,7 @@ _id_1269(var_0, var_1, var_2) {
   var_3 = 0.05;
   var_0 notify("newLookTarget");
   waittillframeend;
-  var_0 setanim( % scripted_talking, 5, 0.2);
+  var_0 setanim(%scripted_talking, 5, 0.2);
   var_0 setflaggedanimknobrestart("face_done_" + var_1, var_2, 1, 0, 1);
   thread _id_126A(var_0, var_1, var_2);
   thread _id_1272(var_0, "face_done_" + var_1, var_1);
@@ -1706,7 +1647,7 @@ _id_126A(var_0, var_1, var_2) {
   self endon(var_1);
 
   for(;;) {
-    var_0 setanim( % scripted_talking, 5, 0.4);
+    var_0 setanim(%scripted_talking, 5, 0.4);
     var_0 setflaggedanimknoblimited("face_done_" + var_1, var_2, 1, 0, 1);
     wait 0.05;
   }
@@ -1721,19 +1662,17 @@ _id_0BDB(var_0, var_1) {
 
   if(!isDefined(var_1) && isDefined(self._id_0BAE)) {
     var_1 = self._id_0BAE;
-
   }
   var_3 = % generic_talker_allies;
 
   if(self isbadguy()) {
     var_3 = % generic_talker_axis;
-
   }
   self setanimknoblimitedrestart(var_3, 1, 0, 1);
-  self setanim( % scripted_talking, 5, 0.4);
+  self setanim(%scripted_talking, 5, 0.4);
   _id_126B(var_0, var_3);
   var_2 = 0.3;
-  self clearanim( % scripted_talking, 0.2);
+  self clearanim(%scripted_talking, 0.2);
 }
 
 _id_126B(var_0, var_1) {
@@ -1742,7 +1681,7 @@ _id_126B(var_0, var_1) {
   for(;;) {
     wait 0.2;
     self setanimknoblimited(var_1, 1, 0, 1);
-    self setanim( % scripted_talking, 5, 0.4);
+    self setanim(%scripted_talking, 5, 0.4);
   }
 }
 
@@ -1752,13 +1691,12 @@ _id_126C(var_0) {
 
   if(self isbadguy()) {
     var_1 = % generic_talker_axis;
-
   }
   self setanimknoblimitedrestart(var_1, 1, 0, 1);
-  self setanim( % scripted_talking, 5, 0.4);
+  self setanim(%scripted_talking, 5, 0.4);
   wait(var_0);
   var_2 = 0.3;
-  self clearanim( % scripted_talking, 0.2);
+  self clearanim(%scripted_talking, 0.2);
 }
 
 _id_126D(var_0, var_1) {
@@ -1787,7 +1725,6 @@ _id_126F(var_0, var_1, var_2) {
 
   while(var_3.count) {
     var_3 waittill("reached_goal");
-
   }
   self notify("stopReachIdle");
 }
@@ -1805,7 +1742,6 @@ _id_1270(var_0, var_1, var_2, var_3) {
 _id_1271(var_0, var_1, var_2, var_3) {
   if(animhasnotetrack(var_3, "dialog")) {
     self waittillmatch("face_done_" + var_0, "dialog");
-
   }
   if(var_1) {
     animscripts\face::_id_0C46(undefined, var_2, 1.0);
@@ -1818,7 +1754,7 @@ _id_1272(var_0, var_1, var_2) {
   var_0 endon("death");
   var_0 waittillmatch(var_1, "end");
   var_3 = 0.3;
-  var_0 clearanim( % scripted_talking, 0.2);
+  var_0 clearanim(%scripted_talking, 0.2);
 }
 
 _id_1273(var_0, var_1, var_2) {
@@ -1840,13 +1776,11 @@ _id_1275(var_0, var_1, var_2, var_3, var_4) {
     var_5 = var_3;
   } else {
     var_5 = self._id_1032;
-
   }
   if(isDefined(var_4) && var_4) {
     var_6 = level._id_0C59[var_5][var_0][0];
   } else {
     var_6 = level._id_0C59[var_5][var_0];
-
   }
   if(isai(self)) {
     var_7 = getstartorigin(var_1, var_2, var_6);
@@ -1854,7 +1788,6 @@ _id_1275(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(self._id_1276)) {
       var_7 = maps\_utility::_id_1277(var_7);
-
     }
     self forceteleport(var_7, var_8);
   } else if(self.code_classname == "script_vehicle") {
@@ -1883,7 +1816,6 @@ _id_1279(var_0, var_1) {
 _id_127A() {
   if(!isDefined(self._id_11E8)) {
     self._id_11E8 = [];
-
   }
   var_0 = 0;
 
@@ -1914,7 +1846,6 @@ _id_127D(var_0, var_1, var_2) {
     var_3 = var_2;
   } else {
     var_3 = self._id_1032;
-
   }
   self setflaggedanim("single anim", maps\_utility::_id_127E(var_0, var_3), 1, 0, var_1);
 }

@@ -16,7 +16,7 @@ function magic_box_init() {
   level._box_locations = array("start_chest", "chest1", "chest2", "base_entry_chest", "storage_area_chest", "chest5", "chest6", "warehouse_lander_chest");
   level thread magic_box_update();
   level thread cosmodrome_maintenance_respawn_fix();
-  setdvar("zombiemode_path_minz_bias", 28);
+  setDvar("zombiemode_path_minz_bias", 28);
 }
 
 function get_location_from_chest_index(chest_index) {

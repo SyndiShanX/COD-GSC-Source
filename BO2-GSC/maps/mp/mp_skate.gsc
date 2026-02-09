@@ -22,7 +22,7 @@ main() {
   precachemodel("paris_construction_scaffold_piece_01");
   maps\mp\_compass::setupminimap("compass_map_mp_skate");
   visionsetnaked("mp_skate", 1);
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";

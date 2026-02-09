@@ -89,7 +89,7 @@ main() {
   level thread maps\mp\zm_highrise_elevators::random_elevator_perks();
   level thread maps\mp\zm_highrise_elevators::faller_location_logic();
   level.custom_faller_entrance_logic = maps\mp\zm_highrise_elevators::watch_for_elevator_during_faller_spawn;
-  setdvar("zombiemode_path_minz_bias", 13);
+  setDvar("zombiemode_path_minz_bias", 13);
   level.check_valid_poi = ::check_valid_poi;
   level thread maps\mp\zm_highrise_elevators::shouldsuppressgibs();
 }
@@ -218,7 +218,7 @@ squashed_death_init(kill_if_falling) {
     self waittill("trigger", who);
 
     if(!(isDefined(who.insta_killed) && who.insta_killed)) {
-      if(isplayer(who)) {
+      if(isPlayer(who)) {
         who thread elevator_black_screen_squash_check();
         who thread insta_kill_player(1, kill_if_falling);
       } else if(isai(who)) {
@@ -537,7 +537,7 @@ is_player_killable(player, checkignoremeflag) {
   if(!isalive(player))
     return false;
 
-  if(!isplayer(player))
+  if(!isPlayer(player))
     return false;
 
   if(player.sessionstate == "spectator")
@@ -733,7 +733,7 @@ escape_pod_walk_on_off(escape_pod) {
   while(true) {
     self waittill("trigger", who);
 
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       if(!is_true(who.in_escape_pod_trigger))
         self thread escape_pod_walk_on_off_watch(who, escape_pod);
     }
@@ -991,16 +991,15 @@ escape_pod_are_all_alive_players_ready() {
 
 watch_escapepod_devgui() {
   while(true) {
-    resetcmd = getdvar(#"_id_C0F9913E");
+    resetcmd = getDvar(#"_id_C0F9913E");
 
     if(isDefined(resetcmd) && resetcmd != "") {
       level notify("reset_escape_pod");
-      setdvar("zombie_devgui_hrescapepodreset", "");
+      setDvar("zombie_devgui_hrescapepodreset", "");
     }
 
     wait 1.0;
   }
-
 }
 
 check_valid_poi(valid) {

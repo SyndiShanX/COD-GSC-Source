@@ -63,7 +63,7 @@ giveplayerscore(var_0, var_1) {
     var_3 = self.owner;
   }
 
-  if(!isplayer(var_3)) {
+  if(!isPlayer(var_3)) {
     return;
   }
   var_5 = var_1;
@@ -567,7 +567,7 @@ func_97D2() {
 }
 
 func_11ACE(var_0, var_1, var_2) {
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(!isDefined(var_1.debuffedbyplayers[var_2])) {
       var_1.debuffedbyplayers[var_2] = [];
     }
@@ -577,7 +577,7 @@ func_11ACE(var_0, var_1, var_2) {
 }
 
 untrackdebuffassist(var_0, var_1, var_2) {
-  if(isplayer(var_1) && isDefined(var_1.debuffedbyplayers[var_2])) {
+  if(isPlayer(var_1) && isDefined(var_1.debuffedbyplayers[var_2])) {
     var_1.debuffedbyplayers[var_2][var_0 getentitynumber()] = undefined;
   }
 }

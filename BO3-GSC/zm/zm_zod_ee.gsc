@@ -1737,9 +1737,7 @@ function function_737ebab() {
       while(!isDefined(spawn_point)) {
         favorite_enemy = array::random(level.activeplayers);
         if(isDefined(level.wasp_spawn_func)) {
-          spawn_point = [
-            [level.wasp_spawn_func]
-          ](favorite_enemy);
+          spawn_point = [[level.wasp_spawn_func]](favorite_enemy);
         } else {
           spawn_point = zm_ai_wasp::wasp_spawn_logic(favorite_enemy);
         }

@@ -26,7 +26,7 @@
 
 function autoexec init() {
   function_b5da43f3();
-  setdvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
   level thread update_closest_player();
   level.validate_on_navmesh = 1;
   level.pathdist_type = 2;

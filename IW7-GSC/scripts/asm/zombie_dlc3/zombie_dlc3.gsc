@@ -616,7 +616,7 @@ handlehypnosisdeath(var_0, var_1, var_2, var_3) {
 }
 
 is_valid_player() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 

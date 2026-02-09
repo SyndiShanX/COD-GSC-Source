@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   level._effect["animated_rat_death"] = loadfx("vfx\blood\dlc_blood_splash_sm");

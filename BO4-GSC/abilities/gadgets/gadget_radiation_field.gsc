@@ -322,9 +322,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
         buffer = 0;
 
         if(isDefined(level.var_ac6052e9)) {
-          buffer = [
-            [level.var_ac6052e9]
-          ]("playerExertBuffer", 0);
+          buffer = [[level.var_ac6052e9]]("playerExertBuffer", 0);
         }
 
         player[[level.heroplaydialog]]("exertRadiationSelfLoop", 30, buffer);
@@ -380,13 +378,13 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
             array::add(player.var_57e6a430, var_a3ca7cb2);
             player playlocalsound(#"hash_6808d51f3971786e");
 
-            if(isplayer(var_a3ca7cb2)) {
+            if(isPlayer(var_a3ca7cb2)) {
               var_a3ca7cb2 playlocalsound(#"hash_7890710107740214");
               function_7e96addd("exertRadiationSelfStart", var_a3ca7cb2);
             }
           }
 
-          if(isplayer(var_a3ca7cb2) && !var_480b4b92 && var_a3ca7cb2 function_4e7b9eed() < 1) {
+          if(isPlayer(var_a3ca7cb2) && !var_480b4b92 && var_a3ca7cb2 function_4e7b9eed() < 1) {
             player damagefeedback::update(undefined, undefined, "flakjacket", weapon);
             var_6f4ece8f = 1;
           }
@@ -407,7 +405,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
             dot_scaler *= isDefined(level.radiationfield_bundle.var_78c1e37b) ? level.radiationfield_bundle.var_78c1e37b : 0.25;
           }
 
-          if(isplayer(var_a3ca7cb2)) {
+          if(isPlayer(var_a3ca7cb2)) {
             dot_scaler *= var_a3ca7cb2 function_4e7b9eed();
           }
 
@@ -425,9 +423,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
           var_a3ca7cb2 thread status_effect::status_effect_apply(var_adf90433, weapon, player, 0);
 
           if(isDefined(level.var_ac6052e9)) {
-            if((isDefined(var_a3ca7cb2.var_a267ce8) ? var_a3ca7cb2.var_a267ce8 : 0) + int([
-                [level.var_ac6052e9]
-              ]("radiationDamageCooldown", 200) * 1000) < gettime()) {
+            if((isDefined(var_a3ca7cb2.var_a267ce8) ? var_a3ca7cb2.var_a267ce8 : 0) + int([[level.var_ac6052e9]]("radiationDamageCooldown", 200) * 1000) < gettime()) {
               function_7e96addd("exertRadiationSelfLoop", var_a3ca7cb2);
               var_a3ca7cb2.var_a267ce8 = gettime();
             }

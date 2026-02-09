@@ -45,7 +45,7 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
     self finishvehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname, 0);
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   if(self weapons::should_suppress_damage(weapon, einflictor)) {
@@ -94,19 +94,19 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
     }
     idamage = idamage * level.vehicledamagescalar;
     idamage = int(idamage);
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       eattacker.pers["participation"]++;
     }
     if(!isDefined(self.maxhealth)) {
       self.maxhealth = self.healthdefault;
     }
     prevhealthratio = self.health / self.maxhealth;
-    if(isDefined(self.owner) && isplayer(self.owner)) {
+    if(isDefined(self.owner) && isPlayer(self.owner)) {
       team = self.owner.pers["team"];
     } else {
       team = self vehicle::vehicle_get_occupant_team();
     }
-    if(level.teambased && isplayer(eattacker) && team == eattacker.pers["team"]) {
+    if(level.teambased && isPlayer(eattacker) && team == eattacker.pers["team"]) {
       if(!allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon)) {
         return;
       }
@@ -158,13 +158,13 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
     }
   }
   if(getdvarint("")) {
-    println(((((((((("" + self getentitynumber()) + "") + self.health) + "") + eattacker.clientid) + "") + isplayer(einflictor) + "") + idamage) + "") + shitloc);
+    println(((((((((("" + self getentitynumber()) + "") + self.health) + "") + eattacker.clientid) + "") + isPlayer(einflictor) + "") + idamage) + "") + shitloc);
   }
   if(1) {
     lpselfnum = selfentnum;
     lpselfteam = "";
     lpattackerteam = "";
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       lpattacknum = eattacker getentitynumber();
       lpattackguid = eattacker getguid();
       lpattackname = eattacker.name;
@@ -188,7 +188,7 @@ function callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdama
   if(game["state"] == "postgame") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   if(isDefined(self.killstreaktype)) {
@@ -215,7 +215,7 @@ function callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdama
       }
     }
     occupant_team = self vehicle::vehicle_get_occupant_team();
-    if(level.teambased && isplayer(eattacker) && occupant_team == eattacker.pers["team"]) {
+    if(level.teambased && isPlayer(eattacker) && occupant_team == eattacker.pers["team"]) {
       if(!allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon)) {
         return;
       }

@@ -213,7 +213,7 @@ function_2c31a0a6() {
   while(true) {
     waitresult = level waittill(#"crawler_created");
 
-    if(isplayer(waitresult.player)) {
+    if(isPlayer(waitresult.player)) {
       waitresult.player create_and_play_dialog(#"general", #"crawl_spawn");
       wait 1;
     }
@@ -230,7 +230,7 @@ function_aa7d1d97() {
       return;
     }
 
-    if(isplayer(waitresult.attacker)) {
+    if(isPlayer(waitresult.attacker)) {
       if(isalive(waitresult.entity)) {
         if(waitresult.area === "left_arm" || waitresult.area === "right_arm") {
           if(waitresult.entity.damageweapon !== getweapon(#"zhield_spectral_dw")) {
@@ -246,11 +246,11 @@ player_killstreak_timer() {
   self endon(#"disconnect", #"death");
 
   if(getdvarstring(#"zombie_kills") == "") {
-    setdvar(#"zombie_kills", 8);
+    setDvar(#"zombie_kills", 8);
   }
 
   if(getdvarstring(#"zombie_kill_timer") == "") {
-    setdvar(#"zombie_kill_timer", 6);
+    setDvar(#"zombie_kill_timer", 6);
   }
 
   kills = getdvarint(#"zombie_kills", 0);
@@ -301,7 +301,7 @@ player_zombie_kill_vox(params) {
     player = params.eattacker;
     zombie = self;
 
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       return;
     }
 
@@ -952,7 +952,7 @@ function_bca32e49(category, subcategory, force_variant, b_wait_if_busy = 0) {
 }
 
 create_and_play_dialog(category, subcategory, force_variant, b_wait_if_busy = 0, var_d0acc84f) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return false;
   }
 
@@ -973,7 +973,6 @@ create_and_play_dialog(category, subcategory, force_variant, b_wait_if_busy = 0,
       if(getdvarint(#"debug_audio", 0)) {
         println("<dev string:x6f>" + category + "<dev string:x8c>" + subcategory + "<dev string:x9f>");
       }
-
     } else if(s_overrides.chance == 0 || s_overrides.chance > randomint(100)) {
       category = s_overrides.str_category;
       subcategory = s_overrides.var_39acfdda;
@@ -1083,7 +1082,6 @@ display_override() {
     if(getdvarint(#"debug_audio", 0)) {
       debug2dtext((500, 20, 0), isDefined(level.sndvoxoverride) && level.sndvoxoverride ? "<dev string:x111>" : "<dev string:x120>", (1, 0, 0), 1, (0, 0, 0), 0, 0.8, 1);
     }
-
   }
 }
 
@@ -1265,7 +1263,7 @@ do_player_or_npc_playvox(sound_to_play, toself = 0, category, subcategory) {
   self.isspeaking = 1;
   self.var_5b6ebfd0 = toself;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clientfield::set_to_player("isspeaking", 1);
   }
 
@@ -1289,7 +1287,7 @@ play_vo_internal(str_sound, e_to_player) {
     self.str_vo_being_spoken = str_sound;
     self.var_4377124 = undefined;
 
-    if(isplayer(self) && isentity(e_to_player)) {
+    if(isPlayer(self) && isentity(e_to_player)) {
       self playsoundtoplayer(str_sound, e_to_player);
       n_time = float(max(isDefined(soundgetplaybacktime(str_sound)) ? soundgetplaybacktime(str_sound) : 500, 500)) / 1000;
       s = self waittilltimeout(n_time, #"vo_clear");
@@ -1343,7 +1341,7 @@ function_87714659(func, str_category, var_39acfdda) {
 }
 
 shouldplayerspeak(player, category, subcategory, vox) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -1472,7 +1470,7 @@ function_654ec86b() {
 }
 
 function_e2bd90b5(category, subcategory, variant) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     assert(0, "<dev string:x123>" + "<dev string:x143>");
     return 0;
   }
@@ -2160,7 +2158,7 @@ sndannouncerplayvox(type, player, str_sound, var_e08a84d6, b_wait_if_busy = 0, v
   n_wait = float(soundgetplaybacktime(str_sound)) / 1000;
   n_wait = max(n_wait - 2, 2.5);
 
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     player endon(#"disconnect");
 
     if(!isDefined(player.var_85ea4daf)) {
@@ -2345,7 +2343,7 @@ sndplayerhitalert(e_victim, str_meansofdeath, e_inflictor, weapon, shitloc, dama
     return;
   }
 
-  if(!isplayer(e_inflictor) && !isplayer(e_inflictor.owner)) {
+  if(!isPlayer(e_inflictor) && !isPlayer(e_inflictor.owner)) {
     return;
   }
 

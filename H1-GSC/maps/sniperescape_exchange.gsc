@@ -454,7 +454,7 @@ exchange_barrett_trigger() {
   thread maps\_utility::autosave_now(1);
   wait 1;
 
-  if(getdvar("use_old_sniper_text_style") == "1") {
+  if(getDvar("use_old_sniper_text_style") == "1") {
     if(getdvarint("loc_language", 0) == 12) {
       thread sniper_text(&"SNIPERESCAPE_TARGET", 120, 0);
       wait 0.5;
@@ -513,7 +513,7 @@ exchange_barrett_trigger() {
 }
 
 player_attach_to_barret_with_anim() {
-  var_0 = getdvar("r_znear");
+  var_0 = getDvar("r_znear");
   setsaveddvar("r_znear", 1.0);
   level.player_intro_node thread maps\_anim::anim_single_solo(level.player_intro_model, "grab_barret");
   thread blackscreengrabgun(4.16);
@@ -642,7 +642,7 @@ sniper_text_init(var_0, var_1, var_2, var_3) {
 }
 
 hudelem_destroyer(var_0) {
-  if(getdvar("use_old_sniper_text_style") == "1")
+  if(getDvar("use_old_sniper_text_style") == "1")
     wait 10;
   else
     level waittill("destroy_snipe_info_text");
@@ -1058,14 +1058,14 @@ arm_goes_flying(var_0) {
   var_1.origin = var_0;
   var_1 setModel(maps\_utility::getmodel("zak_left_arm"));
 
-  if(getdvar("ax") == "")
-    setdvar("ax", "-0.01");
+  if(getDvar("ax") == "")
+    setDvar("ax", "-0.01");
 
-  if(getdvar("ay") == "")
-    setdvar("ay", "-0.07");
+  if(getDvar("ay") == "")
+    setDvar("ay", "-0.07");
 
-  if(getdvar("az") == "")
-    setdvar("az", "0.2");
+  if(getDvar("az") == "")
+    setDvar("az", "0.2");
 
   var_2 = -0.01;
   var_3 = -0.07;
@@ -2019,7 +2019,7 @@ exchange_mission_failure() {
   if(common_scripts\utility::flag("makarov_killed"))
     exchange_mission_failure_paradox_deadquote();
   else
-    setdvar("ui_deadquote", &"SNIPERESCAPE_ZAKHAEV_ESCAPED");
+    setDvar("ui_deadquote", &"SNIPERESCAPE_ZAKHAEV_ESCAPED");
 
   maps\_utility::missionfailedwrapper();
 }
@@ -2032,13 +2032,13 @@ exchange_mission_failure_paradox_deadquote() {
   level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, &"SNIPERESCAPE_PARADOXFAIL_04");
   setdvarifuninitialized("paradox_fail_quote", 0);
   var_0 = getdvarint("paradox_fail_quote");
-  setdvar("ui_deadquote", level.paradox_quotes[var_0]);
+  setDvar("ui_deadquote", level.paradox_quotes[var_0]);
   var_0++;
 
   if(var_0 >= level.paradox_quotes.size)
     var_0 = 0;
 
-  setdvar("paradox_fail_quote", var_0);
+  setDvar("paradox_fail_quote", var_0);
 }
 
 exchange_vehicle_clip() {
@@ -2218,7 +2218,7 @@ flashback_guy_setup() {
 
   thread flashback_guy_death(self.name);
 
-  if(getdvar("enable_flashback_guy_nameplate") == "1")
+  if(getDvar("enable_flashback_guy_nameplate") == "1")
     thread maps\_hud_util::display_custom_nameplate(::can_display_flashback_guy_name);
 }
 
@@ -2378,7 +2378,7 @@ flashback_guys_failure() {
     }
 
     if(var_0 == "Yuri") {
-      setdvar("ui_deadquote", &"SNIPERESCAPE_FRIENDLY_FIRE");
+      setDvar("ui_deadquote", &"SNIPERESCAPE_FRIENDLY_FIRE");
       maps\_utility::missionfailedwrapper();
       return;
     }

@@ -460,7 +460,6 @@ dbline(from, to) {
     time = time - 0.05;
     wait 0.05;
   }
-
 }
 
 player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) {
@@ -525,7 +524,7 @@ watch_hit_players() {
   while(isDefined(self)) {
     self waittill("grenade_bounce", pos, normal, ent);
 
-    if(isplayer(ent))
+    if(isPlayer(ent))
       ent explosiondamage(25, pos);
   }
 }
@@ -843,7 +842,6 @@ piece_spawn_at(origin, angles, use_random_start) {
 
     origin = origin + (0, 0, level.drop_offset);
     unitrigger_offset = unitrigger_offset - (0, 0, level.drop_offset);
-
   }
 
   self.model = spawn("script_model", origin);

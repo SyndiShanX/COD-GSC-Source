@@ -263,19 +263,19 @@ prepare_option_for_change(option, drawnCount) {
   createfx_centerprint("To change " + option["description"] + " on selected entities, type /fx newvalue");
   level.createfx_inputlocked = true;
   set_option_index(option["name"]);
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
   // change color of text to look selected
   level.createFxHudElements[drawnCount + 3][0].color = (1, 1, 0);
 }
 
 menu_fx_option_set() {
-  if(getdvar("fx") == "nil") {
+  if(getDvar("fx") == "nil") {
     return;
   }
   option = get_selected_option();
   setting = undefined;
   if(option["type"] == "string")
-    setting = getdvar("fx");
+    setting = getDvar("fx");
   if(option["type"] == "int")
     setting = getdvarint("fx");
   if(option["type"] == "float")

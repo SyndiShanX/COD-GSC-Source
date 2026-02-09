@@ -6,11 +6,9 @@
 _id_14FC() {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   if(!isDefined(level._id_1456._id_14FD)) {
     level._id_1456._id_14FD = spawnStruct();
-
   }
   _id_1558();
   level._id_1456._id_14FD._id_1458 = 0;
@@ -26,7 +24,6 @@ _id_14FC() {
 
   if(!isDefined(level._id_1456._id_1503)) {
     level._id_1456._id_1503 = [];
-
   }
   level._id_1456._id_14FD._id_1504 = [];
   level._id_1456._id_14FD._id_1473 = [];
@@ -49,7 +46,6 @@ _id_150A(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       var_3 = var_2;
-
     }
     level._id_1456._id_14FD._id_1506 = var_1;
     var_4 = _id_1556(var_0);
@@ -98,7 +94,6 @@ _id_1510(var_0) {
       }
     } else {
       level._id_1456._id_14FD._id_1503["zone_mix"] = [];
-
     }
     level._id_1456._id_14FD._id_1503["zone_mix"]["preset_name"] = var_0;
 
@@ -114,7 +109,6 @@ _id_1510(var_0) {
 
     if(isDefined(var_1["fade_time"])) {
       var_6 = var_1["fade_time"];
-
     }
     _id_153C(var_6, "zone_mix");
   }
@@ -125,7 +119,6 @@ _id_1513(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   if(isDefined(level._id_1456._id_14FD._id_1503["zone_mix"])) {
     level._id_1456._id_14FD._id_1503["zone_mix"]["CLEAR"] = 1;
@@ -195,7 +188,6 @@ _id_151E(var_0, var_1, var_2) {
       _id_1536(var_0, var_1);
     } else {
       _id_1537(var_0, var_1);
-
     }
     _id_153C(var_2, var_0);
   }
@@ -291,7 +283,6 @@ _id_1526(var_0, var_1) {
     if(isstring(var_0)) {
       if(!isDefined(level._id_1456._id_14FD._id_1503["mm_mute"][var_0])) {
         level._id_1456._id_14FD._id_1503["mm_mute"][var_0] = spawnStruct();
-
       }
       level._id_1456._id_14FD._id_1503["mm_mute"][var_0]._id_1511 = 0.0;
       level._id_1456._id_14FD._id_1503["mm_mute"][var_0]._id_1512 = 1.0;
@@ -299,7 +290,6 @@ _id_1526(var_0, var_1) {
       foreach(var_3 in var_0) {
         if(!isDefined(level._id_1456._id_14FD._id_1503["mm_mute"][var_3])) {
           level._id_1456._id_14FD._id_1503["mm_mute"][var_3] = spawnStruct();
-
         }
         level._id_1456._id_14FD._id_1503["mm_mute"][var_3]._id_1511 = 0.0;
         level._id_1456._id_14FD._id_1503["mm_mute"][var_3]._id_1512 = 1.0;
@@ -388,7 +378,6 @@ _id_1530(var_0) {
 
   if(getsubstr(var_0, 0, 8) == "zone_mix") {
     var_0 = "zone_mix";
-
   }
   if(isDefined(level._id_1456._id_14FD._id_1503) && isDefined(level._id_1456._id_14FD._id_1503[var_0])) {
     if(level._id_1456._id_14FD._id_1503[var_0].size > 0) {
@@ -425,7 +414,6 @@ _id_1533(var_0) {
     }
   } else {
     maps\_audio::_id_1532("Trying to set a volmod value on the default submix but \"default\" doesn't exist.");
-
   }
   return var_1;
 }
@@ -486,7 +474,6 @@ _id_1538(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3 = clamp(var_2, 0, 1);
-
   }
   var_4 = spawnStruct();
   var_5 = _id_1556(var_1);
@@ -523,7 +510,6 @@ _id_153B(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_2 = var_0;
-
   }
   foreach(var_5, var_4 in level._id_1456._id_14FD._id_1503) {
     if(var_5 != "default" && var_5 != "zone_mix" && !isDefined(level._id_1456._id_14FD._id_1502[var_5]) && var_5 != "mm_solo" && var_5 != "mm_mute") {
@@ -542,7 +528,6 @@ _id_153C(var_0, var_1) {
 
   if(isDefined(var_1)) {
     level._id_1456._id_14FD._id_1505[var_1] = 1;
-
   }
   level notify("mix_update");
 }
@@ -556,7 +541,6 @@ _id_153E() {
 
     if(isDefined(level._id_1456._id_14FD._id_153D)) {
       var_0 = level._id_1456._id_14FD._id_153D;
-
     }
     _id_1541(var_0);
     level waittill("mix_update");
@@ -597,7 +581,6 @@ _id_1541(var_0) {
   foreach(var_5, var_4 in level._id_1456._id_14FD._id_1540) {
     if(var_5 != "voiceover_critical" && var_5 != "fullvolume") {
       var_4 = var_4 * level._id_1456._id_14FD._id_1506;
-
     }
     if(var_4 != level._id_1456._id_14FD._id_1529[var_5]._id_1542) {
       var_2 = 1;
@@ -628,7 +611,6 @@ _id_1544(var_0) {
 
       if(isDefined(var_4["CLEAR"])) {
         var_5 = 1;
-
       }
       var_4["CLEAR"] = undefined;
 
@@ -650,7 +632,6 @@ _id_1544(var_0) {
 
       if(var_5) {
         level._id_1456._id_14FD._id_1503[var_16] = undefined;
-
       }
       continue;
     }
@@ -661,12 +642,10 @@ _id_1544(var_0) {
 
       if(isDefined(var_9._id_151D)) {
         var_5 = 1;
-
       }
       foreach(var_8, var_11 in var_9._id_153A) {
         if(!isDefined(var_1[var_8])) {
           var_1[var_8] = 1.0;
-
         }
         if(!var_5) {
           var_12 = var_9._id_1539[var_8];
@@ -702,7 +681,6 @@ _id_1546(var_0) {
   if(level._id_1456._id_14FD._id_14FF) {
     while(!isDefined(level.player)) {
       wait 0.05;
-
     }
     _id_1535(var_0);
   }
@@ -861,18 +839,15 @@ _id_154E(var_0, var_1) {
 
   if(!isDefined(level._id_1456._id_14FD._id_1473)) {
     level._id_1456._id_14FD._id_1473 = [];
-
   }
   if(isDefined(level._id_1456._id_14FD._id_1473[var_0])) {
     var_2 = level._id_1456._id_14FD._id_1473[var_0];
   } else {
     if(var_1) {
       var_2 = _id_1550(var_3, var_0, 0);
-
     }
     if(!isDefined(var_2) || var_2.size == 0) {
       var_2 = _id_1550(var_4, var_0, 1);
-
     }
     if(!isDefined(var_2) || var_2.size == 0) {
       return;
@@ -894,7 +869,6 @@ _id_1550(var_0, var_1, var_2) {
 
   if(!isDefined(level._id_1456._id_14FD._id_1551)) {
     level._id_1456._id_14FD._id_1551 = [];
-
   }
   if(!isDefined(level._id_1456._id_14FD._id_1551[var_0])) {
     level._id_1456._id_14FD._id_1551[var_0] = [];
@@ -911,14 +885,12 @@ _id_1550(var_0, var_1, var_2) {
     var_5 = var_12;
   } else if(var_2 && maps\_audio::_id_1553() || !var_2 && maps\_audio::_id_1554()) {
     return var_9;
-
   }
   for(var_13 = 0; var_4 != "EOF" && var_7 < 10; var_5++) {
     var_4 = tablelookupbyrow(var_0, var_5, 0);
 
     if(var_4 != "") {
       var_7 = 0;
-
     }
     while(var_4 == var_1) {
       var_6 = 1;
@@ -964,7 +936,6 @@ _id_1550(var_0, var_1, var_2) {
 
   if(var_6 && isDefined(var_8)) {
     var_9["fade_time"] = float(var_8);
-
   }
   return var_9;
 }
@@ -972,7 +943,6 @@ _id_1550(var_0, var_1, var_2) {
 _id_1556(var_0) {
   if(!isDefined(level._id_1456._id_14FD._id_1473)) {
     level._id_1456._id_14FD._id_1473 = [];
-
   }
   var_1 = [];
 
@@ -998,7 +968,6 @@ _id_1556(var_0) {
 
     if(!isDefined(var_1["fade_time"])) {
       var_1["fade_time"] = 1.0;
-
     }
     level._id_1456._id_14FD._id_1473[var_0] = var_1;
   }
@@ -1009,7 +978,6 @@ _id_1556(var_0) {
 _id_1558() {
   if(!isDefined(level._id_1456._id_14FD._id_1555)) {
     _id_155D();
-
   }
   level._id_1456._id_14FD._id_1529 = [];
 
@@ -1130,7 +1098,6 @@ _id_155D() {
 
   if(!isDefined(level._id_1456._id_1503)) {
     level._id_1456._id_1503 = [];
-
   }
   level._id_1456._id_14FD._id_1503["default"] = [];
 

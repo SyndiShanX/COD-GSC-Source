@@ -278,7 +278,6 @@ interactives_DrawDebugLineForTime(org1, org2, r, g, b, timer) {
   if(GetDvarInt("interactives_debug")) {
     thread draw_line_for_time(org1, org2, r, g, b, timer);
   }
-
 }
 
 drawCross(origin, size, color, timeSeconds) {
@@ -334,9 +333,8 @@ newtonsMethod(x0, x1, p3, p2, p1, p0, tolerance) {
     else if(x < x0)
       x = (oldX + (3 * x0)) / 4;
     iterations--;
-    /# if( iterations == 0 )
-    Print("_interactive_utility::newtonsMethod failed to converge. x0:" + x0 + ", x1:" + x1 + ", p3:" + p3 + ", p2:" + p2 + ", p1:" + p1 + ", p0:" + p0 + ", x:" + x);
-
+    if(iterations == 0)
+      Print("_interactive_utility::newtonsMethod failed to converge. x0:" + x0 + ", x1:" + x1 + ", p3:" + p3 + ", p2:" + p2 + ", p1:" + p1 + ", p0:" + p0 + ", x:" + x);
   }
   return x;
 }

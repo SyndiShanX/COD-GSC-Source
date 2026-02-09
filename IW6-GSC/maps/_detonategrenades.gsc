@@ -139,9 +139,9 @@ track_concussion_grenade(var_0) {
   maps\_utility::slowmo_setspeed_norm(1);
   maps\_utility::slowmo_setspeed_slow(0.25);
   maps\_utility::slowmo_lerp_in();
-  setdvar("noflash", "1");
+  setDvar("noflash", "1");
   wait 0.05;
-  setdvar("noflash", "0");
+  setDvar("noflash", "0");
   wait 2.0;
   maps\_utility::slowmo_lerp_out();
 }
@@ -249,7 +249,7 @@ claymoredetonation() {
     if(isDefined(self.owner) && var_2 == self.owner) {
       continue;
     }
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       continue;
     }
     if(var_2 damageconetrace(self.origin, self) > 0) {
@@ -348,7 +348,7 @@ c4damage() {
   level.c4explodethisframe = 1;
   thread resetc4explodethisframe();
 
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     self detonate(var_0);
   else
     self detonate();

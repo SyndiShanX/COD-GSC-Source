@@ -840,7 +840,7 @@ tank_destruction() {
 tank_missionfailure() {
   soundscripts\_snd::snd_message("start_tank_mission_failure");
   wait 2.25;
-  setdvar("ui_deadquote", &"BOG_A_THE_TANK_WAS_OVERRUN");
+  setDvar("ui_deadquote", &"BOG_A_THE_TANK_WAS_OVERRUN");
   maps\_utility::missionfailedwrapper();
 }
 

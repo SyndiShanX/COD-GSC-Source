@@ -132,7 +132,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     return;
   }
 
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon)) {
     if(eventstruct.weapon.name === # "hatchet") {
       if(isDefined(eventstruct.projectile)) {
         hatchet = eventstruct.projectile;
@@ -227,7 +227,7 @@ function_a25e43f9(activator, laststate, state) {
     return;
   }
 
-  if(isplayer(activator)) {
+  if(isPlayer(activator)) {
     self function_55b32a83();
   }
 }
@@ -241,7 +241,7 @@ function_62ef723(activator, laststate, state) {
     return;
   }
 
-  if(isplayer(activator)) {
+  if(isPlayer(activator)) {
     dot = vectordot(anglesToForward(activator.angles), anglesToForward(self.angles));
     distance = distance2d(activator.origin, self.origin);
 

@@ -30,7 +30,7 @@ _id_1A29() {
 }
 
 _id_1A2B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(!maps\_utility::_id_1A2C()) {
@@ -52,7 +52,7 @@ _id_1A2B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 updatedamagefeedback(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!isDefined(var_0.team)) {
@@ -75,7 +75,6 @@ updatedamagefeedback(var_0) {
 
   if(isDefined(level._id_1A2F._id_1A30)) {
     var_1 = level._id_1A2F._id_1A30;
-
   }
   self.hud_damagefeedback.alpha = 1;
   self.hud_damagefeedback fadeovertime(var_1);

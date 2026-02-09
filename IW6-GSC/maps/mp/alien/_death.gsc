@@ -160,10 +160,10 @@ onAlienAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 }
 
 get_attacker_as_player(eAttacker) {
-  if(IsPlayer(eAttacker))
+  if(isPlayer(eAttacker))
     return eAttacker;
 
-  if(isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner))
+  if(isDefined(eAttacker.owner) && isPlayer(eAttacker.owner))
     return eAttacker.owner;
 
   return undefined;
@@ -217,7 +217,6 @@ play_death_anim_and_ragdoll(eInflictor, iDamage, sMeansOfDeath, sWeapon, vDir, s
 
   if(GetDvarInt("alien_easter_egg") > 0 || (isDefined(level.easter_egg_lodge_sign_active) && level.easter_egg_lodge_sign_active)) {
     playFX(level._effect["arcade_death"], self.origin);
-
   } else {
     primary_animState = get_primary_death_anim_state();
 
@@ -354,7 +353,6 @@ handle_ragdoll(corpse, animState, do_immediate_ragdoll) {
       return;
     }
     println("Corpse failed immediate ragdoll at " + corpse.origin);
-
   }
 
   delayStartRagdoll(corpse, deathAnim);
@@ -403,7 +401,6 @@ delayStartRagdoll(corpse, deathAnim) {
     }
 
     println("Corpse failed second ragdoll at " + corpse.origin);
-
   }
 
   if(isDefined(corpse))
@@ -428,7 +425,7 @@ should_do_ragdoll(ent, deathAnim) {
 }
 
 blackBox_alienKilled(eAttacker) {
-  if(isPlayer(eAttacker) || (isDefined(eAttacker.pet) && (eAttacker.pet == 1) && isPlayer(eAttacker.petowner)) || (isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner))) {
+  if(isPlayer(eAttacker) || (isDefined(eAttacker.pet) && (eAttacker.pet == 1) && isPlayer(eAttacker.petowner)) || (isDefined(eAttacker.owner) && isPlayer(eAttacker.owner))) {
     level.alienBBData["aliens_killed"]++;
   }
 
@@ -450,7 +447,7 @@ blackBox_alienKilled(eAttacker) {
     attacker_alive_time = 0;
     attacker_name = "none";
 
-    if(isplayer(eAttacker)) {
+    if(isPlayer(eAttacker)) {
       attacker_agent_type = "player";
 
       if(isDefined(eAttacker.name))

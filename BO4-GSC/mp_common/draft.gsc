@@ -135,7 +135,7 @@ function_2c7b2ff() {
 
 start_cooldown() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player endon(#"disconnect", #"hash_7fa9c275efb510e2");
   cooldowntime = getgametypesetting(#"hash_2b88c6ac064e9c59");
   cooldownendtime = cooldowntime * 1000 + gettime();
@@ -153,7 +153,7 @@ start_cooldown() {
 
 clear_cooldown() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player notify(#"hash_7fa9c275efb510e2");
   player.var_7d68fce3 = 0;
   player clientfield::set_player_uimodel("PositionDraft.cooldown", 0);
@@ -826,7 +826,7 @@ start() {
 
 open() {
   player = self;
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(isDefined(level.var_edd52efc)) {
     self[[level.var_edd52efc]]();

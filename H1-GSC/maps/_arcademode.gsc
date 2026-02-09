@@ -48,13 +48,13 @@ main() {
   level.arcademode_ramping_score = 0;
   level.arcademode_new_kill_streak_allowed = 1;
   common_scripts\utility::flag_init("arcadeMode_multiplier_maxed");
-  setdvar("arcademode_lives_changed", 0);
+  setDvar("arcademode_lives_changed", 0);
   level.arcademode_kill_streak_current_multiplier = 1;
   level.arcademode_kill_streak_multiplier_count = 3;
   arcademode_reset_kill_streak();
 
   for(var_0 = 0; var_0 < level.arcademode_checkpoint_max; var_0++)
-    setdvar("arcademode_checkpoint_" + var_0, "");
+    setDvar("arcademode_checkpoint_" + var_0, "");
 
   level.arcademode_last_multi_kill_sound = 0;
   level.arcademode_success = 0;
@@ -63,7 +63,7 @@ main() {
   common_scripts\utility::flag_init("arcademode_ending_complete");
   waittillframeend;
 
-  if(getdvar("arcademode_full") == "1")
+  if(getDvar("arcademode_full") == "1")
     precacheleaderboards("LB_AM_FULLCHALLENGE");
   else
     precacheleaderboards("LB_AM_" + level.script);
@@ -75,26 +75,26 @@ main() {
   level.arcademode_maxlives = 10;
   level.arcademode_rewarded_lives = 0;
 
-  if(getdvar("arcademode_lives") == "" || getdvar("arcademode_full") != "1" || level.script == "cargoship") {
-    setdvar("arcademode_lives", 2);
+  if(getDvar("arcademode_lives") == "" || getDvar("arcademode_full") != "1" || level.script == "cargoship") {
+    setDvar("arcademode_lives", 2);
     level.arcademode_rewarded_lives = 2;
   }
 
-  if(getdvar("arcademode_full") == "1" && level.script == "cargoship") {
-    setdvar("arcademode_lives", 5);
+  if(getDvar("arcademode_full") == "1" && level.script == "cargoship") {
+    setDvar("arcademode_lives", 5);
     level.arcademode_rewarded_lives = 5;
   }
 
   var_1 = getdvarint("arcademode_lives");
-  setdvar("arcademode_earned_lives", var_1);
+  setDvar("arcademode_earned_lives", var_1);
   level.arcademode_playthrough = getdvarint("arcademode_playthrough_count");
   level.arcademode_playthrough++;
-  setdvar("arcademode_playthrough_count", level.arcademode_playthrough);
-  setdvar("arcademode_died", 0);
-  setdvar("arcademode_score", 0);
+  setDvar("arcademode_playthrough_count", level.arcademode_playthrough);
+  setDvar("arcademode_died", 0);
+  setDvar("arcademode_score", 0);
 
-  if(getdvar("arcademode_combined_score") == "" || getdvar("arcademode_full") == "1" && level.script == "cargoship")
-    setdvar("arcademode_combined_score", 0);
+  if(getDvar("arcademode_combined_score") == "" || getDvar("arcademode_full") == "1" && level.script == "cargoship")
+    setDvar("arcademode_combined_score", 0);
 
   var_2 = arcademode_get_level_time();
   var_2 = var_2 * 60;
@@ -126,7 +126,7 @@ main() {
 }
 
 arcademode_complete() {
-  if(getdvar("arcademode") != "1")
+  if(getDvar("arcademode") != "1")
     return 0;
 
   return common_scripts\utility::flag("arcademode_complete");
@@ -166,7 +166,7 @@ arcademode_death_detection() {
   level maps\_utility::add_wait(common_scripts\utility::flag_wait, "missionfailed");
   level.player maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
   maps\_utility::do_wait_any();
-  setdvar("arcademode_died", 1);
+  setDvar("arcademode_died", 1);
   var_0 = getdvarint("arcademode_lives");
   var_1 = getdvarint("arcademode_earned_lives");
 
@@ -174,8 +174,8 @@ arcademode_death_detection() {
     var_0 = var_1;
 
   var_0 = var_0 - 1;
-  setdvar("arcademode_lives", var_0);
-  setdvar("arcademode_lives_changed", -1);
+  setDvar("arcademode_lives", var_0);
+  setDvar("arcademode_lives_changed", -1);
   arcademode_redraw_lives(var_0 + 1);
   level.arcademode_redraw_score = 1;
   updatescoreelemsonce();
@@ -245,14 +245,14 @@ arcademode_update_lives() {
         var_3 = getdvarint("arcademode_earned_lives");
         var_3--;
         var_2 = var_3;
-        setdvar("arcademode_earned_lives", var_3);
-        setdvar("arcademode_lives", var_3);
+        setDvar("arcademode_earned_lives", var_3);
+        setDvar("arcademode_lives", var_3);
         level.player thread common_scripts\utility::play_sound_in_space("h1_arcademode_life_lost", level.player getEye());
       }
 
       arcademode_redraw_lives(var_2);
       level.arcademode_redraw_score = 1;
-      setdvar("arcademode_lives_changed", 0);
+      setDvar("arcademode_lives_changed", 0);
     }
 
     wait 0.05;
@@ -266,7 +266,7 @@ arcademode_convert_extra_lives() {
   if(var_0 > var_1)
     thread extra_lives_display(var_0 - var_1);
 
-  setdvar("arcademode_earned_lives", var_0);
+  setDvar("arcademode_earned_lives", var_0);
   thread arcademode_redraw_lives(var_0);
   return var_0 > var_1;
 }
@@ -938,7 +938,7 @@ new_ending_hud(var_0, var_1, var_2, var_3) {
   var_4.vertalign = "middle";
   var_4.fontscale = 3;
 
-  if(getdvar("widescreen") == "1")
+  if(getDvar("widescreen") == "1")
     var_4.fontscale = 5;
 
   var_4.color = (0.8, 1, 0.8);
@@ -1078,8 +1078,8 @@ arcademode_add_points(var_0, var_1, var_2, var_3) {
   var_4 = var_4 + var_3;
   var_5 = getdvarint("arcademode_combined_score");
   var_5 = var_5 + var_3;
-  setdvar("arcademode_combined_score", var_5);
-  setdvar("arcademode_score", var_4);
+  setDvar("arcademode_combined_score", var_5);
+  setDvar("arcademode_score", var_4);
   var_6 = 60;
   var_7 = 1.5;
   var_8 = 0.9 + (var_3 - 10) * 0.01;
@@ -1111,8 +1111,8 @@ arcademode_add_point_towards_extra_life() {
   if(var_0 >= level.arcademode_maxlives)
     var_0 = level.arcademode_maxlives;
   else {
-    setdvar("arcademode_lives", var_0);
-    setdvar("arcademode_lives_changed", 1);
+    setDvar("arcademode_lives", var_0);
+    setDvar("arcademode_lives_changed", 1);
   }
 
   level.arcademode_kills_until_next_extra_life = level.arcademode_extra_lives_range[level.gameskill];
@@ -1445,7 +1445,7 @@ arcademode_ends() {
   var_4 = 1;
   var_5 = 0;
 
-  if(getdvar("arcademode_full") == "1")
+  if(getDvar("arcademode_full") == "1")
     var_5 = 27.5556;
 
   var_6 = -111.111;
@@ -1509,7 +1509,7 @@ arcademode_ends() {
   var_22 = 0;
   var_23 = undefined;
 
-  if(getdvar("arcademode_full") == "1") {
+  if(getDvar("arcademode_full") == "1") {
     var_23 = new_ending_hud("center", var_4, 0, var_7);
     var_23.alignx = "right";
     var_23.horzalign = "fullscreen";
@@ -1645,7 +1645,7 @@ arcademode_ends() {
 
       var_30 = int(var_42 * (1 - var_46) + var_43 * var_46);
 
-      if(getdvar("arcademode_full") == "1") {
+      if(getDvar("arcademode_full") == "1") {
         var_22 = int(var_44 * (1 - var_46) + var_45 * var_46);
         set_total_score_hud(var_22);
       }
@@ -1691,7 +1691,7 @@ arcademode_ends() {
       var_50 = var_50 * var_48;
       var_34 = int(var_50);
 
-      if(getdvar("arcademode_full") == "1") {
+      if(getDvar("arcademode_full") == "1") {
         var_22 = var_22 + var_34;
         set_total_score_hud(var_22);
       }
@@ -1738,14 +1738,14 @@ arcademode_ends() {
 
   var_53 = 0;
 
-  if(getdvar("arcademode_full") == "1") {
+  if(getDvar("arcademode_full") == "1") {
     var_54 = "s18";
     var_55 = getdvarint(var_54);
 
     if(var_22 > var_55) {
       var_56 = get_digits_from_score(var_22);
       var_57 = get_score_string_from_digits(var_56);
-      setdvar(var_54, var_57);
+      setDvar(var_54, var_57);
       var_58 = 0;
 
       if(!level.arcademode_success)
@@ -1831,7 +1831,7 @@ arcademode_ends() {
     var_25 setpulsefx(0, 0, 1000);
   }
 
-  if(getdvar("arcademode_full") == "1") {
+  if(getDvar("arcademode_full") == "1") {
     var_23 setpulsefx(0, 0, 1000);
 
     for(var_21 = 0; var_21 < level.arcademode_hud_digits; var_21++) {
@@ -1851,21 +1851,21 @@ arcademode_ends() {
 
   wait 1;
 
-  if(getdvar("arcademode_full") == "1")
+  if(getDvar("arcademode_full") == "1")
     logstring("ArcadeMode Score: " + var_30 + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + var_22);
   else
     logstring("ArcadeMode Score: " + var_30 + ", mission: " + level.script + ", gameskill: " + level.gameskill);
 
-  setdvar("arcademode_combined_score", var_22);
+  setDvar("arcademode_combined_score", var_22);
 
   if(var_22 >= 400000)
     maps\_utility::giveachievement_wrapper("ARCADE_ADDICT");
 
   if(!level.arcademode_success) {
-    setdvar("ui_arcade_lost", 1);
+    setDvar("ui_arcade_lost", 1);
     end_mission();
   } else
-    setdvar("ui_arcade_lost", 0);
+    setDvar("ui_arcade_lost", 0);
 
   for(var_21 = 0; var_21 < level.arcademode_ending_hud.size; var_21++) {
     if(isDefined(level.arcademode_ending_hud[var_21]))
@@ -1910,7 +1910,7 @@ arcademode_end_boost(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     hud_draw_score_for_elements_align_left(var_0, level.arcademode_hud_mission_scores);
 
-    if(getdvar("arcademode_full") == "1") {
+    if(getDvar("arcademode_full") == "1") {
       var_1 = var_1 + var_2;
 
       if(var_1 > var_12)

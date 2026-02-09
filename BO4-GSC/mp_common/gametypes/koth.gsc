@@ -435,7 +435,7 @@ onupdateuserate() {
 
           player = struct.player;
 
-          if(isDefined(player) && isplayer(player) && (isDefined(player.var_c8d27c06) ? player.var_c8d27c06 : 0) < gettime()) {
+          if(isDefined(player) && isPlayer(player) && (isDefined(player.var_c8d27c06) ? player.var_c8d27c06 : 0) < gettime()) {
             player playsoundtoplayer(#"mpl_control_capture_contested", player);
             player.var_c8d27c06 = gettime() + 5000;
           }
@@ -446,7 +446,7 @@ onupdateuserate() {
 }
 
 ontouchuse(sentient) {
-  if(isplayer(sentient)) {
+  if(isPlayer(sentient)) {
     self.var_464f0169 = self.iscontested;
 
     if(iszonecontested(self) && (isDefined(sentient.var_c8d27c06) ? sentient.var_c8d27c06 : 0) < gettime()) {
@@ -459,7 +459,7 @@ ontouchuse(sentient) {
 onbeginuse(sentient) {
   player = sentient;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     player = sentient.owner;
   }
 
@@ -480,7 +480,7 @@ onenduse(team, sentient, success) {
 
   player = sentient;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     player = sentient.owner;
   }
 
@@ -490,7 +490,7 @@ onenduse(team, sentient, success) {
 onzonecapture(sentient) {
   player = sentient;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     player = sentient.owner;
   }
 
@@ -604,7 +604,6 @@ give_capture_credit(touchlist, string, capturetime, capture_team, lastcapturetea
     }
 
     player iprintlnbold("<dev string:x62>");
-
   }
 }
 
@@ -965,7 +964,7 @@ function_38874bf6() {
 function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
 
-  if(!isplayer(attacker) || level.capturetime && !victim.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers[# "team"] == victim.pers[# "team"]) {
+  if(!isPlayer(attacker) || level.capturetime && !victim.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers[# "team"] == victim.pers[# "team"]) {
     return;
   }
 
@@ -1159,7 +1158,7 @@ updatecapsperminute(lastownerteam) {
   self.numcaps++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed[# "total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed[# "total"])) {
     minutespassed = self.timeplayed[# "total"] / 60;
   }
 

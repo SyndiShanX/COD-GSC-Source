@@ -1049,7 +1049,7 @@ givecurestationachievement() {
 }
 
 perkterminalhostcuredisabled() {
-  if(isplayer(self) && isDefined(self.currentzone) && isDefined(level.zone_is_contaminated_func) && [[level.zone_is_contaminated_func]](self.currentzone)) {
+  if(isPlayer(self) && isDefined(self.currentzone) && isDefined(level.zone_is_contaminated_func) && [[level.zone_is_contaminated_func]](self.currentzone)) {
     return 1;
   }
 
@@ -1616,7 +1616,7 @@ perkterminalgive(var_0, var_1, var_2, var_3) {
     }
 
     foreach(var_22 in var_20) {
-      if(isplayer(var_22)) {
+      if(isPlayer(var_22)) {
         var_23 = getitemomnvar(var_1);
 
         if(isDefined(var_23)) {

@@ -266,9 +266,9 @@ getModulesForCrate(dropType, crateType) {
 }
 
 getRandomCrateType(dropType, excludeCrateTypes) {
-  if(GetDvar("scr_setnextkillstreak", "") != "") {
-    killstreak = GetDvar("scr_setnextkillstreak");
-    SetDvar("scr_setnextkillstreak", "");
+  if(getDvar("scr_setnextkillstreak", "") != "") {
+    killstreak = getDvar("scr_setnextkillstreak");
+    setDvar("scr_setnextkillstreak", "");
 
     foreach(crateType in level.crateTypes[dropType]) {
       type = crateType.type;
@@ -278,7 +278,7 @@ getRandomCrateType(dropType, excludeCrateTypes) {
     }
   }
 
-  if(GetDvar("g_gametype") != "horde") {
+  if(getDvar("g_gametype") != "horde") {
     typeHasMapKillstreak = isDefined(level.mapKillStreak) && isDefined(level.crateTypes[dropType][level.mapKillStreak]);
     canSpawnMapKillStreak = isDefined(level.mapKillstreakAutoDropIndex) && level.numDropCrates >= level.mapKillstreakAutoDropIndex;
     if(typeHasMapKillstreak && canSpawnMapKillStreak) {
@@ -1177,7 +1177,7 @@ deleteCrate(playDestroyVFX, playDeathSound) {
 }
 
 useHoldThink(player, useTime, useText) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player playerLinkTo(self);
   } else {
     player LinkTo(self);
@@ -1207,7 +1207,7 @@ useHoldThink(player, useTime, useText) {
     }
   }
 
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player thread personalUseBar(self, useText);
   }
 
@@ -1557,7 +1557,6 @@ getSecondaryPerkForCrate(dropType) {
     if(isDefined(secondaryCrateType) && isDefined(level.crateTypes[dropType][secondaryCrateType].streakRef)) {
       return level.crateTypes[dropType][secondaryCrateType].streakRef;
     }
-
   }
 
   return undefined;
@@ -1690,5 +1689,4 @@ apply_reinforcement_perk(perkName) {
 
     return;
   }
-
 }

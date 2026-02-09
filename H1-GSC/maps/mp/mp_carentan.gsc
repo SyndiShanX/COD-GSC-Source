@@ -23,7 +23,7 @@ main() {
   maps\mp\_global_fx_code::global_fx("street_wall_light_FX_origin", "vfx\lights\light_spotlight_long_mp_carentan", undefined, "light_street_wall");
   maps\mp\_global_fx_code::global_fx("street_wall_light_sml_FX_origin", "vfx\lights\light_spotlight_mp_carentan", undefined, "light_street_wall_sml");
   maps\mp\_global_fx_code::global_fx("com_studio_light_FX_origin", "vfx\lights\light_studiolight_mp_carentan", undefined, "com_studio_light");
-  setdvar("compassmaxrange", "2500");
+  setDvar("compassmaxrange", "2500");
 
   if(level.gametype == "dom") {
     level.domborderfx["friendly"]["_a"] = "vfx\unique\vfx_marker_dom_med";

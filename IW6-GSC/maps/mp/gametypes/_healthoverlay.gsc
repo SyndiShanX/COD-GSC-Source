@@ -34,7 +34,6 @@ onPlayerSpawned() {
     self thread playerHealthRegen();
 
     self VisionSetThermalForPlayer(game["thermal_vision"]);
-
   }
 }
 
@@ -82,7 +81,6 @@ playerHealthRegen() {
     self thread healthRegeneration(hurtTime, healthRatio);
     self thread breathingManager(hurtTime, healthRatio);
   }
-
 }
 
 breathingManager(hurtTime, healthRatio) {
@@ -98,7 +96,7 @@ breathingManager(hurtTime, healthRatio) {
   if(self isUsingRemote()) {
     return;
   }
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self.breathingStopTime = hurtTime + (6000 * self.regenSpeed);
@@ -190,7 +188,7 @@ playerPainBreathingSound(healthcap) {
   self endon("joined_team");
   self endon("joined_spectators");
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   wait(2);

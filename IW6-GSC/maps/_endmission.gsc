@@ -57,9 +57,9 @@ _nextmission() {
     level.player enableinvulnerability();
     var_0 = undefined;
     setsaveddvar("ui_nextMission", "1");
-    setdvar("ui_showPopup", "0");
-    setdvar("ui_popupString", "");
-    setdvar("ui_prev_map", level.script);
+    setDvar("ui_showPopup", "0");
+    setDvar("ui_popupString", "");
+    setDvar("ui_prev_map", level.script);
 
     if(level.script == "prologue")
       level.player setlocalplayerprofiledata("unlockedAliens", 1);
@@ -76,7 +76,7 @@ _nextmission() {
       }
     }
 
-    setdvar("prologue_select", "0");
+    setDvar("prologue_select", "0");
     maps\_gameskill::auto_adust_zone_complete("aa_main_" + level.script);
 
     if(!isDefined(var_0)) {
@@ -241,14 +241,14 @@ setlevelcompleted(var_0) {
 }
 
 _sethighestmissionifnotcheating(var_0) {
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player setlocalplayerprofiledata("highestMission", var_0);
 }
 
 _setmissiondiffstringifnotcheating(var_0) {
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player setlocalplayerprofiledata("missionHighestDifficulty", var_0);

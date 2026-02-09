@@ -49,12 +49,13 @@ civ_init() {
 set_civilian_run_cycle(str_state, anim_override) {
   self.alwaysrunforward = 1;
 
-  if(isDefined(anim_override))
+  if(isDefined(anim_override)) {
     anime = anim_override;
-  else if(isarray(level.scr_anim[self.script_string][self.anim_set][str_state]))
+  } else if(isarray(level.scr_anim[self.script_string][self.anim_set][str_state])) {
     anime = random(level.scr_anim[self.script_string][self.anim_set][str_state]);
-  else
+  } else {
     anime = level.scr_anim[self.script_string][self.anim_set][str_state];
+  }
 
   self.a.combatrunanim = anime;
   self.run_noncombatanim = anime;
@@ -65,17 +66,21 @@ set_civilian_run_cycle(str_state, anim_override) {
 spawn_civs(str_spawn_loc, n_max_spawns, str_starter_loc, n_initial_spawns, str_endon, n_min_spawn_delay, n_max_spawn_delay) {
   level endon("stop_civ_spawns");
 
-  if(isDefined(str_endon))
+  if(isDefined(str_endon)) {
     level endon(str_endon);
+  }
 
-  if(!isDefined(n_initial_spawns))
+  if(!isDefined(n_initial_spawns)) {
     n_initial_spawns = 0;
+  }
 
-  if(!isDefined(n_min_spawn_delay))
+  if(!isDefined(n_min_spawn_delay)) {
     n_min_spawn_delay = 1.0;
+  }
 
-  if(!isDefined(n_max_spawn_delay))
+  if(!isDefined(n_max_spawn_delay)) {
     n_max_spawn_delay = 4.0;
+  }
 
   level.ai_civs = [];
   a_nd_spawn_locs = getnodearray(str_spawn_loc, "targetname");
@@ -91,10 +96,11 @@ spawn_civs(str_spawn_loc, n_max_spawns, str_starter_loc, n_initial_spawns, str_e
       ai_civ = pick_a_civ();
 
       if(isDefined(ai_civ)) {
-        if(level.ai_civs.size < n_initial_spawns && isDefined(a_nd_initial_locs))
+        if(level.ai_civs.size < n_initial_spawns && isDefined(a_nd_initial_locs)) {
           nd_start = a_nd_initial_locs[level.ai_civs.size];
-        else
+        } else {
           nd_start = random(a_nd_spawn_locs);
+        }
 
         ai_civ.targetname = "civilian";
         ai_civ forceteleport(nd_start.origin, nd_start.angles);
@@ -103,10 +109,11 @@ spawn_civs(str_spawn_loc, n_max_spawns, str_starter_loc, n_initial_spawns, str_e
       }
     }
 
-    if(level.ai_civs.size <= n_initial_spawns)
+    if(level.ai_civs.size <= n_initial_spawns) {
       wait 0.1;
-    else
+    } else {
       wait(randomfloatrange(n_min_spawn_delay, n_max_spawn_delay));
+    }
   }
 }
 
@@ -122,24 +129,27 @@ pick_a_civ(str_type) {
   if(level.n_curr_sp_civ[str_type] >= level.a_sp_civs[str_type].size - 1) {
     level.a_sp_civs[str_type] = array_randomize(level.a_sp_civs[str_type]);
 
-    if(level.a_sp_civs[str_type][0] == sp_last && level.a_sp_civs[str_type].size > 1)
+    if(level.a_sp_civs[str_type][0] == sp_last && level.a_sp_civs[str_type].size > 1) {
       level.n_curr_sp_civ[str_type] = 1;
-    else
+    } else {
       level.n_curr_sp_civ[str_type] = 0;
+    }
   }
 
   sp_civ = level.a_sp_civs[str_type][level.n_curr_sp_civ[str_type]];
   sp_civ.count = 2;
 
-  for(ai_civ = simple_spawn_single(sp_civ); !isDefined(ai_civ); ai_civ = simple_spawn_single(sp_civ))
+  for(ai_civ = simple_spawn_single(sp_civ); !isDefined(ai_civ); ai_civ = simple_spawn_single(sp_civ)) {
     wait 1.0;
+  }
 
   return ai_civ;
 }
 
 wander(start_target) {
-  if(!isDefined(level.civ_init))
+  if(!isDefined(level.civ_init)) {
     civ_init();
+  }
 
   if(isDefined(self.enemy)) {
     return;
@@ -158,14 +168,16 @@ wander(start_target) {
   waittillframeend;
   self pushplayer(0);
 
-  if(!isDefined(self.script_string))
+  if(!isDefined(self.script_string)) {
     self.script_string = "civ_male";
+  }
 
   self init_anim_set_overrides();
   self civ_spawn_props();
 
-  if(isDefined(level.a_civ_wander_anim_points) && randomint(100) < 45)
+  if(isDefined(level.a_civ_wander_anim_points) && randomint(100) < 45) {
     self thread goto_wander_anim_point();
+  }
 
   if(isDefined(start_target) && isstring(start_target)) {
     self.target = start_target;
@@ -201,18 +213,20 @@ wander(start_target) {
     currentgoal = start_target;
     str_link_type = "target";
 
-    if(start_target.type == "Path")
+    if(start_target.type == "Path") {
       str_goal_type = "node";
-    else
+    } else {
       str_goal_type = "ent";
+    }
   }
 
   assert(isDefined(currentgoal), "Initial goal for patroller is undefined");
   nextgoal = currentgoal;
 
   while(true) {
-    while(isDefined(nextgoal.patrol_claimed))
+    while(isDefined(nextgoal.patrol_claimed)) {
       wait 0.05;
+    }
 
     currentgoal.patrol_claimed = undefined;
     currentgoal = nextgoal;
@@ -220,8 +234,9 @@ wander(start_target) {
     self notify("release_node");
     assert(!isDefined(currentgoal.patrol_claimed), "Goal was already claimed");
 
-    if(!(isDefined(self.patrol_dont_claim_node) && self.patrol_dont_claim_node) && (isDefined(currentgoal.script_animation) && currentgoal.script_animation != "delete"))
+    if(!(isDefined(self.patrol_dont_claim_node) && self.patrol_dont_claim_node) && (isDefined(currentgoal.script_animation) && currentgoal.script_animation != "delete")) {
       currentgoal.patrol_claimed = 1;
+    }
 
     self.last_patrol_goal = currentgoal;
     self wander_to_goal(str_goal_type, currentgoal);
@@ -310,8 +325,9 @@ init_anim_set_overrides() {
   self set_civilian_run_cycle("walk");
   self animscripts\anims::setidleanimoverride(level.scr_anim[self.script_string][self.anim_set]["idle"]);
 
-  if(!isDefined(self.anim_array))
+  if(!isDefined(self.anim_array)) {
     self.anim_array = [];
+  }
 
   self.anim_array[self.animtype]["turn"]["stand"]["none"]["turn_f_l_45"] = level.scr_anim[self.script_string][self.anim_set]["turn_l"];
   self.anim_array[self.animtype]["turn"]["stand"]["none"]["turn_f_l_90"] = level.scr_anim[self.script_string][self.anim_set]["turn_l"];
@@ -326,17 +342,19 @@ init_anim_set_overrides() {
 
 civ_spawn_props() {
   if(isDefined(self.anim_set) && isDefined(level.a_str_civ_props[self.anim_set])) {
-    if(self.script_string == "civ_male")
+    if(self.script_string == "civ_male") {
       self attach(random(level.a_str_civ_props[self.anim_set]), "TAG_WEAPON_LEFT");
-    else
+    } else {
       self attach(random(level.a_str_civ_props[self.anim_set]), "TAG_WEAPON_RIGHT");
+    }
   }
 
   if(randomint(100) > 60 && self.anim_set != "phone") {
-    if(self.script_string == "civ_female")
+    if(self.script_string == "civ_female") {
       self attach("p6_anim_bluetooth_female", "J_Head");
-    else
+    } else {
       self attach("p6_anim_bluetooth_male", "J_Head");
+    }
   }
 }
 
@@ -391,10 +409,11 @@ wander_to_goal(str_goal_type, currentgoal) {
   [[level.civ_set_goal_func[str_goal_type]]](currentgoal);
   self ent_flag_set("moving_to_goal");
 
-  if(isDefined(currentgoal.radius) && currentgoal.radius > 0)
+  if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
     self.goalradius = currentgoal.radius;
-  else
+  } else {
     self.goalradius = 32;
+  }
 
   self waittill("goal");
 }
@@ -423,8 +442,9 @@ goto_wander_anim_point() {
       }
     }
 
-    if(!b_point_found)
+    if(!b_point_found) {
       wait 5.0;
+    }
   }
 
   if(!isDefined(nd_anim_point)) {
@@ -442,8 +462,9 @@ goto_wander_anim_point() {
   self ent_flag_clear("wander_pause");
   nd_anim_point.patrol_claimed = undefined;
 
-  if(self ent_flag("moving_to_goal"))
+  if(self ent_flag("moving_to_goal")) {
     self notify("restart_moving_to_goal");
+  }
 }
 
 waittill_death() {
@@ -467,8 +488,9 @@ release_claimed_node() {
 get_target_ents() {
   array = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getEntArray(self.target, "targetname");
+  }
 
   return array;
 }
@@ -476,8 +498,9 @@ get_target_ents() {
 get_target_nodes() {
   array = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getnodearray(self.target, "targetname");
+  }
 
   return array;
 }
@@ -491,8 +514,9 @@ get_linked_nodes() {
     for(i = 0; i < linknames.size; i++) {
       ent = getnode(linknames[i], "script_linkname");
 
-      if(isDefined(ent))
+      if(isDefined(ent)) {
         array[array.size] = ent;
+      }
     }
   }
 
@@ -500,8 +524,9 @@ get_linked_nodes() {
 }
 
 assign_civ_spawners(str_spawnerbase, n_baseindex) {
-  if(!isDefined(n_baseindex))
+  if(!isDefined(n_baseindex)) {
     n_baseindex = undefined;
+  }
 
   if(isDefined(n_baseindex)) {
     n_index = n_baseindex;
@@ -537,22 +562,25 @@ assign_civ_spawners(str_spawnerbase, n_baseindex) {
 assign_civ_drone_spawners(str_spawnername, script_string) {
   a_sp_civs = getEntArray(str_spawnername, "targetname");
 
-  foreach(sp_civ in a_sp_civs)
-  maps\_drones::drones_assign_spawner(script_string, sp_civ);
+  foreach(sp_civ in a_sp_civs) {
+    maps\_drones::drones_assign_spawner(script_string, sp_civ);
+  }
 }
 
 assign_civ_drone_spawners_by_type(type, script_string) {
-  if(!isarray(type))
+  if(!isarray(type)) {
     a_str_type[0] = type;
-  else
+  } else {
     a_str_type = type;
+  }
 
   foreach(str_type in a_str_type) {
     assert(isDefined(level.a_sp_civs[str_type]), "Trying to assign a drone spawner a civ type( " + str_type + " ) that does not exist.");
     a_sp_civs = level.a_sp_civs[str_type];
 
-    foreach(sp_civ in a_sp_civs)
-    maps\_drones::drones_assign_spawner(script_string, sp_civ);
+    foreach(sp_civ in a_sp_civs) {
+      maps\_drones::drones_assign_spawner(script_string, sp_civ);
+    }
   }
 }
 
@@ -560,17 +588,20 @@ delete_all_civs() {
   a_m_civs = getEntArray("civilian", "targetname");
 
   foreach(index, m_civ in a_m_civs) {
-    if(isalive(m_civ))
+    if(isalive(m_civ)) {
       m_civ delete();
+    }
 
-    if(index % 20 == 0)
+    if(index % 20 == 0) {
       wait 0.05;
+    }
   }
 }
 
 delete_civs(str_id, str_key) {
-  if(!isDefined(str_key))
+  if(!isDefined(str_key)) {
     str_key = "targetname";
+  }
 
   n_deleted = 0;
   a_m_civs = getEntArray(str_id, str_key);
@@ -579,16 +610,18 @@ delete_civs(str_id, str_key) {
     m_civ delete();
     n_deleted++;
 
-    if(n_deleted % 20 == 0)
+    if(n_deleted % 20 == 0) {
       wait 0.05;
+    }
   }
 }
 
 #using_animtree("fakeshooters");
 
 spawn_static_civs(str_structnames, n_delay_max) {
-  if(!isDefined(n_delay_max))
+  if(!isDefined(n_delay_max)) {
     n_delay_max = 2.0;
+  }
 
   a_keys = getarraykeys(level.a_sp_civs);
   a_civ_types = [];
@@ -599,8 +632,9 @@ spawn_static_civs(str_structnames, n_delay_max) {
       continue;
     }
 
-    if(level.a_sp_civs[str_type][0].script_percent > 0.0)
+    if(level.a_sp_civs[str_type][0].script_percent > 0.0) {
       a_civ_types[str_type] = level.a_sp_civs[str_type][0].script_percent;
+    }
   }
 
   a_civ_types_keys = getarraykeys(a_civ_types);
@@ -614,12 +648,14 @@ spawn_static_civs(str_structnames, n_delay_max) {
     a_static_locs[i]["script_noteworthy"] = a_s_static_locs[i].script_noteworthy;
     a_static_locs[i]["dr_animation"] = a_s_static_locs[i].dr_animation;
 
-    if(isDefined(a_s_static_locs[i].script_float))
+    if(isDefined(a_s_static_locs[i].script_float)) {
       a_static_locs[i]["script_float"] = a_s_static_locs[i].script_float;
+    }
   }
 
-  foreach(s_struct in a_s_static_locs)
-  s_struct structdelete();
+  foreach(s_struct in a_s_static_locs) {
+    s_struct structdelete();
+  }
 
   a_sp_group = [];
 
@@ -627,35 +663,40 @@ spawn_static_civs(str_structnames, n_delay_max) {
     if(!is_mature() && isDefined(a_static_locs[i]["script_noteworthy"]) && a_static_locs[i]["script_noteworthy"] == "dancers") {
       continue;
     }
-    if(isDefined(a_static_locs[i]["script_string"]) && isDefined(level.a_sp_civs[a_static_locs[i]["script_string"]]))
+    if(isDefined(a_static_locs[i]["script_string"]) && isDefined(level.a_sp_civs[a_static_locs[i]["script_string"]])) {
       a_sp_group = level.a_sp_civs[a_static_locs[i]["script_string"]];
-    else
+    } else {
       a_sp_group = level.a_sp_civs[a_civ_types_keys[randomint(a_civ_types_keys.size)]];
+    }
 
-    if(a_sp_group.size > 1)
+    if(a_sp_group.size > 1) {
       sp_spawner = a_sp_group[randomint(a_sp_group.size)];
-    else
+    } else {
       sp_spawner = a_sp_group[0];
+    }
 
     m_drone = spawn("script_model", a_static_locs[i]["origin"]);
     m_drone.angles = a_static_locs[i]["angles"];
     m_drone.script_noteworthy = a_static_locs[i]["script_noteworthy"];
 
-    if(isDefined(a_static_locs[i]["script_float"]))
+    if(isDefined(a_static_locs[i]["script_float"])) {
       m_drone.script_float = a_static_locs[i]["script_float"];
+    }
 
     m_drone getdronemodel(sp_spawner.classname);
     m_drone useanimtree(#animtree);
     m_drone delay_thread(randomfloat(n_delay_max), ::civ_loop_anim, level.drones.anims[a_static_locs[i]["dr_animation"]]);
 
-    if(i % 15 == 0)
+    if(i % 15 == 0) {
       wait 0.05;
+    }
   }
 }
 
 spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_female_spawners) {
-  if(!isDefined(n_delay_max))
+  if(!isDefined(n_delay_max)) {
     n_delay_max = 2.0;
+  }
 
   a_sp_male = level.a_sp_civs[str_male_spawners];
   a_sp_female = level.a_sp_civs[str_female_spawners];
@@ -670,12 +711,14 @@ spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_fema
     a_static_locs[i]["script_noteworthy"] = a_s_static_locs[i].script_noteworthy;
     a_static_locs[i]["dr_animation"] = a_s_static_locs[i].dr_animation;
 
-    if(isDefined(a_s_static_locs[i].script_float))
+    if(isDefined(a_s_static_locs[i].script_float)) {
       a_static_locs[i]["script_float"] = a_s_static_locs[i].script_float;
+    }
   }
 
-  foreach(s_struct in a_s_static_locs)
-  s_struct structdelete();
+  foreach(s_struct in a_s_static_locs) {
+    s_struct structdelete();
+  }
 
   n_male_index_head = 0;
   n_male_num_heads = get_drone_model_array("male", "head").size;
@@ -699,43 +742,50 @@ spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_fema
       n_male_index_head++;
       n_male_index_body++;
 
-      if(n_male_index_head >= n_male_num_heads)
+      if(n_male_index_head >= n_male_num_heads) {
         n_male_index_head = 0;
+      }
 
-      if(n_male_index_body >= n_male_num_bodies)
+      if(n_male_index_body >= n_male_num_bodies) {
         n_male_index_body = 0;
+      }
     } else if(isDefined(a_static_locs[i]["script_string"]) && a_static_locs[i]["script_string"] == str_female_spawners) {
       m_head = get_drone_model_array("female", "head")[n_female_index_head];
       m_body = get_drone_model_array("female", "body")[n_female_index_body];
       n_female_index_head++;
       n_female_index_body++;
 
-      if(n_female_index_head >= n_female_num_heads)
+      if(n_female_index_head >= n_female_num_heads) {
         n_female_index_head = 0;
+      }
 
-      if(n_female_index_body >= n_female_num_bodies)
+      if(n_female_index_body >= n_female_num_bodies) {
         n_female_index_body = 0;
+      }
     } else if(isDefined(a_static_locs[i]["script_string"]) && a_static_locs[i]["script_string"] == "club_shadow_dancer")
       sp_spawner = level.a_sp_civs["club_shadow_dancer"][0];
-    else if(isDefined(a_static_locs[i]["script_string"]) && a_static_locs[i]["script_string"] == "club_bouncer")
+    else if(isDefined(a_static_locs[i]["script_string"]) && a_static_locs[i]["script_string"] == "club_bouncer") {
       sp_spawner = level.a_sp_civs["club_bouncer"][0];
+    }
 
     m_drone = spawn("script_model", a_static_locs[i]["origin"]);
     m_drone.angles = a_static_locs[i]["angles"];
     m_drone.script_noteworthy = a_static_locs[i]["script_noteworthy"];
 
-    if(isDefined(a_static_locs[i]["script_float"]))
+    if(isDefined(a_static_locs[i]["script_float"])) {
       m_drone.script_float = a_static_locs[i]["script_float"];
+    }
 
     if(isDefined(a_static_locs[i]["script_string"]) && (a_static_locs[i]["script_string"] == str_male_spawners || a_static_locs[i]["script_string"] == str_female_spawners)) {
       m_drone.targetname = m_body;
       m_drone setModel(m_body);
 
       if(isDefined(m_drone.script_float)) {
-        if(a_static_locs[i]["script_string"] == str_male_spawners)
+        if(a_static_locs[i]["script_string"] == str_male_spawners) {
           m_head = "c_mul_civ_club_male_head" + int(m_drone.script_float);
-        else if(a_static_locs[i]["script_string"] == str_female_spawners)
+        } else if(a_static_locs[i]["script_string"] == str_female_spawners) {
           m_head = "c_mul_civ_club_female_head" + int(m_drone.script_float);
+        }
       }
 
       m_drone attach(m_head, "", 1);
@@ -745,8 +795,9 @@ spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_fema
     m_drone useanimtree(#animtree);
     m_drone delay_thread(randomfloat(n_delay_max), ::civ_loop_anim, level.drones.anims[a_static_locs[i]["dr_animation"]]);
 
-    if(i % 15 == 0)
+    if(i % 15 == 0) {
       wait 0.05;
+    }
   }
 }
 

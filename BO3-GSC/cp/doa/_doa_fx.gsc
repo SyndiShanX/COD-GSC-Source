@@ -211,8 +211,8 @@ function turnofffx(name) {
   self notify("turnofffx");
   self endon("turnofffx");
   self endon("death");
-  assert(!(isplayer(self) && name == ""));
-  assert(!(isplayer(self) && name == ""));
+  assert(!(isPlayer(self) && name == ""));
+  assert(!(isPlayer(self) && name == ""));
   if(!isDefined(self.var_350c7e91)) {
     self.var_350c7e91 = [];
     self.var_78c14ec2 = 0;
@@ -234,8 +234,8 @@ function function_285a2999(name) {
   self notify("hash_285a2999");
   self endon("hash_285a2999");
   self endon("death");
-  assert(!(isplayer(self) && name == ""));
-  assert(!(isplayer(self) && name == ""));
+  assert(!(isPlayer(self) && name == ""));
+  assert(!(isPlayer(self) && name == ""));
   if(!isDefined(self.var_3930cdff)) {
     self.var_3930cdff = [];
     self.var_b2ce38d9 = 0;

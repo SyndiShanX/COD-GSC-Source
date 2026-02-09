@@ -1,12 +1,11 @@
 /**************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_radiant_live_update.csc
+ * Script: clientscripts\_radiant_live_update\.csc
 **************************************************/
 
 main() {
   thread scriptstruct_debug_render();
 }
-
 scriptstruct_debug_render() {
   while(1) {
     level waittill("liveupdate", selected_struct);
@@ -17,7 +16,6 @@ scriptstruct_debug_render() {
     }
   }
 }
-
 render_struct(selected_struct) {
   self endon("stop_struct_render");
   while(isDefined(selected_struct)) {

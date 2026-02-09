@@ -925,7 +925,7 @@ function updatefrustrationlevel(entity) {
     return false;
   }
   record3dtext("" + entity.frustrationlevel, entity.origin, (1, 0.5, 0), "");
-  if(isactor(entity.enemy) || isplayer(entity.enemy)) {
+  if(isactor(entity.enemy) || isPlayer(entity.enemy)) {
     if(entity.aggressivemode) {
       if(!isDefined(entity.lastfrustrationboost)) {
         entity.lastfrustrationboost = gettime();
@@ -1642,7 +1642,7 @@ function meleeacquiremutex(behaviortreeentity) {
   if(isDefined(behaviortreeentity) && isDefined(behaviortreeentity.enemy)) {
     behaviortreeentity.melee = spawnStruct();
     behaviortreeentity.melee.enemy = behaviortreeentity.enemy;
-    if(isplayer(behaviortreeentity.melee.enemy)) {
+    if(isPlayer(behaviortreeentity.melee.enemy)) {
       if(!isDefined(behaviortreeentity.melee.enemy.meleeattackers)) {
         behaviortreeentity.melee.enemy.meleeattackers = 0;
       }
@@ -1654,7 +1654,7 @@ function meleeacquiremutex(behaviortreeentity) {
 function meleereleasemutex(behaviortreeentity) {
   if(isDefined(behaviortreeentity.melee)) {
     if(isDefined(behaviortreeentity.melee.enemy)) {
-      if(isplayer(behaviortreeentity.melee.enemy)) {
+      if(isPlayer(behaviortreeentity.melee.enemy)) {
         if(isDefined(behaviortreeentity.melee.enemy.meleeattackers)) {
           behaviortreeentity.melee.enemy.meleeattackers = behaviortreeentity.melee.enemy.meleeattackers - 1;
           if(behaviortreeentity.melee.enemy.meleeattackers <= 0) {
@@ -1672,7 +1672,7 @@ function shouldmutexmelee(behaviortreeentity) {
     return 0;
   }
   if(isDefined(behaviortreeentity.enemy)) {
-    if(!isplayer(behaviortreeentity.enemy)) {
+    if(!isPlayer(behaviortreeentity.enemy)) {
       if(isDefined(behaviortreeentity.enemy.melee)) {
         return 0;
       }
@@ -1714,7 +1714,7 @@ function shouldmelee(entity) {
   if(isvehicle(entity.enemy) && (!(isDefined(entity.enemy.good_melee_target) && entity.enemy.good_melee_target))) {
     return false;
   }
-  if(isplayer(entity.enemy) && entity.enemy getstance() == "prone") {
+  if(isPlayer(entity.enemy) && entity.enemy getstance() == "prone") {
     return false;
   }
   chargedistsq = (isDefined(entity.melee_charge_rangesq) ? entity.melee_charge_rangesq : 140 * 140);

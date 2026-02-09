@@ -8,7 +8,7 @@
 #include maps\mp\_createfx;
 
 print_org(fxcommand, fxid, fxpos, waittime) {
-  if(getdvar(#"_id_0F49A52C") == "1") {
+  if(getDvar(#"_id_0F49A52C") == "1") {
     println("{");
     println("\"origin\" \"" + fxpos[0] + " " + fxpos[1] + " " + fxpos[2] + "\"");
     println("\"classname\" \"script_model\"");
@@ -18,7 +18,6 @@ print_org(fxcommand, fxid, fxpos, waittime) {
     println("\"script_delay\" \"" + waittime + "\"");
     println("}");
   }
-
 }
 
 oneshotfx(fxid, fxpos, waittime, fxpos2) {}

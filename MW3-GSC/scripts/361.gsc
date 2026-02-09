@@ -64,9 +64,8 @@ _id_2847(var_0, var_1) {
   var_0 notify("evasive_action_done");
   thread _id_2849(var_0);
 
-  if(getdvar("cobrapilot_debug") == "1") {
+  if(getDvar("cobrapilot_debug") == "1") {
     var_0 _id_284D(var_1);
-
   }
   var_0 setneargoalnotifydist(1500);
   var_0 vehicle_setspeed(100, 30, 30);
@@ -77,7 +76,6 @@ _id_2847(var_0, var_1) {
       var_4 = vectortoangles(var_1[var_3 + 1]["pos"] - var_1[var_3]["pos"]);
     } else {
       var_4 = (0, var_2, 0);
-
     }
     var_5 = var_4[1];
 
@@ -85,11 +83,9 @@ _id_2847(var_0, var_1) {
       var_5 = (var_4[1] + var_2) / 2;
     } else if(var_1[var_3]["goalYawMethod"] == "forward") {
       var_5 = var_0.angles[1];
-
     }
-    if(getdvar("cobrapilot_debug") == "1") {
+    if(getDvar("cobrapilot_debug") == "1") {
       thread maps\_utility::_id_2655(var_1[var_3]["pos"], var_1[var_3]["pos"] + anglesToForward((0, var_5, 0)) * 250, 1.0, 1.0, 0.2, var_0, "evasive_action_done");
-
     }
     var_0 settargetyaw(var_5);
     var_0 thread maps\_vehicle::_id_2848(var_1[var_3]["pos"], 0);
@@ -120,11 +116,9 @@ _id_284A(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     var_3 = "none";
-
   }
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   self._id_284B[var_4]["forward"] = var_0;
   self._id_284B[var_4]["side"] = var_1;
@@ -169,7 +163,7 @@ _id_284E(var_0) {
   for(;;) {
     var_12 = _id_2850(var_1, var_2, var_3);
 
-    if(getdvar("cobrapilot_debug") == "1") {
+    if(getDvar("cobrapilot_debug") == "1") {
       thread common_scripts\utility::draw_line_for_time(level._id_284F.origin, var_12, 0, 1, 0, var_4);
       thread common_scripts\utility::draw_line_for_time(level._id_284F.origin, var_0.origin, 0, 0, 1, var_4);
       thread common_scripts\utility::draw_line_for_time(var_0.origin, var_12, 1, 1, 0, var_4);
@@ -201,11 +195,9 @@ _id_284E(var_0) {
 
       if(var_16 >= var_15 / 2) {
         var_16 = var_15 / 2;
-
       }
       if(var_17 >= var_15 / 2) {
         var_17 = var_15 / 2;
-
       }
       var_0 vehicle_setspeed(var_15, var_16, var_17);
       var_0 settargetyaw(level._id_284F.angles[1]);
@@ -213,11 +205,9 @@ _id_284E(var_0) {
 
       if(_id_2851() <= 30) {
         var_18 = 1;
-
       }
-      if(getdvar("cobrapilot_debug") == "1") {
+      if(getDvar("cobrapilot_debug") == "1") {
         iprintln("wingman speed: " + var_15 + " : " + var_18);
-
       }
       var_0 setvehgoalpos(var_12, var_18);
     }

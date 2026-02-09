@@ -27,8 +27,9 @@ init_fastrope() {
 setanims() {
   positions = [];
 
-  for(i = 0; i <= 9; i++)
+  for(i = 0; i <= 9; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].idle[0] = % ai_crew_hind_pilot1_idle;
   positions[0].idle[1] = % ai_crew_hind_pilot1_idle_twitch_clickpanel;

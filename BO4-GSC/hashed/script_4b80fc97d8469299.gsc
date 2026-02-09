@@ -412,7 +412,7 @@ function_d584f1a8() {
 }
 
 is_soul_capture(var_88206a50, ent) {
-  b_killed_by_player = isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor);
+  b_killed_by_player = isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor);
   packtri = b_killed_by_player && distance(ent.origin, var_88206a50.origin) < 500;
   return packtri;
 }

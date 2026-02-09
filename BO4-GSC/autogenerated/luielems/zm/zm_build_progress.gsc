@@ -26,7 +26,6 @@ class czm_build_progress: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("progress", 1, 6, "float");
   }
-
 }
 
 register(uid) {

@@ -175,7 +175,7 @@ function_710d3ac7() {
 }
 
 function_bdcb6aac(e_player) {
-  if(!isplayer(e_player) || !isDefined(level.var_240da80)) {
+  if(!isPlayer(e_player) || !isDefined(level.var_240da80)) {
     return 0;
   }
 
@@ -235,7 +235,6 @@ function_c4e5bf05(b_skipped, var_19e802fa) {
     zm_crafting::function_ca244624(#"zblueprint_trap_hellpools");
 
     iprintlnbold("<dev string:x38>");
-
   }
 
   s_unitrigger = struct::get(level.var_708e0925, "script_ww_quest_acid_trap_unitrigger");
@@ -588,7 +587,7 @@ function_ac4e38bc(b_skipped) {
     s_waitresult = trigger::wait_till("t_ww_quest_spile_damage_trigger");
     e_player = s_waitresult.who;
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       b_planted = 1;
       break;
     }
@@ -741,7 +740,6 @@ function_79875787(b_skipped, var_19e802fa) {
   if(b_skipped) {
     iprintlnbold("<dev string:x87>");
   }
-
 }
 
 function_e7e07200() {

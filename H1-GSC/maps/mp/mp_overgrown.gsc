@@ -14,9 +14,9 @@ main() {
   ambientplay("amb_mp_overgrown_ext");
   game["attackers"] = "axis";
   game["defenders"] = "allies";
-  setdvar("compassmaxrange", "2200");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("compassmaxrange", "2200");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   maps\mp\_utility::hardpointvisualsswap("hp_zone_1", "patch_hp_zone_1");
   level thread scriptpatchclip();
 }

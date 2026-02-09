@@ -85,7 +85,7 @@ function main() {
   system::wait_till("all");
   art_review();
   level flagsys::set("load_main_complete");
-  setdvar("phys_wind_enabled", 0);
+  setDvar("phys_wind_enabled", 0);
 }
 
 function basic_player_connect(localclientnum) {

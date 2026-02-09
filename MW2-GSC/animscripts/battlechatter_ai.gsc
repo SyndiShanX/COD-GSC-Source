@@ -268,7 +268,6 @@ aiNameAndRankWaiter() {
     self.bcRank = self animscripts\battlechatter::getRank();
     self waittill("set name and rank");
   }
-
 }
 
 removeFromSystem(squadName) {
@@ -329,8 +328,7 @@ init_aiBattleChatter() {
   self.isSpeaking = false;
   self.bcs_minPriority = 0.0;
 
-  /*-------- ALLOWED THREAT CALLOUTS --------
-  Here we set up the types of threat callouts that this AI is allowed to use.
+  /*-------- ALLOWED THREAT CALLOUTS -------- Here we set up the types of threat callouts that this AI is allowed to use.
    - these should always match the values that index the anim.threatCallouts[] array, which is set up in battlechatter::init_battleChatter()
   ------------------------------------------*/
   self.allowedCallouts = [];
@@ -400,7 +398,7 @@ addThreatEvent(eventType, threat, priority) {
   }
 
   // check if the threat has already been called out by someone in our squad
-  if(threatWasAlreadyCalledOut(threat) && !IsPlayer(threat)) {
+  if(threatWasAlreadyCalledOut(threat) && !isPlayer(threat)) {
     return;
   }
 
@@ -460,7 +458,7 @@ addResponseEvent_internal(eventType, modifier, respondTo, priority, reportAlias,
     return;
   }
 
-  if(!IsPlayer(respondTo)) {
+  if(!isPlayer(respondTo)) {
     // make sure that we don't respond in the same voice
     if(self isUsingSameVoice(respondTo)) {
       return;
@@ -694,7 +692,7 @@ squadThreatWaiter() {
         }
 
         if(!member CanSee(enemy)) {
-          if(IsPlayer(enemy)) {
+          if(isPlayer(enemy)) {
             continue;
           }
 
@@ -781,7 +779,7 @@ aiDeathEnemy() {
     return;
   }
 
-  if(!IsPlayer(attacker)) {
+  if(!isPlayer(attacker)) {
     // attacker says "got one" or something similar
     attacker thread aiKillEventThread();
   }
@@ -803,7 +801,7 @@ aiOfficerOrders() {
     self.squad waittill("squad chat initialized");
 
   while(1) {
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getDvar("bcs_enable", "on") == "off") {
       wait(1.0);
       continue;
     }
@@ -821,7 +819,7 @@ aiGrenadeDangerWaiter() {
   while(1) {
     self waittill("grenade danger", grenade);
 
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getDvar("bcs_enable", "on") == "off") {
       continue;
     }
     if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade") {
@@ -839,7 +837,7 @@ aiDisplaceWaiter() {
   while(true) {
     self waittill("trigger");
 
-    if(getdvar("bcs_enable", "on") == "off") {
+    if(getDvar("bcs_enable", "on") == "off") {
       continue;
     }
     // no acknowledgement if you just took pain, looks dumb
@@ -960,7 +958,7 @@ player_friendlyfire_waiter() {
       continue;
     }
 
-    if(!IsPlayer(shooter)) {
+    if(!isPlayer(shooter)) {
       continue;
     }
 
@@ -983,7 +981,7 @@ player_friendlyfire_waiter_damage() {
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
 
-    if(isDefined(attacker) && IsPlayer(attacker)) {
+    if(isDefined(attacker) && isPlayer(attacker)) {
       if(damage_is_valid_for_friendlyfire_warning(type)) {
         self player_friendlyfire_addReactionEvent();
       }

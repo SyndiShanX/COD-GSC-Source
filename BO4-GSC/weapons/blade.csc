@@ -19,7 +19,7 @@ __init__() {
 }
 
 on_weapon_change(params) {
-  if(self == level || !isplayer(self)) {
+  if(self == level || !isPlayer(self)) {
     return;
   }
 
@@ -81,7 +81,7 @@ melee_event(eventstruct) {
     return;
   }
 
-  if(!isplayer(eventstruct.victim)) {
+  if(!isPlayer(eventstruct.victim)) {
     return;
   }
 

@@ -19,7 +19,6 @@ class cprototype_defend_timer: cluielem {
   function setup_clientfields(uid) {
     cluielem::setup_clientfields(uid);
   }
-
 }
 
 register(uid) {

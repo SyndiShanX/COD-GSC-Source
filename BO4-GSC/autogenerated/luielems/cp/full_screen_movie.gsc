@@ -56,7 +56,6 @@ class cfull_screen_movie: cluielem {
     cluielem::add_clientfield("skippable", 1, 1, "int");
     cluielem::function_dcb34c80("moviefile", "movieKey", 18000);
   }
-
 }
 
 register(uid) {

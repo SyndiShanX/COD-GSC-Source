@@ -11,7 +11,6 @@ magic_box_init() {
   level thread _update_magic_box_indicators();
   level thread _watch_fire_sale();
 }
-
 _update_magic_box_indicators() {
   wait_for_all_players();
   while(true) {
@@ -21,14 +20,12 @@ _update_magic_box_indicators() {
     }
   }
 }
-
 _watch_fire_sale() {
   while(1) {
     level waittill("powerup fire sale");
     level waittill("fire_sale_off");
   }
 }
-
 _get_current_chest() {
   return level.chests[level.chest_index].script_noteworthy;
 }

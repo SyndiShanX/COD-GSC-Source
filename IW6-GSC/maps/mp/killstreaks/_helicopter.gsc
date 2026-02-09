@@ -554,7 +554,7 @@ update_player_threat(player) {
   if(isDefined(self.attacker) && player == self.attacker)
     player.threatlevel += 100;
 
-  if(IsPlayer(player))
+  if(isPlayer(player))
     player.threatlevel += player.score * 4;
 
   if(isDefined(player.antithreat))
@@ -791,7 +791,6 @@ heli_explode(altStyle) {
     deathAngles = self getTagAngles("tag_deathfx");
 
     playFX(level.chopper_fx["explode"]["air_death"][self.heli_type], self getTagOrigin("tag_deathfx"), anglesToForward(deathAngles), anglesToUp(deathAngles));
-
   } else {
     org = self.origin;
     forward = (self.origin + (0, 0, 1)) - self.origin;

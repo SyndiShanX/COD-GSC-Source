@@ -84,7 +84,7 @@ finishline() {
   // wait for all players to cross the finish line
   for(;;) {
     trigger waittill("trigger", player);
-    assert(isplayer(player));
+    assert(isPlayer(player));
 
     // a player crossed the finish line
     if(isDefined(player.crossed_finish_line))
@@ -218,8 +218,8 @@ enemies() {
   level.POS_LOOKAHEAD_DIST = 200;
 
   level.moto_drive = false;
-  if(getdvar("moto_drive") == "")
-    setdvar("moto_drive", "0");
+  if(getDvar("moto_drive") == "")
+    setDvar("moto_drive", "0");
 
   thread maps\cliffhanger_code::enemy_init();
   init_vehicle_splines();

@@ -50,9 +50,9 @@ do_explosion() {
 
       if(isDefined(level.vehicle_death_earthquake[self.destructibledef])) {
         earthquake(
-      }
-          level.vehicle_death_earthquake[self.destructibledef].scale, level.vehicle_death_earthquake[self.destructibledef].duration, self.origin, level.vehicle_death_earthquake[self.destructibledef].radius
-        );
+        }
+        level.vehicle_death_earthquake[self.destructibledef].scale, level.vehicle_death_earthquake[self.destructibledef].duration, self.origin, level.vehicle_death_earthquake[self.destructibledef].radius
+      );
 
       PlayRumbleOnPosition("explosion_generic", self.origin);
 

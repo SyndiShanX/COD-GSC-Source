@@ -75,7 +75,7 @@ getowner() {
 tryuseheavyexosuit(var_0, var_1) {
   var_2 = self;
 
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     var_2 = getowner();
 
     if(!isDefined(var_2)) {
@@ -382,7 +382,7 @@ juggernautmodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     var_0 setclientomnvar("ui_exo_suit_health", var_11);
     level thread dogoliathintegrityvo(var_10, var_11, self);
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       if(isDefined(var_7) && var_7 == "head") {
         var_1 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("headshot");
       } else {
@@ -1137,7 +1137,7 @@ handleattachmentdeath(var_0, var_1, var_2) {
   level endon("game_ended");
   self waittill("death", var_3, var_4, var_5);
 
-  if(!isDefined(var_3) || !isplayer(var_3) || isDefined(var_1) && var_3 == var_1) {
+  if(!isDefined(var_3) || !isPlayer(var_3) || isDefined(var_1) && var_3 == var_1) {
     return;
   }
   level thread maps\mp\gametypes\_rank::awardgameevent("heavy_exo_attachment", var_3, undefined, undefined, undefined, var_2);
@@ -1168,7 +1168,7 @@ handleattachmentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     self.wasdamaged = 1;
     self.damagefade = 0.0;
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       if(var_1 maps\mp\_utility::_hasperk("specialty_armorpiercing")) {
         var_12 = var_12 * level.armorpiercingmod;
       }
@@ -1554,7 +1554,7 @@ cratecapturethink(var_0) {
 }
 
 useholdthink(var_0, var_1, var_2) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 playerlinkto(self);
   } else {
     var_0 linkto(self);
@@ -1587,7 +1587,7 @@ useholdthink(var_0, var_1, var_2) {
     self.usetime = 3000;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread personalusebar(self, var_2);
   }
 
@@ -1825,8 +1825,8 @@ adjustlink(var_0, var_1, var_2, var_3, var_4) {
   }
 
   thread drawspine(var_2, var_0);
-  setdvar("scr_adjust_angles", "" + var_4);
-  setdvar("scr_adjust_origin", "" + var_3);
+  setDvar("scr_adjust_angles", "" + var_4);
+  setDvar("scr_adjust_origin", "" + var_3);
   var_5 = (0, 0, 0);
   var_6 = (0, 0, 0);
 
@@ -2007,9 +2007,7 @@ playermech_invalid_weapon_instance(var_0, var_1) {
 
     if(self call[[var_0]]()) {
       if(!var_2) {
-        if([
-            [var_1]
-          ]()) {
+        if([[var_1]]()) {
           var_2 = 1;
           self playlocalsound("wpn_mech_offline");
           wait 1.5;

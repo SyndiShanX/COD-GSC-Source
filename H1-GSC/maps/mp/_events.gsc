@@ -5,7 +5,7 @@
 ********************************/
 
 init() {
-  var_0 = getdvar("g_gametype");
+  var_0 = getDvar("g_gametype");
   var_1 = 0;
   var_2 = [];
   var_2["dm"] = 4;
@@ -706,7 +706,7 @@ tagcollectorevent() {
 }
 
 monitortagcollector(var_0) {
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
   var_0 notify("tagCollector");

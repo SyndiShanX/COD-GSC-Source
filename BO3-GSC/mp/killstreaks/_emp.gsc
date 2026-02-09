@@ -93,7 +93,7 @@ function activateemp() {
 
 function onplaceemp(emp) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   assert(!isDefined(emp.vehicle));
   emp.vehicle = spawnvehicle("emp_turret", emp.origin, emp.angles);
   emp.vehicle thread util::ghost_wait_show(0.05);
@@ -196,7 +196,7 @@ function ondeath(attacker, weapon) {
   emp_vehicle = self;
   fxtagorigin = self gettagorigin("tag_fx");
   doneempfx(fxtagorigin);
-  if(isDefined(attacker) && isplayer(attacker) && (!isDefined(emp_vehicle.owner) || emp_vehicle.owner util::isenemyplayer(attacker))) {
+  if(isDefined(attacker) && isPlayer(attacker) && (!isDefined(emp_vehicle.owner) || emp_vehicle.owner util::isenemyplayer(attacker))) {
     attacker challenges::destroyscorestreak(weapon, 0, 1, 0);
     attacker challenges::destroynonairscorestreak_poststatslock(weapon);
     attacker addplayerstat("destroy_turret", 1);

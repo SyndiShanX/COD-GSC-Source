@@ -8,9 +8,9 @@
 #include animscripts\utility;
 #include maps\_anim;
 #include maps\_vehicle;
- //#include maps\af_chase_code;
-//#include maps\af_chase_zodiac;
-#include maps\_hud_util;
+
+/include maps\af_chase_code; /
+include maps\af_chase_zodiac;#include maps\_hud_util;
 
 ENDING_MOVE_SPEED = 0.45;
 
@@ -2063,7 +2063,6 @@ gun_crawl_fight_idle() {
     //		new_anim_node anim_single( guys, "fight_D2" );
     //		new_anim_node anim_single( guys, "fight_D3" );
   }
-
 }
 
 gun_crawl_fight_idle_cleanup() {
@@ -2115,7 +2114,7 @@ button_wait(button_alt, button_track, button_index) {
 
     if(button_failure_time < GetTime()) {
       // Price was killed.
-      SetDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_CRAWL");
+      setDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_CRAWL");
       missionFailedWrapper();
       level waittill("never");
     }
@@ -2145,9 +2144,7 @@ crawl_breath_start() {
   while(1) {
     wait RandomFloatRange(.76, 1.7);
     level.player play_sound_on_entity("breathing_hurt");
-
   }
-
 }
 
 crawl_breath_recover() {
@@ -2337,7 +2334,7 @@ player_fails_if_he_doesnt_use_knife() {
   }
 
   // Price was killed.
-  SetDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_PULL_KNIFE");
+  setDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_PULL_KNIFE");
   missionFailedWrapper();
 }
 
@@ -2854,7 +2851,6 @@ occumulate_player_use_presses(struct) {
 
     wait 0.05;
   }
-
 }
 
 timescale_does_not_effect_sound() {
@@ -2990,7 +2986,6 @@ gen_rocks() {
     //		ent PhysicsLaunchClient( ent.origin + offset, force );
     ent PhysicsLaunchClient(ent.origin, (0, 0, 1));
   }
-
 }
 
 scoot_rocks() {

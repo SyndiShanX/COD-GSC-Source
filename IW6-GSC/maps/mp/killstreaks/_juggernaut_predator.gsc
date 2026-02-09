@@ -357,7 +357,6 @@ predatorSetCloaked(useWrist) {
     if(useWrist) {
       self PlayLocalSound("scn_predator_plr_cloak_on");
       self playSound("scn_predator_npc_cloak_on");
-
     }
 
     self thread predatorPlayUnloakVfx();
@@ -380,7 +379,6 @@ predatorUnsetCloaked(useWrist, isFirstTime) {
     if(useWrist) {
       self PlayLocalSound("scn_predator_plr_cloak_off");
       self playSound("scn_predator_npc_cloak_off");
-
     } else if(isDefined(self.inWater) && self.inWater) {
       self PlayLocalSound("scn_predator_plr_cloak_off_waterfall");
       self playSound("scn_predator_npc_cloak_off_waterfall");
@@ -909,7 +907,7 @@ Callback_PlayerLastStandPredator(eInflictor, attacker, iDamage, sMeansOfDeath, s
       lastStandParams.sMeansOfDeath = sMeansOfDeath;
 
     lastStandParams.sWeapon = sWeapon;
-    if(isDefined(attacker) && IsPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none")
+    if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none")
       lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
     else
       lastStandParams.sPrimaryWeapon = undefined;
@@ -955,7 +953,6 @@ Callback_PlayerLastStandPredator(eInflictor, attacker, iDamage, sMeansOfDeath, s
     self thread lastStandTimer(CONST_LAST_STAND_TIME);
 
     self notify("predator_lastStand");
-
   } else if(isDefined(level.previousLastStandCallback)) {
     [[level.previousLastStandCallback]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   }
@@ -1094,7 +1091,6 @@ predatorOnEnemyKilled() {
       if(isDefined(sMeansofDeath) && sMeansofDeath == "MOD_MELEE") {
         self predatorMeleeKillEffect(victim);
       }
-
     }
 
   }
@@ -1178,7 +1174,6 @@ predatorPainCry() {
     if(isDefined(attacker) && attacker != self && amount > 10 && self checkTimeStamp("painCry", 1000)) {
       self predatorPlayVo("scn_predator_plr_vocal_pain", "scn_predator_npc_vocal_pain");
     }
-
   }
 }
 
@@ -1269,7 +1264,7 @@ predatorExpDeath() {
   if(isDefined(level.predatorUser)) {
     foreach(character in level.characters) {
       if(predatorExpCanKill(character)) {
-        if(IsPlayer(character)) {
+        if(isPlayer(character)) {
           if(isReallyAlive(character)) {
             character thread maps\mp\gametypes\_damage::finishPlayerDamageWrapper(level.predatorUser, level.predatorUser, 999999, 0, "MOD_EXPLOSIVE", "iw6_predatorsuicide_mp", character.origin, (0, 0, 1), "none", 0, 0);
           }
@@ -1328,11 +1323,10 @@ debugDvarWatcher() {
     value = GetDvarInt(CONST_DEBUG_LASTSTAND_DVAR, 0);
     if(value > 0) {
       self childthread debugLastStand(value);
-      SetDvar(CONST_DEBUG_LASTSTAND_DVAR, 0);
+      setDvar(CONST_DEBUG_LASTSTAND_DVAR, 0);
     }
     wait(0.5);
   }
-
 }
 
 debugLastStand(waitTime) {

@@ -47,12 +47,12 @@ thundergun_devgui_dvar_think() {
   if(!maps\mp\zombies\_zm_weapons::is_weapon_included("thundergun_zm")) {
     return;
   }
-  setdvar("scr_thundergun_cylinder_radius", level.zombie_vars["thundergun_cylinder_radius"]);
-  setdvar("scr_thundergun_fling_range", level.zombie_vars["thundergun_fling_range"]);
-  setdvar("scr_thundergun_gib_range", level.zombie_vars["thundergun_gib_range"]);
-  setdvar("scr_thundergun_gib_damage", level.zombie_vars["thundergun_gib_damage"]);
-  setdvar("scr_thundergun_knockdown_range", level.zombie_vars["thundergun_knockdown_range"]);
-  setdvar("scr_thundergun_knockdown_damage", level.zombie_vars["thundergun_knockdown_damage"]);
+  setDvar("scr_thundergun_cylinder_radius", level.zombie_vars["thundergun_cylinder_radius"]);
+  setDvar("scr_thundergun_fling_range", level.zombie_vars["thundergun_fling_range"]);
+  setDvar("scr_thundergun_gib_range", level.zombie_vars["thundergun_gib_range"]);
+  setDvar("scr_thundergun_gib_damage", level.zombie_vars["thundergun_gib_damage"]);
+  setDvar("scr_thundergun_knockdown_range", level.zombie_vars["thundergun_knockdown_range"]);
+  setDvar("scr_thundergun_knockdown_damage", level.zombie_vars["thundergun_knockdown_damage"]);
 
   for(;;) {
     level.zombie_vars["thundergun_cylinder_radius"] = getdvarint(#"_id_DEA6F730");
@@ -63,7 +63,6 @@ thundergun_devgui_dvar_think() {
     level.zombie_vars["thundergun_knockdown_damage"] = getdvarint(#"_id_EAB5937B");
     wait 0.5;
   }
-
 }
 
 thundergun_on_player_connect() {

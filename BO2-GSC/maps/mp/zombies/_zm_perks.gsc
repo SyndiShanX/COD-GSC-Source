@@ -1461,7 +1461,6 @@ electric_perks_dialog() {
         self notify("warning_dialog");
 
         iprintlnbold("warning_given");
-
       }
     }
   }
@@ -2436,7 +2435,6 @@ perk_pause(perk) {
         player thread[[level._custom_perks[perk].player_thread_take]]();
 
       println(" ZM PERKS " + player.name + " paused perk " + perk + "\\n");
-
     }
   }
 }

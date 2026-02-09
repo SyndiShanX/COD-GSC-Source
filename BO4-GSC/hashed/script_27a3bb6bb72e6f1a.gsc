@@ -314,7 +314,7 @@ function_a29b80e8(e_victim) {
   if(isalive(e_victim) && !(isDefined(e_victim.var_52f07157) && e_victim.var_52f07157) && isDefined(self.var_94de9684) && self.var_94de9684) {
     e_victim.var_52f07157 = 1;
 
-    if(isplayer(e_victim)) {
+    if(isPlayer(e_victim)) {
       if(!e_victim laststand::player_is_in_laststand()) {
         if(!isDefined(e_victim.var_ae0241fd)) {
           e_victim.var_ae0241fd = [];

@@ -6,7 +6,6 @@
 _id_1455(var_0) {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   level._id_1456._id_1457 = spawnStruct();
   level._id_1456._id_1457._id_1458 = 0;
@@ -43,7 +42,6 @@ _id_1461(var_0, var_1) {
       var_2 = var_1;
     } else {
       var_2 = var_0._id_1463;
-
     }
     level.player setreverb(var_0.priority, var_0._id_1464, var_0._id_145E, var_0._id_1460, var_2);
   }
@@ -90,7 +88,6 @@ _id_1465(var_0, var_1) {
 
   if(var_0 != "deathsdoor") {
     _id_1468(var_0, var_2);
-
   }
   if(level._id_1456._id_1457._id_145A != var_0) {
     level._id_1456._id_1457._id_145A = var_0;
@@ -127,7 +124,6 @@ _id_146C() {
 
   if(isDefined(level._id_1456._id_1457._id_1462)) {
     var_0 = level._id_1456._id_1457._id_1462;
-
   }
   return var_0;
 }
@@ -139,11 +135,9 @@ _id_146D(var_0, var_1) {
 
   if(var_1) {
     var_4 = _id_146F(var_2, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = _id_146F(var_3, var_0);
-
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -177,7 +171,6 @@ _id_146F(var_0, var_1) {
 _id_1470() {
   while(!isDefined(level.player)) {
     wait 0.5;
-
   }
   _id_1461(level._id_1456._id_1457._id_1471);
 }
@@ -185,7 +178,6 @@ _id_1470() {
 _id_1472(var_0) {
   if(!isDefined(level._id_1456._id_1457._id_1473)) {
     level._id_1456._id_1457._id_1473 = [];
-
   }
   var_1 = _id_1476();
   var_2 = [];
@@ -206,7 +198,6 @@ _id_1472(var_0) {
 
     if(!isDefined(var_2) || var_2.size == 0) {
       var_2 = maps\_audio::_id_1475(var_0, var_2);
-
     }
     if(!isDefined(var_2)) {
       return;

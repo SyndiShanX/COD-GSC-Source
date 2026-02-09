@@ -118,7 +118,7 @@ death_check_for_challenge_updates(e_attacker) {
     return;
   }
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 
@@ -555,7 +555,6 @@ function perk_drink_tracking() {
     self waittill(#"perk_bought");
 
     self debug_print("<dev string:x873>");
-
   }
 }
 

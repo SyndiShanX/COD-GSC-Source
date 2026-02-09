@@ -368,7 +368,7 @@ enemy_event_declare_to_team(type, name) {
     if(!isDefined(other)) {
       continue;
     }
-    if(isplayer(other) || (isDefined(other.team) && other.team != team)) {
+    if(isPlayer(other) || (isDefined(other.team) && other.team != team)) {
       break;
     }
   }

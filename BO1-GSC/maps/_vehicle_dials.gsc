@@ -22,7 +22,6 @@ add_dial_vehicle(base_anim) {
   self thread update_dial_anims();
   self thread cleanup_dial_anims();
 }
-
 add_animated_dial(dial_name, dial_anim, value_func) {
   if(!isDefined(self.vehicletype)) {
     PrintLn("^1WARNING: Trying to add dial anims for a non-vehicle entity!");
@@ -37,7 +36,6 @@ add_animated_dial(dial_name, dial_anim, value_func) {
   level.dial_animations[self.vehicletype][dial_name]["func"] = value_func;
   self SetAnim(dial_anim, 1, 0, 0);
 }
-
 update_dial_anims() {
   self endon("kill_dials");
   self endon("death");
@@ -57,7 +55,6 @@ update_dial_anims() {
     wait(0.05);
   }
 }
-
 cleanup_dial_anims() {
   self waittill("death");
   if(isDefined(self)) {

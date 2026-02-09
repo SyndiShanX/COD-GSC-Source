@@ -27,10 +27,10 @@ function main() {
 
 function function_db2629eb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    setdvar("", 0);
-    setdvar("", 10.64);
+    setDvar("", 0);
+    setDvar("", 10.64);
   } else {
-    setdvar("", 1);
+    setDvar("", 1);
   }
 }
 

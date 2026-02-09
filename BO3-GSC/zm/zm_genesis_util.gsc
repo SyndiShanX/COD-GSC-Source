@@ -408,13 +408,13 @@ function function_3a7a7013(n_rumbletype, n_radius, v_origin, var_d00db512) {
 }
 
 function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value = -1) {
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   adddebugcommand(((((("devgui_cmd \"" + str_devgui_path) + "\" \"") + str_dvar) + " ") + n_value) + "\"\n");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }
@@ -596,7 +596,7 @@ function function_88777efd(str_trigger, str_flag) {
   level flag::init(str_flag);
   while(true) {
     t_trigger waittill("trigger", e_triggerer);
-    if(!isplayer(e_triggerer)) {
+    if(!isPlayer(e_triggerer)) {
       wait(0.1);
       continue;
     }

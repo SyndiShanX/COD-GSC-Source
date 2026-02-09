@@ -361,7 +361,6 @@ show_exploder_models_proc(num) {
         if(isDefined(ent.brush_shown)) {
           ent.model Show();
         }
-
       }
     }
   }
@@ -472,10 +471,8 @@ hide_exploder_models_proc(num) {
       if(isDefined(ent.model)) {
         ent.model Hide();
       }
-
     }
   }
-
 }
 
 delete_exploder_proc(num) {
@@ -920,7 +917,6 @@ activate_exploder(num, players, startTime) {
   if(!shouldRunServerSideEffects() && !found_server_exploder) {
     activate_clientside_exploder(num, players, startTime);
   }
-
 }
 
 exploder(num, players, startTime) {
@@ -947,8 +943,7 @@ check_exploder_platform() {
   ent = self;
   if(isDefined(ent.v["platform"]) && isDefined(level.currentgen)) {
     platform = ent.v["platform"];
-    if((platform == "cg" && !level.currentgen) ||
-      (platform == "ng" && !level.nextgen)) {
+    if((platform == "cg" && !level.currentgen) || (platform == "ng" && !level.nextgen)) {
       return false;
     }
   }
@@ -997,13 +992,13 @@ shouldRunServerSideEffects() {
   }
 
   if(!isDefined(level.createFX_enabled)) {
-    level.createFX_enabled = (GetDvar("createfx") != "");
+    level.createFX_enabled = (getDvar("createfx") != "");
   }
 
   if(level.createFX_enabled) {
     return true;
   } else {
-    return GetDvar("clientSideEffects") != "1";
+    return getDvar("clientSideEffects") != "1";
   }
 }
 

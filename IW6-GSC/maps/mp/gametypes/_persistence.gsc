@@ -292,7 +292,6 @@ updateBufferedStats() {
     player writeBufferedStats();
     player updateWeaponBufferedStats();
   }
-
 }
 
 writeBufferedStats() {

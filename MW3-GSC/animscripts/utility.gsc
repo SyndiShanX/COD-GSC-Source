@@ -6,12 +6,11 @@
 #using_animtree("generic_human");
 
 _id_2479(var_0) {
-  self clearanim( % body, 0.3);
-  self setanim( % body, 1, 0);
+  self clearanim(%body, 0.3);
+  self setanim(%body, 1, 0);
 
   if(var_0 != "pain" && var_0 != "death") {
     self.a._id_0D19 = "none";
-
   }
   self._id_247A = 0;
   self.a._id_0CC3 = 1.0;
@@ -26,12 +25,11 @@ _id_247B() {
   if(isDefined(self._id_247C) && self._id_247C != self.a._id_0D26) {
     if(self.a._id_0D26 == "prone") {
       _id_0F7D(0.5);
-
     }
     if(self._id_247C == "prone") {
-      self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+      self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
       _id_10E1(0.5);
-      self setanimknoball( % prone_aim_5, % body, 1, 0.1, 1);
+      self setanimknoball(%prone_aim_5, %body, 1, 0.1, 1);
     }
   }
 
@@ -42,7 +40,6 @@ _id_0D15(var_0) {
   if(isDefined(self._id_0D0F)) {
     if(var_0 != "pain" && var_0 != "death") {
       self kill(self.origin);
-
     }
     if(var_0 != "pain") {
       self._id_0D0F = undefined;
@@ -52,7 +49,6 @@ _id_0D15(var_0) {
 
   if(isDefined(self.a._id_0D6A) && var_0 != "death") {
     self kill(self.origin);
-
   }
   if(isDefined(self.a._id_20AD)) {
     var_1 = self.a._id_20AD;
@@ -61,20 +57,16 @@ _id_0D15(var_0) {
   }
 
   if(var_0 != "combat" && var_0 != "pain" && var_0 != "death" && _id_0C95()) {
-    animscripts\combat::_id_1159( % pistol_stand_switch, 1);
-
+    animscripts\combat::_id_1159(%pistol_stand_switch, 1);
   }
   if(var_0 != "combat" && var_0 != "move" && var_0 != "pain") {
     self.a._id_1111 = undefined;
-
   }
   if(var_0 != "death") {
     self.a._id_0D55 = 0;
-
   }
   if(isDefined(self._id_23A0) && (var_0 == "pain" || var_0 == "death" || var_0 == "flashed")) {
     animscripts\combat_utility::_id_23AA();
-
   }
   self._id_23A0 = undefined;
   animscripts\squadmanager::_id_0A96(var_0);
@@ -88,7 +80,6 @@ _id_0D15(var_0) {
 
   if(isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand")) {
     self.a._id_0CE2 = 1;
-
   }
   _id_2479(var_0);
   _id_247B();
@@ -131,7 +122,6 @@ _id_247E() {
 _id_0A69() {
   if(self.alertlevelint > 1) {
     return 1;
-
   }
   if(isDefined(self.enemy)) {
     self.a._id_20A9 = gettime() + anim._id_20CA + randomint(anim._id_20CB);
@@ -172,7 +162,6 @@ _id_2480(var_0) {
     var_1 = self.node.angles[1] - _id_101A(var_0);
   } else {
     var_1 = self.angles[1] - _id_101A(var_0);
-
   }
   var_1 = angleclamp180(var_1);
   return var_1;
@@ -188,7 +177,6 @@ _id_116D() {
       var_1 = anglesToForward(self.node.angles);
     } else {
       var_1 = anglesToForward(self.angles);
-
     }
     var_1 = var_1 * 150;
     var_0 = self.origin + var_1;
@@ -198,7 +186,6 @@ _id_116D() {
     var_2 = self.node.angles[1] - _id_101A(var_0);
   } else {
     var_2 = self.angles[1] - _id_101A(var_0);
-
   }
   var_2 = angleclamp180(var_2);
   return var_2;
@@ -241,7 +228,6 @@ _id_2482() {
 
   if(var_0 < 0) {
     var_0 = -1 * var_0;
-
   }
   return var_0;
 }
@@ -252,7 +238,6 @@ _id_2483() {
 
   if(var_0 < 0) {
     var_0 = -1 * var_0;
-
   }
   return var_0;
 }
@@ -263,7 +248,6 @@ _id_2484(var_0) {
 
   if(var_1 < 0) {
     var_1 = -1 * var_1;
-
   }
   return var_1;
 }
@@ -274,7 +258,6 @@ _id_2485(var_0) {
 
   if(var_1 < 0) {
     var_1 = -1 * var_1;
-
   }
   return var_1;
 }
@@ -305,7 +288,6 @@ _id_2488(var_0) {
 _id_2489(var_0) {
   if(isDefined(self._id_0CAF)) {
     return self._id_0CAF doesnodeallowstance(var_0);
-
   }
   return self isstanceallowed(var_0);
 }
@@ -313,7 +295,6 @@ _id_2489(var_0) {
 _id_10AF(var_0) {
   if(!isDefined(var_0)) {
     var_0 = self.a._id_0D26;
-
   }
   switch (var_0) {
     case "stand":
@@ -325,7 +306,6 @@ _id_10AF(var_0) {
         var_1 = "prone";
       } else {
         var_1 = "stand";
-
       }
       break;
     case "crouch":
@@ -337,7 +317,6 @@ _id_10AF(var_0) {
         var_1 = "prone";
       } else {
         var_1 = "crouch";
-
       }
       break;
     case "prone":
@@ -349,7 +328,6 @@ _id_10AF(var_0) {
         var_1 = "stand";
       } else {
         var_1 = "prone";
-
       }
       break;
     default:
@@ -365,7 +343,6 @@ _id_0BEE() {
 
   if(isDefined(var_0) && (self nearnode(var_0) || isDefined(self._id_0CAF) && var_0 == self._id_0CAF)) {
     return var_0;
-
   }
   return undefined;
 }
@@ -375,7 +352,6 @@ _id_248A() {
 
   if(isDefined(var_0)) {
     return var_0.type;
-
   }
   return "none";
 }
@@ -385,7 +361,6 @@ _id_2472() {
 
   if(isDefined(var_0)) {
     return var_0.angles[1];
-
   }
   return self.desiredangle;
 }
@@ -395,7 +370,6 @@ _id_248B() {
 
   if(isDefined(var_0)) {
     return anglesToForward(var_0.angles);
-
   }
   return anglesToForward(self.angles);
 }
@@ -405,7 +379,6 @@ _id_2473() {
 
   if(isDefined(var_0)) {
     return var_0.origin;
-
   }
   return self.origin;
 }
@@ -467,7 +440,6 @@ _id_243A(var_0) {
     var_1 = "back";
   } else {
     var_1 = "right";
-
   }
   return var_1;
 }
@@ -484,7 +456,7 @@ _id_248C(var_0, var_1) {
 
 _id_248D(var_0) {
   if(isDefined(var_0)) {
-    self setflaggedanimknoballrestart("playAnim", var_0, % root, 1, 0.1, 1);
+    self setflaggedanimknoballrestart("playAnim", var_0, %root, 1, 0.1, 1);
     var_1 = getanimlength(var_0);
     var_1 = 3 * var_1 + 1;
     thread _id_248E("time is up", "time is up", var_1);
@@ -529,7 +501,6 @@ _id_2491(var_0) {
     var_1 = (0.4, 0.7, 1);
   } else {
     var_1 = (1, 0.7, 0.4);
-
   }
   for(;;) {
     wait 0.05;
@@ -563,7 +534,6 @@ _id_2492() {
 _id_2495() {
   if(!_id_0F8C()) {
     return 0;
-
   }
   var_0 = self getmuzzlepos();
   var_1 = self getshootatpos() - var_0;
@@ -602,7 +572,6 @@ _id_2497(var_0, var_1, var_2) {
     var_4 = (0.4, 0.7, 1);
   } else {
     var_4 = (1, 0.7, 0.4);
-
   }
   for(;;) {
     wait 0.05;
@@ -629,7 +598,6 @@ _id_249A(var_0, var_1) {
     var_3 = "med burst";
   } else {
     var_3 = "long burst";
-
   }
   thread _id_2499(self.origin + (0, 0, 42), var_3, 1.5);
   thread _id_2498(self.origin + (0, 0, 60), "Suppressing");
@@ -724,7 +692,6 @@ _id_24A0() {
 
   if(isDefined(var_4) && isDefined(var_4.origin)) {
     var_4 unlink();
-
   }
   var_0 delete();
 }
@@ -802,11 +769,9 @@ _id_24A3() {
 _id_0F4C() {
   if(isDefined(self._id_24A4)) {
     return self._id_24A4;
-
   }
   if(self.suppressionmeter <= self._id_0CFB) {
     return 0;
-
   }
   return self issuppressed();
 }
@@ -814,7 +779,6 @@ _id_0F4C() {
 _id_0F62() {
   if(self.suppressionmeter <= self._id_0CFB * 0.25) {
     return 0;
-
   }
   return self issuppressed();
 }
@@ -822,7 +786,6 @@ _id_0F62() {
 _id_0F8E(var_0) {
   if(isDefined(var_0.offset)) {
     return var_0.offset;
-
   }
   var_1 = (-26, 0.4, 36);
   var_2 = (-32, 7, 63);
@@ -841,7 +804,6 @@ _id_0F8E(var_0) {
         var_8 = _id_24A5(var_9, var_10, var_1);
       } else {
         var_8 = _id_24A5(var_9, var_10, var_2);
-
       }
       break;
     case "Cover Right":
@@ -849,7 +811,6 @@ _id_0F8E(var_0) {
         var_8 = _id_24A5(var_9, var_10, var_3);
       } else {
         var_8 = _id_24A5(var_9, var_10, var_4);
-
       }
       break;
     case "Turret":
@@ -879,12 +840,10 @@ _id_0CBC() {
 _id_0CE3(var_0) {
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   if(isDefined(var_0) && self cansee(self.enemy, var_0) || self cansee(self.enemy)) {
     if(!_id_24A6(self getEye(), self.enemy getshootatpos())) {
       return 0;
-
     }
     self._id_199F = _id_0FB8();
     _id_24A7();
@@ -906,7 +865,6 @@ _id_0F4A() {
     var_1 = self cansee(self.enemy);
   } else {
     var_1 = _id_117A(var_0, self.node);
-
   }
   if(var_1) {
     self._id_199F = var_0;
@@ -928,7 +886,6 @@ _id_117A(var_0, var_1) {
 
   if(!_id_24A6(var_3, var_0, var_1)) {
     return 0;
-
   }
   if(!sighttracepassed(var_3, var_0, 0, undefined)) {
     if(var_1.type == "Cover Crouch" || var_1.type == "Conceal Crouch") {
@@ -949,12 +906,10 @@ _id_24A6(var_0, var_1, var_2) {
 
   if(var_5 > var_4) {
     return 0;
-
   }
   if(var_5 < var_3) {
     if(isDefined(var_2) && var_2.type != "Cover Crouch" && var_2.type != "Conceal Crouch") {
       return 0;
-
     }
     if(var_5 < anim._id_0CAD + var_3) {
       return 0;
@@ -971,7 +926,6 @@ _id_24A7() {
 _id_24A9() {
   if(!isDefined(self.a._id_24A8)) {
     self.a._id_24A8 = 1;
-
   }
   if(self.a._id_24A8) {
     self.a._id_24AA = gettime() + randomintrange(15000, 30000);
@@ -989,7 +943,6 @@ _id_24AB(var_0, var_1, var_2) {
 _id_24AC() {
   if(!self canattackenemynode()) {
     return 0;
-
   }
   var_0 = undefined;
 
@@ -998,11 +951,9 @@ _id_24AC() {
     var_0 = self.enemy.node.origin + var_1;
   } else {
     var_0 = self.enemy getshootatpos();
-
   }
   if(!self canshoot(var_0)) {
     return 0;
-
   }
   if(self.script == "combat") {
     if(!sighttracepassed(self getEye(), self getmuzzlepos(), 0, undefined)) {
@@ -1020,9 +971,8 @@ _id_0F39() {
     return 0;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return _id_24AC();
-
   }
   if(isDefined(self.node)) {
     if(self.node.type == "Cover Left" || self.node.type == "Cover Right") {
@@ -1035,11 +985,9 @@ _id_0F39() {
     var_1 = self.node.origin + var_0;
   } else {
     var_1 = self getmuzzlepos();
-
   }
   if(!_id_24A6(var_1, self.lastenemysightpos)) {
     return 0;
-
   }
   return _id_24B2(var_1);
 }
@@ -1050,15 +998,13 @@ _id_0CF3() {
     return 0;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return _id_24AC();
-
   }
   var_0 = self getmuzzlepos();
 
   if(!_id_24A6(var_0, self.lastenemysightpos)) {
     return 0;
-
   }
   return _id_24B2(var_0);
 }
@@ -1066,21 +1012,17 @@ _id_0CF3() {
 _id_24AD() {
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   if(!isDefined(self.lastenemysightpos)) {
     return 0;
-
   }
   _id_24A9();
 
   if(gettime() > self.a._id_24AA) {
     return 0;
-
   }
   if(!_id_24AF()) {
     return isDefined(self._id_199F);
-
   }
   return 1;
 }
@@ -1088,11 +1030,9 @@ _id_24AD() {
 _id_24AE(var_0) {
   if(!sighttracepassed(self getshootatpos(), var_0, 0, undefined)) {
     return 0;
-
   }
   if(self.a._id_0EE4["right"] == "none") {
     return 0;
-
   }
   var_1 = self getmuzzlepos();
   return sighttracepassed(var_1, var_0, 0, undefined);
@@ -1101,7 +1041,6 @@ _id_24AE(var_0) {
 _id_24AF() {
   if(isDefined(self._id_199F) && !_id_24AE(self._id_199F)) {
     return 1;
-
   }
   return !isDefined(self._id_24B0) || self._id_24B0 != self.lastenemysightpos || distancesquared(self._id_24B1, self.origin) > 1024;
 }
@@ -1109,7 +1048,6 @@ _id_24AF() {
 _id_24B2(var_0) {
   if(!_id_24AF()) {
     return isDefined(self._id_199F);
-
   }
   if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > squared(self.enemy.maxvisibledist)) {
     self._id_199F = undefined;
@@ -1134,11 +1072,9 @@ _id_24B2(var_0) {
 
   if(var_7 < 1) {
     var_7 = 1;
-
   }
   if(var_7 > 20) {
     var_7 = 20;
-
   }
   var_8 = self.lastenemysightpos - var_3;
   var_8 = (var_8[0] / var_7, var_8[1] / var_7, var_8[2] / var_7);
@@ -1154,7 +1090,6 @@ _id_24B2(var_0) {
 
     if(var_12 == var_7 - 1) {
       var_8 = var_8 - var_5 * vectordot(var_8, var_5);
-
     }
     var_9 = var_9 + var_8;
 
@@ -1180,14 +1115,12 @@ _id_10FF(var_0, var_1) {
 
   if(var_2 == 1) {
     return var_0[0];
-
   }
   var_4 = 0;
   var_5 = 0;
 
   for(var_6 = 0; var_6 < var_2; var_6++) {
     var_5 = var_5 + var_1[var_6];
-
   }
   var_7 = randomfloat(var_5);
   var_8 = 0;
@@ -1235,7 +1168,6 @@ _id_239F() {
 _id_24B6(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 500;
-
   }
   return gettime() - self._id_24B7 < var_0;
 }
@@ -1243,13 +1175,11 @@ _id_24B6(var_0) {
 _id_24B8() {
   if(!self.grenadeammo) {
     return 0;
-
   }
   if(self._id_20B5) {
     return 1;
-
   }
-  return isplayer(self.enemy);
+  return isPlayer(self.enemy);
 }
 
 _id_24B9() {
@@ -1264,7 +1194,6 @@ _id_24BA(var_0) {
 
     for(var_3 = 0; var_3 < var_0.size; var_3++) {
       var_2 = var_2 + var_0[var_3];
-
     }
     var_4 = randomfloat(var_2);
     var_2 = 0;
@@ -1285,7 +1214,6 @@ _id_24BA(var_0) {
 _id_24BB(var_0, var_1) {
   if(!isDefined(anim._id_20D1)) {
     anim._id_20D1 = [];
-
   }
   anim._id_20D1[anim._id_20D1.size] = var_0;
   level._effect["step_" + var_0] = var_1;
@@ -1294,7 +1222,6 @@ _id_24BB(var_0, var_1) {
 _id_24BC(var_0, var_1) {
   if(!isDefined(anim._id_20D2)) {
     anim._id_20D2 = [];
-
   }
   anim._id_20D2[anim._id_20D2.size] = var_0;
   level._effect["step_small_" + var_0] = var_1;
@@ -1303,11 +1230,9 @@ _id_24BC(var_0, var_1) {
 _id_24BD(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_2)) {
     var_2 = "all";
-
   }
   if(!isDefined(level._id_1E89)) {
     level._id_1E89 = [];
-
   }
   level._id_1E89[var_0][var_2] = spawnStruct();
   level._id_1E89[var_0][var_2].tag = var_1;
@@ -1315,7 +1240,6 @@ _id_24BD(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     level._id_1E89[var_0][var_2]._id_23FC = var_4;
-
   }
   if(isDefined(var_5)) {
     level._id_1E89[var_0][var_2]._id_23FD = var_5;
@@ -1367,19 +1291,15 @@ _id_24C0(var_0) {
 _id_0F65() {
   if(self.a._id_0CE2) {
     return 0;
-
   }
   if(!animscripts\weaponlist::_id_0CCA()) {
     return 0;
-
   }
   if(weaponclass(self.weapon) == "mg") {
     return 0;
-
   }
   if(isDefined(self._id_24C1) && self._id_24C1 == 1) {
     return 0;
-
   }
   return 1;
 }
@@ -1387,7 +1307,6 @@ _id_0F65() {
 _id_24C2() {
   if(!_id_0F8C()) {
     return 0;
-
   }
   var_0 = self getmuzzlepos();
   return sighttracepassed(var_0, _id_0CEE(), 0, undefined);
@@ -1425,83 +1344,69 @@ _id_0C6D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_14[0] = var_0;
   } else {
     return var_14;
-
   }
   if(isDefined(var_1)) {
     var_14[1] = var_1;
   } else {
     return var_14;
-
   }
   if(isDefined(var_2)) {
     var_14[2] = var_2;
   } else {
     return var_14;
-
   }
   if(isDefined(var_3)) {
     var_14[3] = var_3;
   } else {
     return var_14;
-
   }
   if(isDefined(var_4)) {
     var_14[4] = var_4;
   } else {
     return var_14;
-
   }
   if(isDefined(var_5)) {
     var_14[5] = var_5;
   } else {
     return var_14;
-
   }
   if(isDefined(var_6)) {
     var_14[6] = var_6;
   } else {
     return var_14;
-
   }
   if(isDefined(var_7)) {
     var_14[7] = var_7;
   } else {
     return var_14;
-
   }
   if(isDefined(var_8)) {
     var_14[8] = var_8;
   } else {
     return var_14;
-
   }
   if(isDefined(var_9)) {
     var_14[9] = var_9;
   } else {
     return var_14;
-
   }
   if(isDefined(var_10)) {
     var_14[10] = var_10;
   } else {
     return var_14;
-
   }
   if(isDefined(var_11)) {
     var_14[11] = var_11;
   } else {
     return var_14;
-
   }
   if(isDefined(var_12)) {
     var_14[12] = var_12;
   } else {
     return var_14;
-
   }
   if(isDefined(var_13)) {
     var_14[13] = var_13;
-
   }
   return var_14;
 }
@@ -1547,7 +1452,6 @@ _id_24C7() {
 _id_24C8(var_0) {
   if(isDefined(self.weaponinfo[var_0])) {
     return 1;
-
   }
   return 0;
 }
@@ -1560,91 +1464,69 @@ _id_0F99(var_0) {
 _id_0D2F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(self.damagelocation == var_0) {
     return 1;
-
   }
   if(!isDefined(var_1)) {
     return 0;
-
   }
   if(self.damagelocation == var_1) {
     return 1;
-
   }
   if(!isDefined(var_2)) {
     return 0;
-
   }
   if(self.damagelocation == var_2) {
     return 1;
-
   }
   if(!isDefined(var_3)) {
     return 0;
-
   }
   if(self.damagelocation == var_3) {
     return 1;
-
   }
   if(!isDefined(var_4)) {
     return 0;
-
   }
   if(self.damagelocation == var_4) {
     return 1;
-
   }
   if(!isDefined(var_5)) {
     return 0;
-
   }
   if(self.damagelocation == var_5) {
     return 1;
-
   }
   if(!isDefined(var_6)) {
     return 0;
-
   }
   if(self.damagelocation == var_6) {
     return 1;
-
   }
   if(!isDefined(var_7)) {
     return 0;
-
   }
   if(self.damagelocation == var_7) {
     return 1;
-
   }
   if(!isDefined(var_8)) {
     return 0;
-
   }
   if(self.damagelocation == var_8) {
     return 1;
-
   }
   if(!isDefined(var_9)) {
     return 0;
-
   }
   if(self.damagelocation == var_9) {
     return 1;
-
   }
   if(!isDefined(var_10)) {
     return 0;
-
   }
   if(self.damagelocation == var_10) {
     return 1;
-
   }
   return 0;
 }
@@ -1738,11 +1620,9 @@ _id_1078(var_0, var_1) {
 _id_104B() {
   if(_id_24C6()) {
     return "secondary";
-
   }
   if(_id_0C95()) {
     return "sidearm";
-
   }
   return "primary";
 }

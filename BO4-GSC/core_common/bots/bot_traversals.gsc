@@ -179,7 +179,6 @@ analyze(params) {
     recordsphere(params.starttrace, 3, (0, 1, 0), "<dev string:x163>", self);
     recordsphere(params.targetpos, 3, (1, 0, 1), "<dev string:x163>", self);
   }
-
 }
 
 function_51cbae24(params) {

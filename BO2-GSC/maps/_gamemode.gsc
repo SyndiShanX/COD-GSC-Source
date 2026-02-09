@@ -4,7 +4,7 @@
 **************************************/
 
 shouldsaveonstartup() {
-  gt = getdvar(#"g_gametype");
+  gt = getDvar(#"g_gametype");
 
   switch (gt) {
     case "vs":

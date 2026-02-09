@@ -16,7 +16,7 @@ main() {
   level.virtualLobbyActive = GetDvarInt("virtualLobbyActive", 0);
 
   set_console_status();
-  level.createFX_enabled = (getdvar("createfx") != "");
+  level.createFX_enabled = (getDvar("createfx") != "");
 
   struct_class_init();
 
@@ -80,7 +80,7 @@ main() {
     maps\mp\_createfx::createfx();
   }
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     deleteDuringReflectionProbeGeneration();
     maps\mp\gametypes\_spawnlogic::setMapCenterForDev();
     maps\mp\_global_fx::main();
@@ -153,7 +153,7 @@ main() {
   setDvar("r_lightGridIntensity", 1);
   setDvar("r_lightGridContrast", 0);
   setDvar("r_dof_physical_enable", 1);
-  setdvar("r_volumeLightScatter", 0);
+  setDvar("r_volumeLightScatter", 0);
   setDvar("r_uiblurdstmode", 0);
   setDvar("r_blurdstgaussianblurradius", 1);
   setDvar("r_dof_physical_bokehEnable", 0);
@@ -347,7 +347,7 @@ hurtPlayersThink() {
 setupDestructibleKillCamEnts() {
   destructible_vehicles = getEntArray("destructible_vehicle", "targetname");
   foreach(dest in destructible_vehicles) {
-    switch (GetDvar("mapname")) {
+    switch (getDvar("mapname")) {
       case "mp_interchange":
 
         if(dest.origin[2] > 150.0) {
@@ -386,7 +386,6 @@ setupDestructibleKillCamEnts() {
     dest.killCamEnt SetScriptMoverKillCam("explosive");
     dest thread deleteDestructibleKillCamEnt();
   }
-
 }
 
 deleteDestructibleKillCamEnt() {
@@ -440,9 +439,7 @@ load_costume_indices() {
     return;
   }
 
-  level.costumeCategories = [
-    "gender", "shirt", "head", "pants", "gloves", "shoes", "kneepads", "gear", "hat", "eyewear", "exo"
-  ];
+  level.costumeCategories = ["gender", "shirt", "head", "pants", "gloves", "shoes", "kneepads", "gear", "hat", "eyewear", "exo"];
 
   level.costumeCat2Idx = [];
   for(i = 0; i < level.costumeCategories.size; i++) {

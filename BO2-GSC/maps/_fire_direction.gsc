@@ -73,10 +73,11 @@ rod_precache() {
     s_data.notify_grid_on = "grid_shader_on_god_rod";
     s_data.notify_grid_off = "grid_shader_off_god_rod";
 
-    if(isDefined(level.wiiu))
+    if(isDefined(level.wiiu)) {
       s_data.str_hint = &"SCRIPT_GOD_ROD_WIIU";
-    else
+    } else {
       s_data.str_hint = &"SCRIPT_GOD_ROD";
+    }
 
     level._fire_direction.a_weapons["god_rod_glove_sp"] = s_data;
   }
@@ -103,10 +104,11 @@ get_default_fire_direction_weapon() {
 }
 
 init_fire_direction(str_weapon) {
-  assert(isplayer(self), "fire_direction feature can only be enabled on players!");
+  assert(isPlayer(self), "fire_direction feature can only be enabled on players!");
 
-  if(!isDefined(str_weapon))
+  if(!isDefined(str_weapon)) {
     str_weapon = get_default_fire_direction_weapon();
+  }
 
   switch (str_weapon) {
     case "claw_glove_sp":
@@ -137,14 +139,16 @@ init_fire_direction(str_weapon) {
 add_fire_direction_shooter(e_shooter, str_weapon) {
   assert(isDefined(e_shooter), "e_shooter is a required parameter for add_fire_direction_shooter function");
 
-  if(!isDefined(str_weapon))
+  if(!isDefined(str_weapon)) {
     str_weapon = get_default_fire_direction_weapon();
+  }
 
   level.player giveweapon(str_weapon);
   weapon_info = level._fire_direction.a_weapons[str_weapon];
 
-  if(weapon_info.a_shooters.size > 0)
+  if(weapon_info.a_shooters.size > 0) {
     weapon_info.a_shooters = array_removedead(weapon_info.a_shooters);
+  }
 
   weapon_info.a_shooters[weapon_info.a_shooters.size] = e_shooter;
   e_shooter thread _fire_direction_shooter_death(str_weapon);
@@ -154,19 +158,22 @@ _fire_direction_shooter_death(str_weapon) {
   self waittill("death");
   a_shooters = get_fire_direction_shooters(str_weapon);
 
-  if(a_shooters.size == 0)
+  if(a_shooters.size == 0) {
     level.player thread _take_weapon(str_weapon, 1);
+  }
 }
 
 get_fire_direction_shooters(str_weapon) {
-  if(!isDefined(str_weapon))
+  if(!isDefined(str_weapon)) {
     str_weapon = get_default_fire_direction_weapon();
+  }
 
   if(isDefined(level._fire_direction.a_weapons) && isDefined(level._fire_direction.a_weapons[str_weapon])) {
     weapon_info = level._fire_direction.a_weapons[str_weapon];
 
-    if(weapon_info.a_shooters.size > 0)
+    if(weapon_info.a_shooters.size > 0) {
       weapon_info.a_shooters = array_removedead(weapon_info.a_shooters);
+    }
 
     return weapon_info.a_shooters;
   }
@@ -177,49 +184,56 @@ get_fire_direction_shooters(str_weapon) {
 add_fire_direction_func(fire_direction_func, str_weapon) {
   assert(isDefined(level._fire_direction), "fire_direction is not set up. Run maps_fire_direction::init before add_fire_direction_func!");
 
-  if(!isDefined(str_weapon))
+  if(!isDefined(str_weapon)) {
     str_weapon = get_default_fire_direction_weapon();
+  }
 
   assert(isDefined(level._fire_direction.a_weapons[str_weapon]), "fire_direction is not set up for this weapon! Make sure to use the correct precache call");
   level._fire_direction.a_weapons[str_weapon].fire_func = fire_direction_func;
 }
 
 _fire_direction_enable(b_shouldhint) {
-  if(!isDefined(b_shouldhint))
+  if(!isDefined(b_shouldhint)) {
     b_shouldhint = 0;
+  }
 
-  assert(isplayer(self), "_fire_direction_enable can only be called on players!");
+  assert(isPlayer(self), "_fire_direction_enable can only be called on players!");
   a_str_weapon_keys = getarraykeys(level._fire_direction.a_weapons);
 
   foreach(str_weapon in a_str_weapon_keys) {
     self giveweapon(str_weapon);
 
-    if(flag("fire_direction_disabled"))
+    if(flag("fire_direction_disabled")) {
       flag_clear("fire_direction_disabled");
+    }
   }
 
-  if(b_shouldhint == 1)
+  if(b_shouldhint == 1) {
     self thread _hint_text(str_weapon);
+  }
 }
 
 _fire_direction_disable() {
-  assert(isplayer(self), "_fire_direction_disable can only be called on players!");
+  assert(isPlayer(self), "_fire_direction_disable can only be called on players!");
   flag_set("fire_direction_disabled");
 
-  if(level._fire_direction.hint_active)
+  if(level._fire_direction.hint_active) {
     screen_message_delete();
+  }
 
   a_str_weapon_keys = getarraykeys(level._fire_direction.a_weapons);
 
-  foreach(str_weapon in a_str_weapon_keys)
-  self takeweapon(str_weapon);
+  foreach(str_weapon in a_str_weapon_keys) {
+    self takeweapon(str_weapon);
+  }
 
   level notify("fire_direction_stop_hint");
 }
 
 _fire_direction_remove_hint() {
-  if(level._fire_direction.hint_active)
+  if(level._fire_direction.hint_active) {
     screen_message_delete();
+  }
 
   level notify("fire_direction_stop_hint");
 }
@@ -229,19 +243,21 @@ is_fire_direction_active() {
 }
 
 _fire_direction_kill() {
-  assert(isplayer(self), "_fire_direction_kill can only be called on players!");
+  assert(isPlayer(self), "_fire_direction_kill can only be called on players!");
   flag_set("fire_direction_disabled");
 
   if(maps\_fire_direction::is_fire_direction_active()) {
     flag_clear("fire_direction_shader_on");
 
-    if(isDefined(level._fire_direction.a_weapons["god_rod_glove_sp"]))
+    if(isDefined(level._fire_direction.a_weapons["god_rod_glove_sp"])) {
       screen_message_create(&"SCRIPT_GOD_ROD_OFFLINE", undefined, undefined, undefined, 3);
+    }
 
     a_keys = getarraykeys(level._fire_direction.a_weapons);
 
-    foreach(key in a_keys)
-    clientnotify(level._fire_direction.a_weapons[key].notify_grid_off);
+    foreach(key in a_keys) {
+      clientnotify(level._fire_direction.a_weapons[key].notify_grid_off);
+    }
 
     self switchtoweapon(level.str_weapon_last);
     level.player _fire_direction_remove_weapons();
@@ -257,33 +273,37 @@ _fire_direction_cleanup() {
   flag_delete("fire_direction_shader_on");
   flag_delete("fire_direction_target_confirmed");
 
-  if(isDefined(level._fire_direction.m_aimpoint))
+  if(isDefined(level._fire_direction.m_aimpoint)) {
     level._fire_direction.m_aimpoint delete();
+  }
 
   a_str_keys = getarraykeys(level._fire_direction.a_weapons);
 
-  foreach(str_key in a_str_keys)
-  level._fire_direction.a_weapons[str_key] = undefined;
+  foreach(str_key in a_str_keys) {
+    level._fire_direction.a_weapons[str_key] = undefined;
+  }
 
   level._fire_direction.a_weapons = undefined;
   level._fire_direction.current_weapon = undefined;
 }
 
 _fire_direction_remove_weapons() {
-  assert(isplayer(self), "_fire_direction_kill can only be called on players!");
+  assert(isPlayer(self), "_fire_direction_kill can only be called on players!");
   level notify("_fire_direction_kill");
   a_str_weapon_keys = getarraykeys(level._fire_direction.a_weapons);
 
-  foreach(str_weapon in a_str_weapon_keys)
-  self takeweapon(str_weapon);
+  foreach(str_weapon in a_str_weapon_keys) {
+    self takeweapon(str_weapon);
+  }
 }
 
 is_fire_direction_weapon(str_weapon) {
   a_str_weapon_keys = getarraykeys(level._fire_direction.a_weapons);
 
   foreach(str_weapon_key in a_str_weapon_keys) {
-    if(str_weapon == str_weapon_key)
+    if(str_weapon == str_weapon_key) {
       return true;
+    }
   }
 
   return false;
@@ -295,16 +315,18 @@ _switch_to_weapon() {
   self thread _montitor_loadout();
 
   while(isalive(self)) {
-    for(str_weapon_current = self getcurrentweapon(); str_weapon_current == "none"; str_weapon_current = self getcurrentweapon())
+    for(str_weapon_current = self getcurrentweapon(); str_weapon_current == "none"; str_weapon_current = self getcurrentweapon()) {
       wait 1;
+    }
 
     if(is_fire_direction_weapon(str_weapon_current)) {
       level._fire_direction.current_weapon = str_weapon_current;
       flag_set("fire_direction_shader_on");
       v_aim_pos = _get_aim_position();
 
-      if(isDefined(v_aim_pos))
+      if(isDefined(v_aim_pos)) {
         level._fire_direction.m_aimpoint.origin = v_aim_pos;
+      }
 
       b_pressed_attack = self attackbuttonpressed();
 
@@ -312,8 +334,9 @@ _switch_to_weapon() {
         weapon_info = level._fire_direction.a_weapons[str_weapon_current];
         b_using_valid_area = [[weapon_info.valid_target_func]]();
 
-        if(isDefined(v_aim_pos) && b_using_valid_area)
+        if(isDefined(v_aim_pos) && b_using_valid_area) {
           flag_set("fire_direction_target_confirmed");
+        }
 
         self thread[[weapon_info.fire_func]]();
         level notify("fire_direction_stop_weapon");
@@ -338,10 +361,11 @@ _switch_to_weapon() {
 cooldown_weapon(str_weapon_current) {
   flag_clear("fire_direction_target_confirmed");
 
-  if(str_weapon_current == "god_rod_glove_sp")
+  if(str_weapon_current == "god_rod_glove_sp") {
     wait 15;
-  else
+  } else {
     wait 4;
+  }
 
   if(!flag("fire_direction_disabled")) {
     if(str_weapon_current == "god_rod_glove_sp" || level._fire_direction.a_weapons[str_weapon_current].a_shooters.size > 0) {
@@ -357,24 +381,27 @@ _montitor_loadout() {
   while(true) {
     self waittill("weapon_change_complete");
 
-    if(self getcurrentweapon() != "quadrotor_glove_sp" && self getcurrentweapon() != "claw_glove_sp" && self getcurrentweapon() != "god_rod_glove_sp" && self getcurrentweapon() != "data_glove_claw_sp")
+    if(self getcurrentweapon() != "quadrotor_glove_sp" && self getcurrentweapon() != "claw_glove_sp" && self getcurrentweapon() != "god_rod_glove_sp" && self getcurrentweapon() != "data_glove_claw_sp") {
       level.str_weapon_last = self getcurrentweapon();
+    }
   }
 }
 
 _take_weapon(str_weapon_disable, b_immediate) {
-  if(!isDefined(b_immediate))
+  if(!isDefined(b_immediate)) {
     b_immediate = 0;
+  }
 
   level endon("_fire_direction_kill");
 
-  if(level.str_weapon_last == "quadrotor_glove_sp" || level.str_weapon_last == "claw_glove_sp" || level.str_weapon_last == "god_rod_glove_sp" || level.str_weapon_last == "data_glove_claw_sp")
+  if(level.str_weapon_last == "quadrotor_glove_sp" || level.str_weapon_last == "claw_glove_sp" || level.str_weapon_last == "god_rod_glove_sp" || level.str_weapon_last == "data_glove_claw_sp") {
     wait 0.5;
-  else {
+  } else {
     self switchtoweapon(level.str_weapon_last);
 
-    if(!b_immediate)
+    if(!b_immediate) {
       self waittill("weapon_change_complete");
+    }
   }
 
   self takeweapon(str_weapon_disable);
@@ -383,10 +410,11 @@ _take_weapon(str_weapon_disable, b_immediate) {
 _get_aim_position() {
   v_eye_pos = level.player getEye();
 
-  if(level.wiiu)
+  if(level.wiiu) {
     v_player_eye = level.player getgunangles();
-  else
+  } else {
     v_player_eye = level.player getplayerangles();
+  }
 
   v_player_eye = vectornormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 4000;
@@ -426,8 +454,9 @@ _hint_text(str_weapon) {
 
     flag_wait("fire_direction_shader_on");
 
-    if(n_hints == 1)
+    if(n_hints == 1) {
       level thread screen_message_create(&"SCRIPT_FIRE_DIRECTION_CONFIRM", undefined, undefined, undefined, 6);
+    }
 
     level waittill_either("fire_direction_stop_weapon", "fire_direction_stop_hint");
     screen_message_delete();
@@ -438,10 +467,11 @@ _hint_text(str_weapon) {
 
     level._fire_direction.hint_active = 0;
 
-    if(n_hints < 1)
+    if(n_hints < 1) {
       wait 4;
-    else
+    } else {
       wait 1;
+    }
   }
 }
 
@@ -456,8 +486,9 @@ quadrotors_find_player_target() {
     a_shooters = get_fire_direction_shooters(level.player getcurrentweapon());
 
     foreach(e_shooter in a_shooters) {
-      if(isDefined(e_shooter) && isalive(e_shooter))
+      if(isDefined(e_shooter) && isalive(e_shooter)) {
         e_shooter thread _quadrotor_attacks_player_target(v_shoot_pos, a_enemies);
+      }
     }
   }
 }
@@ -471,8 +502,9 @@ _quadrotor_attacks_player_target(v_shoot_pos, a_enemies) {
     e_enemy = undefined;
     e_enemy = random(a_enemies);
 
-    foreach(temp_enemy in a_enemies)
-    self thread _quadrotors_register_player_kills(temp_enemy);
+    foreach(temp_enemy in a_enemies) {
+      self thread _quadrotors_register_player_kills(temp_enemy);
+    }
   }
 
   if(isDefined(e_enemy)) {
@@ -505,8 +537,9 @@ _quadrotor_update_enemy(v_shoot_pos, firetime, e_enemy) {
     if(!isDefined(e_enemy) || !isalive(e_enemy)) {
       a_enemies = get_within_range(v_shoot_pos, getaiarray("axis"), 246);
 
-      if(a_enemies.size == 0)
+      if(a_enemies.size == 0) {
         a_enemies = get_within_range(v_shoot_pos, getaiarray("axis"), 392);
+      }
 
       if(a_enemies.size > 0) {
         e_enemy = random(a_enemies);
@@ -524,13 +557,15 @@ _quadrotors_register_player_kills(e_enemy) {
   self endon("fire_time_complete");
   e_enemy waittill("death", attacker);
 
-  if(isDefined(attacker) && attacker == self)
+  if(isDefined(attacker) && attacker == self) {
     level.player inc_general_stat("kills");
+  }
 }
 
 _rod_is_target_area_valid() {
-  if(distance2dsquared(level._fire_direction.m_aimpoint.origin, level.player.origin) >= 16000000)
+  if(distance2dsquared(level._fire_direction.m_aimpoint.origin, level.player.origin) >= 16000000) {
     return false;
+  }
 
   return true;
 }

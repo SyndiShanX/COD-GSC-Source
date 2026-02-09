@@ -383,7 +383,7 @@ func_B960(var_0, var_1) {
       continue;
     }
 
-    if(isplayer(var_2) || isDefined(var_2.team) && var_2.team != var_3) {
+    if(isPlayer(var_2) || isDefined(var_2.team) && var_2.team != var_3) {
       break;
     }
 

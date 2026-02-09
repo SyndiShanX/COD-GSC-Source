@@ -352,37 +352,37 @@ start_deer() {
 }
 
 start_after_hunt() {
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   maps\youngblood_code::after_hunt();
 }
 
 start_woods() {
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   maps\youngblood_code::woods();
 }
 
 start_neighborhood() {
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   maps\youngblood_code::neighborhood();
 }
 
 start_mansion_ext() {
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   maps\youngblood_code::mansion_ext();
 }
 
 start_mansion() {
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   maps\youngblood_code::mansion();
 }
 
 start_chaos_a() {
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   common_scripts\utility::trigger_off("start_chaos_a", "targetname");
   maps\youngblood_code::chaos_a();
@@ -390,13 +390,13 @@ start_chaos_a() {
 
 start_chaos_b() {
   level.player setclienttriggeraudiozone("youngblood_chaos", 1.5);
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   maps\youngblood_code::chaos_b();
 }
 
 start_pickup() {
-  setdvar("hud_showObjectives", 0);
+  setDvar("hud_showObjectives", 0);
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   maps\youngblood_code::pickup();
 }

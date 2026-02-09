@@ -243,7 +243,7 @@ function get_weapon_damage(killstreaktype, maxhealth, attacker, weapon, type, da
     }
     if(!isDefined(weapon_damage)) {
       if(type == "MOD_RIFLE_BULLET" || type == "MOD_PISTOL_BULLET" || type == "MOD_HEAD_SHOT") {
-        hasarmorpiercing = isDefined(attacker) && isplayer(attacker) && attacker hasperk("specialty_armorpiercing");
+        hasarmorpiercing = isDefined(attacker) && isPlayer(attacker) && attacker hasperk("specialty_armorpiercing");
         clipstokill = (isDefined(bundle.ksclipstokill) ? bundle.ksclipstokill : 0);
         if(clipstokill == -1) {
           weapon_damage = 0;

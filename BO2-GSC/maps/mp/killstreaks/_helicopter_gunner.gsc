@@ -554,8 +554,8 @@ destroyplayerhelicopter() {
 }
 
 debug_print_heli(msg) {
-  if(getdvar(#"scr_debugheli") == "")
-    setdvar("scr_debugheli", "0");
+  if(getDvar(#"scr_debugheli") == "")
+    setDvar("scr_debugheli", "0");
 
   if(getdvarint(#"scr_debugheli") == 1)
     println(msg);
@@ -1047,7 +1047,7 @@ heli_player_damage_monitor(player) {
   for(;;) {
     self waittill("damage", damage, attacker, direction, point, type);
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     heli_friendlyfire = maps\mp\gametypes\_weaponobjects::friendlyfirecheck(self.owner, attacker);
@@ -1102,7 +1102,7 @@ debugtags() {
 
   while(true) {
     wait 0.05;
-    tagname = getdvar(#"_id_CEED6282");
+    tagname = getDvar(#"_id_CEED6282");
 
     if(!isDefined(tagname) || tagname == "") {
       continue;
@@ -1375,7 +1375,6 @@ debugcheckforexit(hardpointtype) {
 
     wait 0.1;
   }
-
 }
 
 playpilotdialog(dialog, time) {

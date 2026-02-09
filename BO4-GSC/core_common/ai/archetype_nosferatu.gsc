@@ -32,7 +32,6 @@ class class_1546f28e {
     adjustmentstarted = 0;
     var_425c4c8b = 1;
   }
-
 }
 
 autoexec init() {
@@ -198,7 +197,7 @@ function_b5305a8f(entity) {
 function_2ad18645(notifyhash) {
   player = self;
 
-  if(isDefined(self) && !isplayer(self) && isDefined(self.enemy) && isplayer(self.enemy)) {
+  if(isDefined(self) && !isPlayer(self) && isDefined(self.enemy) && isPlayer(self.enemy)) {
     player = self.enemy;
   }
 
@@ -278,7 +277,7 @@ function_a41a5aea(entity) {
     return false;
   }
 
-  if(!isplayer(entity.enemy)) {
+  if(!isPlayer(entity.enemy)) {
     return false;
   }
 
@@ -331,7 +330,7 @@ function_b5047448(entity) {
       return false;
     }
 
-    if(!isplayer(entity.enemy)) {
+    if(!isPlayer(entity.enemy)) {
       return false;
     }
 
@@ -371,7 +370,7 @@ function_e9819a23(entity) {
       return false;
     }
 
-    if(!isplayer(entity.enemy)) {
+    if(!isPlayer(entity.enemy)) {
       return false;
     }
 
@@ -443,7 +442,7 @@ function_85d8b15d(entity) {
       return false;
     }
 
-    if(!isplayer(entity.enemy)) {
+    if(!isPlayer(entity.enemy)) {
       return false;
     }
 
@@ -665,7 +664,6 @@ function_1ad502a0(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     distance = distance(entity.origin, animendpos);
     recordcircle(animendpos, 3, (0, 1, 0), "<dev string:x53>");
     record3dtext("<dev string:x5c>" + distance, animendpos, (0, 1, 0), "<dev string:x53>");
-
   }
 }
 

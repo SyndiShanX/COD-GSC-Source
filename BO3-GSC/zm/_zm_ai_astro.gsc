@@ -338,7 +338,7 @@ function astro_turn_player() {
 }
 
 function lerp_player_view_to_position(origin, angles, lerptime, fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self endon("disconnect");
   }
   linker = spawn("script_origin", (0, 0, 0));

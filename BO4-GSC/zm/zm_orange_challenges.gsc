@@ -1445,7 +1445,7 @@ function_abec537() {
 }
 
 function_1fdda3c7(s_params) {
-  if(!isplayer(s_params.eattacker)) {
+  if(!isPlayer(s_params.eattacker)) {
     return;
   }
 

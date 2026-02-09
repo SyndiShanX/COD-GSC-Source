@@ -195,7 +195,7 @@ callback_playerconnect() {
   self.wasaliveatmatchstart = 0;
 
   if(level.splitscreen) {
-    setdvar(#"splitscreen_playernum", level.players.size);
+    setDvar(#"splitscreen_playernum", level.players.size);
   }
 
   if(game.state == "postgame") {
@@ -460,7 +460,7 @@ callback_playerdisconnect() {
       level thread globallogic::forceend();
     }
 
-    setdvar(#"splitscreen_playernum", isarray(players) ? players.size : 0);
+    setDvar(#"splitscreen_playernum", isarray(players) ? players.size : 0);
   }
 
   if(isDefined(self.score) && isDefined(self.pers) && isDefined(self.pers[# "team"])) {

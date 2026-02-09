@@ -471,7 +471,7 @@ neighborhood_vehicle_damage(var_0) {
     if(level.player istouching(var_0)) {
       level.player dodamage(300, (0, 0, 0));
       level notify("new_quote_string");
-      setdvar("ui_deadquote", &"YOUNGBLOOD_AVOIDCARS");
+      setDvar("ui_deadquote", &"YOUNGBLOOD_AVOIDCARS");
       maps\_utility::missionfailedwrapper();
       return;
     }
@@ -773,7 +773,7 @@ mansion() {
   if(isDefined(level.prologue) && level.prologue == 1) {
     var_17 = getaiarray();
     common_scripts\utility::array_call(var_17, ::delete);
-    setdvar("hud_showObjectives", 1);
+    setDvar("hud_showObjectives", 1);
     setsaveddvar("ammoCounterHide", "0");
     common_scripts\utility::flag_set("start_transition_to_odin");
     thread maps\_art::sunflare_changes("odin_default", 0);

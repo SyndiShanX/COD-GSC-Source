@@ -90,7 +90,7 @@ func_7DEB() {
 func_371B(var_0) {
   var_1 = undefined;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_1 = var_0 func_7DEB();
   } else {
     var_1 = anglesToForward(self.angles);
@@ -605,7 +605,7 @@ func_B4DB(var_0) {
     return anim.failure;
   }
 
-  var_2 = isplayer(self.enemy.owner);
+  var_2 = isPlayer(self.enemy.owner);
   var_3 = func_9CE7(self.enemy);
   var_4 = distancesquared(self.origin, self.enemy.origin) > 49000000;
 

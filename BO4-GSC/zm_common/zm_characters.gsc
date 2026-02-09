@@ -39,7 +39,7 @@ __init__() {
 
 zombie_force_char(n_char) {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   set_character(n_char);
 }
@@ -286,7 +286,7 @@ function_d35e4c92(characterindex, var_fdf0f13d = 0) {
       fields = getplayerrolefields(characterindex, currentsessionmode());
       return fields.var_2a42c5e0;
     }
-  } else if(isDefined(self) && isplayer(self)) {
+  } else if(isDefined(self) && isPlayer(self)) {
     characterindex = player_role::get();
 
     if(player_role::is_valid(characterindex)) {
@@ -299,7 +299,7 @@ function_d35e4c92(characterindex, var_fdf0f13d = 0) {
 }
 
 function_dc232a80(character) {
-  if(isDefined(self) && isplayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     characterindex = player_role::get();
 
     if(player_role::is_valid(characterindex)) {
@@ -325,9 +325,9 @@ function_dc232a80(character) {
 }
 
 is_character(character) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
-  if(isDefined(self) && isplayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     characterindex = player_role::get();
 
     if(player_role::is_valid(characterindex)) {

@@ -36,7 +36,6 @@ class czm_laststand_client: cluielem {
     cluielem::add_clientfield("revive_progress", 1, 5, "float");
     cluielem::add_clientfield("num_downs", 1, 8, "int");
   }
-
 }
 
 register(uid) {

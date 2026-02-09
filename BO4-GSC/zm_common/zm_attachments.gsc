@@ -23,7 +23,7 @@ __init__() {
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker) && isDefined(weapon) && meansofdeath !== "MOD_UNKNOWN") {
+  if(isPlayer(attacker) && isDefined(weapon) && meansofdeath !== "MOD_UNKNOWN") {
     if(weaponhasattachment(weapon, "uber")) {
       switch (weapon.rootweapon.name) {
         case # "lmg_standard_t8_upgraded":

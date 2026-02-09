@@ -21,9 +21,9 @@ function init() {
 
 function customteam_init() {
   if(getdvarstring("g_customTeamName_Allies") != "") {
-    setdvar("g_TeamName_Allies", getdvarstring("g_customTeamName_Allies"));
+    setDvar("g_TeamName_Allies", getdvarstring("g_customTeamName_Allies"));
   }
   if(getdvarstring("g_customTeamName_Axis") != "") {
-    setdvar("g_TeamName_Axis", getdvarstring("g_customTeamName_Axis"));
+    setDvar("g_TeamName_Axis", getdvarstring("g_customTeamName_Axis"));
   }
 }

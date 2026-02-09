@@ -480,7 +480,6 @@ create_and_play_dialog(category, type, response, force_variant, override) {
   } else {
     if(getdvarint(#"_id_0AEB127D") > 0)
       iprintln("DIALOG DEBUGGER: SOUND_TO_PLAY is undefined");
-
   }
 }
 
@@ -503,7 +502,7 @@ do_player_or_npc_playvox(prefix, index, sound_to_play, waittime, category, type,
     self.speakingline = sound_to_play;
     self.isspeaking = 1;
 
-    if(isplayer(self))
+    if(isPlayer(self))
       self setclientfieldtoplayer("isspeaking", 1);
 
     self notify("speaking", type);
@@ -520,7 +519,7 @@ do_player_or_npc_playvox(prefix, index, sound_to_play, waittime, category, type,
     self playsoundontag(prefix + sound_to_play, "J_Head");
     wait(playbacktime);
 
-    if(isplayer(self) && !(isDefined(isresponse) && isresponse) && isDefined(self.last_vo_played_time)) {
+    if(isPlayer(self) && !(isDefined(isresponse) && isresponse) && isDefined(self.last_vo_played_time)) {
       if(gettime() < self.last_vo_played_time + 5000)
         waittime = 15;
     }
@@ -529,10 +528,10 @@ do_player_or_npc_playvox(prefix, index, sound_to_play, waittime, category, type,
     self notify("done_speaking");
     self.isspeaking = 0;
 
-    if(isplayer(self))
+    if(isPlayer(self))
       self setclientfieldtoplayer("isspeaking", 0);
 
-    if(isplayer(self))
+    if(isPlayer(self))
       self.last_vo_played_time = gettime();
 
     if(isDefined(isresponse) && isresponse) {
@@ -548,7 +547,6 @@ do_player_or_npc_playvox(prefix, index, sound_to_play, waittime, category, type,
     }
   } else {
     println("DIALOG DEBUGGER: Can't play (" + (prefix + sound_to_play) + ") because someone is nearby speaking already.");
-
   }
 }
 
@@ -660,11 +658,11 @@ player_killstreak_timer() {
   self endon("disconnect");
   self endon("death");
 
-  if(getdvar(#"_id_FB12F109") == "")
-    setdvar("zombie_kills", "7");
+  if(getDvar(#"_id_FB12F109") == "")
+    setDvar("zombie_kills", "7");
 
-  if(getdvar(#"_id_D0575D76") == "")
-    setdvar("zombie_kill_timer", "5");
+  if(getDvar(#"_id_D0575D76") == "")
+    setDvar("zombie_kill_timer", "5");
 
   kills = getdvarint(#"_id_FB12F109");
   time = getdvarint(#"_id_D0575D76");

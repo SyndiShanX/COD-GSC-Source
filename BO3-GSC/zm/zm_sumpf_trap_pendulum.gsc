@@ -190,7 +190,7 @@ function pendamage(parent, who) {
   while(true) {
     self waittill("trigger", ent);
     if(parent.penactive == 1) {
-      if(isplayer(ent)) {
+      if(isPlayer(ent)) {
         ent thread playerpendamage();
       } else {
         ent thread zombiependamage(parent, who);
@@ -276,7 +276,7 @@ function do_launch(x, y, z, parent) {
   self launchragdoll((x, y, z));
   util::wait_network_frame();
   self dodamage(self.health, self.origin, parent);
-  if(isDefined(parent.activated_by_player) && isplayer(parent.activated_by_player)) {
+  if(isDefined(parent.activated_by_player) && isPlayer(parent.activated_by_player)) {
     parent.activated_by_player zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
   }
   level.numlaunched++;

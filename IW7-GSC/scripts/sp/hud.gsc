@@ -20,19 +20,19 @@ init() {
     level.fontheight = 12;
   }
 
-  setdvar("ui_remotemissile_playernum", 0);
-  setdvar("ui_pmc_won", 0);
-  setdvar("ui_actionSlot_1_forceActive", "off");
-  setdvar("ui_actionSlot_2_forceActive", "off");
-  setdvar("ui_actionSlot_3_forceActive", "off");
-  setdvar("ui_actionSlot_4_forceActive", "off");
-  setdvar("hideHudFast", 0);
-  setdvar("ui_securing", "");
-  setdvar("ui_securing_progress", 0);
-  setdvar("hud_showObjectives", 1);
-  setdvar("hud_showIntel", 1);
-  setdvar("minimap_sp", 0);
-  setdvar("minimap_full_sp", 0);
+  setDvar("ui_remotemissile_playernum", 0);
+  setDvar("ui_pmc_won", 0);
+  setDvar("ui_actionSlot_1_forceActive", "off");
+  setDvar("ui_actionSlot_2_forceActive", "off");
+  setDvar("ui_actionSlot_3_forceActive", "off");
+  setDvar("ui_actionSlot_4_forceActive", "off");
+  setDvar("hideHudFast", 0);
+  setDvar("ui_securing", "");
+  setDvar("ui_securing_progress", 0);
+  setDvar("hud_showObjectives", 1);
+  setDvar("hud_showIntel", 1);
+  setDvar("minimap_sp", 0);
+  setDvar("minimap_full_sp", 0);
   loadluifile("inGame.sp.KleenexPopup");
   func_8DF5();
 }

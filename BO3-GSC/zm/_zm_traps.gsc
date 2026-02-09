@@ -390,7 +390,7 @@ function trap_damage() {
   self endon("trap_done");
   while(true) {
     self waittill("trigger", ent);
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       if(isDefined(level._custom_traps) && isDefined(level._custom_traps[self._trap_type]) && isDefined(level._custom_traps[self._trap_type].player_damage)) {
         ent thread[[level._custom_traps[self._trap_type].player_damage]]();
         jump loc_0000209C;
@@ -551,7 +551,7 @@ function zombie_trap_death(trap, param) {
       break;
     }
   }
-  if(isDefined(trap.activated_by_player) && isplayer(trap.activated_by_player)) {
+  if(isDefined(trap.activated_by_player) && isPlayer(trap.activated_by_player)) {
     trap.activated_by_player zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
   }
 }

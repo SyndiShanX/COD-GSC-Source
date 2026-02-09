@@ -29,8 +29,7 @@ main() {
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm_nodistort");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
 
-  if(getdvar("clientSideEffects", "1") != "1") {
+  if(getDvar("clientSideEffects", "1") != "1") {
     maps\createfx\mp_dome_fx::main();
   }
-
 }

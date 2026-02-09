@@ -203,7 +203,7 @@ function sr_playerspawnedcb() {
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   thread checkallowspectating();
-  if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     scoreevents::processscoreevent("kill_sd", attacker, self, weapon);
   }
   inbombzone = 0;
@@ -215,7 +215,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       break;
     }
   }
-  if(inbombzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(inbombzone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     if(game["defenders"] == self.pers["team"]) {
       attacker medals::offenseglobalcount();
       attacker thread challenges::killedbaseoffender(currentobjective, weapon);
@@ -232,7 +232,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       scoreevents::processscoreevent("killed_attacker", attacker, self, weapon);
     }
   }
-  if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isbombcarrier) && self.isbombcarrier == 1) {
+  if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isbombcarrier) && self.isbombcarrier == 1) {
     self recordkillmodifier("carrying");
   }
   if(self.isplanting == 1) {

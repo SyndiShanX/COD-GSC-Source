@@ -435,27 +435,25 @@ debug_message_clear(message, origin, duration, extraEndon) {
 chain_off(chain) {
   trigs = getEntArray("trigger_friendlychain", "classname");
   for(i = 0; i < trigs.size; i++) {
-    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {
-  }
-      if(isDefined(trigs[i].oldorigin)) {
-        trigs[i].origin = trigs[i].oldorigin;
-      } else {
-        trigs[i].oldorigin = trigs[i].origin;
-      }
-
-      trigs[i].origin = trigs[i].origin + (0, 0, -5000);
+    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {}
+    if(isDefined(trigs[i].oldorigin)) {
+      trigs[i].origin = trigs[i].oldorigin;
+    } else {
+      trigs[i].oldorigin = trigs[i].origin;
     }
+
+    trigs[i].origin = trigs[i].origin + (0, 0, -5000);
+  }
 }
 
 chain_on(chain) {
   trigs = getEntArray("trigger_friendlychain", "classname");
   for(i = 0; i < trigs.size; i++) {
-    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {
-  }
-      if(isDefined(trigs[i].oldorigin)) {
-        trigs[i].origin = trigs[i].oldorigin;
-      }
+    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {}
+    if(isDefined(trigs[i].oldorigin)) {
+      trigs[i].origin = trigs[i].oldorigin;
     }
+  }
 }
 
 precache(model) {
@@ -705,52 +703,49 @@ get_closest_exclude(org, ents, excluders) {
           exclude[i] = true;
         }
       }
-    found_unexcluded = false;
+      found_unexcluded = false;
     }
     for(i = 0; i < ents.size; i++) {
-      if((!exclude[i]) && (isDefined(ents[i]))) {
+      if((!exclude[i]) && (isDefined(ents[i]))) {}
+      found_unexcluded = true;
+      range = distance(org, ents[i].origin);
+      ent = i;
+      i = ents.size + 1;
     }
-        found_unexcluded = true;
-        range = distance(org, ents[i].origin);
-        ent = i;
-        i = ents.size + 1;
-      }
 
     if(!found_unexcluded) {
       return (undefined);
     }
   } else {
     for(i = 0; i < ents.size; i++) {
-      if(isDefined(ents[i])) {
+      if(isDefined(ents[i])) {}
+      range = distance(org, ents[0].origin);
+      ent = i;
+      i = ents.size + 1;
     }
-        range = distance(org, ents[0].origin);
-        ent = i;
-        i = ents.size + 1;
-      }
   }
 
   ent = undefined;
 
   for(i = 0; i < ents.size; i++) {
-    if(isDefined(ents[i])) {
-  }
-      exclude = false;
-      if(isDefined(excluders)) {
-        for(p = 0; p < excluders.size; p++) {
-          if(ents[i] == excluders[p]) {
-            exclude = true;
-          }
-      }
-        }
-
-      if(!exclude) {
-        newrange = distance(org, ents[i].origin);
-        if(newrange <= range) {
-          range = newrange;
-          ent = i;
+    if(isDefined(ents[i])) {}
+    exclude = false;
+    if(isDefined(excluders)) {
+      for(p = 0; p < excluders.size; p++) {
+        if(ents[i] == excluders[p]) {
+          exclude = true;
         }
       }
     }
+
+    if(!exclude) {
+      newrange = distance(org, ents[i].origin);
+      if(newrange <= range) {
+        range = newrange;
+        ent = i;
+      }
+    }
+  }
 
   if(isDefined(ent)) {
     return ents[ent];
@@ -1173,9 +1168,9 @@ activate_individual_exploder() {
     if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
       self thread cannon_effect();
     } else {
-    if(isDefined(self.v["soundalias"])) {
-      self thread sound_effect();
-    }
+      if(isDefined(self.v["soundalias"])) {
+        self thread sound_effect();
+      }
     }
     if(isDefined(self.v["earthquake"])) {
       self thread exploder_earthquake();
@@ -1197,9 +1192,9 @@ activate_individual_exploder() {
   if(self.v["exploder_type"] == "exploder") {
     self thread brush_show();
   } else {
-  if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible")) {
-    self thread brush_throw();
-  }
+    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible")) {
+      self thread brush_throw();
+    }
   } else {
     self thread brush_delete();
   }
@@ -2084,11 +2079,10 @@ array_merge(array1, array2) // adds only things that are new to the array
   for(i = 0; i < array2.size; i++) {
     foundmatch = false;
     for(j = 0; j < array1.size; j++) {
-      if(array2[i] == array1[j]) {
+      if(array2[i] == array1[j]) {}
+      foundmatch = true;
+      break;
     }
-        foundmatch = true;
-        break;
-      }
     if(foundmatch) {
       continue;
     } else {
@@ -2606,7 +2600,7 @@ array_remove_nokeys(ents, remover) {
     if(ents[i] != remover) {
       newents[newents.size] = ents[i];
     }
-  return newents;
+    return newents;
   }
 }
 
@@ -3146,29 +3140,29 @@ issue_color_orders(color_team, team) {
     if(issubstr(colorCodes[i], "r")) {
       color = "r";
     } else {
-    if(issubstr(colorCodes[i], "b")) {
-      color = "b";
-    }
+      if(issubstr(colorCodes[i], "b")) {
+        color = "b";
+      }
     } else {
-    if(issubstr(colorCodes[i], "y")) {
-      color = "y";
-    }
+      if(issubstr(colorCodes[i], "y")) {
+        color = "y";
+      }
     } else {
-    if(issubstr(colorCodes[i], "c")) {
-      color = "c";
-    }
+      if(issubstr(colorCodes[i], "c")) {
+        color = "c";
+      }
     } else {
-    if(issubstr(colorCodes[i], "g")) {
-      color = "g";
-    }
+      if(issubstr(colorCodes[i], "g")) {
+        color = "g";
+      }
     } else {
-    if(issubstr(colorCodes[i], "p")) {
-      color = "p";
-    }
+      if(issubstr(colorCodes[i], "p")) {
+        color = "p";
+      }
     } else {
-    if(issubstr(colorCodes[i], "o")) {
-      color = "o";
-    }
+      if(issubstr(colorCodes[i], "o")) {
+        color = "o";
+      }
     } else {
       assertEx(0, "Trigger at origin " + self getorigin() + " had strange color index " + colorCodes[i]);
     }

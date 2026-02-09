@@ -28,7 +28,6 @@ class cself_respawn: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("percent", 4000, 6, "float", var_1089a5f3);
   }
-
 }
 
 register(uid, var_1089a5f3) {

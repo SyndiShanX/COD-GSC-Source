@@ -9,11 +9,11 @@ main() {
   scripts\mp\maps\mp_proto\mp_proto_fx::main();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_proto");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_drawsun", 0);
-  setdvar("r_tessellationFactor", 0);
-  setdvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_drawsun", 0);
+  setDvar("r_tessellationFactor", 0);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

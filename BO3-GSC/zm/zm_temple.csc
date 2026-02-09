@@ -57,8 +57,8 @@ function autoexec function_d9af860b() {
 
 function main() {
   zm_temple_ffotd::main_start();
-  setdvar("player_sliding_velocity_cap", 50);
-  setdvar("player_sliding_wishspeed", 600);
+  setDvar("player_sliding_velocity_cap", 50);
+  setDvar("player_sliding_wishspeed", 600);
   level.default_game_mode = "zclassic";
   level.default_start_location = "default";
   thread zm_temple_fx::main();
@@ -247,7 +247,7 @@ function timetravel_watcher(localclientnum, oldval, newval, bnewent, binitialsna
     }
     exploder::kill_exploder("eclipse");
     if(bnewent || binitialsnap || bwasdemojump) {
-      setdvar("r_skyTransition", 0);
+      setDvar("r_skyTransition", 0);
     } else {
       level thread function_bf1b3728(0, 2);
     }
@@ -290,10 +290,10 @@ function function_bf1b3728(n_val, n_time) {
   n_change = var_83a6ec14 / (n_time / 0.1);
   while(level.var_3766c3d3 != n_val) {
     level.var_3766c3d3 = level.var_3766c3d3 + n_change;
-    setdvar("r_skyTransition", level.var_3766c3d3);
+    setDvar("r_skyTransition", level.var_3766c3d3);
     wait(0.1);
   }
-  setdvar("r_skyTransition", n_val);
+  setDvar("r_skyTransition", n_val);
 }
 
 function function_7b0ba395(localclientnum) {

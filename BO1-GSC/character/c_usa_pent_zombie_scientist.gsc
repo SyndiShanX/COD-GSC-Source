@@ -26,7 +26,6 @@ main() {
   self.gibSpawn4 = "char_ger_honorgd_body1_g_llegspawn";
   self.gibSpawnTag4 = "J_Knee_LE";
 }
-
 precache() {
   precacheModel("c_usa_pent_zombie_scientist_body");
   codescripts\character::precacheModelArray(xmodelalias\c_ger_honorguard_zomb_headalias::main());

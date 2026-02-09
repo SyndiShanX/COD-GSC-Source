@@ -6,7 +6,7 @@
 init() {}
 
 updateDamageFeedback(typeHit, victim) {
-  if(!IsPlayer(self) || !isDefined(typeHit)) {
+  if(!isPlayer(self) || !isDefined(typeHit)) {
     return;
   }
 

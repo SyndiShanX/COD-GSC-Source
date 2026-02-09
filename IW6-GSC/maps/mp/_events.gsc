@@ -31,7 +31,7 @@ init() {
 
   game_type = level.gameType;
   if(!isDefined(game_type))
-    game_type = GetDvar("g_gametype");
+    game_type = getDvar("g_gametype");
 
   row = 0;
   while(true) {
@@ -263,7 +263,6 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     }
 
     self thread checkMatchDataKills(killId, victim, weapon, meansOfDeath);
-
   } else if(weapon == "guard_dog_mp") {
     if(!isAlive(self) && self.deathtime < GetTime())
       postDeathDogKill();

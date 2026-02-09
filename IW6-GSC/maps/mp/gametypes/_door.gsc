@@ -488,7 +488,7 @@ return_triggerer(trigger) {
     trigger waittill("trigger", ent);
 
     if(isDefined(trigger.prone_only) && (trigger.prone_only == true)) {
-      if(IsPlayer(ent)) {
+      if(isPlayer(ent)) {
         stance = ent GetStance();
         if(stance != "prone") {
           continue;

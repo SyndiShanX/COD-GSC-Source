@@ -145,7 +145,7 @@ player_splash_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity) && isalive(entity))
+    if(isPlayer(entity) && isalive(entity))
       self thread trigger_thread(entity, ::player_water_fx);
   }
 }
@@ -164,7 +164,7 @@ water_trigger_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       entity playSound("mpl_splash_death");
       playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
     }

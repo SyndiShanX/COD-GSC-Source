@@ -195,13 +195,11 @@ _id_40D0(var_0) {
   if(var_0._id_40D2 == "fullScreen") {
     if(isDefined(var_1)) {
       var_1 thread _id_40EF(0.2, 1);
-
     }
     var_0 thread _id_40EE(0.2, 1);
     level notify("open_menu", level._id_40D1.name);
   } else {
     var_0 thread _id_40F1(0.2);
-
   }
   level.player playSound("mouse_click");
 }
@@ -356,15 +354,12 @@ _id_40E6() {
 _id_40EC() {
   if(self._id_40DE == "subMenu") {
     self._id_40EA maps\_hud_util::destroyelem();
-
   }
   if(self._id_40DE == "settingMenu") {
     self._id_40E9 maps\_hud_util::destroyelem();
-
   }
   if(isDefined(self._id_40EB)) {
     self._id_40EB maps\_hud_util::destroyelem();
-
   }
   self._id_40E7 maps\_hud_util::destroyelem();
   self._id_40E8 maps\_hud_util::destroyelem();
@@ -381,11 +376,9 @@ _id_40ED(var_0, var_1, var_2, var_3, var_4) {
 
   if(self._id_40DE == "settingMenu") {
     self._id_40E9 maps\_hud_util::setpoint("TOPRIGHT", var_1, var_2 + var_5 + 400, var_3, var_4);
-
   }
   if(isDefined(self._id_40EB)) {
     self._id_40EB maps\_hud_util::setpoint("TOPLEFT", var_1, self._id_1B32._id_40CC, self._id_1B32._id_40CD, var_4);
-
   }
   self._id_40E8 maps\_hud_util::setpoint(var_0, var_1, var_2 + var_5, var_3, var_4);
 }
@@ -401,7 +394,6 @@ _id_40EE(var_0, var_1) {
       var_4 _id_40ED("TOPLEFT", "TOPRIGHT", self._id_40CC, self._id_40CD + var_2);
     } else {
       var_4 _id_40ED("TOPRIGHT", "TOPLEFT", self._id_40CC, self._id_40CD + var_2);
-
     }
     var_4._id_40CC = self._id_40CC;
     var_4._id_40CD = self._id_40CD + var_2;
@@ -414,7 +406,6 @@ _id_40EE(var_0, var_1) {
 
   if(self._id_40D2 == "subMenu") {
     self._id_40E2 _id_40EE(var_0, var_1);
-
   }
   _id_40F2(var_0, 1);
 }
@@ -471,7 +462,6 @@ _id_40EF(var_0, var_1) {
 
   if(self._id_40D2 == "subMenu") {
     self._id_40E2 thread _id_40EF(var_0, var_1);
-
   }
   wait(var_0);
 
@@ -565,18 +555,15 @@ _id_40F3(var_0, var_1) {
 
   if(isDefined(self._id_40E9)) {
     self._id_40E9 fadeovertime(var_0);
-
   }
   if(isDefined(self._id_40EB)) {
     self._id_40EB fadeovertime(var_0);
-
   }
   if(var_1) {
     if(self._id_40E2 == level._id_40D1) {
       _id_40F4(1);
     } else {
       _id_40F4(0.5);
-
     }
     if(isDefined(self._id_40EB)) {
       self._id_40EB.alpha = 1;
@@ -586,7 +573,6 @@ _id_40F3(var_0, var_1) {
       _id_40F4(0.5);
     } else {
       _id_40F4(0.25);
-
     }
     if(isDefined(self._id_40EB)) {
       self._id_40EB.alpha = 0;
@@ -600,7 +586,6 @@ _id_40F4(var_0) {
 
   if(self._id_40DE == "settingMenu") {
     self._id_40E9.alpha = var_0;
-
   }
   if(self._id_40DE == "subMenu") {
     self._id_40EA.alpha = var_0;
@@ -631,7 +616,6 @@ _id_40F7() {
 
   if(self._id_40D9 < 0) {
     self._id_40D9 = self._id_40D5.size - 1;
-
   }
   _id_40F2(0.1, 0);
   level.player playSound("mouse_over");
@@ -642,7 +626,6 @@ _id_40F8() {
 
   if(self._id_40D9 >= self._id_40D5.size) {
     self._id_40D9 = 0;
-
   }
   _id_40F2(0.1, 0);
   level.player playSound("mouse_over");
@@ -666,7 +649,7 @@ _id_40FB() {
   var_0 = self._id_40D5[self._id_40D9];
 
   if(var_0._id_40DE == "settingMenu") {
-    var_1 = getdvar(var_0._id_40E4.dvar);
+    var_1 = getDvar(var_0._id_40E4.dvar);
     var_2 = var_0._id_40E4.value;
     var_3 = 0;
 
@@ -680,7 +663,7 @@ _id_40FB() {
 
       if(var_3 >= 0) {
         var_0._id_40E4.index = var_3;
-        setdvar(var_0._id_40E4.dvar, var_2[var_3]);
+        setDvar(var_0._id_40E4.dvar, var_2[var_3]);
         var_0 _id_4103();
         level.player playSound("mouse_over");
       }
@@ -694,7 +677,7 @@ _id_40FC() {
   var_0 = self._id_40D5[self._id_40D9];
 
   if(var_0._id_40DE == "settingMenu") {
-    var_1 = getdvar(var_0._id_40E4.dvar);
+    var_1 = getDvar(var_0._id_40E4.dvar);
     var_2 = var_0._id_40E4.value;
     var_3 = 0;
 
@@ -708,7 +691,7 @@ _id_40FC() {
 
       if(var_3 <= var_0._id_40E4.value.size - 1) {
         var_0._id_40E4.index = var_3;
-        setdvar(var_0._id_40E4.dvar, var_2[var_3]);
+        setDvar(var_0._id_40E4.dvar, var_2[var_3]);
         var_0 _id_4103();
         level.player playSound("mouse_over");
       }
@@ -719,27 +702,27 @@ _id_40FC() {
 }
 
 _id_40FD() {
-  setdvar("controls_sticksConfig", "thumbstick_default");
+  setDvar("controls_sticksConfig", "thumbstick_default");
 }
 
 _id_40FE() {
-  setdvar("controls_buttonConfig", "buttons_default");
+  setDvar("controls_buttonConfig", "buttons_default");
 }
 
 _id_40FF() {
-  setdvar("controls_sensitivityConfig", "sensitivity_medium");
+  setDvar("controls_sensitivityConfig", "sensitivity_medium");
 }
 
 _id_4100() {
-  setdvar("controls_inversionConfig", "inversion_disabled");
+  setDvar("controls_inversionConfig", "inversion_disabled");
 }
 
 _id_4101() {
-  setdvar("controls_autoaimConfig", "autoaim_enabled");
+  setDvar("controls_autoaimConfig", "autoaim_enabled");
 }
 
 _id_4102() {
-  setdvar("controls_vibrationConfig", "vibration_enabled");
+  setDvar("controls_vibrationConfig", "vibration_enabled");
 }
 
 _id_4103() {
@@ -752,11 +735,9 @@ _id_4104(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3._id_4105 = var_1;
-
   }
   if(isDefined(var_2)) {
     var_3._id_4106 = var_2;
-
   }
   return var_3;
 }

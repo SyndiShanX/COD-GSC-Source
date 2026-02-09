@@ -36,7 +36,7 @@ function main() {
   mp_redwood_sound::main();
   load::main();
   compass::setupminimap("compass_map_mp_redwood");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   tree1 = spawn("script_model", (-1480, 692.274, 264.392));
   tree1.angles = (360, 296, 90);
   tree1 setModel("p7_usa_bunker_roof_vent");

@@ -1491,8 +1491,8 @@ register_perks() {
 cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
   assert(isDefined(victim));
   assert(isDefined(attacker));
-  assert(isplayer(victim));
-  attacker_is_player = isplayer(attacker);
+  assert(isPlayer(victim));
+  attacker_is_player = isPlayer(attacker);
 
   if(damage <= 0) {
     return damage;
@@ -1518,14 +1518,12 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
         if(debug) {
           println("<dev string:x138>" + victim.name + "<dev string:x142>" + attacker.name + "<dev string:x158>");
         }
-
       } else {
         final_damage = damage * (100 + level.cac_bulletdamage_data) / 100;
 
         if(debug) {
           println("<dev string:x138>" + attacker.name + "<dev string:x175>" + victim.name);
         }
-
       }
     } else if(victim hasperk(#"specialty_armorvest") && isprimarydamage(mod) && !function_4c80bca1(hitloc)) {
       final_damage = damage * level.cac_armorvest_data * 0.01;
@@ -1533,14 +1531,12 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
       if(debug) {
         println("<dev string:x138>" + attacker.name + "<dev string:x19d>" + victim.name);
       }
-
     } else if(victim hasperk(#"specialty_fireproof") && weapon_utils::isfiredamage(weapon, mod)) {
       final_damage = damage * level.cac_fireproof_data * 0.01;
 
       if(debug) {
         println("<dev string:x138>" + attacker.name + "<dev string:x1c4>" + victim.name);
       }
-
     } else if(!var_81ca51d && victim hasperk(#"specialty_flakjacket") && weapon_utils::isexplosivedamage(mod) && !weapon.ignoresflakjacket && !victim grenade_stuck(inflictor)) {
       cac_data = level.hardcoremode ? level.cac_flakjacket_hardcore_data : level.cac_flakjacket_data;
       final_damage = int(damage * cac_data / 100);
@@ -1548,7 +1544,6 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
       if(debug) {
         println("<dev string:x138>" + victim.name + "<dev string:x1e4>" + attacker.name + "<dev string:x200>");
       }
-
     }
   }
 

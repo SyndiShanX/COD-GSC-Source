@@ -653,7 +653,7 @@ craftable_pet_trap(var_0) {
     if(self.disabled) {
       continue;
     }
-    if(!isplayer(var_1) && !maps\mp\alien\_utility::is_true(var_1.pet)) {
+    if(!isPlayer(var_1) && !maps\mp\alien\_utility::is_true(var_1.pet)) {
       if(!isDefined(var_1.alien_type)) {
         continue;
       }

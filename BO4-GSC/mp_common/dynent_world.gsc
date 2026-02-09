@@ -36,7 +36,6 @@ on_player_connect() {
   if(self ishost()) {
     self thread function_6b66543a();
   }
-
 }
 
 on_player_disconnect() {
@@ -306,7 +305,7 @@ use_dynent(dynent, activator) {
       }
     }
 
-    if(isplayer(activator) && isDefined(state.var_20630681)) {
+    if(isPlayer(activator) && isDefined(state.var_20630681)) {
       activator gestures::function_56e00fbf(state.var_20630681, undefined, 0);
     }
 
@@ -424,7 +423,7 @@ devgui_loop() {
       continue;
     }
 
-    setdvar(#"hash_40f9f26f308dd924", "<dev string:x11b>");
+    setDvar(#"hash_40f9f26f308dd924", "<dev string:x11b>");
     args = strtok(dvarstr, "<dev string:x11e>");
 
     switch (args[0]) {

@@ -58,7 +58,7 @@ function plates() {
   trig = getent("sq_cassimir_trigger", "targetname");
   while(true) {
     trig waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       attacker thread zm_audio::create_and_play_dialog("eggs", "quest5", randomintrange(0, 2));
       break;
     }

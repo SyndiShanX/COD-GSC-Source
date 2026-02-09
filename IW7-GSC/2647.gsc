@@ -17,7 +17,7 @@ onplayerconnect() {
 }
 
 showkillstreaksplash(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_3 = spawnStruct();
@@ -67,7 +67,7 @@ showsplash(var_0, var_1, var_2) {
 }
 
 showsplashinternal(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_3 = tablelookuprownum(getsplashtablename(), 0, var_0);

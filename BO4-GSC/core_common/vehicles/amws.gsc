@@ -133,7 +133,7 @@ state_driving_update(params) {
 
   driver = self getseatoccupant(0);
 
-  if(isplayer(driver)) {
+  if(isPlayer(driver)) {
     while(true) {
       driver endon(#"disconnect");
       driver util::waittill_vehicle_move_up_button_pressed();

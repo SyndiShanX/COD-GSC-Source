@@ -15,7 +15,7 @@ CONST_ENEMY_TAG_MODEL = "prop_dogtags_future_enemy_animated";
 OP_HELPME_NUM_TEAMMATES = 4;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -204,7 +204,7 @@ onSpawnPlayer() {
     self.objective = 0;
   }
 
-  if(IsPlayer(self) && !is_respawning_with_bomb_carrier_class) {
+  if(isPlayer(self) && !is_respawning_with_bomb_carrier_class) {
     if(level.multiBomb && self.pers["team"] == game["attackers"]) {
       self SetClientOmnvar("ui_carrying_bomb", true);
     } else {
@@ -261,7 +261,7 @@ shouldSpawnTags(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
 }
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self SetClientOmnvar("ui_carrying_bomb", false);
   }
 

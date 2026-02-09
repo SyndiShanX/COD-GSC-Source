@@ -528,80 +528,34 @@ update_team(localclientnum, var_4123f2c1) {
         player = getentbynum(localclientnum, clientnum);
 
         if(isDefined(player) && player function_e4f35989()) {
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().player = player;
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().selectedcharacterdata = player function_79a48799();
+          [[draftcharacter]] - > function_82e05d64().player = player;
+          [[draftcharacter]] - > function_82e05d64().selectedcharacterdata = player function_79a48799();
 
-          if(isDefined([
-              [draftcharacter]
-            ] - > function_82e05d64().selectedcharacterdata) && player_role::is_valid([
-              [draftcharacter]
-            ] - > function_82e05d64().selectedcharacterdata.charactertype) && player_role::is_valid([
-              [draftcharacter]
-            ] - > function_82e05d64().focusedcharacterindex)) {
-            [
-              [draftcharacter]
-            ] - > function_82e05d64().activecharacter = undefined;
-            [
-              [draftcharacter]
-            ] - > function_82e05d64().focusedcharacterindex = 0;
+          if(isDefined([[draftcharacter]] - > function_82e05d64().selectedcharacterdata) && player_role::is_valid([[draftcharacter]] - > function_82e05d64().selectedcharacterdata.charactertype) && player_role::is_valid([[draftcharacter]] - > function_82e05d64().focusedcharacterindex)) {
+            [[draftcharacter]] - > function_82e05d64().activecharacter = undefined;
+            [[draftcharacter]] - > function_82e05d64().focusedcharacterindex = 0;
           }
 
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().primaryweapon = player getprimaryweapon();
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().primaryweaponoptions = player function_519bc773();
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().secondaryweapon = player getsecondaryweapon();
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().secondaryweaponoptions = player function_64c66c4b();
+          [[draftcharacter]] - > function_82e05d64().primaryweapon = player getprimaryweapon();
+          [[draftcharacter]] - > function_82e05d64().primaryweaponoptions = player function_519bc773();
+          [[draftcharacter]] - > function_82e05d64().secondaryweapon = player getsecondaryweapon();
+          [[draftcharacter]] - > function_82e05d64().secondaryweaponoptions = player function_64c66c4b();
         } else {
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().player = undefined;
+          [[draftcharacter]] - > function_82e05d64().player = undefined;
         }
 
-        if(isDefined([
-            [draftcharacter]
-          ] - > function_82e05d64().islocalclient) && [
-            [draftcharacter]
-          ] - > function_82e05d64().islocalclient || shoutcaster::is_shoutcaster(localclientnum)) {
-          if(!isDefined([
-              [draftcharacter]
-            ] - > function_82e05d64().player)) {
-            [
-              [draftcharacter]
-            ] - > function_82e05d64().player = localplayer;
-            [
-              [draftcharacter]
-            ] - > function_82e05d64().primaryweapon = localplayer getprimaryweapon();
-            [
-              [draftcharacter]
-            ] - > function_82e05d64().primaryweaponoptions = localplayer function_519bc773();
-            [
-              [draftcharacter]
-            ] - > function_82e05d64().secondaryweapon = localplayer getsecondaryweapon();
-            [
-              [draftcharacter]
-            ] - > function_82e05d64().secondaryweaponoptions = localplayer function_64c66c4b();
+        if(isDefined([[draftcharacter]] - > function_82e05d64().islocalclient) && [[draftcharacter]] - > function_82e05d64().islocalclient || shoutcaster::is_shoutcaster(localclientnum)) {
+          if(!isDefined([[draftcharacter]] - > function_82e05d64().player)) {
+            [[draftcharacter]] - > function_82e05d64().player = localplayer;
+            [[draftcharacter]] - > function_82e05d64().primaryweapon = localplayer getprimaryweapon();
+            [[draftcharacter]] - > function_82e05d64().primaryweaponoptions = localplayer function_519bc773();
+            [[draftcharacter]] - > function_82e05d64().secondaryweapon = localplayer getsecondaryweapon();
+            [[draftcharacter]] - > function_82e05d64().secondaryweaponoptions = localplayer function_64c66c4b();
           }
 
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().localclientnum = localclientnum;
+          [[draftcharacter]] - > function_82e05d64().localclientnum = localclientnum;
 
-          if(isDefined([
-              [draftcharacter]
-            ] - > function_82e05d64().selectedcharacterdata) && player_role::is_valid([
-              [draftcharacter]
-            ] - > function_82e05d64().selectedcharacterdata.charactertype) || shoutcaster::is_shoutcaster(localclientnum)) {
+          if(isDefined([[draftcharacter]] - > function_82e05d64().selectedcharacterdata) && player_role::is_valid([[draftcharacter]] - > function_82e05d64().selectedcharacterdata.charactertype) || shoutcaster::is_shoutcaster(localclientnum)) {
             function_236a944e(localclientnum);
             lerpduration = 1000;
 
@@ -622,26 +576,18 @@ update_team(localclientnum, var_4123f2c1) {
             positiondraftmodel = getuimodel(controllermodel, "PositionDraft");
 
             if(isDefined(positiondraftmodel)) {
-              [
-                [draftcharacter]
-              ] - > function_82e05d64().focusedcharacterindex = getuimodelvalue(getuimodel(positiondraftmodel, "focusedCharacterIndex"));
+              [[draftcharacter]] - > function_82e05d64().focusedcharacterindex = getuimodelvalue(getuimodel(positiondraftmodel, "focusedCharacterIndex"));
             }
           }
         } else {
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().localclientnum = undefined;
+          [[draftcharacter]] - > function_82e05d64().localclientnum = undefined;
         }
 
         var_24b754fa = getuimodelvalue(getuimodel(positionmodel, "clientInfo"));
         [[draftcharacter]] - > function_82e05d64().var_91065a59 = getuimodelvalue(getuimodel(var_24b754fa, "ready"));
 
-        if(shoutcaster::is_shoutcaster(localclientnum) && !isDefined([
-            [draftcharacter]
-          ] - > function_82e05d64().var_91065a59) && isDefined(player) && isbot(player)) {
-          [
-            [draftcharacter]
-          ] - > function_82e05d64().var_91065a59 = 0;
+        if(shoutcaster::is_shoutcaster(localclientnum) && !isDefined([[draftcharacter]] - > function_82e05d64().var_91065a59) && isDefined(player) && isbot(player)) {
+          [[draftcharacter]] - > function_82e05d64().var_91065a59 = 0;
         }
       }
     }

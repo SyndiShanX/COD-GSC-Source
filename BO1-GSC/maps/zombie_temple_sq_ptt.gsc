@@ -16,7 +16,6 @@ init() {
   set_stage_time_limit("sq", "PtT", 5 * 60);
   declare_stage_asset_from_struct("sq", "PtT", "sq_ptt_trig", ::gas_volume, ::volume_trigger_thread);
 }
-
 debug_jet() {
   self endon("death");
   struct = getstruct(self.target, "targetname");
@@ -32,14 +31,12 @@ debug_jet() {
     wait(1);
   }
 }
-
 ignite_jet() {
   self playSound("evt_sq_ptt_gas_ignite");
   exploder(self.script_int + 10);
   wait(1.0);
   stop_exploder(self.script_int);
 }
-
 gas_volume() {
   self endon("death");
   self.jet_color = (0, 255, 0);
@@ -59,7 +56,6 @@ gas_volume() {
     }
   }
 }
-
 play_line_on_nearby_player() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -69,7 +65,6 @@ play_line_on_nearby_player() {
     }
   }
 }
-
 volume_trigger_thread() {
   self endon("death");
   self endon("lit");
@@ -83,7 +78,6 @@ volume_trigger_thread() {
     }
   }
 }
-
 player_line_thread() {
   self endon("death");
   self endon("lit");
@@ -95,11 +89,10 @@ player_line_thread() {
     }
   }
 }
-
 init_stage() {
   level notify("ptt_start");
   flag_clear("sq_ptt_dial_dialed");
-  dial = getEnt("sq_ptt_dial", "targetname");
+  dial = GetEnt("sq_ptt_dial", "targetname");
   dial thread ptt_dial();
   jets = getEntArray("sq_ptt_trig", "targetname");
   level._ptt_jets = jets.size;
@@ -112,7 +105,6 @@ init_stage() {
   }
   level thread play_choking_loop();
 }
-
 play_choking_loop() {
   level endon("sq_PtT_over");
   struct = getstruct("sq_location_ptt", "targetname");
@@ -122,16 +114,14 @@ play_choking_loop() {
   level._ptt_sound_choking_ent = spawn("script_origin", struct.origin);
   level._ptt_sound_choking_ent playLoopSound("evt_sq_ptt_choking_loop", 2);
   flag_wait("sq_ptt_dial_dialed");
-  level._ptt_sound_choking_ent stopLoopSound(1);
+  level._ptt_sound_choking_ent stoploopsound(1);
   wait(1);
   level._ptt_sound_choking_ent delete();
   level._ptt_sound_choking_ent = undefined;
 }
-
 delayed_start_skit(skit) {
   level thread maps\zombie_temple_sq_skits::start_skit(skit);
 }
-
 ptt_lever() {
   level endon("sq_PtT_over");
   flag_clear("sq_ptt_level_pulled");
@@ -155,7 +145,6 @@ ptt_lever() {
   if(isDefined(who)) {}
   flag_set("sq_ptt_level_pulled");
 }
-
 ptt_story_vox(player) {
   level endon("sq_PtT_over");
   struct = getstruct("sq_location_ptt", "targetname");
@@ -174,13 +163,13 @@ ptt_story_vox(player) {
   level._ptt_sound_ent waittill("sounddone");
   if(isDefined(player)) {
     level.skit_vox_override = true;
-    player playSound("vox_egg_story_3_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
+    player playSound("vox_egg_story_3_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player GetEntityNumber()), "vox_egg_sounddone");
     player waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
   level thread ptt_story_reminder_vox(45);
   flag_wait("sq_ptt_level_pulled");
-  level._ptt_sound_ent_trash stopLoopSound(2);
+  level._ptt_sound_ent_trash stoploopsound(2);
   level._ptt_sound_ent_trash playSound("evt_sq_ptt_trash_end");
   level._ptt_sound_ent playSound("vox_egg_story_3_8", "sounddone");
   level._ptt_sound_ent waittill("sounddone");
@@ -192,7 +181,6 @@ ptt_story_vox(player) {
   level._ptt_sound_ent delete();
   level._ptt_sound_ent = undefined;
 }
-
 ptt_story_reminder_vox(waittime) {
   level endon("sq_PtT_over");
   wait(waittime);
@@ -204,7 +192,6 @@ ptt_story_reminder_vox(waittime) {
     wait(waittime);
   }
 }
-
 stage_logic() {
   flag_wait("sq_ptt_dial_dialed");
   while(level._ptt_num_lit < level._ptt_jets) {
@@ -222,7 +209,6 @@ stage_logic() {
   wait(5.0);
   stage_completed("sq", "PtT");
 }
-
 remove_exploders() {
   stop_exploder(100);
   stop_exploder(101);
@@ -234,11 +220,10 @@ remove_exploders() {
   stop_exploder(112);
   stop_exploder(113);
 }
-
 exit_stage(success) {
   flag_clear("sq_ptt_dial_dialed");
   flag_clear("ptt_plot_vo_done");
-  dial = getEnt("sq_ptt_dial", "targetname");
+  dial = GetEnt("sq_ptt_dial", "targetname");
   dial thread dud_dial_handler();
   ents = GetAIArray("axis");
   for(i = 0; i < ents.size; i++) {
@@ -267,7 +252,6 @@ exit_stage(success) {
     level._ptt_sound_choking_ent = undefined;
   }
 }
-
 dial_trigger() {
   level endon("ptt_start");
   level endon("sq_PtT_over");
@@ -276,7 +260,6 @@ dial_trigger() {
     self.owner_ent notify("triggered", who);
   }
 }
-
 ptt_dial() {
   level endon("sq_PtT_over");
   num_turned = 0;
@@ -291,11 +274,10 @@ ptt_dial() {
   }
   level thread ptt_story_vox(who);
   self playSound("evt_sq_ptt_gas_release");
-  lever = getEnt("sq_ptt_lever", "targetname");
+  lever = GetEnt("sq_ptt_lever", "targetname");
   lever thread ptt_lever();
   flag_set("sq_ptt_dial_dialed");
 }
-
 dud_dial_handler() {
   level endon("ptt_start");
   self.trigger thread dial_trigger();

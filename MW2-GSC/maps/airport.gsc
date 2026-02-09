@@ -190,7 +190,7 @@ flags() {
 
 global_inits() {
   level.CONST_WAIT_TARMAC_BSC = 1.5;
-  SetDvar("scr_elevator_speed", "64");
+  setDvar("scr_elevator_speed", "64");
   SetSavedDvar("ai_friendlyFireBlockDuration", 0);
 
   maps\createart\airport_art::main();
@@ -317,10 +317,10 @@ skip_airport_popup() {
 }
 
 skip_airport_listener() {
-  setdvar("ui_skip_airport", "");
+  setDvar("ui_skip_airport", "");
   while(true) {
     wait 1;
-    if(getdvar("ui_skip_airport") == "1") {
+    if(getDvar("ui_skip_airport") == "1") {
       nextmission();
       return;
     }

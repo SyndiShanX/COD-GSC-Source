@@ -98,7 +98,6 @@ _id_0C49(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
   } else {
     self playsoundatviewheight(var_1);
-
   }
   if(!anim._id_0C3B) {
     return;
@@ -142,7 +141,6 @@ _id_0C49(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(isDefined(var_5)) {
         thread _id_0C54(var_5, "Face done waiting", "Face done waiting");
-
       }
       self waittill("Face done waiting");
       var_6 = undefined;
@@ -204,7 +202,6 @@ _id_0C49(var_0, var_1, var_2, var_3, var_4, var_5) {
 
         while(!self.a._id_0C4A || !self.a._id_0C4B) {
           self waittill("animscript facedone");
-
         }
         self.a._id_0C3C = 0;
         self.a._id_0C4F = undefined;

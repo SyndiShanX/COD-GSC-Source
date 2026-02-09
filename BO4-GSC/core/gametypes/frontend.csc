@@ -717,32 +717,24 @@ function_4920c25a(localclientnum, menu_name, state) {
     if(mode == 1 && (var_7823b8b1 == -1 || var_7823b8b1 == 8)) {
       foreach(preset in var_9cf37283.presets) {
         if(preset.isvalid && preset.lootid != # "") {
-          [
-            [var_d0b01271]
-          ] - > function_95779b72();
+          [[var_d0b01271]] - > function_95779b72();
 
           foreach(type, option in preset.parts) {
-            [
-              [var_d0b01271]
-            ] - > set_character_outfit_item(option, type);
+            [[var_d0b01271]] - > set_character_outfit_item(option, type);
           }
 
           function_23bc6f08(localclientnum, var_d0b01271, 8, preset, mode, character_index, 0);
 
           foreach(option, war_paint in var_9cf37283.options[7]) {
             if(war_paint.name == preset.name) {
-              [
-                [var_d0b01271]
-              ] - > set_character_outfit_item(option, 7);
+              [[var_d0b01271]] - > set_character_outfit_item(option, 7);
               break;
             }
           }
 
           foreach(option, war_paint in var_9cf37283.options[1]) {
             if(war_paint.name == preset.name) {
-              [
-                [var_d0b01271]
-              ] - > set_character_outfit_item(option, 7);
+              [[var_d0b01271]] - > set_character_outfit_item(option, 7);
               break;
             }
           }
@@ -758,12 +750,8 @@ function_4920c25a(localclientnum, menu_name, state) {
         [[var_d0b01271]] - > function_158505aa(outfitindex);
 
         foreach(i, option in options) {
-          [
-            [var_d0b01271]
-          ] - > function_95779b72();
-          [
-            [var_d0b01271]
-          ] - > set_character_outfit_item(i, type);
+          [[var_d0b01271]] - > function_95779b72();
+          [[var_d0b01271]] - > set_character_outfit_item(i, type);
 
           if(type == 7 && mode == 1) {
             var_47e7e198 = undefined;
@@ -776,16 +764,10 @@ function_4920c25a(localclientnum, menu_name, state) {
             }
 
             if(isDefined(var_47e7e198)) {
-              [
-                [var_d0b01271]
-              ] - > set_character_outfit(outfitindex);
-              [
-                [var_d0b01271]
-              ] - > set_character_outfit_item(var_47e7e198, 5);
+              [[var_d0b01271]] - > set_character_outfit(outfitindex);
+              [[var_d0b01271]] - > set_character_outfit_item(var_47e7e198, 5);
             } else {
-              [
-                [var_d0b01271]
-              ] - > set_character_outfit(0);
+              [[var_d0b01271]] - > set_character_outfit(0);
             }
           }
 
@@ -798,7 +780,7 @@ function_4920c25a(localclientnum, menu_name, state) {
   [[var_d0b01271]] - > function_39a68bf2();
   level notify("<dev string:x16b>" + localclientnum, {
     #menu: "<dev string:x179>", #status: "<dev string:x18e>"});
-  setdvar(#"char_render", "<dev string:x4b>");
+  setDvar(#"char_render", "<dev string:x4b>");
   function_59013397();
 }
 
@@ -867,7 +849,7 @@ function_fb399a61(localclientnum) {
     }
   }
 
-  setdvar(#"char_render", "<dev string:x4b>");
+  setDvar(#"char_render", "<dev string:x4b>");
   var_f7a528f2 = "<dev string:x4b>";
 
   while(true) {
@@ -1005,7 +987,7 @@ function_f2c538de(localclientnum, menu_name, state) {
   level notify("<dev string:x16b>" + localclientnum, {
     #menu: "<dev string:x317>", #status: "<dev string:x18e>"});
   weapon_model delete();
-  setdvar(#"weap_render", "<dev string:x4b>");
+  setDvar(#"weap_render", "<dev string:x4b>");
   function_59013397();
 }
 
@@ -1034,8 +1016,8 @@ function_db3c4c69(localclientnum) {
     adddebugcommand(localclientnum, "<dev string:x66>" + var_ee63b362 + "<dev string:x369>" + "<dev string:x373>" + "<dev string:x167>" + name + "<dev string:x9a>");
   }
 
-  setdvar(#"hash_1311d7636a782655", "<dev string:x4b>");
-  setdvar(#"weap_render", "<dev string:x4b>");
+  setDvar(#"hash_1311d7636a782655", "<dev string:x4b>");
+  setDvar(#"weap_render", "<dev string:x4b>");
   var_c11ba901 = array("<dev string:x2e7>", "<dev string:x2f5>", "<dev string:x2fc>", "<dev string:x303>", "<dev string:x386>", "<dev string:x38f>", "<dev string:x39a>");
   weapon_name = "<dev string:x4b>";
   var_f7a528f2 = "<dev string:x4b>";
@@ -1128,7 +1110,7 @@ function_ea9a5e69(localclientnum) {
     waitframe(1);
   }
 
-  setdvar(#"hash_4243dd01393aa940", "<dev string:x4b>");
+  setDvar(#"hash_4243dd01393aa940", "<dev string:x4b>");
   var_f7a528f2 = "<dev string:x4b>";
 
   while(true) {
@@ -1233,7 +1215,7 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
 
   level notify("<dev string:x16b>" + localclientnum, {
     #menu: "<dev string:x40e>", #status: "<dev string:x18e>"});
-  setdvar(#"hash_4243dd01393aa940", "<dev string:x4b>");
+  setDvar(#"hash_4243dd01393aa940", "<dev string:x4b>");
   function_59013397();
 }
 
@@ -1846,16 +1828,12 @@ function_ce0c92c1(localclientnum, var_dde5862c) {
       if(isDefined(level.var_47863282) && !array::contains(getarraykeys(level.var_4c6f850d), level.var_47863282)) {
         level.var_37fcc91f = undefined;
 
-        if([
-            [level.cycle_frozen_moment_char_next]
-          ] - > function_ea4ac9f8()) {
+        if([[level.cycle_frozen_moment_char_next]] - > function_ea4ac9f8()) {
           level notify(#"hash_5661859119127749");
         } else {
           level notify(#"hash_4cfb73b5657634d1");
           function_a71254a9(localclientnum, 0, undefined, 1);
-          [
-            [level.cycle_frozen_moment_char_current]
-          ] - > function_39a68bf2();
+          [[level.cycle_frozen_moment_char_current]] - > function_39a68bf2();
           stopmaincamxcam(localclientnum);
           level.var_494e824d = 0;
           function_6e9fbb54(localclientnum);
@@ -2055,9 +2033,7 @@ function_f00ff0c7(localclientnum) {
           var_7d4d74d3 = i > character_array.size ? undefined : character_array[i];
 
           if(isDefined(var_7d4d74d3)) {
-            [
-              [var_7d4d74d3.character]
-            ] - > hide_model();
+            [[var_7d4d74d3.character]] - > hide_model();
             var_7d4d74d3.character draft::cancel_spray();
             var_7d4d74d3.character notify(#"cancel_gesture");
             character_customization::function_bee62aa1(var_7d4d74d3.character);
@@ -2228,7 +2204,6 @@ lobby_main(localclientnum, menu_name, state) {
       var_d53ddee1 = function_ae99571d(localclientnum);
 
       update_room2_devgui(localclientnum);
-
     } else if(state == "room1") {
       setallcontrollerslightbarcolor((1, 0.4, 0));
       level thread pulse_controller_color();

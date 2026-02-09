@@ -472,7 +472,7 @@ function_34bcd465() {
 
   e_player = arraygetclosest(self.origin, var_887826bc);
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     if(n_timer > 0) {
       iprintlnbold("<dev string:x115>" + e_player.name + "<dev string:x12a>" + n_timer + "<dev string:x134>");
     }
@@ -619,7 +619,7 @@ function_a877cd10(str_index) {
 function_11101458(str_next_defend, var_6cc77d4e = # "hash_3a35084ee8c333b2", hide_notify = "creating_zone_defend_area") {
   var_679cd7a8 = function_a877cd10(str_next_defend);
 
-  if(isDefined(var_679cd7a8.var_9fc5eea1) && !isplayer(self)) {
+  if(isDefined(var_679cd7a8.var_9fc5eea1) && !isPlayer(self)) {
     n_obj_id = function_d7db256e(var_679cd7a8.var_ed1db1a7, var_6cc77d4e, 0);
     var_e1feb2f6 = function_d7db256e(var_679cd7a8.var_c13f5c4b, var_6cc77d4e, 0);
     objective_setinvisibletoall(n_obj_id);
@@ -637,7 +637,7 @@ function_11101458(str_next_defend, var_6cc77d4e = # "hash_3a35084ee8c333b2", hid
   n_obj_id = function_d7db256e(var_679cd7a8.var_ed1db1a7, var_6cc77d4e, 0);
   objective_setinvisibletoall(n_obj_id);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread zm_equipment::show_hint_text(var_679cd7a8.var_16a34df0, 10, 1.75, 120);
     objective_setvisibletoplayer(n_obj_id, self);
   } else {
@@ -908,7 +908,7 @@ function_6ca0c2d9(params) {
     }
   }
 
-  if(isplayer(params.eattacker) && var_5d4b3bca == a_ai_enemies.size) {
+  if(isPlayer(params.eattacker) && var_5d4b3bca == a_ai_enemies.size) {
     n_damage = params.idamage * 2;
     return n_damage;
   }

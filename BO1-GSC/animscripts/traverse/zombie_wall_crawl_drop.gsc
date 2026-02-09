@@ -7,10 +7,10 @@
 #include maps\_utility;
 #include animscripts\zombie_Utility;
 #using_animtree("generic_human");
+
 main() {
   zombie_wall_crawl();
 }
-
 debug_draw_orient() {}
 zombie_wall_crawl() {
   self endon("killanimscript");
@@ -68,7 +68,6 @@ zombie_wall_crawl() {
   self.can_explode = true;
   self notify("quad_end_traverse_anim");
 }
-
 ZombieTraverseStartRagdollDeath() {
   self.prevDelayedDeath = self.delayedDeath;
   self.prevAllowDeath = self.allowDeath;
@@ -77,7 +76,6 @@ ZombieTraverseStartRagdollDeath() {
   self.allowDeath = true;
   self.deathFunction = animscripts\traverse\zombie_wall_crawl_drop::ZombieRagdollSimple;
 }
-
 ZombieTraverseStopRagdollDeath() {
   if(!isDefined(self) || !isAlive(self)) {
     return;
@@ -89,12 +87,10 @@ ZombieTraverseStopRagdollDeath() {
   self.prevAllowDeath = undefined;
   self.prevDeathFunction = undefined;
 }
-
 ZombieRagdollSimple() {
   self animscripts\traverse\zombie_shared::TraverseRagdollDeathSimple();
   level maps\_zombiemode_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
 }
-
 play_blended_death(vertAnim, horzAnim) {
   level maps\_zombiemode_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
   pitch = self GetTagAngles("tag_sync")[0];
@@ -111,7 +107,6 @@ play_blended_death(vertAnim, horzAnim) {
   self setFlaggedAnimKnob("falling_death", %wall_death, 1);
   self animscripts\zombie_shared::DoNotetracks("falling_death");
 }
-
 wait_on_vertical_death() {
   self endon("death");
   self endon("traverse_death");

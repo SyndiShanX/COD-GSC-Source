@@ -8,8 +8,9 @@
 #using_animtree("animated_props");
 main() {
   waittillframeend;
-  if(getDvar(#"animated_trees_enabled") == "")
-    setdvar("animated_trees_enabled", "1");
+  if(getDvar(#"animated_trees_enabled") == "") {
+    setDvar("animated_trees_enabled", "1");
+  }
   level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
@@ -59,7 +60,6 @@ main() {
   array_thread(animated_models, ::animated_model);
   level.init_animatedmodels = undefined;
 }
-
 print_modellist_bykey(key) {
   anima = level.init_animatedmodels[key];
   if(isDefined(anima["still"])) {
@@ -69,15 +69,15 @@ print_modellist_bykey(key) {
     println("\tlevel.anim_prop_models[ \"" + key + "\" ][ " + "\"strong\"" + " ] = %" + anima["strong"] + ";");
   }
 }
-
 print_modelcsv_bykey(key) {
   anima = level.init_animatedmodels[key];
-  if(isDefined(anima["still"]))
+  if(isDefined(anima["still"])) {
     println("xanim," + anima["still"]);
-  if(isDefined(anima["strong"]))
+  }
+  if(isDefined(anima["strong"])) {
     println("xanim," + anima["strong"]);
+  }
 }
-
 model_init() {
   anima = [];
   switch (self.model) {
@@ -133,10 +133,10 @@ model_init() {
       break;
   }
   level.init_animatedmodels[self.model] = anima;
-  if(!isDefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model])) {
     level.init_animatedmodels_dump = true;
+  }
 }
-
 model_disable() {
   switch (self.model) {
     case "foliage_tree_desertpalm01_animated":
@@ -180,7 +180,6 @@ model_disable() {
       break;
   }
 }
-
 animated_model() {
   self UseAnimTree(#animtree);
   wind = "strong";
@@ -189,7 +188,6 @@ animated_model() {
     level waittill("windchange", wind);
   }
 }
-
 tree_animates(animate) {
   level endon("windchange");
   windweight = level.wind.weight;

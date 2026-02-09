@@ -8,11 +8,11 @@
 
 init_animset_idle() {
   var_0 = [];
-  var_0["stand"][0] = [ % casual_stand_idle, %casual_stand_idle_twitch, %casual_stand_idle_twitchb];
-  var_0["stand_combat"][0] = [ % cqb_stand_idle, %cqb_stand_twitch];
-  var_0["stand_cqb"][0] = [ % cqb_stand_idle, %cqb_stand_twitch];
-  var_0["crouch"][0] = [ % casual_crouch_idle];
-  var_0["crouch_combat"][0] = [ % exposed_crouch_aim_5];
+  var_0["stand"][0] = [%casual_stand_idle, %casual_stand_idle_twitch, %casual_stand_idle_twitchb];
+  var_0["stand_combat"][0] = [%cqb_stand_idle, %cqb_stand_twitch];
+  var_0["stand_cqb"][0] = [%cqb_stand_idle, %cqb_stand_twitch];
+  var_0["crouch"][0] = [%casual_crouch_idle];
+  var_0["crouch_combat"][0] = [%exposed_crouch_aim_5];
   var_1 = [];
   var_1["crouch_combat"][0] = % exposed_crouch_idle_alert_v1;
   var_1["crouch_combat"][1] = % exposed_crouch_idle_alert_v2;

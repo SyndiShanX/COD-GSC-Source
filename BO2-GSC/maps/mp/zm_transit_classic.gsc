@@ -105,8 +105,8 @@ main() {
   level thread bus_roof_damage_init();
   level thread diner_hatch_access();
   level thread maps\mp\zombies\_zm_buildables::think_buildables();
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 3.5);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 3.5);
   level thread zm_traversal_override_ignores();
   level thread maps\mp\zombies\_zm::post_main();
   level.spectator_respawn_custom_score = ::callback_spectator_respawn_custom_score;
@@ -221,7 +221,7 @@ vault_breach_think() {
     if(isDefined(amount) && amount <= 1) {
       continue;
     }
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       if(self.damage_state == 0)
         self.damage_state = 1;
 
@@ -340,7 +340,7 @@ bus_roof_damage() {
   while(true) {
     self waittill("trigger", who);
 
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       if(who getstance() == "stand")
         who dodamage(1, who.origin);
     } else if(!(isDefined(who.marked_for_death) && who.marked_for_death) && (isDefined(who.has_legs) && who.has_legs)) {

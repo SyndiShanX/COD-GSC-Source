@@ -23,7 +23,6 @@ _id_43FA() {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(isDefined(var_0[var_1].script_noteworthy) && var_0[var_1].script_noteworthy == "notsolid") {
       var_0[var_1] notsolid();
-
     }
     if(!isDefined(var_0[var_1].target)) {
       continue;
@@ -39,15 +38,13 @@ _id_43FA() {
 
   if(isDefined(self.script_noteworthy)) {
     level waittill(self.script_noteworthy);
-
   }
   self waittill("trigger", var_3);
 
-  if(isplayer(var_3)) {
+  if(isPlayer(var_3)) {
     var_4 = var_3 getorigin();
   } else {
     var_4 = var_3.origin;
-
   }
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(!isDefined(var_0[var_1].target)) {
@@ -109,7 +106,6 @@ _id_43FD(var_0) {
     self rotateroll((1500 + randomfloat(2500)) * -1, 5, 0, 0);
   } else {
     self rotateroll(1500 + randomfloat(2500), 5, 0, 0);
-
   }
   self movegravity((var_2, var_3, var_4), 12);
   wait 6;
@@ -127,7 +123,6 @@ _id_43FE(var_0, var_1) {
       var_2[var_3] setModel("woodgib_small1");
     } else {
       var_2[var_3] setModel("woodgib_small2");
-
     }
     var_1 = var_1 + (50 - randomint(100), 50 - randomint(100), 0);
     var_4 = vectornormalize(var_0 - var_1);

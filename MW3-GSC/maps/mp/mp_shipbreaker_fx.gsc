@@ -24,8 +24,7 @@ main() {
   level._effect["Live weld"] = loadfx("maps/mp_shipbreaker/mp_ship_weld_loop");
   level._effect["Towerglow"] = loadfx("maps/mp_shipbreaker/mp_ship_towerglow");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_shipbreaker_fx::main();
   }
-
 }

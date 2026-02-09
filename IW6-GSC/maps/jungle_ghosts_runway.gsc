@@ -1746,7 +1746,7 @@ falling_tree_player_detection(var_0, var_1) {
   for(;;) {
     if(level.player istouching(self)) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", &"jungle_ghosts_obit_tree");
+      setDvar("ui_deadquote", &"jungle_ghosts_obit_tree");
       level.player kill();
       return;
     }

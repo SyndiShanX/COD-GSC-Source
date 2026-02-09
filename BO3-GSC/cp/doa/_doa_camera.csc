@@ -68,8 +68,8 @@ function function_d207ecc1(localclientnum, delta_time) {
   }
   if(level.localplayers.size >= 2) {
     if(!isDefined(level.var_3d977189)) {
-      setdvar("r_deadOpsActive", 1);
-      setdvar("r_splitScreenExpandFull", 1);
+      setDvar("r_deadOpsActive", 1);
+      setDvar("r_splitScreenExpandFull", 1);
       level.var_3d977189 = 1;
     }
   }

@@ -10,7 +10,7 @@ main() {
   level._loadstarted = 1;
   level.virtuallobbyactive = getdvarint("virtualLobbyActive", 0);
   maps\mp\_utility::set_console_status();
-  level.createfx_enabled = getdvar("createfx") != "";
+  level.createfx_enabled = getDvar("createfx") != "";
   common_scripts\utility::struct_class_init();
   maps\mp\_utility::initgameflags();
   maps\mp\_utility::initlevelflags();
@@ -69,7 +69,7 @@ main() {
     maps\mp\_createfx::createfx();
   }
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     deleteduringreflectionprobegeneration();
     maps\mp\gametypes\_spawnlogic::setmapcenterfordev();
     maps\mp\_global_fx::main();
@@ -131,21 +131,21 @@ main() {
   level.laseroff_func = ::laseroff;
   level.connectpathsfunction = ::connectpaths;
   level.disconnectpathsfunction = ::disconnectpaths;
-  setdvar("sm_spotLightScoreModelScale", 0.1);
-  setdvar("sm_spotShadowFadeTime", 1.0);
-  setdvar("r_specularcolorscale", 2.5);
-  setdvar("r_diffusecolorscale", 1);
-  setdvar("r_lightGridEnableTweaks", 0);
-  setdvar("r_lightGridIntensity", 1);
-  setdvar("r_lightGridContrast", 0);
-  setdvar("r_dof_physical_enable", 1);
-  setdvar("r_volumeLightScatter", 0);
-  setdvar("r_uiblurdstmode", 0);
-  setdvar("r_blurdstgaussianblurradius", 1);
-  setdvar("r_dof_physical_bokehEnable", 0);
+  setDvar("sm_spotLightScoreModelScale", 0.1);
+  setDvar("sm_spotShadowFadeTime", 1.0);
+  setDvar("r_specularcolorscale", 2.5);
+  setDvar("r_diffusecolorscale", 1);
+  setDvar("r_lightGridEnableTweaks", 0);
+  setDvar("r_lightGridIntensity", 1);
+  setDvar("r_lightGridContrast", 0);
+  setDvar("r_dof_physical_enable", 1);
+  setDvar("r_volumeLightScatter", 0);
+  setDvar("r_uiblurdstmode", 0);
+  setDvar("r_blurdstgaussianblurradius", 1);
+  setDvar("r_dof_physical_bokehEnable", 0);
 
   if(level.nextgen) {
-    setdvar("sm_polygonOffsetPreset", 0);
+    setDvar("sm_polygonOffsetPreset", 0);
   }
 
   setupdestructiblekillcaments();
@@ -343,7 +343,7 @@ setupdestructiblekillcaments() {
   var_0 = getEntArray("destructible_vehicle", "targetname");
 
   foreach(var_2 in var_0) {
-    switch (getdvar("mapname")) {
+    switch (getDvar("mapname")) {
       case "mp_interchange":
         if(var_2.origin[2] > 150.0) {
           continue;

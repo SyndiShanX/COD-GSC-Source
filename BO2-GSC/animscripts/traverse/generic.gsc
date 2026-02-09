@@ -15,7 +15,6 @@ main() {
     default:
 
       assertmsg("Traversal: 'generic' doesn't support entity type '" + self.type + "'.");
-
   }
 }
 

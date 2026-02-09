@@ -41,7 +41,7 @@ main() {
   level._effect["ground_smoke_dcburning1200x1200"] = loadfx("smoke/ground_smoke1200x1200_dcburning");
 
   //MinSpec Spotlight
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
+  if(getdvarint("sm_enable") && getDvar("r_zfeather") != "0")
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model_dim");
   else
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large");

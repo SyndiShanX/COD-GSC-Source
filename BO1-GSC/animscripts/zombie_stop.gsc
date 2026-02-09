@@ -7,6 +7,7 @@
 #include animscripts\zombie_utility;
 #include animscripts\zombie_SetPoseMovement;
 #using_animtree("generic_human");
+
 main() {
   self notify("stopScript");
   self endon("killanimscript");
@@ -32,13 +33,11 @@ main() {
     }
   }
 }
-
 setLastStoppedTime() {
   self endon("death");
   self waittill("killanimscript");
   self.lastStoppedTime = GetTime();
 }
-
 getDesiredIdlePose() {
   myNode = animscripts\zombie_utility::GetClaimedNode();
   if(isDefined(myNode)) {
@@ -57,7 +56,6 @@ getDesiredIdlePose() {
   }
   return desiredPose;
 }
-
 transitionToIdle(pose, idleSet) {
   if(self isCQBWalking() && self.a.pose == "stand" && self IsInCombat()) {
     pose = "stand_cqb";
@@ -75,7 +73,6 @@ transitionToIdle(pose, idleSet) {
     self animscripts\zombie_shared::DoNoteTracks("idle_transition");
   }
 }
-
 playIdle(pose, idleSet) {
   if(!is_skeleton("base")) {
     pose = pose + "_" + get_skeleton();
@@ -94,7 +91,6 @@ playIdle(pose, idleSet) {
   self SetFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, transTime, self.animplaybackrate);
   self animscripts\zombie_shared::DoNoteTracks("idle");
 }
-
 delayedException() {
   self endon("killanimscript");
   wait(0.05);

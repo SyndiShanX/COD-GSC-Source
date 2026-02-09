@@ -122,7 +122,7 @@ watchPlayerEnterWater() {
       ent thread hordeDogInWater(self);
     }
 
-    if(!IsPlayer(ent) && !IsAI(ent)) {
+    if(!isPlayer(ent) && !IsAI(ent)) {
       continue;
     }
 

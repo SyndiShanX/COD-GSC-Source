@@ -29,9 +29,9 @@ main() {
 
   level.orbitalSupportOverrideFunc = ::damCustomOSPFunc;
 
-  setdvar("r_mpRimColor", "1 1 1");
-  setdvar("r_mpRimStrength", "1");
-  setdvar("r_mpRimDiffuseTint", "1 1 1");
+  setDvar("r_mpRimColor", "1 1 1");
+  setDvar("r_mpRimStrength", "1");
+  setDvar("r_mpRimDiffuseTint", "1 1 1");
 
   thread rotateGenerators();
 

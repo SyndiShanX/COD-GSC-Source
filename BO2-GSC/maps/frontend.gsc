@@ -123,8 +123,9 @@ do_stats() {
 
   player = level.player;
 
-  if(isDefined(player) && player hascompletedallgamechallenges())
+  if(isDefined(player) && player hascompletedallgamechallenges()) {
     player giveachievement_wrapper("SP_ALL_CHALLENGES_IN_GAME");
+  }
 }
 
 level_player_init() {
@@ -147,8 +148,9 @@ level_player_init() {
   visionsetnaked("sp_frontend_bridge", 0.0);
 
   if(level.ps3) {
-    if(getdvar(#"ui_mapname") != "credits")
+    if(getDvar(#"ui_mapname") != "credits") {
       frontend_do_save();
+    }
   } else
     frontend_do_save();
 
@@ -158,10 +160,11 @@ level_player_init() {
 }
 
 setfirstmusicstate() {
-  if(!flag("lockout_screen_skipped") && !flag("lockout_screen_skipped_freeroam") && !flag("lockout_screen_passed"))
+  if(!flag("lockout_screen_skipped") && !flag("lockout_screen_skipped_freeroam") && !flag("lockout_screen_passed")) {
     setmusicstate("FRONT_END_START");
-  else
+  } else {
     setmusicstate("FRONT_END_MAIN");
+  }
 }
 
 frontend_init_common() {

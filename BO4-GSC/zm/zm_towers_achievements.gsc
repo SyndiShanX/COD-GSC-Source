@@ -68,7 +68,7 @@ function_7b7ba154(s_params) {
 
   e_activator = e_attacker.activated_by_player;
 
-  if(!isplayer(e_activator)) {
+  if(!isPlayer(e_activator)) {
     return;
   }
 
@@ -115,7 +115,7 @@ function_9bb7596b() {
 function_3cbde7f5(s_params) {
   e_player = s_params.eattacker;
 
-  if(!isplayer(e_player)) {
+  if(!isPlayer(e_player)) {
     return;
   }
 
@@ -137,7 +137,6 @@ function_3cbde7f5(s_params) {
     e_player zm_utility::giveachievement_wrapper("zm_towers_ww_kills");
 
     e_player debug_notification("<dev string:x56>");
-
   }
 }
 
@@ -176,18 +175,17 @@ function_b43c1bad(s_params) {
 
   e_player = var_328cd9eb.var_443d78cc;
 
-  if(isplayer(e_player) && !e_player flag::exists(#"hash_4969e1eae9bf556f")) {
+  if(isPlayer(e_player) && !e_player flag::exists(#"hash_4969e1eae9bf556f")) {
     e_player flag::init(#"hash_4969e1eae9bf556f");
     e_player flag::set(#"hash_4969e1eae9bf556f");
     e_player zm_utility::giveachievement_wrapper("zm_towers_kitty_kitty");
 
     e_player debug_notification("<dev string:x6c>");
-
   }
 }
 
 function_cda4b8ba(e_attacker) {
-  if(!isplayer(e_attacker) || e_attacker zm_zonemgr::get_player_zone() !== "zone_body_pit") {
+  if(!isPlayer(e_attacker) || e_attacker zm_zonemgr::get_player_zone() !== "zone_body_pit") {
     return;
   }
 
@@ -203,7 +201,6 @@ function_cda4b8ba(e_attacker) {
     e_attacker zm_utility::giveachievement_wrapper("zm_towers_dismember");
 
     e_attacker debug_notification("<dev string:x80>");
-
   }
 }
 
@@ -270,7 +267,6 @@ function_cbdb5e70() {
         e_player zm_utility::giveachievement_wrapper("zm_towers_fast_pap");
 
         e_player debug_notification("<dev string:xc0>");
-
       }
     }
   }

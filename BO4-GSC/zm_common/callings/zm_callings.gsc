@@ -199,7 +199,6 @@ function_104c5d35() {
       self stats::inc_stat(#"playercalling", #"seasons", self.var_e06cb519, #"factions", self.var_d0b65bbe, #"hash_7a54171ce10db54f", 1);
 
       iprintln("<dev string:x38>" + function_9e72a96(var_acbd7392) + "<dev string:x53>" + function_9e72a96(self.var_d0b65bbe));
-
     }
   }
 }

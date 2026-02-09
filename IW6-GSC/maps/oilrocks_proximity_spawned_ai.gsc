@@ -160,7 +160,7 @@ ai_on_death(var_0, var_1) {
 ai_track_death_by_player(var_0, var_1) {
   var_0 endon("entitydeleted");
   var_0 waittill("death", var_2);
-  var_3 = isalive(var_2) && isplayer(var_2);
+  var_3 = isalive(var_2) && isPlayer(var_2);
 
   if(!var_3 && isDefined(var_2) && var_2.classname == "worldspawn")
     var_3 = 1;

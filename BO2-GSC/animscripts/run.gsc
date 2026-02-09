@@ -55,14 +55,12 @@ moverun() {
           movestandcombatoverride();
 
           self animscripts\debug::debugpopstate("MoveStandCombatOverride");
-
         } else {
           self animscripts\debug::debugpushstate("MoveStandCombatNormal");
 
           movestandcombatnormal();
 
           self animscripts\debug::debugpopstate("MoveStandCombatNormal");
-
         }
       } else if(isDefined(self.run_noncombatanim)) {
         self animscripts\debug::debugpushstate("MoveStandNoncombatOverride");
@@ -70,14 +68,12 @@ moverun() {
         movestandnoncombatoverride();
 
         self animscripts\debug::debugpopstate("MoveStandNoncombatOverride");
-
       } else {
         self animscripts\debug::debugpushstate("MoveStandNoncombatNormal");
 
         movestandnoncombatnormal();
 
         self animscripts\debug::debugpopstate("MoveStandNoncombatNormal");
-
       }
 
       break;
@@ -94,14 +90,12 @@ moverun() {
         movecrouchrunoverride();
 
         self animscripts\debug::debugpopstate("MoveCrouchRunOverride");
-
       } else {
         self animscripts\debug::debugpushstate("MoveCrouchRunNormal");
 
         movecrouchrunnormal();
 
         self animscripts\debug::debugpopstate("MoveCrouchRunNormal");
-
       }
 
       break;
@@ -144,8 +138,9 @@ movestandcombatnormal() {
   aimingoff();
   self orientmode("face default");
 
-  if(!self.bulletsinclip && mayshootwhilemoving)
+  if(!self.bulletsinclip && mayshootwhilemoving) {
     cheatammoifnecessary();
+  }
 
   rundebuginfo();
 
@@ -155,8 +150,9 @@ movestandcombatnormal() {
     runshootwhilemovingthreads();
     cheatammoifrunningbackward();
 
-    if(isplayer(self.enemy))
+    if(isPlayer(self.enemy)) {
       self updateplayersightaccuracy();
+    }
 
     if(shouldtacticalwalk()) {
       tacticalwalkforwardtobackwardtransition();
@@ -170,9 +166,9 @@ movestandcombatnormal() {
     stoptacticalwalk();
     stoprunngun();
 
-    if(shouldsprintforvariation() || shouldsprint)
+    if(shouldsprintforvariation() || shouldsprint) {
       fullsprint();
-    else {
+    } else {
       stopfullsprint();
       combatrun();
     }
@@ -184,27 +180,31 @@ movestandcombatnormal() {
 
 cheatammoifrunningbackward() {
   if(shouldtacticalwalk() || shouldrunngun()) {
-    if(shouldshootwhilerunningbackward())
+    if(shouldshootwhilerunningbackward()) {
       self.bulletsinclip = weaponclipsize(self.weapon);
+    }
   }
 }
 
 shouldfullsprint() {
-  if(isDefined(self.sprint) && self.sprint)
+  if(isDefined(self.sprint) && self.sprint) {
     return true;
+  }
 
-  if(isDefined(self.grenade) && isDefined(self.enemy))
+  if(isDefined(self.grenade) && isDefined(self.enemy)) {
     return distance2dsquared(self.origin, self.enemy.origin) > 90000;
+  }
 
   return false;
 }
 
 fullsprint() {
   if(!isDefined(self.a.fullsprintanim)) {
-    if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol"))
+    if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
       self.a.fullsprintanim = animarraypickrandom("cqb_sprint_f");
-    else
+    } else {
       self.a.fullsprintanim = animarraypickrandom("sprint");
+    }
   }
 
   self orientmode("face motion");
@@ -217,24 +217,29 @@ stopfullsprint() {
 }
 
 shouldsprintforvariation() {
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") || self.iswounded)
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") || self.iswounded) {
     return false;
+  }
 
-  if(isDefined(self.a.neversprintforvariation) && self.a.neversprintforvariation)
+  if(isDefined(self.a.neversprintforvariation) && self.a.neversprintforvariation) {
     return false;
+  }
 
   time = gettime();
 
   if(isDefined(self.a.dangersprinttime)) {
-    if(time < self.a.dangersprinttime)
+    if(time < self.a.dangersprinttime) {
       return true;
+    }
 
-    if(time - self.a.dangersprinttime < 6000)
+    if(time - self.a.dangersprinttime < 6000) {
       return false;
+    }
   }
 
-  if(!isDefined(self.enemy) || !issentient(self.enemy))
+  if(!isDefined(self.enemy) || !issentient(self.enemy)) {
     return false;
+  }
 
   isallowedtosprint = self lastknowntime(self.enemy) + 2000 > time || distancesquared(self.enemy.origin, self.origin) > 360000;
 
@@ -248,8 +253,9 @@ shouldsprintforvariation() {
 
 shouldtacticalwalk() {
   if(isDefined(self.pathgoalpos)) {
-    if(!self shouldfacemotionwhilerunning())
+    if(!self shouldfacemotionwhilerunning()) {
       return true;
+    }
   }
 
   return false;
@@ -259,20 +265,22 @@ tacticalwalk() {
   self.a.tacticalwalking = 1;
   relativedir = anim.moveglobals.relativediranimmap[self.relativedir];
 
-  if(relativedir == "f")
+  if(relativedir == "f") {
     aimingon("tactical_f", 45);
-  else if(relativedir == "b")
+  } else if(relativedir == "b") {
     aimingon("tactical_b", 45);
-  else
+  } else {
     aimingon("tactical_l", 45);
+  }
 
   self orientmode("face default");
   motionangle = self getmotionangle();
 
-  if(abs(motionangle) < 10)
+  if(abs(motionangle) < 10) {
     blendtime = 0.4;
-  else
+  } else {
     blendtime = 0.2;
+  }
 
   runforwardanimname = "tactical_walk_" + relativedir;
   runforwardanim = animarraypickrandom(runforwardanimname, "move", 1);
@@ -299,15 +307,17 @@ tacticalwalkforwardtobackwardtransition() {
       self thread stopshootwhilemovingthreads();
       self animscripts\shared::stoptracking();
 
-      if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol"))
+      if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
         animpostfix = "_cqb";
-      else
+      } else {
         animpostfix = "";
+      }
 
-      if(anglediff > 0)
+      if(anglediff > 0) {
         transitionanim = animarray("run_f_to_bR" + animpostfix, "move");
-      else
+      } else {
         transitionanim = animarray("run_f_to_bL" + animpostfix, "move");
+      }
 
       runanimname = "tactical_walk";
       self.a.turnangle = yawtoenemy * sign(anglediff);
@@ -325,17 +335,20 @@ stoptacticalwalk() {
 }
 
 shouldrunngun() {
-  if(aihasonlypistol())
+  if(aihasonlypistol()) {
     return false;
+  }
 
   toenemyyaw = vectortoangles(self.enemy.origin - self.origin)[1];
   anglediff = angleclamp180(toenemyyaw - self.angles[1]);
 
-  if(abs(anglediff) > anim.moveglobals.max_run_n_gun_angle)
+  if(abs(anglediff) > anim.moveglobals.max_run_n_gun_angle) {
     return false;
+  }
 
-  if(self.shootstyle != "none" || isDefined(self.scriptenemy) && self.scriptenemy == self.enemy)
+  if(self.shootstyle != "none" || isDefined(self.scriptenemy) && self.scriptenemy == self.enemy) {
     return true;
+  }
 
   return false;
 }
@@ -343,8 +356,9 @@ shouldrunngun() {
 runngunchooserunanimname() {
   runanimname = "run_n_gun";
 
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol"))
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
     runanimname = "cqb_run_n_gun";
+  }
 
   return runanimname;
 }
@@ -352,8 +366,9 @@ runngunchooserunanimname() {
 runngunchooseaimanimnameprefix() {
   aimanimname = "add";
 
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol"))
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
     aimanimname = "cqb_add";
+  }
 
   return aimanimname;
 }
@@ -404,10 +419,11 @@ runngunforwardtobackwardtransition() {
     self thread stopshootwhilemovingthreads();
     self animscripts\shared::stoptracking();
 
-    if(anglediff > 0)
+    if(anglediff > 0) {
       transitionanim = animarray("run_f_to_bR", "move");
-    else
+    } else {
       transitionanim = animarray("run_f_to_bL", "move");
+    }
 
     runanimname = "run_n_gun";
     self.a.turnangle = yawtoenemy * sign(anglediff);
@@ -441,8 +457,9 @@ stoprunngun() {
 }
 
 combatrun() {
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && isDefined(self.cqb_point_of_interest) || isDefined(self.cqb_target))
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && isDefined(self.cqb_point_of_interest) || isDefined(self.cqb_target)) {
     aimingon("cqb_f", 45);
+  }
 
   self orientmode("face motion");
   runanim = getrunanim();
@@ -467,14 +484,16 @@ movestandnoncombatoverride() {
 }
 
 shouldreloadwhilerunning() {
-  if(shouldforcebehavior("reload"))
+  if(shouldforcebehavior("reload")) {
     return true;
+  }
 
   if(shouldforcebehavior("force_cheat_ammo")) {
     self.bulletsinclip = 10;
 
-    if(self.bulletsinclip > weaponclipsize(self.weapon))
+    if(self.bulletsinclip > weaponclipsize(self.weapon)) {
       self.bulletsinclip = weaponclipsize(self.weapon);
+    }
 
     return false;
   }
@@ -483,44 +502,53 @@ shouldreloadwhilerunning() {
   reloadifempty = reloadifempty || isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < anim.moveglobals.min_reload_distsq;
 
   if(reloadifempty) {
-    if(!self needtoreload(0))
+    if(!self needtoreload(0)) {
       return false;
+    }
   } else if(!self needtoreload(0.5))
     return false;
 
-  if(shouldtacticalwalk())
+  if(shouldtacticalwalk()) {
     return false;
+  }
 
   canshootwhilerunning = animscripts\move::mayshootwhilemoving() && isvalidenemy(self.enemy) && (canshootwhilerunningforward() || canshootwhilerunningbackward());
 
-  if(canshootwhilerunning && !self needtoreload(0))
+  if(canshootwhilerunning && !self needtoreload(0)) {
     return false;
+  }
 
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < anim.moveglobals.min_reload_distsq)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < anim.moveglobals.min_reload_distsq) {
     return false;
+  }
 
   motionangle = angleclamp180(self getmotionangle());
 
-  if(abs(motionangle) > 25)
+  if(abs(motionangle) > 25) {
     return false;
-
-  if(self weaponanims() != "rifle") {
-    if(!(self weaponanims() == "pistol" && isDefined(self.forcesidearm) && self.forcesidearm))
-      return false;
   }
 
-  if(self is_rusher())
-    return false;
+  if(self weaponanims() != "rifle") {
+    if(!(self weaponanims() == "pistol" && isDefined(self.forcesidearm) && self.forcesidearm)) {
+      return false;
+    }
+  }
 
-  if(!runloopisnearbeginning())
+  if(self is_rusher()) {
     return false;
+  }
+
+  if(!runloopisnearbeginning()) {
+    return false;
+  }
 
   return true;
 }
 
 reloadstandrun() {
-  if(!shouldreloadwhilerunning())
+  if(!shouldreloadwhilerunning()) {
     return false;
+  }
 
   aimingoff();
   reloadstandruninternal();
@@ -534,16 +562,19 @@ runloopisnearbeginning() {
   looplength = getanimlength(animscripts\run::getrunanim()) / 3.0;
   animfraction = animfraction * 3.0;
 
-  if(animfraction > 3)
+  if(animfraction > 3) {
     animfraction = animfraction - 2.0;
-  else if(animfraction > 2)
+  } else if(animfraction > 2) {
     animfraction = animfraction - 1.0;
+  }
 
-  if(animfraction < 0.15 / looplength)
+  if(animfraction < 0.15 / looplength) {
     return true;
+  }
 
-  if(animfraction > 1 - 0.3 / looplength)
+  if(animfraction > 1 - 0.3 / looplength) {
     return true;
+  }
 
   return false;
 }
@@ -557,10 +588,11 @@ reloadstandruninternal() {
   reloadanim = undefined;
 
   if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
-    if(self.movemode == "walk" || self.walk)
+    if(self.movemode == "walk" || self.walk) {
       reloadanim = animarraypickrandom("cqb_reload_walk");
-    else
+    } else {
       reloadanim = animarraypickrandom("cqb_reload_run");
+    }
   } else
     reloadanim = animarraypickrandom("reload");
 
@@ -571,16 +603,17 @@ reloadstandruninternal() {
 }
 
 aimingon(aimanimname, aimlimit) {
-  if(!isDefined(aimanimname))
+  if(!isDefined(aimanimname)) {
     aimanimname = "add_f";
+  }
 
   self.a.isaiming = 1;
   ispistoltacticalwalkaim = issubstr(aimanimname, "tactical") && aihasonlypistol();
 
   if(aihasonlypistolorsmg()) {
-    if(issubstr(aimanimname, "tactical"))
+    if(issubstr(aimanimname, "tactical")) {
       ispistoltacticalwalkaim = 1;
-    else {
+    } else {
       self clearanim(%tactical_walk_pistol_aim2, 0);
       self clearanim(%tactical_walk_pistol_aim4, 0);
       self clearanim(%tactical_walk_pistol_aim6, 0);
@@ -588,13 +621,15 @@ aimingon(aimanimname, aimlimit) {
     }
   }
 
-  if(ispistoltacticalwalkaim)
+  if(ispistoltacticalwalkaim) {
     self animscripts\shared::setaiminganims(%tactical_walk_pistol_aim2, %tactical_walk_pistol_aim4, %tactical_walk_pistol_aim6, %tactical_walk_pistol_aim8);
-  else
+  } else {
     self animscripts\shared::setaiminganims(%run_aim_2, %run_aim_4, %run_aim_6, %run_aim_8);
+  }
 
-  if(!isDefined(aimlimit))
+  if(!isDefined(aimlimit)) {
     aimlimit = 50;
+  }
 
   self.rightaimlimit = aimlimit;
   self.leftaimlimit = aimlimit * -1;
@@ -609,8 +644,9 @@ aimingon(aimanimname, aimlimit) {
 aimingoff(blendouttime) {
   self.a.isaiming = 0;
 
-  if(!isDefined(blendouttime))
+  if(!isDefined(blendouttime)) {
     blendouttime = 0.2;
+  }
 
   self clearanim(self.a.aim_2, blendouttime);
   self clearanim(self.a.aim_4, blendouttime);
@@ -674,11 +710,13 @@ updaterunweightsonce(frontanim, backanim, leftanim, rightanim) {
     self setanim(frontanim, 1, 0.1, 1);
     self clearanim(backanim, 0.2);
 
-    if(isDefined(leftanim))
+    if(isDefined(leftanim)) {
       self clearanim(leftanim, 0.2);
+    }
 
-    if(isDefined(rightanim))
+    if(isDefined(rightanim)) {
       self clearanim(rightanim, 0.2);
+    }
   } else {
     animweights = animscripts\utility::quadrantanimweights(self getmotionangle());
 
@@ -691,11 +729,13 @@ updaterunweightsonce(frontanim, backanim, leftanim, rightanim) {
     self setanim(frontanim, animweights["front"], 0.1, 1);
     self setanim(backanim, animweights["back"], 0.1, 1);
 
-    if(isDefined(leftanim))
+    if(isDefined(leftanim)) {
       self setanim(leftanim, animweights["left"], 0.1, 1);
+    }
 
-    if(isDefined(rightanim))
+    if(isDefined(rightanim)) {
       self setanim(rightanim, animweights["right"], 0.1, 1);
+    }
   }
 }
 
@@ -726,8 +766,9 @@ movecrouchrunnormal() {
   aimingoff();
   self orientmode("face motion");
 
-  if(!self.bulletsinclip)
+  if(!self.bulletsinclip) {
     cheatammoifnecessary();
+  }
 
   if(animscripts\move::mayshootwhilemoving() && self.bulletsinclip > 0 && isvalidenemy(self.enemy)) {
     animscripts\run::stopupdaterunanimweights();
@@ -735,8 +776,9 @@ movecrouchrunnormal() {
 
     rundebuginfo();
 
-    if(isplayer(self.enemy))
+    if(isPlayer(self.enemy)) {
       self updateplayersightaccuracy();
+    }
 
     aimingon("add_f");
   }
@@ -749,11 +791,13 @@ movecrouchrunnormal() {
 }
 
 getcrouchrunanim() {
-  if(isDefined(self.a.crouchrunanim))
+  if(isDefined(self.a.crouchrunanim)) {
     return self.a.crouchrunanim;
+  }
 
-  if(self.a.pose != "crouch")
+  if(self.a.pose != "crouch") {
     return animarray("crouch_run_f", "move");
+  }
 
   return animarray("combat_run_f", "move");
 }
@@ -765,45 +809,53 @@ pronecrawl() {
 }
 
 canshootwhilerunningforward() {
-  if(abs(self getmotionangle()) > anim.moveglobals.motion_angle_offset)
+  if(abs(self getmotionangle()) > anim.moveglobals.motion_angle_offset) {
     return false;
+  }
 
   enemyyaw = self getpredictedyawtoenemy(0.2);
 
-  if(abs(enemyyaw) <= anim.moveglobals.aim_yaw_threshold)
+  if(abs(enemyyaw) <= anim.moveglobals.aim_yaw_threshold) {
     return true;
+  }
 
   return false;
 }
 
 canshootwhilerunningforward120() {
-  if(isDefined(self.pathstartpos) && distancesquared(self.pathstartpos, self.pathgoalpos) < anim.moveglobals.min_distsq_120)
+  if(isDefined(self.pathstartpos) && distancesquared(self.pathstartpos, self.pathgoalpos) < anim.moveglobals.min_distsq_120) {
     return false;
+  }
 
-  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < anim.moveglobals.min_distsq_120)
+  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < anim.moveglobals.min_distsq_120) {
     return false;
+  }
 
   return true;
 }
 
 canshootwhilerunningbackward() {
-  if(180 - abs(self getmotionangle()) >= anim.moveglobals.motion_angle_offset)
+  if(180 - abs(self getmotionangle()) >= anim.moveglobals.motion_angle_offset) {
     return false;
+  }
 
   enemyyaw = self getpredictedyawtoenemy(0.2);
 
-  if(abs(enemyyaw) > anim.moveglobals.aim_yaw_threshold)
+  if(abs(enemyyaw) > anim.moveglobals.aim_yaw_threshold) {
     return false;
+  }
 
   return true;
 }
 
 shouldshootwhilerunningbackward() {
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && !self shouldtacticalwalk())
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && !self shouldtacticalwalk()) {
     return false;
+  }
 
-  if(isDefined(self.a.disablebackwardrunngun) && self.a.disablebackwardrunngun)
+  if(isDefined(self.a.disablebackwardrunngun) && self.a.disablebackwardrunngun) {
     return false;
+  }
 
   if(isvalidenemy(self.enemy)) {
     toenemy = self.enemy.origin - self.origin;
@@ -815,15 +867,18 @@ shouldshootwhilerunningbackward() {
       isalreadyrunningbackwards = abs(self getmotionangle()) >= anim.moveglobals.aim_yaw_threshold * 2;
 
       if(!isalreadyrunningbackwards) {
-        if(!shouldtacticalwalk() && (isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < 62500))
+        if(!shouldtacticalwalk() && (isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < 62500)) {
           closetogoal = 1;
+        }
       }
 
-      if(self.lookaheaddist < 150 && !isalreadyrunningbackwards)
+      if(self.lookaheaddist < 150 && !isalreadyrunningbackwards) {
         return false;
+      }
 
-      if(distancesquared(self.enemy.origin, self.origin) < getrunbackwardsdistancesquared() && !closetogoal)
+      if(distancesquared(self.enemy.origin, self.origin) < getrunbackwardsdistancesquared() && !closetogoal) {
         return true;
+      }
     }
   }
 
@@ -832,18 +887,20 @@ shouldshootwhilerunningbackward() {
 
 getrunbackwardsdistancesquared() {
   if(shouldtacticalwalk()) {
-    if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") || self aihasonlypistol())
+    if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") || self aihasonlypistol()) {
       return anim.moveglobals.runbackwards_cqb_distsq;
-    else
+    } else {
       return anim.moveglobals.runbackwards_distsq;
+    }
   }
 
   return 0;
 }
 
 shouldfacemotionwhilerunning() {
-  if(self shouldfacemotion())
+  if(self shouldfacemotion()) {
     return true;
+  }
 
   return false;
 }
@@ -866,8 +923,9 @@ getrunanimupdatefrequency() {
 getpredictedyawtoenemy(lookaheadtime) {
   assert(isvalidenemy(self.enemy));
 
-  if(isDefined(self.predictedyawtoenemy) && isDefined(self.predictedyawtoenemytime) && self.predictedyawtoenemytime == gettime())
+  if(isDefined(self.predictedyawtoenemy) && isDefined(self.predictedyawtoenemytime) && self.predictedyawtoenemytime == gettime()) {
     return self.predictedyawtoenemy;
+  }
 
   selfpredictedpos = self.origin;
   moveangle = self.angles[1] + self getmotionangle();
@@ -883,25 +941,27 @@ getrunanim() {
   run_anim = undefined;
 
   if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand") {
-    if(self.movemode == "walk" || self.walk)
+    if(self.movemode == "walk" || self.walk) {
       run_anim = animarraypickrandom("cqb_walk_f", "move", 1);
-    else if(self.sprint)
+    } else if(self.sprint) {
       run_anim = animarraypickrandom("cqb_sprint_f", "move", 1);
-    else
+    } else {
       run_anim = animarraypickrandom("cqb_run_f", "move", 1);
+    }
   } else if(isDefined(self.a.combatrunanim))
     run_anim = self.a.combatrunanim;
   else if(self.sprint && self.a.pose == "stand") {
-    if(isDefined(self.a.fullsprintanim))
+    if(isDefined(self.a.fullsprintanim)) {
       run_anim = self.a.fullsprintanim;
-    else {
+    } else {
       run_anim = animarraypickrandom("sprint", "move");
       self.a.fullsprintanim = run_anim;
     }
   } else if(self.a.isaiming && self.a.pose == "stand")
     run_anim = animarray("run_n_gun_f", "move");
-  else
+  else {
     run_anim = animarray("combat_run_f", "move");
+  }
 
   assert(isDefined(run_anim), "run.gsc - No run animation for this AI.");
   return run_anim;
@@ -922,10 +982,11 @@ rundebuginfo() {
       anglediff = angleclamp180(toenemyyaw - faceangle);
       recordenttext("Enemy Yaw: " + anglediff + " Predicted enemy yaw: " + self getpredictedyawtoenemy(0.2) + " motion angle: " + abs(self getmotionangle()), self, level.color_debug["yellow"], "Animscript");
 
-      if(self.facemotion)
+      if(self.facemotion) {
         recordenttext("FaceMotion", self, level.color_debug["yellow"], "Animscript");
-      else
+      } else {
         recordenttext("FaceEnemy", self, level.color_debug["yellow"], "Animscript");
+      }
 
       if(isDefined(self.relativedir)) {
         relativedir = "UNKNOWN_DIRECTION";
@@ -954,11 +1015,13 @@ rundebuginfo() {
     } else
       recordenttext("motion angle: " + abs(self getmotionangle()), self, level.color_debug["yellow"], "Animscript");
 
-    if(isDefined(self.shootstyle))
+    if(isDefined(self.shootstyle)) {
       recordenttext("ShootStyle - " + self.shootstyle, self, level.color_debug["red"], "Script");
+    }
 
-    if(isDefined(self.weapon))
+    if(isDefined(self.weapon)) {
       recordenttext("Bullets - " + self.bulletsinclip, self, level.color_debug["white"], "Script");
+    }
 
     if(isDefined(self.pathgoalpos)) {
       dist = distance(self.pathstartpos, self.pathgoalpos);

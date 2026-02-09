@@ -305,7 +305,7 @@ function isplayervalid(player, checkignoremeflag) {
   if(!isalive(player)) {
     return false;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
   if(player.sessionstate == "spectator") {
@@ -332,7 +332,7 @@ function function_5bcae97c(trigger) {
 }
 
 function turnplayershieldon(short_shield = 1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -395,7 +395,7 @@ function shield_trigger_think(player, var_c1ff53d9, thresh) {
     if(!isDefined(guy)) {
       continue;
     }
-    if(isplayer(guy)) {
+    if(isPlayer(guy)) {
       continue;
     }
     if(isDefined(guy.launched)) {

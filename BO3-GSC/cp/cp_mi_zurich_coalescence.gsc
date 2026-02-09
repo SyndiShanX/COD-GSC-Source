@@ -105,7 +105,7 @@ function setup_skiptos() {
 }
 
 function init_level_vars() {
-  setdvar("player_swimTime", 5000);
+  setDvar("player_swimTime", 5000);
 }
 
 function flag_init() {

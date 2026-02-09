@@ -87,7 +87,7 @@ opening_shot() {
   level.player disableweaponswitch();
   level.player giveweapon("remote_chopper_gunner_nopullout");
   level.player switchtoweaponimmediate("remote_chopper_gunner_nopullout");
-  setdvar("hideHudFast", 1);
+  setDvar("hideHudFast", 1);
   setsaveddvar("ammoCounterHide", 1);
   cinematicingameloop("dog_in");
   wait 0.05;
@@ -113,7 +113,7 @@ opening_shot() {
   setsaveddvar("aim_autoAimRangeScale", "1");
   level.player takeweapon("remote_chopper_gunner_nopullout");
   level.player enableweaponswitch();
-  setdvar("hideHudFast", 0);
+  setDvar("hideHudFast", 0);
   setsaveddvar("ammoCounterHide", 0);
   level.player maps\_ash_falling::ash_fall(1);
   wait 1;
@@ -967,7 +967,7 @@ post_crater_dog_setup() {
   level.player disableweaponswitch();
   level.player giveweapon("remote_chopper_gunner");
   level.player switchtoweapon("remote_chopper_gunner");
-  setdvar("hideHudFast", 1);
+  setDvar("hideHudFast", 1);
   setsaveddvar("ammoCounterHide", 1);
   level.player thread maps\_utility::play_sound_on_entity("uav_remote_raise_plr");
   cinematicingameloop("dog_out");
@@ -1294,7 +1294,7 @@ pc_dog_drive_end() {
   wait 1;
   level.player takeweapon("remote_chopper_gunner");
   level.player enableweaponswitch();
-  setdvar("hideHudFast", 0);
+  setDvar("hideHudFast", 0);
   setsaveddvar("ammoCounterHide", 0);
   common_scripts\utility::noself_delaycall(4, ::stopcinematicingame);
 }
@@ -2492,7 +2492,7 @@ mall_lookout() {
   level.player disableweaponswitch();
   level.player giveweapon("remote_chopper_gunner");
   level.player switchtoweapon("remote_chopper_gunner");
-  setdvar("hideHudFast", 1);
+  setDvar("hideHudFast", 1);
   setsaveddvar("ammoCounterHide", 1);
   level.player thread maps\_utility::play_sound_on_entity("uav_remote_raise_plr");
   cinematicingameloop("dog_out");
@@ -3015,7 +3015,7 @@ mall_exit() {
   wait 1;
   level.player takeweapon("remote_chopper_gunner");
   level.player enableweaponswitch();
-  setdvar("hideHudFast", 0);
+  setDvar("hideHudFast", 0);
   setsaveddvar("ammoCounterHide", 0);
 }
 

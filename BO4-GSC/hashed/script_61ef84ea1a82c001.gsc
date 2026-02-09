@@ -95,7 +95,7 @@ function_3a563d3c(params) {
     waitresult = self waittill(#"trigger");
     e_player = waitresult.activator;
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       e_player takeweapon(getweapon(#"spoon_alcatraz"));
 
       if(isDefined(e_player.var_1c4683c4)) {
@@ -115,7 +115,7 @@ function_cd53088e(params) {
     waitresult = self waittill(#"trigger");
     e_player = waitresult.activator;
 
-    if(isplayer(e_player) && e_player flag::get(#"hash_30ae3926b2d211db")) {
+    if(isPlayer(e_player) && e_player flag::get(#"hash_30ae3926b2d211db")) {
       e_player clientfield::set_to_player("" + # "place_spoon", 0);
       wait 0.1;
       e_player clientfield::set_to_player("" + # "fill_blood", 8);
@@ -147,7 +147,7 @@ function_5ec2f851() {
 }
 
 function_85cfc2a3(e_player) {
-  if(!isplayer(e_player)) {
+  if(!isPlayer(e_player)) {
     return;
   }
 

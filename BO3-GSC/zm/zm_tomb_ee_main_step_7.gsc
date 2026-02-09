@@ -38,7 +38,7 @@ function exit_stage(success) {
 }
 
 function ee_zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
-  if(isDefined(attacker) && isplayer(attacker) && zm_tomb_chamber::is_point_in_chamber(self.origin)) {
+  if(isDefined(attacker) && isPlayer(attacker) && zm_tomb_chamber::is_point_in_chamber(self.origin)) {
     level.n_ee_portal_souls++;
     if(level.n_ee_portal_souls == 1) {
       level thread zm_tomb_ee_main::ee_samantha_say("vox_sam_generic_encourage_3");

@@ -19,14 +19,14 @@ function __init__() {
 
 function main() {
   if(getdvarstring("") == "") {
-    setdvar("", 0);
+    setDvar("", 0);
   }
   level.storespawndata = getdvarint("");
   if(getdvarstring("") == "") {
-    setdvar("", 0);
+    setDvar("", 0);
   }
   if(getdvarstring("") == "") {
-    setdvar("", 0.25);
+    setDvar("", 0.25);
   }
   thread loopbotspawns();
   level.spawnlogic_deaths = [];
@@ -43,16 +43,16 @@ function main() {
     }
   }
   if(getdvarstring("scr_spawn_enemyavoiddist") == "") {
-    setdvar("scr_spawn_enemyavoiddist", "800");
+    setDvar("scr_spawn_enemyavoiddist", "800");
   }
   if(getdvarstring("scr_spawn_enemyavoidweight") == "") {
-    setdvar("scr_spawn_enemyavoidweight", "0");
+    setDvar("scr_spawn_enemyavoidweight", "0");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarint("") > 0) {
     thread showdeathsdebug();
@@ -63,7 +63,7 @@ function main() {
     thread allowspawndatareading();
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   thread watchspawnprofile();
   thread spawngraphcheck();
@@ -281,7 +281,8 @@ function finalizespawnpointchoice(spawnpoint) {
 
 function getbestweightedspawnpoint(spawnpoints) {
   maxsighttracedspawnpoints = 3;
-  for(try = 0;
+  for(
+    try = 0;
     try <= maxsighttracedspawnpoints;
     try ++) {
     bestspawnpoints = [];
@@ -308,7 +309,8 @@ function getbestweightedspawnpoint(spawnpoints) {
       return undefined;
     }
     bestspawnpoint = bestspawnpoints[randomint(bestspawnpoints.size)];
-    if(try == maxsighttracedspawnpoints) {
+    if(
+      try == maxsighttracedspawnpoints) {
       return bestspawnpoint;
     }
     if(isDefined(bestspawnpoint.lastsighttracetime) && bestspawnpoint.lastsighttracetime == gettime()) {
@@ -699,9 +701,7 @@ function getallalliedandenemyplayers(obj) {
         continue;
       }
       if(isDefined(level.customalivecheck)) {
-        if(![
-            [level.customalivecheck]
-          ](player)) {
+        if(![[level.customalivecheck]](player)) {
           continue;
         }
       }
@@ -763,7 +763,7 @@ function getspawnpoint_nearteam(spawnpoints, favoredspawnpoints, forceallydistan
     return undefined;
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
     return getspawnpoint_random(spawnpoints);
@@ -821,7 +821,7 @@ function getspawnpoint_nearteam(spawnpoints, favoredspawnpoints, forceallydistan
   avoidvisibleenemies(spawnpoints, 1);
   result = getspawnpoint_final(spawnpoints);
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
     checkbad(result);
@@ -1115,7 +1115,7 @@ function loopbotspawns() {
 }
 
 function allowspawndatareading() {
-  setdvar("", "");
+  setDvar("", "");
   prevval = getdvarstring("");
   prevrelval = getdvarstring("");
   readthistime = 0;
@@ -1125,7 +1125,7 @@ function allowspawndatareading() {
     if(!isDefined(val) || val == prevval) {
       relval = getdvarstring("");
       if(isDefined(relval) && relval != "") {
-        setdvar("", "");
+        setDvar("", "");
       } else {
         wait(0.5);
         continue;

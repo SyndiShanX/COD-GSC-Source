@@ -9,7 +9,7 @@ main() {
   if(!isalive(self.enemy)) {
     _id_3B28();
   } else {
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       _id_3B1B();
       return;
     }
@@ -53,7 +53,7 @@ _id_3B02() {
   self.meleeingplayer _id_3B07(self);
   self.meleeingplayer shellshock("default", 5);
   waittillframeend;
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   thread _id_3B08(self.meleeingplayer, var_1);
 }
 
@@ -62,7 +62,7 @@ _id_3B02() {
 _id_3B05(var_0, var_1) {
   var_0._id_3B06 = 1;
   var_2 = _id_3B56();
-  self setflaggedanimknobrestart("meleeanim", % german_shepherd_player_getoff, 1, 0.1, var_2);
+  self setflaggedanimknobrestart("meleeanim", %german_shepherd_player_getoff, 1, 0.1, var_2);
   var_0._id_1EC3 notify("pvd_melee_interrupted");
   var_0._id_1EC3 notify("pvd_melee_done");
   var_0._id_1EC3 _id_3B4D(var_0);
@@ -75,7 +75,6 @@ _id_3B05(var_0, var_1) {
 _id_3B07(var_0) {
   if(maps\_utility::_id_1A5C()) {
     self enabledeathshield(0);
-
   }
   self disableinvulnerability();
 
@@ -100,7 +99,6 @@ _id_3B08(var_0, var_1) {
     var_2 setshader("hud_hyena_melee", 96, 96);
   } else {
     var_2 setshader("hud_dog_melee", 96, 96);
-
   }
   var_2.alignx = "center";
   var_2.aligny = "middle";
@@ -129,7 +127,7 @@ _id_3B09(var_0) {
 }
 
 _id_3B0B() {
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   var_0 = % german_shepherd_attack_player_miss_b;
 
   if(isDefined(self.enemy)) {
@@ -174,15 +172,12 @@ _id_3B0F() {
   if(isDefined(self.meleeingplayer)) {
     if(isDefined(self.meleeingplayer._id_3B10) && self.meleeingplayer._id_3B10) {
       self.meleeingplayer notify("force_out_of_uav");
-
     }
     if(self.meleeingplayer islinked()) {
       return undefined;
-
     }
     if(self.meleeingplayer ismantling()) {
       return undefined;
-
     }
     if(self.meleeingplayer.laststand && self.meleeingplayer.ignoreme) {
       return undefined;
@@ -204,7 +199,7 @@ _id_3B11(var_0) {
       var_1 = _id_3B0F();
 
       if(isDefined(var_1)) {
-        if(isplayer(var_1)) {
+        if(isPlayer(var_1)) {
           if(getdvarint("survival_chaos") != 1) {
             var_1 shellshock("dog_bite", 1);
             thread _id_3B0E(var_1);
@@ -227,7 +222,6 @@ _id_3B12() {
 
   if(var_0 == 0) {
     return 0;
-
   }
   if(var_0 < 0.25) {
     self.meleeingplayer setnormalhealth(var_0 + 0.25);
@@ -253,10 +247,9 @@ _id_3B14(var_0) {
       var_1 = _id_3B12();
       var_2 = _id_3B0F();
 
-      if(isDefined(var_2) && isplayer(var_2) && isalive(self.meleeingplayer)) {
+      if(isDefined(var_2) && isPlayer(var_2) && isalive(self.meleeingplayer)) {
         if(var_1) {
           _id_3B13();
-
         }
         self._id_3B0C = undefined;
         self.meleeingplayer._id_1EC3 = _id_3B45(self);
@@ -267,7 +260,6 @@ _id_3B14(var_0) {
       } else {
         if(var_1) {
           _id_3B13();
-
         }
         _id_3B0B();
         return 1;
@@ -285,14 +277,14 @@ _id_3B14(var_0) {
         level._id_3AFB = maps\_utility::_id_0B53(level._id_3AFB);
       }
 
-      self setflaggedanimlimited("meleeanim", % german_shepherd_attack_player, 1, 0.2, var_3);
-      self setflaggedanimlimited("meleeanim", % german_shepherd_attack_player_late, 1, 0.2, var_3);
+      self setflaggedanimlimited("meleeanim", %german_shepherd_attack_player, 1, 0.2, var_3);
+      self setflaggedanimlimited("meleeanim", %german_shepherd_attack_player_late, 1, 0.2, var_3);
       self.meleeingplayer._id_1EC3 _id_3B52(var_3);
       break;
     case "dog_lunge":
       thread _id_3B16();
       var_3 = _id_3B56();
-      self setflaggedanim("meleeanim", % german_shepherd_attack_player, 1, 0.2, var_3);
+      self setflaggedanim("meleeanim", %german_shepherd_attack_player, 1, 0.2, var_3);
       self.meleeingplayer._id_1EC3 _id_3B53(var_3);
       break;
     case "dogbite_damage":
@@ -329,7 +321,6 @@ _id_3B1B() {
 
   if(!isDefined(self.meleeingplayer._id_3B1C)) {
     self.meleeingplayer _id_3B18();
-
   }
   var_0 = 30;
   var_1 = self.meleeattackdist + var_0;
@@ -339,7 +330,7 @@ _id_3B1B() {
       break;
     }
 
-    if(!isplayer(self.enemy)) {
+    if(!isPlayer(self.enemy)) {
       break;
     }
 
@@ -366,14 +357,14 @@ _id_3B1B() {
     self animmode("zonly_physics");
     self.safetochangescript = 0;
     _id_3B2D();
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
     self clearpitchorient();
     self.meleeingplayer _id_3B24(500);
 
     if(_id_3B20()) {
       self.meleeingplayer._id_3B19 = gettime();
       self.meleeingplayer._id_3B1A++;
-      self setflaggedanimrestart("meleeanim", % german_shepherd_run_attack_b, 1, 0.2, 1);
+      self setflaggedanimrestart("meleeanim", %german_shepherd_run_attack_b, 1, 0.2, 1);
       animscripts\shared::_id_0C51("meleeanim", ::_id_3B11);
     } else {
       thread _id_3B37();
@@ -381,10 +372,10 @@ _id_3B1B() {
       self.meleeingplayer.laststand = 0;
       self.meleeingplayer._id_1A98 = undefined;
       thread _id_3B1F();
-      self setflaggedanimrestart("meleeanim", % german_shepherd_attack_player, 1, 0.2, 1);
-      self setflaggedanimrestart("meleeanim", % german_shepherd_attack_player_late, 1, 0, 1);
-      self setanimlimited( % attack_player, 1, 0, 1);
-      self setanimlimited( % attack_player_late, 0.01, 0, 1);
+      self setflaggedanimrestart("meleeanim", %german_shepherd_attack_player, 1, 0.2, 1);
+      self setflaggedanimrestart("meleeanim", %german_shepherd_attack_player_late, 1, 0, 1);
+      self setanimlimited(%attack_player, 1, 0, 1);
+      self setanimlimited(%attack_player_late, 0.01, 0, 1);
       animscripts\shared::_id_0C51("meleeanim", ::_id_3B14);
       self notify("dog_no_longer_melee_able");
       self setCanDamage(1);
@@ -411,23 +402,18 @@ _id_3B1F() {
 _id_3B20() {
   if(isDefined(self.meleeingplayer._id_3B21)) {
     return 1;
-
   }
   if(getdvarint("survival_chaos") == 1) {
     return 1;
-
   }
   if(maps\_utility::_id_1A43(self.meleeingplayer)) {
     return 1;
-
   }
   if(isDefined(self.meleeingplayer._id_27A3)) {
     return 1;
-
   }
   if(gettime() - self.meleeingplayer._id_3B19 > 8000) {
     self.meleeingplayer._id_3B1A = 0;
-
   }
   return self.meleeingplayer._id_3B1A < self.meleeingplayer._id_20F2._id_2303 && self.meleeingplayer.health > 25;
 }
@@ -489,7 +475,6 @@ _id_3B25() {
 
       if(!self._id_3B26 && var_4 + 1 == var_2) {
         self.health = 1;
-
       }
       self setflaggedanimrestart("meleeanim", var_1[var_4 + 1], 1, 0, 1);
       animscripts\shared::_id_0C51("meleeanim");
@@ -510,7 +495,7 @@ _id_3B25() {
 
 _id_3B28() {
   self orientmode("face enemy");
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self animmode("zonly_physics");
   var_0 = [];
   var_0[0] = % german_shepherd_attackidle_b;
@@ -547,7 +532,6 @@ _id_3B29() {
 
       if(var_4 < 1) {
         var_3 = anglesToForward(self.angles);
-
       }
       if(var_4 < 30) {
         var_3 = var_3 * (3 / var_4);
@@ -564,19 +548,15 @@ _id_3B2A() {
 _id_3B2B(var_0) {
   if(var_0 != "ai_attack_start") {
     return 0;
-
   }
   if(!isDefined(self.enemy)) {
     return 1;
-
   }
   if(self.enemy != self._id_3B27) {
     return 1;
-
   }
   if(isDefined(self.enemy.syncedmeleetarget)) {
     return 1;
-
   }
   self._id_0D68 = 1;
   self.enemy.syncedmeleetarget = self;
@@ -586,7 +566,6 @@ _id_3B2B(var_0) {
 _id_3B2C(var_0) {
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   var_1 = distancesquared(self.origin, self.enemy.origin);
   return var_1 > var_0 * var_0;
@@ -634,7 +613,6 @@ _id_3B31() {
 
   if(isDefined(self.meleeingplayer._id_3B32)) {
     self.meleeingplayer._id_3B32 maps\_hud_util::destroyelem();
-
   }
   self.meleeingplayer._id_3B32 = self.meleeingplayer maps\_hud_util::createserverclientfontstring("default", 3);
   self.meleeingplayer._id_3B32.color = (1, 1, 1);
@@ -703,7 +681,6 @@ _id_3B37() {
 
   while(_id_3B30()) {
     wait 0.05;
-
   }
   var_2 = 0;
 
@@ -717,7 +694,7 @@ _id_3B37() {
             self.meleeingplayer _id_3B3B(var_2);
             self.meleeingplayer._id_1EC3._id_3B34 = 1;
             self notify("melee_stop");
-            self setflaggedanimknobrestart("dog_death_anim", % german_shepherd_player_neck_snap, 1, 0.2, 1);
+            self setflaggedanimknobrestart("dog_death_anim", %german_shepherd_player_neck_snap, 1, 0.2, 1);
             thread _id_3B36();
             self setCanDamage(0);
             self waittillmatch("dog_death_anim", "dog_death");
@@ -734,8 +711,8 @@ _id_3B37() {
           } else {
             self.meleeingplayer _id_3B3B(var_2);
             self.meleeingplayer._id_1EC3 _id_3B55();
-            self setanimlimited( % attack_player, 0.01, 0.2, 1);
-            self setanimlimited( % attack_player_late, 1, 0.2, 1);
+            self setanimlimited(%attack_player, 0.01, 0.2, 1);
+            self setanimlimited(%attack_player_late, 1, 0.2, 1);
 
             if(_id_3B57()) {
               level._id_3B0A = &"NEW_HYENA_DEATH_TOO_LATE_ALT";
@@ -764,14 +741,13 @@ _id_3B37() {
 
           level._id_3B2E = "soon";
           var_4 = _id_3B56();
-          self setflaggedanimknobrestart("meleeanim", % german_shepherd_player_neck_miss, 1, 0.2, var_4);
+          self setflaggedanimknobrestart("meleeanim", %german_shepherd_player_neck_miss, 1, 0.2, var_4);
           self.meleeingplayer._id_1EC3 _id_3B54(var_4);
           return;
         }
       }
     } else if(!_id_3B30()) {
       var_0 = 0;
-
     }
     wait 0.05;
   }
@@ -780,11 +756,9 @@ _id_3B37() {
 _id_3B39() {
   if(self.gameskill == 3) {
     return 1;
-
   }
   if(isDefined(self._id_3B3A) && self._id_3B3A) {
     return 1;
-
   }
   return 0;
 }
@@ -816,7 +790,6 @@ _id_3B3C() {
 
   if(animscripts\utility::_id_0C95()) {
     animscripts\shared::_id_0C9B(self.primaryweapon, "right");
-
   }
   var_0 = [];
   var_0[0] = % root;
@@ -848,7 +821,6 @@ _id_3B3C() {
 
     if(var_1 == 3 && self._id_3B3D == 3) {
       _id_3B24(getanimlength(var_0[self._id_3B3D]) * 1000 - 1000);
-
     }
     self setflaggedanimrestart("aianim", var_0[self._id_3B3D], 1, 0, 1);
     animscripts\shared::_id_0C51("aianim");
@@ -882,7 +854,6 @@ _id_3B3E() {
 
   if(self.syncedmeleetarget._id_3B26) {
     var_0[4] = % ai_attacked_german_shepherd_04_getup_a;
-
   }
   for(;;) {
     if(!isDefined(self.syncedmeleetarget) || !isalive(self.syncedmeleetarget)) {
@@ -896,7 +867,7 @@ _id_3B3E() {
     if(!isDefined(var_0[self._id_3B3D])) {
       return;
     }
-    self clearanim( % melee_dog, 0.1);
+    self clearanim(%melee_dog, 0.1);
     self setflaggedanimrestart("getupanim", var_0[self._id_3B3D], 1, 0.1, 1);
     animscripts\shared::_id_0C51("getupanim");
   }
@@ -924,20 +895,20 @@ _id_3B40(var_0) {
 
 _id_3B41(var_0) {
   self endon("death");
-  var_1 = getanimlength( % player_3rd_dog_knockdown);
-  self setanim( % player_3rd_dog_knockdown, 1, 0, var_0);
+  var_1 = getanimlength(%player_3rd_dog_knockdown);
+  self setanim(%player_3rd_dog_knockdown, 1, 0, var_0);
 }
 
 _id_3B42() {
-  self setanimknobrestart( % player_3rd_dog_knockdown_neck_snap, 1, 0, 1);
+  self setanimknobrestart(%player_3rd_dog_knockdown_neck_snap, 1, 0, 1);
 }
 
 _id_3B43() {
-  self setanimknobrestart( % player_3rd_dog_knockdown_saved, 1, 0, 1);
+  self setanimknobrestart(%player_3rd_dog_knockdown_saved, 1, 0, 1);
 }
 
 _id_3B44() {
-  self setanimknobrestart( % player_3rd_dog_knockdown_laststand, 1, 0, 1);
+  self setanimknobrestart(%player_3rd_dog_knockdown_laststand, 1, 0, 1);
 }
 
 #using_animtree("player");
@@ -985,10 +956,10 @@ _id_3B48(var_0) {
   var_1 = var_0.meleeingplayer;
   self._id_3B47 = var_0;
   thread _id_3B49(var_1);
-  self setflaggedanimrestart("viewanim", % player_view_dog_knockdown);
-  self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_late);
-  self setanimlimited( % knockdown, 1, 0, 1);
-  self setanimlimited( % knockdown_late, 0.01, 0, 1);
+  self setflaggedanimrestart("viewanim", %player_view_dog_knockdown);
+  self setflaggedanimrestart("viewanim", %player_view_dog_knockdown_late);
+  self setanimlimited(%knockdown, 1, 0, 1);
+  self setanimlimited(%knockdown_late, 0.01, 0, 1);
   animscripts\shared::_id_0C51("viewanim", ::_id_3B46);
   self dontinterpolate();
   self._id_3B47 = undefined;
@@ -1010,20 +981,17 @@ _id_3B49(var_0) {
 _id_3B4A(var_0) {
   if(isDefined(self._id_3B1D)) {
     return 0;
-
   }
   var_1 = var_0.meleeingplayer;
 
   if(isDefined(var_1) && isDefined(var_1._id_1A96)) {
     var_1 notify("sentry_placement_canceled");
-
   }
   var_1 notify("dog_attacks_player");
   self._id_3B1D = 1;
 
   if(isalive(var_1)) {
     var_1 hidehud();
-
   }
   var_1 setstance("stand");
   var_1.syncedmeleetarget = var_0;
@@ -1039,7 +1007,6 @@ _id_3B4A(var_0) {
     self.origin = var_4;
   } else {
     self.origin = var_1.origin;
-
   }
   thread _id_3B48(var_0);
   self dontinterpolate();
@@ -1072,23 +1039,23 @@ _id_3B4D(var_0) {
   var_0 showhud();
 
   if(isalive(var_0)) {
-    self clearanim( % player_view_dog_knockdown, 0.1);
+    self clearanim(%player_view_dog_knockdown, 0.1);
 
     if(isDefined(self._id_3B34)) {
-      self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_neck_snap, 1, 0.2, 1);
+      self setflaggedanimrestart("viewanim", %player_view_dog_knockdown_neck_snap, 1, 0.2, 1);
 
       if(isDefined(self._id_3B4E)) {
         self._id_3B4E _id_3B42();
       }
     } else if(isDefined(var_0._id_3B06)) {
-      self setflaggedanimknobrestart("viewanim", % player_view_dog_knockdown_laststand, 1, 0.1, 1);
+      self setflaggedanimknobrestart("viewanim", %player_view_dog_knockdown_laststand, 1, 0.1, 1);
 
       if(isDefined(self._id_3B4E)) {
         self._id_3B4E _id_3B44();
       }
     } else {
       thread _id_3B4B(var_0);
-      self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_saved);
+      self setflaggedanimrestart("viewanim", %player_view_dog_knockdown_saved);
 
       if(isDefined(self._id_3B4E)) {
         self._id_3B4E _id_3B43();
@@ -1108,7 +1075,6 @@ _id_3B4D(var_0) {
     _id_3B4F(var_0);
   } else {
     setsaveddvar("compass", 0);
-
   }
   var_0.syncedmeleetarget = undefined;
   var_0._id_3B06 = undefined;
@@ -1126,7 +1092,6 @@ _id_3B4F(var_0) {
   if(isDefined(var_1)) {
     if(isDefined(var_1._id_3B4E)) {
       var_1._id_3B4E delete();
-
     }
     var_1 delete();
     var_0._id_1EC3 = undefined;
@@ -1164,8 +1129,8 @@ _id_3B51(var_0) {
 }
 
 _id_3B52(var_0) {
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown, 1, 0.2, var_0);
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown_late, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown_late, 1, 0.2, var_0);
 
   if(isDefined(self._id_3B4E)) {
     self._id_3B4E _id_3B41(var_0);
@@ -1173,8 +1138,8 @@ _id_3B52(var_0) {
 }
 
 _id_3B53(var_0) {
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown, 1, 0.2, var_0);
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown_late, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown_late, 1, 0.2, var_0);
 
   if(isDefined(self._id_3B4E)) {
     self._id_3B4E _id_3B41(var_0);
@@ -1182,12 +1147,12 @@ _id_3B53(var_0) {
 }
 
 _id_3B54(var_0) {
-  self setflaggedanimknobrestart("viewanim", % player_view_dog_knockdown_neck_miss, 1, 0.2, var_0);
+  self setflaggedanimknobrestart("viewanim", %player_view_dog_knockdown_neck_miss, 1, 0.2, var_0);
 }
 
 _id_3B55() {
-  self setanimlimited( % knockdown, 0.01, 0.2, 1);
-  self setanimlimited( % knockdown_late, 1, 0.2, 1);
+  self setanimlimited(%knockdown, 0.01, 0.2, 1);
+  self setanimlimited(%knockdown_late, 1, 0.2, 1);
 }
 
 _id_3B56() {
@@ -1197,7 +1162,6 @@ _id_3B56() {
 _id_3B57() {
   if(issubstr(self.classname, "hyena")) {
     return 1;
-
   }
   return 0;
 }

@@ -321,7 +321,7 @@ carryobjectusethink() {
       continue;
     }
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -826,7 +826,7 @@ setdropped(var_0) {
     }
   } else {
     var_13 = scripts\common\trace::ray_trace(self.safeorigin + (0, 0, 20), self.safeorigin - (0, 0, 20), var_13, var_12, 0);
-    if(isplayer(var_13["entity"])) {
+    if(isPlayer(var_13["entity"])) {
       var_13["entity"] = undefined;
     }
   }
@@ -877,7 +877,7 @@ setdropped(var_0) {
     self.trigger.origin = var_13 + (0, 0, var_15);
     self.curorigin = self.trigger.origin;
     var_18 = undefined;
-    if(!isplayer(var_13["entity"]) || !isbot(var_13["entity"]) || !isagent(var_13["entity"])) {
+    if(!isPlayer(var_13["entity"]) || !isbot(var_13["entity"]) || !isagent(var_13["entity"])) {
       var_18 = var_13["entity"];
     }
 
@@ -1631,7 +1631,7 @@ func_127CA(var_0) {
       break;
     }
 
-    if(isplayer(self) && var_0.usetime > 50) {
+    if(isPlayer(self) && var_0.usetime > 50) {
       updateuiprogress(var_0, 1);
     }
 
@@ -1640,7 +1640,7 @@ func_127CA(var_0) {
 
   if(isDefined(self)) {
     if(var_0.usetime > 50) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         updateuiprogress(var_0, 0);
       }
 
@@ -2023,7 +2023,7 @@ func_12F57() {
 
 useholdthink(var_0) {
   var_0 notify("use_hold");
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 playerlinkto(self.trigger);
   } else {
     var_0 linkto(self.trigger);

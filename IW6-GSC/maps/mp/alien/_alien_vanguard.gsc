@@ -91,7 +91,7 @@ vanguard_activate_think(var_0, var_1, var_2) {
       var_4 maps\mp\_utility::freezecontrolswrapper(1);
       var_4 common_scripts\utility::_disableusability();
 
-      if(isplayer(var_4)) {
+      if(isPlayer(var_4)) {
         break;
       }
     }

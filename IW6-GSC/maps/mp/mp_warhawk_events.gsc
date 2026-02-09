@@ -48,7 +48,7 @@ random_destruction_wait_dvar() {
     if(value == default_value) {
       waitframe();
     } else {
-      SetDvar(dvar_name, 0);
+      setDvar(dvar_name, 0);
       level notify("random_destruction", value);
     }
   }
@@ -302,7 +302,6 @@ random_destruction_preprocess(destructible_array) {
     if(element.mortar_ends.size == 0) {
       element.mortar_ends = destructible_before;
     }
-
   }
 }
 
@@ -366,7 +365,6 @@ plane_crash_init() {
     self thread run_func_on_notify("hit_watertower", ::play_sound_at_ent, self.plane, "osprey_hit_tower");
     self thread run_func_on_notify("hit_ground", ::stop_fx_on_tag, "osprey_trail", "tag_engine_ri_fx2", self.plane);
   }
-
 }
 
 plan_crash_run(waitTime) {
@@ -831,7 +829,6 @@ heli_anims() {
     wait level.heli_anims_length[heli.script_animation];
 
     model Delete();
-
   }
 }
 

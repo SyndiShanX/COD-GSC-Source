@@ -1512,7 +1512,7 @@ rt_helo_break_glass(var_0, var_1) {
   for(;;) {
     var_0 waittill("damage", var_2, var_3);
 
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       break;
     }
 
@@ -1621,7 +1621,7 @@ rt_helo_bullethits() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_12 = rotatevectorinverted(var_3 - var_10, var_11);
 
       if(var_12[0] < 0)
@@ -2305,7 +2305,7 @@ death_watcher() {
     }
 
     if((var_6 || var_10 >= var_8) && !var_9) {
-      setdvar("ui_deadquote", var_0);
+      setDvar("ui_deadquote", var_0);
       maps\_utility::missionfailedwrapper();
       var_9 = 1;
     }

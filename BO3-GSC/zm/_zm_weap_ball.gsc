@@ -218,7 +218,7 @@ function ballovertimeround2_ontimelimit() {
     print("");
     if(isDefined(winner)) {} else {}
   }
-  setdvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
+  setDvar("ui_text_endreason", game["strings"]["time_limit_reached"]);
 }
 
 function onspawnplayer(predictedspawn) {
@@ -527,7 +527,7 @@ function can_use_ball(player) {
   ball = self.visuals[0];
   start = player getEye();
   end = (self.curorigin[0], self.curorigin[1], self.curorigin[2] + 5);
-  if(isDefined(self.carrier) && isplayer(self.carrier)) {
+  if(isDefined(self.carrier) && isPlayer(self.carrier)) {
     end = self.carrier getEye();
   }
   if(!sighttracepassed(end, start, 0, ball) && !sighttracepassed(end, player.origin, 0, ball)) {

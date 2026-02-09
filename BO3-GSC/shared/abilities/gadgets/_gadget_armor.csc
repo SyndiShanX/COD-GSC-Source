@@ -121,7 +121,7 @@ function armor_is_local_player(localclientnum) {
 
 function armor_overlay_think() {
   armorstatus = 0;
-  setdvar("", 0);
+  setDvar("", 0);
   while(true) {
     wait(0.1);
     armorstatusnew = getdvarint("");

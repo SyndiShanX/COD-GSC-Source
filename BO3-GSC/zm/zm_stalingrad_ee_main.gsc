@@ -656,7 +656,7 @@ function function_604cfbfb() {
   level endon("hash_e84299b0");
   while(true) {
     self waittill("damage", amount, attacker, direction, point, mod, tagname, modelname, partname, weapon);
-    if(isplayer(attacker) && mod != "MOD_EXPLOSIVE") {
+    if(isPlayer(attacker) && mod != "MOD_EXPLOSIVE") {
       self.var_c957db9f++;
       if(self.var_c957db9f == 8) {
         self.var_c957db9f = 0;
@@ -700,7 +700,7 @@ function function_316026e4() {
   t_damage = getent("ee_keys_anomaly_damage_trig", "targetname");
   while(true) {
     t_damage waittill("damage", amount, attacker, direction, point, mod, tagname, modelname, partname, weapon);
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       level scene::play("p7_fxanim_zm_stal_pickups_figure_blob_bundle");
       e_key = getent("pickup_blob", "targetname");
       e_key thread function_b68b6797("p7_zm_sta_wall_map_figure_01_blob");
@@ -1987,7 +1987,7 @@ function function_27541a6d() {
     self.var_44b9cab5 = 0;
     self thread function_182fe200();
     self waittill("damage", amount, attacker, direction, point, mod, tagname, modelname, partname, weapon);
-    if(isplayer(attacker) && zm_weapons::is_weapon_upgraded(weapon)) {
+    if(isPlayer(attacker) && zm_weapons::is_weapon_upgraded(weapon)) {
       self notify("pap_damage");
       self.var_44b9cab5 = 1;
       n_current_health = n_current_health - amount;
@@ -3103,14 +3103,14 @@ function function_a1f6ef06(str_devgui_path, str_dvar, n_value, func, n_base_valu
   if(!isDefined(n_base_value)) {
     n_base_value = -1;
   }
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   str_devgui_path = "" + str_devgui_path;
   adddebugcommand(((((("" + str_devgui_path) + "") + str_dvar) + "") + n_value) + "");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }

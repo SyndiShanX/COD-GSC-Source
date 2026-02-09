@@ -380,7 +380,7 @@ killstreakCrateThinkHorde(dropType) {
   while(true) {
     self waittill("captured", player);
 
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     slotNumber = getSlotNumber(player);
@@ -454,7 +454,7 @@ handleKillStreakLimit(player) {
 }
 
 handleAgentUse(player) {
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     if(isDefined(player.disablePlayerUseEnt))
       player.disablePlayerUseEnt EnablePlayerUse(player);
 

@@ -7,7 +7,7 @@
 init() {
   var_0 = getEntArray("destructable", "targetname");
 
-  if(getdvar("scr_destructables") == "0") {
+  if(getDvar("scr_destructables") == "0") {
     for(var_1 = 0; var_1 < var_0.size; var_1++)
       var_0[var_1] delete();
   } else {

@@ -91,10 +91,10 @@ transitionfromcoverstand() {
     var_1 = undefined;
 
     if(self.prevscript == "cover_right") {
-      var_0 = [ % corner_standr_alert_idle, %corner_standr_alert_twitch01, %corner_standr_alert_twitch04, %corner_standr_alert_twitch05, %corner_standr_alert_twitch06, %corner_standr_alert_twitch07];
+      var_0 = [%corner_standr_alert_idle, %corner_standr_alert_twitch01, %corner_standr_alert_twitch04, %corner_standr_alert_twitch05, %corner_standr_alert_twitch06, %corner_standr_alert_twitch07];
       var_1 = "trans_from_corner_standr";
     } else if(self.prevscript == "cover_left") {
-      var_0 = [ % corner_standl_alert_idle, %corner_standl_alert_twitch01, %corner_standl_alert_twitch03, %corner_standl_alert_twitch04, %corner_standl_alert_twitch06, %corner_standl_alert_twitch07];
+      var_0 = [%corner_standl_alert_idle, %corner_standl_alert_twitch01, %corner_standl_alert_twitch03, %corner_standl_alert_twitch04, %corner_standl_alert_twitch06, %corner_standl_alert_twitch07];
       var_1 = "trans_from_corner_standl";
     }
 
@@ -947,7 +947,7 @@ keeptryingtomelee() {
     wait(0.2 + randomfloat(0.3));
 
     if(isDefined(self.enemy)) {
-      if(isplayer(self.enemy))
+      if(isPlayer(self.enemy))
         var_0 = 40000;
       else
         var_0 = 10000;
@@ -966,7 +966,7 @@ delaystandardmelee() {
   if(isDefined(self.nomeleechargedelay)) {
     return;
   }
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     return;
   }
   animscripts\melee::melee_standard_delaystandardcharge(self.enemy);

@@ -16,8 +16,9 @@ setup_mpla_anim_array(animtype, array) {
 setup_melee_mpla_anim_array() {
   self animscripts\anims::clearanimcache();
 
-  if(!isDefined(self.anim_array))
+  if(!isDefined(self.anim_array)) {
     self.anim_array = [];
+  }
 
   self.anim_array[self.animtype]["combat"]["stand"]["none"]["melee_0"] = % ai_digbat_melee_1;
   self.anim_array[self.animtype]["combat"]["stand"]["none"]["stand_2_melee_0"] = % ai_digbat_stand_2_melee_1;

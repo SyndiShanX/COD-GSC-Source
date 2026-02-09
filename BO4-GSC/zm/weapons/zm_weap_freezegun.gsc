@@ -53,7 +53,7 @@ function_b65fd5ae(params) {
     return;
   }
 
-  if(!isplayer(params.eattacker)) {
+  if(!isPlayer(params.eattacker)) {
     return;
   }
 

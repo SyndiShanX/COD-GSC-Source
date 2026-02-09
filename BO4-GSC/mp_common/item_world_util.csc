@@ -194,7 +194,7 @@ function_45efe0ab(itementry) {
 }
 
 function_808be9a3(player, networkid) {
-  assert(player isplayer());
+  assert(player isPlayer());
   assert(networkid >= level.var_b52c46a6 && networkid <= level.var_c1fb34bd);
   entnum = player getentitynumber();
   assert(entnum < 115);
@@ -229,7 +229,7 @@ function_1f0def85(item) {
 }
 
 function_970b8d86(player, slotid, attachmentoffset = undefined) {
-  assert(player isplayer());
+  assert(player isPlayer());
 
   if(isDefined(attachmentoffset)) {
     assert(attachmentoffset <= 6);

@@ -4,6 +4,7 @@
 **************************************/
 
 #using_animtree("generic_human");
+
 main() {
   self.desired_anim_pose = "stand";
   animscripts\utility::UpdateAnimPose();
@@ -15,7 +16,6 @@ main() {
   self.additiveTurretFire = % saw_gunner_firing_add;
   thread animscripts\saw\common::main(turret);
 }
-
 #using_animtree("mg42");
 turretInit(owner) {
   self UseAnimTree(#animtree);

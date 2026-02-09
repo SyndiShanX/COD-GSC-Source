@@ -19,7 +19,6 @@ init() {
   flag_init("std_target_4");
   flag_init("std_plot_vo_done");
 }
-
 init_stage() {
   clientnotify("SR");
   flag_clear("std_target_1");
@@ -31,12 +30,10 @@ init_stage() {
   level thread play_waterthrash_loop();
   maps\zombie_temple_sq_brock::delete_radio();
 }
-
 delayed_start_skit() {
   wait(.5);
   level thread maps\zombie_temple_sq_skits::start_skit("tt5");
 }
-
 play_waterthrash_loop() {
   level endon("sq_StD_over");
   struct = getstruct("sq_location_std", "targetname");
@@ -46,12 +43,11 @@ play_waterthrash_loop() {
   level._std_sound_waterthrash_ent = spawn("script_origin", struct.origin);
   level._std_sound_waterthrash_ent playLoopSound("evt_sq_std_waterthrash_loop", 2);
   level waittill("sq_std_story_vox_begun");
-  level._std_sound_waterthrash_ent stopLoopSound(5);
+  level._std_sound_waterthrash_ent stoploopsound(5);
   wait(5);
   level._std_sound_waterthrash_ent delete();
   level._std_sound_waterthrash_ent = undefined;
 }
-
 target_debug() {
   self endon("death");
   self endon("spiked");
@@ -60,7 +56,6 @@ target_debug() {
     wait(0.1);
   }
 }
-
 target_thread() {
   maps\_zombiemode_spikemore::add_spikeable_object(self);
   self thread target_debug();
@@ -70,13 +65,12 @@ target_thread() {
   self playSound("evt_sq_std_spray_start");
   self playLoopSound("evt_sq_std_spray_loop", 1);
   self waittill("spiked");
-  self stopLoopSound(1);
+  self stoploopsound(1);
   self playSound("evt_sq_std_spray_stop");
   flag_set("std_target_" + self.script_int);
   clientnotify("S" + self.script_int);
   maps\_zombiemode_spikemore::remove_spikeable_object(self);
 }
-
 player_first_success() {
   self endon("death");
   level endon("sq_std_first");
@@ -84,7 +78,6 @@ player_first_success() {
   who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, 1);
   level notify("sq_std_first");
 }
-
 player_hint_line() {
   self endon("death");
   level endon("sq_std_hint_given");
@@ -101,7 +94,6 @@ player_hint_line() {
     wait(.1);
   }
 }
-
 begin_std_story_vox() {
   self endon("death");
   level endon("sq_std_story_vox_begun");
@@ -117,7 +109,6 @@ begin_std_story_vox() {
     wait(.1);
   }
 }
-
 stage_logic() {
   flag_wait("std_target_1");
   flag_wait("std_target_2");
@@ -143,7 +134,6 @@ stage_logic() {
   wait(5.0);
   stage_completed("sq", "StD");
 }
-
 exit_stage(success) {
   targs = getEntArray("sq_sad", "targetname");
   for(i = 0; i < targs.size; i++) {
@@ -170,7 +160,6 @@ exit_stage(success) {
     level._std_sound_waterthrash_ent = undefined;
   }
 }
-
 std_story_vox(player) {
   level endon("sq_StD_over");
   struct = getstruct("sq_location_std", "targetname");
@@ -183,13 +172,12 @@ std_story_vox(player) {
   level._std_sound_ent waittill("sounddone");
   if(isDefined(player)) {
     level.skit_vox_override = true;
-    player playSound("vox_egg_story_4_1" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
+    player playSound("vox_egg_story_4_1" + maps\zombie_temple_sq::get_variant_from_entity_num(player GetEntityNumber()), "vox_egg_sounddone");
     player waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
   level notify("sq_std_hint_line");
 }
-
 std_story_vox_wait_for_finish() {
   level endon("sq_StD_over");
   count = 0;

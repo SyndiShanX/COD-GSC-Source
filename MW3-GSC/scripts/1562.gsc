@@ -50,7 +50,6 @@ _id_3D27(var_0, var_1, var_2, var_3) {
 
     if(!isDefined(level._id_3D29[var_7])) {
       level._id_3D29[var_7] = [];
-
     }
     var_8 = spawnStruct();
     var_8.index = var_4;
@@ -71,7 +70,6 @@ _id_3D27(var_0, var_1, var_2, var_3) {
 _id_3D30(var_0) {
   if(!isDefined(level._id_3D29) || !isDefined(level._id_3D29["weapon"])) {
     return 0;
-
   }
   var_1 = [];
 
@@ -83,7 +81,6 @@ _id_3D30(var_0) {
 
   if(!var_1.size) {
     return 0;
-
   }
   var_1 = _id_060F::_id_3B69(var_1, ::_id_3D32);
   var_5 = undefined;
@@ -159,7 +156,6 @@ _id_3D36(var_0) {
 _id_3D37(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0].type;
-
   }
   return tablelookup("sp/survival_loot.csv", 1, var_0, 2);
 }
@@ -167,7 +163,6 @@ _id_3D37(var_0) {
 _id_3D38(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0].name;
-
   }
   return tablelookup("sp/survival_loot.csv", 1, var_0, 3);
 }
@@ -175,7 +170,6 @@ _id_3D38(var_0) {
 _id_3D39(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0]._id_189B;
-
   }
   return tablelookup("sp/survival_loot.csv", 1, var_0, 4);
 }
@@ -183,7 +177,6 @@ _id_3D39(var_0) {
 _id_3D3A(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0]._id_3D2A;
-
   }
   return float(tablelookup("sp/survival_loot.csv", 1, var_0, 5));
 }
@@ -191,7 +184,6 @@ _id_3D3A(var_0) {
 _id_3D3B(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0]._id_3D2B;
-
   }
   return int(tablelookup("sp/survival_loot.csv", 1, var_0, 6));
 }
@@ -199,7 +191,6 @@ _id_3D3B(var_0) {
 _id_3D3C(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0]._id_3D2C;
-
   }
   return int(tablelookup("sp/survival_loot.csv", 1, var_0, 7));
 }
@@ -207,7 +198,6 @@ _id_3D3C(var_0) {
 _id_3D3D(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0]._id_3D2E;
-
   }
   return int(tablelookup("sp/survival_loot.csv", 1, var_0, 8));
 }
@@ -219,7 +209,6 @@ _id_3D3E(var_0) {
 _id_3D3F(var_0) {
   if(_id_3D34(var_0)) {
     return level._id_3D29[var_0]._id_3D2F;
-
   }
   var_1 = "joe";
   var_2 = [];
@@ -227,7 +216,6 @@ _id_3D3F(var_0) {
 
   if(_id_3D37(var_0) == "weapon") {
     var_3 = getsubstr(var_0, 0, var_0.size - 3);
-
   }
   foreach(var_5 in level._id_3D28) {
     if(issubstr(var_5, var_3)) {
@@ -237,7 +225,6 @@ _id_3D3F(var_0) {
 
   if(!var_2.size) {
     var_2[var_2.size] = var_0;
-
   }
   return var_2;
 }

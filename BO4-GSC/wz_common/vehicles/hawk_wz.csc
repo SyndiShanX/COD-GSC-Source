@@ -82,7 +82,7 @@ function_23a9e4af(localclientnum) {
     wait 0.1;
   }
 
-  if(isplayer(self.owner) && self.owner function_21c0fa55()) {
+  if(isPlayer(self.owner) && self.owner function_21c0fa55()) {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkActive"), 1);
     self thread function_2e07be71(localclientnum);
   }
@@ -228,7 +228,7 @@ function_d952430d(localclientnum, &array, targets) {
     if(isDefined(var_e5cf40eb[entnum])) {
       ent = getentbynum(localclientnum, entnum);
 
-      if(!isDefined(ent) || !isplayer(ent) || !isalive(ent)) {
+      if(!isDefined(ent) || !isPlayer(ent) || !isalive(ent)) {
         to_remove[to_remove.size] = entnum;
       }
 
@@ -302,7 +302,7 @@ function_9ace0fb6(localclientnum) {
   foreach(entnum, info in self.var_704e7b07) {
     ent = getentbynum(localclientnum, entnum);
 
-    if(!isDefined(ent) || !isplayer(ent) || !isalive(ent)) {
+    if(!isDefined(ent) || !isPlayer(ent) || !isalive(ent)) {
       to_remove[to_remove.size] = entnum;
       continue;
     }
@@ -568,7 +568,7 @@ function_2e07be71(localclientnum) {
   if(isDefined(var_3216cebd)) {
     hawk_owner = getentbynum(localclientnum, var_3216cebd);
 
-    if(isDefined(hawk_owner) && isplayer(hawk_owner) && hawk_owner function_21c0fa55()) {
+    if(isDefined(hawk_owner) && isPlayer(hawk_owner) && hawk_owner function_21c0fa55()) {
       setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkActive"), 0);
     }
   }

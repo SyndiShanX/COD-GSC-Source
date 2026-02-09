@@ -6,26 +6,22 @@
 #include animscripts\utility;
 #include common_scripts\Utility;
 #using_animtree("generic_human");
+
 animArray(animname, scriptOverride, errorIfMissing) {
   return animArrayGeneric(animname, scriptOverride, errorIfMissing, self.anim_array, anim.anim_array, true);
 }
-
 angleDeltaArray(animname, scriptOverride, errorIfMissing) {
   return animArrayGeneric(animname, scriptOverride, errorIfMissing, self.angle_delta_array, anim.angle_delta_array, false);
 }
-
 moveDeltaArray(animname, scriptOverride, errorIfMissing) {
   return animArrayGeneric(animname, scriptOverride, errorIfMissing, self.move_delta_array, anim.move_delta_array, false);
 }
-
 preMoveDeltaArray(animname, scriptOverride, errorIfMissing) {
   return animArrayGeneric(animname, scriptOverride, errorIfMissing, self.pre_move_delta_array, anim.pre_move_delta_array, false);
 }
-
 postMoveDeltaArray(animname, scriptOverride, errorIfMissing) {
   return animArrayGeneric(animname, scriptOverride, errorIfMissing, self.post_move_delta_array, anim.post_move_delta_array, false);
 }
-
 longestExposedApproachDist() {
   if(isDefined(self.longestExposedApproachDist)) {
     assert(isDefined(self.longestExposedApproachDist[self.animType]));
@@ -37,7 +33,6 @@ longestExposedApproachDist() {
   }
   return anim.longestExposedApproachDist["default"];
 }
-
 setIdleAnimOverride(overrideAnim) {
   if(!isDefined(self.anim_array)) {
     self.anim_array = [];
@@ -53,7 +48,6 @@ setIdleAnimOverride(overrideAnim) {
     self.anim_array[self.animType]["stop"]["stand"][self WeaponAnims()]["idle"] = array(array(overrideAnim));
   }
 }
-
 animArrayGeneric(animname, scriptOverride, errorIfMissing, my_anim_array, global_anim_array, useCache) {
   if(self.a.pose != self.a.prevPose) {
     clearAnimCache();
@@ -103,7 +97,6 @@ animArrayGeneric(animname, scriptOverride, errorIfMissing, my_anim_array, global
   }
   return theAnim;
 }
-
 animArrayExist(animname, scriptOverride) {
   theAnim = animArray(animname, scriptOverride, false);
   if(!isDefined(theAnim) || theAnim == % void) {
@@ -111,7 +104,6 @@ animArrayExist(animname, scriptOverride) {
   }
   return true;
 }
-
 animArrayAnyExist(animname, scriptOverride) {
   animArray = animArray(animname, scriptOverride, false);
   if(!isDefined(animArray) || (!IsArray(animArray) && animArray == % void)) {
@@ -121,7 +113,6 @@ animArrayAnyExist(animname, scriptOverride) {
   }
   return animArray.size > 0;
 }
-
 animArrayPickRandom(animname, scriptOverride, oncePerCache) {
   animArray = animArray(animname, scriptOverride);
   if(!IsArray(animArray)) {
@@ -129,7 +120,7 @@ animArrayPickRandom(animname, scriptOverride, oncePerCache) {
   }
   assert(animArray.size > 0);
   if(animArray.size > 1) {
-    index = randomInt(animArray.size);
+    index = RandomInt(animArray.size);
   } else {
     index = 0;
   }
@@ -138,7 +129,6 @@ animArrayPickRandom(animname, scriptOverride, oncePerCache) {
   }
   return animArray[index];
 }
-
 animArrayInternal(anim_array, animType, animScript, animPose, animWeaponAnims, animName, errorIfMissing, globalArrayLookup) {
   theAnim = undefined;
   animType_array = anim_array[animType];
@@ -175,7 +165,6 @@ animArrayInternal(anim_array, animType, animScript, animPose, animWeaponAnims, a
   }
   return theAnim;
 }
-
 clearAnimCache() {
   self.anim_array_cache = [];
 }

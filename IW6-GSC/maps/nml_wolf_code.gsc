@@ -608,7 +608,7 @@ wolf_event() {
   common_scripts\utility::flag_wait("begin_wolf_attack");
   common_scripts\utility::flag_clear("start_earthquakes");
   level.player endon("death");
-  setdvar("hideHudFast", 1);
+  setDvar("hideHudFast", 1);
   setsaveddvar("ammoCounterHide", 1);
   setsaveddvar("compass", 0);
   setsaveddvar("hud_showstance", 0);
@@ -977,7 +977,7 @@ merrick_scene_dialogue2() {
   wait 22;
   level.player maps\_utility::player_speed_percent(100, 3);
   level.player enableweapons();
-  setdvar("hideHudFast", 0);
+  setDvar("hideHudFast", 0);
   setsaveddvar("cg_drawCrosshair", 1);
   setsaveddvar("ammocounterhide", 0);
   setsaveddvar("compass", 1);

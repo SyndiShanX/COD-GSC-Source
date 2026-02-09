@@ -9,8 +9,8 @@
 
 main() {
   level.tweakfile = 1;
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 5);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 5);
   visionsetnaked("sp_blackout_default", 2);
 }
 
@@ -20,7 +20,7 @@ vision_set_default() {
 
 vision_set_interrogation() {
   visionsetnaked("sp_blackout_interrogation", 1.0);
-  setdvar("r_rimIntensity", 2);
+  setDvar("r_rimIntensity", 2);
 }
 
 vision_set_hallway() {
@@ -54,12 +54,12 @@ vision_set_vent() {
 
 vision_set_menendez() {
   visionsetnaked("messiah_mode", 5.0);
-  setdvar("r_rimIntensity", 1);
+  setDvar("r_rimIntensity", 1);
 }
 
 vision_set_mason_serverroom() {
   visionsetnaked("sp_blackout_mason_serverroom", 3.0);
-  setdvar("r_rimIntensity", 1);
+  setDvar("r_rimIntensity", 1);
 }
 
 vision_set_hanger() {

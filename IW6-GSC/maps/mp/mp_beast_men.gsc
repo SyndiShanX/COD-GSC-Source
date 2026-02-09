@@ -198,7 +198,7 @@ on_agent_squadmate_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon
 
   self maps\mp\agents\_agent_utility::deactivateAgent();
 
-  if(IsPlayer(eAttacker) && isDefined(self.owner) && eAttacker != self.owner) {
+  if(isPlayer(eAttacker) && isDefined(self.owner) && eAttacker != self.owner) {
     self maps\mp\gametypes\_damage::onKillstreakKilled(eAttacker, sWeapon, sMeansOfDeath, iDamage, "destroyed_ks_beast_man");
   }
 

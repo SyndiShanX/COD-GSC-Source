@@ -15,7 +15,7 @@ dev_cac_init() {
     wait 0.5;
     reset = 1;
 
-    if(getdvar(#"_id_E6D8B517") != "") {
+    if(getDvar(#"_id_E6D8B517") != "") {
       continue;
     }
     host = gethostplayer();
@@ -23,7 +23,7 @@ dev_cac_init() {
     if(!isDefined(level.dev_cac_player))
       level.dev_cac_player = host;
 
-    switch (getdvar(#"devgui_dev_cac")) {
+    switch (getDvar(#"devgui_dev_cac")) {
       case "":
         reset = 0;
         break;
@@ -105,22 +105,20 @@ dev_cac_init() {
     }
 
     if(reset)
-      setdvar("devgui_dev_cac", "");
+      setDvar("devgui_dev_cac", "");
   }
-
 }
 
 dev_cac_camera(on) {
   if(on) {
     self setclientthirdperson(1);
-    setdvar("cg_thirdPersonAngle", "185");
-    setdvar("cg_thirdPersonRange", "138");
-    setdvar("cg_fov", "20");
+    setDvar("cg_thirdPersonAngle", "185");
+    setDvar("cg_thirdPersonRange", "138");
+    setDvar("cg_fov", "20");
   } else {
     self setclientthirdperson(0);
-    setdvar("cg_fov", getdvar(#"cg_fov_default"));
+    setDvar("cg_fov", getDvar(#"cg_fov_default"));
   }
-
 }
 
 dev_cac_dpad_think(part_name, cycle_function, tag) {
@@ -151,7 +149,6 @@ dev_cac_dpad_think(part_name, cycle_function, tag) {
 
     wait 0.05;
   }
-
 }
 
 next_in_list(value, list) {
@@ -291,7 +288,7 @@ dev_cac_overlay_destroy(hud) {
     hud.menu[i] destroy();
 
   hud destroy();
-  setdvar("player_debugSprint", "0");
+  setDvar("player_debugSprint", "0");
 }
 
 dev_cac_overlay_create() {

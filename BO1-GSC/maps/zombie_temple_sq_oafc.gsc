@@ -18,7 +18,6 @@ init() {
   flag_init("oafc_switch_pressed");
   flag_init("oafc_plot_vo_done");
 }
-
 stage_logic() {}
 oafc_switch() {
   level endon("sq_OaFC_over");
@@ -26,19 +25,18 @@ oafc_switch() {
   self.on_pos = self.origin;
   self.off_pos = self.on_pos - (AnglesToUp(self.angles) * 5.5);
   self waittill("triggered", who);
-  entity_num = who getEntityNumber();
+  entity_num = who GetEntityNumber();
   if(isDefined(who.zm_random_char)) {
     entity_num = who.zm_random_char;
   }
   level._player_who_pressed_the_switch = entity_num;
   self.trigger trigger_off();
   self playSound("evt_sq_gen_button");
-  self moveTo(self.off_pos, 0.25);
+  self moveto(self.off_pos, 0.25);
   self waittill("movedone");
   flag_set("oafc_switch_pressed");
   level thread oafc_story_vox();
 }
-
 knocking_audio() {
   level endon("sq_OaFC_over");
   struct = getstruct("sq_location_oafc", "targetname");
@@ -50,17 +48,14 @@ knocking_audio() {
     wait(randomfloatrange(1.5, 4));
   }
 }
-
 tileset1() {
   self.set = 1;
   self.original_origin = self.origin;
 }
-
 tileset2() {
   self.set = 2;
   self.original_origin = self.origin;
 }
-
 tile_cheat() {
   level endon("reset_tiles");
   level endon("sq_OaFC_over");
@@ -69,7 +64,6 @@ tile_cheat() {
     wait(0.1);
   }
 }
-
 tile_debug() {
   level endon("sq_OaFC_over");
   if(!isDefined(level._debug_tiles)) {
@@ -167,14 +161,12 @@ tile_debug() {
     wait(0.05);
   }
 }
-
 tile_monitor() {
   level endon("sq_OaFC_over");
   self endon("tiles_picked");
   level endon("reset_tiles");
   self.origin = self.original_origin;
 }
-
 init_stage() {
   level thread tile_debug();
   flag_clear("oafc_switch_pressed");
@@ -183,21 +175,18 @@ init_stage() {
   maps\zombie_temple_sq_brock::delete_radio();
   level thread delayed_start_skit();
 }
-
 delayed_start_skit() {
   wait(.5);
   level thread maps\zombie_temple_sq_skits::start_skit("tt1");
 }
-
 tile_moves_up(delay) {
   level endon("sq_OaFC_over");
   flag_wait("oafc_switch_pressed");
   for(i = 0; i < delay; i++) {
     wait_network_frame();
   }
-  self moveTo(self.original_origin, 0.25);
+  self moveto(self.original_origin, 0.25);
 }
-
 set_tile_models(tiles, models) {
   for(i = 0; i < tiles.size; i++) {
     tiles[i] setModel("p_ztem_glyphs_00");
@@ -207,7 +196,6 @@ set_tile_models(tiles, models) {
     tiles[i] thread tile_moves_up(i % 4);
   }
 }
-
 player_in_trigger() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -217,7 +205,6 @@ player_in_trigger() {
   }
   return undefined;
 }
-
 oafc_trigger_thread(tiles, set) {
   self endon("death");
   level endon("reset_tiles");
@@ -252,8 +239,8 @@ oafc_trigger_thread(tiles, set) {
                   matched = true;
                   level._picked_tile1.matched = true;
                   level._picked_tile2.matched = true;
-                  level._picked_tile1 moveTo(level._picked_tile1.origin - (0, 0, 24), 0.5);
-                  level._picked_tile2 moveTo(level._picked_tile2.origin - (0, 0, 24), 0.5);
+                  level._picked_tile1 moveto(level._picked_tile1.origin - (0, 0, 24), 0.5);
+                  level._picked_tile2 moveto(level._picked_tile2.origin - (0, 0, 24), 0.5);
                   level._picked_tile1 waittill("movedone");
                   level._picked_tile1 = undefined;
                   level._picked_tile2 = undefined;
@@ -319,7 +306,6 @@ oafc_trigger_thread(tiles, set) {
     PrintLn("Fallen out of trig thread.");
   }
 }
-
 reset_tiles() {
   tile_models = array("p_ztem_glyphs_01_unlit", "p_ztem_glyphs_02_unlit", "p_ztem_glyphs_03_unlit", "p_ztem_glyphs_04_unlit", "p_ztem_glyphs_05_unlit", "p_ztem_glyphs_06_unlit", "p_ztem_glyphs_07_unlit", "p_ztem_glyphs_08_unlit", "p_ztem_glyphs_09_unlit", "p_ztem_glyphs_10_unlit", "p_ztem_glyphs_11_unlit", "p_ztem_glyphs_12_unlit");
   level notify("reset_tiles");
@@ -342,7 +328,6 @@ reset_tiles() {
   set_tile_models(tileset2, tile_models);
   level._oafc_trigger2 thread oafc_trigger_thread(tileset2, 2);
 }
-
 wait_for_first_stepon() {
   self endon("death");
   level endon("quest1_glyph_line_said");
@@ -355,7 +340,6 @@ wait_for_first_stepon() {
   }
   level notify("quest1_glyph_line_said");
 }
-
 exit_stage(success) {
   if(isDefined(level._debug_tiles)) {
     level._debug_tiles = undefined;
@@ -386,7 +370,6 @@ exit_stage(success) {
   }
   level.skit_vox_override = false;
 }
-
 oafc_story_vox() {
   level endon("sq_OaFC_over");
   struct = getstruct("sq_location_oafc", "targetname");

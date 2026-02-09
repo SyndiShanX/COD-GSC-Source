@@ -26,16 +26,17 @@ balconyglobalsinit() {
     for(i = 0; i < all_nodes.size; i++) {
       node = all_nodes[i];
 
-      if(isbalconynode(node))
+      if(isbalconynode(node)) {
         anim.balcony_nodes[anim.balcony_nodes.size] = node;
+      }
     }
   }
 }
 
 balconydamage(idamage, smeansofdeath) {
-  if(isDefined(self.a.doingbalconydeath) && self.a.doingbalconydeath)
+  if(isDefined(self.a.doingbalconydeath) && self.a.doingbalconydeath) {
     self.health = idamage + 1;
-  else if(self.health <= idamage) {
+  } else if(self.health <= idamage) {
     if(candobalcony(smeansofdeath)) {
       self.do_balcony_death_now = 1;
       self.health = idamage + 1;
@@ -56,9 +57,9 @@ candobalcony(smeansofdeath) {
 
   self.balcony_node = getbalconynode();
 
-  if(!isDefined(self.balcony_node))
+  if(!isDefined(self.balcony_node)) {
     return false;
-  else if(isDefined(self.balcony_node.balconydeathcounter) && self.balcony_node.balconydeathcounter > 0) {
+  } else if(isDefined(self.balcony_node.balconydeathcounter) && self.balcony_node.balconydeathcounter > 0) {
     debug_balcony("not doing balcony death: balconyDeathCounter is at " + self.balcony_node.balconydeathcounter);
 
     self.balcony_node.balconydeathcounter--;
@@ -90,8 +91,9 @@ candobalcony(smeansofdeath) {
   }
 
   if(isDefined(self.balcony_node.script_balconydeathchance)) {
-    if(randomfloat(1) > self.balcony_node.script_balconydeathchance)
+    if(randomfloat(1) > self.balcony_node.script_balconydeathchance) {
       return false;
+    }
   }
 
   return true;
@@ -106,14 +108,12 @@ getbalconynode() {
         balcony_node = self.node;
 
         debug_balcony("on a balcony node (self.node).");
-
       }
     } else if(isDefined(self.covernode) && isbalconynode(self.covernode)) {
       if(check_ang_and_dist_to_node(self.covernode)) {
         balcony_node = self.covernode;
 
         debug_balcony("on a balcony node (self.covernode).");
-
       }
     }
   }
@@ -155,8 +155,9 @@ check_ang_and_dist_to_node(node) {
       } else {
         debug_balcony("Behind balcony node. dot = " + dot);
 
-        if(dist <= 900)
+        if(dist <= 900) {
           return true;
+        }
       }
     }
   }
@@ -165,11 +166,13 @@ check_ang_and_dist_to_node(node) {
 }
 
 trybalcony() {
-  if(isDefined(self.doinglongdeath) && self.doinglongdeath)
+  if(isDefined(self.doinglongdeath) && self.doinglongdeath) {
     return false;
+  }
 
-  if(isDefined(self.a.doingbalconydeath) && self.a.doingbalconydeath)
+  if(isDefined(self.a.doingbalconydeath) && self.a.doingbalconydeath) {
     return true;
+  }
 
   if(isDefined(self.do_balcony_death_now) && self.do_balcony_death_now) {
     self animcustom(::dobalcony);
@@ -190,8 +193,9 @@ dobalcony() {
   }
   balconynodetype = "balcony_norailing";
 
-  if(!isbalconynodenorailing(self.balcony_node))
+  if(!isbalconynodenorailing(self.balcony_node)) {
     balconynodetype = "balcony";
+  }
 
   disable_pain();
   disable_react();
@@ -199,8 +203,9 @@ dobalcony() {
   if(self.a.pose == "crouch" && balconynodetype == "balcony_norailing") {
     forward = anglesToForward(self.angles);
 
-    if(isDefined(self.balcony_node))
+    if(isDefined(self.balcony_node)) {
       forward = anglesToForward(self.balcony_node.angles);
+    }
 
     self startragdoll();
     self launchragdoll(vectorscale(forward, randomintrange(25, 35)), "tag_eye");

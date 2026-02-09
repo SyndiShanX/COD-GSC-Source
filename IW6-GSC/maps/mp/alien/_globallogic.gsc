@@ -60,7 +60,7 @@ init() {
 
   registerDvars();
 
-  mapLeaderboard = " LB_" + getdvar("ui_mapname");
+  mapLeaderboard = " LB_" + getDvar("ui_mapname");
   if(GetDvarInt("scr_chaos_mode") == 1)
     mapLeaderboard += "_CHAOS";
   if(getDvarInt("sv_maxclients") == 1)
@@ -68,7 +68,7 @@ init() {
   else
     mapLeaderboard += "_COOP";
 
-  mapEscapesLeaderboard = " LB_" + getdvar("ui_mapname") + "_ESCAPES";
+  mapEscapesLeaderboard = " LB_" + getDvar("ui_mapname") + "_ESCAPES";
 
   if(getDvarInt("scr_aliens_hardcore"))
     mapLeaderboard += "_HC";
@@ -135,12 +135,12 @@ registerDvars() {
   if(getDvar("r_reflectionProbeGenerate") != "1") {
     SetOmnvar("ui_nuke_end_milliseconds", 0);
   }
-  SetDvar("ui_danger_team", "");
-  SetDvar("ui_inhostmigration", 0);
-  SetDvar("ui_inprematch", 0);
-  SetDvar("ui_override_halftime", 0);
-  SetDvar("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
-  SetDvar("scr_alien_intel_pillage", 0);
+  setDvar("ui_danger_team", "");
+  setDvar("ui_inhostmigration", 0);
+  setDvar("ui_inprematch", 0);
+  setDvar("ui_override_halftime", 0);
+  setDvar("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
+  setDvar("scr_alien_intel_pillage", 0);
 }
 
 SetupCallbacks() {

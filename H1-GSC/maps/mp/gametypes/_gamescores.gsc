@@ -66,7 +66,7 @@ giveplayerscore(var_0, var_1, var_2) {
   if(isDefined(var_1.owner))
     var_1 = var_1.owner;
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   var_1 displaypoints(var_0);

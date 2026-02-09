@@ -6,7 +6,7 @@
 #using_animtree("generic_human");
 
 _id_423D(var_0) {
-  self clearanim( % root, var_0);
+  self clearanim(%root, var_0);
 }
 
 _id_423E(var_0) {
@@ -14,13 +14,11 @@ _id_423E(var_0) {
 
   if(isDefined(self.enemy)) {
     var_1 = distance(self.enemy.origin, self.origin);
-
   }
   if(var_1 < 512) {
     var_2 = "_stealth_behavior_spotted_short";
   } else {
     var_2 = "_stealth_behavior_spotted_long";
-
   }
   self.allowdeath = 1;
   thread maps\_anim::_id_11CC(self, "gravity", var_2);
@@ -29,7 +27,6 @@ _id_423E(var_0) {
     wait 0.5;
   } else {
     common_scripts\utility::waittill_notify_or_timeout(var_2, randomfloatrange(1.5, 3));
-
   }
   self notify("stop_animmode");
 }
@@ -44,7 +41,6 @@ _id_4240(var_0) {
     var_1 = self.enemy;
   } else if(isDefined(self.favoriteenemy)) {
     var_1 = self.favoriteenemy;
-
   }
   var_2 = distance(self.origin, var_1.origin);
   var_3 = 4;
@@ -82,7 +78,6 @@ _id_4241(var_0) {
     }
   } else {
     var_1 = "_stealth_dog_growl";
-
   }
   maps\_anim::_id_11CC(self, "gravity", var_1);
 }
@@ -95,7 +90,6 @@ _id_4242(var_0) {
     var_1 = "_stealth_dog_wakeup_fast";
   } else {
     var_1 = "_stealth_dog_growl";
-
   }
   maps\_anim::_id_11CC(self, "gravity", var_1);
 }
@@ -108,7 +102,6 @@ _id_4243(var_0) {
     var_1 = "_stealth_dog_wakeup_slow";
   } else {
     var_1 = "_stealth_dog_growl";
-
   }
   maps\_anim::_id_11CC(self, "gravity", var_1);
 }
@@ -148,7 +141,6 @@ _id_4247(var_0) {
     var_1 = "_stealth_find_stand";
   } else {
     var_1 = "_stealth_find_jog";
-
   }
   maps\_anim::_id_11CC(self, "gravity", var_1);
 }

@@ -244,7 +244,6 @@ screecher_init_done() {
       self dodamage(self.health + 666, self.origin);
 
       screecher_print("Died on bus");
-
     }
 
     wait 0.1;

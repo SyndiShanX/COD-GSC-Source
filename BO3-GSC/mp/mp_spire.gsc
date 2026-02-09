@@ -59,7 +59,7 @@ function main() {
     spawncollision("collision_clip_wall_256x256x10", "collider", (1641, -796, 76), (0, 0, 0));
   }
   mp_spire_amb::main();
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";

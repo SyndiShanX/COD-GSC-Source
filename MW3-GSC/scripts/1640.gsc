@@ -28,9 +28,8 @@ main(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     maps\_vehicle::_id_2A4A("ny_harbor_hind_sideturret", "tag_doorgun", "weapon_dshk", undefined, "auto_ai", 0.5, 20, -14);
-
   }
-  maps\_vehicle::_id_2AC1( % bh_rotors, undefined, 0);
+  maps\_vehicle::_id_2AC1(%bh_rotors, undefined, 0);
   maps\_vehicle::_id_2A02("explosions/grenadeexp_default", "tag_engine_left", "hind_helicopter_hit", undefined, undefined, undefined, 0.2, 1);
   maps\_vehicle::_id_2A02("explosions/grenadeexp_default", "tail_rotor_jnt", "hind_helicopter_secondary_exp", undefined, undefined, undefined, 0.5, 1);
   maps\_vehicle::_id_2A02("fire/fire_smoke_trail_L", "tail_rotor_jnt", "hind_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1);
@@ -62,7 +61,6 @@ _id_2B1D() {
     self._id_295A = 762;
   } else {
     self._id_295A = 906;
-
   }
   self._id_2941 = 0;
   maps\_vehicle::_id_2AB3("running");
@@ -71,7 +69,6 @@ _id_2B1D() {
 _id_3A9C(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1]._id_2523 = % bh_idle;
-
   }
   return var_0;
 }
@@ -95,7 +92,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 9; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_0F59[0] = % helicopter_pilot1_idle;
   var_0[0]._id_0F59[1] = % helicopter_pilot1_twitch_clickpannel;
@@ -223,7 +219,6 @@ _id_3E84() {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     precachemodel(var_0[var_1[var_2]].model);
-
   }
   return var_0;
 }

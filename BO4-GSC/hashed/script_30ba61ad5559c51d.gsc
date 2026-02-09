@@ -117,7 +117,7 @@ on_ai_killed(params) {
     b_valid_weapon = 1;
   }
 
-  if(isplayer(params.eattacker) && b_valid_weapon) {
+  if(isPlayer(params.eattacker) && b_valid_weapon) {
     params.eattacker.var_b4a6cec6++;
 
     if(params.eattacker.var_b4a6cec6 < level.var_b4a6cec6) {

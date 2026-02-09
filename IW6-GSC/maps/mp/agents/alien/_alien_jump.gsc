@@ -25,7 +25,6 @@ JumpCleanup(oldTurnRate, endAngles) {
     self.oriented = true;
     self.ignoreme = true;
   }
-
 }
 
 JumpInternal(startPos, startAngles, endPos, endAngles, nextPos, jumpCBs, scriptableName) {

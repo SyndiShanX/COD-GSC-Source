@@ -492,7 +492,7 @@ function_e0c53cf(params) {
     return;
   }
 
-  if(isalive(self) && isDefined(self.zm_ai_category) && (isplayer(params.eattacker) || isplayer(params.einflictor)) && params.idamage < self.health) {
+  if(isalive(self) && isDefined(self.zm_ai_category) && (isPlayer(params.eattacker) || isPlayer(params.einflictor)) && params.idamage < self.health) {
     switch (self.zm_ai_category) {
       case # "heavy":
         var_3b210d82 = self.maxhealth * 0.2;
@@ -571,22 +571,22 @@ function_45a520db(params) {
     level thread zm_utility::function_4a25b584(self.origin, var_487ba56d);
   }
 
-  if(isDefined(params.einflictor) && isplayer(params.einflictor.activated_by_player)) {
+  if(isDefined(params.einflictor) && isPlayer(params.einflictor.activated_by_player)) {
     params.einflictor.activated_by_player function_261d5f79(params, self);
     return;
   }
 
-  if(isplayer(params.einflictor)) {
+  if(isPlayer(params.einflictor)) {
     params.einflictor function_261d5f79(params, self);
     return;
   }
 
-  if(isDefined(params.eattacker) && isplayer(params.eattacker.activated_by_player)) {
+  if(isDefined(params.eattacker) && isPlayer(params.eattacker.activated_by_player)) {
     params.eattacker.activated_by_player function_261d5f79(params, self);
     return;
   }
 
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     params.eattacker function_261d5f79(params, self);
     return;
   }
@@ -981,7 +981,7 @@ function_83916805(player) {
 }
 
 init_magicbox() {
-  setdvar(#"magic_chest_movable", 1);
+  setDvar(#"magic_chest_movable", 1);
   level.var_bb6907a4 = &function_51ed4d8b;
   level.var_3ba4b305 = 10;
   level.var_ad2674fe = 7;
@@ -1714,7 +1714,7 @@ function_31094dd(var_a8903530 = 0) {
 }
 
 function_9438de5c(var_c34665fc) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     level.var_f5682bb8 zm_arcade_timer::function_9bab3960(self);
     return;
   }

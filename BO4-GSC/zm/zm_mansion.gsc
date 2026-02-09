@@ -321,31 +321,31 @@ function_d7bc28f1() {
 }
 
 function_4db79562(a_ents) {
-  if(isplayer(a_ents[# "player 1"])) {
+  if(isPlayer(a_ents[# "player 1"])) {
     a_ents[# "player 1"] waittill(#"fade_out", #"disconnect");
 
-    if(isplayer(a_ents[# "player 1"])) {
+    if(isPlayer(a_ents[# "player 1"])) {
       a_ents[# "player 1"] thread lui::screen_fade_out(0.5, "black");
     }
   }
 }
 
 function_78276077(a_ents) {
-  if(isplayer(a_ents[# "player 1"])) {
+  if(isPlayer(a_ents[# "player 1"])) {
     a_ents[# "player 1"] thread lui::screen_fade_in(0.1, "black");
     a_ents[# "player 1"] waittill(#"hash_30795d8b5cd79089", #"hide_equipment_hint_text", #"disconnect");
 
-    if(isplayer(a_ents[# "player 1"])) {
+    if(isPlayer(a_ents[# "player 1"])) {
       a_ents[# "player 1"] thread lui::screen_fade_out(0, "black");
     }
   }
 }
 
 function_48276a5e(a_ents) {
-  if(isplayer(a_ents[# "player 1"])) {
+  if(isPlayer(a_ents[# "player 1"])) {
     a_ents[# "player 1"] waittill(#"fade_in", #"disconnect");
 
-    if(isplayer(a_ents[# "player 1"])) {
+    if(isPlayer(a_ents[# "player 1"])) {
       a_ents[# "player 1"] thread lui::screen_fade_in(0.3, "black");
     }
   }
@@ -498,7 +498,6 @@ update_player_hud(str_type) {
       foreach(player in getplayers()) {
         if(isDefined(player.hud_ww)) {
           player.hud_ww settext("<dev string:xac>" + level.var_8442091f + "<dev string:xba>");
-
         }
       }
 
@@ -507,7 +506,6 @@ update_player_hud(str_type) {
       foreach(player in getplayers()) {
         if(isDefined(player.hud_ww)) {
           player.hud_ww settext("<dev string:xc2>" + level.var_6930d2fd + "<dev string:xd0>");
-
         }
       }
 
@@ -548,7 +546,6 @@ function_ea36bce3(str_weapon) {
     foreach(player in getplayers()) {
       if(isDefined(player.hud_ww)) {
         player.hud_ww settext("<dev string:xc2>" + level.var_6930d2fd + "<dev string:xd0>");
-
       }
     }
 
@@ -560,7 +557,6 @@ function_ea36bce3(str_weapon) {
   foreach(player in getplayers()) {
     if(isDefined(player.hud_ww)) {
       player.hud_ww destroy();
-
     }
   }
 }
@@ -589,7 +585,7 @@ offhand_weapon_give_override(str_weapon) {
 }
 
 function_78f60fd5(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker) && isDefined(self.archetype) && (self.archetype == # "nosferatu" || self.archetype == # "crimson_nosferatu") && attacker hasweapon(level.w_stake_knife)) {
+  if(isPlayer(attacker) && isDefined(self.archetype) && (self.archetype == # "nosferatu" || self.archetype == # "crimson_nosferatu") && attacker hasweapon(level.w_stake_knife)) {
     if(!(isDefined(attacker.var_594a3318) && attacker.var_594a3318)) {
       attacker thread zm_vo::function_a2bd5a0c(#"hash_682afe734ec44af", 3);
       attacker.var_594a3318 = 1;
@@ -605,7 +601,7 @@ function_78f60fd5(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 }
 
 function_293e7d89(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(isplayer(eattacker) && smeansofdeath === "MOD_MELEE" && eattacker hasweapon(level.w_stake_knife)) {
+  if(isPlayer(eattacker) && smeansofdeath === "MOD_MELEE" && eattacker hasweapon(level.w_stake_knife)) {
     self clientfield::set("" + # "hash_7a260c02e8c345c2", 1);
     return (self.health + 666);
   }
@@ -936,7 +932,7 @@ function_2d164b86() {
     level flag::set("power_on3");
   }
 
-  if(isplayer(s_result.player)) {
+  if(isPlayer(s_result.player)) {
     var_d11a4648 = s_result.player;
   }
 
@@ -1230,7 +1226,7 @@ function_c52e8ba(player, var_8d5d092c) {
 }
 
 function_af65fe93(t_teleporter) {
-  if(!isplayer(self) || !isDefined(t_teleporter)) {
+  if(!isPlayer(self) || !isDefined(t_teleporter)) {
     return;
   }
 
@@ -1267,7 +1263,7 @@ function_cda69f5e(player) {
 }
 
 play_outro_igc() {
-  setdvar(#"hash_44340be18f159be3", 0);
+  setDvar(#"hash_44340be18f159be3", 0);
   level.var_ea32773 = &function_7f493481;
   level thread scene::init_streamer(#"cin_zm_mansion_outro_butler", #"allies", 0, 0);
   scene::add_scene_func(#"cin_zm_mansion_outro_butler", &function_8b76623, "play");
@@ -1318,7 +1314,7 @@ play_outro_igc() {
 }
 
 function_7f493481() {
-  setdvar(#"hash_44340be18f159be3", 1);
+  setDvar(#"hash_44340be18f159be3", 1);
 }
 
 function_5bfd87e9() {
@@ -2113,7 +2109,7 @@ function_3f147b12(cmd) {
       break;
     case # "hash_3dcf262f16faced0":
       var_cbd5530c = getdvarint(#"hash_3dcf262f16faced0", 0);
-      setdvar(#"hash_3dcf262f16faced0", !var_cbd5530c);
+      setDvar(#"hash_3dcf262f16faced0", !var_cbd5530c);
       break;
   }
 }

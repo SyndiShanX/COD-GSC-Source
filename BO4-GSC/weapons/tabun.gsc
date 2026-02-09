@@ -136,7 +136,6 @@ damageeffectarea(owner, position, radius, height, killcament) {
   if(getdvarint(#"scr_draw_triggers", 0)) {
     level notify(#"tabun_draw_cylinder_stop");
   }
-
 }
 
 damageinpoisonarea(gaseffectarea, killcament, trace, position) {

@@ -144,7 +144,7 @@ function widows_wine_contact_explosion() {
 }
 
 function widows_wine_zombie_damage_response(str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, direction_vec, tagname, modelname, partname, dflags, inflictor, chargelevel) {
-  if(isDefined(self.damageweapon) && self.damageweapon == level.w_widows_wine_grenade || (str_mod === "MOD_MELEE" && isDefined(e_player) && isplayer(e_player) && e_player hasperk("specialty_widowswine") && randomfloat(1) <= 0.5)) {
+  if(isDefined(self.damageweapon) && self.damageweapon == level.w_widows_wine_grenade || (str_mod === "MOD_MELEE" && isDefined(e_player) && isPlayer(e_player) && e_player hasperk("specialty_widowswine") && randomfloat(1) <= 0.5)) {
     if(!(isDefined(self.no_widows_wine) && self.no_widows_wine)) {
       self thread zm_powerups::check_for_instakill(e_player, str_mod, str_hit_location);
       n_dist_sq = distancesquared(self.origin, v_hit_origin);
@@ -192,7 +192,7 @@ function widows_wine_damage_callback(einflictor, eattacker, idamage, idflags, sm
 
 function widows_wine_zombie_death_watch(attacker) {
   if(isDefined(self.b_widows_wine_cocoon) && self.b_widows_wine_cocoon || (isDefined(self.b_widows_wine_slow) && self.b_widows_wine_slow) && (!(isDefined(self.b_widows_wine_no_powerup) && self.b_widows_wine_no_powerup))) {
-    if(isDefined(self.attacker) && isplayer(self.attacker) && self.attacker hasperk("specialty_widowswine")) {
+    if(isDefined(self.attacker) && isPlayer(self.attacker) && self.attacker hasperk("specialty_widowswine")) {
       chance = 0.2;
       if(isDefined(self.damageweapon) && self.damageweapon == level.w_widows_wine_grenade) {
         chance = 0.15;

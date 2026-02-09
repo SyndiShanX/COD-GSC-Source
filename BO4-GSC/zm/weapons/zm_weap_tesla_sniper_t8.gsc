@@ -66,7 +66,7 @@ on_weapon_change(s_params) {
 }
 
 function_de59b16a(e_source, str_mod, var_8e05c280, weapon) {
-  if(isplayer(e_source) && str_mod == "MOD_RIFLE_BULLET" && !self ai::is_stunned()) {
+  if(isPlayer(e_source) && str_mod == "MOD_RIFLE_BULLET" && !self ai::is_stunned()) {
     e_source.tesla_enemies_hit = 1;
     self thread function_9f86f360(e_source, 3, 128);
     return true;
@@ -76,7 +76,7 @@ function_de59b16a(e_source, str_mod, var_8e05c280, weapon) {
 }
 
 function_fd1a163d(e_source, damage, meansofdeath, weapon, shitloc) {
-  if(isplayer(e_source) && (weapon == level.w_tesla_sniper_t8 || weapon == level.w_tesla_sniper_upgraded_t8) && self.archetype === # "zombie" && zm_utility::is_headshot(weapon, shitloc, meansofdeath, 1) && damage >= self.health && !self ai::is_stunned()) {
+  if(isPlayer(e_source) && (weapon == level.w_tesla_sniper_t8 || weapon == level.w_tesla_sniper_upgraded_t8) && self.archetype === # "zombie" && zm_utility::is_headshot(weapon, shitloc, meansofdeath, 1) && damage >= self.health && !self ai::is_stunned()) {
     self clientfield::increment("zm_weapons/fx8_ww_tesla_sniper_impact_lg");
     self clientfield::set("zm_aat_kill_o_watt" + "_zap", 1);
 

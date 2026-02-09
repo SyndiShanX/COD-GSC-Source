@@ -264,7 +264,7 @@ function settweakablevalue(category, name, value) {
       break;
     }
   }
-  setdvar(dvar, value);
+  setDvar(dvar, value);
 }
 
 function settweakablelastvalue(category, name, value) {
@@ -310,13 +310,13 @@ function settweakablelastvalue(category, name, value) {
 function registertweakable(category, name, dvar, value) {
   if(isstring(value)) {
     if(getdvarstring(dvar) == "") {
-      setdvar(dvar, value);
+      setDvar(dvar, value);
     } else {
       value = getdvarstring(dvar);
     }
   } else {
     if(getdvarstring(dvar) == "") {
-      setdvar(dvar, value);
+      setDvar(dvar, value);
     } else {
       value = getdvarint(dvar);
     }

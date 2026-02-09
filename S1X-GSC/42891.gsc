@@ -65,7 +65,7 @@ giveplayerscore(var_0, var_1, var_2) {
     var_1 = var_1.owner;
   }
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   var_1 maps\mp\killstreaks\_killstreaks::giveadrenaline(var_0);

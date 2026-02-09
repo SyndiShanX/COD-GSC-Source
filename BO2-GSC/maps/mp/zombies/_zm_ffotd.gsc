@@ -9,13 +9,13 @@
 #include maps\mp\zombies\_zm_stats;
 
 main_start() {
-  mapname = tolower(getdvar(#"mapname"));
-  gametype = getdvar(#"ui_gametype");
+  mapname = tolower(getDvar(#"mapname"));
+  gametype = getDvar(#"ui_gametype");
 
-  if("zm_transit" == tolower(getdvar(#"mapname")) && "zclassic" == getdvar(#"ui_gametype"))
+  if("zm_transit" == tolower(getDvar(#"mapname")) && "zclassic" == getDvar(#"ui_gametype"))
     level thread transit_navcomputer_remove_card_on_success();
 
-  if("zm_prison" == tolower(getdvar(#"mapname")) && "zgrief" == getdvar(#"ui_gametype"))
+  if("zm_prison" == tolower(getDvar(#"mapname")) && "zgrief" == getDvar(#"ui_gametype"))
     level.zbarrier_script_string_sets_collision = 1;
 
   if(("zm_transit" == mapname || "zm_highrise" == mapname) && "zclassic" == gametype) {
@@ -67,7 +67,7 @@ transit_navcomputer_remove_card_on_success() {
     while(true) {
       nav_trig waittill("trigger", who);
 
-      if(isplayer(who) && is_player_valid(who) && does_player_have_correct_navcard(who)) {
+      if(isPlayer(who) && is_player_valid(who) && does_player_have_correct_navcard(who)) {
         break;
       }
     }
@@ -164,12 +164,11 @@ debug_exploit(player_origin, player_radius, enemy_origin, enemy_radius, zombie_g
     line(enemy_origin, zombie_goto_point, (1, 1, 0), 1);
     wait 0.05;
   }
-
 }
 
 ffotd_melee_miss_func() {
   if(isDefined(self.enemy)) {
-    if(isplayer(self.enemy) && self.enemy getcurrentweapon() == "claymore_zm") {
+    if(isPlayer(self.enemy) && self.enemy getcurrentweapon() == "claymore_zm") {
       dist_sq = distancesquared(self.enemy.origin, self.origin);
       melee_dist_sq = self.meleeattackdist * self.meleeattackdist;
 

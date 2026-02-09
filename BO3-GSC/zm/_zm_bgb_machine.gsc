@@ -96,11 +96,11 @@ function private on_player_disconnect() {
 
 function private setup_devgui() {
   waittillframeend();
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", "");
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", "");
+  setDvar("", 0);
+  setDvar("", 0);
   bgb_devgui_base = "";
   adddebugcommand(((bgb_devgui_base + "") + "") + "");
   keys = getarraykeys(level.bgb);
@@ -145,8 +145,8 @@ function private bgb_machine_devgui_think() {
           level.bgb_machines[best_index] thread bgb_machine_move();
         }
       }
-      setdvar("", 0);
-      setdvar("", 0);
+      setDvar("", 0);
+      setDvar("", 0);
     }
     force_give = getdvarstring("");
     if(getdvarint("") || "" != force_give) {
@@ -154,11 +154,11 @@ function private bgb_machine_devgui_think() {
         level.players[i].bgb_machine_uses_this_round = 0;
         level.players[i] clientfield::set_to_player("", level.players[i].bgb_machine_uses_this_round);
       }
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if("" != force_give) {
       level.bgb_machine_force_give = force_give;
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }

@@ -91,7 +91,7 @@ func_AD5D() {
   var_2 = [];
   for(;;) {
     self waittill("trigger", var_3);
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       var_3 forceusehinton(&"CP_RAVE_USE_ZIPLINE");
       var_3 thread handle_zipline_hint(self);
       if(var_3 isjumping()) {

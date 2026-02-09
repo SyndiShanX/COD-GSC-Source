@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -242,10 +242,10 @@ onuse(var_0) {
   if(var_1 == self.victimteam) {
     self.trigger playSound("mp_kc_tag_denied");
 
-    if(isplayer(var_0))
+    if(isPlayer(var_0))
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_denied");
 
-    if(isDefined(self.attacker) && isplayer(self.attacker))
+    if(isDefined(self.attacker) && isPlayer(self.attacker))
       self.attacker maps\mp\_utility::leaderdialogonplayer("kc_killlost");
 
     var_2 = self.victim == var_0;
@@ -256,12 +256,12 @@ onuse(var_0) {
   } else {
     self.trigger playSound("mp_kc_tag_collected");
 
-    if(isplayer(self.attacker) && self.attacker != var_0)
+    if(isPlayer(self.attacker) && self.attacker != var_0)
       level thread maps\mp\gametypes\_rank::awardgameevent("team_confirmed", self.attacker);
 
     var_0 maps\mp\_events::killconfirmedevent();
 
-    if(isplayer(var_0))
+    if(isPlayer(var_0))
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_confirmed");
 
     var_0 maps\mp\gametypes\_gamescore::giveteamscoreforobjective(var_1, 1);

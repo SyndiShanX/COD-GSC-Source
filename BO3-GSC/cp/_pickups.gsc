@@ -179,7 +179,6 @@ class cpickupitem: cbaseinteractable {
     }
     return undefined;
   }
-
 }
 
 class cbaseinteractable {
@@ -495,5 +494,4 @@ class cbaseinteractable {
   function get_player_currently_holding() {
     return m_e_player_currently_holding;
   }
-
 }

@@ -21,7 +21,7 @@ function main() {
   mp_havoc_sound::main();
   load::main();
   compass::setupminimap("compass_map_mp_havoc");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   level.cleandepositpoints = array((1.29624, -584.847, 136.125), (-1513.77, -791.715, 8.125), (419.803, 1107.09, 8.93066), (300.251, -1300.87, 8.125));
 }
 

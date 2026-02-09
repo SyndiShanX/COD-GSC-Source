@@ -126,7 +126,7 @@ bridge_damage_trigger() {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       break;
     }
 
@@ -659,7 +659,7 @@ achievement(var_0) {
   if(!isalive(var_1)) {
     return;
   }
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   maps\_utility::giveachievement_wrapper("RESCUE_ROYCEWICZ");
@@ -842,7 +842,7 @@ enable_pacifists_to_attack_me() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       continue;
     }
     var_0 setthreatbiasgroup("friendlies_under_unreachable_enemies");
@@ -868,7 +868,7 @@ waittill_triggered_by_ai(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       continue;
     }
     if(!isDefined(var_0)) {
@@ -1120,7 +1120,7 @@ bridge_bmp_is_shot_at() {
     var_0 = self.health;
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
-    if(isDefined(var_2.classname) && !isplayer(var_2)) {
+    if(isDefined(var_2.classname) && !isPlayer(var_2)) {
       self.health = var_0;
       continue;
     }
@@ -1471,7 +1471,7 @@ attack_player_when_attacked(var_0) {
   if(!isDefined(self)) {
     return;
   }
-  if(isplayer(var_1))
+  if(isPlayer(var_1))
     common_scripts\utility::flag_set(var_0);
 }
 
@@ -1913,7 +1913,7 @@ wait_until_player_nears_balcony() {
 price_congrates() {
   self waittill("death", var_0);
 
-  if(isalive(var_0) && isplayer(var_0)) {
+  if(isalive(var_0) && isPlayer(var_0)) {
     wait 2.5;
     level.price thread maps\_anim::anim_single_queue(level.price, "good_job");
   }
@@ -1926,7 +1926,7 @@ player_is_on_mg() {
   if(!isalive(var_1))
     return 0;
 
-  return isplayer(var_1);
+  return isPlayer(var_1);
 }
 
 debug_pain() {
@@ -1962,7 +1962,7 @@ stop_firing_when_shot() {
   for(;;) {
     var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
     if(explosive_damage(var_6)) {
@@ -2194,7 +2194,7 @@ shanty_run() {
     }
     var_1.trigger_num = self.trigger_num;
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       level notify("new_player_trigger_num");
       continue;
     }

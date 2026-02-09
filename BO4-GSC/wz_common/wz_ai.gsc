@@ -226,7 +226,7 @@ function_7820dead() {
   self endon("27ad2aca1861b8c8");
   waitresult = self waittill(#"damage");
 
-  if(isDefined(waitresult.attacker) && isplayer(waitresult.attacker)) {
+  if(isDefined(waitresult.attacker) && isPlayer(waitresult.attacker)) {
     self.favoriteenemy = waitresult.attacker;
     wait 5;
     self.favoriteenemy = undefined;

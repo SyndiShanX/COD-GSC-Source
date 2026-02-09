@@ -986,7 +986,7 @@ function function_12c8548e(b_upgraded = 0) {
     if(isDefined(e_who.var_61f7b3a0) && e_who.var_61f7b3a0) {
       continue;
     }
-    if(isplayer(e_who)) {
+    if(isPlayer(e_who)) {
       continue;
     }
     if(!(isDefined(e_who.b_is_spider) && e_who.b_is_spider) && e_who.completed_emerging_into_playable_area !== 1) {
@@ -1312,7 +1312,7 @@ function function_2870d1b8(var_f40460f5) {
     }
     var_566f2991 = var_d0aaf7a2;
     if(isDefined(var_566f2991)) {
-      if(isplayer(var_566f2991) || (isDefined(var_566f2991.var_61f7b3a0) && var_566f2991.var_61f7b3a0)) {
+      if(isPlayer(var_566f2991) || (isDefined(var_566f2991.var_61f7b3a0) && var_566f2991.var_61f7b3a0)) {
         self function_fa3e7444(var_121609e);
       } else {
         if(isDefined(var_566f2991.b_is_spider) && var_566f2991.b_is_spider) {

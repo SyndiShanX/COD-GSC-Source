@@ -34,7 +34,7 @@ function_a1a81955() {
 }
 
 is_winner(outcome, team_or_player) {
-  if(isplayer(team_or_player)) {
+  if(isPlayer(team_or_player)) {
     if(isDefined(outcome.players) && outcome.players.size && outcome.players[0] == team_or_player) {
       return true;
     }
@@ -122,7 +122,7 @@ set_winner(outcome, team_or_player) {
     return;
   }
 
-  if(isplayer(team_or_player)) {
+  if(isPlayer(team_or_player)) {
     outcome.players[outcome.players.size] = team_or_player;
     outcome.team = team_or_player.team;
     return;

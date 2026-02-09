@@ -1729,7 +1729,7 @@ func_35AD(var_0, var_1) {
     var_2 = var_0;
   }
 
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     return 0;
   }
 

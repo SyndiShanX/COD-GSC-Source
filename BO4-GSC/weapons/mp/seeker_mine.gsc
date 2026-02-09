@@ -189,7 +189,7 @@ function_d573e71(grenade, weapon) {
       angles = vectortoangles(results[# "normal"]);
     }
   } else {
-    z_offset = getdvar(#"hash_22cbaf883dcda013", 0);
+    z_offset = getDvar(#"hash_22cbaf883dcda013", 0);
     origin = grenade.origin + (0, 0, z_offset);
     angles = grenade.angles;
   }
@@ -248,7 +248,7 @@ function_3019d870(origin, angles) {
 }
 
 function_c7561b46(target) {
-  if(isplayer(target) && target isgrappling()) {
+  if(isPlayer(target) && target isgrappling()) {
     return false;
   }
 
@@ -289,7 +289,7 @@ function_f43b3686(originalowner) {
   weapon = waitresult.weapon;
   attacker = self[[level.figure_out_attacker]](attacker);
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(self.var_d8d780c1)) {
       attacker.var_f6201e80 = self.var_d8d780c1[0];
     }
@@ -351,7 +351,7 @@ shock_rumble_loop() {
   self endon(#"shock_rumble_loop", #"death", #"disconnect");
   waitframe(1);
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -468,7 +468,7 @@ function_9a66b97b(target, tag, offset = (0, 0, 0), tagpos, seekermine) {
 watchtargetdeath(seekermine) {
   seekermine endon(#"death");
   params = self waittill(#"death");
-  var_86e4cf17 = isDefined(params.attacker) && isplayer(params.attacker) && isDefined(seekermine.owner) && seekermine.owner == params.attacker;
+  var_86e4cf17 = isDefined(params.attacker) && isPlayer(params.attacker) && isDefined(seekermine.owner) && seekermine.owner == params.attacker;
 
   if(isDefined(params.mod) && params.mod == "MOD_HEAD_SHOT" && var_86e4cf17) {
     scoreevents::processscoreevent(#"seeker_shock_mine_paralyzed_headshot", seekermine.owner, self, params.weapon);
@@ -506,7 +506,7 @@ function_724e8f1c(var_26b2b1bb, arcsource, depth) {
     return 0;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(!(isDefined(self.var_cf18d244) && self.var_cf18d244)) {
       self minigame_start(var_26b2b1bb, arcsource);
     } else {

@@ -130,7 +130,7 @@ func_9896(var_0) {
   self.bt.instancedata[var_0].timeout = gettime();
   self.bt.instancedata[var_0].var_312F = 0;
 
-  if(isplayer(self.melee.target)) {
+  if(isPlayer(self.melee.target)) {
     self.bt.instancedata[var_0].grenadeawareness = self.grenadeawareness;
     self.grenadeawareness = 0;
   }
@@ -141,7 +141,7 @@ func_9896(var_0) {
     self[[self.var_71BF]]();
   }
 
-  if(!isDefined(self.var_B5DA) && isplayer(self.melee.target) && !self.melee.target isonground()) {
+  if(!isDefined(self.var_B5DA) && isPlayer(self.melee.target) && !self.melee.target isonground()) {
     self.melee.var_2720 = 1;
   }
 
@@ -181,7 +181,7 @@ func_5903(var_0) {
     return anim.failure;
   }
 
-  if(isDefined(self.melee.target) && !isplayer(self.melee.target) && self.melee.target scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(isDefined(self.melee.target) && !isPlayer(self.melee.target) && self.melee.target scripts\asm\asm_bb::bb_isanimscripted()) {
     return anim.failure;
   }
 
@@ -264,7 +264,7 @@ func_B5B4(var_0, var_1) {
     var_1 = 1;
   }
 
-  if(isplayer(self.melee.target) && isDefined(anim.var_B5F6[self.unittype])) {
+  if(isPlayer(self.melee.target) && isDefined(anim.var_B5F6[self.unittype])) {
     anim.var_B5F7[self.unittype] = gettime() + anim.var_B5F6[self.unittype] * var_1;
   } else if(isDefined(anim.var_B5F5[self.unittype])) {
     anim.var_B5F8[self.unittype] = gettime() + anim.var_B5F5[self.unittype] * var_1;
@@ -284,7 +284,7 @@ func_B5E8(var_0) {
   self.bt.instancedata[var_0].timeout = gettime() + 4000;
   self.bt.instancedata[var_0].var_6572 = self.enemy.origin;
 
-  if(isplayer(self.melee.target)) {
+  if(isPlayer(self.melee.target)) {
     self.bt.instancedata[var_0].grenadeawareness = self.grenadeawareness;
     self.grenadeawareness = 0;
   }
@@ -318,7 +318,7 @@ func_B5EE(var_0) {
 }
 
 func_7FAB(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_1 = self.meleechargedistvsplayer;
   } else {
     var_1 = self.meleechargedist;
@@ -346,7 +346,7 @@ melee_shouldabort() {
     return 1;
   }
 
-  if(!isplayer(var_0) && var_0 scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(!isPlayer(var_0) && var_0 scripts\asm\asm_bb::bb_isanimscripted()) {
     return 1;
   }
 
@@ -435,7 +435,7 @@ func_B5F0(var_0) {
     return anim.failure;
   }
 
-  if(isplayer(var_2)) {
+  if(isPlayer(var_2)) {
     var_6 = getclosestpointonnavmesh(var_2.origin, self);
   } else {
     var_6 = var_2 func_84AC();
@@ -449,7 +449,7 @@ func_B5F0(var_0) {
   }
 
   if(var_3 <= var_7) {
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       if(scripts\engine\utility::meleegrab_ksweapon_used()) {
         return anim.running;
       }
@@ -457,7 +457,7 @@ func_B5F0(var_0) {
 
     var_9 = 18;
 
-    if(isDefined(self.stairsstate) && self.stairsstate != "none" && isplayer(var_2)) {
+    if(isDefined(self.stairsstate) && self.stairsstate != "none" && isPlayer(var_2)) {
       var_9 = 32;
     }
 

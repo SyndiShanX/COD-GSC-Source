@@ -57,7 +57,7 @@ function_371a151b(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 }
 
 event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -83,7 +83,7 @@ watchownerdisconnect(player) {
 }
 
 event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -176,7 +176,7 @@ on_vehicle_killed(params) {
 
   if(isDefined(params.occupants)) {
     if(params.occupants.size > 0 && self function_c7aa9338(params.occupants)) {
-      if(isplayer(params.eattacker)) {
+      if(isPlayer(params.eattacker)) {
         params.eattacker stats::function_dad108fa(#"destroy_equipment", 1);
         callback::callback(#"hash_67dd51a5d529c64c");
       }

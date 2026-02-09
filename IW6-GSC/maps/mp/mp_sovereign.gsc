@@ -26,16 +26,16 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_sovereign");
 
   if((level.ps3) || (level.xenon)) {
-    setdvar("sm_sunShadowScale", "0.5");
+    setDvar("sm_sunShadowScale", "0.5");
   }
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  SetDvar("r_sky_fog_intensity", "1");
-  SetDvar("r_sky_fog_min_angle", "60");
-  SetDvar("r_sky_fog_max_angle", "85");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_sky_fog_intensity", "1");
+  setDvar("r_sky_fog_min_angle", "60");
+  setDvar("r_sky_fog_max_angle", "85");
 
-  SetDvar("r_ssaofadedepth", 1200);
+  setDvar("r_ssaofadedepth", 1200);
   setdvar_cg_ng("r_specularColorScale", 3.5, 5);
   setdvar_cg_ng("r_diffuseColorScale", 1.5, 1.2);
 
@@ -60,7 +60,7 @@ update_bot_maxsightdistsqrd() {
   while(1) {
     players_in_fog = [];
     foreach(participant in level.participants) {
-      if(!IsPlayer(participant)) {
+      if(!isPlayer(participant)) {
         continue;
       }
       in_fog = level.halon_fog_on && (participant getEye())[2] < 280;
@@ -100,7 +100,7 @@ is_ai_sight_line() {
 walkway_collapse() {
   flag_init("walkway_collasped");
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   PrecacheMpAnim("mp_sovereign_walkway_collapse_top");
@@ -349,7 +349,6 @@ walkway_collapse_group(targetname) {
     } else {
       parent.linked[parent.linked.size] = ent;
       ent LinkTo(parent);
-
     }
   }
 
@@ -363,7 +362,6 @@ walkway_collapse_group(targetname) {
     } else {
       parent.nodes[parent.nodes.size] = node;
     }
-
   }
 
   return parent;

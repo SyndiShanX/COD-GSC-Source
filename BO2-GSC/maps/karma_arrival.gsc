@@ -36,12 +36,12 @@ skipto_arrival() {}
 arrival() {
   iprintln("Arrival");
 
-  level.n_aggressivecullradius = getdvar(#"_id_0EC60F96");
+  level.n_aggressivecullradius = getDvar(#"_id_0EC60F96");
   setsaveddvar("Cg_aggressivecullradius", 200);
 
   if(level.wiiu) {
-    level.n_znear_old = getdvar(#"r_znear");
-    setdvar("r_znear", 20);
+    level.n_znear_old = getDvar(#"r_znear");
+    setDvar("r_znear", 20);
   }
 
   deconstruct_fxanims();
@@ -100,48 +100,56 @@ arrival() {
   level clientnotify("verb_reset");
   level thread run_landing_squad_lighting_scene();
 
-  if(level.player get_story_stat("HARPER_SCARRED"))
+  if(level.player get_story_stat("HARPER_SCARRED")) {
     run_scene_and_delete("landing_squad");
-  else
+  } else {
     run_scene_and_delete("landing_squad_alt");
+  }
 
   flag_set("deplaned");
   level thread arrival_cleanup();
 }
 
 deconstruct_fxanims() {
-  for(i = 1; i <= 12; i++)
+  for(i = 1; i <= 12; i++) {
     maps\_fxanim::fxanim_deconstruct("fxanim_club_top_laser_" + i);
+  }
 
-  for(i = 1; i <= 2; i++)
+  for(i = 1; i <= 2; i++) {
     maps\_fxanim::fxanim_deconstruct("fxanim_club_dj_laser_" + i);
+  }
 
-  for(i = 1; i <= 2; i++)
+  for(i = 1; i <= 2; i++) {
     maps\_fxanim::fxanim_deconstruct("fxanim_club_bar_shelves_0" + i);
+  }
 }
 
 flyin_hide_cells() {
-  foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname"))
-  setcellinvisibleatpos(s_cell.origin);
+  foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname")) {
+    setcellinvisibleatpos(s_cell.origin);
+  }
 }
 
 flyin_show_cells() {
   setsaveddvar("Cg_aggressivecullradius", level.n_aggressivecullradius);
 
-  if(level.wiiu)
-    setdvar("r_znear", level.n_znear_old);
+  if(level.wiiu) {
+    setDvar("r_znear", level.n_znear_old);
+  }
 
-  foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname"))
-  setcellvisibleatpos(s_cell.origin);
+  foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname")) {
+    setcellvisibleatpos(s_cell.origin);
+  }
 }
 
 run_landing_squad_lighting_scene() {
   setup_lighting_alignment_for_plane_exit();
 
-  if(level.player get_story_stat("HARPER_SCARRED"))
+  if(level.player get_story_stat("HARPER_SCARRED")) {
     run_scene_and_delete("landing_squad_lighting");
-  else
+  } else {
     run_scene_and_delete("landing_squad_alt_lighting");
+  }
 }
 
 init_ambient_boats() {
@@ -155,11 +163,13 @@ init_ambient_boats() {
 
   flag_wait("trig_player_blocker_2");
 
-  foreach(e_boat in getEntArray("tiny_boat", "targetname"))
-  e_boat delete();
+  foreach(e_boat in getEntArray("tiny_boat", "targetname")) {
+    e_boat delete();
+  }
 
-  foreach(e_boat in getEntArray("karma_life_boat", "targetname"))
-  e_boat delete();
+  foreach(e_boat in getEntArray("karma_life_boat", "targetname")) {
+    e_boat delete();
+  }
 }
 
 #using_animtree("animated_props");
@@ -190,8 +200,9 @@ setup_vtol(str_vtol_name, str_wait_flag) {
   a_vh_vtols = spawn_vehicles_from_targetname(str_vtol_name);
 
   foreach(vh_vtol in a_vh_vtols) {
-    if(vh_vtol.vehicletype == "heli_vtol")
+    if(vh_vtol.vehicletype == "heli_vtol") {
       playFXOnTag(level._effect["flight_lights_3p"], vh_vtol, "tag_origin");
+    }
 
     vh_vtol add_cleanup_ent("cleanup_tower");
 
@@ -228,8 +239,9 @@ setup_tarmac_fx() {
 }
 
 delay_fx() {
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
+  }
 
   playFXOnTag(level._effect["light_caution_orange_flash"], self, "tag_origin");
 }
@@ -244,8 +256,9 @@ setup_cagelight_fx(light) {
 }
 
 delay_cagelight_fx() {
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
+  }
 
   playFXOnTag(level._effect["light_caution_red_flash"], self, "tag_origin");
 }
@@ -257,8 +270,9 @@ vtol_fly(str_vtol_name, str_wait_flag) {
   nd_flyby_start = getvehiclenode(self.target, "targetname");
   assert(isDefined(nd_flyby_start), "setup_vtol: No path defined for vtol : " + self.target);
 
-  if(isDefined(str_wait_flag))
+  if(isDefined(str_wait_flag)) {
     flag_wait(str_wait_flag);
+  }
 
   switch (self.vehicletype) {
     case "heli_vtol":
@@ -346,10 +360,11 @@ lighting_alignment_cleanup_for_plane_exit(m_align_plane, m_lighting_org, m_align
   clear_lighting_pair("harper_briefcase");
   clear_lighting_pair("player_vtol");
 
-  if(level.player get_story_stat("HARPER_SCARRED"))
+  if(level.player get_story_stat("HARPER_SCARRED")) {
     end_scene("landing_squad_lighting");
-  else
+  } else {
     end_scene("landing_squad_alt_lighting");
+  }
 
   end_scene("landing_player_lighting");
   m_align_plane delete();
@@ -486,11 +501,11 @@ adjust_player_speed(n_units) {
   while(!flag("reset_player_speed")) {
     n_dist = distance(level.ai_harper.origin, level.player.origin);
 
-    if(n_dist >= 256)
+    if(n_dist >= 256) {
       n_speed = 80;
-    else if(n_dist <= 64)
+    } else if(n_dist <= 64) {
       n_speed = 60;
-    else {
+    } else {
       n_percent = (n_dist - 64) / (256 - 64);
       n_speed = n_percent * (80 - 60) + 60;
     }
@@ -545,12 +560,12 @@ start_workers_walking() {
 }
 
 set_water_dvars() {
-  setdvar("r_waterwaveangle", "0 52.7305 164.841 0");
-  setdvar("r_waterwavewavelength", "592 357 286 1");
-  setdvar("r_waterwaveamplitude", "25 6 5 0");
-  setdvar("r_waterwavespeed", "0.72 1.21 1.14 1");
+  setDvar("r_waterwaveangle", "0 52.7305 164.841 0");
+  setDvar("r_waterwavewavelength", "592 357 286 1");
+  setDvar("r_waterwaveamplitude", "25 6 5 0");
+  setDvar("r_waterwavespeed", "0.72 1.21 1.14 1");
   flag_wait("gate_alert");
-  setdvar("r_waterwaveamplitude", "0 0 0 0");
+  setDvar("r_waterwaveamplitude", "0 0 0 0");
 }
 
 set_env_dvars() {
@@ -560,10 +575,11 @@ set_env_dvars() {
 arrival_cleanup() {
   wait 0.5;
 
-  if(level.player get_story_stat("HARPER_SCARRED"))
+  if(level.player get_story_stat("HARPER_SCARRED")) {
     delete_scene("landing_squad_alt");
-  else
+  } else {
     delete_scene("landing_squad");
+  }
 }
 
 flyin_dialog_pilot() {

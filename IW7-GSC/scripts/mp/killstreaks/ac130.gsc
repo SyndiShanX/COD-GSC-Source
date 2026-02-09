@@ -522,7 +522,7 @@ damagetracker() {
   self.attractor = missile_createattractorent(self, 1000, 4096);
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(isDefined(level.ac130player) && level.teambased && isplayer(var_1) && var_1.team == level.ac130player.team && !isDefined(level.nukedetonated)) {
+    if(isDefined(level.ac130player) && level.teambased && isPlayer(var_1) && var_1.team == level.ac130player.team && !isDefined(level.nukedetonated)) {
       continue;
     }
 
@@ -532,18 +532,18 @@ damagetracker() {
 
     self.wasdamaged = 1;
     var_10 = var_0;
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("ac130");
     }
 
     scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_9, level.ac130);
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("ac130");
     }
 
     self.var_E1 = self.var_E1 + var_10;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_ac130", var_1);
         var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_9, 400);
         var_1 notify("destroyed_killstreak");
@@ -998,7 +998,7 @@ context_sensative_dialog_kill(var_0, var_1) {
     return;
   }
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
 

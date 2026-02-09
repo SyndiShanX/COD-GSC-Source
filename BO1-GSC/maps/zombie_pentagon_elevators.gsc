@@ -19,8 +19,8 @@ init() {
   flag_init("war_room_start");
   flag_init("no_warroom_elevator_spawning");
   flag_init("no_labs_elevator_spawning");
-  elevator1 = getEnt("elevator1", "targetname");
-  elevator2 = getEnt("elevator2", "targetname");
+  elevator1 = getent("elevator1", "targetname");
+  elevator2 = getent("elevator2", "targetname");
   elevator1.cost = 250;
   elevator1.station = "elevator1_up";
   elevator1.called = false;
@@ -52,7 +52,6 @@ init() {
   elevator1 thread elevator1_3d_audio();
   elevator2 thread elevator2_3d_audio();
 }
-
 link_pieces() {
   pieces = getEntArray(self.target, "targetname");
   for(i = 0; i < pieces.size; i++) {
@@ -62,14 +61,12 @@ link_pieces() {
     pieces[i] LinkTo(self);
   }
 }
-
 init_call_boxes() {
   trigger = getEntArray(self.targetname + "_call_box", "targetname");
   for(i = 0; i < trigger.size; i++) {
     trigger[i] thread call_box_think(self);
   }
 }
-
 call_box_think(elevator) {
   self setcursorhint("HINT_NOICON");
   self SetHintString(&"ZOMBIE_PENTAGON_CALL_ELEVATOR");
@@ -104,21 +101,20 @@ call_box_think(elevator) {
     wait(.05);
   }
 }
-
 is_elevator_clear(elevator) {
   elevator_door_safety = getEntArray(elevator.targetname + "_safety", "script_noteworthy");
   players = get_players();
   if(isDefined(elevator_door_safety)) {
     for(i = 0; i < elevator_door_safety.size; i++) {
       for(j = 0; j < players.size; j++) {
-        if(players[j] IsTouching(elevator_door_safety[i]))
+        if(players[j] IsTouching(elevator_door_safety[i])) {
           return false;
+        }
       }
     }
   }
   return true;
 }
-
 block_elev_doors_internal(block, suffix) {
   elevator_door_safety_clip = getEntArray(self.targetname + suffix, "script_noteworthy");
   if(isDefined(elevator_door_safety_clip)) {
@@ -131,12 +127,10 @@ block_elev_doors_internal(block, suffix) {
     }
   }
 }
-
 block_elev_doors(block) {
   block_elev_doors_internal(block, "_safety_top");
   block_elev_doors_internal(block, "_safety_bottom");
 }
-
 elevator_hint_text(msg) {
   self endon("death");
   self endon("disconnect");
@@ -161,12 +155,10 @@ elevator_hint_text(msg) {
   text FadeOverTime(0.1);
   text.alpha = 0;
 }
-
 init_buy() {
-  trigger = getEnt(self.targetname + "_buy", "script_noteworthy");
+  trigger = GetEnt(self.targetname + "_buy", "script_noteworthy");
   trigger thread elevator_buy_think(self);
 }
-
 elevator_buy_think(elevator) {
   self setcursorhint("HINT_NOICON");
   self UseTriggerRequireLookAt();
@@ -207,14 +199,12 @@ elevator_buy_think(elevator) {
     wait(.05);
   }
 }
-
 can_buy_elevator() {
   if(self in_revive_trigger()) {
     return false;
   }
   return true;
 }
-
 disable_callboxes() {
   call_boxes = getEntArray(self.targetname + "_call_box", "targetname");
   for(j = 0; j < call_boxes.size; j++) {
@@ -225,9 +215,8 @@ disable_callboxes() {
     }
   }
 }
-
 disable_elevator_buys() {
-  elevator_buy = getEnt(self.targetname + "_buy", "script_noteworthy");
+  elevator_buy = GetEnt(self.targetname + "_buy", "script_noteworthy");
   elevator_buy setcursorhint("HINT_NOICON");
   elevator_buy SetHintString("");
   elevator_buy trigger_off();
@@ -236,15 +225,13 @@ disable_elevator_buys() {
     elevator_buy SetInvisibleToPlayer(players[i]);
   }
 }
-
 enable_elevator_buys() {
-  elevator_buy = getEnt(self.targetname + "_buy", "script_noteworthy");
+  elevator_buy = GetEnt(self.targetname + "_buy", "script_noteworthy");
   elevator_buy setcursorhint("HINT_NOICON");
   elevator_buy SetHintString(&"ZOMBIE_PENTAGON_USE_ELEVATOR", self.cost);
   elevator_buy trigger_on();
   elevator_buy SetVisibleToAll();
 }
-
 enable_callboxes() {
   call_boxes = getEntArray(self.targetname + "_call_box", "targetname");
   for(j = 0; j < call_boxes.size; j++) {
@@ -257,7 +244,6 @@ enable_callboxes() {
     }
   }
 }
-
 elevator_move_to(elevator) {
   players = getplayers();
   elevator close_elev_doors();
@@ -271,7 +257,7 @@ elevator_move_to(elevator) {
     if(elevator.targetname == "elevator1") {
       elevator thread zombie_elevator_closets(false);
     }
-    elevator moveTo(elevator.travel_down, 5.0);
+    elevator MoveTo(elevator.travel_down, 5.0);
     elevator waittill("movedone");
     elevator.station = elevator.targetname + "_down";
     level thread maps\zombie_pentagon::change_pentagon_vision();
@@ -285,7 +271,7 @@ elevator_move_to(elevator) {
     if(elevator.targetname == "elevator1") {
       elevator thread zombie_elevator_closets(true);
     }
-    elevator moveTo(elevator.travel_up, 5.0);
+    elevator MoveTo(elevator.travel_up, 5.0);
     elevator waittill("movedone");
     elevator.station = elevator.targetname + "_up";
     level thread maps\zombie_pentagon::change_pentagon_vision();
@@ -316,7 +302,6 @@ elevator_move_to(elevator) {
   wait(2.0);
   level thread check_if_empty_floors();
 }
-
 zombie_elevator_closets(going_up) {
   if(!isDefined(going_up)) {
     return;
@@ -338,7 +323,6 @@ zombie_elevator_closets(going_up) {
     }
   }
 }
-
 elevator_closet_cleanup() {
   zombies = GetAIArray("axis");
   if(!isDefined(zombies)) {
@@ -351,7 +335,6 @@ elevator_closet_cleanup() {
     }
   }
 }
-
 move_zombies_elevator(going_up) {
   if(!isDefined(going_up)) {
     return;
@@ -369,11 +352,11 @@ move_zombies_elevator(going_up) {
   floor_height = 0;
   self.elevator_players = [];
   players = getplayers();
-  in_elevator = getEnt(self.targetname + "_zombie_cleanup", "targetname");
+  in_elevator = GetEnt(self.targetname + "_zombie_cleanup", "targetname");
   if(going_up == true) {
-    check_trig = getEnt(self.targetname + "_down_riders", "targetname");
+    check_trig = GetEnt(self.targetname + "_down_riders", "targetname");
   } else {
-    check_trig = getEnt(self.targetname + "_up_riders", "targetname");
+    check_trig = GetEnt(self.targetname + "_up_riders", "targetname");
   }
   for(i = 0; i < players.size; i++) {
     players[i].floor = maps\_zombiemode_ai_thief::thief_check_floor(players[i]);
@@ -409,7 +392,8 @@ move_zombies_elevator(going_up) {
     }
   }
   wait_network_frame();
-  if(players.size > 1 && num_floor_laststand > 0 && num_in_elev == (num_current_floor - num_floor_laststand)) {
+  if(players.size > 1 && num_floor_laststand > 0 &&
+    num_in_elev == (num_current_floor - num_floor_laststand)) {
     downed_player thread laststand_elev_zombies_away(current_floor, next_floor);
     return;
   }
@@ -497,7 +481,6 @@ move_zombies_elevator(going_up) {
     }
   }
 }
-
 laststand_elev_zombies_away(current_floor, next_floor) {
   zombies = GetAIArray("axis");
   if(!isDefined(zombies)) {
@@ -536,7 +519,6 @@ laststand_elev_zombies_away(current_floor, next_floor) {
     }
   }
 }
-
 zombies_elev_teleport(elevator, pos_num, going_up) {
   self endon("death");
   teleport_pos = [];
@@ -549,7 +531,6 @@ zombies_elev_teleport(elevator, pos_num, going_up) {
     self forceteleport(teleport_pos[pos_num].origin, teleport_pos[pos_num].angles);
   }
 }
-
 zombies_elev_teleport_hidden(elevator, pos_num, going_up) {
   self endon("death");
   teleport_pos = [];
@@ -573,9 +554,8 @@ zombies_elev_teleport_hidden(elevator, pos_num, going_up) {
     }
   }
 }
-
 elev_clean_up_corpses() {
-  corpse_trig = getEnt(self.targetname + "_zombie_cleanup", "targetname");
+  corpse_trig = GetEnt(self.targetname + "_zombie_cleanup", "targetname");
   corpses = GetCorpseArray();
   if(isDefined(corpses)) {
     for(i = 0; i < corpses.size; i++) {
@@ -585,12 +565,10 @@ elev_clean_up_corpses() {
     }
   }
 }
-
 elev_remove_corpses() {
   playFX(level._effect["dog_gib"], self.origin);
   self Delete();
 }
-
 init_elevator1_doors() {
   self.doors_up = getEntArray("elevator1_doors_up", "script_noteworthy");
   for(i = 0; i < self.doors_up.size; i++) {
@@ -609,7 +587,6 @@ init_elevator1_doors() {
     self.doors_outer_up[l].startpos = self.doors_outer_up[l].origin;
   }
 }
-
 init_elevator2_doors() {
   self.doors = getEntArray("elevator2_doors", "script_noteworthy");
   for(i = 0; i < self.doors.size; i++) {
@@ -624,7 +601,6 @@ init_elevator2_doors() {
     self.doors_outer_up[l].startpos = self.doors_outer_up[l].origin;
   }
 }
-
 close_elev_doors() {
   self block_elev_doors(true);
   for(i = 0; i < self.doors_outer_down.size; i++) {
@@ -659,14 +635,13 @@ close_elev_doors() {
     }
   }
 }
-
 open_elev_doors() {
   if(isDefined(self.elevator_players)) {
     check_trig = undefined;
     if(self.station == self.targetname + "_down") {
-      check_trig = getEnt(self.targetname + "_down_riders", "targetname");
+      check_trig = GetEnt(self.targetname + "_down_riders", "targetname");
     } else {
-      check_trig = getEnt(self.targetname + "_up_riders", "targetname");
+      check_trig = GetEnt(self.targetname + "_up_riders", "targetname");
     }
     for(i = 0; i < self.elevator_players.size; i++) {
       if(!self.elevator_players[i] IsTouching(check_trig)) {
@@ -740,10 +715,9 @@ open_elev_doors() {
     }
   }
 }
-
 relink_elev_doors(pos, elev, linked) {
   self Unlink();
-  self moveTo(pos, 1.0);
+  self moveto(pos, 1.0);
   self waittill("movedone");
   if(linked) {
     self LinkTo(elev);
@@ -758,13 +732,13 @@ relink_elev_doors(pos, elev, linked) {
     self ConnectPaths();
   }
 }
-
 redirect_zombies(destination) {
   players = get_players();
   num_players = 0;
   for(i = 0; i < players.size; i++) {
-    if(players[i] IsTouching(self))
+    if(players[i] IsTouching(self)) {
       num_players++;
+    }
   }
   if(!num_players == players.size) {
     return;
@@ -779,7 +753,6 @@ redirect_zombies(destination) {
     poi delete();
   }
 }
-
 unlock_players() {
   players = getplayers();
   for(i = 0; i < players.size; i++) {
@@ -790,7 +763,6 @@ unlock_players() {
     players[i] thread maps\_zombiemode::store_crumb(players[i].origin);
   }
 }
-
 elevator1_3d_audio() {
   while(1) {
     self waittill("start_3d_audio");
@@ -801,7 +773,6 @@ elevator1_3d_audio() {
     ent Delete();
   }
 }
-
 elevator2_3d_audio() {
   while(1) {
     self waittill("start_3d_audio");

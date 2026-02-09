@@ -63,7 +63,7 @@ clearaptarget(weapon, whom) {
 }
 
 event_handler[missile_fire] function_dc710809(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

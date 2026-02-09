@@ -911,7 +911,7 @@ detect_player_shot() {
 
     if(var_1 == level.player) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", &"FACTORY_FAIL_ALERTED_ENEMY");
+      setDvar("ui_deadquote", &"FACTORY_FAIL_ALERTED_ENEMY");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -1382,7 +1382,7 @@ check_for_player_leaving() {
   level endon("railgun_reveal_setup");
   common_scripts\utility::flag_wait("player_exited_mission");
   level notify("new_quote_string");
-  setdvar("ui_deadquote", &"FACTORY_FAIL_ABANDONED");
+  setDvar("ui_deadquote", &"FACTORY_FAIL_ABANDONED");
   maps\_utility::missionfailedwrapper();
 }
 

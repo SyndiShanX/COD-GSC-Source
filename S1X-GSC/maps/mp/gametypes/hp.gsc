@@ -4,7 +4,7 @@
 **************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -763,7 +763,7 @@ getnextzonefromqueue() {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(maps\mp\gametypes\_damage::isfriendlyfire(self, var_1)) {
@@ -824,7 +824,7 @@ updatecapsperminute(var_0) {
   self.numcaps++;
   var_1 = maps\mp\_utility::gettimepassed() / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed["total"])) {
     var_1 = self.timeplayed["total"] / 60;
   }
 

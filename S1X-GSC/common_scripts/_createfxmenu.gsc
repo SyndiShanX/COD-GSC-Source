@@ -353,15 +353,15 @@ prepare_option_for_change(option, drawnCount) {
   }
 
   set_option_index(option["name"]);
-  setdvar("fx", "nil");
+  setDvar("fx", "nil");
 }
 
 menu_fx_option_set() {
-  if(getdvar("fx") == "nil") {
+  if(getDvar("fx") == "nil") {
     return;
   }
 
-  if(getdvar("fx") == "del") {
+  if(getDvar("fx") == "del") {
     remove_selected_option();
     return;
   }
@@ -369,7 +369,7 @@ menu_fx_option_set() {
   option = get_selected_option();
   setting = undefined;
   if(option["type"] == "string") {
-    setting = getdvar("fx");
+    setting = getDvar("fx");
   }
   if(option["type"] == "int") {
     setting = getdvarint("fx");
@@ -384,7 +384,7 @@ menu_fx_option_set() {
   if(isDefined(setting)) {
     apply_option_to_selected_fx(option, setting);
   } else {
-    setdvar("fx", "nil");
+    setDvar("fx", "nil");
   }
 }
 
@@ -748,8 +748,7 @@ help_navigation_buttons() {
 }
 
 setup_help_keys() {
-  level.createfx_help_keys = [
-    "Insert Insert entity", "F2 Toggle createfx dot and text drawing", "F5 SAVES your work", "ZUndo", "Shift-ZRedo", "FFrames currently selected entities in camera view", "ENDDrop selected entities to the ground", "AAdd option to the selected entities", "PReset the rotation of the selected entities", "VCopy the angles from the most recently selected fx onto all selected fx.", "OOrient all selected fx to point at most recently selected fx.", "SToggle Snap2Normal mode.", "LToggle 90deg Snap mode.", "GSelect all effects in level of same exploder or flag as selected.", "USelect by name list.", "CConvert One-Shot to Exploder.", "Delete Kill the selected entities", "ESCAPE Cancel out of option-modify-mode, must have console open", "SPACE or ->Turn on exploders", "<- Turn off exploders", "Dpad Move selected entities on X/Y or rotate pitch/yaw", "A button Toggle the selection of the current entity", "X button Toggle entity rotation mode", "Y button Move selected entites up or rotate roll", "B button Move selected entites down or rotate roll", "R Shoulder Move selected entities to the cursor", "L Shoulder Hold to select multiple entites", "L JoyClick Copy", "R JoyClick Paste", "Ctrl-C Copy", "Ctrl-V Paste", "NUFO", "TToggle Timescale FAST", "YToggle Timescale SLOW", "[Toggle FX Visibility", "]Toggle ShowTris", "F11Toggle FX Profile"];
+  level.createfx_help_keys = ["Insert Insert entity", "F2 Toggle createfx dot and text drawing", "F5 SAVES your work", "ZUndo", "Shift-ZRedo", "FFrames currently selected entities in camera view", "ENDDrop selected entities to the ground", "AAdd option to the selected entities", "PReset the rotation of the selected entities", "VCopy the angles from the most recently selected fx onto all selected fx.", "OOrient all selected fx to point at most recently selected fx.", "SToggle Snap2Normal mode.", "LToggle 90deg Snap mode.", "GSelect all effects in level of same exploder or flag as selected.", "USelect by name list.", "CConvert One-Shot to Exploder.", "Delete Kill the selected entities", "ESCAPE Cancel out of option-modify-mode, must have console open", "SPACE or ->Turn on exploders", "<- Turn off exploders", "Dpad Move selected entities on X/Y or rotate pitch/yaw", "A button Toggle the selection of the current entity", "X button Toggle entity rotation mode", "Y button Move selected entites up or rotate roll", "B button Move selected entites down or rotate roll", "R Shoulder Move selected entities to the cursor", "L Shoulder Hold to select multiple entites", "L JoyClick Copy", "R JoyClick Paste", "Ctrl-C Copy", "Ctrl-V Paste", "NUFO", "TToggle Timescale FAST", "YToggle Timescale SLOW", "[Toggle FX Visibility", "]Toggle ShowTris", "F11Toggle FX Profile"];
 }
 
 select_by_name() {

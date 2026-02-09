@@ -310,7 +310,7 @@ onPlayerSpawned() {
 
   self waittill("spawned_player");
 
-  if(GetDvar("virtuallobbyactive") == "0") {
+  if(getDvar("virtuallobbyactive") == "0") {
     if(!level.splitscreen || level.splitscreen && !isDefined(level.playedStartingMusic)) {
       if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
         self playLocalSound(game["music"]["spawn_" + self.team]);
@@ -489,7 +489,7 @@ gameWinnerDialog() {
 musicController() {
   level endon("game_ended");
 
-  if(!level.hardcoreMode && (GetDvar("virtualLobbyActive") == "0")) {
+  if(!level.hardcoreMode && (getDvar("virtualLobbyActive") == "0")) {
     thread suspenseMusic();
   }
 

@@ -155,7 +155,7 @@ function private _activate_surge(slot, weapon) {
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_surge");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
@@ -304,7 +304,7 @@ function private function_2a105d32(attacker) {
     } else {
       guy dodamage(5, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_GRENADE_SPLASH", 0, getweapon("emp_grenade"), -1, 1);
     }
-    if(isDefined(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isPlayer(attacker)) {
       attacker challenges::function_96ed590f("cybercom_uses_esdamage");
     }
   }

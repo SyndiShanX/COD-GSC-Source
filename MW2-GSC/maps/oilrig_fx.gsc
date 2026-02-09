@@ -91,7 +91,7 @@ precacheFX() {
   level._effect["sub_surface_runner"] = loadfx("water/sub_surface_runner");
 
   // "hunted light" required zfeather == 1 and r_zfeather is undefined on console.So, test for != "0".
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
+  if(getdvarint("sm_enable") && getDvar("r_zfeather") != "0")
     level._effect["spotlight"] = loadfx("misc/hunted_spotlight_model");
   else
     level._effect["spotlight"] = loadfx("misc/spotlight_large");
@@ -130,8 +130,7 @@ sdv01_fx() {
   //PLACE FX HERE
   playFXOnTag(getfx("oilrig_underwater_ambient_emitter"), self, "TAG_PROPELLER");
 
-  /*-----------------------
-  SDV STOPPING
+  /*----------------------- SDV STOPPING
   -------------------------*/
   self waittill("stopped_moving");
   self notify("stop sound" + "sdv_move_loop_plr");
@@ -141,20 +140,17 @@ sdv01_fx() {
 sdv02_fx() {
   //for engine exhaust, sounds, etc.
 
-  /*-----------------------
-  SDV STARTS MOVING
+  /*----------------------- SDV STARTS MOVING
   -------------------------*/
   self waittill("moving");
   self thread play_sound_on_tag("sdv_start", "TAG_PROPELLER");
   self delaythread(1, ::play_loop_sound_on_tag, "sdv_move_loop", "TAG_PROPELLER", true);
 
-  /*-----------------------
-  SDV PROP WASH FX
+  /*----------------------- SDV PROP WASH FX
   -------------------------*/
   playFXOnTag(getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
 
-  /*-----------------------
-  SDV STOPPING
+  /*----------------------- SDV STOPPING
   -------------------------*/
   //self waittill( "arriving" );
   self waittill("stopped_moving");

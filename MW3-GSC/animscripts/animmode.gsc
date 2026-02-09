@@ -21,7 +21,6 @@ main() {
     self._id_0C5D = undefined;
   } else {
     thread _id_0C63(self._id_0C5A);
-
   }
   var_1 = self._id_0C5A;
   self._id_0C5A = undefined;
@@ -32,7 +31,6 @@ main() {
     var_3 = level._id_0C59[self._id_0C58][var_1][randomint(var_2)];
   } else {
     var_3 = level._id_0C59[self._id_0C58][var_1];
-
   }
   var_4 = getstartorigin(self._id_0C5B.origin, self._id_0C5B.angles, var_3);
   var_5 = getstartangles(self._id_0C5B.origin, self._id_0C5B.angles, var_3);
@@ -44,7 +42,6 @@ main() {
 
   if(!isDefined(self._id_0C5E)) {
     self teleport(var_4, var_5);
-
   }
   self.pushable = 0;
   var_7 = 0.3;
@@ -96,7 +93,6 @@ main() {
 
   if(var_11 != "end") {
     self orientmode("face motion");
-
   }
   self notify("finished_custom_animmode" + var_1);
 }

@@ -22,19 +22,19 @@ init() {
 
   level thread onplayerconnect();
 
-  if(getdvar(#"_id_AD6C19FE") == "")
+  if(getDvar(#"_id_AD6C19FE") == "")
     level.spawn_visibility_check_max = 20;
   else
     level.spawn_visibility_check_max = getdvarint(#"_id_AD6C19FE");
 
   level.spawnprotectiontime = getgametypesetting("spawnprotectiontime");
 
-  setdvar("scr_debug_spawn_player", "");
-  setdvar("scr_debug_render_spawn_data", "1");
-  setdvar("scr_debug_render_snapshotmode", "0");
-  setdvar("scr_spawn_point_test_mode", "0");
+  setDvar("scr_debug_spawn_player", "");
+  setDvar("scr_debug_render_spawn_data", "1");
+  setDvar("scr_debug_render_snapshotmode", "0");
+  setDvar("scr_spawn_point_test_mode", "0");
   level.test_spawn_point_index = 0;
-  setdvar("scr_debug_render_spawn_text", "1");
+  setDvar("scr_debug_render_spawn_text", "1");
 }
 
 default_gamemodespawndvars(reset_dvars) {}
@@ -559,7 +559,6 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
           influencer_id = addsphereinfluencer(level.spawnsystem.einfluencer_type_game_mode, influencer_entity.origin, influencer_entity.radius, score, getteammask(influencer_entity.script_team), "*map_defined", get_score_curve_index(influencer_entity.script_score_curve));
         } else {
           assertmsg("Radiant-placed sphere spawn influencers require 'radius' parameter");
-
         }
 
         break;
@@ -573,7 +572,6 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
           influencer_id = addcylinderinfluencer(level.spawnsystem.einfluencer_type_game_mode, influencer_entity.origin, anglesToForward(influencer_entity.angles), anglestoup(influencer_entity.angles), influencer_entity.radius, influencer_entity.height, score, getteammask(influencer_entity.script_team), "*map_defined", get_score_curve_index(influencer_entity.script_score_curve));
         } else {
           assertmsg("Radiant-placed cylinder spawn influencers require 'radius' and 'height' parameters");
-
         }
 
         break;
@@ -585,7 +583,6 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
     }
   } else {
     assertmsg("Radiant-placed spawn influencers require 'script_shape', 'script_score' and 'script_score_curve' parameters");
-
   }
 
   return influencer_id;
@@ -625,7 +622,6 @@ initialize_player_spawning_dvars() {
     reset_dvars = 0;
     wait 2;
   }
-
 }
 
 get_player_spawning_dvars(reset_dvars) {

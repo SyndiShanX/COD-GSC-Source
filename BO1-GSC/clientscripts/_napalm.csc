@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_napalm.csc
+ * Script: clientscripts\_napalm\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -9,13 +9,14 @@
 #include clientscripts\_airsupport;
 
 startNapalm(localClientNum, pos, yaw, teamfaction, team, owner, exitType) {
-  if(!isDefined(level.napalmstrikeinited) || level.napalmstrikeinited != true)
+  if(!isDefined(level.napalmstrikeinited) || level.napalmstrikeinited != true) {
     init_napalmstrike();
-  players = getLocalPlayers();
-  for(i = 0; i < players.size; i++)
+  }
+  players = getlocalplayers();
+  for(i = 0; i < players.size; i++) {
     callNapalmStrike(localClientNum, pos, yaw, teamfaction, team, owner, exitType);
+  }
 }
-
 init_napalmstrike() {
   level.fx_jet_trail = loadfx("trail/fx_geotrail_jet_contrail");
   level.fx_airstrike_afterburner = loadfx("vehicle/exhaust/fx_exhaust_jet_afterburner");
@@ -34,13 +35,11 @@ init_napalmstrike() {
     }
   }
 }
-
 playPlaneFx(localClientNum) {
   playFXOnTag(localClientNum, level.fx_airstrike_afterburner, self, "tag_engine");
   playFXOnTag(localClientNum, level.fx_jet_trail, self, "tag_right_wingtip");
   playFXOnTag(localClientNum, level.fx_jet_trail, self, "tag_left_wingtip");
 }
-
 callNapalmStrike(localClientNum, coord, yaw, teamfaction, team, owner, exitType) {
   direction = (0, yaw, 0);
   planeHalfDistance = 24000;
@@ -60,15 +59,15 @@ callNapalmStrike(localClientNum, coord, yaw, teamfaction, team, owner, exitType)
   endPoint += (0, 0, planeFlyHeight);
   d = length(startPoint - endPoint);
   flyTime = (d / planeFlySpeed);
-  if(!isDefined(localClientNum))
+  if(!isDefined(localClientNum)) {
     return;
+  }
   planeModel = "t5_veh_jet_mig17";
   thread flarePlane(localClientNum, planeModel, team, owner, startPoint, endPoint, flyTime, direction);
   timeIncreaseBetweenPlanes = 3;
   wait(timeIncreaseBetweenPlanes);
   thread napalmPlane(localClientNum, planeModel, team, owner, exitType, startPoint, endPoint, flyTime, direction, yaw);
 }
-
 napalmPlane(localClientNum, planeModel, team, owner, exitType, startPoint, endPoint, flyTime, direction, yaw) {
   plane = spawnPlane(localClientNum, startPoint, planeModel, team, owner, "compass_objpoint_napalmstrike");
   plane.angles = direction;
@@ -103,7 +102,6 @@ napalmPlane(localClientNum, planeModel, team, owner, exitType, startPoint, endPo
   plane notify("delete");
   plane delete();
 }
-
 flarePlane(localClientNum, planeModel, team, owner, startPoint, endPoint, flyTime, direction) {
   plane = spawnPlane(localClientNum, startPoint, planeModel, team, owner, "compass_objpoint_napalmstrike");
   plane.angles = direction;
@@ -114,10 +112,10 @@ flarePlane(localClientNum, planeModel, team, owner, startPoint, endPoint, flyTim
   plane notify("delete");
   plane delete();
 }
-
 releaseFlare(localClientNum, owner, plane, startPoint, endPoint, direction) {
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
+  }
   startPathRandomness = 100;
   endPathRandomness = 150;
   pathStart = startPoint;
@@ -126,15 +124,16 @@ releaseFlare(localClientNum, owner, plane, startPoint, endPoint, direction) {
   thread debug_line(pathStart, pathEnd, (1, 1, 1), 10);
   thread callStrike_flareEffect(localClientNum, plane, pathEnd, owner);
 }
-
 callStrike_flareEffect(localClientNum, plane, pathEnd, owner) {
   fxTimer = 0.15;
-  if(isDefined(level.airsupportFxTimer))
+  if(isDefined(level.airsupportFxTimer)) {
     fxTimer = level.airsupportFxTimer;
+  }
   fxtimer = getDvarFloatDefault(#"scr_fxTimer", fxTimer);
   bombWait = 2.35;
-  if(isDefined(level.airsupportbombTimer))
+  if(isDefined(level.airsupportbombTimer)) {
     bombWait = level.airsupportbombTimer;
+  }
   bombWait = getDvarFloatDefault(#"scr_napalmflareTimer", bombWait);
   wait(bombWait);
   planedir = anglesToForward(plane.angles);
@@ -148,10 +147,12 @@ callStrike_flareEffect(localClientNum, plane, pathEnd, owner) {
   repeat = 8;
   minAngle = 5;
   maxAngle = 45;
-  if(isDefined(level.napalmFlameMinAngle))
+  if(isDefined(level.napalmFlameMinAngle)) {
     minAngle = level.napalmFlameMinAngle;
-  if(isDefined(level.napalmFlameMaxAngle))
+  }
+  if(isDefined(level.napalmFlameMaxAngle)) {
     maxAngle = level.napalmFlameMaxAngle;
+  }
   maxAngle = getDvarFloatDefault(#"scr_napalm_maxAngles", maxAngle);
   hitpos = (0, 0, 0);
   previousHeight = 0;
@@ -166,12 +167,10 @@ callStrike_flareEffect(localClientNum, plane, pathEnd, owner) {
   wait(4.0);
   flare delete();
 }
-
 spawnFlare(localClientNum, origin, angles) {
   flare = spawn(localClientNum, origin, "script_origin");
   flare.angles = angles;
   flare setModel("projectile_cbu97_clusterbomb");
   return flare;
 }
-
 debug_draw_bomb_path(projectile) {}

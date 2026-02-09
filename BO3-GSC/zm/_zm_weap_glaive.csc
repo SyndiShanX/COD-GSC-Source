@@ -89,7 +89,7 @@ function function_6b6e650c(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function do_gravity_spike_fx(localclientnum, owner, position) {
   var_f31c9d4c = 0;
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     if(!isDefined(self getlocalclientnumber()) || localclientnum == self getlocalclientnumber()) {
       var_f31c9d4c = 1;
     }

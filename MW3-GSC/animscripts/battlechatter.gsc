@@ -9,7 +9,7 @@ _id_0B6B() {
   }
   setdvarifuninitialized("bcs_enable", "on");
 
-  if(getdvar("bcs_enable", "on") == "off") {
+  if(getDvar("bcs_enable", "on") == "off") {
     anim._id_0AAB = 0;
     anim.player._id_0AAB = 0;
     return;
@@ -183,7 +183,6 @@ _id_0B6B() {
 
   if(!isDefined(level._id_0AD3)) {
     level._id_0AD3 = 0;
-
   }
   anim._id_0B6D = [];
   anim._id_0B6D["threat"] = [];
@@ -271,11 +270,9 @@ _id_0B6B() {
 
   if(!isDefined(level._id_0B78)) {
     level._id_0B78 = 1500;
-
   }
   if(!isDefined(level._id_0B1D)) {
     level._id_0B1D = 2500;
-
   }
   level._id_0B79 = 96.0;
   level._id_0B7A = 8.0;
@@ -457,7 +454,6 @@ _id_0B90() {
 
   for(var_2 = 1; var_2 <= var_0; var_2++) {
     anim._id_0AB0["shadowcompany"][var_2] = maps\_utility::string(var_2 + 1);
-
   }
   anim._id_0B92 = [];
 }
@@ -536,7 +532,6 @@ _id_0AAC() {
 
   for(var_1 = 0; var_1 < anim._id_0A63.size; var_1++) {
     var_0 thread _id_0C1E(anim._id_0A63[var_1]._id_0A66);
-
   }
   var_0 thread animscripts\battlechatter_ai::_id_0B1F();
   var_0 thread animscripts\battlechatter_ai::_id_0AE8();
@@ -597,7 +592,6 @@ _id_0B9B() {
 
   for(var_1 = 0; var_1 < anim._id_0A63.size; var_1++) {
     var_0 _id_0C1F(anim._id_0A63[var_1]._id_0A66);
-
   }
   var_0._id_0AAB = 0;
 }
@@ -607,23 +601,21 @@ _id_0AAA() {
 }
 
 _id_0B9C() {
-  var_0 = getdvar("bcs_enable", "on");
+  var_0 = getDvar("bcs_enable", "on");
 
   for(;;) {
-    var_1 = getdvar("bcs_enable", "on");
+    var_1 = getDvar("bcs_enable", "on");
 
     if(var_1 != var_0) {
       switch (var_1) {
         case "on":
           if(!anim._id_0AAB) {
             _id_0B9D();
-
           }
           break;
         case "off":
           if(anim._id_0AAB) {
             _id_0B9E();
-
           }
           break;
       }
@@ -652,7 +644,6 @@ _id_0B9E() {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(isDefined(var_0[var_1]._id_0A7A) && var_0[var_1]._id_0A7A._id_0AAB) {
       var_0[var_1]._id_0A7A _id_0B9B();
-
     }
     var_0[var_1] animscripts\battlechatter_ai::_id_0AC5();
   }
@@ -667,7 +658,6 @@ _id_0B9F(var_0, var_1) {
 
   while(!isDefined(level._id_0BA2)) {
     wait 0.1;
-
   }
   var_2 = level._id_0BA2;
   var_3 = anim._id_0AD0[var_2];
@@ -675,7 +665,6 @@ _id_0B9F(var_0, var_1) {
 
   if(isDefined(var_3)) {
     level.player._id_0BA0 = var_3;
-
   }
   if(isDefined(var_4)) {
     level.player._id_0BA1 = var_4;
@@ -751,7 +740,7 @@ _id_0BA5() {
   if(!isalive(var_0)) {
     return;
   }
-  if(_id_0AD7(var_0) && !isplayer(var_0)) {
+  if(_id_0AD7(var_0) && !isPlayer(var_0)) {
     return;
   }
   anim thread _id_0BDF(self, "threat");
@@ -759,7 +748,7 @@ _id_0BA5() {
 
   switch (self._id_0AC6["threat"]._id_0BA7) {
     case "infantry":
-      if(isplayer(var_0) || !isDefined(var_0 getturret())) {
+      if(isPlayer(var_0) || !isDefined(var_0 getturret())) {
         var_1 = _id_0BAA(var_0);
       } else {}
 
@@ -808,7 +797,6 @@ _id_0BAA(var_0, var_1) {
 
   if(!isDefined(var_3) || isDefined(var_3) && !isDefined(var_3.type)) {
     return 0;
-
   }
   switch (var_3.type) {
     case "rpg":
@@ -859,7 +847,6 @@ _id_0BAA(var_0, var_1) {
         var_2 _id_0C10(var_6);
       } else {
         var_2 _id_0C15("targetclock", var_3._id_0BAF + "_high");
-
       }
       break;
     case "player_cardinal":
@@ -869,7 +856,6 @@ _id_0BAA(var_0, var_1) {
 
       if(var_8 == "impossible") {
         return 0;
-
       }
       var_2 _id_0C15("cardinal", var_8);
       break;
@@ -889,7 +875,6 @@ _id_0BAA(var_0, var_1) {
         var_9 = level.player;
       } else if(isDefined(var_3._id_0BAD) && randomint(100) < anim._id_0B2D["response"]["callout"]) {
         var_9 = var_3._id_0BAD;
-
       }
       var_5 = _id_0BFF(var_9.origin, var_0.origin);
       var_2 _id_0C0F(var_5);
@@ -902,7 +887,6 @@ _id_0BAA(var_0, var_1) {
         var_9 = level.player;
       } else if(isDefined(var_3._id_0BAD) && randomint(100) < anim._id_0B2D["response"]["callout"]) {
         var_9 = var_3._id_0BAD;
-
       }
       var_10 = _id_0BF9(var_9);
       var_11 = _id_0C01(var_10, var_9.origin, var_0.origin);
@@ -916,7 +900,6 @@ _id_0BAA(var_0, var_1) {
         var_9 = level.player;
       } else if(isDefined(var_3._id_0BAD) && randomint(100) < anim._id_0B2D["response"]["callout"]) {
         var_9 = var_3._id_0BAD;
-
       }
       var_10 = _id_0BF9(var_9);
       var_11 = _id_0C01(var_10, var_9.origin, var_0.origin);
@@ -930,7 +913,6 @@ _id_0BAA(var_0, var_1) {
         var_9 = level.player;
       } else if(isDefined(var_3._id_0BAD) && randomint(100) < anim._id_0B2D["response"]["callout"]) {
         var_9 = var_3._id_0BAD;
-
       }
       var_10 = _id_0BF9(var_9);
       var_11 = _id_0C01(var_10, var_9.origin, var_0.origin);
@@ -941,7 +923,6 @@ _id_0BAA(var_0, var_1) {
         var_2 _id_0C10(var_6);
       } else {
         var_2 _id_0C15("targetclock", var_11 + "_high");
-
       }
       var_2 _id_0BB3(self, var_3, var_0);
       break;
@@ -950,14 +931,12 @@ _id_0BAA(var_0, var_1) {
 
       if(self.team == "allies") {
         var_9 = level.player;
-
       }
       var_7 = _id_0BFD(var_9.origin, var_0.origin);
       var_8 = _id_0BFC(var_7);
 
       if(var_8 == "impossible") {
         return 0;
-
       }
       var_2 _id_0C15("cardinal", var_8);
       break;
@@ -966,7 +945,6 @@ _id_0BAA(var_0, var_1) {
 
       if(!var_12) {
         return 0;
-
       }
       break;
     case "player_location":
@@ -975,7 +953,6 @@ _id_0BAA(var_0, var_1) {
 
       if(!var_12) {
         return 0;
-
       }
       break;
     case "ai_location":
@@ -988,7 +965,6 @@ _id_0BAA(var_0, var_1) {
 
       if(!var_12) {
         return 0;
-
       }
       var_13 = var_2._id_0BB0.size - 1;
       var_14 = var_2._id_0BB0[var_13];
@@ -1001,7 +977,6 @@ _id_0BAA(var_0, var_1) {
         var_3._id_0BAD animscripts\battlechatter_ai::_id_0ADB("callout", "neg", self, 0.9);
       } else {
         var_3._id_0BAD animscripts\battlechatter_ai::_id_0ADB("exposed", "acquired", self, 0.9);
-
       }
       break;
   }
@@ -1014,15 +989,12 @@ _id_0BAA(var_0, var_1) {
 _id_0BB1(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0._id_0AB4 != "US" && var_0._id_0AB4 != "NS" && var_0._id_0AB4 != "TF") {
     return 0;
-
   }
   if(randomint(100) > anim._id_0B2D["response"]["exposed"]) {
     return 0;
-
   }
   return 1;
 }
@@ -1043,7 +1015,6 @@ _id_0BB3(var_0, var_1, var_2) {
 
   if(!var_1._id_0BAD cansee(var_2) && randomint(100) < anim._id_0B2D["response"]["callout_negative"]) {
     var_3 = "neg";
-
   }
   var_1._id_0BAD animscripts\battlechatter_ai::_id_0ADB("callout", var_3, var_0, 0.9);
 }
@@ -1056,7 +1027,6 @@ _id_0BB4(var_0) {
 
   if(isDefined(var_3)) {
     var_4 = _id_0C01(var_3.angles, var_3.origin, var_0.origin);
-
   }
   var_5 = _id_0C01(level.player.angles, level.player.origin, var_0.origin);
 
@@ -1074,13 +1044,11 @@ _id_0BB4(var_0) {
   var_8 = _id_0BFE(var_7.origin, var_0.origin);
   self._id_0BB5 = [];
 
-  if(!isplayer(var_0) && var_0 animscripts\utility::_id_0BB6()) {
+  if(!isPlayer(var_0) && var_0 animscripts\utility::_id_0BB6()) {
     _id_0BBD("rpg");
-
   }
   if(var_0 _id_0AA8()) {
     _id_0BBD("exposed");
-
   }
   if(self.team == "allies") {
     var_9 = 0;
@@ -1139,18 +1107,15 @@ _id_0BB4(var_0) {
       } else {
         if(_id_0C0A()) {
           _id_0BBD("player_location");
-
         }
         _id_0BBD("generic_location");
       }
     } else {
       if(isDefined(var_3)) {
         _id_0BBD("ai_location");
-
       }
       if(_id_0C0A()) {
         _id_0BBD("player_location");
-
       }
       _id_0BBD("generic_location");
     }
@@ -1158,7 +1123,6 @@ _id_0BB4(var_0) {
 
   if(!self._id_0BB5.size) {
     return undefined;
-
   }
   var_12 = _id_0BC0(self._id_0BB5, anim._id_0B87);
   var_13 = spawnStruct();
@@ -1169,7 +1133,6 @@ _id_0BB4(var_0) {
 
   if(isDefined(var_1)) {
     var_13.location = var_1;
-
   }
   return var_13;
 }
@@ -1199,13 +1162,11 @@ _id_0BBA(var_0) {
 _id_0BBB(var_0, var_1) {
   if(issubstr(var_0, "_qa") && soundexists(var_0)) {
     return 1;
-
   }
   var_2 = var_1 _id_0BBC(var_0, 0);
 
   if(soundexists(var_2)) {
     return 1;
-
   }
   return 0;
 }
@@ -1228,7 +1189,6 @@ _id_0BBD(var_0) {
     if(var_3 == var_0) {
       if(!_id_0BBE(var_0)) {
         var_1 = 1;
-
       }
       break;
     }
@@ -1236,7 +1196,6 @@ _id_0BBD(var_0) {
 
   if(!var_1) {
     return var_1;
-
   }
   self._id_0BB5[self._id_0BB5.size] = var_0;
   return var_1;
@@ -1245,11 +1204,9 @@ _id_0BBD(var_0) {
 _id_0BBE(var_0) {
   if(!isDefined(anim._id_0B88[self.team])) {
     return 0;
-
   }
   if(!isDefined(anim._id_0B89[self.team])) {
     return 0;
-
   }
   var_1 = anim._id_0B88[self.team];
   var_2 = anim._id_0B89[self.team];
@@ -1257,7 +1214,6 @@ _id_0BBE(var_0) {
 
   if(var_0 == var_1 && gettime() - var_2 < var_3) {
     return 1;
-
   }
   return 0;
 }
@@ -1315,7 +1271,6 @@ _id_0BC2(var_0) {
 
   if(self.owner.team == "allies" && self.owner._id_0AB4 != "RU") {
     var_1 = maps\_utility::_id_0BC3(var_1, "movement");
-
   }
   var_2 = var_1[randomint(var_1.size)];
   _id_0C0D(var_2);
@@ -1365,7 +1320,6 @@ _id_0BC7(var_0, var_1) {
     var_2 _id_0C1D();
   } else {
     var_2 _id_0C1C("taunt", "generic");
-
   }
   _id_0BD9(var_2);
 }
@@ -1438,7 +1392,6 @@ _id_0BCB(var_0, var_1) {
     var_3 = var_2 _id_0C13(var_0, self._id_0BA6._id_0ADE, self._id_0BA6.location);
   } else {
     var_3 = var_2 _id_0C12(var_1);
-
   }
   if(!var_3) {
     return;
@@ -1514,12 +1467,12 @@ _id_0BD0(var_0) {
 
 _id_0B43(var_0, var_1) {
   if(randomint(100) > anim._id_0B2D["response"]["order"]) {
-    if(!isDefined(var_1) || isDefined(var_1) && !isplayer(var_1)) {
+    if(!isDefined(var_1) || isDefined(var_1) && !isPlayer(var_1)) {
       return;
     }
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && isDefined(level.player._id_0BA0)) {
+  if(isDefined(var_1) && isPlayer(var_1) && isDefined(level.player._id_0BA0)) {
     var_0 _id_0C05();
     var_0._id_0BAE = level.player;
   } else if(isDefined(var_1) && _id_0C08(var_1)) {
@@ -1582,7 +1535,6 @@ _id_0BD4(var_0) {
 
   if(var_0 == "grenade") {
     var_1._id_0BAB = 1;
-
   }
   var_1 _id_0B4B("incoming", var_0);
   _id_0BD9(var_1);
@@ -1630,14 +1582,12 @@ _id_0BD9(var_0, var_1) {
 
     if(_id_0C2C()) {
       _id_0C2E(var_2);
-
     }
     if(_id_0C2D()) {
       var_6 = self._id_0BA6._id_0BDA + "_" + self._id_0BA6._id_0BA7;
 
       if(isDefined(self._id_0BA6._id_0AE0)) {
         var_6 = var_6 + ("_" + self._id_0BA6._id_0AE0);
-
       }
       thread _id_0C2F(var_2, var_6);
     }
@@ -1679,7 +1629,6 @@ _id_0BD9(var_0, var_1) {
         var_9 playsoundasmaster(var_0._id_0BB0[var_7], var_0._id_0BB0[var_7], 1);
       } else {
         var_9 playSound(var_0._id_0BB0[var_7], var_0._id_0BB0[var_7], 1);
-
       }
       var_9 waittill(var_0._id_0BB0[var_7]);
       self notify(var_0._id_0BB0[var_7]);
@@ -1697,11 +1646,9 @@ _id_0BD9(var_0, var_1) {
 _id_0BDC(var_0) {
   if(!isDefined(var_0._id_0BDA) || !isDefined(var_0._id_0BA7)) {
     return 0;
-
   }
   if(var_0._id_0BDA == "reaction" && var_0._id_0BA7 == "friendlyfire") {
     return 1;
-
   }
   return 0;
 }
@@ -1742,7 +1689,6 @@ _id_0BDF(var_0, var_1, var_2) {
 
   if(isalive(var_0)) {
     var_0 _id_0BDE(var_1);
-
   }
   var_3._id_0AC8[var_1] = gettime() + anim._id_0B6F[var_1]["squad"];
 }
@@ -1770,37 +1716,29 @@ _id_0AD6(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return 0;
-
   }
   if(distance(level.player.origin, self.origin) > level._id_0B78) {
     return 0;
-
   }
   if(!isDefined(self._id_0AAF) || !self._id_0AAF) {
     return 0;
-
   }
   if(isDefined(var_2) && var_2 >= 1) {
     return 1;
-
   }
   if(gettime() + anim._id_0B6F[var_0]["self"] < self._id_0AC8[var_0]) {
     return 0;
-
   }
   if(gettime() + anim._id_0B6F[var_0]["squad"] < self._id_0A7A._id_0AC8[var_0]) {
     return 0;
-
   }
   if(isDefined(var_1) && _id_0BE8(var_0, var_1)) {
     return 0;
-
   }
   if(isDefined(var_1) && anim._id_0B70[var_0][var_1] < self._id_0ACD) {
     return 0;
-
   }
   return 1;
 }
@@ -1833,7 +1771,6 @@ _id_0BE3(var_0) {
 
   if(!isDefined(var_2[0])) {
     return undefined;
-
   }
   var_4 = undefined;
 
@@ -1897,27 +1834,22 @@ _id_0BE5(var_0) {
 
   if(self._id_0A7A._id_0B97[var_0]) {
     var_1 = var_1 + " playing";
-
   }
   if(gettime() > self._id_0AC6[var_0]._id_0ACB) {
     var_1 = var_1 + " expired";
-
   }
   if(gettime() < self._id_0A7A._id_0AC8[var_0]) {
     var_1 = var_1 + " cantspeak";
-
   }
   if(var_1 == "") {
     var_1 = " valid";
-
   }
   return var_1;
 }
 
 _id_0BE6(var_0) {
-  if(getdvar("bcs_filter" + var_0, "off") == "on" || getdvar("bcs_filter" + var_0, "off") == "1") {
+  if(getDvar("bcs_filter" + var_0, "off") == "on" || getDvar("bcs_filter" + var_0, "off") == "1") {
     return 1;
-
   }
   return 0;
 }
@@ -1935,15 +1867,12 @@ _id_0BE7(var_0) {
 _id_0BE8(var_0, var_1) {
   if(!isDefined(anim._id_0B6D[var_0][var_1])) {
     return 0;
-
   }
   if(!isDefined(self._id_0A7A._id_0B96[var_0][var_1])) {
     return 0;
-
   }
   if(gettime() > self._id_0A7A._id_0B96[var_0][var_1]) {
     return 0;
-
   }
   return 1;
 }
@@ -1956,13 +1885,11 @@ _id_0BE9(var_0, var_1) {
 }
 
 _id_0BEA() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return 0;
-
   }
   if(_id_0AA8()) {
     return 0;
-
   }
   return animscripts\utility::_id_0BEB(self.weapon);
 }
@@ -1970,21 +1897,17 @@ _id_0BEA() {
 _id_0AA8() {
   if(distance(self.origin, level.player.origin) > 1500) {
     return 0;
-
   }
   if(isDefined(_id_0AED())) {
     return 0;
-
   }
   var_0 = _id_0BED();
 
   if(!isDefined(var_0)) {
     return 1;
-
   }
   if(!_id_0B2B()) {
     return 0;
-
   }
   return 1;
 }
@@ -1994,11 +1917,9 @@ _id_0B2B() {
 
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(issubstr(var_0.type, "Cover") || issubstr(var_0.type, "Conceal")) {
     return 1;
-
   }
   return 0;
 }
@@ -2016,17 +1937,15 @@ _id_0A83() {
 
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0 == "sergeant" || var_0 == "lieutenant" || var_0 == "captain" || var_0 == "sergeant") {
     return 1;
-
   }
   return 0;
 }
 
 _id_0BED() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return self.node;
   } else {
     return animscripts\utility::_id_0BEE();
@@ -2048,17 +1967,14 @@ _id_0AC1() {
     var_0 = self.name;
   } else {
     var_0 = undefined;
-
   }
   if(!isDefined(var_0)) {
     return undefined;
-
   }
   var_1 = strtok(var_0, " ");
 
   if(var_1.size < 2) {
     return var_0;
-
   }
   return var_1[1];
 }
@@ -2095,7 +2011,6 @@ _id_0B2C(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = "response";
-
   }
   var_4 = maps\_utility::_id_0B53(self._id_0A7A._id_0A6B);
   var_0 = var_0 * var_0;
@@ -2189,7 +2104,6 @@ _id_0BF6(var_0) {
 
   if(!isDefined(var_1)) {
     return 0;
-
   }
   return 1;
 }
@@ -2199,13 +2113,11 @@ _id_0AEE(var_0) {
 
   if(!isDefined(var_1)) {
     return 0;
-
   }
   var_2 = var_1 + anim._id_0B6F["threat"]["location_repeat"];
 
   if(gettime() < var_2) {
     return 1;
-
   }
   return 0;
 }
@@ -2217,7 +2129,6 @@ _id_0BF7(var_0) {
 _id_0BF8(var_0) {
   if(isDefined(anim._id_0B7C[var_0.classname])) {
     return anim._id_0B7C[var_0.classname];
-
   }
   return undefined;
 }
@@ -2225,7 +2136,7 @@ _id_0BF8(var_0) {
 _id_0BF9(var_0) {
   var_1 = var_0.angles;
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_2 = var_0 _id_0BED();
 
     if(isDefined(var_2)) {
@@ -2239,7 +2150,6 @@ _id_0BF9(var_0) {
 _id_0BFA(var_0) {
   if(var_0 == "left" || var_0 == "right") {
     return 1;
-
   }
   return 0;
 }
@@ -2259,7 +2169,6 @@ _id_0BFB(var_0, var_1, var_2) {
     var_6 = "rear";
   } else {
     var_6 = "left";
-
   }
   return var_6;
 }
@@ -2312,7 +2221,6 @@ _id_0BFD(var_0, var_1) {
     var_3 = var_3 + 360;
   } else if(var_3 > 360) {
     var_3 = var_3 - 360;
-
   }
   if(var_3 < 22.5 || var_3 > 337.5) {
     var_5 = "north";
@@ -2332,7 +2240,6 @@ _id_0BFD(var_0, var_1) {
     var_5 = "northeast";
   } else {
     var_5 = "impossible";
-
   }
   return var_5;
 }
@@ -2366,7 +2273,6 @@ _id_0C00(var_0) {
     var_1 = var_0;
   } else if(var_0 == "1" || var_0 == "2") {
     var_1 = "2";
-
   }
   return var_1;
 }
@@ -2404,7 +2310,6 @@ _id_0C01(var_0, var_1, var_2) {
     var_8 = "10";
   } else {
     var_8 = "11";
-
   }
   return var_8;
 }
@@ -2436,7 +2341,6 @@ _id_0C04(var_0) {
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1 = var_1 + var_0[var_2];
-
   }
   return (var_1[0] / var_0.size, var_1[1] / var_0.size, var_1[2] / var_0.size);
 }
@@ -2464,33 +2368,26 @@ _id_0C07(var_0) {
 _id_0C08(var_0) {
   if(_id_0BEF()) {
     return 0;
-
   }
   if(!isDefined(var_0._id_0AC2)) {
     return 0;
-
   }
   if(var_0._id_0AAF == 0) {
     return 0;
-
   }
   if(!isDefined(var_0._id_0AB4)) {
     return 0;
-
   }
   if(self._id_0AB4 != var_0._id_0AB4) {
     return 0;
-
   }
   if(_id_0C09(var_0)) {
     return 0;
-
   }
   var_1 = self._id_0AB4 + "_" + self._id_0AB6 + "_name_" + var_0._id_0AC2;
 
   if(soundexists(var_1)) {
     return 1;
-
   }
   return 0;
 }
@@ -2498,7 +2395,6 @@ _id_0C08(var_0) {
 _id_0C09(var_0) {
   if(anim._id_0B84[self.team] == var_0._id_0AC2 || gettime() - anim._id_0B85[self.team] < anim._id_0B86) {
     return 1;
-
   }
   return 0;
 }
@@ -2506,21 +2402,17 @@ _id_0C09(var_0) {
 _id_0C0A() {
   if(_id_0BEF()) {
     return 0;
-
   }
   if(!isDefined(level.player._id_0BA0) || !isDefined(level.player._id_0BA1)) {
     return 0;
-
   }
   if(_id_0C0B()) {
     return 0;
-
   }
   var_0 = self._id_0AB4 + "_" + self._id_0AB6 + "_name_player_" + level.player._id_0BA1 + "_" + level.player._id_0BA0;
 
   if(soundexists(var_0)) {
     return 1;
-
   }
   return 0;
 }
@@ -2528,11 +2420,9 @@ _id_0C0A() {
 _id_0C0B() {
   if(!isDefined(anim._id_0C06)) {
     return 0;
-
   }
   if(gettime() - anim._id_0C06 >= anim._id_0B6D["playername"]) {
     return 0;
-
   }
   return 1;
 }
@@ -2552,7 +2442,6 @@ _id_0C0C(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_2 + ("_" + var_1);
-
   }
   self._id_0BB0 = maps\_utility::_id_0BC3(self._id_0BB0, var_2);
   return 1;
@@ -2587,7 +2476,6 @@ _id_0C11(var_0, var_1) {
 
   if(!soundexists(var_2)) {
     return 0;
-
   }
   self._id_0BB0[self._id_0BB0.size] = var_2;
   return 1;
@@ -2598,7 +2486,6 @@ _id_0C12(var_0) {
 
   if(!soundexists(var_1)) {
     return 0;
-
   }
   self._id_0BB0[self._id_0BB0.size] = var_1;
   return 1;
@@ -2624,7 +2511,6 @@ _id_0C13(var_0, var_1, var_2) {
       var_0 animscripts\battlechatter_ai::_id_0ADB("callout", "neg", self.owner, 0.9);
     } else {
       var_0 animscripts\battlechatter_ai::_id_0ADB("exposed", "acquired", self.owner, 0.9);
-
     }
     var_2._id_0BB9 = 1;
     return 0;
@@ -2658,19 +2544,16 @@ _id_0C16(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   var_4 = self.owner._id_0AB4 + "_" + self.owner._id_0AB6 + "_callout_obj_" + var_3;
 
   if(var_2) {
     var_4 = var_4 + "_y";
-
   }
   var_4 = var_4 + ("_" + var_1);
 
   if(!soundexists(var_4)) {
     return 0;
-
   }
   self._id_0BB0[self._id_0BB0.size] = var_4;
   return 1;
@@ -2701,18 +2584,15 @@ _id_0C18(var_0) {
 
     if(!issubstr(var_3, "callout")) {
       var_6 = var_6 + "co_";
-
     }
     var_5 = var_6 + var_3;
   }
 
   if(soundexists(var_5)) {
     var_1 = var_5;
-
   }
   if(!isDefined(var_1)) {
     return 0;
-
   }
   _id_0BF7(var_0);
   self._id_0BB0[self._id_0BB0.size] = var_1;
@@ -2763,11 +2643,9 @@ _id_0B47(var_0, var_1) {
 _id_0C1E(var_0) {
   if(!isDefined(self._id_0A6E[var_0]._id_0AAE)) {
     self._id_0A6E[var_0]._id_0AAE = 0;
-
   }
   if(!isDefined(self._id_0A6E[var_0]._id_0BE1)) {
     self._id_0A6E[var_0]._id_0BE1 = 2000000000;
-
   }
   if(!isDefined(self._id_0A6E[var_0]._id_0BE0)) {
     self._id_0A6E[var_0]._id_0BE0 = 0;
@@ -2790,7 +2668,6 @@ _id_0AD8(var_0, var_1, var_2) {
     var_3.priority = var_2;
   } else {
     var_3.priority = anim._id_0B70[var_0][var_1];
-
   }
   var_3._id_0ACB = gettime() + anim._id_0B71[var_0][var_1];
   return var_3;
@@ -2824,7 +2701,6 @@ _id_0C22() {
 
   while(self._id_0A6A <= 0) {
     wait 0.5;
-
   }
   var_0 = 0;
 
@@ -2836,17 +2712,14 @@ _id_0C22() {
     } else if(self._id_0B99) {
       if(!var_0) {
         wait(randomfloat(anim._id_0B73));
-
       }
       if(var_0) {
         var_0 = 0;
-
       }
       self._id_0B99 = 0;
     } else {
       if(!var_0) {
         wait(randomfloatrange(anim._id_0B73, anim._id_0B74));
-
       }
       if(var_0) {
         var_0 = 0;
@@ -2906,9 +2779,8 @@ _id_0C23(var_0) {
 _id_0C24() {
   var_0 = 0;
 
-  if(!isplayer(self) && isalive(self) && self.classname != "actor_enemy_dog" && level._id_0AB0[self.team] && _id_0AD2() && self._id_0AB0) {
+  if(!isPlayer(self) && isalive(self) && self.classname != "actor_enemy_dog" && level._id_0AB0[self.team] && _id_0AD2() && self._id_0AB0) {
     var_0 = 1;
-
   }
   return var_0;
 }
@@ -2916,7 +2788,6 @@ _id_0C24() {
 _id_0AD2() {
   if(isDefined(anim._id_0B82[self.voice]) && anim._id_0B82[self.voice]) {
     return 1;
-
   }
   return 0;
 }
@@ -2941,7 +2812,6 @@ _id_0C25(var_0) {
 
   if(isDefined(var_1)) {
     var_0._id_0B9A = var_1.unique_id;
-
   }
   return var_1;
 }
@@ -2951,7 +2821,6 @@ _id_0C27(var_0, var_1) {
 
   if(anim._id_0B92.size >= var_2.size) {
     anim._id_0B92 = [];
-
   }
   var_3 = undefined;
 
@@ -2970,7 +2839,6 @@ _id_0C27(var_0, var_1) {
 _id_0C28(var_0) {
   if(!anim._id_0B92.size) {
     return 0;
-
   }
   var_1 = 0;
 
@@ -2987,7 +2855,6 @@ _id_0C28(var_0) {
 _id_0C29(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   var_3 = var_2;
   var_4 = [];
@@ -3047,7 +2914,6 @@ _id_0C2E(var_0) {
 
   if(_id_0BEF()) {
     var_1 = "^6 ";
-
   }
   foreach(var_3 in var_0) {}
 }
@@ -3063,7 +2929,6 @@ _id_0C30(var_0) {
 _id_0C31(var_0, var_1, var_2) {
   if(common_scripts\utility::flag(var_2)) {
     common_scripts\utility::flag_wait(var_2);
-
   }
   common_scripts\utility::flag_set(var_2);
   common_scripts\utility::flag_clear(var_2);
@@ -3143,7 +3008,6 @@ _id_0C36() {
 _id_0C37() {
   if(!_id_0C38()) {
     return 0;
-
   }
   _id_0BE9("reaction", "friendlyfire");
   thread _id_0BC5();
@@ -3153,27 +3017,21 @@ _id_0C37() {
 _id_0C38(var_0) {
   if(isDefined(self._id_0C39)) {
     return 0;
-
   }
   if(!isDefined(self._id_0AC6)) {
     return 0;
-
   }
   if(!isDefined(self._id_0AC6["reaction"]) || !isDefined(self._id_0AC6["reaction"]._id_0BA7)) {
     return 0;
-
   }
   if(self._id_0AC6["reaction"]._id_0BA7 != "friendlyfire") {
     return 0;
-
   }
   if(gettime() > self._id_0AC6["reaction"]._id_0ACB) {
     return 0;
-
   }
   if(!isDefined(var_0)) {
     var_0 = 1;
-
   }
   if(var_0) {
     if(isDefined(self._id_0A7A._id_0B96["reaction"]["friendlyfire"])) {

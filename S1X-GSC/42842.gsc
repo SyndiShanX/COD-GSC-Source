@@ -606,8 +606,8 @@ _playlocalsound(var_0) {
 dvarintvalue(var_0, var_1, var_2, var_3) {
   var_0 = "scr_" + level.gametype + "_" + var_0;
 
-  if(getdvar(var_0) == "") {
-    setdvar(var_0, var_1);
+  if(getDvar(var_0) == "") {
+    setDvar(var_0, var_1);
     return var_1;
   }
 
@@ -621,15 +621,15 @@ dvarintvalue(var_0, var_1, var_2, var_3) {
     return var_4;
   }
 
-  setdvar(var_0, var_4);
+  setDvar(var_0, var_4);
   return var_4;
 }
 
 dvarfloatvalue(var_0, var_1, var_2, var_3) {
   var_0 = "scr_" + level.gametype + "_" + var_0;
 
-  if(getdvar(var_0) == "") {
-    setdvar(var_0, var_1);
+  if(getDvar(var_0) == "") {
+    setDvar(var_0, var_1);
     return var_1;
   }
 
@@ -643,7 +643,7 @@ dvarfloatvalue(var_0, var_1, var_2, var_3) {
     return var_4;
   }
 
-  setdvar(var_0, var_4);
+  setDvar(var_0, var_4);
   return var_4;
 }
 
@@ -1416,12 +1416,12 @@ registerscorelimitdvar(var_0, var_1) {
 
 registertimelimitdvar(var_0, var_1) {
   registerwatchdvarfloat("timelimit", var_1);
-  setdvar("ui_timelimit", gettimelimit());
+  setDvar("ui_timelimit", gettimelimit());
 }
 
 registerhalftimedvar(var_0, var_1) {
   registerwatchdvarint("halftime", var_1);
-  setdvar("ui_halftime", gethalftime());
+  setDvar("ui_halftime", gethalftime());
 }
 
 registernumlivesdvar(var_0, var_1) {
@@ -1429,7 +1429,7 @@ registernumlivesdvar(var_0, var_1) {
 }
 
 setovertimelimitdvar(var_0) {
-  setdvar("overtimeTimeLimit", var_0);
+  setDvar("overtimeTimeLimit", var_0);
 }
 
 get_damageable_player(var_0, var_1) {
@@ -1490,7 +1490,7 @@ get_damageable_grenade_pos(var_0) {
 }
 
 getdvarvec(var_0) {
-  var_1 = getdvar(var_0);
+  var_1 = getDvar(var_0);
 
   if(var_1 == "") {
     return (0, 0, 0);
@@ -1502,9 +1502,9 @@ getdvarvec(var_0) {
     return (0, 0, 0);
   }
 
-  setdvar("tempR", var_2[0]);
-  setdvar("tempG", var_2[1]);
-  setdvar("tempB", var_2[2]);
+  setDvar("tempR", var_2[0]);
+  setDvar("tempG", var_2[1]);
+  setDvar("tempB", var_2[2]);
   return (getdvarfloat("tempR"), getdvarfloat("tempG"), getdvarfloat("tempB"));
 }
 
@@ -1637,7 +1637,7 @@ registerwatchdvarfloat(var_0, var_1) {
 registerwatchdvar(var_0, var_1) {
   var_2 = "scr_" + level.gametype + "_" + var_0;
   level.watchdvars[var_2] = spawnStruct();
-  level.watchdvars[var_2].value = getdvar(var_2, var_1);
+  level.watchdvars[var_2].value = getDvar(var_2, var_1);
   level.watchdvars[var_2].type = "string";
   level.watchdvars[var_2].notifystring = "update_" + var_0;
 }
@@ -1832,7 +1832,7 @@ isobjectivebased() {
 
 gettimelimit() {
   if(inovertime()) {
-    var_0 = float(getdvar("overtimeTimeLimit"));
+    var_0 = float(getDvar("overtimeTimeLimit"));
 
     if(!isDefined(var_0)) {
       var_0 = 1;
@@ -2144,7 +2144,7 @@ giveability(var_0, var_1) {
 _setability(var_0, var_1) {
   self.abilities[var_0] = 1;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.abilitysetfuncs[var_0])) {
       self thread[[level.abilitysetfuncs[var_0]]]();
     }
@@ -2156,7 +2156,7 @@ _setability(var_0, var_1) {
 _unsetability(var_0) {
   self.abilities[var_0] = undefined;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.abilityunsetfuncs[var_0])) {
       self thread[[level.abilityunsetfuncs[var_0]]]();
     }
@@ -2166,7 +2166,7 @@ _unsetability(var_0) {
 }
 
 _clearabilities() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level.abilityunsetfuncs[self.pers["ability"]])) {
       self[[level.abilityunsetfuncs[self.pers["ability"]]]]();
     }
@@ -2291,7 +2291,7 @@ _timeout_pause_on_death_and_prematch(var_0, var_1) {
   self endon("die");
 
   for(var_2 = 0.05; var_0 > 0; var_0 = var_0 - var_2) {
-    if(isplayer(var_1) && !isreallyalive(var_1)) {
+    if(isPlayer(var_1) && !isreallyalive(var_1)) {
       var_1 waittill("spawned_player");
     }
 
@@ -2332,7 +2332,7 @@ playdeathsound() {
 }
 
 rankingenabled() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 
@@ -2360,7 +2360,7 @@ endsceneondeath(var_0) {
 }
 
 getmapname() {
-  return getdvar("mapname");
+  return getDvar("mapname");
 }
 
 getgametypenumlives() {
@@ -2379,7 +2379,7 @@ arrayinsertion(var_0, var_1, var_2) {
 
 getproperty(var_0, var_1) {
   var_2 = var_1;
-  var_2 = getdvar(var_0, var_1);
+  var_2 = getDvar(var_0, var_1);
   return var_2;
 }
 
@@ -2889,7 +2889,7 @@ isbulletdamage(var_0) {
 }
 
 isfmjdamage(var_0, var_1, var_2) {
-  return isDefined(var_2) && isplayer(var_2) && var_2 _hasperk("specialty_bulletpenetration") && isDefined(var_1) && isbulletdamage(var_1);
+  return isDefined(var_2) && isPlayer(var_2) && var_2 _hasperk("specialty_bulletpenetration") && isDefined(var_1) && isbulletdamage(var_1);
 }
 
 initlevelflags() {
@@ -3033,7 +3033,7 @@ teamplayercardsplash(var_0, var_1, var_2, var_3) {
     if(isDefined(var_2) && var_5.team != var_2) {
       continue;
     }
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
     var_5 thread maps\mp\gametypes\_hud_message::playercardsplashnotify(var_0, var_1, var_3);
@@ -3334,7 +3334,7 @@ touchingbadtrigger() {
     }
   }
 
-  if(getdvar("g_gametype") == "hp" && isDefined(level.zone) && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
+  if(getDvar("g_gametype") == "hp" && isDefined(level.zone) && isDefined(level.zone.trig) && self istouching(level.zone.trig)) {
     return 1;
   }
 
@@ -3355,7 +3355,7 @@ killtrigger(var_0, var_1, var_2) {
   for(;;) {
     var_3 waittill("trigger", var_4);
 
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
     var_4 suicide();
@@ -3906,7 +3906,7 @@ setcommonrulesfrommatchrulesdata(var_0) {
   level.matchrules_allowcustomclasses = getmatchrulesdata("commonOption", "allowCustomClasses");
   level.customclasspickcount = getmatchrulesdata("commonOption", "classPickCount");
   setdynamicdvar("scr_game_high_jump", getmatchrulesdata("commonOption", "highJump"));
-  setdynamicdvar("jump_slowdownEnable", getdvar("scr_game_high_jump") == "0");
+  setdynamicdvar("jump_slowdownEnable", getDvar("scr_game_high_jump") == "0");
   setdynamicdvar("scr_game_hardpoints", 1);
   setdynamicdvar("scr_game_perks", 1);
   setdynamicdvar("g_hardcore", getmatchrulesdata("commonOption", "hardcoreModeOn"));
@@ -3935,7 +3935,7 @@ setcommonrulesfrommatchrulesdata(var_0) {
     setdynamicdvar("scr_game_forceuav", 0);
   }
 
-  setdvar("bg_compassShowEnemies", getdvar("scr_game_forceuav"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
 }
 
 reinitializematchrulesonmigration() {
@@ -4127,7 +4127,7 @@ isteamparticipant(var_0) {
     return 1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return 1;
   }
 
@@ -4151,7 +4151,7 @@ isgameparticipant(var_0) {
     return 1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return 1;
   }
 
@@ -4283,23 +4283,23 @@ set_rank_xp_and_prestige_for_bot() {
 
 set_console_status() {
   if(!isDefined(level.console)) {
-    level.console = getdvar("consoleGame") == "true";
+    level.console = getDvar("consoleGame") == "true";
   } else {}
 
   if(!isDefined(level.xenon)) {
-    level.xenon = getdvar("xenonGame") == "true";
+    level.xenon = getDvar("xenonGame") == "true";
   } else {}
 
   if(!isDefined(level.ps3)) {
-    level.ps3 = getdvar("ps3Game") == "true";
+    level.ps3 = getDvar("ps3Game") == "true";
   } else {}
 
   if(!isDefined(level.xb3)) {
-    level.xb3 = getdvar("xb3Game") == "true";
+    level.xb3 = getDvar("xb3Game") == "true";
   } else {}
 
   if(!isDefined(level.ps4)) {
-    level.ps4 = getdvar("ps4Game") == "true";
+    level.ps4 = getDvar("ps4Game") == "true";
   } else {}
 }
 
@@ -4317,9 +4317,9 @@ setdvar_cg_ng(var_0, var_1, var_2) {
   }
 
   if(is_gen4()) {
-    setdvar(var_0, var_2);
+    setDvar(var_0, var_2);
   } else {
-    setdvar(var_0, var_1);
+    setDvar(var_0, var_1);
   }
 }
 
@@ -4360,7 +4360,7 @@ revertvisionsetforplayer(var_0) {
 }
 
 set_light_set_for_player(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(isDefined(level.lightset_current)) {
@@ -4372,7 +4372,7 @@ set_light_set_for_player(var_0) {
 }
 
 clear_light_set_for_player() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_0 = getmapcustom("map");
@@ -4387,7 +4387,7 @@ clear_light_set_for_player() {
 }
 
 light_set_override_for_player(var_0, var_1, var_2, var_3) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self lightsetoverrideenableforplayer(var_0, var_1);

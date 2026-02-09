@@ -32,7 +32,7 @@ function __init__() {
 }
 
 function player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     attacker.kills++;
     if(isDefined(weapon)) {
       dmgweapon = weapon;

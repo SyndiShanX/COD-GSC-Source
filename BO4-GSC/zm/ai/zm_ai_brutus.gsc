@@ -315,7 +315,7 @@ brutustargetservice(entity) {
 
   goalent = entity.favoriteenemy;
 
-  if(isplayer(goalent)) {
+  if(isPlayer(goalent)) {
     goalent = zm_ai_utility::function_a2e8fd7b(entity, entity.favoriteenemy);
   }
 
@@ -548,7 +548,7 @@ function_85e8940a(entity) {
   });
 
   foreach(ent in ents) {
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       if(!zombie_utility::is_player_valid(ent, 0, 0)) {
         continue;
       }
@@ -729,7 +729,7 @@ smoke_vo(v_pos) {
   while(true) {
     waitresult = t_smoke waittill(#"trigger");
 
-    if(isplayer(waitresult.activator)) {
+    if(isPlayer(waitresult.activator)) {
       b_played = waitresult.activator zm_audio::create_and_play_dialog(#"brutus", #"smoke_react");
 
       if(isDefined(b_played) && b_played) {
@@ -748,7 +748,7 @@ function_9a4a6d02() {
 
 function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier, damageoverride) {
   if(!(isDefined(self.hashelmet) && self.hashelmet)) {
-    if(isDefined(attacker) && isplayer(attacker) && attacker hasperk(#"specialty_mod_awareness")) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker hasperk(#"specialty_mod_awareness")) {
       if(self.zm_ai_category === # "boss") {
         damage *= 1.1;
       } else {
@@ -772,7 +772,7 @@ function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier, dama
   if(self.helmethits >= self.var_905e4ce2) {
     self function_530c54e3();
 
-    if(isDefined(attacker) && isplayer(attacker) && isDefined(level.brutus_points_for_helmet)) {
+    if(isDefined(attacker) && isPlayer(attacker) && isDefined(level.brutus_points_for_helmet)) {
       attacker zm_score::add_to_player_score(zm_score::get_points_multiplier(attacker) * zm_utility::round_up_score(level.brutus_points_for_helmet, 5));
       attacker notify(#"hash_1413599b710f10bd");
     }
@@ -787,7 +787,7 @@ function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   var_81dcad68 = 1;
 
   if(self.invulnerabletime > gettime()) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker util::show_hit_marker();
     }
 
@@ -798,7 +798,7 @@ function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   var_9000ab2 = var_786d7e06.damage_scale;
   var_58640bc4 = self zm_ai_utility::function_94d76123(weapon);
 
-  if(isDefined(attacker) && isalive(attacker) && isplayer(attacker) && attacker zm_powerups::is_insta_kill_active()) {
+  if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker) && attacker zm_powerups::is_insta_kill_active()) {
     var_81dcad68 = 2;
   }
 
@@ -818,7 +818,7 @@ function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
     if(self.explosivedmgtaken >= self.explosive_dmg_req && isDefined(self.hashelmet) && self.hashelmet) {
       self function_530c54e3();
 
-      if(isDefined(attacker) && isplayer(attacker) && isDefined(level.brutus_points_for_helmet)) {
+      if(isDefined(attacker) && isPlayer(attacker) && isDefined(level.brutus_points_for_helmet)) {
         attacker zm_score::add_to_player_score(zm_score::get_points_multiplier(attacker) * zm_utility::round_up_score(level.brutus_points_for_helmet, 5));
         attacker notify(#"hash_1413599b710f10bd");
       }

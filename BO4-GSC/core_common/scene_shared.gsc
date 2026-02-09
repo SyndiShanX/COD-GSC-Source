@@ -663,7 +663,6 @@ __main__() {
     if(!isinarray(level.scene_roots, s_instance)) {
       level.scene_roots[level.scene_roots.size] = s_instance;
     }
-
   }
 
   level thread on_load_wait();
@@ -786,7 +785,7 @@ _trigger_init(trig) {
   a_ents = [];
 
   if(get_player_count(self.scriptbundlename) > 0) {
-    if(isplayer(trig.who)) {
+    if(isPlayer(trig.who)) {
       a_ents[0] = trig.who;
     }
   }
@@ -802,7 +801,7 @@ _trigger_play(trig) {
     a_ents = [];
 
     if(get_player_count(self.scriptbundlename) > 0) {
-      if(isplayer(trig.who)) {
+      if(isPlayer(trig.who)) {
         a_ents[0] = trig.who;
       }
     }
@@ -1165,11 +1164,11 @@ _load_female_scene(s_bundle, a_ents) {
   if(b_has_player) {
     e_player = undefined;
 
-    if(isplayer(a_ents)) {
+    if(isPlayer(a_ents)) {
       e_player = a_ents;
     } else if(isarray(a_ents)) {
       foreach(ent in a_ents) {
-        if(isplayer(ent)) {
+        if(isPlayer(ent)) {
           e_player = ent;
           break;
         }
@@ -1180,7 +1179,7 @@ _load_female_scene(s_bundle, a_ents) {
       e_player = level.activeplayers[0];
     }
 
-    if(isplayer(e_player) && e_player util::is_female()) {
+    if(isPlayer(e_player) && e_player util::is_female()) {
       if(isDefined(s_bundle.femalebundle)) {
         s_female_bundle = struct::get_script_bundle("scene", s_bundle.femalebundle);
 
@@ -1676,7 +1675,6 @@ _delete_scene_spawned_ents(str_scene) {
     if(isDefined(str_scene)) {
       update_debug_state(str_scene, "<dev string:x4dc>");
     }
-
   }
 }
 
@@ -2433,7 +2431,7 @@ function_63033fc3(str_notify) {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clear_scene_skipping_ui();
   }
 }
@@ -2616,7 +2614,7 @@ synced_delete(str_scene) {
   self.isdying = 1;
   self.var_a6ddd958 = str_scene;
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     sethideonclientwhenscriptedanimcompleted(self);
     self animation::stop(0);
     waitframe(1);

@@ -134,7 +134,7 @@ function on_ai_spawned() {}
 
 function on_ai_damage(s_params) {
   self.var_74390712 = undefined;
-  if(isplayer(s_params.eattacker)) {
+  if(isPlayer(s_params.eattacker)) {
     if(s_params.idflags & 8) {
       self.var_74390712 = s_params.eattacker;
     }
@@ -304,7 +304,7 @@ function private function_c4f2de38(player, victim, inflictor) {
 }
 
 function function_17ec453c(eattacker, evictim, var_433291aa) {
-  if(isDefined(eattacker.iffowner) && isplayer(eattacker.iffowner)) {
+  if(isDefined(eattacker.iffowner) && isPlayer(eattacker.iffowner)) {
     if(isDefined(eattacker.killcount)) {
       eattacker.killcount++;
     } else {
@@ -330,7 +330,7 @@ function function_fbe029db(eplayer) {
 }
 
 function on_ai_killed(s_params) {
-  if(isplayer(s_params.eattacker)) {
+  if(isPlayer(s_params.eattacker)) {
     player = s_params.eattacker;
     function_1121f26a(player, self);
     function_914b8688(player, self, s_params.weapon, s_params.einflictor);

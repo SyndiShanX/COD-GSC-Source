@@ -39,7 +39,7 @@ function_a430cceb(attacker, weapon) {
     attacker = self[[level.figure_out_attacker]](attacker);
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && concertinawire.owner !== attacker && isDefined(weapon)) {
+  if(isDefined(attacker) && isPlayer(attacker) && concertinawire.owner !== attacker && isDefined(weapon)) {
     attacker stats::function_e24eec31(weapon, #"hash_1c9da51ed1906285", 1);
   }
 

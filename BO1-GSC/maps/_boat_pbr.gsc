@@ -9,7 +9,6 @@ main(model, type) {
   build_aianims(::setanims, ::set_vehicle_anims);
   self thread attach_boat_equipment();
 }
-
 attach_boat_equipment() {
   if(self.vehicletype == "boat_pbr") {
     boat_cage = "t5_veh_boat_pbr_set01_friendly";
@@ -23,12 +22,11 @@ attach_boat_equipment() {
     self Attach(boat_deco, "tag_origin_animate");
   }
 }
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   positions[0] = spawnStruct();

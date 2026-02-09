@@ -31,7 +31,7 @@ gas_station_init() {
   self.launch_ents = [];
   self.linked_ents = [];
 
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   foreach(target_ent in targets) {
@@ -230,7 +230,6 @@ gas_station_update_clip() {
     wait(10);
     self.prone_kill_trigger Delete();
   }
-
 }
 
 gas_station_launch_ent(ent) {
@@ -309,7 +308,7 @@ gas_pump_damage_monitor(gas_station) {
   while(1) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    if(IsPlayer(attacker) || IsAgent(attacker)) {
+    if(isPlayer(attacker) || IsAgent(attacker)) {
       if(IsAgent(attacker) && isDefined(attacker.owner)) {
         attacker = attacker.owner;
       }
@@ -324,7 +323,7 @@ notify_explode(gas_station, gas_pumps) {
   self waittill("death", attacker, mod, weapon);
 
   if(!isDefined(level.player_who_caused_gas_station_explosion)) {
-    if(IsPlayer(attacker) || IsAgent(attacker)) {
+    if(isPlayer(attacker) || IsAgent(attacker)) {
       if(IsAgent(attacker) && isDefined(attacker.owner)) {
         attacker = attacker.owner;
       }
@@ -418,7 +417,7 @@ broken_wall_show() {
 }
 
 breach() {
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   maps\mp\_breach::breach_precache();
@@ -714,7 +713,6 @@ breach_open_watch() {
       default:
         break;
     }
-
   }
 
   wait door_time;
@@ -848,7 +846,6 @@ do_rubble(fxvolumes) {
         }
       }
     }
-
   }
 }
 
@@ -883,7 +880,6 @@ ceiling_rubble_watchUsage(note) {
         default:
           break;
       }
-
     }
 
     missile thread ceiling_rubble_missile_explode_watch();
@@ -946,7 +942,6 @@ search_bot() {
     search_bot waittill("movedone");
     current_node = goal_node;
   }
-
 }
 
 player_connect_watch() {

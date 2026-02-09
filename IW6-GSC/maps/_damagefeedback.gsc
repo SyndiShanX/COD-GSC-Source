@@ -30,7 +30,7 @@ stopmonitordamage() {
 }
 
 damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(!maps\_utility::is_damagefeedback_enabled()) {
@@ -51,7 +51,7 @@ damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 updatedamagefeedback(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!isDefined(var_0.team)) {

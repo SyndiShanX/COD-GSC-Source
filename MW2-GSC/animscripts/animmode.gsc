@@ -58,7 +58,7 @@ main() {
   self animMode(self._animmode);
   self clearAnim(self.root_anim, clear_time);
 
-  //	self setAnim( %body, 1, 0 );	// The %body node should always have weight 1.
+  //	self setAnim(%body, 1, 0 );	// The %body node should always have weight 1.
   self OrientMode("face angle", angles[1]);
 
   anim_string = "custom_animmode";

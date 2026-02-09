@@ -144,7 +144,6 @@ main() {
 
   if(common_scripts\utility::flag("start_plane_crash_aisle_1")) {
     level._id_5A22 = 1;
-
   }
   maps\_utility::delaythread(0.75, ::_id_5A2D, 0.05);
   var_5 = level._id_5976;
@@ -158,7 +157,6 @@ main() {
 
     if(isDefined(var_8.script_noteworthy)) {
       level._id_5976[var_6].script_noteworthy = var_8.script_noteworthy + "_new";
-
     }
     var_6++;
   }
@@ -400,7 +398,6 @@ _id_5A36(var_0, var_1, var_2, var_3) {
         var_17 = (0, 0, 0);
       } else {
         var_17 = level.player getnormalizedmovement();
-
       }
       var_18 = distance((0, 0, 0), var_17);
       var_17 = (var_17[0], var_17[1] * -1, 0);
@@ -409,7 +406,6 @@ _id_5A36(var_0, var_1, var_2, var_3) {
 
       if(isDefined(level._id_5A23)) {
         var_20 = combineangles(level._id_5A23.angles, var_20);
-
       }
       var_21 = combineangles(var_20, var_19);
       var_22 = vectornormalize(anglesToForward(var_21));
@@ -430,11 +426,9 @@ _id_5A36(var_0, var_1, var_2, var_3) {
       if(var_18 == 0 || var_27 == 0) {
         if(var_13) {
           var_0 setanim(var_9, 1, 0, 0);
-
         }
         if(var_14) {
           var_0 setanim(var_11, 1, 0, 0);
-
         }
         var_13 = 0;
         var_14 = 0;
@@ -451,7 +445,6 @@ _id_5A36(var_0, var_1, var_2, var_3) {
         var_10 = var_6;
       } else {
         var_10 = var_5;
-
       }
       var_40 = 1.0;
       var_41 = 1.0;
@@ -523,13 +516,11 @@ _id_5A36(var_0, var_1, var_2, var_3) {
         var_9 = var_10;
       } else {
         var_0 setanim(var_9, 1, 0, abs(var_27) * var_36 * 0.5 * var_16);
-
       }
       if(var_29 < 0) {
         var_12 = var_7;
       } else {
         var_12 = var_8;
-
       }
       if(var_11 != var_12) {
         var_0 clearanim(var_11, 0);
@@ -540,7 +531,6 @@ _id_5A36(var_0, var_1, var_2, var_3) {
         var_11 = var_12;
       } else {
         var_0 setanim(var_11, 1, 0, abs(var_29) * 0.5 * var_16);
-
       }
       var_13 = 1;
       var_14 = 1;
@@ -554,7 +544,6 @@ _id_5A36(var_0, var_1, var_2, var_3) {
         }
       } else {
         var_47 = 0;
-
       }
       level._id_5A3A = gettime();
       wait 0.05;
@@ -562,13 +551,11 @@ _id_5A36(var_0, var_1, var_2, var_3) {
 
       if(var_9 == var_6) {
         var_48 = 1.0 - var_48;
-
       }
       var_49 = var_0 getanimtime(var_11);
 
       if(var_11 == var_7) {
         var_49 = 1.0 - var_49;
-
       }
       _id_5A3D(var_48, var_49);
       continue;
@@ -585,7 +572,6 @@ _id_5A36(var_0, var_1, var_2, var_3) {
         var_0 setanimtime(var_11, 0.8);
       } else if(var_50 < 0.35) {
         var_0 setanimtime(var_11, 0.35);
-
       }
       var_0 setanim(var_11, 1.0, 0.0, 0.0);
       wait 0.85;
@@ -665,7 +651,6 @@ _id_5A40() {
 _id_5A41(var_0, var_1) {
   if(!isDefined(level._id_5A42)) {
     level._id_5A42 = common_scripts\utility::spawn_tag_origin();
-
   }
   level._id_5A42.origin = var_0 gettagorigin("J_Mid_Section");
   var_2 = level._id_5A42 maps\_shg_common::_id_1683(self.origin);
@@ -674,7 +659,7 @@ _id_5A41(var_0, var_1) {
 
   if(isai(self)) {
     self forceteleport(var_3, self.angles);
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     level._id_5A42.origin = var_3;
     level._id_5A42.angles = self getplayerangles();
     maps\_utility::_id_1FDF(level._id_5A42);
@@ -715,7 +700,6 @@ _id_5A44() {
 
   if(isDefined(self._id_0D04) && self._id_0D04) {
     maps\_utility::_id_1902();
-
   }
   self._id_0D45 = undefined;
   waittillframeend;
@@ -770,7 +754,7 @@ _id_5A49() {
   var_1 = getanimlength(var_0 maps\_utility::_id_1281("crash_fall_out"));
   level._id_5976[0] thread maps\_anim::_id_1246(var_0, "crash_fall_out", level._id_5A24);
   wait(var_1 - 0.5);
-  setdvar("ui_deadquote", &"HIJACK_FELL_OUT_OF_PLANE");
+  setDvar("ui_deadquote", &"HIJACK_FELL_OUT_OF_PLANE");
   level notify("mission failed");
   maps\_utility::_id_1826();
 }
@@ -887,7 +871,6 @@ _id_5A53(var_0) {
 
   if(level._id_5A22) {
     var_2 = getent("crash_player_dest_1", "script_noteworthy");
-
   }
   var_3 = vectortoangles(var_1.origin - var_2.origin);
   var_3 = (0, var_3[1], 0);

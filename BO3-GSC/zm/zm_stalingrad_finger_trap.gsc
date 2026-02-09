@@ -125,18 +125,18 @@ function function_f5af37c6(var_3778532a) {
     self waittill("trigger", e_who);
     if(!(isDefined(e_who.var_bd3a4420) && e_who.var_bd3a4420)) {
       if(e_who.health <= 20000) {
-        if(!isplayer(e_who) && isDefined(var_3778532a)) {
+        if(!isPlayer(e_who) && isDefined(var_3778532a)) {
           var_3778532a notify("hash_2637f64f");
           var_3778532a zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
         }
         if(e_who.archetype === "zombie") {
           e_who thread zombie_utility::zombie_gut_explosion();
         }
-      } else if(!isplayer(e_who)) {
+      } else if(!isPlayer(e_who)) {
         e_who.var_bd3a4420 = 1;
         e_who thread function_fe885d6b();
       }
-      if(isplayer(e_who) && e_who issliding()) {
+      if(isPlayer(e_who) && e_who issliding()) {
         continue;
       }
       e_who dodamage(20000, e_who.origin, self, undefined, "none", "MOD_IMPACT");

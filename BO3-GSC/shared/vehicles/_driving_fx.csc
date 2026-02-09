@@ -124,7 +124,6 @@ class vehiclewheelfx {
     ground_fx["tread"].id = "";
     ground_fx["tread"].handle = -1;
   }
-
 }
 
 class vehicle_camera_fx {
@@ -167,7 +166,6 @@ class vehicle_camera_fx {
     quake_strength_max = s_max;
     rumble_name = (rumble != "" ? rumble : rumble_name);
   }
-
 }
 
 #namespace driving_fx;
@@ -176,7 +174,7 @@ function vehicle_enter(localclientnum) {
   self endon("entityshutdown");
   while(true) {
     self waittill("enter_vehicle", user);
-    if(isDefined(user) && user isplayer()) {
+    if(isDefined(user) && user isPlayer()) {
       self thread collision_thread(localclientnum);
       self thread jump_landing_thread(localclientnum);
     }

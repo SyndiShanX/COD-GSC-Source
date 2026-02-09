@@ -143,7 +143,7 @@ laser_targeting_device()
 			self LaserHideFromClient( level.ac130gunner );
 			self.laserForceOn = true;
 
-			if( getdvar( "ac130_force_perspective_laser" ) == "1" )
+			if( getDvar( "ac130_force_perspective_laser" ) == "1" )
 			{
 				self.fake_laser = spawn( "script_model", self getEye() );
 				self.fake_laser.angles = self getplayerangles();

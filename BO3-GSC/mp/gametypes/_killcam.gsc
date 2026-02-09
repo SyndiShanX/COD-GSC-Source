@@ -725,7 +725,7 @@ function get_killcam_entity(attacker, einflictor, weapon) {
   if(weapon.name == "hero_gravityspikes") {
     return undefined;
   }
-  if(isDefined(attacker) && isplayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
     if(weapon.name == "sentinel_turret" || weapon.name == "helicopter_gunner_turret_primary" || weapon.name == "helicopter_gunner_turret_secondary" || weapon.name == "helicopter_gunner_turret_tertiary" || weapon.name == "amws_gun_turret_mp_player" || weapon.name == "auto_gun_turret") {
       return undefined;
     }

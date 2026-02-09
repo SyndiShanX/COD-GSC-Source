@@ -62,7 +62,7 @@ main() {
   thread maps\factory_audio::mission_music();
   thread maps\factory_fx::lgt_vision_fog_init();
   thread maps\factory_fx::fx_init();
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
   setsaveddvar("r_reactiveMotionPlayerRadius", 5.0);
 
   if(level.ps3 == 1)

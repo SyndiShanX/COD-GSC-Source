@@ -65,7 +65,7 @@ function wait_for_throw_status() {
 
 function activatedart(killstreaktype) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   if(!player killstreakrules::iskillstreakallowed("dart", player.team)) {
     return 0;
   }
@@ -102,7 +102,7 @@ function cleanup_grenade() {
 }
 
 function watchthrow(missileweapon) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   playerentnum = player.entnum;
   player endon("disconnect");
@@ -180,7 +180,7 @@ function check_launch_space(origin) {
 
 function spawndart(grenade, killstreak_id, spawn_origin) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   playerentnum = player.entnum;
   player_angles = player getplayerangles();
   grenade cleanup_grenade();
@@ -259,7 +259,7 @@ function waitremotecontrol() {
 
 function startdartremotecontrol(dart) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   if(!dart.is_shutting_down) {
     player.dart_thrown_time = undefined;
     dart usevehicle(player, 0);
@@ -588,7 +588,7 @@ function isvaliddartmissiletarget(ent) {
   if(!isDefined(ent)) {
     return false;
   }
-  entisplayer = isplayer(ent);
+  entisplayer = isPlayer(ent);
   if(entisplayer && !isalive(ent)) {
     return false;
   }
@@ -610,14 +610,14 @@ function isvaliddartmissiletarget(ent) {
 
 function isstillvaliddartmissiletarget(ent, weapon) {
   player = self;
-  if(!(target_istarget(ent) || isplayer(ent)) && (!(isDefined(ent.allowcontinuedlockonafterinvis) && ent.allowcontinuedlockonafterinvis))) {
+  if(!(target_istarget(ent) || isPlayer(ent)) && (!(isDefined(ent.allowcontinuedlockonafterinvis) && ent.allowcontinuedlockonafterinvis))) {
     return false;
   }
   dart = player getvehicleoccupied();
   if(!isDefined(dart)) {
     return false;
   }
-  entisplayer = isplayer(ent);
+  entisplayer = isPlayer(ent);
   if(entisplayer && !isalive(ent)) {
     return false;
   }

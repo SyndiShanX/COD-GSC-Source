@@ -1,6 +1,6 @@
 /********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_theater.csc
+ * Script: clientscripts\zombie_theater\.csc
 ********************************************/
 
 #include clientscripts\_utility;
@@ -23,12 +23,10 @@ main() {
   level thread theater_light_model_swap_init();
   register_zombie_types();
 }
-
 register_zombie_types() {
   character\clientscripts\c_ger_honorguard_zt::register_gibs();
   character\clientscripts\c_zom_quad::register_gibs();
 }
-
 include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("claymore_zm", false);
@@ -96,13 +94,11 @@ include_weapons() {
   include_weapon("crossbow_explosive_zm");
   include_weapon("crossbow_explosive_upgraded_zm", false);
 }
-
 init_theater_box_indicator() {
   level._custom_box_monitor = ::theater_box_monitor;
   level._box_locations = array("start_chest_loc", "foyer_chest_loc", "crematorium_chest_loc", "alleyway_chest_loc", "control_chest_loc", "stage_chest_loc", "dressing_chest_loc", "dining_chest_loc", "theater_chest_loc");
   OnPlayerConnect_Callback(::init_board_lights);
 }
-
 init_board_lights(clientNum) {
   structs = getstructarray("magic_box_loc_light", "targetname");
   for(j = 0; j < structs.size; j++) {
@@ -123,7 +119,6 @@ init_board_lights(clientNum) {
     s.lights[clientNum] setModel("zombie_zapper_cagelight");
   }
 }
-
 get_lights(clientNum, name) {
   structs = getstructarray(name, "script_noteworthy");
   lights = [];
@@ -132,14 +127,12 @@ get_lights(clientNum, name) {
   }
   return (lights);
 }
-
 turn_off_all_box_lights(clientNum) {
   level notify("kill_box_light_threads_" + clientNum);
   for(i = 0; i < level._box_locations.size; i++) {
     turn_off_light(clientNum, i);
   }
 }
-
 flash_lights(clientNum, period) {
   level notify("kill_box_light_threads_" + clientNum);
   level endon("kill_box_light_threads_" + clientNum);
@@ -154,7 +147,6 @@ flash_lights(clientNum, period) {
     }
   }
 }
-
 turn_light_red(clientNum, light_num, play_fx) {
   if(light_num == level._BOX_INDICATOR_NO_LIGHTS) {
     return;
@@ -177,7 +169,6 @@ turn_light_red(clientNum, light_num, play_fx) {
     }
   }
 }
-
 turn_light_green(clientNum, light_num, play_fx) {
   if(light_num == level._BOX_INDICATOR_NO_LIGHTS) {
     return;
@@ -200,7 +191,6 @@ turn_light_green(clientNum, light_num, play_fx) {
     }
   }
 }
-
 turn_off_light(clientNum, light_num, dont_kill_threads) {
   if(!isDefined(dont_kill_threads)) {
     level notify("kill_box_light_threads_" + clientNum);
@@ -218,7 +208,6 @@ turn_off_light(clientNum, light_num, dont_kill_threads) {
     lights[i] setModel("zombie_zapper_cagelight");
   }
 }
-
 theater_box_monitor(clientNum, state, oldState) {
   s = Int(state);
   if(s == level._BOX_INDICATOR_NO_LIGHTS) {
@@ -239,13 +228,12 @@ theater_box_monitor(clientNum, state, oldState) {
     }
   }
 }
-
 theatre_ZPO_listener() {
   while(1) {
     level waittill("ZPO");
     level._power_on = true;
     if(level._box_indicator != level._BOX_INDICATOR_NO_LIGHTS) {
-      for(i = 0; i < getLocalPlayers().size; i++) {
+      for(i = 0; i < getlocalplayers().size; i++) {
         theater_box_monitor(i, level._box_indicator);
       }
     }
@@ -253,7 +241,6 @@ theatre_ZPO_listener() {
     level notify("pl1");
   }
 }
-
 eeroom_visionset_init() {
   eeroom_visionset_triggers = getEntArray(0, "trigger_eeroom_visionset", "targetname");
   if(!isDefined(eeroom_visionset_triggers)) {
@@ -261,7 +248,6 @@ eeroom_visionset_init() {
   }
   array_thread(eeroom_visionset_triggers, ::theater_player_in_eeroom);
 }
-
 theater_player_in_eeroom() {
   while(1) {
     self waittill("trigger", ent_player);
@@ -270,7 +256,6 @@ theater_player_in_eeroom() {
     }
   }
 }
-
 eeroom_visionset_on(ent_player) {
   if(!isDefined(self.script_string)) {
     return;
@@ -278,29 +263,27 @@ eeroom_visionset_on(ent_player) {
   wait(1.0);
   switch (self.script_string) {
     case "asylum_room":
-      visionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_eroom_asylum", 0);
+      VisionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_eroom_asylum", 0);
       break;
     case "pentagon_room":
-      visionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_erooms_pentagon", 0);
+      VisionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_erooms_pentagon", 0);
       break;
     case "girls_new_room":
-      visionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_eroom_girlnew", 0);
+      VisionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_eroom_girlnew", 0);
       break;
     case "girls_old_room":
-      visionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_eroom_girlold", 0);
+      VisionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater_eroom_girlold", 0);
       break;
     default:
-      visionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater", 0);
+      VisionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater", 0);
       break;
   }
 }
-
 eeroom_visionset_off(ent_player) {
-  visionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater", 0);
+  VisionSetNaked(ent_player GetLocalClientNumber(), "zombie_theater", 0);
 }
-
 theater_light_model_swap_init() {
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     theater_light_models = getEntArray(i, "model_lights_on", "targetname");
     if(isDefined(theater_light_models) && theater_light_models.size > 0) {
@@ -308,7 +291,6 @@ theater_light_model_swap_init() {
     }
   }
 }
-
 theater_light_model_swap() {
   level waittill("ZPO");
   if(self.model == "lights_hang_single") {

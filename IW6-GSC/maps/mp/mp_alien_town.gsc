@@ -55,7 +55,7 @@ main() {
   maps\createart\mp_alien_town_art::main();
   maps\mp\mp_alien_town_fx::main();
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", 0.15);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 0.15);
 
   level.craftingEasy = 0;
   level.craftingMedium = 0;

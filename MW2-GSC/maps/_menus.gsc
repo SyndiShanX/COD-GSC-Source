@@ -603,7 +603,6 @@ collapseMenu(transTime) {
     if(itemDef.itemType == "subMenu")
       itemDef.caretIcon destroyElem();
   }
-
 }
 
 expandMenu(transTime) {
@@ -774,7 +773,7 @@ onDPadLeft() {
   focusedItem = self.itemDefs[self.selectedIndex];
 
   if(focusedItem.itemType == "settingMenu") {
-    dvarCurrent = getdvar(focusedItem.setting.dvar);
+    dvarCurrent = getDvar(focusedItem.setting.dvar);
     dvarValues = focusedItem.setting.value;
 
     indexNew = 0;
@@ -789,7 +788,7 @@ onDPadLeft() {
       if(indexNew >= 0) {
         focusedItem.setting.index = indexNew;
 
-        setdvar(focusedItem.setting.dvar, dvarValues[indexNew]);
+        setDvar(focusedItem.setting.dvar, dvarValues[indexNew]);
         focusedItem updateDisplayValue();
         println("Setting: " + focusedItem.setting.dvar + " to " + dvarValues[indexNew]);
         level.player playSound("mouse_over");
@@ -804,7 +803,7 @@ onDPadRight() {
   focusedItem = self.itemDefs[self.selectedIndex];
 
   if(focusedItem.itemType == "settingMenu") {
-    dvarCurrent = getdvar(focusedItem.setting.dvar);
+    dvarCurrent = getDvar(focusedItem.setting.dvar);
     dvarValues = focusedItem.setting.value;
 
     indexNew = 0;
@@ -819,7 +818,7 @@ onDPadRight() {
       if(indexNew <= focusedItem.setting.value.size - 1) {
         focusedItem.setting.index = indexNew;
 
-        setdvar(focusedItem.setting.dvar, dvarValues[indexNew]);
+        setDvar(focusedItem.setting.dvar, dvarValues[indexNew]);
         focusedItem updateDisplayValue();
         level.player playSound("mouse_over");
         println("Setting: " + focusedItem.setting.dvar + " to " + dvarValues[indexNew]);
@@ -832,32 +831,32 @@ onDPadRight() {
 
 initThumbstickLayout() {
   // update to use the real dvars when code will allow it
-  setdvar("controls_sticksConfig", "thumbstick_default");
+  setDvar("controls_sticksConfig", "thumbstick_default");
 }
 
 initButtonLayout() {
   // update to use the real dvars when code will allow it
-  setdvar("controls_buttonConfig", "buttons_default");
+  setDvar("controls_buttonConfig", "buttons_default");
 }
 
 initSensitivity() {
   // update to use the real dvars when code will allow it
-  setdvar("controls_sensitivityConfig", "sensitivity_medium");
+  setDvar("controls_sensitivityConfig", "sensitivity_medium");
 }
 
 initInversion() {
   // update to use the real dvars when code will allow it
-  setdvar("controls_inversionConfig", "inversion_disabled");
+  setDvar("controls_inversionConfig", "inversion_disabled");
 }
 
 initAutoAim() {
   // update to use the real dvars when code will allow it
-  setdvar("controls_autoaimConfig", "autoaim_enabled");
+  setDvar("controls_autoaimConfig", "autoaim_enabled");
 }
 
 initVibration() {
   // update to use the real dvars when code will allow it
-  setdvar("controls_vibrationConfig", "vibration_enabled");
+  setDvar("controls_vibrationConfig", "vibration_enabled");
 }
 
 updateDisplayValue() {

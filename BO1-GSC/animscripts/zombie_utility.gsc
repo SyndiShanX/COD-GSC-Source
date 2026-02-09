@@ -9,6 +9,7 @@
 #include common_scripts\utility;
 #include maps\_utility;
 #using_animtree("generic_human");
+
 initAnimTree(animscript) {
   if(isValidEnemy(self.a.personImMeleeing)) {
     ImNotMeleeing(self.a.personImMeleeing);
@@ -23,12 +24,10 @@ initAnimTree(animscript) {
   self.a.script = animscript;
   [[self.a.StopCowering]]();
 }
-
 UpdateAnimPose() {
   assertEX(self.a.movement == "stop" || self.a.movement == "walk" || self.a.movement == "run", "UpdateAnimPose " + self.a.pose + " " + self.a.movement);
   self.desired_anim_pose = undefined;
 }
-
 initialize(animscript) {
   if(isDefined(self.longDeathStarting)) {
     if(animscript != "pain" && animscript != "death") {
@@ -64,7 +63,6 @@ initialize(animscript) {
   initAnimTree(animscript);
   UpdateAnimPose();
 }
-
 should_find_a_new_node() {
   self.a.next_move_to_new_cover--;
   if(self.a.next_move_to_new_cover > 0) {
@@ -73,11 +71,10 @@ should_find_a_new_node() {
   anim_set_next_move_to_new_cover();
   return true;
 }
-
 badplacer(time, org, radius) {
   for(i = 0; i < time * 20; i++) {
     for(p = 0; p < 10; p++) {
-      angles = (0, randomInt(360), 0);
+      angles = (0, RandomInt(360), 0);
       forward = anglesToForward(angles);
       scale = vector_scale(forward, radius);
       line(org, org + scale, (1, 0.3, 0.3));
@@ -85,7 +82,6 @@ badplacer(time, org, radius) {
     wait(0.05);
   }
 }
-
 printDisplaceInfo() {
   self endon("death");
   self notify("displaceprint");
@@ -95,7 +91,6 @@ printDisplaceInfo() {
     wait(0.05);
   }
 }
-
 getOldRadius() {
   self notify("newOldradius");
   self endon("newOldradius");
@@ -103,15 +98,13 @@ getOldRadius() {
   wait(6);
   self.goalradius = self.a.oldgoalradius;
 }
-
 IsInCombat() {
   if(isValidEnemy(self.enemy)) {
-    self.a.combatEndTime = GetTime() + anim.combatMemoryTimeConst + randomInt(anim.combatMemoryTimeRand);
+    self.a.combatEndTime = GetTime() + anim.combatMemoryTimeConst + RandomInt(anim.combatMemoryTimeRand);
     return true;
   }
   return (self.a.combatEndTime > GetTime());
 }
-
 GetNodeYawToOrigin(pos) {
   if(isDefined(self.node)) {
     yaw = self.node.angles[1] - GetYaw(pos);
@@ -121,7 +114,6 @@ GetNodeYawToOrigin(pos) {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetNodeYawToEnemy() {
   pos = undefined;
   if(isValidEnemy(self.enemy)) {
@@ -143,7 +135,6 @@ GetNodeYawToEnemy() {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetCoverNodeYawToEnemy() {
   pos = undefined;
   if(isValidEnemy(self.enemy)) {
@@ -157,14 +148,12 @@ GetCoverNodeYawToEnemy() {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetYawToSpot(spot) {
   pos = spot;
   yaw = self.angles[1] - GetYaw(pos);
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetYawToEnemy() {
   pos = undefined;
   if(isValidEnemy(self.enemy)) {
@@ -178,17 +167,14 @@ GetYawToEnemy() {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetYaw(org) {
   angles = VectorToAngles(org - self.origin);
   return angles[1];
 }
-
 GetYaw2d(org) {
   angles = VectorToAngles((org[0], org[1], 0) - (self.origin[0], self.origin[1], 0));
   return angles[1];
 }
-
 AbsYawToEnemy() {
   assert(isValidEnemy(self.enemy));
   yaw = self.angles[1] - GetYaw(self.enemy.origin);
@@ -198,7 +184,6 @@ AbsYawToEnemy() {
   }
   return yaw;
 }
-
 AbsYawToEnemy2d() {
   assert(isValidEnemy(self.enemy));
   yaw = self.angles[1] - GetYaw2d(self.enemy.origin);
@@ -208,7 +193,6 @@ AbsYawToEnemy2d() {
   }
   return yaw;
 }
-
 AbsYawToOrigin(org) {
   yaw = self.angles[1] - GetYaw(org);
   yaw = AngleClamp180(yaw);
@@ -217,7 +201,6 @@ AbsYawToOrigin(org) {
   }
   return yaw;
 }
-
 AbsYawToAngles(angles) {
   yaw = self.angles[1] - angles;
   yaw = AngleClamp180(yaw);
@@ -226,43 +209,36 @@ AbsYawToAngles(angles) {
   }
   return yaw;
 }
-
 GetYawFromOrigin(org, start) {
   angles = VectorToAngles(org - start);
   return angles[1];
 }
-
 GetYawToTag(tag, org) {
   yaw = self GetTagAngles(tag)[1] - GetYawFromOrigin(org, self GetTagOrigin(tag));
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetYawToOrigin(org) {
   yaw = self.angles[1] - GetYaw(org);
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetEyeYawToOrigin(org) {
   yaw = self GetTagAngles("TAG_EYE")[1] - GetYaw(org);
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetCoverNodeYawToOrigin(org) {
   yaw = self.coverNode.angles[1] + self.animarray["angle_step_out"][self.a.cornerMode] - GetYaw(org);
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 isStanceAllowedWrapper(stance) {
   if(isDefined(self.coverNode)) {
     return self.coverNode doesNodeAllowStance(stance);
   }
   return self IsStanceAllowed(stance);
 }
-
 choosePose(preferredPose) {
   if(!isDefined(preferredPose)) {
     preferredPose = self.a.pose;
@@ -298,7 +274,6 @@ choosePose(preferredPose) {
   }
   return resultPose;
 }
-
 okToMelee(person) {
   assert(isDefined(person));
   if(isDefined(self.a.personImMeleeing)) {
@@ -320,7 +295,6 @@ okToMelee(person) {
   assert(!isDefined(person.a.personMeleeingMe));
   return true;
 }
-
 IAmMeleeing(person) {
   assert(isDefined(person));
   assert(!isDefined(person.a.personMeleeingMe));
@@ -328,7 +302,6 @@ IAmMeleeing(person) {
   person.a.personMeleeingMe = self;
   self.a.personImMeleeing = person;
 }
-
 ImNotMeleeing(person) {
   if((isDefined(person)) && (isDefined(self.a.personImMeleeing)) && (self.a.personImMeleeing == person)) {
     assert(isDefined(person.a.personMeleeingMe));
@@ -344,7 +317,6 @@ ImNotMeleeing(person) {
   assert(!isDefined(person) || !isDefined(self.a.personImMeleeing) || (self.a.personImMeleeing != person));
   assert(!isDefined(person) || !isDefined(person.a.personMeleeingMe) || (person.a.personMeleeingMe != self));
 }
-
 GetClaimedNode() {
   myNode = self.node;
   if(isDefined(myNode) && (self nearNode(myNode) || (isDefined(self.coverNode) && myNode == self.coverNode))) {
@@ -352,7 +324,6 @@ GetClaimedNode() {
   }
   return undefined;
 }
-
 GetNodeType() {
   myNode = GetClaimedNode();
   if(isDefined(myNode)) {
@@ -360,7 +331,6 @@ GetNodeType() {
   }
   return "none";
 }
-
 GetNodeDirection() {
   myNode = GetClaimedNode();
   if(isDefined(myNode)) {
@@ -368,7 +338,6 @@ GetNodeDirection() {
   }
   return self.desiredAngle;
 }
-
 GetNodeForward() {
   myNode = GetClaimedNode();
   if(isDefined(myNode)) {
@@ -376,7 +345,6 @@ GetNodeForward() {
   }
   return anglesToForward(self.angles);
 }
-
 GetNodeOrigin() {
   myNode = GetClaimedNode();
   if(isDefined(myNode)) {
@@ -384,19 +352,16 @@ GetNodeOrigin() {
   }
   return self.origin;
 }
-
 safemod(a, b) {
   result = int(a) % b;
   result += b;
   return result % b;
 }
-
 AngleClamp(angle) {
   angleFrac = angle / 360.0;
   angle = (angleFrac - floor(angleFrac)) * 360.0;
   return angle;
 }
-
 QuadrantAnimWeights(yaw) {
   forwardWeight = (90 - abs(yaw)) / 90;
   leftWeight = (90 - AbsAngleClamp180(abs(yaw - 90))) / 90;
@@ -436,7 +401,6 @@ QuadrantAnimWeights(yaw) {
   }
   return result;
 }
-
 getQuadrant(angle) {
   angle = AngleClamp(angle);
   if(angle < 45 || angle > 315) {
@@ -450,7 +414,6 @@ getQuadrant(angle) {
   }
   return quadrant;
 }
-
 IsInSet(input, set) {
   for(i = set.size - 1; i >= 0; i--) {
     if(input == set[i]) {
@@ -459,7 +422,6 @@ IsInSet(input, set) {
   }
   return false;
 }
-
 playAnim(animation) {
   if(isDefined(animation)) {
     println("NOW PLAYING: ", animation);
@@ -471,14 +433,12 @@ playAnim(animation) {
     self notify("enddrawstring");
   }
 }
-
 NotifyAfterTime(notifyString, killmestring, time) {
   self endon("death");
   self endon(killmestring);
   wait time;
   self notify(notifyString);
 }
-
 drawString(stringtodraw) {
   self endon("killanimscript");
   self endon("enddrawstring");
@@ -487,7 +447,6 @@ drawString(stringtodraw) {
     Print3d((self GetDebugEye()) + (0, 0, 8), stringtodraw, (1, 1, 1), 1, 0.2);
   }
 }
-
 drawStringTime(msg, org, color, timer) {
   maxtime = timer * 20;
   for(i = 0; i < maxtime; i++) {
@@ -495,7 +454,6 @@ drawStringTime(msg, org, color, timer) {
     wait .05;
   }
 }
-
 showLastEnemySightPos(string) {
   self notify("got known enemy2");
   self endon("got known enemy2");
@@ -516,9 +474,8 @@ showLastEnemySightPos(string) {
     Print3d(self.lastEnemySightPos, string, color, 1, 2.15);
   }
 }
-
 tryTurret(targetname) {
-  turret = getEnt(targetname, "targetname");
+  turret = getent(targetname, "targetname");
   if(!isDefined(turret)) {
     return false;
   }
@@ -538,12 +495,10 @@ tryTurret(targetname) {
     return false;
   }
 }
-
 debugTimeout() {
   wait(5);
   self notify("timeout");
 }
-
 debugPosInternal(org, string, size) {
   self endon("death");
   self notify("stop debug " + org);
@@ -561,15 +516,12 @@ debugPosInternal(org, string, size) {
     Print3d(org, string, color, 1, size);
   }
 }
-
 debugPos(org, string) {
   thread debugPosInternal(org, string, 2.15);
 }
-
 debugPosSize(org, string, size) {
   thread debugPosInternal(org, string, size);
 }
-
 showDebugProc(fromPoint, toPoint, color, printTime) {
   self endon("death");
   timer = printTime * 20;
@@ -578,11 +530,9 @@ showDebugProc(fromPoint, toPoint, color, printTime) {
     line(fromPoint, toPoint, color);
   }
 }
-
 showDebugLine(fromPoint, toPoint, color, printTime) {
   self thread showDebugProc(fromPoint, toPoint + (0, 0, -5), color, printTime);
 }
-
 setEnv(env) {
   anim.idleAnimTransition["stand"]["in"] = % casual_stand_idle_trans_in;
   anim.idleAnimArray["stand"][0][0] = % casual_stand_idle;
@@ -635,7 +585,6 @@ setEnv(env) {
     array_thread(getspawnerarray(), ::PersonalColdBreathSpawner);
   }
 }
-
 PersonalColdBreath() {
   tag = "TAG_EYE";
   self endon("death");
@@ -650,7 +599,6 @@ PersonalColdBreath() {
     }
   }
 }
-
 PersonalColdBreathSpawner() {
   self endon("death");
   self notify("stop personal effect");
@@ -663,7 +611,6 @@ PersonalColdBreathSpawner() {
     Spawn thread PersonalColdBreath();
   }
 }
-
 getNodeOffset(node) {
   if(isDefined(node.offset)) {
     return node.offset;
@@ -709,11 +656,9 @@ getNodeOffset(node) {
   node.offset = nodeOffset;
   return node.offset;
 }
-
 calculateNodeOffset(right, forward, baseoffset) {
   return vector_scale(right, baseoffset[0]) + vector_scale(forward, baseoffset[1]) + (0, 0, baseoffset[2]);
 }
-
 checkPitchVisibility(fromPoint, toPoint, atNode) {
   pitch = AngleClamp180(VectorToAngles(toPoint - fromPoint)[0]);
   if(abs(pitch) > 45) {
@@ -726,7 +671,6 @@ checkPitchVisibility(fromPoint, toPoint, atNode) {
   }
   return true;
 }
-
 showLines(start, end, end2) {
   for(;;) {
     line(start, end, (1, 0, 0), 1);
@@ -735,10 +679,9 @@ showLines(start, end, end2) {
     wait(0.05);
   }
 }
-
 anim_array(animArray, animWeights) {
   total_anims = animArray.size;
-  idleanim = randomInt(total_anims);
+  idleanim = RandomInt(total_anims);
   assert(total_anims);
   assert(animArray.size == animWeights.size);
   if(total_anims == 1) {
@@ -761,15 +704,12 @@ anim_array(animArray, animWeights) {
   }
   return animArray[idleanim];
 }
-
 notForcedCover() {
   return ((self.a.forced_cover == "none") || (self.a.forced_cover == "Show"));
 }
-
 forcedCover(msg) {
   return isDefined(self.a.forced_cover) && (self.a.forced_cover == msg);
 }
-
 print3dtime(timer, org, msg, color, alpha, scale) {
   newtime = timer / 0.05;
   for(i = 0; i < newtime; i++) {
@@ -777,7 +717,6 @@ print3dtime(timer, org, msg, color, alpha, scale) {
     wait(0.05);
   }
 }
-
 print3drise(org, msg, color, alpha, scale) {
   newtime = 5 / 0.05;
   up = 0;
@@ -788,32 +727,26 @@ print3drise(org, msg, color, alpha, scale) {
     wait(0.05);
   }
 }
-
 crossproduct(vec1, vec2) {
   return (vec1[0] * vec2[1] - vec1[1] * vec2[0] > 0);
 }
-
 scriptChange() {
   self.a.current_script = "none";
   self notify(anim.scriptChange);
 }
-
 delayedScriptChange() {
   wait(0.05);
   scriptChange();
 }
-
 getGrenadeModel() {
   return getWeaponModel(self.grenadeweapon);
 }
-
 sawEnemyMove(timer) {
   if(!isDefined(timer)) {
     timer = 500;
   }
   return (GetTime() - self.personalSightTime < timer);
 }
-
 canThrowGrenade() {
   if(!self.grenadeAmmo) {
     return false;
@@ -821,11 +754,10 @@ canThrowGrenade() {
   if(self.script_forceGrenade) {
     return true;
   }
-  return (IsPlayer(self.enemy));
+  return (isPlayer(self.enemy));
 }
-
 random_weight(array) {
-  idleanim = randomInt(array.size);
+  idleanim = RandomInt(array.size);
   if(array.size > 1) {
     anim_weight = 0;
     for(i = 0; i < array.size; i++) {
@@ -843,7 +775,6 @@ random_weight(array) {
   }
   return idleanim;
 }
-
 removeableHat() {
   if(!isDefined(self.hatmodel)) {
     return false;
@@ -853,18 +784,15 @@ removeableHat() {
   }
   return (!isDefined(anim.noHat[self.model]));
 }
-
 metalHat() {
   if(!isDefined(self.hatmodel)) {
     return false;
   }
   return (isDefined(anim.metalHat[self.model]));
 }
-
 fatGuy() {
   return (isDefined(anim.fatGuy[self.model]));
 }
-
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
@@ -875,7 +803,6 @@ setFootstepEffect(name, fx) {
   level._effect["step_" + name] = fx;
   anim.optionalStepEffectFunction = animscripts\zombie_shared::playFootStepEffect;
 }
-
 persistentDebugLine(start, end) {
   self endon("death");
   level notify("newdebugline");
@@ -885,15 +812,12 @@ persistentDebugLine(start, end) {
     wait(0.05);
   }
 }
-
 isNodeDontStand() {
   return (self.spawnflags & 4) == 4;
 }
-
 isNodeDontCrouch() {
   return (self.spawnflags & 8) == 8;
 }
-
 doesNodeAllowStance(stance) {
   if(stance == "stand") {
     return !self isNodeDontStand();
@@ -902,40 +826,34 @@ doesNodeAllowStance(stance) {
     return !self isNodeDontCrouch();
   }
 }
-
 animArray(animname) {
   assert(isDefined(self.a.array));
   return self.a.array[animname];
 }
-
 animArrayAnyExist(animname) {
   assert(isDefined(self.a.array));
   return self.a.array[animname].size > 0;
 }
-
 animArrayPickRandom(animname) {
   assert(isDefined(self.a.array));
   assert(self.a.array[animname].size > 0);
   if(self.a.array[animname].size > 1) {
-    index = randomInt(self.a.array[animname].size);
+    index = RandomInt(self.a.array[animname].size);
   } else {
     index = 0;
   }
   return self.a.array[animname][index];
 }
-
 getAnimEndPos(theanim) {
   moveDelta = getMoveDelta(theanim, 0, 1);
   return self localToWorldCoords(moveDelta);
 }
-
 isValidEnemy(enemy) {
   if(!isDefined(enemy)) {
     return false;
   }
   return true;
 }
-
 damageLocationIsAny(a, b, c, d, e, f, g, h, i, j, k, ovr) {
   if(!isDefined(a)) return false;
   if(self.damageLocation == a) return true;
@@ -962,7 +880,6 @@ damageLocationIsAny(a, b, c, d, e, f, g, h, i, j, k, ovr) {
   assert(!isDefined(ovr));
   return false;
 }
-
 ragdollDeath(moveAnim) {
   self endon("killanimscript");
   lastOrg = self.origin;
@@ -982,64 +899,52 @@ ragdollDeath(moveAnim) {
     }
   }
 }
-
 isCQBWalking() {
   return isDefined(self.cqbwalking) && self.cqbwalking;
 }
-
 squared(value) {
   return value * value;
 }
-
 randomizeIdleSet() {
-  self.a.idleSet = randomInt(2);
+  self.a.idleSet = RandomInt(2);
 }
-
 getRandomIntFromSeed(intSeed, intMax) {
   assert(intMax > 0);
   index = intSeed % anim.randomIntTableSize;
   return anim.randomIntTable[index] % intMax;
 }
-
 is_banzai() {
   return isDefined(self.banzai) && self.banzai;
 }
-
 is_heavy_machine_gun() {
   return isDefined(self.heavy_machine_gunner) && self.heavy_machine_gunner;
 }
-
 is_zombie() {
   if(isDefined(self.is_zombie) && self.is_zombie) {
     return true;
   }
   return false;
 }
-
 is_civilian() {
   if(isDefined(self.is_civilian) && self.is_civilian) {
     return true;
   }
   return false;
 }
-
 is_zombie_gibbed() {
   return (self is_zombie() && self.gibbed);
 }
-
 set_zombie_gibbed() {
   if(self is_zombie()) {
     self.gibbed = true;
   }
 }
-
 is_skeleton(skeleton) {
   if((skeleton == "base") && IsSubStr(get_skeleton(), "scaled")) {
     return true;
   }
   return (get_skeleton() == skeleton);
 }
-
 get_skeleton() {
   if(isDefined(self.skeleton)) {
     return self.skeleton;
@@ -1047,6 +952,5 @@ get_skeleton() {
     return "base";
   }
 }
-
 debug_anim_print(text) {}
 debug_turn_print(text, line) {}

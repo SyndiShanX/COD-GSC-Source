@@ -1,6 +1,6 @@
 /****************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cod5_factory_fx.csc
+ * Script: clientscripts\zombie_cod5_factory_fx\.csc
 ****************************************************/
 
 #include clientscripts\_utility;
@@ -36,7 +36,6 @@ main() {
   level thread light_model_swap("smodel_light_electric_tinhatlamp", "lights_tinhatlamp_on");
   level thread flytrap_lev_objects();
 }
-
 trap_fx_monitor(name, side) {
   while(1) {
     level waittill(name);
@@ -46,7 +45,6 @@ trap_fx_monitor(name, side) {
     }
   }
 }
-
 electric_trap_fx(name, side) {
   ang = self.angles;
   forward = anglesToForward(ang);
@@ -60,7 +58,7 @@ electric_trap_fx(name, side) {
   if(!isDefined(self.loopFX)) {
     self.loopFX = [];
   }
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     self.loopFX[i] = SpawnFx(i, level._effect["zapper"], self.origin, 0, forward, up);
     triggerfx(self.loopFX[i]);
@@ -71,7 +69,6 @@ electric_trap_fx(name, side) {
   }
   self.loopFX = [];
 }
-
 footsteps() {
   clientscripts\_utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   clientscripts\_utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -91,7 +88,6 @@ footsteps() {
   clientscripts\_utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   clientscripts\_utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 precache_scripted_fx() {
   level._effect["zombie_grain"] = LoadFx("misc/fx_zombie_grain_cloud");
   level._effect["electric_short_oneshot"] = loadfx("env/electrical/fx_elec_short_oneshot");
@@ -111,7 +107,6 @@ precache_scripted_fx() {
   level._effect["animscript_gib_fx"] = LoadFx("weapon/bullet/fx_flesh_gib_fatal_01");
   level._effect["animscript_gibtrail_fx"] = LoadFx("trail/fx_trail_blood_streak");
 }
-
 precache_createfx_fx() {
   level._effect["mp_battlesmoke_lg"] = loadfx("maps/mp_maps/fx_mp_battlesmoke_thin_lg");
   level._effect["mp_fire_distant_150_150"] = loadfx("maps/mp_maps/fx_mp_fire_150x150_tall_distant");
@@ -172,24 +167,22 @@ precache_createfx_fx() {
   level._effect["zombie_packapunch"] = loadfx("maps/zombie/fx_zombie_packapunch");
   level._effect["zapper"] = loadfx("misc/fx_zombie_electric_trap");
 }
-
 perk_wire_fx(notify_wait, init_targetname, done_notify) {
   level waittill(notify_wait);
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread perk_wire_fx_client(i, init_targetname, done_notify);
   }
 }
-
-perk_wire_fx_client(clientNum, init_targetname, done_notify) {
+perk_wire_fx_client(clientnum, init_targetname, done_notify) {
   println("perk_wire_fx_client for client #" + clientnum);
   targ = getstruct(init_targetname, "targetname");
   if(!isDefined(targ)) {
     return;
   }
-  mover = spawn(clientNum, targ.origin, "script_model");
+  mover = spawn(clientnum, targ.origin, "script_model");
   mover setModel("tag_origin");
-  fx = playFXOnTag(clientNum, level._effect["wire_spark"], mover, "tag_origin");
+  fx = playFXOnTag(clientnum, level._effect["wire_spark"], mover, "tag_origin");
   fake_ent = spawnfakeent(0);
   setfakeentorg(0, fake_ent, mover.origin);
   playSound(0, "tele_spark_hit", mover.origin);
@@ -199,7 +192,7 @@ perk_wire_fx_client(clientNum, init_targetname, done_notify) {
     if(isDefined(targ.target)) {
       println("perk_wire_fx_client#" + clientnum + " next target: " + targ.target);
       target = getstruct(targ.target, "targetname");
-      mover moveTo(target.origin, 0.1);
+      mover MoveTo(target.origin, 0.1);
       wait(0.1);
       targ = target;
     } else {
@@ -211,7 +204,6 @@ perk_wire_fx_client(clientNum, init_targetname, done_notify) {
   deletefakeent(0, fake_ent);
   level notify(done_notify);
 }
-
 tele_spark_audio_mover(fake_ent) {
   level endon("spark_done");
   while(1) {
@@ -219,7 +211,6 @@ tele_spark_audio_mover(fake_ent) {
     setfakeentorg(0, fake_ent, self.origin);
   }
 }
-
 dog_start_monitor() {
   while(1) {
     level waittill("dog_start");
@@ -244,7 +235,6 @@ dog_start_monitor() {
     setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 dog_stop_monitor() {
   while(1) {
     level waittill("dog_stop");
@@ -269,7 +259,6 @@ dog_stop_monitor() {
     setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 level_fog_init() {
   start_dist = 440;
   half_dist = 3200;
@@ -291,10 +280,9 @@ level_fog_init() {
   max_fog_opacity = 1;
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
 }
-
 light_model_swap(name, model) {
   level waittill("pl1");
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     lamps = getEntArray(p, name, "targetname");
     for(i = 0; i < lamps.size; i++) {
@@ -302,7 +290,6 @@ light_model_swap(name, model) {
     }
   }
 }
-
 get_guide_struct_angles(ent) {
   guide_structs = GetStructArray("map_fx_guide_struct", "targetname");
   if(guide_structs.size > 0) {
@@ -319,10 +306,9 @@ get_guide_struct_angles(ent) {
   }
   return (0, 0, 0);
 }
-
 teleporter_map_light(light_name, on_msg) {
   level waittill("pl1");
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     lamps = getEntArray(p, light_name, "targetname");
     for(i = 0; i < lamps.size; i++) {
@@ -338,7 +324,7 @@ teleporter_map_light(light_name, on_msg) {
     }
   }
   level waittill(on_msg);
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     lamps = getEntArray(p, light_name, "targetname");
     for(i = 0; i < lamps.size; i++) {
@@ -352,11 +338,10 @@ teleporter_map_light(light_name, on_msg) {
     }
   }
 }
-
 teleporter_map_light_receiver() {
   level waittill("pl1");
   level thread teleporter_map_light_receiver_flash();
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     lamps = getEntArray(p, "sm_light_tp_r", "targetname");
     for(i = 0; i < lamps.size; i++) {
@@ -372,7 +357,7 @@ teleporter_map_light_receiver() {
   level waittill("pap1");
   wait(1.5);
   level.map_light_receiver_on = true;
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     lamps = getEntArray(p, "sm_light_tp_r", "targetname");
     for(i = 0; i < lamps.size; i++) {
@@ -386,14 +371,13 @@ teleporter_map_light_receiver() {
     }
   }
 }
-
 teleporter_map_light_receiver_flash() {
   level endon("pap1");
   level waittill("TRf");
   level endon("TRs");
   level thread teleporter_map_light_receiver_stop();
   while(1) {
-    players = getLocalPlayers();
+    players = getlocalplayers();
     for(p = 0; p < players.size; p++) {
       lamps = getEntArray(p, "sm_light_tp_r", "targetname");
       for(i = 0; i < lamps.size; i++) {
@@ -407,7 +391,7 @@ teleporter_map_light_receiver_flash() {
       }
     }
     wait(0.5);
-    players = getLocalPlayers();
+    players = getlocalplayers();
     for(p = 0; p < players.size; p++) {
       lamps = getEntArray(p, "sm_light_tp_r", "targetname");
       for(i = 0; i < lamps.size; i++) {
@@ -420,11 +404,10 @@ teleporter_map_light_receiver_flash() {
     wait(0.5);
   }
 }
-
 teleporter_map_light_receiver_stop() {
   level endon("pap1");
   level waittill("TRs");
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     lamps = getEntArray(p, "sm_light_tp_r", "targetname");
     for(i = 0; i < lamps.size; i++) {
@@ -439,7 +422,6 @@ teleporter_map_light_receiver_stop() {
   }
   level thread teleporter_map_light_receiver_flash();
 }
-
 flytrap_lev_objects() {
   level waittill("ag1");
   i = 0;
@@ -449,7 +431,7 @@ flytrap_lev_objects() {
     hover_spots[i + 1] = GetStruct(hover_spots[i].target, "targetname");
     i++;
   }
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     floaters = getEntArray(p, "ee_floaty_stuff", "targetname");
     for(k = 0; k < floaters.size; k++) {
@@ -457,15 +439,14 @@ flytrap_lev_objects() {
     }
   }
 }
-
-anti_grav_move(clientNum, spots, start_index) {
+anti_grav_move(clientnum, spots, start_index) {
   sound_ent = spawnfakeent(0);
   setfakeentorg(0, sound_ent, self.origin);
   playLoopSound(0, sound_ent, "flytrap_loop");
   self thread flytrap_audio_mover(sound_ent);
-  playFXOnTag(clientNum, level._effect["powerup_on"], self, "tag_origin");
+  playFXOnTag(clientnum, level._effect["powerup_on"], self, "tag_origin");
   playSound(0, "flytrap_spin", self.origin);
-  self moveTo(spots[start_index].origin, 4);
+  self MoveTo(spots[start_index].origin, 4);
   wait(4);
   stop_spinning = false;
   index = start_index;
@@ -485,18 +466,17 @@ anti_grav_move(clientNum, spots, start_index) {
       stop_spinning = true;
     }
     offset = offset + z_increment;
-    self moveTo(spots[index].origin + (0, 0, offset), interval);
+    self MoveTo(spots[index].origin + (0, 0, offset), interval);
     wait(interval);
   }
   end_spot = GetStruct("trap_flyaway_spot", "targetname");
-  self moveTo(end_spot.origin + (RandomFloatRange(-100, 100), 0, 0), 5);
+  self MoveTo(end_spot.origin + (RandomFloatRange(-100, 100), 0, 0), 5);
   playSound(0, "shoot_off", self.origin);
   wait(4.7);
   level notify("delete_sound_ent");
   deletefakeent(0, sound_ent);
   self delete();
 }
-
 flytrap_audio_mover(sound_ent) {
   level endon("delete_sound_ent");
   while(1) {

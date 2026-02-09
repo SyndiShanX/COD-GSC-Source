@@ -105,7 +105,6 @@ init() {
   if(getdvarint("scr_runlevelandquit") == 1) {
     thread runLevelAndQuit();
   }
-
 }
 
 runLevelAndQuit() {

@@ -52,7 +52,7 @@ trap_cooldown() {
 trap_audio() {}
 
 trap_player_damage(t_trap) {
-  if(isplayer(self) && zm_utility::is_player_valid(self, 0, 0, 0) && !(isDefined(self.var_99557baf) && self.var_99557baf)) {
+  if(isPlayer(self) && zm_utility::is_player_valid(self, 0, 0, 0) && !(isDefined(self.var_99557baf) && self.var_99557baf)) {
     self.var_99557baf = 1;
     level thread trap_damage_cooldown(self);
     self dodamage(25, self.origin);
@@ -114,13 +114,13 @@ trap_damage(t_trap) {
     }
 
     if(isDefined(level.var_bae901ce) && level.var_bae901ce) {
-      if(isDefined(t_trap) && isplayer(t_trap.activated_by_player)) {
+      if(isDefined(t_trap) && isPlayer(t_trap.activated_by_player)) {
         t_trap.activated_by_player thread zm_vo::function_a2bd5a0c(#"hash_150ed78f0557df5f", 0.5, 1, 0, 1);
         level.var_bae901ce = undefined;
       }
     }
 
-    if(isplayer(t_trap.activated_by_player)) {
+    if(isPlayer(t_trap.activated_by_player)) {
       t_trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
       t_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }

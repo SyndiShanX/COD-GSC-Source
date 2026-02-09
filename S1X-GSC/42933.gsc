@@ -528,7 +528,7 @@ getplayersonteam(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.players) {
-    if(var_3.hasspawned && isalive(var_3) && var_0 == var_3.team && (!isplayer(self) || var_3 != self)) {
+    if(var_3.hasspawned && isalive(var_3) && var_0 == var_3.team && (!isPlayer(self) || var_3 != self)) {
       var_1[var_1.size] = var_3;
     }
   }
@@ -808,10 +808,8 @@ playerhandleboundarystatic(var_0, var_1, var_2) {
           var_4 = 0;
 
           if(isDefined(level.isoutofboundscustomfunc)) {
-            var_4 = [
-              }
-              [level.isoutofboundscustomfunc]
-          ](var_0, self, var_3);
+            var_4 = [}
+              [level.isoutofboundscustomfunc]](var_0, self, var_3);
           else {
             var_4 = var_0 vehicletouchinganytrigger(var_3);
           }

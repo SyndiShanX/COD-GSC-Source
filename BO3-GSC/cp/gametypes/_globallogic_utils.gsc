@@ -207,9 +207,9 @@ function resumetimer() {
 }
 
 function getscoreremaining(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return scorelimit - globallogic_score::_getplayerscore(self);
   }
   return scorelimit - getteamscore(team);
@@ -223,18 +223,18 @@ function getteamscoreforround(team) {
 }
 
 function getscoreperminute(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
   timelimit = level.timelimit;
   minutespassed = (gettimepassed() / 60000) + 0.0001;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return globallogic_score::_getplayerscore(self) / minutespassed;
   }
   return getteamscoreforround(team) / minutespassed;
 }
 
 function getestimatedtimeuntilscorelimit(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scoreperminute = self getscoreperminute(team);
   scoreremaining = self getscoreremaining(team);
   if(!scoreperminute) {

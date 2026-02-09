@@ -7,6 +7,7 @@
 #include maps\_utility;
 #include maps\_anim;
 #using_animtree("generic_human");
+
 main() {
   level.scr_anim["generic"]["Cover Crouch"][0] = % covercrouch_hide_idle;
   level.scr_anim["generic"]["Cover Crouch"][1] = % covercrouch_twitch_1;
@@ -29,7 +30,6 @@ main() {
   thread node_debug_render();
   thread scriptstruct_debug_render();
 }
-
 scriptstruct_debug_render() {
   while(1) {
     level waittill("obstacle", selected_struct);
@@ -40,7 +40,6 @@ scriptstruct_debug_render() {
     }
   }
 }
-
 render_struct(selected_struct) {
   self endon("stop_struct_render");
   while(isDefined(selected_struct)) {
@@ -48,7 +47,6 @@ render_struct(selected_struct) {
     wait 0.05;
   }
 }
-
 node_debug_render() {
   while(1) {
     level waittill("node_not_safe", node);
@@ -61,7 +59,6 @@ node_debug_render() {
     }
   }
 }
-
 delete_timer() {
   self endon("stop_delete_timer");
   self endon("death");
@@ -73,19 +70,20 @@ delete_timer() {
   }
   self delete();
 }
-
 animate_at_node(node) {
-  if(!node_has_animations(node) || !isDefined(level.nodedrone))
+  if(!node_has_animations(node) || !isDefined(level.nodedrone)) {
     return;
+  }
   level.nodedrone thread animate_nodedrone_at_node(node);
 }
-
 spawn_johnny_node_chaser(node) {
   if(!isDefined(level.johnny_node_chaser)) {
-    if(!isDefined(level.enemy_spawner))
+    if(!isDefined(level.enemy_spawner)) {
       maps\_debug::dynamic_ai_spawner_init();
-    if(!isDefined(level.enemy_spawner))
+    }
+    if(!isDefined(level.enemy_spawner)) {
       return;
+    }
     spawner = level.enemy_spawner;
     old_origin = spawner.origin;
     old_angles = spawner.angles;
@@ -110,7 +108,6 @@ spawn_johnny_node_chaser(node) {
     level.johnny_node_chaser thread keepupwithnode(node);
   }
 }
-
 keepupwithnode(node) {
   self endon("stop_delete_timer");
   self endon("death");
@@ -125,18 +122,17 @@ keepupwithnode(node) {
     wait 1.0;
   }
 }
-
 animate_nodedrone_at_node(node) {
   angles = node.angles;
-  if(isDefined(level.node_offset[node.type]))
+  if(isDefined(level.node_offset[node.type])) {
     angles = angles + level.node_offset[node.type];
+  }
   self.origin = node.origin;
   self.angles = angles;
   self dontinterpolate();
   self show();
   self thread stay_animated_at_node(node);
 }
-
 stay_animated_at_node(node) {
   self.currentnode = node;
   prev_org = (0, 0, 0);
@@ -146,22 +142,24 @@ stay_animated_at_node(node) {
       prev_org = node.origin;
       prev_ang = node.angles;
       angles = node.angles;
-      if(isDefined(level.node_offset[self.currentnode.type]))
+      if(isDefined(level.node_offset[self.currentnode.type])) {
         angles = angles + level.node_offset[self.currentnode.type];
+      }
       self.origin = node.origin;
       self.angles = angles;
       self notify("stop_loop");
-      if(node_has_animations(node))
+      if(node_has_animations(node)) {
         self anim_generic_loop(self, node.type, "stop_loop");
-      else
+      } else {
         prev_org = (0, 0, 0);
+      }
     }
     wait 0.05;
   }
 }
-
 node_has_animations(node) {
-  if(isDefined(level.scr_anim["generic"][node.type]))
+  if(isDefined(level.scr_anim["generic"][node.type])) {
     return true;
+  }
   return false;
 }

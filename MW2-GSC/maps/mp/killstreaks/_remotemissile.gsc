@@ -20,7 +20,6 @@ init() {
     level.missileRemoteLaunchVert = 14000;
     level.missileRemoteLaunchHorz = 7000;
     level.missileRemoteLaunchTargetDist = 1500;
-
   }
   precacheItem("remotemissile_projectile_mp");
   precacheShader("ac130_overlay_grain");
@@ -257,7 +256,6 @@ MissileEyes(player, rocket) {
 
     if(getDvarInt("camera_thirdPerson"))
       player setThirdPersonDOF(true);
-
   }
 
   player clearUsingRemote();

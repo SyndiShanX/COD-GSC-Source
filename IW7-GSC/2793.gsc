@@ -6,7 +6,7 @@
 init() {
   level.var_90AE = getserverhostname();
   setfriendlyfire(scripts\mp\tweakables::gettweakablevalue("team", "fftype"));
-  constraingametype(getdvar("g_gametype"));
+  constraingametype(getDvar("g_gametype"));
 
   for(;;) {
     updateserversettings();
@@ -78,6 +78,6 @@ constraingametype(var_0) {
 
 setfriendlyfire(var_0) {
   level.friendlyfire = var_0;
-  setdvar("ui_friendlyfire", var_0);
-  setdvar("cg_drawFriendlyHUDGrenades", var_0);
+  setDvar("ui_friendlyfire", var_0);
+  setDvar("cg_drawFriendlyHUDGrenades", var_0);
 }

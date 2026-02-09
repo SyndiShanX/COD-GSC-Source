@@ -16,11 +16,11 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_skeleton");
 
   if(!is_gen4()) {
-    setdvar("r_texFilterProbeBilinear", 1);
+    setDvar("r_texFilterProbeBilinear", 1);
   }
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   setdvar_cg_ng("r_specularColorScale", 2.5, 6);
 

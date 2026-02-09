@@ -23,7 +23,7 @@ function main() {
   level.add_raps_drop_locations = &add_raps_drop_locations;
   level.remotemissile_kill_z = -680;
   load::main();
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   compass::setupminimap("compass_map_mp_sector");
   link_traversals("under_bridge", "targetname", 1);
   spawncollision("collision_clip_wall_128x128x10", "collider", (597.185, -523.817, 584.206), (-5, 90, 0));

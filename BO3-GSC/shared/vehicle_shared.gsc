@@ -1219,10 +1219,10 @@ function _play_looped_fx_on_tag_origin_update(tag, effectorigin) {
 
 function setup_dvars() {
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
 }
 
@@ -1930,7 +1930,7 @@ function get_nearest_target(valid_targets) {
 function debug_vehicle() {
   self endon("death");
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   while(true) {
     if(getdvarint("") > 0) {
@@ -1981,7 +1981,7 @@ function vehicle_get_occupant_team() {
   occupants = self getvehoccupants();
   if(occupants.size != 0) {
     occupant = occupants[0];
-    if(isplayer(occupant)) {
+    if(isPlayer(occupant)) {
       return occupant.team;
     }
   }
@@ -2297,7 +2297,7 @@ function vehicle_spawner_tool() {
           vehicle = spawnvehicle(types[type_index], origin, player.angles, "");
           vehicle makevehicleusable();
           if(getdvarint("") == 1) {
-            setdvar("", "");
+            setDvar("", "");
             continue;
           }
           wait(0.3);

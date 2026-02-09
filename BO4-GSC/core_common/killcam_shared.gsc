@@ -855,7 +855,7 @@ get_killcam_entity(attacker, einflictor, weapon) {
     return undefined;
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
     if(weapon.name == # "sentinel_turret" || weapon.name == # "amws_gun_turret_mp_player" || weapon.name == # "auto_gun_turret") {
       return undefined;
     }
@@ -883,7 +883,7 @@ get_killcam_entity(attacker, einflictor, weapon) {
     return attacker;
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(attacker function_a867284b()) {
       return undefined;
     }

@@ -36,7 +36,7 @@ function_58a44f22() {
   teammates = getplayers(self.team);
 
   foreach(player in teammates) {
-    if(isplayer(player) && !isbot(player) && player function_b7de760d()) {
+    if(isPlayer(player) && !isbot(player) && player function_b7de760d()) {
       return true;
     }
   }
@@ -48,7 +48,7 @@ function_9ea8f9d6() {
   teammates = getplayers(self.team);
 
   foreach(player in teammates) {
-    if(isplayer(player) && !isbot(player) && player function_b7de760d()) {
+    if(isPlayer(player) && !isbot(player) && player function_b7de760d()) {
       return player;
     }
   }
@@ -172,7 +172,7 @@ function_d26744ff(target_point, lead_player) {
 }
 
 function_233a1027(target_point, lead_player) {
-  if(!isplayer(lead_player)) {
+  if(!isPlayer(lead_player)) {
     return (0, 0, 0);
   }
 

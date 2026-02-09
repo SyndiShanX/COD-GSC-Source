@@ -1,6 +1,6 @@
 /*************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\char_jap_zombie_nocap.csc
+ * Script: character\clientscripts\char_jap_zombie_nocap\.csc
 *************************************************************/
 
 matches_me() {

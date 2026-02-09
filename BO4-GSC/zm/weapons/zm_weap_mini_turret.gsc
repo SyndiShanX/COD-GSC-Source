@@ -55,9 +55,9 @@ function_58c4db23(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 }
 
 on_player_revived(s_params) {
-  if(isDefined(s_params) && isplayer(s_params.e_revivee)) {
+  if(isDefined(s_params) && isPlayer(s_params.e_revivee)) {
     e_revivee = s_params.e_revivee;
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     e_revivee = self;
   }
 
@@ -177,7 +177,7 @@ function_7f9eb7f() {
 
 onplaceturret(turret) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
   if(isDefined(turret.vehicle)) {
     turret.vehicle.origin = turret.origin;

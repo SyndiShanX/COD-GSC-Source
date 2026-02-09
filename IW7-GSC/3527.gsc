@@ -495,7 +495,7 @@ damagetracker() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
     var_9 = scripts\mp\utility\game::func_13CA1(var_9, var_13);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       if(!isDefined(self)) {
         return;
       }
@@ -514,7 +514,7 @@ damagetracker() {
       self.wasdamaged = 1;
       var_14 = var_0;
 
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
 
         if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
@@ -561,7 +561,7 @@ damagetracker() {
       self.damagetaken = self.damagetaken + var_14;
 
       if(self.damagetaken >= self.maxhealth) {
-        if(isplayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
+        if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
           var_18 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
           var_19 = level.uavsettings[self.uavtype].calloutdestroyed;
 
@@ -1219,7 +1219,7 @@ func_CA50() {
       if(!isDefined(var_2)) {
         continue;
       }
-      if(!isplayer(var_2)) {
+      if(!isPlayer(var_2)) {
         continue;
       }
       if(self.var_6569 != -1) {

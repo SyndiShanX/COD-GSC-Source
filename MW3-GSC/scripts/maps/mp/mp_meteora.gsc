@@ -10,8 +10,8 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_meteoradlc");
   maps\mp\_compass::setupminimap("compass_map_mp_meteora");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
@@ -49,25 +49,21 @@ waitcarryobjects() {
   if(level.gametype == "sd") {
     while(!isDefined(level.sdbomb)) {
       wait 0.05;
-
     }
     level.sdbomb thread watchcarryobjects();
   } else if(level.gametype == "sab") {
     while(!isDefined(level.sabbomb)) {
       wait 0.05;
-
     }
     level.sabbomb thread watchcarryobjects();
   } else if(level.gametype == "tdef") {
     while(!isDefined(level.gameflag)) {
       wait 0.05;
-
     }
     level.gameflag thread watchcarryobjects();
   } else if(level.gametype == "ctf") {
     while(!isDefined(level.teamflags) || !isDefined(level.teamflags[game["defenders"]]) || !isDefined(level.teamflags[game["attackers"]])) {
       wait 0.05;
-
     }
     level.teamflags[game["defenders"]] thread watchcarryobjects();
     level.teamflags[game["attackers"]] thread watchcarryobjects();
@@ -77,7 +73,6 @@ waitcarryobjects() {
 watchcarryobjects() {
   if(!isDefined(level.nodrops)) {
     createnodrops();
-
   }
   for(;;) {
     self waittill("dropped");
@@ -89,7 +84,6 @@ watchcarryobjects() {
           maps\mp\gametypes\_gameobjects::returnhome();
         } else {
           thread movecarryobject(var_1.safepos, var_1.safeangle);
-
         }
         break;
       }

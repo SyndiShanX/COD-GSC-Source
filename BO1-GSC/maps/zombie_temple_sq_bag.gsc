@@ -14,7 +14,6 @@ init() {
   declare_sidequest_stage("sq", "BaG", ::init_stage, ::stage_logic, ::exit_stage);
   set_stage_time_limit("sq", "BaG", 5 * 60);
 }
-
 bag_debug() {
   if(isDefined(level._debug_bag)) {
     return;
@@ -121,7 +120,6 @@ bag_debug() {
     wait(0.05);
   }
 }
-
 init_stage() {
   maps\zombie_temple_sq_brock::delete_radio();
   level notify("bag_start");
@@ -133,12 +131,10 @@ init_stage() {
   maps\zombie_temple_sq::reset_dynamite();
   level thread delayed_start_skit();
 }
-
 delayed_start_skit() {
   wait(.5);
   level thread maps\zombie_temple_sq_skits::start_skit("tt8");
 }
-
 dynamite_debug() {
   self endon("caught");
   while(1) {
@@ -146,7 +142,6 @@ dynamite_debug() {
     wait(0.1);
   }
 }
-
 fire_in_the_hole() {
   self endon("caught");
   self.dropped = true;
@@ -158,7 +153,7 @@ fire_in_the_hole() {
   level.catch_trig.owner_ent = self;
   level.catch_trig thread butter_fingers();
   self NotSolid();
-  self moveTo(dest.origin, 1.4, 0.2, 0);
+  self MoveTo(dest.origin, 1.4, 0.2, 0);
   self waittill("movedone");
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest8", undefined, 5);
@@ -168,7 +163,6 @@ fire_in_the_hole() {
   level.catch_trig = undefined;
   stage_failed("sq", "BaG");
 }
-
 butter_fingers() {
   self endon("boom");
   self endon("death");
@@ -179,17 +173,16 @@ butter_fingers() {
       who playSound("evt_sq_bag_dynamite_catch");
       who._has_dynamite = true;
       self.owner_ent notify("caught");
-      self.owner_ent hide();
+      self.owner_ent Hide();
       who add_sidequest_icon("sq", "dynamite");
       self Delete();
       break;
     }
   }
 }
-
 give_me_the_boom_stick() {
   level endon("sq_BaG_over");
-  wall = getEnt("sq_wall", "targetname");
+  wall = GetEnt("sq_wall", "targetname");
   wall Solid();
   flag_wait("meteorite_shrunk");
   player_close = false;
@@ -214,7 +207,7 @@ give_me_the_boom_stick() {
   not_given = true;
   while(not_given) {
     level._give_trig waittill("trigger", who);
-    if(IsPlayer(who) && is_player_valid(who) && isDefined(who._has_dynamite) && who._has_dynamite) {
+    if(isPlayer(who) && is_player_valid(who) && isDefined(who._has_dynamite) && who._has_dynamite) {
       who._has_dynamite = undefined;
       who remove_sidequest_icon("sq", "dynamite");
       not_given = false;
@@ -238,7 +231,6 @@ give_me_the_boom_stick() {
   }
   flag_set("given_dynamite");
 }
-
 stage_logic() {
   flag_wait("meteorite_shrunk");
   flag_set("pap_override");
@@ -247,7 +239,6 @@ stage_logic() {
   wait(5.0);
   stage_completed("sq", "BaG");
 }
-
 exit_stage(success) {
   if(success) {
     maps\zombie_temple_sq_brock::create_radio(9, maps\zombie_temple_sq_brock::radio9_override);
@@ -255,7 +246,7 @@ exit_stage(success) {
   } else {
     maps\zombie_temple_sq_brock::create_radio(8);
     flag_clear("meteorite_shrunk");
-    ent = getEnt("sq_meteorite", "targetname");
+    ent = GetEnt("sq_meteorite", "targetname");
     ent.origin = ent.original_origin;
     ent.angles = ent.original_angles;
     ent setModel("p_ztem_meteorite");
@@ -285,7 +276,6 @@ exit_stage(success) {
   }
   level.skit_vox_override = false;
 }
-
 resonate_runner() {
   if(!isDefined(level._resonate_time) || level._resonate_time == 0) {
     level._resonate_time = 60;
@@ -301,7 +291,6 @@ resonate_runner() {
   }
   flag_clear("gongs_resonating");
 }
-
 gong_resonate(player) {
   level endon("kill_resonate");
   self.ringing = true;
@@ -332,7 +321,7 @@ gong_resonate(player) {
           if(level._num_gongs >= 0) {
             level._num_gongs--;
           }
-          gongs[i] stopLoopSound(5);
+          gongs[i] stoploopsound(5);
         }
       }
       gongs[i].ringing = false;
@@ -344,16 +333,14 @@ gong_resonate(player) {
     level._num_gongs--;
   }
   self.ringing = false;
-  self stopLoopSound(5);
+  self stoploopsound(5);
 }
-
 gong_goes_bong(in_stage, player) {
   if(self.right_gong && level._num_gongs < 4) {
     level._num_gongs++;
   }
   self thread gong_resonate(player);
 }
-
 gong_handler() {
   level endon("sq_BaG_over");
   if(!isDefined(self.ringing)) {
@@ -368,7 +355,6 @@ gong_handler() {
     }
   }
 }
-
 debug_gong() {
   level endon("bag_start");
   level endon("sq_BaG_over");
@@ -379,7 +365,6 @@ debug_gong() {
     wait(0.1);
   }
 }
-
 gong_wobble() {
   if(isDefined(self.wobble_threaded)) {
     return;
@@ -391,7 +376,6 @@ gong_wobble() {
     self maps\_anim::anim_single(self, "ring");
   }
 }
-
 dud_gong_handler() {
   level endon("bag_start");
   self thread gong_wobble();
@@ -406,7 +390,6 @@ dud_gong_handler() {
     }
   }
 }
-
 bag_story_vox_pt1(player) {
   level endon("sq_StD_over");
   struct = getstruct("sq_location_bag", "targetname");
@@ -422,7 +405,7 @@ bag_story_vox_pt1(player) {
   level._bag_sound_ent waittill("sounddone");
   if(isDefined(player)) {
     level.skit_vox_override = true;
-    player playSound("vox_egg_story_5_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
+    player playSound("vox_egg_story_5_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player GetEntityNumber()), "vox_egg_sounddone");
     player waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
@@ -433,7 +416,6 @@ bag_story_vox_pt1(player) {
   level._bag_sound_ent delete();
   level._bag_sound_ent = undefined;
 }
-
 bag_story_vox_pt2() {
   level endon("sq_StD_over");
   struct = getstruct("sq_location_bag", "targetname");

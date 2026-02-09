@@ -412,7 +412,7 @@ function_c1189522(s_notify) {
 
 function_36eb3c96(var_88206a50, ent) {
   if(isDefined(ent)) {
-    b_killed_by_player = isplayer(ent.attacker) || isplayer(ent.damageinflictor);
+    b_killed_by_player = isPlayer(ent.attacker) || isPlayer(ent.damageinflictor);
     b_in_range = distancesquared(var_88206a50.origin, ent.origin) < level.var_5d5b7e8e.var_a41818b5.e_ring.n_radius * level.var_5d5b7e8e.var_a41818b5.e_ring.n_radius;
     return (b_killed_by_player && b_in_range);
   }

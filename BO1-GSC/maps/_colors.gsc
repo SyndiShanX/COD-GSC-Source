@@ -102,15 +102,12 @@ init_color_grouping(nodes) {
     level.currentColorForced["axis"][level.colorList[i]] = undefined;
   }
 }
-
 player_init_color_grouping() {
   thread player_color_node();
 }
-
 convert_color_to_short_string() {
   self.script_forceColor = level.colorCheckList[self.script_forceColor];
 }
-
 goto_current_ColorIndex() {
   if(!isDefined(self.currentColorCode)) {
     return;
@@ -125,7 +122,7 @@ goto_current_ColorIndex() {
   }
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
-    if(isalive(node.color_user) && !IsPlayer(node.color_user)) {
+    if(isalive(node.color_user) && !isPlayer(node.color_user)) {
       continue;
     }
     self thread ai_sets_goal_with_delay(node);
@@ -134,11 +131,9 @@ goto_current_ColorIndex() {
   }
   no_node_to_go_to();
 }
-
 no_node_to_go_to() {
   println("AI with export " + self.export+" was told to go to color node but had no node to go to.");
 }
-
 get_color_list() {
   colorList = [];
   colorList[colorList.size] = "r";
@@ -150,7 +145,6 @@ get_color_list() {
   colorList[colorList.size] = "o";
   return colorList;
 }
-
 get_colorcodes_from_trigger(color_team, team) {
   colorCodes = strtok(color_team, " ");
   colors = [];
@@ -180,7 +174,6 @@ get_colorcodes_from_trigger(color_team, team) {
   array["colors"] = colors;
   return array;
 }
-
 trigger_issues_orders(color_team, team) {
   self endon("death");
   array = get_colorcodes_from_trigger(color_team, team);
@@ -199,7 +192,6 @@ trigger_issues_orders(color_team, team) {
     trigger_auto_disable();
   }
 }
-
 trigger_auto_disable() {
   if(!isDefined(self.script_color_auto_disable)) {
     self.script_color_auto_disable = true;
@@ -212,7 +204,6 @@ trigger_auto_disable() {
     }
   }
 }
-
 activate_color_trigger(team) {
   if(team == "allies") {
     self thread get_colorcodes_and_activate_trigger(self.script_color_allies, team);
@@ -220,7 +211,6 @@ activate_color_trigger(team) {
     self thread get_colorcodes_and_activate_trigger(self.script_color_axis, team);
   }
 }
-
 get_colorcodes_and_activate_trigger(color_team, team) {
   array = get_colorcodes_from_trigger(color_team, team);
   colorCodes = array["colorCodes"];
@@ -228,7 +218,6 @@ get_colorcodes_and_activate_trigger(color_team, team) {
   colors = array["colors"];
   activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex);
 }
-
 activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex) {
   for(i = 0; i < colorCodes.size; i++) {
     if(!isDefined(level.arrays_of_colorCoded_spawners[team][colorCodes[i]])) {
@@ -269,14 +258,12 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
     issue_color_order_to_ai(colorCode, colors[i], team, ai_array[colorCode]);
   }
 }
-
 same_color_code_as_last_time(team, color) {
   if(!isDefined(level.lastColorForced[team][color])) {
     return false;
   }
   return level.lastColorForced[team][color] == level.currentColorForced[team][color];
 }
-
 process_cover_node_with_last_in_mind_allies(node, lastColor) {
   if(issubstr(node.script_color_allies, lastColor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
@@ -284,7 +271,6 @@ process_cover_node_with_last_in_mind_allies(node, lastColor) {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }
-
 process_cover_node_with_last_in_mind_axis(node, lastColor) {
   if(issubstr(node.script_color_axis, lastColor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
@@ -292,15 +278,12 @@ process_cover_node_with_last_in_mind_axis(node, lastColor) {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }
-
 process_cover_node(node, null) {
   self.cover_nodes_first[self.cover_nodes_first.size] = node;
 }
-
 process_path_node(node, null) {
   self.path_nodes[self.path_nodes.size] = node;
 }
-
 prioritize_colorCoded_nodes(team, colorCode, color) {
   nodes = level.arrays_of_colorCoded_nodes[team][colorCode];
   ent = spawnStruct();
@@ -322,11 +305,9 @@ prioritize_colorCoded_nodes(team, colorCode, color) {
   }
   level.arrays_of_colorCoded_nodes[team][colorCode] = nodes;
 }
-
 get_prioritized_colorCoded_nodes(team, colorCode, color) {
   return level.arrays_of_colorCoded_nodes[team][colorCode];
 }
-
 issue_leave_node_order_to_ai_and_get_ai(colorCode, color, team) {
   level.arrays_of_colorCoded_ai[team][colorCode] = array_removeDead(level.arrays_of_colorCoded_ai[team][colorCode]);
   ai = level.arrays_of_colorCoded_ai[team][colorCode];
@@ -347,7 +328,6 @@ issue_leave_node_order_to_ai_and_get_ai(colorCode, color, team) {
   }
   return ai;
 }
-
 issue_color_order_to_ai(colorCode, color, team, ai) {
   original_ai_array = ai;
   prioritize_colorCoded_nodes(team, colorCode, color);
@@ -369,13 +349,11 @@ issue_color_order_to_ai(colorCode, color, team, ai) {
     }
   }
 }
-
 take_color_node(node, colorCode, trigger, counter) {
   self notify("stop_color_move");
   self.currentColorCode = colorCode;
   self thread process_color_order_to_ai(node, trigger, counter);
 }
-
 player_color_node() {
   for(;;) {
     playerNode = undefined;
@@ -399,7 +377,6 @@ player_color_node() {
     playerNode color_node_finds_a_user();
   }
 }
-
 color_node_finds_a_user() {
   if(isDefined(self.script_color_allies)) {
     color_node_finds_user_from_colorcodes(self.script_color_allies, "allies");
@@ -408,7 +385,6 @@ color_node_finds_a_user() {
     color_node_finds_user_from_colorcodes(self.script_color_axis, "axis");
   }
 }
-
 color_node_finds_user_from_colorcodes(colorCodeString, team) {
   if(isDefined(self.color_user)) {
     return;
@@ -416,7 +392,6 @@ color_node_finds_user_from_colorcodes(colorCodeString, team) {
   colorCodes = strtok(colorCodeString, " ");
   array_levelthread(colorCodes, ::color_node_finds_user_for_colorCode, team);
 }
-
 color_node_finds_user_for_colorCode(colorCode, team) {
   color = colorCode[0];
   assertex(colorIsLegit(color), "Color " + color + " is not legit");
@@ -439,14 +414,12 @@ color_node_finds_user_for_colorCode(colorCode, team) {
     return;
   }
 }
-
 occupies_colorCode(colorCode) {
   if(!isDefined(self.currentColorCode)) {
     return false;
   }
   return self.currentColorCode == colorCode;
 }
-
 ai_sets_goal_with_delay(node) {
   self endon("death");
   delay = my_current_node_delays();
@@ -455,7 +428,6 @@ ai_sets_goal_with_delay(node) {
   }
   ai_sets_goal(node);
 }
-
 ai_sets_goal(node) {
   self notify("stop_going_to_node");
   set_goal_and_volume(node);
@@ -464,7 +436,6 @@ ai_sets_goal(node) {
     thread careful_logic(node, volume);
   }
 }
-
 set_goal_and_volume(node) {
   if(isDefined(self._colors_go_line)) {
     self thread maps\_anim::anim_single_queue(self, self._colors_go_line);
@@ -496,14 +467,12 @@ set_goal_and_volume(node) {
     self.fixedNodeSafeRadius = 64;
   }
 }
-
 color_force_goal(node) {
   self endon("death");
   self thread force_goal(node, undefined, true, "stop_color_forcegoal", true);
   self waittill_either("goal", "stop_color_move");
   self notify("stop_color_forcegoal");
 }
-
 careful_logic(node, volume) {
   self endon("death");
   self endon("stop_being_careful");
@@ -516,7 +485,6 @@ careful_logic(node, volume) {
     set_goal_and_volume(node);
   }
 }
-
 recover_from_careful_disable(node) {
   self endon("death");
   self endon("stop_going_to_node");
@@ -524,7 +492,6 @@ recover_from_careful_disable(node) {
   self.fixednode = true;
   set_goal_and_volume(node);
 }
-
 use_big_goal_until_goal_is_safe(node, volume) {
   self setgoalpos(self.origin);
   self.goalradius = 1024;
@@ -549,7 +516,6 @@ use_big_goal_until_goal_is_safe(node, volume) {
     }
   }
 }
-
 isKnownEnemyInRadius_tmp(node_origin, safe_radius) {
   ai = getaiarray("axis");
   for(i = 0; i < ai.size; i++) {
@@ -559,7 +525,6 @@ isKnownEnemyInRadius_tmp(node_origin, safe_radius) {
   }
   return false;
 }
-
 wait_until_an_enemy_is_in_safe_area(node, volume) {
   if(isDefined(volume)) {
     for(;;) {
@@ -580,14 +545,12 @@ wait_until_an_enemy_is_in_safe_area(node, volume) {
     }
   }
 }
-
 my_current_node_delays() {
   if(!isDefined(self.node)) {
     return false;
   }
   return self.node script_delay();
 }
-
 process_color_order_to_ai(node, trigger, counter) {
   thread decrementColorUsers(node);
   self endon("stop_color_move");
@@ -619,7 +582,6 @@ process_color_order_to_ai(node, trigger, counter) {
     }
   }
 }
-
 get_best_available_colored_node() {
   assertEx(self.team != "neutral");
   assertEx(isDefined(self.script_forceColor), "AI with export " + self.export+" lost his script_forcecolor.. somehow.");
@@ -632,7 +594,6 @@ get_best_available_colored_node() {
     }
   }
 }
-
 get_best_available_new_colored_node() {
   assertEx(self.team != "neutral");
   assertEx(isDefined(self.script_forceColor), "AI with export " + self.export+" lost his script_forcecolor.. somehow.");
@@ -646,7 +607,6 @@ get_best_available_new_colored_node() {
     }
   }
 }
-
 process_stop_short_of_node(node) {
   self endon("stopScript");
   self endon("death");
@@ -664,12 +624,10 @@ process_stop_short_of_node(node) {
     reached_node_but_could_not_claim_it(node);
   }
 }
-
 wait_for_killanimscript_or_time(timer) {
   self endon("killanimscript");
   wait(timer);
 }
-
 reached_node_but_could_not_claim_it(node) {
   ai = getaiarray();
   guy = undefined;
@@ -687,7 +645,6 @@ reached_node_but_could_not_claim_it(node) {
   }
   return false;
 }
-
 decrementColorUsers(node) {
   node.color_user = self;
   assertEx(!isDefined(self.color_node), "Decrement had color_node");
@@ -696,7 +653,6 @@ decrementColorUsers(node) {
   self waittill("death");
   self.color_node.color_user = undefined;
 }
-
 colorIsLegit(color) {
   for(i = 0; i < level.colorList.size; i++) {
     if(color == level.colorList[i]) {
@@ -705,7 +661,6 @@ colorIsLegit(color) {
   }
   return false;
 }
-
 add_volume_to_global_arrays(colorCode, team) {
   colors = strtok(colorCode, " ");
   for(p = 0; p < colors.size; p++) {
@@ -713,7 +668,6 @@ add_volume_to_global_arrays(colorCode, team) {
     level.colorCoded_volumes[team][colors[p]] = self;
   }
 }
-
 add_node_to_global_arrays(colorCode, team) {
   self.color_user = undefined;
   colors = strtok(colorCode, " ");
@@ -727,7 +681,6 @@ add_node_to_global_arrays(colorCode, team) {
     level.arrays_of_colorCoded_spawners[team][colors[p]] = [];
   }
 }
-
 left_color_node() {
   if(!isDefined(self.color_node)) {
     return;
@@ -738,7 +691,6 @@ left_color_node() {
   self.color_node = undefined;
   self notify("stop_color_move");
 }
-
 GetColorNumberArray() {
   array = [];
   if(issubstr(self.classname, "axis") || issubstr(self.classname, "enemy")) {
@@ -754,7 +706,6 @@ GetColorNumberArray() {
   }
   return array;
 }
-
 removeSpawnerFromColorNumberArray() {
   colorNumberArray = GetColorNumberArray();
   if(!isDefined(colorNumberArray)) {
@@ -767,21 +718,18 @@ removeSpawnerFromColorNumberArray() {
     level.arrays_of_colorCoded_spawners[team][colors[i]] = array_remove(level.arrays_of_colorCoded_spawners[team][colors[i]], self);
   }
 }
-
 add_cover_node(type) {
   level.color_node_type_function[type][true]["allies"] = ::process_cover_node_with_last_in_mind_allies;
   level.color_node_type_function[type][true]["axis"] = ::process_cover_node_with_last_in_mind_axis;
   level.color_node_type_function[type][false]["allies"] = ::process_cover_node;
   level.color_node_type_function[type][false]["axis"] = ::process_cover_node;
 }
-
 add_path_node(type) {
   level.color_node_type_function[type][true]["allies"] = ::process_path_node;
   level.color_node_type_function[type][false]["allies"] = ::process_path_node;
   level.color_node_type_function[type][true]["axis"] = ::process_path_node;
   level.color_node_type_function[type][false]["axis"] = ::process_path_node;
 }
-
 colorNode_spawn_reinforcement(classname, fromColor) {
   level endon("kill_color_replacements");
   reinforcement = spawn_hidden_reinforcement(classname, fromColor);
@@ -790,7 +738,6 @@ colorNode_spawn_reinforcement(classname, fromColor) {
   }
   reinforcement thread colorNode_replace_on_death();
 }
-
 colorNode_replace_on_death() {
   level endon("kill_color_replacements");
   assertex(isalive(self), "Tried to do replace on death on something that was not alive");
@@ -845,7 +792,6 @@ colorNode_replace_on_death() {
     color = color_order[color];
   }
 }
-
 get_color_from_order(color, color_order) {
   if(!isDefined(color)) {
     return "none";
@@ -858,7 +804,6 @@ get_color_from_order(color, color_order) {
   }
   return color_order[color];
 }
-
 friendly_spawner_vision_checker() {
   level.friendly_respawn_vision_checker_thread = true;
   successes = 0;
@@ -897,7 +842,6 @@ friendly_spawner_vision_checker() {
     flag_set("player_looks_away_from_spawner");
   }
 }
-
 get_color_spawner(classname, fromColor) {
   specificFromColor = false;
   if(isDefined(level.respawn_spawners_specific) && isDefined(level.respawn_spawners_specific[fromColor])) {
@@ -943,14 +887,14 @@ get_color_spawner(classname, fromColor) {
   }
   return spawner;
 }
-
 spawn_hidden_reinforcement(classname, fromColor) {
   level endon("kill_color_replacements");
   spawn = undefined;
   for(;;) {
     if(!flag("respawn_friendlies")) {
-      if(!isDefined(level.friendly_respawn_vision_checker_thread))
+      if(!isDefined(level.friendly_respawn_vision_checker_thread)) {
         thread friendly_spawner_vision_checker();
+      }
       for(;;) {
         flag_wait_either("player_looks_away_from_spawner", "respawn_friendlies");
         flag_waitopen("friendly_spawner_locked");
@@ -991,25 +935,21 @@ spawn_hidden_reinforcement(classname, fromColor) {
   thread lock_spawner_for_awhile();
   return spawn;
 }
-
 lock_spawner_for_awhile() {
   flag_set("friendly_spawner_locked");
   wait(2);
   flag_clear("friendly_spawner_locked");
 }
-
 player_sees_spawner() {
   successes = 0;
   flag_clear("player_looks_away_from_spawner");
 }
-
 kill_color_replacements() {
   flag_clear("friendly_spawner_locked");
   level notify("kill_color_replacements");
   ai = getaiarray();
   array_thread(ai, ::remove_replace_on_death);
 }
-
 remove_replace_on_death() {
   self.replace_on_death = undefined;
 }

@@ -296,11 +296,11 @@ watchRiotshieldPickup() {
   self waittill("pickup_riotshield");
   self endon("weapon_change");
 
-  /#println( "Picked up riotshield, expecting weapon_change notify..." );
+  println("Picked up riotshield, expecting weapon_change notify...");
 
   wait 0.5;
 
-  /#println( "picked up shield but didn't change weapons, attach it!" );
+  println("picked up shield but didn't change weapons, attach it!");
 
   updateRiotShieldAttachForNewWeapon(self getCurrentWeapon());
 }
@@ -314,8 +314,7 @@ isValidNonShieldWeapon(weapon) {
     return false;
   }
 
-  if(maps\mp\gametypes\_class::isValidEquipment(weapon, true) ||
-    maps\mp\gametypes\_class::isValidEquipment(weapon, false))
+  if(maps\mp\gametypes\_class::isValidEquipment(weapon, true) || maps\mp\gametypes\_class::isValidEquipment(weapon, false))
     return false;
 
   if(weaponIsRiotShield(weapon)) {
@@ -595,7 +594,7 @@ watchDeployedRiotshieldDamage() {
 
     assert(isDefined(self.owner) && isDefined(self.owner.team));
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if((level.teamBased) && (attacker.team == self.owner.team) && (attacker != self.owner)) {
         continue;
       }

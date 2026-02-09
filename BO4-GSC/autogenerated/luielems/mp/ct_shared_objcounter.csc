@@ -81,7 +81,6 @@ class cct_shared_objcounter: cluielem {
     cluielem::function_dcb34c80("string", "objectiveLabel", 1);
     cluielem::add_clientfield("objectiveTotal", 1, 5, "int", var_cee9c803);
   }
-
 }
 
 register(uid, var_c2f4c01a, var_d45d2560, var_cee9c803) {

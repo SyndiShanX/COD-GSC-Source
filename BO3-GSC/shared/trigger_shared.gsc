@@ -173,7 +173,7 @@ function trigger_look(trigger) {
   b_ads_check = isinarray(a_parameters, "check_ads");
   while(true) {
     trigger waittill("trigger", e_other);
-    if(isplayer(e_other)) {
+    if(isPlayer(e_other)) {
       while(isDefined(e_other) && e_other istouching(trigger)) {
         if(e_other util::is_looking_at(e_target, trigger.script_dot, isDefined(trigger.script_trace) && trigger.script_trace) && (!b_ads_check || !e_other util::is_ads())) {
           trigger notify("trigger_look", e_other);
@@ -415,7 +415,7 @@ function trigger_hint(trigger) {
   waittillframeend();
   assert(isDefined(level.trigger_hint_string[trigger.script_hint]), ("" + trigger.script_hint) + "");
   trigger waittill("trigger", other);
-  assert(isplayer(other), "");
+  assert(isPlayer(other), "");
   if(isDefined(level.displayed_hints[trigger.script_hint])) {
     return;
   }
@@ -858,7 +858,7 @@ function delete_links_then_self() {
 function no_crouch_or_prone_think(trigger) {
   while(true) {
     trigger waittill("trigger", other);
-    if(!isplayer(other)) {
+    if(!isPlayer(other)) {
       continue;
     }
     while(other istouching(trigger)) {
@@ -874,7 +874,7 @@ function no_crouch_or_prone_think(trigger) {
 function no_prone_think(trigger) {
   while(true) {
     trigger waittill("trigger", other);
-    if(!isplayer(other)) {
+    if(!isPlayer(other)) {
       continue;
     }
     while(other istouching(trigger)) {

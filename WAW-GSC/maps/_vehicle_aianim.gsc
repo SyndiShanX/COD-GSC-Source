@@ -715,8 +715,8 @@ randomoccurrance(guy, occurrences) {
     if(pick < range[i]) {
       return i;
     }
-}
   }
+}
 
 guy_duck_once_check(guy, pos) {
   return isDefined(anim_pos(self, pos).duck_once);
@@ -832,7 +832,7 @@ check_unloadgroup(pos, unload_group) {
     if(pos == group[i]) {
       return true;
     }
-  return false;
+    return false;
   }
 }
 
@@ -1018,10 +1018,9 @@ check_sound_tag_dupe_reset(soundtag) {
   keys = getarraykeys(self.sound_tag_dupe);
 
   for(i = 0; i < keys.size; i++) {
-    if(self.sound_tag_dupe[keys[i]]) {
+    if(self.sound_tag_dupe[keys[i]]) {}
+    return;
   }
-      return;
-    }
   self.sound_tag_dupe = undefined;
 }
 
@@ -1663,8 +1662,8 @@ get_availablepositions() {
         availablepositions[availablepositions.size] = vehicle_getInstart(i);
       }
     } else {
-        nonanimatedpositions[nonanimatedpositions.size] = i;
-      }
+      nonanimatedpositions[nonanimatedpositions.size] = i;
+    }
   }
   struct = spawnStruct();
   struct.availablepositions = availablepositions;

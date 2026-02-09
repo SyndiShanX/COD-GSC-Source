@@ -57,32 +57,36 @@ melee_digbat_pain_override() {
   painanim = undefined;
   self.blockingpain = 1;
 
-  if(isDefined(self.damagemod) && self.damagemod == "MOD_MELEE")
+  if(isDefined(self.damagemod) && self.damagemod == "MOD_MELEE") {
     return false;
+  }
 
   if(self.a.movement == "run" && self.a.script != "combat") {
     if(isDefined(self.damagelocation)) {
-      if(issubstr(self.damagelocation, "right"))
+      if(issubstr(self.damagelocation, "right")) {
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      else if(issubstr(self.damagelocation, "left"))
+      } else if(issubstr(self.damagelocation, "left")) {
         painanim = % ai_digbat_melee_run_f_stumble_l;
+      }
     }
 
     if(!isDefined(painanim)) {
-      if(cointoss())
+      if(cointoss()) {
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      else
+      } else {
         painanim = % ai_digbat_melee_run_f_stumble_l;
+      }
     }
 
     self setflaggedanimknoballrestart("painanim", painanim, %body, 1, 0.1, 1.0);
     animlength = getanimlength(painanim);
     self animscripts\shared::donotetracksfortime(animlength - 0.2, "painanim");
   } else {
-    if(cointoss())
+    if(cointoss()) {
       painanim = % ai_digbat_melee_idle_pain_01;
-    else
+    } else {
       painanim = % ai_digbat_melee_idle_pain_02;
+    }
 
     self setflaggedanimknoballrestart("painanim", painanim, %body, 1, 0.1, 1.0);
     self animscripts\shared::donotetracks("painanim");
@@ -165,8 +169,9 @@ digbat_drop_baton_on_death() {
   digbat_melee_weapon physicslaunch();
   wait 15;
 
-  if(isDefined(digbat_melee_weapon))
+  if(isDefined(digbat_melee_weapon)) {
     digbat_melee_weapon delete();
+  }
 }
 
 setup_digbat() {
@@ -181,8 +186,9 @@ setup_digbat() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "machete_digbat") {
     make_machete_digbat();
 
-    if(level.script == "panama_2")
+    if(level.script == "panama_2") {
       self thread play_charge_vo();
+    }
 
     return;
   }
@@ -190,8 +196,9 @@ setup_digbat() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "bat_digbat") {
     make_barbwire_digbat();
 
-    if(level.script == "panama_2")
+    if(level.script == "panama_2") {
       self thread play_charge_vo();
+    }
 
     return;
   }
@@ -199,8 +206,9 @@ setup_digbat() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "melee_digbat") {
     make_barbwire_digbat();
 
-    if(level.script == "panama_2")
+    if(level.script == "panama_2") {
       self thread play_charge_vo();
+    }
 
     return;
   }

@@ -59,7 +59,7 @@ main() {
   level thread clientscripts\mp\_utility::initutility();
   clientscripts\mp\_utility_code::struct_class_init();
   clientscripts\mp\_utility::registersystem("levelNotify", ::levelnotifyhandler);
-  level.createfx_enabled = getdvar(#"createfx") != "";
+  level.createfx_enabled = getDvar(#"createfx") != "";
   level.createfx_disable_fx = getdvarint(#"_id_C9B177D6") == 1;
   clientscripts\mp\_global_fx::main();
   level thread clientscripts\mp\_ambientpackage::init();
@@ -75,11 +75,11 @@ main() {
 
   level thread parse_structs();
 
-  if(getdvar(#"r_reflectionProbeGenerate") == "1") {
+  if(getDvar(#"r_reflectionProbeGenerate") == "1") {
     return;
   }
   if(!isps3())
-    setdvar("cg_enableHelicopterNoCullLodOut", 1);
+    setDvar("cg_enableHelicopterNoCullLodOut", 1);
 }
 
 parse_structs() {

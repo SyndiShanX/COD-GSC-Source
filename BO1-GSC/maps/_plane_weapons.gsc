@@ -26,7 +26,6 @@ build_bomb_explosions(type, quakepower, quaketime, quakeradius, range, min_damag
   struct.maxdamage = max_damage;
   level.plane_bomb_explosion[type] = struct;
 }
-
 build_bombs(type, bombmodel, bombfx, bomb_sound) {
   AssertEx(isDefined(type), "_plane_weapons::build_bombs(): no vehicletype specified!");
   AssertEx(isDefined(bombmodel), "_plane_weapons::build_bombs(): no bomb model specified!");
@@ -52,7 +51,6 @@ build_bombs(type, bombmodel, bombfx, bomb_sound) {
     level.plane_bomb_sound[type] = bomb_sound;
   }
 }
-
 bomb_init(bomb_count) {
   errormsg = "Can't find the bomb model for this vehicletype. Check your vehicle's script file; you may need to call its setup_bombs function.";
   AssertEx(isDefined(level.plane_bomb_model[self.vehicletype]), errormsg);
@@ -67,7 +65,6 @@ bomb_init(bomb_count) {
     self thread bomb_drop_end();
   }
 }
-
 drop_bombs_waittill() {
   self endon("death");
   self endon("reached_end_node");
@@ -76,7 +73,6 @@ drop_bombs_waittill() {
     drop_bombs(amount, delay, delay_trace);
   }
 }
-
 bomb_drop_end() {
   self waittill("reached_end_node");
   if(isDefined(self.bomb)) {
@@ -87,7 +83,6 @@ bomb_drop_end() {
     }
   }
 }
-
 attach_bombs() {
   self.bomb = [];
   bomb_tag = [];
@@ -114,7 +109,6 @@ attach_bombs() {
     }
   }
 }
-
 drop_bombs(amount, delay, delay_trace, trace_dist) {
   self endon("reached_end_node");
   self endon("death");
@@ -171,7 +165,6 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
     wait(delay);
   }
 }
-
 bomb_wiggle() {
   self endon("death");
   original_angles = self.angles;
@@ -188,7 +181,6 @@ bomb_wiggle() {
     self waittill("rotatedone");
   }
 }
-
 bomb_pitch(time_of_rotation) {
   self endon("death");
   if(!isDefined(self.pitch)) {
@@ -204,7 +196,6 @@ bomb_pitch(time_of_rotation) {
   }
   return;
 }
-
 bomb_trace(type, delay_trace, trace_dist) {
   self endon("death");
   if(isDefined(delay_trace)) {
@@ -225,7 +216,6 @@ bomb_trace(type, delay_trace, trace_dist) {
     wait(0.05);
   }
 }
-
 bomb_explosion(type) {
   Assert(isDefined(level.plane_bomb_explosion[type]), "_plane_weapons::bomb_explosion(): No plane_bomb_explosion info set up for vehicletype " + type + ". Make sure to run _plane_weapons::build_bomb_explosions() first.");
   struct = level.plane_bomb_explosion[type];
@@ -243,7 +233,6 @@ bomb_explosion(type) {
   RadiusDamage(self.origin, damage_range, max_damage, min_damage);
   self Delete();
 }
-
 bomb_sound_delete() {
   wait(5);
   self Delete();

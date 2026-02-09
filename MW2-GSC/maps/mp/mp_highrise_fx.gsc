@@ -12,6 +12,6 @@ main() {
   level._effect["room_smoke_200"] = loadfx("smoke/room_smoke_200");
   level._effect["room_smoke_400"] = loadfx("smoke/room_smoke_400");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_highrise_fx::main();
 }

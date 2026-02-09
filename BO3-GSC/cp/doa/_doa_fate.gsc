@@ -241,7 +241,7 @@ function private function_271ba816(var_26fc4461 = 0) {
   while(true) {
     self waittill("trigger", guy);
     objective_state(self.id, "done");
-    if(!isplayer(guy)) {
+    if(!isPlayer(guy)) {
       continue;
     }
     if(!var_26fc4461) {
@@ -495,7 +495,7 @@ function function_17fb777b(player, model, modelscale, fate_cb) {
   object setscale(modelscale);
   object setplayercollision(0);
   object thread doa_utility::function_a625b5d3(player);
-  while(isplayer(player)) {
+  while(isPlayer(player)) {
     if(object.origin[2] < player.origin[2]) {
       object.origin = player.origin;
       break;
@@ -504,7 +504,7 @@ function function_17fb777b(player, model, modelscale, fate_cb) {
     object.origin = modz;
     wait(0.05);
   }
-  if(isplayer(player)) {
+  if(isPlayer(player)) {
     object thread namespace_eaa992c::function_285a2999("fate_explode");
     player playrumbleonentity("artillery_rumble");
     if(mayspawnentity()) {
@@ -936,12 +936,12 @@ function private function_c492e72d() {
     data = doa_utility::clamp(self.health / self.maxhealth, 0, 1);
     level clientfield::set("pumpBannerBar", data);
     if(isDefined(attacker)) {
-      if(!isplayer(attacker)) {
-        if(isDefined(attacker.owner) && isplayer(attacker.owner)) {
+      if(!isPlayer(attacker)) {
+        if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
           attacker = attacker.owner;
         }
       }
-      if(isDefined(attacker.doa) && isplayer(attacker)) {
+      if(isDefined(attacker.doa) && isPlayer(attacker)) {
         if(!isDefined(attacker.doa.var_eb1cd159)) {
           attacker.doa.var_eb1cd159 = 0;
         }
@@ -1140,7 +1140,7 @@ function private function_69ae5d15(loc) {
   while(gettime() < timeleft) {
     wait(0.05);
     trigger waittill("trigger", guy);
-    if(isplayer(guy)) {
+    if(isPlayer(guy)) {
       continue;
     }
     if(!(isDefined(guy.takedamage) && guy.takedamage)) {

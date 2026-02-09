@@ -60,7 +60,7 @@ watch_for_cockpit_switch() {
       self waittill("enter_vehicle", player);
       self hidepart("tag_instrument_warning", "t5_veh_helo_hind_cockpitview");
 
-      if(isDefined(player) && isplayer(player)) {
+      if(isDefined(player) && isPlayer(player)) {
         self setModel(self.cockpit_models[self.current_cockpit_state]);
         self.console_model = maps\_utility::spawn("script_model", self.origin);
         self.console_model setModel("t5_veh_helo_hind_ckpitdmg0");
@@ -83,7 +83,7 @@ watch_for_cockpit_switch() {
     while(true) {
       self waittill("exit_vehicle", player);
 
-      if(isDefined(player) && isplayer(player)) {
+      if(isDefined(player) && isPlayer(player)) {
         self notify("hind weapons disabled");
         self setModel("t5_veh_helo_hind_blockout");
         break;
@@ -114,13 +114,15 @@ next_cockpit_damage_state() {
   self.current_cockpit_state++;
   assert(self.current_cockpit_state <= self.console_models.size, "Tried to switch the hind to a cockpit damage state that does not exist");
 
-  if(self.current_cockpit_state > 2)
+  if(self.current_cockpit_state > 2) {
     return false;
+  }
 
-  if(self.current_cockpit_state - 1 < 0)
+  if(self.current_cockpit_state - 1 < 0) {
     self detach(self.console_models[self.console_models.size - 1], "origin_animate_jnt");
-  else
+  } else {
     self detach(self.console_models[self.current_cockpit_state - 1], "origin_animate_jnt");
+  }
 
   self attach(self.console_models[self.current_cockpit_state], "origin_animate_jnt");
 
@@ -170,8 +172,9 @@ debug_cycle_damage_states() {
     self next_cockpit_damage_state();
     wait 5;
 
-    if(self.current_cockpit_state + 1 >= self.cockpit_models.size)
+    if(self.current_cockpit_state + 1 >= self.cockpit_models.size) {
       self.current_cockpit_state = -1;
+    }
   }
 }
 
@@ -228,8 +231,9 @@ switchto_minigun() {
 }
 
 create_tutorial_hud(no_wait) {
-  if(!isDefined(no_wait))
+  if(!isDefined(no_wait)) {
     self waittill("enter_vehicle");
+  }
 
   self thread destroy_tutorial_hud();
   level.fly_up_hud = newhudelem();
@@ -242,8 +246,9 @@ create_tutorial_hud(no_wait) {
   level.fly_up_hud.vertalign = "top";
   level.fly_up_hud.foreground = 1;
 
-  if(self.tut_hud["fly_controls"])
+  if(self.tut_hud["fly_controls"]) {
     level.fly_up_hud settext("Press [{+smoke}] to fly up");
+  }
 
   level.fly_down_hud = newhudelem();
   level.fly_down_hud.fontscale = 1.25;
@@ -255,8 +260,9 @@ create_tutorial_hud(no_wait) {
   level.fly_down_hud.vertalign = "top";
   level.fly_down_hud.foreground = 1;
 
-  if(self.tut_hud["fly_controls"])
+  if(self.tut_hud["fly_controls"]) {
     level.fly_down_hud settext("Press [{+speed_throw}] to fly down");
+  }
 
   level.fire_hud = newhudelem();
   level.fire_hud.fontscale = 1.25;
@@ -268,8 +274,9 @@ create_tutorial_hud(no_wait) {
   level.fire_hud.vertalign = "top";
   level.fire_hud.foreground = 1;
 
-  if(self.tut_hud["gun_controls"])
+  if(self.tut_hud["gun_controls"]) {
     level.fire_hud settext("[{+attack}] mini-gun");
+  }
 
   level.rocket_hud = newhudelem();
   level.rocket_hud.fontscale = 1;
@@ -281,30 +288,35 @@ create_tutorial_hud(no_wait) {
   level.rocket_hud.vertalign = "top";
   level.rocket_hud.foreground = 1;
 
-  if(self.tut_hud["rocket_controls"])
+  if(self.tut_hud["rocket_controls"]) {
     level.rocket_hud settext("[{+speed_throw}] rocket pods - [{+usereload}] reload");
+  }
 }
 
 update_tutorial_hud() {
-  if(self.tut_hud["fly_controls"])
+  if(self.tut_hud["fly_controls"]) {
     level.fly_up_hud settext("Press [{+smoke}] to fly up");
-  else
+  } else {
     level.fly_up_hud settext("");
+  }
 
-  if(self.tut_hud["fly_controls"])
+  if(self.tut_hud["fly_controls"]) {
     level.fly_down_hud settext("Press [{+speed_throw}] to fly down.");
-  else
+  } else {
     level.fly_down_hud settext("");
+  }
 
-  if(self.tut_hud["gun_controls"])
+  if(self.tut_hud["gun_controls"]) {
     level.fire_hud settext("[{+attack}] mini-gun");
-  else
+  } else {
     level.fire_hud settext("");
+  }
 
-  if(self.tut_hud["rocket_controls"])
+  if(self.tut_hud["rocket_controls"]) {
     level.rocket_hud settext("[{+speed_throw}] rocket pods - [{+usereload}] reload");
-  else
+  } else {
     level.rocket_hud settext("");
+  }
 }
 
 destroy_tutorial_hud() {
@@ -329,15 +341,17 @@ watch_for_rocket_firing() {
   while(true) {
     player = get_players()[0];
 
-    while(!player throwbuttonpressed() || self._rocket_pods.free_rockets <= 0)
+    while(!player throwbuttonpressed() || self._rocket_pods.free_rockets <= 0) {
       wait 0.05;
+    }
 
     self ent_flag_clear("reloading_rockets");
     self ent_flag_set("arming_rockets");
     player = get_players()[0];
 
-    while(player throwbuttonpressed())
+    while(player throwbuttonpressed()) {
       wait 0.05;
+    }
 
     self ent_flag_clear("arming_rockets");
     self notify("fire_rockets");
@@ -351,12 +365,14 @@ fire_rockets() {
   while(true) {
     rockets = self arm_rockets();
 
-    for(i = 0; i < rockets.size; i++)
+    for(i = 0; i < rockets.size; i++) {
       self fire_rocket(rockets[i]);
+    }
 
     if(isDefined(level.pow_demo) && level.pow_demo) {
-      if(self._rocket_pods.free_rockets < 3)
+      if(self._rocket_pods.free_rockets < 3) {
         self._rocket_pods.free_rockets = self._rocket_pods.total_rockets;
+      }
     }
 
     self.armed_rockets = 0;
@@ -378,8 +394,9 @@ arm_rockets() {
         if(!rocket.is_armed) {
           arm_time = 0;
 
-          if(armed_rockets.size)
+          if(armed_rockets.size) {
             arm_time = self._rocket_pods.arm_time;
+          }
 
           rocket = arm_single_rocket(rocket, arm_time);
 
@@ -391,8 +408,9 @@ arm_rockets() {
             advance_pod_index();
             playsoundatposition("wpn_rocket_prime_chopper_trigger", (0, 0, 0));
 
-            if(armed_rockets.size > 1)
+            if(armed_rockets.size > 1) {
               playsoundatposition("wpn_rocket_prime_chopper", (0, 0, 0));
+            }
 
             break;
           } else {
@@ -409,8 +427,9 @@ arm_rockets() {
 }
 
 reload_chopper_sounds() {
-  if(!isDefined(level.reload_string))
+  if(!isDefined(level.reload_string)) {
     level.reload_string = "left";
+  }
 
   if(level.reload_string == "left") {
     playsoundatposition("wpn_rocket_reload_chopper_left_battery", (0, 0, 0));
@@ -422,10 +441,11 @@ reload_chopper_sounds() {
 }
 
 advance_pod_index() {
-  if(self._rocket_pods.pod_index == self._rocket_pods.pods.size - 1)
+  if(self._rocket_pods.pod_index == self._rocket_pods.pods.size - 1) {
     self._rocket_pods.pod_index = 0;
-  else
+  } else {
     self._rocket_pods.pod_index++;
+  }
 }
 
 arm_single_rocket(rocket, time) {
@@ -456,8 +476,9 @@ add_rocket_pod(entity, tag, num_rockets) {
   self._rocket_pods.total_rockets = self._rocket_pods.total_rockets + num_rockets;
   self._rocket_pods.free_rockets = self._rocket_pods.free_rockets + num_rockets;
 
-  if(!isDefined(self._rocket_pods.pods))
+  if(!isDefined(self._rocket_pods.pods)) {
     self._rocket_pods.pods = [];
+  }
 
   pod_index = self._rocket_pods.pods.size;
   self._rocket_pods.pods[pod_index] = spawnStruct();
@@ -488,8 +509,9 @@ rocket_regen() {
     if(!self ent_flag("arming_rockets") && self._rocket_pods.free_rockets < self._rocket_pods.total_rockets) {
       wait 3;
 
-      if(!self ent_flag("arming_rockets"))
+      if(!self ent_flag("arming_rockets")) {
         self._rocket_pods.free_rockets++;
+      }
     } else
       wait 0.05;
   }
@@ -500,8 +522,9 @@ rocket_reload() {
   self endon("hind weapons disabled");
 
   while(true) {
-    while(self._rocket_pods.free_rockets > 0 || self ent_flag("arming_rockets"))
+    while(self._rocket_pods.free_rockets > 0 || self ent_flag("arming_rockets")) {
       wait 0.1;
+    }
 
     if(!self ent_flag("reloading_rockets")) {
       self notify("rocket_reload", self._rocket_pods.free_rockets);
@@ -527,11 +550,13 @@ rocket_reload_button() {
   player = get_players()[0];
 
   while(true) {
-    while(self._rocket_pods.free_rockets >= self._rocket_pods.total_rockets || self ent_flag("arming_rockets") || self ent_flag("reloading_rockets"))
+    while(self._rocket_pods.free_rockets >= self._rocket_pods.total_rockets || self ent_flag("arming_rockets") || self ent_flag("reloading_rockets")) {
       wait 0.1;
+    }
 
-    while(!player usebuttonpressed())
+    while(!player usebuttonpressed()) {
       wait 0.05;
+    }
 
     if(!self ent_flag("reloading_rockets")) {
       self notify("rocket_reload", self._rocket_pods.free_rockets);
@@ -575,8 +600,9 @@ get_rocket_pod_fire_pos(pod_index) {
   pod = self._rocket_pods.pods[pod_index];
   pos = pod.ent.origin;
 
-  if(isDefined(pod.tag))
+  if(isDefined(pod.tag)) {
     pos = pod.ent gettagorigin(pod.tag);
+  }
 
   return pos;
 }
@@ -592,10 +618,11 @@ fire_rocket(rocket) {
   trace = bulletTrace(trace_origin, trace_origin + trace_direction, 0, self);
   trace_dist_sq = distancesquared(trace_origin, trace["position"]);
 
-  if(trace_dist_sq < 25000000 && trace_dist_sq > 250000)
+  if(trace_dist_sq < 25000000 && trace_dist_sq > 250000) {
     end_origin = trace["position"];
-  else
+  } else {
     end_origin = start_origin + forward * 1000;
+  }
 
   get_players()[0] playrumbleonentity("damage_light");
   magicbullet("hind_rockets", start_origin, end_origin, self);
@@ -626,10 +653,11 @@ update_rocket_hud(rocket_count, ammo_left, reloading) {
     level._rocket_hud_ammo.y = 30;
   }
 
-  if(isDefined(rocket_count))
+  if(isDefined(rocket_count)) {
     level._rocket_hud settext(rocket_count);
-  else
+  } else {
     level._rocket_hud settext("");
+  }
 
   if(isDefined(reloading) && reloading) {
     self.rocket_reloading = 1;
@@ -653,12 +681,12 @@ debug_rocket_targetting() {
     line(self.other_rocket_pod.origin + 2500 * forward, self.other_rocket_pod.origin + 8000 * forward, (1, 0, 0), 20, 1, 1);
     wait 0.05;
   }
-
 }
 
 hud_rocket_create() {
-  if(!isDefined(self.rocket_hud))
+  if(!isDefined(self.rocket_hud)) {
     self.rocket_hud = [];
+  }
 
   self.rocket_hud["border_left"] = newhudelem();
   self.rocket_hud["border_left"].alignx = "left";
@@ -837,8 +865,9 @@ hud_rocket_think() {
 }
 
 hud_minigun_create() {
-  if(!isDefined(self.minigun_hud))
+  if(!isDefined(self.minigun_hud)) {
     self.minigun_hud = [];
+  }
 
   self.minigun_hud["gun"] = newhudelem();
   self.minigun_hud["gun"].alignx = "right";
@@ -884,8 +913,9 @@ minigun_sound() {
   player = get_players()[0];
 
   while(true) {
-    while(!player attackbuttonpressed())
+    while(!player attackbuttonpressed()) {
       wait 0.05;
+    }
 
     while(player attackbuttonpressed()) {
       wait 0.05;
@@ -903,8 +933,9 @@ hud_minigun_think() {
   player = get_players()[0];
 
   while(true) {
-    while(!player attackbuttonpressed())
+    while(!player attackbuttonpressed()) {
       wait 0.05;
+    }
 
     swap_counter = 1;
     self.minigun_hud["gun"] fadeovertime(0.05);
@@ -915,10 +946,11 @@ hud_minigun_think() {
       player playLoopSound("wpn_hind_pilot_fire_loop_plr");
       self.minigun_hud["gun"] setshader("hud_hind_cannon0" + swap_counter, 64, 64);
 
-      if(swap_counter == 5)
+      if(swap_counter == 5) {
         swap_counter = 1;
-      else
+      } else {
         swap_counter++;
+      }
     }
 
     self.minigun_hud["gun"] setshader("hud_hind_cannon01", 64, 64);
@@ -941,10 +973,11 @@ make_player_usable() {
   while(true) {
     self.enter_trig waittill("trigger", who);
 
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       if(who getstance() != "stand") {
-        while(who.divetoprone)
+        while(who.divetoprone) {
           wait 0.2;
+        }
 
         who freezecontrols(1);
         who setstance("stand");
@@ -970,8 +1003,9 @@ make_player_unusable() {
 swap_for_interior(guy, no_attach) {
   level.animating_helicopter setModel("t5_veh_helo_hind_cockpitview");
 
-  if(!isDefined(no_attach) || !no_attach)
+  if(!isDefined(no_attach) || !no_attach) {
     level.animating_helicopter attach("t5_veh_helo_hind_ckpitdmg0", "origin_animate_jnt");
+  }
 
   level.animating_helicopter hidepart("tag_window_l_dmg_1", "t5_veh_helo_hind_cockpitview");
   level.animating_helicopter hidepart("tag_window_c_dmg_1", "t5_veh_helo_hind_cockpitview");
@@ -1004,8 +1038,9 @@ player_enter_animation(player) {
   player_body attach("t5_veh_helo_hind_cockpit_control", "tag_weapon");
   player_body show();
 
-  while(self getspeed() > 0.1)
+  while(self getspeed() > 0.1) {
     wait 0.05;
+  }
 
   self waittill("playable_hind_climbin");
   player notify("playable_hind_climbin");

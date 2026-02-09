@@ -64,7 +64,7 @@ function_867af0b() {
       player unlink();
     }
 
-    setdvar(#"test_mount", 0);
+    setDvar(#"test_mount", 0);
   }
 }
 

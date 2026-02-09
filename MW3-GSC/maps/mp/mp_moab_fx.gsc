@@ -31,8 +31,7 @@ main() {
   level._effect["Clouds_cliff"] = loadfx("weather/cloud_cliffs_moab");
   level._effect["dust_cloud"] = loadfx("dust/dust_cloud_moab");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_moab_fx::main();
   }
-
 }

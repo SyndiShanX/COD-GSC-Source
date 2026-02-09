@@ -87,7 +87,7 @@ enemy_watcher() {
       wait(0.2);
     }
 
-    if(isDefined(self.enemy) && IsPlayer(self.enemy) && isDefined(self.enemy.tags_carried) && self.enemy.tags_carried >= 3 && self BotCanSeeEntity(self.enemy) && Distance(self.origin, self.enemy.origin) <= MAX_MELEE_CHARGE_DIST) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy) && isDefined(self.enemy.tags_carried) && self.enemy.tags_carried >= 3 && self BotCanSeeEntity(self.enemy) && Distance(self.origin, self.enemy.origin) <= MAX_MELEE_CHARGE_DIST) {
       self BotSetDifficultySetting("meleeChargeDist", MAX_MELEE_CHARGE_DIST);
       self BotSetFlag("prefer_melee", true);
       self BotSetFlag("throw_knife_melee", (level.mugger_throwing_knife_mug_frac > 0));
@@ -149,7 +149,7 @@ bot_find_visible_tags_mugger(nearest_node_self, fov_self) {
     all_tags = array_combine(level.dogtags, level.mugger_extra_tags);
     foreach(tag in all_tags) {
       if(tag maps\mp\gametypes\_gameobjects::canInteractWith(self.team)) {
-        if((IsPlayer(self) || DistanceSquared(self.origin, tag.curorigin) < MAX_TAG_SIGHT_DIST_SQ)) {
+        if((isPlayer(self) || DistanceSquared(self.origin, tag.curorigin) < MAX_TAG_SIGHT_DIST_SQ)) {
           if(self maps\mp\bots\_bots_gametype_conf::bot_is_tag_visible(tag, nearest_node_self, fov_self)) {
             new_tag_struct = spawnStruct();
             new_tag_struct.origin = tag.curorigin;
@@ -180,7 +180,7 @@ tag_watcher() {
     if(self.hiding_until_bank) {
       continue;
     }
-    if(isDefined(self.enemy) && IsPlayer(self.enemy) && self BotCanSeeEntity(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy) && self BotCanSeeEntity(self.enemy)) {
       continue;
     }
     closest_tag = bot_find_closest_tag();

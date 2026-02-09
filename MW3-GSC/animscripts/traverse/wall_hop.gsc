@@ -15,8 +15,8 @@ main() {
 
 _id_3FFC() {
   if(randomint(100) < 30) {
-    animscripts\traverse\shared::_id_3FE6( % traverse_wallhop_3, 39.875);
+    animscripts\traverse\shared::_id_3FE6(%traverse_wallhop_3, 39.875);
   } else {
-    animscripts\traverse\shared::_id_3FE6( % traverse_wallhop, 39.875);
+    animscripts\traverse\shared::_id_3FE6(%traverse_wallhop, 39.875);
   }
 }

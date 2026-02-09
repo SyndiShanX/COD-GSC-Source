@@ -69,7 +69,7 @@ on_player_spawned() {
 }
 
 on_weapon_change(params) {
-  if(!isDefined(params.weapon) || !isweapon(params.weapon) || !isDefined(params.last_weapon) || !isweapon(params.last_weapon) || !isDefined(self) || !isplayer(self)) {
+  if(!isDefined(params.weapon) || !isweapon(params.weapon) || !isDefined(params.last_weapon) || !isweapon(params.last_weapon) || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -124,7 +124,7 @@ scoreeventplayerkill(data, time) {
 
   attacker = data.attacker;
 
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     return;
   }
 
@@ -281,7 +281,7 @@ scoreeventplayerkill(data, time) {
         processscoreevent(#"traversal_kill", attacker, victim, weapon);
       }
 
-      if(var_406186a6 && isDefined(attacker.var_3febb1e9) && isplayer(attacker.var_3febb1e9)) {
+      if(var_406186a6 && isDefined(attacker.var_3febb1e9) && isPlayer(attacker.var_3febb1e9)) {
         if(attacker == attacker.var_3febb1e9) {
           processscoreevent(#"stim_kill", attacker, victim, getweapon(#"eq_localheal"));
         } else {
@@ -334,9 +334,7 @@ scoreeventplayerkill(data, time) {
           attacker.sensorkill = (isDefined(attacker.sensorkill) ? attacker.sensorkill : 0) + 1;
 
           if(isDefined(level.var_ac6052e9)) {
-            var_9194a036 = [
-              [level.var_ac6052e9]
-            ]("sensorDartSuccessLineCount", 0);
+            var_9194a036 = [[level.var_ac6052e9]]("sensorDartSuccessLineCount", 0);
           }
 
           if(attacker.sensorkill == (isDefined(var_9194a036) ? var_9194a036 : 3)) {
@@ -360,9 +358,7 @@ scoreeventplayerkill(data, time) {
           var_78056843.sensorkill = (isDefined(var_78056843.sensorkill) ? var_78056843.sensorkill : 0) + 1;
 
           if(isDefined(level.var_ac6052e9)) {
-            var_9194a036 = [
-              [level.var_ac6052e9]
-            ]("sensorDartSuccessLineCount", 0);
+            var_9194a036 = [[level.var_ac6052e9]]("sensorDartSuccessLineCount", 0);
           }
 
           if(var_78056843.sensorkill == (isDefined(var_9194a036) ? var_9194a036 : 3)) {
@@ -508,9 +504,7 @@ scoreeventplayerkill(data, time) {
         victimlastvisionpulsedby.visionpulsekill = (isDefined(victimlastvisionpulsedby.visionpulsekill) ? victimlastvisionpulsedby.visionpulsekill : 0) + 1;
 
         if(isDefined(level.var_ac6052e9)) {
-          var_9194a036 = [
-            [level.var_ac6052e9]
-          ]("visionPulseSuccessLineCount", 0);
+          var_9194a036 = [[level.var_ac6052e9]]("visionPulseSuccessLineCount", 0);
         }
 
         if(victimlastvisionpulsedby.visionpulsekill == (isDefined(var_9194a036) ? var_9194a036 : 3)) {

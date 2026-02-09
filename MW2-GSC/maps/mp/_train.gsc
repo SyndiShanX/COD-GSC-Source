@@ -254,167 +254,167 @@ train_spawns_dust() {
 }
 
 train_kills_players(train_cars, distance_between_cars) {
-  // find the extents of the train, presuming it is going straight n/s/e/w and then test vs player origins to see
-  // if they should be run over
-  train_width = 68;
-  self endon("train_stops_killing_players");
+    // find the extents of the train, presuming it is going straight n/s/e/w and then test vs player origins to see
+    // if they should be run over
+    train_width = 68;
+    self endon("train_stops_killing_players");
 
-  forward = anglesToForward(self.angles);
-  right = anglestoright(self.angles);
-  full_car_vec = forward * distance_between_cars;
-  half_car_vec = full_car_vec * 0.5;
-  train_width_vec = right * train_width;
+    forward = anglesToForward(self.angles);
+    right = anglestoright(self.angles);
+    full_car_vec = forward * distance_between_cars;
+    half_car_vec = full_car_vec * 0.5;
+    train_width_vec = right * train_width;
 
-  sides = [];
-  sides["front"] = self.origin + half_car_vec;
-  sides["rear"] = self.origin + train_cars * full_car_vec * -1;
-  sides["right"] = self.origin + train_width_vec;
-  sides["left"] = self.origin - train_width_vec;
-  start = self.origin;
-
-  max_x = sides["front"][0];
-  min_x = sides["front"][0];
-  max_y = sides["front"][1];
-  min_y = sides["front"][1];
-  foreach(side in sides) {
-    if(side[0] > max_x)
-      max_x = side[0];
-    if(side[0] < min_x)
-      min_x = side[0];
-    if(side[1] > max_y)
-      max_y = side[1];
-    if(side[1] < min_y)
-      min_y = side[1];
-  }
-
-  for(;;) {
-    dif = start - self.origin;
+    sides = [];
+    sides["front"] = self.origin + half_car_vec;
+    sides["rear"] = self.origin + train_cars * full_car_vec * -1;
+    sides["right"] = self.origin + train_width_vec;
+    sides["left"] = self.origin - train_width_vec;
     start = self.origin;
-    max_x -= dif[0];
-    min_x -= dif[0];
-    max_y -= dif[1];
-    min_y -= dif[1];
 
-    // store it for the dust fx
-    self.min_x = min_x;
-    self.max_x = max_x;
-    self.min_y = min_y;
-    self.max_y = max_y;
+    max_x = sides["front"][0];
+    min_x = sides["front"][0];
+    max_y = sides["front"][1];
+    min_y = sides["front"][1];
+    foreach(side in sides) {
+      if(side[0] > max_x)
+        max_x = side[0];
+      if(side[0] < min_x)
+        min_x = side[0];
+      if(side[1] > max_y)
+        max_y = side[1];
+      if(side[1] < min_y)
+        min_y = side[1];
+    }
 
-    //print3d( ( max_x, max_y, self.origin[ 2 ] ), " * " );
-    //print3d( ( min_x, max_y, self.origin[ 2 ] ), " * " );
-    //print3d( ( max_x, min_y, self.origin[ 2 ] ), " * " );
-    //print3d( ( min_x, min_y, self.origin[ 2 ] ), " * " );
+    for(;;) {
+      dif = start - self.origin;
+      start = self.origin;
+      max_x -= dif[0];
+      min_x -= dif[0];
+      max_y -= dif[1];
+      min_y -= dif[1];
 
-    hit_ents = [];
+      // store it for the dust fx
+      self.min_x = min_x;
+      self.max_x = max_x;
+      self.min_y = min_y;
+      self.max_y = max_y;
 
-    foreach(player in level.players) {
-      if(!isalive(player))
-        continue;
-      if(player.sessionstate != "playing")
-        continue;
-      if(!train_hits(player, min_x, min_y, max_x, max_y)) {
-        continue;
+      //print3d( ( max_x, max_y, self.origin[ 2 ] ), " * " );
+      //print3d( ( min_x, max_y, self.origin[ 2 ] ), " * " );
+      //print3d( ( max_x, min_y, self.origin[ 2 ] ), " * " );
+      //print3d( ( min_x, min_y, self.origin[ 2 ] ), " * " );
+
+      hit_ents = [];
+
+      foreach(player in level.players) {
+        if(!isalive(player))
+          continue;
+        if(player.sessionstate != "playing")
+          continue;
+        if(!train_hits(player, min_x, min_y, max_x, max_y)) {
+          continue;
+        }
+        player playSound("melee_knife_hit_watermelon");
+
+        pos = get_damageable_player_pos(player);
+        hit_ents[hit_ents.size] = get_damageable_player(player, pos);
       }
-      player playSound("melee_knife_hit_watermelon");
 
-      pos = get_damageable_player_pos(player);
-      hit_ents[hit_ents.size] = get_damageable_player(player, pos);
-    }
-
-    grenades = getEntArray("grenade", "classname");
-    foreach(grenade in grenades) {
-      if(!train_hits(grenade, min_x, min_y, max_x, max_y)) {
-        continue;
+      grenades = getEntArray("grenade", "classname");
+      foreach(grenade in grenades) {
+        if(!train_hits(grenade, min_x, min_y, max_x, max_y)) {
+          continue;
+        }
+        pos = get_damageable_grenade_pos(grenade);
+        hit_ents[hit_ents.size] = get_damageable_grenade(grenade, pos);
       }
-      pos = get_damageable_grenade_pos(grenade);
-      hit_ents[hit_ents.size] = get_damageable_grenade(grenade, pos);
+
+      foreach(ent in hit_ents) {
+        ent.damage = 5000;
+        ent.pos = self.origin;
+        ent.damageOwner = self;
+        ent.eInflictor = self;
+
+        ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
+          ent.damageOwner, // eAttacker = the player that is attacking
+          ent.damage, // iDamage = the amount of damage to do
+          "MOD_PROJECTILE_SPLASH", // sMeansOfDeath = string specifying the method of death (e.g. "MOD_PROJECTILE_SPLASH")
+          "train_mp", // sWeapon = string specifying the weapon used (e.g. "claymore_mp")
+          ent.pos, // damagepos = the position damage is coming from
+          vectornormalize(ent.damageCenter - ent.pos) // damagedir = the direction damage is moving in);
+        }
+
+        wait(0.05);
+      }
     }
 
-    foreach(ent in hit_ents) {
-      ent.damage = 5000;
-      ent.pos = self.origin;
-      ent.damageOwner = self;
-      ent.eInflictor = self;
+    train_hits(entity, min_x, min_y, max_x, max_y) {
+      if(entity.origin[2] < self.origin[2] - 5)
+        return false;
 
-      ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
-        ent.damageOwner, // eAttacker = the player that is attacking
-        ent.damage, // iDamage = the amount of damage to do
-        "MOD_PROJECTILE_SPLASH", // sMeansOfDeath = string specifying the method of death (e.g. "MOD_PROJECTILE_SPLASH")
-        "train_mp", // sWeapon = string specifying the weapon used (e.g. "claymore_mp")
-        ent.pos, // damagepos = the position damage is coming from
-        vectornormalize(ent.damageCenter - ent.pos) // damagedir = the direction damage is moving in);
+      if(entity.origin[2] > self.origin[2] + 162)
+        return false;
+
+      x = entity.origin[0];
+      y = entity.origin[1];
+      if(x < min_x)
+        return false;
+      if(y < min_y)
+        return false;
+      if(x > max_x)
+        return false;
+      if(y > max_y)
+        return false;
+      return true;
     }
 
-    wait(0.05);
-  }
-}
+    train_eq(origin, eq_radius, track_time, full_train_time) {
+      train_eq_lerp_for_time(origin, 0.0, 0.09, eq_radius, track_time, 0.5);
+      train_eq_for_time(origin, 0.17, eq_radius, full_train_time, 0.5);
+      train_eq_lerp_for_time(origin, 0.09, 0, eq_radius, track_time, 0.5);
+      //level notify( "stop_train_debug" + origin );
+    }
 
-train_hits(entity, min_x, min_y, max_x, max_y) {
-  if(entity.origin[2] < self.origin[2] - 5)
-    return false;
+    train_eq_for_time(origin, eq, eq_radius, eq_time, eq_time_slice) {
+      // earthquake makes the quake taper off over time so we
+      // are going to do a lot of earthquakes to simulate a steady quake
+      //thread print3d_eq( origin, eq );
+      steps = int(eq_time / eq_time_slice);
+      for(i = 0; i < steps; i++) {
+        Earthquake(eq, eq_time_slice * 3, origin, eq_radius);
+        wait(eq_time_slice);
+      }
+      remainder = eq_time - steps * eq_time_slice;
+      if(remainder > 0) {
+        wait(remainder);
+      }
+    }
 
-  if(entity.origin[2] > self.origin[2] + 162)
-    return false;
+    train_eq_lerp_for_time(origin, eq1, eq2, eq_radius, eq_time, eq_time_slice) {
+      // earthquake makes the quake taper off over time so we
+      // are going to do a lot of earthquakes to simulate a steady quake
+      //thread print3d_eq( origin, eq );
+      steps = int(eq_time / eq_time_slice);
+      for(i = 0; i < steps; i++) {
+        progress = i / steps;
+        eq = eq2 * progress + eq1 * (1 - progress);
+        if(eq > 0)
+          Earthquake(eq, eq_time_slice * 3, origin, eq_radius);
+        wait(eq_time_slice);
+      }
+      remainder = eq_time - steps * eq_time_slice;
+      if(remainder > 0) {
+        wait(remainder);
+      }
+    }
 
-  x = entity.origin[0];
-  y = entity.origin[1];
-  if(x < min_x)
-    return false;
-  if(y < min_y)
-    return false;
-  if(x > max_x)
-    return false;
-  if(y > max_y)
-    return false;
-  return true;
-}
-
-train_eq(origin, eq_radius, track_time, full_train_time) {
-  train_eq_lerp_for_time(origin, 0.0, 0.09, eq_radius, track_time, 0.5);
-  train_eq_for_time(origin, 0.17, eq_radius, full_train_time, 0.5);
-  train_eq_lerp_for_time(origin, 0.09, 0, eq_radius, track_time, 0.5);
-  //level notify( "stop_train_debug" + origin );
-}
-
-train_eq_for_time(origin, eq, eq_radius, eq_time, eq_time_slice) {
-  // earthquake makes the quake taper off over time so we
-  // are going to do a lot of earthquakes to simulate a steady quake
-  //thread print3d_eq( origin, eq );
-  steps = int(eq_time / eq_time_slice);
-  for(i = 0; i < steps; i++) {
-    Earthquake(eq, eq_time_slice * 3, origin, eq_radius);
-    wait(eq_time_slice);
-  }
-  remainder = eq_time - steps * eq_time_slice;
-  if(remainder > 0) {
-    wait(remainder);
-  }
-}
-
-train_eq_lerp_for_time(origin, eq1, eq2, eq_radius, eq_time, eq_time_slice) {
-  // earthquake makes the quake taper off over time so we
-  // are going to do a lot of earthquakes to simulate a steady quake
-  //thread print3d_eq( origin, eq );
-  steps = int(eq_time / eq_time_slice);
-  for(i = 0; i < steps; i++) {
-    progress = i / steps;
-    eq = eq2 * progress + eq1 * (1 - progress);
-    if(eq > 0)
-      Earthquake(eq, eq_time_slice * 3, origin, eq_radius);
-    wait(eq_time_slice);
-  }
-  remainder = eq_time - steps * eq_time_slice;
-  if(remainder > 0) {
-    wait(remainder);
-  }
-}
-
-print3d_eq(origin, msg) {
-  level notify("stop_train_debug" + origin);
-  level endon("stop_train_debug" + origin);
-  for(;;) {
-    Print3d(origin, msg);
-    wait(0.05);
-  }
-}
+    print3d_eq(origin, msg) {
+      level notify("stop_train_debug" + origin);
+      level endon("stop_train_debug" + origin);
+      for(;;) {
+        Print3d(origin, msg);
+        wait(0.05);
+      }
+    }

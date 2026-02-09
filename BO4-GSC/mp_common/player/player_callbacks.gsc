@@ -31,8 +31,8 @@ function_74b6d714(attacker, effectname, var_894859a2, durationoverride, weapon) 
     duration = undefined;
   }
 
-  attackerishittingteammate = isplayer(attacker) && self util::isenemyplayer(attacker) == 0 && self != attacker;
-  attackerishittingself = isplayer(attacker) && self == attacker;
+  attackerishittingteammate = isPlayer(attacker) && self util::isenemyplayer(attacker) == 0 && self != attacker;
+  attackerishittingself = isPlayer(attacker) && self == attacker;
 
   if(attackerishittingself && weapon.var_50d2316b) {
     return;

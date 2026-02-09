@@ -61,28 +61,27 @@ rocket_barrage_watcher() {
     } else {
       if(!self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
         if(self getcurrentweapon() == "air_support" && !self.rocket_targeting_on) //&& isDefined(self.first_with_radio) ) {
-        {
-        }
-          self thread rocket_barrage_targeting();
-          self.rocket_targeting_on = true;
-        } else if(self getcurrentweapon() != "air_support" && self.rocket_targeting_on) {
-          self.Rocket_Targeting_On = false;
-          self notify("end rocket barrage targeting");
-          delete_spotting_target();
-        } else if(self getcurrentweapon() != "air_support") {
-          self.Rocket_Targeting_On = false;
-          self notify("end rocket barrage targeting");
-          delete_spotting_target();
-        }
-      } else if(self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
-        if(self getcurrentweapon() == "air_support") {
-          self notify("activate pressed during barage");
-          wait 0.1;
-        }
+        {}
+        self thread rocket_barrage_targeting();
+        self.rocket_targeting_on = true;
+      } else if(self getcurrentweapon() != "air_support" && self.rocket_targeting_on) {
+        self.Rocket_Targeting_On = false;
+        self notify("end rocket barrage targeting");
+        delete_spotting_target();
+      } else if(self getcurrentweapon() != "air_support") {
+        self.Rocket_Targeting_On = false;
+        self notify("end rocket barrage targeting");
+        delete_spotting_target();
+      }
+    } else if(self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
+      if(self getcurrentweapon() == "air_support") {
+        self notify("activate pressed during barage");
+        wait 0.1;
       }
     }
-    wait_network_frame();
   }
+  wait_network_frame();
+}
 }
 rocket_barrage_targeting() {
   self endon("end rocket barrage targeting");

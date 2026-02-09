@@ -60,7 +60,7 @@ disable_filter_hazmat(player, filterid, overlayid) {
 }
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   if(!clientscripts\mp\zombies\_zm_equipment::is_equipment_included("equip_gasmask_zm")) {

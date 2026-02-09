@@ -13,17 +13,17 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_highrise");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.11);
-  setdvar("r_lightGridContrast", .9);
-  setdvar("r_tessellation", 0);
-  setdvar("r_lodBiasRigid", -2000);
-  setdvar("r_lodBiasSkinned", -2000);
-  setdvar("r_drawSun", 0);
-  setdvar("r_umbra", 1);
-  setdvar("r_fog", 1);
-  setdvar("r_filmusetweaks", 0);
-  setdvar("r_smodelinstancedthreshold", 0);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.11);
+  setDvar("r_lightGridContrast", .9);
+  setDvar("r_tessellation", 0);
+  setDvar("r_lodBiasRigid", -2000);
+  setDvar("r_lodBiasSkinned", -2000);
+  setDvar("r_drawSun", 0);
+  setDvar("r_umbra", 1);
+  setDvar("r_fog", 1);
+  setDvar("r_filmusetweaks", 0);
+  setDvar("r_smodelinstancedthreshold", 0);
 
   VisionSetNaked("mp_highrise");
   ambientPlay("embient_mp_highrise");
@@ -34,7 +34,7 @@ main() {
   // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 3;
 
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   //thread Elevator( "elev1" );
   //thread Elevator( "elev2" );
   //thread Elevator( "elev3" );	
@@ -42,22 +42,22 @@ main() {
 
   //thread SetupRappel();
 
-  setdvar("r_primaryLightUseTweaks", 1);
-  setdvar("r_primaryLightTweakDiffuseStrength", 2.45);
-  setdvar("r_primaryLightTweakSpecularStrength", 1.64);
+  setDvar("r_primaryLightUseTweaks", 1);
+  setDvar("r_primaryLightTweakDiffuseStrength", 2.45);
+  setDvar("r_primaryLightTweakSpecularStrength", 1.64);
 
-  setdvar("r_viewModelPrimaryLightUseTweaks", 1);
-  setdvar("r_viewModelPrimaryLightTweakDiffuseStrength", 2.45);
-  setdvar("r_viewModelPrimaryLightTweakSpecularStrength", 1.64);
+  setDvar("r_viewModelPrimaryLightUseTweaks", 1);
+  setDvar("r_viewModelPrimaryLightTweakDiffuseStrength", 2.45);
+  setDvar("r_viewModelPrimaryLightTweakSpecularStrength", 1.64);
 
-  setdvar("r_colorScaleUseTweaks", 1);
-  setdvar("r_diffuseColorScale", 2.1);
-  setdvar("r_specularColorScale", 1.08);
+  setDvar("r_colorScaleUseTweaks", 1);
+  setDvar("r_diffuseColorScale", 2.1);
+  setDvar("r_specularColorScale", 1.08);
 
-  setdvar("r_veil", 1);
-  setdvar("r_veilusetweaks", 1);
-  setdvar("r_veilStrength", 0.247);
-  setdvar("r_veilBackgroundStrength", 1.793);
+  setDvar("r_veil", 1);
+  setDvar("r_veilusetweaks", 1);
+  setDvar("r_veilStrength", 0.247);
+  setDvar("r_veilBackgroundStrength", 1.793);
 }
 
 Elevator(elevatorID) {

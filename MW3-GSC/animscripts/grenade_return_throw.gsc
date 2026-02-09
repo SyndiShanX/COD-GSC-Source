@@ -15,7 +15,6 @@ main() {
 
   if(isDefined(self.enemy)) {
     var_1 = distance(self.origin, self.enemy.origin);
-
   }
   var_2 = [];
 
@@ -31,10 +30,9 @@ main() {
 
   if(var_2.size == 0) {
     var_2[0] = % grenade_return_standing_throw_overhand_forward;
-
   }
   var_0 = var_2[randomint(var_2.size)];
-  self setflaggedanimknoballrestart("throwanim", var_0, % body, 1, 0.3);
+  self setflaggedanimknoballrestart("throwanim", var_0, %body, 1, 0.3);
   var_4 = animhasnotetrack(var_0, "grenade_left") || animhasnotetrack(var_0, "grenade_right");
 
   if(var_4) {
@@ -54,7 +52,6 @@ main() {
 
   if(isDefined(self.grenade)) {
     self throwgrenade();
-
   }
   wait 1;
 

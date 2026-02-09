@@ -16,7 +16,7 @@ main() {
   game["defenders"] = "allies";
   game["allies_soldiertype"] = "woodland";
   game["axis_soldiertype"] = "woodland";
-  setdvar("compassmaxrange", "2200");
+  setDvar("compassmaxrange", "2200");
 
   if(level.gametype == "dom") {
     level.domborderfx["friendly"]["_a"] = "vfx\unique\vfx_marker_dom_med";

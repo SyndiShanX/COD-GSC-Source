@@ -65,7 +65,7 @@ internalMain(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed,
 }
 
 playerHitable(duration) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   self.shellshocked = true;
   self.ignoreme = true;

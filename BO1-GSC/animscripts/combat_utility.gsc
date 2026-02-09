@@ -11,12 +11,12 @@
 #include maps\_gameskill;
 #include maps\_utility;
 #using_animtree("generic_human");
+
 player_init() {}
 EnemiesWithinStandingRange() {
   enemyDistanceSq = self MyGetEnemySqDist();
   return (enemyDistanceSq < anim.standRangeSq);
 }
-
 MyGetEnemySqDist() {
   dist = self GetClosestEnemySqDist();
   if(!isDefined(dist)) {
@@ -24,7 +24,6 @@ MyGetEnemySqDist() {
   }
   return dist;
 }
-
 getTargetAngleOffset(target) {
   pos = self GetShootAtPos() + (0, 0, -3);
   dir = (pos[0] - target[0], pos[1] - target[1], pos[2] - target[2]);
@@ -32,11 +31,9 @@ getTargetAngleOffset(target) {
   fact = dir[2] * -1;
   return fact;
 }
-
 getSniperBurstDelayTime() {
   return RandomFloatRange(anim.min_sniper_burst_delay_time, anim.max_sniper_burst_delay_time);
 }
-
 getRemainingBurstDelayTime() {
   timeSoFar = (GetTime() - self.a.lastShootTime) / 1000;
   delayTime = getBurstDelayTime();
@@ -45,7 +42,6 @@ getRemainingBurstDelayTime() {
   }
   return 0;
 }
-
 getBurstDelayTime() {
   if(self usingSidearm()) {
     return RandomFloatRange(.15, .55);
@@ -65,7 +61,6 @@ getBurstDelayTime() {
     return RandomFloatRange(.4, .9);
   }
 }
-
 burstDelay() {
   if(self.bulletsInClip) {
     if(self.shootStyle == "full" && !self.fastBurst) {
@@ -80,7 +75,6 @@ burstDelay() {
     }
   }
 }
-
 cheatAmmoIfNecessary() {
   assert(!self.bulletsInClip);
   if(!isDefined(self.enemy)) {
@@ -102,7 +96,7 @@ cheatAmmoIfNecessary() {
   if(self.team == "allies") {
     return false;
   }
-  if(!IsPlayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return false;
   }
   if(weaponClipSize(self.weapon) < 15) {
@@ -137,15 +131,14 @@ cheatAmmoIfNecessary() {
   self.nextCheatTime = GetTime() + 8000;
   return true;
 }
-
 shootUntilShootBehaviorChange() {
   self endon("shoot_behavior_change");
   self endon("stopShooting");
   if(self weaponAnims() == "rocketlauncher" || self isSniper()) {
     players = GetPlayers();
     if(isDefined(players) && players.size > 0) {
-      if(isDefined(self.enemy) && !IsPlayer(self.enemy) && IsSentient(self.enemy)) {
-        if(distanceSquared(players[0].origin, self.enemy.origin) < 384 * 384) {
+      if(isDefined(self.enemy) && !isPlayer(self.enemy) && IsSentient(self.enemy)) {
+        if(DistanceSquared(players[0].origin, self.enemy.origin) < 384 * 384) {
           self.enemy animscripts\battlechatter_ai::addThreatEvent("infantry", self, 1.0);
         }
       }
@@ -154,10 +147,11 @@ shootUntilShootBehaviorChange() {
       wait(RandomFloat(2.0));
     }
   }
-  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > 400 * 400)
+  if(isDefined(self.enemy) && DistanceSquared(self.origin, self.enemy.origin) > 400 * 400) {
     burstCount = RandomIntRange(1, 5);
-  else
+  } else {
     burstCount = 10;
+  }
   while(1) {
     burstDelay();
     animPrefix = getShootAnimPrefix();
@@ -194,12 +188,10 @@ shootUntilShootBehaviorChange() {
     }
   }
 }
-
 getUniqueFlagNameIndex() {
   anim.animFlagNameIndex++;
   return anim.animFlagNameIndex;
 }
-
 FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   animName = "fireAnim_" + getUniqueFlagNameIndex();
   maps\_gameskill::resetMissTime();
@@ -232,10 +224,9 @@ FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots);
   self ClearAnim(%add_fire, .2);
 }
-
 FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
   self endon("enemy");
-  if(IsPlayer(self.enemy) && (self.shootStyle == "full" || self.shootStyle == "semi")) {
+  if(isPlayer(self.enemy) && (self.shootStyle == "full" || self.shootStyle == "semi")) {
     level endon("player_becoming_invulnerable");
   }
   if(stopOnAnimationEnd) {
@@ -269,8 +260,8 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
     if(aimedAtShootEntOrPos() && GetTime() > self.a.lastShootTime) {
       self shootAtShootEntOrPos();
       assertex(self.bulletsInClip >= 0, self.bulletsInClip);
-      if(IsPlayer(self.enemy) && flag("player_is_invulnerable")) {
-        if(randomInt(3) == 0) {
+      if(isPlayer(self.enemy) && flag("player_is_invulnerable")) {
+        if(RandomInt(3) == 0) {
           self.bulletsInClip--;
         }
       } else {
@@ -300,7 +291,6 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
     self notify("fireAnimEnd");
   }
 }
-
 aimedAtShootEntOrPos() {
   tag_weapon = self gettagorigin("tag_weapon");
   if(!isDefined(tag_weapon)) {
@@ -314,20 +304,18 @@ aimedAtShootEntOrPos() {
   anglesToShootPos = VectorToAngles(self.shootPos - tag_weapon);
   absyawdiff = AbsAngleClamp180(weaponAngles[1] - anglesToShootPos[1]);
   if(absyawdiff > self.aimThresholdYaw) {
-    if(distanceSquared(self GetShootAtPos(), self.shootPos) > 64 * 64 || absyawdiff > 45) {
+    if(DistanceSquared(self GetShootAtPos(), self.shootPos) > 64 * 64 || absyawdiff > 45) {
       return false;
     }
   }
   return AbsAngleClamp180(weaponAngles[0] - anglesToShootPos[0]) <= self.aimThresholdPitch;
 }
-
 NotifyOnAnimEnd(animNotify, endNotify) {
   self endon("killanimscript");
   self endon(endNotify);
   self waittillmatch(animNotify, "end");
   self notify(endNotify);
 }
-
 shootAtShootEntOrPos() {
   if(isDefined(self.shoot_notify)) {
     self notify(self.shoot_notify);
@@ -342,7 +330,6 @@ shootAtShootEntOrPos() {
     self shootPosWrapper(self.shootPos);
   }
 }
-
 showRocket() {
   if(!isSubStr(self.weapon, "rpg")) {
     return;
@@ -351,7 +338,6 @@ showRocket() {
   self showpart("tag_rocket");
   self notify("showing_rocket");
 }
-
 showRocketWhenReloadIsDone() {
   if(self.weapon != "rpg") {
     return;
@@ -361,13 +347,11 @@ showRocketWhenReloadIsDone() {
   self waittill("killanimscript");
   self showRocket();
 }
-
 decrementBulletsInClip() {
   if(self.bulletsInClip) {
     self.bulletsInClip--;
   }
 }
-
 shotgunPumpSound(animName) {
   if(!self usingShotgun()) {
     return;
@@ -380,14 +364,12 @@ shotgunPumpSound(animName) {
   self playSound("wpn_shotgun_pump");
   self notify("shotgun_pump_sound_end");
 }
-
 stopShotgunPumpAfterTime(timer) {
   self endon("killanimscript");
   self endon("shotgun_pump_sound_end");
   wait timer;
   self notify("shotgun_pump_sound_end");
 }
-
 NeedToReload(thresholdFraction) {
   if(isDefined(self.noreload)) {
     assertex(self.noreload, ".noreload must be true or undefined");
@@ -409,7 +391,6 @@ NeedToReload(thresholdFraction) {
   }
   return false;
 }
-
 putGunBackInHandOnKillAnimScript() {
   self endon("weapon_switch_done");
   self endon("death");
@@ -418,7 +399,6 @@ putGunBackInHandOnKillAnimScript() {
   self waittill("killanimscript");
   animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
 }
-
 Reload(thresholdFraction, optionalAnimation) {
   if(self usingGasWeapon()) {
     return flamethrower_reload();
@@ -450,13 +430,11 @@ Reload(thresholdFraction, optionalAnimation) {
   }
   return true;
 }
-
 flamethrower_reload() {
   wait(0.05);
   self animscripts\weaponList::RefillClip();
   return true;
 }
-
 getGrenadeThrowOffset(throwAnim) {
   offset = (0, 0, 64);
   if(isDefined(throwAnim)) {
@@ -492,7 +470,6 @@ getGrenadeThrowOffset(throwAnim) {
   }
   return offset;
 }
-
 ThrowGrenadeAtPlayerASAP_combat_utility() {
   if(anim.numGrenadesInProgressTowardsPlayer == 0) {
     anim.grenadeTimers["player_fraggrenade"] = 0;
@@ -500,9 +477,8 @@ ThrowGrenadeAtPlayerASAP_combat_utility() {
   }
   anim.throwGrenadeAtPlayerASAP = true;
 }
-
 setActiveGrenadeTimer(throwingAt) {
-  if(IsPlayer(throwingAt)) {
+  if(isPlayer(throwingAt)) {
     self.activeGrenadeTimer = "player_" + self.grenadeWeapon;
   } else {
     self.activeGrenadeTimer = "AI_" + self.grenadeWeapon;
@@ -511,9 +487,8 @@ setActiveGrenadeTimer(throwingAt) {
     anim.grenadeTimers[self.activeGrenadeTimer] = randomIntRange(1000, 20000);
   }
 }
-
 considerChangingTarget(throwingAt) {
-  if(!IsPlayer(throwingAt) && self.team == "axis") {
+  if(!isPlayer(throwingAt) && self.team == "axis") {
     players = GetPlayers();
     for(i = 0; i < players.size; i++) {
       player = players[i];
@@ -543,26 +518,22 @@ considerChangingTarget(throwingAt) {
   }
   return throwingAt;
 }
-
 usingPlayerGrenadeTimer() {
   return self.activeGrenadeTimer == "player_" + self.grenadeWeapon;
 }
-
 setGrenadeTimer(grenadeTimer, newValue) {
   oldValue = anim.grenadeTimers[grenadeTimer];
   anim.grenadeTimers[grenadeTimer] = max(newValue, oldValue);
 }
-
 getDesiredGrenadeTimerValue() {
   nextGrenadeTimeToUse = undefined;
   if(self usingPlayerGrenadeTimer()) {
-    nextGrenadeTimeToUse = GetTime() + anim.playerGrenadeBaseTime + randomInt(anim.playerGrenadeRangeTime);
+    nextGrenadeTimeToUse = GetTime() + anim.playerGrenadeBaseTime + RandomInt(anim.playerGrenadeRangeTime);
   } else {
-    nextGrenadeTimeToUse = GetTime() + 40000 + randomInt(60000);
+    nextGrenadeTimeToUse = GetTime() + 40000 + RandomInt(60000);
   }
   return nextGrenadeTimeToUse;
 }
-
 mayThrowDoubleGrenade() {
   assert(self.activeGrenadeTimer == "player_fraggrenade");
   if(player_died_recently()) {
@@ -579,14 +550,12 @@ mayThrowDoubleGrenade() {
   }
   return anim.numGrenadesInProgressTowardsPlayer < 2;
 }
-
 myGrenadeCoolDownElapsed() {
   if(player_died_recently()) {
     return false;
   }
   return (GetTime() >= self.a.nextGrenadeTryTime);
 }
-
 grenadeCoolDownElapsed() {
   if(self.script_forcegrenade == 1) {
     return true;
@@ -602,7 +571,6 @@ grenadeCoolDownElapsed() {
   }
   return false;
 }
-
 isGrenadePosSafe(throwingAt, destination) {
   if(isDefined(anim.throwGrenadeAtPlayerASAP) && self usingPlayerGrenadeTimer()) {
     return true;
@@ -620,7 +588,7 @@ isGrenadePosSafe(throwingAt, destination) {
     if(!IsAlive(self.squad.members[i])) {
       continue;
     }
-    dist = distanceSquared(self.squad.members[i].origin, destination);
+    dist = DistanceSquared(self.squad.members[i].origin, destination);
     if(dist > distanceThresholdSq) {
       continue;
     }
@@ -642,11 +610,10 @@ isGrenadePosSafe(throwingAt, destination) {
   }
   return true;
 }
-
 TryGrenadePosProc(throwingAt, destination, optionalAnimation, armOffset) {
   if(!isGrenadePosSafe(throwingAt, destination)) {
     return false;
-  } else if(distanceSquared(self.origin, destination) < 200 * 200) {
+  } else if(DistanceSquared(self.origin, destination) < 200 * 200) {
     return false;
   }
   trace = PhysicsTrace(destination + (0, 0, 1), destination + (0, 0, -500));
@@ -656,7 +623,6 @@ TryGrenadePosProc(throwingAt, destination, optionalAnimation, armOffset) {
   trace += (0, 0, .1);
   return TryGrenadeThrow(throwingAt, trace, optionalAnimation, armOffset);
 }
-
 TryGrenade(throwingAt, optionalAnimation) {
   if(self usingGasWeapon()) {
     return false;
@@ -692,7 +658,6 @@ TryGrenade(throwingAt, optionalAnimation) {
     return TryGrenadePosProc(throwingAt, throwingAt.origin, optionalAnimation, armOffset);
   }
 }
-
 TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset) {
   if(self usingGasWeapon()) {
     return false;
@@ -766,13 +731,11 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset) {
   } else {}
   return false;
 }
-
 reduceGIPTPOnKillanimscript() {
   self endon("dont_reduce_giptp_on_killanimscript");
   self waittill("killanimscript");
   anim.numGrenadesInProgressTowardsPlayer--;
 }
-
 DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self animscripts\battleChatter_ai::evaluateAttackEvent("grenade");
   self notify("stop_aiming_at_enemy");
@@ -826,12 +789,10 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self SetAnim(%exposed_aiming, 1);
   self ClearAnim(throw_anim, .2);
 }
-
 watchGrenadeTowardsPlayer(nextGrenadeTimeToUse) {
   watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse);
   anim.numGrenadesInProgressTowardsPlayer--;
 }
-
 watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
   activeGrenadeTimer = self.activeGrenadeTimer;
   timeoutObj = spawnStruct();
@@ -857,7 +818,7 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
       break;
     }
     if(grenade.origin == prevorigin) {
-      if(distanceSquared(grenade.origin, players[0].origin) < goodRadiusSqrd || distanceSquared(grenade.origin, players[0].origin) > giveUpRadiusSqrd) {
+      if(DistanceSquared(grenade.origin, players[0].origin) < goodRadiusSqrd || DistanceSquared(grenade.origin, players[0].origin) > giveUpRadiusSqrd) {
         break;
       }
     }
@@ -867,7 +828,7 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
   if(isDefined(grenade)) {
     grenadeorigin = grenade.origin;
   }
-  if(distanceSquared(grenadeorigin, players[0].origin) < goodRadiusSqrd) {
+  if(DistanceSquared(grenadeorigin, players[0].origin) < goodRadiusSqrd) {
     level notify("threw_grenade_at_player");
     anim.throwGrenadeAtPlayerASAP = undefined;
     if(GetTime() - anim.lastGrenadeLandedNearPlayerTime < 3000) {
@@ -877,24 +838,20 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
     setGrenadeTimer(activeGrenadeTimer, nextGrenadeTimeToUse);
   } else {}
 }
-
 getGrenadeIThrew() {
   self endon("killanimscript");
   self waittill("grenade_fire", grenade);
   return grenade;
 }
-
 watchGrenadeTowardsPlayerTimeout(timerlength) {
   wait timerlength;
   self notify("watchGrenadeTowardsPlayerTimeout");
 }
-
 attachGrenadeModel(model, tag) {
   self attach(model, tag);
   thread detachGrenadeOnScriptChange(model, tag);
   return tag;
 }
-
 detachGrenadeOnScriptChange(model, tag) {
   self endon("stop grenade check");
   self waittill("killanimscript");
@@ -907,7 +864,6 @@ detachGrenadeOnScriptChange(model, tag) {
   }
   self detach(model, tag);
 }
-
 offsetToOrigin(start) {
   forward = anglesToForward(self.angles);
   right = AnglesToRight(self.angles);
@@ -917,7 +873,6 @@ offsetToOrigin(start) {
   up = vector_scale(up, start[2]);
   return (forward + right + up);
 }
-
 grenadeLine(start, end) {
   level notify("armoffset");
   level endon("armoffset");
@@ -929,7 +884,6 @@ grenadeLine(start, end) {
     wait(0.05);
   }
 }
-
 getGrenadeDropVelocity() {
   yaw = RandomFloat(360);
   pitch = RandomFloatRange(30, 75);
@@ -941,13 +895,11 @@ getGrenadeDropVelocity() {
   velocity = (amntx, amnty, amntz) * speed;
   return velocity;
 }
-
 dropGrenade() {
   grenadeOrigin = self GetTagOrigin("tag_inhand");
   velocity = getGrenadeDropVelocity();
   self MagicGrenadeManual(grenadeOrigin, velocity, 3);
 }
-
 EyesAtEnemy() {
   self notify("stop EyesAtEnemy internal");
   self endon("death");
@@ -957,7 +909,6 @@ EyesAtEnemy() {
     wait 2;
   }
 }
-
 FindCoverNearSelf() {
   oldKeepNodeInGoal = self.keepClaimedNodeInGoal;
   oldKeepNode = self.keepClaimedNode;
@@ -975,7 +926,6 @@ FindCoverNearSelf() {
   self.keepClaimedNode = oldKeepNode;
   return false;
 }
-
 lookForBetterCover() {
   if(!isValidEnemy(self.enemy)) {
     return false;
@@ -989,7 +939,6 @@ lookForBetterCover() {
   }
   return false;
 }
-
 getBestCoverNodeIfAvailable() {
   node = self FindBestCoverNode();
   if(!isDefined(node)) {
@@ -1004,7 +953,6 @@ getBestCoverNodeIfAvailable() {
   }
   return node;
 }
-
 useCoverNodeIfPossible(node) {
   oldKeepNodeInGoal = self.keepClaimedNodeInGoal;
   oldKeepNode = self.keepClaimedNode;
@@ -1017,7 +965,6 @@ useCoverNodeIfPossible(node) {
   self.keepClaimedNode = oldKeepNode;
   return false;
 }
-
 tryRunningToEnemy(ignoreSuppression) {
   if(!isValidEnemy(self.enemy)) {
     return false;
@@ -1038,7 +985,6 @@ tryRunningToEnemy(ignoreSuppression) {
   }
   return false;
 }
-
 getGunYawToShootEntOrPos() {
   if(!isDefined(self.shootPos)) {
     assert(!isDefined(self.shootEnt));
@@ -1048,7 +994,6 @@ getGunYawToShootEntOrPos() {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 getGunPitchToShootEntOrPos() {
   if(!isDefined(self.shootPos)) {
     assert(!isDefined(self.shootEnt));
@@ -1058,7 +1003,6 @@ getGunPitchToShootEntOrPos() {
   pitch = AngleClamp180(pitch);
   return pitch;
 }
-
 getPitchToEnemy() {
   if(!isDefined(self.enemy)) {
     return 0;
@@ -1068,7 +1012,6 @@ getPitchToEnemy() {
   pitchDelta = 360 - VectorToAngles(vectorToEnemy)[0];
   return AngleClamp180(pitchDelta);
 }
-
 getPitchToSpot(spot) {
   if(!isDefined(spot)) {
     return 0;
@@ -1078,11 +1021,9 @@ getPitchToSpot(spot) {
   pitchDelta = 360 - VectorToAngles(vectorToEnemy)[0];
   return AngleClamp180(pitchDelta);
 }
-
 anim_set_next_move_to_new_cover() {
   self.a.next_move_to_new_cover = randomintrange(1, 4);
 }
-
 watchReloading() {
   self.isreloading = false;
   while(1) {
@@ -1093,7 +1034,6 @@ watchReloading() {
     self.isreloading = false;
   }
 }
-
 waittillReloadFinished() {
   self thread timedNotify(4, "reloadtimeout");
   self endon("reloadtimeout");
@@ -1109,13 +1049,11 @@ waittillReloadFinished() {
   }
   self notify("reloadtimeout");
 }
-
 timedNotify(time, msg) {
   self endon(msg);
   wait time;
   self notify(msg);
 }
-
 attackEnemyWhenFlashed() {
   self endon("killanimscript");
   while(1) {
@@ -1126,7 +1064,6 @@ attackEnemyWhenFlashed() {
     attackSpecificEnemyWhenFlashed();
   }
 }
-
 attackSpecificEnemyWhenFlashed() {
   self endon("enemy");
   self.enemy endon("death");
@@ -1138,29 +1075,26 @@ attackSpecificEnemyWhenFlashed() {
     tryToAttackFlashedEnemy();
   }
 }
-
 tryToAttackFlashedEnemy() {
   if(self.enemy.flashingTeam != self.team) {
     return;
   }
-  if(distanceSquared(self.origin, self.enemy.origin) > 1024 * 1024) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > 1024 * 1024) {
     return;
   }
   while(GetTime() < self.enemy.flashendtime - 500) {
-    if(!self cansee(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 800 * 800) {
+    if(!self cansee(self.enemy) && DistanceSquared(self.origin, self.enemy.origin) < 800 * 800) {
       tryRunningToEnemy(true);
     }
     wait .05;
   }
 }
-
 shouldThrowFlashBangAtEnemy() {
-  if(distanceSquared(self.origin, self.enemy.origin) > 768 * 768) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > 768 * 768) {
     return false;
   }
   return true;
 }
-
 startFlashBanged() {
   if(isDefined(self.flashduration)) {
     duration = self.flashduration;
@@ -1171,7 +1105,6 @@ startFlashBanged() {
   self notify("flashed");
   return duration;
 }
-
 monitorFlash() {
   self endon("death");
   self endon("stop_monitoring_flash");
@@ -1204,26 +1137,21 @@ monitorFlash() {
     self notify("doFlashBanged", attacker);
   }
 }
-
 isSniper() {
   return self.isSniper;
 }
-
 isSniperRifle(weapon) {
   return WeaponClass(weapon) == "rifle" && WeaponIsSemiAuto(weapon) && WeaponFireTime(weapon) > 0.2;
 }
-
 isCrossbow(weapon) {
   return (IsSubstr(weapon, "crossbow") && !IsSubstr(weapon, "explosive"));
 }
-
 NeedToRechamber() {
   if(self usingBoltActionWeapon() && self.bulletsInClip && self.a.needsToRechamber) {
     return true;
   }
   return false;
 }
-
 getShootAnimPrefix() {
   if(self.a.script == "cover_left" || self.a.script == "cover_right" || self.a.script == "cover_pillar") {
     if(isDefined(self.cornerAiming) && self.cornerAiming && isDefined(self.a.cornerMode) && self.a.cornerMode == "lean") {

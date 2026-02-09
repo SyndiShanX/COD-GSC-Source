@@ -178,7 +178,7 @@ capsule_get_closest_point(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 }
 
 player_trace(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -206,7 +206,7 @@ player_trace(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 player_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -230,7 +230,7 @@ player_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 player_trace_passed(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -251,7 +251,7 @@ player_get_closest_point_static(var_0, var_1, var_2, var_3) {
 }
 
 player_get_closest_point(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

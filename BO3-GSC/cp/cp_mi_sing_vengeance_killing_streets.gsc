@@ -406,13 +406,13 @@ function function_a45594e6() {
   self endon("death");
   self ai::set_ignoreme(1);
   self ai::set_ignoreall(1);
-  setdvar("ai_awarenessEnabled", 0);
+  setDvar("ai_awarenessEnabled", 0);
   self thread function_53a6540a();
   if(!level flag::get("move_killing_streets_hendricks_node_15")) {
     level flag::wait_till("move_killing_streets_hendricks_node_15");
   }
   self ai::set_ignoreall(0);
-  setdvar("ai_awarenessEnabled", 1);
+  setDvar("ai_awarenessEnabled", 1);
   while(true) {
     eventname = self util::waittill_any_return("killing_streets_intro_alerted", "scene_done", "done_shooting_civilian");
     if(eventname == "done_shooting_civilian") {

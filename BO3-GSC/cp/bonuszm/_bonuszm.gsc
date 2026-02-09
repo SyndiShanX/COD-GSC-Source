@@ -83,12 +83,12 @@ function __init__() {
   bonuszm_dev::function_6f199738();
   level.friendlyfiredisabled = 0;
   level.disableclassselection = 1;
-  setdvar("ai_instantNoSolidOnDeath", 1);
-  setdvar("bg_friendlyFireMode", 0);
-  setdvar("scr_firefly_swarm_attack_radius", 96);
-  setdvar("scr_concussive_wave_radius", 450);
-  setdvar("scr_concussive_wave_upg_radius", 800);
-  setdvar("scr_concussive_wave_kill_radius", 550);
+  setDvar("ai_instantNoSolidOnDeath", 1);
+  setDvar("bg_friendlyFireMode", 0);
+  setDvar("scr_firefly_swarm_attack_radius", 96);
+  setDvar("scr_concussive_wave_radius", 450);
+  setDvar("scr_concussive_wave_upg_radius", 800);
+  setDvar("scr_concussive_wave_kill_radius", 550);
   level.zm_variant_type_max = [];
   level.zm_variant_type_max["walk"] = [];
   level.zm_variant_type_max["run"] = [];
@@ -100,7 +100,7 @@ function __init__() {
   level.zm_variant_type_max["sprint"]["down"] = 7;
   level.zm_variant_type_max["sprint"]["up"] = 6;
   level.zombieanhilationenabled = 1;
-  setdvar("player_tmodeSightEnabled", 0);
+  setDvar("player_tmodeSightEnabled", 0);
   level.var_17ded976 = 0;
   level.zombie_use_zigzag_path = 1;
   level.aidisablegrenadethrows = 1;
@@ -279,7 +279,7 @@ function function_7ef5e890() {
 }
 
 function function_3d7ae135() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self.var_5206d4b9 = 0;
   self.var_f4fa5cef = 0;
 }
@@ -531,7 +531,7 @@ function function_c1802d32() {
   if(!self flag::get("bzm_zombie_attack")) {
     return false;
   }
-  if(isDefined(self.enemy) && isplayer(self.enemy) && self.enemy.var_5206d4b9 > 0) {
+  if(isDefined(self.enemy) && isPlayer(self.enemy) && self.enemy.var_5206d4b9 > 0) {
     return false;
   }
   return true;
@@ -747,14 +747,14 @@ function private function_48cb1ad1(einflictor, eattacker, idamage, idflags, smea
       return 0;
     }
   }
-  if(isplayer(eattacker) && self ai::get_behavior_attribute("spark_behavior")) {
+  if(isPlayer(eattacker) && self ai::get_behavior_attribute("spark_behavior")) {
     if(randomint(100) < 20) {
       if(isDefined(self.var_11f7b644) && (gettime() - self.var_11f7b644) > 1000) {
         self clientfield::increment("sparky_damaged_fx");
       }
     }
   }
-  if(isplayer(eattacker) && self ai::get_behavior_attribute("suicidal_behavior")) {
+  if(isPlayer(eattacker) && self ai::get_behavior_attribute("suicidal_behavior")) {
     if(randomint(100) < 60) {
       if(isDefined(self.var_11f7b644) && (gettime() - self.var_11f7b644) > 1000) {
         self clientfield::increment("fire_damaged_fx");
@@ -767,7 +767,7 @@ function private function_48cb1ad1(einflictor, eattacker, idamage, idflags, smea
   if(var_56559957 && !self ai::get_behavior_attribute("suicidal_behavior") && !self ai::get_behavior_attribute("spark_behavior")) {
     self clientfield::set("arch_actor_fire_fx", 1);
   }
-  if(isplayer(eattacker) && (isDefined(eattacker.forceanhilateondeath) && eattacker.forceanhilateondeath)) {
+  if(isPlayer(eattacker) && (isDefined(eattacker.forceanhilateondeath) && eattacker.forceanhilateondeath)) {
     if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
       self setignorepauseworld(1);
     }
@@ -803,18 +803,18 @@ function private function_f10fd3d1(weapon) {
 }
 
 function private onvehicledamagecallback(params) {
-  if(isplayer(params.eattacker) && (isDefined(params.eattacker.forceanhilateondeath) && params.eattacker.forceanhilateondeath)) {
+  if(isPlayer(params.eattacker) && (isDefined(params.eattacker.forceanhilateondeath) && params.eattacker.forceanhilateondeath)) {
     if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
       self setignorepauseworld(1);
     }
   }
-  if(isDefined(self.archetype) && self.archetype == "parasite" && isplayer(params.eattacker) && (!(isDefined(params.var_2585e9c3) && params.var_2585e9c3))) {
+  if(isDefined(self.archetype) && self.archetype == "parasite" && isPlayer(params.eattacker) && (!(isDefined(params.var_2585e9c3) && params.var_2585e9c3))) {
     if(level.currentdifficulty === "easy" || level.currentdifficulty === "normal") {
       self dodamage(self.health + 100, params.eattacker.origin);
     }
   }
   if(level.currentdifficulty === "easy" || level.currentdifficulty === "normal") {
-    if(isDefined(self.archetype) && self.archetype == "amws" && isplayer(params.eattacker)) {
+    if(isDefined(self.archetype) && self.archetype == "amws" && isPlayer(params.eattacker)) {
       self dodamage(self.health + 100, params.eattacker.origin);
     }
   }
@@ -859,7 +859,7 @@ function function_9bc25e40() {
   if(!function_7effc669(self)) {
     return;
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker thread function_11600557(self, attacker);
   }
   var_14e6a7e9 = self.origin;
@@ -1025,7 +1025,7 @@ function function_8421a595(origin, players) {
   }
   self.var_398570da = gettime() + randomintrange(2000, 3500);
   self.zombie_do_not_update_goal = 0;
-  if(isDefined(target) && !isplayer(target) && ispointonnavmesh(target.origin)) {
+  if(isDefined(target) && !isPlayer(target) && ispointonnavmesh(target.origin)) {
     target.last_valid_position = target.origin;
   }
   self.favoriteenemy = target;
@@ -1262,7 +1262,7 @@ function zombie_death_event(zombie) {
     zombie clientfield::set("arch_actor_fire_fx", 3);
   }
   zombie thread namespace_fdfaa57d::function_b67e03f7();
-  if(isDefined(zombie.attacker) && isplayer(zombie.attacker)) {
+  if(isDefined(zombie.attacker) && isPlayer(zombie.attacker)) {
     zombie.attacker notify("zom_kill", zombie);
   }
   level notify("zom_kill");
@@ -1558,7 +1558,7 @@ function function_5abd553b() {
 }
 
 function private function_fcf02f23() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   mapname = getdvarstring("mapname");
   var_f0b98892 = self savegame::get_player_data("saved_weapon", undefined);
   if(!ismapsublevel(mapname) && getdvarint("ui_blocksaves") != 0) {
@@ -1621,7 +1621,7 @@ function private bzmloadoutchangecallback() {
 function private bzm_waitforstreamerortimeout(player, timeout) {
   player endon("disconnect");
   player endon("death");
-  assert(isDefined(player) && isplayer(player));
+  assert(isDefined(player) && isPlayer(player));
   timeout = gettime() + (timeout * 1000);
   do {
     util::wait_network_frame();

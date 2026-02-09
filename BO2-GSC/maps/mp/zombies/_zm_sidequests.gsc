@@ -24,7 +24,7 @@ is_sidequest_allowed(a_gametypes) {
     a_gametypes = array(a_gametypes);
 
   for(i = 0; i < a_gametypes.size; i++) {
-    if(getdvar(#"g_gametype") == a_gametypes[i])
+    if(getDvar(#"g_gametype") == a_gametypes[i])
       b_is_gametype_active = 1;
   }
 
@@ -32,7 +32,7 @@ is_sidequest_allowed(a_gametypes) {
 }
 
 sidequest_debug() {
-  if(getdvar(#"_id_A7AC338D") != "1") {
+  if(getDvar(#"_id_A7AC338D") != "1") {
     return;
   }
   while(true)
@@ -534,7 +534,7 @@ radius_trigger_thread() {
   while(true) {
     self waittill("trigger", player);
 
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     self.owner_ent notify("triggered");
@@ -664,7 +664,7 @@ time_limited_stage(sidequest) {
 }
 
 sidequest_println(str) {
-  if(getdvar(#"_id_A7AC338D") != "1") {
+  if(getDvar(#"_id_A7AC338D") != "1") {
     return;
   }
   println(str);

@@ -38,24 +38,24 @@ function init_postfx_bundles() {
 
 function postfxbundledebuglisten() {
   self endon("entityshutdown");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   while(true) {
     playbundlename = getdvarstring("");
     if(playbundlename != "") {
       self thread playpostfxbundle(playbundlename);
-      setdvar("", "");
+      setDvar("", "");
     }
     stopbundlename = getdvarstring("");
     if(stopbundlename != "") {
       self thread stoppostfxbundle();
-      setdvar("", "");
+      setDvar("", "");
     }
     stopbundlename = getdvarstring("");
     if(stopbundlename != "") {
       self thread exitpostfxbundle();
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.5);
   }

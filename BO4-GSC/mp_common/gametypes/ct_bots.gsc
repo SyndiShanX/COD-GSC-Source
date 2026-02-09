@@ -285,7 +285,7 @@ function_52dff030(w_gadget) {
 
 function_fd2d220e(var_742b083e = undefined) {
   if(!isDefined(self.var_560765bb)) {
-    setdvar(#"hash_48162cd174e3034d", 0);
+    setDvar(#"hash_48162cd174e3034d", 0);
     return;
   }
 
@@ -669,7 +669,7 @@ on_bot_spawned() {
 }
 
 function_82675316(vdir, limit) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     orientation = self getplayerangles();
   } else {
     orientation = self getangles();

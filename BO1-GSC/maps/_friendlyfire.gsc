@@ -12,28 +12,24 @@ main() {
   level.friendlyfire["friend_kill_points"] = -600;
   level.friendlyfire["civ_kill_points"] = -900;
   level.friendlyfire["point_loss_interval"] = .75;
-  SetDvar("friendlyfire_enabled", "1");
+  setDvar("friendlyfire_enabled", "1");
   level.friendlyfire_override_attacker_entity = ::default_override_attacker_entity;
   if(coopGame()) {
-    SetDvar("friendlyfire_enabled", "0");
+    setDvar("friendlyfire_enabled", "0");
   }
   level.friendlyFireDisabled = 0;
 }
-
 default_override_attacker_entity(entity, damage, attacker, direction, point, method) {
   return (undefined);
 }
-
 player_init() {
   self.participation = 0;
   self thread debug_friendlyfire();
   self thread participation_point_flattenovertime();
 }
-
 debug_friendlyfire() {
   self endon("disconnect");
 }
-
 friendly_fire_think(entity) {
   if(!isDefined(entity)) {
     return;
@@ -70,12 +66,12 @@ friendly_fire_think(entity) {
       attacker = override;
     }
     bPlayersDamage = false;
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       bPlayersDamage = true;
     } else if((isDefined(attacker.classname)) && (attacker.classname == "script_vehicle")) {
       owner = attacker GetVehicleowner();
       if(isDefined(owner)) {
-        if(IsPlayer(owner)) {
+        if(isPlayer(owner)) {
           if(!isDefined(owner.friendlyfire_attacker_not_vehicle_owner)) {
             bPlayersDamage = true;
             attacker = owner;
@@ -131,13 +127,11 @@ friendly_fire_think(entity) {
     attacker friendly_fire_checkpoints();
   }
 }
-
 friendly_fire_checkpoints() {
   if(self.participation <= level.friendlyfire["min_participation"]) {
     self thread missionfail();
   }
 }
-
 check_grenade(entity, method) {
   if(!isDefined(entity)) {
     return false;
@@ -151,7 +145,6 @@ check_grenade(entity, method) {
   }
   return wasGrenade;
 }
-
 savecommit_afterGrenade() {
   currentTime = GetTime();
   if(currentTime < 4500) {
@@ -163,7 +156,6 @@ savecommit_afterGrenade() {
   }
   return false;
 }
-
 participation_point_cap() {
   if(!isDefined(self.participation)) {
     assertmsg("self.participation is not defined!");
@@ -176,7 +168,6 @@ participation_point_cap() {
     self.participation = level.friendlyfire["min_participation"];
   }
 }
-
 participation_point_flattenOverTime() {
   level endon("mission failed");
   level endon("friendly_fire_terminate");
@@ -190,28 +181,25 @@ participation_point_flattenOverTime() {
     wait(level.friendlyfire["point_loss_interval"]);
   }
 }
-
 TurnBackOn() {
   level.friendlyFireDisabled = 0;
 }
-
 TurnOff() {
   level.friendlyFireDisabled = 1;
 }
-
 missionfail() {
   self endon("death");
   level endon("mine death");
   level notify("mission failed");
   if(isDefined(self.last_hit_team) && self.last_hit_team == "neutral") {
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL");
   } else {
     if(level.campaign == "british") {
-      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
+      setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
     } else if(level.campaign == "russian") {
-      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+      setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
     } else {
-      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+      setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
     }
   }
   if(isDefined(level.custom_friendly_fire_shader)) {
@@ -220,7 +208,6 @@ missionfail() {
   logString("failed mission: Friendly fire");
   maps\_utility::missionFailedWrapper();
 }
-
 notifyDamage(entity) {
   level endon("mission failed");
   entity endon("death");
@@ -229,13 +216,11 @@ notifyDamage(entity) {
     entity notify("friendlyfire_notify", damage, attacker, direction, point, method);
   }
 }
-
 notifyDamageNotDone(entity) {
   level endon("mission failed");
   entity waittill("damage_notdone", damage, attacker, direction, point, method);
   entity notify("friendlyfire_notify", -1, attacker, undefined, undefined, method);
 }
-
 notifyDeath(entity) {
   level endon("mission failed");
   entity waittill("death", attacker, method);

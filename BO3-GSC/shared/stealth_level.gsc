@@ -45,24 +45,24 @@ function init() {
   self thread function_945a718();
   self stealth_debug::init_debug();
   level.using_awareness = 1;
-  setdvar("ai_stumbleSightRange", 200);
-  setdvar("ai_awarenessenabled", 1);
-  setdvar("stealth_display", 0);
-  setdvar("stealth_audio", 1);
+  setDvar("ai_stumbleSightRange", 200);
+  setDvar("ai_awarenessenabled", 1);
+  setDvar("stealth_display", 0);
+  setDvar("stealth_audio", 1);
   if(getdvarstring("stealth_indicator") == "") {
-    setdvar("stealth_indicator", 0);
+    setDvar("stealth_indicator", 0);
   }
-  setdvar("stealth_group_radius", 1000);
-  setdvar("stealth_all_aware", 1);
-  setdvar("stealth_no_return", 1);
-  setdvar("stealth_events", "sentientevents_vengeance_default");
+  setDvar("stealth_group_radius", 1000);
+  setDvar("stealth_all_aware", 1);
+  setDvar("stealth_no_return", 1);
+  setDvar("stealth_events", "sentientevents_vengeance_default");
 }
 
 function stop() {
   spawner::remove_global_spawn_function("axis", &stealth::agent_init);
   level.using_awareness = 0;
-  setdvar("ai_stumbleSightRange", 0);
-  setdvar("ai_awarenessenabled", 0);
+  setDvar("ai_stumbleSightRange", 0);
+  setDvar("ai_awarenessenabled", 0);
   if(isDefined(level.stealth.music_ent)) {
     foreach(ent in level.stealth.music_ent) {
       ent stoploopsound(1);
@@ -194,7 +194,7 @@ function update_arrays() {
     entnum = ai getentitynumber();
     counted = 0;
     if(isalive(ai) && ai stealth_aware::enabled() && (!(isDefined(ai.silenced) && ai.silenced))) {
-      var_96b139a9 = isactor(ai) && ai_sniper::is_firing(ai) && isDefined(ai.lase_ent) && isplayer(ai.lase_ent.lase_override);
+      var_96b139a9 = isactor(ai) && ai_sniper::is_firing(ai) && isDefined(ai.lase_ent) && isPlayer(ai.lase_ent.lase_override);
       if(!(isDefined(ai.ignoreall) && ai.ignoreall) && ai stealth_aware::get_awareness() != "unaware") {
         alertcount = alertcount + 1;
       }
@@ -212,7 +212,7 @@ function update_arrays() {
             if(!isDefined(self.stealth.seek[var_146dd427])) {
               self.stealth.seek[var_146dd427] = combatant;
             }
-            if(isplayer(combatant)) {
+            if(isPlayer(combatant)) {
               if(!counted && (!(isDefined(ai.ignoreall) && ai.ignoreall))) {
                 level.combatcount = level.combatcount + 1;
                 counted = 1;

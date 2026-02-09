@@ -59,7 +59,7 @@ function skipto_flood_init(str_objective, b_starting) {
   }
   level thread sgen_util::set_door_state("charging_station_entrance", "open");
   level clientfield::set("w_underwater_state", 1);
-  setdvar("phys_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
   spawner::add_spawn_function_group("flood_reinforcement_robot", "script_noteworthy", &reinforcement_robot_setup);
   level.ai_hendricks ai::set_behavior_attribute("can_melee", 0);
   level.ai_hendricks ai::set_behavior_attribute("can_be_meleed", 0);
@@ -93,7 +93,7 @@ function skipto_flood_defend_init(str_objective, b_starting) {
       level.players[0] setplayerangles((0, 0, 0));
     }
     level clientfield::set("w_underwater_state", 1);
-    setdvar("phys_buoyancy", 1);
+    setDvar("phys_buoyancy", 1);
     spawner::add_spawn_function_group("flood_reinforcement_robot", "script_noteworthy", &reinforcement_robot_setup);
     level.ai_hendricks ai::set_behavior_attribute("can_melee", 0);
     level.ai_hendricks ai::set_behavior_attribute("can_be_meleed", 0);
@@ -256,7 +256,7 @@ function zone_wait_till_player(str_key, str_val = "targetname", n_delay = 0) {
   t_zone endon("death");
   do {
     t_zone waittill("trigger", e_triggerer);
-    if(isplayer(e_triggerer)) {
+    if(isPlayer(e_triggerer)) {
       break;
     }
   }

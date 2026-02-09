@@ -31,7 +31,7 @@ main() {
   level.casual_reward_scalar = 1.0;
   level.casual_score_scalar = 0.5;
   var_0 = ["well_deck", "hallway_1", "cargo", "front_boat", "heli_pad"];
-  setdvar("sm_sunSampleSizeNear", 0.25);
+  setDvar("sm_sunSampleSizeNear", 0.25);
   maps\mp\alien\_utility::alien_area_init(var_0);
   level.include_default_challenges = 1;
   level.challenge_registration_func = maps\mp\alien\mp_alien_beacon_challenges::register_beacon_challenges;
@@ -101,7 +101,7 @@ main() {
   game["thermal_vision"] = "mp_alien_beacon_thermal";
   visionsetthermal(game["thermal_vision"]);
   game["thermal_vision_trinity"] = "mp_alien_thermal_trinity";
-  setdvar("sm_sunShadowScale", "0.5");
+  setDvar("sm_sunShadowScale", "0.5");
   maps\mp\_utility::setdvar_cg_ng("r_specularColorScale", 4.0, 6.0);
   maps\mp\_compass::setupminimap("compass_map_mp_alien_beacon");
   var_1 = 20000;
@@ -1130,7 +1130,7 @@ watch_trigger_by_player() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       break;
     }
   }
@@ -1220,7 +1220,7 @@ mp_alien_beacon_story_moment() {}
 mp_alien_beacon_boss_encounter() {
   var_0 = getent("boss_trigger", "targetname");
   var_0 waittill("trigger");
-  setdvar("sm_sunSampleSizeNear", 0.7);
+  setDvar("sm_sunSampleSizeNear", 0.7);
   level thread clean_aliens_for_kraken();
   wait 2;
   level notify("stop_teleport_script");
@@ -2215,7 +2215,7 @@ _death_trigger_monitor() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_1 = self;
       var_2 = self;
       var_3 = 100;

@@ -36,11 +36,10 @@ _id_3AEF() {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       self.meleeattackdist = anim._id_3AF0;
     } else {
       self.meleeattackdist = anim._id_3AF1;
-
     }
     self waittill("enemy");
   }
@@ -64,10 +63,10 @@ _id_3AF2() {
   precacheshader("hud_dog_melee");
   precacheshader("hud_hyena_melee");
   anim._id_3AF4 = 1;
-  anim._id_3AEE = lengthsquared(getmovedelta( % german_shepherd_run_stop, 0, 1) * 1.2);
-  anim._id_3AF5 = length(getmovedelta( % german_shepherd_run_start, 0, 1));
+  anim._id_3AEE = lengthsquared(getmovedelta(%german_shepherd_run_stop, 0, 1) * 1.2);
+  anim._id_3AF5 = length(getmovedelta(%german_shepherd_run_start, 0, 1));
   anim._id_3AF0 = 102;
-  var_0 = getstartorigin((0, 0, 0), (0, 0, 0), % german_shepherd_attack_ai_01_start_a);
+  var_0 = getstartorigin((0, 0, 0), (0, 0, 0), %german_shepherd_attack_ai_01_start_a);
   anim._id_3AF1 = length(var_0);
   anim._id_3AF6 = [];
   anim._id_3AF6["wallhop"] = % german_shepherd_run_jump_40;
@@ -100,9 +99,8 @@ _id_3AF2() {
 
   for(var_3 = 0; var_3 <= var_1; var_3++) {
     var_2[var_2.size] = var_3 / var_1;
-
   }
   level._id_3AFA = 0;
   level._id_3AFB = maps\_utility::_id_0B53(var_2);
-  setdvar("friendlySaveFromDog", "0");
+  setDvar("friendlySaveFromDog", "0");
 }

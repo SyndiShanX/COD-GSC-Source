@@ -64,7 +64,7 @@ function defaultrole() {
   self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
   self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
   self vehicle_ai::add_state("slash", undefined, &state_slash_update, undefined);
-  setdvar("", 1);
+  setDvar("", 1);
   self thread glaive_target_selection();
   vehicle_ai::startinitialstate("combat");
   self.starttime = gettime();

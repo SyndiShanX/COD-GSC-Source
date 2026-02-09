@@ -18,7 +18,7 @@ function init_shared() {
   game["locked_on_sound"] = "uin_alert_lockon";
   callback::on_spawned(&on_player_spawned);
   level.fx_flare = "killstreaks/fx_heli_chaff";
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function on_player_spawned() {
@@ -314,7 +314,7 @@ function getbeststingertarget(weapon) {
       continue;
     }
     if(self insidestingerreticledetect(target, weapon)) {
-      if(isDefined(target.owner) && self != target.owner || (isplayer(target) && self != target)) {
+      if(isDefined(target.owner) && self != target.owner || (isPlayer(target) && self != target)) {
         if(!isDefined(self.is_valid_target_for_stinger_override) || self[[self.is_valid_target_for_stinger_override]](target)) {
           targetsvalid[targetsvalid.size] = target;
         }
@@ -599,9 +599,7 @@ function setfriendlyflags(weapon, target) {
           if(isDefined(target.usevtoltime) && isDefined(level.vtol) && isDefined(level.vtol.totalrockethits) && isDefined(level.vtol.missiletodestroy)) {
             self settargetedmissilesremaining(weapon, level.vtol.missiletodestroy - level.vtol.totalrockethits);
           } else {
-            maxhealth = [
-              [level.killstreakmaxhealthfunction]
-            ](killstreaktype);
+            maxhealth = [[level.killstreakmaxhealthfunction]](killstreaktype);
             damagetaken = target.damagetaken;
             if(!isDefined(damagetaken) && isDefined(target.parentstruct)) {
               damagetaken = target.parentstruct.damagetaken;

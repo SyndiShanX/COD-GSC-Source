@@ -40,7 +40,6 @@ _id_428C() {
 
     if(maps\_utility::_id_133C("_stealth_behavior_asleep")) {
       maps\_utility::_id_13DB("_stealth_behavior_asleep");
-
     }
     maps\_stealth_utility::_id_428D();
 
@@ -91,13 +90,11 @@ _id_4290() {
 
   if(!maps\_utility::_id_1008("_stealth_found_corpse")) {
     self notify("awareness_corpse", "heard_corpse", (0, 0, 0));
-
   }
   maps\_stealth_shared_utilities::_id_41EB();
 
   if(self.type == "dog") {
     maps\_utility::_id_13DC("_stealth_override_goalpos");
-
   }
   thread _id_4291();
   var_0 = self._id_0B6E._id_41D0._id_41D1["corpse"];
@@ -160,11 +157,9 @@ _id_4297(var_0) {
 
   if(var_2 < 150) {
     return 1;
-
   }
   if(var_2 > level._id_0B6E._id_41ED._id_4250._id_4298) {
     return 0;
-
   }
   return sighttracepassed(var_0 + (0, 0, 48), var_1 getEye(), 0, var_1);
 }
@@ -177,7 +172,6 @@ _id_4299() {
   for(;;) {
     if(maps\_utility::_id_133C("_stealth_behavior_asleep")) {
       maps\_utility::_id_13DB("_stealth_behavior_asleep");
-
     }
     maps\_utility::_id_1654("_stealth_enabled");
 
@@ -206,7 +200,6 @@ _id_4299() {
           var_3 = level._id_0B6E._id_41ED._id_4250._id_429B;
         } else {
           var_3 = level._id_0B6E._id_41ED._id_4250._id_429C;
-
         }
         if(var_6 < var_3) {
           var_0 = 1;
@@ -252,7 +245,6 @@ _id_4299() {
           maps\_utility::_id_13DC("_stealth_found_corpse");
         } else {
           self notify("_stealth_found_corpse");
-
         }
         maps\_utility::_id_13DE("_stealth_saw_corpse");
         thread _id_42A3(var_2);
@@ -265,7 +257,6 @@ _id_4299() {
           maps\_utility::_id_13DC("_stealth_saw_corpse");
         } else {
           self notify("_stealth_saw_corpse");
-
         }
         level notify("_stealth_saw_corpse");
         self notify("awareness_corpse", "saw_corpse", var_2);
@@ -298,7 +289,6 @@ _id_42A0() {
         var_5 = level._id_0B6E._id_41ED._id_4250._id_429B;
       } else {
         var_5 = level._id_0B6E._id_41ED._id_4250._id_429C;
-
       }
       if(var_4 < var_5) {
         var_3 setcorpseremovetimer(10);
@@ -332,11 +322,9 @@ _id_42A2() {
     var_0 = self.enemy;
   } else {
     var_0 = common_scripts\utility::random(level.players);
-
   }
   if(!isDefined(var_0._id_0B6E._id_41ED._id_41EE[self.unique_id])) {
     var_0._id_0B6E._id_41ED._id_41EE[self.unique_id] = 0;
-
   }
   if(var_0._id_0B6E._id_41ED._id_41EE[self.unique_id] < self._id_0B6E._id_41ED._id_4262._id_4263) {
     var_0._id_0B6E._id_41ED._id_41EE[self.unique_id]++;
@@ -356,7 +344,6 @@ _id_42A3(var_0) {
     wait 0.5;
   } else {
     wait 2;
-
   }
   thread maps\_stealth_shared_utilities::_id_41FB();
   wait 2;
@@ -366,7 +353,6 @@ _id_42A3(var_0) {
     maps\_stealth_shared_utilities::_id_41DD("_stealth_found_corpse");
   } else {
     level notify(var_1);
-
   }
   thread _id_42A5();
 }
@@ -418,7 +404,6 @@ _id_42A8(var_0) {
 _id_42A9() {
   if(isDefined(level._id_0B6E._id_41ED._id_4250._id_42AA)) {
     return [[level._id_0B6E._id_41ED._id_4250._id_42AA]]();
-
   }
   return getcorpsearray();
 }

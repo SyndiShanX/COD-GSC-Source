@@ -31,8 +31,9 @@ set_gamemode(mode) {
 }
 
 init() {
-  if(!isDefined(level.rts.game_mode))
+  if(!isDefined(level.rts.game_mode)) {
     set_gamemode("attack");
+  }
 
   initrules();
   level.rts.viewangle = level.rts.game_rules.default_camera_pitch;
@@ -69,18 +70,21 @@ rules_populate() {
     reducers = strtok(lookup_value(ref, i, 15), " ");
     rule.ally_dmg_reducerfps = float(reducers[0]);
 
-    if(rule.ally_dmg_reducerfps <= 0.0)
+    if(rule.ally_dmg_reducerfps <= 0.0) {
       rule.ally_dmg_reducerfps = 1.0;
+    }
 
     rule.ally_dmg_reducerrts = float(reducers[1]);
 
-    if(rule.ally_dmg_reducerrts <= 0.0)
+    if(rule.ally_dmg_reducerrts <= 0.0) {
       rule.ally_dmg_reducerrts = 1.0;
+    }
 
     rule.player_dmg_reducerfps = float(lookup_value(ref, i, 16));
 
-    if(rule.player_dmg_reducerfps <= 0.0)
+    if(rule.player_dmg_reducerfps <= 0.0) {
       rule.player_dmg_reducerfps = 1.0;
+    }
 
     switch (getdifficulty()) {
       case "easy":
@@ -94,11 +98,13 @@ rules_populate() {
         rule.player_dmg_reducerfps = rule.player_dmg_reducerfps * 0.9;
         rule.enemy_helo = rule.enemy_helo - 1;
 
-        if(rule.enemy_helo <= 0)
+        if(rule.enemy_helo <= 0) {
           rule.enemy_helo = 1;
+        }
 
-        if(rule.enemy_vtol <= 0)
+        if(rule.enemy_vtol <= 0) {
           rule.enemy_vtol = 2;
+        }
 
         rule.num_nag_squads--;
         break;
@@ -139,14 +145,17 @@ rules_populate() {
         break;
     }
 
-    if(rule.ally_dmg_reducerfps > 1.0)
+    if(rule.ally_dmg_reducerfps > 1.0) {
       rule.ally_dmg_reducerfps = 1.0;
+    }
 
-    if(rule.ally_dmg_reducerrts > 1.0)
+    if(rule.ally_dmg_reducerrts > 1.0) {
       rule.ally_dmg_reducerrts = 1.0;
+    }
 
-    if(rule.player_dmg_reducerfps > 1.0)
+    if(rule.player_dmg_reducerfps > 1.0) {
       rule.player_dmg_reducerfps = 1.0;
+    }
 
     rules[ref] = rule;
   }
@@ -159,8 +168,9 @@ initrules() {
   assert(isDefined(level.rts.game_rules));
   level.rts.transport_refuel_delay = 20000;
 
-  if(isDefined(level.rts.game_rules.delivery_refuel))
+  if(isDefined(level.rts.game_rules.delivery_refuel)) {
     level.rts.transport_refuel_delay = level.rts.game_rules.delivery_refuel;
+  }
 }
 
 rules_setgametimer() {
@@ -182,18 +192,21 @@ mission_complete(success, param) {
   level.rts.player stopshellshock();
   level.rts.player notify("empGrenadeShutOff");
 
-  if(isDefined(level.rts.player.hud_damagefeedback))
+  if(isDefined(level.rts.player.hud_damagefeedback)) {
     level.rts.player.hud_damagefeedback.alpha = 0;
+  }
 
   level.rts.end_time = gettime();
   level.rts.play_time = level.rts.end_time - level.rts.start_time;
 
-  if(isDefined(level.rts.game_rules.time) && level.rts.game_rules.time > 0)
+  if(isDefined(level.rts.game_rules.time) && level.rts.game_rules.time > 0) {
     level.rts.seconds_remaining = (level.rts.game_rules.time * 60000 - level.rts.play_time) / 1000;
+  }
 
   if(success) {
-    if(getdvarint(#"_id_0F241E06") == 0)
+    if(getdvarint(#"_id_0F241E06") == 0) {
       level.player thread maps\_endmission::strikeforce_increment_unit_tokens();
+    }
   }
 
   if(isDefined(level.custom_mission_complete)) {

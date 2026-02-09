@@ -279,7 +279,6 @@ super_punch() {
       RadiusDamage(self.origin, level.meleeStunRadius, level.meleeStunMaxDamage, level.meleeStunMinDamage, self, "MOD_MELEE", "meleestun_mp");
       self PlaySoundToPlayer("bodyfall_asphault_large", self);
       self wait_for_melee_end();
-
     }
     wait 0.05;
   }

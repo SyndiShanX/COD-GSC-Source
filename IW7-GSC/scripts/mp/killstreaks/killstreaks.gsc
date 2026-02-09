@@ -975,7 +975,7 @@ givekillstreak(var_0, var_1, var_2, var_3) {
 
 getstreakcost(var_0) {
   var_1 = int(scripts\mp\utility::func_7F46(var_0));
-  if(isDefined(self) && isplayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     var_1 = scripts\mp\killstreak_loot::modifycostforlootitem(self.streakvariantids[var_0], var_1);
     if(scripts\mp\utility::isspecialistkillstreak(var_0)) {
       if(isDefined(self.pers["gamemodeLoadout"])) {
@@ -1535,7 +1535,7 @@ func_532A(var_0, var_1, var_2, var_3) {
 }
 
 killstreakhit(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_1) && isplayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
+  if(isDefined(var_1) && isPlayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
     if(scripts\mp\utility::playersareenemies(var_0, var_2.owner)) {
       if(scripts\mp\utility::iskillstreakweapon(var_1)) {
         return;

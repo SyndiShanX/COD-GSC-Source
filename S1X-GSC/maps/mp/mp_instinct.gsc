@@ -49,8 +49,8 @@ main() {
 
   level.goliath_bad_landing_volumes = getEntArray("goliath_bad_landing_volume", "targetname");
 
-  SetDvar("r_reactivemotionfrequencyscale", .5);
-  SetDvar("r_reactivemotionamplitudescale", .5);
+  setDvar("r_reactivemotionfrequencyscale", .5);
+  setDvar("r_reactivemotionamplitudescale", .5);
 }
 
 instinctCustomOSPFunc() {
@@ -101,7 +101,6 @@ river_drilling_animation() {
     wait(2);
     noself_delayCall(.4, ::PlayFXOnTag, getfx("diesel_drill_smk_ring"), river_drill_exhaust_fx, "tag_origin");
   }
-
 }
 
 drilling_animation() {
@@ -147,7 +146,6 @@ update_cave_drill_anim() {
     wait(0.5);
     thread maps\mp\mp_instinct_fx::cave_drill_rock_impact_fx();
   }
-
 }
 
 update_cave_drill_anim_inside() {
@@ -165,5 +163,4 @@ generator_fans() {
   foreach(fan in fans) {
     fan ScriptModelPlayAnim("ins_generator_fan");
   }
-
 }

@@ -50,7 +50,7 @@ function __init__() {
   level.primaryprogressbarwidth = 120;
   level.primaryprogressbary_ss = 280;
   if(getdvarstring("revive_trigger_radius") == "") {
-    setdvar("revive_trigger_radius", "100");
+    setDvar("revive_trigger_radius", "100");
   }
   level.laststandgetupallowed = 0;
   if(isDefined(level.var_be177839)) {
@@ -61,7 +61,7 @@ function __init__() {
 }
 
 function player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     attacker.kills++;
     if(isDefined(weapon)) {
       dmgweapon = weapon;
@@ -718,7 +718,7 @@ function revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived.revive_hud settext(&"COOP_PLAYER_IS_REVIVING_YOU", self);
   playerbeingrevived revive_hud_show_n_fade(3);
   playerbeingrevived.revivetrigger sethintstring("");
-  if(isplayer(playerbeingrevived)) {
+  if(isPlayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
   }
   if(0 && !isDefined(self.reviveprogressbar)) {
@@ -779,7 +779,7 @@ function revive_do_revive(playerbeingrevived, revivergun) {
     self.revivetexthud destroy();
   }
   if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
-    if(isplayer(playerbeingrevived)) {
+    if(isPlayer(playerbeingrevived)) {
       playerbeingrevived stoprevive(self);
     }
   }
@@ -839,7 +839,7 @@ function auto_revive(reviver, dont_enable_weapons) {
   self lui::screen_close_menu();
   if(!(isDefined(level.isresetting_grief) && level.isresetting_grief)) {
     if(isDefined(reviver)) {
-      if(isplayer(reviver) && isDefined(getrootmapname())) {
+      if(isPlayer(reviver) && isDefined(getrootmapname())) {
         reviver addplayerstat("REVIVES", 1);
         var_8642deaf = reviver getdstat("PlayerStatsList", "REVIVES", "statValue");
         reviver setnoncheckpointdata("REVIVES", var_8642deaf);
@@ -860,21 +860,21 @@ function remote_revive(reviver) {
 }
 
 function revive_success(reviver, b_track_stats = 1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self notify("player_revived", reviver);
     return;
   }
   if(isDefined(b_track_stats) && b_track_stats) {
     demo::bookmark("player_revived", gettime(), reviver, self);
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self allowjump(1);
   }
   self.laststand = undefined;
   self notify("player_revived", reviver);
   bb::logplayermapnotification("player_revived", self);
   self reviveplayer();
-  if(isplayer(reviver) && isDefined(getrootmapname())) {
+  if(isPlayer(reviver) && isDefined(getrootmapname())) {
     reviver addplayerstat("REVIVES", 1);
     var_8642deaf = reviver getdstat("PlayerStatsList", "REVIVES", "statValue");
     reviver setnoncheckpointdata("REVIVES", var_8642deaf);
@@ -899,7 +899,7 @@ function revive_success(reviver, b_track_stats = 1) {
 
 function revive_force_revive(reviver) {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(self player_is_in_laststand());
   self thread revive_success(reviver);
 }

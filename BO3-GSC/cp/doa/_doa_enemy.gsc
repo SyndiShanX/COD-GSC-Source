@@ -291,7 +291,7 @@ function function_a1761846(behaviortreeentity) {
         closest = arraygetclosest(behaviortreeentity.origin, getaiteamarray("axis"));
       }
       if(isDefined(closest) && behaviortreeentity.enemy != closest) {
-        if(namespace_831a4a7c::function_5eb6e4d1().size > 1 && isplayer(closest)) {
+        if(namespace_831a4a7c::function_5eb6e4d1().size > 1 && isPlayer(closest)) {
           behaviortreeentity.favoriteenemy = closest;
           behaviortreeentity setpersonalthreatbias(closest, 5000, 1.5);
         } else {
@@ -576,10 +576,10 @@ function function_ff217d39(einflictor, eattacker, idamage, smeansofdeath, weapon
     level thread doa_pickups::spawnubertreasure(self.origin, 1, 1, 1, 1);
   }
   if(isDefined(eattacker)) {
-    if(isactor(eattacker) && isDefined(eattacker.owner) && isplayer(eattacker.owner)) {
+    if(isactor(eattacker) && isDefined(eattacker.owner) && isPlayer(eattacker.owner)) {
       eattacker = eattacker.owner;
     }
-    if(isplayer(eattacker) && isDefined(eattacker.doa) && isDefined(self.doa) && isDefined(self.doa.points)) {
+    if(isPlayer(eattacker) && isDefined(eattacker.doa) && isDefined(self.doa) && isDefined(self.doa.points)) {
       eattacker.kills = math::clamp(eattacker.kills + 1, 0, 65535);
       eattacker.doa.kills++;
       eattacker namespace_64c6b720::function_80eb303(self.doa.points);
@@ -602,7 +602,7 @@ function function_c26b6656(einflictor, eattacker, idamage, idflags, smeansofdeat
   if(isDefined(eattacker) && eattacker.team == self.team) {
     idamage = 0;
   }
-  if(isDefined(self.owner) && isplayer(self.owner) && (isDefined(self.playercontrolled) && self.playercontrolled)) {
+  if(isDefined(self.owner) && isPlayer(self.owner) && (isDefined(self.playercontrolled) && self.playercontrolled)) {
     idamage = 0;
   }
   if(isDefined(self.overridevehicledamage)) {
@@ -621,7 +621,7 @@ function function_90772ac6(einflictor, eattacker, idamage, smeansofdeath, weapon
   if(isDefined(einflictor)) {
     self.damageinflictor = einflictor;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.doa) && isDefined(self.doa)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.doa) && isDefined(self.doa)) {
     eattacker.kills = math::clamp(eattacker.kills + 1, 0, 65535);
     eattacker.doa.kills++;
     eattacker namespace_64c6b720::function_80eb303(self.doa.points);

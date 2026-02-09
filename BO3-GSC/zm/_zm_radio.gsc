@@ -41,7 +41,7 @@ function function_8554d5da() {
   self thread function_f184004e();
   while(true) {
     self waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     if(type == "MOD_PROJECTILE") {

@@ -1,6 +1,6 @@
 /*******************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cod5_prototype_amb.csc
+ * Script: clientscripts\zombie_cod5_prototype_amb\.csc
 *******************************************************/
 
 #include clientscripts\_utility;
@@ -37,7 +37,6 @@ main() {
   thread clientscripts\_waw_zombiemode_radio::init();
   thread play_fire_loops();
 }
-
 play_fire_loops() {
   fire = clientscripts\_audio::playloopat(0, "fire_med", (164.8, -63.5, 127.1));
 }

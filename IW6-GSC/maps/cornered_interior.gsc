@@ -2575,7 +2575,7 @@ mission_failed_watcher() {
       break;
   }
 
-  setdvar("ui_deadquote", var_1);
+  setDvar("ui_deadquote", var_1);
   thread maps\_utility::missionfailedwrapper();
   level notify("stop_mission_failed_watcher");
 }

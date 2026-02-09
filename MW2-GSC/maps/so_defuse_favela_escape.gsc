@@ -186,7 +186,7 @@ change_combatmode_trigger() {
 
   while(true) {
     self waittill("trigger", player);
-    assert(isplayer(player));
+    assert(isPlayer(player));
 
     ai_array = getaiarray("axis");
     foreach(ai in ai_array) {
@@ -333,7 +333,7 @@ civilian_death() {
 
   self waittill("death", killer, type);
 
-  if(!isplayer(killer)) {
+  if(!isPlayer(killer)) {
     return;
   }
   so_force_deadquote("@SO_DEFUSE_FAVELA_ESCAPE_MISSION_FAILED_CIVILIAN");
@@ -343,7 +343,7 @@ civilian_death() {
 ai_on_death() {
   self waittill("death", attacker, cause);
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   attacker.defuse_kills++;

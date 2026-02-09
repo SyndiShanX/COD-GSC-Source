@@ -11,7 +11,6 @@ init_sidequests() {
   level._sidequest_icons_base_x = -225;
   level._zombie_sidequests = [];
 }
-
 damager_trigger_thread(dam_types, trigger_func) {
   while(1) {
     self waittill("damage", amount, attacker, dir, point, type);
@@ -31,7 +30,6 @@ damager_trigger_thread(dam_types, trigger_func) {
   }
   self notify("triggered");
 }
-
 damage_trigger_thread() {
   self endon("death");
   while(1) {
@@ -39,16 +37,13 @@ damage_trigger_thread() {
     self.owner_ent notify("triggered");
   }
 }
-
 sidequest_uses_teleportation(name) {
   level._zombie_sidequests[name].uses_teleportation = true;
 }
-
 declare_sidequest_icon(sidequest_name, icon_name, shader_name) {
   sidequest = level._zombie_sidequests[sidequest_name];
   sidequest.icons[icon_name] = shader_name;
 }
-
 create_icon(shader_name, x) {
   icon = create_simple_hud(self);
   icon.foreground = true;
@@ -64,7 +59,6 @@ create_icon(shader_name, x) {
   icon setshader(shader_name, 32, 32);
   return (icon);
 }
-
 add_sidequest_icon(sidequest_name, icon_name) {
   if(!isDefined(self.sidequest_icons)) {
     self.sidequest_icons = [];
@@ -79,7 +73,6 @@ add_sidequest_icon(sidequest_name, icon_name) {
   }
   self.sidequest_icons[icon_name] = self create_icon(sq.icons[icon_name], base_x + (self.sidequest_icons.size * 34));
 }
-
 remove_sidequest_icon(sidequest_name, icon_name) {
   if(!isDefined(self.sidequest_icons)) {
     return;
@@ -106,7 +99,6 @@ remove_sidequest_icon(sidequest_name, icon_name) {
     self.sidequest_icons[keys[i]].x = base_x + (i * 34);
   }
 }
-
 declare_sidequest(name, init_func, logic_func, complete_func, generic_stage_start_func, generic_stage_end_func) {
   if(!isDefined(level._zombie_sidequests)) {
     init_sidequests();
@@ -129,7 +121,6 @@ declare_sidequest(name, init_func, logic_func, complete_func, generic_stage_star
   sq.num_reps = 0;
   level._zombie_sidequests[name] = sq;
 }
-
 declare_sidequest_stage(sidequest_name, stage_name, init_func, logic_func, exit_func) {
   stage = spawnStruct();
   stage.name = stage_name;
@@ -143,12 +134,10 @@ declare_sidequest_stage(sidequest_name, stage_name, init_func, logic_func, exit_
   stage.time_limit = 0;
   level._zombie_sidequests[sidequest_name].stages[stage_name] = stage;
 }
-
 set_stage_time_limit(sidequest_name, stage_name, time_limit, timer_func) {
   level._zombie_sidequests[sidequest_name].stages[stage_name].time_limit = time_limit;
   level._zombie_sidequests[sidequest_name].stages[stage_name].time_limit_func = timer_func;
 }
-
 declare_stage_asset_from_struct(sidequest_name, stage_name, target_name, thread_func, trigger_thread_func) {
   structs = getstructarray(target_name, "targetname");
   for(i = 0; i < structs.size; i++) {
@@ -160,11 +149,9 @@ declare_stage_asset_from_struct(sidequest_name, stage_name, target_name, thread_
     level._zombie_sidequests[sidequest_name].stages[stage_name].assets[level._zombie_sidequests[sidequest_name].stages[stage_name].assets.size] = asset;
   }
 }
-
 declare_stage_title(sidequest_name, stage_name, title) {
   level._zombie_sidequests[sidequest_name].stages[stage_name].title = title;
 }
-
 declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigger_thread_func) {
   ents = getEntArray(target_name, "targetname");
   for(i = 0; i < ents.size; i++) {
@@ -176,7 +163,6 @@ declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigge
     level._zombie_sidequests[sidequest_name].stages[stage_name].assets[level._zombie_sidequests[sidequest_name].stages[stage_name].assets.size] = asset;
   }
 }
-
 declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread_func) {
   ents = getEntArray(target_name, "targetname");
   for(i = 0; i < ents.size; i++) {
@@ -190,7 +176,6 @@ declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread
     level._zombie_sidequests[sidequest_name].assets[level._zombie_sidequests[sidequest_name].assets.size] = asset;
   }
 }
-
 declare_sidequest_asset_from_struct(sidequest_name, target_name, thread_func, trigger_thread_func) {
   structs = getstructarray(target_name, "targetname");
   for(i = 0; i < structs.size; i++) {
@@ -202,7 +187,6 @@ declare_sidequest_asset_from_struct(sidequest_name, target_name, thread_func, tr
     level._zombie_sidequests[sidequest_name].assets[level._zombie_sidequests[sidequest_name].assets.size] = asset;
   }
 }
-
 build_asset_from_struct(asset, parent_struct) {
   ent = spawn("script_model", asset.origin);
   if(isDefined(asset.model)) {
@@ -226,7 +210,6 @@ build_asset_from_struct(asset, parent_struct) {
   ent.targetname = asset.targetname;
   return ent;
 }
-
 delete_stage_assets() {
   for(i = 0; i < self.active_assets.size; i++) {
     asset = self.active_assets[i];
@@ -256,7 +239,6 @@ delete_stage_assets() {
   }
   self.active_assets = remaining_assets;
 }
-
 build_assets() {
   for(i = 0; i < self.assets.size; i++) {
     asset = undefined;
@@ -277,7 +259,7 @@ build_assets() {
         self.active_assets[self.active_assets.size] = asset;
         break;
       default:
-        PrintLn("** ERROR: Don't know how to build asset of type " + self.assets.type);
+        PrintLn("*** ERROR: Don't know how to build asset of type " + self.assets.type);
         break;
     }
     if((isDefined(asset.script_noteworthy) && (self.assets[i].type == "entity" && !isDefined(asset.trigger))) || isDefined(asset.script_noteworthy)) {
@@ -348,12 +330,11 @@ build_assets() {
     }
   }
 }
-
 radius_trigger_thread() {
   self endon("death");
   while(1) {
     self waittill("trigger", player);
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     self.owner_ent notify("triggered");
@@ -363,7 +344,6 @@ radius_trigger_thread() {
     self.owner_ent notify("untriggered");
   }
 }
-
 thread_on_assets(target_name, thread_func) {
   for(i = 0; i < self.active_assets.size; i++) {
     if(self.active_assets[i].targetname == target_name) {
@@ -371,14 +351,12 @@ thread_on_assets(target_name, thread_func) {
     }
   }
 }
-
 stage_logic_func_wrapper(sidequest, stage) {
   if(isDefined(stage.logic_func)) {
     level endon(sidequest.name + "_" + stage.name + "_over");
     stage[[stage.logic_func]]();
   }
 }
-
 sidequest_start(sidequest_name) {
   sidequest = level._zombie_sidequests[sidequest_name];
   sidequest build_assets();
@@ -389,7 +367,6 @@ sidequest_start(sidequest_name) {
     sidequest thread[[sidequest.logic_func]]();
   }
 }
-
 stage_start(sidequest, stage) {
   if(IsString(sidequest)) {
     sidequest = level._zombie_sidequests[sidequest];
@@ -416,7 +393,6 @@ stage_start(sidequest, stage) {
     stage thread display_stage_title(sidequest.uses_teleportation);
   }
 }
-
 display_stage_title(wait_for_teleport_done_notify) {
   if(wait_for_teleport_done_notify) {
     level waittill("teleport_done");
@@ -444,7 +420,6 @@ display_stage_title(wait_for_teleport_done_notify) {
   wait(1.0);
   stage_text Destroy();
 }
-
 time_limited_stage(sidequest) {
   level endon(sidequest.name + "_" + self.name + "_over");
   level endon("suspend_timer");
@@ -466,7 +441,6 @@ time_limited_stage(sidequest) {
   wait(10);
   stage_failed(sidequest, self);
 }
-
 sidequest_println(str) {}
 precache_sidequest_assets() {
   sidequest_names = GetArrayKeys(level._zombie_sidequests);
@@ -490,18 +464,15 @@ precache_sidequest_assets() {
     }
   }
 }
-
 sidequest_complete(sidequest_name) {
   return (level._zombie_sidequests[sidequest_name].sidequest_complete);
 }
-
 stage_completed(sidequest_name, stage_name) {
-  PrintLn("** stage completed called.");
+  PrintLn("*** stage completed called.");
   sidequest = level._zombie_sidequests[sidequest_name];
   stage = sidequest.stages[stage_name];
   level thread stage_completed_internal(sidequest, stage);
 }
-
 stage_completed_internal(sidequest, stage) {
   level notify(sidequest.name + "_" + stage.name + "_over");
   level notify(sidequest.name + "_" + stage.name + "_completed");
@@ -533,7 +504,6 @@ stage_completed_internal(sidequest, stage) {
     sidequest.sidequest_completed = true;
   }
 }
-
 stage_failed_internal(sidequest, stage) {
   level notify(sidequest.name + "_" + stage.name + "_over");
   level notify(sidequest.name + "_" + stage.name + "_failed");
@@ -546,9 +516,8 @@ stage_failed_internal(sidequest, stage) {
   sidequest.active_stage = -1;
   stage delete_stage_assets();
 }
-
 stage_failed(sidequest, stage) {
-  PrintLn("** Stage failed called.");
+  PrintLn("*** Stage failed called.");
   if(IsString(sidequest)) {
     sidequest = level._zombie_sidequests[sidequest];
   }
@@ -557,7 +526,6 @@ stage_failed(sidequest, stage) {
   }
   level thread stage_failed_internal(sidequest, stage);
 }
-
 get_sidequest_stage(sidequest, stage_number) {
   stage = undefined;
   stage_names = GetArrayKeys(sidequest.stages);
@@ -569,13 +537,11 @@ get_sidequest_stage(sidequest, stage_number) {
   }
   return stage;
 }
-
 get_damage_trigger(radius, origin, damage_types) {
   trig = spawn("trigger_damage", origin, 0, radius, 72);
   trig thread dam_trigger_thread(damage_types);
   return trig;
 }
-
 dam_trigger_thread(damage_types) {
   self endon("death");
   damage_type = "NONE";
@@ -588,7 +554,6 @@ dam_trigger_thread(damage_types) {
     }
   }
 }
-
 use_trigger_thread() {
   self endon("death");
   while(1) {
@@ -597,7 +562,6 @@ use_trigger_thread() {
     wait(0.1);
   }
 }
-
 sidequest_stage_active(sidequest_name, stage_name) {
   sidequest = level._zombie_sidequests[sidequest_name];
   stage = sidequest.stages[stage_name];
@@ -607,7 +571,6 @@ sidequest_stage_active(sidequest_name, stage_name) {
     return false;
   }
 }
-
 sidequest_start_next_stage(sidequest_name) {
   sidequest = level._zombie_sidequests[sidequest_name];
   if(sidequest.sidequest_complete == true) {
@@ -626,7 +589,6 @@ sidequest_start_next_stage(sidequest_name) {
   stage_start(sidequest, stage);
   return (stage);
 }
-
 main() {}
 is_facing(facee) {
   orientation = self getPlayerAngles();
@@ -639,7 +601,6 @@ is_facing(facee) {
   dotProduct = VectorDot(unitForwardVec2D, unitToFaceeVec2D);
   return (dotProduct > 0.9);
 }
-
 fake_use(notify_string, qualifier_func) {
   waittillframeend;
   while(1) {
@@ -652,7 +613,7 @@ fake_use(notify_string, qualifier_func) {
       if(isDefined(qualifier_func)) {
         qualifier_passed = players[i][[qualifier_func]]();
       }
-      if(qualifier_passed && (distanceSquared(self.origin, players[i].origin) < 64 * 64)) {
+      if(qualifier_passed && (DistanceSquared(self.origin, players[i].origin) < 64 * 64)) {
         if(players[i] is_facing(self)) {
           if(players[i] UseButtonPressed()) {
             self notify(notify_string, players[i]);

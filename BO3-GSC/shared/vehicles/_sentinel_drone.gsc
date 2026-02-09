@@ -167,8 +167,8 @@ function sentinel_drone_initialize() {
   self.nextjuketime = 0;
   self.nextrolltime = 0;
   self.arms_count = 3;
-  setdvar("Sentinel_Move_Speed", 25);
-  setdvar("Sentinel_Evade_Speed", 40);
+  setDvar("Sentinel_Move_Speed", 25);
+  setDvar("Sentinel_Evade_Speed", 40);
   self.should_buff_zombies = 0;
   self.disable_flame_fx = 1;
   self.no_widows_wine = 1;
@@ -219,10 +219,10 @@ function private is_target_valid(target) {
   if(!isalive(target)) {
     return false;
   }
-  if(isplayer(target) && target.sessionstate == "spectator") {
+  if(isPlayer(target) && target.sessionstate == "spectator") {
     return false;
   }
-  if(isplayer(target) && target.sessionstate == "intermission") {
+  if(isPlayer(target) && target.sessionstate == "intermission") {
     return false;
   }
   if(isDefined(target.ignoreme) && target.ignoreme) {
@@ -239,7 +239,7 @@ function private is_target_valid(target) {
       return false;
     }
   }
-  if(isDefined(self.should_buff_zombies) && self.should_buff_zombies && isplayer(target)) {
+  if(isDefined(self.should_buff_zombies) && self.should_buff_zombies && isPlayer(target)) {
     if(isDefined(get_sentinel_nearest_zombie())) {
       return false;
     }
@@ -303,7 +303,7 @@ function set_sentinel_drone_enemy(enemy) {
   }
   self.sentinel_droneenemy = enemy;
   if(isDefined(self.skip_first_taunt)) {
-    if(isplayer(enemy)) {
+    if(isPlayer(enemy)) {
       sentinel_play_taunt(level._sentinel_enemy_detected_taunts);
     }
   } else {
@@ -908,7 +908,7 @@ function sentinel_canseeenemy(sentinel_origin, prev_enemy_position) {
   origin_point = sentinel_origin;
   if(!isDefined(prev_enemy_position)) {
     target_point = self.sentinel_droneenemy.origin + vectorscale((0, 0, 1), 48);
-    if(isplayer(self.sentinel_droneenemy)) {
+    if(isPlayer(self.sentinel_droneenemy)) {
       enemy_stance = self.sentinel_droneenemy getstance();
       if(enemy_stance == "prone") {
         target_point = self.sentinel_droneenemy.origin + vectorscale((0, 0, 1), 2);
@@ -950,7 +950,7 @@ function sentinel_canseeenemy(sentinel_origin, prev_enemy_position) {
   }
   result.hit_entity = trace["entity"];
   result.hit_position = trace["position"];
-  if(isplayer(trace["entity"]) || (isDefined(self.should_buff_zombies) && self.should_buff_zombies && isDefined(trace["entity"]) && isDefined(trace["entity"].archetype) && trace["entity"].archetype == "zombie")) {
+  if(isPlayer(trace["entity"]) || (isDefined(self.should_buff_zombies) && self.should_buff_zombies && isDefined(trace["entity"]) && isDefined(trace["entity"].archetype) && trace["entity"].archetype == "zombie")) {
     result.can_see_enemy = 1;
     return result;
   }
@@ -1005,7 +1005,7 @@ function sentinel_firelogic() {
         self clientfield::set("sentinel_drone_beam_charge", 0);
         result = sentinel_canseeenemy(self.beam_start_position, result.hit_position);
         if(result.can_see_enemy) {
-          if(!(isDefined(b_succession) && b_succession) && isplayer(result.hit_entity)) {
+          if(!(isDefined(b_succession) && b_succession) && isPlayer(result.hit_entity)) {
             result.hit_entity thread sentinel_damageplayer(int(50), self);
           }
           sentinel_firebeam(result.hit_position, b_succession);
@@ -1107,7 +1107,7 @@ function sentinel_firebeamsuccession(target_position) {
 function sentinel_damagebeamtouchingentity(player_damage, target_position, b_succession = 0) {
   trace = sentinel_trace(self.origin, target_position, self.sentinel_droneenemy, 0);
   trace_entity = trace["entity"];
-  if(isplayer(trace_entity)) {
+  if(isPlayer(trace_entity)) {
     trace_entity thread sentinel_damageplayer(player_damage, self, b_succession);
   } else if(isDefined(trace_entity) && isDefined(trace_entity.archetype) && trace_entity.archetype == "zombie") {
     self thread sentinel_electrifyzombie(trace_entity.origin, trace_entity, 80);
@@ -1227,7 +1227,7 @@ function private sentinel_armdamage(damage, arm, eattacker = undefined) {
   self.sentineldronehealtharms[arm] = self.sentineldronehealtharms[arm] - damage;
   if(self.sentineldronehealtharms[arm] <= 0) {
     self.arms_count--;
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       if(!isDefined(self.e_arms_attacker) && self.arms_count == 2) {
         self.e_arms_attacker = eattacker;
         self.b_same_arms_attacker = 1;
@@ -1250,7 +1250,7 @@ function private sentinel_armdamage(damage, arm, eattacker = undefined) {
     }
     if(self.arms_count == 0 && (!(isDefined(self.disable_charge_when_no_arms) && self.disable_charge_when_no_arms))) {
       sentinel_onallarmsdestroyed();
-      if(isplayer(eattacker)) {
+      if(isPlayer(eattacker)) {
         level notify("all_sentinel_arms_destroyed", self.b_same_arms_attacker, eattacker);
       }
     }
@@ -1335,7 +1335,7 @@ function private sentinel_cameradamage(damage, partname, eattacker) {
     sentinel_destroycore();
     self thread sentinel_selfdestruct(2000);
     self thread sentinel_chargeatplayer();
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       level notify("sentinel_camera_destroyed", eattacker);
     }
   }

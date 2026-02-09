@@ -25,7 +25,7 @@
 #include maps\mp\gametypes\_hostmigration;
 
 main() {
-  if(getdvar(#"mapname") == "mp_background") {
+  if(getDvar(#"mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -261,7 +261,7 @@ sd_playerspawnedcb() {
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
   thread checkallowspectating();
 
-  if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"])
+  if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"])
     maps\mp\_scoreevents::processscoreevent("kill_sd", attacker, self, sweapon);
 
   inbombzone = 0;
@@ -273,7 +273,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       inbombzone = 1;
   }
 
-  if(inbombzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(inbombzone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     if(game["defenders"] == self.pers["team"]) {
       attacker maps\mp\_medals::offenseglobalcount();
       attacker addplayerstatwithgametype("OFFENDS", 1);
@@ -292,7 +292,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     }
   }
 
-  if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isbombcarrier) && self.isbombcarrier == 1)
+  if(isPlayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isbombcarrier) && self.isbombcarrier == 1)
     self recordkillmodifier("carrying");
 
   if(self.isplanting == 1)

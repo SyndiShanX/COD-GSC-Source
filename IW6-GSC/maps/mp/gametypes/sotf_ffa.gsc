@@ -16,7 +16,7 @@ CONST_WEAPON_SELECTABLE_COL = 3;
 CONST_DLC_MAPPACK_COL = 4;
 
 main() {
-  if(GetDvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -346,7 +346,6 @@ playFxAtPoint(pos) {
   } else {
     playFX(getfx("signal_chest_drop"), spawnPoint);
   }
-
 }
 
 playLinkedSmokeEffect(fxId, fxEntity) {
@@ -652,7 +651,6 @@ getRandomAttachments(newWeapon) {
       if(!scopeFound) {
         nameMid = StrTok(baseName, "_")[1];
         chosenAttachments[chosenAttachments.size] = nameMid + "scope";
-
       }
     }
 

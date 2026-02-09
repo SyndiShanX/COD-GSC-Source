@@ -96,7 +96,7 @@ on_end(round_reset) {
 }
 
 on_ai_killed(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     w_root = zm_weapons::function_386dacbc(params.weapon);
 
     if(params.eattacker.var_636a8bf7 == w_root.name && isDefined(params.eattacker.var_5a5bf8e7) && params.eattacker.var_5a5bf8e7 && !(isDefined(params.eattacker.var_9360d1b5) && params.eattacker.var_9360d1b5)) {

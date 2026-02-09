@@ -115,7 +115,6 @@ bot_fireteam_loadout_class_callback() {
       loadoutValueArray["loadoutStreak3"] = undefined;
 
     bot_fireteam_test_killstreaks(loadoutValueArray, self);
-
   }
 
   self.botLastLoadout = loadoutValueArray;
@@ -500,7 +499,6 @@ bot_fireteam_hunt_zone_find_node() {
 
       result = self BotSetScriptGoal(goalPos, 128, node_type);
       self.fireteam_hunt_goalpos = goalPos;
-
     }
   }
 

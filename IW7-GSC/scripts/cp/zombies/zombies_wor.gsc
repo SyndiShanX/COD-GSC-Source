@@ -756,7 +756,7 @@ struct_wait_for_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   level.wor_items_picked_up[var_3.gun][var_6] = 1;
-  if(isplayer(var_13)) {
+  if(isPlayer(var_13)) {
     switch (var_3.gun) {
       case "iw7_headcutter_zm":
         var_13 thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_crystal_yellow", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
@@ -1703,7 +1703,7 @@ dischord_target_listener(var_0) {
   var_1 = 0;
   while(!var_1) {
     var_0 waittill("damage", var_2, var_3);
-    if(isplayer(var_3) && scripts\engine\utility::istrue(var_3.wearing_dischord_glasses) || level.debug_dischord_targets) {
+    if(isPlayer(var_3) && scripts\engine\utility::istrue(var_3.wearing_dischord_glasses) || level.debug_dischord_targets) {
       level.dischord_targets_hit++;
       var_1 = 1;
       if(level.dischord_targets_hit >= 5) {
@@ -1760,7 +1760,7 @@ debug_show_dischord_targets() {
         level.debug_dischord_targets = 1;
       }
 
-      setdvar("scr_show_dischord_targets", 0);
+      setDvar("scr_show_dischord_targets", 0);
     }
 
     wait(0.1);

@@ -15,7 +15,6 @@ save_restore_callback() {
   move_players_to_start();
   fade_in();
 }
-
 init_client_flags() {
   level._ZT_ACTOR_CF_GIB_DEATH_P1 = 2;
   level._ZT_ACTOR_CF_GIB_DEATH_P2 = 3;
@@ -33,7 +32,6 @@ init_client_flags() {
   level._ZT_PLAYER_CF_SHOW_SCORES = 13;
   level._ZT_PLAYER_CF_START_SMART_BOMB = 14;
 }
-
 main() {
   level thread fade_out(.1);
   level.zombiemode = true;
@@ -103,7 +101,6 @@ main() {
     }
   }
 }
-
 arena_findIndexByName(name) {
   for(i = 0; i < level.arenas.size; i++) {
     if(level.arenas[i] == name) {
@@ -112,7 +109,6 @@ arena_findIndexByName(name) {
   }
   return undefined;
 }
-
 arena_initialize() {
   level.arenas = [];
   level.arenas[level.arenas.size] = "island";
@@ -130,7 +126,6 @@ arena_initialize() {
   level.raw_round = 0;
   setup_exits();
 }
-
 init_difficulty() {
   self notify("init_difficulty");
   self endon("init_difficulty");
@@ -138,7 +133,6 @@ init_difficulty() {
     self waittill("change_difficulty");
   }
 }
-
 player_reset_score() {
   self.score = 0;
   self.lives = 3;
@@ -147,7 +141,6 @@ player_reset_score() {
   self maps\_zombietron_score::update_multiplier_bar(0);
   self maps\_zombietron_score::update_hud();
 }
-
 players_playing() {
   self notify("players_playing");
   self endon("players_playing");
@@ -160,7 +153,6 @@ players_playing() {
     wait(1);
   }
 }
-
 intermission_monitor() {
   while(1) {
     level.in_intermission = false;
@@ -169,7 +161,6 @@ intermission_monitor() {
     level waittill("fade_in_complete");
   }
 }
-
 post_all_players_connected() {
   self notify("post_all_players_connected");
   self endon("post_all_players_connected");
@@ -183,44 +174,44 @@ post_all_players_connected() {
   level thread begin_game();
   level thread intermission_monitor();
 }
-
 mini_boss_spawn_think() {
   level endon("round_spawning_done");
   while(1) {
     time = randomFloatRange(level.zombie_vars["mini_boss_interval_min"], level.zombie_vars["mini_boss_interval_max"]);
     time = time / GetPlayers().size;
     time -= (level.round_number / 10);
-    if(time < 1)
+    if(time < 1) {
       time = 1;
+    }
     wait(time);
-    if(randomInt(100) < (level.zombie_vars["mini_boss_spawn_percentage"] + (level.round_number * GetPlayers().size))) {
+    if(RandomInt(100) < (level.zombie_vars["mini_boss_spawn_percentage"] + (level.round_number * GetPlayers().size))) {
       spawn_locations = level.current_spawners[level.current_wave.spawn_side];
-      spawn_point = spawn_locations[randomInt(spawn_locations.size)];
+      spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
       maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point);
       if(GetPlayers().size == 4) {
         spawn_locations = level.current_spawners[level.current_wave.spawn_side];
-        spawn_point = spawn_locations[randomInt(spawn_locations.size)];
+        spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
         maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, "engineer", true);
       }
     }
   }
 }
-
 wave_spawn(current_wave) {
   spawn_locations = level.current_spawners[current_wave.spawn_side];
   time = current_wave.spawn_duration;
   time = (time * 1000) + GetTime();
   while(GetTime() < time) {
     ai = undefined;
-    spawn_point = spawn_locations[randomInt(spawn_locations.size)];
+    spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
     if(isDefined(level.challenge) && isDefined(level.challenge.spawner)) {
       if(isDefined(level.challenge.spawner_secondary_type) && isDefined(level.challenge.spawner_secondary_chance)) {
-        if(randomInt(100) < level.challenge.spawner_secondary_chance) {
+        if(RandomInt(100) < level.challenge.spawner_secondary_chance) {
           ai = maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, level.challenge.spawner_secondary_type);
         }
       }
-      if(!isDefined(ai))
+      if(!isDefined(ai)) {
         ai = maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, level.challenge.type);
+      }
     } else {
       ai = spawn_zombie(spawn_point);
     }
@@ -237,7 +228,6 @@ wave_spawn(current_wave) {
     }
   }
 }
-
 round_zombie_counter(waitTime) {
   level.zombie_count = undefined;
   wait waitTime;
@@ -248,7 +238,6 @@ round_zombie_counter(waitTime) {
     wait 1;
   }
 }
-
 round_spawning() {
   level notify("round_spawning_starting");
   level.round_start_time = GetTime();
@@ -292,7 +281,6 @@ round_spawning() {
   zombies = GetAISpeciesArray("axis", "all");
   array_thread(zombies, maps\_zombietron_spawner::zombie_killer_failsafe);
 }
-
 get_all_the_map_spawners_on_side(side) {
   spawners = [];
   for(i = 0; i < level.current_spawners[side].size; i++) {
@@ -301,7 +289,6 @@ get_all_the_map_spawners_on_side(side) {
   }
   return spawners;
 }
-
 get_all_the_map_spawners() {
   spawners = [];
   top = get_all_the_map_spawners_on_side("top");
@@ -322,21 +309,23 @@ get_all_the_map_spawners() {
   }
   return spawners;
 }
-
 get_opposite_side(side) {
-  if(side == "top")
+  if(side == "top") {
     return "bottom";
-  if(side == "bottom")
+  }
+  if(side == "bottom") {
     return "top";
-  if(side == "left")
+  }
+  if(side == "left") {
     return "right";
-  if(side == "right")
+  }
+  if(side == "right") {
     return "left";
+  }
   assertex(0, "side parameter was not handled");
 }
-
 get_random_side() {
-  chance = randomInt(4);
+  chance = RandomInt(4);
   if(chance == 0) {
     return "top";
   } else if(chance == 1) {
@@ -347,7 +336,6 @@ get_random_side() {
     return "right";
   }
 }
-
 create_spawn_group(wave_number) {
   wave = spawnStruct();
   wave.type = "zombies";
@@ -357,7 +345,6 @@ create_spawn_group(wave_number) {
   wave.time_till_next_group = 1 + RandomFloatRange(0, wave.spawn_duration);
   return wave;
 }
-
 setup_spawn_sequence() {
   level.spawn_sequence = [];
   max = level.zombie_vars["zombie_max_waves"] + (level.arena_laps * level.zombie_vars["zombie_max_waves"]);
@@ -369,7 +356,6 @@ setup_spawn_sequence() {
     level.spawn_sequence[i] = create_spawn_group(i);
   }
 }
-
 player_basic_needs() {
   players = GetPlayers();
   for(i = 0; i < players.size; i++) {
@@ -388,7 +374,6 @@ player_basic_needs() {
     }
   }
 }
-
 update_next_arena() {
   ClearAllCorpses();
   player_basic_needs();
@@ -412,7 +397,6 @@ update_next_arena() {
     maps\_zombietron_scenes::hide_temple_props("none");
   }
 }
-
 end_of_round_cleanup() {
   if(level.arenas[level.current_arena] == "prison") {
     players = GetPlayers();
@@ -423,7 +407,6 @@ end_of_round_cleanup() {
     }
   }
 }
-
 begin_game() {
   level endon("all_players_dead");
   players = get_players();
@@ -542,7 +525,6 @@ begin_game() {
     }
   }
 }
-
 end_game() {
   level waittill("end_the_game");
   wait 2;
@@ -619,7 +601,6 @@ end_game() {
   }
   wait(666);
 }
-
 update_leaderboards() {
   if(GetPlayers().size <= 1) {
     return;
@@ -633,7 +614,6 @@ update_leaderboards() {
   zombietron_upload_highscore();
   zombietron_set_new_zombie_stats();
 }
-
 get_player_spawn_point() {
   if(level.arena_round_number != 1) {
     camera_center = get_camera_center_point();
@@ -655,12 +635,10 @@ get_player_spawn_point() {
   spawnPointTarget = level.arenas[level.current_arena] + "_spawnpoint";
   return GetStruct(spawnPointTarget, "targetname").origin;
 }
-
 get_camera_center_point() {
   cameraTarget = level.arenas[level.current_arena] + "_center";
   return GetStruct(cameraTarget, "targetname").origin;
 }
-
 move_players_to_start() {
   spawn_origin = get_player_spawn_point();
   spawn_origin = PlayerPhysicsTrace(spawn_origin + (0, 0, 1000), spawn_origin - (0, 0, 1000));
@@ -701,7 +679,6 @@ move_players_to_start() {
   maps\_zombietron_spawner::update_drop_locations();
   level notify("move_to_start");
 }
-
 player_respawn_if_extra_life() {
   self endon("disconnect");
   self endon("player_respawned");
@@ -714,7 +691,6 @@ player_respawn_if_extra_life() {
     wait .2;
   }
 }
-
 life_link(source, dest) {
   self endon("disconnect");
   level endon("end_the_game");
@@ -725,14 +701,13 @@ life_link(source, dest) {
   orb thread destroy_me_on_player_notify(dest, "disconnect");
   orb thread destroy_me_on_player_notify(source, "end_life_link");
   while(isDefined(orb)) {
-    orb moveTo(dest.origin, 0.2, 0, 0);
+    orb moveto(dest.origin, 0.2, 0, 0);
     wait 0.2;
     if(isDefined(orb)) {
       orb.origin = source.origin;
     }
   }
 }
-
 steal_life_cooldown(time) {
   self endon("disconnect");
   level endon("end_the_game");
@@ -740,16 +715,18 @@ steal_life_cooldown(time) {
   wait time;
   self.stealing = undefined;
 }
-
 steal_life_from(source, dest) {
   self endon("disconnect");
   level endon("end_the_game");
-  if(!isDefined(source) || source.lives < 1)
+  if(!isDefined(source) || source.lives < 1) {
     return;
-  if(isDefined(source.stealing))
+  }
+  if(isDefined(source.stealing)) {
     return;
-  if(isDefined(dest.stealing))
+  }
+  if(isDefined(dest.stealing)) {
     return;
+  }
   source thread steal_life_cooldown(10);
   dest thread steal_life_cooldown(level.zombie_vars["auto_respawn_timeout"] + 5);
   source thread life_link(source, dest);
@@ -764,7 +741,7 @@ steal_life_from(source, dest) {
   pickup setModel(level.extra_life_model);
   playFXOnTag(level._effect[source.light_playFX], pickup, "tag_origin");
   source thread maps\_zombietron_pickups::turn_shield_on(true);
-  pickup moveTo(dest.origin, 1, 0, 0);
+  pickup moveto(dest.origin, 1, 0, 0);
   pickup playLoopSound("zmb_pickup_life_shimmer");
   pickup waittill("movedone");
   pickup Delete();
@@ -774,7 +751,7 @@ steal_life_from(source, dest) {
   model = undefined;
   number = 1;
   while(!isDefined(reward) || maps\_zombietron_pickups::can_spawn_pickup(reward) == false) {
-    i = randomInt(level.reward_pickups.size);
+    i = RandomInt(level.reward_pickups.size);
     reward = level.reward_pickups[i];
     switch (reward) {
       case "booster":
@@ -803,7 +780,6 @@ steal_life_from(source, dest) {
   }
   source notify("end_life_link");
 }
-
 player_automatic_respawn() {
   self endon("disconnect");
   level endon("end_the_game");
@@ -819,7 +795,6 @@ player_automatic_respawn() {
   }
   self.headshots = 0;
 }
-
 player_steal_life() {
   self endon("disconnect");
   level endon("end_the_game");
@@ -848,7 +823,6 @@ player_steal_life() {
     }
   }
 }
-
 player_respawn_now() {
   self maps\_zombietron_score::update_hud();
   self playSound("zmb_player_respawn");
@@ -868,13 +842,14 @@ player_respawn_now() {
   self SetStance("stand");
   self notify("player_respawned");
 }
-
 player_respawn() {
   wait 2;
-  if(self.lives < 1 && !isDefined(self.stolen_life))
+  if(self.lives < 1 && !isDefined(self.stolen_life)) {
     return;
-  if(level.gameEnded)
+  }
+  if(level.gameEnded) {
     return;
+  }
   if(!isDefined(self.stolen_life)) {
     self.lives--;
     if(self.lives < 0) {
@@ -885,13 +860,11 @@ player_respawn() {
   }
   self player_respawn_now();
 }
-
 exit_cleanup() {
   level waittill("exit_taken");
   wait .05;
   self notify("trigger");
 }
-
 make_exit_magical(trigger) {
   level endon("exit_taken");
   trigger waittill("trigger");
@@ -901,12 +874,11 @@ make_exit_magical(trigger) {
   if(level.round_number >= 20 && !isDefined(level.lastmagical_armory)) {
     chance = 100;
   }
-  if(level.round_number > 4 && randomInt(100) < chance) {
+  if(level.round_number > 4 && RandomInt(100) < chance) {
     level.magical_exit_armory = 1;
     level.lastmagical_armory = level.round_number;
   }
 }
-
 is_exit_open(label) {
   exit_triggers = get_environment_exits();
   for(i = 0; i < exit_triggers.size; i++) {
@@ -919,9 +891,8 @@ is_exit_open(label) {
   }
   return false;
 }
-
 open_exit(trigger, objective_id) {
-  blocker = getEnt(trigger.target, "targetname");
+  blocker = GetEnt(trigger.target, "targetname");
   blocker.origin -= (0, 0, 500);
   trigger.exit_open = true;
   trigger thread exit_cleanup();
@@ -935,7 +906,6 @@ open_exit(trigger, objective_id) {
   wait 0.1;
   level notify("exit_taken", trigger);
 }
-
 open_exits(specific) {
   level.teleporter_spawned = true;
   exit_triggers = get_environment_exits();
@@ -979,7 +949,7 @@ open_exits(specific) {
   magic_exit = undefined;
   if(level.round_number - level.lastmagical_exit_taken > 2) {
     if(num_exits > 1) {
-      magic_exit = randomInt(num_exits);
+      magic_exit = RandomInt(num_exits);
     }
   }
   opened_exits = 0;
@@ -1018,7 +988,6 @@ open_exits(specific) {
   level.previous_exit_taken = exit_trigger.script_parameters;
   level.teleporter_spawned = false;
 }
-
 Rotate() {
   self endon("death");
   while(1) {
@@ -1026,7 +995,6 @@ Rotate() {
     wait 4;
   }
 }
-
 spawn_teleporter(boss_battle) {
   level.teleporter_spawned = true;
   location = maps\_zombietron_pickups::get_random_pickup_location();
@@ -1074,7 +1042,7 @@ spawn_teleporter(boss_battle) {
     lights[next] thread fake_linkto(teleporter, (-72, 0, 50));
     playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
   }
-  teleporter moveTo(dest_point + (0, 0, 5), 3, 0, 0);
+  teleporter MoveTo(dest_point + (0, 0, 5), 3, 0, 0);
   teleporter thread Rotate();
   physicsExplosionSphere(start_point, 200, 128, 4);
   teleporter waittill("movedone");
@@ -1084,7 +1052,7 @@ spawn_teleporter(boss_battle) {
   trigger playLoopSound("zmb_teleporter_loop", .5);
   trigger waittill("trigger", player);
   PlayRumbleOnPosition("artillery_rumble", location.origin);
-  trigger stopLoopSound(.5);
+  trigger StopLoopSound(.5);
   PlaySoundAtPosition("zmb_teleporter_tele_out", (0, 0, 0));
   level.survived_msg FadeOverTime(1);
   level.msg_t3 FadeOverTime(1);
@@ -1106,7 +1074,6 @@ spawn_teleporter(boss_battle) {
   }
   level.teleporter_spawned = false;
 }
-
 setup_random_environment() {
   players = GetPlayers();
   for(i = 0; i < players.size; i++) {
@@ -1122,7 +1089,7 @@ setup_random_environment() {
     }
   }
   level.weatherFx = [];
-  weather_chance = randomInt(3);
+  weather_chance = RandomInt(3);
   if(level.arena_round_number == 3) {
     fog = getEntArray("fog_fx", "targetname");
     for(i = 0; i < fog.size; i++) {
@@ -1145,7 +1112,6 @@ setup_random_environment() {
   setup_script_models();
   CleanupSpawnedDynEnts();
 }
-
 hide_model() {
   if(!isDefined(self.hidden)) {
     if(self.spawnflags & 1) {
@@ -1155,7 +1121,6 @@ hide_model() {
     self.origin += (0, 0, 2000);
   }
 }
-
 show_model() {
   if(isDefined(self.hidden)) {
     if(self.spawnflags & 1) {
@@ -1165,7 +1130,6 @@ show_model() {
     self DisconnectPaths();
   }
 }
-
 setup_script_models() {
   for(i = 0; i < level.zombie_vars["zombie_arena_rounds"]; i++) {
     models = getEntArray("round" + i, "targetname");
@@ -1180,9 +1144,8 @@ setup_script_models() {
     }
   }
 }
-
 setup_ambient_fx() {
-  vespa_smoke = getEnt("vespa_1", "targetname");
+  vespa_smoke = getent("vespa_1", "targetname");
   assertex(isDefined(vespa_smoke), "vespa_smoke is missing");
   playFX(level._effect["vespa_smoke_fx"], vespa_smoke.origin);
   capacitors = getEntArray("capacitor", "targetname");
@@ -1191,7 +1154,6 @@ setup_ambient_fx() {
     playFX(level._effect["capacitor_light"], capacitors[i].origin);
   }
 }
-
 remove_ignore_attacker() {
   self notify("new_ignore_attacker");
   self endon("new_ignore_attacker");
@@ -1202,7 +1164,6 @@ remove_ignore_attacker() {
   wait(level.ignore_enemy_timer);
   self.ignoreAttacker = undefined;
 }
-
 init_function_overrides() {
   level.custom_introscreen = ::zombie_intro_screen;
   level.reset_clientdvars = ::onPlayerConnect_clientDvars;
@@ -1212,7 +1173,6 @@ init_function_overrides() {
   level.melee_miss_func = ::zombiemode_melee_miss;
   level.callbackPlayerKilled = ::Callback_PlayerKilledZT;
 }
-
 initZombieLeaderboardData() {
   level.zombieLeaderboardStatVariable["zombietron"]["highestwave"] = "zombietron_highestwave";
   level.zombieLeaderboardStatVariable["zombietron"]["timeinwave"] = "zombietron_timeinwave";
@@ -1220,24 +1180,20 @@ initZombieLeaderboardData() {
   level.zombieLeaderboardNumber["zombietron"]["waves"] = 3;
   level.zombieLeaderboardNumber["zombietron"]["points"] = 4;
 }
-
 zombie_intro_screen(string1, string2, string3, string4, string5) {
   flag_wait("all_players_connected");
   wait(1);
   setmusicstate("SPLASH_SCREEN");
   wait(0.2);
 }
-
 onPlayerConnect_clientDvars() {
   self SetClientDvars("cg_deadChatWithDead", "1", "cg_deadChatWithTeam", "1", "cg_deadHearTeamLiving", "1", "cg_deadHearAllLiving", "1", "cg_everyoneHearsEveryone", "1", "compass", "0", "hud_showStance", "0", "ammoCounterHide", "1", "miniscoreboardhide", "1", "ui_hud_hardcore", "0", "player_topDownCamMode", "3", "ai_corpseCount", "14", "waypointOffscreenPointerHeight", "30", "waypointOffscreenPointerWidth", "70", "cg_drawSpectatorMessages", "0", "sm_sunSampleSizeNear", ".57", "playerPushAmount", "1");
   self SetDepthOfField(0, 0, 512, 4000, 4, 0);
   self setClientDvars("aim_lockon_pitch_strength", 0.0, "player_topDownCamOffset", (0, -15, 650), "player_TopDownCamAngles", (75, 0, 0), "cg_fov", 65);
 }
-
 player_killed_override() {
   level waittill("forever");
 }
-
 player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   if(isDefined(self.shield_is_on)) {
     self ClearDamageIndicator();
@@ -1275,31 +1231,33 @@ player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
   }
   return finalDamage;
 }
-
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, sHitLoc, modelIndex, psOffsetTime) {
-  if(!isDefined(self) || !isDefined(attacker))
+  if(!isDefined(self) || !isDefined(attacker)) {
     return damage;
-  if(!isplayer(attacker) && !isplayer(self))
+  }
+  if(!isPlayer(attacker) && !isPlayer(self)) {
     return damage;
-  if(!isDefined(damage) || !isDefined(meansofdeath))
+  }
+  if(!isDefined(damage) || !isDefined(meansofdeath)) {
     return damage;
-  if(meansofdeath == "")
+  }
+  if(meansofdeath == "") {
     return damage;
+  }
   final_damage = damage;
   if(isDefined(self.actor_damage_func)) {
     final_damage = [[self.actor_damage_func]](weapon, final_damage);
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
     attacker = attacker.owner;
+  }
   return int(final_damage);
 }
-
 zombiemode_melee_miss() {
   if(isDefined(self.enemy.curr_pay_turret)) {
     self.enemy doDamage(GetDvarInt(#"ai_meleeDamage"), self.origin, self, undefined, "melee", "none");
   }
 }
-
 Callback_PlayerKilledZT(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
   self playSound("zmb_player_death");
   self notify("player_died");
@@ -1328,11 +1286,9 @@ Callback_PlayerKilledZT(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, v
     self thread player_respawn();
   }
 }
-
 get_environment_exits() {
   return level.arena_exits[level.current_arena];
 }
-
 setup_exits() {
   level.arena_exits = [];
   for(i = 0; i < level.arenas.size; i++) {
@@ -1340,7 +1296,6 @@ setup_exits() {
     level.arena_exits[i] = getEntArray(arena + "_exit", "script_noteworthy");
   }
 }
-
 detect_and_change_music_states() {
   wait_for_all_players();
   setmusicstate(level.arenas[level.current_arena]);
@@ -1373,18 +1328,19 @@ detect_and_change_music_states() {
     }
   }
 }
-
 zombietron_upload_highscore() {
   playersRank = 1;
-  if(level.players_playing == 1)
+  if(level.players_playing == 1) {
     playersRank = 4;
-  else if(level.players_playing == 2)
+  } else if(level.players_playing == 2) {
     playersRank = 3;
-  else if(level.players_playing == 3)
+  } else if(level.players_playing == 3) {
     playersRank = 2;
+  }
   map_name = getDvar(#"mapname");
-  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points"))
+  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points")) {
     return;
+  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     pre_highest_wave = players[i] playerZombieStatGet(map_name, "highestwave");
@@ -1413,27 +1369,27 @@ zombietron_upload_highscore() {
     }
   }
 }
-
 isZombieLeaderboardAvailable(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map]))
+  if(!isDefined(level.zombieLeaderboardNumber[map])) {
     return 0;
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  }
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     return 0;
+  }
   return 1;
 }
-
 getZombieLeaderboardNumber(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     assertMsg("Unknown leaderboard number for map " + map + "and type " + type);
+  }
   return level.zombieLeaderboardNumber[map][type];
 }
-
 getZombieStatVariable(map, variable) {
-  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable]))
+  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable])) {
     assertMsg("Unknown stat variable " + variable + " for map " + map);
+  }
   return level.zombieLeaderboardStatVariable[map][variable];
 }
-
 playerZombieStatGet(map, variable) {
   stat_variable = getZombieStatVariable(map, variable);
   result = self zombieStatGet(stat_variable);
@@ -1442,7 +1398,6 @@ playerZombieStatGet(map, variable) {
   }
   return result;
 }
-
 playerZombieStatSet(map, variable, value) {
   if(!isDefined(value)) {
     value = 0;
@@ -1450,7 +1405,6 @@ playerZombieStatSet(map, variable, value) {
   stat_variable = getZombieStatVariable(map, variable);
   self zombieStatSet(stat_variable, value);
 }
-
 zombietron_set_new_zombie_stats() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -1462,23 +1416,23 @@ zombietron_set_new_zombie_stats() {
     players[i] zombieStatSet("zombie_rounds", total_rounds);
   }
 }
-
 makeRankNumber(wave, players, time) {
-  if(time > 86400)
+  if(time > 86400) {
     time = 86400;
+  }
   padding = "";
-  if(10 > time)
+  if(10 > time) {
     padding += "0000";
-  else if(100 > time)
+  } else if(100 > time) {
     padding += "000";
-  else if(1000 > time)
+  } else if(1000 > time) {
     padding += "00";
-  else if(10000 > time)
+  } else if(10000 > time) {
     padding += "0";
+  }
   rank = wave + "" + players + padding + time;
   return rank;
 }
-
 zombieStatGet(dataName) {
   if(level.systemLink) {
     return 0;
@@ -1488,7 +1442,6 @@ zombieStatGet(dataName) {
   }
   return (self getdstat("PlayerStatsList", dataName));
 }
-
 zombieStatSet(dataName, value) {
   if(level.systemLink) {
     return;

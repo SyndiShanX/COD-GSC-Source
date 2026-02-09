@@ -196,7 +196,6 @@ start_step_2() {
 
   if(zm_white_main_quest::function_6cebbce1()) {
     iprintlnbold("<dev string:xaa>");
-
   }
 
   while(zm_white_main_quest::function_6cebbce1()) {

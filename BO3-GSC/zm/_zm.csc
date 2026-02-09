@@ -258,7 +258,7 @@ function player_duplicaterender(localclientnum) {
     self init_duplicaterender_settings();
     self thread force_update_player_clientfields(localclientnum);
   }
-  if(self isplayer() && self islocalplayer()) {
+  if(self isPlayer() && self islocalplayer()) {
     if(!isDefined(self getlocalclientnumber()) || localclientnum == self getlocalclientnumber()) {
       return;
     }
@@ -443,12 +443,12 @@ function deletezombieeyes(localclientnum) {
 }
 
 function player_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self isplayer()) {
+  if(self isPlayer()) {
     self.zombie_face = newval;
     self notify("face", "face_advance");
     if(isDefined(self.special_eyes) && self.special_eyes) {}
   }
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     else {}
     if(localclientnum == self getlocalclientnumber()) {
       return;
@@ -462,7 +462,7 @@ function player_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, bin
 }
 
 function player_eye_color_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     if(localclientnum == self getlocalclientnumber()) {
       return;
     }
@@ -1110,7 +1110,7 @@ function last_stand_monitor(clientnum, state, oldstate) {
 
 function laststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(!(self isplayer() && self islocalplayer() && isdemoplaying())) {
+    if(!(self isPlayer() && self islocalplayer() && isdemoplaying())) {
       self duplicate_render::set_dr_flag("keyline_ls", 1);
       self duplicate_render::update_dr_filters(localclientnum);
     }
@@ -1118,7 +1118,7 @@ function laststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
     self duplicate_render::set_dr_flag("keyline_ls", 0);
     self duplicate_render::update_dr_filters(localclientnum);
   }
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     if(isDefined(self getlocalclientnumber()) && localclientnum == self getlocalclientnumber()) {
       self zm_audio::sndzmblaststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
     }

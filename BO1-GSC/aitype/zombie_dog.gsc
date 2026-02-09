@@ -26,11 +26,9 @@ main() {
       break;
   }
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\character_sp_zombie_dog::precache();
   character\character_sp_zombie_dog::precache();

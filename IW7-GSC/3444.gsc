@@ -842,7 +842,7 @@ vanguard_control_aiming() {
     }
 
     if(isDefined(var_6)) {
-      if((isai(var_6) || isplayer(var_6)) && length(var_6 getentityvelocity()) < 25) {
+      if((isai(var_6) || isPlayer(var_6)) && length(var_6 getentityvelocity()) < 25) {
         var_0 = var_6.origin;
       } else if(gettime() - var_3 < 500) {
         if(var_4 != var_6) {
@@ -1424,7 +1424,7 @@ bot_control_odin(var_0) {
       if(isDefined(var_10)) {
         var_2 = undefined;
 
-        if(isplayer(var_10)) {
+        if(isPlayer(var_10)) {
           var_4 = func_2E2F(var_10);
         } else {
           var_4 = var_10;
@@ -1955,8 +1955,7 @@ get_random_outside_target() {
     var_5 = var_7.origin;
   } else {
     if(isDefined(level.teleportgetactivenodesfunc)) {
-      var_8 = [
-        }
+      var_8 = [}
         [level.teleportgetactivenodesfunc]]();
     else {
       var_8 = getallnodes();

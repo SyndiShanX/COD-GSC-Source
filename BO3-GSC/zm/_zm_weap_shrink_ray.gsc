@@ -330,7 +330,7 @@ function function_643fa9c8() {
   self.var_f0dec186 endon("death");
   while(true) {
     self.var_f0dec186 waittill("trigger", who);
-    if(!isplayer(who)) {
+    if(!isPlayer(who)) {
       continue;
     }
     if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {

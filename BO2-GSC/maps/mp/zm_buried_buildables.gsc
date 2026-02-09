@@ -1045,7 +1045,7 @@ onuseplantobject_chalk(entity) {
 
       level.built_wallbuys++;
 
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         entity maps\mp\zombies\_zm_stats::increment_client_stat("buried_wallbuy_placed", 0);
         entity maps\mp\zombies\_zm_stats::increment_player_stat("buried_wallbuy_placed");
         entity maps\mp\zombies\_zm_stats::increment_client_stat("buried_wallbuy_placed_" + weapon, 0);
@@ -1053,11 +1053,11 @@ onuseplantobject_chalk(entity) {
       }
 
       if(level.built_wallbuys >= 6) {
-        if(isplayer(entity))
+        if(isPlayer(entity))
           entity maps\mp\zombies\_zm_score::player_add_points("build_wallbuy", 2000);
 
         level.built_wallbuys = -100;
-      } else if(isplayer(entity))
+      } else if(isPlayer(entity))
         entity maps\mp\zombies\_zm_score::player_add_points("build_wallbuy", 1000);
     }
   }

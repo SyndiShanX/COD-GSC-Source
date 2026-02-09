@@ -451,7 +451,7 @@ function surge_player_tracker(player) {
     if(e_hit == player && (!(isDefined(player.is_surged) && player.is_surged))) {
       player.is_surged = 1;
       player thread surge_trigger_watcher(self);
-      if(isplayer(player) && player istouching(self)) {
+      if(isPlayer(player) && player istouching(self)) {
         player thread surge_player_push(self);
         player thread surge_player_rumble(self);
         player playSound("evt_surge_impact");
@@ -607,7 +607,7 @@ function handle_movement(s_target, should_ignore_player) {
 function handle_damage() {
   self endon("death");
   self waittill("damage", damage, e_attacker);
-  self detonate_depth_charge(isDefined(e_attacker) && isplayer(e_attacker));
+  self detonate_depth_charge(isDefined(e_attacker) && isPlayer(e_attacker));
 }
 
 function early_explosion() {

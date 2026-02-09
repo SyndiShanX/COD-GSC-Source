@@ -32,8 +32,8 @@ introscreen_init() {
   precacheshader("black");
   precacheshader("white");
 
-  if(getdvar("introscreen") == "")
-    setdvar("introscreen", "1");
+  if(getDvar("introscreen") == "")
+    setDvar("introscreen", "1");
 
   waittillframeend;
   waittillframeend;
@@ -50,7 +50,7 @@ introscreen_should_activate() {
 }
 
 introscreen_is_enabled() {
-  if(getdvar("beautiful_corner") == "1")
+  if(getDvar("beautiful_corner") == "1")
     return 0;
 
   return 1;

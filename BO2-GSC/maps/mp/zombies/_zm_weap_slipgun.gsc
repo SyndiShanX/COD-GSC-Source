@@ -165,7 +165,6 @@ slipgun_debug_circle(origin, radius, seconds, onslope, parent, start) {
     else
       circle(origin, radius, (1, 1, 1), 0, 1, frames);
   }
-
 }
 
 slipgun_debug_line(start, end, color, seconds) {
@@ -173,7 +172,6 @@ slipgun_debug_line(start, end, color, seconds) {
     frames = int(20 * seconds);
     line(start, end, color, 1, 0, frames);
   }
-
 }
 
 canzombieongoofall() {
@@ -692,7 +690,7 @@ slipgun_zombie_hit_response_internal(mod, damageweapon, player) {
   upgraded = damageweapon == "slipgun_upgraded_zm";
   self thread slipgun_zombie_1st_hit_response(upgraded, player);
 
-  if(isDefined(player) && isplayer(player))
+  if(isDefined(player) && isPlayer(player))
     player thread slipgun_play_zombie_hit_vox();
 
   return true;

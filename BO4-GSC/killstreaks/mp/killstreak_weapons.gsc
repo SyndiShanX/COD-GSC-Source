@@ -21,7 +21,7 @@ init() {
   killstreaks::register("m32", "m32", "killstreak_m32", "m32_used", &usecarriedkillstreakweapon, 0, 1, "M32_USED");
   killstreaks::override_entity_camera_in_demo("m32", 1);
   callback::on_spawned(&on_player_spawned);
-  setdvar(#"scr_heldkillstreak_penalty", 0);
+  setDvar(#"scr_heldkillstreak_penalty", 0);
 }
 
 on_player_spawned() {

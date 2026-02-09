@@ -39,8 +39,9 @@ autoexec init_low_road() {
   array_thread(a_big_rig_ents, ::add_spawn_function, ::spawn_func_bug_rig_ai);
   m_platform = getent("sniper_platform", "targetname");
 
-  foreach(m_piece in getEntArray("sniper_platform_linked", "targetname"))
-  m_piece linkto(m_platform);
+  foreach(m_piece in getEntArray("sniper_platform_linked", "targetname")) {
+    m_piece linkto(m_platform);
+  }
 
   maps\_rusher::init_rusher();
   vh_cougar2 = getent("g20_group1_cougar2", "targetname");
@@ -65,16 +66,17 @@ g20_attackers_spawn_func() {
 }
 
 g20_attackers_damage(einflictor, e_attacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(!isDefined(smeansofdeath) || smeansofdeath == "MOD_UNKNOWN")
+  if(!isDefined(smeansofdeath) || smeansofdeath == "MOD_UNKNOWN") {
     return 0;
-  else if(smeansofdeath == "MOD_CRUSH") {
-    if(isplayer(e_attacker) && !isDefined(self.alreadylaunched)) {
+  } else if(smeansofdeath == "MOD_CRUSH") {
+    if(isPlayer(e_attacker) && !isDefined(self.alreadylaunched)) {
       self.alreadylaunched = 1;
       self startragdoll(1);
       v_launch = vectorscale((0, 0, 1), 100.0);
 
-      if(randomint(100) < 40)
+      if(randomint(100) < 40) {
         v_launch = v_launch + anglesToForward(einflictor.angles) * 300;
+      }
 
       self launchragdoll(v_launch, "J_SpineUpper");
     }
@@ -86,8 +88,9 @@ g20_attackers_damage(einflictor, e_attacker, idamage, idflags, smeansofdeath, sw
 skipto_sniper_rappel() {
   a_heroes = array("hillary", "sam", "jones");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     a_heroes[a_heroes.size] = "harper";
+  }
 
   init_heroes(a_heroes);
   skipto_teleport("skipto_sniper_rappel", "squad");
@@ -166,8 +169,9 @@ load_gump_c() {
   load_gump("la_1_gump_1c");
   m_cougar_destroyed = getent("cougar_destroyed", "targetname");
 
-  if(isDefined(m_cougar_destroyed))
+  if(isDefined(m_cougar_destroyed)) {
     m_cougar_destroyed setModel("veh_t6_mil_cougar_destroyed_low");
+  }
 
   level thread autosave_by_name("after_sam");
 }
@@ -192,8 +196,9 @@ init_damage_fxanims() {
 trigger_damage_fxanim() {
   self setModel(self.model);
 
-  if(self.targetname != "fxanim_sniper_freeway")
+  if(self.targetname != "fxanim_sniper_freeway") {
     self setCanDamage(1);
+  }
 
   b_played_bus_fx = 0;
 
@@ -348,8 +353,9 @@ attack_convoy_random_explosions(v_pos) {
 regroup() {
   run_scene_first_frame("groupcover_approach");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     run_scene_first_frame("groupcover_approach_harper");
+  }
 
   set_objective(level.obj_regroup, level.harper, "breadcrumb");
   level thread regroup_vo();
@@ -359,13 +365,15 @@ regroup() {
 }
 
 regroup_anim() {
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level thread run_scene_and_delete("groupcover_approach_harper");
+  }
 
   run_scene_and_delete("groupcover_approach");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level thread run_scene("groupcover_harper");
+  }
 
   run_scene_and_delete("groupcover");
 }
@@ -404,10 +412,11 @@ regroup_vo() {
 }
 
 sniper_rappel_vo() {
-  if(flag("sniper_option"))
+  if(flag("sniper_option")) {
     level.player queue_dialog("get_the_president_004");
-  else
+  } else {
     level.player queue_dialog("rappel_down__go_001");
+  }
 
   if(!flag("harper_dead")) {
     level.harper queue_dialog("harp_come_on_come_on_g_0", 1.5);
@@ -416,8 +425,9 @@ sniper_rappel_vo() {
     level.harper queue_dialog("harp_we_re_on_ground_fu_0", 1);
     level.harper queue_dialog("harp_we_got_more_mg_truck_0", 1, "truck_right");
   } else {
-    if(!flag("sniper_option"))
+    if(!flag("sniper_option")) {
       flag_wait("grouprappel_player_done");
+    }
 
     level.player queue_dialog("sect_we_gotta_make_quick_0", 0.5);
     flag_wait_any("grouprappel_sniper_started", "grouprappel_started");
@@ -427,8 +437,9 @@ sniper_rappel_vo() {
   if(!flag("harper_dead")) {
     flag_wait("grouprappel_done");
 
-    if(flag("sniper_option"))
+    if(flag("sniper_option")) {
       level.player queue_dialog("take_cover_by_the_010", 0.5);
+    }
   } else {
     level.player queue_dialog("sect_i_see_them_0", 0.5);
     level.player queue_dialog("protect_the_presid_001", 1);
@@ -441,8 +452,9 @@ sniper_rappel_vo() {
     level.player queue_dialog("sect_stay_in_cover_i_ll_0", 0.5);
     level.harper queue_dialog("harp_we_re_taking_heavy_e_0", 3, undefined, "low_road_complete");
 
-    if(flag("sniper_option"))
+    if(flag("sniper_option")) {
       level.harper queue_dialog("harp_they_re_right_on_us_0", 1, undefined, "low_road_complete");
+    }
 
     level.harper queue_dialog("harp_dammit_keep_them_o_0", 1, undefined, "low_road_complete");
 
@@ -463,15 +475,17 @@ sniper_rappel_vo() {
 
   level.player queue_dialog("keep_covering_the_002", 1, undefined, "low_road_complete");
 
-  if(!flag("sniper_option"))
+  if(!flag("sniper_option")) {
     level.player queue_dialog("stay_down_011", 1, undefined, "low_road_complete");
+  }
 
   waittill_enemies_by_bus();
   flag_wait("objective_g20_check");
   wait 1;
 
-  if(flag("objective_g20_failed"))
+  if(flag("objective_g20_failed")) {
     level.jones queue_dialog("jone_we_re_too_late_th_0", 2);
+  }
 
   waittill_snipers_on_overpass();
 }
@@ -479,10 +493,11 @@ sniper_rappel_vo() {
 harper_sniper_nag() {
   level endon("low_road_snipers_cleared");
 
-  if(flag("sniper_option"))
+  if(flag("sniper_option")) {
     wait 0.5;
-  else
+  } else {
     wait 2;
+  }
 
   level.harper queue_dialog("harp_dammit_taking_fire_0");
   level.harper queue_dialog("harp_they_ve_got_fucking_0", 0.5);
@@ -501,10 +516,11 @@ harper_sniper_nag() {
 samu_sniper_nag() {
   level endon("low_road_snipers_cleared");
 
-  if(flag("sniper_option"))
+  if(flag("sniper_option")) {
     wait 0.5;
-  else
+  } else {
     wait 2;
+  }
 
   level.sam queue_dialog("samu_taking_fire_from_sni_0", 0, undefined, "low_road_snipers_cleared");
   level.sam queue_dialog("samu_section_we_need_cov_0", 3, undefined, "low_road_snipers_cleared");
@@ -519,24 +535,27 @@ sniper_exit_vo() {
   level.player disableweapons();
   flag_set("allow_sniper_exit");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level.harper priority_dialog("harp_get_outta_there_sec_0", 0);
-  else
+  } else {
     wait 2;
+  }
 
   flag_wait("exit_sniper_player_started");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level.player priority_dialog("sect_shiiiiit_0", 0);
-  else
+  } else {
     level.player priority_dialog("sect_shiiiiit_0", 2.5);
+  }
 }
 
 last_stand_vo() {
-  if(flag("sniper_option"))
+  if(flag("sniper_option")) {
     flag_wait("exit_sniper_player_done");
-  else
+  } else {
     flag_wait("low_road_move_up_4");
+  }
 
   level.player queue_dialog("sect_get_on_the_radio_and_0", 2);
   level.jones queue_dialog("jone_the_rear_vehicles_di_0", 1);
@@ -552,8 +571,9 @@ last_stand_vo() {
   } else
     level.player queue_dialog("sect_we_re_gonna_be_fight_0", 2);
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     flag_wait("g20_group1_greet_harper_started");
+  }
 
   if(!flag("harper_dead")) {
     level.harper queue_dialog("we_gotta_go_now_005");
@@ -564,27 +584,31 @@ last_stand_vo() {
   trigger_wait("trig_cougar_enter");
   level.player queue_dialog("sect_update_all_blue_ro_0", 1);
 
-  if(flag("harper_dead"))
+  if(flag("harper_dead")) {
     level.player queue_dialog("sect_on_my_lead_110_nor_0");
+  }
 }
 
 vo_rpg_nag() {
   flag_wait("sm_sm_low_road_launcher_enabled");
 
-  if(!is_spawn_manager_cleared("sm_low_road_launcher"))
+  if(!is_spawn_manager_cleared("sm_low_road_launcher")) {
     level.harper queue_dialog("we_got_rpgs_on_the_003", 0);
+  }
 
   wait 3;
 
-  if(!is_spawn_manager_cleared("sm_low_road_launcher"))
+  if(!is_spawn_manager_cleared("sm_low_road_launcher")) {
     level.harper queue_dialog("take_out_those_dam_004", 0);
+  }
 }
 
 waittill_player_looking_at_me(str_flag) {
   self endon("death");
 
-  while(!level.player is_ads() || !level.player is_looking_at(self, 0.98))
+  while(!level.player is_ads() || !level.player is_looking_at(self, 0.98)) {
     wait 0.2;
+  }
 
   flag_set(str_flag);
 }
@@ -613,9 +637,9 @@ last_stand_main() {
   trigger_on("start_last_stand");
   trigger_use("start_last_stand");
 
-  if(flag("sniper_option"))
+  if(flag("sniper_option")) {
     delay_thread(4, ::trigger_use, "last_stand_enemies_sm");
-  else {
+  } else {
     getent("last_stand_enemies_sm", "targetname") delete();
     getent("last_stand_enemies", "targetname") delete();
   }
@@ -636,8 +660,9 @@ last_stand_main() {
   level delay_thread(3, ::trigger_use, "gl_rpgs_trig");
   level delay_thread(6, ::g20_attackers);
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     wait 8;
+  }
 
   enter_cougar();
   freeway_cleanup();
@@ -673,8 +698,9 @@ freeway_cleanup() {
   a_vehicles = getvehiclearray();
 
   foreach(veh in a_vehicles) {
-    if(issubstr(veh.model, "drone") || issubstr(veh.model, "f35"))
+    if(issubstr(veh.model, "drone") || issubstr(veh.model, "f35")) {
       veh thread delete_when_not_looking_at();
+    }
   }
 }
 
@@ -768,8 +794,9 @@ low_road_truck_1() {
 }
 
 drop_car(delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   level.player playSound("evt_sniper_freeway_debris_explo");
   level.player playSound("evt_sniper_car_fall_start");
@@ -798,8 +825,9 @@ spawn_func_bug_rig_ai() {
   self.attackeraccuracy = 100;
   self.health = 1;
 
-  if(self.animname == "freeway_bigrig_entry_guy4")
+  if(self.animname == "freeway_bigrig_entry_guy4") {
     self.a.deathforceragdoll = 1;
+  }
 }
 
 spawn_func_rappel() {
@@ -817,13 +845,12 @@ hillary_think() {
   level endon("stop_god_mode_potus_protection");
 
   while(true) {
-    if(isgodmode(level.player))
+    if(isgodmode(level.player)) {
       self magic_bullet_shield();
-    else {}
+    } else {}
 
     wait 1;
   }
-
 }
 
 pre_rappel_backtrack_check() {
@@ -861,15 +888,17 @@ battle_flow() {
   level.disable_straffing_drone_shooting = 1;
   delay_thread(10, ::trigger_use, "low_road_move_up_1");
 
-  if(flag("rappel_option"))
+  if(flag("rappel_option")) {
     delay_thread(8, ::drop_car);
+  }
 
   if(flag("sniper_option")) {
     add_spawn_function_veh("low_road_truck_1", ::low_road_truck_1);
     right_side_flood_trigger = getent("sm_low_road_right_side_flood", "targetname");
 
-    if(isDefined(right_side_flood_trigger))
+    if(isDefined(right_side_flood_trigger)) {
       trigger_use("sm_low_road_right_side_flood");
+    }
   } else {}
 
   delay_thread(5, ::fxanim_sniper_drone_crash_start);
@@ -889,8 +918,9 @@ battle_flow() {
   flag_set("low_road_move_up_2");
   level thread show_charged_shot_hint();
 
-  if(flag("rappel_option"))
+  if(flag("rappel_option")) {
     wait 1.5;
+  }
 
   trigger_use("low_road_move_up_2");
   level thread noharper_open_cougar_door();
@@ -900,13 +930,15 @@ battle_flow() {
   trigger_use("low_road_move_up_3c");
   trigger_use("low_road_move_up_3b");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level thread harper_sniper_nag();
-  else
+  } else {
     level thread samu_sniper_nag();
+  }
 
-  if(flag("rappel_option"))
+  if(flag("rappel_option")) {
     delay_thread(3, ::rappel_drop_signs);
+  }
 
   waittill_enemies_under_overpass();
   waittill_snipers_on_overpass();
@@ -920,13 +952,15 @@ battle_flow() {
 change_cougar_team() {
   flag_wait_any("grouprappel_tbone_started", "grouprappel_sniper_tbone_started");
 
-  if(flag("grouprappel_tbone_started"))
+  if(flag("grouprappel_tbone_started")) {
     vh_cougar = get_model_or_models_from_scene("grouprappel_tbone", "g20_group1_cougar4");
-  else if(flag("grouprappel_sniper_tbone_started"))
+  } else if(flag("grouprappel_sniper_tbone_started")) {
     vh_cougar = get_model_or_models_from_scene("grouprappel_sniper_tbone", "g20_group1_cougar4");
+  }
 
-  if(isDefined(vh_cougar))
+  if(isDefined(vh_cougar)) {
     vh_cougar setteam("allies");
+  }
 }
 
 spawn_first_truck() {
@@ -997,8 +1031,9 @@ waittill_enemies_bigrig() {
 }
 
 waittill_enemies_by_bus() {
-  while(get_ai_group_count("low_road_choke_group1b") + get_ai_group_count("ai_group_low_road_left_side_flood") > 3)
+  while(get_ai_group_count("low_road_choke_group1b") + get_ai_group_count("ai_group_low_road_left_side_flood") > 3) {
     wait 0.5;
+  }
 
   flag_set("low_road_choke_group1b_cleared");
 }
@@ -1009,8 +1044,9 @@ waittill_enemies_under_overpass() {
 }
 
 waittill_snipers_on_overpass() {
-  while(get_ai_group_count("low_road_snipers") > 0 || get_ai_group_count("ai_group_low_road_right_side_flood") > 3)
+  while(get_ai_group_count("low_road_snipers") > 0 || get_ai_group_count("ai_group_low_road_right_side_flood") > 3) {
     wait 0.5;
+  }
 
   level notify("low_road_snipers_cleared");
   flag_set("low_road_snipers_cleared");
@@ -1027,8 +1063,9 @@ low_road_clear_vo() {
 }
 
 lower_freeway_jeep_moveup(wait_time) {
-  if(isDefined(wait_time))
+  if(isDefined(wait_time)) {
     wait(wait_time);
+  }
 
   wait 0.1;
   vh_jeep = getent("lower_freeway_jeep1", "targetname");
@@ -1053,8 +1090,9 @@ low_road_fail_logic(n_time, str_ender, n_warn_time_step) {
   level thread low_road_warning(str_ender, n_time, n_warn_time_step);
   wait(n_time);
 
-  if(!flag("start_last_stand"))
+  if(!flag("start_last_stand")) {
     missionfailedwrapper(&"LA_SHARED_OBJ_PROTECT_FAIL");
+  }
 }
 
 player_approach_convoy_fail_logic(n_time, str_ender) {
@@ -1090,8 +1128,9 @@ low_road_warning(str_ender, n_time, n_warn_time_step) {
   wait 30.0;
 
   if(flag("sniper_option")) {
-    if(level.playersniperkillsafterbigrig < 1)
+    if(level.playersniperkillsafterbigrig < 1) {
       missionfailedwrapper(&"LA_SHARED_OVERWATCH_FAIL");
+    }
   }
 
   wait 30.0;
@@ -1104,13 +1143,15 @@ low_road_warning_sniper_vo(time) {
     if(!flag("harper_dead")) {
       wait(time / 3);
 
-      if(!weaponissniperweapon(level.player getcurrentweapon()))
+      if(!weaponissniperweapon(level.player getcurrentweapon())) {
         level.harper queue_dialog("harp_use_the_rifle_secti_0");
+      }
     } else {
       wait(time / 3);
 
-      if(!weaponissniperweapon(level.player getcurrentweapon()))
+      if(!weaponissniperweapon(level.player getcurrentweapon())) {
         level.sam queue_dialog("samu_use_the_rifle_secti_0");
+      }
     }
   }
 }
@@ -1142,8 +1183,9 @@ low_road_bigrig_enter() {
   flag_wait("freeway_bigrig_entry_started");
   a_ai_guys = get_ais_from_scene("freeway_bigrig_entry");
 
-  foreach(ai_guy in a_ai_guys)
-  ai_guy.aigroup = "group_bigrig";
+  foreach(ai_guy in a_ai_guys) {
+    ai_guy.aigroup = "group_bigrig";
+  }
 
   waittill_ai_group_ai_count("group_bigrig", 1);
 }
@@ -1157,8 +1199,9 @@ identify_low_road_snipers() {
   level.player setthreatbiasgroup("player");
   a_ai = get_ai_group_ai("low_road_snipers");
 
-  foreach(ai_sniper in a_ai)
-  ai_sniper setthreatbiasgroup("sniper");
+  foreach(ai_sniper in a_ai) {
+    ai_sniper setthreatbiasgroup("sniper");
+  }
 
   while(get_ai_group_count("low_road_snipers")) {
     a_ai = array_randomize(get_ai_group_ai("low_road_snipers"));
@@ -1177,8 +1220,9 @@ identify_low_road_snipers() {
 
 grouprappel() {
   if(flag("sniper_option")) {
-    if(!flag("harper_dead"))
+    if(!flag("harper_dead")) {
       level thread run_scene_and_delete("grouprappel_sniper_jack");
+    }
 
     level thread run_scene_and_delete("grouprappel_sniper_tbone");
     level thread run_scene("grouprappel_sniper_ter01");
@@ -1193,8 +1237,9 @@ grouprappel() {
     level thread bigrig_trailer_ai_nag_vo(a_trailer_ai);
     scene_wait("grouprappel_sniper");
   } else {
-    if(!flag("harper_dead"))
+    if(!flag("harper_dead")) {
       level thread run_scene_and_delete("grouprappel_jack");
+    }
 
     level thread run_scene_and_delete("grouprappel_tbone");
     level thread run_scene_and_delete("grouprappel_ter01");
@@ -1223,8 +1268,9 @@ bigrig_trailer_ai_nag_vo(ai_list) {
   m_door_clip = getent("truck_door", "targetname");
   m_door_clip delete();
 
-  while(!flag("low_road_choke_group1_cleared"))
+  while(!flag("low_road_choke_group1_cleared")) {
     wait 8.0;
+  }
 }
 
 grouprappel_ignore_until_doors() {
@@ -1249,8 +1295,9 @@ fakey_dude() {
 }
 
 fakey_dude_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(isplayer(eattacker))
+  if(isPlayer(eattacker)) {
     return idamage;
+  }
 
   return 0;
 }
@@ -1258,8 +1305,9 @@ fakey_dude_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapo
 fxanim_sniper_drone_crash_start() {
   s_look = get_struct("low_road_lookat_pos_right");
 
-  while(!level.player is_player_looking_at(s_look.origin, 0.7, 0) || level.player is_ads())
+  while(!level.player is_player_looking_at(s_look.origin, 0.7, 0) || level.player is_ads()) {
     wait 0.05;
+  }
 
   level notify("fxanim_sniper_drone_crash_start");
   wait 0.2;
@@ -1302,8 +1350,9 @@ freeway_chunks_fall() {
   a_ai_guys = getaiarray("axis");
 
   foreach(ai_guy in a_ai_guys) {
-    if(ai_guy istouching(getent("trigger_freeway_debris_pile", "targetname")))
+    if(ai_guy istouching(getent("trigger_freeway_debris_pile", "targetname"))) {
       ai_guy die();
+    }
   }
 }
 
@@ -1311,8 +1360,9 @@ delete_rappel_rope() {
   flag_wait("terrorist_rappel1_done");
   e_rope = get_model_or_models_from_scene("terrorist_rappel1", "terrorist_rappel_rope4");
 
-  if(isDefined(e_rope))
+  if(isDefined(e_rope)) {
     e_rope delete();
+  }
 }
 
 g20_cougar() {
@@ -1330,7 +1380,7 @@ g20_cougar() {
     level notify("low_road_g20_saved");
     set_objective(level.obj_g20_cougar, undefined, "done");
     set_objective(level.obj_g20_cougar, undefined, "delete");
-    setdvar("la_G20_1_saved", 1);
+    setDvar("la_G20_1_saved", 1);
   } else {
     exploder(330);
     flag_set("objective_g20_failed");
@@ -1349,21 +1399,24 @@ spawner_delete(str_option) {
   a_spawners = getspawnerarray();
 
   foreach(sp in a_spawners) {
-    if(!isDefined(sp.groupname) && !isDefined(str_disable) || isDefined(sp.groupname) && isDefined(str_disable) && sp.groupname == str_disable)
+    if(!isDefined(sp.groupname) && !isDefined(str_disable) || isDefined(sp.groupname) && isDefined(str_disable) && sp.groupname == str_disable) {
       sp delete();
+    }
   }
 
   a_spawners = getvehiclespawnerarray();
 
   foreach(sp in a_spawners) {
-    if(!isDefined(sp.groupname) && !isDefined(str_disable) || isDefined(sp.groupname) && isDefined(str_disable) && sp.groupname == str_disable)
+    if(!isDefined(sp.groupname) && !isDefined(str_disable) || isDefined(sp.groupname) && isDefined(str_disable) && sp.groupname == str_disable) {
       sp delete();
+    }
   }
 
   a_nodes = getnodearray(str_disable, "script_noteworthy");
 
-  foreach(node in a_nodes)
-  setenablenode(node, 0);
+  foreach(node in a_nodes) {
+    setenablenode(node, 0);
+  }
 }
 
 monitor_trucks() {
@@ -1400,8 +1453,9 @@ monitor_low_road_group() {
   trigger_wait("low_road_bigrig_entry");
   wait 1;
 
-  while(get_ai_group_count("low_road_choke_group1b") + get_ai_group_count("ai_group_low_road_left_side_flood") > 5)
+  while(get_ai_group_count("low_road_choke_group1b") + get_ai_group_count("ai_group_low_road_left_side_flood") > 5) {
     wait 0.5;
+  }
 
   flag_set("move_to_pillar");
 }
@@ -1442,8 +1496,9 @@ cover_2() {
 }
 
 cover_2_optional_vo() {
-  if(flag("harper_dead") && !flag("low_road_complete"))
+  if(flag("harper_dead") && !flag("low_road_complete")) {
     level.sam say_dialog("stay_down_011");
+  }
 }
 
 bus_react() {
@@ -1458,8 +1513,9 @@ bus_react() {
 cover_3() {
   level.hillary.ignoreme = 1;
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     level.harper.perfectaim = 1;
+  }
 
   run_scene_and_delete("group_cover_go3");
   level thread run_scene_and_delete("group_cover_idle3");
@@ -1478,8 +1534,9 @@ monitor_bigrig_guys() {
   waittill_ai_group_ai_count("low_road_choke_group1", 2);
   a_ai_guys = get_ai_group_ai("low_road_choke_group1");
 
-  foreach(ai_guy in a_ai_guys)
-  ai_guy die();
+  foreach(ai_guy in a_ai_guys) {
+    ai_guy die();
+  }
 }
 
 spawn_fun_sniper_van() {
@@ -1532,8 +1589,9 @@ get_rush_enemies() {
       continue;
     }
 
-    if(!isDefined(enemy.script_aigroup) && !isDefined("ai_group_low_road_right_side_flood") || isDefined(enemy.script_aigroup) && isDefined("ai_group_low_road_right_side_flood") && enemy.script_aigroup == "ai_group_low_road_right_side_flood")
+    if(!isDefined(enemy.script_aigroup) && !isDefined("ai_group_low_road_right_side_flood") || isDefined(enemy.script_aigroup) && isDefined("ai_group_low_road_right_side_flood") && enemy.script_aigroup == "ai_group_low_road_right_side_flood") {
       a_rush_enemies[a_rush_enemies.size] = enemy;
+    }
   }
 
   return a_rush_enemies;
@@ -1629,8 +1687,9 @@ exit_sniper() {
   level.player stop_magic_bullet_shield();
 
   if(flag("player_brought_shield")) {
-    if(!level.player hasweapon("riotshield_sp"))
+    if(!level.player hasweapon("riotshield_sp")) {
       level.player giveweapon("riotshield_sp");
+    }
   }
 }
 
@@ -1643,15 +1702,17 @@ pause_rpg_guys() {
   a_rpg_guys = getEntArray("exit_sniper_rpg_guy_ai", "targetname");
 
   foreach(ai_rpg in a_rpg_guys) {
-    if(isalive(ai_rpg))
+    if(isalive(ai_rpg)) {
       ai_rpg.a.allow_shooting = 0;
+    }
   }
 
   wait 4;
 
   foreach(ai_rpg in a_rpg_guys) {
-    if(isalive(ai_rpg))
+    if(isalive(ai_rpg)) {
       ai_rpg.a.allow_shooting = 1;
+    }
   }
 }
 
@@ -1661,10 +1722,11 @@ rappel_option() {
   s_align.angles = (0, 0, 0);
   t_rappel = getent("rappel_trigger", "targetname");
 
-  if(level.player player_has_sniper_weapon())
+  if(level.player player_has_sniper_weapon()) {
     set_objective(level.obj_rappel, t_rappel.origin, &"LA_SHARED_OBJ_RAPPEL");
-  else
+  } else {
     set_objective(level.obj_rappel, t_rappel.origin, &"LA_SHARED_RAPPEL");
+  }
 
   t_rappel trigger_wait();
   level.player magic_bullet_shield();

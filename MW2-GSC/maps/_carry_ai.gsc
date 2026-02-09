@@ -52,10 +52,10 @@ move_president_to_node_nopickup(wounded, eNode) {
 }
 
 goto_and_pickup_wounded(wounded, eNode) {
-  //##############################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   // don't use this, internal only
   // use move_president_to_node()
-  //##############################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   assert(isDefined(self));
   assert(isAI(self));
@@ -92,10 +92,10 @@ link_wounded(wounded) {
 }
 
 carry_to_and_putdown_wounded(wounded, eNode) {
-  //##############################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   // don't use this, internal only
   // use move_president_to_node()
-  //##############################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   assert(isDefined(self));
   assert(isAI(self));

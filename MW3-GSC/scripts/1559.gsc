@@ -59,11 +59,9 @@ _id_3CD8() {
 _id_3CD9(var_0) {
   if(isDefined(self._id_3B10) && self._id_3B10) {
     return 0;
-
   }
   if(!isDefined(var_0)) {
     var_0 = "precision";
-
   }
   switch (var_0) {
     case "precision":
@@ -85,7 +83,6 @@ _id_3CD9(var_0) {
 
   if(!isDefined(var_1)) {
     return 0;
-
   }
   thread _id_3CDE(var_0, var_1.location, var_1._id_3CDA);
   return 1;
@@ -96,13 +93,11 @@ _id_3CDB(var_0) {
 
   if(var_0 == "precision" || var_0 == "stealth") {
     var_1 = 1;
-
   }
   var_2 = level.mapsize / 5.625;
 
   if(issplitscreen()) {
     var_2 = var_2 * 1.5;
-
   }
   self beginlocationselection("map_artillery_selector", var_1, var_2);
   self.selectinglocation = 1;
@@ -116,7 +111,6 @@ _id_3CDB(var_0) {
 
   if(!var_1) {
     var_4 = randomint(360);
-
   }
   self setblurforplayer(0, 0.3);
 
@@ -160,16 +154,13 @@ _id_3CDE(var_0, var_1, var_2) {
 _id_3CDF(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0)) {
     var_0 = "default";
-
   }
   if(var_0 == "harrier") {
     level.planes++;
-
   }
   if(isDefined(level.airstrikeinprogress)) {
     while(isDefined(level.airstrikeinprogress)) {
       level waittill("begin_airstrike");
-
     }
     level.airstrikeinprogress = 1;
     wait 2.0;
@@ -178,7 +169,6 @@ _id_3CDF(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_3)) {
     if(var_0 == "harrier") {
       level.planes--;
-
     }
     return;
   }
@@ -217,7 +207,6 @@ _id_3CDF(var_0, var_1, var_2, var_3, var_4) {
   }
   while(isDefined(var_9)) {
     wait 0.1;
-
   }
   level.planes--;
 }
@@ -264,7 +253,6 @@ callstrike(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_4)) {
     var_10 = var_10 * (1, 1, 0);
-
   }
   var_10 = var_10 + (0, 0, var_9);
 
@@ -272,11 +260,9 @@ callstrike(var_0, var_1, var_2, var_3) {
     var_11 = var_1 + anglesToForward(var_6) * (var_7 * 4);
   } else {
     var_11 = var_1 + anglesToForward(var_6) * var_7;
-
   }
   if(isDefined(var_4)) {
     var_11 = var_11 * (1, 1, 0);
-
   }
   var_11 = var_11 + (0, 0, var_9);
   var_12 = length(var_10 - var_11);
@@ -322,7 +308,6 @@ _id_3CE0(var_0, var_1, var_2) {
 
     if(var_1.team != "allies") {
       var_3 = "vehicle_av8b_harrier_jet_opfor_mp";
-
     }
     var_4 = "hud_minimap_harrier_green";
     var_5 = "hud_minimap_harrier_red";
@@ -512,7 +497,6 @@ dobomberstrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 bomberdropbombs(var_0, var_1, var_2) {
   while(!targetisclose(var_0, var_1, 5000)) {
     wait 0.05;
-
   }
   var_3 = 1;
   var_4 = 0;
@@ -529,7 +513,6 @@ bomberdropbombs(var_0, var_1, var_2) {
 
     if(var_5 < 4500) {
       var_0 thread callstrike_bomb(var_0.origin, var_2, (0, 0, 0), var_3);
-
     }
     wait 0.1;
   }
@@ -540,7 +523,6 @@ bomberdropbombs(var_0, var_1, var_2) {
 targetisclose(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 3000;
-
   }
   var_3 = targetisinfront(var_0, var_1);
 
@@ -548,7 +530,6 @@ targetisclose(var_0, var_1, var_2) {
     var_4 = 1;
   } else {
     var_4 = -1;
-
   }
   var_5 = common_scripts\utility::flat_origin(var_0.origin);
   var_6 = var_5 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_4 * 100000);
@@ -581,7 +562,6 @@ targetgetdist(var_0, var_1) {
     var_3 = 1;
   } else {
     var_3 = -1;
-
   }
   var_4 = common_scripts\utility::flat_origin(var_0.origin);
   var_5 = var_4 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_3 * 100000);

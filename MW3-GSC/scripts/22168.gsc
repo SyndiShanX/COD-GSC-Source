@@ -19,7 +19,6 @@ _id_566E() {
 _id_566F() {
   if(!isDefined(level.players)) {
     level waittill("level.players initialized");
-
   }
   common_scripts\utility::array_thread(level.players, ::_id_5672);
   thread _id_5695();
@@ -54,7 +53,6 @@ _id_5672() {
       playfxontagforclients(level._effect["blizzard_main"], self, "tag_origin", self);
     } else {
       playFX(level._effect["blizzard_main"], maps\_utility::_id_1277(self.origin) + (0, 0, 86));
-
     }
     wait(level._id_566C);
   }
@@ -93,7 +91,6 @@ _id_5673(var_0) {
 _id_5674(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 0.05;
-
   }
   if(var_0 > level._id_566C) {
     while(var_0 > level._id_566C) {
@@ -213,7 +210,6 @@ _id_5680(var_0, var_1) {
 _id_5681(var_0, var_1) {
   if(isDefined(var_1)) {
     wait(var_1);
-
   }
   wait(var_1);
   maps\_utility::vision_set_fog_changes("payback_heavy", var_0);
@@ -222,7 +218,6 @@ _id_5681(var_0, var_1) {
 _id_5682(var_0, var_1) {
   if(isDefined(var_1)) {
     wait(var_1);
-
   }
   maps\_utility::vision_set_fog_changes("payback_heavy_sat", var_0);
 }
@@ -230,7 +225,6 @@ _id_5682(var_0, var_1) {
 _id_5683(var_0, var_1) {
   if(isDefined(var_1)) {
     wait(var_1);
-
   }
   maps\_utility::_id_27D3("payback_heavy_75", var_0);
 }
@@ -267,11 +261,9 @@ _id_5686(var_0, var_1) {
 
   if(!isDefined(var_3) || var_3 == 0) {
     var_3 = var_2;
-
   }
   if(var_1 == 0) {
     var_1 = var_2;
-
   }
   var_4 = 0;
 
@@ -282,7 +274,6 @@ _id_5686(var_0, var_1) {
         level._id_5687 = var_3 + (var_1 - var_3) * var_6;
       } else {
         level._id_5687 = var_3;
-
       }
       continue;
     }
@@ -310,7 +301,6 @@ _id_5688(var_0) {
 
   if(!isDefined(level._id_5689)) {
     level._id_5689 = getEntArray("trig_enable_sandstorm_cull", "targetname");
-
   }
   while(!var_1) {
     if(var_0 == 0) {
@@ -357,7 +347,6 @@ _id_568A(var_0) {
     }
   } else {
     var_1 = 1;
-
   }
   return var_1;
 }
@@ -369,7 +358,6 @@ _id_568B(var_0, var_1) {
 
   if(!isDefined(var_2)) {
     var_2 = 1.0;
-
   }
   var_3 = 1;
   var_4 = 0.25;
@@ -380,7 +368,6 @@ _id_568B(var_0, var_1) {
       level._id_568C = var_2 + (var_1 - var_2) * var_6;
     } else {
       level._id_568C = var_1;
-
     }
     var_3 = 0.25 + level._id_568C * 0.75;
     var_4 = 0.1 + level._id_568C * 0.15;
@@ -469,23 +456,19 @@ _id_5690(var_0) {
 _id_5678(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!isplayer(var_3)) {
+  if(!isPlayer(var_3)) {
     var_3 = level.player;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   if(!isDefined(var_2)) {
     level._id_5691 = var_1;
-
   }
   if(var_1 > 0) {
     setsaveddvar("r_fog_depthhack_scale", "0.5");
   } else {
     setsaveddvar("r_fog_depthhack_scale", "-1");
-
   }
   var_4 = _id_5693(var_3);
   var_4.x = 0;
@@ -507,9 +490,8 @@ _id_5692(var_0) {
   if(!isDefined(var_0) || !var_0) {
     var_1 = self;
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       var_1 = level.player;
-
     }
     var_2 = _id_5693(var_1);
     var_2 destroy();
@@ -522,7 +504,6 @@ _id_5692(var_0) {
 _id_5693(var_0) {
   if(!isDefined(var_0._id_5694)) {
     var_0._id_5694 = newclienthudelem(var_0);
-
   }
   return var_0._id_5694;
 }
@@ -554,7 +535,6 @@ _id_5697(var_0, var_1, var_2) {
 
   if(!isDefined(var_3)) {
     var_3 = 1;
-
   }
   if(issubstr(var_1, "exterior")) {
     _id_5678(1, (1 - var_0) * var_3, 1);

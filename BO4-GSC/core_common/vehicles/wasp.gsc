@@ -809,7 +809,7 @@ wait_till_something_happens(timeout) {
         break;
       }
 
-      if(isplayer(self.enemy) && self.enemy islookingat(self)) {
+      if(isPlayer(self.enemy) && self.enemy islookingat(self)) {
         if(math::cointoss()) {
           wait randomfloatrange(0.1, 0.5);
         }
@@ -1332,11 +1332,11 @@ wasp_driving(params) {
   self endon(#"change_state");
   driver = self getseatoccupant(0);
 
-  if(isplayer(driver)) {
+  if(isPlayer(driver)) {
     clientfield::set("rocket_wasp_hijacked", 1);
   }
 
-  if(isplayer(driver) && isDefined(self.playerdrivenversion)) {
+  if(isPlayer(driver) && isDefined(self.playerdrivenversion)) {
     self thread wasp_manage_camera_swaps();
   }
 }

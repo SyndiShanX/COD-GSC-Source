@@ -45,5 +45,4 @@ init(client_num) {
     waittillframeend;
     println("*** Client : Lit destructibles " + level._num_lit_destructibles);
   }
-
 }

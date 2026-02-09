@@ -46,8 +46,8 @@ init() {
   level.weaponobjects_headicon_offset["default"] = vectorscale((0, 0, 1), 20.0);
   level.weaponobjectexplodethisframe = 0;
 
-  if(getdvar(#"scr_deleteexplosivesonspawn") == "")
-    setdvar("scr_deleteexplosivesonspawn", 1);
+  if(getDvar(#"scr_deleteexplosivesonspawn") == "")
+    setDvar("scr_deleteexplosivesonspawn", 1);
 
   level.deleteexplosivesonspawn = getdvarint(#"scr_deleteexplosivesonspawn");
 
@@ -88,10 +88,10 @@ weapons_get_dvar_int(dvar, def) {
 }
 
 weapons_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }
@@ -336,11 +336,11 @@ weapondetonate(attacker, weaponname) {
     if(isDefined(self.owner) && attacker != self.owner)
       self.playdialog = 1;
 
-    if(isplayer(attacker))
+    if(isPlayer(attacker))
       self detonate(attacker);
     else
       self detonate();
-  } else if(isDefined(self.owner) && isplayer(self.owner)) {
+  } else if(isDefined(self.owner) && isPlayer(self.owner)) {
     self.playdialog = 0;
     self detonate(self.owner);
   } else
@@ -369,7 +369,7 @@ waitanddetonate(object, delay, attacker, weaponname) {
   if(!isDefined(self.detonate)) {
     return;
   }
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && isDefined(object.owner) && isDefined(object.owner.pers["team"])) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.pers["team"]) && isDefined(object.owner) && isDefined(object.owner.pers["team"])) {
     if(level.teambased) {
       if(attacker.pers["team"] != object.owner.pers["team"])
         attacker notify("destroyed_explosive");
@@ -560,10 +560,10 @@ weaponobjectdamage(watcher) {
       }
     }
 
-    if(!isplayer(attacker) && isDefined(attacker.owner))
+    if(!isPlayer(attacker) && isDefined(attacker.owner))
       attacker = attacker.owner;
 
-    if(level.teambased && isplayer(attacker)) {
+    if(level.teambased && isPlayer(attacker)) {
       if(!level.hardcoremode && self.owner.team == attacker.pers["team"] && self.owner != attacker)
         continue;
     }
@@ -618,7 +618,7 @@ watchobjectdamage(owner) {
   while(true) {
     self waittill("damage", damage, attacker);
 
-    if(isDefined(attacker) && isplayer(attacker) && attacker != owner)
+    if(isDefined(attacker) && isPlayer(attacker) && attacker != owner)
       self.playdialog = 1;
     else
       self.playdialog = 0;
@@ -974,7 +974,6 @@ showcone(angle, range, color) {
 
     wait 0.05;
   }
-
 }
 
 weaponobjectdetectionmovable(ownerteam) {
@@ -1053,7 +1052,7 @@ weaponobjectdetectiontrigger(ownerteam) {
 
 hackertriggersetvisibility(owner) {
   self endon("death");
-  assert(isplayer(owner));
+  assert(isPlayer(owner));
   ownerteam = owner.pers["team"];
 
   for(;;) {
@@ -1231,7 +1230,7 @@ canhack(player, owner, weapon_check) {
   if(!isDefined(player))
     return false;
 
-  if(!isplayer(player))
+  if(!isPlayer(player))
     return false;
 
   if(!isalive(player))
@@ -1356,7 +1355,7 @@ proximityweaponobjectdetonation(watcher) {
     if(self isstunned()) {
       continue;
     }
-    if(isplayer(ent) && !isalive(ent)) {
+    if(isPlayer(ent) && !isalive(ent)) {
       continue;
     }
     if(ent damageconetrace(traceorigin, self) > 0) {
@@ -1373,13 +1372,13 @@ proximityweaponobjectdetonation(watcher) {
   ent thread deathdodger(watcher.detectiongraceperiod);
   wait(watcher.detectiongraceperiod);
 
-  if(isplayer(ent) && ent hasperk("specialty_delayexplosive"))
+  if(isPlayer(ent) && ent hasperk("specialty_delayexplosive"))
     wait(getdvarfloat(#"perk_delayExplosiveTime"));
 
   self maps\mp\_entityheadicons::setentityheadicon("none");
   self.origin = traceorigin;
 
-  if(isDefined(self.owner) && isplayer(self.owner))
+  if(isDefined(self.owner) && isPlayer(self.owner))
     self[[watcher.detonate]](self.owner);
   else
     self[[watcher.detonate]]();
@@ -1556,7 +1555,6 @@ saydamaged(orig, amount) {
     print3d(orig, "damaged! " + amount);
     wait 0.05;
   }
-
 }
 
 showheadicon(trigger) {
@@ -1614,7 +1612,7 @@ friendlyfirecheck(owner, attacker, forcedfriendlyfirerule) {
   if(attacker == owner)
     return true;
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(!isDefined(attacker.pers["team"]))
       return true;
 
@@ -1624,7 +1622,7 @@ friendlyfirecheck(owner, attacker, forcedfriendlyfirerule) {
     if(attacker.aiteam != owner.pers["team"])
       return true;
   } else if(isvehicle(attacker)) {
-    if(isDefined(attacker.owner) && isplayer(attacker.owner)) {
+    if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
       if(attacker.owner.pers["team"] != owner.pers["team"])
         return true;
     } else {
@@ -2089,7 +2087,7 @@ switch_team(entity, weapon_name, owner) {
   self notify("stop_disarmthink");
   self endon("stop_disarmthink");
   self endon("death");
-  setdvar("scr_switch_team", "");
+  setDvar("scr_switch_team", "");
 
   while(true) {
     wait 0.5;
@@ -2121,7 +2119,7 @@ switch_team(entity, weapon_name, owner) {
       if(isDefined(player) && player.sessionstate == "playing")
         player notify("grenade_fire", self, self.name);
 
-      setdvar("scr_switch_team", "0");
+      setDvar("scr_switch_team", "0");
     }
   }
 

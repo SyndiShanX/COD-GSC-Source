@@ -6,23 +6,23 @@
 #include common_scripts\utility;
 
 setfogsliders() {
-  SetDevDvar("scr_fog_exp_halfplane", GetDvar("g_fogHalfDistReadOnly", 0.0));
-  SetDevDvar("scr_fog_nearplane", GetDvar("g_fogStartDistReadOnly", 0.1));
+  SetDevDvar("scr_fog_exp_halfplane", getDvar("g_fogHalfDistReadOnly", 0.0));
+  SetDevDvar("scr_fog_nearplane", getDvar("g_fogStartDistReadOnly", 0.1));
   SetDevDvar("scr_fog_color", GetDvarVector("g_fogColorReadOnly", (1, 0, 0)));
-  SetDevDvar("scr_fog_color_intensity", GetDvar("g_fogColorIntensityReadOnly", 1.0));
-  SetDevDvar("scr_fog_max_opacity", GetDvar("g_fogMaxOpacityReadOnly", 1.0));
+  SetDevDvar("scr_fog_color_intensity", getDvar("g_fogColorIntensityReadOnly", 1.0));
+  SetDevDvar("scr_fog_max_opacity", getDvar("g_fogMaxOpacityReadOnly", 1.0));
 
-  SetDevDvar("scr_sunFogEnabled", GetDvar("g_sunFogEnabledReadOnly", 0));
+  SetDevDvar("scr_sunFogEnabled", getDvar("g_sunFogEnabledReadOnly", 0));
   SetDevDvar("scr_sunFogColor", GetDvarVector("g_sunFogColorReadOnly", (1, 0, 0)));
-  SetDevDvar("scr_sunfogColorIntensity", GetDvar("g_sunFogColorIntensityReadOnly", 1.0));
+  SetDevDvar("scr_sunfogColorIntensity", getDvar("g_sunFogColorIntensityReadOnly", 1.0));
   SetDevDvar("scr_sunFogDir", GetDvarVector("g_sunFogDirReadOnly", (1, 0, 0)));
-  SetDevDvar("scr_sunFogBeginFadeAngle", GetDvar("g_sunFogBeginFadeAngleReadOnly", 0.0));
-  SetDevDvar("scr_sunFogEndFadeAngle", GetDvar("g_sunFogEndFadeAngleReadOnly", 180.0));
-  SetDevDvar("scr_sunFogScale", GetDvar("g_sunFogScaleReadOnly", 1.0));
+  SetDevDvar("scr_sunFogBeginFadeAngle", getDvar("g_sunFogBeginFadeAngleReadOnly", 0.0));
+  SetDevDvar("scr_sunFogEndFadeAngle", getDvar("g_sunFogEndFadeAngleReadOnly", 180.0));
+  SetDevDvar("scr_sunFogScale", getDvar("g_sunFogScaleReadOnly", 1.0));
 
-  SetDevDvar("scr_skyFogIntensity", GetDvar("r_sky_fog_intensity"), 0.0);
-  SetDevDvar("scr_skyFogMinAngle", GetDvar("r_sky_fog_min_angle"), 0.0);
-  SetDevDvar("scr_skyFogMaxAngle", GetDvar("r_sky_fog_max_angle"), 90.0);
+  SetDevDvar("scr_skyFogIntensity", getDvar("r_sky_fog_intensity"), 0.0);
+  SetDevDvar("scr_skyFogMinAngle", getDvar("r_sky_fog_min_angle"), 0.0);
+  SetDevDvar("scr_skyFogMaxAngle", getDvar("r_sky_fog_max_angle"), 90.0);
 }
 
 translateFogSlidersToScript() {
@@ -70,12 +70,12 @@ limit(i) {
 fogslidercheck() {
   if(level.sunFogBeginFadeAngle >= level.sunFogEndFadeAngle) {
     level.sunFogBeginFadeAngle = level.sunFogEndFadeAngle - 1;
-    SetDvar("scr_sunFogBeginFadeAngle", level.sunFogBeginFadeAngle);
+    setDvar("scr_sunFogBeginFadeAngle", level.sunFogBeginFadeAngle);
   }
 
   if(level.sunFogEndFadeAngle <= level.sunFogBeginFadeAngle) {
     level.sunFogEndFadeAngle = level.sunFogBeginFadeAngle + 1;
-    SetDvar("scr_sunFogEndFadeAngle", level.sunFogEndFadeAngle);
+    setDvar("scr_sunFogEndFadeAngle", level.sunFogEndFadeAngle);
   }
 }
 
@@ -96,89 +96,89 @@ print_vision(vision_set) {
   }
   fileprint_launcher_start_file();
 
-  fileprint_launcher("r_glow \"" + GetDvar("r_glowTweakEnable") + "\"");
-  fileprint_launcher("r_glowRadius0\"" + GetDvar("r_glowTweakRadius0") + "\"");
-  fileprint_launcher("r_glowBloomPinch \"" + GetDvar("r_glowTweakBloomPinch") + "\"");
-  fileprint_launcher("r_glowBloomCutoff\"" + GetDvar("r_glowTweakBloomCutoff") + "\"");
-  fileprint_launcher("r_glowBloomDesaturation\"" + GetDvar("r_glowTweakBloomDesaturation") + "\"");
-  fileprint_launcher("r_glowBloomIntensity0\"" + GetDvar("r_glowTweakBloomIntensity0") + "\"");
-  fileprint_launcher("r_glowUseAltCutoff \"" + GetDvar("r_glowTweakUseAltCutoff") + "\"");
+  fileprint_launcher("r_glow \"" + getDvar("r_glowTweakEnable") + "\"");
+  fileprint_launcher("r_glowRadius0\"" + getDvar("r_glowTweakRadius0") + "\"");
+  fileprint_launcher("r_glowBloomPinch \"" + getDvar("r_glowTweakBloomPinch") + "\"");
+  fileprint_launcher("r_glowBloomCutoff\"" + getDvar("r_glowTweakBloomCutoff") + "\"");
+  fileprint_launcher("r_glowBloomDesaturation\"" + getDvar("r_glowTweakBloomDesaturation") + "\"");
+  fileprint_launcher("r_glowBloomIntensity0\"" + getDvar("r_glowTweakBloomIntensity0") + "\"");
+  fileprint_launcher("r_glowUseAltCutoff \"" + getDvar("r_glowTweakUseAltCutoff") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_filmEnable\"" + GetDvar("r_filmTweakEnable") + "\"");
-  fileprint_launcher("r_filmContrast\"" + GetDvar("r_filmTweakContrast") + "\"");
-  fileprint_launcher("r_filmBrightness\"" + GetDvar("r_filmTweakBrightness") + "\"");
-  fileprint_launcher("r_filmDesaturation\"" + GetDvar("r_filmTweakDesaturation") + "\"");
-  fileprint_launcher("r_filmDesaturationDark\"" + GetDvar("r_filmTweakDesaturationDark") + "\"");
-  fileprint_launcher("r_filmInvert\"" + GetDvar("r_filmTweakInvert") + "\"");
-  fileprint_launcher("r_filmLightTint \"" + GetDvar("r_filmTweakLightTint") + "\"");
-  fileprint_launcher("r_filmMediumTint\"" + GetDvar("r_filmTweakMediumTint") + "\"");
-  fileprint_launcher("r_filmDarkTint\"" + GetDvar("r_filmTweakDarkTint") + "\"");
+  fileprint_launcher("r_filmEnable\"" + getDvar("r_filmTweakEnable") + "\"");
+  fileprint_launcher("r_filmContrast\"" + getDvar("r_filmTweakContrast") + "\"");
+  fileprint_launcher("r_filmBrightness\"" + getDvar("r_filmTweakBrightness") + "\"");
+  fileprint_launcher("r_filmDesaturation\"" + getDvar("r_filmTweakDesaturation") + "\"");
+  fileprint_launcher("r_filmDesaturationDark\"" + getDvar("r_filmTweakDesaturationDark") + "\"");
+  fileprint_launcher("r_filmInvert\"" + getDvar("r_filmTweakInvert") + "\"");
+  fileprint_launcher("r_filmLightTint \"" + getDvar("r_filmTweakLightTint") + "\"");
+  fileprint_launcher("r_filmMediumTint\"" + getDvar("r_filmTweakMediumTint") + "\"");
+  fileprint_launcher("r_filmDarkTint\"" + getDvar("r_filmTweakDarkTint") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_primaryLightUseTweaks\"" + GetDvar("r_primaryLightUseTweaks") + "\"");
-  fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + GetDvar("r_primaryLightTweakDiffuseStrength") + "\"");
-  fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + GetDvar("r_primaryLightTweakSpecularStrength") + "\"");
-  fileprint_launcher("r_charLightAmbient \"" + GetDvar("r_charLightAmbient") + "\"");
-  fileprint_launcher("r_primaryLightUseTweaks_NG \"" + GetDvar("r_primaryLightUseTweaks_NG") + "\"");
-  fileprint_launcher("r_primaryLightTweakDiffuseStrength_NG\"" + GetDvar("r_primaryLightTweakDiffuseStrength_NG") + "\"");
-  fileprint_launcher("r_primaryLightTweakSpecularStrength_NG \"" + GetDvar("r_primaryLightTweakSpecularStrength_NG") + "\"");
-  fileprint_launcher("r_charLightAmbient_NG\"" + GetDvar("r_charLightAmbient_NG") + "\"");
+  fileprint_launcher("r_primaryLightUseTweaks\"" + getDvar("r_primaryLightUseTweaks") + "\"");
+  fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + getDvar("r_primaryLightTweakDiffuseStrength") + "\"");
+  fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + getDvar("r_primaryLightTweakSpecularStrength") + "\"");
+  fileprint_launcher("r_charLightAmbient \"" + getDvar("r_charLightAmbient") + "\"");
+  fileprint_launcher("r_primaryLightUseTweaks_NG \"" + getDvar("r_primaryLightUseTweaks_NG") + "\"");
+  fileprint_launcher("r_primaryLightTweakDiffuseStrength_NG\"" + getDvar("r_primaryLightTweakDiffuseStrength_NG") + "\"");
+  fileprint_launcher("r_primaryLightTweakSpecularStrength_NG \"" + getDvar("r_primaryLightTweakSpecularStrength_NG") + "\"");
+  fileprint_launcher("r_charLightAmbient_NG\"" + getDvar("r_charLightAmbient_NG") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_viewModelPrimaryLightUseTweaks\"" + GetDvar("r_viewModelPrimaryLightUseTweaks") + "\"");
-  fileprint_launcher("r_viewModelPrimaryLightTweakDiffuseStrength \"" + GetDvar("r_viewModelPrimaryLightTweakDiffuseStrength") + "\"");
-  fileprint_launcher("r_viewModelPrimaryLightTweakSpecularStrength\"" + GetDvar("r_viewModelPrimaryLightTweakSpecularStrength") + "\"");
-  fileprint_launcher("r_viewModelLightAmbient \"" + GetDvar("r_viewModelLightAmbient") + "\"");
-  fileprint_launcher("r_viewModelPrimaryLightUseTweaks_NG \"" + GetDvar("r_viewModelPrimaryLightUseTweaks_NG") + "\"");
-  fileprint_launcher("r_viewModelPrimaryLightTweakDiffuseStrength_NG\"" + GetDvar("r_viewModelPrimaryLightTweakDiffuseStrength_NG") + "\"");
-  fileprint_launcher("r_viewModelPrimaryLightTweakSpecularStrength_NG \"" + GetDvar("r_viewModelPrimaryLightTweakSpecularStrength_NG") + "\"");
-  fileprint_launcher("r_viewModelLightAmbient_NG\"" + GetDvar("r_viewModelLightAmbient_NG") + "\"");
+  fileprint_launcher("r_viewModelPrimaryLightUseTweaks\"" + getDvar("r_viewModelPrimaryLightUseTweaks") + "\"");
+  fileprint_launcher("r_viewModelPrimaryLightTweakDiffuseStrength \"" + getDvar("r_viewModelPrimaryLightTweakDiffuseStrength") + "\"");
+  fileprint_launcher("r_viewModelPrimaryLightTweakSpecularStrength\"" + getDvar("r_viewModelPrimaryLightTweakSpecularStrength") + "\"");
+  fileprint_launcher("r_viewModelLightAmbient \"" + getDvar("r_viewModelLightAmbient") + "\"");
+  fileprint_launcher("r_viewModelPrimaryLightUseTweaks_NG \"" + getDvar("r_viewModelPrimaryLightUseTweaks_NG") + "\"");
+  fileprint_launcher("r_viewModelPrimaryLightTweakDiffuseStrength_NG\"" + getDvar("r_viewModelPrimaryLightTweakDiffuseStrength_NG") + "\"");
+  fileprint_launcher("r_viewModelPrimaryLightTweakSpecularStrength_NG \"" + getDvar("r_viewModelPrimaryLightTweakSpecularStrength_NG") + "\"");
+  fileprint_launcher("r_viewModelLightAmbient_NG\"" + getDvar("r_viewModelLightAmbient_NG") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_materialBloomRadius\"" + GetDvar("r_materialBloomRadius") + "\"");
-  fileprint_launcher("r_materialBloomPinch \"" + GetDvar("r_materialBloomPinch") + "\"");
-  fileprint_launcher("r_materialBloomIntensity \"" + GetDvar("r_materialBloomIntensity") + "\"");
-  fileprint_launcher("r_materialBloomLuminanceCutoff \"" + GetDvar("r_materialBloomLuminanceCutoff") + "\"");
-  fileprint_launcher("r_materialBloomDesaturation\"" + GetDvar("r_materialBloomDesaturation") + "\"");
+  fileprint_launcher("r_materialBloomRadius\"" + getDvar("r_materialBloomRadius") + "\"");
+  fileprint_launcher("r_materialBloomPinch \"" + getDvar("r_materialBloomPinch") + "\"");
+  fileprint_launcher("r_materialBloomIntensity \"" + getDvar("r_materialBloomIntensity") + "\"");
+  fileprint_launcher("r_materialBloomLuminanceCutoff \"" + getDvar("r_materialBloomLuminanceCutoff") + "\"");
+  fileprint_launcher("r_materialBloomDesaturation\"" + getDvar("r_materialBloomDesaturation") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_volumeLightScatter \"" + GetDvar("r_volumeLightScatterUseTweaks") + "\"");
-  fileprint_launcher("r_volumeLightScatterLinearAtten\"" + GetDvar("r_volumeLightScatterLinearAtten") + "\"");
-  fileprint_launcher("r_volumeLightScatterQuadraticAtten \"" + GetDvar("r_volumeLightScatterQuadraticAtten") + "\"");
-  fileprint_launcher("r_volumeLightScatterAngularAtten \"" + GetDvar("r_volumeLightScatterAngularAtten") + "\"");
-  fileprint_launcher("r_volumeLightScatterDepthAttenNear \"" + GetDvar("r_volumeLightScatterDepthAttenNear") + "\"");
-  fileprint_launcher("r_volumeLightScatterDepthAttenFar\"" + GetDvar("r_volumeLightScatterDepthAttenFar") + "\"");
-  fileprint_launcher("r_volumeLightScatterBackgroundDistance \"" + GetDvar("r_volumeLightScatterBackgroundDistance") + "\"");
-  fileprint_launcher("r_volumeLightScatterColor\"" + GetDvar("r_volumeLightScatterColor") + "\"");
+  fileprint_launcher("r_volumeLightScatter \"" + getDvar("r_volumeLightScatterUseTweaks") + "\"");
+  fileprint_launcher("r_volumeLightScatterLinearAtten\"" + getDvar("r_volumeLightScatterLinearAtten") + "\"");
+  fileprint_launcher("r_volumeLightScatterQuadraticAtten \"" + getDvar("r_volumeLightScatterQuadraticAtten") + "\"");
+  fileprint_launcher("r_volumeLightScatterAngularAtten \"" + getDvar("r_volumeLightScatterAngularAtten") + "\"");
+  fileprint_launcher("r_volumeLightScatterDepthAttenNear \"" + getDvar("r_volumeLightScatterDepthAttenNear") + "\"");
+  fileprint_launcher("r_volumeLightScatterDepthAttenFar\"" + getDvar("r_volumeLightScatterDepthAttenFar") + "\"");
+  fileprint_launcher("r_volumeLightScatterBackgroundDistance \"" + getDvar("r_volumeLightScatterBackgroundDistance") + "\"");
+  fileprint_launcher("r_volumeLightScatterColor\"" + getDvar("r_volumeLightScatterColor") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_ssaoStrength \"" + GetDvar("r_ssaoStrength") + "\"");
-  fileprint_launcher("r_ssaoPower\"" + GetDvar("r_ssaoPower") + "\"");
+  fileprint_launcher("r_ssaoStrength \"" + getDvar("r_ssaoStrength") + "\"");
+  fileprint_launcher("r_ssaoPower\"" + getDvar("r_ssaoPower") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_rimLight0Pitch\"" + GetDvar("r_rimLight0Pitch") + "\"");
-  fileprint_launcher("r_rimLight0Heading\"" + GetDvar("r_rimLight0Heading") + "\"");
-  fileprint_launcher("r_rimLightDiffuseIntensity\"" + GetDvar("r_rimLightDiffuseIntensity") + "\"");
-  fileprint_launcher("r_rimLightSpecIntensity \"" + GetDvar("r_rimLightSpecIntensity") + "\"");
-  fileprint_launcher("r_rimLightBias\"" + GetDvar("r_rimLightBias") + "\"");
-  fileprint_launcher("r_rimLightPower \"" + GetDvar("r_rimLightPower") + "\"");
-  fileprint_launcher("r_rimLight0Color\"" + GetDvar("r_rimLight0Color") + "\"");
-  fileprint_launcher("r_rimLight0Pitch_NG \"" + GetDvar("r_rimLight0Pitch_NG") + "\"");
-  fileprint_launcher("r_rimLight0Heading_NG \"" + GetDvar("r_rimLight0Heading_NG") + "\"");
-  fileprint_launcher("r_rimLightDiffuseIntensity_NG \"" + GetDvar("r_rimLightDiffuseIntensity_NG") + "\"");
-  fileprint_launcher("r_rimLightSpecIntensity_NG\"" + GetDvar("r_rimLightSpecIntensity_NG") + "\"");
-  fileprint_launcher("r_rimLightBias_NG \"" + GetDvar("r_rimLightBias_NG") + "\"");
-  fileprint_launcher("r_rimLightPower_NG\"" + GetDvar("r_rimLightPower_NG") + "\"");
-  fileprint_launcher("r_rimLight0Color_NG \"" + GetDvar("r_rimLight0Color_NG") + "\"");
+  fileprint_launcher("r_rimLight0Pitch\"" + getDvar("r_rimLight0Pitch") + "\"");
+  fileprint_launcher("r_rimLight0Heading\"" + getDvar("r_rimLight0Heading") + "\"");
+  fileprint_launcher("r_rimLightDiffuseIntensity\"" + getDvar("r_rimLightDiffuseIntensity") + "\"");
+  fileprint_launcher("r_rimLightSpecIntensity \"" + getDvar("r_rimLightSpecIntensity") + "\"");
+  fileprint_launcher("r_rimLightBias\"" + getDvar("r_rimLightBias") + "\"");
+  fileprint_launcher("r_rimLightPower \"" + getDvar("r_rimLightPower") + "\"");
+  fileprint_launcher("r_rimLight0Color\"" + getDvar("r_rimLight0Color") + "\"");
+  fileprint_launcher("r_rimLight0Pitch_NG \"" + getDvar("r_rimLight0Pitch_NG") + "\"");
+  fileprint_launcher("r_rimLight0Heading_NG \"" + getDvar("r_rimLight0Heading_NG") + "\"");
+  fileprint_launcher("r_rimLightDiffuseIntensity_NG \"" + getDvar("r_rimLightDiffuseIntensity_NG") + "\"");
+  fileprint_launcher("r_rimLightSpecIntensity_NG\"" + getDvar("r_rimLightSpecIntensity_NG") + "\"");
+  fileprint_launcher("r_rimLightBias_NG \"" + getDvar("r_rimLightBias_NG") + "\"");
+  fileprint_launcher("r_rimLightPower_NG\"" + getDvar("r_rimLightPower_NG") + "\"");
+  fileprint_launcher("r_rimLight0Color_NG \"" + getDvar("r_rimLight0Color_NG") + "\"");
   fileprint_launcher(" ");
 
-  fileprint_launcher("r_unlitSurfaceHDRScalar \"" + GetDvar("r_unlitSurfaceHDRScalar") + "\"");
+  fileprint_launcher("r_unlitSurfaceHDRScalar \"" + getDvar("r_unlitSurfaceHDRScalar") + "\"");
   fileprint_launcher(" ");
 
-  colorizationName = GetDvar("r_colorizationTweakName");
-  toneMappingName = GetDvar("r_toneMappingTweakName");
-  clutMaterialName = GetDvar("r_clutMaterialTweakName");
+  colorizationName = getDvar("r_colorizationTweakName");
+  toneMappingName = getDvar("r_toneMappingTweakName");
+  clutMaterialName = getDvar("r_clutMaterialTweakName");
   if(colorizationName != "")
     fileprint_launcher("colorizationSet \"" + colorizationName + "\"");
     if(toneMappingName != "")

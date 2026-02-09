@@ -13,7 +13,6 @@ init() {
   level thread achievement_monkey_see_monkey_dont();
   level thread onPlayerConnect();
 }
-
 onPlayerConnect() {
   for(;;) {
     level waittill("connecting", player);
@@ -21,7 +20,6 @@ onPlayerConnect() {
     player thread achievement_small_consolation();
   }
 }
-
 achievement_temple_sidequest() {
   level waittill("temple_sidequest_achieved");
   level thread maps\_zombiemode::set_sidequest_completed("EOA");
@@ -29,23 +27,19 @@ achievement_temple_sidequest() {
   level givegamerpicture_wrapper("DLC4_DEMPSEY", true);
   level givegamerpicture_wrapper("DLC4_RICHTOFEN", true);
 }
-
 achievement_zomb_disposal() {
   level endon("end_game");
   level waittill("zomb_disposal_achieved");
   level giveachievement_wrapper("DLC4_ZOM_ZOMB_DISPOSAL", true);
 }
-
 achievement_monkey_see_monkey_dont() {
   level waittill("monkey_see_monkey_dont_achieved");
   level giveachievement_wrapper("DLC4_ZOM_MONKEY_SEE_MONKEY_DONT", true);
 }
-
 achievement_blinded_by_the_fright() {
   self waittill("blinded_by_the_fright_achieved");
   self giveachievement_wrapper("DLC4_ZOM_BLINDED_BY_THE_FRIGHT");
 }
-
 achievement_small_consolation() {
   while(true) {
     self waittill("weapon_fired");

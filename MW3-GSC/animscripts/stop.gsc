@@ -50,7 +50,7 @@ main() {
     }
 
     if(self.a._id_0D26 != var_1) {
-      self clearanim( % root, 0.3);
+      self clearanim(%root, 0.3);
       var_0 = 0;
     }
 
@@ -81,7 +81,7 @@ _id_10F5() {
     self notify("clearing_specialIdleAnim");
     self animmode("gravity");
     self orientmode("face current");
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
 
     for(;;) {
       self setflaggedanimrestart("special_idle", var_0[randomint(var_0.size)], 1, 0.2, self._id_10F7);
@@ -110,7 +110,6 @@ _id_10F8() {
     var_3 = animscripts\utility::_id_10AF("crouch");
   } else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
     var_3 = animscripts\utility::_id_10AF("prone");
-
   }
   return var_3;
 }
@@ -118,11 +117,10 @@ _id_10F8() {
 _id_10F9(var_0, var_1) {
   if(animscripts\utility::_id_0C98() && self.a._id_0D26 == "stand") {
     var_0 = "stand_cqb";
-
   }
   if(isDefined(anim._id_10FA[var_0])) {
     var_2 = anim._id_10FA[var_0]["in"];
-    self setflaggedanimknoballrestart("idle_transition", var_2, % body, 1, 0.2, self._id_10F7);
+    self setflaggedanimknoballrestart("idle_transition", var_2, %body, 1, 0.2, self._id_10F7);
     animscripts\shared::_id_0C51("idle_transition");
   }
 }
@@ -130,7 +128,6 @@ _id_10F9(var_0, var_1) {
 _id_10FB(var_0, var_1) {
   if(animscripts\utility::_id_0C98() && self.a._id_0D26 == "stand") {
     var_0 = "stand_cqb";
-
   }
   var_2 = undefined;
 
@@ -152,15 +149,13 @@ _id_10FB(var_0, var_1) {
 
   if(gettime() == self.a._id_1019) {
     var_5 = 0.5;
-
   }
   if(isDefined(var_2)) {
-    self setanimknoball(var_3, % body, 1, var_5, 1);
-    self setanim( % add_idle);
-    self setflaggedanimknoballrestart("idle", var_2, % add_idle, 1, var_5, self._id_10F7);
+    self setanimknoball(var_3, %body, 1, var_5, 1);
+    self setanim(%add_idle);
+    self setflaggedanimknoballrestart("idle", var_2, %add_idle, 1, var_5, self._id_10F7);
   } else {
-    self setflaggedanimknoballrestart("idle", var_3, % body, 1, var_5, self._id_10F7);
-
+    self setflaggedanimknoballrestart("idle", var_3, %body, 1, var_5, self._id_10F7);
   }
   animscripts\shared::_id_0C51("idle");
 }
@@ -170,10 +165,10 @@ _id_1102() {
     var_0["stand_2_prone"] = % stand_2_prone;
     var_0["crouch_2_prone"] = % crouch_2_prone;
     var_1 = var_0[self.a._id_0D26 + "_2_prone"];
-    self setflaggedanimknoballrestart("trans", var_1, % body, 1, 0.2, 1.0);
+    self setflaggedanimknoballrestart("trans", var_1, %body, 1, 0.2, 1.0);
     animscripts\shared::_id_0C51("trans");
     self.a._id_0D2B = "stop";
-    self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
+    self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
     return;
   }
 
@@ -187,10 +182,10 @@ _id_1102() {
     var_2[3] = % prone_twitch_lookfast;
     var_2[4] = % prone_twitch_lookup;
     var_3 = var_2[randomint(var_2.size)];
-    self setflaggedanimknoball("prone_idle", var_3, % exposed_modern, 1, 0.2);
+    self setflaggedanimknoball("prone_idle", var_3, %exposed_modern, 1, 0.2);
   } else {
-    self setanimknoball( % prone_aim_5, % exposed_modern, 1, 0.2);
-    self setflaggedanimknob("prone_idle", % prone_idle, 1, 0.2);
+    self setanimknoball(%prone_aim_5, %exposed_modern, 1, 0.2);
+    self setflaggedanimknob("prone_idle", %prone_idle, 1, 0.2);
   }
 
   self waittillmatch("prone_idle", "end");

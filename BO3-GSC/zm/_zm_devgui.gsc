@@ -39,12 +39,12 @@ function autoexec __init__sytem__() {
 }
 
 function __init__() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   level.devgui_add_weapon = &devgui_add_weapon;
   level.devgui_add_ability = &devgui_add_ability;
   level thread zombie_devgui_think();
@@ -53,7 +53,7 @@ function __init__() {
   thread devgui_zombie_healthbar();
   thread devgui_test_chart_think();
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   level thread dev::body_customization_devgui(0);
   thread testscriptruntimeerror();
@@ -110,7 +110,7 @@ function zombie_devgui_player_menu_clear_on_disconnect(player) {
 }
 
 function zombie_devgui_validation_commands() {
-  setdvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -138,7 +138,7 @@ function zombie_devgui_validation_commands() {
           break;
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     util::wait_network_frame();
   }
@@ -344,7 +344,7 @@ function zombie_pathing_validation() {
     level.zombie_pathing_validation = 1;
   }
   zombie_devgui_open_sesame();
-  setdvar("", 0);
+  setDvar("", 0);
   zombie_devgui_goto_round(20);
   wait(2);
   spawner = level.zombie_spawners[0];
@@ -417,7 +417,7 @@ function function_315fab2d() {
       if(players.size >= 1) {
         players[0] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.1);
     cmd = getdvarstring("");
@@ -427,7 +427,7 @@ function function_315fab2d() {
       if(players.size >= 2) {
         players[1] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.1);
     cmd = getdvarstring("");
@@ -437,7 +437,7 @@ function function_315fab2d() {
       if(players.size >= 3) {
         players[2] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.1);
     cmd = getdvarstring("");
@@ -447,7 +447,7 @@ function function_315fab2d() {
       if(players.size >= 4) {
         players[3] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }
@@ -461,14 +461,14 @@ function zombie_weapon_devgui_think() {
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
       array::thread_all(getplayers(), &zombie_devgui_weapon_give, level.zombie_devgui_gun);
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.25);
     att = getdvarstring("");
     if(isDefined(att) && att.size > 0) {
       level.zombie_devgui_att = att;
       array::thread_all(getplayers(), &zombie_devgui_attachment_give, level.zombie_devgui_att);
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }
@@ -1415,23 +1415,19 @@ function zombie_devgui_think() {
         if(isDefined(level.custom_devgui)) {
           if(isarray(level.custom_devgui)) {
             foreach(devgui in level.custom_devgui) {
-              b_result = [
-                [devgui]
-              ](cmd);
+              b_result = [[devgui]](cmd);
               if(isDefined(b_result) && b_result) {
                 break;
               }
             }
           } else {
-            [
-              [level.custom_devgui]
-            ](cmd);
+            [[level.custom_devgui]](cmd);
           }
         }
         break;
       }
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }
@@ -1563,7 +1559,7 @@ function devgui_bot_spawn_think(origin, yaw) {
 }
 
 function zombie_devgui_open_sesame() {
-  setdvar("", 1);
+  setDvar("", 1);
   level flag::set("");
   level clientfield::set("", 0);
   power_trigs = getEntArray("", "");
@@ -1597,7 +1593,7 @@ function zombie_devgui_open_sesame() {
   }
   level notify("open_sesame");
   wait(1);
-  setdvar("", 0);
+  setDvar("", 0);
 }
 
 function any_player_in_noclip() {
@@ -1617,16 +1613,16 @@ function diable_fog_in_noclip() {
     while(!any_player_in_noclip()) {
       wait(1);
     }
-    setdvar("", "");
-    setdvar("", "");
+    setDvar("", "");
+    setDvar("", "");
     if(isDefined(level.culldist)) {
       setculldist(0);
     }
     while(any_player_in_noclip()) {
       wait(1);
     }
-    setdvar("", "");
-    setdvar("", "");
+    setDvar("", "");
+    setDvar("", "");
     if(isDefined(level.culldist)) {
       setculldist(level.culldist);
     }
@@ -1637,8 +1633,8 @@ function zombie_devgui_allow_fog() {
   if(isDefined(level.fog_disabled_in_noclip) && level.fog_disabled_in_noclip) {
     level notify("allowfoginnoclip");
     level.fog_disabled_in_noclip = 0;
-    setdvar("", "");
-    setdvar("", "");
+    setDvar("", "");
+    setDvar("", "");
   } else {
     thread diable_fog_in_noclip();
   }
@@ -1648,7 +1644,7 @@ function zombie_devgui_give_money() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   self zm_score::add_to_player_score(100000);
@@ -1658,7 +1654,7 @@ function zombie_devgui_take_money() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   if(self.score > 100) {
     self zm_score::player_reduce_points("");
@@ -1671,7 +1667,7 @@ function zombie_devgui_give_xp(amount) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self addrankxp("", self.currentweapon, undefined, undefined, 1, amount / 50);
 }
@@ -1684,7 +1680,7 @@ function zombie_devgui_turn_player(index) {
     player = players[index];
   }
   assert(isDefined(player));
-  assert(isplayer(player));
+  assert(isPlayer(player));
   assert(isalive(player));
   level.devcheater = 1;
   if(player hasperk("")) {
@@ -1704,7 +1700,7 @@ function zombie_devgui_debug_pers(index) {
     player = players[index];
   }
   assert(isDefined(player));
-  assert(isplayer(player));
+  assert(isPlayer(player));
   assert(isalive(player));
   level.devcheater = 1;
   println("");
@@ -1814,7 +1810,7 @@ function zombie_devgui_equipment_give(equipment) {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(zm_equipment::is_included(equipment)) {
@@ -1827,7 +1823,7 @@ function zombie_devgui_give_placeable_mine(weapon) {
   self notify("give_planted_grenade_thread");
   self endon("give_planted_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(!zm_utility::is_placeable_mine(weapon)) {
@@ -1848,7 +1844,7 @@ function zombie_devgui_give_claymores() {
   self notify("give_planted_grenade_thread");
   self endon("give_planted_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(isDefined(self zm_utility::get_player_placeable_mine())) {
@@ -1869,7 +1865,7 @@ function zombie_devgui_give_lethal(weapon) {
   self notify("give_lethal_grenade_thread");
   self endon("give_lethal_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(isDefined(self zm_utility::get_player_lethal_grenade())) {
@@ -1896,7 +1892,7 @@ function zombie_devgui_give_monkey() {
   self notify("give_tactical_grenade_thread");
   self endon("give_tactical_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(isDefined(self zm_utility::get_player_tactical_grenade())) {
@@ -1916,7 +1912,7 @@ function zombie_devgui_give_bhb() {
   self notify("give_tactical_grenade_thread");
   self endon("give_tactical_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(isDefined(self zm_utility::get_player_tactical_grenade())) {
@@ -1936,7 +1932,7 @@ function zombie_devgui_give_qed() {
   self notify("give_tactical_grenade_thread");
   self endon("give_tactical_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(isDefined(self zm_utility::get_player_tactical_grenade())) {
@@ -1956,7 +1952,7 @@ function zombie_devgui_give_dolls() {
   self notify("give_tactical_grenade_thread");
   self endon("give_tactical_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(isDefined(self zm_utility::get_player_tactical_grenade())) {
@@ -1976,7 +1972,7 @@ function zombie_devgui_give_emp_bomb() {
   self notify("give_tactical_grenade_thread");
   self endon("give_tactical_grenade_thread");
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   level.devcheater = 1;
   if(isDefined(self zm_utility::get_player_tactical_grenade())) {
@@ -2010,7 +2006,7 @@ function zombie_devgui_kill() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self disableinvulnerability();
   death_from = (randomfloatrange(-20, 20), randomfloatrange(-20, 20), randomfloatrange(-20, 20));
@@ -2021,7 +2017,7 @@ function zombie_devgui_toggle_ammo() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_toggle_ammo");
   self endon("devgui_toggle_ammo");
@@ -2051,7 +2047,7 @@ function zombie_devgui_toggle_ignore() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   if(!isDefined(self.var_b67d35de)) {
     self.var_b67d35de = 0;
@@ -2063,7 +2059,7 @@ function zombie_devgui_toggle_ignore() {
     self zm_utility::decrement_ignoreme();
   }
   if(self.ignoreme) {
-    setdvar("", 0);
+    setDvar("", 0);
   }
 }
 
@@ -2071,7 +2067,7 @@ function zombie_devgui_revive() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self reviveplayer();
   self notify("stop_revive_trigger");
@@ -2089,7 +2085,7 @@ function zombie_devgui_give_health() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_health");
   self endon("devgui_health");
@@ -2108,7 +2104,7 @@ function zombie_devgui_low_health() {
   /
   #
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(isalive(self));
   self notify("devgui_health");
   self endon("devgui_health");
@@ -2307,7 +2303,7 @@ function zombie_devgui_dog_round(num_dogs) {
     return;
   }
   if(!level flag::get("")) {
-    setdvar("", num_dogs);
+    setDvar("", num_dogs);
   }
   zombie_devgui_goto_round(level.round_number + 1);
 }
@@ -2971,7 +2967,7 @@ function testscriptruntimeerror() {
     wait(1);
   }
   myerror = getdvarstring("");
-  setdvar("", "");
+  setDvar("", "");
   if(myerror == "") {
     testscriptruntimeerrorassert();
   } else {
@@ -2987,11 +2983,11 @@ function function_2fcc56bd() {
 
 function function_1acc8e35() {
   self endon("hash_eec2d58b");
-  setdvar("", 1);
+  setDvar("", 1);
   var_9857308b = getdvarint("");
   timescale = getdvarint("");
   var_da0f3f6 = function_2fcc56bd();
-  setdvar("", timescale);
+  setDvar("", timescale);
   while(level.round_number < var_9857308b) {
     foreach(var_b16efbf2 in var_da0f3f6) {
       if(level.round_number < var_b16efbf2[0]) {
@@ -3006,10 +3002,10 @@ function function_1acc8e35() {
     adddebugcommand("");
     wait(0.2);
   }
-  setdvar("", 1);
+  setDvar("", 1);
 }
 
 function function_eec2d58b() {
   self notify("hash_eec2d58b");
-  setdvar("", 1);
+  setDvar("", 1);
 }

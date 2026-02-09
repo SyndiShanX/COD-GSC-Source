@@ -27,7 +27,7 @@ setup_callbacks() {
 
 bot_sr_debug() {
   while(1) {
-    if(GetDvar("bot_DrawDebugGametype") == "sr") {
+    if(getDvar("bot_DrawDebugGametype") == "sr") {
       foreach(tag in level.dogtags) {
         if(tag maps\mp\gametypes\_gameobjects::canInteractWith("allies") || tag maps\mp\gametypes\_gameobjects::canInteractWith("axis")) {
           if(isDefined(tag.bot_picking_up)) {

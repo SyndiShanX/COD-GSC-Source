@@ -240,7 +240,6 @@ soundrandom_thread(localclientnum, randsound) {
     if(getdvarint(#"debug_audio", 0) > 0) {
       print3d(randsound.origin, randsound.script_sound, (0, 0.8, 0), 1, 3, 45);
     }
-
   }
 }
 
@@ -401,7 +400,6 @@ startsoundloops() {
   if(getdvarint(#"debug_audio", 0) > 0) {
     println("<dev string:x94>");
   }
-
 }
 
 startlineemitters() {
@@ -431,7 +429,6 @@ startlineemitters() {
   if(getdvarint(#"debug_audio", 0) > 0) {
     println("<dev string:xe8>");
   }
-
 }
 
 startrattles() {
@@ -640,7 +637,7 @@ trig_enter_bump(ent) {
   volume = get_vol_from_speed(ent);
 
   if(!sessionmodeiszombiesgame()) {
-    if(isplayer(ent) && ent hasperk(localclientnum, "specialty_quieter")) {
+    if(isPlayer(ent) && ent hasperk(localclientnum, "specialty_quieter")) {
       volume /= 2;
     }
   }
@@ -757,7 +754,6 @@ debug_line_emitter() {
     }
 
     waitframe(1);
-
   }
 }
 
@@ -863,7 +859,7 @@ snd_underwater(localclientnum) {
       continue;
     }
 
-    if(underwaternotify._notify == "swimming_end" && isplayer(self) && isalive(self)) {
+    if(underwaternotify._notify == "swimming_end" && isPlayer(self) && isalive(self)) {
       self swimend(localclientnum);
     }
   }

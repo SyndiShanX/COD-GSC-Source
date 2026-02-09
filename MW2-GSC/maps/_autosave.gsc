@@ -54,7 +54,7 @@ beginningOfLevelSave() {
   // "levelstart" is recognized by the saveGame command as a special save game
   // Start
   SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
-  SetDvar("ui_grenade_death", "0");
+  setDvar("ui_grenade_death", "0");
   PrintLn("Saving level start saved game");
 
   flag_clear("game_saving");
@@ -178,10 +178,10 @@ _autosave_game_now(suppress_print) {
     return false;
   }
 
-  /# AutoSavePrint( "Saving game " + filename + " with desc ", descriptionString );
+  AutoSavePrint("Saving game " + filename + " with desc ", descriptionString);
 
   if(saveId < 0) {
-    /# AutoSavePrint( "Savegame failed - save error.: " + filename + " with desc ", descriptionString );
+    AutoSavePrint("Savegame failed - save error.: " + filename + " with desc ", descriptionString);
     return false;
   }
 
@@ -194,7 +194,7 @@ _autosave_game_now(suppress_print) {
   flag_clear("game_saving");
 
   if(!CommitWouldBeValid(saveId)) {
-    /# AutoSavePrint( "Save is no longer valid, another save was run from elsewhere" );
+    AutoSavePrint("Save is no longer valid, another save was run from elsewhere");
     return false;
   }
 
@@ -204,7 +204,7 @@ _autosave_game_now(suppress_print) {
       thread maps\_arcademode::arcademode_checkpoint_print();
 
     CommitSave(saveId);
-    SetDvar("ui_grenade_death", "0");
+    setDvar("ui_grenade_death", "0");
   }
 
   return true;
@@ -226,7 +226,7 @@ try_to_autosave_now() {
   }
 
   if(!flag("can_save")) {
-    /# AutoSavePrint( "Can_save flag was clear" );
+    AutoSavePrint("Can_save flag was clear");
     return false;
   }
 
@@ -273,10 +273,10 @@ tryAutoSave(filename, description, image, timeout, doStealthChecks, suppress_pri
   while(1) {
     if(autoSaveCheck(undefined, doStealthChecks)) {
       saveId = SaveGameNoCommit(filename, descriptionString, image, suppress_print);
-      /# AutoSavePrint( "Saving game " + filename + " with desc ", descriptionString );
+      AutoSavePrint("Saving game " + filename + " with desc ", descriptionString);
 
       if(saveId < 0) {
-        /# AutoSavePrint( "Savegame failed - save error.: " + filename + " with desc ", descriptionString );
+        AutoSavePrint("Savegame failed - save error.: " + filename + " with desc ", descriptionString);
         break;
       }
 
@@ -292,14 +292,14 @@ tryAutoSave(filename, description, image, timeout, doStealthChecks, suppress_pri
         continue;
       }
       if(!autoSaveCheck(undefined, doStealthChecks)) {
-        /# AutoSavePrint( "Savegame invalid: 1.25 second check failed" );
+        AutoSavePrint("Savegame invalid: 1.25 second check failed");
         continue;
       }
 
       wait time2;
 
       if(!autoSaveCheck_not_picky()) {
-        /# AutoSavePrint( "Savegame invalid: 2.5 second check failed" );
+        AutoSavePrint("Savegame invalid: 2.5 second check failed");
         continue;
       }
 
@@ -310,12 +310,12 @@ tryAutoSave(filename, description, image, timeout, doStealthChecks, suppress_pri
       }
 
       if(!flag("can_save")) {
-        /# AutoSavePrint( "Can_save flag was clear" );
+        AutoSavePrint("Can_save flag was clear");
         break;
       }
 
       if(!CommitWouldBeValid(saveId)) {
-        /# AutoSavePrint( "Save is no longer valid, another save was run from elsewhere" );
+        AutoSavePrint("Save is no longer valid, another save was run from elsewhere");
         flag_clear("game_saving");
         return false;
       }
@@ -323,7 +323,7 @@ tryAutoSave(filename, description, image, timeout, doStealthChecks, suppress_pri
       thread maps\_arcademode::arcademode_checkpoint_print();
       CommitSave(saveId);
       level.lastSaveTime = GetTime();
-      SetDvar("ui_grenade_death", "0");
+      setDvar("ui_grenade_death", "0");
       break;
     }
 
@@ -412,7 +412,7 @@ autoSaveCheck(doPickyChecks, doStealthChecks) {
 }
 
 autoSavePlayerCheck(doPickyChecks) {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(isDefined(level.ac130gunner) && level.ac130gunner == self)
     return true;
@@ -446,7 +446,7 @@ autoSavePlayerCheck(doPickyChecks) {
 }
 
 autoSaveAmmoCheck() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(isDefined(level.ac130gunner) && level.ac130gunner == self)
     return true;
@@ -464,29 +464,29 @@ autoSaveAmmoCheck() {
 }
 
 autoSaveHealthCheck() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   if(isDefined(level.ac130gunner) && level.ac130gunner == self)
     return true;
 
   if(self ent_flag_exist("coop_downed") && self ent_flag("coop_downed")) {
-    /# AutoSavePrint( "autosave failed: health too low" );
+    AutoSavePrint("autosave failed: health too low");
     return false;
   }
 
   healthFraction = self.health / self.maxhealth;
   if(healthFraction < 0.5) {
-    /# AutoSavePrint( "autosave failed: health too low" );
+    AutoSavePrint("autosave failed: health too low");
     return false;
   }
 
   if(flag("_radiation_poisoning")) {
-    /# AutoSavePrint( "autosave failed: player has radiation sickness" );
+    AutoSavePrint("autosave failed: player has radiation sickness");
     return false;
   }
 
   if(self ent_flag("player_has_red_flashing_overlay")) {
-    /# AutoSavePrint( "autosave failed: player has red flashing overlay" );
+    AutoSavePrint("autosave failed: player has red flashing overlay");
     return false;
   }
 
@@ -503,13 +503,13 @@ autoSaveThreatCheck(doPickyChecks) {
     if(!isDefined(enemy.enemy)) {
       continue;
     }
-    if(!isplayer(enemy.enemy)) {
+    if(!isPlayer(enemy.enemy)) {
       continue;
     }
     if(enemy.type == "dog") {
       foreach(player in level.players) {
         if(Distance(enemy.origin, player.origin) < 384) {
-          /# AutoSavePrint( "autosave failed: Dog near player" );
+          AutoSavePrint("autosave failed: Dog near player");
           return (false);
         }
       }
@@ -518,8 +518,8 @@ autoSaveThreatCheck(doPickyChecks) {
     }
 
     // is trying to melee the player
-    if(isDefined(enemy.Melee) && isDefined(enemy.melee.target) && IsPlayer(enemy.melee.target)) {
-      /# AutoSavePrint( "autosave failed: AI meleeing player" );
+    if(isDefined(enemy.Melee) && isDefined(enemy.melee.target) && isPlayer(enemy.melee.target)) {
+      AutoSavePrint("autosave failed: AI meleeing player");
       return (false);
     }
 
@@ -541,13 +541,13 @@ autoSaveThreatCheck(doPickyChecks) {
     // recently shot at the player
     if(enemy.a.lastShootTime > GetTime() - 500) {
       if(doPickyChecks || enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
-        /# AutoSavePrint( "autosave failed: AI firing on player" );
+        AutoSavePrint("autosave failed: AI firing on player");
         return (false);
       }
     }
 
     if(isDefined(enemy.a.aimIdleThread) && enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
-      /# AutoSavePrint( "autosave failed: AI aiming at player" );
+      AutoSavePrint("autosave failed: AI aiming at player");
       return (false);
     }
   }
@@ -563,7 +563,7 @@ autoSaveThreatCheck(doPickyChecks) {
     foreach(player in level.players) {
       if(Distance(vehicle.origin, player.origin) < 400) // grenade radius is 220
       {
-        /# AutoSavePrint( "autosave failed: burning car too close to player" );
+        AutoSavePrint("autosave failed: burning car too close to player");
         return (false);
       }
     }
@@ -590,7 +590,7 @@ autosave_proximity_threat_func(enemy) {
     dist = Distance(enemy.origin, player.origin);
 
     if(dist < 360) {
-      /# AutoSavePrint( "autosave failed: AI too close to player" );
+      AutoSavePrint("autosave failed: AI too close to player");
       return "return";
     } else
     if(dist < 1000) {

@@ -1039,7 +1039,7 @@ cansuppressenemyfromexposed() {
     return 0;
   }
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return aisuppressai();
 
   if(isDefined(self.node)) {
@@ -1065,7 +1065,7 @@ cansuppressenemy() {
     return 0;
   }
 
-  if(!isplayer(self.enemy))
+  if(!isPlayer(self.enemy))
     return aisuppressai();
 
   var_0 = self getmuzzlepos();
@@ -1244,7 +1244,7 @@ canthrowgrenade() {
   if(self.script_forcegrenade)
     return 1;
 
-  return isplayer(self.enemy);
+  return isPlayer(self.enemy);
 }
 
 usingboltactionweapon() {
@@ -1728,7 +1728,7 @@ iscqbwalking() {
 }
 
 is_in_casual_standing_stance() {
-  var_0 = [ % casual_stand_idle, %casual_stand_idle_trans_in, %casual_stand_idle_trans_out, %casual_stand_idle_twitch, %casual_stand_idle_twitchb, %casual_stand_v2_idle, %casual_stand_v2_twitch_radio, %casual_stand_v2_twitch_shift, %casual_stand_v2_twitch_talk, %smg_casual_stand_idle_trans_in, %smg_casual_stand_idle_trans_out];
+  var_0 = [%casual_stand_idle, %casual_stand_idle_trans_in, %casual_stand_idle_trans_out, %casual_stand_idle_twitch, %casual_stand_idle_twitchb, %casual_stand_v2_idle, %casual_stand_v2_twitch_radio, %casual_stand_v2_twitch_shift, %casual_stand_v2_twitch_talk, %smg_casual_stand_idle_trans_in, %smg_casual_stand_idle_trans_out];
 
   foreach(var_2 in var_0) {
     if(self getanimweight(var_2) != 0.0)
@@ -2035,9 +2035,9 @@ using_tight_turn_anims() {
   if(isDefined(level.script))
     var_0 = level.script;
   else
-    var_0 = tolower(getdvar("mapname"));
+    var_0 = tolower(getDvar("mapname"));
 
-  if(isDefined(getdvar("debug_force_tight_turn")) && getdvarint("debug_force_tight_turn"))
+  if(isDefined(getDvar("debug_force_tight_turn")) && getdvarint("debug_force_tight_turn"))
     return 1;
 
   if(isai(self) && isDefined(self.disable_tight_turn))
@@ -2075,7 +2075,7 @@ using_cqb_tight_turn_20() {
   if(isDefined(level.script))
     var_0 = level.script;
   else
-    var_0 = tolower(getdvar("mapname"));
+    var_0 = tolower(getDvar("mapname"));
 
   if(getdvarint("use_CQB_tight_turn_20", 0))
     return 1;
@@ -2115,7 +2115,7 @@ using_exit_node_to_cover_arrival_early_out() {
   if(isDefined(level.script))
     var_0 = level.script;
   else
-    var_0 = tolower(getdvar("mapname"));
+    var_0 = tolower(getDvar("mapname"));
 
   switch (var_0) {
     case "village_defend":
@@ -2149,7 +2149,7 @@ using_cover_transition_angle_correction() {
   if(isDefined(level.script))
     var_0 = level.script;
   else
-    var_0 = tolower(getdvar("mapname"));
+    var_0 = tolower(getDvar("mapname"));
 
   if(getdvarint("use_cover_transition_angle_correction", 0))
     return 1;

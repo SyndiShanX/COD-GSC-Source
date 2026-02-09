@@ -64,7 +64,6 @@ class cfull_screen_black: cluielem {
     cluielem::add_clientfield("endAlpha", 1, 5, "float", var_34291db);
     cluielem::add_clientfield("drawHUD", 1, 1, "int", var_32445b2);
   }
-
 }
 
 register(uid, redcallback, greencallback, bluecallback, fadeovertimecallback, var_b046940, var_34291db, var_32445b2) {

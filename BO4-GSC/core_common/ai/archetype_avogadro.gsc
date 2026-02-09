@@ -345,7 +345,6 @@ function_a495d71f(entity) {
 
         recordline(entity.origin, endpoint, (1, 0, 0));
         recordsphere(endpoint, 15, (1, 0, 0));
-
       }
     }
   }

@@ -237,7 +237,7 @@ dompoint_onuseupdate(var_0, var_1, var_2, var_3) {
 }
 
 dompoint_onuseend(var_0, var_1, var_2) {
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_objective_state", 0);
     var_1.ui_dom_securing = undefined;
   }
@@ -335,7 +335,7 @@ giveflagassistedcapturepoints(var_0) {
       var_3 = var_3.owner;
     }
 
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
 

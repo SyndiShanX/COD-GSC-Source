@@ -110,7 +110,7 @@ function_4a81e337() {
   while(true) {
     s_notify = self waittill(#"damage");
 
-    if(isplayer(s_notify.attacker)) {
+    if(isPlayer(s_notify.attacker)) {
       if(function_216d0545(s_notify)) {
         level notify(#"hash_2588983e2be22ca5");
       }

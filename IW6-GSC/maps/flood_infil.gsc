@@ -641,7 +641,7 @@ tank_damage_player(var_0, var_1) {
     }
 
     if(!isalive(level.player)) {
-      setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+      setDvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
       self stopanimscripted();
 
       foreach(var_5 in level.lynx_smash_array)
@@ -907,7 +907,7 @@ tank_invulnerable_warning() {
   while(isalive(self)) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       var_0[var_0.size] = gettime();
 
       for(var_9 = 0; var_9 < var_0.size; var_9++) {
@@ -1168,7 +1168,7 @@ enemy_mg_get_untargeted_random_target() {
     common_scripts\utility::waitframe();
   }
 
-  if(isplayer(var_1))
+  if(isPlayer(var_1))
     self settargetentity(var_1);
   else if(isDefined(var_1.sprint) && var_1.sprint)
     self settargetentity(var_1);
@@ -1725,7 +1725,7 @@ kill_player_with_tanks(var_0) {
   }
 
   wait 0.1;
-  setdvar("ui_deadquote", &"FLOOD_TANKS_FAIL");
+  setDvar("ui_deadquote", &"FLOOD_TANKS_FAIL");
   level thread maps\_utility::missionfailedwrapper();
 }
 

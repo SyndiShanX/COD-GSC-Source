@@ -15,14 +15,14 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_battery3");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_specularColorScale", 2.5, 15);
   SetDvar_cg_ng("r_reactiveMotionWindFrequencyScale", 0, 0.1);
   SetDvar_cg_ng("r_reactiveMotionWindAmplitudeScale", 0, 0.5);
   SetDvar_cg_ng("sm_sunSampleSizeNear", .25, .55);
 
-  setdvar("r_dof_hq", 0);
+  setDvar("r_dof_hq", 0);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -154,7 +154,6 @@ volcanoWaitForUse(volcanoSourceName) {
       delay = RandomFloatRange(1.0, 2.0);
       wait(delay);
     }
-
   }
 }
 
@@ -292,7 +291,6 @@ templeCollapse() {
     animName = animModel.script_noteworthy;
     if(!isDefined(animName)) {
       animName = "mp_ruins_td_01_cg_anim";
-
     }
 
     animModel ScriptModelPlayAnim(animName);
@@ -325,7 +323,6 @@ templeCollapse() {
   foreach(animModel in self.animModels) {
     animModel Hide();
   }
-
 }
 
 playRumble(rumbleType) {
@@ -376,7 +373,6 @@ crushObjects(refPos, radiusSq, notifyStr, targets) {
   foreach(target in targets) {
     if(DistanceSquared(refPos, target.origin) < radiusSq) {
       target notify(notifyStr);
-
     }
   }
 }
@@ -389,7 +385,7 @@ watersheet_trig_setup() {
   while(true) {
     trig waittill("trigger", player);
 
-    if(IsPlayer(player) && !IsAI(player) && !(isDefined(player.inWater) && player.inWater)) {
+    if(isPlayer(player) && !IsAI(player) && !(isDefined(player.inWater) && player.inWater)) {
       player thread playerTrackWaterSheet(trig);
     }
   }
@@ -433,7 +429,7 @@ checkDbgDvar(dvarName, callback, notifyStr) {
     if(isDefined(notifyStr))
       level notify(notifyStr);
 
-    SetDvar(dvarName, 0);
+    setDvar(dvarName, 0);
   }
 }
 

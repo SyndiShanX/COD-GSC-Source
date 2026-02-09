@@ -382,10 +382,8 @@ tankDamageMonitor() {
       return;
     } else if(self.health < (maxHealth / 4) && stage3 == false) {
       stage3 = true;
-
     } else if(self.health < (maxHealth / 2) && stage2 == false) {
       stage2 = true;
-
     } else if(self.health < (maxHealth / 1.5) && stage1 == false) {
       stage1 = true;
     }
@@ -438,7 +436,6 @@ handlePossibleThreat(attacker) {
     self setEvadeSpeed();
     wait(4);
     self stopToForward();
-
   } else if(position == "front_side" || position == "front") {
     playFX(level.tankCover, self.origin);
     self stopToReverse();
@@ -1777,7 +1774,6 @@ debugPrint3D(origin, printString, color, alpha, scale, duration) {
     print3d(origin, printString, color, alpha, scale, duration);
     println("3D: " + printString);
   }
-
 }
 
 drawTankGraphIds() {

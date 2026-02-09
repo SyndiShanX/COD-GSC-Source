@@ -25,8 +25,8 @@ function __init__() {
   clientfield::register("missile", "elemental_bow" + "_arrow_impact_fx", 5000, 1, "int");
   clientfield::register("missile", "elemental_bow4" + "_arrow_impact_fx", 5000, 1, "int");
   callback::on_connect(&function_c45ac6ae);
-  setdvar("bg_chargeShotUseOneAmmoForMultipleBullets", 0);
-  setdvar("bg_zm_dlc1_chargeShotMultipleBulletsForFullCharge", 2);
+  setDvar("bg_chargeShotUseOneAmmoForMultipleBullets", 0);
+  setDvar("bg_zm_dlc1_chargeShotMultipleBulletsForFullCharge", 2);
   level.var_d6de2706 = new throttle();
   [[level.var_d6de2706]] - > initialize(6, 0.1);
 }

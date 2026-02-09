@@ -196,7 +196,7 @@ func_56CC() {
         break;
       }
 
-      setdvar("start", var_0[var_7]);
+      setDvar("start", var_0[var_7]);
       map_restart();
     }
 
@@ -291,7 +291,7 @@ func_10C9F() {
 func_8960() {
   level.var_10D36 = spawnStruct();
   setdvarifuninitialized("start", "");
-  if(getdvar("scr_generateClipModels") != "" && getdvar("scr_generateClipModels") != "0") {
+  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0") {
     return;
   }
 
@@ -299,7 +299,7 @@ func_8960() {
     level.var_10C58 = [];
   }
 
-  var_0 = tolower(getdvar("start"));
+  var_0 = tolower(getDvar("start"));
   var_1 = func_7CA2();
   if(isDefined(level.var_10CDA)) {
     var_0 = level.var_10CDA;
@@ -383,7 +383,7 @@ func_8960() {
 
   if(scripts\sp\utility::func_9BB5()) {
     var_11 = func_7CB8(var_1);
-    setdvar("start", var_11);
+    setDvar("start", var_11);
   }
 
   waittillframeend;
@@ -449,7 +449,7 @@ func_7CB8(var_0) {
     }
   }
 
-  setdvar("start", var_1);
+  setDvar("start", var_1);
   return var_1;
 }
 
@@ -542,10 +542,10 @@ func_48E4(var_0) {
   setdvarifuninitialized("feedback_index", 0);
   setdvarifuninitialized("setting_feedback_start", 0);
   if(!getdvarint("setting_feedback_start")) {
-    setdvar("feedback_index", 0);
+    setDvar("feedback_index", 0);
   }
 
-  setdvar("setting_feedback_start", 0);
+  setDvar("setting_feedback_start", 0);
   var_1 = [];
   foreach(var_4, var_3 in var_0) {
     var_1[var_4] = tolower(var_3);
@@ -640,12 +640,12 @@ func_6BBD(var_0, var_1) {
   }
 
   if(level.var_6BC3[var_1] != var_0) {
-    setdvar("start", level.var_6BC3[var_1]);
+    setDvar("start", level.var_6BC3[var_1]);
     var_2 = scripts\sp\hud_util::func_48B7("black", 0);
     var_2 fadeovertime(0.5);
     var_2.alpha = 1;
     wait(0.65);
-    setdvar("setting_feedback_start", 1);
+    setDvar("setting_feedback_start", 1);
     map_restart();
     level waittill("forever");
   }
@@ -654,7 +654,7 @@ func_6BBD(var_0, var_1) {
 func_6BC1() {
   var_0 = getdvarint("feedback_index");
   var_0++;
-  setdvar("feedback_index", var_0);
+  setDvar("feedback_index", var_0);
 }
 
 func_3D73(var_0) {
@@ -694,5 +694,5 @@ func_9C4B() {
     return issubstr(level.var_10CDA, "no_game");
   }
 
-  return getdvar("start") == "no_game";
+  return getDvar("start") == "no_game";
 }

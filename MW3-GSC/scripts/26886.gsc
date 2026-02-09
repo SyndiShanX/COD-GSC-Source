@@ -226,7 +226,6 @@ _id_68F1() {
 
   if(isDefined(self._id_164F)) {
     var_5 = self._id_164F;
-
   }
   if(!isDefined(level._id_68E9[var_5])) {
     return;
@@ -283,14 +282,12 @@ _id_68F1() {
             self._id_68F2[0] = var_16;
           } else {
             self._id_68F2[self._id_68F2.size] = var_16;
-
           }
           var_16._id_68F3 = var_11;
 
           if(isDefined(var_8["max_total_number"])) {
             if(!isDefined(level._id_68E5[var_16._id_68F3])) {
               level._id_68E5[var_16._id_68F3] = 0;
-
             }
             level._id_68E5[var_16._id_68F3]++;
           }
@@ -310,11 +307,9 @@ _id_68F4() {
     foreach(var_1 in self._id_68F2) {
       if(isDefined(var_1._id_68E4) && var_1._id_68E4 != "0") {
         level._id_68E4[var_1._id_68E4] = undefined;
-
       }
       if(isDefined(level._id_68E5[var_1._id_68F3])) {
         level._id_68E5[var_1._id_68F3]--;
-
       }
       var_1 delete();
     }
@@ -326,7 +321,6 @@ _id_68F4() {
 _id_68F5(var_0, var_1, var_2, var_3, var_4) {
   if(!(isDefined(var_4) && var_4 && isDefined(level._id_68F6))) {
     var_4 = 0;
-
   }
   var_5 = (0, 0, 0);
   var_6 = 0;
@@ -339,7 +333,6 @@ _id_68F5(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_4) {
       var_5 = (var_5[0], var_5[1], level._id_68F6);
-
     }
     var_6 = _id_68E6(var_5);
 
@@ -355,7 +348,6 @@ _id_68F5(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_6 != "0") {
     level._id_68E4[var_6] = var_11;
-
   }
   var_11 setModel(var_2);
   var_8 = randomfloatrange(-180, 180);
@@ -376,7 +368,6 @@ _id_68F7(var_0, var_1) {
     var_2 = common_scripts\utility::random(var_0["model"]);
   } else {
     var_2 = var_0["model"];
-
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"]);
   return var_3;
@@ -387,7 +378,6 @@ _id_68F8(var_0, var_1) {
     var_2 = common_scripts\utility::random(var_0["model"]);
   } else {
     var_2 = var_0["model"];
-
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"]);
   var_3 thread _id_68FA(var_0, var_1);
@@ -429,7 +419,6 @@ _id_68FB(var_0, var_1) {
     var_2 = common_scripts\utility::random(var_0["model"]);
   } else {
     var_2 = var_0["model"];
-
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"]);
   var_3._id_1032 = "floating_body";
@@ -440,7 +429,6 @@ _id_68FB(var_0, var_1) {
       var_4 = common_scripts\utility::random(var_0["headmodel"]);
     } else {
       var_4 = var_0["headmodel"];
-
     }
     var_3 attach(var_4, "", 1);
   }
@@ -449,7 +437,6 @@ _id_68FB(var_0, var_1) {
     var_5 = common_scripts\utility::random(var_0["animation"]);
   } else {
     var_5 = var_0["animation"];
-
   }
   var_3 thread maps\_anim::_id_11C8(var_3, var_5);
   var_3 thread body(var_0, var_1);
@@ -473,7 +460,6 @@ _id_68FC(var_0, var_1) {
     var_2 = common_scripts\utility::random(var_0["model"]);
   } else {
     var_2 = var_0["model"];
-
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"], 1);
   var_3._id_1032 = "floating_body";
@@ -484,7 +470,6 @@ _id_68FC(var_0, var_1) {
       var_4 = common_scripts\utility::random(var_0["headmodel"]);
     } else {
       var_4 = var_0["headmodel"];
-
     }
     var_3 attach(var_4, "", 1);
   }
@@ -515,7 +500,6 @@ _id_68FD(var_0, var_1, var_2) {
     var_4 = var_2[1];
   } else {
     var_4 = var_2;
-
   }
   maps\_anim::_id_11C8(self, var_4);
 }
@@ -531,7 +515,6 @@ _id_68FE(var_0) {
     level._id_68FF[0] = var_0;
   } else {
     level._id_68FF[level._id_68FF.size] = var_0;
-
   }
   var_0 thread _id_6901();
 }
@@ -551,7 +534,6 @@ _id_6902(var_0, var_1) {
     var_2 = common_scripts\utility::random(var_0["model"]);
   } else {
     var_2 = var_0["model"];
-
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"]);
   var_3._id_1032 = "floating_body";
@@ -562,7 +544,6 @@ _id_6902(var_0, var_1) {
       var_4 = common_scripts\utility::random(var_0["headmodel"]);
     } else {
       var_4 = var_0["headmodel"];
-
     }
     var_3 attach(var_4, "", 1);
   }
@@ -571,7 +552,6 @@ _id_6902(var_0, var_1) {
     var_5 = common_scripts\utility::random(var_0["animation"]);
   } else {
     var_5 = var_0["animation"];
-
   }
   var_3 thread maps\_anim::_id_11C8(var_3, var_5);
   _id_68FE(var_3);

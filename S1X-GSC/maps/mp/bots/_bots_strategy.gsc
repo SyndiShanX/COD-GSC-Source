@@ -430,7 +430,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
     var_24 = "";
 
     if(isDefined(self.cur_defend_node) || isDefined(self.cur_defend_point_override)) {
-      if(var_23 && maps\mp\bots\_bots_util::bot_is_protecting() && !isplayer(var_0) && isDefined(self.defend_entrance_index)) {
+      if(var_23 && maps\mp\bots\_bots_util::bot_is_protecting() && !isPlayer(var_0) && isDefined(self.defend_entrance_index)) {
         var_25 = bot_get_ambush_trap_item("trap_directional", "trap", "c4");
 
         if(isDefined(var_25)) {
@@ -484,7 +484,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
 
         childthread defense_watch_entrances_at_goal();
 
-        if(var_23 && maps\mp\bots\_bots_util::bot_is_protecting() && !isplayer(var_0) && isDefined(self.defend_entrance_index)) {
+        if(var_23 && maps\mp\bots\_bots_util::bot_is_protecting() && !isPlayer(var_0) && isDefined(self.defend_entrance_index)) {
           maps\mp\bots\_bots_personality::bot_try_trap_follower();
         }
       }

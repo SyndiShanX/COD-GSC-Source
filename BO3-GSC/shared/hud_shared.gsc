@@ -65,7 +65,7 @@ function init() {
   level.teamprogressbarwidth = 192;
   level.teamprogressbartexty = 8;
   level.teamprogressbarfontsize = 1.65;
-  setdvar("ui_generic_status_bar", 0);
+  setDvar("ui_generic_status_bar", 0);
   if(level.splitscreen) {
     level.lowertextyalign = "BOTTOM";
     level.lowertexty = -42;

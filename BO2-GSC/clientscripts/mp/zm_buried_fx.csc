@@ -17,7 +17,7 @@ precache_scripted_fx() {
   level._effect["orange_eyes"] = loadfx("misc/fx_zombie_eye_single");
   level._effect["sq_vulture_orange_eye_glow"] = loadfx("misc/fx_zombie_eye_side_quest");
   level._effect["player_possessed_eyes"] = loadfx("maps/zombie_buried/fx_buried_eye_stulhinger");
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
 
   if(gametype == "zcleansed")
     level._effect["blue_eyes_player"] = loadfx("maps/zombie/fx_zombie_eye_returned_blue");
@@ -158,12 +158,11 @@ main() {
 setup_prop_anims() {
   level.fxanim_notifies_to_become_clientfields = array("sloth_fountain_start", "maze_fountain_start", "bda", "bdb", "bdc", "cw_fall", "mansion_piano_play", "saloon_piano_play");
 
-  if(getdvar(#"createfx") == "") {
+  if(getDvar(#"createfx") == "") {
     foreach(key in level.fxanim_notifies_to_become_clientfields) {
       registerclientfield("world", key, 12000, 1, "int", ::fxanim_clientfield_callback, 0, 0);
 
       println("Registering fxanim worldfield for " + key);
-
     }
   }
 

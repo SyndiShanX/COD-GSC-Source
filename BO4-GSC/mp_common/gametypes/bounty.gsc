@@ -139,7 +139,7 @@ event_handler[gametype_init] main(eventstruct) {
   globallogic_defaults::function_daa7e9d5();
   laststand_mp::function_367cfa1b(&function_95002a59);
   laststand_mp::function_eb8c0e47(&onplayerrevived);
-  setdvar(#"hash_7036719f41a78d54", getgametypesetting(#"laststandrevivehealth"));
+  setDvar(#"hash_7036719f41a78d54", getgametypesetting(#"laststandrevivehealth"));
   clientfield::register("allplayers", "bountymoneytrail", 1, 1, "int");
   clientfield::register("toplayer", "realtime_multiplay", 1, 1, "int");
   level.var_1aef539f = &function_a800815;
@@ -606,7 +606,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     }
   }
 
-  if(isDefined(self) && isDefined(attacker) && isplayer(attacker) && attacker != self && attacker.team != self.team && !self laststand_mp::is_cheating()) {
+  if(isDefined(self) && isDefined(attacker) && isPlayer(attacker) && attacker != self && attacker.team != self.team && !self laststand_mp::is_cheating()) {
     scoreevents::processscoreevent(#"eliminated_enemy", attacker, self, weapon);
     attacker contracts::function_fd9fb79b(#"contract_mp_eliminations");
 
@@ -638,7 +638,7 @@ onscoreevent(params) {
 }
 
 onplayerdamage(params) {
-  if(isDefined(params) && isDefined(params.eattacker) && isplayer(params.eattacker) && isDefined(params.idamage)) {
+  if(isDefined(params) && isDefined(params.eattacker) && isPlayer(params.eattacker) && isDefined(params.idamage)) {
     if(params.eattacker.team == self.team) {
       return;
     }
@@ -1478,7 +1478,7 @@ function_9ef02b1b(sentient) {
   useobj = self;
   player = sentient;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     player = sentient.owner;
   }
 
@@ -1587,7 +1587,7 @@ function_9ec1d15() {
 function_d4a84cde(team, player, result) {
   self.isdisabled = 0;
 
-  if(isDefined(result) && result && isDefined(player) && isplayer(player)) {
+  if(isDefined(result) && result && isDefined(player) && isPlayer(player)) {
     self.usecount++;
     player function_3a77006e(level.var_860cdbdb, "moneychange_bountydrop");
     player pickup_health::function_dd4bf8ac(level.var_a2b93ad3);
@@ -1661,11 +1661,11 @@ function_b968a61c() {
 
     player = level.players[0];
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player.pers[# "money"] += var_9b37b387;
       player clientfield::set_to_player("<dev string:xd2>", player.pers[# "money"]);
     }
 
-    setdvar(#"hash_312d65fd43c7008c", 0);
+    setDvar(#"hash_312d65fd43c7008c", 0);
   }
 }

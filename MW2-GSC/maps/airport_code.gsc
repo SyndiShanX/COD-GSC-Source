@@ -78,7 +78,7 @@ elevator_open_doors(doors, snd) {
 
 blend_movespeedscale_custom(percent, time) {
   player = self;
-  if(!isplayer(player))
+  if(!isPlayer(player))
     player = level.player;
 
   player notify("blend_movespeedscale_custom");
@@ -144,7 +144,6 @@ player_dynamic_move_speed() {
 
       if(GetDvarInt("debug_playerDMS"))
         Line(actor.origin, level.player.origin, (1, 0, 0), 1);
-
     } else {
       //calculate if we are ahead of anyone
       foreach(member in level.team) {
@@ -170,7 +169,6 @@ player_dynamic_move_speed() {
 
       if(GetDvarInt("debug_playerDMS"))
         Line(actor.origin, level.player.origin, (0, 1, 0), 1);
-
     }
 
     if(GetDvarInt("debug_playerDMS"))
@@ -527,15 +525,13 @@ lobby_drone_logic() {
     if(!isDefined(self)) {
       break;
     }
-    /*-----------------------
-    KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
+    /*----------------------- KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
     -------------------------*/
     if(DistanceSquared(self.origin, level.player.origin) < squared(2048))
       continue;
     if(player_looking_at(self.origin + (0, 0, 48)))
       continue;
-    /*-----------------------
-    ALL TESTS PASSED, DELETE THE BASTARD
+    /*----------------------- ALL TESTS PASSED, DELETE THE BASTARD
     -------------------------*/
     break;
   }
@@ -675,16 +671,14 @@ lobby_to_stairs_flow() {
   while(!flag("stairs_top_open_fire")) {
     wait .2;
 
-    /*-----------------------
-    KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
+    /*----------------------- KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
     -------------------------*/
     if(DistanceSquared(self.origin, level.player.origin) < squared(2048))
       continue;
     if(player_looking_at(self.origin + (0, 0, 48))) {
       continue;
     }
-    /*-----------------------
-    ALL TESTS PASSED, DELETE THE BASTARD
+    /*----------------------- ALL TESTS PASSED, DELETE THE BASTARD
     -------------------------*/
     self Delete();
   }
@@ -817,7 +811,7 @@ intro_security_run_wait_die() {
 
   while(1) {
     self waittill("damage", amt, attacker);
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       break;
     }
   }
@@ -4018,7 +4012,7 @@ aim_stop() {
   if(!isDefined(time))
     time = .25;
 
-  //self ClearAnim( %run_n_gun, 0.2 );	
+  //self ClearAnim(%run_n_gun, 0.2 );	
   self SetAnimLimited(%casual_killer_walk_shoot_F, 1, time);
   self SetAnimLimited(anime, 0, time);
   self SetFlaggedAnimKnob("runanim", %run_n_gun, 1, time);
@@ -4565,7 +4559,6 @@ basement_door_kick(light, lightintensity) {
         animnode = node;
         break;
     }
-
   }
 
   level.makarov waittill("reached_path_end");
@@ -5046,7 +5039,6 @@ tarmac_retreat_logic() {
     member add_func(::riotshield_fastwalk_off);
     thread do_wait();
   }
-
 }
 
 tarmac_riotshield_group_handle_break(team) {
@@ -5582,7 +5574,7 @@ tarmac_handle_player_too_far_death() {
 
   level.player waittill("death");
 
-  SetDvar("ui_deadquote", level.fail_string);
+  setDvar("ui_deadquote", level.fail_string);
   missionFailedWrapper();
 }
 
@@ -6703,7 +6695,7 @@ do_lobby_player_fire() {
   while(1) {
     self waittill("damage", amt, attacker, vec, point, type);
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     playFX(getfx("killshot"), point);
@@ -7330,7 +7322,7 @@ friendly_fire_player_death() {
   level.player waittill("death");
 
   if(isDefined(level.fail_string))
-    SetDvar("ui_deadquote", level.fail_string);
+    setDvar("ui_deadquote", level.fail_string);
   missionFailedWrapper();
 }
 
@@ -7369,7 +7361,7 @@ friendly_fire_watch_player_nade() {
     }
     self.ff_attacker = nade.owener;
 
-    if(!isplayer(self.ff_attacker)) {
+    if(!isPlayer(self.ff_attacker)) {
       continue;
     }
     flag_set("friendly_fire_warning");
@@ -7392,7 +7384,7 @@ friendly_fire_watch_player_flash() {
     }
     self.ff_attacker = attacker;
 
-    if(!isplayer(self.ff_attacker)) {
+    if(!isPlayer(self.ff_attacker)) {
       continue;
     }
     friendly_fire_handle_aggrissive_num();
@@ -7412,7 +7404,7 @@ friendly_fire_watch_player_fire() {
 
   self.ff_attacker = attacker;
 
-  if(IsPlayer(self.ff_attacker) && !flag("friendly_fire_pause_fire")) {
+  if(isPlayer(self.ff_attacker) && !flag("friendly_fire_pause_fire")) {
     friendly_fire_handle_aggrissive_num();
 
     if(flag("friendly_fire_warning"))
@@ -7436,12 +7428,12 @@ friendly_fire_watch_player() {
     self add_wait(::friendly_fire_watch_player_nade);
     self do_wait_any();
 
-    if(IsPlayer(self.ff_attacker) && flag("friendly_fire_warning")) {
+    if(isPlayer(self.ff_attacker) && flag("friendly_fire_warning")) {
       radio_dialogue_stop();
       level.makarov thread radio_dialogue("airport_mkv_youtraitor");
       break;
     } else
-    if(IsPlayer(self.ff_attacker) && !flag("friendly_fire_checkfire_line")) {
+    if(isPlayer(self.ff_attacker) && !flag("friendly_fire_checkfire_line")) {
       flag_set("friendly_fire_checkfire_line");
       thread flag_clear_delayed("friendly_fire_checkfire_line", 2.5);
 
@@ -7534,7 +7526,7 @@ friendly_fire_good_kill() {
 
   self waittill("death", attacker);
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(flag("friendly_fire_no_kill_line") && !flag("friendly_fire_good_kill_line")) {
@@ -7612,12 +7604,12 @@ airport_vision_elevator_black(node, angles) {
   introblack.foreground = true;
   introblack SetShader("black", 640, 480);
 
-  if(getdvar("alt_intro") == "")
-    setdvar("alt_intro", "");
-  if(!isDefined(getdvar("alt_intro")))
-    setdvar("alt_intro", "");
+  if(getDvar("alt_intro") == "")
+    setDvar("alt_intro", "");
+  if(!isDefined(getDvar("alt_intro")))
+    setDvar("alt_intro", "");
 
-  if(getdvar("alt_intro") != "") {
+  if(getDvar("alt_intro") != "") {
     delaythread(4.25, ::airport_elev_black_shuffle1, introblack, node, angles);
     delaythread(8.25, ::airport_elev_black_shuffle2, introblack, node, angles);
     delaythread(13.75, ::airport_elev_black_click1, introblack, node, angles);
@@ -7967,7 +7959,7 @@ jet_engine_take_damage(parent) {
       wait .1;
       continue;
     }
-    if(isDefined(attacker) && !isplayer(attacker) && DistanceSquared(level.player.origin, self GetOrigin()) < 1500) {
+    if(isDefined(attacker) && !isPlayer(attacker) && DistanceSquared(level.player.origin, self GetOrigin()) < 1500) {
       wait .1;
       continue;
     }
@@ -8018,7 +8010,7 @@ jet_engine_death_print() {
   thread maps\_load::special_death_indicator_hudelement("hud_burningjetengineicon", 64, 64);
 
   wait .05;
-  SetDvar("ui_deadquote", "@AIRPORT_EXPLODING_JET_ENGINE_DEATH");
+  setDvar("ui_deadquote", "@AIRPORT_EXPLODING_JET_ENGINE_DEATH");
 }
 
 glass_elevator_setup() {
@@ -8233,7 +8225,7 @@ m203_hint() {
 
 should_break_m203_hint(nothing) {
   player = get_player_from_self();
-  Assert(IsPlayer(player));
+  Assert(isPlayer(player));
 
   // am I using my m203 weapon?
   weapon = player GetCurrentWeapon();

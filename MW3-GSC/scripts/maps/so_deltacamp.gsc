@@ -6,7 +6,6 @@
 main() {
   if(!isDefined(level._id_4D68)) {
     level._id_4D68 = 1;
-
   }
   precachestring(&"SO_DELTACAMP_OBJ_V1");
   precachestring(&"SO_DELTACAMP_OBJ_V2");
@@ -104,7 +103,6 @@ _id_4D6E() {
 
     if(!maps\_utility::_id_12C1()) {
       _id_4D6F("v1_coop_only");
-
     }
     level._id_4D6B = "so_training_deltacamp_start_v1";
     level._id_4D6A = "so_training_deltacamp_complete_v1";
@@ -115,7 +113,6 @@ _id_4D6E() {
 
     if(!maps\_utility::_id_12C1()) {
       _id_4D6F("v2_coop_only");
-
     }
     _id_4D72();
     _id_4D73();
@@ -154,7 +151,6 @@ _id_4D71() {
     common_scripts\utility::flag_wait("course_targets_finished");
   } else if(level._id_4D68 == 2) {
     common_scripts\utility::flag_wait("all_players_reached_end");
-
   }
   common_scripts\utility::flag_set(level._id_4D6A);
   wait 1.0;
@@ -190,7 +186,6 @@ _id_004B() {
 _id_4D73() {
   if(!maps\_utility::_id_12C1()) {
     level.player thread animscripts\combat_utility::_id_20DE();
-
   }
   level._id_4D1A = 1;
   level._id_4D34 = "viewhands_player_delta";
@@ -205,7 +200,6 @@ _id_4D73() {
 _id_4D79(var_0) {
   if(!isDefined(level._id_4D7A)) {
     level._id_4D7A = 0;
-
   }
   level._id_4D7A++;
 
@@ -303,7 +297,6 @@ _id_4D80() {
 
   while(!isDefined(level._id_45C4)) {
     wait 0.05;
-
   }
   level._id_45C4 endon("death");
   wait 0.5;
@@ -317,7 +310,6 @@ _id_4D80() {
     }
   } else if(level._id_4D68 == 2) {
     _id_0084("so_trainer2_trk_breach", var_0);
-
   }
   wait(randomfloatrange(8.0, 11.0));
 
@@ -333,7 +325,6 @@ _id_0084(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = maps\_utility::_id_0AE9(level.player.origin, level.speakers);
-
   }
   level._id_0047 = var_1;
   var_1 playSound(var_0, "speaker_sound_interrupt", 1);
@@ -606,7 +597,6 @@ _id_4D8A() {
     maps\_specialops::_id_188C(level._id_4D6B, "course_targets_finished", -1, 40, 28);
   } else if(level._id_4D68 == 2) {
     maps\_specialops::_id_188C(level._id_4D6B, "all_players_reached_end", -1, 45, 33);
-
   }
   thread maps\_specialops::_id_1808(3, &"SO_DELTACAMP_CIV_COUNT", "ui_civ_count");
 }
@@ -659,7 +649,6 @@ _id_4D90() {
     level._id_4D91 thread _id_4042("course_start_open_gate", 0);
   } else if(level._id_4D68 == 2) {
     level._id_4D91 thread _id_4042(undefined, 1, 1);
-
   }
   level._id_4D93 = _id_4DC1("gate_enter_v2");
   level._id_4D93._id_4D92 = 80;
@@ -680,7 +669,6 @@ _id_4D94() {
 _id_4D95(var_0, var_1) {
   if(isDefined(level._id_4D6C)) {
     common_scripts\utility::trigger_off(level._id_4D6C, "script_noteworthy");
-
   }
   _id_4DA1(var_1);
   _id_4D9A(var_0);
@@ -695,11 +683,9 @@ _id_4D95(var_0, var_1) {
 
     if(isDefined(var_3._id_1692)) {
       common_scripts\utility::flag_wait(var_3._id_1692);
-
     }
     if(isDefined(var_3.script_delay)) {
       wait(var_3.script_delay);
-
     }
     common_scripts\utility::flag_set(var_3.targetname + "_popped");
     maps\_utility::_id_1F09(var_3._id_4D98, "open");
@@ -756,14 +742,12 @@ _id_4D9A(var_0) {
             var_3._id_4D9E[var_3._id_4D9E.size] = var_8;
           } else {
             continue;
-
           }
           var_8 thread _id_4DA3(var_3, strtok(var_8.script_noteworthy, "_")[1]);
           var_3.targets[var_3.targets.size] = var_8;
 
           if(var_8 _id_4DBF("invisible", ";")) {
             _id_0049(var_8);
-
           }
           continue;
         }
@@ -775,7 +759,6 @@ _id_4D9A(var_0) {
             var_3._id_4D99[var_3._id_4D99.size] = var_8;
           } else {
             continue;
-
           }
           var_8 thread _id_4DB4();
         }
@@ -789,7 +772,6 @@ _id_4D9A(var_0) {
             var_3._id_4D99[var_3._id_4D99.size] = var_8;
           } else {
             continue;
-
           }
           var_8 thread _id_4DB4();
         }
@@ -859,7 +841,6 @@ _id_4DA2() {
   foreach(var_3 in var_1) {
     if(var_3.classname == "script_origin") {
       var_0[var_0.size] = getent(var_3.target, "targetname");
-
     }
     var_0[var_0.size] = var_3;
   }
@@ -898,7 +879,6 @@ _id_4DA3(var_0, var_1) {
     self._id_4DA5 moveto(self._id_4DA5.origin - (0, 0, 36), 0.25);
   } else {
     self._id_4DA5 rotatepitch(-90, 0.25);
-
   }
   if(_id_4DBF("use_rail", ";")) {
     self._id_4DA6 = undefined;
@@ -936,17 +916,14 @@ _id_4DA3(var_0, var_1) {
 
     if(_id_4DBF("breach", ";")) {
       level._id_4BB1++;
-
     }
     if(isDefined(self.script_delay)) {
       wait(self.script_delay);
-
     }
     _id_4DAC();
 
     if(_id_4DBF("invisible", ";")) {
       _id_004A(self);
-
     }
     if(_id_4DBF("melee", ";")) {
       var_11 = maps\_utility::_id_0AE9(self.origin, level._id_4D9D, 120);
@@ -961,7 +938,6 @@ _id_4DA3(var_0, var_1) {
       wait(randomfloatrange(0, 0.2));
     } else {
       var_12 = 0.05;
-
     }
     self solid();
     self playSound("target_up_metal");
@@ -969,11 +945,9 @@ _id_4DA3(var_0, var_1) {
 
     if(_id_4DBF("dog_bark", ";")) {
       thread _id_4DAE();
-
     }
     if(var_1 != "friendly") {
       var_6 enableaimassist();
-
     }
     if(_id_4DBF("reverse", ";")) {
       self._id_4DA5 rotatepitch(-90, var_12);
@@ -985,7 +959,6 @@ _id_4DA3(var_0, var_1) {
       self._id_4DA5 moveto(self._id_4DA5.origin + (0, 0, 36), var_12);
     } else {
       self._id_4DA5 rotatepitch(90, var_12);
-
     }
     wait(var_12);
 
@@ -993,7 +966,6 @@ _id_4DA3(var_0, var_1) {
       thread _id_4DAD();
     } else if(isDefined(self._id_4DA9) && self._id_4DA9.size) {
       thread _id_4DAF();
-
     }
     for(;;) {
       self._id_035A waittill("damage", var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20, var_21, var_22);
@@ -1007,7 +979,7 @@ _id_4DA3(var_0, var_1) {
       if(var_17 == "MOD_IMPACT") {
         continue;
       }
-      if(isplayer(var_14)) {
+      if(isPlayer(var_14)) {
         if(isDefined(self._id_4DA4)) {
           if(var_17 != "MOD_MELEE") {
             continue;
@@ -1030,7 +1002,6 @@ _id_4DA3(var_0, var_1) {
 
           if(_id_4DBF("breach", ";")) {
             level._id_4BB1--;
-
           }
           var_0._id_4DA0++;
 
@@ -1041,7 +1012,6 @@ _id_4DA3(var_0, var_1) {
 
         if(var_17 == "MOD_GRENADE_SPLASH") {
           self notify("hit_with_grenade");
-
         }
         break;
       }
@@ -1049,7 +1019,6 @@ _id_4DA3(var_0, var_1) {
 
     if(isDefined(self._id_4DA4)) {
       self._id_4DAA maps\_utility::_id_27C5();
-
     }
     self notify("hit");
     self notify("target_going_back_down");
@@ -1059,7 +1028,6 @@ _id_4DA3(var_0, var_1) {
 
     if(isDefined(self._id_4DA5._id_4DAB)) {
       self._id_4DA5.origin = self._id_4DA5._id_4DAB;
-
     }
     if(_id_4DBF("reverse", ";")) {
       self._id_4DA5 rotatepitch(90, 0.25);
@@ -1071,7 +1039,6 @@ _id_4DA3(var_0, var_1) {
       self._id_4DA5 moveto(self._id_4DA5.origin - (0, 0, 36), 0.25);
     } else {
       self._id_4DA5 rotatepitch(-90, 0.25);
-
     }
     self._id_035A setCanDamage(0);
     wait 0.25;
@@ -1095,7 +1062,6 @@ _id_4DAC() {
 
       if(length(var_4 getvelocity()) > 200) {
         var_5 = 16384;
-
       }
       if(distancesquared(var_4.origin, var_0) < var_5) {
         var_2 = 1;
@@ -1157,7 +1123,6 @@ _id_4DAF() {
     self._id_4DA5 thread _id_4DB2(var_0, 8, 2.0);
   } else {
     self._id_4DA5 thread _id_4DB2(var_0, 0, 0.0);
-
   }
   var_0 endon("deleted_because_player_was_too_close");
   var_0 endon("death");
@@ -1212,7 +1177,6 @@ _id_4DB2(var_0, var_1, var_2) {
     var_4 = var_6 / 20.0;
   } else {
     var_1 = 0.0;
-
   }
   for(;;) {
     wait 0.05;
@@ -1261,7 +1225,6 @@ _id_4DB4() {
 
   if(isDefined(self._id_2961)) {
     var_0 = self._id_2961;
-
   }
   self waittill("open");
   self rotateyaw(var_0, 0.5, 0.2, 0.1);
@@ -1285,7 +1248,6 @@ _id_4DB9(var_0) {
 
   if(level._id_4DB7 - level._id_4DB8 > 0) {
     level waittill("pre_display_splash" + var_1);
-
   }
   if(common_scripts\utility::flag("special_op_terminated")) {
     return;
@@ -1306,7 +1268,6 @@ _id_4DB9(var_0) {
     var_3 maps\_specialops::_id_16AC();
   } else {
     var_3 maps\_specialops::_id_185F();
-
   }
   wait 0.2;
   var_4 = 1;
@@ -1361,13 +1322,13 @@ _id_16C2() {
       var_15 = maps\_utility::_id_133A(var_7)._id_4D8C;
 
       if(isDefined(level._id_16C9) && level._id_16C9 == 1) {
-        setdvar("ui_hide_hint", 0);
+        setDvar("ui_hide_hint", 0);
         var_7 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER");
         var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_1);
         var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_14);
         var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13, var_15);
       } else {
-        setdvar("ui_hide_hint", 1);
+        setDvar("ui_hide_hint", 1);
         var_7 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER", "@SPECIAL_OPS_UI_SCORE");
         var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_1, var_4);
         var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_14, var_5);
@@ -1385,12 +1346,12 @@ _id_16C2() {
         var_7 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_TEAM_SCORE", var_10);
       }
     } else if(isDefined(level._id_16C9) && level._id_16C9 == 1) {
-      setdvar("ui_hide_hint", 0);
+      setDvar("ui_hide_hint", 0);
       var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1);
       var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12);
       var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13);
     } else {
-      setdvar("ui_hide_hint", 1);
+      setDvar("ui_hide_hint", 1);
       var_7 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_UI_SCORE");
       var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_4);
       var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_5);
@@ -1420,7 +1381,6 @@ _id_4DBC() {
 
   if(isDefined(self._id_1969)) {
     var_0 = int(max(var_0, self._id_1969 + 1));
-
   }
   return var_0 == 4;
 }
@@ -1463,7 +1423,6 @@ _id_4DBE() {
 
   if(isDefined(self._id_1969)) {
     var_0 = int(max(var_0, self._id_1969 + 1));
-
   }
   return var_0;
 }
@@ -1471,7 +1430,6 @@ _id_4DBE() {
 _id_4DBF(var_0, var_1) {
   if(!isDefined(self) || !isDefined(self._id_164F)) {
     return 0;
-
   }
   var_2 = strtok(self._id_164F, var_1);
   return maps\_utility::_id_0AD1(var_2, var_0);
@@ -1480,7 +1438,6 @@ _id_4DBF(var_0, var_1) {
 _id_4DC0(var_0, var_1, var_2) {
   if(!isDefined(self) || !isDefined(self._id_164F)) {
     return 0;
-
   }
   var_3 = strtok(self._id_164F, var_2);
   var_4 = "";
@@ -1488,7 +1445,6 @@ _id_4DC0(var_0, var_1, var_2) {
   foreach(var_6 in var_3) {
     if(var_4 != "") {
       var_4 = var_4 + var_2;
-
     }
     if(var_6 == var_0) {
       var_4 = var_4 + var_1;
@@ -1515,7 +1471,6 @@ _id_4DC1(var_0) {
 
       if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "blocker") {
         var_6 = var_8;
-
       }
       continue;
     }
@@ -1552,7 +1507,6 @@ _id_4DC1(var_0) {
 
   if(isDefined(var_5)) {
     var_16.trigger = var_5;
-
   }
   return var_16;
 }
@@ -1569,11 +1523,9 @@ _id_4042(var_0, var_1, var_2) {
 
   if(isDefined(self._id_4D92)) {
     var_3 = self._id_4D92;
-
   }
   if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
-
   }
   var_4 = 4;
 
@@ -1582,15 +1534,12 @@ _id_4042(var_0, var_1, var_2) {
     self rotateto(self.angles + (0, var_3, 0), 1.5, 0.25, 0.25);
   } else {
     self rotateto(self.angles + (0, var_3, 0), 4, 1.5, 1.5);
-
   }
   if(isDefined(self._id_4DC3)) {
     self._id_4DC3 maps\_utility::_id_27C5();
-
   }
   if(!isDefined(var_2) || var_2 == 0) {
     thread maps\_utility::play_sound_on_entity("scn_training_fence_open");
-
   }
   common_scripts\utility::array_call(self._id_4DC2, ::notsolid);
   wait(var_4);
@@ -1609,11 +1558,9 @@ _id_4DC4(var_0, var_1) {
 
   if(isDefined(self._id_4DC5)) {
     var_2 = self._id_4DC5;
-
   }
   if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
-
   }
   var_3 = 2;
 
@@ -1622,11 +1569,9 @@ _id_4DC4(var_0, var_1) {
     self rotateto(self.angles + (0, var_2, 0), 1, 0.25, 0.25);
   } else {
     self rotateto(self.angles + (0, var_2, 0), 2, 0.5, 0.5);
-
   }
   if(isDefined(self._id_4DC3)) {
     self._id_4DC3 maps\_utility::_id_27C6();
-
   }
   thread maps\_utility::play_sound_on_entity("scn_training_fence_close");
   common_scripts\utility::array_call(self._id_4DC2, ::solid);

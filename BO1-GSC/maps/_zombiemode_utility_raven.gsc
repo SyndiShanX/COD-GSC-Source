@@ -22,14 +22,12 @@ playerCanAfford(player, cost) {
   }
   return true;
 }
-
 SetInvisibleToAll() {
   players = get_players();
   for(playerIndex = 0; playerIndex < players.size; playerIndex++) {
     self setInvisibleToPlayer(players[playerIndex]);
   }
 }
-
 SpawnAndLinkFXToTag(effect, ent, tag) {
   fxEnt = spawn("script_model", ent GetTagOrigin(tag));
   fxEnt LinkTo(ent, tag);
@@ -37,7 +35,6 @@ SpawnAndLinkFXToTag(effect, ent, tag) {
   playFXOnTag(effect, fxEnt, "tag_origin");
   return fxEnt;
 }
-
 SpawnAndLinkFXToOffset(effect, ent, offsetOrigin, offsetAngles) {
   fxEnt = spawn("script_model", (0, 0, 0));
   fxEnt LinkTo(ent, "", offsetOrigin, offsetAngles);
@@ -45,7 +42,6 @@ SpawnAndLinkFXToOffset(effect, ent, offsetOrigin, offsetAngles) {
   playFXOnTag(effect, fxEnt, "tag_origin");
   return fxEnt;
 }
-
 custom_weapon_wall_prices() {
   if(!isDefined(level.zombie_include_weapons)) {
     return;
@@ -64,7 +60,6 @@ custom_weapon_wall_prices() {
     }
   }
 }
-
 pause_zombie_spawning() {
   if(!isDefined(level.spawnPauseCount)) {
     level.spawnPauseCount = 0;
@@ -72,7 +67,6 @@ pause_zombie_spawning() {
   level.spawnPauseCount++;
   flag_clear("spawn_zombies");
 }
-
 try_resume_zombie_spawning() {
   if(!isDefined(level.spawnPauseCount)) {
     level.spawnPauseCount = 0;
@@ -83,7 +77,6 @@ try_resume_zombie_spawning() {
     flag_set("spawn_zombies");
   }
 }
-
 triggerWeaponsLockerWatch(wallModel) {
   storedAmmoClip = undefined;
   storedAmmoStock = undefined;
@@ -100,7 +93,7 @@ triggerWeaponsLockerWatch(wallModel) {
     } else {
       maxWeapons = 2;
     }
-    hasWallWeapon = isDefined(weaponToGive) && who hasWeapon(weaponToGive);
+    hasWallWeapon = isDefined(weaponToGive) && who HasWeapon(weaponToGive);
     if(hasWallWeapon || (isDefined(primaries) && primaries.size < maxWeapons)) {
       storedWeapon = undefined;
       storedAmmoClip = undefined;

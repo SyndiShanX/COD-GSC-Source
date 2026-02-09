@@ -238,7 +238,7 @@ function_37507fb7(var_a276c861) {
 
 is_soul_capture(var_88206a50, ent) {
   if(isDefined(ent)) {
-    b_killed_by_player = isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor);
+    b_killed_by_player = isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor);
     var_e93788f1 = var_88206a50.e_vol;
     return (b_killed_by_player && ent istouching(var_e93788f1));
   }
@@ -316,7 +316,7 @@ function_7c1a1d9a() {
   while(!b_shattered) {
     s_result = self waittill(#"damage");
 
-    if(isplayer(s_result.attacker) && !isbot(s_result.attacker)) {
+    if(isPlayer(s_result.attacker) && !isbot(s_result.attacker)) {
       self setModel("p8_zm_ora_specimen_container_lrg_dmg");
       self playSound(#"hash_4284a1b7bc4ce7df");
       level exploder::kill_exploder("fxexp_spleen_idle");

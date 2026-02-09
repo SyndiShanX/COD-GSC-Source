@@ -832,14 +832,14 @@ func_129FA() {
     self.wasdamaged = 1;
     self.var_4D49 = 0;
     var_10 = var_0;
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
       if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
         var_10 = var_0 * level.armorpiercingmod;
       }
     }
 
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
     }
 
@@ -873,7 +873,7 @@ func_129FA() {
 
     self.var_E1 = self.var_E1 + var_10;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
+      if(isPlayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_9, 100);
         var_1 notify("destroyed_killstreak");
       }

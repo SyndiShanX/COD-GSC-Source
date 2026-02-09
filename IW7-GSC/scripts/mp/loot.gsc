@@ -21,7 +21,7 @@ init() {
 }
 
 getpassivesforweapon(var_0) {
-  if(isplayer(self) && weaponhasprestigenuke(var_0)) {
+  if(isPlayer(self) && weaponhasprestigenuke(var_0)) {
     return ["passive_nuke"];
   }
 

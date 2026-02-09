@@ -19,7 +19,6 @@ _id_44F6() {
       self._id_44F9 = self.currentnode;
     } else {
       self._id_44F9 = undefined;
-
     }
     self._id_44F7 = "none";
   }
@@ -103,7 +102,6 @@ _id_44FB(var_0) {
   if(isDefined(var_0._id_2057)) {
     if(isDefined(self._id_290B)) {
       self._id_290B[var_0._id_2057] = 1;
-
     }
     self notify("vehicle_flag_arrived", var_0._id_2057);
     common_scripts\utility::flag_set(var_0._id_2057);
@@ -111,16 +109,13 @@ _id_44FB(var_0) {
 
   if(isDefined(var_0._id_2058)) {
     maps\_utility::_id_13DC(var_0._id_2058);
-
   }
   if(isDefined(var_0._id_293F)) {
     maps\_utility::_id_13DE(var_0._id_293F);
-
   }
   if(isDefined(var_0._id_2059)) {
     if(isDefined(self._id_290B)) {
       self._id_290B[var_0._id_2059] = 0;
-
     }
     common_scripts\utility::flag_clear(var_0._id_2059);
   }
@@ -128,15 +123,12 @@ _id_44FB(var_0) {
   if(isDefined(var_0.script_noteworthy)) {
     if(var_0.script_noteworthy == "kill") {
       maps\_vehicle::_id_2A11();
-
     }
     if(var_0.script_noteworthy == "godon") {
       maps\_vehicle::_id_2A12();
-
     }
     if(var_0.script_noteworthy == "godoff") {
       maps\_vehicle::_id_2A13();
-
     }
     if(var_0.script_noteworthy == "deleteme") {
       level thread maps\_utility::_id_1E93(self);
@@ -146,23 +138,18 @@ _id_44FB(var_0) {
 
   if(isDefined(var_0._id_2940)) {
     self._id_2940 = var_0._id_2940;
-
   }
   if(isDefined(var_0._id_2941)) {
     self._id_2941 = var_0._id_2941;
-
   }
   if(isDefined(var_0._id_2942)) {
     self._id_2942 = var_0._id_2942;
-
   }
   if(isDefined(var_0.script_team)) {
     self.script_team = var_0.script_team;
-
   }
   if(isDefined(var_0._id_2943)) {
     self notify("turning", var_0._id_2943);
-
   }
   if(isDefined(var_0._id_2944)) {
     if(var_0._id_2944 == 0) {
@@ -180,7 +167,6 @@ _id_44FC(var_0) {
 _id_44FD(var_0, var_1, var_2) {
   if(var_0 > self.veh_speed && var_0 < var_1) {
     var_1 = var_0;
-
   }
   self._id_44FE = var_0;
   self._id_44FF = var_1;
@@ -191,11 +177,9 @@ _id_44FD(var_0, var_1, var_2) {
 _id_4501() {
   if(isDefined(self._id_44FE)) {
     self._id_44FE = undefined;
-
   }
   if(isDefined(self._id_44FF)) {
     self._id_44FF = undefined;
-
   }
   if(isDefined(self._id_4500)) {
     self._id_4500 = undefined;
@@ -205,11 +189,9 @@ _id_4501() {
 _id_4502(var_0) {
   while(var_0 < -180) {
     var_0 = var_0 + 360;
-
   }
   while(var_0 > 180) {
     var_0 = var_0 - 360;
-
   }
   self._id_4503 = var_0;
   self settargetyaw(var_0);
@@ -239,7 +221,6 @@ _id_4506(var_0, var_1, var_2) {
 _id_4508(var_0) {
   if(isDefined(var_0.spawnflags) && var_0.spawnflags & 2) {
     return 1;
-
   }
   return 0;
 }
@@ -267,11 +248,9 @@ _id_4509(var_0, var_1) {
 
   if(isDefined(self._id_44F8.lookahead)) {
     var_6 = self._id_44F8.lookahead;
-
   }
   if(isDefined(self._id_44F8.radius)) {
     var_7 = self._id_44F8.radius;
-
   }
   var_8 = isDefined(self._id_44F8._id_295D) && self._id_44F8._id_295D;
   var_9 = isDefined(self._id_44F8._id_2954);
@@ -282,7 +261,6 @@ _id_4509(var_0, var_1) {
     var_12 = self._id_44F8.angles[1];
   } else {
     var_12 = 0;
-
   }
   self vehicle_helisetai(var_0, var_3, var_4, var_5, self._id_44F8._id_2961, self._id_44F8._id_2960, var_12, var_2, var_11, var_8, var_9, var_10, var_1);
   self._id_450C = var_0;
@@ -306,21 +284,18 @@ _id_4510(var_0, var_1, var_2) {
 
   if(isDefined(self._id_44F8.target)) {
     self._id_4511 = common_scripts\utility::getstruct(self._id_44F8.target, "targetname");
-
   }
   while(isDefined(self._id_44F8)) {
     var_3 = self._id_44F8.origin;
 
     if(isDefined(self._id_295F)) {
       var_3 = (var_3[0], var_3[1], self._id_295F);
-
     }
     var_4 = length(var_3 - self.origin);
     var_5 = _id_44FA(self._id_450B, self._id_44F8, self._id_4511, self.lookahead);
 
     if(isDefined(self._id_295F)) {
       var_5 = (var_5[0], var_5[1], self._id_295F);
-
     }
     var_6 = self.origin - var_5;
     var_7 = vectornormalize(var_6);
@@ -330,14 +305,12 @@ _id_4510(var_0, var_1, var_2) {
       var_9 = var_2 + 10;
     } else {
       var_9 = vectordot(var_7, var_8);
-
     }
     if(var_4 < var_2 || var_9 < var_2) {
       _id_44FB(self._id_44F8);
 
       if(!isDefined(self._id_4511) && isDefined(self._id_44F8)) {
         _id_4509(self._id_44F8.origin, 1);
-
       }
       self._id_450B = self._id_44F8;
       self._id_44F8 = self._id_4511;
@@ -345,7 +318,6 @@ _id_4510(var_0, var_1, var_2) {
 
       if(isDefined(self._id_44F8) && isDefined(self._id_44F8.target)) {
         self._id_4511 = common_scripts\utility::getstruct(self._id_44F8.target, "targetname");
-
       }
       continue;
     }
@@ -358,7 +330,6 @@ _id_4510(var_0, var_1, var_2) {
 
   if(isDefined(self._id_450B) && isDefined(self._id_450B._id_294F)) {
     thread maps\_vehicle::_id_269D();
-
   }
   self notify("reached_dynamic_path_end");
 
@@ -406,7 +377,6 @@ _id_4513(var_0, var_1, var_2, var_3, var_4) {
     var_8 = self.origin - self._id_44F8.origin;
   } else {
     var_8 = self vehicle_getvelocity();
-
   }
   var_8 = vectornormalize(var_8);
   var_9 = undefined;
@@ -437,7 +407,6 @@ _id_4513(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_9)) {
     var_9 = var_11;
-
   }
   self._id_4507 = var_9.targetname;
 
@@ -536,7 +505,6 @@ _id_4519(var_0, var_1, var_2, var_3) {
         var_25 = 0.95;
       } else {
         var_25 = 0.75;
-
       }
       if(var_14 > var_20) {
         var_24 = var_25 * var_20 / var_14;
@@ -559,7 +527,6 @@ _id_4519(var_0, var_1, var_2, var_3) {
         var_27 = self vehicle_getvelocity();
       } else {
         var_27 = var_0 vehicle_getvelocity();
-
       }
       var_28 = length(var_27);
 
@@ -636,7 +603,6 @@ _id_451A(var_0, var_1, var_2, var_3) {
         var_29 = 0.95;
       } else {
         var_29 = 0.75;
-
       }
       if(var_18 > var_24) {
         var_28 = var_29 * var_24 / var_18;
@@ -658,7 +624,6 @@ _id_451A(var_0, var_1, var_2, var_3) {
         var_31 = self vehicle_getvelocity();
       } else {
         var_31 = var_0 vehicle_getvelocity();
-
       }
       var_32 = length(var_31);
 
@@ -776,7 +741,6 @@ _id_451F(var_0, var_1, var_2) {
 
   if(isDefined(self._id_44F8.target)) {
     self._id_4511 = common_scripts\utility::getstruct(self._id_44F8.target, "targetname");
-
   }
   while(isDefined(self._id_44F8)) {
     var_4 = _id_451D(self.origin, self._id_4520, self._id_450B, self._id_44F8, self._id_4511);
@@ -795,11 +759,9 @@ _id_451F(var_0, var_1, var_2) {
 
     if(isDefined(self._id_44F8.lookahead)) {
       var_1 = self._id_44F8.lookahead;
-
     }
     if(isDefined(self._id_44F8.radius)) {
       var_2 = self._id_44F8.radius;
-
     }
     var_9 = isDefined(self._id_44F8._id_295D) && self._id_44F8._id_295D;
     var_10 = isDefined(self._id_44F8._id_2954);
@@ -811,7 +773,6 @@ _id_451F(var_0, var_1, var_2) {
       var_14 = self._id_44F8.angles[1];
     } else {
       var_14 = 0;
-
     }
     var_15 = _id_451E(var_4);
     var_16 = 0;
@@ -826,7 +787,6 @@ _id_451F(var_0, var_1, var_2) {
 
       if(var_20 > 1.0) {
         var_20 = 1.0;
-
       }
       var_21 = _id_451B(var_4, var_20);
       _id_4527(var_21);
@@ -848,7 +808,6 @@ _id_451F(var_0, var_1, var_2) {
       self._id_4520 = self._id_450B.origin;
     } else {
       self._id_4520 = var_3;
-
     }
     self._id_450B = self._id_44F8;
     self._id_44F8 = self._id_4511;
@@ -951,14 +910,12 @@ _id_4530() {
 
     if(var_2 < 0) {
       var_3 = (1, 1, 0);
-
     }
     for(var_4 = 0; var_4 < self._id_452F.size; var_4++) {
       if(var_4 & 1) {
         var_3 = (1, 0, 0);
       } else {
         var_3 = (0, 0, 1);
-
       }
       var_5 = self._id_452F[var_4];
       var_2 = var_5;

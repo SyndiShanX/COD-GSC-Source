@@ -179,7 +179,7 @@ enemy_watcher() {
       wait(0.2);
     }
 
-    if(isDefined(self.enemy) && IsPlayer(self.enemy) && isDefined(self.enemy.tagsCarried) && self.enemy.tagsCarried >= 3 && self BotCanSeeEntity(self.enemy) && Distance(self.origin, self.enemy.origin) <= MAX_MELEE_CHARGE_DIST) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy) && isDefined(self.enemy.tagsCarried) && self.enemy.tagsCarried >= 3 && self BotCanSeeEntity(self.enemy) && Distance(self.origin, self.enemy.origin) <= MAX_MELEE_CHARGE_DIST) {
       self BotSetDifficultySetting("meleeChargeDist", MAX_MELEE_CHARGE_DIST);
       self BotSetFlag("prefer_melee", true);
     } else {

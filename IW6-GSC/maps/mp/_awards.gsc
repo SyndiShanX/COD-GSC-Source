@@ -171,7 +171,6 @@ initAwards() {
     initStatAward("shotgundeaths", 0, ::highestWins);
     initStatAward("shielddeaths", 0, ::highestWins);
     initStatAward("flankdeaths", 0, ::highestWins);
-
   }
 }
 
@@ -431,9 +430,7 @@ assignAwards() {
       (i < awardCount && i < 3); i++) {
       award = player getCommonPlayerData("round", "awards", i, "award");
       value = player getCommonPlayerData("round", "awards", i, "value");
-
     }
-
   }
 
 }
@@ -447,7 +444,6 @@ assignAward(ref) {
     foreach(player in level.players) {
       if(player.clientid == winner) {
         player giveAward(ref);
-
       }
     }
   }
@@ -844,7 +840,7 @@ monitorExplosionsSurvived() {
   for(;;) {
     self waittill("survived_explosion", attacker);
 
-    if(isDefined(attacker) && IsPlayer(attacker) && self == attacker) {
+    if(isDefined(attacker) && isPlayer(attacker) && self == attacker) {
       continue;
     }
     self incPlayerStat("explosionssurvived", 1);

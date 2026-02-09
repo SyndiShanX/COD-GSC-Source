@@ -8,8 +8,8 @@
 #namespace animation;
 
 autoexec function_c3c9d0e5() {
-  setdvar(#"anim_debug", 0);
-  setdvar(#"anim_debug_pause", 0);
+  setDvar(#"anim_debug", 0);
+  setDvar(#"anim_debug_pause", 0);
 
   while(true) {
     b_anim_debug = getdvarint(#"anim_debug", 0) || getdvarint(#"anim_debug_pause", 0);

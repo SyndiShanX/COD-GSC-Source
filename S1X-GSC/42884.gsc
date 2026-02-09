@@ -6,7 +6,7 @@
 init() {}
 
 updatedamagefeedback(var_0, var_1) {
-  if(!isplayer(self) || !isDefined(var_0)) {
+  if(!isPlayer(self) || !isDefined(var_0)) {
     return;
   }
   switch (var_0) {

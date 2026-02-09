@@ -41,7 +41,6 @@ class czm_game_over: cluielem {
     cluielem::add_clientfield("_state", 1, 1, "int");
     cluielem::add_clientfield("rounds", 1, 8, "int");
   }
-
 }
 
 register(uid) {

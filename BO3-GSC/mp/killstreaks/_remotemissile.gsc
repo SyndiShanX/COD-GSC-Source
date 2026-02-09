@@ -422,7 +422,7 @@ function getvalidtargets(rocket, trace, max_targets) {
   pixbeginevent("remotemissile_getVTs_enemies");
   enemies = self getenemies();
   foreach(player in enemies) {
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(player.ignoreme === 1) {
@@ -569,7 +569,7 @@ function targeting_hud_think(rocket) {
         if(isDefined(target) == 0) {
           continue;
         }
-        if(isplayer(target)) {
+        if(isPlayer(target)) {
           if(isalive(target)) {
             index = target.clientid;
             assert(isDefined(index));

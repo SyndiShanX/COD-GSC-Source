@@ -77,7 +77,7 @@ function function_677ed44f(weapon) {
     target thread _corpsewatcher();
     target ai::set_behavior_attribute("robot_lights", 1);
     attacker thread challenges::function_96ed590f("cybercom_uses_control");
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       itemindex = getitemindexfromref("cybercom_ravagecore");
       if(isDefined(itemindex)) {
         self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", 1);

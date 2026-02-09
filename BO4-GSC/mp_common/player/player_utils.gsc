@@ -23,7 +23,7 @@ figure_out_friendly_fire(victim, attacker) {
     return 2;
   }
 
-  if(level.friendlyfire == 4 && isplayer(attacker)) {
+  if(level.friendlyfire == 4 && isPlayer(attacker)) {
     if(attacker.pers[# "teamkills_nostats"] < level.var_fe3ff9c1) {
       return 1;
     } else {

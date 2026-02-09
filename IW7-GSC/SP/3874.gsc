@@ -52,7 +52,7 @@ func_9B26(var_0) {
       var_5 = vectornormalize(self.objective_playermask_hidefromall - self.origin);
       var_6 = anglesToForward(self.angles);
       var_7 = vectornormalize(var_1 - self.origin);
-      if(isplayer(var_0.issplitscreen) && !isplayer(self.var_10E6D.var_9B1D)) {
+      if(isPlayer(var_0.issplitscreen) && !isPlayer(self.var_10E6D.var_9B1D)) {
         var_4 = 1;
       } else if(vectordot(var_5, var_7) < 0 && vectordot(var_6, var_7) < 0) {
         var_4 = 1;
@@ -103,7 +103,7 @@ func_9B2C() {
 }
 
 func_9B2B(var_0) {
-  if(isplayer(self.var_10E6D.var_9B1D) && !isplayer(var_0.issplitscreen)) {
+  if(isPlayer(self.var_10E6D.var_9B1D) && !isPlayer(var_0.issplitscreen)) {
     return 1;
   }
 

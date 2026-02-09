@@ -100,7 +100,7 @@ function function_677ed44f(weapon) {
         target clientfield::set("arch_actor_char", 1);
         target thread function_71a4f1d5();
       }
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         itemindex = getitemindexfromref("cybercom_es_strike");
         if(isDefined(itemindex)) {
           self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
@@ -120,7 +120,7 @@ function ai_activateelectrostaticstrike(upgraded = 0) {
 }
 
 function aielectrostatickillmonitor(statusoverride) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self endon("disconnect");
   } else {
     self endon("death");

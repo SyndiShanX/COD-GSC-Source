@@ -31,7 +31,7 @@ function init() {
   level.killstreakicons["killstreak_m220_tow_drop"] = "hud_ks_tv_guided_marker";
   level.killstreakicons["killstreak_m220_tow"] = "hud_ks_tv_guided_missile";
   callback::on_spawned(&on_player_spawned);
-  setdvar("scr_HeldKillstreak_Penalty", 0);
+  setDvar("scr_HeldKillstreak_Penalty", 0);
 }
 
 function on_player_spawned() {

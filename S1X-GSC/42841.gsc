@@ -271,7 +271,7 @@ minedamagemonitor() {
   for(;;) {
     self waittill("damage", var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(!maps\mp\gametypes\_weapons::friendlyfirecheck(self.owner, var_0)) {
@@ -303,7 +303,7 @@ minedamagemonitor() {
 
   self.wasdamaged = 1;
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("bouncing_betty");
   }
 
@@ -472,7 +472,7 @@ mineproximitytrigger(var_0) {
   self rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   thread playspinnerfx();
 
-  if(isplayer(var_2) && var_2 maps\mp\_utility::_hasperk("specialty_class_engineer")) {
+  if(isPlayer(var_2) && var_2 maps\mp\_utility::_hasperk("specialty_class_engineer")) {
     var_2 notify("triggered_mine");
     wait 3;
   } else {

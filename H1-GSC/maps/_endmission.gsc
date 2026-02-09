@@ -51,7 +51,7 @@ _setmissiondvar(var_0, var_1) {
   if(maps\_cheat::is_cheating() || common_scripts\utility::flag("has_cheated")) {
     return;
   }
-  if(getdvar("mis_cheat") == "1")
+  if(getDvar("mis_cheat") == "1")
     return;
 }
 
@@ -68,8 +68,8 @@ _nextmission() {
 
   var_0 = undefined;
   setsaveddvar("ui_nextMission", "1");
-  setdvar("ui_showPopup", "0");
-  setdvar("ui_popupString", "");
+  setDvar("ui_showPopup", "0");
+  setDvar("ui_popupString", "");
   game["previous_map"] = level.script;
   maps\_gameskill::auto_adust_zone_complete("aa_main_" + level.script);
   var_0 = level.missionsettings getlevelindex(level.script);
@@ -148,7 +148,7 @@ _nextmission() {
     }
 
     if(level.script == "jeepride") {
-      setdvar("credits_load", "1");
+      setDvar("credits_load", "1");
       changelevel("simplecredits", level.missionsettings getkeepweapons(var_0));
       return;
     }
@@ -274,7 +274,7 @@ _sethighestmissionifnotcheating(var_0) {
   if(maps\_cheat::is_cheating() || common_scripts\utility::flag("has_cheated")) {
     return;
   }
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player setlocalplayerprofiledata("highestMission", var_0);
@@ -284,7 +284,7 @@ _setmissiondiffstringifnotcheating(var_0) {
   if(maps\_cheat::is_cheating() || common_scripts\utility::flag("has_cheated")) {
     return;
   }
-  if(getdvar("mis_cheat") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   level.player setlocalplayerprofiledata("missionHighestDifficulty", var_0);

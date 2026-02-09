@@ -26,14 +26,12 @@ hack_perks() {
   }
   level._solo_revive_machine_expire_func = ::solo_revive_expire_func;
 }
-
 solo_revive_expire_func() {
   if(isDefined(self.hackable)) {
     maps\_zombiemode_equip_hacker::deregister_hackable_struct(self.hackable);
     self.hackable = undefined;
   }
 }
-
 perk_hack_qualifier(player) {
   if(isDefined(player._retain_perks)) {
     return false;
@@ -43,7 +41,6 @@ perk_hack_qualifier(player) {
   }
   return false;
 }
-
 perk_hack(hacker) {
   if(flag("solo_game") && self.perk.script_noteworthy == "specialty_quickrevive") {
     hacker.lives--;

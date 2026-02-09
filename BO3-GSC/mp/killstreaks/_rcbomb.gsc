@@ -113,7 +113,7 @@ function configureteampost(owner, ishacked) {
 }
 
 function activatercbomb(hardpointtype) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   if(!player killstreakrules::iskillstreakallowed(hardpointtype, player.team)) {
     return false;
@@ -327,7 +327,7 @@ function explode(attacker, weapon) {
   self vehicle::toggle_sounds(0);
   self vehicle::lights_off();
   self playrumbleonentity("rcbomb_explosion");
-  if(!self.abandoned && attacker != self.owner && isplayer(attacker)) {
+  if(!self.abandoned && attacker != self.owner && isPlayer(attacker)) {
     attacker challenges::destroyrcbomb(weapon);
     if(self.owner util::isenemyplayer(attacker)) {
       scoreevents::processscoreevent("destroyed_hover_rcxd", attacker, self.owner, weapon);
@@ -394,7 +394,7 @@ function calculatespawnorigin(origin, angles) {
     startpoint = startpoint + (0, 0, startheight);
     mask = 1 | 2;
     trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
-    if(isDefined(trace["entity"]) && isplayer(trace["entity"])) {
+    if(isDefined(trace["entity"]) && isPlayer(trace["entity"])) {
       wheelcounts[i] = 0;
       continue;
     }

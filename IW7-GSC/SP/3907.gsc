@@ -4,7 +4,7 @@
 *********************************************/
 
 func_1000F() {
-  return isDefined(self.enemy) && isplayer(self.enemy) && self cansee(self.enemy);
+  return isDefined(self.enemy) && isPlayer(self.enemy) && self cansee(self.enemy);
 }
 
 func_6A70(var_0) {

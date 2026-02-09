@@ -21,9 +21,9 @@ function main() {
   load::main();
   compass::setupminimap("compass_map_mp_apartments");
   mp_apartments_amb::main();
-  setdvar("compassmaxrange", "2100");
-  setdvar("phys_buoyancy", 1);
-  setdvar("phys_ragdoll_buoyancy", 1);
+  setDvar("compassmaxrange", "2100");
+  setDvar("phys_buoyancy", 1);
+  setDvar("phys_ragdoll_buoyancy", 1);
   spawncollision("collision_clip_wall_256x256x10", "collider", (-944.403, -907.351, 1475.01), (0, 90, -90));
   board1 = spawn("script_model", (-895.394, -903.731, 1420.55));
   board1.angles = vectorscale((0, 0, -1), 90);

@@ -50,7 +50,7 @@ func_E3C6(var_0, var_1, var_2, var_3, var_4) {
       _setsaveddvar("bg_cinematicFullScreen", "1");
       _setsaveddvar("bg_cinematicCanPause", "1");
       var_6 = level.var_B8D2.var_ABFA[scripts\sp\endmission::func_7F6B(var_2)].var_2AD3;
-      setdvar("last_transition_movie", var_6);
+      setDvar("last_transition_movie", var_6);
       _cinematicingame(var_6, 0, 1);
       _changelevel(var_2);
     } else {

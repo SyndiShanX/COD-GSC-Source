@@ -1158,9 +1158,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       if(getdebugdvar("debug_noanimscripts") == "") {
         setDvar("debug_noanimscripts", "off");
       } else {
-      if(getdebugdvar("debug_noanimscripts") == "on") {
-        anim.defaultException = animscripts\init::infiniteLoop;
-      }
+        if(getdebugdvar("debug_noanimscripts") == "on") {
+          anim.defaultException = animscripts\init::infiniteLoop;
+        }
       }
       if(getdebugdvar("debug_grenadehand") == "") {
         setDvar("debug_grenadehand", "off");

@@ -155,10 +155,10 @@ event_handler[gametype_init] main(eventstruct) {
   globallogic_spawn::addsupportedspawnpointtype("tdm");
   function_aaa24662();
   level.var_bde3d03 = &function_b777ff94;
-  setdvar(#"g_allowlaststandforactiveclients", 1);
-  setdvar(#"hash_7036719f41a78d54", 50);
-  setdvar(#"hash_6d545f685fa213dd", 3);
-  setdvar(#"scr_deleteexplosivesonspawn", 0);
+  setDvar(#"g_allowlaststandforactiveclients", 1);
+  setDvar(#"hash_7036719f41a78d54", 50);
+  setDvar(#"hash_6d545f685fa213dd", 3);
+  setDvar(#"scr_deleteexplosivesonspawn", 0);
   level.wound_disabled = 1;
   level.var_b219667f = 1;
   level thread function_23600e7d();
@@ -255,7 +255,7 @@ function_c2a75696() {
         break;
     }
 
-    setdvar(#"warzone_devgui_cmd", "<dev string:x38>");
+    setDvar(#"warzone_devgui_cmd", "<dev string:x38>");
   }
 }
 
@@ -490,7 +490,7 @@ on_start_game_type() {
   voice_events::register_handler(#"warsupplydropincoming", &function_8076d591);
   voice_events::register_handler(#"warteamwon", &function_8076d591);
   voice_events::register_handler(#"warteamlost", &function_8076d591);
-  setdvar(#"hash_2b903fa2368b18c9", 0);
+  setDvar(#"hash_2b903fa2368b18c9", 0);
 
   if(isDefined(level.var_4cea2bec) && level.var_4cea2bec) {
     level thread function_6ee52dd0(level.var_6c900548, level.var_e16a689f);
@@ -1267,7 +1267,7 @@ function_c1a417ee(params) {
     smeansofdeath = params.laststandparams.smeansofdeath;
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     itemindex = getitemindexfromref(weapon.name);
 
     if(itemindex == 0) {
@@ -1352,7 +1352,7 @@ player_killed(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitlo
     }
   }
 
-  if(isplayer(attacker) && self function_c14ef1aa(attacker)) {
+  if(isPlayer(attacker) && self function_c14ef1aa(attacker)) {
     encounterid = self getxuid(1) + attacker getxuid(1);
     self function_b096092b(encounterid);
     attacker function_b096092b(encounterid);
@@ -1609,13 +1609,13 @@ function_c14f7557() {
 }
 
 function_2f66bc37() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self setactionslot(3, "flourish_callouts");
   self setactionslot(4, "sprays_boasts");
 }
 
 function_cb4b48d5(var_80427091 = 1) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(var_80427091) {
     self setactionslot(3, "");
@@ -1625,13 +1625,13 @@ function_cb4b48d5(var_80427091 = 1) {
 }
 
 event_handler[enter_vehicle] codecallback_entervehicle(eventstruct) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self function_cb4b48d5(0);
   }
 }
 
 event_handler[exit_vehicle] codecallback_exitvehicle(eventstruct) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self function_2f66bc37();
   }
 }
@@ -1743,7 +1743,7 @@ function_aaa24662() {
 }
 
 function_1e150a0b(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     assert(0);
     return;
   }
@@ -1774,7 +1774,7 @@ function_1e150a0b(player) {
 }
 
 function_293cd859(ent) {
-  if(isplayer(ent)) {
+  if(isPlayer(ent)) {
     data = {
       #pos_x: ent.origin[0], #pos_y: ent.origin[1], #pos_z: ent.origin[2], #type: # "player"};
     function_92d1707f(#"hash_5820ed7a498888c4", data);
@@ -1793,7 +1793,7 @@ function_3c8be2d2(trigger_struct) {
   usetrigger = self;
   activator = trigger_struct.activator;
 
-  if(isplayer(activator)) {
+  if(isPlayer(activator)) {
     iprintlnbold("<dev string:x677>" + activator.origin[0] + "<dev string:x69e>" + activator.origin[1] + "<dev string:x69e>" + activator.origin[2] + "<dev string:x6a3>");
 
     function_293cd859(activator);
@@ -1893,7 +1893,7 @@ function_b777ff94(entity) {
   players = [];
   var_9914886a = 0;
 
-  if(isplayer(entity) && entity isinvehicle()) {
+  if(isPlayer(entity) && entity isinvehicle()) {
     vehicle = entity getvehicleoccupied();
     players = vehicle getvehoccupants();
 
@@ -1914,7 +1914,7 @@ function_b777ff94(entity) {
     validpoint = function_c1471c7c(validpoint);
     toangles = vectortoangles(mapcenter - player.origin);
 
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       player dodamage(player.health, player.origin);
       continue;
     }

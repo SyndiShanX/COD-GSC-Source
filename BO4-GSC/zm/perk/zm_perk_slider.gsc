@@ -259,7 +259,7 @@ function_2772480a() {
 function_9e712df(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
   if(self hasperk(#"specialty_phdflopper")) {
     if(zm_utility::is_explosive_damage(smeansofdeath)) {
-      if(isplayer(eattacker) || isplayer(einflictor)) {
+      if(isPlayer(eattacker) || isPlayer(einflictor)) {
         return 0;
       }
 

@@ -18,7 +18,7 @@ monitor_exocrossbow_launch() {
   level._effect["exocrossbow_sticky_explosion"] = LoadFx("vfx/explosion/frag_grenade_default");
   level._effect["exocrossbow_sticky_blinking"] = LoadFx("vfx/lights/light_beacon_crossbow");
 
-  Assert(IsPlayer(self) || IsAgent(self));
+  Assert(isPlayer(self) || IsAgent(self));
 
   while(true) {
     self waittill("missile_fire", projectile, weaponName);

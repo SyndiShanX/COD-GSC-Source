@@ -400,7 +400,7 @@ exchange_player_fires() {
 //}
 
 should_break_zoom_hint() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(!flag("player_is_on_turret"))
     return true;

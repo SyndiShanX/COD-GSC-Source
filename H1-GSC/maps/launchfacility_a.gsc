@@ -16,19 +16,19 @@ dead_script() {
 }
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
 
-  if(getdvar("debug_bmp") == "")
-    setdvar("debug_bmp", "0");
+  if(getDvar("debug_bmp") == "")
+    setDvar("debug_bmp", "0");
 
-  if(getdvar("debug_launch") == "")
-    setdvar("debug_launch", "0");
+  if(getDvar("debug_launch") == "")
+    setDvar("debug_launch", "0");
 
   initprecache();
   createthreatbiasgroup("player");
@@ -580,7 +580,7 @@ hind_intro_think() {
   var_1 = spawn("script_origin", level.ehindintro gettagorigin(var_0));
   var_1 linkto(level.ehindintro, var_0);
 
-  if(getdvar("debug_launch") == "1")
+  if(getDvar("debug_launch") == "1")
     var_1 thread maps\jake_tools::print3dthread("TARGET");
 
   wait 3.5;
@@ -826,7 +826,7 @@ gate_squad_advance_no_bmp() {
 gate_left_approach() {
   common_scripts\utility::flag_wait("reached_left_gate");
 
-  if(getdvar("debug_bmp") == "1")
+  if(getDvar("debug_bmp") == "1")
     return;
 }
 
@@ -860,7 +860,7 @@ gate_player_participation() {
   wait 0.5;
   common_scripts\utility::flag_wait("player_reached_kill_max");
 
-  if(getdvar("debug_bmp") == "1") {}
+  if(getDvar("debug_bmp") == "1") {}
 
   var_0 = getEntArray("reached_right_gate_additional", "targetname");
   var_1 = getEntArray("reached_right_gate", "targetname");
@@ -1980,7 +1980,7 @@ hind_tree_explosion() {
   for(;;) {
     self waittill("damage", var_1, var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       continue;
     }
     var_3 = randomintrange(1, 4);
@@ -1994,7 +1994,7 @@ hind_tree_explosion() {
 hind_tree_fx(var_0) {
   self waittill("damage", var_1, var_2);
 
-  if(isplayer(var_2)) {
+  if(isPlayer(var_2)) {
     return;
   }
   thread hind_trees_fall();
@@ -2368,7 +2368,7 @@ lid_kill(var_0, var_1) {
 
     if(level.player istouching(self.trigger)) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", &"LAUNCHFACILITY_A_DEADQUOTE_KILLED_BY_LID");
+      setDvar("ui_deadquote", &"LAUNCHFACILITY_A_DEADQUOTE_KILLED_BY_LID");
       level.player kill();
     }
   }
@@ -2543,7 +2543,7 @@ truck_death_think() {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(isDefined(var_2) && !isplayer(var_2)) {
+    if(isDefined(var_2) && !isPlayer(var_2)) {
       if(!common_scripts\utility::flag("enemy_can_blow_up_truck"))
         continue;
     }
@@ -2621,7 +2621,7 @@ vehicle_damage_hints() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     switch (tolower(var_4)) {
@@ -2645,7 +2645,7 @@ vehicle_death_think() {
   for(;;) {
     self waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
     if(!isDefined(var_4)) {
@@ -2785,7 +2785,7 @@ vehicle_turret_think() {
   var_0 = undefined;
   var_1 = undefined;
 
-  if(getdvar("debug_bmp") == "1")
+  if(getDvar("debug_bmp") == "1")
     thread vehicle_debug();
 
   for(;;) {
@@ -2793,10 +2793,10 @@ vehicle_turret_think() {
 
     if(!isDefined(var_0))
       var_0 = vehicle_get_target_player_only();
-    else if(isDefined(var_0) && !isplayer(var_0))
+    else if(isDefined(var_0) && !isPlayer(var_0))
       var_0 = vehicle_get_target_player_only();
 
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       var_2 = 0;
       var_2 = sighttracepassed(self.origin, level.player.origin + (0, 0, 150), 0, self);
 
@@ -2809,7 +2809,7 @@ vehicle_turret_think() {
       var_3 = var_0.origin + (0, 0, 32);
       self setturrettargetvec(var_3);
 
-      if(getdvar("debug_bmp") == "1")
+      if(getDvar("debug_bmp") == "1")
         thread maps\_utility::draw_line_until_notify(self.origin + (0, 0, 32), var_3, 1, 0, 0, self, "stop_drawing_line");
 
       var_4 = randomfloatrange(2, 3);
@@ -2837,7 +2837,7 @@ vehicle_turret_think() {
       }
     }
 
-    if(getdvar("debug_bmp") == "1")
+    if(getDvar("debug_bmp") == "1")
       self notify("stop_drawing_line");
   }
 }
@@ -2872,7 +2872,7 @@ vehicle_c4_think() {
   self.rearc4location linkto(self, "rear_hatch_open_jnt_left", var_1, var_2);
   self.frontc4location linkto(self, "tag_origin", var_3, var_4);
 
-  if(getdvar("debug_launch") == "1") {
+  if(getDvar("debug_launch") == "1") {
     self.frontc4location thread maps\jake_tools::print3dthread("Front");
     self.rearc4location thread maps\jake_tools::print3dthread("Back");
   }
@@ -3136,28 +3136,28 @@ ai_allies_think() {
       case "r":
         level.team01 = common_scripts\utility::array_add(level.team01, self);
 
-        if(getdvar("debug_launch") == "1")
+        if(getDvar("debug_launch") == "1")
           thread maps\jake_tools::print3dthread("Team 01");
 
         break;
       case "o":
         level.team01 = common_scripts\utility::array_add(level.team01, self);
 
-        if(getdvar("debug_launch") == "1")
+        if(getDvar("debug_launch") == "1")
           thread maps\jake_tools::print3dthread("Wingman");
 
         break;
       case "y":
         level.team02 = common_scripts\utility::array_add(level.team02, self);
 
-        if(getdvar("debug_launch") == "1")
+        if(getDvar("debug_launch") == "1")
           thread maps\jake_tools::print3dthread("Team 02");
 
         break;
       case "g":
         level.team03 = common_scripts\utility::array_add(level.team03, self);
 
-        if(getdvar("debug_launch") == "1")
+        if(getDvar("debug_launch") == "1")
           thread maps\jake_tools::print3dthread("Team 03");
 
         break;
@@ -3232,7 +3232,7 @@ ai_axis_sniper_fodder() {
     }
     var_1 = self gettagorigin("TAG_EYE");
 
-    if(getdvar("debug_launch") == "1")
+    if(getDvar("debug_launch") == "1")
       thread maps\jake_tools::print3dthread("target");
 
     for(var_4 = 0; var_4 < level.asniper_orgs.size; var_4++) {
@@ -3261,7 +3261,7 @@ sniper_execute(var_0, var_1) {
   level notify("sniper_target_updated");
   level.sniperkills++;
 
-  if(getdvar("debug_launch") == "1") {
+  if(getDvar("debug_launch") == "1") {
     level notify("stop_drawing_line");
     thread maps\_utility::draw_line_until_notify(var_1.origin, var_0, 1, 0, 0, level, "stop_drawing_line");
   }
@@ -3307,10 +3307,10 @@ ai_axis_death() {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     level.axiskilledbyplayer++;
 
-    if(getdvar("debug_launch") == "1")
+    if(getDvar("debug_launch") == "1")
       return;
   }
 }

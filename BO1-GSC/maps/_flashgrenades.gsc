@@ -6,26 +6,22 @@
 main() {
   precacheShellshock("flashbang");
 }
-
 startMonitoringFlash() {
   self thread monitorFlash();
 }
-
 stopMonitoringFlash(disconnected) {
   self notify("stop_monitoring_flash");
 }
-
 flashRumbleLoop(duration) {
   self endon("stop_monitoring_flash");
   self endon("flash_rumble_loop");
   self notify("flash_rumble_loop");
   goalTime = getTime() + duration * 1000;
   while(getTime() < goalTime) {
-    self playRumbleOnEntity("damage_heavy");
+    self PlayRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }
-
 monitorFlash() {
   self endon("disconnect");
   self.flashEndTime = 0;
@@ -59,7 +55,6 @@ monitorFlash() {
     }
   }
 }
-
 applyFlash(duration, rumbleduration) {
   if(!isDefined(self.flashDuration) || duration > self.flashDuration) {
     self.flashDuration = duration;
@@ -78,7 +73,6 @@ applyFlash(duration, rumbleduration) {
   self.flashDuration = undefined;
   self.flashRumbleDuration = undefined;
 }
-
 isFlashbanged() {
   return isDefined(self.flashEndTime) && gettime() < self.flashEndTime;
 }

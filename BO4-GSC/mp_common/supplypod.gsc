@@ -164,7 +164,7 @@ function_49ef5263() {
 }
 
 hintobjectivehint_updat(weapon) {
-  if(!isDefined(self) || !isplayer(self) || !self function_49ef5263() || !isDefined(weapon) || weapon.name != "launcher_standard_t8") {
+  if(!isDefined(self) || !isPlayer(self) || !self function_49ef5263() || !isDefined(weapon) || weapon.name != "launcher_standard_t8") {
     return;
   }
 
@@ -363,7 +363,7 @@ function_46d74bb7(var_70150641) {
 }
 
 supplypod_on(slot, playerweapon) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self notify(#"start_killstreak", {
     #weapon: playerweapon
   });
@@ -564,7 +564,7 @@ watchfordamage() {
   while(true) {
     waitresult = self waittill(#"damage");
 
-    if((isDefined(level.var_934fb97.bundle.var_4f845dc4) ? level.var_934fb97.bundle.var_4f845dc4 : 0) && isDefined(waitresult.attacker) && isplayer(waitresult.attacker)) {
+    if((isDefined(level.var_934fb97.bundle.var_4f845dc4) ? level.var_934fb97.bundle.var_4f845dc4 : 0) && isDefined(waitresult.attacker) && isPlayer(waitresult.attacker)) {
       healthprct = supplypod.health / startinghealth;
       objective_setprogress(supplypod.var_134eefb9, healthprct);
       var_adb78fe4 = isDefined(supplypod.var_7b7607df[waitresult.attacker.clientid]);
@@ -731,7 +731,7 @@ function_a1434496(team, player, result) {
   if(isDefined(result) && result) {
     supplypod.usecount++;
 
-    if(isDefined(player) && isplayer(player)) {
+    if(isDefined(player) && isPlayer(player)) {
       if(supplypod.owner != player) {
         scoreevents::processscoreevent(#"hash_69dbfbd660f8c53e", supplypod.owner, undefined, level.var_934fb97.weapon);
         relativepos = vectornormalize(player.origin - supplypod.owner.origin);

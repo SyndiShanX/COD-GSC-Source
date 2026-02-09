@@ -279,7 +279,7 @@ kill_allies_on_next_shot() {
         self.enemy maps\_utility::die();
       }
 
-      setdvar("ui_deadquote", &"ENEMY_HQ_YOUR_ALLY_WAS_KILLED");
+      setDvar("ui_deadquote", &"ENEMY_HQ_YOUR_ALLY_WAS_KILLED");
       maps\_utility::missionfailedwrapper();
     } else
       common_scripts\utility::array_thread(level.rpg_ambush_guys, ::fake_ally_kill_me);

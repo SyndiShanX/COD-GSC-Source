@@ -143,7 +143,7 @@ fan_trap_rumble_think() {
   while(true) {
     self.rumble_trig waittill("trigger", ent);
 
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       if(!is_true(ent.fan_trap_rumble))
         self thread fan_trap_rumble(ent);
     }
@@ -179,7 +179,7 @@ fan_trap_damage(parent) {
   while(true) {
     self waittill("trigger", ent);
 
-    if(isplayer(ent))
+    if(isPlayer(ent))
       ent thread player_fan_trap_damage();
     else {
       if(is_true(ent.is_brutus)) {
@@ -351,7 +351,7 @@ acid_trap_damage() {
   while(true) {
     self waittill("trigger", ent);
 
-    if(isplayer(ent))
+    if(isPlayer(ent))
       ent thread player_acid_damage(self);
     else {
       if(is_true(ent.is_brutus)) {

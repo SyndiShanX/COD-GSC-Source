@@ -24,7 +24,7 @@ func_D691(var_0) {
 
 func_D68E(var_0, var_1) {
   self endon("disconnect");
-  if(scripts\mp\utility::func_9EF0(self) || !isplayer(self)) {
+  if(scripts\mp\utility::func_9EF0(self) || !isPlayer(self)) {
     return;
   }
 

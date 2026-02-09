@@ -80,5 +80,4 @@ class cpoweronswitch {
     }
     self thread poweronswitch_think();
   }
-
 }

@@ -833,7 +833,7 @@ play_ks_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
   } else if(isDefined(level.boat_survivor)) {
     scripts\engine\utility::play_sound_in_space(var_0, level.boat_survivor.origin, 0, level.boat_survivor);
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     if(isDefined(self.vo_prefix)) {
       thread scripts\cp\cp_vo::play_vo_system(var_7);
     }

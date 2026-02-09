@@ -12,8 +12,8 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_strike");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  setdvar("compassmaxrange", "1900");
-  setdvar("r_specularcolorscale", "1.86");
+  setDvar("compassmaxrange", "1900");
+  setDvar("r_specularcolorscale", "1.86");
   fix_hp_zone_5();
   thread misc_rotate_ceilingfans();
 }

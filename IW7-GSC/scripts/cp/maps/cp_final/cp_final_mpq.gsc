@@ -2546,7 +2546,7 @@ astronautaidetriggerwatch(var_0) {
 }
 
 tryreleaseastronaut(var_0, var_1) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     wait(0.2);
     level.astronautsshot++;
     if(isDefined(var_0)) {
@@ -2701,7 +2701,7 @@ incrementbridgequest(var_0, var_1) {
   var_3 = level.bridgepiecesfound.size;
   scripts\cp\utility::set_quest_icon(6 + var_3);
   setomnvar("zm_scrap_count", var_3);
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     switch (int(var_3)) {
       case 1:
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_1", "zmb_comment_vo");
@@ -2860,7 +2860,7 @@ givefuses() {
 }
 
 built_bridge_feedback(var_0) {
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     var_1 = ["fistpump", "fingercrossed", "kissfist"];
     var_2 = scripts\engine\utility::random(var_1);
     var_3 = "iw7_" + var_2 + "_zm";

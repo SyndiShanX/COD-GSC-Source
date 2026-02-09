@@ -174,7 +174,7 @@ grief_game_end_check_func() {
 }
 
 player_prevent_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isplayer(eattacker) && self != eattacker && !eattacker hasperk("specialty_noname") && !(isDefined(self.is_zombie) && self.is_zombie))
+  if(isDefined(eattacker) && isPlayer(eattacker) && self != eattacker && !eattacker hasperk("specialty_noname") && !(isDefined(self.is_zombie) && self.is_zombie))
     return true;
 
   return false;
@@ -183,7 +183,7 @@ player_prevent_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
 game_module_player_damage_grief_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
   penalty = 10;
 
-  if(isDefined(eattacker) && isplayer(eattacker) && eattacker != self && eattacker.team != self.team && smeansofdeath == "MOD_MELEE")
+  if(isDefined(eattacker) && isPlayer(eattacker) && eattacker != self && eattacker.team != self.team && smeansofdeath == "MOD_MELEE")
     self applyknockback(idamage, vdir);
 }
 
@@ -286,7 +286,7 @@ meat_stink_on_ground(position_to_play) {
 }
 
 meat_bounce_override(pos, normal, ent) {
-  if(isDefined(ent) && isplayer(ent)) {
+  if(isDefined(ent) && isPlayer(ent)) {
     if(!ent maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
       level thread meat_stink_player(ent);
 
@@ -388,7 +388,7 @@ door_close_zombie_think() {
   self endon("death");
 
   while(isalive(self)) {
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       insamezone = 0;
       keys = getarraykeys(level.zones);
 

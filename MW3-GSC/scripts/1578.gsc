@@ -20,7 +20,6 @@ _id_4445() {
 
     if(!isDefined(level.createfxexploders[var_2])) {
       level.createfxexploders[var_2] = [];
-
     }
     level.createfxexploders[var_2][level.createfxexploders[var_2].size] = var_1;
   }
@@ -38,7 +37,6 @@ _id_4445() {
 
     if(!isDefined(level.createfxbyfxid[var_5])) {
       level.createfxbyfxid[var_5] = [];
-
     }
     level.createfxbyfxid[var_5][level.createfxbyfxid[var_5].size] = var_1;
   }
@@ -49,7 +47,6 @@ _id_4446(var_0) {
 
   if(isDefined(level.createfxexploders)) {
     return level.createfxexploders[var_0];
-
   }
   var_1 = [];
 
@@ -76,7 +73,6 @@ _id_4447(var_0) {
 
   if(isDefined(level.createfxbyfxid)) {
     return level.createfxbyfxid[var_0];
-
   }
   var_1 = [];
 
@@ -141,11 +137,9 @@ _id_444D(var_0, var_1) {
 _id_444E(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   var_4 = var_1 * 10;
   var_5 = var_2 * 10;
@@ -154,7 +148,6 @@ _id_444E(var_0, var_1, var_2, var_3) {
     var_6 = var_0 / var_5;
   } else {
     var_6 = var_0;
-
   }
   var_7 = var_3 * 10;
   var_8 = var_4 - var_7;
@@ -163,7 +156,6 @@ _id_444E(var_0, var_1, var_2, var_3) {
     var_9 = var_0 / var_7;
   } else {
     var_9 = var_0;
-
   }
   var_10 = 0.1;
   var_0 = 0;
@@ -171,11 +163,9 @@ _id_444E(var_0, var_1, var_2, var_3) {
   for(var_11 = 0; var_11 < var_4; var_11++) {
     if(var_11 <= var_5) {
       var_0 = var_0 + var_6;
-
     }
     if(var_11 > var_8) {
       var_0 = var_0 - var_9;
-
     }
     earthquake(var_0, var_10, level.player.origin, 500);
     wait(var_10);
@@ -185,7 +175,6 @@ _id_444E(var_0, var_1, var_2, var_3) {
 _id_444F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(level.createfx_enabled) {
     return 0;
-
   }
   var_8 = common_scripts\utility::spawn_tag_origin();
   var_9 = 1200;
@@ -199,34 +188,27 @@ _id_444F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_2)) {
     var_12 = var_2;
-
   }
   if(isDefined(var_3)) {
     var_13 = var_3;
-
   }
   if(isDefined(var_4)) {
     var_14 = var_4;
-
   }
   if(isDefined(var_5)) {
     var_15 = var_5;
-
   }
   if(isDefined(var_7) && var_7 == 1) {
     var_11 = 1;
-
   }
   if(var_11 < 300) {
     if(isDefined(var_1)) {
       level.player playrumbleonentity(var_1);
-
     }
     level thread _id_444E(var_12, var_13, var_14, var_15);
 
     if(isDefined(var_6) && var_6 == 1) {
       level thread _id_4450(var_8.origin, var_13, var_12);
-
     }
     if(isDefined(var_0)) {
       for(var_16 = 0; var_16 < 6; var_16++) {
@@ -368,25 +350,22 @@ _id_4457(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(level._id_4458)) {
     level._id_4458 = [];
-    level._id_4459 = getdvar("vision_set_current");
+    level._id_4459 = getDvar("vision_set_current");
 
     if(level._id_4459 == "") {
       level._id_4459 = "default";
-
     }
     level._id_445A = level._id_4459;
     level._id_445B = 1.0;
 
     if(!common_scripts\utility::flag_exist("start_vision_watcher_manager")) {
       common_scripts\utility::flag_init("vision_watcher_changed");
-
     }
     level thread _id_445D();
   }
 
   if(var_3 == undefined) {
     var_3 = level._id_445A;
-
   }
   var_4.v["vision_set"] = var_0;
   var_4.v["vision_set_exit"] = var_3;
@@ -402,7 +381,6 @@ _id_4457(var_0, var_1, var_2, var_3) {
     if(var_4.v["active"] == 0) {
       for(var_5 = 0; var_5 < level._id_4458.size; var_5++) {
         level._id_4458[var_5].v["prime"] = 0;
-
       }
       var_4.v["prime"] = 1;
     }
@@ -423,7 +401,7 @@ _id_4457(var_0, var_1, var_2, var_3) {
 
 _id_445C(var_0, var_1, var_2) {
   common_scripts\utility::flag_init(var_1);
-  var_3 = getdvar("vision_set_current");
+  var_3 = getDvar("vision_set_current");
 
   for(;;) {
     common_scripts\utility::flag_wait(var_1);
@@ -444,11 +422,10 @@ _id_445D() {
 
     for(var_3 = 0; var_3 < level._id_4458.size; var_3++) {
       if(level._id_4458[var_3].v["prime"] == 1) {
-        var_4 = getdvar("vision_set_current");
+        var_4 = getDvar("vision_set_current");
 
         if(var_4 != level._id_4458[var_3].v["vision_set"]) {
           maps\_utility::vision_set_fog_changes(level._id_4458[var_3].v["vision_set"], level._id_445B);
-
         }
         var_0 = var_3;
       }
@@ -472,7 +449,6 @@ _id_445D() {
 
     if(var_1 != 1) {
       maps\_utility::vision_set_fog_changes(level._id_4459, level._id_445B);
-
     }
     common_scripts\utility::flag_clear("vision_watcher_changed");
     wait(level._id_445B);
@@ -485,7 +461,6 @@ _id_445E(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     common_scripts\utility::flag_init(var_2);
-
   }
   if(isDefined(var_3)) {
     if(!common_scripts\utility::flag_exist(var_3)) {
@@ -497,7 +472,6 @@ _id_445E(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     thread _id_4464(var_0, var_3, var_1, var_2);
-
   }
   thread _id_4463(var_0, var_1, var_2);
 }
@@ -508,7 +482,6 @@ _id_445F(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     common_scripts\utility::flag_init(var_2);
-
   }
   level common_scripts\utility::waitframe();
   thread _id_4465(var_0, var_1, var_2);
@@ -534,7 +507,6 @@ _id_4463(var_0, var_1, var_2) {
   for(;;) {
     if(!isDefined(var_2)) {
       var_2 = var_1;
-
     }
     common_scripts\utility::flag_wait_either(var_1, var_2);
     _id_4461(var_0);
@@ -550,7 +522,6 @@ _id_4464(var_0, var_1, var_2, var_3) {
   for(;;) {
     if(!isDefined(var_3)) {
       var_3 = var_2;
-
     }
     common_scripts\utility::flag_wait(var_1);
     _id_4462(var_0);
@@ -569,7 +540,6 @@ _id_4465(var_0, var_1, var_2) {
   for(;;) {
     if(!isDefined(var_2)) {
       var_2 = var_1;
-
     }
     common_scripts\utility::flag_wait_all(var_1, var_2);
     _id_4461(var_0);
@@ -584,7 +554,6 @@ _id_4465(var_0, var_1, var_2) {
 _id_4466(var_0, var_1) {
   if(!isDefined(var_1)) {
     common_scripts\utility::flag_init(var_1);
-
   }
   common_scripts\utility::flag_init("fx_zone_" + var_0 + "_active");
   level common_scripts\utility::waitframe();
@@ -656,7 +625,6 @@ _id_446B(var_0) {
 
   if(isDefined(var_2)) {
     var_1 = var_2;
-
   }
   return var_1;
 }
@@ -669,15 +637,12 @@ _id_446C(var_0) {
 _id_446D(var_0, var_1, var_2) {
   if(!common_scripts\utility::flag_exist("fx_spot_flare_kill")) {
     common_scripts\utility::flag_init("fx_spot_flare_kill");
-
   }
   if(!isDefined(var_1)) {
     var_1 = (-90, 0, 0);
-
   }
   if(!isDefined(var_2)) {
     var_2 = 10000;
-
   }
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_4 = level.player.origin;
@@ -726,7 +691,6 @@ _id_4470(var_0, var_1, var_2) {
 
   if(!isDefined(var_1)) {
     var_1 = "default";
-
   }
   var_4 = spawnStruct();
   var_4.v["default"] = spawnStruct();
@@ -742,7 +706,6 @@ _id_4470(var_0, var_1, var_2) {
 
     if(isDefined(var_2.v["name"])) {
       var_5 = var_2.v["name"];
-
     }
     var_4.v[var_5] = var_2;
   }
@@ -756,13 +719,11 @@ _id_4470(var_0, var_1, var_2) {
 _id_4471(var_0) {
   if(!isDefined(var_0.v["ent"])) {
     return 1;
-
   }
   if(isDefined(var_0.v["chain"])) {
     var_0.v["bones"] = _id_4470(var_0.v["chain"], var_0.v["chainset_name"], var_0.v["chainset_override"]);
   } else {
     return 1;
-
   }
   var_0.v["tags"] = [];
   var_0.v["tag_lens"] = [];
@@ -806,7 +767,6 @@ _id_4473(var_0) {
 
   for(var_1 = 0; var_1 < var_0.v["tags"].size; var_1++) {
     var_0.v["tags"][var_1] delete();
-
   }
   var_0.v["tags"] = [];
 }
@@ -821,27 +781,21 @@ _id_4474(var_0) {
 
   if(!isDefined(var_1)) {
     return undefined;
-
   }
   if(!isDefined(var_2)) {
     return undefined;
-
   }
   if(!isDefined(var_3)) {
     var_3 = "all";
-
   }
   if(!isDefined(var_4)) {
     var_4 = 1.0;
-
   }
   if(!isDefined(var_5)) {
     var_5 = "default";
-
   }
   if(!isDefined(var_6)) {
     var_6 = undefined;
-
   }
   var_7 = [];
 
@@ -854,7 +808,6 @@ _id_4474(var_0) {
     var_7[var_7.size] = "torso";
   } else {
     var_7[0] = var_3;
-
   }
   var_8 = var_1.model + "kill_fx_onactor";
   var_9 = [];

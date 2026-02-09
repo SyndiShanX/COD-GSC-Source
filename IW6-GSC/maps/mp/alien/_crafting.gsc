@@ -1125,7 +1125,7 @@ should_calculate_crafting_score() {
 
   var_0 = 0;
 
-  switch (getdvar("ui_mapname")) {
+  switch (getDvar("ui_mapname")) {
     case "mp_alien_last":
     case "mp_alien_beacon":
       var_0 = 1;

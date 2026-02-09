@@ -31,7 +31,7 @@ main() {
     return;
   }
 
-  if(isplayer(self.enemy))
+  if(isPlayer(self.enemy))
     self meleebiteattackplayer(self.enemy);
 }
 
@@ -151,7 +151,7 @@ domeleeafterwait(time) {
   hitent = self melee();
 
   if(isDefined(hitent)) {
-    if(isplayer(hitent))
+    if(isPlayer(hitent))
       hitent shellshock("dog_bite", 1);
   }
 }
@@ -172,7 +172,7 @@ handlemeleebiteattacknotetracks(note, player) {
       hitent = self melee(anglesToForward(self.angles));
 
       if(isDefined(hitent)) {
-        if(isplayer(hitent))
+        if(isPlayer(hitent))
           hitent shellshock("dog_bite", 1);
       } else if(isDefined(level.dog_melee_miss))
         self[[level.dog_melee_miss]](player);

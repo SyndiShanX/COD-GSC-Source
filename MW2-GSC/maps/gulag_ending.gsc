@@ -15,7 +15,7 @@
 /*QUAKED script_origin_pillar2 (0.9 0.75 0.1) (-32 -32 0) (32 32 96)*/
 
 endlog_common() {
-  level.default_sprint = GetDvar("player_sprintSpeedScale");
+  level.default_sprint = getDvar("player_sprintSpeedScale");
   add_start("run", ::start_run, "run", ::gulag_run_for_it);
   add_start("cafe", ::start_cafeteria, "cafe", ::gulag_cafeteria);
   add_start("evac", ::start_evac, "evac", ::gulag_evac);
@@ -23,7 +23,7 @@ endlog_common() {
   waittillframeend; // for _load
 
   if(isDefined(level.stop_load)) {
-    if(GetDvar("createfx") == "")
+    if(getDvar("createfx") == "")
       maps\_global_fx::main();
     return;
   }
@@ -219,7 +219,6 @@ start_run() {
     animation = guy getanim("price_rescue");
     guy SetAnimTime(animation, 0.75);
   }
-
 }
 
 gulag_run_for_it() {
@@ -408,10 +407,8 @@ start_endshow() {
   }
 
   /*
-  gulag_end_animatic_player"gulag_end_animatic_soldier"
-  gulag_end_animatic_price" ]
-  gulag_end_animatic_soap" ][
-  */
+  gulag_end_animatic_player"gulag_end_animatic_soldier"gulag_end_animatic_price" ]
+  gulag_end_animatic_soap" ][*/
 }
 
 start_cafeteria() {

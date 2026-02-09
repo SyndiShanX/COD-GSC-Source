@@ -75,8 +75,8 @@ function private clonespawnsetup() {
 
 function cloneplayerlook(clone, cloneplayer, targetplayer) {
   assert(isactor(clone));
-  assert(isplayer(cloneplayer));
-  assert(isplayer(targetplayer));
+  assert(isPlayer(cloneplayer));
+  assert(isPlayer(targetplayer));
   clone.owner = cloneplayer;
   clone setentitytarget(targetplayer, 1);
   clone setentityowner(cloneplayer);

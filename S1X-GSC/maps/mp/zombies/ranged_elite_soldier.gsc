@@ -590,7 +590,7 @@ ammorefillsecondary() {
 onsoldierkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   level.lastenemydeathpos = self.origin;
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 maps\mp\_utility::incplayerstat("kills", 1);
     var_1 maps\mp\_utility::incpersstat("kills", 1);
     var_1.kills = var_1 maps\mp\_utility::getpersstat("kills");

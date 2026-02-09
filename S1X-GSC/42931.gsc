@@ -171,7 +171,7 @@ settweakablevalue(var_0, var_1, var_2) {
       break;
   }
 
-  setdvar(var_3, var_2);
+  setDvar(var_3, var_2);
 }
 
 settweakablelastvalue(var_0, var_1, var_2) {
@@ -207,7 +207,7 @@ settweakablelastvalue(var_0, var_1, var_2) {
 
 registertweakable(var_0, var_1, var_2, var_3) {
   if(isstring(var_3)) {
-    var_3 = getdvar(var_2, var_3);
+    var_3 = getDvar(var_2, var_3);
   } else {
     var_3 = getdvarint(var_2, var_3);
   }

@@ -155,7 +155,7 @@ function_ce2bd83c(params) {
     return 0;
   }
 
-  if(isplayer(params.eattacker) && params.eattacker infection::is_infected()) {
+  if(isPlayer(params.eattacker) && params.eattacker infection::is_infected()) {
     return 0;
   }
 
@@ -176,7 +176,7 @@ function_ce2bd83c(params) {
   }
 
   if(params.smeansofdeath === "MOD_MELEE") {
-    if(isplayer(params.einflictor)) {
+    if(isPlayer(params.einflictor)) {
       if(self.shield) {
         params.einflictor status_effect::status_effect_apply(level.var_2ea60515, undefined, self, 0);
       }

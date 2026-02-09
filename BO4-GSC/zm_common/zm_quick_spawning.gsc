@@ -364,7 +364,7 @@ function_3b2d308f(player, zone) {
 function_f1ec5df(player, direction, var_ef0ae03b) {
   var_9521d651 = [];
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return var_9521d651;
   }
 
@@ -436,7 +436,7 @@ function_ba3ebac4() {
     }
 
     function_367e3573(1);
-    setdvar(#"hash_879482f07431cc8", 0);
+    setDvar(#"hash_879482f07431cc8", 0);
   }
 }
 

@@ -9,7 +9,6 @@ main() {
 
   if(getdvarint("survival_chaos") != 1) {
     _id_47CD(0.8);
-
   }
   maps\mp\mp_dome_precache::main();
   maps\createart\mp_dome_art::main();
@@ -52,7 +51,7 @@ killtrigger(var_0, var_1, var_2) {
   for(;;) {
     var_3 waittill("trigger", var_4);
 
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
     var_4 maps\_utility::_id_1887();

@@ -669,5 +669,4 @@ debugturbine(radius) {
 
     wait 0.05;
   }
-
 }

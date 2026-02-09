@@ -129,8 +129,8 @@ function __main__() {
 }
 
 function fungus_pods_devgui() {
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   a_keys = getarraykeys(level.fungus_pods.debug_reward_list);
@@ -158,7 +158,7 @@ function fungus_pods_devgui() {
           break;
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     util::wait_network_frame();
   }
@@ -385,7 +385,7 @@ function harvest_fungus_pod(e_harvester) {
     if(isDefined(str_forced) && str_forced != "") {
       s_reward_forced = 1;
       s_reward = level.fungus_pods.debug_reward_list[str_forced];
-      setdvar("", "");
+      setDvar("", "");
     }
     if(s_reward.type == "weapon") {
       s_reward.do_not_consider = function_b0138b1(s_reward.item);

@@ -211,7 +211,7 @@ settweakabledvar(var_0, var_1, var_2) {
       break;
   }
 
-  setdvar(var_3, var_2);
+  setDvar(var_3, var_2);
 }
 
 settweakablevalue(var_0, var_1, var_2) {
@@ -255,7 +255,7 @@ settweakablevalue(var_0, var_1, var_2) {
 
 registertweakable(var_0, var_1, var_2, var_3) {
   if(isstring(var_3)) {
-    var_3 = getdvar(var_2, var_3);
+    var_3 = getDvar(var_2, var_3);
   } else {
     var_3 = getdvarint(var_2, var_3);
   }
@@ -393,5 +393,5 @@ init() {
   registertweakable("hardpoint", "allowsupply", "scr_hardpoint_allowsupply", 1);
   registertweakable("hardpoint", "allowhelicopter", "scr_hardpoint_allowhelicopter", 1);
   registertweakable("hud", "showobjicons", "ui_hud_showobjicons", 1);
-  setdvar("ui_hud_showobjicons", 1);
+  setDvar("ui_hud_showobjicons", 1);
 }

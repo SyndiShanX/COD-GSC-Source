@@ -198,9 +198,9 @@ cheat_complete_stage() {
   level endon("reset_sundial");
 
   while(true) {
-    if(getdvar(#"_id_1186DB2D") != "") {
+    if(getDvar(#"_id_1186DB2D") != "") {
       if(isDefined(level._last_stage_started)) {
-        setdvar("cheat_sq", "");
+        setDvar("cheat_sq", "");
         stage_completed("sq", level._last_stage_started);
       }
     }
@@ -344,7 +344,7 @@ tower_punch_watch_leg(a_leg_trigs) {
   while(!flag("sq_tower_active")) {
     self waittill("trigger", who);
 
-    if(level.n_cur_leg < a_leg_trigs.size && isplayer(who) && (who.current_melee_weapon == "tazer_knuckles_zm" || who.current_melee_weapon == "tazer_knuckles_upgraded_zm")) {
+    if(level.n_cur_leg < a_leg_trigs.size && isPlayer(who) && (who.current_melee_weapon == "tazer_knuckles_zm" || who.current_melee_weapon == "tazer_knuckles_upgraded_zm")) {
       if(self.script_noteworthy == a_leg_trigs[level.n_cur_leg]) {
         level.n_cur_leg++;
         self playSound("zmb_sq_leg_powerup_" + level.n_cur_leg);
@@ -578,7 +578,7 @@ navcomputer_waitfor_navcard() {
   while(true) {
     navcomputer_use_trig waittill("trigger", who);
 
-    if(isplayer(who) && is_player_valid(who)) {
+    if(isPlayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
         who playSound("zmb_sq_navcard_success");

@@ -103,7 +103,7 @@ fake_rotate_of_ai() {}
 
 physics_of_objects_in_plane() {
   level endon("iplane_done");
-  level.orig_phys_gravity = getdvar("phys_gravity");
+  level.orig_phys_gravity = getDvar("phys_gravity");
   var_0 = getEntArray("zerog_physics", "targetname");
 
   foreach(var_2 in var_0)

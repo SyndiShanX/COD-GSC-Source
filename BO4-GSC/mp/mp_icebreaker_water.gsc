@@ -126,7 +126,6 @@ function_553ca6ce(e_player) {
   if(getdvarint(#"hash_a23c3aad7eb7dd", 0) && isalive(e_player) && !e_player.var_6754f1c5) {
     iprintlnbold("<dev string:x83>");
   }
-
 }
 
 init_devgui() {

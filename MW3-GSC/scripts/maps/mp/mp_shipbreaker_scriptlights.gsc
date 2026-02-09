@@ -169,7 +169,6 @@ sb_meat_market_flickering() {
           self._id_1647[0] = var_1;
         } else {
           self._id_1647[self._id_1647.size] = var_1;
-
         }
         continue;
       }
@@ -179,7 +178,6 @@ sb_meat_market_flickering() {
           self._id_1648[0] = var_1;
         } else {
           self._id_1648[self._id_1648.size] = var_1;
-
         }
         self._id_164D = var_1;
         continue;

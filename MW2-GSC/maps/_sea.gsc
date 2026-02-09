@@ -52,7 +52,7 @@ sea_logic() {
   level.new_lite_settings = level.lite_settings;
   */
 
-  string = getdvar("r_lightTweakSunDirection");
+  string = getDvar("r_lightTweakSunDirection");
   token = strtok(string, " ");
   level.lite_settings = (int(token[0]), int(token[1]), int(token[2]));
   level.new_lite_settings = level.lite_settings;
@@ -265,9 +265,7 @@ sea_objectbob_findparent(ent, org) {
     link waittill("precalcdone2");
     wait link.waittime - .05;
     base rotateto(link.ang, org.time, org.time * .5, org.time * .5);
-
   }
-
 }
 
 sea_bob() {

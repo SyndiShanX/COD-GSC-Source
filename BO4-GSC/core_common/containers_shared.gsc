@@ -17,7 +17,6 @@ class ccontainer {
     m_e_container = util::spawn_model(str_xmodel, v_origin, v_angles);
     return m_e_container;
   }
-
 }
 
 autoexec __init__system__() {

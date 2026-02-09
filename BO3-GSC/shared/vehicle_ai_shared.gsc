@@ -47,7 +47,7 @@ function entityisarchetype(entity, archetype) {
   if(!isDefined(entity)) {
     return false;
   }
-  if(isplayer(entity) && entity.usingvehicle && isDefined(entity.viewlockedentity) && entity.viewlockedentity.archetype === archetype) {
+  if(isPlayer(entity) && entity.usingvehicle && isDefined(entity.viewlockedentity) && entity.viewlockedentity.archetype === archetype) {
     return true;
   }
   if(isvehicle(entity) && entity.archetype === archetype) {
@@ -127,7 +127,7 @@ function __fire_for_rounds_internal(firecount, fireinterval, turretidx, target) 
   }
   assert(isDefined(turretidx));
   aifirechance = 1;
-  if(isDefined(target) && !isplayer(target) && isai(target) || isDefined(self.fire_half_blanks)) {
+  if(isDefined(target) && !isPlayer(target) && isai(target) || isDefined(self.fire_half_blanks)) {
     aifirechance = 2;
   }
   counter = 0;
@@ -1558,7 +1558,7 @@ function target_hijackers() {
   while(true) {
     self waittill("ccom_lock_being_targeted", hijackingplayer);
     self getperfectinfo(hijackingplayer, 1);
-    if(isplayer(hijackingplayer)) {
+    if(isPlayer(hijackingplayer)) {
       self setpersonalthreatbias(hijackingplayer, 1500, 4);
     }
   }

@@ -242,7 +242,7 @@ check_stat_complete(s_stat) {
     foreach(m_board in level.a_m_challenge_boards)
     m_board showpart(s_stat.str_glow_tag);
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(level._challenges.a_players[self.characterindex].n_completed + level._challenges.s_team.n_completed == level._challenges.a_stats.size)
         self notify("all_challenges_complete");
     } else {
@@ -624,7 +624,7 @@ reward_points(player, s_stat) {
 }
 
 challenges_devgui() {
-  setdvar("award_challenge", "0");
+  setDvar("award_challenge", "0");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Challenges:10/Award Player1\" \"award_challenge 1\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Challenges:10/Award Player2\" \"award_challenge 2\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Challenges:10/Award Player3\" \"award_challenge 3\"\n");
@@ -643,7 +643,6 @@ watch_devgui_award_challenges() {
 
     wait 0.5;
   }
-
 }
 
 devgui_award_challenge(n_index) {

@@ -245,11 +245,11 @@ function_aaf2d8(player, weapon, b_weapon_supports_aat, var_a86430cb) {
 }
 
 function_873e8824(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(!isplayer(attacker) || !isDefined(weapon) || !isDefined(meansofdeath)) {
+  if(!isPlayer(attacker) || !isDefined(weapon) || !isDefined(meansofdeath)) {
     return damage;
   }
 
-  if(isplayer(inflictor) || meansofdeath == "MOD_PROJECTILE" || meansofdeath == "MOD_PROJECTILE_SPLASH" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH" || meansofdeath == "MOD_IMPACT") {
+  if(isPlayer(inflictor) || meansofdeath == "MOD_PROJECTILE" || meansofdeath == "MOD_PROJECTILE_SPLASH" || meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH" || meansofdeath == "MOD_IMPACT") {
     var_f651a2e7 = attacker function_6d45375a(weapon);
     damage = int(damage * var_f651a2e7);
 

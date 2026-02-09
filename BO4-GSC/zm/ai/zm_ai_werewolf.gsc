@@ -48,7 +48,6 @@ class class_9f07f58e {
     adjustmentstarted = 0;
     var_425c4c8b = 1;
   }
-
 }
 
 autoexec __init__system__() {
@@ -260,7 +259,7 @@ on_werewolf_killed(params) {
 
   e_attacker = params.eattacker;
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 
@@ -292,7 +291,6 @@ function_1aba0132() {
       }
 
       record3dtext("<dev string:x41>" + distance, self.origin, (0, 0, 1), "<dev string:x38>");
-
     }
 
     waitframe(1);
@@ -387,7 +385,7 @@ function_ebf85268(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 
   var_786d7e06 = zm_ai_utility::function_422fdfd4(self, attacker, weapon, boneindex, hitloc, point);
   final_damage = int(damage * var_786d7e06.damage_scale);
-  var_934e9dce = isDefined(var_786d7e06.var_84ed9a13) && isDefined(var_786d7e06.registerzombie_bgb_used_reinforce) && var_786d7e06.registerzombie_bgb_used_reinforce && isDefined(attacker) && isplayer(attacker);
+  var_934e9dce = isDefined(var_786d7e06.var_84ed9a13) && isDefined(var_786d7e06.registerzombie_bgb_used_reinforce) && var_786d7e06.registerzombie_bgb_used_reinforce && isDefined(attacker) && isPlayer(attacker);
 
   if(var_934e9dce) {
     self.var_265cb589 = 1;
@@ -423,7 +421,7 @@ function_ebf85268(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     self.var_c59e2dbf = 0;
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(weapon) && attacker zm_utility::function_aa45670f(weapon, 0)) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(weapon) && attacker zm_utility::function_aa45670f(weapon, 0)) {
     if(isDefined(var_934e9dce) && var_934e9dce && isDefined(self.var_48baa747) && self.var_48baa747 && isDefined(self.var_2037a949) && self.var_2037a949 && hasasm(self) && self function_ebbebf56() >= 1) {
       self.var_1cfbbe3d = 1;
       self.blockingpain = 0;
@@ -945,7 +943,6 @@ function_7ad7aa7d(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     distance = distance(entity.origin, animendpos);
     recordcircle(animendpos, 3, (0, 1, 0), "<dev string:x38>");
     record3dtext("<dev string:x41>" + distance, animendpos, (0, 1, 0), "<dev string:x38>");
-
   }
 }
 
@@ -1233,7 +1230,7 @@ function_e79ce40a() {
       }
     }
 
-    setdvar(#"hash_4fe745cc8a7d9b8c", "<dev string:x41>");
+    setDvar(#"hash_4fe745cc8a7d9b8c", "<dev string:x41>");
   }
 }
 

@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_vehicle.csc
+ * Script: clientscripts\_vehicle\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -8,7 +8,6 @@
 init_vehicles() {
   level.vehicles_inited = true;
 }
-
 vehicle_rumble(localClientNum) {
   self endon("entityshutdown");
   level endon("save_restore");
@@ -24,7 +23,7 @@ vehicle_rumble(localClientNum) {
   radius_squared = self.rumbleradius * self.rumbleradius;
   wait 2;
   while(1) {
-    if((distancesquared(self.origin, getLocalPlayers()[localClientNum].origin) > radius_squared) || self getspeed() == 0) {
+    if((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) > radius_squared) || self getspeed() == 0) {
       wait(0.2);
       continue;
     }
@@ -33,17 +32,16 @@ vehicle_rumble(localClientNum) {
       continue;
     }
     self PlayRumbleLoopOnEntity(localClientNum, self.rumbletype);
-    while((distancesquared(self.origin, getLocalPlayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 0)) {
+    while((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 0)) {
       self earthquake(self.rumblescale, self.rumbleduration, self.origin, self.rumbleradius);
       wait(self.rumblebasetime + randomfloat(self.rumbleadditionaltime));
     }
-    self stopRumble(localClientNum, self.rumbletype);
+    self StopRumble(localClientNum, self.rumbletype);
   }
 }
-
 vehicle_treads(localClientNum) {
   waittillframeend;
-  PrintLn("****CLIENT:: Creating TreadFX: " + self getEntityNumber());
+  PrintLn("****CLIENT:: Creating TreadFX: " + self GetEntityNumber());
   if(!isDefined(level.vehicles_inited) || !isDefined(self.treadfx)) {
     return;
   }
@@ -64,12 +62,10 @@ vehicle_treads(localClientNum) {
     self thread tread(localClientNum, "tag_wheel_back_right", "back_right");
   }
 }
-
 vehicle_kill_treads_forever() {
   PrintLn("****CLIENT:: killing the tread_fx");
   self notify("kill_treads_forever");
 }
-
 get_throttle_effect(throttle) {
   if(isDefined(self.throttlefx)) {
     if(throttle < 0.3) {
@@ -82,7 +78,6 @@ get_throttle_effect(throttle) {
   }
   return undefined;
 }
-
 wake_mon(localClientNum) {
   self waittill("kill_treads_forever");
   level endon("save_restore");
@@ -92,7 +87,6 @@ wake_mon(localClientNum) {
     self.wake_fxHandle = undefined;
   }
 }
-
 wake(localClientNum, tagname) {
   self endon("entityshutdown");
   self endon("kill_treads_forever");
@@ -152,7 +146,6 @@ wake(localClientNum, tagname) {
     wait 0.1;
   }
 }
-
 splash(localClientNum) {
   self endon("entityshutdown");
   self endon("kill_treads_forever");
@@ -184,7 +177,6 @@ splash(localClientNum) {
     last_water_check_pos = water_check_pos;
   }
 }
-
 splash_small() {
   self endon("entityshutdown");
   self endon("kill_treads_forever");
@@ -213,7 +205,6 @@ splash_small() {
     }
   }
 }
-
 tread(localClientNum, tagname, side, relativeOffset) {
   self endon("entityshutdown");
   self endon("kill_treads_forever");
@@ -247,7 +238,6 @@ tread(localClientNum, tagname, side, relativeOffset) {
     }
   }
 }
-
 treadget(vehicle, side) {
   if(vehicle.vehicleclass == "boat") {
     if(!isDefined(vehicle.treadfx["water"])) {
@@ -273,29 +263,28 @@ treadget(vehicle, side) {
   }
   return treadfx;
 }
-
 playTankExhaust(localClientNum) {
   if(isDefined(self.csf_no_exhaust) && self.csf_no_exhaust) {
     return;
   }
   if(isDefined(self) && (self isalive()) && isDefined(self.exhaust_fx)) {
     playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
-    if(!self.oneexhaust)
+    if(!self.oneexhaust) {
       playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
+    }
   }
 }
-
 play_exhaust(localClientNum) {
   if(isDefined(self.csf_no_exhaust) && self.csf_no_exhaust) {
     return;
   }
   if(isDefined(self) && (self isalive()) && isDefined(self.exhaust_fx)) {
     playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
-    if(!self.oneexhaust)
+    if(!self.oneexhaust) {
       playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
+    }
   }
 }
-
 build_gear(vehicletype, model, tag) {
   index = 0;
   if(isDefined(level.vehicleGearModels)) {
@@ -306,7 +295,6 @@ build_gear(vehicletype, model, tag) {
   level.vehicleGearModels[vehicletype][index] = model;
   level.vehicleGearTags[vehicletype][index] = tag;
 }
-
 vehicle_variants(localClientNum) {
   if(isDefined(level.vehicleGearModels)) {
     if(isDefined(level.vehicleGearModels[self.vehicletype])) {
@@ -315,7 +303,7 @@ vehicle_variants(localClientNum) {
       if(numGear < maxGear) {
         maxGear = numGear;
       }
-      randomConstantNumber = self getEntityNumber();
+      randomConstantNumber = self getentitynumber();
       for(i = 0; i < maxGear; i++) {
         alreadyChosen = true;
         gearChoices[i] = -1;
@@ -335,7 +323,6 @@ vehicle_variants(localClientNum) {
     }
   }
 }
-
 aircraft_dustkick() {
   waittillframeend;
   self endon("kill_treads_forever");
@@ -394,7 +381,6 @@ aircraft_dustkick() {
     }
   }
 }
-
 vehicle_weapon_fired() {
   self endon("entityshutdown");
   level endon("save_restore");
@@ -402,7 +388,7 @@ vehicle_weapon_fired() {
   rumble_distance = 500 * 500;
   while(true) {
     self waittill("weapon_fired");
-    players = getLocalPlayers();
+    players = getlocalplayers();
     for(i = 0; i < players.size; i++) {
       player_distance = DistanceSquared(self.origin, players[i].origin);
       if(player_distance < rumble_distance) {
@@ -422,7 +408,6 @@ vehicle_weapon_fired() {
     }
   }
 }
-
 delete_rotor_fx_on_save_restore(localClientNum) {
   self endon("entityshutdown");
   level waittill("save_restore");
@@ -433,7 +418,6 @@ delete_rotor_fx_on_save_restore(localClientNum) {
     DeleteFX(localClientNum, self.rotorTailfxHandle_saved);
   }
 }
-
 play_rotor_fx(localClientNum) {
   self endon("entityshutdown");
   level endon("save_restore");
@@ -511,13 +495,11 @@ play_rotor_fx(localClientNum) {
   self thread csf_stat_rotor_mon();
   self.csf_stationary_rotor = false;
 }
-
 csf_stat_rotor_mon() {
   self endon("entityshutdown");
   self waittill("save_restore");
   self.csf_stationary_rotor = undefined;
 }
-
 play_rotor_fx_stationary(localClientNum) {
   self endon("entityshutdown");
   level endon("save_restore");
@@ -574,7 +556,6 @@ play_rotor_fx_stationary(localClientNum) {
   PrintLn("Script sets csf_stationary to true.");
   self.csf_stationary_rotor = true;
 }
-
 loop_rotor_fx(localClientNum, effect, attachTag) {
   self endon("entityshutdown");
   level endon("save_restore");
@@ -594,7 +575,6 @@ loop_rotor_fx(localClientNum, effect, attachTag) {
     }
   }
 }
-
 vehicle_clientmain(localClientNum) {
   switch (self.vehicletype) {
     case "uaz":
@@ -606,7 +586,6 @@ vehicle_clientmain(localClientNum) {
       break;
   }
 }
-
 headlights_on(localClientNum) {
   if(self.vehicletype == "police") {
     self.headlightFX = LoadFX("vehicle/light/fx_cuba_police_headlight");
@@ -626,7 +605,6 @@ headlights_on(localClientNum) {
     self.headlightRightFXHandle = playFXOnTag(localClientNum, self.headlightFX, self, "tag_headlight_right");
   }
 }
-
 headlights_off(localClientNum) {
   if(isDefined(self.headlightLeftFXHandle)) {
     DeleteFX(localClientNum, self.headlightLeftFXHandle);
@@ -641,7 +619,6 @@ headlights_off(localClientNum) {
     self.frontDLightFXHandle = undefined;
   }
 }
-
 taillights_on(localClientNum) {
   if(self.vehicletype == "police") {
     self.taillightLeftFX = LoadFX("vehicle/light/fx_cuba_police_taillight_left");
@@ -664,7 +641,6 @@ taillights_on(localClientNum) {
     self.taillightRightFXHandle = playFXOnTag(localClientNum, self.taillightRightFX, self, self.taillightRightTag);
   }
 }
-
 taillights_off(localClientNum) {
   if(isDefined(self.taillightLeftFXHandle)) {
     DeleteFX(localClientNum, self.taillightLeftFXHandle);
@@ -675,7 +651,6 @@ taillights_off(localClientNum) {
     self.taillightRightFXHandle = undefined;
   }
 }
-
 interior_lights_on(localClientNum) {
   if(self.vehicletype == "police") {
     self.interiorLightFX = LoadFX("maps/cuba/fx_cuba_veh_interior_lights");
@@ -685,28 +660,24 @@ interior_lights_on(localClientNum) {
     }
   }
 }
-
 interior_lights_off(localClientNum) {
   if(isDefined(self.interiorLightFXHandle)) {
     DeleteFX(localClientNum, self.interiorLightFXHandle);
     self.interiorLightFXHandle = undefined;
   }
 }
-
 sirenlights_on(localClientNum) {
   if(!isDefined(self.sirenlightFXHandle)) {
     self.sirenlightFX = LoadFX("maps/cuba/fx_cuba_siren_light");
     self.sirenlightFXHandle = playFXOnTag(localClientNum, self.sirenlightFX, self, "tag_origin_animate_jnt");
   }
 }
-
 sirenlights_off(localClientNum) {
   if(isDefined(self.sirenlightFXHandle)) {
     DeleteFX(localClientNum, self.sirenlightFXHandle);
     self.sirenlightFXHandle = undefined;
   }
 }
-
 vehicle_flag_toggle_sounds(localClientNum, set, newEnt) {
   if(self is_helicopter()) {
     if(set) {
@@ -718,7 +689,6 @@ vehicle_flag_toggle_sounds(localClientNum, set, newEnt) {
     }
   } else {}
 }
-
 vehicle_flag_turn_off_treadfx(localClientNum, set, newEnt) {
   if(self is_helicopter() || self is_plane()) {
     PrintLn("****CLIENT:: Vehicle Flag Plane");
@@ -739,10 +709,10 @@ vehicle_flag_turn_off_treadfx(localClientNum, set, newEnt) {
     if(set) {
       PrintLn("****CLIENT:: Vehicle Flag Tread FX Set");
       if(isDefined(newEnt) && newEnt) {
-        PrintLn("****CLIENT:: TreadFX NewEnt: " + self getEntityNumber());
+        PrintLn("****CLIENT:: TreadFX NewEnt: " + self GetEntityNumber());
         self.csf_no_tread = true;
       } else {
-        PrintLn("****CLIENT:: TreadFX OldEnt" + self getEntityNumber());
+        PrintLn("****CLIENT:: TreadFX OldEnt" + self GetEntityNumber());
         self vehicle_kill_treads_forever();
       }
     } else {
@@ -755,7 +725,6 @@ vehicle_flag_turn_off_treadfx(localClientNum, set, newEnt) {
     }
   }
 }
-
 vehicle_flag_switch_rotor_fx(localClientNum, set, newEnt) {
   if(set) {
     if(isDefined(newEnt) && newEnt) {
@@ -776,13 +745,11 @@ vehicle_flag_switch_rotor_fx(localClientNum, set, newEnt) {
     }
   }
 }
-
 vehicle_flag_0_handler(localClientNum, set, newEnt) {
   if(self is_helicopter()) {
     vehicle_flag_switch_rotor_fx(localClientNum, set, newEnt);
   } else {}
 }
-
 vehicle_flag_start_stop_rotor_fx(localClientNum, set, newEnt) {
   if(set) {
     if(isDefined(newEnt) && newEnt) {
@@ -806,13 +773,11 @@ vehicle_flag_start_stop_rotor_fx(localClientNum, set, newEnt) {
     self play_rotor_fx(localClientNum);
   }
 }
-
 vehicle_flag_1_handler(localClientNum, set, newEnt) {
   if(self is_helicopter()) {
     vehicle_flag_start_stop_rotor_fx(localClientNum, set, newEnt);
   } else {}
 }
-
 vehicle_flag_start_use_engine_damage_low_sounds(localClientNum, set, newEnt) {
   if(set) {
     self.engine_damage_low = true;
@@ -822,13 +787,11 @@ vehicle_flag_start_use_engine_damage_low_sounds(localClientNum, set, newEnt) {
     self clientscripts\_helicopter_sounds::update_helicopter_sounds();
   }
 }
-
 vehicle_flag_3_handler(localClientNum, set, newEnt) {
   if(self is_helicopter()) {
     vehicle_flag_start_use_engine_damage_low_sounds(localClientNum, set, newEnt);
   } else {}
 }
-
 vehicle_flag_start_use_engine_damage_high_sounds(localClientNum, set, newEnt) {
   if(set) {
     self.engine_damage_high = true;
@@ -838,17 +801,14 @@ vehicle_flag_start_use_engine_damage_high_sounds(localClientNum, set, newEnt) {
     self clientscripts\_helicopter_sounds::update_helicopter_sounds();
   }
 }
-
 vehicle_flag_4_handler(localClientNum, set, newEnt) {
   if(self is_helicopter()) {
     vehicle_flag_start_use_engine_damage_high_sounds(localClientNum, set, newEnt);
   } else {}
 }
-
 vehicle_flag_change_treadfx_handler(localClientNum, set, newEnt) {
   if(set) {} else {}
 }
-
 vehicle_flag_toggle_exhaustfx_handler(localClientNum, set, newEnt) {
   if(set) {
     if(isDefined(newEnt) && newEnt) {
@@ -868,11 +828,9 @@ vehicle_flag_toggle_exhaustfx_handler(localClientNum, set, newEnt) {
     }
   }
 }
-
 vehicle_flag_change_exhaustfx_handler(localClientNum, set, newEnt) {
   if(set) {} else {}
 }
-
 vehicle_flag_toggle_lights_handler(localClientNum, set, newent) {
   if(set) {
     self headlights_on(localClientNum);
@@ -882,7 +840,6 @@ vehicle_flag_toggle_lights_handler(localClientNum, set, newent) {
     self taillights_off(localClientNum);
   }
 }
-
 vehicle_flag_toggle_siren_lights_handler(localClientNum, set, newent) {
   if(set) {
     self sirenlights_on(localClientNum);
@@ -890,7 +847,6 @@ vehicle_flag_toggle_siren_lights_handler(localClientNum, set, newent) {
     self sirenlights_off(localClientNum);
   }
 }
-
 vehicle_flag_toggle_interior_lights_handler(localClientNum, set, newent) {
   if(set) {
     self interior_lights_on(localClientNum);

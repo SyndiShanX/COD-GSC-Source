@@ -449,7 +449,7 @@ function function_8082e9f0() {
       self function_a4b8b7d1(int(cmd));
     }
     if(cmd != "") {
-      setdvar("", "");
+      setDvar("", "");
     }
     if(self.var_eb7d74bb == 1 && isDefined(self.var_ab872594)) {
       function_7aaf1e5d();
@@ -597,8 +597,8 @@ function function_a4b8b7d1(var_36b04a4a) {
 }
 
 function function_2d7075c8() {
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   for(i = 0; i < level.accolades.size; i++) {
     adddebugcommand(((((("" + i) + "") + i) + "") + i) + "");

@@ -10,6 +10,7 @@
 #include maps\_zombiemode_spawner;
 #include maps\_zombiemode_net;
 #using_animtree("generic_human");
+
 sonic_zombie_init() {
   level.sonicZombiesEnabled = true;
   level.sonicZombieMinRoundWait = 1;
@@ -25,7 +26,7 @@ sonic_zombie_init() {
   level.sonicHealthMultiplier = 2.5;
   level.sonic_zombie_spawners = getEntArray("sonic_zombie_spawner", "script_noteworthy");
   if(getDvar("zombiemode_debug_sonic") == "") {
-    SetDvar("zombiemode_debug_sonic", "0");
+    setDvar("zombiemode_debug_sonic", "0");
   }
   set_zombie_var("thundergun_knockdown_damage", 15);
   level.thundergun_gib_refs = [];
@@ -40,13 +41,11 @@ sonic_zombie_init() {
   _sonic_InitSounds();
   thread _sonic_InitSpawners();
 }
-
 _sonic_InitFX() {
   level._effect["sonic_explosion"] = LoadFX("maps/zombie_temple/fx_ztem_sonic_zombie");
   level._effect["sonic_spawn"] = LoadFX("maps/zombie_temple/fx_ztem_sonic_zombie_spawn");
   level._effect["sonic_attack"] = LoadFX("maps/zombie_temple/fx_ztem_sonic_zombie_attack");
 }
-
 _sonic_InitAnims() {
   level.scr_anim["sonic_zombie"]["death1"] = % ai_zombie_sonic_death_03;
   level.scr_anim["sonic_zombie"]["death2"] = % ai_zombie_sonic_death_02;
@@ -149,7 +148,6 @@ _sonic_InitAnims() {
   level._zombie_deaths["sonic_zombie"][2] = % ai_zombie_sonic_death_03;
   level._zombie_board_taunt["sonic_zombie"] = level._zombie_board_taunt["zombie"];
 }
-
 _sonic_InitSounds() {
   level.zmb_vox["sonic_zombie"] = [];
   level.zmb_vox["sonic_zombie"]["ambient"] = "sonic_ambient";
@@ -162,7 +160,6 @@ _sonic_InitSounds() {
   level.zmb_vox["sonic_zombie"]["crawler"] = "sonic_ambient";
   level.zmb_vox["sonic_zombie"]["scream"] = "sonic_scream";
 }
-
 _sonic_InitSpawners() {
   flag_wait("zones_initialized");
   testOrigin = spawn("script_model", (0, 0, 0));
@@ -188,7 +185,6 @@ _sonic_InitSpawners() {
     }
   }
 }
-
 _entity_in_zone(zone) {
   for(i = 0; i < zone.volumes.size; i++) {
     if(self IsTouching(zone.volumes[i])) {
@@ -197,7 +193,6 @@ _entity_in_zone(zone) {
   }
   return false;
 }
-
 sonic_zombie_spawn(animname_set) {
   zombie_spawn_init(animname_set);
   self.animname = "sonic_zombie";
@@ -231,12 +226,12 @@ sonic_zombie_spawn(animname_set) {
   anchor = spawn("script_origin", self.origin);
   anchor.angles = (0, angles[1], 0);
   self linkto(anchor);
-  self hide();
+  self Hide();
   self.a.disablepain = true;
   self.rising = true;
   self magic_bullet_shield();
   anim_org = self.origin + (0, 0, -45);
-  anchor moveTo(anim_org, 0.05);
+  anchor MoveTo(anim_org, 0.05);
   anchor waittill("movedone");
   anchor RotateTo((0, angles[1], 0), 0.05);
   anchor waittill("rotatedone");
@@ -260,40 +255,34 @@ sonic_zombie_spawn(animname_set) {
   self stop_magic_bullet_shield();
   self.a.disablepain = true;
 }
-
 _zombie_InitSideStep() {
   self.zombie_can_sidestep = true;
   self.sideStepAnims["step_left"] = array(%ai_zombie_sonic_sidestep_left_a, %ai_zombie_sonic_sidestep_left_b);
   self.sideStepAnims["step_right"] = array(%ai_zombie_sonic_sidestep_right_a, %ai_zombie_sonic_sidestep_right_b);
   self.sideStepAnims["roll_forward"] = array(%ai_zombie_sonic_duck_a, %ai_zombie_sonic_duck_b, %ai_zombie_sonic_duck_c);
 }
-
 _zombie_death_watch() {
   self waittill("death");
   if(isDefined(level._CF_ACTOR_IS_SONIC_ZOMBIE)) {
     self ClearClientFlag(level._CF_ACTOR_IS_SONIC_ZOMBIE);
   }
 }
-
 _zombie_ambient_sounds() {
   self endon("death");
   while(1) {
     self maps\_zombiemode_audio::do_zombies_playvocals("ambient", "sonic_zombie");
   }
 }
-
 _updateNextScreamTime() {
   self.sonicScreamAttackNext = GetTime();
   self.sonicScreamAttackNext += randomIntRange(self.sonicScreamAttackDebounceMin * 1000, self.sonicScreamAttackDebounceMax * 1000);
 }
-
 _canScreamNow() {
   if(GetTime() > self.sonicScreamAttackNext) {
     return true;
   }
   return false;
 }
-
 _zombie_screamAttackThink() {
   self endon("death");
   thinkDebounce = .1;
@@ -313,7 +302,6 @@ _zombie_screamAttackThink() {
     wait thinkDebounce;
   }
 }
-
 _zombie_getNearByPlayers() {
   nearByPlayers = [];
   radiusSqr = level.sonicScreamAttackRadius * level.sonicScreamAttackRadius;
@@ -333,7 +321,6 @@ _zombie_getNearByPlayers() {
   }
   return nearByPlayers;
 }
-
 _zombie_screamAttackAnim() {
   level _updateNextScreamTime();
   self _updateNextScreamTime();
@@ -349,7 +336,6 @@ _zombie_screamAttackAnim() {
   death_anims = level._zombie_deaths[self.animname];
   self.deathanim = random(death_anims);
 }
-
 _zombie_screamAttackAnim_wait(time) {
   self endon("death");
   endTime = GetTime() + (time * 1000);
@@ -366,7 +352,6 @@ _zombie_screamAttackAnim_wait(time) {
     wait .1;
   }
 }
-
 _zombie_screamAttack(delay) {
   self endon("death");
   self endon("scream_attack_done");
@@ -378,7 +363,6 @@ _zombie_screamAttack(delay) {
   wait(2.0);
   self thread _zombie_scream_attack_done();
 }
-
 _zombie_scream_attack_done() {
   players = GetPlayers();
   for(i = 0; i < players.size; i++) {
@@ -386,7 +370,6 @@ _zombie_scream_attack_done() {
   }
   self notify("scream_attack_done");
 }
-
 _zombie_playScreamFX() {
   if(isDefined(self.screamFX)) {
     self.screamFX Delete();
@@ -401,7 +384,6 @@ _zombie_playScreamFX() {
   self waittill_any("death", "scream_attack_done", "shrink");
   self.screamFX Delete();
 }
-
 _player_ScreamAttackWatch(sonic_zombie) {
   self endon("death");
   self endon("scream_watch_done");
@@ -416,7 +398,6 @@ _player_ScreamAttackWatch(sonic_zombie) {
   self thread _player_SonicBlurVision(sonic_zombie);
   self thread maps\_zombiemode_audio::create_and_play_dialog("general", "sonic_hit");
 }
-
 _player_in_blur_area(sonic_zombie) {
   if(abs(self.origin[2] - sonic_zombie.origin[2]) > 70) {
     return false;
@@ -434,7 +415,6 @@ _player_in_blur_area(sonic_zombie) {
   }
   return true;
 }
-
 _zombie_any_players_in_blur_area() {
   if(is_true(level.intermission)) {
     return false;
@@ -448,7 +428,6 @@ _zombie_any_players_in_blur_area() {
   }
   return false;
 }
-
 _player_SonicBlurVision(zombie) {
   self endon("disconnect");
   level endon("intermission");
@@ -463,35 +442,30 @@ _player_SonicBlurVision(zombie) {
     self.screamAttackBlur = false;
   }
 }
-
 _player_screamAttackDamage(time, blurScale, earthquakeScale, rumble, attacker) {
   self thread _player_blurFailsafe();
   Earthquake(earthquakeScale, 3, attacker.origin, level.sonicScreamDamageRadius, self);
   self SetBlur(blurScale, 0.2);
-  self playRumbleOnEntity(rumble);
+  self PlayRumbleOnEntity(rumble);
   self _player_screamAttack_wait(time);
   self SetBlur(0, 0.5);
   self notify("blur_cleared");
-  self stopRumble(rumble);
+  self stoprumble(rumble);
 }
-
 _player_blurFailsafe() {
   self endon("disconnect");
   self endon("blur_cleared");
   level waittill("intermission");
   self SetBlur(0, 0.5);
 }
-
 _player_screamAttack_wait(time) {
   self endon("disconnect");
   level endon("intermission");
   wait(time);
 }
-
 _player_sonicZombieDeath_DoubleVision() {
   self SetDoubleVision(10, 3);
 }
-
 _zombie_RunEffects() {}
 _zombie_SetupFXOnJoint(jointName, fxName) {
   origin = self GetTagOrigin(jointName);
@@ -502,7 +476,6 @@ _zombie_SetupFXOnJoint(jointName, fxName) {
   playFXOnTag(level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }
-
 sonic_zombie_death() {
   self playSound("evt_sonic_explode");
   if(isDefined(level._effect["sonic_explosion"])) {
@@ -514,7 +487,6 @@ sonic_zombie_death() {
   self thread _sonic_zombie_death_scream(self.attacker);
   return self zombie_death_animscript();
 }
-
 zombie_sonic_scream_death(attacker) {
   self endon("death");
   randomWait = randomfloatrange(0, 1.0);
@@ -533,7 +505,6 @@ zombie_sonic_scream_death(attacker) {
   self maps\_zombiemode_spawner::zombie_head_gib();
   self dodamage(self.health + 666, self.origin, attacker);
 }
-
 _sonic_zombie_death_scream(attacker) {
   zombies = _sonic_zombie_get_enemies_in_scream_range();
   for(i = 0; i < zombies.size; i++) {
@@ -549,7 +520,6 @@ _sonic_zombie_death_scream(attacker) {
     zombies[i] thread zombie_sonic_scream_death(attacker);
   }
 }
-
 _sonic_zombie_death_explode(attacker) {
   PhysicsExplosionCylinder(self.origin, 600, 240, 1);
   if(!isDefined(level.sonicZombie_knockdown_enemies)) {
@@ -573,7 +543,6 @@ _sonic_zombie_death_explode(attacker) {
   level.sonicZombie_fling_enemies = [];
   level.sonicZombie_fling_vecs = [];
 }
-
 _sonic_zombie_network_choke() {
   level.sonic_zombie_network_choke_count++;
   if(!(level.sonic_zombie_network_choke_count % 10)) {
@@ -582,7 +551,6 @@ _sonic_zombie_network_choke() {
     wait_network_frame();
   }
 }
-
 _sonic_zombie_get_enemies_in_scream_range() {
   return_zombies = [];
   center = self getcentroid();
@@ -601,7 +569,6 @@ _sonic_zombie_get_enemies_in_scream_range() {
   }
   return return_zombies;
 }
-
 _sonic_zombie_get_enemies_in_range() {
   center = self getcentroid();
   zombies = get_array_of_closest(center, GetAiSpeciesArray("axis", "all"), undefined, undefined, self.death_knockdown_range);
@@ -616,7 +583,7 @@ _sonic_zombie_get_enemies_in_range() {
       continue;
     }
     test_origin = zombies[i] getcentroid();
-    test_range_squared = distanceSquared(center, test_origin);
+    test_range_squared = DistanceSquared(center, test_origin);
     if(test_range_squared > knockdown_range_squared) {
       return;
     }
@@ -639,7 +606,6 @@ _sonic_zombie_get_enemies_in_range() {
     }
   }
 }
-
 _sonicZombie_fling_zombie(player, fling_vec, index) {
   if(!isDefined(self) || !IsAlive(self)) {
     return;
@@ -657,7 +623,6 @@ _sonicZombie_fling_zombie(player, fling_vec, index) {
     self LaunchRagdoll(fling_vec);
   }
 }
-
 _sonicZombie_knockdown_zombie(player, gib) {
   self endon("death");
   if(!isDefined(self) || !IsAlive(self)) {
@@ -675,7 +640,6 @@ _sonicZombie_knockdown_zombie(player, gib) {
     self DoDamage(20, player.origin, player);
   }
 }
-
 _sonic_Shrink() {}
 _sonic_Unshrink() {}
 sonic_zombie_count_watch() {
@@ -691,11 +655,10 @@ sonic_zombie_count_watch() {
     level.nextSonicSpawnRound = level.round_number + RandomIntRange(level.sonicZombieMinRoundWait, level.sonicZombieMaxRoundWait + 1);
   }
   attacker = self.attacker;
-  if(isDefined(attacker) && isplayer(attacker) && is_true(attacker.screamAttackBlur)) {
+  if(isDefined(attacker) && isPlayer(attacker) && is_true(attacker.screamAttackBlur)) {
     attacker notify("blinded_by_the_fright_achieved");
   }
 }
-
 _sonic_damage_callback(mod, hit_location, hit_origin, player, amount) {
   if(is_true(self.lander_knockdown)) {
     return false;
@@ -713,7 +676,6 @@ _sonic_damage_callback(mod, hit_location, hit_origin, player, amount) {
   }
   return false;
 }
-
 sonic_monkey_bolt_taunts(monkey_bolt) {
   return is_true(self.rising);
 }

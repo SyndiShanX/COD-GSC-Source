@@ -1063,7 +1063,7 @@ start_overlay(var_0) {
 }
 
 get_overlay(var_0) {
-  if(isplayer(self))
+  if(isPlayer(self))
     var_1 = self;
   else
     var_1 = level.player;
@@ -1154,7 +1154,7 @@ create_nameplate_hud(var_0, var_1) {
 }
 
 get_nameplate_color(var_0) {
-  var_1 = strtok(getdvar(var_0), " ");
+  var_1 = strtok(getDvar(var_0), " ");
   var_2 = [];
   var_2 = common_scripts\utility::array_add(var_2, float(var_1[0]));
   var_2 = common_scripts\utility::array_add(var_2, float(var_1[1]));

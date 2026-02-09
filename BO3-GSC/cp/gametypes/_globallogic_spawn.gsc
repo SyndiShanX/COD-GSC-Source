@@ -249,10 +249,10 @@ function spawnplayer() {
     }
   }
   if(getdvarstring("scr_showperksonspawn") == "") {
-    setdvar("scr_showperksonspawn", "0");
+    setDvar("scr_showperksonspawn", "0");
   }
   if(level.hardcoremode) {
-    setdvar("scr_showperksonspawn", "0");
+    setDvar("scr_showperksonspawn", "0");
   }
   if(getdvarint("scr_showperksonspawn") == 1 && game["state"] != "postgame") {
     pixbeginevent("showperksonspawn");
@@ -271,7 +271,7 @@ function spawnplayer() {
     callback::callback("hash_bc12b61f");
   }
   print(((((("" + self.origin[0]) + "") + self.origin[1]) + "") + self.origin[2]) + "");
-  setdvar("scr_selecting_location", "");
+  setDvar("scr_selecting_location", "");
   self thread vehicledeathwaiter();
   if(getdvarint("") > 0) {
     self thread globallogic_score::xpratethread();

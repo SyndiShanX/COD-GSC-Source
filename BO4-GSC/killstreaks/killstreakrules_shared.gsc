@@ -132,7 +132,7 @@ recordkillstreakenddirect(eventindex, recordstreakindex, totalkills) {
 recordkillstreakend(recordstreakindex, totalkills) {
   player = self;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

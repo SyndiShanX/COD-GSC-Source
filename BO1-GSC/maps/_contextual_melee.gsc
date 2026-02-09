@@ -7,9 +7,11 @@
 #include maps\_utility;
 #include maps\_anim;
 #using_animtree("generic_human");
+
 setup() {
-  if(isDefined(level.contextualMeleeFeature) && !level.contextualMeleeFeature)
+  if(isDefined(level.contextualMeleeFeature) && !level.contextualMeleeFeature) {
     return;
+  }
   level._melee = spawnStruct();
   level._CONTEXTUAL_MELEE_DIST = 70;
   level._CONTEXTUAL_MELEE_DIST_SQ = level._CONTEXTUAL_MELEE_DIST *
@@ -22,7 +24,6 @@ setup() {
   setup_fx();
   setup_info();
 }
-
 main(melee_id, set) {
   if(isDefined(melee_id) && !IsString(melee_id) && !melee_id) {
     self notify("stop_contextual_melee");
@@ -58,13 +59,11 @@ main(melee_id, set) {
   }
   self thread contextual_melee_thread();
 }
-
 remove_weapon(melee_id) {
   if(IsSubStr(melee_id, "garrote_sit") || IsSubStr(melee_id, "neckstab_crouch")) {
     self gun_remove();
   }
 }
-
 get_context() {
   if(IsAI(self)) {
     if(isDefined(self._melee.ai_context)) {
@@ -72,13 +71,12 @@ get_context() {
     } else {
       return self.a.pose;
     }
-  } else if(IsPlayer(self)) {
+  } else if(isPlayer(self)) {
     return self GetStance();
   } else {
     assertmsg("_contextual_melee: trying to get context for unsupported entity type.");
   }
 }
-
 waittill_melee() {
   while(true) {
     player = undefined;
@@ -102,19 +100,17 @@ waittill_melee() {
     }
   }
 }
-
 cancel_waittill_melee(guy) {
   guy waittill_any("stop_contextual_melee", "death");
   player = get_players()[0];
   player SetScriptHintString("");
   self enable_weapon();
 }
-
 player_can_melee(guy) {
   info = get_potential_melee_info(guy);
   if(isDefined(info)) {
     guy._melee.info = info;
-    dist = distanceSquared(guy.origin, self.origin);
+    dist = DistanceSquared(guy.origin, self.origin);
     if(dist < level._CONTEXTUAL_MELEE_DIST_SQ) {
       looking_at = is_player_looking_at(guy GetTagOrigin("J_Neck"), .7, false);
       if(isDefined(guy._melee_ignore_angle_override)) {
@@ -126,7 +122,6 @@ player_can_melee(guy) {
   }
   return false;
 }
-
 get_potential_melee_info(guy) {
   info = [];
   set = [];
@@ -146,7 +141,6 @@ get_potential_melee_info(guy) {
     }
   }
 }
-
 player_interaction(guy) {
   self AllowMelee(false);
   if(level._contextual_melee_print_hintstring) {
@@ -181,27 +175,23 @@ player_interaction(guy) {
   }
   return !cancled;
 }
-
 is_auto_melee() {
   return (is_true(self.automatic_contextual_melee));
 }
-
 disable_weapon() {
   self HideViewModel();
   self DisableWeapons();
 }
-
 enable_weapon() {
   self ShowViewModel();
   self EnableWeapons();
   self AllowMelee(true);
 }
-
 get_alignment_object() {
   if(isDefined(level._contextual_melee_align_obj)) {
     return level._contextual_melee_align_obj;
   } else if(isDefined(self.target)) {
-    obj = getEnt(self.target, "targetname");
+    obj = GetEnt(self.target, "targetname");
     if(!isDefined(obj)) {
       obj = getstruct(self.target, "targetname");
     }
@@ -211,7 +201,6 @@ get_alignment_object() {
   }
   return self;
 }
-
 contextual_melee_thread() {
   self notify("_contextual_melee_thread");
   self endon("_contextual_melee_thread");
@@ -227,11 +216,9 @@ contextual_melee_thread() {
     self thread do_contextual_melee(player);
   }
 }
-
 is_scripted_melee() {
   return (isDefined(self._melee.set) && IsString(self._melee.set) && (self._melee.set == "scripted"));
 }
-
 do_idle(type, ai_context) {
   self endon("stop_contextual_melee_idle");
   if(is_valid_stance(ai_context)) {
@@ -254,7 +241,6 @@ do_idle(type, ai_context) {
     }
   }
 }
-
 get_idle_anim(type, ai_context, which_set) {
   info = get_info_set(which_set, true);
   if(isDefined(info[type])) {
@@ -266,11 +252,9 @@ get_idle_anim(type, ai_context, which_set) {
     }
   }
 }
-
 is_valid_stance(stance) {
   return (stance == "stand" || stance == "crouch" || stance == "prone");
 }
-
 do_contextual_melee(player) {
   info = self._melee.info;
   player FreezeControls(true);
@@ -315,7 +299,6 @@ do_contextual_melee(player) {
     }
   }
 }
-
 stop_everything() {
   self notify("end_patrol");
   self notify("_stealth_stop_stealth_logic");
@@ -326,17 +309,14 @@ stop_everything() {
   self Unlink();
   self anim_stopAnimScripted();
 }
-
 contextual_melee_watch_for_anim_end() {
   self animscripts\shared::DoNoteTracks("contextual_melee_anim");
   self notify("finish_contextual_melee");
 }
-
 contextual_melee_watch_for_victim_died() {
   self waittill("death");
   self notify("finish_contextual_melee");
 }
-
 end_contextual_melee(victim) {
   level waittill_any_ents(victim, "death", self, "melee_done");
   self Unlink();
@@ -350,14 +330,12 @@ end_contextual_melee(victim) {
   self FreezeControls(false);
   self enable_weapon();
 }
-
 setup_fx() {
   level._effect["neckstab_stand_blood"] = LoadFX("impacts/fx_melee_neck_stab");
   level._effect["neckstab_crouch_blood"] = LoadFX("impacts/fx_melee_neck_stab_crouching");
   level._effect["neckstab_stand_blood_left"] = LoadFX("impacts/fx_melee_neck_stab_left");
   level._effect["hatchet_arm_blood"] = LoadFX("maps/rebirth/fx_axe_to_the_arm");
 }
-
 get_info_by_type(type, ai_context, player_context, which_set) {
   info = get_info_set(which_set, true);
   if(isDefined(info[type])) {
@@ -368,20 +346,18 @@ get_info_by_type(type, ai_context, player_context, which_set) {
     }
   }
 }
-
 get_info(player_context, ai_context, which_set) {
   info = get_info_set(which_set);
   if(isDefined(info[player_context])) {
     if(isDefined(info[player_context][ai_context])) {
       info = info[player_context][ai_context];
       keys = GetArrayKeys(info);
-      type = keys[randomInt(keys.size)];
+      type = keys[RandomInt(keys.size)];
       info = info[type];
       return info;
     }
   }
 }
-
 get_info_set(which_set, by_type) {
   if(!isDefined(which_set)) {
     which_set = "default";
@@ -392,7 +368,6 @@ get_info_set(which_set, by_type) {
     return level._melee.info[which_set];
   }
 }
-
 setup_info() {
   add_melee_sequence("default", "garrote", "stand", "stand", %int_contextual_melee_garrote, %ai_contextual_melee_garrote);
   add_melee_sequence("default", "garrote", "stand", "sit", %int_contextual_melee_garrotesit, %ai_contextual_melee_garrotesit_death, %ai_contextual_melee_garrotesit_idle, %ai_contextual_melee_garrotesit_deathpose);
@@ -415,7 +390,6 @@ setup_info() {
   level.scr_model["player_model_contextual_melee"] = level.player_interactive_model;
   setup_props();
 }
-
 add_melee_sequence(set, type, player_context, ai_context, player_anim, ai_anim, ai_idle, ai_deathpose) {
   if(!isDefined(level._melee.info)) {
     level._melee.info = [];
@@ -442,16 +416,13 @@ add_melee_sequence(set, type, player_context, ai_context, player_anim, ai_anim, 
     level._melee.info_by_type[set][type][ai_context][player_context]["ai_deathpose"] = ai_deathpose;
   }
 }
-
 add_scripted_melee(name, player_anim, ai_anim, ai_idle, ai_deathpose) {
   add_melee_sequence("scripted", name, "scripted", "scripted", player_anim, ai_anim, ai_idle, ai_deathpose);
 }
-
 add_melee_callback(set, type, player_context, ai_context, callback) {
   level._melee.info[set][player_context][ai_context][type]["callback"] = callback;
   level._melee.info_by_type[set][type][ai_context][player_context]["callback"] = callback;
 }
-
 do_fx() {
   while(true) {
     self waittill("contextual_melee_anim", note);
@@ -477,13 +448,11 @@ do_fx() {
     }
   }
 }
-
 get_weapon(type) {
   if(isDefined(level._melee.weapon_info[type])) {
     return level._melee.weapon_info[type];
   }
 }
-
 does_melee_type_need_legs(type) {
   switch (type) {
     case "shovelslam":
@@ -494,7 +463,6 @@ does_melee_type_need_legs(type) {
       return false;
   }
 }
-
 spawn_player_hands(align_ent, info) {
   if(isDefined(self.early_contextual_player_hands)) {
     self.player_hands = self.early_contextual_player_hands;
@@ -504,17 +472,15 @@ spawn_player_hands(align_ent, info) {
     self.player_hands = spawn_anim_model("player_hands_contextual_melee", start_org, start_ang);
   }
   if(!isDefined(level._contextual_melee_hide)) {
-    self.player_hands hide();
+    self.player_hands Hide();
   }
 }
-
 spawn_player_model(align_ent, info) {
   start_org = GetStartOrigin(align_ent.origin, align_ent.angles, info["player"]);
   start_ang = GetStartAngles(align_ent.origin, align_ent.angles, info["player"]);
   self.player_hands = spawn_anim_model("player_model_contextual_melee", start_org, start_ang);
-  self.player_hands hide();
+  self.player_hands Hide();
 }
-
 animate_player_hands(victim, info) {
   self.player_hands SetAnim(info["player"], 1, 0, 0);
   self StartCameraTween(level._CONTEXTUAL_MELEE_LERP_TIME);
@@ -534,7 +500,6 @@ animate_player_hands(victim, info) {
   self.player_hands Show();
   self.player_hands animscripts\shared::DoNoteTracks("contextual_melee_anim");
 }
-
 #using_animtree("animated_props");
 setup_props() {
   add_melee_weapon("default", "neckstab", "stand", "stand", "weapon_parabolic_knife");
@@ -548,19 +513,16 @@ setup_props() {
   add_melee_prop_anim("default", "garrote", "stand", "sit", %prop_contextual_melee_garrotesit_chair);
   add_melee_prop_anim("quick", "garrote", "stand", "sit", %prop_contextual_melee_garrotesit_chair_quick);
 }
-
 add_melee_weapon(set, type, player_context, ai_context, weapon_name, weapon_anim) {
   level._melee.info[set][player_context][ai_context][type]["weapon_name"] = weapon_name;
   level._melee.info[set][player_context][ai_context][type]["weapon_anim"] = weapon_anim;
   level._melee.info_by_type[set][type][ai_context][player_context]["weapon_name"] = weapon_name;
   level._melee.info_by_type[set][type][ai_context][player_context]["weapon_anim"] = weapon_anim;
 }
-
 add_melee_prop_anim(set, type, player_context, ai_context, animation) {
   level._melee.info[set][player_context][ai_context][type]["prop_anim"] = animation;
   level._melee.info_by_type[set][type][ai_context][player_context]["prop_anim"] = animation;
 }
-
 animate_weapon(weapon_name, animation) {
   weapon_org = self.player_hands GetTagOrigin("tag_weapon");
   weapon_ang = self.player_hands GetTagAngles("tag_weapon");
@@ -572,18 +534,15 @@ animate_weapon(weapon_name, animation) {
   weapon animscripts\shared::DoNoteTracks("contextual_melee_weapon_anim");
   weapon Delete();
 }
-
 animate_prop() {
   if(isDefined(self._melee.info["prop_anim"])) {
     self._contextual_melee_align_obj UseAnimTree(#animtree);
     self._contextual_melee_align_obj AnimScripted("contextual_melee_prop_anim", self._contextual_melee_align_obj.origin, self._contextual_melee_align_obj.angles, self._melee.info["prop_anim"]);
   }
 }
-
 contextual_melee_show_hintstring(string_on) {
   level._contextual_melee_print_hintstring = string_on;
 }
-
 contextual_melee_allow_fire_button(string_on) {
   level._contextual_melee_allow_fire_button = string_on;
 }

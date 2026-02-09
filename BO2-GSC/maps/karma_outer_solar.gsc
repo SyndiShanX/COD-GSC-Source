@@ -45,7 +45,7 @@ skipto_club_solar() {
 main() {
   iprintln("outer_solar");
 
-  level.n_aggressivecullradius = getdvar(#"_id_0EC60F96");
+  level.n_aggressivecullradius = getDvar(#"_id_0EC60F96");
   setsaveddvar("Cg_aggressivecullradius", 50);
   setsaveddvar("r_skyTransition", 1);
   setsaveddvar("mantle_enable", 0);
@@ -65,8 +65,9 @@ main() {
   flag_set("player_among_civilians");
   setmusicstate("KARMA_1_OUTER_SOLAR");
 
-  foreach(ent in getEntArray("velvet_rope", "script_noteworthy"))
-  ent setscale(0.9);
+  foreach(ent in getEntArray("velvet_rope", "script_noteworthy")) {
+    ent setscale(0.9);
+  }
 
   trigger_wait("t_club_entrance");
   clientnotify("scle");
@@ -111,8 +112,9 @@ bar_glass_visibility_think() {
 
   flag_wait("start_club_encounter");
 
-  foreach(e_glass in getEntArray("club_glass", "targetname"))
-  e_glass show();
+  foreach(e_glass in getEntArray("club_glass", "targetname")) {
+    e_glass show();
+  }
 }
 
 enter_bar_animations(str_cleanup_flag) {
@@ -162,40 +164,46 @@ outer_solar_fx() {
 }
 
 globe_activate(str_targetname, n_orbit_time, n_orbit_direction, str_endon, str_cleanup, str_fx, str_tag, v_offset) {
-  if(!isDefined(v_offset))
+  if(!isDefined(v_offset)) {
     v_offset = (0, 0, 0);
+  }
 
   a_m_globes = getEntArray(str_targetname, "targetname");
 
   foreach(m_globe in a_m_globes) {
     m_globe setforcenocull();
 
-    if(isDefined(str_cleanup))
+    if(isDefined(str_cleanup)) {
       m_globe add_cleanup_ent(str_cleanup);
+    }
 
     if(isDefined(m_globe.script_float)) {
       m_globe ignorecheapentityflag(1);
       m_globe setscale(m_globe.script_float);
     }
 
-    if(isDefined(str_fx))
+    if(isDefined(str_fx)) {
       m_globe thread play_fx(str_fx, m_globe.origin + v_offset, (0, 0, 0), str_endon, 1, undefined, 1);
+    }
 
     m_globe thread spin_globe(str_endon, n_orbit_time, n_orbit_direction);
   }
 }
 
 spin_globe(str_endon, n_orbit_time, n_orbit_direction) {
-  if(!isDefined(n_orbit_time))
+  if(!isDefined(n_orbit_time)) {
     n_orbit_time = 30;
+  }
 
-  if(!isDefined(n_orbit_direction))
+  if(!isDefined(n_orbit_direction)) {
     n_orbit_direction = 1;
+  }
 
   self endon("death");
 
-  if(isDefined(str_endon))
+  if(isDefined(str_endon)) {
     level endon(str_endon);
+  }
 
   while(true) {
     self rotateyaw(n_orbit_direction * 360, n_orbit_time);
@@ -274,8 +282,9 @@ init_solar_systems() {
 
 start_civs_outer_solar(str_kill_flag) {
   if(!is_mature()) {
-    foreach(e_dancer in getEntArray("dancers", "script_noteworthy"))
-    e_dancer delete();
+    foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
+      e_dancer delete();
+    }
 
     level thread init_solar_systems();
   } else
@@ -425,8 +434,9 @@ blocking_bouncer_vo_and_wristband() {
 }
 
 player_show_wristband(delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   level.player_viewmodel = "c_usa_masonjr_karma_viewhands";
   level.player showviewmodel();
@@ -465,18 +475,21 @@ outer_solar_cleanup() {
   delete_exploder(601);
   wait 0.1;
 
-  foreach(e_door in getEntArray("script_doors", "script_noteworthy"))
-  e_door delete();
+  foreach(e_door in getEntArray("script_doors", "script_noteworthy")) {
+    e_door delete();
+  }
 
   if(is_mature()) {
     foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
-      if(isDefined(e_dancer.script_float) && e_dancer.script_float == 1.0)
+      if(isDefined(e_dancer.script_float) && e_dancer.script_float == 1.0) {
         e_dancer delete();
+      }
     }
   } else {
     foreach(e_solarsystem in getEntArray("fxanim_solar_system", "targetname")) {
-      if(isDefined(e_solarsystem.script_int) && e_solarsystem.script_int == 1)
+      if(isDefined(e_solarsystem.script_int) && e_solarsystem.script_int == 1) {
         e_solarsystem.script_string = "solar_system_delete";
+      }
     }
 
     maps\_fxanim::fxanim_delete("solar_system_delete");

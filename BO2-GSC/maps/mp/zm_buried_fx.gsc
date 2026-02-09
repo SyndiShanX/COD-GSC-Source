@@ -22,7 +22,7 @@ precache_scripted_fx() {
   level._effect["blue_eyes"] = loadfx("maps/zombie/fx_zombie_eye_single_blue");
   level._effect["orange_eyes"] = loadfx("misc/fx_zombie_eye_single");
   level._effect["player_possessed_eyes"] = loadfx("maps/zombie_buried/fx_buried_eye_stulhinger");
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
 
   if(gametype == "zcleansed") {
     level._effect["blue_eyes_player"] = loadfx("maps/zombie/fx_zombie_eye_returned_blue");

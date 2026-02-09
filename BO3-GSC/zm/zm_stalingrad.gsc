@@ -121,7 +121,7 @@ function main() {
   level._uses_taser_knuckles = 1;
   level.var_bd64e31e = 20;
   level.debug_keyline_zombies = 0;
-  setdvar("dlc3_veh_UpdateYawEvenWhileStationary", 1);
+  setDvar("dlc3_veh_UpdateYawEvenWhileStationary", 1);
   zm::init_fx();
   zm_stalingrad_fx::init();
   dragon::init_clientfields();
@@ -258,7 +258,7 @@ function main() {
   level thread function_9273a671();
   level thread zm_stalingrad_pap::function_5efc91a4();
   level thread function_ba96daeb();
-  setdvar("hkai_pathfindIterationLimit", 1200);
+  setDvar("hkai_pathfindIterationLimit", 1200);
   zm_stalingrad_ffotd::main_end();
 }
 

@@ -8,17 +8,12 @@ _breach global script
 
 NOTE: Load \test\breach.d3dbsp to test all supported breaches
 
- -- -- -- -- -- -- -- -- -- -- -- -- --
-Currently supported breaches( sBreachType )
- -- -- -- -- -- -- -- -- -- -- -- -- --
-"explosive_breach_left""shotgunhinges_breach_left":
+ -- -- -- -- -- -- -- -- -- -- -- -- -- Currently supported breaches( sBreachType )
+ -- -- -- -- -- -- -- -- -- -- -- -- -- "explosive_breach_left""shotgunhinges_breach_left":
 "flash_breach_no_door_right":
 
- -- -- -- -- -- -- -- -- -- -- -- -- --
-How to use
- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-1 )Add any of the following above _load:::main();
+ -- -- -- -- -- -- -- -- -- -- -- -- -- How to use
+ -- -- -- -- -- -- -- -- -- -- -- -- -- 1 )Add any of the following above _load:::main();
 
 	maps\_breach_explosive_left::main();
 	maps\_breach_flash_right::main();
@@ -49,10 +44,8 @@ How to use
 				of any number. Used to play default fx and will later by used by fx artists for additional
 				smoke or custom effects in the room
 				
- -- -- -- -- -- -- -- -- -- -- -- -- --
-Function arguments
- -- -- -- -- -- -- -- -- -- -- -- -- --
- < volume > thread breach_think( aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultFx, bShoot );
+ -- -- -- -- -- -- -- -- -- -- -- -- -- Function arguments
+ -- -- -- -- -- -- -- -- -- -- -- -- -- < volume > thread breach_think( aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultFx, bShoot );
 
  < volume > 	 = The room volume being breached
 aBreachers	 = The array of friendlies performing the breach( can not be more than 2 )
@@ -62,10 +55,8 @@ bSpawnHostiles = true / false value if you want to spawn hostiles inside right b
 bPlayDefaultFx = defaults to true. Set to false and add effects to the exploder instead if you like
 bShoot = some breaches have the AI firing randomly as they storm into a room while they are still playing the scripted anim. True by default
 
- -- -- -- -- -- -- -- -- -- -- -- -- --
-PROPERTIES
- -- -- -- -- -- -- -- -- -- -- -- -- --
-.firstBreacher - to have a specific guy be the first to a breach. If undefined, will choose whichever AI is closest to the door at the time the breach script is called
+ -- -- -- -- -- -- -- -- -- -- -- -- -- PROPERTIES
+ -- -- -- -- -- -- -- -- -- -- -- -- -- .firstBreacher - to have a specific guy be the first to a breach. If undefined, will choose whichever AI is closest to the door at the time the breach script is called
 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 
@@ -96,8 +87,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     anim.fire_notetrack_functions["scripted"] = ::breach_fire_straight;
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  VARIABLE SETUP
+  /* -- -- -- -- -- -- -- -- -- -- -- - VARIABLE SETUP
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self.flashthrown = false;
   self.closestAI = undefined;
@@ -186,15 +176,13 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     assertEx((isDefined(self.grenadeDest)), "script_origin 'flashthrow_" + sRoomName + "' needs to target another script_origin where you want the flashbang to be thrown to");
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  CLEANUP AND FX
+  /* -- -- -- -- -- -- -- -- -- -- -- - CLEANUP AND FX
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self thread breach_abort(aBreachers);
   self thread breach_cleanup(aBreachers);
   self thread breach_play_fx(sBreachType, bPlayDefaultFx);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  DECIDE WHO WILL TAKE UP FIRST POSITION
+  /* -- -- -- -- -- -- -- -- -- -- -- - DECIDE WHO WILL TAKE UP FIRST POSITION
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   iFirstBreachers = 0;
   for(i = 0; i < aBreachers.size; i++) {
@@ -208,8 +196,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   else
     self.closestAI = getClosest(self.animEnt.origin, aBreachers);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  SEND EACH AI TO IDLE
+  /* -- -- -- -- -- -- -- -- -- -- -- - SEND EACH AI TO IDLE
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if(aBreachers.size == 1)
     self.singleBreacher = true;
@@ -219,8 +206,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   while(self.breachers < aBreachers.size)
     wait(0.05);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  AI IS READY TO BREACH
+  /* -- -- -- -- -- -- -- -- -- -- -- - AI IS READY TO BREACH
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self notify("ready_to_breach");
   self.readyToBreach = true;
@@ -234,8 +220,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   flag_set("begin_the_breach");
   self.aboutToBeBreached = true;
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  SPAWN HOSTILES RIGHT AS ROOM IS BEING BREACHED( IF SPECIFIED IN ARGUMENT )
+  /* -- -- -- -- -- -- -- -- -- -- -- - SPAWN HOSTILES RIGHT AS ROOM IS BEING BREACHED( IF SPECIFIED IN ARGUMENT )
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
 
   if(isDefined(bSpawnHostiles) && (bSpawnHostiles == true)) {
@@ -247,8 +232,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     self.hostilesSpawned = true;
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  GET ARRAY OF ALL HOSTILES TOUCHING THE ROOM VOLUME
+  /* -- -- -- -- -- -- -- -- -- -- -- - GET ARRAY OF ALL HOSTILES TOUCHING THE ROOM VOLUME
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   // badplace to get AI out of the way of the door
   if(isDefined(self.badplace))
@@ -263,15 +247,13 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   if(aHostiles.size > 0)
     array_thread(aHostiles, ::breach_enemies_stunned, self);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  WAIT FOR ALL THE AI TO BE IN THE ROOM
+  /* -- -- -- -- -- -- -- -- -- -- -- - WAIT FOR ALL THE AI TO BE IN THE ROOM
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   while(!self.AIareInTheRoom)
     wait(0.05);
 
   self notify("breach_complete");
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  WAIT FOR ROOM TO BE CLEARED
+  /* -- -- -- -- -- -- -- -- -- -- -- - WAIT FOR ROOM TO BE CLEARED
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if(!aHostiles.size) {
     return;
@@ -306,8 +288,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
   self thread give_infinite_ammo();
 
   eVolume endon("breach_abort");
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  VARIABLE SETUP
+  /* -- -- -- -- -- -- -- -- -- -- -- - VARIABLE SETUP
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self.ender = "stop_idle_" + self getentitynumber();
   AInumber = undefined;
@@ -321,8 +302,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
   else
     AInumber = "02";
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  SPECIAL CASE: SINGLE EXPLOSIVVE GUY NEEDS TO BE NUMBER TWO IN THE STACK
+  /* -- -- -- -- -- -- -- -- -- -- -- - SPECIAL CASE: SINGLE EXPLOSIVVE GUY NEEDS TO BE NUMBER TWO IN THE STACK
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if((eVolume.singleBreacher == true) && (sBreachType == "explosive_breach_left"))
     AInumber = "02";
@@ -359,8 +339,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
       break;
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  AI TO BREACH IDLE
+  /* -- -- -- -- -- -- -- -- -- -- -- - AI TO BREACH IDLE
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self breach_set_goaladius(64);
 
@@ -379,8 +358,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
   self.scriptedarrivalent = undefined;
   eVolume waittill("execute_the_breach");
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  AI FLASHES THE ROOM
+  /* -- -- -- -- -- -- -- -- -- -- -- - AI FLASHES THE ROOM
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if((!eVolume.flashthrown) && (isDefined(sAnimFlash))) {
     eVolume.animEnt notify(self.ender);
@@ -409,8 +387,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
     wait(.1);
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  PLAY BREACH ANIMS ON BOTH AI
+  /* -- -- -- -- -- -- -- -- -- -- -- - PLAY BREACH ANIMS ON BOTH AI
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   eVolume.animEnt notify(self.ender);
 
@@ -418,12 +395,10 @@ breacher_think(eVolume, sBreachType, bShoot) {
     self.breachDoNotFire = true;
   eVolume.animEnt thread anim_generic(self, sAnimBreach);
   // eVolume.animEnt anim_generic( self, sAnimBreach );	
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  CONDITIONAL: EXPLOSIVE BREACH
+  /* -- -- -- -- -- -- -- -- -- -- -- - CONDITIONAL: EXPLOSIVE BREACH
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if(sBreachType == "explosive_breach_left") {
-    /* -- -- -- -- -- -- -- -- -- -- -- -
-    BLOW THE DOOR
+    /* -- -- -- -- -- -- -- -- -- -- -- - BLOW THE DOOR
      -- -- -- -- -- -- -- -- -- -- -- -- -*/
     if(AInumber == "02") {
       self thread detcord_logic(eVolume);
@@ -439,12 +414,10 @@ breacher_think(eVolume, sBreachType, bShoot) {
     }
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  CONDITIONAL: SHOTGUN BREACH A
+  /* -- -- -- -- -- -- -- -- -- -- -- - CONDITIONAL: SHOTGUN BREACH A
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   else if(sBreachType == "shotgunhinges_breach_left") {
-    /* -- -- -- -- -- -- -- -- -- -- -- -
-    SHOOT THE DOOR
+    /* -- -- -- -- -- -- -- -- -- -- -- - SHOOT THE DOOR
      -- -- -- -- -- -- -- -- -- -- -- -- -*/
     if(AInumber == "01") {
       eVolume notify("spawn_hostiles");
@@ -454,15 +427,13 @@ breacher_think(eVolume, sBreachType, bShoot) {
     }
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  CONDITIONAL: SHACK BREACH
+  /* -- -- -- -- -- -- -- -- -- -- -- - CONDITIONAL: SHACK BREACH
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   else if(sBreachType == "flash_breach_no_door_right") {
     // Nothing conditional to do for this breach yet
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- -
-  AI FINISHES ENTERING
+  /* -- -- -- -- -- -- -- -- -- -- -- - AI FINISHES ENTERING
    -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self waittillmatch("single anim", "end");
   self notify("breach_complete");
@@ -645,7 +616,6 @@ spawnBreachHostiles(arrayToSpawn) {
   for(i = 0; i < arrayToSpawn.size; i++) {
     guy = spawnHostile(arrayToSpawn[i]);
     spawnedGuys[spawnedGuys.size] = guy;
-
   }
   // check to ensure all the guys were spawned
   assertEx((arrayToSpawn.size == spawnedGuys.size), "Not all guys were spawned successfully from spawnBreachHostiles");

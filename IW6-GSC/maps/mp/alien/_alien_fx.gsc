@@ -29,7 +29,6 @@ alien_fire_on() {
 
   if(self.is_burning == 1) {
     self SetScriptablePartState("body", "burning");
-
   }
 }
 

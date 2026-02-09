@@ -40,7 +40,6 @@ _id_48CC(var_0) {
 
   if(isDefined(var_0._id_48D2)) {
     var_0._id_48D1 = var_0._id_48D2;
-
   }
   var_0._id_488A = 0;
   animscripts\hummer_turret\common::_id_48B6(var_0);
@@ -61,11 +60,9 @@ _id_48CC(var_0) {
     } else if(!var_0._id_488B && var_6) {
       if(!isDefined(var_2)) {
         var_2 = gettime();
-
       }
       if(!isDefined(var_3)) {
         var_3 = randomfloatrange(var_0._id_48CD, var_0._id_48CE);
-
       }
       if(gettime() - var_2 >= var_3) {
         var_6 = 0;
@@ -77,7 +74,6 @@ _id_48CC(var_0) {
     } else if(!var_0._id_488B && !var_6 && var_7) {
       if(!isDefined(var_5)) {
         var_5 = randomfloatrange(var_0._id_48CF, var_0._id_48D0);
-
       }
       if(self._id_4887 || gettime() - var_4 >= var_5) {
         var_0 stopbarrelspin();
@@ -88,7 +84,6 @@ _id_48CC(var_0) {
 
     if(var_0._id_4889 == "fire") {
       var_0._id_488A = var_0._id_488A + 0.05;
-
     }
     if(var_0._id_488A > var_0._id_48D1) {
       var_0._id_488B = 0;

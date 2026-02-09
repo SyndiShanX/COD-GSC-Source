@@ -556,7 +556,6 @@ freeze(ai) {
   while(true) {
     ai animscripted("frozen", ai.origin, ai.angles, %standunarmed_idle_loop);
     ai waittillmatch("frozen", "end");
-
   }
 }
 

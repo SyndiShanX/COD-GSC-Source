@@ -129,9 +129,9 @@ main() {
   precache_scripted_fx();
   precache_fxanim_props();
   maps\mp\createfx\zm_nuked_fx::main();
-  setdvar("enable_global_wind", 1);
-  setdvar("wind_global_vector", "1 0 0");
-  setdvar("wind_global_low_altitude", 0);
-  setdvar("wind_global_hi_altitude", 0);
-  setdvar("wind_global_low_strength_percent", 0);
+  setDvar("enable_global_wind", 1);
+  setDvar("wind_global_vector", "1 0 0");
+  setDvar("wind_global_low_altitude", 0);
+  setDvar("wind_global_hi_altitude", 0);
+  setDvar("wind_global_low_strength_percent", 0);
 }

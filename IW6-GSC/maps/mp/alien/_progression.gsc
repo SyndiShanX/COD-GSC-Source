@@ -124,7 +124,6 @@ player_watch_upgrade_internal(resource, type) {
       }
 
       bbprint("aliencombatresourceupgraded", "cyclenum %i hivename %s resource %s resourcelevel %s ownername %s ", cyclenum, hivename, resource.ref, rank, playername);
-
     }
   }
 }

@@ -13,7 +13,6 @@ main() {
   maps\createfx\zombie_pentagon_fx::main();
   precacheFX();
 }
-
 footsteps() {}
 scriptedFX() {
   level._effect["large_ceiling_dust"] = loadfx("maps/zombie/fx_dust_ceiling_impact_lg_mdbrown");
@@ -41,7 +40,6 @@ scriptedFX() {
   level._effect["animscript_gibtrail_fx"] = LoadFx("trail/fx_trail_blood_streak");
   level._effect["test_spin_fx"] = LoadFX("env/light/fx_light_warning");
 }
-
 precachefx() {
   level._effect["zombie_packapunch"] = loadfx("maps/zombie/fx_zombie_packapunch");
   level._effect["boxlight_light_ready"] = loadfx("maps/zombie/fx_zombie_theater_lightboard_green");

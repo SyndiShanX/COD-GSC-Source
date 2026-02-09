@@ -10,9 +10,9 @@ busInit() {
   level.busState = "";
   registerClientSys("busCmd");
 }
-
 setBusState(state) {
-  if(level.busState != state)
+  if(level.busState != state) {
     setClientSysState("busCmd", state);
+  }
   level.busState = state;
 }

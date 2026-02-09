@@ -8,19 +8,22 @@
 main() {
   minefields = getEntArray("minefield", "targetname");
 
-  if(minefields.size > 0)
+  if(minefields.size > 0) {
     level._effect["mine_explosion"] = loadfx("explosions/fx_grenadeExp_dirt");
+  }
 
-  for(i = 0; i < minefields.size; i++)
+  for(i = 0; i < minefields.size; i++) {
     minefields[i] thread minefield_think();
+  }
 }
 
 minefield_think() {
   while(true) {
     self waittill("trigger", other);
 
-    if(issentient(other))
+    if(issentient(other)) {
       other thread minefield_kill(self);
+    }
   }
 }
 
@@ -37,7 +40,7 @@ minefield_kill(trigger) {
     return;
   }
   if(self istouching(trigger)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       level notify("mine death");
       self playSound("explo_mine");
     } else

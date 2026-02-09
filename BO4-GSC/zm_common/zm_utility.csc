@@ -261,7 +261,7 @@ umbra_fix_trigger(localclientnum, pos, height, radius, umbra_name) {
 function_f8796df3(localclientnum) {
   b_first = 0;
 
-  if(isplayer(self) && self function_21c0fa55() && !isdemoplaying()) {
+  if(isPlayer(self) && self function_21c0fa55() && !isdemoplaying()) {
     if(!isDefined(self getlocalclientnumber()) || localclientnum == self getlocalclientnumber()) {
       b_first = 1;
     }
@@ -273,7 +273,7 @@ function_f8796df3(localclientnum) {
 function_5d8fd5f3(localclientnum) {
   b_first = 0;
 
-  if(isplayer(self) && self function_21c0fa55() && !isdemoplaying()) {
+  if(isPlayer(self) && self function_21c0fa55() && !isdemoplaying()) {
     if(!isDefined(self getlocalclientnumber()) || localclientnum == self getlocalclientnumber()) {
       if(!isthirdperson(localclientnum)) {
         b_first = 1;

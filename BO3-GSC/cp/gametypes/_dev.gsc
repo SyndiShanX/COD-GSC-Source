@@ -30,27 +30,27 @@ function __init__() {
 
 function init() {
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   thread testscriptruntimeerror();
   thread testdvars();
   thread devhelipathdebugdraw();
   thread devstraferunpathdebugdraw();
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   thread equipment_dev_gui();
   thread grenade_dev_gui();
-  setdvar("", "");
+  setDvar("", "");
   level.dem_spawns = [];
   if(level.gametype == "") {
     extra_spawns = [];
@@ -122,7 +122,7 @@ function warpalltoplayer(team, player) {
       players[i] setorigin(origin);
     }
   }
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function updatedevsettingszm() {
@@ -162,7 +162,7 @@ function updatedevsettingszm() {
         }
       }
       if(numpoints == 0) {
-        setdvar("", "");
+        setDvar("", "");
         level.streamdumpteamindex = -1;
       } else {
         averageorigin = (0, 0, 0);
@@ -174,7 +174,7 @@ function updatedevsettingszm() {
         level.players[0] setplayerangles(averageangles);
         level.players[0] setorigin(averageorigin);
         wait(0.05);
-        setdvar("", "");
+        setDvar("", "");
       }
     }
   }
@@ -209,7 +209,7 @@ function updatedevsettings() {
               } else {
                 if(getdvarstring("") == "") {
                   players = getplayers();
-                  setdvar("", "");
+                  setDvar("", "");
                   if(!isDefined(level.devgui_start_spawn_index)) {
                     level.devgui_start_spawn_index = 0;
                   }
@@ -229,7 +229,7 @@ function updatedevsettings() {
                 } else {
                   if(getdvarstring("") == "") {
                     players = getplayers();
-                    setdvar("", "");
+                    setDvar("", "");
                     if(!isDefined(level.devgui_start_spawn_index)) {
                       level.devgui_start_spawn_index = 0;
                     }
@@ -249,7 +249,7 @@ function updatedevsettings() {
                   } else {
                     if(getdvarstring("") == "") {
                       players = getplayers();
-                      setdvar("", "");
+                      setDvar("", "");
                       spawns = level.spawnpoints;
                       spawns = arraycombine(spawns, level.dem_spawns, 1, 0);
                       if(!isDefined(level.devgui_spawn_index)) {
@@ -270,7 +270,7 @@ function updatedevsettings() {
                     } else {
                       if(getdvarstring("") == "") {
                         players = getplayers();
-                        setdvar("", "");
+                        setDvar("", "");
                         spawns = level.spawnpoints;
                         spawns = arraycombine(spawns, level.dem_spawns, 1, 0);
                         if(!isDefined(level.devgui_spawn_index)) {
@@ -304,7 +304,7 @@ function updatedevsettings() {
                             player.devgui_spawn_active = 0;
                             player setactionslot(3, "");
                           }
-                          setdvar("", "");
+                          setDvar("", "");
                         } else {
                           if(getdvarstring("") != "") {
                             players = getplayers();
@@ -325,10 +325,10 @@ function updatedevsettings() {
                               }
                               players[i] notify("devgui_unlimited_ammo");
                             }
-                            setdvar("", "");
+                            setDvar("", "");
                           } else {
                             if(getdvarstring("") != "") {
-                              setdvar("", "");
+                              setDvar("", "");
                             } else {
                               if(getdvarstring("") != "") {
                                 players = getplayers();
@@ -344,7 +344,7 @@ function updatedevsettings() {
                                     player setweaponammoclip(weapons[j], 0);
                                   }
                                 }
-                                setdvar("", "");
+                                setDvar("", "");
                               } else if(getdvarstring("") != "") {
                                 players = getplayers();
                                 for(i = 0; i < players.size; i++) {
@@ -355,7 +355,7 @@ function updatedevsettings() {
                                   }
                                   player setempjammed(1);
                                 }
-                                setdvar("", "");
+                                setDvar("", "");
                               }
                             }
                           }
@@ -384,7 +384,7 @@ function updatedevsettings() {
         }
       }
       if(numpoints == 0) {
-        setdvar("", "");
+        setDvar("", "");
         level.streamdumpteamindex = -1;
       } else {
         averageorigin = (0, 0, 0);
@@ -396,7 +396,7 @@ function updatedevsettings() {
         level.players[0] setplayerangles(averageangles);
         level.players[0] setorigin(averageorigin);
         wait(0.05);
-        setdvar("", "");
+        setDvar("", "");
       }
     }
   }
@@ -418,7 +418,7 @@ function updatedevsettings() {
         }
       }
     }
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") != "") {
     perk = getdvarstring("");
@@ -426,21 +426,21 @@ function updatedevsettings() {
       level.players[i] unsetperk(perk);
       level.players[i].extraperks[perk] = undefined;
     }
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") != "") {
     nametokens = strtok(getdvarstring(""), "");
     if(nametokens.size > 1) {
       thread xkillsy(nametokens[0], nametokens[1]);
     }
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") != "") {
     player.pers[""] = 0;
     player.pers[""] = 0;
     newrank = min(getdvarint(""), 54);
     newrank = max(newrank, 1);
-    setdvar("", "");
+    setDvar("", "");
     lastxp = 0;
     for(index = 0; index <= newrank; index++) {
       newxp = rank::getrankinfominxp(index);
@@ -452,14 +452,14 @@ function updatedevsettings() {
   }
   if(getdvarstring("") != "") {
     player thread rank::giverankxp("", getdvarint(""), 1);
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") != "") {
     for(i = 0; i < level.players.size; i++) {
       level.players[i] hud_message::oldnotifymessage(getdvarstring(""), getdvarstring(""), game[""][""]);
     }
     announcement(getdvarstring(""), 0);
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") != "") {
     ents = getEntArray();
@@ -494,13 +494,13 @@ function devgui_spawn_think() {
     self setactionslot(3, "");
     self setactionslot(4, "");
     if(!dpad_left && self buttonpressed("")) {
-      setdvar("", "");
+      setDvar("", "");
       dpad_left = 1;
     } else if(!self buttonpressed("")) {
       dpad_left = 0;
     }
     if(!dpad_right && self buttonpressed("")) {
-      setdvar("", "");
+      setDvar("", "");
       dpad_right = 1;
     } else if(!self buttonpressed("")) {
       dpad_right = 0;
@@ -621,7 +621,7 @@ function testscriptruntimeerror() {
     wait(1);
   }
   myerror = getdvarstring("");
-  setdvar("", "");
+  setDvar("", "");
   if(myerror == "") {
     testscriptruntimeerrorassert();
   } else {
@@ -641,8 +641,8 @@ function testdvars() {
   tokens = strtok(getdvarstring(""), "");
   dvarname = tokens[0];
   dvarvalue = tokens[1];
-  setdvar(dvarname, dvarvalue);
-  setdvar("", "");
+  setDvar(dvarname, dvarvalue);
+  setDvar("", "");
   thread testdvars();
 }
 
@@ -891,7 +891,7 @@ function take_all_grenades_and_equipment(player) {
 function equipment_dev_gui() {
   set_equipment_list();
   set_grenade_list();
-  setdvar("", "");
+  setDvar("", "");
   while(true) {
     wait(0.5);
     devgui_int = getdvarint("");
@@ -900,7 +900,7 @@ function equipment_dev_gui() {
         take_all_grenades_and_equipment(level.players[i]);
         level.players[i] giveweapon(level.dev_equipment[devgui_int]);
       }
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }
@@ -908,7 +908,7 @@ function equipment_dev_gui() {
 function grenade_dev_gui() {
   set_equipment_list();
   set_grenade_list();
-  setdvar("", "");
+  setDvar("", "");
   while(true) {
     wait(0.5);
     devgui_int = getdvarint("");
@@ -917,7 +917,7 @@ function grenade_dev_gui() {
         take_all_grenades_and_equipment(level.players[i]);
         level.players[i] giveweapon(level.dev_grenade[devgui_int]);
       }
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }
@@ -939,7 +939,7 @@ function devstraferunpathdebugdraw() {
       node = getvehiclenode("", "");
       if(!isDefined(node)) {
         println("");
-        setdvar("", "");
+        setDvar("", "");
         continue;
       }
       while(isDefined(node.target)) {

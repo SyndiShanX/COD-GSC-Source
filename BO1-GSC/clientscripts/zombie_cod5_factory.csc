@@ -1,6 +1,6 @@
 /*************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cod5_factory.csc
+ * Script: clientscripts\zombie_cod5_factory\.csc
 *************************************************/
 
 #include clientscripts\_utility;
@@ -17,9 +17,8 @@ zombie_monitor(clientNum) {
     realwait(0.1);
   }
 }
-
 zombifyHandler(clientNum, newState, oldState) {
-  player = getLocalPlayers()[clientNum];
+  player = getlocalplayers()[clientNum];
   if(newState == "1") {
     if(!isDefined(player.zombifyFX)) {
       player.zombifyFX = 1;
@@ -34,7 +33,6 @@ zombifyHandler(clientNum, newState, oldState) {
     }
   }
 }
-
 factory_ZPO_listener() {
   while(1) {
     level waittill("ZPO");
@@ -45,7 +43,6 @@ factory_ZPO_listener() {
     level notify("pl1");
   }
 }
-
 main() {
   include_weapons();
   level._uses_crossbow = true;
@@ -60,11 +57,9 @@ main() {
   level thread factory_ZPO_listener();
   println("*** Client : zombie running...or is it chasing? Muhahahaha");
 }
-
 register_zombie_types() {
   character\clientscripts\c_ger_honorguard_zt::register_gibs();
 }
-
 include_weapons() {
   include_weapon("m1911_zm", false);
   include_weapon("python_zm");
@@ -139,7 +134,6 @@ include_weapons() {
   include_weapon("zombie_cymbal_monkey", true);
   include_weapon("mine_bouncing_betty", false);
 }
-
 triggered_lights_think(light_struct) {
   level waittill("pl1");
   if(isDefined(self.script_float)) {

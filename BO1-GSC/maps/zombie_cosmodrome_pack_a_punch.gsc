@@ -14,15 +14,14 @@ pack_a_punch_main() {
   flag_init("launch_activated");
   flag_init("launch_complete");
   level.pack_debug = 0;
-  level.pack_a_punch_door = getEnt("rocket_room_bottom_door", "targetname");
-  level.pack_a_punch_door.clip = getEnt(level.pack_a_punch_door.target, "targetname");
+  level.pack_a_punch_door = GetEnt("rocket_room_bottom_door", "targetname");
+  level.pack_a_punch_door.clip = GetEnt(level.pack_a_punch_door.target, "targetname");
   level.pack_a_punch_door.clip LinkTo(level.pack_a_punch_door);
-  launch_trig = getEnt("trig_launch_rocket", "targetname");
+  launch_trig = getent("trig_launch_rocket", "targetname");
   launch_trig thread launch_rocket();
   level thread pack_a_punch_activate();
   level thread rocket_launch_preparation();
 }
-
 pack_a_punch_activate() {
   if(getDvar("rocket_test") != "") {
     flag_set("lander_a_used");
@@ -38,7 +37,6 @@ pack_a_punch_activate() {
   pack_print("punch activate");
   level thread pack_a_punch_open_door();
 }
-
 move_rocket_arm() {
   wait(5.5);
   maps\zombie_cosmodrome_traps::link_rocket_pieces();
@@ -46,7 +44,6 @@ move_rocket_arm() {
   level maps\zombie_cosmodrome_traps::move_lifter_away();
   maps\zombie_cosmodrome_traps::unlink_rocket_pieces();
 }
-
 rocket_launch_preparation() {
   level waittill("new_lander_used");
   exploder(5601);
@@ -54,31 +51,28 @@ rocket_launch_preparation() {
   wait(6);
   level notify("rocket_lights_on");
 }
-
 pack_a_punch_close_door() {
   move_dist = -228;
   level.pack_a_punch_door MoveZ(move_dist, 1.5);
   level.pack_a_punch_door waittill("movedone");
   level.pack_a_punch_door DisconnectPaths();
 }
-
 pack_a_punch_open_door() {
   flag_set("rocket_group");
-  upper_door_model = getEnt("rocket_room_top_door", "targetname");
-  upper_door_model.clip = getEnt(upper_door_model.target, "targetname");
+  upper_door_model = GetEnt("rocket_room_top_door", "targetname");
+  upper_door_model.clip = GetEnt(upper_door_model.target, "targetname");
   upper_door_model.clip LinkTo(upper_door_model);
-  upper_door_model moveTo(upper_door_model.origin + upper_door_model.script_vector, 1.5);
-  level.pack_a_punch_door moveTo(level.pack_a_punch_door.origin + level.pack_a_punch_door.script_vector, 1.5);
+  upper_door_model MoveTo(upper_door_model.origin + upper_door_model.script_vector, 1.5);
+  level.pack_a_punch_door MoveTo(level.pack_a_punch_door.origin + level.pack_a_punch_door.script_vector, 1.5);
   level.pack_a_punch_door.clip NotSolid();
   upper_door_model playSound("zmb_heavy_door_open");
   level.pack_a_punch_door.clip playSound("zmb_heavy_door_open");
   level.pack_a_punch_door waittill("movedone");
   level.pack_a_punch_door.clip ConnectPaths();
 }
-
 pack_print(str) {}
 launch_rocket() {
-  panel = getEnt("rocket_launch_panel", "targetname");
+  panel = getent("rocket_launch_panel", "targetname");
   self UseTriggerRequireLookAt();
   self SetHintString(&"ZOMBIE_NEED_POWER");
   self SetCursorHint("HINT_NOICON");
@@ -93,10 +87,9 @@ launch_rocket() {
   level thread do_launch_countdown();
   self delete();
 }
-
 play_launch_loopers() {
   level endon("rocket_dmg");
-  level.rocket_base_looper = getEnt("rocket_base_engine", "script_noteworthy");
+  level.rocket_base_looper = getent("rocket_base_engine", "script_noteworthy");
   level.rocket_base_looper playLoopSound("zmb_rocket_launch", .1);
   wait(2);
   level.rocket_sound_ent_1 = spawn("script_origin", (0, 0, 0));
@@ -104,26 +97,24 @@ play_launch_loopers() {
   level.rocket_sound_ent_1 playLoopSound("zmb_rocket_air_distf", .1);
   level.rocket_sound_ent_2 playLoopSound("zmb_rocket_air_distr", .1);
   wait(22);
-  level.rocket_base_looper stopLoopSound(1);
+  level.rocket_base_looper StopLoopSound(1);
   wait(46);
-  level.rocket_sound_ent_1 stopLoopSound(1);
-  level.rocket_sound_ent_2 stopLoopSound(1);
+  level.rocket_sound_ent_1 StopLoopSound(1);
+  level.rocket_sound_ent_2 StopLoopSound(1);
   level thread delete_rocket_sound_ents();
 }
-
 delete_rocket_sound_ents() {
   wait(5);
   level.rocket_sound_ent_1 Delete();
   level.rocket_sound_ent_2 Delete();
 }
-
 do_launch_countdown() {
   level.gantry_r rotateyaw(60, 6);
   level.gantry_l rotateyaw(-60, 6);
   level.gantry_l playSound("zmb_rocket_disengage");
   level.gantry_l playSound("zmb_rocket_start");
   wait(3);
-  rocket_base = getEnt("rocket_base_engine", "script_noteworthy");
+  rocket_base = getent("rocket_base_engine", "script_noteworthy");
   level thread play_launch_loopers();
   maps\zombie_cosmodrome_traps::claw_attach(level.claw_arm_l, "claw_l");
   maps\zombie_cosmodrome_traps::claw_attach(level.claw_arm_r, "claw_r");
@@ -132,20 +123,19 @@ do_launch_countdown() {
     level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_launch_countdown_" + i, true, true);
     wait(1);
     if(i == 4) {
-      level.claw_arm_r moveTo(level.claw_retract_r_pos, 4.0);
-      level.claw_arm_l moveTo(level.claw_retract_l_pos, 4.0);
+      level.claw_arm_r MoveTo(level.claw_retract_r_pos, 4.0);
+      level.claw_arm_l MoveTo(level.claw_retract_l_pos, 4.0);
     }
   }
   rocket_liftoff();
 }
-
 rocket_liftoff() {
   rocket_pieces = getEntArray(level.rocket.target, "targetname");
   for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] linkto(level.rocket);
   }
   level endon("rocket_dmg");
-  rocket_base = getEnt("rocket_base_engine", "script_noteworthy");
+  rocket_base = getent("rocket_base_engine", "script_noteworthy");
   stop_exploder(5601);
   exploder(5701);
   rocket_base setclientflag(0);
@@ -153,7 +143,7 @@ rocket_liftoff() {
   wait(1);
   level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_engines_firing", true);
   level.rocket setforcenocull();
-  level.rocket moveTo(level.rocket.origin + (0, 0, 50000), 50, 45);
+  level.rocket moveto(level.rocket.origin + (0, 0, 50000), 50, 45);
   wait(5);
   maps\zombie_cosmodrome_traps::claw_detach(level.claw_arm_l, "claw_l");
   maps\zombie_cosmodrome_traps::claw_detach(level.claw_arm_r, "claw_r");
@@ -170,7 +160,6 @@ rocket_liftoff() {
   }
   level.rocket delete();
 }
-
 launch_rumble_and_quake() {
   level endon("stop_rumble");
   level endon("stop_rumble_dmg");
@@ -189,12 +178,11 @@ launch_rumble_and_quake() {
     Earthquake(RandomFloatRange(0.15, 0.35), RandomFloatRange(.25, .5), level.rocket.origin, 5500);
     rumble = "slide_rumble";
     for(i = 0; i < players_in_range.size; i++) {
-      players_in_range[i] playRumbleOnEntity(rumble);
+      players_in_range[i] PlayRumbleOnEntity(rumble);
     }
     wait(.1);
   }
 }
-
 rocket_monitor_for_damage() {
   level endon("stop_rumble");
   rocket_pieces = getEntArray(level.rocket.target, "targetname");
@@ -215,39 +203,37 @@ rocket_monitor_for_damage() {
     flag_set("launch_complete");
   }
 }
-
 piece_crash_down(num) {
   trace = bulletTrace(self.origin, self.origin + (randomintrange(-100, 100), randomintrange(-100, 100), -20000), false, self);
   ground_pos = trace["position"] + (0, 0, 1.5);
-  self moveTo(ground_pos, 3);
+  self moveto(ground_pos, 3);
   self rotateto((randomintrange(-360, 360), randomintrange(-360, 360), randomintrange(-360, 360)), 3.9);
   wait(3.9);
   Earthquake(RandomFloatRange(0.25, 0.45), RandomFloatRange(.65, .75), self.origin, 5500);
   if(isDefined(num)) {
-    if(num == 0)
+    if(num == 0) {
       self playSound("zmb_rocket_top_crash");
-    else if(num == 1)
+    } else if(num == 1) {
       self playSound("zmb_rocket_bottom_crash");
+    }
   }
   wait(1);
   self hide();
   wait(10);
   self delete();
 }
-
 rocket_piece_monitor_for_damage() {
   level endon("no_rocket_damage");
   self setCanDamage(true);
   self waittill("damage", dmg_amount, attacker, dir, point, dmg_type);
-  if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+  if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
     level notify("rocket_dmg");
-    level.rocket_base_looper stopLoopSound(1);
-    level.rocket_sound_ent_1 stopLoopSound(1);
-    level.rocket_sound_ent_2 stopLoopSound(1);
+    level.rocket_base_looper StopLoopSound(1);
+    level.rocket_sound_ent_1 StopLoopSound(1);
+    level.rocket_sound_ent_2 StopLoopSound(1);
     level thread delete_rocket_sound_ents();
   }
 }
-
 rocket_explode() {
   playFXOnTag(level._effect["rocket_exp_1"], self, "tag_origin");
   self playSound("zmb_rocket_stage_1_exp");

@@ -81,7 +81,6 @@ class czm_red_challenges_hud: cluielem {
     cluielem::add_clientfield("rewardHidden", 15000, 1, "int");
     cluielem::add_clientfield("challengeFailing", 15000, 1, "int");
   }
-
 }
 
 register(uid) {

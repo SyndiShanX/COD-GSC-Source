@@ -247,7 +247,7 @@ func_AADC() {
   for(;;) {
     self.owner waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
     var_9 = scripts\mp\utility::func_13CA1(var_9, var_13);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       if(var_1 != self.owner && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_1.team == self.team) {
         self setlookatent(var_1);
         if(isDefined(self.mgturretleft)) {
@@ -327,7 +327,7 @@ func_AAD4() {
 
     self.wasdamaged = 1;
     var_14 = var_0;
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       if(var_1 != self.owner && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_1.team == self.team) {
         self setlookatent(var_1);
         if(isDefined(self.mgturretleft)) {
@@ -347,7 +347,7 @@ func_AAD4() {
       }
     }
 
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
     }
 
@@ -384,7 +384,7 @@ func_AAD4() {
 
     self.var_E1 = self.var_E1 + var_14;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
+      if(isPlayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_1 notify("destroyed_helicopter");
         var_1 notify("destroyed_killstreak", var_9);
         thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_little_bird", var_1);

@@ -23,8 +23,9 @@ slum_vo_ambulance() {
   flag_wait("ambulance_complete");
   wait 1;
 
-  if(!flag("ambulance_staff_killed"))
+  if(!flag("ambulance_staff_killed")) {
     level.player say_dialog("wood_get_outta_here_go_0", 2);
+  }
 
   level.mason say_dialog("huds_mason_do_you_still_0");
   level.mason say_dialog("maso_affirmative_0");
@@ -66,8 +67,9 @@ dialog_van_jump() {
   level.player say_dialog("wood_i_see_him_0");
   ai = get_ais_from_scene("parking_jump", "slums_park_digbat_01");
 
-  while(isalive(ai))
+  while(isalive(ai)) {
     wait 0.1;
+  }
 
   level.player say_dialog("wood_crazy_fuckin_bastar_0");
   level.mason say_dialog("maso_which_way_now_fuckf_0");
@@ -110,14 +112,16 @@ dialog_church() {
   level.mason say_dialog("maso_push_through_the_chu_0");
   level.mason say_dialog("maso_our_boys_are_pushing_0");
 
-  if(distance2d(level.player.origin, level.mason.origin) < 160000)
+  if(distance2d(level.player.origin, level.mason.origin) < 160000) {
     level.player say_dialog("wood_stay_the_fuck_outta_0");
+  }
 
   trigger_wait("slums_e4_start");
   level.mason say_dialog("maso_come_on_go_0");
 
-  if(distance2d(level.player.origin, level.mason.origin) < 160000)
+  if(distance2d(level.player.origin, level.mason.origin) < 160000) {
     level.player say_dialog("wood_now_what_0", 3);
+  }
 
   level.noriega say_dialog("nori_there_through_the_0");
   level.mason say_dialog("wood_come_on_mason_i_v_0");
@@ -126,8 +130,9 @@ dialog_church() {
 personal_pdf_battle_dialog() {
   vo_triggers = getEntArray("dialog_triggers", "targetname");
 
-  for(i = 0; i < vo_triggers.size; i++)
+  for(i = 0; i < vo_triggers.size; i++) {
     vo_triggers[i] thread parse_vo_and_play_them();
+  }
 }
 
 parse_vo_and_play_them() {
@@ -135,6 +140,7 @@ parse_vo_and_play_them() {
   self waittill("trigger", guy);
   guy endon("death");
 
-  for(i = 0; i < dialog_vos.size; i++)
+  for(i = 0; i < dialog_vos.size; i++) {
     guy say_dialog(dialog_vos[i], randomfloatrange(0.5, 2));
+  }
 }

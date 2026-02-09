@@ -26,9 +26,9 @@ __init__() {
   level.bettydamagemin = 800;
   level.bettydamageheight = level.bettyjumpheight;
 
-  setdvar(#"betty_damage_max", level.bettydamagemax);
-  setdvar(#"betty_damage_min", level.bettydamagemin);
-  setdvar(#"betty_jump_height_onground", level.bettyjumpheight);
+  setDvar(#"betty_damage_max", level.bettydamagemax);
+  setDvar(#"betty_damage_min", level.bettydamagemin);
+  setDvar(#"betty_jump_height_onground", level.bettyjumpheight);
 }
 
 proximityweaponobjectdetonation_override(watcher) {

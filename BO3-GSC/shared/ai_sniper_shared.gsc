@@ -250,7 +250,7 @@ function lase_point(entity_or_point) {
   result = entity_or_point;
   if(!isvec(entity_or_point) && isDefined(entity_or_point.origin)) {
     result = entity_or_point.origin;
-    if(isplayer(entity_or_point) || isactor(entity_or_point)) {
+    if(isPlayer(entity_or_point) || isactor(entity_or_point)) {
       result = entity_or_point getEye();
     }
   }

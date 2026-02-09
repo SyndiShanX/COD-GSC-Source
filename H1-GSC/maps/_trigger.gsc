@@ -62,7 +62,7 @@ trigger_multiple_fx_watersheeting(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_2 setwatersheeting(1, var_1);
       wait(var_1 * 0.2);
     }
@@ -264,7 +264,7 @@ trigger_damage_player_flag_set(var_0) {
     if(!isalive(var_2)) {
       continue;
     }
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     var_0 maps\_utility::script_delay();
@@ -355,7 +355,7 @@ trigger_flag_set_coop(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_3);
 
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
     var_4 = [];
@@ -593,7 +593,7 @@ trigger_physics(var_0) {
     if(!isDefined(var_10))
       var_10 = 0.25;
 
-    setdvar("tempdvar", var_10);
+    setDvar("tempdvar", var_10);
     var_10 = getdvarfloat("tempdvar");
 
     if(isDefined(var_11))
@@ -967,7 +967,7 @@ trigger_battlechatter(var_0) {
         }
       }
     }
-  } else if(isplayer(var_3))
+  } else if(isPlayer(var_3))
     var_4 = var_3 animscripts\battlechatter::getclosestfriendlyspeaker("custom");
   else
     var_4 = var_3;
@@ -1176,7 +1176,7 @@ trigger_flag_set_player(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     var_0 maps\_utility::script_delay();
@@ -1221,7 +1221,7 @@ trigger_multiple_visionset_preh1(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_6);
 
-    if(isplayer(var_6)) {
+    if(isPlayer(var_6)) {
       if(var_1) {
         var_7 = 0;
 
@@ -1996,7 +1996,7 @@ volume_wakefx(var_0) {
       var_2 = var_0.script_fxid;
       var_3 = (0, 0, 0);
 
-      if(isplayer(self))
+      if(isPlayer(self))
         var_3 = self getvelocity();
 
       if(isai(self))
@@ -2113,7 +2113,7 @@ volume_fallingwaterfx(var_0) {
         }
       }
 
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         wait 0.05;
         var_9 = var_9 + 0.05;
 

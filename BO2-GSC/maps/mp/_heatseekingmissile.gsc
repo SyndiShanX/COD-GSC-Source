@@ -17,7 +17,7 @@ init() {
   thread onplayerconnect();
   level.fx_flare = loadfx("vehicle/vexplosion/fx_heli_chaff");
 
-  setdvar("scr_freelock", "0");
+  setDvar("scr_freelock", "0");
 }
 
 onplayerconnect() {
@@ -225,7 +225,7 @@ getbeststingertarget() {
   targetsvalid = [];
 
   for(idx = 0; idx < targetsall.size; idx++) {
-    if(getdvar(#"scr_freelock") == "1") {
+    if(getDvar(#"scr_freelock") == "1") {
       if(self insidestingerreticlenolock(targetsall[idx]))
         targetsvalid[targetsvalid.size] = targetsall[idx];
 

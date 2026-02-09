@@ -10,7 +10,6 @@ main() {
   self.voice = "american";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("c_usa_sog_mp_body_camo");
   precacheModel("c_usa_sog_mp_head_1");

@@ -745,7 +745,7 @@ wait_commander_takeover_bot() {
 }
 
 bot_wait_here() {
-  if(!isDefined(self) || !isplayer(self) || !isbot(self)) {
+  if(!isDefined(self) || !isPlayer(self) || !isbot(self)) {
     return;
   }
   self notify("wait_here");
@@ -770,7 +770,7 @@ bot_wait_free_to_move() {
 }
 
 bot_free_to_move() {
-  if(!isDefined(self) || !isplayer(self) || !isbot(self)) {
+  if(!isDefined(self) || !isPlayer(self) || !isbot(self)) {
     return;
   }
   self botsetflag("disable_movement", 0);

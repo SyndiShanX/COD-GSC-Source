@@ -51,7 +51,6 @@ class cscriptbundleobjectbase {
     _o_bundle = o_bundle;
     _e = e_ent;
   }
-
 }
 
 class cscriptbundlebase {
@@ -134,7 +133,6 @@ class cscriptbundlebase {
   }
 
   function on_error(e) {}
-
 }
 
 #namespace scriptbundle;

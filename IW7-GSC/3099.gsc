@@ -778,7 +778,7 @@ func_12D7B() {
 
   if(isalive(var_0)) {
     var_1 = isDefined(var_0.vehicletype) && _isaircraft(var_0);
-    var_2 = var_1 && isDefined(var_0.owner) && isplayer(var_0.owner);
+    var_2 = var_1 && isDefined(var_0.owner) && isPlayer(var_0.owner);
     var_3 = self._blackboard.var_2894;
 
     if(!var_1) {
@@ -846,7 +846,7 @@ func_12E1A() {
     }
     var_5 = -1;
 
-    if(isDefined(var_4.owner) && isplayer(var_4.owner) && isDefined(var_4.var_DB07.target) && var_4.var_DB07.target == self) {
+    if(isDefined(var_4.owner) && isPlayer(var_4.owner) && isDefined(var_4.var_DB07.target) && var_4.var_DB07.target == self) {
       var_5 = min((gettime() - var_4.var_DB07.starttime) / 1000 * 1.5, 2.0);
     } else if(isDefined(var_4.enemy) && var_4.enemy == self && isDefined(var_4.var_6577)) {
       var_5 = min((gettime() - var_4.var_6577) / 1000 * 1.0, 1.0);

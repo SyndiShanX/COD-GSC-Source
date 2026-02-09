@@ -17,12 +17,12 @@ __init__() {
 
 ai_puppeteer_think() {
   while(true) {
-    if(getdvar(#"debug_ai_puppeteer", 0) && !(isDefined(level.ai_puppeteer_active) && level.ai_puppeteer_active)) {
+    if(getDvar(#"debug_ai_puppeteer", 0) && !(isDefined(level.ai_puppeteer_active) && level.ai_puppeteer_active)) {
       level.ai_puppeteer_active = 1;
       level notify(#"kill ai puppeteer");
       adddebugcommand("<dev string:x38>");
       thread ai_puppeteer();
-    } else if(!getdvar(#"debug_ai_puppeteer", 0) && isDefined(level.ai_puppeteer_active) && level.ai_puppeteer_active) {
+    } else if(!getDvar(#"debug_ai_puppeteer", 0) && isDefined(level.ai_puppeteer_active) && level.ai_puppeteer_active) {
       level.ai_puppeteer_active = 0;
       adddebugcommand("<dev string:x38>");
       level notify(#"kill ai puppeteer");
@@ -35,7 +35,7 @@ ai_puppeteer_think() {
 ai_puppeteer() {
   player = undefined;
 
-  while(!isplayer(player)) {
+  while(!isPlayer(player)) {
     player = getplayers()[0];
     waitframe(1);
   }

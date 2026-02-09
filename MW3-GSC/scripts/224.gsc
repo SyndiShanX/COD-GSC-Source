@@ -15,7 +15,6 @@ main() {
 
   if(getdvarint("coop_show_constant_icon") == 1) {
     common_scripts\utility::flag_set("coop_show_constant_icon");
-
   }
   precacheshader("hint_health");
   precacheshader("coop_player_location");
@@ -63,7 +62,6 @@ _id_1A3B(var_0, var_1, var_2) {
   }
   if(!isDefined(self._id_1A3D) || self._id_1A3D._id_1A3E != var_1) {
     _id_1A3F(var_1);
-
   }
   self._id_1A3D.color = var_0;
 
@@ -75,7 +73,6 @@ _id_1A3B(var_0, var_1, var_2) {
 _id_1A3F(var_0) {
   if(isDefined(self._id_1A3D)) {
     self._id_1A3D destroy();
-
   }
   self._id_1A3D = newclienthudelem(self);
   self._id_1A3D setshader(var_0, 1, 1);

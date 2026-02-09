@@ -33,12 +33,12 @@ vl_init() {
 }
 
 vl_main() {
-  SetDvar("r_dof_physical_enable", 1);
-  SetDvar("r_dof_physical_bokehEnable", 1);
-  SetDvar("r_adaptiveSubdiv", 0);
-  SetDvar("r_eyePupil", 0.15);
-  SetDvar("r_uiblurdstmode", 3);
-  SetDvar("r_blurdstgaussianblurradius", 1.5);
+  setDvar("r_dof_physical_enable", 1);
+  setDvar("r_dof_physical_bokehEnable", 1);
+  setDvar("r_adaptiveSubdiv", 0);
+  setDvar("r_eyePupil", 0.15);
+  setDvar("r_uiblurdstmode", 3);
+  setDvar("r_blurdstgaussianblurradius", 1.5);
   ResetEntPlayerXuidForEmblems();
 
   level.PartyMembers_cb = ::party_members;
@@ -60,7 +60,7 @@ vl_main() {
   thread monitor_member_class_changes();
   thread monitor_member_timeouts();
 
-  SetDvar("virtuallobbymembers", 0);
+  setDvar("virtuallobbymembers", 0);
 
   SetDvarIfUninitialized("scr_vl_addfakemembers", "0");
   SetDvarIfUninitialized("scr_vl_debugfly", "0");
@@ -353,7 +353,6 @@ enable_player_controls() {
   if((val == 1) && level.in_firingrange == true) {
     self AllowFire(true);
   }
-
 }
 
 enter_vlobby(player) {
@@ -413,10 +412,10 @@ monitor_move_btn_fr_vl(player) {
 
         enter_firingrange(player);
         player clientclearsoundsubmix("mp_no_foley", 1);
-        SetDvar("r_dof_physical_bokehEnable", 0);
-        SetDvar("r_dof_physical_enable", 0);
-        SetDvar("r_uiblurdstmode", 0);
-        SetDvar("r_blurdstgaussianblurradius", 1);
+        setDvar("r_dof_physical_bokehEnable", 0);
+        setDvar("r_dof_physical_enable", 0);
+        setDvar("r_uiblurdstmode", 0);
+        setDvar("r_blurdstgaussianblurradius", 1);
       } else if((val == 0) && level.in_firingrange) {
         player HideViewModel();
         player FiringRangeCleanup();
@@ -425,10 +424,10 @@ monitor_move_btn_fr_vl(player) {
         player notify("enter_lobby");
         enter_vlobby(player);
         player clientaddsoundsubmix("mp_no_foley", 1);
-        SetDvar("r_dof_physical_enable", 1);
-        SetDvar("r_dof_physical_bokehEnable", 1);
-        SetDvar("r_uiblurdstmode", 3);
-        SetDvar("r_blurdstgaussianblurradius", 1.5);
+        setDvar("r_dof_physical_enable", 1);
+        setDvar("r_dof_physical_bokehEnable", 1);
+        setDvar("r_uiblurdstmode", 3);
+        setDvar("r_blurdstgaussianblurradius", 1.5);
       }
     }
 

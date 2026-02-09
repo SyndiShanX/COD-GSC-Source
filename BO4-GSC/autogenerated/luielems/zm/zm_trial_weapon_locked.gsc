@@ -26,7 +26,6 @@ class czm_trial_weapon_locked: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("show_icon", 1, 1, "counter");
   }
-
 }
 
 register(uid) {

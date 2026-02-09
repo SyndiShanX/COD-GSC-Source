@@ -149,7 +149,7 @@ function is_location_good(location, context) {
 }
 
 function valid_location(location = self.origin) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     start = self getcentroid();
     end = location + vectorscale((0, 0, 1), 16);
     trace = physicstrace(start, end, (0, 0, 0), (0, 0, 0), self, 16);
@@ -467,7 +467,7 @@ function tank_damage_think() {
     weapon_damage = killstreak_bundles::get_weapon_damage("ai_tank_drop", maxhealth, attacker, weapon, mod, damage, flags, chargelevel);
     if(!isDefined(weapon_damage)) {
       if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET" || weapon.name == "hatchet" || (mod == "MOD_PROJECTILE_SPLASH" && weapon.bulletimpactexplode)) {
-        if(isplayer(attacker)) {
+        if(isPlayer(attacker)) {
           if(attacker hasperk("specialty_armorpiercing")) {
             damage = damage + (int(damage * level.cac_armorpiercing_data));
           }
@@ -637,7 +637,7 @@ function tank_death_think(hardpointname) {
     self.damage_fx delete();
   }
   attacker = self[[level.figure_out_attacker]](attacker);
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(self.owner) && attacker != self.owner) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(self.owner) && attacker != self.owner) {
     if(self.owner util::isenemyplayer(attacker)) {
       scoreevents::processscoreevent("destroyed_aitank", attacker, self.owner, weapon);
       luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_AI_TANK", attacker.entnum);
@@ -749,7 +749,7 @@ function valid_target(target, team, owner) {
   if(target == owner) {
     return false;
   }
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     if(target.sessionstate != "playing") {
       return false;
     }
@@ -925,13 +925,13 @@ function watchwater() {
 }
 
 function tank_devgui_think() {
-  setdvar("", "");
+  setDvar("", "");
   for(;;) {
     wait(0.25);
     level.ai_tank_turret_fire_rate = level.ai_tank_turret_weapon.firetime;
     if(getdvarstring("") == "") {
       devgui_debug_route();
-      setdvar("", "");
+      setDvar("", "");
     }
   }
 }

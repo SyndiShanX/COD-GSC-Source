@@ -1,6 +1,6 @@
 /*************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_zom_cosmo_cosmonaut.csc
+ * Script: character\clientscripts\c_zom_cosmo_cosmonaut\.csc
 *************************************************************/
 
 matches_me() {

@@ -10,7 +10,6 @@
 isHero() {
   return self.npcID == "bar" || self.npcID == "lew";
 }
-
 addToSystem(squadName) {}
 aiThreadThreader() {
   self endon("death");
@@ -28,7 +27,6 @@ aiThreadThreader() {
   wait(waitTime);
   self thread aiBattleChatterLoop();
 }
-
 setNPCID() {
   assert(!isDefined(self.npcID));
   usedIDs = anim.usedIDs[self.voice];
@@ -43,7 +41,6 @@ setNPCID() {
   self thread npcIDTracker(lowestID);
   self.npcID = usedIDs[lowestID].npcID;
 }
-
 npcIDTracker(lowestID) {
   voice = self.voice;
   anim.usedIDs[voice][lowestID].count++;
@@ -53,7 +50,6 @@ npcIDTracker(lowestID) {
   }
   anim.usedIDs[voice][lowestID].count--;
 }
-
 aiBattleChatterLoop() {}
 aiNameAndRankWaiter() {
   self endon("death");
@@ -64,7 +60,6 @@ aiNameAndRankWaiter() {
     self waittill("set name and rank");
   }
 }
-
 removeFromSystem(squadName) {}
 init_aiBattleChatter() {
   self.chatQueue = [];
@@ -102,7 +97,6 @@ init_aiBattleChatter() {
   }
   self.chatInitialized = true;
 }
-
 squadOfficerWaiter() {}
 getThreats(potentialThreats) {}
 squadThreatWaiter() {}
@@ -124,31 +118,33 @@ aiDeathFriendly() {
   attacker = self.attacker;
   if(isDefined(self)) {
     for(i = 0; i < self.squad.members.size; i++) {
-      if(IsAlive(self.squad.members[i]) && self.squad.members[i] cansee(self) && distance(self.origin, self.squad.members[i].origin) < 500) {
+      if(IsAlive(self.squad.members[i]) &&
+        self.squad.members[i] cansee(self) &&
+        distance(self.origin, self.squad.members[i].origin) < 500) {
         self.squad.members[i].bcFriendDeathTime = GetTime();
       }
     }
   }
 }
-
 aiDeathEnemy() {
   attacker = self.attacker;
   if(!IsAlive(attacker) || !IsSentient(attacker) || !isDefined(attacker.squad)) {
     return;
   }
-  if(isDefined(self.calledOut[attacker.squad.squadName]) && IsAlive(self.calledOut[attacker.squad.squadName].spotter) && self.calledOut[attacker.squad.squadName].spotter != attacker && GetTime() < self.calledOut[attacker.squad.squadName].expireTime) {
+  if(isDefined(self.calledOut[attacker.squad.squadName]) &&
+    IsAlive(self.calledOut[attacker.squad.squadName].spotter) &&
+    self.calledOut[attacker.squad.squadName].spotter != attacker &&
+    GetTime() < self.calledOut[attacker.squad.squadName].expireTime) {
     attacker.bcKillTime = GetTime();
-  } else if(!IsPlayer(attacker)) {
+  } else if(!isPlayer(attacker)) {
     attacker.bcKillTime = GetTime();
   }
 }
-
 addOrder(type, modifier) {
   self.bcOrderType = type;
   self.bcOrderModifier = modifier;
   self.bcOrderTime = GetTime();
 }
-
 evaluateMoveEvent(leavingCover) {}
 evaluateReloadEvent() {}
 evaluateMeleeEvent() {}
@@ -166,7 +162,6 @@ addSituationalOrder() {
     self addSituationalIdleOrder();
   }
 }
-
 addSituationalIdleOrder() {
   self endon("death");
   self endon("removed from battleChatter");
@@ -176,7 +171,6 @@ addSituationalIdleOrder() {
     self addOrder("move", "generic");
   }
 }
-
 addSituationalCombatOrder() {
   self endon("death");
   self endon("removed from battleChatter");
@@ -203,7 +197,7 @@ addSituationalCombatOrder() {
     closestSoldierInCoverLocation = undefined;
     for(index = 0; index < soldiers.size; index++) {
       soldier = soldiers[index];
-      distance = distanceSquared(self.origin, soldier.origin);
+      distance = DistanceSquared(self.origin, soldier.origin);
       if(closestSoldierDistance > distance) {
         closestSoldierDistance = distance;
         closestSoldier = soldier;
@@ -235,5 +229,4 @@ addSituationalCombatOrder() {
     } else {}
   }
 }
-
 beginCustomEvent() {}

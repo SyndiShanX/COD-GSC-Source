@@ -16,8 +16,9 @@ setupcqbpointsofinterest() {
   level.cqbpointsofinterest = [];
   level.cqbsetupcomplete = 0;
 
-  while(!isDefined(level.struct_class_names))
+  while(!isDefined(level.struct_class_names)) {
     wait 0.05;
+  }
 
   level.cqbsetupcomplete = 1;
   pointents = getEntArray("cqb_point_of_interest", "targetname");
@@ -27,8 +28,9 @@ setupcqbpointsofinterest() {
   for(i = 0; i < points.size; i++) {
     level.cqbpointsofinterest[i] = points[i].origin;
 
-    if(isDefined(points[i].classname) && (points[i].classname == "script_origin" || points[i].classname == "script_model"))
+    if(isDefined(points[i].classname) && (points[i].classname == "script_origin" || points[i].classname == "script_model")) {
       points[i] delete();
+    }
   }
 }
 
@@ -38,8 +40,9 @@ findcqbpointsofinterest() {
   }
   anim.findingcqbpointsofinterest = 1;
 
-  while(!isDefined(level.cqbsetupcomplete) || !level.cqbsetupcomplete)
+  while(!isDefined(level.cqbsetupcomplete) || !level.cqbsetupcomplete) {
     wait 0.05;
+  }
 
   if(!level.cqbpointsofinterest.size) {
     return;
@@ -77,8 +80,9 @@ findcqbpointsofinterest() {
               }
               dot = vectordot(vectornormalize(point - shootatpos), forward);
 
-              if(dot < 0.643 || dot > 0.966)
+              if(dot < 0.643 || dot > 0.966) {
                 continue;
+              }
             } else if(dist < 2500) {
               continue;
             }
@@ -90,18 +94,20 @@ findcqbpointsofinterest() {
           }
         }
 
-        if(best < 0)
+        if(best < 0) {
           ai[i].cqb_point_of_interest = undefined;
-        else
+        } else {
           ai[i].cqb_point_of_interest = level.cqbpointsofinterest[best];
+        }
 
         wait 0.05;
         waited = 1;
       }
     }
 
-    if(!waited)
+    if(!waited) {
       wait 0.25;
+    }
   }
 }
 
@@ -110,8 +116,9 @@ cqbdebug() {
   self endon("end_cqb_debug");
   self endon("death");
 
-  if(getdvar(#"_id_3380B629") == "")
-    setdvar("scr_cqbdebug", "off");
+  if(getDvar(#"_id_3380B629") == "") {
+    setDvar("scr_cqbdebug", "off");
+  }
 
   level thread cqbdebugglobal();
 
@@ -156,7 +163,6 @@ cqbdebug() {
 
     wait 1;
   }
-
 }
 
 cqbdebugglobal() {
@@ -171,10 +177,10 @@ cqbdebugglobal() {
       continue;
     }
 
-    for(i = 0; i < level.cqbpointsofinterest.size; i++)
+    for(i = 0; i < level.cqbpointsofinterest.size; i++) {
       print3d(level.cqbpointsofinterest[i], ".", (0.7, 0.7, 1), 0.7, 3);
+    }
 
     wait 0.05;
   }
-
 }

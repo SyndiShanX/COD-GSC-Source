@@ -58,7 +58,7 @@ function_7df6bb60(fieldname, value, player) {
     return;
   }
 
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
   if(!isDefined(player)) {
     return;

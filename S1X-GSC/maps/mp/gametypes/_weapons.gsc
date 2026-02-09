@@ -38,7 +38,7 @@ init() {
         level.scavenger_secondary = false;
         break;
     }
-    gametype = GetDvar("g_gametype");
+    gametype = getDvar("g_gametype");
     attachmentList = getAttachmentListBaseNames();
     attachmentList = alphabetize(attachmentList);
 
@@ -90,7 +90,6 @@ init() {
           if(getDvar("scr_dump_weapon_assets") != "") {
             println("weapon,mp/" + weapon_name + "_" + attachmentName + "_mp");
           }
-
         }
 
         attachmentCombos = [];
@@ -114,7 +113,6 @@ init() {
 
           level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
         }
-
       }
 
       if(!isDefined(level.isZombieGame) || !level.isZombieGame) {
@@ -781,7 +779,7 @@ init() {
 
       weapon = self.lastDroppableWeapon;
       if(!isDefined(weapon)) {
-        if(getdvar("scr_dropdebug") == "1") {
+        if(getDvar("scr_dropdebug") == "1") {
           println("didn't drop weapon: not defined");
         }
 
@@ -789,7 +787,7 @@ init() {
       }
 
       if(weapon == "none") {
-        if(getdvar("scr_dropdebug") == "1") {
+        if(getDvar("scr_dropdebug") == "1") {
           println("didn't drop weapon: weapon == none");
         }
 
@@ -797,7 +795,7 @@ init() {
       }
 
       if(!(self hasWeapon(weapon))) {
-        if(getdvar("scr_dropdebug") == "1") {
+        if(getDvar("scr_dropdebug") == "1") {
           println("didn't drop weapon: don't have it anymore (" + weapon + ")");
         }
 
@@ -828,7 +826,7 @@ init() {
 
       if(weapon != "riotshield_mp") {
         if(!(self AnyAmmoForWeaponModes(weapon))) {
-          if(getdvar("scr_dropdebug") == "1") {
+          if(getDvar("scr_dropdebug") == "1") {
             println("didn't drop weapon: no ammo for weapon modes");
           }
 
@@ -838,7 +836,7 @@ init() {
         clipAmmoR = self GetWeaponAmmoClip(weapon, "right");
         clipAmmoL = self GetWeaponAmmoClip(weapon, "left");
         if(!clipAmmoR && !clipAmmoL) {
-          if(getdvar("scr_dropdebug") == "1") {
+          if(getDvar("scr_dropdebug") == "1") {
             println("didn't drop weapon: no ammo in clip");
           }
 
@@ -869,7 +867,7 @@ init() {
         item ItemWeaponSetAmmo(1, 1, 0);
       }
 
-      if(getdvar("scr_dropdebug") == "1") {
+      if(getDvar("scr_dropdebug") == "1") {
         println("dropped weapon: " + weapon);
       }
 
@@ -966,7 +964,7 @@ init() {
         }
 
         if(isDefined(owner) && (owner != player)) {
-          if(getdvar("scr_dropdebug") == "1") {
+          if(getDvar("scr_dropdebug") == "1") {
             println("picked up weapon: " + weapname + ", " + owner);
           }
 
@@ -2096,7 +2094,6 @@ init() {
           if(getdvarint("scr_claymoredebug")) {
             claymore thread claymoreDebug();
           }
-
         }
       }
     }
@@ -2286,7 +2283,7 @@ init() {
 
       self playSound("claymore_activated");
 
-      if(IsPlayer(player) && player _hasPerk("specialty_delaymine")) {
+      if(isPlayer(player) && player _hasPerk("specialty_delaymine")) {
         player notify("triggered_claymore");
         wait level.delayMineTime;
       } else {
@@ -3262,7 +3259,6 @@ init() {
           }
         }
 
-        /#	
         if(heaviestWeaponValue == 1000) {
           AssertMsg("No weapons of non zero speed");
 
@@ -3288,8 +3284,7 @@ init() {
       baseWeapon = getBaseWeaponName(weapon);
 
       if(isDefined(level.weaponWeightFunc)) {
-        return [
-          }
+        return [}
           [level.weaponWeightFunc]](baseWeapon);
 
       weaponSpeed = Int(TableLookup("mp/statstable.csv", 4, baseWeapon, 8));
@@ -3358,7 +3353,7 @@ init() {
     }
 
     stanceRecoilAdjuster() {
-      if(!IsPlayer(self)) {
+      if(!isPlayer(self)) {
         return;
       }
 
@@ -3411,7 +3406,7 @@ init() {
       baseWeaponData = [];
 
       for(weaponId = 0; weaponId <= max_weapon_num; weaponId++) {
-        gametype = GetDvar("g_gametype");
+        gametype = getDvar("g_gametype");
         baseName = tablelookup("mp/statstable.csv", 0, weaponId, 4);
         if(baseName == "") {
           continue;
@@ -3726,7 +3721,7 @@ init() {
 
       self playSound("mine_betty_click");
 
-      if(IsPlayer(player) && player _hasPerk("specialty_delaymine")) {
+      if(isPlayer(player) && player _hasPerk("specialty_delaymine")) {
         player notify("triggered_mine");
         wait level.delayMineTime;
       } else {
@@ -4427,7 +4422,7 @@ init() {
               time = 1;
             }
 
-            if(IsPlayer(self)) {
+            if(isPlayer(self)) {
               self IPrintLnBold(&"MP_EXPLOSIVES_UNAVAILABLE_FOR_N", time);
             }
           }

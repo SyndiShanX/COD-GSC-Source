@@ -24,7 +24,7 @@
 #include maps\mp\_medals;
 
 main() {
-  if(getdvar(#"mapname") == "mp_background") {
+  if(getDvar(#"mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -939,7 +939,7 @@ onroundswitch() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || !self.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers["team"] == self.pers["team"]) {
+  if(!isPlayer(attacker) || !self.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers["team"] == self.pers["team"]) {
     return;
   }
   medalgiven = 0;

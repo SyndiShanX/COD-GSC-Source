@@ -36,52 +36,63 @@ ai_preload() {
 }
 
 ai_getgrenadetype(team) {
-  if(is_true(level.onlyallowfrags))
+  if(is_true(level.onlyallowfrags)) {
     return "frag_grenade_sp";
+  }
 
   if(isDefined(level.rts.custom_ai_getgrenadecb)) {
     grenade = [[level.rts.custom_ai_getgrenadecb]](team);
 
-    if(!isDefined(grenade))
+    if(!isDefined(grenade)) {
       return undefined;
+    }
 
-    if(grenade != "")
+    if(grenade != "") {
       return grenade;
+    }
   }
 
   roll = randomint(100);
 
   if(team == "axis") {
-    if(roll >= 90)
+    if(roll >= 90) {
       return "flash_grenade_sp";
+    }
 
-    if(roll >= 75)
+    if(roll >= 75) {
       return "willy_pete_sp";
+    }
 
     if(level.era == "twentytwenty") {
-      if(roll >= 60)
+      if(roll >= 60) {
         return "sticky_grenade_future_ai_sp";
+      }
 
-      if(roll >= 35)
+      if(roll >= 35) {
         return "emp_grenade_sp";
+      }
     }
 
     return "frag_grenade_sp";
   }
 
   if(team == "allies") {
-    if(roll >= 90)
+    if(roll >= 90) {
       return "flash_grenade_sp";
+    }
 
-    if(roll >= 75)
+    if(roll >= 75) {
       return "willy_pete_sp";
+    }
 
     if(level.era == "twentytwenty") {
-      if(roll >= 60)
+      if(roll >= 60) {
         return "sticky_grenade_future_ai_sp";
+      }
 
-      if(roll >= 35)
+      if(roll >= 35) {
         return "emp_grenade_sp";
+      }
     }
 
     return "frag_grenade_sp";
@@ -124,8 +135,9 @@ ai_unload_watcher() {
     guy maps\_so_rts_ai::ai_postinitialize();
     guy.rts_unloaded = 1;
 
-    if(guy.ai_ref.species == "human")
+    if(guy.ai_ref.species == "human") {
       guy getperfectinfo(level.rts.player);
+    }
   }
 }
 
@@ -155,14 +167,17 @@ ai_type_populate() {
     ai.seat = int(lookup_value(ref, i, 13));
     ai.cmd_tag = lookup_value(ref, i, 14);
 
-    if(ai.swap_spawner == "")
+    if(ai.swap_spawner == "") {
       ai.swap_spawner = undefined;
+    }
 
-    if(ai.swap_notify == "")
+    if(ai.swap_notify == "") {
       ai.swap_notify = undefined;
+    }
 
-    if(ai.cmd_tag == "")
+    if(ai.cmd_tag == "") {
       ai.cmd_tag = undefined;
+    }
 
     ai_types[ref] = ai;
   }
@@ -171,42 +186,53 @@ ai_type_populate() {
 }
 
 ai_istakeoverpossible(ai) {
-  if(!is_alive(ai))
+  if(!is_alive(ai)) {
     return false;
+  }
 
-  if(!is_true(ai.rts_unloaded))
+  if(!is_true(ai.rts_unloaded)) {
     return false;
+  }
 
-  if(!is_true(ai.initialized))
+  if(!is_true(ai.initialized)) {
     return false;
+  }
 
-  if(isDefined(ai.melee))
+  if(isDefined(ai.melee)) {
     return false;
+  }
 
-  if(isDefined(ai.no_takeover))
+  if(isDefined(ai.no_takeover)) {
     return false;
+  }
 
   return true;
 }
 
 ai_isselectable(ai) {
-  if(!is_alive(ai))
+  if(!is_alive(ai)) {
     return false;
+  }
 
-  if(!is_true(ai.rts_unloaded))
+  if(!is_true(ai.rts_unloaded)) {
     return false;
+  }
 
-  if(!is_true(ai.initialized))
+  if(!is_true(ai.initialized)) {
     return false;
+  }
 
-  if(isDefined(ai.melee))
+  if(isDefined(ai.melee)) {
     return false;
+  }
 
-  if(is_true(ai.unselectable))
+  if(is_true(ai.unselectable)) {
     return false;
+  }
 
-  if(isDefined(ai.squadid) && !is_true(level.rts.squads[ai.squadid].selectable) && !is_true(level.rts.squads[ai.squadid].forceallowselect))
+  if(isDefined(ai.squadid) && !is_true(level.rts.squads[ai.squadid].selectable) && !is_true(level.rts.squads[ai.squadid].forceallowselect)) {
     return false;
+  }
 
   return true;
 }
@@ -214,14 +240,16 @@ ai_isselectable(ai) {
 getaibyspecies(species, team) {
   ais = [];
 
-  if(isDefined(team))
+  if(isDefined(team)) {
     ailist = arraycombine(getaiarray(team), getvehiclearray(team), 0, 0);
-  else
+  } else {
     ailist = arraycombine(getaiarray(), getvehiclearray(), 0, 0);
+  }
 
   foreach(guy in ailist) {
-    if(isDefined(guy.ai_ref) && guy.ai_ref.species == species && is_true(guy.rts_unloaded))
+    if(isDefined(guy.ai_ref) && guy.ai_ref.species == species && is_true(guy.rts_unloaded)) {
       ais[ais.size] = guy;
+    }
   }
 
   return ais;
@@ -230,8 +258,9 @@ getaibyspecies(species, team) {
 get_war_enemies_living() {
   enemy_array = getaiarray("axis");
 
-  if(isDefined(level.bosses) && level.bosses.size)
+  if(isDefined(level.bosses) && level.bosses.size) {
     enemy_array = arraycombine(enemy_array, level.bosses, 0, 0);
+  }
 
   return enemy_array;
 }
@@ -247,15 +276,17 @@ update_enemy_remaining() {
   level.rts.enemy_remaining = enemies_alive.size;
   level notify("axis_died");
 
-  if(flag("aggressive_mode") && enemies_alive.size == 1 && isai(enemies_alive[0]) && enemies_alive[0].type != "dog")
+  if(flag("aggressive_mode") && enemies_alive.size == 1 && isai(enemies_alive[0]) && enemies_alive[0].type != "dog") {
     enemies_alive[0] thread prevent_long_death();
+  }
 }
 
 get_enemies_living() {
   enemy_array = getaiarray("axis");
 
-  if(isDefined(level.rts.bosses) && level.rts.bosses.size)
+  if(isDefined(level.rts.bosses) && level.rts.bosses.size) {
     enemy_array = arraycombine(enemy_array, level.rts.bosses, 0, 0);
+  }
 
   return enemy_array;
 }
@@ -291,10 +322,11 @@ prevent_long_death() {
     if(safe_to_kill) {
       attacker = self get_last_attacker();
 
-      if(isDefined(attacker))
+      if(isDefined(attacker)) {
         self kill(self.origin, attacker);
-      else
+      } else {
         self kill(self.origin);
+      }
 
       return;
     }
@@ -307,8 +339,9 @@ get_last_attacker() {
   assert(isDefined(self), "Self must be defined to check for last attacker.");
   attacker = undefined;
 
-  if(isDefined(self.attacker_list) && self.attacker_list.size)
+  if(isDefined(self.attacker_list) && self.attacker_list.size) {
     attacker = self.attacker_list[self.attacker_list.size - 1];
+  }
 
   return attacker;
 }
@@ -326,8 +359,9 @@ ai_on_long_death() {
   self waittill("long_death");
   self waittill("flashbang", amount_distance, amount_angle, attacker, attackerteam);
 
-  if(isDefined(attacker) && isDefined(attacker.team) && attacker.team == "allies")
+  if(isDefined(attacker) && isDefined(attacker.team) && attacker.team == "allies") {
     self kill(self.origin, attacker);
+  }
 }
 
 ai_on_flashed() {
@@ -335,8 +369,9 @@ ai_on_flashed() {
   level endon("rts_terminated");
   self waittill("flashbang", flash_origin, flash_dist, flash_angle, attacker);
 
-  if(isDefined(attacker) && isplayer(attacker))
+  if(isDefined(attacker) && isPlayer(attacker)) {
     attacker maps\_damagefeedback::updatedamagefeedback();
+  }
 }
 
 ai_getclassification(ai) {
@@ -363,48 +398,56 @@ ai_died(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, ps
 }
 
 ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
-  if(meansofdeath == "MOD_CRUSH" && isDefined(einflictor) && (isDefined(einflictor.vteam) && einflictor.vteam == self.team))
+  if(meansofdeath == "MOD_CRUSH" && isDefined(einflictor) && (isDefined(einflictor.vteam) && einflictor.vteam == self.team)) {
     return 0;
+  }
 
-  if(isDefined(eattacker) && isDefined(eattacker.team) && eattacker.team == self.team)
+  if(isDefined(eattacker) && isDefined(eattacker.team) && eattacker.team == self.team) {
     return 0;
+  }
 
-  if(isDefined(einflictor) && isDefined(einflictor.team) && einflictor.team == self.team)
+  if(isDefined(einflictor) && isDefined(einflictor.team) && einflictor.team == self.team) {
     return 0;
+  }
 
-  if(isDefined(level.rts.ai_damage_cb))
+  if(isDefined(level.rts.ai_damage_cb)) {
     idamage = [[level.rts.ai_damage_cb]](einflictor, eattacker, idamage, meansofdeath);
+  }
 
-  if(meansofdeath == "MOD_UNKNOWN")
+  if(meansofdeath == "MOD_UNKNOWN") {
     i = 1;
+  }
 
   if(self.team == "allies") {
-    if(flag("rts_mode"))
+    if(flag("rts_mode")) {
       idamage = int(idamage * level.rts.game_rules.ally_dmg_reducerrts);
-    else if(flag("fps_mode"))
+    } else if(flag("fps_mode")) {
       idamage = int(idamage * level.rts.game_rules.ally_dmg_reducerfps);
+    }
   }
 
   if(isDefined(self.classname) && self.classname == "script_vehicle" && isDefined(self.player)) {
     println("@@@ PLAYER VEHICLE DAMAGE ENT(" + self getentnum() + ") Type:" + meansofdeath + " Damage: " + idamage + " Armor Left:" + isDefined(self.armor) ? self.armor : 0 + "\\t Health: " + self.health + " eInflictor:" + isDefined(einflictor.ai_ref) ? einflictor.ai_ref.ref : "Unk");
 
-    if(isDefined(eattacker) && eattacker == self.player)
+    if(isDefined(eattacker) && eattacker == self.player) {
       return 0;
+    }
   }
 
   self.lasthitstamp = gettime();
 
-  if(!isDefined(self.hits))
+  if(!isDefined(self.hits)) {
     self.hits = 1;
-  else
+  } else {
     self.hits++;
+  }
 
   if(isDefined(self.armor) && self.armor > 0) {
     self.armor = self.armor - idamage;
 
-    if(self.armor > 0)
+    if(self.armor > 0) {
       idamage = 0;
-    else {
+    } else {
       idamage = self.armor * -1;
       self.armor = undefined;
     }
@@ -413,17 +456,17 @@ ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
   if(self.health > 0) {
     if(isDefined(self.armor) && self.armor > 0) {
       println("@@@ AI(" + self getentnum() + ") Damage: " + idamage + " Armor Left:" + isDefined(self.armor) ? self.armor : 0 + "\\t Health: " + self.health);
-
     }
 
     if(idamage > self.health) {
       self notify("death_incomming");
 
       if(self.team == "allies") {
-        if(flag("fps_mode"))
+        if(flag("fps_mode")) {
           maps\_so_rts_event::trigger_event("diedfps_" + self.pkg_ref.ref);
-        else
+        } else {
           maps\_so_rts_event::trigger_event("died_" + self.pkg_ref.ref);
+        }
       }
     } else
       luinotifyevent(&"rts_update_health", 3, self getentitynumber(), self.health < 0 ? 0 : self.health, self.health_max);
@@ -435,24 +478,28 @@ ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
 set_vehicle_damage_override() {
   self.overridevehicledamageorig = self.overridevehicledamage;
 
-  if(is_true(level.friendlyfiredisabled))
+  if(is_true(level.friendlyfiredisabled)) {
     self.friendlyfire_shield = 0;
-  else
+  } else {
     self.friendlyfire_shield = 1;
+  }
 
   self.overridevehicledamage = ::veh_deathwatch;
   self.callbackvehiclekilled = ::ai_died;
 
-  if(isDefined(self.overridevehicledamageorig))
+  if(isDefined(self.overridevehicledamageorig)) {
     assert(self.overridevehicledamageorig != self.overridevehicledamage, "Cyclical damage callbacks");
+  }
 }
 
 veh_deathwatch(einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
-  if(isDefined(self.player) && isDefined(self.player.blockalldamage) && gettime() < self.player.blockalldamage)
+  if(isDefined(self.player) && isDefined(self.player.blockalldamage) && gettime() < self.player.blockalldamage) {
     idamage = 0;
+  }
 
-  if(isDefined(self.overridevehicledamageorig) && self.overridevehicledamageorig != ::veh_deathwatch)
+  if(isDefined(self.overridevehicledamageorig) && self.overridevehicledamageorig != ::veh_deathwatch) {
     idamage = [[self.overridevehicledamageorig]](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
+  }
 
   return self ai_deathwatch(einflictor, eattacker, idamage, str_means_of_death);
 }
@@ -462,13 +509,15 @@ set_actor_damage_override() {
   self.overrideactordamage = ::actor_deathwatch;
   self.overrideactorkilled = ::ai_died;
 
-  if(isDefined(self.overrideactordamageorig))
+  if(isDefined(self.overrideactordamageorig)) {
     assert(self.overrideactordamageorig != self.overrideactordamage, "Cyclical damage callbacks");
+  }
 }
 
 actor_deathwatch(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(isDefined(self.overrideactordamageorig) && self.overrideactordamageorig != ::actor_deathwatch)
+  if(isDefined(self.overrideactordamageorig) && self.overrideactordamageorig != ::actor_deathwatch) {
     idamage = [[self.overrideactordamageorig]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename);
+  }
 
   return self ai_deathwatch(einflictor, eattacker, idamage, smeansofdeath);
 }
@@ -485,8 +534,9 @@ enemy_contact_watcher() {
       continue;
     }
     if(isDefined(self.enemy) && self canshootenemy()) {
-      if(isDefined(self.enemy.pkg_ref))
+      if(isDefined(self.enemy.pkg_ref)) {
         maps\_so_rts_event::trigger_event("dlg_enemy_" + self.enemy.pkg_ref.ref);
+      }
     }
 
     wait 1;
@@ -530,8 +580,9 @@ ai_claymore_handle_notetracks(notetrack) {
     self notify("planted_claymore");
     self thread maps\_so_rts_support::claymore_create(self.plant_origin, self.plant_angles, self.team);
 
-    if(self.team == level.rts.player.team)
+    if(self.team == level.rts.player.team) {
       maps\_so_rts_event::trigger_event("dlg_claymoreplant");
+    }
   }
 }
 
@@ -605,12 +656,14 @@ ai_preinitialize(ref, pkg_ref, team, squadid) {
   self.maxvisibledist = 1024;
   self.maxsightdistsqrd = 1048576;
 
-  if(!is_true(self.no_sonar))
+  if(!is_true(self.no_sonar)) {
     self maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(1) + self.team == "allies" ? 1 : 0);
+  }
 
   if(isDefined(ref)) {
-    if(isDefined(ref.initializer) && isDefined(level.rts.additional_ai_initializers[ref.initializer]))
+    if(isDefined(ref.initializer) && isDefined(level.rts.additional_ai_initializers[ref.initializer])) {
       self thread[[level.rts.additional_ai_initializers[ref.initializer]]]();
+    }
   }
 
   self.preinitialized = 1;
@@ -622,8 +675,9 @@ ai_postinitialize() {
   self.takedamage = 1;
   self.postinitialized = 1;
 
-  if(isai(self) && !is_true(self.isbigdog) && isalive(self))
+  if(isai(self) && !is_true(self.isbigdog) && isalive(self)) {
     self disable_react();
+  }
 
   if(is_true(self.isbigdog)) {
     self.shoot_only_on_sight = 1;
@@ -642,23 +696,27 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
   assert(isDefined(self.preinitialized), "AI not preinitialized");
   self.initialized = 1;
 
-  if(isDefined(health) && health > 0)
+  if(isDefined(health) && health > 0) {
     self.health = health;
-  else
+  } else {
     self.health = ref.health;
+  }
 
-  if(self.health < 10)
+  if(self.health < 10) {
     self.health = 10;
+  }
 
-  if(team == "allies")
+  if(team == "allies") {
     adjustedhealth = int(self.health * level.rts.game_rules.ally_health_scale);
-  else
+  } else {
     adjustedhealth = int(self.health * level.rts.game_rules.axis_health_scale);
+  }
 
   println("AI INITIALIZE: EntNum(" + self getentitynumber() + ") Health:" + self.health + " Adjusted Health:" + adjustedhealth);
 
-  if(adjustedhealth < 10)
+  if(adjustedhealth < 10) {
     adjustedhealth = 10;
+  }
 
   self.health = adjustedhealth;
   self.health_max = self.health;
@@ -672,10 +730,11 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
     if(ref.species == "human" || ref.species == "dog" || ref.species == "robot_actor") {
       self setgoalpos(origin);
 
-      if(isDefined(angles))
+      if(isDefined(angles)) {
         self forceteleport(origin, angles);
-      else
+      } else {
         self forceteleport(origin);
+      }
     } else if(ref.species == "vehicle") {
       self.goalpos = origin;
       self.origin = origin;
@@ -703,32 +762,35 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     self set_vehicle_damage_override();
 
-    if(issubstr(self.vehicletype, "metalstorm"))
+    if(issubstr(self.vehicletype, "metalstorm")) {
       self thread maps\_metal_storm::metalstorm_set_team(team);
-    else if(issubstr(self.vehicletype, "quadrotor"))
+    } else if(issubstr(self.vehicletype, "quadrotor")) {
       self thread maps\_quadrotor::quadrotor_set_team(team);
-    else
+    } else {
       self.vteam = team;
+    }
 
     recordent(self);
-
   } else
     self set_actor_damage_override();
 
   self thread ai_deathmonitor();
 
-  if(ref.species == "human")
+  if(ref.species == "human") {
     self thread ai_weaponselectwatch();
+  }
 
   if(self.team == "allies" && isDefined(squadid)) {
-    if(!(isDefined(self.classname) && self.classname == "script_vehicle"))
+    if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
       self thread enemy_contact_watcher();
+    }
 
     if(!is_true(self.manual_lui_add)) {
-      if(ref.species == "human")
+      if(ref.species == "human") {
         luinotifyevent(&"rts_add_friendly_human", 5, self getentitynumber(), squadid, 35, 0, pkg_ref.idx);
-      else
+      } else {
         luinotifyevent(&"rts_add_friendly_ai", 4, self getentitynumber(), squadid, 0, pkg_ref.idx);
+      }
     }
 
     self.grenadeawareness = 0;
@@ -737,36 +799,42 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
   } else
     self thread enemy_death_watcher();
 
-  if(self.ai_ref.armor > 0)
+  if(self.ai_ref.armor > 0) {
     self.armor = self.ai_ref.armor;
+  }
 
   self maps\_so_rts_support::flush_gpr();
 
-  if(isDefined(level.rts.aux_ai_initializer))
+  if(isDefined(level.rts.aux_ai_initializer)) {
     self thread[[level.rts.aux_ai_initializer]]();
+  }
 }
 
 spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, manualluiadd) {
-  if(!isDefined(findinitnode))
+  if(!isDefined(findinitnode)) {
     findinitnode = 1;
+  }
 
-  if(!isDefined(manualluiadd))
+  if(!isDefined(manualluiadd)) {
     manualluiadd = 0;
+  }
 
   if(!isDefined(searchpoint)) {
-    if(team == "axis")
+    if(team == "axis") {
       searchpoint = level.rts.enemy_center.origin;
-    else if(team == "allies")
+    } else if(team == "allies") {
       searchpoint = level.rts.allied_center.origin;
+    }
   }
 
   squadid = maps\_so_rts_squad::createsquad(searchpoint, team, pkg_ref);
 
   if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {
-    if(pkg_ref.qty["allies"] > 0)
+    if(pkg_ref.qty["allies"] > 0) {
       luinotifyevent(&"rts_add_squad", 4, squadid, pkg_ref.idx, 0, pkg_ref.qty["allies"]);
-    else
+    } else {
       luinotifyevent(&"rts_add_squad", 3, squadid, pkg_ref.idx, 0);
+    }
   }
 
   maps\_so_rts_squad::removedeadfromsquad(squadid);
@@ -782,9 +850,9 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
 
     ai_ref = level.rts.ai[unit];
 
-    if(ai_ref.species == "human" || ai_ref.species == "robot_actor")
+    if(ai_ref.species == "human" || ai_ref.species == "robot_actor") {
       ai = simple_spawn_single(ai_ref.ref, undefined, undefined, undefined, undefined, undefined, undefined, 1);
-    else if(ai_ref.species == "vehicle") {
+    } else if(ai_ref.species == "vehicle") {
       origin = isDefined(nodes[i]) ? nodes[i].origin : searchpoint;
       ai = maps\_so_rts_support::placevehicle(ai_ref.ref, origin + vectorscale((0, 0, 1), 36.0), team);
     } else if(ai_ref.species == "dog")
@@ -804,8 +872,9 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
           ai.initnode = nodes[i];
           i++;
 
-          if(i >= nodes.size)
+          if(i >= nodes.size) {
             i = 0;
+          }
         }
       }
 
@@ -825,24 +894,26 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
       }
     }
 
-    if(team == "allies")
+    if(team == "allies") {
       assert(0, "couldnt spawn a friendly " + ai_ref.ref);
-
+    }
   }
 
   maps\_so_rts_catalog::units_delivered(team, squadid);
 
-  if(isDefined(callback))
+  if(isDefined(callback)) {
     thread[[callback]](squadid);
+  }
 
   return squadid;
 }
 
 get_package_drop_target(team) {
-  if(team == "axis")
+  if(team == "axis") {
     droptarget = level.rts.enemy_center.origin;
-  else
+  } else {
     droptarget = level.rts.allied_center.origin;
+  }
 
   return droptarget;
 }
@@ -862,8 +933,9 @@ spawn_ai_package_helo(transport) {
   chopper = chopper_send(droptarget, team, type, 0);
   maps\_so_rts_squad::removedeadfromsquad(squadid);
 
-  if(team == "axis")
+  if(team == "axis") {
     maps\_so_rts_squad::ordersquaddefend(get_package_drop_target(team), squadid);
+  }
 
   foreach(unit in pkg_ref.units) {
     if(!maps\_so_rts_catalog::pkg_ref_checkmaxspawn(pkg_ref, team)) {
@@ -894,8 +966,9 @@ spawn_ai_package_helo(transport) {
   chopper thread callbackonnotify("unloaded", maps\_so_rts_catalog::unloadtransport, transport);
   chopper thread callbackonnotify("unloaded", maps\_so_rts_support::chopper_release_path);
 
-  if(isDefined(callback))
+  if(isDefined(callback)) {
     chopper thread callbackonnotify("unloaded", callback, squadid);
+  }
 
   return squadid;
 }
@@ -916,8 +989,9 @@ spawn_ai_package_cargo(transport) {
   chopper thread callbackonnotify("unloaded", maps\_so_rts_catalog::unloadtransport, transport);
   chopper thread callbackonnotify("unloaded", maps\_so_rts_support::chopper_release_path);
 
-  if(isDefined(callback))
+  if(isDefined(callback)) {
     chopper thread callbackonnotify("unloaded", callback, squadid);
+  }
 
   return squadid;
 }
@@ -930,14 +1004,15 @@ chopper_unload_cargo(pkg_ref, team, squadid) {
   self setflaggedanimrestart("door_open", %v_vtol_doors_open, 1, 0.2, 1);
   self waittillmatch("door_open", "end");
 
-  if(issubstr(pkg_ref.ref, "quadrotor"))
+  if(issubstr(pkg_ref.ref, "quadrotor")) {
     self chopper_unload_cargo_quad(pkg_ref, team, squadid);
-  else if(issubstr(pkg_ref.ref, "metalstorm"))
+  } else if(issubstr(pkg_ref.ref, "metalstorm")) {
     self chopper_unload_cargo_metalstorm(pkg_ref, team, squadid);
-  else if(issubstr(pkg_ref.ref, "bigdog"))
+  } else if(issubstr(pkg_ref.ref, "bigdog")) {
     self chopper_unload_cargo_claw(pkg_ref, team, squadid);
-  else
+  } else {
     assert(0, "unhandled pkg");
+  }
 
   wait 1;
   self notify("unloaded");
@@ -968,8 +1043,9 @@ chopper_unload_cargo_quad(pkg_ref, team, squadid, cb) {
   guy setModel(level.rts.quad_thrower_model);
   guy useanimtree(#animtree);
 
-  if(isDefined(level.rts.quad_thrower_headmodel))
+  if(isDefined(level.rts.quad_thrower_headmodel)) {
     guy attach(level.rts.quad_thrower_headmodel, "", 1);
+  }
 
   tagorigin = self gettagorigin("tag_detach");
   tagangles = self gettagangles("tag_detach");
@@ -995,8 +1071,9 @@ chopper_unload_cargo_quad(pkg_ref, team, squadid, cb) {
       throwtag = throwtags[j % 2];
       origin = guy gettagorigin(throwtag);
 
-      if(!isDefined(origin))
+      if(!isDefined(origin)) {
         origin = guy.origin;
+      }
 
       quad = placevehicle(ai_ref.ref, origin, team);
       quad linkto(guy, throwtag);
@@ -1020,8 +1097,9 @@ chopper_unload_cargo_quad(pkg_ref, team, squadid, cb) {
   level notify("unloaded_" + pkg_ref.ref);
   guy delete();
 
-  if(isDefined(cb))
+  if(isDefined(cb)) {
     thread[[cb]](squadid);
+  }
 }
 
 #using_animtree("fxanim_props");
@@ -1110,11 +1188,13 @@ cargocheck(pkg_ref) {
 }
 
 spawnreplacement(spawner) {
-  if(!isDefined(self.ally))
+  if(!isDefined(self.ally)) {
     return undefined;
+  }
 
-  if(!isDefined(spawner))
+  if(!isDefined(spawner)) {
     spawner = self.ally.ai_ref.ref;
+  }
 
   guy = simple_spawn_single(spawner, undefined, undefined, undefined, undefined, undefined, undefined, 1);
 
@@ -1136,10 +1216,11 @@ spawnreplacement(spawner) {
       }
     }
 
-    if(goingtonode)
+    if(goingtonode) {
       guy ai_initialize(self.ally.ai_ref, self.team, goal.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
-    else
+    } else {
       guy ai_initialize(self.ally.ai_ref, self.team, self.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
+    }
 
     guy.armor = self.ally.armor;
     guy.goalradius = self.ally.goalradius;
@@ -1150,8 +1231,9 @@ spawnreplacement(spawner) {
     guy.rts_unloaded = 1;
     guy.playerinhabited = 1;
 
-    if(isDefined(self.ally.viewhands))
+    if(isDefined(self.ally.viewhands)) {
       guy.viewhands = self.ally.viewhands;
+    }
 
     guy ai_postinitialize();
     primary_weapons = self getweaponslistprimaries();
@@ -1160,18 +1242,21 @@ spawnreplacement(spawner) {
     guy gun_switchto(primary_weapons[0], "right");
     guy animscripts\utility::setprimaryweapon(primary_weapons[0]);
 
-    if(primary_weapons.size > 1)
+    if(primary_weapons.size > 1) {
       guy animscripts\utility::setsecondaryweapon(primary_weapons[1]);
+    }
 
     if(isDefined(self.ally.grenadeweapon)) {
       grenadeweapon = self.ally.grenadeweapon;
       guy.grenadeweapon = grenadeweapon;
 
-      if(grenadeweapon == "frag_grenade_sp")
+      if(grenadeweapon == "frag_grenade_sp") {
         grenadeweapon = "frag_grenade_future_sp";
+      }
 
-      if(grenadeweapon == "sticky_grenade_future_ai_sp")
+      if(grenadeweapon == "sticky_grenade_future_ai_sp") {
         grenadeweapon = "sticky_grenade_future_sp";
+      }
 
       guy.grenadeammo = self getweaponammoclip(grenadeweapon);
     }
@@ -1179,8 +1264,9 @@ spawnreplacement(spawner) {
     guy.health = self.ally.health > self.health ? self.health : self.ally.health;
     luinotifyevent(&"rts_update_health", 3, guy getentitynumber(), guy.health, isDefined(guy.health_max) ? guy.health_max : guy.health);
 
-    if(isDefined(self.ally.restorenote))
+    if(isDefined(self.ally.restorenote)) {
       level notify(self.ally.restorenote, guy);
+    }
   } else if(isDefined(self.ally.restorenote))
     assert(0, "Entity with restore note did not spawn");
 
@@ -1235,10 +1321,11 @@ restorereplacement() {
       }
     }
 
-    if(goingtonode)
+    if(goingtonode) {
       self.ally.swapai ai_initialize(self.ally.ai_ref, self.team, goal.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
-    else
+    } else {
       self.ally.swapai ai_initialize(self.ally.ai_ref, self.team, self.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
+    }
 
     self.ally.swapai.health = health;
     self.ally.swapai.armor = self.ally.armor;
@@ -1252,8 +1339,9 @@ restorereplacement() {
     self.ally.swapai.ignoreall = 0;
     self.ally.swapai.takedamage = 1;
 
-    if(isDefined(self.ally.restorenote))
+    if(isDefined(self.ally.restorenote)) {
       level notify(self.ally.restorenote, self.ally.swapai);
+    }
 
     level.rts.last_teammate = self.ally.swapai;
   } else if(self.ally.ai_ref.species == "vehicle") {
@@ -1264,8 +1352,9 @@ restorereplacement() {
       self.ally.vehicle.player = undefined;
       self.ally.vehicle.vehdontejectoccupantsondeath = 0;
 
-      if(isDefined(self.ally.restorenote))
+      if(isDefined(self.ally.restorenote)) {
         level notify(self.ally.restorenote, self.ally.vehicle);
+      }
 
       luinotifyevent(&"rts_update_health", 3, self.ally.vehicle getentitynumber(), self.ally.vehicle.health, self.ally.vehicle.health_max);
       level.rts.last_teammate = self.ally.vehicle;
@@ -1274,8 +1363,9 @@ restorereplacement() {
 
   self.ally = undefined;
 
-  if(isDefined(level.rts.activesquad))
+  if(isDefined(level.rts.activesquad)) {
     package_highlightunits(level.rts.activesquad);
+  }
 }
 
 takeoverselectedinfantry(entity) {
@@ -1307,22 +1397,26 @@ takeoverselectedinfantry(entity) {
     self.ally.viewhands = entity.viewhands;
   }
 
-  if(!is_true(entity.playerinhabited))
+  if(!is_true(entity.playerinhabited)) {
     self.ally.grenadeammo = randomintrange(2, 5);
+  }
 
-  if(entity.ai_ref.armor > 0)
+  if(entity.ai_ref.armor > 0) {
     self.armor = entity.ai_ref.armor;
+  }
 
   self takeallweapons();
 
   if(isDefined(self.ally.grenadeweapon) && self.ally.grenadeweapon != "" && self.ally.grenadeweapon != "none") {
     grenadeweapon = self.ally.grenadeweapon;
 
-    if(self.ally.grenadeweapon == "frag_grenade_sp")
+    if(self.ally.grenadeweapon == "frag_grenade_sp") {
       grenadeweapon = "frag_grenade_future_sp";
+    }
 
-    if(self.ally.grenadeweapon == "sticky_grenade_future_ai_sp")
+    if(self.ally.grenadeweapon == "sticky_grenade_future_ai_sp") {
       grenadeweapon = "sticky_grenade_future_sp";
+    }
 
     self giveweapon(grenadeweapon);
     self setweaponammoclip(grenadeweapon, self.ally.grenadeammo);
@@ -1361,8 +1455,9 @@ takeoverselectedinfantry(entity) {
   level.rts.player setplayerangles(getbestinitialorientangles(entity));
   entity maps\_so_rts_support::flush_gpr();
 
-  if(isDefined(entity.takeovernote))
+  if(isDefined(entity.takeovernote)) {
     level notify(entity.takeovernote);
+  }
 
   entity delete();
   luinotifyevent(&"rts_add_friendly_human", 5, self getentitynumber(), self.ally.squadid, 0, 1, self.ally.pkg_ref.idx);
@@ -1375,10 +1470,11 @@ vehicledeathwatcher(vehicle) {
   if(!isDefined(vehicle.playerdeleted)) {
     maps\_so_rts_squad::removedeadfromsquad(self.ally.squadid);
 
-    if(level.rts.squads[self.ally.squadid].members.size == 0)
+    if(level.rts.squads[self.ally.squadid].members.size == 0) {
       nextsquad = maps\_so_rts_squad::getnextvalidsquad(self.ally.squadid);
-    else
+    } else {
       nextsquad = self.ally.squadid;
+    }
 
     maps\_so_rts_event::trigger_event("vehicle_death");
 
@@ -1393,8 +1489,9 @@ vehicledeathwatcher(vehicle) {
 
     wait 1;
 
-    if(isDefined(vehicle) && isDefined(vehicle.ai_ref.swap_spawner))
+    if(isDefined(vehicle) && isDefined(vehicle.ai_ref.swap_spawner)) {
       vehicle delete();
+    }
   }
 }
 
@@ -1402,19 +1499,22 @@ getbestinitialorientangles(entity) {
   angles = entity.angles;
   eye = entity gettagangles("tag_eye");
 
-  if(isDefined(eye))
+  if(isDefined(eye)) {
     return (0, eye[1], 0);
+  }
 
-  if(isDefined(level.rts.enemy_base))
+  if(isDefined(level.rts.enemy_base)) {
     enemyent = level.rts.enemy_base.entity;
+  }
 
-  if(isDefined(entity.enemy))
+  if(isDefined(entity.enemy)) {
     enemyent = entity.enemy;
-  else {
+  } else {
     closeenemy = getclosestai(self.origin, "axis", 562500);
 
-    if(isDefined(closeenemy))
+    if(isDefined(closeenemy)) {
       enemyent = closeenemy;
+    }
   }
 
   if(isDefined(enemyent)) {
@@ -1429,8 +1529,9 @@ vehicle_airwatcher(vehicle) {
   vehicle endon("death");
   vehicle endon("player_exited");
 
-  if(issubstr(vehicle.vehicletype, "quadrotor"))
+  if(issubstr(vehicle.vehicletype, "quadrotor")) {
     return;
+  }
 }
 
 takeoverselectedvehicle(entity) {
@@ -1481,8 +1582,9 @@ takeoverselectedvehicle(entity) {
       vehicle.rts_unloaded = 1;
       vehicle ai_postinitialize();
 
-      if(vehicle.ai_ref.armor > 0)
+      if(vehicle.ai_ref.armor > 0) {
         vehicle.armor = vehicle.ai_ref.armor;
+      }
 
       entity maps\_so_rts_squad::removeaifromsquad();
       entity.rts_unloaded = 0;
@@ -1494,8 +1596,9 @@ takeoverselectedvehicle(entity) {
       entity forceteleport(vectorscale((0, 0, -1), 30000.0));
       self.ally.swapai = entity;
 
-      if(isDefined(entity.takeovernote))
+      if(isDefined(entity.takeovernote)) {
         level notify(entity.takeovernote);
+      }
 
       entity = vehicle;
     }
@@ -1520,11 +1623,13 @@ takeoverselectedvehicle(entity) {
     self thread vehicledeathwatcher(entity);
     entity makevehicleunusable();
 
-    if(entity.ai_ref.armor > 0)
+    if(entity.ai_ref.armor > 0) {
       entity.armor = entity.ai_ref.armor;
+    }
 
-    if(isDefined(entity.takeovernote))
+    if(isDefined(entity.takeovernote)) {
       level notify(entity.takeovernote);
+    }
   }
 
   entity.player = self;
@@ -1543,8 +1648,9 @@ health_regen(amountpersec, maxhealth) {
   while(true) {
     self.health = self.health + amountpersec;
 
-    if(self.health > maxhealth)
+    if(self.health > maxhealth) {
       self.health = maxhealth;
+    }
 
     wait 1;
   }
@@ -1563,10 +1669,11 @@ takeoverselected(entity) {
   pkg_ref = entity.pkg_ref;
 
   if(isDefined(entity.classname) && entity.classname == "script_vehicle" || is_mechanical(entity)) {
-    if(is_mechanical(entity))
+    if(is_mechanical(entity)) {
       entity.takedamage = 1;
-    else
+    } else {
       entity veh_magic_bullet_shield(0);
+    }
 
     entity = takeoverselectedvehicle(entity);
   } else
@@ -1591,9 +1698,9 @@ spider_initialize() {
 
 bigdog_initialize() {
   if(isai(self)) {
-    if(self.team == "allies")
+    if(self.team == "allies") {
       self setModel("veh_t6_drone_claw_mk2");
-    else {
+    } else {
       self setModel("veh_t6_drone_claw_mk2_alt");
       self.turret setModel("veh_t6_drone_claw_mk2_turret_alt");
     }
@@ -1605,14 +1712,16 @@ bigdog_initialize() {
 removebaseasthreat() {
   allenemies = getaiarray("axis");
 
-  foreach(enemy in allenemies)
-  enemy clearentitytarget();
+  foreach(enemy in allenemies) {
+    enemy clearentitytarget();
+  }
 
   allvehicles = getvehiclearray("axis");
 
   foreach(vehicle in allvehicles) {
-    if(issentient(vehicle))
+    if(issentient(vehicle)) {
       vehicle vehclearentitytarget();
+    }
   }
 }
 

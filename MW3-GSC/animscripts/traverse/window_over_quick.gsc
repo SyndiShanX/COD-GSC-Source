@@ -18,7 +18,7 @@ _id_3FFE() {
   var_0["traverseAnim"] = % traverse_window_quick;
   var_0["coverType"] = "Cover Crouch";
   var_0["traverseHeight"] = 36.0;
-  var_0["interruptDeathAnim"][0] = animscripts\utility::_id_0C6D( % traverse_window_death_start);
-  var_0["interruptDeathAnim"][1] = animscripts\utility::_id_0C6D( % traverse_window_death_end);
+  var_0["interruptDeathAnim"][0] = animscripts\utility::_id_0C6D(%traverse_window_death_start);
+  var_0["interruptDeathAnim"][1] = animscripts\utility::_id_0C6D(%traverse_window_death_end);
   animscripts\traverse\shared::_id_3FEB(var_0);
 }

@@ -15,7 +15,6 @@ main() {
   level._effect["thin_black_smoke_L"] = loadfx("smoke/thin_black_smoke_L");
   level._effect["dust_wind_slow"] = loadfx("dust/dust_wind_slow_yel_loop");
 
-  /#		
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_cross_fire_fx::main();
 }

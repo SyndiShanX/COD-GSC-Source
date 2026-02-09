@@ -296,7 +296,7 @@ apply_filter(localclientnum, filter, filterset = "framebuffer") {
   if(getdvarint(#"scr_debug_duplicaterender", 0)) {
     name = "<dev string:x38>";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(isDefined(self.name)) {
         name = "<dev string:x43>" + self.name;
       }

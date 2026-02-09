@@ -21,7 +21,6 @@ init() {
     }
   }
 }
-
 deathcard_spawn() {
   dc = spawn("script_model", self.origin + (0, 0, 40));
   dc.angles = self.angles;
@@ -32,7 +31,6 @@ deathcard_spawn() {
   dc thread deathcard_grab();
   self.pro_tip_death_card_round = level.round_number + 1;
 }
-
 deathcard_laststand() {
   players = get_players();
   if(players.size == 1) {
@@ -97,7 +95,6 @@ deathcard_laststand() {
     }
   }
 }
-
 deathcard_save_perks(ent) {
   idx = 0;
   perk_array = undefined;
@@ -124,7 +121,6 @@ deathcard_save_perks(ent) {
   }
   return (perk_array);
 }
-
 deathcard_grab() {
   self endon("deatchcard_timedout");
   wait(1);
@@ -142,7 +138,7 @@ deathcard_grab() {
           players[i] deathcard_give(i);
           wait(0.1);
           playsoundatposition("zmb_powerup_grabbed_3p", self.origin);
-          self stopLoopSound();
+          self stoploopsound();
           self delete();
           self notify("deathcard_grabbed");
           players[i] clientnotify("dc0");
@@ -152,14 +148,13 @@ deathcard_grab() {
     wait_network_frame();
   }
 }
-
 deathcard_give(index) {
   dc = level.deathcards[index];
   if(dc.current_weapon >= 0) {
     weapon = undefined;
     stock = 0;
     needSwitch = false;
-    if(dc.weapon[dc.current_weapon] != "none" && !self hasWeapon(dc.weapon[dc.current_weapon])) {
+    if(dc.weapon[dc.current_weapon] != "none" && !self HasWeapon(dc.weapon[dc.current_weapon])) {
       weapon = dc.weapon[dc.current_weapon];
       stock = dc.stockCount[dc.current_weapon];
       needSwitch = true;
@@ -168,7 +163,7 @@ deathcard_give(index) {
         if(dc.current_weapon == i || dc.weapon[i] == "none") {
           continue;
         }
-        if(!self hasWeapon(dc.weapon[i])) {
+        if(!self HasWeapon(dc.weapon[i])) {
           weapon = dc.weapon[i];
           stock = dc.stockCount[i];
         }
@@ -202,7 +197,7 @@ deathcard_give(index) {
           continue;
         }
         remaining = dc.perk.size - i;
-        if(remaining <= newPerks || randomInt(100) > 50) {
+        if(remaining <= newPerks || RandomInt(100) > 50) {
           maps\_zombiemode_perks::give_perk(dc.perk[i]);
           newPerks--;
         }
@@ -219,7 +214,6 @@ deathcard_give(index) {
     }
   }
 }
-
 deathcard_give_solo() {
   dc = level.deathcards[0];
   self maps\_zombiemode::laststand_giveback_player_perks();
@@ -252,7 +246,6 @@ deathcard_give_solo() {
     }
   }
 }
-
 deathcard_wobble() {
   self endon("deathcard_grabbed");
   self endon("deathcard_timedout");
@@ -266,7 +259,6 @@ deathcard_wobble() {
     wait(3);
   }
 }
-
 deathcard_timeout() {
   self endon("deathcard_grabbed");
   level waittill("between_round_over");

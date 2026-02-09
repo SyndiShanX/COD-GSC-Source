@@ -14,7 +14,7 @@ init() {
   SetDevDvarIfUninitialized("threat_detection_mark_time", 3);
   SetDevDvarIfUninitialized("threat_detection_highlight_style", level._threatdetection.default_style);
 
-  level._threatdetection.activeStyle = GetDvar("threat_detection_highlight_style", level._threatdetection.default_style);
+  level._threatdetection.activeStyle = getDvar("threat_detection_highlight_style", level._threatdetection.default_style);
   level thread onPlayerConnect();
   level thread watchAgentspawn();
 }
@@ -52,7 +52,6 @@ changeThreatStyle(threatStyle) {
         }
       }
     }
-
   }
 
   foreach(p in level.players) {
@@ -63,7 +62,7 @@ changeThreatStyle(threatStyle) {
 }
 
 GetThreatStyle() {
-  threatStyle = GetDvar("threat_detection_highlight_style", level._threatdetection.default_style);
+  threatStyle = getDvar("threat_detection_highlight_style", level._threatdetection.default_style);
   if(threatStyle != level._threatdetection.activeStyle) {
     changeThreatStyle(threatStyle);
   }
@@ -153,7 +152,6 @@ monitorThreatHighlightNotification() {
           notification_overlay_element.alpha = 0.0;
           wait(FadeOutTime);
         }
-
       }
     }
 
@@ -349,7 +347,7 @@ addThreatEvent(players_arr, event_duration_sec, event_type, updateHostile, updat
       self._threatdetection.showlist[index].losEndTime = losEndTime;
       self._threatdetection.showlist[index].eventType = event_type;
 
-      if(IsPlayer(self)) {
+      if(isPlayer(self)) {
         if(!isDefined(bPlaySound) || bPlaySound) {
           self PlayLocalSound("flag_spawned");
         }
@@ -357,7 +355,7 @@ addThreatEvent(players_arr, event_duration_sec, event_type, updateHostile, updat
     }
   }
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(updateFriendly) {
       visitFXEnt(::visitorUpdateMarkerPos, ::getFriendlyMarker, undefined);
     }
@@ -384,21 +382,21 @@ stopThreatEventType(eventType) {
 visitFXEnt(visitorFn, accessorFn, show_to) {
   threatStyle = GetThreatStyle();
   if(threatStyle == "glow") {
-    assert(IsPlayer(self));
+    assert(isPlayer(self));
     foreach(i, fx in self.mark_fx.fx_ent) {
       assert(isDefined([[accessorFn]](fx)));
       [[visitorFn]]([[accessorFn]](fx), show_to, level._threatdetection.fx_data[i][0]);
     }
   } else if(threatStyle == "model") {
-    assert(IsPlayer(self));
+    assert(isPlayer(self));
     assert(isDefined([[accessorFn]](self._threatdetection)));
     [[visitorFn]]([[accessorFn]](self._threatdetection), show_to, "tag_origin");
   } else if(threatStyle == "vfx_model") {
-    assert(IsPlayer(self));
+    assert(isPlayer(self));
     assert(isDefined([[accessorFn]](self._threatdetection)));
     [[visitorFn]]([[accessorFn]](self._threatdetection), show_to, "tag_origin");
   } else if(threatStyle == "attached_glow") {
-    assert(IsPlayer(self));
+    assert(isPlayer(self));
     foreach(i, fx in self.mark_fx.fx_ent) {
       assert(isDefined([[accessorFn]](fx)));
       [[visitorFn]]([[accessorFn]](fx), show_to, level._threatdetection.fx_data[i][0]);
@@ -640,7 +638,6 @@ monitorThreatHighlight() {
       } else {
         AssertEx(0, "unknown threat style " + threatStyle + ".i dont know how to set it up");
       }
-
     }
     if(!anyoneNeedsDraw) {
       continue;
@@ -658,21 +655,20 @@ monitorThreatHighlight() {
 
         result = bulletTrace(p.player.origin + height_offset, self.origin + height_offset, true, p.player);
 
-        if(result["fraction"] < 1 && !isplayer(result["entity"])) {
+        if(result["fraction"] < 1 && !isPlayer(result["entity"])) {
           showThreat(p.player, ::getFriendlyMarker, ::getHostileMarker, ::visitorShowToPlayer);
           prepare_show_threat(all_hidden, threatStyle, p.player);
           all_hidden = false;
         }
       }
     }
-
   }
 }
 
 prepare_show_threat(already_drawn, threatStyle, player) {
   if(already_drawn) {
     if(threatStyle == "attached_glow") {
-      assert(IsPlayer(self));
+      assert(isPlayer(self));
       showThreat(player, ::getFriendlyLOSMarker, ::getHostileLOSMarker, ::visitorRetriggerFX);
     }
   }
@@ -773,7 +769,7 @@ visitorUpdateLOSMarker(member, player, bone) {
 }
 
 visitorShowToPlayer(member, player, bone) {
-  assert(isDefined(player) && isplayer(player));
+  assert(isDefined(player) && isPlayer(player));
   assert(isDefined(member));
 
   threatStyle = GetThreatStyle();

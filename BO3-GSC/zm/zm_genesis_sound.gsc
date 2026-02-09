@@ -212,7 +212,7 @@ function function_8554d5da() {
   while(true) {
     var_99ff4537.health = 1000000;
     var_99ff4537 waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     if(type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE") {
@@ -346,7 +346,7 @@ function function_1d3f00e6() {
   var_326ccfe3 = self.bump;
   for(;;) {
     var_326ccfe3 waittill("trigger", e_player);
-    if(isDefined(e_player) && isplayer(e_player)) {
+    if(isDefined(e_player) && isPlayer(e_player)) {
       if(isDefined(e_player.perks_active) && e_player.perks_active.size == 9 && (isDefined(self.sndjingleactive) && self.sndjingleactive)) {
         e_player thread function_97997a8c(self, var_326ccfe3, var_3628045a);
         while(e_player istouching(var_326ccfe3)) {

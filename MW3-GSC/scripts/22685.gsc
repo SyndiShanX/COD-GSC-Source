@@ -18,13 +18,11 @@ _id_566E() {
 _id_566F() {
   if(!isDefined(level.players)) {
     level waittill("level.players initialized");
-
   }
   common_scripts\utility::array_thread(level.players, ::_id_5672);
 
   if(maps\_utility::_id_0A36()) {
     common_scripts\utility::array_thread(level.players, ::_id_5896);
-
   }
   thread _id_5695();
 }
@@ -34,14 +32,12 @@ _id_5672() {
 
   if(maps\_utility::_id_0A36()) {
     var_0 = 0.2;
-
   }
   for(;;) {
     if(maps\_utility::_id_0A36()) {
       self playFX(level._effect["blizzard_main"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     } else {
       playFX(level._effect["blizzard_main"], self.origin);
-
     }
     wait(var_0);
   }
@@ -277,17 +273,14 @@ _id_5690(var_0) {
 _id_5678(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!isplayer(var_3)) {
+  if(!isPlayer(var_3)) {
     var_3 = level.player;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   if(!isDefined(var_2)) {
     level._id_5691 = var_1;
-
   }
   var_4 = _id_5693(var_3);
   var_4.x = 0;
@@ -309,9 +302,8 @@ _id_5692(var_0) {
   if(!isDefined(var_0) || !var_0) {
     var_1 = self;
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       var_1 = level.player;
-
     }
     var_2 = _id_5693(var_1);
     var_2 destroy();
@@ -324,7 +316,6 @@ _id_5692(var_0) {
 _id_5693(var_0) {
   if(!isDefined(var_0._id_5694)) {
     var_0._id_5694 = newclienthudelem(var_0);
-
   }
   return var_0._id_5694;
 }
@@ -361,7 +352,6 @@ _id_5697(var_0, var_1, var_2) {
 
   if(!isDefined(var_3)) {
     var_3 = 1;
-
   }
   if(issubstr(var_1, "exterior")) {
     _id_5678(1, (1 - var_0) * var_3, 1);

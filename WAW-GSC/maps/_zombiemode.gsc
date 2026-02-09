@@ -2408,9 +2408,6 @@ check_for_jugg_perk() {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
       if(players[i] hasperk("specialty_armorvest") && !isDefined(players[i].is_burning) && !is_magic_bullet_shield_enabled(players[i])) {
-
-      }
-      {
         if(!flag("dog_round")) {
           players[i].health += 40;
         } else {

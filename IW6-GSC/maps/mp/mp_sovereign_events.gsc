@@ -168,7 +168,6 @@ assembly_line_tank_damage_watch() {
     foreach(part in self.parts) {
       part thread assembly_line_tank_part_extinguish();
     }
-
   }
 }
 
@@ -342,7 +341,6 @@ halon_system() {
     level waittill("activate_halon_system", killstreak_player);
 
     level thread halon_system_run(killstreak_player);
-
   }
 }
 
@@ -517,7 +515,7 @@ halon_system_test() {
       waitframe();
     } else {
       level notify("activate_halon_system");
-      SetDvar(dvar_name, default_value);
+      setDvar(dvar_name, default_value);
     }
   }
 }
@@ -538,6 +536,5 @@ halon_fog_only() {
 
     halon_system_fog_off();
   }
-
 }
 # /

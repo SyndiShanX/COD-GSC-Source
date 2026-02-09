@@ -43,7 +43,7 @@ init() {
       level.scavenger_secondary = false;
       break;
   }
-  gametype = GetDvar("g_gametype");
+  gametype = getDvar("g_gametype");
   attachmentList = getAttachmentListBaseNames();
   attachmentList = alphabetize(attachmentList);
 
@@ -105,7 +105,6 @@ init() {
 
       if(getDvar("scr_dump_weapon_assets") != "")
         println("weapon,mp/" + weapon_name + "_" + attachmentName + "_mp");
-
     }
 
     attachmentCombos = [];
@@ -126,7 +125,6 @@ init() {
 
         level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
       }
-
   }
 
   foreach(weaponName in level.weaponList) {
@@ -137,7 +135,6 @@ init() {
       if(altWeapon != "none")
         println("weapon,mp/" + altWeapon);
     }
-
   }
 
   thread maps\mp\_flashgrenades::main();
@@ -423,7 +420,6 @@ onPlayerConnect() {
     player thread bombSquadWaiter_missileFire();
     player thread watchMissileUsage();
     player thread sniperDustWatcher();
-
   }
 }
 
@@ -743,7 +739,6 @@ watchWeaponChange() {
       self.lastDroppableWeapon = weaponName;
     else if(weaponName != "none" && mayDropWeapon(weaponName + "_mp"))
       self.lastDroppableWeapon = weaponName + "_mp";
-
   }
 }
 
@@ -885,21 +880,21 @@ dropWeaponForDeath(attacker, sMeansOfDeath) {
   }
   weapon = self.lastDroppableWeapon;
   if(!isDefined(weapon)) {
-    if(getdvar("scr_dropdebug") == "1")
+    if(getDvar("scr_dropdebug") == "1")
       println("didn't drop weapon: not defined");
 
     return;
   }
 
   if(weapon == "none") {
-    if(getdvar("scr_dropdebug") == "1")
+    if(getDvar("scr_dropdebug") == "1")
       println("didn't drop weapon: weapon == none");
 
     return;
   }
 
   if(!(self hasWeapon(weapon))) {
-    if(getdvar("scr_dropdebug") == "1")
+    if(getDvar("scr_dropdebug") == "1")
       println("didn't drop weapon: don't have it anymore (" + weapon + ")");
 
     return;
@@ -1021,10 +1016,9 @@ watchPickup() {
     if(isDefined(droppedItem)) {
       break;
     }
-
   }
 
-  if(getdvar("scr_dropdebug") == "1")
+  if(getDvar("scr_dropdebug") == "1")
     println("picked up weapon: " + weapname + ", " + isDefined(self.ownersattacker));
 
   assert(isDefined(player.tookWeaponFrom));
@@ -1475,7 +1469,7 @@ throwingKnifeUsed(owner, grenade, weapon_name) {
     }
     knifeTrigger waittill("trigger", player);
 
-    if(!IsPlayer(player) || !isReallyAlive(player)) {
+    if(!isPlayer(player) || !isReallyAlive(player)) {
       continue;
     }
     if(!(player HasWeapon(weapon_name))) {
@@ -2792,7 +2786,7 @@ explosiveHandleMovers(parent, useDefaultInvalidParentCallback) {
 }
 
 explosiveTrigger(target, gracePeriod, notifyStr) {
-  if(IsPlayer(target) && target _hasPerk("specialty_delaymine")) {
+  if(isPlayer(target) && target _hasPerk("specialty_delaymine")) {
     target notify("triggeredExpl", notifyStr);
     gracePeriod = level.delayMineTime;
   }
@@ -3138,7 +3132,6 @@ onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage, eAttacker) {
       maps\mp\gametypes\_shellshock::shellshockOnDamage(meansOfDeath, damage);
       break;
   }
-
 }
 
 isPrimaryWeapon(weapName) {
@@ -3311,7 +3304,8 @@ getWeaponHeaviestValue() {
       }
     }
 
-    /#	/ / Debug
+    / /
+    Debug
     for odd cases where move speed is erroring based on equiped weapons.
     if(heaviestWeaponValue == 1000) {
       AssertMsg("No weapons of non zero speed");
@@ -3398,7 +3392,7 @@ CONST_RECOIL_REDUCTION_SNIPER_PRONE_BORED = 20;
 CONST_RECOIL_REDUCTION_SNIPER_CROUCH_BORED = 10;
 
 stanceRecoilAdjuster() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("death");
@@ -3482,7 +3476,7 @@ buildWeaponData(filterPerks) {
   baseWeaponData = [];
 
   statsTableName = "mp/statstable.csv";
-  gametype = GetDvar("g_gametype");
+  gametype = getDvar("g_gametype");
   if(gametype == "aliens") {
     statsTableName = "mp/alien/mode_string_tables/alien_statstable.csv";
   }
@@ -3580,7 +3574,7 @@ semtexUsed(grenade) {
 
   grenade thread maps\mp\gametypes\_shellshock::grenade_earthQuake();
 
-  if(IsPlayer(stuckTo) || IsAgent(stuckTo)) {
+  if(isPlayer(stuckTo) || IsAgent(stuckTo)) {
     if(!isDefined(self)) {
       grenade.stuckEnemyEntity = stuckTo;
 
@@ -3591,7 +3585,7 @@ semtexUsed(grenade) {
       grenade.isStuck = "enemy";
       grenade.stuckEnemyEntity = stuckTo;
 
-      if(IsPlayer(stuckTo))
+      if(isPlayer(stuckTo))
         stuckTo maps\mp\gametypes\_hud_message::playerCardSplashNotify("semtex_stuck", self);
 
       self thread maps\mp\gametypes\_hud_message::splashNotify("stuck_semtex", 100);

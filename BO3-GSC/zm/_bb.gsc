@@ -44,7 +44,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
   var_5833b024 = "";
   aiattackercombatmode = "";
   if(isDefined(attacker)) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attackerid = getplayerspawnid(attacker);
       attackertype = "_player";
       attackername = attacker.name;
@@ -66,7 +66,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
     }
   }
   if(isDefined(victim)) {
-    if(isplayer(victim)) {
+    if(isPlayer(victim)) {
       victimid = getplayerspawnid(victim);
       victimtype = "_player";
       victimname = victim.name;
@@ -121,7 +121,7 @@ function logpurchaseevent(player, sellerent, cost, itemname, itemupgraded, itemt
 function logpowerupevent(powerup, optplayer, eventname) {
   playerspawnid = -1;
   playername = "";
-  if(isDefined(optplayer) && isplayer(optplayer)) {
+  if(isDefined(optplayer) && isPlayer(optplayer)) {
     playerspawnid = getplayerspawnid(optplayer);
     playername = optplayer.name;
   }

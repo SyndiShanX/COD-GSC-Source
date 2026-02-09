@@ -53,7 +53,6 @@ bot_killstreak_setup() {
     if(!is_aliens()) {
       bot_validate_killstreak_funcs();
     }
-
   }
 
   thread remote_vehicle_setup();

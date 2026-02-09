@@ -362,7 +362,7 @@ function flame_damage_over_time(e_attacker, damageweapon, pct_damage) {
   n_damage = n_damage * pct_damage;
   self thread on_fire_timeout(n_duration);
   while(true) {
-    if(isDefined(e_attacker) && isplayer(e_attacker)) {
+    if(isDefined(e_attacker) && isPlayer(e_attacker)) {
       if(e_attacker zm_powerups::is_insta_kill_active()) {
         n_damage = self.health;
       }

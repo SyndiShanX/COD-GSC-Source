@@ -118,7 +118,7 @@ function any_player_in_zone(zone_name) {
 }
 
 function entity_in_zone(zone_name, ignore_enabled_check = 0) {
-  if(isplayer(self) && self.sessionstate == "spectator") {
+  if(isPlayer(self) && self.sessionstate == "spectator") {
     return false;
   }
   if(!zone_is_enabled(zone_name) && !ignore_enabled_check) {
@@ -134,7 +134,7 @@ function entity_in_zone(zone_name, ignore_enabled_check = 0) {
 }
 
 function entity_in_active_zone(ignore_enabled_check = 0) {
-  if(isplayer(self) && self.sessionstate == "spectator") {
+  if(isPlayer(self) && self.sessionstate == "spectator") {
     return false;
   }
   foreach(str_adj_zone in level.active_zone_names) {
@@ -846,7 +846,7 @@ function _debug_show_zone(zone, color, alpha) {
 function _debug_zones() {
   enabled = 0;
   if(getdvarstring("zombiemode_debug_zones") == "") {
-    setdvar("zombiemode_debug_zones", "0");
+    setDvar("zombiemode_debug_zones", "0");
   }
   infovolumedebuginit();
   zkeys = getarraykeys(level.zones);

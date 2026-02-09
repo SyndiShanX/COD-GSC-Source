@@ -85,7 +85,7 @@ function_54e9d3c4(localclientnum) {
 
   driver = vehicle.owner;
 
-  if(!isDefined(driver) || !isplayer(driver)) {
+  if(!isDefined(driver) || !isPlayer(driver)) {
     return;
   }
 

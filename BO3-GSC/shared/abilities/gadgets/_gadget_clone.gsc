@@ -278,7 +278,7 @@ function _cloneorbfx(endpos, traveltime) {
 
 function private _clonecopyplayerlook(clone, player) {
   if(getdvarint("tu1_gadgetCloneCopyLook", 1)) {
-    if(isplayer(player) && isai(clone)) {
+    if(isPlayer(player) && isai(clone)) {
       bodymodel = player getcharacterbodymodel();
       if(isDefined(bodymodel)) {
         clone setModel(bodymodel);
@@ -402,7 +402,7 @@ function private _clonedamaged() {
 }
 
 function processclonescoreevent(clone, attacker, weapon) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(!level.teambased || clone.team != attacker.pers["team"]) {
       if(isDefined(clone.isaiclone) && clone.isaiclone) {
         scoreevents::processscoreevent("killed_clone_enemy", attacker, clone, weapon);

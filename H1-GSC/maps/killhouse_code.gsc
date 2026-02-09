@@ -273,7 +273,7 @@ fail_on_damage() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isplayer(var_1))
+    if(isPlayer(var_1))
       maps\_friendlyfire::missionfail();
   }
 }
@@ -319,7 +319,7 @@ fail_if_friendlies_in_line_of_fire() {
 
       if(var_6 && var_7 < 1000) {
         level notify("mission failed");
-        setdvar("ui_deadquote", &"KILLHOUSE_FIRED_NEAR_FRIENDLY");
+        setDvar("ui_deadquote", &"KILLHOUSE_FIRED_NEAR_FRIENDLY");
         maps\_utility::missionfailedwrapper();
       }
     }
@@ -461,7 +461,7 @@ check_deck_training_quit() {
   level endon("test_cleared");
   self waittill("trigger");
   level notify("mission failed");
-  setdvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
+  setDvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -522,9 +522,9 @@ jumpoff_monitor() {
   level notify("mission failed");
 
   if(common_scripts\utility::flag("activate_rope"))
-    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_OFF");
+    setDvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_OFF");
   else
-    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_TOO_EARLY");
+    setDvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_TOO_EARLY");
 
   maps\_utility::missionfailedwrapper();
 }
@@ -541,7 +541,7 @@ flashbang_ammo_monitor(var_0) {
 
     if(level.player getweaponammostock("flash_grenade") < var_3) {
       level notify("mission failed");
-      setdvar("ui_deadquote", &"KILLHOUSE_SHIP_OUT_OF_FLASH");
+      setDvar("ui_deadquote", &"KILLHOUSE_SHIP_OUT_OF_FLASH");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -749,7 +749,7 @@ rope() {
 fail_if_damage_waiter() {
   self endon("pop_down");
   self waittill("damage", var_0, var_1, var_2, var_3, var_4);
-  setdvar("ui_deadquote", &"KILLHOUSE_HIT_FRIENDLY");
+  setDvar("ui_deadquote", &"KILLHOUSE_HIT_FRIENDLY");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -905,13 +905,13 @@ mission_failed_out_of_time() {
   var_1 = var_0[randomint(var_0.size)];
   level.price thread execdialog(var_1);
   var_2 = getdvarint("killhouse_too_slow");
-  setdvar("killhouse_too_slow", var_2 + 1);
+  setDvar("killhouse_too_slow", var_2 + 1);
   level notify("mission failed");
 
   if(!common_scripts\utility::flag("at_finish"))
-    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_TOO_SLOW");
+    setDvar("ui_deadquote", &"KILLHOUSE_SHIP_TOO_SLOW");
   else
-    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_DIDNT_SPRINT");
+    setDvar("ui_deadquote", &"KILLHOUSE_SHIP_DIDNT_SPRINT");
 
   maps\_utility::missionfailedwrapper();
 }
@@ -922,7 +922,7 @@ mission_failed_quit_training() {
       level.player endon("death");
       level endon("kill_timer");
       level notify("mission failed");
-      setdvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
+      setDvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
       maps\_utility::missionfailedwrapper();
     }
 
@@ -1080,16 +1080,16 @@ killtimer(var_0, var_1) {
     thread clearhud_after10sec();
 
     if(var_11 > 40) {
-      setdvar("recommended_gameskill", "0");
+      setDvar("recommended_gameskill", "0");
       level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_EASY");
     } else if(var_11 > 26) {
-      setdvar("recommended_gameskill", "1");
+      setDvar("recommended_gameskill", "1");
       level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_NORMAL");
     } else if(var_11 > 20) {
-      setdvar("recommended_gameskill", "2");
+      setDvar("recommended_gameskill", "2");
       level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_HARD");
     } else {
-      setdvar("recommended_gameskill", "3");
+      setDvar("recommended_gameskill", "3");
       level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_VETERAN");
     }
 
@@ -2222,7 +2222,7 @@ stalltriggerthink(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
     if(self.targetname != "stall4") {
@@ -2657,8 +2657,8 @@ c4_icon_hint() {
 
 auto_aim() {
   if(level.console) {
-    if(isDefined(getdvar("input_autoaim"))) {
-      if(getdvar("input_autoaim") == "1")
+    if(isDefined(getDvar("input_autoaim"))) {
+      if(getDvar("input_autoaim") == "1")
         return 1;
     }
   }
@@ -2668,7 +2668,7 @@ auto_aim() {
 
 is_ps3_flipped() {
   var_0 = 0;
-  var_1 = getdvar("gpad_buttonsConfig");
+  var_1 = getDvar("gpad_buttonsConfig");
 
   if(isDefined(var_1)) {
     if(issubstr(var_1, "_alt"))

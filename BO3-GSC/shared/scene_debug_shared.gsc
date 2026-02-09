@@ -20,11 +20,11 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   if(getdvarstring("", "") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   level thread run_scene_tests();
   level thread toggle_scene_menu();
   level thread toggle_postfx_igc_loop();
@@ -62,11 +62,11 @@ function run_scene_tests() {
     if(b_capture) {
       if(ispc()) {
         if(str_scene != "") {
-          setdvar("", str_scene);
-          setdvar("", "");
+          setDvar("", str_scene);
+          setDvar("", "");
         }
       } else {
-        setdvar("", "");
+        setDvar("", "");
       }
     } else {
       if(str_client_scene != "") {
@@ -74,7 +74,7 @@ function run_scene_tests() {
         util::wait_network_frame();
       }
       if(str_scene != "") {
-        setdvar("", "");
+        setDvar("", "");
         clear_old_ents(str_scene);
         b_found = 0;
         a_scenes = struct::get_array(str_scene, "");
@@ -102,7 +102,7 @@ function run_scene_tests() {
       util::wait_network_frame();
     }
     if(str_scene != "") {
-      setdvar("", "");
+      setDvar("", "");
       clear_old_ents(str_scene);
       b_found = 0;
       a_scenes = struct::get_array(str_scene, "");
@@ -126,7 +126,7 @@ function run_scene_tests() {
       util::wait_network_frame();
     }
     if(str_scene != "") {
-      setdvar("", "");
+      setDvar("", "");
       level stop(str_scene, 1);
     }
     wait(0.05);
@@ -134,7 +134,7 @@ function run_scene_tests() {
 }
 
 function capture_scene(str_scene, str_mode) {
-  setdvar("", 0);
+  setDvar("", 0);
   level play(str_scene, undefined, undefined, 1, undefined, str_mode);
 }
 
@@ -147,7 +147,7 @@ function clear_old_ents(str_scene) {
 }
 
 function toggle_scene_menu() {
-  setdvar("", 0);
+  setDvar("", 0);
   n_scene_menu_last = -1;
   while(true) {
     n_scene_menu = getdvarstring("");
@@ -166,8 +166,8 @@ function toggle_scene_menu() {
           default: {
             level flagsys::clear("");
             level notify("scene_menu_cleanup");
-            setdvar("", 0);
-            setdvar("", 1);
+            setDvar("", 0);
+            setDvar("", 1);
           }
         }
         n_scene_menu_last = n_scene_menu;
@@ -205,8 +205,8 @@ function display_scene_menu(str_type) {
   level endon("scene_menu_cleanup");
   waittillframeend();
   level flagsys::set("");
-  setdvar("", 1);
-  setdvar("", 0);
+  setDvar("", 1);
+  setDvar("", 0);
   level thread display_mode();
   hudelem = level.host openluimenu("");
   level.host setluimenudata(hudelem, "", "");
@@ -278,7 +278,7 @@ function display_scene_menu(str_type) {
       }
     }
     if(level.host buttonpressed("")) {
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(names[selected] != "") {
       if(level.host buttonpressed("") || level.host buttonpressed("")) {
@@ -295,18 +295,18 @@ function display_scene_menu(str_type) {
     }
     if(level.host buttonpressed("") || level.host buttonpressed("") || level.host buttonpressed("")) {
       if(names[selected] == "") {
-        setdvar("", 0);
+        setDvar("", 0);
       } else {
         if(is_scene_playing(names[selected])) {
-          setdvar("", names[selected]);
+          setDvar("", names[selected]);
         } else {
           if(is_scene_initialized(names[selected])) {
-            setdvar("", names[selected]);
+            setDvar("", names[selected]);
           } else {
             if(has_init_state(names[selected])) {
-              setdvar("", names[selected]);
+              setDvar("", names[selected]);
             } else {
-              setdvar("", names[selected]);
+              setDvar("", names[selected]);
             }
           }
         }

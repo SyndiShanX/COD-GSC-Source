@@ -14,7 +14,6 @@ rainHard(transition) {
   level.ambient_modifier["rain"] = "";
   wait(transition * 0.5);
 }
-
 rainMedium(transition) {
   println("Rain becomes Medium over " + transition + " seconds");
   level notify("rain_change", "medium", transition);
@@ -23,7 +22,6 @@ rainMedium(transition) {
   level.ambient_modifier["rain"] = "med";
   wait(transition * 0.5);
 }
-
 rainLight(transition) {
   println("Rain becomes Light over " + transition + " seconds");
   level notify("rain_change", "light", transition);
@@ -32,7 +30,6 @@ rainLight(transition) {
   level.ambient_modifier["rain"] = "light";
   wait(transition * 0.5);
 }
-
 rainNone(transition) {
   println("Rain fades out over " + transition + " seconds");
   level notify("rain_change", "none", transition);
@@ -41,7 +38,6 @@ rainNone(transition) {
   level.ambient_modifier["rain"] = "norain";
   wait(transition * 0.5);
 }
-
 rainInit(lvl) {
   if(lvl == "none") {
     level.rainLevel = 0;
@@ -67,7 +63,6 @@ rainInit(lvl) {
     rainHard(0.1);
   }
 }
-
 lightning(normal, flash) {
   if(!isDefined(level.disableLightning)) {
     level.disableLightning = false;
@@ -78,7 +73,6 @@ lightning(normal, flash) {
     lightningThink(normal, flash);
   }
 }
-
 rainEffectChange(change, transition) {
   level notify("rain_level_change");
   level endon("rain_level_change");
@@ -103,7 +97,6 @@ rainEffectChange(change, transition) {
     assert(level.rainLevel == change);
   }
 }
-
 rainlevelRandomwait() {
   if(level.rainLevel == 0) {
     return (randomfloat(30));
@@ -129,7 +122,6 @@ rainlevelRandomwait() {
     return (randomfloat(5));
   }
 }
-
 rainlevelwait() {
   if(level.rainLevel == 0) {
     return (20);
@@ -155,7 +147,6 @@ rainlevelwait() {
     return (5);
   }
 }
-
 lightningThink(normal, flash) {
   level endon("rain_change");
   nextStrike = gettime() + ((rainlevelwait() + rainlevelRandomwait()) * 1000);
@@ -173,7 +164,6 @@ lightningThink(normal, flash) {
     level.nextLightning = gettime() + ((rainlevelwait() + rainlevelRandomwait()) * 1000);
   }
 }
-
 lightningStrike(normalfunc, flashfunc) {
   if(!isDefined(level.pauseLightning)) {
     level.pauseLightning = false;
@@ -184,13 +174,13 @@ lightningStrike(normalfunc, flashfunc) {
   flash[0] = "quick";
   flash[1] = "double";
   flash[2] = "triple";
-  flashType = randomInt(flash.size);
+  flashType = RandomInt(flash.size);
   thread thunder(flash[flashType]);
   lit_num = 0;
   if(isDefined(level.lightningExploderIndex)) {
     if(level.lightningExploder.size > 1) {
       while(lit_num == level.lightningExploderIndex) {
-        lit_num = randomInt(level.lightningExploder.size);
+        lit_num = RandomInt(level.lightningExploder.size);
       }
     }
     level.lightningExploderIndex = lit_num;
@@ -216,7 +206,6 @@ lightningStrike(normalfunc, flashfunc) {
     }
   }
 }
-
 lightningflash(normalfunc, flashfunc) {
   if(isDefined(level.lightningExploderIndex)) {
     exploder(level.lightningExploder[level.lightningExploderIndex]);
@@ -225,7 +214,6 @@ lightningflash(normalfunc, flashfunc) {
   wait RandomFloatRange(0.05, 0.1);
   [[normalfunc]]();
 }
-
 thunder(flashType) {
   if(level.rainLevel == 0) {
     wait(6 + randomfloat(2));
@@ -264,19 +252,16 @@ thunder(flashType) {
     array_thread(get_players(), ::player_thunder, thunderDistant, thunderClose, flashType);
   }
 }
-
 emitter_thunder(thunderDistant, thunderClose, flashType) {
   ent = spawn("script_origin", level.thunderSoundEmitter.origin);
   ent thread thunder_playSound(thunderDistant, thunderClose, flashType);
 }
-
 player_thunder(thunderDistant, thunderClose, flashType) {
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = self.origin + (0, 0, 60);
   ent LinkTo(self);
   ent thread thunder_playSound(thunderDistant, thunderClose, flashType);
 }
-
 thunder_playSound(thunderDistant, thunderClose, flashType) {
   if(level.rainlevel <= 7) {
     self playSound(thunderDistant, "sounddone");
@@ -290,7 +275,7 @@ thunder_playSound(thunderDistant, thunderClose, flashType) {
       sound = thunderClose;
       doRumble = true;
     } else {
-      if(randomInt(100) < 40) {
+      if(RandomInt(100) < 40) {
         sound = thunderDistant;
         doRumble = false;
       }
@@ -303,7 +288,6 @@ thunder_playSound(thunderDistant, thunderClose, flashType) {
   self waittill("sounddone");
   self Delete();
 }
-
 thunder_rumble() {
   self endon("death");
   self endon("disconnect");
@@ -313,7 +297,7 @@ thunder_rumble() {
   duration = 0.5;
   stopTime = GetTime() + (duration * 1000);
   while(GetTime() <= stopTime) {
-    self playRumbleOnEntity("damage_heavy");
+    self PlayRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }

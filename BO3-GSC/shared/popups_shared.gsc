@@ -123,7 +123,7 @@ function function_9a14a686() {
     return;
   }
   if((getdvarint("", -999)) == -999) {
-    setdvar("", 0);
+    setDvar("", 0);
   }
   var_deda26ca = "";
   util::function_e2ac06bb(var_deda26ca + "", ("" + "") + "");
@@ -138,11 +138,11 @@ function function_9a14a686() {
 }
 
 function devgui_notif_init() {
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   if(isdedicated()) {
     return;
   }
@@ -180,7 +180,7 @@ function notif_devgui_rank_up_think() {
       continue;
     }
     level.players[0] rank::codecallback_rankup(rank_number, 0, 1);
-    setdvar("", 0);
+    setDvar("", 0);
     wait(1);
   }
 }
@@ -283,10 +283,10 @@ function notif_devgui_gun_level_think() {
     attachment_index = getdvarint("");
     rank_id = getdvarint("");
     level.players[0] persistence::codecallback_gunchallengecomplete(xp_reward, attachment_index, weapon_item_index, rank_id);
-    setdvar("", 0);
-    setdvar("", 0);
-    setdvar("", 0);
-    setdvar("", 0);
+    setDvar("", 0);
+    setDvar("", 0);
+    setDvar("", 0);
+    setDvar("", 0);
     wait(1);
   }
 }
@@ -319,8 +319,8 @@ function notif_devgui_challenges() {
 }
 
 function notif_devgui_challenges_think() {
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   for(;;) {
     row = getdvarint("");
     table = getdvarint("");
@@ -363,8 +363,8 @@ function notif_devgui_challenges_think() {
     challengeid = int(tablelookupcolumnforrow(tablename, row, 0));
     maxvalue = int(tablelookupcolumnforrow(tablename, row, 2));
     level.players[0] persistence::codecallback_challengecomplete(xpreward, maxvalue, row, table - 1, type, itemindex, challengeid);
-    setdvar("", 0);
-    setdvar("", 0);
+    setDvar("", 0);
+    setDvar("", 0);
     wait(1);
   }
 }
@@ -434,28 +434,28 @@ function popupsfromconsole() {
     reset = getdvarint("", 1);
     if(reset) {
       if(medal) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
       if(challenge) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
       if(gun) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
       if(rank) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
       if(contractpass) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
       if(contractfail) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
       if(gamemodemsg) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
       if(teammsg) {
-        setdvar("", 0);
+        setDvar("", 0);
       }
     }
   }
@@ -547,7 +547,7 @@ function displayteammessagewaiter() {
     if(self.teammessagequeue.size > 0) {
       nextnotifydata = self.teammessagequeue[0];
       arrayremoveindex(self.teammessagequeue, 0, 0);
-      if(!isDefined(nextnotifydata.player) || !isplayer(nextnotifydata.player)) {
+      if(!isDefined(nextnotifydata.player) || !isPlayer(nextnotifydata.player)) {
         continue;
       }
       if(self isempjammed()) {

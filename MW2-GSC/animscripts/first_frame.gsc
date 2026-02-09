@@ -10,7 +10,7 @@ main() {
   self.pushable = 0;
 
   self clearAnim(self.root_anim, 0.3);
-  //	self setAnim( %body, 1, 0 );	// The %body node should always have weight 1.
+  //	self setAnim(%body, 1, 0 );	// The %body node should always have weight 1.
 
   self OrientMode("face angle", self.angles[1]);
 

@@ -175,7 +175,7 @@ function_3c39c720() {
 }
 
 function_8a595f5(s_params) {
-  if(isplayer(s_params.eattacker) && s_params.weapon == level.w_hand_hemera) {
+  if(isPlayer(s_params.eattacker) && s_params.weapon == level.w_hand_hemera) {
     if(isDefined(self.var_4dcd7a1c) && self.var_4dcd7a1c) {
       s_params.eattacker.var_ec3e3f82++;
     }
@@ -217,7 +217,7 @@ function_74846734() {
 }
 
 function_c6125761(s_params) {
-  if(isplayer(s_params.eattacker) && s_params.weapon == level.w_hand_ouranos) {
+  if(isPlayer(s_params.eattacker) && s_params.weapon == level.w_hand_ouranos) {
     if(isDefined(self.var_8ac7cc49) && self.var_8ac7cc49 && isDefined(s_params.eattacker.n_flung)) {
       s_params.eattacker.n_flung++;
     }
@@ -275,7 +275,7 @@ function_f31369ae() {
   while(isalive(self)) {
     s_result = self waittill(#"damage", #"death");
 
-    if((s_result.weapon === getweapon(#"zhield_zpear_dw") || s_result.weapon === getweapon(#"zhield_zpear_turret")) && isplayer(s_result.attacker)) {
+    if((s_result.weapon === getweapon(#"zhield_zpear_dw") || s_result.weapon === getweapon(#"zhield_zpear_turret")) && isPlayer(s_result.attacker)) {
       if(!isDefined(e_player)) {
         e_player = s_result.attacker;
       } else if(e_player !== s_result.attacker || isDefined(e_player.var_298cc14d) && e_player.var_298cc14d) {

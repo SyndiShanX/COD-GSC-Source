@@ -908,7 +908,7 @@ function watchrapskills(originalowner) {
   }
   while(true) {
     self waittill("killed", victim);
-    if(isDefined(victim) && isplayer(victim)) {
+    if(isDefined(victim) && isPlayer(victim)) {
       if(!isDefined(self.killcount)) {
         self.killcount = 0;
       }
@@ -935,14 +935,14 @@ function watchrapsdeath(originalowner) {
   originalownerentnum = originalowner.entnum;
   self waittill("death", attacker, damagefromunderneath, weapon);
   attacker = self[[level.figure_out_attacker]](attacker);
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(self.owner) && self.owner != attacker && self.owner.team != attacker.team) {
       scoreevents::processscoreevent("killed_raps", attacker);
       attacker challenges::destroyscorestreak(weapon, 1);
       attacker challenges::destroynonairscorestreak_poststatslock(weapon);
       if(isDefined(self.attackers)) {
         foreach(player in self.attackers) {
-          if(isplayer(player) && player != attacker && player != self.owner) {
+          if(isPlayer(player) && player != attacker && player != self.owner) {
             scoreevents::processscoreevent("killed_raps_assist", player);
           }
         }

@@ -171,7 +171,7 @@ logkillstreakevent(var_0, var_1) {
 }
 
 loggameevent(var_0, var_1) {
-  if(isplayer(self) && !canlogclient(self)) {
+  if(isPlayer(self) && !canlogclient(self)) {
     return;
   }
 
@@ -289,7 +289,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_11 = self.var_13905;
   }
 
-  if(isplayer(var_1) && canlogclient(var_1)) {
+  if(isPlayer(var_1) && canlogclient(var_1)) {
     var_12 = var_1 scripts\mp\utility::func_9EE8();
     var_13 = 0.4226;
     var_14 = scripts\engine\utility::within_fov(self.origin, self.angles, var_1.origin, var_13);
@@ -499,7 +499,7 @@ func_636A() {
     }
 
     var_1 setplayerdata("common", "round", "gameMode", level.gametype);
-    var_1 setplayerdata("common", "round", "map", tolower(getdvar("mapname")));
+    var_1 setplayerdata("common", "round", "map", tolower(getDvar("mapname")));
   }
 }
 
@@ -536,7 +536,7 @@ canlogclient(var_0) {
     return 0;
   } else if(isagent(var_0)) {
     return 0;
-  } else if(!isplayer(var_0)) {
+  } else if(!isPlayer(var_0)) {
     return 0;
   }
 

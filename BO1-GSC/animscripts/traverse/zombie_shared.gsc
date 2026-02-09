@@ -5,8 +5,9 @@
 
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 init_traverse() {
-  point = getEnt(self.target, "targetname");
+  point = GetEnt(self.target, "targetname");
   if(isDefined(point)) {
     self.traverse_height = point.origin[2];
     point Delete();
@@ -17,7 +18,6 @@ init_traverse() {
     }
   }
 }
-
 teleportThread(verticalOffset) {
   self endon("killanimscript");
   self notify("endTeleportThread");
@@ -29,33 +29,35 @@ teleportThread(verticalOffset) {
     wait .05;
   }
 }
-
 teleportThreadEx(verticalOffset, delay, frames) {
   self endon("killanimscript");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
-  if(verticalOffset == 0)
+  if(verticalOffset == 0) {
     return;
+  }
   wait delay;
   amount = verticalOffset / frames;
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  } else if(amount < -10.0) {
     amount = -10.0;
+  }
   offset = (0, 0, amount);
   for(i = 0; i < frames; i++) {
     self Teleport(self.origin + offset);
     wait .05;
   }
 }
-
 PrepareForTraverse() {
   self.a.pose = "stand";
 }
-
 DoTraverse(traverseData) {
   self endon("killanimscript");
-  self.traverseAnimIsSequence = (isDefined(traverseData["traverseAnimType"]) && (traverseData["traverseAnimType"] == "sequence"));
+  self.traverseAnimIsSequence = (
+    isDefined(traverseData["traverseAnimType"]) &&
+    (traverseData["traverseAnimType"] == "sequence")
+  );
   self.traverseAnim = traverseData["traverseAnim"];
   self.traverseAnimTransIn = traverseData["traverseAnimTransIn"];
   self.traverseAnimTransOut = traverseData["traverseAnimTransOut"];
@@ -83,7 +85,7 @@ DoTraverse(traverseData) {
   self OrientMode("face angle", self.traverseStartNode.angles[1]);
   self.traverseStartZ = self.origin[2];
   toCover = false;
-  if(isDefined(self.traverseToCoverAnim) && isDefined(self.node) && self.node.type == traverseData["coverType"] && distanceSquared(self.node.origin, self.traverseEndNode.origin) < 25 * 25) {
+  if(isDefined(self.traverseToCoverAnim) && isDefined(self.node) && self.node.type == traverseData["coverType"] && DistanceSquared(self.node.origin, self.traverseEndNode.origin) < 25 * 25) {
     if(AbsAngleClamp180(self.node.angles[1] - self.traverseEndNode.angles[1]) > 160) {
       toCover = true;
       self.traverseAnim = self.traverseToCoverAnim;
@@ -98,7 +100,7 @@ DoTraverse(traverseData) {
     return;
   }
   self.a.nodeath = false;
-  if(toCover && isDefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
+  if(toCover && isDefined(self.node) && DistanceSquared(self.origin, self.node.origin) < 16 * 16) {
     self.a.movement = "stop";
     self Teleport(self.node.origin);
   } else {
@@ -112,7 +114,6 @@ DoTraverse(traverseData) {
     wait(.2);
   }
 }
-
 DoTraverse_Animation() {
   traverseAnim = self.traverseAnim;
   if(!IsArray(traverseAnim)) {
@@ -143,26 +144,22 @@ DoTraverse_Animation() {
     wait_anim_length(self.traverseAnimTransOut, .2);
   }
 }
-
 DoMainTraverse_Animation(animation, blend) {
   self SetFlaggedAnimKnobRestart("traverseAnim", animation, 1, blend, 1);
   self thread TraverseRagdollDeath(animation);
   self animscripts\zombie_shared::DoNoteTracks("traverseAnim", ::handleTraverseNotetracks);
 }
-
 wait_anim_length(animation, blend) {
   len = GetAnimLength(animation) - blend;
   if(len > 0) {
     wait len;
   }
 }
-
 handleTraverseNotetracks(note) {
   if(note == "traverse_death") {
     return handleTraverseDeathNotetrack();
   }
 }
-
 handleTraverseDeathNotetrack() {
   self endon("killanimscript");
   if(self.delayedDeath) {
@@ -173,7 +170,6 @@ handleTraverseDeathNotetrack() {
   }
   self.traverseDeathIndex++;
 }
-
 handleTraverseAlignment() {
   self traverseMode("nogravity");
   self traverseMode("noclip");
@@ -182,22 +178,20 @@ handleTraverseAlignment() {
     self thread teleportThread(currentHeight - self.traverseHeight);
   }
 }
-
 doNothingFunc() {
   self AnimMode("zonly_physics");
   self waittill("killanimscript");
 }
-
 traverseDeath() {
   self notify("traverse_death");
-  if(!isDefined(self.triedTraverseRagdoll))
+  if(!isDefined(self.triedTraverseRagdoll)) {
     self animscripts\zombie_death::PlayDeathSound();
+  }
   deathAnimArray = self.traverseDeathAnim[self.traverseDeathIndex];
-  deathAnim = deathAnimArray[randomInt(deathAnimArray.size)];
+  deathAnim = deathAnimArray[RandomInt(deathAnimArray.size)];
   animscripts\zombie_death::play_death_anim(deathAnim);
   self DoDamage(self.health + 5, self.origin);
 }
-
 TraverseStartRagdollDeath() {
   self.prevDelayedDeath = self.delayedDeath;
   self.prevAllowDeath = self.allowDeath;
@@ -206,7 +200,6 @@ TraverseStartRagdollDeath() {
   self.allowDeath = true;
   self.deathFunction = ::TraverseRagdollDeathSimple;
 }
-
 TraverseStopRagdollDeath() {
   self.delayedDeath = self.prevDelayedDeath;
   self.allowDeath = self.prevAllowDeath;
@@ -215,7 +208,6 @@ TraverseStopRagdollDeath() {
   self.prevAllowDeath = undefined;
   self.prevDeathFunction = undefined;
 }
-
 TraverseRagdollDeathSimple() {
   self animscripts\zombie_death::PlayDeathSound();
   self startRagdoll();
@@ -227,7 +219,6 @@ TraverseRagdollDeathSimple() {
   wait 0.5;
   return true;
 }
-
 TraverseRagdollDeath(traverseAnim) {
   self notify("TraverseRagdollDeath");
   self endon("TraverseRagdollDeath");
@@ -261,23 +252,21 @@ TraverseRagdollDeath(traverseAnim) {
     break;
   }
 }
-
 physExplosionForRagdoll(pos) {
   wait .1;
   physicsExplosionSphere(pos, 55, 35, 1);
 }
-
 postTraverseDeathAnim() {
   self endon("killanimscript");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   deathAnim = animscripts\zombie_death::get_death_anim();
   self SetFlaggedAnimKnobAllRestart("deathanim", deathAnim, %body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
     playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
 }
-
 #using_animtree("dog");
 dog_wall_and_window_hop(traverseName, height) {
   self endon("killanimscript");
@@ -295,7 +284,6 @@ dog_wall_and_window_hop(traverseName, height) {
   self animscripts\zombie_shared::DoNoteTracks("dog_traverse");
   self.traverseComplete = true;
 }
-
 dog_jump_down(height, frames) {
   self endon("killanimscript");
   self traverseMode("noclip");
@@ -310,7 +298,6 @@ dog_jump_down(height, frames) {
   self traverseMode("gravity");
   self.traverseComplete = true;
 }
-
 dog_jump_up(height, frames) {
   self endon("killanimscript");
   self traverseMode("noclip");

@@ -15,7 +15,7 @@ main() {
   enable();
   anims();
   fx();
-  setdvar("player_swimTime", 1000);
+  setDvar("player_swimTime", 1000);
   onplayerconnect_callback(::on_player_connect);
   onsaverestored_callback(::on_save_restored);
 }
@@ -91,7 +91,7 @@ settings() {
   level._swimming.dof_far_end = 2345;
   level._swimming.dof_near_blur = 6;
   level._swimming.dof_far_blur = 2.16;
-  setdvar("bg_bobAmplitudeSwimming", "2 2");
+  setDvar("bg_bobAmplitudeSwimming", "2 2");
 }
 
 on_player_connect() {
@@ -112,7 +112,6 @@ test() {
     hide_swimming_arms();
     wait 5;
   }
-
 }
 
 on_save_restored() {
@@ -130,7 +129,6 @@ on_save_restored() {
     player setclientflag(level.cf_player_underwater);
   } else {
     println("^4_swimming - server: save restore, not underwater");
-
   }
 }
 
@@ -222,7 +220,6 @@ underwaterfx() {
       self setdepthoffield(level._swimming.dof_near_start, level._swimming.dof_near_end, level._swimming.dof_far_start, level._swimming.dof_far_end, level._swimming.dof_near_blur, level._swimming.dof_far_blur);
     } else {
       println("^4_swimming - server: depth of field is NOT used.");
-
     }
 
     self waittill("surface");
@@ -254,8 +251,9 @@ swimmingdrown() {
 
       println("^4_swimming - server: phase " + phase);
 
-      if(phase == level._swimming.num_phases)
+      if(phase == level._swimming.num_phases) {
         wait 2;
+      }
     }
   }
 
@@ -265,21 +263,25 @@ swimmingdrown() {
 advance_drowning_phase(phase) {
   t_delta = swimming_get_time();
 
-  if(isgodmode(self))
+  if(isgodmode(self)) {
     return 0;
+  }
 
-  if(getdvarint(#"_id_79A1DCC2") == 1)
+  if(getdvarint(#"_id_79A1DCC2") == 1) {
     return 0;
+  }
 
-  if(isDefined(level.disable_drowning) && level.disable_drowning)
+  if(isDefined(level.disable_drowning) && level.disable_drowning) {
     return 0;
+  }
 
   if(self._swimming.is_underwater) {
     self._swimming.swim_time = self._swimming.swim_time + t_delta;
 
     for(phase = level._swimming.num_phases; phase >= 0; phase--) {
-      if(self._swimming.swim_time >= get_phase_time(phase))
+      if(self._swimming.swim_time >= get_phase_time(phase)) {
         return phase;
+      }
     }
   } else {
     self._swimming.reset_time = self._swimming.reset_time + t_delta;
@@ -297,8 +299,9 @@ swimming_get_time() {
   t_now = gettime();
   t_delta = 0;
 
-  if(isDefined(self._swimming.last_get_time))
+  if(isDefined(self._swimming.last_get_time)) {
     t_delta = t_now - self._swimming.last_get_time;
+  }
 
   self._swimming.last_get_time = t_now;
   return t_delta;

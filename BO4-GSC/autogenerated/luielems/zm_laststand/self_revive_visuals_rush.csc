@@ -28,7 +28,6 @@ class cself_revive_visuals_rush: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("revive_time", 1, 4, "int", var_2e62cab3);
   }
-
 }
 
 register(uid, var_2e62cab3) {

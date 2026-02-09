@@ -6,17 +6,17 @@
 
 init() {
   level.splitscreen = issplitscreen();
-  level.ps3 = getdvar("ps3Game") == "true";
-  level.xenon = getdvar("xenonGame") == "true";
-  level.console = getdvar("consoleGame") == "true";
+  level.ps3 = getDvar("ps3Game") == "true";
+  level.xenon = getDvar("xenonGame") == "true";
+  level.console = getDvar("consoleGame") == "true";
   level.onlinegame = isonlinegame();
   level.rankedmatch = level.onlinegame && !getdvarint("xblive_privatematch");
-  level.script = tolower(getdvar("mapname"));
+  level.script = tolower(getDvar("mapname"));
 
   if(getdvarint("virtualLobbyActive", 0))
     level.gametype = "vlobby";
   else
-    level.gametype = tolower(getdvar("g_gametype"));
+    level.gametype = tolower(getDvar("g_gametype"));
 
   level.teamnamelist = ["axis", "allies"];
   level.otherteam["allies"] = "axis";
@@ -93,9 +93,9 @@ init_multiteamdata(var_0) {
 registerdvars() {
   setomnvar("ui_bomb_timer", 0);
   setomnvar("ui_nuke_end_milliseconds", 0);
-  setdvar("ui_danger_team", "");
-  setdvar("ui_inhostmigration", 0);
-  setdvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
+  setDvar("ui_danger_team", "");
+  setDvar("ui_inhostmigration", 0);
+  setDvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
 }
 
 setupcallbacks() {

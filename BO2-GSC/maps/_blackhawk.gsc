@@ -8,9 +8,9 @@
 main() {
   self.script_badplace = 0;
 
-  if(self.vehicletype == "heli_blackhawk_stealth_la2")
+  if(self.vehicletype == "heli_blackhawk_stealth_la2") {
     build_aianims(::setanims, ::set_vehicle_anims);
-  else {
+  } else {
     init_fastrope();
     build_aianims(::setrappelanims, ::set_vehicle_rappel_anims);
     build_attach_models(::set_attached_models);
@@ -44,8 +44,9 @@ init_fastrope() {
 setanims() {
   positions = [];
 
-  for(i = 0; i <= 6; i++)
+  for(i = 0; i <= 6; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].idle[0] = % ai_crew_blackhawk_pilot1_idle;
   positions[0].idle[1] = % ai_crew_blackhawk_pilot1_idle_twitch_clickpanel;
@@ -93,8 +94,9 @@ setanims() {
 setrappelanims() {
   positions = [];
 
-  for(i = 0; i <= 9; i++)
+  for(i = 0; i <= 9; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].idle[0] = % ai_crew_blackhawk_pilot1_idle;
   positions[0].idle[1] = % ai_crew_blackhawk_pilot1_idle_twitch_clickpanel;

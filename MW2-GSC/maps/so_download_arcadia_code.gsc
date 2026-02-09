@@ -13,10 +13,7 @@
 // make sure this is the same as in arcadia_code.gsc
 STRYKER_SUPPRESSION_RADIUS = 1500 * 1500;
 
-// -----------------------
-// --- DOWNLOAD STUFF ---
-// -----------------------
-so_download_objective_init(objIdx, objStr) {
+// ----------------------- // --- DOWNLOAD STUFF --- // ----------------------- so_download_objective_init(objIdx, objStr) {
   level.downloadObjectiveStr = objStr;
   level.downloadObjectiveIdx = objIdx;
   level.downloadsComplete = 0;
@@ -693,10 +690,7 @@ ai_near_download(guy) {
   return false;
 }
 
-// ----------------
-// --- STRYKER ---
-// ----------------
-stryker_think() {
+// ---------------- // --- STRYKER --- // ---------------- stryker_think() {
   stryker = maps\_vehicle::spawn_vehicle_from_targetname("stryker");
   ASSERT(isDefined(stryker));
   level.stryker = stryker;
@@ -1068,11 +1062,7 @@ stryker_extraction_spawn_enemy() {
   guy SetGoalPos(level.stryker.origin);
 }
 
-// ------------------------
-// --- LASER TARGETING ---
-// ------------------------
-
-// Handles the usability of the laser weapon
+// ------------------------ // --- LASER TARGETING --- // ------------------------ // Handles the usability of the laser weapon
 player_laser_targeting_think() {
   is_laser_disabled = false;
 
@@ -1125,10 +1115,7 @@ laser_targeting_device_remove() {
   self.laserForceOn = false;
 }
 
-// -----------------
-// --- AI STUFF ---
-// -----------------
-so_download_arcadia_enemy_setup() {
+// ----------------- // --- AI STUFF --- // ----------------- so_download_arcadia_enemy_setup() {
   level.enemies = [];
 
   allspawners = GetSpawnerTeamArray("axis");
@@ -1190,10 +1177,7 @@ so_download_arcadia_outside_enemy_spawnfunc() {
   }
 }
 
-// -------------------
-// --- MISC UTILS ---
-// -------------------
-all_players_closeto(ent, dist) {
+// ------------------- // --- MISC UTILS --- // ------------------- all_players_closeto(ent, dist) {
   foundOne = false;
   foreach(player in level.players) {
     if(Distance(player.origin, ent.origin) > dist) {
@@ -1216,7 +1200,7 @@ waittill_both_players_touch_targetname(tn) {
   while(touchers.size < level.players.size) {
     trig waittill("trigger", other);
 
-    if(IsPlayer(other) && !is_in_array(touchers, other)) {
+    if(isPlayer(other) && !is_in_array(touchers, other)) {
       touchers[touchers.size] = other;
     }
   }

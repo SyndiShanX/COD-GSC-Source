@@ -2,29 +2,26 @@
 
 #include clientscripts\mp\_utility;
 
-main()
-{
-	// If the team nationalites change in this level's gsc file,
-	// you must update the team nationality here!
-	level.allies_team = "russian";
-	level.axis_team   = "german";
-		
-	clientscripts\mp\_panzeriv::main( "vehicle_ger_tracked_panzer4_mp" );
-	clientscripts\mp\_t34::main( "vehicle_rus_tracked_t34_mp" );
+main() {
+  // If the team nationalites change in this level's gsc file, // you must update the team nationality here!
+  level.allies_team = "russian";
+  level.axis_team = "german";
 
-	// _load!
-	clientscripts\mp\_load::main();
+  clientscripts\mp\_panzeriv::main("vehicle_ger_tracked_panzer4_mp");
+  clientscripts\mp\_t34::main("vehicle_rus_tracked_t34_mp");
 
-	clientscripts\mp\mp_seelow_fx::main();
+  // _load!
+  clientscripts\mp\_load::main();
 
-	thread clientscripts\mp\_fx::fx_init(0);
-	thread clientscripts\mp\_audio::audio_init(0);
+  clientscripts\mp\mp_seelow_fx::main();
 
-	thread clientscripts\mp\mp_seelow_amb::main();
+  thread clientscripts\mp\_fx::fx_init(0);
+  thread clientscripts\mp\_audio::audio_init(0);
 
-	// This needs to be called after all systems have been registered.
-	thread waitforclient(0);
+  thread clientscripts\mp\mp_seelow_amb::main();
 
-	println("*** Client : mp_seelow running...");
+  // This needs to be called after all systems have been registered.
+  thread waitforclient(0);
 
+  println("*** Client : mp_seelow running...");
 }

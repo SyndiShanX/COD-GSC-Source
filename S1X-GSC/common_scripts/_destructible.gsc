@@ -92,7 +92,6 @@ debgugPrintDestructibleList() {
 
     level.created_destructibles = undefined;
   }
-
 }
 
 find_destructibles() {
@@ -1216,13 +1215,13 @@ destructible_think() {
     }
 
     if(isSP()) {
-      if(isDefined(attacker) && IsPlayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         self.damageOwner = attacker;
       }
     } else {
-      if(isDefined(attacker) && IsPlayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         self.damageOwner = attacker;
-      } else if(isDefined(attacker) && isDefined(attacker.gunner) && IsPlayer(attacker.gunner)) {
+      } else if(isDefined(attacker) && isDefined(attacker.gunner) && isPlayer(attacker.gunner)) {
         self.damageOwner = attacker.gunner;
       }
     }
@@ -1307,7 +1306,7 @@ is_shotgun_damage(attacker, type) {
   }
 
   currentWeapon = undefined;
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     currentweapon = attacker getCurrentWeapon();
   } else if(isDefined(level.enable_ai_shotgun_destructible_damage) && level.enable_ai_shotgun_destructible_damage) {
     if(isDefined(attacker.weapon)) {
@@ -1473,7 +1472,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
       validDamageCause = self isValidDamageCause(partIndex, stateIndex, damageType);
       if(validDamageCause) {
         if(isDefined(attacker)) {
-          if(IsPlayer(attacker)) {
+          if(isPlayer(attacker)) {
             self.player_damage += damage;
           } else {
             if(attacker != self) {
@@ -1771,7 +1770,6 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
           if(GetDvarInt("debug_destructibles", 0) == 1) {
             thread draw_line_for_time(physTagOrigin, physTagOrigin + initial_velocity, 1, 1, 1, 5.0);
           }
-
         } else {
           initial_velocity = point;
           impactDir = (0, 0, 0);
@@ -1826,7 +1824,6 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
 
     updateHealthValue = true;
   }
-
 }
 
 destructible_splash_rotatation(v) {
@@ -1905,7 +1902,6 @@ destructible_splash_damage(damage, point, direction_vec, attacker, damageType) {
 
     self thread destructible_update_part(damageAmount, part.v["modelName"], part.v["tagName"], point, direction_vec, attacker, damageType, part);
   }
-
 }
 
 getAllActiveParts(direction_vec) {
@@ -2027,7 +2023,7 @@ isAttackerValid(partIndex, stateIndex, attacker) {
   }
 
   if(sType == "no_player") {
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       return true;
     }
     if(!isDefined(attacker.damageIsFromPlayer)) {
@@ -2038,7 +2034,7 @@ isAttackerValid(partIndex, stateIndex, attacker) {
     }
   } else {
     if(sType == "player_only") {}
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       return true;
     }
     if(isDefined(attacker.damageIsFromPlayer) && attacker.damageIsFromPlayer) {
@@ -2855,7 +2851,7 @@ get_player_touching(ent) {
 }
 
 is_so() {
-  return GetDvar("specialops") == "1";
+  return getDvar("specialops") == "1";
 }
 
 destructible_handles_collision_brushes() {
@@ -2924,7 +2920,6 @@ debug_player_in_post_clip(clip) {
   if(isDefined(player)) {
     AssertEx(!IsAlive(player), "Player is in a clip of a destructible, but is still alive. He's either in godmode or we're doing something wrong. Player will be stuck now.");
   }
-
 }
 
 destructible_get_my_breakable_light(range) {
@@ -3086,7 +3081,6 @@ destructible_spotlight_think(action_v, eModel, damageType, partIndex) {
   if(isDefined(tag_origin)) {
     level.destructible_spotlight LinkTo(tag_origin);
   }
-
 }
 
 is_valid_damagetype(damageType, v, idx, groupNum) {
@@ -3201,7 +3195,6 @@ destructible_fx_spawn_think(eModel, fxid, fx_tag, i, usetagangles, stateChangeKi
       }
     }
   }
-
 }
 
 destructible_fx_spawnImmediate() {
@@ -3236,7 +3229,6 @@ destructible_fx_spawnImmediate() {
           }
         }
       }
-
     }
   }
 }
@@ -3762,10 +3754,7 @@ onEnterDOT_buildFunc(idx, trigger) {
   entNum = undefined;
   statements = trigger.ticks[idx].statements;
 
-  if(!isDefined(statements) ||
-    !isDefined(statements["vars"]) ||
-    !isDefined(statements["vars"]["count"]) ||
-    !isDefined(statements["actions"])) {
+  if(!isDefined(statements) || !isDefined(statements["vars"]) || !isDefined(statements["vars"]["count"]) || !isDefined(statements["actions"])) {
     return;
   }
   count = statements["vars"]["count"];

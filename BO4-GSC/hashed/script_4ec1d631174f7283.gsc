@@ -96,7 +96,6 @@ function_b7f08e2d() {
 
       if(isDefined(goalinfo.goalpos)) {
         sphere(goalinfo.goalpos, 5, (0, 1, 0), 0.5, 0, 8, 1);
-
       }
     }
   }

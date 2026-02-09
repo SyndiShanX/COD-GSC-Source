@@ -329,11 +329,11 @@ function function_9087381a() {
   wait(0.05);
   level waittill("start_zombie_round_logic");
   wait(0.05);
-  setdvar("", 0);
+  setDvar("", 0);
   adddebugcommand("");
   while(true) {
     if(getdvarint("")) {
-      setdvar("", 0);
+      setDvar("", 0);
       level thread function_d12a18d7(1);
     }
     wait(0.5);

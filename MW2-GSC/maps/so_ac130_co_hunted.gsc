@@ -19,8 +19,8 @@ main() {
   set_custom_gameskill_func(maps\_gameskill::solo_player_in_coop_gameskill_settings);
 
   // special ops character selection using dvar "start"level.specops_character_selector = "";
-  if(IsSplitScreen() || (GetDvar("coop") == "1")) {
-    level.specops_character_selector = getdvar("coop_start");
+  if(IsSplitScreen() || (getDvar("coop") == "1")) {
+    level.specops_character_selector = getDvar("coop_start");
   }
 
   default_start(::start_specop);
@@ -255,11 +255,11 @@ move_hunters_to_new_goal(closest_goal) {
 move_deadlier_hunters_to_new_goal(closest_goal) {
   waittillframeend;
   //Sent half the enemies to player, and the other half to set goal, foreach(enemy in level.hunter_enemies) {
-    if(RandomInt(100) < CONST_specop_difficulty)
-      enemy setgoalpos(closest_goal.origin);
-    else
-      enemy setgoalentity(level.ground_player);
-  }
+  if(RandomInt(100) < CONST_specop_difficulty)
+    enemy setgoalpos(closest_goal.origin);
+  else
+    enemy setgoalentity(level.ground_player);
+}
 }
 
 ShouldBreakAC130HintPrint() {
@@ -497,7 +497,7 @@ enemy_monitor() {
 
 spawn_enemy_group() {
   if(level.selection >= level.enemy_force.size) {
-    if(getdvar("no_respawn", 1) == "1")
+    if(getDvar("no_respawn", 1) == "1")
       return;
     else
       level.selection = 0;
@@ -696,7 +696,7 @@ noprone() {
     if(!isDefined(player)) {
       continue;
     }
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     while(player IsTouching(self)) {

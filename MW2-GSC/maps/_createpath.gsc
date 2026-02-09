@@ -20,7 +20,6 @@ init() {
 }
 
 main() {
-
   if(!isDefined(level.flag) || !isDefined(level.flag["path_refresh"])) {
     flag_init("path_refresh");
     flag_init("path_Notviewing");
@@ -30,16 +29,16 @@ main() {
   precacheshader("psourcecreate");
   precacheshader("psourcemodify");
 
-  setdvar("path_delete", "");
-  setdvar("path_editmode", "");
-  setdvar("path_select_next", "");
-  setdvar("path_select_prev", "");
-  setdvar("path_setview", "");
-  setdvar("path_help", "");
-  setdvar("path_dump", "");
-  setdvar("path_select_new", "");
-  setdvar("path_enable", "0");
-  setdvar("path_setid", "0");
+  setDvar("path_delete", "");
+  setDvar("path_editmode", "");
+  setDvar("path_select_next", "");
+  setDvar("path_select_prev", "");
+  setDvar("path_setview", "");
+  setDvar("path_help", "");
+  setDvar("path_dump", "");
+  setDvar("path_select_new", "");
+  setDvar("path_enable", "0");
+  setDvar("path_setid", "0");
   level.pathmodsize = 35;
   level.pathmod = newhudelem();
   level.pathmod.alignX = "center";
@@ -79,11 +78,10 @@ main() {
     path_help();
     wait .05;
   }
-
 }
 
 path_enable() {
-  if(getdvar("path_enable") != "1") {
+  if(getDvar("path_enable") != "1") {
     flag_set("path_refresh"); // makes everything stop drawing.
     level.pathmod.alpha = 0;
   }
@@ -92,7 +90,7 @@ path_enable() {
 }
 
 path_waittill_enable() {
-  while(getdvar("path_enable") != "1")
+  while(getDvar("path_enable") != "1")
     wait .1;
 }
 
@@ -283,44 +281,44 @@ plot_circle_fortime(radius, time, color) {
 }
 
 path_select_next() {
-  if(getdvar("path_select_next") == "")
+  if(getDvar("path_select_next") == "")
     return;
   if(!(level.path_selectindex == level.path_views[level.path_selectid].size))
     level.path_selectindex++;
 
-  setdvar("path_select_next", "");
+  setDvar("path_select_next", "");
 }
 
 path_select_prev() {
-  if(getdvar("path_select_prev") == "")
+  if(getDvar("path_select_prev") == "")
     return;
   if(!(level.path_selectindex == 0))
     level.path_selectindex--;
-  setdvar("path_select_prev", "");
+  setDvar("path_select_prev", "");
 }
 
 path_select_new() {
-  if(getdvar("path_select_new") == "")
+  if(getDvar("path_select_new") == "")
     return;
   level.path_selectindex = level.path_views[level.path_selectid].size;
-  setdvar("path_select_new", "");
+  setDvar("path_select_new", "");
 }
 
 path_setid() {
-  if(getdvar("path_setid") == "")
+  if(getDvar("path_setid") == "")
     return;
-  level.path_selectid = path_createid(getdvar("path_setid"));
+  level.path_selectid = path_createid(getDvar("path_setid"));
   level.path_selectindex = 0; // set current selection to first whenever it's changed
 }
 
 path_setview() {
-  if(getdvar("path_setview") == "")
+  if(getDvar("path_setview") == "")
     return;
   view = path_getcurrentview();
   //add trigger stuff here
   //check for trigger
   path_setvieworgang(view);
-  setdvar("path_setview", "");
+  setDvar("path_setview", "");
   flag_set("path_refresh");
 }
 
@@ -335,7 +333,7 @@ path_trigger_setvieworgang(view) {
 }
 
 path_dump() {
-  if(getdvar("path_dump") == "")
+  if(getDvar("path_dump") == "")
     return;
   println(" ");
   println(" ");
@@ -364,11 +362,11 @@ path_dump() {
   println(" ");
   println(" ");
   println(" ");
-  setdvar("path_dump", "");
+  setDvar("path_dump", "");
 }
 
 path_help() {
-  if(getdvar("path_help") == "")
+  if(getDvar("path_help") == "")
     return;
   println(" ");
   println(" ");
@@ -397,11 +395,11 @@ path_help() {
   println("path_image <materialname>");
   println(" ");
   println("Once you have all your views press the dump button, open your console.log and paste the script to your level script");
-  setdvar("path_help", "");
+  setDvar("path_help", "");
 }
 
 path_delete() {
-  if(getdvar("path_delete") == "")
+  if(getDvar("path_delete") == "")
     return;
   newarray = [];
   for(i = 0; i < level.path_views[level.path_selectid].size; i++)
@@ -409,30 +407,30 @@ path_delete() {
       newarray[newarray.size] = level.path_views[level.path_selectid][i];
   level.path_views = newarray;
   flag_set("path_refresh");
-  setdvar("path_delete", "");
+  setDvar("path_delete", "");
 }
 
 path_select_template() {
-  if(getdvar("path_select_template") == "")
+  if(getDvar("path_select_template") == "")
     return;
-  setdvar("path_select_template", "");
+  setDvar("path_select_template", "");
 }
 
 path_editmode_update() {
-  if(getdvar("path_editmode") == "")
+  if(getDvar("path_editmode") == "")
     return;
   if(!level.path_editmode)
     level.path_editmode = true;
   else
     level.path_editmode = false;
-  setdvar("path_editmode", "");
+  setDvar("path_editmode", "");
 }
 
 path_image_update() {
-  if(getdvar("path_image") == "")
+  if(getDvar("path_image") == "")
     return;
   view = path_getcurrentview();
-  setdvar("path_image", "");
+  setDvar("path_image", "");
 }
 
 path_getcurrentview() {

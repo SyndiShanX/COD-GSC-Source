@@ -303,7 +303,7 @@ huditemshide() {
   if(level.players.size > 0) {
     for(var_0 = 0; var_0 < level.players.size; var_0++) {
       if(level.players[var_0] maps\_utility::ent_flag("on_remote_turret"))
-        setdvar("ui_remotemissile_playernum", var_0 + 1);
+        setDvar("ui_remotemissile_playernum", var_0 + 1);
     }
   } else {
     setsaveddvar("compass", "0");
@@ -314,7 +314,7 @@ huditemshide() {
 
 huditemsshow() {
   if(level.players.size > 0)
-    setdvar("ui_remotemissile_playernum", 0);
+    setDvar("ui_remotemissile_playernum", 0);
   else {
     setsaveddvar("compass", "1");
     setsaveddvar("ammoCounterHide", "0");

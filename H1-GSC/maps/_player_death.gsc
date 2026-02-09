@@ -47,7 +47,7 @@ death_quote_think() {
   level endon("new_quote_string");
   level.player waittill("death", var_0, var_1, var_2);
 
-  if(getdvar("limited_mode") == "1") {
+  if(getDvar("limited_mode") == "1") {
     return;
   }
   setdeadquote();
@@ -149,10 +149,10 @@ exploding_barrel_death(var_0) {
 }
 
 set_deadquote(var_0) {
-  if(getdvar("limited_mode") == "1") {
+  if(getDvar("limited_mode") == "1") {
     return;
   }
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
 }
 
 setdeadquote() {
@@ -160,31 +160,31 @@ setdeadquote() {
     var_0 = int(tablelookup("sp\deathQuoteTable.csv", 1, "size", 0));
     var_1 = randomint(var_0);
 
-    if(getdvar("cycle_deathquotes") != "") {
-      if(getdvar("ui_deadquote_index") == "")
-        setdvar("ui_deadquote_index", "0");
+    if(getDvar("cycle_deathquotes") != "") {
+      if(getDvar("ui_deadquote_index") == "")
+        setDvar("ui_deadquote_index", "0");
 
       var_1 = getdvarint("ui_deadquote_index");
-      setdvar("ui_deadquote", lookupdeathquote(var_1));
+      setDvar("ui_deadquote", lookupdeathquote(var_1));
       var_1++;
 
       if(var_1 > var_0 - 1)
         var_1 = 0;
 
-      setdvar("ui_deadquote_index", var_1);
+      setDvar("ui_deadquote_index", var_1);
     } else
-      setdvar("ui_deadquote", lookupdeathquote(var_1));
+      setDvar("ui_deadquote", lookupdeathquote(var_1));
   }
 }
 
 deadquote_recently_used(var_0) {
-  if(var_0 == getdvar("ui_deadquote_v1"))
+  if(var_0 == getDvar("ui_deadquote_v1"))
     return 1;
 
-  if(var_0 == getdvar("ui_deadquote_v2"))
+  if(var_0 == getDvar("ui_deadquote_v2"))
     return 1;
 
-  if(var_0 == getdvar("ui_deadquote_v3"))
+  if(var_0 == getDvar("ui_deadquote_v3"))
     return 1;
 
   return 0;
@@ -202,7 +202,7 @@ lookupdeathquote(var_0) {
 grenade_death_hint(var_0, var_1) {
   level.player.failingmission = 1;
 
-  if(getdvar("limited_mode") == "1") {
+  if(getDvar("limited_mode") == "1") {
     return;
   }
   set_deadquote("");
@@ -245,7 +245,7 @@ grenade_death_hint(var_0, var_1) {
 }
 
 grenade_death_indicator_hud() {
-  if(getdvar("limited_mode") == "1") {
+  if(getDvar("limited_mode") == "1") {
     return;
   }
   wait 2.5;

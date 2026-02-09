@@ -180,7 +180,7 @@ function onspawnplayer(predictedspawn) {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isplayer(attacker) && attacker.team != self.team) {
+  if(isPlayer(attacker) && attacker.team != self.team) {
     if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore) {
       attacker globallogic_score::giveteamscoreforobjective(attacker.team, level.teamscoreperkill);
     }
@@ -190,7 +190,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     }
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && attacker.team != self.team) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker.team != self.team) {
     taco = function_b25ab1e7();
 
     if(isDefined(taco)) {
@@ -286,7 +286,7 @@ function_903c4eff(victim, attacker, pos, yawangle) {
   self show();
   self clientfield::set("taco_flag", 1);
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     self clientfield::set("taco_player_entnum", attacker.entnum);
   }
 

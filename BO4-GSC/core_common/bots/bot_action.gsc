@@ -781,7 +781,6 @@ set_weapon_rank(weapon, rank, reason) {
   if(isDefined(reason)) {
     self.bot.var_c4fbaffc[weapon][self.bot.var_c4fbaffc[weapon].size] = "<dev string:x1e4>" + reason;
   }
-
 }
 
 modify_weapon_rank(weapon, amount, reason) {
@@ -2567,7 +2566,7 @@ function_b70a8fcf(actionparams) {
     return false;
   }
 
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     return isDefined(target.revivetrigger);
   }
 
@@ -2709,7 +2708,6 @@ function_3a2f51fd(actionparams) {
     recordsphere(actionparams.aimpoint, 4, (1, 0, 0), "<dev string:x4b>");
     record3dtext("<dev string:x646>", actionparams.aimpoint + (0, 0, 5), (1, 0, 0), "<dev string:x4b>", undefined, 0.5);
   }
-
 }
 
 function_31a76186(actionparams) {
@@ -2814,7 +2812,6 @@ look_at_point(point, var_e125ba43, debugcolor) {
     recordsphere(point, 4, debugcolor, "<dev string:x4b>");
     record3dtext(var_e125ba43, point + (0, 0, 5), debugcolor, "<dev string:x4b>", undefined, 0.5);
   }
-
 }
 
 function_2b8f7067() {

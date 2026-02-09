@@ -290,7 +290,7 @@ swim_intro_dialogue() {
   wait(var_0);
 
   if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
-    setdvar("ui_deadquote", &"BLACK_ICE_SWIM_DETONATE_FAIL");
+    setDvar("ui_deadquote", &"BLACK_ICE_SWIM_DETONATE_FAIL");
     common_scripts\utility::flag_set("flag_detonate_fail");
     maps\_utility::missionfailedwrapper();
   }
@@ -559,7 +559,7 @@ player_swim_rubberband() {
       var_5 = var_7 - var_6;
 
       if(var_5 > var_4) {
-        setdvar("ui_deadquote", &"BLACK_ICE_SWIM_FAIL_DISTANCE");
+        setDvar("ui_deadquote", &"BLACK_ICE_SWIM_FAIL_DISTANCE");
         maps\_utility::missionfailedwrapper();
       }
     }
@@ -831,7 +831,7 @@ swim_surface_dialog() {
   var_0 = [ &"BLACK_ICE_HESH_KILLED", &"BLACK_ICE_KEEGAN_KILLED"];
 
   if(!common_scripts\utility::flag("flag_swim_player_drop_tank")) {
-    setdvar("ui_deadquote", var_0[randomint(var_0.size - 1)]);
+    setDvar("ui_deadquote", var_0[randomint(var_0.size - 1)]);
     maps\_utility::missionfailedwrapper();
   }
 }

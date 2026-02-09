@@ -150,13 +150,13 @@ function function_71f8e359() {
   level notify("hash_90d1f5ef");
   level thread zm_audio::sndmusicsystem_playstate("sentinel_roundstart");
   level.var_a61a9af4 = getdvarint("Sentinel_Move_Speed");
-  setdvar("Sentinel_Move_Speed", 5);
+  setDvar("Sentinel_Move_Speed", 5);
 }
 
 function function_5cf4e163() {
   level flag::clear("sentinel_round");
   level flag::clear("special_round");
-  setdvar("Sentinel_Move_Speed", level.var_a61a9af4);
+  setDvar("Sentinel_Move_Speed", level.var_a61a9af4);
   level.var_e476eac3 = 0;
   level notify("hash_d32683ce");
 }
@@ -181,7 +181,7 @@ function function_7766fb04() {
   level.zombie_total = function_e9be6289();
   if(getdvarstring("") != "" && getdvarint("") > 0) {
     level.zombie_total = getdvarint("");
-    setdvar("", 0);
+    setDvar("", 0);
   }
   wait(1);
   sentinel_round_fx(1);
@@ -329,9 +329,7 @@ function function_d600cb9a() {
       if(query_result.data.size) {
         a_s_locs = array::randomize(query_result.data);
         foreach(s_loc in a_s_locs) {
-          var_caae2f83 = [
-            [self.check_point_in_enabled_zone]
-          ](s_loc.origin, 1);
+          var_caae2f83 = [[self.check_point_in_enabled_zone]](s_loc.origin, 1);
           if(var_caae2f83) {
             continue;
           }
@@ -368,9 +366,7 @@ function function_d600cb9a() {
       if(query_result.data.size) {
         a_s_locs = array::randomize(query_result.data);
         foreach(s_loc in a_s_locs) {
-          var_caae2f83 = [
-            [self.check_point_in_enabled_zone]
-          ](s_loc.origin, 1);
+          var_caae2f83 = [[self.check_point_in_enabled_zone]](s_loc.origin, 1);
           if(var_caae2f83) {
             var_c85c791d = 0;
             foreach(player in level.activeplayers) {
@@ -515,7 +511,7 @@ function function_ea9730d8(var_4e5c415e) {
   self endon("hash_107a4ece");
   var_4e5c415e endon("death");
   self function_cb2c6547();
-  if(!isDefined(self.attacker) || !isplayer(self.attacker)) {
+  if(!isDefined(self.attacker) || !isPlayer(self.attacker)) {
     var_4e5c415e.var_580a32ea++;
   }
 }
@@ -524,7 +520,7 @@ function function_cb2c6547() {
   self endon("death");
   while(true) {
     self waittill("damage", n_damage, e_attacker);
-    if(isDefined(e_attacker) && isplayer(e_attacker)) {
+    if(isDefined(e_attacker) && isPlayer(e_attacker)) {
       self notify("hash_107a4ece");
     }
   }
@@ -688,7 +684,7 @@ function function_53547f4d() {
     var_4a50cb2a = level.var_6a6f912a;
     if(isDefined(var_4a50cb2a)) {
       var_bae0d10b = level zm_powerups::specific_powerup_drop("full_ammo", var_4a50cb2a);
-      if(isplayer(e_attacker)) {
+      if(isPlayer(e_attacker)) {
         v_destination = e_attacker.origin;
       } else {
         e_player = zm_utility::get_closest_player(var_4a50cb2a);
@@ -792,7 +788,7 @@ function function_d0769312() {
       level notify("last_ai_down", self, attacker);
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       attacker zm_score::player_add_points("death_sentinel");
     }
@@ -1007,7 +1003,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1017,7 +1013,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1027,7 +1023,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1037,7 +1033,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1047,7 +1043,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1057,7 +1053,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1067,7 +1063,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1077,7 +1073,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     case "": {
@@ -1087,7 +1083,7 @@ function function_c630bba3(cmd) {
       } else {
         curvalue = 0;
       }
-      setdvar("", curvalue);
+      setDvar("", curvalue);
       return true;
     }
     default: {

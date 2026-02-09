@@ -14,7 +14,6 @@ main() {
   }
   OnSaveRestored_Callback(::collectibles_level_restore);
 }
-
 collectibles_level_restore() {
   map_collectibles = getEntArray("collectible", "targetname");
   for(i = 0; i < map_collectibles.size; i++) {
@@ -24,7 +23,6 @@ collectibles_level_restore() {
     }
   }
 }
-
 collectible_init() {
   collectibles = [];
   items = 0;
@@ -96,14 +94,12 @@ collectible_init() {
   }
   return collectibles;
 }
-
 collectible_remove_found(collectible_item) {
   if(isDefined(collectible_item.trigger)) {
     collectible_item.trigger delete();
   }
   collectible_item delete();
 }
-
 collectible_wait_for_pickup() {
   level endon("collectible_save_restored");
   while(1) {
@@ -114,7 +110,9 @@ collectible_wait_for_pickup() {
     } else {
       self.trigger setHintString("");
     }
-    if(IsAlive(player) && player_is_looking_at && player Use_button_held()) {
+    if(IsAlive(player) &&
+      player_is_looking_at &&
+      player Use_button_held()) {
       playsoundatposition("uin_aar_unlock_loud", (0, 0, 0));
       break;
     }
@@ -128,7 +126,6 @@ collectible_wait_for_pickup() {
   player thread collectible_achievement_unlock();
   collectible_remove_found(self);
 }
-
 collectible_achievement_unlock() {
   offset_start = 1;
   offset_end = 42;
@@ -139,7 +136,6 @@ collectible_achievement_unlock() {
     offset_start++;
   }
 }
-
 collectibleNotify(Unlock, num_found) {
   notifyData = spawnStruct();
   notifyData.notifyText = &"SCRIPT_COLLECTIBLE";

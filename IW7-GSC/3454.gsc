@@ -355,7 +355,7 @@ missilegetbesttarget() {
 }
 
 missileisgoodtarget(var_0) {
-  return isalive(var_0) && var_0.team != self.owner.team && !ismissiletargeted(var_0) && (isplayer(var_0) && !var_0 scripts\mp\utility\game::_hasperk("specialty_blindeye")) && missiletargetangle(var_0) > 0.25;
+  return isalive(var_0) && var_0.team != self.owner.team && !ismissiletargeted(var_0) && (isPlayer(var_0) && !var_0 scripts\mp\utility\game::_hasperk("specialty_blindeye")) && missiletargetangle(var_0) > 0.25;
 }
 
 missiletargetangle(var_0) {

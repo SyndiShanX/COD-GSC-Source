@@ -565,7 +565,7 @@ func_113F7() {
   self endon("tagged_entity_death_cleanup");
   self.var_113F7 = 1;
   self waittill("death", var_0, var_1);
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     wait(0.1);
     if(isDefined(self) && distancesquared(self.origin, level.player.origin) > 90000) {
       var_2 = gettime();

@@ -102,7 +102,7 @@ cornered_intro_pre_load() {
 }
 
 setup_intro() {
-  setdvar("e3", "0");
+  setDvar("e3", "0");
   setup_intro_internal();
 }
 
@@ -205,7 +205,7 @@ intro_handler() {
   thread intro_rorke_gun();
   thread intro_baker();
 
-  if(getdvar("intro_mask") == "0")
+  if(getDvar("intro_mask") == "0")
     wait 8.5;
   else
     wait 11.5;
@@ -384,7 +384,7 @@ intro_rorke() {
   common_scripts\utility::waitframe();
   var_1 = undefined;
 
-  if(getdvar("intro_mask") != "0")
+  if(getDvar("intro_mask") != "0")
     self setanim(%cornered_level_intro_merrick_start_mask, 1, 0.1);
 
   thread maps\cornered_audio::aud_intro("r_jump");
@@ -395,20 +395,20 @@ intro_rorke() {
   common_scripts\utility::flag_set("swap_ally_intro_gun");
   maps\_utility::gun_recall();
 
-  if(getdvar("intro_mask") != "0") {
+  if(getDvar("intro_mask") != "0") {
     wait 2.2;
     thread maps\_utility::play_sound_on_entity("crnd_intro_mask");
   }
 
   self waittillmatch("single anim", "end");
 
-  if(getdvar("intro_mask") != "0") {
+  if(getDvar("intro_mask") != "0") {
     self clearanim(%cornered_level_intro_merrick_start_mask, 0);
     thread maps\cornered_code::head_swap("head_keegan_cornered_xb");
   }
 
   if(!maps\cornered_code::is_e3()) {
-    if(getdvar("intro_mask") == "0")
+    if(getDvar("intro_mask") == "0")
       level.intro_struct maps\_anim::anim_first_frame_solo(self, "cornered_intro_rorke_2_end");
     else
       level.intro_struct thread maps\_anim::anim_loop_solo(self, "cornered_level_intro_merrick_loop", "stop_loop");
@@ -1113,7 +1113,7 @@ intro_target_monitor() {
   level.player endon("hvt_confirmed");
   level endon("player_falling");
   level waittill("scanning_failed");
-  setdvar("ui_deadquote", &"CORNERED_BINOCULARS_FAIL");
+  setDvar("ui_deadquote", &"CORNERED_BINOCULARS_FAIL");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1154,7 +1154,7 @@ intro_allies_vo() {
   thread intro_save_check("intro_scanning_seq", "intro_id_scan");
   common_scripts\utility::flag_wait("intro_vo_begin");
 
-  if(getdvar("intro_mask") == "0")
+  if(getDvar("intro_mask") == "0")
     level.allies[level.const_rorke] maps\cornered_code::char_dialog_add_and_go("cornered_rke_heretheycomestay");
 
   common_scripts\utility::flag_wait("vip_heli_approach");

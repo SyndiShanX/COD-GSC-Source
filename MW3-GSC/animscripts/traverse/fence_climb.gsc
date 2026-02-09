@@ -13,7 +13,7 @@ main() {
   self traversemode("noclip");
   var_0 = self getnegotiationstartnode();
   self orientmode("face angle", var_0.angles[1]);
-  self setflaggedanimknoballrestart("diveanim", % fenceclimb, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("diveanim", %fenceclimb, %body, 1, 0.1, 1);
   animscripts\shared::_id_0C51("diveanim");
   self traversemode("gravity");
 }

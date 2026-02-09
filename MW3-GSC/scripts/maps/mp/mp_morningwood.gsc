@@ -10,9 +10,9 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_morningwood");
   maps\mp\_compass::setupminimap("compass_map_mp_morningwood");
-  setdvar("sm_sunShadowScale", "0.7");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("sm_sunShadowScale", "0.7");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   thread maps\mp\_utility::killtrigger((-328, -712, 824), 40, 50);
@@ -33,7 +33,6 @@ audio_settings() {
 spawn_blocker_collision(var_0, var_1) {
   while(!isDefined(level.airdropcratecollision)) {
     wait 0.05;
-
   }
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("tag_origin");

@@ -159,7 +159,7 @@ function_4f89089b() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isplayer(s_result.activator) && isalive(s_result.activator)) {
+    if(isPlayer(s_result.activator) && isalive(s_result.activator)) {
       b_played = s_result.activator zm_audio::create_and_play_dialog(#"vpods", #"react");
 
       if(isDefined(b_played) && b_played) {
@@ -259,7 +259,7 @@ function_49189399() {
     s_info = var_e5bf9843 waittill(#"trigger");
     e_player = s_info.activator;
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       break;
     }
   }
@@ -285,7 +285,7 @@ function_22101968() {
     s_info = var_d756a0b4 waittill(#"trigger");
     e_player = s_info.activator;
 
-    if(isplayer(e_player) && e_player flag::get(#"hash_30ae3926b2d211db")) {
+    if(isPlayer(e_player) && e_player flag::get(#"hash_30ae3926b2d211db")) {
       break;
     }
   }

@@ -15,16 +15,16 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_zebra");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   setdvar_cg_ng("r_specularColorScale", 1.7, 10);
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", 1);
-  setdvar("r_reactiveMotionWindAreaScale", 10);
-  setdvar("r_reactiveMotionWindDir", (0.3, -1, 0.3));
-  setdvar("r_reactiveMotionWindFrequencyScale", 1);
-  setdvar("r_reactiveMotionWindStrength", 20);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 1);
+  setDvar("r_reactiveMotionWindAreaScale", 10);
+  setDvar("r_reactiveMotionWindDir", (0.3, -1, 0.3));
+  setDvar("r_reactiveMotionWindFrequencyScale", 1);
+  setDvar("r_reactiveMotionWindStrength", 20);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";

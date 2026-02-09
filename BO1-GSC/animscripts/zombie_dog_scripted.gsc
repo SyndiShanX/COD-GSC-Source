@@ -18,7 +18,6 @@ main() {
   }
   self waittill("killanimscript");
 }
-
 init(notifyName, origin, angles, theAnim, AnimMode, root, goalTime) {
   self.codeScripted["notifyName"] = notifyName;
   self.codeScripted["origin"] = origin;

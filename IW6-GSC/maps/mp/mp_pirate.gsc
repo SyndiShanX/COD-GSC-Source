@@ -23,8 +23,8 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_pirate");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_specularColorScale", 2.8, 14);
   setdvar_cg_ng("sm_sunShadowScale", 0.5, 1);
 
@@ -229,7 +229,6 @@ towerCollapse(initialDelay) {
     animName = animModel.script_noteworthy;
     if(isDefined(animName)) {
       animModel ScriptModelPlayAnim(animName);
-
     }
   }
 
@@ -306,7 +305,6 @@ crushObjects(refPos, radiusSq, notifyStr, targets) {
   foreach(target in targets) {
     if(DistanceSquared(refPos, target.origin) < radiusSq) {
       target notify(notifyStr);
-
     }
   }
 }
@@ -482,7 +480,7 @@ bellsDetectHit() {
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, hit_point, type);
 
-    if(!isDefined(attacker) || !IsPlayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     current_weapon = attacker GetCurrentWeapon();
@@ -586,7 +584,7 @@ grogOnUse(player) {
 grogOnBeginUse(player) {}
 
 grogOnEndUse(team, player, result) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player maps\mp\gametypes\_gameobjects::updateUIProgress(self, false);
   }
 }
@@ -669,11 +667,9 @@ grogStopFx() {
 }
 
 setupConvos() {
-  level.convoLocs = [
-    "convo_dock_3", "convo_dock_3", "convo_tavern_1", "convo_voodoo_1", "convo_brothel_1"];
+  level.convoLocs = ["convo_dock_3", "convo_dock_3", "convo_tavern_1", "convo_voodoo_1", "convo_brothel_1"];
 
-  level.convoVos = [
-    "mp_pirate_vo_docked", "mp_pirate_vo_docked", "mp_pirate_vo_tavern", "mp_pirate_vo_voodoo", "mp_pirate_vo_brothel"];
+  level.convoVos = ["mp_pirate_vo_docked", "mp_pirate_vo_docked", "mp_pirate_vo_tavern", "mp_pirate_vo_voodoo", "mp_pirate_vo_brothel"];
 
   level endon("game_ended");
 
@@ -705,8 +701,7 @@ JAIL_VO_MAX_WAIT = 180;
 jailVO() {
   level endon("game_ended");
 
-  jailLines = [
-    "mp_pirate_prs_jail_1", "mp_pirate_prs_jail_2", "mp_pirate_prs_jail_3", "mp_pirate_prs_jail_4", "mp_pirate_prs_jail_5"];
+  jailLines = ["mp_pirate_prs_jail_1", "mp_pirate_prs_jail_2", "mp_pirate_prs_jail_3", "mp_pirate_prs_jail_4", "mp_pirate_prs_jail_5"];
 
   soundStruct = getstruct("convo_jail_1", "targetname");
   soundEnt = spawn("script_origin", soundStruct.origin);
@@ -785,15 +780,15 @@ debugWatchDvars() {
     foreach(dvar, event in level.dbgDvarNotify) {
       if(GetDvarInt(dvar) > 0) {
         level notify(event);
-        SetDvar(dvar, 0);
+        setDvar(dvar, 0);
       }
     }
 
     foreach(dvar, callback in level.dbgDvarCallback) {
-      value = GetDvar(dvar);
+      value = getDvar(dvar);
       if(value != "") {
         [[callback]](value);
-        SetDvar(dvar, "");
+        setDvar(dvar, "");
       }
     }
 

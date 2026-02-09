@@ -157,7 +157,6 @@ main() {
       } else {
         self PlayAnimNUntilNotetrack(animState, 0, "traverse");
       }
-
     }
 
     self ScrAgentSetAnimScale(1, 1);

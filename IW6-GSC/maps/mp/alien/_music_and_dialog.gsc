@@ -106,7 +106,6 @@ onGameEnded() {
     } else {
       if(winner == "allies") {
         wait .01;
-
       } else if(winner == "axis") {
         foreach(player in level.players) {
           if(flag("alien_music_playing")) {
@@ -186,12 +185,10 @@ musicController() {
       }
 
       level waittill("match_ending_very_soon");
-
     }
   } else {
     if(!level.hardcoreMode)
       playSoundOnPlayers(game["music"]["losing_allies"]);
-
   }
 }
 
@@ -465,7 +462,6 @@ playVOforBlockerHive() {
     line = player.vo_prefix + "stayready";
     player play_vo_on_player(line);
   }
-
 }
 
 playVOForBombPlant(player) {
@@ -1312,7 +1308,6 @@ ext_last_stand_sfx() {
   } else {
     self playLocalSound("breathing_better");
   }
-
 }
 
 play_solo_vo(line, priority, timeout, interrupt, pause_time, only_local) {

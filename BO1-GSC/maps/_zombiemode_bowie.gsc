@@ -16,7 +16,7 @@ bowie_init() {
   }
   bowie_triggers = getEntArray("bowie_upgrade", "targetname");
   for(i = 0; i < bowie_triggers.size; i++) {
-    knife_model = getEnt(bowie_triggers[i].target, "targetname");
+    knife_model = GetEnt(bowie_triggers[i].target, "targetname");
     knife_model hide();
     bowie_triggers[i] thread bowie_think(cost);
     bowie_triggers[i] SetHintString(&"ZOMBIE_WEAPON_BOWIE_BUY", cost);
@@ -24,7 +24,6 @@ bowie_init() {
     bowie_triggers[i] UseTriggerRequireLookAt();
   }
 }
-
 bowie_think(cost) {
   self.first_time_triggered = false;
   for(;;) {
@@ -45,7 +44,7 @@ bowie_think(cost) {
       wait(0.1);
       continue;
     }
-    if(player hasWeapon("bowie_knife_zm") || player hasWeapon("minigun_zm")) {
+    if(player HasWeapon("bowie_knife_zm") || player HasWeapon("minigun_zm")) {
       wait(0.1);
       continue;
     }
@@ -66,7 +65,7 @@ bowie_think(cost) {
     if(!player_has_bowie) {
       if(player.score >= cost) {
         if(self.first_time_triggered == false) {
-          model = getEnt(self.target, "targetname");
+          model = getent(self.target, "targetname");
           model thread bowie_show(player);
           self.first_time_triggered = true;
         }
@@ -86,14 +85,12 @@ bowie_think(cost) {
     }
   }
 }
-
 give_bowie() {
   gun = self do_bowie_flourish_begin();
   self maps\_zombiemode_audio::create_and_play_dialog("weapon_pickup", "bowie");
   self waittill_any("fake_death", "death", "player_downed", "weapon_change_complete");
   self do_bowie_flourish_end(gun);
 }
-
 do_bowie_flourish_begin() {
   self increment_is_drinking();
   self AllowLean(false);
@@ -112,7 +109,6 @@ do_bowie_flourish_begin() {
   self SwitchToWeapon(weapon);
   return gun;
 }
-
 do_bowie_flourish_end(gun) {
   assert(gun != "zombie_perk_bottle_doubletap");
   assert(gun != "zombie_perk_bottle_revive");
@@ -134,14 +130,14 @@ do_bowie_flourish_end(gun) {
     self.lastActiveWeapon = "none";
     return;
   }
-  if(self hasWeapon("knife_ballistic_zm")) {
+  if(self HasWeapon("knife_ballistic_zm")) {
     self notify("zmb_lost_knife");
     self TakeWeapon("knife_ballistic_zm");
     self GiveWeapon("knife_ballistic_bowie_zm");
     if(gun == "knife_ballistic_zm") {
       gun = "knife_ballistic_bowie_zm";
     }
-  } else if(self hasWeapon("knife_ballistic_upgraded_zm")) {
+  } else if(self HasWeapon("knife_ballistic_upgraded_zm")) {
     self notify("zmb_lost_knife");
     self TakeWeapon("knife_ballistic_upgraded_zm");
     self GiveWeapon("knife_ballistic_bowie_upgraded_zm", 0, self maps\_zombiemode_weapons::get_pack_a_punch_weapon_options("knife_ballistic_bowie_upgraded_zm"));
@@ -152,7 +148,7 @@ do_bowie_flourish_end(gun) {
   self TakeWeapon(weapon);
   self GiveWeapon("bowie_knife_zm");
   self set_player_melee_weapon("bowie_knife_zm");
-  if(self hasWeapon("knife_zm")) {
+  if(self HasWeapon("knife_zm")) {
     self TakeWeapon("knife_zm");
   }
   if(self is_multiple_drinking()) {
@@ -175,7 +171,6 @@ do_bowie_flourish_end(gun) {
     self decrement_is_drinking();
   }
 }
-
 bowie_show(player) {
   player_angles = VectorToAngles(player.origin - self.origin);
   player_yaw = player_angles[1];
@@ -192,5 +187,5 @@ bowie_show(player) {
   self Show();
   play_sound_at_pos("weapon_show", self.origin, self);
   time = 1;
-  self moveTo(self.og_origin, time);
+  self MoveTo(self.og_origin, time);
 }

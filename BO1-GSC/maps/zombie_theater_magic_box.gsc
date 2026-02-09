@@ -16,7 +16,6 @@ magic_box_init() {
   level thread magic_box_update();
   level thread watch_fire_sale();
 }
-
 get_location_from_chest_index(chest_index) {
   chest_loc = level.chests[chest_index].script_noteworthy;
   for(i = 0; i < level._box_locations.size; i++) {
@@ -26,7 +25,6 @@ get_location_from_chest_index(chest_index) {
   }
   AssertMsg("Unknown chest location - " + chest_loc);
 }
-
 magic_box_update() {
   wait(2);
   flag_wait("power_on");
@@ -51,7 +49,6 @@ magic_box_update() {
     wait(0.5);
   }
 }
-
 watch_fire_sale() {
   while(1) {
     level waittill("powerup fire sale");
@@ -62,7 +59,6 @@ watch_fire_sale() {
     setclientsysstate("box_indicator", get_location_from_chest_index(level.chest_index));
   }
 }
-
 turnLightGreen(name, playfx) {
   zapper_lights = getEntArray(name, "script_noteworthy");
   for(i = 0; i < zapper_lights.size; i++) {
@@ -79,7 +75,6 @@ turnLightGreen(name, playfx) {
       zapper_lights[i] setModel("zombie_zapper_cagelight");
   }
 }
-
 turnLightRed(name, playfx) {
   zapper_lights = getEntArray(name, "script_noteworthy");
   for(i = 0; i < zapper_lights.size; i++) {

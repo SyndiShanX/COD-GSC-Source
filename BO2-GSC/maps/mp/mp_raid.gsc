@@ -71,7 +71,7 @@ player_splash_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity) && isalive(entity))
+    if(isPlayer(entity) && isalive(entity))
       self thread trigger_thread(entity, ::player_water_fx);
   }
 }

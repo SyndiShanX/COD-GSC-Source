@@ -70,7 +70,7 @@ function onstartgametype() {
 }
 
 function onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer)) {
+  if(isDefined(winningplayer) && isPlayer(winningplayer)) {
     [[level._setplayerscore]](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
   }
 }
@@ -97,7 +97,7 @@ function onspawnplayer(predictedspawn) {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || self == attacker) {
+  if(!isPlayer(attacker) || self == attacker) {
     return;
   }
   if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {

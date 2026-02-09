@@ -1,6 +1,6 @@
 /*****************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_airsupport.csc
+ * Script: clientscripts\_airsupport\.csc
 *****************************************/
 
 #include clientscripts\_utility;
@@ -13,7 +13,6 @@ planeSounds(spawnSound, flybySound, flybySoundLoop, lengthOfFlyby) {
   playSound(0, spawnSound, (0, 0, 0));
   thread plane_position_updater(fake_ent_plane, self, flybySound, flybySoundLoop, lengthOfFlyBy);
 }
-
 plane_position_updater(fake_ent, plane, flybySound, flybySoundLoop, lengthOfFlyby) {
   soundid = -1;
   dx = undefined;
@@ -27,7 +26,7 @@ plane_position_updater(fake_ent, plane, flybySound, flybySoundLoop, lengthOfFlyb
       if(length(dx) > .01) {
         velocity = dx / (getrealtime() - lastTime);
         assert(isDefined(velocity));
-        players = getLocalPlayers();
+        players = getlocalplayers();
         assert(isDefined(players));
         other_point = plane.origin + (velocity * 100000);
         point = closest_point_on_line_to_point(players[0].origin, plane.origin, other_point);
@@ -37,10 +36,12 @@ plane_position_updater(fake_ent, plane, flybySound, flybySoundLoop, lengthOfFlyb
         time = dist / length(velocity);
         assert(isDefined(time));
         if(time < lengthOfFlyby) {
-          if(isDefined(flybysoundloop))
+          if(isDefined(flybysoundloop)) {
             soundid = playLoopSound(0, fake_ent, flybySoundLoop, 0);
-          if(isDefined(flybySound))
+          }
+          if(isDefined(flybySound)) {
             plane playSound(0, flybySound);
+          }
           startTime = getRealTime();
         }
       }
@@ -52,10 +53,10 @@ plane_position_updater(fake_ent, plane, flybySound, flybySoundLoop, lengthOfFlyb
   wait(5);
   deletefakeent(0, fake_ent);
 }
-
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
-  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) / (LineMagSqrd);
+  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) /
+    (LineMagSqrd);
   if(t < 0.0) {
     return LineStart;
   } else if(t > 1.0) {
@@ -67,7 +68,6 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
     return (start_x, start_y, start_z);
   }
 }
-
 getPlaneModel(teamFaction) {
   switch (teamFaction) {
     case "vietcong":
@@ -95,7 +95,6 @@ getPlaneModel(teamFaction) {
   }
   return planeModel;
 }
-
 planeTurnLeft(plane, yaw, halflife) {
   plane endon("delete");
   yawY = getDvarFloatDefault(#"scr_planeyaw", 0.6);
@@ -106,17 +105,20 @@ planeTurnLeft(plane, yaw, halflife) {
   oy = getDvarFloatDefault(#"scr_planeoy", 30000.0);
   maxoX = getDvarFloatDefault(#"scr_maxo_planex", -1.0);
   maxoY = getDvarFloatDefault(#"scr_maxo_planey", -1.0);
-  if(plane.angles[1] == 360)
+  if(plane.angles[1] == 360) {
     plane.angles = (plane.angles[0], 0, plane.angles[2]);
+  }
   origX = plane.origin[0];
   origY = plane.origin[1];
   accumTurn = 0;
   looptime = 0.1;
   while(loopTime <= halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] <= minRoll)
+    }
+    if(minRoll != -1 && plane.angles[2] <= minRoll) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn >= maxYaw) {
       yawY = 0.0;
@@ -144,10 +146,12 @@ planeTurnLeft(plane, yaw, halflife) {
   maxy = getDvarFloatDefault(#"scr_max_planey2", 90);
   accumTurn = 0;
   while(loopTime < halflife + halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= 0)
+    }
+    if(minRoll != -1 && plane.angles[2] >= 0) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn >= maxYaw) {
       yawY = 0.0;
@@ -165,7 +169,6 @@ planeTurnLeft(plane, yaw, halflife) {
     loopTime += 0.1;
   }
 }
-
 planeTurnRight(plane, yaw, halflife) {
   plane endon("delete");
   yawY = getDvarFloatDefault(#"scr_planeyaw", -0.6);
@@ -176,17 +179,20 @@ planeTurnRight(plane, yaw, halflife) {
   oy = getDvarFloatDefault(#"scr_planeoy", -30000.0);
   maxoX = getDvarFloatDefault(#"scr_maxo_planex", -1.0);
   maxoY = getDvarFloatDefault(#"scr_maxo_planey", -1.0);
-  if(plane.angles[1] == 360)
+  if(plane.angles[1] == 360) {
     plane.angles = (plane.angles[0], 0, plane.angles[2]);
+  }
   origX = plane.origin[0];
   origY = plane.origin[1];
   accumTurn = 0;
   looptime = 0.1;
   while(loopTime <= halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= minRoll)
+    }
+    if(minRoll != -1 && plane.angles[2] >= minRoll) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn <= maxYaw) {
       yawY = 0.0;
@@ -215,10 +221,12 @@ planeTurnRight(plane, yaw, halflife) {
   maxy = getDvarFloatDefault(#"scr_max_planey2", 90);
   accumTurn = 0;
   while(loopTime < halflife + halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= 0)
+    }
+    if(minRoll != -1 && plane.angles[2] >= 0) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn >= maxYaw) {
       yawY = 0.0;
@@ -236,7 +244,6 @@ planeTurnRight(plane, yaw, halflife) {
     loopTime += 0.1;
   }
 }
-
 doABarrelRoll(plane, endPoint, time) {
   plane endon("delete");
   plane moveTo(endPoint, time, 0, 0);
@@ -249,12 +256,10 @@ doABarrelRoll(plane, endPoint, time) {
     realwait(0.01);
   }
 }
-
 planeGoStraight(plane, endPoint, time) {
   plane endon("delete");
   plane moveTo(endPoint, time, 0, 0);
 }
-
 debug_line(from, to, color, time) {}
 debug_star(origin, color, time) {}
 getDvarFloatDefault(dvarName, defaultValue) {
@@ -264,7 +269,6 @@ getDvarFloatDefault(dvarName, defaultValue) {
   }
   return returnVal;
 }
-
 getDvarIntDefault(dvarName, defaultValue) {
   returnVal = defaultValue;
   if(getDvar(dvarName) != "") {

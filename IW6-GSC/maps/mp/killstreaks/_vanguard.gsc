@@ -542,7 +542,6 @@ loopTriggeredEffect(effect, missile) {
     TriggerFX(effect);
     wait(0.25);
   }
-
 }
 
 vanguard_fireMissile(vanguard, targetLocation) {
@@ -768,7 +767,6 @@ vanguard_monitorTimeout(vanguard, duration) {
   timeout = VANGUARD_FLY_TIME;
   if(!is_aliens()) {
     timeout = GetDvarFloat("scr_vanguard_timeout");
-
   } else
     timeout = duration;
 

@@ -275,7 +275,7 @@ function do_tank_fill(actor, tank) {
 
 function tank_volume_death_check() {
   self waittill("death", attacker);
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(!isDefined(self)) {

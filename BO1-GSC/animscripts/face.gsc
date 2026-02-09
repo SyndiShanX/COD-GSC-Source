@@ -27,7 +27,6 @@ SayGenericDialogue(typeString) {
   }
   SayGenericDialogueWithImportance(typeString, importance);
 }
-
 SayGenericDialogueWithImportance(typeString, importance) {
   soundAlias = "dds_";
   if(isDefined(self.dds_characterID)) {
@@ -41,11 +40,9 @@ SayGenericDialogueWithImportance(typeString, importance) {
     self thread PlayFaceThread(undefined, soundAlias, importance);
   }
 }
-
 SetIdleFaceDelayed(facialAnimationArray) {
   self.a.idleFace = facialAnimationArray;
 }
-
 SetIdleFace(facialAnimationArray) {
   if(!anim.useFacialAnims) {
     return;
@@ -53,19 +50,15 @@ SetIdleFace(facialAnimationArray) {
   self.a.idleFace = facialAnimationArray;
   self PlayIdleFace();
 }
-
 SaySpecificDialogue(facialanim, soundAlias, importance, notifyString, waitOrNot, timeToWait) {
   self thread PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, timeToWait);
 }
-
 ChooseAnimFromSet(animSet) {
   return;
 }
-
 PlayIdleFace() {
   return;
 }
-
 PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, timeToWait) {
   if(!isDefined(soundAlias)) {
     wait(1);
@@ -163,7 +156,6 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
   self notify("done speaking");
   self notify(notifyString);
 }
-
 display_vo(vo_string, uniqueNotify) {
   if(!isDefined(level.vo_hud)) {
     level.vo_hud = NewHudElem();
@@ -185,7 +177,6 @@ display_vo(vo_string, uniqueNotify) {
   level.vo_hud SetText("");
   self notify(uniqueNotify);
 }
-
 temp_dialogue_print(soundAlias) {
   self endon("death");
   new_string = "";
@@ -214,7 +205,6 @@ temp_dialogue_print(soundAlias) {
     wait(0.05);
   }
 }
-
 PlayFace_WaitForNotify(waitForString, notifyString, killmeString) {
   self endon("death");
   self endon(killmeString);
@@ -222,7 +212,6 @@ PlayFace_WaitForNotify(waitForString, notifyString, killmeString) {
   self.a.faceWaitForResult = "notify";
   self notify(notifyString);
 }
-
 PlayFace_WaitForTime(time, notifyString, killmeString) {
   self endon("death");
   self endon(killmeString);
@@ -230,6 +219,6 @@ PlayFace_WaitForTime(time, notifyString, killmeString) {
   self.a.faceWaitForResult = "time";
   self notify(notifyString);
 }
-
 #using_animtree("generic_human");
+
 InitLevelFace() {}

@@ -16,7 +16,6 @@ magic_box_init() {
   level thread zombie_zipline_clip();
   level.pandora_fx_func = ::swamp_pandora_fx_func;
 }
-
 swamp_pandora_fx_func() {
   self.pandora_light = spawn("script_model", self.chest_origin.origin);
   self.pandora_light.angles = self.chest_origin.angles + (-90, 0, 0);
@@ -27,7 +26,6 @@ swamp_pandora_fx_func() {
     playFXOnTag(level._effect["lght_marker_old"], self.pandora_light, "tag_origin");
   }
 }
-
 waitfor_flag_open_chest_location(which) {
   wait(3);
   switch (which) {
@@ -82,20 +80,19 @@ waitfor_flag_open_chest_location(which) {
       break;
   }
 }
-
 zombie_zipline_clip() {
   PreCacheModel("collision_wall_128x128x10");
   PreCacheModel("collision_geo_64x64x128");
   collision = spawn("script_model", (10712, 1615, -464));
   collision setModel("collision_wall_128x128x10");
   collision.angles = (0, 71.2, 0);
-  collision hide();
+  collision Hide();
   collision2 = spawn("script_model", (10818, 1599, -464));
   collision2 setModel("collision_wall_128x128x10");
   collision2.angles = (0, 75.6, 0);
-  collision2 hide();
+  collision2 Hide();
   collision3 = spawn("script_model", (9984, 1444, -473));
   collision3 setModel("collision_geo_64x64x128");
   collision3.angles = (0, 0, 0);
-  collision3 hide();
+  collision3 Hide();
 }

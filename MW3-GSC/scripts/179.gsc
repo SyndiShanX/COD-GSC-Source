@@ -44,15 +44,12 @@ _id_18AF(var_0, var_1, var_2) {
 
       if(var_7 == "airsupport") {
         var_11 = "specops_ui_airsupport";
-
       }
       if(var_7 == "equipment") {
         var_11 = "specops_ui_equipmentstore";
-
       }
       if(var_7 == "weapon" || var_7 == "weaponupgrade") {
         var_11 = "specops_ui_weaponstore";
-
       }
       var_12 = 0;
       _id_18B0(var_6, var_10, var_8, var_9, var_11, "survival", var_12);
@@ -72,11 +69,9 @@ _id_18B0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(!isDefined(level._id_1897)) {
     level._id_1897 = [];
-
   }
   if(!isDefined(level._id_1897[var_1])) {
     level._id_1897[var_1] = [];
-
   }
   level._id_1897[var_1][level._id_1897[var_1].size] = var_7;
 }
@@ -90,19 +85,16 @@ _id_17E2(var_0) {
 
   if(isDefined(level._id_0A35) && level._id_0A35) {
     return _id_18B5(var_0);
-
   }
   var_1 = getEntArray("info_player_start_so", "classname");
 
   if(var_1.size <= 0) {
     var_1 = getEntArray("info_player_start", "classname");
-
   }
   var_2 = common_scripts\utility::random(var_1);
 
   if(isDefined(var_0) && var_0) {
     return var_2.origin;
-
   }
   _id_18B7(level.player, var_2);
 
@@ -127,7 +119,6 @@ _id_18B5(var_0) {
     var_1 = getEntArray("info_player_start_pmcDefend", "classname");
   } else {
     var_1 = getEntArray("info_player_start_pmc", "classname");
-
   }
   var_2 = [];
   var_3 = undefined;
@@ -137,11 +128,9 @@ _id_18B5(var_0) {
       var_3 = common_scripts\utility::random(var_1);
     } else {
       var_3 = maps\_utility::_id_18B6(var_3.origin, var_1, var_2);
-
     }
     if(isDefined(var_0) && var_0) {
       return var_3.origin;
-
     }
     var_5 setorigin(var_3.origin);
     var_5 setplayerangles(var_3.angles);
@@ -171,11 +160,9 @@ _id_18B8() {
 _id_17EC(var_0) {
   if(_id_18BA(var_0)) {
     return 1;
-
   }
   if(_id_18BB(var_0)) {
     return 1;
-
   }
   return 0;
 }
@@ -183,11 +170,9 @@ _id_17EC(var_0) {
 _id_18BA(var_0) {
   if(!isDefined(self._id_1693)) {
     return 0;
-
   }
   if(self._id_1693 == var_0) {
     return 0;
-
   }
   return 1;
 }
@@ -195,11 +180,9 @@ _id_18BA(var_0) {
 _id_18BB(var_0) {
   if(!isDefined(self._id_18BC)) {
     return 0;
-
   }
   if(var_0 == 0) {
     return 1;
-
   }
   var_1 = strtok(self._id_18BC, ":;, ");
   var_2 = 1;
@@ -219,7 +202,6 @@ _id_1845(var_0) {
 
   while(!_id_1844()) {
     wait 0.5;
-
   }
   if(!isDefined(var_0)) {
     return;
@@ -237,7 +219,6 @@ _id_1845(var_0) {
     }
   } else {
     var_0 maps\_hud_util::fade_over_time(1, 0.5);
-
   }
   if(!maps\_utility::_id_1008("so_hud_can_toggle")) {
     maps\_utility::_id_13DC("so_hud_can_toggle");
@@ -247,15 +228,12 @@ _id_1845(var_0) {
 _id_1844() {
   if(isDefined(level._id_1816) && level._id_1816) {
     return 0;
-
   }
   if(isDefined(level._id_1865) && level._id_1865) {
     return 1;
-
   }
   if(!isDefined(self._id_17D4)) {
     return 1;
-
   }
   return gettime() > self._id_17D4;
 }
@@ -263,11 +241,9 @@ _id_1844() {
 _id_18BD(var_0) {
   if(!isDefined(var_0._id_1867) || !var_0._id_1867) {
     return 0;
-
   }
   if(!isDefined(self._id_1862)) {
     return 0;
-
   }
   return 1;
 }
@@ -280,7 +256,6 @@ _id_1807(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3) && var_3) {
     var_4 = 1;
-
   }
   var_5 = maps\_specialops::_id_185B();
   self._id_18BE = maps\_specialops::_id_16B6(1, var_5, var_2, self, var_4);
@@ -290,7 +265,6 @@ _id_1807(var_0, var_1, var_2, var_3) {
     self._id_186B settenthstimerstatic(level._id_16C3);
   } else {
     self._id_186B = maps\_specialops::_id_16B6(1, var_5, &"SPECIAL_OPS_TIME_NULL", self, var_4);
-
   }
   self._id_186B.alignx = "left";
 
@@ -320,7 +294,6 @@ _id_1807(var_0, var_1, var_2, var_3) {
 _id_18BF() {
   if(!common_scripts\utility::flag_exist("so_challenge_is_3quarter")) {
     common_scripts\utility::flag_init("so_challenge_is_3quarter");
-
   }
   common_scripts\utility::flag_wait("so_challenge_is_3quarter");
   maps\_specialops::_id_187F(3, 4);
@@ -329,7 +302,6 @@ _id_18BF() {
 _id_18C0() {
   if(!common_scripts\utility::flag_exist("so_challenge_is_halfway")) {
     common_scripts\utility::flag_init("so_challenge_is_halfway");
-
   }
   common_scripts\utility::flag_wait("so_challenge_is_halfway");
   maps\_specialops::_id_187F(2, 4);
@@ -338,7 +310,6 @@ _id_18C0() {
 _id_18C1() {
   if(!common_scripts\utility::flag_exist("so_challenge_is_quarter")) {
     common_scripts\utility::flag_init("so_challenge_is_quarter");
-
   }
   common_scripts\utility::flag_wait("so_challenge_is_quarter");
   maps\_specialops::_id_187F(1, 4);
@@ -349,7 +320,6 @@ _id_18C2(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     common_scripts\utility::flag_wait(var_2);
-
   }
   foreach(var_4 in level.players) {
     if(!var_4 _id_1844()) {
@@ -360,12 +330,10 @@ _id_18C2(var_0, var_1, var_2) {
   if(!isDefined(level._id_16CF)) {
     if(_id_18C3()) {
       level.player playSound("arcademode_zerodeaths");
-
     }
     level._id_16CF = gettime();
   } else {
     level._id_01DE = gettime();
-
   }
   var_1.label = "";
 
@@ -379,7 +347,6 @@ _id_18C2(var_0, var_1, var_2) {
 _id_18C3() {
   if(isDefined(level._id_16C3)) {
     return 1;
-
   }
   foreach(var_1 in level.players) {
     if(var_1._id_1862 != "off") {
@@ -400,7 +367,6 @@ _id_18C4(var_0, var_1) {
 
   while(level._id_186A > level._id_17D5) {
     wait 0.1;
-
   }
   var_0 _id_192A();
   var_1 _id_192A();
@@ -420,7 +386,6 @@ _id_18C5(var_0, var_1) {
 
   while(level._id_186A > level._id_17D6) {
     wait 0.1;
-
   }
   var_0 _id_192B();
   var_1 _id_192B();
@@ -433,11 +398,9 @@ _id_18C5(var_0, var_1) {
 _id_18C6() {
   if(self != level.player) {
     return 1;
-
   }
   if(!isDefined(level._id_18C7)) {
     return 0;
-
   }
   return level._id_18C7;
 }
@@ -474,13 +437,11 @@ _id_18C8() {
 _id_18C9() {
   if(level._id_186A > level._id_1806) {
     return 0;
-
   }
   for(var_0 = 0; var_0 <= level._id_1805; var_0++) {
     if(level._id_186A > var_0) {
       if(level._id_1806 < var_0) {
         level._id_1806 = var_0 + 1;
-
       }
       continue;
     }
@@ -506,13 +467,11 @@ _id_18CA(var_0, var_1) {
 
   if(self == level.player) {
     thread maps\_specialops::_id_1878();
-
   }
   var_2 = "@SPECIAL_OPS_FAILURE_HINT_TIME";
 
   if(isDefined(level._id_18CB)) {
     var_2 = level._id_18CB;
-
   }
   maps\_specialops::_id_183F(var_2, "ui_time_failure");
 
@@ -529,7 +488,6 @@ _id_18CC(var_0, var_1, var_2) {
     maps\_utility::_id_1654(var_2);
   } else {
     common_scripts\utility::flag_wait(var_2);
-
   }
   common_scripts\utility::flag_set("challenge_timer_passed");
   level._id_16CE = gettime();
@@ -539,11 +497,9 @@ _id_18CC(var_0, var_1, var_2) {
 
   if(isDefined(level._id_16C3)) {
     var_5 = level._id_16C3 - var_5;
-
   }
   if(var_5 <= 0) {
     var_5 = 0.1;
-
   }
   var_1 settenthstimerstatic(var_5);
 
@@ -564,7 +520,6 @@ _id_18CD(var_0, var_1) {
 _id_18CE(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     var_0 thread maps\_specialops::_id_185C(var_2);
-
   }
   if(isDefined(var_1)) {
     var_1 thread maps\_specialops::_id_185C(var_2);
@@ -574,11 +529,9 @@ _id_18CE(var_0, var_1, var_2) {
 _id_18CF(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0 <= 0) {
     return 0;
-
   }
   return 1;
 }
@@ -596,23 +549,20 @@ _id_18D0() {
 }
 
 _id_17F9(var_0) {
-  setdvar("ui_opensummary", 1);
+  setDvar("ui_opensummary", 1);
 
   if(var_0) {
-    setdvar("ui_mission_success", 1);
+    setDvar("ui_mission_success", 1);
   } else {
-    setdvar("ui_mission_success", 0);
-
+    setDvar("ui_mission_success", 0);
   }
   if(common_scripts\utility::flag("special_op_terminated")) {}
 
   if(!isDefined(level._id_16CF)) {
     level._id_16CF = gettime();
-
   }
   if(!isDefined(level._id_16CE)) {
     level._id_16CE = gettime();
-
   }
   common_scripts\utility::flag_set("special_op_terminated");
   level notify("stop_music");
@@ -623,7 +573,6 @@ _id_17F9(var_0) {
     var_1 = _id_18B5(1);
   } else {
     var_1 = _id_17E2(1);
-
   }
   if(isDefined(var_1)) {
     foreach(var_3 in level.players) {}
@@ -637,7 +586,6 @@ _id_17F9(var_0) {
     thread _id_1903();
   } else {
     thread _id_1905();
-
   }
   foreach(var_3 in level.players) {
     var_3 allowjump(0);
@@ -661,7 +609,6 @@ _id_17F9(var_0) {
     var_3 uploadleaderboards();
   } else {
     wait 3;
-
   }
   thread _id_1900();
 
@@ -679,7 +626,6 @@ _id_17F9(var_0) {
 _id_18D2() {
   if(maps\_utility::_id_12C1() && level.players.size == 2) {
     self setplayerdata("round", "xuidTeammate", maps\_utility::_id_133A(self) getxuid());
-
   }
   self setplayerdata("round", "timePlayed", self._id_16C6["time"]);
   self setplayerdata("round", "kills", self._id_16C6["kills"]);
@@ -709,7 +655,6 @@ _id_18D2() {
 
     if(isDefined(self._id_1969)) {
       var_6 = self._id_1969;
-
     }
     self setplayerdata("round", "difficulty", var_6);
     self setplayerdata("round", "score", self._id_16C6["score"]);
@@ -734,7 +679,6 @@ _id_1900() {
     }
     if(isDefined(var_2._id_0D04)) {
       var_2 maps\_utility::_id_1902();
-
     }
     var_2 delete();
   }
@@ -762,7 +706,6 @@ _id_1903() {
 
   if(var_5 == "hijack" || var_5 == "fso") {
     var_5 = "delta";
-
   }
   maps\_utility::_id_1428("so_victory_" + var_5, undefined, 0, 1);
 }
@@ -787,7 +730,6 @@ _id_1905() {
 
   if(var_5 == "hijack" || var_5 == "fso") {
     var_5 = "delta";
-
   }
   maps\_utility::_id_1428("so_defeat_" + var_5, undefined, 0, 1);
 }
@@ -819,7 +761,6 @@ _id_190A(var_0, var_1, var_2) {
 
   for(var_4 = var_1; var_4 < var_2; var_4++) {
     var_3 = var_3 + int(max(0, int(var_0[var_4]) - 1));
-
   }
   return var_3;
 }
@@ -829,7 +770,6 @@ _id_190B(var_0, var_1) {
 
   if(var_2 > level._id_1889._id_190C.size) {
     var_2 = level._id_1889._id_190C.size;
-
   }
   var_3 = 0;
 
@@ -854,7 +794,6 @@ _id_190D(var_0) {
 
   if(issplitscreen() && level.ps3) {
     level._id_1337._id_190E = 0;
-
   }
   var_4 = tablelookup("sp/specOpsTable.csv", 1, level.script, 9);
 
@@ -873,13 +812,11 @@ _id_190D(var_0) {
 
       if(var_7) {
         level._id_1910 = 1;
-
       }
       var_8 = var_2._id_16C6["score"];
 
       if(var_7 || var_8 > var_6) {
         var_2 setlocalplayerprofiledata(var_4, var_8);
-
       }
       if(!var_7 && var_8 > var_6) {
         var_2._id_1911 = 1;
@@ -923,7 +860,6 @@ _id_190D(var_0) {
       var_16 = int(var_17) + 1;
     } else {
       var_16 = int(var_17);
-
     }
     var_2 thread maps\_specialops::_id_01DF("BRAG_RAGS");
     var_2 thread maps\_specialops::_id_01DF("TACTICIAN");
@@ -936,7 +872,6 @@ _id_190D(var_0) {
       var_25 = var_24 + var_23 * 100;
     } else {
       var_25 = var_24 + var_15 * 100;
-
     }
     var_2 setlocalplayerprofiledata("percentCompleteSO", var_25);
   }
@@ -1037,7 +972,6 @@ _id_1915() {
     self._id_1916 = _id_1919(self);
   } else {
     self._id_1916.alpha = 1;
-
   }
   wait 0.05;
   self._id_1916 fadeovertime(0.25);
@@ -1105,11 +1039,9 @@ _id_17D8() {
 _id_181F() {
   if(common_scripts\utility::flag("player_has_escaped")) {
     return 1;
-
   }
   if(_id_191C()) {
     return 0;
-
   }
   return 1;
 }
@@ -1117,7 +1049,6 @@ _id_181F() {
 _id_191C() {
   if(!isDefined(level._id_181E)) {
     return 0;
-
   }
   foreach(var_1 in level._id_181E) {
     if(self istouching(var_1)) {
@@ -1161,11 +1092,9 @@ _id_1822() {
 _id_191D() {
   if(common_scripts\utility::flag("special_op_terminated")) {
     return 0;
-
   }
   if(!_id_191C()) {
     return 0;
-
   }
   return 1;
 }
@@ -1176,7 +1105,7 @@ _id_17DF() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(isDefined(var_0._id_191E) && var_0._id_191E) {
@@ -1206,7 +1135,7 @@ _id_17DE() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     if(isDefined(var_0._id_191E) && var_0._id_191E) {
@@ -1259,7 +1188,6 @@ _id_1921(var_0) {
 _id_1924(var_0) {
   while(self istouching(var_0)) {
     wait 0.05;
-
   }
   maps\_utility::_id_13DE("so_escape_hint_active");
 }
@@ -1267,11 +1195,9 @@ _id_1924(var_0) {
 _id_1925() {
   if(!isalive(self)) {
     return 0;
-
   }
   if(common_scripts\utility::flag("special_op_terminated")) {
     return 0;
-
   }
   return maps\_utility::_id_1008("so_escape_hint_active");
 }
@@ -1279,11 +1205,9 @@ _id_1925() {
 _id_1873(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     wait(var_1);
-
   }
   if(isDefined(var_2) && var_2) {
     maps\_utility::_id_1926();
-
   }
   maps\_utility::_id_11F4(var_0);
 }
@@ -1353,7 +1277,6 @@ _id_184C() {
 
   if(self._id_192D) {
     _id_1850(self._id_184F, self._id_192E, self._id_184D);
-
   }
   while(isDefined(self._id_184B) && self._id_184B) {
     _id_1850(self._id_192E, self._id_1930, self._id_192F);
@@ -1364,39 +1287,30 @@ _id_184C() {
 _id_1849() {
   if(!isDefined(self)) {
     return 0;
-
   }
   if(!isDefined(self._id_184D)) {
     self._id_184D = 0.5;
-
   }
   if(!isDefined(self._id_184E)) {
     self._id_184E = 1.0;
-
   }
   if(!isDefined(self._id_184F)) {
     self._id_184F = 1.6;
-
   }
   if(!isDefined(self._id_184B)) {
     self._id_184B = 0;
-
   }
   if(!isDefined(self._id_192F)) {
     self._id_192F = 1.0;
-
   }
   if(!isDefined(self._id_192E)) {
     self._id_192E = 1.0;
-
   }
   if(!isDefined(self._id_1930)) {
     self._id_1930 = 1.15;
-
   }
   if(!isDefined(self._id_192D)) {
     self._id_192D = 1;
-
   }
   return 1;
 }
@@ -1420,24 +1334,24 @@ _id_1931() {
 }
 
 _id_17ED(var_0) {
-  setdvar("ui_dog_death", 0);
-  setdvar("ui_vehicle_death", 0);
-  setdvar("ui_destructible_death", 0);
-  setdvar("ui_barrel_death", 0);
-  setdvar("ui_grenade_death", 0);
-  setdvar("ui_time_failure", 0);
-  setdvar("ui_ff_death", 0);
-  setdvar("ui_juggernaut_death", 0);
-  setdvar("ui_bled_out", 0);
-  setdvar("ui_icon_partner", 0);
-  setdvar("ui_icon_obj", 0);
-  setdvar("ui_icon_obj_offscreen", 0);
-  setdvar("ui_icon_stars", 0);
-  setdvar("ui_icon_claymore", 0);
-  setdvar("ui_icon_stealth_stance", 0);
+  setDvar("ui_dog_death", 0);
+  setDvar("ui_vehicle_death", 0);
+  setDvar("ui_destructible_death", 0);
+  setDvar("ui_barrel_death", 0);
+  setDvar("ui_grenade_death", 0);
+  setDvar("ui_time_failure", 0);
+  setDvar("ui_ff_death", 0);
+  setDvar("ui_juggernaut_death", 0);
+  setDvar("ui_bled_out", 0);
+  setDvar("ui_icon_partner", 0);
+  setDvar("ui_icon_obj", 0);
+  setDvar("ui_icon_obj_offscreen", 0);
+  setDvar("ui_icon_stars", 0);
+  setDvar("ui_icon_claymore", 0);
+  setDvar("ui_icon_stealth_stance", 0);
 
   if(isDefined(var_0)) {
-    setdvar(var_0, 1);
+    setDvar(var_0, 1);
   }
 }
 
@@ -1498,11 +1412,9 @@ _id_1933() {
 _id_1934(var_0, var_1) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(!isDefined(var_1) || isDefined(var_1) && var_1 != "claymore") {
     return 0;
-
   }
   return 1;
 }
@@ -1510,17 +1422,14 @@ _id_1934(var_0, var_1) {
 _id_1935(var_0) {
   if(!maps\_utility::_id_12C1()) {
     return 0;
-
   }
   if(!isDefined(var_0)) {
     return 0;
-
   }
   var_1 = maps\_utility::_id_133A(self);
 
   if(var_1 != var_0) {
     return 0;
-
   }
   _id_1942("@DEADQUOTE_SO_FRIENDLY_FIRE_KILL", "ui_ff_death");
   return 1;
@@ -1529,11 +1438,9 @@ _id_1935(var_0) {
 _id_1936(var_0) {
   if(!isDefined(var_0) || var_0.classname != "worldspawn") {
     return 0;
-
   }
   if(!isDefined(self._id_1937) || !self._id_1937) {
     return 0;
-
   }
   _id_1942("@SCRIPT_RADIATION_DEATH");
   return 1;
@@ -1542,15 +1449,12 @@ _id_1936(var_0) {
 _id_1938(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(!isDefined(var_0.weapon)) {
     return 0;
-
   }
   if(var_0.weapon != "dog_bite") {
     return 0;
-
   }
   common_scripts\utility::flag_set("special_op_no_unlink");
   _id_1942(level._id_1939, "ui_dog_death");
@@ -1560,11 +1464,9 @@ _id_1938(var_0) {
 _id_193A(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(!isDefined(var_0._id_0A37)) {
     return 0;
-
   }
   var_1 = [];
   var_1[0] = "@DEADQUOTE_JUGGERNAUT_FLASHBANGS";
@@ -1578,25 +1480,20 @@ _id_193A(var_0) {
 _id_193B(var_0, var_1) {
   if(!isDefined(var_1)) {
     return 0;
-
   }
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_1 != "MOD_EXPLOSIVE") {
     return 0;
-
   }
   if(!isDefined(var_0.destructible_type)) {
     return 0;
-
   }
   if(issubstr(var_0.destructible_type, "vehicle")) {
     _id_1942("@SCRIPT_EXPLODING_VEHICLE_DEATH", "ui_vehicle_death");
   } else {
     _id_1942("@SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH", "ui_destructible_death");
-
   }
   return 1;
 }
@@ -1604,25 +1501,20 @@ _id_193B(var_0, var_1) {
 _id_193C(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0 != "MOD_EXPLOSIVE") {
     return 0;
-
   }
   if(!isDefined(level._id_193D)) {
     return 0;
-
   }
   if(gettime() != level._id_193D["time"]) {
     return 0;
-
   }
   var_1 = distance(self.origin, level._id_193D["origin"]);
 
   if(var_1 > level._id_193D["radius"]) {
     return 0;
-
   }
   _id_1942("@SCRIPT_EXPLODING_BARREL_DEATH", "ui_barrel_death");
   return 1;
@@ -1631,15 +1523,12 @@ _id_193C(var_0) {
 _id_193E(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0 != "MOD_SUICIDE") {
     return 0;
-
   }
   if(self._id_193F - gettime() > 3500.0) {
     return 0;
-
   }
   _id_1942("@SCRIPT_GRENADE_SUICIDE_COMBINED");
   return 1;
@@ -1648,11 +1537,9 @@ _id_193E(var_0) {
 _id_1940(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0 != "MOD_GRENADE" && var_0 != "MOD_GRENADE_SPLASH") {
     return 0;
-
   }
   _id_1942("@SCRIPT_GRENADE_DEATH", "ui_grenade_death");
   return 1;
@@ -1661,19 +1548,15 @@ _id_1940(var_0) {
 _id_1941(var_0, var_1) {
   if(!isDefined(var_1)) {
     return 0;
-
   }
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_1 != "MOD_CRUSH") {
     return 0;
-
   }
   if(var_0.code_classname != "script_vehicle") {
     return 0;
-
   }
   _id_1942("@DEADQUOTE_SO_RUN_OVER_BY_VEHICLE");
   return 1;
@@ -1699,7 +1582,7 @@ _id_0239() {
     if(!maps\_utility::_id_1A2C()) {
       continue;
     }
-    if(isDefined(var_3) && isplayer(var_3)) {
+    if(isDefined(var_3) && isPlayer(var_3)) {
       var_3 maps\_damagefeedback::updatedamagefeedback(self);
     }
   }
@@ -1717,7 +1600,6 @@ _id_023A() {
     foreach(var_2 in level.players) {
       if(isDefined(var_2._id_023C) && var_2._id_023C > 0) {
         var_0 = 1;
-
       }
       if(var_2 maps\_utility::_id_198F() < 2) {
         var_0 = 1;

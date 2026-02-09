@@ -394,7 +394,6 @@ _id_4A43(var_0) {
 
     if(var_4 < 0) {
       var_4 = 360 + var_4;
-
     }
     var_1 = var_1 + 0.000208333;
 
@@ -402,7 +401,6 @@ _id_4A43(var_0) {
       var_1 = 1.0 + var_1;
     } else if(var_1 > 1) {
       var_1 = var_1 - 1.0;
-
     }
     var_0 setanimtime(level._id_0C59["smoke_column"]["fire"], clamp(var_4 / 360.0, 0.0, 1.0));
     var_0 setanimtime(level._id_0C59["smoke_column"]["rot"], var_1);
@@ -593,7 +591,6 @@ _id_4A4A() {
 
   if(level.console && level.ps3 || !level.console) {
     sethalfresparticles(1);
-
   }
   var_19 waittillmatch("single anim", "breach_water");
   var_14.v["wake"] = ["tag_fx_wave", "tag_fx_wave1", "tag_fx_wave2", "tag_fx_wave3", "tag_fx_wave4", "tag_fx_wave5"];
@@ -682,7 +679,6 @@ _id_4A4A() {
 
   if(level.console && level.ps3 || !level.console) {
     sethalfresparticles(0);
-
   }
   level thread _id_4A38();
   level thread _id_4A39();
@@ -755,7 +751,6 @@ _id_4A4E() {
 _id_4A4F(var_0) {
   if(!isDefined(level._id_4A50)) {
     level._id_4A50 = 0;
-
   }
   var_1 = var_0 + (0, 0, 48);
   var_2 = var_1 - level.player.origin;
@@ -775,7 +770,6 @@ _id_4A4F(var_0) {
     if(level.console && level.ps3 || !level.console) {
       if(level._id_4A50 < 2) {
         sethalfresparticles(0);
-
       }
       level._id_4A50--;
     }
@@ -839,11 +833,9 @@ _id_4A52(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3 = var_2;
-
   }
   if(isDefined(var_1)) {
     var_4 = var_1;
-
   }
   for(;;) {
     var_5 = var_0 gettagorigin("tag_body");
@@ -853,11 +845,9 @@ _id_4A52(var_0, var_1, var_2) {
 
     if(var_3) {
       var_7 = maps\_ocean::_id_4A36(level._id_4A30["water_patch"], var_5);
-
     }
     if(isDefined(self)) {
       self moveto((var_5[0], var_5[1], var_7 + var_4), 0.12);
-
     }
     wait 0.12;
   }
@@ -894,7 +884,6 @@ _id_4A53() {
   if(level.console && level.ps3 || !level.console) {
     if(level._id_4A50 < 2) {
       sethalfresparticles(0);
-
     }
     level._id_4A50--;
   }
@@ -957,7 +946,6 @@ _id_4A58() {
 
   if(level.createfx_enabled) {
     return 0;
-
   }
   var_0 = (-40344.3, -23924.7, -235.465);
   var_1 = (288.103, 186.437, -6.33035);
@@ -1009,7 +997,6 @@ _id_4A5B(var_0, var_1) {
 
   if(var_1 == 3) {
     playFXOnTag(common_scripts\utility::getfx("ny_harbor_dvora_bloodsplat"), var_0, "tag_guy3");
-
   }
   wait 2;
   var_11 delete();
@@ -1025,7 +1012,7 @@ _id_4A5C() {
 }
 
 _id_4A5D() {
-  var_0 = getdvar("vision_set_current");
+  var_0 = getDvar("vision_set_current");
   visionsetnaked("generic_flash", 0.08);
   wait 0.17;
   visionsetnaked(var_0, 0.08);
@@ -1045,7 +1032,6 @@ _id_4A5E() {
   if(level.console && level.ps3 || !level.console) {
     if(level._id_4A50 < 2) {
       sethalfresparticles(0);
-
     }
     level._id_4A50--;
   }
@@ -1071,7 +1057,6 @@ _id_4A60() {
 
   if(isDefined(level._id_4975)) {
     playFXOnTag(common_scripts\utility::getfx("ny_dvora_finalexplosion_splash"), level._id_4975, "tag_origin");
-
   }
   thread _id_4A46(2.0);
 }
@@ -1088,7 +1073,6 @@ _id_4A61() {
 
     if(var_0 < 5) {
       var_2 = 1000;
-
     }
     var_8 = var_3 + var_4 * var_2 + var_5 * var_1 + var_7 * (-250 + 500 * randomfloat(1.0));
     var_9 = maps\_ocean::_id_4A36(level._id_4A30["water_patch"], var_8);
@@ -1638,11 +1622,10 @@ precachefx() {
   level._effect["thin_black_smoke_L"] = loadfx("smoke/thin_black_smoke_L");
   level._effect["light_c4_blink"] = loadfx("misc/light_c4_blink");
 
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
+  if(getdvarint("sm_enable") && getDvar("r_zfeather") != "0") {
     level._effect["spotlight"] = loadfx("misc/hunted_spotlight_model");
   } else {
     level._effect["spotlight"] = loadfx("misc/spotlight_large");
-
   }
   level._effect["heli_dlight_blue"] = loadfx("misc/aircraft_light_cockpit_blue");
   level._effect["ship_explosion"] = loadfx("explosions/tanker_explosion");
@@ -1651,7 +1634,6 @@ precachefx() {
 
   if(!isDefined(level._id_00AB)) {
     level._effect["zodiac_wake_geotrail"] = loadfx("treadfx/zodiac_wake_geotrail_harbor");
-
   }
   level._effect["zodiac_leftground"] = loadfx("misc/watersplash_large");
   level._effect["player_zodiac_bumpbig"] = loadfx("misc/watersplash_large");
@@ -1832,7 +1814,7 @@ _id_4A76() {
   wait 5;
 
   for(var_0 = 0; var_0 < 2; var_0++) {
-    var_1 = getdvar("vision_set_current");
+    var_1 = getDvar("vision_set_current");
     visionsetnaked("ny_harbor_torch_contrast", 0.1);
     wait(0.1 + randomfloat(0.2));
     visionsetnaked("generic_flash", 0);
@@ -1999,7 +1981,6 @@ _id_4A80() {
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
     var_4[var_5] = 0;
-
   }
   var_6 = [];
 
@@ -2042,7 +2023,6 @@ _id_4A82() {
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
     playFXOnTag(common_scripts\utility::getfx("ny_harbor_ship_sink_explo_post"), var_4[var_5], "tag_origin");
-
   }
   common_scripts\utility::flag_wait("russian_sub_spawned");
 
@@ -2069,7 +2049,6 @@ _id_4A83() {
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
     playFXOnTag(common_scripts\utility::getfx("water_bubbles_lg_lp"), var_4[var_5], "tag_origin");
-
   }
   common_scripts\utility::flag_wait("russian_sub_spawned");
 
@@ -2096,7 +2075,6 @@ _id_4A84() {
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
     playFXOnTag(common_scripts\utility::getfx("ny_harbor_ship_sink_post_smk"), var_4[var_5], "tag_origin");
-
   }
   common_scripts\utility::flag_wait("russian_sub_spawned");
 
@@ -2128,7 +2106,7 @@ _id_4A85(var_0, var_1) {
 
 _id_4A86() {
   level.player _id_4AD4(0);
-  var_0 = getdvar("vision_set_current");
+  var_0 = getDvar("vision_set_current");
   visionsetnaked("ny_harbor_undrwtr_explo_flash_strong", 0.1);
   wait 0.1;
   visionsetnaked(var_0, 0.15);
@@ -2261,7 +2239,7 @@ _id_4A93() {
 _id_4A95() {
   level.player _id_4AD4(0);
   level.player _id_4AD6(0);
-  var_0 = getdvar("vision_set_current");
+  var_0 = getDvar("vision_set_current");
   setblur(10, 0.5);
   visionsetnaked("ny_harbor_torch_contrast", 0.05);
   wait 0.06;
@@ -2334,7 +2312,7 @@ _id_4A9A() {
   wait 0.2;
   level.player _id_4AD4(0);
   level.player _id_4AD6(0);
-  var_0 = getdvar("vision_set_current");
+  var_0 = getDvar("vision_set_current");
   wait 0.5;
   visionsetnaked("ny_harbor_player_surfacing", 0.75);
   level.player sethuddynlight(500, (1, 1, 1));
@@ -2641,7 +2619,6 @@ _id_4AB9(var_0, var_1) {
 
   if(isDefined(var_3)) {
     playFXOnTag(var_3, var_2, "tag_origin");
-
   }
   var_4 = 1;
 
@@ -2738,7 +2715,6 @@ _id_4ABF(var_0) {
 
   if(isDefined(var_1)) {
     var_1 linkto(self, "tag_collision", (0, 0, 0), (0, -90, 0));
-
   }
   maps\_audio::aud_send_msg("explode_wave", var_1);
   self._id_1032 = "explosion_wave";
@@ -2748,7 +2724,6 @@ _id_4ABF(var_0) {
     thread _id_4AC1();
   } else {
     thread _id_4AC0();
-
   }
   maps\_anim::_id_1246(self, "wave");
   self hide();
@@ -2810,7 +2785,6 @@ _id_4AC5() {
 
     if(var_0 maps\_utility::_id_133C("in_poison_volume")) {} else {
       var_0 maps\_utility::_id_1402("in_poison_volume");
-
     }
     if(isDefined(var_0) && distancesquared(var_0.origin, level.player.origin) < 9250000) {
       if(var_0 maps\_utility::_id_1008("in_poison_volume")) {
@@ -2833,11 +2807,10 @@ _id_4AC6(var_0) {
         wait(max(1 - var_1 / 120, 0.1));
       } else {
         wait 0.15;
-
       }
       var_2 = var_0.script_fxid;
 
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         var_1 = distance(self getvelocity(), (0, 0, 0));
 
         if(var_1 < 5) {
@@ -2965,7 +2938,6 @@ _id_4ACA() {
 
   if(common_scripts\utility::flag_exist("switch_chinook") == 0) {
     common_scripts\utility::flag_init("switch_chinook");
-
   }
   common_scripts\utility::flag_wait("switch_chinook");
   var_0 = 0;
@@ -2999,7 +2971,6 @@ _id_4ACE() {
 
   if(common_scripts\utility::flag_exist("switch_chinook") == 0) {
     common_scripts\utility::flag_init("switch_chinook");
-
   }
   common_scripts\utility::flag_wait("switch_chinook");
   setsaveddvar("sm_spotlimit", 1);

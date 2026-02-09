@@ -223,7 +223,7 @@ gettargetlist() {
 }
 
 stingerusageloop() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("death");

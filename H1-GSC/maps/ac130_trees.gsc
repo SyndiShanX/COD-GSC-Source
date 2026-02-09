@@ -67,7 +67,7 @@ ac130_tree_think() {
   for(;;) {
     self.ac130_hitbox waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       var_5 = var_1 getcurrentweapon();
 
       switch (tolower(var_5)) {

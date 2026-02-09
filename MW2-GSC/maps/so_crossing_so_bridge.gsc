@@ -3,20 +3,16 @@
  * Script: maps\so_crossing_so_bridge.gsc
 ********************************************************/
 
-// ---------------------------------------------------------------------------------
-//	Special Ops Script Structure
-// ---------------------------------------------------------------------------------
-#include common_scripts\utility;
+// --------------------------------------------------------------------------------- //	Special Ops Script Structure
+// --------------------------------------------------------------------------------- #include common_scripts\utility;
 #include maps\_utility;
 #include maps\_vehicle;
 #include maps\_anim;
 #include maps\so_bridge_code;
 #include maps\_specialops;
 
-// ---------------------------------------------------------------------------------
-//	Init
-// ---------------------------------------------------------------------------------
-main() {
+// --------------------------------------------------------------------------------- //	Init
+// --------------------------------------------------------------------------------- main() {
   default_start(::start_so_crossing_timed);
   add_start("so_crossing", ::start_so_crossing_timed, "Special Op: Crossing");
 
@@ -35,10 +31,8 @@ main() {
   thread maps\so_bridge_amb::main();
 }
 
-// ---------------------------------------------------------------------------------
-//	Challenge Initializations
-// ---------------------------------------------------------------------------------
-start_so_crossing_timed() {
+// --------------------------------------------------------------------------------- //	Challenge Initializations
+// --------------------------------------------------------------------------------- start_so_crossing_timed() {
   flag_init("so_obj_crossing_start");
   flag_init("so_obj_crossing_complete");
 
@@ -121,12 +115,8 @@ remove_enemies_with_weapons(class, enemies, remove_count) {
   }
 }
 
-// ---------------------------------------------------------------------------------
-//	Enable/Disable events
-// ---------------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------------
-enable_uav_resources() {
+// --------------------------------------------------------------------------------- //	Enable/Disable events
+// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- enable_uav_resources() {
   array_thread(getvehiclenodearray("uav_sound", "script_noteworthy"), maps\_ucav::plane_sound_node);
   array_thread(getvehiclenodearray("fire_missile", "script_noteworthy"), maps\_ucav::fire_missile_node);
 }
@@ -139,20 +129,17 @@ enable_ambient_uavs() {
   thread delayThread(20, ::spawn_vehicle_from_targetname_and_drive, "ucav_flyover_03");
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_bridge() {
+// --------------------------------------------------------------------------------- enable_rappel_bridge() {
   flag_set("so_rappel_bridge");
   array_spawn_function_noteworthy("rappel_bridge", ::ai_rappel_think);
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_bridge_seek() {
+// --------------------------------------------------------------------------------- enable_rappel_bridge_seek() {
   flag_set("so_rappel_bridge_seek");
   array_spawn_function_noteworthy("rappel_bridge_seek", ::ai_rappel_think, true);
 }
 
-// ---------------------------------------------------------------------------------
-// Must be a thread due to the waittill
+// --------------------------------------------------------------------------------- // Must be a thread due to the waittill
 enable_bridge_collapse() {
   flag_set("so_bridge_collapse");
 
@@ -163,7 +150,7 @@ enable_bridge_collapse() {
 
   trigger = GetEnt("bridge_collapse", "targetname");
 
-  if(GetDvar("test_bridge_collapse") == "1") {
+  if(getDvar("test_bridge_collapse") == "1") {
     trigger thread notify_delay("trigger", 10);
   }
 
@@ -197,29 +184,24 @@ enable_bridge_collapse() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-enable_missile_attack_taxi() {
+// --------------------------------------------------------------------------------- enable_missile_attack_taxi() {
   flag_set("so_missile_attack_taxi");
   thread missile_taxi_moves();
 }
 
-// ---------------------------------------------------------------------------------
-enable_attack_heli() {
+// --------------------------------------------------------------------------------- enable_attack_heli() {
   flag_set("so_attack_heli");
   thread attack_heli();
 }
 
-// ---------------------------------------------------------------------------------
-enable_troop_flood() {
+// --------------------------------------------------------------------------------- enable_troop_flood() {
   flag_set("so_flood_spawner");
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_heli_close() {
+// --------------------------------------------------------------------------------- enable_rappel_heli_close() {
   flag_set("so_rappel_heli_close");
 }
 
-// ---------------------------------------------------------------------------------
-enable_rappel_heli_far() {
+// --------------------------------------------------------------------------------- enable_rappel_heli_far() {
   flag_set("so_rappel_heli_far");
 }

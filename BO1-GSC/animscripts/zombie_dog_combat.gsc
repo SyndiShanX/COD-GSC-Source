@@ -14,19 +14,20 @@ main() {
     combatIdle();
     return;
   }
-  assert(IsPlayer(self.enemy));
+  assert(isPlayer(self.enemy));
   self notify("dog_combat");
-  if(IsPlayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     self meleeBiteAttackPlayer(self.enemy);
   }
 }
-
 handleMeleeBiteAttackNoteTracks(note) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return;
-  assert(IsPlayer(self.enemy));
-  if(!IsAlive(self.enemy))
+  }
+  assert(isPlayer(self.enemy));
+  if(!IsAlive(self.enemy)) {
     return;
+  }
   player = self.enemy;
   switch (note) {
     case "dog_melee": {
@@ -44,7 +45,7 @@ handleMeleeBiteAttackNoteTracks(note) {
       }
       hitEnt = self melee(anglesToForward(self.angles));
       if(isDefined(hitEnt)) {
-        if(IsPlayer(hitEnt)) {
+        if(isPlayer(hitEnt)) {
           hitEnt ShellShock("dog_bite", 0.35);
         }
       } else {
@@ -64,7 +65,6 @@ handleMeleeBiteAttackNoteTracks(note) {
     break;
   }
 }
-
 orientToPlayerDeadReckoning(player, time_till_bite) {
   enemy_attack_current_origin = player.origin;
   enemy_attack_current_time = GetTime();
@@ -78,7 +78,6 @@ orientToPlayerDeadReckoning(player, time_till_bite) {
   }
   self OrientMode("face point", enemy_predicted_position);
 }
-
 meleeBiteAttackPlayer(player) {
   attackRangeBuffer = 30;
   meleeRange = self.meleeAttackDist + attackRangeBuffer;
@@ -127,37 +126,35 @@ meleeBiteAttackPlayer(player) {
   self.safeToChangeScript = true;
   self AnimMode("none");
 }
-
 doMeleeAfterWait(time) {
   self endon("death");
   wait(time);
   hitEnt = self melee();
   if(isDefined(hitEnt)) {
-    if(isplayer(hitEnt))
+    if(isPlayer(hitEnt)) {
       hitEnt shellshock("dog_bite", 0.35);
+    }
   }
 }
-
 dog_cant_kill_in_one_hit(player) {
   return true;
   if(isDefined(player.dogs_dont_instant_kill)) {
     assertex(player.dogs_dont_instant_kill, "Dont set player.dogs_dont_instant_kill to false, set to undefined");
     return true;
   }
-  if(getTime() - level.lastDogMeleePlayerTime > 8000)
+  if(getTime() - level.lastDogMeleePlayerTime > 8000) {
     level.dogMeleePlayerCounter = 0;
-  return level.dogMeleePlayerCounter < level.dog_hits_before_kill && player.health > 25;
+  }
+  return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
+    player.health > 25;
 }
-
 shouldWaitInCombatIdle() {
   assert(isDefined(self.enemy) && IsAlive(self.enemy));
   return isDefined(self.enemy.dogAttackAllowTime) && (GetTime() < self.enemy.dogAttackAllowTime);
 }
-
 setNextDogAttackAllowTime(time) {
   self.dogAttackAllowTime = GetTime() + time;
 }
-
 combatIdle() {
   self OrientMode("face enemy");
   self ClearAnim(%root, 0.1);
@@ -168,12 +165,11 @@ combatIdle() {
   self animscripts\zombie_shared::DoNoteTracks("combat_idle");
   self notify("combatIdleEnd");
 }
-
 checkEndCombat(meleeRange) {
   if(!isDefined(self.enemy)) {
     return false;
   }
-  distToTargetSq = distanceSquared(self.origin, self.enemy.origin);
+  distToTargetSq = DistanceSquared(self.origin, self.enemy.origin);
   melee_origin = (self.origin[0], self.origin[1], self.origin[2] + 65);
   enemy_origin = (self.enemy.origin[0], self.enemy.origin[1], self.enemy.origin[2] + 32);
   if(!BulletTracePassed(melee_origin, enemy_origin, false, self)) {
@@ -181,7 +177,6 @@ checkEndCombat(meleeRange) {
   }
   return (distToTargetSq > meleeRange * meleeRange);
 }
-
 use_low_attack(player) {
   height_diff = self.enemy_attack_start_origin[2] - self.origin[2];
   low_enough = 30.0;
@@ -195,7 +190,6 @@ use_low_attack(player) {
   }
   return false;
 }
-
 prepareAttackPlayer(player) {
   level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
   distanceToTarget = distance(self.origin, self.enemy.origin);

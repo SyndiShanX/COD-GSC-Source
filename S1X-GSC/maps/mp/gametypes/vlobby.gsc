@@ -10,11 +10,11 @@
 #include maps\mp\agents\_scriptedAgents;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
-  assert(getdvar("mapname") == getdvar("virtualLobbyMap"));
+  assert(getDvar("mapname") == getDvar("virtualLobbyMap"));
 
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();

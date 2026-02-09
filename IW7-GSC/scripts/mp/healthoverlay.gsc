@@ -78,7 +78,7 @@ func_D367() {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -189,7 +189,7 @@ func_D368(var_0) {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

@@ -264,7 +264,7 @@ function_f2d20a04(params) {
           }
         }
 
-        if(isDefined(self.enemy) && isplayer(self.enemy)) {
+        if(isDefined(self.enemy) && isPlayer(self.enemy)) {
           wait randomfloatrange(self.settings.var_77e64d20, self.settings.var_d4e8eb34);
           continue;
         }
@@ -275,7 +275,7 @@ function_f2d20a04(params) {
       self setturretspinning(0);
 
       if(isDefined(self.enemy) && isalive(self.enemy) && self cansee(self.enemy)) {
-        if(isplayer(self.enemy)) {
+        if(isPlayer(self.enemy)) {
           wait randomfloatrange(0.5, 1.3);
         } else {
           wait randomfloatrange(0.5, 1.3) * 2;

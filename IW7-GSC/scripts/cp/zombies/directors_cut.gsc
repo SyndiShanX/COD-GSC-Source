@@ -268,7 +268,7 @@ mark_talisman_possession(var_0) {
   }
 
   var_0 setplayerdata("cp", "haveItems", var_1, 1);
-  var_2 = getdvar("ui_mapname");
+  var_2 = getDvar("ui_mapname");
   switch (var_2) {
     case "cp_zmb":
       var_0 scripts\cp\cp_merits::processmerit("mt_tali_1");
@@ -309,7 +309,7 @@ allow_max_pap_from_start() {
 }
 
 insert_fuses_into_pap_machine() {
-  var_0 = getdvar("ui_mapname");
+  var_0 = getDvar("ui_mapname");
   switch (var_0) {
     case "cp_zmb":
       var_1 = getent("pap_machine", "targetname");
@@ -699,7 +699,7 @@ talisman_damage_monitor(var_0) {
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
-    if(isplayer(var_2) && isDefined(var_10) && var_10 == "iw7_cpknifethrow_mp") {
+    if(isPlayer(var_2) && isDefined(var_10) && var_10 == "iw7_cpknifethrow_mp") {
       break;
     }
   }
@@ -723,7 +723,7 @@ disco_talisman_damage_monitor(var_0) {
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_11 = var_2;
       if(directors_cut_activated_for(var_11) && !scripts\engine\utility::istrue(var_11.got_disco_talisman)) {
         var_0 hidefromplayer(var_11);
@@ -942,7 +942,7 @@ flying_talisman_damage_monitor(var_0, var_1) {
   for(;;) {
     var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     var_0.health = 999999;
-    if(isplayer(var_3) && var_3 == var_1 && directors_cut_activated_for(var_1)) {
+    if(isPlayer(var_3) && var_3 == var_1 && directors_cut_activated_for(var_1)) {
       playFX(level._effect["sb_quest_item_pickup"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles), var_1);
       var_0 hidefromplayer(var_1);
       var_1 setplayerdata("cp", "dcq", "cp_final", 1);

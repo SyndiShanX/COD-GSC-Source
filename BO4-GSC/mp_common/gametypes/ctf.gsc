@@ -913,7 +913,7 @@ getotherflag(flag) {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     for(index = 0; index < level.flags.size; index++) {
       flagteam = "invalidTeam";
       inflagradius = 0;
@@ -925,7 +925,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
         flagorigin = level.flags[index].carrier.origin;
         iscarried = 1;
 
-        if(isplayer(attacker) && attacker.pers[# "team"] != self.pers[# "team"]) {
+        if(isPlayer(attacker) && attacker.pers[# "team"] != self.pers[# "team"]) {
           if(isDefined(level.flags[index].carrier.attackerdata)) {
             if(level.flags[index].carrier != attacker) {
               if(isDefined(level.flags[index].carrier.attackerdata[self.clientid])) {
@@ -963,7 +963,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
         }
       }
 
-      if(inflagradius && isplayer(attacker) && attacker.pers[# "team"] != self.pers[# "team"]) {
+      if(inflagradius && isPlayer(attacker) && attacker.pers[# "team"] != self.pers[# "team"]) {
         attacker challenges::function_82bb78f7(weapon);
         attacker.pers[# "objectiveekia"]++;
         attacker.objectiveekia = attacker.pers[# "objectiveekia"];
@@ -1019,7 +1019,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     return;
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && attacker.pers[# "team"] != self.pers[# "team"]) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker.pers[# "team"] != self.pers[# "team"]) {
     if(isDefined(self.flagcarried)) {
       for(index = 0; index < level.flags.size; index++) {
         currentflag = level.flags[index];
@@ -1163,7 +1163,7 @@ function_a5f40b8e(player) {
     end = (flag.origin[0], flag.origin[1], flag.origin[2] + 5);
   }
 
-  if(isDefined(self.carrier) && isplayer(self.carrier)) {
+  if(isDefined(self.carrier) && isPlayer(self.carrier)) {
     end = self.carrier getEye();
   }
 

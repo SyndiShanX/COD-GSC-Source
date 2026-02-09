@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -88,7 +88,7 @@ onprecachegametype() {
 onstartgametype() {
   if(game["roundsPlayed"] == 2) {
     game["status"] = "overtime";
-    setdvar("ui_overtime", 1);
+    setDvar("ui_overtime", 1);
   }
 
   if(scripts\mp\utility::inovertime()) {
@@ -644,11 +644,11 @@ func_12E43(var_0) {
   level endon("bomb_defused" + var_0.label);
   level endon("bomb_exploded" + var_0.label);
   var_1 = var_0.var_13845 * 1000 + gettime();
-  setdvar("ui_bombtimer" + var_0.label, var_1);
+  setDvar("ui_bombtimer" + var_0.label, var_1);
   level waittill("host_migration_begin");
   var_2 = scripts\mp\hostmigration::waittillhostmigrationdone();
   if(var_2 > 0) {
-    setdvar("ui_bombtimer" + var_0.label, var_1 + var_2);
+    setDvar("ui_bombtimer" + var_0.label, var_1 + var_2);
   }
 }
 

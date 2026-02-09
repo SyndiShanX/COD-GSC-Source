@@ -61,7 +61,7 @@ spawn_ally(var_0, var_1) {
 
   var_3 = var_0;
 
-  if(var_0 == "rorke" && getdvar("intro_mask") != "0" && isDefined(level.start_point) && level.start_point != "default" && level.start_point != "intro" && level.start_point != "e3")
+  if(var_0 == "rorke" && getDvar("intro_mask") != "0" && isDefined(level.start_point) && level.start_point != "default" && level.start_point != "intro" && level.start_point != "e3")
     var_3 = "rorke_mask";
 
   var_4 = spawn_targetname_at_struct_targetname(var_3, var_2);
@@ -158,7 +158,7 @@ cornered_falling_death() {
   wait 0.5;
   var_0 show();
   wait 3.0;
-  setdvar("ui_deadquote", &"CORNERED_FALL_FAIL");
+  setDvar("ui_deadquote", &"CORNERED_FALL_FAIL");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -258,7 +258,7 @@ death_func() {
 
   level.enemies_above_killed++;
 
-  if(isDefined(var_2) && isplayer(var_2))
+  if(isDefined(var_2) && isPlayer(var_2))
     level notify("player_shot_above_enemy");
 
   if(self.script_noteworthy == "p1_junction") {
@@ -949,7 +949,7 @@ ally_can_see_any_enemy() {
 }
 
 ally_stealth_kill(var_0, var_1, var_2) {
-  if(getdvar("useTagFlashSilenced") == "1") {
+  if(getDvar("useTagFlashSilenced") == "1") {
     ally_to_magicbullet(var_0, var_1, var_2);
     return;
   }
@@ -1623,7 +1623,7 @@ cleanup_outside_ents_on_entry() {
 }
 
 is_e3() {
-  return getdvar("e3", "0") == "1";
+  return getDvar("e3", "0") == "1";
 }
 
 head_swap(var_0) {

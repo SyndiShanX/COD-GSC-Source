@@ -1045,7 +1045,7 @@ earnKillstreak(streakName, streakVal) {
 }
 
 getKillstreakModules(owner, streakName) {
-  Assert(IsPlayer(owner) && isDefined(owner.killStreakModules));
+  Assert(isPlayer(owner) && isDefined(owner.killStreakModules));
 
   modules = [];
 
@@ -1384,7 +1384,7 @@ getStreakModuleBaseKillstreak(moduleName) {
 }
 
 getAllStreakModulesCost(streakName) {
-  Assert(IsPlayer(self) && isDefined(self.killStreakModules));
+  Assert(isPlayer(self) && isDefined(self.killStreakModules));
 
   cost = 0;
 
@@ -1403,11 +1403,11 @@ getAllStreakModulesCost(streakName) {
 getStreakCost(streakName) {
   cost = int(getKillstreakKills(streakName));
 
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     cost += getAllStreakModulesCost(streakName);
   }
 
-  if(isDefined(self) && IsPlayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     if(cost > 100 && self _hasPerk("specialty_hardline")) {
       cost -= 100;
     }
@@ -1866,8 +1866,7 @@ canShuffleKillstreaks() {
 
 canShuffleWithKillstreakWeapon() {
   curWeapon = self GetCurrentWeapon();
-  return (!isKillstreakWeapon(curWeapon) ||
-    (isKillstreakWeapon(curWeapon) && self isJuggernaut()));
+  return (!isKillstreakWeapon(curWeapon) || (isKillstreakWeapon(curWeapon) && self isJuggernaut()));
 }
 
 streakNotifyTracker() {
@@ -2084,10 +2083,7 @@ pc_watchStreakUse() {
         if(isDefined(self.killstreakIndexWeapon)) {
           killstreakWeapon = getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName, self.pers["killstreaks"][self.killstreakIndexWeapon].modules);
 
-          if(newWeapon == killstreakWeapon ||
-            newWeapon == "none" ||
-            (killstreakWeapon == "killstreak_uav_mp" && newWeapon == "uav_remote_mp") ||
-            (killstreakWeapon == "killstreak_recreation_mp" && newWeapon == "uav_remote_mp")) {
+          if(newWeapon == killstreakWeapon || newWeapon == "none" || (killstreakWeapon == "killstreak_uav_mp" && newWeapon == "uav_remote_mp") || (killstreakWeapon == "killstreak_recreation_mp" && newWeapon == "uav_remote_mp")) {
             continue;
           }
           break;

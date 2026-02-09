@@ -180,7 +180,7 @@ function_abf0bf8c() {
   while(true) {
     s_waitresult = self.var_740e1e0e waittill(#"damage");
 
-    if(isplayer(s_waitresult.attacker) && !zm_loadout::is_offhand_weapon(s_waitresult.weapon)) {
+    if(isPlayer(s_waitresult.attacker) && !zm_loadout::is_offhand_weapon(s_waitresult.weapon)) {
       if(isDefined(s_waitresult.position) && distancesquared(s_waitresult.position, self.origin) < 100) {
         level.var_d5f74526 notify(#"hash_5a5c7c802e5f3037", {
           #var_c8407ea2: self.script_int, #var_740e1e0e: self.var_740e1e0e, #attacker: s_waitresult.attacker
@@ -314,7 +314,7 @@ function_6941c919() {
     s_waitresult = self.t_damage waittill(#"damage");
     w_base_weapon = zm_weapons::get_base_weapon(s_waitresult.weapon);
 
-    if(isplayer(s_waitresult.attacker)) {
+    if(isPlayer(s_waitresult.attacker)) {
       if(w_base_weapon === level.w_bowie_knife) {
         level.var_d5f74526 notify(#"hash_15ccd1fdda38284a", {
           #var_c8407ea2: self.script_int, #attacker: s_waitresult.attacker
@@ -459,7 +459,7 @@ function_123eb361(var_88206a50, ent) {
 
   s_inbetween = struct::get(var_88206a50.target, "targetname");
   var_51e4bd8d = getent(s_inbetween.target, "targetname");
-  return isDefined(ent) && (isplayer(ent.attacker) || isplayer(ent.damageinflictor)) && ent istouching(var_51e4bd8d);
+  return isDefined(ent) && (isPlayer(ent.attacker) || isPlayer(ent.damageinflictor)) && ent istouching(var_51e4bd8d);
 }
 
 function_9bb74431(var_f0e6c7a2, ent) {

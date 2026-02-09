@@ -28,7 +28,7 @@ watch_for_skull_death() {
   self endon("end_this_thread_for_" + self.object_num);
   for(;;) {
     self.model waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 
@@ -2007,7 +2007,7 @@ death_floor_player_monitor(var_0) {
   var_0 endon("stop_death_floor");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::teleport_into_arcade_console(var_1);
       var_2 = scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::get_active_moving_target_based_on_priority();
       if(isDefined(var_2)) {
@@ -2225,7 +2225,7 @@ watch_for_damage_on_struct() {
   level endon("game_ended");
   for(;;) {
     self.model waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 
@@ -2520,7 +2520,7 @@ medusa_watch_for_player_melee(var_0) {
   self setCanDamage(1);
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
 
@@ -2623,7 +2623,7 @@ activatefiguredamage(var_0, var_1, var_2) {
   var_2 endon("end_thread_for_" + var_2.model);
   for(;;) {
     var_2 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
-    if(!isplayer(var_4)) {
+    if(!isPlayer(var_4)) {
       continue;
     }
 

@@ -122,7 +122,7 @@ function __main__() {
 
 function debugdvars() {
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   while(true) {
     if(getdvarint("") > 0) {
@@ -370,7 +370,7 @@ function goto_current_colorindex() {
   }
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
-    if(isalive(node.color_user) && !isplayer(node.color_user)) {
+    if(isalive(node.color_user) && !isPlayer(node.color_user)) {
       continue;
     }
     self thread ai_sets_goal_with_delay(node);

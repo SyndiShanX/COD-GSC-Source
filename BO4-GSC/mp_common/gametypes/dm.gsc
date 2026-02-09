@@ -102,7 +102,7 @@ onspawnplayer(predictedspawn) {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || self == attacker) {
+  if(!isPlayer(attacker) || self == attacker) {
     return;
   }
 

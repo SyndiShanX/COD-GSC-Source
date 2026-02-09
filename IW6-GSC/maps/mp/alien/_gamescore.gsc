@@ -194,7 +194,6 @@ calculate_encounter_scores(players_list, score_component_name_list) {
 }
 
 calculate_player_encounter_scores(player, score_component_name_list) {
-  /#	
   maps\mp\alien\_debug::debug_print_encounter_performance(player);
 
   row_number = 1;
@@ -646,7 +645,7 @@ give_attacker_kill_rewards(attacker, sHitloc) {
       }
       if(attacker_struct.damage >= min_assist_damage) {
         if(isDefined(attacker_struct.player) && attacker_struct.player != attacker) {
-          assertex(isplayer(attacker_struct.player), "Tried to give non-player rewards");
+          assertex(isPlayer(attacker_struct.player), "Tried to give non-player rewards");
 
           attacker_struct.player maps\mp\alien\_persistence::eog_player_update_stat("assists", 1);
 

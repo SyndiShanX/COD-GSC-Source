@@ -10,7 +10,7 @@
 #include clientscripts\mp\zm_tomb;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   level._effect["whirlwind"] = loadfx("weapon/zmb_staff/fx_zmb_staff_air_ug_impact_miss");

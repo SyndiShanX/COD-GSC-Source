@@ -219,9 +219,9 @@ main() {
   maps\mp\zm_buried_sq::precache_sq();
   level.level_specific_stats_init = ::init_buried_stats;
   maps\mp\zombies\_load::main();
-  setdvar("zombiemode_path_minz_bias", 13);
+  setDvar("zombiemode_path_minz_bias", 13);
 
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   maps\mp\teams\_teamset_cdc::level_init();
@@ -331,10 +331,10 @@ main() {
       level.zombie_ai_limit = 20;
 
     level.claymores_max_per_player = level.claymores_max_per_player / 2;
-    setdvar("fx_marks_draw", 0);
-    setdvar("disable_rope", 1);
-    setdvar("cg_disableplayernames", 1);
-    setdvar("disableLookAtEntityLogic", 1);
+    setDvar("fx_marks_draw", 0);
+    setDvar("disable_rope", 1);
+    setDvar("cg_disableplayernames", 1);
+    setDvar("disableLookAtEntityLogic", 1);
   } else
     level.zombie_ai_limit = 24;
 
@@ -630,7 +630,6 @@ zombie_buried_devgui(cmd) {
     default:
       break;
   }
-
 }
 
 pick_up(thing) {
@@ -659,7 +658,6 @@ pick_up(thing) {
     }
     level notify("player_purchase_" + thing, player);
   }
-
 }
 
 givecustomloadout(takeallweapons, alreadyspawned) {
@@ -736,7 +734,7 @@ give_personality_characters() {
   self.favorite_wall_weapons_list = [];
   self.talks_in_danger = 0;
 
-  if(getdvar(#"_id_40772CF1") != "")
+  if(getDvar(#"_id_40772CF1") != "")
     self.characterindex = getdvarint(#"_id_40772CF1");
 
   switch (self.characterindex) {
@@ -1026,7 +1024,7 @@ init_level_specific_wall_buy_fx() {
 }
 
 custom_add_weapons() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", &"ZOMBIE_WEAPON_M1911", 50, "", "", undefined);
   add_zombie_weapon("rnma_zm", "rnma_upgraded_zm", &"ZOMBIE_WEAPON_RNMA", 50, "pickup_six_shooter", "", undefined, 1);
   add_zombie_weapon("judge_zm", "judge_upgraded_zm", &"ZOMBIE_WEAPON_JUDGE", 50, "wpck_judge", "", undefined, 1);
@@ -1076,7 +1074,7 @@ less_than_normal() {
 }
 
 include_weapons() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("claymore_zm", 0);
@@ -1603,7 +1601,7 @@ buried_custom_zombie_gibbed_vo() {
 
   if(isDefined(self.a.gib_ref) && isalive(self)) {
     if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "right_leg" || self.a.gib_ref == "left_leg") {
-      if(isDefined(self.attacker) && isplayer(self.attacker)) {
+      if(isDefined(self.attacker) && isPlayer(self.attacker)) {
         if(isDefined(self.attacker.crawler_created_vo_cooldown) && self.attacker.crawler_created_vo_cooldown) {
           return;
         }
@@ -1616,7 +1614,7 @@ buried_custom_zombie_gibbed_vo() {
       }
     } else if(isDefined(self.a.gib_ref) && (self.a.gib_ref == "right_arm" || self.a.gib_ref == "left_arm")) {
       if(self.has_legs && isalive(self)) {
-        if(isDefined(self.attacker) && isplayer(self.attacker)) {
+        if(isDefined(self.attacker) && isPlayer(self.attacker)) {
           rand = randomintrange(0, 100);
 
           if(rand < 7)
@@ -1851,7 +1849,7 @@ sloth_first_encounter_vo() {
   while(true) {
     trigger waittill("trigger", ent);
 
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       if(ent is_player_looking_at(level.sloth.origin, 0.25, 0)) {
         ent thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "sloth_encounter");
         trigger delete();
@@ -1923,7 +1921,7 @@ collapsing_catwalk_init() {
   while(true) {
     trig waittill("trigger", who);
 
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       if(!(isDefined(who.on_platform) && who.on_platform)) {
         trig thread collapsing_platform_watcher(who, platform);
         return;
@@ -2027,7 +2025,7 @@ player_force_from_prone() {
   while(true) {
     self waittill("trigger", who);
 
-    if(isplayer(who) && who getstance() == "prone")
+    if(isPlayer(who) && who getstance() == "prone")
       who setstance("crouch");
 
     wait 0.1;

@@ -6,7 +6,7 @@
 stealth_default() {
   stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   switch (self.team) {
@@ -29,7 +29,7 @@ stealth_set_default_stealth_function(var_0, var_1) {
 }
 
 stealth_plugin_basic(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     maps\_stealth_visibility_friendly::stealth_visibility_friendly_main();
     return;
   }

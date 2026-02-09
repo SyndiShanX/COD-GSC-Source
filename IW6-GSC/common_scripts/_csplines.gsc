@@ -213,7 +213,6 @@ csplineSeg_calcTopSpeedByDeriving(csplineSeg, segLength) {
     speedSq = (a * x * x * x * x) + (b * x * x * X) + (c * x * x) + (d * x) + e;
     if(speedSq > maxSpeedSq)
       maxSpeedSq = speedSq;
-
   }
 
   return (sqrt(maxSpeedSq) / segLength);
@@ -593,7 +592,6 @@ cspline_adjustTime(csPath, newTime) {
 
     thisTime = csPath.Segments[i].endtime - csPath.Segments[i - 1].endtime;
     AssertEx(abs(thisTime - (thisOldTime / R)) < 0.001, "cspline_adjustTime math failure. " + thisTime + " != " + (thisOldTime / R));
-
   }
   i = csPath.Segments.size - 1;
   csPath.Segments[i].speedStart *= R;
@@ -676,20 +674,17 @@ cspline_test(csPath, timeSecs) {
         thread draw_line_for_time(hsArray[i]["pos"] - (size, 0, 0), hsArray[i]["pos"] + (size, 0, 0), 1, 0, 0, 1);
         thread draw_line_for_time(hsArray[i]["pos"] - (0, size, 0), hsArray[i]["pos"] + (0, size, 0), 1, 0, 0, 1);
         thread draw_line_for_time(hsArray[i]["pos"] - (0, 0, size), hsArray[i]["pos"] + (0, 0, size), 1, 0, 0, 1);
-
       }
       for(i = 1; i < hsArray.size - 1; i++) {
         thread draw_line_for_time(hsArray[i]["pos"] - (size, 0, 0), hsArray[i]["pos"] + (size, 0, 0), 1, 1, 0, 1);
         thread draw_line_for_time(hsArray[i]["pos"] - (0, size, 0), hsArray[i]["pos"] + (0, size, 0), 1, 1, 0, 1);
         thread draw_line_for_time(hsArray[i]["pos"] - (0, 0, size), hsArray[i]["pos"] + (0, 0, size), 1, 1, 0, 1);
-
       }
     }
     wait 1;
     sec++;
     if(isDefined(timeSecs) && (sec >= timeSecs)) break;
   }
-
 }
 
 cspline_testNodes(nodes, timeSecs) {

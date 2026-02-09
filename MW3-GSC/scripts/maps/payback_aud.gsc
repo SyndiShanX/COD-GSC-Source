@@ -506,7 +506,6 @@ _id_55C8(var_0, var_1) {
     case "sandstorm_shanty_enter":
       if(level._id_16F5._id_55CB == 0) {
         maps\_audio_zone_manager::_id_156C("zone_interior_sandstorm");
-
       }
       break;
     case "sandstorm_shanty_exit":
@@ -541,11 +540,9 @@ _id_55C8(var_0, var_1) {
 
       for(var_19 = 0; var_19 < var_17.size; var_19++) {
         thread _id_561C(var_17[var_19]);
-
       }
       for(var_19 = 0; var_19 < var_18.size; var_19++) {
         thread _id_561D(var_18[var_19]);
-
       }
       break;
     case "nikolai_pickup":
@@ -585,7 +582,6 @@ _id_448C(var_0, var_1) {
 
   if(getsubstr(var_0, 0, 4) != "mus_") {
     return 0;
-
   }
   level notify("kill_other_music");
   level endon("kill_other_music");
@@ -819,11 +815,9 @@ _id_55DA() {
 _id_55DF() {
   if(isDefined(level._id_55E0)) {
     level._id_55E0 stoploopsound();
-
   }
   if(isDefined(level._id_55DE)) {
     level._id_55DE stoploopsound();
-
   }
   level._id_55D8 = spawn("script_origin", level.player.origin);
   level._id_55D8 linkto(level.player);
@@ -949,11 +943,9 @@ _id_55EC() {
 
   if(isDefined(level._id_55EB)) {
     maps\_audio::_id_15F3(level._id_55EB, 0.5);
-
   }
   if(isDefined(level._id_16F5._id_55E9)) {
     maps\_audio_zone_manager::_id_156C(level._id_16F5._id_55E9);
-
   }
   maps\_audio_dynamic_ambi::_id_14A9("pybk_chopperpings", 0.1);
   wait 0.5;
@@ -961,7 +953,6 @@ _id_55EC() {
 
   if(isDefined(level._id_55EB)) {
     level._id_55EB delete();
-
   }
   thread maps\_audio::_id_173A();
   maps\_audio_mix_manager::_id_1520("mix_chopper_gunner");
@@ -973,11 +964,9 @@ _id_008D() {
 
   if(isDefined(level._id_55EB)) {
     maps\_audio::_id_15F3(level._id_55EB, 0.5);
-
   }
   if(isDefined(level._id_16F5._id_55E9)) {
     maps\_audio_zone_manager::_id_156C(level._id_16F5._id_55E9);
-
   }
   maps\_audio_dynamic_ambi::_id_14A9("pybk_chopperpings", 0.1);
   wait 0.5;
@@ -985,7 +974,6 @@ _id_008D() {
 
   if(isDefined(level._id_55EB)) {
     level._id_55EB delete();
-
   }
   thread maps\_audio::_id_173A();
   maps\_audio_mix_manager::_id_1520("mix_chopper_gunner");
@@ -999,7 +987,6 @@ _id_008E() {
     if(var_0.size < 5) {
       if(isDefined(level._id_16F5._id_55E9)) {
         maps\_audio_zone_manager::_id_156C(level._id_16F5._id_55E9);
-
       }
       maps\_audio_dynamic_ambi::_id_14A9("pybk_chopperpings", 0.5);
     }
@@ -1096,7 +1083,6 @@ _id_55F4(var_0) {
       }
     } else if(isDefined(var_0)) {
       var_0 playSound("pybk_body_slomo");
-
     }
     break;
   }
@@ -1120,7 +1106,6 @@ _id_55F6(var_0) {
 _id_55F7(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(level._id_16F5._id_49D9)) {
     level._id_16F5._id_49D9 = 0;
-
   }
   var_5 = gettime();
 
@@ -1228,7 +1213,6 @@ _id_5606() {
   if(isDefined(level._id_55CA)) {
     if(isDefined(level._id_55CA._id_5607) && isDefined(level._id_55CA._id_5607.enabled)) {
       level._id_55CA._id_5607.enabled = 0;
-
     }
     level._id_55CA stoploopsound();
     level._id_5608 = spawn("script_origin", level._id_55CA.origin);
@@ -1537,7 +1521,6 @@ _id_5622() {
 _id_5623() {
   if(isDefined(level.chopper)) {
     level.chopper stoploopsound();
-
   }
   if(!isDefined(level._id_55CA)) {
     level._id_55CA = spawn("script_origin", level.chopper.origin);
@@ -1569,7 +1552,6 @@ _id_5625() {
   if(!isDefined(level.chopper)) {
     if(isDefined(level._id_55CA._id_5607) && isDefined(level._id_55CA._id_5607.enabled)) {
       level._id_55CA._id_5607.enabled = 0;
-
     }
     waittillframeend;
     var_0 = 15.0;
@@ -1619,7 +1601,6 @@ _id_5629() {
       _id_562B(var_0, 80, 0.707107, 2.0, 1.0, 6144, 3.0, 4);
     } else {
       break;
-
     }
     wait(var_0);
     waittillframeend;
@@ -1639,7 +1620,6 @@ _id_562A() {
 
       if(isDefined(var_4.model)) {
         var_5 = var_4.model;
-
       }
       if(isDefined(var_4.model) && var_4.model == "projectile_tag") {
         continue;
@@ -1659,25 +1639,20 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(self) && !isDefined(self._id_5607)) {
     self._id_5607 = spawnStruct();
-
   }
   if(!isDefined(level._id_0113)) {
     level._id_0113 = 1;
-
   }
   if(!isDefined(level._id_0114)) {
     level._id_0114 = 0;
-
   }
   if(level._id_0113 == 1) {
     if(isDefined(self) && !isDefined(self._id_5607.enabled)) {
       self._id_5607.enabled = 1;
-
     }
     if(isDefined(self) && isDefined(self._id_5607) && isDefined(self._id_5607.enabled) && self._id_5607.enabled) {
       if(isDefined(self) && !isDefined(self._id_5607._id_562C)) {
         self._id_5607._id_562C = self.origin;
-
       }
       self._id_5607.velocity = (self.origin - self._id_5607._id_562C) / 2;
 
@@ -1705,13 +1680,11 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
         if(!isDefined(var_4) || var_4 <= 0) {
           var_4 = 1;
-
         }
         var_21 = var_20 * var_4;
 
         if(isDefined(var_21)) {
           self scalepitch(var_21, var_0);
-
         }
         if(level._id_0114 == 1) {
           var_22 = 0.75;
@@ -1722,7 +1695,6 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
           if(isDefined(var_7)) {
             var_26 = var_7;
-
           }
           var_27 = (0, 0, 128);
           var_28 = "doppler():: " + var_10 + " pitch: " + var_21;

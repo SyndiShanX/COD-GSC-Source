@@ -123,7 +123,7 @@ function challengeactorkills(data, time) {
         break;
       }
     }
-    if(isDefined(data.attacker) && isplayer(data.attacker)) {
+    if(isDefined(data.attacker) && isPlayer(data.attacker)) {
       data.attacker decorations::function_2bc66a34();
     }
   }
@@ -267,7 +267,7 @@ function function_85ec34dc() {
 
 function function_96ed590f(statname, n_amount = 1) {
   self endon("disconnect");
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self addplayerstat(statname, n_amount);
@@ -364,7 +364,7 @@ function function_4f96d6bd() {
   while(true) {
     if(getdvarint("", 0) == 1) {
       self function_f2d8f1d0();
-      setdvar("", 0);
+      setDvar("", 0);
     }
     wait(0.1);
   }

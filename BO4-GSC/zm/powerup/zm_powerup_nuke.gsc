@@ -110,7 +110,7 @@ nuke_powerup(drop_item, player_team, var_264cf1f9) {
 
   level notify(#"nuke_complete");
 
-  if(zm_powerups::function_cfd04802(#"nuke") && isplayer(var_264cf1f9)) {
+  if(zm_powerups::function_cfd04802(#"nuke") && isPlayer(var_264cf1f9)) {
     var_264cf1f9 zm_score::player_add_points("nuke_powerup", 400, undefined, undefined, undefined, undefined, 1);
     return;
   }

@@ -31,7 +31,6 @@ class cspectrerisingindicator: cluielem {
     cluielem::add_clientfield("clientnum", 1, 7, "int");
     cluielem::add_clientfield("isAlive", 1, 1, "int");
   }
-
 }
 
 register(uid) {

@@ -201,7 +201,7 @@ update_players_stats_at_match_end(players) {
   if(is_true(level.zm_disable_recording_stats)) {
     return;
   }
-  game_mode = getdvar(#"ui_gametype");
+  game_mode = getDvar(#"ui_gametype");
   game_mode_group = level.scr_zm_ui_gametype_group;
   map_location_name = level.scr_zm_map_start_location;
 
@@ -476,7 +476,7 @@ set_stored_weapondata(weapondata, map) {
 }
 
 add_client_stat(stat_name, stat_value, include_gametype) {
-  if(getdvar(#"ui_zm_mapstartlocation") == "" || is_true(level.zm_disable_recording_stats)) {
+  if(getDvar(#"ui_zm_mapstartlocation") == "" || is_true(level.zm_disable_recording_stats)) {
     return;
   }
   if(!isDefined(include_gametype))
@@ -487,7 +487,7 @@ add_client_stat(stat_name, stat_value, include_gametype) {
 }
 
 increment_player_stat(stat_name) {
-  if(getdvar(#"ui_zm_mapstartlocation") == "" || is_true(level.zm_disable_recording_stats)) {
+  if(getDvar(#"ui_zm_mapstartlocation") == "" || is_true(level.zm_disable_recording_stats)) {
     return;
   }
   self incrementplayerstat(stat_name, 1);
@@ -785,7 +785,7 @@ update_global_counters_on_match_end() {
     tomb_perk_extension = tomb_perk_extension + player.pers["tomb_perk_extension"];
   }
 
-  game_mode = getdvar(#"ui_gametype");
+  game_mode = getDvar(#"ui_gametype");
   incrementcounter("global_zm_" + game_mode, 1);
   incrementcounter("global_zm_games", 1);
 
@@ -902,7 +902,7 @@ get_specific_stat(stat_category, stat_name) {
 }
 
 do_stats_for_gibs(zombie, limb_tags_array) {
-  if(isDefined(zombie) && isDefined(zombie.attacker) && isplayer(zombie.attacker)) {
+  if(isDefined(zombie) && isDefined(zombie.attacker) && isPlayer(zombie.attacker)) {
     foreach(limb in limb_tags_array) {
       stat_name = undefined;
 

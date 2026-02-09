@@ -71,12 +71,12 @@ function first_damage() {
   self endon("first_damage_done");
   while(true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       self.owner_ent notify("triggered");
       attacker thread zm_audio::create_and_play_dialog("eggs", "quest3", 1);
       return;
     }
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker thread zm_audio::create_and_play_dialog("eggs", "quest3", 2);
     }
   }
@@ -102,7 +102,7 @@ function report_melee_early() {
   self endon("shrunk");
   while(true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-    if(isplayer(attacker) && dmg_type == "MOD_MELEE") {
+    if(isPlayer(attacker) && dmg_type == "MOD_MELEE") {
       attacker thread zm_audio::create_and_play_dialog("eggs", "quest3", 3);
       wait(5);
     }
@@ -113,7 +113,7 @@ function wait_for_melee() {
   self endon("death");
   while(true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
-    if(isplayer(attacker) && dmg_type == "MOD_MELEE") {
+    if(isPlayer(attacker) && dmg_type == "MOD_MELEE") {
       self.owner_ent notify("triggered");
       attacker thread zm_audio::create_and_play_dialog("eggs", "quest3", 6);
       return;

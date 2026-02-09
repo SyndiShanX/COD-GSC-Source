@@ -13,11 +13,9 @@ init() {
   level.money_dump_delay = 500;
   level.money_dump_size = 500;
 }
-
 money_precache() {
   PrecacheModel("zombie_z_money_icon");
 }
-
 check_players() {
   flag_wait("all_players_connected");
   players = getplayers();
@@ -27,7 +25,6 @@ check_players() {
     }
   }
 }
-
 player_can_dump() {
   if(self.score < level.money_dump_size) {
     return false;
@@ -43,7 +40,6 @@ player_can_dump() {
   }
   return true;
 }
-
 money_dump() {
   self endon("disconnect");
   self.moneyDump = undefined;
@@ -64,7 +60,6 @@ money_dump() {
     wait(0.05);
   }
 }
-
 money_spawn(player) {
   money = spawn("script_model", player.origin + (0, 0, 40));
   money.angles = player.angles;
@@ -75,7 +70,6 @@ money_spawn(player) {
   money thread money_grab();
   return money;
 }
-
 money_grab() {
   while(isDefined(self)) {
     players = get_players();
@@ -95,7 +89,7 @@ money_grab() {
         players[i].score += self.score;
         wait(0.1);
         playsoundatposition("zmb_cha_ching", self.origin);
-        self stopLoopSound();
+        self stoploopsound();
         self.player.moneyDump = undefined;
         self delete();
         self notify("money_grabbed");
@@ -105,7 +99,6 @@ money_grab() {
     wait_network_frame();
   }
 }
-
 money_wobble() {
   self endon("money_grabbed");
   if(isDefined(self)) {

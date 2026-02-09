@@ -40,8 +40,9 @@ main() {
     self moveloop();
 
     if(self.a.movement == "run") {
-      if(self.disablearrivals == 0)
+      if(self.disablearrivals == 0) {
         self thread stopmove();
+      }
 
       self waittill("run");
       self clearanim(%german_shepherd_run_stop, 0.1);
@@ -54,10 +55,11 @@ moveloop() {
   self endon("stop_soon");
 
   while(true) {
-    if(self.disablearrivals)
+    if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    else
+    } else {
       self.stopanimdistsq = anim.dogstoppingdistsq;
+    }
 
     if(self.a.movement == "run") {
       weights = self getrunanimweights();
@@ -105,16 +107,19 @@ randomsoundduringrunloop() {
   self endon("killanimscript");
 
   while(true) {
-    if(getdebugdvar("debug_dog_sound") != "")
+    if(getdebugdvar("debug_dog_sound") != "") {
       iprintln("dog " + self getentnum() + " bark start " + gettime());
+    }
 
-    if(isDefined(self.script_growl))
+    if(isDefined(self.script_growl)) {
       self play_sound_on_tag("aml_dog_growl", "tag_eye");
-    else
+    } else {
       self play_sound_on_tag("aml_dog_bark", "tag_eye");
+    }
 
-    if(getdebugdvar("debug_dog_sound") != "")
+    if(getdebugdvar("debug_dog_sound") != "") {
       iprintln("dog " + self getentnum() + " bark end " + gettime());
+    }
 
     wait(randomfloatrange(0.1, 0.3));
   }
@@ -127,30 +132,35 @@ getrunanimweights() {
   weights["right"] = 0;
 
   if(self.leanamount > 0) {
-    if(self.leanamount < 0.95)
+    if(self.leanamount < 0.95) {
       self.leanamount = 0.95;
+    }
 
     weights["left"] = 0;
     weights["right"] = (1 - self.leanamount) * 20;
 
-    if(weights["right"] > 1)
+    if(weights["right"] > 1) {
       weights["right"] = 1;
-    else if(weights["right"] < 0)
+    } else if(weights["right"] < 0) {
       weights["right"] = 0;
+    }
 
     weights["center"] = 1 - weights["right"];
   } else if(self.leanamount < 0) {
-    if(self.leanamount > -0.95)
+    if(self.leanamount > -0.95) {
       self.leanamount = -0.95;
+    }
 
     weights["right"] = 0;
     weights["left"] = (1 + self.leanamount) * 20;
 
-    if(weights["left"] > 1)
+    if(weights["left"] > 1) {
       weights["left"] = 1;
+    }
 
-    if(weights["left"] < 0)
+    if(weights["left"] < 0) {
       weights["left"] = 0;
+    }
 
     weights["center"] = 1 - weights["left"];
   } else {

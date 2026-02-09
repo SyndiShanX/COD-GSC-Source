@@ -314,11 +314,10 @@ setup_fx() {
     return;
   }
   if(isDefined(self.model)) {
-    if(self.model == "toilet") {
+    if(self.model == "toilet") {}
+    self thread burnville_paratrooper_hack();
+    return;
   }
-      self thread burnville_paratrooper_hack();
-      return;
-    }
 
   org = undefined;
   if(isDefined(self.target)) {

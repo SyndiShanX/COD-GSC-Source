@@ -197,10 +197,11 @@ footsteps() {
 }
 
 createfx_setup() {
-  level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
+  level.skipto_point = tolower(getDvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "")
+  if(level.skipto_point == "") {
     level.skipto_point = "speech";
+  }
 
   maps\yemen_utility::load_gumps();
 }

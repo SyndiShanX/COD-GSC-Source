@@ -24,7 +24,7 @@ function __init__() {
   level.friendlyfirepoints["point_loss_interval"] = 0.75;
   level.friendlyfiredamagepercentage = 1;
   if(util::coopgame()) {
-    setdvar("friendlyfire_enabled", "0");
+    setDvar("friendlyfire_enabled", "0");
   }
   if(!isDefined(level.friendlyfiredisabled)) {
     level.friendlyfiredisabled = 0;
@@ -52,10 +52,10 @@ function debug_friendlyfire() {
   self endon("hash_cca1b1b9");
   self endon("disconnect");
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   if(getdvarstring("") == "") {
-    setdvar("", "");
+    setDvar("", "");
   }
   fullpts = level.friendlyfirepoints[""] - level.friendlyfirepoints[""];
   lbound = 520;
@@ -204,12 +204,12 @@ function friendly_fire_callback(entity, damage, attacker, method) {
     return;
   }
   bplayersdamage = 0;
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     bplayersdamage = 1;
   } else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
     owner = attacker getvehicleowner();
     if(isDefined(owner)) {
-      if(isplayer(owner)) {
+      if(isPlayer(owner)) {
         if(!isDefined(owner.friendlyfire_attacker_not_vehicle_owner)) {
           bplayersdamage = 1;
           attacker = owner;
@@ -296,12 +296,12 @@ function friendly_fire_think(entity) {
       continue;
     }
     bplayersdamage = 0;
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       bplayersdamage = 1;
     } else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
       owner = attacker getvehicleowner();
       if(isDefined(owner)) {
-        if(isplayer(owner)) {
+        if(isPlayer(owner)) {
           if(!isDefined(owner.friendlyfire_attacker_not_vehicle_owner)) {
             bplayersdamage = 1;
             attacker = owner;

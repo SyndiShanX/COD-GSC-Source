@@ -21,7 +21,7 @@
 function autoexec init() {
   initzmfactorybehaviorsandasm();
   level.zombie_init_done = &function_f06eec12;
-  setdvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
   level.closest_player_override = &factory_closest_player;
   level thread update_closest_player();
   level.move_valid_poi_to_navmesh = 1;

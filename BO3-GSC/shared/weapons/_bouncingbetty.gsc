@@ -131,7 +131,7 @@ function trackusedonhack() {
 }
 
 function trackbouncingbettyasused() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self addweaponstat(getweapon("bouncingbetty"), "used", 1);
   }
 }

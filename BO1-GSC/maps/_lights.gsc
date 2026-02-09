@@ -37,7 +37,6 @@ generic_pulsing() {
     wait(.5);
   }
 }
-
 generic_double_strobe() {
   if(getDvar(#"r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
@@ -59,7 +58,7 @@ generic_double_strobe() {
       }
       if(linked_things[i].classname == "script_model") {
         lit_model = linked_things[i];
-        unlit_model = getEnt(lit_model.target, "targetname");
+        unlit_model = getent(lit_model.target, "targetname");
         linked_models = true;
       }
     }
@@ -91,16 +90,15 @@ generic_double_strobe() {
     wait(.1);
   }
 }
-
 getclosests_flickering_model(origin) {
   array = getEntArray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
-  if(isDefined(model))
+  if(isDefined(model)) {
     return_array[0] = model;
+  }
   return return_array;
 }
-
 generic_flickering() {
   if(getDvar(#"r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
@@ -161,7 +159,7 @@ generic_flickering() {
     }
     if(linked_things[i].classname == "script_model") {
       lit_model = linked_things[i];
-      unlit_model = getEnt(lit_model.target, "targetname");
+      unlit_model = GetEnt(lit_model.target, "targetname");
       linked_models = true;
     }
   }
@@ -172,14 +170,14 @@ generic_flickering() {
       if(curr > (on * 0.5)) {
         curr = RandomFloatRange(min_intensity, max_intensity);
         if(linked_models) {
-          lit_model hide();
+          lit_model Hide();
           unlit_model Show();
         }
       } else {
         curr = on;
         if(linked_models) {
           lit_model Show();
-          unlit_model hide();
+          unlit_model Hide();
         }
       }
       self SetLightIntensity(curr);
@@ -198,12 +196,11 @@ generic_flickering() {
     }
     if(linked_models) {
       lit_model Show();
-      unlit_model hide();
+      unlit_model Hide();
     }
     wait(RandomFloatRange(min_flickerless_time, max_flickerless_time));
   }
 }
-
 fire_flicker() {
   min_delay = 0.1;
   max_delay = 0.5;

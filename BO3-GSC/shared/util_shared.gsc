@@ -834,7 +834,7 @@ function getclientsysstate(ssysname) {
 
 function clientnotify(event) {
   if(level.clientscripts) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       setclientsysstate("levelNotify", event, self);
     } else {
       setclientsysstate("levelNotify", event);
@@ -854,7 +854,7 @@ function is_looking_at(ent_or_org, n_dot_range = 0.67, do_trace = 0, v_offset) {
   }
   b_can_see = 0;
   b_use_tag_eye = 0;
-  if(isplayer(self) || isai(self)) {
+  if(isPlayer(self) || isai(self)) {
     b_use_tag_eye = 1;
   }
   n_dot = self math::get_dot_direction(v_point, 0, 1, "forward", b_use_tag_eye);
@@ -870,7 +870,7 @@ function is_looking_at(ent_or_org, n_dot_range = 0.67, do_trace = 0, v_offset) {
 }
 
 function get_eye() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     linked_ent = self getlinkedent();
     if(isDefined(linked_ent) && getdvarint("cg_cameraUseTagCamera") > 0) {
       camera = linked_ent gettagorigin("tag_camera");
@@ -933,7 +933,7 @@ function waittill_player_not_looking_at(origin, dot, do_trace) {
 }
 
 function is_player_looking_at(origin, dot, do_trace, ignore_ent) {
-  assert(isplayer(self), "");
+  assert(isPlayer(self), "");
   if(!isDefined(dot)) {
     dot = 0.7;
   }
@@ -1422,7 +1422,7 @@ function freeze_player_controls(b_frozen = 1) {
 }
 
 function is_bot() {
-  return isplayer(self) && isDefined(self.pers["isBot"]) && self.pers["isBot"] != 0;
+  return isPlayer(self) && isDefined(self.pers["isBot"]) && self.pers["isBot"] != 0;
 }
 
 function ishacked() {
@@ -1441,7 +1441,7 @@ function getlastweapon() {
 
 function isenemyplayer(player) {
   assert(isDefined(player));
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
   if(level.teambased) {
@@ -1491,7 +1491,7 @@ function get_elapsed_time(start_time, end_time = getmicrosecondsraw()) {
 
 function mayapplyscreeneffect() {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   return !isDefined(self.viewlockedentity);
 }
 
@@ -1757,7 +1757,7 @@ function set_lighting_state(n_state) {
         }
       }
     } else {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self setlightingstate(self.lighting_state);
       } else {
         assertmsg("");
@@ -1780,7 +1780,7 @@ function set_sun_shadow_split_distance(f_distance) {
         }
       }
     } else {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self setsunshadowsplitdistance(self.sun_shadow_split_distance);
       } else {
         assertmsg("");
@@ -2492,7 +2492,7 @@ function has_purchased_perk_equipped(ref) {
 }
 
 function has_purchased_perk_equipped_with_specific_stat(single_perk_ref, stats_table_ref) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return self hasperk(single_perk_ref) && self is_item_purchased(stats_table_ref);
   }
   return 0;

@@ -13,5 +13,5 @@ main() {
 
   VisionSetNaked("co_hunted", 0);
 
-  setdvar("r_specularcolorscale", "5");
+  setDvar("r_specularcolorscale", "5");
 }

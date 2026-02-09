@@ -793,11 +793,11 @@ teleport_watch_debug_dvar(dvar_name, dvar_default) {
   SetDvarIfUninitialized(dvar_name, dvar_default);
 
   while(1) {
-    current_value = GetDvar(dvar_name, dvar_default);
+    current_value = getDvar(dvar_name, dvar_default);
 
     if(current_value != dvar_default) {
       level notify("teleport_dvar_changed", dvar_name, current_value);
-      SetDvar(dvar_name, dvar_default);
+      setDvar(dvar_name, dvar_default);
     }
 
     wait .25;
@@ -1120,7 +1120,6 @@ teleport_to_zone_killstreaks(zone_name) {
   if(isDefined(level.intelEnt)) {
     level.intelEnt["dropped_time"] = -60000;
   }
-
 }
 
 teleport_notify_death() {

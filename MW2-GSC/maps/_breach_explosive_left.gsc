@@ -5,8 +5,7 @@
 
 #using_animtree("generic_human");
 main() {
-  /*-----------------------
-  EXPLOSIVE BREACH (LEFT SIDE)
+  /*----------------------- EXPLOSIVE BREACH (LEFT SIDE)
   -------------------------*/
   level.maxDetpackDamage = 100; // max damage done by breach detpacks
   level.minDetpackDamage = 50; // max damage done by breach detpacks

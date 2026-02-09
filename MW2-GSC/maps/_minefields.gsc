@@ -37,7 +37,7 @@ minefield_kill(trigger) {
     return;
   }
   if(self istouching(trigger)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       level notify("mine death");
       self playSound("explo_mine");
     } else
@@ -53,8 +53,8 @@ minefield_kill(trigger) {
     radiusDamage(origin, range, maxdamage, mindamage);
     level.player enableHealthShield(true);
 
-    if(isplayer(self)) {
-      setdvar("ui_deadquote", "@MINEFIELDS_MINEDIED");
+    if(isPlayer(self)) {
+      setDvar("ui_deadquote", "@MINEFIELDS_MINEDIED");
       maps\_utility::missionFailedWrapper();
     }
   }

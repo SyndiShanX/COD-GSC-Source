@@ -653,7 +653,7 @@ function attack_thread_rocket() {
       if(!usejavelin) {
         self setvehweapon(getweapon("quadtank_main_turret_rocketpods_straight"));
         offset = vectorscale((0, 0, -1), 50);
-        if(isplayer(self.enemy)) {
+        if(isPlayer(self.enemy)) {
           origin = self.enemy.origin;
           eye = self.enemy getEye();
           offset = (0, 0, (origin[2] - eye[2]) - 5);
@@ -670,7 +670,7 @@ function attack_thread_rocket() {
         fired = 0;
         for(i = 0; i < 4 && isDefined(self.enemy); i++) {
           if(usejavelin) {
-            if(isplayer(self.enemy)) {
+            if(isPlayer(self.enemy)) {
               self thread vehicle_ai::javelin_losetargetatrighttime(self.enemy);
             }
             self thread javeline_incoming(getweapon("quadtank_main_turret_rocketpods_javelin"));
@@ -858,7 +858,7 @@ function do_melee(shoulddodamage, enemy) {
   if(vehicle_ai::entityisarchetype(enemy, "quadtank") || vehicle_ai::entityisarchetype(enemy, "raps")) {
     return false;
   }
-  if(isplayer(enemy) && enemy laststand::player_is_in_laststand()) {
+  if(isPlayer(enemy) && enemy laststand::player_is_in_laststand()) {
     return false;
   }
   self notify("play_meleefx");
@@ -874,7 +874,7 @@ function do_melee(shoulddodamage, enemy) {
       player._takedamage_old = undefined;
     }
   }
-  if(isDefined(enemy) && isplayer(enemy)) {
+  if(isDefined(enemy) && isPlayer(enemy)) {
     direction = (enemy.origin - self.origin[0], enemy.origin - self.origin[1], 0);
     if(abs(direction[0]) < 0.01 && abs(direction[1]) < 0.01) {
       direction = (randomfloatrange(1, 2), randomfloatrange(1, 2), 0);
@@ -927,7 +927,7 @@ function quadtankcallback_vehicledamage(einflictor, eattacker, idamage, idflags,
     }
     is_damaged_by_grenade = 0;
   }
-  if(isDefined(eattacker) && (eattacker == self || (isplayer(eattacker) && eattacker.usingvehicle && eattacker.viewlockedentity === self))) {
+  if(isDefined(eattacker) && (eattacker == self || (isPlayer(eattacker) && eattacker.usingvehicle && eattacker.viewlockedentity === self))) {
     return 0;
   }
   if(smeansofdeath === "MOD_MELEE" || smeansofdeath === "MOD_MELEE_WEAPON_BUTT" || smeansofdeath === "MOD_MELEE_ASSASSINATE" || smeansofdeath === "MOD_ELECTROCUTED" || smeansofdeath === "MOD_CRUSH" || weapon.isemp) {
@@ -937,12 +937,12 @@ function quadtankcallback_vehicledamage(einflictor, eattacker, idamage, idflags,
     self.trophy_system_health = 0;
     self.trophy_disables = 3;
     self thread quadtank_disabletrophy();
-    if(isplayer(eattacker) && damagefeedback::dodamagefeedback(weapon, einflictor)) {
+    if(isPlayer(eattacker) && damagefeedback::dodamagefeedback(weapon, einflictor)) {
       eattacker thread damagefeedback::update(smeansofdeath, einflictor);
     }
   }
   if(partname == "tag_target_lower" || partname == "tag_target_upper" || partname == "tag_defense_active" || partname == "tag_body_animate") {
-    if(isDefined(eattacker) && isplayer(eattacker) && eattacker.team != self.team) {
+    if(isDefined(eattacker) && isPlayer(eattacker) && eattacker.team != self.team) {
       if(!isDefined(self.trophy_system_health)) {
         self.trophy_system_health = self.settings.trophysystemhealth;
       }
@@ -952,7 +952,7 @@ function quadtankcallback_vehicledamage(einflictor, eattacker, idamage, idflags,
         if(self.trophy_system_health <= 0) {
           self thread quadtank_disabletrophy();
         }
-        if(isplayer(eattacker) && damagefeedback::dodamagefeedback(weapon, einflictor)) {
+        if(isPlayer(eattacker) && damagefeedback::dodamagefeedback(weapon, einflictor)) {
           if(idamage > 0) {
             eattacker thread damagefeedback::update(smeansofdeath, einflictor);
           }

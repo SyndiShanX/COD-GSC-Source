@@ -28,7 +28,7 @@ function main() {
   namespace_83fbe97c::main();
   load::main();
   compass::setupminimap("compass_map_mp_infection");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   level.levelescortdisable = [];
   level.levelescortdisable[level.levelescortdisable.size] = spawn("trigger_radius", (-245.331, -1770.34, 0), 0, 256, 128);
   level.levelescortdisable[level.levelescortdisable.size] = spawn("trigger_radius", (-252.651, -1588.34, 0), 0, 256, 300);

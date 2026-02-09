@@ -32,7 +32,7 @@ func_13B68(var_0) {
   self notify("watchStuck");
   self endon("watchStuck");
   var_0 waittill("missile_stuck", var_1);
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     thread func_C576(var_0, var_1);
     return;
   }

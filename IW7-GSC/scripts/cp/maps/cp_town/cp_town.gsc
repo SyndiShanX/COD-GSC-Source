@@ -4,14 +4,14 @@
 ***********************************************/
 
 main() {
-  setdvar("sm_sunSampleSizeNear", 0.97);
-  setdvar("sm_sunCascadeSizeMultiplier1", 2);
-  setdvar("sm_sunCascadeSizeMultiplier2", 3);
-  setdvar("r_sdfShadowPenumbra", 0.4);
-  setdvar("r_umbraMinObjectContribution", 6);
-  setdvar("r_umbraAccurateOcclusionThreshold", 2000);
-  setdvar("sm_roundRobinPrioritySpotShadows", 8);
-  setdvar("sm_spotUpdateLimit", 8);
+  setDvar("sm_sunSampleSizeNear", 0.97);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 3);
+  setDvar("r_sdfShadowPenumbra", 0.4);
+  setDvar("r_umbraMinObjectContribution", 6);
+  setDvar("r_umbraAccurateOcclusionThreshold", 2000);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
   level.bcrabbrutedebugger = getdvarint("debug_crab_brute", 0);
   level.bcrabminidebugger = getdvarint("debug_crab_mini", 0);
   level.bcrabbossdebugger = getdvarint("debug_crab_boss", 0);
@@ -2013,7 +2013,7 @@ water_triggers() {
 water_trigger() {
   for(;;) {
     self waittill("trigger", var_0);
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -2328,11 +2328,11 @@ townhostmigrationfunc() {
 cp_town_ismeleeblocked_func() {
   var_0 = self.origin + (0, 0, self.var_B5F9);
   var_1 = self.curmeleetarget.origin + (0, 0, self.var_B5F9);
-  if(!isplayer(self.curmeleetarget) && !isai(self.curmeleetarget)) {
+  if(!isPlayer(self.curmeleetarget) && !isai(self.curmeleetarget)) {
     return 0;
   }
 
-  if(isplayer(self.curmeleetarget)) {
+  if(isPlayer(self.curmeleetarget)) {
     if(self.curmeleetarget isusingturret()) {
       return 0;
     }
@@ -2349,7 +2349,7 @@ cp_town_ismeleeblocked_func() {
     return 0;
   }
 
-  if(isplayer(self.curmeleetarget)) {
+  if(isPlayer(self.curmeleetarget)) {
     var_6 = scripts\common\trace::create_default_contents(0);
     var_7 = scripts\common\trace::ray_trace(var_0, var_1, level.agentarray, var_6);
     if(var_7["hittype"] == "hittype_entity" && var_7["entity"] == self.curmeleetarget) {

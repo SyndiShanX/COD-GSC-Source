@@ -59,12 +59,12 @@ init_shared() {
   clientfield::register("scriptmover", "smartcover_placed", 1, 5, "float");
   clientfield::register("scriptmover", "start_smartcover_microwave", 1, 1, "int");
   callback::on_end_game(&on_end_game);
-  setdvar(#"hash_4d17057924212aa9", 20);
-  setdvar(#"hash_686a676b28ae0af4", 0);
-  setdvar(#"hash_7f893c50ae5356c8", -15);
-  setdvar(#"hash_70ce44b2b0b4005", 30);
-  setdvar(#"hash_477cc29b988c0b75", -10);
-  setdvar(#"hash_41cfd0e34c53ef02", 30);
+  setDvar(#"hash_4d17057924212aa9", 20);
+  setDvar(#"hash_686a676b28ae0af4", 0);
+  setDvar(#"hash_7f893c50ae5356c8", -15);
+  setDvar(#"hash_70ce44b2b0b4005", 30);
+  setDvar(#"hash_477cc29b988c0b75", -10);
+  setDvar(#"hash_41cfd0e34c53ef02", 30);
   callback::on_finalize_initialization(&function_1c601b99);
 }
 
@@ -167,11 +167,11 @@ on_end_game() {
 }
 
 setupdvars() {
-  setdvar(#"hash_4f4ce3cb18b004bc", 8);
-  setdvar(#"hash_417afa70d515fba5", isDefined(level.smartcoversettings.bundle.var_76d79155) ? level.smartcoversettings.bundle.var_76d79155 : 0);
-  setdvar(#"hash_1d8eb304f5cf8033", 1);
-  setdvar(#"hash_71f8bd4cd30de4b3", isDefined(level.smartcoversettings.bundle.var_e35fc674) ? level.smartcoversettings.bundle.var_e35fc674 : 0);
-  setdvar(#"hash_39a564d4801c4b2e", isDefined(level.smartcoversettings.bundle.var_1f0ae388) ? level.smartcoversettings.bundle.var_1f0ae388 : 0);
+  setDvar(#"hash_4f4ce3cb18b004bc", 8);
+  setDvar(#"hash_417afa70d515fba5", isDefined(level.smartcoversettings.bundle.var_76d79155) ? level.smartcoversettings.bundle.var_76d79155 : 0);
+  setDvar(#"hash_1d8eb304f5cf8033", 1);
+  setDvar(#"hash_71f8bd4cd30de4b3", isDefined(level.smartcoversettings.bundle.var_e35fc674) ? level.smartcoversettings.bundle.var_e35fc674 : 0);
+  setDvar(#"hash_39a564d4801c4b2e", isDefined(level.smartcoversettings.bundle.var_1f0ae388) ? level.smartcoversettings.bundle.var_1f0ae388 : 0);
 }
 
 function_649f8cbe(func) {
@@ -498,7 +498,7 @@ ondamage() {
   while(true) {
     waitresult = self waittill(#"damage");
 
-    if(isDefined(waitresult.attacker) && isplayer(waitresult.attacker)) {
+    if(isDefined(waitresult.attacker) && isPlayer(waitresult.attacker)) {
       if(waitresult.amount > 0 && damagefeedback::dodamagefeedback(waitresult.weapon, waitresult.attacker)) {
         waitresult.attacker damagefeedback::update(waitresult.mod, waitresult.inflictor, undefined, waitresult.weapon, self);
       }
@@ -621,7 +621,7 @@ function_d2368084(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   bundle = level.smartcoversettings.bundle;
   startinghealth = isDefined(self.startinghealth) ? self.startinghealth : 0;
 
-  if((isDefined(self.health) ? self.health : 0) < startinghealth * 0.5 && !(self.var_2cf2e843 === 1) && isDefined(self.owner) && isplayer(self.owner) && !(eattacker === self.owner)) {
+  if((isDefined(self.health) ? self.health : 0) < startinghealth * 0.5 && !(self.var_2cf2e843 === 1) && isDefined(self.owner) && isPlayer(self.owner) && !(eattacker === self.owner)) {
     self.owner thread killstreaks::play_taacom_dialog("smartCoverWeaponDamaged");
     self.var_2cf2e843 = 1;
   }
@@ -875,7 +875,6 @@ function_4e6d9621(smartcover, origins, radii) {
       if(getdvarint(#"hash_686a676b28ae0af4", 0) == 1) {
         sphere(origins[index], radius, (0, 0, 1), 0.5, 0, 10, 500);
         sphere(var_592587c3, getdvarfloat(#"hash_4d17057924212aa9", 1), (1, 0, 0), 0.5, 0, 10, 500);
-
       }
 
       radiussqr = combinedradius * combinedradius;
@@ -1012,7 +1011,7 @@ microwaveentity(entity) {
   turret endon(#"microwave_turret_shutdown", #"death");
   entity endon(#"disconnect", #"death");
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity endon(#"joined_team", #"joined_spectators");
   }
 
@@ -1024,7 +1023,7 @@ microwaveentity(entity) {
   viewkickscalar = 1;
   damagescalar = 1;
 
-  if(isplayer(entity) && entity hasperk(#"specialty_microwaveprotection")) {
+  if(isPlayer(entity) && entity hasperk(#"specialty_microwaveprotection")) {
     shellshockscalar = getdvarfloat(#"specialty_microwaveprotection_shellshock_scalar", 0.5);
     viewkickscalar = getdvarfloat(#"specialty_microwaveprotection_viewkick_scalar", 0.5);
     damagescalar = getdvarfloat(#"specialty_microwaveprotection_damage_scalar", 0.5);
@@ -1090,7 +1089,7 @@ microwaveentity(entity) {
     entity.lastmicrowavedby = turret.owner;
     time = gettime();
 
-    if(isplayer(entity) && isDefined(entity.clientid)) {
+    if(isPlayer(entity) && isDefined(entity.clientid)) {
       entity playsoundtoplayer(#"hash_5eecc78116b1fc85", entity);
 
       if(!entity isremotecontrolling() && time - (isDefined(entity.microwaveshellshockandviewkicktime) ? entity.microwaveshellshockandviewkicktime : 0) > 950) {
@@ -1129,7 +1128,7 @@ microwaveturretaffectsentity(entity) {
     return false;
   }
 
-  if(!isplayer(entity) && !isai(entity)) {
+  if(!isPlayer(entity) && !isai(entity)) {
     return false;
   }
 
@@ -1153,7 +1152,7 @@ microwaveturretaffectsentity(entity) {
     return false;
   }
 
-  if(isplayer(entity) && entity getEye()[2] < turret.origin[2]) {
+  if(isPlayer(entity) && entity getEye()[2] < turret.origin[2]) {
     return false;
   }
 

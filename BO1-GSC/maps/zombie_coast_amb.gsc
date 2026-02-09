@@ -13,60 +13,64 @@ main() {
   level._audio_director_vox_play = ::do_director_playvox;
   level.AUDIO_last_d = undefined;
   level.AUDIO_current_character = undefined;
-  level.door_trig = getEnt("trig_start_voices", "targetname");
+  level.door_trig = GetEnt("trig_start_voices", "targetname");
   level.skit_vox_override = false;
   level thread power_clangs();
   level thread radio_easter_eggs();
   level thread setup_music_egg();
 }
-
 power_clangs() {
   wait(5);
   flag_wait("power_on");
   clangs = getstructarray("amb_power_clang", "targetname");
-  if(!isDefined(clangs))
+  if(!isDefined(clangs)) {
     return;
+  }
   for(i = 0; i < clangs.size; i++) {
     playsoundatposition("zmb_circuit", clangs[i].origin);
     wait(RandomFloatrange(0.25, 0.7));
   }
 }
-
 weapon_type_check_custom(weapon) {
-  if(!isDefined(self.entity_num))
+  if(!isDefined(self.entity_num)) {
     return "crappy";
+  }
   switch (self.entity_num) {
     case 0:
-      if(weapon == "spectre_zm")
+      if(weapon == "spectre_zm") {
         return "favorite";
-      else if(weapon == "spectre_upgraded_zm")
+      } else if(weapon == "spectre_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 1:
-      if(weapon == "rpk_zm")
+      if(weapon == "rpk_zm") {
         return "favorite";
-      else if(weapon == "rpk_upgraded_zm")
+      } else if(weapon == "rpk_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 2:
-      if(weapon == "ak74u_zm")
+      if(weapon == "ak74u_zm") {
         return "favorite";
-      else if(weapon == "ak74u_upgraded_zm")
+      } else if(weapon == "ak74u_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 3:
-      if(weapon == "ithaca_zm")
+      if(weapon == "ithaca_zm") {
         return "favorite";
-      else if(weapon == "ithaca_upgraded_zm")
+      } else if(weapon == "ithaca_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
   }
-  if(IsSubStr(weapon, "upgraded"))
+  if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  else
+  } else {
     return level.zombie_weapons[weapon].vox;
+  }
 }
-
 setup_response_line_custom(player, index, category, type) {
   Sarah = 0;
   Englund = 1;
@@ -88,11 +92,9 @@ setup_response_line_custom(player, index, category, type) {
   }
   return;
 }
-
 director_vox_init() {
   self thread director_intro_vox();
 }
-
 director_vox_futz() {
   self endon("death");
   level endon("director_submerging_audio");
@@ -103,7 +105,6 @@ director_vox_futz() {
     self waittill("director_calmed");
   }
 }
-
 director_intro_vox() {
   self endon("death");
   level endon("end_game");
@@ -122,14 +123,12 @@ director_intro_vox() {
     self thread wait_for_submerge();
   }
 }
-
 wait_for_submerge() {
   self endon("death");
   level waittill("director_submerging_audio");
   wait(9);
   self create_and_play_director_vox("lucid");
 }
-
 wait_for_anger() {
   self endon("death");
   level endon("director_submerging_audio");
@@ -139,7 +138,6 @@ wait_for_anger() {
     self thread director_angry_vox();
   }
 }
-
 wait_for_calm() {
   self endon("death");
   level endon("director_submerging_audio");
@@ -154,7 +152,6 @@ wait_for_calm() {
     self thread director_ambient_vox();
   }
 }
-
 director_ambient_vox() {
   self notify("director_ambient_vox");
   self endon("death");
@@ -166,7 +163,7 @@ director_ambient_vox() {
     wait(RandomIntRange(25, 70));
     players = getplayers();
     for(i = 0; i < players.size; i++) {
-      if(distanceSquared(self.origin, players[i].origin) <= 500 * 500) {
+      if(DistanceSquared(self.origin, players[i].origin) <= 500 * 500) {
         self create_and_play_director_vox("find");
         continue;
       }
@@ -179,7 +176,6 @@ director_ambient_vox() {
     }
   }
 }
-
 director_angry_vox() {
   self notify("director_angry_vox");
   self endon("death");
@@ -197,14 +193,12 @@ director_angry_vox() {
     }
   }
 }
-
 init_director_behind_vox() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] thread director_behind_vox(self);
   }
 }
-
 director_behind_vox(director) {
   self endon("disconnect");
   self endon("death");
@@ -214,21 +208,21 @@ director_behind_vox(director) {
   dist = 350;
   while(!is_true(self.defeated)) {
     wait(4);
-    if(distanceSquared(director.origin, self.origin) < dist * dist) {
+    if(DistanceSquared(director.origin, self.origin) < dist * dist) {
       yaw = self animscripts\utility::GetYawToSpot(director.origin);
       z_diff = self.origin[2] - director.origin[2];
       if((yaw < -95 || yaw > 95) && abs(z_diff) < 50) {
         if(isDefined(level._audio_director_vox_play)) {
-          if(director.is_activated)
+          if(director.is_activated) {
             director thread[[level._audio_director_vox_play]]("vox_director_slam");
-          else
+          } else {
             director thread[[level._audio_director_vox_play]]("vox_director_behind_you");
+          }
         }
       }
     }
   }
 }
-
 create_and_play_director_vox(type, force_variant) {
   waittime = .25;
   alias = "vox_romero_" + type;
@@ -257,7 +251,6 @@ create_and_play_director_vox(type, force_variant) {
   sound_to_play = alias + "_" + variation;
   self thread do_director_playvox(sound_to_play, waittime);
 }
-
 do_director_playvox(sound_to_play, waittime, override) {
   if(!isDefined(level.director_is_speaking)) {
     level.director_is_speaking = 0;
@@ -273,7 +266,6 @@ do_director_playvox(sound_to_play, waittime, override) {
     level.director_is_speaking = 0;
   }
 }
-
 radio_easter_eggs() {
   wait(3);
   teststruct = getstruct("radio_egg_0", "targetname");
@@ -285,7 +277,6 @@ radio_easter_eggs() {
     ent[i] thread activate_radio_egg(i);
   }
 }
-
 activate_radio_egg(num) {
   radio_trig = spawn("trigger_radius", self.origin - (0, 0, 200), 0, 75, 400);
   radio_trig.completed = false;
@@ -305,14 +296,12 @@ activate_radio_egg(num) {
   radio_trig Delete();
   playsoundatposition("vox_radio_egg_" + num, self.origin);
 }
-
 setup_music_egg() {
   wait(3);
   level.meteor_counter = 0;
   level.music_override = false;
   array_thread(getstructarray("mus_easteregg", "targetname"), ::music_egg);
 }
-
 music_egg() {
   if(!isDefined(self)) {
     return;
@@ -320,7 +309,7 @@ music_egg() {
   temp_ent = spawn("script_origin", self.origin);
   temp_ent playLoopSound("zmb_meteor_loop");
   player = self music_egg_wait();
-  temp_ent stopLoopSound(1);
+  temp_ent StopLoopSound(1);
   player playSound("zmb_meteor_activate");
   player maps\_zombiemode_audio::create_and_play_dialog("eggs", "meteors", undefined, level.meteor_counter);
   level.meteor_counter = level.meteor_counter + 1;
@@ -330,7 +319,6 @@ music_egg() {
   wait(1.5);
   temp_ent Delete();
 }
-
 music_egg_wait() {
   music_egg_trig = spawn("trigger_radius", self.origin - (0, 0, 200), 0, 50, 400);
   music_egg_trig.completed = false;
@@ -350,7 +338,6 @@ music_egg_wait() {
   music_egg_trig Delete();
   return who;
 }
-
 play_music_egg(player) {
   level.music_override = true;
   level thread maps\_zombiemode_audio::change_zombie_music("egg");
@@ -360,10 +347,10 @@ play_music_egg(player) {
   }
   wait(420);
   level.music_override = false;
-  if(level.music_round_override == false)
+  if(level.music_round_override == false) {
     level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
+  }
 }
-
 skit_start_reminder(ent) {
   while(!flag("fuse_fun_start")) {
     rand = RandomIntRange(0, 3);
@@ -371,7 +358,6 @@ skit_start_reminder(ent) {
     wait(RandomIntRange(10, 35));
   }
 }
-
 play_characters_skits_etc(player, ent, a, b, c, d) {
   if(!isDefined(level.door_knock_vox_occurring)) {
     level.door_knock_vox_occurring = false;
@@ -413,11 +399,9 @@ play_characters_skits_etc(player, ent, a, b, c, d) {
     level.door_knock_vox_occurring = false;
   }
 }
-
 play_sound_on_ent_and_wait(str_soundalias, str_force_variant, bool_override, str_waittill) {
   self create_and_play_dialog_egg("eggs", "coast_response", undefined, str_force_variant, bool_override);
 }
-
 create_and_play_dialog_egg(category, type, response, force_variant, override) {
   waittime = .25;
   if(!isDefined(level.plr_vox[category][type])) {
@@ -427,8 +411,9 @@ create_and_play_dialog_egg(category, type, response, force_variant, override) {
     return;
   }
   alias_suffix = level.plr_vox[category][type];
-  if(isDefined(response))
+  if(isDefined(response)) {
     alias_suffix = response + alias_suffix;
+  }
   index = maps\_zombiemode_weapons::get_player_index(self);
   prefix = level.plr_vox["prefix"] + index + "_";
   if(!isDefined(self.sound_dialog)) {
@@ -459,14 +444,14 @@ create_and_play_dialog_egg(category, type, response, force_variant, override) {
   sound_to_play = alias_suffix + "_" + variation;
   self do_player_playvox_egg(prefix, index, sound_to_play, waittime, category, type, override);
 }
-
 do_player_playvox_egg(prefix, index, sound_to_play, waittime, category, type, override) {
   players = getplayers();
   if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
-  if(is_true(level.skit_vox_override) && !override)
+  if(is_true(level.skit_vox_override) && !override) {
     return;
+  }
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
     self playSound(prefix + sound_to_play, "sound_done" + sound_to_play);
@@ -475,7 +460,6 @@ do_player_playvox_egg(prefix, index, sound_to_play, waittime, category, type, ov
     level.player_is_speaking = 0;
   }
 }
-
 get_character(current_d) {
   if(!isDefined(level.AUDIO_last_d)) {
     level.AUDIO_last_d = 80;

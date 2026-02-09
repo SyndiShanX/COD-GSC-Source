@@ -1,6 +1,6 @@
 /***************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cosmodrome_amb.csc
+ * Script: clientscripts\zombie_cosmodrome_amb\.csc
 ***************************************************/
 
 #include clientscripts\_utility;
@@ -48,7 +48,6 @@ main() {
   level thread play_minigun_loop();
   level thread samantha_is_angry_setup();
 }
-
 spawn_fx_loopers() {
   clientscripts\_audio::snd_play_auto_fx("fx_fire_line_xsm", "amb_fire_medium");
   clientscripts\_audio::snd_play_auto_fx("fx_fire_line_sm", "amb_fire_large");
@@ -62,7 +61,6 @@ spawn_fx_loopers() {
   clientscripts\_audio::snd_play_auto_fx("fx_zmb_steam_hallway_md", "amb_steam_medium");
   clientscripts\_audio::snd_play_auto_fx("fx_zmb_water_spray_leak_sm", "amb_water_spray_small");
 }
-
 play_minigun_loop() {
   while(1) {
     level waittill("minis");
@@ -70,12 +68,11 @@ play_minigun_loop() {
     ent playLoopSound("zmb_insta_kill_loop");
     level waittill("minie");
     playSound(0, "zmb_insta_kill", (0, 0, 0));
-    ent stopLoopSound(.5);
+    ent stoploopsound(.5);
     wait(.5);
     ent Delete();
   }
 }
-
 alarm_a_timer() {
   level waittill("power_on");
   wait(2.5);
@@ -83,13 +80,11 @@ alarm_a_timer() {
   wait(21);
   level notify("alarm_a_Off");
 }
-
 alarm_b_timer() {
   level waittill("power_on");
   wait(8.5);
   level thread alarm_b();
 }
-
 play_alarm_a() {
   level endon("alarm_a_Off");
   while(1) {
@@ -97,39 +92,33 @@ play_alarm_a() {
     wait(1.1);
   }
 }
-
 play_alarm_b() {
   alarm_bell = spawn(0, self.origin, "script.origin");
   alarm_bell playLoopSound("evt_alarm_b_loop", 0.8);
   wait(8.8);
   playSound(0, "evt_alarm_b_end", self.origin);
   wait(0.1);
-  alarm_bell stopLoopSound(0.6);
+  alarm_bell stoploopsound(0.6);
   wait(3);
   alarm_bell delete();
 }
-
 alarm_a() {
   array_thread(getstructarray("amb_warning_siren", "targetname"), ::play_alarm_a);
 }
-
 alarm_b() {
   array_thread(getstructarray("amb_warning_bell", "targetname"), ::play_alarm_b);
 }
-
 play_pa_vox() {
   wait(2);
   playSound(0, "amb_vox_rus_PA", self.origin);
 }
-
 samantha_is_angry_setup() {
   waitforclient(0);
-  player = getLocalPlayers();
+  player = getlocalplayers();
   for(i = 0; i < player.size; i++) {
     player[i] thread samantha_is_angry_earthquake_and_rumbles();
   }
 }
-
 samantha_is_angry_earthquake_and_rumbles() {
   self endon("death");
   self endon("disconnect");
@@ -142,11 +131,10 @@ samantha_is_angry_earthquake_and_rumbles() {
   snd_set_snapshot("default");
   self clientscripts\_zombiemode::zombie_vision_set_remove(level._visionset_map_nopower, 3);
 }
-
 do_that_sam_rumble() {
   count = 0;
   while(count <= 4) {
-    self playRumbleOnEntity(0, "damage_heavy");
+    self PlayRumbleOnEntity(0, "damage_heavy");
     wait(.1);
     count = count + .1;
   }

@@ -8,7 +8,7 @@
 #include common_scripts\utility;
 
 init() {
-  gameType = GetDvar("g_gametype");
+  gameType = getDvar("g_gametype");
   gameTypeRow = 0;
 
   gameTypeColumn = [];
@@ -1141,7 +1141,7 @@ tagCollectorEvent() {
 }
 
 monitorTagCollector(player) {
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

@@ -68,7 +68,7 @@ try_give_player_weapon_xp(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(isai(var_0) || !isplayer(var_0) || !weapon_progression_enabled() || !is_weapon_unlocked(var_0, var_1)) {
+  if(isai(var_0) || !isPlayer(var_0) || !weapon_progression_enabled() || !is_weapon_unlocked(var_0, var_1)) {
     return;
   }
 

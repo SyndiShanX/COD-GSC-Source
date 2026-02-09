@@ -45,10 +45,10 @@ main() {
   }
 
   // temp disabled, prototyping money
-  if(getdvar("xp_enable", "0") == "1")
+  if(getDvar("xp_enable", "0") == "1")
     thread maps\_rank::init();
 
-  if(getdvar("money_enable", "0") == "1")
+  if(getDvar("money_enable", "0") == "1")
     thread maps\_money::init();
 
   // for combat mode testing
@@ -403,7 +403,6 @@ trigger_spawner(trigger) {
 
     spawner thread trigger_spawner_spawns_guys();
   }
-
 }
 
 trigger_spawner_spawns_guys() {
@@ -864,7 +863,7 @@ spawn_prethink() {
 
   level.ai_classname_in_level[self.classname] = true;
 
-  if(getdvar("noai", "off") != "off") {
+  if(getDvar("noai", "off") != "off") {
     // NO AI in the level plz
     self set_count(0);
     return;
@@ -1112,7 +1111,7 @@ specops_dmg(dmg, attacker, dir, point, type, model_name, tag_name) {
     return;
   }
 
-  if(isDefined(attacker) && IsPlayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     self.last_dmg_player = attacker;
     self.last_dmg_type = type;
   }
@@ -1138,7 +1137,7 @@ deathFunctions() {
       }
 
       validAttacker = false;
-      if(isplayer(attacker))
+      if(isPlayer(attacker))
         validAttacker = true;
       if(isDefined(level.pmc_match) && level.pmc_match)
         validAttacker = true;
@@ -1226,11 +1225,11 @@ spawn_team_allies() {
 
 spawn_team_axis() {
   // xp
-  if(getdvar("xp_enable", "0") == "1")
+  if(getDvar("xp_enable", "0") == "1")
     self thread maps\_rank::AI_xp_init();
 
   // money
-  if(getdvar("money_enable", "0") == "1")
+  if(getDvar("money_enable", "0") == "1")
     self thread maps\_money::AI_money_init();
 
   if(self.type == "human")
@@ -1243,9 +1242,9 @@ spawn_team_axis() {
   }
 
   // for combat mode testing
-  if(getdvar("scr_force_ai_combat_mode") == "ambush")
+  if(getDvar("scr_force_ai_combat_mode") == "ambush")
     self.combatMode = "ambush";
-  else if(getdvar("scr_force_ai_combat_mode") == "ambush_nodes_only")
+  else if(getDvar("scr_force_ai_combat_mode") == "ambush_nodes_only")
     self.combatMode = "ambush_nodes_only";
 }
 
@@ -1497,7 +1496,6 @@ spawn_think_script_inits() {
     self.nodrop = self.script_nodrop;
   }
 
-  /#	
   if(getdvarint("scr_heat") == 1)
     self enable_heat_behavior();
 }
@@ -1545,7 +1543,7 @@ spawn_think_action(targetname) {
   // which eq triggers am I touching?
   //thread setup_ai_eq_triggers();
 
-  /# spawn_think_debug_checks();
+  spawn_think_debug_checks();
 
   init_reset_AI();
 
@@ -3116,7 +3114,7 @@ flood_and_secure(instantRespawn) {
     else {
       if(!isalive(other))
         continue;
-      if(isplayer(other))
+      if(isPlayer(other))
         playerTriggered = true;
       else
       if(!isDefined(other.isSquad) || !other.isSquad) {
@@ -3447,7 +3445,7 @@ flood_and_secure_spawn(spawner) {
 
   self waittill("death", other);
 
-  playerKill = isalive(other) && isplayer(other);
+  playerKill = isalive(other) && isPlayer(other);
   if(!playerkill && isDefined(other) && other.classname == "worldspawn") // OR THE WORLDSPAWN???
   {
     playerKill = true;
@@ -3724,7 +3722,6 @@ friendlychain_onDeath() {
       level.deathSpawner[num] = 0;
 
       level.deathSpawnerEnts[num] = [];
-
     }
 
     spawners[i] thread deathChainSpawnerLogic();
@@ -4016,7 +4013,7 @@ move_when_enemy_hides(nodes) {
       continue;
     }
 
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       if(self.enemy ent_flag("player_has_red_flashing_overlay") || flag("player_flashed")) {
         // player is wounded, chase him with a suicide charge. One must fall!
         self.fixednode = 0;
@@ -4200,7 +4197,7 @@ player_saw_kill(guy, attacker) {
   }
 
   if(isalive(attacker)) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       return true;
     }
 
@@ -4470,7 +4467,7 @@ traceShow(org) {
 
 show_bad_path() {
   if(getdebugdvar("debug_badpath_count") == "")
-    setdvar("debug_badpath_count", 10);
+    setDvar("debug_badpath_count", 10);
 
   self endon("death");
   last_bad_path_time = -5000;
@@ -4554,7 +4551,7 @@ setup_ai_eq_triggers() {
   // ai placed in the level run their spawn func before the triggers are initialized
   waittillframeend;
 
-  self.is_the_player = isplayer(self);
+  self.is_the_player = isPlayer(self);
   self.eq_table = [];
   self.eq_touching = [];
   for(i = 0; i < level.eq_trigger_num; i++) {
@@ -4673,7 +4670,7 @@ achieve_engineer_turret(attacker) {
     return;
   if(!isDefined(attacker.owner))
     return;
-  if(!isplayer(attacker.owner)) {
+  if(!isPlayer(attacker.owner)) {
     return;
   }
   if(!isDefined(attacker.owner.achieve_engineer_turret))
@@ -4687,7 +4684,7 @@ achieve_engineer_turret(attacker) {
 
 achieve_ten_plus_hellfire(attacker) {
   Bplayer = false;
-  if(isplayer(attacker) || (isDefined(attacker.attacker) && isplayer(attacker.attacker)))
+  if(isPlayer(attacker) || (isDefined(attacker.attacker) && isPlayer(attacker.attacker)))
     Bplayer = true;
 
   if(!Bplayer)
@@ -4710,7 +4707,7 @@ achieve_ten_plus_hellfire(attacker) {
 }
 
 achieve_key_master_shotgun(attacker, type) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   weapon = attacker getcurrentweapon();
@@ -4756,7 +4753,7 @@ achieve_key_master_shotgun(attacker, type) {
 }
 
 achieve_some_like_hot_thermal(attacker, type) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   weapon = attacker getcurrentweapon();
@@ -4796,7 +4793,7 @@ achieve_some_like_hot_thermal(attacker, type) {
 }
 
 achieve_2_birds_1_stone(attacker, type) {
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     return;
   if(!(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET")) {
     return;
@@ -4819,7 +4816,7 @@ achieve_2_birds_1_stone(attacker, type) {
 }
 
 achieve_driveby(attacker) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(!isDefined(attacker.drivingVehicle)) {
@@ -4841,7 +4838,7 @@ achieve_harder_they_fall(attacker) {
     return;
   self.achieve_harder_they_fall = 1;
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(!isDefined(self.rappeller)) {
@@ -4865,7 +4862,7 @@ achieve_harder_they_fall(attacker) {
 }
 
 achieve_riotshield_melee(attacker, type) {
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     return;
   if(type != "MOD_MELEE") {
     return;
@@ -4880,7 +4877,7 @@ achieve_riotshield_melee(attacker, type) {
 }
 
 achieve_slowmo_breach_kills(attacker) {
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     return;
   if(!isDefined(attacker.isbreaching)) {
     attacker.achieve_slowmo_breach_kills = undefined;
@@ -4904,7 +4901,7 @@ achieve_slowmo_breach_kills(attacker) {
 }
 
 achieve_downed_kills(attacker) {
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     return;
   if(!attacker.laststand) {
     attacker.achieve_downed_kills = undefined;
@@ -4921,7 +4918,7 @@ achieve_downed_kills(attacker) {
 }
 
 achieve_one_man_army(attacker, type, weapon) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(!isDefined(weapon)) {
@@ -4951,7 +4948,7 @@ achieve_one_man_army(attacker, type, weapon) {
 }
 
 achieve_akimbo(attacker, type) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(!(attacker isDualWielding())) {
@@ -4974,7 +4971,7 @@ achieve_akimbo(attacker, type) {
 }
 
 achieve_stealth_knife(attacker, type) {
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     return;
   if(type != "MOD_MELEE")
     return;
@@ -4991,7 +4988,7 @@ achieve_stealth_knife(attacker, type) {
 }
 
 achieve_threesome(attacker, type, weapon) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(type != "MOD_GRENADE_SPLASH") {

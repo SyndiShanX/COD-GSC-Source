@@ -26,7 +26,6 @@ class czm_location: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::function_dcb34c80("string", "location_name", 1);
   }
-
 }
 
 register(uid) {

@@ -7,25 +7,25 @@
 #include maps\_utility;
 
 main() {
-  setdvar("r_rimIntensity_debug", 1);
-  setdvar("r_rimIntensity", 5);
+  setDvar("r_rimIntensity_debug", 1);
+  setDvar("r_rimIntensity", 5);
   wait 1;
   setsaveddvar("r_lightTweakSunLight", 1);
   visionsetnaked("sp_pakistan_2_default", 2);
 }
 
 set_water_dvars_street() {
-  setdvar("r_waterwavespeed", "0.470637 0.247217 1 1");
-  setdvar("r_waterwaveamplitude", "2.8911 0 0 0");
-  setdvar("r_waterwavewavelength", "9.71035 3.4 1 1");
-  setdvar("r_waterwaveangle", "56.75 237.203 0 0");
-  setdvar("r_waterwavephase", "0 2.6 0 0");
-  setdvar("r_waterwavesteepness", "0 0 0 0");
-  setdvar("r_waterwavelength", "9.71035 3.40359 1 1");
+  setDvar("r_waterwavespeed", "0.470637 0.247217 1 1");
+  setDvar("r_waterwaveamplitude", "2.8911 0 0 0");
+  setDvar("r_waterwavewavelength", "9.71035 3.4 1 1");
+  setDvar("r_waterwaveangle", "56.75 237.203 0 0");
+  setDvar("r_waterwavephase", "0 2.6 0 0");
+  setDvar("r_waterwavesteepness", "0 0 0 0");
+  setDvar("r_waterwavelength", "9.71035 3.40359 1 1");
 }
 
 set_water_dvars_flatten_surface() {
-  setdvar("r_waterwaveamplitude", "0 0 0 0");
+  setDvar("r_waterwaveamplitude", "0 0 0 0");
 }
 
 turn_on_claw_vision() {

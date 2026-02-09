@@ -18,7 +18,7 @@ vehicle_wait(startinvehicle) {
   if(!isDefined(startinvehicle))
     startinvehicle = false;
   else if(startinvehicle) {
-    if(getdvar("player_vehicle_dismountable") == "off")
+    if(getDvar("player_vehicle_dismountable") == "off")
       self makeUnusable();
   }
   self endon("death");
@@ -31,7 +31,7 @@ vehicle_wait(startinvehicle) {
       self useby(level.player);
     }
     owner = self getvehicleowner();
-    if(isDefined(owner) && isplayer(owner))
+    if(isDefined(owner) && isPlayer(owner))
       self thread vehicle_enter();
     else
       self thread vehicle_exit();
@@ -132,7 +132,6 @@ Protect_Player() {
       level.player kill((0, 0, 0));
     level.player.health += int(ammount * .2);
     //		}
-
   }
 }
 
@@ -173,14 +172,13 @@ vehicle_ridehandle() {
       health_regeninc = 50;
       health_regentimer = 2700;
       break;
-
   }
   if(self.vehicletype == "crusader_player") {
     self setModel("vehicle_crusader2_viewmodel");
   }
 
   regentimer = gettime();
-  if(getdvar("debug_vehiclegod") != "off") {
+  if(getDvar("debug_vehiclegod") != "off") {
     while(1) {
       self waittill("damage");
       self.health = self.maxhealth;
@@ -190,7 +188,7 @@ vehicle_ridehandle() {
   regeninctimer = gettime();
   while(1) {
     if(self.damaged) {
-      if(getdvar("debug_vehicleplayerhealth") != "off")
+      if(getDvar("debug_vehicleplayerhealth") != "off")
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
       self.damaged = false;
       regentimer = gettime() + health_regentimer;
@@ -203,7 +201,7 @@ vehicle_ridehandle() {
       else
         self.health += health_regeninc;
       regeninctimer = gettime() + 250;
-      if(getdvar("debug_vehicleplayerhealth") != "off")
+      if(getDvar("debug_vehicleplayerhealth") != "off")
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
     }
 
@@ -242,7 +240,7 @@ vehicle_reloadsound() {
 }
 
 vehicle_hud_tank_fireicon() {
-  if(getdvar("player_vehicle_dismountable") != "off")
+  if(getDvar("player_vehicle_dismountable") != "off")
     return;
   level endon("player exited vehicle");
   level.player endon("death");
@@ -272,7 +270,6 @@ vehicle_hud_tank_fireicon() {
         icon = true;
         level.VehicleFireIcon.alpha = icon;
       }
-
     }
     wait .05;
   }

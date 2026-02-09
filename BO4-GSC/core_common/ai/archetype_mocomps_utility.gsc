@@ -59,7 +59,6 @@ drawtraversal(traversal, entity, animation, mocompanimblendouttime, mocompanimfl
 
     for(index = 1; index < edgepoints.size; index++) {
       recordline(edgepoints[index - 1], edgepoints[index], (1, 0, 0), "<dev string:x38>", entity);
-
     }
   }
 
@@ -67,14 +66,12 @@ drawtraversal(traversal, entity, animation, mocompanimblendouttime, mocompanimfl
 
   for(index = 1; index < edgepoints.size; index++) {
     recordline(edgepoints[index - 1], edgepoints[index], (1, 0, 0), "<dev string:x38>", entity);
-
   }
 
   edgepoints = getnodeedge(traversal.endnode);
 
   for(index = 1; index < edgepoints.size; index++) {
     recordline(edgepoints[index - 1], edgepoints[index], (1, 0, 0), "<dev string:x38>", entity);
-
   }
 }
 
@@ -116,10 +113,8 @@ drawtraversalsection(section, entity, animation, mocompanimblendouttime, mocompa
       nextposition += adjusteddeltaperframe;
 
       recordline(currentposition, nextposition, (0, 1, 0), "<dev string:x38>", entity);
-
     } else {
       recordline(currentposition, nextposition, (1, 0.5, 0), "<dev string:x38>", entity);
-
     }
 
     currentposition = nextposition;
@@ -498,7 +493,7 @@ mocomptraversalproceduralpivotupdate(entity, mocompanim, mocompanimblendouttime,
     return;
   }
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity lerporigin(newentityorigin);
     entity setplayerangles(traversal.startangles);
   }
@@ -652,7 +647,6 @@ debuglocoexplosion(entity) {
     recordline(startorigin, startorigin + damageyawforward * 100, (1, 0, 0), "<dev string:x38>", entity);
     waitframe(1);
   }
-
 }
 
 mocompflankstandinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -673,7 +667,6 @@ mocomplocoexplosioninit(entity, mocompanim, mocompanimblendouttime, mocompanimfl
   if(getdvarint(#"ai_debuglocoexplosionmocomp", 0)) {
     entity thread debuglocoexplosion(entity);
   }
-
 }
 
 mocompadjusttocoverinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -726,7 +719,6 @@ mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendouttime, mocompanim
     recordline(entity.origin, entity.origin + anglesToForward(entity.angles) * 10, (1, 0, 0), "<dev string:x38>", entity);
     recordline(hiptagorigin, (hiptagorigin[0], hiptagorigin[1], entity.origin[2]), (0, 0, 1), "<dev string:x38>", entity);
   }
-
 }
 
 mocompadjusttocoverterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {

@@ -167,7 +167,7 @@ callback_playerconnect() {
   level.players[level.players.size] = self;
 
   if(level.splitscreen) {
-    setdvar(#"splitscreen_playernum", level.players.size);
+    setDvar(#"splitscreen_playernum", level.players.size);
   }
 
   if(gamestate::is_game_over()) {

@@ -423,7 +423,7 @@ function_f8655c9() {
 }
 
 function_af65fe93(t_teleporter) {
-  if(!isplayer(self) || !isDefined(t_teleporter)) {
+  if(!isPlayer(self) || !isDefined(t_teleporter)) {
     return;
   }
 

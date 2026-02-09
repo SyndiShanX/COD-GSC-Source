@@ -601,7 +601,7 @@ function glass_breach_think() {
   self.damage_state = 0;
   while(true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type);
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH")) {
       if(self.damage_state == 0) {
         self glass_gets_destroyed();
         self.damage_state = 1;

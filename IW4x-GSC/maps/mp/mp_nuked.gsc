@@ -17,7 +17,7 @@ main() {
   game["defenders"] = "axis";
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_nuked");
-  //setdvar( "compassmaxrange", "4000" );
+  //setDvar( "compassmaxrange", "4000" );
 
   nuked_doomsday_clock_init();
   level thread nuked_population_sign_think();

@@ -9,7 +9,7 @@
 
 main() {
   if(!isDefined(level.script))
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
 
   PreCacheModel("fog_blackout");
 
@@ -191,7 +191,7 @@ main() {
 }
 
 createfx_stuff() {
-  if(GetDvar("createfx") != "") {
+  if(getDvar("createfx") != "") {
     waittillframeend; // let _load run
     level.sandstorm_time = spawnStruct();
     level.sandstorm_time.min = 0.3;

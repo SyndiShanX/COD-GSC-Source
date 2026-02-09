@@ -15,12 +15,12 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_rust_long");
 
-  setdvar("compassmaxrange", "1400");
+  setDvar("compassmaxrange", "1400");
 
   ambientPlay("ambient_mp_duststorm");
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("r_diffusecolorscale", "1.4");
+  setDvar("r_diffusecolorscale", "1.4");
 }

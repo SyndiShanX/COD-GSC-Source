@@ -59,7 +59,6 @@ debug_org() {
     print3d(self.origin + (0, 0, 0), "ORG", (1, 1, 1), 1, 0.5);
     wait(0.5);
   }
-
 }
 
 player_scuba_bubbles() {
@@ -105,7 +104,7 @@ underwater_hud_enable(bool) {
     //setsaveddvar( "ui_hidemap", 1 );
     SetSavedDvar("hud_showStance", "0");
     SetSavedDvar("compass", "0");
-    //SetDvar( "old_compass", "0" );
+    //setDvar( "old_compass", "0" );
     SetSavedDvar("ammoCounterHide", "1");
     setsaveddvar("g_friendlyNameDist", 0);
     //SetSavedDvar( "hud_showTextNoAmmo", "0" );
@@ -114,7 +113,7 @@ underwater_hud_enable(bool) {
     setSavedDvar("hud_drawhud", "1");
     SetSavedDvar("hud_showStance", "1");
     SetSavedDvar("compass", "1");
-    //SetDvar( "old_compass", "1" );
+    //setDvar( "old_compass", "1" );
     SetSavedDvar("ammoCounterHide", "0");
     setsaveddvar("g_friendlyNameDist", 15000);
     //SetSavedDvar( "hud_showTextNoAmmo", "1" );

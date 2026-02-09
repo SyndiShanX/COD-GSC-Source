@@ -17,7 +17,7 @@
 #namespace globallogic_utils;
 
 is_winner(outcome, team_or_player) {
-  if(isplayer(team_or_player)) {
+  if(isPlayer(team_or_player)) {
     if(outcome.players.size && outcome.players[0] == team_or_player) {
       return true;
     }
@@ -300,10 +300,10 @@ resumetimerdiscardoverride(discardtime) {
 }
 
 getscoreremaining(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return (scorelimit - globallogic_score::_getplayerscore(self));
   }
 
@@ -319,10 +319,10 @@ getteamscoreforround(team) {
 }
 
 getscoreperminute(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   minutespassed = gettimepassed() / int(60 * 1000) + 0.0001;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return (globallogic_score::_getplayerscore(self) / minutespassed);
   }
 
@@ -330,7 +330,7 @@ getscoreperminute(team) {
 }
 
 getestimatedtimeuntilscorelimit(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scoreperminute = self getscoreperminute(team);
   scoreremaining = self getscoreremaining(team);
 
@@ -455,12 +455,12 @@ function_8d61a6c2(var_c1e98979) {
   log_string = level.var_336c35f1[var_c1e98979];
   winner = round::get_winner();
 
-  if(isplayer(winner)) {
+  if(isPlayer(winner)) {
     print("<dev string:x86>" + winner getxuid() + "<dev string:x97>" + winner.name + "<dev string:x9b>");
   }
 
   if(isDefined(winner)) {
-    if(isplayer(winner)) {
+    if(isPlayer(winner)) {
       log_string = log_string + "<dev string:x9f>" + winner getxuid() + "<dev string:x97>" + winner.name + "<dev string:x9b>";
     } else {
       log_string = log_string + "<dev string:x9f>" + winner;

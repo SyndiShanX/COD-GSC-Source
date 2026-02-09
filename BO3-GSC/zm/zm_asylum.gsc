@@ -708,7 +708,7 @@ function waitfor_flag_open_chest_location(which) {
 function watersheet_on_trigger() {
   while(true) {
     self waittill("trigger", who);
-    if(isDefined(who) && isplayer(who) && isalive(who) && who.sessionstate != "spectator") {
+    if(isDefined(who) && isPlayer(who) && isalive(who) && who.sessionstate != "spectator") {
       if(!who laststand::player_is_in_laststand()) {
         if(isDefined(who.var_1e4200d5)) {
           if(!who.var_1e4200d5) {

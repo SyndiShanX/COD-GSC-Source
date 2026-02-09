@@ -321,7 +321,7 @@ watchdeployedriotshielddamage() {
 
     assert(isDefined(self.owner) && isDefined(self.owner.team));
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(level.teambased && !util::function_fbce7263(attacker.team, self.owner.team) && attacker != self.owner) {
         continue;
       }
@@ -365,7 +365,7 @@ damagethendestroyriotshield(attacker, weapon) {
   self notsolid();
   self clientfield::set("riotshield_state", 2);
 
-  if(isDefined(attacker) && attacker != self.owner && isplayer(attacker)) {
+  if(isDefined(attacker) && attacker != self.owner && isPlayer(attacker)) {
     scoreevents::processscoreevent(#"destroyed_shield", attacker, self.owner, weapon);
   }
 
@@ -405,7 +405,7 @@ watch_riot_shield_use() {
 }
 
 event_handler[grenade_fire] function_4f975761(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

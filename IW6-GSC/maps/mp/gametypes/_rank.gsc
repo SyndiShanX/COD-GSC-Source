@@ -264,7 +264,6 @@ onPlayerSpawned() {
     } else {
       AssertEx(isDefined(self.class), "Player should have class here.");
       AssertEx(isDefined(self.class_num), "Player should have class_num here.");
-
     }
 
     self playerUpdateRank();
@@ -309,7 +308,6 @@ onPlayerGiveLoadout() {
           self.pers["rankxp"] = 0;
         else {
           AssertEx(isDefined(self.class_num), "Player should have class_num here.");
-
         }
       }
     }
@@ -350,7 +348,7 @@ giveRankXP_regularMP(type, value, weapon, sMeansOfDeath, challengeName, victim) 
   if(isAI(self)) {
     return;
   }
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!self rankingEnabled()) {
@@ -916,7 +914,7 @@ xpEventPopup_regularMP(event) {
     self.owner xpEventPopup(event);
   }
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self thread xpEventPopupFinalize(event);
@@ -1230,7 +1228,6 @@ watchDevDvars() {
 
         if(weaponTokens[0] == "gl")
           weaponName = weaponTokens[1];
-
       }
       SetDevDvar("scr_devsetweaponmaxrank", 0);
     }

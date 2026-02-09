@@ -230,7 +230,7 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
       break;
 
     case 2:
-      if(var_4 == "none" && !isplayer(var_1)) {
+      if(var_4 == "none" && !isPlayer(var_1)) {
         break;
       }
 

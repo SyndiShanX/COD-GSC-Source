@@ -46,7 +46,6 @@ class cremote_missile_targets: cluielem {
     cluielem::add_clientfield("extra_target_2", 1, 10, "int", var_afbc846a);
     cluielem::add_clientfield("extra_target_3", 1, 10, "int", var_4c87c083);
   }
-
 }
 
 register(uid, var_9318c80d, var_82a5247c, var_afbc846a, var_4c87c083) {

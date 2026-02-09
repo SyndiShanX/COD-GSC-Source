@@ -1214,7 +1214,7 @@ function function_ce9a171c(str_flag) {
   if(self == level) {
     a_players = level.players;
   } else {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       a_players = array(self);
     } else {
       return;

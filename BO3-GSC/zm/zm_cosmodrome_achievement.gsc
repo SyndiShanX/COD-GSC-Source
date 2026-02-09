@@ -29,7 +29,7 @@ function achievement_chimp_on_the_barbie() {
   level endon("end_game");
   for(;;) {
     level waittill("trap_kill", zombie, trap);
-    if(!isplayer(zombie) && "monkey_zombie" == zombie.animname && "fire" == trap._trap_type) {
+    if(!isPlayer(zombie) && "monkey_zombie" == zombie.animname && "fire" == trap._trap_type) {
       zm_utility::giveachievement_wrapper("DLC2_ZOM_FIREMONKEY", 1);
       return;
     }

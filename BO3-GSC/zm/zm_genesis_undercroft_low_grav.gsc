@@ -127,13 +127,13 @@ function function_e49e9c09() {
 }
 
 function function_efcb9832() {
-  setdvar("wallrun_enabled", 1);
-  setdvar("doublejump_enabled", 1);
-  setdvar("playerEnergy_enabled", 1);
-  setdvar("bg_lowGravity", 300);
-  setdvar("wallRun_maxTimeMs_zm", 10000);
-  setdvar("playerEnergy_maxReserve_zm", 200);
-  setdvar("wallRun_peakTest_zm", 0);
+  setDvar("wallrun_enabled", 1);
+  setDvar("doublejump_enabled", 1);
+  setDvar("playerEnergy_enabled", 1);
+  setDvar("bg_lowGravity", 300);
+  setDvar("wallRun_maxTimeMs_zm", 10000);
+  setDvar("playerEnergy_maxReserve_zm", 200);
+  setDvar("wallRun_peakTest_zm", 0);
   level thread function_5f1fa8cd();
 }
 
@@ -223,7 +223,7 @@ function function_c3f6aa22() {
           self clientfield::set_to_player("player_postfx", 1);
           self thread function_e997f73a();
           if(getdvarint("") > 0) {
-            setdvar("", getdvarint(""));
+            setDvar("", getdvarint(""));
           }
         }
         wait(0.1);

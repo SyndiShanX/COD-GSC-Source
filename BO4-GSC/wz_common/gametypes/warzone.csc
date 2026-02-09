@@ -67,11 +67,11 @@ event_handler[gametype_init] main(eventstruct) {
   function_f6b076db();
 
   if(isDefined(getgametypesetting(#"hash_3a73deb0ca8c9aea")) && getgametypesetting(#"hash_3a73deb0ca8c9aea")) {
-    setdvar(#"cg_drawcrosshair", 0);
+    setDvar(#"cg_drawcrosshair", 0);
   }
 
   if(isDefined(getgametypesetting(#"hash_7532afe3ef8b4332")) && getgametypesetting(#"hash_7532afe3ef8b4332")) {
-    setdvar(#"hash_2d5b0d6d4ce995d7", 0);
+    setDvar(#"hash_2d5b0d6d4ce995d7", 0);
   }
 }
 
@@ -176,7 +176,6 @@ function_41f9de03() {
   if(isDefined(level.var_909020d0)) {
     println(level.var_909020d0 + "<dev string:x40>" + level.var_a1222bd2);
   }
-
 }
 
 on_localclient_connect(localclientnum) {
@@ -201,12 +200,12 @@ on_player_spawned(localclientnum) {
 }
 
 function_c6878ba5() {
-  setdvar(#"hash_254c50d45dcf475", 0);
+  setDvar(#"hash_254c50d45dcf475", 0);
 }
 
 function_f6b076db() {
-  setdvar(#"hash_254c50d45dcf475", 300);
-  setdvar(#"hash_51508fd2e827ae4", 1500);
+  setDvar(#"hash_254c50d45dcf475", 300);
+  setDvar(#"hash_51508fd2e827ae4", 1500);
 }
 
 on_killcam_begin(params) {
@@ -324,7 +323,7 @@ function_a1b40aa4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  if(!isplayer(player) || !isalive(player)) {
+  if(!isPlayer(player) || !isalive(player)) {
     function_3f258626(localclientnum);
     return;
   }

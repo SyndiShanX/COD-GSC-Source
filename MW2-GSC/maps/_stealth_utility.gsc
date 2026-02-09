@@ -16,7 +16,7 @@
 stealth_default() {
   self stealth_plugin_basic();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
   switch (self.team) {
@@ -55,7 +55,7 @@ stealth_set_default_stealth_function(key, func) {
 stealth_plugin_basic(custom_state_funcs) {
   assertex(isDefined(level._stealth.logic), "call maps\_stealth::main()");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self maps\_stealth_visibility_friendly::stealth_visibility_friendly_main();
     return;
   }

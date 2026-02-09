@@ -105,7 +105,7 @@ function tdef() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || attacker.team == self.team) {
+  if(!isPlayer(attacker) || attacker.team == self.team) {
     return;
   }
   victim = self;

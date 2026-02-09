@@ -132,7 +132,6 @@ _id_59DF() {
 
   if(level._id_1F19 != "tarmac") {
     level waittill("start_commander_wake_up_anim");
-
   }
   var_4 = getent("crashed_plane_engine", "targetname");
   var_4._id_1032 = "engine";
@@ -142,7 +141,6 @@ _id_59DF() {
 
   if(level._id_1F19 != "tarmac_2") {
     var_0 thread maps\_anim::_id_124E(level._id_58D2, "exit_top_idle", "stop_top_loop");
-
   }
   common_scripts\utility::flag_wait_any("player_exit_plane_1", "start_commander_ramp_anim");
   common_scripts\utility::flag_set("commander_started_ramp_anim");
@@ -232,7 +230,6 @@ _id_59E6() {
 
   if(var_2 < -0.2) {
     return 0;
-
   }
   return 1;
 }
@@ -397,11 +394,9 @@ _id_59EE() {
 _id_59F0() {
   if(level._id_1F19 == "tarmac") {
     common_scripts\utility::flag_wait("player_exit_plane_2");
-
   }
   if(level._id_1F19 == "tarmac_2") {
     common_scripts\utility::flag_wait("start_engine_explosion");
-
   }
   thread maps\hijack_drunk_player::_id_5988();
 }
@@ -431,14 +426,12 @@ _id_59F2() {
 
   if(level._id_1F19 != "tarmac_2") {
     thread _id_59F7();
-
   }
   thread _id_59FA();
   thread _id_59EE();
 
   if(level._id_1F19 != "tarmac" && level._id_1F19 != "tarmac_2") {
     wait 3.5;
-
   }
   thread maps\hijack_drunk_player::main();
   thread _id_59F0();
@@ -447,7 +440,6 @@ _id_59F2() {
 
   if(!common_scripts\utility::flag("player_exit_plane_4")) {
     thread _id_59F1();
-
   }
   thread maps\hijack_drunk_player::_id_5985();
   common_scripts\utility::flag_set("start_doing_aftermath_walk");
@@ -460,7 +452,6 @@ _id_59F2() {
 
   if(level._id_1F19 != "tarmac_2") {
     wait 3;
-
   }
   _id_59C4(0.24);
   common_scripts\utility::flag_wait("player_exit_plane_3");
@@ -470,7 +461,6 @@ _id_59F2() {
 
   if(isDefined(level._id_59EF)) {
     level._id_59EF._id_1B71 = 1;
-
   }
   common_scripts\utility::flag_wait("player_exit_plane_4");
   thread _id_59F4();
@@ -601,7 +591,6 @@ _id_59F8() {
 _id_59F9(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = "J_prop_1";
-
   }
   var_3 = maps\_utility::_id_1287("post_crash_prop");
   waittillframeend;
@@ -651,7 +640,6 @@ _id_59FC() {
     level._id_58D2 maps\_anim::_id_1246(level._id_58D2, "engine_stumble");
   } else {
     common_scripts\utility::flag_wait("commander_finished_flare_anim");
-
   }
   common_scripts\utility::flag_set("commander_finished_engine_react_anim");
 }
@@ -760,7 +748,7 @@ _id_599A() {
 
 _id_5A03() {
   common_scripts\utility::flag_wait("tarmac_level_fail");
-  setdvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
+  setDvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
   level notify("mission failed");
   maps\_utility::_id_1826();
 }
@@ -813,7 +801,6 @@ _id_5A05(var_0) {
 
   if(isDefined(var_1[0])) {
     var_1[0] delete();
-
   }
   if(isDefined(var_1[2])) {
     var_1[2] delete();
@@ -991,7 +978,6 @@ _id_5943() {
 
   if(level._id_1F19 == "post_tarmac" || level._id_1F19 == "end_scene") {
     var_0 = 0.0;
-
   }
   level._id_5943 thread _id_5A0D(var_0);
   level._id_5943 thread _id_5A0C();
@@ -1068,7 +1054,6 @@ _id_5A0D(var_0) {
 
   if(isDefined(var_0)) {
     wait(var_0);
-
   }
   self._id_2891 thread _id_5275("heli_spotlight", "tag_flash", self);
 }
@@ -1096,7 +1081,6 @@ _id_536E(var_0) {
 
   if(isDefined(var_0)) {
     var_0 waittill("death");
-
   }
   self delete();
 }

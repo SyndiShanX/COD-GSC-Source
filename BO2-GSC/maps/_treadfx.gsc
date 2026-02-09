@@ -6,19 +6,23 @@
 loadtreadfx(vehicle) {
   treadfx = getvehicletreadfxarray(vehicle.vehicletype);
 
-  for(i = 0; i < treadfx.size; i++)
+  for(i = 0; i < treadfx.size; i++) {
     loadfx(treadfx[i]);
+  }
 
   lightfx = vehicle.lightfxnamearray;
 
-  for(i = 0; i < lightfx.size; i++)
+  for(i = 0; i < lightfx.size; i++) {
     loadfx(lightfx[i]);
+  }
 
-  if(isDefined(vehicle.friendlylightfxname) && vehicle.friendlylightfxname != "")
+  if(isDefined(vehicle.friendlylightfxname) && vehicle.friendlylightfxname != "") {
     loadfx(vehicle.friendlylightfxname);
+  }
 
-  if(isDefined(vehicle.enemylightfxname) && vehicle.enemylightfxname != "")
+  if(isDefined(vehicle.enemylightfxname) && vehicle.enemylightfxname != "") {
     loadfx(vehicle.enemylightfxname);
+  }
 
   if(vehicle.vehicletype == "boat_soct_player") {
     vehicle.throttlefx = [];

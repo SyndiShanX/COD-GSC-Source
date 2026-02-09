@@ -31,8 +31,8 @@ function autoexec init() {
   level.var_4fb25bb9["run"] = 4;
   level.var_4fb25bb9["sprint"] = 4;
   level.var_4fb25bb9["crawl"] = 3;
-  setdvar("tu5_zmPathDistanceCheckTolarance", 20);
-  setdvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("tu5_zmPathDistanceCheckTolarance", 20);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
   level.closest_player_override = &castle_closest_player;
   level thread update_closest_player();
   thread castle_zombie_devgui();
@@ -246,7 +246,7 @@ function private castle_closest_player(origin, var_6c55ba74) {
 }
 
 function private function_4fee0339(player) {
-  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isPlayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
   return true;

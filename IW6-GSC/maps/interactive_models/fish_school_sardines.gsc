@@ -883,7 +883,7 @@ sardines_detectpeople(var_0, var_1, var_2, var_3, var_4) {
   while(var_8) {
     var_6 waittill("trigger", var_10);
 
-    if(isDefined(var_10) && isplayer(var_10)) {
+    if(isDefined(var_10) && isPlayer(var_10)) {
       var_11 = var_3 * var_3;
       var_12 = 1;
 

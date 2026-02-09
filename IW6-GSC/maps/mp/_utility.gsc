@@ -210,7 +210,6 @@ getPlant() {
     if(!isDefined(besttracefraction) || (trace["fraction"] < besttracefraction)) {
       besttracefraction = trace["fraction"];
       besttraceposition = trace["position"];
-
     }
   }
 
@@ -847,7 +846,6 @@ getNextRelevantDialog() {
     } else {
       return level.alliesCapturing[self.leaderDialogQueue];
     }
-
   }
 }
 
@@ -1035,12 +1033,12 @@ registerScoreLimitDvar(dvarString, defaultValue) {
 
 registerTimeLimitDvar(dvarString, defaultValue) {
   registerWatchDvarFloat("timelimit", defaultValue);
-  SetDvar("ui_timelimit", getTimeLimit());
+  setDvar("ui_timelimit", getTimeLimit());
 }
 
 registerHalfTimeDvar(dvarString, defaultValue) {
   registerWatchDvarInt("halftime", defaultValue);
-  SetDvar("ui_halftime", getHalfTime());
+  setDvar("ui_halftime", getHalfTime());
 }
 
 registerNumLivesDvar(dvarString, defaultValue) {
@@ -1048,7 +1046,7 @@ registerNumLivesDvar(dvarString, defaultValue) {
 }
 
 setOverTimeLimitDvar(value) {
-  SetDvar("overtimeTimeLimit", value);
+  setDvar("overtimeTimeLimit", value);
 }
 
 get_damageable_player(player, playerpos) {
@@ -1908,7 +1906,7 @@ _timeout_pause_on_death_and_prematch(delay, ent) {
 
   inc = 0.05;
   while(delay > 0) {
-    if(IsPlayer(ent) && !isReallyAlive(ent)) {
+    if(isPlayer(ent) && !isReallyAlive(ent)) {
       ent waittill("spawned_player");
     }
     if(GetOmnvar("ui_prematch_period")) {
@@ -2688,7 +2686,6 @@ initGlobals() {
     level.global_tables["killstreakTable"].dpad_icon_col = 15;
     level.global_tables["killstreakTable"].unearned_icon_col = 16;
     level.global_tables["killstreakTable"].all_team_steak_col = 17;
-
   }
 }
 
@@ -2741,7 +2738,7 @@ teamPlayerCardSplash(splash, owner, team, optionalNumber) {
     if(isDefined(team) && player.team != team) {
       continue;
     }
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify(splash, owner, optionalNumber);
@@ -3277,12 +3274,12 @@ setThirdPersonDOF(isEnabled) {
 killTrigger(pos, radius, height) {
   trig = spawn("trigger_radius", pos, 0, radius, height);
 
-  if(getdvar("scr_killtriggerdebug") == "1")
+  if(getDvar("scr_killtriggerdebug") == "1")
     thread killTriggerDebug(pos, radius, height);
 
   for(;;) {
-    if(getdvar("scr_killtriggerradius") != "")
-      radius = int(getdvar("scr_killtriggerradius"));
+    if(getDvar("scr_killtriggerradius") != "")
+      radius = int(getDvar("scr_killtriggerradius"));
 
     trig waittill("trigger", player);
 
@@ -3791,7 +3788,6 @@ setFakeLoadoutWeaponSlot(sWeapon, omnvarSlot) {
 
     self SetClientOmnvar(attachmentOmnvar, attachmentRowIdx);
   }
-
 }
 
 isBuffUnlockedForWeapon(buffRef, weaponRef) {
@@ -3869,7 +3865,7 @@ setCommonRulesFromMatchRulesData(skipFriendlyFire) {
     SetDynamicDvar("scr_game_forceuav", 0);
   }
 
-  SetDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
 }
 
 reInitializeMatchRulesOnMigration() {
@@ -4084,7 +4080,7 @@ IsTeamParticipant(ent) {
   if(IsAITeamParticipant(ent))
     return true;
 
-  if(IsPlayer(ent))
+  if(isPlayer(ent))
     return true;
 
   return false;
@@ -4104,7 +4100,7 @@ IsGameParticipant(ent) {
   if(IsAIGameParticipant(ent))
     return true;
 
-  if(IsPlayer(ent))
+  if(isPlayer(ent))
     return true;
 
   return false;
@@ -4237,7 +4233,7 @@ get_rank_xp_for_bot() {
 bot_israndom() {
   isRandom = true;
 
-  if(GetDvar("squad_use_hosts_squad") == "1") {
+  if(getDvar("squad_use_hosts_squad") == "1") {
     botTeam = undefined;
 
     if(isDefined(self.bot_team))
@@ -4358,29 +4354,29 @@ bot_is_fireteam_mode() {
 
 set_console_status() {
   if(!isDefined(level.Console))
-    level.Console = GetDvar("consoleGame") == "true";
+    level.Console = getDvar("consoleGame") == "true";
   else
-    AssertEx(level.Console == (GetDvar("consoleGame") == "true"), "Level.console got set incorrectly.");
+    AssertEx(level.Console == (getDvar("consoleGame") == "true"), "Level.console got set incorrectly.");
 
   if(!isDefined(level.xenon))
-    level.xenon = GetDvar("xenonGame") == "true";
+    level.xenon = getDvar("xenonGame") == "true";
   else
-    AssertEx(level.xenon == (GetDvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
+    AssertEx(level.xenon == (getDvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
 
   if(!isDefined(level.ps3))
-    level.ps3 = GetDvar("ps3Game") == "true";
+    level.ps3 = getDvar("ps3Game") == "true";
   else
-    AssertEx(level.ps3 == (GetDvar("ps3Game") == "true"), "Level.ps3 got set incorrectly.");
+    AssertEx(level.ps3 == (getDvar("ps3Game") == "true"), "Level.ps3 got set incorrectly.");
 
   if(!isDefined(level.xb3))
-    level.xb3 = GetDvar("xb3Game") == "true";
+    level.xb3 = getDvar("xb3Game") == "true";
   else
-    AssertEx(level.xb3 == (GetDvar("xb3Game") == "true"), "Level.xb3 got set incorrectly.");
+    AssertEx(level.xb3 == (getDvar("xb3Game") == "true"), "Level.xb3 got set incorrectly.");
 
   if(!isDefined(level.ps4))
-    level.ps4 = GetDvar("ps4Game") == "true";
+    level.ps4 = getDvar("ps4Game") == "true";
   else
-    AssertEx(level.ps4 == (GetDvar("ps4Game") == "true"), "Level.ps4 got set incorrectly.");
+    AssertEx(level.ps4 == (getDvar("ps4Game") == "true"), "Level.ps4 got set incorrectly.");
 }
 
 is_gen4() {
@@ -4398,9 +4394,9 @@ setdvar_cg_ng(dvar_name, current_gen_val, next_gen_val) {
   AssertEx(isDefined(level.console) && isDefined(level.xb3) && isDefined(level.ps4), "Expected platform defines to be complete.");
 
   if(is_gen4())
-    setdvar(dvar_name, next_gen_val);
+    setDvar(dvar_name, next_gen_val);
   else
-    setdvar(dvar_name, current_gen_val);
+    setDvar(dvar_name, current_gen_val);
 }
 
 isValidTeamTarget(attacker, victimTeam, target) {
@@ -4699,7 +4695,7 @@ getRandomPlayingPlayer() {
 
 getMapName() {
   if(!isDefined(level.mapName))
-    level.mapName = GetDvar("mapname");
+    level.mapName = getDvar("mapname");
 
   return level.mapName;
 }

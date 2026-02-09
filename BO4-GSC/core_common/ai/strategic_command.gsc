@@ -127,7 +127,7 @@ function_65b80a10(commander, member, vehicle = undefined) {
   if(isDefined(vehicle)) {
     occupant = vehicle getseatoccupant(0);
 
-    if(isplayer(occupant) && !isbot(occupant)) {
+    if(isPlayer(occupant) && !isbot(occupant)) {
       return "<dev string:x38>";
     }
 
@@ -376,7 +376,6 @@ function_75df771f() {
     if(var_f3ac248f != 0) {
       if(!debugmode) {
         iprintlnbold("<dev string:x160>");
-
       }
 
       var_1b2a0645 = xoffset;
@@ -412,7 +411,6 @@ function_75df771f() {
 
     if(debugmode) {
       iprintlnbold("<dev string:x178>");
-
     }
   }
 }
@@ -428,7 +426,6 @@ _debuggameobjects() {
     foreach(gameobject in level.a_gameobjects) {
       function_3ed19fa3(gameobject);
     }
-
   }
 }
 
@@ -1128,7 +1125,6 @@ function_423cfbc1(side, var_ebfc3fac = undefined, missioncomponent = undefined, 
     }
 
     sdebug[sdebug.size] = var_ebfc3fac.type + "<dev string:x104>" + var_ebfc3fac.name + "<dev string:x420>" + (isDefined(var_f57f0f3f) ? var_f57f0f3f : "<dev string:x1df>");
-
   }
 
   if(isDefined(missioncomponent)) {
@@ -1139,7 +1135,6 @@ function_423cfbc1(side, var_ebfc3fac = undefined, missioncomponent = undefined, 
     }
 
     sdebug[sdebug.size] = missioncomponent.scriptbundlename + "<dev string:x426>" + (isDefined(var_e763ef0b) ? var_e763ef0b : "<dev string:x1df>");
-
   }
 
   if(isDefined(gameobject)) {
@@ -1174,7 +1169,6 @@ function_423cfbc1(side, var_ebfc3fac = undefined, missioncomponent = undefined, 
       }
 
       sdebug[sdebug.size] = "<dev string:x42b>" + gameobject getentitynumber() + "<dev string:x420>" + (isDefined(var_1c9cd543) ? var_1c9cd543 : "<dev string:x1df>");
-
     }
   }
 
@@ -1341,7 +1335,7 @@ function_208c970d(gpbundle, var_832340f2) {
 }
 
 isvalidplayer(client) {
-  return isDefined(client) && !isbot(client) && isplayer(client) && !client isinmovemode("ufo", "noclip");
+  return isDefined(client) && !isbot(client) && isPlayer(client) && !client isinmovemode("ufo", "noclip");
 }
 
 function_f867cce0(missioncomponent, commanderteam) {
@@ -1496,7 +1490,6 @@ querypointsinsidetrigger(bot, trigger) {
     points = tacticalquery(#"stratcom_tacquery_trigger", obb);
 
     level thread function_1891d0d2(points, obb);
-
   }
 
   return points;
@@ -1518,7 +1511,6 @@ function_210f00bf(bot, trigger) {
     points = tacticalquery(#"stratcom_tacquery_trigger", obb);
 
     level thread function_1891d0d2(points, obb);
-
   }
 
   return points;

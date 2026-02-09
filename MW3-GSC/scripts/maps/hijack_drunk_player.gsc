@@ -44,7 +44,6 @@ _id_5986() {
 
     if(isDefined(var_0)) {
       wait(var_0);
-
     }
     childthread _id_5987();
   }
@@ -69,7 +68,6 @@ _id_4BCB() {
     if(!common_scripts\utility::flag("fall")) {
       if(isDefined(level._id_5989)) {
         [[level._id_5989]]();
-
       }
       if(common_scripts\utility::flag("player_heartbeat_sound")) {
         wait 0.05;
@@ -141,7 +139,6 @@ _id_598C(var_0) {
 
     if(var_6 < 0.05) {
       var_6 = 0.05;
-
     }
     var_7 = gettime();
     var_0 moveto((var_4, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
@@ -186,7 +183,6 @@ _id_598F() {
       var_0 = var_0 + 1.5;
     } else {
       var_0 = var_0 + randomfloatrange(0, 2);
-
     }
     var_1 = var_1 + var_3 * 0.01 * level._id_598D;
 
@@ -194,11 +190,9 @@ _id_598F() {
       var_1 = var_1 + 1.5;
     } else {
       var_1 = var_1 + randomfloatrange(0, 2);
-
     }
     if(cos(var_0) > 0) {
       var_0 = var_0 + var_3 * 0.1;
-
     }
     var_4 = sin(var_0) - 1;
     var_5 = var_4 * 1.8 * level._id_598D;
@@ -207,7 +201,6 @@ _id_598F() {
 
     if(!common_scripts\utility::flag("player_limping")) {
       level._id_5258 rotateto((var_5, var_7, var_6), var_2, var_2 * 0.5, var_2 * 0.5);
-
     }
     wait 0.05;
   }
@@ -259,7 +252,6 @@ _id_5992(var_0) {
       var_1 = var_1 + 2;
     } else {
       var_1 = var_1 - 1;
-
     }
     var_1 = clamp(var_1, 0, var_2);
 
@@ -351,7 +343,6 @@ _id_5994() {
 
     if(randomint(100) < 20) {
       var_6 = var_6 * 1.5;
-
     }
     var_7 = randomfloatrange(0.35, 0.45);
     var_8 = randomfloatrange(0.65, 0.8);
@@ -372,7 +363,6 @@ _id_5994() {
 
     if(var_5 > 1.3) {
       var_0++;
-
     }
     common_scripts\utility::flag_set("player_limping");
     childthread _id_51E4(var_11, var_7, var_8);

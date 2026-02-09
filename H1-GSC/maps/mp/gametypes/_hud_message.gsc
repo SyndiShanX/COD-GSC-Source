@@ -55,7 +55,7 @@ init() {
   level.lua_splash_type_rankup = 4;
   level.lua_splash_type_generic = 5;
   level thread onplayerconnect();
-  setdvar("scr_lua_splashes", "1");
+  setDvar("scr_lua_splashes", "1");
 }
 
 onplayerconnect() {
@@ -185,7 +185,7 @@ dispatchnotify(var_0) {
 }
 
 promotionsplashnotify() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -348,7 +348,7 @@ shownotifymessage(var_0) {
 }
 
 coopkillstreaksplashnotify(var_0, var_1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -368,7 +368,7 @@ coopkillstreaksplashnotify(var_0, var_1) {
 }
 
 killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -423,7 +423,7 @@ killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
 }
 
 challengesplashnotify(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -480,7 +480,7 @@ medalsplashnotify(var_0) {
 }
 
 splashnotify(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(getdvarint("scr_lua_splashes")) {
@@ -518,7 +518,7 @@ splashnotify(var_0, var_1, var_2) {
 }
 
 rankupsplashnotify(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -553,7 +553,7 @@ rankupsplashnotify(var_0, var_1, var_2) {
 }
 
 playercardsplashnotify(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self endon("disconnect");
@@ -688,7 +688,7 @@ actionnotifymessage(var_0) {
         if(isDefined(var_0.playercardplayer)) {
           self setclientomnvar("ui_splash_playercard_idx", var_2);
 
-          if(isplayer(var_0.playercardplayer))
+          if(isPlayer(var_0.playercardplayer))
             self setclientomnvar("ui_splash_playercard_clientnum", var_0.playercardplayer getentitynumber());
 
           if(isDefined(var_0.optionalnumber))

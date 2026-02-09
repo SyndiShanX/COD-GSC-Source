@@ -1,6 +1,6 @@
 /***************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_zom_scuba.csc
+ * Script: character\clientscripts\c_zom_scuba\.csc
 ***************************************************/
 
 matches_me() {

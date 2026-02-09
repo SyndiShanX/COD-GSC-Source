@@ -110,7 +110,7 @@ processscoreevent(event, player, victim, weapon) {
   pixbeginevent("processScoreEvent");
   scoregiven = 0;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     assertmsg("processScoreEvent called on non player entity: " + event);
 
     return scoregiven;

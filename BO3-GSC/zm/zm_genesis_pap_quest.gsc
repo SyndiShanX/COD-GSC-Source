@@ -250,7 +250,7 @@ function function_9278bc8a(var_181e2689) {
     }
   }
   level notify("hash_80f97945");
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker thread zm_genesis_vo::function_57f3d77();
   }
   exploder::exploder("fxexp_" + (106 + var_181e2689));

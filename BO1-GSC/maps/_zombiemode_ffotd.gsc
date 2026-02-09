@@ -13,7 +13,6 @@ main_start() {
     level.zombie_additionalprimaryweapon_machine_origin = undefined;
   }
 }
-
 main_end() {}
 nazizombies_checking_for_cheats() {
   return false;

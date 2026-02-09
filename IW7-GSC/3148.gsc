@@ -605,7 +605,7 @@ func_1951() {
       break;
     }
 
-    if(isplayer(self.var_77A3)) {
+    if(isPlayer(self.var_77A3)) {
       var_11 = level.player getEye();
     } else if(isai(self.var_77A3)) {
       var_11 = self.var_77A3 getEye();
@@ -689,7 +689,7 @@ func_1953() {
       break;
     }
 
-    if(isplayer(self.var_77A3)) {
+    if(isPlayer(self.var_77A3)) {
       var_1 = 0;
       if(level.player func_846D() == "safe") {
         var_1 = 4.62;
@@ -757,7 +757,7 @@ func_194D() {
       break;
     }
 
-    if(isplayer(self.var_6A5D)) {
+    if(isPlayer(self.var_6A5D)) {
       var_1 = level.player getEye();
     } else if(isai(self.var_6A5D)) {
       var_1 = self.var_6A5D getEye();
@@ -796,7 +796,7 @@ func_1950() {
       break;
     }
 
-    if(isplayer(self.var_6A5D)) {
+    if(isPlayer(self.var_6A5D)) {
       var_1 = level.player getEye();
     } else if(isai(self.var_6A5D)) {
       var_1 = self.var_6A5D getEye();
@@ -846,7 +846,7 @@ func_1966() {
       break;
     }
 
-    if(isplayer(self.var_77A3)) {
+    if(isPlayer(self.var_77A3)) {
       var_9 = level.player getEye();
     } else if(isai(self.var_77A3)) {
       var_9 = self.var_77A3 getEye();
@@ -963,7 +963,7 @@ func_195D(var_0) {
     return;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_3 = level.player getEye();
   } else if(!isDefined(var_1)) {
     var_3 = self.origin;
@@ -1306,7 +1306,7 @@ func_194C(var_0, var_1, var_2) {
     return;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_12 = level.player getEye();
   } else if(!isDefined(var_1)) {
     var_12 = self.origin;
@@ -1446,7 +1446,7 @@ func_1952() {
       break;
     }
 
-    if(isplayer(self.var_77A3)) {
+    if(isPlayer(self.var_77A3)) {
       var_8 = level.player getEye();
     } else if(isai(self.var_77A3)) {
       var_8 = self.var_77A3 getEye();
@@ -1487,7 +1487,7 @@ func_1954() {
       break;
     }
 
-    if(isplayer(self.var_77A3)) {
+    if(isPlayer(self.var_77A3)) {
       var_1 = level.player getEye();
     } else if(isai(self.var_77A3)) {
       var_1 = self.var_77A3 getEye();
@@ -1622,7 +1622,7 @@ func_2B8A() {
       break;
     }
 
-    if(isplayer(var_0.var_77A3)) {
+    if(isPlayer(var_0.var_77A3)) {
       var_9 = level.player getEye();
     } else if(isai(var_0.var_77A3)) {
       var_9 = var_0.var_77A3 getEye();
@@ -1796,7 +1796,7 @@ func_2B86() {
       break;
     }
 
-    if(isplayer(var_0.var_77A3)) {
+    if(isPlayer(var_0.var_77A3)) {
       var_11 = level.player getEye();
     } else if(isai(var_0.var_77A3)) {
       var_11 = var_0.var_77A3 getEye();

@@ -18,11 +18,11 @@ main() {
   game["attackers"] = "axis";
   game["defenders"] = "allies";
 
-  setdvar("r_specularcolorscale", "2.3");
-  setdvar("compassmaxrange", "4000");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1);
-  setdvar("r_lightGridContrast", .4);
+  setDvar("r_specularcolorscale", "2.3");
+  setDvar("compassmaxrange", "4000");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1);
+  setDvar("r_lightGridContrast", .4);
 
   thread killTrigger((2077, -91, 0), 75, 20);
 }

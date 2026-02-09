@@ -341,7 +341,7 @@ func_114D9() {
         self.var_72B8 = var_6;
         thread func_698D();
       }
-    } else if(isplayer(var_6)) {
+    } else if(isPlayer(var_6)) {
       var_6 scripts\mp\damagefeedback::updatedamagefeedback("hitHelicopter");
 
       if(var_6 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {

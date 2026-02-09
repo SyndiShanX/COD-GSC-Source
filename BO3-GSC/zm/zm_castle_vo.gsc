@@ -708,7 +708,7 @@ function function_7b697614(str_vo_alias, n_delay = 0, b_wait_if_busy = 0, n_prio
   self.str_vo_being_spoken = str_vo_alias;
   array::add(level.a_e_speakers, self, 1);
   var_2df3d133 = str_vo_alias + "_vo_done";
-  if(isactor(self) || isplayer(self)) {
+  if(isactor(self) || isPlayer(self)) {
     self playsoundwithnotify(str_vo_alias, var_2df3d133, "J_head");
   } else {
     self playsoundwithnotify(str_vo_alias, var_2df3d133);
@@ -1141,7 +1141,7 @@ function function_24854f68() {
 function function_5b684ae5() {
   while(true) {
     level waittill("trap_kill", e_zombie, var_f1c4d54d);
-    var_ecf98bb6 = (isplayer(var_f1c4d54d) ? var_f1c4d54d : var_f1c4d54d.activated_by_player);
+    var_ecf98bb6 = (isPlayer(var_f1c4d54d) ? var_f1c4d54d : var_f1c4d54d.activated_by_player);
     e_zombie function_52f36cdc("generic", var_ecf98bb6);
   }
 }

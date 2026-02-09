@@ -815,16 +815,16 @@ intro_struct_realign(var_0, var_1) {
 
   if(isDefined(var_0))
     var_2.origin = common_scripts\utility::drop_to_ground(var_0, 10, -200);
-  else if(getdvar("intro_origin") != "") {
-    var_3 = strtok(getdvar("intro_origin"), " ");
+  else if(getDvar("intro_origin") != "") {
+    var_3 = strtok(getDvar("intro_origin"), " ");
     var_2.origin = (float(var_3[0]), float(var_3[1]), float(var_3[2]));
     var_2.origin = common_scripts\utility::drop_to_ground(var_2.origin, 10, -200);
   }
 
   if(isDefined(var_1))
     var_2.angles = var_1 + (0, 90, 0);
-  else if(getdvar("intro_angles") != "") {
-    var_3 = strtok(getdvar("intro_angles"), " ");
+  else if(getDvar("intro_angles") != "") {
+    var_3 = strtok(getDvar("intro_angles"), " ");
     var_2.angles = (float(var_3[0]), float(var_3[1]) + 90, float(var_3[2]));
   }
 }

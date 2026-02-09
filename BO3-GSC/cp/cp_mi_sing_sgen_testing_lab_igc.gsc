@@ -105,7 +105,7 @@ function function_652f4022() {
 
 function humanlab_3rd_sh005(a_ents) {
   foreach(e_in_scene in a_ents) {
-    if(isplayer(e_in_scene)) {
+    if(isPlayer(e_in_scene)) {
       e_in_scene cybercom::cybercom_armpulse(1);
       e_in_scene clientfield::set_to_player("sndCCHacking", 2);
       e_in_scene util::delay(1, "death", &clientfield::increment_to_player, "hack_dni_fx");

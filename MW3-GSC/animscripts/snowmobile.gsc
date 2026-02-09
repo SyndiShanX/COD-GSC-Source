@@ -64,7 +64,6 @@ _id_0EF3() {
     thread _id_0EFB();
   } else {
     thread _id_0EF9();
-
   }
   _id_0EFD("passenger");
 }
@@ -78,7 +77,7 @@ _id_0EF6() {
   var_1 = [];
   var_1["left2right"] = getanimlength(animscripts\utility::_id_0D4D("left2right"));
   var_1["right2left"] = getanimlength(animscripts\utility::_id_0D4D("right2left"));
-  self setanimknoball( % sm_turn, % body, 1, 0);
+  self setanimknoball(%sm_turn, %body, 1, 0);
   self setanim(animscripts\utility::_id_0D4D("drive"), 1, 0);
   self setanimknob(animscripts\utility::_id_0D4D(var_0), 1, 0);
   self setanimtime(animscripts\utility::_id_0D4D(var_0), 0.5);
@@ -90,7 +89,6 @@ _id_0EF6() {
 
       if(var_0 == "right2left") {
         var_3 = 1 - var_3;
-
       }
       var_4 = 20 * abs(var_3 - var_2);
 
@@ -117,18 +115,17 @@ _id_0EF6() {
 _id_0EF9() {
   self endon("death");
   self endon("killanimscript");
-  self setanimknoball(animscripts\utility::_id_0D4D("hide"), % body, 1, 0);
+  self setanimknoball(animscripts\utility::_id_0D4D("hide"), %body, 1, 0);
   self setanimknob(animscripts\utility::_id_0D4D("drive"), 1, 0);
 
   for(;;) {
     var_0 = maps\_vehicle::_id_0EF8(self._id_0EF1);
-    self setanimlimited( % sm_lean, abs(var_0), 0.05);
+    self setanimlimited(%sm_lean, abs(var_0), 0.05);
 
     if(var_0 >= 0) {
       self setanimknoblimited(animscripts\utility::_id_0D4D("lean_right"), 1, 0.05);
     } else {
       self setanimknoblimited(animscripts\utility::_id_0D4D("lean_left"), 1, 0.05);
-
     }
     wait 0.05;
   }
@@ -139,7 +136,7 @@ _id_0EFA() {
   self endon("killanimscript");
   var_0 = 0.05;
   var_1 = 0;
-  self setanimknoball( % sm_aiming, % body, 1, 0);
+  self setanimknoball(%sm_aiming, %body, 1, 0);
   self setanimknob(animscripts\utility::_id_0D4D("idle"), 1, 0);
 
   for(;;) {
@@ -163,7 +160,6 @@ _id_0EFA() {
 
     if(var_1 <= gettime()) {
       _id_0EFF();
-
     }
     self setanimknoblimited(animscripts\utility::_id_0D4D("add_aim_left_center"), var_3, var_0);
     self setanimlimited(animscripts\utility::_id_0D4D("add_aim_left_left"), var_4, var_0);
@@ -180,7 +176,7 @@ _id_0EFB() {
   self endon("death");
   self endon("killanimscript");
   var_0 = 0.05;
-  self setanimknoball( % sm_aiming, % body, 1, 0);
+  self setanimknoball(%sm_aiming, %body, 1, 0);
   self setanimknob(animscripts\utility::_id_0D4D("idle"), 1, 0);
 
   for(;;) {
@@ -213,9 +209,8 @@ _id_0EFB() {
     self setanimlimited(animscripts\utility::_id_0D4D("add_aim_backright_left"), var_3, var_0);
     self setanimlimited(animscripts\utility::_id_0D4D("add_aim_backright_right"), var_4, var_0);
 
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       self updateplayersightaccuracy();
-
     }
     wait 0.05;
     thread _id_0F00();
@@ -287,7 +282,7 @@ _id_0EFD(var_0) {
 
 _id_0EFF() {
   self notify("want_shoot_while_driving");
-  self setanim( % sm_add_fire, 1, 0.2);
+  self setanim(%sm_add_fire, 1, 0.2);
 
   if(isDefined(self._id_0EE9)) {
     return;
@@ -303,7 +298,7 @@ _id_0F00() {
   wait 0.05;
   self notify("end_shoot_while_driving");
   self._id_0EE9 = undefined;
-  self clearanim( % sm_add_fire, 0.2);
+  self clearanim(%sm_add_fire, 0.2);
 }
 
 _id_0F01() {
@@ -337,7 +332,6 @@ _id_0F03() {
     self._id_0CDA = "burst";
   } else {
     self._id_0CDA = "single";
-
   }
   if(isDefined(self.enemy.vehicle)) {
     var_1 = 0.5;
@@ -360,13 +354,11 @@ _id_0F03() {
           var_9 = 128;
         } else if(var_9 < -128) {
           var_9 = -128;
-
         }
         if(var_9 > 0) {
           var_9 = 128 - var_9;
         } else {
           var_9 = -128 - var_9;
-
         }
         self._id_0CAB = undefined;
         self._id_0CB1 = var_2.origin + var_8 * var_5 + var_9 * var_6;
@@ -395,15 +387,12 @@ _id_0F05() {
 _id_0F07() {
   if(!self._id_0EF1._id_0EF7) {
     return 0;
-
   }
   if(!animscripts\combat_utility::_id_0F08(0)) {
     return 0;
-
   }
   if(!animscripts\utility::_id_0EE3()) {
     return 0;
-
   }
   _id_0F09();
   self notify("abort_reload");
@@ -414,19 +403,19 @@ _id_0F09() {
   self endon("snowmobile_event_occurred");
   self._id_0F0A = 1;
   self waittill("start_blending_reload");
-  self setanim( % sm_aiming, 0, 0.25);
+  self setanim(%sm_aiming, 0, 0.25);
   self setflaggedanimrestart("gun_down", animscripts\utility::_id_0D4D("gun_down"), 1, 0.25);
   animscripts\shared::_id_0C51("gun_down");
   self clearanim(animscripts\utility::_id_0D4D("gun_down"), 0);
-  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::_id_0D4D("reload"), % body, 1, 0.25);
+  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::_id_0D4D("reload"), %body, 1, 0.25);
   animscripts\shared::_id_0C51("reload_anim");
-  self clearanim( % sm_reload, 0.2);
+  self clearanim(%sm_reload, 0.2);
   self setflaggedanimrestart("gun_up", animscripts\utility::_id_0D4D("gun_up"), 1, 0.25);
   self._id_0F0B = 1;
   animscripts\shared::_id_0C51("gun_up", ::_id_0F0C);
   self._id_0F0A = undefined;
-  self clearanim( % sm_reload, 0.1);
-  self setanim( % sm_aiming, 1, 0.1);
+  self clearanim(%sm_reload, 0.1);
+  self setanim(%sm_aiming, 1, 0.1);
 
   if(isDefined(self._id_0F0B)) {
     self._id_0F0B = undefined;
@@ -469,7 +458,6 @@ _id_0F0F() {
 
     if(isDefined(self._id_0CAB)) {
       var_6 = self._id_0CAB getshootatpos();
-
     }
     if(!isDefined(var_6)) {
       var_3 = 0;
@@ -487,7 +475,6 @@ _id_0F0F() {
 
     if(var_3 > self.rightaimlimit || var_3 < self.leftaimlimit) {
       var_3 = 0;
-
     }
     if(var_4) {
       var_4 = 0;
@@ -502,8 +489,8 @@ _id_0F0F() {
     var_2 = var_3;
     var_11 = min(max(0 - var_3, 0), 90) / 90 * self.a._id_0CC3;
     var_12 = min(max(var_3, 0), 90) / 90 * self.a._id_0CC3;
-    self setanimlimited( % sm_aim_4, var_11, var_0);
-    self setanimlimited( % sm_aim_6, var_12, var_0);
+    self setanimlimited(%sm_aim_4, var_11, var_0);
+    self setanimlimited(%sm_aim_6, var_12, var_0);
     wait 0.05;
   }
 }
@@ -528,7 +515,6 @@ _id_0F10() {
 
     if(isDefined(self._id_0CAB)) {
       var_10 = self._id_0CAB getshootatpos();
-
     }
     if(!isDefined(var_10)) {
       var_7 = 0;
@@ -546,18 +532,15 @@ _id_0F10() {
 
     if(isDefined(self._id_0F0A) || var_7 > 0 && (var_7 - self.rightaimlimit) * self._id_0EF5 > 0 || var_7 < 0 && (var_7 - self.leftaimlimit) * self._id_0EF5 < 0) {
       var_7 = 0;
-
     }
     if(var_8) {
       var_8 = 0;
     } else {
       if(var_6 < -180 + var_4 && var_7 > 180 - var_5) {
         var_7 = -179;
-
       }
       if(var_6 > 180 - var_4 && var_7 < -180 + var_5) {
         var_7 = 179;
-
       }
       var_14 = var_7 - var_6;
       var_15 = (var_2 - var_1) * abs(var_14) / 180 + var_1;
@@ -581,11 +564,11 @@ _id_0F10() {
     var_18 = max(90 - abs(var_7), 0) / 90 * self.a._id_0CC3;
     var_19 = min(max(var_7, 0), 90) / 90 * self.a._id_0CC3;
     var_20 = max(-90 + var_7, 0) / 90 * self.a._id_0CC3;
-    self setanimlimited( % sm_aim_1, var_16, var_0);
-    self setanimlimited( % sm_aim_4_delta, var_17, var_0);
-    self setanimlimited( % sm_aim_5_delta, var_18, var_0);
-    self setanimlimited( % sm_aim_6_delta, var_19, var_0);
-    self setanimlimited( % sm_aim_3, var_20, var_0);
+    self setanimlimited(%sm_aim_1, var_16, var_0);
+    self setanimlimited(%sm_aim_4_delta, var_17, var_0);
+    self setanimlimited(%sm_aim_5_delta, var_18, var_0);
+    self setanimlimited(%sm_aim_6_delta, var_19, var_0);
+    self setanimlimited(%sm_aim_3, var_20, var_0);
     wait 0.05;
   }
 }
@@ -614,7 +597,6 @@ _id_0F11(var_0, var_1, var_2) {
 
   if(isDefined(anim._id_0F12) && var_8 == anim._id_0F12 && gettime() - anim._id_0F13 < 500) {
     var_8 = var_4;
-
   }
   anim._id_0F12 = var_8;
   anim._id_0F13 = gettime();
@@ -628,7 +610,6 @@ _id_0F14() {
 
   if(lengthsquared(var_1) > 1000000) {
     var_1 = vectornormalize(var_1) * 1000;
-
   }
   var_2 = spawn("script_origin", self.origin);
   var_2 moveslide((0, 0, 40), 15, var_1);
@@ -655,7 +636,6 @@ _id_0F17() {
 
   if(!isDefined(var_0)) {
     return _id_0F16();
-
   }
   var_1 = var_0._id_0F15;
   _id_0F14();

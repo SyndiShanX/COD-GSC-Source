@@ -43,7 +43,7 @@ function __init__() {
   level.primaryprogressbarwidth = 120;
   level.primaryprogressbary_ss = 280;
   if(getdvarstring("revive_trigger_radius") == "") {
-    setdvar("revive_trigger_radius", "40");
+    setDvar("revive_trigger_radius", "40");
   }
   level.laststandgetupallowed = 0;
   if(!isDefined(level.vsmgr_prio_visionset_zm_laststand)) {
@@ -69,7 +69,7 @@ function laststand_global_init() {
 }
 
 function player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if("zcleansed" == level.gametype) {
       demo::bookmark("kill", gettime(), attacker, self, 0, einflictor);
     }
@@ -144,7 +144,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   }
   if(isDefined(self.is_zombie) && self.is_zombie) {
     self takeallweapons();
-    if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
+    if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
       attacker notify("killed_a_zombie_player", einflictor, self, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration);
     }
   } else {
@@ -630,7 +630,7 @@ function revive_trigger_think(t_secondary) {
       }
       b_revive_successful = e_reviver revive_do_revive(self, w_reviver, w_revive_tool, t_secondary);
       e_reviver notify("revive_done");
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self allowjump(1);
       }
       self.laststand = undefined;
@@ -772,7 +772,7 @@ function revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
   e_revivee.revive_hud settext(&"ZOMBIE_PLAYER_IS_REVIVING_YOU", name);
   e_revivee laststand::revive_hud_show_n_fade(3);
   e_revivee.revivetrigger sethintstring("");
-  if(isplayer(e_revivee)) {
+  if(isPlayer(e_revivee)) {
     e_revivee startrevive(self);
   }
   if(0 && !isDefined(self.reviveprogressbar)) {
@@ -830,7 +830,7 @@ function revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
     self.revivetexthud destroy();
   }
   if(isDefined(e_revivee.revivetrigger.auto_revive) && e_revivee.revivetrigger.auto_revive == 1) {} else if(!revived) {
-    if(isplayer(e_revivee)) {
+    if(isPlayer(e_revivee)) {
       e_revivee stoprevive(self);
     }
   }
@@ -889,7 +889,7 @@ function auto_revive(reviver, dont_enable_weapons) {
   self util::delay(2, "death", &set_ignoreme, 0);
   self.laststand = undefined;
   if(!(isDefined(level.isresetting_grief) && level.isresetting_grief)) {
-    if(isplayer(reviver)) {
+    if(isPlayer(reviver)) {
       reviver.revives++;
       reviver zm_stats::increment_client_stat("revives");
       reviver zm_stats::increment_player_stat("revives");
@@ -913,7 +913,7 @@ function remote_revive(reviver) {
 }
 
 function revive_success(reviver, b_track_stats = 1) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     self notify("player_revived", reviver);
     return;
   }
@@ -981,7 +981,7 @@ function set_ignoreme(b_ignoreme) {
 
 function revive_force_revive(reviver) {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   assert(self laststand::player_is_in_laststand());
   self thread revive_success(reviver);
 }

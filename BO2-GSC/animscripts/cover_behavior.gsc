@@ -56,8 +56,9 @@ main(behaviorcallbacks) {
       self thread endidleatframeend();
       [[behaviorcallbacks.mainloopstart]]();
 
-      if(gettime() == starttime)
+      if(gettime() == starttime) {
         self notify("dont_end_idle");
+      }
     }
 
     if(runforcedbehaviors(behaviorcallbacks)) {
@@ -94,8 +95,9 @@ main(behaviorcallbacks) {
 
     if(visibleenemy) {
       if(self.a.getboredofthisnodetime < gettime()) {
-        if(lookforbettercover())
+        if(lookforbettercover()) {
           return;
+        }
       }
 
       attackvisibleenemy(behaviorcallbacks);
@@ -103,8 +105,9 @@ main(behaviorcallbacks) {
     }
 
     if(isDefined(self.aggressivemode) && self.aggressivemode || enemyishiding()) {
-      if(advanceonhidingenemy())
+      if(advanceonhidingenemy()) {
         return;
+      }
     }
 
     if(suppressableenemy) {
@@ -112,8 +115,9 @@ main(behaviorcallbacks) {
       continue;
     }
 
-    if(attacknothingtodo(behaviorcallbacks))
+    if(attacknothingtodo(behaviorcallbacks)) {
       return;
+    }
   }
 }
 
@@ -139,25 +143,27 @@ resetrespondtodeathtime() {
 resetlookforbettercovertime() {
   currenttime = gettime();
 
-  if(isDefined(self.didshufflemove) && currenttime > self.a.getboredofthisnodetime)
+  if(isDefined(self.didshufflemove) && currenttime > self.a.getboredofthisnodetime) {
     self.a.getboredofthisnodetime = currenttime + randomintrange(2000, 5000);
-  else if(isDefined(self.enemy)) {
+  } else if(isDefined(self.enemy)) {
     dist = distance2d(self.origin, self.enemy.origin);
 
-    if(dist < self.engagemindist)
+    if(dist < self.engagemindist) {
       self.a.getboredofthisnodetime = currenttime + randomintrange(5000, 10000);
-    else if(dist > self.engagemaxdist && dist < self.goalradius)
+    } else if(dist > self.engagemaxdist && dist < self.goalradius) {
       self.a.getboredofthisnodetime = currenttime + randomintrange(2000, 5000);
-    else
+    } else {
       self.a.getboredofthisnodetime = currenttime + randomintrange(10000, 15000);
+    }
   } else
     self.a.getboredofthisnodetime = currenttime + randomintrange(5000, 15000);
 }
 
 respondtodeadteammate() {
   if(self atdangerousnode() && self.a.respondtodeathtime < gettime()) {
-    if(lookforbettercover())
+    if(lookforbettercover()) {
       return true;
+    }
 
     self.a.respondtodeathtime = gettime() + anim.coverglobals.respond_to_death_retry_interval;
   }
@@ -172,26 +178,30 @@ dononattackcoverbehavior(behaviorcallbacks) {
   }
 
   if(shouldswitchsides(1)) {
-    if(switchsides(behaviorcallbacks))
+    if(switchsides(behaviorcallbacks)) {
       return true;
+    }
   }
 
   if(suppressedbehavior(behaviorcallbacks)) {
-    if(isenemyvisiblefromexposed())
+    if(isenemyvisiblefromexposed()) {
       resetseekoutenemytime();
+    }
 
     self.a.lastencountertime = gettime();
     return true;
   }
 
-  if(coverreload(behaviorcallbacks, 0))
+  if(coverreload(behaviorcallbacks, 0)) {
     return true;
+  }
 
   if(animscripts\shared::shouldswitchweapons()) {
     animscripts\shared::switchweapons();
 
-    if(isDefined(behaviorcallbacks.resetweaponanims))
+    if(isDefined(behaviorcallbacks.resetweaponanims)) {
       [[behaviorcallbacks.resetweaponanims]]();
+    }
 
     return true;
   }
@@ -206,8 +216,9 @@ throwgrenadeatenemyasap(behaviorcallbacks) {
     if(isalive(players[0])) {
       self.grenadeammo++;
 
-      if(trythrowinggrenade(behaviorcallbacks, players[0], 1))
+      if(trythrowinggrenade(behaviorcallbacks, players[0], 1)) {
         return true;
+      }
     }
   }
 
@@ -215,8 +226,9 @@ throwgrenadeatenemyasap(behaviorcallbacks) {
     if(isDefined(self.enemy) && isalive(self.enemy)) {
       self.grenadeammo++;
 
-      if(trythrowinggrenade(behaviorcallbacks, self.enemy, 1))
+      if(trythrowinggrenade(behaviorcallbacks, self.enemy, 1)) {
         return true;
+      }
     }
   }
 
@@ -240,8 +252,9 @@ attackvisibleenemy(behaviorcallbacks) {
     return;
   }
   if(distancesquared(self.origin, self.enemy.origin) > anim.coverglobals.min_grenade_throw_distance_sq) {
-    if(trythrowinggrenade(behaviorcallbacks, self.enemy))
+    if(trythrowinggrenade(behaviorcallbacks, self.enemy)) {
       return;
+    }
   }
 
   if(leavecoverandshoot(behaviorcallbacks, "normal")) {
@@ -253,21 +266,24 @@ attackvisibleenemy(behaviorcallbacks) {
 
 attacksuppressableenemy(behaviorcallbacks) {
   if(self.doingambush) {
-    if(leavecoverandshoot(behaviorcallbacks, "ambush"))
+    if(leavecoverandshoot(behaviorcallbacks, "ambush")) {
       return;
+    }
   } else if(self.providecoveringfire || gettime() >= self.a.nextallowedsuppresstime) {
     preferredactivity = "suppress";
 
-    if(!self.providecoveringfire && gettime() - self.lastsuppressiontime > 5000 && randomint(3) < 2)
+    if(!self.providecoveringfire && gettime() - self.lastsuppressiontime > 5000 && randomint(3) < 2) {
       preferredactivity = "ambush";
-    else if(!self animscripts\shoot_behavior::shouldsuppress())
+    } else if(!self animscripts\shoot_behavior::shouldsuppress()) {
       preferredactivity = "ambush";
+    }
 
     if(leavecoverandshoot(behaviorcallbacks, preferredactivity)) {
       self.a.nextallowedsuppresstime = gettime() + randomintrange(anim.coverglobals.suppress_wait_min, anim.coverglobals.suppress_wait_max);
 
-      if(isenemyvisiblefromexposed())
+      if(isenemyvisiblefromexposed()) {
         self.a.lastencountertime = gettime();
+      }
 
       return;
     }
@@ -280,12 +296,14 @@ attacksuppressableenemy(behaviorcallbacks) {
 }
 
 attacknothingtodo(behaviorcallbacks) {
-  if(coverreload(behaviorcallbacks, 0.1))
+  if(coverreload(behaviorcallbacks, 0.1)) {
     return false;
+  }
 
   if(isvalidenemy(self.enemy)) {
-    if(trythrowinggrenade(behaviorcallbacks, self.enemy))
+    if(trythrowinggrenade(behaviorcallbacks, self.enemy)) {
       return false;
+    }
   }
 
   if(!self.doingambush && gettime() >= self.a.nextallowedlooktime) {
@@ -296,14 +314,16 @@ attacknothingtodo(behaviorcallbacks) {
   }
 
   if(gettime() > self.a.getboredofthisnodetime) {
-    if(cantfindanythingtodo())
+    if(cantfindanythingtodo()) {
       return true;
+    }
   }
 
   if(self.doingambush || gettime() >= self.a.nextallowedsuppresstime && isvalidenemy(self.enemy)) {
     if(leavecoverandshoot(behaviorcallbacks, "ambush")) {
-      if(isenemyvisiblefromexposed())
+      if(isenemyvisiblefromexposed()) {
         resetseekoutenemytime();
+      }
 
       self.a.lastencountertime = gettime();
       self.a.nextallowedsuppresstime = gettime() + randomintrange(anim.coverglobals.suppress_wait_ambush_min, anim.coverglobals.suppress_wait_max);
@@ -316,18 +336,21 @@ attacknothingtodo(behaviorcallbacks) {
 }
 
 isenemyvisiblefromexposed() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(distancesquared(self.enemy.origin, self.couldntseeenemypos) < 256)
+  if(distancesquared(self.enemy.origin, self.couldntseeenemypos) < 256) {
     return 0;
-  else
+  } else {
     return canseeenemyfromexposed();
+  }
 }
 
 suppressedbehavior(behaviorcallbacks) {
-  if(!issuppressedwrapper())
+  if(!issuppressedwrapper()) {
     return false;
+  }
 
   nextallowedblindfiretime = gettime();
   justlooked = 1;
@@ -338,13 +361,15 @@ suppressedbehavior(behaviorcallbacks) {
     justlooked = 0;
     self teleport(self.covernode.origin);
 
-    if(runforcedbehaviors(behaviorcallbacks))
+    if(runforcedbehaviors(behaviorcallbacks)) {
       return false;
+    }
 
     trymovingnodes = 1;
 
-    if(isDefined(self.a.favor_blindfire) && self.a.favor_blindfire)
+    if(isDefined(self.a.favor_blindfire) && self.a.favor_blindfire) {
       trymovingnodes = cointoss();
+    }
 
     if(trymovingnodes && trytogetoutofdangeroussituation()) {
       self notify("killanimscript");
@@ -377,10 +402,11 @@ suppressedbehavior(behaviorcallbacks) {
       if(gettime() >= nextallowedblindfiretime) {
         if(blindfire(behaviorcallbacks)) {
           if(!(isDefined(self.a.favor_blindfire) && self.a.favor_blindfire)) {
-            if(self.team != "allies")
+            if(self.team != "allies") {
               nextallowedblindfiretime = nextallowedblindfiretime + randomintrange(anim.coverglobals.enemy_blindfire_wait_time_min, anim.coverglobals.enemy_blindfire_wait_time_max);
-            else
+            } else {
               nextallowedblindfiretime = nextallowedblindfiretime + randomintrange(anim.coverglobals.ally_blindfire_wait_time_min, anim.coverglobals.ally_blindfire_wait_time_max);
+            }
           } else
             nextallowedblindfiretime = gettime();
 
@@ -395,8 +421,9 @@ suppressedbehavior(behaviorcallbacks) {
     }
 
     if(shouldswitchsides(0)) {
-      if(switchsides(behaviorcallbacks))
+      if(switchsides(behaviorcallbacks)) {
         continue;
+      }
     }
 
     if(coverreload(behaviorcallbacks, 0.1)) {
@@ -405,8 +432,9 @@ suppressedbehavior(behaviorcallbacks) {
     idle(behaviorcallbacks);
   }
 
-  if(!justlooked && randomint(2) == 0)
+  if(!justlooked && randomint(2) == 0) {
     peekout(behaviorcallbacks);
+  }
 
   self animscripts\debug::debugpopstate("suppressedBehavior");
 
@@ -414,31 +442,35 @@ suppressedbehavior(behaviorcallbacks) {
 }
 
 calloptionalbehaviorcallback(callback, arg, arg2, arg3) {
-  if(!isDefined(callback))
+  if(!isDefined(callback)) {
     return 0;
+  }
 
   self thread endidleatframeend();
   starttime = gettime();
   val = undefined;
 
-  if(isDefined(arg3))
+  if(isDefined(arg3)) {
     val = [[callback]](arg, arg2, arg3);
-  else if(isDefined(arg2))
+  } else if(isDefined(arg2)) {
     val = [[callback]](arg, arg2);
-  else if(isDefined(arg))
+  } else if(isDefined(arg)) {
     val = [[callback]](arg);
-  else
+  } else {
     val = [[callback]]();
+  }
 
   assert(isDefined(val) && (val == 1 || val == 0), "behavior callback must return true or false");
 
-  if(isDefined(val) && val)
+  if(isDefined(val) && val) {
     assert(gettime() != starttime, "behavior callback must return true only if its lets time pass");
-  else
+  } else {
     assert(gettime() == starttime, "behavior callbacks returning false must not have a wait in them");
+  }
 
-  if(!val)
+  if(!val) {
     self notify("dont_end_idle");
+  }
 
   return val;
 }
@@ -452,16 +484,18 @@ watchsuppression() {
     self waittill("suppression");
     time = gettime();
 
-    if(self.lastsuppressiontime < time - 700)
+    if(self.lastsuppressiontime < time - 700) {
       self.suppressionstart = time;
+    }
 
     self.lastsuppressiontime = time;
   }
 }
 
 coverreload(behaviorcallbacks, threshold) {
-  if(isDefined(self.covernode.turret))
+  if(isDefined(self.covernode.turret)) {
     return 0;
+  }
 
   assert(isDefined(self.bulletsinclip));
   assert(isDefined(self.weapon));
@@ -471,8 +505,9 @@ coverreload(behaviorcallbacks, threshold) {
 
   forcebehavior = shouldforcebehavior("reload");
 
-  if(!forcebehavior && self.bulletsinclip > weaponclipsize(self.weapon) * threshold)
+  if(!forcebehavior && self.bulletsinclip > weaponclipsize(self.weapon) * threshold) {
     return 0;
+  }
 
   self.isreloading = 1;
 
@@ -493,15 +528,17 @@ rambo(behaviorcallbacks) {
 leavecoverandshoot(behaviorcallbacks, initialgoal) {
   self thread animscripts\shoot_behavior::decidewhatandhowtoshoot(initialgoal);
 
-  if(!self.fixednode && !self.doingambush)
+  if(!self.fixednode && !self.doingambush) {
     self thread breakoutofshootingifwanttomoveup();
+  }
 
   self animscripts\debug::debugpushstate("leaveCoverAndShoot");
 
   val = rambo(behaviorcallbacks);
 
-  if(!val)
+  if(!val) {
     val = calloptionalbehaviorcallback(behaviorcallbacks.leavecoverandshoot);
+  }
 
   self animscripts\debug::debugpopstate("leaveCoverAndShoot");
 
@@ -510,26 +547,27 @@ leavecoverandshoot(behaviorcallbacks, initialgoal) {
 }
 
 lookforenemy(behaviorcallbacks) {
-  if(self.a.atconcealmentnode && self canseeenemy())
+  if(self.a.atconcealmentnode && self canseeenemy()) {
     return 0;
+  }
 
   self animscripts\debug::debugpushstate("lookForEnemy");
 
   looked = 0;
 
-  if(self.a.lastencountertime + 6000 > gettime())
+  if(self.a.lastencountertime + 6000 > gettime()) {
     looked = peekout(behaviorcallbacks);
-  else {
-    if(weaponisgasweapon(self.weapon))
+  } else {
+    if(weaponisgasweapon(self.weapon)) {
       looked = calloptionalbehaviorcallback(behaviorcallbacks.look, 5 + randomfloat(2));
-    else
+    } else {
       looked = calloptionalbehaviorcallback(behaviorcallbacks.look, 2 + randomfloat(2));
+    }
 
     if(!looked) {
       looked = calloptionalbehaviorcallback(behaviorcallbacks.fastlook);
 
       self animscripts\debug::debugaddstateinfo("lookForEnemy", "look failed, used fastlook");
-
     }
   }
 
@@ -547,7 +585,6 @@ peekout(behaviorcallbacks) {
     looked = calloptionalbehaviorcallback(behaviorcallbacks.look, 0);
 
     self animscripts\debug::debugaddstateinfo("peekOut", "fastlook failed, used look");
-
   }
 
   self animscripts\debug::debugpopstate("peekOut");
@@ -577,13 +614,15 @@ idle(behaviorcallbacks, howlong) {
     self.a.idlingatcover = 1;
   }
 
-  if(isDefined(howlong))
+  if(isDefined(howlong)) {
     self idlewait(howlong);
-  else
+  } else {
     self idlewaitabit();
+  }
 
-  if(self.flinching)
+  if(self.flinching) {
     self waittill("flinch_done");
+  }
 
   self notify("stop_waiting_to_flinch");
 
@@ -626,8 +665,9 @@ flinchwhensuppressed(behaviorcallbacks) {
   assert(isDefined(behaviorcallbacks.flinch));
   val = [[behaviorcallbacks.flinch]]();
 
-  if(!val)
+  if(!val) {
     self notify("dont_end_idle");
+  }
 
   self.flinching = 0;
   self notify("flinch_done");
@@ -657,7 +697,6 @@ trythrowinggrenade(behaviorcallbacks, throwat, forcethrow) {
 
   if(!canthrowgrenade()) {
     self animscripts\debug::debugpopstate("tryThrowingGrenade", "Cant throw grenade, canThrowGrenade() failed");
-
   }
 
   forward = anglesToForward(self.angles);
@@ -686,13 +725,15 @@ trythrowinggrenade(behaviorcallbacks, throwat, forcethrow) {
     return 0;
   }
 
-  if(shouldswitchsides(0))
+  if(shouldswitchsides(0)) {
     switchsides(behaviorcallbacks);
+  }
 
-  if(self ispartiallysuppressedwrapper() || isDefined(forcethrow) && forcethrow)
+  if(self ispartiallysuppressedwrapper() || isDefined(forcethrow) && forcethrow) {
     result = calloptionalbehaviorcallback(behaviorcallbacks.grenadehidden, throwat, forcethrow);
-  else
+  } else {
     result = calloptionalbehaviorcallback(behaviorcallbacks.grenade, throwat);
+  }
 
   self animscripts\debug::debugpopstate("tryThrowingGrenade");
 
@@ -700,11 +741,13 @@ trythrowinggrenade(behaviorcallbacks, throwat, forcethrow) {
 }
 
 blindfire(behaviorcallbacks) {
-  if(!canblindfire())
+  if(!canblindfire()) {
     return 0;
+  }
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     self animscripts\shoot_behavior::setshootent(self.enemy);
+  }
 
   self animscripts\debug::debugpushstate("blindfire");
 
@@ -729,53 +772,62 @@ breakoutofshootingifwanttomoveup() {
       continue;
     }
     if(enemyishiding()) {
-      if(advanceonhidingenemy())
+      if(advanceonhidingenemy()) {
         return;
+      }
     }
 
     if(!self recentlysawenemy() && !self cansuppressenemy()) {
       if(gettime() > self.a.getboredofthisnodetime) {
-        if(cantfindanythingtodo())
+        if(cantfindanythingtodo()) {
           return;
+        }
       }
     }
   }
 }
 
 enemyishiding() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
-  if(self.enemy isflashed())
+  if(self.enemy isflashed()) {
     return true;
+  }
 
-  if(isplayer(self.enemy)) {
-    if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
+  if(isPlayer(self.enemy)) {
+    if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth) {
       return true;
+    }
   } else if(issentient(self.enemy) && self.enemy issuppressedwrapper())
     return true;
 
-  if(isDefined(self.enemy.isreloading) && self.enemy.isreloading)
+  if(isDefined(self.enemy.isreloading) && self.enemy.isreloading) {
     return true;
+  }
 
   return false;
 }
 
 wouldbesmartformyaitypetoseekoutenemy() {
-  if(self weaponanims() == "rocketlauncher")
+  if(self weaponanims() == "rocketlauncher") {
     return false;
+  }
 
-  if(self issniper())
+  if(self issniper()) {
     return false;
+  }
 
   return true;
 }
 
 resetseekoutenemytime() {
-  if(isDefined(self.aggressivemode) && self.aggressivemode)
+  if(isDefined(self.aggressivemode) && self.aggressivemode) {
     self.seekoutenemytime = gettime() + randomintrange(500, 1000);
-  else
+  } else {
     self.seekoutenemytime = gettime() + randomintrange(3000, 5000);
+  }
 }
 
 cantfindanythingtodo() {
@@ -783,60 +835,72 @@ cantfindanythingtodo() {
 }
 
 advanceonhidingenemy() {
-  if(self.fixednode || self.doingambush)
+  if(self.fixednode || self.doingambush) {
     return 0;
+  }
 
-  if(isDefined(self.aggressivemode) && self.aggressivemode && gettime() >= self.seekoutenemytime)
+  if(isDefined(self.aggressivemode) && self.aggressivemode && gettime() >= self.seekoutenemytime) {
     return tryrunningtoenemy(0);
+  }
 
   foundbettercover = 0;
 
-  if(!isvalidenemy(self.enemy) || !self.enemy isflashed())
+  if(!isvalidenemy(self.enemy) || !self.enemy isflashed()) {
     foundbettercover = lookforbettercover();
+  }
 
   if(!foundbettercover && isvalidenemy(self.enemy) && wouldbesmartformyaitypetoseekoutenemy() && !self canseeenemyfromexposed()) {
-    if(gettime() >= self.seekoutenemytime || self.enemy isflashed())
+    if(gettime() >= self.seekoutenemytime || self.enemy isflashed()) {
       return tryrunningtoenemy(0);
+    }
   }
 
   return foundbettercover;
 }
 
 trytogetoutofdangeroussituation() {
-  if(movetonearbycover())
+  if(movetonearbycover()) {
     return 1;
+  }
 
   return lookforbettercover();
 }
 
 movetonearbycover() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
   if(isDefined(self.didshufflemove) && self.didshufflemove) {
     self.didshufflemove = undefined;
     return false;
   }
 
-  if(aihasonlypistol())
+  if(aihasonlypistol()) {
     return false;
+  }
 
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return false;
+  }
 
-  if(self.fixednode || self.doingambush || self.keepclaimednode || self.keepclaimednodeifvalid)
+  if(self.fixednode || self.doingambush || self.keepclaimednode || self.keepclaimednodeifvalid) {
     return false;
+  }
 
-  if(distancesquared(self.origin, self.node.origin) > 256)
+  if(distancesquared(self.origin, self.node.origin) > 256) {
     return false;
+  }
 
   node = self findshufflecovernode();
 
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return false;
+  }
 
-  if(isDefined(node) && distancesquared(node.origin, self.node.origin) <= anim.moveglobals.shuffle_cover_min_distsq)
+  if(isDefined(node) && distancesquared(node.origin, self.node.origin) <= anim.moveglobals.shuffle_cover_min_distsq) {
     return false;
+  }
 
   if(isDefined(node) && node != self.node && self usecovernode(node)) {
     self.shufflemove = 1;
@@ -859,22 +923,25 @@ watchplayeraim() {
   self endon("death");
   self endon("stop_watchPlayerAim");
 
-  if(isDefined(self.coverlookattrigger))
+  if(isDefined(self.coverlookattrigger)) {
     self.coverlookattrigger delete();
+  }
 
   assert(isDefined(self.covernode));
   self.coversafetopopout = 1;
   stepoutpos = self.covernode.origin;
 
-  if(self.a.script == "cover_left" || self.a.script == "cover_pillar" && self.cornerdirection == "left")
+  if(self.a.script == "cover_left" || self.a.script == "cover_pillar" && self.cornerdirection == "left") {
     stepoutpos = stepoutpos - vectorscale(anglestoright(self.covernode.angles), 32);
-  else if(self.a.script == "cover_right" || self.a.script == "cover_pillar" && self.cornerdirection == "right")
+  } else if(self.a.script == "cover_right" || self.a.script == "cover_pillar" && self.cornerdirection == "right") {
     stepoutpos = stepoutpos + vectorscale(anglestoright(self.covernode.angles), 32);
+  }
 
   triggerheight = 72;
 
-  if(self.a.pose == "crouch")
+  if(self.a.pose == "crouch") {
     triggerheight = 48;
+  }
 
   self.coverlookattrigger = spawn("trigger_lookat", stepoutpos, 0, 15, triggerheight);
 
@@ -909,32 +976,34 @@ watchplayeraimdebug(numframes) {
     i++;
     wait 0.05;
   }
-
 }
 
 shouldswitchsides(forvariety) {
-  if(!canswitchsides())
+  if(!canswitchsides()) {
     return false;
+  }
 
   forcecornermode = shouldforcebehavior("force_corner_direction");
 
-  if(forcecornermode == self.cornerdirection)
+  if(forcecornermode == self.cornerdirection) {
     return false;
+  }
 
   enemyrightbehindme = 0;
 
-  if(self.cornerdirection != self.covernode.desiredcornerdirection)
+  if(self.cornerdirection != self.covernode.desiredcornerdirection) {
     return true;
-  else if(isDefined(self.enemy)) {
+  } else if(isDefined(self.enemy)) {
     yaw = self.covernode getyawtoorigin(self.enemy.origin);
     desiredcornerdirection = self.cornerdirection;
 
-    if(yaw < -5 && !self.covernode has_spawnflag(1024))
+    if(yaw < -5 && !self.covernode has_spawnflag(1024)) {
       desiredcornerdirection = "right";
-    else if(yaw > 5 && !self.covernode has_spawnflag(2048))
+    } else if(yaw > 5 && !self.covernode has_spawnflag(2048)) {
       desiredcornerdirection = "left";
-    else
+    } else {
       enemyrightbehindme = 1;
+    }
 
     if(!enemyrightbehindme && self.cornerdirection != desiredcornerdirection) {
       self.covernode.desiredcornerdirection = desiredcornerdirection;
@@ -943,10 +1012,11 @@ shouldswitchsides(forvariety) {
   }
 
   if((enemyrightbehindme || forvariety) && gettime() > self.a.nextallowedswitchsidestime) {
-    if(self.cornerdirection == "left" && !self.covernode has_spawnflag(1024))
+    if(self.cornerdirection == "left" && !self.covernode has_spawnflag(1024)) {
       self.covernode.desiredcornerdirection = "right";
-    else if(!self.covernode has_spawnflag(2048))
+    } else if(!self.covernode has_spawnflag(2048)) {
       self.covernode.desiredcornerdirection = "left";
+    }
 
     return true;
   }
@@ -980,58 +1050,69 @@ runforcedbehaviors(behaviorcallbacks) {
   }
 
   if(!didsomething && shouldforcebehavior("look")) {
-    if(calloptionalbehaviorcallback(behaviorcallbacks.look, 2 + randomfloat(2)))
+    if(calloptionalbehaviorcallback(behaviorcallbacks.look, 2 + randomfloat(2))) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("lookFast")) {
-    if(calloptionalbehaviorcallback(behaviorcallbacks.fastlook))
+    if(calloptionalbehaviorcallback(behaviorcallbacks.fastlook)) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("reload")) {
-    if(coverreload(behaviorcallbacks, 0))
+    if(coverreload(behaviorcallbacks, 0)) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("switchSides")) {
     if(gettime() > self.a.nextallowedswitchsidestime) {
-      if(switchsides(behaviorcallbacks))
+      if(switchsides(behaviorcallbacks)) {
         didsomething = 1;
+      }
     }
   }
 
   if(!didsomething && shouldforcebehavior("stepOut")) {
-    if(leavecoverandshoot(behaviorcallbacks, "normal"))
+    if(leavecoverandshoot(behaviorcallbacks, "normal")) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("advance")) {
-    if(advanceonhidingenemy())
+    if(advanceonhidingenemy()) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("blindfire")) {
-    if(blindfire(behaviorcallbacks))
+    if(blindfire(behaviorcallbacks)) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("grenade")) {
-    if(self.grenadeammo <= 0)
+    if(self.grenadeammo <= 0) {
       self.grenadeammo = 1;
+    }
 
-    if(isDefined(self.enemy) && trythrowinggrenade(behaviorcallbacks, self.enemy))
+    if(isDefined(self.enemy) && trythrowinggrenade(behaviorcallbacks, self.enemy)) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("flinch")) {
-    if(calloptionalbehaviorcallback(behaviorcallbacks.flinch))
+    if(calloptionalbehaviorcallback(behaviorcallbacks.flinch)) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("rambo")) {
-    if(rambo(behaviorcallbacks))
+    if(rambo(behaviorcallbacks)) {
       didsomething = 1;
+    }
   }
 
   if(!didsomething && shouldforcebehavior("switchWeapons")) {

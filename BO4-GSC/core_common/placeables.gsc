@@ -84,7 +84,7 @@ function_e4fd9a4c(placeable) {
       if(placeable.weapon.deployable) {
         deployable::register_deployable(placeable.weapon, placeable.var_8f4513d1, undefined, placeable.placehintstring, placeable.invalidlocationhintstring);
 
-        if(isplayer(player)) {
+        if(isPlayer(player)) {
           player giveweapon(placeable.weapon);
           player givestartammo(placeable.weapon);
           player switchtoweapon(placeable.weapon);
@@ -100,7 +100,7 @@ function_df4e6283(placeable) {
   if(isDefined(placeable)) {
     if(isDefined(placeable.weapon)) {
       if(placeable.weapon.deployable) {
-        if(isplayer(player)) {
+        if(isPlayer(player)) {
           player takeweapon(placeable.weapon);
         }
       }
@@ -414,7 +414,7 @@ function_613a226a(allow_alt) {
 
 watchcarrycancelevents(placeable) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   placeable endon(#"cancelled", #"placed");
   player waittill(#"death", #"emp_jammed", #"emp_grenaded", #"disconnect", #"joined_team");
   placeable notify(#"cancelled");
@@ -422,7 +422,7 @@ watchcarrycancelevents(placeable) {
 
 function_e222876f(placeable) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   player endon(#"disconnect", #"death");
   placeable endon(#"placed", #"cancelled");
 
@@ -523,7 +523,7 @@ onemp(attacker) {
 cancelonplayerdisconnect(placeable) {
   placeable endon(#"hacked");
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   placeable endon(#"cancelled", #"death");
   player waittill(#"disconnect", #"joined_team");
   placeable notify(#"cancelled");
@@ -627,7 +627,7 @@ watchownergameevents() {
 shutdownoncancelevent(placeable) {
   placeable endon(#"hacked");
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   vehicle = placeable.vehicle;
   othermodel = placeable.othermodel;
 

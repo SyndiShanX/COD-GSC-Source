@@ -371,7 +371,7 @@ flame_damage_over_time(e_attacker, damageweapon, pct_damage) {
   self thread on_fire_timeout(n_duration);
 
   while(true) {
-    if(isDefined(e_attacker) && isplayer(e_attacker)) {
+    if(isDefined(e_attacker) && isPlayer(e_attacker)) {
       if(e_attacker maps\mp\zombies\_zm_powerups::is_insta_kill_active())
         n_damage = self.health;
     }

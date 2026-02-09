@@ -305,7 +305,7 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   assert(isPlayer(victim));
   assert(isDefined(victim.team));
 
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker) || !maps\mp\_utility::invirtuallobby() && !isplayer(victim))
+  if(!isDefined(victim) || !isDefined(attacker) || !isPlayer(attacker) || !maps\mp\_utility::invirtuallobby() && !isPlayer(victim))
     return damage;
 
   if(attacker.sessionstate != "playing" || !isDefined(damage) || !isDefined(meansofdeath))
@@ -383,100 +383,100 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
 }
 
 initperkdvars() {
-  level.juggernautmod = 0.08;
-  level.juggernatudefmod = 0.08;
-  level.regenhealthmod = 0.25;
+    level.juggernautmod = 0.08;
+    level.juggernatudefmod = 0.08;
+    level.regenhealthmod = 0.25;
 
-  level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this % level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this % level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
-  level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this % level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
-  level.riotShieldMod = getIntProperty("perk_riotShield", 100) / 100;
-  level.dangerCloseMod = getIntProperty("perk_dangerClose", 100) / 100;
-  level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %}
+    level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this % level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this % level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
+    level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this % level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
+    level.riotShieldMod = getIntProperty("perk_riotShield", 100) / 100;
+    level.dangerCloseMod = getIntProperty("perk_dangerClose", 100) / 100;
+    level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %}
 
-cac_selector() {}
+    cac_selector() {}
 
-giveblindeyeafterspawn() {
-  self endon("death");
-  self endon("disconnect");
-  maps\mp\_utility::giveperk("specialty_blindeye", 0);
-  self.spawnperk = 1;
+    giveblindeyeafterspawn() {
+      self endon("death");
+      self endon("disconnect");
+      maps\mp\_utility::giveperk("specialty_blindeye", 0);
+      self.spawnperk = 1;
 
-  while(self.avoidkillstreakonspawntimer > 0) {
-    self.avoidkillstreakonspawntimer -= 0.05;
-    wait 0.05;
-  }
+      while(self.avoidkillstreakonspawntimer > 0) {
+        self.avoidkillstreakonspawntimer -= 0.05;
+        wait 0.05;
+      }
 
-  maps\mp\_utility::_unsetperk("specialty_blindeye");
-  self.spawnperk = 0;
-}
-
-applyperks() {
-  self endon("disconnect");
-  level endon("game_ended");
-
-  self setviewkickscale(1.0);
-
-  table = "mp/perkTable.csv";
-
-  for(i = 0; i < tablegetrowcount(table); i++) {
-    pro_perk = tableLookup(table, 0, i, 8);
-
-    if(!isSubStr(pro_perk, "specialty_")) {
-      continue;
+      maps\mp\_utility::_unsetperk("specialty_blindeye");
+      self.spawnperk = 0;
     }
-    if(self maps\mp\_utility::_hasPerk(pro_perk))
-      self maps\mp\_utility::givePerk(tableLookup(table, 0, i, 1), false);
-  }
-}
 
-get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
-{
-  var_3 = perktablelookupgroup(var_0);
-  var_4 = perktablelookupcount(var_0);
+    applyperks() {
+      self endon("disconnect");
+      level endon("game_ended");
 
-  if(var_1 == "specialty1") {
-    if(issubstr(var_3, "grenade")) {
-      if(var_0 == "specialty_fraggrenade")
-        self.perkscustom["grenades_count"] = var_4;
-      else
-        self.perkscustom["grenades_count"] = 1;
+      self setviewkickscale(1.0);
 
-      if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
-        self.perkscustom["specialgrenades_count"] = var_4;
-      else
-        self.perkscustom["specialgrenades_count"] = 1;
+      table = "mp/perkTable.csv";
 
-      return;
-    } else {
-      self.perkscustom["grenades_count"] = 1;
-      self.perkscustom["specialgrenades_count"] = 1;
+      for(i = 0; i < tablegetrowcount(table); i++) {
+        pro_perk = tableLookup(table, 0, i, 8);
+
+        if(!isSubStr(pro_perk, "specialty_")) {
+          continue;
+        }
+        if(self maps\mp\_utility::_hasPerk(pro_perk))
+          self maps\mp\_utility::givePerk(tableLookup(table, 0, i, 1), false);
+      }
     }
-  }
 
-  if(var_3 == "inventory") {
-    self.perkscustom["inventory"] = var_0;
-    self.perkscustom["inventory_count"] = var_4;
-  }
-}
+    get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
+    {
+      var_3 = perktablelookupgroup(var_0);
+      var_4 = perktablelookupcount(var_0);
 
-giveperkinventory() {
-  var_0 = self.perkscustom["inventory"];
+      if(var_1 == "specialty1") {
+        if(issubstr(var_3, "grenade")) {
+          if(var_0 == "specialty_fraggrenade")
+            self.perkscustom["grenades_count"] = var_4;
+          else
+            self.perkscustom["grenades_count"] = 1;
 
-  if(isDefined(var_0) && var_0 != "") {
-    var_0 = "h1_" + var_0;
-    self giveweapon(var_0);
-    setweaponammooverall(var_0, self.perkscustom["inventory_count"]);
-    self setactionslot(3, "weapon", var_0);
-  } else
-    self setactionslot(3, "altMode");
-}
+          if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
+            self.perkscustom["specialgrenades_count"] = var_4;
+          else
+            self.perkscustom["specialgrenades_count"] = 1;
 
-setweaponammooverall(var_0, var_1) {
-  if(isweaponcliponly(var_0))
-    self setweaponammoclip(var_0, var_1);
-  else {
-    self setweaponammoclip(var_0, var_1);
-    var_2 = var_1 - self getweaponammoclip(var_0);
-    self setweaponammostock(var_0, var_2);
-  }
-}
+          return;
+        } else {
+          self.perkscustom["grenades_count"] = 1;
+          self.perkscustom["specialgrenades_count"] = 1;
+        }
+      }
+
+      if(var_3 == "inventory") {
+        self.perkscustom["inventory"] = var_0;
+        self.perkscustom["inventory_count"] = var_4;
+      }
+    }
+
+    giveperkinventory() {
+      var_0 = self.perkscustom["inventory"];
+
+      if(isDefined(var_0) && var_0 != "") {
+        var_0 = "h1_" + var_0;
+        self giveweapon(var_0);
+        setweaponammooverall(var_0, self.perkscustom["inventory_count"]);
+        self setactionslot(3, "weapon", var_0);
+      } else
+        self setactionslot(3, "altMode");
+    }
+
+    setweaponammooverall(var_0, var_1) {
+      if(isweaponcliponly(var_0))
+        self setweaponammoclip(var_0, var_1);
+      else {
+        self setweaponammoclip(var_0, var_1);
+        var_2 = var_1 - self getweaponammoclip(var_0);
+        self setweaponammostock(var_0, var_2);
+      }
+    }

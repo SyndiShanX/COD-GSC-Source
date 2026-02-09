@@ -569,9 +569,7 @@ func_1EE8(var_0, var_1, var_2, var_3) {
         if(isai(var_6)) {
           var_21 = var_6 lib_0A1E::func_2356("Knobs", "body");
         } else if(isDefined(var_6.var_1ED4)) {
-          var_21 = [
-            [var_6.var_1ED4]
-          ]();
+          var_21 = [[var_6.var_1ED4]]();
         }
 
         var_6 animscripted(var_9, var_13, var_14, level.var_EC85[var_1F][var_1][var_11], undefined, var_21, var_20);
@@ -732,7 +730,7 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
 
       var_7 func_A888();
       var_7.var_12FF = var_1;
-      if(isplayer(var_7)) {
+      if(isPlayer(var_7)) {
         var_1E = level.var_EC85[var_1C]["root"];
         var_7 give_attacker_kill_rewards(var_1E, 0, var_1D);
         var_1F = level.var_EC85[var_1C][var_1];
@@ -745,9 +743,7 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
         if(isai(var_7)) {
           var_20 = var_7 lib_0A1E::func_2356("Knobs", "body");
         } else if(isDefined(var_7.var_1ED4)) {
-          var_20 = [
-            [var_7.var_1ED4]
-          ]();
+          var_20 = [[var_7.var_1ED4]]();
         }
 
         if(isDefined(var_7.asm) && !isai(var_7)) {
@@ -816,7 +812,7 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
       continue;
     }
 
-    if(isplayer(var_7)) {
+    if(isPlayer(var_7)) {
       var_1C = undefined;
       if(isDefined(var_4)) {
         var_1C = var_4;

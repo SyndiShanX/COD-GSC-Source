@@ -1234,9 +1234,7 @@ func_105E4(var_0, var_1, var_2) {
         var_0.var_A41D[var_6] = undefined;
 
         if(isDefined(var_5) && isDefined(var_2)) {
-          [
-            [var_2]
-          ](var_5, var_0);
+          [[var_2]](var_5, var_0);
         }
 
         continue;

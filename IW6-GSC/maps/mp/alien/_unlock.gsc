@@ -74,7 +74,6 @@ update_unlock(reference, progress_amt) {
     unlock_item_info = level.alien_unlock_data[unlock.index_map];
 
     maps\mp\alien\_debug::debug_print_item_unlocked(unlock_item_info.item, unlock_item_info.type);
-
   }
 }
 

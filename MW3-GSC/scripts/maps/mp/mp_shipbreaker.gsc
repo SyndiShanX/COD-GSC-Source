@@ -11,17 +11,16 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_shipbreaker");
   maps\mp\_compass::setupminimap("compass_map_mp_shipbreaker");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_diffuseColorScale", 1.55);
-  setdvar("r_specularColorScale", 3.4);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_diffuseColorScale", 1.55);
+  setDvar("r_specularColorScale", 3.4);
   thread maps\mp\mp_shipbreaker_scriptlights::main();
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.6");
+    setDvar("sm_sunShadowScale", "0.6");
   } else {
-    setdvar("sm_sunShadowScale", "0.7");
-
+    setDvar("sm_sunShadowScale", "0.7");
   }
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -88,7 +87,6 @@ spin_objects() {
       self rotatevelocity((0, var_0, 0), var_4);
     } else {
       self rotatevelocity((0, var_0, 0), var_4);
-
     }
     wait(var_4);
   }

@@ -627,7 +627,7 @@ func_1179F() {
 
     var_2 = var_2 - var_7;
     var_0 setclientomnvar("ui_killstreak_health", var_2 / var_1.maxhealth);
-    if(isplayer(var_8)) {
+    if(isPlayer(var_8)) {
       var_8 scripts\mp\damagefeedback::updatedamagefeedback("");
       scripts\mp\killstreaks\killstreaks::killstreakhit(var_8, var_10, self, var_11);
       scripts\mp\damage::logattackerkillstreak(self, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10);

@@ -880,7 +880,7 @@ hide_on_damage() {
   var_0 hide();
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(isDefined(var_2) && isplayer(var_2) && var_5 == "MOD_MELEE" && var_2.currentmeleeweapon == "iw7_knife_zm_crowbar") {
+    if(isDefined(var_2) && isPlayer(var_2) && var_5 == "MOD_MELEE" && var_2.currentmeleeweapon == "iw7_knife_zm_crowbar") {
       self hide();
       level.car_mirror_hit = 1;
       var_0 = getent("car_mirror_ground", "targetname");
@@ -902,7 +902,7 @@ break_mirror_in_bathroom() {
   var_1 hide();
   for(;;) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
-    if(isDefined(var_3) && isplayer(var_3) && var_6 == "MOD_MELEE" && var_3.currentmeleeweapon == "iw7_knife_zm_crowbar") {
+    if(isDefined(var_3) && isPlayer(var_3) && var_6 == "MOD_MELEE" && var_3.currentmeleeweapon == "iw7_knife_zm_crowbar") {
       playFX(level._effect["mirror_break"], (-1060.77, 3661.85, 463.01), (0, 0, -30));
       playsoundatpos((-1060, 3661, 463), "mpq_mirror_shatter");
       self hide();
@@ -922,7 +922,7 @@ freeze_meat_in_locker() {
   playFX(level._effect["meat_freeze"], (6263.18, -512, 418.71), (0, 0, -30));
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(isDefined(var_1) && isplayer(var_1) && var_4 == "MOD_MELEE" && var_1.currentmeleeweapon == "iw7_knife_zm_crowbar") {
+    if(isDefined(var_1) && isPlayer(var_1) && var_4 == "MOD_MELEE" && var_1.currentmeleeweapon == "iw7_knife_zm_crowbar") {
       playFX(level._effect["zombie_freeze_shatter"], (6263.18, -512, 418.71));
       self hide();
       break;
@@ -1617,7 +1617,7 @@ listen_for_turnstile_damage() {
     var_0 setCanDamage(1);
     for(;;) {
       var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-      if(isDefined(var_2) && isplayer(var_2)) {
+      if(isDefined(var_2) && isPlayer(var_2)) {
         playFX(level._effect["turnstile_teleport"], var_0.origin);
         var_0 hide();
         var_2 scripts\cp\cp_merits::processmerit("mt_dlc3_troll");
@@ -1646,7 +1646,7 @@ phase3_watch_gauge_trigs() {
   level.gauges = scripts\engine\utility::array_add(level.gauges, self.gauge);
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(isDefined(var_1) && isplayer(var_1) && var_4 == "MOD_MELEE" && var_1.currentmeleeweapon == "iw7_knife_zm_crowbar") {
+    if(isDefined(var_1) && isPlayer(var_1) && var_4 == "MOD_MELEE" && var_1.currentmeleeweapon == "iw7_knife_zm_crowbar") {
       self.gauge playSound("mpq_gauge_hit");
       if(scripts\engine\utility::istrue(self.gauge.stuck)) {
         self.gauge.current_value = undefined;

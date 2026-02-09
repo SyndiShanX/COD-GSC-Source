@@ -336,14 +336,13 @@ canShootEnemyFrom(offset, posOverrideEntity, useSightCheck, posOverrideOrigin) {
         if(getdebugdvar("anim_debug") == "3") {
           thread showDebugLine(myGunPos + myEyeOffset + offset, eye + (0, 0, 2), (.5, 1, .5), 5);
         }
-    } else {
-      }
+      } else {}
       if(getdebugdvarint("anim_dotshow") == self getentnum()) {
         if(getdebugdvar("anim_debug") == "3") {
           thread showDebugLine(myGunPos + myEyeOffset + offset, eye + (0, 0, 2), (1, .5, .5), 5);
         }
-    }
       }
+    }
   } else
     canSee = true;
 
@@ -358,14 +357,13 @@ canShootEnemyFrom(offset, posOverrideEntity, useSightCheck, posOverrideOrigin) {
       if(getdebugdvar("anim_debug") == "3") {
         thread showDebugLine(myGunPos + offset + (0, 0, 2), eye + (0, 0, 4), (.5, 1, .5), 5);
       }
-  } else {
-    }
+    } else {}
     if(getdebugdvarint("anim_dotshow") == self getentnum()) {
       if(getdebugdvar("anim_debug") == "3") {
         thread showDebugLine(myGunPos + offset + (0, 0, 2), eye + (0, 0, 4), (1, .5, .5), 5);
       }
-  }
     }
+  }
 
   return (canShoot);
 }
@@ -1117,13 +1115,13 @@ debugBurstPrint(numShots, maxShots) {
   if(numShots == self.bulletsInClip) {
     burstSizeStr = "all rounds";
   } else {
-  if(burstSize < 0.25) {
-    burstSizeStr = "small burst";
-  }
+    if(burstSize < 0.25) {
+      burstSizeStr = "small burst";
+    }
   } else {
-  if(burstSize < 0.5) {
-    burstSizeStr = "med burst";
-  }
+    if(burstSize < 0.5) {
+      burstSizeStr = "med burst";
+    }
   } else {
     burstSizeStr = "long burst";
   }

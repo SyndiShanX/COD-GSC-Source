@@ -92,7 +92,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(!isalive(player)) {
     return 0;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return 0;
   }
   if(isDefined(player.is_zombie) && player.is_zombie == 1) {
@@ -687,7 +687,7 @@ function canthrowgrenade() {
   if(self.script_forcegrenade) {
     return 1;
   }
-  return isplayer(self.enemy);
+  return isPlayer(self.enemy);
 }
 
 function random_weight(array) {
@@ -1715,8 +1715,8 @@ function zombie_should_gib(amount, attacker, type) {
   damage_percent = (amount / prev_health) * 100;
   weapon = undefined;
   if(isDefined(attacker)) {
-    if(isplayer(attacker) || (isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
-      if(isplayer(attacker)) {
+    if(isPlayer(attacker) || (isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
+      if(isPlayer(attacker)) {
         weapon = attacker getcurrentweapon();
       } else {
         weapon = attacker.weapon;
@@ -1743,7 +1743,7 @@ function zombie_should_gib(amount, attacker, type) {
     }
   }
   if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       return false;
     }
     if(weapon == level.weaponnone || (isDefined(level.start_weapon) && weapon == level.start_weapon) || weapon.isgasweapon) {
@@ -1763,12 +1763,12 @@ function head_should_gib(attacker, type, point) {
   if(!isDefined(attacker)) {
     return false;
   }
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     if(!(isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
       return false;
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     weapon = attacker getcurrentweapon();
   } else {
     weapon = attacker.weapon;
@@ -1838,7 +1838,7 @@ function head_gib_damage_over_time(dmg, delay, attacker, means_of_death) {
   if(!isalive(self)) {
     return;
   }
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     attacker = self;
   }
   if(!isDefined(means_of_death)) {
@@ -1955,7 +1955,7 @@ function anim_get_dvar(dvar, def) {
   if(getdvarstring(dvar) != "") {
     return getdvarfloat(dvar);
   }
-  setdvar(dvar, def);
+  setDvar(dvar, def);
   return def;
 }
 

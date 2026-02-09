@@ -631,7 +631,7 @@ stage3_sacrifice_setup() {
   while(level.sacrificeactive == 1) {
     var_0 waittill("trigger", var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       continue;
     } else if(isDefined(var_2.agentteam) && var_2.agentteam == level.playerteam) {
       continue;
@@ -968,7 +968,7 @@ bunpickup() {
   for(;;) {
     self.trigger waittill("trigger", var_1);
 
-    if(isplayer(var_1) && !var_1 playerhasbun()) {
+    if(isPlayer(var_1) && !var_1 playerhasbun()) {
       var_1 playergivebun();
       var_1 playlocalsound("sq_bun_pickup");
       level.pickedupbun = 1;

@@ -17,8 +17,8 @@ function main() {
   load::main();
   level.domflagbasefxoverride = &dom_flag_base_fx_override;
   level.domflagcapfxoverride = &dom_flag_cap_fx_override;
-  setdvar("phys_buoyancy", 1);
-  setdvar("phys_ragdoll_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
+  setDvar("phys_ragdoll_buoyancy", 1);
   util::waitforclient(0);
   level.endgamexcamname = "ui_cam_endgame_mp_redwood";
 }

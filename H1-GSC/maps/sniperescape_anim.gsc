@@ -106,8 +106,8 @@ main() {
     maps\_anim::addnotetrack_animsound("price", "wounded_putdown", "start", "h1_macmillan_down");
     level.scr_animtree["carry_price"] = #animtree;
     level.scr_model["carry_price"] = "body_complete_sp_usmc_ghillie_price";
-    level.scr_anim["carry_price"]["carry_idle"] = [ % h1_sniper_escape_price_carry_idle];
-    level.scr_anim["carry_price"]["carry_run"] = [ % h1_sniper_escape_price_carry];
+    level.scr_anim["carry_price"]["carry_idle"] = [%h1_sniper_escape_price_carry_idle];
+    level.scr_anim["carry_price"]["carry_run"] = [%h1_sniper_escape_price_carry];
     level.scr_anim["carry_price"]["ladder_on"] = % h1_sniper_escape_price_ladder_takeoff;
     level.scr_anim["carry_price"]["ladder_off"] = % h1_sniper_escape_price_ladder_puton;
   }
@@ -366,8 +366,8 @@ player_rappel() {
     level.scr_model["wounded_carry"] = "viewhands_player_marines";
     level.scr_anim["wounded_carry"]["wounded_putdown"] = % h1_sniper_escape_player_putdown;
     level.scr_anim["wounded_carry"]["wounded_pickup"] = % h1_sniper_escape_player_getup;
-    level.scr_anim["wounded_carry"]["carry_idle"] = [ % h1_sniper_escape_player_carry_idle];
-    level.scr_anim["wounded_carry"]["carry_run"] = [ % h1_sniper_escape_player_carry];
+    level.scr_anim["wounded_carry"]["carry_idle"] = [%h1_sniper_escape_player_carry_idle];
+    level.scr_anim["wounded_carry"]["carry_run"] = [%h1_sniper_escape_player_carry];
     maps\_anim::addnotetrack_animsound("player_carry", "carry_run", "drag_step_right", "sniperescape_plr_footstep_dragR");
     maps\_anim::addnotetrack_animsound("player_carry", "carry_run", "drag_step_left", "sniperescape_plr_footstep_dragL");
     level.scr_anim["wounded_carry"]["ladder_on"] = % h1_sniper_escape_player_ladder_takeoff;

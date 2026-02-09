@@ -72,7 +72,6 @@ init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgrade
     if(isDefined(level.devgui_add_weapon))
       [[level.devgui_add_weapon]](weapon_name, "", weapon_name, cost);
   }
-
 }
 
 prepare_stub(stub, weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgraded_weapon_name, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn) {

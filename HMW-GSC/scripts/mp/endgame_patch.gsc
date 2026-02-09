@@ -13,7 +13,7 @@ endgame_stub(var_0, var_1, var_2) {
     return;
   }
   game["state"] = "postgame";
-  setdvar("ui_game_state", "postgame");
+  setDvar("ui_game_state", "postgame");
   level.gameendtime = gettime();
   level.gameended = 1;
   level.ingraceperiod = 0;
@@ -57,16 +57,16 @@ endgame_stub(var_0, var_1, var_2) {
 
     maps\mp\gametypes\_gamescore::updateteamscore("axis");
     maps\mp\gametypes\_gamescore::updateteamscore("allies");
-  } else if(isDefined(var_0) && isplayer(var_0))
+  } else if(isDefined(var_0) && isPlayer(var_0))
     game["roundsWon"][var_0.guid]++;
 
   maps\mp\gametypes\_gamescore::updateplacement();
   maps\mp\gametypes\_gamelogic::rankedmatchupdates(var_0);
   maps\mp\gametypes\_gamelogic::handlekillstreaksonroundswitch(1);
 
-  setdvar("g_deadChat", 1);
-  setdvar("ui_allow_teamchange", 0);
-  setdvar("bg_compassShowEnemies", 0);
+  setDvar("g_deadChat", 1);
+  setDvar("ui_allow_teamchange", 0);
+  setDvar("bg_compassShowEnemies", 0);
   maps\mp\gametypes\_gamelogic::freezeallplayers(1.0, 1);
   var_7 = game["switchedsides"];
 
@@ -94,7 +94,7 @@ endgame_stub(var_0, var_1, var_2) {
 
       level notify("restarting");
       game["state"] = "playing";
-      setdvar("ui_game_state", "playing");
+      setDvar("ui_game_state", "playing");
       map_restart(1);
       return;
     }
@@ -334,7 +334,7 @@ endgame_stub(var_0, var_1, var_2) {
 
   if(isDefined(level.ishorde) && level.ishorde) {
     if(isDefined(level.zombiescompleted) && level.zombiescompleted)
-      setdvar("cg_drawCrosshair", 1);
+      setDvar("cg_drawCrosshair", 1);
   }
 
   level notify("exitLevel_called");
@@ -348,7 +348,7 @@ giveplayerscore_stub(var_0, var_1, var_2) {
   if(isDefined(var_1.owner))
     var_1 = var_1.owner;
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   var_1 maps\mp\gametypes\_gamescore::displaypoints(var_0);

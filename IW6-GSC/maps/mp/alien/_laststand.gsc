@@ -325,7 +325,7 @@ lastStandWaittillLifeReceived(downedPlayer, reviveTime) {
     self waittill("trigger", reviver);
     self makeUnUsable();
 
-    if(!isplayer(reviver) || !(reviver isOnGround())) {
+    if(!isPlayer(reviver) || !(reviver isOnGround())) {
       continue;
     }
     reviveTimeScaler = reviver maps\mp\alien\_perk_utility::perk_GetReviveTimeScalar();
@@ -720,7 +720,7 @@ blackBox_lastStand(attacker, iDamage) {
   } else {
     attacker_alive_time = 0;
 
-    if(isplayer(attacker))
+    if(isPlayer(attacker))
       attacker_agent_type = "player";
     else
       attacker_agent_type = "nonagent";

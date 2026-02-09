@@ -49,7 +49,7 @@ error(msg) {
     waitframe(1);
   }
 
-  if(getdvar(#"debug", 0)) {
+  if(getDvar(#"debug", 0)) {
     assertmsg("<dev string:x45>");
   }
 }
@@ -1200,7 +1200,7 @@ getclientsysstate(ssysname) {
 
 clientnotify(event) {
   if(level.clientscripts) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       setclientsysstate("levelNotify", event, self);
       return;
     }
@@ -1224,7 +1224,7 @@ is_looking_at(ent_or_org, n_dot_range = 0.9, do_trace = 0, v_offset) {
   b_can_see = 0;
   b_use_tag_eye = 0;
 
-  if(isplayer(self) || isai(self)) {
+  if(isPlayer(self) || isai(self)) {
     b_use_tag_eye = 1;
   }
 
@@ -1243,7 +1243,7 @@ is_looking_at(ent_or_org, n_dot_range = 0.9, do_trace = 0, v_offset) {
 }
 
 get_eye() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return self getplayercamerapos();
   }
 
@@ -1309,7 +1309,7 @@ waittill_player_not_looking_at(origin, dot, do_trace) {
 }
 
 is_player_looking_at(v_origin, n_dot = 0.7, b_do_trace = 1, e_ignore) {
-  assert(isplayer(self), "<dev string:x6fc>");
+  assert(isPlayer(self), "<dev string:x6fc>");
 
   if(isDefined(self.hijacked_vehicle_entity)) {
     v_eye = self.hijacked_vehicle_entity gettagorigin("tag_driver");
@@ -1783,7 +1783,6 @@ init_button_wrappers() {
 
     level._button_funcs[4] = &up_button_pressed;
     level._button_funcs[5] = &down_button_pressed;
-
   }
 }
 
@@ -1860,7 +1859,7 @@ isenemyteam(team) {
 }
 
 isfriendlyplayer(player) {
-  if(!isplayer(player) || !isDefined(self)) {
+  if(!isPlayer(player) || !isDefined(self)) {
     return false;
   }
 
@@ -1874,7 +1873,7 @@ isfriendlyplayer(player) {
 }
 
 isenemyplayer(player) {
-  if(!isplayer(player) || !isDefined(self)) {
+  if(!isPlayer(player) || !isDefined(self)) {
     return false;
   }
 
@@ -2001,7 +2000,7 @@ note_raw_time(label = "unspecified") {
 
 mayapplyscreeneffect() {
   assert(isDefined(self));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   return !isDefined(self.viewlockedentity);
 }
 
@@ -2300,7 +2299,7 @@ set_lighting_state(n_state) {
       return;
     }
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self setlightingstate(self.lighting_state);
       return;
     }
@@ -2327,7 +2326,7 @@ set_sun_shadow_split_distance(f_distance) {
       return;
     }
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self setsunshadowsplitdistance(self.sun_shadow_split_distance);
       return;
     }
@@ -2358,7 +2357,7 @@ function_7f49ffb7(var_bf01552a) {
       return;
     }
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self function_61471b4a(self.var_bf01552a);
       return;
     }
@@ -2381,7 +2380,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return;
   }
 
@@ -3001,7 +3000,7 @@ has_purchased_perk_equipped(ref) {
 }
 
 has_purchased_perk_equipped_with_specific_stat(single_perk_ref, stats_table_ref) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     return (self hasperk(single_perk_ref) && self is_item_purchased(stats_table_ref));
   }
 
@@ -3646,7 +3645,7 @@ ghost_wait_show_to_others(player, wait_time = 0.1, self_endon_string1) {
 }
 
 show_hit_marker(var_554cb812 = 0, var_1ed250ec = 0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(self) && isDefined(self.hud_damagefeedback)) {
       currenttime = gettime();
 
@@ -3731,7 +3730,7 @@ get_gametype_name() {
 cleanup_fancycam() {
   self endon(#"disconnect");
 
-  if(isplayer(self) && !isbot(self)) {
+  if(isPlayer(self) && !isbot(self)) {
     wait_network_frame();
     self function_eb0dd56(0);
     wait_network_frame();
@@ -3741,7 +3740,7 @@ cleanup_fancycam() {
 
 set_dvar_if_unset(dvar, value, reset = 0) {
   if(reset || getdvarstring(dvar) == "") {
-    setdvar(dvar, value);
+    setDvar(dvar, value);
     return value;
   }
 
@@ -3750,7 +3749,7 @@ set_dvar_if_unset(dvar, value, reset = 0) {
 
 set_dvar_float_if_unset(dvar, value, reset = 0) {
   if(reset || getdvarstring(dvar) == "") {
-    setdvar(dvar, value);
+    setDvar(dvar, value);
   }
 
   return getdvarfloat(dvar, 0);
@@ -3758,7 +3757,7 @@ set_dvar_float_if_unset(dvar, value, reset = 0) {
 
 set_dvar_int_if_unset(dvar, value, reset = 0) {
   if(reset || getdvarstring(dvar) == "") {
-    setdvar(dvar, value);
+    setDvar(dvar, value);
     return int(value);
   }
 
@@ -3847,7 +3846,7 @@ is_spectating() {
 }
 
 function_8570168d() {
-  if(getdvar(#"hash_49e94b7aefac4f49", 0)) {
+  if(getDvar(#"hash_49e94b7aefac4f49", 0)) {
     return true;
   }
 
@@ -3911,7 +3910,7 @@ function_22bf0a4a() {
     return;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     profilestop();
     return;
   }

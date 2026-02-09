@@ -4,6 +4,7 @@
 *******************************************/
 
 #using_animtree("generic_human");
+
 main() {
   self endon("death");
   self notify("killanimscript");
@@ -23,8 +24,8 @@ main() {
   }
   self waittill("killanimscript");
 }
-
 #using_animtree("generic_human");
+
 init(notifyName, origin, angles, theAnim, AnimMode, root, rate, goalTime) {
   self.codeScripted["notifyName"] = notifyName;
   self.codeScripted["origin"] = origin;

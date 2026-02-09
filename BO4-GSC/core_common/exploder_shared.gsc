@@ -475,7 +475,6 @@ reportexploderids() {
   foreach(k, v in level._exploder_ids) {
     println(k + "<dev string:x11c>" + v);
   }
-
 }
 
 getexploderid(ent) {

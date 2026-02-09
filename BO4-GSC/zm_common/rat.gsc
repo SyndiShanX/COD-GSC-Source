@@ -231,7 +231,7 @@ function_ea4b3f00(params) {
 
 function_c79c0501(params) {
   if(isDefined(params.round)) {
-    setdvar(#"scr_zombie_round", int(params.round));
+    setDvar(#"scr_zombie_round", int(params.round));
     adddebugcommand("<dev string:x311>");
   }
 }
@@ -355,11 +355,11 @@ function_3d37c034(params) {
 }
 
 function_38d6a592(params) {
-  setdvar(#"zombie_cheat", 2);
+  setDvar(#"zombie_cheat", 2);
 }
 
 function_26a15f4d(params) {
-  setdvar(#"zombie_cheat", 0);
+  setDvar(#"zombie_cheat", 0);
 }
 
 function_1428d95e(params) {

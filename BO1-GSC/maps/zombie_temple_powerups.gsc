@@ -16,11 +16,9 @@ init() {
   level.playable_area = getEntArray("player_volume", "script_noteworthy");
   level._effect["zombie_kill"] = LoadFX("impacts/fx_flesh_hit_body_fatal_lg_exit_mp");
 }
-
 temple_special_powerup_setup(powerup) {
   return true;
 }
-
 temple_powerup_grab(powerup) {
   if(!isDefined(powerup)) {
     return;
@@ -33,7 +31,6 @@ temple_powerup_grab(powerup) {
       break;
   }
 }
-
 monkey_swarm(powerup) {
   monkey_count_per_player = 2;
   flag_clear("spawn_zombies");
@@ -47,7 +44,6 @@ monkey_swarm(powerup) {
   }
   flag_set("spawn_zombies");
 }
-
 player_monkey_think(numMonkeys) {
   spawns = getEntArray("monkey_zombie_spawner", "targetname");
   if(spawns.size == 0) {
@@ -85,7 +81,7 @@ player_monkey_think(numMonkeys) {
       bestDist = 0.0;
       for(b = 0; b < barriers.size; b++) {
         barrier = barriers[b];
-        dist2 = distanceSquared(barrier.origin, self.origin);
+        dist2 = DistanceSquared(barrier.origin, self.origin);
         if(!isDefined(best) || dist2 < bestDist) {
           best = barrier;
           bestDist = dist2;
@@ -120,7 +116,6 @@ player_monkey_think(numMonkeys) {
     monkey thread monkey_protect_player(self);
   }
 }
-
 monkey_powerup_timeout() {
   wait(60.0);
   self.timeout = true;
@@ -135,7 +130,6 @@ monkey_powerup_timeout() {
   self notify("timeout");
   self Delete();
 }
-
 monkey_protect_player(player) {
   self endon("timeout");
   wait(0.5);
@@ -153,7 +147,7 @@ monkey_protect_player(player) {
     } else {
       goalDist = 64;
       checkDist2 = goalDist * goalDist;
-      dist2 = distanceSquared(self.origin, player.origin);
+      dist2 = DistanceSquared(self.origin, player.origin);
       if(dist2 > checkDist2) {
         self.goalradius = goalDist;
         self SetGoalEntity(player);
@@ -164,8 +158,8 @@ monkey_protect_player(player) {
     wait(0.5);
   }
 }
-
 #using_animtree("generic_human");
+
 monkey_attack_zombie(zombie) {
   self endon("bad_path");
   self endon("timeout");
@@ -179,7 +173,7 @@ monkey_attack_zombie(zombie) {
       self notify("zombie_killed");
       return;
     }
-    dist2 = distanceSquared(zombie.origin, self.origin);
+    dist2 = DistanceSquared(zombie.origin, self.origin);
     if(dist2 < checkDist2) {
       break;
     }
@@ -209,7 +203,6 @@ monkey_attack_zombie(zombie) {
   self.zombie = undefined;
   self notify("zombie_killed");
 }
-
 _ent_GetBestZombie(minDist) {
   bestZombie = undefined;
   bestDist = 0.0;
@@ -230,7 +223,7 @@ _ent_GetBestZombie(minDist) {
     if(z.classname == "actor_zombie_napalm" || z.classname == "actor_zombie_sonic") {
       continue;
     }
-    dist2 = distanceSquared(z.origin, self.origin);
+    dist2 = DistanceSquared(z.origin, self.origin);
     if(dist2 < bestDist) {
       valid = z _ent_InPlayableArea();
       if(valid) {
@@ -241,7 +234,6 @@ _ent_GetBestZombie(minDist) {
   }
   return bestZombie;
 }
-
 _ent_InPlayableArea() {
   for(i = 0; i < level.playable_area.size; i++) {
     if(self IsTouching(level.playable_area[i])) {

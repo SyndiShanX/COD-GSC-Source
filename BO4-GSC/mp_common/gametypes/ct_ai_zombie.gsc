@@ -189,7 +189,7 @@ function_c75fae30(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 }
 
 function_3d9b8ab3(params) {
-  if(!isDefined(self.enemy_override) && isDefined(self.favoriteenemy) && isDefined(params.eattacker) && isplayer(params.eattacker)) {
+  if(!isDefined(self.enemy_override) && isDefined(self.favoriteenemy) && isDefined(params.eattacker) && isPlayer(params.eattacker)) {
     self.favoriteenemy = params.eattacker;
   }
 }
@@ -526,7 +526,7 @@ is_player_valid(player) {
     return false;
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return false;
   }
 
@@ -1038,8 +1038,8 @@ zombie_should_gib(amount, attacker, type) {
   weapon = undefined;
 
   if(isDefined(attacker)) {
-    if(isplayer(attacker) || isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies) {
-      if(isplayer(attacker)) {
+    if(isPlayer(attacker) || isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies) {
+      if(isPlayer(attacker)) {
         weapon = attacker getcurrentweapon();
       } else {
         weapon = attacker.weapon;
@@ -1060,7 +1060,7 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       return false;
     }
 
@@ -1077,13 +1077,13 @@ head_should_gib(attacker, type, point) {
     return false;
   }
 
-  if(!isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(attacker) || !isPlayer(attacker)) {
     if(!(isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
       return false;
     }
   }
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     weapon = attacker getcurrentweapon();
   } else {
     weapon = attacker.weapon;
@@ -1152,7 +1152,7 @@ damage_over_time(dmg, delay, attacker, means_of_death) {
     return;
   }
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     attacker = self;
   }
 

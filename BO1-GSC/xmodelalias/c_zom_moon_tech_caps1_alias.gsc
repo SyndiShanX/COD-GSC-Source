@@ -11,5 +11,5 @@ main() {
   a[4] = "c_zom_moon_tech_nocap";
   a[5] = "c_zom_moon_tech_nocap";
   a[6] = "c_zom_moon_tech_nocap";
-  returna;
+  return a;
 }

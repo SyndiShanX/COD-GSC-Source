@@ -107,15 +107,14 @@ add_craftable_cheat(craftable) {
     s_piece craftable_waittill_spawned();
     s_piece.piecespawn.model thread puzzle_debug_position("C", vectorscale((0, 1, 0), 255.0), undefined, "show_craftable_locations");
   }
-
 }
 
 autocraft_staffs() {
-  setdvar("autocraft_staffs", "off");
+  setDvar("autocraft_staffs", "off");
 
   adddebugcommand("devgui_cmd \"Zombies/Tomb:1/Craftables:1/Give All Staff Pieces:0\" \"autocraft_staffs on\"\n");
 
-  while(getdvar(#"_id_373B6254") != "on")
+  while(getDvar(#"_id_373B6254") != "on")
     wait_network_frame();
 
   flag_wait("start_zombie_round_logic");
@@ -149,10 +148,10 @@ autocraft_staffs() {
 
 run_craftables_devgui() {
   level thread autocraft_staffs();
-  setdvar("give_craftable", "");
+  setDvar("give_craftable", "");
 
   while(true) {
-    craftable_id = getdvar(#"_id_817E2753");
+    craftable_id = getDvar(#"_id_817E2753");
 
     if(craftable_id != "") {
       piece_spawn = level.cheat_craftables[craftable_id].piecespawn;
@@ -162,12 +161,11 @@ run_craftables_devgui() {
         players[0] maps\mp\zombies\_zm_craftables::player_take_piece(piece_spawn);
       }
 
-      setdvar("give_craftable", "");
+      setDvar("give_craftable", "");
     }
 
     wait 0.05;
   }
-
 }
 
 include_craftables() {
@@ -852,7 +850,6 @@ quadrotor_fly_back_to_table() {
     self delete();
 
     iprintln("Maxis deleted");
-
   }
 
   level notify("drone_available");
@@ -872,7 +869,6 @@ quadrotor_fly_back_to_table_timeout() {
     self delete();
 
     iprintln("Maxis deleted");
-
   }
 
   self notify("return_timeout");

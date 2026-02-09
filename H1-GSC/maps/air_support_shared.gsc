@@ -8,7 +8,7 @@ air_support_precache() {
   precachemodel("wpn_h1_airsupport_marker");
   precachemodel("wpn_h1_airsupport_marker_selected");
   level._effect["airsupport_marker_vfx"] = loadfx("vfx\props\air_support_marker_glow");
-  setdvar("use_new_air_support", "true");
+  setDvar("use_new_air_support", "true");
 }
 
 #using_animtree("script_model");
@@ -72,7 +72,7 @@ air_support_update_arrow_coords(var_0, var_1) {
     var_7 = anglestoup(var_5);
     var_8 = anglestoright(var_5);
     var_9 = level.player getEye();
-    var_10 = getdvar(var_1) == "1";
+    var_10 = getDvar(var_1) == "1";
     var_11 = (0, 0, 0);
 
     for(var_12 = 0; var_12 < var_3.size; var_12++) {

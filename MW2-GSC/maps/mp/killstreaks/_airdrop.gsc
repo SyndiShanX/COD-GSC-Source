@@ -178,7 +178,6 @@ getCrateTypeForDropType(dropType) {
       return "nuke";
     default:
       return getRandomCrateType("airdrop");
-
   }
 }
 
@@ -543,7 +542,6 @@ setSelfAndEnemyUsable(owner) {
     else
       self enablePlayerUse(player);
   }
-
 }
 
 setUnUsable(team) {
@@ -688,7 +686,6 @@ getFlyHeightOffset(dropSite) {
   } else {
     return heightEnt.origin[2];
   }
-
 }
 
 /**********************************************************

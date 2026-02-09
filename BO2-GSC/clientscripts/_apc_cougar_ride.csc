@@ -37,15 +37,17 @@ rumble_loop(player) {
   origin = self.origin;
 
   while(isDefined(self)) {
-    while(distancesquared(origin, self.origin) < distance_between_rumble * distance_between_rumble)
+    while(distancesquared(origin, self.origin) < distance_between_rumble * distance_between_rumble) {
       wait 0.1;
+    }
 
     origin = self.origin;
     player playrumbleonentity(0, "reload_clipin");
     wait 0.1;
 
-    while(distancesquared(origin, self.origin) < distance_between_wheels * distance_between_wheels)
+    while(distancesquared(origin, self.origin) < distance_between_wheels * distance_between_wheels) {
       wait 0.1;
+    }
 
     origin = self.origin;
     player playrumbleonentity(0, "reload_clipin");
@@ -75,17 +77,19 @@ steering_loop(viewarms) {
     target_time = target_time * 0.5;
     delta_change = target_time - time;
 
-    if(delta_change > max_delta_t)
+    if(delta_change > max_delta_t) {
       delta_change = max_delta_t;
-    else if(delta_change < max_delta_t * -1)
+    } else if(delta_change < max_delta_t * -1) {
       delta_change = max_delta_t * -1;
+    }
 
     time = time + delta_change;
 
-    if(time > 1)
+    if(time > 1) {
       time = 1;
-    else if(time < 0)
+    } else if(time < 0) {
       time = 0;
+    }
 
     self setanim(cougar_anim, 1, 0, 0);
     self setanimtime(cougar_anim, time);

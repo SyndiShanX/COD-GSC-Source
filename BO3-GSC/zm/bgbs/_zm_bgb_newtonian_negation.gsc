@@ -50,8 +50,8 @@ function disable() {
 
 function function_2b4ff13a(var_365c612) {
   if(var_365c612) {
-    setdvar("phys_gravity_dir", (0, 0, -1));
+    setDvar("phys_gravity_dir", (0, 0, -1));
   } else {
-    setdvar("phys_gravity_dir", (0, 0, 1));
+    setDvar("phys_gravity_dir", (0, 0, 1));
   }
 }

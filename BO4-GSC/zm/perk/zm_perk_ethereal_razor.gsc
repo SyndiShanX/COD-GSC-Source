@@ -230,7 +230,7 @@ on_ai_killed(s_params) {
     return;
   }
 
-  if(isplayer(player) && player hasperk(#"specialty_etherealrazor") && function_866130c7(w_melee) && isDefined(self.var_39c64392) && isplayer(s_params.einflictor)) {
+  if(isPlayer(player) && player hasperk(#"specialty_etherealrazor") && function_866130c7(w_melee) && isDefined(self.var_39c64392) && isPlayer(s_params.einflictor)) {
     if(player function_da33f286()) {
       player.health = math::clamp(player.health + 10, 0, player.var_66cb03ad);
       player.var_ec2fa29e = 1;
@@ -249,7 +249,7 @@ on_ai_damage(s_params) {
     return;
   }
 
-  if(isplayer(player) && player hasperk(#"specialty_etherealrazor") && function_866130c7(w_melee) && isplayer(s_params.einflictor)) {
+  if(isPlayer(player) && player hasperk(#"specialty_etherealrazor") && function_866130c7(w_melee) && isPlayer(s_params.einflictor)) {
     self.var_39c64392 = s_params.shitloc;
   }
 }

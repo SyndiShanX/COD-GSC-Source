@@ -80,7 +80,7 @@ func_284F() {
   playFXOnTag(level.var_2850["shot"], var_2, "tag_origin");
   var_2 moveto(var_4["position"], var_0);
   wait(var_0);
-  if(isDefined(var_4["entity"]) && isplayer(var_4["entity"]) && !isDefined(var_4["entity"].var_8BD3) && var_4["entity"].team == self.team) {
+  if(isDefined(var_4["entity"]) && isPlayer(var_4["entity"]) && !isDefined(var_4["entity"].var_8BD3) && var_4["entity"].team == self.team) {
     var_5 = self worldpointinreticle_circle(var_4["entity"] gettagorigin("tag_eye"), 65, 25);
     var_4["entity"] thread func_284E(self, var_5);
     playFX(level.var_2850["activate"], var_4["position"] + (0, 0, 20));
@@ -110,7 +110,7 @@ func_68D8(var_0) {
 func_7E0D() {
   var_0 = [];
   foreach(var_2 in level.participants) {
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       var_0 = scripts\engine\utility::array_add(var_0, var_2);
     }
   }

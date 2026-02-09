@@ -48,7 +48,7 @@ less_than_goal() {
 }
 
 update_alien_kill_achievements_dlc2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
   if(isDefined(self.alien_type) && self.alien_type == "seeder_spore")

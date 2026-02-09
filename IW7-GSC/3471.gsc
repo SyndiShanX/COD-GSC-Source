@@ -290,7 +290,7 @@ box_seticon(var_0, var_1, var_2) {
 }
 
 box_enableplayeruse(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     self enableplayeruse(var_0);
   }
 
@@ -298,7 +298,7 @@ box_enableplayeruse(var_0) {
 }
 
 box_disableplayeruse(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     self disableplayeruse(var_0);
   }
 

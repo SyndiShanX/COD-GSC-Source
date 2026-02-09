@@ -79,7 +79,6 @@ class cct_shared_warning: cluielem {
     cluielem::add_clientfield("_state", 1, 4, "int");
     cluielem::add_clientfield("objpoints", 1, 11, "int", var_ea26adc8);
   }
-
 }
 
 register(uid, var_ea26adc8) {

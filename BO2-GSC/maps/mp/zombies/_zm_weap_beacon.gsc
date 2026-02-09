@@ -618,7 +618,7 @@ artillery_fx_logic_ee(sp_giant_robot, grenade) {
 }
 
 homing_beacon_vo() {
-  if(isDefined(self.owner) && isplayer(self.owner)) {
+  if(isDefined(self.owner) && isPlayer(self.owner)) {
     n_time = gettime();
 
     if(isDefined(self.time_thrown)) {

@@ -565,7 +565,7 @@ function updatewinlossstats(winner) {
     return;
   }
   players = level.players;
-  if(!isDefined(winner) || (isDefined(winner) && !isplayer(winner) && winner == "tie")) {
+  if(!isDefined(winner) || (isDefined(winner) && !isPlayer(winner) && winner == "tie")) {
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"])) {
         continue;
@@ -576,7 +576,7 @@ function updatewinlossstats(winner) {
       updatetiestats(players[i]);
     }
   } else {
-    if(isplayer(winner)) {
+    if(isPlayer(winner)) {
       if(level.hostforcedend && winner ishost()) {
         return;
       }
@@ -731,7 +731,7 @@ function givekillstats(smeansofdeath, weapon, evictim) {
   if(smeansofdeath == "MOD_HEAD_SHOT") {
     attacker thread incpersstat("headshots", 1, 1, 0);
     attacker.headshots = attacker.pers["headshots"];
-    if(isDefined(evictim) && isplayer(evictim)) {
+    if(isDefined(evictim) && isPlayer(evictim)) {
       evictim recordkillmodifier("headshot");
     }
   }
@@ -776,7 +776,7 @@ function givekillstats(smeansofdeath, weapon, evictim) {
       }
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     itemindex = undefined;
     if(weapon.name == "gadget_firefly_swarm" || weapon.name == "gadget_firefly_swarm_upgraded") {
       itemindex = getitemindexfromref("cybercom_fireflyswarm");

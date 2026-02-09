@@ -26,8 +26,8 @@ function main() {
   callback::on_localplayer_spawned(&waterfall::waterfalloverlay);
   callback::on_localplayer_spawned(&waterfall::waterfallmistoverlay);
   callback::on_localplayer_spawned(&waterfall::waterfallmistoverlayreset);
-  setdvar("phys_buoyancy", 1);
-  setdvar("phys_ragdoll_buoyancy", 1);
+  setDvar("phys_buoyancy", 1);
+  setDvar("phys_ragdoll_buoyancy", 1);
 }
 
 function dom_flag_base_fx_override(flag, team) {

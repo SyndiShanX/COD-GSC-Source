@@ -56,11 +56,9 @@ _id_562F() {
 attachpath(var_0) {
   if(var_0.v["type"] != "soundfx_interval" && var_0.v["type"] != "soundfx") {
     return 0;
-
   }
   if(var_0.v["origin"][2] < 6500) {
     return 1;
-
   }
   return 0;
 }
@@ -82,14 +80,12 @@ watchplayeroverlap() {
   while(level.players.size > 1) {
     while(!level.planerumbleactive || !playeroverlap(var_0, var_1)) {
       wait 0.05;
-
     }
     var_2 = var_0 setcontents(0);
     var_3 = var_1 setcontents(0);
 
     while(playeroverlap(var_0, var_1)) {
       wait 0.05;
-
     }
     var_0 setcontents(var_2);
     var_1 setcontents(var_3);
@@ -99,13 +95,11 @@ watchplayeroverlap() {
 playeroverlap(var_0, var_1) {
   if(abs(var_0.origin[2] - var_1.origin[2]) > 70) {
     return 0;
-
   }
   var_2 = distance2d(var_0.origin, var_1.origin);
 
   if(var_2 > 30) {
     return 0;
-
   }
   return 1;
 }
@@ -320,15 +314,14 @@ _id_5B4E() {
   level._id_5A65 = getent("player_debate_trigger", "script_noteworthy");
   level._id_5A65 common_scripts\utility::trigger_off();
 
-  if(getdvar("airmasks") == "") {
-    setdvar("airmasks", "1");
-
+  if(getDvar("airmasks") == "") {
+    setDvar("airmasks", "1");
   }
   level.player setweaponammostock("fnfiveseven", 60);
-  level._id_5A68 = getdvar("phys_gravity");
-  level._id_5A69 = getdvar("phys_gravity_ragdoll");
-  level._id_5A6A = getdvar("phys_gravityChangeWakeupRadius");
-  level._id_5A6B = getdvar("ragdoll_max_life");
+  level._id_5A68 = getDvar("phys_gravity");
+  level._id_5A69 = getDvar("phys_gravity_ragdoll");
+  level._id_5A6A = getDvar("phys_gravityChangeWakeupRadius");
+  level._id_5A6B = getDvar("ragdoll_max_life");
   level._id_5A6C = (-14, 114, 0);
   level._id_5960 = getent("org_view_roll", "targetname");
   level.player playersetgroundreferenceent(level._id_5960);
@@ -736,14 +729,12 @@ _id_5B6F() {
 
   if(var_0 < var_12) {
     var_14 = int((var_12 - var_13) / var_12 * 5000);
-
   }
   level._id_16C4 = level._id_16C4 + var_14;
   var_15 = 25 * level.players[0]._id_16C6["kills"];
 
   if(maps\_utility::_id_12C1()) {
     var_15 = var_15 + 25 * maps\_utility::_id_133A(level.players[0])._id_16C6["kills"];
-
   }
   level._id_16C4 = level._id_16C4 + var_15;
   var_16 = var_1 / level.players.size;
@@ -805,7 +796,6 @@ _id_5B6F() {
 
         if(!issplitscreen()) {
           var_4 maps\_utility::_id_16C8();
-
         }
         var_4 maps\_utility::_id_16C7(var_25, var_35, undefined, undefined);
       } else {
@@ -828,7 +818,6 @@ _id_5B6F() {
 
       if(!issplitscreen()) {
         var_4 maps\_utility::_id_16C8();
-
       }
       var_4 maps\_utility::_id_16C7(var_25, var_35, undefined, undefined);
       continue;
@@ -840,9 +829,9 @@ _id_5B6F() {
   }
 
   if(!level._id_16C9) {
-    setdvar("ui_hide_hint", 1);
+    setDvar("ui_hide_hint", 1);
   } else {
-    setdvar("ui_hide_hint", 0);
+    setDvar("ui_hide_hint", 0);
   }
 }
 
@@ -876,7 +865,6 @@ _id_5B72() {
 
   if(_id_011A()) {
     wait 1;
-
   }
   _id_5B73("lower_floor_first_terrorists");
   common_scripts\utility::flag_wait("lower_floor_second_terrorists");
@@ -895,7 +883,6 @@ _id_5B72() {
 
   if(_id_011A()) {
     wait 4;
-
   }
   _id_5B73("so_conference_room_hall");
 }
@@ -1230,7 +1217,6 @@ _id_5B88() {
 
   if(!isDefined(level._id_5B89)) {
     level._id_5B89 = [];
-
   }
   level._id_5B89[level._id_5B89.size] = self;
 }
@@ -1263,7 +1249,6 @@ _id_5B8C() {
 
   while(!_id_5B8D()) {
     wait 0.1;
-
   }
   self setcursorhint("HINT_NOICON");
   self sethintstring(&"SO_MILEHIGH_HIJACK_USE_PRESIDENT");
@@ -1311,7 +1296,6 @@ _id_5B8F() {
 
   while(isDefined(var_2)) {
     common_scripts\utility::waitframe();
-
   }
   level notify("so_counter_breach_flash_activated");
 }

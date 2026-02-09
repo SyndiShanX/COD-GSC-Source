@@ -225,7 +225,6 @@ createCarryObject(ownerTeam, trigger, visuals, offset) {
         carryObject.numTouching[name] = 0;
         carryObject.touchList[name] = [];
       }
-
     }
 
     carryObject thread carryObjectProxThink();
@@ -478,7 +477,7 @@ giveObject(object) {
     }
   }
 
-  if(isDefined(object.carryIcon) && IsPlayer(self)) {
+  if(isDefined(object.carryIcon) && isPlayer(self)) {
     if(level.splitscreen) {
       self.carryIcon = createIcon(object.carryIcon, 33, 33);
       self.carryIcon setPoint("BOTTOM RIGHT", "BOTTOM RIGHT", -50, -78);
@@ -1430,7 +1429,7 @@ triggerTouchThink(object) {
   object updateUseRate();
 
   while(isReallyAlive(self) && isDefined(object.trigger) && (self isTouching(object.trigger) || isBoostingAboveTriggerRadius(object.trigger)) && !level.gameEnded) {
-    if(IsPlayer(self) && object.useTime) {
+    if(isPlayer(self) && object.useTime) {
       self updateUIProgress(object, true);
       self updateProxBar(object, false);
     }
@@ -1438,7 +1437,7 @@ triggerTouchThink(object) {
   }
 
   if(isDefined(self) && isDefined(self.touchTriggers)) {
-    if(IsPlayer(self) && object.useTime) {
+    if(isPlayer(self) && object.useTime) {
       self updateUIProgress(object, false);
       self updateProxBar(object, true);
     }
@@ -1721,7 +1720,7 @@ attachUseModel() {
 
 useHoldThink(player) {
   player notify("use_hold");
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player playerLinkTo(self.trigger);
   } else {
     player LinkTo(self.trigger);
@@ -1760,7 +1759,7 @@ useHoldThink(player) {
   self.inUse = true;
   self.useRate = 0;
 
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player thread personalUseBar(self);
   }
 
@@ -1787,7 +1786,6 @@ useHoldThink(player) {
       } else {
         player takeWeapon(useWeapon);
       }
-
     } else {
       player _enableWeapon();
     }
@@ -2347,7 +2345,6 @@ getRelativeTeam(team) {
   } else {
     return "enemy";
   }
-
 }
 
 isFriendlyTeam(team) {

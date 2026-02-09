@@ -794,7 +794,7 @@ player_slide_fall() {
     var_1 maps\_anim::anim_single_solo(var_1, "carrier_player_slide");
   } else {
     level.player dodamage(level.player.health * 0.9, level.player.origin + (0, 0, 72));
-    setdvar("ui_deadquote", &"CARRIER_FAIL_DECK_TILT");
+    setDvar("ui_deadquote", &"CARRIER_FAIL_DECK_TILT");
     maps\_utility::missionfailedwrapper();
   }
 }
@@ -2043,7 +2043,7 @@ edge_lean_natural() {
   for(;;) {
     self waittill("trigger");
     level.player.in_lean_vol = 1;
-    level.player_view_pitch_down = getdvar("player_view_pitch_down");
+    level.player_view_pitch_down = getDvar("player_view_pitch_down");
     setsaveddvar("player_view_pitch_down", 89);
 
     while(level.player istouching(self)) {
@@ -2165,7 +2165,7 @@ player_rain_drops() {
 rain_overlay_alpha(var_0, var_1) {
   var_2 = self;
 
-  if(!isplayer(var_2))
+  if(!isPlayer(var_2))
     var_2 = level.player;
 
   if(!isDefined(var_1))

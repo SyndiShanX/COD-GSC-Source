@@ -55,7 +55,7 @@ function_184e15d2(weapon) {
 watchsmokegrenadedetonation(owner, statweapon, smokeweapon, duration, totaltime) {
   self endon(#"trophy_destroyed");
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner stats::function_e24eec31(statweapon, #"used", 1);
   }
 
@@ -83,7 +83,7 @@ smokedetonate(owner, statweapon, smokeweapon, position, radius, effectlifetime, 
   if(isDefined(owner)) {
     ent setteam(owner.team);
 
-    if(isplayer(owner)) {
+    if(isPlayer(owner)) {
       ent setowner(owner);
     }
   }
@@ -187,9 +187,7 @@ function_b4a975f1(attacker, victim, weapon, attackerweapon, meansofdeath) {
           smoketrigger.kills = (isDefined(smoketrigger.kills) ? smoketrigger.kills : 0) + 1;
 
           if(isDefined(level.var_ac6052e9)) {
-            var_9194a036 = [
-              [level.var_ac6052e9]
-            ]("muteSmokeSuccessLineCount", 0);
+            var_9194a036 = [[level.var_ac6052e9]]("muteSmokeSuccessLineCount", 0);
           }
 
           if(smoketrigger.kills == (isDefined(var_9194a036) ? var_9194a036 : 3)) {
@@ -200,7 +198,7 @@ function_b4a975f1(attacker, victim, weapon, attackerweapon, meansofdeath) {
       }
 
       return true;
-    } else if(isDefined(smoketrigger.owner) && isplayer(smoketrigger.owner) && isalive(smoketrigger.owner) && util::function_fbce7263(smoketrigger.owner.team, victim.team)) {
+    } else if(isDefined(smoketrigger.owner) && isPlayer(smoketrigger.owner) && isalive(smoketrigger.owner) && util::function_fbce7263(smoketrigger.owner.team, victim.team)) {
       if(level.teambased) {
         scoreevents::processscoreevent(#"smoke_assist", smoketrigger.owner, undefined, getweapon(#"eq_smoke"));
       }

@@ -248,7 +248,7 @@ on_agent_dog_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir
     self.owner leaderDialogOnPlayer("dog_kia_mp_instinct");
     self maps\mp\gametypes\_damage::onKillstreakKilled(eAttacker, sWeapon, sMeansOfDeath, iDamage, "destroyed_guard_dog");
 
-    if(IsPlayer(eAttacker)) {
+    if(isPlayer(eAttacker)) {
       eAttacker maps\mp\gametypes\_missions::processChallenge("ch_notsobestfriend");
 
       if(!self IsOnGround()) {

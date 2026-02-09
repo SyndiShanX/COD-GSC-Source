@@ -55,7 +55,6 @@ class clower_message: cluielem {
     cluielem::function_dcb34c80("string", "message", 1);
     cluielem::add_clientfield("countdownTimeSeconds", 1, 5, "int", var_7a5253d3);
   }
-
 }
 
 register(uid, var_9af44e2b, var_7a5253d3) {

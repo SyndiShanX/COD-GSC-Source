@@ -10,7 +10,7 @@
 init() {
   registerclientfield("toplayer", "tazer_flourish", 1, 1, "int", ::tazer_flourish, 0);
 
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   level._effect["fx_zmb_taser_flourish"] = loadfx("weapon/taser/fx_taser_knuckles_anim_zmb");

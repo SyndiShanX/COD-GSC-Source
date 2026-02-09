@@ -643,7 +643,7 @@ register_radio_vo(var_0, var_1, var_2, var_3, var_4) {
 watch_for_melee_on_chemical_object() {
   for(;;) {
     self.model waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 

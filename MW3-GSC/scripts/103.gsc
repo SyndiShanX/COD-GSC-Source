@@ -6,14 +6,12 @@
 _id_16F4() {
   if(!isDefined(level._id_16F5)) {
     if(!isDefined(level.script)) {
-      level.script = tolower(getdvar("mapname"));
-
+      level.script = tolower(getDvar("mapname"));
     }
     level._id_16F5 = spawnStruct();
 
     if(!isDefined(level._id_1456)) {
       level._id_1456 = spawnStruct();
-
     }
     level._id_1456._id_16F6 = 0;
     level._id_1456._id_16F7 = [];
@@ -93,7 +91,6 @@ _id_170B(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-
   }
   self endon("release" + var_0);
 
@@ -103,7 +100,6 @@ _id_170B(var_0, var_1, var_2) {
 
     if(!isDefined(self._id_170C)) {
       self._id_170C = [];
-
     }
     self._id_170C[var_0] = 1;
 
@@ -130,7 +126,6 @@ _id_170F(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   self notify("release" + var_0);
 
@@ -154,7 +149,6 @@ _id_1711(var_0, var_1, var_2) {
     _id_17BF(var_1);
   } else {
     wait(var_1);
-
   }
   self playSound(var_0, "sounddone");
   self waittill("sounddone");
@@ -167,7 +161,6 @@ _id_1712(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_4 = var_2;
-
   }
   var_5 = spawn("script_origin", var_4);
   var_5 thread _id_1711(var_0, var_1, var_3);
@@ -216,7 +209,6 @@ _id_171E() {
 
   if(!isDefined(level._id_1456._id_1467)) {
     level._id_1456._id_1467 = spawnStruct();
-
   }
   level._id_1456._id_1467._id_171D = undefined;
   level._id_1456._id_1467._id_171C = undefined;
@@ -240,14 +232,12 @@ _id_1722() {
 
   while(!common_scripts\utility::flag_exist("missionfailed")) {
     wait 0.05;
-
   }
   var_0 = "shg_mission_failed_stinger";
   common_scripts\utility::flag_wait("missionfailed");
 
   if(isDefined(level._id_1456._id_1721)) {
     var_0 = level._id_1456._id_1721;
-
   }
   if(soundexists(var_0)) {
     maps\_audio_music::_id_15A7(var_0, 2, 4);
@@ -268,14 +258,12 @@ _id_1723(var_0, var_1, var_2, var_3) {
     var_6 = var_2;
   } else if(var_3 && _id_1553() || !var_3 && _id_1554()) {
     return 0;
-
   }
   while(var_5 != "EOF" && var_10 < 10) {
     var_5 = tablelookupbyrow(var_1, var_6, 0);
 
     if(var_5 != "") {
       var_10 = 0;
-
     }
     while(var_5 == var_0) {
       var_9 = 1;
@@ -284,7 +272,6 @@ _id_1723(var_0, var_1, var_2, var_3) {
       for(var_11 = 1; var_11 < var_4; var_11++) {
         if(!isDefined(var_8[var_11])) {
           var_8[var_11] = tablelookupbyrow(var_1, 0, var_11);
-
         }
         var_12 = var_8[var_11];
         var_13 = tablelookupbyrow(var_1, var_6, var_11);
@@ -318,7 +305,6 @@ _id_1723(var_0, var_1, var_2, var_3) {
 
       if(!isDefined(level._id_1456._id_1729[var_0])) {
         level._id_1456._id_1729[var_0] = [];
-
       }
       level._id_1456._id_1729[var_0][level._id_1456._id_1729[var_0].size] = var_7;
       var_6++;
@@ -329,7 +315,6 @@ _id_1723(var_0, var_1, var_2, var_3) {
 
     if(var_9) {
       return 1;
-
     }
     var_6++;
   }
@@ -340,13 +325,11 @@ _id_1723(var_0, var_1, var_2, var_3) {
 _id_172A(var_0, var_1, var_2) {
   if(!isDefined(level._id_1456._id_1729)) {
     level._id_1456._id_1729 = [];
-
   }
   var_3 = 0;
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-
   }
   if(!isDefined(level._id_1456._id_1729[var_0])) {
     level._id_1456._id_1729[var_0] = [];
@@ -357,7 +340,6 @@ _id_172A(var_0, var_1, var_2) {
 
     if(!var_6) {
       var_6 = _id_1723(var_0, var_4, var_3, 1);
-
     }
     if(!var_6) {
       return;
@@ -372,7 +354,6 @@ _id_172A(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       var_7 = var_2;
-
     }
     var_8 = 0;
 
@@ -395,7 +376,6 @@ _id_172B(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   level._id_1456._id_16FF[var_1] = "";
   _id_1570(undefined, var_1);
@@ -424,7 +404,6 @@ _id_1570(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     var_4 = var_1;
-
   }
   if(!isDefined(var_0) || isDefined(var_0) && var_0 == "") {
     level._id_1456._id_16FE = undefined;
@@ -458,14 +437,12 @@ _id_1731(var_0) {
     var_4 = var_9;
   } else if(_id_1553()) {
     return 0;
-
   }
   while(var_3 != "EOF" && var_8 < 10) {
     var_3 = tablelookupbyrow(var_1, var_4, 0);
 
     if(var_3 != "") {
       var_8 = 0;
-
     }
     while(var_3 == var_0) {
       var_7 = 1;
@@ -474,7 +451,6 @@ _id_1731(var_0) {
       for(var_10 = 1; var_10 < var_2 + 1; var_10++) {
         if(!isDefined(var_6[var_10])) {
           var_6[var_10] = tablelookupbyrow(var_1, 0, var_10);
-
         }
         var_11 = var_6[var_10];
         var_12 = tablelookupbyrow(var_1, var_4, var_10);
@@ -497,7 +473,6 @@ _id_1731(var_0) {
 
       if(isDefined(var_5)) {
         level._id_1456._id_1733[var_0][level._id_1456._id_1733[var_0].size] = var_5;
-
       }
       var_4++;
       var_3 = tablelookupbyrow(var_1, var_4, 0);
@@ -507,7 +482,6 @@ _id_1731(var_0) {
 
     if(var_7) {
       return 1;
-
     }
     var_4++;
   }
@@ -520,11 +494,9 @@ _id_1734(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_2 = var_0;
-
   }
   if(!isDefined(level._id_1456._id_1733)) {
     level._id_1456._id_1733 = [];
-
   }
   var_3 = 1;
 
@@ -540,7 +512,6 @@ _id_1734(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_4 = var_1;
-
   }
   var_5 = 0;
 
@@ -579,14 +550,12 @@ _id_1736(var_0) {
     var_4 = var_9;
   } else if(_id_1553()) {
     return 0;
-
   }
   while(var_3 != "EOF" && var_8 < 10) {
     var_3 = tablelookupbyrow(var_1, var_4, 0);
 
     if(var_3 != "") {
       var_8 = 0;
-
     }
     while(var_3 == var_0) {
       var_7 = 1;
@@ -595,7 +564,6 @@ _id_1736(var_0) {
       for(var_10 = 1; var_10 < var_2 + 1; var_10++) {
         if(!isDefined(var_6[var_10])) {
           var_6[var_10] = tablelookupbyrow(var_1, 0, var_10);
-
         }
         var_11 = var_6[var_10];
         var_12 = tablelookupbyrow(var_1, var_4, var_10);
@@ -627,19 +595,15 @@ _id_1736(var_0) {
 
       if(!isDefined(var_5._id_1726)) {
         var_5._id_1726 = 600;
-
       }
       if(!isDefined(var_5.type)) {
         var_5.type = "highshelf";
-
       }
       if(!isDefined(var_5._id_1727)) {
         var_5._id_1727 = -12;
-
       }
       if(!isDefined(var_5._id_1728)) {
         var_5._id_1728 = 1;
-
       }
       level._id_1456._id_1737[var_0][level._id_1456._id_1737[var_0].size] = var_5;
       var_4++;
@@ -650,7 +614,6 @@ _id_1736(var_0) {
 
     if(var_7) {
       return 1;
-
     }
     var_4++;
   }
@@ -663,11 +626,9 @@ _id_1738(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_2 = var_0;
-
   }
   if(!isDefined(level._id_1456._id_1737)) {
     level._id_1456._id_1737 = [];
-
   }
   var_3 = 1;
 
@@ -686,7 +647,6 @@ _id_1738(var_0, var_1) {
 
     if(isDefined(var_1)) {
       var_4 = var_4;
-
     }
     var_5 = 0;
 
@@ -721,7 +681,6 @@ _id_156F(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_1;
-
   }
   var_2 = 0;
 
@@ -743,7 +702,6 @@ _id_1739(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_1;
-
   }
   _id_1570(undefined, 0, var_1);
   _id_1570(undefined, 1, var_1);
@@ -758,7 +716,6 @@ _id_173A(var_0) {
 
   if(isDefined(var_0)) {
     var_3 = var_3;
-
   }
   if(isDefined(level._id_1456._id_1561._id_1562) && isDefined(level._id_1456._id_1561._id_1563[level._id_1456._id_1561._id_1562])) {
     var_4 = maps\_audio_zone_manager::_id_1578();
@@ -766,7 +723,6 @@ _id_173A(var_0) {
 
     if(isDefined(var_5["occlusion"]) && var_5["occlusion"] != "none") {
       var_2 = var_5["occlusion"];
-
     }
     if(isDefined(var_5["filter"]) && var_5["filter"] != "none") {
       var_1 = var_5["filter"];
@@ -775,7 +731,6 @@ _id_173A(var_0) {
 
   if(level._id_1456._id_171F != var_2) {
     var_2 = level._id_1456._id_171F;
-
   }
   level._id_1456._id_159D = 0;
   _id_1570(var_1, 0, var_3);
@@ -800,7 +755,6 @@ _id_173F(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   level._id_1456._id_16F6 = 1;
   maps\_audio_zone_manager::_id_156A();
@@ -811,7 +765,6 @@ _id_173F(var_0) {
 
   if(var_1) {
     _id_17AC();
-
   }
   maps\_audio_whizby::_id_15B7("default");
 }
@@ -953,7 +906,6 @@ _id_174D(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     self notify(var_2);
-
   }
   if(!var_3) {
     _id_1466("\tAUDIO MESSAGE NOT HANDLED: " + var_0);
@@ -977,15 +929,12 @@ _id_15B2(var_0, var_1, var_2) {
 
     if(isDefined(var_0)) {
       var_5 = var_0;
-
     }
     if(isDefined(var_2)) {
       var_7 = var_2;
-
     }
     if(isDefined(var_2)) {
       var_6 = var_1;
-
     }
     var_8 = 36 * var_7;
     var_9 = 36 * var_6;
@@ -1004,7 +953,6 @@ _id_15B2(var_0, var_1, var_2) {
             var_16 = 1.0;
           } else {
             var_16 = 1.0 - (var_15 - var_9) / (var_8 - var_9);
-
           }
           var_12 = var_12 + var_16;
         }
@@ -1039,7 +987,6 @@ _id_1752(var_0) {
 
   if(isDefined(var_0)) {
     var_2 = 36 * var_0;
-
   }
   var_3 = getaiarray("bad_guys");
 
@@ -1085,19 +1032,16 @@ _id_1753(var_0, var_1) {
         var_5 = var_1._id_1755;
       } else {
         var_5 = undefined;
-
       }
       if(isDefined(var_1._id_1756)) {
         var_6 = var_1._id_1756;
       } else {
         var_6 = undefined;
-
       }
       if(isDefined(var_1.velocity)) {
         var_7 = var_1.velocity;
       } else {
         var_7 = undefined;
-
       }
       _id_1775(var_1._id_1759, var_1._id_1758, var_1._id_1757, var_5, var_6, var_7);
       break;
@@ -1133,7 +1077,6 @@ _id_175A(var_0) {
 
       if(soundexists("paris_lamplight_flicker")) {
         thread common_scripts\utility::play_sound_in_space("paris_lamplight_flicker", var_0.origin);
-
       }
       break;
     default:
@@ -1155,7 +1098,6 @@ _id_175B(var_0, var_1) {
   foreach(var_6 in var_2) {
     if(isDefined(var_6.delay)) {
       wait(var_6.delay);
-
     }
     var_7 = spawn("script_origin", (0, 0, 0));
     var_7 linkto(var_6._id_14B9, "", (0, 0, 0), (0, 0, 0));
@@ -1173,7 +1115,6 @@ _id_175B(var_0, var_1) {
 _id_175D(var_0) {
   if(!isDefined(level._id_1456._id_144F)) {
     level._id_1456._id_144F = [];
-
   }
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
@@ -1212,7 +1153,6 @@ _id_1762() {
 _id_1763(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return undefined;
-
   }
   if(var_1) {
     return var_0[1];
@@ -1224,7 +1164,6 @@ _id_1763(var_0, var_1) {
 _id_1764(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return undefined;
-
   }
   if(var_1) {
     return var_0[0];
@@ -1236,11 +1175,9 @@ _id_1764(var_0, var_1) {
 _id_1765(var_0) {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   if(!isDefined(level._id_1456._id_144F)) {
     level._id_1456._id_144F = [];
-
   }
   var_1 = undefined;
 
@@ -1252,7 +1189,6 @@ _id_1765(var_0) {
     var_1 = strtok(self._id_1766, " ");
   } else if(isDefined(self._id_1767)) {
     var_1 = strtok(self._id_1767, " ");
-
   }
   if(isDefined(var_1) && var_1.size == 2) {} else if(isDefined(var_1) && var_1.size == 1) {
     for(;;) {
@@ -1270,27 +1206,21 @@ _id_1765(var_0) {
 
   if(!isDefined(level._id_1456._id_175E)) {
     level._id_1456._id_175E = [];
-
   }
   if(isDefined(self._id_1769)) {
     level._id_1456._id_175E[level._id_1456._id_175E.size] = self._id_1769;
-
   }
   if(isDefined(self._id_176A)) {
     level._id_1456._id_175E[level._id_1456._id_175E.size] = self._id_176A;
-
   }
   if(isDefined(self._id_176B)) {
     level._id_1456._id_175E[level._id_1456._id_175E.size] = self._id_176B;
-
   }
   if(isDefined(self._id_176C)) {
     level._id_1456._id_175E[level._id_1456._id_175E.size] = self._id_176C;
-
   }
   if(!isDefined(self._id_176D)) {
     self._id_176D = "blend";
-
   }
   var_3 = undefined;
   var_4 = undefined;
@@ -1352,14 +1282,10 @@ _id_1765(var_0) {
         if(isDefined(self._id_1769)) {
           if(isDefined(var_1) && isDefined(var_1[0])) {
             if(isDefined(level._id_1456._id_144F[self._id_1769])) {
-              [
-                [level._id_1456._id_144F[self._id_1769]]
-              ](var_1[0]);
+              [[level._id_1456._id_144F[self._id_1769]]](var_1[0]);
             }
           } else if(isDefined(level._id_1456._id_144F[self._id_1769])) {
-            [
-              [level._id_1456._id_144F[self._id_1769]]
-            ]("front");
+            [[level._id_1456._id_144F[self._id_1769]]]("front");
           }
         }
       } else {
@@ -1376,27 +1302,20 @@ _id_1765(var_0) {
         if(isDefined(self._id_1769)) {
           if(isDefined(var_1) && isDefined(var_1[1])) {
             if(isDefined(level._id_1456._id_144F[self._id_1769])) {
-              [
-                [level._id_1456._id_144F[self._id_1769]]
-              ](var_1[1]);
+              [[level._id_1456._id_144F[self._id_1769]]](var_1[1]);
             }
           } else if(isDefined(level._id_1456._id_144F[self._id_1769])) {
-            [
-              [level._id_1456._id_144F[self._id_1769]]
-            ]("back");
+            [[level._id_1456._id_144F[self._id_1769]]]("back");
           }
         }
       }
     } else {
       if(isDefined(self._id_176E)) {
         aud_send_msg(self._id_176E);
-
       }
       if(isDefined(self._id_1769)) {
         if(isDefined(level._id_1456._id_144F[self._id_1769])) {
-          [
-            [level._id_1456._id_144F[self._id_1769]]
-          ]();
+          [[level._id_1456._id_144F[self._id_1769]]]();
         }
       }
     }
@@ -1426,9 +1345,7 @@ _id_1765(var_0) {
         var_13 = _id_1773(var_3, var_4, var_2.origin);
 
         if(isDefined(level._id_1456._id_144F[self._id_176C])) {
-          [
-            [level._id_1456._id_144F[self._id_176C]]
-          ](var_13);
+          [[level._id_1456._id_144F[self._id_176C]]](var_13);
         }
       }
 
@@ -1437,28 +1354,22 @@ _id_1765(var_0) {
 
         if(isDefined(self._id_1768)) {
           var_10 = _id_15B3(var_10, level._id_1456._id_16FC[self._id_1768]);
-
         }
         if(var_10 != var_12) {
           if(isDefined(_id_1763(var_1, var_9)) && isDefined(_id_1764(var_1, var_9))) {
             maps\_audio_zone_manager::_id_157A(_id_1763(var_1, var_9), _id_1764(var_1, var_9), var_10);
-
           }
           if(isDefined(self._id_176F)) {
             aud_send_msg(self._id_176F, var_10);
-
           }
           if(isDefined(self._id_176B)) {
             if(isDefined(level._id_1456._id_144F[self._id_176B])) {
-              [
-                [level._id_1456._id_144F[self._id_176B]]
-              ](var_10);
+              [[level._id_1456._id_144F[self._id_176B]]](var_10);
             }
           }
 
           if(isDefined(var_11)) {
             _id_1774(var_10, var_11, var_9);
-
           }
           var_12 = var_10;
           maps\_audio_zone_manager::_id_157C(var_10);
@@ -1477,7 +1388,6 @@ _id_1765(var_0) {
       if(var_10 > 0.5) {
         if(isDefined(var_1) && isDefined(var_1[1])) {
           maps\_audio_zone_manager::_id_1579(var_1[1]);
-
         }
         if(isDefined(self._id_1771)) {
           if(isDefined(var_1) && isDefined(var_1[1])) {
@@ -1490,14 +1400,10 @@ _id_1765(var_0) {
         if(isDefined(self._id_176A)) {
           if(isDefined(var_1) && isDefined(var_1[1])) {
             if(isDefined(level._id_1456._id_144F[self._id_176A])) {
-              [
-                [level._id_1456._id_144F[self._id_176A]]
-              ](var_1[1]);
+              [[level._id_1456._id_144F[self._id_176A]]](var_1[1]);
             }
           } else if(isDefined(level._id_1456._id_144F[self._id_176A])) {
-            [
-              [level._id_1456._id_144F[self._id_176A]]
-            ]("back");
+            [[level._id_1456._id_144F[self._id_176A]]]("back");
           }
         }
 
@@ -1505,7 +1411,6 @@ _id_1765(var_0) {
       } else {
         if(isDefined(var_1) && isDefined(var_1[0])) {
           maps\_audio_zone_manager::_id_1579(var_1[0]);
-
         }
         if(isDefined(self._id_1771)) {
           if(isDefined(var_1) && isDefined(var_1[0])) {
@@ -1518,14 +1423,10 @@ _id_1765(var_0) {
         if(isDefined(self._id_176A)) {
           if(isDefined(var_1) && isDefined(var_1[0])) {
             if(isDefined(level._id_1456._id_144F[self._id_176A])) {
-              [
-                [level._id_1456._id_144F[self._id_176A]]
-              ](var_1[0]);
+              [[level._id_1456._id_144F[self._id_176A]]](var_1[0]);
             }
           } else if(isDefined(level._id_1456._id_144F[self._id_176A])) {
-            [
-              [level._id_1456._id_144F[self._id_176A]]
-            ]("front");
+            [[level._id_1456._id_144F[self._id_176A]]]("front");
           }
         }
 
@@ -1534,14 +1435,12 @@ _id_1765(var_0) {
 
       if(isDefined(var_11)) {
         _id_1774(var_10, var_11, var_9);
-
       }
       continue;
     }
 
     if(isDefined(self._id_1771)) {
       aud_send_msg(self._id_1771);
-
     }
     if(isDefined(self._id_176A)) {
       if(isDefined(level._id_1456._id_144F[self._id_176A])) {
@@ -1571,7 +1470,6 @@ _id_1774(var_0, var_1, var_2) {
 
   if(var_2) {
     var_0 = 1.0 - var_0;
-
   }
   var_3 = var_1.mode;
 
@@ -1592,7 +1490,6 @@ _id_1775(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(var_3)) {
     var_3 = distance(var_7.origin, var_6.origin);
-
   }
   if(!isDefined(var_4)) {
     var_8 = 30;
@@ -1606,7 +1503,6 @@ _id_1775(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(var_5)) {
     var_5 = 1800;
-
   }
   var_11 = var_10 / var_5;
 
@@ -1648,7 +1544,6 @@ _id_1777(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_2 = var_0;
-
   }
   return var_2;
 }
@@ -1759,7 +1654,6 @@ _id_1787(var_0, var_1, var_2) {
     var_0 = var_1;
   } else if(var_0 > var_2) {
     var_0 = var_2;
-
   }
   return var_0;
 }
@@ -1771,13 +1665,11 @@ _id_1788(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_5 = var_4;
-
   }
   if(var_5) {
     var_0 playLoopSound(var_1);
   } else {
     var_0 playSound(var_1);
-
   }
   var_0 scalevolume(0.0);
   var_0 common_scripts\utility::delaycall(0.05, ::scalevolume, var_2, var_3);
@@ -1937,7 +1829,6 @@ _id_1793(var_0, var_1, var_2) {
     _id_17BF(var_1);
   } else {
     wait(var_1);
-
   }
   var_3 = spawn("script_origin", level.player.origin);
   var_3 thread _id_1792(var_0);
@@ -1981,7 +1872,6 @@ _id_1797(var_0, var_1) {
 
   while(isDefined(self)) {
     wait 0.1;
-
   }
   level notify(var_1 + "internal");
 
@@ -1997,7 +1887,6 @@ _id_15D7(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     var_5 = var_2;
-
   }
   var_6 = spawn("script_origin", var_1.origin);
 
@@ -2005,11 +1894,9 @@ _id_15D7(var_0, var_1, var_2, var_3, var_4) {
     var_6 linkto(var_1, "tag_origin", var_4, (0, 0, 0));
   } else {
     var_6 linkto(var_1);
-
   }
   if(var_5 == "loop") {
     var_1 thread _id_1797(var_6, var_3);
-
   }
   var_6 thread _id_1796(var_5, var_0, var_3);
   return var_6;
@@ -2022,13 +1909,11 @@ _id_1798(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_4 = var_2;
-
   }
   if(var_4 == "loop") {
     var_3 playLoopSound(var_0);
   } else {
     var_3 playSound(var_0);
-
   }
   return var_3;
 }
@@ -2041,7 +1926,6 @@ _id_1799(var_0, var_1, var_2) {
     self stopsounds();
   } else {
     self waittill("sounddone");
-
   }
   wait 0.05;
   self delete();
@@ -2090,7 +1974,6 @@ _id_17A0(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_4 = var_3;
-
   }
   var_5 = getEntArray(var_0, "script_noteworthy");
   var_6 = var_5.size;
@@ -2144,7 +2027,6 @@ _id_17A4(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-
   }
   maps\_audio_mix_manager::_id_1517("mute_music", 0.1);
   wait 0.05;
@@ -2156,7 +2038,6 @@ _id_14E1() {
 
   if(!isDefined(self._id_14E2)) {
     self._id_14E2 = 0;
-
   }
   self waittill("sounddone");
 
@@ -2210,13 +2091,11 @@ _id_17A8(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_4 = var_2;
-
   }
   var_5 = var_4;
 
   if(isDefined(var_3)) {
     var_5 = var_3;
-
   }
   maps\_audio_mix_manager::_id_1517(var_0, var_4);
   wait(var_1);
@@ -2260,7 +2139,6 @@ _id_1552(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3 = var_2;
-
   }
   var_4 = undefined;
 
@@ -2268,7 +2146,6 @@ _id_1552(var_0, var_1, var_2) {
     var_4 = level._id_1456.index._id_16F9;
   } else {
     var_4 = level._id_1456.index._id_16F8;
-
   }
   var_5 = undefined;
 
@@ -2291,7 +2168,6 @@ _id_1552(var_0, var_1, var_2) {
 
   if(!isDefined(var_5)) {
     var_5 = -1;
-
   }
   return var_5;
 }
@@ -2350,7 +2226,6 @@ _id_17B1(var_0, var_1) {
       }
     } else {
       var_6 = 0;
-
     }
     wait 0.05;
   }
@@ -2408,13 +2283,11 @@ _id_17BE(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_2)) {
     var_6 = var_2;
-
   }
   var_7 = 1.0;
 
   if(isDefined(var_5)) {
     var_7 = var_5;
-
   }
   if(isDefined(var_3)) {
     if(!isDefined(var_4)) {
@@ -2454,7 +2327,6 @@ _id_17C0(var_0) {
 _id_17C1(var_0) {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   level._id_1456._id_17C2 = var_0;
 }
@@ -2462,7 +2334,6 @@ _id_17C1(var_0) {
 _id_17C3() {
   if(!isDefined(level._id_1456._id_17C2)) {
     level._id_1456._id_17C2 = 1.0;
-
   }
   wait 0.05;
   levelsoundfade(1, level._id_1456._id_17C2);
@@ -2475,7 +2346,6 @@ _id_17C4() {
 _id_17C6() {
   if(!isDefined(level._id_1456)) {
     level._id_1456 = spawnStruct();
-
   }
   level._id_1456._id_17C5 = 1;
 }
@@ -2506,7 +2376,6 @@ _id_17C8() {
       self._id_17CB = 1;
     } else {
       self moveto(var_6, var_3);
-
     }
     wait(var_3);
   }
@@ -2527,7 +2396,6 @@ _id_17CE(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_5)) {
     var_7 = max(var_5, 0);
-
   }
   var_8 = spawn("script_origin", (0, 0, 0));
   var_8._id_1486 = var_1;
@@ -2556,7 +2424,6 @@ _id_17CF(var_0, var_1, var_2) {
 
     if(isDefined(var_1)) {
       var_7 = var_1;
-
     }
     if(isDefined(var_2)) {
       var_8 = var_2;

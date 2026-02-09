@@ -42,7 +42,6 @@ cycleTargets() {
     self findTargets();
     wait(randomIntRange(4, 5));
   }
-
 }
 
 findTargets() {
@@ -97,7 +96,6 @@ findTargets() {
     wait(0.5);
     self thread fireAtTarget(uav, self.team, false);
   }
-
 }
 
 earlyAbortWatcher() {

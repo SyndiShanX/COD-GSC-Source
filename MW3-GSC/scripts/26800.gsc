@@ -13,7 +13,6 @@ _id_6873() {
     level._id_6874 = var_2;
   } else {
     level._id_6874 = var_2;
-
   }
   maps\_shg_common::_id_1685(var_1, 20, var_2, (1, 1, 1));
   self._id_6875 = 1.0;
@@ -29,11 +28,9 @@ _id_6877() {
 
   if(!isDefined(var_2)) {
     var_2 = self.script_noteworthy;
-
   }
   if(!isDefined(var_2)) {
     var_2 = "" + var_0;
-
   }
   for(;;) {
     waittillframeend;
@@ -69,14 +66,14 @@ main() {
   anim._id_6879["left"]._id_687B._id_5C80 = % zodiac_harbor_rightside_aim4;
   anim._id_6879["left"]._id_687B._id_687C = % zodiac_harbor_rightside_aim5;
   anim._id_6879["left"]._id_687B.right = % zodiac_harbor_rightside_aim6;
-  anim._id_6879["left"]._id_0F54 = animscripts\utility::_id_0C6D( % zodiac_harbor_rightside_reload);
+  anim._id_6879["left"]._id_0F54 = animscripts\utility::_id_0C6D(%zodiac_harbor_rightside_reload);
   anim._id_6879["left"].leftaimlimit = -49;
   anim._id_6879["left"].rightaimlimit = 48;
   anim._id_6879["left"]._id_687D = % zodiac_harbor_rightside_idle;
   anim._id_6879["left"]._id_0F59 = % zodiac_harbor_rightside_bump_idle;
   anim._id_6879["left"]._id_687E = % zodiac_harbor_rightside_idle_short;
   anim._id_6879["left"]._id_687F = % zodiac_harbor_rightside_react;
-  anim._id_6879["left"]._id_6880 = animscripts\utility::_id_0C6D( % zodiac_harbor_rightside_shift, % zodiac_harbor_rightside_react);
+  anim._id_6879["left"]._id_6880 = animscripts\utility::_id_0C6D(%zodiac_harbor_rightside_shift, %zodiac_harbor_rightside_react);
   anim._id_6879["right"] = spawnStruct();
   anim._id_6879["right"]._id_143A = % zodiac_aim_right;
   anim._id_6879["right"]._id_687A = % zodiac_harbor_trans_l2r;
@@ -84,11 +81,11 @@ main() {
   anim._id_6879["right"]._id_687B._id_5C80 = % zodiac_harbor_leftside_aim4;
   anim._id_6879["right"]._id_687B._id_687C = % zodiac_harbor_leftside_aim5;
   anim._id_6879["right"]._id_687B.right = % zodiac_harbor_leftside_aim6;
-  anim._id_6879["right"]._id_0F54 = animscripts\utility::_id_0C6D( % zodiac_harbor_leftside_reload, % zodiac_harbor_leftside_reloadb);
+  anim._id_6879["right"]._id_0F54 = animscripts\utility::_id_0C6D(%zodiac_harbor_leftside_reload, %zodiac_harbor_leftside_reloadb);
   anim._id_6879["right"]._id_687D = % zodiac_harbor_leftside_idle;
   anim._id_6879["right"]._id_0F59 = % zodiac_harbor_leftside_bump_idle;
   anim._id_6879["right"]._id_687E = % zodiac_harbor_leftside_idle_short;
-  anim._id_6879["right"]._id_6880 = animscripts\utility::_id_0C6D( % zodiac_harbor_leftside_duck);
+  anim._id_6879["right"]._id_6880 = animscripts\utility::_id_0C6D(%zodiac_harbor_leftside_duck);
   anim._id_6879["right"]._id_687F = % zodiac_harbor_leftside_react;
   anim._id_6879["right"].leftaimlimit = -51;
   anim._id_6879["right"].rightaimlimit = 51;
@@ -117,7 +114,6 @@ _id_6884() {
     maps\_utility::_id_1402("transitioning_positions");
   } else {
     maps\_utility::_id_13DE("transitioning_positions");
-
   }
   animscripts\utility::_id_0D15("zodiac");
   self._id_6885 = 0;
@@ -125,7 +121,6 @@ _id_6884() {
 
   if(!isDefined(self.a._id_6887)) {
     self.a._id_6887 = "right";
-
   }
   self.a._id_6888 = gettime() + 1000;
   self.a._id_6889 = gettime() + randomintrange(3000, 6000);
@@ -138,7 +133,6 @@ _id_6884() {
 
   if(isDefined(self._id_688F)) {
     self._id_688E = self._id_688F;
-
   }
   _id_68AF();
   self.a._id_6890 = undefined;
@@ -161,13 +155,13 @@ _id_6884() {
         var_1 = anim._id_6879[self.a._id_6887]._id_687A;
         self.a._id_6887 = var_0;
         maps\_utility::_id_13DC("transitioning_positions");
-        self setflaggedanimknoballrestart("trans", var_1, % body, 1, 0.2);
+        self setflaggedanimknoballrestart("trans", var_1, %body, 1, 0.2);
         animscripts\notetracks::_id_0D4F(getanimlength(var_1) - 0.3, "trans");
         self.a._id_6888 = gettime();
         self.a._id_6889 = gettime() + randomintrange(3000, 6000);
         maps\_utility::_id_13DE("transitioning_positions");
         var_2 = anim._id_6879[self.a._id_6887]._id_687B._id_687C;
-        self setanimknoballrestart(var_2, % body, 1, 0.2);
+        self setanimknoballrestart(var_2, %body, 1, 0.2);
         self notify("boat_pose_change");
         self.a._id_6886 = 0;
         _id_68AF();
@@ -187,7 +181,6 @@ _id_6884() {
       continue;
     } else {
       _id_68A7();
-
     }
     wait 0.1;
   }
@@ -199,7 +192,6 @@ _id_6891() {
   if(animscripts\combat_utility::_id_0F08(0)) {
     if(!isDefined(self.a._id_6890)) {
       self.a._id_6890 = gettime();
-
     }
     animscripts\weaponlist::_id_0CD0();
   }
@@ -207,11 +199,9 @@ _id_6891() {
   if(isDefined(self.a._id_6890)) {
     if(gettime() - self.a._id_6890 > 2500) {
       return 1;
-
     }
     if(!_id_68A5()) {
       return 1;
-
     }
     if(self.a._id_0AA7 < gettime() - 1500) {
       return 1;
@@ -225,7 +215,7 @@ _id_6892() {
   var_0 = anim._id_6879[self.a._id_6887]._id_0F54;
   var_1 = var_0[randomint(var_0.size)];
   self.a._id_6890 = undefined;
-  self setflaggedanimknoballrestart("reload", var_1, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("reload", var_1, %body, 1, 0.2);
   _id_689C(var_1);
   animscripts\weaponlist::_id_0CD0();
 }
@@ -239,7 +229,7 @@ _id_6893() {
   wait 0.05;
   self notify("end_boat_idle");
   self.a._id_6894 = undefined;
-  self clearanim( % zodiac_idle, 0.2);
+  self clearanim(%zodiac_idle, 0.2);
 }
 
 _id_6895(var_0, var_1, var_2) {
@@ -255,7 +245,6 @@ _id_6896() {
   if(isDefined(self.vehicle) && isDefined(self.vehicle._id_0EFE)) {
     if(self.vehicle._id_0EFE["bump_big"]["passenger"]) {
       var_0 = 1;
-
     }
     if(self.vehicle._id_0EFE["jump"]["passenger"]) {
       var_0 = 1;
@@ -272,7 +261,6 @@ _id_6897() {
 
   if(var_1 > 170) {
     var_0 = "alt";
-
   }
   if(isDefined(self._id_6899) && self._id_6899) {
     if(isDefined(self.vehicle) && isDefined(self.vehicle._id_0EFE)) {
@@ -326,12 +314,11 @@ _id_6897() {
     if(var_7) {
       var_2 = var_2 + "react ";
       var_8 = anim._id_6879[self.a._id_6887]._id_687F;
-      self setflaggedanimknoballrestart("twitch", var_8, % body, 1, 0.2);
+      self setflaggedanimknoballrestart("twitch", var_8, %body, 1, 0.2);
       var_9 = getanimlength(var_8);
 
       if(var_9 > 0.5) {
         var_9 = 0.5;
-
       }
       self._id_688B = gettime() + 1000 * var_9;
       self._id_688C = 2.0;
@@ -340,7 +327,6 @@ _id_6897() {
     } else if(self._id_6885) {
       if(self._id_688B < gettime()) {
         self._id_6885 = 0;
-
       }
       var_9 = self._id_688B - gettime();
       var_2 = var_2 + "react " + var_9 + " ";
@@ -349,11 +335,9 @@ _id_6897() {
     } else {
       if(var_4 < 0) {
         var_4 = 0;
-
       }
       if(var_4 > 1.0) {
         var_4 = 1.0;
-
       }
       if(isDefined(var_3) && var_4 > 0) {
         if(self._id_688B < gettime() || var_6 && var_4 > self._id_688C) {
@@ -380,7 +364,6 @@ _id_6897() {
 
   if(var_0 == "normal" || !isDefined(var_3)) {
     var_3 = anim._id_6879[self.a._id_6887]._id_0F59;
-
   }
   if(isDefined(var_3)) {
     var_10 = anim._id_6879[self.a._id_6887]._id_687D;
@@ -389,7 +372,6 @@ _id_6897() {
       var_4 = 1.0;
     } else {
       var_4 = var_1 / 85;
-
     }
     var_2 = var_2 + "idle " + var_4 + " ";
     self._id_688B = gettime();
@@ -398,7 +380,6 @@ _id_6897() {
 
     if(isDefined(self._id_689A)) {
       var_11 = 0.0;
-
     }
     self setanimknob(var_10, 1 - var_4, var_11);
     self setanimknob(var_3, var_4, var_11);
@@ -410,23 +391,18 @@ _id_6897() {
 _id_689B() {
   if(isDefined(self._id_6899) && self._id_6899) {
     return 0;
-
   }
   if(self.a._id_0AA7 > gettime() - 2000) {
     return 0;
-
   }
   if(gettime() < self.a._id_688A + 1500) {
     return 0;
-
   }
   if(_id_689F()) {
     return 0;
-
   }
   if(!isDefined(anim._id_6879[self.a._id_6887]._id_6880)) {
     return 0;
-
   }
   return 1;
 }
@@ -456,7 +432,7 @@ _id_689D() {
     var_1 = var_0[randomint(var_0.size)];
   }
 
-  self setflaggedanimknoballrestart("twitch", var_1, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("twitch", var_1, %body, 1, 0.2);
   _id_689C(var_1);
   self.a._id_689E = var_1;
   self.a._id_688A = gettime();
@@ -465,7 +441,6 @@ _id_689D() {
 _id_689F() {
   if(!isDefined(self.enemy)) {
     return 0;
-
   }
   var_0 = bulletTrace(self getEye(), self.enemy.origin + (0, 0, 60), 1, self);
 
@@ -479,7 +454,6 @@ _id_689F() {
 
   if(var_0["fraction"] > 0.99) {
     return 1;
-
   }
   return 0;
 }
@@ -528,7 +502,6 @@ _id_68A2() {
       self._id_68A3 = randomfloatrange(-20, 40);
     } else {
       self._id_68A3 = randomfloatrange(-40, 20);
-
     }
     _id_68A1();
   }
@@ -537,7 +510,6 @@ _id_68A2() {
 _id_68A4(var_0) {
   if(!isDefined(self._id_0CB1)) {
     return 0;
-
   }
   var_1 = self._id_0CB1 - self._id_6898 * var_0;
   var_2 = animscripts\shared::_id_23CE(var_1);
@@ -547,7 +519,6 @@ _id_68A4(var_0) {
 _id_68A5() {
   if(!isDefined(self._id_0CB1)) {
     return 0;
-
   }
   var_0 = _id_68A6();
   var_1 = anim._id_6879[self.a._id_6887];
@@ -567,7 +538,6 @@ _id_68A6() {
     }
   } else {
     var_0 = self._id_68A3;
-
   }
   return var_0;
 }
@@ -577,7 +547,6 @@ _id_68A7() {
 
   if(!isDefined(self._id_0CB1)) {
     var_0 = 5;
-
   }
   var_1 = _id_68A6();
 
@@ -602,7 +571,6 @@ _id_68A7() {
 
     if(var_4 > 1) {
       var_4 = 1;
-
     }
     self setanimknob(var_2._id_687B._id_687C, 1 - var_4, var_3);
     self setanim(var_2._id_687B._id_5C80, var_4, var_3);
@@ -611,13 +579,12 @@ _id_68A7() {
 
     if(var_4 > 1) {
       var_4 = 1;
-
     }
     self setanimknob(var_2._id_687B._id_687C, 1 - var_4, var_3);
     self setanim(var_2._id_687B.right, var_4, var_3);
   }
 
-  self setanimknoball(var_2._id_143A, % zodiac_actions, 1, 0.2);
+  self setanimknoball(var_2._id_143A, %zodiac_actions, 1, 0.2);
   self.a._id_6886 = var_1;
 }
 
@@ -667,15 +634,12 @@ _id_68AA() {
 _id_68AB() {
   if(isDefined(self._id_6899) && self._id_6899) {
     return "none";
-
   }
   if(self.a._id_6888 > gettime() - 2000) {
     return "none";
-
   }
   if(self.a._id_0AA7 > gettime() - 2000) {
     return "none";
-
   }
   if(!isDefined(self._id_0CB1)) {
     if(self.a._id_6889 < gettime()) {
@@ -707,19 +671,16 @@ _id_68AB() {
 _id_68AC() {
   if(isDefined(self._id_68AD)) {
     return _id_68AB();
-
   }
   if(isDefined(self._id_68AE)) {
     if(self.a._id_6887 == self._id_68AE) {
       return "none";
-
     }
     return self._id_68AE;
   }
 
   if(self.a._id_6887 == "right") {
     return "left";
-
   }
   return "none";
 }
@@ -729,7 +690,7 @@ _id_68AF() {
   self.a._id_0C6D["fire"] = % exposed_shoot_auto_v3;
 
   if(self.a._id_6887 == "left") {
-    self.a._id_0C6D["single"] = animscripts\utility::_id_0C6D( % zodiac_harbor_rightside_fire_single);
+    self.a._id_0C6D["single"] = animscripts\utility::_id_0C6D(%zodiac_harbor_rightside_fire_single);
     self.a._id_0C6D["burst2"] = % zodiac_harbor_rightside_fire_burst;
     self.a._id_0C6D["burst3"] = % zodiac_harbor_rightside_fire_burst;
     self.a._id_0C6D["burst4"] = % zodiac_harbor_rightside_fire_burst;
@@ -741,7 +702,7 @@ _id_68AF() {
     self.a._id_0C6D["semi5"] = % zodiac_harbor_rightside_fire_burst;
     self.a._id_0C6D["semi6"] = % zodiac_harbor_rightside_fire_burst;
   } else {
-    self.a._id_0C6D["single"] = animscripts\utility::_id_0C6D( % zodiac_harbor_leftside_fire_single);
+    self.a._id_0C6D["single"] = animscripts\utility::_id_0C6D(%zodiac_harbor_leftside_fire_single);
     self.a._id_0C6D["burst2"] = % zodiac_harbor_leftside_fire_burst;
     self.a._id_0C6D["burst3"] = % zodiac_harbor_leftside_fire_burst;
     self.a._id_0C6D["burst4"] = % zodiac_harbor_leftside_fire_burst;

@@ -36,7 +36,7 @@ passiveparsetable() {
       var_6.attachmentroll = var_3;
     }
 
-    if(getdvar("ui_gametype") == "zombie") {
+    if(getDvar("ui_gametype") == "zombie") {
       var_7 = tablelookupbyrow("mp\passivetable.csv", var_0, 22);
 
       if(var_7 != "") {

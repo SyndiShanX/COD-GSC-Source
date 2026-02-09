@@ -10,8 +10,9 @@
 
 advance_then_retreat_one_path(startPath, retreatPathName, speed, accel, damage_percent, retreatNotify) {
   self endon("death");
-  if(!isDefined(damage_percent))
+  if(!isDefined(damage_percent)) {
     damage_percent = 0.0;
+  }
   self advance_then_stop(startPath, speed, accel);
   self thread check_for_damage_notify(damage_percent);
   if(isDefined(retreatNotify)) {
@@ -25,13 +26,11 @@ advance_then_retreat_one_path(startPath, retreatPathName, speed, accel, damage_p
   self.attachedpath = retreatPath;
   self thread goPath();
 }
-
 advance_then_retreat_multiple_paths(path1start, path2startarray, speed, accel, damage_percent, retreatNotify) {
   self endon("death");
-  retreatPathNode = path2startArray[randomInt(path2startarray.size - 1)];
+  retreatPathNode = path2startArray[randomint(path2startarray.size - 1)];
   advance_then_retreat_one_path(path1start, retreatPathNode, speed, accel, damage_percent, retreatNotify);
 }
-
 advance_then_stop(path1start, speed, accel) {
   self endon("death");
   goalNode = GetVehicleNode(path1start, "targetname");
@@ -40,7 +39,6 @@ advance_then_stop(path1start, speed, accel) {
   self.attachedpath = goalNode;
   self thread goPath();
 }
-
 patrol_loop(path1start, path1end, path2start, path2end, speed, accel) {
   self endon("death");
   goalnodes = [];
@@ -65,11 +63,11 @@ patrol_loop(path1start, path1end, path2start, path2end, speed, accel) {
     nextNode = nextNode % 4;
   }
 }
-
 patrol_loop_then_retreat(path1start, path1end, path2start, path2end, startretreatnode, retreatpathnode, speed, accel, damage_percent, retreatNotify) {
   self endon("death");
-  if(!isDefined(damage_percent))
+  if(!isDefined(damage_percent)) {
     damage_percent = 0.0;
+  }
   reachNode = GetVehicleNode(startretreatnode, "targetname");
   switchNode = GetVehicleNode(retreatpathnode, "targetname");
   self thread patrol_loop(path1start, path1end, path2start, path2end, speed, accel);
@@ -81,7 +79,6 @@ patrol_loop_then_retreat(path1start, path1end, path2start, path2end, startretrea
   }
   self thread switch_path_when_node_reached(reachNode, switchNode, speed, accel);
 }
-
 switch_path_when_node_reached(reachNode, switchNode, speed, accel) {
   self endon("death");
   distanceSq = 25.0 * 25.0;
@@ -99,7 +96,6 @@ switch_path_when_node_reached(reachNode, switchNode, speed, accel) {
   self attachPath(switchNode);
   self.attachedPath = switchNode;
 }
-
 check_for_damage_notify(damage_percent) {
   self endon("death");
   while(1) {

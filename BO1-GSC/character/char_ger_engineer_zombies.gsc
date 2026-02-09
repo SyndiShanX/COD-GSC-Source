@@ -8,7 +8,6 @@ main() {
   self.voice = "german";
   self.skeleton = "base";
 }
-
 precache() {
   precacheModel("char_ger_zombeng_body1_1");
 }

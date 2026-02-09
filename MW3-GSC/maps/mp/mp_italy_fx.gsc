@@ -35,8 +35,7 @@ main() {
   level._effect["waterfall_splash_medium_london"] = loadfx("water/waterfall_splash_medium_london");
   level._effect["water_fountain_spout"] = loadfx("water/water_fountain_spout");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_italy_fx::main();
   }
-
 }

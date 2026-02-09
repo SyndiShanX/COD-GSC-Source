@@ -7,16 +7,15 @@
 #include common_scripts\utility;
 
 main() {
-  setdvar("r_reflectionprobefog", "1");
-  setdvar("r_lightGridEnableTweaks", "1");
-  setdvar("r_lightGridIntensity", "1.33");
+  setDvar("r_reflectionprobefog", "1");
+  setDvar("r_lightGridEnableTweaks", "1");
+  setDvar("r_lightGridIntensity", "1.33");
 
-  setdvar("r_gunSightColorEntityScale", "7");
-  setdvar("r_gunSightColorNoneScale", "0.8");
+  setDvar("r_gunSightColorEntityScale", "7");
+  setDvar("r_gunSightColorNoneScale", "0.8");
 
   if(level.currentgen) {
-    SetDvar("r_intensity", 1.15);
-    setdvar("r_brightness", GetDvar("r_brightness") + 0.07);
+    setDvar("r_intensity", 1.15);
+    setDvar("r_brightness", getDvar("r_brightness") + 0.07);
   }
-
 }

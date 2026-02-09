@@ -33,12 +33,12 @@ Callback_HostMigration() {
   foreach(character in level.characters) {
     character thread hostMigrationTimerThink();
 
-    if(IsPlayer(character)) {
+    if(isPlayer(character)) {
       character SetClientOmnvar("ui_session_state", character.sessionstate);
     }
   }
 
-  SetDvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
 
   level endon("host_migration_begin");
   hostMigrationWait();
@@ -141,7 +141,6 @@ hostMigrationTimerThink() {
     }
     self.hostMigrationControlsFrozen = undefined;
   }
-
 }
 
 waitTillHostMigrationDone() {

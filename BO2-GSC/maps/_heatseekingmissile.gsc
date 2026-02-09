@@ -67,8 +67,9 @@ stingerfirednotify() {
     if(weap != "strela_sp" && weap != "stinger_sp" && weap != "afghanstinger_ff_sp" && weap != "fhj18_sp" && weap != "fhj18_dpad_sp" && weap != "smaw_sp") {
       continue;
     }
-    if(isDefined(self.stingertarget))
+    if(isDefined(self.stingertarget)) {
       self.stingertarget notify("stinger_fired_at_me");
+    }
 
     self notify("stinger_fired");
   }
@@ -79,13 +80,15 @@ stingertoggleloop() {
   self endon("death");
 
   for(;;) {
-    while(!self playerstingerads())
+    while(!self playerstingerads()) {
       wait 0.05;
+    }
 
     self thread stingerirtloop();
 
-    while(self playerstingerads())
+    while(self playerstingerads()) {
       wait 0.05;
+    }
 
     self notify("stinger_IRT_off");
     self clearirtarget();
@@ -163,8 +166,9 @@ stingerirtloop() {
       screen_message_create(&"SCRIPT_AFGHANSTINGER_SWITCHTO_LOCKON");
       self thread kill_lockon_screen_message(3);
 
-      while(self getcurrentweapon() != "afghanstinger_ff_sp")
+      while(self getcurrentweapon() != "afghanstinger_ff_sp") {
         wait 0.05;
+      }
 
       level thread screen_message_delete(1.0);
       self notify("lockon_msg_killed");
@@ -190,26 +194,30 @@ kill_lockon_screen_message(n_time) {
 locksighttest(target) {
   eyepos = self getEye();
 
-  if(!isDefined(target))
+  if(!isDefined(target)) {
     return false;
+  }
 
   passed = 0;
   passed = bullettracepassed(eyepos, target.origin, 0, target);
 
-  if(!passed)
+  if(!passed) {
     return false;
+  }
 
   front = target getpointinbounds(1, 0, 0);
   bullettracepassed(eyepos, front, 0, target);
 
-  if(!passed)
+  if(!passed) {
     return false;
+  }
 
   back = target getpointinbounds(-1, 0, 0);
   passed = bullettracepassed(eyepos, back, 0, target);
 
-  if(!passed)
+  if(!passed) {
     return false;
+  }
 
   return true;
 }
@@ -220,8 +228,9 @@ softsighttest() {
     return true;
   }
 
-  if(self.stingerlostsightlinetime == 0)
+  if(self.stingerlostsightlinetime == 0) {
     self.stingerlostsightlinetime = gettime();
+  }
 
   timepassed = gettime() - self.stingerlostsightlinetime;
 
@@ -241,8 +250,9 @@ getbeststingertarget() {
   for(idx = 0; idx < targetsall.size; idx++) {
     dist = insidestingerreticlenolock(targetsall[idx]);
 
-    if(dist && dist < bestdist)
+    if(dist && dist < bestdist) {
       besttarget = targetsall[idx];
+    }
   }
 
   return besttarget;
@@ -259,14 +269,17 @@ insidestingerreticlelocked(target) {
 }
 
 isstillvalidtarget(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
 
-  if(!target_istarget(ent))
+  if(!target_istarget(ent)) {
     return false;
+  }
 
-  if(!insidestingerreticlelocked(ent))
+  if(!insidestingerreticlelocked(ent)) {
     return false;
+  }
 
   return true;
 }
@@ -274,11 +287,13 @@ isstillvalidtarget(ent) {
 playerstingerads() {
   weap = self getcurrentweapon();
 
-  if(weap != "strela_sp" && weap != "fhj18_sp" && weap != "fhj18_dpad_sp" && weap != "stinger_sp" && weap != "afghanstinger_ff_sp" && weap != "afghanstinger_sp" && weap != "smaw_sp")
+  if(weap != "strela_sp" && weap != "fhj18_sp" && weap != "fhj18_dpad_sp" && weap != "stinger_sp" && weap != "afghanstinger_ff_sp" && weap != "afghanstinger_sp" && weap != "smaw_sp") {
     return false;
+  }
 
-  if(self playerads() == 1.0)
+  if(self playerads() == 1.0) {
     return true;
+  }
 
   return false;
 }
@@ -294,8 +309,9 @@ setnoclearance() {
   checks[4] = vectorscale((1, 0, 1), 40.0);
   debug = 0;
 
-  if(getdvar(#"_id_64296AD0") == "1")
+  if(getDvar(#"_id_64296AD0") == "1") {
     debug = 1;
+  }
 
   playerangles = self getplayerangles();
   forward = anglesToForward(playerangles);
@@ -313,13 +329,12 @@ setnoclearance() {
 
       if(debug) {
         line(origin, trace["position"], color_failed, 1);
-
       } else
         break;
     } else {
-      if(debug)
+      if(debug) {
         line(origin, trace["position"], color_passed, 1);
-
+      }
     }
   }
 
@@ -328,8 +343,9 @@ setnoclearance() {
 }
 
 settargettooclose(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
 
   dist = distance2d(self.origin, ent.origin);
 

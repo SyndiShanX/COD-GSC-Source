@@ -2317,7 +2317,7 @@ func_B8D1() {
   level.var_B8D0 = 1;
   scripts\engine\utility::flag_set("missionfailed");
 
-  if(getdvar("failure_disabled") == "1") {
+  if(getDvar("failure_disabled") == "1") {
     return;
   }
   if(isDefined(level.var_B8BE)) {
@@ -3508,7 +3508,7 @@ func_13861(var_0, var_1, var_2) {
 }
 
 func_DC45(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     switch (var_0) {
       case "raise":
         func_0E4B::func_1348D();
@@ -4610,23 +4610,23 @@ func_F305() {
     return;
   }
   if(!isDefined(level.console)) {
-    level.console = getdvar("consoleGame") == "true";
+    level.console = getDvar("consoleGame") == "true";
   }
 
   if(!isDefined(level.var_13E0F)) {
-    level.var_13E0F = getdvar("xenonGame") == "true";
+    level.var_13E0F = getDvar("xenonGame") == "true";
   }
 
   if(!isDefined(level.var_DADB)) {
-    level.var_DADB = getdvar("ps3Game") == "true";
+    level.var_DADB = getDvar("ps3Game") == "true";
   }
 
   if(!isDefined(level.var_13E0E)) {
-    level.var_13E0E = getdvar("xb3Game") == "true";
+    level.var_13E0E = getDvar("xb3Game") == "true";
   }
 
   if(!isDefined(level.var_DADC)) {
-    level.var_DADC = getdvar("ps4Game") == "true";
+    level.var_DADC = getDvar("ps4Game") == "true";
   }
 }
 
@@ -5202,7 +5202,7 @@ func_13BBF(var_0, var_1) {
     }
     var_6 = "water_movement";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(distance(self getvelocity(), (0, 0, 0)) < 5) {
         var_6 = "water_stop";
       }
@@ -5952,7 +5952,7 @@ func_13817(var_0, var_1) {
 }
 
 func_D2CD(var_0, var_1) {
-  var_2 = int(getdvar("g_speed"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.var_764D)) {
     level.player.var_764D = var_2;
@@ -5965,7 +5965,7 @@ func_D2CD(var_0, var_1) {
 func_2B78(var_0, var_1) {
   var_2 = self;
 
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     var_2 = level.player;
   }
 
@@ -5978,7 +5978,7 @@ func_2B78(var_0, var_1) {
 }
 
 func_D2D1(var_0, var_1) {
-  var_2 = int(getdvar("g_speed"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.var_764D)) {
     level.player.var_764D = var_2;
@@ -5998,7 +5998,7 @@ func_CF97(var_0, var_1) {
 func_2B76(var_0, var_1) {
   var_2 = self;
 
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     var_2 = level.player;
   }
 
@@ -6045,7 +6045,7 @@ func_D2CA(var_0) {
 func_2B77(var_0) {
   var_1 = self;
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     var_1 = level.player;
   }
 
@@ -6057,7 +6057,7 @@ func_2B77(var_0) {
 }
 
 func_11624(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setorigin(var_0.origin);
     self setplayerangles(var_0.angles);
   } else if(isai(self)) {
@@ -6073,7 +6073,7 @@ func_11645(var_0, var_1) {
   var_3 = var_0 gettagangles(var_1);
   self dontinterpolate();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setorigin(var_2);
     self setplayerangles(var_3);
   } else if(isai(self)) {
@@ -6862,7 +6862,7 @@ func_515D(var_0) {
 }
 
 func_B3CA(var_0) {
-  if(getdvar("createfx") != "") {
+  if(getDvar("createfx") != "") {
     return;
   }
   var_1 = getEntArray("script_brushmodel", "classname");
@@ -7110,7 +7110,7 @@ func_1380D(var_0, var_1) {
 }
 
 func_D0F4() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_0 = self;
   } else {
     var_0 = level.player;
@@ -7355,7 +7355,7 @@ func_9330() {
   for(;;) {
     self waittill("damage", var_0, var_1);
 
-    if(!isplayer(var_1) && issentient(var_1)) {
+    if(!isPlayer(var_1) && issentient(var_1)) {
       if(isDefined(var_1.enemy) && var_1.enemy != self) {
         continue;
       }
@@ -7791,7 +7791,7 @@ func_9BAF() {
 }
 
 func_9BB7() {
-  if(getdvar("e3demo") == "1") {
+  if(getDvar("e3demo") == "1") {
     return 1;
   }
 
@@ -8108,9 +8108,9 @@ func_F6DB(var_0, var_1, var_2) {
   }
 
   if(func_9BEE()) {
-    setdvar(var_0, var_2);
+    setDvar(var_0, var_2);
   } else {
-    setdvar(var_0, var_1);
+    setDvar(var_0, var_1);
   }
 }
 
@@ -8354,17 +8354,17 @@ func_765B() {
 
 func_12B17(var_0) {
   var_1 = "ui_actionslot_" + var_0 + "_forceActive";
-  setdvar(var_1, "on");
+  setDvar(var_1, "on");
 }
 
 func_12B16(var_0) {
   var_1 = "ui_actionslot_" + var_0 + "_forceActive";
-  setdvar(var_1, "turn_off");
+  setDvar(var_1, "turn_off");
 }
 
 func_12B18(var_0) {
   var_1 = "ui_actionslot_" + var_0 + "_forceActive";
-  setdvar(var_1, "onetime");
+  setDvar(var_1, "onetime");
 }
 
 hastag(var_0, var_1) {
@@ -8446,7 +8446,7 @@ func_F5AF(var_0, var_1) {
       if(!isDefined(var_7.script_noteworthy)) {
         continue;
       }
-      if(isplayer(var_4)) {
+      if(isPlayer(var_4)) {
         if(var_7.script_noteworthy == "player") {
           var_5 = var_7;
           break;
@@ -10210,7 +10210,7 @@ func_965C() {
   if(isDefined(level.script)) {
     return;
   }
-  level.script = tolower(getdvar("mapname"));
+  level.script = tolower(getDvar("mapname"));
 }
 
 func_93A6() {

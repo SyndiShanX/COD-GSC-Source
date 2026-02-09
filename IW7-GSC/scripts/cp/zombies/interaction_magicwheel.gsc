@@ -456,7 +456,7 @@ func_1010C(var_0, var_1) {
       }
 
       var_1.given_nunchucks = 1;
-    } else if(randomint(100) > 95 || getdvar("debug_gns_reward") != "") {
+    } else if(randomint(100) > 95 || getDvar("debug_gns_reward") != "") {
       if(!has_nunchucks_in_loadout(var_1) && scripts\cp\zombies\directors_cut::directors_cut_is_activated() || can_have_nunchucks(var_1)) {
         var_3 = "";
         if(scripts\engine\utility::istrue(level.magic_wheel_upgraded_pap2)) {
@@ -573,7 +573,7 @@ func_1010C(var_0, var_1) {
   }
 
   var_0.weapon.scriptmodelplayanim = var_0.var_13C25[var_4];
-  if((isDefined(var_1) && isplayer(var_1) && scripts\engine\utility::istrue(level.magic_wheel_upgraded_pap1)) || scripts\engine\utility::istrue(level.magic_wheel_upgraded_pap2)) {
+  if((isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::istrue(level.magic_wheel_upgraded_pap1)) || scripts\engine\utility::istrue(level.magic_wheel_upgraded_pap2)) {
     var_0.weapon setmoverweapon(get_weapon_with_new_camo(var_1, var_0.weapon.scriptmodelplayanim, get_camo_for_upgraded_weapon(getweaponbasename(var_0.weapon.scriptmodelplayanim), var_1)));
   } else {
     var_0.weapon setmoverweapon(var_0.weapon.scriptmodelplayanim);

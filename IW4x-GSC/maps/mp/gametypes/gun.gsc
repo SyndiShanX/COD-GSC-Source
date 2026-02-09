@@ -18,7 +18,7 @@ main() {
 
   registerTimeLimitDvar(level.gameType, 10);
   scoreLimit = level.gun_guns.size;
-  SetDvar("scr_gun_scorelimit", scoreLimit);
+  setDvar("scr_gun_scorelimit", scoreLimit);
   registerScoreLimitDvar(level.gametype, level.gun_guns.size);
   registerRoundLimitDvar(level.gameType, 1, 0, 10);
   registerWinLimitDvar(level.gameType, 1, 0, 10);
@@ -95,7 +95,7 @@ onStartGameType() {
 
   // Prevent class and team change. TODO: Must be disabled in _menus.gsc as well
   setDvar("ui_allow_classchange", 0);
-  setdvar("ui_allow_teamchange", 0);
+  setDvar("ui_allow_teamchange", 0);
 
   level.QuickMessageToAll = true;
   level.blockWeaponDrops = true;
@@ -118,7 +118,6 @@ onPlayerConnect() {
 
     player thread refillAmmo();
     player thread refillSingleCountAmmo();
-
   }
 }
 

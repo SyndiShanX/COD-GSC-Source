@@ -60,10 +60,10 @@ function __init__() {
     level.timeofday = "day";
   }
   if(getdvarstring("scr_RequiredMapAspectratio") == "") {
-    setdvar("scr_RequiredMapAspectratio", "1");
+    setDvar("scr_RequiredMapAspectratio", "1");
   }
-  setdvar("r_waterFogTest", 0);
-  setdvar("tu6_player_shallowWaterHeight", "0.0");
+  setDvar("r_waterFogTest", 0);
+  setDvar("tu6_player_shallowWaterHeight", "0.0");
   util::registerclientsys("levelNotify");
   level thread all_players_spawned();
   level thread keep_time();
@@ -81,7 +81,7 @@ function __init__() {
 function init_push_out_threshold() {
   push_out_threshold = getdvarfloat("tu16_physicsPushOutThreshold", -1);
   if(push_out_threshold != -1) {
-    setdvar("tu16_physicsPushOutThreshold", 20);
+    setDvar("tu16_physicsPushOutThreshold", 20);
   }
 }
 
@@ -133,7 +133,7 @@ function level_notify_listener() {
           level notify(toks[0]);
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.2);
   }
@@ -144,7 +144,7 @@ function client_notify_listener() {
     val = getdvarstring("");
     if(val != "") {
       util::clientnotify(val);
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.2);
   }
@@ -256,19 +256,19 @@ function player_special_death_hint() {
   if(cause == "MOD_EXPLOSIVE") {
     if(isDefined(attacker) && (attacker.classname == "script_vehicle" || isDefined(attacker.create_fake_vehicle_damage))) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
+      setDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
       self thread explosive_vehice_death_indicator_hudelement();
       return;
     }
     if(isDefined(inflicter) && isDefined(inflicter.destructibledef)) {
       if(issubstr(inflicter.destructibledef, "barrel_explosive")) {
         level notify("new_quote_string");
-        setdvar("ui_deadquote", "@SCRIPT_EXPLODING_BARREL_DEATH");
+        setDvar("ui_deadquote", "@SCRIPT_EXPLODING_BARREL_DEATH");
         return;
       }
       if(isDefined(inflicter.destructiblecar) && inflicter.destructiblecar) {
         level notify("new_quote_string");
-        setdvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
+        setDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
         self thread explosive_vehice_death_indicator_hudelement();
         return;
       }
@@ -280,10 +280,10 @@ function player_special_death_hint() {
     }
     level notify("new_quote_string");
     if(weapon.name == "explosive_bolt") {
-      setdvar("ui_deadquote", "@SCRIPT_EXPLOSIVE_BOLT_DEATH");
+      setDvar("ui_deadquote", "@SCRIPT_EXPLOSIVE_BOLT_DEATH");
       thread explosive_arrow_death_indicator_hudelement();
     } else {
-      setdvar("ui_deadquote", "@SCRIPT_GRENADE_DEATH");
+      setDvar("ui_deadquote", "@SCRIPT_GRENADE_DEATH");
       thread grenade_death_indicator_hudelement();
     }
     return;
@@ -292,7 +292,7 @@ function player_special_death_hint() {
 
 function grenade_death_text_hudelement(textline1, textline2) {
   self.failingmission = 1;
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   wait(0.5);
   fontelem = newhudelem();
   fontelem.elemtype = "font";
@@ -537,7 +537,7 @@ function water_think() {
       }
     }
     self waittill("trigger", other);
-    if(!isplayer(other)) {
+    if(!isPlayer(other)) {
       continue;
     }
     while(true) {
@@ -695,7 +695,7 @@ function shock_onpain() {
   self endon("disconnect");
   self endon("killonpainmonitor");
   if(getdvarstring("blurpain") == "") {
-    setdvar("blurpain", "on");
+    setDvar("blurpain", "on");
   }
   while(true) {
     oldhealth = self.health;
@@ -785,7 +785,7 @@ function art_review() {
   str_dvar = getdvarstring("art_review");
   switch (str_dvar) {
     case "": {
-      setdvar("art_review", "0");
+      setDvar("art_review", "0");
       break;
     }
     case "1":
@@ -798,9 +798,9 @@ function art_review() {
       hud.foreground = 0;
       hud.hidewheninmenu = 0;
       if(sessionmodeiszombiesgame()) {
-        setdvar("zombie_cheat", "2");
+        setDvar("zombie_cheat", "2");
         if(str_dvar == "1") {
-          setdvar("zombie_devgui", "power_on");
+          setDvar("zombie_devgui", "power_on");
         }
       } else {
         foreach(trig in trigger::get_all()) {

@@ -29,12 +29,12 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_zerosub");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  SetDvar("r_tessellationCutoffFalloffBase", 600);
-  SetDvar("r_tessellationCutoffDistanceBase", 2000);
-  SetDvar("r_tessellationCutoffFalloff", 600);
-  SetDvar("r_tessellationCutoffDistance", 2000);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_tessellationCutoffFalloffBase", 600);
+  setDvar("r_tessellationCutoffDistanceBase", 2000);
+  setDvar("r_tessellationCutoffFalloff", 600);
+  setDvar("r_tessellationCutoffDistance", 2000);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -117,7 +117,7 @@ update_bot_maxsightdistsqrd() {
 
   while(true) {
     foreach(participant in level.participants) {
-      if(!IsPlayer(participant)) {
+      if(!isPlayer(participant)) {
         continue;
       }
       if(IsBot(participant)) {
@@ -307,7 +307,7 @@ debugDvarWatcher(DVAR) {
 
           break;
       }
-      SetDvar(DVAR, 0);
+      setDvar(DVAR, 0);
     }
 
     wait(0.5);
@@ -824,7 +824,7 @@ tvs() {
 }
 
 tvs_set(targetname) {
-  /# SetDevDvarIfUninitialized( "tv_debug", 0 );
+  SetDevDvarIfUninitialized("tv_debug", 0);
   if(!isDefined(level._effect[targetname])) {
     error("level._effect[" + targetname + "] not defined.");
   }
@@ -876,7 +876,7 @@ tvs_set(targetname) {
     }
     wait level.tv_info.effectLength[targetname][level.tv_fx_num];
 
-    /#tvs_remaining = false;
+    tvs_remaining = false;
     foreach(tv in tvs) {
       if(tv.isHealthy == true) tvs_remaining = true;
     }

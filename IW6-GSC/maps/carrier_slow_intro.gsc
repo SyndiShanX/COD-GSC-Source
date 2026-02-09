@@ -530,7 +530,7 @@ hallway_rear_run_down_back() {
 }
 
 super_ignore_all() {
-  var_0 = getdvar("ai_friendlyFireBlockDuration");
+  var_0 = getDvar("ai_friendlyFireBlockDuration");
   setsaveddvar("ai_friendlyFireBlockDuration", 0);
   self pushplayer(1);
   self.ignoreall = 1;

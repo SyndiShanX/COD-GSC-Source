@@ -9,7 +9,7 @@ main() {
 
   //* Fog section *
 
-  setdvar("scr_fog_disable", "0");
+  setDvar("scr_fog_disable", "0");
 
   setExpFog(1580.28, 6000.05, 0.544852, 0.394025, 0.21177, 0.3, 0);
 

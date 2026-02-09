@@ -16,32 +16,32 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_flooded");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(!is_gen4()) {
-    setdvar("r_texFilterProbeBilinear", 1);
+    setDvar("r_texFilterProbeBilinear", 1);
   }
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.55");
-    SetDvar("sm_sunsamplesizenear", ".15");
+    setDvar("sm_sunShadowScale", "0.55");
+    setDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.85");
-    SetDvar("sm_sunsamplesizenear", ".22");
+    setDvar("sm_sunShadowScale", "0.85");
+    setDvar("sm_sunsamplesizenear", ".22");
   } else {
-    SetDvar("sm_sunShadowScale", "0.9");
-    SetDvar("sm_sunsamplesizenear", ".27");
+    setDvar("sm_sunShadowScale", "0.9");
+    setDvar("sm_sunsamplesizenear", ".27");
   }
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", 1);
-  setdvar("r_reactiveMotionWindAreaScale", 10);
-  setdvar("r_reactiveMotionWindDir", (0.3, -1, -.5));
-  setdvar("r_reactiveMotionWindFrequencyScale", .25);
-  setdvar("r_reactiveMotionWindStrength", 1);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 1);
+  setDvar("r_reactiveMotionWindAreaScale", 10);
+  setDvar("r_reactiveMotionWindDir", (0.3, -1, -.5));
+  setDvar("r_reactiveMotionWindFrequencyScale", .25);
+  setDvar("r_reactiveMotionWindStrength", 1);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -212,7 +212,7 @@ sinkingPlatform_Return() {
 }
 
 canEntTriggerPlatform(other) {
-  return ((IsPlayer(other) || (IsAgent(other) && isDefined(other.agent_type) && other.agent_type != "dog")) && !isDefined(self.entsInTrigger[other GetEntityNumber()]));
+  return ((isPlayer(other) || (IsAgent(other) && isDefined(other.agent_type) && other.agent_type != "dog")) && !isDefined(self.entsInTrigger[other GetEntityNumber()]));
 }
 
 updateSinkRate(numBodies) {

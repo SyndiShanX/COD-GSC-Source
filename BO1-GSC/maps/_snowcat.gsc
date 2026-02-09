@@ -9,13 +9,11 @@ main() {
   build_aianims(::setanims, ::set_vehicle_anims);
   self thread attach_snowcat_props();
 }
-
 attach_snowcat_props() {
   if(self.vehicletype == "tank_snowcat_plow") {
     self Attach("t5_veh_snowcat_plow", "tag_origin");
   }
 }
-
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   positions[0].sittag = "tag_driver";
@@ -36,8 +34,8 @@ set_vehicle_anims(positions) {
   positions[1].vehicle_getoutanim = % v_gaz63_passenger_door_open;
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   num_positions = 10;

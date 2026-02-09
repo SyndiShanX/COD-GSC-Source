@@ -20,7 +20,7 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   if(getdvarstring("debug_anim_shared", "") == "") {
-    setdvar("debug_anim_shared", "");
+    setDvar("debug_anim_shared", "");
   }
   setup_notetracks();
 }
@@ -116,7 +116,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
       self animscripted(animation, v_origin_or_ent.origin, v_angles, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
     }
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     set_player_clamps();
   }
   self thread anim_info_render_thread(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp);

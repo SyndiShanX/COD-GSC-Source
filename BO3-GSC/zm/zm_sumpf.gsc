@@ -136,15 +136,15 @@ function main() {
   level.has_pack_a_punch = 0;
   setculldist(2400);
   function_27cb39f1();
-  setdvar("sv_maxPhysExplosionSpheres", 15);
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.25);
-  setdvar("r_lightGridContrast", 0.1);
+  setDvar("sv_maxPhysExplosionSpheres", 15);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.25);
+  setDvar("r_lightGridContrast", 0.1);
   level thread function_c283498();
   function_39a5be7e();
   level thread function_5b94e922();
-  setdvar("player_shallowWaterWadeScale", 0.55);
-  setdvar("player_waistWaterWadeScale", 0.55);
+  setDvar("player_shallowWaterWadeScale", 0.55);
+  setDvar("player_waistWaterWadeScale", 0.55);
   scene::add_scene_func("p7_fxanim_zm_sumpf_zipline_down_bundle", &function_b87f949f, "init");
   level scene::init("p7_fxanim_zm_sumpf_zipline_down_bundle");
   level.var_9aaae7ae = &function_869d6f66;
@@ -664,7 +664,7 @@ function function_d166ac07() {
 function function_4bb6626e() {
   while(true) {
     self waittill("damage", damage, attacker, dir, loc, str_type, model, tag, part, weapon, flags);
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     if(weapon != level.start_weapon) {

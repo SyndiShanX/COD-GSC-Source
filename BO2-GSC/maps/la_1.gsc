@@ -46,7 +46,7 @@ main() {
   maps\la_1_amb::main();
   level thread maps\_objectives::objectives();
   setsaveddvar("vehicle_sounds_cutoff", 30000);
-  setdvar("footstep_sounds_cutoff", 3000);
+  setDvar("footstep_sounds_cutoff", 3000);
   setsaveddvar("cg_aggressiveCullRadius", "100");
   battlechatter_on("allies");
   battlechatter_on("axis");
@@ -126,8 +126,9 @@ level_precache() {
   precachemodel("veh_t6_drone_avenger_x2");
   precachemodel("veh_t6_drone_pegasus");
 
-  if(isassetloaded("weapon", "riotshield_sp"))
+  if(isassetloaded("weapon", "riotshield_sp")) {
     precacheitem("riotshield_sp");
+  }
 }
 
 setup_skiptos() {
@@ -180,14 +181,16 @@ sam_visionset() {
     visionset = self getvisionsetnaked();
     self visionsetnaked("sam_turret", 0.5);
 
-    if(!level.wiiu)
+    if(!level.wiiu) {
       cin_id = start3dcinematic("sam_gizmos_v2", 1, 1);
+    }
 
     self waittill("missileTurret_off");
     clientnotify("sam_off");
 
-    if(!level.wiiu)
+    if(!level.wiiu) {
       stop3dcinematic(cin_id);
+    }
 
     battlechatter_on("allies");
     battlechatter_on("axis");
@@ -205,17 +208,19 @@ init_vehicles() {
   a_script_models = getEntArray("script_model", "classname");
   a_vehicles = arraycombine(a_script_models, getEntArray("script_vehicle", "classname"), 0, 0);
 
-  foreach(veh in a_vehicles)
-  global_vehicle_spawn_func(veh);
+  foreach(veh in a_vehicles) {
+    global_vehicle_spawn_func(veh);
+  }
 }
 
 global_vehicle_spawn_func(veh) {
-  if(is_police_car(veh))
+  if(is_police_car(veh)) {
     veh thread police_car();
-  else if(is_police_motorcycle(veh))
+  } else if(is_police_motorcycle(veh)) {
     veh thread police_motorcycle();
-  else if(is_suv(veh) && (!isDefined(veh.script_animation) && !isDefined("open_suv_doors") || isDefined(veh.script_animation) && isDefined("open_suv_doors") && veh.script_animation == "open_suv_doors"))
+  } else if(is_suv(veh) && (!isDefined(veh.script_animation) && !isDefined("open_suv_doors") || isDefined(veh.script_animation) && isDefined("open_suv_doors") && veh.script_animation == "open_suv_doors")) {
     veh open_suv_doors();
+  }
 }
 
 cleanup() {

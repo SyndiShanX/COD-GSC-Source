@@ -26,7 +26,6 @@ _id_133D(var_0) {
   foreach(var_4 in var_0) {
     if(isDefined(var_4._id_1341)) {
       var_4 _id_1395(var_4._id_1341, "allies");
-
     }
     if(isDefined(var_4._id_1342)) {
       var_4 _id_1395(var_4._id_1342, "axis");
@@ -36,7 +35,6 @@ _id_133D(var_0) {
   foreach(var_7 in var_2) {
     if(isDefined(var_7._id_1341)) {
       var_7 _id_1394(var_7._id_1341, "allies");
-
     }
     if(isDefined(var_7._id_1342)) {
       var_7 _id_1394(var_7._id_1342, "axis");
@@ -46,7 +44,6 @@ _id_133D(var_0) {
   foreach(var_10 in var_1) {
     if(isDefined(var_10._id_1341)) {
       var_10 thread _id_1357(var_10._id_1341, "allies");
-
     }
     if(isDefined(var_10._id_1342)) {
       var_10 thread _id_1357(var_10._id_1342, "axis");
@@ -157,7 +154,7 @@ _id_134E() {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
 
-    if(isalive(var_3._id_1350) && !isplayer(var_3._id_1350)) {
+    if(isalive(var_3._id_1350) && !isPlayer(var_3._id_1350)) {
       continue;
     }
     thread _id_1379(var_3);
@@ -236,7 +233,6 @@ _id_1355(var_0, var_1) {
 _id_1356(var_0, var_1) {
   if(isDefined(level._id_133E[var_0][var_1])) {
     return 1;
-
   }
   return isDefined(level._id_133F[var_0][var_1]);
 }
@@ -350,7 +346,6 @@ _id_135F(var_0, var_1, var_2, var_3) {
 _id_1363(var_0, var_1) {
   if(!isDefined(level._id_1347[var_0][var_1])) {
     return 0;
-
   }
   return level._id_1347[var_0][var_1] == level._id_1346[var_0][var_1];
 }
@@ -408,11 +403,9 @@ _id_136B(var_0, var_1, var_2) {
 
   for(var_6 = 0; var_6 < var_4._id_1365.size; var_6++) {
     var_3[var_3.size] = var_4._id_1365[var_6];
-
   }
   for(var_6 = 0; var_6 < var_4._id_136A.size; var_6++) {
     var_3[var_3.size] = var_4._id_136A[var_6];
-
   }
   foreach(var_7 in var_8) {}
   var_3[var_3.size] = var_7;
@@ -537,7 +530,6 @@ _id_1373() {
 _id_1374() {
   if(isDefined(self._id_1341)) {
     _id_1375(self._id_1341, "allies");
-
   }
   if(isDefined(self._id_1342)) {
     _id_1375(self._id_1342, "axis");
@@ -578,7 +570,6 @@ _id_1376(var_0, var_1) {
 _id_1378(var_0) {
   if(!isDefined(self._id_134D)) {
     return 0;
-
   }
   return self._id_134D == var_0;
 }
@@ -608,7 +599,6 @@ _id_137A(var_0) {
 _id_137C(var_0) {
   if(isDefined(self._id_137D)) {
     self thread[[self._id_137D]](var_0);
-
   }
   if(isDefined(self._id_137E)) {
     thread maps\_anim::_id_1252(self, self._id_137E);
@@ -619,13 +609,11 @@ _id_137C(var_0) {
     self thread[[self._id_137F]](var_0);
   } else {
     self setgoalnode(var_0);
-
   }
   if(_id_1381(var_0)) {
     thread _id_1383(var_0);
   } else if(var_0.radius > 0) {
     self.goalradius = var_0.radius;
-
   }
   var_1 = level._id_133F[_id_13B5()][self._id_134D];
 
@@ -633,7 +621,6 @@ _id_137C(var_0) {
     self setfixednodesafevolume(var_1);
   } else {
     self clearfixednodesafevolume();
-
   }
   if(isDefined(var_0.fixednodesaferadius)) {
     self.fixednodesaferadius = var_0.fixednodesaferadius;
@@ -647,15 +634,12 @@ _id_137C(var_0) {
 _id_1381(var_0) {
   if(!isDefined(self._id_1382)) {
     return 0;
-
   }
   if(!self._id_1382) {
     return 0;
-
   }
   if(!isDefined(var_0.fixednodesaferadius)) {
     return 0;
-
   }
   if(self.fixednode) {
     return 0;
@@ -760,7 +744,6 @@ _id_1388(var_0, var_1) {
 _id_1389() {
   if(!isDefined(self.node)) {
     return 0;
-
   }
   return self.node maps\_utility::script_delay();
 }
@@ -772,7 +755,6 @@ _id_138A(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_1 maps\_utility::script_delay();
-
   }
   if(!_id_1389()) {
     if(isDefined(var_2)) {
@@ -786,16 +768,14 @@ _id_138A(var_0, var_1, var_2) {
   for(;;) {
     self waittill("node_taken", var_3);
 
-    if(isplayer(var_3)) {
+    if(isPlayer(var_3)) {
       wait 0.05;
-
     }
     var_0 = _id_138E();
 
     if(isDefined(var_0)) {
       if(isalive(self._id_138C._id_1350) && self._id_138C._id_1350 == self) {
         self._id_138C._id_1350 = undefined;
-
       }
       self._id_138C = var_0;
       var_0._id_1350 = self;
@@ -927,7 +907,6 @@ _id_1396() {
   }
   if(isDefined(self._id_138C._id_1350) && self._id_138C._id_1350 == self) {
     self._id_138C._id_1350 = undefined;
-
   }
   self._id_138C = undefined;
   self notify("stop_color_move");
@@ -948,7 +927,6 @@ _id_1397() {
 
   if(!isDefined(var_0["colorTeam"])) {
     var_0 = undefined;
-
   }
   return var_0;
 }
@@ -990,7 +968,6 @@ _id_139B(var_0, var_1) {
 
   if(isDefined(level._id_139C)) {
     var_2 thread[[level._id_139C]]();
-
   }
   var_2 thread _id_139D();
 }
@@ -1009,7 +986,6 @@ _id_139D() {
 
   if(isalive(self)) {
     self waittill("death");
-
   }
   var_2 = level._id_139F;
 
@@ -1020,11 +996,9 @@ _id_139D() {
 
   if(isDefined(self) && isDefined(self._id_134B)) {
     var_1 = self._id_134B;
-
   }
   if(isDefined(self) && isDefined(self.origin)) {
     var_3 = self.origin;
-
   }
   for(;;) {
     if(_id_13A6(var_1, var_2) == "none") {
@@ -1034,11 +1008,9 @@ _id_139D() {
 
     if(!isDefined(level._id_13A0)) {
       var_4 = maps\_utility::_id_13A1(var_4);
-
     }
     if(!isDefined(level._id_13A2)) {
       var_4 = maps\_utility::_id_13A3(var_4, var_0);
-
     }
     if(!var_4.size) {
       wait 2;
@@ -1055,7 +1027,6 @@ _id_139D() {
 
     if(isDefined(level._id_13A5)) {
       var_5[[level._id_13A5]](var_1);
-
     }
     var_1 = var_2[var_1];
   }
@@ -1064,15 +1035,12 @@ _id_139D() {
 _id_13A6(var_0, var_1) {
   if(!isDefined(var_0)) {
     return "none";
-
   }
   if(!isDefined(var_1)) {
     return "none";
-
   }
   if(!isDefined(var_1[var_0])) {
     return "none";
-
   }
   return var_1[var_0];
 }
@@ -1160,7 +1128,6 @@ _id_13AA(var_0) {
 _id_13AB() {
   if(isDefined(level._id_13AC)) {
     return 0;
-
   }
   return common_scripts\utility::flag("respawn_friendlies");
 }
@@ -1188,7 +1155,6 @@ _id_13AE(var_0, var_1) {
     if(!_id_13AB()) {
       if(!isDefined(level._id_13A8)) {
         thread _id_13A7();
-
       }
       for(;;) {
         _id_13AD();
@@ -1233,7 +1199,6 @@ _id_13AE(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 maps\_utility::_id_13A4(var_1);
-
   }
   thread _id_13B0();
   return var_2;
@@ -1246,7 +1211,6 @@ _id_13B0() {
     [[level._id_13B1]]();
   } else {
     wait 2;
-
   }
   common_scripts\utility::flag_clear("friendly_spawner_locked");
 }
@@ -1270,7 +1234,6 @@ _id_13B4() {
 _id_13B5(var_0) {
   if(isDefined(self.team) && !isDefined(var_0)) {
     var_0 = self.team;
-
   }
   return level._id_1340[var_0];
 }

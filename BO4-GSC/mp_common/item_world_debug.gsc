@@ -584,12 +584,12 @@ function_cdd9b388() {
     }
 
     if(getdvarint(#"hash_170b29b9b506feed", 0)) {
-      setdvar(#"hash_170b29b9b506feed", 0);
+      setDvar(#"hash_170b29b9b506feed", 0);
       level thread function_bebe535();
     }
 
     if(getdvarint(#"hash_38ea7228f76d733f", 0)) {
-      setdvar(#"hash_38ea7228f76d733f", 0);
+      setDvar(#"hash_38ea7228f76d733f", 0);
       level thread function_2248268e();
     }
 

@@ -913,7 +913,7 @@ function_7590a833() {
     s_notify = t_trigger waittill(#"trigger");
     e_player = s_notify.activator;
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       v_origin = e_player.origin;
       break;
     }

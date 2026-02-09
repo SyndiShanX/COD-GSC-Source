@@ -9,8 +9,8 @@
 #namespace animation;
 
 function autoexec __init__() {
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   while(true) {
     anim_debug = getdvarint("", 0) || getdvarint("", 0);
     level flagsys::set_val("", anim_debug);

@@ -125,7 +125,7 @@ func_9896(var_0) {
   self.bt.instancedata[var_0] = spawnStruct();
   self.bt.instancedata[var_0].timeout = gettime();
   self.bt.instancedata[var_0].var_312F = 0;
-  if(isplayer(self.melee.target)) {
+  if(isPlayer(self.melee.target)) {
     self.bt.instancedata[var_0].objective_state_nomessage = self.objective_state_nomessage;
     self.objective_state_nomessage = 0;
   }
@@ -135,7 +135,7 @@ func_9896(var_0) {
     self[[self.var_71BF]]();
   }
 
-  if(!isDefined(self.var_B5DA) && isplayer(self.melee.target) && !self.melee.target isonground()) {
+  if(!isDefined(self.var_B5DA) && isPlayer(self.melee.target) && !self.melee.target isonground()) {
     self.melee.var_2720 = 1;
   }
 
@@ -174,7 +174,7 @@ func_5903(var_0) {
     return level.failure;
   }
 
-  if(isDefined(self.melee.target) && !isplayer(self.melee.target) && self.melee.target scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(isDefined(self.melee.target) && !isPlayer(self.melee.target) && self.melee.target scripts\asm\asm_bb::bb_isanimscripted()) {
     return level.failure;
   }
 
@@ -257,7 +257,7 @@ func_B5B4(var_0, var_1) {
     var_1 = 1;
   }
 
-  if(isplayer(self.melee.target) && isDefined(level.var_B5F6[self.unittype])) {
+  if(isPlayer(self.melee.target) && isDefined(level.var_B5F6[self.unittype])) {
     level.var_B5F7[self.unittype] = gettime() + level.var_B5F6[self.unittype] * var_1;
     return;
   }
@@ -278,7 +278,7 @@ func_B5E8(var_0) {
   self.bt.instancedata[var_0].var_3E30 = gettime() + 100;
   self.bt.instancedata[var_0].timeout = gettime() + 4000;
   self.bt.instancedata[var_0].var_6572 = self.enemy.origin;
-  if(isplayer(self.melee.target)) {
+  if(isPlayer(self.melee.target)) {
     self.bt.instancedata[var_0].objective_state_nomessage = self.objective_state_nomessage;
     self.objective_state_nomessage = 0;
   }
@@ -310,7 +310,7 @@ func_B5EE(var_0) {
 }
 
 func_7FAB(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_1 = self.meleechargedistvsplayer;
   } else {
     var_1 = self.meleechargedist;
@@ -337,7 +337,7 @@ melee_shouldabort() {
     return 1;
   }
 
-  if(!isplayer(var_0) && var_0 scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(!isPlayer(var_0) && var_0 scripts\asm\asm_bb::bb_isanimscripted()) {
     return 1;
   }
 
@@ -421,7 +421,7 @@ func_B5F0(var_0) {
     return level.failure;
   }
 
-  if(isplayer(var_2)) {
+  if(isPlayer(var_2)) {
     var_6 = getclosestpointonnavmesh(var_2.origin, self);
   } else {
     var_6 = var_3 func_84AC();
@@ -434,14 +434,14 @@ func_B5F0(var_0) {
   }
 
   if(var_3 <= var_7) {
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       if(scripts\engine\utility::meleegrab_ksweapon_used()) {
         return level.running;
       }
     }
 
     var_9 = 18;
-    if(isDefined(self.getcsplinepointtargetname) && self.getcsplinepointtargetname != "none" && isplayer(var_2)) {
+    if(isDefined(self.getcsplinepointtargetname) && self.getcsplinepointtargetname != "none" && isPlayer(var_2)) {
       var_9 = 32;
     }
 

@@ -128,7 +128,7 @@ function wait_for_bullet_impact(localclientnum) {
     self waittill("damage", attacker, impactpos, effectdir, partname);
     if(partname == "tag_target_lower" || partname == "tag_target_upper" || partname == "tag_defense_active" || partname == "tag_body_animate") {
       if(self.trophy_on) {
-        if(isDefined(attacker) && attacker isplayer() && attacker.team != self.team) {
+        if(isDefined(attacker) && attacker isPlayer() && attacker.team != self.team) {
           playFX(localclientnum, settings.weakspotfx, impactpos, effectdir);
           self playSound(0, "veh_quadtank_panel_hit");
         }

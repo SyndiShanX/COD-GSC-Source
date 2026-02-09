@@ -107,7 +107,7 @@ function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_us
   }
   if(!isDefined(b_use_eye)) {
     b_use_eye = 0;
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       b_use_eye = 1;
     }
   }
@@ -116,7 +116,7 @@ function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_us
   if(b_use_eye) {
     v_origin = self util::get_eye();
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     v_angles = self getplayerangles();
     if(level.wiiu) {
       v_angles = self getgunangles();
@@ -186,7 +186,7 @@ function get_dot_forward(v_point, b_ignore_z, b_normalize) {
 
 function get_dot_from_eye(v_point, b_ignore_z, b_normalize, str_direction) {
   assert(isDefined(v_point), "");
-  assert(isplayer(self) || isai(self), ("" + self.classname) + "");
+  assert(isPlayer(self) || isai(self), ("" + self.classname) + "");
   n_dot = get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, 1);
   return n_dot;
 }

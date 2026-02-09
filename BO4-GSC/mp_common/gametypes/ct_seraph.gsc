@@ -634,7 +634,7 @@ function_8aa1c633() {
 
 function_849be68a() {
   sessionmode = currentsessionmode();
-  setdvar(#"hash_527da51d610a31b1", "<dev string:x38>");
+  setDvar(#"hash_527da51d610a31b1", "<dev string:x38>");
   level flag::init("<dev string:x3b>");
 
   if(sessionmode != 4) {
@@ -660,6 +660,6 @@ function_849be68a() {
         break;
     }
 
-    setdvar(#"hash_527da51d610a31b1", "<dev string:x38>");
+    setDvar(#"hash_527da51d610a31b1", "<dev string:x38>");
   }
 }

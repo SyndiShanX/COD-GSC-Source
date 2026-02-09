@@ -215,7 +215,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     self.isinuse = 0;
 
     if(self.targetname === "war_machine_victim") {
-      if(weapon === getweapon(#"hero_pineapplegun") || weapon === getweapon(#"hero_pineapple_grenade") || isplayer(attacker)) {
+      if(weapon === getweapon(#"hero_pineapplegun") || weapon === getweapon(#"hero_pineapple_grenade") || isPlayer(attacker)) {
         level flag::set("gib_done");
       }
 
@@ -223,7 +223,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     }
 
     if(level.var_ad7c0539 === 8) {
-      if(isDefined(attacker) && isplayer(attacker) && (weapon == getweapon(#"hero_pineapplegun") || weapon == getweapon(#"hero_pineapple_grenade"))) {
+      if(isDefined(attacker) && isPlayer(attacker) && (weapon == getweapon(#"hero_pineapplegun") || weapon == getweapon(#"hero_pineapple_grenade"))) {
         level flag::set("window_hit");
       }
 
@@ -909,7 +909,7 @@ function_18161780() {
 
 function_be0b44be() {
   level endon(#"combattraining_logic_finished");
-  setdvar(#"hash_48162cd174e3034d", 0);
+  setDvar(#"hash_48162cd174e3034d", 0);
   level.var_c8f47cbe = 3;
   globallogic_score::_setplayermomentum(level.players[0], 0);
   callback::on_player_killed_with_params(&ct_utils::function_944e4110);
@@ -978,7 +978,7 @@ function_8e068518() {
 
   while(level.var_2159a10d) {
     ct_utils::function_e44c5b8e(#"planemortar", 9);
-    setdvar(#"hash_3e06b14c41136e95", 0);
+    setDvar(#"hash_3e06b14c41136e95", 0);
     level flag::clear("stop_reinforce");
     level.players[0] thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_KillToEarnLightningStrike");
     level.var_ff7ed5c8 = 0;
@@ -1120,9 +1120,9 @@ function_e17f2b8a() {
 }
 
 function_7f8a8489() {
-  setdvar(#"hash_3e06b14c41136e95", 0);
+  setDvar(#"hash_3e06b14c41136e95", 0);
   ct_gadgets::function_350dd8ec(#"planemortar");
-  setdvar(#"hash_3e06b14c41136e95", 1);
+  setDvar(#"hash_3e06b14c41136e95", 1);
 }
 
 function_667b9fbc() {

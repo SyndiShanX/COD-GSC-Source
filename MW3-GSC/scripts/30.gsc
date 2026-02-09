@@ -83,19 +83,16 @@ randomvectorrange(var_0, var_1) {
 
   if(randomint(2) == 0) {
     var_2 = var_2 * -1;
-
   }
   var_3 = randomfloatrange(var_0, var_1);
 
   if(randomint(2) == 0) {
     var_3 = var_3 * -1;
-
   }
   var_4 = randomfloatrange(var_0, var_1);
 
   if(randomint(2) == 0) {
     var_4 = var_4 * -1;
-
   }
   return (var_2, var_3, var_4);
 }
@@ -103,23 +100,18 @@ randomvectorrange(var_0, var_1) {
 angle_dif(var_0, var_1) {
   if(var_0 == var_1) {
     return 0;
-
   }
   while(var_1 > 360) {
     var_1 = var_1 - 360;
-
   }
   while(var_1 < 0) {
     var_1 = var_1 + 360;
-
   }
   while(var_0 > 360) {
     var_0 = var_0 - 360;
-
   }
   while(var_0 < 0) {
     var_0 = var_0 + 360;
-
   }
   var_2 = undefined;
   var_3 = undefined;
@@ -128,13 +120,11 @@ angle_dif(var_0, var_1) {
     var_3 = 360 - var_1;
   } else {
     var_3 = var_1;
-
   }
   if(var_0 > 180) {
     var_2 = 360 - var_0;
   } else {
     var_2 = var_0;
-
   }
   var_4 = var_3 + var_2;
   var_5 = 0;
@@ -143,7 +133,6 @@ angle_dif(var_0, var_1) {
     var_5 = var_1 - var_0;
   } else {
     var_5 = var_0 - var_1;
-
   }
   if(var_5 < var_4) {
     return var_5;
@@ -155,7 +144,6 @@ angle_dif(var_0, var_1) {
 sign(var_0) {
   if(var_0 >= 0) {
     return 1;
-
   }
   return -1;
 }
@@ -222,7 +210,6 @@ get_cumulative_weights(var_0) {
 waittill_string(var_0, var_1) {
   if(var_0 != "death") {
     self endon("death");
-
   }
   var_1 endon("die");
   self waittill(var_0);
@@ -303,29 +290,23 @@ waittill_multiple_ents(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 waittill_any_return(var_0, var_1, var_2, var_3, var_4) {
   if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death")) {
     self endon("death");
-
   }
   var_5 = spawnStruct();
 
   if(isDefined(var_0)) {
     thread waittill_string(var_0, var_5);
-
   }
   if(isDefined(var_1)) {
     thread waittill_string(var_1, var_5);
-
   }
   if(isDefined(var_2)) {
     thread waittill_string(var_2, var_5);
-
   }
   if(isDefined(var_3)) {
     thread waittill_string(var_3, var_5);
-
   }
   if(isDefined(var_4)) {
     thread waittill_string(var_4, var_5);
-
   }
   var_5 waittill("returned", var_6);
   var_5 notify("die");
@@ -335,29 +316,23 @@ waittill_any_return(var_0, var_1, var_2, var_3, var_4) {
 waittill_any_timeout(var_0, var_1, var_2, var_3, var_4, var_5) {
   if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death")) {
     self endon("death");
-
   }
   var_6 = spawnStruct();
 
   if(isDefined(var_1)) {
     thread waittill_string(var_1, var_6);
-
   }
   if(isDefined(var_2)) {
     thread waittill_string(var_2, var_6);
-
   }
   if(isDefined(var_3)) {
     thread waittill_string(var_3, var_6);
-
   }
   if(isDefined(var_4)) {
     thread waittill_string(var_4, var_6);
-
   }
   if(isDefined(var_5)) {
     thread waittill_string(var_5, var_6);
-
   }
   var_6 thread _timeout(var_0);
   var_6 waittill("returned", var_7);
@@ -374,31 +349,24 @@ _timeout(var_0) {
 waittill_any(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_1)) {
     self endon(var_1);
-
   }
   if(isDefined(var_2)) {
     self endon(var_2);
-
   }
   if(isDefined(var_3)) {
     self endon(var_3);
-
   }
   if(isDefined(var_4)) {
     self endon(var_4);
-
   }
   if(isDefined(var_5)) {
     self endon(var_5);
-
   }
   if(isDefined(var_6)) {
     self endon(var_6);
-
   }
   if(isDefined(var_7)) {
     self endon(var_7);
-
   }
   self waittill(var_0);
 }
@@ -406,27 +374,21 @@ waittill_any(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 waittill_any_ents(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2 endon(var_3);
-
   }
   if(isDefined(var_4) && isDefined(var_5)) {
     var_4 endon(var_5);
-
   }
   if(isDefined(var_6) && isDefined(var_7)) {
     var_6 endon(var_7);
-
   }
   if(isDefined(var_8) && isDefined(var_9)) {
     var_8 endon(var_9);
-
   }
   if(isDefined(var_10) && isDefined(var_11)) {
     var_10 endon(var_11);
-
   }
   if(isDefined(var_12) && isDefined(var_13)) {
     var_12 endon(var_13);
-
   }
   var_0 waittill(var_1);
 }
@@ -434,7 +396,6 @@ waittill_any_ents(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
 isflashed() {
   if(!isDefined(self.flashendtime)) {
     return 0;
-
   }
   return gettime() < self.flashendtime;
 }
@@ -454,7 +415,6 @@ init_flags() {
 
   if(!isDefined(level.sp_stat_tracking_func)) {
     level.sp_stat_tracking_func = ::empty_init_func;
-
   }
   level.flag_struct = spawnStruct();
   level.flag_struct assign_unique_id();
@@ -463,7 +423,6 @@ init_flags() {
 flag_init(var_0) {
   if(!isDefined(level.flag)) {
     init_flags();
-
   }
   level.flag[var_0] = 0;
 
@@ -472,7 +431,6 @@ flag_init(var_0) {
     level.trigger_flags[var_0] = [];
   } else if(!isDefined(level.trigger_flags[var_0])) {
     level.trigger_flags[var_0] = [];
-
   }
   if(issuffix(var_0, "aa_")) {
     thread[[level.sp_stat_tracking_func]](var_0);
@@ -484,7 +442,6 @@ empty_init_func(var_0) {}
 issuffix(var_0, var_1) {
   if(var_1.size > var_0.size) {
     return 0;
-
   }
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_0[var_2] != var_1[var_2]) {
@@ -660,7 +617,6 @@ trigger_on(var_0, var_1) {
 trigger_on_proc() {
   if(isDefined(self.realorigin)) {
     self.origin = self.realorigin;
-
   }
   self.trigger_off = undefined;
 }
@@ -677,11 +633,9 @@ trigger_off(var_0, var_1) {
 trigger_off_proc() {
   if(!isDefined(self.realorigin)) {
     self.realorigin = self.origin;
-
   }
   if(self.origin == self.realorigin) {
     self.origin = self.origin + (0, 0, -10000);
-
   }
   self.trigger_off = 1;
 }
@@ -748,11 +702,9 @@ getstruct(var_0, var_1) {
 
   if(!isDefined(var_2)) {
     return undefined;
-
   }
   if(var_2.size > 1) {
     return undefined;
-
   }
   return var_2[0];
 }
@@ -762,7 +714,6 @@ getstructarray(var_0, var_1) {
 
   if(!isDefined(var_2)) {
     return [];
-
   }
   return var_2;
 }
@@ -778,7 +729,6 @@ struct_class_init() {
     if(isDefined(var_1.targetname)) {
       if(!isDefined(level.struct_class_names["targetname"][var_1.targetname])) {
         level.struct_class_names["targetname"][var_1.targetname] = [];
-
       }
       var_2 = level.struct_class_names["targetname"][var_1.targetname].size;
       level.struct_class_names["targetname"][var_1.targetname][var_2] = var_1;
@@ -787,7 +737,6 @@ struct_class_init() {
     if(isDefined(var_1.target)) {
       if(!isDefined(level.struct_class_names["target"][var_1.target])) {
         level.struct_class_names["target"][var_1.target] = [];
-
       }
       var_2 = level.struct_class_names["target"][var_1.target].size;
       level.struct_class_names["target"][var_1.target][var_2] = var_1;
@@ -796,7 +745,6 @@ struct_class_init() {
     if(isDefined(var_1.script_noteworthy)) {
       if(!isDefined(level.struct_class_names["script_noteworthy"][var_1.script_noteworthy])) {
         level.struct_class_names["script_noteworthy"][var_1.script_noteworthy] = [];
-
       }
       var_2 = level.struct_class_names["script_noteworthy"][var_1.script_noteworthy].size;
       level.struct_class_names["script_noteworthy"][var_1.script_noteworthy][var_2] = var_1;
@@ -913,13 +861,11 @@ array_levelcall(var_0, var_1, var_2, var_3, var_4) {
 add_to_array(var_0, var_1) {
   if(!isDefined(var_1)) {
     return var_0;
-
   }
   if(!isDefined(var_0)) {
     var_0[0] = var_1;
   } else {
     var_0[var_0.size] = var_1;
-
   }
   return var_0;
 }
@@ -942,11 +888,9 @@ flag_wait_either_return(var_0, var_1) {
   for(;;) {
     if(flag(var_0)) {
       return var_0;
-
     }
     if(flag(var_1)) {
       return var_1;
-
     }
     var_2 = level waittill_any_return(var_0, var_1);
     return var_2;
@@ -983,7 +927,6 @@ flag_wait_any(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   } else {
     return;
-
   }
   for(;;) {
     for(var_7 = 0; var_7 < var_6.size; var_7++) {
@@ -1019,7 +962,6 @@ flag_wait_any_return(var_0, var_1, var_2, var_3, var_4) {
     return var_6;
   } else {
     return;
-
   }
   for(;;) {
     for(var_7 = 0; var_7 < var_5.size; var_7++) {
@@ -1036,15 +978,12 @@ flag_wait_any_return(var_0, var_1, var_2, var_3, var_4) {
 flag_wait_all(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0)) {
     flag_wait(var_0);
-
   }
   if(isDefined(var_1)) {
     flag_wait(var_1);
-
   }
   if(isDefined(var_2)) {
     flag_wait(var_2);
-
   }
   if(isDefined(var_3)) {
     flag_wait(var_3);
@@ -1098,7 +1037,6 @@ delaycall(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
 delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(issp()) {
     self endon("death");
-
   }
   wait(var_1);
 
@@ -1145,16 +1083,14 @@ noself_delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 issp() {
   if(!isDefined(level.issp)) {
-    level.issp = !string_starts_with(getdvar("mapname"), "mp_");
-
+    level.issp = !string_starts_with(getDvar("mapname"), "mp_");
   }
   return level.issp;
 }
 
 issp_towerdefense() {
   if(!isDefined(level.issp_towerdefense)) {
-    level.issp_towerdefense = string_starts_with(getdvar("mapname"), "so_td_");
-
+    level.issp_towerdefense = string_starts_with(getDvar("mapname"), "so_td_");
   }
   return level.issp_towerdefense;
 }
@@ -1162,7 +1098,6 @@ issp_towerdefense() {
 string_starts_with(var_0, var_1) {
   if(var_0.size < var_1.size) {
     return 0;
-
   }
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(tolower(var_0[var_2]) != tolower(var_1[var_2])) {
@@ -1178,19 +1113,15 @@ plot_points(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 1;
-
   }
   if(!isDefined(var_4)) {
     var_4 = 0.05;
-
   }
   for(var_6 = 1; var_6 < var_0.size; var_6++) {
     thread draw_line_for_time(var_5, var_0[var_6], var_1, var_2, var_3, var_4);
@@ -1458,7 +1389,6 @@ random(var_0) {
 
   if(!var_1.size) {
     return undefined;
-
   }
   return var_1[randomint(var_1.size)];
 }
@@ -1470,11 +1400,9 @@ spawn_tag_origin() {
 
   if(isDefined(self.origin)) {
     var_0.origin = self.origin;
-
   }
   if(isDefined(self.angles)) {
     var_0.angles = self.angles;
-
   }
   return var_0;
 }
@@ -1485,53 +1413,50 @@ waittill_notify_or_timeout(var_0, var_1) {
 }
 
 fileprint_launcher_start_file() {
-  level.fileprintlauncher_linecount = 0;
-  level.fileprint_launcher = 1;
-  fileprint_launcher("GAMEPRINTSTARTFILE:");
+level.fileprintlauncher_linecount = 0;
+level. fileprint_launcher = 1;
+fileprint_launcher("GAMEPRINTSTARTFILE:");
 }
 
 fileprint_launcher(var_0) {
-  level.fileprintlauncher_linecount++;
+level.fileprintlauncher_linecount++;
 
-  if(level.fileprintlauncher_linecount > 200) {
-    wait 0.05;
-    level.fileprintlauncher_linecount = 0;
-  }
+if(level.fileprintlauncher_linecount > 200) {
+  wait 0.05;
+  level.fileprintlauncher_linecount = 0;
+}
 }
 
 fileprint_launcher_end_file(var_0, var_1) {
-  if(!isDefined(var_1)) {
-    var_1 = 0;
+if(!isDefined(var_1)) {
+  var_1 = 0;
+}
+if(var_1) {
+  fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + var_0);
+} else {
+  fileprint_launcher("GAMEPRINTENDFILE:" + var_0);
+}
+var_2 = gettime() + 4000;
 
-  }
-  if(var_1) {
-    fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + var_0);
-  } else {
-    fileprint_launcher("GAMEPRINTENDFILE:" + var_0);
+while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getDvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_2) {
+  wait 0.05;
+}
+if(!(gettime() < var_2)) {
+  iprintlnbold("LAUNCHER_PRINT_FAIL:( TIMEOUT ): launcherconflict? restart launcher and try again? ");
+  level. fileprint_launcher = undefined;
+  return 0;
+}
 
-  }
-  var_2 = gettime() + 4000;
+var_3 = getDvar("LAUNCHER_PRINT_FAIL");
 
-  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < var_2) {
-    wait 0.05;
+if(var_3 != "0") {
+  iprintlnbold("LAUNCHER_PRINT_FAIL:( " + var_3 + " ): launcherconflict? restart launcher and try again? ");
+  level. fileprint_launcher = undefined;
+  return 0;
+}
 
-  }
-  if(!(gettime() < var_2)) {
-    iprintlnbold("LAUNCHER_PRINT_FAIL:( TIMEOUT ): launcherconflict? restart launcher and try again? ");
-    level.fileprint_launcher = undefined;
-    return 0;
-  }
-
-  var_3 = getdvar("LAUNCHER_PRINT_FAIL");
-
-  if(var_3 != "0") {
-    iprintlnbold("LAUNCHER_PRINT_FAIL:( " + var_3 + " ): launcherconflict? restart launcher and try again? ");
-    level.fileprint_launcher = undefined;
-    return 0;
-  }
-
-  level.fileprint_launcher = undefined;
-  return 1;
+level. fileprint_launcher = undefined;
+return 1;
 }
 
 launcher_write_clipboard(var_0) {
@@ -1542,7 +1467,6 @@ launcher_write_clipboard(var_0) {
 isdestructible() {
   if(!isDefined(self)) {
     return 0;
-
   }
   return isDefined(self.destructible_type);
 }
@@ -1554,29 +1478,23 @@ pauseeffect() {
 activate_individual_exploder() {
   if(isDefined(self.v["firefx"])) {
     thread fire_effect();
-
   }
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     thread cannon_effect();
   } else if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
     thread sound_effect();
-
   }
   if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil") {
     thread effect_loopsound();
-
   }
   if(isDefined(self.v["damage"])) {
     thread exploder_damage();
-
   }
   if(isDefined(self.v["earthquake"])) {
     thread exploder_earthquake();
-
   }
   if(isDefined(self.v["rumble"])) {
     thread exploder_rumble();
-
   }
   if(self.v["exploder_type"] == "exploder") {
     thread brush_show();
@@ -1598,7 +1516,6 @@ brush_delete() {
     wait(self.v["delay"]);
   } else {
     wait 0.05;
-
   }
   if(!isDefined(self.model)) {
     return;
@@ -1625,7 +1542,6 @@ brush_delete() {
 
   if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
     self.v["exploder"] = undefined;
-
   }
   waittillframeend;
 
@@ -1637,13 +1553,11 @@ brush_delete() {
 brush_throw() {
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-
   }
   var_0 = undefined;
 
   if(isDefined(self.v["target"])) {
     var_0 = get_target_ent(self.v["target"]);
-
   }
   if(!isDefined(var_0)) {
     self.model delete();
@@ -1654,7 +1568,6 @@ brush_throw() {
 
   if(isDefined(self.v["delay_post"])) {
     wait(self.v["delay_post"]);
-
   }
   var_1 = self.v["origin"];
   var_2 = self.v["angles"];
@@ -1670,7 +1583,6 @@ brush_throw() {
 
     if(isDefined(var_0.target)) {
       var_9 = var_0 get_target_ent();
-
     }
     if(!isDefined(var_9)) {
       var_10 = var_1;
@@ -1708,13 +1620,11 @@ brush_throw() {
 get_target_ent(var_0) {
   if(!isDefined(var_0)) {
     var_0 = self.target;
-
   }
   var_1 = getent(var_0, "targetname");
 
   if(isDefined(var_1)) {
     return var_1;
-
   }
   if(issp()) {
     var_1 = call[[level.getnodefunction]](var_0, "targetname");
@@ -1728,7 +1638,6 @@ get_target_ent(var_0) {
 
   if(isDefined(var_1)) {
     return var_1;
-
   }
   var_1 = getvehiclenode(var_0, "targetname");
 
@@ -1740,7 +1649,6 @@ get_target_ent(var_0) {
 brush_show() {
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-
   }
   if(!isDefined(self.model.script_modelname)) {
     self.model show();
@@ -1750,7 +1658,6 @@ brush_show() {
 
     if(isDefined(self.model.script_linkname)) {
       var_0.script_linkname = self.model.script_linkname;
-
     }
     var_0 setModel(self.model.script_modelname);
     var_0 show();
@@ -1802,18 +1709,15 @@ exploder_rumble() {
 exploder_delay() {
   if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
-
   }
   var_0 = self.v["delay"];
   var_1 = self.v["delay"] + 0.001;
 
   if(isDefined(self.v["delay_min"])) {
     var_0 = self.v["delay_min"];
-
   }
   if(isDefined(self.v["delay_max"])) {
     var_1 = self.v["delay_max"];
-
   }
   if(var_0 > 0) {
     wait(randomfloatrange(var_0, var_1));
@@ -1825,13 +1729,11 @@ exploder_damage() {
     var_0 = self.v["delay"];
   } else {
     var_0 = 0;
-
   }
   if(isDefined(self.v["damage_radius"])) {
     var_1 = self.v["damage_radius"];
   } else {
     var_1 = 128;
-
   }
   var_2 = self.v["damage"];
   var_3 = self.v["origin"];
@@ -1842,7 +1744,6 @@ exploder_damage() {
 effect_loopsound() {
   if(isDefined(self.loopsound_ent)) {
     self.loopsound_ent delete();
-
   }
   var_0 = self.v["origin"];
   var_1 = self.v["loopsound"];
@@ -1855,7 +1756,6 @@ play_loopsound_in_space(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = self.origin;
-
   }
   var_2.origin = var_1;
   var_2 playLoopSound(var_0);
@@ -1878,7 +1778,6 @@ play_sound_in_space(var_0, var_1, var_2) {
 
   if(!isDefined(var_1)) {
     var_1 = self.origin;
-
   }
   var_3.origin = var_1;
 
@@ -1892,7 +1791,6 @@ play_sound_in_space(var_0, var_1, var_2) {
     var_3 playsoundasmaster(var_0);
   } else {
     var_3 playSound(var_0);
-
   }
   var_3 waittill("sounddone");
   var_3 delete();
@@ -1914,7 +1812,6 @@ cannon_effect() {
 
   if(isDefined(self.looper)) {
     self.looper delete();
-
   }
   self.looper = spawnfx(getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
   triggerfx(self.looper);
@@ -1939,20 +1836,17 @@ fire_effect() {
 
   if(!isDefined(var_6)) {
     var_6 = "createfx_effectStopper";
-
   }
   var_7 = self.v["firefxtimeout"];
   var_8 = 0.5;
 
   if(isDefined(self.v["firefxdelay"])) {
     var_8 = self.v["firefxdelay"];
-
   }
   exploder_delay();
 
   if(isDefined(var_3)) {
     level thread loop_fx_sound(var_3, var_4, 1, var_6, var_7);
-
   }
   playFX(level._effect[var_5], self.v["origin"], var_0, var_1);
 }
@@ -1976,7 +1870,6 @@ loop_fx_sound(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(level.createfx_enabled)) {
       var_6 = level.createfx_enabled;
-
     }
     if(!isDefined(var_4) && !var_6) {
       var_5 willneverchange();
@@ -2091,7 +1984,6 @@ createexploder(var_0) {
 alphabetize(var_0) {
   if(var_0.size <= 1) {
     return var_0;
-
   }
   var_1 = 0;
 
@@ -2204,21 +2096,17 @@ alphabet_compare(var_0, var_1) {
 
   if(isDefined(var_2[var_0])) {
     var_4 = var_2[var_0];
-
   }
   var_5 = 0;
 
   if(isDefined(var_2[var_1])) {
     var_5 = var_2[var_1];
-
   }
   if(var_4 > var_5) {
     return "1st";
-
   }
   if(var_4 < var_5) {
     return "2nd";
-
   }
   return "same";
 }
@@ -2282,7 +2170,6 @@ tag_project(var_0, var_1) {
 ter_op(var_0, var_1, var_2) {
   if(var_0) {
     return var_1;
-
   }
   return var_2;
 }
@@ -2290,11 +2177,9 @@ ter_op(var_0, var_1, var_2) {
 create_lock(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   if(!isDefined(level.lock)) {
     level.lock = [];
-
   }
   var_2 = spawnStruct();
   var_2.max_count = var_1;
@@ -2307,7 +2192,6 @@ lock(var_0) {
 
   while(var_1.count >= var_1.max_count) {
     var_1 waittill("unlocked");
-
   }
   var_1.count++;
 }
@@ -2338,7 +2222,6 @@ get_template_level() {
 
   if(isDefined(level.template_script)) {
     var_0 = level.template_script;
-
   }
   return var_0;
 }

@@ -1,6 +1,6 @@
 /*********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_ambientpackage.csc
+ * Script: clientscripts\_ambientpackage\.csc
 *********************************************/
 
 #include clientscripts\_utility;
@@ -18,7 +18,6 @@ deactivateAmbientPackage(client, package, priority) {
     }
   }
 }
-
 deactivateAmbientRoom(client, room, priority) {
   if(!isDefined(level.ambientRooms[room])) {
     assertmsg("deactivateAmbientRoom: must declare ambient room \"" + room + "\" in level_amb main before it can be deactivated");
@@ -32,21 +31,22 @@ deactivateAmbientRoom(client, room, priority) {
     }
   }
 }
-
 trig_enter(ent) {
-  if(self.useAmbientPackage)
+  if(self.useAmbientPackage) {
     activateAmbientPackage(0, self.script_ambientpackage, self.script_ambientpriority);
-  if(self.useAmbientRoom)
+  }
+  if(self.useAmbientRoom) {
     activateAmbientRoom(0, self.script_ambientroom, self.script_ambientpriority);
+  }
 }
-
 trig_leave(ent) {
-  if(self.useAmbientPackage)
+  if(self.useAmbientPackage) {
     deactivateAmbientPackage(0, self.script_ambientpackage, self.script_ambientpriority);
-  if(self.useAmbientRoom)
+  }
+  if(self.useAmbientRoom) {
     deactivateAmbientRoom(0, self.script_ambientroom, self.script_ambientpriority);
+  }
 }
-
 AmbientPackageTrigger() {
   hasAmbientRoom = isDefined(self.script_ambientroom);
   useAmbientRoom = hasAmbientRoom && isDefined(level.ambientRooms[self.script_ambientroom]);
@@ -78,16 +78,14 @@ AmbientPackageTrigger() {
     wait(0.01);
   }
 }
-
 init_ambient_package_triggers() {
   wait(0.1);
-  player = getLocalPlayers()[0];
+  player = GetLocalPlayers()[0];
   remove_triggers_from_ent(player);
   trigs = getEntArray(0, "ambient_package", "targetname");
   array_thread(trigs, ::ambientPackageTrigger);
   println("Client : " + trigs.size + " ambient package triggers.");
 }
-
 init() {
   level.activeAmbientPackage = "";
   level.ambientPackages = [];
@@ -109,16 +107,15 @@ init() {
   clientscripts\_utility::registerSystem("ambientRoomCmd", ::ambientRoomCmdHandler);
   level thread init_ambient_package_triggers();
 }
-
 declareAmbientPackage(package) {
-  if(isDefined(level.ambientPackages[package]))
+  if(isDefined(level.ambientPackages[package])) {
     return;
+  }
   level.ambientPackages[package] = spawnStruct();
   level.ambientPackages[package].priority = [];
   level.ambientPackages[package].refcount = [];
   level.ambientPackages[package].elements = [];
 }
-
 addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin, angleMax) {
   if(!isDefined(level.ambientPackages[package])) {
     assertmsg("addAmbientElement: must declare ambient package \"" + package + "\" in level_amb main before it can have elements added to it");
@@ -127,10 +124,12 @@ addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin
   index = level.ambientPackages[package].elements.size;
   level.ambientPackages[package].elements[index] = spawnStruct();
   level.ambientPackages[package].elements[index].alias = alias;
-  if(spawnMin < 0)
+  if(spawnMin < 0) {
     spawnMin = 0;
-  if(spawnMin >= spawnMax)
+  }
+  if(spawnMin >= spawnMax) {
     spawnMax = spawnMin + 1;
+  }
   level.ambientPackages[package].elements[index].spawnMin = spawnMin;
   level.ambientPackages[package].elements[index].spawnMax = spawnMax;
   level.ambientPackages[package].elements[index].distMin = -1;
@@ -146,16 +145,15 @@ addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin
     level.ambientPackages[package].elements[index].angleMax = angleMax;
   }
 }
-
 declareAmbientRoom(room) {
-  if(isDefined(level.ambientRooms[room]))
+  if(isDefined(level.ambientRooms[room])) {
     return;
+  }
   level.ambientRooms[room] = spawnStruct();
   level.ambientRooms[room].priority = [];
   level.ambientRooms[room].refcount = [];
   level.ambientRooms[room].ent = spawnfakeent(0);
 }
-
 setAmbientRoomTone(room, alias, fadeIn, fadeOut) {
   if(!isDefined(level.ambientRooms[room])) {
     assertmsg("setAmbientRoomTone: must declare ambient room \"" + room + "\" in level_amb main before it can have a room tone set");
@@ -171,7 +169,6 @@ setAmbientRoomTone(room, alias, fadeIn, fadeOut) {
     level.ambientRooms[room].fadeOut = fadeOut;
   }
 }
-
 setAmbientRoomSnapshot(room, snapshot) {
   if(!isDefined(level.ambientRooms[room])) {
     assertmsg("setAmbientRoomSnapshot: must declare ambient room \"" + room + "\" in level_amb main before it can have a room snapshot set");
@@ -179,7 +176,6 @@ setAmbientRoomSnapshot(room, snapshot) {
   }
   level.ambientRooms[room].snapshot = snapshot;
 }
-
 setAmbientRoomContext(room, type, value) {
   if(!isDefined(level.ambientRooms[room])) {
     assertmsg("setAmbientRoomContext: must declare ambient room \"" + room + "\" in level_amb main before it can have a room context set");
@@ -194,7 +190,6 @@ setAmbientRoomContext(room, type, value) {
   }
   level.ambientContexts[type] = type;
 }
-
 setAmbientRoomReverb(room, reverbRoomType, dry, wet, fade) {
   if(!isDefined(level.ambientRooms[room])) {
     assertmsg("setAmbientRoomReverb: must declare ambient room \"" + room + "\" in level_amb main before it can have a room reverb set");
@@ -209,7 +204,6 @@ setAmbientRoomReverb(room, reverbRoomType, dry, wet, fade) {
     level.ambientRooms[room].reverb.fade = fade;
   }
 }
-
 activateAmbientPackage(clientNum, package, priority) {
   if(!isDefined(level.ambientPackages[package])) {
     assertmsg("activateAmbientPackage: must declare ambient package \"" + package + "\" in level_amb.csc main before it can be activated");
@@ -227,7 +221,6 @@ activateAmbientPackage(clientNum, package, priority) {
   }
   level notify("updateActiveAmbientPackage");
 }
-
 activateAmbientRoom(clientNum, room, priority) {
   if(!isDefined(level.ambientRooms[room])) {
     assertmsg("activateAmbientRoom: must declare ambient room \"" + room + "\" in level_amb.csc main before it can be activated");
@@ -245,7 +238,6 @@ activateAmbientRoom(clientNum, room, priority) {
   }
   level notify("updateActiveAmbientRoom");
 }
-
 ambientPackageCmdHandler(clientNum, state, oldState) {
   if(state != "") {
     split_state = splitargs(state);
@@ -291,7 +283,6 @@ ambientPackageCmdHandler(clientNum, state, oldState) {
     }
   }
 }
-
 ambientRoomCmdHandler(clientNum, state, oldState) {
   if(state != "") {
     split_state = splitargs(state);
@@ -336,7 +327,6 @@ ambientRoomCmdHandler(clientNum, state, oldState) {
     }
   }
 }
-
 ambientElementThread() {
   level endon("killambientElementThread" + level.activeAmbientPackage);
   timer = 0;
@@ -380,7 +370,6 @@ ambientElementThread() {
     }
   }
 }
-
 getScriptOriginPoolIndex() {
   for(index = 0; index < level.ambientPackageScriptOriginPool.size; index++) {
     if(!level.ambientPackageScriptOriginPool[index].inuse) {
@@ -394,7 +383,6 @@ getScriptOriginPoolIndex() {
   if(getdvarint(#"debug_audio") > 0) {}
   return -1;
 }
-
 scriptOriginPoolThread() {
   for(;;) {
     if(self.inuse == true) {
@@ -412,7 +400,6 @@ scriptOriginPoolThread() {
     wait(0.01);
   }
 }
-
 findHighestPriorityAmbientPackage() {
   package = "";
   priority = -1;
@@ -427,7 +414,6 @@ findHighestPriorityAmbientPackage() {
   }
   return package;
 }
-
 updateActiveAmbientPackage() {
   for(;;) {
     level waittill("updateActiveAmbientPackage");
@@ -440,13 +426,11 @@ updateActiveAmbientPackage() {
     }
   }
 }
-
 roomToneFadeOutTimerThread(fadeOut) {
   self endon("killRoomToneFadeOutTimer");
   wait fadeOut;
   self.inuse = false;
 }
-
 findHighestPriorityAmbientRoom() {
   room = "";
   priority = -1;
@@ -464,7 +448,6 @@ findHighestPriorityAmbientRoom() {
   }
   return room;
 }
-
 saveRestore() {
   for(;;) {
     level waittill("save_restore");
@@ -472,7 +455,6 @@ saveRestore() {
     level notify("updateActiveAmbientRoom");
   }
 }
-
 updateActiveAmbientRoom() {
   for(;;) {
     newAmbientRoom = findHighestPriorityAmbientRoom();
@@ -484,7 +466,9 @@ updateActiveAmbientRoom() {
     }
     oldroom = level.ambientRooms[level.activeAmbientRoom];
     newroom = level.ambientRooms[newAmbientRoom];
-    if(isDefined(oldroom) && isDefined(newroom) && isDefined(oldroom.tone) && isDefined(newroom.tone) && oldroom.tone == newroom.tone) {
+    if(isDefined(oldroom) && isDefined(newroom) &&
+      isDefined(oldroom.tone) && isDefined(newroom.tone) &&
+      oldroom.tone == newroom.tone) {
       tmp = newroom.ent;
       newroom.ent = oldroom.ent;
       oldroom.ent = tmp;
@@ -493,7 +477,7 @@ updateActiveAmbientRoom() {
         newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadeIn);
       } else {}
       if(isDefined(oldroom) && isDefined(oldroom.tone)) {
-        stopLoopSound(0, oldroom.ent, oldroom.fadeOut);
+        stoploopsound(0, oldroom.ent, oldroom.fadeOut);
       } else {}
     }
     if(!isDefined(newroom) || !isDefined(newroom.reverb)) {

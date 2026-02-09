@@ -280,7 +280,7 @@ logevent_playerconnected() {
 }
 
 logevent_playerdeath(var_0, var_1, var_2) {
-    if(!shouldplayerlogevents(self) || !isplayer(self)) {
+    if(!shouldplayerlogevents(self) || !isPlayer(self)) {
       return;
     }
 
@@ -294,7 +294,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
     var_10 = 0;
     var_11 = "s";
     var_12 = 0;
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       var_4 = var_0.analyticslog.playerid;
       if(isDefined(var_0.team)) {
         if(var_0.team == "axis") {
@@ -339,7 +339,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
 
       if(isDefined(self.attackers)) {
         foreach(var_11 in self.attackers) {
-          if(isDefined(var_11) && isplayer(var_11) && var_11 != var_0) {
+          if(isDefined(var_11) && isPlayer(var_11) && var_11 != var_0) {
             logevent_assist(var_11.analyticslog.playerid, var_14, var_2);
           }
         }
@@ -352,7 +352,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
       }
 
       var_3 = anglesToForward(self getplayerangles());
-      bbprint("gamemp_kill", "playerid %i x %f y %f z %f gun_orientx %f gun_orienty %f gun_orientz %f weapon %s mean_of_kill %s victimid %i action %i attacker_health %i victim_pixel_count %i", self.analyticslog.playerid, self.origin[0], self.origin[1], self.origin[2], var_3[0], var_3[1], var_3[2], scripts\engine\utility::ter_op(isDefined(var_2), var_2, "None"), scripts\engine\utility::ter_op(isDefined(var_1), var_1, "None"), scripts\engine\utility::ter_op(isDefined(var_0) && isplayer(var_0), var_0.analyticslog.playerid, "-1"), buildkilldeathactionvalue(), getsantizedhealth(), 0);
+      bbprint("gamemp_kill", "playerid %i x %f y %f z %f gun_orientx %f gun_orienty %f gun_orientz %f weapon %s mean_of_kill %s victimid %i action %i attacker_health %i victim_pixel_count %i", self.analyticslog.playerid, self.origin[0], self.origin[1], self.origin[2], var_3[0], var_3[1], var_3[2], scripts\engine\utility::ter_op(isDefined(var_2), var_2, "None"), scripts\engine\utility::ter_op(isDefined(var_1), var_1, "None"), scripts\engine\utility::ter_op(isDefined(var_0) && isPlayer(var_0), var_0.analyticslog.playerid, "-1"), buildkilldeathactionvalue(), getsantizedhealth(), 0);
     }
 
     logevent_explosion(var_0, var_1, var_2, var_3, var_4) {
@@ -469,7 +469,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
     }
 
     logmatchtags() {
-      var_0 = getdvar("scr_analytics_tag", "");
+      var_0 = getDvar("scr_analytics_tag", "");
       if(var_0 != "") {
         logevent_tag(var_0);
       }

@@ -474,7 +474,6 @@ class cteamgather {
     cleanup_floor_effect();
     e_gameobject gameobjects::destroy_object(1, 1);
   }
-
 }
 
 #namespace teamgather;

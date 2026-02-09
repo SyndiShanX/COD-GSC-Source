@@ -134,7 +134,7 @@ function killstreak_switch_team(owner) {
   killstreakentity notify("killstreak_switch_team_singleton");
   killstreakentity endon("killstreak_switch_team_singleton");
   killstreakentity endon("death");
-  setdvar("", "");
+  setDvar("", "");
   while(true) {
     wait(0.5);
     devgui_int = getdvarint("");
@@ -159,7 +159,7 @@ function killstreak_switch_team(owner) {
       killstreakentity.previouslyhacked = 1;
       killstreakentity[[killstreakentity.killstreak_hackedcallback]](player);
       wait(0.5);
-      setdvar("", "");
+      setDvar("", "");
       return;
     }
   }

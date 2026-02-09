@@ -71,9 +71,7 @@ find_flesh() {
       self maps\mp\zombies\_zm_spawner::zombie_history("find flesh -> can't find player, continue");
 
       if(isDefined(self.ignore_player)) {
-        if(isDefined(level._should_skip_ignore_player_logic) && [
-            [level._should_skip_ignore_player_logic]
-          ]()) {
+        if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
           wait 1;
           continue;
         }

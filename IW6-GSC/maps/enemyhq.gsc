@@ -9,7 +9,7 @@ main() {
   maps\enemyhq_fx::main();
   maps\enemyhq_precache::main();
   maps\enemyhq_anim::main();
-  setdvar("debug_bcprint", "on");
+  setDvar("debug_bcprint", "on");
   enemyhq_pre_load();
   enemyhq_starts();
   maps\_utility::set_console_status();

@@ -15,11 +15,12 @@ init() {
   level.cheatstates = [];
   level.cheatfuncs = [];
   level.cheatdvars = [];
-  level.cheatbobamporiginal = getdvar(#"_id_72BFD45D");
+  level.cheatbobamporiginal = getDvar(#"_id_72BFD45D");
   level.cheatshowslowmohint = 0;
 
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
+  }
 
   level._effect["grain_test"] = loadfx("misc/fx_grain_test");
   flag_init("has_cheated");
@@ -35,38 +36,42 @@ player_init() {
   self thread specialfeaturesmenu();
   players = get_players();
 
-  if(self == players[0])
+  if(self == players[0]) {
     self slowmo_system_init();
+  }
 }
 
 death_monitor() {
   setdvars_based_on_varibles();
 
   while(true) {
-    if(issaverecentlyloaded())
+    if(issaverecentlyloaded()) {
       setdvars_based_on_varibles();
+    }
 
     wait 0.1;
   }
 }
 
 setdvars_based_on_varibles() {
-  for(index = 0; index < level.cheatdvars.size; index++)
-    setdvar(level.cheatdvars[index], level.cheatstates[level.cheatdvars[index]]);
+  for(index = 0; index < level.cheatdvars.size; index++) {
+    setDvar(level.cheatdvars[index], level.cheatstates[level.cheatdvars[index]]);
+  }
 
   if(!isDefined(level.credits_active) || !level.credits_active) {
-    setdvar("credits_active", "0");
-    setdvar("credits_load", "0");
+    setDvar("credits_active", "0");
+    setDvar("credits_load", "0");
   }
 }
 
 addcheat(toggledvar, cheatfunc) {
-  setdvar(toggledvar, 0);
+  setDvar(toggledvar, 0);
   level.cheatstates[toggledvar] = getdvarint(toggledvar);
   level.cheatfuncs[toggledvar] = cheatfunc;
 
-  if(level.cheatstates[toggledvar])
+  if(level.cheatstates[toggledvar]) {
     [[cheatfunc]](level.cheatstates[toggledvar]);
+  }
 }
 
 checkcheatchanged(toggledvar) {
@@ -75,8 +80,9 @@ checkcheatchanged(toggledvar) {
   if(level.cheatstates[toggledvar] == cheatvalue) {
     return;
   }
-  if(cheatvalue)
+  if(cheatvalue) {
     flag_set("has_cheated");
+  }
 
   level.cheatstates[toggledvar] = cheatvalue;
   [[level.cheatfuncs[toggledvar]]](cheatvalue);
@@ -93,25 +99,28 @@ specialfeaturesmenu() {
   level.cheatdvars = getarraykeys(level.cheatstates);
 
   for(;;) {
-    for(index = 0; index < level.cheatdvars.size; index++)
+    for(index = 0; index < level.cheatdvars.size; index++) {
       checkcheatchanged(level.cheatdvars[index]);
+    }
 
     wait 0.5;
   }
 }
 
 tire_explosionmode(cheatvalue) {
-  if(cheatvalue)
+  if(cheatvalue) {
     level.tire_explosion = 1;
-  else
+  } else {
     level.tire_explosion = 0;
+  }
 }
 
 clustergrenademode(cheatvalue) {
-  if(cheatvalue)
+  if(cheatvalue) {
     self thread wait_for_grenades();
-  else
+  } else {
     level notify("end_cluster_grenades");
+  }
 }
 
 wait_for_grenades() {
@@ -154,8 +163,9 @@ create_clustergrenade() {
     }
   }
 
-  if(!isDefined(ai))
+  if(!isDefined(ai)) {
     ai = aiarray[0];
+  }
 
   oldweapon = ai.grenadeweapon;
   ai.grenadeweapon = "frag_grenade";
@@ -185,35 +195,39 @@ ignore_ammomode(cheatvalue) {
   if(level.script == "ac130") {
     return;
   }
-  if(cheatvalue)
+  if(cheatvalue) {
     setsaveddvar("player_sustainAmmo", 1);
-  else
+  } else {
     setsaveddvar("player_sustainAmmo", 0);
+  }
 }
 
 contrastmode(cheatvalue) {
-  if(cheatvalue)
+  if(cheatvalue) {
     level.visionsets["contrast"] = 1;
-  else
+  } else {
     level.visionsets["contrast"] = 0;
+  }
 
   applyvisionsets();
 }
 
 bwmode(cheatvalue) {
-  if(cheatvalue)
+  if(cheatvalue) {
     level.visionsets["bw"] = 1;
-  else
+  } else {
     level.visionsets["bw"] = 0;
+  }
 
   applyvisionsets();
 }
 
 invertmode(cheatvalue) {
-  if(cheatvalue)
+  if(cheatvalue) {
     level.visionsets["invert"] = 1;
-  else
+  } else {
     level.visionsets["invert"] = 0;
+  }
 
   applyvisionsets();
 }
@@ -224,14 +238,17 @@ applyvisionsets() {
   }
   visionset = "";
 
-  if(level.visionsets["bw"])
+  if(level.visionsets["bw"]) {
     visionset = visionset + "_bw";
+  }
 
-  if(level.visionsets["invert"])
+  if(level.visionsets["invert"]) {
     visionset = visionset + "_invert";
+  }
 
-  if(level.visionsets["contrast"])
+  if(level.visionsets["contrast"]) {
     visionset = visionset + "_contrast";
+  }
 
   if(level.visionsets["chaplin"]) {
     level.vision_cheat_enabled = 1;
@@ -329,10 +346,11 @@ gamespeed_proc() {
     level.cheatshowslowmohint = 0;
 
     if(!flag("disable_slowmo_cheat")) {
-      if(self.speed_current < level.slowmo.speed_norm)
+      if(self.speed_current < level.slowmo.speed_norm) {
         self thread gamespeed_reset();
-      else
+      } else {
         self thread gamespeed_slowmo();
+      }
     }
 
     waittillframeend;
@@ -360,8 +378,9 @@ gamespeed_set(speed, refspeed, lerp_time) {
   interval = self.lerp_interval;
   cycles = int(time / interval);
 
-  if(!cycles)
+  if(!cycles) {
     cycles = 1;
+  }
 
   increment = actual_range / cycles;
   self.lerping = time;
@@ -389,8 +408,9 @@ gamespeed_reset() {
 
 is_cheating() {
   for(i = 0; i < level.cheatdvars.size; i++) {
-    if(level.cheatstates[level.cheatdvars[i]])
+    if(level.cheatstates[level.cheatdvars[i]]) {
       return true;
+    }
   }
 
   return false;

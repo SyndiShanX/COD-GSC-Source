@@ -189,7 +189,7 @@ monitor_chamber_death_trigs() {
   while(true) {
     self waittill("trigger", ent);
 
-    if(isplayer(ent))
+    if(isPlayer(ent))
       ent.bleedout_time = 0;
 
     ent dodamage(ent.health + 666, ent.origin);
@@ -692,7 +692,7 @@ staff_biplane_drop_pieces(a_staff_pieces) {
 }
 
 aircrystalbiplanecallback_vehicledamage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
-  if(isplayer(e_attacker) && self.vehicletype == "biplane_zm" && !self ent_flag("biplane_down")) {
+  if(isPlayer(e_attacker) && self.vehicletype == "biplane_zm" && !self ent_flag("biplane_down")) {
     self ent_flag_set("biplane_down");
     level notify("biplane_down");
   }
@@ -911,7 +911,6 @@ debug_staff_charge() {
 
     wait 0.05;
   }
-
 }
 
 waittill_staff_inserted() {
@@ -961,7 +960,7 @@ zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vd
   }
   n_max_dist_sq = 9000000;
 
-  if(isplayer(attacker) || sweapon == "one_inch_punch_zm") {
+  if(isPlayer(attacker) || sweapon == "one_inch_punch_zm") {
     if(!flag("fire_puzzle_1_complete"))
       maps\mp\zm_tomb_quest_fire::sacrifice_puzzle_zombie_killed(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime);
 

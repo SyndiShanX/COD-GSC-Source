@@ -33,7 +33,7 @@ __init__() {
 __main__() {}
 
 function_843da215(params) {
-  if(!gamestate::is_state("playing") || !isplayer(params.reviver) || !isDefined(params.attacker)) {
+  if(!gamestate::is_state("playing") || !isPlayer(params.reviver) || !isDefined(params.attacker)) {
     return;
   }
 
@@ -54,7 +54,7 @@ function_f4837321(params) {
   var_8efbdcbb = self.var_a1d415ee.attacker;
   weapon = self.laststandparams.sweapon;
 
-  if(!isDefined(original_attacker) || !isplayer(var_8efbdcbb) || !isDefined(weapon)) {
+  if(!isDefined(original_attacker) || !isPlayer(var_8efbdcbb) || !isDefined(weapon)) {
     return;
   }
 

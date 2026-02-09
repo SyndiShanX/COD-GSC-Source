@@ -88,7 +88,7 @@ function watchhackertoolfired() {
       if(isentityhackablecarepackage(hackertooltarget)) {
         scoreevents::givecratecapturemedal(hackertooltarget, self);
         hackertooltarget notify("captured", self, 1);
-        if(isDefined(hackertooltarget.owner) && isplayer(hackertooltarget.owner) && hackertooltarget.owner.team != self.team && isDefined(level.play_killstreak_hacked_dialog)) {
+        if(isDefined(hackertooltarget.owner) && isPlayer(hackertooltarget.owner) && hackertooltarget.owner.team != self.team && isDefined(level.play_killstreak_hacked_dialog)) {
           hackertooltarget.owner[[level.play_killstreak_hacked_dialog]](hackertooltarget.killstreaktype, hackertooltarget.killstreakid, self);
         }
       } else {
@@ -99,7 +99,7 @@ function watchhackertoolfired() {
         } else {
           if(isDefined(hackertooltarget.killstreak_hackedcallback) && (!isDefined(hackertooltarget.killstreaktimedout) || hackertooltarget.killstreaktimedout == 0)) {
             if(hackertooltarget.killstreak_hackedprotection == 0) {
-              if(isDefined(hackertooltarget.owner) && isplayer(hackertooltarget.owner)) {
+              if(isDefined(hackertooltarget.owner) && isPlayer(hackertooltarget.owner)) {
                 if(isDefined(level.play_killstreak_hacked_dialog)) {
                   hackertooltarget.owner[[level.play_killstreak_hacked_dialog]](hackertooltarget.killstreaktype, hackertooltarget.killstreakid, self);
                 }
@@ -112,7 +112,7 @@ function watchhackertoolfired() {
                 self addplayerstat("hack_streak_with_blindeye_or_engineer", 1);
               }
             } else {
-              if(isDefined(hackertooltarget.owner) && isplayer(hackertooltarget.owner)) {
+              if(isDefined(hackertooltarget.owner) && isPlayer(hackertooltarget.owner)) {
                 if(isDefined(level.play_killstreak_firewall_hacked_dialog)) {
                   self.hackertooltarget.owner[[level.play_killstreak_firewall_hacked_dialog]](self.hackertooltarget.killstreaktype, self.hackertooltarget.killstreakid);
                 }
@@ -279,7 +279,7 @@ function hackertooltargetloop(weapon) {
       }
       if(self.hackertoollocktimeelapsed == 0) {
         self playlocalsound("evt_hacker_hacking");
-        if(isDefined(self.hackertooltarget.owner) && isplayer(self.hackertooltarget.owner)) {
+        if(isDefined(self.hackertooltarget.owner) && isPlayer(self.hackertooltarget.owner)) {
           if(isDefined(self.hackertooltarget.killstreak_hackedcallback) && (!isDefined(self.hackertooltarget.killstreaktimedout) || self.hackertooltarget.killstreaktimedout == 0)) {
             if(self.hackertooltarget.killstreak_hackedprotection == 0) {
               if(isDefined(level.play_killstreak_being_hacked_dialog)) {

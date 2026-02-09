@@ -155,7 +155,7 @@ update_trigger_visibility() {
 function_2043936c(trigger_struct) {
   player = trigger_struct.activator;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

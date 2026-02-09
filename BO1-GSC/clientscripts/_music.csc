@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_music.csc
+ * Script: clientscripts\_music\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -15,12 +15,12 @@ music_init() {
   thread musicSaveWait();
   registerSystem("musicCmd", ::musicCmdHandler);
 }
-
 musicSaveWait() {
   for(;;) {
     level waittill("save_restore");
-    if(level.nextMusicState == "")
+    if(level.nextMusicState == "") {
       level.nextMusicState = level.activeMusicState;
+    }
     level.activeMusicState = "";
     println("resetting music state to " + level.nextMusicState);
     states = getArrayKeys(level.musicStates);
@@ -30,22 +30,23 @@ musicSaveWait() {
     thread updateMusic();
   }
 }
-
 musicCmdHandler(clientNum, state, oldState) {
-  if(clientNum != 0)
+  if(clientNum != 0) {
     return;
+  }
   level.nextMusicState = state;
   println("music debug: got state '" + state + "'");
   level notify("new_music");
 }
-
 updateMusic() {
   level endon("save_restore");
   while(1) {
-    if(level.activeMusicState == level.nextMusicState)
+    if(level.activeMusicState == level.nextMusicState) {
       level waittill("new_music");
-    if(level.activeMusicState == level.nextMusicState)
+    }
+    if(level.activeMusicState == level.nextMusicState) {
       continue;
+    }
     active = level.activeMusicState;
     next = level.nextMusicState;
     if(next != "" && !isDefined(level.musicStates[next])) {
@@ -53,27 +54,29 @@ updateMusic() {
       level.nextMusicState = level.activeMusicState;
       continue;
     }
-    if(active != "")
+    if(active != "") {
       transitionOut(active, next);
-    if(next != "")
+    }
+    if(next != "") {
       transitionIn(active, next);
+    }
     level.activeMusicState = next;
   }
 }
-
 fadeOutAndStopSound(id, time) {
   rate = 0;
-  if(isDefined(time) && time != 0)
+  if(isDefined(time) && time != 0) {
     rate = 1.0 / time;
+  }
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
   wait(time);
   stopSound(id);
 }
-
 transitionOut(previous, next) {
-  if(previous == "")
+  if(previous == "") {
     return;
+  }
   println("music transition out state " + next);
   if(!isDefined(level.musicStates[previous])) {
     assertmsg("unknown music state '" + previous + "'");
@@ -118,16 +121,18 @@ transitionOut(previous, next) {
       thread fadeOutAndStopSound(id, fadeout);
     }
   }
-  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
+  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000) {
     wait(.01);
-  if(waittillstingerdone) {
-    while(SoundPlaying(stingerid))
-      wait(.01);
   }
-  if(loopalias != nextloopalias)
+  if(waittillstingerdone) {
+    while(SoundPlaying(stingerid)) {
+      wait(.01);
+    }
+  }
+  if(loopalias != nextloopalias) {
     level.musicStates[previous].id = -1;
+  }
 }
-
 transitionIn(previous, next) {
   ent = level.musicStates[next].aliasEnt;
   loopalias = level.musicStates[next].loopalias;
@@ -172,10 +177,10 @@ transitionIn(previous, next) {
     level.musicStates[next].id = playLoopSound(0, ent, loopalias, fadein);
   }
 }
-
 declareMusicState(name) {
-  if(isDefined(level.musicStates[name]))
+  if(isDefined(level.musicStates[name])) {
     return;
+  }
   level.musicDeclareName = name;
   level.musicStates[name] = spawnStruct();
   level.musicStates[name].aliasEnt = spawnfakeent(0);
@@ -190,23 +195,21 @@ declareMusicState(name) {
   level.musicStates[name].startDelay = 0;
   level.musicStates[name].forceStinger = false;
 }
-
 musicWaitTillDone() {
   assert(isDefined(level.musicDeclareName));
   name = level.musicDeclareName;
   level.musicStates[name].waittilldone = true;
 }
-
 musicWaitTillStingerDone() {
   assert(isDefined(level.musicDeclareName));
   name = level.musicDeclareName;
   level.musicStates[name].waittillstingerdone = true;
 }
-
 musicStinger(stinger, delay, force) {
   assert(isDefined(level.musicDeclareName));
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0;
+  }
   name = level.musicDeclareName;
   level.musicStates[name].stinger = stinger;
   level.musicStates[name].startDelay = delay;
@@ -214,22 +217,20 @@ musicStinger(stinger, delay, force) {
     level.musicStates[name].forceStinger = force;
   }
 }
-
 _musicAlias(alias, fadein, fadeout, loop) {
   assert(isDefined(level.musicDeclareName));
   name = level.musicDeclareName;
-  if(loop)
+  if(loop) {
     level.musicStates[name].loopalias = alias;
-  else
+  } else {
     level.musicStates[name].oneshotalias = alias;
+  }
   level.musicStates[name].fadein = fadein;
   level.musicStates[name].fadeout = fadeout;
 }
-
 musicAliasLoop(alias, fadein, fadeout) {
   _musicAlias(alias, fadein, fadeout, true);
 }
-
 musicAlias(alias, fadeout) {
   _musicAlias(alias, 0, fadeout, false);
 }

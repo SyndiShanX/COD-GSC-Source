@@ -429,8 +429,8 @@ init_level_specific_audio() {
   level.oh_shit_vo_cooldown = 0;
   level.wolf_kill_vo_cooldown = 0;
   level.wallbuys_purchased = 0;
-  setdvar("zombie_kills", "5");
-  setdvar("zombie_kill_timer", "5");
+  setDvar("zombie_kills", "5");
+  setDvar("zombie_kill_timer", "5");
 
   if(is_classic()) {
     level._audio_custom_response_line = ::alcatraz_audio_custom_response_line;
@@ -758,7 +758,7 @@ alcatraz_custom_crawler_spawned_vo() {
 
   if(isDefined(self.a.gib_ref) && isalive(self)) {
     if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "right_leg" || self.a.gib_ref == "left_leg") {
-      if(isDefined(self.attacker) && isplayer(self.attacker)) {
+      if(isDefined(self.attacker) && isPlayer(self.attacker)) {
         if(isDefined(self.attacker.crawler_created_vo_cooldown) && self.attacker.crawler_created_vo_cooldown) {
           return;
         }

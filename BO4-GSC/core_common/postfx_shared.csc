@@ -32,30 +32,30 @@ localplayer_postfx_bundle_init(localclientnum) {
 
 postfxbundledebuglisten() {
   self endon(#"death");
-  setdvar(#"scr_play_postfx_bundle", "<dev string:x38>");
-  setdvar(#"scr_stop_postfx_bundle", "<dev string:x38>");
-  setdvar(#"scr_exit_postfx_bundle", "<dev string:x38>");
+  setDvar(#"scr_play_postfx_bundle", "<dev string:x38>");
+  setDvar(#"scr_stop_postfx_bundle", "<dev string:x38>");
+  setDvar(#"scr_exit_postfx_bundle", "<dev string:x38>");
 
   while(true) {
     playbundlename = getdvarstring(#"scr_play_postfx_bundle");
 
     if(playbundlename != "<dev string:x38>") {
       self thread playpostfxbundle(playbundlename);
-      setdvar(#"scr_play_postfx_bundle", "<dev string:x38>");
+      setDvar(#"scr_play_postfx_bundle", "<dev string:x38>");
     }
 
     stopbundlename = getdvarstring(#"scr_stop_postfx_bundle");
 
     if(stopbundlename != "<dev string:x38>") {
       self thread stoppostfxbundle(stopbundlename);
-      setdvar(#"scr_stop_postfx_bundle", "<dev string:x38>");
+      setDvar(#"scr_stop_postfx_bundle", "<dev string:x38>");
     }
 
     var_38ce085 = getdvarstring(#"scr_exit_postfx_bundle");
 
     if(var_38ce085 != "<dev string:x38>") {
       self thread exitpostfxbundle(var_38ce085);
-      setdvar(#"scr_exit_postfx_bundle", "<dev string:x38>");
+      setDvar(#"scr_exit_postfx_bundle", "<dev string:x38>");
     }
 
     wait 0.5;

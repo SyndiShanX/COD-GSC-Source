@@ -173,7 +173,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
@@ -258,7 +258,7 @@ waitanddetonate(object, delay, attacker, weaponname) {
   if(!isDefined(self.detonate)) {
     return;
   }
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && isDefined(object.owner) && isDefined(object.owner.pers["team"])) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.pers["team"]) && isDefined(object.owner) && isDefined(object.owner.pers["team"])) {
     if(level.teambased) {
       if(attacker.pers["team"] != object.owner.pers["team"])
         attacker notify("destroyed_explosive");

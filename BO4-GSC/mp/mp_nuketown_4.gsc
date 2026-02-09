@@ -137,7 +137,7 @@ on_connect() {
 function_b3e0f5e0() {
   while(level.mannequin_mode === 0) {
     if(getdvarint(#"hash_519c2711f2f609f", 0) && level.mannequin_mode == 0) {
-      setdvar(#"hash_519c2711f2f609f", 0);
+      setDvar(#"hash_519c2711f2f609f", 0);
       level thread mannequin_mode();
     }
 

@@ -9,10 +9,10 @@ main() {
   scripts\mp\maps\mp_desert\mp_desert_fx::main();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_desert");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraAccurateOcclusionThreshold", 1200);
-  setdvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraAccurateOcclusionThreshold", 1200);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

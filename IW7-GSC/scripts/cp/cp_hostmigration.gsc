@@ -30,11 +30,11 @@ hostmigrationname(var_0) {
     var_1 = var_0.entity_number;
   }
 
-  if(isplayer(var_0) && isDefined(var_0.name)) {
+  if(isPlayer(var_0) && isDefined(var_0.name)) {
     var_2 = var_0.name;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return "player <" + var_2 + ">";
   }
 

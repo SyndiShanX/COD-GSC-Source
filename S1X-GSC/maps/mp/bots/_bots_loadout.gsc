@@ -938,7 +938,7 @@ bot_loadout_choose_from_camotable(var_0, var_1, var_2, var_3, var_4) {
 }
 
 bot_loadout_item_valid_for_rank(var_0, var_1, var_2) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 1;
   }
 

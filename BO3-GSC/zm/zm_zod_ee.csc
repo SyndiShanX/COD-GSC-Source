@@ -97,7 +97,6 @@ class class_b454dc63 {
     var_dbea7369 useanimtree($generic);
     var_dbea7369 setanim("p7_fxanim_zm_zod_apothicons_god_mouth_idle_anim", 1, 0, 1);
   }
-
 }
 
 #namespace zm_zod_ee;

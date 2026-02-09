@@ -19,11 +19,9 @@ main() {
   self setEngagementMaxDist(700.000000, 1000.000000);
   character\c_zom_soldier::main();
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\c_zom_soldier::precache();
   precacheItem("m1911_zm");

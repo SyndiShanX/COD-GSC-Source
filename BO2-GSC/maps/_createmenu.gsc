@@ -17,45 +17,49 @@ add_menu(menu_name, title) {
 }
 
 add_menuoptions(menu_name, option_text, func, key) {
-  if(!isDefined(level.menu_sys[menu_name].options))
+  if(!isDefined(level.menu_sys[menu_name].options)) {
     level.menu_sys[menu_name].options = [];
+  }
 
   num = level.menu_sys[menu_name].options.size;
   level.menu_sys[menu_name].options[num] = option_text;
   level.menu_sys[menu_name].function[num] = func;
 
   if(isDefined(key)) {
-    if(!isDefined(level.menu_sys[menu_name].func_key))
+    if(!isDefined(level.menu_sys[menu_name].func_key)) {
       level.menu_sys[menu_name].func_key = [];
+    }
 
     level.menu_sys[menu_name].func_key[num] = key;
   }
-
 }
 
 add_menu_child(parent_menu, child_menu, child_title, child_number_override, func) {
-  if(!isDefined(level.menu_sys[child_menu]))
+  if(!isDefined(level.menu_sys[child_menu])) {
     add_menu(child_menu, child_title);
+  }
 
   level.menu_sys[child_menu].parent_menu = parent_menu;
 
-  if(!isDefined(level.menu_sys[parent_menu].children_menu))
+  if(!isDefined(level.menu_sys[parent_menu].children_menu)) {
     level.menu_sys[parent_menu].children_menu = [];
+  }
 
-  if(!isDefined(child_number_override))
+  if(!isDefined(child_number_override)) {
     size = level.menu_sys[parent_menu].children_menu.size;
-  else
+  } else {
     size = child_number_override;
+  }
 
   level.menu_sys[parent_menu].children_menu[size] = child_menu;
 
   if(isDefined(func)) {
-    if(!isDefined(level.menu_sys[parent_menu].children_func))
+    if(!isDefined(level.menu_sys[parent_menu].children_func)) {
       level.menu_sys[parent_menu].children_func = [];
+    }
 
     level.menu_sys[parent_menu].children_func[size] = func;
   }
-
 }
 
 set_no_back_menu(menu_name) {
@@ -89,19 +93,20 @@ enable_menu(menu_name) {
     text = back_option_num + 1 + ". " + "Back";
     level.menu_sys["current_menu"].options[back_option_num] = set_menu_hudelem(text, "options", 20 * back_option_num);
   }
-
 }
 
 disable_menu(menu_name) {
   if(isDefined(level.menu_sys[menu_name])) {
-    if(isDefined(level.menu_sys[menu_name].title))
+    if(isDefined(level.menu_sys[menu_name].title)) {
       level.menu_sys[menu_name].title destroy();
+    }
 
     if(isDefined(level.menu_sys[menu_name].options)) {
       options = level.menu_sys[menu_name].options;
 
-      for(i = 0; i < options.size; i++)
+      for(i = 0; i < options.size; i++) {
         options[i] destroy();
+      }
     }
   }
 
@@ -112,33 +117,37 @@ disable_menu(menu_name) {
 set_menu_hudelem(text, type, y_offset) {
   y = 100;
 
-  if(isDefined(type) && type == "title")
+  if(isDefined(type) && type == "title") {
     scale = 2;
-  else {
+  } else {
     scale = 1.3;
     y = y + 30;
   }
 
-  if(!isDefined(y_offset))
+  if(!isDefined(y_offset)) {
     y_offset = 0;
+  }
 
   y = y + y_offset;
   return set_hudelem(text, 10, y, scale);
 }
 
 set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
-  if(!isDefined(alpha))
+  if(!isDefined(alpha)) {
     alpha = 1;
+  }
 
-  if(!isDefined(scale))
+  if(!isDefined(scale)) {
     scale = 1;
+  }
 
-  if(!isDefined(sort))
+  if(!isDefined(sort)) {
     sort = 20;
+  }
 
-  if(isDefined(level.player) && !isDefined(debug_hudelem))
+  if(isDefined(level.player) && !isDefined(debug_hudelem)) {
     hud = newclienthudelem(level.player);
-  else {
+  } else {
     hud = newdebughudelem();
     hud.debug_hudelem = 1;
   }
@@ -154,8 +163,9 @@ set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
   hud.y = y;
   hud.og_scale = scale;
 
-  if(isDefined(text))
+  if(isDefined(text)) {
     hud settext(text);
+  }
 
   return hud;
 }
@@ -189,26 +199,29 @@ menu_input() {
       continue;
     } else if(keystring == "button_a" || keystring == "enter")
       key = level.menu_cursor.current_pos;
-    else
+    else {
       key = int(keystring) - 1;
+    }
 
-    if(key > level.menu_sys[menu_name].options.size)
+    if(key > level.menu_sys[menu_name].options.size) {
       continue;
-    else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
+    } else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
       level notify("disable " + menu_name);
       level enable_menu(level.menu_sys[menu_name].parent_menu);
     } else if(isDefined(level.menu_sys[menu_name].function) && isDefined(level.menu_sys[menu_name].function[key])) {
       level.menu_sys["current_menu"].options[key] thread hud_selector(level.menu_sys["current_menu"].options[key].x, level.menu_sys["current_menu"].options[key].y);
 
-      if(isDefined(level.menu_sys[menu_name].func_key) && isDefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring)
+      if(isDefined(level.menu_sys[menu_name].func_key) && isDefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring) {
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
-      else
+      } else {
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
+      }
 
       level thread hud_selector_fade_out();
 
-      if(isDefined(error_msg))
+      if(isDefined(error_msg)) {
         level thread selection_error(error_msg, level.menu_sys["current_menu"].options[key].x, level.menu_sys["current_menu"].options[key].y);
+      }
     }
 
     if(!isDefined(level.menu_sys[menu_name].children_menu)) {
@@ -235,72 +248,77 @@ menu_input() {
     level enable_menu(level.menu_sys[menu_name].children_menu[key]);
     wait 0.1;
   }
-
 }
 
 force_menu_back(waittill_msg) {
-  if(isDefined(waittill_msg))
+  if(isDefined(waittill_msg)) {
     level waittill(waittill_msg);
+  }
 
   wait 0.1;
   menu_name = level.menu_sys["current_menu"].menu_name;
   key = level.menu_sys[menu_name].options.size;
   key++;
 
-  if(key == 1)
+  if(key == 1) {
     key = "1";
-  else if(key == 2)
+  } else if(key == 2) {
     key = "2";
-  else if(key == 3)
+  } else if(key == 3) {
     key = "3";
-  else if(key == 4)
+  } else if(key == 4) {
     key = "4";
-  else if(key == 5)
+  } else if(key == 5) {
     key = "5";
-  else if(key == 6)
+  } else if(key == 6) {
     key = "6";
-  else if(key == 7)
+  } else if(key == 7) {
     key = "7";
-  else if(key == 8)
+  } else if(key == 8) {
     key = "8";
-  else if(key == 9)
+  } else if(key == 9) {
     key = "9";
+  }
 
   level notify("menu_button_pressed", key);
 }
 
 list_menu(list, x, y, scale, func, sort, start_num) {
-  if(!isDefined(list) || list.size == 0)
+  if(!isDefined(list) || list.size == 0) {
     return -1;
+  }
 
   hud_array = [];
 
   for(i = 0; i < 5; i++) {
-    if(i == 0)
+    if(i == 0) {
       alpha = 0.3;
-    else if(i == 1)
+    } else if(i == 1) {
       alpha = 0.6;
-    else if(i == 2)
+    } else if(i == 2) {
       alpha = 1;
-    else if(i == 3)
+    } else if(i == 3) {
       alpha = 0.6;
-    else
+    } else {
       alpha = 0.3;
+    }
 
     hud = set_hudelem(list[i], x, y + (i - 2) * 15, scale, alpha, sort);
     hud_array[hud_array.size] = hud;
   }
 
-  if(isDefined(start_num))
+  if(isDefined(start_num)) {
     new_move_list_menu(hud_array, list, start_num);
+  }
 
   current_num = 0;
   old_num = 0;
   selected = 0;
   level.menu_list_selected = 0;
 
-  if(isDefined(func))
+  if(isDefined(func)) {
     [[func]](list[current_num]);
+  }
 
   while(true) {
     level waittill("menu_button_pressed", key);
@@ -333,38 +351,43 @@ list_menu(list, x, y, scale, func, sort, start_num) {
     if(current_num != old_num) {
       old_num = current_num;
 
-      if(isDefined(func))
+      if(isDefined(func)) {
         [[func]](list[current_num]);
+      }
     }
 
     wait 0.1;
   }
 
-  for(i = 0; i < hud_array.size; i++)
+  for(i = 0; i < hud_array.size; i++) {
     hud_array[i] destroy();
+  }
 
-  if(selected)
+  if(selected) {
     return current_num;
+  }
 }
 
 new_move_list_menu(hud_array, list, num) {
   for(i = 0; i < hud_array.size; i++) {
-    if(isDefined(list[i + (num - 2)]))
+    if(isDefined(list[i + (num - 2)])) {
       text = list[i + (num - 2)];
-    else
+    } else {
       text = "";
+    }
 
     hud_array[i] settext(text);
   }
-
 }
 
 move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
-  if(!isDefined(min_alpha))
+  if(!isDefined(min_alpha)) {
     min_alpha = 0;
+  }
 
-  if(!isDefined(num_of_fades))
+  if(!isDefined(num_of_fades)) {
     num_of_fades = 3;
+  }
 
   side_movement = 0;
 
@@ -376,38 +399,43 @@ move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
     movement = space * -1;
   } else if(dir == "up")
     movement = space;
-  else
+  else {
     movement = space * -1;
+  }
 
   for(i = 0; i < hud_array.size; i++) {
     hud_array[i] moveovertime(0.1);
 
-    if(side_movement)
+    if(side_movement) {
       hud_array[i].x = hud_array[i].x + movement;
-    else
+    } else {
       hud_array[i].y = hud_array[i].y + movement;
+    }
 
     temp = i - num;
 
-    if(temp < 0)
+    if(temp < 0) {
       temp = temp * -1;
+    }
 
     alpha = 1 / (temp + 1);
 
-    if(alpha < 1 / num_of_fades)
+    if(alpha < 1 / num_of_fades) {
       alpha = min_alpha;
+    }
 
-    if(!isDefined(hud_array[i].debug_hudelem))
+    if(!isDefined(hud_array[i].debug_hudelem)) {
       hud_array[i] fadeovertime(0.1);
+    }
 
     hud_array[i].alpha = alpha;
   }
-
 }
 
 hud_selector(x, y) {
-  if(isDefined(level.hud_selector))
+  if(isDefined(level.hud_selector)) {
     level thread hud_selector_fade_out();
+  }
 
   level.menu_cursor.alpha = 0;
   level.hud_selector = set_hudelem(undefined, x - 10, y, 1);
@@ -418,15 +446,17 @@ hud_selector(x, y) {
 }
 
 hud_selector_fade_out(time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 0.25;
+  }
 
   level.menu_cursor.alpha = 0.5;
   hud = level.hud_selector;
   level.hud_selector = undefined;
 
-  if(!isDefined(hud.debug_hudelem))
+  if(!isDefined(hud.debug_hudelem)) {
     hud fadeovertime(time);
+  }
 
   hud.alpha = 0;
   wait(time + 0.1);
@@ -441,13 +471,15 @@ selection_error(msg, x, y) {
   error_hud = set_hudelem(msg, x + 125, y, 1);
   error_hud.color = (1, 0, 0);
 
-  if(!isDefined(hud.debug_hudelem))
+  if(!isDefined(hud.debug_hudelem)) {
     hud fadeovertime(3);
+  }
 
   hud.alpha = 0;
 
-  if(!isDefined(error_hud.debug_hudelem))
+  if(!isDefined(error_hud.debug_hudelem)) {
     error_hud fadeovertime(3);
+  }
 
   error_hud.alpha = 0;
   wait 3.1;
@@ -461,8 +493,9 @@ hud_font_scaler(mult) {
   self endon("stop_fontscaler");
   og_scale = self.og_scale;
 
-  if(!isDefined(mult))
+  if(!isDefined(mult)) {
     mult = 1.5;
+  }
 
   self.fontscale = og_scale * mult;
   dif = og_scale - self.fontscale;
@@ -472,7 +505,6 @@ hud_font_scaler(mult) {
     self.fontscale = self.fontscale + dif;
     wait 0.05;
   }
-
 }
 
 menu_cursor() {
@@ -485,11 +517,13 @@ menu_cursor() {
 }
 
 new_hud(hud_name, msg, x, y, scale) {
-  if(!isDefined(level.hud_array))
+  if(!isDefined(level.hud_array)) {
     level.hud_array = [];
+  }
 
-  if(!isDefined(level.hud_array[hud_name]))
+  if(!isDefined(level.hud_array[hud_name])) {
     level.hud_array[hud_name] = [];
+  }
 
   hud = set_hudelem(msg, x, y, scale);
   level.hud_array[hud_name][level.hud_array[hud_name].size] = hud;
@@ -502,51 +536,58 @@ remove_hud(hud_name) {
   }
   huds = level.hud_array[hud_name];
 
-  for(i = 0; i < huds.size; i++)
+  for(i = 0; i < huds.size; i++) {
     destroy_hud(huds[i]);
+  }
 
   level.hud_array[hud_name] = undefined;
 }
 
 destroy_hud(hud) {
-  if(isDefined(hud))
+  if(isDefined(hud)) {
     hud destroy();
+  }
 }
 
 set_menus_pos_by_num(hud_array, num, x, y, space, min_alpha, num_of_fades) {
-  if(!isDefined(min_alpha))
+  if(!isDefined(min_alpha)) {
     min_alpha = 0.1;
+  }
 
-  if(!isDefined(num_of_fades))
+  if(!isDefined(num_of_fades)) {
     num_of_fades = 3;
+  }
 
   for(i = 0; i < hud_array.size; i++) {
     temp = i - num;
     hud_array[i].y = y + temp * space;
 
-    if(temp < 0)
+    if(temp < 0) {
       temp = temp * -1;
+    }
 
     alpha = 1 / (temp + 1);
 
-    if(alpha < 1 / num_of_fades)
+    if(alpha < 1 / num_of_fades) {
       alpha = min_alpha;
+    }
 
     hud_array[i].alpha = alpha;
   }
-
 }
 
 popup_box(x, y, width, height, time, color, alpha) {
-  if(!isDefined(alpha))
+  if(!isDefined(alpha)) {
     alpha = 0.5;
+  }
 
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = vectorscale((0, 0, 1), 0.5);
+  }
 
-  if(isDefined(level.player))
+  if(isDefined(level.player)) {
     hud = newclienthudelem(level.player);
-  else {
+  } else {
     hud = newdebughudelem();
     hud.debug_hudelem = 1;
   }
@@ -560,9 +601,9 @@ popup_box(x, y, width, height, time, color, alpha) {
   hud.alpha = alpha;
   hud.color = color;
 
-  if(isDefined(level.player))
+  if(isDefined(level.player)) {
     hud.background = newclienthudelem(level.player);
-  else {
+  } else {
     hud.background = newdebughudelem();
     hud.debug_hudelem = 1;
   }
@@ -588,11 +629,13 @@ destroy_popup() {
   self scaleovertime(0.25, 0, 0);
   wait 0.1;
 
-  if(isDefined(self.background))
+  if(isDefined(self.background)) {
     self.background destroy();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self destroy();
+  }
 }
 
 dialog_text_box(dialog_msg, dialog_msg2, word_length) {
@@ -664,8 +707,9 @@ dialog_text_box_input(cursor_x, cursor_y, word_length) {
     } else if(button == "backspace" || button == "del") {
       new_word = "";
 
-      for(i = 0; i < word.size - 1; i++)
+      for(i = 0; i < word.size - 1; i++) {
         new_word = new_word + word[i];
+      }
 
       word = new_word;
     } else if(word.size < word_length)
@@ -674,8 +718,9 @@ dialog_text_box_input(cursor_x, cursor_y, word_length) {
     hud_word settext(word);
     x = cursor_x;
 
-    for(i = 0; i < word.size; i++)
+    for(i = 0; i < word.size; i++) {
       x = x + get_letter_space(word[i]);
+    }
 
     level.dialog_box_cursor.x = x;
     wait 0.05;
@@ -748,32 +793,34 @@ dialog_text_box_cursor() {
     level.dialog_box_cursor.alpha = 1;
     wait 0.5;
   }
-
 }
 
 get_letter_space(letter) {
-  if(letter == "m" || letter == "w" || letter == "_")
+  if(letter == "m" || letter == "w" || letter == "_") {
     space = 10;
-  else if(letter == "e" || letter == "h" || letter == "u" || letter == "v" || letter == "x" || letter == "o")
+  } else if(letter == "e" || letter == "h" || letter == "u" || letter == "v" || letter == "x" || letter == "o") {
     space = 7;
-  else if(letter == "f" || letter == "r" || letter == "t")
+  } else if(letter == "f" || letter == "r" || letter == "t") {
     space = 5;
-  else if(letter == "i" || letter == "l")
+  } else if(letter == "i" || letter == "l") {
     space = 4;
-  else if(letter == "j")
+  } else if(letter == "j") {
     space = 3;
-  else
+  } else {
     space = 6;
+  }
 
   return space;
 }
 
 add_universal_button(button_group, name) {
-  if(!isDefined(level.u_buttons[button_group]))
+  if(!isDefined(level.u_buttons[button_group])) {
     level.u_buttons[button_group] = [];
+  }
 
-  if(array_check_for_dupes(level.u_buttons[button_group], name))
+  if(array_check_for_dupes(level.u_buttons[button_group], name)) {
     level.u_buttons[button_group][level.u_buttons[button_group].size] = name;
+  }
 }
 
 clear_universal_buttons(button_group) {
@@ -783,8 +830,9 @@ clear_universal_buttons(button_group) {
 universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_button) {
   level endon(end_on);
 
-  if(!isDefined(use_attackbutton))
+  if(!isDefined(use_attackbutton)) {
     use_attackbutton = 0;
+  }
 
   notify_name = button_group + "_button_pressed";
   buttons = level.u_buttons[button_group];
@@ -820,7 +868,6 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
 
     wait 0.05;
   }
-
 }
 
 disable_buttons(button_group) {
@@ -850,8 +897,9 @@ any_button_hit(button_hit, type) {
     buttons = level.buttons;
 
   for(i = 0; i < buttons.size; i++) {
-    if(button_hit == buttons[i])
+    if(button_hit == buttons[i]) {
       return true;
+    }
   }
 
   return false;

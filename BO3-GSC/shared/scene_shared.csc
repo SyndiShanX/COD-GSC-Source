@@ -351,7 +351,6 @@ class csceneobject: cscriptbundleobjectbase {
     }
     return self;
   }
-
 }
 
 class cscene: cscriptbundlebase {
@@ -434,9 +433,7 @@ class cscene: cscriptbundlebase {
       if(isDefined(getlocalplayer(clientnum))) {
         a_ents[clientnum] = [];
         foreach(o_obj in _a_objects) {
-          ent = [
-            [o_obj]
-          ] - > get_ent(clientnum);
+          ent = [[o_obj]] - > get_ent(clientnum);
           if(isDefined(o_obj._s.name)) {
             a_ents[clientnum][o_obj._s.name] = ent;
             continue;
@@ -671,9 +668,7 @@ class cscene: cscriptbundlebase {
       foreach(str_name, e_ent in arraycopy(a_ents)) {
         foreach(i, s_obj in arraycopy(a_objs)) {
           if(s_obj.name === (isDefined(str_name) ? "" + str_name : "")) {
-            cscriptbundlebase::add_object([
-              [new csceneobject()]
-            ] - > first_init(s_obj, self, e_ent, _e_root.localclientnum));
+            cscriptbundlebase::add_object([[new csceneobject()]] - > first_init(s_obj, self, e_ent, _e_root.localclientnum));
             arrayremoveindex(a_ents, str_name);
             arrayremoveindex(a_objs, i);
             break;
@@ -706,8 +701,8 @@ function player_scene_animation_skip(localclientnum, oldval, newval, bnewent, bi
 
 function player_scene_skip_completed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   flushsubtitles(localclientnum);
-  setdvar("r_graphicContentBlur", 0);
-  setdvar("r_makeDark_enable", 0);
+  setDvar("r_graphicContentBlur", 0);
+  setDvar("r_makeDark_enable", 0);
 }
 
 function get_existing_ent(clientnum, str_name) {

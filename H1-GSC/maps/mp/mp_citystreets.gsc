@@ -14,7 +14,7 @@ main() {
   game["defenders"] = "allies";
   game["allies_soldiertype"] = "desert";
   game["axis_soldiertype"] = "desert";
-  setdvar("compassmaxrange", "2000");
+  setDvar("compassmaxrange", "2000");
   maps\mp\_explosive_barrels::main();
   thread misc_rotate_ceilingfans();
   level.oldschoolfxtype = "bright";

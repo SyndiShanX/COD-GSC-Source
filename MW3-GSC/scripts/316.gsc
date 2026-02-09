@@ -13,9 +13,8 @@ main() {
   precacheshader("black");
   precacheshader("white");
 
-  if(getdvar("introscreen") == "") {
-    setdvar("introscreen", "1");
-
+  if(getDvar("introscreen") == "") {
+    setDvar("introscreen", "1");
   }
   if(isDefined(level._id_1D95)) {
     return;
@@ -114,7 +113,6 @@ _id_1D98(var_0, var_1, var_2) {
 _id_1D99(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = 1.5;
-
   }
   var_4 = newhudelem();
   var_4.x = 0;
@@ -135,7 +133,6 @@ _id_1D99(var_0, var_1, var_2, var_3) {
 
   if(var_2 > 0) {
     var_4 fadeovertime(var_2);
-
   }
   var_4.alpha = 0;
   wait(var_2);
@@ -148,7 +145,6 @@ _id_1D9A(var_0) {
 
   if(level.console) {
     var_2 = var_2 - 60;
-
   }
   level._id_1D9B[var_1] = newhudelem();
   level._id_1D9B[var_1].x = 0;
@@ -226,21 +222,17 @@ _id_1D9D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_0)) {
     _id_1D9A(var_0);
-
   }
   if(isDefined(var_4)) {
     wait(var_4);
   } else {
     wait 2;
-
   }
   if(isDefined(var_1)) {
     _id_1D9A(var_1);
-
   }
   if(isDefined(var_2)) {
     _id_1D9A(var_2);
-
   }
   if(isDefined(var_3)) {
     if(isDefined(var_5)) {
@@ -252,7 +244,6 @@ _id_1D9D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_3)) {
     _id_1D9A(var_3);
-
   }
   level notify("finished final intro screen fadein");
 
@@ -260,7 +251,6 @@ _id_1D9D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     wait(var_6);
   } else {
     wait 3;
-
   }
   level._id_1D9E fadeovertime(1.5);
   level._id_1D9E.alpha = 0;
@@ -278,7 +268,6 @@ _id_1D9F(var_0, var_1, var_2, var_3) {
     level._id_1DA0 = 0;
   } else {
     level._id_1DA0++;
-
   }
   var_4 = _id_1DA1();
   var_5 = newhudelem();
@@ -446,17 +435,14 @@ _id_1DAE() {
 
   if(!getdvarint("newintro")) {
     var_0["roadkill"] = 1;
-
   }
   var_1 = isDefined(level._id_1DAF);
 
   if(!isDefined(var_0[_id_1DB8()])) {
     return 0;
-
   }
   if(!isDefined(level._id_1DB0)) {
     thread _id_1DB5();
-
   }
   thread _id_1DB3();
   thread _id_1DB4();
@@ -500,7 +486,6 @@ _id_1DAE() {
     var_9.angles = (0, level._id_1DAF[1], 0);
   } else {
     var_9.angles = level.player.angles;
-
   }
   level.player playerlinkto(var_9, undefined, 1, 0, 0, 0, 0);
   var_9.angles = (var_9.angles[0] + 89, var_9.angles[1], 0);
@@ -513,11 +498,9 @@ _id_1DAE() {
     var_9 rotateto(level._id_1DAF, 0.5, 0.3, 0.2);
   } else {
     var_9 rotateto((var_9.angles[0] - 89, var_9.angles[1], 0), 0.5, 0.3, 0.2);
-
   }
   if(!var_6) {
     savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
-
   }
   wait 0.5;
   common_scripts\utility::flag_set("pullup_weapon");
@@ -555,7 +538,6 @@ _id_1DB5() {
 
   if(!isDefined(level._id_1DB6)) {
     setsaveddvar("compass", 1);
-
   }
   setsaveddvar("ammoCounterHide", "0");
   setsaveddvar("actionSlotsHide", "0");
@@ -567,7 +549,6 @@ _id_1DB7(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = 0.25;
-
   }
   var_3 = var_2 - var_1;
   var_4 = var_0 * 20;
@@ -585,7 +566,6 @@ _id_1DB7(var_0, var_1) {
 _id_1DB8() {
   if(isDefined(level._id_1DB9)) {
     return level._id_1DB9;
-
   }
   return level.script;
 }

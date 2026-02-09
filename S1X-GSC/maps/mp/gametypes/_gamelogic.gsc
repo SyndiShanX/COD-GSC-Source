@@ -302,7 +302,6 @@ updateGameEvents() {
         level.forfeitInProgress = undefined;
         level notify("abort_forfeit");
       }
-
     } else if(level.teamBased) {
       if(level.teamCount["allies"] < 1 && level.teamCount["axis"] > 0 && game["state"] == "playing") {
         thread onForfeit("axis");
@@ -981,7 +980,6 @@ setXenonRanks(winner) {
     if(!isDefined(player.score) || !isDefined(player.pers["team"])) {
       continue;
     }
-
   }
 
   for(i = 0; i < players.size; i++) {
@@ -1517,7 +1515,7 @@ Callback_StartGameType() {
 
   level.intermission = false;
 
-  SetDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
 
   if(!isDefined(game["gamestarted"])) {
     game["clientid"] = 0;
@@ -1826,13 +1824,13 @@ Callback_StartGameType() {
     }
   }
 
-  SetDvar("ui_scorelimit", 0);
-  SetDvar("ui_allow_teamchange", 1);
+  setDvar("ui_scorelimit", 0);
+  setDvar("ui_allow_teamchange", 1);
 
   if(getGametypeNumLives()) {
-    setdvar("g_deadChat", 0);
+    setDvar("g_deadChat", 0);
   } else {
-    setdvar("g_deadChat", 1);
+    setDvar("g_deadChat", 1);
   }
 
   waveDelay = getDvarFloat("scr_" + level.gameType + "_waverespawndelay");
@@ -1964,10 +1962,10 @@ updateUIScoreLimit() {
     level waittill_either("update_scorelimit", "update_winlimit");
 
     if(!isRoundBased() || !isObjectiveBased()) {
-      SetDvar("ui_scorelimit", getWatchedDvar("scorelimit"));
+      setDvar("ui_scorelimit", getWatchedDvar("scorelimit"));
       thread checkScoreLimit();
     } else {
-      SetDvar("ui_scorelimit", getWatchedDvar("winlimit"));
+      setDvar("ui_scorelimit", getWatchedDvar("winlimit"));
     }
   }
 }
@@ -2101,11 +2099,11 @@ startGame() {
   level.timerStopped = false;
   level.timerStoppedForGameMode = false;
 
-  SetDvar("ui_inprematch", 1);
+  setDvar("ui_inprematch", 1);
   prematchPeriod();
   gameFlagSet("prematch_done");
   level notify("prematch_over");
-  SetDvar("ui_inprematch", 0);
+  setDvar("ui_inprematch", 0);
 
   level.prematch_done_time = GetTime();
 
@@ -2329,7 +2327,7 @@ freezeAllPlayers(delay, resetFov) {
 }
 
 endGameOvertime(winner, endReasonText) {
-  SetDvar("bg_compassShowEnemies", 0);
+  setDvar("bg_compassShowEnemies", 0);
 
   freezeAllPlayers(1.0, true);
 
@@ -2408,12 +2406,12 @@ endGameOvertime(winner, endReasonText) {
   game["status"] = winner;
   level notify("restarting");
   game["state"] = "playing";
-  SetDvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   map_restart(true);
 }
 
 endGameHalfTime(endReasonText) {
-  SetDvar("bg_compassShowEnemies", 0);
+  setDvar("bg_compassShowEnemies", 0);
 
   winner = "halftime";
 
@@ -2491,7 +2489,7 @@ endGameHalfTime(endReasonText) {
   game["status"] = "halftime";
   level notify("restarting");
   game["state"] = "playing";
-  SetDvar("ui_game_state", game["state"]);
+  setDvar("ui_game_state", game["state"]);
   map_restart(true);
 }
 
@@ -2535,7 +2533,7 @@ endGame(winner, endReasonText, nukeDetonated) {
   }
 
   game["state"] = "postgame";
-  SetDvar("ui_game_state", "postgame");
+  setDvar("ui_game_state", "postgame");
 
   level.gameEndTime = getTime();
   level.gameEnded = true;
@@ -2603,7 +2601,7 @@ endGame(winner, endReasonText, nukeDetonated) {
 
   setDvar("g_deadChat", 1);
   setDvar("ui_allow_teamchange", 0);
-  SetDvar("bg_compassShowEnemies", 0);
+  setDvar("bg_compassShowEnemies", 0);
 
   freezeAllPlayers(1.0, true);
 
@@ -2633,7 +2631,7 @@ endGame(winner, endReasonText, nukeDetonated) {
 
       level notify("restarting");
       game["state"] = "playing";
-      SetDvar("ui_game_state", "playing");
+      setDvar("ui_game_state", "playing");
       map_restart(true);
       return;
     }
@@ -2885,7 +2883,7 @@ endGame(winner, endReasonText, nukeDetonated) {
 
   if(isDefined(level.isHorde) && level.isHorde) {
     if(isDefined(level.zombiesCompleted) && level.zombiesCompleted) {
-      SetDvar("cg_drawCrosshair", true);
+      setDvar("cg_drawCrosshair", true);
     }
   }
 
@@ -3032,7 +3030,7 @@ trackLeaderBoardDeathStats(sWeapon, sMeansOfDeath) {
 }
 
 trackAttackerLeaderBoardDeathStats(sWeapon, sMeansOfDeath, eInflictor) {
-  if(isDefined(self) && isplayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     if(sMeansOfDeath != "MOD_FALLING") {
       if(isMeleeMOD(sMeansOfDeath) && IsSubStr(sWeapon, "tactical")) {
         return;
@@ -3055,7 +3053,6 @@ trackAttackerLeaderBoardDeathStats(sWeapon, sMeansOfDeath, eInflictor) {
       if(adsRatio < 0.2) {
         self thread threadedSetWeaponStatByName(sWeapon, 1, "hipfirekills");
       }
-
     }
 
     if(sMeansOfDeath == "MOD_HEAD_SHOT") {
@@ -3246,7 +3243,6 @@ checkForPersonalBests() {
     if(isDefined(player.pers["denied"])) {
       player maps\mp\_matchdata::logKillsDenied();
     }
-
   }
 }
 

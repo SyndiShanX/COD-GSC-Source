@@ -961,7 +961,7 @@ killplayerfromcrate_fastvelocitypush() {
   self endon("death");
   for(;;) {
     self waittill("player_pushed", var_0, var_1);
-    if(isplayer(var_0) || isagent(var_0)) {
+    if(isPlayer(var_0) || isagent(var_0)) {
       if(var_1[2] < -20) {
         killplayerfromcrate_dodamage(var_0);
       }
@@ -985,7 +985,7 @@ cleanup_crate_capture() {
   }
 
   foreach(var_2 in var_0) {
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
 
@@ -2126,7 +2126,7 @@ killstreakcratethink(var_0) {
   thread cratewatchgameover();
   for(;;) {
     self waittill("captured", var_4);
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       var_4 setclientomnvar("ui_securing", 0);
       var_4.ui_securing = undefined;
     }
@@ -2225,7 +2225,7 @@ killstreakbombcratethink(var_0) {
   }
 
   self waittill("captured", var_4);
-  if(isplayer(var_4)) {
+  if(isPlayer(var_4)) {
     var_4 setclientomnvar("ui_securing", 0);
     var_4.ui_securing = undefined;
   }

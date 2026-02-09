@@ -859,13 +859,13 @@ crateactivate(hacker) {
       objective_icon(enemycrateobjid, "compass_supply_drop_red");
       objective_state(enemycrateobjid, "active");
 
-      if(isplayer(self.owner))
+      if(isPlayer(self.owner))
         objective_setinvisibletoplayer(enemycrateobjid, self.owner);
 
       self.enemyobjid[self.enemyobjid.size] = enemycrateobjid;
     }
 
-    if(isplayer(self.owner))
+    if(isPlayer(self.owner))
       objective_setvisibletoplayer(crateobjid, self.owner);
 
     if(isDefined(self.hacker)) {
@@ -883,7 +883,7 @@ crateactivate(hacker) {
   if(!self.visibletoall && isDefined(icon))
     self thread maps\mp\_entityheadicons::setentityheadicon(self.team, self, level.crate_headicon_offset, icon, 1);
 
-  if(isDefined(self.owner) && isplayer(self.owner) && self.owner is_bot())
+  if(isDefined(self.owner) && isPlayer(self.owner) && self.owner is_bot())
     self.owner notify("bot_crate_landed", self);
 
   if(isDefined(self.owner))
@@ -975,7 +975,7 @@ cratespawn(category, owner, team, drop_origin, drop_angle) {
   crate.visibletoall = 0;
   crate setteam(team);
 
-  if(isplayer(owner))
+  if(isPlayer(owner))
     crate setowner(owner);
 
   crate.script_noteworthy = "care_package";
@@ -1389,7 +1389,7 @@ cratedroptogroundtrace(start) {
   end = start + vectorscale((0, 0, -1), 8000.0);
   trace = bulletTrace(start, end, 1, self, 1, 1);
 
-  if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
+  if(isDefined(trace["entity"]) && isPlayer(trace["entity"]) && isalive(trace["entity"])) {
     player = trace["entity"];
 
     if(player.sessionstate != "playing") {
@@ -1507,7 +1507,7 @@ crateusethink() {
 }
 
 givecratecapturemedal(crate, capturer) {
-  if(isDefined(crate.owner) && isplayer(crate.owner)) {
+  if(isDefined(crate.owner) && isPlayer(crate.owner)) {
     if(level.teambased) {
       if(capturer.team != crate.owner.team) {
         crate.owner playlocalsound("mpl_crate_enemy_steals");
@@ -1719,7 +1719,7 @@ spawn_helicopter(owner, team, origin, angles, model, targetname, killstreak_id) 
   chopper = spawnhelicopter(owner, origin, angles, model, targetname);
 
   if(!isDefined(chopper)) {
-    if(isplayer(owner))
+    if(isPlayer(owner))
       maps\mp\killstreaks\_killstreakrules::killstreakstop("supply_drop_mp", team, killstreak_id);
 
     return undefined;
@@ -1742,7 +1742,7 @@ spawn_helicopter(owner, team, origin, angles, model, targetname, killstreak_id) 
   chopper setdrawinfrared(1);
   target_set(chopper, vectorscale((0, 0, -1), 25.0));
 
-  if(isplayer(owner))
+  if(isPlayer(owner))
     chopper thread refcountdecchopper(team, killstreak_id);
 
   chopper thread helidestroyed();
@@ -1918,7 +1918,7 @@ helidelivercrate(origin, weaponname, owner, team, killstreak_id, package_content
   chopper setteam(team);
   chopper.numflares = 0;
 
-  if(isplayer(owner))
+  if(isPlayer(owner))
     chopper setowner(owner);
 
   killcament = spawn("script_model", chopper.origin + vectorscale((0, 0, 1), 800.0));
@@ -1926,7 +1926,7 @@ helidelivercrate(origin, weaponname, owner, team, killstreak_id, package_content
   killcament.starttime = gettime();
   killcament linkto(chopper);
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     target_setturretaquire(self, 0);
     chopper thread samturretwatcher(drop_origin);
   }
@@ -2136,11 +2136,11 @@ resetreconmodelonevent(eventname, owner) {
 }
 
 supply_drop_dev_gui() {
-  setdvar("scr_supply_drop_gui", "");
+  setDvar("scr_supply_drop_gui", "");
 
   while(true) {
     wait 0.5;
-    devgui_string = getdvar(#"scr_supply_drop_gui");
+    devgui_string = getDvar(#"scr_supply_drop_gui");
 
     switch (devgui_string) {
       case "ammo":

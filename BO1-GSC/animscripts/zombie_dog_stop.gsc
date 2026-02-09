@@ -27,7 +27,6 @@ main() {
     animscripts\zombie_shared::DoNoteTracks("dog_idle", ::dogIdleNotetracks);
   }
 }
-
 dogIdleNotetracks(note) {
   if(note == "breathe_fire") {
     if(isDefined(level._effect["dog_breath"])) {
@@ -39,7 +38,6 @@ dogIdleNotetracks(note) {
     }
   }
 }
-
 isFacingEnemy(toleranceCosAngle) {
   assert(isDefined(self.enemy));
   vecToEnemy = self.enemy.origin - self.origin;
@@ -50,7 +48,6 @@ isFacingEnemy(toleranceCosAngle) {
   forward = anglesToForward(self.angles);
   return ((forward[0] * vecToEnemy[0]) + (forward[1] * vecToEnemy[1])) / distToEnemy > toleranceCosAngle;
 }
-
 randomAttackIdle() {
   if(isFacingEnemy(-0.5)) {
     self OrientMode("face current");
@@ -58,9 +55,9 @@ randomAttackIdle() {
     self OrientMode("face enemy");
   }
   self ClearAnim(anim.dogAnims[self.animSet].attack["attackidle_knob"], 0.1);
-  if(isDefined(self.enemy) && IsPlayer(self.enemy) && IsAlive(self.enemy)) {
+  if(isDefined(self.enemy) && isPlayer(self.enemy) && IsAlive(self.enemy)) {
     range = GetDvarFloat("ai_meleeRange");
-    distance_ok = distanceSquared(self.origin, self.enemy.origin) < (range * range);
+    distance_ok = DistanceSquared(self.origin, self.enemy.origin) < (range * range);
     if(distance_ok == true) {
       self notify("dog_combat");
       self animscripts\zombie_dog_combat::meleeBiteAttackPlayer(self.enemy);
@@ -82,7 +79,7 @@ randomAttackIdle() {
       barkChance = 85;
     }
   }
-  rand = randomInt(100);
+  rand = RandomInt(100);
   if(rand < idleChance) {
     self SetFlaggedAnimRestart("dog_idle", anim.dogAnims[self.animSet].combatIdle["attackidle_growl"], 1, 0.2, self.animplaybackrate);
   } else if(rand < barkChance) {
@@ -91,11 +88,9 @@ randomAttackIdle() {
     self SetFlaggedAnimRestart("dog_idle", anim.dogAnims[self.animSet].combatIdle["attackidle_growl"], 1, 0.2, self.animplaybackrate);
   }
 }
-
 shouldAttackIdle() {
-  return (isDefined(self.enemy) && IsAlive(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 1000000);
+  return (isDefined(self.enemy) && IsAlive(self.enemy) && DistanceSquared(self.origin, self.enemy.origin) < 1000000);
 }
-
 should_growl() {
   if(isDefined(self.script_growl)) {
     return true;
@@ -105,7 +100,6 @@ should_growl() {
   }
   return !(self cansee(self.enemy));
 }
-
 lookAtTarget(lookPoseSet) {
   self endon("killanimscript");
   self endon("stop tracking");
@@ -124,7 +118,6 @@ lookAtTarget(lookPoseSet) {
   self setAnimLookWeight(1, 0.2);
   self trackLoop(anim.dogAnims[self.animSet].lookKnob[2], anim.dogAnims[self.animSet].lookKnob[4], anim.dogAnims[self.animSet].lookKnob[6], anim.dogAnims[self.animSet].lookKnob[8]);
 }
-
 trackLoop(look2, look4, look6, look8) {
   players = GetPlayers();
   deltaChangePerFrame = 5;
@@ -163,7 +156,7 @@ trackLoop(look2, look4, look6, look8) {
     }
     if(!isDefined(lookPos)) {
       assert(!isDefined(self.lookEnt));
-      if(isDefined(self.node) && self.node.type == "Guard" && distanceSquared(self.origin, self.node.origin) < 16) {
+      if(isDefined(self.node) && self.node.type == "Guard" && DistanceSquared(self.origin, self.node.origin) < 16) {
         yawDelta = AngleClamp180(self.angles[1] - self.node.angles[1]);
         pitchDelta = 0;
       } else {
@@ -203,11 +196,13 @@ trackLoop(look2, look4, look6, look8) {
       firstFrame = false;
     } else {
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > maxYawDeltaChange)
+      if(abs(yawDeltaChange) > maxYawDeltaChange) {
         yawDelta = prevYawDelta + maxYawDeltaChange * sign(yawDeltaChange);
+      }
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > maxPitchDeltaChange)
+      if(abs(pitchDeltaChange) > maxPitchDeltaChange) {
         pitchDelta = prevPitchDelta + maxPitchDeltaChange * sign(pitchDeltaChange);
+      }
     }
     prevYawDelta = yawDelta;
     prevPitchDelta = pitchDelta;
@@ -240,7 +235,6 @@ trackLoop(look2, look4, look6, look8) {
     }
   }
 }
-
 setAnimLookWeight(goalweight, goaltime) {
   if(!isDefined(goaltime) || goaltime <= 0) {
     self.a.lookweight = goalweight;
@@ -255,7 +249,6 @@ setAnimLookWeight(goalweight, goaltime) {
   }
   self.a.lookweight_t = 0;
 }
-
 incrAnimLookWeight() {
   if(self.a.lookweight_t < self.a.lookweight_transframes) {
     self.a.lookweight_t++;
@@ -263,7 +256,6 @@ incrAnimLookWeight() {
     self.a.lookweight = self.a.lookweight_start * (1 - t) + self.a.lookweight_end * t;
   }
 }
-
 getPitchToLookEntOrPos() {
   pitch = getPitchToLookEntOrPos();
   if(self.a.script == "cover_crouch" && isDefined(self.a.coverMode) && self.a.coverMode == "lean") {
@@ -271,7 +263,6 @@ getPitchToLookEntOrPos() {
   }
   return pitch;
 }
-
 getLookYawToPoint(point) {
   yaw = GetYawToSpot(point);
   dist = distance(self.origin, point);
@@ -282,7 +273,6 @@ getLookYawToPoint(point) {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-
 GetLookAtPos() {
   return self GetShootAtPos();
 }

@@ -58,12 +58,10 @@ main() {
   init_pentagon_client_flags();
   level thread play_starting_vox();
 }
-
 init_pentagon_client_flags() {
   level.ZOMBIE_PENTAGON_PLAYER_PORTALFX = 5;
   level.ZOMBIE_PENTAGON_PLAYER_PORTALFX_COOL = 6;
 }
-
 delete_in_createfx() {
   if(getDvar(#"createfx") != "") {
     exterior_goals = getstructarray("exterior_goal", "targetname");
@@ -74,7 +72,7 @@ delete_in_createfx() {
       targets = getEntArray(exterior_goals[i].target, "targetname");
       for(j = 0; j < targets.size; j++) {
         if(isDefined(targets[j].script_parameters) && targets[j].script_parameters == "repair_board") {
-          unbroken_section = getEnt(targets[j].target, "targetname");
+          unbroken_section = GetEnt(targets[j].target, "targetname");
           if(isDefined(unbroken_section)) {
             unbroken_section self_delete();
           }
@@ -85,7 +83,6 @@ delete_in_createfx() {
     return;
   }
 }
-
 pentagon_zone_init() {
   flag_init("always_on");
   flag_set("always_on");
@@ -107,14 +104,12 @@ pentagon_zone_init() {
   level.zones["conference_level1"].num_spawners = 4;
   level.zones["hallway_level1"].num_spawners = 4;
 }
-
 enable_zone_elevators_init() {
-  elev_zone_trig = getEnt("elevator1_down_riders", "targetname");
+  elev_zone_trig = GetEnt("elevator1_down_riders", "targetname");
   elev_zone_trig thread maps\zombie_pentagon_teleporter::enable_zone_portals();
-  elev_zone_trig2 = getEnt("elevator2_down_riders", "targetname");
+  elev_zone_trig2 = GetEnt("elevator2_down_riders", "targetname");
   elev_zone_trig2 thread maps\zombie_pentagon_teleporter::enable_zone_portals();
 }
-
 include_weapons() {
   include_weapon("frag_grenade_zm", false, true);
   include_weapon("claymore_zm", false, true);
@@ -192,7 +187,6 @@ include_weapons() {
   precacheItem("explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-
 include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -204,9 +198,8 @@ include_powerups() {
   PreCacheItem("minigun_zm");
   include_powerup("minigun");
 }
-
 electric_switch() {
-  trig = getEnt("use_elec_switch", "targetname");
+  trig = getent("use_elec_switch", "targetname");
   trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
   trig setcursorhint("HINT_NOICON");
   level thread wait_for_power();
@@ -215,9 +208,8 @@ electric_switch() {
   flag_set("power_on");
   Objective_State(8, "done");
 }
-
 wait_for_power() {
-  master_switch = getEnt("elec_switch", "targetname");
+  master_switch = getent("elec_switch", "targetname");
   master_switch notsolid();
   flag_wait("power_on");
   exploder(3500);
@@ -239,27 +231,23 @@ wait_for_power() {
   master_switch playSound("zmb_turn_on");
   level thread maps\zombie_pentagon_amb::play_pentagon_announcer_vox("zmb_vox_pentann_poweron");
 }
-
 init_sounds() {
   maps\_zombiemode_utility::add_sound("wood_door_fall", "zmb_wooden_door_fall");
   maps\_zombiemode_utility::add_sound("window_grate", "zmb_window_grate_slide");
   maps\_zombiemode_utility::add_sound("lab_door", "zmb_lab_door_slide");
   maps\_zombiemode_utility::add_sound("lab_door_swing", "zmb_door_wood_open");
 }
-
 quad_traverse_death_fx() {
   self endon("quad_end_traverse_anim");
   self waittill("death");
   playFX(level._effect["quad_grnd_dust_spwnr"], self.origin);
 }
-
 zombie_pathing_init() {
   cleanup_trig = getEntArray("zombie_movement_cleanup", "targetname");
   for(i = 0; i < cleanup_trig.size; i++) {
     cleanup_trig[i] thread zombie_pathing_cleanup();
   }
 }
-
 zombie_pathing_cleanup() {
   while(true) {
     self waittill("trigger", who);
@@ -271,16 +259,14 @@ zombie_pathing_cleanup() {
     }
   }
 }
-
 vision_set_init() {
   level waittill("start_of_round");
   exploder(2000);
   players = getplayers();
   for(i = 0; i < players.size; i++) {
-    players[i] visionSetNaked("zombie_pentagon", 0.5);
+    players[i] VisionSetNaked("zombie_pentagon", 0.5);
   }
 }
-
 change_pentagon_vision() {
   if(flag("thief_round")) {
     return;
@@ -292,7 +278,6 @@ change_pentagon_vision() {
     wait_network_frame();
   }
 }
-
 laststand_bleedout_init() {
   flag_wait("all_players_connected");
   players = get_players();
@@ -303,7 +288,6 @@ laststand_bleedout_init() {
     }
   }
 }
-
 wait_for_laststand_notify() {
   self endon("disconnect");
   while(true) {
@@ -331,7 +315,6 @@ wait_for_laststand_notify() {
     }
   }
 }
-
 bleedout_listener() {
   while(true) {
     self waittill("spawned_spectator");
@@ -340,7 +323,6 @@ bleedout_listener() {
     wait(1);
   }
 }
-
 pentagon_bonfire_init() {
   if(flag("defcon_active") && level.defcon_activated == false) {
     return;
@@ -352,7 +334,7 @@ pentagon_bonfire_init() {
   current_defcon_level = level.defcon_level;
   punch_switches = getEntArray("punch_switch", "targetname");
   signs = getEntArray("defcon_sign", "targetname");
-  pack_door_slam = getEnt("slam_pack_door", "targetname");
+  pack_door_slam = GetEnt("slam_pack_door", "targetname");
   flag_set("bonfire_reset");
   level.defcon_level = 1;
   level notify("pack_room_reset");
@@ -379,7 +361,6 @@ pentagon_bonfire_init() {
   }
   flag_clear("bonfire_reset");
 }
-
 lab_shutters_init() {
   shutters = getEntArray("lab_shutter", "script_noteworthy");
   if(isDefined(shutters)) {
@@ -388,7 +369,6 @@ lab_shutters_init() {
     }
   }
 }
-
 lab_shutters_think() {
   door_pos = self.origin;
   time = 1;
@@ -404,10 +384,10 @@ lab_shutters_think() {
       vector = vector_scale(self.script_vector, scale);
       thief_vector = vector_scale(self.script_vector, .2);
       while(true) {
-        self moveTo(door_pos + vector, time, time * 0.25, time * 0.25);
+        self MoveTo(door_pos + vector, time, time * 0.25, time * 0.25);
         self thread maps\_zombiemode_blockers::door_solid_thread();
         flag_wait("thief_round");
-        self moveTo(door_pos + thief_vector, time, time * 0.25, time * 0.25);
+        self MoveTo(door_pos + thief_vector, time, time * 0.25, time * 0.25);
         self thread maps\_zombiemode_blockers::door_solid_thread();
         while(flag("thief_round")) {
           wait(0.5);
@@ -416,30 +396,26 @@ lab_shutters_think() {
     }
   }
 }
-
 play_starting_vox() {
   flag_wait("all_players_connected");
   level thread maps\zombie_pentagon_amb::play_pentagon_announcer_vox("zmb_vox_pentann_levelstart");
 }
-
 pentagon_brush_lights_init() {
   sbrush_office_ceiling_lights_off = getEntArray("sbrushmodel_interior_office_lights", "targetname");
   if(isDefined(sbrush_office_ceiling_lights_off) && sbrush_office_ceiling_lights_off.size > 0) {
     array_thread(sbrush_office_ceiling_lights_off, ::pentagon_brush_lights);
   }
 }
-
 pentagon_brush_lights() {
   if(!isDefined(self.target)) {
     return;
   }
-  self.off_version = getEnt(self.target, "targetname");
-  self.off_version hide();
+  self.off_version = GetEnt(self.target, "targetname");
+  self.off_version Hide();
   flag_wait("power_on");
-  self hide();
+  self Hide();
   self.off_version Show();
 }
-
 pentagon_precache() {
   PreCacheModel("zombie_zapper_cagelight_red");
   precachemodel("zombie_zapper_cagelight_green");
@@ -475,7 +451,6 @@ pentagon_precache() {
   PreCacheModel("p_zom_pent_defcon_sign_04");
   PreCacheModel("p_zom_pent_defcon_sign_05");
 }
-
 pentagon_exit_level() {
   zombies = GetAiArray("axis");
   for(i = 0; i < zombies.size; i++) {
@@ -486,7 +461,6 @@ pentagon_exit_level() {
     }
   }
 }
-
 pentagon_find_exit_point() {
   self endon("death");
   player = getplayers()[0];
@@ -497,8 +471,8 @@ pentagon_find_exit_point() {
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {
-    dist_zombie = distanceSquared(locs[i].origin, endPos);
-    dist_player = distanceSquared(locs[i].origin, player.origin);
+    dist_zombie = DistanceSquared(locs[i].origin, endPos);
+    dist_player = DistanceSquared(locs[i].origin, player.origin);
     if(dist_zombie < dist_player) {
       dest = i;
       break;

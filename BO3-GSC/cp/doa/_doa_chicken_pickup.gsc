@@ -249,7 +249,7 @@ function function_44ff9baa(player) {
       function_4dd46e10(follow_points, num_follow_points);
     }
     if(isDefined(self.var_947e1f34)) {
-      if(isplayer(self.var_947e1f34)) {
+      if(isPlayer(self.var_947e1f34)) {
         angles = self.var_947e1f34 getplayerangles();
       } else {
         angles = self.var_947e1f34.angles;
@@ -260,7 +260,7 @@ function function_44ff9baa(player) {
       self.is_moving = 0;
       if(distance2dsquared(self.var_947e1f34.origin, follow_points[follow_index]) > (getdvarint("scr_doa_follow_point_spacing", 4 * 4))) {
         follow_pt = self.var_947e1f34.origin;
-        if(isplayer(self.var_947e1f34)) {
+        if(isPlayer(self.var_947e1f34)) {
           if(isDefined(self.var_947e1f34.doa.var_65f7f2a9) && self.var_947e1f34.doa.var_65f7f2a9 || isDefined(self.var_5c667593)) {
             z = getdvarint("scr_doa_chickenZ", 20);
           } else {

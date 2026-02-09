@@ -63,7 +63,7 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     } else if(var_15) {
       if(var_16) {
         if(scripts\cp\utility::is_ricochet_damage()) {
-          if(isplayer(var_1) && isDefined(var_8) && var_8 != "shield") {
+          if(isPlayer(var_1) && isDefined(var_8) && var_8 != "shield") {
             if(isDefined(var_0)) {
               var_1 getrandomarmkillstreak(var_2, var_1.origin - (0, 0, 50), var_1, var_0, var_4);
             } else {
@@ -454,7 +454,7 @@ update_zombie_damage_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   if(!isDefined(level.current_challenge)) {
     return;
   }
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_11 = self[[level.var_4C44]](var_0, var_1, var_2, var_4, var_5, var_7, var_8, var_9, var_10);
 
     if(!scripts\engine\utility::is_true(var_11)) {
@@ -483,7 +483,7 @@ update_performance_zombie_damage(var_0, var_1, var_2) {
   }
   scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "damage_done_on_alien", var_1);
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\cp\cp_gamescore::update_personal_encounter_performance("personal", "damage_done_on_alien", var_1);
   } else if(isDefined(var_0.owner)) {
     var_0.owner scripts\cp\cp_gamescore::update_personal_encounter_performance("personal", "damage_done_on_alien", var_1);
@@ -670,7 +670,7 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       var_17 = "";
 
-      if(isDefined(var_8) && isplayer(var_8)) {
+      if(isDefined(var_8) && isPlayer(var_8)) {
         var_17 = var_8 scripts\cp\utility::getuniqueid();
       }
 
@@ -704,7 +704,7 @@ isfriendlyfire(var_0, var_1) {
     return 0;
   }
 
-  if(!isplayer(var_1) && !isDefined(var_1.team)) {
+  if(!isPlayer(var_1) && !isDefined(var_1.team)) {
     return 0;
   }
 
@@ -726,7 +726,7 @@ finishplayerdamagewrapper(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   if(!isalive(self)) {
     return;
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self finishplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   }
 

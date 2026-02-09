@@ -118,7 +118,7 @@ function function_9350c173() {
   util::waitforallclients();
   wait(5);
   var_57f81ff6 = getdvarint("sys_threadWatchdogTimeoutLive", 30000);
-  setdvar("sys_threadWatchdogTimeout", var_57f81ff6);
+  setDvar("sys_threadWatchdogTimeout", var_57f81ff6);
 }
 
 function autoexec function_d00a98f6() {

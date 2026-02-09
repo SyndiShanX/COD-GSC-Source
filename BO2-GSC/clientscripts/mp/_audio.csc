@@ -108,7 +108,6 @@ soundrandom_thread(localclientnum, randsound) {
 
     if(getdvarint(#"_id_0AEB127D") > 0)
       print3d(randsound.origin, randsound.script_sound, vectorscale((0, 1, 0), 0.8), 1, 3, 45);
-
   }
 }
 
@@ -221,7 +220,6 @@ startsoundloops() {
   } else {
     if(getdvarint(#"_id_0AEB127D") > 0)
       println("*** Client : No looper sounds.");
-
   }
 }
 
@@ -244,7 +242,6 @@ startlineemitters() {
   } else {
     if(getdvarint(#"_id_0AEB127D") > 0)
       println("*** Client : No line emitter sounds.");
-
   }
 }
 
@@ -496,7 +493,6 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
 
           print3d(a_fx_id[i].v["origin"], "single", (1, 1, 1), 1, 1, 100000000);
         }
-
       }
 
       size = a_fx_id.size;
@@ -595,7 +591,6 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
     }
   } else {
     println("^5******* NO FX IN LEVEL");
-
   }
 }
 
@@ -614,7 +609,6 @@ debug_line_emitter() {
     }
 
     wait 0.01;
-
   }
 }
 

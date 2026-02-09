@@ -10,7 +10,7 @@ main() {
   maps\createart\mp_zombie_lab_fog_hdr::main();
   maps\createart\mp_zombie_lab_art::main();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     onreflectionprobecompile();
   }
 
@@ -576,7 +576,7 @@ cg_exploittriggermonitor() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_1 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 
       foreach(var_3 in var_1) {

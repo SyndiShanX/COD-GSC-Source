@@ -102,7 +102,7 @@ function agent_init() {
   if(!isDefined(object) || isDefined(object.stealth)) {
     return false;
   }
-  if(isplayer(object)) {
+  if(isPlayer(object)) {
     object stealth_player::init();
   } else {
     if(isactor(object)) {
@@ -123,7 +123,7 @@ function agent_stop() {
   if(!isDefined(object)) {
     return 0;
   }
-  if(isplayer(object)) {
+  if(isPlayer(object)) {
     return object stealth_player::stop();
   }
   if(isactor(object)) {
@@ -143,7 +143,7 @@ function function_e8434f94() {
   if(!isDefined(object)) {
     return 0;
   }
-  if(isplayer(object)) {
+  if(isPlayer(object)) {
     return object stealth_player::reset();
   }
   if(isactor(object)) {
@@ -195,7 +195,7 @@ function awareness_delta(str_awarenessa, str_awarenessb) {
 function level_wait_notify(waitfor) {
   self notify("level_wait_notify_" + waitfor);
   self endon("level_wait_notify_" + waitfor);
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self endon("disconnect");
   } else {
     self endon("death");
@@ -206,7 +206,7 @@ function level_wait_notify(waitfor) {
 }
 
 function weapon_can_be_reloaded() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   w_weapon = self getcurrentweapon();
   i_clip = self getweaponammoclip(w_weapon);
   i_stock = self getweaponammostock(w_weapon);
@@ -219,7 +219,7 @@ function get_closest_enemy_in_view(distance, fov) {
   cosfov = cos(fov);
   eyepos = self.origin;
   eyeangles = self.angles;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     eyepos = self getEye();
     eyeangles = self getplayerangles();
   } else if(isactor(self)) {

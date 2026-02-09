@@ -197,7 +197,7 @@ function_92f341d0(e_activator, e_volume) {
   if(isalive(self)) {
     self.water_damage = 1;
 
-    if(isplayer(level.s_freeze_trap.activated_by_player)) {
+    if(isPlayer(level.s_freeze_trap.activated_by_player)) {
       level.s_freeze_trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
       level.s_freeze_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }

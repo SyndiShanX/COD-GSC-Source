@@ -170,7 +170,7 @@ watchdamage() {
   for(;;) {
     self waittill("damage", damage, attacker, dir, point, mod, model, tag, part, weapon, flags);
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
     self.damage_debug = damage + " (" + weapon + ")";
@@ -225,7 +225,7 @@ watchforkills() {
   for(;;) {
     self waittill("killed", player);
 
-    if(isplayer(player))
+    if(isPlayer(player))
       continue;
   }
 }
@@ -644,7 +644,6 @@ createkillcams(numkillcams, numrockets) {
 
       if(getdvarintdefault(#"_id_9191CAAA", 0))
         level.straferunkillcams.strafes[i] thread debug_draw_bomb_path(undefined, vectorscale((0, 0, 1), 0.5), 200);
-
     }
   }
 }

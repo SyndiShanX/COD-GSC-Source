@@ -154,7 +154,6 @@ start_exo_ping() {
     self.ping_fx = SpawnLinkedFx(level.exo_ping_vfx_active, self, "J_SpineUpper");
     TriggerFX(self.ping_fx);
   }
-
 }
 
 stop_exo_ping(should_play_fx) {

@@ -113,7 +113,7 @@ dev_cac_init() {
     }
 
     if(reset) {
-      setdvar(#"devgui_dev_cac", "<dev string:x38>");
+      setDvar(#"devgui_dev_cac", "<dev string:x38>");
     }
 
     charmindex = getdvarint(#"hash_158f81eb73a459bd", 0);
@@ -134,14 +134,14 @@ dev_cac_init() {
 dev_cac_camera(on) {
   if(on) {
     self setclientthirdperson(1);
-    setdvar(#"cg_thirdpersonangle", 185);
-    setdvar(#"cg_thirdpersonrange", 138);
-    setdvar(#"cg_fov", 20);
+    setDvar(#"cg_thirdpersonangle", 185);
+    setDvar(#"cg_thirdpersonrange", 138);
+    setDvar(#"cg_fov", 20);
     return;
   }
 
   self setclientthirdperson(0);
-  setdvar(#"cg_fov", getdvarstring(#"cg_fov_default"));
+  setDvar(#"cg_fov", getdvarstring(#"cg_fov_default"));
 }
 
 dev_cac_dpad_think(part_name, cycle_function, tag) {
@@ -325,7 +325,7 @@ dev_cac_overlay_destroy(hud) {
   }
 
   hud destroy();
-  setdvar(#"player_debugsprint", 0);
+  setDvar(#"player_debugsprint", 0);
 }
 
 dev_cac_overlay_create() {

@@ -51,7 +51,7 @@ is_weapon_or_variant_same_as_gadget(weapon, gadget) {
 }
 
 power_gain_event_score(event, eattacker, score, weapon) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -177,7 +177,6 @@ power_gain_event(slot, eattacker, val, source) {
     }
 
     self cpower_print(slot, "<dev string:x5c>" + powertoadd + "<dev string:x68>" + source + "<dev string:x75>" + powerleft);
-
   }
 }
 
@@ -220,7 +219,6 @@ power_loss_event(slot, eattacker, val, source) {
     powerleft = self gadgetpowerchange(slot, powertoremove);
 
     self cpower_print(slot, "<dev string:x86>" + powertoremove + "<dev string:x68>" + source + "<dev string:x75>" + powerleft);
-
   }
 }
 

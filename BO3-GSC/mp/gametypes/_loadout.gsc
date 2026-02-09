@@ -1009,7 +1009,7 @@ function register_perks() {
 }
 
 function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor) {
-  if(!isDefined(victim) || !isDefined(attacker) || !isplayer(attacker)) {
+  if(!isDefined(victim) || !isDefined(attacker) || !isPlayer(attacker)) {
     return damage;
   }
   if(!isDefined(damage) || !isDefined(meansofdeath) || !isDefined(weapon)) {
@@ -1034,8 +1034,8 @@ function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, wea
 function cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
   assert(isDefined(victim));
   assert(isDefined(attacker));
-  assert(isplayer(victim));
-  attacker_is_player = isplayer(attacker);
+  assert(isPlayer(victim));
+  attacker_is_player = isPlayer(attacker);
   if(damage <= 0) {
     return damage;
   }
@@ -1130,7 +1130,7 @@ function isbulletdamage(meansofdeath) {
 }
 
 function isfmjdamage(sweapon, smeansofdeath, attacker) {
-  return isDefined(attacker) && isplayer(attacker) && attacker hasperk("specialty_armorpiercing") && isDefined(smeansofdeath) && isbulletdamage(smeansofdeath);
+  return isDefined(attacker) && isPlayer(attacker) && attacker hasperk("specialty_armorpiercing") && isDefined(smeansofdeath) && isbulletdamage(smeansofdeath);
 }
 
 function isfiredamage(weapon, meansofdeath) {

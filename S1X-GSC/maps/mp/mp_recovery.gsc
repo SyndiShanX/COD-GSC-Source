@@ -620,7 +620,6 @@ side_b_visionset_reset() {
       player revertVisionSetForPlayer(3.0);
       player.safeFromGas = true;
     }
-
   }
 }
 

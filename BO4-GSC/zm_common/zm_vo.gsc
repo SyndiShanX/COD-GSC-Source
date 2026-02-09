@@ -523,7 +523,7 @@ _vo_clear(str_endon) {
     self stopsound(self.str_vo_being_spoken);
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clientfield::set_to_player("isspeaking", 0);
   }
 
@@ -608,7 +608,7 @@ function_45e29f06() {
 }
 
 is_player_speaking(e_player) {
-  if(!isDefined(e_player) && isplayer(self)) {
+  if(!isDefined(e_player) && isPlayer(self)) {
     e_player = self;
   }
 
@@ -620,9 +620,9 @@ is_player_speaking(e_player) {
 }
 
 function_a2bd5a0c(var_cadd3b0c, n_delay = 0, b_wait_if_busy = 0, n_priority = 0, var_34e7887 = 0, var_d7714e4e = 0, var_67fee570 = 0) {
-  assert(isplayer(self), "<dev string:x94>" + "<dev string:xb2>");
+  assert(isPlayer(self), "<dev string:x94>" + "<dev string:xb2>");
 
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -648,7 +648,7 @@ vo_say(str_vo_alias, n_delay = 0, b_wait_if_busy = 0, n_priority = 0, var_34e788
     return 0;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(!zm_utility::is_player_valid(self, 0, var_67fee570, 0) || isDefined(self.dontspeak) && self.dontspeak) {
       return 0;
     }
@@ -756,7 +756,7 @@ function_7e4562d7(var_3505e2ee, var_604e94aa = [], b_wait_if_busy = 0, n_priorit
     foreach(i, n_line in arraycopy(var_a7e5c412)) {
       player = zm_utility::function_828bac1(var_cd5bda0c[n_line][0]);
 
-      if(!isplayer(player)) {
+      if(!isPlayer(player)) {
         arrayremoveindex(var_a7e5c412, i, 1);
       }
     }
@@ -783,7 +783,7 @@ function_7e4562d7(var_3505e2ee, var_604e94aa = [], b_wait_if_busy = 0, n_priorit
     if(isDefined(player)) {
       b_said = 0;
 
-      if(isplayer(player)) {
+      if(isPlayer(player)) {
         b_said = player vo_say(var_cd5bda0c[n_line][1], var_fa74ccf1, b_wait_if_busy, n_priority, var_34e7887);
       }
 

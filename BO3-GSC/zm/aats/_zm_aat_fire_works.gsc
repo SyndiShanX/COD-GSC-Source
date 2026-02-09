@@ -142,7 +142,7 @@ function zombie_death_gib(e_attacker, w_weapon, e_owner) {
   }
   gibserverutils::giblegs(self);
   self dodamage(self.health, self.origin, e_attacker, w_weapon, "torso_upper");
-  if(isDefined(e_owner) && isplayer(e_owner)) {
+  if(isDefined(e_owner) && isPlayer(e_owner)) {
     e_owner zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_FIRE_WORKS");
   }
 }

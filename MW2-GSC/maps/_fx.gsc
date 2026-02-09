@@ -221,7 +221,7 @@ watersheeting(trigger) {
 
   while(true) {
     trigger waittill("trigger", other);
-    if(IsPlayer(other)) {
+    if(isPlayer(other)) {
       other SetWaterSheeting(1, duration);
       wait duration * 0.2;
     }

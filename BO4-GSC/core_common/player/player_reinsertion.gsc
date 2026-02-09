@@ -569,9 +569,9 @@ function_5425f45d() {
 
 function_a6eac3b7() {
   while(true) {
-    if(getdvar(#"hash_3fb4a63926f3fa15", 0) > 0) {
+    if(getDvar(#"hash_3fb4a63926f3fa15", 0) > 0) {
       function_9536aa3d();
-      setdvar(#"hash_3fb4a63926f3fa15", "<dev string:x38>");
+      setDvar(#"hash_3fb4a63926f3fa15", "<dev string:x38>");
     }
 
     waitframe(1);

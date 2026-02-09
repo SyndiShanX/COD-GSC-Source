@@ -7,6 +7,7 @@
 #include maps\_utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 init() {
   level._uses_jump_pads = true;
   level.scr_anim["zombie"]["low_g_super_sprint"] = % ai_zombie_supersprint_lowg;
@@ -21,7 +22,6 @@ init() {
   level thread moon_jump_pads_malfunctions();
   level thread moon_jump_pad_cushion_sound_init();
 }
-
 moon_jump_pad_overrides() {
   level._jump_pad_override["biodome_logic"] = ::moon_jump_pad_progression_end;
   level._jump_pad_override["low_grav"] = ::moon_low_gravity_velocity;
@@ -32,7 +32,6 @@ moon_jump_pad_overrides() {
   flag_set("pad_allow_anim_change");
   level thread jump_pad_throttle_anim_changes();
 }
-
 moon_jump_pad_progression_end(ent_player) {
   if(isDefined(self.start.script_string)) {
     ent_player.script_string = self.start.script_string;
@@ -43,7 +42,7 @@ moon_jump_pad_progression_end(ent_player) {
     for(i = 0; i < end_spot_array.size; i++) {
       if(isDefined(end_spot_array[i].script_string) && end_spot_array[i].script_string == ent_player.script_string) {
         end_point = end_spot_array[i];
-        if(randomInt(100) < 5 && !level._pad_powerup && isDefined(end_point.script_parameters)) {
+        if(RandomInt(100) < 5 && !level._pad_powerup && isDefined(end_point.script_parameters)) {
           temptation_array = level._biodome_tempt_arrays[end_point.script_parameters];
           if(isDefined(temptation_array)) {}
         }
@@ -52,7 +51,6 @@ moon_jump_pad_progression_end(ent_player) {
     }
   }
 }
-
 moon_low_gravity_velocity(ent_start_point, struct_end_point) {
   end_point = struct_end_point;
   start_point = ent_start_point;
@@ -66,7 +64,7 @@ moon_low_gravity_velocity(ent_start_point, struct_end_point) {
   end_spot = struct_end_point.origin;
   if(!is_true(self.script_airspeed)) {
     rand_end = (RandomFloat(0.1, 1.2), RandomFloat(0.1, 1.2), 0);
-    rand_scale = randomInt(100);
+    rand_scale = RandomInt(100);
     rand_spot = vector_scale(rand_end, rand_scale);
     end_spot = struct_end_point.origin + rand_spot;
   }
@@ -105,7 +103,6 @@ moon_low_gravity_velocity(ent_start_point, struct_end_point) {
   jump_info[1] = jump_time;
   return jump_info;
 }
-
 moon_vertical_jump(ent_start_point, struct_end_point) {
   end_point = struct_end_point;
   start_point = ent_start_point;
@@ -145,7 +142,6 @@ moon_vertical_jump(ent_start_point, struct_end_point) {
   jump_info[1] = jump_time;
   return jump_info;
 }
-
 moon_biodome_temptation_init() {
   level._biodome_tempt_arrays = [];
   level._biodome_tempt_arrays["struct_tempt_left_medium_start"] = getstructarray("struct_tempt_left_medium_start", "targetname");
@@ -159,12 +155,11 @@ moon_biodome_temptation_init() {
   flag_wait("all_players_connected");
   level thread moon_biodome_random_pad_temptation();
 }
-
 moon_biodome_random_pad_temptation() {
   level endon("end_game");
   structs = getstructarray("struct_biodome_temptation", "script_noteworthy");
   while(true) {
-    rand = randomInt(structs.size);
+    rand = RandomInt(structs.size);
     if(isDefined(level._biodome_tempt_arrays[structs[rand].targetname])) {
       tempt_array = level._biodome_tempt_arrays[structs[rand].targetname];
       tempt_array = array_randomize(tempt_array);
@@ -175,7 +170,6 @@ moon_biodome_random_pad_temptation() {
     wait(RandomIntRange(60, 180));
   }
 }
-
 moon_biodome_powerup_temptation(struct_array) {
   powerup = spawn("script_model", struct_array[0].origin);
   level thread moon_biodome_temptation_active(powerup);
@@ -189,7 +183,8 @@ moon_biodome_powerup_temptation(struct_array) {
   rotation = 0;
   temptation_array = array_randomize(temptation_array);
   while(isDefined(powerup)) {
-    if(temptation_array[temptation_index] == "fire_sale" && (level.zombie_vars["zombie_powerup_fire_sale_on"] == true || level.chest_moves == 0)) {
+    if(temptation_array[temptation_index] == "fire_sale" &&
+      (level.zombie_vars["zombie_powerup_fire_sale_on"] == true || level.chest_moves == 0)) {
       temptation_index++;
       if(temptation_index >= temptation_array.size) {
         temptation_index = 0;
@@ -228,7 +223,6 @@ moon_biodome_powerup_temptation(struct_array) {
     }
   }
 }
-
 moon_biodome_temptation_active(ent_powerup) {
   level._pad_powerup = true;
   while(isDefined(ent_powerup)) {
@@ -236,7 +230,6 @@ moon_biodome_temptation_active(ent_powerup) {
   }
   level._pad_powerup = false;
 }
-
 moon_jump_pads_low_gravity() {
   level endon("end_game");
   biodome_pads = getEntArray("biodome_pads", "script_noteworthy");
@@ -251,7 +244,6 @@ moon_jump_pads_low_gravity() {
     biodome_pads[i].script_string = "low_grav";
   }
 }
-
 moon_jump_pads_malfunctions() {
   level endon("end_game");
   jump_pad_triggers = getEntArray("trig_jump_pad", "targetname");
@@ -275,7 +267,6 @@ moon_jump_pads_malfunctions() {
     level._dome_malfunction_pads[i] thread moon_pad_malfunction_think();
   }
 }
-
 moon_pad_malfunction_think() {
   level endon("end_game");
   pad_hook = spawn("script_model", self.origin);
@@ -293,7 +284,6 @@ moon_pad_malfunction_think() {
     self trigger_on();
   }
 }
-
 moon_zombie_run_change(ent_poi) {
   self endon("death");
   if(is_true(self._pad_chase)) {
@@ -321,7 +311,8 @@ moon_zombie_run_change(ent_poi) {
   if(!isDefined(curr_zone) && isDefined(self.zone_name)) {
     curr_zone = self.zone_name;
   }
-  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) && level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
+  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) &&
+    level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
     low_grav = 1;
   }
   if(self.animname == "zombie") {
@@ -348,7 +339,6 @@ moon_zombie_run_change(ent_poi) {
   self moon_jump_pad_run_switch(chase_anim);
   self thread moon_stop_running_to_catch();
 }
-
 jump_pad_store_movement_anim() {
   self endon("death");
   current_anim = self.run_combatanim;
@@ -359,7 +349,6 @@ jump_pad_store_movement_anim() {
     }
   }
 }
-
 moon_stop_running_to_catch() {
   self endon("death");
   if(!is_true(self._pad_chase)) {
@@ -376,7 +365,8 @@ moon_stop_running_to_catch() {
   self ent_flag_wait("pad_anim_change");
   low_grav = 0;
   curr_zone = self get_current_zone();
-  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) && level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
+  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) &&
+    level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
     low_grav = 1;
   }
   anim_set = undefined;
@@ -385,21 +375,21 @@ moon_stop_running_to_catch() {
       if(low_grav) {
         if(self.has_legs) {
           var = RandomIntRange(1, level.num_anim[self.animname]["walk"] + 1);
-          anim_set = "walk_moon" +  var;
+          anim_set = "walk_moon" + var;
           break;
         } else {
           var = RandomIntRange(1, level.num_anim[self.animname]["crawl"] + 1);
-          anim_set = "crawl_moon" +  var;
+          anim_set = "crawl_moon" + var;
           break;
         }
       } else {
         if(self.has_legs) {
           var = RandomIntRange(1, 9);
-          anim_set = "walk" +  var;
+          anim_set = "walk" + var;
           break;
         } else {
           var = RandomIntRange(1, 7);
-          anim_set = "crawl" +  var;
+          anim_set = "crawl" + var;
           break;
         }
       }
@@ -407,21 +397,21 @@ moon_stop_running_to_catch() {
       if(low_grav) {
         if(self.has_legs) {
           var = RandomIntRange(1, level.num_anim[self.animname]["run"] + 1);
-          anim_set = "run_moon" +  var;
+          anim_set = "run_moon" + var;
           break;
         } else {
           var = RandomIntRange(1, level.num_anim[self.animname]["crawl"] + 1);
-          anim_set = "crawl_moon" +  var;
+          anim_set = "crawl_moon" + var;
           break;
         }
       } else {
         if(self.has_legs) {
           var = RandomIntRange(1, 7);
-          anim_set = "run" +  var;
+          anim_set = "run" + var;
           break;
         } else {
           var = RandomIntRange(1, 3);
-          anim_set = "crawl_hand_" +  var;
+          anim_set = "crawl_hand_" + var;
           break;
         }
       }
@@ -429,21 +419,21 @@ moon_stop_running_to_catch() {
       if(low_grav) {
         if(self.has_legs) {
           var = RandomIntRange(1, level.num_anim[self.animname]["sprint"] + 1);
-          anim_set = "sprint_moon" +  var;
+          anim_set = "sprint_moon" + var;
           break;
         } else {
           var = RandomIntRange(1, level.num_anim[self.animname]["crawl"] + 1);
-          anim_set = "crawl_moon" +  var;
+          anim_set = "crawl_moon" + var;
           break;
         }
       } else {
         if(self.has_legs) {
           var = RandomIntRange(1, 5);
-          anim_set = "sprint" +  var;
+          anim_set = "sprint" + var;
           break;
         } else {
           var = RandomIntRange(1, 4);
-          anim_set = "crawl_sprint" +  var;
+          anim_set = "crawl_sprint" + var;
           break;
         }
       }
@@ -451,7 +441,6 @@ moon_stop_running_to_catch() {
   self moon_jump_pad_run_switch(anim_set);
   self._pad_chase = 0;
 }
-
 jump_pad_throttle_anim_changes() {
   if(!isDefined(level._jump_pad_anim_change)) {
     level._jump_pad_anim_change = [];
@@ -491,7 +480,6 @@ jump_pad_throttle_anim_changes() {
     wait(0.1);
   }
 }
-
 moon_jump_pad_run_switch(str_anim_key) {
   self endon("death");
   self.a.runBlendTime = 0.9;
@@ -502,7 +490,6 @@ moon_jump_pad_run_switch(str_anim_key) {
   self.crouchRunAnim = level.scr_anim[self.animname][str_anim_key];
   self.crouchrun_combatanim = level.scr_anim[self.animname][str_anim_key];
 }
-
 moon_jump_pad_cushion_sound_init() {
   flag_wait("all_players_connected");
   cushion_sound_triggers = getEntArray("trig_cushion_sound", "targetname");
@@ -513,11 +500,10 @@ moon_jump_pad_cushion_sound_init() {
     cushion_sound_triggers[i] thread moon_jump_pad_cushion_play_sound();
   }
 }
-
 moon_jump_pad_cushion_play_sound() {
   while(isDefined(self)) {
     self waittill("trigger", who);
-    if(IsPlayer(who) && is_true(who._padded)) {
+    if(isPlayer(who) && is_true(who._padded)) {
       self playSound("evt_jump_pad_land");
     }
   }

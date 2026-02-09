@@ -4,53 +4,41 @@
 **************************************/
 
 _id_1FF7() {
-  if(getdvar("debug_drones") == "") {
-    setdvar("debug_drones", "0");
-
+  if(getDvar("debug_drones") == "") {
+    setDvar("debug_drones", "0");
   }
   if(!isDefined(level._id_1FF8)) {
     level._id_1FF9 = 200;
-
   }
   if(!isDefined(level._id_1FFA)) {
     level._id_1FFA = [];
-
   }
   if(!isDefined(level._id_1FFA["allies"])) {
     level._id_1FFA["allies"] = 99999;
-
   }
   if(!isDefined(level._id_1FFA["axis"])) {
     level._id_1FFA["axis"] = 99999;
-
   }
   if(!isDefined(level._id_1FFA["team3"])) {
     level._id_1FFA["team3"] = 99999;
-
   }
   if(!isDefined(level._id_1FFA["neutral"])) {
     level._id_1FFA["neutral"] = 99999;
-
   }
   if(!isDefined(level._id_1FFB)) {
     level._id_1FFB = [];
-
   }
   if(!isDefined(level._id_1FFB["allies"])) {
     level._id_1FFB["allies"] = maps\_utility::_id_1FFC();
-
   }
   if(!isDefined(level._id_1FFB["axis"])) {
     level._id_1FFB["axis"] = maps\_utility::_id_1FFC();
-
   }
   if(!isDefined(level._id_1FFB["team3"])) {
     level._id_1FFB["team3"] = maps\_utility::_id_1FFC();
-
   }
   if(!isDefined(level._id_1FFB["neutral"])) {
     level._id_1FFB["neutral"] = maps\_utility::_id_1FFC();
-
   }
   level._id_1FFD = ::_id_2003;
 }
@@ -65,7 +53,6 @@ _id_1FFE() {
     self._id_0FC6 = self._id_1FFF;
   } else {
     self._id_0FC6 = 1;
-
   }
   if(self.team == "allies") {
     maps\_names::_id_12A4();
@@ -74,11 +61,9 @@ _id_1FFE() {
 
   if(isDefined(level._id_2000)) {
     self thread[[level._id_2000]]();
-
   }
   if(!isDefined(self._id_2001)) {
     level thread maps\_friendlyfire::_id_1FE4(self);
-
   }
   if(!isDefined(level._id_2002)) {
     self thermaldrawenable();
@@ -137,13 +122,11 @@ _id_200B() {
 
   if(isDefined(self._id_200C) && isDefined(level._id_200D[self.team][self._id_200C]) && isDefined(level._id_200D[self.team][self._id_200C]["death"])) {
     var_0 = self._id_200C;
-
   }
   var_1 = level._id_200D[self.team][var_0]["death"];
 
   if(isDefined(self._id_0D50)) {
     var_1 = self._id_0D50;
-
   }
   self notify("death");
 
@@ -175,7 +158,6 @@ _id_200B() {
   while(isDefined(self)) {
     if(!maps\_utility::within_fov(level.player.origin, level.player.angles, self.origin, 0.5)) {
       self delete();
-
     }
     wait 5;
   }
@@ -207,19 +189,18 @@ _id_2011(var_0) {
 }
 
 _id_2012(var_0, var_1) {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self stopanimscripted();
-  self setflaggedanimknoballrestart("drone_anim", var_0, % body, 1, 0.2, var_1);
+  self setflaggedanimknoballrestart("drone_anim", var_0, %body, 1, 0.2, var_1);
 }
 
 _id_2013(var_0, var_1) {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self stopanimscripted();
   var_2 = "normal";
 
   if(isDefined(var_1)) {
     var_2 = "deathplant";
-
   }
   var_3 = "drone_anim";
   self animscripted(var_3, self.origin, self.angles, var_0, var_2);
@@ -268,7 +249,6 @@ _id_2035(var_0, var_1) {
 
   if(!isDefined(level._id_200D[self.team][var_2]["arrival"])) {
     return var_0;
-
   }
   var_3 = getmovedelta(level._id_200D[self.team][var_2]["arrival"], 0, 1);
   var_3 = length(var_3);
@@ -288,7 +268,6 @@ _id_2036(var_0, var_1, var_2) {
       self._id_2037 = "drone_ak47_fire_npc";
     } else if(var_3 == 2) {
       self._id_2037 = "drone_g36c_fire_npc";
-
     }
     if(var_3 == 3) {
       self._id_2037 = "drone_fnp90_fire_npc";
@@ -298,7 +277,6 @@ _id_2036(var_0, var_1, var_2) {
       self._id_2037 = "drone_m4carbine_fire_npc";
     } else if(var_3 == 2) {
       self._id_2037 = "drone_m16_fire_npc";
-
     }
     if(var_3 == 3) {
       self._id_2037 = "drone_m249saw_fire_npc";
@@ -309,7 +287,6 @@ _id_2036(var_0, var_1, var_2) {
 
   if(var_0 == "coverprone") {
     self moveto(self.origin + (0, 0, 8), 0.05);
-
   }
   self._id_0EC6 = 1;
   var_4 = level._id_200D[self.team][var_0];
@@ -323,14 +300,12 @@ _id_2036(var_0, var_1, var_2) {
 
       if(isDefined(var_4["pop_up_chance"])) {
         var_5 = var_4["pop_up_chance"];
-
       }
       var_5 = var_5 * 100;
       var_6 = 1;
 
       if(randomfloat(100) > var_5) {
         var_6 = 0;
-
       }
       if(var_6 == 1) {
         _id_2013(var_4["hide_2_aim"]);
@@ -342,7 +317,6 @@ _id_2036(var_0, var_1, var_2) {
           thread _id_2012(var_4["fire_exposed"], 1);
         } else {
           thread _id_2012(var_4["fire"], 1);
-
         }
         _id_2038();
       } else {
@@ -357,7 +331,6 @@ _id_2036(var_0, var_1, var_2) {
 
       if(var_6 == 1) {
         _id_2013(var_4["aim_2_hide"]);
-
       }
       _id_2013(var_4["reload"]);
     }
@@ -417,7 +390,6 @@ _id_203A() {
 
   if(self.team == "allies") {
     var_0 = common_scripts\utility::getfx("m16_muzzleflash");
-
   }
   thread _id_203B(self._id_2037);
   playFXOnTag(var_0, self, "tag_flash");
@@ -560,7 +532,6 @@ _id_203E(var_0) {
 
   if(isDefined(self._id_203F)) {
     var_1 = self._id_203F;
-
   }
   var_6 = spawnStruct();
   var_6._id_2040 = var_2;
@@ -578,7 +549,6 @@ _id_2043() {
 
   if(isDefined(self._id_2044)) {
     var_1 = self._id_2044;
-
   }
   var_2 = _id_203E(var_1);
   var_3 = var_2._id_2041;
@@ -598,7 +568,6 @@ _id_2043() {
 
   if(!var_4) {
     thread _id_2049(var_3);
-
   }
   _id_2012(var_1, self._id_0FC6);
   var_5 = 0.5;
@@ -634,7 +603,7 @@ _id_2043() {
         var_14 = var_0[var_0.size - 1]["origin"] - (0, 0, 100);
         var_15 = physicstrace(var_13, var_14);
 
-        if(getdvar("debug_drones") == "1") {
+        if(getDvar("debug_drones") == "1") {
           thread common_scripts\utility::draw_line_for_time(var_13, var_14, 1, 1, 1, var_5);
           thread common_scripts\utility::draw_line_for_time(self.origin, var_15, 0, 0, 1, var_5);
         }
@@ -668,7 +637,6 @@ _id_2043() {
             thread _id_2049(var_3);
           } else {
             self notify("drone_move_z");
-
           }
           _id_2012(var_1, self._id_0FC6);
         }
@@ -685,9 +653,8 @@ _id_2043() {
 
     if(!var_4) {
       self._id_2048 = var_17;
-
     }
-    if(getdvar("debug_drones") == "1") {
+    if(getDvar("debug_drones") == "1") {
       thread common_scripts\utility::draw_line_for_time(var_13, var_14, 1, 1, 1, var_5);
       thread _id_204C(var_17, 1, 0, 0, 16, var_5);
     }
@@ -699,9 +666,8 @@ _id_2043() {
     var_16 = var_20 * var_19;
     var_16 = var_16 + self.origin;
 
-    if(getdvar("debug_drones") == "1") {
+    if(getDvar("debug_drones") == "1") {
       thread common_scripts\utility::draw_line_for_time(self.origin, var_16, 0, 0, 1, var_5);
-
     }
     self moveto(var_16, var_5);
     wait(var_5);
@@ -760,7 +726,6 @@ _id_204A(var_0, var_1) {
     var_6 = "node";
   } else if(var_9.size) {
     var_6 = "struct";
-
   }
   for(;;) {
     var_10 = var_3.size;
@@ -771,11 +736,9 @@ _id_204A(var_0, var_1) {
     if(isDefined(var_12.radius)) {
       if(!isDefined(self._id_204B)) {
         self._id_204B = -1 + randomfloat(2);
-
       }
       if(!isDefined(var_12.angles)) {
         var_12.angles = (0, 0, 0);
-
       }
       var_14 = anglesToForward(var_12.angles);
       var_15 = anglestoright(var_12.angles);
@@ -791,22 +754,18 @@ _id_204A(var_0, var_1) {
 
     if(isDefined(self._id_164F) && self._id_164F == "use_last_node_angles" && isDefined(var_12.angles)) {
       var_3[var_10]["angles"] = var_12.angles;
-
     }
     if(isDefined(var_12.script_noteworthy)) {
       var_3[var_10]["script_noteworthy"] = var_12.script_noteworthy;
-
     }
     var_3[var_10 - 1]["dist"] = distance(var_3[var_10]["origin"], var_3[var_10 - 1]["origin"]);
     var_3[var_10 - 1]["vec"] = vectornormalize(var_3[var_10]["origin"] - var_3[var_10 - 1]["origin"]);
 
     if(!isDefined(var_3[var_10 - 1]["target"])) {
       var_3[var_10 - 1]["target"] = var_12.targetname;
-
     }
     if(!isDefined(var_3[var_10 - 1]["script_noteworthy"]) && isDefined(var_12.script_noteworthy)) {
       var_3[var_10 - 1]["script_noteworthy"] = var_12.script_noteworthy;
-
     }
     if(!isDefined(var_12.target)) {
       break;
@@ -819,7 +778,6 @@ _id_204A(var_0, var_1) {
     var_3[var_10]["vec"] = anglesToForward(var_3[var_10]["angles"]);
   } else {
     var_3[var_10]["vec"] = var_3[var_10 - 1]["vec"];
-
   }
   var_12 = undefined;
   return var_3;

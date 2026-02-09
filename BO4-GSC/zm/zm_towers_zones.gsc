@@ -203,7 +203,7 @@ function_4e4594ab() {
   s_notify = self waittill(#"death");
   e_attacker = s_notify.attacker;
 
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     return;
   }
 

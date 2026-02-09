@@ -14,7 +14,7 @@ update_exo_battery_hud(weapon_name) {
   self endon("faux_spawn");
   self endon("kill_battery");
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

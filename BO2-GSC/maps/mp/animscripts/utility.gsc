@@ -8,10 +8,10 @@ anim_get_dvar_int(dvar, def) {
 }
 
 anim_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getDvar(dvar) != "")
     return getdvarfloat(dvar);
   else {
-    setdvar(dvar, def);
+    setDvar(dvar, def);
     return def;
   }
 }
@@ -51,7 +51,6 @@ debug_turn_print(text, line) {
     lookaheadyaw = angleclamp180(lookaheadangles[1]);
     println(text + " " + gettime() + " cur: " + currentyaw + " look: " + lookaheadyaw + " desired: " + desiredyaw);
   }
-
 }
 
 debug_allow_movement() {

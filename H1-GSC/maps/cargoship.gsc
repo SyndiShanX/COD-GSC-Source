@@ -35,7 +35,7 @@ hacks_for_e3_gameplay_video() {
 }
 
 main() {
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -66,8 +66,8 @@ main() {
   level.missionfailedquote["jump"] = &"CARGOSHIP_NOBODY_MAKES_THEIR_JUMP";
   level.missionfailedquote["escape"] = level.missionfailedquote["slow"];
 
-  if(getdvar("limited_mode") == "1")
-    setdvar("ui_deadquote", "");
+  if(getDvar("limited_mode") == "1")
+    setDvar("ui_deadquote", "");
 
   level.maskiscracked = 0;
   setdvarifuninitialized("showGasMaskCracks", "1");
@@ -96,7 +96,7 @@ main() {
   var_2 = getent("sea", "targetname");
   var_3 = getEntArray("sink_waterlevel", "targetname");
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     var_2 hide();
 
     for(var_1 = 0; var_1 < var_3.size; var_1++)
@@ -735,7 +735,7 @@ bridge_standoff_damage() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       break;
     }
   }
@@ -850,7 +850,7 @@ bridge_standoff_behavior_earlydeath(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       break;
     }
   }
@@ -1170,7 +1170,7 @@ quarters_drunk_earlydeath(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2);
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       break;
     }
   }
@@ -1184,7 +1184,7 @@ quarters_drunk_earlydeath2(var_0) {
   self endon("quarters_drunk_earlydeath1");
   self waittill("death", var_1);
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   self notify("quarters_drunk_earlydeath2");
@@ -2336,11 +2336,11 @@ cargohold1_dialogue3() {
 }
 
 cargohold1_pulp_fiction_think() {
-  if(getdvar("pulp_fiction_guy") == "")
-    setdvar("pulp_fiction_guy", "");
+  if(getDvar("pulp_fiction_guy") == "")
+    setDvar("pulp_fiction_guy", "");
 
-  if(!isDefined(getdvar("pulp_fiction_guy")))
-    setdvar("pulp_fiction_guy", "");
+  if(!isDefined(getDvar("pulp_fiction_guy")))
+    setDvar("pulp_fiction_guy", "");
 
   common_scripts\utility::flag_wait("cargoholds_1_enter");
   maps\_utility::autosave_by_name_thread("cargoholds_1_enter");
@@ -2350,7 +2350,7 @@ cargohold1_pulp_fiction_think() {
   var_0 = maps\_utility::array_exclude(var_0, var_1);
   common_scripts\utility::array_thread(var_0, common_scripts\utility::trigger_off);
   var_0 = getEntArray("pulp_fiction_trigger", "targetname");
-  var_2 = getdvar("pulp_fiction_guy");
+  var_2 = getDvar("pulp_fiction_guy");
   var_3 = randomint(var_0.size);
 
   if(isDefined(var_2)) {
@@ -2362,7 +2362,7 @@ cargohold1_pulp_fiction_think() {
     }
   }
 
-  setdvar("pulp_fiction_guy", var_3);
+  setDvar("pulp_fiction_guy", var_3);
   var_4 = var_0[var_3];
   var_4 common_scripts\utility::trigger_on();
   common_scripts\utility::flag_wait_any("cargoholds2", "pulp_fiction_guy", "laststand");
@@ -3563,7 +3563,7 @@ end_heli_drift_anim_thread(var_0, var_1) {
 }
 
 end_scene_setup() {
-  if(getdvar("new_end_scene") == "1")
+  if(getDvar("new_end_scene") == "1")
     return;
 }
 
@@ -3987,7 +3987,7 @@ end_screen() {
   level.player shellshock("cargoship", 50);
   var_0 maps\cargoship_code::exp_fade_overlay(1, 4);
 
-  if(getdvar("limited_mode") == "1")
+  if(getDvar("limited_mode") == "1")
     wait 0.5;
   else {
     level.intro_offset = 0;

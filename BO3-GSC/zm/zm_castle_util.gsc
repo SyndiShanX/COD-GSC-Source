@@ -102,13 +102,13 @@ function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_valu
   if(!isDefined(n_base_value)) {
     n_base_value = -1;
   }
-  setdvar(str_dvar, n_base_value);
+  setDvar(str_dvar, n_base_value);
   adddebugcommand(((((("" + str_devgui_path) + "") + str_dvar) + "") + n_value) + "");
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [[func]](n_dvar);
-      setdvar(str_dvar, n_base_value);
+      setDvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
   }

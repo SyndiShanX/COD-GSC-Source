@@ -10,7 +10,7 @@ enable_dog_kinect() {
     speechenablegrammar("speech/iw6/grammars/en-us_rileynml.cfg", 1);
 
   speechenable(1);
-  setdvar("show_riley_commands", 0);
+  setDvar("show_riley_commands", 0);
 }
 
 disable_dog_kinect() {

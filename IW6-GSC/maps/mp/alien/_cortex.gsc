@@ -321,7 +321,7 @@ cortex_pickup_listener(var_0) {
     var_2 common_scripts\utility::_disableusability();
     var_2 thread maps\mp\alien\_drill::delayed_enable_usability();
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       break;
     }
   }

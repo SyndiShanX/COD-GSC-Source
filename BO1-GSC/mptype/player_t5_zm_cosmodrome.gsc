@@ -19,7 +19,6 @@ main() {
       break;
   }
 }
-
 precache() {
   character\c_ger_richtofen_dlc2::precache();
   character\c_jap_takeo_dlc2::precache();

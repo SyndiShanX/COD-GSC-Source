@@ -28,7 +28,7 @@ __init__() {
   addratscriptcmd("<dev string:x8b>", &function_7eabbc02);
   addratscriptcmd("<dev string:x98>", &function_d50abf44);
   addratscriptcmd("<dev string:xaa>", &function_89684f6a);
-  setdvar(#"rat_death_count", 0);
+  setDvar(#"rat_death_count", 0);
 }
 
 function_d50abf44(params) {

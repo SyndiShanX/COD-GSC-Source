@@ -143,7 +143,7 @@ createfx_setup() {
   level.func["create_triggerfx"] = ::dcemp_create_triggerfx;
 
   //ROBOT -> change fx groups here
-  if(getdvar("createfx") == "on") {
+  if(getDvar("createfx") == "on") {
     //	flag_set( "intro_fx" );
     //	flag_set( "iss_fx" );
     //		robot_iss_stuff();
@@ -490,8 +490,7 @@ iss_dialogue() {
   thread radio_dialogue("dcemp_hsc_standby");
 
   flag_wait("iss_anyword");
-  //Houston, this is ISS Control, uh... any word on the-
-  thread radio_dialogue("dcemp_iss_anyword");
+  //Houston, this is ISS Control, uh... any word on the- thread radio_dialogue("dcemp_iss_anyword");
 
   //	flag_wait( "iss_space_nuke" );
   //	wait .5;
@@ -2717,7 +2716,7 @@ parking_open_fire() {
     else
     if(!player_looking_at(self getEye()) && distancesquared(self.origin, level.player.origin) > squared(512)) {
       array = bulletTrace(self getEye(), node.origin, false, self);
-      if(!isDefined(array["entity"]) || !isplayer(array["entity"]))
+      if(!isDefined(array["entity"]) || !isPlayer(array["entity"]))
         magicbullet(self.weapon, self getEye(), node.origin);
     }
     wait .1;

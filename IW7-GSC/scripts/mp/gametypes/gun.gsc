@@ -133,7 +133,7 @@ keepweaponsloaded() {
 }
 
 getspawnpoint() {
-  if(isplayer(self) && self.gun_firstspawn) {
+  if(isPlayer(self) && self.gun_firstspawn) {
     self.gun_firstspawn = 0;
     if(scripts\engine\utility::cointoss()) {
       scripts\mp\menus::addtoteam("axis", 1);
@@ -185,7 +185,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     return;
   }
 
-  if(var_3 == "MOD_FALLING" || isDefined(var_1) && isplayer(var_1)) {
+  if(var_3 == "MOD_FALLING" || isDefined(var_1) && isPlayer(var_1)) {
     var_10 = scripts\mp\weapons::isriotshield(var_4);
     var_11 = scripts\mp\weapons::isknifeonly(var_4) || scripts\mp\weapons::isaxeweapon(var_4);
     if(!isDefined(self.ladderdeathsthisweapon)) {
@@ -203,7 +203,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
       if(self.gungameprevgunindex > self.gungamegunindex) {
         scripts\mp\utility::incperstat("setbacks", 1);
         scripts\mp\persistence::statsetchild("round", "setbacks", self.pers["setbacks"]);
-        if(isplayer(self)) {
+        if(isPlayer(self)) {
           scripts\mp\utility::setextrascore1(self.pers["setbacks"]);
         }
 
@@ -220,7 +220,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
         var_1 scripts\mp\awards::givemidmatchaward("mode_gun_melee");
         var_1 scripts\mp\utility::incperstat("stabs", 1);
         var_1 scripts\mp\persistence::statsetchild("round", "stabs", var_1.pers["stabs"]);
-        if(isplayer(var_1)) {
+        if(isPlayer(var_1)) {
           var_1 scripts\mp\utility::setextrascore0(var_1.pers["stabs"]);
         }
       }

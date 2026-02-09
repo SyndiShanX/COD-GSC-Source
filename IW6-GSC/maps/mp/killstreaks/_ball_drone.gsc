@@ -656,7 +656,6 @@ ballDrone_watchTimeout() {
   }
   if(!is_aliens()) {
     timeout = GetDvarFloat("scr_balldrone_timeout");
-
   }
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(timeout);
   if(isDefined(self.owner) && !is_aliens())
@@ -687,7 +686,6 @@ ballDrone_watchOwnerDeath() {
 
     if(getGametypeNumLives() && self.owner.pers["deaths"] == getGametypeNumLives())
       self thread ballDrone_leave();
-
   }
 }
 
@@ -759,7 +757,6 @@ handleDeathDamage(attacker, weapon, type, damage) {
   if(self.ballDroneType == "ball_drone_backup") {
     attacker maps\mp\gametypes\_missions::processChallenge("ch_vulturekiller");
   }
-
 }
 
 watchEMPDamage() {
@@ -922,7 +919,6 @@ ballDrone_burstFireStart() {
         vehicle SetLookAtEnt(targetEnt);
 
         self ShootTurret();
-
       }
 
       wait(fireTime);
@@ -968,7 +964,7 @@ ballDrone_burstFireStop() {
 canBeTargeted(ent) {
   canTarget = true;
 
-  if(IsPlayer(ent)) {
+  if(isPlayer(ent)) {
     if(!isReallyAlive(ent) || ent.sessionstate != "playing")
       return false;
   }
@@ -979,13 +975,13 @@ canBeTargeted(ent) {
   if(isDefined(ent.team) && ent.team == "spectator")
     return false;
 
-  if(IsPlayer(ent) && ent == self.owner)
+  if(isPlayer(ent) && ent == self.owner)
     return false;
 
-  if(IsPlayer(ent) && isDefined(ent.spawntime) && (GetTime() - ent.spawntime) / 1000 <= 5)
+  if(isPlayer(ent) && isDefined(ent.spawntime) && (GetTime() - ent.spawntime) / 1000 <= 5)
     return false;
 
-  if(IsPlayer(ent) && ent _hasPerk("specialty_blindeye"))
+  if(isPlayer(ent) && ent _hasPerk("specialty_blindeye"))
     return false;
 
   if(DistanceSquared(ent.origin, self.origin) > level.ballDroneSettings[self.vehicle.ballDroneType].visual_range_sq)

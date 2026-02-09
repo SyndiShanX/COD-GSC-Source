@@ -126,12 +126,12 @@ on_end(round_reset) {
 }
 
 on_player_damage(params) {
-  if(isplayer(params.eattacker) && !isbot(params.eattacker) && params.idamage >= self.health && params.eattacker != self) {
+  if(isPlayer(params.eattacker) && !isbot(params.eattacker) && params.idamage >= self.health && params.eattacker != self) {
     zm_trial::fail(#"hash_6e2a00b7d2d6e510", array(params.eattacker));
     return;
   }
 
-  if(isbot(self) && isDefined(params.einflictor) && isplayer(params.einflictor.activated_by_player) && !isbot(params.einflictor.activated_by_player) && params.idamage >= self.health) {
+  if(isbot(self) && isDefined(params.einflictor) && isPlayer(params.einflictor.activated_by_player) && !isbot(params.einflictor.activated_by_player) && params.idamage >= self.health) {
     zm_trial::fail(#"hash_6e2a00b7d2d6e510", array(params.einflictor.activated_by_player));
     return;
   }
@@ -164,7 +164,7 @@ function_e1378d07() {
 }
 
 function_c4e6367a(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker) && isbot(attacker) && level.round_number <= 20) {
+  if(isPlayer(attacker) && isbot(attacker) && level.round_number <= 20) {
     damage = int(damage * 0.5);
   }
 

@@ -88,7 +88,7 @@ function_1e11d939(attacker, weapon) {
     attacker = self[[level.figure_out_attacker]](attacker);
   }
 
-  if(destroyedbyenemy && isplayer(attacker)) {
+  if(destroyedbyenemy && isPlayer(attacker)) {
     scoreevents::function_f40d64cc(attacker, self, weapon);
 
     if(isDefined(attacker)) {

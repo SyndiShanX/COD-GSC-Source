@@ -791,7 +791,7 @@ function set_sun_color(n_value) {
       player set_sun_color(n_value);
     }
   } else {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self clientfield::set_to_player("ramses_sun_color", n_value);
     } else {
       assertmsg("");
@@ -808,7 +808,7 @@ function light_shift_think(str_trigger_targetname, str_level_endon, func_on_trig
   assert(isDefined(t_light_shift), ("" + str_trigger_targetname) + "");
   while(true) {
     t_light_shift waittill("trigger", e_player);
-    if(isDefined(e_player) && isplayer(e_player)) {
+    if(isDefined(e_player) && isPlayer(e_player)) {
       e_player[[func_on_trigger]]();
     }
   }
@@ -917,7 +917,7 @@ function stop_magic_bullet_shield_on_player_damage(str_kill_mbs, str_phalanx_sca
   level endon(str_kill_mbs);
   while(true) {
     self waittill("damage", amount, attacker);
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(isDefined(str_phalanx_scatter_notify)) {
         level notify(str_phalanx_scatter_notify);
         wait(0.05);
@@ -944,7 +944,7 @@ function function_f08afb37(b_on = 1, var_eebad467 = 0.1) {
 }
 
 function function_74e97bfe(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     function_f08afb37(0);
     return n_damage;
   }
@@ -987,7 +987,7 @@ function complete_staged_fight_enlarge_goal_radius(str_robot_sm, str_human_sm) {
 }
 
 function player_walk_speed_adjustment(e_rubber_band_to, str_endon, n_dist_min, n_dist_max, n_speed_scale_min = 0, n_speed_scale_max = 1, var_d04843e1 = 20) {
-  assert(isplayer(self), "");
+  assert(isPlayer(self), "");
   assert(isDefined(e_rubber_band_to), "");
   assert(isDefined(n_dist_min), "");
   assert(isDefined(n_dist_max), "");

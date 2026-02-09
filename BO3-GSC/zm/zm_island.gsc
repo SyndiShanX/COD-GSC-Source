@@ -269,11 +269,11 @@ function main() {
   level thread namespace_d9f30fb4::main();
   level thread function_94fc6a19();
   level thread function_8a2a48bb();
-  setdvar("dlc2_fix_scripted_looping_linked_animations", 1);
-  setdvar("dlc2_show_damage_feedback_when_drowning", 1);
-  setdvar("player_useWaterWadeScale", "0");
-  setdvar("r_waveWaterNewFormula", 1);
-  setdvar("hkai_pathfindIterationLimit", 1200);
+  setDvar("dlc2_fix_scripted_looping_linked_animations", 1);
+  setDvar("dlc2_show_damage_feedback_when_drowning", 1);
+  setDvar("player_useWaterWadeScale", "0");
+  setDvar("r_waveWaterNewFormula", 1);
+  setDvar("hkai_pathfindIterationLimit", 1200);
   level thread zm_island_vo::main();
   zm_island_ffotd::main_end();
 }

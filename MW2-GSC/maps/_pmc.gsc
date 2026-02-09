@@ -59,9 +59,7 @@ main() {
   if(!isDefined(level.pmc_alljuggernauts))
     level.pmc_alljuggernauts = false;
 
-  //-------------------------------------------------------------
-
-  common_scripts\_sentry::main();
+  //------------------------------------------------------------- common_scripts\_sentry::main();
 
   if(!is_specialop())
     maps\_specialops_code::pick_starting_location_pmc();
@@ -72,11 +70,8 @@ main() {
 
 initialize_gametype() {
   juggernaut_setup();
-  //--------------------------------
-  // Precache
-  //--------------------------------
-
-  // Enemies Alive: && 1
+  //-------------------------------- // Precache
+  //-------------------------------- // Enemies Alive: && 1
   precacheString(&"PMC_DEBUG_ENEMY_COUNT");
   // Vehicles Alive: && 1
   precacheString(&"PMC_DEBUG_VEHICLE_COUNT");
@@ -122,11 +117,8 @@ initialize_gametype() {
   precacheShader("waypoint_extraction");
   precacheShader("waypoint_defend");
 
-  //--------------------------------
-  // Set up some tweak values
-  //--------------------------------
-
-  setDvarIfUninitialized("pmc_debug", "0");
+  //-------------------------------- // Set up some tweak values
+  //-------------------------------- setDvarIfUninitialized("pmc_debug", "0");
   setDvarIfUninitialized("pmc_debug_forcechopper", "0");
 
   level.pmc = spawnStruct();
@@ -159,11 +151,8 @@ initialize_gametype() {
   level.pmc.sound["timer_tick"] = "pmc_timer_tick";
   //	level.pmc.sound[ "juggernaut_attack" ] 	 = "pmc_juggernaut";
 
-  //--------------------------------
-  // Variables and Init
-  //--------------------------------
-
-  flag_init("enemies_seek_players");
+  //-------------------------------- // Variables and Init
+  //-------------------------------- flag_init("enemies_seek_players");
   flag_init("objective_complete");
   flag_init("extraction_complete");
   flag_init("defend_started");
@@ -224,11 +213,8 @@ start_pmc_gametype() {
   if(isDefendMatch())
     array_thread(level.sentry_enemies, common_scripts\_sentry::delete_sentry_turret);
 
-  //----------------------------------------
-  // Set gametype specific function pointers
-  //----------------------------------------
-
-  level.pmc.enemy_spawn_position_func = ::pick_enemy_spawn_positions;
+  //---------------------------------------- // Set gametype specific function pointers
+  //---------------------------------------- level.pmc.enemy_spawn_position_func = ::pick_enemy_spawn_positions;
   level.pmc.populate_enemies_func = ::populate_enemies;
   level.pmc.get_spawnlist_func = ::get_spawnlist;
   level.pmc.set_goal_func = ::enemy_set_goal_when_player_spotted;
@@ -247,11 +233,8 @@ start_pmc_gametype() {
   assert(isDefined(level.pmc.get_spawnlist_func));
   assert(isDefined(level.pmc.set_goal_func));
 
-  //----------------------------------------
-  // Get all enemy spawners in level
-  //----------------------------------------
-
-  // Get all enemy spawners in the level for possible spawning
+  //---------------------------------------- // Get all enemy spawners in level
+  //---------------------------------------- // Get all enemy spawners in the level for possible spawning
   level.pmc.enemy_spawners_full_list = getEntArray("pmc_spawner", "targetname");
   assertEx(level.pmc.enemy_spawners_full_list.size >= level.pmc_enemies, "There aren't enough enemy spawners in the level.");
 
@@ -266,11 +249,8 @@ start_pmc_gametype() {
   assertEx(level.pmc.enemy_spawners.size >= level.pmc.enemies_kills_to_win, "There aren't enough enemy spawners in the level to hunt down " + level.pmc.enemies_kills_to_win + " enemies.");
   level.pmc.enemies_remaining = level.pmc.enemies_kills_to_win;
 
-  //----------------------------------------
-  // Get us started!
-  //----------------------------------------
-
-  level.pmc._populating_enemies = false;
+  //---------------------------------------- // Get us started!
+  //---------------------------------------- level.pmc._populating_enemies = false;
   level.pmc._re_populating_enemies = false;
   gametype_setup();
   setup_objective_entities();
@@ -278,11 +258,8 @@ start_pmc_gametype() {
 
   thread[[level.pmc.populate_enemies_func]]();
 
-  //----------------------------------------
-  // Debug threads for testing
-  //----------------------------------------
-
-  if(getdvar("pmc_debug") == "1") {
+  //---------------------------------------- // Debug threads for testing
+  //---------------------------------------- if(getDvar("pmc_debug") == "1") {
     thread debug_show_enemy_spawners_count();
     thread debug_show_enemies_alive_count();
     thread debug_show_vehicles_alive_count();
@@ -356,7 +333,7 @@ pick_enemy_spawn_positions() {
   wait 0.05;
 
   // Draw the bounds of the area
-  if(getdvar("pmc_debug") == "1") {
+  if(getDvar("pmc_debug") == "1") {
     topLeft = (x_min - 50, y_max + 50, 0);
     topRight = (x_max + 50, y_max + 50, 0);
     bottomLeft = (x_min - 50, y_min - 50, 0);
@@ -418,7 +395,7 @@ pick_enemy_spawn_positions() {
   wait 0.05;
 
   // print the quad bounds and number on each quad
-  if(getdvar("pmc_debug") == "1") {
+  if(getDvar("pmc_debug") == "1") {
     foreach(quad in level.quads) {
       topLeft = (quad.min_x, quad.max_y, 0);
       topRight = (quad.max_x, quad.max_y, 0);
@@ -502,7 +479,7 @@ pick_enemy_spawn_positions() {
   }
   debug_print("All spawners are ready");
 
-  if(getdvar("pmc_debug") == "1") {
+  if(getDvar("pmc_debug") == "1") {
     foreach(spawner in spawnsToUse)
     thread draw_line(spawner.origin, spawner.origin + (0, 0, 250), color_green[0], color_green[1], color_green[2]);
     if(isDefined(randomized)) {
@@ -534,11 +511,8 @@ populate_enemies() {
   if(is_specialop())
     flag_wait("mission_start");
 
-  //---------------------------------------------------------------------
-  // Spawns all of the best located AI until the max alive AI count is reached
-  //---------------------------------------------------------------------
-
-  if(level.pmc._populating_enemies)
+  //--------------------------------------------------------------------- // Spawns all of the best located AI until the max alive AI count is reached
+  //--------------------------------------------------------------------- if(level.pmc._populating_enemies)
     return;
   level.pmc._populating_enemies = true;
 
@@ -627,7 +601,7 @@ get_spawnlist_defend() {
     spawners[spawners.size] = all_spawners[i];
   }
 
-  if(getdvar("pmc_debug") == "1") {
+  if(getDvar("pmc_debug") == "1") {
     level notify("updated_spawn_list");
     foreach(spawner in spawners)
     thread draw_line_until_notify(spawner.origin, spawner.origin + (0, 0, 250), 0, 1, 0, level, "updated_spawn_list");
@@ -683,7 +657,7 @@ init_enemy_combat_mode(spawnerIndex) {
     return;
   }
 
-  if(getdvar("scr_force_ai_combat_mode") != "0") {
+  if(getDvar("scr_force_ai_combat_mode") != "0") {
     return;
   }
 
@@ -1368,7 +1342,6 @@ add_player_objectives() {
     foreach(player in level.players)
     player thread show_remaining_enemy_count();
   }
-
 }
 
 objective_add_enemies(objNum) {
@@ -1469,7 +1442,7 @@ mission_complete() {
 }
 
 debug_print(string) {
-  if(getdvar("pmc_debug") == "1") {
+  if(getDvar("pmc_debug") == "1") {
     assert(isDefined(string));
     iprintln(string);
   }

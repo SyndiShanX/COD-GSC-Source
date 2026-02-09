@@ -1062,7 +1062,7 @@ breach_participants_ready_to_proceed(var_0, var_1, var_2) {
     return 1;
 
   if(!breach_friendlies_ready_at_other_door(var_2, 1)) {
-    if(getdvar("breach_requires_friendlies_in_position") == "1") {
+    if(getDvar("breach_requires_friendlies_in_position") == "1") {
       if(!breachfriendlies_can_teleport(var_1, var_2))
         return 0;
     }
@@ -1097,7 +1097,7 @@ wait_for_breach_or_deletion(var_0) {
     }
 
     if(isDefined(var_0.safe_volume) && !maps\_utility::is_specialop()) {
-      if(isplayer(var_3) && isalive(var_3)) {
+      if(isPlayer(var_3) && isalive(var_3)) {
         var_6 = var_0.safe_volume maps\_utility::get_ai_touching_volume("axis");
 
         if(var_6.size) {
@@ -1109,7 +1109,7 @@ wait_for_breach_or_deletion(var_0) {
 
     var_7 = get_available_breachfriendlies(var_2);
 
-    if(isplayer(var_3) && isalive(var_3)) {
+    if(isPlayer(var_3) && isalive(var_3)) {
       if(breach_should_be_skipped(var_1.script_slowmo_breach)) {
         break;
       }
@@ -1356,7 +1356,7 @@ friendlies_breach(var_0, var_1) {
   set_room_to_breached(var_2, var_4);
   var_12 = var_0.friendly_anim_ent;
   var_13 = get_player_volume(var_3);
-  var_14 = getdvar("breach_requires_friendlies_in_position") == "1";
+  var_14 = getDvar("breach_requires_friendlies_in_position") == "1";
 
   if(!var_14) {
     if(isDefined(var_13) && breach_friendlies_ready_at_other_door(var_13)) {
@@ -1802,7 +1802,7 @@ get_available_breachfriendlies(var_0) {
     return var_1;
 
   var_1 = maps\_utility::array_removedead(level.breachfriendlies);
-  var_2 = getdvar("breach_requires_friendlies_in_position") == "1";
+  var_2 = getDvar("breach_requires_friendlies_in_position") == "1";
 
   foreach(var_4 in var_1) {
     if(isDefined(var_4.breaching) && var_4.breaching == 1) {
@@ -2000,8 +2000,8 @@ clear_breaching_variable() {
 }
 
 slomo_difficulty_dvars() {
-  var_0 = getdvar("bg_viewKickScale");
-  var_1 = getdvar("bg_viewKickMax");
+  var_0 = getDvar("bg_viewKickScale");
+  var_1 = getDvar("bg_viewKickMax");
   setsaveddvar("bg_viewKickScale", 0.3);
   setsaveddvar("bg_viewKickMax", "15");
   setsaveddvar("bullet_penetration_damage", 0);
@@ -2091,7 +2091,7 @@ record_last_player_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isalive(var_1)) {
     return;
   }
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
   if(!self isbadguy()) {
@@ -2215,7 +2215,7 @@ hostage_health_regen() {
     self waittill("damage", var_1, var_2);
 
     if(isDefined(var_2)) {
-      if(isplayer(var_2)) {
+      if(isPlayer(var_2)) {
         self kill(self.origin, level.player);
         break;
       } else if(isDefined(var_2.team) && var_2.team == "allies")
@@ -2238,14 +2238,14 @@ hostage_mission_fail() {
   thread hostage_health_regen();
   var_2 = get_room_volume_from_slomo_breach_number(self.script_slowmo_breach);
 
-  if(getdvar("hostage_missionfail") == "0") {
+  if(getDvar("hostage_missionfail") == "0") {
     return;
   }
   while(isDefined(self)) {
     self waittill("death", var_3);
 
     if(isDefined(var_3)) {
-      if(isplayer(var_3)) {
+      if(isPlayer(var_3)) {
         level notify("player_shot_a_hostage");
         waittillframeend;
 
@@ -2255,7 +2255,7 @@ hostage_mission_fail() {
           maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
 
         var_1 = 1;
-      } else if(isDefined(var_3.team) && var_3.team == "allies" && !isplayer(var_3)) {
+      } else if(isDefined(var_3.team) && var_3.team == "allies" && !isPlayer(var_3)) {
         maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
         var_1 = 1;
       } else {
@@ -2642,7 +2642,7 @@ breach_debug_display_animnames(var_0) {
   var_1 = self.origin;
   wait 0.05;
 
-  if(getdvar("breach_debug") == "0") {
+  if(getDvar("breach_debug") == "0") {
     return;
   }
   var_2 = [];
@@ -2848,7 +2848,7 @@ player_loses_speedscale(var_0, var_1, var_2) {
 manhandler_think() {
   level endon("mission failed");
 
-  if(getdvar("hostage_missionfail") == "1")
+  if(getDvar("hostage_missionfail") == "1")
     level endon("player_shot_a_hostage");
 
   thread maps\_utility::magic_bullet_shield();

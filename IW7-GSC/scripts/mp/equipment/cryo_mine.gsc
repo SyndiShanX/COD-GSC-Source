@@ -129,7 +129,7 @@ func_4AD4() {
     var_5 = "hitequip";
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_5);
   }
 
@@ -168,7 +168,7 @@ func_4AD1(var_0) {
 }
 
 func_4ACF(var_0, var_1) {
-  if(!isplayer(self) || !isDefined(var_0)) {
+  if(!isPlayer(self) || !isDefined(var_0)) {
     return;
   }
 
@@ -197,7 +197,7 @@ func_4ADB(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     if(scripts\mp\utility::func_9F72(var_0)) {
       return 0;
     }

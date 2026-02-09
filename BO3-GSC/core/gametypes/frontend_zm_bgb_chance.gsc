@@ -19,8 +19,8 @@ function zm_frontend_bgb_slots_logic() {
 }
 
 function zm_frontend_bgb_devgui() {
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   bgb_devgui_base = "";
   a_n_amounts = array(1, 5, 10, 100);
   for(i = 0; i < a_n_amounts.size; i++) {
@@ -56,8 +56,8 @@ function bgb_devgui_think() {
         iprintlnbold("");
       }
     }
-    setdvar("", "");
-    setdvar("", "");
+    setDvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }

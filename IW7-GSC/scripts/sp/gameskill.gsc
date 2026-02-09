@@ -28,7 +28,7 @@ func_95F9() {
 
 func_F848(var_0) {
   if(!isDefined(level.script)) {
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
   }
 
   if(!isDefined(var_0) || var_0 == 0) {
@@ -84,7 +84,7 @@ func_F848(var_0) {
   setdvarifuninitialized("autodifficulty_playerDeathTimer", 0);
   anim.var_E7D4 = 0.5;
   anim.var_1385F = 0.8;
-  setdvar("autodifficulty_frac", 0);
+  setDvar("autodifficulty_frac", 0);
   level.var_54D1 = [];
   foreach(var_2 in level.players) {
     var_2 func_9772();
@@ -342,7 +342,7 @@ func_F848(var_0) {
 
   updategameskill();
   func_12E5A();
-  setdvar("autodifficulty_original_setting", level.var_7683);
+  setDvar("autodifficulty_original_setting", level.var_7683);
 }
 
 func_F52D(var_0, var_1) {
@@ -609,7 +609,7 @@ func_C869() {
     return 0;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return 0;
   }
 
@@ -634,7 +634,7 @@ func_F288() {
     return;
   }
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     func_E258();
     if(self.a.var_B8D6 > gettime()) {
       self.accuracy = 0;
@@ -675,7 +675,7 @@ func_F84B() {
 
   self.var_103BF++;
   var_2 = level.var_7683;
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     var_2 = self.enemy.var_7683;
   }
 
@@ -737,7 +737,7 @@ func_13847() {
     return var_0;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return var_0;
   }
 
@@ -777,7 +777,7 @@ resetmisstime_code() {
     return;
   }
 
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     self.accuracy = self.var_2894;
     return;
   }
@@ -1777,7 +1777,7 @@ func_2625() {
   level.player waittill("death");
   var_0 = getdvarint("autodifficulty_playerDeathTimer");
   var_0 = var_0 - 60;
-  setdvar("autodifficulty_playerDeathTimer", var_0);
+  setDvar("autodifficulty_playerDeathTimer", var_0);
 }
 
 func_2626() {
@@ -1963,15 +1963,15 @@ func_913B(var_0, var_1) {
 
 func_14ED() {
   scripts\engine\utility::add_func_ref_MAYBE("sp_stat_tracking_func", ::func_262A);
-  setdvar("aa_player_kills", "0");
-  setdvar("aa_enemy_deaths", "0");
-  setdvar("aa_enemy_damage_taken", "0");
-  setdvar("aa_player_damage_taken", "0");
-  setdvar("aa_player_damage_dealt", "0");
-  setdvar("aa_ads_damage_dealt", "0");
-  setdvar("aa_time_tracking", "0");
-  setdvar("aa_deaths", "0");
-  setdvar("player_cheated", 0);
+  setDvar("aa_player_kills", "0");
+  setDvar("aa_enemy_deaths", "0");
+  setDvar("aa_enemy_damage_taken", "0");
+  setDvar("aa_player_damage_taken", "0");
+  setDvar("aa_player_damage_dealt", "0");
+  setDvar("aa_ads_damage_dealt", "0");
+  setDvar("aa_time_tracking", "0");
+  setDvar("aa_deaths", "0");
+  setDvar("player_cheated", 0);
   level.var_262B = [];
   thread func_14F4();
   thread func_14F1();
@@ -2038,19 +2038,19 @@ func_262A(var_0) {
   level.var_262B[var_0] = [];
   level.var_2629[var_0] = 0;
   scripts\engine\utility::flag_wait(var_0);
-  if(getdvar("aa_zone" + var_0) == "") {
-    setdvar("aa_zone" + var_0, "on");
+  if(getDvar("aa_zone" + var_0) == "") {
+    setDvar("aa_zone" + var_0, "on");
     level.var_2629[var_0] = 1;
     func_14F5();
-    setdvar("start_time" + var_0, getdvar("aa_time_tracking"));
-    setdvar("starting_player_kills" + var_0, getdvar("aa_player_kills"));
-    setdvar("starting_deaths" + var_0, getdvar("aa_deaths"));
-    setdvar("starting_ads_damage_dealt" + var_0, getdvar("aa_ads_damage_dealt"));
-    setdvar("starting_player_damage_dealt" + var_0, getdvar("aa_player_damage_dealt"));
-    setdvar("starting_player_damage_taken" + var_0, getdvar("aa_player_damage_taken"));
-    setdvar("starting_enemy_damage_taken" + var_0, getdvar("aa_enemy_damage_taken"));
-    setdvar("starting_enemy_deaths" + var_0, getdvar("aa_enemy_deaths"));
-  } else if(getdvar("aa_zone" + var_0) == "done") {
+    setDvar("start_time" + var_0, getDvar("aa_time_tracking"));
+    setDvar("starting_player_kills" + var_0, getDvar("aa_player_kills"));
+    setDvar("starting_deaths" + var_0, getDvar("aa_deaths"));
+    setDvar("starting_ads_damage_dealt" + var_0, getDvar("aa_ads_damage_dealt"));
+    setDvar("starting_player_damage_dealt" + var_0, getDvar("aa_player_damage_dealt"));
+    setDvar("starting_player_damage_taken" + var_0, getDvar("aa_player_damage_taken"));
+    setDvar("starting_enemy_damage_taken" + var_0, getDvar("aa_enemy_damage_taken"));
+    setDvar("starting_enemy_deaths" + var_0, getDvar("aa_enemy_deaths"));
+  } else if(getDvar("aa_zone" + var_0) == "done") {
     return;
   }
 
@@ -2059,7 +2059,7 @@ func_262A(var_0) {
 }
 
 func_262C(var_0) {
-  setdvar("aa_zone" + var_0, "done");
+  setDvar("aa_zone" + var_0, "done");
   var_1 = getdvarfloat("start_time" + var_0);
   var_2 = getdvarint("starting_player_kills" + var_0);
   var_3 = getdvarint("aa_enemy_deaths" + var_0);
@@ -2135,12 +2135,12 @@ func_14F5() {}
 
 func_14DB(var_0, var_1) {
   var_2 = getdvarint(var_0);
-  setdvar(var_0, var_2 + var_1);
+  setDvar(var_0, var_2 + var_1);
 }
 
 func_14DC(var_0, var_1) {
   var_2 = getdvarfloat(var_0);
-  setdvar(var_0, var_2 + var_1);
+  setDvar(var_0, var_2 + var_1);
 }
 
 func_E44D(var_0) {
@@ -2152,7 +2152,7 @@ func_CF80(var_0) {
     return 1;
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return 1;
   }
 

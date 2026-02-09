@@ -18,7 +18,6 @@ main() {
     default:
 
       assertmsg("Traversal: 'stairs_down' doesn't support entity type '" + self.type + "'.");
-
   }
 }
 

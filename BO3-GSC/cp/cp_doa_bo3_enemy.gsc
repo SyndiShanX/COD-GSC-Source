@@ -273,7 +273,7 @@ function function_8b898788() {
     }
     guy thread namespace_1a381543::function_90118d8c("zmb_hazard_hit");
     guy thread namespace_eaa992c::function_285a2999("hazard_electric");
-    if(!isplayer(guy)) {
+    if(!isPlayer(guy)) {
       dir = guy.origin - self.damage_trigger.origin;
       dir = vectornormalize(dir);
       guy launchragdoll(dir * 100);
@@ -1360,7 +1360,7 @@ function function_4ce6d0ea() {
   level endon("hash_d1f5acf7");
   level thread function_7e51c1d2();
   level notify("hash_e2918623");
-  setdvar("scr_margwa_footstep_eq_radius", 0);
+  setDvar("scr_margwa_footstep_eq_radius", 0);
   foreach(player in namespace_831a4a7c::function_5eb6e4d1()) {
     player notify("hash_d28ba89d");
   }
@@ -1454,7 +1454,7 @@ function private function_c0147a11() {
       self waittill("damage", damage, attacker);
       data = doa_utility::clamp(self.health / self.maxhealth, 0, 1);
       level clientfield::set("pumpBannerBar", data);
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker namespace_64c6b720::function_80eb303(int(damage * 0.25), 1);
       }
       doa_utility::debugmsg("" + self.health);

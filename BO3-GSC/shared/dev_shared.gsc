@@ -26,7 +26,7 @@ function debug_sphere(origin, radius, color, alpha, time) {
 function updateminimapsetting() {
   requiredmapaspectratio = getdvarfloat("");
   if(!isDefined(level.minimapheight)) {
-    setdvar("", "");
+    setDvar("", "");
     level.minimapheight = 0;
   }
   minimapheight = getdvarfloat("");
@@ -110,23 +110,23 @@ function updateminimapsetting() {
           player camerasetposition(viewpos, (90, getnorthyaw(), 0));
           player cameraactivate(1);
           player takeallweapons();
-          setdvar("", 0);
-          setdvar("", 0);
-          setdvar("", 0);
-          setdvar("", 0);
-          setdvar("", 0);
-          setdvar("", 0);
-          setdvar("", znear);
-          setdvar("", 0.1);
-          setdvar("", 0);
-          setdvar("", 1);
-          setdvar("", 90);
-          setdvar("", 0);
-          setdvar("", 1);
-          setdvar("", 1);
-          setdvar("", 0);
-          setdvar("", 0);
-          setdvar("", "");
+          setDvar("", 0);
+          setDvar("", 0);
+          setDvar("", 0);
+          setDvar("", 0);
+          setDvar("", 0);
+          setDvar("", 0);
+          setDvar("", znear);
+          setDvar("", 0.1);
+          setDvar("", 0);
+          setDvar("", 1);
+          setDvar("", 90);
+          setDvar("", 0);
+          setDvar("", 1);
+          setDvar("", 1);
+          setDvar("", 0);
+          setDvar("", 0);
+          setDvar("", "");
           if(isDefined(level.objpoints)) {
             for(i = 0; i < level.objpointnames.size; i++) {
               if(isDefined(level.objpoints[level.objpointnames[i]])) {
@@ -141,7 +141,7 @@ function updateminimapsetting() {
           println("");
         }
       } else {
-        setdvar("", "");
+        setDvar("", "");
       }
     }
   }
@@ -270,7 +270,7 @@ function body_customization_devgui(mode) {
     if(character_index != "") {
       body_customization_process_command(character_index);
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }

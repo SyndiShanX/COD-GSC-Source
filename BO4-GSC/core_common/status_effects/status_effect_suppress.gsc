@@ -68,13 +68,13 @@ function_aa232314(oldval, newval) {
     self.var_ead9cdbf = undefined;
 
     if(isDefined(self.var_14407070) && isDefined(self.var_14407070.var_36c77790)) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self playlocalsound(self.var_14407070.var_36c77790);
       }
     }
 
     if(isDefined(self.var_14407070) && isDefined(self.var_14407070.var_801118b0)) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         self stoploopsound(0.5);
       }
     }

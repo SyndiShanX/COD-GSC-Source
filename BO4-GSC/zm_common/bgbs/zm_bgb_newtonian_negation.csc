@@ -24,12 +24,12 @@ __init__() {
 
 function_8622e664(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    setdvar(#"phys_gravity_dir", (0, 0, -1));
+    setDvar(#"phys_gravity_dir", (0, 0, -1));
     self notify(#"end_dynent_touching");
     return;
   }
 
-  setdvar(#"phys_gravity_dir", (0, 0, 1));
+  setDvar(#"phys_gravity_dir", (0, 0, 1));
   self thread function_e752a980(localclientnum);
 }
 

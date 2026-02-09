@@ -19,7 +19,7 @@ function main() {
   mp_stronghold_sound::main();
   load::main();
   compass::setupminimap("compass_map_mp_stronghold");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   spawncollision("collision_clip_wall_128x128x10", "collider", (-1072.79, -2008.87, 259.646), (340, 278, 0));
   spawncollision("collision_clip_cylinder_32x256", "collider", (831.371, -3700.67, 66.1907), (0, 0, 0));
   spawncollision("collision_clip_cylinder_32x256", "collider", (831.371, -3700.67, 217.442), (0, 0, 0));

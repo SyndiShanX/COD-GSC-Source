@@ -11,7 +11,6 @@ main() {
 
   if(!isDefined(level._id_2106)) {
     level._id_2106 = [];
-
   }
   level._id_2106["juggernaut"] = ::_id_3AAE;
   level._id_3AAD = 0;
@@ -81,7 +80,7 @@ _id_3AAE() {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
 }
@@ -152,8 +151,8 @@ _id_3AB0() {
 _id_3AB3() {
   self.walkdist = 500;
   self.walkdistfacingmotion = 500;
-  maps\_utility::_id_26F9("run", % juggernaut_runf, % juggernaut_sprint);
-  maps\_utility::_id_26F9("walk", % juggernaut_walkf);
-  maps\_utility::_id_26F9("cqb", % juggernaut_walkf);
-  maps\_utility::_id_26F8( % juggernaut_stand_fire_burst, % juggernaut_aim5, % juggernaut_stand_idle, % juggernaut_stand_reload);
+  maps\_utility::_id_26F9("run", %juggernaut_runf, %juggernaut_sprint);
+  maps\_utility::_id_26F9("walk", %juggernaut_walkf);
+  maps\_utility::_id_26F9("cqb", %juggernaut_walkf);
+  maps\_utility::_id_26F8(%juggernaut_stand_fire_burst, %juggernaut_aim5, %juggernaut_stand_idle, %juggernaut_stand_reload);
 }

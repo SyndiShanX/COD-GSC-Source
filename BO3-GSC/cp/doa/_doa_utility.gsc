@@ -228,7 +228,7 @@ function function_75e76155(other, note) {
   }
   killnote = function_2ccf4b82("DeleteNote");
   self thread function_f5db70f1(other, killnote);
-  if(isplayer(other)) {
+  if(isPlayer(other)) {
     if(note == "disconnect") {
       other util::waittill_any(note, killnote);
     } else {
@@ -258,7 +258,7 @@ function function_24245456(other, note) {
   self endon("death");
   killnote = function_2ccf4b82("killNote");
   self thread function_f5db70f1(other, killnote);
-  if(isplayer(other)) {
+  if(isPlayer(other)) {
     if(note == "disconnect") {
       other util::waittill_any(note, killnote);
     } else {
@@ -310,7 +310,7 @@ function function_981c685d(var_627e7613) {
   self endon("death");
   killnote = function_2ccf4b82("deathNote");
   self thread function_f5db70f1(var_627e7613, killnote);
-  if(isplayer(var_627e7613)) {
+  if(isPlayer(var_627e7613)) {
     var_627e7613 util::waittill_any("death", "disconnect", killnote);
   } else {
     var_627e7613 util::waittill_any("death", killnote);
@@ -322,7 +322,7 @@ function function_981c685d(var_627e7613) {
 }
 
 function function_a625b5d3(player) {
-  assert(isplayer(player), "");
+  assert(isPlayer(player), "");
   self endon("death");
   player waittill("disconnect");
   self delete();
@@ -429,7 +429,7 @@ function function_e3c30240(dir, var_e3e1b987 = 100, var_1f32eac0 = 0.1, attacker
 }
 
 function function_ba30b321(time, attacker, mod = "MOD_HIT_BY_OBJECT") {
-  assert(!isplayer(self));
+  assert(!isPlayer(self));
   if(isDefined(self.boss) && self.boss) {
     return;
   }

@@ -6,6 +6,7 @@
 #include animscripts\utility;
 #include animscripts\traverse\zombie_shared;
 #using_animtree("generic_human");
+
 main() {
   if(isDefined(self.is_zombie) && self.is_zombie) {
     if(!self.isdog) {
@@ -17,7 +18,6 @@ main() {
     }
   }
 }
-
 jump_down_quad() {
   traverseData = [];
   traverseData["traverseAnim"] = % ai_zombie_quad_jump_down_vent;

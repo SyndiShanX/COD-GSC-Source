@@ -27,7 +27,6 @@ _id_1299() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     level._id_129A[var_0[var_1]] = [];
-
   }
   _id_129D("american", "Abbott");
   _id_129D("american", "Abeles");
@@ -638,7 +637,6 @@ _id_12A1(var_0) {
 
   if(var_1.size > 1) {
     var_0 = var_1[1];
-
   }
   return var_0;
 }
@@ -725,7 +723,6 @@ _id_12A5(var_0) {
 _id_12A6(var_0) {
   if(!isDefined(var_0)) {
     self._id_0BF1 = "private";
-
   }
   var_1 = strtok(var_0, " ");
   var_2 = var_1[0];

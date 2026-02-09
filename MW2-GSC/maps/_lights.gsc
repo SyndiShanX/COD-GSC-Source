@@ -35,7 +35,7 @@ flickerLight(color0, color1, minDelay, maxDelay) {
 
 generic_pulsing() {
   //ChrisC wants the lights off when probes are done
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
     return;
   }
@@ -79,7 +79,7 @@ generic_pulsing() {
 
 generic_double_strobe() {
   //ChrisC wants the lights off when probes are done
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
     return;
   }
@@ -157,7 +157,7 @@ getclosests_flickering_model(origin) {
 
 generic_flickering() {
   //ChrisC wants the lights off when probes are done
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
     return;
   }

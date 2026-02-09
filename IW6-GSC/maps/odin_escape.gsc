@@ -907,7 +907,7 @@ escape_explosion_player_timeout() {
   wait 0.5;
   level.player kill();
   level notify("new_quote_string");
-  setdvar("ui_deadquote", &"ODIN_WINDOW_TIMEOUT");
+  setDvar("ui_deadquote", &"ODIN_WINDOW_TIMEOUT");
   maps\_utility::missionfailedwrapper();
 }
 

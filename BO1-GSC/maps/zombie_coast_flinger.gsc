@@ -13,30 +13,28 @@ main() {
   level.flinger_anims["player_fling_prone"] = % pb_rifle_prone_flinger_flail;
   level.flinger_animtree = #animtree;
 }
-
 init_flinger() {
   flag_wait("all_players_spawned");
-  blocker = getEnt("flipper_pathblock", "targetname");
+  blocker = getent("flipper_pathblock", "targetname");
   blocker connectpaths();
   blocker trigger_off();
-  gate = getEnt("flinger_player_gate", "targetname");
+  gate = getent("flinger_player_gate", "targetname");
   gate notsolid();
   level thread start_flinger_in_open_position();
   level thread flinger_think();
 }
-
 start_flinger_in_open_position() {
-  blocker = getEnt("flipper_pathblock", "targetname");
-  gate = getEnt("flinger_player_gate", "targetname");
-  flinger_trig = getEnt("flinger_activate", "targetname");
-  flinger_trig.flipper = getEnt("flipper", "targetname");
+  blocker = getent("flipper_pathblock", "targetname");
+  gate = getent("flinger_player_gate", "targetname");
+  flinger_trig = getent("flinger_activate", "targetname");
+  flinger_trig.flipper = getent("flipper", "targetname");
   flinger_trig.flipper_closed_struct = getstruct("flipper_closed", "targetname");
   flinger_trig.flipper_open_struct = getstruct("flipper_open", "targetname");
   flinger_trig.flipper_anchor = spawn("script_origin", flinger_trig.flipper_closed_struct.origin);
   flinger_trig.flipper_anchor.angles = flinger_trig.flipper_closed_struct.angles;
   flinger_trig.flipper linkto(flinger_trig.flipper_anchor);
   angles_dif = flinger_trig.flipper_open_struct.angles - flinger_trig.flipper_closed_struct.angles;
-  flinger_trig.flipper_anchor rotatePitch(angles_dif[0], .2);
+  flinger_trig.flipper_anchor rotatepitch(angles_dif[0], .2);
   flag_wait("power_on");
   flag_wait("residence_beach_group");
   wait_for_flinger_area_to_be_clear();
@@ -45,7 +43,7 @@ start_flinger_in_open_position() {
   blocker trigger_off();
   flinger_trig.flipper playSound("zmb_flinger_close");
   angles_dif = flinger_trig.flipper_closed_struct.angles - flinger_trig.flipper_open_struct.angles;
-  flinger_trig.flipper_anchor rotatePitch(angles_dif[0], .2);
+  flinger_trig.flipper_anchor rotatepitch(angles_dif[0], .2);
   wait(.3);
   flinger_trig.flipper unlink();
   flinger_trig.flipper_anchor delete();
@@ -54,13 +52,12 @@ start_flinger_in_open_position() {
   blocker trigger_off();
   level notify("flinger_in_place");
 }
-
 flinger_think() {
   flag_wait("power_on");
   flag_wait("residence_beach_group");
   level waittill("flinger_in_place");
-  flinger_trig = getEnt("flinger_activate", "targetname");
-  flinger_poi = getEnt(flinger_trig.target, "targetname");
+  flinger_trig = getent("flinger_activate", "targetname");
+  flinger_poi = getent(flinger_trig.target, "targetname");
   flinger_poi create_zombie_point_of_interest(undefined, 30, 0, false);
   flinger_poi thread create_zombie_point_of_interest_attractor_positions(4, 45);
   while(1) {
@@ -71,7 +68,7 @@ flinger_think() {
     if(isDefined(who.sessionstate) && is_true(who.sessionstate == "spectator")) {
       continue;
     }
-    flinger_trig.flipper = getEnt("flipper", "targetname");
+    flinger_trig.flipper = getent("flipper", "targetname");
     flinger_trig.flipper playSound("zmb_flinger_activate");
     flinger_trig.flipper thread play_delayed_activate_sound();
     wait(2);
@@ -81,12 +78,10 @@ flinger_think() {
     }
   }
 }
-
 play_delayed_activate_sound() {
   wait(1.9);
   self playSound("zmb_flinger_activate");
 }
-
 flinger_fling() {
   players_reviving = true;
   while(players_reviving) {
@@ -105,15 +100,15 @@ flinger_fling() {
     }
     wait(.5);
   }
-  blocker = getEnt("flipper_pathblock", "targetname");
-  gate = getEnt("flinger_player_gate", "targetname");
+  blocker = getent("flipper_pathblock", "targetname");
+  gate = getent("flinger_player_gate", "targetname");
   self.flipper_closed_struct = getstruct("flipper_closed", "targetname");
   self.flipper_open_struct = getstruct("flipper_open", "targetname");
   self.flipper_anchor = spawn("script_origin", self.flipper_closed_struct.origin);
   self.flipper_anchor.angles = self.flipper_closed_struct.angles;
   self.flipper linkto(self.flipper_anchor);
   angles_dif = self.flipper_open_struct.angles - self.flipper_closed_struct.angles;
-  self.flipper_anchor rotatePitch(angles_dif[0], .2);
+  self.flipper_anchor rotatepitch(angles_dif[0], .2);
   self.flipper playSound("zmb_flinger_fling_add");
   self.zombies_flinged = false;
   level thread player_launch(self, gate);
@@ -139,7 +134,7 @@ flinger_fling() {
   self.flipper playSound("zmb_flinger_close");
   self.zombies_flinged = false;
   angles_dif = self.flipper_closed_struct.angles - self.flipper_open_struct.angles;
-  self.flipper_anchor rotatePitch(angles_dif[0], .2);
+  self.flipper_anchor rotatepitch(angles_dif[0], .2);
   self notify("trap_done");
   do_flipper_corpse_cleanup(self);
   self.flipper_anchor waittill("rotatedone");
@@ -149,9 +144,8 @@ flinger_fling() {
   blocker connectpaths();
   blocker trigger_off();
 }
-
 wait_for_flinger_area_to_be_clear() {
-  area = getEnt("flinger_check_clear", "targetname");
+  area = getent("flinger_check_clear", "targetname");
   if(!isDefined(area)) {
     return;
   }
@@ -179,7 +173,6 @@ wait_for_flinger_area_to_be_clear() {
     wait(.25);
   }
 }
-
 fling_zombie(fling_dir) {
   self.no_powerups = true;
   self StartRagdoll();
@@ -189,9 +182,8 @@ fling_zombie(fling_dir) {
   self dodamage(self.health + 100, self.origin);
   level.zombie_total++;
 }
-
 unlink_later(link_ent) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self endon("disconnect");
   }
   prevorigin = self.origin;
@@ -201,15 +193,15 @@ unlink_later(link_ent) {
     wait(.05);
   }
   self Unlink();
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clearclientflag(self.fling_anim);
     wait_network_frame();
     self show();
   }
-  self stopLoopSound(.75);
+  self StopLoopSound(.75);
   self playSound("zmb_player_flinger_land");
   link_ent delete();
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(!self maps\_laststand::player_is_in_laststand()) {
       self decrement_is_drinking();
     }
@@ -225,7 +217,6 @@ unlink_later(link_ent) {
     }
   }
 }
-
 player_launch(flipper_area, gate) {
   launch_spots = getstructarray("player_launch_spot", "targetname");
   players = get_players();
@@ -238,7 +229,6 @@ player_launch(flipper_area, gate) {
     }
   }
 }
-
 fling_player(launch_spot) {
   self endon("death");
   self endon("disconnect");
@@ -292,13 +282,12 @@ fling_player(launch_spot) {
     }
   }
   if(all_players_flung) {
-    flinger_trig = getEnt("flinger_activate", "targetname");
-    flinger_poi = getEnt(flinger_trig.target, "targetname");
+    flinger_trig = getent("flinger_activate", "targetname");
+    flinger_poi = getent(flinger_trig.target, "targetname");
     flinger_poi activate_zombie_point_of_interest();
     flinger_poi thread wait_for_flung_players_to_land();
   }
 }
-
 wait_for_flung_players_to_land() {
   players_landed = false;
   while(!players_landed) {
@@ -312,7 +301,6 @@ wait_for_flung_players_to_land() {
   }
   self deactivate_zombie_point_of_interest();
 }
-
 boss_launch(flipper_area) {
   launch_spots = getstructarray("engineer_launch_spot", "targetname");
   if(self istouching(flipper_area)) {
@@ -327,12 +315,10 @@ boss_launch(flipper_area) {
     self thread unlink_later(org1);
   }
 }
-
 flipper_second_dust() {
   wait(0.2);
   playFX(level._effect["rise_dust"], self.flipper.origin + (-100, 0, 0));
 }
-
 do_flipper_corpse_cleanup(area) {
   corpses = GetCorpseArray();
   if(isDefined(corpses)) {
@@ -343,7 +329,6 @@ do_flipper_corpse_cleanup(area) {
     }
   }
 }
-
 remove_corpse() {
   playFX(level._effect["corpse_burst"], self.origin);
   self Delete();

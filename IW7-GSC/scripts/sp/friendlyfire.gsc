@@ -93,7 +93,7 @@ func_73B1(var_0) {
       }
     }
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_8 = 1;
       if(isDefined(var_6) && var_6 == "none") {
         var_8 = 0;
@@ -108,7 +108,7 @@ func_73B1(var_0) {
       }
     } else if(isDefined(var_2.var_9F) && var_2.var_9F == "script_vehicle") {
       var_9 = var_2 func_816A();
-      if(isDefined(var_9) && isplayer(var_9)) {
+      if(isDefined(var_9) && isPlayer(var_9)) {
         var_8 = 1;
       }
     }
@@ -268,7 +268,7 @@ func_B8CF(var_0) {
     var_0 = 0;
   }
 
-  if(getdvar("friendlyfire_dev_disabled") == "1") {
+  if(getDvar("friendlyfire_dev_disabled") == "1") {
     return;
   }
 

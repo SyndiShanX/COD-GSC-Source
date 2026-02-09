@@ -7,6 +7,7 @@
 #include common_scripts\utility;
 #include maps\_zombiemode_utility;
 #using_animtree("generic_human");
+
 init() {
   if(!maps\_zombiemode_weapons::is_weapon_included("freezegun_zm")) {
     return;
@@ -42,14 +43,12 @@ init() {
   level._effect["freezegun_crumple_gibtrail_fx"] = LoadFX("system_elements/fx_null");
   level thread freezegun_on_player_connect();
 }
-
 freezegun_on_player_connect() {
   for(;;) {
     level waittill("connecting", player);
     player thread wait_for_thundergun_fired();
   }
 }
-
 wait_for_thundergun_fired() {
   self endon("disconnect");
   self waittill("spawned_player");
@@ -64,7 +63,6 @@ wait_for_thundergun_fired() {
     }
   }
 }
-
 freezegun_fired(upgraded) {
   if(!isDefined(level.freezegun_enemies)) {
     level.freezegun_enemies = [];
@@ -77,7 +75,6 @@ freezegun_fired(upgraded) {
   level.freezegun_enemies = [];
   level.freezegun_enemies_dist_ratio = [];
 }
-
 freezegun_get_cylinder_radius(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_cylinder_radius_upgraded"];
@@ -85,7 +82,6 @@ freezegun_get_cylinder_radius(upgraded) {
     return level.zombie_vars["freezegun_cylinder_radius"];
   }
 }
-
 freezegun_get_inner_range(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_inner_range_upgraded"];
@@ -93,7 +89,6 @@ freezegun_get_inner_range(upgraded) {
     return level.zombie_vars["freezegun_inner_range"];
   }
 }
-
 freezegun_get_outer_range(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_outer_range_upgraded"];
@@ -101,7 +96,6 @@ freezegun_get_outer_range(upgraded) {
     return level.zombie_vars["freezegun_outer_range"];
   }
 }
-
 freezegun_get_inner_damage(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_inner_damage_upgraded"];
@@ -109,7 +103,6 @@ freezegun_get_inner_damage(upgraded) {
     return level.zombie_vars["freezegun_inner_damage"];
   }
 }
-
 freezegun_get_outer_damage(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_outer_damage_upgraded"];
@@ -117,7 +110,6 @@ freezegun_get_outer_damage(upgraded) {
     return level.zombie_vars["freezegun_outer_damage"];
   }
 }
-
 freezegun_get_shatter_range(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_shatter_range_upgraded"];
@@ -125,7 +117,6 @@ freezegun_get_shatter_range(upgraded) {
     return level.zombie_vars["freezegun_shatter_range"];
   }
 }
-
 freezegun_get_shatter_inner_damage(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_shatter_inner_damage_upgraded"];
@@ -133,7 +124,6 @@ freezegun_get_shatter_inner_damage(upgraded) {
     return level.zombie_vars["freezegun_shatter_inner_damage"];
   }
 }
-
 freezegun_get_shatter_outer_damage(upgraded) {
   if(upgraded) {
     return level.zombie_vars["freezegun_shatter_outer_damage_upgraded"];
@@ -141,7 +131,6 @@ freezegun_get_shatter_outer_damage(upgraded) {
     return level.zombie_vars["freezegun_shatter_outer_damage"];
   }
 }
-
 freezegun_get_enemies_in_range(upgraded) {
   inner_range = freezegun_get_inner_range(upgraded);
   outer_range = freezegun_get_outer_range(upgraded);
@@ -161,7 +150,7 @@ freezegun_get_enemies_in_range(upgraded) {
       continue;
     }
     test_origin = zombies[i] getcentroid();
-    test_range_squared = distanceSquared(view_pos, test_origin);
+    test_range_squared = DistanceSquared(view_pos, test_origin);
     if(test_range_squared > freezegun_outer_range_squared) {
       zombies[i] freezegun_debug_print("range", (1, 0, 0));
       return;
@@ -173,7 +162,7 @@ freezegun_get_enemies_in_range(upgraded) {
       continue;
     }
     radial_origin = PointOnSegmentNearestToPoint(view_pos, end_pos, test_origin);
-    if(distanceSquared(test_origin, radial_origin) > cylinder_radius_squared) {
+    if(DistanceSquared(test_origin, radial_origin) > cylinder_radius_squared) {
       zombies[i] freezegun_debug_print("cylinder", (1, 0, 0));
       continue;
     }
@@ -185,30 +174,24 @@ freezegun_get_enemies_in_range(upgraded) {
     level.freezegun_enemies_dist_ratio[level.freezegun_enemies_dist_ratio.size] = (freezegun_outer_range_squared - test_range_squared) / (freezegun_outer_range_squared - freezegun_inner_range_squared);
   }
 }
-
 freezegun_debug_print(msg, color) {}
 freezegun_do_damage(upgraded, player, dist_ratio) {
   damage = Int(LerpFloat(freezegun_get_outer_damage(upgraded), freezegun_get_inner_damage(upgraded), dist_ratio));
   self DoDamage(damage, player.origin, player, undefined, "projectile");
   self freezegun_debug_print(damage, (0, 1, 0));
 }
-
 freezegun_set_extremity_damage_fx() {
   self setclientflag(level._ZOMBIE_ACTOR_FLAG_FREEZEGUN_EXTREMITY_DAMAGE_FX);
 }
-
 freezegun_clear_extremity_damage_fx() {
   self clearclientflag(level._ZOMBIE_ACTOR_FLAG_FREEZEGUN_EXTREMITY_DAMAGE_FX);
 }
-
 freezegun_set_torso_damage_fx() {
   self setclientflag(level._ZOMBIE_ACTOR_FLAG_FREEZEGUN_TORSO_DAMAGE_FX);
 }
-
 freezegun_clear_torso_damage_fx() {
   self clearclientflag(level._ZOMBIE_ACTOR_FLAG_FREEZEGUN_TORSO_DAMAGE_FX);
 }
-
 freezegun_damage_response(player, amount) {
   if(isDefined(self.freezegun_damage_response_func)) {
     if(self[[self.freezegun_damage_response_func]](player, amount)) {
@@ -232,7 +215,6 @@ freezegun_damage_response(player, amount) {
   }
   self thread freezegun_set_extremity_damage_fx();
 }
-
 freezegun_do_gib(gib_type, upgraded) {
   gibArray = [];
   gibArray[gibArray.size] = level._ZOMBIE_GIB_PIECE_INDEX_ALL;
@@ -244,7 +226,6 @@ freezegun_do_gib(gib_type, upgraded) {
   wait(0.1);
   self self_delete();
 }
-
 freezegun_do_shatter(player, weap, shatter_trigger, crumple_trigger) {
   freezegun_debug_print("shattered");
   self freezegun_cleanup_freezegun_triggers(shatter_trigger, crumple_trigger);
@@ -256,7 +237,6 @@ freezegun_do_shatter(player, weap, shatter_trigger, crumple_trigger) {
     self StartRagdoll();
   }
 }
-
 freezegun_wait_for_shatter(player, weap, shatter_trigger, crumple_trigger) {
   shatter_trigger endon("cleanup_freezegun_triggers");
   orig_attacker = self.attacker;
@@ -267,7 +247,6 @@ freezegun_wait_for_shatter(player, weap, shatter_trigger, crumple_trigger) {
     self thread freezegun_do_shatter(player, weap, shatter_trigger, crumple_trigger);
   }
 }
-
 freezegun_do_crumple(weap, shatter_trigger, crumple_trigger) {
   freezegun_debug_print("crumpled");
   self freezegun_cleanup_freezegun_triggers(shatter_trigger, crumple_trigger);
@@ -278,13 +257,11 @@ freezegun_do_crumple(weap, shatter_trigger, crumple_trigger) {
     self StartRagdoll();
   }
 }
-
 freezegun_wait_for_crumple(weap, shatter_trigger, crumple_trigger) {
   crumple_trigger endon("cleanup_freezegun_triggers");
   crumple_trigger waittill("trigger");
   self thread freezegun_do_crumple(weap, shatter_trigger, crumple_trigger);
 }
-
 freezegun_cleanup_freezegun_triggers(shatter_trigger, crumple_trigger) {
   self notify("cleanup_freezegun_triggers");
   shatter_trigger notify("cleanup_freezegun_triggers");
@@ -292,12 +269,10 @@ freezegun_cleanup_freezegun_triggers(shatter_trigger, crumple_trigger) {
   shatter_trigger self_delete();
   crumple_trigger self_delete();
 }
-
 freezegun_run_skipped_death_events() {
   self thread maps\_zombiemode_audio::do_zombies_playvocals("death", self.animname);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
 }
-
 freezegun_death(hit_location, hit_origin, player) {
   if(self.isdog) {
     self freezegun_run_skipped_death_events();
@@ -340,27 +315,21 @@ freezegun_death(hit_location, hit_origin, player) {
   wait(anim_len);
   self thread freezegun_do_crumple(weap, shatter_trigger, crumple_trigger);
 }
-
 is_freezegun_damage(mod) {
   return (("MOD_EXPLOSIVE" == mod || "MOD_PROJECTILE" == mod) && isDefined(self.damageweapon) && (self.damageweapon == "freezegun_zm" || self.damageweapon == "freezegun_upgraded_zm"));
 }
-
 is_freezegun_shatter_damage(mod) {
   return ("MOD_EXPLOSIVE" == mod && isDefined(self.damageweapon) && (self.damageweapon == "freezegun_zm" || self.damageweapon == "freezegun_upgraded_zm"));
 }
-
 should_do_freezegun_death(mod) {
   return is_freezegun_damage(mod);
 }
-
 enemy_damaged_by_freezegun() {
   return 0 < self.freezegun_damage;
 }
-
 enemy_percent_damaged_by_freezegun() {
   return self.freezegun_damage / self.maxhealth;
 }
-
 enemy_killed_by_freezegun() {
   return (isDefined(self.freezegun_death) && self.freezegun_death == true);
 }

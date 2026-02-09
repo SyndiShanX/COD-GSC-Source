@@ -48,10 +48,10 @@ extra_death_func_to_check_for_splat_death() {
 
   if(self.damagemod == "MOD_GRENADE" || self.damagemod == "MOD_GRENADE_SPLASH") {
     if(self.damageweapon == "blundersplat_explosive_dart_zm") {
-      if(isplayer(self.attacker))
+      if(isPlayer(self.attacker))
         self notify("killed_by_a_blundersplat", self.attacker);
     } else if(self.damageweapon == "bouncing_tomahawk_zm") {
-      if(isplayer(self.attacker))
+      if(isPlayer(self.attacker))
         self.attacker notify("got_a_tomahawk_kill");
     }
   }
@@ -108,7 +108,7 @@ wait_for_initial_conditions() {
       playsoundatposition("zmb_squest_spoon_poster", m_poster.origin);
       m_poster delete();
 
-      if(isDefined(attacker) && isplayer(attacker))
+      if(isDefined(attacker) && isPlayer(attacker))
         attacker do_player_general_vox("quest", "secret_poster", undefined, 100);
 
       wait 1.0;
@@ -256,5 +256,4 @@ debug_prison_spoon_quest() {
 
     wait 1.0;
   }
-
 }

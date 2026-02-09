@@ -35,11 +35,9 @@ main() {
       break;
   }
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\c_viet_zombie_nva1::precache();
   character\c_viet_zombie_female_body::precache();

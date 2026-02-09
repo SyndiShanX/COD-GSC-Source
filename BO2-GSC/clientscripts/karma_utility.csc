@@ -10,10 +10,11 @@ autoexec _karma_utility() {
 }
 
 set_id_shader(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     lerp_shader_constant(localclientnum, 2, "ScriptVector3", 2, 0.01, 1);
-  else
+  } else {
     lerp_shader_constant(localclientnum, 2, "ScriptVector3", 2, 0.01, 0);
+  }
 }
 
 screen_flash() {
@@ -23,11 +24,11 @@ screen_flash() {
 
 screen_flash_dvar() {
   n_exposure = getdvarfloat(#"r_exposureValue");
-  setdvar("r_exposureTweak", 1);
+  setDvar("r_exposureTweak", 1);
   setdvarfloat("r_exposureValue", -6);
   wait(frames(2));
   lerp_dvar("r_exposureValue", -6, n_exposure, frames(2.5 - 1.0), 0);
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureTweak", 0);
 }
 
 screen_flash_visionset() {

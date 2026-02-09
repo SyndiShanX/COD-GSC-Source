@@ -10,7 +10,6 @@
 init() {
   team_score_init();
 }
-
 player_add_points(event, mod, hit_location, is_dog) {
   if(level.intermission) {
     return;
@@ -85,7 +84,6 @@ player_add_points(event, mod, hit_location, is_dog) {
   }
   self.stats["score"] = self.score_total;
 }
-
 get_points_multiplier() {
   multiplier = level.zombie_vars["zombie_point_scalar"];
   if(level.mutators["mutator_doubleMoney"]) {
@@ -93,7 +91,6 @@ get_points_multiplier() {
   }
   return multiplier;
 }
-
 get_zombie_death_player_points() {
   players = get_players();
   if(players.size == 1) {
@@ -107,7 +104,6 @@ get_zombie_death_player_points() {
   }
   return (points);
 }
-
 get_zombie_death_team_points() {
   players = get_players();
   if(players.size == 1) {
@@ -121,7 +117,6 @@ get_zombie_death_team_points() {
   }
   return (points);
 }
-
 player_add_points_kill_bonus(mod, hit_location) {
   if(mod == "MOD_MELEE") {
     return level.zombie_vars["zombie_score_bonus_melee"];
@@ -145,7 +140,6 @@ player_add_points_kill_bonus(mod, hit_location) {
   }
   return score;
 }
-
 player_reduce_points(event, mod, hit_location) {
   if(level.intermission) {
     return;
@@ -177,7 +171,6 @@ player_reduce_points(event, mod, hit_location) {
   self.score = points;
   self set_player_score_hud();
 }
-
 add_to_player_score(points, add_to_total) {
   if(!isDefined(add_to_total)) {
     add_to_total = true;
@@ -191,7 +184,6 @@ add_to_player_score(points, add_to_total) {
   }
   self set_player_score_hud();
 }
-
 minus_to_player_score(points) {
   if(!isDefined(points) || level.intermission) {
     return;
@@ -199,7 +191,6 @@ minus_to_player_score(points) {
   self.score -= points;
   self set_player_score_hud();
 }
-
 add_to_team_score(points) {}
 minus_to_team_score(points) {
   if(!isDefined(points) || level.intermission) {
@@ -212,7 +203,6 @@ minus_to_team_score(points) {
   team_pool.score -= points;
   team_pool set_team_score_hud();
 }
-
 player_died_penalty() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -221,15 +211,13 @@ player_died_penalty() {
     }
   }
 }
-
 player_downed_penalty() {
   self player_reduce_points("downed");
 }
-
 set_player_score_hud(init) {
   num = self.entity_num;
   score_diff = self.score - self.old_score;
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     if(!level.onlineGame && !level.systemLink && IsSplitScreen()) {
       self thread score_highlight(self, self.score, score_diff);
     } else {
@@ -244,12 +232,10 @@ set_player_score_hud(init) {
   }
   self.old_score = self.score;
 }
-
 set_team_score_hud(init) {
   self.score = 0;
   self.score_total = 0;
 }
-
 create_highlight_hud(x, y, value) {
   font_size = 8;
   if(self IsSplitscreen()) {
@@ -276,7 +262,6 @@ create_highlight_hud(x, y, value) {
   hud SetValue(value);
   return hud;
 }
-
 score_highlight(scoring_player, score, value) {
   self endon("disconnect");
   score_x = -103;
@@ -304,8 +289,8 @@ score_highlight(scoring_player, score, value) {
   half_time = time * 0.5;
   hud = self create_highlight_hud(x, y, value);
   hud MoveOverTime(time);
-  hud.x -= 20 + randomInt(40);
-  hud.y -= (-15 + randomInt(30));
+  hud.x -= 20 + RandomInt(40);
+  hud.y -= (-15 + RandomInt(30));
   wait(half_time);
   hud FadeOverTime(half_time);
   hud.alpha = 0;
@@ -313,7 +298,6 @@ score_highlight(scoring_player, score, value) {
   hud Destroy();
   level.hudelem_count--;
 }
-
 team_score_init() {
   flag_wait("all_players_connected");
   level.team_pool = [];
@@ -348,7 +332,6 @@ team_score_init() {
     }
   }
 }
-
 create_team_hud(value, team_pool) {
   AssertEx(isDefined(team_pool), "create_team_hud:You must specify a team_pool when calling this function");
   font_size = 8.0;

@@ -1279,7 +1279,7 @@ function function_83d084fe(str_targetname) {
   t_to_check endon("death");
   while(true) {
     t_to_check waittill("trigger", var_4161ad80);
-    if(isplayer(var_4161ad80) || isDefined(var_4161ad80.owner)) {
+    if(isPlayer(var_4161ad80) || isDefined(var_4161ad80.owner)) {
       if(isDefined(var_4161ad80.owner)) {
         t_to_check trigger::use(undefined, var_4161ad80.owner);
       }
@@ -1292,7 +1292,7 @@ function function_8df847d() {
   self endon("death");
   while(true) {
     self waittill("trigger", var_4161ad80);
-    if(isplayer(var_4161ad80) || isDefined(var_4161ad80.owner)) {
+    if(isPlayer(var_4161ad80) || isDefined(var_4161ad80.owner)) {
       if(isDefined(var_4161ad80.owner)) {
         self useby(var_4161ad80.owner);
       }
@@ -1385,7 +1385,7 @@ function generator_damage_watch() {
   var_5c2b0988 setCanDamage(1);
   while(n_damage < 1000) {
     var_5c2b0988 waittill("damage", idamage, sattacker, vdirection, vpoint, stype, smodelname, sattachtag, stagname);
-    if(isplayer(sattacker)) {
+    if(isPlayer(sattacker)) {
       if(stype === "MOD_PROJECTILE_SPLASH") {
         idamage = idamage * 2;
       }
@@ -2264,7 +2264,7 @@ function function_e8db2799(var_46100e43, str_path) {
   level endon("hash_e8db2799");
   while(true) {
     var_46100e43 waittill("trigger", ent);
-    if(isplayer(ent) && isalive(ent)) {
+    if(isPlayer(ent) && isalive(ent)) {
       switch (str_path) {
         case "left": {
           ent dialog::player_say("plyr_taking_left_flank_c_0");

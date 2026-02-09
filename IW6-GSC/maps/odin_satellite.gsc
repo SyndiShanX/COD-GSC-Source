@@ -1089,7 +1089,7 @@ player_took_too_long_to_open(var_0) {
         thread maps\_utility::smart_radio_dialogue("odin_shq_youretoolatebegin");
         wait 2.5;
         level notify("new_quote_string");
-        setdvar("ui_deadquote", "@ODIN_SATELLITE_TIMEOUT");
+        setDvar("ui_deadquote", "@ODIN_SATELLITE_TIMEOUT");
         maps\_utility::missionfailedwrapper();
         return;
       }

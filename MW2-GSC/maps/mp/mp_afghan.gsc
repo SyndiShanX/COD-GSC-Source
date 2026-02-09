@@ -15,16 +15,16 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_afghan");
 
-  setdvar("compassmaxrange", "3000");
+  setDvar("compassmaxrange", "3000");
 
   ambientPlay("ambient_mp_desert");
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.2);
-  setdvar("r_lightGridContrast", 0);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.2);
+  setDvar("r_lightGridContrast", 0);
 
   thread killTrigger((206, 2414, 257 - 120), 55, 100);
 }

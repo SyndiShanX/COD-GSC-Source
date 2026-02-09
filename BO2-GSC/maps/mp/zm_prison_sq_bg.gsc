@@ -67,7 +67,7 @@ sq_bg_macguffin_think() {
   while(true) {
     self waittill("damage", amount, attacker);
 
-    if(attacker == level || isplayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
+    if(attacker == level || isPlayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
       playFX(level._effect["ee_skull_shot"], self.origin);
       self playSound("zmb_powerpanel_activate");
       self thread maps\mp\zombies\_zm_afterlife::disable_afterlife_prop();
@@ -150,7 +150,7 @@ give_sq_bg_reward() {
   while(true) {
     t_near waittill("trigger", ent);
 
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       t_near thread sq_bg_spawn_rumble();
       break;
     }
@@ -241,5 +241,4 @@ debug_sq_bg_quest_starter() {
 
     wait 1.0;
   }
-
 }

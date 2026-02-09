@@ -6,7 +6,7 @@
 init() {
   if(!isDefined(game["music"])) {
     var_0 = randomint(100);
-    var_1 = getdvar("mapname");
+    var_1 = getDvar("mapname");
     if(getdvarint("scr_vo_selection_test", 0) != 0) {
       var_2 = getdvarint("scr_vo_selection_test", 0);
       switch (var_2) {
@@ -629,7 +629,7 @@ ongameended() {
       continue;
     }
 
-    if(isDefined(var_12) && isplayer(var_12) && var_13 == var_12) {
+    if(isDefined(var_12) && isPlayer(var_12) && var_13 == var_12) {
       var_13 setplayermusicstate(game["music"]["victory_" + var_13.pers["team"]]);
       continue;
     }
@@ -645,7 +645,7 @@ func_E76B() {
   wait(0.5);
   var_1 = game["teamScores"]["allies"];
   var_2 = game["teamScores"]["axis"];
-  if(!isDefined(var_0) || isplayer(var_0)) {
+  if(!isDefined(var_0) || isPlayer(var_0)) {
     return;
   }
 
@@ -687,7 +687,7 @@ func_7690() {
     return;
   }
 
-  if(isplayer(var_0) && !level.teambased) {
+  if(isPlayer(var_0) && !level.teambased) {
     for(var_2 = 0; var_2 < level.placement["all"].size; var_2++) {
       var_3 = level.placement["all"][var_2];
       if(var_3 issplitscreenplayer() && !var_3 issplitscreenplayerprimary()) {

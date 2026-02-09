@@ -956,18 +956,18 @@ TryGrenade(throwingAt, optionalAnimation) {
 
   if(isDefined(self.enemy) && throwingAt == self.enemy) {
     if(!checkGrenadeThrowDist()) {
-      /# self setGrenadeMissReason( "Too close or too far" );
+      self setGrenadeMissReason("Too close or too far");
       return false;
     }
 
     if(isPlayer(self.enemy) && self.enemy isPlayerDown()) {
-      /# self setGrenadeMissReason( "Enemy is downed player" );
+      self setGrenadeMissReason("Enemy is downed player");
       return false;
     }
 
     if(self canSeeEnemyFromExposed()) {
       if(!(self isGrenadePosSafe(throwingAt, throwingAt.origin))) {
-        /# self setGrenadeMissReason( "Teammates near target" );
+        self setGrenadeMissReason("Teammates near target");
         return false;
       }
       return TryGrenadeThrow(throwingAt, undefined, optionalAnimation, armOffset);
@@ -976,13 +976,13 @@ TryGrenade(throwingAt, optionalAnimation) {
     } else {
       // hopefully we can get through a grenade hint or something
       if(!(self isGrenadePosSafe(throwingAt, throwingAt.origin))) {
-        /# self setGrenadeMissReason( "Teammates near target" );
+        self setGrenadeMissReason("Teammates near target");
         return false;
       }
       return TryGrenadeThrow(throwingAt, undefined, optionalAnimation, armOffset);
     }
 
-    /# self setGrenadeMissReason( "Don't know where to throw" );
+    self setGrenadeMissReason("Don't know where to throw");
     return false; // didn't know where to throw!
   } else {
     return TryGrenadePosProc(throwingAt, throwingAt.origin, optionalAnimation, armOffset);
@@ -992,7 +992,7 @@ TryGrenade(throwingAt, optionalAnimation) {
 TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow, withBounce, throwInThread) {
   // no AI grenade throws in the first 10 seconds, bad during black screen
   if(gettime() < 10000 && !isDefined(level.ignoreGrenadeSafeTime)) {
-    /# self setGrenadeMissReason( "First 10 seconds of game" );
+    self setGrenadeMissReason("First 10 seconds of game");
     return false;
   }
 
@@ -1087,7 +1087,7 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
       }
     }
 
-    if(getdvar("grenade_spam") == "on")
+    if(getDvar("grenade_spam") == "on")
       nextGrenadeTimeToUse = 0;
 
     //prof_end( "TryGrenadeThrow" );
@@ -1098,11 +1098,11 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
 
     return true;
   } else {
-    /# self setGrenadeMissReason( "Couldn't find trajectory" ); #/ /
+    self setGrenadeMissReason("Couldn't find trajectory");
+    /
     #
     if(getdebugdvar("debug_grenademiss") == "on" && isDefined(destination))
       thread grenadeLine(armoffset, destination);
-
   }
 
   //prof_end( "TryGrenadeThrow" );
@@ -1453,7 +1453,7 @@ useCoverNodeIfPossible(node) {
   if(self UseCoverNode(node)) {
     return true;
   } else {
-    /#self thread DebugFailedCoverUsage( node );
+    self thread DebugFailedCoverUsage(node);
   }
 
   self.keepClaimedNodeIfValid = oldKeepNodeInGoal;
@@ -1463,8 +1463,8 @@ useCoverNodeIfPossible(node) {
 }
 
 DebugFailedCoverUsage(node) {
-  if(getdvar("scr_debugfailedcover") == "")
-    setdvar("scr_debugfailedcover", "0");
+  if(getDvar("scr_debugfailedcover") == "")
+    setDvar("scr_debugfailedcover", "0");
   if(getdebugdvarint("scr_debugfailedcover") == 1) {
     self endon("death");
     for(i = 0; i < 20; i++) {

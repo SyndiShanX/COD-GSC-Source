@@ -18,6 +18,6 @@ main() {
 
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_estate_tropical_fx::main();
 }

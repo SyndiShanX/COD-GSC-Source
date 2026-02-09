@@ -146,7 +146,7 @@ function private covercleanuptothrowgrenade(behaviortreeentity) {
       grenade = undefined;
       if(isactor(behaviortreeentity.enemy) && isDefined(behaviortreeentity.grenadeweapon)) {
         grenade = behaviortreeentity.enemy magicgrenadetype(behaviortreeentity.grenadeweapon, behaviortreeentity gettagorigin("j_wrist_ri"), (0, 0, 0), behaviortreeentity.grenadeweapon.aifusetime / 1000);
-      } else if(isplayer(behaviortreeentity.enemy) && isDefined(behaviortreeentity.grenadeweapon)) {
+      } else if(isPlayer(behaviortreeentity.enemy) && isDefined(behaviortreeentity.grenadeweapon)) {
         grenade = behaviortreeentity.enemy magicgrenadeplayer(behaviortreeentity.grenadeweapon, behaviortreeentity gettagorigin("j_wrist_ri"), (0, 0, 0));
       }
       if(isDefined(grenade)) {
@@ -185,7 +185,7 @@ function private shouldreturntocovercondition(behaviortreeentity) {
     if(gettime() < (behaviortreeentity.covershootstarttime + 800)) {
       return 0;
     }
-    if(isDefined(behaviortreeentity.enemy) && isplayer(behaviortreeentity.enemy) && behaviortreeentity.enemy.health < (behaviortreeentity.enemy.maxhealth * 0.5)) {
+    if(isDefined(behaviortreeentity.enemy) && isPlayer(behaviortreeentity.enemy) && behaviortreeentity.enemy.health < (behaviortreeentity.enemy.maxhealth * 0.5)) {
       if(gettime() < (behaviortreeentity.covershootstarttime + 3000)) {
         return 0;
       }

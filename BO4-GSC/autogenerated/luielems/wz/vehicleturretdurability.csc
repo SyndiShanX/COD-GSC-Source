@@ -28,7 +28,6 @@ class cvehicleturretdurability: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("bar_percent", 4000, 6, "float", var_661989d5);
   }
-
 }
 
 register(uid, var_661989d5) {

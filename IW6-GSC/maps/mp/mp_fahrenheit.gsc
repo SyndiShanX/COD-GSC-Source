@@ -36,22 +36,22 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_fahrenheit");
 
-  setdvar("r_reactiveMotionWindAmplitudeScale", .5);
-  setdvar("r_reactiveMotionWindFrequencyScale", .5);
+  setDvar("r_reactiveMotionWindAmplitudeScale", .5);
+  setDvar("r_reactiveMotionWindFrequencyScale", .5);
 
   if((level.ps3) || (level.xenon)) {
-    setdvar("sm_sunShadowScale", "0.8");
+    setDvar("sm_sunShadowScale", "0.8");
   }
 
   setdvar_cg_ng("r_specularColorScale", 3, 9);
   setdvar_cg_ng("r_diffuseColorScale", 1.6, 2.2);
-  setdvar("r_ssaorejectdepth", 1500);
-  setdvar("r_ssaofadedepth", 1200);
-  setdvar("r_sky_fog_intensity", "1");
-  setdvar("r_sky_fog_min_angle", "56.6766");
-  setdvar("r_sky_fog_max_angle", "75");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_ssaorejectdepth", 1500);
+  setDvar("r_ssaofadedepth", 1200);
+  setDvar("r_sky_fog_intensity", "1");
+  setDvar("r_sky_fog_min_angle", "56.6766");
+  setDvar("r_sky_fog_max_angle", "75");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -259,7 +259,6 @@ plant_set_stage_directional(stage, angle, time, rand) {
 
     level thread plant_set_stage(plant, stage, delay);
   }
-
 }
 
 plant_set_stage(plant, stage, delay) {
@@ -448,7 +447,7 @@ watch_storm_dvar() {
       if((value > 2) || (value < 0)) {
         println("Invalid storm stage. Valid values are 0, 1, 2.");
       } else {
-        SetDvar(dvar_name, value);
+        setDvar(dvar_name, value);
         level.storm_stage = value;
         rainFXStage(level.storm_stage);
         foreach(player in level.players) {

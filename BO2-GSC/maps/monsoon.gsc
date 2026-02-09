@@ -272,8 +272,9 @@ level_init() {
   level.metalstorm_freeze_death = 1;
   a_escape_trigs = getEntArray("escape_trigs", "script_noteworthy");
 
-  foreach(trig in a_escape_trigs)
-  trig trigger_off();
+  foreach(trig in a_escape_trigs) {
+    trig trigger_off();
+  }
 
   trig_briggs_player_use = getent("briggs_player_use", "targetname");
   trig_briggs_player_use trigger_off();

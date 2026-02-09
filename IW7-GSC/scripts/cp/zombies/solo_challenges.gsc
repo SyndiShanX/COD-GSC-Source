@@ -9,7 +9,7 @@ init_solo_challenges() {
 }
 
 func_956D() {
-  var_0 = getdvar("ui_mapname");
+  var_0 = getDvar("ui_mapname");
   level.zombie_challenge_table = "cp\zombies\" + var_0 + "_challenges.csv";
   if(!tableexists(level.zombie_challenge_table)) {
     level.zombie_challenge_table = undefined;
@@ -22,7 +22,7 @@ func_956D() {
 }
 
 update_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(!current_challenge_is(var_0)) {
       return;
     }
@@ -372,7 +372,7 @@ update_death_challenges(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_9 = var_1.playerowner;
   }
 
-  if(!isplayer(var_9)) {
+  if(!isPlayer(var_9)) {
     return;
   }
 

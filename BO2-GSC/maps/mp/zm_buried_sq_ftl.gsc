@@ -111,7 +111,7 @@ max_lantern_zombie_death_watcher() {
   }
   self waittill("death", attacker);
 
-  if(!isDefined(attacker) || isplayer(attacker)) {
+  if(!isDefined(attacker) || isPlayer(attacker)) {
     return;
   }
   players = getplayers();

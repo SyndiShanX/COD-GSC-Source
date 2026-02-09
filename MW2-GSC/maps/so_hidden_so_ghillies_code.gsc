@@ -8,9 +8,7 @@
 #include maps\_anim;
 #include maps\_specialops;
 
-// ---------------------------------------------------------------------------------
-
-should_spawn() {
+// --------------------------------------------------------------------------------- should_spawn() {
   switch (level.gameSkill) {
     case 0:
     case 1:
@@ -22,9 +20,7 @@ should_spawn() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-create_ghillie_enemies(enemy_id, wait_id, activate_id) {
+// --------------------------------------------------------------------------------- create_ghillie_enemies(enemy_id, wait_id, activate_id) {
   ghillie_enemies_init();
 
   assertex(isDefined(enemy_id), "create_ghillie_enemies() requires a valid enemy_id");
@@ -550,9 +546,7 @@ ghillie_get_time(time_min, time_max) {
   return wait_time;
 }
 
-// ---------------------------------------------------------------------------------
-
-create_patrol_enemies(enemy_id, wait_id, spawn_delay) {
+// --------------------------------------------------------------------------------- create_patrol_enemies(enemy_id, wait_id, spawn_delay) {
   patrol_enemies_init();
 
   assertex(isDefined(enemy_id), "create_patrol_enemies() requires a valid enemy_id");
@@ -684,7 +678,7 @@ patrol_enemy_can_multi_kill(attacker, cause, weapon_name) {
   if(flag("_stealth_spotted"))
     return false;
 
-  if(!isDefined(attacker) || !isplayer(attacker))
+  if(!isDefined(attacker) || !isPlayer(attacker))
     return false;
 
   if(!(cause == "MOD_PISTOL_BULLET" || cause == "MOD_RIFLE_BULLET"))
@@ -762,10 +756,8 @@ patrol_enemy_sight_test(player) {
   return true;
 }
 
-// ---------------------------------------------------------------------------------
-
-death_register_unaware(attacker, force_dialog, skip_dialog) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+// --------------------------------------------------------------------------------- death_register_unaware(attacker, force_dialog, skip_dialog) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     level notify("kill_registered");
     attacker.kills_stealth++;
   }
@@ -776,7 +768,7 @@ death_register_unaware(attacker, force_dialog, skip_dialog) {
 }
 
 death_register_nofire(attacker, force_dialog, skip_dialog) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     level notify("kill_registered");
     attacker.kills_nofire++;
   }
@@ -787,7 +779,7 @@ death_register_nofire(attacker, force_dialog, skip_dialog) {
 }
 
 death_register_basic(attacker, force_dialog, skip_dialog) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     level notify("kill_registered");
     attacker.kills_basic++;
   }
@@ -820,9 +812,7 @@ death_dialog(dialog, total, force_dialog, skip_dialog) {
   radio_dialogue(dialog[total % dialog.size], 1.0);
 }
 
-// ---------------------------------------------------------------------------------
-
-turn_on_stealth() {
+// --------------------------------------------------------------------------------- turn_on_stealth() {
   battlechatter_off("axis");
   battlechatter_off("allies");
 
@@ -949,18 +939,14 @@ stealth_chastize_loop() {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-turn_on_radiation() {
+// --------------------------------------------------------------------------------- turn_on_radiation() {
   thread maps\_radiation::main();
 
   wait 4;
   thread radio_dialogue("so_hid_ghil_rad_warning");
 }
 
-// ---------------------------------------------------------------------------------
-
-hud_bonuses_create() {
+// --------------------------------------------------------------------------------- hud_bonuses_create() {
   ypos = so_hud_ypos();
   stealth_title = so_create_hud_item(3, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
   nofire_title = so_create_hud_item(4, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
@@ -1011,9 +997,7 @@ hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills) {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-objective_set_chopper() {
+// --------------------------------------------------------------------------------- objective_set_chopper() {
   flag_wait("so_hidden_obj_chopper");
 
   obj = getstruct("so_hidden_obj_chopper", "script_noteworthy");
@@ -1021,9 +1005,7 @@ objective_set_chopper() {
   playFX(getfx("extraction_smoke"), obj.origin);
 }
 
-// ---------------------------------------------------------------------------------
-
-create_chatter_aliases_for_patrols() {
+// --------------------------------------------------------------------------------- create_chatter_aliases_for_patrols() {
   aliases = [];
   aliases[aliases.size] = "scoutsniper_ru1_passcig";
   aliases[aliases.size] = "scoutsniper_ru2_whoseturnisit";
@@ -1196,9 +1178,7 @@ find_next_member(closest_enemies, closest, closest_chat_group) {
   return undefined;
 }
 
-// ---------------------------------------------------------------------------------
-
-clip_nosight_wait_for_activate() {
+// --------------------------------------------------------------------------------- clip_nosight_wait_for_activate() {
   self endon("death");
 
   flag_wait(self.script_flag);
@@ -1227,9 +1207,7 @@ clip_nosight_wait_stealth() {
   self delete();
 }
 
-// ---------------------------------------------------------------------------------
-
-init_prone_DOF() {
+// --------------------------------------------------------------------------------- init_prone_DOF() {
   foreach(player in level.players) {
     player.dofDefault["nearStart"] = level.dofDefault["nearStart"];
     player.dofDefault["nearEnd"] = level.dofDefault["nearEnd"];
@@ -1290,9 +1268,7 @@ set_prone_DOF() {
   self maps\_art::setdefaultdepthoffield();
 }
 
-// ---------------------------------------------------------------------------------
-
-dialog_unsilenced_weapons() {
+// --------------------------------------------------------------------------------- dialog_unsilenced_weapons() {
   self endon("death");
   level endon("nonsilenced_weapon_pickup");
 

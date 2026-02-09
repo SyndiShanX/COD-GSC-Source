@@ -181,7 +181,7 @@ waitforreinforcementoftype(var_0, var_1) {
 }
 
 givereinforcementoftype(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_1 = getcarepackagestreakforreinforcementoftype(var_0);

@@ -82,7 +82,6 @@ class cluielemtext: cluielem {
     cluielem::function_dcb34c80("string", "text", 1);
     cluielem::add_clientfield("horizontal_alignment", 1, 2, "int", horizontal_alignmentcallback);
   }
-
 }
 
 register(uid, xcallback, ycallback, heightcallback, fadeovertimecallback, alphacallback, redcallback, greencallback, bluecallback, textcallback, horizontal_alignmentcallback) {

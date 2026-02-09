@@ -43,7 +43,7 @@ update_alien_kill_achievements_dlc3(var_0, var_1, var_2, var_3, var_4, var_5, va
     return;
   }
   var_9 = 1;
-  var_10 = isDefined(var_1) && isplayer(var_1);
+  var_10 = isDefined(var_1) && isPlayer(var_1);
 
   if(var_10 && isDefined(self.alien_type) && self.alien_type == "gargoyle") {
     if(isDefined(var_4) && (var_4 == "alienvanguard_projectile_mp" || var_4 == "alienvanguard_projectile_mini_mp"))

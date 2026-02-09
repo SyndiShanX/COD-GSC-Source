@@ -1502,7 +1502,7 @@ function_c43189cd() {
     waitframe(1);
     level thread ct_vo::function_831e0584(array(#"hash_36816442279da155"), 1);
     ct_utils::kill_all_bots(undefined);
-    setdvar(#"hash_3e06b14c41136e95", 0);
+    setDvar(#"hash_3e06b14c41136e95", 0);
 
     while(true) {
       e_player = ct_utils::get_player();
@@ -1563,7 +1563,7 @@ function_c43189cd() {
       ct_utils::function_e44c5b8e(#"ac130", 0);
       wait 0.1;
       ct_utils::function_daa27144();
-      setdvar(#"hash_3e06b14c41136e95", 0);
+      setDvar(#"hash_3e06b14c41136e95", 0);
       ct_gadgets::function_350dd8ec("ac130");
       level.ac130 = undefined;
 
@@ -1572,7 +1572,7 @@ function_c43189cd() {
       }
 
       ct_utils::function_c2a10fc();
-      setdvar(#"hash_3e06b14c41136e95", 1);
+      setDvar(#"hash_3e06b14c41136e95", 1);
     }
   }
 
@@ -1609,7 +1609,7 @@ gunship_event() {
   level endon(#"combattraining_logic_finished");
   level.var_e190d640 = 1;
   function_2232d333(1);
-  setdvar(#"hash_3e06b14c41136e95", 1);
+  setDvar(#"hash_3e06b14c41136e95", 1);
   level.var_43da6545 = 1;
   level.var_e190d640 = 1;
   level.var_e6db911d = 0;

@@ -99,7 +99,7 @@ slowgun_fired(upgraded) {
 
   if(targets.size) {
     foreach(target in targets) {
-      if(isplayer(target)) {
+      if(isPlayer(target)) {
         if(is_player_valid(target) && self != target)
           target thread player_paralyzed(self, upgraded);
 
@@ -698,7 +698,6 @@ show_anim_rates() {
 
     wait 0.05;
   }
-
 }
 
 show_muzzle(origin, forward) {
@@ -711,5 +710,4 @@ show_muzzle(origin, forward) {
     frames = int(20 * seconds);
     line(start, end, green, 1, 0, frames);
   }
-
 }

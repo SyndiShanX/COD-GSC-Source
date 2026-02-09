@@ -109,19 +109,22 @@ barge_defend_setup() {
 barge_defend_attack_boats_think() {
   level.challenge_escort_boat_destroy = 1;
 
-  foreach(vh_boat in level.boat_convoy)
-  vh_boat thread convoy_boat_speed_think();
+  foreach(vh_boat in level.boat_convoy) {
+    vh_boat thread convoy_boat_speed_think();
+  }
 
-  foreach(vh_boat in level.boat_convoy_small)
-  vh_boat thread convoy_boat_speed_think();
+  foreach(vh_boat in level.boat_convoy_small) {
+    vh_boat thread convoy_boat_speed_think();
+  }
 
   boat_wave_1();
   flag_set("waves_done");
 
   for(a_ai = getaiarray("axis"); a_ai.size > 0; a_ai = getaiarray("axis")) {
     foreach(ai_guy in a_ai) {
-      if(distance2dsquared(ai_guy.origin, level.main_barge.origin) > 1000000)
+      if(distance2dsquared(ai_guy.origin, level.main_barge.origin) > 1000000) {
         ai_guy delete();
+      }
     }
 
     wait 1;
@@ -137,8 +140,9 @@ determine_convoy_spawn_points() {
     level.spawn_boat_trigger = trigger_wait("trigger_spawner_boats_" + index);
     index++;
 
-    if(index == 10)
+    if(index == 10) {
       index = 0;
+    }
   }
 }
 
@@ -186,8 +190,9 @@ barge_defend_wait_for_ai_dead() {
     enemies = getaiarray("axis");
 
     for(i = 0; i < enemies.size; i++) {
-      if(distance2dsquared(enemies[i].origin, level.main_barge.origin) > 64000000)
+      if(distance2dsquared(enemies[i].origin, level.main_barge.origin) > 64000000) {
         enemies[i] die();
+      }
     }
 
     if(enemies.size == 0) {
@@ -272,8 +277,9 @@ boat_wave_1() {
 wait_time_or_boats_defeated(n_time) {
   n_timer = gettime() + n_time * 1000;
 
-  while(!level.a_barge_attacker.size)
+  while(!level.a_barge_attacker.size) {
     wait 0.05;
+  }
 
   while(gettime() < n_timer) {
     if(!level.a_barge_attacker.size) {
@@ -294,18 +300,21 @@ add_boat_to_attack_array() {
 }
 
 boat_board_barge(str_board_location, vh_enemy_boat, is_replaced, is_called_out) {
-  if(!isDefined(is_replaced))
+  if(!isDefined(is_replaced)) {
     is_replaced = 1;
+  }
 
-  if(!isDefined(is_called_out))
+  if(!isDefined(is_called_out)) {
     is_called_out = 1;
+  }
 
   vh_enemy_boat endon("death");
   vh_enemy_boat endon("delete");
   arrayremovevalue(level.boat_convoy, vh_enemy_boat);
 
-  if(is_replaced)
+  if(is_replaced) {
     vh_enemy_boat boat_replace_when_boarding("mediumboat_01");
+  }
 
   vh_enemy_boat thread add_boat_to_attack_array();
   level thread boat_board_barge_and_unload(str_board_location, vh_enemy_boat, is_replaced, is_called_out);
@@ -316,14 +325,17 @@ boat_board_barge(str_board_location, vh_enemy_boat, is_replaced, is_called_out) 
 }
 
 boat_board_barge_and_unload(str_board_location, vh_enemy_boat, is_replaced, is_called_out) {
-  if(!isDefined(vh_enemy_boat))
+  if(!isDefined(vh_enemy_boat)) {
     vh_enemy_boat = undefined;
+  }
 
-  if(!isDefined(is_replaced))
+  if(!isDefined(is_replaced)) {
     is_replaced = 1;
+  }
 
-  if(!isDefined(is_called_out))
+  if(!isDefined(is_called_out)) {
     is_called_out = 1;
+  }
 
   vh_enemy_boat endon("death");
   vh_enemy_boat endon("delete");
@@ -333,8 +345,9 @@ boat_board_barge_and_unload(str_board_location, vh_enemy_boat, is_replaced, is_c
   vh_enemy_boat boarding_boat_setup(str_board_location);
   vh_enemy_boat thread boarding_boat_ai_think(str_board_location);
 
-  if(is_called_out)
+  if(is_called_out) {
     level thread boat_approach_hudson_vo(str_board_location);
+  }
 
   vh_enemy_boat boarding_boat_wait_until_at_barge(str_board_location);
   vh_enemy_boat linkto(level.main_barge, "tag_origin");
@@ -428,17 +441,19 @@ boat_replace_when_boarding(str_spawner_name) {
     vh_boat = maps\angola_river::convoy_boat_spawn(str_spawner_name, v_offset, 1);
     vh_boat veh_magic_bullet_shield(1);
 
-    if(isDefined(self.death_animation))
+    if(isDefined(self.death_animation)) {
       vh_boat.death_animation = self.death_animation;
+    }
 
     vh_boat pathfixedoffset(vh_boat.v_path_offset);
     vh_boat thread go_path(getvehiclenode(level.spawn_boat_trigger.target, "targetname"));
     vh_boat thread convoy_boat_speed_think();
 
-    if(str_spawner_name == "smallboat_02")
+    if(str_spawner_name == "smallboat_02") {
       level.boat_convoy_small[level.boat_convoy_small.size] = vh_boat;
-    else
+    } else {
       level.boat_convoy[level.boat_convoy.size] = vh_boat;
+    }
   }
 }
 
@@ -449,11 +464,11 @@ boat_board_fallback(str_board_location) {
   goal_set = level.boat_goal_sets["med_boat_2"];
   self setvehicleavoidance(1, 256, 1);
 
-  if(issubstr(self.model, "medium"))
+  if(issubstr(self.model, "medium")) {
     self boat_drive_away_forward();
-  else if(isalive(self.driver))
+  } else if(isalive(self.driver)) {
     self boat_drive_away_forward();
-  else {
+  } else {
     while(distancesquared(level.main_barge.origin, self.origin) < 6250000) {
       self setspeed(1, 20, 20);
       self cancelaimove();
@@ -481,19 +496,23 @@ boat_drive_away_forward() {
   self setspeed(70, 509);
   self setvehgoalpos(nd_goto.origin, 0, 1);
 
-  while(distancesquared(level.main_barge.origin, self.origin) < 42250000)
+  while(distancesquared(level.main_barge.origin, self.origin) < 42250000) {
     wait 0.2;
+  }
 
-  while(level.player is_looking_at(self, 0.6, 1))
+  while(level.player is_looking_at(self, 0.6, 1)) {
     wait 0.1;
+  }
 }
 
 small_boat_attack_barge(str_attack_side, is_replaced, is_called_out) {
-  if(!isDefined(is_replaced))
+  if(!isDefined(is_replaced)) {
     is_replaced = 1;
+  }
 
-  if(!isDefined(is_called_out))
+  if(!isDefined(is_called_out)) {
     is_called_out = 1;
+  }
 
   vh_boat = level.boat_convoy_small[0];
   vh_boat endon("delete");
@@ -502,11 +521,13 @@ small_boat_attack_barge(str_attack_side, is_replaced, is_called_out) {
   vh_boat boarding_boat_setup("small_boat");
   m_goal = level.boat_goal_sets["med_boat_2"]["small_boat"];
 
-  if(is_replaced)
+  if(is_replaced) {
     vh_boat boat_replace_when_boarding("smallboat_02");
+  }
 
-  if(is_called_out)
+  if(is_called_out) {
     level thread boat_approach_hudson_vo(str_attack_side);
+  }
 
   vh_boat setspeed(80, 20, 20);
   vh_boat thread small_boat_unlink_rpg_guy();
@@ -516,17 +537,19 @@ small_boat_attack_barge(str_attack_side, is_replaced, is_called_out) {
   while((isalive(vh_boat.gunner[0]) || isalive(vh_boat.gunner[1])) && isalive(vh_boat.driver)) {
     n_dist = distancesquared(m_goal.origin, vh_boat.origin);
 
-    if(n_dist < 1056784)
+    if(n_dist < 1056784) {
       vh_boat setspeed(20, 20, 20);
-    else if(n_dist < 20250000)
+    } else if(n_dist < 20250000) {
       vh_boat setspeed(50, 20, 20);
+    }
 
     vh_boat setvehgoalpos(m_goal.origin, 0, 1);
     wait 0.2;
   }
 
-  if(isalive(vh_boat))
+  if(isalive(vh_boat)) {
     vh_boat thread boat_board_fallback(str_attack_side);
+  }
 
   level notify("small_boat_done");
 }
@@ -536,8 +559,9 @@ small_boat_unlink_rpg_guy() {
   self endon("delete");
   self.gunner[1] endon("death");
 
-  while(distancesquared(level.main_barge.origin, self.origin) > 4000000)
+  while(distancesquared(level.main_barge.origin, self.origin) > 4000000) {
     wait 0.1;
+  }
 
   if(isDefined(self.gunner[1]) && isalive(self.gunner[1])) {
     self.gunner[1] unlink();
@@ -553,10 +577,11 @@ boat_approach_hudson_vo(str_board_location) {
 boat_board_hudson_vo(str_board_location) {
   a_vo = array("huds_dammit_they_re_boa_0", "huds_we_ve_got_mpla_on_bo_0", "huds_stay_on_em_1");
 
-  if(issubstr(str_board_location, "front"))
+  if(issubstr(str_board_location, "front")) {
     a_vo[a_vo.size] = "huds_enemies_on_board_u_0";
-  else
+  } else {
     a_vo[a_vo.size] = "huds_enemies_on_the_lower_0";
+  }
 
   level.hudson say_dialog(random(a_vo));
 }
@@ -614,8 +639,9 @@ boarding_boat_watch_challenge_death() {
   self endon("delete");
   self waittill("death", attacker, type, weapon);
 
-  if(isDefined(weapon) && weapon == "auto_gun_turret_sp_barge" || isDefined(attacker) && attacker == level.player)
+  if(isDefined(weapon) && weapon == "auto_gun_turret_sp_barge" || isDefined(attacker) && attacker == level.player) {
     level notify("boarding_boat_death");
+  }
 }
 
 boarding_boat_wait_until_at_barge(str_board_location) {
@@ -667,8 +693,9 @@ watch_boat_boarding_done(a_guys) {
   self endon("death");
   self waittill("boarding_done");
 
-  foreach(ai_guy in a_guys)
-  ai_guy notify("boat_rider_anim_done");
+  foreach(ai_guy in a_guys) {
+    ai_guy notify("boat_rider_anim_done");
+  }
 }
 
 spawn_barge_ai_at_node(str_node_spawn, n_count) {
@@ -702,8 +729,9 @@ unlink_from_barge_if_animating_on_death(str_board_location) {
   self unlink();
   self anim_stopanimscripted(0.2);
 
-  if(self.health > 0)
+  if(self.health > 0) {
     radiusdamage(self.origin, 512, self.health * 2, self.health * 2, level.player);
+  }
 }
 
 kill_if_my_boat_dies(vh_boat) {
@@ -813,8 +841,9 @@ container_cleanup() {
       vh_vehicle.delete_on_death = 1;
       vh_vehicle notify("death");
 
-      if(!isalive(vh_vehicle))
+      if(!isalive(vh_vehicle)) {
         vh_vehicle delete();
+      }
     }
   }
 
@@ -824,11 +853,13 @@ container_cleanup() {
   foreach(str_name in a_barge_model_names) {
     a_ents = getEntArray(str_name, "targetname");
 
-    if(!a_ents.size)
+    if(!a_ents.size) {
       a_ents = getEntArray(str_name, "script_noteworthy");
+    }
 
-    foreach(ent in a_ents)
-    ent setmovingplatformenabled(0);
+    foreach(ent in a_ents) {
+      ent setmovingplatformenabled(0);
+    }
   }
 }
 
@@ -851,16 +882,18 @@ find_woods() {
     vh_boat.delete_on_death = 1;
     vh_boat notify("death");
 
-    if(!isalive(vh_boat))
+    if(!isalive(vh_boat)) {
       vh_boat delete();
+    }
   }
 
   foreach(vh_boat in level.boat_convoy_small) {
     vh_boat.delete_on_death = 1;
     vh_boat notify("death");
 
-    if(!isalive(vh_boat))
+    if(!isalive(vh_boat)) {
       vh_boat delete();
+    }
   }
 
   setmusicstate("ANGOLA_DEAD_BODIES");
@@ -907,8 +940,9 @@ find_woods() {
   wait 1;
 
   for(i = 0; i < a_light_targets.size; i++) {
-    if(isDefined(getent(a_light_targets[i], "targetname")))
+    if(isDefined(getent(a_light_targets[i], "targetname"))) {
       set_lighting_pair(a_light_targets[i], a_light_entities[i]);
+    }
   }
 
   wait 4;
@@ -941,8 +975,9 @@ container_animations() {
 }
 
 container_body_animations() {
-  if(is_mature())
+  if(is_mature()) {
     level thread run_scene("container_bodies_body1_p1");
+  }
 
   level thread run_scene("container_bodies_body2_p1");
   wait 1;
@@ -950,8 +985,9 @@ container_body_animations() {
   level.container_body2 = getent("body_2", "targetname");
   scene_wait("container_bodies_body2_p1");
 
-  if(is_mature())
+  if(is_mature()) {
     level thread run_scene("container_bodies_body1_p2");
+  }
 
   level thread run_scene("container_bodies_body2_p2");
 }
@@ -979,8 +1015,9 @@ hudson_carry_woods() {
 container_clear_lighting_ents() {
   a_ents = array("hudson_ai", "woods_ai");
 
-  foreach(str_guy in a_ents)
-  clear_lighting_pair(str_guy);
+  foreach(str_guy in a_ents) {
+    clear_lighting_pair(str_guy);
+  }
 
   delete_scene_all("open_woods_container_p1_lighting", 1);
 }
@@ -1066,14 +1103,17 @@ kill_player_on_timeout() {
 }
 
 river_hind_damage_override(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(eattacker != level.player)
+  if(eattacker != level.player) {
     return 0;
+  }
 
-  if(level.river_hind.damage_immunity)
+  if(level.river_hind.damage_immunity) {
     return 1;
+  }
 
-  if(type != "MOD_EXPLOSIVE" && type != "MOD_PROJECTILE_SPLASH" && type != "MOD_PROJECTILE" && type != "MOD_EXPLOSIVE_SPLASH" && type != "MOD_IMPACT")
+  if(type != "MOD_EXPLOSIVE" && type != "MOD_PROJECTILE_SPLASH" && type != "MOD_PROJECTILE" && type != "MOD_EXPLOSIVE_SPLASH" && type != "MOD_IMPACT") {
     return 0;
+  }
 
   if(self.health - idamage < 3000) {
     level notify("hind_crash");
@@ -1083,8 +1123,9 @@ river_hind_damage_override(einflictor, eattacker, idamage, idflags, type, sweapo
   if(self.health - idamage < 4000 && !level.river_hind.damaged_effect) {
     level.river_hind.damaged_effect = 1;
 
-    if(!level.river_hind.at_barge_back)
+    if(!level.river_hind.at_barge_back) {
       level.river_hind.damage_immunity = 1;
+    }
 
     playFXOnTag(level._effect["hind_damage"], level.river_hind, "tag_wing_r");
   }
@@ -1117,8 +1158,9 @@ river_finale() {
   level thread hind_falling_animation();
   level thread run_scene("player_hind_shell_shock");
 
-  if(isDefined(level.player.viewlockedentity))
+  if(isDefined(level.player.viewlockedentity)) {
     level.player.viewlockedentity useby(level.player);
+  }
 
   level thread run_scene("player_knocked_off_turret");
   level.player playSound("evt_barge_sandbar");
@@ -1191,8 +1233,9 @@ destroy_barge_turrets() {
     vh_turret.delete_on_death = 1;
     vh_turret notify("death");
 
-    if(!isalive(vh_turret))
+    if(!isalive(vh_turret)) {
       vh_turret delete();
+    }
   }
 }
 
@@ -1228,8 +1271,9 @@ destroy_barge_housing() {
 wait_till_player_looking_at_hind() {
   level endon("destroy_barge_housing");
 
-  while(!level.player is_player_looking_at(level.river_hind.origin, 0.9, 1))
+  while(!level.player is_player_looking_at(level.river_hind.origin, 0.9, 1)) {
     wait 0.05;
+  }
 
   level notify("destroy_barge_housing");
 }
@@ -1334,15 +1378,17 @@ hind_strafe_states_logic() {
   while(true) {
     switch (level.river_hind.current_state) {
       case "side_strafe":
-        if(randomint(2))
+        if(randomint(2)) {
           next_node = self.node_index - 1;
-        else
+        } else {
           next_node = self.node_index + 1;
+        }
 
-        if(next_node > 5)
+        if(next_node > 5) {
           next_node = 0;
-        else if(next_node < 0)
+        } else if(next_node < 0) {
           next_node = 5;
+        }
 
         level.river_hind maps\_turret::set_turret_target(level.hudson, vectorscale((0, 0, 1), 30.0), 0);
         level.river_hind thread maps\_turret::fire_turret_for_time(-1, 0);
@@ -1355,8 +1401,9 @@ hind_strafe_states_logic() {
       case "over_strafe":
         next_node = self.node_index + 3;
 
-        if(next_node > 5)
+        if(next_node > 5) {
           next_node = next_node - 6;
+        }
 
         level notify("hind_start_firing");
         self.holding_position = 0;
@@ -1385,8 +1432,9 @@ hind_strafe_fire() {
   hind_fire_at linkto(self);
 
   while(true) {
-    if(isDefined(self.holding_position) && self.holding_position)
+    if(isDefined(self.holding_position) && self.holding_position) {
       level waittill("hind_start_firing");
+    }
 
     level.river_hind maps\_turret::set_turret_target(level.player, (randomintrange(-100, 100), randomintrange(-100, 100), 0), 0);
     level.river_hind maps\_turret::fire_turret(0);
@@ -1406,11 +1454,13 @@ hind_hold_postion(destination) {
 }
 
 hind_reach_goal(destination, distance, offset) {
-  if(!isDefined(distance))
+  if(!isDefined(distance)) {
     distance = 500;
+  }
 
-  if(!isDefined(offset))
+  if(!isDefined(offset)) {
     offset = (0, 0, 0);
+  }
 
   self endon("death");
   level endon("hind_crash");
@@ -1491,8 +1541,9 @@ spawn_barge_side_damage_fx() {
   wait 0.1;
   radiusdamage(fake_model.origin, 1024, level.player.health / 4, level.player.health / 8);
 
-  if(distance(fake_model.origin, level.player.origin) >= 1024)
+  if(distance(fake_model.origin, level.player.origin) >= 1024) {
     level.player shellshock("death", 0.5);
+  }
 
   earthquake(0.5, 1, fake_model.origin, 1024);
   scene_wait("barge_side_explosion");
@@ -1508,8 +1559,9 @@ hind_attack_find_tow() {
 
   foreach(item in a_item_list) {
     if(issubstr(item.classname, "weapon_")) {
-      if(distance2dsquared(item.origin, level.main_barge.origin) < 4194304)
+      if(distance2dsquared(item.origin, level.main_barge.origin) < 4194304) {
         item delete();
+      }
     }
   }
 
@@ -1529,8 +1581,9 @@ hind_attack_find_tow() {
   a_tarps = getEntArray("crate_tarps", "targetname");
 
   for(i = 0; i < a_tarps.size; i++) {
-    if(isDefined(a_tarps[i].script_animname) && a_tarps[i].script_animname == "tarp_blowoff")
+    if(isDefined(a_tarps[i].script_animname) && a_tarps[i].script_animname == "tarp_blowoff") {
       m_tarp = a_tarps[i];
+    }
   }
 
   anim_origin = spawn_model("tag_origin", m_tarp.origin, m_tarp.angles);
@@ -1560,8 +1613,9 @@ player_teach_ammo_cache() {
     a_weapons = level.player getweaponslistprimaries();
 
     foreach(weapon in a_weapons) {
-      if(weapon == "m220_tow_sp" && !level.player anyammoforweaponmodes("m220_tow_sp"))
+      if(weapon == "m220_tow_sp" && !level.player anyammoforweaponmodes("m220_tow_sp")) {
         out_of_ammo = 1;
+      }
     }
 
     wait 0.05;
@@ -1584,8 +1638,9 @@ remove_ammo_marker_on_reload() {
     a_weapons = level.player getweaponslistprimaries();
 
     foreach(weapon in a_weapons) {
-      if(weapon == "m220_tow_sp" && level.player anyammoforweaponmodes("m220_tow_sp"))
+      if(weapon == "m220_tow_sp" && level.player anyammoforweaponmodes("m220_tow_sp")) {
         ammo_refilled = 1;
+      }
     }
 
     wait 0.05;
@@ -1634,14 +1689,16 @@ watch_player_tow_missile_ads() {
   level.river_hind endon("delete");
 
   while(true) {
-    while(self playerads() < 0.9 || self getcurrentweapon() != "m220_tow_sp")
+    while(self playerads() < 0.9 || self getcurrentweapon() != "m220_tow_sp") {
       wait 0.05;
+    }
 
     level.player setclientflag(10);
     level.player thread tow_highlight_on_heli_lookat(level.river_hind);
 
-    while(self playerads() > 0.9 && self getcurrentweapon() == "m220_tow_sp")
+    while(self playerads() > 0.9 && self getcurrentweapon() == "m220_tow_sp") {
       wait 0.05;
+    }
 
     level.player clearclientflag(10);
     level.player notify("m220_tow_lowered");
@@ -1655,13 +1712,15 @@ tow_highlight_on_heli_lookat(vh_heli) {
   vh_heli endon("delete");
 
   while(true) {
-    while(!self is_player_looking_at(vh_heli.origin, 0.95, 1, vh_heli))
+    while(!self is_player_looking_at(vh_heli.origin, 0.95, 1, vh_heli)) {
       wait 0.05;
+    }
 
     self setclientflag(8);
 
-    while(self is_player_looking_at(vh_heli.origin, 0.95, 1, vh_heli))
+    while(self is_player_looking_at(vh_heli.origin, 0.95, 1, vh_heli)) {
       wait 0.05;
+    }
 
     self clearclientflag(8);
     wait 0.05;
@@ -1673,13 +1732,15 @@ missile_highlight_on_heli_lookat(vh_heli) {
   self endon("death");
 
   while(true) {
-    while(!self is_missile_looking_at(vh_heli.origin, 0.95, 1, vh_heli))
+    while(!self is_missile_looking_at(vh_heli.origin, 0.95, 1, vh_heli)) {
       wait 0.05;
+    }
 
     level.player setclientflag(8);
 
-    while(self is_missile_looking_at(vh_heli.origin, 0.95, 1, vh_heli))
+    while(self is_missile_looking_at(vh_heli.origin, 0.95, 1, vh_heli)) {
       wait 0.05;
+    }
 
     level.player clearclientflag(8);
     wait 0.05;
@@ -1687,11 +1748,13 @@ missile_highlight_on_heli_lookat(vh_heli) {
 }
 
 is_missile_looking_at(origin, dot, do_trace, ignore_ent) {
-  if(!isDefined(dot))
+  if(!isDefined(dot)) {
     dot = 0.7;
+  }
 
-  if(!isDefined(do_trace))
+  if(!isDefined(do_trace)) {
     do_trace = 1;
+  }
 
   eye = self.origin;
   delta_vec = anglesToForward(vectortoangles(origin - eye));
@@ -1699,10 +1762,11 @@ is_missile_looking_at(origin, dot, do_trace, ignore_ent) {
   new_dot = vectordot(delta_vec, view_vec);
 
   if(new_dot >= dot) {
-    if(do_trace)
+    if(do_trace) {
       return bullettracepassed(origin, eye, 0, ignore_ent);
-    else
+    } else {
       return 1;
+    }
   }
 
   return 0;
@@ -1721,8 +1785,9 @@ tow_missile_instructions() {
       if(level.wiiu) {
         controller_type = level.player getcontrollertype();
 
-        if(controller_type == "remote")
+        if(controller_type == "remote") {
           instruction_string = &"ANGOLA_2_TOW_INSTRUCTION_WIIU_REMOTE";
+        }
       }
 
       screen_message_create(instruction_string);
@@ -1736,8 +1801,9 @@ check_to_release_chaff() {
   self endon("death");
   self endon("deleted");
 
-  while(distancesquared(level.river_hind.origin, self.origin) > 4000000)
+  while(distancesquared(level.river_hind.origin, self.origin) > 4000000) {
     wait 0.05;
+  }
 
   level.river_hind play_fx("aircraft_flares", level.river_hind.origin, level.river_hind.angles, undefined, 1, "tag_origin");
 }
@@ -1766,8 +1832,9 @@ cleanup_river_intro_boats() {
   for(i = 0; i < e_trash.size; i++) {
     e_trash[i] die();
 
-    if(isDefined(e_trash[i]))
+    if(isDefined(e_trash[i])) {
       e_trash[i] delete();
+    }
   }
 
   e_trash = getEntArray("river_boat_cleanup", "script_noteworthy");
@@ -1852,8 +1919,9 @@ swim_mechanic() {
       playing_backstroke = 1;
       playing_idle = 0;
 
-      if(b_message_up)
+      if(b_message_up) {
         screen_message_delete();
+      }
     } else if(input == 0 && !playing_idle) {
       swim_pos moveto(swim_pos.origin, 0.05);
       level thread run_scene("player_idle_swim");
@@ -1863,8 +1931,9 @@ swim_mechanic() {
 
     wait 0.05;
 
-    if(playing_backstroke)
+    if(playing_backstroke) {
       time = time - 0.05;
+    }
   }
 
   player_model notify("delete_wake");
@@ -1997,10 +2066,10 @@ voice_over_barge() {
 }
 
 set_water_dvars_swim() {
-  setdvar("r_waterwavespeed", "0.5 1.1 1 1.012");
-  setdvar("r_waterwaveamplitude", "3 1.5 2.5 2");
-  setdvar("r_waterwavewavelength", "85 200 295 460");
-  setdvar("r_waterwaveangle", "85 33 69 162");
+  setDvar("r_waterwavespeed", "0.5 1.1 1 1.012");
+  setDvar("r_waterwaveamplitude", "3 1.5 2.5 2");
+  setDvar("r_waterwavewavelength", "85 200 295 460");
+  setDvar("r_waterwaveangle", "85 33 69 162");
 }
 
 barge_sink_sfx() {

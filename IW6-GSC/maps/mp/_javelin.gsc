@@ -153,11 +153,11 @@ JavelinUsageLoop() {
     }
 
     debugDraw = false;
-    if(GetDVar("missileDebugDraw") == "1")
+    if(getDvar("missileDebugDraw") == "1")
       debugDraw = true;
 
     debugText = false;
-    if(GetDVar("missileDebugText") == "1")
+    if(getDvar("missileDebugText") == "1")
       debugText = true;
 
     self.javelinUseEntered = true;
@@ -195,7 +195,6 @@ JavelinUsageLoop() {
           self.javelinStage = 1;
           continue;
         }
-
       }
 
       if(LockMissesPassedThreshold()) {
@@ -312,7 +311,7 @@ JavelinUsageLoop() {
 }
 
 DebugSightLine(start, end, passed) {
-  if(GetDVar("missileDebugDraw") != "1") {
+  if(getDvar("missileDebugDraw") != "1") {
     return;
   }
   if(passed)

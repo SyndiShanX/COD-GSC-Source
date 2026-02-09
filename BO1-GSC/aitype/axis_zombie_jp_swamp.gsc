@@ -26,11 +26,9 @@ main() {
       break;
   }
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\char_jap_zombie::precache();
   character\char_jap_zombie_nocap::precache();

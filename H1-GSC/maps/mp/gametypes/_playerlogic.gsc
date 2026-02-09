@@ -513,7 +513,7 @@ spawnplayer(var_0, var_1) {
     self.loadingplayerweapons = 1;
 
     if(!isDefined(self.costume)) {
-      if(isplayer(self))
+      if(isPlayer(self))
         self.costume = maps\mp\gametypes\_class::cao_getactivecostume();
       else if(isagent(self) && self.agent_type == "player")
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
@@ -1058,22 +1058,22 @@ initclientdvarssplitscreenspecific() {
 }
 
 initclientdvars() {
-  setdvar("cg_drawTalk", 1);
-  setdvar("cg_drawCrosshair", 1);
-  setdvar("cg_drawCrosshairNames", 1);
-  setdvar("cg_hudGrenadeIconMaxRangeFrag", 250);
+  setDvar("cg_drawTalk", 1);
+  setDvar("cg_drawCrosshair", 1);
+  setDvar("cg_drawCrosshairNames", 1);
+  setDvar("cg_hudGrenadeIconMaxRangeFrag", 250);
 
   if(level.hardcoremode) {
-    setdvar("cg_drawTalk", 3);
-    setdvar("cg_drawCrosshair", 0);
-    setdvar("cg_drawCrosshairNames", 1);
-    setdvar("cg_hudGrenadeIconMaxRangeFrag", 0);
+    setDvar("cg_drawTalk", 3);
+    setDvar("cg_drawCrosshair", 0);
+    setDvar("cg_drawCrosshairNames", 1);
+    setDvar("cg_hudGrenadeIconMaxRangeFrag", 0);
   }
 
   if(isDefined(level.alwaysdrawfriendlynames) && level.alwaysdrawfriendlynames)
-    setdvar("cg_drawFriendlyNamesAlways", 1);
+    setDvar("cg_drawFriendlyNamesAlways", 1);
   else
-    setdvar("cg_drawFriendlyNamesAlways", 0);
+    setDvar("cg_drawFriendlyNamesAlways", 0);
 
   initclientdvarssplitscreenspecific();
 
@@ -1228,7 +1228,7 @@ callback_playerconnect() {
   initclientdvars();
   initplayerstats();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1")
     level waittill("eternity");
 
   self.guid = self getguid();

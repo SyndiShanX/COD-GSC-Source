@@ -1,15 +1,15 @@
 /****************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_footsteps.csc
+ * Script: clientscripts\_footsteps\.csc
 ****************************************/
 
 init() {
   SetAIFootstepPrepend("fly_step_run_npc_");
 }
-
 playerFootstep(client_num, player, movementtype, ground_type, firstperson, quiet) {
-  if(player underwater())
+  if(player underwater()) {
     return;
+  }
   if(isDefined(level.footstep_vol_override)) {
     movementtype = "run";
   }
@@ -22,12 +22,10 @@ playerFootstep(client_num, player, movementtype, ground_type, firstperson, quiet
     player playSound(client_num, player.step_sound, player.origin, volume);
   }
 }
-
 playerJump(client_num, player, ground_type, firstperson, quiet) {
   sound_alias = buildMovementSoundAliasName("step_run", ground_type, firstperson, quiet);
   player playSound(client_num, sound_alias);
 }
-
 playerLand(client_num, player, ground_type, firstperson, quiet, damagePlayer) {
   sound_alias = buildMovementSoundAliasName("land", ground_type, firstperson, quiet);
   player playSound(client_num, sound_alias);
@@ -43,7 +41,6 @@ playerLand(client_num, player, ground_type, firstperson, quiet, damagePlayer) {
     }
   }
 }
-
 playerFoliage(client_num, player, firstperson, quiet) {
   sound_alias = "fly_movement_foliage_npc";
   if(firstperson) {
@@ -51,11 +48,9 @@ playerFoliage(client_num, player, firstperson, quiet) {
   }
   player playSound(client_num, sound_alias);
 }
-
 SetAIFootstepPrepend(prepend) {
   level.footstepPrepend = prepend;
 }
-
 playAIFootstep(client_num, ent, pos, ground_type, on_fire, is_dog) {
   sound_alias = undefined;
   if(!isDefined(is_dog)) {
@@ -69,15 +64,15 @@ playAIFootstep(client_num, ent, pos, ground_type, on_fire, is_dog) {
   if(is_dog) {
     sound_alias = "fly_dog_step_run_default";
   }
-  if(isDefined(sound_alias))
+  if(isDefined(sound_alias)) {
     playSound(client_num, sound_alias, pos);
+  }
   if(isDefined(ent.step_sound) && (ent.step_sound) != "null") {
     volume = clientscripts\_audio::get_vol_from_speed(ent);
     ent playSound(client_num, ent.step_sound, ent.origin, volume);
   }
   ent do_foot_effect(client_num, ground_type, pos, on_fire);
 }
-
 buildMovementSoundAliasName(movementtype, ground_type, firstperson, quiet) {
   if(firstperson && isDefined(level.snd_footstep_override_plr) && (level.snd_footstep_override_plr != "")) {
     return level.snd_footstep_override_plr;
@@ -98,7 +93,6 @@ buildMovementSoundAliasName(movementtype, ground_type, firstperson, quiet) {
   sound_alias = sound_alias + ground_type;
   return sound_alias;
 }
-
 do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
   if(!isDefined(level._optionalStepEffects) && !isDefined(self._footstepOverrideEffect)) {
     return;

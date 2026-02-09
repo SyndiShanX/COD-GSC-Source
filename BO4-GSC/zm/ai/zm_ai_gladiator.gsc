@@ -64,7 +64,6 @@ class class_52f0d01d {
     adjustmentstarted = 0;
     var_425c4c8b = 1;
   }
-
 }
 
 autoexec __init__system__() {
@@ -223,7 +222,7 @@ gladiatortargetservice(entity) {
   entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
   entity zombie_utility::run_ignore_player_handler();
 
-  if(isDefined(entity.var_4f1b8d2b) && entity.var_4f1b8d2b && isDefined(entity.favoriteenemy) && isplayer(entity.favoriteenemy) && !isDefined(zm_zonemgr::function_54fc7938(entity.favoriteenemy, entity))) {
+  if(isDefined(entity.var_4f1b8d2b) && entity.var_4f1b8d2b && isDefined(entity.favoriteenemy) && isPlayer(entity.favoriteenemy) && !isDefined(zm_zonemgr::function_54fc7938(entity.favoriteenemy, entity))) {
     entity.var_4f1b8d2b = 0;
   }
 
@@ -744,7 +743,6 @@ registerhud_message_electricity_(entity, mocompanim, mocompanimblendouttime, moc
     distance = distance(entity.origin, animendpos);
     recordcircle(animendpos, 3, (0, 1, 0), "<dev string:x38>");
     record3dtext("<dev string:x41>" + distance, animendpos, (0, 1, 0), "<dev string:x38>");
-
   }
 }
 
@@ -755,7 +753,7 @@ function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   if(isDefined(self.favoriteenemy) && !self.meleeinfo.adjustmentstarted && self.meleeinfo.var_425c4c8b && currentanimtime >= self.meleeinfo.var_98bc84b7) {
     predictedenemypos = entity.favoriteenemy.origin;
 
-    if(isplayer(entity.favoriteenemy)) {
+    if(isPlayer(entity.favoriteenemy)) {
       velocity = entity.favoriteenemy getvelocity();
 
       if(length(velocity) >= 0) {
@@ -891,7 +889,7 @@ function_cdef55f0(entity) {
 
   entity.var_4f1b8d2b = 0;
 
-  if(isplayer(hitent)) {
+  if(isPlayer(hitent)) {
     hitent clientfield::increment_to_player("gladiator_melee_effect");
   }
 }
@@ -979,11 +977,11 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     return 0;
   }
 
-  if(isDefined(attacker) && !isplayer(attacker) && !(isDefined(attacker.var_594b7855) && attacker.var_594b7855)) {
+  if(isDefined(attacker) && !isPlayer(attacker) && !(isDefined(attacker.var_594b7855) && attacker.var_594b7855)) {
     return 0;
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && self.subarchetype == # "gladiator_marauder" && !isDefined(self.var_4f1b8d2b) && isDefined(zm_zonemgr::function_54fc7938(attacker, self))) {
+  if(isDefined(attacker) && isPlayer(attacker) && self.subarchetype == # "gladiator_marauder" && !isDefined(self.var_4f1b8d2b) && isDefined(zm_zonemgr::function_54fc7938(attacker, self))) {
     self.favoriteenemy = attacker;
     self.var_4f1b8d2b = 1;
     self.var_cb89528d = 1;
@@ -1142,7 +1140,7 @@ function_3b8907b9(s_params) {
     self.axe_model delete();
   }
 
-  if(!isplayer(s_params.eattacker)) {
+  if(!isPlayer(s_params.eattacker)) {
     return;
   }
 }
@@ -1184,7 +1182,7 @@ function_fbc2806e(var_a4388d06, spin_dir) {
   while(true) {
     enemy = self.favoriteenemy;
 
-    if(isDefined(enemy) && isplayer(enemy) && enemy issliding() && !(isDefined(var_6b72740e) && var_6b72740e)) {
+    if(isDefined(enemy) && isPlayer(enemy) && enemy issliding() && !(isDefined(var_6b72740e) && var_6b72740e)) {
       if(distance2dsquared(enemy.origin, axe.origin) <= 45 * 45) {
         recordsphere(enemy.origin, 3, (0, 0, 1), "<dev string:x38>");
         var_b013c31 = distance2d(enemy.origin, axe.origin);
@@ -1258,7 +1256,7 @@ function_88d65504(axe, var_7900b267, move_pos) {
     });
 
     if(isDefined(hit_ent)) {
-      if(isplayer(hit_ent)) {
+      if(isPlayer(hit_ent)) {
         if(isDefined(hit_ent.hasriotshield) && hit_ent.hasriotshield) {
           if(isDefined(hit_ent.hasriotshieldequipped) && hit_ent.hasriotshieldequipped) {
             if(hit_ent hasperk(#"specialty_shield") || hit_ent zm_utility::is_facing(axe, 0.2)) {
@@ -1473,7 +1471,7 @@ function_831dd6bd() {
   }
 
   if(shouldrepath) {
-    if(isplayer(self.favoriteenemy)) {
+    if(isPlayer(self.favoriteenemy)) {
       goalent = zm_ai_utility::function_a2e8fd7b(self, self.favoriteenemy);
 
       if(isDefined(goalent.last_valid_position)) {
@@ -1625,9 +1623,9 @@ function_24a38427() {
           break;
         case # "spread":
           if(getdvarint(#"ai_debugzigzag", 0)) {
-            setdvar(#"ai_debugzigzag", 0);
+            setDvar(#"ai_debugzigzag", 0);
           } else {
-            setdvar(#"ai_debugzigzag", 1);
+            setDvar(#"ai_debugzigzag", 1);
           }
 
           break;
@@ -1647,6 +1645,6 @@ function_24a38427() {
       }
     }
 
-    setdvar(#"hash_1a45d40a78c47d72", "<dev string:x41>");
+    setDvar(#"hash_1a45d40a78c47d72", "<dev string:x41>");
   }
 }

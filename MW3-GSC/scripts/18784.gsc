@@ -42,7 +42,7 @@ _id_3A9C(var_0) {
 
 _id_495A() {
   self useanimtree(#animtree);
-  self setanim( % mig_landing_gear_up);
+  self setanim(%mig_landing_gear_up);
 }
 
 _id_3A9D() {
@@ -50,7 +50,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 1; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   return var_0;
 }
@@ -94,7 +93,6 @@ _id_4008() {
 
   if(isDefined(self._id_443B)) {
     self._id_443B delete();
-
   }
   if(isDefined(self._id_495C)) {
     self._id_495C delete();
@@ -142,7 +140,6 @@ _id_443F(var_0) {
     var_2 = 1;
   } else {
     var_2 = -1;
-
   }
   var_3 = common_scripts\utility::flat_origin(var_0.origin);
   var_4 = var_3 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_2 * 100000);
@@ -159,7 +156,6 @@ _id_443F(var_0) {
 _id_4440(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   var_1 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
   var_2 = vectornormalize(common_scripts\utility::flat_origin(level.player.origin) - var_0.origin);
@@ -180,7 +176,6 @@ _id_3E81() {
 
   while(_id_4440(var_0)) {
     wait 0.05;
-
   }
   wait 0.5;
 
@@ -208,7 +203,6 @@ _id_495D() {
 
     if(var_2 == 3) {
       var_2 = 1;
-
     }
     var_1[var_3] thread maps\_utility::play_sound_on_entity("airstrike_explosion_close");
     playFX(level._effect["plane_bomb_explosion" + var_2], var_1[var_3].origin);
@@ -234,7 +228,6 @@ _id_495E() {
 
   for(var_6 = 0; var_6 < 3; var_6++) {
     var_5[var_6] = (var_3[var_6] + var_4[var_6]) / 2;
-
   }
   var_5 = (var_5[0], var_5[1], var_5[2]);
   var_5 = var_5 * 7000;

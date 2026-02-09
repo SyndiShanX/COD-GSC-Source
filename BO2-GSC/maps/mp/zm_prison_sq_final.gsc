@@ -331,7 +331,7 @@ final_flight_trigger() {
   while(isDefined(self)) {
     self waittill("trigger", e_triggerer);
 
-    if(isplayer(e_triggerer)) {
+    if(isPlayer(e_triggerer)) {
       if(isDefined(level.custom_plane_validation)) {
         valid = self[[level.custom_plane_validation]](e_triggerer);
 

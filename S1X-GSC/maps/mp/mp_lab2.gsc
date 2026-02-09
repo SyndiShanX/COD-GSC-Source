@@ -29,7 +29,7 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_lab2");
 
-  setdvar("sm_minSpotLightScore", 0.0007);
+  setDvar("sm_minSpotLightScore", 0.0007);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -75,11 +75,11 @@ main() {
   thread FindAndPlayAnims("animated_prop", true);
   thread SpecialGametypeScript();
 
-  SetDvar("r_reactivemotionfrequencyscale", .5);
-  SetDvar("r_reactivemotionamplitudescale", .5);
+  setDvar("r_reactivemotionfrequencyscale", .5);
+  setDvar("r_reactivemotionamplitudescale", .5);
 
-  setdvar("r_gunSightColorEntityScale", "7");
-  setdvar("r_gunSightColorNoneScale", "0.8");
+  setDvar("r_gunSightColorEntityScale", "7");
+  setDvar("r_gunSightColorNoneScale", "0.8");
 
   level.LabTempTuner1 = 9;
   level.LabTempTuner2 = 4;
@@ -92,7 +92,7 @@ main() {
 }
 
 set_umbra_values() {
-  SetDvar("r_umbraAccurateOcclusionThreshold", 128);
+  setDvar("r_umbraAccurateOcclusionThreshold", 128);
 }
 
 SpecialGametypeScript() {
@@ -124,7 +124,6 @@ waitCarryObjects() {
     foreach(ball in level.balls) {
       ball thread watchCarryObjects();
     }
-
   } else if(level.gameType == "ctf") {
     while(!isDefined(level.teamFlags) || !isDefined(level.teamFlags[game["defenders"]]) || !isDefined(level.teamFlags[game["attackers"]])) {
       wait(0.05);
@@ -361,7 +360,6 @@ dynamicEventEndFunc() {
   if(level.gametype == "dom") {
     dom_b_move();
   }
-
 }
 
 GetNetQuantizedAngle(angle) {
@@ -1012,7 +1010,6 @@ WatchDamageChemical(Crane) {
           level notify("Chemical_Exploded");
           break;
         }
-
       } else if(Crane.exploding == true) {
         break;
       }
@@ -1120,7 +1117,6 @@ MissileExplosion(attacker, RackOrigin) {
   } else {
     RadiusDamage(RackOrigin + (0, 0, -44), level.GasMachine.DamageRadius, level.GasMachine.MaxDamageAmount, level.GasMachine.MinDamageAmount, undefined, "MOD_EXPLOSIVE", "mp_lab_gas_explosion");
   }
-
 }
 MissileChem(Particle, ChemicalOrigin, attacker) {
   level.GasParticleTime = level.PauseTime * 0.15;
@@ -1155,7 +1151,6 @@ ChemDamageThink(GasCloud, ChemicalOrigin, attacker) {
 
     wait(1);
   }
-
 }
 FindShockVictims(location) {
   damageRange = level.GasMachine.GasRange * level.GasMachine.GasRange;

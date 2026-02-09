@@ -14,7 +14,6 @@ _id_3B9C() {
 _id_3B9D() {
   if(!isDefined(level._id_3B9E)) {
     level._id_3B9E = 24;
-
   }
   level._id_3B9F = 0;
   level._id_3BA0 = spawnStruct();
@@ -31,13 +30,11 @@ _id_3BA3(var_0) {
 
   if(_id_0611::isusingremote()) {
     return 0;
-
   }
   var_1 = _id_3BA5(var_0);
 
   if((!isDefined(var_1) || !var_1) && !isDefined(self._id_3BA4)) {
     return 0;
-
   }
   return 1;
 }
@@ -53,7 +50,6 @@ _id_3BA5(var_0) {
     var_2 = var_1;
   } else {
     var_2 = undefined;
-
   }
   while(isairdropmarker(var_1)) {
     self waittill("weapon_change", var_1);
@@ -67,7 +63,6 @@ _id_3BA5(var_0) {
 
   if(!isDefined(var_2)) {
     return 0;
-
   }
   return !(self getammocount(var_2) && self hasweapon(var_2));
 }
@@ -129,7 +124,6 @@ _id_3BA9(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_4)) {
     var_4 = 0;
-
   }
   var_5 = var_5 + var_4;
 
@@ -221,7 +215,6 @@ _id_3BAC(var_0, var_1, var_2) {
     var_3.owner = var_0;
   } else {
     var_3.owner = undefined;
-
   }
   var_3.cratetype = var_1;
   var_3.targetname = "care_package";
@@ -239,7 +232,6 @@ _id_3BAC(var_0, var_1, var_2) {
 _id_3BAE() {
   if(isDefined(self.objidfriendly)) {
     objective_delete(self.objidfriendly);
-
   }
   if(isDefined(level._id_3BAF) && level._id_3BAF.size) {
     level._id_3BAF = common_scripts\utility::array_remove(level._id_3BAF, self);
@@ -289,7 +281,6 @@ _id_3BB4() {
 _id_00D2(var_0, var_1) {
   while(isDefined(self) && distancesquared(self.origin, var_0) > 1024) {
     wait 0.05;
-
   }
   if(!isDefined(self)) {
     return;
@@ -327,13 +318,11 @@ _id_3BB7() {
 
   if(!isDefined(level._id_3BAF)) {
     level._id_3BAF = [];
-
   }
   level._id_3BAF[level._id_3BAF.size] = self;
 
   if(level._id_3BAF.size > 4) {
     level._id_3BAF[0] _id_3BAE();
-
   }
   thread _id_3BBB();
   level thread _id_3BB9(self, self.owner);
@@ -345,7 +334,6 @@ _id_3BB9(var_0, var_1) {
 
   if(isDefined(level._id_3BBA)) {
     var_2 = level._id_3BBA;
-
   }
   if(var_2 <= 0) {
     return;
@@ -354,7 +342,6 @@ _id_3BB9(var_0, var_1) {
 
   while(var_0.curprogress != 0) {
     wait 1;
-
   }
   var_0 _id_3BAE();
 }
@@ -367,16 +354,14 @@ _id_3BBB() {
 
   if(isDefined(level._id_3BBC)) {
     self thread[[level._id_3BBC]]();
-
   }
   for(;;) {
     self waittill("captured", var_0);
 
     if(isDefined(self.owner) && var_0 != self.owner) {
       thread _id_3BC0(var_0);
-
     }
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_1 = var_0;
       var_1 playlocalsound("ammo_crate_use");
 
@@ -398,7 +383,7 @@ _id_3BBB() {
 _id_3BC0(var_0) {
   self notify("hijacked", var_0);
 
-  if(!isplayer(self.owner)) {
+  if(!isPlayer(self.owner)) {
     return;
   }
   if(var_0.team == self.owner.team) {
@@ -464,11 +449,9 @@ _id_3BC9() {
     var_0 = level._id_3B9E;
   } else {
     var_0 = level._id_3BCA + 1;
-
   }
   if(var_0 > level._id_3B9E + 7) {
     var_0 = level._id_3B9E;
-
   }
   level._id_3BCA = var_0;
   return var_0;
@@ -531,14 +514,12 @@ _id_3BCF(var_0, var_1) {
     self.usetime = var_1;
   } else {
     self.usetime = 3000;
-
   }
   if(self.usetime > 0) {
     var_0 thread _id_3BD2(self);
     var_2 = _id_3BD1(var_0);
   } else {
     var_2 = 1;
-
   }
   if(isalive(var_0)) {
     var_0 common_scripts\utility::_enableweapon();
@@ -547,7 +528,6 @@ _id_3BCF(var_0, var_1) {
 
   if(!isDefined(self)) {
     return 0;
-
   }
   self.inuse = 0;
   self.curprogress = 0;
@@ -562,11 +542,9 @@ _id_3BD1(var_0) {
       self.userate = 1 * self.objectivescaler;
     } else {
       self.userate = 1;
-
     }
     if(self.curprogress >= self.usetime) {
       return isalive(var_0);
-
     }
     wait 0.05;
   }
@@ -585,7 +563,6 @@ _id_3BD2(var_0) {
     if(var_3 != var_0.userate) {
       if(var_0.curprogress > var_0.usetime) {
         var_0.curprogress = var_0.usetime;
-
       }
       var_1 updatebar(var_0.curprogress / var_0.usetime, 1000 / var_0.usetime * var_0.userate);
 
@@ -728,7 +705,6 @@ updateheadiconorigin() {
 createprimaryprogressbartext(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   var_1 = maps\_hud_util::createserverclientfontstring("hudbig", level.primaryprogressbarfontsize);
   var_1.hidden = 0;
@@ -740,7 +716,6 @@ createprimaryprogressbartext(var_0) {
 createprimaryprogressbar(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
-
   }
   var_1 = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
   var_1 setpoint("CENTER", undefined, level.primaryprogressbarx, level.primaryprogressbary - var_0);
@@ -760,7 +735,6 @@ createbar(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_4.flashfrac = var_3;
-
   }
   var_5 = newclienthudelem(self);
   var_5.elemtype = "bar";
@@ -783,23 +757,19 @@ createbar(var_0, var_1, var_2, var_3) {
 setpoint(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_4)) {
     var_4 = 0;
-
   }
   var_5 = maps\_hud_util::getparent();
 
   if(var_4) {
     self moveovertime(var_4);
-
   }
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   self.xoffset = var_2;
 
   if(!isDefined(var_3)) {
     var_3 = 0;
-
   }
   self.yoffset = var_3;
   self.point = var_0;
@@ -808,23 +778,18 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
   if(issubstr(var_0, "TOP")) {
     self.aligny = "top";
-
   }
   if(issubstr(var_0, "BOTTOM")) {
     self.aligny = "bottom";
-
   }
   if(issubstr(var_0, "LEFT")) {
     self.alignx = "left";
-
   }
   if(issubstr(var_0, "RIGHT")) {
     self.alignx = "right";
-
   }
   if(!isDefined(var_1)) {
     var_1 = var_0;
-
   }
   self.relativepoint = var_1;
   var_6 = "center_adjustable";
@@ -832,19 +797,15 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
   if(issubstr(var_1, "TOP")) {
     var_7 = "top_adjustable";
-
   }
   if(issubstr(var_1, "BOTTOM")) {
     var_7 = "bottom_adjustable";
-
   }
   if(issubstr(var_1, "LEFT")) {
     var_6 = "left_adjustable";
-
   }
   if(issubstr(var_1, "RIGHT")) {
     var_6 = "right_adjustable";
-
   }
   if(var_5 == level.uiparent) {
     self.horzalign = var_6;
@@ -924,13 +885,11 @@ setpointbar(var_0, var_1, var_2, var_3) {
     self.bar.x = self.x - self.width;
   } else {
     self.bar.x = self.x - int(self.width / 2);
-
   }
   if(self.aligny == "top") {
     self.bar.y = self.y;
   } else if(self.aligny == "bottom") {
     self.bar.y = self.y;
-
   }
   updatebar(self.bar.frac);
 }
@@ -946,7 +905,6 @@ updatebarscale(var_0, var_1) {
 
   if(!var_2) {
     var_2 = 1;
-
   }
   self.bar.frac = var_0;
   self.bar setshader(self.bar.shader, var_2, self.height);
@@ -971,7 +929,6 @@ hideelem() {
 
   if(self.alpha != 0) {
     self.alpha = 0;
-
   }
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
     self.bar.hidden = 1;
@@ -991,7 +948,6 @@ showelem() {
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
     if(self.alpha != 0.5) {
       self.alpha = 0.5;
-
     }
     self.bar.hidden = 0;
 
@@ -1006,11 +962,9 @@ showelem() {
 strip_suffix(var_0, var_1) {
   if(var_0.size <= var_1.size) {
     return var_0;
-
   }
   if(getsubstr(var_0, var_0.size - var_1.size, var_0.size) == var_1) {
     return getsubstr(var_0, 0, var_0.size - var_1.size);
-
   }
   return var_0;
 }
@@ -1026,11 +980,9 @@ destroyelem() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] maps\_hud_util::setparent(maps\_hud_util::getparent());
-
   }
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
     self.bar destroy();
-
   }
   self destroy();
 }

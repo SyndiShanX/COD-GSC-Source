@@ -12,11 +12,10 @@ init_bouncing_betties() {
     level thread betty_think(level.betty_trigs[i]);
   }
 }
-
 betty_think(trigger) {
   trigger waittill("trigger");
-  tripwire = getEnt(trigger.target, "targetname");
-  betty = getEnt(tripwire.target, "targetname");
+  tripwire = GetEnt(trigger.target, "targetname");
+  betty = GetEnt(tripwire.target, "targetname");
   betty_radius = 90;
   jumpHeight = RandomIntRange(68, 80);
   dropHeight = RandomIntRange(10, 20);
@@ -28,9 +27,9 @@ betty_think(trigger) {
   wait(clickWaitTime);
   playFX(level._effect["betty_groundPop"], betty.origin + (0, 0, 10));
   betty thread betty_rotate();
-  betty moveTo(betty.origin + (0, 0, jumpHeight), jumpTime, 0, jumpTime * 0.5);
+  betty MoveTo(betty.origin + (0, 0, jumpHeight), jumpTime, 0, jumpTime * 0.5);
   betty waittill("movedone");
-  betty moveTo(betty.origin - (0, 0, dropHeight), dropTime, dropTime * 0.5);
+  betty MoveTo(betty.origin - (0, 0, dropHeight), dropTime, dropTime * 0.5);
   betty waittill("movedone");
   betty notify("stop_rotate_thread");
   playFX(level._effect["betty_explosion"], betty.origin);
@@ -59,7 +58,6 @@ betty_think(trigger) {
   tripwire Delete();
   trigger Delete();
 }
-
 betty_rotate() {
   self endon("stop_rotate_thread");
   self thread betty_rotate_fx();
@@ -70,7 +68,6 @@ betty_rotate() {
     self waittill("rotatedone");
   }
 }
-
 betty_rotate_fx() {
   self endon("stop_rotate_thread");
   fxOrg = spawn("script_model", self.origin);
@@ -80,14 +77,12 @@ betty_rotate_fx() {
   assertex(isDefined(level._effect["betty_smoketrail"]), "level._effect['betty_smoketrail'] needs to be defined");
   fx = playFXOnTag(level._effect["betty_smoketrail"], fxOrg, "tag_origin");
 }
-
 betty_pop(waitTime) {
   if(isDefined(waitTime) && waitTime > 0) {
     wait(waitTime);
   }
   self notify("trigger");
 }
-
 betty_think_no_wires(trigger) {
   trigger waittill("trigger");
   jumpHeight = RandomIntRange(68, 80);
@@ -104,9 +99,9 @@ betty_think_no_wires(trigger) {
   fake_betty = spawn("script_model", self.origin);
   fake_betty setModel("viewmodel_usa_bbetty_mine");
   fake_betty thread betty_rotate();
-  fake_betty moveTo(fake_betty.origin + (0, 0, jumpHeight), jumpTime, 0, jumpTime * 0.5);
+  fake_betty MoveTo(fake_betty.origin + (0, 0, jumpHeight), jumpTime, 0, jumpTime * 0.5);
   fake_betty waittill("movedone");
-  fake_betty moveTo(fake_betty.origin - (0, 0, dropHeight), dropTime, dropTime * 0.5);
+  fake_betty MoveTo(fake_betty.origin - (0, 0, dropHeight), dropTime, dropTime * 0.5);
   fake_betty waittill("movedone");
   self detonate();
   fake_betty notify("stop_rotate_thread");

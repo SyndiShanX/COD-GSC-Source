@@ -55,7 +55,7 @@ calloutareathink() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
     var_0 setplayercalloutarea(self.script_noteworthy, self);

@@ -524,7 +524,7 @@ headchopperattack(weapon, ent) {
   if(!isDefined(tracefwd) || !isDefined(tracefwd["position"]) || tracefwd["position"] != trace_point) {
     return;
   }
-  if(isplayer(ent)) {
+  if(isPlayer(ent)) {
     if(isDefined(weapon.deployed_time) && gettime() - weapon.deployed_time <= 2000) {
       return;
     }
@@ -805,5 +805,4 @@ debugheadchopper(radius) {
 
     wait 0.05;
   }
-
 }

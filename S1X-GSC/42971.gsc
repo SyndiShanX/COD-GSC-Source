@@ -770,7 +770,7 @@ glowstickenemyuselistener(var_0) {
 }
 
 setpainted(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(var_0.specialty_paint_time) && !maps\mp\_utility::_hasperk("specialty_coldblooded")) {
       self.painted = 1;
       self setperk("specialty_radararrow", 1, 0);
@@ -972,7 +972,7 @@ setlightarmorhp(var_0) {
   if(isDefined(var_0)) {
     self.lightarmorhp = var_0;
 
-    if(isplayer(self) && isDefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
+    if(isPlayer(self) && isDefined(self.maxlightarmorhp) && self.maxlightarmorhp > 0) {
       var_1 = clamp(self.lightarmorhp / self.maxlightarmorhp, 0, 1);
       self setclientomnvar("ui_light_armor_percent", var_1);
     }

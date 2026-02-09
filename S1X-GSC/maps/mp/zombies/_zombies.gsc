@@ -325,7 +325,7 @@ getrandomspawnpoint() {
 deathgibmonitor() {
   self waittill("death", var_0, var_1, var_2);
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
   var_3 = var_0 getcurrentweapon();
@@ -536,7 +536,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 giveburgleachievement(var_0) {
-  if(!isDefined(self.distractiondrone) || !isDefined(var_0) || !isplayer(var_0)) {
+  if(!isDefined(self.distractiondrone) || !isDefined(var_0) || !isPlayer(var_0)) {
     return;
   }
   if(isDefined(self.distractiondrone.owner) && self.distractiondrone.owner == var_0) {
@@ -638,7 +638,7 @@ givegoliathmeleeachievement(var_0, var_1, var_2) {
 }
 
 givetrickshotachievement(var_0, var_1, var_2) {
-  if(!isDefined(var_0) || !isplayer(var_0) || !isDefined(var_2)) {
+  if(!isDefined(var_0) || !isPlayer(var_0) || !isDefined(var_2)) {
     return;
   }
   var_3 = getweaponbasename(var_2);
@@ -786,10 +786,10 @@ onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     }
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && !isDefined(self.favoriteenemy)) {
+  if(isDefined(var_1) && isPlayer(var_1) && !isDefined(self.favoriteenemy)) {
     var_14 = self.aistate != "melee";
     var_15 = isDefined(self.curmeleetarget) && self.curmeleetarget == var_1;
-    var_16 = isDefined(self.curmeleetarget) && !isplayer(self.curmeleetarget);
+    var_16 = isDefined(self.curmeleetarget) && !isPlayer(self.curmeleetarget);
 
     if(var_14 || var_15 || var_16) {
       if(distancesquared(self.origin, var_1.origin) <= self.damagedradiussq) {

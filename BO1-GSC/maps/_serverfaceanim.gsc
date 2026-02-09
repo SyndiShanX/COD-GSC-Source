@@ -6,6 +6,7 @@
 #include maps\_utility;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 null_ai_face_anims_func() {
   anims = % faces;
   anims = % f_idle_casual_v1;
@@ -52,7 +53,6 @@ null_ai_face_anims_func() {
   anims = % f_running_v1;
   anims = % f_running_v2;
 }
-
 init_serverfaceanim() {
   self addAIEventListener("grenade danger");
   self addAIEventListener("bulletwhizby");
@@ -73,7 +73,6 @@ init_serverfaceanim() {
     level thread wait_for_face_event();
   }
 }
-
 wait_for_face_event() {
   while(true) {
     level waittill("face", face_notify, ent);

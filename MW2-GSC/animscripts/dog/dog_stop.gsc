@@ -110,7 +110,6 @@ lookAtTarget(lookPoseSet) {
 
   self animscripts\shared::setAnimAimWeight(1, 0.2);
 
-  /#	
   assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "lookAtTarget";

@@ -7,16 +7,15 @@
 
 main() {
   if(getDvar(#"debug_vehiclegod") == "") {
-    setdvar("debug_vehiclegod", "off");
+    setDvar("debug_vehiclegod", "off");
   }
   if(getDvar(#"debug_vehicleplayerhealth") == "") {
-    setdvar("debug_vehicleplayerhealth", "off");
+    setDvar("debug_vehicleplayerhealth", "off");
   }
   if(getDvar(#"player_vehicle_dismountable") == "") {
-    setdvar("player_vehicle_dismountable", "off");
+    setDvar("player_vehicle_dismountable", "off");
   }
 }
-
 vehicle_wait(startinvehicle) {
   if(!isDefined(startinvehicle)) {
     startinvehicle = false;
@@ -36,7 +35,7 @@ vehicle_wait(startinvehicle) {
       self useby(players[0]);
     }
     owner = self getvehicleowner();
-    if(isDefined(owner) && isplayer(owner)) {
+    if(isDefined(owner) && isPlayer(owner)) {
       self thread vehicle_enter();
     } else {
       self thread vehicle_exit();
@@ -47,7 +46,6 @@ vehicle_wait(startinvehicle) {
     wait 0.05;
   }
 }
-
 vehicle_exit() {
   level.playervehicle = level.playervehiclenone;
   level notify("player exited vehicle");
@@ -66,20 +64,16 @@ vehicle_exit() {
     level.VehicleFireIcon destroy();
   }
 }
-
 vehicle_enter() {
   level.playervehicle = self;
   self thread vehicle_ridehandle();
 }
-
 setup_vehicle_tank() {
   self vehicle_giveHealth();
 }
-
 setup_vehicle_other() {
   self vehicle_giveHealth();
 }
-
 vehicle_giveHealth() {
   skill = getdifficulty();
   if(skill == ("easy")) {
@@ -94,7 +88,6 @@ vehicle_giveHealth() {
     self.health = 2000;
   }
 }
-
 vehicle_ridehandle() {
   level endon("player exited vehicle");
   self endon("no_regen_health");
@@ -158,12 +151,11 @@ vehicle_ridehandle() {
     wait .05;
   }
 }
-
 vehicle_kill_player_ondeath() {
   level endon("player exited vehicle");
   self waittill("death");
   driver = self getvehicleowner();
-  if(isDefined(driver) && isplayer(driver)) {
+  if(isDefined(driver) && isPlayer(driver)) {
     driver enablehealthshield(false);
     while(driver.health > 0) {
       driver DoDamage(driver.health + 500, driver.origin);
@@ -173,7 +165,6 @@ vehicle_kill_player_ondeath() {
     driver enablehealthshield(true);
   }
 }
-
 vehicle_damageset() {
   self.damaged = false;
   self endon("death");
@@ -183,7 +174,6 @@ vehicle_damageset() {
     self.damaged = true;
   }
 }
-
 vehicle_reloadsound() {
   while(1) {
     self waittill("turret_fire");
@@ -191,7 +181,6 @@ vehicle_reloadsound() {
     self playSound("tank_reload");
   }
 }
-
 vehicle_hud_tank_fireicon() {
   if(getDvar(#"player_vehicle_dismountable") != "off") {
     return;
@@ -228,7 +217,6 @@ vehicle_hud_tank_fireicon() {
     wait .05;
   }
 }
-
 healthOverlay() {
   self endon("death");
   overlay = newHudElem();

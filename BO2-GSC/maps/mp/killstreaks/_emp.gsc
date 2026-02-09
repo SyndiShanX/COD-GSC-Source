@@ -114,7 +114,7 @@ emp_jamotherteams(teamname, killstreak_id) {
   if(isDefined(level.nukedetonated))
     visionsetnaked(level.nukevisionset, 5.0);
   else
-    visionsetnaked(getdvar(#"mapname"), 5.0);
+    visionsetnaked(getDvar(#"mapname"), 5.0);
 
   level.teamemping[teamname] = 1;
   level notify("emp_update");
@@ -152,7 +152,7 @@ emp_jamplayers(owner, killstreak_id) {
   if(isDefined(level.nukedetonated))
     visionsetnaked(level.nukevisionset, 5.0);
   else
-    visionsetnaked(getdvar(#"mapname"), 5.0);
+    visionsetnaked(getDvar(#"mapname"), 5.0);
 
   level notify("emp_update");
   level.empplayer = owner;
@@ -298,7 +298,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
@@ -392,7 +392,6 @@ drawempdamageorigin(pos, ang, radius) {
     line(pos, pos - anglestoup(ang) * radius, (0, 0, 1));
     wait 0.05;
   }
-
 }
 
 isenemyempkillstreakactive() {

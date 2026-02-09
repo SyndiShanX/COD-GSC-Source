@@ -13,8 +13,7 @@
 	Respawning:	No wait / Away from other players
 
 	Level requirements
-	------------------
-		Spawnpoints:
+	------------------ Spawnpoints:
 			classname		mp_dm_spawn
 			All players spawn from these. The spawnpoint chosen is dependent on the current locations of enemies at the time of spawn.
 			Players generally spawn away from enemies.

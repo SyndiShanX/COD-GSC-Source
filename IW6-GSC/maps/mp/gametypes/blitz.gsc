@@ -250,7 +250,6 @@ assignTeamSpawns() {
         if(distPercent > 0.5) {
           level.teamSpawnPoints["neutral"][level.teamSpawnPoints["neutral"].size] = spawnPoint;
         }
-
       }
     }
   } else {
@@ -371,7 +370,6 @@ hideOpenPortalFX(portalTeam) {
         if(isDefined(player.goal_fx_ent))
           player.goal_fx_ent Delete();
       }
-
     }
   }
 }
@@ -980,7 +978,7 @@ blitzDebug() {
   heightOffsetNames = (0, 0, 64);
 
   while(true) {
-    if(getdvar("scr_blitzdebug") != "1") {
+    if(getDvar("scr_blitzdebug") != "1") {
       wait(1);
       continue;
     }
@@ -988,7 +986,7 @@ blitzDebug() {
     SetDevDvar("scr_showspawns", "1");
 
     while(true) {
-      if(getdvar("scr_blitzdebug") != "1") {
+      if(getDvar("scr_blitzdebug") != "1") {
         SetDevDvar("scr_showspawns", "0");
         break;
       }

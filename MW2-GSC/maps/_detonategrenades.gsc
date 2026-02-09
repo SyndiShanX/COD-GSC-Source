@@ -46,7 +46,7 @@ beginsmokegrenadetracking() {
   self waittill("grenade_fire", grenade, weaponName);
   if(!isDefined(level.smokegrenades))
     level.smokegrenades = 0;
-  if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0")
+  if(level.smokegrenades > 2 && getDvar("player_sustainAmmo") != "0")
     grenade delete();
   else
     grenade thread smoke_grenade_death();
@@ -155,7 +155,7 @@ watchC4() {
       }*/
 
       self.c4array[self.c4array.size] = c4;
-      if(self.c4array.size > 15 && getdvar("player_sustainAmmo") != "0")
+      if(self.c4array.size > 15 && getDvar("player_sustainAmmo") != "0")
         self.c4array[0] delete();
       c4.owner = self;
       //			c4 thread maps\mp\gametypes\_shellshock::c4_earthQuake();
@@ -226,7 +226,7 @@ claymoreDetonation() {
     if(isDefined(self.owner) && ent == self.owner) {
       continue;
     }
-    if(isplayer(ent))
+    if(isPlayer(ent))
       continue; // no enemy claymores in SP.
 
     if(ent damageConeTrace(self.origin, self) > 0) {
@@ -327,7 +327,7 @@ c4Damage() {
 
   thread resetC4ExplodeThisFrame();
 
-  if(isplayer(attacker))
+  if(isPlayer(attacker))
     self detonate(attacker);
   else
     self detonate();
@@ -461,90 +461,90 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
 // damagepos = the position damage is coming from
 // damagedir = the direction damage is moving in
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
-  if(self.isPlayer) {
-    self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](eInflictor, // eInflictor The entity that causes the damage.( e.g. a turret )
-      eAttacker, // eAttacker The entity that is attacking.
-      iDamage, // iDamage Integer specifying the amount of damage done
-      0, // iDFlags Integer specifying flags that are to be applied to the damage
-      sMeansOfDeath, // sMeansOfDeath Integer specifying the method of death
-      sWeapon, // sWeapon The weapon number of the weapon used to inflict the damage
-      damagepos, // vPoint The point the damage is from?
-      damagedir, // vDir The direction of the damage
-      "none", // sHitLoc The location of the hit
-      0 // psOffsetTime The time offset for the damage);
-  } else {
-    // destructable walls and such can only be damaged in certain ways.
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
-      return;
+    if(self.isPlayer) {
+      self.damageOrigin = damagepos;
+      self.entity thread[[level.callbackPlayerDamage]](eInflictor, // eInflictor The entity that causes the damage.( e.g. a turret )
+        eAttacker, // eAttacker The entity that is attacking.
+        iDamage, // iDamage Integer specifying the amount of damage done
+        0, // iDFlags Integer specifying flags that are to be applied to the damage
+        sMeansOfDeath, // sMeansOfDeath Integer specifying the method of death
+        sWeapon, // sWeapon The weapon number of the weapon used to inflict the damage
+        damagepos, // vPoint The point the damage is from?
+        damagedir, // vDir The direction of the damage
+        "none", // sHitLoc The location of the hit
+        0 // psOffsetTime The time offset for the damage);
+      }
+      else {
+        // destructable walls and such can only be damaged in certain ways.
+        if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
+          return;
+        }
+        self.entity notify("damage", iDamage, eAttacker);
+      }
     }
-    self.entity notify("damage", iDamage, eAttacker);
-  }
-}
 
-debugline(a, b, color) {
-  for(i = 0; i < 30 * 20; i++) {
-    line(a, b, color);
-    wait .05;
-  }
-}
+    debugline(a, b, color) {
+      for(i = 0; i < 30 * 20; i++) {
+        line(a, b, color);
+        wait .05;
+      }
+    }
 
-onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage) {
-  self endon("death");
+    onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage) {
+      self endon("death");
 
-  switch (sWeapon) {
-    case "concussion_grenade_mp":
-      // should match weapon settings in gdt
-      radius = 512;
-      scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
+      switch (sWeapon) {
+        case "concussion_grenade_mp":
+          // should match weapon settings in gdt
+          radius = 512;
+          scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
 
-      time = 1 + (4 * scale);
+          time = 1 + (4 * scale);
 
-      wait(0.05);
-      self shellShock("concussion_grenade_mp", time);
-      break;
-    default:
-      // shellshock will only be done if meansofdeath is an appropriate type and if there is enough damage.
-      //			maps\mp\gametypes\_shellshock::shellshockOnDamage( meansOfDeath, damage );
-      break;
-  }
+          wait(0.05);
+          self shellShock("concussion_grenade_mp", time);
+          break;
+        default:
+          // shellshock will only be done if meansofdeath is an appropriate type and if there is enough damage.
+          //			maps\mp\gametypes\_shellshock::shellshockOnDamage( meansOfDeath, damage );
+          break;
+      }
+    }
 
-}
+    watchC4AltDetonate() {
+      self endon("death");
+      self endon("disconnect");
+      self endon("detonated");
+      level endon("game_ended");
 
-watchC4AltDetonate() {
-  self endon("death");
-  self endon("disconnect");
-  self endon("detonated");
-  level endon("game_ended");
-
-  buttonTime = 0;
-  for(;;) {
-    if(self UseButtonPressed()) {
       buttonTime = 0;
-      while(self UseButtonPressed()) {
-        buttonTime += 0.05;
+      for(;;) {
+        if(self UseButtonPressed()) {
+          buttonTime = 0;
+          while(self UseButtonPressed()) {
+            buttonTime += 0.05;
+            wait(0.05);
+          }
+
+          println("pressTime1: " + buttonTime);
+          if(buttonTime >= 0.5) {
+            continue;
+          }
+          buttonTime = 0;
+          while(!self UseButtonPressed() && buttonTime < 0.5) {
+            buttonTime += 0.05;
+            wait(0.05);
+          }
+
+          println("delayTime: " + buttonTime);
+          if(buttonTime >= 0.5) {
+            continue;
+          }
+          if(!self.c4Array.size) {
+            return;
+          }
+          self notify("alt_detonate");
+        }
         wait(0.05);
       }
-
-      println("pressTime1: " + buttonTime);
-      if(buttonTime >= 0.5) {
-        continue;
-      }
-      buttonTime = 0;
-      while(!self UseButtonPressed() && buttonTime < 0.5) {
-        buttonTime += 0.05;
-        wait(0.05);
-      }
-
-      println("delayTime: " + buttonTime);
-      if(buttonTime >= 0.5) {
-        continue;
-      }
-      if(!self.c4Array.size) {
-        return;
-      }
-      self notify("alt_detonate");
     }
-    wait(0.05);
-  }
-}

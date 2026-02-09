@@ -50,7 +50,7 @@ determine_sticky_position(var_0, var_1) {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(var_1) && !maps\mp\_utility::invirtuallobby() && isplayer(var_1)) {
+  if(isDefined(var_1) && !maps\mp\_utility::invirtuallobby() && isPlayer(var_1)) {
     self.ch_crossbow_victim_jumping = var_1 ishighjumping();
 
     if(var_0 maps\mp\gametypes\_weapons::isstucktofriendly(var_1)) {

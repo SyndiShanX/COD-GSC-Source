@@ -48,7 +48,7 @@ func_85CE(var_0) {
   var_0 endon("death");
   var_0 waittill("missile_stuck", var_1);
   var_0 setscriptablepartstate("beacon", "active", 0);
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     scripts\mp\weapons::grenadestuckto(var_0, var_1);
     foreach(var_3 in var_0.grenades) {
       var_3.isstuck = var_0.isstuck;
@@ -238,7 +238,7 @@ func_13B91() {
   thread func_127B9();
   for(;;) {
     self waittill("trigger", var_2);
-    if(!isplayer(var_2) && !scripts\mp\utility::func_9F22(var_2)) {
+    if(!isPlayer(var_2) && !scripts\mp\utility::func_9F22(var_2)) {
       continue;
     }
 
@@ -298,7 +298,7 @@ func_D51E(var_0, var_1) {
 }
 
 func_10D77() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setscriptablepartstate("burning", "active", 0);
   }
 
@@ -308,7 +308,7 @@ func_10D77() {
 func_6312() {
   self notify("endBurning");
   self.var_3291 = undefined;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setscriptablepartstate("burning", "neutral", 0);
   }
 }

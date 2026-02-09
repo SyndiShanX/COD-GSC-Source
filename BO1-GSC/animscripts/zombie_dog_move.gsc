@@ -42,7 +42,6 @@ main() {
     }
   }
 }
-
 moveLoop() {
   self endon("killanimscript");
   self endon("stop_soon");
@@ -72,7 +71,6 @@ moveLoop() {
     }
   }
 }
-
 startMoveTrackLookAhead() {
   self endon("killanimscript");
   for(i = 0; i < 2; i++) {
@@ -80,7 +78,6 @@ startMoveTrackLookAhead() {
     self OrientMode("face angle", lookaheadAngle);
   }
 }
-
 startMove() {
   {
     self SetAnimRestart(anim.dogAnims[self.animSet].move["run_start"], 1, 0.2, 1);
@@ -90,7 +87,6 @@ startMove() {
   self AnimMode("none");
   self OrientMode("face motion");
 }
-
 stopMove() {
   self endon("killanimscript");
   self endon("run");
@@ -98,12 +94,10 @@ stopMove() {
   self SetFlaggedAnimRestart("stop_anim", anim.dogAnims[self.animSet].move["run_stop"], 1, 0.2, 1);
   self animscripts\zombie_shared::DoNoteTracks("stop_anim");
 }
-
 wait_for_play_sound_on_tag(alias, tag) {
   self play_sound_on_tag(alias, tag);
   self notify("growl_bark_done");
 }
-
 randomSoundDuringRunLoop() {
   self endon("killanimscript");
   while(1) {
@@ -116,7 +110,6 @@ randomSoundDuringRunLoop() {
     wait(RandomFloatRange(0.1, 0.3));
   }
 }
-
 getRunAnimWeights() {
   weights = [];
   weights["center"] = 0;
@@ -154,7 +147,6 @@ getRunAnimWeights() {
   }
   return weights;
 }
-
 need_to_run() {
   run_dist_squared = 384 * 384;
   if(getDvar("scr_dog_run_distance") != "") {
@@ -176,7 +168,7 @@ need_to_run() {
   if(!self CanSee(self.enemy)) {
     return false;
   }
-  dist = distanceSquared(self.origin, self.enemy.origin);
+  dist = DistanceSquared(self.origin, self.enemy.origin);
   if(dist > run_dist_squared) {
     return false;
   }

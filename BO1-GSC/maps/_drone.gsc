@@ -8,9 +8,10 @@
 #include animscripts\utility;
 #include animscripts\combat_utility;
 #using_animtree("generic_human");
+
 init() {
   if(getDvar(#"debug_drones") == "") {
-    setdvar("debug_drones", "0");
+    setDvar("debug_drones", "0");
   }
   if(!isDefined(level.traceHeight)) {
     level.traceHeight = 400;
@@ -70,7 +71,6 @@ init() {
   }
   level.drone_spawn_func = ::drone_init;
 }
-
 drone_init() {
   assertEx(isDefined(level.max_drones), "You need to put maps\_drone::init(); in your level script!");
   if(level.drones[self.team].array.size >= level.max_drones[self.team]) {
@@ -101,7 +101,6 @@ drone_init() {
   }
   self drone_idle();
 }
-
 drone_death_thread(drone) {
   while(isDefined(drone)) {
     drone waittill("damage");
@@ -123,7 +122,6 @@ drone_death_thread(drone) {
     drone delete();
   }
 }
-
 drone_play_anim(droneAnim) {
   if(isDefined(self.need_notetrack)) {
     self thread drone_notetrack("drone_anim");
@@ -132,7 +130,6 @@ drone_play_anim(droneAnim) {
   self waittillmatch("drone_anim", "end");
   self notify("stop_droneNoteTrack");
 }
-
 drone_notetrack(msg) {
   self endon("stop_droneNoteTrack");
   while(1) {
@@ -144,12 +141,10 @@ drone_notetrack(msg) {
     }
   }
 }
-
 drone_idle() {
   self stopAnimScripted();
   self thread drone_play_anim(level.drone_anims["stand"]["idle"]);
 }
-
 drone_move_to_ent(target_ent) {
   if(isDefined(self)) {
     self.target = target_ent.targetname;
@@ -157,7 +152,6 @@ drone_move_to_ent(target_ent) {
     self thread drone_move();
   }
 }
-
 drone_move_to_ent_and_fire(target_ent, other_target) {
   self endon("death");
   self notify("stop_firing");
@@ -165,18 +159,15 @@ drone_move_to_ent_and_fire(target_ent, other_target) {
   self waittill("goal");
   self drone_fire_at_target(other_target, true);
 }
-
 drone_move_to_ent_and_delete(target_ent) {
   self thread delete_at_goal();
   self thread drone_move_to_ent(target_ent);
 }
-
 delete_at_goal() {
   self endon("death");
   self waittill("goal");
   self Delete();
 }
-
 drone_move() {
   self endon("death");
   wait randomfloat(0.5);
@@ -255,7 +246,6 @@ drone_move() {
   prof_end("drone_math");
   self notify("goal");
 }
-
 getPathArray(firstTargetName, initialPoint) {
   usingNodes = true;
   assert(isDefined(firstTargetName));
@@ -307,7 +297,6 @@ getPathArray(firstTargetName, initialPoint) {
   prof_end("drone_math");
   return nodes;
 }
-
 drone_scripted_spawn(classname, spawn_script_origin) {
   assert(isDefined(level.dronestruct[classname]));
   struct = level.dronestruct[classname];
@@ -362,7 +351,6 @@ drone_scripted_spawn(classname, spawn_script_origin) {
   spawn_script_origin notify("drone_spawned", drone);
   return drone;
 }
-
 drone_hide_weapon() {
   tagname = "j_helmet";
   size = self getattachsize();
@@ -375,14 +363,12 @@ drone_hide_weapon() {
     }
   }
 }
-
 drone_show_weapon() {
   if(isDefined(self.hidden_weapon)) {
     weapon = getWeaponModel(self.hidden_weapon);
     self attach(self.hidden_weapon, "tag_weapon_right");
   }
 }
-
 drone_fire_at_target(target, was_moving) {
   if(isDefined(was_moving)) {
     self drone_idle();
@@ -413,7 +399,6 @@ drone_fire_at_target(target, was_moving) {
     }
   }
 }
-
 drone_fire_at_vehicle_type(_vehicletype, _range) {
   self endon("death");
   self endon("stop vehicle target");
@@ -441,7 +426,6 @@ drone_fire_at_vehicle_type(_vehicletype, _range) {
     my_target = -1;
   }
 }
-
 drone_track_ent(target) {
   drone = self;
   drone endon("death");
@@ -459,7 +443,6 @@ drone_track_ent(target) {
     wait(0.05);
   }
 }
-
 drone_track_ent_height(target) {
   drone = self;
   drone endon("death");
@@ -491,7 +474,6 @@ drone_track_ent_height(target) {
     wait(0.05);
   }
 }
-
 trackShootEntOrPos(target) {
   if(isDefined(self) && isDefined(target)) {
     drone = self;
@@ -512,7 +494,6 @@ trackShootEntOrPos(target) {
     drone trackLoop(%exposed_aim_2, %exposed_aim_4, %exposed_aim_6, %exposed_aim_8);
   }
 }
-
 trackLoop(aim2, aim4, aim6, aim8) {
   self animscripts\shared::setAnimAimWeight(1, .2);
   players = get_players();

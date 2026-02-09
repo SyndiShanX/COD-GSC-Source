@@ -885,7 +885,6 @@ bike_drives_path(bike) {
         } else {
           rider startragdoll();
           rider notify("newanime");
-
         }
       }
       wait(5);
@@ -977,7 +976,6 @@ priceliner() {
       Line(level.player.origin + forward, self.origin, (1, 0, 0));
     wait(0.05);
   }
-
 }
 
 update_position_on_spline() {
@@ -1102,9 +1100,7 @@ modulate_speed_based_on_progress() {
       price_match_player_speed(10, 10);
 
       //hud setText( int( array["progress"] ) + " mult:" + multiplier + " dspeed:" + int( my_speed ) + " aspeed:" + int( self.veh_speed ) );
-
     }
-
   }
 }
 
@@ -1225,7 +1221,6 @@ match_player_speed(maxaccell, maxdecel) {
         level notify("dialog_six");
       }
       multiplier = 1.5;
-
     }
 
     if(isDefined(level.player.offset)) {
@@ -1501,7 +1496,6 @@ set_bike_position(ent) {
         thread Linedraw(bike.origin, endpos, (0.9, 0.1, 0.3), 1, 0, timer);
       else
         thread Linedraw(bike.origin, endpos, (0.3, 0.1, 0.9), 1, 0, timer);
-
   }
 
   bike.progress_targ = targ;
@@ -1730,7 +1724,6 @@ bike_turns() {
       if(self.tilt < 0) {
         self.tilt_vel += tilt_rate;
       }
-
     } else
     if(self.goal_dir == 1) {
       self.tilt_vel += tilt_rate;

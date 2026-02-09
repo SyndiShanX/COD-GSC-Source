@@ -111,7 +111,7 @@ matchstarttimerconsole_internal(counttime, matchstarttimer) {
     matchstarttimer setvalue(counttime);
 
     if(counttime == 2)
-      visionsetnaked(getdvar(#"mapname"), 3.0);
+      visionsetnaked(getDvar(#"mapname"), 3.0);
 
     counttime--;
     wait(1 - matchstarttimer.inframes * 0.05);
@@ -139,10 +139,10 @@ matchstarttimerconsole(type, duration) {
 
   if(counttime >= 2) {
     matchstarttimerconsole_internal(counttime, matchstarttimer);
-    visionsetnaked(getdvar(#"mapname"), 3.0);
+    visionsetnaked(getDvar(#"mapname"), 3.0);
   } else {
     visionsetnaked("mpIntro", 0);
-    visionsetnaked(getdvar(#"mapname"), 1.0);
+    visionsetnaked(getDvar(#"mapname"), 1.0);
   }
 
   matchstarttimer destroyelem();

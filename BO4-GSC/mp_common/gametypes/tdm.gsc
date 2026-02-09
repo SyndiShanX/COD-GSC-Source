@@ -161,7 +161,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     }
   }
 
-  if(isplayer(attacker) == 0 || attacker.team == self.team) {
+  if(isPlayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
 

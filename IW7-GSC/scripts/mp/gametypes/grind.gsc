@@ -342,7 +342,7 @@ runzonethink() {
       continue;
     }
 
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -473,7 +473,7 @@ droptags(var_0, var_1) {
 }
 
 dogtagallyonusecb(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\utility::setextrascore1(var_0.pers["denied"]);
   }
 }
@@ -481,8 +481,8 @@ dogtagallyonusecb(var_0) {
 removepoint() {
   self endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devRemoveDomFlag", "") != "") {
-      var_0 = getdvar("scr_devRemoveDomFlag", "");
+    if(getDvar("scr_devRemoveDomFlag", "") != "") {
+      var_0 = getDvar("scr_devRemoveDomFlag", "");
       foreach(var_2 in level.var_13FC1) {
         if(isDefined(var_2.useobj.label) && var_2.useobj.label == var_0) {
           var_2.useobj notify("stop_trigger" + var_2.useobj.label);
@@ -524,8 +524,8 @@ removepoint() {
 placepoint() {
   self endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devPlaceDomFlag", "") != "") {
-      var_0 = getdvar("scr_devPlaceDomFlag", "");
+    if(getDvar("scr_devPlaceDomFlag", "") != "") {
+      var_0 = getDvar("scr_devPlaceDomFlag", "");
       var_1 = undefined;
       var_2 = getEntArray("grind_location", "targetname");
       foreach(var_4 in var_2) {

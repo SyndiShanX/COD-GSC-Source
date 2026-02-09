@@ -90,7 +90,7 @@ init(player) {
   if(is_coop())
     precacheModel("vehicle_ac130_coop");
 
-  if(getdvar("ac130_alternate_controls", "0") == "0") {
+  if(getDvar("ac130_alternate_controls", "0") == "0") {
     precacheItem("ac130_25mm");
     precacheItem("ac130_40mm");
     precacheItem("ac130_105mm");
@@ -248,7 +248,7 @@ init(player) {
   level.ac130.origin = level.ac130player getOrigin();
   level.ac130 hide();
 
-  if(getdvar("ac130_alternate_controls", "0") == "0") {
+  if(getDvar("ac130_alternate_controls", "0") == "0") {
     level.ac130player giveweapon("ac130_105mm");
     level.ac130player switchtoweapon("ac130_105mm");
   } else {
@@ -258,16 +258,16 @@ init(player) {
   level.ac130player SetActionSlot(1, "");
   Setammo();
 
-  if(getdvar("ac130_enabled", "1") == "1") {
+  if(getDvar("ac130_enabled", "1") == "1") {
     thread overlay();
     thread HUDItemsOff();
     thread attachPlayer();
     thread changeWeapons();
     thread weaponFiredThread();
     thread thermalVision();
-    if(getdvar("ac130_pre_engagement_mode", "2") == "1")
+    if(getDvar("ac130_pre_engagement_mode", "2") == "1")
       thread failMissionForEngaging();
-    if(getdvar("ac130_pre_engagement_mode", "2") == "2")
+    if(getDvar("ac130_pre_engagement_mode", "2") == "2")
       thread nofireCrossHair();
     thread context_Sensative_Dialog();
     thread shotFired();
@@ -309,7 +309,7 @@ overlay() {
   level.HUDItem["crosshairs"] setshader("ac130_overlay_105mm", level.ac130_crosshair_size_x, level.ac130_crosshair_size_y);
   level.HUDItem["crosshairs"].sort = -2;
 
-  if(getdvar("ac130_hud_text_misc", "1") == "1") {
+  if(getDvar("ac130_hud_text_misc", "1") == "1") {
     level.HUDItem["hud_text_top"] = newClientHudElem(level.ac130player);
     level.HUDItem["hud_text_top"].x = 0 + level.ac130_left_hud_offset;
     level.HUDItem["hud_text_top"].y = 0;
@@ -365,7 +365,7 @@ overlay() {
     level.HUDItem["hud_text_bottom"].alpha = 1.0;
   }
 
-  if(getdvar("ac130_hud_text_thermal", "1") == "1") {
+  if(getDvar("ac130_hud_text_thermal", "1") == "1") {
     level.HUDItem["thermal_mode"] = newClientHudElem(level.ac130player);
     level.HUDItem["thermal_mode"].x = -80 + level.ac130_right_hud_offset;
     level.HUDItem["thermal_mode"].y = 50;
@@ -379,7 +379,7 @@ overlay() {
     level.HUDItem["thermal_mode"].alpha = 1.0;
   }
 
-  if(getdvar("ac130_hud_text_weapons", "1") == "1") {
+  if(getDvar("ac130_hud_text_weapons", "1") == "1") {
     level.HUDItem["weapon_text"][0] = newClientHudElem(level.ac130player);
     level.HUDItem["weapon_text"][0].x = 0 + level.ac130_left_hud_offset;
     level.HUDItem["weapon_text"][0].y = 0;
@@ -421,7 +421,7 @@ overlay() {
   thread overlay_coords();
   thread blink_hud_elem(0);
 
-  if(getdvar("ac130_thermal_enabled", "1") == "1") {
+  if(getDvar("ac130_thermal_enabled", "1") == "1") {
     level.HUDItem["grain"] = newClientHudElem(level.ac130player);
     level.HUDItem["grain"].x = 0;
     level.HUDItem["grain"].y = 0;
@@ -434,7 +434,7 @@ overlay() {
     level.HUDItem["grain"].sort = -3;
   }
 
-  if(getdvar("ac130_thermal_enabled", "1") == "1")
+  if(getDvar("ac130_thermal_enabled", "1") == "1")
     thread ac130ShellShock();
 
   wait 0.05;
@@ -445,14 +445,14 @@ overlay() {
     setsaveddvar("g_friendlynamedist", 2000);
 
   // sets dvar for ac130 player number for menu to hide the correct HUD components
-  setdvar("ac130_player_num", 1);
+  setDvar("ac130_player_num", 1);
   if(level.ac130player == level.player)
-    setdvar("ac130_player_num", 0);
+    setDvar("ac130_player_num", 0);
 
   if(!is_coop())
     setsaveddvar("compass", 0);
 
-  if(getdvar("ac130_thermal_enabled", "1") == "1") {
+  if(getDvar("ac130_thermal_enabled", "1") == "1") {
     level.ac130player SetBlurForPlayer(1.2, 0);
   }
 }
@@ -492,7 +492,7 @@ hud_timer() {
     return;
   }
 
-  if(getdvar("ac130_hud_text_misc", "1") == "0") {
+  if(getDvar("ac130_hud_text_misc", "1") == "0") {
     return;
   }
   level endon("post_effects_disabled");
@@ -514,7 +514,7 @@ hud_timer() {
 }
 
 overlay_coords() {
-  if(getdvar("ac130_hud_text_misc", "1") == "0") {
+  if(getDvar("ac130_hud_text_misc", "1") == "0") {
     return;
   }
   level.HUDItem["coordinate_long"] = newClientHudElem(level.ac130player);
@@ -748,7 +748,7 @@ changeWeapons() {
   level.ac130_weapon[2].string = (&"AC130_HUD_WEAPON_25MM");
   level.ac130_weapon[2].hudelem_y = -60;
 
-  if(getdvar("ac130_alternate_controls", "0") == "0") {
+  if(getDvar("ac130_alternate_controls", "0") == "0") {
     level.ac130_weapon[0].weapon = "ac130_105mm";
     level.ac130_weapon[1].weapon = "ac130_40mm";
     level.ac130_weapon[2].weapon = "ac130_25mm";
@@ -766,7 +766,7 @@ changeWeapons() {
 
   wait 0.05;
 
-  level.initialFOV = int(getdvar("cg_fov"));
+  level.initialFOV = int(getDvar("cg_fov"));
   assert(isDefined(level.initialFOV));
   assert(level.initialFOV > 0);
 
@@ -791,7 +791,7 @@ changeWeapons() {
     thread blink_crosshairs(level.ac130_weapon[currentWeapon].weapon);
     thread blink_hud_elem(currentWeapon);
 
-    if(getdvar("ac130_alternate_controls", "0") == "0") {
+    if(getDvar("ac130_alternate_controls", "0") == "0") {
       //setsaveddvar( "cg_fov", level.ac130_weapon[currentWeapon].fov );
 
       targetFOV = int(level.ac130_weapon[currentWeapon].fov);
@@ -919,7 +919,7 @@ weaponFiredCoOpTracer(weaponName) {
 thermalVision() {
   level.ac130player endon("death");
 
-  if(getdvar("ac130_thermal_enabled", "1") != "1") {
+  if(getDvar("ac130_thermal_enabled", "1") != "1") {
     return;
   }
   level.ac130player visionSetThermalForPlayer("ac130", 0);
@@ -978,7 +978,7 @@ failMissionForEngaging() {
 
   if(!flag("mission_failed")) {
     flag_set("mission_failed");
-    setdvar("ui_deadquote", "@AC130_DO_NOT_ENGAGE");
+    setDvar("ui_deadquote", "@AC130_DO_NOT_ENGAGE");
     maps\_utility::missionFailedWrapper();
   }
 }
@@ -1030,7 +1030,7 @@ fire_screenShake() {
     level.ac130player waittill("weapon_fired");
 
     if(level.currentWeapon == "105mm") {
-      if((getdvar("ac130_pre_engagement_mode", "2") == "2") && (!flag("clear_to_engage"))) {
+      if((getDvar("ac130_pre_engagement_mode", "2") == "2") && (!flag("clear_to_engage"))) {
         continue;
       }
       thread gun_fired_and_ready_105mm();
@@ -1039,7 +1039,7 @@ fire_screenShake() {
       earthquake(0.2, 1, level.ac130player.origin, 1000);
     } else
     if(level.currentWeapon == "40mm") {
-      if((getdvar("ac130_pre_engagement_mode", "2") == "2") && (!flag("clear_to_engage"))) {
+      if((getDvar("ac130_pre_engagement_mode", "2") == "2") && (!flag("clear_to_engage"))) {
         continue;
       }
       //earthquake(<scale>,<duration>,<source>,<radius>)
@@ -1114,7 +1114,7 @@ shotFired() {
 
     thread shotFiredBadPlace(position, weaponName);
 
-    if(getdvar("ac130_ragdoll_deaths", "1") == "1")
+    if(getDvar("ac130_ragdoll_deaths", "1") == "1")
       thread shotFiredPhysicsSphere(position, weaponName);
     wait 0.05;
   }
@@ -1135,7 +1135,7 @@ shotFiredFriendlyProximity(weaponName, position) {
   prof_end("ac130_friendly_proximity_check");
   level thread shotFiredFriendlyProximity_trigger(trigger, trigger_lifetime);
 
-  if(getdvar("ac130_debug_weapons", "0") == "1") {
+  if(getDvar("ac130_debug_weapons", "0") == "1") {
     thread debug_circle(trigger_origin, trigger_radius, trigger_lifetime, level.color["white"], undefined, true);
     thread debug_circle(trigger_origin + (0, 0, trigger_height), trigger_radius, trigger_lifetime, level.color["white"], undefined, true);
   }
@@ -1174,7 +1174,7 @@ shotFiredBadPlace(center, weapon) {
   badplace_cylinder("", level.badplaceDuration[weapon], center, level.badplaceRadius[weapon], level.badplaceRadius[weapon], "axis");
   thread shotFiredBadPlaceCount(level.badplaceDuration[weapon]);
 
-  if(getdvar("ac130_debug_weapons", "0") == "1")
+  if(getDvar("ac130_debug_weapons", "0") == "1")
     thread debug_circle(center, level.badplaceRadius[weapon], level.badplaceDuration[weapon], level.color["blue"], undefined, true);
 }
 
@@ -1236,7 +1236,7 @@ breakable()
 	for(;;)
 	{
 		self waittill ( "damage", damage, attacker );
-		if( ( isplayer( attacker ) ) &( damage >= 1000 ) )
+		if( ( isPlayer( attacker ) ) &( damage >= 1000 ) )
 			break;
 	}
 	self delete();
@@ -1249,7 +1249,7 @@ tree_fall()
 	for(;;)
 	{
 		self waittill( "damage", damage, attacker, direction_vec, point );
-		if( !isplayer( attacker ) )
+		if( !isPlayer( attacker ) )
 			continue;
 		if( randomint( 2 ) == 0 )
 			continue;
@@ -1301,7 +1301,7 @@ spawn_callback_thread(guy) {
     thread enemy_killed_thread(guy);
   }
 
-  if(getdvar("ac130_target_markers", "0") == "1") {
+  if(getDvar("ac130_target_markers", "0") == "1") {
     target_set(guy, (0, 0, 32));
     thread hud_target_blink(guy);
   }
@@ -1332,15 +1332,15 @@ enemy_killed_thread(guy) {
   if(guy.team != "axis") {
     return;
   }
-  if(getdvar("ac130_ragdoll_deaths", "1") == "1")
+  if(getDvar("ac130_ragdoll_deaths", "1") == "1")
     guy.skipDeathAnim = true;
 
   guy waittill("death", attacker);
 
-  if((isDefined(attacker)) && (isplayer(attacker)))
+  if((isDefined(attacker)) && (isPlayer(attacker)))
     level.enemiesKilledByPlayer++;
 
-  if(getdvar("ac130_ragdoll_deaths", "1") == "1") {
+  if(getDvar("ac130_ragdoll_deaths", "1") == "1") {
     if((isDefined(guy.damageweapon)) && (issubstr(guy.damageweapon, "25mm")))
       guy.skipDeathAnim = undefined;
   }
@@ -1395,7 +1395,7 @@ context_Sensative_Dialog_Guy_Crawling() {
     level waittill("ai_crawling", guy);
 
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog", "0") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog", "0") == "1")
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (0, 1, 0));
     }
 
@@ -1408,7 +1408,7 @@ context_Sensative_Dialog_Guy_Pain_Falling() {
     level waittill("ai_pain_falling", guy);
 
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog", "0") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog", "0") == "1")
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 0, 0));
     }
 
@@ -1421,7 +1421,7 @@ context_Sensative_Dialog_Guy_Pain() {
     level waittill("ai_pain", guy);
 
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog", "0") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog", "0") == "1")
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 0, 0));
     }
 
@@ -1436,7 +1436,7 @@ context_Sensative_Dialog_Secondary_Explosion_Vehicle() {
     wait 1;
 
     if(isDefined(vehicle_origin)) {
-      if(getdvar("ac130_debug_context_sensative_dialog", "0") == "1")
+      if(getDvar("ac130_debug_context_sensative_dialog", "0") == "1")
         thread debug_line(level.ac130player.origin, vehicle_origin, 5.0, (0, 0, 1));
     }
 
@@ -1448,14 +1448,14 @@ context_Sensative_Dialog_Kill(guy, attacker) {
   if(!isDefined(attacker)) {
     return;
   }
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   level.enemiesKilledInTimeWindow++;
   level notify("enemy_killed");
 
   if((isDefined(guy)) && (isDefined(guy.origin))) {
-    if(getdvar("ac130_debug_context_sensative_dialog", "0") == "1")
+    if(getDvar("ac130_debug_context_sensative_dialog", "0") == "1")
       thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 1, 0));
   }
 }
@@ -1723,13 +1723,13 @@ mission_fail_casualties() {
 
   if(level.friendlyCount < level.minimumFriendlyCount) {
     flag_set("mission_failed");
-    setdvar("ui_deadquote", "@AC130_FRIENDLIES_DEAD");
+    setDvar("ui_deadquote", "@AC130_FRIENDLIES_DEAD");
     maps\_utility::missionFailedWrapper();
   }
 }
 
 debug_friendly_count() {
-  while(getdvar("ac130_debug_friendly_count", "0") != "1")
+  while(getDvar("ac130_debug_friendly_count", "0") != "1")
     wait 1;
 
   assert(isDefined(level.friendlyCount));

@@ -224,7 +224,7 @@ doscreenflash() {
 }
 
 isentityphaseshifted(var_0) {
-  return isDefined(var_0) && isplayer(var_0) || isagent(var_0) && var_0 isinphase();
+  return isDefined(var_0) && isPlayer(var_0) || isagent(var_0) && var_0 isinphase();
 }
 
 areentitiesinphase(var_0, var_1) {

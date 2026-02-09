@@ -319,7 +319,7 @@ function_8ca62ae3() {
 function_f8139729() {
   assert(isDefined(self.var_66cb03ad));
   assert(isDefined(self.maxhealth));
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_bc840360 = isDefined(self.heal) && isDefined(self.heal.var_bc840360) ? self.heal.var_bc840360 : 0;
 
   if(var_bc840360 == 0) {

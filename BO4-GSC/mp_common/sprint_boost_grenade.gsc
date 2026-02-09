@@ -80,7 +80,7 @@ apply_sprint_boost_to_players(owner, origin, radius, duration) {
   radiussq = (isDefined(radius) ? radius : 150) * (isDefined(radius) ? radius : 150);
 
   foreach(player in level.players) {
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
 

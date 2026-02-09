@@ -229,7 +229,7 @@ goto_current_ColorIndex() {
 
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
-    if(isalive(node.color_user) && !isplayer(node.color_user)) {
+    if(isalive(node.color_user) && !isPlayer(node.color_user)) {
       continue;
     }
     self thread ai_sets_goal_with_delay(node);
@@ -478,7 +478,6 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
     color_forced = level.currentColorForced[team][color];
     color_defined = isDefined(level.arrays_of_colorCoded_nodes[team][color_forced]) || isDefined(level.arrays_of_colorCoded_volumes[team][color_forced]);
     assertEx(color_defined, "Trigger tried to set colorCode " + color + " but there are no nodes for " + team + " that use that color combo.");
-
   }
 
   ai_array = [];
@@ -639,7 +638,7 @@ send_ai_to_colorVolume(volume, colorCode) {
 issue_color_order_to_ai(colorCode, color, team, ai) {
   original_ai_array = ai;
 
-  /# level.colorNodes_debug_array[ team ][ colorCode ] = undefined;
+  level.colorNodes_debug_array[team][colorCode] = undefined;
 
   nodes = [];
   if(isDefined(level.arrays_of_colorCoded_nodes[team][colorCode])) {
@@ -647,7 +646,6 @@ issue_color_order_to_ai(colorCode, color, team, ai) {
     nodes = get_prioritized_colorCoded_nodes(team, colorCode, color);
 
     level.colorNodes_debug_array[team][colorCode] = nodes;
-
   } else {
     volume = get_colorCoded_volume(team, colorCode);
     assertex(isDefined(volume), "More than 1 volume has the same colorcode. Don't know what to do! Color code was " + colorCode + " but this may be changed at compile time.");
@@ -984,7 +982,7 @@ process_color_order_to_ai(node, trigger, counter) {
 
   for(;;) {
     self waittill("node_taken", taker);
-    if(isplayer(taker)) {
+    if(isPlayer(taker)) {
       // give time for the player to claim the node
       wait(0.05);
     }

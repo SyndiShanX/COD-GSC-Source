@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cod5_sumpf.csc
+ * Script: clientscripts\zombie_cod5_sumpf\.csc
 ***********************************************/
 
 #include clientscripts\_utility;
@@ -17,9 +17,8 @@ zombie_monitor(clientNum) {
     realwait(0.1);
   }
 }
-
 zombifyHandler(clientNum, newState, oldState) {
-  player = getLocalPlayers()[clientNum];
+  player = getlocalplayers()[clientNum];
   if(newState == "1") {
     if(!isDefined(player.zombifyFX)) {
       player.zombifyFX = 1;
@@ -34,7 +33,6 @@ zombifyHandler(clientNum, newState, oldState) {
     }
   }
 }
-
 main() {
   include_weapons();
   level._uses_crossbow = true;
@@ -47,12 +45,10 @@ main() {
   register_zombie_types();
   println("*** Client : zombie running...or is it chasing? Muhahahaha");
 }
-
 register_zombie_types() {
   character\clientscripts\char_jap_zombie::register_gibs();
   character\clientscripts\char_jap_zombie_nocap::register_gibs();
 }
-
 include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
@@ -92,11 +88,11 @@ include_weapons() {
   include_weapon("mine_bouncing_betty", false);
   include_weapon("zombie_cymbal_monkey");
 }
-
 swamp_german_safe() {
   if(is_german_build()) {
     dead_guy = GetDynEnt("hanging_dead_guy");
-    if(isDefined(dead_guy))
-      dead_guy hide();
+    if(isDefined(dead_guy)) {
+      dead_guy Hide();
+    }
   }
 }

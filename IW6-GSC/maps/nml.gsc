@@ -124,7 +124,7 @@ main() {
   maps\nml_wolf::preload();
   level.hudoutline_maxdist = 1024;
 
-  if(getdvar("createfx", "") == "on") {
+  if(getDvar("createfx", "") == "on") {
     level.getnodefunction = ::getnode;
     level.getnodearrayfunction = ::getnodearray;
     level.struct_class_names = undefined;
@@ -211,7 +211,7 @@ main() {
   level.dog_flush_functions["sat_camp_1"] = maps\nml_satellite_new::flush_sat_camp_1;
   level.custom_followpath_parameter_func = maps\_utility_dogs::dog_follow_path_func;
   setsaveddvar("cg_cinematicFullScreen", "0");
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
   setsaveddvar("r_hudOutlineEnable", 1);
   thread maps\nml_util::reactive_grass_settings();
   thread delayed_setup();
@@ -224,7 +224,7 @@ main() {
       var_1.origin = (4028.6, -170.6, -191.7);
   }
 
-  setdvar("jimmy", 0);
+  setDvar("jimmy", 0);
   thread sat_crane();
   thread mall_crane();
   thread objectives();
@@ -406,7 +406,7 @@ init_level_flags() {
 setup_e3() {
   common_scripts\utility::flag_set("start_intro");
   maps\nml_util::set_start_positions("start_intro");
-  setdvar("e3", "1");
+  setDvar("e3", "1");
   level.baker.name = "";
   level.dog.name = "";
 }
@@ -414,7 +414,7 @@ setup_e3() {
 setup_intro() {
   common_scripts\utility::flag_set("start_intro");
   maps\nml_util::set_start_positions("start_intro");
-  setdvar("e3", "0");
+  setDvar("e3", "0");
 }
 
 setup_cave() {
@@ -441,7 +441,7 @@ jimmy_fade() {
   maps\_utility::music_play("mus_nml_travel");
   level.player disableweapons();
   wait 3;
-  setdvar("jimmy", 1);
+  setDvar("jimmy", 1);
   maps\_hud_util::fade_in(2);
   common_scripts\utility::flag_wait("hesh_mansion_jumpdown");
   wait 3;

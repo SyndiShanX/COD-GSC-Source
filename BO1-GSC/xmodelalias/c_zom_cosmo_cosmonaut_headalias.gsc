@@ -8,5 +8,5 @@ main() {
   a[1] = "c_zom_cosmo_head2";
   a[2] = "c_zom_cosmo_head3";
   a[3] = "c_zom_cosmo_head4";
-  returna;
+  return a;
 }

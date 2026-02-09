@@ -130,7 +130,6 @@ industrial_curtain_ondamage() {
 
   if(isDefined(level.func["useanimtree"])) {
     self call[[level.func["useanimtree"]]](#animtree);
-
   }
   var_0 = common_scripts\utility::ter_op(common_scripts\utility::issp(), level.func["clearanim"], level.func["scriptModelClearAnim"]);
   var_1 = common_scripts\utility::ter_op(common_scripts\utility::issp(), level.func["setanim"], level.func["scriptModelPlayAnim"]);
@@ -182,11 +181,9 @@ industrial_curtain_ondamage() {
 
           if(var_4 > 1) {
             var_4 = 0;
-
           }
           if(var_6 > 85) {
             var_2 = "large";
-
           }
           break;
       }
@@ -207,13 +204,11 @@ industrial_curtain_ondamage() {
       self call[[var_0]](level._interactive_anims["curtain_industrial"]["idle2"], 0);
     } else {
       self call[[var_0]]();
-
     }
     if(common_scripts\utility::issp()) {
       self call[[var_1]](level._interactive_anims["curtain_industrial"][var_3], 1, 0, 1);
     } else {
       self call[[var_1]](level._interactive_anims["curtain_industrial"][var_3]);
-
     }
     var_11 = undefined;
     var_12 = undefined;
@@ -231,7 +226,6 @@ industrial_curtain_ondamage() {
       self call[[var_0]](level._interactive_anims["curtain_industrial"][var_3], 0);
     } else {
       self call[[var_0]]();
-
     }
     thread industrial_curtain_playidleanim();
   }
@@ -249,7 +243,6 @@ industrial_curtain_playidleanim() {
       self call[[var_1]](level._interactive_anims["curtain_industrial"]["idle1"], 1, 0, 1);
     } else {
       self call[[var_1]](level._interactive_anims["curtain_industrial"]["idle1"]);
-
     }
     wait(level._interactive_animlengths["curtain_industrial"]["idle1"]);
 
@@ -265,7 +258,6 @@ industrial_curtain_playidleanim() {
     self call[[var_1]](level._interactive_anims["curtain_industrial"]["idle2"], 1, 0, 1);
   } else {
     self call[[var_1]](level._interactive_anims["curtain_industrial"]["idle2"]);
-
   }
   wait(level._interactive_animlengths["curtain_industrial"]["idle2"]);
   wait(randomfloat(3));

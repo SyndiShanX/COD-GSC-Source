@@ -30,13 +30,13 @@ function register_clientfields() {
 }
 
 function function_554db684() {
-  setdvar("wallrun_enabled", 1);
-  setdvar("doublejump_enabled", 1);
-  setdvar("playerEnergy_enabled", 1);
-  setdvar("bg_lowGravity", 300);
-  setdvar("wallRun_maxTimeMs_zm", 10000);
-  setdvar("playerEnergy_maxReserve_zm", 200);
-  setdvar("wallRun_peakTest_zm", 0);
+  setDvar("wallrun_enabled", 1);
+  setDvar("doublejump_enabled", 1);
+  setDvar("playerEnergy_enabled", 1);
+  setDvar("bg_lowGravity", 300);
+  setDvar("wallRun_maxTimeMs_zm", 10000);
+  setDvar("playerEnergy_maxReserve_zm", 200);
+  setDvar("wallRun_peakTest_zm", 0);
 }
 
 function function_69e96b4d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

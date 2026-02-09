@@ -17,12 +17,10 @@ main() {
   level thread visual_trigger_vox("mine_see");
   level thread endgame_vox();
 }
-
 audio_alias_override() {
   level.plr_vox["kill"]["explosive"] = "kill_explosive";
   level.plr_vox["kill"]["explosive_response"] = undefined;
 }
-
 endgame_vox() {
   level waittill("end_game");
   wait(2);
@@ -35,7 +33,7 @@ endgame_vox() {
     }
   }
   if(isDefined(winner)) {
-    num = winner getEntityNumber();
+    num = winner getentitynumber();
     if(isDefined(winner.zm_random_char)) {
       num = winner.zm_random_char;
     }
@@ -46,49 +44,52 @@ endgame_vox() {
     }
   }
 }
-
 weapon_type_check_custom(weapon) {
-  if(!isDefined(self.entity_num))
+  if(!isDefined(self.entity_num)) {
     return "crappy";
+  }
   switch (self.entity_num) {
     case 0:
-      if(weapon == "m16_zm")
+      if(weapon == "m16_zm") {
         return "favorite";
-      else if(weapon == "m16_gl_upgraded_zm")
+      } else if(weapon == "m16_gl_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 1:
-      if(weapon == "fnfal_zm")
+      if(weapon == "fnfal_zm") {
         return "favorite";
-      else if(weapon == "hk21_upgraded_zm")
+      } else if(weapon == "hk21_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 2:
-      if(weapon == "ak74u_zm")
+      if(weapon == "ak74u_zm") {
         return "favorite";
-      else if(weapon == "m14_upgraded_zm")
+      } else if(weapon == "m14_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 3:
-      if(weapon == "spectre_zm")
+      if(weapon == "spectre_zm") {
         return "favorite";
-      else if(weapon == "g11_lps_upgraded_zm")
+      } else if(weapon == "g11_lps_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
   }
-  if(IsSubStr(weapon, "upgraded"))
+  if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  else
+  } else {
     return level.zombie_weapons[weapon].vox;
+  }
 }
-
 setup_music_egg() {
   wait(3);
   level.meteor_counter = 0;
   level.music_override = false;
   array_thread(getstructarray("mus_easteregg", "targetname"), ::music_egg);
 }
-
 music_egg() {
   if(!isDefined(self)) {
     return;
@@ -96,7 +97,7 @@ music_egg() {
   temp_ent = spawn("script_origin", self.origin);
   temp_ent playLoopSound("zmb_meteor_loop");
   player = self music_egg_wait();
-  temp_ent stopLoopSound(1);
+  temp_ent StopLoopSound(1);
   player playSound("zmb_meteor_activate");
   player maps\_zombiemode_audio::create_and_play_dialog("eggs", "meteors", undefined, level.meteor_counter);
   level.meteor_counter = level.meteor_counter + 1;
@@ -106,7 +107,6 @@ music_egg() {
   wait(1.5);
   temp_ent Delete();
 }
-
 music_egg_wait() {
   music_egg_trig = spawn("trigger_radius", self.origin - (0, 0, 200), 0, 50, 400);
   music_egg_trig.completed = false;
@@ -126,7 +126,6 @@ music_egg_wait() {
   music_egg_trig Delete();
   return who;
 }
-
 play_music_egg(player) {
   level.music_override = true;
   level thread maps\_zombiemode_audio::change_zombie_music("egg");
@@ -136,10 +135,10 @@ play_music_egg(player) {
   }
   wait(360);
   level.music_override = false;
-  if(level.music_round_override == false)
+  if(level.music_round_override == false) {
     level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
+  }
 }
-
 intro_vox_or_skit() {
   playsoundatposition("evt_warp_in", (0, 0, 0));
   wait(3);
@@ -155,7 +154,6 @@ intro_vox_or_skit() {
     players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("general", "start");
   }
 }
-
 visual_trigger_vox(place) {
   wait(3);
   struct = getstruct("vox_" + place, "targetname");

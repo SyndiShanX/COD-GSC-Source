@@ -9,7 +9,7 @@ _id_0CA9() {
   self endon("killanimscript");
   self endon("stop tracking");
   self endon("melee");
-  _id_0CAA( % aim_2, % aim_4, % aim_6, % aim_8);
+  _id_0CAA(%aim_2, %aim_4, %aim_6, %aim_8);
 }
 
 _id_0CAA(var_0, var_1, var_2, var_3) {
@@ -32,11 +32,9 @@ _id_0CAA(var_0, var_1, var_2, var_3) {
 
     if(isDefined(self._id_0CAC)) {
       var_13 = anim._id_0CAD;
-
     }
     if((self.script == "cover_left" || self.script == "cover_right") && isDefined(self.a._id_0CAE) && self.a._id_0CAE == "lean") {
       var_14 = self._id_0CAF.angles[1] - self.angles[1];
-
     }
     var_11 = (var_13, var_14, 0);
   }
@@ -48,11 +46,9 @@ _id_0CAA(var_0, var_1, var_2, var_3) {
 
     if(isDefined(self._id_0CAB)) {
       var_16 = self._id_0CAB getshootatpos();
-
     }
     if(!isDefined(var_16) && animscripts\utility::_id_0CB2()) {
       var_16 = _id_0CB6(var_15);
-
     }
     var_17 = isDefined(self._id_0CB3) || isDefined(self._id_0CB4);
     var_18 = isDefined(var_16);
@@ -60,14 +56,12 @@ _id_0CAA(var_0, var_1, var_2, var_3) {
 
     if(var_18) {
       var_19 = var_16;
-
     }
     var_20 = 0;
     var_21 = isDefined(self._id_0CB5);
 
     if(var_21) {
       var_20 = self._id_0CB5;
-
     }
     var_6 = self getaimangle(var_15, var_19, var_18, var_11, var_20, var_21, var_17);
     var_22 = var_6[0];
@@ -82,7 +76,6 @@ _id_0CAA(var_0, var_1, var_2, var_3) {
       var_10 = 30;
     } else {
       var_10 = 10;
-
     }
     var_24 = squared(var_10);
     var_8 = self.relativedir;
@@ -197,7 +190,6 @@ _id_0CBF(var_0, var_1, var_2) {
   if(isDefined(self._id_0CB3) || isDefined(self._id_0CB4)) {
     if(var_1 > self.rightaimlimit || var_1 < self.leftaimlimit) {
       var_1 = 0;
-
     }
     if(var_0 > self.upaimlimit || var_0 < self.downaimlimit) {
       var_0 = 0;
@@ -210,7 +202,6 @@ _id_0CBF(var_0, var_1, var_2) {
       var_1 = clamp(var_1, -10, 10);
     } else {
       var_1 = clamp(var_1, self.leftaimlimit, self.rightaimlimit);
-
     }
     var_0 = clamp(var_0, self.downaimlimit, self.upaimlimit);
   }
@@ -249,7 +240,6 @@ _id_0CC4(var_0, var_1) {
   } else {
     if(!isDefined(self.a._id_0CC3)) {
       self.a._id_0CC3 = 0;
-
     }
     self.a._id_0CC5 = self.a._id_0CC3;
     self.a._id_0CC6 = var_0;

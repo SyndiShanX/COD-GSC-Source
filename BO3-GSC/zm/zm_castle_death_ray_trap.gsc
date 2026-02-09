@@ -354,7 +354,7 @@ function function_41ecbdf9() {
 
 function function_991ffb6c(var_1a8c0e14) {
   self.var_1ea49cd7 = 1;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self clientfield::increment_to_player("tesla_beam_fx");
   } else {
     self clientfield::increment("tesla_beam_fx");

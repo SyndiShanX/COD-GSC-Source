@@ -1,6 +1,6 @@
 /****************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\createfx\zombietron_fx.csc
+ * Script: clientscripts\createfx\zombietron_fx\.csc
 ****************************************************/
 
 main() {

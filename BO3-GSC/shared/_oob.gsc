@@ -129,10 +129,10 @@ function waitforplayertouch() {
       hostmigration::waittillhostmigrationdone();
     }
     self waittill("trigger", entity);
-    if(!isplayer(entity) && (!(isvehicle(entity) && (isDefined(entity.hijacked) && entity.hijacked) && isDefined(entity.owner) && isalive(entity)))) {
+    if(!isPlayer(entity) && (!(isvehicle(entity) && (isDefined(entity.hijacked) && entity.hijacked) && isDefined(entity.owner) && isalive(entity)))) {
       continue;
     }
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       player = entity;
     } else {
       vehicle = entity;
@@ -203,7 +203,7 @@ function updatevisualeffects(trigger, entity) {
 
 function killentity(entity) {
   entity_to_kill = entity;
-  if(isplayer(entity) && entity isinvehicle()) {
+  if(isPlayer(entity) && entity isinvehicle()) {
     vehicle = entity getvehicleoccupied();
     if(isDefined(vehicle) && vehicle.is_oob_kill_target === 1) {
       entity_to_kill = vehicle;
@@ -220,7 +220,7 @@ function watchforleave(trigger, entity) {
     if(entity istouchinganyoobtrigger()) {
       updatevisualeffects(trigger, entity);
       if((level.oob_timelimit_ms - (gettime() - self.oob_start_time)) <= 0) {
-        if(isplayer(entity)) {
+        if(isPlayer(entity)) {
           entity disableinvulnerability();
           entity.ignoreme = 0;
           entity.laststand = undefined;

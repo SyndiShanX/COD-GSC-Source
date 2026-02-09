@@ -205,7 +205,7 @@ build_fx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 build_deathfx_override(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   level.vttype = var_1;
   level.vtmodel = var_2;
@@ -682,7 +682,7 @@ build_light(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 build_light_override(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   level.vtclassname = var_0;
   build_light(var_0, var_1, var_2, var_3, var_4, var_5);
@@ -751,7 +751,7 @@ build_drive(var_0, var_1, var_2, var_3) {
 
 build_template(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   if(isDefined(var_2))
     var_0 = var_2;
@@ -1454,7 +1454,7 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_33 = var_33 + maps\_utility::vector_multiply(var_27, var_31);
   var_32.final_angles = vectortoangles(var_33);
 
-  if(getdvar("debug_tankcrush") == "1") {
+  if(getDvar("debug_tankcrush") == "1") {
     thread maps\_utility::draw_line_from_ent_for_time(level.player, self.origin, 1, 0, 0, var_12 / 2);
     thread maps\_utility::draw_line_from_ent_for_time(level.player, var_39, 0, 1, 0, var_12 / 2);
     thread maps\_utility::draw_line_from_ent_to_ent_for_time(level.player, var_32, 0, 0, 1, var_12 / 2);

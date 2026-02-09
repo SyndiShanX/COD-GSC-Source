@@ -796,13 +796,10 @@ checkForFriendlies(missileTarget, radiusSize) {
   return false;
 }
 
-///-------------------------------------------------------
-//
+///------------------------------------------------------- //
 //		Health Functions
 //
-///------------------------------------------------------
-
-Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
+///------------------------------------------------------ Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
   if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner)) {
     return;
   }

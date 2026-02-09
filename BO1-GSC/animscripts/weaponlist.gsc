@@ -5,6 +5,7 @@
 
 #include maps\_utility;
 #using_animtree("generic_human");
+
 usingAutomaticWeapon() {
   if(self.weapon == "none" || !self animscripts\utility::holdingWeapon()) {
     return false;
@@ -21,11 +22,9 @@ usingAutomaticWeapon() {
   }
   return false;
 }
-
 usingSemiAutoWeapon() {
   return (weaponIsSemiAuto(self.weapon));
 }
-
 autoShootAnimRate() {
   if(usingAutomaticWeapon()) {
     return 0.1 / weaponFireTime(self.weapon) * GetDvarFloat(#"scr_ai_auto_fire_rate");
@@ -33,7 +32,6 @@ autoShootAnimRate() {
     return 0.2;
   }
 }
-
 burstShootAnimRate() {
   if(usingAutomaticWeapon()) {
     return 0.16 / weaponFireTime(self.weapon);
@@ -41,11 +39,9 @@ burstShootAnimRate() {
     return 0.2;
   }
 }
-
 waitAfterShot() {
   return 0.25;
 }
-
 shootAnimTime(semiAutoFire) {
   if(!usingAutomaticWeapon() || (isDefined(semiAutofire) && (semiAutofire == true))) {
     rand = 0.5 + RandomFloat(1);
@@ -54,7 +50,6 @@ shootAnimTime(semiAutoFire) {
     return weaponFireTime(self.weapon);
   }
 }
-
 RefillClip() {
   assertEX(isDefined(self.weapon), "self.weapon is not defined for " + self.model);
   if(self.weapon == "none") {
@@ -78,7 +73,6 @@ RefillClip() {
     return true;
   }
 }
-
 precacheWeaponSwitchFx() {}
 precacheClipFx() {
   clipEffects = [];
@@ -106,7 +100,6 @@ precacheClipFx() {
     level.weaponClipModelsLoaded = true;
   } else {}
 }
-
 add_weapon(name, type, time, clipsize, anims) {
   assert(isDefined(name));
   assert(isDefined(type));
@@ -125,7 +118,6 @@ add_weapon(name, type, time, clipsize, anims) {
   anim.AIWeapon[name]["clipsize"] = clipsize;
   anim.AIWeapon[name]["anims"] = anims;
 }
-
 addTurret(turret) {
   anim.AIWeapon[tolower(turret)]["type"] = "turret";
 }

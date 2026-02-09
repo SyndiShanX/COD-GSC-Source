@@ -25,8 +25,8 @@ function init() {}
 function main() {
   callback::on_connect(&on_player_connect);
   callback::on_spawned(&on_player_spawned);
-  setdvar("scr_emergency_reserve_timer", 5);
-  setdvar("scr_emergency_reserve_timer_upgraded", 8);
+  setDvar("scr_emergency_reserve_timer", 5);
+  setDvar("scr_emergency_reserve_timer_upgraded", 8);
   cybercom_tacrig::register_cybercom_rig_ability("cybercom_emergencyreserve", 3);
   cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_emergencyreserve", &emergencyreservegive, &emergencyreservetake);
   cybercom_tacrig::register_cybercom_rig_activation_callbacks("cybercom_emergencyreserve", &emergencyreserveactivate, &emergencyreservedeactivate);

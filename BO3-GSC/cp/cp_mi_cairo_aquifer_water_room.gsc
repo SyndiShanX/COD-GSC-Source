@@ -89,7 +89,7 @@ function function_1ecf48ef() {
   level.kayne aquifer_obj::function_30343b22("kayne_waterroom_swim");
   level.kayne thread function_8fdcc95b(1);
   savegame::checkpoint_save();
-  setdvar("player_swimSpeed", 80);
+  setDvar("player_swimSpeed", 80);
   if(isDefined(level.bzm_aquiferdialogue2callback)) {
     level thread[[level.bzm_aquiferdialogue2callback]]();
   }
@@ -121,7 +121,7 @@ function function_3d8a313e(a_ents) {
 
 function function_4a90c357() {
   level flag::wait_till("flag_kayne_water_moment");
-  setdvar("player_swimSpeed", 30);
+  setDvar("player_swimSpeed", 30);
   level notify("hash_47f08523");
   level flag::set("inside_data_center");
   foreach(p in level.activeplayers) {
@@ -130,7 +130,7 @@ function function_4a90c357() {
   level thread lui::screen_fade_out(1);
   wait(1);
   level.kayne stopanimscripted();
-  setdvar("player_swimSpeed", 150);
+  setDvar("player_swimSpeed", 150);
   level.kayne clientfield::set("kane_bubbles_fx", 0);
   thread function_3ed240f1();
   var_31b9fd4a = getent("doubledoor_sbm", "targetname");
@@ -141,7 +141,7 @@ function function_4a90c357() {
   level notify("hash_8f79547f");
   level thread namespace_71a63eac::function_e18f629a();
   util::teleport_players_igc("igc_post_water_structs");
-  setdvar("player_swimSpeed", 150);
+  setDvar("player_swimSpeed", 150);
   thread function_a079b7e3();
   savegame::checkpoint_save();
   thread function_8aec0a4c();
@@ -332,17 +332,17 @@ function function_408f0fb5() {
   foreach(p in level.activeplayers) {
     p thread function_4f725f0b();
   }
-  setdvar("player_swimSpeed", 95);
+  setDvar("player_swimSpeed", 95);
   level notify("hash_781a429d");
   level thread cp_mi_cairo_aquifer_sound::function_69386a6b();
   function_846f1215(0.5);
   level thread cp_mi_cairo_aquifer_sound::function_decbd389();
   wait(2);
-  setdvar("player_swimSpeed", 80);
+  setDvar("player_swimSpeed", 80);
   function_846f1215(0.65);
   level thread cp_mi_cairo_aquifer_sound::function_4ce4df2();
   wait(2);
-  setdvar("player_swimSpeed", 50);
+  setDvar("player_swimSpeed", 50);
   function_846f1215(0.8);
   level thread cp_mi_cairo_aquifer_sound::function_2ad0c85b();
   wait(2);
@@ -365,7 +365,7 @@ function function_45676b91(n_alpha) {
 
 function function_645f7873() {
   level endon("hash_47f08523");
-  setdvar("player_swimSpeed", 95);
+  setDvar("player_swimSpeed", 95);
   wait(0.5);
   level thread cp_mi_cairo_aquifer_sound::function_fc716128();
   thread function_c1808198();

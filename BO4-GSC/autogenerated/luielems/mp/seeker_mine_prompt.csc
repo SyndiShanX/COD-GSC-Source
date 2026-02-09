@@ -34,7 +34,6 @@ class cseeker_mine_prompt: cluielem {
     cluielem::add_clientfield("progress", 1, 5, "float", progresscallback);
     cluielem::add_clientfield("promptState", 1, 2, "int", var_ca3086f0);
   }
-
 }
 
 register(uid, progresscallback, var_ca3086f0) {

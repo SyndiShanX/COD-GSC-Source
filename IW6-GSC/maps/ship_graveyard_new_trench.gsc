@@ -70,7 +70,7 @@ canyon_main() {
 }
 
 trench_drowning() {
-  var_0 = getdvar("g_friendlyNameDist");
+  var_0 = getDvar("g_friendlyNameDist");
   setsaveddvar("g_friendlyNameDist", 0);
   var_1 = common_scripts\utility::get_target_ent("new_trench_first_crash");
   var_1 delete();
@@ -650,7 +650,7 @@ deathquote_on_death() {
   level endon("start_new_canyon");
   level.player waittill("death");
   var_0 = getdvarint("shpg_trench_times_died", 0);
-  setdvar("shpg_trench_times_died", var_0 + 1);
+  setDvar("shpg_trench_times_died", var_0 + 1);
   maps\ship_graveyard_util::force_deathquote(&"SHIP_GRAVEYARD_HINT_TRENCH");
 }
 

@@ -881,7 +881,7 @@ setbomboverheatingafterweaponchange(useobject, overheated, heat) {
 function_76739a65() {
   level endon(#"combattraining_logic_finished");
   ct_utils::function_e9ab1003("s_player_ks_respawn_loc");
-  setdvar(#"hash_3e06b14c41136e95", 0);
+  setDvar(#"hash_3e06b14c41136e95", 0);
   ct_vo::function_831e0584(array(#"hash_1c2ce90dec8991f7"), 1);
   n_bomb_timer = int(gettime() + 1000 + int(15 * 1000));
   setmatchflag("bomb_timer_a", 1);
@@ -954,7 +954,7 @@ function_76739a65() {
   level.var_e6db911d = 1;
   waitframe(1);
   ct_utils::kill_all_bots();
-  setdvar(#"hash_3e06b14c41136e95", 1);
+  setDvar(#"hash_3e06b14c41136e95", 1);
   level.var_28cfc859 = undefined;
   ct_vo::function_831e0584(array(#"hash_66d8097a378fccfb", #"hash_66d8087a378fcb48"), 1);
 }
@@ -972,7 +972,7 @@ function_eadc9c91() {
     e_player thread ct_utils::function_61c3d59c(var_f663fd65, undefined);
 
     if(!var_96265bc2) {
-      setdvar(#"hash_3e06b14c41136e95", 0);
+      setDvar(#"hash_3e06b14c41136e95", 0);
       ct_utils::function_daa27144();
     }
 
@@ -1038,7 +1038,7 @@ function_eadc9c91() {
           ct_utils::function_e44c5b8e(#"ultimate_turret", 0, 1);
           wait 0.1;
           ct_utils::function_daa27144();
-          setdvar(#"hash_3e06b14c41136e95", 0);
+          setDvar(#"hash_3e06b14c41136e95", 0);
           level.var_6aeec601 = 5;
           var_96265bc2++;
           var_1c2eeef4 = 0;

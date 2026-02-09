@@ -78,7 +78,7 @@ function function_feac00a() {
 }
 
 function function_e83f24(params) {
-  if(isplayer(params.eattacker) && params.weapon == getweapon("micromissile_launcher")) {
+  if(isPlayer(params.eattacker) && params.weapon == getweapon("micromissile_launcher")) {
     params.eattacker thread function_feac00a();
     if(!isDefined(params.eattacker.var_3a4bbe6b)) {
       function_f673d34(params);
@@ -97,7 +97,7 @@ function function_86716d12() {
 }
 
 function function_2f913423(params) {
-  if(isplayer(params.eattacker) && params.weapon.name == "turret_bo3_civ_truck_pickup_tech_54i") {
+  if(isPlayer(params.eattacker) && params.weapon.name == "turret_bo3_civ_truck_pickup_tech_54i") {
     params.eattacker notify("hash_4a4fc79");
   }
 }
@@ -115,7 +115,7 @@ function function_41954f8f() {
 }
 
 function function_587c487b(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, timeoffset, boneindex, modelindex, surfacetype, vsurfacenormal) {
-  if(isplayer(eattacker) && weapon.weapclass != "pistol") {
+  if(isPlayer(eattacker) && weapon.weapclass != "pistol") {
     level.var_76663db9 = 0;
   }
   return idamage;
@@ -123,11 +123,11 @@ function function_587c487b(einflictor, eattacker, idamage, idflags, smeansofdeat
 
 function warlord_death_watcher() {
   self waittill("death", eattacker, damagefromunderneath, weapon, point, dir);
-  if(level.var_76663db9 && isplayer(eattacker)) {
+  if(level.var_76663db9 && isPlayer(eattacker)) {
     foreach(player in level.activeplayers) {
       player notify("hash_c5775d94");
     }
-  } else if(isplayer(eattacker) && weapon.name == "turret_bo3_civ_truck_pickup_tech_54i") {
+  } else if(isPlayer(eattacker) && weapon.name == "turret_bo3_civ_truck_pickup_tech_54i") {
     eattacker notify("hash_3f3be7cb");
   }
 }
@@ -142,7 +142,7 @@ function function_ed62e62f() {
 }
 
 function function_9cb470ce(params) {
-  if(isplayer(params.eattacker) && distancesquared(params.eattacker.origin, self.origin) >= 3240000) {
+  if(isPlayer(params.eattacker) && distancesquared(params.eattacker.origin, self.origin) >= 3240000) {
     if(params.eattacker.var_d7f34b97 == 0) {
       params.eattacker.s_timer = util::new_timer(3);
       params.eattacker.var_d7f34b97++;
@@ -167,7 +167,7 @@ function function_be537152() {
 }
 
 function function_55a74563(params) {
-  if(isplayer(params.eattacker) && issubstr(self.classname, "rpg")) {
+  if(isPlayer(params.eattacker) && issubstr(self.classname, "rpg")) {
     if(params.eattacker.var_65338a8f == 0) {
       params.eattacker.s_timer = util::new_timer(1);
       params.eattacker.var_65338a8f++;
@@ -203,7 +203,7 @@ function function_fe5a0b6() {
 }
 
 function function_635e0947(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(self.archetype == "human") {
       params.eattacker.var_6fd54591++;
     } else if(self.archetype == "robot") {
@@ -242,7 +242,7 @@ function function_91fa5513() {
 }
 
 function function_92bc12da(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(params.shitloc == "head" || params.shitloc == "helmet" || params.shitloc == "neck") {
       params.eattacker.var_a7590ae5++;
       if(params.eattacker.var_a7590ae5 >= 3) {
@@ -264,7 +264,7 @@ function function_29c337dd() {
 }
 
 function function_8c9ce56(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(issubstr(self.targetname, "comm_relay_awaken_robot") && !isDefined(self.b_activated)) {
       params.eattacker.var_10276781++;
       if(params.eattacker.var_10276781 >= 4) {
@@ -296,7 +296,7 @@ function function_328b2c47() {
 }
 
 function function_b82c8e7b(params) {
-  if(isplayer(params.eattacker) && self.archetype == "warlord") {
+  if(isPlayer(params.eattacker) && self.archetype == "warlord") {
     if(params.einflictor.targetname === "destructible") {
       params.eattacker notify("hash_729650f9");
     }
@@ -318,7 +318,7 @@ function function_aa2360ca(einflictor, eattacker, idamage, idflags, smeansofdeat
     return idamage;
   }
   str_weapon_name = weapon.rootweapon.name;
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     if(smeansofdeath !== "MOD_MELEE" && smeansofdeath !== "MOD_MELEE_ASSASSINATE" && smeansofdeath !== "MOD_MELEE_WEAPON_BUTT" && str_weapon_name != "flash_grenade" && str_weapon_name != "gadget_es_strike" && str_weapon_name != "gadget_es_strike_upgraded" && str_weapon_name != "gadget_sensory_overload") {
       level.var_63855bec = 0;
     }
@@ -338,7 +338,7 @@ function function_ccfcd136(a_ai) {
 
 function riotshield_death() {
   self waittill("death", eattacker, damagefromunderneath, weapon, point, dir);
-  if(!isplayer(eattacker)) {
+  if(!isPlayer(eattacker)) {
     level.var_63855bec = 0;
   }
 }
@@ -355,7 +355,7 @@ function function_7d2dae0a() {
 }
 
 function function_cdf3285b(params) {
-  if(isplayer(params.eattacker) && self.archetype == "human_riotshield") {
+  if(isPlayer(params.eattacker) && self.archetype == "human_riotshield") {
     if(params.shitloc == "head" || params.shitloc == "helmet" || params.shitloc == "neck") {
       params.eattacker.var_a7590ae5++;
       params.eattacker notify("hash_d34814eb");

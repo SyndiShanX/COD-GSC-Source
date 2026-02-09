@@ -181,7 +181,7 @@ function empexplosiondamageents(owner, weapon, origin, radius, damageplayers) {
     damageplayers = 1;
   }
   foreach(ent in ents) {
-    if(!damageplayers && isplayer(ent)) {
+    if(!damageplayers && isPlayer(ent)) {
       continue;
     }
     ent dodamage(1, origin, owner, owner, "none", "MOD_GRENADE_SPLASH", 0, weapon);

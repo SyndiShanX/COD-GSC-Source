@@ -13,7 +13,6 @@ _id_5949() {
 _id_594A(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = level._id_1F19 + "_" + var_0;
-
   }
   var_2 = _id_594B(var_0, var_1);
   return var_2;
@@ -26,7 +25,6 @@ _id_594B(var_0, var_1) {
 
   if(isDefined(var_3.angles)) {
     var_2.angles = var_3.angles;
-
   }
   var_4 = var_2 maps\_utility::_id_166F();
   return var_4;
@@ -124,7 +122,6 @@ _id_5955() {
 _id_51F1() {
   if(!isDefined(level._id_51F2)) {
     level._id_51F2 = maps\_utility::_id_1287("player_rig");
-
   }
   return level._id_51F2;
 }
@@ -139,7 +136,6 @@ _id_5956(var_0, var_1) {
   }
   if(isDefined(var_1._id_1B71)) {
     var_1 delete();
-
   }
   var_1 playSound(var_0, "done");
   var_1 waittill("done");
@@ -196,15 +192,12 @@ _id_595C(var_0, var_1, var_2) {
 
   if(!isDefined(var_0)) {
     var_0 = var_3 getvelocity() + (0, 0, -10);
-
   }
   if(!isDefined(var_1)) {
     var_1 = 10;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 0.035;
-
   }
   var_5 = spawn("script_origin", var_3.origin);
   var_5.angles = var_3.angles;
@@ -215,11 +208,9 @@ _id_595C(var_0, var_1, var_2) {
     var_3 playerlinktodelta(var_5, undefined, 0);
   } else {
     var_3 playerlinkto(var_5, undefined, 0, 180, 180, 180, 180, 1);
-
   }
   if(!isDefined(level._id_595D)) {
     var_3 allowprone(0);
-
   }
   var_3 thread maps\_utility_code::_id_142F(var_5, var_1, var_2);
 }
@@ -386,13 +377,11 @@ _id_09FA(var_0, var_1) {
 
   if(var_0) {
     var_2 fadeovertime(var_0);
-
   }
   if(isDefined(var_1)) {
     var_2.alpha = var_1;
   } else {
     var_2.alpha = 1;
-
   }
   wait(var_0);
 }
@@ -406,7 +395,6 @@ _id_17CC(var_0) {
 
   if(var_0) {
     var_1 fadeovertime(var_0);
-
   }
   var_1.alpha = 0;
   wait(var_0);
@@ -415,7 +403,6 @@ _id_17CC(var_0) {
 _id_473C() {
   if(!isDefined(level._id_473D)) {
     level._id_473D = maps\_hud_util::_id_09A7("black", 0, level.player);
-
   }
   level._id_473D.sort = -1;
   level._id_473D.foreground = 0;
@@ -432,7 +419,7 @@ _id_5969() {
 }
 
 _id_596B() {
-  if(getdvar("airmasks") == "0") {
+  if(getDvar("airmasks") == "0") {
     return;
   }
   self show();
@@ -454,7 +441,6 @@ _id_596D(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = 4;
-
   }
   if(isDefined(level._id_596E)) {
     level._id_596E destroy();

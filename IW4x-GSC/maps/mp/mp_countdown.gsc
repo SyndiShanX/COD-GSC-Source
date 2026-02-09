@@ -15,7 +15,7 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("r_specularcolorscale", "1.5");
+  setDvar("r_specularcolorscale", "1.5");
 
-  setdvar("compassmaxrange", "2000");
+  setDvar("compassmaxrange", "2000");
 }

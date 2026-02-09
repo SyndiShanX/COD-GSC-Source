@@ -566,9 +566,7 @@ function player_blocking_lander() {
         playsoundatposition("nuked", zombies[i].origin);
         playFX(level._effect["zomb_gib"], zombies[i].origin);
         if(isDefined(zombies[i].lander_death)) {
-          zombies[i][
-            [zombies[i].lander_death]
-          ]();
+          zombies[i][[zombies[i].lander_death]]();
         }
         zombies[i] delete();
       }

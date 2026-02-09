@@ -6,7 +6,6 @@
 _id_3B6D(var_0) {
   if(!common_scripts\utility::flag_exist("squad_spawning")) {
     common_scripts\utility::flag_init("squad_spawning");
-
   }
   level._id_3B6E = 1;
   level._id_3B6F = 3;
@@ -16,7 +15,6 @@ _id_3B6D(var_0) {
     var_1 = common_scripts\utility::getstructarray("leader", "script_noteworthy");
   } else {
     var_1 = getEntArray("leader", "script_noteworthy");
-
   }
   foreach(var_3 in var_1) {
     if(isDefined(var_3.targetname) && issubstr(var_3.targetname, "protector")) {
@@ -34,11 +32,9 @@ _id_3B6D(var_0) {
 _id_3B72(var_0, var_1, var_2) {
   if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
-
   }
   if(common_scripts\utility::flag_exist("squad_spawning")) {
     common_scripts\utility::flag_waitopen("squad_spawning");
-
   }
   level notify("squad_disband");
   level._id_3B70 = [];
@@ -70,7 +66,6 @@ _id_3B76(var_0, var_1) {
 
   if(!common_scripts\utility::flag_exist("squad_spawning")) {
     common_scripts\utility::flag_init("squad_spawning");
-
   }
   var_2 = var_0 common_scripts\utility::get_links();
   var_3 = [];
@@ -87,15 +82,12 @@ _id_3B76(var_0, var_1) {
     wait 2.02;
   } else {
     level._id_3B77 = 0;
-
   }
   if(level._id_3B70.size + var_1 > level._id_3B78) {
     var_1 = level._id_3B78 - level._id_3B70.size;
-
   }
   for(var_7 = 0; var_7 < var_1; var_7++) {
     _id_3B7B(var_3, undefined, undefined, undefined);
-
   }
   wait 1;
   level._id_3B77 = 0;
@@ -112,7 +104,6 @@ _id_3B79(var_0) {
     level._id_3B78 = 4;
   } else {
     var_2 = "Must have at least 4 squad leader spawners in level";
-
   }
   if(isDefined(level._id_3B7A) && level._id_3B7A) {
     var_3 = getEntArray("zone_trig", "targetname");
@@ -128,7 +119,6 @@ _id_3B79(var_0) {
 
     if(isDefined(level._id_3B77) && level._id_3B77) {
       level waittill("clean_up_done");
-
     }
     if(level._id_3B70.size < level._id_3B78) {
       _id_3B7B(var_1, undefined, undefined, var_0);
@@ -142,7 +132,6 @@ _id_3B7B(var_0, var_1, var_2, var_3) {
 
   if(maps\_utility::_id_12C1()) {
     var_4[var_4.size] = level.players[1];
-
   }
   foreach(var_6 in level._id_3B70) {}
   var_4[var_4.size] = var_6;
@@ -167,7 +156,6 @@ _id_3B7B(var_0, var_1, var_2, var_3) {
     var_12 = getEntArray(var_8.target, "targetname");
   } else {
     var_12 = common_scripts\utility::getstructarray(var_8.target, "targetname");
-
   }
   var_12[var_12.size] = var_8;
 
@@ -298,17 +286,14 @@ _id_3B81(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     var_4 = 1;
-
   }
   if(!isDefined(level._id_3B70)) {
     level._id_3B70 = [];
-
   }
   if(!isDefined(var_3)) {
     var_3 = var_0.size - 1;
   } else {
     var_3 = int(min(var_0.size - 1, var_3));
-
   }
   var_5 = "Trying to spawn " + var_3 + " followers but only " + (var_0.size - 1) + " spawners are available!";
 
@@ -320,7 +305,6 @@ _id_3B81(var_0, var_1, var_2, var_3) {
     foreach(var_10 in var_8) {
       if(var_10.classname == var_1) {
         var_6 = var_10;
-
       }
       if(var_10.classname == var_2) {
         var_7 = var_10;
@@ -362,7 +346,6 @@ _id_3B81(var_0, var_1, var_2, var_3) {
     foreach(var_15 in var_0) {
       if(var_15.script_noteworthy == "follower") {
         var_12++;
-
       }
       if(var_12 >= var_3) {
         continue;
@@ -375,7 +358,6 @@ _id_3B81(var_0, var_1, var_2, var_3) {
 
   if(!var_13.size) {
     return undefined;
-
   }
   var_20 = [];
 
@@ -442,7 +424,6 @@ _id_3B84(var_0) {
 
       if(level._id_3B70.size > 1) {
         var_4 = maps\_utility::_id_2605(self.origin, level._id_3B70);
-
       }
       _id_3B88(var_4);
       return;
@@ -451,7 +432,6 @@ _id_3B84(var_0) {
 
   if(!maps\_utility::is_in_array(level._id_3B70, self)) {
     level._id_3B70[level._id_3B70.size] = self;
-
   }
   if(isDefined(level._id_3B85)) {
     self thread[[level._id_3B85]]();
@@ -469,7 +449,6 @@ _id_3B84(var_0) {
 
   if(!isDefined(level._id_3B6E) || level._id_3B6E == 0) {
     thread _id_3B98(var_0);
-
   }
   self waittill("death");
   var_6 = [];
@@ -544,7 +523,6 @@ _id_3B88(var_0) {
 
   if(isDefined(level._id_3B89)) {
     self[[level._id_3B89]]();
-
   }
   if(isDefined(level._id_3B71)) {
     self[[level._id_3B71]](var_0);
@@ -586,7 +564,6 @@ _id_3B8B(var_0) {
         _id_3B8C("left");
       } else {
         _id_3B8C("right");
-
       }
       return;
     }
@@ -730,25 +707,22 @@ _id_3B92() {
 _id_3B93(var_0, var_1) {
   if(!isDefined(var_0)) {
     return undefined;
-
   }
   var_2 = undefined;
 
   if(isDefined(var_1) && var_1) {
-    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       var_2 = vectortoangles(self.enemy - self.origin);
     } else {
       return undefined;
     }
   } else {
     var_2 = self.angles;
-
   }
   if(var_0 == "left") {
     var_3 = (var_2[0], var_2[1] - 145, var_2[2]);
   } else {
     var_3 = (var_2[0], var_2[1] + 145, var_2[2]);
-
   }
   var_4 = vectornormalize(anglesToForward(var_3)) * 45;
   return self.origin + var_4;
@@ -780,7 +754,6 @@ _id_3B96(var_0) {
 _id_3B97(var_0) {
   if(var_0.classname == "actor_enemy_afghan_riotshield") {
     return 1;
-
   }
   return 0;
 }
@@ -805,7 +778,6 @@ _id_3B98(var_0) {
 
       if(level._id_3B70.size > 1) {
         var_5 = maps\_utility::_id_2605(self.origin, level._id_3B70);
-
       }
       thread _id_3B88(var_5);
       self notify("demotion");
@@ -815,7 +787,7 @@ _id_3B98(var_0) {
 }
 
 _id_3B99() {
-  if(getdvar("squad_debug") == "" || getdvar("squad_debug") == "0") {
+  if(getDvar("squad_debug") == "" || getDvar("squad_debug") == "0") {
     return;
   }
   var_0 = (1, 1, 1);
@@ -834,7 +806,7 @@ _id_3B99() {
 }
 
 _id_3B9A(var_0, var_1) {
-  if(getdvar("squad_debug") == "" || getdvar("squad_debug") == "0") {
+  if(getDvar("squad_debug") == "" || getDvar("squad_debug") == "0") {
     return;
   }
   for(var_2 = 0; var_2 < 40; var_2++) {
@@ -843,7 +815,7 @@ _id_3B9A(var_0, var_1) {
 }
 
 _id_3B9B() {
-  if(getdvar("squad_debug") == "" || getdvar("squad_debug") == "0") {
+  if(getDvar("squad_debug") == "" || getDvar("squad_debug") == "0") {
     return;
   }
   for(;;) {

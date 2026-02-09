@@ -96,7 +96,7 @@ function function_3c1114e8(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function flip_skybox(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    setdvar("r_skyTransition", 1);
+    setDvar("r_skyTransition", 1);
   }
 }
 

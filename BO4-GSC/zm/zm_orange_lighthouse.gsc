@@ -654,7 +654,7 @@ function_2853c44e(e_trap) {
     #n_count: 1
   });
 
-  if(isDefined(level.var_ab11c23d.activated_by_player) && isplayer(level.var_ab11c23d.activated_by_player)) {
+  if(isDefined(level.var_ab11c23d.activated_by_player) && isPlayer(level.var_ab11c23d.activated_by_player)) {
     level.var_ab11c23d.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     level.var_ab11c23d.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
   }
@@ -757,7 +757,7 @@ devgui() {
         break;
     }
 
-    setdvar(#"zm_orange_lighthouse_cmd", "<dev string:x260>");
+    setDvar(#"zm_orange_lighthouse_cmd", "<dev string:x260>");
   }
 }
 

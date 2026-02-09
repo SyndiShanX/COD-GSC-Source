@@ -1,7 +1,7 @@
 main() {
   // restore scr_game_hardpoints value when game ends
-  if(getdvar("g_gametype") == "gun") {
-    level.saved_hardpoints_dvar = getdvar("scr_game_hardpoints");
+  if(getDvar("g_gametype") == "gun") {
+    level.saved_hardpoints_dvar = getDvar("scr_game_hardpoints");
   }
 
   // replace gun game weapon pool
@@ -11,14 +11,14 @@ main() {
 }
 
 init() {
-  if(getdvar("g_gametype") == "gun") {
+  if(getDvar("g_gametype") == "gun") {
     thread reset_hardpoints_dvar();
   }
 }
 
 reset_hardpoints_dvar() {
   level waittill("game_ended");
-  setdvar("scr_game_hardpoints", level.saved_hardpoints_dvar);
+  setDvar("scr_game_hardpoints", level.saved_hardpoints_dvar);
 }
 
 setguns_stub() {

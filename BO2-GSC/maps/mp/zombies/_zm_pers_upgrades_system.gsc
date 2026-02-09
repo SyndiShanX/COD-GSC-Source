@@ -113,7 +113,6 @@ pers_upgrades_monitor() {
                 player playsoundtoplayer("evt_player_downgrade", player);
 
               player iprintlnbold("Downgraded!");
-
             }
 
             player.pers_upgrades_awarded[level.pers_upgrades_keys[pers_upgrade_index]] = 0;

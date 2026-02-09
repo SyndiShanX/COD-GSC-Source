@@ -1,6 +1,6 @@
 /***************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_waw_zombiemode_radio.csc
+ * Script: clientscripts\_waw_zombiemode_radio\.csc
 ***************************************************/
 
 #include clientscripts\_utility;
@@ -22,7 +22,6 @@ init() {
   register_clientflag_callback("scriptmover", level._ZOMBIE_RADIO_CLIENTFLAG, ::next_song);
   level thread stop_radio_listener();
 }
-
 next_song(localClientNum, set, val) {
   assert(isDefined(level.radio_id));
   assert(isDefined(level.radio_songs));
@@ -53,24 +52,22 @@ next_song(localClientNum, set, val) {
     }
   }
 }
-
 add_song(song) {
   if(!isDefined(level.radio_songs)) {
     level.radio_songs = [];
   }
   level.radio_songs[level.radio_songs.size] = song;
 }
-
 fade(id, time) {
   rate = 0;
-  if(time != 0)
+  if(time != 0) {
     rate = 1.0 / time;
+  }
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
   wait(time);
   stopSound(id);
 }
-
 stop_radio_listener() {
   while(1) {
     level waittill("ktr");

@@ -25,7 +25,7 @@ init() {
     return;
   }
 
-  if(GetDvar("scr_scorestreak_skip_aerial", "0") != "0") {
+  if(getDvar("scr_scorestreak_skip_aerial", "0") != "0") {
     return;
   }
 
@@ -208,7 +208,7 @@ heli_pick_fly_node(nodes) {
   start = self.origin;
   nextNode = undefined;
 
-  if(GetDvar("scr_heli_pick_fly_node_debug", "0") != "0") {
+  if(getDvar("scr_heli_pick_fly_node_debug", "0") != "0") {
     foreach(node in nodes) {
       Sphere(node.origin, 100, (0, 1, 0), false, 300);
     }
@@ -240,7 +240,7 @@ flyNodeOrgTracePassed(start, end, ignoreEnt) {
   trace = bulletTrace(start, end, false, ignoreEnt, false, false, true, false, false);
   passed = (trace["fraction"] >= 1);
 
-  if(GetDvar("scr_heli_pick_fly_node_debug", "0") != "0") {
+  if(getDvar("scr_heli_pick_fly_node_debug", "0") != "0") {
     if(passed) {
       Line(start, end, (0, 1, 0), 1, false, 300);
     } else {
@@ -517,7 +517,7 @@ playerFireSounds(soundEnt, sound2d, sound3d) {
     soundEnt PlaySoundOnMovingEnt(sound3d);
   }
 
-  if(GetDvar("scr_paladin_stay_on_ground", "0") != "0") {
+  if(getDvar("scr_paladin_stay_on_ground", "0") != "0") {
     return;
   }
 
@@ -601,13 +601,12 @@ detectionGrenadeWatch(owner, time) {
     self DesignateFoFTarget(false);
     self.tagMarkedBy = undefined;
   }
-
 }
 
 getPlayersOnTeam(team) {
   teammates = [];
   foreach(player in level.players) {
-    if(player.hasSpawned && isAlive(player) && team == player.team && (!IsPlayer(self) || player != self)) {
+    if(player.hasSpawned && isAlive(player) && team == player.team && (!isPlayer(self) || player != self)) {
       teammates[teammates.size] = player;
     }
   }

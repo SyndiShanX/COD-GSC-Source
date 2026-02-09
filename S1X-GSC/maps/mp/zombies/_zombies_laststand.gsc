@@ -404,7 +404,7 @@ registerlaststandparameter(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.shitloc = var_6;
   var_7.laststandstarttime = gettime();
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1 getcurrentprimaryweapon() != "none") {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1 getcurrentprimaryweapon() != "none") {
     var_7.sprimaryweapon = var_1 getcurrentprimaryweapon();
   } else {
     var_7.sprimaryweapon = undefined;
@@ -673,7 +673,7 @@ revivetriggerthinkzombies() {
       self.owner notify("revive_trigger", var_2);
       var_5 = var_2;
 
-      if(!isplayer(var_5) && isplayer(var_5.owner)) {
+      if(!isPlayer(var_5) && isPlayer(var_5.owner)) {
         var_5 = var_5.owner;
       }
 
@@ -722,11 +722,11 @@ laststandwaittilllifereceived() {
   var_0 thread laststandcleanupomnvar(["becameSpectator", "death", "disconnect"]);
   var_0 waittill("revive_trigger", var_1);
 
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_0 thread maps\mp\zombies\_zombies_audio::playerrevivevo(var_1);
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1 != var_0) {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1 != var_0) {
     var_0 thread maps\mp\gametypes\_hud_message::playercardsplashnotify("revived", var_1);
     var_1 maps\mp\_utility::incplayerstat("assists", 1);
     var_1 maps\mp\_utility::incpersstat("assists", 1);

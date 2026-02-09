@@ -427,7 +427,7 @@ turret_spawn_failed(var_0, var_1, var_2, var_3) {
     return 1;
 
   if(isDefined(var_2)) {
-    if(isplayer(var_0) && !capsuletracepassed(var_1 + (0, 0, 5), 20, 100, undefined, 1, 1)) {
+    if(isPlayer(var_0) && !capsuletracepassed(var_1 + (0, 0, 5), 20, 100, undefined, 1, 1)) {
       if(isDefined(var_3) && var_0 turret_capsule_trace_passed(var_3))
         self.force_use_attacknode = 1;
       else
@@ -569,13 +569,13 @@ seeder_turret_damage_watcher() {
     self.spore_health = self.spore_health - var_0;
 
     if(self.spore_health <= 0) {
-      if(isDefined(var_1) && isDefined(var_1.owner) && isplayer(var_1.owner))
+      if(isDefined(var_1) && isDefined(var_1.owner) && isPlayer(var_1.owner))
         var_1 = var_1.owner;
 
       if(maps\mp\alien\_utility::is_chaos_mode())
         maps\mp\alien\_chaos::update_alien_killed_event(maps\mp\alien\_utility::get_alien_type(), self.origin, var_1);
 
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         var_13 = 25;
         maps\mp\alien\_gamescore::givekillreward(var_1, var_13, undefined, var_11);
         maps\mp\alien\_achievement::update_alien_kill_achievements(var_10, var_1, var_0, var_4, var_9, var_2, var_11);
@@ -615,7 +615,7 @@ onaliensporedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
 
   var_2 = maps\mp\alien\_damage::set_alien_damage_by_weapon_type(var_4, var_5, var_2, var_1);
 
-  if(isplayer(var_1) && !maps\mp\alien\_utility::is_trap(var_0)) {
+  if(isPlayer(var_1) && !maps\mp\alien\_utility::is_trap(var_0)) {
     var_2 = maps\mp\alien\_damage::scale_alien_damage_by_perks(var_1, var_2, var_4, var_5);
     var_2 = maps\mp\alien\_damage::scale_alien_damage_by_weapon_type(var_1, var_2, var_4, var_5, var_8);
   }
@@ -663,7 +663,7 @@ seeder_turret_spit_attack() {
       continue;
     }
 
-    if((isplayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote())
+    if((isPlayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote())
       var_2 = var_0 getEye() + (0, 0, -15);
     else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore")
       var_2 = var_0 gettagorigin("J_Spore_46");
@@ -688,7 +688,7 @@ seeder_turret_spit_attack() {
         return;
       }
 
-      if((isplayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote())
+      if((isPlayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote())
         var_2 = var_0 getEye() + (0, 0, -15);
       else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore")
         var_2 = var_0 gettagorigin("J_Spore_46");
@@ -753,7 +753,7 @@ seeder_turret_cleanup() {
   if(isDefined(self.pet))
     level.seeder_active_pet_turrets = level.seeder_active_pet_turrets - 1;
 
-  if(isDefined(self.parent) && !isplayer(self.parent) && isDefined(self.parent.num_active_turrets))
+  if(isDefined(self.parent) && !isPlayer(self.parent) && isDefined(self.parent.num_active_turrets))
     self.parent.num_active_turrets = self.parent.num_active_turrets - 1;
 
   if(isDefined(self.coll_model))

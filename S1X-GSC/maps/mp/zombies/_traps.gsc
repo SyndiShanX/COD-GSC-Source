@@ -686,7 +686,7 @@ trap_damage_trigger_watch(var_0, var_1, var_2) {
     var_0 waittill("trigger", var_9);
     var_10 = (var_9.origin[0], var_9.origin[1], var_0.origin[2]);
 
-    if(isplayer(var_9)) {
+    if(isPlayer(var_9)) {
       if(isDefined(var_0.script_parameters) && var_0.script_parameters == "no_player_damage") {
         continue;
       }
@@ -1235,7 +1235,7 @@ trap_zomboni_zombies_attack(var_0) {
       if(!isalive(var_5)) {
         continue;
       }
-      if(isplayer(var_5)) {
+      if(isPlayer(var_5)) {
         continue;
       }
       if(!var_5 maps\mp\zombies\_util::has_entered_game()) {
@@ -1257,7 +1257,7 @@ trap_zomboni_zombies_attack(var_0) {
         continue;
       }
       if(var_5.enemy != var_0) {
-        if(!isplayer(var_5.enemy)) {
+        if(!isPlayer(var_5.enemy)) {
           continue;
         }
         if(!trap_zomboni_is_player_on_zomboni(var_5.enemy, var_0)) {
@@ -1539,7 +1539,7 @@ trap_zomboni_kill_zone(var_0) {
     }
     var_1.nexttrapdamage = gettime() + 200;
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 dodamage(10, var_1.origin, undefined, var_0);
       continue;
     }

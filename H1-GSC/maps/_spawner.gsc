@@ -1055,7 +1055,7 @@ multikill_monitor() {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
   if(!isDefined(var_2)) {
@@ -1079,7 +1079,7 @@ specops_dmg(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(var_1) && isplayer(var_1)) {
+  if(isDefined(var_1) && isPlayer(var_1)) {
     self.last_dmg_player = var_1;
     self.last_dmg_type = var_4;
   }
@@ -1088,7 +1088,7 @@ specops_dmg(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 check_explosion_man_achievement(var_0, var_1, var_2) {
   var_3 = 0;
 
-  if(!isplayer(var_0) && (!isDefined(var_1) || var_1 != "seaknight_mark19")) {
+  if(!isPlayer(var_0) && (!isDefined(var_1) || var_1 != "seaknight_mark19")) {
     return;
   }
   if(isDefined(var_1)) {
@@ -1138,7 +1138,7 @@ deathfunctions() {
 
         var_0 = var_0.attacker;
       } else if(isDefined(var_0.owner)) {
-        if(isai(var_0) && isplayer(var_0.owner))
+        if(isai(var_0) && isPlayer(var_0.owner))
           var_3 = "friendly";
 
         var_0 = var_0.owner;
@@ -1152,7 +1152,7 @@ deathfunctions() {
       check_explosion_man_achievement(var_0, var_2, var_1);
       var_4 = 0;
 
-      if(isplayer(var_0))
+      if(isPlayer(var_0))
         var_4 = 1;
 
       if(isDefined(level.pmc_match) && level.pmc_match)
@@ -1194,7 +1194,7 @@ ai_damage_think() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       var_7 = var_1 getcurrentweapon();
 
       if(isDefined(var_7) && maps\_utility::isprimaryweapon(var_7) && isDefined(var_4) && (var_4 == "MOD_PISTOL_BULLET" || var_4 == "MOD_RIFLE_BULLET"))
@@ -2105,7 +2105,7 @@ fallback_spawner_think(var_0, var_1) {
     self waittill("spawned", var_3);
 
     if(var_2) {
-      if(getdvar("fallback", "0") == "1") {}
+      if(getDvar("fallback", "0") == "1") {}
 
       level notify("fallback_firstspawn" + var_0);
       var_2 = 0;
@@ -2171,7 +2171,7 @@ fallback_ai(var_0, var_1) {
   level thread fallback_death(self, var_0);
   thread fallback_goal();
 
-  if(getdvar("fallback", "0") == "1")
+  if(getDvar("fallback", "0") == "1")
     thread coverprint(var_1.origin);
 
   self waittill("fallback_notify");
@@ -2226,7 +2226,7 @@ newfallback_overmind(var_0, var_1) {
   thread fallback_wait(var_0, var_1);
   level waittill("fallbacker_trigger" + var_0);
 
-  if(getdvar("fallback", "0") == "1") {}
+  if(getDvar("fallback", "0") == "1") {}
 
   level.fallback_initiated[var_0] = 1;
   var_9 = undefined;
@@ -2261,15 +2261,15 @@ newfallback_overmind(var_0, var_1) {
 fallback_wait(var_0, var_1) {
   level endon("fallbacker_trigger" + var_0);
 
-  if(getdvar("fallback", "0") == "1") {}
+  if(getDvar("fallback", "0") == "1") {}
 
   for(var_2 = 0; var_2 < level.spawner_fallbackers[var_0]; var_2++) {
-    if(getdvar("fallback", "0") == "1") {}
+    if(getDvar("fallback", "0") == "1") {}
 
     level waittill("fallback_firstspawn" + var_0);
   }
 
-  if(getdvar("fallback", "0") == "1") {}
+  if(getDvar("fallback", "0") == "1") {}
 
   var_3 = getaiarray();
 
@@ -2282,7 +2282,7 @@ fallback_wait(var_0, var_1) {
   var_4 = level.current_fallbackers[var_0];
 
   for(var_5 = 0; level.current_fallbackers[var_0] > var_4 * 0.5; var_5++) {
-    if(getdvar("fallback", "0") == "1") {}
+    if(getDvar("fallback", "0") == "1") {}
 
     level waittill("fallbacker_died" + var_0);
   }
@@ -2348,7 +2348,7 @@ fallback() {
     self.interval = 20;
     level thread fallback_death(self);
 
-    if(getdvar("fallback", "0") == "1")
+    if(getDvar("fallback", "0") == "1")
       thread fallback_print();
 
     if(isDefined(var_0.target)) {
@@ -2826,7 +2826,7 @@ flood_and_secure(var_0) {
       if(!isalive(var_4)) {
         continue;
       }
-      if(isplayer(var_4))
+      if(isPlayer(var_4))
         var_2 = 1;
       else if(!isDefined(var_4.issquad) || !var_4.issquad)
         continue;
@@ -3091,7 +3091,7 @@ waittillrestartordistance(var_0) {
 flood_and_secure_spawn(var_0) {
   thread flood_and_secure_spawn_goal();
   self waittill("death", var_1);
-  var_2 = isalive(var_1) && isplayer(var_1);
+  var_2 = isalive(var_1) && isPlayer(var_1);
 
   if(!var_2 && isDefined(var_1) && var_1.classname == "worldspawn")
     var_2 = 1;
@@ -3606,7 +3606,7 @@ move_when_enemy_hides(var_0) {
       continue;
     }
 
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       if(self.enemy maps\_utility::ent_flag("player_has_red_flashing_overlay") || common_scripts\utility::flag("player_flashed")) {
         self.fixednode = 0;
 
@@ -3797,7 +3797,7 @@ player_saw_kill(var_0, var_1) {
     return 0;
 
   if(isalive(var_1)) {
-    if(isplayer(var_1))
+    if(isPlayer(var_1))
       return 1;
 
     if(distance(var_1.origin, level.player.origin) < 200)
@@ -4025,7 +4025,7 @@ objective_event_init(var_0) {
 setup_ai_eq_triggers() {
   self endon("death");
   waittillframeend;
-  self.is_the_player = isplayer(self);
+  self.is_the_player = isPlayer(self);
   self.eq_table = [];
   self.eq_touching = [];
 

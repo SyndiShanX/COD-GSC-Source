@@ -63,7 +63,7 @@
 #using_animtree("generic_human");
 
 main(bscriptgened, bcsvgened, bsgenabled) {
-  level.script = tolower(getdvar(#"mapname"));
+  level.script = tolower(getDvar(#"mapname"));
   maps\_perks_sp::initperkdvars();
   init_session_mode_flags();
   level thread init_leaderboards();
@@ -74,13 +74,15 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   set_early_level();
   level.era = get_level_era();
 
-  if(!isDefined(level.era))
+  if(!isDefined(level.era)) {
     level.era = "default";
+  }
 
   animscripts\weaponlist::precacheweaponswitchfx();
 
-  if(!isDefined(level.revivefeature))
+  if(!isDefined(level.revivefeature)) {
     level.revivefeature = 0;
+  }
 
   maps\_constants::main();
   level.scr_anim["generic"]["signal_onme"] = % cqb_stand_wave_on_me;
@@ -89,40 +91,49 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   level.scr_anim["generic"]["signal_moveup"] = % cqb_stand_signal_move_up;
   level.scr_anim["generic"]["signal_moveout"] = % cqb_stand_signal_move_out;
 
-  if(!isDefined(level.script_gen_dump_reasons))
+  if(!isDefined(level.script_gen_dump_reasons)) {
     level.script_gen_dump_reasons = [];
+  }
 
-  if(!isDefined(bsgenabled))
+  if(!isDefined(bsgenabled)) {
     level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "First run";
+  }
 
-  if(!isDefined(bcsvgened))
+  if(!isDefined(bcsvgened)) {
     bcsvgened = 0;
+  }
 
   level.bcsvgened = bcsvgened;
 
-  if(!isDefined(bscriptgened))
+  if(!isDefined(bscriptgened)) {
     bscriptgened = 0;
-  else
+  } else {
     bscriptgened = 1;
+  }
 
   level.bscriptgened = bscriptgened;
 
   ascii_logo();
 
-  if(getdvar(#"_id_0F49A52C") == "")
-    setdvar("debug", "0");
+  if(getDvar(#"_id_0F49A52C") == "") {
+    setDvar("debug", "0");
+  }
 
-  if(getdvar(#"_id_CC860215") == "")
-    setdvar("fallback", "0");
+  if(getDvar(#"_id_CC860215") == "") {
+    setDvar("fallback", "0");
+  }
 
-  if(getdvar(#"_id_F224451F") == "")
-    setdvar("angles", "0");
+  if(getDvar(#"_id_F224451F") == "") {
+    setDvar("angles", "0");
+  }
 
-  if(getdvar(#"_id_7C9B464C") == "")
-    setdvar("noai", "off");
+  if(getDvar(#"_id_7C9B464C") == "") {
+    setDvar("noai", "off");
+  }
 
-  if(getdvar(#"scr_RequiredMapAspectratio") == "")
-    setdvar("scr_RequiredMapAspectratio", "1");
+  if(getDvar(#"scr_RequiredMapAspectratio") == "") {
+    setDvar("scr_RequiredMapAspectratio", "1");
+  }
 
   createprintchannel("script_debug");
 
@@ -158,7 +169,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   level.run_func_after_wait_array = [];
   level.do_wait_endons_array = [];
   level.radiation_totalpercent = 0;
-  level.clientscripts = getdvar(#"cg_usingClientScripts") != "";
+  level.clientscripts = getDvar(#"cg_usingClientScripts") != "";
   level._client_exploders = [];
   level._client_exploder_ids = [];
   registerclientsys("levelNotify");
@@ -169,7 +180,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   level.default_run_speed = 190;
   setsaveddvar("g_speed", level.default_run_speed);
   setsaveddvar("phys_vehicleWheelEntityCollision", 0);
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   setsaveddvar("sv_saveOnStartMap", maps\_gamemode::shouldsaveonstartup());
   level thread maps\_vehicle::init_vehicles();
   struct_class_init();
@@ -177,9 +188,9 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   delete_bounce_light_brushes();
   init_triggers();
 
-  if(!isDefined(level.flag))
+  if(!isDefined(level.flag)) {
     level.flag = [];
-  else {
+  } else {
     flags = getarraykeys(level.flag);
     level array_ent_thread(flags, ::check_flag_for_stat_tracking);
   }
@@ -194,15 +205,18 @@ main(bscriptgened, bcsvgened, bsgenabled) {
     level.script_gen_dump_reasons[0] = "First run";
   }
 
-  if(!isDefined(level.script_gen_dump2))
+  if(!isDefined(level.script_gen_dump2)) {
     level.script_gen_dump2 = [];
+  }
 
-  if(isDefined(level.createfxent))
+  if(isDefined(level.createfxent)) {
     script_gen_dump_addline("maps\\createfx\\" + level.script + "_fx::main(); ", level.script + "_fx");
+  }
 
   if(isDefined(level.script_gen_dump_preload)) {
-    for(i = 0; i < level.script_gen_dump_preload.size; i++)
+    for(i = 0; i < level.script_gen_dump_preload.size; i++) {
       script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
+    }
   }
 
   level.last_mission_sound_time = -5000;
@@ -264,15 +278,16 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   precacheshellshock("concussion_grenade_mp");
   maps\_damagefeedback::precache();
 
-  if(isDefined(level._gamemode_precache))
+  if(isDefined(level._gamemode_precache)) {
     [[level._gamemode_precache]]();
+  }
 
   maps\_callbackglobal::init();
   maps\_callbacksetup::setupcallbacks();
   maps\_anim::init();
   maps\_autosave::main();
   level thread maps\_fxanim::fxanim_init();
-  level.createfx_enabled = getdvar(#"createfx") != "";
+  level.createfx_enabled = getDvar(#"createfx") != "";
   maps\_cheat::init();
   setupexploders();
   maps\_art::main();
@@ -302,7 +317,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   thread setup_simple_primary_lights();
   animscripts\death::precache_ai_death_fx();
 
-  if(getdvar(#"r_reflectionProbeGenerate") == "1") {
+  if(getDvar(#"r_reflectionProbeGenerate") == "1") {
     maps\_global_fx::main();
     maps\_loadout::init_loadout();
     level waittill("eternity");
@@ -310,7 +325,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
 
   level thread maps\_skipto::handle_skiptos();
 
-  if(getdvar(#"g_connectpaths") == "2") {
+  if(getDvar(#"g_connectpaths") == "2") {
     println("g_connectpaths == 2; halting script execution");
 
     level waittill("eternity");
@@ -318,8 +333,9 @@ main(bscriptgened, bcsvgened, bsgenabled) {
 
   println("level.script: ", level.script);
 
-  if(isDefined(level._gamemode_initcallbacks))
+  if(isDefined(level._gamemode_initcallbacks)) {
     [[level._gamemode_initcallbacks]]();
+  }
 
   maps\_skipto::do_no_game_skipto();
   maps\_ar::init();
@@ -331,14 +347,16 @@ main(bscriptgened, bcsvgened, bsgenabled) {
 
   anim.usefacialanims = 0;
 
-  if(!isDefined(level.missionfailed))
+  if(!isDefined(level.missionfailed)) {
     level.missionfailed = 0;
+  }
 
-  if(getdvar(#"g_gametype") != "vs") {
-    if(isDefined(level.skill_override))
+  if(getDvar(#"g_gametype") != "vs") {
+    if(isDefined(level.skill_override)) {
       maps\_gameskill::setskill(undefined, level.skill_override);
-    else
+    } else {
       maps\_gameskill::setskill();
+    }
   }
 
   maps\_loadout::init_loadout();
@@ -353,8 +371,9 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   calculate_map_center();
   maps\_global_fx::main();
 
-  if(!isDefined(level.campaign))
+  if(!isDefined(level.campaign)) {
     level.campaign = "american";
+  }
 
   setsaveddvar("ui_campaign", level.campaign);
 
@@ -405,8 +424,9 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   level thread onplayerconnect();
   level thread adjust_placed_weapons();
 
-  if(!isDefined(level.splitscreen_fog))
+  if(!isDefined(level.splitscreen_fog)) {
     set_splitscreen_fog();
+  }
 
   level notify("load main complete");
 
@@ -422,8 +442,9 @@ level_auto_complete() {
   level waittill("skip_level");
   levelname = getsubstr(level.script, 0, 6);
 
-  if(levelname != "so_rts")
+  if(levelname != "so_rts") {
     nextmission();
+  }
 }
 
 init_client_flags() {
@@ -434,23 +455,26 @@ onplayerconnect() {
   for(;;) {
     level waittill("connecting", player);
 
-    if(!isDefined(player.a))
+    if(!isDefined(player.a)) {
       player.a = spawnStruct();
+    }
 
     player thread animscripts\init::onplayerconnect();
     player thread onplayerspawned();
     player thread onplayerdisconnect();
 
-    if(issplitscreen())
-      setdvar("r_watersim", 0);
+    if(issplitscreen()) {
+      setDvar("r_watersim", 0);
+    }
   }
 }
 
 onplayerdisconnect() {
   self waittill("disconnect");
 
-  if(issplitscreen())
-    setdvar("r_watersim", 1);
+  if(issplitscreen()) {
+    setDvar("r_watersim", 1);
+  }
 }
 
 onplayerspawned() {
@@ -500,8 +524,9 @@ onplayerspawned() {
 
 devhelp_hudelements(hudarray, alpha) {
   for(i = 0; i < hudarray.size; i++) {
-    for(p = 0; p < 2; p++)
+    for(p = 0; p < 2; p++) {
       hudarray[i][p].alpha = alpha;
+    }
   }
 }
 
@@ -524,7 +549,6 @@ load_friendlies() {
     game_characters = game["total characters"];
 
     println("Loading Characters: ", game_characters);
-
   } else {
     println("Loading Characters: None!");
 
@@ -585,8 +609,9 @@ init_triggers() {
   level.trigger_hint_func = [];
   level.fog_trigger_current = undefined;
 
-  if(!isDefined(level.trigger_flags))
+  if(!isDefined(level.trigger_flags)) {
     init_trigger_flags();
+  }
 
   trigger_funcs = [];
   trigger_funcs["flood_spawner"] = maps\_spawner::flood_trigger_think;
@@ -617,67 +642,84 @@ init_triggers() {
   triggers = get_triggers("trigger_radius", "trigger_multiple", "trigger_once", "trigger_box");
 
   foreach(trig in triggers) {
-    if(trig has_spawnflag(32))
+    if(trig has_spawnflag(32)) {
       level thread maps\_spawner::trigger_spawner(trig);
+    }
 
-    if(trig has_spawnflag(256))
+    if(trig has_spawnflag(256)) {
       level thread trigger_look(trig);
+    }
   }
 
   triggers = get_triggers();
 
   foreach(trig in triggers) {
-    if(trig.classname != "trigger_once" && is_trigger_once(trig))
+    if(trig.classname != "trigger_once" && is_trigger_once(trig)) {
       level thread trigger_once(trig);
+    }
 
-    if(isDefined(trig.script_flag_true))
+    if(isDefined(trig.script_flag_true)) {
       level thread script_flag_true_trigger(trig);
+    }
 
-    if(isDefined(trig.script_flag_set))
+    if(isDefined(trig.script_flag_set)) {
       level thread flag_set_trigger(trig, trig.script_flag_set);
+    }
 
-    if(isDefined(trig.script_flag_clear))
+    if(isDefined(trig.script_flag_clear)) {
       level thread flag_clear_trigger(trig, trig.script_flag_clear);
+    }
 
-    if(isDefined(trig.script_flag_false))
+    if(isDefined(trig.script_flag_false)) {
       level thread script_flag_false_trigger(trig);
+    }
 
-    if(isDefined(trig.script_autosavename) || isDefined(trig.script_autosave))
+    if(isDefined(trig.script_autosavename) || isDefined(trig.script_autosave)) {
       level thread maps\_autosave::autosave_name_think(trig);
+    }
 
-    if(isDefined(trig.script_fallback))
+    if(isDefined(trig.script_fallback)) {
       level thread maps\_spawner::fallback_think(trig);
+    }
 
-    if(isDefined(trig.script_killspawner))
+    if(isDefined(trig.script_killspawner)) {
       level thread maps\_spawner::kill_spawner_trigger(trig);
+    }
 
-    if(isDefined(trig.script_emptyspawner))
+    if(isDefined(trig.script_emptyspawner)) {
       level thread maps\_spawner::empty_spawner(trig);
+    }
 
-    if(isDefined(trig.script_prefab_exploder))
+    if(isDefined(trig.script_prefab_exploder)) {
       trig.script_exploder = trig.script_prefab_exploder;
+    }
 
-    if(isDefined(trig.script_exploder))
+    if(isDefined(trig.script_exploder)) {
       level thread exploder_load(trig);
+    }
 
-    if(isDefined(trig.script_trigger_group))
+    if(isDefined(trig.script_trigger_group)) {
       trig thread trigger_group();
+    }
 
-    if(isDefined(trig.script_notify))
+    if(isDefined(trig.script_notify)) {
       level thread trigger_notify(trig, trig.script_notify);
+    }
 
     if(isDefined(trig.targetname)) {
       targetname = trig.targetname;
 
-      if(isDefined(trigger_funcs[targetname]))
+      if(isDefined(trigger_funcs[targetname])) {
         level thread[[trigger_funcs[targetname]]](trig);
+      }
     }
   }
 }
 
 level_struct_array_free() {
-  for(i = level.struct.size; i >= 0; i--)
+  for(i = level.struct.size; i >= 0; i--) {
     level.struct[i] = undefined;
+  }
 
   level.struct = undefined;
 }
@@ -685,8 +727,9 @@ level_struct_array_free() {
 delete_bounce_light_brushes() {
   a_m_lights = getEntArray("bounce_light_brush", "targetname");
 
-  foreach(m_light in a_m_lights)
-  m_light delete();
+  foreach(m_light in a_m_lights) {
+    m_light delete();
+  }
 }
 
 perk_flags() {

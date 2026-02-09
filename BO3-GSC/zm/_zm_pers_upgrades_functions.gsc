@@ -205,7 +205,7 @@ function insta_kill_upgraded_player_kill_func(active_time) {
 function pers_insta_kill_melee_swipe(smeansofdeath, eattacker) {
   if(zm_pers_upgrades::is_pers_system_active()) {
     if(isDefined(smeansofdeath) && smeansofdeath == "MOD_MELEE") {
-      if(isplayer(self) && zm_pers_upgrades::is_insta_kill_upgraded_and_active()) {
+      if(isPlayer(self) && zm_pers_upgrades::is_insta_kill_upgraded_and_active()) {
         self notify("pers_melee_swipe");
         level.pers_melee_swipe_zombie_swiper = eattacker;
       }
@@ -557,7 +557,7 @@ function pers_upgrade_box_weapon_used(e_user, e_grabber) {
   if(level.round_number >= level.pers_box_weapon_lose_round) {
     return;
   }
-  if(isDefined(e_grabber) && isplayer(e_grabber)) {
+  if(isDefined(e_grabber) && isPlayer(e_grabber)) {
     if(isDefined(e_grabber.pers_box_weapon_awarded) && e_grabber.pers_box_weapon_awarded) {
       return;
     }
@@ -565,7 +565,7 @@ function pers_upgrade_box_weapon_used(e_user, e_grabber) {
       return;
     }
     e_grabber zm_stats::increment_client_stat("pers_box_weapon_counter", 0);
-  } else if(isDefined(e_user) && isplayer(e_user)) {
+  } else if(isDefined(e_user) && isPlayer(e_user)) {
     if(isDefined(e_user.pers_upgrades_awarded["box_weapon"]) && e_user.pers_upgrades_awarded["box_weapon"]) {
       return;
     }

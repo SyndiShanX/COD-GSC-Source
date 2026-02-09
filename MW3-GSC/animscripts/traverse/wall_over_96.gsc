@@ -7,7 +7,7 @@
 
 main() {
   self._id_4006 = 1;
-  _id_4007( % traverse90, 96);
+  _id_4007(%traverse90, 96);
 }
 
 _id_4007(var_0, var_1) {
@@ -19,7 +19,7 @@ _id_4007(var_0, var_1) {
   var_2 = self getnegotiationstartnode();
   self orientmode("face angle", var_2.angles[1]);
   var_3 = var_2._id_1EFA - var_2.origin[2];
-  self setflaggedanimknoballrestart("traverse", var_0, % body, 1, 0.15, 1);
+  self setflaggedanimknoballrestart("traverse", var_0, %body, 1, 0.15, 1);
   var_4 = gettime();
   thread animscripts\notetracks::_id_239E("traverse", "no clear", ::_id_4008);
 
@@ -51,10 +51,9 @@ _id_4008(var_0) {
     self.a._id_0D55 = 1;
 
     if(self._id_4006 > 1) {
-      self setflaggedanimknoball("deathanim", % traverse90_end_death, % body, 1, 0.2, 1);
+      self setflaggedanimknoball("deathanim", %traverse90_end_death, %body, 1, 0.2, 1);
     } else {
-      self setflaggedanimknoball("deathanim", % traverse90_start_death, % body, 1, 0.2, 1);
-
+      self setflaggedanimknoball("deathanim", %traverse90_start_death, %body, 1, 0.2, 1);
     }
     animscripts\face::_id_0C41("death");
   }

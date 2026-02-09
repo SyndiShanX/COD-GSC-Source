@@ -14,9 +14,9 @@ set_level_lighting_values() {
 }
 
 setup_lighting() {
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
-  setdvar("r_gunSightColorEntityScale", "7");
-  setdvar("r_gunSightColorNoneScale", "0.8");
+  setDvar("r_gunSightColorEntityScale", "7");
+  setDvar("r_gunSightColorNoneScale", "0.8");
 }

@@ -117,14 +117,12 @@ init() {
   level thread extra_life_spawner();
   turret_init();
 }
-
 map_vehicles_cleanup() {
   map_vehicles = getEntArray("map_vehicles", "targetname");
   for(i = 0; i < map_vehicles.size; i++) {
     map_vehicles[i] Delete();
   }
 }
-
 clear_all_pickups() {
   level notify("stop_spawning_pickups");
   wait_network_frame();
@@ -142,7 +140,6 @@ clear_all_pickups() {
     }
   }
 }
-
 pickup_bomb_on_player(player) {
   self endon("picked_up");
   self endon("disconnect");
@@ -156,14 +153,13 @@ pickup_bomb_on_player(player) {
     wait 0.05;
   }
 }
-
 directed_pickup_award_to(player, type, model) {
   assertex(isDefined(type), "valid type not specified");
   assertex(isDefined(player), "valid player not specified");
   assertex(isDefined(model), "valid model not specified");
   origin = player.origin + (0, 0, 800);
   pickup = spawn("script_model", origin);
-  pickup.angles = (0, randomInt(360), 0);
+  pickup.angles = (0, RandomInt(360), 0);
   pickup setModel(model);
   trigger = spawn("trigger_radius", origin, 0, 30, 128);
   pickup.type = type;
@@ -173,7 +169,6 @@ directed_pickup_award_to(player, type, model) {
   pickup thread pickup_bomb_on_player(player);
   pickup.trigger = trigger;
 }
-
 extra_life_spawner() {
   while(1) {
     waittime = RandomFloatRange(level.zombie_vars["min_extra_life_spawn_time"], level.zombie_vars["max_extra_life_spawn_time"]);
@@ -206,7 +201,7 @@ extra_life_spawner() {
       origin = spawn_point.origin;
       pickup = spawn("script_model", origin);
       pickup.script_noteworthy = "a_pickup_item";
-      yaw = randomInt(360);
+      yaw = RandomInt(360);
       pickup.angles = (0, yaw, 0);
       pickup setModel(level.extra_life_model);
       trigger = spawn("trigger_radius", origin, 0, 30, 128);
@@ -219,7 +214,6 @@ extra_life_spawner() {
     }
   }
 }
-
 pickup_spawner() {
   stall = false;
   while(1) {
@@ -240,7 +234,6 @@ pickup_spawner() {
     spawn_random_pickup();
   }
 }
-
 prize_spawner() {
   stall = false;
   while(1) {
@@ -261,7 +254,6 @@ prize_spawner() {
     spawn_prize_glob();
   }
 }
-
 spawn_treasures(spawn_point, count, radOverride, timeout) {
   level endon("stop_spawning_pickups");
   if(!isDefined(spawn_point)) {
@@ -280,7 +272,7 @@ spawn_treasures(spawn_point, count, radOverride, timeout) {
       pickup = spawn("script_model", origin);
       pickup.script_noteworthy = "a_pickup_item";
       pickup.type = type;
-      yaw = randomInt(360);
+      yaw = RandomInt(360);
       pickup.angles = (0, yaw, 0);
       model = get_random_prize_model();
       pickup setModel(model);
@@ -297,16 +289,13 @@ spawn_treasures(spawn_point, count, radOverride, timeout) {
     wait .2;
   }
 }
-
 spawn_prize_glob() {
   spawn_point = get_random_pickup_location();
-  level thread spawn_treasures(spawn_point.origin, 3 + randomInt(5), spawn_point.radius, true);
+  level thread spawn_treasures(spawn_point.origin, 3 + RandomInt(5), spawn_point.radius, true);
 }
-
 get_random_prize_model() {
-  return level.prize_models[randomInt(level.prize_models.size)];
+  return level.prize_models[RandomInt(level.prize_models.size)];
 }
-
 spawn_uber_prize(barpoints, spawn_point) {
   type = "money";
   pickup = spawn("script_model", spawn_point);
@@ -317,8 +306,8 @@ spawn_uber_prize(barpoints, spawn_point) {
   pickup.script_noteworthy = "a_pickup_item";
   pickup.increments = int(barpoints);
   pickup.points = 5 * level.zombie_vars["prize_points"];
-  pickup.angles = (RandomIntRange(25, 75), randomInt(360), 0);
-  model = level.uber_prize_models[randomInt(level.uber_prize_models.size)];
+  pickup.angles = (RandomIntRange(25, 75), RandomInt(360), 0);
+  model = level.uber_prize_models[RandomInt(level.uber_prize_models.size)];
   pickup setModel(model);
   quarterBar = level.zombie_vars["max_prize_inc_range"] / 4;
   scale = barpoints / quarterBar;
@@ -336,7 +325,6 @@ spawn_uber_prize(barpoints, spawn_point) {
   pickup.trigger = trigger;
   return pickup;
 }
-
 spawn_uber_prizes(increments, spawn_point, popUp, popVec) {
   quarterBar = level.zombie_vars["max_prize_inc_range"] / 4;
   while(increments > 0) {
@@ -359,7 +347,6 @@ spawn_uber_prizes(increments, spawn_point, popUp, popVec) {
     }
   }
 }
-
 powerup_popup(trigger, popVec) {
   trigger trigger_off();
   if(!isDefined(popVec)) {
@@ -376,7 +363,6 @@ powerup_popup(trigger, popVec) {
     trigger trigger_on();
   }
 }
-
 get_random_pickup_type() {
   if(level.avail_pickups.size < (level.pickup_types.size / 4)) {
     level.avail_pickups = randomize_array(level.pickup_types);
@@ -385,7 +371,6 @@ get_random_pickup_type() {
   level.avail_pickups = array_remove(level.avail_pickups, pu);
   return pu;
 }
-
 get_random_pickup_location(ignore) {
   spawn_locations = [];
   pickupTarget = level.arenas[level.current_arena] + "_pickup";
@@ -393,13 +378,13 @@ get_random_pickup_location(ignore) {
   if(spawn_locations.size == 0) {
     return undefined;
   }
-  spawn_point = spawn_locations[randomInt(spawn_locations.size)];
+  spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
   if(isDefined(ignore)) {
     attempts = 5;
     while(attempts) {
       attempts--;
       if(spawn_point == ignore) {
-        spawn_point = spawn_locations[randomInt(spawn_locations.size)];
+        spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
         continue;
       } else {
         break;
@@ -408,7 +393,6 @@ get_random_pickup_location(ignore) {
   }
   return spawn_point;
 }
-
 spawn_random_pickup() {
   spawn_point = get_random_pickup_location();
   if(isDefined(spawn_point)) {
@@ -427,7 +411,6 @@ spawn_random_pickup() {
     }
   }
 }
-
 spawn_random_weapon_pickup() {
   spawn_point = get_random_pickup_location();
   if(isDefined(spawn_point)) {
@@ -446,7 +429,6 @@ spawn_random_weapon_pickup() {
     }
   }
 }
-
 spawn_specific_pickup(type) {
   spawn_point = get_random_pickup_location();
   if(isDefined(spawn_point)) {
@@ -460,7 +442,6 @@ spawn_specific_pickup(type) {
     }
   }
 }
-
 is_type_exclusive(type) {
   for(i = 0; i < level.pickup_mutual_exlusion_list.size; i++) {
     if(level.pickup_mutual_exlusion_list[i] == type) {
@@ -469,7 +450,6 @@ is_type_exclusive(type) {
   }
   return false;
 }
-
 can_spawn_pickup(type) {
   if(isDefined(level.min_round_requirement[type])) {
     if(level.round_number < level.min_round_requirement[type]) {
@@ -510,7 +490,6 @@ can_spawn_pickup(type) {
   }
   return true;
 }
-
 spawn_pickup(type, origin) {
   if(!isDefined(type)) {
     return;
@@ -619,7 +598,6 @@ spawn_pickup(type, origin) {
   pickup setclientflag(level._ZT_SCRIPTMOVER_CF_POWERUP);
   return pickup;
 }
-
 special_pickup_idle(type) {
   if(type == "double_shot") {
     self thread chicken_idle();
@@ -627,7 +605,6 @@ special_pickup_idle(type) {
   }
   return false;
 }
-
 move_pickup_to_score(type, player) {
   x = 1000;
   y = 1500;
@@ -647,10 +624,9 @@ move_pickup_to_score(type, player) {
   }
   end_pt += (x, y, z);
   self notify("picked_up");
-  self moveTo(end_pt, 1.4, 0, 0);
+  self moveto(end_pt, 1.4, 0, 0);
   self waittill("movedone");
 }
-
 wait_for_pickup(type, trigger) {
   wait .4;
   trigger waittill("trigger", player);
@@ -748,14 +724,13 @@ wait_for_pickup(type, trigger) {
     trigger delete();
   }
   if(isDefined(self)) {
-    self hide();
+    self Hide();
   }
   wait_network_frame();
   if(isDefined(self)) {
     self delete();
   }
 }
-
 weapon_pickup_update() {
   self notify("new_weapon_pickup");
   self endon("new_weapon_pickup");
@@ -781,7 +756,6 @@ weapon_pickup_update() {
   self switchToWeapon(self.default_weap);
   self.special_weapon = undefined;
 }
-
 spinning_blockers_damage_trigger(player) {
   player endon("new_spinners_pickup");
   while(1) {
@@ -790,11 +764,10 @@ spinning_blockers_damage_trigger(player) {
       guy playSound("zmb_pwup_barrel_impact");
       guy DoDamage(guy.health + 1, player.origin, player, undefined, "MOD_CRUSH");
       guy StartRagdoll(1);
-      player playRumbleOnEntity("slide_rumble");
+      player PlayRumbleOnEntity("slide_rumble");
     }
   }
 }
-
 spinning_blockers_timeout(org) {
   self endon("new_spinners_pickup");
   self playLoopSound("zmb_pwup_barrel_loop", .5);
@@ -806,11 +779,10 @@ spinning_blockers_timeout(org) {
     wait 0.05;
     time -= 0.05;
   }
-  self stopLoopSound(.5);
+  self StopLoopSound(.5);
   self playSound("zmb_pwup_barrel_end");
   self notify("new_spinners_pickup");
 }
-
 spinning_blockers_cleanup(org) {
   self waittill_any("new_spinners_pickup", "disconnect", "player_died");
   self notify("new_spinners_pickup");
@@ -832,7 +804,6 @@ spinning_blockers_cleanup(org) {
   org Delete();
   self.spinning_blockers = undefined;
 }
-
 spinning_blockers_update() {
   self notify("new_spinners_pickup");
   self endon("new_spinners_pickup");
@@ -867,7 +838,6 @@ spinning_blockers_update() {
     wait 0.9;
   }
 }
-
 tesla_blockers_damage_trigger(player) {
   player endon("new_tesla_pickup");
   player endon("disconnect");
@@ -886,7 +856,6 @@ tesla_blockers_damage_trigger(player) {
     }
   }
 }
-
 tesla_blockers_timeout(org) {
   self endon("new_tesla_pickup");
   self playLoopSound("zmb_pwup_coco_loop");
@@ -898,11 +867,10 @@ tesla_blockers_timeout(org) {
   while(GetTime() < time) {
     wait 0.05;
   }
-  self stopLoopSound(.5);
+  self StopLoopSound(.5);
   self playSound("zmb_pwup_coco_end");
   self notify("new_tesla_pickup");
 }
-
 tesla_blockers_cleanup(org) {
   self waittill_any("new_tesla_pickup", "disconnect", "player_died");
   self notify("new_tesla_pickup");
@@ -925,7 +893,6 @@ tesla_blockers_cleanup(org) {
   org Delete();
   self.tesla_blockers = undefined;
 }
-
 tesla_blockers_deletion_monitors(org) {
   self endon("new_tesla_pickup");
   while(1) {
@@ -938,7 +905,6 @@ tesla_blockers_deletion_monitors(org) {
     wait 0.05;
   }
 }
-
 tesla_blockers_move(org) {
   self endon("new_tesla_pickup");
   while(1) {
@@ -946,7 +912,6 @@ tesla_blockers_move(org) {
     wait 1;
   }
 }
-
 tesla_blockers_fx(org) {
   self endon("new_tesla_pickup");
   self endon("disconnect");
@@ -956,7 +921,6 @@ tesla_blockers_fx(org) {
     }
   }
 }
-
 tesla_blockers_update() {
   self notify("new_tesla_pickup");
   self endon("new_tesla_pickup");
@@ -1007,13 +971,11 @@ tesla_blockers_update() {
   self thread tesla_blockers_timeout(org);
   self thread tesla_blockers_cleanup(org);
 }
-
 stunned_guy_think() {
   self.stunned = true;
   wait level.zombie_vars["stun_effect_time"];
   self.stunned = undefined;
 }
-
 stun_blockers_damage_trigger(player) {
   player endon("new_stun_pickup");
   while(1) {
@@ -1021,12 +983,11 @@ stun_blockers_damage_trigger(player) {
     if(!isDefined(guy.stunned) && !isDefined(guy.boss)) {
       guy playSound("zmb_pwup_bear_stun");
       playFXOnTag(level._effect["stun_bear_explode"], guy, "j_hip_le");
-      player playRumbleOnEntity("slide_rumble");
+      player PlayRumbleOnEntity("slide_rumble");
       guy thread stunned_guy_think();
     }
   }
 }
-
 stun_blockers_timeout(org) {
   self endon("new_stun_pickup");
   self playLoopSound("zmb_pwup_bear_loop");
@@ -1038,11 +999,10 @@ stun_blockers_timeout(org) {
   while(GetTime() < time) {
     wait_network_frame();
   }
-  self stopLoopSound(.5);
+  self StopLoopSound(.5);
   self playSound("zmb_pwup_bear_end");
   self notify("new_stun_pickup");
 }
-
 stun_blockers_cleanup(org) {
   self waittill_any("new_stun_pickup", "disconnect", "player_died");
   self notify("new_stun_pickup");
@@ -1052,7 +1012,6 @@ stun_blockers_cleanup(org) {
   org Delete();
   self.stun_blockers = undefined;
 }
-
 stun_blockers_update() {
   self notify("new_stun_pickup");
   self endon("new_stun_pickup");
@@ -1070,7 +1029,6 @@ stun_blockers_update() {
   self thread stun_blockers_timeout(org);
   self thread stun_blockers_cleanup(org);
 }
-
 double_shot_fire(orb, weapon) {
   if(!isDefined(weapon)) {
     weapon = self getcurrentweapon();
@@ -1081,7 +1039,6 @@ double_shot_fire(orb, weapon) {
   setweapon(orb, weapon);
   fire(orb, self);
 }
-
 double_shot_fire_loop(orb) {
   orb endon("death");
   orb endon("spinning_out");
@@ -1097,7 +1054,6 @@ double_shot_fire_loop(orb) {
     }
   }
 }
-
 double_shot_disconnect_watch_helper(orb, is_chicken, fated) {
   orb endon("death");
   if(isDefined(fated)) {
@@ -1112,7 +1068,6 @@ double_shot_disconnect_watch_helper(orb, is_chicken, fated) {
     orb notify("spin_out");
   }
 }
-
 double_shot_disconnect_watch(orb, is_chicken) {
   if(isDefined(self.fate) && self.fate == "friendship") {
     self thread double_shot_disconnect_watch_helper(orb, is_chicken, true);
@@ -1154,7 +1109,6 @@ double_shot_disconnect_watch(orb, is_chicken) {
   wait_network_frame();
   orb Delete();
 }
-
 double_shot_exit_watcher(orb) {
   self endon("disconnect");
   orb endon("spinning_out");
@@ -1165,7 +1119,6 @@ double_shot_exit_watcher(orb) {
     }
   }
 }
-
 double_shot_chicken_time_add(orb) {
   self endon("disconnect");
   orb endon("spinning_out");
@@ -1178,7 +1131,6 @@ double_shot_chicken_time_add(orb) {
     orb.timeout = time * 1000 + GetTime();
   }
 }
-
 double_shot_update() {
   self endon("disconnect");
   orb = spawn("script_model", self.origin + (0, 0, 50));
@@ -1213,14 +1165,14 @@ double_shot_update() {
   follow_index = 0;
   next_index = follow_index + 1;
   while(GetTime() < orb.timeout && isDefined(orb)) {
-    if(IsPlayer(self)) {
+    if(isPlayer(self)) {
       orb.angles = self GetPlayerAngles();
     } else {
       orb.angles = self.angles;
     }
     if(Distance2dSquared(orb.follow_ent.origin, orb.follow_points[follow_index]) > 4 * 4) {
       follow_pt = orb.follow_ent.origin;
-      if(IsPlayer(orb.follow_ent)) {
+      if(isPlayer(orb.follow_ent)) {
         follow_pt = follow_pt + (0, 0, 50);
         if(isDefined(self.fate_shot_orb)) {
           orb.follow_ent = self.fate_shot_orb;
@@ -1239,7 +1191,6 @@ double_shot_update() {
   }
   orb notify("spin_out", self getcurrentweapon());
 }
-
 fated_double_shot_update(model) {
   self endon("disconnect");
   orb = spawn("script_model", self.origin + (0, 0, 50));
@@ -1266,7 +1217,7 @@ fated_double_shot_update(model) {
     orb.angles = self.angles;
     if(Distance2dSquared(orb.follow_ent.origin, orb.follow_points[follow_index]) > 6 * 6) {
       follow_pt = orb.follow_ent.origin;
-      if(IsPlayer(orb.follow_ent)) {
+      if(isPlayer(orb.follow_ent)) {
         follow_pt = follow_pt + (0, 0, 50);
       }
       orb.follow_points[next_index] = follow_pt;
@@ -1278,7 +1229,6 @@ fated_double_shot_update(model) {
     wait 0.05;
   }
 }
-
 heli_rocket_loop(mini_heli) {
   mini_heli endon("death");
   mini_heli DisableGunnerFiring(0, true);
@@ -1305,16 +1255,14 @@ heli_rocket_loop(mini_heli) {
     wait .05;
   }
 }
-
 pop_off_head() {
   self setclientflag(level._ZT_ACTOR_CF_KILLED_BY_HELI);
 }
-
 heli_trigger_think(player) {
   self endon("death");
   while(1) {
     self waittill("trigger", guy);
-    if(!isDefined(guy.launched) && !IsPlayer(guy)) {
+    if(!isDefined(guy.launched) && !isPlayer(guy)) {
       if(!isDefined(guy.boss) || guy.boss == false) {
         guy.a.gib_ref = "head";
         guy.a.gib_vel = (0, 0, 3500);
@@ -1332,7 +1280,6 @@ heli_trigger_think(player) {
     }
   }
 }
-
 heli_zombie_poi(player) {
   players = GetPlayers();
   index = 0;
@@ -1353,7 +1300,6 @@ heli_zombie_poi(player) {
   }
   level.active_heli = array_remove(level.active_heli, level.active_heli[index]);
 }
-
 push_origin_out(origin, radius) {
   mins = (-4, -4, 0);
   maxs = (4, 4, 4);
@@ -1383,7 +1329,6 @@ push_origin_out(origin, radius) {
   }
   return origin;
 }
-
 heli_pickup_update(pickup) {
   self EnableInvulnerability();
   origin = push_origin_out(self.origin, 30);
@@ -1425,7 +1370,6 @@ heli_pickup_update(pickup) {
   self DisableInvulnerability();
   self turn_shield_on(true);
 }
-
 veh_chicken_watcher() {
   while(isDefined(self)) {
     self waittill_any("turret_fire");
@@ -1434,14 +1378,13 @@ veh_chicken_watcher() {
     }
   }
 }
-
 tank_outofworld_watcher() {
   self endon("death");
   self endon("disconnect");
   min_dist_squared = 1300 * 1300;
   while(isDefined(self.tank)) {
     origin = maps\_zombietron_main::get_camera_center_point();
-    dist_squared = distanceSquared(origin, self.origin);
+    dist_squared = DistanceSquared(origin, self.origin);
     if(dist_squared > min_dist_squared) {
       self.aborted_tank = true;
       self notify("tank_abort");
@@ -1449,7 +1392,6 @@ tank_outofworld_watcher() {
     wait .25;
   }
 }
-
 tank_pickup_update(pickup) {
   self EnableInvulnerability();
   origin = push_origin_out(pickup.origin, 30);
@@ -1491,14 +1433,12 @@ tank_pickup_update(pickup) {
   self DisableInvulnerability();
   self turn_shield_on(true);
 }
-
 speed_pickup_cleanup() {
   self waittill_any("new_speed_pickup", "disconnect", "player_died");
   self SetMoveSpeedScale(self.default_movespeed);
-  self stopLoopSound(.5);
+  self StopLoopSound(.5);
   self playSound("zmb_pwup_speed_end");
 }
-
 speed_pickup_update() {
   self notify("new_speed_pickup");
   self endon("new_speed_pickup");
@@ -1513,34 +1453,32 @@ speed_pickup_update() {
     time_left *= level.zombie_vars["fate_fortune_drop_mod"];
   }
   wait(time_left);
-  self stopLoopSound(.5);
+  self StopLoopSound(.5);
   self playSound("zmb_pwup_speed_end");
   self SetMoveSpeedScale(self.default_movespeed);
 }
-
 powerup_wobble(trigger) {
   trigger endon("trigger");
   while(isDefined(self)) {
     waittime = randomfloatrange(2.5, 5);
-    yaw = randomInt(360);
+    yaw = RandomInt(360);
     if(yaw > 300) {
       yaw = 300;
     } else if(yaw < 60) {
       yaw = 60;
     }
     yaw = self.angles[1] + yaw;
-    self rotateto((-20 + randomInt(40), yaw, -90 + randomInt(180)), waittime, waittime * 0.5, waittime * 0.5);
+    self rotateto((-20 + randomint(40), yaw, -90 + randomint(180)), waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }
-
 powerup_rotate(trigger) {
   trigger endon("trigger");
   if(isDefined(self)) {
     playFXOnTag(level._effect["powerup_on_red"], self, "tag_origin");
   }
   dir = 180;
-  if(randomInt(100) > 50) {
+  if(RandomInt(100) > 50) {
     dir = -180;
   }
   time = RandomFloatRange(3, 7);
@@ -1549,7 +1487,6 @@ powerup_rotate(trigger) {
     wait time;
   }
 }
-
 powerup_timeout(trigger, timeout) {
   trigger endon("trigger");
   if(!isDefined(timeout)) {
@@ -1584,7 +1521,6 @@ powerup_timeout(trigger, timeout) {
     self delete();
   }
 }
-
 get_random_mine_location() {
   spawn_locations = [];
   hazardTarget = level.arenas[level.current_arena] + "_hazard";
@@ -1592,10 +1528,9 @@ get_random_mine_location() {
   if(spawn_locations.size == 0) {
     return undefined;
   }
-  spawn_point = spawn_locations[randomInt(spawn_locations.size)];
+  spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
   return spawn_point;
 }
-
 wait_for_mine_pickup(trigger) {
   self endon("death");
   while(1) {
@@ -1610,7 +1545,6 @@ wait_for_mine_pickup(trigger) {
     }
   }
 }
-
 mine_off_on_loop() {
   self endon("death");
   self setclientflag(level._ZT_SCRIPTMOVER_CF_ELEC_TRAP);
@@ -1628,12 +1562,10 @@ mine_off_on_loop() {
     wait RandomFloatRange(3, 6);
   }
 }
-
 delete_sound_ent_on_death(ent) {
   self waittill("death");
   ent Delete();
 }
-
 AdjustMineOrigin(origin) {
   min_dist = 24;
   min_dist_squared = min_dist * min_dist;
@@ -1645,7 +1577,7 @@ AdjustMineOrigin(origin) {
     for(i = 0; i < level.mines.size; i++) {
       mine = level.mines[i];
       if(isDefined(mine)) {
-        dist_squared = distanceSquared(origin, mine.origin);
+        dist_squared = DistanceSquared(origin, mine.origin);
         if(dist_squared < min_dist_squared) {
           dir = origin - mine.origin;
           dir = VectorNormalize(dir);
@@ -1657,7 +1589,6 @@ AdjustMineOrigin(origin) {
   }
   return origin;
 }
-
 clear_mines() {
   if(!isDefined(level.mines)) {
     level.mines = [];
@@ -1676,10 +1607,9 @@ clear_mines() {
   }
   level.mines = [];
 }
-
 spawn_mines() {
   clear_mines();
-  count = 1 + randomInt(2 + Int((level.round_number - 4) / 3));
+  count = 1 + RandomInt(2 + Int((level.round_number - 4) / 3));
   for(i = 0; i < count; i++) {
     spawn_point = get_random_mine_location();
     if(!isDefined(spawn_point)) {
@@ -1698,7 +1628,6 @@ spawn_mines() {
     level.mines[i] = pickup;
   }
 }
-
 shield_debug() {
   self endon("death");
   while(1) {
@@ -1706,22 +1635,26 @@ shield_debug() {
     wait 0.05;
   }
 }
-
 shield_trigger_think(player) {
   self endon("death");
   self endon("disconnect");
   while(1) {
     self waittill("trigger", guy);
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
-    if(IsPlayer(guy))
+    }
+    if(isPlayer(guy)) {
       continue;
-    if(isDefined(guy.launched))
+    }
+    if(isDefined(guy.launched)) {
       continue;
-    if(isDefined(guy.boss))
+    }
+    if(isDefined(guy.boss)) {
       continue;
-    if(!IsSentient(guy))
+    }
+    if(!IsSentient(guy)) {
       continue;
+    }
     if(isDefined(player.rhino_deaths)) {
       player.rhino_deaths++;
     }
@@ -1731,17 +1664,16 @@ shield_trigger_think(player) {
     guy LaunchRagdoll((0, 0, 220));
     guy.launched = true;
     guy playSound("zmb_ragdoll_launched");
-    player playRumbleOnEntity("slide_rumble");
+    player PlayRumbleOnEntity("slide_rumble");
   }
 }
-
 shield_flag_on(onOff) {
-  if(onOff)
+  if(onOff) {
     self.shield_is_on = 1;
-  else
+  } else {
     self.shield_is_on = undefined;
+  }
 }
-
 turn_shield_on(short_shield) {
   shield_flag_on(1);
   self EnableInvulnerability();
@@ -1773,7 +1705,6 @@ turn_shield_on(short_shield) {
     self DisableInvulnerability();
   }
 }
-
 update_drop_booster() {
   self notify("update_drop_booster");
   self endon("update_drop_booster");
@@ -1803,7 +1734,7 @@ update_drop_booster() {
         boost_vector -= (0, 0, 200);
         while(GetTime() < endTime) {
           self SetVelocity(boost_vector);
-          self playRumbleOnEntity("slide_rumble");
+          self PlayRumbleOnEntity("slide_rumble");
           wait 0.05;
         }
         if(self.rhino_deaths >= 20) {
@@ -1819,7 +1750,6 @@ update_drop_booster() {
     }
   }
 }
-
 update_drop_bomb() {
   self notify("update_drop_bomb");
   self endon("update_drop_bomb");
@@ -1871,7 +1801,6 @@ update_drop_bomb() {
     wait 0.05;
   }
 }
-
 turret_init() {
   level.mini_turret_orgs = [];
   level.mini_turrets = getEntArray("mini_turret", "script_noteworthy");
@@ -1892,7 +1821,6 @@ turret_init() {
     level.mini_turrets[i].script_burst_max = 1.5;
   }
 }
-
 can_spawn_turret() {
   if(level.round_number < level.zombie_vars["mini_turret_min_round"]) {
     return false;
@@ -1907,7 +1835,6 @@ can_spawn_turret() {
   }
   return false;
 }
-
 turret_timeout() {
   timeLeft = GetTime() + (level.zombie_vars["mini_turret_time"] * 1000);
   while(GetTime() < timeLeft) {
@@ -1922,7 +1849,6 @@ turret_timeout() {
   wait 1;
   self notify("turret_time_to_go");
 }
-
 turret_pickup_update(player) {
   mini_turret = undefined;
   for(i = 0; i < level.mini_turrets.size; i++) {
@@ -1950,7 +1876,7 @@ turret_pickup_update(player) {
   playFXOnTag(level._effect["betty_explode"], mini_turret, "tag_origin");
   mini_turret playSound("evt_turret_land");
   physicsExplosionSphere(mini_turret.org.origin, 512, 128, 2);
-  player playRumbleOnEntity("artillery_rumble");
+  player PlayRumbleOnEntity("artillery_rumble");
   if(GetPlayers().size > 1) {
     mini_turret.fx = SpawnFx(level._effect[player.light_playFX], mini_turret.origin, (1, 0, 0), (0, 0, 1));
     if(isDefined(mini_turret.fx)) {
@@ -1975,7 +1901,6 @@ turret_pickup_update(player) {
   mini_turret.org moveTo(mini_turret.original_location, 1, 0, 0);
   mini_turret.deployed = false;
 }
-
 #using_animtree("zombie_cymbal_monkey");
 monkey_update(player, origin) {
   hitp = PlayerPhysicsTrace(origin + (0, 0, 72), origin + (0, 0, -500));
@@ -1985,7 +1910,7 @@ monkey_update(player, origin) {
   monkey setModel(level.monkey_model);
   monkey UseAnimTree(#animtree);
   monkey SetAnim(%o_monkey_bomb);
-  monkey.angles = (0, randomInt(360), 0);
+  monkey.angles = (0, RandomInt(360), 0);
   playFXOnTag(level._effect["monkey_glow"], monkey, "origin_animate_jnt");
   level.active_monkeys[level.active_monkeys.size] = monkey;
   fx = undefined;
@@ -2010,7 +1935,6 @@ monkey_update(player, origin) {
   wait 0.2;
   monkey Delete();
 }
-
 #using_animtree("critter");
 chicken_idle() {
   self UseAnimTree(#animtree);
@@ -2024,7 +1948,7 @@ chicken_idle() {
     self SetAnim(curAnim);
     wait(RandomIntRange(2, 4));
     lastAnim = curAnim;
-    switch (randomInt(4)) {
+    switch (RandomInt(4)) {
       case 0:
         curAnim = % a_chicken_idle_peck;
         break;
@@ -2040,7 +1964,6 @@ chicken_idle() {
     }
   }
 }
-
 chicken_death_idle() {
   self endon("death");
   self UseAnimTree(#animtree);
@@ -2051,7 +1974,6 @@ chicken_death_idle() {
     self ClearAnim(%a_chicken_react_up_down, 0);
   }
 }
-
 chicken_active_idle() {
   self endon("death");
   self endon("spinning_out");
@@ -2063,19 +1985,16 @@ chicken_active_idle() {
     self ClearAnim(%a_chicken_react_to_front_notrans, 0);
   }
 }
-
 fated_active_idle() {
   self UseAnimTree(#animtree);
   self SetAnim(%fxanim_zombies_crow_fly_anim);
 }
-
 delete_sound_ent(ent, wait_string) {
   self waittill_any(wait_string, "disconnect");
   if(isDefined(ent)) {
     ent Delete();
   }
 }
-
 double_shot_wait_for_pickup_audio() {
   self endon("picked_up");
   self endon("death");
@@ -2085,7 +2004,6 @@ double_shot_wait_for_pickup_audio() {
     wait(RandomFloatRange(2, 5));
   }
 }
-
 double_shot_audio_loop(orb) {
   orb endon("spinning_out");
   orb endon("death");
@@ -2100,7 +2018,6 @@ double_shot_audio_loop(orb) {
     wait(RandomFloatRange(1, 3));
   }
 }
-
 double_shot_audio_death(orb) {
   self endon("disconnect");
   orb endon("death");
@@ -2111,7 +2028,6 @@ double_shot_audio_death(orb) {
     wait(RandomFloatRange(.5, 1));
   }
 }
-
 spawn_treasure(numGlobs) {
   level endon("stop_spawning_pickups");
   while(numGlobs) {
@@ -2120,7 +2036,6 @@ spawn_treasure(numGlobs) {
     numGlobs--;
   }
 }
-
 spawn_bonus_room() {
   weaps = RandomIntRange(level.zombie_vars["zombie_treasure_weapon_drops_min"], level.zombie_vars["zombie_treasure_weapon_drops_max"]);
   while(weaps) {
@@ -2130,7 +2045,6 @@ spawn_bonus_room() {
   maps\_zombietron_pickups::spawn_random_pickup();
   level thread spawn_treasure(level.zombie_vars["zombie_treasure_boss"]);
 }
-
 spawn_armory() {
   numplayers = GetPlayers().size;
   for(i = 0; i < 4; i++) {
@@ -2141,10 +2055,11 @@ spawn_armory() {
     spawn_specific_pickup("booster");
     wait 0.2;
   }
-  if(numplayers > 1)
+  if(numplayers > 1) {
     numChickens = 1;
-  else
+  } else {
     numChickens = 4;
+  }
   while(numChickens) {
     numChickens--;
     spawn_specific_pickup("double_shot");

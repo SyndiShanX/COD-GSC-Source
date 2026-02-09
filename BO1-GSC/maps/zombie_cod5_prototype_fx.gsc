@@ -12,7 +12,6 @@ main() {
   footsteps();
   maps\createfx\zombie_cod5_prototype_fx::main();
 }
-
 footsteps() {
   animscripts\utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -34,7 +33,6 @@ footsteps() {
   animscripts\utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   animscripts\utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 precache_createfx_fx() {
   level._effect["smoke_plume_xlg_slow_blk"] = loadfx("maps/ber2/fx_smk_plume_xlg_slow_blk_w");
   level._effect["smoke_hallway_faint_dark"] = loadfx("env/smoke/fx_smoke_hallway_faint_dark");
@@ -81,7 +79,6 @@ precache_createfx_fx() {
   level._effect["fx_moon_prototype"] = loadfx("maps/zombie/fx_zomb_moon_proto");
   level._effect["fx_zombie_lamp_glow_amber"] = loadfx("maps/zombie/fx_zombie_lamp_glow_amber");
 }
-
 scriptedFX() {
   level._effect["large_ceiling_dust"] = LoadFx("env/dirt/fx_dust_ceiling_impact_lg_mdbrown");
   level._effect["poltergeist"] = LoadFx("misc/fx_zombie_couch_effect");

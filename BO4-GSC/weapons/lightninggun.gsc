@@ -46,7 +46,7 @@ function lightninggun_start_damage_effects(eattacker) {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self setelectrifiedstate(1);
     self.electrifiedby = eattacker;
     self playrumbleonentity("lightninggun_victim");
@@ -157,7 +157,7 @@ lightninggun_find_arc_targets(eattacker, arc_source, arc_source_origin, arc_sour
       continue;
     }
 
-    if(isplayer(enemy) && enemy player::is_spawn_protected()) {
+    if(isPlayer(enemy) && enemy player::is_spawn_protected()) {
       continue;
     }
 
@@ -172,7 +172,7 @@ lightninggun_find_arc_targets(eattacker, arc_source, arc_source_origin, arc_sour
         continue;
       }
 
-      if(isplayer(enemy)) {
+      if(isPlayer(enemy)) {
         tagorigin = enemy gettagorigin("j_spineupper");
       } else if(enemy.archetype === "mp_dog") {
         tagorigin = enemy gettagorigin("j_neck1");
@@ -218,7 +218,7 @@ lightninggun_damage_response(eattacker, einflictor, weapon, meansofdeath, damage
   arc_source = self;
   arc_source_origin = self.origin;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     arc_source_pos = self gettagorigin("j_spineupper");
   } else if(self.archetype === "mp_dog") {
     arc_source_pos = self gettagorigin("j_neck1");
@@ -229,7 +229,7 @@ lightninggun_damage_response(eattacker, einflictor, weapon, meansofdeath, damage
   delta = arc_source_pos - bolt_source_pos;
   angles = (0, 0, 0);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     arc_source.killcamkilledbyent = create_killcam_entity(bolt_source_pos, angles, weapon);
     arc_source.killcamkilledbyent killcam_move(bolt_source_pos, arc_source_pos, level.weaponlightninggunkillcamtime);
     killcamentity = arc_source.killcamkilledbyent;

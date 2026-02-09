@@ -41,8 +41,7 @@ main() {
   level._effect["leaves_fall_strongwind_large"] = loadfx("misc/leaves_fall_strongwind_large");
   level._effect["leaves_fall_strongwind_green_meteora"] = loadfx("misc/leaves_fall_strongwind_green_meteora");
 
-  if(getdvar("clientSideEffects", "1") != "1") {
+  if(getDvar("clientSideEffects", "1") != "1") {
     maps\createfx\mp_meteora_fx::main();
   }
-
 }

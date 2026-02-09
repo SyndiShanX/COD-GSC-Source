@@ -8,15 +8,14 @@
 #include animscripts\combat_utility;
 #include common_scripts\utility;
 #using_animtree("generic_human");
+
 deleteAtLimit() {
   wait 30.0;
   self delete();
 }
-
 LookAtEntity(lookTargetEntity, lookDuration, lookSpeed, eyesOnly, interruptOthers) {
   return;
 }
-
 LookAtPosition(lookTargetPos, lookDuration, lookSpeed, eyesOnly, interruptOthers) {
   assertEX(isAI(self), "Can only call this function on an AI character");
   assertEX(self.a.targetLookInitilized == true, "LookAtPosition called on AI that lookThread was not called on");
@@ -36,12 +35,10 @@ LookAtPosition(lookTargetPos, lookDuration, lookSpeed, eyesOnly, interruptOthers
     }
   }
 }
-
 LookAtAnimations(leftanim, rightanim) {
   self.a.LookAnimationLeft = leftanim;
   self.a.LookAnimationRight = rightanim;
 }
-
 HandleDogSoundNoteTracks(note) {
   if(note == "sound_dogstep_run_default") {
     self playSound("fly_dog_step_run_default");
@@ -59,11 +56,9 @@ HandleDogSoundNoteTracks(note) {
   }
   return true;
 }
-
 growling() {
   return isDefined(self.script_growl);
 }
-
 registerNoteTracks() {
   anim.notetracks["anim_pose = \"stand\""] = ::noteTrackPoseStand;
   anim.notetracks["anim_pose = \"crouch\""] = ::noteTrackPoseCrouch;
@@ -87,7 +82,6 @@ registerNoteTracks() {
   anim.notetracks["land"] = ::noteTrackLand;
   anim.notetracks["start_ragdoll"] = ::noteTrackStartRagdoll;
 }
-
 noteTrackStopAnim(note, flagName) {}
 noteTrackStartRagdoll(note, flagName) {
   if(isDefined(self.noragdoll)) {
@@ -96,42 +90,35 @@ noteTrackStartRagdoll(note, flagName) {
   self Unlink();
   self startRagdoll();
 }
-
 noteTrackMovementStop(note, flagName) {
   if(IsSentient(self)) {
     self.a.movement = "stop";
   }
 }
-
 noteTrackMovementWalk(note, flagName) {
   if(IsSentient(self)) {
     self.a.movement = "walk";
   }
 }
-
 noteTrackMovementRun(note, flagName) {
   if(IsSentient(self)) {
     self.a.movement = "run";
   }
 }
-
 noteTrackAlertnessCasual(note, flagName) {
   if(IsSentient(self)) {
     self.a.alertness = "casual";
   }
 }
-
 noteTrackAlertnessAlert(note, flagName) {
   if(IsSentient(self)) {
     self.a.alertness = "alert";
   }
 }
-
 noteTrackPoseStand(note, flagName) {
   self.a.pose = "stand";
   self notify("entered_pose" + "stand");
 }
-
 noteTrackPoseCrouch(note, flagName) {
   self.a.pose = "crouch";
   self notify("entered_pose" + "crouch");
@@ -140,7 +127,6 @@ noteTrackPoseCrouch(note, flagName) {
     self.health = 150;
   }
 }
-
 noteTrackGravity(note, flagName) {
   if(isSubStr(note, "on")) {
     self AnimMode("gravity");
@@ -152,7 +138,6 @@ noteTrackGravity(note, flagName) {
     self.nogravity = undefined;
   }
 }
-
 noteTrackBodyFall(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
@@ -165,7 +150,6 @@ noteTrackBodyFall(note, flagName) {
     self playSound("fly_bodyfall_small_" + groundType);
   }
 }
-
 noteTrackFootStep(note, flagName) {
   if(isSubStr(note, "left")) {
     playFootStep("J_Ball_LE");
@@ -176,7 +160,6 @@ noteTrackFootStep(note, flagName) {
     self playSound("fly_gear_run");
   }
 }
-
 noteTrackFootScrape(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
@@ -185,7 +168,6 @@ noteTrackFootScrape(note, flagName) {
   }
   self playSound("fly_step_scrape_" + groundType);
 }
-
 noteTrackLand(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
@@ -194,7 +176,6 @@ noteTrackLand(note, flagName) {
   }
   self playSound("fly_land_npc_" + groundType);
 }
-
 HandleNoteTrack(note, flagName, customFunction, var1) {
   if(isAI(self) && self.isdog) {
     if(HandleDogSoundNoteTracks(note)) {
@@ -251,19 +232,14 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
     default:
       if(isDefined(customFunction)) {
         if(!isDefined(var1)) {
-          return [
-            [customFunction]
-          ](note);
+          return [[customFunction]](note);
         } else {
-          return [
-            [customFunction]
-          ](note, var1);
+          return [[customFunction]](note, var1);
         }
       }
       break;
   }
 }
-
 DoNoteTracks(flagName, customFunction, debugIdentifier, var1) {
   for(;;) {
     self waittill(flagName, note);
@@ -276,7 +252,6 @@ DoNoteTracks(flagName, customFunction, debugIdentifier, var1) {
     }
   }
 }
-
 DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
   assert(isDefined(interceptFunction));
   for(;;) {
@@ -294,7 +269,6 @@ DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
     }
   }
 }
-
 DoNoteTracksPostCallback(flagName, postFunction) {
   assert(isDefined(postFunction));
   for(;;) {
@@ -309,15 +283,12 @@ DoNoteTracksPostCallback(flagName, postFunction) {
     }
   }
 }
-
 DoNoteTracksForever(flagName, killString, customFunction, debugIdentifier) {
   DoNoteTracksForeverProc(::DoNoteTracks, flagName, killString, customFunction, debugIdentifier);
 }
-
 DoNoteTracksForeverIntercept(flagName, killString, interceptFunction, debugIdentifier) {
   DoNoteTracksForeverProc(::DoNoteTracksIntercept, flagName, killString, interceptFunction, debugIdentifier);
 }
-
 DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, debugIdentifier) {
   if(isDefined(killString)) {
     self endon(killString);
@@ -341,29 +312,24 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
     }
   }
 }
-
 DoNoteTracksForTime(time, flagName, customFunction, debugIdentifier) {
   ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, time, flagName, customFunction, debugIdentifier, ent);
 }
-
 DoNoteTracksForTimeIntercept(time, flagName, interceptFunction, debugIdentifier) {
   ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForeverIntercept, time, flagName, interceptFunction, debugIdentifier, ent);
 }
-
 DoNoteTracksForTimeProc(doNoteTracksForeverFunc, time, flagName, customFunction, debugIdentifier, ent) {
   ent endon("stop_notetracks");
   [[doNoteTracksForeverFunc]](flagName, undefined, customFunction, debugIdentifier);
 }
-
 doNoteTracksForTimeEndNotify(time) {
   wait(time);
   self notify("stop_notetracks");
 }
-
 playFootStep(foot) {
   if(!level.clientScripts) {
     if(!isAI(self)) {
@@ -389,7 +355,6 @@ playFootStep(foot) {
   }
   [[anim.optionalStepEffectFunction]](foot, groundType);
 }
-
 playFootStepEffect(foot, groundType) {
   if(level.clientScripts) {
     return;
@@ -406,10 +371,9 @@ playFootStepEffect(foot, groundType) {
     return;
   }
 }
-
 moveToOriginOverTime(origin, time) {
   self endon("killanimscript");
-  if(distanceSquared(self.origin, origin) > 16 * 16 && !self mayMoveToPoint(origin)) {
+  if(DistanceSquared(self.origin, origin) > 16 * 16 && !self mayMoveToPoint(origin)) {
     return;
   }
   self.keepClaimedNodeInGoal = true;
@@ -423,7 +387,6 @@ moveToOriginOverTime(origin, time) {
   }
   self.keepClaimedNodeInGoal = false;
 }
-
 returnTrue() {
   return true;
 }

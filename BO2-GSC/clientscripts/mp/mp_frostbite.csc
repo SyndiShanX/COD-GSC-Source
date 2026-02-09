@@ -14,7 +14,7 @@ main() {
   clientscripts\mp\mp_frostbite_fx::main();
   thread clientscripts\mp\_audio::audio_init(0);
   thread clientscripts\mp\mp_frostbite_amb::main();
-  setdvar("tu7_cg_deathCamAboveWater", "8");
+  setDvar("tu7_cg_deathCamAboveWater", "8");
   setsaveddvar("sm_sunshadowsmall", 1);
   setsaveddvar("sm_sunsamplesizenear", 0.25);
   waitforclient(0);

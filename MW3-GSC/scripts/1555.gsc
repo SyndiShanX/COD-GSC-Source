@@ -8,11 +8,9 @@ init() {
 
   if(!isDefined(level._id_3BD3)) {
     level._id_3BD3 = 12000;
-
   }
   if(!isDefined(level._id_3BD4)) {
     level._id_3BD4 = [];
-
   }
   level._id_3BD5 = 0 - level._id_3BD3;
   level._id_3BD6 = 0;
@@ -22,7 +20,6 @@ init() {
     precacheitem(level._id_3BD7);
   } else {
     precacheitem("remote_missile");
-
   }
   precacheshader("veh_hud_target");
   precacheshader("veh_hud_target_offscreen");
@@ -50,11 +47,10 @@ init() {
     visionsetmissilecam("missilecam");
   } else {
     visionsetmissilecam(level.vision_uav);
-
   }
   setsaveddvar("missileRemoteSpeedUp", "1000");
   setsaveddvar("missileRemoteSpeedTargetRange", "6000 12000");
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   if(var_0 == "zzz") {} else if(var_0 == "raymetest") {
     setsaveddvar("missileRemoteSpeedUp", "500");
@@ -76,33 +72,26 @@ _id_3BDC() {
 
   if(isDefined(level._id_3BDD)) {
     var_0 = 1;
-
   }
   var_1 = _id_3C2B();
 
   if(!isalive(var_1)) {
     var_0 = 1;
-
   }
   if(isDefined(self._id_3BDE)) {
     var_0 = 1;
-
   }
   if(common_scripts\utility::flag_exist("wave_wiped_out") && common_scripts\utility::flag("wave_wiped_out")) {
     var_0 = 1;
-
   }
   if(maps\_utility::_id_133C("laststand_downed") && maps\_utility::_id_1008("laststand_downed")) {
     var_0 = 1;
-
   }
   if(self getcurrentweapon() == "remote_missile_detonator") {
     var_0 = 1;
-
   }
   if(common_scripts\utility::flag_exist("no_default_uav_hint") && common_scripts\utility::flag("no_default_uav_hint")) {
     var_0 = 1;
-
   }
   return var_0;
 }
@@ -110,7 +99,6 @@ _id_3BDC() {
 _id_3BDF() {
   if(!isDefined(level._id_11BB)) {
     level._id_11BB = [];
-
   }
   level._id_3BE0 = 1;
   level._id_11BB["uav_reloading"] = "cont_cmt_rearmhellfires";
@@ -159,7 +147,6 @@ _id_3BE4() {
 _id_3BE5(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = 1;
-
   }
   if(!common_scripts\utility::flag("uav_enabled")) {
     common_scripts\utility::flag_set("uav_enabled");
@@ -177,7 +164,6 @@ _id_3BE5(var_0, var_1) {
 _id_3BE6(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = 1;
-
   }
   if(common_scripts\utility::flag("uav_enabled")) {
     common_scripts\utility::flag_clear("uav_enabled");
@@ -202,7 +188,6 @@ _id_3BE7(var_0) {
     var_1 = self._id_3BE8;
   } else {
     return;
-
   }
   if(!self hasweapon(var_1)) {
     return;
@@ -219,15 +204,12 @@ _id_3BE9() {
 _id_3BEA(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(var_0 == "remote_missile_detonator") {
     return 1;
-
   }
   if(var_0 == "remote_missile_detonator_finite") {
     return 1;
-
   }
   return 0;
 }
@@ -254,7 +236,6 @@ _id_3BEE() {
 _id_3BEF() {
   if(!isDefined(self._id_3BF0)) {
     return 0;
-
   }
   return self._id_3BF0.size > 1;
 }
@@ -299,7 +280,6 @@ _id_3BF1(var_0) {
 
       if(isDefined(level._id_3BF4)) {
         [[level._id_3BF4]]();
-
       }
       maps\_audio::aud_send_msg("player_UAV_use");
       level._id_3BF3 = self;
@@ -310,7 +290,6 @@ _id_3BF1(var_0) {
 
       if(isDefined(level._id_3BF6)) {
         [[level._id_3BF6]]();
-
       }
       if(isDefined(var_0)) {
         thread[[var_0]]();
@@ -345,7 +324,6 @@ _id_3BF8(var_0) {
     }
     if(!_id_3BEA(self getcurrentweapon())) {
       self._id_3BF2 = self getcurrentweapon();
-
     }
     if(isDefined(level._id_3BDD)) {
       thread _id_3BF9(0, "uav_down");
@@ -361,7 +339,6 @@ _id_3BF8(var_0) {
 _id_3BF9(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = "uav_offline";
-
   }
   var_2 = gettime();
 
@@ -434,7 +411,6 @@ _id_3BFC() {
 
   if(isDefined(level._id_3BF5["ai"])) {
     var_1 = level._id_3BF5["ai"];
-
   }
   if(var_1 > 5) {
     var_0 = "uav_multi_kill";
@@ -448,7 +424,6 @@ _id_3BFC() {
     var_0 = "uav_few_kills";
   } else if(var_1 > 0) {
     var_0 = "uav_1_kill";
-
   }
   var_2 = undefined;
   var_3 = 0;
@@ -553,7 +528,6 @@ _id_3C01() {
     common_scripts\utility::waittill_any("player_has_red_flashing_overlay", "player_downed", "dtest", "force_out_of_uav");
   } else {
     common_scripts\utility::waittill_any("damage", "dtest", "force_out_of_uav");
-
   }
   self._id_3C02 = 1;
   maps\_audio::aud_send_msg("abort_UAV_control");
@@ -637,19 +611,15 @@ _id_3C0E(var_0) {
   while(gettime() < var_1) {
     if(self._id_3C02) {
       return 0;
-
     }
     if(isDefined(level._id_3BDD)) {
       return 0;
-
     }
     if(self usebuttonpressed()) {
       return 0;
-
     }
     if(!common_scripts\utility::flag("uav_enabled")) {
       return 0;
-
     }
     wait 0.05;
   }
@@ -688,14 +658,12 @@ _id_3C13(var_0) {
     var_0 visionsetthermalforplayer(level._id_1E70, 0.5);
   } else if(isDefined(maps\_utility::_id_1FC2(level._id_13EE))) {
     var_0 maps\_utility::_id_27D1(level._id_13EE, 0.5);
-
   }
   var_0 _id_3C3F();
   var_0 freezecontrols(0);
 
   if(!maps\_utility::_id_1A43(var_0)) {
     var_0 enableoffhandweapons();
-
   }
   var_0 maps\_utility::delaythread(0.1, ::_id_3C15, 1);
   level._id_3C14 = undefined;
@@ -709,11 +677,9 @@ _id_3C15(var_0) {
 
     if(var_1 != "prone") {
       self allowprone(var_0);
-
     }
     if(var_1 != "crouch") {
       self allowcrouch(var_0);
-
     }
     if(var_1 != "stand") {
       self allowstand(var_0);
@@ -729,7 +695,6 @@ _id_3C15(var_0) {
 _id_3C16(var_0, var_1) {
   if(var_1 == "remote_missile_detonator") {
     var_0 givemaxammo(var_1);
-
   }
   level notify("starting_predator_drone_control");
   var_0 notify("starting_predator_drone_control");
@@ -739,7 +704,6 @@ _id_3C16(var_0, var_1) {
 
   if(!isDefined(level.vision_uav)) {
     level.vision_uav = "ac130";
-
   }
   level._id_3C18 = "missilecam";
   var_0 disableoffhandweapons();
@@ -756,7 +720,6 @@ _id_3C16(var_0, var_1) {
 
     if(isDefined(level._id_3BDA) && level._id_3BDA) {
       var_0 visionsetthermalforplayer(level._id_3C17, var_5);
-
     }
     _id_3C33();
     var_4 = _id_3C0E(var_5);
@@ -812,7 +775,6 @@ _id_3C16(var_0, var_1) {
     } else {
       if(isDefined(maps\_utility::_id_1FC2(level.vision_uav))) {
         var_0 maps\_utility::_id_27D1(level.vision_uav, 0.25);
-
       }
       var_0 visionsetnakedforplayer(level.vision_uav, 0.25);
     }
@@ -866,7 +828,6 @@ _id_3C16(var_0, var_1) {
       var_0 cameralinkto(var_10, level._id_3C1E);
     } else {
       var_0 cameralinkto(var_10, "tag_origin");
-
     }
     var_0 controlslinkto(var_10);
     var_4 = _id_3C0E(0.2);
@@ -878,7 +839,6 @@ _id_3C16(var_0, var_1) {
 
     if(isDefined(level._id_3C1F)) {
       var_0[[level._id_3C1F]](var_10);
-
     }
     thread _id_3C3A();
 
@@ -980,7 +940,6 @@ _id_3C27(var_0) {
   }
   if(!isDefined(level._id_3BF5["ai"])) {
     level._id_3BF5["ai"] = 0;
-
   }
   if(isDefined(var_0) && isDefined(level._id_3BF3)) {
     if(var_0 == level._id_3BF3 || isDefined(var_0.attacker) && var_0.attacker == level._id_3BF3) {
@@ -1024,7 +983,6 @@ _id_3C28(var_0) {
 
   if(!isDefined(level._id_3BF5[var_1])) {
     level._id_3BF5[var_1] = 0;
-
   }
   self waittill("death", var_2, var_3);
 
@@ -1043,11 +1001,9 @@ _id_3C29() {
 _id_3C2B() {
   if(!isDefined(self._id_3BF0)) {
     return level._id_3C2C;
-
   }
   if(!isDefined(self._id_3C2A)) {
     self._id_3C2A = 0;
-
   }
   var_0 = _id_3C29();
   return var_0._id_3C2C;
@@ -1060,13 +1016,11 @@ _id_3C2D(var_0, var_1) {
     var_0[[level._id_3C1D]](1);
   } else {
     _id_3C07();
-
   }
   _id_3C3E();
 
   if(isDefined(level._id_3BDD)) {
     thread staticeffect(0.5);
-
   }
   var_0 controlsunlink();
   var_0 cameraunlink();
@@ -1101,7 +1055,6 @@ _id_3C2D(var_0, var_1) {
 
     if(!maps\_utility::_id_1A43(var_0)) {
       var_0 enableweapons();
-
     }
     var_0 freezecontrols(0);
     var_0 showviewmodel();
@@ -1125,7 +1078,6 @@ _id_3C2D(var_0, var_1) {
 
     if(!maps\_utility::_id_1A43(var_0)) {
       var_0 enableweapons();
-
     }
     var_0 showviewmodel();
     wait 0.5;
@@ -1133,7 +1085,6 @@ _id_3C2D(var_0, var_1) {
 
     if(!maps\_utility::_id_1A43(var_0)) {
       var_0 enableoffhandweapons();
-
     }
     var_0 freezecontrols(0);
   }
@@ -1158,11 +1109,9 @@ _id_3C2E(var_0, var_1) {
 
   if(isDefined(level._id_3BDA) && level._id_3BDA) {
     var_0 visionsetthermalforplayer(level._id_3C17, 0.25);
-
   }
   if(isDefined(level._id_3BDD)) {
     var_0 thread staticeffect(0.5);
-
   }
   wait 0.15;
   wait 0.35;
@@ -1184,7 +1133,6 @@ _id_3C2E(var_0, var_1) {
 
   if(isDefined(var_0._id_3C20)) {
     setsaveddvar("cg_fov", 65);
-
   }
   var_2 = var_0 _id_3C2B();
 
@@ -1210,7 +1158,6 @@ _id_3C2E(var_0, var_1) {
 
     if(!maps\_utility::_id_1A43(var_0)) {
       var_0 enableweapons();
-
     }
     var_0 showviewmodel();
     wait 0.1;
@@ -1218,7 +1165,6 @@ _id_3C2E(var_0, var_1) {
 
     if(!maps\_utility::_id_1A43(var_0)) {
       var_0 enableoffhandweapons();
-
     }
     var_0 freezecontrols(0);
   } else {
@@ -1234,7 +1180,6 @@ _id_3C2E(var_0, var_1) {
 
     if(!maps\_utility::_id_1A43(var_0)) {
       var_0 enableweapons();
-
     }
     var_0 showviewmodel();
     wait 0.5;
@@ -1243,7 +1188,6 @@ _id_3C2E(var_0, var_1) {
 
     if(!maps\_utility::_id_1A43(var_0)) {
       var_0 enableoffhandweapons();
-
     }
     var_0 freezecontrols(0);
   }
@@ -1272,7 +1216,6 @@ _id_3C30(var_0) {
 
   if(common_scripts\utility::flag("predator_missile_launch_allowed")) {
     var_0 thread _id_3C31("launch_remote_missile", "launch");
-
   }
   var_0 waittill("remote_missile_attack", var_1);
   var_0 maps\_utility::_id_13DE("controlling_UAV");
@@ -1316,7 +1259,7 @@ _id_3C33() {
   if(level.players.size > 0) {
     for(var_0 = 0; var_0 < level.players.size; var_0++) {
       if(isDefined(level.players[var_0]._id_3B10) && level.players[var_0]._id_3B10) {
-        setdvar("ui_remotemissile_playernum", var_0 + 1);
+        setDvar("ui_remotemissile_playernum", var_0 + 1);
       }
     }
   } else {
@@ -1328,7 +1271,7 @@ _id_3C33() {
 
 _id_3C34() {
   if(level.players.size > 0) {
-    setdvar("ui_remotemissile_playernum", 0);
+    setDvar("ui_remotemissile_playernum", 0);
   } else {
     setsaveddvar("compass", "1");
     setsaveddvar("ammoCounterHide", "0");
@@ -1345,11 +1288,9 @@ _id_3C35(var_0) {
 
   if(!isDefined(level._id_3C36)) {
     level._id_3C36 = -300.0;
-
   }
   if(!isDefined(level._id_3C37)) {
     level._id_3C37 = 700.0;
-
   }
   var_5 = var_1 + var_4 * level._id_3C37 + var_3 * level._id_3C36;
   var_6 = var_5 + var_3 * 10.0;
@@ -1362,7 +1303,6 @@ _id_3C35(var_0) {
     var_7 = magicbullet("remote_missile_invasion", var_5, var_6, var_0);
   } else {
     var_7 = magicbullet("remote_missile", var_5, var_6, var_0);
-
   }
   var_0._id_3C12 = var_7;
   thread _id_3C0F(var_7, var_0);
@@ -1401,7 +1341,6 @@ _id_3C3C() {
     target_set(self, (0, 0, -96));
   } else {
     target_set(self, (0, 0, 64));
-
   }
   if(isai(self)) {
     if(issplitscreen()) {
@@ -1409,13 +1348,12 @@ _id_3C3C() {
     } else {
       target_setshader(self, "remotemissile_infantry_target");
     }
-  } else if(isplayer(self)) {
+  } else if(isPlayer(self)) {
     if(isDefined(self._id_2259) && self._id_2259) {
       target_setshader(self, "hud_fofbox_self_sp");
     } else {}
   } else {
     target_setshader(self, "veh_hud_target");
-
   }
   var_0 = undefined;
   var_1 = undefined;

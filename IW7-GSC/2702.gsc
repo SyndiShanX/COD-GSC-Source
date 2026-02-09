@@ -159,7 +159,7 @@ func_13A58(var_0, var_1) {
     if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_5)) {
       continue;
     }
-    if(!isplayer(var_5) || isagent(var_5)) {
+    if(!isPlayer(var_5) || isagent(var_5)) {
       continue;
     }
     if(!scripts\mp\utility\game::isreallyalive(var_5)) {
@@ -361,7 +361,7 @@ bhg_destroyonemp() {
     var_5 = "hitequip";
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_5);
   }
 

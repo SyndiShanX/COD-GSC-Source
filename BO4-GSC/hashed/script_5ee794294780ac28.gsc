@@ -71,9 +71,9 @@ is_active() {
 }
 
 on_ai_killed(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     player = params.eattacker;
-  } else if(isplayer(params.einflictor)) {
+  } else if(isPlayer(params.einflictor)) {
     player = params.einflictor;
   }
 

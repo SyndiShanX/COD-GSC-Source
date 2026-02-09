@@ -190,7 +190,7 @@ return tag_origin;
 */
 
 _visionsetnaked(visionSet, time) {
-  mapname = getdvar("mapname");
+  mapname = getDvar("mapname");
 
   if(visionSet == "" && !issubstr(mapname, "mp_"))
     visionsetnaked(mapname, time);
@@ -199,7 +199,7 @@ _visionsetnaked(visionSet, time) {
 }
 
 _visionsetnakedforplayer(visionset, time) {
-  mapname = getdvar("mapname");
+  mapname = getDvar("mapname");
   if(visionset == "" && !issubstr(mapname, "mp_"))
     self visionsetnakedforplayer(mapname, time);
   else

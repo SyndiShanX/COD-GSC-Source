@@ -149,8 +149,7 @@ friendly_fire_think(entity) {
     } else {
       arcademode_assignpoints("arcademode_friendies_damage", attacker);
 
-      if(killed) {
-    } else {}
+      if(killed) {} else {}
     }
 
     if(isDefined(entity.no_friendly_fire_penalty)) {

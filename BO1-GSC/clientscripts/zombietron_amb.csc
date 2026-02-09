@@ -1,6 +1,6 @@
 /********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombietron_amb.csc
+ * Script: clientscripts\zombietron_amb\.csc
 ********************************************/
 
 #include clientscripts\_utility;

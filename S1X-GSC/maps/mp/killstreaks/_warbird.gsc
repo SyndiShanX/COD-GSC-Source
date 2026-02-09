@@ -263,7 +263,7 @@ SetupWarbirdKillStreak(lifeId, modules) {
     lifeSpan *= self.specialty_blackbox_bonus;
   }
 
-  if(GetDvar("scr_warbird_timeout", "0") != "0") {
+  if(getDvar("scr_warbird_timeout", "0") != "0") {
     lifeSpan = GetDvarFloat("scr_warbird_timeout");
   }
 
@@ -707,7 +707,7 @@ WarbirdFire(warbird) {
       enemyTargets = [];
 
       foreach(guy in allGuys) {
-        if(!IsAI(guy) && GetDvar("scr_player_notarget", 0) != "0") {
+        if(!IsAI(guy) && getDvar("scr_player_notarget", 0) != "0") {
           continue;
         }
 
@@ -939,7 +939,6 @@ setWarbirdVisionSetPerMap(delay) {
   if(isDefined(level.warbirdVisionSet)) {
     self SetClientTriggerVisionSet(level.warbirdVisionSet, 0);
   }
-
 }
 
 removeWarbirdVisionSetPerMap(delay) {
@@ -1015,7 +1014,7 @@ PlayerCloakReady(warbird, init) {
   self endon("warbirdStreakComplete");
   self endon("ResumeWarbirdAI");
 
-  if(GetDvar("scr_warbird_testcloak", 0) != "0") {
+  if(getDvar("scr_warbird_testcloak", 0) != "0") {
     self thread playerTestCloak();
   }
 
@@ -1047,7 +1046,7 @@ PlayerCloakReady(warbird, init) {
 
     warbird play_sound_on_entity("warbird_cloak_activate");
 
-    if(GetDvar("scr_warbird_testcloak", 0) != "0") {
+    if(getDvar("scr_warbird_testcloak", 0) != "0") {
       continue;
     }
 
@@ -1893,7 +1892,7 @@ testFlares(player) {
       continue;
     }
 
-    SetDvar("scr_warbird_flares", "0");
+    setDvar("scr_warbird_flares", "0");
 
     if(cur == "none") {
       player SetClientOmnvar("ui_warbird_flares", 3);

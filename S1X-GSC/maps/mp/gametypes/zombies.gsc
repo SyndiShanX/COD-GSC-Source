@@ -566,7 +566,7 @@ initzombiesettings() {
 
 setzombiesdlclevel() {
   level.zombiedlclevel = 99;
-  var_0 = getdvar("mapname");
+  var_0 = getDvar("mapname");
 
   if(var_0 == "mp_zombie_lab") {
     level.zombiedlclevel = 1;
@@ -901,7 +901,7 @@ onspawnfinished(var_0) {
   if(maps\mp\zombies\_util::isonhumanteam(self)) {
     var_1 = "iw5_titan45zm_mp";
 
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(isDefined(self.characterindex)) {
         var_2 = "ui_zm_character_" + self.characterindex + "_alive";
         setomnvar(var_2, 1);
@@ -1358,7 +1358,7 @@ modifyplayerdamagezombies(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     var_9 = int(var_9 * level.defusedamagemultiplier);
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(isai(var_2) && var_2 maps\mp\zombies\_util::zombiewaitingfordeath()) {
       return 0;
     }
@@ -1427,7 +1427,7 @@ modifyplayerdamagezombies(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     }
   }
 
-  if(isai(var_0) && !isplayer(var_0) && !isDefined(var_2)) {
+  if(isai(var_0) && !isPlayer(var_0) && !isDefined(var_2)) {
     if(var_4 == "MOD_FALLING") {
       return 0;
     }
@@ -1441,7 +1441,7 @@ modifyplayerdamagezombies(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     }
   }
 
-  if(isai(var_0) && !isplayer(var_0) && isai(var_2)) {
+  if(isai(var_0) && !isPlayer(var_0) && isai(var_2)) {
     if(!isscriptedagent(var_2) && isalliedsentient(var_0, var_2)) {
       return 0;
     }
@@ -1463,13 +1463,13 @@ modifyplayerdamagezombies(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     }
   }
 
-  if(isai(var_0) && !isplayer(var_0) && isDefined(var_1) && var_1.classname == "misc_turret") {
+  if(isai(var_0) && !isPlayer(var_0) && isDefined(var_1) && var_1.classname == "misc_turret") {
     if(isDefined(var_1.team) && var_1.team == var_0.team) {
       return 0;
     }
   }
 
-  if(isDefined(var_2) && isplayer(var_2) && isai(var_0) && !isplayer(var_0)) {
+  if(isDefined(var_2) && isPlayer(var_2) && isai(var_0) && !isPlayer(var_0)) {
     if(isDefined(level.modifyweapondamage[var_12])) {
       var_9 = [[level.modifyweapondamage[var_12]]](var_0, var_2, var_9, var_4, var_5, var_6, var_7, var_8);
     }
@@ -1541,7 +1541,7 @@ modifyplayerdamagezombies(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     }
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 maps\mp\zombies\_zombies_audio::player_hurt(var_2, var_9, var_4);
 
     if(isDefined(var_2) && isai(var_2) && isscriptedagent(var_2)) {

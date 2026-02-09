@@ -29,11 +29,11 @@ __init__() {
 
 init() {
   if(getdvarstring(#"scr_show_hq_spawns") == "<dev string:x38>") {
-    setdvar(#"scr_show_hq_spawns", "<dev string:x38>");
+    setDvar(#"scr_show_hq_spawns", "<dev string:x38>");
   }
 
-  if(!isDefined(getdvar(#"scr_testscriptruntimeerror"))) {
-    setdvar(#"scr_testscriptruntimeerror", "<dev string:x3b>");
+  if(!isDefined(getDvar(#"scr_testscriptruntimeerror"))) {
+    setDvar(#"scr_testscriptruntimeerror", "<dev string:x3b>");
   }
 
   thread testscriptruntimeerror();
@@ -42,12 +42,12 @@ init() {
   thread devstraferunpathdebugdraw();
   thread globallogic_score::setplayermomentumdebug();
   thread dev_class::dev_cac_init();
-  setdvar(#"scr_giveperk", "<dev string:x38>");
-  setdvar(#"scr_forceevent", "<dev string:x38>");
-  setdvar(#"scr_draw_triggers", 0);
+  setDvar(#"scr_giveperk", "<dev string:x38>");
+  setDvar(#"scr_forceevent", "<dev string:x38>");
+  setDvar(#"scr_draw_triggers", 0);
   thread equipment_dev_gui();
   thread grenade_dev_gui();
-  setdvar(#"debug_dynamic_ai_spawning", 0);
+  setDvar(#"debug_dynamic_ai_spawning", 0);
   level.dem_spawns = [];
 
   if(level.gametype == "<dev string:x42>") {
@@ -134,7 +134,7 @@ warpalltoplayer(team, player) {
     }
   }
 
-  setdvar(#"scr_playerwarp", "<dev string:x38>");
+  setDvar(#"scr_playerwarp", "<dev string:x38>");
 }
 
 updatedevsettingszm() {
@@ -183,7 +183,7 @@ updatedevsettingszm() {
       }
 
       if(numpoints == 0) {
-        setdvar(#"r_streamdumpdistance", 0);
+        setDvar(#"r_streamdumpdistance", 0);
         level.streamdumpteamindex = -1;
         return;
       }
@@ -199,7 +199,7 @@ updatedevsettingszm() {
       level.players[0] setplayerangles(averageangles);
       level.players[0] setorigin(averageorigin);
       waitframe(1);
-      setdvar(#"r_streamdumpdistance", 2);
+      setDvar(#"r_streamdumpdistance", 2);
     }
   }
 }
@@ -223,7 +223,7 @@ updatedevsettings() {
 
   if(!isDefined(level.show_spawns) || level.show_spawns != show_spawns) {
     level.show_spawns = show_spawns;
-    setdvar(#"scr_showspawns", level.show_spawns);
+    setDvar(#"scr_showspawns", level.show_spawns);
 
     if(level.show_spawns) {
       showspawnpoints();
@@ -234,7 +234,7 @@ updatedevsettings() {
 
   if(!isDefined(level.show_start_spawns) || level.show_start_spawns != show_start_spawns) {
     level.show_start_spawns = show_start_spawns;
-    setdvar(#"scr_showstartspawns", level.show_start_spawns);
+    setDvar(#"scr_showstartspawns", level.show_start_spawns);
 
     if(level.show_start_spawns) {
       showstartspawnpoints();
@@ -270,7 +270,7 @@ updatedevsettings() {
         players[i] notify(#"devgui_unlimited_ammo");
       }
 
-      setdvar(#"scr_player_ammo", "<dev string:x38>");
+      setDvar(#"scr_player_ammo", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_momentum") != "<dev string:x38>") {
       if(!isDefined(level.devgui_unlimited_momentum)) {
         level.devgui_unlimited_momentum = 1;
@@ -286,10 +286,10 @@ updatedevsettings() {
         level notify(#"devgui_unlimited_momentum");
       }
 
-      setdvar(#"scr_player_momentum", "<dev string:x38>");
+      setDvar(#"scr_player_momentum", "<dev string:x38>");
     } else if(getdvarstring(#"scr_give_player_score") != "<dev string:x38>") {
       level thread devgui_increase_momentum(getdvarint(#"scr_give_player_score", 0));
-      setdvar(#"scr_give_player_score", "<dev string:x38>");
+      setDvar(#"scr_give_player_score", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_zero_ammo") != "<dev string:x38>") {
       players = getplayers();
 
@@ -308,7 +308,7 @@ updatedevsettings() {
         }
       }
 
-      setdvar(#"scr_player_zero_ammo", "<dev string:x38>");
+      setDvar(#"scr_player_zero_ammo", "<dev string:x38>");
     } else if(getdvarstring(#"scr_emp_jammed") != "<dev string:x38>") {
       players = getplayers();
 
@@ -317,7 +317,7 @@ updatedevsettings() {
         player setempjammed(getdvarint(#"scr_emp_jammed", 0));
       }
 
-      setdvar(#"scr_emp_jammed", "<dev string:x38>");
+      setDvar(#"scr_emp_jammed", "<dev string:x38>");
     } else if(getdvarstring(#"scr_round_pause") != "<dev string:x38>") {
       if(!level.timerstopped) {
         iprintln("<dev string:x1d9>");
@@ -327,10 +327,10 @@ updatedevsettings() {
         globallogic_utils::resumetimer();
       }
 
-      setdvar(#"scr_round_pause", "<dev string:x38>");
+      setDvar(#"scr_round_pause", "<dev string:x38>");
     } else if(getdvarstring(#"scr_round_end") != "<dev string:x38>") {
       level globallogic::forceend();
-      setdvar(#"scr_round_end", "<dev string:x38>");
+      setDvar(#"scr_round_end", "<dev string:x38>");
     } else if(getdvarstring(#"scr_show_hq_spawns") != "<dev string:x38>") {
       if(!isDefined(level.devgui_show_hq)) {
         level.devgui_show_hq = 0;
@@ -349,7 +349,7 @@ updatedevsettings() {
         level.devgui_show_hq = !level.devgui_show_hq;
       }
 
-      setdvar(#"scr_show_hq_spawns", "<dev string:x38>");
+      setDvar(#"scr_show_hq_spawns", "<dev string:x38>");
     }
 
     if(getdvarint(#"r_streamdumpdistance", 0) == 3) {
@@ -370,7 +370,7 @@ updatedevsettings() {
       }
 
       if(numpoints == 0) {
-        setdvar(#"r_streamdumpdistance", 0);
+        setDvar(#"r_streamdumpdistance", 0);
         level.streamdumpteamindex = -1;
       } else {
         averageorigin = (0, 0, 0);
@@ -384,7 +384,7 @@ updatedevsettings() {
         level.players[0] setplayerangles(averageangles);
         level.players[0] setorigin(averageorigin);
         waitframe(1);
-        setdvar(#"r_streamdumpdistance", 2);
+        setDvar(#"r_streamdumpdistance", 2);
       }
     }
   }
@@ -397,7 +397,7 @@ updatedevsettings() {
       players[i] clearperks();
     }
 
-    setdvar(#"scr_giveperk", "<dev string:x38>");
+    setDvar(#"scr_giveperk", "<dev string:x38>");
   }
 
   if(getdvarstring(#"scr_giveperk") != "<dev string:x38>") {
@@ -418,7 +418,7 @@ updatedevsettings() {
       }
     }
 
-    setdvar(#"scr_giveperk", "<dev string:x38>");
+    setDvar(#"scr_giveperk", "<dev string:x38>");
   }
 
   if(getdvarstring(#"scr_toggleperk") != "<dev string:x38>") {
@@ -444,7 +444,7 @@ updatedevsettings() {
       }
     }
 
-    setdvar(#"scr_toggleperk", "<dev string:x38>");
+    setDvar(#"scr_toggleperk", "<dev string:x38>");
   }
 
   if(getdvarstring(#"scr_forceevent") != "<dev string:x38>") {
@@ -463,7 +463,7 @@ updatedevsettings() {
       player dodamage(1, player.origin + right);
     }
 
-    setdvar(#"scr_forceevent", "<dev string:x38>");
+    setDvar(#"scr_forceevent", "<dev string:x38>");
   }
 
   if(getdvarstring(#"scr_takeperk") != "<dev string:x38>") {
@@ -474,7 +474,7 @@ updatedevsettings() {
       level.players[i].extraperks[perk] = undefined;
     }
 
-    setdvar(#"scr_takeperk", "<dev string:x38>");
+    setDvar(#"scr_takeperk", "<dev string:x38>");
   }
 
   if(getdvarstring(#"scr_x_kills_y") != "<dev string:x38>") {
@@ -484,7 +484,7 @@ updatedevsettings() {
       thread xkillsy(nametokens[0], nametokens[1]);
     }
 
-    setdvar(#"scr_x_kills_y", "<dev string:x38>");
+    setDvar(#"scr_x_kills_y", "<dev string:x38>");
   }
 
   if(getdvarstring(#"scr_entdebug") != "<dev string:x38>") {
@@ -529,14 +529,14 @@ devgui_spawn_think() {
     self setactionslot(4, "<dev string:x38>");
 
     if(!dpad_left && self buttonpressed("<dev string:x2cc>")) {
-      setdvar(#"scr_playerwarp", "<dev string:x2d8>");
+      setDvar(#"scr_playerwarp", "<dev string:x2d8>");
       dpad_left = 1;
     } else if(!self buttonpressed("<dev string:x2cc>")) {
       dpad_left = 0;
     }
 
     if(!dpad_right && self buttonpressed("<dev string:x2e5>")) {
-      setdvar(#"scr_playerwarp", "<dev string:x2f2>");
+      setDvar(#"scr_playerwarp", "<dev string:x2f2>");
       dpad_right = 1;
     } else if(!self buttonpressed("<dev string:x2e5>")) {
       dpad_right = 0;
@@ -718,7 +718,7 @@ testscriptruntimeerror() {
   }
 
   myerror = getdvarstring(#"scr_testscriptruntimeerror");
-  setdvar(#"scr_testscriptruntimeerror", "<dev string:x3b>");
+  setDvar(#"scr_testscriptruntimeerror", "<dev string:x3b>");
 
   if(myerror == "<dev string:x39e>") {
     testscriptruntimeerrorassert();
@@ -743,8 +743,8 @@ testdvars() {
   tokens = strtok(getdvarstring(#"scr_testdvar"), "<dev string:x107>");
   dvarname = tokens[0];
   dvarvalue = tokens[1];
-  setdvar(dvarname, dvarvalue);
-  setdvar(#"scr_testdvar", "<dev string:x38>");
+  setDvar(dvarname, dvarvalue);
+  setDvar(#"scr_testdvar", "<dev string:x38>");
   thread testdvars();
 }
 
@@ -1006,7 +1006,7 @@ take_all_grenades_and_equipment(player) {
 equipment_dev_gui() {
   set_equipment_list();
   set_grenade_list();
-  setdvar(#"scr_give_equipment", "<dev string:x38>");
+  setDvar(#"scr_give_equipment", "<dev string:x38>");
 
   while(true) {
     wait 0.5;
@@ -1018,7 +1018,7 @@ equipment_dev_gui() {
         level.players[i] giveweapon(level.dev_equipment[devgui_int]);
       }
 
-      setdvar(#"scr_give_equipment", 0);
+      setDvar(#"scr_give_equipment", 0);
     }
   }
 }
@@ -1026,7 +1026,7 @@ equipment_dev_gui() {
 grenade_dev_gui() {
   set_equipment_list();
   set_grenade_list();
-  setdvar(#"scr_give_grenade", "<dev string:x38>");
+  setDvar(#"scr_give_grenade", "<dev string:x38>");
 
   while(true) {
     wait 0.5;
@@ -1038,7 +1038,7 @@ grenade_dev_gui() {
         level.players[i] giveweapon(level.dev_grenade[devgui_int]);
       }
 
-      setdvar(#"scr_give_grenade", 0);
+      setDvar(#"scr_give_grenade", 0);
     }
   }
 }
@@ -1062,7 +1062,7 @@ devstraferunpathdebugdraw() {
 
       if(!isDefined(node)) {
         println("<dev string:x40b>");
-        setdvar(#"scr_devstraferunpathdebugdraw", 0);
+        setDvar(#"scr_devstraferunpathdebugdraw", 0);
         continue;
       }
 

@@ -156,8 +156,9 @@ learjet_turret_challenge_count() {
   self waittill("death", e_attacker, str_mod, str_weapon);
 
   if(isDefined(e_attacker) && isDefined(str_weapon)) {
-    if(str_weapon == "civ_pickup_turret" && e_attacker == level.player)
+    if(str_weapon == "civ_pickup_turret" && e_attacker == level.player) {
       level notify("killed_by_turret");
+    }
   }
 }
 
@@ -370,8 +371,9 @@ zodiac_littlebird_logic(v_offset) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 phantom_truck_killer() {
@@ -431,8 +433,9 @@ gaz_truck_delete() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 phantom_fire_rocket() {
@@ -482,8 +485,9 @@ can_see_buildings_on_zodiac() {
 turn_off_hotel_lights() {
   s_hotel = getstruct("hotel_group_1", "targetname");
 
-  while(!level.player is_player_looking_at(s_hotel.origin, 0.95) || !flag("can_turn_off_lights"))
+  while(!level.player is_player_looking_at(s_hotel.origin, 0.95) || !flag("can_turn_off_lights")) {
     wait 0.05;
+  }
 
   exploder(251);
   wait 0.5;
@@ -493,8 +497,9 @@ turn_off_hotel_lights() {
   for(i = 0; i < 3; i++) {
     a_hotel_lights = getEntArray("hotel_floor_" + a_floor_numbers[i], "targetname");
 
-    foreach(m_hotel_light in a_hotel_lights)
-    m_hotel_light delete();
+    foreach(m_hotel_light in a_hotel_lights) {
+      m_hotel_light delete();
+    }
   }
 
   wait 0.4;
@@ -502,8 +507,9 @@ turn_off_hotel_lights() {
   for(i = 3; i < 6; i++) {
     a_hotel_lights = getEntArray("hotel_floor_" + a_floor_numbers[i], "targetname");
 
-    foreach(m_hotel_light in a_hotel_lights)
-    m_hotel_light delete();
+    foreach(m_hotel_light in a_hotel_lights) {
+      m_hotel_light delete();
+    }
   }
 }
 
@@ -573,13 +579,15 @@ zodiac_jet_flyover() {}
 invasion_read() {
   a_zodiac_littlebird_armada = spawn_vehicles_from_targetname_and_drive("zodiac_littlebird_armada");
 
-  foreach(heli in a_zodiac_littlebird_armada)
-  heli thread delete_vehicle_after_opening();
+  foreach(heli in a_zodiac_littlebird_armada) {
+    heli thread delete_vehicle_after_opening();
+  }
 
   a_intro_building_jets = spawn_vehicles_from_targetname_and_drive("intro_building_jet");
 
-  foreach(jet in a_intro_building_jets)
-  jet thread delete_vehicle_after_opening();
+  foreach(jet in a_intro_building_jets) {
+    jet thread delete_vehicle_after_opening();
+  }
 
   level.player playSound("evt_zodiac_flyby_f");
   level thread temp_building_fx_explosion();
@@ -633,8 +641,9 @@ ac130_fake_move(s_org) {
       self.delete_on_death = 1;
       self notify("death");
 
-      if(!isalive(self))
+      if(!isalive(self)) {
         self delete();
+      }
     }
   }
 }
@@ -698,8 +707,9 @@ beach_main() {
   playsoundatposition("evt_bridge_trucks_by", (-23474, -8785, 322));
   a_beach_intro_trucks = spawn_vehicles_from_targetname_and_drive("intro_civ_trucks");
 
-  foreach(vh_truck in a_beach_intro_trucks)
-  vh_truck thread intro_truck_behaviour();
+  foreach(vh_truck in a_beach_intro_trucks) {
+    vh_truck thread intro_truck_behaviour();
+  }
 
   level thread mason_contextual_kill();
   level thread melee_guard_02();
@@ -747,11 +757,11 @@ beach_walk_speed_adjustment() {
   while(true) {
     n_dist = distance2d(level.player.origin, level.mason.origin);
 
-    if(n_dist < 128)
+    if(n_dist < 128) {
       self setmovespeedscale(self.n_speed_scale_min);
-    else if(n_dist > 256)
+    } else if(n_dist > 256) {
       self setmovespeedscale(self.n_speed_scale_max);
-    else {
+    } else {
       n_speed_scale = linear_map(n_dist, 128, 256, self.n_speed_scale_min, self.n_speed_scale_max);
       self setmovespeedscale(n_speed_scale);
     }
@@ -814,9 +824,9 @@ melee_guard_03() {
   flag_wait("knife_event_finished");
   level thread screen_message_delete();
 
-  if(flag("contextual_melee_success"))
+  if(flag("contextual_melee_success")) {
     run_scene("flare_guy_killed");
-  else {
+  } else {
     run_scene("flare_guy_lives");
     nd_flareguy = getnode("nd_flareguy", "targetname");
     ai_flare_guy setgoalnode(nd_flareguy);
@@ -858,10 +868,11 @@ player_contextual_kill() {
   flag_wait("knife_event_finished");
   flag_set("button_wait_done");
 
-  if(flag("contextual_melee_success"))
+  if(flag("contextual_melee_success")) {
     run_scene("player_knife_kill");
-  else
+  } else {
     run_scene("player_knife_no_kill");
+  }
 
   level thread maps\_audio::switch_music_wait("PANAMA_PRE_HANGAR_FIGHT", 3);
   level thread give_player_godmode_for_timer_after_knife_throw();
@@ -896,8 +907,9 @@ beach_kill_vo() {
   trigger_wait("trig_shh_vo");
   flag_wait("beach_intro_vo_done");
 
-  if(!flag("mason_drain_approach_started"))
+  if(!flag("mason_drain_approach_started")) {
     self say_dialog("maso_shhh_hold_up_0");
+  }
 
   flag_wait("mason_getting_in_drain");
   self say_dialog("maso_take_em_woods_0");
@@ -933,8 +945,9 @@ delete_on_goal() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 play_fxanim_building_rubble() {
@@ -1024,8 +1037,9 @@ parking_lot_backup() {
   flag_wait("parking_lot_laststand");
   a_parking_lot_guys = get_ai_group_ai("parking_lot_guys");
 
-  foreach(guy in a_parking_lot_guys)
-  guy set_spawner_targets("parking_lot_laststand");
+  foreach(guy in a_parking_lot_guys) {
+    guy set_spawner_targets("parking_lot_laststand");
+  }
 
   v_parking_lot_backup_truck = spawn_vehicle_from_targetname_and_drive("parking_lot_backup_truck");
 }
@@ -1035,8 +1049,9 @@ spin_rooftop_fans() {
   fan_array = getEntArray("rooftop_fan", "targetname");
 
   while(true) {
-    foreach(fan in fan_array)
-    fan rotatevelocity((0, randomintrange(400, 450), 0), 0.5);
+    foreach(fan in fan_array) {
+      fan rotatevelocity((0, randomintrange(400, 450), 0), 0.5);
+    }
 
     wait 0.5;
   }
@@ -1100,8 +1115,9 @@ car_slide() {
   run_scene_first_frame("car_slide");
   s_lookat_car_slide = getstruct("lookat_car_slide", "targetname");
 
-  while(!level.player is_player_looking_at(s_lookat_car_slide.origin, 0.95))
+  while(!level.player is_player_looking_at(s_lookat_car_slide.origin, 0.95)) {
     wait 0.05;
+  }
 
   run_scene("car_slide");
 }
@@ -1125,8 +1141,9 @@ table_flip() {
   trigger_wait("trig_table_flip_hall");
   s_window_table_flip = getstruct("lookat_window_table_flip", "targetname");
 
-  while(!level.player is_player_looking_at(s_window_table_flip.origin, 0.95))
+  while(!level.player is_player_looking_at(s_window_table_flip.origin, 0.95)) {
     wait 0.05;
+  }
 
   level notify("window_table_flip");
   m_window = getent("window_3", "targetname");
@@ -1183,8 +1200,9 @@ window_entries() {
   trigger_wait("trig_window_entries");
   s_window_entries = getstruct("lookat_window_entries", "targetname");
 
-  while(!level.player is_player_looking_at(s_window_entries.origin, 0.95))
+  while(!level.player is_player_looking_at(s_window_entries.origin, 0.95)) {
     wait 0.05;
+  }
 
   level thread run_scene("window_mantle");
   level thread run_scene("window_dive");
@@ -1248,8 +1266,9 @@ kill_gunner_once_at_motel() {
 }
 
 gunner_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
-  if(e_attacker != level.player && e_attacker != level.mason)
+  if(e_attacker != level.player && e_attacker != level.mason) {
     n_damage = 0;
+  }
 
   return n_damage;
 }
@@ -1270,10 +1289,11 @@ learjet_turret_truck() {
   vh_learjet_truck waittill("reached_end_node");
   wait 0.25;
 
-  if(getdifficulty() == "easy")
+  if(getdifficulty() == "easy") {
     vh_learjet_truck maps\_turret::set_turret_burst_parameters(1, 2, 3, 4, 1);
-  else
+  } else {
     vh_learjet_truck maps\_turret::set_turret_burst_parameters(3.0, 5.0, 1.0, 2.0, 1);
+  }
 
   vh_learjet_truck enable_turret(1);
   vh_learjet_truck thread vo_on_turret_dead();
@@ -1281,8 +1301,9 @@ learjet_turret_truck() {
   flag_wait("learjet_intro_vo_done");
   level.mason waittill_done_talking();
 
-  if(!flag("learjet_truck_enabled"))
+  if(!flag("learjet_truck_enabled")) {
     level.mason say_dialog("maso_watch_that_truck_0");
+  }
 }
 
 vo_on_turret_dead() {
@@ -1337,8 +1358,9 @@ clean_up_stuff_before_hangar() {
   a_enemies = getaiarray("axis");
 
   foreach(ai_enemy in a_enemies) {
-    if(ai_enemy.origin[1] < -6144)
+    if(ai_enemy.origin[1] < -6144) {
       ai_enemy delete();
+    }
   }
 }
 
@@ -1349,8 +1371,9 @@ general_enemy_vo() {
   a_enemy_vo = random_shuffle(a_enemy_vo);
 
   while(true) {
-    while(isDefined(level.b_enemy_is_talking))
+    while(isDefined(level.b_enemy_is_talking)) {
       wait 0.05;
+    }
 
     level.mason waittill_done_talking();
     a_enemies = getaiarray("axis");
@@ -1358,8 +1381,9 @@ general_enemy_vo() {
     if(a_enemies.size > 0) {
       ai_random = a_enemies[randomint(a_enemies.size)];
 
-      if(isalive(ai_random))
+      if(isalive(ai_random)) {
         ai_random say_dialog(a_enemy_vo[n_array_counter]);
+      }
 
       n_array_counter++;
 
@@ -1382,8 +1406,9 @@ random_shuffle(a_items) {
   while(!(isDefined(b_done_shuffling) && b_done_shuffling)) {
     a_items = array_randomize(a_items);
 
-    if(a_items[0] != item)
+    if(a_items[0] != item) {
       b_done_shuffling = 1;
+    }
 
     wait 0.05;
   }
@@ -1471,13 +1496,15 @@ seal_breaches() {
   run_scene("seal_breach_1");
   ai_seal_a = getent("door_breach_a_1_ai", "targetname");
 
-  if(isDefined(ai_seal_a) && isalive(ai_seal_a))
+  if(isDefined(ai_seal_a) && isalive(ai_seal_a)) {
     ai_seal_a thread waittill_goal_and_die();
+  }
 
   ai_seal_a = getent("door_breach_a_2_ai", "targetname");
 
-  if(isDefined(ai_seal_a) && isalive(ai_seal_a))
+  if(isDefined(ai_seal_a) && isalive(ai_seal_a)) {
     ai_seal_a thread waittill_goal_and_die();
+  }
 }
 
 general_seals() {
@@ -1603,15 +1630,17 @@ cleanup_seals() {
   a_ai_seal1 = getEntArray("seal_group_1_ai", "targetname");
 
   if(isDefined(a_ai_seal1)) {
-    foreach(ai_seal1 in a_ai_seal1)
-    ai_seal1 die();
+    foreach(ai_seal1 in a_ai_seal1) {
+      ai_seal1 die();
+    }
   }
 
   a_ai_seal2 = getEntArray("seal_group_2_ai", "targetname");
 
   if(isDefined(a_ai_seal2)) {
-    foreach(ai_seal2 in a_ai_seal2)
-    ai_seal2 die();
+    foreach(ai_seal2 in a_ai_seal2) {
+      ai_seal2 die();
+    }
   }
 
   spawn_manager_kill("trig_sm_runway_seals");
@@ -1619,29 +1648,33 @@ cleanup_seals() {
   a_ai_hangar_seals = getEntArray("hangar_seals_ai", "targetname");
 
   if(isDefined(a_ai_hangar_seals)) {
-    foreach(ai_hangar_seal in a_ai_hangar_seals)
-    ai_hangar_seal delete();
+    foreach(ai_hangar_seal in a_ai_hangar_seals) {
+      ai_hangar_seal delete();
+    }
   }
 
   a_ai_foreshadow = get_ai_group_ai("foreshadow_seals");
 
   if(isDefined(a_ai_foreshadow)) {
-    foreach(ai_foreshadow in a_ai_foreshadow)
-    ai_foreshadow die();
+    foreach(ai_foreshadow in a_ai_foreshadow) {
+      ai_foreshadow die();
+    }
   }
 
   a_ai_rescue_seals = get_ai_group_ai("rescue_seals");
 
   if(isDefined(a_ai_rescue_seals)) {
-    foreach(ai_rescue_seals in a_ai_rescue_seals)
-    ai_rescue_seals die();
+    foreach(ai_rescue_seals in a_ai_rescue_seals) {
+      ai_rescue_seals die();
+    }
   }
 
   a_ai_standoff_seals = get_ai_group_ai("standoff_seals");
 
   if(isDefined(a_ai_standoff_seals)) {
-    foreach(ai_standoff_seals in a_ai_standoff_seals)
-    ai_standoff_seals die();
+    foreach(ai_standoff_seals in a_ai_standoff_seals) {
+      ai_standoff_seals die();
+    }
   }
 }
 
@@ -1652,8 +1685,9 @@ player_door_kick() {
   simple_spawn("motel_path_runners", ::init_motel_path_runners);
   dead_body_pool = simple_spawn_single("dead_body_in_pool");
 
-  if(isDefined(dead_body_pool))
+  if(isDefined(dead_body_pool)) {
     dead_body_pool thread ragdoll_death();
+  }
 
   flag_set("friendly_door_bash_done");
 }
@@ -1678,8 +1712,9 @@ delete_door_bash_clip(str_flag) {
   wait 1;
   m_door_bash_clip = getent("door_bash_clip", "targetname");
 
-  if(isDefined(m_door_bash_clip))
+  if(isDefined(m_door_bash_clip)) {
     m_door_bash_clip delete();
+  }
 }
 
 intruder_box() {
@@ -1706,12 +1741,14 @@ give_grenade(str_grenade_type) {
   a_player_weapons = self getweaponslist();
 
   foreach(weapon in a_player_weapons) {
-    if(weapontype(weapon) == "grenade")
+    if(weapontype(weapon) == "grenade") {
       arrayinsert(players_grenades, weapon, players_grenades.size);
+    }
   }
 
-  if(players_grenades.size >= 2)
+  if(players_grenades.size >= 2) {
     self takeweapon(players_grenades[1]);
+  }
 
   self giveweapon(str_grenade_type);
   self givemaxammo(str_grenade_type);
@@ -1781,8 +1818,9 @@ shop_door_opens() {
 }
 
 rpg_has_ammo() {
-  if(level.player getweaponammoclip("rpg_sp") || level.player getweaponammostock("rpg_sp"))
+  if(level.player getweaponammoclip("rpg_sp") || level.player getweaponammostock("rpg_sp")) {
     return true;
+  }
 
   return false;
 }
@@ -1831,11 +1869,13 @@ mcknight_clear_pool() {
   a_enemies_near_pool = getEntArray("motel_path_runners_ai", "targetname");
 
   foreach(ai_near_pool in a_enemies_near_pool) {
-    while(flag("mcknight_sniping"))
+    while(flag("mcknight_sniping")) {
       wait 0.05;
+    }
 
-    if(isalive(ai_near_pool))
+    if(isalive(ai_near_pool)) {
       sniper_shoot(ai_near_pool);
+    }
 
     wait(randomfloatrange(2.1, 3.9));
   }
@@ -1874,8 +1914,9 @@ temp_cleanup_func() {
   level.mcknight_sniper delete();
   ai = getaiarray();
 
-  foreach(guy in ai)
-  guy die();
+  foreach(guy in ai) {
+    guy die();
+  }
 }
 
 monitor_player_distance() {
@@ -1883,7 +1924,7 @@ monitor_player_distance() {
 
   while(true) {
     if(distancesquared(level.player.origin, level.mason.origin) <= 750) {
-      setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
+      setDvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
       level notify("mission failed");
       maps\_utility::missionfailedwrapper();
     }
@@ -1896,7 +1937,7 @@ hotel_path_fail() {
   trigger_wait("trig_hotel_warn");
   level.player thread display_hint("hangar_warning");
   trigger_wait("trig_hotel_fail");
-  setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
+  setDvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -1913,8 +1954,9 @@ learjet_challenge_think(m_fxanim_learjet) {
   flag_set("learjet_destroyed");
   level notify("jet_exp_audio");
 
-  if(level.player == e_attacker)
+  if(level.player == e_attacker) {
     flag_set("player_destroyed_learjet");
+  }
 
   self hide();
   m_fxanim_learjet show();
@@ -1943,23 +1985,26 @@ seals_destroy_learjet() {
   createthreatbiasgroup("learjet_runway_seals");
   createthreatbiasgroup("learjet_intro_pdfs");
 
-  foreach(ai_seal in a_learjet_rpg_seals)
-  ai_seal setthreatbiasgroup("learjet_runway_seals");
+  foreach(ai_seal in a_learjet_rpg_seals) {
+    ai_seal setthreatbiasgroup("learjet_runway_seals");
+  }
 
   foreach(ai_intro_pdf in a_learjet_intro_pdfs) {
     ai_intro_pdf setthreatbiasgroup("learjet_intro_pdfs");
     ai_intro_pdf magic_bullet_shield();
 
-    if(isDefined(ai_intro_pdf.script_noteworthy) && ai_intro_pdf.script_noteworthy == "learjet_intro_retreat")
+    if(isDefined(ai_intro_pdf.script_noteworthy) && ai_intro_pdf.script_noteworthy == "learjet_intro_retreat") {
       ai_intro_pdf_retreat = ai_intro_pdf;
+    }
   }
 
   setthreatbias("learjet_runway_seals", "learjet_intro_pdfs", 100);
   ai_intro_pdf_retreat thread learjet_intro_ai_retreat();
   trigger_wait("trig_learjet_truck");
 
-  foreach(ai_intro_pdf in a_learjet_intro_pdfs)
-  ai_intro_pdf stop_magic_bullet_shield();
+  foreach(ai_intro_pdf in a_learjet_intro_pdfs) {
+    ai_intro_pdf stop_magic_bullet_shield();
+  }
 
   trigger_wait("seal_shoot_learjet");
   setthreatbias("learjet_runway_seals", "learjet_intro_pdfs", 0);
@@ -1967,8 +2012,9 @@ seals_destroy_learjet() {
 
   foreach(ai_intro_pdf in a_learjet_intro_pdfs) {
     if(isalive(ai_intro_pdf)) {
-      if(!isDefined(ai_intro_pdf.script_noteworthy))
+      if(!isDefined(ai_intro_pdf.script_noteworthy)) {
         ai_intro_pdf.goalradius = 2048;
+      }
 
       ai_intro_pdf setthreatbiasgroup("learjet_enemies");
     }
@@ -1985,8 +2031,9 @@ seals_destroy_learjet() {
 
   wait 3;
 
-  foreach(seal in a_learjet_rpg_seals)
-  seal.ignoreme = 1;
+  foreach(seal in a_learjet_rpg_seals) {
+    seal.ignoreme = 1;
+  }
 }
 
 learjet_intro_ai_retreat() {
@@ -2036,8 +2083,9 @@ pdf_death_count_timeout() {
   wait 15;
 
   if(level.player hasperk("specialty_trespasser")) {
-    if(flag("lock_breaker_started"))
+    if(flag("lock_breaker_started")) {
       flag_wait_or_timeout("hangar_doors_closing", 20);
+    }
   }
 
   flag_set("remove_hangar_god_mode");
@@ -2066,8 +2114,9 @@ intro_truck_behaviour() {
   }
 
   foreach(civ in a_intro_civ_truck_guys) {
-    if(isDefined(civ))
+    if(isDefined(civ)) {
       civ delete();
+    }
   }
 
   self delete();
@@ -2085,8 +2134,9 @@ kill_all_parkinglot() {
   a_ai_guys = getaiarray("axis");
 
   foreach(ai_guy in a_ai_guys) {
-    if(isDefined(ai_guy))
+    if(isDefined(ai_guy)) {
       ai_guy die();
+    }
   }
 }
 
@@ -2096,8 +2146,9 @@ kill_non_visable_parkinglot() {
 
   foreach(ai_guy in a_ai_guys) {
     if(isDefined(ai_guy)) {
-      if(!level.player is_player_looking_at(ai_guy.origin))
+      if(!level.player is_player_looking_at(ai_guy.origin)) {
         ai_guy die();
+      }
     }
   }
 
@@ -2181,8 +2232,9 @@ littlebird_strafe_parkinglot() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 littlebird_kill_troops() {
@@ -2193,8 +2245,9 @@ littlebird_kill_troops() {
 
     foreach(ai_guy in a_ai_guys) {
       if(isDefined(ai_guy)) {
-        if(distance2dsquared(self.origin, ai_guy.origin) < 2250000)
+        if(distance2dsquared(self.origin, ai_guy.origin) < 2250000) {
           ai_guy die();
+        }
       }
     }
 
@@ -2219,8 +2272,9 @@ littlebird_fireat_cessna(v_goal) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 radio_antenna_explosion() {
@@ -2327,8 +2381,9 @@ runway_seals() {
   flag_wait("setup_runway_standoff");
   a_runway_cessnas = spawn_vehicles_from_targetname("runway_cessnas");
 
-  foreach(cessna in a_runway_cessnas)
-  cessna thread setup_runway_cessnas();
+  foreach(cessna in a_runway_cessnas) {
+    cessna thread setup_runway_cessnas();
+  }
 
   a_runway_hangar_cessna = spawn_vehicles_from_targetname("runway_hangar_cessna");
 
@@ -2366,8 +2421,9 @@ runway_seals() {
   simple_spawn("rooftop_pdf_slider2");
   standoff_seals = get_ai_group_ai("standoff_seals");
 
-  foreach(seal in standoff_seals)
-  seal thread kill_off_standoff_seals();
+  foreach(seal in standoff_seals) {
+    seal thread kill_off_standoff_seals();
+  }
 }
 
 red_airplane_hide_and_show() {
@@ -2415,14 +2471,15 @@ airfield_littlebird_logic(v_offset) {
   self setspeed(25, 20, 15);
   flag_wait("seal_encounter_mason_started");
 
-  if(self.targetname == "littlebird_airfield_1")
+  if(self.targetname == "littlebird_airfield_1") {
     wait 1;
-  else if(self.targetname == "littlebird_airfield_2")
+  } else if(self.targetname == "littlebird_airfield_2") {
     wait 2;
-  else if(self.targetname == "littlebird_airfield_3")
+  } else if(self.targetname == "littlebird_airfield_3") {
     wait 2.6;
-  else
+  } else {
     wait 3.7;
+  }
 
   self setvehgoalpos(s_goal1.origin + v_offset, 0);
   self waittill_any("goal", "near_goal");
@@ -2436,8 +2493,9 @@ airfield_littlebird_logic(v_offset) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 jets_flyby_hangar_stairs() {
@@ -2463,8 +2521,9 @@ phantom_hangar_stair_logic() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 phantom_rooftop_entrance() {
@@ -2493,17 +2552,19 @@ ambient_aircraft_flightpath(s_start) {
     self setvehgoalpos(s_goal.origin);
     self waittill_any("goal", "near_goal");
 
-    if(isDefined(s_goal.target))
+    if(isDefined(s_goal.target)) {
       s_goal = getstruct(s_goal.target, "targetname");
-    else
+    } else {
       break;
+    }
   }
 
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 ambient_phantoms() {
@@ -2539,8 +2600,9 @@ phantom_rooftop_logic(s_spawnpt) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 ambient_littlebirds() {
@@ -2575,21 +2637,24 @@ littlebird_circle(s_start) {
       self.delete_on_death = 1;
       self notify("death");
 
-      if(!isalive(self))
+      if(!isalive(self)) {
         self delete();
+      }
     }
 
-    if(isDefined(s_goal.target))
+    if(isDefined(s_goal.target)) {
       s_goal = getstruct(s_goal.target, "targetname");
-    else
+    } else {
       break;
+    }
   }
 
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 littlebird_fire_indiscriminately() {
@@ -2609,7 +2674,7 @@ sniper_victim() {
 runway_standoff_fail_timeout() {
   level endon("player_at_hatch");
   wait 35;
-  setdvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
+  setDvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -2627,8 +2692,9 @@ init_standoff_seal() {
   self stopanimscripted();
   self magic_bullet_shield();
 
-  if(cointoss())
+  if(cointoss()) {
     self.ignoreme = 1;
+  }
 
   wait 5;
   self.ignoreme = 0;
@@ -2712,8 +2778,9 @@ runway_hangar_mason() {
     level.mason setgoalentity(ai_shotgun);
     level.mason thread force_goal(undefined, 100, 0, undefined, 1);
 
-    while(isalive(ai_shotgun))
+    while(isalive(ai_shotgun)) {
       wait 0.5;
+    }
 
     level.mason thread force_goal(nd_mason_hangar, 64, 1, undefined, 1);
   } else
@@ -2738,8 +2805,9 @@ runway_hangar_mason() {
   trig_color_leer_jet notify("trigger");
   trigger = getent("trigger_hangar_rpg", "targetname");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger delete();
+  }
 }
 
 mason_waiting_for_player_vo() {
@@ -2783,8 +2851,9 @@ vo_seals_under_fire() {
     level.ai_seal say_dialog("reds_find_cover_0", 1);
   }
 
-  if(isDefined(level.ai_pdf))
+  if(isDefined(level.ai_pdf)) {
     level.ai_pdf say_dialog("pdf_don_t_let_them_get_o_0", 1);
+  }
 
   flag_set("runway_vo_done");
 }
@@ -2857,8 +2926,9 @@ talker_hangar_spawn_func() {
 rooftop_tracers() {
   a_ai_seals = getEntArray("hangar_seals_ai", "targetname");
 
-  foreach(ai_seal in a_ai_seals)
-  ai_seal thread fire_at_rooftop();
+  foreach(ai_seal in a_ai_seals) {
+    ai_seal thread fire_at_rooftop();
+  }
 }
 
 fire_at_rooftop() {
@@ -2872,8 +2942,9 @@ fire_at_rooftop() {
   while(true) {
     e_target = spawn("script_model", s_m203_end_1.origin + (0, randomintrange(-300, 300), 0));
 
-    if(cointoss())
+    if(cointoss()) {
       e_target = spawn("script_model", s_m203_end_2.origin + (0, randomintrange(-300, 300), 0));
+    }
 
     e_target setModel("tag_origin");
     self shoot_at_target(e_target, "tag_origin", 0, randomintrange(4, 7));
@@ -2893,16 +2964,18 @@ spawn_rooftop() {
   ai_last = simple_spawn_single("rooftop_pdf_last", ::rooftop_last_logic);
   wait 3;
 
-  if(isDefined(ai_last))
+  if(isDefined(ai_last)) {
     level thread sniper_shoot(ai_last);
+  }
 }
 
 go_sliders() {
   ai_engager = getent("rooftop_pdf_engager_ai", "targetname");
   nd_rooftop_pdf_engager = getnode("nd_rooftop_pdf_engager", "targetname");
 
-  if(isDefined(ai_engager))
+  if(isDefined(ai_engager)) {
     ai_engager thread force_goal(nd_rooftop_pdf_engager, 16);
+  }
 
   ai_slide_guy_1 = getent("rooftop_pdf_slider1_ai", "targetname");
 
@@ -2949,8 +3022,9 @@ sniper_logic() {
   wait 0.5;
   ai_victim = getent("rooftop_pdf_sniper_victim_ai", "targetname");
 
-  if(isDefined(ai_victim))
+  if(isDefined(ai_victim)) {
     level thread sniper_shoot(ai_victim);
+  }
 
   flag_wait("rooftop_spawned");
   wait 3;
@@ -2962,8 +3036,9 @@ sniper_logic() {
     if(a_ai_targets.size) {
       ai_target = a_ai_targets[randomint(a_ai_targets.size)];
 
-      if(isDefined(ai_target))
+      if(isDefined(ai_target)) {
         level thread sniper_shoot(ai_target);
+      }
     }
 
     wait(randomfloatrange(3.5, 4.5));
@@ -2986,8 +3061,9 @@ sniper_shoot(ai_target) {
   playsoundatposition("evt_sniper_shot_front", s_sniper.origin);
   playsoundatposition("evt_sniper_impacts", v_target);
 
-  if(isalive(ai_target))
+  if(isalive(ai_target)) {
     ai_target die();
+  }
 
   wait 0.2;
   e_trail delete();
@@ -3061,7 +3137,7 @@ rooftop_fail_timeout() {
   level endon("player_near_skylight");
   level endon("player_in_hangar");
   wait 25;
-  setdvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
+  setDvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -3144,16 +3220,18 @@ hangar_pdf_seals() {
   a_hangar_seals = get_ai_group_ai("hangar_seals");
 
   for(i = 0; i < a_hangar_seals.size; i++) {
-    if(i < 2)
+    if(i < 2) {
       a_hangar_seals[i].script_noteworthy = "cessna_seal_" + i;
+    }
 
     a_hangar_seals[i] thread seals_storm_hangar(nd_delete_seals);
   }
 
   a_hangar_pdf = get_ai_group_ai("hangar_pdf");
 
-  foreach(pdf in a_hangar_pdf)
-  pdf thread pdf_hangar_fallback();
+  foreach(pdf in a_hangar_pdf) {
+    pdf thread pdf_hangar_fallback();
+  }
 
   while(true) {
     a_hangar_pdf = get_ai_group_ai("hangar_pdf");
@@ -3171,11 +3249,13 @@ hangar_pdf_seals() {
   nd_delete_seal_group_1 = getnode("nd_delete_seal_group_1", "targetname");
   nd_delete_seal_group_2 = getnode("nd_delete_seal_group_2", "targetname");
 
-  foreach(seal in a_seal_group_1)
-  seal thread stack_up_and_delete(nd_delete_seal_group_1);
+  foreach(seal in a_seal_group_1) {
+    seal thread stack_up_and_delete(nd_delete_seal_group_1);
+  }
 
-  foreach(seal in a_seal_group_2)
-  seal thread stack_up_and_delete(nd_delete_seal_group_2);
+  foreach(seal in a_seal_group_2) {
+    seal thread stack_up_and_delete(nd_delete_seal_group_2);
+  }
 }
 
 handle_pdf_hangar_movement() {
@@ -3186,8 +3266,9 @@ handle_pdf_hangar_movement() {
   trigger_use("triggercolor_pdf_hangar_retreat");
   a_ai_guys = get_ai_group_ai("hangar_pdf");
 
-  foreach(ai_guy in a_ai_guys)
-  ai_guy thread force_goal(undefined, 64, 1, undefined, 1);
+  foreach(ai_guy in a_ai_guys) {
+    ai_guy thread force_goal(undefined, 64, 1, undefined, 1);
+  }
 }
 
 seal_hangar_entry() {

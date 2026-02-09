@@ -106,7 +106,7 @@ spawnregenpod(var_0) {
     if(!isDefined(var_2) && isDefined(self.final_attacker))
       var_2 = self.final_attacker;
 
-    if(isDefined(var_2) && isplayer(var_2)) {
+    if(isDefined(var_2) && isPlayer(var_2)) {
       var_4 = int(level.alien_types["brute"].attributes["reward"] * 2);
       maps\mp\alien\_gamescore::givekillreward(var_2, var_4, "large", "soft");
     }
@@ -132,7 +132,7 @@ regenpoddamagehandler() {
   while(isDefined(self.pod_coll_model) && self.pod_coll_model.health > 100000) {
     self.pod_coll_model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(isDefined(var_2) && isplayer(var_2)) {
+    if(isDefined(var_2) && isPlayer(var_2)) {
       var_2 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("standard");
       var_0 = var_2;
     }
@@ -997,7 +997,7 @@ spit_aoe_cloud_damage(var_0, var_1) {
   for(;;) {
     var_1 waittill("trigger", var_3);
 
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
     if(!isalive(var_3)) {
@@ -1375,7 +1375,7 @@ throwegg(var_0, var_1) {
       return;
     }
   } else {
-    if(isDefined(var_10) && isplayer(var_10)) {
+    if(isDefined(var_10) && isPlayer(var_10)) {
       var_15 = level.alien_types["brute"].attributes["reward"];
       maps\mp\alien\_gamescore::givekillreward(var_10, var_15, "large", "soft");
     }
@@ -1591,7 +1591,7 @@ process_damage_feedback() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isDefined(var_1) && isplayer(var_1))
+    if(isDefined(var_1) && isPlayer(var_1))
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("standard");
   }
 }

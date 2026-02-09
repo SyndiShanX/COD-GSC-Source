@@ -16,16 +16,16 @@ MAX_DRONES_CIVILIAN = 99999;
 DEATH_DELETE_FOV = 0.5; // cos(60)
 
 initGlobals() {
-  //############################################################################
-  //############################################################################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   // NEVER CALL THIS FUNCTION MANUALLY, THIS IS MEANT TO BE CALLED INTERNALLY!!!
   // NEVER CALL THIS FUNCTION MANUALLY, THIS IS MEANT TO BE CALLED INTERNALLY!!!
   // NEVER CALL THIS FUNCTION MANUALLY, THIS IS MEANT TO BE CALLED INTERNALLY!!!
-  //############################################################################
-  //############################################################################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-  if(getdvar("debug_drones") == "")
-    setdvar("debug_drones", "0");
+  if(getDvar("debug_drones") == "")
+    setDvar("debug_drones", "0");
 
   assert(isDefined(level.drone_anims));
 
@@ -232,7 +232,6 @@ drone_drop_real_weapon_on_death() {
     gun.angles = ang;
     gun.origin = org;
   }
-
 }
 
 drone_idle(lastNode, moveToDest) {
@@ -243,7 +242,6 @@ drone_idle(lastNode, moveToDest) {
     // Otherwise, just loop standard idle animation
     self drone_play_looping_anim(level.drone_anims[self.team]["stand"]["idle"], 1);
   }
-
 }
 
 drone_get_goal_loc_with_arrival(dist, node) {
@@ -401,7 +399,6 @@ drone_fire_randomly() {
     self drone_shoot();
     wait(randomfloatrange(.15, .75));
   }
-
 }
 
 drone_shoot() {
@@ -585,9 +582,7 @@ drone_move() {
     }
 
     // Calculate how far and what direction the lookahead path point should move
-    //--------------------------------------------------------------------------
-
-    // find point on real path where character is
+    //-------------------------------------------------------------------------- // find point on real path where character is
     vec1 = nodes[currentNode_LookAhead]["vec"];
     vec2 = (self.origin - nodes[currentNode_LookAhead]["origin"]);
     distanceFromPoint1 = vectorDot(vectorNormalize(vec1), vec2);
@@ -627,7 +622,7 @@ drone_move() {
         traceOrg2 = nodes[nodes.size - 1]["origin"] - (0, 0, TRACE_HEIGHT);
         moveToDest = physicstrace(traceOrg1, traceOrg2);
 
-        if(getdvar("debug_drones") == "1") {
+        if(getDvar("debug_drones") == "1") {
           thread draw_line_for_time(traceOrg1, traceOrg2, 1, 1, 1, loopTime);
           thread draw_line_for_time(self.origin, moveToDest, 0, 0, 1, loopTime);
         }
@@ -654,11 +649,8 @@ drone_move() {
 
       assert(isDefined(nodes[currentNode_LookAhead]));
     }
-    //-------------------------------------------------------------------------
-
-    // Move the lookahead point down along it's path
-    //----------------------------------------------
-    assert(isDefined(nodes[currentNode_LookAhead]["vec"]));
+    //------------------------------------------------------------------------- // Move the lookahead point down along it's path
+    //---------------------------------------------- assert(isDefined(nodes[currentNode_LookAhead]["vec"]));
     assert(isDefined(nodes[currentNode_LookAhead]["vec"][0]));
     assert(isDefined(nodes[currentNode_LookAhead]["vec"][1]));
     assert(isDefined(nodes[currentNode_LookAhead]["vec"][2]));
@@ -670,36 +662,28 @@ drone_move() {
     traceOrg2 = lookaheadPoint - (0, 0, TRACE_HEIGHT);
     lookaheadPoint = physicstrace(traceOrg1, traceOrg2);
 
-    if(getdvar("debug_drones") == "1") {
+    if(getDvar("debug_drones") == "1") {
       thread draw_line_for_time(traceOrg1, traceOrg2, 1, 1, 1, loopTime);
       thread draw_point(lookaheadPoint, 1, 0, 0, 16, loopTime);
       println(lookaheadDistanceFromNode + "/" + nodes[currentNode_LookAhead]["dist"] + " units forward from node[" + currentNode_LookAhead + "]");
     }
-    //---------------------------------------------
-
-    //Rotate character to face the lookahead point
-    //--------------------------------------------
-    assert(isDefined(lookaheadPoint));
+    //--------------------------------------------- //Rotate character to face the lookahead point
+    //-------------------------------------------- assert(isDefined(lookaheadPoint));
     characterFaceDirection = VectorToAngles(lookaheadPoint - self.origin);
     assert(isDefined(characterFaceDirection));
     assert(isDefined(characterFaceDirection[0]));
     assert(isDefined(characterFaceDirection[1]));
     assert(isDefined(characterFaceDirection[2]));
     self rotateTo((0, characterFaceDirection[1], 0), loopTime);
-    //--------------------------------------------
-
-    //Move the character in the direction of the lookahead point
-    //----------------------------------------------------------
-    characterDistanceToMove = (DRONE_RUN_SPEED * loopTime * self.moveplaybackrate);
+    //-------------------------------------------- //Move the character in the direction of the lookahead point
+    //---------------------------------------------------------- characterDistanceToMove = (DRONE_RUN_SPEED * loopTime * self.moveplaybackrate);
     moveVec = vectorNormalize(lookaheadPoint - self.origin);
     desiredPosition = vector_multiply(moveVec, characterDistanceToMove);
     desiredPosition = desiredPosition + self.origin;
-    if(getdvar("debug_drones") == "1")
+    if(getDvar("debug_drones") == "1")
       thread draw_line_for_time(self.origin, desiredPosition, 0, 0, 1, loopTime);
     self moveTo(desiredPosition, loopTime);
-    //----------------------------------------------------------
-
-    wait loopTime;
+    //---------------------------------------------------------- wait loopTime;
   }
 
   self thread drone_idle();
@@ -708,7 +692,7 @@ drone_move() {
 }
 
 getPathArray(firstTargetName, initialPoint) {
-  //#########################################################################################################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   //	make an array of all the points along the spline starting with the characters current position, //	then starting with the point with the passed in targetname
   //
   //	information stored in array:
@@ -718,7 +702,7 @@ getPathArray(firstTargetName, initialPoint) {
   //	vec	- vector to the next node ( if there is not a next node, the vector will be the same as the previous node )
   //	script_noteworthy - script_noteworthy of the node if defined
   //
-  //#########################################################################################################
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   usingNodes = true;
   assert(isDefined(firstTargetName));

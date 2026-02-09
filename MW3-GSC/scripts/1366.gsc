@@ -6,15 +6,12 @@
 _id_417C(var_0, var_1) {
   if(!isDefined(level._id_417D)) {
     level._id_417D = [];
-
   }
   if(!isDefined(level._id_417D[var_0])) {
     level._id_417D[var_0] = [];
-
   }
   if(isDefined(level._id_417D[var_0][var_1])) {
     return 1;
-
   }
   level._id_417D[var_0][var_1] = 1;
   return 0;

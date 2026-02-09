@@ -19,7 +19,6 @@ main() {
       break;
   }
 }
-
 precache() {
   character\c_usa_nixon_zt::precache();
   character\c_cub_castro_zt::precache();

@@ -389,7 +389,7 @@ function bc_grenadewatcher() {
   while(true) {
     self waittill("grenade_fire", grenade, weapon);
     if(weapon.name == "frag_grenade" || weapon.name == "frag_grenade_invisible") {
-      if(randomintrange(0, 100) <= 80 && !isplayer(self)) {
+      if(randomintrange(0, 100) <= 80 && !isPlayer(self)) {
         level thread bc_makeline(self, "grenade_toss");
       }
       level thread bc_incominggrenadewatcher(self, grenade);
@@ -433,7 +433,7 @@ function bc_stickygrenadewatcher() {
 function function_897d1130() {
   self endon("disconnect");
   self waittill("death", attacker, meansofdeath);
-  if(isDefined(attacker) && !isplayer(attacker)) {
+  if(isDefined(attacker) && !isPlayer(attacker)) {
     if(meansofdeath == "MOD_MELEE") {
       attacker notify("bhtn_action_notify", "meleeKill");
     } else {
@@ -462,11 +462,11 @@ function bc_death() {
       }
       self thread do_sound(soundalias, 1);
     }
-    if(isDefined(self.sndissniper) && self.sndissniper && isDefined(attacker) && !isplayer(attacker)) {
+    if(isDefined(self.sndissniper) && self.sndissniper && isDefined(attacker) && !isPlayer(attacker)) {
       level thread bc_makeline(attacker, "sniper_kill");
       return;
     }
-    if(isDefined(attacker) && !isplayer(attacker)) {
+    if(isDefined(attacker) && !isPlayer(attacker)) {
       if(meansofdeath == "MOD_MELEE") {
         attacker notify("bhtn_action_notify", "meleeKill");
       } else {

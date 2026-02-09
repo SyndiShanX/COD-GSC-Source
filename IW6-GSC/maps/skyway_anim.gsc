@@ -1109,7 +1109,7 @@ breach_enemy_player_stab(var_0) {
   level.player dodamage(level.player.health - 1, var_0 getEye(), var_0, var_0);
   level.player disableweapons();
   level notify("failure");
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   maps\_utility::missionfailedwrapper();
 }
 

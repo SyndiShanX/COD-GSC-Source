@@ -78,7 +78,6 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
     if(getdvarint(#"zm_debug_ee", 0)) {
       thread function_28aee167(name);
     }
-
   }
 
   ee = level._ee[name];
@@ -117,7 +116,6 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
     thread function_b3da1a16(ee.name, new_step.name);
     thread devgui_think();
   }
-
 }
 
 start(name, var_9d8cf7f = 0) {
@@ -272,7 +270,6 @@ run_step(ee, step, var_5ea5c94d) {
     iprintlnbold("<dev string:x244>" + function_9e72a96(ee.name) + "<dev string:x306>");
     println("<dev string:x244>" + function_9e72a96(ee.name) + "<dev string:x306>");
   }
-
 }
 
 function_3f795dc3(ee, step, var_5ea5c94d) {
@@ -406,7 +403,7 @@ devgui_think() {
   while(true) {
     wait 1;
     cmd = getdvarstring(#"hash_319d902ea18eb39");
-    setdvar(#"hash_319d902ea18eb39", "<dev string:x45c>");
+    setDvar(#"hash_319d902ea18eb39", "<dev string:x45c>");
     cmd = strtok(cmd, "<dev string:x2c4>");
 
     if(cmd.size == 0) {

@@ -48,7 +48,7 @@ init_and_run(players) {
 }
 
 nightVision_Toggle() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   self endon("death");
 
@@ -68,7 +68,7 @@ nightVision_check(player) {
 }
 
 nightVision_On() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   // wait for the goggles to come down over the eyes
 
@@ -129,7 +129,7 @@ stop_reflector_effect() {
 }
 
 nightVision_Off() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   self.nightVision_Started = undefined;
 
   // wait until the goggles pull off
@@ -183,13 +183,13 @@ doShellshock()
 */
 
 ShouldBreakNVGHintPrint() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   return isDefined(self.nightVision_Started);
 }
 
 should_break_disable_nvg_print() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   return !isDefined(self.nightVision_Started);
 }

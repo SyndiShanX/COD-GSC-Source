@@ -178,7 +178,7 @@ function calcspawnorigin(origin, angles) {
     endpoint = startpoint + (vectorscale(anglesToForward((0, angles[1], 0) + testangles[i]), 70));
     mask = 1 | 2;
     trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
-    if(isDefined(trace["entity"]) && isplayer(trace["entity"])) {
+    if(isDefined(trace["entity"]) && isPlayer(trace["entity"])) {
       continue;
     }
     if(trace["fraction"] > bestfrac) {
@@ -204,7 +204,7 @@ function calcspawnorigin(origin, angles) {
 }
 
 function activatesentinel(killstreaktype) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   player = self;
   if(!isnavvolumeloaded()) {
     iprintlnbold("");
@@ -296,7 +296,7 @@ function watchgameended() {
 
 function startsentinelremotecontrol(sentinel) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
   sentinel usevehicle(player, 0);
   sentinel clientfield::set("vehicletransition", 1);
   sentinel thread audio::sndupdatevehiclecontext(1);
@@ -378,7 +378,7 @@ function watchdeath() {
   sentinel notify("sentinel_shutdown");
   attacker = self[[level.figure_out_attacker]](attacker);
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       challenges::destroyedaircraft(attacker, weapon, sentinel.controlled === 1);
       attacker challenges::addflyswatterstat(weapon, self);
       attacker addweaponstat(weapon, "destroy_aitank_or_setinel", 1);

@@ -800,7 +800,7 @@ rt_ally_dam_watch() {
   self.v.invincible = 0;
   wait(randomintrange(3, 5));
   self waittill("damage");
-  setdvar("ui_deadquote", &"SKYWAY_HESH_BY_HELOS");
+  setDvar("ui_deadquote", &"SKYWAY_HESH_BY_HELOS");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -896,7 +896,7 @@ rt_respawn_ammo() {
     wait 0.05;
 
   var_0 = getdvarint("rt_helo_lives", 0);
-  setdvar("rt_helo_lives", var_0 + 1);
+  setDvar("rt_helo_lives", var_0 + 1);
 
   if(getdvarint("rt_helo_lives", 0) > 1) {
     var_1 = level.player getweaponslistprimaries();

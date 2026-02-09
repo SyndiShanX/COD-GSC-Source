@@ -26,7 +26,7 @@ __init__() {
   }
 
   level.var_160dcfef.var_193db709 = [];
-  setdvar(#"hash_8d4e58d73e3f876", 0);
+  setDvar(#"hash_8d4e58d73e3f876", 0);
 }
 
 register_deployable(weapon, var_c0064c29, var_94b4fa08 = undefined, placehintstr = undefined, var_a39cb3db = undefined, var_fe12c0d9 = undefined) {

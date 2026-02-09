@@ -60,7 +60,7 @@ kill_zombies(var_0, var_1, var_2) {
   var_0 endon("stop_trap");
   for(;;) {
     var_0 waittill("trigger", var_3);
-    if(isplayer(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3)) {
+    if(isPlayer(var_3) && !scripts\cp\cp_laststand::player_in_laststand(var_3)) {
       var_3 dodamage(var_3.health + 100, var_3.origin);
       continue;
     }

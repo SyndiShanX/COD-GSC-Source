@@ -106,7 +106,7 @@ func_254E() {
   level.rave_dancing_zombies = [];
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       continue;
     }
 

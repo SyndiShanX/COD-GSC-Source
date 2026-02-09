@@ -131,7 +131,7 @@ check_limit_type(type, count) {
 }
 
 print_org(fxcommand, fxId, fxPos, waittime) {
-  if(GetDvar("debug") == "1") {
+  if(getDvar("debug") == "1") {
     println("{");
     println("\"origin\" \"" + fxPos[0] + " " + fxPos[1] + " " + fxPos[2] + "\"");
     println("\"classname\" \"script_model\"");
@@ -221,7 +221,7 @@ create_loopsound() {
   if(self.v["soundalias"] == "nil") {
     return;
   }
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   culled = false;
@@ -258,7 +258,7 @@ create_interval_sound() {
   ender = undefined;
   runner = self;
 
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
   if((isDefined(self.v["stopable"]) && self.v["stopable"]) || level.createFX_enabled) {
@@ -267,7 +267,6 @@ create_interval_sound() {
       ender = "death";
     } else
       ender = "stop_loop";
-
   }
 
   runner thread loop_fx_sound_interval_with_angles(self.v["soundalias"], self.v["origin"], self.v["angles"], ender, undefined, self.v["delay_min"], self.v["delay_max"]);
@@ -558,7 +557,7 @@ OneShotfxthread() {
 CONST_MAX_REACTIVE_SOUND_ENTS = 4;
 CONST_NEXT_PLAY_TIME = 3000;
 add_reactive_fx() {
-  if(!isSP() && GetDVar("createfx") == "") {
+  if(!isSP() && getDvar("createfx") == "") {
     return;
   }
 
@@ -577,7 +576,7 @@ add_reactive_fx() {
 
 reactive_fx_thread() {
   if(!isSp()) {
-    if(GetDvar("createfx") == "on") {
+    if(getDvar("createfx") == "on") {
       flag_wait("createfx_started");
     }
   }

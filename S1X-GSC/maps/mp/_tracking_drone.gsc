@@ -191,7 +191,6 @@ createTrackingDrone(weaponName, bRecreate, startPosition, startAngles, DroneType
     } else {
       startPos = self.origin + targetOffset;
     }
-
   } else {
     startPos = startPosition;
     targetPos = startPosition;
@@ -324,7 +323,6 @@ trackingDrone_enemy_lightFX() {
       self childthread trackingDrone_lightFX(level.trackingDroneSettings.fxId_enemy_light, player);
       wait(0.2);
     }
-
   }
 }
 

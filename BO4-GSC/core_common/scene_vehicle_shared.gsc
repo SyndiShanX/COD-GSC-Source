@@ -48,5 +48,4 @@ class cscenevehicle: csceneobject {
       }
     }
   }
-
 }

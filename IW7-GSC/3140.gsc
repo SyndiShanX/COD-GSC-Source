@@ -70,7 +70,7 @@ func_35C1(var_0) {
       break;
 
     case "lookat":
-      if(isplayer(self.melee.target)) {
+      if(isPlayer(self.melee.target)) {
         thread func_B010();
       }
       break;
@@ -146,7 +146,7 @@ func_8481() {
   var_3 = ["left", "right", "forward"];
   self.melee.var_1180D = var_3[randomint(var_3.size)];
   var_4 = (0, 229, 180);
-  if(isplayer(self.melee.target)) {
+  if(isPlayer(self.melee.target)) {
     switch (self.melee.var_1180D) {
       case "left":
         var_4 = (15, 229, 180);
@@ -163,7 +163,7 @@ func_8481() {
   }
 
   var_2 linkto(self, "j_wrist_z_ri", (34, 3.4, 43.752), var_4);
-  if(isplayer(self.melee.target)) {
+  if(isPlayer(self.melee.target)) {
     func_35DC();
     level.player dodamage(level.player.health * 0.6, self.origin, self);
     level.player.ignoreme = 1;
@@ -212,7 +212,7 @@ func_11831() {
     return;
   }
 
-  if(isplayer(var_5)) {
+  if(isPlayer(var_5)) {
     var_6 = var_5;
     var_7 = vectortoangles(-1 * var_3);
     switch (self.melee.var_1180D) {

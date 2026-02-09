@@ -50,7 +50,7 @@ on_player_killed() {
   attacker = self.laststandparams.attacker;
   mod = self.laststandparams.smeansofdeath;
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
 

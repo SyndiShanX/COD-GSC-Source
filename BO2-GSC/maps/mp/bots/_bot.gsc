@@ -523,8 +523,8 @@ bot_spawn() {
     weapon = player getcurrentweapon();
   }
 
-  if(getdvar(#"devgui_bot_weapon") != "")
-    weapon = getdvar(#"devgui_bot_weapon");
+  if(getDvar(#"devgui_bot_weapon") != "")
+    weapon = getDvar(#"devgui_bot_weapon");
 
   if(isDefined(weapon)) {
     self maps\mp\gametypes\_weapons::detach_all_weapons();
@@ -1268,109 +1268,109 @@ bot_set_difficulty() {
   difficulty = bot_get_difficulty();
 
   if(difficulty == "fu") {
-    setdvar("bot_MinDeathTime", "250");
-    setdvar("bot_MaxDeathTime", "500");
-    setdvar("bot_MinFireTime", "100");
-    setdvar("bot_MaxFireTime", "250");
-    setdvar("bot_PitchUp", "-5");
-    setdvar("bot_PitchDown", "10");
-    setdvar("bot_Fov", "160");
-    setdvar("bot_MinAdsTime", "3000");
-    setdvar("bot_MaxAdsTime", "5000");
-    setdvar("bot_MinCrouchTime", "100");
-    setdvar("bot_MaxCrouchTime", "400");
-    setdvar("bot_TargetLeadBias", "2");
-    setdvar("bot_MinReactionTime", "40");
-    setdvar("bot_MaxReactionTime", "70");
-    setdvar("bot_StrafeChance", "1");
-    setdvar("bot_MinStrafeTime", "3000");
-    setdvar("bot_MaxStrafeTime", "6000");
-    setdvar("scr_help_dist", "512");
-    setdvar("bot_AllowGrenades", "1");
-    setdvar("bot_MinGrenadeTime", "1500");
-    setdvar("bot_MaxGrenadeTime", "4000");
-    setdvar("bot_MeleeDist", "70");
-    setdvar("bot_YawSpeed", "2");
+    setDvar("bot_MinDeathTime", "250");
+    setDvar("bot_MaxDeathTime", "500");
+    setDvar("bot_MinFireTime", "100");
+    setDvar("bot_MaxFireTime", "250");
+    setDvar("bot_PitchUp", "-5");
+    setDvar("bot_PitchDown", "10");
+    setDvar("bot_Fov", "160");
+    setDvar("bot_MinAdsTime", "3000");
+    setDvar("bot_MaxAdsTime", "5000");
+    setDvar("bot_MinCrouchTime", "100");
+    setDvar("bot_MaxCrouchTime", "400");
+    setDvar("bot_TargetLeadBias", "2");
+    setDvar("bot_MinReactionTime", "40");
+    setDvar("bot_MaxReactionTime", "70");
+    setDvar("bot_StrafeChance", "1");
+    setDvar("bot_MinStrafeTime", "3000");
+    setDvar("bot_MaxStrafeTime", "6000");
+    setDvar("scr_help_dist", "512");
+    setDvar("bot_AllowGrenades", "1");
+    setDvar("bot_MinGrenadeTime", "1500");
+    setDvar("bot_MaxGrenadeTime", "4000");
+    setDvar("bot_MeleeDist", "70");
+    setDvar("bot_YawSpeed", "2");
   } else if(difficulty == "hard") {
-    setdvar("bot_MinDeathTime", "250");
-    setdvar("bot_MaxDeathTime", "500");
-    setdvar("bot_MinFireTime", "400");
-    setdvar("bot_MaxFireTime", "600");
-    setdvar("bot_PitchUp", "-5");
-    setdvar("bot_PitchDown", "10");
-    setdvar("bot_Fov", "100");
-    setdvar("bot_MinAdsTime", "3000");
-    setdvar("bot_MaxAdsTime", "5000");
-    setdvar("bot_MinCrouchTime", "100");
-    setdvar("bot_MaxCrouchTime", "400");
-    setdvar("bot_TargetLeadBias", "2");
-    setdvar("bot_MinReactionTime", "400");
-    setdvar("bot_MaxReactionTime", "700");
-    setdvar("bot_StrafeChance", "0.9");
-    setdvar("bot_MinStrafeTime", "3000");
-    setdvar("bot_MaxStrafeTime", "6000");
-    setdvar("scr_help_dist", "384");
-    setdvar("bot_AllowGrenades", "1");
-    setdvar("bot_MinGrenadeTime", "1500");
-    setdvar("bot_MaxGrenadeTime", "4000");
-    setdvar("bot_MeleeDist", "70");
-    setdvar("bot_YawSpeed", "1.4");
+    setDvar("bot_MinDeathTime", "250");
+    setDvar("bot_MaxDeathTime", "500");
+    setDvar("bot_MinFireTime", "400");
+    setDvar("bot_MaxFireTime", "600");
+    setDvar("bot_PitchUp", "-5");
+    setDvar("bot_PitchDown", "10");
+    setDvar("bot_Fov", "100");
+    setDvar("bot_MinAdsTime", "3000");
+    setDvar("bot_MaxAdsTime", "5000");
+    setDvar("bot_MinCrouchTime", "100");
+    setDvar("bot_MaxCrouchTime", "400");
+    setDvar("bot_TargetLeadBias", "2");
+    setDvar("bot_MinReactionTime", "400");
+    setDvar("bot_MaxReactionTime", "700");
+    setDvar("bot_StrafeChance", "0.9");
+    setDvar("bot_MinStrafeTime", "3000");
+    setDvar("bot_MaxStrafeTime", "6000");
+    setDvar("scr_help_dist", "384");
+    setDvar("bot_AllowGrenades", "1");
+    setDvar("bot_MinGrenadeTime", "1500");
+    setDvar("bot_MaxGrenadeTime", "4000");
+    setDvar("bot_MeleeDist", "70");
+    setDvar("bot_YawSpeed", "1.4");
   } else if(difficulty == "easy") {
-    setdvar("bot_MinDeathTime", "1000");
-    setdvar("bot_MaxDeathTime", "2000");
-    setdvar("bot_MinFireTime", "900");
-    setdvar("bot_MaxFireTime", "1000");
-    setdvar("bot_PitchUp", "-20");
-    setdvar("bot_PitchDown", "40");
-    setdvar("bot_Fov", "50");
-    setdvar("bot_MinAdsTime", "3000");
-    setdvar("bot_MaxAdsTime", "5000");
-    setdvar("bot_MinCrouchTime", "4000");
-    setdvar("bot_MaxCrouchTime", "6000");
-    setdvar("bot_TargetLeadBias", "8");
-    setdvar("bot_MinReactionTime", "1200");
-    setdvar("bot_MaxReactionTime", "1600");
-    setdvar("bot_StrafeChance", "0.1");
-    setdvar("bot_MinStrafeTime", "3000");
-    setdvar("bot_MaxStrafeTime", "6000");
-    setdvar("scr_help_dist", "256");
-    setdvar("bot_AllowGrenades", "0");
-    setdvar("bot_MeleeDist", "40");
+    setDvar("bot_MinDeathTime", "1000");
+    setDvar("bot_MaxDeathTime", "2000");
+    setDvar("bot_MinFireTime", "900");
+    setDvar("bot_MaxFireTime", "1000");
+    setDvar("bot_PitchUp", "-20");
+    setDvar("bot_PitchDown", "40");
+    setDvar("bot_Fov", "50");
+    setDvar("bot_MinAdsTime", "3000");
+    setDvar("bot_MaxAdsTime", "5000");
+    setDvar("bot_MinCrouchTime", "4000");
+    setDvar("bot_MaxCrouchTime", "6000");
+    setDvar("bot_TargetLeadBias", "8");
+    setDvar("bot_MinReactionTime", "1200");
+    setDvar("bot_MaxReactionTime", "1600");
+    setDvar("bot_StrafeChance", "0.1");
+    setDvar("bot_MinStrafeTime", "3000");
+    setDvar("bot_MaxStrafeTime", "6000");
+    setDvar("scr_help_dist", "256");
+    setDvar("bot_AllowGrenades", "0");
+    setDvar("bot_MeleeDist", "40");
   } else {
-    setdvar("bot_MinDeathTime", "500");
-    setdvar("bot_MaxDeathTime", "1000");
-    setdvar("bot_MinFireTime", "600");
-    setdvar("bot_MaxFireTime", "800");
-    setdvar("bot_PitchUp", "-10");
-    setdvar("bot_PitchDown", "20");
-    setdvar("bot_Fov", "70");
-    setdvar("bot_MinAdsTime", "3000");
-    setdvar("bot_MaxAdsTime", "5000");
-    setdvar("bot_MinCrouchTime", "2000");
-    setdvar("bot_MaxCrouchTime", "4000");
-    setdvar("bot_TargetLeadBias", "4");
-    setdvar("bot_MinReactionTime", "600");
-    setdvar("bot_MaxReactionTime", "800");
-    setdvar("bot_StrafeChance", "0.6");
-    setdvar("bot_MinStrafeTime", "3000");
-    setdvar("bot_MaxStrafeTime", "6000");
-    setdvar("scr_help_dist", "256");
-    setdvar("bot_AllowGrenades", "1");
-    setdvar("bot_MinGrenadeTime", "1500");
-    setdvar("bot_MaxGrenadeTime", "4000");
-    setdvar("bot_MeleeDist", "70");
-    setdvar("bot_YawSpeed", "1.2");
+    setDvar("bot_MinDeathTime", "500");
+    setDvar("bot_MaxDeathTime", "1000");
+    setDvar("bot_MinFireTime", "600");
+    setDvar("bot_MaxFireTime", "800");
+    setDvar("bot_PitchUp", "-10");
+    setDvar("bot_PitchDown", "20");
+    setDvar("bot_Fov", "70");
+    setDvar("bot_MinAdsTime", "3000");
+    setDvar("bot_MaxAdsTime", "5000");
+    setDvar("bot_MinCrouchTime", "2000");
+    setDvar("bot_MaxCrouchTime", "4000");
+    setDvar("bot_TargetLeadBias", "4");
+    setDvar("bot_MinReactionTime", "600");
+    setDvar("bot_MaxReactionTime", "800");
+    setDvar("bot_StrafeChance", "0.6");
+    setDvar("bot_MinStrafeTime", "3000");
+    setDvar("bot_MaxStrafeTime", "6000");
+    setDvar("scr_help_dist", "256");
+    setDvar("bot_AllowGrenades", "1");
+    setDvar("bot_MinGrenadeTime", "1500");
+    setDvar("bot_MaxGrenadeTime", "4000");
+    setDvar("bot_MeleeDist", "70");
+    setDvar("bot_YawSpeed", "1.2");
   }
 
   if(level.gametype == "oic" && difficulty == "fu") {
-    setdvar("bot_MinReactionTime", "400");
-    setdvar("bot_MaxReactionTime", "500");
-    setdvar("bot_MinAdsTime", "1000");
-    setdvar("bot_MaxAdsTime", "2000");
+    setDvar("bot_MinReactionTime", "400");
+    setDvar("bot_MaxReactionTime", "500");
+    setDvar("bot_MinAdsTime", "1000");
+    setDvar("bot_MaxAdsTime", "2000");
   }
 
   if(level.gametype == "oic" && (difficulty == "hard" || difficulty == "fu"))
-    setdvar("bot_SprintDistance", "256");
+    setDvar("bot_SprintDistance", "256");
 }
 
 bot_update_c4() {
@@ -1950,14 +1950,14 @@ bot_debug_box(origin, mins, maxs, yaw, seconds, color) {
 bot_devgui_think() {
   self endon("death");
   self endon("disconnect");
-  setdvar("devgui_bot", "");
-  setdvar("scr_bot_follow", "0");
+  setDvar("devgui_bot", "");
+  setDvar("scr_bot_follow", "0");
 
   for(;;) {
     wait 1;
     reset = 1;
 
-    switch (getdvar(#"devgui_bot")) {
+    switch (getDvar(#"devgui_bot")) {
       case "crosshair":
         if(getdvarint(#"scr_bot_follow") != 0) {
           iprintln("Bot following enabled");
@@ -1965,12 +1965,12 @@ bot_devgui_think() {
         } else {
           iprintln("Bot following disabled");
           self notify("crosshair_follow_off");
-          setdvar("bot_AllowMovement", "0");
+          setDvar("bot_AllowMovement", "0");
         }
 
         break;
       case "laststand":
-        setdvar("scr_forcelaststand", "1");
+        setDvar("scr_forcelaststand", "1");
         self setperk("specialty_pistoldeath");
         self setperk("specialty_finalstand");
         self dodamage(self.health, self.origin);
@@ -1982,20 +1982,19 @@ bot_devgui_think() {
     }
 
     if(reset)
-      setdvar("devgui_bot", "");
+      setDvar("devgui_bot", "");
   }
-
 }
 
 bot_system_devgui_think() {
-  setdvar("devgui_bot", "");
-  setdvar("devgui_bot_weapon", "");
+  setDvar("devgui_bot", "");
+  setDvar("devgui_bot_weapon", "");
 
   for(;;) {
     wait 1;
     reset = 1;
 
-    switch (getdvar(#"devgui_bot")) {
+    switch (getDvar(#"devgui_bot")) {
       case "spawn_friendly":
         player = gethostplayer();
         team = player.team;
@@ -2035,9 +2034,8 @@ bot_system_devgui_think() {
     }
 
     if(reset)
-      setdvar("devgui_bot", "");
+      setDvar("devgui_bot", "");
   }
-
 }
 
 bot_crosshair_follow() {
@@ -2048,9 +2046,9 @@ bot_crosshair_follow() {
 
   for(;;) {
     wait 1;
-    setdvar("bot_AllowMovement", "1");
-    setdvar("bot_IgnoreHumans", "1");
-    setdvar("bot_ForceStand", "1");
+    setDvar("bot_AllowMovement", "1");
+    setDvar("bot_IgnoreHumans", "1");
+    setDvar("bot_ForceStand", "1");
     player = gethostplayerforbots();
     direction = player getplayerangles();
     direction_vec = anglesToForward(direction);
@@ -2108,7 +2106,6 @@ devgui_debug_route() {
     player notify("debug_patrol");
     player thread bot_debug_patrol(nodes[0], nodes[1]);
   }
-
 }
 
 devgui_bot_spawn(team) {
@@ -2143,5 +2140,4 @@ devgui_bot_spawn_think(origin, yaw) {
     angles = (0, yaw, 0);
     self setplayerangles(angles);
   }
-
 }

@@ -67,19 +67,15 @@ _id_562F() {
 attachpath(var_0) {
   if(var_0.v["type"] != "soundfx_interval" && var_0.v["type"] != "soundfx") {
     return 0;
-
   }
   if(var_0.v["origin"][0] > 3400) {
     return 1;
-
   }
   if(var_0.v["origin"][0] < -2400) {
     return 1;
-
   }
   if(var_0.v["origin"][1] < 3500) {
     return 1;
-
   }
   return 0;
 }
@@ -166,7 +162,6 @@ _id_1109() {
     level._id_5BCC = 32 + 10 * level._id_5BCB;
   } else {
     level._id_5BCC = 34 + 10 * level._id_5BCB;
-
   }
   level._id_5BCD = 120000;
   level._id_5BCE = 720000;
@@ -209,7 +204,6 @@ _id_5561() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] delete();
-
   }
   var_2 = getEntArray("SO_remove_brush", "targetname");
 
@@ -331,7 +325,6 @@ _id_5BD7() {
       var_3 thread _id_5C01();
     } else {
       var_3 setgoalpos(var_3.origin);
-
     }
     level._id_5BB6 = common_scripts\utility::add_to_array(level._id_5BB6, var_3);
 
@@ -362,7 +355,6 @@ _id_5BD7() {
       var_5 thread _id_5C01();
     } else {
       var_5 setgoalpos(var_5.origin);
-
     }
     level._id_5BB7 = common_scripts\utility::add_to_array(level._id_5BB7, var_5);
     var_5 thread _id_5BDE(2);
@@ -565,7 +557,6 @@ _id_5BE0(var_0, var_1) {
       foreach(var_4 in var_2) {
         if(isDefined(var_4) && isalive(var_4)) {
           var_4 _id_5BE2();
-
         }
         var_4 notify("group_wake");
 
@@ -643,7 +634,6 @@ _id_4794() {
 
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] thread _id_5640();
-
   }
   common_scripts\utility::flag_set("so_assassin_payback_start");
   level thread _id_5BE7();
@@ -673,7 +663,6 @@ _id_5B6F() {
     var_11 = 5000;
   } else if(var_0 <= level._id_5BCE) {
     var_11 = int(5000 * (1 - (var_0 - level._id_5BCD) / (level._id_5BCE - level._id_5BCD)));
-
   }
   level._id_16C4 = level._id_16C4 + var_11;
 
@@ -749,9 +738,9 @@ _id_5B6F() {
   }
 
   if(!level._id_16C9) {
-    setdvar("ui_hide_hint", 1);
+    setDvar("ui_hide_hint", 1);
   } else {
-    setdvar("ui_hide_hint", 0);
+    setDvar("ui_hide_hint", 0);
   }
 }
 
@@ -764,7 +753,6 @@ _id_5640() {
 
     if(self getstance() == "prone") {
       self setstance("stand");
-
     }
     self allowprone(0);
     common_scripts\utility::flag_waitopen("no_prone_water_trigger");
@@ -791,7 +779,6 @@ _id_5BE7() {
 
   while(level._id_5BD4 < 1) {
     wait 1.0;
-
   }
   common_scripts\utility::flag_set("out_of_stage_1");
   thread maps\ss_util::_id_4421("so_assassin_enemy_heading_your_way");
@@ -840,11 +827,9 @@ _id_5BE7() {
 
   if(level._id_5BD4 < 6) {
     thread maps\ss_util::_id_4421("so_assassin_team_large_enemy_force");
-
   }
   for(level._id_5BBC = maps\_utility::_id_1361(level._id_5BBC); level._id_5BBC.size > 0; level._id_5BBC = maps\_utility::_id_1361(level._id_5BBC)) {
     wait 1.0;
-
   }
   _id_5BE6(3);
   thread maps\ss_util::_id_4421("so_assassin_nice_work");
@@ -858,7 +843,6 @@ _id_5BE7() {
 
   while(level._id_5BD4 < 4) {
     wait 1.0;
-
   }
   common_scripts\utility::flag_wait("hostage_x_pressed");
   _id_5BE6(5);
@@ -1086,7 +1070,6 @@ _id_5BEF() {
 
   while(level._id_5BD4 < 2) {
     wait 1.0;
-
   }
   _id_5BF0("attack_littlebird_spawner", "attack_heli_start", "attack_heli_pilot");
 
@@ -1097,7 +1080,6 @@ _id_5BEF() {
 
   while(level._id_5BD4 < 6) {
     wait 1.0;
-
   }
   wait 5;
   _id_5BF0("attack_littlebird_spawner_2", "attack_heli_start_dock_1", "attack_heli_pilot_3");
@@ -1189,7 +1171,6 @@ _id_5BF4() {
       self._id_5BF6 settext(var_1);
     } else {
       level waittill("start_heli_timer");
-
     }
     common_scripts\utility::waitframe();
   }
@@ -1219,7 +1200,6 @@ _id_5BF8() {
   for(;;) {
     while(!maps\_stinger::_id_5BAD()) {
       wait 0.05;
-
     }
     level._id_5BC6 = maps\_utility::_id_1228(level._id_5BC6);
 
@@ -1238,7 +1218,6 @@ _id_5BF8() {
 
     while(maps\_stinger::_id_5BAD()) {
       wait 0.05;
-
     }
     level._id_5BC6 = maps\_utility::_id_1228(level._id_5BC6);
 
@@ -1325,7 +1304,6 @@ _id_5BFB() {
 
     if(isalive(var_1)) {
       thread maps\_helicopter_globals::fire_missile("cobra_zippy", 4, var_1, 0.1);
-
     }
     wait 2.0;
   }
@@ -1338,7 +1316,6 @@ _id_4F95(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_6)) {
     objective_setpointertextoverride(maps\_utility::_id_2816(var_0), var_6);
-
   }
   if(isDefined(var_4)) {
     objective_position(maps\_utility::_id_2816(var_0), var_4.origin);
@@ -1348,7 +1325,6 @@ _id_4F95(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_2)) {
     objective_position(maps\_utility::_id_2816(var_0), var_2.origin);
-
   }
   common_scripts\utility::flag_wait(var_3);
   objective_position(maps\_utility::_id_2816(var_0), (0, 0, 0));
@@ -1401,7 +1377,6 @@ _id_5BFE(var_0) {
 
     if(maps\_utility::_id_2752(self getEye()) || maps\_utility::_id_2752(self.origin)) {
       var_1 = 1;
-
     }
     wait 0.1;
   }
@@ -1509,7 +1484,6 @@ _id_5093(var_0, var_1) {
 
       if(isDefined(var_1)) {
         var_5 = var_1;
-
       }
       var_2[var_2.size] = _id_5094(var_4, var_5, var_4.origin, var_4.angles);
     }

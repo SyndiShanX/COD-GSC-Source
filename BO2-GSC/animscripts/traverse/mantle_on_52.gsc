@@ -18,7 +18,6 @@ main() {
     default:
 
       assertmsg("Traversal: 'mantle_on_52' doesn't support entity type '" + self.type + "'.");
-
   }
 }
 

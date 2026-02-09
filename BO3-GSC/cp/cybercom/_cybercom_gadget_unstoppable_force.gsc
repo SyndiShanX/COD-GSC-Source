@@ -60,7 +60,7 @@ function _on(slot, weapon) {
   self notify(weapon.name + "_fired");
   level notify(weapon.name + "_fired");
   self thread function_875f1595(slot, weapon);
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_unstoppableforce");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);

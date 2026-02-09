@@ -243,7 +243,7 @@ damage_monitor(var_0) {
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
-    if(isplayer(var_2) && isDefined(var_10) && var_10 == "iw7_cpknifethrow_mp") {
+    if(isPlayer(var_2) && isDefined(var_10) && var_10 == "iw7_cpknifethrow_mp") {
       break;
     }
   }
@@ -399,7 +399,7 @@ skull_damage_monitor(var_0) {
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
 

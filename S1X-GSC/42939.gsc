@@ -10,7 +10,7 @@ init() {
   level.streaksupportqueueallies = [];
   level.streaksupportqueueaxis = [];
   level.streaksuppordisabledcount = [];
-  setdvar("scr_coop_util_delay", "1");
+  setDvar("scr_coop_util_delay", "1");
 }
 
 promptforstreaksupport(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {

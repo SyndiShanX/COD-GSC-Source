@@ -7,8 +7,8 @@
 #include maps\_cooplogic;
 
 init() {
-  level.xenon = getdvar(#"xenonGame") == "true";
-  level.consolegame = getdvar(#"_id_D1AF4972") == "true";
+  level.xenon = getDvar(#"xenonGame") == "true";
+  level.consolegame = getDvar(#"_id_D1AF4972") == "true";
   precachemenu("loadout_splitscreen");
   precachemenu("ObjectiveInfoMenu");
   precachemenu("InGamePopupMenu");
@@ -34,9 +34,9 @@ onmenuresponse() {
     }
 
     if(response == "endround") {
-      if(!level.gameended)
+      if(!level.gameended) {
         level thread maps\_cooplogic::forceend();
-      else {
+      } else {
         self closemenu();
         self closeingamemenu();
       }
@@ -44,7 +44,8 @@ onmenuresponse() {
       continue;
     }
 
-    if(response == "close_all_ingame_menus")
+    if(response == "close_all_ingame_menus") {
       self closeingamemenu();
+    }
   }
 }

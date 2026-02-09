@@ -214,7 +214,6 @@ heli_path_graph() {
         if(isDefined(currentnode.script_delay)) {
           airsupport::debug_print3d_simple("<dev string:xc6>" + currentnode.script_delay, currentnode, (0, 0, 10));
         }
-
       }
 
       if(todest) {
@@ -275,34 +274,34 @@ heli_path_graph() {
 
 heli_update_global_dvars(debug_refresh) {
   do {
-    level.heli_loopmax = getdvar(#"scr_heli_loopmax", 2);
-    level.heli_missile_rof = getdvar(#"scr_heli_missile_rof", 2);
-    level.heli_armor = getdvar(#"scr_heli_armor", 500);
-    level.heli_maxhealth = getdvar(#"scr_heli_maxhealth", 2000);
-    level.heli_amored_maxhealth = getdvar(#"scr_heli_armored_maxhealth", 1500);
-    level.heli_missile_max = getdvar(#"scr_heli_missile_max", 20);
-    level.heli_dest_wait = getdvar(#"scr_heli_dest_wait", 8);
-    level.heli_debug = getdvar(#"scr_heli_debug", 0);
-    level.heli_debug_crash = getdvar(#"scr_heli_debug_crash", 0);
-    level.heli_targeting_delay = getdvar(#"scr_heli_targeting_delay", 0.1);
-    level.heli_turretreloadtime = getdvar(#"scr_heli_turretreloadtime", 0.5);
-    level.heli_turretclipsize = getdvar(#"scr_heli_turretclipsize", 60);
-    level.heli_visual_range = isDefined(level.heli_visual_range_override) ? level.heli_visual_range_override : getdvar(#"scr_heli_visual_range", 3500);
-    level.heli_missile_range = getdvar(#"scr_heli_missile_range", 100000);
-    level.heli_health_degrade = getdvar(#"scr_heli_health_degrade", 0);
-    level.heli_turret_target_cone = getdvar(#"scr_heli_turret_target_cone", 0.6);
-    level.heli_target_spawnprotection = getdvar(#"scr_heli_target_spawnprotection", 5);
-    level.heli_missile_regen_time = getdvar(#"scr_heli_missile_regen_time", 10);
-    level.heli_turret_spinup_delay = getdvar(#"scr_heli_turret_spinup_delay", 0.1);
-    level.heli_target_recognition = getdvar(#"scr_heli_target_recognition", 0.2);
-    level.heli_missile_friendlycare = getdvar(#"scr_heli_missile_friendlycare", 512);
-    level.heli_missile_target_cone = getdvar(#"scr_heli_missile_target_cone", 0.6);
-    level.heli_valid_target_cone = getdvar(#"scr_heli_missile_valid_target_cone", 0.7);
-    level.heli_armor_bulletdamage = getdvar(#"scr_heli_armor_bulletdamage", 0.5);
-    level.heli_attract_strength = getdvar(#"scr_heli_attract_strength", 1000);
-    level.heli_attract_range = getdvar(#"scr_heli_attract_range", 20000);
-    level.helicopterturretmaxangle = getdvar(#"scr_helicopterturretmaxangle", 50);
-    level.var_e071ed64 = isDefined(getgametypesetting(#"hash_5f76e2d55ad861ed")) && getgametypesetting(#"hash_5f76e2d55ad861ed") && getdvar(#"hash_3910a4196fe6b62e", 1);
+    level.heli_loopmax = getDvar(#"scr_heli_loopmax", 2);
+    level.heli_missile_rof = getDvar(#"scr_heli_missile_rof", 2);
+    level.heli_armor = getDvar(#"scr_heli_armor", 500);
+    level.heli_maxhealth = getDvar(#"scr_heli_maxhealth", 2000);
+    level.heli_amored_maxhealth = getDvar(#"scr_heli_armored_maxhealth", 1500);
+    level.heli_missile_max = getDvar(#"scr_heli_missile_max", 20);
+    level.heli_dest_wait = getDvar(#"scr_heli_dest_wait", 8);
+    level.heli_debug = getDvar(#"scr_heli_debug", 0);
+    level.heli_debug_crash = getDvar(#"scr_heli_debug_crash", 0);
+    level.heli_targeting_delay = getDvar(#"scr_heli_targeting_delay", 0.1);
+    level.heli_turretreloadtime = getDvar(#"scr_heli_turretreloadtime", 0.5);
+    level.heli_turretclipsize = getDvar(#"scr_heli_turretclipsize", 60);
+    level.heli_visual_range = isDefined(level.heli_visual_range_override) ? level.heli_visual_range_override : getDvar(#"scr_heli_visual_range", 3500);
+    level.heli_missile_range = getDvar(#"scr_heli_missile_range", 100000);
+    level.heli_health_degrade = getDvar(#"scr_heli_health_degrade", 0);
+    level.heli_turret_target_cone = getDvar(#"scr_heli_turret_target_cone", 0.6);
+    level.heli_target_spawnprotection = getDvar(#"scr_heli_target_spawnprotection", 5);
+    level.heli_missile_regen_time = getDvar(#"scr_heli_missile_regen_time", 10);
+    level.heli_turret_spinup_delay = getDvar(#"scr_heli_turret_spinup_delay", 0.1);
+    level.heli_target_recognition = getDvar(#"scr_heli_target_recognition", 0.2);
+    level.heli_missile_friendlycare = getDvar(#"scr_heli_missile_friendlycare", 512);
+    level.heli_missile_target_cone = getDvar(#"scr_heli_missile_target_cone", 0.6);
+    level.heli_valid_target_cone = getDvar(#"scr_heli_missile_valid_target_cone", 0.7);
+    level.heli_armor_bulletdamage = getDvar(#"scr_heli_armor_bulletdamage", 0.5);
+    level.heli_attract_strength = getDvar(#"scr_heli_attract_strength", 1000);
+    level.heli_attract_range = getDvar(#"scr_heli_attract_range", 20000);
+    level.helicopterturretmaxangle = getDvar(#"scr_helicopterturretmaxangle", 50);
+    level.var_e071ed64 = isDefined(getgametypesetting(#"hash_5f76e2d55ad861ed")) && getgametypesetting(#"hash_5f76e2d55ad861ed") && getDvar(#"hash_3910a4196fe6b62e", 1);
 
     if(level.var_e071ed64) {
       level.heli_protect_time = getdvarint(#"scr_heli_protect_time", 75);
@@ -314,13 +313,13 @@ heli_update_global_dvars(debug_refresh) {
       level.var_c2bbc18f = getdvarint(#"hash_569da8451469c0d0", 1600);
       level.var_d9c77d70 = getdvarint(#"hash_7e0189d9c55ba919", 350);
     } else {
-      level.heli_protect_time = getdvar(#"scr_heli_protect_time", 75);
-      level.heli_protect_pos_time = getdvar(#"scr_heli_protect_pos_time", 8);
-      level.heli_protect_radius = getdvar(#"scr_heli_protect_radius", 2000);
+      level.heli_protect_time = getDvar(#"scr_heli_protect_time", 75);
+      level.heli_protect_pos_time = getDvar(#"scr_heli_protect_pos_time", 8);
+      level.heli_protect_radius = getDvar(#"scr_heli_protect_radius", 2000);
     }
 
-    level.heli_missile_reload_time = getdvar(#"scr_heli_missile_reload_time", 5);
-    level.heli_warning_distance = getdvar(#"scr_heli_warning_distance", 500);
+    level.heli_missile_reload_time = getDvar(#"scr_heli_missile_reload_time", 5);
+    level.heli_warning_distance = getDvar(#"scr_heli_warning_distance", 500);
     wait 1;
   }
   while(isDefined(debug_refresh));
@@ -732,7 +731,6 @@ heli_targeting(missilesenabled, hardpointtype) {
       self.secondarytarget = undefined;
 
       debug_print_target();
-
     } else if(targets.size > 1) {
       assignprimarytargets(targets);
     }
@@ -748,7 +746,6 @@ heli_targeting(missilesenabled, hardpointtype) {
       self notify(#"secondary acquired");
 
       debug_print_target();
-
     } else if(targetsmissile.size > 1) {
       assignsecondarytargets(targetsmissile);
     }
@@ -756,7 +753,6 @@ heli_targeting(missilesenabled, hardpointtype) {
     wait self.targeting_delay;
 
     debug_print_target();
-
   }
 }
 
@@ -1054,7 +1050,7 @@ assignprimarytargets(targets) {
       continue;
     }
 
-    if(isplayer(targets[idx])) {
+    if(isPlayer(targets[idx])) {
       killstreaks::update_player_threat(targets[idx]);
       continue;
     }
@@ -1223,7 +1219,7 @@ heli_damage_monitor(hardpointtype) {
     flags = waitresult.flags;
     chargelevel = waitresult.chargelevel;
 
-    if(!isDefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
 
@@ -1381,7 +1377,7 @@ heli_damage_monitor(hardpointtype) {
       if(target_istarget(self)) {
         target_remove(self);
       }
-    } else if(isDefined(self.owner) && isplayer(self.owner)) {
+    } else if(isDefined(self.owner) && isPlayer(self.owner)) {
       if(last_hit_vo + hit_vo_spacing < gettime()) {
         if(type == "MOD_PROJECTILE" || randomintrange(0, 3) == 0) {
           last_hit_vo = gettime();
@@ -2214,26 +2210,22 @@ function_81cba63() {
   while(true) {
     if(isDefined(self.protectdest)) {
       recordsphere(self.protectdest, 8, (0, 0, 1), "<dev string:x28a>");
-
     }
 
     if(isDefined(self.var_6c63b409)) {
       recordline(self.protectdest, self.var_6c63b409, (0, 1, 0), "<dev string:x28a>");
       recordsphere(self.var_6c63b409, 8, (0, 1, 0), "<dev string:x28a>");
-
     }
 
     if(isDefined(self.goalpos)) {
       recordsphere(self.goalpos, 8, (0, 1, 1), "<dev string:x28a>");
       recordline(self.origin, self.goalpos, (0, 1, 1), "<dev string:x28a>");
-
     }
 
     if(isDefined(self.var_2c1a38eb) && isDefined(self.var_f9d38924)) {
       recordsphere(self.var_f9d38924, 8, (0, 1, 0), "<dev string:x28a>");
       recordline(self.var_2c1a38eb, self.var_f9d38924, (0, 1, 0), "<dev string:x28a>");
       record3dtext("<dev string:x2dc>" + distance(self.var_2c1a38eb, self.var_f9d38924), self.var_f9d38924 + (0, 0, 20), (0, 1, 0), "<dev string:x28a>");
-
     }
 
     waitframe(1);

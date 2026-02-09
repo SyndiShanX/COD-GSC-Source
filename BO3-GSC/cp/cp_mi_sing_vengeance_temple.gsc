@@ -59,8 +59,8 @@ function temple_main(str_objective) {
   stealth::reset();
   level.var_67e1f60e[level.var_67e1f60e.size] = &function_591ead63;
   level flag::set("temple_begin");
-  setdvar("scr_security_breach_lose_contact_distance", 36000);
-  setdvar("scr_security_breach_lost_contact_distance", 72000);
+  setDvar("scr_security_breach_lose_contact_distance", 36000);
+  setDvar("scr_security_breach_lost_contact_distance", 72000);
   level thread namespace_523da15d::function_a6fadcaa();
   level thread temple_vo();
   level.ai_hendricks thread setup_temple_hendricks();
@@ -655,7 +655,7 @@ function breakable_garden_window_watcher() {
   self.health = 10;
   while(true) {
     self waittill("damage", damage, attacker);
-    if(isDefined(attacker) && isplayer(attacker) && isDefined(damage)) {
+    if(isDefined(attacker) && isPlayer(attacker) && isDefined(damage)) {
       self.health = self.health - damage;
       if(self.health <= 0) {
         self delete();
@@ -821,7 +821,7 @@ function function_8f9d056c() {
   level endon("hash_8a3b89d3");
   while(true) {
     self waittill("trigger", player);
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       self function_a1a65fdc(player);
     }
   }

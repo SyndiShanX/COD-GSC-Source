@@ -6,11 +6,9 @@
 initfx() {
   if(!isDefined(level.func)) {
     level.func = [];
-
   }
   if(!isDefined(level.func["create_triggerfx"])) {
     level.func["create_triggerfx"] = ::create_triggerfx;
-
   }
   common_scripts\utility::create_lock("createfx_looper", 20);
   level.exploderfunction = common_scripts\utility::exploder_before_load;
@@ -21,19 +19,15 @@ initfx() {
 
   if(getdvarint("serverCulledSounds") == 1) {
     level.server_culled_sounds = 1;
-
   }
   if(level.createfx_enabled) {
     level.server_culled_sounds = 0;
-
   }
   if(level.createfx_enabled) {
     level waittill("createfx_common_done");
-
   }
   if(isDefined(level.delay_createfx_seconds)) {
     wait(level.delay_createfx_seconds);
-
   }
   for(var_0 = 0; var_0 < level.createfxent.size; var_0++) {
     var_1 = level.createfxent[var_0];
@@ -41,15 +35,12 @@ initfx() {
 
     if(var_1.v["type"] == "loopfx") {
       var_1 thread loopfxthread();
-
     }
     if(var_1.v["type"] == "oneshotfx") {
       var_1 thread oneshotfxthread();
-
     }
     if(var_1.v["type"] == "soundfx") {
       var_1 thread create_loopsound();
-
     }
     if(var_1.v["type"] == "soundfx_interval") {
       var_1 thread create_interval_sound();
@@ -58,7 +49,7 @@ initfx() {
 }
 
 print_org(var_0, var_1, var_2, var_3) {
-  if(getdvar("debug") == "1") {
+  if(getDvar("debug") == "1") {
     return;
   }
 }
@@ -73,7 +64,6 @@ exploderfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9,
 
     if(isDefined(var_4)) {
       var_18.v["angles"] = vectortoangles(var_4 - var_2);
-
     }
     var_18.v["delay"] = var_3;
     var_18.v["exploder"] = var_0;
@@ -83,7 +73,6 @@ exploderfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9,
 
       if(!isDefined(var_19)) {
         var_19 = [];
-
       }
       var_19[var_19.size] = var_18;
       level.createfxexploders[var_18.v["exploder"]] = var_19;
@@ -117,7 +106,6 @@ exploderfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9,
 
   if(!isDefined(level._script_exploders)) {
     level._script_exploders = [];
-
   }
   level._script_exploders[level._script_exploders.size] = var_20;
   common_scripts\_createfx::createfx_showorigin(var_1, var_2, var_3, var_4, "exploderfx", var_20, undefined, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
@@ -130,7 +118,6 @@ loopfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_3)) {
     var_7.v["angles"] = vectortoangles(var_3 - var_1);
-
   }
   var_7.v["delay"] = var_2;
 }
@@ -157,7 +144,6 @@ create_loopsound() {
 
       if(level.server_culled_sounds == 1 && isDefined(self.v["server_culled"])) {
         var_0 = self.v["server_culled"];
-
       }
       thread common_scripts\utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], var_0);
     }
@@ -193,24 +179,20 @@ loopfxthread() {
 
   if(isDefined(self.fxstart)) {
     level waittill("start fx" + self.fxstart);
-
   }
   for(;;) {
     create_looper();
 
     if(isDefined(self.timeout)) {
       thread loopfxstop(self.timeout);
-
     }
     if(isDefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
     } else {
       return;
-
     }
     if(isDefined(self.looper)) {
       self.looper delete();
-
     }
     if(isDefined(self.fxstart)) {
       level waittill("start fx" + self.fxstart);
@@ -300,7 +282,6 @@ gunfireloopfxthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(!level.createfx_enabled) {
     var_15 willneverchange();
-
   }
   for(;;) {
     var_16 = var_13 + randomint(var_14);
@@ -353,7 +334,6 @@ gunfireloopfxvecthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   if(!level.createfx_enabled) {
     var_16 willneverchange();
-
   }
   for(;;) {
     var_17 = var_14 + randomint(var_15);
@@ -364,7 +344,6 @@ gunfireloopfxvecthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
       if(var_19 < 0.05) {
         var_19 = 0.05;
-
       }
       wait(var_19);
     }
@@ -403,25 +382,20 @@ setup_fx() {
 
   if(isDefined(self.script_fxstart)) {
     var_2 = self.script_fxstart;
-
   }
   var_3 = undefined;
 
   if(isDefined(self.script_fxstop)) {
     var_3 = self.script_fxstop;
-
   }
   if(self.script_fxcommand == "OneShotfx") {
     oneshotfx(self.script_fxid, self.origin, self.script_delay, var_0);
-
   }
   if(self.script_fxcommand == "loopfx") {
     loopfx(self.script_fxid, self.origin, self.script_delay, var_0, var_2, var_3);
-
   }
   if(self.script_fxcommand == "loopsound") {
     loopsound(self.script_fxid, self.origin, self.script_delay);
-
   }
   self delete();
 }
@@ -451,7 +425,6 @@ create_triggerfx() {
 
   if(!level.createfx_enabled) {
     self.looper willneverchange();
-
   }
   create_loopsound();
 }
@@ -459,11 +432,9 @@ create_triggerfx() {
 verify_effects_assignment(var_0) {
   if(isDefined(level._effect[var_0])) {
     return 1;
-
   }
   if(!isDefined(level._missing_fx)) {
     level._missing_fx = [];
-
   }
   level._missing_fx[self.v["fxid"]] = var_0;
   verify_effects_assignment_print(var_0);
@@ -484,7 +455,6 @@ oneshotfxthread() {
 
   if(self.v["delay"] > 0) {
     wait(self.v["delay"]);
-
   }
   [[level.func["create_triggerfx"]]]();
 }

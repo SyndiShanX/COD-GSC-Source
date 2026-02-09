@@ -76,8 +76,8 @@ event_handler[gametype_init] main(eventstruct) {
   infection::function_db5ddd5f("specialty_fastmantle");
   globallogic_spawn::addsupportedspawnpointtype("tdm");
   globallogic_audio::set_leader_gametype_dialog("startInfect", "hcStartInfect", "infectOrdersOfs", "infectOrdersDef", "bbStartInfect", "hcbbStartInfect");
-  setdvar(#"g_allowlaststandforactiveclients", 1);
-  setdvar(#"hash_7036719f41a78d54", 50);
+  setDvar(#"g_allowlaststandforactiveclients", 1);
+  setDvar(#"hash_7036719f41a78d54", 50);
 
   if(getdvarint(#"hash_5795d85dc4b1b0d9", 0)) {
     level.var_49a15413 = getdvarint(#"hash_5795d85dc4b1b0d9", 0);
@@ -250,7 +250,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     }
   }
 
-  if(isplayer(attacker) == 0 || attacker.team == self.team) {
+  if(isPlayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
 

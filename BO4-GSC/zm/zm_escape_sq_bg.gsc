@@ -94,7 +94,7 @@ sq_bg_macguffin_think() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(isplayer(s_result.attacker) && (s_result.weapon == getweapon(#"tomahawk_t8") || s_result.weapon == getweapon(#"tomahawk_t8_upgraded"))) {
+    if(isPlayer(s_result.attacker) && (s_result.weapon == getweapon(#"tomahawk_t8") || s_result.weapon == getweapon(#"tomahawk_t8_upgraded"))) {
       playFX(level._effect[# "ee_skull_shot"], self.origin);
       self thread wait_and_hide_sq_bg_macguffin();
     }
@@ -172,14 +172,14 @@ check_sq_bg_progress() {
       break;
     }
 
-    if(isplayer(e_player)) {
+    if(isPlayer(e_player)) {
       e_player thread play_sq_bg_collected_vo();
     }
   }
 
   wait 1;
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     e_player playSound(#"zmb_easteregg_laugh");
   }
 }
@@ -249,7 +249,7 @@ sq_bg_spawn_rumble() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isplayer(s_result.activator)) {}
+    if(isPlayer(s_result.activator)) {}
 
     wait 0.1;
   }

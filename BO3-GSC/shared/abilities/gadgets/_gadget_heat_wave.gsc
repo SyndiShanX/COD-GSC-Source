@@ -116,7 +116,7 @@ function set_gadget_status(status, time) {
 }
 
 function is_entity_valid(entity, heatwave) {
-  if(!isplayer(entity)) {
+  if(!isPlayer(entity)) {
     return false;
   }
   if(self getentitynumber() == entity getentitynumber()) {
@@ -210,7 +210,7 @@ function heat_wave_damage_entities(weapon, heatwave) {
         burnedenemy = burnedenemy | heat_wave_burn_entities(weapon, entity, heatwave);
         continue;
       }
-      if(!isplayer(entity)) {
+      if(!isPlayer(entity)) {
         entity dodamage(1, heatwave.origin, self, self, "none", "MOD_BURNED", 0, weapon);
         entity thread update_last_burned_by(heatwave);
       }

@@ -511,14 +511,14 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
       locJugScale *= level.armorPiercingMod;
     }
 
-    if(IsPlayer(attacker) && attacker _hasPerk("specialty_paint_pro") && !isKillstreakWeapon(sWeapon)) {
+    if(isPlayer(attacker) && attacker _hasPerk("specialty_paint_pro") && !isKillstreakWeapon(sWeapon)) {
       if(!victim isPainted())
         attacker maps\mp\gametypes\_missions::processChallenge("ch_bulletpaint");
 
       victim thread maps\mp\perks\_perkfunctions::setPainted(attacker);
     }
 
-    if(IsPlayer(attacker) && (attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest"))) {} else if(IsPlayer(attacker) && (attacker _hasPerk("specialty_bulletdamage") || attacker _hasPerk("specialty_moredamage"))) {
+    if(isPlayer(attacker) && (attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest"))) {} else if(isPlayer(attacker) && (attacker _hasPerk("specialty_bulletdamage") || attacker _hasPerk("specialty_moredamage"))) {
       damageAdd += damage * level.bulletDamageMod;
     } else if(victim _hasPerk("specialty_armorvest")) {
       damageAdd -= damage * level.armorVestMod;
@@ -795,7 +795,7 @@ getPerkName(perkName) {
 }
 
 updateActivePerks(eInflictor, attacker, victim, iDamage, sMeansOfDeath) {
-  if(isDefined(eInflictor) && IsPlayer(eInflictor) && isDefined(attacker) && IsPlayer(attacker) && attacker != victim) {
+  if(isDefined(eInflictor) && isPlayer(eInflictor) && isDefined(attacker) && isPlayer(attacker) && attacker != victim) {
     if(attacker _hasPerk("specialty_triggerhappy"))
       attacker thread maps\mp\perks\_perkfunctions::setTriggerHappyInternal();
 

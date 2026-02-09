@@ -343,7 +343,7 @@ elevatorDoorsAutoClose() {
 }
 
 handleUnreslovedCollision(hitEnt) {
-  if(!IsPlayer(hitEnt)) {
+  if(!isPlayer(hitEnt)) {
     hitEnt DoDamage(1000, hitEnt.origin, self, self, "MOD_CRUSH");
   }
 }

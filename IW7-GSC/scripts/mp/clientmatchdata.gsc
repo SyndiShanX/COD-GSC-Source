@@ -31,7 +31,7 @@ logplayerdeath(var_0) {
     return;
   }
 
-  if(isplayer(var_0) && canlogclient(var_0)) {
+  if(isPlayer(var_0) && canlogclient(var_0)) {
     self getufolightcolor(var_1, self.clientid, var_0, var_0.clientid);
     return;
   }

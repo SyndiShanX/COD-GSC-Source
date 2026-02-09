@@ -1,6 +1,6 @@
 /**************************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_weap_black_hole_bomb.csc
+ * Script: clientscripts\_zombiemode_weap_black_hole_bomb\.csc
 **************************************************************/
 
 #include clientscripts\_utility;
@@ -32,22 +32,20 @@ init() {
   OnPlayerSpawned_Callback(::black_hole_on_player_spawned);
   level thread black_hole_visionset_think();
 }
-
 black_hole_on_player_connect(int_local_client_num) {
   self endon("disconnect");
-  while(!clientHasSnapshot(int_local_client_num)) {
+  while(!ClientHasSnapshot(int_local_client_num)) {
     wait 0.05;
   }
   if(int_local_client_num != 0) {
     return;
   }
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     players[i]._curr_black_hole_dist = 100000 * 100000;
     players[i]._last_black_hole_dist = 100000 * 100000;
   }
 }
-
 black_hole_on_player_spawned(int_local_client_num) {
   self endon("disconnect");
   while(!self hasdobj(int_local_client_num)) {
@@ -56,7 +54,7 @@ black_hole_on_player_spawned(int_local_client_num) {
   if(int_local_client_num != 0) {
     return;
   }
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i]._curr_black_hole_dist)) {
       players[i]._curr_black_hole_dist = 100000 * 100000;
@@ -65,18 +63,16 @@ black_hole_on_player_spawned(int_local_client_num) {
     }
   }
 }
-
 black_hole_deployed(local_client_num, int_set, ent_new) {
   if(local_client_num != 0) {
     return;
   }
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     level thread black_hole_fx_start(i, self);
     level thread black_hole_activated(self, i);
   }
 }
-
 black_hole_fx_start(local_client_num, ent_bomb) {
   bomb_fx_spot = spawn(local_client_num, ent_bomb.origin, "script_model");
   bomb_fx_spot setModel("tag_origin");
@@ -90,7 +86,6 @@ black_hole_fx_start(local_client_num, ent_bomb) {
   wait(0.2);
   event_horizon_spot Delete();
 }
-
 black_hole_visionset_switch(str_switch, flt_transition_time, int_local_client_num) {
   self endon("disconnect");
   self endon("death");
@@ -112,25 +107,24 @@ black_hole_visionset_switch(str_switch, flt_transition_time, int_local_client_nu
       break;
   }
 }
-
 black_hole_visionset_think() {
   flt_black_hole_vision_transition_time = 0;
   min_black_hole_dist = 512 * 512;
   self._visionset_think_running = 1;
   temp_array = [];
   while(isDefined(level._current_black_hole_bombs)) {
-    players = getLocalPlayers();
+    players = GetLocalPlayers();
     for(i = 0; i < players.size; i++) {
       players[i]._curr_black_hole_dist = 100000 * 100000;
     }
     self._curr_black_hole_dist = 100000 * 100000;
     if(level._current_black_hole_bombs.size == 0) {
-      players = getLocalPlayers();
+      players = GetLocalPlayers();
       for(i = 0; i < players.size; i++) {
         players[i] black_hole_visionset_switch("default", 2.0, i);
       }
     } else {
-      players = getLocalPlayers();
+      players = GetLocalPlayers();
       for(i = 0; i < players.size; i++) {
         struct_closest_black_hole = players[i] get_closest_black_hole();
         players[i] black_hole_vision_set(min_black_hole_dist, flt_black_hole_vision_transition_time, struct_closest_black_hole, i);
@@ -147,7 +141,6 @@ black_hole_visionset_think() {
     temp_array = [];
   }
 }
-
 get_closest_black_hole() {
   self endon("disconnect");
   self endon("death");
@@ -161,7 +154,6 @@ get_closest_black_hole() {
   }
   return struct_closest_black_hole;
 }
-
 black_hole_vision_set(min_black_hole_dist, flt_transition_time, struct_closest_black_hole, int_local_client_num) {
   self endon("disconnect");
   self endon("death");
@@ -177,7 +169,6 @@ black_hole_vision_set(min_black_hole_dist, flt_transition_time, struct_closest_b
     self black_hole_visionset_switch("outside_bh", flt_transition_time, int_local_client_num);
   }
 }
-
 black_hole_activated(ent_model, int_local_client_num) {
   new_black_hole_struct = spawnStruct();
   new_black_hole_struct.origin = ent_model.origin;
@@ -187,7 +178,6 @@ black_hole_activated(ent_model, int_local_client_num) {
   new_black_hole_struct._black_hole_active = 0;
   wait(0.2);
 }
-
 black_hole_zombie_being_pulled(local_client_num, int_set, actor_new) {
   self endon("death");
   self endon("entityshutdown");
@@ -200,7 +190,7 @@ black_hole_zombie_being_pulled(local_client_num, int_set, actor_new) {
     self._bhb_pulled_in_fx LinkTo(self, "tag_origin");
     self._bhb_pulled_in_fx setModel("tag_origin");
     level thread black_hole_bomb_pulled_in_fx_clean(self, self._bhb_pulled_in_fx);
-    players = getLocalPlayers();
+    players = GetLocalPlayers();
     for(i = 0; i < players.size; i++) {
       playFXOnTag(i, level._effect["black_hole_bomb_zombie_pull"], self._bhb_pulled_in_fx, "tag_origin");
     }
@@ -212,7 +202,6 @@ black_hole_zombie_being_pulled(local_client_num, int_set, actor_new) {
     }
   }
 }
-
 black_hole_bomb_pulled_in_fx_clean(ent_zombie, ent_fx_origin) {
   ent_fx_origin endon("no_clean_up_needed");
   if(!isDefined(ent_zombie)) {

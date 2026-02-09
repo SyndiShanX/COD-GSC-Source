@@ -74,7 +74,7 @@ function _on(slot, weapon) {
   cybercom::function_adc40f11(weapon, 1);
   self thread create_concussion_wave(self.cybercom.concussive_wave_damage, slot, weapon);
   level.var_b1ae49b1 = gettime();
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_concussive");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
@@ -121,7 +121,7 @@ function is_jumping() {
 }
 
 function create_damage_wave(damage, attacker) {
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     playFX("weapon/fx_ability_concussive_wave_impact", attacker.origin);
   }
   assert(isDefined(attacker));
@@ -203,7 +203,7 @@ function function_78e146a3() {
 }
 
 function create_concussion_wave(damage, slot, weapon) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     level thread create_damage_wave(damage, self);
     return;
   }

@@ -169,8 +169,7 @@ createFxLogic() {
   if(getDvar("createfx_map") == "") {
     setDvar("createfx_map", level.script);
   } else {
-  if(getDvar("createfx_map") == level.script) {
-  }
+    if(getDvar("createfx_map") == level.script) {}
     playerPos = [];
     playerPos[0] = getdvarint("createfx_playerpos_x");
     playerPos[1] = getdvarint("createfx_playerpos_y");
@@ -1358,9 +1357,9 @@ process_fx_rotater() {
     if(level.selectedRotate_pitch != 0) {
       rotater devAddPitch(level.selectedRotate_pitch);
     } else {
-    if(level.selectedRotate_yaw != 0) {
-      rotater devAddYaw(level.selectedRotate_yaw);
-    }
+      if(level.selectedRotate_yaw != 0) {
+        rotater devAddYaw(level.selectedRotate_yaw);
+      }
     } else {
       rotater devAddRoll(level.selectedRotate_roll);
     }
@@ -1379,9 +1378,9 @@ rotate_over_time(org, rotater) {
     if(level.selectedRotate_pitch != 0) {
       org devAddPitch(level.selectedRotate_pitch);
     } else {
-    if(level.selectedRotate_yaw != 0) {
-      org devAddYaw(level.selectedRotate_yaw);
-    }
+      if(level.selectedRotate_yaw != 0) {
+        org devAddYaw(level.selectedRotate_yaw);
+      }
     } else {
       org devAddRoll(level.selectedRotate_roll);
     }

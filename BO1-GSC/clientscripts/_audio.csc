@@ -1,6 +1,6 @@
 /**************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_audio.csc
+ * Script: clientscripts\_audio\.csc
 **************************************/
 
 #include clientscripts\_utility;
@@ -18,12 +18,10 @@ audio_init(localClientNum) {
     init_after_save_restore();
   }
 }
-
 init_after_save_restore() {
   level waittill("save_restore");
   level thread audio_init(0);
 }
-
 snd_snapshot_init() {
   level._sndActiveSnapshot = "default";
   if(!isDefined(level._sndNextSnapshot)) {
@@ -33,18 +31,15 @@ snd_snapshot_init() {
   thread snd_snapshot_think();
   thread snd_snapshot_save();
 }
-
 snd_snapshot_save() {
   level waittill("save_restore");
   setgroupsnapshot(level._sndActiveSnapshot);
 }
-
 snd_set_snapshot(state) {
   level._sndNextSnapshot = state;
   println("snd snapshot debug: set state '" + state + "'");
   level notify("new_bus");
 }
-
 snd_snapshot_think() {
   level endon("save_restore");
   for(;;) {
@@ -60,7 +55,6 @@ snd_snapshot_think() {
     level._sndActiveSnapshot = level._sndNextSnapshot;
   }
 }
-
 snd_snapshot_level_fadein() {
   level notify("end_duplicate_fadein");
   level endon("end_duplicate_fadein");
@@ -82,7 +76,6 @@ snd_snapshot_level_fadein() {
     player waittill("respawn");
   }
 }
-
 soundRandom_Thread(localClientNum, randSound) {
   level endon("save_restore");
   if(!isDefined(randSound.script_wait_min)) {
@@ -100,7 +93,6 @@ soundRandom_Thread(localClientNum, randSound) {
     }
   }
 }
-
 startSoundRandoms(localClientNum) {
   randoms = GetStructArray("random", "script_label");
   if(isDefined(randoms) && randoms.size > 0) {
@@ -112,7 +104,6 @@ startSoundRandoms(localClientNum) {
     println("*** Client : No random sounds.");
   }
 }
-
 soundLoopThink() {
   if(!isDefined(self.script_sound)) {
     return;
@@ -147,7 +138,6 @@ soundLoopThink() {
     }
   } else {}
 }
-
 soundLineThink() {
   level endon("save_restore");
   if(!isDefined(self.target)) {
@@ -181,7 +171,6 @@ soundLineThink() {
     }
   } else {}
 }
-
 startSoundLoops() {
   loopers = GetStructArray("looper", "script_label");
   if(isDefined(loopers) && loopers.size > 0) {
@@ -198,7 +187,6 @@ startSoundLoops() {
     println("*** Client : No looper sounds.");
   }
 }
-
 startLineEmitters() {
   lineEmitters = GetStructArray("line_emitter", "script_label");
   if(isDefined(lineEmitters) && lineEmitters.size > 0) {
@@ -215,21 +203,18 @@ startLineEmitters() {
     println("*** Client : No line emitter sounds.");
   }
 }
-
 init_audio_step_triggers() {
   waitforclient(0);
   trigs = getEntArray(0, "audio_step_trigger", "targetname");
   println("Client : " + trigs.size + " audio_step_triggers.");
   array_thread(trigs, ::audio_step_trigger);
 }
-
 audio_step_trigger(trig) {
   for(;;) {
     self waittill("trigger", trigPlayer);
     self thread trigger_thread(trigPlayer, ::trig_enter_audio_step_trigger, ::trig_leave_audio_step_trigger);
   }
 }
-
 trig_enter_audio_step_trigger(trigPlayer) {
   if(!isDefined(trigPlayer.movementtype)) {
     trigPlayer.movementtype = "null";
@@ -242,7 +227,6 @@ trig_enter_audio_step_trigger(trigPlayer) {
     self playSound(0, self.script_sound, self.origin, volume);
   }
 }
-
 trig_leave_audio_step_trigger(trigPlayer) {
   if(isDefined(self.script_noteworthy) && (trigPlayer.movementtype == "sprint")) {
     volume = 9;
@@ -250,14 +234,12 @@ trig_leave_audio_step_trigger(trigPlayer) {
   }
   trigPlayer.step_sound = "null";
 }
-
 bump_trigger_start() {
   bump_trigs = getEntArray(0, "audio_bump_trigger", "targetname");
   for(i = 0; i < bump_trigs.size; i++) {
     bump_trigs[i] thread thread_bump_trigger();
   }
 }
-
 thread_bump_trigger() {
   self thread bump_trigger_listener();
   if(!isDefined(self.script_activated)) {
@@ -268,7 +250,6 @@ thread_bump_trigger() {
     self thread trigger_thread(trigPlayer, ::trig_enter_bump, ::trig_leave_bump);
   }
 }
-
 trig_enter_bump(ent) {
   volume = get_vol_from_speed(ent);
   if(isDefined(self.script_sound) && self.script_activated) {
@@ -280,7 +261,6 @@ trig_enter_bump(ent) {
     }
   }
 }
-
 trig_leave_bump(ent) {}
 bump_trigger_listener() {
   if(isDefined(self.script_label)) {
@@ -288,7 +268,6 @@ bump_trigger_listener() {
     self.script_activated = 0;
   }
 }
-
 start_player_health_snapshot() {
   if(isDefined(level.zombiemode) && level.zombiemode == true) {
     return;
@@ -310,19 +289,19 @@ start_player_health_snapshot() {
     SetHealthSnapshot(health_snapshot, health_scale);
   }
 }
-
 scale_speed(x1, x2, y1, y2, z) {
-  if(z < x1)
+  if(z < x1) {
     z = x1;
-  if(z > x2)
+  }
+  if(z > x2) {
     z = x2;
+  }
   dx = x2 - x1;
   n = (z - x1) / dx;
   dy = y2 - y1;
   w = (n * dy + y1);
   return w;
 }
-
 get_vol_from_speed(player) {
   min_speed = 21;
   max_speed = 285;
@@ -339,18 +318,18 @@ get_vol_from_speed(player) {
   volume = scale_speed(min_speed, max_speed, min_vol, max_vol, abs_speed);
   return volume;
 }
-
 absolute_value(fowd) {
-  if(fowd < 0)
+  if(fowd < 0) {
     return (fowd * -1);
-  else
+  } else {
     return fowd;
+  }
 }
-
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   self endon("end line sound");
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
-  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) / (LineMagSqrd);
+  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) /
+    (LineMagSqrd);
   if(t < 0.0) {
     self.origin = LineStart;
   } else if(t > 1.0) {
@@ -362,16 +341,15 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
     self.origin = (start_x, start_y, start_z);
   }
 }
-
 playloopat(localClientNum, aliasname, origin, fade) {
-  if(!isDefined(fade))
+  if(!isDefined(fade)) {
     fade = 0;
+  }
   fake_ent = spawnfakeent(localClientNum);
   setfakeentorg(localClientNum, fake_ent, origin);
   playLoopSound(localClientNum, fake_ent, aliasname, fade);
   return fake_ent;
 }
-
 snd_play_auto_fx(fxid, alias) {
   for(i = 0; i < level.createFXent.size; i++) {
     if(level.createFXent[i].v["fxid"] == fxid && !isDefined(level.createFXent[i].soundEnt)) {
@@ -381,7 +359,6 @@ snd_play_auto_fx(fxid, alias) {
     }
   }
 }
-
 snd_delete_auto_fx(fxid) {
   for(i = 0; i < level.createFXent.size; i++) {
     if(level.createFXent[i].v["fxid"] == fxid && isDefined(level.createFXent[i].soundEnt)) {
@@ -390,15 +367,12 @@ snd_delete_auto_fx(fxid) {
     }
   }
 }
-
 snd_print_fx_id(fxid, type, ent) {
   printLn("^5******* fxid; " + fxid + "^5 type; " + type);
 }
-
 debug_line_emitter() {
   while(1) {}
 }
-
 move_sound_along_line() {
   closest_dist = undefined;
   while(1) {
@@ -416,7 +390,6 @@ move_sound_along_line() {
     }
   }
 }
-
 line_sound_player() {
   if(isDefined(self.script_looping)) {
     self.fake_ent = spawnfakeent(self.localClientNum);
@@ -426,13 +399,11 @@ line_sound_player() {
     playSound(self.localClientNum, self.script_sound, self.origin);
   }
 }
-
 soundwait(id) {
   while(soundplaying(id)) {
     wait(0.1);
   }
 }
-
 sound_movie_snapshot_start() {
   while(1) {
     level waittill("pms");
@@ -440,7 +411,6 @@ sound_movie_snapshot_start() {
     snd_set_snapshot("alloff_except_voice_music");
   }
 }
-
 sound_movie_snapshot_alloff_but_mid_start() {
   while(1) {
     level waittill("pmsao");
@@ -448,7 +418,6 @@ sound_movie_snapshot_alloff_but_mid_start() {
     snd_set_snapshot("flashback_duck");
   }
 }
-
 sound_movie_snapshot_stop() {
   while(1) {
     level waittill("pmo");

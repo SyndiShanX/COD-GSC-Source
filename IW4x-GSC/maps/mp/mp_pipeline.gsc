@@ -17,10 +17,10 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  setdvar("r_specularcolorscale", "1");
+  setDvar("r_specularcolorscale", "1");
 
-  setdvar("r_glowbloomintensity0", ".1");
-  setdvar("r_glowbloomintensity1", ".1");
-  setdvar("r_glowskybleedintensity0", ".1");
-  setdvar("compassmaxrange", "2200");
+  setDvar("r_glowbloomintensity0", ".1");
+  setDvar("r_glowbloomintensity1", ".1");
+  setDvar("r_glowskybleedintensity0", ".1");
+  setDvar("compassmaxrange", "2200");
 }

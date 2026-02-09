@@ -177,7 +177,7 @@ func_7FDB() {
     if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_3)) {
       continue;
     }
-    if(isplayer(var_3) || isagent(var_3)) {
+    if(isPlayer(var_3) || isagent(var_3)) {
       if(scripts\mp\utility::func_9F72(var_3)) {
         continue;
       }

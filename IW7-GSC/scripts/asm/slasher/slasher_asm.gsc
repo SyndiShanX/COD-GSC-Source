@@ -288,7 +288,7 @@ firebladeburst(var_0, var_1, var_2) {
   for(var_5 = 0; var_5 < var_4; var_5++) {
     var_6 = (randomfloatrange(var_3.sawblade_min_offset, var_3.sawblade_max_offset), randomfloatrange(var_3.sawblade_min_offset, var_3.sawblade_max_offset), randomfloatrange(var_3.sawblade_min_offset, var_3.sawblade_max_offset));
     var_7 = magicbullet("iw7_slasher_sawblade_mp", var_1, var_2 + var_6, self);
-    var_8 = getdvar("ui_mapname");
+    var_8 = getDvar("ui_mapname");
     if(var_8 != "cp_final") {
       var_7 thread hide_and_show_blade();
     }
@@ -312,7 +312,7 @@ fireblades(var_0) {
       } else {
         var_5 = (randomfloatrange(var_1.sawblade_min_offset, var_1.sawblade_max_offset), randomfloatrange(var_1.sawblade_min_offset, var_1.sawblade_max_offset), randomfloatrange(var_1.sawblade_min_offset, var_1.sawblade_max_offset));
         var_6 = magicbullet("iw7_slasher_sawblade_mp", var_3, var_4 + var_5, self);
-        var_7 = getdvar("ui_mapname");
+        var_7 = getDvar("ui_mapname");
         if(var_7 != "cp_final") {
           var_6 thread hide_and_show_blade();
         }

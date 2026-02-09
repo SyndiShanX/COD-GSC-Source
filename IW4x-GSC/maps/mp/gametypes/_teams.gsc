@@ -68,12 +68,12 @@ initScoreBoard() {
   scoreColor = getTeamColor("axis");
   setDvar("g_ScoresColor_Axis", scoreColor[0] + " " + scoreColor[1] + " " + scoreColor[2]);
 
-  setdvar("g_ScoresColor_Spectator", ".25 .25 .25");
-  setdvar("g_ScoresColor_Free", ".76 .78 .10");
-  setdvar("g_teamColor_MyTeam", ".6 .8 .6");
-  setdvar("g_teamColor_EnemyTeam", "1 .45 .5");
-  setdvar("g_teamTitleColor_MyTeam", ".6 .8 .6");
-  setdvar("g_teamTitleColor_EnemyTeam", "1 .45 .5");
+  setDvar("g_ScoresColor_Spectator", ".25 .25 .25");
+  setDvar("g_ScoresColor_Free", ".76 .78 .10");
+  setDvar("g_teamColor_MyTeam", ".6 .8 .6");
+  setDvar("g_teamColor_EnemyTeam", "1 .45 .5");
+  setDvar("g_teamTitleColor_MyTeam", ".6 .8 .6");
+  setDvar("g_teamTitleColor_EnemyTeam", "1 .45 .5");
 }
 
 onPlayerConnect() {
@@ -137,7 +137,6 @@ trackPlayedTime() {
       } else if(self.sessionteam == "spectator") {
         self.timePlayed["other"]++;
       }
-
     }
 
     wait(1.0);
@@ -788,7 +787,6 @@ setTeamModels(team, charSet) {
       game[team + "_model"]["SMG"] = mptype\mptype_sas_urban_smg::main;
       game[team + "_model"]["RIOT"] = mptype\mptype_sas_urban_smg::main;
       break;
-
   }
 }
 

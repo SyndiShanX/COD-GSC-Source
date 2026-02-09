@@ -175,7 +175,7 @@ delete_beginning_ents() {
   wait 1;
 
   foreach(var_3 in var_0) {
-    if(var_3 != var_1 && !isplayer(var_3) && var_3 != level.mover_object && isDefined(var_3.classname) && var_3.classname != "script_origin") {
+    if(var_3 != var_1 && !isPlayer(var_3) && var_3 != level.mover_object && isDefined(var_3.classname) && var_3.classname != "script_origin") {
       if(isDefined(var_3.origin)) {
         level.mover_object.origin = var_3.origin;
 

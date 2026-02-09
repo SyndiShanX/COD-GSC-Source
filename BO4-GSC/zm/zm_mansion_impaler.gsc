@@ -644,7 +644,7 @@ function_9ee098d5() {
     if(isDefined(v_drop)) {
       switch (var_ac3fdee1) {
         case 0:
-          if(isplayer(waitresult.attacker)) {
+          if(isPlayer(waitresult.attacker)) {
             level thread function_7de84c26(v_drop, var_ac3fdee1);
             var_ac3fdee1++;
           }
@@ -911,7 +911,7 @@ on_nosferatu_killed(s_params) {
   if(self.archetype === # "nosferatu" && !level flag::get(#"hash_2e0f59cef233a264")) {
     t_radius = getent("t_imp_kill", "targetname");
 
-    if(self istouching(t_radius) && isplayer(s_params.eattacker)) {
+    if(self istouching(t_radius) && isPlayer(s_params.eattacker)) {
       level.var_6a17ff24++;
       self playSound(#"hash_4dd41aee138bb20c");
 
@@ -1112,7 +1112,7 @@ function_615d8c38(params) {
     return;
   }
 
-  if(!isplayer(params.eattacker)) {
+  if(!isPlayer(params.eattacker)) {
     return;
   }
 

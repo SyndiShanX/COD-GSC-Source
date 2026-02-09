@@ -111,7 +111,6 @@ class cct_shared_button_prompt: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("_state", 1, 5, "int");
   }
-
 }
 
 register(uid) {

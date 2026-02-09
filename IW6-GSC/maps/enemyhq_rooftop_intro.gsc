@@ -94,7 +94,7 @@ setup_rooftop_intro() {
 }
 
 begin_rooftop_intro() {
-  level.ehq_znear_default = getdvar("r_znear");
+  level.ehq_znear_default = getDvar("r_znear");
   setsaveddvar("r_znear", 40.0);
   thread maps\enemyhq_intro::spawn_player_truck();
   maps\_utility::disable_trigger_with_targetname("TRIG_get_in_truck");
@@ -187,7 +187,7 @@ player_failcase_road_mk32() {
 
     while(common_scripts\utility::flag("FLAG_player_failcase_road_mk32")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setDvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -202,7 +202,7 @@ player_failcase_road_mk32() {
 player_failcase_road_overrun_mk32() {
   level endon("kill_player_fail");
   common_scripts\utility::flag_wait("FLAG_player_failcase_road_overrun_mk32");
-  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setDvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -989,7 +989,7 @@ watch_last_truck() {
       wait 3;
 
       if(level.player_hit_convoy == 0) {
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_FAILED_TO_HIT_ENOUGH");
+        setDvar("ui_deadquote", &"ENEMY_HQ_YOU_FAILED_TO_HIT_ENOUGH");
         maps\_utility::missionfailedwrapper();
         wait 20;
       }
@@ -1276,9 +1276,9 @@ track_dud() {
 
     if(isDefined(var_9) && (var_9 == level.player_truck || isai(var_9) && var_9.team == "allies")) {
       if(var_9 == level.player_truck)
-        setdvar("ui_deadquote", &"ENEMY_HQ_YOUR_ACTIONS_COMPROMISED");
+        setDvar("ui_deadquote", &"ENEMY_HQ_YOUR_ACTIONS_COMPROMISED");
       else
-        setdvar("ui_deadquote", &"ENEMY_HQ_FRIENDLY_FIRE_WILL_NOT");
+        setDvar("ui_deadquote", &"ENEMY_HQ_FRIENDLY_FIRE_WILL_NOT");
 
       maps\_utility::missionfailedwrapper();
       wait 10;

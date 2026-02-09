@@ -277,11 +277,9 @@ domflags() {
         spawn_beacon::addprotectedzone(trigger);
       } else {
         util::error("<dev string:x68>" + dom_flag.script_label + "<dev string:x8a>" + dom_flag.target);
-
       }
     } else {
       util::error("<dev string:x68>" + dom_flag.script_label);
-
     }
 
     if(trigger.script_label == "_a") {
@@ -300,7 +298,6 @@ domflags() {
     }
 
     util::error("<dev string:x9e>" + trigger.script_label);
-
   }
 
   level.domflags = [];
@@ -930,7 +927,6 @@ credit_player(player, string, lastownerteam, isbflag, neutralizing, time, var_a8
     }
   } else {
     player iprintlnbold("<dev string:xf6>");
-
   }
 
   if(var_a84f97bf) {
@@ -965,7 +961,6 @@ give_neutralized_credit(touchlist, string, lastownerteam, isbflag) {
       potm::bookmark(#"event", gettime(), player_from_touchlist);
     } else {
       player_from_touchlist iprintlnbold("<dev string:xf6>");
-
     }
 
     level thread popups::displayteammessagetoall(string, player_from_touchlist);
@@ -1166,7 +1161,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
     return;
   }
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     scoreeventprocessed = 0;
 
     if(!scoreeventprocessed && isDefined(attacker.touchtriggers) && attacker.touchtriggers.size && attacker.pers[# "team"] != victim.pers[# "team"]) {
@@ -1219,7 +1214,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
         }
       }
 
-      if(inflagzone && isplayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"]) {
+      if(inflagzone && isPlayer(attacker) && attacker.pers[# "team"] != victim.pers[# "team"]) {
         if(offendedflag) {
           if(!isDefined(attacker.dom_defends)) {
             attacker.dom_defends = 0;
@@ -1247,7 +1242,6 @@ function_610d3790(einflictor, victim, idamage, weapon) {
             break;
           } else {
             attacker iprintlnbold("<dev string:x262>");
-
           }
         }
 
@@ -1284,7 +1278,6 @@ function_610d3790(einflictor, victim, idamage, weapon) {
           }
 
           attacker iprintlnbold("<dev string:x2ab>");
-
         }
       }
     }
@@ -1316,7 +1309,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     return;
   }
 
-  if(isplayer(attacker) == 0 || attacker.team == self.team) {
+  if(isPlayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
 
@@ -1759,7 +1752,7 @@ updatecapsperminute(lastownerteam) {
   self.numcaps++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed[# "total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed[# "total"])) {
     minutespassed = self.timeplayed[# "total"] / 60;
   }
 
@@ -1791,7 +1784,7 @@ isscoreboosting(player, flag) {
 }
 
 on_touch_use(sentient) {
-  if(isplayer(sentient)) {
+  if(isPlayer(sentient)) {
     if((isDefined(self.contested) ? self.contested : 0) && (isDefined(sentient.var_c8d27c06) ? sentient.var_c8d27c06 : 0) < gettime()) {
       sentient playsoundtoplayer(#"mpl_control_capture_contested", sentient);
       sentient.var_c8d27c06 = gettime() + 5000;
@@ -1814,7 +1807,7 @@ onupdateuserate() {
         foreach(struct in playerlist) {
           player = struct.player;
 
-          if(isDefined(player) && isplayer(player) && (isDefined(player.var_c8d27c06) ? player.var_c8d27c06 : 0) < gettime()) {
+          if(isDefined(player) && isPlayer(player) && (isDefined(player.var_c8d27c06) ? player.var_c8d27c06 : 0) < gettime()) {
             player playsoundtoplayer(#"mpl_control_capture_contested", player);
             player.var_c8d27c06 = gettime() + 5000;
           }

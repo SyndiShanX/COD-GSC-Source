@@ -1297,7 +1297,6 @@ print_resume_speed(timer) {
       position = i * 32;
 
       print3d(self.origin + (0, 0, position), "<dev string:x1a0>" + self.resumemsgs[i], (0, 1, 0), 1, 3);
-
     }
 
     waitframe(1);
@@ -1376,7 +1375,6 @@ node_trigger_process() {
     if(level.vehicle_detourpaths[self.script_vehicledetour].size > 2) {
       println("<dev string:x1d3>", self.script_vehicledetour);
     }
-
   }
 
   if(isDefined(self.script_gatetrigger)) {
@@ -1548,13 +1546,12 @@ _play_looped_fx_on_tag_origin_update(tag, effectorigin) {
 
 setup_dvars() {
   if(getdvarstring(#"debug_vehicleresume") == "<dev string:x212>") {
-    setdvar(#"debug_vehicleresume", "<dev string:x180>");
+    setDvar(#"debug_vehicleresume", "<dev string:x180>");
   }
 
   if(getdvarstring(#"debug_vehiclesetspeed") == "<dev string:x212>") {
-    setdvar(#"debug_vehiclesetspeed", "<dev string:x180>");
+    setDvar(#"debug_vehiclesetspeed", "<dev string:x180>");
   }
-
 }
 
 setup_level_vars() {
@@ -2363,7 +2360,7 @@ debug_vehicle() {
   self endon(#"death");
 
   if(getdvarstring(#"debug_vehicle_health") == "<dev string:x212>") {
-    setdvar(#"debug_vehicle_health", 0);
+    setDvar(#"debug_vehicle_health", 0);
   }
 
   while(true) {
@@ -2419,7 +2416,7 @@ vehicle_get_occupant_team() {
   if(occupants.size != 0) {
     occupant = occupants[0];
 
-    if(isplayer(occupant)) {
+    if(isPlayer(occupant)) {
       return occupant.team;
     }
   }
@@ -2504,7 +2501,7 @@ function_fa4236af(params) {
   self endon(#"death", #"exit_vehicle");
   driver = self getseatoccupant(0);
 
-  if(!isplayer(driver)) {
+  if(!isPlayer(driver)) {
     self toggle_sounds(1);
     return;
   }
@@ -2934,7 +2931,7 @@ vehicle_spawner_tool() {
           vehicle makevehicleusable();
 
           if(getdvarint(#"debug_vehicle_spawn", 0) == 1) {
-            setdvar(#"debug_vehicle_spawn", 0);
+            setDvar(#"debug_vehicle_spawn", 0);
             continue;
           }
 
@@ -3742,7 +3739,7 @@ function_f2fa0421(n_health) {
     a_occupants = self getvehoccupants();
 
     foreach(e_occupant in a_occupants) {
-      if(isplayer(e_occupant)) {
+      if(isPlayer(e_occupant)) {
         e_occupant update_damage_as_occupant(self.maxhealth - self.health, self.maxhealth);
       }
     }

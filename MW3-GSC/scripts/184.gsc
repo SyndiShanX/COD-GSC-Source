@@ -14,28 +14,25 @@ _id_18A8() {
 
   if(isalive(level.player)) {
     level.player waittill("death");
-
   }
   if(!level._id_16C9) {
     var_0 = int(tablelookup("sp/deathQuoteTable.csv", 1, "size", 0));
     var_1 = randomint(var_0);
 
-    if(getdvar("cycle_deathquotes") != "") {
-      if(getdvar("ui_deadquote_index") == "") {
-        setdvar("ui_deadquote_index", "0");
-
+    if(getDvar("cycle_deathquotes") != "") {
+      if(getDvar("ui_deadquote_index") == "") {
+        setDvar("ui_deadquote_index", "0");
       }
       var_1 = getdvarint("ui_deadquote_index");
-      setdvar("ui_deadquote", _id_18A9(var_1));
+      setDvar("ui_deadquote", _id_18A9(var_1));
       var_1++;
 
       if(var_1 > var_0 - 1) {
         var_1 = 0;
-
       }
-      setdvar("ui_deadquote_index", var_1);
+      setDvar("ui_deadquote_index", var_1);
     } else {
-      setdvar("ui_deadquote", _id_18A9(var_1));
+      setDvar("ui_deadquote", _id_18A9(var_1));
     }
   }
 }
@@ -45,7 +42,6 @@ _id_18A9(var_0) {
 
   if(tolower(var_1[0]) != tolower("@")) {
     var_1 = "@" + var_1;
-
   }
   return var_1;
 }
@@ -67,11 +63,9 @@ _id_18AA() {
 
         if(var_1 >= var_0.size) {
           var_1 = 0;
-
         }
         if(var_1 == var_3) {
           var_2 = 0;
-
         }
         continue;
       }
@@ -79,9 +73,9 @@ _id_18AA() {
       var_2 = 0;
     }
 
-    setdvar("ui_deadquote_v3", getdvar("ui_deadquote_v2"));
-    setdvar("ui_deadquote_v2", getdvar("ui_deadquote_v1"));
-    setdvar("ui_deadquote_v1", var_0[var_1]);
+    setDvar("ui_deadquote_v3", getDvar("ui_deadquote_v2"));
+    setDvar("ui_deadquote_v2", getDvar("ui_deadquote_v1"));
+    setDvar("ui_deadquote_v1", var_0[var_1]);
   }
 
   switch (var_0[var_1]) {
@@ -106,21 +100,18 @@ _id_18AA() {
       break;
   }
 
-  setdvar("ui_deadquote", var_0[var_1]);
+  setDvar("ui_deadquote", var_0[var_1]);
 }
 
 _id_18AC(var_0) {
-  if(var_0 == getdvar("ui_deadquote_v1")) {
+  if(var_0 == getDvar("ui_deadquote_v1")) {
     return 1;
-
   }
-  if(var_0 == getdvar("ui_deadquote_v2")) {
+  if(var_0 == getDvar("ui_deadquote_v2")) {
     return 1;
-
   }
-  if(var_0 == getdvar("ui_deadquote_v3")) {
+  if(var_0 == getDvar("ui_deadquote_v3")) {
     return 1;
-
   }
   return 0;
 }
@@ -128,7 +119,6 @@ _id_18AC(var_0) {
 _id_18AD() {
   if(_id_18AE()) {
     return level._id_1840;
-
   }
   var_0 = [];
   var_0[var_0.size] = "@DEADQUOTE_SO_TOGGLE_WEAP_ALT_MODE";
@@ -159,7 +149,6 @@ _id_18AD() {
 
   if(isDefined(self._id_1862) && self._id_1862 != "none") {
     var_0[var_0.size] = "@DEADQUOTE_SO_TOGGLE_TIMER";
-
   }
   if(maps\_utility::_id_12C1()) {
     var_0[var_0.size] = "@DEADQUOTE_SO_CRAWL_TO_TEAMMATE";
@@ -174,11 +163,9 @@ _id_18AD() {
 _id_18AE() {
   if(!isDefined(level._id_1840)) {
     return 0;
-
   }
   if(level._id_1840.size <= 0) {
     return 0;
-
   }
   return level._id_17E0 >= randomfloat(1.0);
 }

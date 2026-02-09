@@ -12,9 +12,9 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_crash_dlc");
   game["attackers"] = "axis";
   game["defenders"] = "allies";
-  setdvar("compassmaxrange", "1600");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("compassmaxrange", "1600");
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   thread misc_rotate_ceilingfans();
   thread knockbadpanoffwall();
 }

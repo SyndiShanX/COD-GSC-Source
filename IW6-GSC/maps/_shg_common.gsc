@@ -621,7 +621,7 @@ vision_change_multiple_internal() {
   for(;;) {
     self waittill("trigger", var_5);
 
-    if(isplayer(var_5)) {
+    if(isPlayer(var_5)) {
       var_6 = anglesToForward(var_5 getplayerangles());
       var_7 = undefined;
       var_8 = 0;
@@ -731,7 +731,7 @@ anim_single_end_early(var_0, var_1, var_2) {
     if(var_20) {
       var_9 maps\_anim::last_anim_time_check();
 
-      if(isplayer(var_9)) {
+      if(isPlayer(var_9)) {
         var_25 = level.scr_anim[var_24]["root"];
         var_9 setanim(var_25, 0, 0.2);
         var_26 = level.scr_anim[var_24][var_1];
@@ -792,7 +792,7 @@ anim_single_end_early(var_0, var_1, var_2) {
     if(!isDefined(var_9)) {
       continue;
     }
-    if(isplayer(var_9)) {
+    if(isPlayer(var_9)) {
       var_24 = var_9.animname;
 
       if(isDefined(level.scr_anim[var_24][var_1])) {

@@ -62,8 +62,9 @@ set_deathmodel(v_point, v_dir) {
     num_pieces = 1;
 
     if(isDefined(self.last_damage_mod)) {
-      if(self.last_damage_mod == "MOD_PROJECTILE" || self.last_damage_mod == "MOD_EXPLOSIVE")
+      if(self.last_damage_mod == "MOD_PROJECTILE" || self.last_damage_mod == "MOD_EXPLOSIVE") {
         num_pieces = randomintrange(2, deathmodel_pieces.size);
+      }
     }
 
     for(i = 0; i < num_pieces; i++) {
@@ -81,18 +82,20 @@ rotate_dead_piece() {
   self endon("death");
   torque = (0, randomintrange(-90, 90), randomintrange(90, 720));
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     torque = (torque[0], torque[1], torque[2] * -1);
+  }
 
   ang_vel = (0, 0, 0);
 
   while(isDefined(self)) {
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[2] < 500 * -1)
+    if(ang_vel[2] < 500 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 500 * -1);
-    else if(ang_vel[2] > 500)
+    } else if(ang_vel[2] > 500) {
       ang_vel = (ang_vel[0], ang_vel[1], 500);
+    }
 
     self.angles = self.angles + ang_vel * 0.05;
     wait 0.05;

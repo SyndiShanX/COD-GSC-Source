@@ -10,9 +10,7 @@
 #include maps\_specialops;
 #include maps\_hud_util;
 
-// ---------------------------------------------------------------------------------
-
-fire_off_exploder(current) {
+// --------------------------------------------------------------------------------- fire_off_exploder(current) {
   while(1) {
     exploder(current.script_prefab_exploder);
     if(!isDefined(current.target)) {
@@ -26,9 +24,7 @@ fire_off_exploder(current) {
   }
 }
 
-// ---------------------------------------------------------------------------------
-
-create_smoke_wave(smoke_tag, flag_start, dialog_wait) {
+// --------------------------------------------------------------------------------- create_smoke_wave(smoke_tag, flag_start, dialog_wait) {
   if(isDefined(flag_start)) {
     flag_init(flag_start);
     flag_wait(flag_start);
@@ -68,9 +64,7 @@ dialog_smoke_wave_alert(dialog_wait) {
   radio_dialogue("so_def_inv_thermaloptics");
 }
 
-// ---------------------------------------------------------------------------------
-
-btr80_level_init() {
+// --------------------------------------------------------------------------------- btr80_level_init() {
   if(isDefined(level.btr_init)) {
     return;
   }
@@ -395,9 +389,7 @@ dialog_btr80_spotted_you_action() {
   radio_dialogue("so_def_inv_bmpspottedyou");
 }
 
-// ---------------------------------------------------------------------------------
-
-hunter_enemies_level_init() {
+// --------------------------------------------------------------------------------- hunter_enemies_level_init() {
   if(isDefined(level.hunters_init)) {
     return;
   }
@@ -644,7 +636,7 @@ hunter_register_long_death_finish(my_id) {
   if(!isDefined(attacker)) {
     return;
   }
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   if(cause == "MOD_UNKNOWN") {
@@ -749,9 +741,7 @@ dialog_hunter_enemies_setup(enemy_tag, wait_time) {
   level.dialog["taco_enemies"][2] = "inv_hqr_tacojoint";
 }
 
-// ---------------------------------------------------------------------------------
-
-hud_create_kill_counter() {
+// --------------------------------------------------------------------------------- hud_create_kill_counter() {
   level endon("special_op_failed");
 
   yline = 2;
@@ -986,7 +976,6 @@ hud_create_kill_splash(points) {
 
     self.hud_kill_splash_msg = hud_create_kill_splash_default(self);
     self.hud_kill_splash_msg.y = self.hud_kill_splash_points.y - 10;
-
   } else {
     self.hud_kill_splash_total += points;
     if(points > self.hud_kill_splash_max)
@@ -1147,9 +1136,7 @@ hud_create_kill_splash_default(player, message) {
   return hudelem;
 }
 
-// ---------------------------------------------------------------------------------
-
-door_diner_open() {
+// --------------------------------------------------------------------------------- door_diner_open() {
   diner_back_door = getent("diner_back_door", "targetname");
   diner_back_door rotateyaw(85, .3); //counter clockwise
   diner_back_door playSound("diner_backdoor_slams_open");

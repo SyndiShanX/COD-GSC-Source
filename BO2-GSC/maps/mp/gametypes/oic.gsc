@@ -148,7 +148,7 @@ onspawnplayer(predictedspawn) {
 }
 
 onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer))
+  if(isDefined(winningplayer) && isPlayer(winningplayer))
     [[level._setplayerscore]](winningplayer, [[level._getplayerscore]](winningplayer) + 1);
 }
 
@@ -222,7 +222,7 @@ onwagerfinalizeround() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && self != attacker) {
+  if(isDefined(attacker) && isPlayer(attacker) && self != attacker) {
     attackerammo = attacker getammocount("kard_wager_mp");
     victimammo = self getammocount("kard_wager_mp");
     attacker giveammo(1);

@@ -311,7 +311,7 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       }
     }
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_2);
     }
   } else if(var_8 == "helmet") {
@@ -324,7 +324,7 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
       self notify("helmet_damage");
 
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_2);
       }
 
@@ -340,7 +340,7 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 }
 
 brute_killed_vo(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_brute", "zmb_comment_vo", "medium", 10, 0, 0, 0, 20);
   }
 

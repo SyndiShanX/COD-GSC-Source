@@ -24,9 +24,9 @@ init() {
     level.hostname = "CoDHost";
   }
 
-  setdvar(#"sv_hostname", level.hostname);
+  setDvar(#"sv_hostname", level.hostname);
   level.allowvote = getdvarint(#"g_allowvote", 1);
-  setdvar(#"g_allowvote", level.allowvote);
+  setDvar(#"g_allowvote", level.allowvote);
   level.allow_teamchange = 0;
   allowingameteamchange = getgametypesetting(#"allowingameteamchange");
 
@@ -48,16 +48,16 @@ init() {
   level.var_ca1c5097 = getgametypesetting(#"hash_5c918cbf75e16116");
   level.var_2c3d094b = getgametypesetting(#"hash_ecf2124e9108fc4");
 
-  if(!isDefined(getdvar(#"scr_mapsize"))) {
-    setdvar(#"scr_mapsize", 64);
+  if(!isDefined(getDvar(#"scr_mapsize"))) {
+    setDvar(#"scr_mapsize", 64);
   } else if(getdvarfloat(#"scr_mapsize", 0) >= 64) {
-    setdvar(#"scr_mapsize", 64);
+    setDvar(#"scr_mapsize", 64);
   } else if(getdvarfloat(#"scr_mapsize", 0) >= 32) {
-    setdvar(#"scr_mapsize", 32);
+    setDvar(#"scr_mapsize", 32);
   } else if(getdvarfloat(#"scr_mapsize", 0) >= 16) {
-    setdvar(#"scr_mapsize", 16);
+    setDvar(#"scr_mapsize", 16);
   } else {
-    setdvar(#"scr_mapsize", 8);
+    setDvar(#"scr_mapsize", 8);
   }
 
   level.mapsize = getdvarfloat(#"scr_mapsize", 0);
@@ -78,14 +78,14 @@ update() {
 
   if(level.hostname != sv_hostname) {
     level.hostname = sv_hostname;
-    setdvar(#"ui_hostname", level.hostname);
+    setDvar(#"ui_hostname", level.hostname);
   }
 
   g_allowvote = getdvarstring(#"g_allowvote");
 
   if(level.allowvote != g_allowvote) {
     level.allowvote = g_allowvote;
-    setdvar(#"ui_allowvote", level.allowvote);
+    setDvar(#"ui_allowvote", level.allowvote);
   }
 
   if(sessionmodeismultiplayergame()) {
@@ -100,7 +100,7 @@ update() {
 
   if(level.friendlyfire != scr_friendlyfire) {
     level.friendlyfire = scr_friendlyfire;
-    setdvar(#"ui_friendlyfire", level.friendlyfire);
+    setDvar(#"ui_friendlyfire", level.friendlyfire);
   }
 }
 

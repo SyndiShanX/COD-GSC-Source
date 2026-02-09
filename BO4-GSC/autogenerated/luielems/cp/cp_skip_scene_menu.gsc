@@ -41,7 +41,6 @@ class ccp_skip_scene_menu: cluielem {
     cluielem::add_clientfield("votedToSkip", 1, 1, "int");
     cluielem::add_clientfield("sceneSkipEndTime", 1, 3, "int");
   }
-
 }
 
 register(uid) {

@@ -1328,14 +1328,14 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
 
 isSP() {
   if(!isDefined(level.isSP))
-    level.isSP = !(string_starts_with(getdvar("mapname"), "mp_"));
+    level.isSP = !(string_starts_with(getDvar("mapname"), "mp_"));
 
   return level.isSP;
 }
 
 isSP_TowerDefense() {
   if(!isDefined(level.isSP_TowerDefense))
-    level.isSP_TowerDefense = string_starts_with(getdvar("mapname"), "so_td_");
+    level.isSP_TowerDefense = string_starts_with(getDvar("mapname"), "so_td_");
 
   return level.isSP_TowerDefense;
 }
@@ -1376,7 +1376,6 @@ draw_line_for_time(org1, org2, r, g, b, timer) {
     line(org1, org2, (r, g, b), 1);
     wait .05;
   }
-
 }
 
 table_combine(table1, table2) {
@@ -1708,7 +1707,7 @@ PlayerUnlimitedAmmoThread() {
   while(1) {
     wait .5;
 
-    if(getdvar("UnlimitedAmmoOff") == "1") {
+    if(getDvar("UnlimitedAmmoOff") == "1") {
       continue;
     }
     currentWeapon = player getCurrentWeapon();
@@ -1911,7 +1910,7 @@ else
   fileprint_launcher("GAMEPRINTENDFILE:" + file_relative_to_game);
 
   TimeOut = gettime() + 4000;
-while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
+while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getDvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
   wait .05;
 
 if(!(gettime() < TimeOut)) {
@@ -1921,7 +1920,7 @@ if(!(gettime() < TimeOut)) {
   return false;
 }
 
-failvar = getdvar("LAUNCHER_PRINT_FAIL");
+failvar = getDvar("LAUNCHER_PRINT_FAIL");
 if(failvar != "0") {
   iprintlnbold("LAUNCHER_PRINT_FAIL:( " + failvar + " ): launcherconflict? restart launcher and try again? ");
   setdevdvar("LAUNCHER_PRINT_FAIL", "0");
@@ -2213,7 +2212,7 @@ error(msg) {
   PrintLn("^c * ERROR * ", msg);
   waitframe();
 
-  if(GetDvar("debug") != "1")
+  if(getDvar("debug") != "1")
     AssertMsg("This is a forced error - attach the log file. \n" + msg);
 }
 
@@ -2489,7 +2488,7 @@ set_basic_animated_model(model, anime, mpanimstring) {
   if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = [];
 
-  mapname = tolower(getdvar("mapname"));
+  mapname = tolower(getDvar("mapname"));
   SP = true;
   if(string_starts_with(mapname, "mp_"))
     SP = false;

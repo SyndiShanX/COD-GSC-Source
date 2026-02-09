@@ -100,7 +100,7 @@ onplayerconnect() {
       var_0.pers["summary"]["matchStartXp"] = var_4;
     }
 
-    if(getdvar("virtualLobbyActive") != "1") {
+    if(getDvar("virtualLobbyActive") != "1") {
       var_0 setclientdvar("ui_opensummary", 0);
       var_0 thread maps\mp\gametypes\_missions::updatechallenges();
     }
@@ -175,7 +175,7 @@ shouldplaysplash(var_0) {
 getscoreinfovalue(var_0) {
   var_1 = "scr_" + level.gametype + "_score_" + var_0;
 
-  if(getdvar(var_1) != "")
+  if(getDvar(var_1) != "")
     return getdvarint(var_1);
 
   return level.xpeventinfo[var_0]["value"];
@@ -242,7 +242,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isai(self)) {
     return;
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(!maps\mp\_utility::rankingenabled()) {

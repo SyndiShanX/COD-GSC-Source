@@ -117,7 +117,7 @@ func_85F8(var_0, var_1) {
   var_1 giveflagcapturexp(var_2 * 800);
   var_0 playSound("grey_force_push");
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 earthquakeforplayer(0.5, 1, var_1.origin, 800);
 
     if(!scripts\engine\utility::is_true(var_0.i_am_clone)) {
@@ -422,7 +422,7 @@ func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     } else {
       var_13 = gettime();
 
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         if(!scripts\engine\utility::is_true(self.actually_doing_regen)) {
           scripts\cp\cp_agent_utils::process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, self);
         }
@@ -456,7 +456,7 @@ func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   scripts\cp\agents\gametype_zombie::onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
   if(isDefined(var_2)) {
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       if(!isDefined(self.sum_of_recent_damage)) {
         scripts\aitypes\zombie_grey\behaviors::reset_recent_damage_data(self);
       }

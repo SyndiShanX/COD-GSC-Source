@@ -651,7 +651,6 @@ class class_d90687be {
     zm_genesis_arena::function_c1402204();
     level thread function_15715797();
   }
-
 }
 
 #namespace zm_genesis_arena;
@@ -745,13 +744,13 @@ function __init__() {
 }
 
 function __main__() {
-  setdvar("doublejump_enabled", 1);
-  setdvar("playerEnergy_enabled", 1);
-  setdvar("wallrun_enabled", 1);
-  setdvar("bg_lowGravity", 300);
-  setdvar("wallRun_maxTimeMs_zm", 10000);
-  setdvar("playerEnergy_maxReserve_zm", 200);
-  setdvar("wallRun_peakTest_zm", 0);
+  setDvar("doublejump_enabled", 1);
+  setDvar("playerEnergy_enabled", 1);
+  setDvar("wallrun_enabled", 1);
+  setDvar("bg_lowGravity", 300);
+  setDvar("wallRun_maxTimeMs_zm", 10000);
+  setDvar("playerEnergy_maxReserve_zm", 200);
+  setDvar("wallRun_peakTest_zm", 0);
   level thread function_3dbace38();
 }
 
@@ -790,13 +789,13 @@ function function_6f772f30() {
   level endon("hash_a3369c1f");
   while(true) {
     level waittill("host_migration_end");
-    setdvar("doublejump_enabled", 1);
-    setdvar("playerEnergy_enabled", 1);
-    setdvar("wallrun_enabled", 1);
-    setdvar("bg_lowGravity", 300);
-    setdvar("wallRun_maxTimeMs_zm", 10000);
-    setdvar("playerEnergy_maxReserve_zm", 200);
-    setdvar("wallRun_peakTest_zm", 0);
+    setDvar("doublejump_enabled", 1);
+    setDvar("playerEnergy_enabled", 1);
+    setDvar("wallrun_enabled", 1);
+    setDvar("bg_lowGravity", 300);
+    setDvar("wallRun_maxTimeMs_zm", 10000);
+    setDvar("playerEnergy_maxReserve_zm", 200);
+    setDvar("wallRun_peakTest_zm", 0);
   }
 }
 
@@ -2825,7 +2824,7 @@ function function_47c38473() {
     if(!level flag::get("final_boss_vulnerable")) {
       continue;
     }
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker show_hit_marker();
     }
     playFX(level._effect["shadowman_impact_fx"], point);
@@ -3449,7 +3448,7 @@ function function_ceedfe1c() {
     if(isDefined(player.b_teleporting) && player.b_teleporting) {
       continue;
     }
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player setstance("stand");
       playFX(level._effect["portal_3p"], player.origin);
       player playlocalsound("zmb_teleporter_teleport_2d");
@@ -3771,11 +3770,11 @@ function function_4f66f424(n_val) {
 }
 
 function function_5addbab1(n_val) {
-  setdvar("", "");
+  setDvar("", "");
   wait(1);
-  setdvar("", "");
+  setDvar("", "");
   wait(1);
-  setdvar("", "");
+  setDvar("", "");
 }
 
 function function_db4e54c1(n_val) {

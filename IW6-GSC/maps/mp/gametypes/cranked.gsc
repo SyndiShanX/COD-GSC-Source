@@ -9,7 +9,7 @@
 OP_CRANKED_RESET_TIME = 1000;
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -42,7 +42,7 @@ main() {
 
   if(!level.teamBased) {
     level.onPlayerScore = ::onPlayerScore;
-    SetDvar("scr_cranked_scorelimit", GetDvarInt("scr_cranked_scorelimit_ffa", 60));
+    setDvar("scr_cranked_scorelimit", GetDvarInt("scr_cranked_scorelimit_ffa", 60));
     SetTeamMode("ffa");
   }
 

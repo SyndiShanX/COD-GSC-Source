@@ -23,10 +23,10 @@ player_start() {
 }
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -34,22 +34,22 @@ main() {
   setsaveddvar("r_specularcolorscale", "1.2");
   initprecache();
 
-  if(getdvar("alt_music") == "")
-    setdvar("alt_music", "0");
+  if(getDvar("alt_music") == "")
+    setDvar("alt_music", "0");
 
-  if(getdvar("airmasks") == "")
-    setdvar("airmasks", "1");
+  if(getDvar("airmasks") == "")
+    setDvar("airmasks", "1");
 
-  if(getdvar("notimer") == "")
-    setdvar("notimer", "0");
+  if(getDvar("notimer") == "")
+    setDvar("notimer", "0");
 
-  if(getdvar("airplane_debug") == "")
-    setdvar("airplane_debug", "0");
+  if(getDvar("airplane_debug") == "")
+    setDvar("airplane_debug", "0");
 
   setsaveddvar("g_friendlyNameDist", 0);
 
-  if(getdvar("humanshield_magicbullet_shots") == "")
-    setdvar("humanshield_magicbullet_shots", 4);
+  if(getDvar("humanshield_magicbullet_shots") == "")
+    setDvar("humanshield_magicbullet_shots", 4);
 
   level.peoplespeaking = 0;
   level.firstaxiskilled = 0;
@@ -90,7 +90,7 @@ main() {
   maps\airplane_lighting::main();
   maps\airplane_aud::main();
 
-  if(getdvar("use_old_intro_fade_in") == "1")
+  if(getDvar("use_old_intro_fade_in") == "1")
     thread intro_fade_in();
   else
     thread intro_fade_in_h1();
@@ -463,7 +463,7 @@ fuselage_breached() {
   common_scripts\utility::flag_set("wind_zone_active");
   common_scripts\utility::flag_set("fuselage_breached");
 
-  if(getdvar("goggle_crack_during_breach") == "1")
+  if(getDvar("goggle_crack_during_breach") == "1")
     thread addgasmaskcracks();
 
   thread hull_breach_rumble(var_0, 0);
@@ -773,7 +773,7 @@ humanshield() {
   triggerfx(level.slowmooverlay);
   setomnvar("ui_airplane_slowmo_overlay", 1);
 
-  if(getdvar("chaplincheat") == "1") {
+  if(getDvar("chaplincheat") == "1") {
     level.player setmovespeedscale(0.2);
     level.eplayerview delete();
     common_scripts\utility::flag_wait("restore_timescale");
@@ -921,7 +921,7 @@ human_shield_ter_wounded_failsafe() {
 humanshield_magicbullet_h1(var_0) {
   var_1 = 1;
 
-  if(getdvar("humanshield_magicbullet_shots") != "" && getdvarint("humanshield_magicbullet_shots") > 0)
+  if(getDvar("humanshield_magicbullet_shots") != "" && getdvarint("humanshield_magicbullet_shots") > 0)
     var_1 = getdvarint("humanshield_magicbullet_shots");
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
@@ -979,7 +979,7 @@ human_shield_pain_monitor() {
       continue;
     }
     if(self == level.hostage) {
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         self kill();
         break;
       }
@@ -1026,7 +1026,7 @@ mission_failed_veteran_no_headshot() {
   level notify("mission failed");
   thread killtimer();
   level notify("kill_timer");
-  setdvar("ui_deadquote", &"AIRPLANE_HOSTAGE_NO_HEADSHOT");
+  setDvar("ui_deadquote", &"AIRPLANE_HOSTAGE_NO_HEADSHOT");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1301,7 +1301,7 @@ end_sound_stop() {
   common_scripts\utility::flag_wait("cut_to_black");
   ambientstop();
 
-  if(getdvar("arcademode") != "1")
+  if(getDvar("arcademode") != "1")
     level.player shellshock("nosound", 60, 0);
 }
 
@@ -1433,7 +1433,7 @@ airmask_think() {
   self hide();
   common_scripts\utility::flag_wait("fuselage_breached");
 
-  if(getdvar("airmasks") == "0") {
+  if(getDvar("airmasks") == "0") {
     return;
   }
   self show();
@@ -1466,7 +1466,7 @@ airmask_breach_think() {
   self hide();
   common_scripts\utility::flag_wait("fuselage_breached");
 
-  if(getdvar("airmasks") == "0") {
+  if(getDvar("airmasks") == "0") {
     return;
   }
   self show();
@@ -1549,7 +1549,7 @@ player_breach_jump() {
   var_1 hide();
   thread killtimer();
   level notify("kill_timer");
-  setdvar("ui_deadquote", &"AIRPLANE_FAILED_JUMPED_OUT");
+  setDvar("ui_deadquote", &"AIRPLANE_FAILED_JUMPED_OUT");
   maps\_utility::missionfailedwrapper();
   level.player kill();
 }
@@ -1724,7 +1724,7 @@ fx_management() {
 timer_start() {
   maps\_gameskill::updategameskill();
 
-  if(getdvar("notimer") == "1") {
+  if(getDvar("notimer") == "1") {
     return;
   }
   var_0 = undefined;
@@ -1750,7 +1750,7 @@ timer_start() {
 }
 
 timer_logic(var_0, var_1, var_2) {
-  if(getdvar("notimer") == "1") {
+  if(getDvar("notimer") == "1") {
     return;
   }
   if(!isDefined(var_2))
@@ -1781,14 +1781,14 @@ hostage_timer_cleanup() {
 }
 
 hostage_timer(var_0) {
-  if(getdvar("notimer") == "1") {
+  if(getDvar("notimer") == "1") {
     return;
   }
   if(isDefined(level.start_time)) {
     level.timetoreachvip = (gettime() - level.start_time) / 1000;
     level.timetovipmessage = "Airplane - difficulty " + level.gameskill + ": Time to hostage sequence: (" + level.timetoreachvip + " seconds)";
 
-    if(getdvar("airplane_debug") == "1") {}
+    if(getDvar("airplane_debug") == "1") {}
   }
 
   if(level.gameskill != 3)
@@ -1830,7 +1830,7 @@ mission_failed_out_of_time(var_0) {
   level.player thread player_death_effect();
   level.player thread maps\_utility::play_sound_on_entity("airplane_final_explosion");
   musicstop(1);
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
   thread timer_death_hud();
   maps\_utility::missionfailedwrapper();
   level notify("kill_timer");

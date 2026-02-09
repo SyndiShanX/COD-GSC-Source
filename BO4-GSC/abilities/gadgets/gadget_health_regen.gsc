@@ -316,7 +316,7 @@ on_player_damage(params) {
 }
 
 function_aba28004() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

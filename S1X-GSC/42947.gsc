@@ -1297,11 +1297,11 @@ getallstreakmodulescost(var_0) {
 getstreakcost(var_0) {
   var_1 = int(maps\mp\_utility::getkillstreakkills(var_0));
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_1 = var_1 + getallstreakmodulescost(var_0);
   }
 
-  if(isDefined(self) && isplayer(self)) {
+  if(isDefined(self) && isPlayer(self)) {
     if(var_1 > 100 && maps\mp\_utility::_hasperk("specialty_hardline")) {
       var_1 = var_1 - 100;
     }
@@ -2006,7 +2006,7 @@ enablekillstreakactionslots() {
 }
 
 killstreakhit(var_0, var_1, var_2) {
-  if(isDefined(var_1) && isplayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
+  if(isDefined(var_1) && isPlayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
     if((level.teambased && var_2.owner.team != var_0.team || !level.teambased) && var_0 != var_2.owner) {
       if(maps\mp\_utility::iskillstreakweapon(var_1)) {
         return;

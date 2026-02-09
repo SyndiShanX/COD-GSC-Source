@@ -161,7 +161,7 @@ enemy_watcher() {
       wait(0.2);
     }
 
-    if(isDefined(self.enemy) && isplayer(self.enemy) && isDefined(self.enemy.tagscarried) && self.enemy.tagscarried >= 3 && self botcanseeentity(self.enemy) && distance(self.origin, self.enemy.origin) <= 500) {
+    if(isDefined(self.enemy) && isPlayer(self.enemy) && isDefined(self.enemy.tagscarried) && self.enemy.tagscarried >= 3 && self botcanseeentity(self.enemy) && distance(self.origin, self.enemy.origin) <= 500) {
       self getpassivestruct("meleeChargeDist", 500);
       self botsetflag("prefer_melee", 1);
       continue;

@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -792,7 +792,7 @@ onuseupdate(var_0, var_1, var_2, var_3) {
 
 onenduse(var_0, var_1, var_2) {
   checkendgame();
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_objective_state", 0);
     var_1.ui_dom_securing = undefined;
   }
@@ -928,7 +928,7 @@ func_12E58() {
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   func_12E58();
-  if(!isplayer(var_1) || var_1.team == self.team) {
+  if(!isPlayer(var_1) || var_1.team == self.team) {
     return;
   }
 
@@ -1237,7 +1237,7 @@ giveflagcapturexp(var_0, var_1) {
   }
 
   level.lastcaptime = gettime();
-  if(isplayer(var_2)) {
+  if(isPlayer(var_2)) {
     level thread scripts\mp\utility::teamplayercardsplash("callout_securedposition" + self.label, var_2);
     var_2 thread scripts\mp\matchdata::loggameevent("capture", var_2.origin);
   }
@@ -1249,7 +1249,7 @@ giveflagcapturexp(var_0, var_1) {
       var_5 = var_5.owner;
     }
 
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
 
@@ -1345,8 +1345,8 @@ checkendgame() {
 removedompoint() {
   self endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devRemoveDomFlag", "") != "") {
-      var_0 = getdvar("scr_devRemoveDomFlag", "");
+    if(getDvar("scr_devRemoveDomFlag", "") != "") {
+      var_0 = getDvar("scr_devRemoveDomFlag", "");
       foreach(var_2 in level.domflags) {
         if(isDefined(var_2.label) && var_2.label == var_0) {
           var_2 scripts\mp\gameobjects::allowuse("none");
@@ -1406,8 +1406,8 @@ removedompoint() {
 placedompoint() {
   self endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devPlaceDomFlag", "") != "") {
-      var_0 = getdvar("scr_devPlaceDomFlag", "");
+    if(getDvar("scr_devPlaceDomFlag", "") != "") {
+      var_0 = getDvar("scr_devPlaceDomFlag", "");
       var_1 = spawnStruct();
       var_1.origin = level.players[0].origin;
       var_1.angles = level.players[0].angles;

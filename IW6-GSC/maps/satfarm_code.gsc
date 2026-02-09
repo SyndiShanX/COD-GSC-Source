@@ -17,7 +17,7 @@ init_system() {
 }
 
 init_tank(var_0, var_1, var_2) {
-  if(!isDefined(var_1) || !isplayer(var_1))
+  if(!isDefined(var_1) || !isPlayer(var_1))
     var_1 = level.player;
 
   if(isDefined(var_2))
@@ -3318,7 +3318,7 @@ init_chatter() {
   anim.tank_bc.eventtypeminwait["inform_enemy_retreat"] = 5;
   anim.tank_bc.bcprintfailprefix = "^3***** BCS FAILURE: ";
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.voiceid = "plr";
     self.bc_isspeaking = 0;
     thread enemy_callout_tracking_plr();
@@ -3358,7 +3358,7 @@ play_chatter(var_0, var_1) {
   if(var_1 && !can_say_soundalias(var_2))
     return 0;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     self.bc_isspeaking = 1;
   else
     anim.tank_bc.bc_isspeaking = 1;
@@ -3366,7 +3366,7 @@ play_chatter(var_0, var_1) {
   self playSound(var_2, "bc_done", 1);
   self waittill("bc_done");
 
-  if(isplayer(self))
+  if(isPlayer(self))
     self.bc_isspeaking = 0;
   else
     anim.tank_bc.bc_isspeaking = 0;
@@ -3382,17 +3382,17 @@ can_say_event_type(var_0) {
   if(isDefined(self.bc_enabled) && !self.bc_enabled)
     return 0;
 
-  if(!isplayer(self) && anim.tank_bc.bc_isspeaking)
+  if(!isPlayer(self) && anim.tank_bc.bc_isspeaking)
     return 0;
-  else if(isplayer(self) && self.bc_isspeaking)
+  else if(isPlayer(self) && self.bc_isspeaking)
     return 0;
 
-  if(isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0]))
+  if(isPlayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0]))
     return 1;
-  else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0]))
+  else if(!isPlayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0]))
     return 1;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     var_1 = anim.tank_bc.bc_eventtypelastusedtimeplr[var_0];
   else
     var_1 = anim.tank_bc.bc_eventtypelastusedtime[var_0];
@@ -3418,7 +3418,7 @@ can_say_soundalias(var_0) {
 }
 
 update_event_type(var_0, var_1) {
-  if(isplayer(self))
+  if(isPlayer(self))
     anim.tank_bc.bc_eventtypelastusedtimeplr[var_0] = gettime();
   else
     anim.tank_bc.bc_eventtypelastusedtime[var_0] = gettime();
@@ -3444,7 +3444,7 @@ take_fire_tracking() {
     self.request_move = 1;
 
     if(isDefined(var_1)) {
-      if(!isplayer(var_1)) {
+      if(!isPlayer(var_1)) {
         var_2 = createevent("inform_taking_fire", "inform_taking_fire");
         play_chatter(var_2);
       }
@@ -3512,7 +3512,7 @@ enemy_callout_tracking_plr() {
 }
 
 getthreatalias(var_0) {
-  if(isplayer(self))
+  if(isPlayer(self))
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self getplayerangles(), self.origin, var_0.origin);
   else
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self.angles, self.origin, var_0.origin);
@@ -4050,11 +4050,7 @@ array_sort_by_handler_parameter(var_0, var_1, var_2) {
       if(isDefined(self) && isDefined(var_0[var_3])) {
         for(var_4 = var_3 + 1; var_4 < var_0.size; var_4++) {
           if(isDefined(self) && isDefined(var_0[var_4]) && isDefined(var_0[var_3])) {
-            if(var_0[var_4][
-                [var_1]
-              ](var_2) < var_0[var_3][
-                [var_1]
-              ](var_2)) {
+            if(var_0[var_4][[var_1]](var_2) < var_0[var_3][[var_1]](var_2)) {
               var_5 = var_0[var_4];
               var_0[var_4] = var_0[var_3];
               var_0[var_3] = var_5;
@@ -6894,7 +6890,7 @@ chopper_insta_kill() {
 satfarm_timer(var_0, var_1, var_2, var_3) {
   level endon("kill_timer");
 
-  if(getdvar("notimer") == "1") {
+  if(getDvar("notimer") == "1") {
     return;
   }
   if(!isDefined(var_3))
@@ -6990,7 +6986,7 @@ exiting_combat_player_fail() {
   level.playertank makeusable();
   level.playertank useby(level.player);
   level.player disableinvulnerability();
-  setdvar("ui_deadquote", &"SATFARM_TANK_DEATH");
+  setDvar("ui_deadquote", &"SATFARM_TANK_DEATH");
   maps\_utility::missionfailedwrapper();
   level.player kill();
   level.playertank kill();

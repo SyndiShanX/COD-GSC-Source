@@ -30,8 +30,8 @@ init() {
   level thread clientscripts\mp\zombies\_zm_ffotd::main_start();
   level.onlinegame = sessionmodeisonlinegame();
   level.swimmingfeature = 0;
-  level.scr_zm_ui_gametype = getdvar(#"ui_gametype");
-  level.scr_zm_map_start_location = getdvar(#"ui_zm_mapstartlocation");
+  level.scr_zm_ui_gametype = getDvar(#"ui_gametype");
+  level.scr_zm_map_start_location = getDvar(#"ui_zm_mapstartlocation");
   level.gamedifficulty = getgametypesetting("zmDifficulty");
   level.enable_magic = getgametypesetting("magic");
   level.headshots_only = getgametypesetting("headshotsonly");
@@ -102,19 +102,19 @@ init() {
 }
 
 zombe_gametype_premain() {
-  gamemode = getdvar(#"ui_gametype");
+  gamemode = getDvar(#"ui_gametype");
 
   if(!isDefined(level.gamemode_map_location_main) || !isDefined(level.gamemode_map_location_main[gamemode])) {
     return;
   }
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   if(isDefined(level._zombie_gamemodepremain))
     level thread[[level._zombie_gamemodepremain]]();
 
   if(isDefined(level.gamemode_map_location_main[gamemode])) {
-    loc = getdvar(#"ui_zm_mapstartlocation");
+    loc = getDvar(#"ui_zm_mapstartlocation");
 
     if(loc == "" && isDefined(level.default_start_location))
       loc = level.default_start_location;
@@ -125,12 +125,12 @@ zombe_gametype_premain() {
 }
 
 start_zombie_gametype() {
-  gamemode = getdvar(#"ui_gametype");
+  gamemode = getDvar(#"ui_gametype");
 
   if(!isDefined(level.gamemode_map_location_main) || !isDefined(level.gamemode_map_location_main[gamemode])) {
     return;
   }
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   if(isDefined(level.gamemode_map_main)) {
@@ -140,7 +140,7 @@ start_zombie_gametype() {
 
   if(isDefined(level.gamemode_map_location_main)) {
     if(isDefined(level.gamemode_map_location_main[gamemode])) {
-      loc = getdvar(#"ui_zm_mapstartlocation");
+      loc = getDvar(#"ui_zm_mapstartlocation");
 
       if(loc == "" && isDefined(level.default_start_location))
         loc = level.default_start_location;
@@ -168,7 +168,7 @@ delay_for_clients_then_execute(func) {
 }
 
 precache_zombie_gametype() {
-  gamemode = getdvar(#"ui_gametype");
+  gamemode = getDvar(#"ui_gametype");
 
   if(!isDefined(level.gamemode_map_location_main) || !isDefined(level.gamemode_map_location_main[gamemode])) {
     return;
@@ -183,7 +183,7 @@ precache_zombie_gametype() {
 
   if(isDefined(level.gamemode_map_location_precache)) {
     if(isDefined(level.gamemode_map_location_precache[gamemode])) {
-      loc = getdvar(#"ui_zm_mapstartlocation");
+      loc = getDvar(#"ui_zm_mapstartlocation");
 
       if(loc == "" && isDefined(level.default_start_location))
         loc = level.default_start_location;
@@ -587,7 +587,7 @@ deletezombieeyes(localclientnum) {
 }
 
 player_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(self isplayer()) {
+  if(self isPlayer()) {
     self.zombie_face = newval;
     self notify("face", "face_advance");
 
@@ -597,7 +597,7 @@ player_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap
       self._eyeglow_fx_override = level._effect["player_eye_glow_orng"];
   }
 
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     if(localclientnum == self getlocalclientnumber())
       return;
   }
@@ -609,7 +609,7 @@ player_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 player_eye_color_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(self isplayer() && self islocalplayer() && !isdemoplaying()) {
+  if(self isPlayer() && self islocalplayer() && !isdemoplaying()) {
     if(localclientnum == self getlocalclientnumber())
       return;
   }

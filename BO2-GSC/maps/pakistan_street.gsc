@@ -113,18 +113,21 @@ cleanup_frogger_guys() {
   spawn_manager_kill("frogger_perk_spawn_trigger");
   a_ai_frogger = get_ai_array("frogger_perk_extra_guys", "targetname");
 
-  foreach(ai_frogger in a_ai_frogger)
-  ai_frogger die();
+  foreach(ai_frogger in a_ai_frogger) {
+    ai_frogger die();
+  }
 
   a_ai_frogger = get_ai_array("frogger_third_wave_guys", "targetname");
 
-  foreach(ai_frogger in a_ai_frogger)
-  ai_frogger die();
+  foreach(ai_frogger in a_ai_frogger) {
+    ai_frogger die();
+  }
 
   a_ai_frogger = get_ai_array("frogger_second_wave_guys", "targetname");
 
-  foreach(ai_frogger in a_ai_frogger)
-  ai_frogger die();
+  foreach(ai_frogger in a_ai_frogger) {
+    ai_frogger die();
+  }
 }
 
 turn_off_claw_firing() {
@@ -137,8 +140,9 @@ cleanup_market() {
   a_s_structs = getstructarray("market_struct", "script_noteworthy");
   array_delete(a_e_market_ents);
 
-  foreach(s_struct in a_s_structs)
-  s_struct structdelete();
+  foreach(s_struct in a_s_structs) {
+    s_struct structdelete();
+  }
 
   flag_wait("approach_bus_dam");
   delete_scene_all("bus_smash_damage_ai", 1, 0, 1);
@@ -150,11 +154,13 @@ claws_toggle_firing(b_shouldfire) {
   ai_claw_1 = getent("claw_1_ai", "targetname");
   ai_claw_2 = getent("claw_2_ai", "targetname");
 
-  if(isDefined(ai_claw_1))
+  if(isDefined(ai_claw_1)) {
     ai_claw_1 maps\pakistan_market::claw_toggle_firing(b_shouldfire);
+  }
 
-  if(isDefined(ai_claw_2))
+  if(isDefined(ai_claw_2)) {
     ai_claw_2 maps\pakistan_market::claw_toggle_firing(b_shouldfire);
+  }
 }
 
 vo_frogger_enemy() {
@@ -201,8 +207,9 @@ frogger_setup_environment() {
   level thread frogger_start_spawning_dyn_ents();
   level.player thread maps\pakistan_util::frogger_corpse_control();
 
-  if(!isDefined(level.water_level_raised))
+  if(!isDefined(level.water_level_raised)) {
     raise_water_level();
+  }
 
   level thread frogger_set_dvars();
   nd_fall = getnode("frogger_balcony_connect_fall", "targetname");
@@ -225,8 +232,9 @@ _balcony_collapse_internal() {
   level.player thread balcony_collapse_rumble();
   a_n_nodes = getnodearray("balcony_collapse_nodes", "script_noteworthy");
 
-  foreach(n_node in a_n_nodes)
-  setenablenode(n_node, 0);
+  foreach(n_node in a_n_nodes) {
+    setenablenode(n_node, 0);
+  }
 
   bm_clip = get_ent("balcony_collapse_clip", "targetname");
   bm_clip delete();
@@ -253,10 +261,11 @@ shoot_at_players_feet() {
 
 raise_water_level() {
   level.water_level_raised = 1;
-  str_val = getdvar(#"r_waterWaveBase");
+  str_val = getDvar(#"r_waterWaveBase");
 
-  if(isDefined(str_val) && str_val != "")
+  if(isDefined(str_val) && str_val != "") {
     level thread lerp_dvar("r_waterWaveBase", 10, 2);
+  }
 
   e_market_volume = get_ent("market_water_volume", "targetname", 1);
   setwaterbrush(e_market_volume);
@@ -266,10 +275,11 @@ raise_water_level() {
 
 lower_water_level() {
   if(isDefined(level.water_level_raised) && level.water_level_raised) {
-    str_val = getdvar(#"r_waterWaveBase");
+    str_val = getDvar(#"r_waterWaveBase");
 
-    if(isDefined(str_val) && str_val != "")
+    if(isDefined(str_val) && str_val != "") {
       level thread lerp_dvar("r_waterWaveBase", 2, 2);
+    }
   }
 
   stop_exploder(100);
@@ -287,8 +297,9 @@ frogger_harper_movement() {
   level.harper setgoalnode(nd_path);
   ai_crosby = getent("crosby_ai", "targetname");
 
-  if(!isDefined(ai_crosby))
+  if(!isDefined(ai_crosby)) {
     ai_crosby = init_hero("crosby");
+  }
 
   ai_crosby thread frogger_crosby_movement();
   level waittill("fxanim_car_corner_crash_start");
@@ -304,29 +315,33 @@ frogger_crosby_movement() {
 }
 
 delete_ent_if_defined(str_key, str_value) {
-  if(!isDefined(str_value))
+  if(!isDefined(str_value)) {
     str_value = "targetname";
+  }
 
   e_temp = get_ent(str_key, str_value);
 
   if(isDefined(e_temp)) {
-    if(e_temp is_hero())
+    if(e_temp is_hero()) {
       e_temp unmake_hero();
+    }
 
     if(isDefined(e_temp.classname) && e_temp.classname == "script_vehicle") {
       e_temp.delete_on_death = 1;
       e_temp notify("death");
 
-      if(!isalive(e_temp))
+      if(!isalive(e_temp)) {
         e_temp delete();
+      }
     } else
       e_temp delete();
   }
 }
 
 move_breakoff_group_to_roof() {
-  if(maps\_fire_direction::is_fire_direction_active())
+  if(maps\_fire_direction::is_fire_direction_active()) {
     level.player maps\_fire_direction::_fire_direction_disable();
+  }
 
   level endon("brute_force_bypassed");
   flag_wait("brute_force_unlock_done");
@@ -349,10 +364,11 @@ move_breakoff_group_to_roof() {
   level thread vo_claw_streets_enemy();
   spawn_manager_enable("frogger_perk_spawn_trigger");
 
-  if(maps\_fire_direction::is_fire_direction_active())
+  if(maps\_fire_direction::is_fire_direction_active()) {
     level.player maps\_fire_direction::_fire_direction_enable(1);
-  else
+  } else {
     maps\pakistan_market::enable_claw_fire_direction_feature(0);
+  }
 
   claws_toggle_firing(1);
   level thread maps\pakistan_anim::vo_frogger_support();
@@ -363,8 +379,9 @@ move_breakoff_group_to_roof() {
 }
 
 kill_me() {
-  if(isDefined(self))
+  if(isDefined(self)) {
     self dodamage(self.health, self.origin, self);
+  }
 }
 
 bus_street() {
@@ -395,12 +412,13 @@ start_bus(e_bus) {
 }
 
 water_dvar_lerp(str_dvar, n_time, n_amp_1, n_amp_2, n_amp_3, n_amp_4) {
-  str_water_values = getdvar(str_dvar);
+  str_water_values = getDvar(str_dvar);
   a_tokens = strtok(str_water_values, " ");
   a_values = [];
 
-  for(i = 0; i < 4; i++)
+  for(i = 0; i < 4; i++) {
     a_values[a_values.size] = float(a_tokens[i]);
+  }
 
   n_frames = n_time * 20;
   a_change_per_frame = [];
@@ -417,12 +435,12 @@ water_dvar_lerp(str_dvar, n_time, n_amp_1, n_amp_2, n_amp_3, n_amp_4) {
       str_frame_amplitudes = str_frame_amplitudes + (n_change_this_frame + " ");
     }
 
-    setdvar(str_dvar, str_frame_amplitudes);
+    setDvar(str_dvar, str_frame_amplitudes);
     wait 0.05;
   }
 
   str_final_amp = "" + n_amp_1 + " " + n_amp_2 + " " + n_amp_3 + " " + n_amp_4;
-  setdvar(str_dvar, str_final_amp);
+  setDvar(str_dvar, str_final_amp);
 }
 
 bus_street_decrease_enemy_accuracy() {
@@ -431,8 +449,9 @@ bus_street_decrease_enemy_accuracy() {
   s_escape = get_struct("bus_escape_struct", "targetname", 1);
   e_ignore = get_ent("player_bus_safe_zone_volume", "targetname", 1);
 
-  foreach(enemy in a_enemies)
-  enemy thread _run_from_bus(m_bus, s_escape, e_ignore);
+  foreach(enemy in a_enemies) {
+    enemy thread _run_from_bus(m_bus, s_escape, e_ignore);
+  }
 
   level delay_notify("stop_running_from_bus", 5);
 }
@@ -441,8 +460,9 @@ _run_from_bus(m_bus, s_escape, e_ignore) {
   level endon("stop_running_from_bus");
   self endon("death");
 
-  while(distance2d(m_bus.origin, self.origin) > 512)
+  while(distance2d(m_bus.origin, self.origin) > 512) {
     wait 0.05;
+  }
 
   wait(randomfloatrange(0.15, 1.0));
 
@@ -475,8 +495,9 @@ _wave_hits_debris() {
   while(true) {
     self waittill("trigger", e_triggered);
 
-    if(!isDefined(e_triggered.targetname) && !isDefined("bus_dam_wave_push_debris") || isDefined(e_triggered.targetname) && isDefined("bus_dam_wave_push_debris") && e_triggered.targetname == "bus_dam_wave_push_debris")
+    if(!isDefined(e_triggered.targetname) && !isDefined("bus_dam_wave_push_debris") || isDefined(e_triggered.targetname) && isDefined("bus_dam_wave_push_debris") && e_triggered.targetname == "bus_dam_wave_push_debris") {
       e_triggered thread gopath();
+    }
   }
 }
 
@@ -496,10 +517,11 @@ _wave_hits_ai() {
       v_launch = vectornormalize(e_triggered.origin - self.origin) * 55 + v_launch_offset;
       e_triggered.animname = "generic";
 
-      if(b_toggle)
+      if(b_toggle) {
         str_deathanim = "bus_wave_death_1";
-      else
+      } else {
         str_deathanim = "bus_wave_death_2";
+      }
 
       e_triggered set_deathanim(str_deathanim);
       e_triggered dodamage(e_triggered.health + 1, e_triggered.origin, self);
@@ -510,8 +532,9 @@ _wave_hits_ai() {
 copy_orientation(e_target) {
   self.origin = e_target.origin;
 
-  if(isDefined(e_target.angles))
+  if(isDefined(e_target.angles)) {
     self.angles = e_target.angles;
+  }
 }
 
 precache_dyn_ent_debris() {
@@ -531,8 +554,9 @@ precache_dyn_ent_debris() {
   level.floating_dyn_ents[level.floating_dyn_ents.size] = "p_jun_foliage_pacific_branch_set1";
   level.floating_dyn_ents[level.floating_dyn_ents.size] = "p_jun_foliage_pacific_branch_set2";
 
-  foreach(str_model in level.floating_dyn_ents)
-  precachemodel(str_model);
+  foreach(str_model in level.floating_dyn_ents) {
+    precachemodel(str_model);
+  }
 }
 
 harper_run_to_gate() {
@@ -588,7 +612,7 @@ bus_event_failure() {
   m_bus = get_ent("bus_dam_bus", "targetname", 1);
   t_bus_kill = get_ent("bus_dam_damage_trigger", "targetname", 1);
   t_bus_kill thread maps\pakistan_market::trigger_kill_ai_on_contact("bus_dam_done");
-  setdvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
+  setDvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
   level thread bus_death_hud(level.player, 5.3);
   level thread run_scene("bus_dam_exit");
   wait 5.1;
@@ -620,8 +644,9 @@ street_cleanup() {
   flag_wait("bus_dam_gate_push_setup_started");
   a_ai_enemies = getaiarray("axis");
 
-  foreach(ai_enemy in a_ai_enemies)
-  ai_enemy die();
+  foreach(ai_enemy in a_ai_enemies) {
+    ai_enemy die();
+  }
 
   cleanupspawneddynents();
   clearallcorpses();
@@ -642,22 +667,26 @@ street_cleanup() {
   vol_touching delete();
   a_s_market_exit = getstructarray("market_exit_struct", "script_noteworthy");
 
-  foreach(s_exit in a_s_market_exit)
-  s_exit structdelete();
+  foreach(s_exit in a_s_market_exit) {
+    s_exit structdelete();
+  }
 }
 
 cleanup_claws() {
   ai_claw_1 = getent("claw_1_ai", "targetname");
   ai_claw_2 = getent("claw_2_ai", "targetname");
 
-  if(isDefined(ai_claw_1))
+  if(isDefined(ai_claw_1)) {
     ai_claw_1 stop_magic_bullet_shield();
+  }
 
-  if(isDefined(ai_claw_2))
+  if(isDefined(ai_claw_2)) {
     ai_claw_2 stop_magic_bullet_shield();
+  }
 
-  if(maps\pakistan_util::is_claw_flamethrower_unlocked() && isDefined(ai_claw_2) && isDefined(ai_claw_2.turret_flamethrower))
+  if(maps\pakistan_util::is_claw_flamethrower_unlocked() && isDefined(ai_claw_2) && isDefined(ai_claw_2.turret_flamethrower)) {
     ai_claw_2.turret_flamethrower delete();
+  }
 
   wait_network_frame();
   delete_ent_if_defined("claw_1_ai");
@@ -732,9 +761,9 @@ bus_dam() {
   level notify("fxanim_break_wall_crumble_start");
   level thread wall_crumble_timeout();
 
-  if(!flag("player_at_bus_gate"))
+  if(!flag("player_at_bus_gate")) {
     bus_event_failure();
-  else {
+  } else {
     level.player playSound("evt_bus_gate_extra");
 
     if(bus_dam_strength_test()) {
@@ -755,7 +784,7 @@ monitor_bus_kill_player() {
 
   while(true) {
     if(distance2d(level.player.origin, self.origin) < 128 || level.player istouching(self)) {
-      setdvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
+      setDvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
       level thread bus_death_hud(level.player, 0.5);
       wait 0.2;
       missionfailed();
@@ -796,8 +825,9 @@ bus_audio_watcher(delay) {
   self endon("stop_bus_wait");
   delay = delay - 4.1;
 
-  if(delay > 0)
+  if(delay > 0) {
     wait(delay);
+  }
 
   self playSound("evt_bus_idle_build", "sounddone");
   self waittill("sounddone");
@@ -843,9 +873,9 @@ bus_dam_button_mash() {
     b_button_pressed_this_frame = _bus_dam_button_push_poll();
 
     if(b_button_pressed_this_frame) {
-      if(n_state_last == 1 || n_state_last == 2)
+      if(n_state_last == 1 || n_state_last == 2) {
         n_state = 2;
-      else {
+      } else {
         n_state = 1;
         n_push_count++;
         debug_print_line("push count = " + n_push_count + " of " + 10);
@@ -879,8 +909,9 @@ get_time_required_to_avoid_bus() {
   t_success = getent("player_escaped_bus_trigger", "targetname");
   n_distance_to_bus = 0;
 
-  if(isDefined(t_success))
+  if(isDefined(t_success)) {
     n_distance_to_bus = distance(t_success.origin, level.player.origin);
+  }
 
   n_sprint_speed_units_per_sec = 120;
   n_bus_event_success_wait_max = n_distance_to_bus / (n_sprint_speed_units_per_sec * level.move_speed_scale);
@@ -983,8 +1014,9 @@ safely_spawn_dynent(v_force) {
 
 launch_dynent(str_model, v_force) {
   if(str_model == "dub_lounge_sofa_02") {
-    if(randomintrange(1, 5) > 1)
+    if(randomintrange(1, 5) > 1) {
       str_model = random(level.floating_dyn_ents);
+    }
   }
 
   createdynentandlaunch(str_model, self.origin, self.angles, self.origin, v_force);
@@ -1000,16 +1032,19 @@ debris_vehicle() {
   m_debris thread _frogger_fx_play_on_object();
   m_debris thread debris_collision(self);
 
-  if(!(!isDefined(self.script_noteworthy) && !isDefined("nofloat") || isDefined(self.script_noteworthy) && isDefined("nofloat") && self.script_noteworthy == "nofloat"))
+  if(!(!isDefined(self.script_noteworthy) && !isDefined("nofloat") || isDefined(self.script_noteworthy) && isDefined("nofloat") && self.script_noteworthy == "nofloat")) {
     self thread toggle_float_anim();
+  }
 
-  if(!(isDefined(self.script_disconnectpaths) && !self.script_disconnectpaths))
+  if(!(isDefined(self.script_disconnectpaths) && !self.script_disconnectpaths)) {
     self thread disconnect_debris_paths(m_debris);
+  }
 
   self waittill("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     m_debris delete();
+  }
 }
 
 disconnect_debris_paths(m_debris) {
@@ -1063,14 +1098,16 @@ debris_settle() {
 
 find_debris_model(node) {
   while(isDefined(node) && !isDefined(node.model)) {
-    if(isDefined(node.target))
+    if(isDefined(node.target)) {
       node = getvehiclenode(node.target, "targetname");
-    else
+    } else {
       break;
+    }
   }
 
-  if(isDefined(node))
+  if(isDefined(node)) {
     return node.model;
+  }
 }
 
 _frogger_fx_play_on_object() {
@@ -1086,8 +1123,9 @@ _frogger_fx_play_on_object() {
 _find_float_angles_offset(b_should_flip) {
   v_offset = (randomintrange(-8, 8), randomintrange(-8, 8), 0);
 
-  if(b_should_flip)
+  if(b_should_flip) {
     v_offset = v_offset + vectorscale((0, 0, 1), 180.0);
+  }
 
   return v_offset;
 }
@@ -1096,8 +1134,9 @@ is_player_using_thumbstick() {
   b_using_thumbstick = 1;
   v_thumbstick = self getnormalizedmovement();
 
-  if(length(v_thumbstick) < 0.3)
+  if(length(v_thumbstick) < 0.3) {
     b_using_thumbstick = 0;
+  }
 
   return b_using_thumbstick;
 }
@@ -1109,18 +1148,21 @@ delete_at_spline_end() {
     self.m_temp clearclientflag(3);
     wait 0.1;
 
-    if(isDefined(self.m_anim))
+    if(isDefined(self.m_anim)) {
       self.m_anim delete();
+    }
 
-    if(isDefined(self.m_temp))
+    if(isDefined(self.m_temp)) {
       self.m_temp delete();
+    }
   }
 
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 debris_collision(vh_ent) {
@@ -1138,14 +1180,16 @@ debris_collision(vh_ent) {
         self setmovingplatformenabled(1);
         self frogger_debris_audio();
 
-        if(!isDefined(level.player._last_collision_time))
+        if(!isDefined(level.player._last_collision_time)) {
           level.player._last_collision_time = 0;
+        }
 
         n_current_time_ms = gettime();
 
         if(n_current_time_ms - level.player._last_collision_time > 1000) {
-          if(level.player.health < 20)
-            setdvar("ui_deadquote", &"PAKISTAN_SHARED_FROGGER_FAIL");
+          if(level.player.health < 20) {
+            setDvar("ui_deadquote", &"PAKISTAN_SHARED_FROGGER_FAIL");
+          }
 
           level.player dodamage(20, self.origin, self);
           level.player._last_collision_time = n_current_time_ms;
@@ -1166,25 +1210,27 @@ debris_collision(vh_ent) {
 }
 
 frogger_debris_audio() {
-  if(self.model == "p_glo_crate02" || self.model == "ch_crate48x64" || self.model == "furniture_cabinet_console_b")
+  if(self.model == "p_glo_crate02" || self.model == "ch_crate48x64" || self.model == "furniture_cabinet_console_b") {
     self playSound("fly_bump_wood");
-  else if(self.model == "veh_iw_civ_car_hatch")
+  } else if(self.model == "veh_iw_civ_car_hatch") {
     self playSound("fly_bump_veh");
-  else if(self.model == "furniture_couch_leather2_dust" || self.model == "dub_lounge_sofa_02")
+  } else if(self.model == "furniture_couch_leather2_dust" || self.model == "dub_lounge_sofa_02") {
     self playSound("fly_bump_couch");
-  else if(self.model == "p6_chair_damaged_panama" || self.model == "berlin_furniture_chair1_dusty")
+  } else if(self.model == "p6_chair_damaged_panama" || self.model == "berlin_furniture_chair1_dusty") {
     self playSound("fly_bump_chair");
-  else if(self.model == "me_refrigerator_d" || self.model == "machinery_washer_blue")
+  } else if(self.model == "me_refrigerator_d" || self.model == "machinery_washer_blue") {
     self playSound("fly_bump_fridge");
-  else
+  } else {
     self playSound("fly_bump_plr");
+  }
 }
 
 #using_animtree("generic_human");
 
 frogger_debris_pain_react() {
-  if(!isDefined(self.playing_custom_pain))
+  if(!isDefined(self.playing_custom_pain)) {
     self.playing_custom_pain = 0;
+  }
 
   if(!self.playing_custom_pain) {
     self.playing_custom_pain = 1;
@@ -1197,8 +1243,9 @@ frogger_debris_pain_react() {
     self setflaggedanimknoballrestart("pain_anim", anim_pain, %body, 1, 0.2, 1);
     self waittillmatch("pain_anim", "end");
 
-    if(b_pain_enabled)
+    if(b_pain_enabled) {
       self enable_pain();
+    }
 
     self.takedamage = 1;
     self unlink();
@@ -1312,8 +1359,9 @@ bus_dam_idle_rumble(n_waittime, e_origin) {
   while(true) {
     self playrumbleonentity("damage_light");
 
-    if(isDefined(e_origin))
+    if(isDefined(e_origin)) {
       earthquake(0.05, n_waittime / 2, e_origin.origin, 1024, self);
+    }
 
     wait(n_waittime / 2);
   }

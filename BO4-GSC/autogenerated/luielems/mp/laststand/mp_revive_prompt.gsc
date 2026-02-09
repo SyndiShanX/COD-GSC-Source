@@ -36,7 +36,6 @@ class cmp_revive_prompt: cluielem {
     cluielem::add_clientfield("health", 1, 5, "float", 0);
     cluielem::add_clientfield("reviveProgress", 1, 5, "float", 0);
   }
-
 }
 
 register(uid) {

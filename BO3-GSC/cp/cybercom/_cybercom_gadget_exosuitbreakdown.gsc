@@ -137,7 +137,7 @@ function _activate_exo_breakdown(slot, weapon) {
     self cybercom::function_29bf9dee(undefined, 1, 0);
   }
   cybercom::function_adc40f11(weapon, fired);
-  if(fired && isplayer(self)) {
+  if(fired && isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_exosuitbreakdown");
     if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
@@ -226,7 +226,7 @@ function private _exo_breakdown(attacker) {
   }
   self.is_disabled = 1;
   self.ignoreall = 1;
-  if(isplayer(attacker) && attacker hascybercomability("cybercom_exosuitbreakdown") == 2) {
+  if(isPlayer(attacker) && attacker hascybercomability("cybercom_exosuitbreakdown") == 2) {
     if(isDefined(self.voiceprefix) && isDefined(self.bcvoicenumber)) {
       self thread battlechatter::do_sound((self.voiceprefix + self.bcvoicenumber) + "_exert_breakdown_pain", 1);
     }

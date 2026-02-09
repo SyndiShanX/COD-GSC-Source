@@ -1594,7 +1594,7 @@ func_61E0(var_0) {
   if(var_0) {
     level.player give_explosive_touch_on_revived("c6servo");
     level.player setsuit("hacked_c6");
-    level.player.var_C37E = getdvar("cg_fov");
+    level.player.var_C37E = getDvar("cg_fov");
     setsaveddvar("cg_fov", 75);
     level.player func_81DE(75, 0.05);
     level.player scripts\engine\utility::allow_reload(1);
@@ -1635,7 +1635,7 @@ func_61E2(var_0) {
     setsaveddvar("offhandShield_useCustomShader", 0);
     level.player give_explosive_touch_on_revived("c8servo");
     level.player setsuit("hacked_c8");
-    level.player.var_C37E = getdvar("cg_fov");
+    level.player.var_C37E = getDvar("cg_fov");
     setsaveddvar("cg_fov", 75);
     level.player func_81DE(75, 0.05);
     level.player.health = self.health;
@@ -1696,7 +1696,7 @@ func_61E1(var_0) {
   if(var_0) {
     level.player give_explosive_touch_on_revived("c6servo");
     level.player setsuit("hacked_c6");
-    level.player.var_C37E = getdvar("cg_fov");
+    level.player.var_C37E = getDvar("cg_fov");
     setsaveddvar("cg_fov", 75);
     level.player func_81DE(75, 0.05);
     level.player scripts\engine\utility::allow_reload(1);

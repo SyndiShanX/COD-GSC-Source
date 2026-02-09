@@ -1002,7 +1002,7 @@ function function_477a16ba() {
 }
 
 function function_905d9544(e_attacker) {
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(self.archetype === "apothicon_fury") {
       if(zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod)) {
         level notify("hash_646a26b1", e_attacker);
@@ -1071,7 +1071,7 @@ function function_4d042c7d(player) {
 }
 
 function function_6267dc(str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, v_direction, str_tag, str_model, str_part, n_flags, e_inflictor, n_chargelevel) {
-  if(isplayer(e_inflictor)) {
+  if(isPlayer(e_inflictor)) {
     if(!(isDefined(zm_utility::is_melee_weapon(w_weapon)) && zm_utility::is_melee_weapon(w_weapon))) {
       level notify("non_melee_damage");
     }
@@ -1127,7 +1127,7 @@ function function_b1cd865a() {
 }
 
 function function_ca31caac(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     if(!isDefined(self.var_b6802ed1)) {
       self.var_b6802ed1 = [];
     }

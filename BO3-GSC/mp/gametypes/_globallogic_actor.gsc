@@ -33,7 +33,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   if(self.team == "spectator") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   self.idflags = idflags;
@@ -85,15 +85,15 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
   }
   if(!idflags & 2048) {
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       eattacker.pers["participation"]++;
     }
     prevhealthratio = self.health / self.maxhealth;
     isshootingownclone = 0;
-    if(isDefined(self.isaiclone) && self.isaiclone && isplayer(eattacker) && self.owner == eattacker) {
+    if(isDefined(self.isaiclone) && self.isaiclone && isPlayer(eattacker) && self.owner == eattacker) {
       isshootingownclone = 1;
     }
-    if(level.teambased && isplayer(eattacker) && self != eattacker && self.team == eattacker.pers["team"] && !isshootingownclone) {
+    if(level.teambased && isPlayer(eattacker) && self != eattacker && self.team == eattacker.pers["team"] && !isshootingownclone) {
       friendlyfire = [[level.figure_out_friendly_fire]](self);
       if(friendlyfire == 0) {
         return;
@@ -148,13 +148,13 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
   }
   if(getdvarint("")) {
-    println(((((((((("" + self getentitynumber()) + "") + self.health) + "") + eattacker.clientid) + "") + isplayer(einflictor) + "") + idamage) + "") + shitloc);
+    println(((((((((("" + self getentitynumber()) + "") + self.health) + "") + eattacker.clientid) + "") + isPlayer(einflictor) + "") + idamage) + "") + shitloc);
   }
   if(1) {
     lpselfnum = self getentitynumber();
     lpselfteam = self.team;
     lpattackerteam = "";
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       lpattacknum = eattacker getentitynumber();
       lpattackguid = eattacker getguid();
       lpattackname = eattacker.name;

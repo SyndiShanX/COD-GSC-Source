@@ -59,7 +59,7 @@ function_2fc5f13() {
 }
 
 function_138aec8e(attacker) {
-  if(!isplayer(attacker) && !(isDefined(self.nuked) && self.nuked)) {
+  if(!isPlayer(attacker) && !(isDefined(self.nuked) && self.nuked)) {
     return;
   }
 

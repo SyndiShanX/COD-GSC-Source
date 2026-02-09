@@ -44,22 +44,26 @@ global_fx(targetname, fxname, fxfile, delay, soundalias) {
     }
     note = ents[i].script_noteworthy;
 
-    if(!isDefined(level._global_fx_ents[note]))
+    if(!isDefined(level._global_fx_ents[note])) {
       level._global_fx_ents[note] = [];
+    }
 
     level._global_fx_ents[note][level._global_fx_ents[note].size] = ent;
   }
 }
 
 global_fx_create(fxname, fxfile, delay, soundalias) {
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
+  }
 
-  if(!isDefined(level._effect[fxname]))
+  if(!isDefined(level._effect[fxname])) {
     level._effect[fxname] = loadfx(fxfile);
+  }
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   if(!level.clientscripts) {
     ent = createoneshoteffect(fxname);
@@ -68,8 +72,9 @@ global_fx_create(fxname, fxfile, delay, soundalias) {
     ent.v["fxid"] = fxname;
     ent.v["delay"] = delay;
 
-    if(isDefined(soundalias))
+    if(isDefined(soundalias)) {
       ent.v["soundalias"] = soundalias;
+    }
 
     return ent;
   }

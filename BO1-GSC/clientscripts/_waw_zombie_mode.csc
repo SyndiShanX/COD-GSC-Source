@@ -1,6 +1,6 @@
 /**********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_waw_zombie_mode.csc
+ * Script: clientscripts\_waw_zombie_mode\.csc
 **********************************************/
 
 #include clientscripts\_music;
@@ -21,7 +21,6 @@ createZombieEyes(localClientNum) {
     }
   }
 }
-
 deleteZombieEyes(localClientNum) {
   if(isDefined(self._eyeArray)) {
     if(isDefined(self._eyeArray[localClientNum])) {
@@ -30,7 +29,6 @@ deleteZombieEyes(localClientNum) {
     }
   }
 }
-
 zombieEyeMonitor() {
   self waittill("entityshutdown");
   if(isDefined(self._eyeArray)) {
@@ -39,7 +37,6 @@ zombieEyeMonitor() {
     }
   }
 }
-
 zombie_eyes(localClientNum) {
   if(!isDefined(self._eyeArray)) {
     self._eyeArray = [];
@@ -49,7 +46,6 @@ zombie_eyes(localClientNum) {
     self createZombieEyes(localClientNum);
   }
 }
-
 zombie_eye_callback(localClientNum, hasEyes) {
   if(hasEyes) {
     self createZombieEyes(localClientNum);
@@ -57,7 +53,6 @@ zombie_eye_callback(localClientNum, hasEyes) {
     self deleteZombieEyes(localClientNum);
   }
 }
-
 init_perk_machines() {
   if(getDvar("createfx") == "on") {
     return;
@@ -68,7 +63,6 @@ init_perk_machines() {
   level._effect["revive_light"] = loadfx("misc/fx_zombie_cola_revive_on");
   level thread perk_start_up();
 }
-
 perk_start_up() {
   level waittill("power_on");
   timer = 0;
@@ -102,14 +96,12 @@ perk_start_up() {
     realwait(duration);
   }
 }
-
 vending_machine_flicker_light(fx_light, duration) {
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     self thread play_perk_fx_on_client(i, fx_light, duration);
   }
 }
-
 play_perk_fx_on_client(client_num, fx_light, duration) {
   fxObj = spawn(client_num, self.origin + (0, 0, -50), "script_model");
   fxobj setModel("tag_origin");

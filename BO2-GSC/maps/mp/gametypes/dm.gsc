@@ -88,7 +88,7 @@ onspawnplayer(predictedspawn) {
 }
 
 onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer))
+  if(isDefined(winningplayer) && isPlayer(winningplayer))
     [[level._setplayerscore]](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
 }
 
@@ -112,7 +112,7 @@ onscoreclosemusic() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || self == attacker) {
+  if(!isPlayer(attacker) || self == attacker) {
     return;
   }
   attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.teamscoreperkill);

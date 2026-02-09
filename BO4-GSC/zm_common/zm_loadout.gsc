@@ -55,7 +55,7 @@ on_player_spawned() {
 }
 
 event_handler[weapon_change] weapon_changed(eventstruct) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

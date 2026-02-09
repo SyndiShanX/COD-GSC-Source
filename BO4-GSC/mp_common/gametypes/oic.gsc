@@ -283,7 +283,7 @@ getplayersleft() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker) && self != attacker) {
+  if(isDefined(attacker) && isPlayer(attacker) && self != attacker) {
     weapon = level.var_bf82f6b0;
     attackerammo = attacker getammocount(weapon);
     victimammo = self getammocount(weapon);

@@ -264,7 +264,7 @@ func_9FBC(var_0, var_1, var_2, var_3) {
   }
 
   if(var_3 == "player") {
-    return isplayer(self.melee.target);
+    return isPlayer(self.melee.target);
   }
 
   return isDefined(self.melee.target.unittype) && tolower(self.melee.target.unittype) == tolower(var_3);

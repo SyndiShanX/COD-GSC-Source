@@ -91,7 +91,7 @@ function num_players_touching_volume(volume) {
   num_players_inside = 0;
   for(i = 0; i < players.size; i++) {
     ent = players[i];
-    if(!isalive(ent) || !isplayer(ent) || ent.sessionstate == "spectator") {
+    if(!isalive(ent) || !isPlayer(ent) || ent.sessionstate == "spectator") {
       continue;
     }
     if(ent istouching(volume)) {

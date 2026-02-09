@@ -198,11 +198,11 @@ function security_door_drop_think(killplayers) {
         }
         continue;
       }
-      if(killplayers == 0 && isplayer(entity)) {
+      if(killplayers == 0 && isPlayer(entity)) {
         continue;
       }
       entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         corpse_delay = gettime() + 1000;
       }
     }

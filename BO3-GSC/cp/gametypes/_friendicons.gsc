@@ -21,7 +21,7 @@ function init() {
     return;
   }
   if(getdvarstring("scr_drawfriend") == "") {
-    setdvar("scr_drawfriend", "0");
+    setDvar("scr_drawfriend", "0");
   }
   level.drawfriend = getdvarint("scr_drawfriend");
   callback::on_spawned(&on_player_spawned);

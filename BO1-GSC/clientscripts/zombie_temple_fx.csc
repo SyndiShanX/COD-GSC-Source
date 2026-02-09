@@ -1,6 +1,6 @@
 /**********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_temple_fx.csc
+ * Script: clientscripts\zombie_temple_fx\.csc
 **********************************************/
 
 #include clientscripts\_utility;
@@ -21,12 +21,11 @@ main() {
   level thread cave_fog_off();
   waitforclient(0);
   wait(3);
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     play_fx_prop_anims(i);
   }
 }
-
 precache_util_fx() {
   level._effect["fx_trail_blood_streak"] = LoadFx("trail/fx_trail_blood_streak");
   level._effect["eye_glow"] = LoadFx("misc/fx_zombie_eye_single");
@@ -36,7 +35,6 @@ precache_util_fx() {
   level._effect["animscript_gib_fx"] = LoadFx("weapon/bullet/fx_flesh_gib_fatal_01");
   level._effect["animscript_gibtrail_fx"] = LoadFx("trail/fx_trail_blood_streak");
 }
-
 precache_scripted_fx() {
   level._effect["napalm_zombie_footstep"] = LoadFX("maps/zombie_temple/fx_ztem_napalm_zombie_ground2");
   level._effect["punji_dust"] = LoadFX("maps/zombie_temple/fx_ztem_dust_punji");
@@ -44,7 +42,6 @@ precache_scripted_fx() {
   level._effect["maze_wall_raise"] = LoadFX("maps/zombie_temple/fx_ztem_dust_maze_raise");
   level._effect["rag_doll_gib_mini"] = loadfx("maps/zombie_temple/fx_ztem_zombie_mini_squish");
 }
-
 precache_createfx_fx() {
   level._effect["fx_water_temple_geyser_ready"] = loadfx("env/water/fx_water_temple_geyser_ready");
   level._effect["fx_fire_md"] = loadfx("env/fire/fx_fire_md");
@@ -138,13 +135,11 @@ precache_createfx_fx() {
   level._effect["fx_ztem_meteorite_big_shimmer"] = loadfx("maps/zombie_temple/fx_ztem_meteorite_big_shimmer");
   level._effect["fx_crystal_water_trail"] = LoadFX("maps/zombie_temple/fx_ztem_meteorite_splash_run");
 }
-
 precache_creek_fx() {
   level._effect["fx_insect_swarm_lg"] = loadfx("maps/creek/fx_insect_swarm_lg");
   level._effect["fx_insect_swarm"] = loadfx("maps/creek/fx_insect_swarm");
   level._effect["fx_ztem_smoke_thick_indoor"] = loadfx("maps/zombie_temple/fx_ztem_smoke_thick_indoor");
 }
-
 dog_start_monitor() {
   while(1) {
     level waittill("dog_start");
@@ -169,7 +164,6 @@ dog_start_monitor() {
     setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 dog_stop_monitor() {
   while(1) {
     level waittill("dog_stop");
@@ -195,7 +189,6 @@ dog_stop_monitor() {
     setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);;
   }
 }
-
 eclipse_fog_on() {
   start_dist = 151.622;
   half_dist = 136.124;
@@ -217,7 +210,6 @@ eclipse_fog_on() {
   max_fog_opacity = 0.593122;
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
 }
-
 cave_fog_on() {
   level.tweakfile = true;
   start_dist = 683.36;
@@ -239,10 +231,9 @@ cave_fog_on() {
   time = 5;
   max_fog_opacity = 0.369586;
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
-  SetDvar("r_exposureTweak", "1");
-  SetDvar("r_exposureValue", "1.15");
+  setDvar("r_exposureTweak", "1");
+  setDvar("r_exposureValue", "1.15");
 }
-
 cave_fog_off() {
   level.tweakfile = true;
   start_dist = 151.081;
@@ -264,10 +255,9 @@ cave_fog_off() {
   time = 5;
   max_fog_opacity = 0.604413;
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
-  SetDvar("r_exposureTweak", "1");
-  SetDvar("r_exposureValue", "1.1");
+  setDvar("r_exposureTweak", "1");
+  setDvar("r_exposureValue", "1.1");
 }
-
 #using_animtree("fxanim_props");
 precache_fx_prop_anims() {
   level._fxanims = [];
@@ -281,7 +271,6 @@ precache_fx_prop_anims() {
     level.speeds[i] = RandomFloatRange(0.75, 1.4);
   }
 }
-
 play_fx_prop_anims(localClientNum) {
   fxanim_chains = getEntArray(localClientNum, "fxanim_gp_chain01_mod", "targetname");
   for(i = 0; i < fxanim_chains.size; i++) {
@@ -296,7 +285,6 @@ play_fx_prop_anims(localClientNum) {
     fxanim_chains[i] thread fxanim_think(localClientNum, "fxanim_gp_chain03", level.waits[i], 1);
   }
 }
-
 fxanim_think(localClientNum, anim_index, wait_time, speed) {
   self endon("death");
   self endon("entityshutdown");
@@ -306,7 +294,6 @@ fxanim_think(localClientNum, anim_index, wait_time, speed) {
   wait(wait_time);
   self SetAnim(level._fxanims[anim_index], 1.0, 0.0, speed);
 }
-
 waittill_dobj(localClientNum) {
   while(isDefined(self) && !(self hasdobj(localClientNum))) {
     wait(0.01);

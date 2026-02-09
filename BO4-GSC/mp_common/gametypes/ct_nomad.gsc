@@ -152,7 +152,7 @@ function_1779a8c2(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(isplayer(einflictor)) {
+  if(isPlayer(einflictor)) {
     einflictor ct_utils::function_d471f8fa(1, undefined, 1);
   }
 }
@@ -499,7 +499,7 @@ function_403b73b4(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
       level.var_bf36382a = 1;
     }
   } else {
-    if(isDefined(einflictor) && isplayer(einflictor)) {
+    if(isDefined(einflictor) && isPlayer(einflictor)) {
       self thread function_f44e6cdf();
     }
 

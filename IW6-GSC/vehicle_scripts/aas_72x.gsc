@@ -333,7 +333,7 @@ shooter_shooting() {
 
     shoot_behavior();
 
-    if(isplayer(self.enemy))
+    if(isPlayer(self.enemy))
       self updateplayersightaccuracy();
   }
 }

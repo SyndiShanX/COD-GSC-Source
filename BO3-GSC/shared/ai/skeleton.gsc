@@ -192,7 +192,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(!isalive(player)) {
     return 0;
   }
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return 0;
   }
   if(isDefined(player.is_zombie) && player.is_zombie == 1) {

@@ -49,7 +49,6 @@ shootAnimTime(semiAutoFire) {
   } else {
     return weaponFireTime(self.weapon);
   }
-
 }
 
 RefillClip() {

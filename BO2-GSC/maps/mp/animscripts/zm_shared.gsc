@@ -248,13 +248,9 @@ handlenotetrack(note, flagname, customfunction, var1) {
     default:
       if(isDefined(customfunction)) {
         if(!isDefined(var1))
-          return [
-            [customfunction]
-          ](note);
+          return [[customfunction]](note);
         else
-          return [
-            [customfunction]
-          ](note, var1);
+          return [[customfunction]](note, var1);
       }
 
       break;

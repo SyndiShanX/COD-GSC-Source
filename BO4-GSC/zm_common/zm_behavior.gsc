@@ -286,7 +286,7 @@ initzmbehaviorsandasm() {
   animationstatenetwork::registernotetrackhandlerfunction("smash_board", &function_b37b8c0d);
   animationstatenetwork::registernotetrackhandlerfunction("bhb_burst", &zombiebhbburst);
   animationstatenetwork::registernotetrackhandlerfunction("freezegun_hide", &function_36b3cb7d);
-  setdvar(#"scr_zm_use_code_enemy_selection", 0);
+  setDvar(#"scr_zm_use_code_enemy_selection", 0);
 }
 
 function_fb814207(behaviortreeentity) {
@@ -602,7 +602,7 @@ zombieupdategoal() {
   }
 
   if(shouldrepath) {
-    if(isplayer(self.favoriteenemy)) {
+    if(isPlayer(self.favoriteenemy)) {
       goalent = zm_ai_utility::function_a2e8fd7b(self, self.favoriteenemy);
 
       if(isDefined(goalent.last_valid_position)) {
@@ -1131,7 +1131,7 @@ zombieshouldattackthroughboardscondition(behaviortreeentity) {
   }
 
   if(getdvarstring(#"zombie_reachin_freq") == "") {
-    setdvar(#"zombie_reachin_freq", 50);
+    setDvar(#"zombie_reachin_freq", 50);
   }
 
   freq = getdvarint(#"zombie_reachin_freq", 0);
@@ -1167,7 +1167,7 @@ zombieshouldtauntcondition(behaviortreeentity) {
   }
 
   if(getdvarstring(#"zombie_taunt_freq") == "") {
-    setdvar(#"zombie_taunt_freq", 5);
+    setDvar(#"zombie_taunt_freq", 5);
   }
 
   freq = getdvarint(#"zombie_taunt_freq", 0);

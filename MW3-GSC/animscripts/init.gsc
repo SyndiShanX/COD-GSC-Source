@@ -36,11 +36,9 @@ _id_209D() {
 _id_20A2() {
   if(animscripts\utility::_id_0CEA(self.secondaryweapon)) {
     return 1;
-
   }
   if(weaponclass(self.primaryweapon) == "rocketlauncher") {
     return 1;
-
   }
   return 0;
 }
@@ -55,15 +53,12 @@ main() {
 
   if(self.primaryweapon == "") {
     self.primaryweapon = "none";
-
   }
   if(self.secondaryweapon == "") {
     self.secondaryweapon = "none";
-
   }
   if(self.sidearm == "") {
     self.sidearm = "none";
-
   }
   _id_2098(self.primaryweapon);
   _id_2098(self.secondaryweapon);
@@ -85,7 +80,6 @@ main() {
 
   if(var_0) {
     thread animscripts\shared::_id_20A6();
-
   }
   self.a.rockets = 3;
   self.a._id_0CD2 = 1;
@@ -102,7 +96,6 @@ main() {
 
   if(animscripts\utility::_id_0CEA(self.secondaryweapon)) {
     animscripts\shared::_id_0C9B(self.secondaryweapon, "back");
-
   }
   self.a._id_114D = 0;
   self.a._id_20A9 = gettime();
@@ -117,7 +110,6 @@ main() {
 
   if(self.team != "allies") {
     self._id_0CDE = 1;
-
   }
   self.a._id_20AD = undefined;
   self.a.stance = "stand";
@@ -141,7 +133,6 @@ main() {
 
   if(!isDefined(self._id_20B5)) {
     self._id_20B5 = 0;
-
   }
   _id_20BD();
   animscripts\weaponlist::_id_0CD0();
@@ -154,13 +145,11 @@ main() {
     self._id_0CFB = 0.5;
   } else {
     self._id_0CFB = 0.0;
-
   }
   if(self.team == "allies") {
     self._id_20B6 = 0;
   } else {
     self._id_20B6 = 256;
-
   }
   self._id_20B7 = 8000;
   self._id_10BA = 0;
@@ -177,7 +166,6 @@ main() {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     common_scripts\utility::clear_exception(var_1[var_2]);
-
   }
   self._id_1160 = 0;
   thread _id_20BB();
@@ -194,7 +182,6 @@ _id_20BA(var_0) {
 
   if(!isDefined(var_0)) {
     return 0;
-
   }
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(issubstr(var_0, var_1[var_2])) {
@@ -210,7 +197,6 @@ _id_20BB() {
 
   if(!isDefined(level._id_0A82)) {
     level waittill("loadout complete");
-
   }
   maps\_names::_id_12A4();
   thread animscripts\squadmanager::_id_0A7E();
@@ -247,7 +233,6 @@ _id_20BC() {
 
     for(var_4 = 0; var_4 < var_0.size; var_4++) {
       var_5 = (var_2[0] + var_3[0] * var_4, var_2[1] + var_3[1] * var_4, var_2[2] + var_3[2] * var_4);
-
     }
     wait 0.05;
   }
@@ -284,10 +269,9 @@ _id_20C1() {
     if(!isalive(self.enemy)) {
       continue;
     }
-    while(isplayer(self.enemy)) {
+    while(isPlayer(self.enemy)) {
       if(animscripts\utility::_id_0F8C()) {
         level._id_20C2 = gettime();
-
       }
       wait 2;
     }
@@ -322,7 +306,7 @@ _id_20C5() {
   level._id_20C2 = 100;
   anim.exception = ::_id_20C0;
   _id_20DF();
-  setdvar("scr_expDeathMayMoveCheck", "on");
+  setDvar("scr_expDeathMayMoveCheck", "on");
   maps\_names::_id_1299();
   anim._id_20C9 = 0;
   animscripts\init_move_transitions::_id_2087();
@@ -340,11 +324,9 @@ _id_20C5() {
 
   if(!isDefined(anim._id_20D1)) {
     anim._id_20D1 = [];
-
   }
   if(!isDefined(anim._id_20D2)) {
     anim._id_20D2 = [];
-
   }
   anim._id_20D4 = animscripts\utility::_id_20D3;
   anim._id_20D6["scripted"] = animscripts\notetracks::_id_20D5;
@@ -357,7 +339,6 @@ _id_20C5() {
 
   if(!isDefined(level.flag)) {
     common_scripts\utility::init_flags();
-
   }
   maps\_gameskill::_id_1E8E();
   level._id_20D8 = undefined;
@@ -479,7 +460,6 @@ _id_20F1() {
 
     if(var_0 < 1) {
       var_0 = 1;
-
     }
     self._id_20E3["fraggrenade"] = randomintrange(0, var_0);
     self._id_20E3["flash_grenade"] = randomintrange(0, var_0);
@@ -491,7 +471,6 @@ _id_20F1() {
 
     if(var_0 <= var_1) {
       var_0 = var_1 + 1;
-
     }
     self._id_20E3["double_grenade"] = randomintrange(var_1, var_0);
   }
@@ -512,7 +491,6 @@ _id_20F5() {
 
   for(var_0 = 0; var_0 < anim._id_20F6; var_0++) {
     anim._id_20F7[var_0] = var_0;
-
   }
   for(var_0 = 0; var_0 < anim._id_20F6; var_0++) {
     var_1 = randomint(anim._id_20F6);

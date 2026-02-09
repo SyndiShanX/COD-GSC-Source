@@ -337,7 +337,7 @@ end_breach_player_death_logic(var_0) {
     if(var_5 != "MOD_PROJECTILE_SPLASH") {
       level.player disableweapons();
       level notify("failure");
-      setdvar("ui_deadquote", "");
+      setDvar("ui_deadquote", "");
       maps\_utility::missionfailedwrapper();
       level notify("notify_breach_fail");
     }
@@ -355,7 +355,7 @@ end_breach_player_death_via_notetrack() {
   level.player dodamage(level.player.health - 1, level.end_breach_enemies[0] getEye(), level.end_breach_enemies[0], level.end_breach_enemies[0]);
   level.player disableweapons();
   level notify("failure");
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -367,7 +367,7 @@ end_breach_player_death_rpg() {
   level.player dodamage(level.player.health - 1, level.end_breach_rpg_guy.origin);
   level.player disableweapons();
   level notify("failure");
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   maps\_utility::missionfailedwrapper();
   level notify("notify_breach_fail");
 }
@@ -1055,8 +1055,8 @@ player_heartbeat() {
 }
 
 slowmo_difficulty_dvars() {
-  var_0 = getdvar("bg_viewKickScale");
-  var_1 = getdvar("bg_viewKickMax");
+  var_0 = getDvar("bg_viewKickScale");
+  var_1 = getDvar("bg_viewKickMax");
   setsaveddvar("bg_viewKickScale", 0.3);
   setsaveddvar("bg_viewKickMax", "15");
   setsaveddvar("bullet_penetration_damage", 0);

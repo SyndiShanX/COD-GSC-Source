@@ -339,21 +339,15 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       hintprintwait(var_12, level.hint_breakfunc);
 
       if(var_16 == 3) {
-        if([
-            [level.hint_breakfunc]
-          ](var_2, var_3, var_4)) {
+        if([[level.hint_breakfunc]](var_2, var_3, var_4)) {
           break;
         }
       } else if(var_16 == 2) {
-        if([
-            [level.hint_breakfunc]
-          ](var_2, var_3)) {
+        if([[level.hint_breakfunc]](var_2, var_3)) {
           break;
         }
       } else if(var_16 == 1) {
-        if([
-            [level.hint_breakfunc]
-          ](var_2)) {
+        if([[level.hint_breakfunc]](var_2)) {
           break;
         }
       } else if([[level.hint_breakfunc]]()) {
@@ -990,7 +984,7 @@ dynamic_run_speed_stopped() {
 }
 
 g_speed_get_func() {
-  return int(getdvar("g_speed"));
+  return int(getDvar("g_speed"));
 }
 
 g_speed_set_func(var_0) {
@@ -1085,7 +1079,7 @@ autosave_tactical_proc() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.enemy) && isplayer(var_2.enemy))
+    if(isDefined(var_2.enemy) && isPlayer(var_2.enemy))
       return;
   }
 

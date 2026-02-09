@@ -8,8 +8,8 @@ func_952F() {
   func_CF6C();
   func_EE1F();
   func_87EC();
-  level.var_A03B = getdvar("player_itemUseRadius");
-  level.var_A03A = getdvar("player_itemUseFOV");
+  level.var_A03B = getDvar("player_itemUseRadius");
+  level.var_A03A = getDvar("player_itemUseFOV");
   var_0 = getEntArray("loot_room_volume", "targetname");
   foreach(var_2 in var_0) {
     var_2 thread func_CF73();

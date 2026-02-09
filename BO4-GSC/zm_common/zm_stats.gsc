@@ -38,7 +38,7 @@ __init__() {
   }
 
   if(!getdvarint(#"hash_83577689a2e58b3", 0)) {
-    setdvar(#"hash_83577689a2e58b3", 180);
+    setDvar(#"hash_83577689a2e58b3", 180);
   }
 
   function_a8758411();
@@ -912,7 +912,7 @@ function_69317807(stat_name, value) {
 handle_death(einflictor, eattacker, weapon, smeansofdeath) {
   entity = self;
 
-  if(isplayer(entity) && isDefined(eattacker.archetype)) {
+  if(isPlayer(entity) && isDefined(eattacker.archetype)) {
     switch (eattacker.archetype) {
       case # "blight_father":
         entity increment_client_stat("killed_by_blightfather");
@@ -1000,7 +1000,7 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
     return;
   }
 
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     if(isDefined(entity.archetype)) {
       switch (entity.archetype) {
         case # "blight_father":
@@ -1448,7 +1448,7 @@ function_b14863c1() {
   level thread function_c5f9ea85();
 
   while(true) {
-    wait getdvar(#"hash_83577689a2e58b3", 180);
+    wait getDvar(#"hash_83577689a2e58b3", 180);
     function_ea5b4947();
   }
 }
@@ -1584,7 +1584,7 @@ function_c0c6ab19(var_ad971622, n_value = 1, var_b68b08b1 = 0) {
   }
 
   if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"zm_active_daily_calling", 0)) {
-    if(getdvar(#"hash_acdd08b365cb62f", 0)) {
+    if(getDvar(#"hash_acdd08b365cb62f", 0)) {
       var_a4aebab9 = getdvarint(#"zm_active_daily_calling", 0);
 
       if(var_a4aebab9) {

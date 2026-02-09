@@ -222,7 +222,7 @@ start_zombie_stuff() {
 }
 
 include_weapons() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("claymore_zm", 0);
@@ -304,7 +304,7 @@ include_weapons() {
 }
 
 include_powerups() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -375,7 +375,6 @@ set_fog_on_bus() {
     setworldfogactivebank(who, 1);
 
     println("Now using fog bank 1 for local client " + who);
-
   }
 }
 
@@ -461,7 +460,7 @@ power_controlled_lights() {
   off_sq = 414;
   level thread power_controlled_or_turbine(on, off, on_sq, off_sq, "bridgedepot");
 
-  if(getdvar(#"ui_gametype") == "zclassic")
+  if(getDvar(#"ui_gametype") == "zclassic")
     level thread sq_tower_sparks_init();
 
   while(true) {
@@ -490,7 +489,7 @@ power_controlled_lights() {
 
     level.power_on = 1;
 
-    if(getdvar(#"ui_gametype") == "zclassic")
+    if(getDvar(#"ui_gametype") == "zclassic")
       level thread turbine_door_sparks_init();
 
     fog_vol_to_visionset_set_suffix("_on");
@@ -604,7 +603,6 @@ safety_light_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
       safety notify("power_off");
   } else {
     println("ERROR: Callback on unknown screecher light " + fieldname);
-
   }
 }
 

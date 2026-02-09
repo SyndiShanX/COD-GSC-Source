@@ -6,5 +6,5 @@
 #namespace flowgraph_player;
 
 ifplayer(x, e_entity) {
-  return isplayer(e_entity);
+  return isPlayer(e_entity);
 }

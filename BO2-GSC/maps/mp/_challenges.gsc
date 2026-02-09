@@ -205,7 +205,7 @@ challengekills(data, time) {
   if(!isDefined(data.sweapon)) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
   weaponclass = getweaponclass(weapon);
@@ -855,7 +855,7 @@ disarmedhackedcarepackage() {
 }
 
 destroyed_car() {
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
   self addplayerstat("destroy_car", 1);
@@ -945,7 +945,7 @@ gameend(winner) {
   if(level.teambased) {
     if(isDefined(winner) && isDefined(level.teams[winner]))
       data.winner = winner;
-  } else if(isDefined(winner) && isplayer(winner))
+  } else if(isDefined(winner) && isPlayer(winner))
     data.winner = winner;
 
   for(index = 0; index < level.placement["all"].size; index++) {
@@ -956,7 +956,7 @@ gameend(winner) {
 }
 
 getfinalkill(player) {
-  if(isplayer(player))
+  if(isPlayer(player))
     player addplayerstat("get_final_kill", 1);
 }
 
@@ -1487,7 +1487,7 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, att
   data.victimweapon = data.victim.currentweapon;
   data.victimonground = data.victim isonground();
 
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     data.attackeronground = data.attacker isonground();
 
     if(!isDefined(data.attackerstance))

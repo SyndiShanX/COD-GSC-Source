@@ -205,7 +205,7 @@ function_48b8fc19(localclientnum) {
     }
   }
 
-  for(player = function_5c10bd79(localclientnum); !isDefined(player) || !isplayer(player) || !isDefined(player.type) || player.type != # "player" || player ishidden() || player isinfreefall() || player function_9a0edd92(); player = function_5c10bd79(localclientnum)) {
+  for(player = function_5c10bd79(localclientnum); !isDefined(player) || !isPlayer(player) || !isDefined(player.type) || player.type != # "player" || player ishidden() || player isinfreefall() || player function_9a0edd92(); player = function_5c10bd79(localclientnum)) {
     waitframe(1);
   }
 
@@ -909,7 +909,7 @@ function_4e9220ab(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       level flagsys::set(#"item_world_reset");
     }
 
-    setdvar(#"hash_21e070fbb56cf0f", 0);
+    setDvar(#"hash_21e070fbb56cf0f", 0);
     level flagsys::clear(#"item_world_initialized");
     level item_inventory::inventory_init(localclientnum);
     clientdata = function_a7e98a1a(localclientnum);
@@ -1159,7 +1159,7 @@ function_5cbe24ea(&dest, &source, &order) {
 }
 
 function_43d3ebe1(&items) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
   if(items.size <= 1) {
     return items;
@@ -1612,7 +1612,7 @@ _update_loop(localclientnum) {
   waitframe(1);
   function_1b11e73c();
 
-  while(isDefined(self) && isplayer(self)) {
+  while(isDefined(self) && isPlayer(self)) {
     if(function_96fa1c6d(localclientnum)) {
       draworigin = function_8cf40a8c(localclientnum);
       self thread _draw(localclientnum, draworigin);
@@ -1755,7 +1755,7 @@ function_48ca0bbb(localclientnum) {
 }
 
 function_94db1536(localclientnum, origin, angles, maxdist = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   clientdata = function_a7e98a1a(localclientnum);
   forward = vectornormalize(anglesToForward(angles));
 
@@ -1781,7 +1781,7 @@ function_c5b6693a() {
 }
 
 function_7c84312d(localclientnum, origin, angles) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   clientdata = function_a7e98a1a(localclientnum);
 
   while(isDefined(clientdata.var_a4ad122e) && clientdata.var_a4ad122e) {
@@ -2173,7 +2173,7 @@ show_item(localclientnum, networkid, showitem) {
     item = function_b1702735(networkid);
     var_6369afab = function_963d3f6e();
 
-    if(isplayer(player) && distance2dsquared(item.origin, player.origin) <= var_6369afab * var_6369afab) {
+    if(isPlayer(player) && distance2dsquared(item.origin, player.origin) <= var_6369afab * var_6369afab) {
       player.var_506495f9 = 1;
     }
   } else {

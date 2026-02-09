@@ -429,7 +429,7 @@ function watchcombatrobotdeath() {
   callback::remove_on_spawned(&respectnottargetedbyrobotperk, combatrobot);
   combatrobot waittill("death", attacker, damagefromunderneath, weapon);
   attacker = self[[level.figure_out_attacker]](attacker);
-  if(isDefined(attacker) && isplayer(attacker) && (!isDefined(combatrobot.owner) || combatrobot.owner util::isenemyplayer(attacker))) {
+  if(isDefined(attacker) && isPlayer(attacker) && (!isDefined(combatrobot.owner) || combatrobot.owner util::isenemyplayer(attacker))) {
     attacker challenges::destroyscorestreak(weapon, 0, 1);
     attacker challenges::destroynonairscorestreak_poststatslock(weapon);
     scoreevents::processscoreevent("destroyed_combat_robot", attacker, combatrobot.owner, weapon);
@@ -635,7 +635,7 @@ function combatrobotdamageoverride(einflictor, eattacker, idamage, idflags, smea
   }
   combatrobot.missiletrackdamage = combatrobot.missiletrackdamage + idamage;
   if(idamage > 0 && isDefined(eattacker)) {
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       if(isDefined(combatrobot.owner)) {
         challenges::combat_robot_damage(eattacker, combatrobot.owner);
       }

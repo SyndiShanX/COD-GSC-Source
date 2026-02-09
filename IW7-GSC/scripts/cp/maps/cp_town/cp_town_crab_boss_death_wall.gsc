@@ -387,7 +387,7 @@ func_D051(var_0) {
   var_0 endon("stop_toxic_trigger_monitor");
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       if(scripts\engine\utility::istrue(var_1.inlaststand)) {
         continue;
       }

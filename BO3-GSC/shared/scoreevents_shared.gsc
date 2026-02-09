@@ -15,7 +15,7 @@
 function processscoreevent(event, player, victim, weapon) {
   pixbeginevent("processScoreEvent");
   scoregiven = 0;
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     assertmsg("" + event);
     return scoregiven;
   }
@@ -188,7 +188,7 @@ function is_hero_score_event_restricted(event) {
 }
 
 function givecratecapturemedal(crate, capturer) {
-  if(isDefined(crate) && isDefined(capturer) && isDefined(crate.owner) && isplayer(crate.owner)) {
+  if(isDefined(crate) && isDefined(capturer) && isDefined(crate.owner) && isPlayer(crate.owner)) {
     if(level.teambased) {
       if(capturer.team != crate.owner.team) {
         crate.owner playlocalsound("mpl_crate_enemy_steals");

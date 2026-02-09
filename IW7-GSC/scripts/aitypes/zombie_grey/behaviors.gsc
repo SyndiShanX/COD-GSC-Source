@@ -834,7 +834,7 @@ mobile_shield_damage_monitor(var_0) {
 }
 
 try_update_mobile_shield(var_0, var_1) {
-  if(!(isDefined(var_1) && isplayer(var_1))) {
+  if(!(isDefined(var_1) && isPlayer(var_1))) {
     return;
   }
   if(!isDefined(var_0.mobile_shields)) {

@@ -83,7 +83,7 @@ mutatoracidtriggerthink(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isplayer(var_1) && !maps\mp\zombies\_util::isplayerinlaststand(var_1)) {
+    if(isPlayer(var_1) && !maps\mp\zombies\_util::isplayerinlaststand(var_1)) {
       var_1 thread mutatoracidplayereffects();
       var_1 dodamage(clamp(20 * (level.wavecounter / 6), 20, 60), var_1.origin);
       var_1 playlocalsound("zmb_mut_acid_damage");

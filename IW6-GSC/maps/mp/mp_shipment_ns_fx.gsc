@@ -61,7 +61,7 @@ main() {
   level._effect["vfx_jet_cheap_contrail_red"] = loadfx("vfx/moments/mp_shipment_ns/vfx_jet_cheap_contrail_red");
   level._effect["vfx_jet_cheap_contrail_white"] = loadfx("vfx/moments/mp_shipment_ns/vfx_jet_cheap_contrail_white");
   level._effect["vfx_jet_cheap_contrail_blue"] = loadfx("vfx/moments/mp_shipment_ns/vfx_jet_cheap_contrail_blue");
-  setdvar("r_reactiveMotionWindFrequencyScale", 0.7);
-  setdvar("r_reactiveMotionWindAmplitudeScale", 0.4);
-  setdvar("r_reactiveMotionPlayerRadius", 20.0);
+  setDvar("r_reactiveMotionWindFrequencyScale", 0.7);
+  setDvar("r_reactiveMotionWindAmplitudeScale", 0.4);
+  setDvar("r_reactiveMotionPlayerRadius", 20.0);
 }

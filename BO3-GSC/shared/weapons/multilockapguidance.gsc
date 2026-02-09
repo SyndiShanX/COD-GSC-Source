@@ -20,7 +20,7 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   callback::on_spawned(&on_player_spawned);
-  setdvar("scr_max_simLocks", 3);
+  setDvar("scr_max_simLocks", 3);
 }
 
 function on_player_spawned() {

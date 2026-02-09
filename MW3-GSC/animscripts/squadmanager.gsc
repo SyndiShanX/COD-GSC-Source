@@ -56,7 +56,6 @@ _id_0A65(var_0, var_1) {
 
   for(var_3 = 0; var_3 < anim._id_0A63.size; var_3++) {
     anim._id_0A63[var_3] _id_0A94();
-
   }
   var_2 thread _id_0A89();
   var_2 thread _id_0A8A();
@@ -75,7 +74,6 @@ _id_0A76(var_0) {
 
   while(var_2._id_0A6B.size) {
     var_2._id_0A6B[0] _id_0A7E(var_2._id_0A6B[0].team);
-
   }
   anim._id_0A63[var_1] = anim._id_0A63[anim._id_0A63.size - 1];
   anim._id_0A63[var_1]._id_0A75 = var_1;
@@ -106,7 +104,6 @@ _id_0A78(var_0) {
 
   if(!isDefined(anim._id_0A62[var_0])) {
     anim _id_0A65(var_0, self);
-
   }
   var_1 = anim._id_0A62[var_0];
   self._id_0A7A = var_1;
@@ -120,7 +117,6 @@ _id_0A7B() {
     var_0 = self.team + self._id_0A7C;
   } else {
     var_0 = self._id_0A79 + self._id_0A7C;
-
   }
   _id_0A7E(var_0);
 }
@@ -130,7 +126,6 @@ _id_0A7D(var_0) {
 
   if(var_0.team == "axis" || var_0.team == "neutral" || var_0.team == "team3") {
     var_1 = var_0.team;
-
   }
   return var_1;
 }
@@ -139,7 +134,6 @@ _id_0A7E(var_0) {
   if(!isDefined(var_0)) {
     if(isDefined(self._id_0A7C)) {
       thread _id_0A7B();
-
     }
     if(isDefined(self._id_0A79)) {
       var_0 = self._id_0A79;
@@ -150,7 +144,6 @@ _id_0A7E(var_0) {
 
   if(!isDefined(anim._id_0A62[var_0])) {
     anim _id_0A65(var_0, self);
-
   }
   var_1 = anim._id_0A62[var_0];
 
@@ -212,7 +205,6 @@ _id_0A84() {
 
   if(isDefined(self._id_0A85)) {
     _id_0A87();
-
   }
   for(var_2 = 0; var_2 < self._id_0A7A._id_0A71.size; var_2++) {
     var_4 = self._id_0A7A._id_0A71[var_2];
@@ -221,7 +213,6 @@ _id_0A84() {
 
   if(var_0._id_0A6A == 0) {
     _id_0A76(var_0._id_0A66);
-
   }
   if(isDefined(self)) {
     self._id_0A7A = undefined;
@@ -276,7 +267,6 @@ _id_0A87() {
 _id_0A88() {
   if(!isDefined(level._id_0A82)) {
     anim waittill("loadout complete");
-
   }
   for(var_0 = 0; var_0 < self._id_0A6B.size; var_0++) {
     if(self._id_0A6B[var_0] animscripts\battlechatter::_id_0A83()) {
@@ -321,7 +311,6 @@ _id_0A8B() {
 
   if(isDefined(self)) {
     self.attacker = var_0;
-
   }
   _id_0A84();
 }
@@ -336,7 +325,6 @@ _id_0A8D() {
       self._id_0A7A notify("squadupdate", "combat");
     } else {
       self._id_0A7A._id_0A69 = 1;
-
     }
     wait 0.05;
   }
@@ -390,7 +378,6 @@ _id_0A90() {
 
   for(var_0 = 0; var_0 < anim._id_0A63.size; var_0++) {
     self._id_0A6E[anim._id_0A63[var_0]._id_0A66]._id_0A91 = 0;
-
   }
   for(var_0 = 0; var_0 < self._id_0A6B.size; var_0++) {
     if(isDefined(self._id_0A6B[var_0].enemy) && isDefined(self._id_0A6B[var_0].enemy._id_0A7A) && self._id_0A6B[var_0]._id_0A80 > 0) {
@@ -448,7 +435,6 @@ _id_0A93() {
     self.origin = (var_0[0] / var_1, var_0[1] / var_1, var_0[2] / var_1);
   } else {
     self.origin = var_0;
-
   }
   self._id_0A69 = var_3;
   self.enemy = var_2;
@@ -474,11 +460,9 @@ _id_0A95(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
-
   }
   if(!isDefined(var_3)) {
     var_3 = (1, 0, 0);
-
   }
   for(var_4 = 0; var_4 < var_1 * 2; var_4++) {
     if(!isalive(self)) {
@@ -564,7 +548,6 @@ _id_0A9B(var_0) {
       self._id_0A80 = var_0;
     } else {
       self._id_0A80 = self._id_0A80 + var_0;
-
     }
     self._id_0A7F = gettime();
     return;
@@ -622,25 +605,21 @@ _id_0AA6(var_0, var_1) {
     case "suppressed":
       if(var_0._id_0A9E > 1.0) {
         self._id_0AA0[var_1]._id_0AA3++;
-
       }
       break;
     case "combat":
       if(var_0._id_0A80 > 0.0) {
         self._id_0AA0[var_1]._id_0AA3++;
-
       }
       break;
     case "attacking":
       if(gettime() < var_0.a._id_0AA7 + 2000) {
         self._id_0AA0[var_1]._id_0AA3++;
-
       }
       break;
     case "cover":
       if(!var_0 animscripts\battlechatter::_id_0AA8()) {
         self._id_0AA0[var_1]._id_0AA3++;
-
       }
       break;
   }

@@ -23,7 +23,7 @@
 #include maps\mp\_medals;
 
 main() {
-  if(getdvar(#"mapname") == "mp_background") {
+  if(getDvar(#"mapname") == "mp_background") {
     return;
   }
   maps\mp\gametypes\_globallogic::init();
@@ -555,7 +555,6 @@ give_capture_credit(touchlist, string, capturetime, capture_team, lastcapturetea
     }
 
     player iprintlnbold("GAMETYPE DEBUG: NOT GIVING YOU CAPTURE CREDIT AS BOOSTING PREVENTION");
-
   }
 }
 
@@ -1061,7 +1060,7 @@ onroundswitch() {
 }
 
 onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || level.capturetime && !self.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers["team"] == self.pers["team"]) {
+  if(!isPlayer(attacker) || level.capturetime && !self.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers["team"] == self.pers["team"]) {
     return;
   }
   medalgiven = 0;
@@ -1240,7 +1239,7 @@ updatecapsperminute(lastownerteam) {
   self.numcaps++;
   minutespassed = maps\mp\gametypes\_globallogic_utils::gettimepassed() / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed["total"]))
+  if(isPlayer(self) && isDefined(self.timeplayed["total"]))
     minutespassed = self.timeplayed["total"] / 60;
 
   self.capsperminute = self.numcaps / minutespassed;

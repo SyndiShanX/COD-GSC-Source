@@ -116,7 +116,7 @@ trigger_when_player_close_by() {
       continue;
     }
 
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       if(self.last_time_player_used + 5000 > gettime()) {
         if(!isDefined(var_5.last_travel_time) || gettime() > var_5.last_travel_time + 10000) {
           thread move_zombie_through_portal_tube(var_5);

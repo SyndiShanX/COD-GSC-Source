@@ -915,7 +915,7 @@ function function_81889ac5() {
           level notify("hash_71de5140");
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
@@ -924,25 +924,25 @@ function function_81889ac5() {
           gravityspikes_power_update(player);
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
       foreach(player in getplayers()) {
         if(equipment_id == wpn_gravityspikes.name) {
-          setdvar("", 1);
+          setDvar("", 1);
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
       foreach(player in getplayers()) {
         if(equipment_id == wpn_gravityspikes.name) {
-          setdvar("", 0);
+          setDvar("", 0);
         }
       }
-      setdvar("", "");
+      setDvar("", "");
     }
     wait(0.05);
   }

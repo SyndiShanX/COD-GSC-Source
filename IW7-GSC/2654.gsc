@@ -65,7 +65,7 @@ mt_kills(var_0, var_1) {
   var_2 = var_0.attacker;
   var_3 = var_0.victim;
 
-  if(!isDefined(var_2) || !isplayer(var_2)) {
+  if(!isDefined(var_2) || !isPlayer(var_2)) {
     return;
   }
   var_2 processmerit("mt_kills");
@@ -126,8 +126,8 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   if(!isDefined(var_1)) {
     return;
   }
-  if(!isplayer(var_1)) {
-    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+  if(!isPlayer(var_1)) {
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       var_1 = var_1.owner;
     } else {
       return;
@@ -273,7 +273,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     var_1 processmerit("mt_faf_burned_out_kills");
   }
 
-  if(getdvar("ui_mapname") == "cp_rave") {
+  if(getDvar("ui_mapname") == "cp_rave") {
     if(isDefined(self.agent_type) && self.agent_type == "zombie_sasquatch") {
       var_1 processmerit("mt_dlc1_sasquatch_kills");
     }
@@ -301,7 +301,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     }
   }
 
-  if(getdvar("ui_mapname") == "cp_disco") {
+  if(getDvar("ui_mapname") == "cp_disco") {
     if(var_4 == "iw7_katana_zm_pap2+camo222" || var_4 == "iw7_katana_windforce_zm") {
       var_1 processmerit("mt_dlc2_pap2_katana");
     } else if(var_4 == "iw7_nunchucks_zm_pap2+camo222") {
@@ -329,7 +329,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     }
   }
 
-  if(getdvar("ui_mapname") == "cp_town") {
+  if(getDvar("ui_mapname") == "cp_town") {
     if(var_17) {
       if(var_4 == "iw7_knife_zm_cleaver") {
         var_1 processmerit("mt_dlc3_cleaver_kills");
@@ -386,7 +386,7 @@ processmerit(var_0, var_1, var_2) {
   if(!mayprocessmerits()) {
     return;
   }
-  if(!isplayer(self) || isai(self)) {
+  if(!isPlayer(self) || isai(self)) {
     return;
   }
   if(!isDefined(var_1)) {

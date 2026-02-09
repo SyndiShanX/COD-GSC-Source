@@ -26,7 +26,6 @@ class cscavenger_icon: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("pulse", 1, 1, "counter");
   }
-
 }
 
 register(uid) {

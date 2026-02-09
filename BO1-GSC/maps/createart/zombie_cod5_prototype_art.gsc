@@ -6,12 +6,11 @@
 main() {
   level.tweakfile = true;
   level thread fog_settings();
-  visionSetNaked("zombie_prototype", 0);
+  VisionSetNaked("zombie_prototype", 0);
   SetSavedDvar("r_lightGridEnableTweaks", 1);
   SetSavedDvar("r_lightGridIntensity", 1.45);
   SetSavedDvar("r_lightGridContrast", .15);
 }
-
 fog_settings() {
   start_dist = 220;
   half_dist = 948.75;

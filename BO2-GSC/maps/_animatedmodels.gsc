@@ -10,8 +10,9 @@
 main() {
   waittillframeend;
 
-  if(getdvar(#"_id_55B6AAF4") == "")
-    setdvar("animated_trees_enabled", "1");
+  if(getDvar(#"_id_55B6AAF4") == "") {
+    setDvar("animated_trees_enabled", "1");
+  }
 
   level.wind = spawnStruct();
   level.wind.rate = 0.4;
@@ -20,15 +21,16 @@ main() {
   level.init_animatedmodels_dump = 0;
   level.anim_prop_models_animtree = #animtree;
 
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   level.init_animatedmodels = [];
   animated_models = getEntArray("animated_model", "targetname");
 
-  if(getdvar(#"_id_55B6AAF4") == "1")
+  if(getDvar(#"_id_55B6AAF4") == "1") {
     array_thread(animated_models, ::model_init);
-  else {
+  } else {
     array_thread(animated_models, ::model_disable);
     return;
   }
@@ -48,16 +50,18 @@ main() {
     println("animated_model_setup()");
     println("{");
 
-    for(i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++) {
       print_modellist_bykey(keys[i]);
+    }
 
     println("}");
     println("");
     println("make sure these are in your <level>.csv");
     println("");
 
-    for(i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++) {
       print_modelcsv_bykey(keys[i]);
+    }
 
     println("");
     println("");
@@ -74,21 +78,25 @@ main() {
 print_modellist_bykey(key) {
   anima = level.init_animatedmodels[key];
 
-  if(isDefined(anima["still"]))
+  if(isDefined(anima["still"])) {
     println("\\tlevel.anim_prop_models[ \"" + key + "\" ][ " + "\"still\"" + " ] = %" + anima["still"] + ";");
+  }
 
-  if(isDefined(anima["strong"]))
+  if(isDefined(anima["strong"])) {
     println("\\tlevel.anim_prop_models[ \"" + key + "\" ][ " + "\"strong\"" + " ] = %" + anima["strong"] + ";");
+  }
 }
 
 print_modelcsv_bykey(key) {
   anima = level.init_animatedmodels[key];
 
-  if(isDefined(anima["still"]))
+  if(isDefined(anima["still"])) {
     println("xanim," + anima["still"]);
+  }
 
-  if(isDefined(anima["strong"]))
+  if(isDefined(anima["strong"])) {
     println("xanim," + anima["strong"]);
+  }
 }
 
 model_init() {
@@ -152,8 +160,9 @@ model_init() {
 
   level.init_animatedmodels[self.model] = anima;
 
-  if(!isDefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model])) {
     level.init_animatedmodels_dump = 1;
+  }
 }
 
 model_disable() {

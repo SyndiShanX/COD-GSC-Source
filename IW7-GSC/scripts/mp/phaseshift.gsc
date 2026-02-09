@@ -278,7 +278,7 @@ func_27D8() {
 
 canbetargeted(var_0) {
   var_1 = 1;
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     if(!scripts\mp\utility::isreallyalive(var_0) || var_0.sessionstate != "playing") {
       return 0;
     }
@@ -292,15 +292,15 @@ canbetargeted(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 == self.owner) {
+  if(isPlayer(var_0) && var_0 == self.owner) {
     return 0;
   }
 
-  if(isplayer(var_0) && isDefined(var_0.spawntime) && gettime() - var_0.spawntime / 1000 <= 5) {
+  if(isPlayer(var_0) && isDefined(var_0.spawntime) && gettime() - var_0.spawntime / 1000 <= 5) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 scripts\mp\utility::_hasperk("specialty_blindeye")) {
+  if(isPlayer(var_0) && var_0 scripts\mp\utility::_hasperk("specialty_blindeye")) {
     return 0;
   }
 

@@ -84,19 +84,18 @@ _id_1109() {
   level._id_5A67 = getent("debate_laptop_off", "targetname");
   level._id_5A67 hide();
 
-  if(getdvar("airmasks") == "") {
-    setdvar("airmasks", "1");
-
+  if(getDvar("airmasks") == "") {
+    setDvar("airmasks", "1");
   }
   maps\_flare::main("tag_flash");
   maps\_drone_ai::init();
   level.friendlyfire["enemy_kill_points"] = 3;
   level.friendlyfire["friend_kill_points"] = -1000;
   level.player setweaponammostock("fnfiveseven", 60);
-  level._id_5A68 = getdvar("phys_gravity");
-  level._id_5A69 = getdvar("phys_gravity_ragdoll");
-  level._id_5A6A = getdvar("phys_gravityChangeWakeupRadius");
-  level._id_5A6B = getdvar("ragdoll_max_life");
+  level._id_5A68 = getDvar("phys_gravity");
+  level._id_5A69 = getDvar("phys_gravity_ragdoll");
+  level._id_5A6A = getDvar("phys_gravityChangeWakeupRadius");
+  level._id_5A6B = getDvar("ragdoll_max_life");
   level._id_5A6C = (-14, 114, 0);
   level._id_5960 = getent("org_view_roll", "targetname");
   level.player playersetgroundreferenceent(level._id_5960);
@@ -361,7 +360,6 @@ _id_5A77() {
       playFXOnTag(common_scripts\utility::getfx("window_volumetric_open"), var_2, "tag_origin");
     } else {
       playFXOnTag(common_scripts\utility::getfx("window_volumetric"), var_2, "tag_origin");
-
     }
     var_3 = common_scripts\utility::spawn_tag_origin();
     var_3.origin = var_2.origin;
@@ -412,12 +410,12 @@ _id_5A7C() {
 }
 
 _id_5A7D() {
-  setdvar("ui_deadquote", &"HIJACK_MISSIONFAIL_PRESIDENT");
+  setDvar("ui_deadquote", &"HIJACK_MISSIONFAIL_PRESIDENT");
   thread maps\_utility::_id_1826();
 }
 
 _id_5A7E() {
-  setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+  setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   thread maps\_utility::_id_1826();
 }
 

@@ -83,7 +83,7 @@ main() {
   maps\mp\zombies\_load::main();
   level.level_specific_stats_init = maps\mp\zm_prison_achievement::init_player_achievement_stats;
 
-  if(getdvar(#"createfx") == "1") {
+  if(getDvar(#"createfx") == "1") {
     return;
   }
   maps\mp\gametypes_zm\_spawning::level_use_unified_spawning(1);
@@ -167,15 +167,15 @@ main() {
     if(is_classic())
       level.zombie_ai_limit = 20;
 
-    setdvar("fx_marks_draw", 0);
-    setdvar("disable_rope", 1);
-    setdvar("cg_disableplayernames", 1);
-    setdvar("disableLookAtEntityLogic", 1);
+    setDvar("fx_marks_draw", 0);
+    setDvar("disable_rope", 1);
+    setDvar("cg_disableplayernames", 1);
+    setDvar("disableLookAtEntityLogic", 1);
   } else
     level.zombie_ai_limit = 24;
 
-  setdvar("zombiemode_path_minz_bias", 13);
-  setdvar("waypointMaxDrawDist", 12000);
+  setDvar("zombiemode_path_minz_bias", 13);
+  setDvar("waypointMaxDrawDist", 12000);
   level.zombie_vars["zombie_use_failsafe"] = 0;
   level.zones = [];
   level.zone_manager_init_func = ::working_zone_init;
@@ -451,7 +451,7 @@ give_personality_characters() {
 
   self.favorite_wall_weapons_list = [];
 
-  if(getdvar(#"_id_40772CF1") != "")
+  if(getDvar(#"_id_40772CF1") != "")
     self.characterindex = getdvarint(#"_id_40772CF1");
 
   switch (self.characterindex) {
@@ -1014,7 +1014,7 @@ alcatraz_afterlife_doors() {
       while(true) {
         m_shockbox waittill("damage", amount, attacker);
 
-        if(isplayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
+        if(isPlayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
           if(isDefined(level.afterlife_interact_dist)) {
             if(distance2d(attacker.origin, m_shockbox.origin) < level.afterlife_interact_dist) {
               t_bump delete();

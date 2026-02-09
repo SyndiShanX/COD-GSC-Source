@@ -121,7 +121,6 @@ main(var_0) {
 _id_28EF(var_0, var_1, var_2) {
   if(!isDefined(level._id_28F0)) {
     level._id_28F0 = [];
-
   }
   if(!isDefined(var_2)) {
     level._id_28F0[var_0][var_1] = -1;

@@ -18,13 +18,11 @@ _id_0CD7(var_0) {
 
   if(!isDefined(self._id_0CDD)) {
     self._id_0CDD = 0;
-
   }
   var_1 = isDefined(self._id_0CAF) && self._id_0CAF.type != "Cover Prone" && self._id_0CAF.type != "Conceal Prone";
 
   if(var_1) {
     wait 0.05;
-
   }
   var_2 = self._id_0CAB;
   var_3 = self._id_0CB1;
@@ -37,11 +35,9 @@ _id_0CD7(var_0) {
 
   if(animscripts\combat_utility::issniper()) {
     _id_0D09();
-
   }
   if(var_1 && (!self.a._id_0CE2 || !animscripts\utility::_id_0CE3())) {
     thread _id_0CFA();
-
   }
   thread _id_0CFE();
   self._id_0CE4 = undefined;
@@ -67,15 +63,12 @@ _id_0CD7(var_0) {
       var_5 = _id_0CF6();
     } else {
       var_5 = _id_0CF2();
-
     }
     if(isDefined(self.a._id_0CE6)) {
       [[self.a._id_0CE6]]();
-
     }
     if(_id_0CFF(var_2, self._id_0CAB) || !isDefined(self._id_0CAB) && _id_0CFF(var_3, self._id_0CB1) || _id_0CFF(var_4, self._id_0CDA)) {
       self notify("shoot_behavior_change");
-
     }
     var_2 = self._id_0CAB;
     var_3 = self._id_0CB1;
@@ -121,11 +114,9 @@ _id_0CE9() {
 _id_0CEB() {
   if(!animscripts\utility::_id_0CE3()) {
     return 0;
-
   }
   if(!isDefined(self._id_0CAF) && !self canshootenemy()) {
     return 0;
-
   }
   return 1;
 }
@@ -134,7 +125,6 @@ _id_0CEC() {
   if(!_id_0CEB()) {
     if(animscripts\combat_utility::issniper()) {
       _id_0D09();
-
     }
     if(self.doingambush) {
       self._id_0CD9 = "ambush";
@@ -150,7 +140,6 @@ _id_0CEC() {
         self._id_0CD9 = "suppress";
       } else {
         self._id_0CD9 = "ambush";
-
       }
       return "retry";
     }
@@ -190,7 +179,6 @@ _id_0CEF(var_0) {
 
       if(_id_0CE9()) {
         self._id_0CD9 = "suppress";
-
       }
       if(randomint(3) == 0) {
         self notify("return_to_cover");
@@ -226,7 +214,6 @@ _id_0CF0() {
 
   if(isDefined(self.enemy)) {
     var_1 = distance(self.origin, self.enemy.origin);
-
   }
   var_2 = self getEye() + anglesToForward(var_0) * var_1;
 
@@ -249,7 +236,6 @@ _id_0CF2() {
 
     if(animscripts\combat_utility::issniper()) {
       _id_0D09();
-
     }
     var_0 = animscripts\utility::_id_0CF3();
 
@@ -320,7 +306,6 @@ _id_0CF6() {
 
     if(!isDefined(self._id_0CE4)) {
       self._id_0CE4 = gettime() + randomintrange(4000, 8000);
-
     }
     if(self._id_0CE4 < gettime()) {
       self._id_0CD9 = "normal";
@@ -361,17 +346,14 @@ _id_0CFA() {
 _id_0CFC() {
   if(self._id_0CDD) {
     return 0;
-
   }
   if(!isDefined(self.enemy) || !self cansee(self.enemy)) {
     return 1;
-
   }
   if(gettime() < self._id_0CFD + 800) {
     return 0;
-
   }
-  if(isplayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
+  if(isPlayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
     if(gettime() < self._id_0CFD + 3000) {
       return 0;
     }
@@ -390,11 +372,9 @@ _id_0CFE() {
 _id_0CFF(var_0, var_1) {
   if(isDefined(var_0) != isDefined(var_1)) {
     return 1;
-
   }
   if(!isDefined(var_1)) {
     return 0;
-
   }
   return var_0 != var_1;
 }
@@ -411,7 +391,6 @@ _id_0D01() {
 
   if(self.doingambush) {
     self._id_0CD9 = "ambush";
-
   }
   if(!self._id_0CDD) {
     self notify("return_to_cover");
@@ -420,17 +399,15 @@ _id_0D01() {
 }
 
 _id_0D02() {
-  return level.gameskill == 3 && isplayer(self.enemy);
+  return level.gameskill == 3 && isPlayer(self.enemy);
 }
 
 _id_0D03() {
   if(isDefined(self._id_0CAB.enemy) && isDefined(self._id_0CAB.enemy.syncedmeleetarget)) {
     return _id_0D06("single", 0);
-
   }
   if(animscripts\combat_utility::issniper()) {
     return _id_0D06("single", 0);
-
   }
   if(animscripts\utility::_id_0CEA(self.weapon)) {
     if(animscripts\utility::_id_0C97()) {
@@ -442,18 +419,15 @@ _id_0D03() {
 
   if(weaponburstcount(self.weapon) > 0) {
     return _id_0D06("burst", 0);
-
   }
   if(isDefined(self._id_0A37) && self._id_0A37) {
     return _id_0D06("full", 1);
-
   }
   var_0 = distancesquared(self getshootatpos(), self._id_0CB1);
   var_1 = weaponclass(self.weapon) == "mg";
 
   if(self.providecoveringfire && var_1) {
     return _id_0D06("full", 0);
-
   }
   if(var_0 < 62500) {
     if(isDefined(self._id_0CAB) && isDefined(self._id_0CAB._id_0D04)) {
@@ -484,14 +458,12 @@ _id_0D05() {
   if(weaponissemiauto(self.weapon)) {
     if(var_0 < 2560000) {
       return _id_0D06("semi", 0);
-
     }
     return _id_0D06("single", 0);
   }
 
   if(weaponclass(self.weapon) == "mg") {
     return _id_0D06("full", 0);
-
   }
   if(self.providecoveringfire || var_0 < 2560000) {
     if(_id_0D07()) {
@@ -512,11 +484,9 @@ _id_0D06(var_0, var_1) {
 _id_0D07() {
   if(weaponclass(self.weapon) != "rifle") {
     return 0;
-
   }
   if(self.team != "allies") {
     return 0;
-
   }
   var_0 = animscripts\utility::_id_0D08(int(self.origin[1]), 10000) + 2000;
   var_1 = int(self.origin[0]) + gettime();
@@ -552,7 +522,6 @@ _id_0D0C() {
     if(self.weapon == self.primaryweapon && animscripts\combat_utility::_id_0D0E()) {
       if(distancesquared(self.origin, self.enemy.origin) > 65536) {
         playFXOnTag(var_0, self, "tag_flash");
-
       }
       var_1 = randomfloatrange(3, 5);
       wait(var_1);

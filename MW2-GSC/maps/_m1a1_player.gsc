@@ -13,7 +13,7 @@ main(model, type) {
   build_localinit(::init_local);
   build_deathmodel("vehicle_m1a1_abrams", "vehicle_m1a1_abrams_dmg");
   //build_shoot_shock( "tankblast" );
-  //build_drive( %abrams_movement, %abrams_movement_backwards, 10 );
+  //build_drive(%abrams_movement, %abrams_movement_backwards, 10 );
   build_exhaust("distortion/abrams_exhaust");
   build_deckdust("dust/abrams_desk_dust");
   build_deathfx("explosions/large_vehicle_explosion", undefined, "exp_armor_vehicle");

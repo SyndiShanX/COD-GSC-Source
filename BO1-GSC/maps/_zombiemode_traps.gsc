@@ -19,7 +19,6 @@ init() {
   level.elec_trap_time = 40;
   level.elec_trap_cooldown_time = 60;
 }
-
 disable_traps(traps) {
   for(i = 0; i < traps.size; i++) {
     if(isDefined(traps[i].target)) {
@@ -33,14 +32,14 @@ disable_traps(traps) {
     traps[i] disable_trigger();
   }
 }
-
 trap_init() {
   self ent_flag_init("flag_active");
   self ent_flag_init("flag_cooldown");
   self._trap_type = "";
   if(isDefined(self.script_noteworthy)) {
     self._trap_type = self.script_noteworthy;
-    if(isDefined(level._zombiemode_trap_activate_funcs) && isDefined(level._zombiemode_trap_activate_funcs[self._trap_type])) {
+    if(isDefined(level._zombiemode_trap_activate_funcs) &&
+      isDefined(level._zombiemode_trap_activate_funcs[self._trap_type])) {
       self._trap_activate_func = level._zombiemode_trap_activate_funcs[self._trap_type];
     } else {
       switch (self.script_noteworthy) {
@@ -58,7 +57,8 @@ trap_init() {
           self._trap_activate_func = ::trap_activate_fire;
       }
     }
-    if(isDefined(level._zombiemode_trap_use_funcs) && isDefined(level._zombiemode_trap_use_funcs[self._trap_type])) {
+    if(isDefined(level._zombiemode_trap_use_funcs) &&
+      isDefined(level._zombiemode_trap_use_funcs[self._trap_type])) {
       self._trap_use_func = level._zombiemode_trap_use_funcs[self._trap_type];
     } else {
       self._trap_use_func = ::trap_use_think;
@@ -166,7 +166,6 @@ trap_init() {
     self._trap_use_trigs[i] thread[[self._trap_use_func]](self);
   }
 }
-
 trap_use_think(trap) {
   while(1) {
     self waittill("trigger", who);
@@ -207,7 +206,6 @@ trap_use_think(trap) {
     }
   }
 }
-
 trap_lights_red() {
   if(level.mutators["mutator_noTraps"]) {
     return;
@@ -224,7 +222,6 @@ trap_lights_red() {
     playFXOnTag(level._effect["zapper_light_notready"], light.fx, "tag_origin");
   }
 }
-
 trap_lights_green() {
   if(level.mutators["mutator_noTraps"]) {
     return;
@@ -241,7 +238,6 @@ trap_lights_green() {
     playFXOnTag(level._effect["zapper_light_ready"], light.fx, "tag_origin");
   }
 }
-
 trap_set_string(string, param1, param2) {
   for(i = 0; i < self._trap_use_trigs.size; i++) {
     if(!isDefined(param1)) {
@@ -253,26 +249,24 @@ trap_set_string(string, param1, param2) {
     }
   }
 }
-
 trap_move_switches() {
   if(level.mutators["mutator_noTraps"]) {
     return;
   }
   self trap_lights_red();
   for(i = 0; i < self._trap_switches.size; i++) {
-    self._trap_switches[i] rotatePitch(180, .5);
+    self._trap_switches[i] rotatepitch(180, .5);
     self._trap_switches[i] playSound("amb_sparks_l_b");
   }
   self._trap_switches[0] waittill("rotatedone");
   self notify("switch_activated");
   self waittill("available");
   for(i = 0; i < self._trap_switches.size; i++) {
-    self._trap_switches[i] rotatePitch(-180, .5);
+    self._trap_switches[i] rotatepitch(-180, .5);
   }
   self._trap_switches[0] waittill("rotatedone");
   self trap_lights_green();
 }
-
 trap_activate_electric() {
   self._trap_duration = 40;
   self._trap_cooldown_time = 60;
@@ -297,7 +291,6 @@ trap_activate_electric() {
     clientnotify(self.script_string + "0");
   }
 }
-
 trap_activate_fire() {
   self._trap_duration = 40;
   self._trap_cooldown_time = 60;
@@ -314,7 +307,6 @@ trap_activate_fire() {
   clientnotify(self.script_string + "0");
   clientnotify(self.script_parameters);
 }
-
 trap_activate_rotating() {
   self endon("trap_done");
   self._trap_duration = 30;
@@ -342,7 +334,6 @@ trap_activate_rotating() {
   }
   self notify("trap_done");
 }
-
 trap_activate_flipper() {}
 trap_audio_fx(trap) {
   if(level.mutators["mutator_noTraps"]) {
@@ -361,14 +352,14 @@ trap_audio_fx(trap) {
   }
   trap waittill_any_or_timeout(trap._trap_duration, "trap_done");
   if(isDefined(sound_origin)) {
-    if(trap.script_noteworthy == "fire")
+    if(trap.script_noteworthy == "fire") {
       playsoundatposition("zmb_firetrap_end", sound_origin.origin);
-    sound_origin stopLoopSound();
+    }
+    sound_origin stoploopsound();
     wait(.05);
     sound_origin delete();
   }
 }
-
 play_electrical_sound(trap) {
   trap endon("trap_done");
   while(1) {
@@ -376,12 +367,11 @@ play_electrical_sound(trap) {
     playsoundatposition("zmb_elec_arc", self.origin);
   }
 }
-
 trap_damage() {
   self endon("trap_done");
   while(1) {
     self waittill("trigger", ent);
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       switch (self._trap_type) {
         case "electric":
           ent thread player_elec_damage();
@@ -409,14 +399,13 @@ trap_damage() {
           case "electric":
           case "fire":
           default:
-            ent thread zombie_trap_death(self, randomInt(100));
+            ent thread zombie_trap_death(self, randomint(100));
             break;
         }
       }
     }
   }
 }
-
 trig_update(parent) {
   if(level.mutators["mutator_noTraps"]) {
     return;
@@ -428,7 +417,6 @@ trig_update(parent) {
     wait(0.05);
   }
 }
-
 player_elec_damage() {
   self endon("death");
   self endon("disconnect");
@@ -454,7 +442,6 @@ player_elec_damage() {
     }
   }
 }
-
 player_fire_damage() {
   self endon("death");
   self endon("disconnect");
@@ -471,7 +458,6 @@ player_fire_damage() {
     }
   }
 }
-
 zombie_trap_death(trap, param) {
   if(level.mutators["mutator_noTraps"]) {
     return;
@@ -497,10 +483,10 @@ zombie_trap_death(trap, param) {
           refs[4] = "left_leg";
           refs[5] = "no_legs";
           refs[6] = "head";
-          self.a.gib_ref = refs[randomInt(refs.size)];
+          self.a.gib_ref = refs[randomint(refs.size)];
           playsoundatposition("zmb_zombie_arc", self.origin);
           if(trap._trap_type == "electric") {
-            if(randomInt(100) > 50) {
+            if(randomint(100) > 50) {
               self thread electroctute_death_fx();
               self thread play_elec_vocals();
             }
@@ -530,16 +516,14 @@ zombie_trap_death(trap, param) {
       break;
   }
 }
-
 zombie_flame_watch() {
   if(level.mutators["mutator_noTraps"]) {
     return;
   }
   self waittill("death");
-  self stopLoopSound();
+  self stoploopsound();
   level.burning_zombies = array_remove_nokeys(level.burning_zombies, self);
 }
-
 play_elec_vocals() {
   if(isDefined(self)) {
     org = self.origin;
@@ -549,7 +533,6 @@ play_elec_vocals() {
     playsoundatposition("zmb_exp_jib_zombie", org);
   }
 }
-
 electroctute_death_fx() {
   self endon("death");
   if(isDefined(self.is_electrocuted) && self.is_electrocuted) {
@@ -584,18 +567,16 @@ electroctute_death_fx() {
   playFXOnTag(level._effect["elec_sm"], self, tagArray[0]);
   playFXOnTag(level._effect["elec_sm"], self, tagArray[1]);
 }
-
 electrocute_timeout() {
   self endon("death");
   self playLoopSound("fire_manager_0");
   wait 12;
-  self stopLoopSound();
+  self stoploopsound();
   if(isDefined(self) && isalive(self)) {
     self.is_electrocuted = false;
     self notify("stop_flame_damage");
   }
 }
-
 trap_dialog() {
   self endon("warning_dialog");
   level endon("switch_flipped");
@@ -622,7 +603,6 @@ trap_dialog() {
     }
   }
 }
-
 get_trap_array(trap_type) {
   ents = getEntArray("zombie_trap", "targetname");
   traps = [];
@@ -633,7 +613,6 @@ get_trap_array(trap_type) {
   }
   return traps;
 }
-
 trap_disable() {
   cooldown = self._trap_cooldown_time;
   if(self._trap_in_use) {
@@ -645,12 +624,10 @@ trap_disable() {
   self trap_lights_red();
   self._trap_cooldown_time = cooldown;
 }
-
 trap_enable() {
   array_thread(self._trap_use_trigs, ::trigger_on);
   self trap_lights_green();
 }
-
 trap_model_type_init() {
   if(!isDefined(self.script_parameters)) {
     self.script_parameters = "default";

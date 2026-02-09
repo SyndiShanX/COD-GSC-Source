@@ -23,7 +23,6 @@ registerblackboardattribute(entity, attributename, defaultattributevalue, getter
   if(isactor(entity)) {
     entity trackblackboardattribute(attributename);
   }
-
 }
 
 getstructblackboardattribute(struct, attributename) {

@@ -44,7 +44,7 @@ function __init__() {
   }
   register_clientfields();
   init_fx();
-  setdvar("bg_friendlyFireMode", 0);
+  setDvar("bg_friendlyFireMode", 0);
   level.setgibfxtoignorepause = 1;
   callback::on_spawned(&on_player_spawned);
   function_aea4686a();
@@ -59,7 +59,7 @@ function autoexec function_4d5aa4f3() {}
 
 function private on_player_spawned(localclientnum) {
   self tmodeenable(0);
-  setdvar("r_bloomUseLutALT", 1);
+  setDvar("r_bloomUseLutALT", 1);
   function_8cf4b0ee(localclientnum);
 }
 

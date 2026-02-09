@@ -9,9 +9,9 @@
 main() {
   level.tweakfile = 1;
   visionsetnaked("yemen_start", 1);
-  r_rimintensity_debug = getdvar(#"r_rimIntensity_debug");
+  r_rimintensity_debug = getDvar(#"r_rimIntensity_debug");
   setsaveddvar("r_rimIntensity_debug", 1);
-  r_rimintensity = getdvar(#"r_rimIntensity");
+  r_rimintensity = getDvar(#"r_rimIntensity");
   setsaveddvar("r_rimIntensity", 8);
   capture_swap_vision_and_sky();
 }
@@ -32,9 +32,9 @@ menendez_intro() {
   n_far_blur = 1;
   n_time = 2;
   level.player depth_of_field_tween(n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur, n_time);
-  r_rimintensity_debug = getdvar(#"r_rimIntensity_debug");
+  r_rimintensity_debug = getDvar(#"r_rimIntensity_debug");
   setsaveddvar("r_rimIntensity_debug", 1);
-  r_rimintensity = getdvar(#"r_rimIntensity");
+  r_rimintensity = getDvar(#"r_rimIntensity");
   setsaveddvar("r_rimIntensity", 3);
 }
 
@@ -44,28 +44,28 @@ intro_hall() {
 
 large_crowd() {
   visionsetnaked("sp_yemen_crowd", 1);
-  r_rimintensity_debug = getdvar(#"r_rimIntensity_debug");
+  r_rimintensity_debug = getDvar(#"r_rimIntensity_debug");
   setsaveddvar("r_rimIntensity_debug", 1);
-  r_rimintensity = getdvar(#"r_rimIntensity");
+  r_rimintensity = getDvar(#"r_rimIntensity");
   setsaveddvar("r_rimIntensity", 8);
 }
 
 hallway_exposure() {
   wait 2.55;
   current_exposure = getdvarfloat(#"r_exposureValue");
-  setdvar("r_exposureTweak", 1);
-  setdvar("r_exposureValue", 0.65);
+  setDvar("r_exposureTweak", 1);
+  setDvar("r_exposureValue", 0.65);
   wait 1;
   difference_expo_per_frame = (current_exposure - 0.65) / 40;
 
   for(i = 0; i < 40; i++) {
     new_expo = i * difference_expo_per_frame + 0.65;
-    setdvar("r_exposureValue", new_expo);
+    setDvar("r_exposureValue", new_expo);
     wait 0.05;
   }
 
-  setdvar("r_exposureValue", current_exposure);
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureValue", current_exposure);
+  setDvar("r_exposureTweak", 0);
 }
 
 market() {

@@ -108,7 +108,7 @@ func_44F8(var_0) {
 }
 
 func_44FC(var_0) {
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return 0;
   }
 

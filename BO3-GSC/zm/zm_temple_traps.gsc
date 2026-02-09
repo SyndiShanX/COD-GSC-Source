@@ -48,7 +48,7 @@ function spear_trap_think() {
   }
   while(true) {
     self waittill("trigger", who);
-    if(!isDefined(who) || !isplayer(who) || who.sessionstate == "spectator") {
+    if(!isDefined(who) || !isPlayer(who) || who.sessionstate == "spectator") {
       continue;
     }
     for(i = 0; i < 3; i++) {
@@ -73,7 +73,7 @@ function spear_trap_damage_all_characters(audio_counter, player) {
       self thread spear_damage_character(char);
       continue;
     }
-    if(isplayer(char) && audio_counter == 0 && randomintrange(0, 101) <= 10) {
+    if(isPlayer(char) && audio_counter == 0 && randomintrange(0, 101) <= 10) {
       if(isDefined(player) && player == char) {
         char thread delayed_spikes_close_vox();
       }
@@ -101,7 +101,7 @@ function spear_trap_slow() {
     return;
   }
   self.spear_trap_slow = 1;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(zombie_utility::is_player_valid(self)) {
       self thread zm_audio::create_and_play_dialog("general", "spikes_damage");
       self thread _fake_red();
@@ -315,7 +315,7 @@ function function_b68fdf22() {
   self triggerenable(1);
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       self thread function_5e706bd9(who);
     }
   }
@@ -371,7 +371,7 @@ function waterfall_trap_damage() {
   zombies_knocked_down = [];
   while(true) {
     self waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       if(isDefined(self.script_string) && self.script_string == "hurt_player") {
         who dodamage(20, self.origin);
         wait(1);
@@ -644,7 +644,7 @@ function maze_cell_watch() {
   while(true) {
     self.trigger waittill("trigger", who);
     if(self.trigger.pathcount > 0) {
-      if(isplayer(who)) {
+      if(isPlayer(who)) {
         if(who is_player_maze_slow()) {
           continue;
         }
@@ -656,7 +656,7 @@ function maze_cell_watch() {
         self.trigger thread zombie_normal_trigger_exit(who);
       }
     } else {
-      if(isplayer(who)) {
+      if(isPlayer(who)) {
         if(who is_player_on_path()) {
           continue;
         }

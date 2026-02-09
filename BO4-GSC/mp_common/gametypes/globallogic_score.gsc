@@ -875,7 +875,7 @@ _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray
 }
 
 setplayermomentumdebug() {
-  setdvar(#"sv_momentumpercent", 0);
+  setDvar(#"sv_momentumpercent", 0);
 
   while(true) {
     wait 1;
@@ -1624,7 +1624,7 @@ givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
     self.kills = self getpersstat(#"kills");
     self updatestatratio("kdratio", "kills", "deaths");
 
-    if(isDefined(evictim) && isplayer(evictim) && isDefined(evictim.attackerdamage)) {
+    if(isDefined(evictim) && isPlayer(evictim) && isDefined(evictim.attackerdamage)) {
       if(isarray(evictim.attackerdamage) && isDefined(self.clientid) && isDefined(evictim.attackerdamage[self.clientid]) && evictim.attackerdamage.size == 1) {
         stats::function_dad108fa(#"direct_action_kills", 1);
       }
@@ -1635,7 +1635,7 @@ givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
     }
   }
 
-  if(isDefined(evictim) && isplayer(evictim)) {
+  if(isDefined(evictim) && isPlayer(evictim)) {
     self incpersstat(#"ekia", 1, 1, 1);
     self stats::function_e24eec31(weapon, #"ekia", 1);
     self contracts::player_contract_event(#"ekia", weapon);

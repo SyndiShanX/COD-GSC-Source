@@ -39,31 +39,24 @@ _id_1BB3() {
 _id_1BB4() {
   if(!isDefined(self._id_1BB5)) {
     self._id_1BB5 = 0;
-
   }
   if(!isDefined(self._id_1BB6)) {
     self._id_1BB6 = 0;
-
   }
   if(!isDefined(self._id_1BB7)) {
     self._id_1BB7 = 0;
-
   }
   if(!isDefined(self._id_1BB8)) {
     self._id_1BB8 = 0;
-
   }
   if(!isDefined(self._id_1BB9)) {
     self._id_1BB9 = 32;
-
   }
   if(!isDefined(self.radius)) {
     self.radius = 84;
-
   }
   if(!isDefined(self._id_1BBA)) {
     self._id_1BBA = 1000;
-
   }
   if(!isDefined(self._id_1BBB)) {
     self._id_1BBB = [];
@@ -89,19 +82,15 @@ _id_1BBC(var_0) {
 
     if(isDefined(var_12.radius)) {
       var_5 = var_12.radius;
-
     }
     if(isDefined(var_12._id_1BBD) && var_12._id_1BBD) {
       var_3 = 1;
-
     }
     if(isDefined(var_12._id_1BBE) && var_12._id_1BBE) {
       var_6 = var_12._id_1BBE;
-
     }
     if(isDefined(var_12._id_1BBF) && var_12._id_1BBF) {
       var_4 = 1;
-
     }
     foreach(var_15 in var_2) {
       if(var_12 == var_15) {
@@ -116,7 +105,6 @@ _id_1BBC(var_0) {
 
     if(var_1 == 100000001) {
       var_1 = undefined;
-
     }
     _id_1BD7(var_12._id_1BC0, var_12.model, var_3, var_4, var_1, var_5, var_6, var_7, var_8, var_9, var_10, var_13);
   }
@@ -125,7 +113,6 @@ _id_1BBC(var_0) {
 _id_1BC1(var_0) {
   if(!isDefined(var_0.target)) {
     return undefined;
-
   }
   var_1 = getent(var_0.target, "targetname");
   return var_1.angles - var_0.angles;
@@ -134,7 +121,6 @@ _id_1BC1(var_0) {
 _id_1BC2(var_0) {
   if(!isDefined(var_0.target)) {
     return undefined;
-
   }
   var_1 = getent(var_0.target, "targetname");
   var_2 = var_1.origin[2] - var_0.origin[2];
@@ -149,14 +135,12 @@ _id_1BC3(var_0) {
   foreach(var_4 in var_0) {
     if(!isDefined(var_4._id_1BC0)) {
       var_4._id_1BC0 = var_4.model;
-
     }
     var_2 = var_4._id_1BC0;
     level._id_1B4F = var_2;
 
     if(!isDefined(var_1[var_2]) || !var_1[var_2].size) {
       var_1[var_2] = [];
-
     }
     var_1[var_2][var_1[var_2].size] = var_4;
   }
@@ -190,14 +174,12 @@ _id_1BC4(var_0) {
 hack_start(var_0) {
   if(!isDefined(var_0)) {
     var_0 = "painter";
-
   }
   precachemenu(var_0);
   common_scripts\utility::flag_init("user_alive");
 
   while(!isDefined(get_player())) {
     wait 0.05;
-
   }
   level._id_1BD3 = get_player();
   wait 0.05;
@@ -243,7 +225,6 @@ _id_1B2C() {
 
   if(_id_1BF3()) {
     var_0 = 7;
-
   }
   var_1 = [];
   var_2 = 15;
@@ -265,7 +246,6 @@ _id_1B2C() {
       var_1[var_7].alpha = 1;
     } else {
       var_1[var_7].alpha = var_6;
-
     }
     var_1[var_7].x = 20;
     var_1[var_7].y = var_4;
@@ -273,7 +253,6 @@ _id_1B2C() {
 
     if(var_7 == var_3) {
       var_5 = var_5 * -1;
-
     }
     var_6 = var_6 + var_5;
     var_4 = var_4 - var_2;
@@ -442,7 +421,6 @@ _id_1BD7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(!isDefined(var_10)) {
     var_10 = (0, 0, 0);
-
   }
   level._id_1BB1[var_0]._id_1BB8 = var_3;
   level._id_1BB1[var_0]._id_1BB7 = var_2;
@@ -454,19 +432,16 @@ _id_1BD7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(!isDefined(level._id_1BB1[var_0]._id_1BBB)) {
     level._id_1BB1[var_0]._id_1BBB = [];
-
   }
   level._id_1BB1[var_0]._id_1BBB[var_1] = var_10;
 
   if(!isDefined(level._id_1BB1[var_0]._id_1BD9)) {
     level._id_1BB1[var_0]._id_1BD9 = [];
-
   }
   level._id_1BB1[var_0]._id_1BD9[var_1] = var_7;
 
   if(!isDefined(level._id_1BB1[var_0]._id_1BDA)) {
     level._id_1BB1[var_0]._id_1BDA = [];
-
   }
   level._id_1BB1[var_0]._id_1BDA[var_1] = var_11;
   level._id_1BB1[var_0]._id_1BD8[level._id_1BB1[var_0]._id_1BD8.size] = var_1;
@@ -483,7 +458,6 @@ _id_1B41() {
 
     if(level._id_1BD3 buttonpressed("f")) {
       _id_1BF2();
-
     }
     if(level._id_1BD3 buttonpressed("DPAD_UP")) {
       _id_1BE1(var_0, "DPAD_UP");
@@ -508,7 +482,6 @@ _id_1B41() {
     } else {
       if(level._id_1BD3 buttonpressed("BUTTON_LSHLDR")) {
         _id_1BF1(var_0);
-
       }
       if(level._id_1BD3 buttonpressed("BUTTON_RSHLDR")) {
         thread _id_1BEA(var_0);
@@ -532,7 +505,6 @@ _id_1BDD(var_0, var_1) {
   }
   while(level._id_1BD3 buttonpressed(var_1)) {
     wait 0.05;
-
   }
   level._id_1BCD = 1;
   _id_1BD5();
@@ -551,13 +523,11 @@ _id_1BDD(var_0, var_1) {
       var_4 = 1;
     } else {
       var_4 = 0;
-
     }
     var_6 = var_6 + var_4 * var_3;
 
     if(var_6 == 0) {
       var_6 = var_6 + var_4 * var_3;
-
     }
     level._id_1BCE = var_6;
     common_scripts\utility::array_thread(var_2, ::_id_1BDE, var_0);
@@ -588,7 +558,6 @@ _id_1BE1(var_0, var_1) {
   }
   while(level._id_1BD3 buttonpressed(var_1)) {
     wait 0.05;
-
   }
   _id_1BD6();
   level._id_1BCC = 1;
@@ -606,17 +575,14 @@ _id_1BE1(var_0, var_1) {
       var_5 = -1;
     } else if(level._id_1BD3 buttonpressed("BUTTON_B")) {
       var_5 = 1;
-
     }
     var_3 = var_3 + var_5 * var_4;
 
     if(var_3 > 360) {
       var_3 = 1;
-
     }
     if(var_3 < 0) {
       var_3 = 359;
-
     }
     _id_1BE7(var_0, (0, 0, 1));
     level._id_1BE2 = level._id_1BD3 getplayerangles();
@@ -624,7 +590,6 @@ _id_1BE1(var_0, var_1) {
 
     for(var_6 = 0; var_6 < var_2.size; var_6++) {
       var_2[var_6].angles = level._id_1BE2;
-
     }
     wait 0.05;
   }
@@ -633,7 +598,6 @@ _id_1BE1(var_0, var_1) {
 
   while(level._id_1BD3 buttonpressed(var_1)) {
     wait 0.05;
-
   }
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
     var_2[var_6] thread _id_1B71();
@@ -662,7 +626,6 @@ _id_1BE4() {
 _id_1BE5(var_0, var_1) {
   if(gettime() - level._id_1BCF > 60) {
     level._id_1BD0 = 0;
-
   }
   level._id_1BD0 = level._id_1BD0 + 0.05;
 
@@ -670,14 +633,12 @@ _id_1BE5(var_0, var_1) {
     var_2 = 2;
   } else {
     var_2 = level._id_1BD0 / 0.3;
-
   }
   var_3 = level._id_1BC9;
   var_3 = var_3 + var_1 * var_2;
 
   if(var_3 > 0) {
     level._id_1BC9 = var_3;
-
   }
   level._id_1B31["helpradius"]._id_1B32 setvalue(level._id_1BC9);
   level._id_1BCF = gettime();
@@ -690,7 +651,6 @@ _id_1BE6(var_0, var_1) {
 
   if(var_3 > 0) {
     level._id_1BC5 = var_3;
-
   }
   level._id_1B2F.alpha = 1;
   level._id_1B2E.alpha = 0;
@@ -702,7 +662,6 @@ _id_1BE6(var_0, var_1) {
 _id_1BE7(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = (0, 1, 0);
-
   }
   if(var_0["fraction"] == 1) {
     return;
@@ -714,7 +673,6 @@ _id_1BE7(var_0, var_1) {
 
   if(level._id_1BCC) {
     draw_axis(var_3, level._id_1BE2);
-
   }
   if(level._id_1BCD) {
     common_scripts\utility::draw_arrow(var_3, var_3 + var_0["normal"] * level._id_1BCE, (1, 1, 1));
@@ -745,19 +703,15 @@ _id_1BE9() {
 
   if(level._id_1BB5) {
     self.angles = level._id_1BD3 getplayerangles();
-
   }
   if(level._id_1BB6) {
     _id_1BE8();
-
   }
   if(var_0._id_1BB7) {
     self.angles = common_scripts\utility::flat_angle(self.angles);
-
   }
   if(!level._id_1BB6 && !level._id_1BB5) {
     self addyaw(randomint(360));
-
   }
   if(var_0._id_1BB8) {
     self.angles = common_scripts\utility::flat_angle(vectortoangles(self.origin - level._id_1BD3 getEye()));
@@ -790,7 +744,6 @@ _id_1BEB() {
 _id_1BEC(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 0;
-
   }
   var_3 = [];
   var_4 = level._id_1BC5;
@@ -802,7 +755,6 @@ _id_1BEC(var_0, var_1, var_2) {
 
   if(var_1) {
     var_9 = var_9 + (0, randomfloat(360), 0);
-
   }
   var_10 = vectornormalize(anglestoright(var_9));
   var_11 = vectornormalize(anglestoup(var_9));
@@ -893,17 +845,14 @@ _id_1BEE(var_0, var_1) {
 
   if(level._id_1BCD) {
     var_2.origin = var_2.origin + var_0["normal"] * level._id_1BCE;
-
   }
   var_3 = _id_1B72();
 
   if(isDefined(var_3._id_1BD9[var_1])) {
     var_2.origin = var_2.origin + var_0["normal"] * var_3._id_1BD9[var_1];
-
   }
   if(isDefined(var_3._id_1BDA[var_1])) {
     var_2._id_1BDA = var_3._id_1BDA[var_1];
-
   }
   return var_2;
 }
@@ -919,11 +868,9 @@ _id_1BEF(var_0, var_1, var_2) {
 _id_1BF0(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_3)) {
     var_3 = (0, 1, 0);
-
   }
   if(!isDefined(var_4)) {
     var_4 = 16;
-
   }
   var_6 = var_4 / 2;
   var_7 = 360 / var_4;
@@ -939,7 +886,6 @@ _id_1BF0(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(var_12["fraction"] != 1) {
       var_8[var_8.size] = var_12["position"];
-
     }
     var_9 = var_9 + var_7;
   }
@@ -981,7 +927,6 @@ draw_axis(var_0, var_1) {
 _id_1B34() {
   if(!isDefined(level._id_1B35)) {
     level._id_1B35 = [];
-
   }
   var_0 = newhudelem();
   level._id_1B35[level._id_1B35.size] = var_0;
@@ -1007,7 +952,6 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
 
   if(_id_1BF3()) {
     var_5 = 630;
-
   }
   var_6 = 120;
   var_7 = 18;
@@ -1017,14 +961,12 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_2)) {
     var_2 = "";
-
   }
   if(!isDefined(level._id_1B31) || !isDefined(level._id_1B31[var_0])) {
     level._id_1B31[var_0] = _id_1B34();
     var_11 = _id_1B34();
   } else {
     var_11 = level._id_1B31[var_0]._id_1B32;
-
   }
   level._id_1B31[var_0].location = 0;
   level._id_1B31[var_0].alignx = "right";
@@ -1049,11 +991,9 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_11 setvalue(var_4);
-
   }
   if(isDefined(var_3)) {
     var_11 _id_1B36(var_3);
-
   }
   level._id_1B31[var_0]._id_1B32 = var_11;
 }

@@ -26,7 +26,7 @@ function private on_player_spawned(localclientnum) {
 }
 
 function private on_player_shutdown(localclientnum) {
-  if(self isplayer()) {
+  if(self isPlayer()) {
     self notify("stopfacialthread");
     corpse = self getplayercorpse();
     if(!isDefined(corpse)) {
@@ -46,7 +46,7 @@ function private on_player_shutdown(localclientnum) {
 function private on_player_death(localclientnum) {
   self endon("entityshutdown");
   self waittill("death");
-  if(self isplayer()) {
+  if(self isPlayer()) {
     self notify("stopfacialthread");
     corpse = self getplayercorpse();
     if(isDefined(corpse.facialdeathanimstarted) && corpse.facialdeathanimstarted) {
@@ -62,7 +62,7 @@ function private on_player_death(localclientnum) {
 
 function private facialanimationsinit(localclientnum) {
   buildandvalidatefacialanimationlist(localclientnum);
-  if(self isplayer()) {
+  if(self isPlayer()) {
     self thread facialanimationthink(localclientnum);
   }
 }
@@ -123,7 +123,7 @@ function private facialanimationthink(localclientnum) {
     return;
   }
   self.__clientfacialanimationsthinkstarted = 1;
-  assert(self isplayer());
+  assert(self isPlayer());
   self util::waittill_dobj(localclientnum);
   while(isDefined(self)) {
     updatefacialanimforplayer(localclientnum, self);

@@ -26,7 +26,7 @@ main() {
   precacheitem("hind_turret_penetration");
   level.sniperescape_fastload = 0;
 
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -296,7 +296,7 @@ main() {
   common_scripts\utility::run_thread_on_targetname("set_go_line", maps\sniperescape_code::set_go_line);
   common_scripts\utility::run_thread_on_targetname("enemy_door_trigger", maps\sniperescape_code::enemy_door_trigger);
 
-  if(getdvar("use_old_obj_grass") == "1")
+  if(getDvar("use_old_obj_grass") == "1")
     common_scripts\utility::run_thread_on_targetname("grass_obj", maps\sniperescape_wounding::grass_obj);
   else
     thread maps\sniperescape_wounding::ferris_wheel_placement_objective();
@@ -688,7 +688,7 @@ player_rappel() {
   var_0 thread maps\_anim::anim_single_solo(var_1, "rappel_for_player");
   var_0 waittill("rappel");
   level.player unlink();
-  setsaveddvar("cg_drawCrosshair", getdvar("cg_drawCrosshairOption", 1));
+  setsaveddvar("cg_drawCrosshair", getDvar("cg_drawCrosshairOption", 1));
   setsaveddvar("bg_scriptFullPitchRange", 0);
   level.player allowcrouch(1);
   level.player allowprone(1);
@@ -1185,7 +1185,7 @@ enter_burnt_apartment() {
   thread maps\sniperescape_code::spooky_dog();
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "spawn_spooky_dog", common_scripts\utility::flag_set, "aa_burnt_apartment");
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "apartment_cleared", common_scripts\utility::flag_clear, "aa_burnt_apartment");
-  setdvar("player_sees_pool_dogs", "");
+  setDvar("player_sees_pool_dogs", "");
   common_scripts\utility::run_thread_on_noteworthy("apartment_guard", maps\_utility::add_spawn_function, maps\_utility::set_fixednode_true);
   common_scripts\utility::run_thread_on_noteworthy("apartment_guard", maps\_utility::add_spawn_function, maps\_utility::set_baseaccuracy, 100);
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "enter_burnt", maps\_utility::clear_dvar, "player_hasnt_been_spooked");
@@ -1217,7 +1217,7 @@ start_pool() {
   maps\sniperescape_wounding::plant_price();
   level.player setplayerangles(var_2.angles);
   level.player setorigin(var_2.origin);
-  setdvar("player_sees_pool_dogs", "");
+  setDvar("player_sees_pool_dogs", "");
   wait 0.05;
   common_scripts\utility::flag_set("to_the_pool");
   thread maps\sniperescape_code::price_wounded_logic();
@@ -1239,8 +1239,8 @@ pool() {
   thread maps\sniperescape_wounding::pool_have_body();
   common_scripts\utility::flag_init("pool_dogs_flee");
 
-  if(getdvar("player_sees_pool_dogs") == "")
-    setdvar("player_sees_pool_dogs", "1");
+  if(getDvar("player_sees_pool_dogs") == "")
+    setDvar("player_sees_pool_dogs", "1");
   else
     common_scripts\utility::flag_set("pool_dogs_flee");
 
@@ -1388,8 +1388,8 @@ fairgrounds_after_prep() {
   if(level.gameskill <= 1)
     maps\sniperescape_code::max_ammo_on_legit_sniper_escape_weapon();
 
-  if(getdvar("claymore_hint") == "") {
-    setdvar("claymore_hint", "claymore");
+  if(getDvar("claymore_hint") == "") {
+    setDvar("claymore_hint", "claymore");
     var_1 = level.player maps\_utility::getplayerclaymores();
 
     if(var_1) {
@@ -1401,8 +1401,8 @@ fairgrounds_after_prep() {
       level.player thread maps\_utility::display_hint("claymore_plant");
       wait 4;
     }
-  } else if(getdvar("claymore_hint") == "claymore") {
-    setdvar("claymore_hint", "c4");
+  } else if(getDvar("claymore_hint") == "claymore") {
+    setDvar("claymore_hint", "c4");
     level.player thread maps\sniperescape_code::c4_hint();
   }
 
@@ -1549,7 +1549,7 @@ seaknight_flies_in(var_0) {
   if(!common_scripts\utility::flag("player_made_it_to_seaknight")) {
     wait 1.5;
     thread maps\_hud_util::fade_in(1.5);
-    setdvar("ui_deadquote", &"SNIPERESCAPE_YOU_FAILED_TO_REACH_THE");
+    setDvar("ui_deadquote", &"SNIPERESCAPE_YOU_FAILED_TO_REACH_THE");
     maps\_utility::missionfailedwrapper();
   }
 

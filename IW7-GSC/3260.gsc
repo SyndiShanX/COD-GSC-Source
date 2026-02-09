@@ -93,7 +93,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_15 = isDefined(self.isfrozen) && isDefined(var_5) && !scripts\cp\cp_weapon::isforgefreezeweapon(var_5) || var_4 == "MOD_MELEE";
   var_16 = scripts\cp\cp_weapon::isaltforgefreezeweapon(var_5);
   var_17 = scripts\engine\utility::isbulletdamage(var_4) || var_4 == "MOD_EXPLOSIVE_BULLET" && var_8 != "none";
-  var_18 = isDefined(var_1) && isplayer(var_1);
+  var_18 = isDefined(var_1) && isPlayer(var_1);
   var_19 = var_17 && scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
   var_1A = (var_1 scripts\cp\cp_weapon::has_attachment(var_5, "overclock") || var_1 scripts\cp\cp_weapon::has_attachment(var_5, "overclockcp")) && var_17;
   var_1B = scripts\engine\utility::istrue(self.battleslid);
@@ -123,7 +123,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(scripts\engine\utility::istrue(self.marked_shared_fate_fnf)) {
       var_1 notify("weapon_hit_marked_target", var_1, var_2, var_4, var_5, self);
     }
@@ -424,7 +424,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     var_2 = var_2 * var_1.special_zombie_damage;
   }
 
-  if(isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1)) {
+  if(isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1)) {
     playFX(level._effect["melee_impact"], self gettagorigin("j_neck"), vectortoangles(self.origin - var_1.origin), anglestoup(self.angles), var_1);
   }
 
@@ -445,7 +445,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     self getrandomhovernodesaroundtargetpos(0, 0);
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(isDefined(level.updateondamagepassivesfunc)) {
       level thread[[level.updateondamagepassivesfunc]](var_1, var_5, self);
     }
@@ -567,7 +567,7 @@ should_do_damage_checks(var_0, var_1, var_2, var_3, var_4, var_5) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 isinphase()) {
+  if(isPlayer(var_0) && var_0 isinphase()) {
     return 0;
   }
 
@@ -606,7 +606,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     self.scrnfx = undefined;
   }
 
-  if(isplayer(var_1) && var_1 scripts\cp\utility::is_consumable_active("explosive_touch")) {
+  if(isPlayer(var_1) && var_1 scripts\cp\utility::is_consumable_active("explosive_touch")) {
     self.nocorpse = 1;
     self.full_gib = 1;
     if(isDefined(self.body)) {
@@ -614,9 +614,9 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  if(issubstr(var_4, "iw7_knife") && isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
+  if(issubstr(var_4, "iw7_knife") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread setandunsetmeleekill(var_1);
-  } else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isplayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
+  } else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread setandunsetmeleekill(var_1);
   }
 
@@ -625,7 +625,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     self.linked_to_boat = undefined;
   }
 
-  if(!isplayer(var_1)) {
+  if(!isPlayer(var_1)) {
     if(isDefined(var_1.name)) {
       if(var_1.name == var_1.owner.itemtype) {
         if(isDefined(var_1.owner.killswithitem[var_1.owner.itemtype])) {
@@ -656,7 +656,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges)) {
       if(isDefined(level.cryptidkillswithvenomx)) {
         if(level.splchosenagent == "cryptids" && self.agent_type == "alien_goon" || self.agent_type == "alien_phantom") {
@@ -736,7 +736,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   if(isDefined(var_1.team)) {
     if(var_1.team == "allies") {
-      if(!isplayer(var_1)) {
+      if(!isPlayer(var_1)) {
         for(var_9 = 0; var_9 < level.revocatorownercount; var_9++) {
           if(!isDefined(level.revocatorkills[level.revocatorkills[var_9].name])) {
             level.revocatorkills[level.revocatorkills[var_9].name] = 1;
@@ -761,7 +761,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_14 = isDefined(self.agent_type) && self.agent_type == "zombie_brute";
   var_15 = isDefined(self.agent_type) && self.agent_type == "zombie_grey";
   var_10 = scripts\engine\utility::istrue(self.is_suicide_bomber);
-  if(isDefined(level.updaterecentkills_func) && isplayer(var_1)) {
+  if(isDefined(level.updaterecentkills_func) && isPlayer(var_1)) {
     var_1 thread[[level.updaterecentkills_func]](self, var_4);
   }
 
@@ -775,7 +775,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 notify("zombie_killed", self, self.origin, var_4, var_3);
   }
 
@@ -824,7 +824,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     level thread[[level.quest_death_update_func]](self);
   }
 
-  if(isplayer(var_1) && isDefined(level.updateonkillpassivesfunc)) {
+  if(isPlayer(var_1) && isDefined(level.updateonkillpassivesfunc)) {
     level thread[[level.updateonkillpassivesfunc]](var_4, var_1, self, var_3, var_6);
   }
 
@@ -1097,17 +1097,13 @@ process_kill_rewards(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       if(!var_9 && !var_14) {
-        if(scripts\engine\utility::flag_exist("can_drop_coins") && scripts\engine\utility::flag("can_drop_coins") && isDefined(level.crafting_item_drop_func) && scripts\engine\utility::istrue([
-            [level.crafting_item_drop_func]
-          ](var_6, self.origin, var_1))) {
+        if(scripts\engine\utility::flag_exist("can_drop_coins") && scripts\engine\utility::flag("can_drop_coins") && isDefined(level.crafting_item_drop_func) && scripts\engine\utility::istrue([[level.crafting_item_drop_func]](var_6, self.origin, var_1))) {
           level.last_drop_time = gettime();
           return;
         }
 
         if(isDefined(level.loot_func) && scripts\engine\utility::flag_exist("zombie_drop_powerups") && scripts\engine\utility::flag("zombie_drop_powerups")) {
-          [
-            [level.loot_func]
-          ](var_6, self.origin, var_1);
+          [[level.loot_func]](var_6, self.origin, var_1);
           return;
         }
 
@@ -1184,7 +1180,7 @@ give_attacker_kill_rewards(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  if(!isplayer(var_6) && !isDefined(var_6.owner) || !isplayer(var_6.owner)) {
+  if(!isPlayer(var_6) && !isDefined(var_6.owner) || !isPlayer(var_6.owner)) {
     return;
   }
 
@@ -1205,7 +1201,7 @@ give_attacker_kill_rewards(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(isplayer(var_6)) {
+  if(isPlayer(var_6)) {
     var_13 = scripts\cp\utility::get_weapon_variant_id(var_6, var_9);
     if(scripts\cp\utility::ismark2weapon(var_13)) {
       var_12 = var_12 * 1.15;
@@ -1288,7 +1284,7 @@ giveplayerbonuscash(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
       }
     }
 
-    if(isplayer(var_1) && isDefined(var_1.cash_scalar)) {
+    if(isPlayer(var_1) && isDefined(var_1.cash_scalar)) {
       if(isDefined(var_1.cash_scalar_weapon) && var_1.cash_scalar_weapon == scripts\cp\utility::getrawbaseweaponname(var_6)) {
         var_10 = int(var_2 * var_1.cash_scalar - var_2);
         var_1 thread delaygivecurrency(var_10, var_4, var_5, "bonus", 0.25);
@@ -1310,7 +1306,7 @@ delaygivecurrency(var_0, var_1, var_2, var_3, var_4) {
 }
 
 should_get_currency_from_kill(var_0, var_1, var_2, var_3) {
-  if(isplayer(var_1) && scripts\cp\cp_laststand::player_in_laststand(var_1)) {
+  if(isPlayer(var_1) && scripts\cp\cp_laststand::player_in_laststand(var_1)) {
     return 0;
   }
 
@@ -1349,11 +1345,11 @@ isonhumanteam(var_0) {
 }
 
 shitloc_mods(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0) && isplayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade") && scripts\cp\utility::coop_getweaponclass(var_2) == "weapon_sniper") {
+  if(isDefined(var_0) && isPlayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade") && scripts\cp\utility::coop_getweaponclass(var_2) == "weapon_sniper") {
     return "head";
   }
 
-  if(isDefined(var_0) && isplayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("increased_limb_damage") && is_limb(var_2, var_3, var_1, var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0) && var_1 != "MOD_MELEE" && var_0 scripts\cp\utility::is_consumable_active("increased_limb_damage") && is_limb(var_2, var_3, var_1, var_0)) {
     return "torso_upper";
   }
 
@@ -1537,7 +1533,7 @@ can_scale_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
     return 0;
   }
 
-  if(isplayer(var_1) && !isDefined(var_1.pap)) {
+  if(isPlayer(var_1) && !isDefined(var_1.pap)) {
     return 0;
   }
 
@@ -1579,7 +1575,7 @@ set_damage_by_weapon_type(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 }
 
 eligible_for_reward(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return 0;
   }
 
@@ -1684,7 +1680,7 @@ eligible_for_reward(var_0, var_1, var_2, var_3, var_4, var_5) {
 onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   var_13 = scripts\cp\utility::is_trap(var_0, var_5, self);
   if((isDefined(var_1) && isDefined(var_4) && scripts\engine\utility::isbulletdamage(var_4) || scripts\cp\utility::player_has_special_ammo(var_1, "combined_ammo") && var_4 == "MOD_EXPLOSIVE_BULLET") || var_5 == "poison_ammo_mp") {
-    if(isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    if(isPlayer(var_1) || isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       if(!var_13) {
         var_1 check_for_special_damage(self, var_0, var_3, var_5, var_4);
       }
@@ -1773,7 +1769,7 @@ should_do_stun_damage(var_0, var_1, var_2) {
     return 1;
   }
 
-  if(isDefined(var_2) && isplayer(var_2) && var_1 != "MOD_MELEE") {
+  if(isDefined(var_2) && isPlayer(var_2) && var_1 != "MOD_MELEE") {
     var_3 = isDefined(var_0) && var_0 == var_2 getcurrentprimaryweapon();
     return var_3 && var_2 scripts\cp\utility::has_stun_ammo();
   }
@@ -2267,7 +2263,7 @@ launch_and_kill(var_0, var_1, var_2) {
 
 func_B982() {
   scripts\engine\utility::flag_init("player_count_determined");
-  var_0 = getdvar("party_partyPlayerCountNum");
+  var_0 = getDvar("party_partyPlayerCountNum");
   if(var_0 != "1") {
     level.only_one_player = 0;
     scripts\engine\utility::flag_set("player_count_determined");

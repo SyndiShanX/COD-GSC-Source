@@ -670,7 +670,7 @@ function mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath,
   num_tiers = level.mechz_armor_info.size + 1;
   old_health_tier = int((num_tiers * self.health) / level.mechz_health);
   bonename = getpartname("c_zom_mech_body", boneindex);
-  if(isDefined(attacker) && isalive(attacker) && isplayer(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || (isDefined(attacker.personal_instakill) && attacker.personal_instakill))) {
+  if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || (isDefined(attacker.personal_instakill) && attacker.personal_instakill))) {
     n_mechz_damage_percent = 1;
     n_mechz_headshot_modifier = 2;
   } else {
@@ -737,7 +737,7 @@ function mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath,
     attacker mechzserverutils::show_hit_marker();
   }
   if(!isDefined(weapon) || weapon.name == "none") {
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       final_damage = 0;
     }
   }

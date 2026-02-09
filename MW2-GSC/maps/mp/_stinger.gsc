@@ -115,7 +115,7 @@ LockSightTest(target) {
 }
 
 StingerDebugDraw(target) {
-  if(GetDVar("missileDebugDraw") != "1")
+  if(getDvar("missileDebugDraw") != "1")
     return;
   if(!isDefined(target)) {
     return;

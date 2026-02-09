@@ -347,7 +347,7 @@ function challengekills(data) {
   if(!isDefined(data.weapon)) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player) || weapon == level.weaponnone) {
+  if(!isDefined(player) || !isPlayer(player) || weapon == level.weaponnone) {
     return;
   }
   weaponclass = util::getweaponclass(weapon);
@@ -1226,12 +1226,12 @@ function checkforherosurvival() {
 
 function callbackendherospecialistemp() {
   empowner = self emp::enemyempowner();
-  if(isDefined(empowner) && isplayer(empowner)) {
+  if(isDefined(empowner) && isPlayer(empowner)) {
     empowner addplayerstat("end_enemy_specialist_ability_with_emp", 1);
     return;
   }
   if(isDefined(self.empstarttime) && self.empstarttime > (gettime() - 100)) {
-    if(isDefined(self.empedby) && isplayer(self.empedby)) {
+    if(isDefined(self.empedby) && isPlayer(self.empedby)) {
       self.empedby addplayerstat("end_enemy_specialist_ability_with_emp", 1);
       return;
     }

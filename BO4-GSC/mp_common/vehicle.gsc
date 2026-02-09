@@ -21,7 +21,7 @@ player_is_occupant_invulnerable(attacker, smeansofdeath) {
   }
 
   if(self.var_ca876b0f === 1 && self player_is_driver()) {
-    if(self.var_e7e2e3e5 === 1 && isplayer(attacker) && attacker == self) {
+    if(self.var_e7e2e3e5 === 1 && isPlayer(attacker) && attacker == self) {
       return 1;
     }
 

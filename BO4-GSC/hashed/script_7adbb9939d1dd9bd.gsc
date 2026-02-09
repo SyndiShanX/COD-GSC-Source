@@ -14,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  setdvar(#"hash_6d3c5317001d4fc6", 0);
+  setDvar(#"hash_6d3c5317001d4fc6", 0);
 
   adddebugcommand("<dev string:x38>");
   adddebugcommand("<dev string:x7d>");
@@ -30,7 +30,7 @@ __init__() {
 }
 
 zombie_open_sesame() {
-  setdvar(#"zombie_unlock_all", 1);
+  setDvar(#"zombie_unlock_all", 1);
   level flag::set("power_on");
   level clientfield::set("zombie_power_on", 1);
   power_trigs = getEntArray("use_elec_switch", "targetname");
@@ -82,7 +82,7 @@ zombie_open_sesame() {
 
   level notify(#"open_sesame");
   wait 1;
-  setdvar(#"zombie_unlock_all", 0);
+  setDvar(#"zombie_unlock_all", 0);
 }
 
 function_97346595() {
@@ -115,7 +115,6 @@ function_97346595() {
         waitframe(1);
 
         adddebugcommand("<dev string:x13b>");
-
       } else {
         adddebugcommand("<dev string:x156>");
 

@@ -47,7 +47,6 @@ soundfx(fxId, fxPos, endonNotify) {
   if(isDefined(endonNotify)) {
     org thread soundfxDelete(endonNotify);
   }
-
 }
 
 soundfxDelete(endonNotify) {

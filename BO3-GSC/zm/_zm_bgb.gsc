@@ -167,8 +167,8 @@ function private bgb_player_monitor() {
 
 function private setup_devgui() {
   waittillframeend();
-  setdvar("", "");
-  setdvar("", -1);
+  setDvar("", "");
+  setDvar("", -1);
   bgb_devgui_base = "";
   keys = getarraykeys(level.bgb);
   foreach(key in keys) {
@@ -189,7 +189,7 @@ function private bgb_devgui_think() {
     if(var_fe9a7d67 != "") {
       bgb_devgui_acquire(var_fe9a7d67);
     }
-    setdvar("", "");
+    setDvar("", "");
     wait(0.5);
   }
 }
@@ -888,7 +888,7 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return damage;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     name = attacker get_enabled();
     if(name !== "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
       damage = [[level.bgb[name].actor_damage_override_func]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
@@ -901,7 +901,7 @@ function vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeans
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return idamage;
   }
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     name = eattacker get_enabled();
     if(name !== "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
       idamage = [[level.bgb[name].vehicle_damage_override_func]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
@@ -914,7 +914,7 @@ function actor_death_override(attacker) {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return 0;
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     name = attacker get_enabled();
     if(name !== "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {
       damage = [[level.bgb[name].actor_death_override_func]](attacker);

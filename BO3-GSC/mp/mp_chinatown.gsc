@@ -19,7 +19,7 @@ function main() {
   level.remotemissile_kill_z = -435 + 50;
   load::main();
   compass::setupminimap("compass_map_mp_chinatown");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
   game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";

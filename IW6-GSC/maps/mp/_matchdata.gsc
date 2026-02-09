@@ -156,7 +156,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
   if(lifeId >= level.MaxLives) {
     return;
   }
-  if(IsPlayer(attacker) && canLogClient(attacker))
+  if(isPlayer(attacker) && canLogClient(attacker))
     self LogMatchDataDeath(lifeId, self.clientid, attacker, attacker.clientid, sWeapon, sMeansOfDeath, isKillstreakWeapon(sWeapon), attacker isJuggernaut());
   else
     self LogMatchDataDeath(lifeId, self.clientid, undefined, undefined, sWeapon, sMeansOfDeath, isKillstreakWeapon(sWeapon), false);
@@ -249,7 +249,7 @@ endOfGameSummaryLogger() {
     }
 
     player setCommonPlayerData("round", "gameMode", level.gametype);
-    player setCommonPlayerData("round", "map", ToLower(GetDvar("mapname")));
+    player setCommonPlayerData("round", "map", ToLower(getDvar("mapname")));
     if(IsSquadsMode()) {
       player setCommonPlayerData("round", "squadMode", 1);
     } else {

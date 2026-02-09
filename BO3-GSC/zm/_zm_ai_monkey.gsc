@@ -1850,7 +1850,7 @@ function monkey_zombie_die(einflictor, attacker, idamage, smeansofdeath, weapon,
   playsoundatposition("zmb_monkey_explode", self.origin);
   level zm_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
   if(randomintrange(0, 100) >= 75) {
-    if(isDefined(self.attacker) && isplayer(self.attacker)) {
+    if(isDefined(self.attacker) && isPlayer(self.attacker)) {
       self.attacker zm_audio::create_and_play_dialog("kill", "space_monkey");
     }
   }

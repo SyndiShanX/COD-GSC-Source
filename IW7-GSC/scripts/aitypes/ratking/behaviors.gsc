@@ -940,7 +940,7 @@ tryattackzombies() {
       continue;
     }
     if(isDefined(var_4.enemy)) {
-      if(isplayer(var_4.enemy)) {
+      if(isPlayer(var_4.enemy)) {
         continue;
       }
     }
@@ -1325,7 +1325,7 @@ is_near_any_targets(var_0) {
   var_2 = 250000;
 
   foreach(var_4 in var_1) {
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       if(!isalive(var_4)) {
         continue;
       }

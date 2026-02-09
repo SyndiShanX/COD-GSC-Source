@@ -297,7 +297,7 @@ enemy_event_declare_to_team(var_0, var_1) {
     if(!isDefined(var_2)) {
       continue;
     }
-    if(isplayer(var_2) || isDefined(var_2.team) && var_2.team != var_3) {
+    if(isPlayer(var_2) || isDefined(var_2.team) && var_2.team != var_3) {
       break;
     }
   }

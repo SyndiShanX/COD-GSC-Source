@@ -45,7 +45,7 @@ hitwithincendiary(attacker, inflictor, mod) {
     tagarray[tagarray.size] = "J_Ankle_RI";
     tagarray[tagarray.size] = "J_Ankle_LE";
 
-    if(isplayer(self) && self.health > 0)
+    if(isPlayer(self) && self.health > 0)
       self setburn(3.0);
   }
 
@@ -62,7 +62,7 @@ hitwithincendiary(attacker, inflictor, mod) {
   if(!isalive(self)) {
     return;
   }
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread watchforwater(7);
     self thread watchfordeath();
   }
@@ -106,7 +106,7 @@ hitwithnapalmstrike(attacker, inflictor, mod) {
     tagarray[tagarray.size] = "J_Ankle_RI";
     tagarray[tagarray.size] = "J_Ankle_LE";
 
-    if(isplayer(self))
+    if(isPlayer(self))
       self setburn(3.0);
   }
 
@@ -123,7 +123,7 @@ hitwithnapalmstrike(attacker, inflictor, mod) {
   }
   self thread donapalmstrikedamage(attacker, inflictor, mod);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread watchforwater(7);
     self thread watchfordeath();
   }
@@ -167,7 +167,7 @@ walkedthroughflames(attacker, inflictor, weapon) {
   }
   self thread doflamedamage(attacker, inflictor, weapon, 1.0);
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self thread watchforwater(7);
     self thread watchfordeath();
   }
@@ -197,11 +197,11 @@ burnedwithflamethrower(attacker, inflictor, weapon) {
     tagarray[1] = "j_knee_ri";
     tagarray[2] = "j_knee_le";
 
-    if(isplayer(self) && self.health > 0)
+    if(isPlayer(self) && self.health > 0)
       self setburn(3.0);
   }
 
-  if(isplayer(self) && isalive(self)) {
+  if(isPlayer(self) && isalive(self)) {
     self thread watchforwater(7);
     self thread watchfordeath();
   }
@@ -237,11 +237,11 @@ burnedwithdragonsbreath(attacker, inflictor, weapon) {
     tagarray[2] = "j_knee_ri";
     tagarray[3] = "j_knee_le";
 
-    if(isplayer(self) && self.health > 0)
+    if(isPlayer(self) && self.health > 0)
       self setburn(3.0);
   }
 
-  if(isplayer(self) && isalive(self)) {
+  if(isPlayer(self) && isalive(self)) {
     self thread watchforwater(7);
     self thread watchfordeath();
     return;
@@ -267,7 +267,7 @@ watchfordeath() {
   self endon("watching for death while on fire");
   self waittill("death");
 
-  if(isplayer(self))
+  if(isPlayer(self))
     self _stopburning();
 
   self.burning = undefined;
@@ -352,7 +352,7 @@ donapalmgrounddamage(attacker, inflictor, mod) {
   self endon("stop burn damage");
 
   if(isDefined(level.groundburntime)) {
-    if(getdvar(#"_id_6EC13261") == "")
+    if(getDvar(#"_id_6EC13261") == "")
       waittime = level.groundburntime;
     else
       waittime = getdvarfloat(#"_id_6EC13261");
@@ -363,7 +363,7 @@ donapalmgrounddamage(attacker, inflictor, mod) {
   self.ingroundnapalm = 1;
 
   if(isDefined(level.napalmgrounddamage)) {
-    if(getdvar(#"_id_3FFA6673") == "")
+    if(getDvar(#"_id_3FFA6673") == "")
       napalmgrounddamage = level.napalmgrounddamage;
     else
       napalmgrounddamage = getdvarfloat(#"_id_3FFA6673");
@@ -371,7 +371,7 @@ donapalmgrounddamage(attacker, inflictor, mod) {
     while(isDefined(self) && isDefined(inflictor) && self depthofplayerinwater() < 1 && waittime > 0) {
       self dodamage(level.napalmgrounddamage, self.origin, attacker, inflictor, "none", mod, 0, "napalm_mp");
 
-      if(isplayer(self))
+      if(isPlayer(self))
         self setburn(1.1);
 
       wait 1;

@@ -385,7 +385,7 @@ kill_nodamage_monitor() {
       continue;
     }
 
-    if(isDefined(var_1) && isplayer(var_1) && scripts\cp\utility::is_hardcore_mode()) {
+    if(isDefined(var_1) && isPlayer(var_1) && scripts\cp\utility::is_hardcore_mode()) {
       level notify("kill_nodamage_failed");
       return;
     } else if(isDefined(var_1) && isagent(var_1)) {
@@ -511,7 +511,7 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
       return 0;
 
     case "jump_shot":
-      if(isDefined(var_1) && isplayer(var_1) && isDefined(var_4)) {
+      if(isDefined(var_1) && isPlayer(var_1) && isDefined(var_4)) {
         if(((isDefined(self.killedby) && var_1 == self.killedby) || var_4 == var_1 getcurrentweapon()) && !var_1 isonground()) {
           scripts\cp\cp_challenge::update_challenge("jump_shot", 1);
         }
@@ -530,13 +530,13 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
       return 0;
 
     case "kill_melee":
-      if(isDefined(var_1) && isplayer(var_1) && var_3 == "MOD_MELEE" || var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") {
+      if(isDefined(var_1) && isPlayer(var_1) && var_3 == "MOD_MELEE" || var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") {
         scripts\cp\cp_challenge::update_challenge("kill_melee", 1);
       }
       return 0;
 
     case "kill_nodamage":
-      if(isDefined(var_1) && isplayer(var_1)) {
+      if(isDefined(var_1) && isPlayer(var_1)) {
         scripts\cp\cp_challenge::update_challenge("kill_nodamage", 1);
       }
       return 0;
@@ -581,7 +581,7 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
 
     case "area_kills":
       if(isDefined(level.challenge_area_marker)) {
-        if(isDefined(var_1) && isplayer(var_1)) {
+        if(isDefined(var_1) && isPlayer(var_1)) {
           if(distancesquared(var_1.origin, level.challenge_area_marker.origin) < level.challenge_area_marker.fgetarg) {
             scripts\cp\cp_challenge::update_challenge("area_kills", 1);
           }
@@ -590,7 +590,7 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
       return 0;
 
     case "kill_zombiewhodamagedme":
-      if(!isplayer(var_1)) {
+      if(!isPlayer(var_1)) {
         return 0;
       }
 
@@ -605,7 +605,7 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
 }
 
 is_distance_shot(var_0, var_1, var_2, var_3) {
-  if(isplayer(var_0) && isalive(var_0) && !var_0 scripts\cp\utility::isusingremote()) {
+  if(isPlayer(var_0) && isalive(var_0) && !var_0 scripts\cp\utility::isusingremote()) {
     if(var_3 == "long_shot") {
       return distancesquared(var_0.origin, var_2.origin) >= 90000;
     } else if(var_3 == "close_shot") {

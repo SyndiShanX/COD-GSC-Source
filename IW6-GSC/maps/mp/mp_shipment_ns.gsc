@@ -27,20 +27,20 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_shipment_ns");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   setdvar_cg_ng("r_specularColorScale", 3.0, 9.5);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.45");
-    SetDvar("sm_sunsamplesizenear", ".15");
+    setDvar("sm_sunShadowScale", "0.45");
+    setDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.55" + "");
-    SetDvar("sm_sunsamplesizenear", ".3");
+    setDvar("sm_sunShadowScale", "0.55" + "");
+    setDvar("sm_sunsamplesizenear", ".3");
   } else {
-    SetDvar("sm_sunShadowScale", "1.0");
-    SetDvar("sm_sunsamplesizenear", ".42");
+    setDvar("sm_sunShadowScale", "1.0");
+    setDvar("sm_sunsamplesizenear", ".42");
   }
 
   game["attackers"] = "allies";
@@ -188,7 +188,6 @@ manage_gates() {
     level notify("announcement", "doors_opened", undefined, undefined, true);
 
     level notify("gates_open");
-
   }
 }
 
@@ -489,7 +488,6 @@ check_for_player_connect() {
   while(1) {
     level waittill("connected", player);
     player thread run_func_after_spawn(::kill_watcher);
-
   }
 }
 
@@ -1316,7 +1314,7 @@ trap_activate(trap, character_damage, equipment_damage, frequency, duration, loo
       exploder(trap.exploder);
 
     attacker = trap.player;
-    if(!isDefined(trap.player) || !IsPlayer(trap.player))
+    if(!isDefined(trap.player) || !isPlayer(trap.player))
       attacker = undefined;
 
     thread damage_characters(trap, attacker, character_damage);
@@ -1379,14 +1377,12 @@ damage_characters(trap, attacker, damage) {
     if(can_kill_character(trap, victim) && isDefined(attacker)) {
       if(victim.team != trap.team || level.friendlyfire) {
         trap.inflictor RadiusDamage(victim.origin, 10, damage, damage, attacker, "MOD_PROJECTILE_SPLASH", "killstreak_level_event_mp");
-
       } else if(victim == attacker)
         trap.inflictor RadiusDamage(victim.origin, 10, damage, damage, attacker, "MOD_PROJECTILE_SPLASH", "killstreak_level_event_mp");
     }
 
     wait(0.05);
   }
-
 }
 
 can_kill_character(trap, victim) {
@@ -1929,7 +1925,6 @@ box_kill_numbers() {
 
   foreach(number in all_numbers) {
     number Show();
-
   }
 
   while(1) {
@@ -2257,7 +2252,6 @@ flashing_neon_sign() {
 
       wait 0.4;
     }
-
   }
 
   foreach(letter in sign_on)

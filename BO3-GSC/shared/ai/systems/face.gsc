@@ -150,7 +150,7 @@ function playfacethread(facialanim, str_script_alias, importance, notifystring, 
   }
   if(isDefined(str_vox_file)) {
     if(soundexists(str_vox_file)) {
-      if(isplayer(toplayer)) {
+      if(isPlayer(toplayer)) {
         self thread _play_sound_to_player_with_notify(str_vox_file, toplayer, uniquenotify);
       } else {
         if(isDefined(self gettagorigin("J_Head"))) {
@@ -197,7 +197,7 @@ function _play_sound_to_player_with_notify(soundalias, toplayer, uniquenotify) {
 }
 
 function private _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
-  setdvar("bgcache_disablewarninghints", 1);
+  setDvar("bgcache_disablewarninghints", 1);
   if(!b_missing_vo && isDefined(self.propername)) {
     str_line = (self.propername + ": ") + str_line;
   }
@@ -220,7 +220,7 @@ function private _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
       player closeluimenu(player getluimenu("TempDialog"));
     }
   }
-  setdvar("bgcache_disablewarninghints", 0);
+  setDvar("bgcache_disablewarninghints", 0);
   self notify(uniquenotify);
 }
 

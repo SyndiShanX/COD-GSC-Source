@@ -129,7 +129,7 @@ automatondamagecallback() {
     }
     level.timesplayerattackingautomaton = 0;
 
-    if(isDefined(attacker) && isplayer(attacker)) {
+    if(isDefined(attacker) && isPlayer(attacker)) {
       wait 5;
 
       if(!isDefined(self.dmgfxorigin)) {
@@ -254,7 +254,7 @@ automatonanimationsspeaking() {
     self setanim(speakinganim);
     self thread sndspeakinganimaudio(speakingnum);
 
-    if(getdvar(#"_id_96F6EBD9") != "")
+    if(getDvar(#"_id_96F6EBD9") != "")
       iprintlnbold("" + speakinganim);
 
     wait(getanimlength(speakinganim));
@@ -299,7 +299,7 @@ bus_driver_idle() {
     if(isDefined(self.previous_anim) && self.previous_anim == driveranim && driveranim != % ai_zombie_bus_driver_idle)
       driveranim = % ai_zombie_bus_driver_idle;
 
-    if(getdvar(#"_id_6DF184E8") != "")
+    if(getDvar(#"_id_6DF184E8") != "")
       iprintlnbold("Idle:" + driveranim);
 
     self.isplayingidleanim = 1;

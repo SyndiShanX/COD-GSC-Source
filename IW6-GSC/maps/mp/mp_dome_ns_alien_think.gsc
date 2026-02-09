@@ -298,7 +298,6 @@ UpdateMoveState() {
     if(bRefreshGoal == true) {
       self ScrAgentSetGoalPos(self.origin);
     }
-
   } else if(self.moveState == "pursuit") {
     self.curMeleeTarget = self.enemy;
     self.moveMode = "sprint";
@@ -620,7 +619,7 @@ watchOwnerDamage() {
     }
     self.owner waittill("damage", damage, attacker);
 
-    if(IsPlayer(attacker) && attacker != self.owner) {
+    if(isPlayer(attacker) && attacker != self.owner) {
       if(self.attackState == "attacking") {
         continue;
       }
@@ -850,7 +849,7 @@ DoDebugMode() {
   level endon("game_ended");
   self endon("enddebugmode");
 
-  if(isDefined(self.owner) && IsPlayer(self.owner))
+  if(isDefined(self.owner) && isPlayer(self.owner))
     player = self.owner;
   else
     player = level.players[0];

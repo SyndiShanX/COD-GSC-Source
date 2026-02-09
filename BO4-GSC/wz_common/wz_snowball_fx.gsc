@@ -19,7 +19,7 @@ __init__() {
 }
 
 function_c9509a9c(params) {
-  if(isalive(self) && isplayer(self)) {
+  if(isalive(self) && isPlayer(self)) {
     if(params.weapon.name === # "snowball") {
       var_feafe576 = 0;
       var_cb01806c = 0;

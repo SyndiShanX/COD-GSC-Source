@@ -28,12 +28,14 @@ blindfire() {
     if(self.a.pose == "crouch" || self.a.pose == "stand" && self.a.script == "cover_pillar") {
       modes = self.covernode getvalidcoverpeekouts();
 
-      if(isinarray(modes, "over") && animarrayanyexist("blind_over"))
+      if(isinarray(modes, "over") && animarrayanyexist("blind_over")) {
         blindfiremodes[blindfiremodes.size] = "blind_over";
+      }
     }
 
-    if(self.a.pose == "stand")
+    if(self.a.pose == "stand") {
       animscripts\cover_corner::setstepoutanimspecial("blindfire");
+    }
   }
 
   blindfiremode = blindfiremodes[randomintrange(0, blindfiremodes.size)];
@@ -71,16 +73,19 @@ blindfire() {
 }
 
 canuseblindaiming(blindfiremode) {
-  if(getdvarint(#"_id_5BDF0C62") == 1)
+  if(getdvarint(#"_id_5BDF0C62") == 1) {
     return false;
+  }
 
-  if(self.a.script == "cover_pillar" && blindfiremode == "blind_over")
+  if(self.a.script == "cover_pillar" && blindfiremode == "blind_over") {
     return false;
+  }
 
   blindfireaimexist = animarrayanyexist(blindfiremode + "_add_aim_up");
 
-  if(blindfireaimexist && shootposoutsidelegalyawrange())
+  if(blindfireaimexist && shootposoutsidelegalyawrange()) {
     return true;
+  }
 
   return false;
 }
@@ -89,16 +94,18 @@ startblindaiming(aimanim, type) {
   self animscripts\shared::setaiminganims(%blind_aim_2, %blind_aim_4, %blind_aim_6, %blind_aim_8);
   self animscripts\shared::setanimaimweight(1, 0);
 
-  if(animhasnotetrack(aimanim, "start_aim"))
+  if(animhasnotetrack(aimanim, "start_aim")) {
     self waittillmatch(type, "start_aim");
+  }
 
   playadditiveaiminganims(type + "_add", 0.2);
   self animscripts\shared::trackloopstart();
 }
 
 getanimaimlimit(aimanim, defaultlimit) {
-  if(!isDefined(defaultlimit))
+  if(!isDefined(defaultlimit)) {
     defaultlimit = 20;
+  }
 
   aimlimit = defaultlimit;
   notetracks = getnotetracksindelta(aimanim, 0, 1);
@@ -124,10 +131,11 @@ stopblindaiming(fireanim, animname) {
   self endon("killanimscript");
 
   if(isDefined(fireanim) && isDefined(animname)) {
-    if(animhasnotetrack(fireanim, "stop_aim"))
+    if(animhasnotetrack(fireanim, "stop_aim")) {
       self waittillmatch(animname, "stop_aim");
-    else
+    } else {
       self waittillmatch(animname, "end");
+    }
   }
 
   self animscripts\shared::stoptracking();
@@ -139,20 +147,25 @@ stopblindaiming(fireanim, animname) {
 }
 
 canblindfire() {
-  if(self.a.atconcealmentnode)
+  if(self.a.atconcealmentnode) {
     return false;
+  }
 
-  if(self.weaponclass == "mg")
+  if(self.weaponclass == "mg") {
     return false;
+  }
 
-  if(isDefined(self.disable_blindfire) && self.disable_blindfire == 1)
+  if(isDefined(self.disable_blindfire) && self.disable_blindfire == 1) {
     return false;
+  }
 
-  if(isDefined(self.node) && isDefined(self.node.script_dontblindfire))
+  if(isDefined(self.node) && isDefined(self.node.script_dontblindfire)) {
     return false;
+  }
 
-  if(!animscripts\weaponlist::usingautomaticweapon() && !usingpistol())
+  if(!animscripts\weaponlist::usingautomaticweapon() && !usingpistol()) {
     return false;
+  }
 
   return true;
 }
@@ -160,40 +173,48 @@ canblindfire() {
 canrambo() {
   ramboanimsexist = animarrayanyexist("rambo");
 
-  if(shouldforcebehavior("rambo"))
+  if(shouldforcebehavior("rambo")) {
     return ramboanimsexist;
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     return 0;
+  }
 
-  if(isDefined(self.covernode.script_norambo) && self.covernode.script_norambo || isDefined(level.norambo))
+  if(isDefined(self.covernode.script_norambo) && self.covernode.script_norambo || isDefined(level.norambo)) {
     return 0;
+  }
 
-  if(!animscripts\weaponlist::usingautomaticweapon())
+  if(!animscripts\weaponlist::usingautomaticweapon()) {
     return 0;
+  }
 
-  if(ramboanimsexist)
+  if(ramboanimsexist) {
     return 1;
+  }
 
   return 0;
 }
 
 debugrambooutposition(rambooutpos) {
-  if(getdvar(#"_id_7927E91F") != "1") {
+  if(getDvar(#"_id_7927E91F") != "1") {
     return;
   }
   self endon("death");
 
-  for(i = 0; i < 600; i++)
+  for(i = 0; i < 600; i++) {
     recordline(self.origin, rambooutpos, (1, 1, 1), "Animscript", self);
+  }
 }
 
 canswitchsides() {
-  if(!self.a.atpillarnode)
+  if(!self.a.atpillarnode) {
     return false;
+  }
 
-  if(self usingpistol())
+  if(self usingpistol()) {
     return false;
+  }
 
   return true;
 }
@@ -204,10 +225,11 @@ turntomatchnodedirection(nodeangleoffset) {
     absrelyaw = abs(angleclamp180(self.angles[1] - (node.angles[1] + nodeangleoffset)));
 
     if(self.a.pose == "stand" && node gethighestnodestance() != "stand") {
-      if(absrelyaw > 45 && absrelyaw < 90)
+      if(absrelyaw > 45 && absrelyaw < 90) {
         self orientmode("face angle", self.angles[1]);
-      else
+      } else {
         self orientmode("face current");
+      }
 
       standtocrouchanim = animarray("stand_2_crouch", "combat");
       notetime = getnotetracktimes(standtocrouchanim, "anim_pose = \"crouch\"")[0];
@@ -231,17 +253,20 @@ turntomatchnodedirection(nodeangleoffset) {
 }
 
 getrandomcovermode(modes) {
-  if(modes.size == 0)
+  if(modes.size == 0) {
     return undefined;
+  }
 
-  if(modes.size == 1)
+  if(modes.size == 1) {
     return modes[0];
+  }
 
   if(isDefined(self.a.prevattack) && randomint(100) > 20) {
     foreach(i, mode in modes) {
       if(mode == self.a.prevattack) {
-        if(i < modes.size - 1)
+        if(i < modes.size - 1) {
           modes[i] = modes[modes.size - 1];
+        }
 
         modes[modes.size - 1] = undefined;
         break;
@@ -275,21 +300,25 @@ getshootpospitch(frompos) {
 resetanimspecial(delay) {
   self endon("killanimscript");
 
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   self.a.special = "none";
 }
 
 canthrowgrenade() {
-  if(self.script_forcegrenade)
+  if(self.script_forcegrenade) {
     return true;
+  }
 
-  if(self.weapon == "mg42" || self.grenadeammo <= 0)
+  if(self.weapon == "mg42" || self.grenadeammo <= 0) {
     return false;
+  }
 
-  if(weaponisgasweapon(self.weapon))
+  if(weaponisgasweapon(self.weapon)) {
     return false;
+  }
 
   return true;
 }

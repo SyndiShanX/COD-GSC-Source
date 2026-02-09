@@ -9,7 +9,6 @@ main() {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_unload_groups(::unload_groups);
 }
-
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   positions[0].sittag = "tag_driver";
@@ -20,8 +19,8 @@ set_vehicle_anims(positions) {
   positions[1].vehicle_getoutanim = % v_police_passenger_door_open;
   return positions;
 }
-
 #using_animtree("generic_human");
+
 setanims() {
   positions = [];
   num_positions = 2;
@@ -38,7 +37,6 @@ setanims() {
   positions[1].idle = % crew_police_passenger_idle;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

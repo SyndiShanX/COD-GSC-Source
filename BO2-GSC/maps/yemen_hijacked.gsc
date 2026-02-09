@@ -141,8 +141,9 @@ hijacked_skipto_quadrotors_init() {
   maps\yemen_drone_control::setup_allied_quadrotors();
   a_vh_quadrotors = getEntArray("allied_quadrotor", "targetname");
 
-  foreach(vh_quadrotor in a_vh_quadrotors)
-  vh_quadrotor.origin = level.player.origin + (randomintrange(34, 128), randomintrange(34, 128), randomintrange(34, 128));
+  foreach(vh_quadrotor in a_vh_quadrotors) {
+    vh_quadrotor.origin = level.player.origin + (randomintrange(34, 128), randomintrange(34, 128), randomintrange(34, 128));
+  }
 }
 
 hijacked_skipto_salazar_init() {
@@ -156,8 +157,9 @@ allied_quadrotors_move_ahead_and_delete() {
   s_goal = getstruct("s_hijacked_hostile_qrotor_goal1");
   a_quadrotors = getEntArray("allied_quadrotor", "targetname");
 
-  foreach(vh_quadrotor in a_quadrotors)
-  vh_quadrotor.goalpos = s_goal.origin;
+  foreach(vh_quadrotor in a_quadrotors) {
+    vh_quadrotor.goalpos = s_goal.origin;
+  }
 
   wait 15;
   array_delete(a_quadrotors);
@@ -167,11 +169,13 @@ hijacked_destructibles_setup() {
   a_m_bridge_destroyed_parts = getEntArray("bridge_destroyed", "targetname");
   a_m_building_destroyed = getEntArray("bridge_building_destroyed", "targetname");
 
-  foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts)
-  m_bridge_destroyed hide();
+  foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts) {
+    m_bridge_destroyed hide();
+  }
 
-  foreach(m_building_destroyed in a_m_building_destroyed)
-  m_building_destroyed hide();
+  foreach(m_building_destroyed in a_m_building_destroyed) {
+    m_building_destroyed hide();
+  }
 }
 
 hijacked_setup_trees() {
@@ -241,8 +245,9 @@ menendez_hijack_scene_check() {
 give_models_guns(str_scene, str_gun) {
   a_models = get_model_or_models_from_scene(str_scene);
 
-  foreach(m_guy in a_models)
-  m_guy attach(str_gun, "tag_weapon_right");
+  foreach(m_guy in a_models) {
+    m_guy attach(str_gun, "tag_weapon_right");
+  }
 }
 
 hijacked_cleanup() {
@@ -270,11 +275,13 @@ cleanup_bridge_sm() {
 kill_units(a_e_units, b_stagger) {
   foreach(e_unit in a_e_units) {
     if(isDefined(e_unit)) {
-      if(e_unit.health > 0)
+      if(e_unit.health > 0) {
         radiusdamage(e_unit.origin + vectorscale((0, 0, 1), 10.0), 32, e_unit.health + 10, e_unit.health + 10);
+      }
 
-      if(isDefined(b_stagger) && b_stagger == 1)
+      if(isDefined(b_stagger) && b_stagger == 1) {
         wait(randomfloatrange(0.45, 0.65));
+      }
     }
   }
 }
@@ -330,13 +337,15 @@ qr_drones_move(s_goal, e_target) {
   self endon("death");
   self endon("delete");
 
-  if(isDefined(e_target))
+  if(isDefined(e_target)) {
     self setturrettargetent(e_target);
+  }
 
   self.goalpos = s_goal.origin;
 
-  while(distance2dsquared(self.origin, s_goal.origin) > 262144)
+  while(distance2dsquared(self.origin, s_goal.origin) > 262144) {
     wait 0.1;
+  }
 
   self veh_magic_bullet_shield(0);
   self.takedamage = 1;
@@ -406,11 +415,13 @@ capture_fake_battle() {
   a_ai_seals_b = get_ai_array("hijacked_ally_bridge", "script_noteworthy");
   o_target = spawn("script_origin", s_shoot_spot.origin);
 
-  foreach(ai_seal in a_ai_seals)
-  ai_seal shoot_at_target_untill_dead(o_target);
+  foreach(ai_seal in a_ai_seals) {
+    ai_seal shoot_at_target_untill_dead(o_target);
+  }
 
-  foreach(ai_seal in a_ai_seals_b)
-  ai_seal shoot_at_target_untill_dead(o_target);
+  foreach(ai_seal in a_ai_seals_b) {
+    ai_seal shoot_at_target_untill_dead(o_target);
+  }
 
   level waittill("first_flashback");
   o_target delete();
@@ -427,16 +438,19 @@ quadrotors_guard_bridge() {
   a_vh_quads = getEntArray("hijacked_bridge_robot", "script_noteworthy");
   nd_goal = getvehiclenode("hijacked_hostile_formation_bridge_spline_end", "targetname");
 
-  foreach(vh_quad in a_vh_quads)
-  vh_quad.goalpos = nd_goal.origin;
+  foreach(vh_quad in a_vh_quads) {
+    vh_quad.goalpos = nd_goal.origin;
+  }
 }
 
 spawn_quadrotor_and_drive_path(str_veh_spawner, str_nd, b_crash, b_trig) {
-  if(!isDefined(b_trig) || b_trig == 1)
+  if(!isDefined(b_trig) || b_trig == 1) {
     self trigger_wait();
+  }
 
-  if(!isDefined(str_veh_spawner))
+  if(!isDefined(str_veh_spawner)) {
     str_veh_spawner = self.script_noteworthy;
+  }
 
   veh_qrotor = spawn_vehicle_from_targetname(str_veh_spawner);
   veh_qrotor quadrotor_go_on_path(str_nd, b_crash);
@@ -445,8 +459,9 @@ spawn_quadrotor_and_drive_path(str_veh_spawner, str_nd, b_crash, b_trig) {
 quadrotor_go_on_path(str_nd, b_crash) {
   self maps\_quadrotor::quadrotor_start_scripted();
 
-  if(!isDefined(str_nd))
+  if(!isDefined(str_nd)) {
     str_nd = self.target;
+  }
 
   nd_goal = getvehiclenode(str_nd, "targetname");
   self go_path(nd_goal);
@@ -465,8 +480,9 @@ spawn_quadrotor_formation(n_count, str_nd_start, str_spawner, str_team, threatgr
   offset = vectorscale((0, 1, 0), 70.0);
 
   for(i = 0; i < n_count; i++) {
-    if(!isDefined(str_team))
+    if(!isDefined(str_team)) {
       str_team = "axis";
+    }
 
     quad = maps\_vehicle::spawn_vehicle_from_targetname(str_spawner);
     quad thread maps\_quadrotor::quadrotor_set_team(str_team);
@@ -481,8 +497,9 @@ spawn_quadrotor_formation(n_count, str_nd_start, str_spawner, str_team, threatgr
     quad thread maps\_vehicle::gopath();
     quad thread activate_ai_on_end_path();
 
-    if(isDefined(threatgroup))
+    if(isDefined(threatgroup)) {
       quad setthreatbiasgroup(threatgroup);
+    }
 
     wait(randomfloatrange(0.3, 0.8));
   }
@@ -552,22 +569,26 @@ hijacked_bridge_swap() {
   a_m_bridge_whole_parts = getEntArray("bridge_whole", "targetname");
   a_m_bridge_destroyed_parts = getEntArray("bridge_destroyed", "targetname");
 
-  foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts)
-  m_bridge_destroyed show();
+  foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts) {
+    m_bridge_destroyed show();
+  }
 
-  foreach(m_bridge_whole in a_m_bridge_whole_parts)
-  m_bridge_whole delete();
+  foreach(m_bridge_whole in a_m_bridge_whole_parts) {
+    m_bridge_whole delete();
+  }
 }
 
 hijacked_bridge_building_swap() {
   a_m_building_whole = getEntArray("bridge_building_whole", "targetname");
   a_m_building_destroyed = getEntArray("bridge_building_destroyed", "targetname");
 
-  foreach(m_building_destroyed in a_m_building_destroyed)
-  m_building_destroyed show();
+  foreach(m_building_destroyed in a_m_building_destroyed) {
+    m_building_destroyed show();
+  }
 
-  foreach(m_building_whole in a_m_building_whole)
-  m_building_whole delete();
+  foreach(m_building_whole in a_m_building_whole) {
+    m_building_whole delete();
+  }
 }
 
 quadrotor_crash_tree_think() {

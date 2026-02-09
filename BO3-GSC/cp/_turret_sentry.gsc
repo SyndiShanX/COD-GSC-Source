@@ -275,7 +275,7 @@ function function_2e229297() {
   while(true) {
     if(isDefined(self.enemy) && self vehcansee(self.enemy) && self function_e7857e05(self.enemy)) {
       self.turretrotscale = 1;
-      if(cant_see_enemy_count > 0 && isplayer(self.enemy)) {
+      if(cant_see_enemy_count > 0 && isPlayer(self.enemy)) {
         sentry_turret_alert_sound();
         wait(0.5);
       }
@@ -288,14 +288,14 @@ function function_2e229297() {
         } else {
           self cleartargetentity();
         }
-        if(isDefined(self.enemy) && isplayer(self.enemy)) {
+        if(isDefined(self.enemy) && isPlayer(self.enemy)) {
           wait(randomfloatrange(0.3, 0.6));
           continue;
         }
         wait(randomfloatrange(0.3, 0.6) * 2);
       }
       if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
-        if(isplayer(self.enemy)) {
+        if(isPlayer(self.enemy)) {
           wait(randomfloatrange(0.5, 1.3));
         } else {
           wait(randomfloatrange(0.5, 1.3) * 2);

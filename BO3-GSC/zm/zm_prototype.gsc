@@ -100,7 +100,7 @@ function main() {
   fx_overrides();
   _zm_weap_cymbal_monkey::init();
   _zm_weap_bowie::init();
-  setdvar("magic_chest_movable", "0");
+  setDvar("magic_chest_movable", "0");
   level thread function_44c28e00();
   level thread function_54bf648f();
   level.zones = [];

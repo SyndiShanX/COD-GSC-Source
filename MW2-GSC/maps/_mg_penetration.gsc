@@ -83,7 +83,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
     wait(0.1);
   }
 
-  if(isplayer(enemy)) {
+  if(isPlayer(enemy)) {
     // shoot into the wall in the direction he exited our vision, then bring it back
 
     self endon("saw_enemy");

@@ -229,7 +229,7 @@ function recordkillstreakenddirect(eventindex, recordstreakindex, totalkills) {
 
 function recordkillstreakend(recordstreakindex, totalkills) {
   player = self;
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   if(!isDefined(totalkills)) {

@@ -50,7 +50,6 @@ _id_4534() {
 
     if(var_1 > 360) {
       var_1 = var_1 - 360;
-
     }
     wait 0.05;
   }
@@ -130,11 +129,9 @@ _id_4539() {
 
     if(var_1 != "aim") {
       var_1 = "aim";
-
     }
     if(var_2 <= 0) {
       var_2 = 0.1;
-
     }
     thread _id_453F(var_2);
     self waittill("turretstatechange");
@@ -199,7 +196,6 @@ _id_453C() {
 
       if(var_5 > self._id_4535["aimspeed"]) {
         var_5 = self._id_4535["aimspeed"];
-
       }
       var_1 = var_1 + var_5 * var_7;
 
@@ -215,11 +211,10 @@ _id_453C() {
         continue;
       }
 
-      if(isai(var_8) || isplayer(var_8)) {
+      if(isai(var_8) || isPlayer(var_8)) {
         var_6 = 0.5 * (var_8 getEye() + var_8.origin);
       } else {
         var_6 = var_8.origin;
-
       }
       var_7 = var_6 - var_1;
       var_5 = distance(var_6, var_1);
@@ -227,7 +222,6 @@ _id_453C() {
 
       if(var_5 > self._id_4535["aimspeed"]) {
         var_5 = self._id_4535["aimspeed"];
-
       }
       var_1 = var_1 + var_5 * var_7;
 

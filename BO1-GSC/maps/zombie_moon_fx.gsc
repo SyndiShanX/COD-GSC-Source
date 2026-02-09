@@ -13,7 +13,6 @@ main() {
   precache_scripted_fx();
   footsteps();
 }
-
 footsteps() {}
 precache_scripted_fx() {
   level._effect["large_ceiling_dust"] = loadFx("env/dirt/fx_dust_ceiling_impact_lg_mdbrown");
@@ -56,7 +55,6 @@ precache_scripted_fx() {
   level._effect["blue_eyes"] = LoadFX("misc/fx_zombie_eye_single_blue");
   level._effect["osc_button_glow"] = LoadFX("maps/zombie_moon/fx_moon_button_console_glow");
 }
-
 precache_createfx_fx() {
   level._effect["fx_mp_fog_xsm_int"] = Loadfx("maps/mp_maps/fx_mp_fog_xsm_int");
   level._effect["fx_moon_fog_spawn_closet"] = Loadfx("maps/zombie_moon/fx_moon_fog_spawn_closet");

@@ -86,7 +86,7 @@ breathingmanager(var_0, var_1, var_2, var_3) {
   if(maps\mp\_utility::isusingremote() || maps\mp\_utility::isinremotetransition()) {
     return;
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(isDefined(var_3) && var_3 != "MOD_FALLING" || isDefined(var_2) && var_2 > 1)
@@ -241,7 +241,7 @@ playerpainbreathingsound() {
   if(getdvarint("virtuallobbyactive", 0)) {
     return;
   }
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   if(isDefined(level.iszombiegame) && level.iszombiegame) {

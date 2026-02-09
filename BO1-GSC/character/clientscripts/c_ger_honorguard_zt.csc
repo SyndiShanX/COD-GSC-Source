@@ -1,6 +1,6 @@
 /***********************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_ger_honorguard_zt.csc
+ * Script: character\clientscripts\c_ger_honorguard_zt\.csc
 ***********************************************************/
 
 matches_me() {

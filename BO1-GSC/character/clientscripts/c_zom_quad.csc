@@ -1,6 +1,6 @@
 /**************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: character\clientscripts\c_zom_quad.csc
+ * Script: character\clientscripts\c_zom_quad\.csc
 **************************************************/
 
 matches_me() {

@@ -25,18 +25,18 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_ca_impact");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.55");
-    SetDvar("sm_sunsamplesizenear", ".15");
+    setDvar("sm_sunShadowScale", "0.55");
+    setDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.56" + "");
-    SetDvar("sm_sunsamplesizenear", ".22");
+    setDvar("sm_sunShadowScale", "0.56" + "");
+    setDvar("sm_sunsamplesizenear", ".22");
   } else {
-    SetDvar("sm_sunShadowScale", "0.9");
-    SetDvar("sm_sunsamplesizenear", ".27");
+    setDvar("sm_sunShadowScale", "0.9");
+    setDvar("sm_sunsamplesizenear", ".27");
   }
 
   game["attackers"] = "allies";
@@ -80,7 +80,7 @@ waterTriggerWaiter() {
     if(isAI(player)) {
       continue;
     }
-    if(!IsPlayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
     if(!isDefined(player.isTouchingWaterSheetTrigger) || player.isTouchingWaterSheetTrigger == false)
@@ -273,7 +273,6 @@ setup_watertanks() {
     for(i = 0; i < watertanks.size; i++)
       watertanks[i] thread update_watertank(i);
   }
-
 }
 
 update_watertank(index) {
@@ -361,7 +360,6 @@ update_watertank_invulnerable() {
     }
     hit_angles = VectorToAngles(hit_angles);
     playFX(level._effect["vfx_watertank_bullet_hit"], hit_point, anglesToForward(hit_angles), AnglesToUp(hit_angles));
-
   }
 }
 

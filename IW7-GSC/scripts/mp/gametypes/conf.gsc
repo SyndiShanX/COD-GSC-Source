@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -134,14 +134,14 @@ onspawnplayer() {
 }
 
 dogtagallyonusecb(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\utility::setextrascore1(var_0.pers["denied"]);
     var_0 scripts\mp\gamescore::giveteamscoreforobjective(var_0.pers["team"], level.scoredeny, 0);
   }
 }
 
 dogtagenemyonusecb(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 scripts\mp\utility::leaderdialogonplayer("kill_confirmed", undefined, undefined, undefined, 4);
     var_0 scripts\mp\utility::setextrascore0(var_0.pers["confirmed"]);
   }

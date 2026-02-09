@@ -10,7 +10,7 @@
 // Picks up a grenade from 32 units in front of the character, and throws it.
 
 main() {
-  if(getdvar("scr_forcegrenadecower") == "on" && isDefined(self.grenade)) {
+  if(getDvar("scr_forcegrenadecower") == "on" && isDefined(self.grenade)) {
     self OrientMode("face angle", randomfloat(360));
     self animmode("gravity");
     wait .2;
@@ -56,8 +56,8 @@ main() {
   assert(animArray.size);
   throwAnim = animArray[randomint(animArray.size)];
 
-  if(getdvar("scr_grenadereturnanim") != "") {
-    val = getdvar("scr_grenadereturnanim");
+  if(getDvar("scr_grenadereturnanim") != "") {
+    val = getDvar("scr_grenadereturnanim");
     //if( val == "kick1")
     //	throwAnim = %grenade_return_running_kick_forward_1;
     //else if( val == "kick2")

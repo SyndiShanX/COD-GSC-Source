@@ -25,7 +25,6 @@ main(model, type) {
   }
   self thread turret_sound_init();
 }
-
 turret_sound_init() {
   self.sound_org = spawn("script_origin", self.origin);
   self.sound_org linkto(self);
@@ -46,7 +45,6 @@ turret_sound_init() {
   self waittill("death");
   self.sound_org delete();
 }
-
 attach_truck_bed() {
   bed_base = "t5_veh_gaz66_flatbed";
   bed_dead = "t5_veh_gaz66_flatbed_dead";
@@ -148,7 +146,6 @@ attach_truck_bed() {
       break;
   }
 }
-
 attach_truck_bed_low() {
   bed_base = "t5_veh_gaz66_flatbed_low";
   bed_dead = "t5_veh_gaz66_flatbed_dead_low";
@@ -216,7 +213,6 @@ attach_truck_bed_low() {
       break;
   }
 }
-
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   positions[0].sittag = "tag_driver";
@@ -237,12 +233,11 @@ set_vehicle_anims(positions) {
   positions[1].vehicle_getoutanim = % v_gaz63_passenger_door_open;
   return positions;
 }
-
 #using_animtree("generic_human");
+
 set_gunner_vehicle_anims(positions) {
   return positions;
 }
-
 set_gunner_anims() {
   positions = [];
   num_positions = 3;
@@ -258,7 +253,6 @@ set_gunner_anims() {
   positions[2].aimdown = % ai_50cal_gunner_aim_down;
   return positions;
 }
-
 #using_animtree("vehicles");
 set_50cal_vehicle_anims(positions) {
   positions[0].sittag = "tag_driver";
@@ -272,8 +266,8 @@ set_50cal_vehicle_anims(positions) {
   positions[1].vehicle_getoutanim = % v_gaz63_passenger_door_open;
   return positions;
 }
-
 #using_animtree("generic_human");
+
 set_50cal_gunner_anims() {
   positions = [];
   num_positions = 3;
@@ -297,7 +291,6 @@ set_50cal_gunner_anims() {
   positions[1].idle = % crew_gaz63_passenger_sit_idle;
   return positions;
 }
-
 setanims() {
   positions = [];
   num_positions = 10;
@@ -346,7 +339,6 @@ setanims() {
   positions[9].idle = % crew_truck_guy4_sit_idle;
   return positions;
 }
-
 unload_groups() {
   unload_groups = [];
   unload_groups["all"] = [];

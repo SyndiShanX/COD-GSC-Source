@@ -5,8 +5,7 @@
 
 _id_1E8E(var_0) {
   if(!isDefined(level.script)) {
-    level.script = tolower(getdvar("mapname"));
-
+    level.script = tolower(getDvar("mapname"));
   }
   if(!isDefined(var_0) || var_0 == 0) {
     if(isDefined(level.gameskill)) {
@@ -14,15 +13,13 @@ _id_1E8E(var_0) {
     }
     if(!isDefined(level._id_22DB)) {
       level._id_22DB = ::_id_236A;
-
     }
     level._id_09B9 = ::_id_236D;
     level._id_09BA = ::_id_236D;
     level._id_09B8 = ::_id_236D;
 
-    if(getdvar("arcademode") == "1") {
+    if(getDvar("arcademode") == "1") {
       thread maps\_arcademode::main();
-
     }
     maps\_utility::_id_1DE7();
 
@@ -43,7 +40,6 @@ _id_1E8E(var_0) {
 
       if(!isDefined(var_2._id_22DC)) {
         var_2._id_22DC = 0;
-
       }
       var_2.disabledweapon = 0;
       var_2.disabledweaponswitch = 0;
@@ -65,7 +61,7 @@ _id_1E8E(var_0) {
   setdvarifuninitialized("autodifficulty_playerDeathTimer", 0);
   anim._id_22DF = 0.5;
   anim._id_22E0 = 0.8;
-  setdvar("autodifficulty_frac", 0);
+  setDvar("autodifficulty_frac", 0);
   level._id_22E1 = [];
 
   foreach(var_2 in level.players) {
@@ -195,15 +191,13 @@ _id_1E8E(var_0) {
 
   if(isDefined(level._id_22E5)) {
     [[level._id_22E5]]();
-
   }
   if(_id_2372()) {
     _id_22E9();
-
   }
   _id_22EF();
   _id_22EA();
-  setdvar("autodifficulty_original_setting", level.gameskill);
+  setDvar("autodifficulty_original_setting", level.gameskill);
 }
 
 _id_22E6() {
@@ -237,7 +231,6 @@ _id_17DB() {
     level._id_22E4["invulTime_onShield"]["normal"] = 2.5;
   } else {
     level._id_22E4["invulTime_onShield"]["normal"] = 1.5;
-
   }
   level._id_22E4["player_deathInvulnerableTime"]["normal"] = 3000;
   level._id_22E4["player_deathInvulnerableTime"]["hardened"] = 1300;
@@ -298,7 +291,6 @@ _id_17D1() {
 
   if(maps\_utility::_id_1A5C()) {
     level._id_1A65 = level._id_22E4["player_downed_buffer_time"][var_1];
-
   }
   maps\_mgturret::_id_17D2();
 }
@@ -317,17 +309,14 @@ _id_22EF() {
 
   if(maps\_utility::_id_12C1() && level._id_1337.gameskill > level.gameskill) {
     level.gameskill = level._id_1337.gameskill;
-
   }
   level._id_16D1 = level.player.gameskill;
 
   if(maps\_utility::_id_12C1() && level._id_1337.gameskill < level._id_16D1) {
     level._id_16D1 = level._id_1337.gameskill;
-
   }
   if(isDefined(level._id_1969)) {
     level.gameskill = level._id_1969;
-
   }
   return level.gameskill;
 }
@@ -358,7 +347,6 @@ _id_22F1(var_0) {
 _id_22F2() {
   if(level.script == "killhouse") {
     return 1;
-
   }
   return level.gameskill == getdvarint("autodifficulty_original_setting");
 }
@@ -458,7 +446,6 @@ _id_230D() {
 _id_230E() {
   if(!_id_230F()) {
     return 0;
-
   }
   return randomint(100) > 25;
 }
@@ -466,23 +453,18 @@ _id_230E() {
 _id_230F() {
   if(!isalive(self.enemy)) {
     return 0;
-
   }
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return 0;
-
   }
   if(!isalive(level._id_20D8) || level._id_20D8.script != "pain") {
     level._id_20D8 = self;
-
   }
   if(self == level._id_20D8) {
     return 0;
-
   }
   if(self.damageweapon != "none" && weaponisboltaction(self.damageweapon)) {
     return 0;
-
   }
   return 1;
 }
@@ -493,7 +475,7 @@ _id_2310() {
     return;
   }
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     _id_231A();
 
     if(self.a._id_19B8 > gettime()) {
@@ -507,7 +489,6 @@ _id_2310() {
       self.accuracy = anim._id_22E0 * self._id_20AF;
     } else {
       self.accuracy = anim._id_22DF * self._id_20AF;
-
     }
     return;
   }
@@ -528,16 +509,14 @@ _id_2312() {
   self._id_0D0A++;
   var_0 = level.gameskill;
 
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     var_0 = self.enemy.gameskill;
-
   }
   if(_id_2314()) {
     self.accuracy = 0;
 
     if(var_0 > 0 || self._id_0D0A > 1) {
       self._id_2313 = self.enemy;
-
     }
     return;
   }
@@ -553,19 +532,15 @@ _id_2312() {
 _id_2314() {
   if(isDefined(self._id_2315) && self._id_2315) {
     return 0;
-
   }
   if(self.team == "allies") {
     return 0;
-
   }
   if(isDefined(self._id_2313) && self.enemy == self._id_2313) {
     return 0;
-
   }
   if(distancesquared(self.origin, self.enemy.origin) > 250000) {
     return 0;
-
   }
   return 1;
 }
@@ -588,15 +563,12 @@ _id_2318() {
 
   if(!isalive(self.enemy)) {
     return var_0;
-
   }
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     return var_0;
-
   }
   if(self.enemy maps\_utility::_id_1008("player_is_invulnerable")) {
     var_0 = 0.3 + randomfloat(0.4);
-
   }
   return var_0;
 }
@@ -624,7 +596,7 @@ _id_0CD8() {
   if(!isalive(self.enemy)) {
     return;
   }
-  if(!isplayer(self.enemy)) {
+  if(!isPlayer(self.enemy)) {
     self.accuracy = self._id_20AF;
     return;
   }
@@ -643,7 +615,6 @@ _id_231B(var_0) {
   }
   if(var_0 > 0) {
     self.accuracy = 0;
-
   }
   var_0 = var_0 * 1000;
   self.a._id_19B8 = gettime() + var_0;
@@ -660,7 +631,6 @@ _id_231D() {
 
     if(self.a._id_19B8 > gettime()) {
       var_0 = (1, 0, 0);
-
     }
     wait 0.05;
   }
@@ -686,7 +656,6 @@ _id_231F(var_0, var_1, var_2) {
 
   if(var_2) {
     var_3 = -1;
-
   }
   var_4 = randomfloatrange(-15, 15);
   var_5 = randomfloatrange(-15, 15);
@@ -729,7 +698,6 @@ _id_2322(var_0) {
 
   if(var_0 == "bottom") {
     var_2 = "fullscreen_dirt_bottom_b";
-
   }
   thread _id_2324("dirt", var_0, var_1, var_2, randomfloatrange(0.55, 0.66));
 }
@@ -815,11 +783,9 @@ _id_2325() {
 
     if(isDefined(self._id_232B)) {
       var_8 = self._id_232B[var_7];
-
     }
     if(!isDefined(var_8) && isDefined(var_2[var_7])) {
       var_8 = var_2[var_7];
-
     }
     if(isDefined(var_8)) {
       waittillframeend;
@@ -861,12 +827,10 @@ playerhealthregen() {
 
     if(maps\_utility::_id_1A5C()) {
       thread maps\_laststand::_id_1A5B();
-
     }
     if(self.health == self.maxhealth) {
       if(maps\_utility::_id_1008("player_has_red_flashing_overlay")) {
         _id_2345();
-
       }
       var_7 = 1;
       var_3 = 0;
@@ -911,18 +875,15 @@ playerhealthregen() {
 
         if(gettime() > var_5 + self._id_20F2._id_22F9) {
           var_6 = var_6 + self._id_20F2._id_22FB;
-
         }
         if(var_6 >= 1) {
           _id_232F();
         }
       } else {
         var_6 = 1;
-
       }
       if(var_6 > 1.0) {
         var_6 = 1.0;
-
       }
       if(var_6 <= 0) {
         return;
@@ -937,7 +898,6 @@ playerhealthregen() {
 
     if(self.attackercount == 1) {
       var_10 = var_10 * 3;
-
     }
     var_11 = var_0 - var_9 >= var_10;
 
@@ -968,7 +928,6 @@ playerhealthregen() {
       var_4 = self._id_20F2._id_22F6;
     } else {
       var_4 = self._id_20F2._id_22F4;
-
     }
     var_7 = self.health / self.maxhealth;
     thread _id_2330(var_4);
@@ -992,12 +951,10 @@ _id_232F() {
 _id_2330(var_0) {
   if(isDefined(self.flashendtime) && self.flashendtime > gettime()) {
     var_0 = var_0 * _id_2309("flashbangedInvulFactor");
-
   }
   if(var_0 > 0) {
     if(!isDefined(self._id_2331)) {
       self.attackeraccuracy = 0;
-
     }
     self.ignorerandombulletdamage = 1;
     wait(var_0);
@@ -1010,7 +967,6 @@ _id_2330(var_0) {
 _id_216D() {
   if(self.team == "allies") {
     self._id_10A3 = 0.6;
-
   }
   if(self isbadguy()) {
     if(level.gameskill >= 2) {
@@ -1089,7 +1045,6 @@ _id_2334() {
     }
   } else {
     var_0 setshader("splatter_alt_sp", 640, 480);
-
   }
   var_0.splatter = 1;
   var_0.alignx = "left";
@@ -1112,7 +1067,6 @@ _id_2334() {
 
     if(var_1 > var_5) {
       var_1 = var_1 - var_3 * var_2;
-
     }
     if(var_1 < var_5) {
       var_1 = var_5;
@@ -1132,7 +1086,6 @@ _id_2336(var_0) {
     self.fontscale = 2;
   } else {
     self.fontscale = 1.6;
-
   }
   self.x = 0;
   self.y = -36;
@@ -1155,7 +1108,6 @@ _id_2336(var_0) {
     self._id_2337 setshader("popmenu_bg", 650, 52);
   } else {
     self._id_2337 setshader("popmenu_bg", 650, 42);
-
   }
   self._id_2337.alpha = 0.5;
 }
@@ -1170,7 +1122,6 @@ _id_2338() {
     var_0 settext(level._id_09A3["get_back_up"].text);
   } else {
     var_0 settext(level._id_09A3["take_cover"].text);
-
   }
   var_0.fontscale = 2;
   var_0.alpha = 1;
@@ -1216,11 +1167,9 @@ _id_233C(var_0) {
 _id_233E(var_0) {
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(isDefined(var_0._id_233D)) {
     return 0;
-
   }
   return 1;
 }
@@ -1244,7 +1193,6 @@ _id_2340(var_0, var_1, var_2, var_3) {
 
   if(var_10 < 0) {
     var_10 = 0;
-
   }
   var_11 = 0.8 + var_1 * 0.1;
   var_12 = 0.5 + var_1 * 0.3;
@@ -1258,7 +1206,6 @@ _id_2340(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0)) {
     var_0 thread _id_233F(1.0, var_6);
-
   }
   wait(var_6 + var_7);
 
@@ -1280,7 +1227,6 @@ _id_2340(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0)) {
     var_0 thread _id_233F(0.9, var_9);
-
   }
   wait(var_9);
   wait(var_10);
@@ -1289,11 +1235,9 @@ _id_2340(var_0, var_1, var_2, var_3) {
 _id_2341() {
   if(isDefined(level._id_2342)) {
     return 0;
-
   }
   if(isDefined(self.vehicle)) {
     return 0;
-
   }
   return 1;
 }
@@ -1301,33 +1245,26 @@ _id_2341() {
 _id_2343() {
   if(!isalive(self)) {
     return 0;
-
   }
   if(self islinked()) {
     return 0;
-
   }
   if(self.ignoreme) {
     return 0;
-
   }
   if(level._id_16C9) {
     return 0;
-
   }
   if(!_id_2341()) {
     return 0;
-
   }
   if(self.gameskill > 1 && !maps\_load::_id_1EED()) {
     return 0;
-
   }
   var_0 = self getlocalplayerprofiledata("takeCoverWarnings");
 
   if(var_0 <= 3) {
     return 0;
-
   }
   return 1;
 }
@@ -1339,18 +1276,15 @@ _id_2344() {
 
   if(_id_2343()) {
     var_0 = _id_2338();
-
   }
   var_1 = gettime() + self._id_20F2._id_22F9;
   _id_2340(var_0, 1, 1, 0);
 
   while(gettime() < var_1 && isalive(self) && maps\_utility::_id_1008("player_has_red_flashing_overlay")) {
     _id_2340(var_0, 0.9, 1, 0);
-
   }
   if(isalive(self)) {
     _id_2340(var_0, 0.65, 0.8, 0);
-
   }
   if(_id_233E(var_0)) {
     var_0 fadeovertime(1.0);
@@ -1373,7 +1307,6 @@ _id_2345() {
 
   if(!isDefined(self._id_1718) || !self._id_1718) {
     self playlocalsound("breathing_better");
-
   }
   self notify("take_cover_done");
 }
@@ -1440,7 +1373,6 @@ _id_234C() {
 
     if(var_1 < 0) {
       var_1 = 0;
-
     }
     for(var_2 = var_1; var_2 < level._id_234A.size; var_2++) {
       if(!level.player _id_234B(level._id_234A[var_2])) {
@@ -1459,7 +1391,7 @@ _id_234E() {
   level.player waittill("death");
   var_0 = getdvarint("autodifficulty_playerDeathTimer");
   var_0 = var_0 - 60;
-  setdvar("autodifficulty_playerDeathTimer", var_0);
+  setDvar("autodifficulty_playerDeathTimer", var_0);
 }
 
 _id_234F() {
@@ -1468,7 +1400,6 @@ _id_234F() {
   for(;;) {
     if(level.player attackbuttonpressed()) {
       var_0 = gettime();
-
     }
     level._id_2350 = gettime() - var_0;
     wait 0.05;
@@ -1498,7 +1429,6 @@ _id_2353() {
 _id_2356(var_0) {
   if(!isDefined(level._id_2357)) {
     level._id_2357 = [];
-
   }
   if(!isDefined(level._id_2357[var_0])) {
     var_1 = newhudelem();
@@ -1647,15 +1577,15 @@ _id_235D(var_0, var_1) {
 
 _id_1E7E() {
   level.sp_stat_tracking_func = ::_id_2364;
-  setdvar("aa_player_kills", "0");
-  setdvar("aa_enemy_deaths", "0");
-  setdvar("aa_enemy_damage_taken", "0");
-  setdvar("aa_player_damage_taken", "0");
-  setdvar("aa_player_damage_dealt", "0");
-  setdvar("aa_ads_damage_dealt", "0");
-  setdvar("aa_time_tracking", "0");
-  setdvar("aa_deaths", "0");
-  setdvar("player_cheated", 0);
+  setDvar("aa_player_kills", "0");
+  setDvar("aa_enemy_deaths", "0");
+  setDvar("aa_enemy_damage_taken", "0");
+  setDvar("aa_player_damage_taken", "0");
+  setDvar("aa_player_damage_dealt", "0");
+  setDvar("aa_ads_damage_dealt", "0");
+  setDvar("aa_time_tracking", "0");
+  setDvar("aa_deaths", "0");
+  setDvar("player_cheated", 0);
   level._id_235E = [];
   thread _id_2360();
   thread _id_2363();
@@ -1670,7 +1600,6 @@ _id_235F(var_0) {
 
   if(var_1["count"] <= 0) {
     return 0;
-
   }
   for(var_2 = 1; var_2 < var_1["count"] + 1; var_2++) {
     if(self buttonpressed(var_1["key" + var_2])) {
@@ -1699,7 +1628,6 @@ _id_2361() {
 
       while(level.player maps\_utility::_id_167C()) {
         wait 0.05;
-
       }
       continue;
     }
@@ -1723,26 +1651,25 @@ _id_2363() {
 _id_2364(var_0) {
   if(!isDefined(level._id_2365)) {
     level._id_2365 = [];
-
   }
   common_scripts\utility::flag_wait("auto_adjust_initialized");
   level._id_235E[var_0] = [];
   level._id_2365[var_0] = 0;
   common_scripts\utility::flag_wait(var_0);
 
-  if(getdvar("aa_zone" + var_0) == "") {
-    setdvar("aa_zone" + var_0, "on");
+  if(getDvar("aa_zone" + var_0) == "") {
+    setDvar("aa_zone" + var_0, "on");
     level._id_2365[var_0] = 1;
     _id_2367();
-    setdvar("start_time" + var_0, getdvar("aa_time_tracking"));
-    setdvar("starting_player_kills" + var_0, getdvar("aa_player_kills"));
-    setdvar("starting_deaths" + var_0, getdvar("aa_deaths"));
-    setdvar("starting_ads_damage_dealt" + var_0, getdvar("aa_ads_damage_dealt"));
-    setdvar("starting_player_damage_dealt" + var_0, getdvar("aa_player_damage_dealt"));
-    setdvar("starting_player_damage_taken" + var_0, getdvar("aa_player_damage_taken"));
-    setdvar("starting_enemy_damage_taken" + var_0, getdvar("aa_enemy_damage_taken"));
-    setdvar("starting_enemy_deaths" + var_0, getdvar("aa_enemy_deaths"));
-  } else if(getdvar("aa_zone" + var_0) == "done") {
+    setDvar("start_time" + var_0, getDvar("aa_time_tracking"));
+    setDvar("starting_player_kills" + var_0, getDvar("aa_player_kills"));
+    setDvar("starting_deaths" + var_0, getDvar("aa_deaths"));
+    setDvar("starting_ads_damage_dealt" + var_0, getDvar("aa_ads_damage_dealt"));
+    setDvar("starting_player_damage_dealt" + var_0, getDvar("aa_player_damage_dealt"));
+    setDvar("starting_player_damage_taken" + var_0, getDvar("aa_player_damage_taken"));
+    setDvar("starting_enemy_damage_taken" + var_0, getDvar("aa_enemy_damage_taken"));
+    setDvar("starting_enemy_deaths" + var_0, getDvar("aa_enemy_deaths"));
+  } else if(getDvar("aa_zone" + var_0) == "done") {
     return;
   }
   common_scripts\utility::flag_waitopen(var_0);
@@ -1750,7 +1677,7 @@ _id_2364(var_0) {
 }
 
 _id_195B(var_0) {
-  setdvar("aa_zone" + var_0, "done");
+  setDvar("aa_zone" + var_0, "done");
   var_1 = getdvarfloat("start_time" + var_0);
   var_2 = getdvarint("starting_player_kills" + var_0);
   var_3 = getdvarint("aa_enemy_deaths" + var_0);
@@ -1800,7 +1727,6 @@ _id_195B(var_0) {
 
   if(var_9 > 0) {
     var_20 = var_19 / var_9;
-
   }
   var_21 = var_20 * 60;
   var_21 = int(var_21);
@@ -1818,7 +1744,6 @@ _id_195B(var_0) {
 
   for(var_26 = 0; var_26 < var_25.size; var_26++) {
     var_24 = var_24 + ", " + var_25[var_26] + ": " + var_23[var_25[var_26]];
-
   }
   logstring(var_24);
 }
@@ -1831,12 +1756,12 @@ _id_2367() {}
 
 _id_2368(var_0, var_1) {
   var_2 = getdvarint(var_0);
-  setdvar(var_0, var_2 + var_1);
+  setDvar(var_0, var_2 + var_1);
 }
 
 _id_2369(var_0, var_1) {
   var_2 = getdvarfloat(var_0);
-  setdvar(var_0, var_2 + var_1);
+  setDvar(var_0, var_2 + var_1);
 }
 
 _id_236A(var_0) {
@@ -1846,15 +1771,12 @@ _id_236A(var_0) {
 _id_236B(var_0) {
   if([[level._id_22DB]](var_0)) {
     return 1;
-
   }
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     return 1;
-
   }
   if(!isDefined(var_0.car_damage_owner_recorder)) {
     return 0;
-
   }
   return var_0 _id_236C();
 }
@@ -1911,7 +1833,6 @@ _id_236F(var_0, var_1, var_2) {
 _id_2370(var_0) {
   if(var_0 == "MOD_PISTOL_BULLET") {
     return 1;
-
   }
   return var_0 == "MOD_RIFLE_BULLET";
 }
@@ -1919,7 +1840,6 @@ _id_2370(var_0) {
 _id_2371(var_0, var_1, var_2) {
   if(!isDefined(level._id_22E1[var_0])) {
     level._id_22E1[var_0] = [];
-
   }
   var_3 = [];
   var_3["frac"] = var_1;

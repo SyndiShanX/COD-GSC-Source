@@ -11,7 +11,6 @@ init() {
     level.portableAOEgeneratorSettings = [];
     level.generators = [];
   }
-
 }
 
 setWeapon(generatorType) {

@@ -680,7 +680,7 @@ function player_get_revive_time(player_being_revived) {
 }
 
 function player_damage_override_beast_mode(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isplayer(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker)) {
     return false;
   }
   b_superbeastmode = level clientfield::get("bm_superbeast");
@@ -1095,7 +1095,7 @@ function player_watch_grappled_object() {
           target zombie_gets_pulled(self);
         }
       }
-      level notify("grapple_hit", target, self, isDefined(self.pivotentity) && !isplayer(self.pivotentity));
+      level notify("grapple_hit", target, self, isDefined(self.pivotentity) && !isPlayer(self.pivotentity));
       playsoundatposition("wpn_beastmode_grapple_imp", target.origin);
     }
   }

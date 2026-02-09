@@ -253,7 +253,7 @@ func_FE5C(var_0, var_1, var_2, var_3) {
   var_9 = 0;
   var_10 = self.asm.shootparams.var_FF0B;
   var_11 = var_10 == 1 || self.asm.shootparams.var_1119D == "semi";
-  var_12 = isplayer(self.enemy) && self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable");
+  var_12 = isPlayer(self.enemy) && self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable");
   var_13 = scripts\anim\utility_common::weapon_pump_action_shotgun();
   while(var_9 < var_10 && var_10 > 0) {
     if(var_6) {

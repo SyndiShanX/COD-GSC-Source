@@ -60,7 +60,7 @@ init() {
   registerDvars();
 
   if(matchMakingGame()) {
-    mapLeaderboard = " LB_MAP_" + getdvar("ui_mapname");
+    mapLeaderboard = " LB_MAP_" + getDvar("ui_mapname");
 
     gamemodeLeaderboard = "";
     baseLeaderboards = "";
@@ -150,10 +150,10 @@ registerDvars() {
   if(getDvar("r_reflectionProbeGenerate") != "1") {
     SetOmnvar("ui_nuke_end_milliseconds", 0);
   }
-  SetDvar("ui_danger_team", "");
-  SetDvar("ui_inhostmigration", 0);
-  SetDvar("ui_override_halftime", 0);
-  SetDvar("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
+  setDvar("ui_danger_team", "");
+  setDvar("ui_inhostmigration", 0);
+  setDvar("ui_override_halftime", 0);
+  setDvar("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
 }
 
 SetupCallbacks() {

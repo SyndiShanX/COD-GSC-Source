@@ -55,7 +55,7 @@ init() {
   level._num_gongs = 0;
   randomize_gongs();
   precache_sidequest_assets();
-  trig = getEnt("sq_dgcwf_trig", "targetname");
+  trig = GetEnt("sq_dgcwf_trig", "targetname");
   trig trigger_off();
   level thread gong_watcher();
   level._sq_perk_array = array("specialty_armorvest", "specialty_quickrevive", "specialty_fastreload", "specialty_rof", "specialty_longersprint", "specialty_flakjacket", "specialty_deadshot");
@@ -63,7 +63,6 @@ init() {
     level._sq_perk_array = array_add(level._sq_perk_array, "specialty_additionalprimaryweapon");
   }
 }
-
 randomize_gongs() {
   gongs = getEntArray("sq_gong", "targetname");
   gongs = array_randomize(gongs);
@@ -75,7 +74,6 @@ randomize_gongs() {
     }
   }
 }
-
 watch_for_respawn() {
   self endon("disconnect");
   while(1) {
@@ -84,7 +82,6 @@ watch_for_respawn() {
     self SetMaxHealth(level.zombie_vars["zombie_perk_juggernaut_health"]);
   }
 }
-
 reward() {
   level notify("temple_sidequest_achieved");
   self add_sidequest_icon("sq", "anti115");
@@ -98,7 +95,6 @@ reward() {
   self._retain_perks = true;
   self thread watch_for_respawn();
 }
-
 raise_all_crystals() {
   while(0 == GetDvarInt(#"scr_raise_crystals")) {
     wait(0.1);
@@ -110,7 +106,6 @@ raise_all_crystals() {
   level notify("raise_crystal_5");
   level notify("raise_crystal_6");
 }
-
 gong_watcher() {
   if(isDefined(level._gong_watcher_running)) {
     return;
@@ -134,7 +129,6 @@ gong_watcher() {
     }
   }
 }
-
 watch_for_gongs_gone_bad() {
   while(1) {
     level waittill("wrong_gong");
@@ -153,7 +147,6 @@ watch_for_gongs_gone_bad() {
     }
   }
 }
-
 force_eclipse_watcher() {
   while(1) {
     while(0 == GetDvarInt(#"scr_force_eclipse")) {
@@ -168,41 +161,34 @@ force_eclipse_watcher() {
     hide_meteor();
   }
 }
-
 gong_trigger_handler() {
   while(1) {
     self waittill("damage", amount, attacker, dir, point, mod);
-    if(isplayer(attacker) && mod == "MOD_MELEE") {
+    if(isPlayer(attacker) && mod == "MOD_MELEE") {
       self.owner_ent notify("triggered", attacker);
     }
   }
 }
-
 gong_handler() {
   self thread maps\zombie_temple_sq_bag::dud_gong_handler();
 }
-
 ptt_dial_handler() {
   self thread maps\zombie_temple_sq_ptt::dud_dial_handler();
 }
-
 bttp2_dial_handler() {
   self thread maps\zombie_temple_sq_bttp2::dud_dial_handler();
 }
-
 start_temple_sidequest() {
   hide_meteor();
   flag_wait("all_players_connected");
   sidequest_start("sq");
 }
-
 restart_sundial_monitor() {
   level endon("kill_sundial_monitor");
   level waittill("reset_sundial");
   wait(0.1);
   self thread sundial_monitor();
 }
-
 spin_dial(duration, multiplier) {
   if(!isDefined(duration)) {
     duration = 2.0;
@@ -213,17 +199,15 @@ spin_dial(duration, multiplier) {
   spin_time = 0.1;
   while(spin_time < duration) {
     self playLoopSound("evt_sq_gen_sundial_spin", .5);
-    self rotatePitch(180, spin_time);
+    self RotatePitch(180, spin_time);
     wait(spin_time * 0.95);
     spin_time *= multiplier;
   }
-  self stopLoopSound(2);
+  self stoploopsound(2);
 }
-
 short_dial_spin() {
   spin_dial(1.0, 1.6);
 }
-
 sundial_monitor() {
   level endon("reset_sundial");
   level endon("end_game");
@@ -249,7 +233,7 @@ sundial_monitor() {
     level._sundial_active = true;
     self playSound("evt_sq_gen_transition_start");
     self playSound("evt_sq_gen_sundial_emerge");
-    self moveTo(self.original_pos, 0.25);
+    self moveto(self.original_pos, 0.25);
     self waittill("movedone");
     self thread spin_dial();
     wait(0.5);
@@ -258,26 +242,25 @@ sundial_monitor() {
     amount = 34 / 4;
     level waittill("timed_stage_75_percent");
     self playSound("evt_sq_gen_sundial_timer");
-    self moveTo(self.origin - (AnglesToUp(self.angles) * amount), 1);
+    self moveto(self.origin - (AnglesToUp(self.angles) * amount), 1);
     self thread short_dial_spin();
     level waittill("timed_stage_50_percent");
     self playSound("evt_sq_gen_sundial_timer");
-    self moveTo(self.origin - (AnglesToUp(self.angles) * amount), 1);
+    self moveto(self.origin - (AnglesToUp(self.angles) * amount), 1);
     self thread short_dial_spin();
     level waittill("timed_stage_25_percent");
     self playSound("evt_sq_gen_sundial_timer");
-    self moveTo(self.origin - (AnglesToUp(self.angles) * amount), 1);
+    self moveto(self.origin - (AnglesToUp(self.angles) * amount), 1);
     self thread short_dial_spin();
     level waittill("timed_stage_10_seconds_to_go");
     self thread play_one_second_increments();
-    self moveTo(self.origin - (AnglesToUp(self.angles) * amount), 10);
+    self moveto(self.origin - (AnglesToUp(self.angles) * amount), 10);
     self thread spin_dial();
     self waittill("movedone");
     level._sundial_active = false;
     wait(0.1);
   }
 }
-
 play_one_second_increments() {
   level endon("sidequest_sq_complete");
   level endon("reset_sundial");
@@ -286,7 +269,6 @@ play_one_second_increments() {
     wait(1);
   }
 }
-
 sundial_button_already_pressed_by(who, buttons) {
   for(i = 0; i < buttons.size; i++) {
     if(isDefined(buttons[i].triggering_player) && buttons[i].triggering_player == who) {
@@ -295,7 +277,6 @@ sundial_button_already_pressed_by(who, buttons) {
   }
   return false;
 }
-
 sundial_button() {
   level endon("stage_starting");
   level endon("kill_buttons");
@@ -303,7 +284,7 @@ sundial_button() {
     self.dont_rethread = true;
     self.on_pos = self.origin - AnglesToUp(self.angles);
     self.off_pos = self.on_pos - (AnglesToUp(self.angles) * 5.5);
-    self moveTo(self.off_pos, 0.01);
+    self moveto(self.off_pos, 0.01);
   }
   if(isDefined(self.trigger)) {
     self.trigger Delete();
@@ -311,7 +292,7 @@ sundial_button() {
   }
   self.triggering_player = undefined;
   flag_wait("power_on");
-  self moveTo(self.on_pos, 0.25);
+  self moveto(self.on_pos, 0.25);
   self waittill("movedone");
   buttons = getEntArray("sq_sundial_button", "targetname");
   offset = (anglesToForward(self.angles) * 5) - (0, 0, 16);
@@ -327,21 +308,20 @@ sundial_button() {
       self.triggering_player = who;
       level._sundial_buttons_pressed++;
       self playSound("evt_sq_gen_button");
-      self moveTo(self.off_pos, 0.25);
+      self moveto(self.off_pos, 0.25);
       delay = 1;
       wait(delay);
       while(level._sundial_active) {
         wait(0.1);
       }
       self.triggering_player = undefined;
-      self moveTo(self.on_pos, 0.25);
+      self moveto(self.on_pos, 0.25);
       if(level._sundial_buttons_pressed > 0) {
         level._sundial_buttons_pressed--;
       }
     }
   }
 }
-
 #using_animtree("fxanim_props_dlc4");
 init_gongs() {
   gongs = getEntArray("sq_gong", "targetname");
@@ -353,7 +333,6 @@ init_gongs() {
     level.scr_anim[name]["ring"] = % viewmodel_fxanim_zom_ztem_gong_anim;
   }
 }
-
 init_sidequest() {
   level._buttons_can_reset = true;
   if(!isDefined(level._sidequest_firsttime)) {
@@ -362,7 +341,7 @@ init_sidequest() {
   }
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    entnum = players[i] getEntityNumber();
+    entnum = players[i] GetEntityNumber();
     if(isDefined(players[i].zm_random_char)) {
       entnum = players[i].zm_random_char;
     }
@@ -373,33 +352,32 @@ init_sidequest() {
   }
   maps\zombie_temple_sq_brock::create_radio(1);
   init_gongs();
-  wall = getEnt("sq_wall", "targetname");
+  wall = GetEnt("sq_wall", "targetname");
   wall setModel("p_ztem_temple_wall_solid");
   crystals = getEntArray("sq_crystals", "targetname");
   level._raised_crystals = [];
   for(i = 0; i < crystals.size; i++) {
     level._raised_crystals[i] = 0;
   }
-  trap = getEnt("sq_spiketrap", "targetname");
+  trap = GetEnt("sq_spiketrap", "targetname");
   trap Show();
   flag_clear("radio_4_played");
   flag_clear("radio_7_played");
   flag_clear("radio_9_played");
   flag_clear("meteorite_shrunk");
-  meteorite = getEnt("sq_meteorite", "targetname");
+  meteorite = GetEnt("sq_meteorite", "targetname");
   meteorite setModel("p_ztem_meteorite");
-  meteorite hide();
+  meteorite Hide();
   if(!isDefined(meteorite.original_origin)) {
     meteorite.original_origin = meteorite.origin;
     meteorite.original_angles = meteorite.angles;
   }
   meteorite.origin = meteorite.original_origin;
   meteorite.angles = meteorite.original_angles;
-  anti115 = getEnt("sq_anti_115", "targetname");
+  anti115 = GetEnt("sq_anti_115", "targetname");
   anti115 Show();
   level thread pap_watcher();
 }
-
 pap_watcher() {
   level notify("only_one_pap_watcher");
   level endon("only_one_pap_watcher");
@@ -415,40 +393,35 @@ pap_watcher() {
     level thread pack_a_punch_show();
   }
 }
-
 cheat_complete_stage() {
   level endon("reset_sundial");
   while(1) {
     if(getDvar("cheat_sq") != "") {
       if(isDefined(level._last_stage_started)) {
-        SetDvar("cheat_sq", "");
+        setDvar("cheat_sq", "");
         stage_completed("sq", level._last_stage_started);
       }
     }
     wait(0.1);
   }
 }
-
 generic_stage_start() {
   level._stage_active = true;
   back_to_the_eclipse();
   reveal_meteor();
 }
-
 generic_stage_complete() {
   level notify("reset_sundial");
   level._stage_active = false;
   back_to_the_future();
   hide_meteor();
 }
-
 complete_sidequest() {
   level notify("kill_sundial_monitor");
   level notify("reset_sundial");
   level notify("kill_buttons");
   level thread sidequest_done();
 }
-
 spin_115() {
   self endon("picked_up");
   while(1) {
@@ -456,12 +429,11 @@ spin_115() {
     wait(0.4);
   }
 }
-
 sidequest_done() {
-  wall = getEnt("sq_wall", "targetname");
+  wall = GetEnt("sq_wall", "targetname");
   wall setModel("p_ztem_temple_wall_broken");
   wall NotSolid();
-  anti115 = getEnt("sq_anti_115", "targetname");
+  anti115 = GetEnt("sq_anti_115", "targetname");
   anti115 thread spin_115();
   anti115 playLoopSound("zmb_meteor_loop");
   exploder(520);
@@ -471,22 +443,22 @@ sidequest_done() {
   trigger.height = 72;
   while(1) {
     trigger waittill("trigger", who);
-    if(IsPlayer(who) && !isDefined(who._has_anti115)) {
+    if(isPlayer(who) && !isDefined(who._has_anti115)) {
       who._has_anti115 = true;
       who playSound("zmb_meteor_activate");
       who thread reward();
       who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest8", undefined, 7);
       who thread delayed_loser_response();
       break;
-    } else if(IsPlayer(who)) {
+    } else if(isPlayer(who)) {
       who playSound("zmb_no_cha_ching");
     }
   }
   trigger Delete();
-  anti115 stopLoopSound(1);
+  anti115 stoploopsound(1);
   anti115 notify("picked_up");
   level notify("picked_up");
-  anti115 hide();
+  anti115 Hide();
   stop_exploder(520);
   players_far = 0;
   players = get_players();
@@ -503,7 +475,6 @@ sidequest_done() {
   flag_clear("pap_override");
   level thread reset_sidequest();
 }
-
 delayed_loser_response() {
   wait(5);
   losers = get_players();
@@ -512,7 +483,6 @@ delayed_loser_response() {
     losers[randomintrange(0, losers.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest8", undefined, 8);
   }
 }
-
 reset_sidequest() {
   sidequest = level._zombie_sidequests["sq"];
   if(sidequest.num_reps >= 3) {
@@ -540,7 +510,7 @@ reset_sidequest() {
       crystals[i] Delete();
     }
   }
-  dynamite = getEnt("dynamite", "targetname");
+  dynamite = GetEnt("dynamite", "targetname");
   dynamite Delete();
   buttons = getEntArray("sq_sundial_button", "targetname");
   for(i = 0; i < buttons.size; i++) {
@@ -550,37 +520,32 @@ reset_sidequest() {
     }
   }
   start_temple_sidequest();
-  dial = getEnt("sq_sundial", "targetname");
+  dial = GetEnt("sq_sundial", "targetname");
   dial thread sundial_monitor();
 }
-
 back_to_the_eclipse() {
   clientnotify("ec");
 }
-
 back_to_the_future() {
   clientnotify("db");
 }
-
 reveal_meteor() {
-  ent = getEnt("sq_meteorite", "targetname");
+  ent = GetEnt("sq_meteorite", "targetname");
   if(isDefined(ent)) {
     ent Show();
     exploder(518);
   }
 }
-
 hide_meteor() {
-  ent = getEnt("sq_meteorite", "targetname");
+  ent = GetEnt("sq_meteorite", "targetname");
   if(isDefined(ent)) {
-    ent hide();
+    ent Hide();
     stop_exploder(518);
   }
 }
-
 spawn_skel() {
   if(!isDefined(level._sq_skel)) {
-    ent = getEnt("sq_spiketrap", "targetname");
+    ent = GetEnt("sq_spiketrap", "targetname");
     if(isDefined(ent)) {
       sb = spawn("script_model", ent.origin);
       sb.angles = ent.angles;
@@ -589,16 +554,14 @@ spawn_skel() {
     }
   }
 }
-
 remove_skel() {
   if(isDefined(level._sq_skel)) {
     level._sq_skel Delete();
     level._sq_skel = undefined;
   }
 }
-
 reset_dynamite() {
-  dynamite = getEnt("dynamite", "targetname");
+  dynamite = GetEnt("dynamite", "targetname");
   dynamite.angles = dynamite.original_angles;
   dynamite.origin = dynamite.original_origin;
   dynamite Unlink();
@@ -606,13 +569,11 @@ reset_dynamite() {
   dynamite.dropped = undefined;
   dynamite Show();
 }
-
 delay_kill_loop_sound_and_delete() {
-  self stopLoopSound(.5);
+  self stoploopsound(.5);
   wait(0.5);
   self Delete();
 }
-
 crystal_handler() {
   if(isDefined(self.trigger)) {
     maps\_zombiemode_weap_shrink_ray::remove_shrinkable_object(self.trigger);
@@ -637,7 +598,7 @@ crystal_handler() {
   }
   self DontInterpolate();
   self.origin = self.original_origin - (0, 0, 154);
-  self hide();
+  self Hide();
   level waittill("raise_crystal_" + self.script_int, actual_stage);
   if(actual_stage) {
     level notify("suspend_timer");
@@ -645,9 +606,9 @@ crystal_handler() {
   self Show();
   self playSound("evt_sq_gen_crystal_start");
   self playLoopSound("evt_sq_gen_crystal_loop", 2);
-  self moveTo(self.origin + (0, 0, 154), 4.0, 0.8, 0.4);
+  self moveto(self.origin + (0, 0, 154), 4.0, 0.8, 0.4);
   self waittill("movedone");
-  self stopLoopSound(1);
+  self stoploopsound(1);
   self playSound("evt_sq_gen_crystal_end");
   level notify("raised_crystal_" + self.script_int);
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "empty_holder") {
@@ -667,7 +628,6 @@ crystal_handler() {
   self thread force_stoploopsound_end();
   level._raised_crystals[self.script_int - 1] = 1;
 }
-
 play_loopsound_while_resonating() {
   self.trigger endon("death");
   while(1) {
@@ -676,10 +636,9 @@ play_loopsound_while_resonating() {
     while(flag("gongs_resonating")) {
       wait(0.1);
     }
-    self stopLoopSound(.5);
+    self stoploopsound(.5);
   }
 }
-
 get_crystal_from_script_int(num) {
   sq = getEntArray("sq_crystals", "targetname");
   for(i = 0; i < sq.size; i++) {
@@ -688,14 +647,12 @@ get_crystal_from_script_int(num) {
     }
   }
 }
-
 is_crystal_raised(i) {
   if(isDefined(level._raised_crystals[i - 1]) && level._raised_crystals[i - 1] == 1) {
     return 1;
   }
   return 0;
 }
-
 bounce_from_a_to_b(a, b, hotsauce) {
   if(hotsauce) {
     a setclientflag(level._CF_SCRIPTMOVER_CLIENT_FLAG_HOTSAUCE_START);
@@ -714,21 +671,19 @@ bounce_from_a_to_b(a, b, hotsauce) {
     b clearclientflag(level._CF_SCRIPTMOVER_CLIENT_FLAG_SAUCE_END);
   }
 }
-
 do_bounce_off(start, hotsauce) {
   if(!isDefined(level._bounce_off_ent)) {
     level._bounce_off_ent = spawn("script_model", (0, 0, 0));
     level._bounce_off_ent setModel("p_ztem_glyphs_00");
-    level._bounce_off_ent hide();
+    level._bounce_off_ent Hide();
   }
   yaw = randomFloat(360);
   r = randomFloatRange(100, 200);
   amntx = cos(yaw) * r;
   amnty = sin(yaw) * r;
-  level._bounce_off_ent.origin = start.origin + (amntx, amnty, randomInt(60));
+  level._bounce_off_ent.origin = start.origin + (amntx, amnty, RandomInt(60));
   level thread bounce_from_a_to_b(start, level._bounce_off_ent, hotsauce);
 }
-
 shrink_time() {
   wait 1.0;
   clientnotify("mts");
@@ -736,18 +691,17 @@ shrink_time() {
   exploder(519);
   wait(0.1);
   stop_exploder(518);
-  self hide();
+  self Hide();
   wait 0.25;
   flag_set("meteorite_shrunk");
   level thread shut_off_all_looping_sounds();
   self playSound("evt_sq_bag_silence");
   self playSound("evt_sq_bag_meteor_fall");
-  self moveTo(self.origin - (0, 0, 120), 2.0, 0.5);
+  self moveto(self.origin - (0, 0, 120), 2.0, 0.5);
   self waittill("movedone");
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest8", undefined, 4);
 }
-
 crystal_shrink_logic(hotsauce) {
   level._crystal_shrink_logic_running = true;
   flag_set("doing_bounce_around");
@@ -758,7 +712,7 @@ crystal_shrink_logic(hotsauce) {
     for(i = 0; i < bounce_path.size; i++) {
       if(string(bounce_path[i]) == "M") {
         if(sidequest_stage_active("sq", "BaG") && !flag("meteorite_shrunk")) {
-          ent = getEnt("sq_meteorite", "targetname");
+          ent = GetEnt("sq_meteorite", "targetname");
           if(hotsauce) {
             start playSound("evt_sq_bag_crystal_bounce_correct");
             exploder(509);
@@ -804,7 +758,6 @@ crystal_shrink_logic(hotsauce) {
   level._crystal_shrink_logic_running = undefined;
   flag_clear("doing_bounce_around");
 }
-
 crystal_shrink_thread() {
   self endon("death");
   while(1) {
@@ -817,7 +770,6 @@ crystal_shrink_thread() {
     }
   }
 }
-
 crystal_trigger_thread() {
   self endon("death");
   self thread crystal_shrink_thread();
@@ -825,21 +777,20 @@ crystal_trigger_thread() {
     self waittill("damage", amount, attacker, dir, point, type);
   }
 }
-
 pack_a_punch_hide() {
   if(!isDefined(level._pap_hidden)) {
     level._pap_hidden = 0;
-    pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
+    pap_machine_trig = getent("zombie_vending_upgrade", "targetname");
     pap_machine_trig enablelinkto();
   }
   if(level._pap_hidden) {
     return;
   }
   level._pap_hidden = 1;
-  pap_clip = getEnt("zombie_vending_upgrade_clip", "targetname");
+  pap_clip = getent("zombie_vending_upgrade_clip", "targetname");
   pap_clip notsolid();
   pap_clip ConnectPaths();
-  pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
+  pap_machine_trig = getent("zombie_vending_upgrade", "targetname");
   pap_pieces = getEntArray(pap_machine_trig.target, "targetname");
   pap_jingle_struct = getstruct("pack_jingle_struct", "script_noteworthy");
   if(!isDefined(pap_jingle_struct.original_origin)) {
@@ -853,22 +804,22 @@ pack_a_punch_hide() {
   pap_clip linkto(link_ent);
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getEnt(pap_pieces[i].target, "targetname") linkto(link_ent);
+      getent(pap_pieces[i].target, "targetname") linkto(link_ent);
     }
     pap_pieces[i] linkto(link_ent);
   }
-  link_ent moveTo(link_ent.origin + (0, 0, -350), 5);
+  link_ent moveto(link_ent.origin + (0, 0, -350), 5);
   link_ent waittill("movedone");
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getEnt(pap_pieces[i].target, "targetname") hide();
+      getent(pap_pieces[i].target, "targetname") hide();
     }
     pap_pieces[i] hide();
   }
   pap_machine_trig unlink();
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getEnt(pap_pieces[i].target, "targetname") unlink();
+      getent(pap_pieces[i].target, "targetname") unlink();
     }
     pap_pieces[i] unlink();
   }
@@ -878,7 +829,6 @@ pack_a_punch_hide() {
   link_ent delete();
   level._pap_hidden = 2;
 }
-
 pack_a_punch_show() {
   if(!isDefined(level._pap_hidden) || level._pap_hidden == 0) {
     return;
@@ -888,10 +838,10 @@ pack_a_punch_show() {
       wait(1);
     }
   }
-  pap_clip = getEnt("zombie_vending_upgrade_clip", "targetname");
+  pap_clip = getent("zombie_vending_upgrade_clip", "targetname");
   pap_clip Solid();
   pap_clip ConnectPaths();
-  pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
+  pap_machine_trig = getent("zombie_vending_upgrade", "targetname");
   pap_pieces = getEntArray(pap_machine_trig.target, "targetname");
   pap_jingle_struct = getstruct("pack_jingle_struct", "script_noteworthy");
   link_ent = spawn("script_origin", pap_machine_trig.origin);
@@ -900,24 +850,24 @@ pack_a_punch_show() {
   pap_clip linkto(link_ent);
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getEnt(pap_pieces[i].target, "targetname") linkto(link_ent);
-      getEnt(pap_pieces[i].target, "targetname") hide();
+      getent(pap_pieces[i].target, "targetname") linkto(link_ent);
+      getent(pap_pieces[i].target, "targetname") hide();
     }
     pap_pieces[i] linkto(link_ent);
     pap_pieces[i] hide();
   }
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getEnt(pap_pieces[i].target, "targetname") show();
+      getent(pap_pieces[i].target, "targetname") show();
     }
     pap_pieces[i] show();
   }
-  link_ent moveTo(level._original_pap_spot, 5);
+  link_ent moveto(level._original_pap_spot, 5);
   link_ent waittill("movedone");
   pap_machine_trig unlink();
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getEnt(pap_pieces[i].target, "targetname") unlink();
+      getent(pap_pieces[i].target, "targetname") unlink();
     }
     pap_pieces[i] unlink();
   }
@@ -927,7 +877,6 @@ pack_a_punch_show() {
   link_ent delete();
   level._pap_hidden = 0;
 }
-
 get_variant_from_entity_num(player_number) {
   if(!isDefined(player_number)) {
     player_number = 0;
@@ -949,7 +898,6 @@ get_variant_from_entity_num(player_number) {
   }
   return post_fix;
 }
-
 shut_off_all_looping_sounds() {
   gongs = getEntArray("sq_gong", "targetname");
   for(i = 0; i < gongs.size; i++) {
@@ -958,7 +906,7 @@ shut_off_all_looping_sounds() {
         if(level._num_gongs >= 0) {
           level._num_gongs--;
         }
-        gongs[i] stopLoopSound(.5);
+        gongs[i] stoploopsound(.5);
       }
     }
     gongs[i].ringing = false;
@@ -966,9 +914,8 @@ shut_off_all_looping_sounds() {
   level notify("force_stoploopsound_end");
   level notify("kill_resonate");
 }
-
 force_stoploopsound_end() {
   self.trigger endon("death");
   level waittill("force_stoploopsound_end");
-  self stopLoopSound(.5);
+  self stoploopsound(.5);
 }

@@ -44,7 +44,6 @@ main() {
     info.rigmodel_anims["land_groundmp"] = "pigeon_flock_land_ground_mp";
     info.rigmodel_anims["takeoff_inpipemp"] = "pigeon_flock_takeoff_inpipe_mp";
     info.rigmodel_anims["land_inpipemp"] = "pigeon_flock_land_inpipe_mp";
-
   }
   info.sounds = [];
   info.sounds["takeoff"] = "anml_crow_startle_flyaway";

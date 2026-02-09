@@ -11,6 +11,7 @@
 #include animscripts\anims;
 #include common_scripts\Utility;
 #using_animtree("generic_human");
+
 MeleeCombat() {
   self endon("killanimscript");
   self melee_notify_wrapper();
@@ -36,7 +37,7 @@ MeleeCombat() {
   }
   self thread EyesAtEnemy();
   self OrientMode("face enemy");
-  meleeDebugPrint("Melee begin");
+  MeleeDebugPrint("Melee begin");
   self AnimMode("zonly_physics");
   resetGiveUpTime();
   first_time = true;
@@ -47,14 +48,14 @@ MeleeCombat() {
     }
     first_time = false;
     assert(self.a.pose == "stand");
-    meleeDebugPrint("Melee main loop" + randomInt(100));
+    MeleeDebugPrint("Melee main loop" + RandomInt(100));
     if(!realMelee && animscripts\utility::okToMelee(self.enemy)) {
       realMelee = true;
       animscripts\utility::IAmMeleeing(self.enemy);
     }
     self thread EyesAtEnemy();
     self OrientMode("face current");
-    if(self maps\_bayonet::has_bayonet() && randomInt(100) < 0) {
+    if(self maps\_bayonet::has_bayonet() && RandomInt(100) < 0) {
       self SetFlaggedAnimKnobAllRestart("meleeanim", animArray("bayonet"), %body, 1, .2, 1);
     } else {
       self SetFlaggedAnimKnobAllRestart("meleeanim", animArray("melee"), %body, 1, .2, 1);
@@ -86,7 +87,6 @@ MeleeCombat() {
   self AnimMode("none");
   self thread backToCombat();
 }
-
 backToCombat() {
   self notify("killanimscript");
   waittillframeend;
@@ -95,21 +95,18 @@ backToCombat() {
   self notify("stop_melee_debug_print");
   scriptChange();
 }
-
 resetGiveUpTime() {
-  if(distanceSquared(self.origin, self.enemy.origin) > anim.chargeRangeSq) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > anim.chargeRangeSq) {
     self.giveUpOnMeleeTime = GetTime() + randomintrange(2700, 3300);
   } else {
     self.giveUpOnMeleeTime = GetTime() + randomintrange(1700, 2300);
   }
 }
-
-meleeDebugPrint(text) {
+MeleeDebugPrint(text) {
   return;
   self.meleedebugprint = text;
   self thread meleeDebugPrintThreadWrapper();
 }
-
 meleeDebugPrintThreadWrapper() {
   if(!isDefined(self.meleedebugthread)) {
     self.meleedebugthread = true;
@@ -117,7 +114,6 @@ meleeDebugPrintThreadWrapper() {
     self.meleedebugthread = undefined;
   }
 }
-
 meleeDebugPrintThread() {
   self endon("death");
   self endon("killanimscript");
@@ -127,37 +123,30 @@ meleeDebugPrintThread() {
     wait .05;
   }
 }
-
 debug_melee_on_actor() {
   return false;
 }
-
 debug_melee(msg) {}
 debug_melee_line(start, end, color, duration) {}
 getEnemyPose() {
-  if(IsPlayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     return self.enemy getStance();
   } else {
     return self.enemy.a.pose;
   }
 }
-
 CanContinueToMelee() {
   return CanMeleeInternal("already started");
 }
-
 CanMeleeAnyRange() {
   return CanMeleeInternal("any range");
 }
-
 CanMeleeDesperate() {
   return CanMeleeInternal("long range");
 }
-
 CanMelee() {
   return CanMeleeInternal("normal");
 }
-
 CanMeleeInternal(state) {
   if(!IsSentient(self.enemy)) {
     debug_melee("Not doing melee - Does not have a valid target.");
@@ -176,7 +165,7 @@ CanMeleeInternal(state) {
     return false;
   }
   enemypose = getEnemyPose();
-  if(!IsPlayer(self.enemy) && enemypose != "stand" && enemypose != "crouch") {
+  if(!isPlayer(self.enemy) && enemypose != "stand" && enemypose != "crouch") {
     if(!(self is_banzai() && enemypose == "prone")) {
       debug_melee("Not doing melee - Enemy is in prone.");
       return false;
@@ -245,7 +234,7 @@ CanMeleeInternal(state) {
     if(state == "already started") {
       return false;
     }
-    if((!self is_banzai() || IsPlayer(self.enemy)) && self.a.allow_shooting && isDefined(self.lastMeleeGiveUpTime) && GetTime() - self.lastMeleeGiveUpTime < 3000) {
+    if((!self is_banzai() || isPlayer(self.enemy)) && self.a.allow_shooting && isDefined(self.lastMeleeGiveUpTime) && GetTime() - self.lastMeleeGiveUpTime < 3000) {
       debug_melee("Not doing melee - Recently meleed someone and missed.");
       return false;
     }
@@ -266,7 +255,6 @@ CanMeleeInternal(state) {
   }
   return true;
 }
-
 isMeleePathClear(vecToEnemy, enemyPoint) {
   dirToEnemy = VectorNormalize((vecToEnemy[0], vecToEnemy[1], 0));
   meleePoint = enemyPoint - (dirToEnemy[0] * 32, dirToEnemy[1] * 32, 0);
@@ -281,7 +269,6 @@ isMeleePathClear(vecToEnemy, enemyPoint) {
   debug_melee("Not doing melee - Can not move to the melee point, MayMoveToPoint failed.");
   return false;
 }
-
 PrepareToMelee(first_time) {
   if(!CanMeleeAnyRange()) {
     return false;
@@ -314,7 +301,7 @@ PrepareToMelee(first_time) {
   self SetFlaggedAnimKnobAll("chargeanim", runAnim, %body, 1, .3, 1);
   raisingGun = false;
   while(1) {
-    meleeDebugPrint("PrepareToMelee loop" + randomInt(100));
+    MeleeDebugPrint("PrepareToMelee loop" + RandomInt(100));
     time = GetTime();
     willBeWithinRangeWhenGunIsRaised = (isDefined(predictedEnemyDistSqAfterRaiseGun) && predictedEnemyDistSqAfterRaiseGun <= shouldRaiseGunDistSq);
     if(!raisingGun) {
@@ -338,7 +325,7 @@ PrepareToMelee(first_time) {
     enemyVel = vector_scale(self.enemy.origin - prevEnemyPos, 1 / (GetTime() - time));
     prevEnemyPos = self.enemy.origin;
     predictedEnemyPosAfterRaiseGun = self.enemy.origin + vector_scale(enemyVel, raiseGunPredictDuration);
-    predictedEnemyDistSqAfterRaiseGun = distanceSquared(self.origin, predictedEnemyPosAfterRaiseGun);
+    predictedEnemyDistSqAfterRaiseGun = DistanceSquared(self.origin, predictedEnemyPosAfterRaiseGun);
     if(raisingGun && self.enemyDistanceSq <= shouldMeleeDistSq && GetTime() - raiseGunStartTime >= raiseGunFinishDuration) {
       break;
     }
@@ -348,7 +335,6 @@ PrepareToMelee(first_time) {
   }
   return true;
 }
-
 PlayMeleeSound() {
   if(!isDefined(self.a.nextMeleeChargeSound)) {
     self.a.nextMeleeChargeSound = 0;
@@ -358,13 +344,12 @@ PlayMeleeSound() {
     self.a.nextMeleeChargeSound = GetTime() + 8000;
   }
 }
-
 AiVsAiMeleeCombat() {
   self endon("killanimscript");
   self melee_notify_wrapper();
   self OrientMode("face enemy");
   self ClearAnim(%root, 0.3);
-  IWin = (randomInt(10) < 8);
+  IWin = (RandomInt(10) < 8);
   if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     IWin = true;
   }
@@ -383,7 +368,7 @@ AiVsAiMeleeCombat() {
   desiredDistSqrd = 72 * 72;
   self PlayMeleeSound();
   AiVsAiMeleeCharge(desiredDistSqrd);
-  if(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd) {
     return false;
   }
   self.meleePartner = self.enemy;
@@ -393,20 +378,17 @@ AiVsAiMeleeCombat() {
   self.meleeAnim = myAnim;
   self animcustom(::AiVsAiAnimCustom);
 }
-
 AiVsAiMeleeCharge(desiredDistSqrd) {
   giveUpTime = GetTime() + 2500;
   self SetAnimKnobAll(animscripts\run::GetRunAnim(), %body, 1, 0.2);
-  while(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && GetTime() < giveUpTime) {
+  while(DistanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && GetTime() < giveUpTime) {
     wait .05;
   }
 }
-
 AiVsAiAnimCustom() {
   self endon("killanimscript");
   self AiVsAiMeleeAnim(self.meleeAnim);
 }
-
 AiVsAiMeleeAnim(myAnim) {
   self endon("end_melee");
   self thread endMeleeOnKillanimscript();
@@ -417,7 +399,6 @@ AiVsAiMeleeAnim(myAnim) {
   self animscripts\shared::DoNoteTracks("meleeAnim");
   self notify("end_melee");
 }
-
 endMeleeOnKillanimscript() {
   self endon("end_melee");
   self waittill("killanimscript");

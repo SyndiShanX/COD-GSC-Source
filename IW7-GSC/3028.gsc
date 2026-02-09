@@ -359,7 +359,7 @@ func_75E7(var_0, var_1) {
 #using_animtree("jackal");
 
 func_31A1() {
-  level.var_A065["evasion"] = [ % jackal_vehicle_evade_01, %jackal_vehicle_evade_02, %jackal_vehicle_evade_03, %jackal_vehicle_evade_04, %jackal_vehicle_evade_05, %jackal_vehicle_evade_06, %jackal_vehicle_evade_07, %jackal_vehicle_evade_08];
+  level.var_A065["evasion"] = [%jackal_vehicle_evade_01, %jackal_vehicle_evade_02, %jackal_vehicle_evade_03, %jackal_vehicle_evade_04, %jackal_vehicle_evade_05, %jackal_vehicle_evade_06, %jackal_vehicle_evade_07, %jackal_vehicle_evade_08];
   level.var_A065["evasion_overlay"] = % jackal_evade_overlay;
   level.var_A065["evasion"] = ::scripts\engine\utility::array_randomize(level.var_A065["evasion"]);
 }

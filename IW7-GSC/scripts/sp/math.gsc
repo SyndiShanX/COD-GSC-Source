@@ -108,7 +108,7 @@ func_1E78(var_0, var_1, var_2) {
 
 func_9C85(var_0) {
   var_1 = 0;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_2 = var_0 - self getorigin();
     var_3 = anglesToForward(self getplayerangles(1));
     var_1 = vectordot(var_2, var_3);
@@ -123,7 +123,7 @@ func_9C85(var_0) {
 
 func_9C86(var_0) {
   var_1 = 0;
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_2 = var_0 - self getorigin();
     var_3 = anglestoright(self getplayerangles(1));
     var_1 = vectordot(var_2, var_3);

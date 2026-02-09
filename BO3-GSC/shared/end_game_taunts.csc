@@ -47,7 +47,7 @@ function __init__() {
 
 function check_force_taunt() {
   while(true) {
-    setdvar("", "");
+    setDvar("", "");
     wait(0.05);
     taunt = getdvarstring("");
     if(taunt == "") {
@@ -58,7 +58,7 @@ function check_force_taunt() {
       continue;
     }
     bodytype = getdvarint("", -1);
-    setdvar("", -1);
+    setDvar("", -1);
     if(bodytype >= 0) {
       tauntmodel = spawn_temp_specialist_model(model.localclientnum, bodytype, model.origin, model.angles, model.showcaseweapon);
       model hide();
@@ -76,7 +76,7 @@ function check_force_taunt() {
 
 function check_force_gesture() {
   while(true) {
-    setdvar("", "");
+    setDvar("", "");
     wait(0.05);
     gesture = getdvarstring("");
     if(gesture == "") {

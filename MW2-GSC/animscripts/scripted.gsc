@@ -64,6 +64,6 @@ DebugPrintEndSequence()
 {
 	self endon ("death");
 	self waittill ("end_sequence");
-	/#thread [[anim.println]]("scripted.gsc: \"end_sequence\" was notified.Time: ",GetTime(),".");
+	thread [[anim.println]]("scripted.gsc: \"end_sequence\" was notified.Time: ",GetTime(),".");
 }
 */

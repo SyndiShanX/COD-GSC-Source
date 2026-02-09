@@ -163,7 +163,7 @@ function_87c540c0(jammer, origin, attackingplayer) {
 
   foreach(entity in entities) {
     if(!function_b16c8865(entity, attackingplayer)) {
-      if(!var_480b4b92 && isplayer(entity) && entity hastalent(#"talent_resistance") && util::function_fbce7263(entity.team, attackingplayer.team)) {
+      if(!var_480b4b92 && isPlayer(entity) && entity hastalent(#"talent_resistance") && util::function_fbce7263(entity.team, attackingplayer.team)) {
         attackingplayer damagefeedback::update(undefined, undefined, "resistance", level.var_578f7c6d.weapon);
         var_480b4b92 = 1;
       }
@@ -171,7 +171,7 @@ function_87c540c0(jammer, origin, attackingplayer) {
       continue;
     }
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       thread function_b8c5ab9c(jammer, entity, attackingplayer);
       continue;
     }
@@ -282,7 +282,7 @@ function_ca8a005e(jammer, gadget, attackingplayer) {
 function_4a82368f(entity, owner) {
   assert(isDefined(owner));
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner clientfield::set_to_player("jammedvehpostfx", 1);
   }
 
@@ -292,13 +292,13 @@ function_4a82368f(entity, owner) {
     return;
   }
 
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     owner clientfield::set_to_player("jammedvehpostfx", 0);
   }
 }
 
 function_1c430dad(entity, isjammed) {
-  if(!isplayer(entity) && !isactor(entity)) {
+  if(!isPlayer(entity) && !isactor(entity)) {
     entity clientfield::set("isJammed", isjammed);
   }
 
@@ -311,14 +311,14 @@ function_d88f3e48(entity) {
     return;
   }
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity clientfield::set_to_player("isJammed", 0);
     entity setempjammed(0);
   }
 
   function_1c430dad(entity, 0);
 
-  if(isDefined(entity.weapon) && !isplayer(entity) && isDefined(entity.owner)) {
+  if(isDefined(entity.weapon) && !isPlayer(entity) && isDefined(entity.owner)) {
     function_2eb0a933(entity.weapon, entity.owner);
   }
 }
@@ -351,7 +351,7 @@ function_b16c8865(entity, attackingplayer) {
     return false;
   }
 
-  if(!isplayer(entity) && (!isDefined(entity.model) || entity.model == # "")) {
+  if(!isPlayer(entity) && (!isDefined(entity.model) || entity.model == # "")) {
     return false;
   }
 
@@ -363,7 +363,7 @@ function_b16c8865(entity, attackingplayer) {
     return false;
   }
 
-  if(isplayer(entity) && entity hastalent(#"talent_resistance")) {
+  if(isPlayer(entity) && entity hastalent(#"talent_resistance")) {
     return false;
   }
 

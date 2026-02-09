@@ -10,9 +10,9 @@ main() {
   maps\mp\_load::main();
   ambientplay("ambient_mp_nola");
   maps\mp\_compass::setupminimap("compass_map_mp_nola");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_diffuseColorScale", 1.1);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_diffuseColorScale", 1.1);
   thread maps\mp\mp_nola_scriptlights::main();
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -26,13 +26,13 @@ audio_settings() {
 }
 
 sunshadow_optimization() {
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.ps3) {
-    setdvar("sm_sunShadowScale", "0.5");
+    setDvar("sm_sunShadowScale", "0.5");
   } else {
-    setdvar("sm_sunShadowScale", "0.75");
+    setDvar("sm_sunShadowScale", "0.75");
   }
 }
 

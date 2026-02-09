@@ -102,7 +102,7 @@ onPlayerConnect() {
       player.pers["summary"]["matchStartXp"] = matchStartXp;
     }
 
-    if(GetDvar("virtualLobbyActive") != "1") {
+    if(getDvar("virtualLobbyActive") != "1") {
       player setClientDvar("ui_opensummary", 0);
 
       player thread maps\mp\gametypes\_missions::updateChallenges();
@@ -223,7 +223,7 @@ giveRankXP(type, value, weapon, sMeansOfDeath, challengeName, victim) {
     return;
   }
 
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

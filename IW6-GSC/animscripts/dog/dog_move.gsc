@@ -557,7 +557,7 @@ waitforfollowspeed() {
         var_12 = vectordot(var_11, var_10);
 
         if(var_12 > 0) {
-          if(isplayer(var_9))
+          if(isPlayer(var_9))
             var_13 = lengthsquared(var_9 getentityvelocity());
           else
             var_13 = lengthsquared(var_9.velocity);

@@ -649,10 +649,9 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
   self thread showNoteTrack(note);
 
   if(isAI(self) && self.type == "dog") {
-    if(HandleDogSoundNoteTracks(note)) {
+    if(HandleDogSoundNoteTracks(note)) {}
+    return;
   }
-      return;
-    }
   notetrackFunc = anim.notetracks[note];
   if(isDefined(notetrackFunc)) {
     return [[notetrackFunc]](note, flagName);

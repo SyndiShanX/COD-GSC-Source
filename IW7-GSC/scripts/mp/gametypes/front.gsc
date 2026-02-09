@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("mapname") == "mp_background") {
+  if(getDvar("mapname") == "mp_background") {
     return;
   }
 
@@ -115,7 +115,7 @@ initspawns() {
 }
 
 onspawnplayer() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     scripts\mp\gametypes\common::onspawnplayer();
     self setclientomnvar("ui_uplink_carrier_hud", 0);
     self.inenemybase = 0;
@@ -292,7 +292,7 @@ friendlybasewatcher() {
   self endon("disconnect");
   for(;;) {
     self waittill("trigger", var_0);
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -393,7 +393,7 @@ enableenemybaseoutline() {
   self.outlinetime = gettime();
   self.outlineid = scripts\mp\utility::outlineenableforteam(self, "orange", scripts\mp\utility::getotherteam(self.team), 0, 1, "perk");
   if(!isbot(self)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       scripts\mp\utility::_hudoutlineviewmodelenable(5, 0, 0);
     }
   }
@@ -403,7 +403,7 @@ disableenemybaseoutline() {
   self.useoutline = 0;
   scripts\mp\utility::outlinedisable(self.outlineid, self);
   self.outlineid = undefined;
-  if(!isbot(self) && isplayer(self)) {
+  if(!isbot(self) && isPlayer(self)) {
     scripts\mp\utility::_hudoutlineviewmodeldisable();
   }
 }

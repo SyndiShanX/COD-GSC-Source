@@ -69,8 +69,9 @@ temp_disable_hud_damage() {
   wait 1;
 
   while(true) {
-    while(getdvarint(#"_id_13510208") != 1)
+    while(getdvarint(#"_id_13510208") != 1) {
       wait 0.05;
+    }
 
     level clientnotify("temp_disable_hud_damage");
 
@@ -79,8 +80,9 @@ temp_disable_hud_damage() {
       level.player.e_temp_fx delete();
     }
 
-    while(getdvarint(#"_id_13510208") == 1)
+    while(getdvarint(#"_id_13510208") == 1) {
       wait 0.05;
+    }
 
     level clientnotify("temp_enable_hud_damage");
   }
@@ -139,11 +141,13 @@ global_funcs() {
   add_spawn_function_veh_by_type("civ_police", ::police_car_add_occupants, sp_police_car_rider);
   add_spawn_function_veh_by_type("civ_pickup_red_wturret_la2", ::pickup_add_occupants);
 
-  if(!isDefined(level.green_zone_volume))
+  if(!isDefined(level.green_zone_volume)) {
     level.green_zone_volume = get_ent("green_zone_volume", "targetname", 1);
+  }
 
-  if(!isDefined(level.dogfights_volume))
+  if(!isDefined(level.dogfights_volume)) {
     level.dogfights_volume = get_ent("dogfights_zone", "targetname", 1);
+  }
 
   level.player setclientdvar("cg_aggressiveCullRadius", 100);
   level.player thread toggle_occluders();
@@ -155,8 +159,9 @@ delay_free_vehicle() {
   self waittill("death");
   wait 10;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.dontfreeme = undefined;
+  }
 }
 
 pavelow_tailor_rotor_fire_on_death() {
@@ -177,8 +182,9 @@ clean_up_vehicle_at_air_to_air() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 enable_vehicle_avoidance(radius) {
@@ -191,11 +197,13 @@ police_car_add_occupants(sp_rider) {
   }
   self endon("death");
 
-  if(!isDefined(sp_rider.currently_spawning))
+  if(!isDefined(sp_rider.currently_spawning)) {
     sp_rider.currently_spawning = 0;
+  }
 
-  while(sp_rider.currently_spawning)
+  while(sp_rider.currently_spawning) {
     wait(randomfloatrange(0.05, 0.25));
+  }
 
   sp_rider.currently_spawning = 1;
   ai_rider = simple_spawn_single(sp_rider);
@@ -223,9 +231,9 @@ find_target_after_getout(a_target_ents) {
   while(!b_found_node) {
     nd_best = getclosest(self.origin, a_cover);
 
-    if(!isnodeoccupied(nd_best) && (isDefined(nd_best.script_string) && nd_best.script_string == self.team))
+    if(!isnodeoccupied(nd_best) && (isDefined(nd_best.script_string) && nd_best.script_string == self.team)) {
       b_found_node = 1;
-    else {
+    } else {
       arrayremovevalue(a_cover, nd_best);
       wait 0.05;
     }
@@ -234,8 +242,9 @@ find_target_after_getout(a_target_ents) {
   self setgoalnode(nd_best);
   self delay_thread(randomfloatrange(3, 8), ::bloody_death);
 
-  if(isDefined(a_target_ents))
+  if(isDefined(a_target_ents)) {
     self shoot_at_target(random(a_target_ents), undefined, 0, -1);
+  }
 }
 
 hover_at_spline_end() {
@@ -270,10 +279,11 @@ add_missile_turret_target() {
   v_offset = (0, 0, 0);
 
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
-    if(self.vehicletype == "civ_van_sprinter")
+    if(self.vehicletype == "civ_van_sprinter") {
       v_offset = vectorscale((0, 0, 1), 60.0);
-    else if(self.vehicletype == "civ_bigrig_la2")
+    } else if(self.vehicletype == "civ_bigrig_la2") {
       v_offset = vectorscale((0, 0, 1), 80.0);
+    }
   }
 
   target_set(self, v_offset);
@@ -301,8 +311,9 @@ pickup_disable_turret_on_gunner_death(vh_truck) {
 }
 
 pickup_gunners_dont_take_cougar_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(isDefined(sweapon) && sweapon == "cougar_gun_turret")
+  if(isDefined(sweapon) && sweapon == "cougar_gun_turret") {
     idamage = 1;
+  }
 
   return idamage;
 }
@@ -310,8 +321,9 @@ pickup_gunners_dont_take_cougar_damage(einflictor, eattacker, idamage, idflags, 
 convoy_trigger_setup() {
   a_triggers = get_ent_array("convoy_vehicle_trigger", "script_noteworthy", 1);
 
-  for(i = 0; i < a_triggers.size; i++)
+  for(i = 0; i < a_triggers.size; i++) {
     a_triggers[i] thread convoy_trigger_proc();
+  }
 }
 
 bigrig_add_trailer() {
@@ -333,8 +345,9 @@ bigrig_add_trailer() {
   self.trailer_model show();
   self.trailer_model setModel("veh_t6_civ_18wheeler_trailer_dead");
 
-  if(isDefined(self.model_old))
+  if(isDefined(self.model_old)) {
     self setModel(self.model_old);
+  }
 }
 
 _play_bigrig_trailer_anim() {}
@@ -350,16 +363,18 @@ convoy_trigger_proc() {
   wait 1;
   self delete();
 
-  if(isDefined(t_vehicle_spawn))
+  if(isDefined(t_vehicle_spawn)) {
     t_vehicle_spawn delete();
+  }
 }
 
 plane_midair_deathfx() {
   self waittill("death");
 
   if(flag("convoy_at_dogfight") && !flag("dogfight_done")) {
-    if(isDefined(self) && isDefined(self.origin) && isDefined(self.angles))
+    if(isDefined(self) && isDefined(self.origin) && isDefined(self.angles)) {
       playFX(level._effect["plane_deathfx_small"], self.origin, anglesToForward(self.angles));
+    }
   }
 }
 
@@ -372,10 +387,11 @@ toggle_occluders() {
   while(true) {
     b_is_in_volume = self istouching(e_occluders_on);
 
-    if(b_is_in_volume)
+    if(b_is_in_volume) {
       n_value = 1;
-    else
+    } else {
       n_value = 0;
+    }
 
     enableoccluder("", n_value);
     wait 0.5;
@@ -443,8 +459,9 @@ la_drones_setup() {
   a_drone_triggers_allies = get_ent_array("drone_allies", "targetname");
   a_drone_triggers = arraycombine(a_drone_triggers, a_drone_triggers_allies, 1, 0);
 
-  foreach(drone_trigger in a_drone_triggers)
-  maps\_drones::drones_speed_modifier(drone_trigger.script_string, -0.3, 0.3);
+  foreach(drone_trigger in a_drone_triggers) {
+    maps\_drones::drones_speed_modifier(drone_trigger.script_string, -0.3, 0.3);
+  }
 
   maps\_drones::drones_speed_modifier("warehouse_st_right_blockade", -0.2, 0.4);
   maps\_drones::drones_speed_modifier("hotel_street_breakthrough_drones", 0.0, 0.4);
@@ -464,36 +481,41 @@ _drone_throws_molotov_proc() {
 }
 
 drones_assign_global_spawner(str_side, str_spawner_targetname) {
-  if(str_side == "allies")
+  if(str_side == "allies") {
     str_targetname = "drone_allies";
-  else
+  } else {
     str_targetname = "drone_axis";
+  }
 
   a_drone_spawners = get_ent_array(str_targetname, "targetname", 1);
   sp_drone_model = get_ent(str_spawner_targetname, "targetname", 1);
 
-  for(i = 0; i < a_drone_spawners.size; i++)
+  for(i = 0; i < a_drone_spawners.size; i++) {
     maps\_drones::drones_assign_spawner(a_drone_spawners[i].script_string, sp_drone_model);
+  }
 }
 
 level_start() {
   wait_for_first_player();
 
-  if(getdvar(#"_id_B5F23DCA") != "1") {
+  if(getDvar(#"_id_B5F23DCA") != "1") {
     println("LA_1 ENDING POSITION NOT FOUND. USING DEFAULT LEVEL START CONDITIONS!");
 
     flag_set("G20_1_saved");
     flag_set("G20_2_saved");
   }
 
-  if(isDefined(getdvar(#"_id_CEC8DDF8")) && getdvar(#"_id_CEC8DDF8") == "1")
+  if(isDefined(getDvar(#"_id_CEC8DDF8")) && getDvar(#"_id_CEC8DDF8") == "1") {
     flag_set("F35_pilot_saved");
+  }
 
-  if(isDefined(getdvar(#"_id_E0C8EA9C")) && getdvar(#"_id_E0C8EA9C") == "1")
+  if(isDefined(getDvar(#"_id_E0C8EA9C")) && getDvar(#"_id_E0C8EA9C") == "1") {
     flag_set("G20_1_saved");
+  }
 
-  if(isDefined(getdvar(#"_id_2DC3275D")) && getdvar(#"_id_2DC3275D") == "1")
+  if(isDefined(getDvar(#"_id_2DC3275D")) && getDvar(#"_id_2DC3275D") == "1") {
     flag_set("G20_2_saved");
+  }
 
   println("Anderson saved: " + flag("F35_pilot_saved"));
   println("G20_1 saved: " + flag("G20_1_saved"));
@@ -540,8 +562,9 @@ la_2_objectives() {
   t_f35_bump_trigger = get_ent("f35_bump_trigger", "targetname", 1);
   maps\_objectives::set_objective(level.obj_fly, t_f35_bump_trigger, "breadcrumb");
 
-  while(distance2d(level.player.origin, t_f35_bump_trigger.origin) > 300 || !flag("player_can_board"))
+  while(distance2d(level.player.origin, t_f35_bump_trigger.origin) > 300 || !flag("player_can_board")) {
     wait 0.05;
+  }
 
   maps\_objectives::set_objective(level.obj_fly, t_f35_bump_trigger, "enter");
   level thread objective_f35_hint();
@@ -549,10 +572,11 @@ la_2_objectives() {
   maps\_objectives::set_objective(level.obj_fly, level.f35, "done");
   flag_wait("player_flying");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     maps\_objectives::set_objective(level.obj_follow_van, level.convoy.vh_van, "follow");
-  else
+  } else {
     maps\_objectives::set_objective(level.obj_follow_ambulance, level.convoy.vh_van, "follow");
+  }
 
   flag_wait("roadblock_done");
 
@@ -592,8 +616,9 @@ f35_move_to_position(str_struct_name) {
   s_f35_position = get_struct(str_struct_name, "targetname", 1);
   level.f35.origin = s_f35_position.origin;
 
-  if(isDefined(s_f35_position.angles))
+  if(isDefined(s_f35_position.angles)) {
     level.f35 setphysangles(s_f35_position.angles);
+  }
 
   maps\la_2_player_f35::player_boards_f35();
 }
@@ -605,8 +630,9 @@ convoy_move_to_position(str_struct_names) {
   vh_van = level.convoy.vh_van;
   a_vehicles[a_vehicles.size] = vh_van;
 
-  if(!maps\_skipto::is_after_skipto("f35_dogfights") && maps\_skipto::is_after_skipto("f35_ground_targets"))
+  if(!maps\_skipto::is_after_skipto("f35_dogfights") && maps\_skipto::is_after_skipto("f35_ground_targets")) {
     a_vehicles = arraycombine(a_vehicles, level.convoy.lapd_escort, 1, 0);
+  }
 
   a_structs = get_struct_array(str_struct_names, "targetname", 1);
   assert(a_structs.size >= a_vehicles.size, "missing structs for convoy_move_to_position. Have " + a_structs.size + ", need " + a_vehicles.size);
@@ -698,8 +724,9 @@ convoy_waits_for_player_input() {
   wait 1;
 
   while(!b_player_moving) {
-    if(length(level.player getnormalizedmovement()) > 0.1)
+    if(length(level.player getnormalizedmovement()) > 0.1) {
       b_player_moving = 1;
+    }
 
     wait 0.05;
   }
@@ -710,13 +737,15 @@ convoy_waits_for_player_input() {
   level thread maps\la_2_fly::_autosave_after_bink();
 
   foreach(vehicle in level.convoy.vehicles) {
-    if(is_alive(vehicle))
+    if(is_alive(vehicle)) {
       vehicle setspeed(30);
+    }
   }
 
   foreach(vehicle in level.convoy.lapd_escort) {
-    if(is_alive(vehicle))
+    if(is_alive(vehicle)) {
       vehicle setspeed(30);
+    }
   }
 }
 
@@ -743,8 +772,9 @@ skipto_f35_trenchrun() {
   f35_move_to_position("skipto_f35_trenchrun_struct");
   convoy_move_to_position("skipto_convoy_trenchruns_struct");
 
-  for(i = 0; i < level.convoy.vehicles.size; i++)
+  for(i = 0; i < level.convoy.vehicles.size; i++) {
     level.convoy.vehicles[i] setspeed(30);
+  }
 }
 
 skipto_f35_hotel() {
@@ -781,12 +811,14 @@ getbestmissileturrettarget_f38() {
   a_targets_all = get_array_of_closest(self.origin, a_targets_all, undefined, 10, level.missile_lock_on_range);
 
   for(idx = 0; idx < a_targets_all.size; idx++) {
-    if(self insidemissileturretreticlenolock(a_targets_all[idx]))
+    if(self insidemissileturretreticlenolock(a_targets_all[idx])) {
       a_targets_valid[a_targets_valid.size] = a_targets_all[idx];
+    }
   }
 
-  if(a_targets_valid.size == 0)
+  if(a_targets_valid.size == 0) {
     return undefined;
+  }
 
   e_best_target = a_targets_valid[0];
   n_best_target_index = -1;
@@ -803,8 +835,9 @@ getbestmissileturrettarget_f38() {
     }
   }
 
-  if(n_best_target_index > -1)
+  if(n_best_target_index > -1) {
     e_best_target = a_targets_valid[n_best_target_index];
+  }
 
   return e_best_target;
 }

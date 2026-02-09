@@ -66,10 +66,10 @@ function_7c4ef26b(predictedspawn) {
     return;
   }
 
-  setdvar(#"custom_killstreak_mode", 2);
-  setdvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
-  setdvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
-  setdvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
+  setDvar(#"custom_killstreak_mode", 2);
+  setDvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
+  setDvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
+  setDvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
@@ -348,7 +348,7 @@ function_62449dad() {
           self vehlookat(self.turrettarget);
         }
 
-        helicopterturretmaxangle = getdvar(#"scr_helicopterturretmaxangle", level.helicopterturretmaxangle);
+        helicopterturretmaxangle = getDvar(#"scr_helicopterturretmaxangle", level.helicopterturretmaxangle);
 
         while(isDefined(self.turrettarget) && isalive(self.turrettarget) && self helicopter::turret_target_check(self.turrettarget, helicopterturretmaxangle) == 0) {
           wait 0.1;
@@ -1071,7 +1071,7 @@ function_f75c4ec2(v_target) {
 
 function_868cd9ac() {
   sessionmode = currentsessionmode();
-  setdvar(#"hash_16e650a0fe963515", "<dev string:x84>");
+  setDvar(#"hash_16e650a0fe963515", "<dev string:x84>");
   level flag::init("<dev string:x6d>");
 
   if(sessionmode != 4) {
@@ -1168,6 +1168,6 @@ function_868cd9ac() {
         break;
     }
 
-    setdvar(#"hash_16e650a0fe963515", "<dev string:x84>");
+    setDvar(#"hash_16e650a0fe963515", "<dev string:x84>");
   }
 }

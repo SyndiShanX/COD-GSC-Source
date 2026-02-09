@@ -237,11 +237,11 @@ setup_puzzle_piece_glint() {
 }
 
 setup_devgui() {
-  setdvar("add_afterlife", "off");
-  setdvar("build_plane", "off");
-  setdvar("get_master_key", "off");
-  setdvar("alcatraz_final_battle", "off");
-  setdvar("alcatraz_give_shield", "off");
+  setDvar("add_afterlife", "off");
+  setDvar("build_plane", "off");
+  setDvar("get_master_key", "off");
+  setDvar("alcatraz_final_battle", "off");
+  setDvar("alcatraz_give_shield", "off");
 
   adddebugcommand("devgui_cmd \"Zombies/Alcatraz:1/Add Afterlife\" \"add_afterlife on\"\n");
   adddebugcommand("devgui_cmd \"Zombies/Alcatraz:1/Get Master Key\" \"get_master_key on\"\n");
@@ -258,7 +258,7 @@ setup_devgui() {
 
 watch_devgui_alcatraz_final_battle() {
   while(true) {
-    if(getdvar(#"_id_9624FC9B") == "on") {
+    if(getDvar(#"_id_9624FC9B") == "on") {
       players = getplayers();
 
       foreach(player in players) {
@@ -268,7 +268,7 @@ watch_devgui_alcatraz_final_battle() {
         player thread final_flight_player_thread();
       }
 
-      setdvar("alcatraz_final_battle", "off");
+      setDvar("alcatraz_final_battle", "off");
     }
 
     wait 0.1;
@@ -277,7 +277,7 @@ watch_devgui_alcatraz_final_battle() {
 
 watch_devgui_get_key() {
   while(true) {
-    if(getdvar(#"_id_B1E41F18") == "on") {
+    if(getDvar(#"_id_B1E41F18") == "on") {
       a_players = [];
       a_players = getplayers();
       m_master_key = get_craftable_piece_model("quest_key1", "p6_zm_al_key");
@@ -287,7 +287,7 @@ watch_devgui_get_key() {
         m_master_key setvisibletoall();
       }
 
-      setdvar("get_master_key", "off");
+      setDvar("get_master_key", "off");
     }
 
     wait 0.1;
@@ -296,14 +296,14 @@ watch_devgui_get_key() {
 
 watch_devgui_afterlife() {
   while(true) {
-    if(getdvar(#"_id_51DB321F") == "on") {
+    if(getDvar(#"_id_51DB321F") == "on") {
       a_players = [];
       a_players = getplayers();
 
       for(i = 0; i < a_players.size; i++)
         a_players[i] afterlife_add();
 
-      setdvar("add_afterlife", "off");
+      setDvar("add_afterlife", "off");
     }
 
     wait 0.1;
@@ -312,13 +312,13 @@ watch_devgui_afterlife() {
 
 watch_devgui_give_shield() {
   while(true) {
-    if(getdvar(#"_id_DF65AA39") == "on") {
+    if(getDvar(#"_id_DF65AA39") == "on") {
       foreach(player in getplayers()) {
         if(is_equipment_included("alcatraz_shield_zm"))
           player maps\mp\zombies\_zm_equipment::equipment_buy("alcatraz_shield_zm");
       }
 
-      setdvar("alcatraz_give_shield", "off");
+      setDvar("alcatraz_give_shield", "off");
     }
 
     wait 0.05;
@@ -329,7 +329,7 @@ watch_devgui_plane() {
   is_shortcut_plane_built = 0;
 
   while(!is_shortcut_plane_built) {
-    if(getdvar(#"_id_3C0D12E4") == "on") {
+    if(getDvar(#"_id_3C0D12E4") == "on") {
       iprintlnbold("plane built!");
 
       is_shortcut_plane_built = 1;
@@ -358,7 +358,7 @@ watch_devgui_plane() {
   while(isDefined(t_plane_fly)) {
     t_plane_fly waittill("trigger", e_triggerer);
 
-    if(isplayer(e_triggerer)) {
+    if(isPlayer(e_triggerer)) {
       iprintlnbold(e_triggerer);
 
       if(isDefined(level.custom_plane_validation)) {
@@ -467,7 +467,6 @@ master_key_door_trigger_thread() {
       e_triggerer thread do_player_general_vox("quest", "sidequest_key", undefined, 100);
 
       iprintlnbold("missing key!");
-
     }
   }
 
@@ -1034,7 +1033,7 @@ plane_fly_trigger_thread() {
   while(isDefined(self)) {
     self waittill("trigger", e_triggerer);
 
-    if(isplayer(e_triggerer)) {
+    if(isPlayer(e_triggerer)) {
       if(level.n_plane_fuel_count == 5) {
         if(isDefined(level.custom_plane_validation)) {
           valid = self[[level.custom_plane_validation]](e_triggerer);
@@ -1577,7 +1576,6 @@ manage_electric_chairs() {
         corpse.revivetrigger.origin = m_electric_chair.origin + (64, 0, 32);
 
         corpse.revivetrigger thread print3d_ent("revivetrigger");
-
       }
 
       for(j = 1; j < 5; j++) {
@@ -1636,7 +1634,7 @@ electric_chair_trigger_thread(chair_number) {
     self waittill("trigger", e_triggerer);
     character_name = e_triggerer.character_name;
 
-    if(isplayer(e_triggerer) && is_player_valid(e_triggerer)) {
+    if(isPlayer(e_triggerer) && is_player_valid(e_triggerer)) {
       e_triggerer enableinvulnerability();
       self sethintstring("");
       self trigger_off();
@@ -1774,7 +1772,6 @@ track_player_completed_cycle() {
 reset_plane_hint_string(player) {
   if(isDefined(self.stub)) {
     println("Error: This should have been handled by the craftables callback");
-
   } else
     self.fly_trigger sethintstring(&"ZM_PRISON_PLANE_BEGIN_TAKEOFF");
 }

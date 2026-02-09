@@ -463,7 +463,6 @@ debug_draw_new_attractor_positions() {
       }
 
       debugstar(attract, 6, (1, 0, 0));
-
     }
 
     waitframe(1);

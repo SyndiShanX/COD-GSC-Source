@@ -37,14 +37,14 @@ register_kill(killedEnt, cause) {
   if(isDefined(self.owner))
     player = self.owner;
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     // fix for enemies sometimes blowing themselves up in Spec Ops and then the mission summary
     // says 38/40 kills or whatever, eventhough you had to kill all 40 enemies to win
     if(isDefined(level.pmc_match) && level.pmc_match)
       player = level.players[randomint(level.players.size)];
   }
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
   // overall
@@ -158,11 +158,11 @@ register_new_weapon(weaponName) {
 set_stat_dvars() {
   playerNum = 1;
   foreach(player in level.players) {
-    setdvar("stats_" + playerNum + "_kills_melee", player.stats["kills_melee"]);
-    setdvar("stats_" + playerNum + "_kills_juggernaut", player.stats["kills_juggernaut"]);
-    setdvar("stats_" + playerNum + "_kills_explosives", player.stats["kills_explosives"]);
-    setdvar("stats_" + playerNum + "_kills_vehicle", player.stats["kills_vehicle"]);
-    setdvar("stats_" + playerNum + "_kills_sentry", player.stats["kills_sentry"]);
+    setDvar("stats_" + playerNum + "_kills_melee", player.stats["kills_melee"]);
+    setDvar("stats_" + playerNum + "_kills_juggernaut", player.stats["kills_juggernaut"]);
+    setDvar("stats_" + playerNum + "_kills_explosives", player.stats["kills_explosives"]);
+    setDvar("stats_" + playerNum + "_kills_vehicle", player.stats["kills_vehicle"]);
+    setDvar("stats_" + playerNum + "_kills_sentry", player.stats["kills_sentry"]);
 
     // Sort the weapons used from most used to least used based on kills, then calculate accuracy
     weapons = player get_best_weapons(5);
@@ -174,20 +174,20 @@ set_stat_dvars() {
 
     // Put detailed weapon info into dvars ( name, kills, shots fired, and accuracy )
     for(i = 1; i < 6; i++) {
-      setdvar("stats_" + playerNum + "_weapon" + i + "_name", " ");
-      setdvar("stats_" + playerNum + "_weapon" + i + "_kills", " ");
-      setdvar("stats_" + playerNum + "_weapon" + i + "_shots", " ");
-      setdvar("stats_" + playerNum + "_weapon" + i + "_accuracy", " ");
+      setDvar("stats_" + playerNum + "_weapon" + i + "_name", " ");
+      setDvar("stats_" + playerNum + "_weapon" + i + "_kills", " ");
+      setDvar("stats_" + playerNum + "_weapon" + i + "_shots", " ");
+      setDvar("stats_" + playerNum + "_weapon" + i + "_accuracy", " ");
     }
     for(i = 0; i < weapons.size; i++) {
       if(!isDefined(weapons[i])) {
         break;
       }
 
-      setdvar("stats_" + playerNum + "_weapon" + (i + 1) + "_name", weapons[i].name);
-      setdvar("stats_" + playerNum + "_weapon" + (i + 1) + "_kills", weapons[i].kills);
-      setdvar("stats_" + playerNum + "_weapon" + (i + 1) + "_shots", weapons[i].shots_fired);
-      setdvar("stats_" + playerNum + "_weapon" + (i + 1) + "_accuracy", weapons[i].accuracy + "%");
+      setDvar("stats_" + playerNum + "_weapon" + (i + 1) + "_name", weapons[i].name);
+      setDvar("stats_" + playerNum + "_weapon" + (i + 1) + "_kills", weapons[i].kills);
+      setDvar("stats_" + playerNum + "_weapon" + (i + 1) + "_shots", weapons[i].shots_fired);
+      setDvar("stats_" + playerNum + "_weapon" + (i + 1) + "_accuracy", weapons[i].accuracy + "%");
     }
 
     playerNum++;

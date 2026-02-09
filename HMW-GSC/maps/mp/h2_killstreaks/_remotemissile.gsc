@@ -64,7 +64,6 @@ init() {
     level.missileRemoteLaunchVert = 14000;
     level.missileRemoteLaunchHorz = 7000;
     level.missileRemoteLaunchTargetDist = 1500;
-
   }
 
   //precacheItem( "remotemissile_projectile_mp" );

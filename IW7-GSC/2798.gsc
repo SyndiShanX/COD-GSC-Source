@@ -548,7 +548,7 @@ getactiveplayerlist() {
     if(!scripts\mp\utility\game::isreallyalive(var_2)) {
       continue;
     }
-    if(isplayer(var_2) && var_2.sessionstate != "playing") {
+    if(isPlayer(var_2) && var_2.sessionstate != "playing") {
       continue;
     }
     if(var_2 scripts\mp\killstreaks\killstreaks::isusinggunship() && isDefined(var_2.chopper) && (!isDefined(var_2.chopper.var_BCB4) || !var_2.chopper.var_BCB4)) {
@@ -686,8 +686,7 @@ func_AFDA(var_0) {
   }
   if(isDefined(level.matchrecording_logevent)) {
     if(isDefined(level.matchrecording_generateid) && !isDefined(var_0.logid)) {
-      var_0.logid = [
-        }
+      var_0.logid = [}
         [level.matchrecording_generateid]]();
 
     if(isDefined(var_0.logid)) {
@@ -837,7 +836,7 @@ func_17DC(var_0, var_1) {
 }
 
 finalizespawnpointchoice(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   var_1 = gettime();
@@ -978,11 +977,9 @@ func_67D3(var_0, var_1) {
       var_9.spawnviewpathnodes = var_9 func_8480(getfarnoderadiusdist());
 
       if(!isDefined(var_9.spawnviewpathnodes) || var_9.spawnviewpathnodes.size == 0) {
-        if(isDefined(level.matchrecording_logeventmsg) && var_7 && isplayer(var_9)) {
+        if(isDefined(level.matchrecording_logeventmsg) && var_7 && isPlayer(var_9)) {
           if(!isDefined(var_9.var_A9CC) || var_9.var_A9CC != gettime()) {
-            [
-              [level.matchrecording_logeventmsg]
-            ]("LOG_GENERIC_MESSAGE", gettime(), "WARNING: Could not use TTLOS data for player " + var_9.name);
+            [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "WARNING: Could not use TTLOS data for player " + var_9.name);
             var_9.var_A9CC = gettime();
           }
         }
@@ -998,7 +995,7 @@ func_67D3(var_0, var_1) {
     if(!isDefined(var_5)) {
       var_11 = undefined;
 
-      if(isplayer(var_9)) {
+      if(isPlayer(var_9)) {
         var_11 = var_9 getEye();
       } else {
         var_11 = var_9.origin + (0, 0, 50);
@@ -1012,7 +1009,7 @@ func_67D3(var_0, var_1) {
       var_0.var_B4C4[var_9.var_108DF] = var_5;
     }
 
-    if(isDefined(var_6) && isplayer(var_9)) {
+    if(isDefined(var_6) && isPlayer(var_9)) {
       if(!isDefined(var_0.var_B4A6[var_9.var_108DF]) || var_5 > var_0.var_B4A6[var_9.var_108DF]) {
         var_0.var_B4A6[var_9.var_108DF] = var_6;
       }
@@ -1137,8 +1134,7 @@ func_D91D() {
     if(shoulduseprecomputedlos()) {
       [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "Attempting to use TTLOS Spawning Data...");
     } else {
-      [
-      }
+      [}
       [level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "Using Corner-Trace Spawning System...");
   }
 }

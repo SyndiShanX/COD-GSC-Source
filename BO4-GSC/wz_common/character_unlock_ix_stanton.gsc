@@ -40,7 +40,7 @@ function_1c4b5097(item) {
 }
 
 on_use_perk(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 

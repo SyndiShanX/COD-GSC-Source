@@ -295,7 +295,7 @@ zone_onuseend(var_0, var_1, var_2) {
     }
   }
 
-  if(isplayer(var_1)) {
+  if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_objective_state", 0);
     var_1.ui_dom_securing = undefined;
   }

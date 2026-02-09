@@ -139,17 +139,17 @@ exploding_barrel_death(var_0) {
 }
 
 set_deadquote(var_0) {
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
 }
 
 deadquote_recently_used(var_0) {
-  if(var_0 == getdvar("ui_deadquote_v1"))
+  if(var_0 == getDvar("ui_deadquote_v1"))
     return 1;
 
-  if(var_0 == getdvar("ui_deadquote_v2"))
+  if(var_0 == getDvar("ui_deadquote_v2"))
     return 1;
 
-  if(var_0 == getdvar("ui_deadquote_v3"))
+  if(var_0 == getDvar("ui_deadquote_v3"))
     return 1;
 
   return 0;

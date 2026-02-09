@@ -11,8 +11,8 @@ register() {
 level_init() {
   game["allies"] = "cdc";
   game["axis"] = "cia";
-  setdvar("g_TeamName_Allies", &"ZMUI_CDC_SHORT");
-  setdvar("g_TeamName_Axis", &"ZMUI_CIA_SHORT");
+  setDvar("g_TeamName_Allies", &"ZMUI_CDC_SHORT");
+  setDvar("g_TeamName_Axis", &"ZMUI_CIA_SHORT");
   game["strings"]["allies_win"] = &"ZM_CDC_WIN_MATCH";
   game["strings"]["allies_win_round"] = &"ZM_CDC_WIN_ROUND";
   game["strings"]["allies_mission_accomplished"] = &"ZM_CDC_MISSION_ACCOMPLISHED";
@@ -24,7 +24,7 @@ level_init() {
   game["icons"]["allies"] = "faction_cdc";
   game["colors"]["allies"] = (0, 0, 0);
   game["voice"]["allies"] = "vox_st6_";
-  setdvar("scr_allies", "marines");
+  setDvar("scr_allies", "marines");
   game["strings"]["axis_win"] = &"ZM_CIA_WIN_MATCH";
   game["strings"]["axis_win_round"] = &"ZM_CIA_WIN_ROUND";
   game["strings"]["axis_mission_accomplished"] = &"ZM_CIA_MISSION_ACCOMPLISHED";

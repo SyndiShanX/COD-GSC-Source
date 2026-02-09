@@ -40,7 +40,6 @@ _id_6509() {
       if(maps\_utility::_id_277B(var_3)) {
         if(isDefined(var_3._id_6583)) {
           var_1 = var_3._id_6583;
-
         }
         break;
       }
@@ -171,7 +170,6 @@ _id_658D() {
 
   if(!maps\_utility::_id_0A36()) {
     maps\payback_fx_sp::_id_6504();
-
   }
   common_scripts\utility::flag_wait("sandstorm_script_trigger");
   maps\_utility::_id_1425("save_sandstorm");
@@ -326,7 +324,6 @@ _id_6599() {
 
   if(var_1 < 600) {
     return 0;
-
   }
   var_0 = vectornormalize(var_0);
   var_2 = vectornormalize(self.goalpos - self.origin);
@@ -334,7 +331,6 @@ _id_6599() {
 
   if(var_3 < -0.5) {
     return 0;
-
   }
   return 1;
 }
@@ -450,7 +446,6 @@ _id_65A0(var_0) {
 
     if(randomfloat(10) > 5) {
       var_2 maps\payback_sandstorm_code::_id_648A();
-
     }
     var_2 thread _id_65A3(350);
   }
@@ -472,7 +467,6 @@ _id_65A2(var_0) {
   if(isDefined(self) && isalive(self)) {
     if(!isDefined(var_0)) {
       wait(randomfloatrange(0.25, 1.0));
-
     }
     self.ignoreall = 0;
     self.ignoreme = 0;
@@ -482,13 +476,11 @@ _id_65A2(var_0) {
 
     if(isDefined(var_0)) {
       self getenemyinfo(var_0);
-
     }
     self._id_20AF = 0.15;
 
     if(isDefined(self) && isalive(self)) {
       self setgoalpos(self.origin);
-
     }
     var_1 = getent("fight_zone", "targetname");
     var_2 = getnode(var_1.target, "targetname");
@@ -774,7 +766,6 @@ _id_65B4(var_0) {
     common_scripts\utility::flag_wait("uaz_guys_dead");
   } else {
     common_scripts\utility::flag_set("uaz_guys_dead");
-
   }
   _id_6585("sandstorm_move_to_alley");
   wait 2;
@@ -970,7 +961,6 @@ _id_65C1(var_0, var_1) {
 _id_65C2(var_0) {
   if(randomfloat(100) < 75) {
     maps\payback_sandstorm_code::_id_648A();
-
   }
   maps\_utility::_id_2724(10);
   self setgoalpos(self.origin);
@@ -995,7 +985,6 @@ _id_65C4(var_0, var_1) {
 
   if(isDefined(var_1) && (!isDefined(self.script_noteworthy) || isDefined(self.script_noteworthy) && self.script_noteworthy != "no_intterupt")) {
     level endon(var_1);
-
   }
   maps\_utility::_id_2724(100);
   self setgoalnode(var_0);
@@ -1045,7 +1034,6 @@ _id_65C7(var_0) {
 
   if(!isDefined(var_0)) {
     wait(randomfloatrange(0.5, 2.0));
-
   }
   if(isDefined(self) && isalive(self)) {
     self.ignoreme = 0;

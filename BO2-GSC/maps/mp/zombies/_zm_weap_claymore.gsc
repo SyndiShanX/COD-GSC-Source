@@ -348,7 +348,7 @@ satchel_damage() {
     }
     self.health = self.maxhealth;
 
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     if(isDefined(self.owner) && attacker == self.owner) {

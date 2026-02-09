@@ -107,15 +107,14 @@ checkForReinforcements() {
       } else if(i < 100) {
         typeAvailable = 3;
       }
-
     }
 
     if(GetDvarInt("scr_force_reinforcements", 0) > 0) {
       typeAvailable = GetDvarInt("scr_force_reinforcements", 0);
     }
 
-    SetDvar("scr_force_reinforcements_randomly", 0);
-    SetDvar("src_force_reinforcements", 0);
+    setDvar("scr_force_reinforcements_randomly", 0);
+    setDvar("src_force_reinforcements", 0);
   }
 
   storePendingReinforcement(typeAvailable);
@@ -236,7 +235,7 @@ waitForReinforcementOfType(type, timeMS) {
 }
 
 giveReinforcementOfType(type) {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 

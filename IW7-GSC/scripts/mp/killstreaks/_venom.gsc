@@ -293,7 +293,7 @@ func_13279() {
     }
 
     var_0 setclientomnvar("ui_killstreak_health", self.var_EDD7 / 10);
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       scripts\mp\killstreaks\killstreaks::killstreakhit(var_2, var_10, self, var_5);
       if(isDefined(var_10) && var_10 == "concussion_grenade_mp") {
         if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_2))) {

@@ -26,7 +26,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 6; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_body";
   var_0[1]._id_24F2 = "tag_body";

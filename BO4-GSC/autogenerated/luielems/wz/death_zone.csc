@@ -28,7 +28,6 @@ class cdeath_zone: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("shutdown_sec", 1, 9, "int", var_fd61f748);
   }
-
 }
 
 register(uid, var_fd61f748) {

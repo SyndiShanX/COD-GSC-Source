@@ -49,7 +49,7 @@ function_23a9e4af(localclientnum) {
     wait 0.1;
   }
 
-  if(isplayer(self.owner) && self.owner function_21c0fa55()) {
+  if(isPlayer(self.owner) && self.owner function_21c0fa55()) {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkActive"), 1);
     self setcompassicon("icon_minimap_hawk");
     self function_811196d1(0);
@@ -201,7 +201,7 @@ function_2e07be71(localclientnum) {
   if(isDefined(var_3216cebd)) {
     hawk_owner = getentbynum(localclientnum, var_3216cebd);
 
-    if(isDefined(hawk_owner) && isplayer(hawk_owner) && hawk_owner function_21c0fa55()) {
+    if(isDefined(hawk_owner) && isPlayer(hawk_owner) && hawk_owner function_21c0fa55()) {
       setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkActive"), 0);
     }
   }
@@ -253,7 +253,7 @@ function_5a1bf101(localclientnum) {
   stance_offsets[# "crouch"] = (0, 0, 40);
   stance_offsets[# "prone"] = (0, 0, 12);
 
-  while(isDefined(hawk_owner) && isplayer(hawk_owner) && hawk_owner function_21c0fa55()) {
+  while(isDefined(hawk_owner) && isPlayer(hawk_owner) && hawk_owner function_21c0fa55()) {
     if(hawk_owner isremotecontrolling(localclientnum)) {
       if(!isinvehicle(localclientnum, self) && isDefined(hawk_owner.weapon) && hawk_owner.weapon.statname == # "remote_missile") {
         if(var_c0443ab2) {
@@ -289,7 +289,7 @@ function_5a1bf101(localclientnum) {
       var_8347ac20 = getuimodelvalue(var_15d793e8[ti]);
       target_player = getentbynum(localclientnum, var_8347ac20);
 
-      if(!isDefined(target_player) || !isplayer(target_player)) {
+      if(!isDefined(target_player) || !isPlayer(target_player)) {
         var_6c8b920a[ti] = undefined;
         continue;
       }

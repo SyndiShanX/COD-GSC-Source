@@ -10,7 +10,7 @@
 main() {
   precacheFX();
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_carentan_fx::main();
 }
 

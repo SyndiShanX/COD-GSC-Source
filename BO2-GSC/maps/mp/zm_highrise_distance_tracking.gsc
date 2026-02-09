@@ -323,7 +323,7 @@ zombies_off_building() {
   while(true) {
     self waittill("trigger", who);
 
-    if(!isplayer(who) && !(isDefined(who.is_leaper) && who.is_leaper)) {
+    if(!isPlayer(who) && !(isDefined(who.is_leaper) && who.is_leaper)) {
       zombies = getaiarray("axis");
 
       if(zombies.size + level.zombie_total > 24 || zombies.size + level.zombie_total <= 24 && who.health >= who.maxhealth) {

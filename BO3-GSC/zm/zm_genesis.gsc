@@ -147,17 +147,17 @@ function main() {
   zm::register_actor_damage_callback(&function_82800a29);
   zm::register_vehicle_damage_callback(&function_68a54382);
   spawner::add_archetype_spawn_function("zombie", &zm_genesis_ai_spawning::function_47b2f1f4);
-  setdvar("doublejump_enabled", 1);
-  setdvar("playerEnergy_enabled", 1);
-  setdvar("wallrun_enabled", 1);
-  setdvar("waypointVerticalSeparation", -2001);
-  setdvar("bg_freeCamClipMaxDist", 4000);
+  setDvar("doublejump_enabled", 1);
+  setDvar("playerEnergy_enabled", 1);
+  setDvar("wallrun_enabled", 1);
+  setDvar("waypointVerticalSeparation", -2001);
+  setDvar("bg_freeCamClipMaxDist", 4000);
   level.debug_keyline_zombies = 0;
   level construct_idgun_weapon_array();
   zm::init_fx();
   zm_genesis_fx::main();
   zm_genesis_amb::main();
-  setdvar("zm_wasp_open_spawning", 1);
+  setDvar("zm_wasp_open_spawning", 1);
   zm_genesis_wasp::init();
   zm_genesis_apothicon_fury::function_51dd865c();
   zm_genesis_keeper::function_51dd865c();
@@ -184,7 +184,7 @@ function main() {
   level.zombiemode_reusing_pack_a_punch = 1;
   level._zombie_custom_spawn_logic = &function_dcf0070e;
   level.minigun_damage_adjust_override = &function_83937162;
-  setdvar("tu13_ai_useModifiedPushActors", 1);
+  setDvar("tu13_ai_useModifiedPushActors", 1);
   level.speed_change_round = 9;
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 4);
   level.do_randomized_zigzag_path = 1;
@@ -228,8 +228,8 @@ function main() {
   level thread sndfunctions();
   level thread zm_genesis_util::function_1f006e62();
   zombie_utility::set_zombie_var("below_world_check", -4000);
-  setdvar("hkai_pathfindIterationLimit", 4000);
-  setdvar("dlc2_fix_scripted_looping_linked_animations", 1);
+  setDvar("hkai_pathfindIterationLimit", 4000);
+  setDvar("dlc2_fix_scripted_looping_linked_animations", 1);
   level thread function_632e15ea();
   zm_genesis_ffotd::main_end();
   level thread zm_genesis_ee_quest::function_26bc55e3();
@@ -783,7 +783,7 @@ function function_b51f6175(zombie, enemy) {
     }
   }
   if(zombie.archetype == "mechz") {
-    if(isplayer(enemy) && enemy iswallrunning()) {
+    if(isPlayer(enemy) && enemy iswallrunning()) {
       position = getclosestpointonnavmesh(enemy.origin, 256, 30);
       if(isDefined(position)) {
         enemy.last_valid_position = position;

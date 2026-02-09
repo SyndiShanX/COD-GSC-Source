@@ -328,7 +328,6 @@ removeMPDamPlayer(player, disconnected) {
       turret SetMode("manual");
       turret SetTargetEntity(level.DamDefaultAimEnt);
     }
-
   }
 
   level.mp_dam_player = undefined;

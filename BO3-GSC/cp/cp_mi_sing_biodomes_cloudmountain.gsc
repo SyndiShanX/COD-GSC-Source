@@ -152,7 +152,7 @@ function function_7ec07da9() {
   objectives::hide_for_target("cp_level_biodomes_siegebot", self);
   wait(1);
   battlechatter::function_d9f49fba(0);
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     level dialog::player_say("plyr_siege_bot_is_s_o_l_0");
     var_7a45cb6d = "hendricks";
   } else {

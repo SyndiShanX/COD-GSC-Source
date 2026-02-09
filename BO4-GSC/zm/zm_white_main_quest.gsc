@@ -665,7 +665,6 @@ function_5391159f() {
           self.s_unitrigger.var_9c74d1b8 = 1;
 
           iprintlnbold("<dev string:x5c>" + self.s_unitrigger.n_position + "<dev string:x65>");
-
         }
       } else if(self.s_unitrigger.is_selected) {
         level flag::clear(#"hash_ef15c4b3a1dfd31" + self.s_unitrigger.n_position);
@@ -791,7 +790,6 @@ function_2193794() {
             self.s_unitrigger.var_9c74d1b8 = 1;
 
             iprintlnbold("<dev string:x5c>" + self.s_unitrigger.n_position + "<dev string:x65>");
-
           }
         } else if(self.s_unitrigger.is_selected) {
           level flag::clear(#"hash_ef15c4b3a1dfd31" + self.s_unitrigger.n_position);
@@ -1291,7 +1289,7 @@ function_7cd1bff1() {
 }
 
 function_950562c0(s_params) {
-  if(isplayer(s_params.eattacker) && level flag::get(#"hash_13e9bb1de846d022") && !level flag::get(#"hash_63d6d5191ca09cae")) {
+  if(isPlayer(s_params.eattacker) && level flag::get(#"hash_13e9bb1de846d022") && !level flag::get(#"hash_63d6d5191ca09cae")) {
     n_distance = distance(self.origin, level.var_eac33019.origin);
 
     if(n_distance < 128 && s_params.weapon.name == # "galvaknuckles_t8" && level.var_eac33019.is_active === 0) {
@@ -1734,7 +1732,6 @@ zm_white_main_quest_step9_setup(var_5ea5c94d) {
     level flag::wait_till(#"hash_5aa1c9627e8626e0");
 
     iprintlnbold("<dev string:xbb>");
-
   }
 }
 
@@ -2188,7 +2185,6 @@ function_c349b9ef() {
         self.var_8ad92463 = 0;
 
         iprintlnbold("<dev string:x182>" + self.var_580ff2bd);
-
       } else if(self.var_eb58e513) {
         self.var_8ad92463 += 1;
       }
@@ -2532,12 +2528,12 @@ function_931fd8c2() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(level flag::get(#"hash_bbe0772d001265") && !level flag::get(#"hash_4ad92dd97af40a26") && isplayer(s_result.attacker) && level.var_1409b3a9) {
+    if(level flag::get(#"hash_bbe0772d001265") && !level flag::get(#"hash_4ad92dd97af40a26") && isPlayer(s_result.attacker) && level.var_1409b3a9) {
       level function_3937a01d(s_result.attacker);
       continue;
     }
 
-    if(s_result.mod === "MOD_MELEE" && isplayer(s_result.attacker) && level.var_1409b3a9) {
+    if(s_result.mod === "MOD_MELEE" && isPlayer(s_result.attacker) && level.var_1409b3a9) {
       level function_3937a01d(s_result.attacker);
     }
   }
@@ -3445,7 +3441,7 @@ function_431ee8fc() {
       continue;
     }
 
-    if(isplayer(s_result.attacker) && !level.var_ca750e86) {
+    if(isPlayer(s_result.attacker) && !level.var_ca750e86) {
       level.var_ca750e86 = 1;
       level thread function_ee37a268();
     }
@@ -3606,12 +3602,10 @@ function_795df0c2() {
 
     if(n_elapsed_time == 5) {
       iprintlnbold("<dev string:x1d6>");
-
     }
 
     if(n_elapsed_time == 10) {
       iprintlnbold("<dev string:x1ed>");
-
     }
   }
 }
@@ -4013,7 +4007,7 @@ function_edd35668(e_player) {
 
 function_cdcaffd1(var_88206a50, ent) {
   vol_test = getent(var_88206a50.target, "targetname");
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && ent istouching(vol_test);
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && ent istouching(vol_test);
 }
 
 mannequin_activate(n_difficulty) {
@@ -4372,7 +4366,6 @@ soul_captured(var_f0e6c7a2, ent) {
     var_c286216d = n_souls_required - level.n_captured;
     debug2dtext((720, 155, 0), "<dev string:x2ff>" + var_c286216d, (1, 1, 0), 1, (0, 0, 0), 0.5, 1, 40);
   }
-
 }
 
 function_62156542(str_identifier) {

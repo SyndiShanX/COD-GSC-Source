@@ -27,8 +27,8 @@ func_967C() {
 }
 
 main() {
-  if(getdvar("mg42") == "") {
-    setdvar("mgTurret", "off");
+  if(getDvar("mg42") == "") {
+    setDvar("mgTurret", "off");
   }
 
   level.var_B153 = 24;
@@ -299,7 +299,7 @@ func_DC9D(var_0) {
   self endon("stopfiring");
   self settargetentity(var_0);
   for(;;) {
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0.origin = self.var_B319 getorigin();
     } else {
       var_0.origin = self.var_B319.origin;
@@ -563,7 +563,7 @@ func_B6A4(var_0, var_1) {
   var_2 = spawn("script_origin", (0, 0, 0));
   var_3 = spawn("script_model", (0, 0, 0));
   var_3.var_EB9C = 3;
-  if(getdvar("mg42") != "off") {
+  if(getDvar("mg42") != "off") {
     var_3 setModel("temp");
   }
 
@@ -737,7 +737,7 @@ func_BC9D(var_0, var_1, var_2) {
 }
 
 func_116C2(var_0, var_1) {
-  if(getdvar("mg42") == "off") {
+  if(getDvar("mg42") == "off") {
     return;
   }
 
@@ -868,7 +868,7 @@ func_B6A9(var_0, var_1, var_2) {
     self.var_C0 = 2;
     if(!var_0) {
       var_5 = self func_8165();
-      if(!isalive(var_5) || isplayer(var_5)) {
+      if(!isalive(var_5) || isPlayer(var_5)) {
         wait(0.05);
         continue;
       } else {

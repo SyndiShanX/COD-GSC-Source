@@ -297,7 +297,7 @@ function_eebc7e40(s_target, str_notify) {
     s_result = s_target.t_damage waittill(#"damage");
     s_target.t_damage.health += s_result.amount;
 
-    if(isplayer(s_result.inflictor)) {
+    if(isPlayer(s_result.inflictor)) {
       var_8f1e485e = isDefined(s_result.weapon.isriotshield) && s_result.weapon.isriotshield && (s_result.mod === "MOD_PROJECTILE" || s_result.mod === "MOD_PROJECTILE_SPLASH");
 
       if(var_8f1e485e && isDefined(s_result.inflictor.var_b4f85096) && s_result.inflictor.var_b4f85096) {
@@ -384,7 +384,7 @@ function_f26aeec5() {
 }
 
 function_b252fc5(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isplayer(attacker) && isDefined(attacker.var_b4f85096) && attacker.var_b4f85096) {
+  if(isPlayer(attacker) && isDefined(attacker.var_b4f85096) && attacker.var_b4f85096) {
     if(isDefined(attacker.var_b0cde18d) && attacker.var_b0cde18d && self.zm_ai_category == # "basic") {
       if(self.archetype == # "zombie" && !zm_utility::is_magic_bullet_shield_enabled(self)) {
         mdl_fx = util::spawn_model(#"tag_origin", self gettagorigin("j_spine4"), self gettagangles("j_spine4"));
@@ -572,7 +572,7 @@ reflect_vo() {
 
   s_result = level waittill(#"monument_shot");
 
-  if(isplayer(s_result.e_player)) {
+  if(isPlayer(s_result.e_player)) {
     s_result.e_player zm_audio::create_and_play_dialog(#"generic", #"response_positive");
   }
 }
@@ -715,7 +715,7 @@ function_47c0d27() {
 
     if(isDefined(self)) {
       if(s_result.e_entity === self && self == level.var_67c7040c) {
-        if(isplayer(s_result.player) && isDefined(s_result.player.var_a56de6e0) && s_result.player.var_a56de6e0) {
+        if(isPlayer(s_result.player) && isDefined(s_result.player.var_a56de6e0) && s_result.player.var_a56de6e0) {
           self notify(#"monument_shot");
           s_result.player notify(#"monument_shot");
           level notify(#"monument_shot", {
@@ -1111,7 +1111,7 @@ function_8b20a029() {
     s_result = t_damage waittill(#"damage");
     t_damage.health += s_result.amount;
 
-    if(isplayer(s_result.inflictor)) {
+    if(isPlayer(s_result.inflictor)) {
       t_damage delete();
       var_61550b0 = 1;
 
@@ -1188,7 +1188,7 @@ function_8b20a029() {
       t_damage.health += s_result.amount;
       var_db76a822 = level.a_mdl_statues[0] function_b35c1d18() || level.a_mdl_statues[1] function_b35c1d18() || level.a_mdl_statues[2] function_b35c1d18();
 
-      if(isplayer(s_result.inflictor) && s_result.weapon === getweapon(#"zhield_zpear_turret") && var_db76a822) {
+      if(isPlayer(s_result.inflictor) && s_result.weapon === getweapon(#"zhield_zpear_turret") && var_db76a822) {
         t_damage delete();
         var_32071ca7 = 1;
         level.var_720c7171 = s_result.inflictor;
@@ -1329,7 +1329,7 @@ function_a0111782(var_99fea1a4) {
     var_2f3fee37 = abs(self.origin[self.n_axis] - var_99fea1a4.origin[self.n_axis]);
 
     if(var_99fea1a4.var_d5b27ae8 && var_2f3fee37 <= 3.9) {
-      if(isplayer(s_result.inflictor) && isDefined(s_result.weapon.isriotshield) && s_result.weapon.isriotshield) {
+      if(isPlayer(s_result.inflictor) && isDefined(s_result.weapon.isriotshield) && s_result.weapon.isriotshield) {
         if(!(isDefined(level.var_2a3c1c63) && level.var_2a3c1c63)) {
           level.var_2a3c1c63 = 1;
           s_result.inflictor thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");
@@ -1599,7 +1599,7 @@ function_2ee0f84b() {
   level thread function_bb660b8a();
   s_result = level waittill(#"hash_1e533dd76c452301");
 
-  if(isplayer(s_result.e_player)) {
+  if(isPlayer(s_result.e_player)) {
     s_result.e_player zm_audio::create_and_play_dialog(#"generic", #"response_positive");
   }
 }
@@ -1608,7 +1608,7 @@ function_bb660b8a() {
   level endon(#"shoot_roots_completed");
   s_result = level waittill(#"hash_22f69672129581f6");
 
-  if(isplayer(s_result.e_player)) {
+  if(isPlayer(s_result.e_player)) {
     s_result.e_player zm_audio::create_and_play_dialog(#"generic", #"response_negative");
   }
 }
@@ -5725,7 +5725,7 @@ mid_igc_setup(b_skipped) {
   a_ai_blight_father = getaiarchetypearray(#"blight_father");
 
   foreach(e_actor in array(e_stanton, e_bruno)) {
-    if(!isplayer(e_actor)) {
+    if(!isPlayer(e_actor)) {
       return;
     }
 
@@ -5786,8 +5786,8 @@ mid_igc_setup(b_skipped) {
     return;
   }
 
-  setdvar(#"cg_disableplayernames", 1);
-  setdvar(#"hash_2d5b0d6d4ce995d7", 0);
+  setDvar(#"cg_disableplayernames", 1);
+  setDvar(#"hash_2d5b0d6d4ce995d7", 0);
   zm_red_challenges::pause_challenges(1);
   s_blood.var_9f2db310 = 1;
 
@@ -6022,8 +6022,8 @@ mid_igc_cleanup(b_skipped, var_19e802fa) {
   }
 
   s_blood.var_9f2db310 = 0;
-  setdvar(#"cg_disableplayernames", 0);
-  setdvar(#"hash_2d5b0d6d4ce995d7", 1);
+  setDvar(#"cg_disableplayernames", 0);
+  setDvar(#"hash_2d5b0d6d4ce995d7", 1);
   zm_vo::function_769aa73b("post_mid_banter", array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6"), array(#"hash_3e63362aea484e09", #"hash_5a906d7137467771"));
   callback::on_connect(&function_dcc3c705);
 

@@ -96,11 +96,11 @@ onstartgametype() {
   }
 
   if(scripts\mp\utility::inovertime()) {
-    setdvar("ui_override_halftime", 0);
+    setDvar("ui_override_halftime", 0);
   } else if(game["switchedsides"]) {
-    setdvar("ui_override_halftime", 2);
+    setDvar("ui_override_halftime", 2);
   } else {
-    setdvar("ui_override_halftime", 1);
+    setDvar("ui_override_halftime", 1);
   }
 
   if(!isDefined(game["original_defenders"])) {
@@ -669,7 +669,7 @@ onpickup(var_0) {
     scripts\mp\utility::leaderdialog("flag_returned", var_1, "status");
     var_0 scripts\mp\utility::incperstat("returns", 1);
     var_0 scripts\mp\persistence::statsetchild("round", "returns", var_0.pers["returns"]);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0 scripts\mp\utility::setextrascore1(var_0.pers["returns"]);
     }
 
@@ -852,7 +852,7 @@ onuse(var_0) {
 
     var_0 scripts\mp\utility::incperstat("captures", 1);
     var_0 scripts\mp\persistence::statsetchild("round", "captures", var_0.pers["captures"]);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_0 scripts\mp\utility::setextrascore0(var_0.pers["captures"]);
     }
 
@@ -1045,7 +1045,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     var_12 = var_0 == var_1;
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != self.pers["team"]) {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1.pers["team"] != self.pers["team"]) {
     if(isDefined(var_1.carryflag) && var_12) {
       var_1 thread scripts\mp\awards::givemidmatchaward("mode_ctf_kill_with_flag");
       var_10 = 1;
@@ -1133,8 +1133,8 @@ setspecialloadouts() {
 removeflag() {
   level endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devRemoveDomFlag", "") != "") {
-      var_0 = getdvar("scr_devRemoveDomFlag", "");
+    if(getDvar("scr_devRemoveDomFlag", "") != "") {
+      var_0 = getDvar("scr_devRemoveDomFlag", "");
       if(var_0 == "_a") {
         var_1 = "allies";
       } else {
@@ -1187,8 +1187,8 @@ removeflag() {
 placeflag() {
   level endon("game_ended");
   for(;;) {
-    if(getdvar("scr_devPlaceDomFlag", "") != "") {
-      var_0 = getdvar("scr_devPlaceDomFlag", "");
+    if(getDvar("scr_devPlaceDomFlag", "") != "") {
+      var_0 = getDvar("scr_devPlaceDomFlag", "");
       if(var_0 == "_a") {
         var_1 = "allies";
       } else {

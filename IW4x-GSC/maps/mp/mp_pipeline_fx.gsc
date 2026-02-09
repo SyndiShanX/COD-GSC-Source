@@ -22,7 +22,6 @@ main() {
   level._effect["dust_ceiling_ash_large"] = loadfx("dust/dust_ceiling_ash_large");
   level._effect["ash_spiral_runner"] = loadfx("dust/ash_spiral_runner");
 
-  /#		
-  if(getdvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1")
     maps\createfx\mp_pipeline_fx::main();
 }

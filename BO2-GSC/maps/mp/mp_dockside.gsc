@@ -35,8 +35,8 @@ main() {
   spawncollision("collision_clip_64x64x64", "collider", (1095, 1489, -111), (0, 0, 0));
   spawncollision("collision_clip_32x32x32", "collider", (1079, 1441, -97), (0, 0, 0));
   spawncollision("collision_clip_wall_128x128x10", "collider", (-1791, 2954, -23), vectorscale((0, 1, 0), 270.0));
-  setdvar("sm_sunsamplesizenear", 0.39);
-  setdvar("sm_sunshadowsmall", 1);
+  setDvar("sm_sunsamplesizenear", 0.39);
+  setDvar("sm_sunshadowsmall", 1);
 
   if(getgametypesetting("allowMapScripting"))
     level maps\mp\mp_dockside_crane::init();
@@ -76,7 +76,7 @@ water_trigger_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       entity playSound("mpl_splash_death");
       playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
     }
@@ -118,11 +118,11 @@ rts_remove() {
 }
 
 devgui_dockside() {
-  setdvar("devgui_notify", "");
+  setDvar("devgui_notify", "");
 
   for(;;) {
     wait 0.5;
-    devgui_string = getdvar(#"devgui_notify");
+    devgui_string = getDvar(#"devgui_notify");
 
     switch (devgui_string) {
       case "":
@@ -134,10 +134,9 @@ devgui_dockside() {
         break;
     }
 
-    if(getdvar(#"devgui_notify") != "")
-      setdvar("devgui_notify", "");
+    if(getDvar(#"devgui_notify") != "")
+      setDvar("devgui_notify", "");
   }
-
 }
 
 crane_print_dvars() {
@@ -152,7 +151,6 @@ crane_print_dvars() {
 
   foreach(dvar in dvars) {
     print(dvar + ": ");
-    println(getdvar(dvar));
+    println(getDvar(dvar));
   }
-
 }

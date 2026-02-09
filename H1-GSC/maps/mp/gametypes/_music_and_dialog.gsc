@@ -144,7 +144,7 @@ onplayerspawned() {
   self endon("disconnect");
   self waittill("spawned_player");
 
-  if(getdvar("virtuallobbyactive") == "0") {
+  if(getDvar("virtuallobbyactive") == "0") {
     if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
       if(!maps\mp\_utility::issecondarysplitscreenplayer())
         self playlocalsound(game["music"]["spawn_" + self.team]);
@@ -251,7 +251,7 @@ ongameended() {
         continue;
       }
 
-      if(isDefined(var_0) && isplayer(var_0) && var_2 == var_0) {
+      if(isDefined(var_0) && isPlayer(var_0) && var_2 == var_0) {
         var_2 playlocalsound(game["music"]["victory_" + var_2.pers["team"]]);
         continue;
       }
@@ -269,7 +269,7 @@ roundwinnerdialog() {
   if(var_1 > 0)
     wait(var_1);
 
-  if(!isDefined(var_0) || isplayer(var_0)) {
+  if(!isDefined(var_0) || isPlayer(var_0)) {
     return;
   }
   if(var_0 == "allies") {
@@ -288,7 +288,7 @@ gamewinnerdialog() {
   if(var_1 > 0)
     wait(var_1);
 
-  if(!isDefined(var_0) || isplayer(var_0)) {
+  if(!isDefined(var_0) || isPlayer(var_0)) {
     return;
   }
   if(var_0 == "allies") {
@@ -308,7 +308,7 @@ gamewinnerdialog() {
 musiccontroller() {
   level endon("game_ended");
 
-  if(!level.hardcoremode && getdvar("virtualLobbyActive") == "0")
+  if(!level.hardcoremode && getDvar("virtualLobbyActive") == "0")
     thread suspensemusic();
 
   level waittill("match_ending_soon", var_0);

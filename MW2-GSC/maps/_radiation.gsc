@@ -376,7 +376,7 @@ radiation_kill() {
   assert(!isAlive(self));
   // Avoid the radiation zones.\nListen for the clicks of the Geiger counter.
   quote = &"SCRIPT_RADIATION_DEATH";
-  setdvar("ui_deadquote", quote);
+  setDvar("ui_deadquote", quote);
 }
 
 fadeinBlackOut(duration, alpha, blur, player) {

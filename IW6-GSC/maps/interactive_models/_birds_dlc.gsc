@@ -371,7 +371,7 @@ birds_fly(start_perch) {
 
     wait(pauseStart);
 
-    /#self thread debugprint( "Accelerating" );
+    self thread debugprint("Accelerating");
     Distance = 0;
     while(speed < (topSpeedFrame - accnFrame)) {
       speed += accnFrame;
@@ -379,7 +379,7 @@ birds_fly(start_perch) {
       posVel = flock_setFlyingPosAndAngles(birdPath, distance, pathLength, speed, angleChange);
       wait 0.05;
     }
-    /#self thread debugprint( "Cruising" );
+    self thread debugprint("Cruising");
 
     speed = topSpeedFrame;
     while(Distance < (pathLength - distanceDecelerating)) {
@@ -392,7 +392,7 @@ birds_fly(start_perch) {
       assert(0);
     }
 
-    /#self thread debugprint( "Decelerating" );
+    self thread debugprint("Decelerating");
 
     distanceToTravel = pathLength - Distance;
     speedAdjust = distanceToTravel / distanceDecelerating;
@@ -410,7 +410,7 @@ birds_fly(start_perch) {
     }
 
     if(speed <= 0) {
-      /#self thread debugprint( "Waiting for birds to land" );
+      self thread debugprint("Waiting for birds to land");
 
       AssertEx(abs(Distance - pathLength) < 0.1, "Please let Boon know that his bird path function failed to hit the end spot perfectly.");
       self.origin = self.perch.origin;
@@ -422,10 +422,10 @@ birds_fly(start_perch) {
       }
       if(birds_isPerchSafe(self.perch)) {
         self.landed = 1;
-        /#self thread debugprint( "Landed safely" );
+        self thread debugprint("Landed safely");
       }
     } else {
-      /#self thread debugprint( "Moving to new path" );
+      self thread debugprint("Moving to new path");
 
       mainPath = self.perch.outgoing[RandomInt(self.perch.outgoing.size)];
       birdpath = birds_path_move_first_point(mainPath, posVel["pos"], posVel["vel"] * (speed / topSpeedFrame));
@@ -480,7 +480,6 @@ birds_set_flying_angles(birdFlock, flockVel, birds) {
         thread draw_line_for_time(tagOrigin, tagOrigin + tagForward, 1, 0, 0, 0.1);
         thread draw_line_for_time(tagOrigin, tagOrigin + flockVel, 0, 1, 0, 0.1);
       }
-
     }
   }
 }
@@ -510,7 +509,6 @@ flock_setFlyingPosAndAngles(birdPath, distance, pathLength, speed, angleChange) 
       }
     }
     self.angles += angleChange;
-
   }
 
   return posVel;
@@ -544,7 +542,6 @@ flock_fly_anim(takeoffAnim, takeoffFrac, loopAnim, landAnim, animSpeed, numLoops
         waitframe();
         self call[[level.func["setanimtime"]]](takeoffAnim, takeoffFrac);
         self waittillmatch("bird_rig_takeoff_anim", "end");
-
       } else {
         self waittillmatch("bird_rig_takeoff_anim", "end");
       }
@@ -759,12 +756,12 @@ birds_perchTouchTrigger(trigger, notifyStr, ender) {
     trigger waittill("trigger");
     self notify(notifyStr);
     trigger.anythingTouchingTrigger = 1;
-    /#if( GetDvarInt( "interactives_debug" ) ) {
-    Print3d(self.origin, "Triggered by touch", (0, 0, 1), 1, 2, 100);
-  }
+    if(GetDvarInt("interactives_debug")) {
+      Print3d(self.origin, "Triggered by touch", (0, 0, 1), 1, 2, 100);
+    }
 
-  wait 1;
-}
+    wait 1;
+  }
 }
 
 birds_perchEventTrigger(radius, notifyStr, ender) {
@@ -786,13 +783,12 @@ birds_perchEventTrigger(radius, notifyStr, ender) {
       if((eventType != "explode" && eventType != "gunshot") || DistanceSquared(self.origin, position) < 2 * radius) {
         self notify(notifyStr);
         self.lastAIEventTrigger = GetTime();
-        /#if( GetDvarInt( "interactives_debug" ) ) {
-        Print3d(self.origin, "Triggered by event", (0, 0, 1), 1, 2, 100);
+        if(GetDvarInt("interactives_debug")) {
+          Print3d(self.origin, "Triggered by event", (0, 0, 1), 1, 2, 100);
+        }
       }
-
     }
   }
-}
 }
 
 birds_deletePerchSentient() {

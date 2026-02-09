@@ -182,7 +182,7 @@ force_song(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_9 = lookupsoundlength(var_1) / 1000;
   scripts\engine\utility::waittill_any_timeout(var_9, "skip_song");
   var_8 stoploopsound();
-  if(getdvar("ui_mapname") != "cp_disco") {
+  if(getDvar("ui_mapname") != "cp_disco") {
     level thread scripts\cp\cp_vo::try_to_play_vo("dj_sign_off", "zmb_dj_vo", "high", 20, 1, 0, 1);
     var_10 = lookupsoundlength("dj_sign_off") / 1000;
     wait(var_10);
@@ -225,7 +225,7 @@ get_song_struct(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_5) && var_5 != "") {
-      if(getdvar("ui_mapname") == "cp_disco") {
+      if(getDvar("ui_mapname") == "cp_disco") {
         var_5 = cp_disco_pam_radio_vo();
         if(var_5 != "nil") {
           while(scripts\engine\utility::istrue(level.pam_playing) || scripts\engine\utility::istrue(level.announcer_vo_playing)) {

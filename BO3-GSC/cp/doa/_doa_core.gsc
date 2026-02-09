@@ -86,14 +86,14 @@ function private _load() {
   while(var_f862b7b1 < var_91f98264 && (player_count_actual + var_a349db66) < var_91f98264);
   setinitialplayersconnected();
   level flag::set("all_players_connected");
-  setdvar("all_players_are_connected", "1");
+  setDvar("all_players_are_connected", "1");
   level util::streamer_wait();
   if(var_8acfab2a > 1) {
     level.players[0] thread lui::screen_fade_out(0);
   } else {
     level thread lui::screen_fade_out(0);
   }
-  setdvar("ui_allowDisplayContinue", 1);
+  setDvar("ui_allowDisplayContinue", 1);
   level flag::set("start_coop_logic");
 }
 
@@ -334,12 +334,12 @@ function init() {
   callback::on_spawned(&on_player_spawned);
   callback::on_disconnect(&on_player_disconnect);
   callback::on_start_gametype(&function_53b7b84f);
-  setdvar("doublejump_enabled", 0);
-  setdvar("ai_instantNoSolidOnDeath", 1);
-  setdvar("mantle_enable", 0);
-  setdvar("trm_enable", 0);
-  setdvar("ik_enable_ai_terrain", 0);
-  setdvar("r_newLensFlares", 0);
+  setDvar("doublejump_enabled", 0);
+  setDvar("ai_instantNoSolidOnDeath", 1);
+  setDvar("mantle_enable", 0);
+  setDvar("trm_enable", 0);
+  setDvar("ik_enable_ai_terrain", 0);
+  setDvar("r_newLensFlares", 0);
   level flag::init("start_coop_logic");
   level flag::init("doa_load_complete");
   level flag::init("doa_round_active");
@@ -788,7 +788,7 @@ function function_780f83fd(round) {
   if(!sessionmodeisonlinegame()) {
     return;
   }
-  if(!isDefined(self) || !isplayer(self) || !isDefined(self.doa)) {
+  if(!isDefined(self) || !isPlayer(self) || !isDefined(self.doa)) {
     return;
   }
   if(isDefined(self.doa.var_80ffe475) && self.doa.var_80ffe475) {

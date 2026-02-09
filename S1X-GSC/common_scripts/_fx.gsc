@@ -144,7 +144,7 @@ check_limit_type(type, count) {
 }
 
 print_org(fxcommand, fxId, fxPos, waittime) {
-  if(GetDvar("debug") == "1") {
+  if(getDvar("debug") == "1") {
     println("{");
     println("\"origin\" \"" + fxPos[0] + " " + fxPos[1] + " " + fxPos[2] + "\"");
     println("\"classname\" \"script_model\"");
@@ -160,22 +160,7 @@ PlatformMatches() {
   if(isDefined(self.v["platform"]) && isDefined(level.currentgen)) {
     platform = self.v["platform"];
 
-    if((platform == "cg" && !level.currentgen) ||
-      (platform == "ng" && !level.nextgen) ||
-      (platform == "xenon" && !level.xenon) ||
-      (platform == "ps3" && !level.ps3) ||
-      (platform == "pc" && !level.pc) ||
-      (platform == "xb3" && !level.xb3) ||
-      (platform == "ps4" && !level.ps4) ||
-      (platform == "pccg" && !level.pccg) ||
-      (platform == "!cg" && level.currentgen) ||
-      (platform == "!ng" && level.nextgen) ||
-      (platform == "!xenon" && level.xenon) ||
-      (platform == "!ps3" && level.ps3) ||
-      (platform == "!pc" && level.pc) ||
-      (platform == "!xb3" && level.xb3) ||
-      (platform == "!ps4" && level.ps4) ||
-      (platform == "!pccg" && level.pccg)) {
+    if((platform == "cg" && !level.currentgen) || (platform == "ng" && !level.nextgen) || (platform == "xenon" && !level.xenon) || (platform == "ps3" && !level.ps3) || (platform == "pc" && !level.pc) || (platform == "xb3" && !level.xb3) || (platform == "ps4" && !level.ps4) || (platform == "pccg" && !level.pccg) || (platform == "!cg" && level.currentgen) || (platform == "!ng" && level.nextgen) || (platform == "!xenon" && level.xenon) || (platform == "!ps3" && level.ps3) || (platform == "!pc" && level.pc) || (platform == "!xb3" && level.xb3) || (platform == "!ps4" && level.ps4) || (platform == "!pccg" && level.pccg)) {
       return false;
     }
   }
@@ -271,7 +256,7 @@ create_loopsound() {
     return;
   }
 
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -319,7 +304,7 @@ create_interval_sound() {
   ender = undefined;
   runner = self;
 
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -330,7 +315,6 @@ create_interval_sound() {
     } else {
       ender = "stop_loop";
     }
-
   }
 
   runner thread loop_fx_sound_interval_with_angles(self.v["soundalias"], self.v["origin"], self.v["angles"], ender, undefined, self.v["delay_min"], self.v["delay_max"]);
@@ -349,7 +333,7 @@ create_dynamicambience() {
   }
 
   if(isSP()) {} else {
-    if(GetDvar("createfx") == "on") {
+    if(getDvar("createfx") == "on") {
       flag_wait("createfx_started");
     }
 
@@ -675,7 +659,7 @@ add_reactive_fx() {
     return;
   }
 
-  if(!isSP() && GetDVar("createfx") == "") {
+  if(!isSP() && getDvar("createfx") == "") {
     return;
   }
 
@@ -694,7 +678,7 @@ add_reactive_fx() {
 
 reactive_fx_thread() {
   if(!isSp()) {
-    if(GetDvar("createfx") == "on") {
+    if(getDvar("createfx") == "on") {
       flag_wait("createfx_started");
     }
   }

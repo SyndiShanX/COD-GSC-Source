@@ -92,7 +92,7 @@ function announce_round_winner(winner, delay) {
   if(delay > 0) {
     wait(delay);
   }
-  if(!isDefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isPlayer(winner)) {
     return;
   }
   if(isDefined(level.teams[winner])) {
@@ -749,7 +749,7 @@ function set_music_on_team(state, team = "both", wait_time = 0, save_state = 0, 
 
 function set_music_on_player(state, wait_time = 0, save_state = 0, return_state = 0) {
   self endon("disconnect");
-  assert(isplayer(self));
+  assert(isPlayer(self));
   if(!isDefined(state)) {
     return;
   }

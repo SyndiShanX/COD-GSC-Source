@@ -96,7 +96,7 @@ weapons_init_stub() {
       break;
   }
 
-  var_0 = getdvar("g_gametype");
+  var_0 = getDvar("g_gametype");
   var_1 = maps\mp\_utility::getattachmentlistbasenames();
   var_1 = common_scripts\utility::alphabetize(var_1);
   var_2 = tablegetrowcount("mp/statstable.csv");
@@ -485,7 +485,7 @@ memberclasschanges_stub(var_0) {
       var_5 = maps\mp\_vl_avatar::getnewlobbyavatarownerid(var_3.xuid);
       var_24 = maps\mp\gametypes\vlobby::getspawnpoint(maps\mp\_vl_base::getconstlocalplayer());
       var_4 = maps\mp\_vl_avatar::spawn_an_avatar(var_1, var_24, var_20, var_22, var_23, var_3._id_A7E7, var_5, 0);
-      setdvar("virtuallobbymembers", level.vlavatars.size);
+      setDvar("virtuallobbymembers", level.vlavatars.size);
       thread maps\mp\_vl_base::setvirtuallobbypresentable();
       var_4._id_A7EA = var_16;
       var_4 _meth_8577(var_19);

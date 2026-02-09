@@ -68,7 +68,7 @@ donotetracks_vsplayer(var_0, var_1) {
           }
 
           if(isalive(var_5)) {
-            if(isplayer(var_5)) {
+            if(isPlayer(var_5)) {
               if(isDefined(self.var_B621)) {
                 var_7 = distance2dsquared(var_5.origin, self.origin);
               } else {
@@ -268,7 +268,7 @@ func_38A0(var_0, var_1, var_2, var_3) {}
 
 func_67D6(var_0, var_1, var_2, var_3) {
   var_4 = self.melee.target;
-  if(isplayer(var_4)) {
+  if(isPlayer(var_4)) {
     return 0;
   }
 

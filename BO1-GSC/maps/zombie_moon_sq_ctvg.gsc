@@ -18,7 +18,6 @@ init() {
   PreCacheModel("p_zom_moon_vril_complete");
   PreCacheModel("zombie_magic_box_wire");
 }
-
 plate_thread() {
   level waittill("stage_1");
   target = self.target;
@@ -28,7 +27,7 @@ plate_thread() {
     if(!isDefined(time)) {
       time = 1.0;
     }
-    self moveTo(struct.origin, time, time / 10);
+    self moveto(struct.origin, time, time / 10);
     self RotateTo(struct.angles, time, time / 10);
     self waittill("movedone");
     playsoundatposition("evt_clank", self.origin);
@@ -36,14 +35,13 @@ plate_thread() {
   }
   level notify("stage_1_done");
 }
-
 build_init() {}
 plates() {
   plates = getEntArray("sq_cassimir_plates", "targetname");
   trig = spawn("trigger_damage", ((plates[0].origin + plates[1].origin) / 2) - (0, 0, 100), 0, 64, 120);
   while(1) {
     trig waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       attacker thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, randomintrange(0, 2), true);
       break;
     }
@@ -69,26 +67,23 @@ plates() {
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, randomintrange(4, 6), true);
   for(i = 0; i < plates.size; i++) {
-    plates[i] hide();
+    plates[i] Hide();
   }
   clientnotify("cp");
   flag_set("c_built");
 }
-
 wire_qualifier() {
   if(isDefined(self._has_wire) && self._has_wire) {
     return true;
   }
   return false;
 }
-
 monitor_wire_disconnect() {
   level endon("w_placed");
   self waittill("disconnect");
   level notify("wire_restart");
   level thread wire();
 }
-
 wire() {
   level endon("wire_restart");
   wires = getstructarray("sq_wire_pos", "targetname");
@@ -119,16 +114,14 @@ wire() {
   clientnotify("wp");
   flag_set("w_placed");
 }
-
 dud_func(position) {}
 vg_qualifier() {
-  num = self getEntityNumber();
+  num = self GetEntityNumber();
   if(isDefined(self.zm_random_char)) {
     num = self.zm_random_char;
   }
   return ((num == 3) && level._all_previous_done);
 }
-
 vg() {
   flag_wait("w_placed");
   flag_wait("power_on");
@@ -143,7 +136,6 @@ vg() {
   clientnotify("vg");
   flag_set("vg_placed");
 }
-
 build_stage_logic() {
   level thread plates();
   level thread wire();
@@ -153,19 +145,16 @@ build_stage_logic() {
   flag_wait("vg_placed");
   stage_completed("ctvg", "build");
 }
-
 ctvg_validation(position) {
-  if(distanceSquared(level._ctvg_pos, position) < (128 * 128)) {
+  if(DistanceSquared(level._ctvg_pos, position) < (128 * 128)) {
     level notify("ctvg_validation");
   }
   return false;
 }
-
 delete_soon() {
   wait(4.5);
   self Delete();
 }
-
 bhb_teleport_loc_check(grenade, model, info) {
   if(isDefined(level.teleport_target_trigger) && grenade IsTouching(level.teleport_target_trigger)) {
     plates = getEntArray("sq_cassimir_plates", "targetname");
@@ -179,19 +168,18 @@ bhb_teleport_loc_check(grenade, model, info) {
   }
   return false;
 }
-
 teleport_target(grenade, models) {
   level.teleport_target_trigger Delete();
   level.teleport_target_trigger = undefined;
   wait(1.0);
   time = 3.0;
   for(i = 0; i < models.size; i++) {
-    models[i] moveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
+    models[i] MoveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
   }
   wait(time);
   teleport_targets = getstructarray("sq_ctvg_tp", "targetname");
   for(i = 0; i < models.size; i++) {
-    models[i] hide();
+    models[i] Hide();
   }
   playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
   wait(0.5);
@@ -199,7 +187,7 @@ teleport_target(grenade, models) {
     models[i] DontInterpolate();
     models[i].angles = teleport_targets[i].angles;
     models[i].origin = teleport_targets[i].origin;
-    models[i] stopLoopSound(1);
+    models[i] StopLoopSound(1);
   }
   wait(0.5);
   for(i = 0; i < models.size; i++) {
@@ -211,7 +199,6 @@ teleport_target(grenade, models) {
   wait(2.0);
   level notify("ctvg_tp_done");
 }
-
 build_exit_stage(success) {}
 build_charge_stage(num_presses, lines) {
   stage = spawnStruct();
@@ -225,7 +212,6 @@ build_charge_stage(num_presses, lines) {
   }
   return stage;
 }
-
 speak_charge_lines(lines) {
   level.skit_vox_override = true;
   for(i = 0; i < lines.size; i++) {
@@ -235,7 +221,7 @@ speak_charge_lines(lines) {
       case "rictofen":
         players = get_players();
         for(j = 0; j < players.size; j++) {
-          ent_num = players[j] getEntityNumber();
+          ent_num = players[j] GetEntityNumber();
           if(isDefined(players[j].zm_random_char)) {
             ent_num = players[j].zm_random_char;
           }
@@ -262,20 +248,18 @@ speak_charge_lines(lines) {
     }
     sound_ent waittill("line_spoken");
   }
-  level._charge_sound_ent stopLoopSound();
+  level._charge_sound_ent StopLoopSound();
   level.skit_vox_override = false;
 }
-
 charge_init() {
   level._charge_stages = array(build_charge_stage(1, array("rictofen", "vox_plr_3_quest_step5_12")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_13", "rictofen", "vox_plr_3_quest_step5_14")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_15", "maxis", "vox_xcomp_quest_step5_16", "rictofen", "vox_plr_3_quest_step5_17")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_18", "rictofen", "vox_plr_3_quest_step5_19")), build_charge_stage(15, array("maxis", "vox_xcomp_quest_step5_20", "rictofen", "vox_plr_3_quest_step5_21", "maxis", "vox_xcomp_quest_step5_22", "rictofen", "vox_plr_3_quest_step5_23")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_24", "rictofen", "vox_plr_3_quest_step5_25", "computer", "vox_mcomp_quest_step5_26")));
   sound_struct = getstruct("sq_charge_terminal", "targetname");
   level._charge_sound_ent = spawn("script_origin", sound_struct.origin);
-  level._charge_terminal = getEnt("sq_ctvg_terminal", "targetname");
+  level._charge_terminal = GetEnt("sq_ctvg_terminal", "targetname");
   level._charge_terminal setModel("p_zom_moon_magic_box_com_red");
 }
-
 bucket_qualifier() {
-  ent_num = self getEntityNumber();
+  ent_num = self GetEntityNumber();
   if(isDefined(self.zm_random_char)) {
     ent_num = self.zm_random_char;
   }
@@ -284,9 +268,8 @@ bucket_qualifier() {
   }
   return false;
 }
-
 wrong_press_qualifier() {
-  ent_num = self getEntityNumber();
+  ent_num = self GetEntityNumber();
   if(isDefined(self.zm_random_char)) {
     ent_num = self.zm_random_char;
   }
@@ -295,7 +278,6 @@ wrong_press_qualifier() {
   }
   return false;
 }
-
 typing_sound_thread() {
   level endon("kill_typing_thread");
   level._charge_sound_ent playLoopSound("evt_typing_loop");
@@ -305,7 +287,7 @@ typing_sound_thread() {
     if(typing) {
       if((GetTime() - level._typing_time) > 250) {
         typing = false;
-        level._charge_sound_ent stopLoopSound();
+        level._charge_sound_ent StopLoopSound();
       }
     } else {
       if((GetTime() - level._typing_time) < 100) {
@@ -316,7 +298,6 @@ typing_sound_thread() {
     wait(0.1);
   }
 }
-
 do_bucket_fill(target) {
   presses = 0;
   players = get_players();
@@ -324,7 +305,7 @@ do_bucket_fill(target) {
   level thread typing_sound_thread();
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    ent_num = player getEntityNumber();
+    ent_num = player GetEntityNumber();
     if(isDefined(player.zm_random_char)) {
       ent_num = player.zm_random_char;
     }
@@ -344,7 +325,6 @@ do_bucket_fill(target) {
   }
   level notify("kill_typing_thread");
 }
-
 wrong_presser_thread() {
   level endon("kill_press_monitor");
   while(1) {
@@ -356,7 +336,6 @@ wrong_presser_thread() {
     wait(1.0);
   }
 }
-
 wrong_collector() {
   level endon("collected");
   while(1) {
@@ -366,7 +345,6 @@ wrong_collector() {
     wait(1.0);
   }
 }
-
 charge_stage_logic() {
   stage_index = 0;
   level thread wrong_presser_thread();
@@ -395,13 +373,11 @@ charge_stage_logic() {
   level notify("collected");
   stage_completed("ctvg", "charge");
 }
-
 charge_exit_stage(success) {
   level._charge_sound_ent Delete();
   level._charge_sound_ent = undefined;
   flag_set("vg_charged");
 }
-
 prevent_other_vox_while_here() {
   level endon("start_player_vox_again");
   while(1) {
@@ -413,7 +389,6 @@ prevent_other_vox_while_here() {
     wait(1);
   }
 }
-
 start_player_vox_again() {
   level notify("start_player_vox_again");
   wait(1);

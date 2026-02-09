@@ -8,7 +8,6 @@
 main() {
   if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
-
   }
   var_0 = "oil_pump_jack01";
 

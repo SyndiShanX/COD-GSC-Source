@@ -350,7 +350,6 @@ onPlayerSpawned() {
       waitframe();
       self SetClientTriggerVisionSet("", 10);
     }
-
   }
 }
 

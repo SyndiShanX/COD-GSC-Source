@@ -255,7 +255,6 @@ endStrafeSequence(switch_state) {
 
     self thread a10_FreezeBuffer();
     self.using_remote_a10 = undefined;
-
   }
 
   level.a10strafeActive = undefined;
@@ -279,7 +278,6 @@ attachMissiles() {
     self.missiles[missileTag] LinkTo(self, missileTag);
     i--;
   }
-
 }
 
 attachAnimatedFlaps() {
@@ -432,7 +430,6 @@ player_input_monitor() {
     }
     wait 0.05;
   }
-
 }
 
 doOneFlyby() {
@@ -589,7 +586,7 @@ missileGetBestTarget() {
 }
 
 missileIsGoodTarget(target) {
-  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (IsPlayer(target) && !(target _hasPerk("specialty_blindeye"))) && self missileTargetAngle(target) > 0.25);
+  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (isPlayer(target) && !(target _hasPerk("specialty_blindeye"))) && self missileTargetAngle(target) > 0.25);
 }
 
 missileTargetAngle(target) {
@@ -886,7 +883,6 @@ monitorWeaponFire(streakName, plane) {
 
     self.is_attacking = 0;
   }
-
 }
 
 monitor_attack_button(plane) {
@@ -1081,7 +1077,6 @@ watchNuke(plane, streakName) {
     plane thread a10_explode();
     plane thread endFlyby(KS_NAME);
   }
-
 }
 
 watchTeamSwitchPost(plane, streakName) {
@@ -1182,6 +1177,5 @@ a10_explode() {
     self Hide();
 
     wait 20.0;
-
   }
 }

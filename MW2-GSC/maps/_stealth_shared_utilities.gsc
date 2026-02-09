@@ -172,8 +172,8 @@ stealth_debug_print(msg) {
 enemy_event_debug_print(type) {
   setDvarIfUninitialized("stealth_debug_prints", "0");
 
-  if(!isDefined(getdvar("stealth_debug_prints")))
-    setdvar("stealth_debug_prints", "0");
+  if(!isDefined(getDvar("stealth_debug_prints")))
+    setDvar("stealth_debug_prints", "0");
 
   if(getdvarint("stealth_debug_prints") != 1) {
     return;

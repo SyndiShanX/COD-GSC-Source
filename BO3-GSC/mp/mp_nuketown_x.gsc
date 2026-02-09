@@ -36,7 +36,7 @@ function main() {
   level.update_escort_robot_path = &update_escort_robot_path;
   load::main();
   compass::setupminimap("compass_map_mp_nuketown_x");
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   level.levelescortdisable = [];
   level.levelescortdisable[level.levelescortdisable.size] = spawn("trigger_radius", (749, 872, -112.5), 0, 150, 128);
   level.levelescortdisable[level.levelescortdisable.size] = spawn("trigger_radius", (868, 909.5, -112.5), 0, 150, 128);

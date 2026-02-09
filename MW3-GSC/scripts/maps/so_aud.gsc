@@ -106,7 +106,6 @@ _id_4402(var_0) {
   }
   if(!isDefined(level._id_16F5._id_4403)) {
     level._id_16F5._id_4403 = 0;
-
   }
   var_1 = maps\_audio_zone_manager::_id_1578();
 
@@ -182,15 +181,12 @@ _id_4409(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_4) || isDefined(var_1)) {
       var_4 playLoopSound(var_1);
-
     }
     if(isDefined(var_5) || isDefined(var_2)) {
       var_5 playLoopSound(var_2);
-
     }
     if(isDefined(var_6) || isDefined(var_3)) {
       var_6 playLoopSound(var_3);
-
     }
     var_4 scalevolume(0.0);
     var_5 scalevolume(0.0);

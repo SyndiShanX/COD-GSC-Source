@@ -27,7 +27,7 @@ init() {
   var_1 = level.gametype;
 
   if(!isDefined(var_1)) {
-    var_1 = getdvar("g_gametype");
+    var_1 = getDvar("g_gametype");
   }
 
   var_2 = 0;
@@ -898,7 +898,7 @@ isskeetshooter(var_0, var_1, var_2, var_3, var_4) {
 }
 
 isbackkill(var_0, var_1, var_2) {
-  if(!isplayer(var_0) || !isplayer(var_1)) {
+  if(!isPlayer(var_0) || !isPlayer(var_1)) {
     return 0;
   }
 

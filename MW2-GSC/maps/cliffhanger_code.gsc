@@ -722,7 +722,7 @@ setup_welders() {
   //flag_wait( "player_before_welders" );
 
   /*
-  SetDvar( "start", "snowmobile" );
+  setDvar( "start", "snowmobile" );
   ChangeLevel( "cliffhanger", true );
 
   IPrintLnBold( "END OF SCRIPTED LEVEL" );
@@ -804,7 +804,6 @@ flashing_welding(welder, tag) {
       wait(RandomFloatRange(.05, .1));
 
       light SetLightIntensity(off);
-
     }
 
     light SetLightIntensity(off);
@@ -1099,7 +1098,7 @@ flag_if_player_kill() {
   self waittill("death", attacker);
   if(!isDefined(attacker))
     return;
-  if(IsPlayer(attacker))
+  if(isPlayer(attacker))
     flag_set("player_killed_one_first_two_encounters");
 }
 
@@ -1397,7 +1396,7 @@ mission_fail(string) {
     return;
   flag_set("mission_fail");
 
-  SetDvar("ui_deadquote", level.strings[string]);
+  setDvar("ui_deadquote", level.strings[string]);
   missionFailedWrapper();
 }
 
@@ -2269,7 +2268,7 @@ dialog_player_kill() {
 
   if(!isDefined(killer))
     return;
-  if(IsPlayer(killer))
+  if(isPlayer(killer))
     flag_set("player_killed_someone");
 
   if(flag("_stealth_spotted"))
@@ -2281,7 +2280,7 @@ dialog_player_kill() {
   if(flag("price_moving_to_hanger")) {
     return;
   }
-  if(IsPlayer(killer)) {
+  if(isPlayer(killer)) {
     wait 1;
     if(!stealth_is_everything_normal())
       return;
@@ -2871,7 +2870,7 @@ guy_starts_shooting() {
 }
 
 should_break_activate_heartbeat() {
-  Assert(IsPlayer(self));
+  Assert(isPlayer(self));
 
   //	if( GetTime() > level.heartbeat_timeout )
   //		return true;
@@ -3332,7 +3331,6 @@ run_in_and_shout() {
     self Shoot();
     wait(RandomFloatRange(0.1, 0.2));
   }
-
 }
 
 random_yelling(enemies) {
@@ -4154,7 +4152,7 @@ price_died_you_lose() {
   wait(2.5);
 
   // Captain MacTavish was executed.
-  SetDvar("ui_deadquote", &"CLIFFHANGER_PRICE_DIED");
+  setDvar("ui_deadquote", &"CLIFFHANGER_PRICE_DIED");
   missionFailedWrapper();
   level.player waittill("detonate");
 }
@@ -4238,7 +4236,7 @@ price_talks_about_compromised() {
   // "This is major petrov! Come out with your hands up!
   level.petrov dialogue_queue("petrov");
 
-  if(GetDvar("player_has_witnessed_capture") == "1") {
+  if(getDvar("player_has_witnessed_capture") == "1") {
     // player died once already so skip ahead
     flag_set("player_can_see_capture");
     waittillframeend; // for price_tells_you_plan_b() to progress
@@ -4274,7 +4272,7 @@ price_tells_you_plan_b() {
     return;
   level.price endon("death");
   flag_wait("player_can_see_capture");
-  SetDvar("player_has_witnessed_capture", 1);
+  setDvar("player_has_witnessed_capture", 1);
 
   // "Soap, Go to plan b
   level.price dialogue_queue("plan_b");
@@ -4616,7 +4614,6 @@ explosion_chain_reaction(parameter1, parameter2) {
       //Print3d( org, "x", ( 1, 0, 0 ), 1, 1, 100 );
       wait(0.05);
     }
-
   }
 }
 

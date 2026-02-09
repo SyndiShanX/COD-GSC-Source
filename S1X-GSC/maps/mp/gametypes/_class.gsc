@@ -362,7 +362,6 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
   } else {
     return tempName;
   }
-
 }
 
 table_getWeaponBuff(tableName, classIndex, weaponIndex) {
@@ -1188,7 +1187,7 @@ getLoadout(team, class, allowCopycat, setPrimarySpawnWeapon) {
   isRecipeClass = isSubstr(class, "recipe");
   ignorelock = false;
 
-  unlockallweapons = getdvar("unlockAllLootItems", "0");
+  unlockallweapons = getDvar("unlockAllLootItems", "0");
   if(unlockallweapons == "1") {
     ignorelock = true;
   }
@@ -2006,7 +2005,7 @@ applyLoadout() {
       if(practiceRoundGame()) {
         self.costume = self maps\mp\gametypes\_teams::getPracticeRoundCostume();
       } else {
-        if(IsPlayer(self)) {
+        if(isPlayer(self)) {
           self.costume = self cao_getActiveCostume();
         } else if(IsAgent(self) && self.agent_type == "player") {
           self.costume = maps\mp\gametypes\_teams::getDefaultCostume();
@@ -2027,7 +2026,7 @@ applyLoadout() {
         self.costume = self.sessionCostume;
       } else {
         self.costume = maps\mp\gametypes\_teams::getDefaultCostume();
-        if(IsPlayer(self)) {
+        if(isPlayer(self)) {
           self cao_setActiveCostume(self.costume);
         }
         self.sessionCostume = self.costume;
@@ -2264,7 +2263,6 @@ takeOffhand(offhandWeapon) {
     default:
       assertmsg("Unknown offhand weapon " + offhandWeapon);
   }
-
 }
 
 loadoutAllPerks(loadoutEquipment, loadoutPerks) {
@@ -2729,7 +2727,6 @@ setKillstreaks(streak1, streak2, streak3, streak4, cacLoadout, practiceLoadout, 
 
     self.killStreaks[streakIndex] = killStreaks[streakIndex];
   }
-
 }
 
 replenishLoadout() {

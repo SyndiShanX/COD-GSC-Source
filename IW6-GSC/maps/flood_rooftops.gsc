@@ -90,7 +90,7 @@ skybridge() {
   maps\_utility::activate_trigger_with_targetname("skybridge_color_order_start");
   level.allies[1] maps\_utility::disable_ai_color();
   level.allies[2] maps\_utility::disable_ai_color();
-  setdvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
   level.allies[0] maps\_utility::set_force_color("r");
   level.allies[1] maps\_utility::forceuseweapon("fads+reflex_sp", "primary");
   level.allies[2] maps\_utility::forceuseweapon("fads+acog_sp", "primary");

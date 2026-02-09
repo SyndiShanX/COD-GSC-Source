@@ -112,7 +112,6 @@ class cct_shared_aar: cluielem {
     cluielem::function_dcb34c80("string", "missionResultMsg", 1);
     cluielem::function_dcb34c80("string", "medalThresholds", 1);
   }
-
 }
 
 register(uid, var_fa61efce, var_a2ce4dd8, var_28aefa0, var_30cfd9be) {

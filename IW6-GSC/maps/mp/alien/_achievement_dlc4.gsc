@@ -111,7 +111,7 @@ update_alien_kill_achievements_dlc4(var_0, var_1, var_2, var_3, var_4, var_5, va
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     return;
   }
-  var_9 = isDefined(var_1) && isplayer(var_1);
+  var_9 = isDefined(var_1) && isPlayer(var_1);
 
   if(var_9) {
     if(isDefined(var_4) && (var_4 == "iw6_aliendlc42_mp" || var_4 == "iw6_aliendlc41_mp"))

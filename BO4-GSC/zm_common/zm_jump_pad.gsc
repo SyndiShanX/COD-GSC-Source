@@ -73,7 +73,7 @@ jump_pad_think() {
     waitresult = self waittill(#"trigger");
     who = waitresult.activator;
 
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       self thread delayed_jump_pad_start(who);
     }
   }

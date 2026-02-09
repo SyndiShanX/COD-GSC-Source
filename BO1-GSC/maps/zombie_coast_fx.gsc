@@ -15,7 +15,6 @@ main() {
   thread water_settings();
   level thread reset_water_burst_fx();
 }
-
 footsteps() {}
 precache_scripted_fx() {
   level._effect["large_ceiling_dust"] = LoadFx("maps/zombie/fx_dust_ceiling_impact_lg_mdbrown");
@@ -40,7 +39,6 @@ precache_scripted_fx() {
   level._effect["box_spark"] = LoadFX("maps/zombie/fx_zmb_coast_dest_fuse_box");
   level._effect["rtg_field"] = LoadFX("maps/zombie/fx_zmb_coast_rtg_gen_glow");
 }
-
 precache_createfx_fx() {
   level._effect["fx_zombie_boss_water_intro"] = loadfx("maps/zombie/fx_zombie_boss_water_intro");
   level._effect["fx_zombie_boss_water_boil"] = loadfx("maps/zombie/fx_zombie_boss_water_boil");
@@ -92,13 +90,11 @@ precache_createfx_fx() {
   level._effect["rise_burst_water"] = LoadFX("maps/zombie/fx_mp_zombie_hand_water_burst");
   level._effect["rise_billow_water"] = LoadFX("maps/zombie/fx_mp_zombie_body_water_billowing");
 }
-
 reset_water_burst_fx() {
   wait(2.0);
   level._effect["rise_burst_water"] = LoadFX("maps/zombie/fx_mp_zombie_hand_water_burst");
   level._effect["rise_billow_water"] = LoadFX("maps/zombie/fx_mp_zombie_body_water_billowing");
 }
-
 manage_fog() {
   setVolFog(110, 2016, 621, 674, 0.572, 0.672, 0.678, 0);
   wait(1);
@@ -111,7 +107,6 @@ manage_fog() {
     wait(30);
   }
 }
-
 manage_blizzard() {
   level endon("kill_blizzard");
   level thread blizzard_tidyup();
@@ -169,7 +164,6 @@ manage_blizzard() {
     }
   }
 }
-
 blizzard_tidyup() {
   level waittill("kill_blizzard");
   stop_exploder(101);
@@ -179,28 +173,26 @@ blizzard_tidyup() {
     players[i] ClearClientFlag(level._COAST_FOG_BLIZZARD);
   }
 }
-
 wait_and_delete_sound_ent() {
-  self stopLoopSound(4);
+  self StopLoopSound(4);
   wait(5);
   self Delete();
 }
-
 water_settings() {
-  SetDvar("r_watersim_waveSeedDelay", 10);
-  SetDvar("r_watersim_curlAmount", 0.18);
-  SetDvar("r_watersim_curlMax", 0.32);
-  SetDvar("r_watersim_curlReduce", 0.261);
-  SetDvar("r_watersim_minShoreHeight", 0.358);
-  SetDvar("r_watersim_foamAppear", 3.01);
-  SetDvar("r_watersim_foamDisappear", 0.40);
-  SetDvar("r_watersim_windAmount", 0.179);
-  SetDvar("r_watersim_windDir", 275);
-  SetDvar("r_watersim_windMax", 2.69);
-  SetDvar("r_watersim_particleGravity", 0.03);
-  SetDvar("r_watersim_particleLimit", 2.5);
-  SetDvar("r_watersim_particleLength", 0.03);
-  SetDvar("r_watersim_particleWidth", 2.0);
+  setDvar("r_watersim_waveSeedDelay", 10);
+  setDvar("r_watersim_curlAmount", 0.18);
+  setDvar("r_watersim_curlMax", 0.32);
+  setDvar("r_watersim_curlReduce", 0.261);
+  setDvar("r_watersim_minShoreHeight", 0.358);
+  setDvar("r_watersim_foamAppear", 3.01);
+  setDvar("r_watersim_foamDisappear", 0.40);
+  setDvar("r_watersim_windAmount", 0.179);
+  setDvar("r_watersim_windDir", 275);
+  setDvar("r_watersim_windMax", 2.69);
+  setDvar("r_watersim_particleGravity", 0.03);
+  setDvar("r_watersim_particleLimit", 2.5);
+  setDvar("r_watersim_particleLength", 0.03);
+  setDvar("r_watersim_particleWidth", 2.0);
   waittillframeend;
   WaterSimEnable(true);
 }

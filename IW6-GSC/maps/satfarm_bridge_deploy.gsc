@@ -8,7 +8,7 @@ bridge_deploy_init() {
 }
 
 bridge_deploy_main() {
-  setdvar("debug_sat_view_pip", "1");
+  setDvar("debug_sat_view_pip", "1");
   maps\satfarm_code::kill_spawners_per_checkpoint("bridge_deploy");
   common_scripts\utility::flag_init("bridge_deploy_kill_gaz");
   common_scripts\utility::flag_init("bridge_deploy_pre_end");
@@ -49,7 +49,7 @@ tower_to_bridge_deploy_bink() {
   level.player.ignoreme = 1;
   setsaveddvar("compass", 0);
   common_scripts\utility::waitframe();
-  setdvar("paris_transition_movie", "1");
+  setDvar("paris_transition_movie", "1");
   setsaveddvar("ui_nextMission", "1");
   changelevel("satfarm_b");
 }
@@ -94,7 +94,7 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_audio::overlord_trans2();
   wait(var_0 - 0.25);
 
-  if(getdvar("debug_sat_view_pip", "1") == "2") {
+  if(getDvar("debug_sat_view_pip", "1") == "2") {
     level.player maps\satfarm_satellite_view::satellite_view_init_hud(1);
     visionsetnaked("satfarm_b", 0.0);
     wait 0.25;
@@ -117,7 +117,7 @@ tower_to_bridge_deploy() {
   var_11.origin = var_8.origin;
   var_11 moveto(var_9.origin, var_10);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::target_enable_sat_view(var_11, "ac130_hud_friendly_vehicle_diamond_s_w", (0, 1, 0));
 
   wait 0.5;
@@ -126,7 +126,7 @@ tower_to_bridge_deploy() {
   if(!isDefined(var_12))
     var_12 = (0, 0, 0);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_LOCATED", (1, 1, 1), "left", "top", 1);
 
   maps\satfarm_satellite_view::satellite_view_move_to_point(var_12[0], var_12[1], undefined, undefined, 0.5);
@@ -135,19 +135,19 @@ tower_to_bridge_deploy() {
   var_14 = var_13 - anglesToForward(var_4.angles) * (var_4.origin[2] - var_13[2]);
   var_4 moveto(var_14, 0.5);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_TRACKING", (1, 1, 1), "right", "top", 1);
 
   maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, undefined, undefined, 0.5);
   wait 0.5;
   var_4 linkto(var_11);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     level.player lerpfov(30, 0.25);
 
   thread maps\satfarm_satellite_view::satellite_view_zoom_in_sound(0.25);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("right", &"SATFARM_ADAM_RORKE", &"SATFARM_GHOST_ONE");
 
   wait 1;
@@ -156,7 +156,7 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_complex::missile_bases();
   var_15 = 2;
 
-  switch (getdvar("debug_sat_view_pip", "1")) {
+  switch (getDvar("debug_sat_view_pip", "1")) {
     case "1":
       thread maps\satfarm_satellite_view::satellite_view_corner_pip(var_6, "tag_origin", 200, -145);
       thread maps\satfarm_satellite_view::satellite_view_pip_display_name(&"SATFARM_FEED_3", 1);
@@ -168,13 +168,13 @@ tower_to_bridge_deploy() {
 
   wait 1;
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_SWITCHING_FEEDS", (1, 1, 1), "left", "top", 1.5);
 
   thread spawn_a10s();
   wait 1;
 
-  switch (getdvar("debug_sat_view_pip", "1")) {
+  switch (getDvar("debug_sat_view_pip", "1")) {
     case "1":
       maps\satfarm_satellite_view::satellite_view_blink_pip_border();
       thread maps\satfarm_satellite_view::satellite_view_move_to_point(-888, 500, undefined, undefined, 1.5);
@@ -194,21 +194,21 @@ tower_to_bridge_deploy() {
   wait 0.05;
   thread remove_bridge_deploy_tanks(var_7);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     target_remove(var_11);
 
   var_11 delete();
 
-  if(getdvar("debug_sat_view_pip", "1") == "1")
+  if(getDvar("debug_sat_view_pip", "1") == "1")
     thread maps\satfarm_satellite_view::satellite_view_pip_disable();
-  else if(getdvar("debug_sat_view_pip", "1") == "2")
+  else if(getDvar("debug_sat_view_pip", "1") == "2")
     level.player playerlinktoabsolute(var_4, "tag_origin");
 
   maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, 888, 500, 0);
   thread maps\satfarm_satellite_view::satellite_view_move_to_point(-10, 0, 240, 240, 0.5);
   thread mark_mantis_turrets(var_4);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2") {
+  if(getDvar("debug_sat_view_pip", "1") != "2") {
     thread maps\satfarm_satellite_view::satellite_view_type_multiline_text_at_point(20, 20, &"SATFARM_OBJECTIVE", &"SATFARM_DESTROY_THE_LOKI", &"SATFARM_DEFENSE_SATELLITE");
     thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("left", "Missile Incoming", "Time: 5:51", undefined, "satellite_view_missile_wireframe");
   }
@@ -230,13 +230,13 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, 32, 32, 1);
   wait 1.5;
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     level.player lerpfov(30, 0.25);
 
   thread maps\satfarm_satellite_view::satellite_view_zoom_in_sound(0.25);
   wait 0.5;
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_ACQUIRING", (1, 1, 1), "left", "top", 2);
 
   thread bridge_deploy_enemy_a10_gun_dives();
@@ -251,20 +251,20 @@ tower_to_bridge_deploy() {
       wait 0.1;
 
       if(!var_21) {
-        if(getdvar("debug_sat_view_pip", "1") != "2")
+        if(getDvar("debug_sat_view_pip", "1") != "2")
           maps\satfarm_satellite_view::satellite_view_reticle_color("red");
       }
 
       wait 0.1;
 
-      if(getdvar("debug_sat_view_pip", "1") != "2")
+      if(getDvar("debug_sat_view_pip", "1") != "2")
         maps\satfarm_satellite_view::satellite_view_blink_corners(1, 0.1);
       else
         wait 0.2;
 
       wait 0.2;
 
-      if(getdvar("debug_sat_view_pip", "1") != "2")
+      if(getDvar("debug_sat_view_pip", "1") != "2")
         thread maps\satfarm_satellite_view::target_enable_sat_view(var_20, "satellite_view_enemy_target", (1, 0, 0));
 
       thread common_scripts\utility::play_sound_in_space("satf_satellite_blip_2", level.player.origin);
@@ -280,13 +280,13 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_satellite_view::satellite_view_zoom_out_sound(0.25);
   level.player maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, undefined, undefined, 0.25);
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     maps\satfarm_satellite_view::satellite_view_reticle_color("white");
 
   wait 2.5;
 
   foreach(var_24 in level.allyheli) {
-    if(getdvar("debug_sat_view_pip", "1") != "2")
+    if(getDvar("debug_sat_view_pip", "1") != "2")
       thread maps\satfarm_satellite_view::target_enable_sat_view(var_24, "satellite_view_friendly_target", (0, 1, 0));
   }
 
@@ -297,7 +297,7 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_com_keepmovingbadgerone");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_com_weonlyhaveone");
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::satellite_view_type_text_at_point(&"SATFARM_SYNCING", (1, 1, 1), 320, 50, 0.75);
 
   wait 0.25;
@@ -325,7 +325,7 @@ tower_to_bridge_deploy() {
   wait 0.2;
   common_scripts\utility::waitframe();
 
-  if(getdvar("debug_sat_view_pip", "1") != "2")
+  if(getDvar("debug_sat_view_pip", "1") != "2")
     thread maps\satfarm_satellite_view::delete_temp_sat_view_targets();
 
   maps\satfarm_satellite_view::satellite_view_clear_hud();
@@ -432,9 +432,9 @@ mark_mantis_turrets(var_0) {
   var_7 linkto(var_6);
   var_6 rotateyaw(15, 5);
 
-  if(getdvar("debug_sat_view_pip", "1") == "1")
+  if(getDvar("debug_sat_view_pip", "1") == "1")
     thread maps\satfarm_satellite_view::satellite_view_corner_pip(var_7, "tag_origin", 220, -145, 100, 100);
-  else if(getdvar("debug_sat_view_pip", "1") == "2")
+  else if(getDvar("debug_sat_view_pip", "1") == "2")
     level.player playerlinktoabsolute(var_7, "tag_origin");
 
   foreach(var_5 in var_1) {
@@ -443,7 +443,7 @@ mark_mantis_turrets(var_0) {
     if(!isDefined(var_9)) {
       continue;
     }
-    if(getdvar("debug_sat_view_pip", "1") != "2")
+    if(getDvar("debug_sat_view_pip", "1") != "2")
       thread maps\satfarm_satellite_view::satellite_view_zoom_box(var_5.origin, 15, 2, 0.25, 2.5 - var_3 * var_4);
 
     var_2++;
@@ -457,7 +457,7 @@ mark_mantis_turrets(var_0) {
 
   wait 2.5;
 
-  if(getdvar("debug_sat_view_pip", "1") == "1")
+  if(getDvar("debug_sat_view_pip", "1") == "1")
     thread maps\satfarm_satellite_view::satellite_view_pip_disable();
   else
     level.player playerlinktoabsolute(var_0, "tag_origin");

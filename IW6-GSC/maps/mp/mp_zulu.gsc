@@ -28,18 +28,18 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_zulu");
   setdvar_cg_ng("r_specularColorScale", 2.5, 7.5);
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.45");
-    SetDvar("sm_sunsamplesizenear", ".35");
+    setDvar("sm_sunShadowScale", "0.45");
+    setDvar("sm_sunsamplesizenear", ".35");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.55" + "");
-    SetDvar("sm_sunsamplesizenear", ".35");
+    setDvar("sm_sunShadowScale", "0.55" + "");
+    setDvar("sm_sunsamplesizenear", ".35");
   } else {
-    SetDvar("sm_sunShadowScale", "1.0");
-    SetDvar("sm_sunsamplesizenear", ".35");
+    setDvar("sm_sunShadowScale", "1.0");
+    setDvar("sm_sunsamplesizenear", ".35");
   }
 
   level.mapCustomCrateFunc = ::mariachiCustomCrateFunc;
@@ -503,7 +503,6 @@ watch_for_death_mariachi_crate() {
         game["player_holding_level_killstrek"] = true;
 
         wait_for_killstreak_availability();
-
       }
     }
   }
@@ -645,7 +644,6 @@ onJuggDeathMariachiDeath() {
     self.spiritwalking = false;
     self VisionSetNakedForPlayer("mp_zulu", 0.1);
     self.healthRegenDisabled = false;
-
   }
 
   game["player_holding_level_killstrek"] = false;

@@ -538,7 +538,6 @@ dbline(from, to) {
     time = time - 0.05;
     wait 0.05;
   }
-
 }
 
 player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) {
@@ -603,7 +602,7 @@ watch_hit_players() {
   while(isDefined(self)) {
     self waittill("grenade_bounce", pos, normal, ent);
 
-    if(isplayer(ent))
+    if(isPlayer(ent))
       ent explosiondamage(25, pos);
   }
 }
@@ -687,7 +686,7 @@ player_drop_piece(piece, slot) {
     piece.damage = 0;
     piece piece_spawn_at(origin, self.angles);
 
-    if(isplayer(self))
+    if(isPlayer(self))
       self clear_buildable_clientfield(slot);
 
     if(isDefined(piece.ondrop))
@@ -715,7 +714,7 @@ player_take_piece(piece) {
   piece piece_unspawn();
   piece notify("pickup");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(piece.client_field_state))
       self set_buildable_clientfield(piece_slot, piece.client_field_state);
 
@@ -729,7 +728,7 @@ player_destroy_piece(piece) {
   if(!isDefined(piece))
     piece = self player_get_buildable_piece();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     slot = piece.buildable_slot;
 
     if(isDefined(piece)) {
@@ -1381,14 +1380,14 @@ player_build(buildable, pieces) {
     }
   }
 
-  if(isplayer(self))
+  if(isPlayer(self))
     self track_buildable_pieces_built(buildable);
 
   if(buildable buildable_all_built()) {
     self player_finish_buildable(buildable);
     buildable.stub buildablestub_finish_build(self);
 
-    if(isplayer(self))
+    if(isPlayer(self))
       self track_buildables_built(buildable);
 
     if(isDefined(level.buildable_built_custom_func))

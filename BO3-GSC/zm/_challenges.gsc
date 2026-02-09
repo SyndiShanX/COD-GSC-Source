@@ -52,7 +52,7 @@ function challengekills(data, time) {
   if(!isDefined(data.weapon)) {
     return;
   }
-  if(!isDefined(player) || !isplayer(player)) {
+  if(!isDefined(player) || !isPlayer(player)) {
     return;
   }
   weaponclass = util::getweaponclass(weapon);

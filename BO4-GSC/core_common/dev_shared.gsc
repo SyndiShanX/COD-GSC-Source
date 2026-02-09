@@ -80,7 +80,7 @@ updateminimapsetting() {
   requiredmapaspectratio = getdvarfloat(#"scr_requiredmapaspectratio", 0);
 
   if(!isDefined(level.minimapheight)) {
-    setdvar(#"scr_minimap_height", 0);
+    setDvar(#"scr_minimap_height", 0);
     level.minimapheight = 0;
   }
 
@@ -183,25 +183,25 @@ updateminimapsetting() {
           player camerasetposition(viewpos, (90, getnorthyaw(), 0));
           player cameraactivate(1);
           player takeallweapons();
-          setdvar(#"cg_drawgun", 0);
-          setdvar(#"cg_draw2d", 0);
-          setdvar(#"cg_drawfps", 0);
-          setdvar(#"fx_enable", 0);
-          setdvar(#"r_fog", 0);
-          setdvar(#"r_highloddist", 0);
-          setdvar(#"r_znear", znear);
-          setdvar(#"r_lodscalerigid", 0.1);
-          setdvar(#"cg_drawversion", 0);
-          setdvar(#"sm_enable", 1);
-          setdvar(#"player_view_pitch_down", 90);
-          setdvar(#"player_view_pitch_up", 0);
-          setdvar(#"cg_fov", angle);
-          setdvar(#"cg_drawminimap", 1);
-          setdvar(#"r_umbranumthreads", 1);
-          setdvar(#"r_umbradistancescale", 0.1);
-          setdvar(#"r_uselensfov", 0);
-          setdvar(#"hash_5ee9a4ac16993e50", 1);
-          setdvar(#"debug_show_viewpos", 0);
+          setDvar(#"cg_drawgun", 0);
+          setDvar(#"cg_draw2d", 0);
+          setDvar(#"cg_drawfps", 0);
+          setDvar(#"fx_enable", 0);
+          setDvar(#"r_fog", 0);
+          setDvar(#"r_highloddist", 0);
+          setDvar(#"r_znear", znear);
+          setDvar(#"r_lodscalerigid", 0.1);
+          setDvar(#"cg_drawversion", 0);
+          setDvar(#"sm_enable", 1);
+          setDvar(#"player_view_pitch_down", 90);
+          setDvar(#"player_view_pitch_up", 0);
+          setDvar(#"cg_fov", angle);
+          setDvar(#"cg_drawminimap", 1);
+          setDvar(#"r_umbranumthreads", 1);
+          setDvar(#"r_umbradistancescale", 0.1);
+          setDvar(#"r_uselensfov", 0);
+          setDvar(#"hash_5ee9a4ac16993e50", 1);
+          setDvar(#"debug_show_viewpos", 0);
           thread drawminimapbounds(viewpos, mincorner, maxcorner);
         } else {
           println("<dev string:x65>");
@@ -210,7 +210,7 @@ updateminimapsetting() {
         return;
       }
 
-      setdvar(#"scr_minimap_height", 0);
+      setDvar(#"scr_minimap_height", 0);
     }
   }
 }
@@ -428,14 +428,14 @@ body_customization_devgui(mode) {
 
     if(var_f12e4923 != "<dev string:x1de>") {
       level thread body_customization_populate(mode, var_f12e4923);
-      setdvar(#"hash_2195b248bfe1371e", "<dev string:x1de>");
+      setDvar(#"hash_2195b248bfe1371e", "<dev string:x1de>");
     }
 
     character_index = getdvarstring(#"char_devgui", "<dev string:x1de>");
 
     if(character_index != "<dev string:x1de>") {
       body_customization_process_command(character_index);
-      setdvar(#"char_devgui", "<dev string:x1de>");
+      setDvar(#"char_devgui", "<dev string:x1de>");
     }
 
     wait 0.5;
@@ -505,7 +505,7 @@ function_a432e633() {
     }
   }
 
-  setdvar(#"scr_givegesture", "<dev string:x1de>");
+  setDvar(#"scr_givegesture", "<dev string:x1de>");
 }
 
 function_487bf571() {
@@ -516,7 +516,7 @@ function_487bf571() {
       function_a432e633();
     }
 
-    setdvar(#"scr_givegesture", "<dev string:x1de>");
+    setDvar(#"scr_givegesture", "<dev string:x1de>");
     wait 0.5;
   }
 }

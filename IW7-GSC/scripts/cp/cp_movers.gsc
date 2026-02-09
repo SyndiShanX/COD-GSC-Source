@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -692,7 +692,7 @@ player_pushed_kill(var_0) {
   self endon("stop_player_pushed_kill");
   for(;;) {
     self waittill("player_pushed", var_1, var_2);
-    if(isplayer(var_1) || isagent(var_1)) {
+    if(isPlayer(var_1) || isagent(var_1)) {
       var_3 = length(var_2);
       if(var_3 >= var_0) {
         unresolved_collision_owner_damage(var_1);
@@ -740,7 +740,7 @@ script_mover_has_parent_moved(var_0) {
 }
 
 script_mover_use_can_link(var_0) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 1;
   }
 
@@ -770,7 +770,7 @@ script_mover_use_can_link(var_0) {
 }
 
 script_mover_link_to_use_object(var_0) {
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 script_mover_start_use(self);
     var_1 = var_0 getmovingplatformparent();
     var_2 = undefined;

@@ -91,7 +91,7 @@ main() {
   spawncollision("collision_clip_wall_64x64x10", "collider", (-1126, -909, 106), vectorscale((0, 1, 0), 105.6));
   spawncollision("collision_clip_wall_64x64x10", "collider", (-1130, -789.5, 164.5), vectorscale((0, 1, 0), 83.9));
   spawncollision("collision_mp_frost_kitchen_weap", "collider", (1994, -281.5, 16), (0, 0, 0));
-  setdvar("compassmaxrange", "2100");
+  setDvar("compassmaxrange", "2100");
   visionsetnaked("mp_frostbite", 1);
   game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
   game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";

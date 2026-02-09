@@ -127,7 +127,6 @@ escape_pod_host_migration_respawn_check(escape_pod) {
     self maps\mp\gametypes_zm\_hostmigration::hostmigration_put_player_in_better_place();
   } else {
     println("Taking no action.");
-
   }
 }
 
@@ -323,7 +322,7 @@ elevator_roof_watcher() {
   while(true) {
     self.trig waittill("trigger", who);
 
-    if(isDefined(who) && isplayer(who)) {
+    if(isDefined(who) && isPlayer(who)) {
       while(isDefined(who) && who istouching(self.trig)) {
         if(self.is_moving)
           self waittill_any("movedone", "forcego");
@@ -852,7 +851,6 @@ debugline(ent1, ent2) {
     line(ent1.origin, org, (0, 0, 1));
     wait 0.05;
   }
-
 }
 
 get_perk_elevator() {
@@ -1087,12 +1085,11 @@ init_elevator_devgui(elevatorname, elevator) {
     elevator thread watch_elevator_devgui(elevatorname, 0);
     elevator thread show_elevator_floor(elevatorname);
   }
-
 }
 
 watch_elevator_devgui(name, global) {
   while(true) {
-    stopcmd = getdvar(#"_id_7844BB8F");
+    stopcmd = getDvar(#"_id_7844BB8F");
 
     if(isDefined(stopcmd) && stopcmd == name) {
       if(global)
@@ -1100,11 +1097,11 @@ watch_elevator_devgui(name, global) {
       else if(isDefined(self))
         self.body.elevator_stop = 1;
 
-      setdvar("zombie_devgui_hrelevatorstop", "");
+      setDvar("zombie_devgui_hrelevatorstop", "");
     }
 
     gofloor = getdvarint(#"_id_7FEC8C2B");
-    gocmd = getdvar(#"_id_8693373F");
+    gocmd = getDvar(#"_id_8693373F");
 
     if(isDefined(gocmd) && gocmd == name) {
       if(global)
@@ -1118,13 +1115,12 @@ watch_elevator_devgui(name, global) {
         self.body notify("forcego");
       }
 
-      setdvar("zombie_devgui_hrelevatorfloor", "-1");
-      setdvar("zombie_devgui_hrelevatorgo", "");
+      setDvar("zombie_devgui_hrelevatorfloor", "-1");
+      setDvar("zombie_devgui_hrelevatorgo", "");
     }
 
     wait 1.0;
   }
-
 }
 
 show_elevator_floor(name) {
@@ -1159,5 +1155,4 @@ show_elevator_floor(name) {
 
     wait 0.05;
   }
-
 }

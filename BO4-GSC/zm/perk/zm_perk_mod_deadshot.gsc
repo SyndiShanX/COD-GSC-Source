@@ -43,7 +43,7 @@ function_ce99709d(b_pause, str_perk, str_result, n_slot) {
 on_ai_killed(params) {
   e_attacker = params.eattacker;
 
-  if(isplayer(e_attacker) && e_attacker hasperk(#"specialty_mod_deadshot")) {
+  if(isPlayer(e_attacker) && e_attacker hasperk(#"specialty_mod_deadshot")) {
     if(e_attacker zm_weapons::function_f5a0899d(params.weapon)) {
       if(self zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath)) {
         e_attacker.var_957a1762++;

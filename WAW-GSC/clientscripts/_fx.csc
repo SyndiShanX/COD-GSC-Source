@@ -211,8 +211,7 @@ activate_individual_exploder() {
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     self thread cannon_effect();
   } else {
-  if(isDefined(self.v["soundalias"])) {
-  }
+    if(isDefined(self.v["soundalias"])) {}
     println("** Client : missing sound_effect");
   }
 

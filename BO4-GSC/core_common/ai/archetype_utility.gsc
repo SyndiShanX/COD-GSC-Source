@@ -935,7 +935,7 @@ updatefrustrationlevel(entity) {
 
   record3dtext("<dev string:xe7>" + entity.ai.frustrationlevel, entity.origin, (1, 0.5, 0), "<dev string:x75>");
 
-  if(isactor(entity.enemy) || isplayer(entity.enemy)) {
+  if(isactor(entity.enemy) || isPlayer(entity.enemy)) {
     if(entity.ai.aggressivemode) {
       if(!isDefined(entity.ai.lastfrustrationboost)) {
         entity.ai.lastfrustrationboost = gettime();
@@ -1203,7 +1203,6 @@ shouldchoosebettercover(behaviortreeentity) {
     }
 
     recordenttext("<dev string:xfb>" + shouldusecovernoderesult + "<dev string:x11b>" + islookingaroundforenemy + "<dev string:x123>" + abouttoarriveatcover + "<dev string:x12b>" + iswithineffectiverangealready + "<dev string:x133>" + shouldbeboredatcurrentcover, behaviortreeentity, color, "<dev string:x75>");
-
   } else {
     return !(behaviortreeentity shouldusecovernode() && behaviortreeentity isapproachinggoal());
   }
@@ -1669,7 +1668,7 @@ meleeacquiremutex(behaviortreeentity) {
   if(isDefined(behaviortreeentity) && isDefined(behaviortreeentity.enemy)) {
     behaviortreeentity.meleeenemy = behaviortreeentity.enemy;
 
-    if(isplayer(behaviortreeentity.meleeenemy)) {
+    if(isPlayer(behaviortreeentity.meleeenemy)) {
       if(!isDefined(behaviortreeentity.meleeenemy.meleeattackers)) {
         behaviortreeentity.meleeenemy.meleeattackers = 0;
       }
@@ -1681,7 +1680,7 @@ meleeacquiremutex(behaviortreeentity) {
 
 meleereleasemutex(behaviortreeentity) {
   if(isDefined(behaviortreeentity.meleeenemy)) {
-    if(isplayer(behaviortreeentity.meleeenemy)) {
+    if(isPlayer(behaviortreeentity.meleeenemy)) {
       if(isDefined(behaviortreeentity.meleeenemy.meleeattackers)) {
         behaviortreeentity.meleeenemy.meleeattackers -= 1;
 
@@ -1697,7 +1696,7 @@ meleereleasemutex(behaviortreeentity) {
 
 shouldmutexmelee(behaviortreeentity) {
   if(isDefined(behaviortreeentity.enemy)) {
-    if(!isplayer(behaviortreeentity.enemy)) {
+    if(!isPlayer(behaviortreeentity.enemy)) {
       if(behaviortreeentity.enemy.meleeattackers) {
         return false;
       }
@@ -1746,7 +1745,7 @@ shouldmelee(entity) {
     return false;
   }
 
-  if(isplayer(entity.enemy) && entity.enemy getstance() == "prone") {
+  if(isPlayer(entity.enemy) && entity.enemy getstance() == "prone") {
     return false;
   }
 

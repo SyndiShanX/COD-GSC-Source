@@ -318,7 +318,7 @@ getbesthackertooltarget() {
     if(!isDefined(target_ent) || !isDefined(target_ent.owner)) {
       continue;
     }
-    if(getdvar(#"scr_freelock") == "1") {
+    if(getDvar(#"scr_freelock") == "1") {
       if(self iswithinhackertoolreticle(targetsall[idx]))
         targetsvalid[targetsvalid.size] = targetsall[idx];
 
@@ -632,5 +632,4 @@ tunables() {
     level.chopper_gunner_time = weapons_get_dvar_int("scr_chopper_gunner_time", 7);
     wait 1.0;
   }
-
 }

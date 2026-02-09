@@ -466,7 +466,7 @@ function onusewithneutralizingflag(player) {
     level.bestspawnflag[oldteam] = self.levelflag;
     self gameobjects::set_owner_team(team);
     self.visuals[0] setModel(level.flagmodel[team]);
-    setdvar("scr_obj" + self gameobjects::get_label(), team);
+    setDvar("scr_obj" + self gameobjects::get_label(), team);
     self update_spawn_influencers(team);
     self flagcapturedfromneutral(team);
   } else {
@@ -474,7 +474,7 @@ function onusewithneutralizingflag(player) {
     string = getdomflagusestring(label, 1);
     self gameobjects::set_owner_team("neutral");
     self.visuals[0] setModel(level.flagmodel["neutral"]);
-    setdvar("scr_obj" + self gameobjects::get_label(), "neutral");
+    setDvar("scr_obj" + self gameobjects::get_label(), "neutral");
     self update_spawn_influencers("neutral");
     self flagneutralized(team, oldteam);
   }
@@ -507,7 +507,7 @@ function onusewithoutneutralizingflag(player) {
   print("" + self.label);
   self gameobjects::set_owner_team(team);
   self.visuals[0] setModel(level.flagmodel[team]);
-  setdvar("scr_obj" + self gameobjects::get_label(), team);
+  setDvar("scr_obj" + self gameobjects::get_label(), team);
   level.usestartspawns = 0;
   assert(team != "");
   isbflag = 0;
@@ -756,7 +756,7 @@ function onroundswitch() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     scoreeventprocessed = 0;
     if(attacker.touchtriggers.size && attacker.pers["team"] != self.pers["team"]) {
       triggerids = getarraykeys(attacker.touchtriggers);
@@ -792,7 +792,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
           offendedflag = 1;
         }
       }
-      if(inflagzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+      if(inflagzone && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
         if(offendedflag) {
           if(!isDefined(attacker.dom_defends)) {
             attacker.dom_defends = 0;
@@ -1182,7 +1182,7 @@ function updatecapsperminute(lastownerteam) {
   }
   self.numcaps++;
   minutespassed = globallogic_utils::gettimepassed() / 60000;
-  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
+  if(isPlayer(self) && isDefined(self.timeplayed["total"])) {
     minutespassed = self.timeplayed["total"] / 60;
   }
   self.capsperminute = self.numcaps / minutespassed;

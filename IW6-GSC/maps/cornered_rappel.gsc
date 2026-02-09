@@ -751,7 +751,7 @@ combat_rappel_garden_entry() {
   maps\_utility::delaythread(1.0, common_scripts\utility::flag_set, "garden_spawn_first_enemies");
   maps\_utility::delaythread(1.0, common_scripts\utility::flag_set, "rappel_finished");
   thread maps\cornered_audio::aud_rappel_combat("swing");
-  var_2 = getdvar("cg_hudGrenadeIconOffset");
+  var_2 = getDvar("cg_hudGrenadeIconOffset");
   setsaveddvar("cg_hudGrenadeIconOffset", "512");
   thread combat_rappel_garden_entry_enemies();
   thread combat_rappel_garden_entry_allies(var_0);

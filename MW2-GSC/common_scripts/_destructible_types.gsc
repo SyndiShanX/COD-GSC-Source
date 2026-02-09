@@ -475,10 +475,8 @@ getInfoIndex(destructibleType) {
 }
 
 toy_glass(size) {
-  //---------------------------------------------------------------------
-  // glass break test 120x110inches
-  //---------------------------------------------------------------------
-  destructible_create("toy_glass" + size, "tag_origin", 50);
+  //--------------------------------------------------------------------- // glass break test 120x110inches
+  //--------------------------------------------------------------------- destructible_create("toy_glass" + size, "tag_origin", 50);
   destructible_splash_damage_scaler(5);
   destructible_sound("building_glass_shatter");
   // Glass
@@ -495,10 +493,8 @@ toy_glass(size) {
 }
 
 toy_dt_mirror(size) {
-  //---------------------------------------------------------------------
-  // dt_mirror
-  //---------------------------------------------------------------------
-  destructible_create("toy_dt_mirror" + size, "tag_origin", 150, undefined, 32);
+  //--------------------------------------------------------------------- // dt_mirror
+  //--------------------------------------------------------------------- destructible_create("toy_dt_mirror" + size, "tag_origin", 150, undefined, 32);
   destructible_splash_damage_scaler(5);
   destructible_fx("tag_fx", "props/mirror_shatter" + size);
   destructible_sound("mirror_shatter");
@@ -509,10 +505,8 @@ toy_dt_mirror(size) {
 }
 
 toy_tubetv_(version) {
-  //---------------------------------------------------------------------
-  // Tube TV
-  //---------------------------------------------------------------------
-  destructible_create("toy_tubetv_" + version, "tag_origin", 1, undefined, 32);
+  //--------------------------------------------------------------------- // Tube TV
+  //--------------------------------------------------------------------- destructible_create("toy_tubetv_" + version, "tag_origin", 1, undefined, 32);
   destructible_splash_damage_scaler(1);
   destructible_fx("tag_fx", "explosions/tv_explosion");
   destructible_sound("tv_shot_burst");
@@ -521,10 +515,8 @@ toy_tubetv_(version) {
 }
 
 toy_tvs_flatscreen(version, mounting) {
-  //---------------------------------------------------------------------
-  // Flatscreen TVs
-  //---------------------------------------------------------------------
-  destructible_create("toy_tv_flatscreen_" + mounting + version, "tag_origin", 1, undefined, 32);
+  //--------------------------------------------------------------------- // Flatscreen TVs
+  //--------------------------------------------------------------------- destructible_create("toy_tv_flatscreen_" + mounting + version, "tag_origin", 1, undefined, 32);
   destructible_splash_damage_scaler(1);
   destructible_fx("tag_fx", "explosions/tv_flatscreen_explosion");
   destructible_sound("tv_shot_burst");
@@ -533,10 +525,8 @@ toy_tvs_flatscreen(version, mounting) {
 }
 
 toy_transformer_ratnest01(destructibleType) {
-  //---------------------------------------------------------------------
-  // Transformer w/ wires for Favela
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 75, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Transformer w/ wires for Favela
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 75, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_loopfx("tag_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 75, undefined, 32, "no_melee");
@@ -560,10 +550,8 @@ toy_transformer_ratnest01(destructibleType) {
 }
 
 toy_transformer_small01(destructibleType) {
-  //---------------------------------------------------------------------
-  // Small hanging Transformer box for Favela
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 75, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Small hanging Transformer box for Favela
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 75, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_loopfx("tag_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 75, undefined, 32, "no_melee");
@@ -587,10 +575,8 @@ toy_transformer_small01(destructibleType) {
 }
 
 toy_generator(destructibleType) {
-  //---------------------------------------------------------------------
-  // Red Generator
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_bounce", 75, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Red Generator
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_bounce", 75, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_loopfx("tag_fx2", "smoke/generator_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 75, undefined, 32, "no_melee");
@@ -611,10 +597,8 @@ toy_generator(destructibleType) {
 }
 
 toy_generator_on(destructibleType) {
-  //---------------------------------------------------------------------
-  // Red Generator, on... with sound and vibration animation
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_bounce", 0, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Red Generator, on... with sound and vibration animation
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_bounce", 0, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_loopfx("tag_fx2", "smoke/generator_exhaust", 0.4);
   destructible_anim(get_precached_anim("generator_vibration"), #animtree, "setanimknob", undefined, undefined, "generator_vibration");
@@ -644,10 +628,8 @@ toy_generator_on(destructibleType) {
 }
 
 toy_oxygen_tank(version) {
-  //---------------------------------------------------------------------
-  // Oxygen Tanks 01 and 02
-  //---------------------------------------------------------------------
-  destructible_create("toy_oxygen_tank_" + version, "tag_origin", 150, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Oxygen Tanks 01 and 02
+  //--------------------------------------------------------------------- destructible_create("toy_oxygen_tank_" + version, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_healthdrain(12, 0.2, 64, "allies");
   destructible_loopsound("oxygen_tank_leak_loop");
   destructible_fx("tag_cap", "props/oxygen_tank" + version + "_cap");
@@ -660,10 +642,8 @@ toy_oxygen_tank(version) {
 }
 
 toy_electricbox2(destructibleType) {
-  //---------------------------------------------------------------------
-  // electric box large toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // electric box large toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_fx("tag_fx", "props/electricbox4_explode", undefined, undefined, undefined, 1);
   destructible_sound("exp_fusebox_sparks");
@@ -677,10 +657,8 @@ toy_electricbox2(destructibleType) {
 }
 
 toy_electricbox4(destructibleType) {
-  //---------------------------------------------------------------------
-  // electric box medium toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // electric box medium toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_fx("tag_fx", "props/electricbox4_explode", undefined, undefined, undefined, 1);
   destructible_sound("exp_fusebox_sparks");
@@ -691,10 +669,8 @@ toy_electricbox4(destructibleType) {
 }
 
 toy_airconditioner(destructibleType) {
-  //---------------------------------------------------------------------
-  // Small Airconditioner hanging on wall
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 0, undefined, 32);
+  //--------------------------------------------------------------------- // Small Airconditioner hanging on wall
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 0, undefined, 32);
   destructible_anim(get_precached_anim("ex_airconditioner_fan"), #animtree, "setanimknob", undefined, undefined, "ex_airconditioner_fan");
   destructible_loopsound("airconditioner_running_loop");
   destructible_state("tag_origin", "com_ex_airconditioner", 300);
@@ -707,10 +683,8 @@ toy_airconditioner(destructibleType) {
 }
 
 toy_ceiling_fan(destructibleType) {
-  //---------------------------------------------------------------------
-  // ceiling fan
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 0, undefined, 32);
+  //--------------------------------------------------------------------- // ceiling fan
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 0, undefined, 32);
   destructible_anim(get_precached_anim("me_fanceil1_spin"), #animtree, "setanimknob", undefined, undefined, "me_fanceil1_spin");
   destructible_state("tag_origin", "me_fanceil1", 150);
   destructible_anim(get_precached_anim("me_fanceil1_spin_stop"), #animtree, "setanimknob", undefined, undefined, "me_fanceil1_spin_stop");
@@ -722,10 +696,8 @@ toy_ceiling_fan(destructibleType) {
 }
 
 toy_wall_fan(destructibleType) {
-  //---------------------------------------------------------------------
-  // wall fan
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_swivel", 0, undefined, 32);
+  //--------------------------------------------------------------------- // wall fan
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_swivel", 0, undefined, 32);
   destructible_anim(get_precached_anim("wall_fan_rotate"), #animtree, "setanimknob", undefined, undefined, "wall_fan_rotate");
   destructible_loopsound("wall_fan_fanning");
   destructible_state("tag_wobble", "cs_wallfan1", 150);
@@ -741,11 +713,8 @@ toy_wall_fan(destructibleType) {
 }
 
 toy_propane_tank02(destructibleType) {
-  //---------------------------------------------------------------------
-  // Large Propane tank goes KaBooM
-  //---------------------------------------------------------------------
-
-  destructible_create(destructibleType, "tag_origin", 50, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Large Propane tank goes KaBooM
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 50, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(5);
   destructible_state(undefined, undefined, 350, undefined, 32, "no_melee");
   destructible_loopsound("propanetank02_gas_leak_loop");
@@ -779,11 +748,8 @@ toy_propane_tank02(destructibleType) {
 }
 
 toy_propane_tank02_small(destructibleType) {
-  //---------------------------------------------------------------------
-  // Small Propane tank goes KaBooM
-  //---------------------------------------------------------------------
-
-  destructible_create(destructibleType, "tag_origin", 50, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Small Propane tank goes KaBooM
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 50, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(10);
   destructible_state(undefined, undefined, 350, undefined, 32, "no_melee");
   destructible_loopsound("propanetank02_gas_leak_loop");
@@ -816,10 +782,8 @@ toy_propane_tank02_small(destructibleType) {
 }
 
 toy_copier(destructibleType) {
-  //---------------------------------------------------------------------
-  // copier toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // copier toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_loopfx("tag_left_feeder", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 250, undefined, 32, "no_melee");
@@ -845,10 +809,8 @@ toy_copier(destructibleType) {
 }
 
 toy_firehydrant(destructibleType) {
-  //---------------------------------------------------------------------
-  // fire hydrant toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // fire hydrant toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 250, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(11);
   destructible_state(undefined, undefined, 500, undefined, 32, "no_melee");
   destructible_loopfx("tag_cap", "props/firehydrant_leak", 0.1);
@@ -868,10 +830,8 @@ toy_firehydrant(destructibleType) {
 }
 
 toy_parkingmeter(destructibleType) {
-  //---------------------------------------------------------------------
-  // parking meter toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_meter", 120);
+  //--------------------------------------------------------------------- // parking meter toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_meter", 120);
   destructible_fx("tag_fx", "props/parking_meter_coins", true, damage_not("splash")); // coin drop
   destructible_fx("tag_fx", "props/parking_meter_coins_exploded", true, "splash"); // coin drop
   destructible_sound("exp_parking_meter_sweet"); // coin drop sounds
@@ -884,10 +844,8 @@ toy_parkingmeter(destructibleType) {
 }
 
 toy_mailbox(destructibleType) {
-  //---------------------------------------------------------------------
-  // mail box without pole
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 200);
+  //--------------------------------------------------------------------- // mail box without pole
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 200);
   destructible_fx("tag_fx", "props/mail_box_explode", true); // mail flying
   destructible_sound("exp_mailbox_sweet"); // mail paper sounds
   destructible_explode(100, 2000, 64, 64, 0, 0); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage
@@ -897,10 +855,8 @@ toy_mailbox(destructibleType) {
 }
 
 toy_mailbox2(color) {
-  //---------------------------------------------------------------------
-  // mailbox2 w/ pole toy
-  //---------------------------------------------------------------------
-  destructible_create("toy_mailbox2_" + color, "tag_origin", 120);
+  //--------------------------------------------------------------------- // mailbox2 w/ pole toy
+  //--------------------------------------------------------------------- destructible_create("toy_mailbox2_" + color, "tag_origin", 120);
   destructible_fx("tag_fx", "props/mail_box_explode", true, damage_not("splash")); // bullet damages
   destructible_fx("tag_fx", "props/mail_box_explode", true, "splash"); // grenade damages
   destructible_sound("exp_mailbox_sweet");
@@ -914,10 +870,8 @@ toy_mailbox2(color) {
 }
 
 toy_newspaper_stand_red(destructibleType) {
-  //---------------------------------------------------------------------
-  // newspaper stand toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120);
+  //--------------------------------------------------------------------- // newspaper stand toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120);
   destructible_fx("tag_door", "props/news_stand_paper_spill", true, damage_not("splash")); // coin drop
   destructible_sound("exp_newspaper_box"); // coin drop sounds
   destructible_explode(2500, 2501, 64, 64, 0, 0, true); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage, continue to take damage
@@ -930,10 +884,8 @@ toy_newspaper_stand_red(destructibleType) {
 }
 
 toy_newspaper_stand_blue(destructibleType) {
-  //---------------------------------------------------------------------
-  // newspaper stand toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120);
+  //--------------------------------------------------------------------- // newspaper stand toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120);
   destructible_fx("tag_door", "props/news_stand_paper_spill_shatter", true, damage_not("splash")); // coin drop
   destructible_sound("exp_newspaper_box"); // coin drop sounds
   destructible_explode(800, 2001, 64, 64, 0, 0, true); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage, continue to take damage
@@ -946,10 +898,8 @@ toy_newspaper_stand_blue(destructibleType) {
 }
 
 toy_filecabinet(destructibleType) {
-  //---------------------------------------------------------------------
-  // filecabinet toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120);
+  //--------------------------------------------------------------------- // filecabinet toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120);
   destructible_fx("tag_drawer_lower", "props/filecabinet_dam", true, damage_not("splash")); // coin drop
   destructible_sound("exp_filecabinet");
   destructible_state(undefined, "com_filecabinetblackclosed_dam", 20, undefined, undefined, "splash");
@@ -963,10 +913,8 @@ toy_filecabinet(destructibleType) {
 }
 
 toy_trashbin_01(destructibleType) {
-  //---------------------------------------------------------------------
-  // trashbin01 toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // trashbin01 toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
   destructible_fx("tag_fx", "props/garbage_spew_des", true, "splash");
   destructible_fx("tag_fx", "props/garbage_spew", true, damage_not("splash"));
   destructible_sound("exp_trashcan_sweet");
@@ -978,10 +926,8 @@ toy_trashbin_01(destructibleType) {
 }
 
 toy_trashbin_02(destructibleType) {
-  //---------------------------------------------------------------------
-  // trashbin02 toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // trashbin02 toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
   destructible_fx("tag_fx", "props/garbage_spew_des", true, "splash");
   destructible_fx("tag_fx", "props/garbage_spew", true, damage_not("splash"));
   destructible_sound("exp_trashcan_sweet");
@@ -993,10 +939,8 @@ toy_trashbin_02(destructibleType) {
 }
 
 toy_recyclebin_01(destructibleType) {
-  //---------------------------------------------------------------------
-  // recyclebin toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // recyclebin toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
   destructible_fx("tag_fx", "props/garbage_spew_des", true, "splash");
   destructible_fx("tag_fx", "props/garbage_spew", true, damage_not("splash"));
   destructible_sound("exp_trashcan_sweet");
@@ -1008,10 +952,8 @@ toy_recyclebin_01(destructibleType) {
 }
 
 toy_trashcan_metal_closed(destructibleType) {
-  //---------------------------------------------------------------------
-  // trashcan_metal_closed
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // trashcan_metal_closed
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
   destructible_fx("tag_fx", "props/garbage_spew_des", true, "splash");
   destructible_fx("tag_fx", "props/garbage_spew", true, damage_not("splash"));
   destructible_sound("exp_trashcan_sweet");
@@ -1022,10 +964,8 @@ toy_trashcan_metal_closed(destructibleType) {
 }
 
 toy_water_collector(destructibleType) {
-  //---------------------------------------------------------------------
-  // utility_water_collector - big blue odd shaped water barrels
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 220, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // utility_water_collector - big blue odd shaped water barrels
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 220, undefined, 32, "no_melee");
   destructible_fx("tag_fx", "explosions/water_collector_explosion");
   destructible_sound("water_collector_splash");
   destructible_explode(500, 800, 32, 32, 1, 10, undefined, 32); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage, continue damage, originoffset
@@ -1036,10 +976,8 @@ toy_water_collector(destructibleType) {
 }
 
 toy_foliage_tree_oak_1(destructibleType) {
-  //---------------------------------------------------------------------
-  // foliage_tree_oak_1 destructible tree (splash damage only)
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "splash");
+  //--------------------------------------------------------------------- // foliage_tree_oak_1 destructible tree (splash damage only)
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "splash");
   destructible_fx("tag_fx", "explosions/tree_trunk_explosion_oak_1", true, "splash");
   destructible_sound("large_oak_tree_impact");
   destructible_sound("large_oak_tree_fall");
@@ -1050,10 +988,8 @@ toy_foliage_tree_oak_1(destructibleType) {
 }
 
 toy_usa_gas_station_trash_bin_01(destructibleType) {
-  //---------------------------------------------------------------------
-  // usa_gas_station_trash_bin_01 toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // usa_gas_station_trash_bin_01 toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
   destructible_fx("tag_fx", "props/garbage_spew_des", true, "splash");
   destructible_fx("tag_fx", "props/garbage_spew", true, damage_not("splash"));
   destructible_explode(600, 651, 1, 1, 10, 20); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage
@@ -1064,10 +1000,8 @@ toy_usa_gas_station_trash_bin_01(destructibleType) {
 }
 
 toy_usa_gas_station_trash_bin_02(destructibleType) {
-  //---------------------------------------------------------------------
-  // usa_gas_station_trash_bin_02 toy
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // usa_gas_station_trash_bin_02 toy
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 120, undefined, 32, "no_melee");
   destructible_fx("tag_fx_high", "props/garbage_spew_des", true, "splash");
   destructible_fx("tag_fx_high", "props/garbage_spew", true, damage_not("splash"));
   destructible_explode(600, 651, 1, 1, 10, 20); // force_min, force_max, rangeSP, rangeMP, mindamage, maxdamage
@@ -1078,10 +1012,8 @@ toy_usa_gas_station_trash_bin_02(destructibleType) {
 }
 
 toy_light_ceiling_round(destructibleType) {
-  //---------------------------------------------------------------------
-  // Ceiling round light
-  //---------------------------------------------------------------------
-  //println( "Ceiling light round being destroyedﬂ" );
+  //--------------------------------------------------------------------- // Ceiling round light
+  //--------------------------------------------------------------------- //println( "Ceiling light round being destroyedﬂ" );
   destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_lights_out(16);
@@ -1090,10 +1022,8 @@ toy_light_ceiling_round(destructibleType) {
 }
 
 toy_light_ceiling_fluorescent(destructibleType) {
-  //---------------------------------------------------------------------
-  // Ceiling fluorescent light
-  //---------------------------------------------------------------------
-  println("Ceiling light fluorescent being destroyedﬂ");
+  //--------------------------------------------------------------------- // Ceiling fluorescent light
+  //--------------------------------------------------------------------- println("Ceiling light fluorescent being destroyedﬂ");
   destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_fx("tag_fx", "misc/light_fluorescent_blowout_runner");
@@ -1113,10 +1043,8 @@ toy_light_ceiling_fluorescent(destructibleType) {
 }
 
 toy_light_ceiling_fluorescent_spotlight(destructibleType) {
-  //---------------------------------------------------------------------
-  // Ceiling fluorescent light
-  //---------------------------------------------------------------------
-  println("Ceiling light fluorescent being destroyedﬂ");
+  //--------------------------------------------------------------------- // Ceiling fluorescent light
+  //--------------------------------------------------------------------- println("Ceiling light fluorescent being destroyedﬂ");
   destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_sound("fluorescent_light_bulb");
@@ -1135,10 +1063,8 @@ toy_light_ceiling_fluorescent_spotlight(destructibleType) {
 }
 
 toy_light_ceiling_fluorescent_single(destructibleType) {
-  //---------------------------------------------------------------------
-  // Ceiling fluorescent light
-  //---------------------------------------------------------------------
-  println("Ceiling light fluorescent single being destroyedﬂ");
+  //--------------------------------------------------------------------- // Ceiling fluorescent light
+  //--------------------------------------------------------------------- println("Ceiling light fluorescent single being destroyedﬂ");
   destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_fx("tag_fx", "misc/light_fluorescent_single_blowout_runner");
@@ -1162,10 +1088,8 @@ toy_light_ceiling_fluorescent_single(destructibleType) {
 }
 
 toy_light_ceiling_fluorescent_single_spotlight(destructibleType) {
-  //---------------------------------------------------------------------
-  // Ceiling fluorescent light
-  //---------------------------------------------------------------------
-  println("Ceiling light fluorescent single being destroyedﬂ");
+  //--------------------------------------------------------------------- // Ceiling fluorescent light
+  //--------------------------------------------------------------------- println("Ceiling light fluorescent single being destroyedﬂ");
   destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_lights_out(16);
@@ -1182,10 +1106,8 @@ toy_light_ceiling_fluorescent_single_spotlight(destructibleType) {
 }
 
 toy_bookstore_bookstand4_books(destructibleType) {
-  //---------------------------------------------------------------------
-  // bookstore_bookstand4_books
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 200, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // bookstore_bookstand4_books
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 200, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(7);
   destructible_fx("tag_fx", "props/bookshelf4_dmg", true, damage_not("splash"));
   //destructible_sound( "copier_exp" );
@@ -1196,10 +1118,8 @@ toy_bookstore_bookstand4_books(destructibleType) {
 }
 
 toy_locker_double(destructibleType) {
-  //---------------------------------------------------------------------
-  // Locker Double
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Locker Double
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
 
   destructible_anim(get_precached_anim("locker_broken_both_doors_1"), #animtree, "setanimknob", undefined, 0, "locker_broken_both_doors_1");
   destructible_fx("tag_fx", "props/locker_double_des_02_right", undefined, undefined, 0);
@@ -1237,10 +1157,8 @@ toy_locker_double(destructibleType) {
 }
 
 toy_chicken(version) {
-  //---------------------------------------------------------------------
-  // Chicken
-  //---------------------------------------------------------------------
-  destructible_create("toy_chicken" + version, "tag_origin", 0, undefined, 32);
+  //--------------------------------------------------------------------- // Chicken
+  //--------------------------------------------------------------------- destructible_create("toy_chicken" + version, "tag_origin", 0, undefined, 32);
   destructible_anim(get_precached_anim("chicken_cage_loop_01"), #animtree, "setanimknob", undefined, 0, "chicken_cage_loop_01", 1.6);
   destructible_anim(get_precached_anim("chicken_cage_loop_02"), #animtree, "setanimknob", undefined, 1, "chicken_cage_loop_02", 1.6);
   destructible_loopsound("animal_chicken_idle_loop");
@@ -1253,10 +1171,8 @@ toy_chicken(version) {
 }
 
 vehicle_bus_destructible() {
-  //---------------------------------------------------------------------
-  // Bus
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_bus_destructible");
+  //--------------------------------------------------------------------- // Bus
+  //--------------------------------------------------------------------- destructible_create("vehicle_bus_destructible");
   // Glass ( Front Left )
   tag = "tag_window_front_left";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -1379,10 +1295,8 @@ vehicle_bus_destructible() {
 }
 
 vehicle_80s_sedan1(color) {
-  //---------------------------------------------------------------------
-  // 80's Sedan
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_80s_sedan1_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // 80's Sedan
+  //--------------------------------------------------------------------- destructible_create("vehicle_80s_sedan1_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -1501,10 +1415,8 @@ vehicle_80s_sedan1(color) {
 }
 
 vehicle_80s_hatch1(color) {
-  //---------------------------------------------------------------------
-  // 80's hatchback
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_80s_hatch1_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // 80's hatchback
+  //--------------------------------------------------------------------- destructible_create("vehicle_80s_hatch1_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -1618,10 +1530,8 @@ vehicle_80s_hatch1(color) {
 }
 
 vehicle_80s_hatch2(color) {
-  //---------------------------------------------------------------------
-  // 80's hatchback 2
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_80s_hatch2_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // 80's hatchback 2
+  //--------------------------------------------------------------------- destructible_create("vehicle_80s_hatch2_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -1735,10 +1645,8 @@ vehicle_80s_hatch2(color) {
 }
 
 vehicle_80s_wagon1(color) {
-  //---------------------------------------------------------------------
-  // 80's wagon
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_80s_wagon1_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // 80's wagon
+  //--------------------------------------------------------------------- destructible_create("vehicle_80s_wagon1_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -1868,10 +1776,8 @@ vehicle_80s_wagon1(color) {
 }
 
 vehicle_small_hatch(color) {
-  //---------------------------------------------------------------------
-  // small hatch
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_small_hatch_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // small hatch
+  //--------------------------------------------------------------------- destructible_create("vehicle_small_hatch_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -1985,10 +1891,8 @@ vehicle_small_hatch(color) {
 }
 
 vehicle_pickup(destructibleType) {
-  //---------------------------------------------------------------------
-  // White Pickup Truck
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 300, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // White Pickup Truck
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 300, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -2102,10 +2006,8 @@ vehicle_pickup(destructibleType) {
 }
 
 vehicle_hummer(destructibleType) {
-  //---------------------------------------------------------------------
-  // Hummer
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 400, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Hummer
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 400, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 400, undefined, 32, "no_melee");
@@ -2174,10 +2076,8 @@ vehicle_hummer(destructibleType) {
 }
 
 vehicle_bm21(destructibleType, destroyedModel) {
-  //---------------------------------------------------------------------
-  // BM21
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 300, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // BM21
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 300, undefined, 32, "no_melee");
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_blacksmoke", 0.4);
@@ -2238,10 +2138,8 @@ vehicle_bm21(destructibleType, destroyedModel) {
 }
 
 vehicle_moving_truck(destructibleType) {
-  //---------------------------------------------------------------------
-  // White Moving Truck
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 300, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // White Moving Truck
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 300, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -2299,10 +2197,8 @@ vehicle_moving_truck(destructibleType) {
 }
 
 vehicle_luxurysedan(color) {
-  //---------------------------------------------------------------------
-  // Luxury Sedan
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_luxurysedan_2008" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Luxury Sedan
+  //--------------------------------------------------------------------- destructible_create("vehicle_luxurysedan_2008" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_car_alarm();
@@ -2414,10 +2310,8 @@ vehicle_luxurysedan(color) {
 }
 
 vehicle_mig29_landed(destructibleType) {
-  //---------------------------------------------------------------------
-  // Mig 29 Landed Airplane
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "TAG_ORIGIN", 250, undefined, 32, "splash");
+  //--------------------------------------------------------------------- // Mig 29 Landed Airplane
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "TAG_ORIGIN", 250, undefined, 32, "splash");
   destructible_splash_damage_scaler(11);
   destructible_loopfx("TAG_front_fire", "smoke/car_damage_whitesmoke", 0.4);
   destructible_loopfx("TAG_rear_fire", "smoke/car_damage_whitesmoke", 0.4);
@@ -2443,10 +2337,8 @@ vehicle_mig29_landed(destructibleType) {
 }
 
 vehicle_mack_truck_short(color) {
-  //---------------------------------------------------------------------
-  // Mack Truck
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_mack_truck_short_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Mack Truck
+  //--------------------------------------------------------------------- destructible_create("vehicle_mack_truck_short_" + color, "tag_body", 250, undefined, 32, "no_melee");
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_blacksmoke", 0.4);
@@ -2465,7 +2357,7 @@ vehicle_mack_truck_short(color) {
   destructible_sound("mack_truck_explode");
   destructible_loopsound("fire_metal_large");
   destructible_explode(8000, 10000, 512, 512, 100, 400, undefined, undefined, 0.4, 1000);
-  //destructible_anim( %vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy" );
+  //destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy" );
   destructible_state(undefined, "vehicle_mack_truck_short_" + color + "_destroy", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_mack_truck_short_" + color + "_wheel_lf", 20, undefined, undefined, "no_melee", undefined, 8.0);
@@ -2507,10 +2399,8 @@ vehicle_motorcycle(number) {
   explode_anim = undefined;
   explode_anim = get_precached_anim("vehicle_motorcycle_destroy_" + number);
 
-  //---------------------------------------------------------------------
-  // Motorcycle
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_motorcycle_" + number, "body_animate_jnt", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Motorcycle
+  //--------------------------------------------------------------------- destructible_create("vehicle_motorcycle_" + number, "body_animate_jnt", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_death_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -2530,18 +2420,16 @@ vehicle_motorcycle(number) {
   destructible_state(undefined, "vehicle_motorcycle_" + number + "_destroy", undefined, 32, "no_melee");
   // Tires
   destructible_part("front_wheel", "vehicle_motorcycle_01_front_wheel_d", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  //			destructible_anim( %vehicle_80s_sedan1_flattire_LF, #animtree, "setanim" );
+  //			destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim" );
   //			destructible_sound( "veh_tire_deflate", "bullet" );
   destructible_part("rear_wheel", "vehicle_motorcycle_01_rear_wheel_d", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  //			destructible_anim( %vehicle_80s_sedan1_flattire_LB, #animtree, "setanim" );
+  //			destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim" );
   //			destructible_sound( "veh_tire_deflate", "bullet" );
 }
 
 vehicle_subcompact(color) {
-  //---------------------------------------------------------------------
-  // Modern Subcompact - shares textures with coupee and Van
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_subcompact_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Modern Subcompact - shares textures with coupee and Van
+  //--------------------------------------------------------------------- destructible_create("vehicle_subcompact_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -2638,10 +2526,8 @@ vehicle_subcompact(color) {
 }
 
 vehicle_van(color) {
-  //---------------------------------------------------------------------
-  // Modern van - shares textures with Subcompact and Coupe
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_van_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Modern van - shares textures with Subcompact and Coupe
+  //--------------------------------------------------------------------- destructible_create("vehicle_van_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -2754,10 +2640,8 @@ vehicle_van(color) {
 }
 
 vehicle_suburban(destructibleType, color) {
-  //---------------------------------------------------------------------
-  // Suburban
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Suburban
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_car_alarm();
@@ -2885,10 +2769,8 @@ vehicle_suburban(destructibleType, color) {
 }
 
 vehicle_snowmobile(destructibleType) {
-  //---------------------------------------------------------------------
-  // Snowmobile
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Snowmobile
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -2923,10 +2805,8 @@ vehicle_snowmobile(destructibleType) {
 }
 
 destructible_gaspump(destructibleType) {
-  //---------------------------------------------------------------------
-  // Gas Pump 01
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Gas Pump 01
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 150, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_loopfx("tag_death_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 150, undefined, 32, "no_melee");
@@ -2975,10 +2855,8 @@ destructible_gaspump(destructibleType) {
 }
 
 destructible_electrical_transformer_large(destructibleType) {
-  //---------------------------------------------------------------------
-  // Electrical transformer 01
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_origin", 1500, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Electrical transformer 01
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_origin", 1500, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(2);
   destructible_loopsound("electrical_transformer_sparks");
   destructible_loopfx("tag_fx", "explosions/electrical_transformer_spark_runner", 0.8);
@@ -3045,10 +2923,8 @@ get_precached_anim(animname) {
 #using_animtree("vehicles");
 
 vehicle_coupe(color) {
-  //---------------------------------------------------------------------
-  // Modern coupe - shares textures with Subcompact and Van
-  //---------------------------------------------------------------------
-  destructible_create("vehicle_coupe_" + color, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Modern coupe - shares textures with Subcompact and Van
+  //--------------------------------------------------------------------- destructible_create("vehicle_coupe_" + color, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -3145,10 +3021,8 @@ vehicle_coupe(color) {
 }
 
 vehicle_uaz_winter(destructibleType) {
-  //---------------------------------------------------------------------
-  // UAZ - Winter Version
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // UAZ - Winter Version
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -3255,10 +3129,8 @@ vehicle_uaz_winter(destructibleType) {
 }
 
 vehicle_uaz_fabric(destructibleType) {
-  //---------------------------------------------------------------------
-  // UAZ - Winter Version
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // UAZ - Winter Version
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -3351,10 +3223,8 @@ vehicle_uaz_fabric(destructibleType) {
 }
 
 vehicle_uaz_hardtop(destructibleType) {
-  //---------------------------------------------------------------------
-  // UAZ - Winter Version
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // UAZ - Winter Version
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -3461,10 +3331,8 @@ vehicle_uaz_hardtop(destructibleType) {
 }
 
 vehicle_uaz_open(destructibleType) {
-  //---------------------------------------------------------------------
-  // UAZ - Open Version
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // UAZ - Open Version
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -3571,10 +3439,8 @@ vehicle_uaz_open(destructibleType) {
 }
 
 vehicle_policecar(destructibleType) {
-  //---------------------------------------------------------------------
-  // Police Car
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Police Car
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -3678,10 +3544,8 @@ vehicle_policecar(destructibleType) {
 }
 
 vehicle_policecar_russia(destructibleType) {
-  //---------------------------------------------------------------------
-  // Police Car
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Police Car
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   destructible_loopfx("tag_hood_fx", "smoke/car_damage_whitesmoke", 0.4);
   destructible_state(undefined, undefined, 200, undefined, 32, "no_melee");
@@ -3785,10 +3649,8 @@ vehicle_policecar_russia(destructibleType) {
 }
 
 vehicle_taxi(destructibleType) {
-  //---------------------------------------------------------------------
-  // Taxi with random roof ads
-  //---------------------------------------------------------------------
-  destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
+  //--------------------------------------------------------------------- // Taxi with random roof ads
+  //--------------------------------------------------------------------- destructible_create(destructibleType, "tag_body", 250, undefined, 32, "no_melee");
   //destructible_splash_damage_scaler( 18 );
   random_dynamic_attachment("tag_ad", "vehicle_taxi_rooftop_ad_base", "vehicle_taxi_rooftop_ad_1");
   random_dynamic_attachment("tag_ad", "vehicle_taxi_rooftop_ad_base", "vehicle_taxi_rooftop_ad_2");

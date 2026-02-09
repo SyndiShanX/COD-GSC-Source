@@ -892,12 +892,12 @@ function crateactivate(hacker) {
       objective_icon(enemycrateobjid, "compass_supply_drop_white");
       objective_setcolor(enemycrateobjid, &"EnemyOrange");
       objective_state(enemycrateobjid, "active");
-      if(isplayer(self.owner)) {
+      if(isPlayer(self.owner)) {
         objective_setinvisibletoplayer(enemycrateobjid, self.owner);
       }
       self.enemyobjid[self.enemyobjid.size] = enemycrateobjid;
     }
-    if(isplayer(self.owner)) {
+    if(isPlayer(self.owner)) {
       objective_setvisibletoplayer(crateobjid, self.owner);
     }
     if(isDefined(self.hacker)) {
@@ -921,7 +921,7 @@ function crateactivate(hacker) {
       }
     }
   }
-  if(isDefined(self.owner) && isplayer(self.owner) && self.owner util::is_bot()) {
+  if(isDefined(self.owner) && isPlayer(self.owner) && self.owner util::is_bot()) {
     self.owner notify("bot_crate_landed", self);
   }
   if(isDefined(self.owner)) {
@@ -1523,7 +1523,7 @@ function cratedroptogroundkill() {
 function cratedroptogroundtrace(start) {
   end = start + (vectorscale((0, 0, -1), 8000));
   trace = bulletTrace(start, end, 1, self, 1, 1);
-  if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
+  if(isDefined(trace["entity"]) && isPlayer(trace["entity"]) && isalive(trace["entity"])) {
     player = trace["entity"];
     if(player.sessionstate != "playing") {
       return;
@@ -1839,7 +1839,7 @@ function personalusebar(object) {
 function spawn_helicopter(owner, team, origin, angles, model, targetname, killstreak_id, context) {
   chopper = spawnhelicopter(owner, origin, angles, model, targetname);
   if(!isDefined(chopper)) {
-    if(isplayer(owner)) {
+    if(isPlayer(owner)) {
       killstreakrules::killstreakstop("supply_drop", team, killstreak_id);
       self notify("cleanup_marker");
     }
@@ -1868,7 +1868,7 @@ function spawn_helicopter(owner, team, origin, angles, model, targetname, killst
   chopper setmaxpitchroll(0, maxroll);
   chopper setdrawinfrared(1);
   target_set(chopper, vectorscale((0, 0, -1), 25));
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     chopper thread refcountdecchopper(team, killstreak_id);
   }
   chopper thread helidestroyed();
@@ -2151,7 +2151,7 @@ function helidelivercrate(origin, weapon, owner, team, killstreak_id, package_co
   killcament.angles = (100, chopper.angles[1], chopper.angles[2]);
   killcament.starttime = gettime();
   killcament linkto(chopper);
-  if(isplayer(owner)) {
+  if(isPlayer(owner)) {
     target_setturretaquire(self, 0);
     chopper thread samturretwatcher(drop_origin);
   }
@@ -2352,7 +2352,7 @@ function refcountdecchopper(team, killstreak_id) {
 }
 
 function supply_drop_dev_gui() {
-  setdvar("", "");
+  setDvar("", "");
   while(true) {
     wait(0.5);
     devgui_string = getdvarstring("");

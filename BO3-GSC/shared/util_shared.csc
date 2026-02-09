@@ -484,7 +484,7 @@ function clean_deleted(&array) {
 
 function get_eye() {
   if(sessionmodeiscampaigngame()) {
-    if(self isplayer()) {
+    if(self isPlayer()) {
       linked_ent = self getlinkedent();
       if(isDefined(linked_ent) && getdvarint("cg_cameraUseTagCamera") > 0) {
         camera = linked_ent gettagorigin("tag_camera");
@@ -516,7 +516,7 @@ function lerp_dvar(str_dvar, n_start_val = getdvarfloat(str_dvar), n_end_val, n_
     if(isDefined(b_saved_dvar) && b_saved_dvar) {
       setsaveddvar(str_dvar, n_curr_val);
     } else {
-      setdvar(str_dvar, n_curr_val);
+      setDvar(str_dvar, n_curr_val);
     }
   }
   while(n_time_delta < n_lerp_time);
@@ -646,7 +646,7 @@ function friend_not_foe_team(localclientindex, team, predicted) {
 
 function isenemyplayer(player) {
   assert(isDefined(player));
-  if(!player isplayer()) {
+  if(!player isPlayer()) {
     return false;
   }
   if(player.team != "free") {

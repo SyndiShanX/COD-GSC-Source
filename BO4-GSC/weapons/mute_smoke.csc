@@ -98,7 +98,6 @@ function_12e09509(localclientnum = 0) {
         function_e08f51f(var_46e1fb08.origin);
         function_e08f51f(var_37b85cb5.origin);
         function_e08f51f(var_618fb067.origin);
-
       }
 
       var_34bb1a09 = 0;
@@ -238,7 +237,7 @@ function_a189ab2e(localclientnum, enemy) {
 }
 
 function_775916af() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 62;
   }
 

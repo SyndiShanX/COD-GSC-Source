@@ -69,7 +69,7 @@ setlowermessage(text, time) {
 clearlowermessage() {
   self endon(#"hash_6ceeeb477ece797b");
 
-  if(!isDefined(level.lower_message) || !isplayer(self)) {
+  if(!isDefined(level.lower_message) || !isPlayer(self)) {
     return;
   }
 

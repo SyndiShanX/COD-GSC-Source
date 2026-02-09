@@ -101,7 +101,7 @@ function_84f1c310() {
     level flag::set(#"catwalk_door_open");
     level thread scene::init_streamer(#"aib_vign_zm_mob_brutus_summon_hellhounds", #"allies", 0, 0);
 
-    if(isplayer(waitresult.activator)) {
+    if(isPlayer(waitresult.activator)) {
       waitresult.activator thread zm_audio::create_and_play_dialog(#"catwalk", #"open", undefined, 1);
     }
 
@@ -195,7 +195,7 @@ function_f184754() {
   while(true) {
     s_info = self waittill(#"trigger", #"death");
 
-    if(isplayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
+    if(isPlayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
       break;
     }
   }
@@ -210,7 +210,7 @@ function_fd3fa3a3() {
   while(true) {
     s_info = self waittill(#"trigger", #"death");
 
-    if(isplayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
+    if(isPlayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
       break;
     }
   }
@@ -338,7 +338,7 @@ function_17ccf041() {
     n_check_time = function_27b45f3e();
     e_leader = function_9ac202b9();
 
-    if(isplayer(e_leader)) {
+    if(isPlayer(e_leader)) {
       s_notify = e_leader waittilltimeout(n_check_time, #"damage", #"death");
 
       if(s_notify._notify === "death") {

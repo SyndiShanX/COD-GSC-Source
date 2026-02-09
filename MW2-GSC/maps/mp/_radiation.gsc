@@ -20,7 +20,6 @@ radiation() {
 
     thread onPlayerConnect();
   }
-
 }
 
 onPlayerConnect() {
@@ -187,26 +186,26 @@ blackout() {
 }
 
 doRadiationdamage(iDamage) {
-  self thread[[level.callbackPlayerDamage]](self, // eInflictor The entity that causes the damage.( e.g. a turret )
-    self, // eAttacker The entity that is attacking.
-    iDamage, // iDamage Integer specifying the amount of damage done
-    0, // iDFlags Integer specifying flags that are to be applied to the damage
-    "MOD_SUICIDE", // sMeansOfDeath Integer specifying the method of death
-    "claymore_mp", // sWeapon The weapon number of the weapon used to inflict the damage
-    self.origin, // vPoint The point the damage is from?
-    (0, 0, 0) - self.origin, // vDir The direction of the damage
-    "none", // sHitLoc The location of the hit
-    0 // psOffsetTime The time offset for the damage);
-}
+    self thread[[level.callbackPlayerDamage]](self, // eInflictor The entity that causes the damage.( e.g. a turret )
+      self, // eAttacker The entity that is attacking.
+      iDamage, // iDamage Integer specifying the amount of damage done
+      0, // iDFlags Integer specifying flags that are to be applied to the damage
+      "MOD_SUICIDE", // sMeansOfDeath Integer specifying the method of death
+      "claymore_mp", // sWeapon The weapon number of the weapon used to inflict the damage
+      self.origin, // vPoint The point the damage is from?
+      (0, 0, 0) - self.origin, // vDir The direction of the damage
+      "none", // sHitLoc The location of the hit
+      0 // psOffsetTime The time offset for the damage);
+    }
 
-fadeinBlackOut(duration, alpha) {
-  self fadeOverTime(duration);
-  self.alpha = alpha;
-  wait duration;
-}
+    fadeinBlackOut(duration, alpha) {
+      self fadeOverTime(duration);
+      self.alpha = alpha;
+      wait duration;
+    }
 
-fadeoutBlackOut(duration, alpha) {
-  self fadeOverTime(duration);
-  self.alpha = alpha;
-  wait duration;
-}
+    fadeoutBlackOut(duration, alpha) {
+      self fadeOverTime(duration);
+      self.alpha = alpha;
+      wait duration;
+    }

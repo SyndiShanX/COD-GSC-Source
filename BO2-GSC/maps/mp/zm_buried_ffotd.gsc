@@ -212,7 +212,7 @@ spawned_slide_push_trigger() {
   while(true) {
     trig1 waittill("trigger", who);
 
-    if(who getstance() == "prone" && isplayer(who))
+    if(who getstance() == "prone" && isPlayer(who))
       who setstance("crouch");
 
     trig1 thread slide_push_think(who);

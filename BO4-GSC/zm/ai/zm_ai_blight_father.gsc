@@ -263,7 +263,7 @@ killed_callback(e_attacker) {
 
   self clientfield::set("blight_father_amb_sac_clientfield", 0);
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
 
@@ -578,7 +578,7 @@ function_76c1f56f() {
 }
 
 function_cf18d183(grapplee) {
-  if(isDefined(grapplee) && isplayer(grapplee)) {
+  if(isDefined(grapplee) && isPlayer(grapplee)) {
     grapplee clientfield::set_to_player("tongueGrabPostFx", 0);
     grapplee clientfield::set_to_player("tongueGrabRumble", 0);
   }
@@ -609,7 +609,7 @@ blightfatherdeathstart(entity) {
 
   attacker = entity.attacker;
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     weapon = attacker getcurrentweapon();
 
     if(attacker hasweapon(weapon)) {
@@ -1326,7 +1326,7 @@ function_91dcbd1c(prone_2_run_roll, var_a424c06a, e_grapplee) {
   prone_2_run_roll.e_grapplee = e_grapplee;
   e_grapplee zm_grappler::function_a60cb756(1, 0);
 
-  if(isplayer(e_grapplee)) {
+  if(isPlayer(e_grapplee)) {
     e_grapplee thread function_c1b0cbda();
     e_grapplee function_5d851a4e();
   }
@@ -1341,7 +1341,7 @@ function_91dcbd1c(prone_2_run_roll, var_a424c06a, e_grapplee) {
   var_ca015b6f linkto(var_a424c06a, "tag_origin", (0, 0, 35) * -1);
   e_grapplee.var_ca015b6f = var_ca015b6f;
 
-  if(isplayer(e_grapplee)) {
+  if(isPlayer(e_grapplee)) {
     e_grapplee playerlinkto(var_ca015b6f, "tag_origin", 1, 40, 40, 80, 15);
 
     recordstar(var_148b92ae, (1, 0, 0));
@@ -1358,7 +1358,7 @@ function_91dcbd1c(prone_2_run_roll, var_a424c06a, e_grapplee) {
     e_grapplee linkto(var_a424c06a);
   }
 
-  if(isDefined(prone_2_run_roll) && isDefined(e_grapplee) && isplayer(e_grapplee)) {
+  if(isDefined(prone_2_run_roll) && isDefined(e_grapplee) && isPlayer(e_grapplee)) {
     e_grapplee thread function_55cba1f3(prone_2_run_roll);
   }
 
@@ -1393,7 +1393,7 @@ function_c526065b(entity, var_e0ef3075) {
 
   grapplee zm_grappler::function_a60cb756(0, 0);
 
-  if(isplayer(grapplee)) {
+  if(isPlayer(grapplee)) {
     grapplee function_1fd426b6();
     grapplee allowcrouch(1);
     grapplee allowprone(1);
@@ -1408,12 +1408,12 @@ function_c526065b(entity, var_e0ef3075) {
       droppoint = v_ground_pos;
     }
 
-    if(isplayer(grapplee)) {
+    if(isPlayer(grapplee)) {
       grapplee setorigin(droppoint);
     } else {
       grapplee forceteleport(droppoint);
     }
-  } else if(isplayer(grapplee)) {
+  } else if(isPlayer(grapplee)) {
     if(isDefined(grapplee.last_valid_position)) {
       grapplee setorigin(grapplee.last_valid_position);
     }
@@ -1582,7 +1582,7 @@ function_1d2646(entity) {
   var_78a5a6c3 = 0;
   grapplee = entity.e_grapplee;
 
-  if(isDefined(grapplee) && isplayer(grapplee) && !(isDefined(grapplee.var_16735873) && grapplee.var_16735873) && !(isDefined(grapplee.var_77f481e1) && grapplee.var_77f481e1)) {
+  if(isDefined(grapplee) && isPlayer(grapplee) && !(isDefined(grapplee.var_16735873) && grapplee.var_16735873) && !(isDefined(grapplee.var_77f481e1) && grapplee.var_77f481e1)) {
     grapplee.var_f4e33249 = 1;
     var_78a5a6c3 = 1;
     var_8aa5bbfb = entity gettagorigin("tag_jaw") - grapplee getEye();
@@ -1592,7 +1592,6 @@ function_1d2646(entity) {
     grapplee thread function_5e853c85(entity);
 
     grapplee thread function_e989972e(entity);
-
   }
 
   if(!var_78a5a6c3 && entity.var_e6c8672d < ai::function_9139c839().var_4afa14d6) {
@@ -1630,7 +1629,7 @@ function_bc3eb15a(entity) {
     var_495f8389 = abs(var_7981cbb7 - 10);
     var_6f2b0bce = max(var_7981cbb7 + 10, 0);
 
-    if(isplayer(grapplee) && grapplee islinkedto(grapplee.var_ca015b6f)) {
+    if(isPlayer(grapplee) && grapplee islinkedto(grapplee.var_ca015b6f)) {
       grapplee lerpviewangleclamp(0, 0, 0, 20, 20, var_495f8389, var_6f2b0bce);
     }
   }
@@ -2101,7 +2100,7 @@ function_19249d10(entity) {
     return false;
   }
 
-  if(!isplayer(entity.favoriteenemy)) {
+  if(!isPlayer(entity.favoriteenemy)) {
     return false;
   }
 
@@ -2157,7 +2156,6 @@ function_19249d10(entity) {
     var_edabd3cd = bullettracepassed(self.origin + var_725b8fb5 + (0, 0, height + entity ai::function_9139c839().var_73212b51), self.origin + var_c46a2de3 + (0, 0, height + entity ai::function_9139c839().var_73212b51), 0, self);
 
     recordline(self.origin + var_725b8fb5 + (0, 0, height + entity ai::function_9139c839().var_73212b51), self.origin + var_c46a2de3 + (0, 0, height + entity ai::function_9139c839().var_73212b51), (0, 1, 0));
-
   }
 
   if(!var_edabd3cd) {
@@ -2291,7 +2289,7 @@ function_b2be1340(starting_health) {
   while(self.n_health > 0) {
     s_notify = self.trigger waittill(#"damage");
 
-    if(isDefined(s_notify.attacker) && isplayer(s_notify.attacker) && s_notify.amount > 0) {
+    if(isDefined(s_notify.attacker) && isPlayer(s_notify.attacker) && s_notify.amount > 0) {
       self.n_health -= s_notify.amount;
     }
   }
@@ -2352,7 +2350,7 @@ function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   if(isDefined(self.missile_target) && isDefined(self.var_209ff2fa)) {
     var_6d0a510 = self.missile_target getcentroid();
 
-    if(isplayer(self.missile_target)) {
+    if(isPlayer(self.missile_target)) {
       var_6d0a510 = self.missile_target getplayercamerapos();
     }
 
@@ -2801,7 +2799,7 @@ function_a2751530() {
           function_cab68577(cmd[1]);
           break;
         case # "debug_purchase_lockdown":
-          setdvar(#"hash_3ec02cda135af40f", !getdvarint(#"hash_3ec02cda135af40f", 0));
+          setDvar(#"hash_3ec02cda135af40f", !getdvarint(#"hash_3ec02cda135af40f", 0));
           break;
         case # "debug_dmg":
           level.var_482766d7 = !(isDefined(level.var_482766d7) && level.var_482766d7);
@@ -2820,16 +2818,14 @@ function_a2751530() {
           break;
         default:
           if(isDefined(level.var_c81a4e00)) {
-            [
-              [level.var_c81a4e00]
-            ](cmd);
+            [[level.var_c81a4e00]](cmd);
           }
 
           break;
       }
     }
 
-    setdvar(#"hash_1999cec56042c9de", "<dev string:x51c>");
+    setDvar(#"hash_1999cec56042c9de", "<dev string:x51c>");
   }
 }
 

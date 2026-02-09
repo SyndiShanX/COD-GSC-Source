@@ -797,7 +797,7 @@ function onroundswitch() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isplayer(attacker) || (!self.touchtriggers.size && !attacker.touchtriggers.size) || attacker.pers["team"] == self.pers["team"]) {
+  if(!isPlayer(attacker) || (!self.touchtriggers.size && !attacker.touchtriggers.size) || attacker.pers["team"] == self.pers["team"]) {
     return;
   }
   medalgiven = 0;

@@ -257,7 +257,7 @@ function bomber_spawn_function() {
 }
 
 function callback_bomber_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(isplayer(eattacker)) {
+  if(isPlayer(eattacker)) {
     eattacker thread function_9c291f73();
   } else {
     idamage = 0;
@@ -1509,7 +1509,7 @@ function glass_ceiling_igc() {
   level.var_f2a5cb1e = var_5b5cfed1;
   while(true) {
     var_5b5cfed1 waittill("trigger", ent);
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       level thread function_3174cbb();
       level notify("hash_a70b0538");
       break;
@@ -2326,7 +2326,7 @@ function rooftops_player_fell_off() {
   a_s_teleports = struct::get_array(self.target, "targetname");
   while(true) {
     self waittill("trigger", e_who);
-    if(isplayer(e_who) && (!(isDefined(e_who.var_fc8b8ec) && e_who.var_fc8b8ec))) {
+    if(isPlayer(e_who) && (!(isDefined(e_who.var_fc8b8ec) && e_who.var_fc8b8ec))) {
       e_who playsoundtoplayer("evt_plr_derez", e_who);
       e_who thread function_c24ce0f9(a_s_teleports);
     }
@@ -2598,7 +2598,7 @@ function function_f4151d2d() {
       continue;
     }
     if(e_actor istouching(var_a80eedb1)) {
-      if(isplayer(e_actor)) {
+      if(isPlayer(e_actor)) {
         e_actor dodamage(e_actor.health, e_actor.origin);
         break;
         continue;
@@ -2704,7 +2704,7 @@ function function_db738b68() {
   self endon("death");
   while(true) {
     self waittill("touch", ent);
-    if(isplayer(ent)) {
+    if(isPlayer(ent)) {
       ent dodamage(ent.health, ent.origin);
     }
   }
@@ -2777,7 +2777,7 @@ function function_c9af9d76(var_10057083) {
   t_rumble = getent(var_10057083, "targetname");
   while(level flag::get("chase_train_move")) {
     t_rumble waittill("trigger", ent);
-    if(isplayer(ent) && (!(isDefined(ent.var_c9af9d76) && ent.var_c9af9d76))) {
+    if(isPlayer(ent) && (!(isDefined(ent.var_c9af9d76) && ent.var_c9af9d76))) {
       ent clientfield::set_to_player("chase_train_rumble", 1);
       ent thread function_cdd68ba3(t_rumble);
     }

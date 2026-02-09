@@ -97,16 +97,16 @@ main() {
   level thread clientscripts\mp\_utility::initutility();
   clientscripts\mp\_utility_code::struct_class_init();
   clientscripts\mp\_utility::registersystem("levelNotify", ::levelnotifyhandler);
-  level.createfx_enabled = getdvar(#"createfx") != "";
+  level.createfx_enabled = getDvar(#"createfx") != "";
   level.createfx_disable_fx = getdvarint(#"_id_C9B177D6") == 1;
-  setdvar("tu6_player_shallowWaterHeight", "0.0");
-  setdvar("tu7_cg_deathCamAboveWater", "0");
-  setdvar("tu12_cg_vehicleCamAboveWater", "0");
-  setdvar("bg_plantInWaterDepth", "5");
+  setDvar("tu6_player_shallowWaterHeight", "0.0");
+  setDvar("tu7_cg_deathCamAboveWater", "0");
+  setDvar("tu12_cg_vehicleCamAboveWater", "0");
+  setDvar("bg_plantInWaterDepth", "5");
 
   if(!sessionmodeiszombiesgame()) {
     setup_default_client_flag_callbacks();
-    setdvar("r_exposureTweak", "0");
+    setDvar("r_exposureTweak", "0");
     setsaveddvar("sm_sunsamplesizenear", 0.5);
     setsaveddvar("sm_sunshadowsmall", 0);
     setsaveddvar("r_lightGridEnableTweaks", 0);
@@ -157,14 +157,14 @@ main() {
 
   level thread parse_structs();
 
-  if(getdvar(#"r_reflectionProbeGenerate") == "1") {
+  if(getDvar(#"r_reflectionProbeGenerate") == "1") {
     return;
   }
   if(!sessionmodeiszombiesgame())
     clientscripts\mp\_vehicle::init_vehicles();
 
   if(!isps3())
-    setdvar("cg_enableHelicopterNoCullLodOut", 1);
+    setDvar("cg_enableHelicopterNoCullLodOut", 1);
 }
 
 parse_structs() {

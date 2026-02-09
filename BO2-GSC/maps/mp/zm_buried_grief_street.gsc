@@ -35,7 +35,7 @@ street_treasure_chest_init() {
   tunnel_chest = getstruct("tunnels_chest1", "script_noteworthy");
   jail_chest = getstruct("jail_chest1", "script_noteworthy");
   gun_chest = getstruct("gunshop_chest", "script_noteworthy");
-  setdvar("disableLookAtEntityLogic", 1);
+  setDvar("disableLookAtEntityLogic", 1);
   level.chests = [];
   level.chests[level.chests.size] = start_chest;
   level.chests[level.chests.size] = court_chest;

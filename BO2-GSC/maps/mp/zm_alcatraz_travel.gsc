@@ -605,7 +605,7 @@ gondola_lights_green() {
 }
 
 is_player_on_gondola() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(self istouching(level.e_gondola.t_ride))
       return true;
     else

@@ -79,7 +79,7 @@ main() {
   maps\mp\agents\alien\alien_spider\_alien_spider::precacheanims();
   maps\mp\alien\_armory_weapon::init();
   maps\mp\_load::main();
-  setdvar("sm_sunShadowScale", "0.5");
+  setDvar("sm_sunShadowScale", "0.5");
   var_1 = ["tutorial_hive_01"];
   maps\mp\alien\_utility::add_hive_dependencies("checkpoint_hive_01", var_1);
   maps\mp\alien\_utility::add_hive_dependencies("checkpoint_hive_02", var_1);
@@ -488,7 +488,7 @@ watch_trigger_by_player() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       break;
     }
   }
@@ -927,7 +927,7 @@ monitor_conduit_hit() {
     var_0 setCanDamage(1);
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(isDefined(var_2) && isplayer(var_2) && isDefined(var_5) && var_5 == "MOD_EXPLOSIVE" && isDefined(var_9) && var_9 == 5 && !isDefined(var_10)) {
+    if(isDefined(var_2) && isPlayer(var_2) && isDefined(var_5) && var_5 == "MOD_EXPLOSIVE" && isDefined(var_9) && var_9 == 5 && !isDefined(var_10)) {
       if(self.window_active) {
         if(level.easter_egg_conduit_hits == 0)
           level thread monitor_fail_condition();

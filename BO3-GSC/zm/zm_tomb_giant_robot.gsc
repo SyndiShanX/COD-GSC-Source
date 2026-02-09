@@ -937,7 +937,7 @@ function player_exits_giant_robot_head_trigger_think() {
     if(!(isDefined(self.stub.is_available) && self.stub.is_available)) {
       continue;
     }
-    if(!isplayer(player) || !zombie_utility::is_player_valid(player)) {
+    if(!isPlayer(player) || !zombie_utility::is_player_valid(player)) {
       continue;
     }
     level thread init_player_eject_logic(self.stub, player);
@@ -1572,13 +1572,13 @@ function footprint_check_for_nearby_players(ai_giant_robot) {
 }
 
 function setup_giant_robot_devgui() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", "");
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1592,7 +1592,7 @@ function setup_giant_robot_devgui() {
 function watch_for_force_giant_robot() {
   while(true) {
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       if(isDefined(level.devgui_force_giant_robot) && level.devgui_force_giant_robot == 0) {
         level.devgui_force_giant_robot = undefined;
         iprintlnbold("");
@@ -1602,7 +1602,7 @@ function watch_for_force_giant_robot() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       if(isDefined(level.devgui_force_giant_robot) && level.devgui_force_giant_robot == 1) {
         level.devgui_force_giant_robot = undefined;
         iprintlnbold("");
@@ -1612,7 +1612,7 @@ function watch_for_force_giant_robot() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       if(isDefined(level.devgui_force_giant_robot) && level.devgui_force_giant_robot == 2) {
         level.devgui_force_giant_robot = undefined;
         iprintlnbold("");
@@ -1622,7 +1622,7 @@ function watch_for_force_giant_robot() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       if(isDefined(level.devgui_force_three_robot_round) && level.devgui_force_three_robot_round) {
         level.devgui_force_three_robot_round = undefined;
         iprintlnbold("");
@@ -1632,7 +1632,7 @@ function watch_for_force_giant_robot() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       if(isDefined(level.devgui_force_giant_robot_foot) && level.devgui_force_giant_robot_foot == "") {
         level.devgui_force_giant_robot_foot = undefined;
         iprintlnbold("");
@@ -1642,7 +1642,7 @@ function watch_for_force_giant_robot() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       if(isDefined(level.devgui_force_giant_robot_foot) && level.devgui_force_giant_robot_foot == "") {
         level.devgui_force_giant_robot_foot = undefined;
         iprintlnbold("");
@@ -1652,7 +1652,7 @@ function watch_for_force_giant_robot() {
       }
     }
     if(getdvarstring("") == "") {
-      setdvar("", "");
+      setDvar("", "");
       level flag::set("");
       iprintlnbold("");
     }

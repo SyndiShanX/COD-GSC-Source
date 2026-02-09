@@ -8,19 +8,23 @@
 #include animscripts\combat_utility;
 
 usingautomaticweapon() {
-  if(self.weapon == "none" || !self animscripts\utility::holdingweapon())
+  if(self.weapon == "none" || !self animscripts\utility::holdingweapon()) {
     return false;
+  }
 
-  if(weaponissemiauto(self.weapon))
+  if(weaponissemiauto(self.weapon)) {
     return false;
+  }
 
-  if(weaponisboltaction(self.weapon))
+  if(weaponisboltaction(self.weapon)) {
     return false;
+  }
 
   class = self.weaponclass;
 
-  if(class == "rifle" || class == "mg" || class == "smg")
+  if(class == "rifle" || class == "mg" || class == "smg") {
     return true;
+  }
 
   return false;
 }
@@ -30,17 +34,19 @@ usingsemiautoweapon() {
 }
 
 autoshootanimrate() {
-  if(usingautomaticweapon())
+  if(usingautomaticweapon()) {
     return 0.1 / weaponfiretime(self.weapon) * getdvarfloat(#"_id_DA8BDE9E");
-  else
+  } else {
     return 0.2;
+  }
 }
 
 burstshootanimrate() {
-  if(usingautomaticweapon())
+  if(usingautomaticweapon()) {
     return 0.16 / weaponfiretime(self.weapon);
-  else
+  } else {
     return 0.2;
+  }
 }
 
 waitaftershot() {
@@ -64,20 +70,23 @@ refillclip() {
   }
 
   if(self.weaponclass == "rocketlauncher") {
-    if(!self.a.rocketvisible)
+    if(!self.a.rocketvisible) {
       self thread animscripts\combat_utility::showrocketwhenreloadisdone();
+    }
 
-    if(self.a.rockets <= 0)
+    if(self.a.rockets <= 0) {
       self.a.rockets = weaponclipsize(self.weapon);
+    }
   }
 
   self.bulletsinclip = weaponclipsize(self.weapon);
   assert(isDefined(self.bulletsinclip), "RefillClip failed");
 
-  if(self.bulletsinclip <= 0)
+  if(self.bulletsinclip <= 0) {
     return false;
-  else
+  } else {
     return true;
+  }
 }
 
 precacheweaponswitchfx() {}

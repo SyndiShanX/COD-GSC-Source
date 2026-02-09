@@ -286,7 +286,7 @@ function function_26edc5d7() {
   self endon("death");
   while(true) {
     self waittill("trigger", ai_guy);
-    if(isDefined(ai_guy.owner) && isplayer(ai_guy.owner) || isplayer(ai_guy)) {
+    if(isDefined(ai_guy.owner) && isPlayer(ai_guy.owner) || isPlayer(ai_guy)) {
       break;
     }
   }
@@ -466,7 +466,7 @@ function glass_break(str_trigger_name) {
     t_glass flag::init("glass_broken");
     while(isDefined(t_glass) && t_glass flag::get("glass_broken") == 0) {
       t_glass trigger::wait_till();
-      if(!isplayer(t_glass.who) || (isplayer(t_glass.who) && t_glass.who issprinting())) {
+      if(!isPlayer(t_glass.who) || (isPlayer(t_glass.who) && t_glass.who issprinting())) {
         glassradiusdamage(t_glass.origin, 100, 500, 500);
         t_glass flag::set("glass_broken");
       }

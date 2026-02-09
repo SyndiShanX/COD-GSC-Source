@@ -409,7 +409,7 @@ function function_1add8026(mechz) {
 
 function function_ef1ba7e5() {
   self waittill("death");
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     event = "death_mechz";
     if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       self.attacker zm_score::player_add_points(event, 1500);
@@ -438,7 +438,7 @@ function function_949a3fdf() {
 }
 
 function function_b03abc02(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(zm_spawner::player_using_hi_score_weapon(attacker)) {
       damage_type = "damage";
     } else {

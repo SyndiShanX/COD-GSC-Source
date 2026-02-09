@@ -60,14 +60,14 @@ function function_3c75e14b(localclientnum, onoff) {
     var_b401f607 = getdvarint("scr_num_in_beast");
     if(onoff) {
       var_b401f607++;
-      setdvar("cg_focalLength", 21);
+      setDvar("cg_focalLength", 21);
     } else {
       var_b401f607--;
       if(var_b401f607 == 0) {
-        setdvar("cg_focalLength", 14.64);
+        setDvar("cg_focalLength", 14.64);
       }
     }
-    setdvar("scr_num_in_beast", var_b401f607);
+    setDvar("scr_num_in_beast", var_b401f607);
   }
 }
 

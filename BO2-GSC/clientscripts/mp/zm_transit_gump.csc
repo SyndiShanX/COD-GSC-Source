@@ -24,7 +24,7 @@ init_transit_gump() {
   for(i = 0; i < players.size; i++)
     sethidegumpalpha(i, startcolor);
 
-  if(getdvar(#"ui_gametype") == "zclassic" || getdvar(#"ui_gametype") == "zsurvival") {
+  if(getDvar(#"ui_gametype") == "zclassic" || getDvar(#"ui_gametype") == "zsurvival") {
     slots = players.size;
 
     if(slots < 2)
@@ -44,7 +44,7 @@ init_transit_gump() {
 
     thread clientscripts\mp\zombies\_zm_gump::watch_spectation(gump_trigs);
   } else {
-    start_location = getdvar(#"ui_zm_mapstartlocation");
+    start_location = getDvar(#"ui_zm_mapstartlocation");
 
     if(start_location == "transit" || start_location == "busstop")
       start_location = "busstation";

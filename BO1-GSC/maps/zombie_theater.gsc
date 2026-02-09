@@ -68,32 +68,29 @@ main() {
   level thread maps\_zombiemode_zone_manager::manage_zones(init_zones);
   level thread maps\_zombiemode_auto_turret::init();
   level thread set_rope_collision();
-  level.extracam_screen = getEnt("theater_extracam_screen", "targetname");
-  level.extracam_screen hide();
+  level.extracam_screen = GetEnt("theater_extracam_screen", "targetname");
+  level.extracam_screen Hide();
   clientnotify("camera_stop");
   init_sounds();
   level thread add_powerups_after_round_1();
-  visionSetNaked("zombie_theater", 0);
+  visionsetnaked("zombie_theater", 0);
   chandelier = getEntArray("theater_chandelier", "targetname");
   array_thread(chandelier, ::theater_chandelier_model_scale);
   maps\zombie_theater_teleporter::teleport_pad_hide_use();
 }
-
 #using_animtree("generic_human");
+
 anim_override_func() {
   level.scr_anim["zombie"]["walk7"] = % ai_zombie_walk_v8;
 }
-
 #using_animtree("zombie_theater");
 curtain_anim_init() {
   level.scr_anim["curtains_move"] = % o_zombie_theatre_curtain;
 }
-
 theater_playanim(animname) {
   self UseAnimTree(#animtree);
   self animscripted(animname + "_done", self.origin, self.angles, level.scr_anim[animname], "normal", undefined, 2.0);
 }
-
 include_weapons() {
   include_weapon("frag_grenade_zm", false, true);
   include_weapon("claymore_zm", false, true);
@@ -173,7 +170,6 @@ include_weapons() {
   precacheItem("explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-
 include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -182,7 +178,6 @@ include_powerups() {
   include_powerup("carpenter");
   include_powerup("fire_sale");
 }
-
 add_powerups_after_round_1() {
   level.zombie_powerup_array = array_remove(level.zombie_powerup_array, "nuke");
   level.zombie_powerup_array = array_remove(level.zombie_powerup_array, "fire_sale");
@@ -195,7 +190,6 @@ add_powerups_after_round_1() {
     wait(1);
   }
 }
-
 init_zombie_theater() {
   flag_init("curtains_done");
   flag_init("lobby_occupied");
@@ -207,7 +201,6 @@ init_zombie_theater() {
   thread maps\zombie_theater_quad::init_roofs();
   level thread teleporter_intro();
 }
-
 teleporter_intro() {
   flag_wait("all_players_spawned");
   wait(0.25);
@@ -218,9 +211,8 @@ teleporter_intro() {
   playsoundatposition("evt_beam_fx_2d", (0, 0, 0));
   playsoundatposition("evt_pad_cooldown_2d", (0, 0, 0));
 }
-
 electric_switch() {
-  trig = getEnt("use_elec_switch", "targetname");
+  trig = getent("use_elec_switch", "targetname");
   trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
   trig setcursorhint("HINT_NOICON");
   level thread wait_for_power();
@@ -229,9 +221,8 @@ electric_switch() {
   flag_set("power_on");
   Objective_State(8, "done");
 }
-
 wait_for_power() {
-  master_switch = getEnt("elec_switch", "targetname");
+  master_switch = getent("elec_switch", "targetname");
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
@@ -258,12 +249,10 @@ wait_for_power() {
   level.delay_spawners = undefined;
   level thread quad_wave_init();
 }
-
 init_sounds() {
   maps\_zombiemode_utility::add_sound("wooden_door", "zmb_door_wood_open");
   maps\_zombiemode_utility::add_sound("fence_door", "zmb_door_fence_open");
 }
-
 theater_zone_init() {
   flag_init("always_on");
   flag_set("always_on");
@@ -280,7 +269,6 @@ theater_zone_init() {
   add_adjacent_zone("theater_zone", "stage_zone", "power_on");
   add_adjacent_zone("west_balcony_zone", "alleyway_zone", "magic_box_west_balcony1");
 }
-
 theater_ignore_spawner(spawner) {
   if(!flag("curtains_done")) {
     if(spawner.script_noteworthy == "quad_zombie_spawner") {
@@ -304,7 +292,6 @@ theater_ignore_spawner(spawner) {
   }
   return false;
 }
-
 quad_wave_init() {
   level thread time_for_quad_wave("foyer_zone");
   level thread time_for_quad_wave("theater_zone");
@@ -313,7 +300,6 @@ quad_wave_init() {
   level waittill("end_of_round");
   flag_clear("special_quad_round");
 }
-
 time_for_quad_wave(zone_name) {
   if(!isDefined(zone_name)) {
     return;
@@ -341,7 +327,7 @@ time_for_quad_wave(zone_name) {
   chance = 100;
   max_zombies = [[level.max_zombie_func]](max);
   current_round = level.round_number;
-  if((level.round_number % 3 == 0) && chance >= randomInt(100)) {
+  if((level.round_number % 3 == 0) && chance >= RandomInt(100)) {
     if(zone.is_occupied) {
       flag_set("special_quad_round");
       maps\_zombiemode_zone_manager::reinit_zone_spawners();
@@ -354,7 +340,6 @@ time_for_quad_wave(zone_name) {
   }
   level thread time_for_quad_wave(zone_name);
 }
-
 theater_chandelier_model_scale() {
   flag_wait("power_on");
   if(self.model == "zombie_theater_chandelier1arm_off") {
@@ -363,7 +348,6 @@ theater_chandelier_model_scale() {
     self setModel("zombie_theater_chandelier1_on");
   }
 }
-
 set_rope_collision() {
   techrope = getEntArray("techrope01", "targetname");
   if(isDefined(techrope)) {
@@ -373,14 +357,12 @@ set_rope_collision() {
     }
   }
 }
-
 theater_exit_level() {
   zombies = GetAiArray("axis");
   for(i = 0; i < zombies.size; i++) {
     zombies[i] thread theater_find_exit_point();
   }
 }
-
 theater_find_exit_point() {
   self endon("death");
   player = getplayers()[0];
@@ -391,8 +373,8 @@ theater_find_exit_point() {
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {
-    dist_zombie = distanceSquared(locs[i].origin, endPos);
-    dist_player = distanceSquared(locs[i].origin, player.origin);
+    dist_zombie = DistanceSquared(locs[i].origin, endPos);
+    dist_player = DistanceSquared(locs[i].origin, player.origin);
     if(dist_zombie < dist_player) {
       dest = i;
       break;

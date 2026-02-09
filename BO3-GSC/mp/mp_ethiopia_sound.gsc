@@ -20,7 +20,7 @@ function snd_dmg_monk() {
   }
   while(true) {
     trigger waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       trigger playSound("amb_monkey_shot");
       wait(15);
     }
@@ -34,7 +34,7 @@ function snd_dmg_cheet() {
   }
   while(true) {
     trigger waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       trigger playSound("amb_cheeta_shot");
       wait(15);
     }
@@ -48,7 +48,7 @@ function snd_dmg_boar() {
   }
   while(true) {
     trigger waittill("trigger", who);
-    if(isplayer(who)) {
+    if(isPlayer(who)) {
       trigger playSound("amb_boar_shot");
       wait(15);
     }

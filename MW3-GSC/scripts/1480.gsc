@@ -15,7 +15,6 @@ _id_3AD6() {
 
     if(!maps\_utility::_id_12DC()) {
       var_0[var_0.size] = "@DEADQUOTE_RIOTSHIELD_USE_EXPLOSIVE";
-
     }
     var_0[var_0.size] = "@DEADQUOTE_RIOTSHIELD_OUT_FLANK";
     var_0[var_0.size] = "@DEADQUOTE_RIOTSHIELD_DONT_CHARGE";
@@ -24,7 +23,6 @@ _id_3AD6() {
 
   if(!isDefined(level._id_2106)) {
     level._id_2106 = [];
-
   }
   level._id_2106["riotshield"] = ::_id_3AD8;
   animscripts\riotshield\riotshield::_id_3AB4();
@@ -79,7 +77,6 @@ _id_3ADA(var_0, var_1, var_2) {
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_1124) && isDefined(var_5._id_1124._id_1F41)) {
       var_5._id_1124._id_1F41 = common_scripts\utility::array_remove(var_5._id_1124._id_1F41, var_5);
-
     }
     var_5._id_1124 = var_7;
   }
@@ -97,7 +94,6 @@ _id_3ADD(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self._id_3ADC = var_1;
-
   }
   foreach(var_3 in self._id_1F41) {
     var_3.goalradius = 25;
@@ -120,7 +116,6 @@ _id_3ADE() {
 
     if(self._id_3ADF != "stopped") {
       self waittill("goal");
-
     }
     self._id_1F41 = maps\_utility::_id_1361(self._id_1F41);
     _id_3AE0();
@@ -135,7 +130,6 @@ _id_3AE0(var_0) {
     self.forward = var_0;
   } else {
     var_0 = self.forward;
-
   }
   var_1 = _id_3AED();
   var_2 = (self.forward[1], -1 * self.forward[0], 0);
@@ -200,7 +194,6 @@ _id_3AE3(var_0, var_1) {
     self.forward = var_1;
   } else {
     var_1 = self.forward;
-
   }
   var_2 = (var_1[1], -1 * var_1[0], 0);
   var_3 = var_2 * self._id_3ADC;
@@ -211,7 +204,6 @@ _id_3AE3(var_0, var_1) {
 
     if(isDefined(var_6)) {
       var_6 setgoalpos(var_4);
-
     }
     var_4 = var_4 + var_3;
   }
@@ -371,7 +363,6 @@ _id_3AED() {
 
   if(var_1) {
     var_0 = 1 / var_1 * var_0;
-
   }
   return var_0;
 }

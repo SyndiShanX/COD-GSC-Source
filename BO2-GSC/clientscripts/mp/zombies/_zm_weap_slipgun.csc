@@ -10,7 +10,7 @@
 #include clientscripts\mp\zombies\_zm_weapons;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   if(!clientscripts\mp\zombies\_zm_weapons::is_weapon_included("slipgun_zm")) {

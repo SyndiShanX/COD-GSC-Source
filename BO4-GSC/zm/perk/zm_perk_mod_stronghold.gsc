@@ -36,7 +36,7 @@ function_20b5dc19(b_pause, str_perk, str_result, n_slot) {
 function_1c4f9c3f(s_params) {
   player = s_params.eattacker;
 
-  if(isplayer(player) && player hasperk(#"specialty_mod_camper")) {
+  if(isPlayer(player) && player hasperk(#"specialty_mod_camper")) {
     if(!(isDefined(player.var_7d0e99f3) && player.var_7d0e99f3)) {
       return;
     }

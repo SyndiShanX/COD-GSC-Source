@@ -300,7 +300,6 @@ assignAwards() {
   if(CONST_PRINT_AWARDS) {
     printAwards();
   }
-
 }
 
 printAwards() {

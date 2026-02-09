@@ -18,7 +18,7 @@ debugchains() {
   var_4 = 0;
 
   for(;;) {
-    if(getdvar("chain") == "1") {
+    if(getDvar("chain") == "1") {
       for(var_3 = 0; var_3 < var_2.size; var_3++) {
         if(distance(level.player getorigin(), var_2[var_3].origin) < 1500) {}
       }
@@ -524,7 +524,7 @@ debug_character_count() {
   var_5 = "off";
 
   for(;;) {
-    var_6 = getdvar("debug_character_count");
+    var_6 = getDvar("debug_character_count");
 
     if(var_6 == "off") {
       if(var_6 != var_5) {
@@ -646,17 +646,17 @@ camera() {
 }
 
 freeplayer() {
-  setdvar("cl_freemove", "0");
+  setDvar("cl_freemove", "0");
 }
 
 setplayertocamera(var_0) {
-  setdvar("cl_freemove", "2");
+  setDvar("cl_freemove", "2");
 }
 
 anglescheck() {
   for(;;) {
-    if(getdvar("angles", "0") == "1")
-      setdvar("angles", "0");
+    if(getDvar("angles", "0") == "1")
+      setDvar("angles", "0");
 
     wait 1;
   }
@@ -695,17 +695,17 @@ updateminimapsetting() {
   var_0 = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
   if(!isDefined(level.minimapcornertargetname)) {
-    setdvar("scr_minimap_corner_targetname", "minimap_corner");
+    setDvar("scr_minimap_corner_targetname", "minimap_corner");
     level.minimapcornertargetname = "minimap_corner";
   }
 
   if(!isDefined(level.minimapheight)) {
-    setdvar("scr_minimap_height", "0");
+    setDvar("scr_minimap_height", "0");
     level.minimapheight = 0;
   }
 
   var_1 = getdvarfloat("scr_minimap_height");
-  var_2 = getdvar("scr_minimap_corner_targetname");
+  var_2 = getDvar("scr_minimap_corner_targetname");
 
   if(var_1 != level.minimapheight || var_2 != level.minimapcornertargetname) {
     if(isDefined(level.minimaporigin)) {
@@ -967,11 +967,11 @@ try_to_draw_line_to_node() {
 }
 
 fogcheck() {
-  if(getdvar("depth_close") == "")
-    setdvar("depth_close", "0");
+  if(getDvar("depth_close") == "")
+    setDvar("depth_close", "0");
 
-  if(getdvar("depth_far") == "")
-    setdvar("depth_far", "1500");
+  if(getDvar("depth_far") == "")
+    setDvar("depth_far", "1500");
 
   var_0 = getdvarint("depth_close");
   var_1 = getdvarint("depth_far");
@@ -1013,7 +1013,7 @@ displaythreat(var_0, var_1) {
   var_5 = 20;
   var_6 = (1, 0.5, 0.2);
   var_7 = (0.2, 0.5, 1);
-  var_8 = !isplayer(self) && self.pacifist;
+  var_8 = !isPlayer(self) && self.pacifist;
 
   for(var_9 = 0; var_9 <= var_5; var_9++) {
     if(isDefined(var_1)) {}
@@ -1236,9 +1236,9 @@ print3ddraw(var_0, var_1, var_2) {
 }
 
 complete_me() {
-  if(getdvar("credits_active") == "1") {
+  if(getDvar("credits_active") == "1") {
     wait 7;
-    setdvar("credits_active", "0");
+    setDvar("credits_active", "0");
     maps\_endmission::credits_end();
     return;
   }

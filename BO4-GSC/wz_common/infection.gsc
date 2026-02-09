@@ -136,7 +136,7 @@ function_cc4a1b88() {
 }
 
 function_89116a1e() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     assert(0);
     return;
   }
@@ -199,9 +199,9 @@ function_89116a1e() {
 }
 
 function_b8c66122() {
-  assert(isplayer(self));
+  assert(isPlayer(self));
 
-  if(!isplayer(self) || !isalive(self)) {
+  if(!isPlayer(self) || !isalive(self)) {
     return;
   }
 
@@ -226,7 +226,7 @@ function_b8c66122() {
 }
 
 function_4fcf8d3f(player) {
-  if(!isplayer(player) || !player is_infected()) {
+  if(!isPlayer(player) || !player is_infected()) {
     return;
   }
 
@@ -280,7 +280,7 @@ function_70f6e873(params) {
 event_handler[grenade_fire] function_4776caf4(eventstruct) {
   eventstruct.projectile endon(#"death");
 
-  if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self)) {
+  if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self)) {
     weaponname = eventstruct.weapon.name;
 
     if(weaponname != # "hash_351254cd4fc93d6e") {

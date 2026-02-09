@@ -101,7 +101,7 @@ crowd_damage_trigger() {
     s_waitresult = self waittill(#"damage");
     player = s_waitresult.attacker;
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       player.var_7df228aa.var_56b97916 += s_waitresult.amount;
       b_explosive_damage = 0;
 
@@ -267,7 +267,7 @@ function_2d074f7d(params) {
       break;
   }
 
-  if(isplayer(params.eattacker) && isalive(params.eattacker)) {
+  if(isPlayer(params.eattacker) && isalive(params.eattacker)) {
     player = params.eattacker;
 
     if(!isDefined(player.var_7df228aa.n_zombie_kills)) {
@@ -593,7 +593,6 @@ crowd_throw_item(var_2bd26cff) {
         self playSound(#"hash_270c80055a8d296c");
 
         self thread zm_net::network_choke_action("<dev string:x38>", &function_f3e454c1, self.name + "<dev string:x52>");
-
       }
 
       wait 0.05;
@@ -641,14 +640,13 @@ crowd_throw_item(var_2bd26cff) {
         s_waitresult = e_powerup waittill(#"powerup_grabbed", #"powerup_timedout", #"hacked", #"death");
         var_264cf1f9 = s_waitresult.e_grabber;
 
-        if(isplayer(var_264cf1f9) && var_bec704d1 == 1) {
+        if(isPlayer(var_264cf1f9) && var_bec704d1 == 1) {
           var_264cf1f9 notify(#"hash_62f05feef69e1ed4");
         }
 
-        if(isplayer(var_264cf1f9) && isplayer(self)) {
+        if(isPlayer(var_264cf1f9) && isPlayer(self)) {
           if(var_264cf1f9 == self) {
             self thread zm_net::network_choke_action("<dev string:x38>", &function_f3e454c1, var_264cf1f9.name + "<dev string:x84>" + str_powerup + "<dev string:x90>");
-
           } else {
             if(str_powerup == "hero_weapon_power" || str_powerup == "bonus_points_player") {
               var_264cf1f9.var_7df228aa.var_a120aedc++;
@@ -661,7 +659,6 @@ crowd_throw_item(var_2bd26cff) {
             }
 
             thread zm_net::network_choke_action("<dev string:x38>", &function_f3e454c1, var_264cf1f9.name + "<dev string:xa3>" + self.name + "<dev string:xad>" + str_powerup);
-
           }
         }
       }
@@ -817,7 +814,7 @@ function_b8dfa139(str_event) {
 
 function_f3e454c1(str_text) {
   if(ishash(str_text)) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self iprintlnbold(function_9e72a96(str_text));
     } else {
       iprintlnbold(function_9e72a96(str_text));
@@ -826,7 +823,7 @@ function_f3e454c1(str_text) {
     return;
   }
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self iprintlnbold(str_text);
     return;
   }
@@ -1185,7 +1182,7 @@ function_8e83be5d() {
       case # "crawler_created":
         e_player = waitresult.player;
 
-        if(!isplayer(e_player)) {
+        if(!isPlayer(e_player)) {
           continue;
         }
 
@@ -1201,7 +1198,7 @@ function_8e83be5d() {
         str_event = # "trap_activated";
         break;
       case # "trap_kill":
-        if(isplayer(waitresult.e_victim)) {
+        if(isPlayer(waitresult.e_victim)) {
           e_player = waitresult.e_victim;
           str_event = # "hash_1f2dfda53e67bf22";
         } else {
@@ -1212,7 +1209,7 @@ function_8e83be5d() {
         break;
     }
 
-    if(isplayer(e_player) && isDefined(str_event)) {
+    if(isPlayer(e_player) && isDefined(str_event)) {
       e_player function_b8dfa139(str_event);
     }
   }

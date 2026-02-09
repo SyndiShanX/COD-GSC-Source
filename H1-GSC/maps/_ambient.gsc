@@ -336,10 +336,10 @@ set_ambience_single(var_0) {
 }
 
 ambience_hud(var_0, var_1, var_2) {
-  if(getdvar("loc_warnings") == "1") {
+  if(getDvar("loc_warnings") == "1") {
     return;
   }
-  if(getdvar("debug_hud") != "") {
+  if(getDvar("debug_hud") != "") {
     return;
   }
   if(!isDefined(level.amb_hud)) {

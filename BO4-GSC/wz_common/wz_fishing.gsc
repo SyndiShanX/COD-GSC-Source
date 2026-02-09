@@ -62,7 +62,7 @@ function_57232538(s_item) {
   fishing_rocks = getdynentarray("fishing_rock");
 
   foreach(rock in fishing_rocks) {
-    if(isplayer(rock.fisherman) && rock.fisherman == self && isDefined(rock.isfishing) && rock.isfishing) {
+    if(isPlayer(rock.fisherman) && rock.fisherman == self && isDefined(rock.isfishing) && rock.isfishing) {
       self stopallboasts();
       self function_ed446f40(rock);
     }
@@ -73,7 +73,7 @@ function_7bf61c45() {
   fishing_rocks = getdynentarray("fishing_rock");
 
   foreach(rock in fishing_rocks) {
-    if(rock.isfishing && isplayer(rock.fisherman) && rock.fisherman === self) {
+    if(rock.isfishing && isPlayer(rock.fisherman) && rock.fisherman === self) {
       self stopallboasts();
       self function_ed446f40(rock);
     }
@@ -84,7 +84,7 @@ function_e2877ac6() {
   fishing_rocks = getdynentarray("fishing_rock");
 
   foreach(rock in fishing_rocks) {
-    if(rock.isfishing && isplayer(rock.fisherman) && rock.fisherman === self) {
+    if(rock.isfishing && isPlayer(rock.fisherman) && rock.fisherman === self) {
       self stopallboasts();
       self function_ed446f40(rock);
     }
@@ -97,7 +97,7 @@ function_c0cfa434() {
   fishing_rocks = getdynentarray("fishing_rock");
 
   foreach(rock in fishing_rocks) {
-    if(rock.isfishing && isplayer(rock.fisherman)) {
+    if(rock.isfishing && isPlayer(rock.fisherman)) {
       rock.fisherman notify(#"hash_61bb9580151c93d5");
       rock.fisherman stopallboasts();
       rock.fisherman function_ed446f40(rock);
@@ -209,7 +209,7 @@ function_4cfd3896(activator, laststate, state) {
     return;
   }
 
-  if(!isplayer(activator)) {
+  if(!isPlayer(activator)) {
     return;
   }
 
@@ -251,7 +251,7 @@ function_6c71782a(dynent) {
   self endon("48d65f5f22c36da2");
   self endon(#"death", #"hash_61bb9580151c93d5", #"hash_667fd08050e0942b");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -308,7 +308,7 @@ function_b828bd39(player, dynent) {
   self notify("1fa6d3899117f2a");
   self endon("1fa6d3899117f2a");
 
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -347,7 +347,7 @@ function_16e4e507(dynent) {
   self endon("651631a8d4cdd907");
   self endoncallback(&function_73532e4f, #"death", #"hash_61bb9580151c93d5");
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -376,7 +376,7 @@ function_ed446f40(dynent) {
   self notify("694f2b46b5345051");
   self endon("694f2b46b5345051");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self enableweaponcycling();
     self enableusability();
     self enableoffhandweapons();
@@ -403,7 +403,7 @@ function_176e516(dynent) {
   self notify("110650c21bf60e88");
   self endon("110650c21bf60e88");
 
-  if(!isDefined(dynent) || !isplayer(self)) {
+  if(!isDefined(dynent) || !isPlayer(self)) {
     return;
   }
 
@@ -447,7 +447,7 @@ function_73532e4f() {
   self notify("76a99663ad9702eb");
   self endon("76a99663ad9702eb");
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self enableweaponcycling();
     self enableusability();
     self enableoffhandweapons();

@@ -22,7 +22,6 @@ class cmp_prop_controls: cluielem {
   function setup_clientfields(uid) {
     cluielem::setup_clientfields(uid);
   }
-
 }
 
 register(uid) {

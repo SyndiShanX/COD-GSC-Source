@@ -511,7 +511,7 @@ func_7DFC(var_0) {
   }
 
   self.var_2A95 = var_3 + 300;
-  switch (getdvar("mapname")) {
+  switch (getDvar("mapname")) {
     case "mp_morningwood":
       self.var_2A95 = self.var_2A95 + 600;
       break;

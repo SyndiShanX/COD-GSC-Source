@@ -45,7 +45,5 @@ precache() {
   precacheItem("beretta");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_sniper_glint::main();
-  //----------------
-}
+  //---------------- maps\_sniper_glint::main();
+  //---------------- }

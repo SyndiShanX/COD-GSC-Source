@@ -12,25 +12,20 @@ _id_410B(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_0 = 12;
   } else if(var_0 < 7) {
     var_0 = 7;
-
   }
   if(!isDefined(var_1)) {
     var_1 = 150;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 100;
-
   }
   if(!isDefined(var_3)) {
     var_3 = 100;
-
   }
   if(!isDefined(var_5)) {
     var_6 = "default";
   } else {
     var_6 = var_5;
-
   }
   var_7 = level.player getorigin() + (0, 8, 2);
   var_8 = 320;
@@ -51,7 +46,6 @@ _id_410B(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(!isDefined(var_4)) {
       level.player thread _id_410C(var_0);
-
     }
     wait 1.5;
     level.player allowstand(1);

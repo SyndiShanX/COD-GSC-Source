@@ -151,7 +151,6 @@ assertproperplacement() {
       }
     }
   }
-
 }
 
 isvalidclass(class) {
@@ -243,10 +242,10 @@ resumetimer() {
 }
 
 getscoreremaining(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     return scorelimit - maps\mp\gametypes\_globallogic_score::_getplayerscore(self);
   else
     return scorelimit - getteamscore(team);
@@ -260,19 +259,19 @@ getteamscoreforround(team) {
 }
 
 getscoreperminute(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
   timelimit = level.timelimit;
   minutespassed = gettimepassed() / 60000 + 0.0001;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     return maps\mp\gametypes\_globallogic_score::_getplayerscore(self) / minutespassed;
   else
     return getteamscoreforround(team) / minutespassed;
 }
 
 getestimatedtimeuntilscorelimit(team) {
-  assert(isplayer(self) || isDefined(team));
+  assert(isPlayer(self) || isDefined(team));
   scoreperminute = self getscoreperminute(team);
   scoreremaining = self getscoreremaining(team);
 
@@ -363,7 +362,6 @@ debugline(start, end) {
     line(start, end);
     wait 0.05;
   }
-
 }
 
 isexcluded(entity, entitylist) {

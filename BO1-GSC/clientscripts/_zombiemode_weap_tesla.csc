@@ -1,6 +1,6 @@
 /****************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_weap_tesla.csc
+ * Script: clientscripts\_zombiemode_weap_tesla\.csc
 ****************************************************/
 
 #include clientscripts\_utility;
@@ -25,12 +25,11 @@ init() {
   level thread player_init();
   level thread tesla_notetrack_think();
 }
-
 player_init() {
   waitforclient(0);
   level.tesla_play_fx = [];
   level.tesla_play_rail = true;
-  players = getLocalPlayers();
+  players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
     level.tesla_play_fx[i] = false;
     players[i] thread tesla_fx_rail(i);
@@ -38,8 +37,7 @@ player_init() {
     players[i] thread tesla_happy(i);
   }
 }
-
-tesla_fx_rail(localClientNum) {
+tesla_fx_rail(localclientnum) {
   self endon("disconnect");
   for(;;) {
     realwait(RandomFloatRange(8, 12));
@@ -49,40 +47,39 @@ tesla_fx_rail(localClientNum) {
     if(!level.tesla_play_rail) {
       continue;
     }
-    currentweapon = GetCurrentWeapon(localClientNum);
+    currentweapon = GetCurrentWeapon(localclientnum);
     if(currentweapon != "tesla_gun_zm" && currentweapon != "tesla_gun_upgraded_zm") {
       continue;
     }
-    if(IsADS(localClientNum) || IsThrowingGrenade(localClientNum) || IsMeleeing(localClientNum) || IsOnTurret(localClientNum)) {
+    if(IsADS(localclientnum) || IsThrowingGrenade(localclientnum) || IsMeleeing(localclientnum) || IsOnTurret(localclientnum)) {
       continue;
     }
-    if(GetWeaponAmmoClip(localClientNum, currentweapon) <= 0) {
+    if(GetWeaponAmmoClip(localclientnum, currentweapon) <= 0) {
       continue;
     }
     fx = level._effect["tesla_viewmodel_rail"];
     if(currentweapon == "tesla_gun_upgraded_zm") {
       fx = level._effect["tesla_viewmodel_rail_upgraded"];
     }
-    PlayViewmodelFx(localClientNum, fx, "tag_flash");
-    playSound(localClientNum, "wpn_tesla_effects", (0, 0, 0));
+    PlayViewmodelFx(localclientnum, fx, "tag_flash");
+    playSound(localclientnum, "wpn_tesla_effects", (0, 0, 0));
   }
 }
-
-tesla_fx_tube(localClientNum) {
+tesla_fx_tube(localclientnum) {
   self endon("disconnect");
   for(;;) {
     realwait(0.1);
     if(!level.tesla_play_fx[localclientnum]) {
       continue;
     }
-    currentweapon = GetCurrentWeapon(localClientNum);
+    currentweapon = GetCurrentWeapon(localclientnum);
     if(currentweapon != "tesla_gun_zm" && currentweapon != "tesla_gun_upgraded_zm") {
       continue;
     }
-    if(IsThrowingGrenade(localClientNum) || IsMeleeing(localClientNum) || IsOnTurret(localClientNum)) {
+    if(IsThrowingGrenade(localclientnum) || IsMeleeing(localclientnum) || IsOnTurret(localclientnum)) {
       continue;
     }
-    ammo = GetWeaponAmmoClip(localClientNum, currentweapon);
+    ammo = GetWeaponAmmoClip(localclientnum, currentweapon);
     if(ammo <= 0) {
       continue;
     }
@@ -104,10 +101,9 @@ tesla_fx_tube(localClientNum) {
         fx = level._effect["tesla_viewmodel_tube"];
       }
     }
-    PlayViewmodelFx(localClientNum, fx, "tag_brass");
+    PlayViewmodelFx(localclientnum, fx, "tag_brass");
   }
 }
-
 tesla_notetrack_think() {
   for(;;) {
     level waittill("notetrack", localclientnum, note);
@@ -124,13 +120,12 @@ tesla_notetrack_think() {
     }
   }
 }
-
-tesla_happy(localClientNum) {
+tesla_happy(localclientnum) {
   for(;;) {
     level waittill("TGH");
-    currentweapon = GetCurrentWeapon(localClientNum);
+    currentweapon = GetCurrentWeapon(localclientnum);
     if(currentweapon == "tesla_gun_zm" || currentweapon == "tesla_gun_upgraded_zm") {
-      playSound(localClientNum, "wpn_tesla_happy", (0, 0, 0));
+      playSound(localclientnum, "wpn_tesla_happy", (0, 0, 0));
       level.tesla_play_rail = false;
       realwait(2);
       level.tesla_play_rail = true;

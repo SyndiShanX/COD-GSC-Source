@@ -227,7 +227,6 @@ _debugcommander(commander) {
         yoffset += 13;
 
         recordtext(function_9e72a96(commander.plan[index].name), position + (xoffset, yoffset, 0), (1, 1, 1), "<dev string:x4c>", textscale);
-
       }
 
       attackgameobjects = blackboard::getstructblackboardattribute(commander, #"gameobjects_assault");
@@ -238,7 +237,6 @@ _debugcommander(commander) {
         }
 
         recordsphere(attackgameobjects[index][# "origin"], 20, (1, 0, 0));
-
       }
 
       defendgameobjects = blackboard::getstructblackboardattribute(commander, #"gameobjects_defend");
@@ -249,14 +247,12 @@ _debugcommander(commander) {
         }
 
         recordsphere(defendgameobjects[index][# "origin"], 20, (1, 0.5, 0));
-
       }
 
       objectives = blackboard::getstructblackboardattribute(commander, #"objectives");
 
       for(index = 0; index < objectives.size; index++) {
         recordsphere(objectives[index][# "origin"], 20, (0, 0, 1));
-
       }
 
       excluded = blackboard::getstructblackboardattribute(commander, #"gameobjects_exclude");
@@ -275,7 +271,6 @@ _debugcommander(commander) {
             if(isDefined(identifier) && isDefined(excludedmap[identifier])) {
               record3dtext(identifier, gameobject.origin + (0, 0, offset), (1, 1, 0), "<dev string:x4c>");
               recordsphere(gameobject.origin, 20, (1, 1, 0));
-
             }
           }
         }
@@ -301,7 +296,7 @@ function_9962ffd8(commander) {
       }
     }
 
-    setdvar(#"hash_3335f636d26687d3", 0);
+    setDvar(#"hash_3335f636d26687d3", 0);
     waitframe(1);
   }
 }

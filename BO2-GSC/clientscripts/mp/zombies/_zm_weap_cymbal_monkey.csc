@@ -17,7 +17,7 @@ init() {
   else
     level.cymbal_monkey_model = "t6_wpn_zmb_monkey_bomb_world";
 
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   if(!clientscripts\mp\zombies\_zm_weapons::is_weapon_included(level.cymbal_monkey_name)) {

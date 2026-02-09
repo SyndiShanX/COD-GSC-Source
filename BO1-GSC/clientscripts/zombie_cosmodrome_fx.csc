@@ -1,6 +1,6 @@
 /**************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_cosmodrome_fx.csc
+ * Script: clientscripts\zombie_cosmodrome_fx\.csc
 **************************************************/
 
 #include clientscripts\_utility;
@@ -27,7 +27,6 @@ main() {
   level thread lander_dock_lights_red();
   level thread lander_dock_lights_green();
 }
-
 footsteps() {}
 precache_util_fx() {}
 level_fog_init() {
@@ -51,7 +50,6 @@ level_fog_init() {
   max_fog_opacity = 1;
   setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
 }
-
 precache_scripted_fx() {
   level._effect["zombie_power_switch"] = loadfx("maps/zombie/fx_zombie_power_switch");
   level._effect["zapper_light_ready"] = loadfx("misc/fx_zombie_zapper_light_green");
@@ -90,7 +88,6 @@ precache_scripted_fx() {
   level._effect["monkey_spawn"] = loadfx("maps/zombie/fx_zombie_ape_spawn_dust");
   level._effect["monkey_trail"] = loadfx("maps/zombie/fx_zombie_ape_spawn_trail");
 }
-
 precache_createfx_fx() {
   level._effect["fx_tower_light_glow"] = loadfx("maps/flashpoint/fx_tower_light_glow");
   level._effect["fx_zombie_rocket_trap_heat_glow"] = loadfx("maps/zombie/fx_zombie_rocket_trap_heat_glow");
@@ -130,7 +127,6 @@ precache_createfx_fx() {
   level._effect["fx_zmb_elec_terminal_bridge"] = loadfx("maps/zombie/fx_zmb_elec_terminal_bridge");
   level._effect["fx_zmb_russian_rocket_smk"] = loadfx("maps/zombie/fx_zmb_russian_rocket_smk");
 }
-
 trap_fx_monitor(name, loc, trap_type) {
   structs = getstructarray(name, "targetname");
   points = [];
@@ -146,7 +142,6 @@ trap_fx_monitor(name, loc, trap_type) {
     }
   }
 }
-
 trap_play_fx(loc, trap_type) {
   ang = self.angles;
   forward = anglesToForward(ang);
@@ -174,7 +169,7 @@ trap_play_fx(loc, trap_type) {
         break;
     }
   }
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     self.loopFX[i] = SpawnFx(i, level._effect[fx_name], self.origin, 0, forward, up);
     triggerfx(self.loopFX[i]);
@@ -185,21 +180,18 @@ trap_play_fx(loc, trap_type) {
   }
   self.loopFX = [];
 }
-
 lander_dock_lights_red() {
   while(1) {
     level waittill("L_R");
     toggle_lander_lights("red");
   }
 }
-
 lander_dock_lights_green() {
   while(1) {
     level waittill("L_G");
     toggle_lander_lights("green");
   }
 }
-
 toggle_lander_lights(color) {
   right_fx = level._effect["lander_green_right"];
   left_fx = level._effect["lander_green_left"];
@@ -207,7 +199,7 @@ toggle_lander_lights(color) {
     right_fx = level._effect["lander_red_right"];
     left_fx = level._effect["lander_red_left"];
   }
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(x = 0; x < players.size; x++) {
     doors1 = getEntArray(x, "centrifuge_zip_door", "targetname");
     doors2 = getEntArray(x, "base_entry_zip_door", "targetname");

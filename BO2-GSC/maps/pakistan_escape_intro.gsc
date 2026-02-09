@@ -122,11 +122,13 @@ drone_intro() {
   level notify("soct_intro_ready");
   level thread cleanup_di_right_guys();
 
-  if(-1)
+  if(-1) {
     level.vh_player_soct thread player_in_soct_keep_up_with_salazar_fail();
+  }
 
-  if(-1)
+  if(-1) {
     level.vh_player_soct thread player_in_soct_keep_moving_fail();
+  }
 }
 
 cleanup_di_right_guys() {
@@ -143,18 +145,21 @@ cleanup_di_right_guys() {
 cleanup_intro_part1() {
   e_ent = getent("di_left_0_ai", "targetname");
 
-  if(isDefined(e_ent))
+  if(isDefined(e_ent)) {
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
+  }
 
   e_ent = getent("di_glass_building_1_ai", "targetname");
 
-  if(isDefined(e_ent))
+  if(isDefined(e_ent)) {
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
+  }
 
   e_ent = getent("di_glass_building_2_ai", "targetname");
 
-  if(isDefined(e_ent))
+  if(isDefined(e_ent)) {
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
+  }
 }
 
 drone_intro_lookat_targets() {
@@ -212,7 +217,7 @@ drone_intro_billboard() {
   t_billboard = getent("t_di_billboard", "targetname");
   e_triggerer = undefined;
 
-  while(!isplayer(e_triggerer)) {
+  while(!isPlayer(e_triggerer)) {
     t_billboard waittill("trigger", e_triggerer);
     wait 0.05;
   }
@@ -344,10 +349,11 @@ drone_intro_blockade() {
     self waittill("damage", n_damage, e_attacker, direction_vec, point, damagetype);
 
     if(e_attacker == level.player) {
-      if(damagetype == "MOD_PROJECTILE_SPLASH")
+      if(damagetype == "MOD_PROJECTILE_SPLASH") {
         n_damage = n_damage / 2;
-      else if(damagetype == "MOD_PROJECTILE")
+      } else if(damagetype == "MOD_PROJECTILE") {
         n_damage = 2600;
+      }
 
       self.n_damage_total = self.n_damage_total + n_damage;
     }
@@ -403,8 +409,9 @@ remove_targets_at_drone_intro() {
   a_enemies = getaiarray("axis");
 
   foreach(ai_enemy in a_enemies) {
-    if(ai_enemy istouching(self))
+    if(ai_enemy istouching(self)) {
       ai_enemy notify("end_lock_on");
+    }
   }
 }
 
@@ -417,20 +424,23 @@ drone_intro_soct_0_logic() {
 }
 
 kill_on_player_vehicle_swap() {
-  while(!isDefined(level.player.viewlockedentity))
+  while(!isDefined(level.player.viewlockedentity)) {
     wait 0.01;
+  }
 
   level.player.viewlockedentity waittill("change_seat");
   pak3_kill_vehicle(self);
   e_drone = getent("passenger_700_drone", "targetname");
 
-  if(isDefined(e_drone))
+  if(isDefined(e_drone)) {
     e_drone delete();
+  }
 
   e_drone = getent("shooter_700_drone", "targetname");
 
-  if(isDefined(e_drone))
+  if(isDefined(e_drone)) {
     e_drone delete();
+  }
 }
 
 soct_intro_chicken() {
@@ -501,8 +511,9 @@ scaffolding_damage_trigger1(health) {
   while(health > 0) {
     self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player)
+    if(attacker == level.player) {
       health = health - amount;
+    }
   }
 
   playsoundatposition("evt_soct_scaffold_1", self.origin);
@@ -515,8 +526,9 @@ scaffolding_damage_trigger2(health) {
   while(health > 0) {
     self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player)
+    if(attacker == level.player) {
       health = health - amount;
+    }
   }
 
   level notify("fxanim_drone_scaffold_02_start");
@@ -529,8 +541,9 @@ scaffolding_damage_trigger5(health) {
   while(health > 0) {
     self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player)
+    if(attacker == level.player) {
       health = health - amount;
+    }
   }
 
   level notify("fxanim_drone_scaffold_04_start");
@@ -560,8 +573,9 @@ start_left_balcony_damage_trigger() {
   while(health > 0) {
     e_damage_trigger waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
-    if(attacker == level.player)
+    if(attacker == level.player) {
       health = health - amount;
+    }
   }
 
   level notify("fxanim_balcony_collapse_start");
@@ -597,8 +611,9 @@ blockage_walkway_damage_trigger(str_endon) {
             if(isalive(e_ent)) {
               dist = distance(damage_ori, e_ent.origin);
 
-              if(dist < 336)
+              if(dist < 336) {
                 e_ent dodamage(e_ent.health + 100, e_ent.origin, level.player);
+              }
             }
           }
         }

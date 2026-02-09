@@ -669,7 +669,7 @@ explodable_barrel_explode() {
   if(isDefined(self.damageowner)) {
     var_9 = self.damageowner;
 
-    if(isplayer(var_9))
+    if(isPlayer(var_9))
       maps\_utility::arcademode_kill(self.origin, "rifle", 150);
   }
 

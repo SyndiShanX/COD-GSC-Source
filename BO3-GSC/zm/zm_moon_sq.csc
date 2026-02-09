@@ -52,27 +52,27 @@ function dest_debug(dest) {
 }
 
 function vision_wobble() {
-  setdvar("r_poisonFX_debug_amount", 0);
-  setdvar("r_poisonFX_debug_enable", 1);
-  setdvar("r_poisonFX_pulse", 2);
-  setdvar("r_poisonFX_warpX", -0.3);
-  setdvar("r_poisonFX_warpY", 0.15);
-  setdvar("r_poisonFX_dvisionA", 0);
-  setdvar("r_poisonFX_dvisionX", 0);
-  setdvar("r_poisonFX_dvisionY", 0);
-  setdvar("r_poisonFX_blurMin", 0);
-  setdvar("r_poisonFX_blurMax", 3);
+  setDvar("r_poisonFX_debug_amount", 0);
+  setDvar("r_poisonFX_debug_enable", 1);
+  setDvar("r_poisonFX_pulse", 2);
+  setDvar("r_poisonFX_warpX", -0.3);
+  setDvar("r_poisonFX_warpY", 0.15);
+  setDvar("r_poisonFX_dvisionA", 0);
+  setDvar("r_poisonFX_dvisionX", 0);
+  setDvar("r_poisonFX_dvisionY", 0);
+  setDvar("r_poisonFX_blurMin", 0);
+  setDvar("r_poisonFX_blurMax", 3);
   delta = 0.064;
   amount = 1;
-  setdvar("r_poisonFX_debug_amount", amount);
+  setDvar("r_poisonFX_debug_amount", amount);
   waitrealtime(3);
   while(amount > 0) {
     amount = max(amount - delta, 0);
-    setdvar("r_poisonFX_debug_amount", amount);
+    setDvar("r_poisonFX_debug_amount", amount);
     wait(0.016);
   }
-  setdvar("r_poisonFX_debug_amount", 0);
-  setdvar("r_poisonFX_debug_enable", 0);
+  setDvar("r_poisonFX_debug_amount", 0);
+  setDvar("r_poisonFX_debug_enable", 0);
 }
 
 function soul_swap(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

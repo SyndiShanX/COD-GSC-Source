@@ -201,7 +201,6 @@ screecher_spawning_logic() {
       level.zombie_screecher_count++;
 
       screecher_print("screecher total " + level.zombie_screecher_count);
-
     }
 
     wait(level.zombie_vars["zombie_spawn_delay"]);
@@ -397,7 +396,7 @@ play_screecher_damaged_yelps() {
   while(true) {
     self waittill("damage", damage, attacker, dir, point, mod);
 
-    if(isDefined(attacker) && isplayer(attacker))
+    if(isDefined(attacker) && isPlayer(attacker))
       self playSound("zmb_vocals_screecher_pain");
   }
 }
@@ -687,7 +686,6 @@ screecher_attacking() {
           level.near_miss = 1;
 
           screecher_print("first attack near_miss " + level.near_miss);
-
         }
       }
     }
@@ -818,7 +816,7 @@ claw_fx(player, timeout) {
 screecher_cleanup() {
   self waittill("death", attacker);
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(self.damagelocation) && isDefined(self.damagemod))
       level thread maps\mp\zombies\_zm_audio::player_zombie_kill_vox(self.damagelocation, attacker, self.damagemod, self);
   }
@@ -875,7 +873,6 @@ screecher_cleanup() {
     level.zombie_screecher_count--;
 
     screecher_print("screecher total " + level.zombie_screecher_count);
-
   }
 }
 
@@ -985,7 +982,7 @@ screecher_melee_damage(player) {
 
 screecher_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   if(isDefined(self.linked_ent)) {
-    if(isplayer(einflictor) && smeansofdeath == "MOD_MELEE")
+    if(isPlayer(einflictor) && smeansofdeath == "MOD_MELEE")
       return 0;
   }
 
@@ -999,7 +996,7 @@ screecher_death_func() {
   maps\mp\animscripts\zm_shared::donotetracks("death_anim");
   playFX(level._effect["screecher_death"], self.origin);
 
-  if(isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker maps\mp\zombies\_zm_stats::increment_client_stat("screechers_killed", 0);
     self.attacker maps\mp\zombies\_zm_stats::increment_player_stat("screechers_killed");
   }
@@ -1063,7 +1060,6 @@ screecher_debug_axis() {
 
     wait 0.1;
   }
-
 }
 
 screecher_print(str) {
@@ -1079,5 +1075,4 @@ screecher_print(str) {
       }
     }
   }
-
 }

@@ -13,7 +13,6 @@ main() {
   level thread wind_settings();
   maps\createfx\zombie_cod5_sumpf_fx::main();
 }
-
 footsteps() {
   animscripts\utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -33,7 +32,6 @@ footsteps() {
   animscripts\utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   animscripts\utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 scriptedFX() {
   level._effect["hanging_light_fx"] = loadfx("env/light/fx_glow_hanginglamp");
   level._effect["large_ceiling_dust"] = LoadFx("env/dirt/fx_dust_ceiling_impact_lg_mdbrown");
@@ -50,14 +48,12 @@ scriptedFX() {
   level._effect["zombie_perk_end"] = Loadfx("misc/fx_zombie_perk_lottery_end");
   level._effect["zombie_perk_4th"] = Loadfx("misc/fx_zombie_perk_lottery_4");
 }
-
 wind_settings() {
   SetSavedDvar("wind_global_vector", "171 -140 0");
   SetSavedDvar("wind_global_low_altitude", 40);
   SetSavedDvar("wind_global_hi_altitude", 940);
   SetSavedDvar("wind_global_low_strength_percent", 0.05);
 }
-
 precacheFX() {
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");
@@ -101,12 +97,10 @@ precacheFX() {
   level._effect["rise_billow_water_swmp"] = LoadFX("maps/zombie/fx_zombie_body_wtr_billow_smpf");
   level._effect["fx_light_god_ray_sm_sumpf_warm_v1"] = loadfx("env/light/fx_light_god_ray_sm_sumpf_warm_v1");
 }
-
 post_lights() {
   lanterns = getEntArray("post_lamp", "targetname");
   array_thread(lanterns, ::swing_lanterns);
 }
-
 swing_lanterns() {
   org_angles = self.angles;
   org_pos = self.origin;

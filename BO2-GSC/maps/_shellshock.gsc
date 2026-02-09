@@ -8,41 +8,49 @@
 main(origin, duration, shock_range, nmaxdamagebase, nrandamagebase, nmindamagebase, nexposed, customshellshock, stancelockduration) {
   assert(isDefined(origin), "_shellshock::main() needs a origin passed in now for coop consideration.");
 
-  if(!isDefined(shock_range))
+  if(!isDefined(shock_range)) {
     shock_range = 500;
+  }
 
-  if(!isDefined(duration))
+  if(!isDefined(duration)) {
     duration = 12;
-  else if(duration < 7)
+  } else if(duration < 7) {
     duration = 7;
+  }
 
-  if(!isDefined(nmaxdamagebase))
+  if(!isDefined(nmaxdamagebase)) {
     nmaxdamagebase = 150;
+  }
 
-  if(!isDefined(nrandamagebase))
+  if(!isDefined(nrandamagebase)) {
     nrandamagebase = 100;
+  }
 
-  if(!isDefined(nmindamagebase))
+  if(!isDefined(nmindamagebase)) {
     nmindamagebase = 100;
+  }
 
-  if(!isDefined(customshellshock))
+  if(!isDefined(customshellshock)) {
     customshellshock = "default";
+  }
 
   players = get_players();
 
   for(q = 0; q < players.size; q++) {
-    if(distancesquared(players[q].origin, origin) < shock_range * shock_range)
+    if(distancesquared(players[q].origin, origin) < shock_range * shock_range) {
       players[q] thread shellshock_thread(duration, nmaxdamagebase, nrandamagebase, nmindamagebase, nexposed, customshellshock, stancelockduration);
+    }
   }
 }
 
 shellshock_thread(duration, nmaxdamagebase, nrandamagebase, nmindamagebase, nexposed, customshellshock, stancelockduration) {
   origin = self getorigin() + (0, 8, 2);
 
-  if(isDefined(nrandamagebase) && nrandamagebase > 0)
+  if(isDefined(nrandamagebase) && nrandamagebase > 0) {
     maxdamage = nmaxdamagebase + randomint(nrandamagebase);
-  else
+  } else {
     maxdamage = nmaxdamagebase;
+  }
 
   mindamage = nmindamagebase;
   wait 0.25;
@@ -60,11 +68,13 @@ shellshock_thread(duration, nmaxdamagebase, nrandamagebase, nmindamagebase, nexp
     self viewkick(127, self.origin);
     self shellshock(customshellshock, duration);
 
-    if(!isDefined(nexposed))
+    if(!isDefined(nexposed)) {
       level thread playerhitable(duration);
+    }
 
-    if(!isDefined(stancelockduration))
+    if(!isDefined(stancelockduration)) {
       stancelockduration = 1.5;
+    }
 
     wait(stancelockduration);
     self allowstand(1);

@@ -756,18 +756,12 @@ registernotetracks() {
                           handlenotetrack(var_0, var_1, var_2, var_3) {
                             var_4 = level.notetracks[var_0];
                             if(isDefined(var_4)) {
-                              return [
-                                [var_4]
-                              ](var_0, var_1);
+                              return [[var_4]](var_0, var_1);
                             } else if(isDefined(self.var_4C93)) {
                               if(isDefined(var_3)) {
-                                return [
-                                  [self.var_4C93]
-                                ](var_0, var_1, var_2, var_3);
+                                return [[self.var_4C93]](var_0, var_1, var_2, var_3);
                               } else {
-                                return [
-                                  [self.var_4C93]
-                                ](var_0, var_1, var_2);
+                                return [[self.var_4C93]](var_0, var_1, var_2);
                               }
                             }
 
@@ -897,13 +891,9 @@ registernotetracks() {
                               default:
                                 if(isDefined(var_2)) {
                                   if(isDefined(var_3)) {
-                                    return [
-                                      [var_2]
-                                    ](var_0, var_3);
+                                    return [[var_2]](var_0, var_3);
                                   } else {
-                                    return [
-                                      [var_2]
-                                    ](var_0);
+                                    return [[var_2]](var_0);
                                   }
                                 }
                                 break;
@@ -922,9 +912,7 @@ registernotetracks() {
                               }
 
                               scripts\anim\utility::validatenotetracks(var_0, var_3);
-                              var_4 = [
-                                [var_1]
-                              ](var_3);
+                              var_4 = [[var_1]](var_3);
                               if(isDefined(var_4) && var_4) {
                                 continue;
                               }
@@ -996,15 +984,11 @@ registernotetracks() {
 
                             for(;;) {
                               var_5 = gettime();
-                              var_6 = [
-                                [var_0]
-                              ](var_1, var_3, var_4);
+                              var_6 = [[var_0]](var_1, var_3, var_4);
                               var_7 = gettime() - var_5;
                               if(var_7 < 0.05) {
                                 var_5 = gettime();
-                                var_6 = [
-                                  [var_0]
-                                ](var_1, var_3, var_4);
+                                var_6 = [[var_0]](var_1, var_3, var_4);
                                 var_7 = gettime() - var_5;
                                 if(var_7 < 0.05) {
                                   wait(0.05 - var_7);
@@ -1033,9 +1017,7 @@ registernotetracks() {
 
                           donotetracksfortimeproc(var_0, var_1, var_2, var_3, var_4) {
                             var_4 endon("stop_notetracks");
-                            [
-                              [var_0]
-                            ](var_1, undefined, var_2, var_3);
+                            [[var_0]](var_1, undefined, var_2, var_3);
                           }
 
                           donotetracksfortimeendnotify(var_0) {
@@ -1130,9 +1112,7 @@ registernotetracks() {
                             }
 
                             if(var_1) {
-                              if(![
-                                  [level.optionalstepeffectfunction]
-                                ](var_3, var_2)) {
+                              if(![[level.optionalstepeffectfunction]](var_3, var_2)) {
                                 func_D480(var_3, var_2);
                                 return;
                               }
@@ -1140,9 +1120,7 @@ registernotetracks() {
                               return;
                             }
 
-                            if(![
-                                [level.optionalstepeffectsmallfunction]
-                              ](var_3, var_2)) {
+                            if(![[level.optionalstepeffectsmallfunction]](var_3, var_2)) {
                               playfootstepeffect(var_3, var_2);
                             }
                           }
@@ -1184,9 +1162,7 @@ registernotetracks() {
                               self playsurfacesound(var_5, var_3);
                             }
 
-                            if(![
-                                [level.optionalstepeffectsmallfunction]
-                              ](var_2, var_3)) {
+                            if(![[level.optionalstepeffectsmallfunction]](var_2, var_3)) {
                               playfootstepeffect(var_2, var_3);
                             }
                           }

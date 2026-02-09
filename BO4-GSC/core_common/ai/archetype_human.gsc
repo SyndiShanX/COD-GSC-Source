@@ -194,11 +194,11 @@ damageoverride(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, 
   entity = self;
   entity destructserverutils::handledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
 
-  if(isDefined(eattacker) && isplayer(eattacker) && (smeansofdeath === "MOD_RIFLE_BULLET" || smeansofdeath === "MOD_PISTOL_BULLET" || smeansofdeath === "MOD_HEAD_SHOT") && isDefined(shitloc) && (shitloc == "head" || shitloc == "helmet" || shitloc == "neck")) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && (smeansofdeath === "MOD_RIFLE_BULLET" || smeansofdeath === "MOD_PISTOL_BULLET" || smeansofdeath === "MOD_HEAD_SHOT") && isDefined(shitloc) && (shitloc == "head" || shitloc == "helmet" || shitloc == "neck")) {
     idamage *= 5;
   }
 
-  if(isDefined(eattacker) && !isplayer(eattacker) && !isvehicle(eattacker)) {
+  if(isDefined(eattacker) && !isPlayer(eattacker) && !isvehicle(eattacker)) {
     dist = distancesquared(entity.origin, eattacker.origin);
 
     if(dist < 65536) {

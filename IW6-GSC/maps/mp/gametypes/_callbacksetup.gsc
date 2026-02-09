@@ -112,7 +112,7 @@ AbortLevel() {
   level.callbackPlayerMigrated = ::callbackVoid;
   level.callbackHostMigration = ::callbackVoid;
 
-  setdvar("g_gametype", "dm");
+  setDvar("g_gametype", "dm");
 
   exitLevel(false);
 }

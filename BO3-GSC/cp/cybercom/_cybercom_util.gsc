@@ -26,7 +26,7 @@
 function wait_to_load() {
   level flagsys::wait_till("load_main_complete");
   level thread cybercom_dev::cybercom_setupdevgui();
-  setdvar("scr_max_simLocks", 5);
+  setDvar("scr_max_simLocks", 5);
 }
 
 function vehicle_init_cybercom(vehicle) {
@@ -1359,7 +1359,7 @@ function function_a3e55896(weapon) {
 }
 
 function function_29bf9dee(var_42d20903, var_b766574c, var_10853dc3 = 1, priority = 1) {
-  if(!isplayer(self) || !isDefined(self.cybercom)) {
+  if(!isPlayer(self) || !isDefined(self.cybercom)) {
     return;
   }
   if(var_10853dc3 && (!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed))) {
@@ -1392,7 +1392,7 @@ function getyaw(org) {
 }
 
 function function_5ad6b98d(eattacker, eplayer, idamage) {
-  if(!isplayer(eplayer) || !isDefined(eattacker) || !isDefined(eattacker.aitype)) {
+  if(!isPlayer(eplayer) || !isDefined(eattacker) || !isDefined(eattacker.aitype)) {
     return idamage;
   }
   if(!isDefined(eplayer.cybercom.var_5e76d31b) || !eplayer.cybercom.var_5e76d31b) {

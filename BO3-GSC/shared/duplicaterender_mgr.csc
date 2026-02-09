@@ -283,7 +283,7 @@ function apply_filter(localclientnum, filter, filterset = "framebuffer") {
   }
   if(getdvarint("")) {
     name = "";
-    if(self isplayer()) {
+    if(self isPlayer()) {
       if(isDefined(self.name)) {
         name = "" + self.name;
       }

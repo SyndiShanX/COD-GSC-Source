@@ -498,7 +498,7 @@ function_cd1447ce() {
     response = waitresult.response;
 
     if(menu == "PlayOfTheMatchWidget") {
-      if(isplayer(self) && response == "voteSkip") {
+      if(isPlayer(self) && response == "voteSkip") {
         self.var_3211ad9b = 1;
         self clientfield::set_player_uimodel("hudItems.voteKillcamSkip", 1);
         return;
@@ -631,9 +631,7 @@ function_60211cf4(sequence) {
         cmd = 1;
 
         if(cameraindex == 0 && game.var_142de1de == 0) {
-          goto_btapi_refillammoifneededservice = [
-            [game.var_94f3e5d2]
-          ]();
+          goto_btapi_refillammoifneededservice = [[game.var_94f3e5d2]]();
         } else {
           goto_btapi_refillammoifneededservice = 0;
         }
@@ -949,7 +947,7 @@ function_b6a5e7fa(repeatcount = 1) {
       if(isDefined(event.clientnum)) {
         player = getentbynum(event.clientnum);
 
-        if(isplayer(player)) {
+        if(isPlayer(player)) {
           player stats::function_dad108fa(#"featured_in_best_play", 1);
         }
       }
@@ -1037,8 +1035,8 @@ function_d1cb3471() {
 }
 
 waitthennotifyplaypotm() {
-  setdvar(#"scr_force_potm", 0);
-  setdvar(#"hash_2428eb9c3d05eee0", 0);
+  setDvar(#"scr_force_potm", 0);
+  setDvar(#"hash_2428eb9c3d05eee0", 0);
   level function_b6a5e7fa(1);
 }
 
@@ -1134,7 +1132,6 @@ function_f19228da() {
     }
 
     updatedebugmenudata(1);
-
   }
 
   level.var_e99fd3d1 = 0;
@@ -1154,7 +1151,7 @@ function_43690387(xuid) {
     return;
   }
 
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
 
@@ -1205,7 +1202,7 @@ function_fff1ad7e(var_740b4e7b) {
 }
 
 function_b83114d9() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return function_d46f78f8();
   }
 
@@ -1364,7 +1361,7 @@ function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, sc
     return undefined;
   }
 
-  if(var_7491f0eb && isDefined(var_81538b15) && isplayer(var_81538b15) && !isalive(var_81538b15)) {
+  if(var_7491f0eb && isDefined(var_81538b15) && isPlayer(var_81538b15) && !isalive(var_81538b15)) {
     println(function_9e72a96(modulename) + "<dev string:x6b2>" + bookmarkname + "<dev string:x6cf>" + inflictorenttype + "<dev string:x6de>" + var_6f810a5 + "<dev string:x720>" + var_81538b15 getentitynumber() + "<dev string:x731>");
     return undefined;
   }
@@ -1382,7 +1379,7 @@ function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, sc
   if(isDefined(var_81538b15)) {
     bookmark.mainclientnum = var_81538b15 getentitynumber();
 
-    if(isplayer(var_81538b15)) {
+    if(isPlayer(var_81538b15)) {
       bookmark.var_ea3fa3e = var_81538b15 getxuid();
     } else {
       bookmark.var_ea3fa3e = 0;
@@ -1396,7 +1393,7 @@ function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, sc
     bookmark.var_f28fb772 = var_f28fb772;
     bookmark.otherclientnum = var_f28fb772 getentitynumber();
 
-    if(isplayer(var_f28fb772)) {
+    if(isPlayer(var_f28fb772)) {
       bookmark.var_6ae7938a = var_f28fb772 getxuid();
     } else {
       bookmark.var_6ae7938a = 0;
@@ -2114,9 +2111,9 @@ debuginit() {
     return;
   }
 
-  setdvar(#"scr_potm_debug", 0);
-  setdvar(#"scr_potm_debug_print", 0);
-  setdvar(#"scr_potm_debug_event_num", 1);
+  setDvar(#"scr_potm_debug", 0);
+  setDvar(#"scr_potm_debug_print", 0);
+  setDvar(#"scr_potm_debug_event_num", 1);
 }
 
 updatedebugmenudata(forceupdate) {
@@ -2215,6 +2212,6 @@ debugupdate() {
       player val::reset(#"potm", "<dev string:xab5>");
     }
 
-    setdvar(#"hash_198be770b0735f93", 0);
+    setDvar(#"hash_198be770b0735f93", 0);
   }
 }

@@ -270,14 +270,14 @@ function function_cce7ef03(localclientnum, onoff) {
     var_b401f607 = getdvarint("scr_num_in_beast");
     if(onoff) {
       var_b401f607++;
-      setdvar("cg_focalLength", 21);
+      setDvar("cg_focalLength", 21);
     } else {
       var_b401f607--;
       if(var_b401f607 == 0) {
-        setdvar("cg_focalLength", 14.64);
+        setDvar("cg_focalLength", 14.64);
       }
     }
-    setdvar("scr_num_in_beast", var_b401f607);
+    setDvar("scr_num_in_beast", var_b401f607);
   }
 }
 
@@ -723,7 +723,7 @@ function grapple_watch(onoff, tag = "tag_flash", delay = 0.15) {
       if(getdvarint("") > 0) {
         var_1e66ebb1 = "";
       }
-      if(isDefined(pivot) && !pivot isplayer()) {
+      if(isDefined(pivot) && !pivot isPlayer()) {
         thread function_55af4b5b(self, var_1e66ebb1, pivot, delay);
       }
       evt = self util::waittill_any_ex(7.5, "grapple_pulled", "grapple_landed", "grapple_cancel", "grapple_beam_off", "grapple_watch", "disconnect");

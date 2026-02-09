@@ -41,7 +41,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   level.bscriptgened = bscriptgened;
   level._loadstarted = 1;
   struct_class_init();
-  level.clientscripts = getdvar(#"cg_usingClientScripts") != "";
+  level.clientscripts = getDvar(#"cg_usingClientScripts") != "";
   level._client_exploders = [];
   level._client_exploder_ids = [];
 
@@ -72,10 +72,10 @@ main(bscriptgened, bcsvgened, bsgenabled) {
       script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
   }
 
-  if(getdvar(#"scr_RequiredMapAspectratio") == "")
-    setdvar("scr_RequiredMapAspectratio", "1");
+  if(getDvar(#"scr_RequiredMapAspectratio") == "")
+    setDvar("scr_RequiredMapAspectratio", "1");
 
-  setdvar("r_waterFogTest", 0);
+  setDvar("r_waterFogTest", 0);
   precacherumble("reload_small");
   precacherumble("reload_medium");
   precacherumble("reload_large");
@@ -93,7 +93,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   level.physicstracemaskwater = 4;
   level.physicstracemaskclip = 8;
   level.physicstracecontentsvehicleclip = 16;
-  level.createfx_enabled = getdvar(#"createfx") != "";
+  level.createfx_enabled = getDvar(#"createfx") != "";
   level thread start_intro_screen_zm();
   thread maps\mp\_interactive_objects::init();
   maps\mp\_audio::init();
@@ -122,7 +122,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
     maps\mp\_createfx::createfx();
   }
 
-  if(getdvar(#"r_reflectionProbeGenerate") == "1") {
+  if(getDvar(#"r_reflectionProbeGenerate") == "1") {
     maps\mp\_global_fx::main();
     level waittill("eternity");
   }
@@ -167,11 +167,11 @@ main(bscriptgened, bcsvgened, bsgenabled) {
 
 level_notify_listener() {
   while(true) {
-    val = getdvar(#"level_notify");
+    val = getDvar(#"level_notify");
 
     if(val != "") {
       level notify(val);
-      setdvar("level_notify", "");
+      setDvar("level_notify", "");
     }
 
     wait 0.2;
@@ -180,11 +180,11 @@ level_notify_listener() {
 
 client_notify_listener() {
   while(true) {
-    val = getdvar(#"client_notify");
+    val = getDvar(#"client_notify");
 
     if(val != "") {
       clientnotify(val);
-      setdvar("client_notify", "");
+      setDvar("client_notify", "");
     }
 
     wait 0.2;

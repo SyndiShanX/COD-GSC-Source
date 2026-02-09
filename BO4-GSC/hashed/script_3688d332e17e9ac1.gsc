@@ -87,7 +87,7 @@ on_end(round_reset) {
 }
 
 on_ai_damage(params) {
-  if(isplayer(params.eattacker) && params.weapon != level.weaponbasemelee && (isDefined(params.weapon.isbulletweapon) && params.weapon.isbulletweapon || isDefined(params.weapon.isprojectileweapon) && params.weapon.isprojectileweapon || isDefined(params.weapon.isburstfire) && params.weapon.isburstfire)) {
+  if(isPlayer(params.eattacker) && params.weapon != level.weaponbasemelee && (isDefined(params.weapon.isbulletweapon) && params.weapon.isbulletweapon || isDefined(params.weapon.isprojectileweapon) && params.weapon.isprojectileweapon || isDefined(params.weapon.isburstfire) && params.weapon.isburstfire)) {
     params.eattacker.b_hit = 1;
   }
 }

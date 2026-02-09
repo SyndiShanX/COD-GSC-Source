@@ -314,7 +314,7 @@ stop_defusing(var_0) {
 getvalidspawnnodesforsquadmate(var_0) {
   var_1 = self.origin;
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_2 = self getnearestnode();
   } else {
     var_2 = getclosestnodeinsight(var_1);

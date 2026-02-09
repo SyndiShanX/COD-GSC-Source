@@ -12,7 +12,7 @@ main() {
   thread set_level_lighting_values();
   thread setup_fade_angle_lights();
 
-  if(getdvar("beautiful_corner") != "1") {
+  if(getDvar("beautiful_corner") != "1") {
     thread handle_heli_flight_lighting_init();
     thread handle_heli_crash_lighting_init();
     thread handle_wakeup_done();

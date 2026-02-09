@@ -52,7 +52,7 @@ determine_sticky_position(var_0) {
     var_6 setModel("projectile_semtex_grenade");
 
     if(isDefined(var_5["entity"])) {
-      if(isplayer(var_5["entity"])) {
+      if(isPlayer(var_5["entity"])) {
         var_0 thread show_stuck_fanfare();
         var_5["entity"] thread show_stuck_fanfare();
       }

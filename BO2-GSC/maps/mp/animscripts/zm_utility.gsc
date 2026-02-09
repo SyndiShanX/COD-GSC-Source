@@ -364,7 +364,6 @@ drawstringtime(msg, org, color, timer) {
     print3d(org, msg, color, 1, 1);
     wait 0.05;
   }
-
 }
 
 showlastenemysightpos(string) {
@@ -388,7 +387,6 @@ showlastenemysightpos(string) {
     }
     print3d(self.lastenemysightpos, string, color, 1, 2.15);
   }
-
 }
 
 debugtimeout() {
@@ -413,7 +411,6 @@ debugposinternal(org, string, size) {
     wait 0.05;
     print3d(org, string, color, 1, size);
   }
-
 }
 
 debugpos(org, string) {
@@ -432,7 +429,6 @@ showdebugproc(frompoint, topoint, color, printtime) {
     wait 0.05;
     line(frompoint, topoint, color);
   }
-
 }
 
 showdebugline(frompoint, topoint, color, printtime) {
@@ -512,7 +508,6 @@ showlines(start, end, end2) {
     line(start, end2, (0, 0, 1), 1);
     wait 0.05;
   }
-
 }
 
 anim_array(animarray, animweights) {
@@ -561,7 +556,6 @@ print3dtime(timer, org, msg, color, alpha, scale) {
     print3d(org, msg, color, alpha, scale);
     wait 0.05;
   }
-
 }
 
 print3drise(org, msg, color, alpha, scale) {
@@ -574,7 +568,6 @@ print3drise(org, msg, color, alpha, scale) {
     print3d(org + (0, 0, up), msg, color, alpha, scale);
     wait 0.05;
   }
-
 }
 
 crossproduct(vec1, vec2) {
@@ -609,7 +602,7 @@ canthrowgrenade() {
   if(self.script_forcegrenade)
     return 1;
 
-  return isplayer(self.enemy);
+  return isPlayer(self.enemy);
 }
 
 random_weight(array) {
@@ -658,7 +651,6 @@ persistentdebugline(start, end) {
     line(start, end, (0.3, 1, 0), 1);
     wait 0.05;
   }
-
 }
 
 isnodedontstand() {
@@ -730,7 +722,6 @@ dumpanimarray() {
 
     println(" array[ \"" + keys[i] + "\" ] = ", self.a.array[keys[i]]);
   }
-
 }
 
 getanimendpos(theanim) {
@@ -921,7 +912,6 @@ debug_turn_print(text, line) {
     lookaheadyaw = angleclamp180(lookaheadangles[1]);
     println(text + " " + gettime() + " cur: " + currentyaw + " look: " + lookaheadyaw + " desired: " + desiredyaw);
   }
-
 }
 
 play_sound_on_tag_endon_death(alias, tag) {

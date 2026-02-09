@@ -23,7 +23,7 @@ less_than_goal() {
 }
 
 update_alien_kill_achievements_dlc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(var_1) || !isplayer(var_1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
   var_1 maps\mp\alien\_achievement::update_achievement("KILL_WITH_SWEAPON", 1, var_4);

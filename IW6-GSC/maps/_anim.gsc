@@ -528,7 +528,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4) {
 
       var_7 last_anim_time_check();
 
-      if(isplayer(var_7)) {
+      if(isPlayer(var_7)) {
         var_27 = level.scr_anim[var_25]["root"];
         var_7 setanim(var_27, 0, var_26);
         var_28 = level.scr_anim[var_25][var_1];
@@ -592,7 +592,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4) {
     if(!isDefined(var_7)) {
       continue;
     }
-    if(isplayer(var_7)) {
+    if(isPlayer(var_7)) {
       var_25 = undefined;
 
       if(isDefined(var_4))

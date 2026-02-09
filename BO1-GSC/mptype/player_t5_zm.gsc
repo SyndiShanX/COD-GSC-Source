@@ -19,7 +19,6 @@ main() {
       break;
   }
 }
-
 precache() {
   character\c_usa_marine_michael_carter_player_zm::precache();
   character\c_usa_marine_michael_carter_player_zm::precache();

@@ -91,7 +91,6 @@ watchHostMigrationFinishedInit(player) {
     } else {
       player SetClientOmnvar("ui_predator_missile", 2);
     }
-
   }
 }
 

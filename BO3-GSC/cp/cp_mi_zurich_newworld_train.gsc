@@ -623,7 +623,7 @@ function train_civilian_logic(a_ents) {
       break;
     }
   }
-  if(isplayer(attacker)) {
+  if(isPlayer(attacker)) {
     attacker thread function_8e9219f();
   }
   if(!isDefined(var_f11c18b5)) {
@@ -1319,9 +1319,9 @@ function function_96eacbb1() {
 
 function altered_gravity_enable(b_enable = 1) {
   if(b_enable) {
-    setdvar("phys_gravity_dir", (-1, 0, 0.9));
+    setDvar("phys_gravity_dir", (-1, 0, 0.9));
   } else {
-    setdvar("phys_gravity_dir", (0, 0, 1));
+    setDvar("phys_gravity_dir", (0, 0, 1));
   }
 }
 
@@ -1804,7 +1804,7 @@ function train_player_fell_off() {
   a_s_teleports = struct::get_array(self.target, "targetname");
   while(true) {
     self waittill("trigger", e_who);
-    if(isplayer(e_who) && (!(isDefined(e_who.var_511157e8) && e_who.var_511157e8))) {
+    if(isPlayer(e_who) && (!(isDefined(e_who.var_511157e8) && e_who.var_511157e8))) {
       e_who playsoundtoplayer("evt_plr_derez", e_who);
       e_who thread function_c24ce0f9(a_s_teleports);
     }
@@ -1844,7 +1844,7 @@ function train_robot_fell_off() {
   e_trigger = getent("train_bad_area_robots", "targetname");
   while(true) {
     e_trigger waittill("trigger", e_who);
-    if(!isplayer(e_who)) {
+    if(!isPlayer(e_who)) {
       e_who kill();
     }
   }

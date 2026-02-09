@@ -86,8 +86,8 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_dig");
 
   setdvar_cg_ng("r_specularColorScale", 2.5, 5);
-  SetDvar("r_lightGridEnableTweaks", 1);
-  SetDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -261,7 +261,7 @@ debugDvarWatcher(DVAR) {
           break;
         case CONST_DEBUG_TREASURE_OPEN:
           foreach(player in level.players) {
-            if(IsPlayer(player) && isReallyAlive(player)) {
+            if(isPlayer(player) && isReallyAlive(player)) {
               owner = player;
 
               foreach(torch in level.key_torches) {
@@ -279,7 +279,7 @@ debugDvarWatcher(DVAR) {
           level notify("treasure_room_reset");
           break;
       }
-      SetDvar(DVAR, 0);
+      setDvar(DVAR, 0);
     }
 
     wait(0.5);
@@ -749,14 +749,14 @@ watchScarabTrigger(deathZone) {
     deathZone waittill("trigger", victim);
 
     if(level.teamBased) {
-      if(isDefined(victim) && IsPlayer(victim) && (victim.team != self.owner.team || victim == self.owner)) {
+      if(isDefined(victim) && isPlayer(victim) && (victim.team != self.owner.team || victim == self.owner)) {
         self thread delayStopSound(0.5);
         self thread killNearbyVictim(victim);
         self notify("scarabs_attacked_player");
         break;
       }
     } else {
-      if(isDefined(victim) && IsPlayer(victim)) {
+      if(isDefined(victim) && isPlayer(victim)) {
         self thread delayStopSound(0.5);
         self thread killNearbyVictim(victim);
         self notify("scarabs_attacked_player");
@@ -986,7 +986,6 @@ openTreasureRoom() {
     level.doorSoundObj = spawn("script_model", level.treasureDoor.origin + offset);
     level.doorSoundObj setModel("tag_origin");
     level.doorSoundObj LinkTo(level.treasureDoor);
-
   }
 
   level thread doorSounds();
@@ -1060,7 +1059,7 @@ chestOnUse(player) {
 chestOnBeginUse(player) {}
 
 chestOnEndUse(team, player, result) {
-  if(IsPlayer(player)) {
+  if(isPlayer(player)) {
     player maps\mp\gametypes\_gameobjects::updateUIProgress(self, false);
   }
 }
@@ -1161,7 +1160,7 @@ triggerFlameTrap() {
   }
 
   foreach(player in level.participants) {
-    if(IsPlayer(player) && isReallyAlive(player) && player IsTouching(level.flameDeathZone)) {
+    if(isPlayer(player) && isReallyAlive(player) && player IsTouching(level.flameDeathZone)) {
       playFXOnTag(level.dig_fx["flametrap"]["player"], player, "j_spineupper");
 
       fire_effect_ent = SpawnFXForClient(level.dig_fx["flametrap"]["screen"], player getEye(), player);
@@ -1261,7 +1260,7 @@ digCrateThink(dropType) {
 
     level.dig_killstreak_user = player;
 
-    if(IsPlayer(player)) {
+    if(isPlayer(player)) {
       player SetClientOmnvar("ui_securing", 0);
       player.ui_securing = undefined;
     }

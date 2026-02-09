@@ -179,7 +179,6 @@ switchAircraft(plane, streakName) {
   if(isDefined(plane)) {
     plane thread endFlyby(streakName);
   }
-
 }
 
 spawnAircraft(streakName, lifeId, splineId) {
@@ -282,7 +281,6 @@ endFlyby(streakName) {
     self StopLoopSound(config.sfxEngine_1p);
 
     self cleanupAircraft();
-
   }
 }
 
@@ -415,7 +413,7 @@ missileGetBestTarget() {
 }
 
 missileIsGoodTarget(target) {
-  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (IsPlayer(target) && !(target _hasPerk("specialty_blindeye"))) && self missileTargetAngle(target) > 0.25);
+  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (isPlayer(target) && !(target _hasPerk("specialty_blindeye"))) && self missileTargetAngle(target) > 0.25);
 }
 
 missileTargetAngle(target) {
@@ -572,7 +570,6 @@ onFireRocket(streakName) {
     rocket playLoopSound(config.sfxMissile);
 
     self PlaySoundOnMovingEnt("a10p_missile_launch");
-
   }
 }
 
@@ -746,7 +743,6 @@ a10_cockpit_breathing() {
 
   for(;;) {
     wait(RandomFloatRange(3.0, 7.0));
-
   }
 }
 

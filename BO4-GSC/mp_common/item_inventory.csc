@@ -71,7 +71,7 @@ function_38ebb2a1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     clientdata.groupitems = [];
     player = function_27673a7(localclientnum);
 
-    if(isplayer(player) && isalive(player)) {
+    if(isPlayer(player) && isalive(player)) {
       player function_9116bb0e(localclientnum, 1);
     }
   }
@@ -1089,7 +1089,7 @@ function_1a99656a(localclientnum, inventoryitem, networkid, itemid, count, total
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "armorMax"), armormax);
     description = isDefined(item.itementry.description) ? item.itementry.description : # "";
 
-    if(getdvar(#"hash_4a5fd7d94cfc9dfd", 0) == 1) {
+    if(getDvar(#"hash_4a5fd7d94cfc9dfd", 0) == 1) {
       if(isDefined(item.itementry.unlockableitemref)) {
         if(isDefined(item.itementry.var_a51bc1f7)) {
           description = isDefined(item.itementry.var_a51bc1f7) ? item.itementry.var_a51bc1f7 : # "";
@@ -1842,7 +1842,7 @@ function_a243ddd6(localclientnum, itementry) {
 }
 
 function_d768ea30(localclientnum) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   var_b4322d52 = 0;
   currentweapon = isDefined(self.currentweapon) ? self.currentweapon : self.weapon;
 
@@ -1862,7 +1862,7 @@ function_d768ea30(localclientnum) {
 }
 
 function_78ed4455(localclientnum, itementry) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   data = item_world::function_a7e98a1a(localclientnum);
 
   switch (itementry.itemtype) {
@@ -1947,7 +1947,7 @@ function_9c4460e0(localclientnum, itemid, count = 1, slotid = undefined) {
 }
 
 function_1415f8f1(localclientnum, itementry) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   data = item_world::function_a7e98a1a(localclientnum);
 
   if(itementry.itemtype == # "attachment") {
@@ -2000,7 +2000,7 @@ function_bba770de(localclientnum, itementry) {
 }
 
 can_pickup_ammo(localclientnum, item, ammoamount = undefined) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   data = item_world::function_a7e98a1a(localclientnum);
   itementry = item.itementry;
   ammoweapon = itementry.weapon;
@@ -2437,7 +2437,7 @@ function_6231c19(params) {
     return;
   }
 
-  if(!self function_da43934d() || !isplayer(self) || !isalive(self)) {
+  if(!self function_da43934d() || !isPlayer(self) || !isalive(self)) {
     return;
   }
 
@@ -2887,7 +2887,7 @@ update_inventory_item(localclientnum, networkid, count) {
 }
 
 function_9116bb0e(localclientnum, closed = 0) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   clientdata = item_world::function_a7e98a1a(localclientnum);
   var_6e2c91d0 = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.multiItemPickup");
   var_cc67e8b = createuimodel(var_6e2c91d0, "count");

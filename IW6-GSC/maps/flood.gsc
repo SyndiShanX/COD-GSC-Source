@@ -36,7 +36,7 @@ main() {
   thread mission_object_control();
   level maps\_utility::delaythread(1.0, maps\_utility::set_team_bcvoice, "allies", "delta");
   level maps\_utility::delaythread(1.0, maps\_utility::set_team_bcvoice, "axis", "shadowcompany");
-  setdvar("music_enable", 1);
+  setDvar("music_enable", 1);
 
   if(level.start_point == "infil")
     level thread flood_intro_screen();

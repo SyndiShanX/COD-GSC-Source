@@ -55,7 +55,7 @@ function private actor_damage_override(einflictor, eattacker, idamage, idflags, 
   if(isDefined(self.interdimensional_gun_weapon) && isDefined(self.interdimensional_gun_attacker)) {
     return idamage;
   }
-  if(isplayer(eattacker) && (isDefined(eattacker.forceanhilateondeath) && eattacker.forceanhilateondeath)) {
+  if(isPlayer(eattacker) && (isDefined(eattacker.forceanhilateondeath) && eattacker.forceanhilateondeath)) {
     if(isDefined(eattacker.var_d63e841a) && eattacker.var_d63e841a) {
       assert(isDefined(eattacker.var_b3258f2e));
       if(!isinarray(eattacker.var_b3258f2e, self)) {
@@ -74,7 +74,7 @@ function private vehicle_damage_override(einflictor, eattacker, idamage, idflags
   if(isDefined(self.var_a0e2dfff) && self.var_a0e2dfff) {
     return idamage;
   }
-  if(isplayer(eattacker) && (isDefined(eattacker.forceanhilateondeath) && eattacker.forceanhilateondeath)) {
+  if(isPlayer(eattacker) && (isDefined(eattacker.forceanhilateondeath) && eattacker.forceanhilateondeath)) {
     if(isDefined(eattacker.var_d63e841a) && eattacker.var_d63e841a) {
       assert(isDefined(eattacker.var_b3258f2e));
       if(!isinarray(eattacker.var_b3258f2e, self)) {

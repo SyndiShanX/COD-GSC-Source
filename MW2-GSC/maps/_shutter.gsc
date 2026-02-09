@@ -11,8 +11,7 @@ main() {
     level.windStrength = 0.2;
 
   //WIND SETTINGS
-  //-------------
-  level.animRate["awning"] = 1.0;
+  //------------- level.animRate["awning"] = 1.0;
   level.animRate["palm"] = 1.0;
   level.animWeightMin = (level.windStrength - 0.5);
   level.animWeightMax = (level.windStrength + 0.2);
@@ -21,10 +20,7 @@ main() {
     level.animWeightMin = 0.1;
   if(level.animWeightMax > 1.0)
     level.animWeightMax = 1.0;
-  //-------------
-  //-------------
-
-  level.inc = 0;
+  //------------- //------------- level.inc = 0;
   awningAnims();
   palmTree_anims();
 
@@ -311,7 +307,7 @@ awningAnims() {
 
 awningWander(ent) {
   /*
-  	ent UseAnimTree( #animtree );
+  	ent UseAnimTree(#animtree );
   	
   	switch (ent.model)
   	{

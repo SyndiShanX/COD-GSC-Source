@@ -99,7 +99,7 @@ water_trigger_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       trace = worldtrace(entity.origin + vectorscale((0, 0, 1), 30.0), entity.origin - vectorscale((0, 0, 1), 256.0));
 
       if(trace["surfacetype"] == "none") {

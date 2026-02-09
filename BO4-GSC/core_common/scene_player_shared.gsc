@@ -59,7 +59,6 @@ class csceneplayer: csceneobject {
     if(isDefined(level.hud_scene_dev_info3)) {
       level.hud_scene_dev_info3 destroy();
     }
-
   }
 
   function display_dev_info() {
@@ -104,7 +103,6 @@ class csceneplayer: csceneobject {
     }
 
     destroy_dev_info();
-
   }
 
   function animation_lookup(animation, ent = self._e, b_camera = 0) {
@@ -142,9 +140,7 @@ class csceneplayer: csceneobject {
 
       if(isDefined(_o_scene._a_objects)) {
         foreach(obj in _o_scene._a_objects) {
-          if(obj._s.type === "sharedplayer" && [
-              [obj]
-            ] - > function_6c1c67c1()) {
+          if(obj._s.type === "sharedplayer" && [[obj]] - > function_6c1c67c1()) {
             return true;
           }
         }
@@ -258,7 +254,6 @@ class csceneplayer: csceneobject {
       p_host = util::gethostplayer();
       stop_camera(p_host);
     }
-
   }
 
   function function_894716e2(player) {
@@ -345,7 +340,6 @@ class csceneplayer: csceneobject {
     if(player === level.host) {
       player util::delay(0.5, "<dev string:xf5>", &destroy_dev_info);
     }
-
   }
 
   function _cleanup() {
@@ -1348,7 +1342,6 @@ class csceneplayer: csceneobject {
     s_objdef.nospawn = 1;
     return csceneobject::first_init(s_objdef, o_scene);
   }
-
 }
 
 class cscenefakeplayer: csceneobject {}
@@ -1507,7 +1500,6 @@ class cscenesharedplayer: csceneplayer, csceneobject {
       if(getdvarint(#"debug_scene", 0) > 0) {
         printtoprightln("<dev string:x217>" + _s.name + "<dev string:x261>" + player_animation);
       }
-
     }
   }
 
@@ -1579,5 +1571,4 @@ class cscenesharedplayer: csceneplayer, csceneobject {
     _set_visibility();
     array::wait_till(a_players, "scene_ready");
   }
-
 }

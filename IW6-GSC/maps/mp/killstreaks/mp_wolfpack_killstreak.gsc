@@ -328,7 +328,6 @@ UpdateMoveState() {
     if(bRefreshGoal == true) {
       self ScrAgentSetGoalPos(self.origin);
     }
-
   } else if(self.moveState == "pursuit") {
     self.curMeleeTarget = self.enemy;
     self.moveMode = "sprint";

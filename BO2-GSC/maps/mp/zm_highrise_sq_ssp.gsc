@@ -166,7 +166,7 @@ corpse_room_revive_watcher() {
   while(weaponname != "knife_ballistic_upgraded_zm" || str_type != "MOD_IMPACT") {
     t_corpse_room_dmg waittill("damage", amount, inflictor, direction, point, type);
 
-    if(isplayer(inflictor)) {
+    if(isPlayer(inflictor)) {
       weaponname = inflictor.currentweapon;
       str_type = type;
     }

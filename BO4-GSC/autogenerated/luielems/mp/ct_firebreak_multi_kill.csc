@@ -22,7 +22,6 @@ class cct_firebreak_multi_kill: cluielem {
   function setup_clientfields(uid) {
     cluielem::setup_clientfields(uid);
   }
-
 }
 
 register(uid) {

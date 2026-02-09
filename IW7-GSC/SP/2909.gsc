@@ -17,7 +17,7 @@ pausemenu_think() {
 }
 
 func_E2B3() {
-  var_0 = getdvar("version");
+  var_0 = getDvar("version");
   if(var_0 != "" && issubstr(var_0, "IW7_PROFILE") || issubstr(var_0, "IW7_DEMO")) {
     map_restart();
     return;

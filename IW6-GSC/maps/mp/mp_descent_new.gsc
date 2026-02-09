@@ -45,16 +45,16 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_descent_new");
 
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
   setdvar_cg_ng("r_specularColorScale", 2.5, 2.5);
 
   if(level.ps3) {
-    SetDvar("sm_sunShadowScale", "0.5");
-    SetDvar("sm_sunsamplesizenear", ".15");
+    setDvar("sm_sunShadowScale", "0.5");
+    setDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.8");
-    SetDvar("sm_sunsamplesizenear", ".25");
+    setDvar("sm_sunShadowScale", "0.8");
+    setDvar("sm_sunsamplesizenear", ".25");
   }
 
   game["attackers"] = "allies";
@@ -278,7 +278,6 @@ world_tilt() {
     trans = vista_trans[i];
     level.vista world_tilt_move(trans);
     Earthquake(.35, 2, level.vista.origin, 100000);
-
   }
 }
 
@@ -495,7 +494,7 @@ tilt_wait_dvar() {
   while(GetDvarInt(dvar_name) == default_value) {
     waitframe();
   }
-  SetDvar(dvar_name, GetDvarInt(dvar_name) - 1);
+  setDvar(dvar_name, GetDvarInt(dvar_name) - 1);
 
   level notify("tilt_start");
 }
@@ -523,9 +522,7 @@ watersheet_trig_setup() {
 
     if(!isDefined(player.isTouchingWaterSheetTrigger) || player.isTouchingWaterSheetTrigger == false) {
       thread watersheet_playFX(player);
-
     }
-
   }
 }
 
@@ -585,7 +582,6 @@ animateOneScriptableProp(fallAnimLength) {
     self SetScriptablePartState(0, "fall");
 
     wait(fallAnimLength);
-
   }
 }
 
@@ -709,7 +705,7 @@ blockPath() {
 GRAVITY_DVAR = "phys_gravity";
 levitateProps(minTime, maxTime) {
   baseGravity = GetDvarInt(GRAVITY_DVAR, -800);
-  SetDvar(GRAVITY_DVAR, 0);
+  setDvar(GRAVITY_DVAR, 0);
 
   PhysicsJitter(level.mapCenter, 2500, 0, 5.0, 5.0);
 
@@ -717,7 +713,7 @@ levitateProps(minTime, maxTime) {
 
   wait(gravityTime);
 
-  SetDvar(GRAVITY_DVAR, baseGravity);
+  setDvar(GRAVITY_DVAR, baseGravity);
 }
 
 moverCreate(moverName, triggerFlag) {
@@ -853,7 +849,6 @@ setupCollapsingColumn(entName) {
     RadiusDamage(impactPos, CONST_COLUMN_DAMAGE_RADIUS, CONST_COLUMN_DAMAGE, CONST_COLUMN_DAMAGE, undefined, "MOD_CRUSH");
 
     rubble Solid();
-
   }
 }
 
@@ -882,7 +877,6 @@ setupSniperDuct(entName) {
 
     root RotatePitch(0.05 * CONST_SNIPER_DUCT_ANGLE, recoveryTime, 0.5 * recoveryTime, 0.5 * recoveryTime);
     wait(recoveryTime);
-
   }
 }
 
@@ -1243,7 +1237,6 @@ periodicTremor(minTime, maxTime) {
       duration = RandomFloatRange(1.0, 1.5);
 
       Earthquake(magnitude, duration, level.mapCenter, CONST_EARTHQUAKE_RANGE);
-
     }
 
     interval = RandomFloatRange(minTime, maxTime);
@@ -1308,7 +1301,7 @@ checkDbgDvar(dvarName, callback, notifyStr) {
     if(isDefined(notifyStr))
       level notify(notifyStr);
 
-    SetDvar(dvarName, 0);
+    setDvar(dvarName, 0);
   }
 }
 

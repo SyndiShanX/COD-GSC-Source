@@ -54,7 +54,7 @@ function_aba430c2() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isplayer(s_result.activator) && isalive(s_result.activator) && !isDefined(s_result.activator.registerraz_locationinvalidposmenu)) {
+    if(isPlayer(s_result.activator) && isalive(s_result.activator) && !isDefined(s_result.activator.registerraz_locationinvalidposmenu)) {
       break;
     }
   }
@@ -157,7 +157,7 @@ function_ad05f6f3() {
   while(isDefined(self)) {
     s_result = self waittill(#"damage");
 
-    if(isplayer(s_result.attacker)) {
+    if(isPlayer(s_result.attacker)) {
       break;
     }
   }
@@ -216,7 +216,7 @@ function_33864e5d() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(!isplayer(s_result.activator) || !isalive(s_result.activator)) {
+    if(!isPlayer(s_result.activator) || !isalive(s_result.activator)) {
       continue;
     }
 

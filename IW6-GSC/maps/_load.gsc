@@ -37,36 +37,36 @@ main() {
   common_scripts\utility::array_thread(getEntArray("ammo_cache", "targetname"), ::ammo_cache_think_global);
   maps\_utility::array_delete(getEntArray("trigger_multiple_softlanding", "classname"));
 
-  if(getdvar("debug") == "")
-    setdvar("debug", "0");
+  if(getDvar("debug") == "")
+    setDvar("debug", "0");
 
-  if(getdvar("fallback") == "")
-    setdvar("fallback", "0");
+  if(getDvar("fallback") == "")
+    setDvar("fallback", "0");
 
-  if(getdvar("angles") == "")
-    setdvar("angles", "0");
+  if(getDvar("angles") == "")
+    setDvar("angles", "0");
 
-  if(getdvar("noai") == "")
-    setdvar("noai", "off");
+  if(getDvar("noai") == "")
+    setDvar("noai", "off");
 
-  if(getdvar("scr_RequiredMapAspectratio") == "")
-    setdvar("scr_RequiredMapAspectratio", "1");
+  if(getDvar("scr_RequiredMapAspectratio") == "")
+    setDvar("scr_RequiredMapAspectratio", "1");
 
-  setdvar("ac130_player_num", -1);
-  setdvar("ui_remotemissile_playernum", 0);
-  setdvar("ui_pmc_won", 0);
-  setdvar("ui_actionSlot_1_forceActive", "off");
-  setdvar("ui_actionSlot_2_forceActive", "off");
-  setdvar("ui_actionSlot_3_forceActive", "off");
-  setdvar("ui_actionSlot_4_forceActive", "off");
-  setdvar("ui_dog_grenade", 0);
-  setdvar("hideHudFast", 0);
-  setdvar("ui_securing", "");
-  setdvar("ui_securing_progress", 0.0);
-  setdvar("hud_showObjectives", 1);
-  setdvar("hud_showIntel", 1);
-  setdvar("minimap_sp", 0);
-  setdvar("minimap_full_sp", 0);
+  setDvar("ac130_player_num", -1);
+  setDvar("ui_remotemissile_playernum", 0);
+  setDvar("ui_pmc_won", 0);
+  setDvar("ui_actionSlot_1_forceActive", "off");
+  setDvar("ui_actionSlot_2_forceActive", "off");
+  setDvar("ui_actionSlot_3_forceActive", "off");
+  setDvar("ui_actionSlot_4_forceActive", "off");
+  setDvar("ui_dog_grenade", 0);
+  setDvar("hideHudFast", 0);
+  setDvar("ui_securing", "");
+  setDvar("ui_securing_progress", 0.0);
+  setDvar("hud_showObjectives", 1);
+  setDvar("hud_showIntel", 1);
+  setDvar("minimap_sp", 0);
+  setDvar("minimap_full_sp", 0);
 
   if(!isDefined(anim.notetracks)) {
     anim.notetracks = [];
@@ -88,7 +88,7 @@ main() {
   level.abort_wait_any_func_array = [];
 
   if(!isDefined(level.script))
-    level.script = tolower(getdvar("mapname"));
+    level.script = tolower(getDvar("mapname"));
 
   level.dirteffectmenu["center"] = "dirt_effect_center";
   level.dirteffectmenu["left"] = "dirt_effect_left";
@@ -226,7 +226,7 @@ main() {
   level._effect["deathfx_bloodpool_generic"] = loadfx("fx/impacts/deathfx_bloodpool_generic");
   animscripts\pain::initpainfx();
   animscripts\melee::melee_init();
-  level.createfx_enabled = getdvar("createfx") != "";
+  level.createfx_enabled = getDvar("createfx") != "";
   slowmo_system_init();
   maps\_mgturret::main();
   common_scripts\_exploder::setupexploders();
@@ -258,7 +258,7 @@ main() {
   setsaveddvar("ufoHitsTriggers", "0");
   do_no_game_start();
 
-  if(getdvar("g_connectpaths") == "2")
+  if(getDvar("g_connectpaths") == "2")
     level waittill("eternity");
 
   maps\_autosave::main();
@@ -633,13 +633,13 @@ handle_starts() {
   level.start_struct = spawnStruct();
   common_scripts\utility::create_dvar("start", "");
 
-  if(getdvar("scr_generateClipModels") != "" && getdvar("scr_generateClipModels") != "0") {
+  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0") {
     return;
   }
   if(!isDefined(level.start_functions))
     level.start_functions = [];
 
-  var_0 = tolower(getdvar("start"));
+  var_0 = tolower(getDvar("start"));
   var_1 = get_start_dvars();
 
   if(isDefined(level.start_point))
@@ -677,7 +677,7 @@ handle_starts() {
   var_7 = getdvarint("sv_loadingsavegame", 0);
 
   if(var_7 != 0) {
-    var_8 = getdvar("sv_savegametransient", "");
+    var_8 = getDvar("sv_savegametransient", "");
     loadstartpointtransient(var_8);
 
     if(var_8 != "")
@@ -707,7 +707,7 @@ handle_starts() {
 
   if(maps\_utility::is_default_start()) {
     var_10 = get_string_for_starts(var_1);
-    setdvar("start", var_10);
+    setDvar("start", var_10);
   }
 
   waittillframeend;
@@ -767,7 +767,7 @@ get_string_for_starts(var_0) {
       var_1 = var_1 + var_0[var_2] + " ";
   }
 
-  setdvar("start", var_1);
+  setDvar("start", var_1);
   return var_1;
 }
 
@@ -905,7 +905,7 @@ display_starts() {
         break;
       }
 
-      setdvar("start", var_0[var_7]);
+      setDvar("start", var_0[var_7]);
       level.player openpopupmenu("start");
     }
 
@@ -1067,7 +1067,7 @@ ammo_pickup(var_0) {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(!isplayer(var_3)) {
+    if(!isPlayer(var_3)) {
       continue;
     }
     var_4 = undefined;
@@ -1208,7 +1208,7 @@ precache_script_models() {
 }
 
 player_death_detection() {
-  setdvar("player_died_recently", "0");
+  setDvar("player_died_recently", "0");
   thread player_died_recently_degrades();
   level maps\_utility::add_wait(common_scripts\utility::flag_wait, "missionfailed");
   level.player maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
@@ -1218,7 +1218,7 @@ player_death_detection() {
   var_0[1] = 30;
   var_0[2] = 0;
   var_0[3] = 0;
-  setdvar("player_died_recently", var_0[level.gameskill]);
+  setDvar("player_died_recently", var_0[level.gameskill]);
 }
 
 player_died_recently_degrades() {
@@ -1227,7 +1227,7 @@ player_died_recently_degrades() {
 
     if(var_0 > 0) {
       var_0 = var_0 - 5;
-      setdvar("player_died_recently", var_0);
+      setDvar("player_died_recently", var_0);
     }
 
     wait 5;
@@ -1502,7 +1502,7 @@ ammo_cache_think_global(var_0) {
   self.use_trigger setcursorhint("HINT_NOICON");
   var_1 = &"WEAPON_CACHE_USE_HINT";
 
-  if(getdvar("consoleGame") == "true")
+  if(getDvar("consoleGame") == "true")
     var_1 = &"WEAPON_CACHE_USE_CONTROLLER_HINT";
 
   self.use_trigger sethintstring(var_1);
@@ -1570,7 +1570,7 @@ ammo_icon_think() {
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
     while(var_2 istouching(var_0)) {

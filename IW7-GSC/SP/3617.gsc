@@ -478,7 +478,7 @@ func_6228() {
 
   level.player scripts\engine\utility::allow_usability(0);
   level.player.var_C37D = getdvarint("player_death_animated", 1);
-  setdvar("player_death_animated", 0);
+  setDvar("player_death_animated", 0);
   if(level.player scripts\sp\utility::func_65DB("player_space_override_off")) {
     return;
   }
@@ -512,7 +512,7 @@ func_5567() {
 
   level.player.playing_terrorist_respawn_music = undefined;
   level.player scripts\engine\utility::allow_usability(1);
-  setdvar("player_death_animated", level.player.var_C37D);
+  setDvar("player_death_animated", level.player.var_C37D);
   level.player.var_C37D = undefined;
   thread func_5568();
 }

@@ -23,7 +23,7 @@ main() {
   setsaveddvar("r_lodFOVScaleOverrideStopMaxAngle", 5);
   setsaveddvar("r_lodFOVScaleOverrideStopMinAngle", 0.0);
 
-  if(getdvar("beautiful_corner") == "1") {
+  if(getDvar("beautiful_corner") == "1") {
     dead_script();
     return;
   }
@@ -1801,7 +1801,7 @@ graveyard_hind_spot_enemy() {
       }
       var_9 = bulletTrace(self.origin + (0, 0, -128), level.player.origin, 1, level.price);
 
-      if(!isDefined(var_9["entity"]) || !isplayer(var_9["entity"]))
+      if(!isDefined(var_9["entity"]) || !isPlayer(var_9["entity"]))
         continue;
     } else if(level.player._stealth.logic.stance == "prone" || level.player._stealth.logic.stance == "crouch") {
       var_1 = 0;
@@ -1816,7 +1816,7 @@ graveyard_hind_spot_enemy() {
       }
       var_9 = bulletTrace(self.origin + (0, 0, -128), level.player.origin, 1, level.price);
 
-      if(!isDefined(var_9["entity"]) || !isplayer(var_9["entity"]))
+      if(!isDefined(var_9["entity"]) || !isPlayer(var_9["entity"]))
         continue;
     }
 
@@ -2283,7 +2283,7 @@ field_enemy_think2() {
   self notify("_stealth_stop_corpse_logic");
   self notify("end_patrol");
 
-  if(getdvar("old_field_enemy_run") == "1") {
+  if(getDvar("old_field_enemy_run") == "1") {
     if(self.export == 47)
       wait 2;
   } else
@@ -3389,7 +3389,7 @@ dash_kill_nosave() {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isplayer(var_0))
+  if(isPlayer(var_0))
     common_scripts\utility::flag_set("dash_stealth_unsure");
 }
 

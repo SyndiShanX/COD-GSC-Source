@@ -82,7 +82,6 @@ class cluielembar: cluielem {
     cluielem::add_clientfield("blue", 1, 4, "float", bluecallback);
     cluielem::add_clientfield("bar_percent", 1, 6, "float", var_661989d5);
   }
-
 }
 
 register(uid, xcallback, ycallback, widthcallback, heightcallback, fadeovertimecallback, alphacallback, redcallback, greencallback, bluecallback, var_661989d5) {

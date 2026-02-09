@@ -106,7 +106,5 @@ precache() {
   precacheItem("beretta");
   precacheItem("fraggrenade");
 
-  //----------------
-  maps\_rambo::main();
-  //----------------
-}
+  //---------------- maps\_rambo::main();
+  //---------------- }

@@ -682,7 +682,6 @@ getStandDeathAnim() {
       deathArray[deathArray.size] = tryAddFiringDeathAnim(%exposed_death_firing);
       deathArray = removeUndefined(deathArray);
     }
-
   }
 
   assertex(deathArray.size > 0, deathArray.size);
@@ -805,7 +804,7 @@ playExplodeDeathAnim() {
 
   deathAnim = deathArray[randomint(deathArray.size)];
 
-  if(getdvar("scr_expDeathMayMoveCheck", "on") == "on") {
+  if(getDvar("scr_expDeathMayMoveCheck", "on") == "on") {
     localDeltaVector = getMoveDelta(deathAnim, 0, 1);
     endPoint = self localToWorldCoords(localDeltaVector);
 

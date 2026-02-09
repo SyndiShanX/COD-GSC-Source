@@ -421,7 +421,7 @@ loot_pick_up_monitor(var_0) {
   wait(0.2);
   for(;;) {
     var_0 waittill("trigger", var_1);
-    if(!isplayer(var_1)) {
+    if(!isPlayer(var_1)) {
       wait(0.25);
       continue;
     }
@@ -716,7 +716,7 @@ update_enemy_killed_event(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isplayer(var_2)) {
+  if(!isPlayer(var_2)) {
     return;
   }
 

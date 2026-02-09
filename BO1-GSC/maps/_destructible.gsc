@@ -18,7 +18,6 @@ init() {
     }
   }
 }
-
 destructible_think() {
   self endon("death");
   if(self.destructibledef == "fxanim_gp_ceiling_fan_old_mod" || self.destructibledef == "fxanim_gp_ceiling_fan_modern_mod" || self.destructibledef == "fxanim_airconditioner_mod") {
@@ -26,7 +25,6 @@ destructible_think() {
     return;
   }
 }
-
 destructible_event_callback(destructible_event, attacker) {
   explosion_radius = 0;
   if(IsSubStr(destructible_event, "explode") && destructible_event != "explode") {
@@ -67,7 +65,6 @@ destructible_event_callback(destructible_event, attacker) {
       break;
   }
 }
-
 simple_explosion(attacker) {
   offset = (0, 0, 5);
   if(isDefined(attacker)) {
@@ -78,7 +75,6 @@ simple_explosion(attacker) {
   PhysicsExplosionSphere(self.origin + offset, 255, 254, 0.3);
   self DoDamage(20000, self.origin + offset);
 }
-
 complex_explosion(attacker, max_radius) {
   offset = (0, 0, 5);
   if(isDefined(attacker)) {
@@ -89,7 +85,6 @@ complex_explosion(attacker, max_radius) {
   PhysicsExplosionSphere(self.origin + offset, max_radius, max_radius - 1, 0.3);
   self DoDamage(20000, self.origin + offset);
 }
-
 CodeCallback_DestructibleEvent(event, param1, param2, param3) {
   if(event == "broken") {
     notify_type = param1;
@@ -103,14 +98,12 @@ CodeCallback_DestructibleEvent(event, param1, param2, param3) {
     self thread breakAfter(time, damage, piece);
   }
 }
-
 breakAfter(time, damage, piece) {
   self notify("breakafter");
   self endon("breakafter");
   wait time;
   self dodamage(damage, self.origin, undefined, piece);
 }
-
 ceiling_fan_think() {
   self UseAnimTree(#animtree);
   self SetFlaggedAnimKnobRestart("idle", %fxanim_gp_ceiling_fan_old_slow_anim, 1, 0.0, 1);
@@ -120,22 +113,19 @@ ceiling_fan_think() {
     self SetFlaggedAnimKnobRestart("idle", %fxanim_gp_ceiling_fan_old_dest_anim, 1, 0.0, 1);
   }
 }
-
 delete_collision() {
   self endon("death");
   if(isDefined(self.target)) {
-    dest_clip = getEnt(self.target, "targetname");
+    dest_clip = GetEnt(self.target, "targetname");
     wait 0.1;
     dest_clip delete();
   }
 }
-
 destructible_barrel_death_think() {
   self endon("barrel_dead");
   self waittill("death");
   self thread destructible_barrel_explosion(undefined, false);
 }
-
 destructible_barrel_fire_think() {
   self endon("barrel_dead");
   self endon("explode");
@@ -143,7 +133,6 @@ destructible_barrel_fire_think() {
   wait(RandomIntRange(7, 10));
   destructible_barrel_explosion();
 }
-
 destructible_barrel_explosion(attacker, physics_explosion) {
   if(!isDefined(physics_explosion)) {
     physics_explosion = true;
@@ -153,7 +142,7 @@ destructible_barrel_explosion(attacker, physics_explosion) {
   }
   self notify("barrel_dead");
   if(isDefined(self.target)) {
-    dest_clip = getEnt(self.target, "targetname");
+    dest_clip = GetEnt(self.target, "targetname");
     dest_clip delete();
   }
   self RadiusDamage(self.origin, 256, 300, 85, attacker, "MOD_EXPLOSIVE", "frag_grenade_sp");
@@ -164,7 +153,6 @@ destructible_barrel_explosion(attacker, physics_explosion) {
   }
   self DoDamage(self.health + 10000, self.origin + (0, 0, 1));
 }
-
 #using_animtree("vehicles");
 destructible_car_explosion(attacker) {
   self UseAnimTree(#animtree);
@@ -178,7 +166,6 @@ destructible_car_explosion(attacker) {
   self DoDamage(self.health + 10000, self.origin + (0, 0, 1), attacker);
   self notify("death", attacker);
 }
-
 destructible_car_fire_think() {
   self endon("death");
   wait(RandomIntRange(7, 10));

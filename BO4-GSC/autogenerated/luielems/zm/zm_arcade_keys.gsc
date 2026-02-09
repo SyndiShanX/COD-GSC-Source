@@ -26,7 +26,6 @@ class czm_arcade_keys: cluielem {
     cluielem::setup_clientfields(uid);
     cluielem::add_clientfield("key_count", 1, 4, "int");
   }
-
 }
 
 register(uid) {

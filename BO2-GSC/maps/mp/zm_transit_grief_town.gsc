@@ -19,8 +19,8 @@ precache() {
 town_treasure_chest_init() {
   chest1 = getstruct("town_chest", "script_noteworthy");
   chest2 = getstruct("town_chest_2", "script_noteworthy");
-  setdvar("disable_rope", 1);
-  setdvar("disableLookAtEntityLogic", 1);
+  setDvar("disable_rope", 1);
+  setDvar("disableLookAtEntityLogic", 1);
   level.chests = [];
   level.chests[level.chests.size] = chest1;
   level.chests[level.chests.size] = chest2;

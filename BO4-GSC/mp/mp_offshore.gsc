@@ -24,8 +24,8 @@ event_handler[level_init] main(eventstruct) {
   load::main();
   compass::setupminimap("");
   level.cleandepositpoints = array((2730, 320, 72), (1648, -1560, -20), (3950, 1600, 131), (1012, 564, -10), (4460, 160, 57));
-  setdvar(#"phys_buoyancy", 1);
-  setdvar(#"phys_ragdoll_buoyancy", 1);
+  setDvar(#"phys_buoyancy", 1);
+  setDvar(#"phys_ragdoll_buoyancy", 1);
   function_2cdcf5c3();
 }
 

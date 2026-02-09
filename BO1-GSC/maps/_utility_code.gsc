@@ -15,7 +15,6 @@ structarray_swap(object1, object2) {
   self.array[index1].struct_array_index = index1;
   self.array[index2].struct_array_index = index2;
 }
-
 waitSpread_insert(allotment) {
   gapIndex = -1;
   gap = 0;
@@ -37,7 +36,6 @@ waitSpread_insert(allotment) {
   }
   return newAllotment;
 }
-
 waittill_objective_event_proc(requireTrigger) {
   while(level.deathSpawner[self.script_deathChain] > 0) {
     level waittill("spawner_expired" + self.script_deathChain);
@@ -48,29 +46,24 @@ waittill_objective_event_proc(requireTrigger) {
   flag = self get_trigger_flag();
   flag_set(flag);
 }
-
 wait_until_done_speaking() {
   self endon("death");
   while(self.isSpeaking) {
     wait(0.05);
   }
 }
-
 ent_waits_for_level_notify(msg) {
   level waittill(msg);
   self notify("done");
 }
-
 ent_waits_for_trigger(trigger) {
   trigger waittill("trigger");
   self notify("done");
 }
-
 ent_times_out(timer) {
   wait(timer);
   self notify("done");
 }
-
 update_debug_friendlycolor_on_death() {
   self notify("debug_color_update");
   self endon("debug_color_update");
@@ -79,7 +72,6 @@ update_debug_friendlycolor_on_death() {
   level.debug_color_friendlies[num] = undefined;
   level notify("updated_color_friendlies");
 }
-
 update_debug_friendlycolor(num) {
   thread update_debug_friendlycolor_on_death();
   if(isDefined(self.script_forceColor)) {
@@ -89,7 +81,6 @@ update_debug_friendlycolor(num) {
   }
   level notify("updated_color_friendlies");
 }
-
 insure_player_does_not_set_forcecolor_twice_in_one_frame() {}
 new_color_being_set(color) {
   self notify("new_color_being_set");
@@ -106,7 +97,6 @@ new_color_being_set(color) {
   self.new_force_color_being_set = undefined;
   self notify("done_setting_new_color");
 }
-
 delayThread_proc(func, timer, param1, param2, param3, param4) {
   self endon("death");
   wait(timer);
@@ -122,23 +112,19 @@ delayThread_proc(func, timer, param1, param2, param3, param4) {
     thread[[func]]();
   }
 }
-
 wait_for_flag_or_time_elapses(flagname, timer) {
   level endon(flagname);
   wait(timer);
 }
-
 ent_wait_for_flag_or_time_elapses(flagname, timer) {
   self endon(flagname);
   wait(timer);
 }
-
 waittill_either_function_internal(ent, func, parm) {
   ent endon("done");
   [[func]](parm);
   ent notify("done");
 }
-
 HintPrintWait(length, breakfunc) {
   if(!isDefined(breakfunc)) {
     wait(length);
@@ -152,7 +138,6 @@ HintPrintWait(length, breakfunc) {
     wait(0.05);
   }
 }
-
 HintPrint(string, breakfunc) {
   MYFADEINTIME = 1.0;
   MYFLASHTIME = 0.75;
@@ -203,9 +188,8 @@ HintPrint(string, breakfunc) {
   Hint Destroy();
   flag_clear("global_hint_in_use");
 }
-
 lerp_player_view_to_tag_internal(ent, tag, lerptime, fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self endon("disconnect");
   }
   if(isDefined(self.first_frame_time) && ent.first_frame_time == gettime()) {
@@ -225,9 +209,8 @@ lerp_player_view_to_tag_internal(ent, tag, lerptime, fraction, right_arc, left_a
     self playerlinkto(ent);
   }
 }
-
 lerp_player_view_to_tag_oldstyle_internal(ent, tag, lerptime, fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self endon("disconnect");
   }
   if(isDefined(ent.first_frame_time) && ent.first_frame_time == gettime()) {
@@ -241,9 +224,8 @@ lerp_player_view_to_tag_oldstyle_internal(ent, tag, lerptime, fraction, right_ar
   }
   self playerlinktodelta(ent, tag, fraction, right_arc, left_arc, top_arc, bottom_arc, false);
 }
-
 lerp_player_view_to_moving_tag_oldstyle_internal(ent, tag, lerptime, fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo) {
-  if(IsPlayer(self)) {
+  if(isPlayer(self)) {
     self endon("disconnect");
   }
   if(isDefined(ent.first_frame_time) && ent.first_frame_time == gettime()) {
@@ -255,7 +237,6 @@ lerp_player_view_to_moving_tag_oldstyle_internal(ent, tag, lerptime, fraction, r
   }
   self playerlinkto(ent, tag, fraction, right_arc, left_arc, top_arc, bottom_arc, false);
 }
-
 function_stack_proc(caller, func, param1, param2, param3, param4) {
   if(!isDefined(caller.function_stack)) {
     caller.function_stack = [];
@@ -283,7 +264,6 @@ function_stack_proc(caller, func, param1, param2, param3, param4) {
     self notify("function_done");
   }
 }
-
 function_stack_caller_waits_for_turn(caller) {
   caller endon("death");
   self endon("death");
@@ -291,7 +271,6 @@ function_stack_caller_waits_for_turn(caller) {
     caller waittill("level_function_stack_ready");
   }
 }
-
 alphabet_compare(a, b) {
   list = [];
   val = 1;
@@ -387,7 +366,6 @@ alphabet_compare(a, b) {
   }
   return "same";
 }
-
 is_later_in_alphabet(string1, string2) {
   count = string1.size;
   if(count >= string2.size) {
@@ -404,23 +382,19 @@ is_later_in_alphabet(string1, string2) {
   }
   return string1.size > string2.size;
 }
-
 wait_for_sounddone_or_death(org) {
   self endon("death");
   org waittill("sounddone");
 }
-
 sound_effect() {
   self effect_soundalias();
 }
-
 effect_soundalias() {
   origin = self.v["origin"];
   alias = self.v["soundalias"];
   self exploder_delay();
   play_sound_in_space(alias, origin);
 }
-
 cannon_effect() {
   if(isDefined(self.v["repeat"])) {
     for(i = 0; i < self.v["repeat"]; i++) {
@@ -437,7 +411,6 @@ cannon_effect() {
   triggerFx(self.looper);
   exploder_playSound();
 }
-
 exploder_delay() {
   if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
@@ -454,7 +427,6 @@ exploder_delay() {
     wait(randomfloatrange(min_delay, max_delay));
   }
 }
-
 exploder_earthquake() {
   earthquake_name = self.v["earthquake"];
   assertex(isDefined(level.earthquake) && isDefined(level.earthquake[earthquake_name]), "No earthquake '" + earthquake_name + "' defined for exploder - call add_earthquake() in your level script.");
@@ -462,19 +434,16 @@ exploder_earthquake() {
   eq = level.earthquake[earthquake_name];
   earthquake(eq["magnitude"], eq["duration"], self.v["origin"], eq["radius"]);
 }
-
 exploder_rumble() {
   self exploder_delay();
   level.player PlayRumbleonentity(self.v["rumble"]);
 }
-
 exploder_playSound() {
   if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }
   play_sound_in_space(self.v["soundalias"], self.v["origin"]);
 }
-
 fire_effect() {
   forward = self.v["forward"];
   up = self.v["up"];
@@ -497,7 +466,6 @@ fire_effect() {
   }
   playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
-
 trail_effect() {
   self exploder_delay();
   if(!isDefined(self.v["trailfxtag"])) {
@@ -528,13 +496,11 @@ trail_effect() {
     temp_ent Delete();
   }
 }
-
 trail_effect_ender(ent, ender) {
   ent endon("death");
   self waittill(ender);
   ent Delete();
 }
-
 init_vision_set(visionset) {
   level.lvl_visionset = visionset;
   if(!isDefined(level.vision_cheat_enabled)) {
@@ -542,7 +508,6 @@ init_vision_set(visionset) {
   }
   return level.vision_cheat_enabled;
 }
-
 exec_func(func, endons) {
   for(i = 0; i < endons.size; i++) {
     endons[i].caller endon(endons[i].ender);
@@ -557,7 +522,6 @@ exec_func(func, endons) {
     func.caller[[func.func]](func.parms[0], func.parms[1], func.parms[2]);
   }
 }
-
 waittill_func_ends(func, endons) {
   self endon("all_funcs_ended");
   exec_func(func, endons);

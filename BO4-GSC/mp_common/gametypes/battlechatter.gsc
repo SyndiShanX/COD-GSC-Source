@@ -272,7 +272,7 @@ on_player_spawned() {
 }
 
 function_58c93260(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return undefined;
   }
 
@@ -312,7 +312,7 @@ function_af2bf286(player) {
 
     if(isarray(enemies) && enemies.size > 0) {
       foreach(enemy in enemies) {
-        if(!isplayer(enemy) || enemy hasperk(#"specialty_quieter")) {
+        if(!isPlayer(enemy) || enemy hasperk(#"specialty_quieter")) {
           continue;
         }
 
@@ -574,7 +574,7 @@ function_551980b7(dialogname) {
     return;
   }
 
-  if(!isDefined(self) || !isplayer(self)) {
+  if(!isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -657,7 +657,7 @@ function_7139078d() {
       continue;
     }
 
-    if(isDefined(result.suppressor.currentweapon) && isplayer(result.suppressor)) {
+    if(isDefined(result.suppressor.currentweapon) && isPlayer(result.suppressor)) {
       bundlename = self getmpdialogname();
 
       if(!isDefined(bundlename)) {
@@ -697,7 +697,7 @@ function_7139078d() {
 }
 
 function_bd715920(var_28b40381, attacker, eventorigin, eventobject, timedelay) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self)) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -748,7 +748,7 @@ function_bd715920(var_28b40381, attacker, eventorigin, eventobject, timedelay) {
   }
 
   if(isDefined(var_4a247dec) ? var_4a247dec : 0) {
-    if(isDefined(attacker) && isplayer(attacker) && !attacker hasperk(#"specialty_quieter")) {
+    if(isDefined(attacker) && isPlayer(attacker) && !attacker hasperk(#"specialty_quieter")) {
       if(isDefined(var_2f741f8e) ? var_2f741f8e : 0) {
         eventobject.var_87b1ba00 = 1;
       } else {
@@ -768,11 +768,11 @@ function_bd715920(var_28b40381, attacker, eventorigin, eventobject, timedelay) {
     enemydistance = mpdialog_value("enemyContactDistance", 0);
 
     foreach(player in players) {
-      if(!isplayer(player) || player hasperk(#"specialty_quieter")) {
+      if(!isPlayer(player) || player hasperk(#"specialty_quieter")) {
         continue;
       }
 
-      if(isDefined(attacker) && isplayer(attacker) && player == attacker) {
+      if(isDefined(attacker) && isPlayer(attacker) && player == attacker) {
         continue;
       }
 
@@ -957,8 +957,8 @@ enemy_threat() {
             continue;
           }
 
-          if(isDefined(playerweapon) && (isplayer(traceresult[# "entity"]) || isDefined(traceresult[# "entity"].owner))) {
-            var_24d3b6ca = isplayer(traceresult[# "entity"]) ? traceresult[# "entity"] : traceresult[# "entity"].owner;
+          if(isDefined(playerweapon) && (isPlayer(traceresult[# "entity"]) || isDefined(traceresult[# "entity"].owner))) {
+            var_24d3b6ca = isPlayer(traceresult[# "entity"]) ? traceresult[# "entity"] : traceresult[# "entity"].owner;
             var_24d3b6ca function_bd715920(playerweapon, self, traceresult[# "entity"].origin, traceresult[# "entity"]);
             traceresult[# "entity"].var_9ee835dc = 1;
             self.enemythreattime = gettime();
@@ -1060,11 +1060,11 @@ function_db89c38f(speakingplayer, allyradiussq) {
 }
 
 function_e6457410(attacker, victim, weapon, inflictor) {
-  if(!isDefined(attacker) || !isplayer(attacker) || attacker hasperk(#"specialty_quieter")) {
+  if(!isDefined(attacker) || !isPlayer(attacker) || attacker hasperk(#"specialty_quieter")) {
     return 0;
   }
 
-  if(!isDefined(weapon) || !isplayer(victim)) {
+  if(!isDefined(weapon) || !isPlayer(victim)) {
     return 0;
   }
 
@@ -1216,7 +1216,7 @@ player_killed(attacker, killstreaktype, einflictor, weapon, mod) {
 
   waittillframeend();
 
-  if(isDefined(attacker) && isplayer(attacker) && !attacker hasperk(#"specialty_quieter")) {
+  if(isDefined(attacker) && isPlayer(attacker) && !attacker hasperk(#"specialty_quieter")) {
     if(weapon.name == # "dog_ai_defaultmelee" && isDefined(einflictor)) {
       attacker function_bd715920(weapon, self, einflictor.origin, einflictor);
     } else if(weapon.name == # "hero_flamethrower" || weapon.name == # "sig_blade") {
@@ -1303,7 +1303,7 @@ function_7c107ed4(attacker, weapon, victim, inflictor) {
 function_a43a3519(waittime, gadgetweapon) {
   wait waittime + 0.1;
 
-  if(!isDefined(self) || !isDefined(self.var_f6201e80) || !isplayer(self.var_f6201e80) || self.var_f6201e80 hasperk(#"specialty_quieter")) {
+  if(!isDefined(self) || !isDefined(self.var_f6201e80) || !isPlayer(self.var_f6201e80) || self.var_f6201e80 hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -1351,7 +1351,7 @@ function_a43a3519(waittime, gadgetweapon) {
 }
 
 function_f5c48bfa(attacker, owner, gadgetweapon, attackerweapon) {
-  if(!level.allowspecialistdialog || !isDefined(attacker) || !isplayer(attacker) || attacker hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(attacker) || !isPlayer(attacker) || attacker hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -1438,7 +1438,7 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor, meansofdeath) {
     return;
   }
 
-  if(!isDefined(attacker) || !isplayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || attacker hasperk(#"specialty_quieter") || !isDefined(victim) || !isplayer(victim)) {
+  if(!isDefined(attacker) || !isPlayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || attacker hasperk(#"specialty_quieter") || !isDefined(victim) || !isPlayer(victim)) {
     return;
   }
 
@@ -1446,7 +1446,7 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor, meansofdeath) {
     return;
   }
 
-  if(isDefined(inflictor) && inflictor.classname != "worldspawn" && !isplayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
+  if(isDefined(inflictor) && inflictor.classname != "worldspawn" && !isPlayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
     return;
   }
 
@@ -1516,7 +1516,7 @@ grenade_tracking() {
 
           if(isarray(enemies) && enemies.size > 0) {
             foreach(enemy in enemies) {
-              if(!isplayer(enemy) || enemy hasperk(#"specialty_quieter")) {
+              if(!isPlayer(enemy) || enemy hasperk(#"specialty_quieter")) {
                 continue;
               }
 
@@ -1605,7 +1605,7 @@ sticky_grenade_tracking() {
   while(true) {
     waitresult = self waittill(#"grenade_stuck");
     grenade = waitresult.projectile;
-    var_76d5e4ce = isalive(self) && isplayer(self) && !self hasperk(#"specialty_quieter");
+    var_76d5e4ce = isalive(self) && isPlayer(self) && !self hasperk(#"specialty_quieter");
 
     if(var_76d5e4ce && isDefined(grenade) && isDefined(grenade.weapon)) {
       if(grenade.weapon.rootweapon.name == "sticky_grenade" || grenade.weapon.rootweapon.name == "eq_sticky_grenade" || grenade.weapon.rootweapon.name == "eq_cluster_semtex_grenade") {
@@ -1678,7 +1678,7 @@ heavy_weapon_success_reaction() {
 }
 
 play_promotion_reaction() {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || self hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -1895,7 +1895,7 @@ get_death_vox(weapon, meansofdeath) {
 }
 
 function_9a20c887(var_27347352) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || self hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -1916,7 +1916,7 @@ function_9a20c887(var_27347352) {
 }
 
 play_killstreak_threat(killstreaktype) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || self hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -1928,7 +1928,7 @@ play_killstreak_threat(killstreaktype) {
 }
 
 function_dd6a6012(killstreaktype, weapon) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || self hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -1958,7 +1958,7 @@ function_f57e565f(dialogkey, entity, waittime) {
   self endon(#"death");
   level endon(#"game_ended");
 
-  if(!isDefined(self) || isDefined(self.playingdialog) && self.playingdialog || !isplayer(self) || !isDefined(entity) || self == entity && self isplayerunderwater() || !isplayer(entity)) {
+  if(!isDefined(self) || isDefined(self.playingdialog) && self.playingdialog || !isPlayer(self) || !isDefined(entity) || self == entity && self isplayerunderwater() || !isPlayer(entity)) {
     return;
   }
 
@@ -1967,7 +1967,7 @@ function_f57e565f(dialogkey, entity, waittime) {
   if(isDefined(waittime) && waittime > 0) {
     wait waittime;
 
-    if(!isDefined(self) || isDefined(self.playingdialog) && self.playingdialog || !isplayer(self) || !isDefined(entity) || self == entity && self isplayerunderwater() || !isplayer(entity)) {
+    if(!isDefined(self) || isDefined(self.playingdialog) && self.playingdialog || !isPlayer(self) || !isDefined(entity) || self == entity && self isplayerunderwater() || !isPlayer(entity)) {
       return;
     }
   }
@@ -1986,7 +1986,7 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
   self endon(#"death");
   level endon(#"game_ended");
 
-  if(!isDefined(dialogkey) || !isplayer(self) || !isalive(self) || level.gameended) {
+  if(!isDefined(dialogkey) || !isPlayer(self) || !isalive(self) || level.gameended) {
     return;
   }
 
@@ -2082,7 +2082,7 @@ function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy) {
     level endon(#"game_ended");
   }
 
-  if(!isDefined(dialogalias) || !isplayer(self) || !isalive(self) || level.gameended && !var_c84adc7e) {
+  if(!isDefined(dialogalias) || !isPlayer(self) || !isalive(self) || level.gameended && !var_c84adc7e) {
     return;
   }
 
@@ -2160,7 +2160,7 @@ stop_dialog() {
 wait_playback_time(soundalias) {}
 
 get_player_dialog_alias(dialogkey, meansofdeath) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return undefined;
   }
 
@@ -2215,7 +2215,7 @@ get_random_key(dialogkey) {
 }
 
 play_gadget_ready(weapon, userflip = 0) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || self hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -2406,7 +2406,7 @@ function_1d4b0ec0(dogstate, dog) {
     return;
   }
 
-  if(!isDefined(self.script_owner) || !isplayer(self.script_owner) || self.script_owner hasperk(#"specialty_quieter")) {
+  if(!isDefined(self.script_owner) || !isPlayer(self.script_owner) || self.script_owner hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -2439,7 +2439,7 @@ function_1d4b0ec0(dogstate, dog) {
 }
 
 function_e3ebbf87(var_aa988d26, var_c1132df6) {
-  if(!isDefined(var_aa988d26) || !isDefined(self) || !isplayer(self)) {
+  if(!isDefined(var_aa988d26) || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -2454,7 +2454,7 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
   waittime = mpdialog_value("calloutTriggerDelay", 0);
   wait waittime;
 
-  if(!isDefined(self) || !isplayer(self) || self isplayerunderwater()) {
+  if(!isDefined(self) || !isPlayer(self) || self isplayerunderwater()) {
     return;
   }
 
@@ -2884,7 +2884,7 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
 }
 
 function_fff18afc(dialogkey, var_4d5833c) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self)) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -2906,7 +2906,7 @@ function_fff18afc(dialogkey, var_4d5833c) {
 }
 
 function_cad61ec(weapon) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self)) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -2957,7 +2957,7 @@ function_cad61ec(weapon) {
 }
 
 function_916b4c72(weapon) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || self hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -3026,7 +3026,7 @@ function_94b5718c(entity) {
 }
 
 play_gadget_activate(weapon) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self)) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -3201,7 +3201,7 @@ play_gadget_activate(weapon) {
 }
 
 function_bf68a5ab(var_4d5833c) {
-  if(!isDefined(self) || !isplayer(self) || !level.allowspecialistdialog) {
+  if(!isDefined(self) || !isPlayer(self) || !level.allowspecialistdialog) {
     return;
   }
 
@@ -3210,7 +3210,7 @@ function_bf68a5ab(var_4d5833c) {
 }
 
 function_253c2ba4(var_cf210c5b, dialogbuffer) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || !isDefined(var_cf210c5b)) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || !isDefined(var_cf210c5b)) {
     return;
   }
 
@@ -3242,7 +3242,7 @@ function_253c2ba4(var_cf210c5b, dialogbuffer) {
 }
 
 play_gadget_success(weapon, waitkey, victim, var_5d738b56) {
-  if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter")) {
+  if(!level.allowspecialistdialog || !isDefined(self) || !isPlayer(self) || self hasperk(#"specialty_quieter")) {
     return;
   }
 
@@ -3295,7 +3295,7 @@ play_gadget_success(weapon, waitkey, victim, var_5d738b56) {
 }
 
 function_4fb91bc7(weapon, var_df17fa82, var_53c10ed8) {
-  if(!isDefined(weapon) || !isDefined(var_df17fa82) || !isplayer(var_df17fa82) || !isDefined(self) || !isplayer(self)) {
+  if(!isDefined(weapon) || !isDefined(var_df17fa82) || !isPlayer(var_df17fa82) || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -3483,7 +3483,7 @@ get_friendly_players() {
 }
 
 can_play_dialog(teamonly) {
-  if(!isplayer(self) || !isalive(self) || self.playingdialog === 1 || self isplayerunderwater() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
+  if(!isPlayer(self) || !isalive(self) || self.playingdialog === 1 || self isplayerunderwater() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
     return false;
   }
 
@@ -3623,10 +3623,10 @@ function_e44c3a3c(weapon, attacker, eventorigin, eventobject, timedelay) {
 }
 
 devgui_think() {
-  setdvar(#"devgui_mpdialog", "<dev string:x74>");
-  setdvar(#"testalias_player", "<dev string:x77>");
-  setdvar(#"testalias_taacom", "<dev string:x94>");
-  setdvar(#"testalias_commander", "<dev string:xb0>");
+  setDvar(#"devgui_mpdialog", "<dev string:x74>");
+  setDvar(#"testalias_player", "<dev string:x77>");
+  setDvar(#"testalias_taacom", "<dev string:x94>");
+  setDvar(#"testalias_commander", "<dev string:xb0>");
 
   while(true) {
     wait 1;
@@ -3679,7 +3679,7 @@ devgui_think() {
         break;
     }
 
-    setdvar(#"devgui_mpdialog", "<dev string:x74>");
+    setDvar(#"devgui_mpdialog", "<dev string:x74>");
   }
 }
 

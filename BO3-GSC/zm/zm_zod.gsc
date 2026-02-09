@@ -113,7 +113,7 @@ function autoexec opt_in() {
 function main() {
   zm_zod_ffotd::main_start();
   setclearanceceiling(34);
-  setdvar("zm_wasp_open_spawning", 1);
+  setDvar("zm_wasp_open_spawning", 1);
   level.uses_tesla_powerup = 1;
   level.zod_character_names = [];
   array::add(level.zod_character_names, "boxer");
@@ -183,11 +183,11 @@ function main() {
   zm_zod_craftables::include_craftables();
   zm_zod_craftables::init_craftables();
   load::main();
-  setdvar("doublejump_enabled", 1);
-  setdvar("playerEnergy_enabled", 1);
-  setdvar("wallrun_enabled", 1);
+  setDvar("doublejump_enabled", 1);
+  setDvar("playerEnergy_enabled", 1);
+  setDvar("wallrun_enabled", 1);
   level thread function_4df9f4ad();
-  setdvar("ai_threatUpdateInterval", 50);
+  setDvar("ai_threatUpdateInterval", 50);
   _zm_weap_tesla::init();
   level.customrandomweaponweights = &zod_custom_weapon_weights;
   level.special_weapon_magicbox_check = &zod_special_weapon_magicbox_check;
@@ -1280,7 +1280,7 @@ function function_e33614b9() {
   self endon("disconnect");
   util::wait_network_frame();
   while(true) {
-    if(isDefined(self) && isplayer(self)) {
+    if(isDefined(self) && isPlayer(self)) {
       self notify("lightning_strike");
       self clientfield::increment_to_player("devgui_lightning_test", 1);
     }
@@ -1321,10 +1321,10 @@ function zod_ghost_test(n_index) {
 }
 
 function setup_devgui() {
-  setdvar("", "");
-  setdvar("", "");
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", "");
+  setDvar("", "");
+  setDvar("", 0);
+  setDvar("", 0);
   execdevgui("");
   level.custom_devgui = &function_4173fe95;
 }
@@ -1402,17 +1402,17 @@ function zombie_devgui_raps_round_skip(num_raps) {
 
 function function_4d732a77(num_wasp) {
   if(isDefined(num_wasp) && num_wasp > 0) {
-    setdvar("", num_wasp);
+    setDvar("", num_wasp);
   } else {
-    setdvar("", "");
+    setDvar("", "");
   }
 }
 
 function function_205a2511(num_raps) {
   if(isDefined(num_raps) && num_raps > 0) {
-    setdvar("", num_raps);
+    setDvar("", num_raps);
   } else {
-    setdvar("", "");
+    setDvar("", "");
   }
 }
 
@@ -1773,9 +1773,9 @@ function function_aab1d0bd() {
   while(true) {
     level waittill("start_of_round");
     if(level.round_number < 12) {
-      setdvar("r_maxSpotShadowUpdates", "12");
+      setDvar("r_maxSpotShadowUpdates", "12");
     } else {
-      setdvar("r_maxSpotShadowUpdates", "8");
+      setDvar("r_maxSpotShadowUpdates", "8");
     }
   }
 }
@@ -1893,8 +1893,8 @@ function function_4df9f4ad() {
   level endon("hash_a3369c1f");
   while(true) {
     level waittill("host_migration_end");
-    setdvar("doublejump_enabled", 1);
-    setdvar("playerEnergy_enabled", 1);
-    setdvar("wallrun_enabled", 1);
+    setDvar("doublejump_enabled", 1);
+    setDvar("playerEnergy_enabled", 1);
+    setDvar("wallrun_enabled", 1);
   }
 }

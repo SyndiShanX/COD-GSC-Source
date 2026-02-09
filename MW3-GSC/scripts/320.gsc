@@ -10,13 +10,11 @@ main() {
 
   if(var_1.size) {
     var_0 = 1;
-
   }
   var_1 = getEntArray("explodable_barrel", "script_noteworthy");
 
   if(var_1.size > 0) {
     var_0 = 1;
-
   }
   if(var_0) {
     level.breakables_fx["barrel"]["explode"] = loadfx("props/barrelExp");
@@ -35,32 +33,27 @@ main() {
 
   if(var_3.size) {
     level.breakables_fx["tincan"] = loadfx("props/tincan_bounce");
-
   }
   var_4 = 0;
   var_5 = getEntArray("breakable", "targetname");
 
   if(var_5.size) {
     var_4 = 1;
-
   }
   var_5 = getEntArray("breakable_vase", "targetname");
 
   if(var_5.size) {
     var_4 = 1;
-
   }
   var_5 = getEntArray("breakable box", "targetname");
 
   if(var_1.size) {
     var_4 = 1;
-
   }
   var_5 = getEntArray("breakable box", "script_noteworthy");
 
   if(var_1.size) {
     var_4 = 1;
-
   }
   if(var_4) {
     level.breakables_fx["vase"] = loadfx("props/vase_water");
@@ -120,11 +113,9 @@ main() {
 
   for(var_10 = 0; var_10 < level._id_1DE5.size; var_10++) {
     level._id_1DE5[var_10] notsolid();
-
   }
   for(var_10 = 0; var_10 < level._id_1DE6.size; var_10++) {
     level._id_1DE6[var_10] notsolid();
-
   }
   maps\_utility::_id_1DE7();
 
@@ -137,7 +128,6 @@ main() {
 
   for(var_10 = 0; var_10 < var_11.size; var_10++) {
     level.breakables_clip[level.breakables_clip.size] = var_11[var_10];
-
   }
   level._breakable_utility_modelarray = [];
   level._breakable_utility_modelindex = 0;
@@ -227,7 +217,6 @@ _id_1DF4() {
 
       if(isDefined(self._id_1DF2)) {
         self._id_1DF2 setlightintensity(self._id_1DF3);
-
       }
       continue;
     }
@@ -248,7 +237,7 @@ _id_1DF5() {
       if(!isalive(var_1)) {
         continue;
       }
-      if(!isplayer(var_1)) {
+      if(!isPlayer(var_1)) {
         continue;
       }
     }
@@ -258,19 +247,16 @@ _id_1DF5() {
 
   if(isDefined(level._id_1DF6)) {
     [[level._id_1DF6]]();
-
   }
   self notify("off");
 
   if(isDefined(self._id_1DF1)) {
     self._id_1DF1 notify("death");
-
   }
   self setModel(self._id_1DED);
 
   if(isDefined(self._id_1DF2)) {
     self._id_1DF2 setlightintensity(0);
-
   }
   playFXOnTag(level.breakables_fx["tv_explode"], self, "tag_fx");
   self playSound("tv_shot_burst");
@@ -288,7 +274,6 @@ _id_1DF7() {
 
   if(isDefined(self.target)) {
     var_2 = getent(self.target, "targetname");
-
   }
   if(isDefined(self.script_linkto)) {
     var_4 = common_scripts\utility::get_links();
@@ -320,7 +305,6 @@ _id_1DF7() {
     var_3 = 99;
   } else {
     var_3 = 250;
-
   }
   self setCanDamage(1);
 
@@ -329,7 +313,6 @@ _id_1DF7() {
 
     if(!isDefined(var_0)) {
       var_0 = (0, 0, 1);
-
     }
     if(!isDefined(var_9)) {
       var_6 = 100000;
@@ -337,7 +320,6 @@ _id_1DF7() {
       var_6 = var_6 * 1.75;
     } else if(var_9 == "MOD_IMPACT") {
       var_6 = 100000;
-
     }
     var_3 = var_3 - var_6;
   }
@@ -357,7 +339,6 @@ _id_1DF7() {
 
       if(!isDefined(var_0)) {
         var_0 = (0, 0, 1);
-
       }
       if(!isDefined(var_9)) {
         var_6 = 100000;
@@ -413,7 +394,6 @@ oil_spill_think() {
 
   if(isDefined(self.barrel)) {
     self.barrel waittill("exploding");
-
   }
   self.extra delete();
   self hide();
@@ -480,7 +460,6 @@ oil_spill_burn(var_0, var_1) {
 
     for(var_13 = 0; var_13 < var_12.size; var_13++) {
       var_8 = common_scripts\utility::array_remove(var_8, var_12[var_13]);
-
     }
     wait 0.1;
   }
@@ -530,7 +509,6 @@ explodable_barrel_think() {
 
     if(level.barrelexplodingthisframe) {
       wait(randomfloat(1));
-
     }
     self.damagetaken = self.damagetaken + var_0;
 
@@ -562,7 +540,6 @@ explodable_barrel_burn() {
 
     if(var_0 > 19) {
       var_0 = 0;
-
     }
     playFX(level.breakables_fx["barrel"]["burn"], self.origin + var_6);
 
@@ -606,7 +583,6 @@ explodable_barrel_explode() {
   if(isDefined(self.remove)) {
     if(common_scripts\utility::issp() && self.remove.spawnflags & 1) {
       self.remove connectpaths();
-
     }
     self.remove delete();
   }
@@ -617,16 +593,14 @@ explodable_barrel_explode() {
 
   if(isDefined(self.radius)) {
     var_8 = self.radius;
-
   }
   var_9 = undefined;
 
   if(isDefined(self.damageowner)) {
     var_9 = self.damageowner;
 
-    if(isplayer(var_9)) {
+    if(isPlayer(var_9)) {
       maps\_utility::_id_1E05(self.origin, "rifle", 150);
-
     }
     self.damageowner = undefined;
   }
@@ -640,7 +614,6 @@ explodable_barrel_explode() {
     self setModel("com_barrel_piece");
   } else {
     self setModel("com_barrel_piece2");
-
   }
   if(var_2 < 0.5) {
     var_4 = self.origin + var_0 * 22;
@@ -658,7 +631,6 @@ _id_1E06() {
 
   if(self.model == "prop_helmet_german_normandy") {
     var_0 = 1;
-
   }
   self setCanDamage(1);
 
@@ -669,7 +641,6 @@ _id_1E06() {
       self vibrate(var_3, 20, 0.6, 0.75);
     } else {
       self vibrate(var_3, 0.4, 0.4, 0.4);
-
     }
     self waittill("rotatedone");
   }
@@ -682,11 +653,10 @@ _id_1E07() {
   self setCanDamage(1);
   self waittill("damage", var_0, var_1);
 
-  if(isai(var_1) || isplayer(var_1)) {
+  if(isai(var_1) || isPlayer(var_1)) {
     var_2 = var_1 getEye() - (0, 0, randomint(50) + 50);
   } else {
     var_2 = var_1.origin;
-
   }
   var_3 = vectornormalize(self.origin - var_2);
   var_3 = var_3 * 0.5 + randomfloat(1);
@@ -711,11 +681,10 @@ _id_1E09() {
     var_2 = var_1 getEye();
   } else {
     var_2 = var_1.origin;
-
   }
   var_3 = vectornormalize(self.origin - var_2);
 
-  if(!isDefined(self._id_1E0A) && isplayer(var_1)) {
+  if(!isDefined(self._id_1E0A) && isPlayer(var_1)) {
     thread animscripts\death::_id_0ED0(var_3);
     return;
   }
@@ -733,7 +702,6 @@ _id_1E09() {
 _id_1E0B(var_0) {
   if(!isDefined(level._id_1E0C)) {
     return 1;
-
   }
   if(level._id_1E0C.size == 0) {
     return 0;
@@ -920,7 +888,6 @@ _id_1E10(var_0) {
 
     if(isDefined(var_1) && var_1.code_classname == "script_vehicle") {
       var_1 joltbody(self.origin + (0, 0, -90), 0.2);
-
     }
     if(var_0 == "wood box") {
       if(!_id_1E0B(var_1)) {
@@ -954,7 +921,6 @@ _id_1E10(var_0) {
         var_3 = level._id_1E12;
       } else {
         var_3 = "bullet_large_vase";
-
       }
       var_4 = level.breakables_fx["box"][randomint(level.breakables_fx["box"].size)];
       var_5 = 1;
@@ -973,7 +939,6 @@ _id_1E10(var_0) {
 
   if(isDefined(var_4)) {
     playFX(var_4, self.origin);
-
   }
   if(var_5) {
     var_6 = getEntArray("breakable", "targetname");
@@ -1002,7 +967,6 @@ _id_1E10(var_0) {
     self delete();
   } else {
     self._id_1E0A = 0;
-
   }
   self notify("ok_remove");
 }
@@ -1010,7 +974,6 @@ _id_1E10(var_0) {
 _id_1E13() {
   if(isDefined(level._id_1DE5) && level._id_1DE5.size > 0) {
     self._id_1E14 = _id_1E23(self.origin, level._id_1DE5);
-
   }
   if(isDefined(self._id_1E14)) {
     level._id_1DE5 = common_scripts\utility::array_remove(level._id_1DE5, self._id_1E14);
@@ -1038,7 +1001,6 @@ _id_1E16(var_0) {
 
   if(self._id_1E0A) {
     self waittill("ok_remove");
-
   }
   self delete();
 }
@@ -1049,7 +1011,6 @@ _id_1E17(var_0) {
 
   if(!isDefined(var_0)) {
     var_0 = 1;
-
   }
   if(isDefined(self.script_noteworthy) && var_0) {
     var_1 = "enable_xenon_autoaim_" + self.script_noteworthy;
@@ -1060,7 +1021,6 @@ _id_1E17(var_0) {
 
   if(isDefined(self._id_1E19) && self._id_1E19 == 1) {
     self waittill("recreate");
-
   }
   self enableaimassist();
 }
@@ -1077,7 +1037,6 @@ breakable_clip() {
 
   if(isDefined(level.breakables_clip) && level.breakables_clip.size > 0) {
     self.remove = getclosestent(self.origin, level.breakables_clip);
-
   }
   if(isDefined(self.remove)) {
     level.breakables_clip = common_scripts\utility::array_remove(level.breakables_clip, self.remove);
@@ -1246,7 +1205,6 @@ _id_1E1B(var_0, var_1) {
 _id_1E1C(var_0) {
   if(isDefined(level._breakable_utility_modelarray[level._breakable_utility_modelindex])) {
     level._breakable_utility_modelarray[level._breakable_utility_modelindex] delete();
-
   }
   level._breakable_utility_modelarray[level._breakable_utility_modelindex] = var_0;
   level._breakable_utility_modelindex++;
@@ -1275,15 +1233,12 @@ _id_1E1D(var_0) {
 
     if(randomint(100) > 50) {
       var_4 = -1;
-
     }
     if(randomint(100) > 50) {
       var_5 = -1;
-
     }
     if(randomint(100) > 50) {
       var_6 = -1;
-
     }
     var_1 rotatevelocity((250 * var_4, 250 * var_5, randomfloat(100) * var_6), 2, 0, 0.5);
   } else if(isDefined(self.type) && self.type == "plate") {
@@ -1311,7 +1266,6 @@ _id_1E1D(var_0) {
 
   if(isDefined(self)) {
     self unlink();
-
   }
   var_1 delete();
 }
@@ -1324,7 +1278,6 @@ _id_1E1E(var_0) {
 
   while(self.origin[2] > var_2[2]) {
     wait 0.05;
-
   }
   self unlink();
   self.origin = (self.origin[0], self.origin[1], var_2[2]);

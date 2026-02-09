@@ -528,7 +528,6 @@ mineProximityTrigger(Owner) {
     if(player damageConeTrace(self.origin, self) > 0) {
       break;
     }
-
   }
 
   self RemoveGroupedTriDrone();
@@ -549,7 +548,7 @@ mineProximityTrigger(Owner) {
   self RotateVelocity((0, 750, 32), 0.7, 0, .65);
   self thread playSpinnerFX();
 
-  if(IsPlayer(player) && player _hasPerk("specialty_class_engineer")) {
+  if(isPlayer(player) && player _hasPerk("specialty_class_engineer")) {
     player notify("triggered_mine");
     wait CONST_Mine_TriggerDelay_Perk;
   } else {

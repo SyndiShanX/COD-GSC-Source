@@ -38,14 +38,14 @@ take_perk(b_pause, str_perk, str_result, n_slot) {
 }
 
 on_revived(s_params) {
-  if(isplayer(s_params.e_reviver) && s_params.e_reviver hasperk(#"specialty_mod_quickrevive")) {
+  if(isPlayer(s_params.e_reviver) && s_params.e_reviver hasperk(#"specialty_mod_quickrevive")) {
     s_params.e_reviver zm_utility::set_max_health();
     s_params.e_reviver thread function_118be9d8();
   } else {
     return;
   }
 
-  if(isplayer(s_params.e_revivee)) {
+  if(isPlayer(s_params.e_revivee)) {
     s_params.e_revivee thread function_118be9d8();
   }
 }

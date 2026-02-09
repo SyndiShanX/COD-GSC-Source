@@ -94,7 +94,7 @@ func_FE41() {
     return;
   }
 
-  if(getdvar("r_texturebits") == "16") {
+  if(getDvar("r_texturebits") == "16") {
     return;
   }
 
@@ -145,7 +145,7 @@ func_D023() {
     var_0 = getdvarint("player_died_recently", 0);
     if(var_0 > 0) {
       var_0 = var_0 - 5;
-      setdvar("player_died_recently", var_0);
+      setDvar("player_died_recently", var_0);
     }
 
     wait(5);
@@ -153,7 +153,7 @@ func_D023() {
 }
 
 func_CFF8() {
-  setdvar("player_died_recently", "0");
+  setDvar("player_died_recently", "0");
   thread func_D023();
   level scripts\sp\utility::func_178D(scripts\engine\utility::flag_wait, "missionfailed");
   level.player scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
@@ -163,7 +163,7 @@ func_CFF8() {
   var_0[1] = 30;
   var_0[2] = 0;
   var_0[3] = 0;
-  setdvar("player_died_recently", var_0[level.var_7683]);
+  setDvar("player_died_recently", var_0[level.var_7683]);
 }
 
 func_16BC(var_0) {

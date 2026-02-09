@@ -56,8 +56,9 @@ main() {
   level.overrideactorkilled = ::global_actor_killed_callback;
   a_m_clips = getEntArray("compile_paths_clips", "targetname");
 
-  foreach(m_clip in a_m_clips)
-  m_clip delete();
+  foreach(m_clip in a_m_clips) {
+    m_clip delete();
+  }
 
   fxanim_deconstruct();
   model_convert_areas();
@@ -77,8 +78,9 @@ on_save_restored() {
     luinotifyevent(&"hud_shrink_ammo", 0);
   }
 
-  if(flag("fxanim_catwalk_collapse_delete"))
+  if(flag("fxanim_catwalk_collapse_delete")) {
     clientnotify("unhide_debris");
+  }
 }
 
 level_precache() {
@@ -158,14 +160,15 @@ setup_skiptos() {
 }
 
 load_gumps() {
-  if(maps\_skipto::is_after_skipto("e5-2_sliding_door"))
+  if(maps\_skipto::is_after_skipto("e5-2_sliding_door")) {
     load_gump("haiti_gump_hangar");
-  else if(maps\_skipto::is_after_skipto("e3_foyer"))
+  } else if(maps\_skipto::is_after_skipto("e3_foyer")) {
     load_gump("haiti_gump_interior");
-  else if(maps\_skipto::is_after_skipto("e1_intro"))
+  } else if(maps\_skipto::is_after_skipto("e1_intro")) {
     load_gump("haiti_gump_front_door");
-  else
+  } else {
     load_gump("haiti_gump_intro");
+  }
 }
 
 skipto_cleanup() {
@@ -239,8 +242,9 @@ skipto_cleanup() {
   if(skipto == "e5-2_sliding_door") {
     return;
   }
-  if(skipto == "e6_endings")
+  if(skipto == "e6_endings") {
     return;
+  }
 }
 
 setup_objectives() {
@@ -286,8 +290,9 @@ nodeath_challenge(str_notify) {
   level.player waittill("mission_finished");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0)
+  if(n_deaths == 0) {
     self notify(str_notify);
+  }
 }
 
 malee_camo_challenge(str_notify) {
@@ -315,8 +320,9 @@ global_actor_killed_callback(e_inflictor, e_attacker, n_damage, str_means_of_dea
   if(self.team == "axis") {
     if(isDefined(e_inflictor) && e_inflictor == level.player) {
       if(issniperrifle(str_weapon)) {
-        if(distancesquared(level.player.origin, self.origin) > 2479990.0)
+        if(distancesquared(level.player.origin, self.origin) > 2479990.0) {
           level notify("sniper_challenge_shot");
+        }
       }
     }
   }
@@ -348,8 +354,9 @@ challenge_godrod_think() {
   self waittill("death", attacker, type, weapon);
 
   if(isDefined(weapon)) {
-    if(weapon == "god_rod_sp")
+    if(weapon == "god_rod_sp") {
       level.n_killcount++;
+    }
   }
 }
 
@@ -362,8 +369,9 @@ kill_emp_challenge_spawnfunc(str_notify) {
 
   if(isDefined(self)) {
     if(self.vteam == "axis" && isDefined(self.emped)) {
-      if(isDefined(attacker) && attacker == level.player)
+      if(isDefined(attacker) && attacker == level.player) {
         level.player notify(str_notify);
+      }
     }
   }
 }
@@ -385,8 +393,9 @@ antiair_challenge(str_notify) {
 delete_ent(str_targetname) {
   a_m_to_delete = getEntArray(str_targetname, "targetname");
 
-  foreach(m_to_delete in a_m_to_delete)
-  m_to_delete delete();
+  foreach(m_to_delete in a_m_to_delete) {
+    m_to_delete delete();
+  }
 }
 
 fxanim_deconstruct() {

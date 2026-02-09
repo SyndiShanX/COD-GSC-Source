@@ -104,7 +104,6 @@ runZombieRound() {
 
     level.zombiesDead++;
   }
-
 }
 
 createEnemy() {
@@ -232,7 +231,7 @@ highlightLastEnemies() {
           player.outlineColor = level.enemyOutlineColor;
         }
       }
-      setdvar("bg_compassShowEnemies", 1);
+      setDvar("bg_compassShowEnemies", 1);
 
       break;
     }
@@ -279,7 +278,7 @@ hordeEnemyKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, s
     SetOmnvar("ui_horde_enemies_left", level.enemiesLeft);
   }
 
-  if(IsPlayer(eAttacker) && !level.zombiesStarted) {
+  if(isPlayer(eAttacker) && !level.zombiesStarted) {
     awardHordeKill(eAttacker);
     eAttacker thread maps\mp\gametypes\_rank::xpPointsPopup("kill", self.awardPoints);
     level thread hordeUpdateScore(eAttacker, self.awardPoints);
@@ -287,7 +286,7 @@ hordeEnemyKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, s
     if(eAttacker _hasPerk("specialty_triggerhappy")) {}
   }
 
-  if(isDefined(eAttacker) && isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner) && isDefined(eAttacker.owner.killz)) {
+  if(isDefined(eAttacker) && isDefined(eAttacker.owner) && isPlayer(eAttacker.owner) && isDefined(eAttacker.owner.killz)) {
     awardHordeKill(eAttacker.owner);
     eAttacker.owner thread maps\mp\gametypes\_rank::xpPointsPopup("kill", self.awardPoints);
     level thread hordeUpdateScore(eAttacker.owner, self.awardPoints);
@@ -529,7 +528,6 @@ agentDogBark() {
     }
     wait 0.05;
   }
-
 }
 
 WaitForBadPathHorde() {

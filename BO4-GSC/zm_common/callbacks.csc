@@ -72,7 +72,7 @@ entityspawned(localclientnum) {
   self endon(#"death");
   util::function_89a98f85();
 
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(isDefined(level._clientfaceanimonplayerspawned)) {
       self thread[[level._clientfaceanimonplayerspawned]](localclientnum);
     }

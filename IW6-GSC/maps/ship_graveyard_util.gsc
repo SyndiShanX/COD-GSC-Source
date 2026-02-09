@@ -104,7 +104,7 @@ boat_shoot_entity(var_0, var_1) {
     var_2 = (self.origin[0], self.origin[1], level.water_level_z);
     var_3 = 64 * anglesToForward(var_0.angles);
 
-    if(isplayer(var_0))
+    if(isPlayer(var_0))
       var_4 = var_0 getEye() + var_3;
     else
       var_4 = var_0.origin + var_3;
@@ -1258,7 +1258,7 @@ baker_killfirms() {
 force_deathquote(var_0) {
   if(isDefined(var_0)) {
     level notify("new_quote_string");
-    setdvar("ui_deadquote", var_0);
+    setDvar("ui_deadquote", var_0);
   }
 }
 
@@ -1625,7 +1625,7 @@ shark_kill_front(var_0, var_1, var_2) {
   level.player playrumbleonentity("damage_heavy");
   wait(var_2[2]);
   var_13 = getdvarint("shpg_killed_by_shark", 0);
-  setdvar("shpg_killed_by_shark", var_13 + 1);
+  setDvar("shpg_killed_by_shark", var_13 + 1);
   level.player kill();
 }
 

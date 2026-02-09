@@ -18,7 +18,7 @@ _id_199A() {
   var_4 = 0;
 
   for(;;) {
-    if(getdvar("chain") == "1") {
+    if(getDvar("chain") == "1") {
       for(var_3 = 0; var_3 < var_2.size; var_3++) {
         if(distance(level.player getorigin(), var_2[var_3].origin) < 1500) {}
       }
@@ -93,7 +93,6 @@ _id_199E() {
         var_3 = (1, 0, 0);
       } else {
         var_3 = (0, 0, 1);
-
       }
       var_4 = var_1.origin + (0, 0, 54);
 
@@ -205,11 +204,9 @@ _id_19A6(var_0, var_1, var_2, var_3) {
 _id_19A7(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = 100;
-
   }
   if(!isDefined(var_1)) {
     var_1 = (0, 1, 0);
-
   }
   for(;;) {
     if(!isDefined(self)) {
@@ -283,7 +280,6 @@ _id_19AD() {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(var_0[var_2].type == "Cover Left") {
       var_1[var_1.size] = var_0[var_2];
-
     }
     if(var_0[var_2].type == "Cover Right") {
       var_1[var_1.size] = var_0[var_2];
@@ -294,7 +290,6 @@ _id_19AD() {
 
   for(var_2 = 0; var_2 < var_3.size; var_2++) {
     var_3[var_2] delete();
-
   }
   level._id_19AE = getspawnerarray();
   level._id_19AF = [];
@@ -302,7 +297,6 @@ _id_19AD() {
 
   for(var_2 = 0; var_2 < level._id_19AE.size; var_2++) {
     level._id_19AE[var_2].targetname = "blah";
-
   }
   var_4 = 0;
 
@@ -323,7 +317,6 @@ _id_19AD() {
 
     if(var_4 >= var_1.size) {
       var_4 = 0;
-
     }
     var_1[var_4] thread _id_19B1();
     var_4++;
@@ -441,8 +434,7 @@ _id_19B7() {
   self endon("death");
 
   for(;;) {
-    if(self.a._id_19B8 <= 0) {
-    } else {}
+    if(self.a._id_19B8 <= 0) {} else {}
 
     wait 0.05;
   }
@@ -498,11 +490,9 @@ _id_19C7() {
 
     if(!isDefined(var_0)) {
       var_2 = level._id_19C8;
-
     }
     if(!isDefined(var_1)) {
       var_3 = level.player getEye();
-
     }
     var_4 = bulletTrace(var_2, var_3, 0, undefined);
   }
@@ -549,7 +539,7 @@ _id_19C9() {
   var_5 = "off";
 
   for(;;) {
-    var_6 = getdvar("debug_character_count");
+    var_6 = getDvar("debug_character_count");
 
     if(var_6 == "off") {
       if(var_6 != var_5) {
@@ -674,18 +664,17 @@ _id_19CD() {
 }
 
 _id_19CF() {
-  setdvar("cl_freemove", "0");
+  setDvar("cl_freemove", "0");
 }
 
 _id_19D0(var_0) {
-  setdvar("cl_freemove", "2");
+  setDvar("cl_freemove", "2");
 }
 
 _id_19D1() {
   for(;;) {
-    if(getdvar("angles", "0") == "1") {
-      setdvar("angles", "0");
-
+    if(getDvar("angles", "0") == "1") {
+      setDvar("angles", "0");
     }
     wait 1;
   }
@@ -694,9 +683,8 @@ _id_19D1() {
 _id_19D2() {
   if(!isDefined(level._id_19D3)) {
     level._id_19D3 = 5;
-
   }
-  setdvar("dolly", "");
+  setDvar("dolly", "");
   thread _id_19D4();
   thread _id_19D5();
   thread _id_19D6();
@@ -704,9 +692,9 @@ _id_19D2() {
 
 _id_19D4() {
   for(;;) {
-    if(getdvar("dolly") == "start") {
+    if(getDvar("dolly") == "start") {
       level._id_19D4 = level.player.origin;
-      setdvar("dolly", "");
+      setDvar("dolly", "");
     }
 
     wait 1;
@@ -715,9 +703,9 @@ _id_19D4() {
 
 _id_19D5() {
   for(;;) {
-    if(getdvar("dolly") == "end") {
+    if(getDvar("dolly") == "end") {
       level._id_19D5 = level.player.origin;
-      setdvar("dolly", "");
+      setDvar("dolly", "");
     }
 
     wait 1;
@@ -728,8 +716,8 @@ _id_19D6() {
   for(;;) {
     wait 1;
 
-    if(getdvar("dolly") == "go") {
-      setdvar("dolly", "");
+    if(getDvar("dolly") == "go") {
+      setDvar("dolly", "");
 
       if(!isDefined(level._id_19D4)) {
         continue;
@@ -782,17 +770,17 @@ _id_19DC() {
   var_0 = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
   if(!isDefined(level._id_19DD)) {
-    setdvar("scr_minimap_corner_targetname", "minimap_corner");
+    setDvar("scr_minimap_corner_targetname", "minimap_corner");
     level._id_19DD = "minimap_corner";
   }
 
   if(!isDefined(level._id_19DE)) {
-    setdvar("scr_minimap_height", "0");
+    setDvar("scr_minimap_height", "0");
     level._id_19DE = 0;
   }
 
   var_1 = getdvarfloat("scr_minimap_height");
-  var_2 = getdvar("scr_minimap_corner_targetname");
+  var_2 = getDvar("scr_minimap_corner_targetname");
 
   if(var_1 != level._id_19DE || var_2 != level._id_19DD) {
     if(isDefined(level._id_19DF)) {
@@ -817,13 +805,11 @@ _id_19DC() {
           var_6 = (var_4[1].origin[0], var_6[1], var_6[2]);
         } else {
           var_7 = (var_4[1].origin[0], var_7[1], var_7[2]);
-
         }
         if(var_4[1].origin[1] > var_4[0].origin[1]) {
           var_6 = (var_6[0], var_4[1].origin[1], var_6[2]);
         } else {
           var_7 = (var_7[0], var_4[1].origin[1], var_7[2]);
-
         }
         var_8 = var_6 - var_5;
         var_5 = (var_5[0], var_5[1], var_5[2] + var_1);
@@ -834,13 +820,11 @@ _id_19DC() {
 
         if(var_12 < 0) {
           var_12 = 0 - var_12;
-
         }
         var_13 = vectordot(var_11, var_8);
 
         if(var_13 < 0) {
           var_13 = 0 - var_13;
-
         }
         if(var_0 > 0) {
           var_14 = var_13 / var_12;
@@ -874,17 +858,14 @@ _id_19DC() {
           var_20 = var_18;
         } else {
           var_20 = var_19;
-
         }
         var_21 = var_1 - 1000;
 
         if(var_21 < 16) {
           var_21 = 16;
-
         }
         if(var_21 > 10000) {
           var_21 = 10000;
-
         }
         var_3 playerlinktoabsolute(var_9);
         var_9.origin = var_5 + (0, 0, -62);
@@ -906,7 +887,6 @@ _id_19E1() {
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = var_0[var_2] _id_19E2();
-
   }
   return var_1;
 }
@@ -934,7 +914,6 @@ _id_19E2() {
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_2[var_3] = var_0[var_3].origin;
-
   }
   return var_2;
 }
@@ -1005,7 +984,6 @@ _id_19E6() {
 
     if(isDefined(var_3._id_134B)) {
       var_4 = level._id_19E7[var_3._id_134B];
-
     }
     if(var_3.team == "axis") {
       continue;
@@ -1066,13 +1044,11 @@ _id_19EB() {
 }
 
 _id_19EC() {
-  if(getdvar("depth_close") == "") {
-    setdvar("depth_close", "0");
-
+  if(getDvar("depth_close") == "") {
+    setDvar("depth_close", "0");
   }
-  if(getdvar("depth_far") == "") {
-    setdvar("depth_far", "1500");
-
+  if(getDvar("depth_far") == "") {
+    setDvar("depth_far", "1500");
   }
   var_0 = getdvarint("depth_close");
   var_1 = getdvarint("depth_far");
@@ -1107,16 +1083,14 @@ _id_19F0(var_0, var_1) {
 
   if(var_0.ignoreme || var_3 < -900000) {
     var_3 = "Ignore";
-
   }
   if(self.ignoreme || var_2 < -900000) {
     var_2 = "Ignore";
-
   }
   var_5 = 20;
   var_6 = (1, 0.5, 0.2);
   var_7 = (0.2, 0.5, 1);
-  var_8 = !isplayer(self) && self.pacifist;
+  var_8 = !isPlayer(self) && self.pacifist;
 
   for(var_9 = 0; var_9 <= var_5; var_9++) {
     if(isDefined(var_1)) {}
@@ -1155,7 +1129,6 @@ _id_19F3() {
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_1[var_2[var_4]] = 0;
-
   }
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
     var_5 = level._id_13CA[var_0[var_4]];
@@ -1164,7 +1137,6 @@ _id_19F3() {
 
   for(var_4 = 0; var_4 < level._id_19F2.size; var_4++) {
     level._id_19F2[var_4] destroy();
-
   }
   level._id_19F2 = [];
   var_6 = 15;
@@ -1258,7 +1230,6 @@ _id_19FB() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     _id_19FD(var_0[var_1]);
-
   }
   var_0 = getarraykeys(level._id_11B9);
 
@@ -1319,7 +1290,6 @@ _id_1A02() {
 
   if(isDefined(var_0._id_1032)) {
     var_2 = var_0._id_1032;
-
   }
   level._id_1A04.label = "Actor: " + var_2;
 
@@ -1330,23 +1300,19 @@ _id_1A02() {
     }
   } else {
     level._id_1A05 = 0;
-
   }
   if(level.player buttonpressed("UPARROW")) {
     if(level._id_1A07 != "up") {
       level._id_1A08--;
-
     }
     level._id_1A07 = "up";
   } else if(level.player buttonpressed("DOWNARROW")) {
     if(level._id_1A07 != "down") {
       level._id_1A08++;
-
     }
     level._id_1A07 = "down";
   } else {
     level._id_1A07 = "none";
-
   }
   for(var_3 = 0; var_3 < level._id_11E7; var_3++) {
     var_4 = level._id_1A09[var_3];
@@ -1374,11 +1340,9 @@ _id_1A02() {
   }
   if(level._id_1A08 > var_6) {
     level._id_1A08 = var_6;
-
   }
   if(level._id_1A08 < 0) {
     level._id_1A08 = 0;
-
   }
   for(;;) {
     if(isDefined(var_1[level._id_1A08])) {
@@ -1526,7 +1490,6 @@ _id_1A16(var_0) {
 _id_1A17(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_2)) {
     var_2 = (1, 1, 1);
-
   }
   if(isDefined(var_5)) {
     var_5 = var_5 * 20;
@@ -1548,9 +1511,9 @@ _id_1A18(var_0, var_1, var_2) {
 }
 
 _id_1A19() {
-  if(getdvar("credits_active") == "1") {
+  if(getDvar("credits_active") == "1") {
     wait 7;
-    setdvar("credits_active", "0");
+    setDvar("credits_active", "0");
     maps\_endmission::_id_198E();
     return;
   }
@@ -1564,7 +1527,6 @@ _id_1A1A(var_0) {}
 _id_1A1B(var_0) {
   if(!isDefined(level._id_1A1C)) {
     level._id_1A1C = -1;
-
   }
   if(level._id_1A1C == var_0) {
     return;
@@ -1578,7 +1540,6 @@ _id_1A1B(var_0) {
 
   if(!isDefined(level._id_1A1E)) {
     level._id_1A1E = level._id_1A1D common_scripts\utility::spawn_tag_origin();
-
   }
   thread _id_1A1F(level._id_1A1D);
 }
@@ -1621,7 +1582,6 @@ _id_1A21(var_0, var_1) {}
 _id_1A22(var_0) {
   if(!isDefined(level._id_1A23)) {
     level._id_1A23 = 9500;
-
   }
   level._id_1A23++;
   var_1 = "bridge_helpers";

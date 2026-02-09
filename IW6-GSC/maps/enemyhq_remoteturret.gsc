@@ -70,7 +70,7 @@ remote_turret_init(var_0) {
   level.fov_range = level.remote_turret_max_fov - level.remote_turret_min_fov;
   level.slow_aim_yaw_range = level.remote_turret_max_slow_aim_yaw - level.remote_turret_min_slow_aim_yaw;
   level.slow_aim_pitch_range = level.remote_turret_max_slow_aim_pitch - level.remote_turret_min_slow_aim_pitch;
-  setdvar("debug_sniper_mode", 1);
+  setDvar("debug_sniper_mode", 1);
   thread remove_remote_turret_targets();
 }
 

@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_theater_fx.csc
+ * Script: clientscripts\zombie_theater_fx\.csc
 ***********************************************/
 
 #include clientscripts\_utility;
@@ -28,7 +28,6 @@ main() {
   level thread level_fog_init();
   level thread projector_screen_fx();
 }
-
 precache_util_fx() {}
 precache_scripted_fx() {
   level._effect["eye_glow"] = LoadFx("misc/fx_zombie_eye_single");
@@ -45,7 +44,6 @@ precache_scripted_fx() {
   level._effect["animscript_gib_fx"] = LoadFx("weapon/bullet/fx_flesh_gib_fatal_01");
   level._effect["animscript_gibtrail_fx"] = LoadFx("trail/fx_trail_blood_streak");
 }
-
 precache_createfx_fx() {
   level._effect["fx_mp_smoke_thick_indoor"] = loadfx("maps/zombie/fx_mp_smoke_thick_indoor");
   level._effect["fx_mp_smoke_amb_indoor_misty"] = loadfx("maps/zombie/fx_zombie_theater_smoke_amb_indoor");
@@ -109,7 +107,6 @@ precache_createfx_fx() {
   level._effect["fx_quad_roof_break_theater"] = loadfx("maps/zombie/fx_zombie_crawler_roof_theater");
   level._effect["fx_quad_dust_roof"] = loadfx("maps/zombie/fx_zombie_crawler_dust_roof");
 }
-
 trap_fx_monitor(name, loc, trap_type) {
   structs = getstructarray(name, "targetname");
   points = [];
@@ -125,7 +122,6 @@ trap_fx_monitor(name, loc, trap_type) {
     }
   }
 }
-
 trap_play_fx(loc, trap_type) {
   ang = self.angles;
   forward = anglesToForward(ang);
@@ -153,7 +149,7 @@ trap_play_fx(loc, trap_type) {
         break;
     }
   }
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     self.loopFX[i] = SpawnFx(i, level._effect[fx_name], self.origin, 0, forward, up);
     triggerfx(self.loopFX[i]);
@@ -164,10 +160,9 @@ trap_play_fx(loc, trap_type) {
   }
   self.loopFX = [];
 }
-
 light_model_swap(name, model) {
   level waittill("pl1");
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(p = 0; p < players.size; p++) {
     lamps = getEntArray(p, name, "targetname");
     for(i = 0; i < lamps.size; i++) {
@@ -175,7 +170,6 @@ light_model_swap(name, model) {
     }
   }
 }
-
 projector_screen_fx() {
   projector_struct = getstruct("struct_theater_projector_beam", "targetname");
   projector_ang = projector_struct.angles;
@@ -191,7 +185,7 @@ projector_screen_fx() {
     screen_struct.script_string = "ps0";
   }
   level waittill("sip");
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     projector_struct.screen_beam[i] = spawn(i, projector_struct.origin, "script_model");
     projector_struct.screen_beam[i].angles = projector_struct.angles;
@@ -206,23 +200,20 @@ projector_screen_fx() {
   }
   projector_reel_change_init(projector_struct);
 }
-
 projector_reel_change_init(struct_projector) {
   level thread projector_reel_swap(struct_projector, "ps1");
   level thread projector_reel_swap(struct_projector, "ps2");
   level thread projector_reel_swap(struct_projector, "ps3");
 }
-
 projector_reel_swap(struct_screen, str_clientnotify) {
   level waittill(str_clientnotify);
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(struct_screen.vid[i])) {
       playFXOnTag(i, level._effect[str_clientnotify], struct_screen.vid[i], "tag_origin");
     }
   }
 }
-
 dog_start_monitor() {
   while(1) {
     level waittill("dog_start");
@@ -247,7 +238,6 @@ dog_start_monitor() {
     setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 dog_stop_monitor() {
   while(1) {
     level waittill("dog_stop");
@@ -272,7 +262,6 @@ dog_stop_monitor() {
     setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
-
 level_fog_init() {
   start_dist = 155.625;
   half_dist = 2332.79;

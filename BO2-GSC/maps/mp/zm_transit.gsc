@@ -219,7 +219,7 @@ main() {
   level.custom_breadcrumb_store_func = ::transit_breadcrumb_store_func;
   register_screecher_lights();
 
-  if(getdvar(#"createfx") == "1") {
+  if(getDvar(#"createfx") == "1") {
     return;
   }
   maps\mp\teams\_teamset_cdc::level_init();
@@ -287,7 +287,7 @@ main() {
   level._allow_melee_weapon_switching = 1;
   level.disable_melee_wallbuy_icons = 1;
   level.uses_gumps = 1;
-  setdvar("aim_target_fixed_actor_size", 1);
+  setDvar("aim_target_fixed_actor_size", 1);
   level.banking_update_enabled = 1;
   level.raygun2_included = 1;
   include_weapons();
@@ -377,14 +377,14 @@ main() {
     if(is_classic())
       level.zombie_ai_limit = 20;
 
-    setdvar("fx_marks_draw", 0);
-    setdvar("disable_rope", 1);
-    setdvar("cg_disableplayernames", 1);
-    setdvar("disableLookAtEntityLogic", 1);
+    setDvar("fx_marks_draw", 0);
+    setDvar("disable_rope", 1);
+    setDvar("cg_disableplayernames", 1);
+    setDvar("disableLookAtEntityLogic", 1);
   } else
     level.zombie_ai_limit = 24;
 
-  setdvar("zombiemode_path_minz_bias", 13);
+  setDvar("zombiemode_path_minz_bias", 13);
   level thread maps\mp\zm_transit_ffotd::main_end();
   flag_wait("start_zombie_round_logic");
   level notify("players_done_connecting");
@@ -771,11 +771,11 @@ post_first_init() {
 }
 
 set_transit_wind() {
-  setdvar("enable_global_wind", 1);
-  setdvar("wind_global_vector", "-120 -115 -120");
-  setdvar("wind_global_low_altitude", 0);
-  setdvar("wind_global_hi_altitude", 2000);
-  setdvar("wind_global_low_strength_percent", 0.5);
+  setDvar("enable_global_wind", 1);
+  setDvar("wind_global_vector", "-120 -115 -120");
+  setDvar("wind_global_low_altitude", 0);
+  setDvar("wind_global_hi_altitude", 2000);
+  setDvar("wind_global_low_strength_percent", 0.5);
 }
 
 revive_trigger_move_with_player() {
@@ -1010,7 +1010,7 @@ give_personality_characters() {
   self.favorite_wall_weapons_list = [];
   self.talks_in_danger = 0;
 
-  if(getdvar(#"_id_40772CF1") != "")
+  if(getDvar(#"_id_40772CF1") != "")
     self.characterindex = getdvarint(#"_id_40772CF1");
 
   switch (self.characterindex) {
@@ -1384,7 +1384,7 @@ transit_zone_init() {
   add_adjacent_zone("zone_pri2", "zone_station_ext", "OnPriDoorYar", 1);
   add_adjacent_zone("zone_pri2", "zone_pri", "OnPriDoorYar3", 1);
 
-  if(getdvar(#"ui_zm_mapstartlocation") == "transit") {
+  if(getDvar(#"ui_zm_mapstartlocation") == "transit") {
     level thread disconnect_door_zones("zone_pri2", "zone_station_ext", "OnPriDoorYar");
     level thread disconnect_door_zones("zone_pri2", "zone_pri", "OnPriDoorYar3");
   }
@@ -1425,7 +1425,7 @@ transit_zone_init() {
 }
 
 include_powerups() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -1654,7 +1654,7 @@ offhand_weapon_overrride() {
 }
 
 include_weapons() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("claymore_zm", 0);
@@ -1845,10 +1845,9 @@ setup_dvars() {
   dvars[dvars.size] = "zombie_bus_debug_spawners";
 
   for(i = 0; i < dvars.size; i++) {
-    if(getdvar(dvars[i]) == "")
-      setdvar(dvars[i], "0");
+    if(getDvar(dvars[i]) == "")
+      setDvar(dvars[i], "0");
   }
-
 }
 
 setup_zombie_init() {
@@ -2154,7 +2153,7 @@ zombie_transit_devgui(cmd) {
       guy forceteleport(trace["position"], player.angles + vectorscale((0, 1, 0), 180.0));
       break;
     case "test_attach":
-      attach_name = getdvar(#"_id_61FFB6CE");
+      attach_name = getDvar(#"_id_61FFB6CE");
       opening = level.the_bus maps\mp\zm_transit_openings::busgetopeningfortag(attach_name);
       jump = level.the_bus maps\mp\zm_transit_openings::_busgetjumptagfrombindtag(attach_name);
 
@@ -2183,7 +2182,7 @@ zombie_transit_devgui(cmd) {
 
       break;
     case "attach_tag":
-      setdvar("zombie_bus_debug_attach", cmd_strings[1]);
+      setDvar("zombie_bus_debug_attach", cmd_strings[1]);
       break;
     case "hatch_available":
       if(isDefined(level.the_bus))
@@ -2254,7 +2253,6 @@ zombie_transit_devgui(cmd) {
     default:
       break;
   }
-
 }
 
 is_valid_powerup_location(powerup) {
@@ -2370,7 +2368,7 @@ is_player_killable(player, checkignoremeflag) {
   if(!isalive(player))
     return false;
 
-  if(!isplayer(player))
+  if(!isPlayer(player))
     return false;
 
   if(player.sessionstate == "spectator")
@@ -2950,7 +2948,7 @@ power_pap_hint() {
   while(true) {
     lab_trig waittill("trigger", who);
 
-    if(isplayer(who) && is_player_valid(who)) {
+    if(isPlayer(who) && is_player_valid(who)) {
       who thread do_player_general_vox("general", "pap_hint", undefined, 100);
       return;
     }

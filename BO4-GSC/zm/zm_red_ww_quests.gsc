@@ -378,7 +378,7 @@ function_10310ecb() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(isplayer(s_result.attacker) && s_result.mod === "MOD_MELEE") {
+    if(isPlayer(s_result.attacker) && s_result.mod === "MOD_MELEE") {
       self dodamage(self.health + 100, self.origin, s_result.attacker);
     }
   }
@@ -391,7 +391,7 @@ function_fa621ff5(e_destructible) {
   while(true) {
     s_waitresult = self waittill(#"weapon_melee");
 
-    if(isplayer(self) && s_waitresult.weapon == getweapon(#"zhield_zpear_dw") && self util::is_looking_at(e_destructible.origin) && distance2d(e_destructible.origin, self.origin) < 100) {
+    if(isPlayer(self) && s_waitresult.weapon == getweapon(#"zhield_zpear_dw") && self util::is_looking_at(e_destructible.origin) && distance2d(e_destructible.origin, self.origin) < 100) {
       e_destructible dodamage(e_destructible.health + 100, e_destructible.origin, self);
     }
   }
@@ -1524,7 +1524,7 @@ function_f5639b00(e_player) {
   level endon(#"end_game");
   e_player endon(#"hash_740799bb1b6c19b6");
 
-  if(isplayer(e_player)) {
+  if(isPlayer(e_player)) {
     e_player waittill(#"disconnect", #"hash_540044cdce85f636");
   }
 
@@ -3407,7 +3407,7 @@ function_cb939976(s_params) {
     s_params.eattacker.var_ac8a5779++;
   }
 
-  if(isDefined(s_params.eattacker) && isplayer(s_params.eattacker) && !(isDefined(s_params.eattacker.var_49afaaae) && s_params.eattacker.var_49afaaae) && isinarray(array(level.w_hand_charon_uncharged, level.w_hand_gaia_uncharged, level.w_hand_ouranos_uncharged, level.w_hand_hemera_uncharged), s_params.weapon)) {
+  if(isDefined(s_params.eattacker) && isPlayer(s_params.eattacker) && !(isDefined(s_params.eattacker.var_49afaaae) && s_params.eattacker.var_49afaaae) && isinarray(array(level.w_hand_charon_uncharged, level.w_hand_gaia_uncharged, level.w_hand_ouranos_uncharged, level.w_hand_hemera_uncharged), s_params.weapon)) {
     s_params.eattacker thread function_2a513082(s_params.weapon);
   }
 }
@@ -3817,7 +3817,7 @@ is_soul_capture(var_88206a50, e_zombie) {
 
   var_c87cb9d0 = getent(var_88206a50.target, "targetname");
 
-  if(isDefined(e_zombie.attacker) && isplayer(e_zombie.attacker) || isDefined(e_zombie.damageinflictor) && isplayer(e_zombie.damageinflictor)) {
+  if(isDefined(e_zombie.attacker) && isPlayer(e_zombie.attacker) || isDefined(e_zombie.damageinflictor) && isPlayer(e_zombie.damageinflictor)) {
     n_dist_sq = distance2dsquared(e_zombie.origin, var_88206a50.origin);
 
     if(isDefined(e_zombie) && e_zombie istouching(var_c87cb9d0) || isDefined(e_zombie.var_47d982a1) && e_zombie.var_47d982a1 && n_dist_sq <= 44100) {
@@ -4352,7 +4352,7 @@ function_e7a6f333(s_params) {
     return;
   }
 
-  if(!isplayer(s_params.eattacker)) {
+  if(!isPlayer(s_params.eattacker)) {
     return;
   }
 

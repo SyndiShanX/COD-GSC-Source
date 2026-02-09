@@ -99,7 +99,7 @@ function death_check_for_challenge_updates(e_attacker) {
       debug_print("");
     }
   }
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     return;
   }
   if(isvehicle(self)) {

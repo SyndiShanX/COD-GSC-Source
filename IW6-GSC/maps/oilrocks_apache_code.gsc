@@ -13,7 +13,7 @@ on_damage_turret_push_friendly_fire(var_0) {
     var_4 = undefined;
     var_5 = undefined;
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
-    var_6 = isDefined(var_2) && maps\oilrocks_code::isturret(var_2) && isDefined(var_2.owner) && isplayer(var_2.owner);
+    var_6 = isDefined(var_2) && maps\oilrocks_code::isturret(var_2) && isDefined(var_2.owner) && isPlayer(var_2.owner);
 
     if(var_6) {
       var_7 = "turret";
@@ -280,7 +280,7 @@ attack_missile_set_up_and_notify(var_0, var_1, var_2, var_3) {
   var_0 childthread earthquake_on_death_missile();
   self notify("LISTEN_missile_fire_self", var_0);
 
-  if(isDefined(var_1.heli) && isDefined(var_1.heli.owner) && isplayer(var_1.heli.owner))
+  if(isDefined(var_1.heli) && isDefined(var_1.heli.owner) && isPlayer(var_1.heli.owner))
     var_1.heli.owner notify("LISTEN_missile_fire", var_0);
   else
     var_1 notify("LISTEN_missile_fire", var_0);
@@ -708,7 +708,7 @@ enemy_adjust_missile_damage(var_0, var_1) {
       return;
     }
 
-    if(isDefined(var_5) && isplayer(var_5) && isDefined(var_8) && (var_8 == "MOD_PROJECTILE" || var_8 == "MOD_PROJECTILE_SPLASH")) {
+    if(isDefined(var_5) && isPlayer(var_5) && isDefined(var_8) && (var_8 == "MOD_PROJECTILE" || var_8 == "MOD_PROJECTILE_SPLASH")) {
       var_9 = max(0, var_3 - var_4);
       var_10 = common_scripts\utility::ter_op(isDefined(var_7), var_7, self.origin);
 
@@ -953,7 +953,7 @@ vehicle_ai_turret_shoot_target(var_0, var_1, var_2) {
   var_3 = get_apache_player();
   var_4 = 0;
 
-  if(isplayer(var_0) || isDefined(var_3) && var_3 == var_0)
+  if(isPlayer(var_0) || isDefined(var_3) && var_3 == var_0)
     var_4 = 1;
 
   var_1 settargetentity(var_0);
@@ -1442,7 +1442,7 @@ earthquake_valid_entity(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_0.origin) || !isDefined(var_1))
     return 0;
 
-  var_2 = isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner);
+  var_2 = isPlayer(var_1) || isDefined(var_1.owner) && isPlayer(var_1.owner);
   var_3 = 0;
   var_4 = 0;
 
@@ -1475,7 +1475,7 @@ earthquake_on_death() {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isplayer(var_0) || isDefined(var_0.owner) && isplayer(var_0.owner)) {
+  if(isPlayer(var_0) || isDefined(var_0.owner) && isPlayer(var_0.owner)) {
     if(isDefined(var_2)) {
       if(gettime() > level.engagementcomplimentdialognext) {
         if(issubstr(var_2, "apache_"))

@@ -267,7 +267,7 @@ disable_control() {
   self notify("disable_dog_control");
   self.controlled_dog = undefined;
   self enableoffhandweapons();
-  setdvar("ui_dog_grenade", 0);
+  setDvar("ui_dog_grenade", 0);
 }
 
 set_dog_scripted_mode(var_0) {
@@ -381,7 +381,7 @@ ally_dog_follow_owner_internal(var_0, var_1) {
       continue;
     }
 
-    if(isplayer(var_0))
+    if(isPlayer(var_0))
       var_10 = vectornormalize(vector2d(var_0 getvelocity()));
     else
       var_10 = vectornormalize(vector2d(var_9 - var_8));

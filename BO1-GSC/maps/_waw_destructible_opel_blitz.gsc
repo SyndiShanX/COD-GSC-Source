@@ -14,11 +14,9 @@ init_blitz() {
   blitzes = getEntArray("broken_blitz", "script_noteworthy");
   for(i = 0; i < blitzes.size; i++) {}
 }
-
 get_explosion_animation() {
   return % v_opelblitz_explode;
 }
-
 get_flattire_animation(broken_notify) {
   if(broken_notify == "flat_tire_left_rear") {
     return % v_opelblitz_flattire_lb;

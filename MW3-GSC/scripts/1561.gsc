@@ -72,7 +72,6 @@ _id_3D0C(var_0) {
 
     while(isDefined(level._id_3D0F) && level._id_3D0F == 1) {
       wait 0.05;
-
     }
     var_3 = _id_3D1E(var_2);
 
@@ -94,7 +93,6 @@ _id_3D0C(var_0) {
 
     if(isDefined(self._id_3D0D)) {
       var_1 = _id_3D18(self._id_3D0D);
-
     }
     wait 0.1;
   }
@@ -169,7 +167,6 @@ _id_3D15(var_0) {
 
   if(isDefined(level._id_3D16)) {
     var_2 = level._id_3D16;
-
   }
   return var_1 >= var_2 && var_1 <= 3072;
 }
@@ -220,16 +217,13 @@ _id_3D1B(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = gettime() + var_1 * 1000;
-
   }
   while(isDefined(var_0)) {
     if(maps\_utility::_id_26AB(self.origin, self.angles, var_0.origin, 0.0)) {
       return 1;
-
     }
     if(isDefined(var_2) && gettime() >= var_2) {
       return 0;
-
     }
     wait 0.25;
   }
@@ -244,7 +238,7 @@ _id_3D1C(var_0) {
   foreach(var_3 in self.mgturret) {
     if(isai(var_0)) {
       var_3 settargetentity(var_0, var_0 getEye() - var_0.origin);
-    } else if(isplayer(var_0)) {
+    } else if(isPlayer(var_0)) {
       if(maps\_utility::_id_1A43(var_0)) {
         var_1 = 60;
         var_3 settargetentity(var_0);
@@ -253,7 +247,6 @@ _id_3D1C(var_0) {
       }
     } else {
       var_3 settargetentity(var_0, (0, 0, 32));
-
     }
     var_3 startbarrelspin();
   }
@@ -268,7 +261,6 @@ _id_3D1C(var_0) {
 
     if(var_6 >= self.mgturret.size) {
       var_6 = 0;
-
     }
     wait(var_5 + 0.05);
   }
@@ -291,7 +283,6 @@ _id_3D1E(var_0) {
 
   if(!isDefined(var_0) || var_0 == 0) {
     var_1[var_1.size] = self._id_3D0A;
-
   }
   thread _id_3D1D();
   var_2 = [];
@@ -346,9 +337,8 @@ _id_3D1E(var_0) {
       }
       var_22 = var_21.origin + (0, 0, 64);
 
-      if(isai(var_21) || isplayer(var_21)) {
+      if(isai(var_21) || isPlayer(var_21)) {
         var_22 = var_21 getEye();
-
       }
       if(_id_3D14(var_18.origin, var_22)) {
         if(!isDefined(var_18._id_3D0D)) {
@@ -429,7 +419,6 @@ _id_3D1E(var_0) {
 
     if(isDefined(level._id_3D16)) {
       var_41 = level._id_3D16;
-
     }
     if(var_18._id_3D1F >= var_41 && var_18._id_3D1F <= 3072) {
       var_38 = var_18;
@@ -440,11 +429,9 @@ _id_3D1E(var_0) {
 
   if(!isDefined(var_38) && var_37.size) {
     var_38 = var_37[0];
-
   }
   if(isDefined(var_38) && isDefined(var_38._id_3D0D)) {
     _id_3D17(var_38._id_3D0D);
-
   }
   self notify("chopper_done_targeting");
 

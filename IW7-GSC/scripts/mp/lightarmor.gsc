@@ -45,11 +45,11 @@ setlightarmorvalue(var_0, var_1, var_2, var_3) {
   }
 
   var_0.lightarmorhp = var_1;
-  if(isplayer(var_0) && var_4 <= var_1 && var_1 > 0 && var_3 == 1) {
+  if(isPlayer(var_0) && var_4 <= var_1 && var_1 > 0 && var_3 == 1) {
     thread lightarmor_setfx(var_0);
   }
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     lightarmor_updatehud(var_0);
   }
 }
@@ -63,7 +63,7 @@ lightarmor_set(var_0, var_1, var_2) {
   var_0.lightarmorhp = var_1;
   lightarmor_updatehud(var_0);
   thread lightarmor_monitordeath(var_0);
-  if(isplayer(var_0) && var_2 == 1) {
+  if(isPlayer(var_0) && var_2 == 1) {
     thread lightarmor_setfx(var_0);
   }
 }
@@ -72,7 +72,7 @@ lightarmor_unset(var_0) {
   var_0 notify("lightArmor_unset");
   var_0.lightarmorhp = undefined;
   lightarmor_updatehud(var_0);
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_0 setscriptablepartstate("light_armor", "neutral", 0);
   }
 
@@ -167,7 +167,7 @@ lightarmor_monitordeath(var_0) {
 }
 
 lightarmor_updatehud(var_0) {
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
 

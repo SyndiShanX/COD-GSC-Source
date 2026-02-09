@@ -77,7 +77,6 @@ main(notifyname, character, node, scr_thread, bitflags) {
     println("Counter for sequence ", notifyname, " was ", level.scripted_animation_counter[notifyname]);
   }
 }
-
 checkanim(notifyname, total) {
   doanim = true;
   for(i = 0; i < total; i++) {
@@ -87,7 +86,6 @@ checkanim(notifyname, total) {
   }
   return doanim;
 }
-
 wait_notify(notifyname) {
   if(getDvar("debug") == "1") {
     println("Preparing wait-notify for sequence ", notifyname);
@@ -112,7 +110,6 @@ wait_notify(notifyname) {
   }
   level.scripted_animation_slot[notifyname] = undefined;
 }
-
 idle_anim(node, notifyname, character, bitflags) {
   self endon("g_scripted_idle_anim");
   if(isDefined(node.classname)) {
@@ -130,11 +127,10 @@ idle_anim(node, notifyname, character, bitflags) {
     self.goalradius = oldradius;
   }
   while(isalive(self)) {
-    self animscripted("scriptedanimdone", node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][randomInt(level.scr_anim[notifyname][character]["idle"].size)]);
+    self animscripted("scriptedanimdone", node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][randomint(level.scr_anim[notifyname][character]["idle"].size)]);
     self waittillmatch("scriptedanimdone", "end");
   }
 }
-
 abort_sequence(notifyname) {
   self waittill("new_sequence");
   if(getDvar("debug") == "1") {
@@ -142,7 +138,6 @@ abort_sequence(notifyname) {
   }
   self notify(notifyname);
 }
-
 doscriptedanim(notifyname) {
   self notify("g_scripted_idle_anim");
   if(isDefined(self.scripted_thread)) {
@@ -179,7 +174,6 @@ doscriptedanim(notifyname) {
   self notify(notifyname);
   self.notifyname = undefined;
 }
-
 abrupt_end(notifyname) {
   self waittill("end_sequence");
   if(!isDefined(self.notifyname)) {

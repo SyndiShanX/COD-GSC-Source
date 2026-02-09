@@ -57,7 +57,6 @@ onUse(lifeId, streakName) {
 
     return true;
   }
-
 }
 
 doStrike(lifeId, streakName) {

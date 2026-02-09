@@ -72,7 +72,7 @@ givePlayerScore(event, player, victim) {
     player = player.owner;
   }
 
-  if(!IsPlayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -299,7 +299,6 @@ removeDisconnectedPlayerFromPlacement() {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
-
 }
 
 updatePlacement() {

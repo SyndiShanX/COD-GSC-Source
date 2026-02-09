@@ -58,7 +58,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   }
   if(isDefined(level.friendlyfiredisabled) && !level.friendlyfiredisabled) {
     if(isDefined(level.friendlyfiredamagepercentage)) {
-      if(isplayer(eattacker) && self.team == eattacker.team) {
+      if(isPlayer(eattacker) && self.team == eattacker.team) {
         idamage = int(idamage * level.friendlyfiredamagepercentage);
         if(idamage < 1) {
           idamage = 1;
@@ -85,7 +85,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     idflags = idflags | 4;
   }
   if(isDefined(eattacker)) {
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       level thread friendlyfire::friendly_fire_callback(self, idamage, eattacker, smeansofdeath);
       if(isDefined(self.playercausedactordamage)) {
         self thread[[self.playercausedactordamage]]();
@@ -105,10 +105,10 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   actorkilled = 0;
   self thread globallogic_player::trackattackerdamage(eattacker, idamage, smeansofdeath, weapon);
   if(self.health > 0 && (self.health - idamage) <= 0) {
-    if(isDefined(eattacker) && isplayer(eattacker.driver)) {
+    if(isDefined(eattacker) && isPlayer(eattacker.driver)) {
       eattacker = eattacker.driver;
     }
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       println((("" + weapon.name) + "") + smeansofdeath);
       if(self.team != eattacker.team) {
         if(smeansofdeath == "MOD_MELEE") {
@@ -137,7 +137,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
   }
   if(!idflags & 2048) {
-    if(level.teambased && isDefined(eattacker) && eattacker != self && self.team == eattacker.team && !isplayer(eattacker)) {
+    if(level.teambased && isDefined(eattacker) && eattacker != self && self.team == eattacker.team && !isPlayer(eattacker)) {
       if(level.friendlyfire == 0) {
         return;
       }
@@ -189,7 +189,7 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
   if(globallogic_utils::isheadshot(weapon, shitloc, smeansofdeath, einflictor)) {
     smeansofdeath = "MOD_HEAD_SHOT";
   }
-  if(isDefined(eattacker) && isplayer(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker)) {
     eattacker notify("killed_ai", self, smeansofdeath, weapon);
     globallogic_score::inctotalkills(eattacker.team);
     eattacker thread globallogic_score::givekillstats(smeansofdeath, weapon, self);
@@ -216,14 +216,14 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
       self[[killedcallback]](einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime);
     }
   }
-  if(isplayer(eattacker) && (isDefined(level.overrideammodropallies) && level.overrideammodropallies && self.team == "allies" || (isDefined(level.overrideammodropteam3) && level.overrideammodropteam3 && self.team == "team3") || self.team == "axis")) {
+  if(isPlayer(eattacker) && (isDefined(level.overrideammodropallies) && level.overrideammodropallies && self.team == "allies" || (isDefined(level.overrideammodropteam3) && level.overrideammodropteam3 && self.team == "team3") || self.team == "axis")) {
     self thread ammo::dropaiammo();
   }
   player = eattacker;
   if(eattacker.classname == "script_vehicle" && isDefined(eattacker.owner)) {
     player = eattacker.owner;
   }
-  if(isDefined(player) && isplayer(player) && (!(isDefined(self.disable_score_events) && self.disable_score_events))) {
+  if(isDefined(player) && isPlayer(player) && (!(isDefined(self.disable_score_events) && self.disable_score_events))) {
     if(!level.teambased || self.team != player.pers["team"]) {
       if(smeansofdeath == "MOD_MELEE" || smeansofdeath == "MOD_MELEE_ASSASSINATE") {
         scoreevents::processscoreevent("melee_kill" + self.scoretype, player, self, weapon);

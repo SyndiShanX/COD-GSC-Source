@@ -11,7 +11,6 @@ _id_1944(var_0, var_1) {
 
   if(level._id_1708[var_1] == var_0) {
     return 0;
-
   }
   level._id_1708[var_1] = var_0;
   _id_1946(var_0, var_1);
@@ -35,7 +34,6 @@ _id_1948(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-
   }
   var_3 = 0.05;
   var_4 = var_2 / var_3;

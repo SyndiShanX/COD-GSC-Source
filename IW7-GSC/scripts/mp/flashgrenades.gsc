@@ -91,7 +91,7 @@ func_B9D9() {
       if(isDefined(var_4) && var_4 != self) {
         var_4 thread scripts\mp\damagefeedback::updatedamagefeedback("flash");
         var_11 = self;
-        if(isplayer(var_4) && var_4 isitemunlocked("specialty_paint", "perk") && var_4 scripts\mp\utility::_hasperk("specialty_paint")) {
+        if(isPlayer(var_4) && var_4 isitemunlocked("specialty_paint", "perk") && var_4 scripts\mp\utility::_hasperk("specialty_paint")) {
           var_11 thread scripts\mp\perks\perkfunctions::setpainted(var_4);
         }
       }

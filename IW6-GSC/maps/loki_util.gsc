@@ -522,9 +522,9 @@ player_boundary_fail(var_0) {
   wait 1.0;
 
   if(common_scripts\utility::flag("space_breach_done"))
-    setdvar("ui_deadquote", &"LOKI_CONTROL_BOUNDS_FAIL");
+    setDvar("ui_deadquote", &"LOKI_CONTROL_BOUNDS_FAIL");
   else
-    setdvar("ui_deadquote", &"LOKI_BOUNDS_FAIL");
+    setDvar("ui_deadquote", &"LOKI_BOUNDS_FAIL");
 
   level thread maps\_utility::missionfailedwrapper();
 }

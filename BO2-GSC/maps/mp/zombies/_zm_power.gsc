@@ -33,7 +33,6 @@ debug_powered_items() {
 
     wait 0.05;
   }
-
 }
 
 watch_global_power() {

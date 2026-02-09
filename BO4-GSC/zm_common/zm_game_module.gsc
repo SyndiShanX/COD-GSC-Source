@@ -109,11 +109,11 @@ respawn_spectators_and_freeze_players() {
 }
 
 damage_callback_no_pvp_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, eapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isplayer(eattacker) && eattacker == self) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && eattacker == self) {
     return idamage;
   }
 
-  if(isDefined(eattacker) && !isplayer(eattacker)) {
+  if(isDefined(eattacker) && !isPlayer(eattacker)) {
     return idamage;
   }
 

@@ -4,18 +4,18 @@
 *************************************************/
 
 init() {
-  level.hostname = getdvar("sv_hostname");
+  level.hostname = getDvar("sv_hostname");
   if(level.hostname == "")
     level.hostname = "CoDHost";
-  setdvar("sv_hostname", level.hostname);
+  setDvar("sv_hostname", level.hostname);
 
   level.allowvote = getdvarint("g_allowvote", 1);
-  SetDvar("g_allowvote", level.allowvote);
-  SetDvar("ui_allowvote", level.allowvote);
+  setDvar("g_allowvote", level.allowvote);
+  setDvar("ui_allowvote", level.allowvote);
 
   setFriendlyFire(maps\mp\gametypes\_tweakables::getTweakableValue("team", "fftype"));
 
-  constrainGameType(getdvar("g_gametype"));
+  constrainGameType(getDvar("g_gametype"));
 
   for(;;) {
     updateServerSettings();
@@ -24,7 +24,7 @@ init() {
 }
 
 updateServerSettings() {
-  sv_hostname = getdvar("sv_hostname");
+  sv_hostname = getDvar("sv_hostname");
   if(level.hostname != sv_hostname) {
     level.hostname = sv_hostname;
   }
@@ -32,7 +32,7 @@ updateServerSettings() {
   g_allowvote = getdvarint("g_allowvote", 1);
   if(level.allowvote != g_allowvote) {
     level.allowvote = g_allowvote;
-    setdvar("ui_allowvote", level.allowvote);
+    setDvar("ui_allowvote", level.allowvote);
   }
 
   scr_friendlyfire = maps\mp\gametypes\_tweakables::getTweakableValue("team", "fftype");
@@ -76,6 +76,6 @@ constrainGameType(gametype) {
 
 setFriendlyFire(enabled) {
   level.friendlyfire = enabled;
-  setdvar("ui_friendlyfire", enabled);
-  setdvar("cg_drawFriendlyHUDGrenades", enabled);
+  setDvar("ui_friendlyfire", enabled);
+  setDvar("cg_drawFriendlyHUDGrenades", enabled);
 }

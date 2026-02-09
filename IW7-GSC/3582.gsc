@@ -73,7 +73,7 @@ func_13A62() {
     self waittill("rewindBeginRace");
     waittillframeend;
     if(isDefined(var_0.var_6ACF)) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         scripts\mp\hud_message::showerrormessage("MP_REWIND_FAILED");
       }
 

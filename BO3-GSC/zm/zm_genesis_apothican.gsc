@@ -134,7 +134,7 @@ function function_ea9e816a() {
     if(isDefined(e_portee.var_5aef0317) && e_portee.var_5aef0317) {
       continue;
     }
-    if(isplayer(e_portee) && !e_portee laststand::player_is_in_laststand() && !(e_portee.is_drinking > 0)) {
+    if(isPlayer(e_portee) && !e_portee laststand::player_is_in_laststand() && !(e_portee.is_drinking > 0)) {
       e_portee thread function_657f1d1(self.stub, str_zone, self.origin);
     }
   }

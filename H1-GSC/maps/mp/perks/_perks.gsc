@@ -266,7 +266,7 @@ onplayerspawned() {
 }
 
 cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(var_0) || !isDefined(var_1) || !isplayer(var_1) || !maps\mp\_utility::invirtuallobby() && !isplayer(var_0))
+  if(!isDefined(var_0) || !isDefined(var_1) || !isPlayer(var_1) || !maps\mp\_utility::invirtuallobby() && !isPlayer(var_0))
     return var_2;
 
   if(var_1.sessionstate != "playing" || !isDefined(var_2) || !isDefined(var_3))
@@ -279,16 +279,16 @@ cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
   var_10 = var_2;
 
   if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") && maps\mp\_utility::isbulletdamage(var_3)) {
-    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+    if(isDefined(var_0) && isPlayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
       var_10 = var_9;
     else
       var_10 = var_10 + var_2 * level.bulletdamagemod;
   } else if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage") && isexplosivedamagemod(var_3)) {
-    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+    if(isDefined(var_0) && isPlayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
       var_10 = var_9;
     else
       var_10 = var_10 + var_2 * level.explosivedamagemod;
-  } else if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+  } else if(isDefined(var_0) && isPlayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
     var_10 = var_10 - var_2 * level.armorvestmod;
   else
     var_10 = var_9;

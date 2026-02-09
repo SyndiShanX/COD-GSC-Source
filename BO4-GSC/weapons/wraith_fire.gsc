@@ -497,7 +497,6 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
     if(getdvarint(#"scr_draw_triggers", 0)) {
       level thread util::drawcylinder(var_21f4217c, 12, var_cbaaea69, undefined, "<dev string:x78>", (1, 0, 0), 0.9);
     }
-
   }
 
   if(radius >= 0.04) {
@@ -536,9 +535,7 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
 
       if(isDefined(level.playgadgetsuccess) && var_d0603aba) {
         if(isDefined(level.var_ac6052e9)) {
-          var_9194a036 = [
-            [level.var_ac6052e9]
-          ]("wraith_fireSuccessLineCount", 0);
+          var_9194a036 = [[level.var_ac6052e9]]("wraith_fireSuccessLineCount", 0);
         }
 
         if(affectedplayers >= (isDefined(var_9194a036) ? var_9194a036 : 3)) {
@@ -589,7 +586,6 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
   if(getdvarint(#"scr_draw_triggers", 0)) {
     level notify(#"hash_67e730c2519446");
   }
-
 }
 
 is_round_reset() {
@@ -825,7 +821,7 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
     return var_1956fc57;
   }
 
-  if(isDefined(level.var_edae191d) && level.var_edae191d && isplayer(target)) {
+  if(isDefined(level.var_edae191d) && level.var_edae191d && isPlayer(target)) {
     return var_1956fc57;
   }
 
@@ -850,7 +846,7 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
     trace = bulletTrace(position, target getshootatpos(), 0, target);
 
     if(trace[# "fraction"] == 1) {
-      if(isplayer(target) || sessionmodeiswarzonegame() && isactor(target)) {
+      if(isPlayer(target) || sessionmodeiswarzonegame() && isactor(target)) {
         target thread damageinfirearea(sourcepos, killcament, trace, position, weapon, customsettings, owner);
 
         if(isDefined(owner) && util::function_fbce7263(target.team, owner.team)) {
@@ -867,7 +863,7 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
     }
   }
 
-  if(var_be45d685 && isDefined(target.var_84e41b20) && isplayer(target)) {
+  if(var_be45d685 && isDefined(target.var_84e41b20) && isPlayer(target)) {
     if(target.var_84e41b20.size == 0) {
       target.var_84e41b20 = undefined;
       target status_effect::function_408158ef(level.var_ccdda8d1, level.var_40d32830);
@@ -982,7 +978,7 @@ hitpos(start, end, color) {
 }
 
 candofiredamage(killcament, victim, resetfiretime) {
-  if(isplayer(victim) && victim depthofplayerinwater() >= 1 && !(isDefined(level.var_c62ed297) && level.var_c62ed297)) {
+  if(isPlayer(victim) && victim depthofplayerinwater() >= 1 && !(isDefined(level.var_c62ed297) && level.var_c62ed297)) {
     return false;
   }
 
@@ -1019,5 +1015,4 @@ function_85ff22aa(origin, radius, color, alpha, time) {
 
     util::debug_sphere(origin, radius, color, alpha, time);
   }
-
 }

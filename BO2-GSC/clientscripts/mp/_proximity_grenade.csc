@@ -177,7 +177,7 @@ visionsettoggle(localclientnum, toggle) {
   if(toggle)
     visionsetnaked(localclientnum, "taser_mine_shock", duration);
   else
-    visionsetnaked(localclientnum, getdvar(#"mapname"), duration);
+    visionsetnaked(localclientnum, getDvar(#"mapname"), duration);
 
   return !toggle;
 }

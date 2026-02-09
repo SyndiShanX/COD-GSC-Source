@@ -24,8 +24,8 @@
 function autoexec init() {
   initzmzodbehaviorsandasm();
   level.zombie_init_done = &zod_zombie_init_done;
-  setdvar("scr_zm_use_code_enemy_selection", 0);
-  setdvar("tu5_zmPathDistanceCheckTolarance", 20);
+  setDvar("scr_zm_use_code_enemy_selection", 0);
+  setDvar("tu5_zmPathDistanceCheckTolarance", 20);
   level.closest_player_override = &zod_closest_player;
   level thread update_closest_player();
   level.move_valid_poi_to_navmesh = 1;

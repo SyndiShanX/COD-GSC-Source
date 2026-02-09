@@ -49,29 +49,29 @@ main() {
   array_thread(getEntArray("script_model_pickup_claymore", "classname"), ::claymore_pickup_think_global);
   array_thread(getEntArray("ammo_cache", "targetname"), ::ammo_cache_think_global);
 
-  /# star( 4 + RandomInt( 4 ) );
+  star(4 + RandomInt(4));
 
-  if(GetDvar("debug") == "")
-    SetDvar("debug", "0");
+  if(getDvar("debug") == "")
+    setDvar("debug", "0");
 
-  if(GetDvar("fallback") == "")
-    SetDvar("fallback", "0");
+  if(getDvar("fallback") == "")
+    setDvar("fallback", "0");
 
-  if(GetDvar("angles") == "")
-    SetDvar("angles", "0");
+  if(getDvar("angles") == "")
+    setDvar("angles", "0");
 
-  if(GetDvar("noai") == "")
-    SetDvar("noai", "off");
+  if(getDvar("noai") == "")
+    setDvar("noai", "off");
 
-  if(GetDvar("scr_RequiredMapAspectratio") == "")
-    SetDvar("scr_RequiredMapAspectratio", "1");
+  if(getDvar("scr_RequiredMapAspectratio") == "")
+    setDvar("scr_RequiredMapAspectratio", "1");
 
-  //if( GetDvar( "ac130_player_num" ) == "" )
-  SetDvar("ac130_player_num", -1); // reset ac130 player number for proper display of HUD
+  //if( getDvar( "ac130_player_num" ) == "" )
+  setDvar("ac130_player_num", -1); // reset ac130 player number for proper display of HUD
 
   clear_custom_eog_summary();
-  SetDvar("ui_remotemissile_playernum", 0);
-  SetDvar("ui_pmc_won", 0);
+  setDvar("ui_remotemissile_playernum", 0);
+  setDvar("ui_pmc_won", 0);
 
   CreatePrintChannel("script_debug");
 
@@ -96,13 +96,13 @@ main() {
   level.do_wait_endons_array = [];
   level.abort_wait_any_func_array = [];
   if(!isDefined(level.script))
-    level.script = ToLower(GetDvar("mapname"));
+    level.script = ToLower(getDvar("mapname"));
 
   maps\_specialops::specialops_remove_unused();
 
   // set solo_play dvar correctly upon returning from a friend's game in which you were invited while playing solo play mode previously
-  if(is_specialop() && (IsSplitScreen() || (GetDvar("coop") == "1")))
-    SetDvar("solo_play", "");
+  if(is_specialop() && (IsSplitScreen() || (getDvar("coop") == "1")))
+    setDvar("solo_play", "");
 
   /*
   no_game_levels = [];
@@ -110,12 +110,12 @@ main() {
 
   if( isDefined( no_game_levels[ level.script ] ) )
   {
-  	SetDvar( "start", "no_game" );
+  	setDvar( "start", "no_game" );
   }
   else
   {
-  	if( GetDvar( "start" ) == "no_game" )
-  		SetDvar( "start", "" );
+  	if( getDvar( "start" ) == "no_game" )
+  		setDvar( "start", "" );
   }
   */
 
@@ -144,22 +144,22 @@ main() {
   }
 
   // disabled, prototyping PMC/COOP money
-  if(GetDvar("xp_enable", "0") == "")
-    SetDvar("xp_enable", "0");
+  if(getDvar("xp_enable", "0") == "")
+    setDvar("xp_enable", "0");
 
   if(string_starts_with(level.script, "co_")) {
-    SetDvar("money_enable", "1");
-    SetDvar("in_game_reward", "0"); // this includes getting reward from kills and objectives
+    setDvar("money_enable", "1");
+    setDvar("in_game_reward", "0"); // this includes getting reward from kills and objectives
   } else if(string_starts_with(level.script, "pmc_")) {
-    SetDvar("money_enable", "1");
-    SetDvar("in_game_reward", "1");
+    setDvar("money_enable", "1");
+    setDvar("in_game_reward", "1");
   } else {
-    SetDvar("money_enable", "0");
-    SetDvar("in_game_reward", "0");
+    setDvar("money_enable", "0");
+    setDvar("in_game_reward", "0");
   }
 
-  if(GetDvar("money_sharing") == "")
-    SetDvar("money_sharing", "1");
+  if(getDvar("money_sharing") == "")
+    setDvar("money_sharing", "1");
 
   init_level_players();
 
@@ -306,7 +306,7 @@ main() {
 
   animscripts\melee::Melee_Init();
 
-  level.createFX_enabled = (GetDvar("createfx") != "");
+  level.createFX_enabled = (getDvar("createfx") != "");
 
   slowmo_system_init();
 
@@ -330,11 +330,7 @@ main() {
 
   thread setup_simple_primary_lights();
 
-  // --------------------------------------------------------------------------------
-  // ---- PAST THIS POINT THE SCRIPTS DONT RUN WHEN GENERATING REFLECTION PROBES ----
-  // --------------------------------------------------------------------------------
-
-  if(GetDvar("r_reflectionProbeGenerate") == "1") {
+  // -------------------------------------------------------------------------------- // ---- PAST THIS POINT THE SCRIPTS DONT RUN WHEN GENERATING REFLECTION PROBES ---- // -------------------------------------------------------------------------------- if(getDvar("r_reflectionProbeGenerate") == "1") {
     level.stop_load = true;
     maps\_global_fx::main();
     level waittill("eternity");
@@ -379,8 +375,8 @@ main() {
 
   thread maps\_vehicle::init_vehicles();
 
-  if(GetDvar("g_connectpaths") == "2") {
-    /# PrintLn( "g_connectpaths == 2; halting script execution" );
+  if(getDvar("g_connectpaths") == "2") {
+    PrintLn("g_connectpaths == 2; halting script execution");
     level waittill("eternity");
   }
 
@@ -432,7 +428,7 @@ main() {
   array_levelthread(getEntArray("badplace", "targetname"), ::badplace_think);
   array_levelthread(getEntArray("delete_on_load", "targetname"), ::deleteEnt);
   array_thread(GetNodeArray("traverse", "targetname"), ::traverseThink);
-  /# array_thread( GetNodeArray( "deprecated_traverse", "targetname" ), ::deprecatedTraverseThink );
+  array_thread(GetNodeArray("deprecated_traverse", "targetname"), ::deprecatedTraverseThink);
   array_thread(getEntArray("piano_key", "targetname"), ::pianoThink);
   array_thread(getEntArray("piano_damage", "targetname"), ::pianoDamageThink);
   array_thread(getEntArray("water", "targetname"), ::waterThink);
@@ -1094,7 +1090,7 @@ shock_onpain() {
   while(1) {
     oldhealth = level.player.health;
     level.player waittill("damage");
-    if(GetDvar("blurpain") == "on") {
+    if(getDvar("blurpain") == "on") {
       // 			PrintLn( "health dif was ", oldhealth - level.player.health );
       if(oldhealth - level.player.health < 129) {
         // level.player ShellShock( "pain", 0.4 );
@@ -1106,15 +1102,15 @@ shock_onpain() {
 }
 
 usedAnimations() {
-  SetDvar("usedanim", "");
+  setDvar("usedanim", "");
   while(1) {
-    if(GetDvar("usedanim") == "") {
+    if(getDvar("usedanim") == "") {
       wait(2);
       continue;
     }
 
-    animname = GetDvar("usedanim");
-    SetDvar("usedanim", "");
+    animname = getDvar("usedanim");
+    setDvar("usedanim", "");
 
     if(!isDefined(level.completedAnims[animname])) {
       PrintLn("^d -- -- No anims for ", animname, "^d -- -- -- -- -- - ");
@@ -1466,7 +1462,7 @@ player_special_death_hint() {
 
     level notify("new_quote_string");
     // Would putting the content of the string here be so hard?
-    SetDvar("ui_deadquote", "@SCRIPT_GRENADE_DEATH");
+    setDvar("ui_deadquote", "@SCRIPT_GRENADE_DEATH");
     thread grenade_death_indicator_hudelement();
     return;
   }
@@ -1482,7 +1478,7 @@ vehicle_death(attacker) {
   level notify("new_quote_string");
 
   // You were killed by an exploding vehicle. Vehicles on fire are likely to explode.
-  SetDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
+  setDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
   thread special_death_indicator_hudelement("hud_burningcaricon", 96, 96);
 
   return true;
@@ -1499,11 +1495,11 @@ destructible_death(attacker) {
 
   if(IsSubStr(attacker.destructible_type, "vehicle")) {
     // You were killed by an exploding vehicle. Vehicles on fire are likely to explode.
-    SetDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
+    setDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
     thread special_death_indicator_hudelement("hud_burningcaricon", 96, 96);
   } else {
     // You were killed by an explosion.\nSome burning objects can explode.
-    SetDvar("ui_deadquote", "@SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH");
+    setDvar("ui_deadquote", "@SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH");
     thread special_death_indicator_hudelement("hud_destructibledeathicon", 96, 96);
   }
 
@@ -1537,7 +1533,7 @@ exploding_barrel_death(attacker) {
     // must have been killed by that barrel
     level notify("new_quote_string");
     // You were killed by an exploding barrel. Red barrels will explode when shot.
-    SetDvar("ui_deadquote", "@SCRIPT_EXPLODING_BARREL_DEATH");
+    setDvar("ui_deadquote", "@SCRIPT_EXPLODING_BARREL_DEATH");
     thread special_death_indicator_hudelement("hud_burningbarrelicon", 64, 64);
     return true;
   }
@@ -1547,7 +1543,7 @@ exploding_barrel_death(attacker) {
 grenade_death_text_hudelement(textLine1, textLine2) {
   level.player.failingMission = true;
 
-  SetDvar("ui_deadquote", "");
+  setDvar("ui_deadquote", "");
 
   wait(1.5);
 
@@ -1740,7 +1736,7 @@ bcTrigger(trigger) {
     }
   }
   // otherwise we're just using one trigger
-  else if(IsPlayer(other)) {
+  else if(isPlayer(other)) {
     soldier = other animscripts\battlechatter::getClosestFriendlySpeaker("custom");
   } else {
     soldier = other;
@@ -2039,7 +2035,7 @@ trigger_lookat_think(trigger, endOnFlag) {
 
     trigger waittill("trigger", other);
 
-    AssertEx(IsPlayer(other), "trigger_lookat currently only supports looking from the player");
+    AssertEx(isPlayer(other), "trigger_lookat currently only supports looking from the player");
     touching_trigger = [];
 
     while(other IsTouching(trigger)) {
@@ -2127,7 +2123,7 @@ trigger_cansee(trigger) {
       flag_clear(flagName);
 
     trigger waittill("trigger", other);
-    AssertEx(IsPlayer(other), "trigger_cansee currently only supports looking from the player");
+    AssertEx(isPlayer(other), "trigger_cansee currently only supports looking from the player");
 
     while(level.player IsTouching(trigger)) {
       if(!(other cantraceto(target_origin, offsets))) {
@@ -2178,7 +2174,7 @@ indicate_start(start) {
 handle_starts() {
   create_dvar("start", "");
 
-  if(GetDvar("scr_generateClipModels") != "" && GetDvar("scr_generateClipModels") != "0")
+  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0")
     return; // shortcut for generating clipmodels gah.
 
   if(!isDefined(level.start_functions))
@@ -2186,9 +2182,9 @@ handle_starts() {
 
   PrecacheMenu("start");
 
-  AssertEx(GetDvar("jumpto") == "", "Use the START dvar instead of JUMPTO");
+  AssertEx(getDvar("jumpto") == "", "Use the START dvar instead of JUMPTO");
 
-  start = ToLower(GetDvar("start"));
+  start = ToLower(getDvar("start"));
 
   // find the start that matches the one the dvar is set to, and execute it
   dvars = get_start_dvars();
@@ -2235,7 +2231,6 @@ handle_starts() {
     if(isDefined(level.default_start)) {
       level thread[[level.default_start]]();
     }
-
   } else {
     if(isDefined(level.start_loc_string[level.start_point]))
       thread indicate_start(level.start_loc_string[level.start_point]);
@@ -2248,7 +2243,7 @@ handle_starts() {
 
   if(is_default_start()) {
     string = get_string_for_starts(dvars);
-    SetDvar("start", string);
+    setDvar("start", string);
   }
 
   waittillframeend; // let the frame finish for all ai init type stuff that goes on in start points
@@ -2285,7 +2280,7 @@ get_string_for_starts(dvars) {
     }
   }
 
-  SetDvar("start", string);
+  setDvar("start", string);
   return string;
 }
 
@@ -2320,7 +2315,6 @@ start_menu() {
     }
     wait(0.05);
   }
-
 }
 
 start_nogame() {
@@ -2415,13 +2409,12 @@ display_starts() {
         break;
       }
 
-      SetDvar("start", dvars[selected]);
+      setDvar("start", dvars[selected]);
       level.player OpenPopupMenu("start");
       //			ChangeLevel( level.script, false );
     }
     wait(0.05);
   }
-
 }
 
 start_button_combo() {
@@ -2513,7 +2506,6 @@ devhelp() {
     devhelp_hudElements(hudarray, 0);
     wait .05;
   }
-
 }
 
 flag_set_player_trigger(trigger) {
@@ -2530,7 +2522,7 @@ flag_set_player_trigger(trigger) {
 
   for(;;) {
     trigger waittill("trigger", other);
-    if(!isplayer(other))
+    if(!isPlayer(other))
       continue;
     trigger script_delay();
     flag_set(flag);
@@ -2618,7 +2610,7 @@ trigger_damage_player_flag_set(trigger) {
     trigger waittill("trigger", other);
     if(!isalive(other))
       continue;
-    if(!isplayer(other))
+    if(!isPlayer(other))
       continue;
     trigger script_delay();
     flag_set(flag, other);
@@ -2638,7 +2630,7 @@ flag_set_coop_trigger(trigger) {
   for(;;) {
     trigger waittill("trigger", user);
 
-    if(!isplayer(user)) {
+    if(!isPlayer(user)) {
       continue;
     }
     add = [];
@@ -2970,7 +2962,7 @@ trigger_multiple_physics(trigger) {
       vel = 0.25;
 
     // convert string to float
-    SetDvar("tempdvar", vel);
+    setDvar("tempdvar", vel);
     vel = GetDvarFloat("tempdvar");
 
     if(isDefined(damage)) {
@@ -2993,7 +2985,6 @@ trigger_multiple_friendly_respawn(trigger) {
   if(isDefined(org)) {
     origin = org.origin;
     org Delete();
-
   } else {
     org = getstruct(trigger.target, "targetname");
     AssertEx(isDefined(org), "trigger_multiple_friendly_respawn doesn't target an origin.");
@@ -3126,7 +3117,7 @@ trigger_hint(trigger) {
   AssertEx(isDefined(level.trigger_hint_string[hint]), "Trigger_hint with hint " + hint + " had no hint string assigned to it. Define hint strings with add_hint_string()");
   trigger waittill("trigger", other);
 
-  AssertEx(IsPlayer(other), "Tried to do a trigger_hint on a non player entity");
+  AssertEx(isPlayer(other), "Tried to do a trigger_hint on a non player entity");
 
   if(isDefined(level.displayed_hints[hint]))
     return;
@@ -3136,8 +3127,8 @@ trigger_hint(trigger) {
 }
 
 stun_test() {
-  if(GetDvar("stuntime") == "")
-    SetDvar("stuntime", "1");
+  if(getDvar("stuntime") == "")
+    setDvar("stuntime", "1");
   level.player.AllowAds = true;
 
   for(;;) {
@@ -3414,7 +3405,7 @@ ammo_pickup(sWeaponType) {
     if(!isDefined(triggerer)) {
       continue;
     }
-    if(!isplayer(triggerer)) {
+    if(!isPlayer(triggerer)) {
       continue;
     }
     // check if the player is carrying one of the valid grenade launcher weapons
@@ -3617,7 +3608,7 @@ trigger_fog(trigger) {
 
   for(;;) {
     trigger waittill("trigger", other);
-    AssertEx(IsPlayer(other), "Non - player entity touched a trigger_fog.");
+    AssertEx(isPlayer(other), "Non - player entity touched a trigger_fog.");
 
     progress = 0;
     while(other IsTouching(trigger)) {
@@ -3683,7 +3674,7 @@ no_crouch_or_prone_think(trigger) {
 }
 
 no_crouch_or_prone_think_for_player(trigger) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   for(;;) {
     trigger waittill("trigger", player);
 
@@ -3708,7 +3699,7 @@ no_prone_think(trigger) {
 }
 
 no_prone_think_for_player(trigger) {
-  assert(isplayer(self));
+  assert(isPlayer(self));
   for(;;) {
     trigger waittill("trigger", player);
 
@@ -3805,7 +3796,7 @@ precache_script_models() {
 }
 
 filmy() {
-  if(GetDvar("grain_test") == "")
+  if(getDvar("grain_test") == "")
     return;
   effect = LoadFX("misc/grain_test");
   looper = spawn("script_model", level.player getEye());
@@ -3852,7 +3843,7 @@ arcademode_save() {
 
 player_death_detection() {
   // a dvar starts high then degrades over time whenever the player dies, // checked from maps\_utility::player_died_recently()
-  SetDvar("player_died_recently", "0");
+  setDvar("player_died_recently", "0");
   thread player_died_recently_degrades();
 
   level add_wait(::flag_wait, "missionfailed");
@@ -3865,7 +3856,7 @@ player_death_detection() {
   recently_skill[2] = 0;
   recently_skill[3] = 0;
 
-  SetDvar("player_died_recently", recently_skill[level.gameskill]);
+  setDvar("player_died_recently", recently_skill[level.gameskill]);
 }
 
 player_died_recently_degrades() {
@@ -3873,7 +3864,7 @@ player_died_recently_degrades() {
     recent_death_time = GetDvarInt("player_died_recently", 0);
     if(recent_death_time > 0) {
       recent_death_time -= 5;
-      SetDvar("player_died_recently", recent_death_time);
+      setDvar("player_died_recently", recent_death_time);
     }
     wait(5);
   }
@@ -4330,7 +4321,7 @@ ammo_icon_think() {
   while(true) {
     trigger waittill("trigger", other);
 
-    if(!isplayer(other)) {
+    if(!isPlayer(other)) {
       continue;
     }
     while(other IsTouching(trigger)) {
@@ -4384,7 +4375,6 @@ handle_getviewpos() {
     //this part doesn't do anything for radiant. gonna have to make it work sometime.
     // + " " + playerviewangle[0] + " " + playerviewangle[1]
   }
-
 }
 
 trigger_multiple_visionset(trigger) {
@@ -4410,7 +4400,6 @@ handle_getviewangle() {
     //this part doesn't do anything for radiant. gonna have to make it work sometime.
     // + " " + playerviewangle[0] + " " + playerviewangle[1]
   }
-
 }
 
 window_destroy() {

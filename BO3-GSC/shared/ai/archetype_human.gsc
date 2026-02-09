@@ -178,7 +178,7 @@ function private trygibbinglegs(entity, damage, hitloc, isexplosive, attacker) {
 function damageoverride(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
   entity = self;
   entity destructserverutils::handledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
-  if(isDefined(eattacker) && !isplayer(eattacker) && !isvehicle(eattacker)) {
+  if(isDefined(eattacker) && !isPlayer(eattacker) && !isvehicle(eattacker)) {
     dist = distancesquared(entity.origin, eattacker.origin);
     if(dist < 65536) {
       idamage = int(idamage * 10);

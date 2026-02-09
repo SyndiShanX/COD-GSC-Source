@@ -9,12 +9,12 @@ main() {
   scripts\mp\maps\mp_junk\mp_junk_fx::main();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_junk");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraAccurateOcclusionThreshold", 1024);
-  setdvar("r_tessellationFactor", 40);
-  setdvar("r_tessellationCutoffFalloff", 256);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 1024);
+  setDvar("r_tessellationFactor", 40);
+  setDvar("r_tessellationCutoffFalloff", 256);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -186,7 +186,7 @@ killtriggerloop(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(isDefined(var_1)) {
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         var_1 suicide();
         var_2 = var_1 func_8113();
         var_2 hide(1);

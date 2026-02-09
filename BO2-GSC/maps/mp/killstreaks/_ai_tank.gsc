@@ -68,7 +68,7 @@ init() {
   anims[anims.size] = % o_drone_tank_missile2_fire;
   anims[anims.size] = % o_drone_tank_missile3_fire;
   anims[anims.size] = % o_drone_tank_missile_full_reload;
-  setdvar("scr_ai_tank_no_timeout", 0);
+  setDvar("scr_ai_tank_no_timeout", 0);
 
   level thread tank_devgui_think();
 }
@@ -206,7 +206,7 @@ tank_team_kill() {
 tank_abort_think() {
   self endon("death");
   self.owner wait_endon(120, "disconnect", "joined_team", "joined_spectators", "emp_jammed");
-  shouldtimeout = getdvar(#"scr_ai_tank_no_timeout");
+  shouldtimeout = getDvar(#"scr_ai_tank_no_timeout");
 
   if(shouldtimeout == "1") {
     return;
@@ -264,7 +264,7 @@ tank_damage_think() {
     }
 
     if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET" || weapon == "hatchet_mp" || mod == "MOD_PROJECTILE_SPLASH" && isexplosivebulletweapon(weapon)) {
-      if(isplayer(attacker)) {
+      if(isPlayer(attacker)) {
         if(attacker hasperk("specialty_armorpiercing"))
           damage = damage + int(damage * level.cac_armorpiercing_data);
       }
@@ -293,7 +293,7 @@ tank_damage_think() {
       low_health = 1;
     }
 
-    if(isDefined(attacker) && isplayer(attacker) && self tank_is_idle() && !self.isstunned) {
+    if(isDefined(attacker) && isPlayer(attacker) && self tank_is_idle() && !self.isstunned) {
       self.aim_entity.origin = attacker getcentroid();
       self.aim_entity.delay = 8;
       self notify("aim_updated");
@@ -425,7 +425,7 @@ tank_death_think(hardpointname) {
       self.damage_fx delete();
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(self.owner) && attacker != self.owner) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(self.owner) && attacker != self.owner) {
     if(self.owner isenemyplayer(attacker)) {
       maps\mp\_scoreevents::processscoreevent("destroyed_aitank", attacker, self.owner, weapon);
       attacker addweaponstat(weapon, "destroyed_aitank", 1);
@@ -864,7 +864,7 @@ valid_target(target, team, owner) {
   if(target == owner)
     return false;
 
-  if(isplayer(target)) {
+  if(isPlayer(target)) {
     if(target.sessionstate != "playing")
       return false;
 
@@ -873,7 +873,6 @@ valid_target(target, team, owner) {
 
     if(target isinmovemode("ufo", "noclip"))
       return false;
-
   }
 
   if(level.teambased) {
@@ -1158,15 +1157,15 @@ destroy_remote_hud() {
 }
 
 tank_devgui_think() {
-  setdvar("devgui_tank", "");
+  setDvar("devgui_tank", "");
 
   for(;;) {
     wait 0.25;
     level.ai_tank_turret_fire_rate = weaponfiretime("ai_tank_drone_gun_mp");
 
-    if(getdvar(#"devgui_tank") == "routes") {
+    if(getDvar(#"devgui_tank") == "routes") {
       devgui_debug_route();
-      setdvar("devgui_tank", "");
+      setDvar("devgui_tank", "");
     }
   }
 
@@ -1184,7 +1183,6 @@ tank_debug_patrol(node1, node2) {
     self waittill("reached_end_node");
     wait 1;
   }
-
 }
 
 devgui_debug_route() {
@@ -1203,7 +1201,6 @@ devgui_debug_route() {
     tank notify("debug_patrol");
     tank thread tank_debug_patrol(nodes[0], nodes[1]);
   }
-
 }
 
 tank_debug_hud_init() {
@@ -1254,5 +1251,4 @@ tank_debug_health() {
     str = self.health + "Last Damage: " + self.damage_debug;
     level.ai_tank_text settext(str);
   }
-
 }

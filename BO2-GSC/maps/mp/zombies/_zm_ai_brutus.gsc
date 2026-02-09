@@ -44,7 +44,7 @@ precache() {
   precachestring(&"ZOMBIE_LOCKED_COST_4000");
   precachestring(&"ZOMBIE_LOCKED_COST_6000");
   flag_init("brutus_setup_complete");
-  setdvar("zombie_double_wide_checks", 1);
+  setDvar("zombie_double_wide_checks", 1);
 
   if(!isDefined(level.vsmgr_prio_zm_brutus_teargas))
     level.vsmgr_prio_overlay_zm_ai_screecher_blur = 50;
@@ -108,7 +108,7 @@ init() {
   level.brutus_respawn_after_despawn = 1;
   level.brutus_in_grief = 0;
 
-  if(getdvar(#"ui_gametype") == "zgrief")
+  if(getDvar(#"ui_gametype") == "zgrief")
     level.brutus_in_grief = 1;
 
   level.brutus_shotgun_damage_mod = 1.5;
@@ -493,9 +493,7 @@ get_brutus_spawn_pos_val(brutus_pos) {
       interact_points = [[interaction.get_func]](zone_name);
 
       for(j = 0; j < interact_points.size; j++) {
-        if(interact_points[j][
-            [interaction.validity_func]
-          ]())
+        if(interact_points[j][[interaction.validity_func]]())
           score = score + interaction.spawn_bias;
       }
     }
@@ -614,7 +612,7 @@ brutus_death() {
     }
   }
 
-  if(isplayer(self.attacker)) {
+  if(isPlayer(self.attacker)) {
     event = "death";
 
     if(issubstr(self.damageweapon, "knife_ballistic_"))
@@ -799,21 +797,20 @@ brutus_stop_basic_find_flesh() {
 }
 
 setup_devgui() {
-  setdvar("spawn_Brutus", "off");
+  setDvar("spawn_Brutus", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Zombie Spawning:2/Spawn Zombie:1/Brutus:1\" \"spawn_Brutus on\"\n");
   level thread watch_devgui_brutus();
 }
 
 watch_devgui_brutus() {
   while(true) {
-    if(getdvar(#"_id_5E6F2932") == "on") {
+    if(getDvar(#"_id_5E6F2932") == "on") {
       level notify("spawn_brutus", 1);
-      setdvar("spawn_Brutus", "off");
+      setDvar("spawn_Brutus", "off");
     }
 
     wait 0.1;
   }
-
 }
 
 respawn_brutus(starting_health, has_helmet, helmet_hits, explosive_dmg_taken, zone_name, b_no_current_valid_targets) {
@@ -1769,7 +1766,7 @@ scale_helmet_damage(attacker, damage, headshot_mod, damage_mod, vdir) {
         player_points = multiplier * round_up_score(level.brutus_points_for_helmet, 5);
       }
 
-      if(isDefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker add_to_player_score(player_points);
         attacker.pers["score"] = attacker.score;
         level notify("brutus_helmet_removed", attacker);
@@ -1797,7 +1794,7 @@ is_weapon_shotgun(sweapon) {
 }
 
 brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, poffsettime, boneindex) {
-  if(isDefined(attacker) && isalive(attacker) && isplayer(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || isDefined(attacker.personal_instakill) && attacker.personal_instakill)) {
+  if(isDefined(attacker) && isalive(attacker) && isPlayer(attacker) && (level.zombie_vars[attacker.team]["zombie_insta_kill"] || isDefined(attacker.personal_instakill) && attacker.personal_instakill)) {
     n_brutus_damage_percent = 1.0;
     n_brutus_headshot_modifier = 2.0;
   } else {
@@ -1834,7 +1831,7 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
           player_points = multiplier * round_up_score(level.brutus_points_for_helmet, 5);
         }
 
-        if(isDefined(attacker) && isplayer(attacker)) {
+        if(isDefined(attacker) && isPlayer(attacker)) {
           attacker add_to_player_score(player_points);
           attacker.pers["score"] = attacker.score;
           level notify("brutus_helmet_removed", attacker);
@@ -1918,7 +1915,6 @@ custom_brutus_flame_death_fx() {
     }
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_torso\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_torso\"");
-
   }
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
@@ -1959,7 +1955,6 @@ custom_brutus_flame_death_fx() {
     a_script_origins[a_script_origins.size] = e_origin_1;
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_zombie_md\"");
-
   }
 
   self thread custom_brutus_on_fire_timeout(a_script_origins);
@@ -1995,7 +1990,6 @@ brutus_debug() {
       }
     }
   }
-
 }
 
 brutus_check_zone() {

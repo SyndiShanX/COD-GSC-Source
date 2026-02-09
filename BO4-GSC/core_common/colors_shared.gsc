@@ -149,7 +149,7 @@ __main__() {
 
 debugdvars() {
   while(true) {
-    if(getdvar(#"debug_colornodes", 0) > 0) {
+    if(getDvar(#"debug_colornodes", 0) > 0) {
       thread debug_colornodes();
     }
 
@@ -266,7 +266,7 @@ draw_colornodes(array, team) {
       for(p = 0; p < a_team_nodes.size; p++) {
         print3d(a_team_nodes[p].origin, "<dev string:x90>" + function_9e72a96(k), color, 1, 0.7);
 
-        if(getdvar(#"debug_colornodes", 0) == 2 && isDefined(a_team_nodes[p].script_color_allies_old)) {
+        if(getDvar(#"debug_colornodes", 0) == 2 && isDefined(a_team_nodes[p].script_color_allies_old)) {
           if(isDefined(a_team_nodes[p].color_user) && isalive(a_team_nodes[p].color_user) && isDefined(a_team_nodes[p].color_user.script_forcecolor)) {
             print3d(a_team_nodes[p].origin + (0, 0, -5), "<dev string:x90>" + a_team_nodes[p].script_color_allies_old, _get_debug_color(a_team_nodes[p].color_user.script_forcecolor), 0.5, 0.4);
             continue;
@@ -295,13 +295,13 @@ debugcolorfriendliestogglewatch() {
   just_turned_off = 0;
 
   while(true) {
-    if(getdvar(#"debug_colornodes", 0) == 1 && !just_turned_on) {
+    if(getDvar(#"debug_colornodes", 0) == 1 && !just_turned_on) {
       just_turned_on = 1;
       just_turned_off = 0;
       draw_color_friendlies();
     }
 
-    if(getdvar(#"debug_colornodes", 0) != 1 && !just_turned_off) {
+    if(getDvar(#"debug_colornodes", 0) != 1 && !just_turned_off) {
       just_turned_off = 1;
       just_turned_on = 0;
       draw_color_friendlies();
@@ -350,7 +350,7 @@ draw_color_friendlies() {
 
   level.debug_color_huds = [];
 
-  if(getdvar(#"debug_colornodes", 0) != 1) {
+  if(getDvar(#"debug_colornodes", 0) != 1) {
     return;
   }
 
@@ -412,7 +412,7 @@ goto_current_colorindex() {
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
 
-    if(isalive(node.color_user) && !isplayer(node.color_user)) {
+    if(isalive(node.color_user) && !isPlayer(node.color_user)) {
       continue;
     }
 

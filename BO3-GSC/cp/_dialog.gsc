@@ -43,7 +43,7 @@ function add(str_dialog_name, str_vox_file) {
 }
 
 function notetrack_say(str_vo_line) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     if(self flagsys::get("shared_igc")) {
       player_say(str_vo_line);
     } else {
@@ -107,7 +107,7 @@ function private _say(str_vo_line, n_delay, b_fake_ent = 0, e_to_player) {
   }
   if(!b_fake_ent) {
     if(!isDefined(self.health) || self.health <= 0) {
-      if(!isplayer(self) || (!(isDefined(self.laststand) && self.laststand))) {
+      if(!isPlayer(self) || (!(isDefined(self.laststand) && self.laststand))) {
         assertmsg("");
         self.is_about_to_talk = undefined;
         self notify("hash_90f83311", str_vo_line);

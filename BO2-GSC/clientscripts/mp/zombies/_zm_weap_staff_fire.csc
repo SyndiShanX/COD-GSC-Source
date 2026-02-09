@@ -8,7 +8,7 @@
 #include clientscripts\mp\_music;
 
 init() {
-  if(getdvar(#"createfx") == "on") {
+  if(getDvar(#"createfx") == "on") {
     return;
   }
   level._effect["character_fire_death_sm"] = loadfx("env/fire/fx_fire_zombie_md");

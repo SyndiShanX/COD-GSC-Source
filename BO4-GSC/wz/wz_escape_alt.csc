@@ -18,11 +18,11 @@ event_handler[level_init] main(eventstruct) {
   setsaveddvar(#"wind_global_hi_altitude", 10000);
   setsaveddvar(#"wind_global_low_strength_percent", 100);
   load::main();
-  setdvar(#"cg_aggressivecullradius", 100);
-  setdvar(#"hash_53f625ed150e7700", 12000);
+  setDvar(#"cg_aggressivecullradius", 100);
+  setDvar(#"hash_53f625ed150e7700", 12000);
 
   if(isDefined(getgametypesetting(#"hash_26f00de198472b81")) && getgametypesetting(#"hash_26f00de198472b81")) {
-    setdvar(#"hash_53f625ed150e7700", 6000);
+    setDvar(#"hash_53f625ed150e7700", 6000);
   }
 
   util::waitforclient(0);

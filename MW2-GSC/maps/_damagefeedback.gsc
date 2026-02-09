@@ -41,7 +41,7 @@ monitorDamage() {
 }
 
 damagefeedback_took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isplayer(attacker))
+  if(!isPlayer(attacker))
     return;
   if(isDefined(self.bullet_resistance)) {
     legal_bullet_types = [];

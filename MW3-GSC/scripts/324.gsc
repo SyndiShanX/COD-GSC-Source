@@ -16,17 +16,14 @@ precachemodelarray(var_0) {
 attachhead(var_0, var_1) {
   if(!isDefined(level.character_head_index)) {
     level.character_head_index = [];
-
   }
   if(!isDefined(level.character_head_index[var_0])) {
     level.character_head_index[var_0] = randomint(var_1.size);
-
   }
   var_2 = (level.character_head_index[var_0] + 1) % var_1.size;
 
   if(isDefined(self.script_char_index)) {
     var_2 = self.script_char_index % var_1.size;
-
   }
   level.character_head_index[var_0] = var_2;
   self attach(var_1[var_2], "", 1);
@@ -36,11 +33,9 @@ attachhead(var_0, var_1) {
 attachhat(var_0, var_1) {
   if(!isDefined(level.character_hat_index)) {
     level.character_hat_index = [];
-
   }
   if(!isDefined(level.character_hat_index[var_0])) {
     level.character_hat_index[var_0] = randomint(var_1.size);
-
   }
   var_2 = (level.character_hat_index[var_0] + 1) % var_1.size;
   level.character_hat_index[var_0] = var_2;
@@ -99,8 +94,7 @@ load(var_0) {
 }
 
 precache(var_0) {
-  if(isDefined(var_0["name"])) {
-    } else {}
+  if(isDefined(var_0["name"])) {} else {}
 
   precachemodel(var_0["model"]);
   var_1 = var_0["attach"];
@@ -117,14 +111,12 @@ get_random_character(var_0) {
   if(!common_scripts\utility::issp()) {
     if(isDefined(self.pers["modelIndex"]) && self.pers["modelIndex"] < var_0) {
       return self.pers["modelIndex"];
-
     }
     var_2 = randomint(var_0);
     self.pers["modelIndex"] = var_2;
     return var_2;
   } else if(var_1.size <= 2) {
     return randomint(var_0);
-
   }
   var_3 = "auto";
   var_2 = undefined;
@@ -132,7 +124,6 @@ get_random_character(var_0) {
 
   if(isDefined(self.script_char_index)) {
     var_2 = self.script_char_index;
-
   }
   if(isDefined(self.script_char_group)) {
     var_5 = "grouped";
@@ -141,15 +132,12 @@ get_random_character(var_0) {
 
   if(!isDefined(level.character_index_cache)) {
     level.character_index_cache = [];
-
   }
   if(!isDefined(level.character_index_cache[var_4])) {
     level.character_index_cache[var_4] = [];
-
   }
   if(!isDefined(level.character_index_cache[var_4][var_3])) {
     initialize_character_group(var_4, var_3, var_0);
-
   }
   if(!isDefined(var_2)) {
     var_2 = get_least_used_index(var_4, var_3);
@@ -161,7 +149,6 @@ get_random_character(var_0) {
 
   while(var_2 >= var_0) {
     var_2 = var_2 - var_0;
-
   }
   level.character_index_cache[var_4][var_3][var_2]++;
   return var_2;

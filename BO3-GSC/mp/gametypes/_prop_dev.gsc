@@ -65,14 +65,14 @@ function function_6c015e54() {
   util::set_dvar_int_if_unset("", 0);
   util::set_dvar_int_if_unset("", 0);
   util::set_dvar_int_if_unset("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   if(getdvarint("", 0) != 0) {
     adddebugcommand("");
   }
@@ -157,13 +157,13 @@ function function_6c015e54() {
     if(getdvarint("", 0) != var_8c45c976) {
       var_8c45c976 = getdvarint("", 0);
       if(var_8c45c976) {
-        setdvar("", 1);
-        setdvar("", 1);
-        setdvar("", 10000);
+        setDvar("", 1);
+        setDvar("", 1);
+        setDvar("", 10000);
       } else {
-        setdvar("", 1600);
-        setdvar("", 1000);
-        setdvar("", 400);
+        setDvar("", 1600);
+        setDvar("", 1000);
+        setDvar("", 400);
         iprintlnbold((var_8c45c976 ? "" : ""));
       }
     }
@@ -196,21 +196,21 @@ function function_6c015e54() {
     }
     if(getdvarint("", 0) != 0) {
       function_543336f9();
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
       function_a8147bf9();
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
       function_1a022b4b();
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
       if(isDefined(level.players) && isDefined(level.players[0])) {
         level thread prop::function_435d5169(&"", level.players[0]);
       }
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
       function_276ad638();
@@ -220,7 +220,7 @@ function function_6c015e54() {
     }
     if(getdvarint("", 0) != 0) {
       function_ad9aebcc();
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
       if(isDefined(level.players) && isDefined(level.players[0])) {
@@ -232,17 +232,17 @@ function function_6c015e54() {
     }
     if(getdvarint("", 0) != 0) {
       function_6863880e();
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
       function_9b9725b1();
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0 && isDefined(level.players)) {
       foreach(player in level.players) {
         player notify("hash_b83e2d54");
       }
-      setdvar("", 0);
+      setDvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
       function_b52ad1b2();
@@ -274,13 +274,13 @@ function function_6c015e54() {
 }
 
 function function_f35dfc64(enabled) {
-  setdvar("", enabled);
-  setdvar("", enabled);
-  setdvar("", enabled);
-  setdvar("", enabled);
-  setdvar("", enabled);
-  setdvar("", enabled);
-  setdvar("", enabled);
+  setDvar("", enabled);
+  setDvar("", enabled);
+  setDvar("", enabled);
+  setDvar("", enabled);
+  setDvar("", enabled);
+  setDvar("", enabled);
+  setDvar("", enabled);
 }
 
 function function_194631ab(enabled) {
@@ -363,7 +363,7 @@ function function_8bd2ff0() {
   self endon("disconnect");
   self endon("hash_bff3e3c5");
   self waittill("death");
-  setdvar("", 0);
+  setDvar("", 0);
 }
 
 function debugaxis(origin, angles, size, alpha, depthtest, duration) {
@@ -907,8 +907,8 @@ function function_c64fb4ca() {
   if(!isDefined(var_21281cd2.hits)) {
     var_21281cd2.hits = 0;
   }
-  setdvar("", 0);
-  setdvar("", 0);
+  setDvar("", 0);
+  setDvar("", 0);
   player.health = player.maxhealth;
   weapon = getweapon("");
   end = player.origin;

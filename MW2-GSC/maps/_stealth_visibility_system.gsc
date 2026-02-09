@@ -330,25 +330,25 @@ system_default_event_distances() {
   ai_event["ai_eventDistGunShotTeam"] = [];
   ai_event["ai_eventDistNewEnemy"] = [];
 
-  ai_event["ai_eventDistDeath"]["spotted"] = getdvar("ai_eventDistDeath"); // 1024
+  ai_event["ai_eventDistDeath"]["spotted"] = getDvar("ai_eventDistDeath"); // 1024
   ai_event["ai_eventDistDeath"]["hidden"] = 512; // used to be 256
 
-  ai_event["ai_eventDistPain"]["spotted"] = getdvar("ai_eventDistPain"); // 512
+  ai_event["ai_eventDistPain"]["spotted"] = getDvar("ai_eventDistPain"); // 512
   ai_event["ai_eventDistPain"]["hidden"] = 256; // used to be 256
 
   ai_event["ai_eventDistExplosion"]["spotted"] = 4000;
   ai_event["ai_eventDistExplosion"]["hidden"] = 4000;
 
-  ai_event["ai_eventDistBullet"]["spotted"] = 96; // getdvar( "ai_eventDistBullet" );// 96
+  ai_event["ai_eventDistBullet"]["spotted"] = 96; // getDvar( "ai_eventDistBullet" );// 96
   ai_event["ai_eventDistBullet"]["hidden"] = 64;
 
-  ai_event["ai_eventDistFootstep"]["spotted"] = 350; // getdvar( "ai_eventDistFootstep" );// 512
+  ai_event["ai_eventDistFootstep"]["spotted"] = 350; // getDvar( "ai_eventDistFootstep" );// 512
   ai_event["ai_eventDistFootstep"]["hidden"] = 64;
 
-  ai_event["ai_eventDistFootstepWalk"]["spotted"] = 256; // getdvar( "ai_eventDistFootstepWalk" );// 256
+  ai_event["ai_eventDistFootstepWalk"]["spotted"] = 256; // getDvar( "ai_eventDistFootstepWalk" );// 256
   ai_event["ai_eventDistFootstepWalk"]["hidden"] = 32;
 
-  ai_event["ai_eventDistFootstepSprint"]["spotted"] = 400; // getdvar( "ai_eventDistFootstepSprint" );// 400
+  ai_event["ai_eventDistFootstepSprint"]["spotted"] = 400; // getDvar( "ai_eventDistFootstepSprint" );// 400
   ai_event["ai_eventDistFootstepSprint"]["hidden"] = 400;
 
   ai_event["ai_eventDistGunShot"]["spotted"] = 2048;

@@ -9,6 +9,7 @@
 #include animscripts\Combat_Utility;
 #include maps\_utility;
 #using_animtree("generic_human");
+
 main() {
   self SetFlashBanged(false);
   if(isDefined(self.longDeathStarting)) {
@@ -57,7 +58,6 @@ main() {
   painAnim = getPainAnim();
   playPainAnim(painAnim);
 }
-
 wasDamagedByExplosive() {
   if(self.damageWeapon != "none") {
     if(weaponClass(self.damageWeapon) == "rocketlauncher" || weaponClass(self.damageWeapon) == "grenade" || self.damageWeapon == "fraggrenade" || self.damageWeapon == "c4" || self.damageWeapon == "claymore" || self.damageWeapon == "satchel_charge_new" || self.damageWeapon == "frag_grenade_sp") {
@@ -67,15 +67,14 @@ wasDamagedByExplosive() {
   }
   if(GetTime() - anim.lastCarExplosionTime <= 50) {
     rangesq = anim.lastCarExplosionRange * anim.lastCarExplosionRange * 1.2 * 1.2;
-    if(distanceSquared(self.origin, anim.lastCarExplosionDamageLocation) < rangesq) {
+    if(DistanceSquared(self.origin, anim.lastCarExplosionDamageLocation) < rangesq) {
       upwardsDeathRangeSq = rangesq * 0.5 * 0.5;
-      self.mayDoUpwardsDeath = (distanceSquared(self.origin, anim.lastCarExplosionLocation) < upwardsDeathRangeSq);
+      self.mayDoUpwardsDeath = (DistanceSquared(self.origin, anim.lastCarExplosionLocation) < upwardsDeathRangeSq);
       return true;
     }
   }
   return false;
 }
-
 getPainAnim() {
   if(self.a.pose == "stand") {
     if(isDefined(self.damagemod) && self.damagemod == "MOD_BURNED") {
@@ -97,7 +96,6 @@ getPainAnim() {
     return % back_pain;
   }
 }
-
 get_flamethrower_pain() {
   painArray = array(%ai_flame_wounded_stand_a, %ai_flame_wounded_stand_b, %ai_flame_wounded_stand_c, %ai_flame_wounded_stand_d);
   tagArray = array("J_Elbow_RI", "J_Wrist_LE", "J_Wrist_RI", "J_Head");
@@ -106,7 +104,7 @@ get_flamethrower_pain() {
     self.a.movement = "stop";
     return getStandPainAnim();
   }
-  anim_num = randomInt(painArray.size);
+  anim_num = RandomInt(painArray.size);
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
     playFXOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
   } else {}
@@ -115,7 +113,6 @@ get_flamethrower_pain() {
   self.a.flamepainTime = GetTime() + (time * 1000);
   return pain_anim;
 }
-
 get_flamethrower_crouch_pain() {
   painArray = array(%ai_flame_wounded_crouch_a, %ai_flame_wounded_crouch_b, %ai_flame_wounded_crouch_c, %ai_flame_wounded_crouch_d);
   tagArray = array("J_Elbow_LE", "J_Wrist_LE", "J_Wrist_RI", "J_Head");
@@ -124,7 +121,7 @@ get_flamethrower_crouch_pain() {
     self.a.movement = "stop";
     return getStandPainAnim();
   }
-  anim_num = randomInt(painArray.size);
+  anim_num = RandomInt(painArray.size);
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
     playFXOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
   } else {}
@@ -133,7 +130,6 @@ get_flamethrower_crouch_pain() {
   self.a.flamepainTime = GetTime() + (time * 1000);
   return pain_anim;
 }
-
 getRunningForwardPainAnim() {
   painArray = array(%run_pain_fallonknee, %run_pain_fallonknee_02, %run_pain_fallonknee_03, %run_pain_stomach, %run_pain_stumble);
   painArray = removeBlockedAnims(painArray);
@@ -141,9 +137,8 @@ getRunningForwardPainAnim() {
     self.a.movement = "stop";
     return getStandPainAnim();
   }
-  return painArray[randomInt(painArray.size)];
+  return painArray[RandomInt(painArray.size)];
 }
-
 getStandPainAnim() {
   painArray = [];
   damageAmount = self.damageTaken / self.maxhealth;
@@ -175,9 +170,8 @@ getStandPainAnim() {
     painArray[painArray.size] = % exposed_pain_dropgun;
   }
   assertex(painArray.size > 0, painArray.size);
-  return painArray[randomInt(painArray.size)];
+  return painArray[RandomInt(painArray.size)];
 }
-
 removeBlockedAnims(array) {
   newArray = [];
   for(index = 0; index < array.size; index++) {
@@ -189,7 +183,6 @@ removeBlockedAnims(array) {
   }
   return newArray;
 }
-
 getCrouchPainAnim() {
   painArray = [];
   if(damageLocationIsAny("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
@@ -211,9 +204,8 @@ getCrouchPainAnim() {
     painArray[painArray.size] = % exposed_crouch_pain_chest;
   }
   assertex(painArray.size > 0, painArray.size);
-  return painArray[randomInt(painArray.size)];
+  return painArray[RandomInt(painArray.size)];
 }
-
 playPainAnim(painAnim) {
   if(isDefined(self.magic_bullet_shield)) {
     rate = 1.5;
@@ -223,7 +215,6 @@ playPainAnim(painAnim) {
   self SetFlaggedAnimKnobAllRestart("painanim", painAnim, %body, 1, .1, rate);
   self animscripts\zombie_shared::DoNoteTracks("painanim");
 }
-
 playThundergunPainAnim() {
   self notify("end_play_thundergun_pain_anim");
   self endon("killanimscript");
@@ -271,7 +262,6 @@ playThundergunPainAnim() {
   self SetFlaggedAnimKnobAllRestart("painanim", getupAnim, %body, 1, .2, self.animPlayBackRate);
   self animscripts\zombie_shared::DoNoteTracks("painanim");
 }
-
 specialPain(anim_special) {
   if(anim_special == "none") {
     return false;
@@ -373,13 +363,11 @@ specialPain(anim_special) {
   }
   return handled;
 }
-
 DoPainFromArray(painArray) {
-  painAnim = painArray[randomInt(painArray.size)];
+  painAnim = painArray[RandomInt(painArray.size)];
   self SetFlaggedAnimKnob("painanim", painAnim, 1, .3, 1);
   self animscripts\zombie_shared::DoNoteTracks("painanim");
 }
-
 mg42pain(pose) {
   self SetFlaggedAnimKnob("painanim", level.mg_animmg["pain_" + pose], 1, .1, 1);
   self animscripts\zombie_shared::DoNoteTracks("painanim");

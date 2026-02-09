@@ -99,6 +99,6 @@ devgui() {
         break;
     }
 
-    setdvar(#"zm_white_debug_cmd", "<dev string:x365>");
+    setDvar(#"zm_white_debug_cmd", "<dev string:x365>");
   }
 }

@@ -17,8 +17,8 @@ main() {
   PreCacheShader("black");
   PreCacheShader("white");
 
-  if(GetDvar("introscreen") == "")
-    SetDvar("introscreen", "1");
+  if(getDvar("introscreen") == "")
+    setDvar("introscreen", "1");
 
   //String1 = Title of the level
   //String2 = Place, Country or just Country
@@ -783,7 +783,7 @@ oilrig_intro_dvars() {
   SetSavedDvar("ui_hidemap", 1);
   SetSavedDvar("hud_showStance", "0");
   SetSavedDvar("compass", "0");
-  //SetDvar( "old_compass", "0" );
+  //setDvar( "old_compass", "0" );
   SetSavedDvar("ammoCounterHide", "1");
   SetSavedDvar("g_friendlyNameDist", 0);
   //SetSavedDvar( "hud_showTextNoAmmo", "0" );
@@ -1117,7 +1117,7 @@ flying_intro() {
   zoomHeight = 16000;
   slamzoom = true;
 
-  if(GetDvar("slamzoom") != "")
+  if(getDvar("slamzoom") != "")
     slamzoom = false;
 
   extra_delay = 0;

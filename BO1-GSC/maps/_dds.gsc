@@ -28,7 +28,6 @@ dds_init() {
   init_dds_categories_axis();
   init_dds_active_events();
 }
-
 init_dds_countryIDs(voice, dds_label) {
   level.dds.characterID_count = 0;
   level.dds.character_names = [];
@@ -44,21 +43,18 @@ init_dds_countryIDs(voice, dds_label) {
   add_dds_countryID("british", "br", 2);
   add_dds_countryID("russian_english", "rn", 3);
 }
-
 add_dds_countryID(voice, dds_label, max_voices) {
   level.dds.countryIDs[voice] = spawnStruct();
   level.dds.countryIDs[voice].label = dds_label;
   level.dds.countryIDs[voice].count = 0;
   level.dds.countryIDs[voice].max_voices = max_voices;
 }
-
 init_dds_flags() {
   flag_init("dds_running_allies");
   level thread dds_send_team_notify_on_disable("allies");
   flag_init("dds_running_axis");
   level thread dds_send_team_notify_on_disable("axis");
 }
-
 init_dds_categories() {
   level.dds.categories = [];
   add_dds_category("low_health", "health_low", 1.0, "", true, ::dds_sort_ent_dist, ::get_nearest_not_plr, 5000, 8, 1, true);
@@ -78,7 +74,6 @@ init_dds_categories() {
   add_dds_category("civ_fire", "frndly_fire", 1, "", true, ::dds_sort_ent_dist, ::get_nearest_not_plr, 5000, .9, 1, true);
   add_dds_category("kill_melee", "kill_melee", .75, "", true, ::dds_sort_ent_dist, ::get_attacker, 400, 1, 0.5, false);
 }
-
 init_dds_categories_axis() {
   level.dds.categories_axis = [];
   add_dds_category_axis("react_grenade", "react_grenade", 1, "grenade_rspns", true, ::dds_sort_ent_dist, ::get_nearest, 5000, 1, 0.5);
@@ -95,7 +90,6 @@ init_dds_categories_axis() {
   add_dds_category_axis("headshot", "hs", .75, "kill_rspns", true, ::dds_sort_ent_dist, ::get_attacker, 2000, .8, 1);
   add_dds_category_axis("kill_melee", "kill_melee", .25, "", true, ::dds_sort_ent_dist, ::get_attacker, 400, 1, 3);
 }
-
 add_dds_category(name, alias_name, duration, rspns_cat_name, clear_category_on_action_success, priority_sort, get_talker_func, distance, probability, timeout_reset, should_squelch) {
   new_category = spawnStruct();
   new_category.name = name;
@@ -115,7 +109,6 @@ add_dds_category(name, alias_name, duration, rspns_cat_name, clear_category_on_a
   new_category.should_squelch = should_squelch;
   level.dds.categories[level.dds.categories.size] = new_category;
 }
-
 add_dds_category_axis(name, alias_name, duration, rspns_cat_name, clear_category_on_action_success, priority_sort, get_talker_func, distance, probability, timeout_reset) {
   new_category_axis = spawnStruct();
   new_category_axis.name = name;
@@ -134,7 +127,6 @@ add_dds_category_axis(name, alias_name, duration, rspns_cat_name, clear_category
   new_category_axis.clear_on_action_success = clear_category_on_action_success;
   level.dds.categories_axis[level.dds.categories_axis.size] = new_category_axis;
 }
-
 init_dds_active_events() {
   level.dds.active_events = [];
   level.dds.active_events_axis = [];
@@ -145,7 +137,6 @@ init_dds_active_events() {
     level.dds.active_events_axis[level.dds.categories_axis[i].name] = [];
   }
 }
-
 dds_clear_old_expired_events() {
   for(i = 0; i < level.dds.categories.size; i++) {
     category = level.dds.categories[i];
@@ -157,7 +148,6 @@ dds_clear_old_expired_events() {
     }
   }
 }
-
 dds_clear_old_expired_events_axis() {
   for(i = 0; i < level.dds.categories_axis.size; i++) {
     category = level.dds.categories_axis[i];
@@ -169,7 +159,6 @@ dds_clear_old_expired_events_axis() {
     }
   }
 }
-
 dds_clear_all_queued_events() {
   for(i = 0; i < level.dds.categories.size; i++) {
     for(j = 0; j < level.dds.active_events[level.dds.categories[i].name].size; j++) {
@@ -177,7 +166,6 @@ dds_clear_all_queued_events() {
     }
   }
 }
-
 dds_clear_all_queued_events_axis() {
   for(i = 0; i < level.dds.categories_axis.size; i++) {
     for(j = 0; j < level.dds.active_events_axis[level.dds.categories_axis[i].name].size; j++) {
@@ -185,10 +173,10 @@ dds_clear_all_queued_events_axis() {
     }
   }
 }
-
 dds_main_process() {
-  if(flag("dds_running_allies"))
+  if(flag("dds_running_allies")) {
     return;
+  }
   flag_set("dds_running_allies");
   dds_find_threats("allies", "axis");
   should_delay_dds = false;
@@ -211,10 +199,10 @@ dds_main_process() {
     }
   }
 }
-
 dds_main_process_axis() {
-  if(flag("dds_running_axis"))
+  if(flag("dds_running_axis")) {
     return;
+  }
   flag_set("dds_running_axis");
   dds_find_threats("axis", "allies");
   should_delay_dds = false;
@@ -237,11 +225,9 @@ dds_main_process_axis() {
     }
   }
 }
-
 dds_find_threats(us, them) {
   level thread dds_find_infantry_threat(us, them);
 }
-
 dds_enable(team) {
   if(!isDefined(team)) {
     level thread dds_main_process();
@@ -254,7 +240,6 @@ dds_enable(team) {
     }
   }
 }
-
 dds_disable(team) {
   if(!isDefined(team)) {
     dds_clear_all_queued_events();
@@ -276,7 +261,6 @@ dds_disable(team) {
     }
   }
 }
-
 dds_send_team_notify_on_disable(team) {
   while(1) {
     flag_waitopen("dds_running_" + team);
@@ -284,21 +268,19 @@ dds_send_team_notify_on_disable(team) {
     flag_wait("dds_running_" + team);
   }
 }
-
 is_dds_enabled() {
   if(level.createFX_enabled || (!flag("dds_running_allies") && !flag("dds_running_axis"))) {
     return false;
   }
   return true;
 }
-
 exponent(base, power) {
   assert(power >= 0);
-  if(power == 0)
+  if(power == 0) {
     return 1;
+  }
   return base * exponent(base, (power - 1));
 }
-
 dds_process_active_events() {
   for(i = 0; i < level.dds.categories.size; i++) {
     category = level.dds.categories[i];
@@ -347,7 +329,6 @@ dds_process_active_events() {
   }
   return false;
 }
-
 dds_process_active_events_axis() {
   for(i = 0; i < level.dds.categories_axis.size; i++) {
     category = level.dds.categories_axis[i];
@@ -396,7 +377,6 @@ dds_process_active_events_axis() {
   }
   return false;
 }
-
 dds_event_activate(event, get_talker_func, distance, rspns_cat_name, should_squelch) {
   if(!isDefined(event)) {
     return false;
@@ -425,12 +405,12 @@ dds_event_activate(event, get_talker_func, distance, rspns_cat_name, should_sque
     should_squelch = false;
   }
   if(IsAlive(talker)) {
-    if(should_squelch && !IsPlayer(talker) && (talker.voice != "russian_english")) {
+    if(should_squelch && !isPlayer(talker) && (talker.voice != "russian_english")) {
       talker animscripts\face::PlayFaceThread(undefined, "dds_squelch_strt", .5, "dds_squelch_strt");
     }
     talker animscripts\face::PlayFaceThread(undefined, phrase, .5, phrase);
   }
-  if(should_squelch && !IsPlayer(talker) && IsAlive(talker) && (talker.voice != "russian_english")) {
+  if(should_squelch && !isPlayer(talker) && IsAlive(talker) && (talker.voice != "russian_english")) {
     talker animscripts\face::PlayFaceThread(undefined, "dds_squelch_end", .5, "dds_squelch_end");
   }
   event.talker = talker;
@@ -443,12 +423,10 @@ dds_event_activate(event, get_talker_func, distance, rspns_cat_name, should_sque
   }
   return true;
 }
-
 add_phrase_to_history(phrase) {
   level.dds.history[level.dds.history_index] = phrase;
   level.dds.history_index = (level.dds.history_index + 1) % level.dds.history_count;
 }
-
 get_nearest_common(response, player_can_say_line, distance) {
   player = get_players()[0];
   if(self.isAlliesLine) {
@@ -459,16 +437,18 @@ get_nearest_common(response, player_can_say_line, distance) {
   } else {
     ai_array = GetAIArray("axis");
   }
-  if(ai_array.size <= 0)
+  if(ai_array.size <= 0) {
     return undefined;
+  }
   if(response && isDefined(self.talker)) {
     ai_array = remove_all_actors_with_same_characterID(ai_array, self.talker.dds_characterID);
     closest_ent = get_closest_living(self.talker.origin, ai_array);
   } else {
     closest_ent = get_closest_living(self.ent_origin, ai_array);
   }
-  if(!isDefined(closest_ent))
+  if(!isDefined(closest_ent)) {
     return undefined;
+  }
   dis_from_player = distance(player.origin, closest_ent.origin);
   if(dis_from_player > distance) {
     return undefined;
@@ -478,7 +458,6 @@ get_nearest_common(response, player_can_say_line, distance) {
   }
   return closest_ent;
 }
-
 remove_all_actors_with_same_characterID(ai_array, talker_characterID) {
   for(i = 0; i < ai_array.size;) {
     if(!isDefined(ai_array[i].dds_characterID)) {
@@ -493,15 +472,12 @@ remove_all_actors_with_same_characterID(ai_array, talker_characterID) {
   }
   return ai_array;
 }
-
 get_nearest(response, distance) {
   return get_nearest_common(response, true, distance);
 }
-
 get_nearest_not_plr(response, distance) {
   return get_nearest_common(response, false, distance);
 }
-
 get_attacker(response, distance) {
   if(isDefined(self.ent_attacker) && IsAlive(self.ent_attacker)) {
     if(isDefined(self.ent_team)) {
@@ -516,14 +492,12 @@ get_attacker(response, distance) {
   }
   return undefined;
 }
-
 get_self_ent(response, distance) {
   if(isDefined(self.ent) && isAlive(self.ent)) {
     return self.ent;
   }
   return undefined;
 }
-
 dds_get_alias_from_event(talker, category_alias_name, event_ent) {
   if(!IsAlive(talker)) {
     return undefined;
@@ -544,18 +518,19 @@ dds_get_alias_from_event(talker, category_alias_name, event_ent) {
     for(i = 0; i < variant_count_array.size; i++) {
       variant_num = random(variant_count_array);
       temp_alias = alias;
-      if(variant_num < 10)
+      if(variant_num < 10) {
         temp_alias += "0";
+      }
       temp_alias += variant_num;
-      if(!is_phrase_in_history(temp_alias))
+      if(!is_phrase_in_history(temp_alias)) {
         return temp_alias;
+      }
     }
   } else {
     return undefined;
   }
   return undefined;
 }
-
 is_phrase_in_history(phrase) {
   for(i = 0; i < level.dds.history.size; i++) {
     if(level.dds.history[i] == phrase) {
@@ -564,20 +539,19 @@ is_phrase_in_history(phrase) {
   }
   return false;
 }
-
 dds_variant_count_for_alias(alias) {
   variant_count_array = [];
   for(i = 0; i < level.dds.variant_limit; i++) {
     prefix = "";
-    if(i < 10)
+    if(i < 10) {
       prefix = "0";
+    }
     if(SoundExists(alias + prefix + i)) {
       variant_count_array[variant_count_array.size] = i;
     }
   }
   return variant_count_array;
 }
-
 get_landmark_qualifier(alias) {
   lm_script_area = undefined;
   lm_script_area_origin = undefined;
@@ -595,21 +569,21 @@ get_landmark_qualifier(alias) {
     lm_script_area = self.node.script_area;
     lm_script_area_origin = self.node.origin;
   }
-  if(!isDefined(lm_script_area) || !isDefined(lm_script_area_origin))
+  if(!isDefined(lm_script_area) || !isDefined(lm_script_area_origin)) {
     return undefined;
+  }
   if((distance(self.origin, lm_script_area_origin) < 400) && SoundExists(alias + lm_script_area + "_00")) {
     return lm_script_area;
   }
   return undefined;
 }
-
 get_event_override(alias) {
-  if(isDefined(level.dds.event_override_name) && (randomFloat(1) >= level.dds.event_override_probability) && SoundExists(alias + level.dds.event_override_name + "_00")) {
+  if(isDefined(level.dds.event_override_name) && (randomFloat(1) >= level.dds.event_override_probability) &&
+    SoundExists(alias + level.dds.event_override_name + "_00")) {
     return level.dds.event_override_name;
   }
   return undefined;
 }
-
 dds_find_infantry_threat(us, them) {
   THRT_INF_NOTIFY_DISTANCE = 4000;
   while(flag("dds_running_" + us)) {
@@ -620,7 +594,8 @@ dds_find_infantry_threat(us, them) {
     for(i = 0; i < our_team.size; i++) {
       for(j = 0; j < other_team.size; j++) {
         if((other_team.size > 1) && (randomFloat(1) < .5)) {
-          if(other_team[j] canSee(our_team[i]) && (distance(other_team[j].origin, our_team[i].origin) < THRT_INF_NOTIFY_DISTANCE) && (distance(other_team[j].origin, player.origin) < THRT_INF_NOTIFY_DISTANCE)) {
+          if(other_team[j] canSee(our_team[i]) && (distance(other_team[j].origin, our_team[i].origin) < THRT_INF_NOTIFY_DISTANCE) &&
+            (distance(other_team[j].origin, player.origin) < THRT_INF_NOTIFY_DISTANCE)) {
             other_team[j] dds_notify("thrt", (them != "allies"));
             success = true;
             break;
@@ -634,9 +609,8 @@ dds_find_infantry_threat(us, them) {
     wait(2);
   }
 }
-
 player_init() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     PrintLn("dds::player_init not called on a player; did not set up dds player flags and threads.");
     return;
   }
@@ -649,7 +623,6 @@ player_init() {
   self thread dds_multikill_tracker();
   self.dds_characterID = level.dds.player_character_name;
 }
-
 dds_multikill_tracker() {
   self endon("death");
   self endon("disconnect");
@@ -659,7 +632,6 @@ dds_multikill_tracker() {
     self dds_notify("multikill", (self.team == "allies"));
   }
 }
-
 dds_watch_player_health() {
   self endon("death");
   self endon("disconnect");
@@ -674,7 +646,6 @@ dds_watch_player_health() {
     self ent_flag_waitopen("dds_low_health");
   }
 }
-
 reset_player_health() {
   self endon("death");
   self endon("disconnect");
@@ -686,7 +657,6 @@ reset_player_health() {
     wait(1);
   }
 }
-
 dds_killstreak_timer() {
   self endon("death");
   self endon("disconnect");
@@ -703,7 +673,6 @@ dds_killstreak_timer() {
     self ent_flag_clear("dds_killstreak");
   }
 }
-
 track_kills_over_time(kills, time) {
   timer = GetTime() + (time * 1000);
   while(GetTime() < timer) {
@@ -717,13 +686,11 @@ track_kills_over_time(kills, time) {
   self.killstreakcounter = 0;
   self.isKillstreakTimerRunning = false;
 }
-
 dds_ai_init() {
   self dds_get_ai_id();
   self thread dds_watch_grenade_flee();
   self thread dds_watch_friendly_fire();
 }
-
 dds_get_ai_id() {
   classname = ToLower(self.classname);
   tokens = StrTok(classname, "_");
@@ -761,7 +728,6 @@ dds_get_ai_id() {
   }
   printLn("dds: didn't set this AI with a dds_characterID");
 }
-
 dds_watch_grenade_flee() {
   self endon("death");
   self endon("disconnect");
@@ -772,7 +738,6 @@ dds_watch_grenade_flee() {
     }
   }
 }
-
 dds_watch_friendly_fire() {
   self endon("death");
   self endon("disconnect");
@@ -781,20 +746,18 @@ dds_watch_friendly_fire() {
     self dds_notify("friendly_fire", (self.team == "allies"));
   }
 }
-
 update_player_damage(eAttacker) {
   if(!is_dds_enabled()) {
     return;
   }
   self.dds_dmg_attacker = eAttacker;
 }
-
 update_actor_damage(eAttacker, damage_mod) {
   if(!is_dds_enabled()) {
     return;
   }
   self.dds_dmg_attacker = eAttacker;
-  if(IsPlayer(eAttacker)) {
+  if(isPlayer(eAttacker)) {
     switch (damage_mod) {
       case "MOD_GRENADE_SPLASH":
       case "MOD_IMPACT":
@@ -807,7 +770,6 @@ update_actor_damage(eAttacker, damage_mod) {
     }
   }
 }
-
 check_kill_damage(mod, dmg_mod) {
   if(isDefined(self.dds_dmg_attacker) && isDefined(self.dds_dmg_attacker.dds_dmg_attacker)) {
     if(self == self.dds_dmg_attacker.dds_dmg_attacker) {
@@ -816,13 +778,13 @@ check_kill_damage(mod, dmg_mod) {
   }
   return mod;
 }
-
 dds_notify_mod(isAlliesLine, category_name) {
   if(!is_dds_enabled()) {
     return;
   }
-  if(!isDefined(self.damagemod))
+  if(!isDefined(self.damagemod)) {
     return;
+  }
   if(isDefined(self.dds_dmg_attacker) && isDefined(self.team)) {
     if(isDefined(self.dds_dmg_attacker.team) && ((self.dds_dmg_attacker.team == self.team) || (self.team == "neutral"))) {
       return;
@@ -871,15 +833,13 @@ dds_notify_mod(isAlliesLine, category_name) {
     self dds_notify(category_name, isAlliesLine);
     is_bullet_kill = true;
   }
-  if(IsPlayer(self.attacker) && is_bullet_kill) {
+  if(isPlayer(self.attacker) && is_bullet_kill) {
     self.attacker ent_flag_set("dds_killstreak");
   }
 }
-
 dds_notify_casualty() {
   self dds_notify("casualty", (self.team == "allies"));
 }
-
 dds_notify_grenade(grenade_name, isAlliesLine, isThrowBack) {
   if(!is_dds_enabled()) {
     return;
@@ -905,7 +865,6 @@ dds_notify_grenade(grenade_name, isAlliesLine, isThrowBack) {
     self dds_notify("frag_throwback", isAlliesLine);
   }
 }
-
 dds_notify_reload(weaponName, isAlliesLine) {
   if(!isDefined(weaponName)) {
     self dds_notify("reload", isAlliesLine);
@@ -923,7 +882,6 @@ dds_notify_reload(weaponName, isAlliesLine) {
       break;
   }
 }
-
 dds_notify(category_name, isAlliesLine) {
   if(!flag("dds_running_allies") && isAlliesLine) {
     return;
@@ -966,11 +924,11 @@ dds_notify(category_name, isAlliesLine) {
     level.dds.active_events[category_name][level.dds.active_events[category_name].size] = event;
   }
 }
-
 dds_notify_response(event, talker, phrase, rspns_cat_name) {
   event.category_response_name = rspns_cat_name;
   event.processed = false;
-  if((rspns_cat_name == "grenade_rspns") && isDefined(event.ent) && isDefined(event.ent.grenade) && isDefined(event.ent.grenade.originalowner) && (isDefined(event.ent.grenade.originalowner.team != event.ent_team)))
+  if((rspns_cat_name == "grenade_rspns") && isDefined(event.ent) && isDefined(event.ent.grenade) && isDefined(event.ent.grenade.originalowner) &&
+    (isDefined(event.ent.grenade.originalowner.team != event.ent_team)))
     return;
   if(!event.isAlliesLine) {
     dds_category = find_dds_category_by_name(level.dds.categories_axis, event.category_response_name);
@@ -990,7 +948,6 @@ dds_notify_response(event, talker, phrase, rspns_cat_name) {
     level.dds.active_events[event.category_response_name][level.dds.active_events[event.category_response_name].size] = event;
   }
 }
-
 find_dds_category_by_name(category_array, category_name) {
   for(i = 0; i < category_array.size; i++) {
     if(category_array[i].name == category_name) {
@@ -999,7 +956,6 @@ find_dds_category_by_name(category_array, category_name) {
   }
   return undefined;
 }
-
 dds_sort_ent_dist(eventArray) {
   player = get_players()[0];
   dist_array = [];
@@ -1011,8 +967,9 @@ dds_sort_ent_dist(eventArray) {
   }
   temp = undefined;
   for(i = 0; i < dist_array.size - 1; i++) {
-    if(dist_array[i] <= dist_array[i + 1])
+    if(dist_array[i] <= dist_array[i + 1]) {
       continue;
+    }
     temp = dist_array[i];
     dist_array[i] = dist_array[i + 1];
     dist_array[i + 1] = temp;
@@ -1026,15 +983,12 @@ dds_sort_ent_dist(eventArray) {
   }
   return new_array;
 }
-
 dds_sort_ent_duration(eventArray) {
   return eventArray;
 }
-
 dds_sort_ent_damage(eventArray) {
   return eventArray;
 }
-
 getDvarIntDefault(dvarName, defaultValue) {
   returnVal = defaultValue;
   if(getDvar(dvarName) != "") {
@@ -1042,15 +996,12 @@ getDvarIntDefault(dvarName, defaultValue) {
   }
   return returnVal;
 }
-
 dds_set_event_override(event_name) {
   level.dds.event_override_name = event_name;
 }
-
 dds_clear_event_override() {
   level.dds.event_override_name = undefined;
 }
-
 dds_set_event_override_probability(probability_value) {
   if(probability_value < 0 || probability_value > 1) {
     PrintLn(probability_value + " is invalid event override probability. value must be between 0 and 1. resetting to default.");
@@ -1059,7 +1010,6 @@ dds_set_event_override_probability(probability_value) {
     level.dds.event_override_probability = probability_value;
   }
 }
-
 dds_reset_event_override_probability() {
   level.dds.event_override_probability = .5;
 }

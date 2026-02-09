@@ -150,7 +150,7 @@ wait_trigger_activate(var_0, var_1) {
   for(;;) {
     var_3 waittill("trigger", var_6);
 
-    if(!isplayer(var_6)) {
+    if(!isPlayer(var_6)) {
       common_scripts\utility::waitframe();
       continue;
     }

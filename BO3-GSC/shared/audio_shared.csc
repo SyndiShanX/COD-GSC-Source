@@ -465,7 +465,7 @@ function trig_enter_bump(ent) {
   localclientnum = self._localclientnum;
   volume = get_vol_from_speed(ent);
   if(!sessionmodeiszombiesgame()) {
-    if(ent isplayer() && ent hasperk(localclientnum, "specialty_quieter")) {
+    if(ent isPlayer() && ent hasperk(localclientnum, "specialty_quieter")) {
       volume = volume / 2;
     }
   }
@@ -653,7 +653,7 @@ function snd_underwater(localclientnum) {
       } else {
         if(underwaternotify == "swimming_begin") {
           self swimbegin();
-        } else if(underwaternotify == "swimming_end" && self isplayer() && isalive(self)) {
+        } else if(underwaternotify == "swimming_end" && self isPlayer() && isalive(self)) {
           self swimend(localclientnum);
         }
       }

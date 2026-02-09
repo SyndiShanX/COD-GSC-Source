@@ -903,7 +903,7 @@ transitionto(var_0) {
       for(;;) {
         wait(0.2 + randomfloat(0.3));
         if(isDefined(self.enemy)) {
-          if(isplayer(self.enemy)) {
+          if(isPlayer(self.enemy)) {
             var_0 = -25536;
           } else {
             var_0 = 10000;
@@ -927,7 +927,7 @@ transitionto(var_0) {
         return;
       }
 
-      if(isplayer(self.enemy)) {}
+      if(isPlayer(self.enemy)) {}
     }
 
     func_6A19(var_0) {

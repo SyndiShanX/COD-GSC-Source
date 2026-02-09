@@ -69,7 +69,6 @@ disable_elevators() {
   foreach(button in buttons) {
     button.origin = (0, 0, -50000);
   }
-
 }
 
 disable_elevator_internal() {

@@ -46,7 +46,7 @@ function_eaba72c9() {
           break;
       }
 
-      setdvar(#"wz_supply_drop", 0);
+      setDvar(#"wz_supply_drop", 0);
     }
 
     if(getdvarint(#"wz_flare_drop", 0) > 0) {
@@ -56,7 +56,7 @@ function_eaba72c9() {
           break;
       }
 
-      setdvar(#"wz_flare_drop", 0);
+      setDvar(#"wz_flare_drop", 0);
     }
 
     if(getdvarint(#"hash_5dc24c61c66f6fee", 0) > 0) {
@@ -88,7 +88,7 @@ function_eaba72c9() {
         }
       }
 
-      setdvar(#"hash_40d4ca5923d72b3d", 0);
+      setDvar(#"hash_40d4ca5923d72b3d", 0);
     }
 
     waitframe(1);

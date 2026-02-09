@@ -142,12 +142,12 @@ func_A448() {
     }
 
     var_8 = 0;
-    if(getdvar("missileDebugDraw") == "1") {
+    if(getDvar("missileDebugDraw") == "1") {
       var_8 = 1;
     }
 
     var_9 = 0;
-    if(getdvar("missileDebugText") == "1") {
+    if(getDvar("missileDebugText") == "1") {
       var_9 = 1;
     }
 
@@ -346,7 +346,7 @@ func_A440(var_0) {
       return;
     }
 
-    if(isplayer(self.var_A445)) {
+    if(isPlayer(self.var_A445)) {
       self func_8402(self.var_A445, (0, 0, 64), 0);
     } else {
       self func_8402(self.var_A445, (0, 0, 0), 0);

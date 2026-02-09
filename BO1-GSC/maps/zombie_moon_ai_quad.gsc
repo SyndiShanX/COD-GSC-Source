@@ -12,8 +12,8 @@ init() {
   level.quad_prespawn = ::moon_quad_prespawn;
   level.quad_gas_immune_func = ::moon_quad_gas_immune;
 }
-
 #using_animtree("generic_human");
+
 moon_quad_prespawn() {
   self.no_gib = true;
   self.zombie_can_sidestep = true;
@@ -25,7 +25,6 @@ moon_quad_prespawn() {
   self.sideStepFunc = ::moon_quad_sidestep;
   self.fastSprintFunc = ::moon_quad_fastSprint;
 }
-
 moon_quad_sidestep(animname, stepAnim) {
   self endon("death");
   self endon("stop_sidestep");
@@ -46,14 +45,12 @@ moon_quad_sidestep(animname, stepAnim) {
     }
   }
 }
-
 moon_quad_fastSprint() {
   if(is_true(self.in_low_gravity)) {
     return "low_g_super_sprint";
   }
   return "super_sprint";
 }
-
 moon_quad_wait_phase_end(stepAnim) {
   self endon("death");
   self endon("stop_wait_phase_end");
@@ -63,7 +60,6 @@ moon_quad_wait_phase_end(stepAnim) {
   self show();
   self notify("stop_sidestep");
 }
-
 moon_quad_exit_align(stepAnim) {
   self endon("death");
   anim_length = GetAnimLength(stepAnim);
@@ -72,13 +68,11 @@ moon_quad_exit_align(stepAnim) {
     self notify("stepAnim", "exit_align");
   }
 }
-
 moon_quad_phase_fx() {
   self endon("death");
   playFXOnTag(level._effect["quad_phasing"], self, "j_head");
   playFXOnTag(level._effect["quad_phasing"], self, "j_mainroot");
 }
-
 moon_quad_gas_immune() {
   self endon("disconnect");
   self endon("death");

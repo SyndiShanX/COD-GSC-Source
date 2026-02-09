@@ -11,7 +11,6 @@ main(var_0, var_1, var_2) {
     maps\_vehicle::_id_2ABE("vehicle_zodiac_viewmodel");
   } else {
     maps\_vehicle::_id_2ABE(var_0);
-
   }
   maps\_vehicle::_id_2ACE(999, 500, 1500);
   maps\_vehicle::_id_2AC6("allies");
@@ -31,7 +30,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 6; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_body";
   var_0[1]._id_24F2 = "tag_body";

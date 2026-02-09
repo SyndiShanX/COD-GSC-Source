@@ -9,18 +9,20 @@
 #include animscripts\combat_utility;
 #include animscripts\anims_table;
 #using_animtree("generic_human");
+
 init_rusher() {
   level.RUSHER_DEFAULT_GOALRADIUS = 64;
   level.RUSHER_DEFAULT_PATHENEMYDIST = 64;
   level.RUSHER_PISTOL_PATHENEMYDIST = 300;
 }
-
 rush(endon_flag, timeout) {
   self endon("death");
-  if(!IsAlive(self))
+  if(!IsAlive(self)) {
     return;
-  if(isDefined(self.rusher))
+  }
+  if(isDefined(self.rusher)) {
     return;
+  }
   self.rusher = true;
   if(self.animType == "vc") {
     self.moveplaybackrate = 1.6;
@@ -53,19 +55,18 @@ rush(endon_flag, timeout) {
     self thread rusher_go_back_to_normal(endon_flag, timeout);
   }
 }
-
 rusher_go_back_to_normal(endon_flag, timeout) {
   self endon("death");
   if(isDefined(timeout)) {
     self thread notifyTimeOut(timeout, false, "stop_rushing_timeout");
   }
-  if(!isDefined(endon_flag))
+  if(!isDefined(endon_flag)) {
     endon_flag = "nothing";
+  }
   self waittill_any(endon_flag, "stop_rushing_timeout");
   self notify("stop_rushing");
   self rusher_reset();
 }
-
 rusher_reset() {
   self reset_rusher_anims();
   self.rusher = false;
@@ -78,7 +79,6 @@ rusher_reset() {
   self.disableArrivals = false;
   self.rushing_goalent Delete();
 }
-
 change_to_wounded() {
   self endon("death");
   self endon("stop_rushing");
@@ -95,7 +95,6 @@ change_to_wounded() {
     break;
   }
 }
-
 keep_rushing_player(player) {
   self endon("death");
   self endon("stop_rushing");
@@ -105,7 +104,6 @@ keep_rushing_player(player) {
     self waittill_any("goal", "timeout");
   }
 }
-
 notifyTimeOut(timeout, endon_goal, notify_string) {
   self endon("death");
   self endon("stop_rushing");
@@ -115,18 +113,17 @@ notifyTimeOut(timeout, endon_goal, notify_string) {
   wait(timeOut);
   self notify(notify_string);
 }
-
 rusher_yelling() {
   self endon("death");
   self endon("stop_rushing");
-  if(isDefined(self.noRusherYell) && self.noRusherYell)
+  if(isDefined(self.noRusherYell) && self.noRusherYell) {
     return;
+  }
   while(1) {
     wait(RandomFloatRange(1, 3));
     self playSound("chr_npc_charge_viet");
   }
 }
-
 set_rusher_type() {
   if(self usingShotgun()) {
     self.rusherType = "shotgun";
@@ -150,7 +147,7 @@ set_rusher_type() {
     self.rightGunModel setModel(GetWeaponModel(self.weapon));
     self.rightGunModel UseWeaponHideTags(self.weapon);
     self.rightGunModel LinkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
-    self.rightGunModel hide();
+    self.rightGunModel Hide();
     self.secondGunHand = "left";
     self thread dualWeaponDropLogic();
     self thread fakeDualWieldShooting();
@@ -163,31 +160,28 @@ set_rusher_type() {
     }
   }
 }
-
 fakeDualWieldShooting() {
   self endon("death");
   while(1) {
     self waittill("shoot");
     if(self.secondGunHand == "left") {
       self animscripts\shared::placeWeaponOn(self.weapon, "left");
-      self.leftGunModel hide();
+      self.leftGunModel Hide();
       self.rightGunModel Show();
       self.secondGunHand = "right";
     } else {
       self animscripts\shared::placeWeaponOn(self.weapon, "right");
       self.leftGunModel Show();
-      self.rightGunModel hide();
+      self.rightGunModel Hide();
       self.secondGunHand = "left";
     }
   }
 }
-
 deleteFakeWeaponsOnDeath() {
   self waittill("death");
   self.leftGunModel Delete();
   self.rightGunModel Delete();
 }
-
 dualWeaponDropLogic() {
   dualWeaponName = "";
   switch (self.weapon) {

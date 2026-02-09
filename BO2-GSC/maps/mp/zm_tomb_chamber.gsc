@@ -54,7 +54,6 @@ watch_chamber_wall() {
 
     wait 0.05;
   }
-
 }
 
 cap_value(val, min, max) {

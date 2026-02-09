@@ -23,7 +23,6 @@ class areaofeffect {
     state = 0;
     var_be1913ae = gettime() + 100;
   }
-
 }
 
 class class_698343df {
@@ -32,7 +31,6 @@ class class_698343df {
   constructor() {
     var_9a08bb02 = [];
   }
-
 }
 
 autoexec __init__system__() {

@@ -1,7 +1,7 @@
 main() {
   // Clientsideeffects for MP
 
-  if(getdvar("clientSideEffects", "1") != "1") {
+  if(getDvar("clientSideEffects", "1") != "1") {
     maps\createfx\mp_overwatch_fx::main();
   }
 

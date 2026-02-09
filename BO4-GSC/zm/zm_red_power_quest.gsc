@@ -333,7 +333,7 @@ function_3ff7750a() {
   while(true) {
     var_a5e3ee12 = trigger::wait_till("trigger_amph_entrance");
 
-    if(isplayer(var_a5e3ee12.who)) {
+    if(isPlayer(var_a5e3ee12.who)) {
       player = var_a5e3ee12.who;
       break;
     }
@@ -762,7 +762,7 @@ function_aab4eb23() {
     s_waitresult = self waittill(#"damage");
     e_attacker = s_waitresult.attacker;
 
-    if(isplayer(e_attacker) && zm_utility::is_player_valid(e_attacker, 0, 0, 0)) {
+    if(isPlayer(e_attacker) && zm_utility::is_player_valid(e_attacker, 0, 0, 0)) {
       var_168ccd6b = getent("vol_power_quest_kill_zone", "targetname");
 
       if(e_attacker istouching(var_168ccd6b)) {
@@ -1452,7 +1452,7 @@ function_2a80a9cc(b_run = 0, b_sprint = 0) {
 function_75c83fbf(s_params) {
   e_attacker = s_params.eattacker;
 
-  if(isplayer(e_attacker) && isDefined(self.var_ae4569d5) && self.var_ae4569d5) {
+  if(isPlayer(e_attacker) && isDefined(self.var_ae4569d5) && self.var_ae4569d5) {
     if(zombie_utility::get_zombie_var_team(#"zombie_powerup_double_points_on", #"allies")) {
       n_points = 20;
     } else {

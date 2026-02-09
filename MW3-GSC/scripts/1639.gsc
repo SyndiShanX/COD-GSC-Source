@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::_id_2AC2("gaz_tigr_turret", var_0, var_1, var_2);
   maps\_vehicle::_id_2AD2(::_id_2B1D);
   maps\_vehicle::_id_2ACD(::_id_3E58);
-  maps\_vehicle::_id_2AC1( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  maps\_vehicle::_id_2AC1(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   maps\_vehicle::_id_2AC5();
   maps\_vehicle::_id_2ACE(999, 500, 1500);
   maps\_vehicle::_id_2AC6("axis");
@@ -19,7 +19,6 @@ main(var_0, var_1, var_2) {
     maps\_vehicle::_id_2A4A("dshk_gaz", "tag_turret", "weapon_dshk_turret", undefined, "auto_ai", 0.2, -20, -14);
   } else {
     maps\_vehicle::_id_2ACA(::_id_3A9D, ::_id_3A9C);
-
   }
   _id_4436(var_2);
   var_3 = maps\_vehicle::_id_2B1A(var_0, var_2);
@@ -104,7 +103,6 @@ _id_3A9D() {
 
   for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
-
   }
   var_0[0]._id_24F2 = "tag_driver";
   var_0[1]._id_24F2 = "tag_passenger";

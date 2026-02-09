@@ -110,7 +110,7 @@ chicken_achievement() {
 chicken_achievement_think() {
   self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
 
-  if(!isplayer(attacker)) {
+  if(!isPlayer(attacker)) {
     return;
   }
   level.chickens_killed[level.chickens_killed.size] = gettime();
@@ -435,10 +435,7 @@ solorun_roof_obj_update_pos(objID) {
   //Objective_SetPointerTextOverride( objID, &"FAVELA_ESCAPE_OBJ_JUMP_MARKER" );
 }
 
-// --------------------------
-// -- STARTS --
-// --------------------------
-build_starts() {
+// -------------------------- // -- STARTS -- // -------------------------- build_starts() {
   default_start(::start_radiotower);
 
   add_start("intro", ::start_radiotower, "map start");
@@ -732,10 +729,7 @@ start_solorun_chopper() {
   thread solorun("chopperjump");
 }
 
-// ------------------
-// --- RADIOTOWER ---
-// ------------------
-radiotower() {
+// ------------------ // --- RADIOTOWER --- // ------------------ radiotower() {
   thread intro_rojas_crucified();
   thread favesc_combat_music();
   thread radiotower_crowd_walla();
@@ -757,7 +751,7 @@ radiotower() {
 
   thread radiotower_runpath_dialogue();
 
-  if(GetDvar("introscreen") != "0") {
+  if(getDvar("introscreen") != "0") {
     level waittill("introscreen_complete");
   } else {
     flag_set("introscreen_start_dialogue");
@@ -839,7 +833,7 @@ intro_rojas_crucified() {
       continue;
     }
 
-    if(IsPlayer(who)) {
+    if(isPlayer(who)) {
       break;
     }
   }
@@ -881,10 +875,7 @@ intro_rojas_crucified_cleanup(rojas, animref, restraints) {
   restraints Delete();
 }
 
-// ---------------
-// --- STREETS ---
-// ---------------
-street(startPoint) {
+// --------------- // --- STREETS --- // --------------- street(startPoint) {
   thread friendly_colors(startPoint);
 
   thread street_dialogue();
@@ -926,7 +917,6 @@ friendly_colors(startPoint) {
 
     thread color_flags_advance(market_trigPrefix, market_numTrigs);
     flag_wait(market_trigPrefix + "_" + market_numTrigs);
-
   } else {
     // SPECIAL CASE ALTERNATE LOGIC FOR START POINTS
     if(startPoint == "vista2") {
@@ -948,10 +938,7 @@ friendly_colors(startPoint) {
   }
 }
 
-// --------------
-// --- MARKET ---
-// --------------
-market() {
+// -------------- // --- MARKET --- // -------------- market() {
   thread market_dialogue();
   thread market_fake_choppers();
 
@@ -1281,10 +1268,7 @@ market_evac_sarge_should_idle() {
   return true;
 }
 
-// ----------------
-// --- ROOF RUN ---
-// ----------------
-roofrun() {
+// ---------------- // --- ROOF RUN --- // ---------------- roofrun() {
   autosave_by_name("roofrun_start");
 
   level.runnersDone = 0;
@@ -1347,10 +1331,7 @@ roofrun_chopper_cargodoor_open() {
   chopper anim_single_solo(chopper, "cargodoor_open");
 }
 
-// ----------------
-// --- SOLO RUN ---
-// ----------------
-solorun(start) {
+// ---------------- // --- SOLO RUN --- // ---------------- solorun(start) {
   flag_set("solorun_start");
 
   waitBeforeJump = undefined;
@@ -1460,13 +1441,13 @@ solorun_balcony_save_aicheck() {
       continue;
     }
 
-    if(!IsPlayer(enemy.enemy)) {
+    if(!isPlayer(enemy.enemy)) {
       continue;
     }
 
     // is trying to melee the player
-    if(isDefined(enemy.Melee) && isDefined(enemy.melee.target) && IsPlayer(enemy.melee.target)) {
-      /# maps\_autosave::AutoSavePrint( "autosave failed: AI meleeing player" );
+    if(isDefined(enemy.Melee) && isDefined(enemy.melee.target) && isPlayer(enemy.melee.target)) {
+      maps\_autosave::AutoSavePrint("autosave failed: AI meleeing player");
       return (false);
     }
 
@@ -1477,7 +1458,7 @@ solorun_balcony_save_aicheck() {
 
     // level specific!he's in the room behind the player
     if(volume IsTouching(enemy)) {
-      /# maps\_autosave::AutoSavePrint( "autosave failed: AI are in a volume close behind the player" );
+      maps\_autosave::AutoSavePrint("autosave failed: AI are in a volume close behind the player");
       return false;
     }
 
@@ -1489,7 +1470,7 @@ solorun_balcony_save_aicheck() {
     	
     	if( dist < 360 )
     	{
-    		/# maps\_autosave::AutoSavePrint( "autosave failed: AI too close to player" );
+    		maps\_autosave::AutoSavePrint( "autosave failed: AI too close to player" );
     		return false;
     	}
     	else
@@ -1509,13 +1490,13 @@ solorun_balcony_save_aicheck() {
     // recently shot at the player
     if(enemy.a.lastShootTime > GetTime() - 500) {
       if(enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
-        /# maps\_autosave::AutoSavePrint( "autosave failed: AI firing on player" );
+        maps\_autosave::AutoSavePrint("autosave failed: AI firing on player");
         return false;
       }
     }
 
     if(isDefined(enemy.a.aimIdleThread) && enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
-      /# maps\_autosave::AutoSavePrint( "autosave failed: AI aiming at player" );
+      maps\_autosave::AutoSavePrint("autosave failed: AI aiming at player");
       return false;
     }
   }

@@ -249,7 +249,6 @@ hostmigrationtimerthink_internal() {
     self._host_migration_link_helper = ent;
 
     println("Linking player to ent " + self._host_migration_link_entity.targetname);
-
   }
 
   self.hostmigrationcontrolsfrozen = 1;
@@ -267,7 +266,6 @@ hostmigrationtimerthink() {
     self.hostmigrationcontrolsfrozen = 0;
 
     println(" Host migration unfreeze controls");
-
   }
 
   if(isDefined(self._host_migration_link_entity)) {
@@ -318,7 +316,6 @@ waitlongdurationwithhostmigrationpause(duration) {
 
   if(gettime() != endtime) {
     println("SCRIPT WARNING: gettime() = " + gettime() + " NOT EQUAL TO endtime = " + endtime);
-
   }
 
   waittillhostmigrationdone();
@@ -381,9 +378,7 @@ find_alternate_player_place(v_origin, min_radius, max_radius, max_height, ignore
             override_abort = 0;
 
             if(isDefined(level._chugabud_reject_node_override_func))
-              override_abort = [
-                [level._chugabud_reject_node_override_func]
-              ](v_origin, n_node);
+              override_abort = [[level._chugabud_reject_node_override_func]](v_origin, n_node);
 
             if(!override_abort) {
               found_node = n_node;

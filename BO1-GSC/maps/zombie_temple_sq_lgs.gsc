@@ -19,13 +19,11 @@ init() {
   set_stage_time_limit("sq", "LGS", 5 * 60);
   declare_stage_asset_from_struct("sq", "LGS", "sq_lgs_crystal", ::lgs_crystal);
 }
-
 init_stage() {
   maps\zombie_temple_sq_brock::delete_radio();
   flag_clear("meteor_impact");
   level thread lgs_intro();
 }
-
 lgs_intro() {
   exploder(600);
   wait(4.0);
@@ -39,31 +37,28 @@ lgs_intro() {
   wait(1.0);
   flag_set("meteor_impact");
 }
-
 play_nikolai_farting() {
   level endon("sq_LGS_over");
   wait(2);
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    if(players[i] getEntityNumber() == 1) {
+    if(players[i] getentitynumber() == 1) {
       players[i] playSound("evt_sq_lgs_fart");
       return;
     }
   }
 }
-
 play_intro_audio() {
   playsoundatposition("evt_sq_lgs_meteor_incoming", (-1680, -780, 147));
   wait(3.3);
   playsoundatposition("evt_sq_lgs_meteor_impact", (-1229, -1642, 198));
 }
-
 first_damage() {
   self endon("death");
   self endon("first_damage_done");
   while(1) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       self.owner_ent notify("triggered");
       attacker thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 1);
       return;
@@ -73,7 +68,6 @@ first_damage() {
     }
   }
 }
-
 wait_for_player_to_get_close() {
   self endon("death");
   self endon("first_damage_done");
@@ -88,31 +82,28 @@ wait_for_player_to_get_close() {
     wait(.1);
   }
 }
-
 report_melee_early() {
   self endon("death");
   self endon("shrunk");
   while(1) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-    if(isplayer(attacker) && dmg_type == "MOD_MELEE") {
+    if(isPlayer(attacker) && dmg_type == "MOD_MELEE") {
       attacker thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 3);
       wait(5.0);
     }
   }
 }
-
 wait_for_melee() {
   self endon("death");
   while(1) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-    if(isplayer(attacker) && dmg_type == "MOD_MELEE") {
+    if(isPlayer(attacker) && dmg_type == "MOD_MELEE") {
       self.owner_ent notify("triggered");
       attacker thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 6);
       return;
     }
   }
 }
-
 check_for_closed_slide(ent) {
   if(!flag("waterslide_open")) {
     self endon("death");
@@ -141,7 +132,6 @@ check_for_closed_slide(ent) {
     }
   }
 }
-
 water_trail(ent) {
   self endon("death");
   while(1) {
@@ -155,10 +145,9 @@ water_trail(ent) {
     }
   }
 }
-
 lgs_crystal() {
   self endon("death");
-  self hide();
+  self Hide();
   flag_wait("meteor_impact");
   self Show();
   self.trigger = spawn("trigger_damage", self.origin, 0, 32, 72);
@@ -177,7 +166,7 @@ lgs_crystal() {
     if(!isDefined(time)) {
       time = 1.0;
     }
-    self moveTo(struct.origin, time, time / 10);
+    self moveto(struct.origin, time, time / 10);
     self waittill("movedone");
     self playSound("evt_sq_lgs_crystal_hit1");
     target = struct.target;
@@ -209,7 +198,7 @@ lgs_crystal() {
   self UseAnimTree(#animtree);
   self.animname = "crystal";
   vehicle = SpawnVehicle("p_ztem_glyphs_00", "crystal_mover", "misc_freefall", self.origin, self.angles);
-  vehicle hide();
+  vehicle Hide();
   vehicle._crystal = self;
   level._lgs_veh = vehicle;
   wait_network_frame();
@@ -232,7 +221,7 @@ lgs_crystal() {
   flag_wait("minecart_geyser_active");
   self notify("kill_bobble");
   self setclientflag(level._CF_SCRIPTMOVER_CLIENT_FLAG_WATER_TRAIL);
-  self moveTo(self.origin + (0, 0, 4000), 2, 0.1);
+  self moveto(self.origin + (0, 0, 4000), 2, 0.1);
   level notify("suspend_timer");
   level notify("raise_crystal_1");
   level notify("raise_crystal_2");
@@ -240,22 +229,21 @@ lgs_crystal() {
   level waittill("raised_crystal_3");
   self clearclientflag(level._CF_SCRIPTMOVER_CLIENT_FLAG_WATER_TRAIL);
   wait(2);
-  holder = getEnt("empty_holder", "script_noteworthy");
+  holder = GetEnt("empty_holder", "script_noteworthy");
   self.origin = (holder.origin[0], holder.origin[1], self.origin[2]);
   self setModel("p_ztem_crystal");
   playsoundatposition("evt_sq_lgs_crystal_incoming", (holder.origin[0], holder.origin[1], holder.origin[2] + 134));
-  self moveTo((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
+  self moveto((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
   self waittill("movedone");
-  self stopLoopSound(1);
+  self stoploopsound(1);
   self playSound("evt_sq_lgs_crystal_landinholder");
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 8);
   level notify("crystal_dropped");
-  self hide();
+  self Hide();
   wait(5.0);
   stage_completed("sq", "LGS");
 }
-
 crystal_spin() {
   self endon("death");
   self endon("kill_bobble");
@@ -265,7 +253,6 @@ crystal_spin() {
     wait t;
   }
 }
-
 crystal_bobble() {
   self endon("death");
   self endon("kill_bobble");
@@ -274,13 +261,12 @@ crystal_bobble() {
   bottom_pos = node.origin + (0, 0, 4);
   top_pos = bottom_pos + (0, 0, 3);
   while(1) {
-    self moveTo(top_pos + (0, 0, RandomFloat(3)), 0.2 + RandomFloat(0.1), 0.1);
+    self moveto(top_pos + (0, 0, RandomFloat(3)), 0.2 + RandomFloat(0.1), 0.1);
     self waittill("movedone");
-    self moveTo(bottom_pos + (0, 0, RandomFloat(5)), 0.05 + RandomFloat(0.07), 0, 0.03);
+    self moveto(bottom_pos + (0, 0, RandomFloat(5)), 0.05 + RandomFloat(0.07), 0, 0.03);
     self waittill("movedone");
   }
 }
-
 stage_logic() {}
 exit_stage(success) {
   if(isDefined(level._lgs_veh)) {

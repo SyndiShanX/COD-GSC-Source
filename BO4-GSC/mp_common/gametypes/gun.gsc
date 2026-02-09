@@ -39,8 +39,8 @@ event_handler[gametype_init] main(eventstruct) {
   level.setbacksperdemotion = getgametypesetting(#"setbacks");
   level.inactivitykick = 120;
   level.var_f46d16f0 = 1;
-  setdvar(#"hash_137c8b2b96ac6c72", 0.2);
-  setdvar(#"compassradarpingfadetime", 0.75);
+  setDvar(#"hash_137c8b2b96ac6c72", 0.2);
+  setDvar(#"compassradarpingfadetime", 0.75);
   globallogic_spawn::addsupportedspawnpointtype("gg");
   level.gunprogression = [];
   gunlist = getgametypesetting(#"gunselection");
@@ -209,7 +209,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     return;
   }
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(attacker == self) {
       self thread demoteplayer(attacker);
       return;

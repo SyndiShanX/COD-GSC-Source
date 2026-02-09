@@ -64,7 +64,7 @@ function_35e11623(deathcircle, var_898879a6) {
   excludelist = [# "eq_acid_bomb": 1, #"eq_cluster_semtex_grenade": 1, #"eq_molotov": 1, #"eq_slow_grenade": 1, #"eq_swat_grenade": 1, #"eq_wraith_fire": 1, #"frag_grenade": 1, #"willy_pete": 1];
 
   foreach(player in players) {
-    if(!isplayer(player)) {
+    if(!isPlayer(player)) {
       continue;
     }
 
@@ -311,7 +311,6 @@ function_ada16428(deathcircle, var_898879a6) {
   if(getdvarint(#"hash_55e8ad2b1d030870", 0) && deleted > 0) {
     iprintlnbold("<dev string:x4d>" + level.var_cd8f416a.size + "<dev string:x5f>" + deleted);
   }
-
 }
 
 function_213a12e4() {

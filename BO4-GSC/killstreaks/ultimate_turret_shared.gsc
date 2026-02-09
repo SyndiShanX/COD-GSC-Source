@@ -153,7 +153,7 @@ initturret() {
 
 activateturret() {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
   if(isDefined(player.var_c306ebe3)) {
     return false;
@@ -371,7 +371,7 @@ function_7f9eb7f() {
 
 onplaceturret(turret) {
   player = self;
-  assert(isplayer(player));
+  assert(isPlayer(player));
 
   if(isDefined(turret.vehicle)) {
     turret.vehicle.origin = turret.origin;
@@ -451,7 +451,7 @@ onplaceturret(turret) {
 }
 
 respectnottargetedbysentryperk(player) {
-  if(!isplayer(player)) {
+  if(!isPlayer(player)) {
     return;
   }
 
@@ -551,7 +551,7 @@ onturretdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, v
         self.var_7eb3ebd5[einflictor getentitynumber()] = # "damage";
         self targetting_delay::function_a4d6d6d8(einflictor);
       }
-    } else if(isalive(eattacker) && issentient(eattacker) && !(isplayer(eattacker) && eattacker isremotecontrolling()) && is_valid_target(eattacker, self.team)) {
+    } else if(isalive(eattacker) && issentient(eattacker) && !(isPlayer(eattacker) && eattacker isremotecontrolling()) && is_valid_target(eattacker, self.team)) {
       self.favoriteenemy = eattacker;
       self.var_c8072bcc = gettime();
       self.var_7eb3ebd5[eattacker getentitynumber()] = # "damage";
@@ -598,13 +598,13 @@ ondeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, ps
     } else if(isDefined(eattacker) && isDefined(turretvehicle.owner) && eattacker != turretvehicle.owner) {
       turretvehicle.parentstruct killstreaks::play_destroyed_dialog_on_owner(turretvehicle.killstreaktype, turretvehicle.killstreakid);
 
-      if(isplayer(eattacker) && isDefined(level.var_bbc796bf)) {
+      if(isPlayer(eattacker) && isDefined(level.var_bbc796bf)) {
         self[[level.var_bbc796bf]](eattacker, weapon);
       }
     }
   }
 
-  if(isDefined(eattacker) && isplayer(eattacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(eattacker))) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(eattacker))) {
     eattacker challenges::destroyscorestreak(weapon, turretvehicle.controlled, 1, 0);
     eattacker stats::function_dad108fa(#"destroy_turret", 1);
     eattacker stats::function_e24eec31(weapon, #"destroy_turret", 1);
@@ -891,7 +891,7 @@ function_b8952a40(turret_index) {
   while(isDefined(veh.enemy) && !(isDefined(veh.isstunned) && veh.isstunned) && !(isDefined(veh.isjammed) && veh.isjammed)) {
     var_559acfe = veh.enemy getvelocity() * getdvarfloat(#"hash_3a25aaa27558e77b", 0.075);
 
-    if(isplayer(veh.enemy)) {
+    if(isPlayer(veh.enemy)) {
       target_offset = get_target_offset(veh.enemy);
       veh turretsettarget(turret_index, veh.enemy, target_offset + var_559acfe);
     } else {

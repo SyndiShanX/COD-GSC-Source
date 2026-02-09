@@ -1,6 +1,6 @@
 /***************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\_zombiemode_ai_napalm.csc
+ * Script: clientscripts\_zombiemode_ai_napalm\.csc
 ***************************************************/
 
 #include clientscripts\_utility;
@@ -13,7 +13,6 @@ init_napalm_zombie() {
   level.napalmPlayerWarningRadiusSqr *= level.napalmPlayerWarningRadiusSqr;
   napalm_fx();
 }
-
 napalm_fx() {
   level._effect["napalm_fire_forearm"] = LoadFX("maps/zombie_temple/fx_ztem_napalm_zombie_forearm");
   level._effect["napalm_fire_torso"] = LoadFX("maps/zombie_temple/fx_ztem_napalm_zombie_torso");
@@ -23,7 +22,6 @@ napalm_fx() {
   level._effect["napalm_steam"] = LoadFX("maps/zombie_temple/fx_ztem_zombie_torso_steam_runner");
   level._effect["napalm_feet_steam"] = LoadFX("maps/zombie_temple/fx_ztem_zombie_torso_steam_runner");
 }
-
 napalm_zombie_spawn(client_num, set, newEnt) {
   if(set) {
     level.napalm_zombie = self;
@@ -39,7 +37,6 @@ napalm_zombie_spawn(client_num, set, newEnt) {
     level.napalm_zombie = undefined;
   }
 }
-
 _napalm_zombie_RunSteamEffects(client_num) {
   self endon("napalm_killed");
   self endon("death");
@@ -70,7 +67,6 @@ _napalm_zombie_RunSteamEffects(client_num) {
     wait .1;
   }
 }
-
 _napalm_zombie_RunEffects(client_num) {
   fx = [];
   fx["J_Wrist_RI"] = "napalm_fire_forearm";
@@ -93,7 +89,7 @@ _napalm_zombie_RunEffects(client_num) {
   }
   self waittill("stop_fx");
   if(isDefined(watch[0])) {
-    watch[0] stopLoopSound(.25);
+    watch[0] stoploopsound(.25);
   }
   for(i = 0; i < watch.size; i++) {
     if(isDefined(watch[i])) {
@@ -101,12 +97,10 @@ _napalm_zombie_RunEffects(client_num) {
     }
   }
 }
-
 napalm_zombie_explode_callback(client_num, set, newEnt) {
   self thread napalm_glow_explode(client_num);
   self thread _zombie_RunExplosionWindupEffects(client_num);
 }
-
 _zombie_RunExplosionWindupEffects(client_num) {
   fx = [];
   fx["J_Elbow_LE"] = "napalm_fire_forearm_end";
@@ -131,7 +125,6 @@ _zombie_RunExplosionWindupEffects(client_num) {
     }
   }
 }
-
 _napalm_zombie_RunWetEffects(client_num) {
   fx = [];
   fx["J_SpineLower"] = "napalm_steam";
@@ -152,7 +145,6 @@ _napalm_zombie_RunWetEffects(client_num) {
     }
   }
 }
-
 _zombie_SetupFXOnJoint(client_num, jointName, fxName, offset) {
   origin = self GetTagOrigin(jointName);
   effectEnt = spawn(client_num, origin, "script_model");
@@ -165,7 +157,6 @@ _zombie_SetupFXOnJoint(client_num, jointName, fxName, offset) {
   playFXOnTag(client_num, level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }
-
 set_footstep_override_for_napalm_zombie(set) {
   if(set) {
     self._footstepOverrideEffect = "napalm_zombie_footstep";
@@ -175,7 +166,6 @@ set_footstep_override_for_napalm_zombie(set) {
     self.step_sound = "zmb_napalm_step";
   }
 }
-
 player_napalm_radius_overlay_fade() {
   self endon("death");
   self endon("disconnect");
@@ -202,7 +192,6 @@ player_napalm_radius_overlay_fade() {
     wait(0.1);
   }
 }
-
 player_can_see_napalm(ent_napalm) {
   trace = undefined;
   if(isDefined(level.napalm_zombie)) {
@@ -213,7 +202,6 @@ player_can_see_napalm(ent_napalm) {
   }
   return false;
 }
-
 napalm_zombie_wet_callback(client_num, set, newEnt) {
   if(set) {
     self napalm_start_wet_fx(client_num);
@@ -221,38 +209,31 @@ napalm_zombie_wet_callback(client_num, set, newEnt) {
     self napalm_end_wet_fx(client_num);
   }
 }
-
 napalm_start_wet_fx(client_num) {
   self notify("stop_fx");
   self thread _napalm_zombie_RunWetEffects(client_num);
   self.wet = true;
   self thread napalm_glow_wet(client_num);
 }
-
 napalm_end_wet_fx(client_num) {
   self notify("stop_fx");
   self thread _napalm_zombie_RunEffects(client_num);
   self.wet = false;
   self thread napalm_glow_normal(client_num);
 }
-
 napalm_set_glow(client_num, glowVal) {
   self.glow_val = glowVal;
   self setshaderconstant(client_num, 0, 0, 0, 0, glowVal);
 }
-
 napalm_glow_normal(client_num) {
   self thread napalm_glow_lerp(client_num, 2.5);
 }
-
 napalm_glow_explode(client_num) {
   self thread napalm_glow_lerp(client_num, 10.0);
 }
-
 napalm_glow_wet(client_num) {
   self thread napalm_glow_lerp(client_num, 0.5);
 }
-
 napalm_glow_lerp(client_num, glowVal) {
   self notify("glow_lerp");
   self endon("glow_lerp");

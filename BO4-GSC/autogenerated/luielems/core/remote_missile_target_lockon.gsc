@@ -41,7 +41,6 @@ class cremote_missile_target_lockon: cluielem {
     cluielem::add_clientfield("isHawkTag", 13000, 1, "int");
     cluielem::add_clientfield("killed", 13000, 1, "int");
   }
-
 }
 
 register(uid) {

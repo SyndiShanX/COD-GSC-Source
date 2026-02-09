@@ -18,7 +18,6 @@ _id_435F() {
     var_0 = self._id_4360;
   } else {
     var_0 = randomint(360);
-
   }
   var_1 = (self.angles[0], var_0, self.angles[2]);
   var_2 = anglesToForward(var_1);
@@ -44,7 +43,6 @@ _id_435F() {
 
   if(var_13 < 0) {
     var_13 = var_13 * -1;
-
   }
   var_14 = var_12 + var_13 / var_8;
   self movegravity(var_2, var_14);
@@ -82,7 +80,6 @@ drawline(var_0, var_1, var_2, var_3) {
 _id_4361(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   if(isDefined(var_1)) {
     for(;;) {

@@ -632,7 +632,7 @@ find_teleport_spot_for_ally(var_0, var_1) {
 }
 
 player_vision_blind(var_0) {
-  var_1 = getdvar("vision_set_current");
+  var_1 = getDvar("vision_set_current");
   visionsetnaked("generic_flash", 0.2);
   wait(var_0);
   visionsetnaked(var_1, 0.2);
@@ -1024,7 +1024,7 @@ m880_crash_kill_in_volume() {
   if(level.player istouching(var_1)) {
     level.player kill();
     wait 0.1;
-    setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+    setDvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
     level thread maps\_utility::missionfailedwrapper();
   }
 
@@ -1059,7 +1059,7 @@ wait_then_check_if_player_touching_kill(var_0, var_1) {
     if(level.player istouching(self)) {
       level.player kill();
       wait 0.1;
-      setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+      setDvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
       level thread maps\_utility::missionfailedwrapper();
     }
 
@@ -1094,7 +1094,7 @@ convoy_kill_player() {
   var_0 waittill("trigger");
   level.player kill();
   wait 0.1;
-  setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+  setDvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
   level thread maps\_utility::missionfailedwrapper();
 }
 
@@ -1776,7 +1776,7 @@ convoy_check() {
         wait 0.2;
         level.player kill();
         wait 0.1;
-        setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
+        setDvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
         level thread maps\_utility::missionfailedwrapper();
       }
     }
@@ -2121,7 +2121,7 @@ mlrs_kill1_start(var_0, var_1) {
     level.convoy_tall_barricade_02 hide();
     setslowmotion(0.25, 1.0, 0.25);
     wait 1.0;
-    setdvar("ui_deadquote", &"FLOOD_LAUNCHER_QTE_FAIL");
+    setDvar("ui_deadquote", &"FLOOD_LAUNCHER_QTE_FAIL");
     level thread maps\_utility::missionfailedwrapper();
   } else {
     mlrs_kill1_end_spawn(var_2, var_6, var_0, var_1, var_3, var_4, level.m880_radiation_gate);

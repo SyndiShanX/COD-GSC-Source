@@ -5,8 +5,8 @@
 ********************************/
 
 initglobals() {
-  if(getdvar("debug_drones") == "")
-    setdvar("debug_drones", "0");
+  if(getDvar("debug_drones") == "")
+    setDvar("debug_drones", "0");
 
   if(!isDefined(level.lookahead_value))
     level.drone_lookahead_value = 200;
@@ -556,7 +556,7 @@ drone_move() {
         var_17 = var_0[var_0.size - 1]["origin"] - (0, 0, 100);
         var_18 = physicstrace(var_16, var_17);
 
-        if(getdvar("debug_drones") == "1") {
+        if(getDvar("debug_drones") == "1") {
           thread common_scripts\utility::draw_line_for_time(var_16, var_17, 1, 1, 1, var_5);
           thread common_scripts\utility::draw_line_for_time(self.origin, var_18, 0, 0, 1, var_5);
         }
@@ -606,7 +606,7 @@ drone_move() {
     if(!var_4)
       self.drone_look_ahead_point = var_20;
 
-    if(getdvar("debug_drones") == "1") {
+    if(getDvar("debug_drones") == "1") {
       thread common_scripts\utility::draw_line_for_time(var_16, var_17, 1, 1, 1, var_5);
       thread draw_point(var_20, 1, 0, 0, 16, var_5);
     }
@@ -618,7 +618,7 @@ drone_move() {
     var_19 = var_23 * var_22;
     var_19 = var_19 + self.origin;
 
-    if(getdvar("debug_drones") == "1")
+    if(getDvar("debug_drones") == "1")
       thread common_scripts\utility::draw_line_for_time(self.origin, var_19, 0, 0, 1, var_5);
 
     self moveto(var_19, var_5);

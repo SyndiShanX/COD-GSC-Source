@@ -194,7 +194,7 @@ function function_92008f69(var_ec7cc126) {
 
 function function_76de618f(vol_area, var_ec7cc126 = 0) {
   self endon("death");
-  if(!isplayer(self) && var_ec7cc126 == 1) {
+  if(!isPlayer(self) && var_ec7cc126 == 1) {
     self thread function_5acfb0f();
   }
   if(!self istouching(vol_area)) {
@@ -206,7 +206,7 @@ function function_76de618f(vol_area, var_ec7cc126 = 0) {
     var_499440d9 = self.health;
   }
   if(isDefined(var_ec7cc126) && var_ec7cc126) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       if(level flag::get("solo_game") && self.lives > 0) {
         var_97786609 = struct::get_array("player_respawn_point", "targetname");
         a_s_points = [];
@@ -331,11 +331,11 @@ function function_65b37e40() {
   wait(0.05);
   level waittill("start_zombie_round_logic");
   wait(0.05);
-  setdvar("", 0);
+  setDvar("", 0);
   adddebugcommand("");
   while(true) {
     if(getdvarint("")) {
-      setdvar("", 0);
+      setDvar("", 0);
       level thread function_713600fe(1);
     }
     wait(0.5);

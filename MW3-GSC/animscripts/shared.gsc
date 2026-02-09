@@ -14,7 +14,6 @@ _id_0C9B(var_0, var_1, var_2) {
 
   if(var_3 != "none") {
     _id_23BE(var_0);
-
   }
   if(var_1 == "none") {
     _id_23C4();
@@ -23,18 +22,15 @@ _id_0C9B(var_0, var_1, var_2) {
 
   if(self.a._id_0EE4[var_1] != "none") {
     _id_23BE(self.a._id_0EE4[var_1]);
-
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   if(var_2 && (var_1 == "left" || var_1 == "right")) {
     _id_23BF(var_0, var_1);
     self.weapon = var_0;
   } else {
     _id_23BF(var_0, var_1);
-
   }
   _id_23C4();
 }
@@ -59,7 +55,6 @@ _id_23C0(var_0) {
 
   if(var_1 == "none") {
     return self.a._id_20A4[var_0];
-
   }
   return var_1;
 }
@@ -109,7 +104,6 @@ _id_23C4() {
 
     if(weapontype(var_3) == "riotshield" && isDefined(self._id_23C2)) {
       var_4 = self._id_23C2;
-
     }
     var_5 = getweaponmodel(var_3, var_4);
 
@@ -117,13 +111,11 @@ _id_23C4() {
       self attach(var_5, _id_23C7(var_2));
     } else {
       self attach(var_5, _id_23C7(var_2), 1);
-
     }
     var_6 = getweaponhidetags(var_3);
 
     for(var_7 = 0; var_7 < var_6.size; var_7++) {
       self hidepart(var_6[var_7], var_5);
-
     }
     if(self.weaponinfo[var_3]._id_209B && !self.weaponinfo[var_3]._id_209A) {
       self hidepart("tag_clip");
@@ -152,11 +144,9 @@ _id_0CE0() {
 _id_23C6() {
   if(!self.a._id_0CDF) {
     return 0;
-
   }
   if(animscripts\utility::_id_0CEA(self.weapon)) {
     return 0;
-
   }
   return isalive(self);
 }
@@ -181,7 +171,6 @@ _id_23C7(var_0) {
 _id_23C8(var_0) {
   if(!isDefined(var_0)) {
     var_0 = self.weapon;
-
   }
   if(var_0 == "none") {
     return;
@@ -194,13 +183,11 @@ _id_23C8(var_0) {
 
   if(self.dropweapon && var_1 != "none") {
     thread _id_23C9(var_0, var_1);
-
   }
   _id_23BE(var_0);
 
   if(var_0 == self.weapon) {
     self.weapon = "none";
-
   }
   _id_23C4();
 }
@@ -208,7 +195,6 @@ _id_23C8(var_0) {
 _id_0D73() {
   if(isDefined(self._id_2145)) {
     return "none";
-
   }
   var_0 = [];
   var_0[var_0.size] = "left";
@@ -238,14 +224,12 @@ _id_0D73() {
 _id_23C9(var_0, var_1) {
   if(self isragdoll()) {
     return "none";
-
   }
   self.a._id_20A4[var_1] = var_0;
   var_2 = var_0;
 
   if(issubstr(tolower(var_2), "rpg")) {
     var_2 = "rpg_player";
-
   }
   self dropweapon(var_2, var_1, 0);
   self endon("end_weapon_drop_" + var_1);
@@ -265,7 +249,6 @@ _id_0C51(var_0, var_1, var_2) {
 
     if(!isDefined(var_3)) {
       var_3 = "undefined";
-
     }
     var_4 = animscripts\notetracks::_id_23CA(var_3, var_0, var_1);
 
@@ -279,7 +262,6 @@ _id_111C(var_0) {
   if(!isDefined(self._id_0CAB)) {
     if(!isDefined(self._id_0CB1)) {
       return 0;
-
     }
     return _id_23CE(self._id_0CB1);
   }
@@ -292,7 +274,6 @@ _id_10E9() {
   if(!isDefined(self._id_0CAB)) {
     if(!isDefined(self._id_0CB1)) {
       return 0;
-
     }
     return _id_23CE(self._id_0CB1);
   }
@@ -305,7 +286,6 @@ _id_23CB() {
 
   if(self.script == "cover_crouch" && isDefined(self.a._id_0CF8) && self.a._id_0CF8 == "lean") {
     var_0 = var_0 - anim._id_0CAD;
-
   }
   return var_0;
 }
@@ -314,7 +294,6 @@ _id_23CC() {
   if(!isDefined(self._id_0CAB)) {
     if(!isDefined(self._id_0CB1)) {
       return 0;
-
     }
     return animscripts\combat_utility::_id_23B3(self._id_0CB1);
   }
@@ -349,17 +328,17 @@ _id_23CE(var_0) {
 _id_0F90(var_0) {
   self endon("killanimscript");
   _id_23CF(var_0);
-  self clearanim( % generic_aim_left, 0.5);
-  self clearanim( % generic_aim_right, 0.5);
+  self clearanim(%generic_aim_left, 0.5);
+  self clearanim(%generic_aim_right, 0.5);
 }
 
 _id_23CF(var_0) {
   self endon("rambo_aim_end");
   waittillframeend;
-  self clearanim( % generic_aim_left, 0.2);
-  self clearanim( % generic_aim_right, 0.2);
-  self setanimlimited( % generic_aim_45l, 1, 0.2);
-  self setanimlimited( % generic_aim_45r, 1, 0.2);
+  self clearanim(%generic_aim_left, 0.2);
+  self clearanim(%generic_aim_right, 0.2);
+  self setanimlimited(%generic_aim_45l, 1, 0.2);
+  self setanimlimited(%generic_aim_45r, 1, 0.2);
   var_1 = 0.2;
   var_2 = 0;
 
@@ -384,19 +363,17 @@ _id_23CF(var_0) {
 
       if(var_4 > 1) {
         var_4 = 1;
-
       }
-      self setanimlimited( % generic_aim_right, var_4, var_1);
-      self setanimlimited( % generic_aim_left, 0, var_1);
+      self setanimlimited(%generic_aim_right, var_4, var_1);
+      self setanimlimited(%generic_aim_left, 0, var_1);
     } else {
       var_4 = var_2 / 45;
 
       if(var_4 > 1) {
         var_4 = 1;
-
       }
-      self setanimlimited( % generic_aim_left, var_4, var_1);
-      self setanimlimited( % generic_aim_right, 0, var_1);
+      self setanimlimited(%generic_aim_left, var_4, var_1);
+      self setanimlimited(%generic_aim_right, 0, var_1);
     }
 
     wait(var_1);
@@ -415,15 +392,12 @@ _id_237A() {
     var_0 = anim._id_20DB[randomint(anim._id_20DB.size)];
   } else {
     var_0 = anim._id_20DA[randomint(anim._id_20DA.size)];
-
   }
   if(var_0 <= self._id_0CD1) {
     return var_0;
-
   }
   if(self._id_0CD1 <= 0) {
     return 1;
-
   }
   return self._id_0CD1;
 }
@@ -455,14 +429,12 @@ _id_23D1(var_0) {
 
   if(self.weaponinfo[self.weapon]._id_209B) {
     var_1 = getweaponclipmodel(self.weapon);
-
   }
   if(self.weaponinfo[self.weapon]._id_209A) {
     if(animscripts\utility::_id_0C95()) {
       self playSound("weap_reload_pistol_clipout_npc");
     } else {
       self playSound("weap_reload_smg_clipout_npc");
-
     }
     if(isDefined(var_1)) {
       self hidepart("tag_clip");
@@ -488,7 +460,6 @@ _id_23D1(var_0) {
       case "detach clip nohand":
         if(isDefined(var_1)) {
           self detach(var_1, "tag_inhand");
-
         }
         break;
       case "detach clip right":
@@ -504,7 +475,6 @@ _id_23D1(var_0) {
           self playSound("weap_reload_pistol_clipin_npc");
         } else {
           self playSound("weap_reload_smg_clipin_npc");
-
         }
         self.a._id_114D = 0;
         return;
@@ -522,12 +492,10 @@ _id_23D2(var_0, var_1) {
   }
   if(isDefined(var_1)) {
     self detach(var_0, var_1);
-
   }
   if(isalive(self)) {
     if(self.weapon != "none" && self.weaponinfo[self.weapon]._id_2099 != "none") {
       self showpart("tag_clip");
-
     }
     self.weaponinfo[self.weapon]._id_209A = 1;
   } else if(isDefined(var_1)) {
@@ -580,7 +548,6 @@ _id_23D4() {
 _id_0F93(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = ::_id_23D4;
-
   }
   for(var_3 = 0; var_3 < var_1 * 10; var_3++) {
     if(isalive(self.enemy)) {
@@ -592,7 +559,7 @@ _id_0F93(var_0, var_1, var_2) {
     if(animscripts\utility::_id_0F4C() && [[var_2]]()) {
       return;
     }
-    self setanimknoball(var_0, % body, 1, 0.1);
+    self setanimknoball(var_0, %body, 1, 0.1);
     wait 0.1;
   }
 }

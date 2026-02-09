@@ -898,7 +898,7 @@ drop_alien_fuses() {
 delay_spawn_glow_vfx_on(fuse, vfx) {
   fuse endon("death");
   wait(0.3);
-  playFxOnTag(level._effect[vfx], fuse, "tag_origin");
+  playFXOnTag(level._effect[vfx], fuse, "tag_origin");
 }
 
 item_keep_rotating(fuse) {
@@ -914,14 +914,14 @@ fuse_pick_up_monitor(fuse_1, fuse_2) {
   fuse_1 endon("death");
   fuse_1 makeUsable();
   fuse_1 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
-	
+
   foreach(player in level.players) {
     player thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
   }
 
   for(;;) {
     fuse_1 waittill("trigger", player);
-		
+
     if(isPlayer(player)) {
       player playLocalSound("part_pickup");
       player thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
@@ -933,8 +933,8 @@ fuse_pick_up_monitor(fuse_1, fuse_2) {
   scripts\cp\cp_interaction::add_to_current_interaction_list(getStruct("pap_upgrade", "script_noteworthy"));
   scripts\cp\cp_interaction::remove_from_current_interaction_list(getStruct("weapon_upgrade", "script_noteworthy"));
   level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
-  
-	foreach(player in level.players) {
+
+  foreach(player in level.players) {
     player setClientOmnvar("zm_special_item", 1);
   }
 
@@ -1180,7 +1180,7 @@ get_ufo_turret_target() {
 }
 
 can_be_attacked_by_ufo_turret(var_0) {
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     return 0;
   }
 

@@ -81,8 +81,9 @@ door_open(door_name, delete_door) {
   door connectpaths();
 
   if(isDefined(delete_door)) {
-    if(delete_door)
+    if(delete_door) {
       door delete();
+    }
   }
 }
 

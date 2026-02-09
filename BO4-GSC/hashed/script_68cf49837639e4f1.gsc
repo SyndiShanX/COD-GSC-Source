@@ -84,11 +84,11 @@ on_end(round_reset) {
 on_ai_killed(params) {
   e_attacker = params.eattacker;
 
-  if(!isplayer(e_attacker)) {
+  if(!isPlayer(e_attacker)) {
     e_attacker = params.einflictor;
   }
 
-  if(isDefined(params.weapon) && isplayer(e_attacker) && (zm_loadout::is_hero_weapon(params.weapon) || zm_hero_weapon::function_6a32b8f(params.weapon)) && isDefined(e_attacker.var_76bb4a3e) && e_attacker.var_76bb4a3e < level.var_f7e95a13) {
+  if(isDefined(params.weapon) && isPlayer(e_attacker) && (zm_loadout::is_hero_weapon(params.weapon) || zm_hero_weapon::function_6a32b8f(params.weapon)) && isDefined(e_attacker.var_76bb4a3e) && e_attacker.var_76bb4a3e < level.var_f7e95a13) {
     e_attacker.var_76bb4a3e++;
     e_attacker zm_trial_util::function_2190356a(e_attacker.var_76bb4a3e);
 

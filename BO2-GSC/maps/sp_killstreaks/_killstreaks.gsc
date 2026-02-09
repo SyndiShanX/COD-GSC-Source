@@ -26,8 +26,8 @@ preload() {
   if(!isDefined(level.killstreakrounddelay))
     level.killstreakrounddelay = 0;
 
-  if(getdvar(#"scr_allow_killstreak_building") == "")
-    setdvar("scr_allow_killstreak_building", "0");
+  if(getDvar(#"scr_allow_killstreak_building") == "")
+    setDvar("scr_allow_killstreak_building", "0");
 
   precachestring(&"MP_KILLSTREAK_N");
   killstreak_setup();
@@ -204,7 +204,6 @@ drawline(start, end, timeslice, color) {
     line(start, end, (1, 0, 0), 0, 1);
     wait 0.05;
   }
-
 }
 
 getkillstreaklevel(index, killstreak) {
@@ -938,10 +937,10 @@ onplayerspawned() {
 }
 
 killstreak_debug_think() {
-  setdvar("debug_killstreak", "");
+  setDvar("debug_killstreak", "");
 
   for(;;) {
-    cmd = getdvar(#"debug_killstreak");
+    cmd = getDvar(#"debug_killstreak");
 
     switch (cmd) {
       case "data_dump":
@@ -950,11 +949,10 @@ killstreak_debug_think() {
     }
 
     if(cmd != "")
-      setdvar("debug_killstreak", "");
+      setDvar("debug_killstreak", "");
 
     wait 0.5;
   }
-
 }
 
 killstreak_data_dump() {
@@ -1056,7 +1054,7 @@ killstreak_setup() {
 }
 
 callback_killstreakactorkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(shouldgivekillstreak(sweapon)) {
       attacker addtokillstreakcount(sweapon);
       attacker thread givekillstreakforstreak();

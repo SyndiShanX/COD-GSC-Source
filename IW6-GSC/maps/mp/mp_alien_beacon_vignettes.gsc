@@ -1680,7 +1680,7 @@ watch_trigger_by_player() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       break;
     }
   }

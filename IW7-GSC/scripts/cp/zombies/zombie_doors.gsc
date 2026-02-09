@@ -81,7 +81,7 @@ func_95B5(var_0) {
       continue;
     }
 
-    if(isplayer(var_6)) {
+    if(isPlayer(var_6)) {
       if(!var_6 scripts\cp\cp_interaction::can_purchase_interaction(var_1[0], level.interactions[var_1[0].script_noteworthy].cost, level.interactions[var_1[0].script_noteworthy].spend_type)) {
         level notify("interaction", "purchase_denied", level.interactions[var_1[0].script_noteworthy], var_6);
         var_6 func_100F4();
@@ -112,7 +112,7 @@ func_95B5(var_0) {
       scripts\engine\utility::flag_set("first_door_opened");
     }
 
-    if((isplayer(var_6) && var_6 scripts\cp\utility::is_valid_player()) || isDefined(var_0.allow_nonplayer_trigger)) {
+    if((isPlayer(var_6) && var_6 scripts\cp\utility::is_valid_player()) || isDefined(var_0.allow_nonplayer_trigger)) {
       foreach(var_9 in var_1) {
         if(!isDefined(level.spawn_volume_array[var_9.script_area])) {
           continue;
@@ -241,7 +241,7 @@ team_killdoor_think() {
 team_killdoor_activate() {
   for(;;) {
     self.trigger waittill("trigger", var_0);
-    if(!isplayer(var_0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
@@ -257,7 +257,7 @@ team_killdoor_deactivate() {
   self endon("killdoor_deactivate");
   for(;;) {
     self.trigger waittill("trigger", var_0);
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       create_killdoor_hud(var_0);
       childthread killdoor_timeout();
       thread player_timeout(var_0);
@@ -459,7 +459,7 @@ chi_door_think() {
       }
     }
 
-    if(isplayer(var_9) && var_9 scripts\cp\utility::is_valid_player()) {
+    if(isPlayer(var_9) && var_9 scripts\cp\utility::is_valid_player()) {
       foreach(var_15 in var_3) {
         if(!isDefined(level.spawn_volume_array[var_15.script_area])) {
           continue;

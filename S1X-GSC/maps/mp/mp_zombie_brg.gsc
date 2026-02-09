@@ -130,7 +130,7 @@ laddermonitor() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(isDefined(var_0.laddercheck)) {
         continue;
       } else if(var_0 isonladder()) {
@@ -190,7 +190,7 @@ disablepronevolumecheck() {
     for(;;) {
       var_2 waittill("trigger", var_3);
 
-      if(isplayer(var_3)) {
+      if(isPlayer(var_3)) {
         var_3 thread disableprone(var_2);
       }
     }
@@ -1244,7 +1244,7 @@ setupflyoveranimation(var_0, var_1, var_2, var_3) {
     waitframe();
   }
 
-  setdvar("lui_enabled", 0);
+  setDvar("lui_enabled", 0);
   level.zombiegamepaused = 1;
   wait 1.0;
   var_5 = spawn("script_model", (0, 0, 0));
@@ -1817,7 +1817,7 @@ goliathspawnexplosionradiusdamage(var_0) {
     if(isDefined(var_3.agent_type) && var_3.agent_type == "zombie_melee_goliath") {
       continue;
     } else {
-      if(isplayer(var_3) || isDefined(var_3.agentteam) && var_3.agentteam == level.playerteam) {
+      if(isPlayer(var_3) || isDefined(var_3.agentteam) && var_3.agentteam == level.playerteam) {
         var_4 = int(var_3.health * 0.5);
         var_3 dodamage(var_4, var_0);
         continue;
@@ -1872,7 +1872,7 @@ exploittriggermonitor() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       if(isDefined(self.script_parameters) && self.script_parameters == "exploitTriggerDmg") {
         thread exploittriggerdamage(var_0);
       }
@@ -2191,7 +2191,7 @@ windowexploitledgelogicthink() {
     self waittill("trigger", var_0);
     wait 1.5;
 
-    if(isplayer(var_0)) {
+    if(isPlayer(var_0)) {
       var_1 = maps\mp\agents\_agent_utility::getactiveagentsoftype("all");
 
       foreach(var_3 in var_1) {
@@ -2226,7 +2226,7 @@ shoveplayer() {
     var_1 waittill("trigger", var_2);
     wait 1.5;
 
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_3 = vectornormalize((var_2.origin + (-100, 0, 0) - var_2.origin) * (1, 1, 0));
       var_2 setvelocity(var_3 * 300);
     }

@@ -119,10 +119,11 @@ intro_main() {
   onsaverestored_callback(::intro_save_restore);
   run_scene_first_frame("intro");
 
-  if(isDefined(level.is_harper_alive) && level.is_harper_alive == 0)
+  if(isDefined(level.is_harper_alive) && level.is_harper_alive == 0) {
     run_scene_first_frame("intro_player_harperdead");
-  else
+  } else {
     run_scene_first_frame("intro_player");
+  }
 
   add_spawn_function_veh("ai_jetwing", ::ai_jetwing_think, 80);
   add_spawn_function_veh("ai_jetwing_chinese", ::ai_jetwing_think, 135, 3.5);
@@ -152,10 +153,11 @@ landing_main() {
 }
 
 intro() {
-  if(isDefined(level.is_harper_alive) && level.is_harper_alive == 0)
+  if(isDefined(level.is_harper_alive) && level.is_harper_alive == 0) {
     level thread run_scene("intro_player_harperdead");
-  else
+  } else {
     level thread run_scene("intro_player");
+  }
 
   level thread run_scene("intro");
   exploder(101);
@@ -308,8 +310,9 @@ player_avoid_drones() {
 
   foreach(vehicle in vehicles) {
     if(isalive(vehicle)) {
-      if(vehicle.vehicletype == "plane_jetwing_haiti_ai" || vehicle.vehicletype == "plane_jetwing_haiti_ai_hero")
+      if(vehicle.vehicletype == "plane_jetwing_haiti_ai" || vehicle.vehicletype == "plane_jetwing_haiti_ai_hero") {
         vehicle setspeed(90, 100, 100);
+      }
     }
   }
 
@@ -324,19 +327,23 @@ landing_lods() {
 }
 
 player_jetwing_land() {
-  if(isDefined(level.jetwing_harper))
+  if(isDefined(level.jetwing_harper)) {
     level.jetwing_harper delete();
+  }
 
-  if(isDefined(level.drop_vista_1))
+  if(isDefined(level.drop_vista_1)) {
     level.drop_vista_1 delete();
+  }
 
-  if(isDefined(level.drop_vista_1))
+  if(isDefined(level.drop_vista_1)) {
     level.drop_vista_2 delete();
+  }
 
   level notify("approach_facility");
 
-  if(isDefined(level.jetwing))
+  if(isDefined(level.jetwing)) {
     level.jetwing notify("approach_facility");
+  }
 
   rpc("clientscripts/haiti", "set_cloud_fog");
   level.player thread jetwing_landing_rumble();
@@ -368,8 +375,9 @@ player_jetwing_land() {
   level notify("end_ambient_drones_start_drop_group_5");
   clientnotify("stop_jetpack");
 
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     level.ai_harper = init_hero("harper", ::harper_think);
+  }
 
   level thread start_jetwing_land_exhaust();
   level thread run_scene("jetwing_land_crash");
@@ -396,8 +404,9 @@ player_jetwing_land() {
 delay_give_challenge(delay) {
   wait(delay);
 
-  if(isDefined(level.player_burned) && !level.player_burned)
+  if(isDefined(level.player_burned) && !level.player_burned) {
     level notify("player_avoid_missiles");
+  }
 }
 
 start_jetwing_land_exhaust() {
@@ -423,10 +432,11 @@ add_fake_jetwing_hud() {
 #using_animtree("vehicles");
 
 spawn_avoid_vtols() {
-  if(!isDefined(level.vtols))
+  if(!isDefined(level.vtols)) {
     level.vtols = [];
-  else
+  } else {
     array_delete(level.vtols);
+  }
 
   vtol_structs = getstructarray("avoid_vtol", "targetname");
 
@@ -446,21 +456,25 @@ spawn_avoid_vtols() {
 }
 
 avoid_vtol_think(b_wait, b_fake_flight, b_exhaust) {
-  if(!isDefined(b_wait))
+  if(!isDefined(b_wait)) {
     b_wait = 1;
+  }
 
-  if(!isDefined(b_fake_flight))
+  if(!isDefined(b_fake_flight)) {
     b_fake_flight = 1;
+  }
 
-  if(!isDefined(b_exhaust))
+  if(!isDefined(b_exhaust)) {
     b_exhaust = 1;
+  }
 
   self endon("death");
   self endon("stop_think");
   level endon("jetwing_done");
 
-  if(b_wait)
+  if(b_wait) {
     level waittill("jetpack_go");
+  }
 
   fwd = anglesToForward(self.angles);
   self.speed = 0;
@@ -468,8 +482,9 @@ avoid_vtol_think(b_wait, b_fake_flight, b_exhaust) {
   frequency = randomfloatrange(0.025, 0.05);
   maxroll = randomintrange(10, 25);
 
-  if(b_exhaust)
+  if(b_exhaust) {
     playFXOnTag(level._effect["vtol_exhaust_cheap"], self, "tag_engine_left");
+  }
 
   while(!flag("jetwing_done")) {
     fwd = anglesToForward(self.angles);
@@ -528,8 +543,9 @@ avoid_vtol_death() {
   playFXOnTag(level._effect["vtol_trail_cheap"], self, "tag_origin");
   torque = (0, 0, randomintrange(25, 45));
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     torque = (torque[0], torque[1], torque[2] * -1);
+  }
 
   ang_vel = (0, 0, 0);
   life = 5;
@@ -537,10 +553,11 @@ avoid_vtol_death() {
   while(life > 0) {
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[2] < 45 * -1)
+    if(ang_vel[2] < 45 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 45 * -1);
-    else if(ang_vel[2] > 45)
+    } else if(ang_vel[2] > 45) {
       ang_vel = (ang_vel[0], ang_vel[1], 45);
+    }
 
     self rotatevelocity(ang_vel, 0.05);
     life = life - 0.05;
@@ -564,18 +581,20 @@ vtol_death_piece(origin, offset, model, fwd, right, up) {
   self movegravity(dir * force, 5);
   torque = (randomintrange(-90, 90), randomintrange(-90, 90), 0);
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     torque = (torque[0], torque[1], torque[2] * -1);
+  }
 
   ang_vel = (0, 0, 0);
 
   while(isDefined(self) && self.origin[2] < level.player.origin[2]) {
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[2] < 90 * -1)
+    if(ang_vel[2] < 90 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 90 * -1);
-    else if(ang_vel[2] > 90)
+    } else if(ang_vel[2] > 90) {
       ang_vel = (ang_vel[0], ang_vel[1], 90);
+    }
 
     self rotatevelocity(ang_vel, 0.05);
     wait 0.05;
@@ -589,11 +608,13 @@ vtol_death_piece_delete() {
 }
 
 aerial_explosion(origin, angles, fx_name, b_quake) {
-  if(!isDefined(b_quake))
+  if(!isDefined(b_quake)) {
     b_quake = 1;
+  }
 
-  if(fx_name != "none")
+  if(fx_name != "none") {
     playFX(level._effect[fx_name], origin, (0, 0, 1), anglesToForward(angles));
+  }
 
   n_dist = distance2d(origin, level.player.origin);
   n_quake_scale = clamp(1.0 - n_dist / 10000, 0.25, 1.0);
@@ -627,11 +648,13 @@ aa_fire_manager() {
   level endon("approach_facility");
   target_set(level.jetwing, vectorscale((0, 0, -1), 30.0));
 
-  if(!isDefined(level.aa_fire_min_delay))
+  if(!isDefined(level.aa_fire_min_delay)) {
     level.aa_fire_min_delay = 0.5;
+  }
 
-  if(!isDefined(level.aa_fire_max_delay))
+  if(!isDefined(level.aa_fire_max_delay)) {
     level.aa_fire_max_delay = 1.0;
+  }
 
   while(true) {
     origin = level.jetwing.origin + anglesToForward(level.jetwing.angles) * 5000;
@@ -713,8 +736,9 @@ spawn_avoid_drone_group(spawner_name, path_name, count) {
 avoid_drone_think2() {
   self endon("death");
 
-  if(self.vteam == "axis")
+  if(self.vteam == "axis") {
     self thread avoid_drone_fire();
+  }
 
   self waittill("reached_end_node");
   self delete();
@@ -783,8 +807,9 @@ vtol_halo_jumps() {
 }
 
 do_vtol_halo_jump(b_think) {
-  if(!isDefined(b_think))
+  if(!isDefined(b_think)) {
     b_think = 0;
+  }
 
   self endon("death");
   guys = simple_spawn("halo_guys");
@@ -829,8 +854,9 @@ halo_jump_think(origin) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 halo_jump_speed_match() {
@@ -841,10 +867,11 @@ halo_jump_speed_match() {
     fwd = anglesToForward(level.jetwing.angles);
     dot = vectordot(fwd, delta);
 
-    if(dot < 0)
+    if(dot < 0) {
       self setspeed(400, 1000, 1000);
-    else
+    } else {
       break;
+    }
 
     wait 0.25;
   }
@@ -898,8 +925,9 @@ halo_jumpers_fx() {
   vtols = getEntArray("avoid_vtol", "targetname");
 
   foreach(vtol in vtols) {
-    if(vtol.health > 0)
+    if(vtol.health > 0) {
       playFXOnTag(level._effect["halo_jumpers"], vtol, "tag_origin");
+    }
   }
 }
 
@@ -930,8 +958,9 @@ missile_think() {
   while(true) {
     dist = distance(self.origin, self.targetent.origin);
 
-    if(dist < 200)
+    if(dist < 200) {
       self resetmissiledetonationtime(0);
+    }
 
     wait 0.1;
   }
@@ -1008,8 +1037,9 @@ move_path() {
   vehicles = getvehiclearray();
 
   foreach(vehicle in vehicles) {
-    if(isalive(vehicle) && (vehicle.vehicletype == "plane_jetwing_haiti_ai" || vehicle.vehicletype == "plane_jetwing_haiti_ai_hero"))
+    if(isalive(vehicle) && (vehicle.vehicletype == "plane_jetwing_haiti_ai" || vehicle.vehicletype == "plane_jetwing_haiti_ai_hero")) {
       vehicle pathmove(path_node, origin, angles);
+    }
   }
 
   wait 0.25;
@@ -1072,8 +1102,9 @@ player_intro_rumble() {
 }
 
 player_override_damage(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
-  if(self.health - n_damage < 0)
+  if(self.health - n_damage < 0) {
     self.health = self.healthmax;
+  }
 
   return n_damage;
 }
@@ -1095,8 +1126,9 @@ jetwing_guys_explode() {
   pos = average_pos + dir * 1000;
   aerial_explosion(pos, (0, 0, 0), "sam_explode_cheap", 1);
 
-  for(i = 0; i < jetwings.size; i++)
+  for(i = 0; i < jetwings.size; i++) {
     jetwings[i] dodamage(jetwings[i].health + 1, pos);
+  }
 
   while(true) {
     circle(average_pos, 400, (0, 1, 1), 0, 1);
@@ -1104,7 +1136,6 @@ jetwing_guys_explode() {
     line(average_pos, pos, (1, 1, 1), 0, 1);
     wait 0.05;
   }
-
 }
 
 #using_animtree("animated_props");
@@ -1377,7 +1408,7 @@ pregameplay_exposure() {
   blend_exposure_over_time(1.0, 1.0);
   level waittill("vtol_exterior_explosion");
   blend_exposure_over_time(level.exposure, 1.0);
-  setdvar("r_exposureTweak", 0);
+  setDvar("r_exposureTweak", 0);
 }
 
 cloud_exposure(time, time_high, time_low) {
@@ -1400,16 +1431,19 @@ assemble_vtol_explode2() {
   parent = getent("vtol_explode2", "targetname");
   pieces = getEntArray("vtol_explode2_piece", "targetname");
 
-  foreach(piece in pieces)
-  piece linkto(parent, piece.fxanim_tag, (0, 0, 0), (0, 0, 0));
+  foreach(piece in pieces) {
+    piece linkto(parent, piece.fxanim_tag, (0, 0, 0), (0, 0, 0));
+  }
 }
 
 set_cloud_fog() {
-  if(isDefined(level.drop_vista_1))
+  if(isDefined(level.drop_vista_1)) {
     level.drop_vista_1 setclientflag(6);
+  }
 
-  if(isDefined(level.drop_vista_2))
+  if(isDefined(level.drop_vista_2)) {
     level.drop_vista_2 setclientflag(6);
+  }
 
   rpc("clientscripts/haiti", "set_cloud_fog");
 }
@@ -1418,11 +1452,13 @@ set_intro_fog() {
   rpc("clientscripts/haiti", "set_intro_fog");
   wait 0.05;
 
-  if(isDefined(level.drop_vista_1))
+  if(isDefined(level.drop_vista_1)) {
     level.drop_vista_1 clearclientflag(6);
+  }
 
-  if(isDefined(level.drop_vista_2))
+  if(isDefined(level.drop_vista_2)) {
     level.drop_vista_2 clearclientflag(6);
+  }
 }
 
 avoid_pieces() {
@@ -1473,8 +1509,9 @@ avoid_vtols_vo() {
   level.player say_dialog("sect_control_your_descent_0");
   wait 3;
 
-  if(level.is_harper_alive)
+  if(level.is_harper_alive) {
     level.harper say_dialog("harp_stay_out_of_their_fu_0");
+  }
 }
 
 avoid_missiles_vo() {

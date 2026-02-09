@@ -106,7 +106,7 @@ monitorflash() {
         self.flashattacker = var_4;
         var_12 = self;
 
-        if(isplayer(var_4) && var_4 isitemunlocked("specialty_paint") && var_4 maps\mp\_utility::_hasperk("specialty_paint"))
+        if(isPlayer(var_4) && var_4 isitemunlocked("specialty_paint") && var_4 maps\mp\_utility::_hasperk("specialty_paint"))
           var_12 thread maps\mp\perks\_perkfunctions::setpainted(var_4);
       } else
         self.flashattacker = undefined;

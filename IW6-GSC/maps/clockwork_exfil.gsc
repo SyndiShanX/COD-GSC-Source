@@ -941,7 +941,7 @@ chaos_kill_player() {
   common_scripts\utility::flag_wait("chaos_kill_player");
   common_scripts\utility::flag_set("exfil_fire_fail");
   wait 3;
-  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_FOLLOW");
+  setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_FOLLOW");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -2395,7 +2395,7 @@ skip_to_end(var_0, var_1, var_2, var_3, var_4) {
   wait 3;
 
   if(!common_scripts\utility::flag("ally_start_path_exfil")) {
-    setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
+    setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
     maps\_utility::missionfailedwrapper();
   }
 }

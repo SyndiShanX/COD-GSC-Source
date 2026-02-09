@@ -214,23 +214,20 @@ plane_bomb_node() {
 }
 
 plane_bomb_cluster() {
-  /*-----------------------
-  WAIT FOR PLANE TO HIT NODE
+  /*----------------------- WAIT FOR PLANE TO HIT NODE
   -------------------------*/
   self waittill("trigger", other);
   other endon("death");
   plane = other;
   plane thread plane_bomb_cluster(); // spawn new thread for next plane that passes through this pathnode
 
-  /*-----------------------
-  SPAWN A BOMB MODEL
+  /*----------------------- SPAWN A BOMB MODEL
   -------------------------*/
   bomb = spawn("script_model", plane.origin - (0, 0, 100));
   bomb.angles = plane.angles;
   bomb setModel("projectile_cbu97_clusterbomb");
 
-  /*-----------------------
-  LAUNCH FROM PLANE UNTIL CLOSE TO GROUND
+  /*----------------------- LAUNCH FROM PLANE UNTIL CLOSE TO GROUND
   -------------------------*/
   vecForward = vector_multiply(anglesToForward(plane.angles), 2);
   vecUp = vector_multiply(anglestoup(plane.angles), -0.2); // invert the up angles
@@ -251,8 +248,7 @@ plane_bomb_cluster() {
   bomb delete();
   bomb = newBomb;
 
-  /*-----------------------
-  PLAY FX ON INVISIBLE BOMB
+  /*----------------------- PLAY FX ON INVISIBLE BOMB
   -------------------------*/
   bombOrigin = bomb.origin;
   bombAngles = bomb.angles;

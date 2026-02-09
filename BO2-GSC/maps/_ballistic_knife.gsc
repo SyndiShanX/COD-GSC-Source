@@ -28,14 +28,15 @@ on_spawn(watcher, player) {
     retrievable_model.name = watcher.weapon;
 
     if(isDefined(prey)) {
-      if(isplayer(prey) && player.team == prey.team)
+      if(isPlayer(prey) && player.team == prey.team) {
         isfriendly = 1;
-      else if(isai(prey) && player.team == prey.team)
+      } else if(isai(prey) && player.team == prey.team) {
         isfriendly = 1;
+      }
 
-      if(!isfriendly)
+      if(!isfriendly) {
         retrievable_model linkto(prey, bone);
-      else if(isfriendly) {
+      } else if(isfriendly) {
         retrievable_model physicslaunch(normal, (randomint(10), randomint(10), randomint(10)));
         normal = (0, 0, 1);
       }
@@ -43,15 +44,17 @@ on_spawn(watcher, player) {
 
     watcher.objectarray[watcher.objectarray.size] = retrievable_model;
 
-    if(isfriendly)
+    if(isfriendly) {
       retrievable_model waittill("stationary");
+    }
 
     retrievable_model thread drop_knives_to_ground(player);
 
-    if(isfriendly)
+    if(isfriendly) {
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    else
+    } else {
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
+    }
 
     retrievable_model thread wait_to_show_glowing_model(prey);
   }
@@ -65,8 +68,9 @@ wait_to_show_glowing_model(prey) {
   glowing_retrievable_model.angles = self.angles;
   glowing_retrievable_model linkto(self);
 
-  if(isDefined(prey))
+  if(isDefined(prey)) {
     wait 2;
+  }
 
   glowing_retrievable_model setModel("t5_weapon_ballistic_knife_blade_retrieve");
 }
@@ -83,7 +87,7 @@ on_spawn_retrieve_trigger(watcher, player) {
   }
   trigger_pos = [];
 
-  if(isDefined(prey) && (isplayer(prey) || isai(prey))) {
+  if(isDefined(prey) && (isPlayer(prey) || isai(prey))) {
     trigger_pos[0] = prey.origin[0];
     trigger_pos[1] = prey.origin[1];
     trigger_pos[2] = prey.origin[2] + 10;
@@ -100,10 +104,11 @@ on_spawn_retrieve_trigger(watcher, player) {
   player clientclaimtrigger(pickup_trigger);
   pickup_trigger enablelinkto();
 
-  if(isDefined(prey))
+  if(isDefined(prey)) {
     pickup_trigger linkto(prey);
-  else
+  } else {
     pickup_trigger linkto(retrievable_model);
+  }
 
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
   player thread watch_shutdown(pickup_trigger, retrievable_model);
@@ -116,7 +121,6 @@ debug_print(endpos) {
     print3d(endpos, "pickup_trigger");
     wait 0.05;
   }
-
 }
 
 watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, npcsoundonuse) {
@@ -146,17 +150,20 @@ watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, npcsoundon
     total_ammo = ammo_stock + ammo_clip;
     hasreloaded = 1;
 
-    if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == weapon)
+    if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == weapon) {
       hasreloaded = 0;
+    }
 
     if(total_ammo >= max_ammo || !hasreloaded) {
       continue;
     }
-    if(isDefined(playersoundonuse))
+    if(isDefined(playersoundonuse)) {
       player playlocalsound(playersoundonuse);
+    }
 
-    if(isDefined(npcsoundonuse))
+    if(isDefined(npcsoundonuse)) {
       player playSound(npcsoundonuse);
+    }
 
     player thread[[callback]](weapon, model, trigger);
     break;
@@ -169,9 +176,9 @@ pick_up(weapon, model, trigger) {
   if(current_weapon != weapon) {
     clip_ammo = self getweaponammoclip(weapon);
 
-    if(!clip_ammo)
+    if(!clip_ammo) {
       self setweaponammoclip(weapon, 1);
-    else {
+    } else {
       new_ammo_stock = self getweaponammostock(weapon) + 1;
       self setweaponammostock(weapon, new_ammo_stock);
     }
@@ -186,8 +193,9 @@ pick_up(weapon, model, trigger) {
 
 destroy_ent() {
   if(isDefined(self)) {
-    if(isDefined(self.glowing_model))
+    if(isDefined(self.glowing_model)) {
       self.glowing_model delete();
+    }
 
     self delete();
   }

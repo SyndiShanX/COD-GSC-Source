@@ -1,6 +1,6 @@
 /********************************************
  * Decompiled and Edited by SyndiShanX
- * Script: clientscripts\zombie_moon_fx.csc
+ * Script: clientscripts\zombie_moon_fx\.csc
 ********************************************/
 
 #include clientscripts\_utility;
@@ -24,25 +24,22 @@ main() {
   level thread breach_labs_upper_fx();
   level thread power_on_spinning_lights();
 }
-
 fog_triggers_setup() {
   waitforclient(0);
   wait(3);
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     level thread moon_fog_triggers_init(i);
   }
 }
-
 footsteps() {}
 airlock_fx_init() {
   waitforallclients();
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread airlock_fx(i);
   }
 }
-
 airlock_fx(localClientNum) {
   level waittill("power_on");
   airlock_fx = getEntArray(localClientNum, "airlock_jambs_fx", "targetname");
@@ -51,7 +48,6 @@ airlock_fx(localClientNum) {
     playFX(localClientNum, level._effect["airlock_fx"], airlock_fx[i].origin, forwardVec);
   }
 }
-
 precache_scripted_fx() {
   level._effect["switch_sparks"] = loadfx("env/electrical/fx_elec_wire_spark_burst");
   level._effect["zapper_light_ready"] = loadfx("misc/fx_zombie_zapper_light_green");
@@ -83,7 +79,6 @@ precache_scripted_fx() {
   level._effect["blue_eyes"] = LoadFX("misc/fx_zombie_eye_single_blue");
   level._effect["osc_button_glow"] = LoadFX("maps/zombie_moon/fx_moon_button_console_glow");
 }
-
 precache_createfx_fx() {
   level._effect["fx_mp_fog_xsm_int"] = Loadfx("maps/mp_maps/fx_mp_fog_xsm_int");
   level._effect["fx_moon_fog_spawn_closet"] = Loadfx("maps/zombie_moon/fx_moon_fog_spawn_closet");
@@ -117,11 +112,9 @@ precache_createfx_fx() {
   level._effect["fx_earth_destroyed"] = Loadfx("maps/zombie_moon/fx_earth_destroyed");
   level._effect["fx_quad_vent_break"] = LoadFX("maps/zombie/fx_zombie_crawler_vent_break");
 }
-
 power_on_spinning_lights() {
   level waittill("power_on");
 }
-
 trap_fx_monitor(name, side, trap_type) {
   while(1) {
     level waittill(name);
@@ -131,7 +124,6 @@ trap_fx_monitor(name, side, trap_type) {
     }
   }
 }
-
 breach_receiving_fx() {
   level waittill("Az1");
   clientscripts\_fx::activate_exploder(300);
@@ -140,7 +132,6 @@ breach_receiving_fx() {
   }
   level notify("sl0");
 }
-
 breach_labs_lower_fx() {
   level waittill("Az4a");
   clientscripts\_fx::activate_exploder(320);
@@ -150,7 +141,6 @@ breach_labs_lower_fx() {
   level notify("sl5");
   level notify("sl6");
 }
-
 breach_labs_upper_fx() {
   level waittill("Az4b");
   clientscripts\_fx::activate_exploder(340);
@@ -159,7 +149,6 @@ breach_labs_upper_fx() {
   }
   level notify("sl4");
 }
-
 electric_trap_fx(name, side, trap_type) {
   ang = self.angles;
   forward = anglesToForward(ang);
@@ -173,7 +162,7 @@ electric_trap_fx(name, side, trap_type) {
   if(!isDefined(self.loopFX)) {
     self.loopFX = [];
   }
-  players = getLocalPlayers();
+  players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     switch (trap_type) {
       case "electric":
@@ -192,7 +181,6 @@ electric_trap_fx(name, side, trap_type) {
   }
   self.loopFX = [];
 }
-
 moon_fog_triggers_init(localClientNum) {
   exterior_array = getEntArray(localClientNum, "zombie_moonExterior", "targetname");
   array_thread(exterior_array, ::fog_trigger, ::moon_exterior_fog_change);
@@ -207,7 +195,6 @@ moon_fog_triggers_init(localClientNum) {
     array_thread(nml_array, ::fog_trigger, ::moon_nml_fog_change);
   }
 }
-
 fog_trigger(change_func) {
   while(1) {
     self waittill("trigger", who);
@@ -216,7 +203,6 @@ fog_trigger(change_func) {
     }
   }
 }
-
 Moon_Exterior_Fog_Change(Ent_Player) {
   if(!isDefined(ent_player)) {
     return;
@@ -256,7 +242,6 @@ Moon_Exterior_Fog_Change(Ent_Player) {
   ent_player clientscripts\zombie_moon_fx::moon_vision_set(ent_player._previous_vision, new_vision, local_clientnum, self.script_int);
   ent_player._previous_vision = "zme";
 }
-
 moon_interior_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -296,7 +281,6 @@ moon_interior_fog_change(ent_player) {
   ent_player clientscripts\zombie_moon_fx::moon_vision_set(ent_player._previous_vision, new_vision, local_clientnum, self.script_int);
   ent_player._previous_vision = "zmi";
 }
-
 moon_biodome_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -340,7 +324,6 @@ moon_biodome_fog_change(ent_player) {
   ent_player clientscripts\zombie_moon_fx::moon_vision_set(ent_player._previous_vision, new_vision, local_clientnum, self.script_int);
   ent_player._previous_vision = "zmb";
 }
-
 moon_tunnels_fog_change(ent_player) {
   if(!isDefined(ent_player)) {
     return;
@@ -374,7 +357,6 @@ moon_tunnels_fog_change(ent_player) {
   ent_player._previous_vision = "zmt";
   SetSavedDvar("r_skyColorTemp", (6400));
 }
-
 moon_nml_fog_change(ent_player) {
   if(!isDefined(ent_player) || (isDefined(level._dte_done) && level._dte_done)) {
     return;
@@ -415,7 +397,6 @@ moon_nml_fog_change(ent_player) {
   setClientDvar("r_lightTweakSunDirection", sundirection);
   SetSavedDvar("r_skyColorTemp", (6400));
 }
-
 moon_vision_set(str_vision_old, str_vision_new, int_clientnum, int_trans) {
   if(str_vision_old == str_vision_new) {
     return;

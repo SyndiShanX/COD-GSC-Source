@@ -298,7 +298,7 @@ damageTracker() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    if(!IsPlayer(attacker)) {
+    if(!isPlayer(attacker)) {
       if(!isDefined(self)) {
         return;
       }
@@ -312,7 +312,7 @@ damageTracker() {
 
     modifiedDamage = damage;
 
-    if(IsPlayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 
       if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
@@ -339,16 +339,15 @@ damageTracker() {
       }
 
       maps\mp\killstreaks\_killstreaks::killstreakHit(attacker, weapon, self);
-
     }
 
     self.damageTaken += modifiedDamage;
 
     if(isDefined(self) && GetDvarInt("g_debugDamage"))
-      PrintLn("uav:" + self getEntityNumber() + " health:" + (self.health - self.damageTaken) + " attacker:" + attacker.clientid + " inflictor is player:" + IsPlayer(attacker) + " damage:" + modifiedDamage + " range:" + Distance(attacker.origin, self.origin));
+      PrintLn("uav:" + self getEntityNumber() + " health:" + (self.health - self.damageTaken) + " attacker:" + attacker.clientid + " inflictor is player:" + isPlayer(attacker) + " damage:" + modifiedDamage + " range:" + Distance(attacker.origin, self.origin));
 
     if(self.damageTaken >= self.maxHealth) {
-      if(IsPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
+      if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
         thread teamPlayerCardSplash(level.uavSettings[self.uavType].calloutDestroyed, attacker);
 
         thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, attacker, damage, meansOfDeath, weapon);

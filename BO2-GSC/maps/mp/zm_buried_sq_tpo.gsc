@@ -78,7 +78,6 @@ stage_logic() {
     stage_logic_maxis();
   else {
     assertmsg("SQ TPO: no sidequest side picked!");
-
   }
 
   iprintlnbold("TPO done");
@@ -324,7 +323,6 @@ _debug_show_location() {
 
     wait 1;
   }
-
 }
 
 promote_to_corpse_model(str_model) {

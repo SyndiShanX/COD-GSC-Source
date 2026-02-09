@@ -300,7 +300,7 @@ player_cough_damage() {
         self dodamage(40, level.player.origin, level._engine_room.damage_smoke_ent);
     } else if(!common_scripts\utility::flag("flag_engine_room_nodamage")) {
       level.player kill();
-      setdvar("ui_deadquote", &"BLACK_ICE_ENGINE_ROOM_SMOKE_DEATH");
+      setDvar("ui_deadquote", &"BLACK_ICE_ENGINE_ROOM_SMOKE_DEATH");
       maps\_utility::missionfailedwrapper();
     }
 

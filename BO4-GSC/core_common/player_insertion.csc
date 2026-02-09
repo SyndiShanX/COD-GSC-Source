@@ -166,7 +166,7 @@ function_8c515e6(player) {
   self endon("23c1f5278d3016e8");
   self waittill(#"death");
 
-  if(isDefined(player) && player isplayer()) {
+  if(isDefined(player) && player isPlayer()) {
     player camerasetupdatecallback();
   }
 }

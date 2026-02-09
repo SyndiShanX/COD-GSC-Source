@@ -37,7 +37,7 @@ adddeathicon(entity, dyingplayer, team, timeout) {
   maps\mp\gametypes\_globallogic_utils::waittillslowprocessallowed();
   assert(isDefined(level.teams[team]));
 
-  if(getdvar(#"_id_F83E8105") == "0") {
+  if(getDvar(#"_id_F83E8105") == "0") {
     return;
   }
   if(level.hardcoremode) {

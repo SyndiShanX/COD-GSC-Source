@@ -118,21 +118,18 @@ main() {
   level thread maps\zombie_coast_ffotd::main_end();
   level thread check_to_set_play_outro_movie();
 }
-
 check_to_set_play_outro_movie() {
   flag_wait("all_players_connected");
   if(!level.onlineGame && !level.systemlink) {
-    SetDvar("ui_playCoastOutroMovie", 1);
+    setDvar("ui_playCoastOutroMovie", 1);
   }
 }
-
 zombie_coast_player_out_of_playable_area_monitor_callback() {
   if(is_true(self._being_flung) || is_true(self.is_ziplining)) {
     return false;
   }
   return true;
 }
-
 zombie_unlock_all() {
   flag_wait("begin_spawning");
   players = GetPlayers();
@@ -146,12 +143,10 @@ zombie_unlock_all() {
     zombie_debris[i] notify("trigger", players[0]);
   }
 }
-
 custom_add_weapons() {
   maps\_zombiemode_weapons::add_zombie_weapon("humangun_zm", "humangun_upgraded_zm", &"ZOMBIE_WEAPON_HUMANGUN", 10, "human", "", undefined);
   maps\_zombiemode_weapons::add_zombie_weapon("sniper_explosive_zm", "sniper_explosive_upgraded_zm", &"ZOMBIE_WEAPON_SNIPER_EXPLOSIVE", 2500, "ubersniper", "", undefined);
 }
-
 coast_spawn_init_delay(director) {
   flag_wait("begin_spawning");
   flag_clear("spawn_zombies");
@@ -168,13 +163,12 @@ coast_spawn_init_delay(director) {
   director_zomb waittill_notify_or_timeout("director_spawn_zombies", 30);
   flag_set("spawn_zombies");
 }
-
 #using_animtree("generic_human");
+
 anim_override_func() {
   level.scr_anim["zombie"]["walk3"] = % ai_zombie_walk_v2;
   level.scr_anim["zombie"]["run6"] = % ai_zombie_run_v2;
 }
-
 coast_zone_init() {
   flag_init("always_on");
   flag_set("always_on");
@@ -214,7 +208,6 @@ coast_zone_init() {
   add_adjacent_zone("lighthouse1_zone", "lighthouse2_zone", "lighthouse2_enter");
   add_adjacent_zone("catwalk_zone", "lighthouse2_zone", "catwalk_enter");
 }
-
 include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false, true);
@@ -301,11 +294,9 @@ include_weapons() {
   precacheItem("sniper_explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "sickle_knife_zm");
 }
-
 coast_director_should_drop_special_powerup() {
   return maps\_zombiemode::is_sidequest_previously_completed();
 }
-
 coast_offhand_weapon_overrride() {
   register_lethal_grenade_for_level("frag_grenade_zm");
   register_lethal_grenade_for_level("sticky_grenade_zm");
@@ -318,7 +309,6 @@ coast_offhand_weapon_overrride() {
   register_melee_weapon_for_level("sickle_knife_zm");
   level.zombie_melee_weapon_player_init = "knife_zm";
 }
-
 coast_offhand_weapon_give_override(str_weapon) {
   self endon("death");
   if(is_tactical_grenade(str_weapon) && isDefined(self get_player_tactical_grenade()) && !self is_player_tactical_grenade(str_weapon)) {
@@ -331,7 +321,6 @@ coast_offhand_weapon_give_override(str_weapon) {
   }
   return false;
 }
-
 zombie_coast_player_intersection_tracker_override(other_player) {
   if(is_true(self._being_flung) || is_true(self.is_ziplining)) {
     return true;
@@ -341,14 +330,12 @@ zombie_coast_player_intersection_tracker_override(other_player) {
   }
   return false;
 }
-
 zombie_coast_player_damage_level_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime) {
   if(is_true(self._being_flung) || is_true(self.is_ziplining)) {
     return 0;
   }
   return -1;
 }
-
 include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -362,16 +349,14 @@ include_powerups() {
   include_powerup("tesla");
   include_powerup("free_perk");
 }
-
 init_sounds() {
   maps\_zombiemode_utility::add_sound("break_stone", "break_stone");
   maps\_zombiemode_utility::add_sound("lighthouse_double_door", "zmb_lighthouse_double_door");
   maps\_zombiemode_utility::add_sound("ship_door", "zmb_ship_door");
   maps\_zombiemode_utility::add_sound("ship_container_door", "zmb_ship_container_door");
 }
-
 electric_switch() {
-  trig = getEnt("use_elec_switch", "targetname");
+  trig = getent("use_elec_switch", "targetname");
   trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
   trig setcursorhint("HINT_NOICON");
   level thread wait_for_power();
@@ -380,9 +365,8 @@ electric_switch() {
   flag_set("power_on");
   Objective_State(8, "done");
 }
-
 wait_for_power() {
-  master_switch = getEnt("elec_switch", "targetname");
+  master_switch = getent("elec_switch", "targetname");
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
@@ -409,7 +393,6 @@ wait_for_power() {
   playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
   master_switch playSound("zmb_turn_on");
 }
-
 electric_door_function() {
   door_trigs = getEntArray("electric_door", "script_noteworthy");
   array_thread(door_trigs, ::set_door_unusable);
@@ -418,12 +401,10 @@ electric_door_function() {
   array_thread(door_trigs, ::trigger_off);
   thread open_electric_doors(door_trigs);
 }
-
 set_door_unusable() {
   self sethintstring(&"ZOMBIE_NEED_POWER");
   self UseTriggerRequireLookAt();
 }
-
 open_electric_doors(door_trigs) {
   time = 1;
   for(i = 0; i < door_trigs.size; i++) {
@@ -452,7 +433,7 @@ open_electric_doors(door_trigs) {
           time = doors[j].script_transition_time;
         }
         play_sound_at_pos("door_slide_open", doors[j].origin);
-        doors[j] moveTo(doors[j].origin + doors[j].script_vector, time, time * 0.25, time * 0.25);
+        doors[j] MoveTo(doors[j].origin + doors[j].script_vector, time, time * 0.25, time * 0.25);
         doors[j] thread maps\_zombiemode_blockers::door_solid_thread();
         doors[j] playSound("door_slide_open");
       }
@@ -460,7 +441,6 @@ open_electric_doors(door_trigs) {
     }
   }
 }
-
 play_door_dialog() {
   self endon("warning_dialog");
   timer = 0;
@@ -486,9 +466,8 @@ play_door_dialog() {
     }
   }
 }
-
 check_plankB(from, forward) {
-  trigger = getEnt(from, "targetname");
+  trigger = getent(from, "targetname");
   trigger sethintstring(&"ZOMBIE_BUILD_BRIDGE");
   trigger setcursorhint("HINT_NOICON");
   trigger endon("plankB_done");
@@ -498,22 +477,22 @@ check_plankB(from, forward) {
     trigger waittill("trigger", user);
     if(is_player_valid(user) && user.score >= level.plankB_cost) {
       user maps\_zombiemode_score::minus_to_player_score(level.plankB_cost);
-      other = getEnt(trigger.target, "targetname");
+      other = getent(trigger.target, "targetname");
       other notify("plankB_done");
       other delete();
       trigger delete();
-      clip = getEnt("plankB_clip", "targetname");
+      clip = getent("plankB_clip", "targetname");
       clip connectpaths();
       clip delete();
       if(forward == true) {
         for(i = 1; i <= 4; i++) {
-          bridge = getEnt("residence2ship_walk" + i, "targetname");
+          bridge = getent("residence2ship_walk" + i, "targetname");
           bridge show();
           wait(0.5);
         }
       } else {
         for(i = 4; i >= 1; i--) {
-          bridge = getEnt("residence2ship_walk" + i, "targetname");
+          bridge = getent("residence2ship_walk" + i, "targetname");
           bridge show();
           wait(0.5);
         }
@@ -524,7 +503,6 @@ check_plankB(from, forward) {
     wait(.05);
   }
 }
-
 wait_for_respawn() {
   zone_name = self.script_noteworthy;
   if(isDefined(level.zones[zone_name])) {
@@ -534,14 +512,12 @@ wait_for_respawn() {
     self.locked = false;
   }
 }
-
 stairs_blocker_buyable() {
   trigger = getEntArray("buyable_stairs", "targetname");
   for(i = 0; i < trigger.size; i++) {
     trigger[i] thread stairs_init();
   }
 }
-
 stairs_init() {
   cost = 1000;
   if(isDefined(self.zombie_cost)) {
@@ -574,7 +550,6 @@ stairs_init() {
   wait_network_frame();
   self thread stairs_think(planks, debris, clip);
 }
-
 stairs_think(planks, debris, clip) {
   while(1) {
     self waittill("trigger", who);
@@ -602,7 +577,7 @@ stairs_think(planks, debris, clip) {
           }
         }
         if(isDefined(clip)) {
-          clip moveTo(clip.origin + (0, 0, -1000), 0.1);
+          clip moveto(clip.origin + (0, 0, -1000), 0.1);
           wait(0.1);
           clip connectpaths();
           clip delete();
@@ -614,13 +589,12 @@ stairs_think(planks, debris, clip) {
     }
   }
 }
-
 stairs_move(struct, planks, trigger) {
   self script_delay();
   self notsolid();
   selfpos = self.origin;
   selfang = self.angles;
-  self moveTo(struct.origin, 0.1);
+  self moveto(struct.origin, 0.1);
   wait(randomfloatrange(1.0, 10.0));
   self show();
   self play_sound_on_ent("debris_move");
@@ -644,7 +618,7 @@ stairs_move(struct, planks, trigger) {
   if(isDefined(self.script_transition_time)) {
     time = self.script_transition_time;
   }
-  self moveTo(selfpos, time, time * 0.5);
+  self MoveTo(selfpos, time, time * 0.5);
   self RotateTo(selfang, time * 0.75);
   self waittill("movedone");
   level.stairs_pieces++;
@@ -656,7 +630,6 @@ stairs_move(struct, planks, trigger) {
     playsoundatposition("zombie_spawn", self.origin);
   }
 }
-
 special_debris_move(struct) {
   self script_delay();
   self notsolid();
@@ -674,7 +647,7 @@ special_debris_move(struct) {
     wait(time - 0.05);
   }
   time = 0.5;
-  self moveTo(struct.origin, time, time * 0.5);
+  self MoveTo(struct.origin, time, time * 0.5);
   self RotateTo(struct.angles, time * 0.75);
   self waittill("movedone");
   if(isDefined(self.script_fxid)) {
@@ -683,11 +656,9 @@ special_debris_move(struct) {
   }
   self Delete();
 }
-
 coast_precache_custom_models() {
   mptype\player_t5_zm_coast::precache();
 }
-
 coast_custom_third_person_override(entity_num) {
   if(isDefined(self.zm_random_char)) {
     entity_num = self.zm_random_char;
@@ -707,7 +678,6 @@ coast_custom_third_person_override(entity_num) {
       break;
   }
 }
-
 coast_custom_viewmodel_override(entity_num) {
   switch (self.entity_num) {
     case 0:
@@ -724,7 +694,6 @@ coast_custom_viewmodel_override(entity_num) {
       break;
   }
 }
-
 setup_water_physics() {
   flag_wait("all_players_connected");
   players = GetPlayers();
@@ -732,41 +701,36 @@ setup_water_physics() {
     players[i] SetClientDvars("phys_buoyancy", 1);
   }
 }
-
 setup_zcoast_water() {
-  SetDvar("r_waterWaveAngle", "0 45 90 180");
-  SetDvar("r_waterWaveWavelength", "350 150 450 650");
-  SetDvar("r_waterWaveAmplitude", "6 4 8 2");
-  SetDvar("r_waterWavePhase", "0 0 0 0");
-  SetDvar("r_waterWaveSteepness", "0.25 0.25 0.25 0.25");
-  SetDvar("r_waterWaveSpeed", "1 0.5 1 0.5");
+  setDvar("r_waterWaveAngle", "0 45 90 180");
+  setDvar("r_waterWaveWavelength", "350 150 450 650");
+  setDvar("r_waterWaveAmplitude", "6 4 8 2");
+  setDvar("r_waterWavePhase", "0 0 0 0");
+  setDvar("r_waterWaveSteepness", "0.25 0.25 0.25 0.25");
+  setDvar("r_waterWaveSpeed", "1 0.5 1 0.5");
 }
-
 coast_fade_in_notify() {
   level waittill("fade_in_complete");
   wait_network_frame();
   level ClientNotify("ZID");
 }
-
 coast_power_on_lighthouse_react() {
   flag_wait("power_on");
   exploder(301);
 }
-
 rock_wall_barricade() {
   rock_wall = getstruct("special_rock_wall", "script_noteworthy");
   boards = getEntArray(rock_wall.target, "targetname");
   rock = undefined;
   for(i = 0; i < boards.size; i++) {
     if(isDefined(boards[i].target)) {
-      rock = getEnt(boards[i].target, "targetname");
+      rock = GetEnt(boards[i].target, "targetname");
       if(isDefined(rock)) {
         rock LinkTo(boards[i]);
       }
     }
   }
 }
-
 coast_revive_solo_fx() {
   vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
@@ -776,28 +740,24 @@ coast_revive_solo_fx() {
     }
   }
 }
-
 func_humangun_check() {
   self notify("stop_melee_watch");
   if(is_true(self.electrified)) {
     maps\_zombiemode_ai_director::zombie_clear_electric_buff();
   }
 }
-
 check_for_alternate_poi() {
   if(!is_true(self.following_human_zombie) && !is_true(self.following_player_zipline)) {
     return false;
   }
   return true;
 }
-
 #using_animtree("fxanim_props_dlc3");
 init_fx_anims() {
   level.fxanims = [];
   level.fxanims["hook_anim"] = % fxanim_zom_ship_crane01_hook_anim;
   level.fxanims["boat_anim"] = % fxanim_zom_ship_lifeboat_anim;
 }
-
 zombie_coast_poi_positioning_func(origin, forward) {
   return maps\_zombiemode_server_throttle::server_safe_ground_trace_ignore_water("poi_trace", 10, self.origin + forward + (0, 0, 10));
 }

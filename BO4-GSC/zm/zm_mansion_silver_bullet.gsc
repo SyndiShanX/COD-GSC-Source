@@ -157,7 +157,7 @@ function_bdddc37c(w_weapon) {
 function_eb7664aa(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   n_multi = 1;
 
-  if(isalive(attacker) && isplayer(attacker) && isalive(inflictor) && isplayer(inflictor) && meansofdeath != "MOD_UNKNOWN" && meansofdeath != "MOD_MELEE" && meansofdeath != "MOD_AAT" && attacker zm_utility::function_aa45670f(weapon, 0)) {
+  if(isalive(attacker) && isPlayer(attacker) && isalive(inflictor) && isPlayer(inflictor) && meansofdeath != "MOD_UNKNOWN" && meansofdeath != "MOD_MELEE" && meansofdeath != "MOD_AAT" && attacker zm_utility::function_aa45670f(weapon, 0)) {
     if(isDefined(self) && isDefined(self.archetype)) {
       switch (self.archetype) {
         case # "zombie":

@@ -76,7 +76,7 @@ function onspawnretrievetrigger(watcher, player) {
   }
   vec_scale = 10;
   trigger_pos = [];
-  if(isDefined(prey) && (isplayer(prey) || isai(prey))) {
+  if(isDefined(prey) && (isPlayer(prey) || isai(prey))) {
     trigger_pos[0] = prey.origin[0];
     trigger_pos[1] = prey.origin[1];
     trigger_pos[2] = prey.origin[2] + vec_scale;

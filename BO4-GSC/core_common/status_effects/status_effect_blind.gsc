@@ -46,9 +46,7 @@ blind_apply(var_756fda07, weapon, applicant) {
         applicant.var_a467e27f = (isDefined(applicant.var_a467e27f) ? applicant.var_a467e27f : 0) + 1;
 
         if(isDefined(level.var_ac6052e9)) {
-          var_9194a036 = [
-            [level.var_ac6052e9]
-          ]("swatGrenadeSuccessLineCount", 0);
+          var_9194a036 = [[level.var_ac6052e9]]("swatGrenadeSuccessLineCount", 0);
         }
 
         if(applicant.var_a467e27f == (isDefined(var_9194a036) ? var_9194a036 : 0)) {

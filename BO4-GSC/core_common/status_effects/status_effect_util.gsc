@@ -51,13 +51,13 @@ function_b24f18a1() {
     }
 
     if(isDefined(self.var_36c77790)) {
-      if(isplayer(self.owner)) {
+      if(isPlayer(self.owner)) {
         self.owner playlocalsound(self.var_36c77790);
       }
     }
 
     if(isDefined(self.var_801118b0)) {
-      if(isplayer(self.owner)) {
+      if(isPlayer(self.owner)) {
         self.owner stoploopsound(0.5);
       }
     }
@@ -203,7 +203,7 @@ status_effect_apply(var_756fda07, weapon, applicant, isadditive, durationoverrid
   }
 
   if(isDefined(weapon) && weapon.doesfiredamage) {
-    if(isplayer(self)) {
+    if(isPlayer(self)) {
       self clientfield::set("burn", 1);
     }
   }
@@ -219,7 +219,7 @@ status_effect_apply(var_756fda07, weapon, applicant, isadditive, durationoverrid
     thread function_86c0eb67(effect, "begin");
   }
 
-  var_1d673e46 = !isplayer(self) || self hastalent(#"talent_resistance") && !(isDefined(var_756fda07.var_857e12ae) && var_756fda07.var_857e12ae);
+  var_1d673e46 = !isPlayer(self) || self hastalent(#"talent_resistance") && !(isDefined(var_756fda07.var_857e12ae) && var_756fda07.var_857e12ae);
 
   if(!var_1d673e46 && !isDefined(effect.var_b5207a36)) {
     if(isDefined(var_756fda07.var_208fb7da)) {
@@ -274,7 +274,7 @@ function_47cad1aa(var_756fda07, isadditive) {
 
   if(isDefined(self.var_121392a1[var_18d16a6b]) && isDefined(self.var_121392a1[var_18d16a6b].duration)) {
     if(setype != 4) {
-      if(isplayer(self)) {
+      if(isPlayer(self)) {
         assert(!isfloat(self.var_121392a1[var_18d16a6b].duration), "<dev string:x94>");
         self applystatuseffect(var_756fda07.namehash, self.var_121392a1[var_18d16a6b].duration, isadditive);
       }
@@ -283,7 +283,7 @@ function_47cad1aa(var_756fda07, isadditive) {
 }
 
 function_89ae38c1(sename) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self endstatuseffect(sename);
   }
 }
@@ -291,7 +291,7 @@ function_89ae38c1(sename) {
 function_52969ffe(var_756fda07) {
   player = self;
 
-  if(isDefined(var_756fda07.var_3edb6e25) && var_756fda07.var_3edb6e25 && isplayer(player)) {
+  if(isDefined(var_756fda07.var_3edb6e25) && var_756fda07.var_3edb6e25 && isPlayer(player)) {
     player disableoffhandspecial();
     player disableoffhandweapons();
   }
@@ -300,7 +300,7 @@ function_52969ffe(var_756fda07) {
 function_14fdd7e2(var_756fda07) {
   player = self;
 
-  if(isDefined(var_756fda07.var_3edb6e25) && var_756fda07.var_3edb6e25 && isplayer(player)) {
+  if(isDefined(var_756fda07.var_3edb6e25) && var_756fda07.var_3edb6e25 && isPlayer(player)) {
     player enableoffhandspecial();
     player enableoffhandweapons();
   }
@@ -323,7 +323,7 @@ function_6bf7c434(status_effect_type) {
   thread function_86c0eb67(self, "end");
 
   if(isDefined(self.var_3d1ed4bd) && isDefined(self.owner) && self.var_3d1ed4bd.doesfiredamage) {
-    if(isplayer(self.owner)) {
+    if(isPlayer(self.owner)) {
       self.owner clientfield::set("burn", 0);
     }
   }
@@ -376,13 +376,13 @@ handle_sounds(var_756fda07) {
   endtime = self.endtime;
 
   if(isDefined(var_756fda07.var_b86e9a5e)) {
-    if(level.time > endtime && isplayer(self.owner)) {
+    if(level.time > endtime && isPlayer(self.owner)) {
       self.owner playlocalsound(var_756fda07.var_b86e9a5e);
     }
   }
 
   if(isDefined(var_756fda07.var_801118b0)) {
-    if(level.time > endtime && isplayer(self.owner)) {
+    if(level.time > endtime && isPlayer(self.owner)) {
       self.owner playLoopSound(var_756fda07.var_801118b0);
     }
 
@@ -603,7 +603,7 @@ function_72886b31() {
 }
 
 function_3c54ae98(status_effect_type) {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 0;
   }
 
@@ -618,7 +618,7 @@ function_3c54ae98(status_effect_type) {
 }
 
 function_37683813() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return 1;
   }
 

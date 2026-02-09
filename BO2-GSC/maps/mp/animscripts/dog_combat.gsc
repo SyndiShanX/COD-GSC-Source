@@ -29,7 +29,7 @@ main() {
     return;
   }
 
-  if(isplayer(self.enemy))
+  if(isPlayer(self.enemy))
     self meleebiteattackplayer(self.enemy);
 }
 
@@ -57,7 +57,7 @@ meleebiteattackplayer(player) {
     self setanimstate("combat_attack_player_close_range");
     wait 0.35;
 
-    if(isplayer(self.enemy) && self.enemy getstance() == "prone")
+    if(isPlayer(self.enemy) && self.enemy getstance() == "prone")
       self meleewithoffset(vectorscale((0, 0, -1), 9.0));
     else
       self melee();
@@ -82,7 +82,7 @@ handlemeleebiteattacknotetracks(note, player) {
 }
 
 use_low_attack() {
-  if(isplayer(self.enemy)) {
+  if(isPlayer(self.enemy)) {
     if(self.enemy getstance() == "prone") {
       attack_height = self.origin[2] + 16;
 

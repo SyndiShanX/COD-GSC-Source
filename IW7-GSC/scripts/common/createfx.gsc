@@ -55,7 +55,7 @@ createloopsound() {
   var_0.v["origin"] = (0, 0, 0);
   var_0.v["server_culled"] = 1;
 
-  if(getdvar("serverCulledSounds") != "1") {
+  if(getDvar("serverCulledSounds") != "1") {
     var_0.v["server_culled"] = 0;
   }
 
@@ -251,7 +251,7 @@ createfxlogic() {
     level._effect = [];
   }
 
-  if(getdvar("createfx_map") == "") {} else if(getdvar("createfx_map") == scripts\engine\utility::get_template_script_MAYBE()) {
+  if(getDvar("createfx_map") == "") {} else if(getDvar("createfx_map") == scripts\engine\utility::get_template_script_MAYBE()) {
     [[level.var_position_player]]();
   }
 
@@ -266,9 +266,9 @@ createfxlogic() {
   setdvarifuninitialized("createfx_filter", "");
   setdvarifuninitialized("createfx_vfxonly", "0");
 
-  if(getdvar("createfx_use_f4") == "") {}
+  if(getDvar("createfx_use_f4") == "") {}
 
-  if(getdvar("createfx_no_autosave") == "") {}
+  if(getDvar("createfx_no_autosave") == "") {}
 
   level.createfx_draw_enabled = 1;
   level.last_displayed_ent = undefined;
@@ -435,8 +435,7 @@ createfxlogic() {
     }
 
     if(!level.mp_createfx) {
-      var_0 = [
-        }
+      var_0 = [}
         [level.var_position_player_get]](var_0);
 
     var_1 = var_12;
@@ -580,7 +579,7 @@ manipulate_createfx_ents(var_0, var_1, var_2, var_3, var_4) {
     if(!var_6.drawn) {
       continue;
     }
-    if(is_ent_filtered_out(var_6, getdvar("createfx_filter"))) {
+    if(is_ent_filtered_out(var_6, getDvar("createfx_filter"))) {
       continue;
     }
     var_7 = getdvarfloat("createfx_scaleid");
@@ -1928,11 +1927,11 @@ createfx_filter_types() {
 }
 
 cfxprintlnstart() {
-  scripts\engine\utility::fileprint_launcher_start_file();
+  scripts\engine\utility:: fileprint_launcher_start_file();
 }
 
 cfxprintln(var_0) {
-  scripts\engine\utility::fileprint_launcher(var_0);
+  scripts\engine\utility:: fileprint_launcher(var_0);
 }
 
 cfxprintlnend(var_0, var_1, var_2) {
@@ -1959,7 +1958,7 @@ cfxprintlnend(var_0, var_1, var_2) {
   var_5 = scripts\engine\utility::get_template_script_MAYBE();
   var_6 = get_raw_or_devraw_subdir();
   var_7 = get_gamemode_subdir();
-  scripts\engine\utility::fileprint_launcher_end_file("\share\" + var_6 + "\scripts\" + var_7 + "\maps\" + var_5 + "\gen\" + var_4, var_3);
+  scripts\engine\utility:: fileprint_launcher_end_file("\share\" + var_6 + "\scripts\" + var_7 + "\maps\" + var_5 + "\gen\" + var_4, var_3);
 }
 
 get_raw_or_devraw_subdir() {
@@ -2291,13 +2290,13 @@ set_tool_hudelem(var_0, var_1) {
 }
 
 select_by_substring() {
-  var_0 = getdvar("select_by_substring");
+  var_0 = getDvar("select_by_substring");
 
   if(var_0 == "") {
     return 0;
   }
 
-  setdvar("select_by_substring", "");
+  setDvar("select_by_substring", "");
   var_1 = [];
 
   foreach(var_4, var_3 in level.createfxent) {

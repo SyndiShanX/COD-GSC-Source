@@ -211,7 +211,7 @@ trigger_is_occupied() {
 
   foreach(entity in entities) {
     if(isalive(entity)) {
-      if(isplayer(entity) || isai(entity) || isvehicle(entity))
+      if(isPlayer(entity) || isai(entity) || isvehicle(entity))
         return true;
     }
   }
@@ -223,7 +223,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {

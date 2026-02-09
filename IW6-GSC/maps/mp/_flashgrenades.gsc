@@ -101,7 +101,7 @@ monitorFlash() {
         attacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback("flash");
 
         victim = self;
-        if(IsPlayer(attacker) && attacker IsItemUnlocked("specialty_paint") && attacker _hasPerk("specialty_paint")) {
+        if(isPlayer(attacker) && attacker IsItemUnlocked("specialty_paint") && attacker _hasPerk("specialty_paint")) {
           if(!victim maps\mp\perks\_perkfunctions::isPainted())
             attacker maps\mp\gametypes\_missions::processChallenge("ch_paint_pro");
 

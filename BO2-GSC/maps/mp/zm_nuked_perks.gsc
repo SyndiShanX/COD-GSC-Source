@@ -90,7 +90,6 @@ init_nuked_perks() {
       level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_perk_structs[i];
 
       level.random_perk_structs[i] thread draw_debug_location();
-
     }
   } else {
     level.override_perk_targetname = "zm_perk_machine_override";
@@ -117,7 +116,6 @@ init_nuked_perks() {
       level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_perk_structs[i];
 
       level.random_perk_structs[i] thread draw_debug_location();
-
     }
   }
 }

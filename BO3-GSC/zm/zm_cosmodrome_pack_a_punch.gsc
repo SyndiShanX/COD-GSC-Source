@@ -273,7 +273,7 @@ function rocket_piece_monitor_for_damage() {
   level endon("no_rocket_damage");
   self setCanDamage(1);
   self waittill("damage", dmg_amount, attacker, dir, point, dmg_type);
-  if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+  if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
     level notify("rocket_dmg");
     level.rocket_base_looper stoploopsound(1);
     level.var_4ba14d27 stoploopsound(1);

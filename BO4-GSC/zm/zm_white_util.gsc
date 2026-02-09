@@ -349,7 +349,7 @@ function_85edbfb9(w_weapon) {
 }
 
 function_1526eabf(e_player) {
-  return isplayer(e_player) && e_player zm_weapons::has_weapon_or_upgrade(level.a_w_ray_guns[2]);
+  return isPlayer(e_player) && e_player zm_weapons::has_weapon_or_upgrade(level.a_w_ray_guns[2]);
 }
 
 function_d7c9337c() {

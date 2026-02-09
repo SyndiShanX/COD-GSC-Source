@@ -377,7 +377,7 @@ function function_b8a39218() {
 }
 
 function function_ae39e30a(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, timeoffset, boneindex, modelindex, surfacetype, surfacenormal) {
-  if(isDefined(eattacker) && isplayer(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker)) {
     if(!isDefined(eattacker.doa.var_1f7cae53)) {
       eattacker.doa.var_1f7cae53 = 0;
     }
@@ -473,7 +473,7 @@ function function_6441ddee(ent) {
   if(!isDefined(ent)) {
     return false;
   }
-  if(!isplayer(ent)) {
+  if(!isPlayer(ent)) {
     return false;
   }
   if(isDefined(ent.doa) && isDefined(ent.doa.vehicle)) {
@@ -712,7 +712,7 @@ function function_b3eb3a0b(params) {
       self waittillmatch("pissedoff");
       continue;
     }
-    if(gettime() >= self.var_dc477b8d && isDefined(self.enemy) && isplayer(self.enemy) && randomint(100) < getdvarint("scr_boss_silverback_special_attack_chance_boost", 10)) {
+    if(gettime() >= self.var_dc477b8d && isDefined(self.enemy) && isPlayer(self.enemy) && randomint(100) < getdvarint("scr_boss_silverback_special_attack_chance_boost", 10)) {
       roll = randomint(100);
       if(roll < 5) {
         attacks = 5;
@@ -816,7 +816,7 @@ function private function_c2d22e21() {
   self endon("death");
   while(true) {
     self waittill("trigger", guy);
-    if(isplayer(guy)) {
+    if(isPlayer(guy)) {
       if(!isDefined(guy.var_18098213) || gettime() > guy.var_18098213) {
         guy notify("hash_9132a424");
         guy.var_18098213 = gettime() + 1000;

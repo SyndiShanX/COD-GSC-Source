@@ -853,7 +853,7 @@ stage4_incinerator_ground_run() {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
-    if(!isDefined(var_2) && isplayer(var_2)) {
+    if(!isDefined(var_2) && isPlayer(var_2)) {
       continue;
     }
     var_6 = var_2 getEye();
@@ -1216,7 +1216,7 @@ processenemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   if(maps\mp\zombies\_util::istrapweapon(var_4)) {
     return;
   }
-  if(isDefined(var_1) && isplayer(var_1) && maps\mp\_utility::ismeleemod(var_3) && !var_1 playerisbadgeupgradedstage7()) {
+  if(isDefined(var_1) && isPlayer(var_1) && maps\mp\_utility::ismeleemod(var_3) && !var_1 playerisbadgeupgradedstage7()) {
     var_1 playlocalsound("orbital_pkg_use");
     var_1 playerincrementbadge();
     return;
@@ -1270,7 +1270,7 @@ badgepickup() {
   for(;;) {
     self.trigger waittill("trigger", var_1);
 
-    if(isplayer(var_1) && !var_1 playerisbadgeupgradedstage7()) {
+    if(isPlayer(var_1) && !var_1 playerisbadgeupgradedstage7()) {
       var_1 playerincrementbadge();
       var_1 playlocalsound("ee_badge_collected_zombies");
       level.pickedupbadges = 1;

@@ -29,7 +29,7 @@ init() {
 }
 
 init_chatter() {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     self.voiceid = "plr";
     self.bc_isspeaking = 0;
     thread enemy_callout_tracking_plr();
@@ -156,7 +156,7 @@ take_fire_tracking() {
     self.request_move = 1;
 
     if(isDefined(var_1)) {
-      if(!isplayer(var_1)) {
+      if(!isPlayer(var_1)) {
         var_2 = createevent("inform_taking_fire", "inform_taking_fire");
         play_chatter(var_2);
       }
@@ -172,7 +172,7 @@ createevent(var_0, var_1) {
 }
 
 getthreatalias(var_0) {
-  if(isplayer(self))
+  if(isPlayer(self))
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self getplayerangles(), self.origin, var_0.origin);
   else
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self.angles, self.origin, var_0.origin);
@@ -225,7 +225,7 @@ play_chatter(var_0, var_1) {
   if(var_1 && !can_say_soundalias(var_2))
     return 0;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     self.bc_isspeaking = 1;
   else
     anim.tank_bc.bc_isspeaking = 1;
@@ -234,7 +234,7 @@ play_chatter(var_0, var_1) {
   self playSound(var_2, "bc_done", 1);
   self waittill("bc_done");
 
-  if(isplayer(self))
+  if(isPlayer(self))
     self.bc_isspeaking = 0;
   else
     anim.tank_bc.bc_isspeaking = 0;
@@ -250,17 +250,17 @@ can_say_event_type(var_0) {
   if(!self.bc_enabled)
     return 0;
 
-  if(!isplayer(self) && anim.tank_bc.bc_isspeaking)
+  if(!isPlayer(self) && anim.tank_bc.bc_isspeaking)
     return 0;
-  else if(isplayer(self) && self.bc_isspeaking)
+  else if(isPlayer(self) && self.bc_isspeaking)
     return 0;
 
-  if(isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0]))
+  if(isPlayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0]))
     return 1;
-  else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0]))
+  else if(!isPlayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0]))
     return 1;
 
-  if(isplayer(self))
+  if(isPlayer(self))
     var_1 = anim.tank_bc.bc_eventtypelastusedtimeplr[var_0];
   else
     var_1 = anim.tank_bc.bc_eventtypelastusedtime[var_0];
@@ -286,7 +286,7 @@ can_say_soundalias(var_0) {
 }
 
 update_event_type(var_0, var_1) {
-  if(isplayer(self))
+  if(isPlayer(self))
     anim.tank_bc.bc_eventtypelastusedtimeplr[var_0] = gettime();
   else
     anim.tank_bc.bc_eventtypelastusedtime[var_0] = gettime();

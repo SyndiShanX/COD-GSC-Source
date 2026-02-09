@@ -608,7 +608,7 @@ watch_for_damage_on_clock(var_0) {
   self endon("last_stand");
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(!isplayer(var_2) && !isagent(var_2)) {
+    if(!isPlayer(var_2) && !isagent(var_2)) {
       var_0.health = var_0.maxhealth;
       continue;
     }
@@ -875,7 +875,7 @@ use_memory_tv_object(var_0, var_1) {
     }
   }
 
-  if((scripts\engine\utility::istrue(var_1.finished_part_one) && scripts\engine\utility::istrue(var_1.finished_part_two) && scripts\engine\utility::istrue(var_1.finished_part_three)) || getdvar("scr_tv_quest") != "") {
+  if((scripts\engine\utility::istrue(var_1.finished_part_one) && scripts\engine\utility::istrue(var_1.finished_part_two) && scripts\engine\utility::istrue(var_1.finished_part_three)) || getDvar("scr_tv_quest") != "") {
     if(!isDefined(var_1.vo_prefix)) {
       return;
     }
@@ -1301,7 +1301,7 @@ use_nunchucks_object(var_0, var_1) {
     return;
   }
 
-  if(scripts\engine\utility::istrue(var_1.finished_part_one) && getdvar("scr_nunchucks") == "") {
+  if(scripts\engine\utility::istrue(var_1.finished_part_one) && getDvar("scr_nunchucks") == "") {
     return;
   }
 
@@ -1764,7 +1764,7 @@ watch_for_damage_on_struct(var_0) {
   thread reset_on_failure(var_0);
   for(;;) {
     self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(!isplayer(var_2) && !isagent(var_2)) {
+    if(!isPlayer(var_2) && !isagent(var_2)) {
       continue;
     }
 
@@ -1962,7 +1962,7 @@ activatememquestmodel(var_0, var_1, var_2) {
   var_3 = getcurrentquestfromstruct(var_0, var_1);
   for(;;) {
     var_0.model waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
-    if(!isplayer(var_5)) {
+    if(!isPlayer(var_5)) {
       continue;
     }
 
@@ -2288,7 +2288,7 @@ use_nunchucks_object_2(var_0, var_1) {
     }
   }
 
-  if(scripts\engine\utility::istrue(var_1.finished_part_two) && getdvar("scr_nunchucks") == "") {
+  if(scripts\engine\utility::istrue(var_1.finished_part_two) && getDvar("scr_nunchucks") == "") {
     return;
   }
 
@@ -2402,7 +2402,7 @@ watch_for_damage_on_struct_q2(var_0) {
   var_0 endon("delete_previous_thread");
   for(;;) {
     self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(!isplayer(var_2) && !isagent(var_2)) {
+    if(!isPlayer(var_2) && !isagent(var_2)) {
       continue;
     }
 
@@ -2524,7 +2524,7 @@ use_nunchucks_object_3(var_0, var_1) {
     }
   }
 
-  if(scripts\engine\utility::istrue(var_1.finished_part_three) && getdvar("scr_nunchucks") == "") {
+  if(scripts\engine\utility::istrue(var_1.finished_part_three) && getDvar("scr_nunchucks") == "") {
     return;
   }
 
@@ -2637,7 +2637,7 @@ watch_for_damage_on_struct_q3(var_0) {
   thread reset_on_failure_q3(var_0);
   for(;;) {
     self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-    if(!isplayer(var_2) && !isagent(var_2)) {
+    if(!isPlayer(var_2) && !isagent(var_2)) {
       continue;
     }
 
@@ -3471,7 +3471,7 @@ electric_trap_damage(var_0, var_1) {
   var_3 = getent(var_0.target, "targetname");
   for(;;) {
     var_3 waittill("trigger", var_4);
-    if(isplayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
+    if(isPlayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
       playsoundatpos(var_4.origin, "trap_electric_shock");
       playfxontagforclients(level._effect["electric_shock_plyr"], var_4, "tag_eye", var_4);
       var_4.padding_damage = 1;

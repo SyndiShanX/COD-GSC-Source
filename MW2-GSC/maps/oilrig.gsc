@@ -13,17 +13,16 @@
 #include maps\_slowmo_breach;
 
 main() {
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1")
     return;
-  SetDvar("breach_debug", "0");
-  setdvar("breach_weapons", "1");
+  setDvar("breach_debug", "0");
+  setDvar("breach_weapons", "1");
   //setsaveddvar( "thermalBlurFactorScope", 300 );
-  setdvar("breach_requires_friendlies_in_position", "0");
-  //setdvar( "breach_friendlies", "1" );
-  setdvar("hostage_missionfail", "1");
+  setDvar("breach_requires_friendlies_in_position", "0");
+  //setDvar( "breach_friendlies", "1" );
+  setDvar("hostage_missionfail", "1");
   initPrecache();
-  /*-----------------------
-  LEVEL VARIABLES
+  /*----------------------- LEVEL VARIABLES
   -------------------------*/
   level.squadsize = 3;
   level.droneCallbackThread = ::AI_drone_think;
@@ -54,8 +53,7 @@ main() {
       level.aColornodeTriggers = array_add(level.aColornodeTriggers, trigger);
   }
 
-  /*-----------------------
-  STARTS
+  /*----------------------- STARTS
   -------------------------*/
   // debug
   add_start("debug", ::start_debug, "debug");
@@ -77,8 +75,7 @@ main() {
   add_start("escape", ::start_escape, "escape");
   default_start(::start_default);
 
-  /*-----------------------
-  SUPPORT SCRIPTS
+  /*----------------------- SUPPORT SCRIPTS
   -------------------------*/
   level.weaponClipModels = [];
   level.weaponClipModels[0] = "weapon_g36_clip";
@@ -115,8 +112,7 @@ main() {
   level thread maps\oilrig_amb::main();
   maps\_slowmo_breach::add_breach_func(::first_breach);
 
-  /*-----------------------
-  FLAGS
+  /*----------------------- FLAGS
   -------------------------*/
   flag_init("sdv_01_passing");
 
@@ -223,8 +219,7 @@ main() {
   battlechatter_off("allies");
   battlechatter_off("axis");
 
-  /*-----------------------
-  GLOBAL THREADS
+  /*----------------------- GLOBAL THREADS
   -------------------------*/
   array_thread(getEntArray("redshirt_trigger", "targetname"), ::redshirt_trigger_think);
   array_thread(getEntArray("compassTriggers", "targetname"), ::compass_triggers_think);
@@ -254,8 +249,7 @@ main() {
   setignoremegroup("oblivious", "allies"); // allies ignore oblivious
   setignoremegroup("oblivious", "axis"); // axis ignore oblivious
   setignoremegroup("oblivious", "oblivious"); // oblivious ignore oblivious
-  /*-----------------------
-  SPAWNER THREADS
+  /*----------------------- SPAWNER THREADS
   -------------------------*/
   array_thread(getEntArray("hostiles_ambush", "targetname"), ::add_spawn_function, ::ambush_patroller_think);
   //array_thread( getEntArray( "seeker", "script_noteworthy" ), ::add_spawn_function, ::ai_seekers_think );
@@ -362,7 +356,6 @@ start_surface_notifies() {
     guy notify("finished_swim_animation");
     i++;
   }
-
 }
 
 start_rig(bDontSpawnFriendlies) {
@@ -541,15 +534,13 @@ underwater_sequence() {
   black_overlay.sort = 1000;
   black_overlay.foreground = false;
   //thread maps\_utility::set_ambient( "amb_underwater_test1v1" );
-  /*-----------------------
-  UNDERWATER FOG/VISON/FX
+  /*----------------------- UNDERWATER FOG/VISON/FX
   -------------------------*/
   thread underwater_hud_enable(true);
   thread enablePlayerWeapons(false);
   below_water_art_and_ambient_setup();
 
-  /*-----------------------
-  SETUP SUBS &SDVS
+  /*----------------------- SETUP SUBS &SDVS
   -------------------------*/
   eSub_01 = submarine_spawn("01", eNodeIntro);
   eSub_02 = submarine_spawn("02", eNodeIntro);
@@ -569,13 +560,11 @@ underwater_sequence() {
   eNodeIntro anim_first_frame(aIntroVehicles, "intro_sequence");
 
   wait(1);
-  /*-----------------------
-  SETUP PLAYER
+  /*----------------------- SETUP PLAYER
   -------------------------*/
   level.player thread player_sdv_think(eSDV_01, eNodeIntro);
 
-  /*-----------------------
-  SETUP FRIENDLIES
+  /*----------------------- SETUP FRIENDLIES
   -------------------------*/
   wait(.5);
   array_thread(level.sdvSquad01, ::friendly_sdv_think, eSDV_01, eNodeIntro);
@@ -583,14 +572,12 @@ underwater_sequence() {
 
   wait(1);
 
-  /*-----------------------
-  DISABLE ALL FX IN TOP AND MID DECKS
+  /*----------------------- DISABLE ALL FX IN TOP AND MID DECKS
   -------------------------*/
   array_thread(level.effects_mid_decks, ::pauseEffect);
   array_thread(level.effects_top_deck, ::pauseEffect);
 
-  /*-----------------------
-  DOOR OPENS
+  /*----------------------- DOOR OPENS
   -------------------------*/
   flag_wait("player_attached_to_sdv");
   array_thread(level.players, ::player_scuba);
@@ -661,14 +648,12 @@ underwater_slowview() {
 }
 
 underwater_friendly_setup() {
-  /*-----------------------
-  SETUP RIG FRIENDLIES AND HIDE THEM
+  /*----------------------- SETUP RIG FRIENDLIES AND HIDE THEM
   -------------------------*/
   initFriendlies("Rig", false, true);
   array_call(level.friendlies, ::hide);
 
-  /*-----------------------
-  SETUP SUBMARINE FRIENDLIES
+  /*----------------------- SETUP SUBMARINE FRIENDLIES
   -------------------------*/
   level.sdvSquad01 = [];
   level.sdvSquad01[0] = spawn_script_noteworthy("sdv01_pilot");
@@ -814,16 +799,14 @@ player_sdv_think(eSDV, eNodeIntro) {
   level.player allowprone(false);
   level.player allowsprint(false);
   level.player allowjump(false);
-  /*-----------------------
-  WORLDMODEL RIGS FOR PLAYER ANIMS
+  /*----------------------- WORLDMODEL RIGS FOR PLAYER ANIMS
   -------------------------*/
   ePlayer_rig = spawn_anim_model("player_rig");
   ePlayer_rig thread underwater_player_flags();
   eSDV anim_first_frame_solo(ePlayer_rig, "underwater_player_start", "origin_animate_jnt");
   ePlayer_rig linkto(eSDV, "origin_animate_jnt");
 
-  /*-----------------------
-  ATTACH PLAYER TO SUB
+  /*----------------------- ATTACH PLAYER TO SUB
   -------------------------*/
   //level.player setorigin( eSDV.origin );
   //level.player setplayerangles( eSDV.angles );
@@ -837,14 +820,12 @@ player_sdv_think(eSDV, eNodeIntro) {
   level.player PlayerLinkToDelta(ePlayer_rig, "tag_player", 1, 55, 43, 5, 20, true);
   flag_set("player_attached_to_sdv");
 
-  /*-----------------------
-  PLAYER ANIMATES
+  /*----------------------- PLAYER ANIMATES
   -------------------------*/
   flag_wait("intro_anim_sequence_starting");
   eSDV thread anim_single_solo(ePlayer_rig, "underwater_player_start", "origin_animate_jnt");
 
-  /*-----------------------
-  PLAYER SWIMMING UP
+  /*----------------------- PLAYER SWIMMING UP
   -------------------------*/
   flag_wait("sdv_01_arriving");
 
@@ -873,8 +854,7 @@ player_breaks_surface() {
   grate_blocker hide();
   grate_blocker notsolid();
 
-  /*-----------------------
-  STOP SCUBA, CHANGE VISION
+  /*----------------------- STOP SCUBA, CHANGE VISION
   -------------------------*/
   flag_wait("player_breaks_surface");
   array_thread(level.players, ::stop_player_scuba);
@@ -884,8 +864,7 @@ player_breaks_surface() {
   thread play_sound_in_space("player_break_surface", level.player.origin);
   thread player_surface_blur();
 
-  /*-----------------------
-  PLAYER REGAINS CONTROL
+  /*----------------------- PLAYER REGAINS CONTROL
   -------------------------*/
   //flag_wait( "player_is_done_swimming" );
   thread water_bob();
@@ -1005,7 +984,6 @@ water_movement(org_view_bob) {
 
     self.angles = (level.player.angles[0], level.player.angles[1], org_view_bob.angles[2]);
     self moveto(newLocation, updateTime, 0, 0);
-
   }
   if(isDefined(org_view_bob))
     org_view_bob delete();
@@ -1014,14 +992,12 @@ water_movement(org_view_bob) {
 }
 
 underwater_player_flags() {
-  /*-----------------------
-  PLAYER BREAKS SURFACE
+  /*----------------------- PLAYER BREAKS SURFACE
   -------------------------*/
   //self waittillmatch( "single anim", "surface" );
   //flag_set( "player_is_surfacing" );
 
-  /*-----------------------
-  PLAYER ENDS SWIMMING
+  /*----------------------- PLAYER ENDS SWIMMING
   -------------------------*/
   self waittillmatch("single anim", "end");
   flag_set("player_is_done_swimming");
@@ -1032,8 +1008,7 @@ friendly_sdv_think(eSDV, eNodeIntro) {
   self linkto(eSDV, "origin_animate_jnt");
   flag_wait("intro_anim_sequence_starting");
 
-  /*-----------------------
-  FRIENDLY RIDE-IN AND SWIM TO SURFACE
+  /*----------------------- FRIENDLY RIDE-IN AND SWIM TO SURFACE
   -------------------------*/
   eSDV thread anim_single_solo(self, "sdv_ride_in", "origin_animate_jnt");
   self waittillmatch("single anim", "end");
@@ -1079,7 +1054,6 @@ water_monitor() {
     else
       level notify("player_is_above_water");
   }
-
 }
 
 water_vision_management() {
@@ -1092,7 +1066,6 @@ water_vision_management() {
     level waittill("player_is_above_water");
     above_water_art_and_ambient_setup();
     thread player_surface_blur();
-
   }
 }
 
@@ -1222,24 +1195,21 @@ player_grate_sequence_think() {
   assert(isDefined(eNodeIntro));
   flag_wait("player_is_done_swimming");
 
-  //SetDvar( "old_compass", "1" );
+  //setDvar( "old_compass", "1" );
   SetSavedDvar("compass", "1");
 
-  /*-----------------------
-  PLAYER REGAINS CONTROL
+  /*----------------------- PLAYER REGAINS CONTROL
   -------------------------*/
   level.player set_speed(level.playerWaterSpeed);
 
-  /*-------------------------
-  WORLDMODEL RIGS FOR PLAYER ANIMS
+  /*------------------------- WORLDMODEL RIGS FOR PLAYER ANIMS
   -------------------------*/
   ePlayer_rig = spawn_anim_model("player_rig");
   ePlayer_rig thread player_kill_fx();
   ePlayer_rig hide();
   eNodeIntro anim_first_frame_solo(ePlayer_rig, "player_stealth_kill");
 
-  /*-----------------------
-  MAKE GUARD USABLE
+  /*----------------------- MAKE GUARD USABLE
   -------------------------*/
   //	level.hostile_stealthkill_player.useable = true;
   //	level.hostile_stealthkill_player SetCursorHint( "HINT_NOICON" );
@@ -1250,12 +1220,11 @@ player_grate_sequence_think() {
   thread player_looking_at_grate_guard_logic();
   waittill_player_triggers_stealth_kill();
 
-  //SetDvar( "old_compass", "0" );
+  //setDvar( "old_compass", "0" );
   SetSavedDvar("compass", "0");
   level.hostile_stealthkill_player.useable = false;
 
-  /*-----------------------
-  PLAYER DOES STEALTH KILL
+  /*----------------------- PLAYER DOES STEALTH KILL
   -------------------------*/
   //ePlayer_rig show();
   //ePlayer_rig lerp_player_view_to_tag_oldstyle( level.player, "tag_player", 0.5, 1, 0, 0, 0, 0 );
@@ -1267,32 +1236,27 @@ player_grate_sequence_think() {
   flag_set("player_starting_stealth_kill");
   eNodeIntro thread anim_single_solo(ePlayer_rig, "player_stealth_kill");
   ePlayer_rig show();
-  /*-----------------------
-  FOG OUT GEO USED FOR LIGHTGRID
+  /*----------------------- FOG OUT GEO USED FOR LIGHTGRID
   -------------------------*/
   //thread maps\createart\oilrig_underwater_art::underwater_while_slitting_throat( 5 );
 
-  /*-----------------------
-  PLAYER STARTING THROAT SLIT
+  /*----------------------- PLAYER STARTING THROAT SLIT
   -------------------------*/
   ePlayer_rig waittillmatch("single anim", "throat");
   flag_set("player_slitting_throat");
 
-  /*-----------------------
-  PLAYER WATCHING FLOATING BODY
+  /*----------------------- PLAYER WATCHING FLOATING BODY
   -------------------------*/
   ePlayer_rig waittillmatch("single anim", "teleport");
   flag_set("player_looking_at_floating_body");
 
-  /*-----------------------
-  PLAYER BEING HELPED FROM WATER
+  /*----------------------- PLAYER BEING HELPED FROM WATER
   -------------------------*/
   ePlayer_rig waittillmatch("single anim", "help");
   flag_set("player_ready_to_be_helped_from_water");
 
   flag_set_delayed("player_pulled_halfway_out_of_water", 2);
-  /*-----------------------
-  PLAYER OUT OF WATER
+  /*----------------------- PLAYER OUT OF WATER
   -------------------------*/
   ePlayer_rig waittillmatch("single anim", "end");
 
@@ -1305,13 +1269,11 @@ player_grate_sequence_think() {
   flag_set("player_done_being_helped_from_water");
   thread underwater_hud_enable(false);
 
-  /*-----------------------
-  DISABLE UNDERWATER FX
+  /*----------------------- DISABLE UNDERWATER FX
   -------------------------*/
   array_thread(level.effects_underwater, ::pauseEffect);
 
-  /*-----------------------
-  TURN ON BRUSH FOR PLAYER TO STAND AND MANTLE FROM
+  /*----------------------- TURN ON BRUSH FOR PLAYER TO STAND AND MANTLE FROM
   -------------------------*/
   mantle_platform = getent("mantle_platform", "targetname");
   assert(isDefined(mantle_platform));
@@ -1375,13 +1337,11 @@ waittill_player_triggers_stealth_kill() {
 player_in_water_monitor() {
   level notify("player_in_water");
   level endon("player_out_of_water");
-  /*-----------------------
-  TURN OFF WATER KILL TRIGGER WHILE IN WATER
+  /*----------------------- TURN OFF WATER KILL TRIGGER WHILE IN WATER
   -------------------------*/
   thread killtrigger_ocean_off();
 
-  /*-----------------------
-  PLAYER PROPERTIES WHILE IN WATER
+  /*----------------------- PLAYER PROPERTIES WHILE IN WATER
   -------------------------*/
   level.player allowcrouch(false);
   level.player allowprone(false);
@@ -1390,15 +1350,13 @@ player_in_water_monitor() {
   level.player set_speed(level.playerWaterSpeed);
   level.player disableWeapons();
 
-  /*-----------------------
-  WAIT FOR PLAYER TO GET OUT
+  /*----------------------- WAIT FOR PLAYER TO GET OUT
   -------------------------*/
   trig_out_of_water = getent("trig_out_of_water", "targetname");
   assert(isDefined(trig_out_of_water));
   trig_out_of_water waittill("trigger");
 
-  /*-----------------------
-  PLAYER PROPERTIES WHILE OUT OF WATER
+  /*----------------------- PLAYER PROPERTIES WHILE OUT OF WATER
   -------------------------*/
   level.player allowcrouch(true);
   level.player allowprone(true);
@@ -1407,8 +1365,7 @@ player_in_water_monitor() {
   level.player set_speed(level.playerCQBSpeed);
   level.player enableWeapons();
 
-  /*-----------------------
-  WAIT FOR PLAYER TO FALL BACK INTO WATER
+  /*----------------------- WAIT FOR PLAYER TO FALL BACK INTO WATER
   -------------------------*/
   //wait for player to not be touching the water trigger
   trig_in_water = getent("trig_in_water", "targetname");
@@ -1442,13 +1399,11 @@ friendly_surface_think() {
   eNodeIntro = getent("org_stealth_kill", "targetname");
   assert(isDefined(eNodeIntro));
 
-  /*-----------------------
-  WAIT TO FINISH SWIM UP ANIM
+  /*----------------------- WAIT TO FINISH SWIM UP ANIM
   -------------------------*/
   self waittill("finished_swim_animation");
 
-  /*-----------------------
-  PLAY SURFACE IDLE ANIM
+  /*----------------------- PLAY SURFACE IDLE ANIM
   -------------------------*/
   self unlink();
 
@@ -1457,14 +1412,12 @@ friendly_surface_think() {
   } else
     eNodeIntro thread anim_loop_solo(self, "surface_idle", "stop_idle");
 
-  /*-----------------------
-  SPECIAL FRIENDLY GETS IN POSITION FOR STEALTH KILL
+  /*----------------------- SPECIAL FRIENDLY GETS IN POSITION FOR STEALTH KILL
   -------------------------*/
   if(self.animname == "sdv02_pilot")
     self thread underwater_stealth_kill();
 
-  /*-----------------------
-  ALL OTHER ACTORS GET DELETED WHEN PLAYER NOT LOOKING
+  /*----------------------- ALL OTHER ACTORS GET DELETED WHEN PLAYER NOT LOOKING
   -------------------------*/
   else {
     flag_wait("player_looking_at_floating_body");
@@ -1475,8 +1428,7 @@ friendly_surface_think() {
 friendly_gear_takeoff() {
   flag_wait("player_ready_to_be_helped_from_water");
 
-  /*-----------------------
-  GEAR TAKEOFF
+  /*----------------------- GEAR TAKEOFF
   -------------------------*/
   eGearNode = getent("node_gear_takeoff", "targetname");
   eGearNode anim_generic_first_frame(level.friendly02, "oilrig_seal_surface_rebreather_off_guy2");
@@ -1490,8 +1442,7 @@ friendly_gear_takeoff() {
     }
   }
 
-  /*-----------------------
-  CROUCHING MASK GUY
+  /*----------------------- CROUCHING MASK GUY
   -------------------------*/
   mask_remove_guy anim_generic_first_frame(mask_remove_guy, "oilrig_seal_surface_mask_off");
   tempNode = spawn("script_origin", mask_remove_guy gettagorigin("TAG_ORIGIN"));
@@ -1499,8 +1450,7 @@ friendly_gear_takeoff() {
   thread maps\oilrig_anim::scuba_gear_removal("mask_off_oilrig_seal_surface_mask_off", "oilrig_seal_surface_mask_off_prop", tempNode, "player_pulled_halfway_out_of_water");
   mask_remove_guy setgoalpos(mask_remove_guy.origin);
 
-  /*-----------------------
-  DUAL GIAR FRIENDLIES
+  /*----------------------- DUAL GIAR FRIENDLIES
   -------------------------*/
   level.friendly02.disableexits = true;
   level.friendly03.disableexits = true;
@@ -1556,27 +1506,23 @@ player_looking_at_gear_friendlies(eGearNode) {
 }
 
 underwater_stealth_kill() {
-  /*-----------------------
-  GET ALL OTHER ACTORS IN THIS SEQUECE
+  /*----------------------- GET ALL OTHER ACTORS IN THIS SEQUECE
   -------------------------*/
   aStealthKillActors = [];
   aStealthKillActors[0] = self; //the AI doing the killing
   aStealthKillActors[1] = level.hostile_stealthkill_player; //the AI getting killed by the player
   aStealthKillActors[2] = level.hostile_stealthkill_friendly; //the AI getting killed by the friendly
 
-  /*-----------------------
-  WAIT FOR PLAYER TO START STEALTH KILL
+  /*----------------------- WAIT FOR PLAYER TO START STEALTH KILL
   -------------------------*/
   flag_wait("player_starting_stealth_kill");
 
-  /*-----------------------
-  ALL ACTORS PLAY ANIMS
+  /*----------------------- ALL ACTORS PLAY ANIMS
   -------------------------*/
   level.eNodeIntroDuplicate notify("stop_idle");
   level.eNodeIntroDuplicate anim_single(aStealthKillActors, "stealth_kill");
 
-  /*-----------------------
-  STEALTH KILLER COMES OUT OF WATER
+  /*----------------------- STEALTH KILLER COMES OUT OF WATER
   -------------------------*/
   //3-- todo...add mocapped coming out of water anim
   //	if( self.animname == "sdv02_pilot" )
@@ -1647,8 +1593,7 @@ door_to_deck1_think() {
   flag_wait("lower_room_breached");
   volume_first_room = getent("volume_first_room", "script_noteworthy");
 
-  //	/*-----------------------
-  //	TELEPORT THE TEAM LEADER TO THE DECK1 DOOR
+  //	/*----------------------- //	TELEPORT THE TEAM LEADER TO THE DECK1 DOOR
   //	-------------------------*/
   //	wait( 2 );
   //	
@@ -1664,8 +1609,7 @@ door_to_deck1_think() {
   //		level.teamleader teleport_when_out_of_sight( eNode );
   //	}
 
-  /*-----------------------
-  SEND THE TEAM LEADER TO THE DECK1 DOOR
+  /*----------------------- SEND THE TEAM LEADER TO THE DECK1 DOOR
   -------------------------*/
   wait(2);
   eNode = getnode("node_deck1_door", "targetname");
@@ -1674,8 +1618,7 @@ door_to_deck1_think() {
   wait(.5);
   level.teamleader setgoalnode(eNode);
 
-  /*-----------------------
-  OPEN THE DOOR TO DECK1
+  /*----------------------- OPEN THE DOOR TO DECK1
   -------------------------*/
   door_deck1 = getent("door_deck1", "targetname");
   door_deck1 open_door_deck1();
@@ -1703,8 +1646,7 @@ teleport_when_out_of_sight(eNode) {
 
 first_breach_ambient_guys() {
   flag_wait("player_at_lower_breach");
-  /*-----------------------
-  ENEMIES DOING COOL SHIT INSIDE THROUGH WINDOWS UNTIL BREACH
+  /*----------------------- ENEMIES DOING COOL SHIT INSIDE THROUGH WINDOWS UNTIL BREACH
   -------------------------*/
   sound_org = getent("origin_breach1_dialogue", "targetname");
   sound_org thread play_loop_sound_on_entity("oilrig_muffled_breach_voices");
@@ -1948,8 +1890,7 @@ breach_lower_setup() {
   level.teamleader maps\_slowmo_breach::add_slowmo_breacher();
   thread autosave_by_name("lower_breach");
 
-  /*-----------------------
-  HOSTAGES EVAC
+  /*----------------------- HOSTAGES EVAC
   -------------------------*/
   level waittill("A door in breach group 100 has been activated.");
   volume_first_room = getent("volume_first_room", "script_noteworthy");
@@ -1958,14 +1899,12 @@ breach_lower_setup() {
 
   flag_wait("lower_room_cleared");
 
-  /*-----------------------
-  ENABLE NEXT DECK FX
+  /*----------------------- ENABLE NEXT DECK FX
   -------------------------*/
   array_thread(level.effects_mid_decks, ::restartEffect);
 
   wait(1);
-  /*-----------------------
-  FRIENDLIES CONTINUE TO UPPER DECK
+  /*----------------------- FRIENDLIES CONTINUE TO UPPER DECK
   -------------------------*/
   triggersEnable("colornodes_after_lower_breach", "script_noteworthy", true);
   triggersEnable("colornodes_deck1", "script_noteworthy", true);
@@ -1977,8 +1916,7 @@ breach_lower_setup() {
 
 friendly_aims_at_railing_guy(ePatroller) {
   level endon("railing_patroller_dead");
-  /*-----------------------
-  FRIENDLY GETS INTO POSITION TO KILL RAILING DUDE
+  /*----------------------- FRIENDLY GETS INTO POSITION TO KILL RAILING DUDE
   -------------------------*/
   eNode = getnode("node_railing_friendly", "targetname");
   assert(isDefined(eNode));
@@ -2044,8 +1982,7 @@ friendly_speed_adjustment_breach_02() {
 
 deck1_breach_ambient_guys() {
   flag_wait("player_ignoring_heli_flyby");
-  /*-----------------------
-  ENEMIES DOING COOL SHIT INSIDE THROUGH WINDOWS UNTIL BREACH
+  /*----------------------- ENEMIES DOING COOL SHIT INSIDE THROUGH WINDOWS UNTIL BREACH
   -------------------------*/
   sound_org = getent("origin_ambush_discovery_dialogue", "targetname");
   sound_org thread play_loop_sound_on_entity("oilrig_muffled_breach_voices");
@@ -2115,7 +2052,7 @@ dialogue_heli_patrol_deck_1() {
   level endon("player_at_last_breach_building");
 
   //"Seal Leader: Ok, move."//"Seal Leader: Move."//"Seal Leader: All clear, move up."if(!flag("player_at_last_breach_building"))
-    dialogue_random_heli_all_clear();
+  dialogue_random_heli_all_clear();
 }
 
 balls_out_player_speed() {
@@ -2181,22 +2118,19 @@ ambush_sequence() {
   volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");
 
   level waittill("A door in breach group 200 has been activated.");
-  /*-----------------------
-  DISABLE LOWER RIG FX
+  /*----------------------- DISABLE LOWER RIG FX
   -------------------------*/
   array_thread(level.effects_lower_rig, ::pauseEffect);
   array_thread(level.effects_underwater, ::pauseEffect);
   array_thread(level.effects_top_deck, ::pauseEffect);
 
-  /*-----------------------
-  WAIT UNTIL UPPER ROOM BREACHED
+  /*----------------------- WAIT UNTIL UPPER ROOM BREACHED
   -------------------------*/
   flag_wait("upper_room_breached");
   //upper_room_hostiles = volume_ambush_room get_ai_touching_volume( "axis" );
   //array_thread( upper_room_hostiles,::delete_upper_room_guns_if_near_c4 );
 
-  /*-----------------------
-  FIGURE OUT WHERE FRIENDLY WILL PLANT C4
+  /*----------------------- FIGURE OUT WHERE FRIENDLY WILL PLANT C4
   -------------------------*/
   aFriendlyC4Orgs = [];
   aFriendlyC4Orgs[0] = getent("origin_c4_friendly", "targetname");
@@ -2210,8 +2144,7 @@ ambush_sequence() {
   //level.hostageNodes = getnodearray("node_hostage_scaffolding", "targetname" );
   //thread hostage_evac( volume_ambush_room, "upper_room_cleared" );
 
-  /*-----------------------
-  CLOSE DOOR BACK TO LOWER DECKS
+  /*----------------------- CLOSE DOOR BACK TO LOWER DECKS
   -------------------------*/
   flag_set("lower_decks_closed_off");
   door_deck1 = getent("door_deck1", "targetname");
@@ -2222,8 +2155,7 @@ ambush_sequence() {
   bottom_deck_destructibles = getEntArray("bottom_deck_destructibles", "script_noteworthy");
   array_thread(bottom_deck_destructibles, ::destructible_cleanup);
 
-  /*-----------------------
-  TELEPORT 2 TEAM2 MEMBERS TO EVAC HOSTAGES
+  /*----------------------- TELEPORT 2 TEAM2 MEMBERS TO EVAC HOSTAGES
   -------------------------*/
   aNodes = getnodearray("node_team2_scaffolding", "targetname");
   level.team2 = array_spawn(getEntArray("team2_escort", "targetname"), true);
@@ -2232,15 +2164,13 @@ ambush_sequence() {
 
   flag_wait("upper_room_cleared");
 
-  /*-----------------------
-  ENABLE TOP DECK FX
+  /*----------------------- ENABLE TOP DECK FX
   -------------------------*/
   array_thread(level.effects_top_deck, ::restartEffect);
 
   thread autosave_by_name("deck1_breach_finished");
 
-  /*-----------------------
-  FRIENDLIES TAKE UP GUARD POSITIONS IN ROOM
+  /*----------------------- FRIENDLIES TAKE UP GUARD POSITIONS IN ROOM
   -------------------------*/
   ac4Friendlies = [];
   ac4Friendlies[0] = level.friendly02;
@@ -2272,8 +2202,7 @@ ambush_sequence() {
 
   //"Navy Seal 1: Sir, I think we're going to have company..."radio_dialogue("oilrig_ns1_havecompany");
 
-  /*-----------------------
-  GLOWING C4 ON BODIES
+  /*----------------------- GLOWING C4 ON BODIES
   -------------------------*/
   //"Seal Leader: Alright. Get some C4 on those bodies. We're going loud."level.teamleader thread dialogue_execute("oilrig_nsl_goingloud");
 
@@ -2286,13 +2215,11 @@ ambush_sequence() {
   thread autosave_by_name("obj_c4_ambush_plant_given");
   wait(2);
 
-  /*-----------------------
-  FRIENDLIES GO GUARD OR PLANT C4
+  /*----------------------- FRIENDLIES GO GUARD OR PLANT C4
   -------------------------*/
   level.teamleader thread teamleader_ambush_think();
 
-  /*-----------------------
-  C4 PLANTED, GO TO AMBUSH
+  /*----------------------- C4 PLANTED, GO TO AMBUSH
   -------------------------*/
   flag_wait("player_has_started_planting_c4");
 
@@ -2302,8 +2229,7 @@ ambush_sequence() {
   level.friendly02 cqb_walk("on");
   level.friendly03 cqb_walk("on");
 
-  /*-----------------------
-  GIVE LOUD WEAPONS TO FRIENDLIES
+  /*----------------------- GIVE LOUD WEAPONS TO FRIENDLIES
   -------------------------*/
   //level.friendly03 forceUseWeapon( "scar_h_reflex", "primary" );
 
@@ -2326,8 +2252,7 @@ ambush_sequence() {
 
   thread ambush_nag();
 
-  /*-----------------------
-  ENEMIES HEADED TO BLDG
+  /*----------------------- ENEMIES HEADED TO BLDG
   -------------------------*/
   flag_wait("ambush_enemies_spawned");
 
@@ -2336,13 +2261,11 @@ ambush_sequence() {
   level.friendly03 thread force_weapon_when_player_not_looking("mp5_reflex");
 
   thread oilrig_stealth_monitor_on();
-  /*-----------------------
-  ALL IGNORED
+  /*----------------------- ALL IGNORED
   -------------------------*/
   ignoreme_on_squad_and_player();
 
-  /*-----------------------
-  ENEMIES ALERTED
+  /*----------------------- ENEMIES ALERTED
   -------------------------*/
   flag_wait_either("ambush_enemies_alerted", "ambush_enemies_alerted_prematurely");
   thread oilrig_stealth_monitor_off();
@@ -2385,7 +2308,6 @@ switch_player_weapons_to_loud_versions() {
       }
     }
   }
-
 }
 
 //delete_upper_room_guns_if_near_c4()
@@ -2412,8 +2334,7 @@ switch_player_weapons_to_loud_versions() {
 //}
 
 hostage_manhandle_sequence() {
-  /*-----------------------
-  SETUP
+  /*----------------------- SETUP
   -------------------------*/
   prison_sequence_dummies_walk = getent("prison_sequence_dummies_walk", "script_noteworthy");
   prison_sequence_dummies_run = getent("prison_sequence_dummies_run", "script_noteworthy");
@@ -2421,8 +2342,7 @@ hostage_manhandle_sequence() {
   runReference = prison_sequence_dummies_run;
   lookatPoint = runReference.origin + (0, 0, 36);
 
-  /*-----------------------
-  SETUP ACTORS WHEN AMBUSH OBJECTIVE GIVEN
+  /*----------------------- SETUP ACTORS WHEN AMBUSH OBJECTIVE GIVEN
   -------------------------*/
   flag_wait("obj_c4_ambush_plant_given");
 
@@ -2448,8 +2368,7 @@ hostage_manhandle_sequence() {
   aRunActors[0].animname = "manhandle_soldier_run";
   aRunActors[1].animname = "manhandle_prisoner_run";
 
-  /*-----------------------
-  GET ACTORS READY WHEN PLAYER NOT LOOKING
+  /*----------------------- GET ACTORS READY WHEN PLAYER NOT LOOKING
   -------------------------*/
   flag_wait("player_has_started_planting_c4");
 
@@ -2459,8 +2378,7 @@ hostage_manhandle_sequence() {
   foreach(hostage in aHostagesForSequence)
   hostage hide();
 
-  /*-----------------------
-  GET ACTORS READY WHEN PLAYER NOT LOOKING
+  /*----------------------- GET ACTORS READY WHEN PLAYER NOT LOOKING
   -------------------------*/
   if(isDefined(level.manhandler)) {
     if(level.manhandler istouching(volume_ambush_room)) {
@@ -2468,7 +2386,6 @@ hostage_manhandle_sequence() {
         level.manhandler stop_magic_bullet_shield();
       level.manhandler delete();
     }
-
   }
 
   walkReference anim_first_frame(aWalkActors, "prisoner_manhandle_walk");
@@ -2477,8 +2394,7 @@ hostage_manhandle_sequence() {
   foreach(hostage in aHostagesForSequence)
   hostage show();
 
-  /*-----------------------
-  ANIMATE ACTORS WHEN PLAYER IN RANGE AND LOOKING
+  /*----------------------- ANIMATE ACTORS WHEN PLAYER IN RANGE AND LOOKING
   -------------------------*/
   player_looking_at_prisoner_sequence = getent("player_looking_at_prisoner_sequence", "targetname");
   player_looking_at_prisoner_sequence trigger_on();
@@ -2518,8 +2434,7 @@ friendly_plant_c4(eAnimOrg, eNode) {
   assert(isDefined(c4));
   safeVolume = getent(c4.target, "targetname");
   assert(isDefined(safeVolume));
-  /*-----------------------
-  CHILL OUT AND GUARD WHILE PLAYER PLANTS C4
+  /*----------------------- CHILL OUT AND GUARD WHILE PLAYER PLANTS C4
   -------------------------*/
   self disable_ai_color();
   self cqb_walk("on");
@@ -2527,8 +2442,7 @@ friendly_plant_c4(eAnimOrg, eNode) {
   flag_wait("obj_c4_ambush_plant_given");
   wait(randomfloatrange(2, 4));
 
-  /*-----------------------
-  PLANTS C4 ON THE WALL TO HELP OUT
+  /*----------------------- PLANTS C4 ON THE WALL TO HELP OUT
   -------------------------*/
   eAnimOrg anim_generic_reach(self, "C4_plant_start");
   self setgoalpos(self.origin);
@@ -2601,8 +2515,7 @@ ambush_nag() {
 }
 
 teamleader_ambush_think() {
-  /*-----------------------
-  TEAM LEADER GOES TO LADDER AND WAITS
+  /*----------------------- TEAM LEADER GOES TO LADDER AND WAITS
   -------------------------*/
   eNode = getnode("node_guard_scaffolding", "targetname");
   self disable_ai_color();
@@ -2611,8 +2524,7 @@ teamleader_ambush_think() {
   self.alertlevel = "alert";
   level.teamleader cqb_walk("on");
 
-  /*-----------------------
-  C4 PLANTED AND PLAYER APPROACHING
+  /*----------------------- C4 PLANTED AND PLAYER APPROACHING
   -------------------------*/
   flag_wait("obj_c4_ambush_plant_complete");
   aNodes = getnodearray("friendlyStartHeli", "targetname");
@@ -2639,8 +2551,7 @@ c4_nag(volume_ambush_room) {
   level endon("obj_c4_ambush_plant_complete");
   level endon("player_has_started_planting_c4");
 
-  /*-----------------------
-  NAG PLAYER TO PLANT C4
+  /*----------------------- NAG PLAYER TO PLANT C4
   -------------------------*/
   wait(randomintrange(4, 6));
 
@@ -2656,8 +2567,7 @@ c4_nag(volume_ambush_room) {
 
   wait(4);
 
-  /*-----------------------
-  PLAYER STILL HASN'T PLANTED C4, BUT FRIENDLY HAS
+  /*----------------------- PLAYER STILL HASN'T PLANTED C4, BUT FRIENDLY HAS
   -------------------------*/
   flag_set("friendlies_had_to_plant_C4");
   //thread c4_invisible( volume_ambush_room );
@@ -2691,8 +2601,7 @@ mission_fail_c4_not_planted() {
 glowing_c4_think(volume_ambush_room) {
   flag_wait("upper_room_breached");
 
-  /*-----------------------
-  SPAWN THE DYING DUDES WITH THE C4
+  /*----------------------- SPAWN THE DYING DUDES WITH THE C4
   -------------------------*/
   c4_hostiles = getEntArray("c4_hostiles", "targetname");
   c4_hostiles2 = getEntArray("c4_hostiles2", "targetname");
@@ -3035,8 +2944,7 @@ deck1_firefight() {
   //	wait( 0.9 );
   //	thread dialogue_random_pmc( org );
 
-  /*-----------------------
-  MAKE ONE FRIENDLY KILLABLE, REMOVE AS BREACH FRIENDLY
+  /*----------------------- MAKE ONE FRIENDLY KILLABLE, REMOVE AS BREACH FRIENDLY
   -------------------------*/
   flag_wait("obj_explosives_locate_given");
 
@@ -3116,8 +3024,7 @@ heli_ramp_up_damage(eHeli) {
   if(level.gameskill > 1) {
     return;
   }
-  /*-----------------------
-  MAKE DAMAGE FROM HELI GUNS RAMP UP
+  /*----------------------- MAKE DAMAGE FROM HELI GUNS RAMP UP
   -------------------------*/
   heli_damage_delay = 1.25; //time to make player invulnerable after being shot by heli
   heli_damage_ramp_loops = 20; //number of times to make the player invulnerable
@@ -3144,7 +3051,6 @@ heli_ramp_up_damage(eHeli) {
       heli_damage_delay = heli_damage_delay / 1.3;
       level.player disableInvulnerability();
     }
-
   }
   level.player disableInvulnerability();
 }
@@ -3175,7 +3081,6 @@ heli_kill_nag(eHeli, sEndFlag) {
       while(iDialogueNumberNoRocket == iLastDialogueNumberNoRocket) {
         wait(0.05);
         iDialogueNumberNoRocket = randomint(5);
-
       }
       if(flag(sEndFlag)) {
         break;
@@ -3186,7 +3091,6 @@ heli_kill_nag(eHeli, sEndFlag) {
       while(iDialogueNumber == iLastDialogueNumber) {
         wait(0.05);
         iDialogueNumber = randomint(4);
-
       }
       if(flag(sEndFlag)) {
         break;
@@ -3304,8 +3208,7 @@ heli_deck2_harass() {
   array_thread(eHeli.riders, ::attack_heli_riders_think);
   flag_wait_either("player_looking_deck2_littlebird", "player_deck2_littlebird_failsafe");
 
-  /*-----------------------
-  HELI AIRWOLFS UP
+  /*----------------------- HELI AIRWOLFS UP
   -------------------------*/
   delaythread(2, ::dialogue_random_heliwarning_combat_intense);
   thread maps\_vehicle::gopath(eHeli);
@@ -3325,8 +3228,7 @@ heli_deck2_harass() {
   eHeli delaythread(3, maps\_attack_heli::heli_spotlight_on, "tag_barrel", true);
   thread track_if_player_is_shooting_at_intimidating_heli(eHeli);
   thread heli_kill_failsafe(eHeli);
-  /*-----------------------
-  HELI BEGINS ATTACK BEHAVIOR
+  /*----------------------- HELI BEGINS ATTACK BEHAVIOR
   -------------------------*/
   flag_wait_either("player_shoots_or_aims_rocket_at_intimidating_heli", "deck_2_heli_is_finished_intimidating");
 
@@ -3335,8 +3237,7 @@ heli_deck2_harass() {
   thread heli_kill_nag(eHeli, "heli_deck2_shot_down");
   flag_wait("heli_deck2_shot_down");
 
-  /*-----------------------
-  HELI DEAD
+  /*----------------------- HELI DEAD
   -------------------------*/
   thread autosave_by_name("heli_deck2_dead");
   wait(1.5);
@@ -3369,13 +3270,12 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
     // this damage is done to self.health which isnt used to determine the helicopter's health, damageTaken is.
     eHeli waittill("damage", damage, attacker, direction_vec, P, type);
 
-    if(!isDefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isPlayer(attacker))
       continue;
     else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
       break;
     }
-
   }
 }
 
@@ -3398,7 +3298,6 @@ smoke_throw(aSmokeOrgs) {
     //if( all_ai_dead_in_volumes( volumes_enemy_hardpoint_deck3 ) )
     //	break;
   }
-
 }
 
 /****************************************************************************
@@ -3452,7 +3351,6 @@ breach_save_deck3_triggers_think() {
         enemiesPresent = true;
         break;
       }
-
     }
     if(enemiesPresent == false) {
       thread autosave_by_name("deck3_breach");
@@ -3544,15 +3442,13 @@ deck3_firefight() {
         continue;
       dude.disableDamageShieldPain = true;
     }
-
   }
 
   if(!is_specialop()) {
     thread autosave_by_name("deck3_firefight_start");
   }
 
-  /*-----------------------
-  SMOKE GAMEPLAY
+  /*----------------------- SMOKE GAMEPLAY
   -------------------------*/
   flag_wait("player_on_right_top_deck");
   aSmokeOrgs = getEntArray("smoke_deck3", "targetname");
@@ -3583,15 +3479,13 @@ deck3_firefight() {
     }
   }
 
-  /*-----------------------
-  SPAWN FLANKERS IF PLAYER STILL NOT APPROACHING
+  /*----------------------- SPAWN FLANKERS IF PLAYER STILL NOT APPROACHING
   -------------------------*/
   flag_wait_or_timeout("player_approaching_topdeck_building", 28);
   if(!flag("player_approaching_topdeck_building"))
     thread spawn_smoke_flankers();
 
-  /*-----------------------
-  AT MAIN BREACH ROOM
+  /*----------------------- AT MAIN BREACH ROOM
   -------------------------*/
   flag_wait_either("player_near_breach_topdeck_right", "player_near_breach_topdeck_left");
 
@@ -3715,7 +3609,7 @@ c4_barrels_think() {
   flag_wait("derrick_room_getting_breached");
   while(!flag("player_detonated_explosives")) {
     eDamageTrigger waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, idFlags);
-    if((isDefined(attacker)) && (isplayer(attacker))) {
+    if((isDefined(attacker)) && (isPlayer(attacker))) {
       if(idFlags & 8) // bullet penetration occurred
         continue;
       //remove all hitpoints if it was a grenade, etc
@@ -3851,8 +3745,7 @@ escape_sequence() {
 
   thread friendly_speed_adjustment_on();
 
-  /*-----------------------
-  OPTIMIZE FOR FLIGHT AWAY
+  /*----------------------- OPTIMIZE FOR FLIGHT AWAY
   -------------------------*/
   setsaveddvar("sm_sunSampleSizeNear", 1); // air
   setsaveddvar("sm_sunShadowScale", 0.5); // optimization
@@ -3861,15 +3754,13 @@ escape_sequence() {
   sPlayerRideTag = "tag_guy3";
 
   wait(1);
-  /*-----------------------
-  FRIENDLIES LEAVE DERRICK ROOM
+  /*----------------------- FRIENDLIES LEAVE DERRICK ROOM
   -------------------------*/
   triggersEnable("colornodes_escape", "script_noteworthy", true);
   triggersEnable("colornodes_escape_start", "script_noteworthy", true);
   activate_trigger_with_noteworthy("colornodes_escape_start");
 
-  /*-----------------------
-  SPAWN LITTLEBIRD AND RIDERS TO NODES
+  /*----------------------- SPAWN LITTLEBIRD AND RIDERS TO NODES
   -------------------------*/
   aRoof_riders_left = array_spawn(getEntArray("littlebird_riders_left", "targetname"));
   aRoof_riders_right = array_spawn(getEntArray("littlebird_riders_right", "targetname"));
@@ -3892,8 +3783,7 @@ escape_sequence() {
   level.littlebird_escape set_stage(pickup_node_before_stage, aRoof_riders_left, "left");
   level.littlebird_escape set_stage(pickup_node_before_stage, aRoof_riders_right, "right");
 
-  /*-----------------------
-  HIDE THE RIDER IN THE PLAYER SEAT
+  /*----------------------- HIDE THE RIDER IN THE PLAYER SEAT
   -------------------------*/
   aRiders = array_merge(aRoof_riders_left, aRoof_riders_right);
   foreach(guy in aRiders) {
@@ -3920,25 +3810,21 @@ escape_sequence() {
   level.littlebird_escape gopath();
   flag_set("littlebird_escape_moving");
 
-  /*-----------------------
-  JET FLYBY
+  /*----------------------- JET FLYBY
   -------------------------*/
   thread helipad_jets();
 
-  /*-----------------------
-  LITTLEBIRD LANDS BEFORE PLAYER GETS THERE
+  /*----------------------- LITTLEBIRD LANDS BEFORE PLAYER GETS THERE
   -------------------------*/
   //touch_down happens when the vehicle paths into the vehicle node contained in theprefabs/script_gags/littlebird_stage_load.map prefab
   level.littlebird_escape waittill("touch_down");
   flag_set("escape_littlebird_landed");
 
-  /*-----------------------
-  PLAYER GETON TRIGGER
+  /*----------------------- PLAYER GETON TRIGGER
   -------------------------*/
   level.littlebird_escape thread player_gets_on_littlebird(sPlayerRideTag);
 
-  /*-----------------------
-  RIDERS GET ON
+  /*----------------------- RIDERS GET ON
   -------------------------*/
   level.littlebird_escape thread load_side("left", aRoof_riders_left);
   level.littlebird_escape thread load_side("right", aRoof_riders_right);
@@ -3946,8 +3832,7 @@ escape_sequence() {
   while(level.littlebird_escape.riders.size < 8)
     wait(.1);
 
-  /*-----------------------
-  LITTLEBIRD TAKES OFF
+  /*----------------------- LITTLEBIRD TAKES OFF
   -------------------------*/
   //level.littlebird_escape vehicle_ai_event( "idle_alert" );
   //level.littlebird_escape thread vehicle_liftoff( 76 );
@@ -3960,13 +3845,11 @@ escape_sequence() {
   thread vision_set_fog_changes("oilrig_exterior_heli", 5);
   flag_set("obj_escape_complete");
 
-  /*-----------------------
-  DISABLE MID DECK FX (ALL FX ARE NOW PAUSED EXCEPT FOR TOP DECK FX)
+  /*----------------------- DISABLE MID DECK FX (ALL FX ARE NOW PAUSED EXCEPT FOR TOP DECK FX)
   -------------------------*/
   array_thread(level.effects_mid_decks, ::pauseEffect);
 
-  /*-----------------------
-  Trigger smoke plumces for ride out
+  /*----------------------- Trigger smoke plumces for ride out
   -------------------------*/
   exploder("ride_smoke");
 
@@ -3982,8 +3865,7 @@ escape_sequence() {
 
   level.littlebird_escape Vehicle_SetSpeed(17);
 
-  /*-----------------------
-  MAIN DECK BLACKHAWK
+  /*----------------------- MAIN DECK BLACKHAWK
   -------------------------*/
   flag_wait("heli_escape_path_01");
   blackhawk_main_deck = spawn_vehicle_from_targetname_and_drive("blackhawk_main_deck");
@@ -3991,14 +3873,12 @@ escape_sequence() {
   //level.player_view_controller ClearTargetEntity();
   //level.player_view_controller SetTargetEntity( view_derrick_building_01 );
 
-  /*-----------------------
-  MAIN DECK BLACKHAWK
+  /*----------------------- MAIN DECK BLACKHAWK
   -------------------------*/
   flag_wait("heli_escape_path_03");
   friendlies_deck3_stairs = array_spawn(getEntArray("friendlies_deck3_stairs", "targetname"));
 
-  /*-----------------------
-  LITTLEBIRD WINGMEN
+  /*----------------------- LITTLEBIRD WINGMEN
   -------------------------*/
   flag_wait("heli_escape_path_04");
   littlebird_wingman_01_drone = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_01_drone");
@@ -4009,13 +3889,11 @@ escape_sequence() {
   //level.player_view_controller ClearTargetEntity();
   //level.player_view_controller SetTargetEntity( view_derrick_building_01 );
 
-  /*-----------------------
-  ADJUST PLAYER SPEED
+  /*----------------------- ADJUST PLAYER SPEED
   -------------------------*/
   level.littlebird_escape Vehicle_SetSpeed(22);
 
-  /*-----------------------
-  LITTLEBIRD WINGMEN
+  /*----------------------- LITTLEBIRD WINGMEN
   -------------------------*/
   flag_wait("heli_escape_path_06");
   littlebird_wingman_02_drone = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_02_drone");
@@ -4024,8 +3902,7 @@ escape_sequence() {
   littlebird_wingman_02_drone Vehicle_SetSpeed(33);
   littlebird_wingman_01_drone Vehicle_SetSpeed(33);
 
-  /*-----------------------
-  JETS FLYBY IN DISTANCE
+  /*----------------------- JETS FLYBY IN DISTANCE
   -------------------------*/
   jets_escape_flight_03 = spawn_vehicles_from_targetname_and_drive("jets_escape_flight_03");
 
@@ -4033,8 +3910,7 @@ escape_sequence() {
 
   flag_wait("heli_escape_path_07");
 
-  /*-----------------------
-  LEVEL END
+  /*----------------------- LEVEL END
   -------------------------*/
   flag_wait("heli_escape_path_09");
   //level.player_view_controller ClearTargetEntity();
@@ -4093,8 +3969,7 @@ liner(blah) {
 player_gets_on_littlebird(sPlayerRideTag) {
   //self ==> the littlebird
 
-  /*-----------------------
-  WAIT FOR PLAYER TO APPROACH LITTLEBIRD
+  /*----------------------- WAIT FOR PLAYER TO APPROACH LITTLEBIRD
   -------------------------*/
   trigger_origin = self gettagorigin(sPlayerRideTag);
   trigger_radius = 80;
@@ -4109,8 +3984,7 @@ player_gets_on_littlebird(sPlayerRideTag) {
   player_seat linkto(self, sPlayerRideTag, (0, 0, 0), (0, -90, 0));
   trigger waittill("trigger");
 
-  /*-----------------------
-  PLAYER LERPED ONTO BIRD
+  /*----------------------- PLAYER LERPED ONTO BIRD
   -------------------------*/
 
   level.player freezeControls(true);
@@ -4151,8 +4025,7 @@ player_gets_on_littlebird(sPlayerRideTag) {
 //{
 //	//self ==> the littlebird
 //	
-//	/*-----------------------
-//	WAIT FOR PLAYER TO APPROACH LITTLEBIRD
+//	/*----------------------- //	WAIT FOR PLAYER TO APPROACH LITTLEBIRD
 //	-------------------------*/
 //	trigger_origin = self gettagorigin( sPlayerRideTag );
 //	trigger_radius = 80;
@@ -4169,8 +4042,7 @@ player_gets_on_littlebird(sPlayerRideTag) {
 //	
 //	trigger waittill( "trigger" );
 //	
-//	/*-----------------------
-//	PLAYER LERPED ONTO BIRD
+//	/*----------------------- //	PLAYER LERPED ONTO BIRD
 //	-------------------------*/
 //	
 //	level.player freezeControls( true );
@@ -4608,7 +4480,7 @@ AI_axis_think() {
 
 AI_axis_death_think() {
   self waittill("death", attacker);
-  if((isDefined(attacker)) && (isplayer(attacker)))
+  if((isDefined(attacker)) && (isPlayer(attacker)))
     level notify("player_killed_an_enemy");
 }
 
@@ -4700,7 +4572,6 @@ heli_patrol_think() {
       guy.ignoreme = true;
       guy setthreatbiasgroup("oblivious");
     }
-
   }
   self thread maps\_attack_heli::heli_spotlight_on(undefined, true);
   self waittill("damage");
@@ -4777,8 +4648,7 @@ turret_rains_down_shells() {
 //}
 
 level_think() {
-  /*-----------------------
-  MOVING DERRICK DRILL THING
+  /*----------------------- MOVING DERRICK DRILL THING
   -------------------------*/
   eDerrick_thing = getent("derrick_thing", "targetname");
   eDerrick_thing.origin = eDerrick_thing.origin + (0, 0, -2816);
@@ -4789,7 +4659,6 @@ level_think() {
     eDerrick_thing rotatevelocity((0, speed, 0), time);
     wait(time);
   }
-
 }
 
 //triggers_zone_management_think()
@@ -5200,8 +5069,7 @@ initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
   if(is_default_start()) {
     return;
   }
-  /*-----------------------
-  TELEPORT FRIENDLIES
+  /*----------------------- TELEPORT FRIENDLIES
   -------------------------*/
   aFriendlies = level.squad;
   warpNodes = getnodearray("friendlyStart" + sStartPoint, "targetname");
@@ -5234,14 +5102,12 @@ initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
     }
   }
 
-  /*-----------------------
-  TELEPORT PLAYERS
+  /*----------------------- TELEPORT PLAYERS
   -------------------------*/
   if((isDefined(bWarpPlayer)) && (bWarpPlayer == true)) {
     aPlayerNodes = getnodearray("playerStart" + sStartPoint, "targetname");
     teleport_players(aPlayerNodes);
   }
-
 }
 
 team2_think() {
@@ -5354,11 +5220,9 @@ premature_kill_missionfail(soundOrg) {
   level endon("breach_explosion");
   while(true) {
     self waittill("damage", amount, attacker);
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       thread mission_fail_generic(soundOrg);
-
     }
-
   }
 
 }
@@ -5429,7 +5293,6 @@ spawn_group_staggered(aSpawners) {
     wait(randomfloatrange(.25, 1));
     guy = spawner spawn_ai();
     spawnedGuys[spawnedGuys.size] = guy;
-
   }
   //check to ensure all the guys were spawned
   assertEx((aSpawners.size == spawnedGuys.size), "Not all guys were spawned successfully from array_spawn");
@@ -5504,7 +5367,7 @@ submarine_spawn(sSubNumber, eNode) {
     }
     foreach(part in eSub.aDDSparts) {
       part linkto(eSub.DDS);
-      //			if( getdvar( "oilrig_debug" ) == "0" )
+      //			if( getDvar( "oilrig_debug" ) == "0" )
       //			{
       //				if( ( isDefined( part.script_noteworthy ) ) && ( part.script_noteworthy == "ribs" ) )
       //					part hide();
@@ -5578,8 +5441,7 @@ sdv_think() {
   flag_init(sFlagNameStarting);
   flag_init(sFlagNameArriving);
   flag_init(sFlagNameStopping);
-  /*-----------------------
-  SDV STARTS MOVING
+  /*----------------------- SDV STARTS MOVING
   -------------------------*/
   self waittillmatch("single anim", "start");
   flag_set(sFlagNameStarting);
@@ -5678,8 +5540,7 @@ friendlies_shoot_heli_with_rockets(eHeli) {
   while(isDefined(eHeli)) {
     wait(randomfloatrange(15, 25));
 
-    /*-----------------------
-    GET FRIENDLY THE PLAYER CANNOT SEE
+    /*----------------------- GET FRIENDLY THE PLAYER CANNOT SEE
     -------------------------*/
     eFriendly = undefined;
     level.squad = remove_dead_from_array(level.squad);
@@ -5710,8 +5571,7 @@ friendlies_shoot_heli_with_rockets(eHeli) {
       }
     }
 
-    /*-----------------------
-    SHOOT THE FAKE HELI TARGET
+    /*----------------------- SHOOT THE FAKE HELI TARGET
     -------------------------*/
     if((isDefined(eHeliTarget)) && (bullettracepassed(eFriendly gettagorigin("tag_flash") + (0, 0, zOffset), eHeliTarget.origin, true, eFriendly))) {
       if(!isDefined(eFriendly))
@@ -5862,11 +5722,11 @@ air_nodes_think() {
   if(!isDefined(self.script_flag))
     return;
   flag_init(self.script_flag);
-  if(getdvar("oilrig_debug") == "1")
+  if(getDvar("oilrig_debug") == "1")
     self thread debug_message(self.script_flag, self.origin, 9999);
   self waittill("trigger");
   flag_set(self.script_flag);
-  if(getdvar("oilrig_debug") == "1")
+  if(getDvar("oilrig_debug") == "1")
     iPrintlnbold("flag: " + self.script_flag + " has been set");
 }
 
@@ -5932,24 +5792,21 @@ friendly_should_speed_up() {
 }
 
 fx_management() {
-  /*-----------------------
-  CREATE ARRAYS OF FX FOR THE LEVEL
+  /*----------------------- CREATE ARRAYS OF FX FOR THE LEVEL
   -------------------------*/
   level.effects_underwater = [];
   level.effects_lower_rig = [];
   level.effects_mid_decks = [];
   level.effects_top_deck = [];
 
-  /*-----------------------
-  GET VOLUMES THAT ENCOMPASS EFFECTS
+  /*----------------------- GET VOLUMES THAT ENCOMPASS EFFECTS
   -------------------------*/
   effects_underwater = getent("effects_underwater", "script_noteworthy");
   effects_lower_rig = getent("effects_lower_rig", "script_noteworthy");
   effects_mid_decks = getent("effects_mid_decks", "script_noteworthy");
   effects_top_deck = getent("effects_top_deck", "script_noteworthy");
 
-  /*-----------------------
-  CATALOG ALL FX BY VOLUME
+  /*----------------------- CATALOG ALL FX BY VOLUME
   -------------------------*/
   dummy = spawn("script_origin", (0, 0, 0));
   for(i = 0; i < level.createfxent.size; i++) {

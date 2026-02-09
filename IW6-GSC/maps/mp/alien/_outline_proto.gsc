@@ -136,7 +136,6 @@ unset_alien_outline() {
     if(!isDefined(alien.pet))
       disable_outline_for_player(alien, self);
   }
-
 }
 
 hive_outline_monitor() {
@@ -162,7 +161,6 @@ drill_preplant_outline_monitor() {
     if(index % 6 == 0)
       waitframe();
   }
-
 }
 
 item_outline() {
@@ -183,7 +181,6 @@ item_outline() {
     if(index % 6 == 0)
       waitframe();
   }
-
 }
 
 item_outline_pillage() {
@@ -204,7 +201,6 @@ item_outline_pillage() {
     if(index % 10 == 0)
       waitframe();
   }
-
 }
 
 intel_outline() {
@@ -230,7 +226,6 @@ item_outline_weapon_monitor() {
     if(index % 6 == 0)
       waitframe();
   }
-
 }
 
 item_outline_drill_monitor() {

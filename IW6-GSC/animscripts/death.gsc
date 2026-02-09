@@ -839,7 +839,7 @@ playexplodedeathanim() {
 
   var_1 = var_0[randomint(var_0.size)];
 
-  if(getdvar("scr_expDeathMayMoveCheck", "on") == "on") {
+  if(getDvar("scr_expDeathMayMoveCheck", "on") == "on") {
     var_2 = getmovedelta(var_1, 0, 1);
     var_3 = self localtoworldcoords(var_2);
 

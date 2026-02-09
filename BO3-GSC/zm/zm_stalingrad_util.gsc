@@ -354,7 +354,7 @@ function function_ff194e31(var_d965b1c7) {
 function function_b74ff7d4() {
   ai_zombie = self;
   ai_zombie waittill("death", e_attacker);
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     [[level.hero_power_update]](e_attacker, ai_zombie);
   }
 }

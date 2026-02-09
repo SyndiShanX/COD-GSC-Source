@@ -116,7 +116,7 @@ function_ef53914c() {
   attacker = params.attacker;
   weapon = params.sweapon;
 
-  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
+  if(!isPlayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
     return;
   }
 
@@ -179,7 +179,7 @@ function_de83cc91(params) {
     weapon = params.laststandparams.sweapon;
   }
 
-  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
+  if(!isPlayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
     return;
   }
 }

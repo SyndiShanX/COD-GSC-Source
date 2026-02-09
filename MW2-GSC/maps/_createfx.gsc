@@ -38,9 +38,9 @@ createfx() {
 func_position_player_get(lastPlayerOrigin) {
   if(distance(lastPlayerOrigin, level.player.origin) > 64) {
     // save the players position so we can go back here on a map restart
-    setdvar("createfx_playerpos_x", level.player.origin[0]);
-    setdvar("createfx_playerpos_y", level.player.origin[1]);
-    setdvar("createfx_playerpos_z", level.player.origin[2]);
+    setDvar("createfx_playerpos_x", level.player.origin[0]);
+    setDvar("createfx_playerpos_y", level.player.origin[1]);
+    setDvar("createfx_playerpos_z", level.player.origin[2]);
   }
 
   return level.player.origin;

@@ -108,7 +108,7 @@ globalthink() {
   level thread flares_think(self);
   level thread maps\_helicopter_ai::evasive_think(self);
 
-  if(getdvar("cobrapilot_wingman_enabled") == "1") {
+  if(getDvar("cobrapilot_wingman_enabled") == "1") {
     if(isDefined(self.script_wingman)) {
       level.wingman = self;
       level thread maps\_helicopter_ai::wingman_think(self);
@@ -366,7 +366,7 @@ shootenemytarget_bullets(var_0) {
   while(self.health > 0) {
     var_2 = randomintrange(1, 25);
 
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getDvar("cobrapilot_debug") == "1")
       iprintln("randomShots = " + var_2);
 
     for(var_3 = 0; var_3 < var_2; var_3++) {
@@ -389,7 +389,7 @@ shootenemytarget_bullets(var_0) {
 }
 
 shootenemytarget_bullets_debugline(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(getdvar("cobrapilot_debug") != "1") {
+  if(getDvar("cobrapilot_debug") != "1") {
     return;
   }
   if(!isDefined(var_4))

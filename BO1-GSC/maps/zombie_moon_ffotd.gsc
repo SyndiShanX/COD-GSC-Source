@@ -11,7 +11,6 @@
 main_start() {
   SetSavedDvar("sm_sunShadowSmallScriptPS3OnlyEnable", true);
 }
-
 main_end() {
   if(level.pistol_values[level.pistol_values.size - 1] != "microwavegundw_upgraded_zm") {
     level.pistol_values[level.pistol_values.size] = "microwavegundw_zm";
@@ -19,12 +18,11 @@ main_end() {
   }
   level.zombie_last_stand = ::last_stand_pistol_swap;
 }
-
 last_stand_pistol_swap() {
   if(self has_powerup_weapon()) {
     self.lastActiveWeapon = "none";
   }
-  if(!self hasWeapon(self.laststandpistol)) {
+  if(!self HasWeapon(self.laststandpistol)) {
     self GiveWeapon(self.laststandpistol);
   }
   ammoclip = WeaponClipSize(self.laststandpistol);

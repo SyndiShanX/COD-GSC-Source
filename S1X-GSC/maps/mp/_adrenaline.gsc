@@ -152,7 +152,6 @@ StartAdrenaline() {
     TriggerFX(self.overclock_fx_l);
     TriggerFX(self.overclock_fx_r);
   }
-
 }
 
 StopAdrenaline(should_play_fx) {

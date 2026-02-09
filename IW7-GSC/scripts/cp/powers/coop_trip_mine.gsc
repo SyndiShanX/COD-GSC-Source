@@ -149,7 +149,7 @@ func_127F4() {
       continue;
     }
 
-    var_3 = scripts\engine\utility::ter_op(isplayer(var_2) || isagent(var_2), var_2 gettagorigin("j_helmet"), var_2.origin);
+    var_3 = scripts\engine\utility::ter_op(isPlayer(var_2) || isagent(var_2), var_2 gettagorigin("j_helmet"), var_2.origin);
     var_4 = self gettagorigin("tag_laser");
     var_5 = self.var_6316.origin;
     var_6 = scripts\engine\utility::closestdistancebetweensegments(var_2.origin, var_3, var_4, var_5);
@@ -185,7 +185,7 @@ func_127F7() {
       continue;
     }
 
-    var_3 = scripts\engine\utility::ter_op(isplayer(var_2) || isagent(var_2), var_2 getEye(), var_2.origin);
+    var_3 = scripts\engine\utility::ter_op(isPlayer(var_2) || isagent(var_2), var_2 getEye(), var_2.origin);
     var_4 = function_0287(self.origin, var_2 getEye(), var_1, self, 0, "physicsquery_closest");
     if(isDefined(var_4) && var_4.size > 0) {
       continue;
@@ -215,7 +215,7 @@ func_127E4(var_0, var_1) {
     return 0;
   }
 
-  if(isplayer(var_0) || isagent(var_0)) {
+  if(isPlayer(var_0) || isagent(var_0)) {
     if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_0)) {
       return 0;
     }

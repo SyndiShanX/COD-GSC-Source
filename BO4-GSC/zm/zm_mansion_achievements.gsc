@@ -44,7 +44,7 @@ on_player_damage(params) {
 on_ai_killed(params) {
   e_attacker = params.eattacker;
 
-  if(isplayer(e_attacker)) {
+  if(isPlayer(e_attacker)) {
     if(self.archetype == # "nosferatu") {
       str_zone = self zm_utility::get_current_zone();
 

@@ -1162,7 +1162,7 @@ function_ea2d02a6() {
 
 function_cdcaffd1(var_88206a50, ent) {
   vol_test = getent(var_88206a50.target, "targetname");
-  return (isDefined(ent.attacker) && isplayer(ent.attacker) || isDefined(ent.damageinflictor) && isplayer(ent.damageinflictor)) && isDefined(ent) && ent istouching(vol_test);
+  return (isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor)) && isDefined(ent) && ent istouching(vol_test);
 }
 
 soul_captured(var_f0e6c7a2, ent) {

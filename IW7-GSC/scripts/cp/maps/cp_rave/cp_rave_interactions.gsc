@@ -160,7 +160,7 @@ fuse_pick_up_monitor(var_0, var_1) {
   var_0 sethintstring(&"CP_RAVE_PICKUP_ITEM");
   for(;;) {
     var_0 waittill("trigger", var_2);
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       level.has_picked_up_fuses = 1;
       var_2 playlocalsound("part_pickup");
       var_2 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);

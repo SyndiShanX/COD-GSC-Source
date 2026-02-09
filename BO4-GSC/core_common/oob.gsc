@@ -93,7 +93,7 @@ isoutofbounds() {
 istouchinganyoobtrigger() {
   result = 0;
 
-  if(isplayer(self) && function_65b20()) {
+  if(isPlayer(self) && function_65b20()) {
     return 0;
   }
 
@@ -193,12 +193,12 @@ waitforplayertouch() {
     waitresult = self waittill(#"trigger");
     entity = waitresult.activator;
 
-    if(isplayer(entity)) {
+    if(isPlayer(entity)) {
       player = entity;
     } else if(isvehicle(entity) && isalive(entity)) {
       player = entity getseatoccupant(0);
 
-      if(!isDefined(player) || !isplayer(player)) {
+      if(!isDefined(player) || !isPlayer(player)) {
         continue;
       }
 
@@ -308,7 +308,7 @@ updatevisualeffects(entity) {
     timeremaining = level.oob_timelimit_ms - gettime() - self.oob_start_time;
   }
 
-  if(entity.var_c5d65381 === 1 && isplayer(self) && !self isremotecontrolling() && isvehicle(entity)) {
+  if(entity.var_c5d65381 === 1 && isPlayer(self) && !self isremotecontrolling() && isvehicle(entity)) {
     self clientfield::set_to_player("out_of_bounds", 0);
     self val::reset(#"oob", "show_hud");
     return;
@@ -358,7 +358,7 @@ killentity(entity) {
 
   entity val::set(#"oob", "takedamage", 1);
 
-  if(isplayer(entity) && entity isinvehicle()) {
+  if(isPlayer(entity) && entity isinvehicle()) {
     vehicle = entity getvehicleoccupied();
     vehicle val::set(#"oob", "takedamage", 1);
     occupants = vehicle getvehoccupants();
@@ -374,7 +374,7 @@ killentity(entity) {
 
   entity dodamage(entity.health + 10000, entity.origin, undefined, undefined, "none", "MOD_TRIGGER_HURT", 8192 | 16384);
 
-  if(isplayer(entity)) {
+  if(isPlayer(entity)) {
     entity suicide();
   }
 }
@@ -385,13 +385,13 @@ watchforleave(entity) {
   entity endon(#"death");
 
   while(true) {
-    if(entity istouchinganyoobtrigger() && (isplayer(entity) || isplayer(self) && self isremotecontrolling() || entity.var_c5d65381 === 1)) {
+    if(entity istouchinganyoobtrigger() && (isPlayer(entity) || isPlayer(self) && self isremotecontrolling() || entity.var_c5d65381 === 1)) {
       updatevisualeffects(entity);
       cur_time = gettime();
       elapsed_time = cur_time - self.oob_start_time;
 
       if(elapsed_time > level.oob_timelimit_ms) {
-        if(isplayer(entity)) {
+        if(isPlayer(entity)) {
           entity val::set(#"oob_touch", "ignoreme", 0);
           entity.laststand = undefined;
 

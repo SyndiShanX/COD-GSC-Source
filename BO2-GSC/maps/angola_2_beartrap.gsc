@@ -25,8 +25,9 @@ give_player_beartrap() {
   level thread beartrap_mortar_plant_think();
   level.player.planting_beartrap_mortar = 0;
 
-  if(isDefined(level.player_has_mortars) && level.player_has_mortars)
+  if(isDefined(level.player_has_mortars) && level.player_has_mortars) {
     level.player thread mortar_refill_think();
+  }
 }
 
 beartrap_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
@@ -34,8 +35,9 @@ beartrap_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_mea
 }
 
 beartrap_helper_message(delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   screen_message_create(&"ANGOLA_2_BEARTRAP_HELPER");
   wait 4;
@@ -50,8 +52,9 @@ beartrap_watch() {
   while(true) {
     self waittill("grenade_fire", e_grenade, str_weapon_name);
 
-    if(str_weapon_name == "beartrap_sp")
+    if(str_weapon_name == "beartrap_sp") {
       e_grenade thread beartrap_triggered_think();
+    }
   }
 }
 
@@ -69,8 +72,9 @@ beartrap_triggered_think() {
       case "TRAP_PULLING_IN_TARGET":
         self beartrap_pulling_in_target();
 
-        if(self.trap_mode != "TRAP_CATCHES_TARGET")
+        if(self.trap_mode != "TRAP_CATCHES_TARGET") {
           self.trap_mode = "TRAP_LOOKING_FOR_TARGET";
+        }
 
         break;
       case "TRAP_CATCHES_TARGET":
@@ -120,8 +124,9 @@ beartrap_pulling_in_target() {
   self.trap_target.goalradius = 42;
   self.trap_target waittill("goal");
 
-  if(self.message)
+  if(self.message) {
     screen_message_delete();
+  }
 
   self.trap_target thread ai_caught_in_beartrap(self);
   self.trap_target.using_beartrap = 1;
@@ -146,8 +151,9 @@ bear_trap_closing_animations() {
 cleanup_beartrap_script_model(delay) {
   level.player endon("death");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   self notify("beartrap_stop_loop");
   self anim_stopanimscripted();
@@ -164,8 +170,9 @@ beartrap_catches_targes() {
     foreach(ai_enemy in a_enemies) {
       if(isDefined(ai_enemy) && isalive(ai_enemy)) {
         if(!maps\angola_2_util::ent_is_launcher(ai_enemy) && !isDefined(ai_enemy.using_beartrap) && !isDefined(ai_enemy.investigating_bear_trap)) {
-          if(distance2d(self.origin, ai_enemy.origin) < ai_goto_trap_radius)
+          if(distance2d(self.origin, ai_enemy.origin) < ai_goto_trap_radius) {
             ai_enemy thread second_wave_investigate_beartrap(self);
+          }
         }
       }
     }
@@ -179,8 +186,9 @@ ai_caught_in_beartrap(e_beartrap) {
   e_beartrap thread bear_trap_closing_animations();
   self.allowdeath = 1;
 
-  if(e_beartrap.beartrap_exlposive == 1)
+  if(e_beartrap.beartrap_exlposive == 1) {
     e_beartrap thread primed_beartrap_explode(self);
+  }
 
   org anim_generic_aligned(self, "ai_beartrap_caught");
   org thread anim_generic_loop(self, "ai_beartrap_caught_loop");
@@ -200,8 +208,9 @@ primed_beartrap_explode(guy) {
   playFX(level._effect["def_explosion"], self.origin);
   playsoundatposition("exp_mortar", self.origin);
 
-  if(isDefined(self.mortar_ref))
+  if(isDefined(self.mortar_ref)) {
     self.mortar_ref delete();
+  }
 
   level thread ai_beartrap_explosive_radius(self, 400);
 }
@@ -225,8 +234,9 @@ beartrap_alert_ai_to_player_soon(delay) {
 }
 
 beartrap_search_for_ai_victim(ai_enemy, in_range_distance, vis_dot) {
-  if(isDefined(ai_enemy.investigating_bear_trap))
+  if(isDefined(ai_enemy.investigating_bear_trap)) {
     return 0;
+  }
 
   dist_to_trap = distance(ai_enemy.origin, self.origin);
 
@@ -235,8 +245,9 @@ beartrap_search_for_ai_victim(ai_enemy, in_range_distance, vis_dot) {
     v_dir_to_trap = vectornormalize(self.origin - ai_enemy.origin);
     dot = vectordot(v_ai_forward, v_dir_to_trap);
 
-    if(dot > vis_dot)
+    if(dot > vis_dot) {
       return dist_to_trap;
+    }
   }
 
   return 0;
@@ -250,8 +261,9 @@ second_wave_investigate_beartrap(e_trap) {
   wait 0.2;
   rval = randomfloatrange(0, 100);
 
-  if(rval < 100)
+  if(rval < 100) {
     self clear_run_anim();
+  }
 
   self setgoalpos(e_trap.origin);
   self.goalradius = ai_reached_trap_radius;
@@ -293,12 +305,13 @@ beartrap_mortar_plant_think() {
       e_beartrap_closest.mortar_ref = play_plant_mortar_anim(e_beartrap_closest);
       total_mortars = level.player getweaponammostock("mortar_shell_dpad_sp") + level.player getweaponammoclip("mortar_shell_dpad_sp");
 
-      if(total_mortars == 0)
+      if(total_mortars == 0) {
         level.player takeweapon("mortar_shell_dpad_sp");
-      else if(level.player getweaponammostock("mortar_shell_dpad_sp") > 0)
+      } else if(level.player getweaponammostock("mortar_shell_dpad_sp") > 0) {
         level.player setweaponammostock("mortar_shell_dpad_sp", level.player getweaponammostock("mortar_shell_dpad_sp") - 1);
-      else if(level.player getweaponammoclip("mortar_shell_dpad_sp") > 0)
+      } else if(level.player getweaponammoclip("mortar_shell_dpad_sp") > 0) {
         level.player setweaponammoclip("mortar_shell_dpad_sp", level.player getweaponammoclip("mortar_shell_dpad_sp") - 1);
+      }
 
       e_beartrap_closest.beartrap_exlposive = 1;
       arrayremovevalue(level.a_beartraps, e_beartrap_closest);
@@ -339,8 +352,9 @@ beartrap_explosive_think() {
           self.message = 1;
         }
 
-        if(self.message && level.player usebuttonpressed())
+        if(self.message && level.player usebuttonpressed()) {
           level notify("player_trying_to_plant");
+        }
       }
     }
 
@@ -371,8 +385,9 @@ ai_beartrap_explosive_radius(e_beartrap, radius) {
     radiusdamage(e_beartrap.origin, radius, 100, 50, level.player, "MOD_EXPLOSIVE");
   }
 
-  if(num_ai_hit_by_trap >= 4)
+  if(num_ai_hit_by_trap >= 4) {
     level notify("three_ai_hit_by_mortar_beartrap_explosion");
+  }
 }
 
 ai_beartrap_explosive_death(e_beartrap) {
@@ -399,8 +414,9 @@ does_player_have_mortar() {
 
   foreach(str_weapon in a_weapons) {
     if(str_weapon == "mortar_shell_dpad_sp") {
-      if(level.player getammocount(str_weapon) > 0)
+      if(level.player getammocount(str_weapon) > 0) {
         return true;
+      }
     }
   }
 
@@ -421,8 +437,9 @@ play_plant_mortar_anim(beartrap) {
   level.player disableweapons();
   level.player playerlinktoabsolute(player_rig, "tag_player");
 
-  foreach(guy in guys)
-  guy show();
+  foreach(guy in guys) {
+    guy show();
+  }
 
   beartrap anim_single_aligned(guys, "mortar_plant");
   level.player unlink();
@@ -441,14 +458,16 @@ beartrap_refill_think() {
     a_weapons = self getweaponslist();
 
     foreach(str_weapon in a_weapons) {
-      if(str_weapon == "beartrap_sp")
+      if(str_weapon == "beartrap_sp") {
         b_beartraps = 1;
+      }
     }
 
-    if(b_beartraps)
+    if(b_beartraps) {
       self givemaxammo("beartrap_sp");
-    else
+    } else {
       self giveweapon("beartrap_sp");
+    }
   }
 }
 
@@ -461,31 +480,35 @@ mortar_refill_think() {
     a_weapons = self getweaponslist();
 
     foreach(str_weapon in a_weapons) {
-      if(str_weapon == "mortar_shell_dpad_sp")
+      if(str_weapon == "mortar_shell_dpad_sp") {
         b_mortars = 1;
+      }
     }
 
-    if(b_mortars)
+    if(b_mortars) {
       self givemaxammo("mortar_shell_dpad_sp");
-    else
+    } else {
       self giveweapon("mortar_shell_dpad_sp");
+    }
   }
 }
 
 moderate_number_of_beartraps() {
   level.player endon("death");
 
-  if(!isDefined(level.active_beartraps))
+  if(!isDefined(level.active_beartraps)) {
     level.active_beartraps = [];
+  }
 
   while(true) {
     level waittill("beartrap_added", trap);
 
     if(isDefined(trap)) {
-      if(level.active_beartraps.size < 10)
+      if(level.active_beartraps.size < 10) {
         level.active_beartraps[level.active_beartraps.size] = trap;
-      else
+      } else {
         level.active_beartraps = add_beartrap_into_full_array(trap);
+      }
     }
   }
 }
@@ -498,14 +521,16 @@ remove_from_beartrap_array() {
 add_beartrap_into_full_array(trap) {
   level.active_beartraps[0] notify("trap_removed_to_make_room");
 
-  if(isDefined(level.active_beartraps[0].mortar_ref))
+  if(isDefined(level.active_beartraps[0].mortar_ref)) {
     level.active_beartraps[0].mortar_ref delete();
+  }
 
   level.active_beartraps[0] delete();
   a_temp = [];
 
-  for(i = 1; i <= level.active_beartraps.size; i++)
+  for(i = 1; i <= level.active_beartraps.size; i++) {
     a_temp[a_temp.size] = level.active_beartraps[i];
+  }
 
   a_temp[9] = trap;
   return a_temp;
@@ -516,14 +541,16 @@ trap_array_remove(a_array, e_ent) {
   removed_index = undefined;
 
   for(i = 0; i < a_array.size; i++) {
-    if(a_array[i] == e_ent)
+    if(a_array[i] == e_ent) {
       removed_index = i;
+    }
   }
 
   for(i = 0; i < a_array.size; i++) {
     if(i < removed_index) {
-      if(a_array[i] != e_ent)
+      if(a_array[i] != e_ent) {
         a_temp[a_temp.size] = a_array[i];
+      }
 
       continue;
     }

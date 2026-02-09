@@ -30,8 +30,7 @@ main() {
   level._effect["falling_dirt_frequent_runner_cement"] = loadfx("dust/falling_dirt_frequent_runner_cement");
   level._effect["falling_dirt_infrequent_runner"] = loadfx("dust/falling_dirt_infrequent_runner");
 
-  if(getdvar("clientSideEffects") != "1") {
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_cement_fx::main();
   }
-
 }

@@ -775,7 +775,7 @@ func_10CCC(var_0) {
 }
 
 func_7B5D(var_0) {
-  if(isplayer(self)) {
+  if(isPlayer(self)) {
     var_1 = self;
   } else {
     var_1 = level.player;

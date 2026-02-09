@@ -233,7 +233,7 @@ getBestStepOutPos() {
   else if(self.doingAmbush && isDefined(self.shootPos))
     yaw = self.coverNode GetYawToOrigin(self.shootPos);
 
-  dvarval = getdvar("scr_cornerforcestance");
+  dvarval = getDvar("scr_cornerforcestance");
   if(dvarval == "lean" || dvarval == "a" || dvarval == "b")
     return dvarval;
 
@@ -304,7 +304,7 @@ changeStepOutPos() {
   if(animHasNotetrack(switchanim, "start_aim")) {
     self waittillmatch("changeStepOutPos", "start_aim");
   } else {
-    /#println( "^1Corner position switch animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack" );
+    println("^1Corner position switch animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack");
     self waittillmatch("changeStepOutPos", "end");
   }
 
@@ -508,7 +508,7 @@ stepOut() /* bool */ {
 
     self waittillmatch("stepout", "start_aim");
   } else {
-    /#println( "^1Corner stepout animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack" );
+    println("^1Corner stepout animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack");
     self waittillmatch("stepout", "end");
   }
 
@@ -931,7 +931,7 @@ isPeekOutPosClear() {
 
   lookAtPos = eyePos + anglesToForward(self.coverNode.angles) * PEEKOUT_OFFSET;
 
-  // /# thread debugLine( eyePos, lookAtPos, ( 1, 0, 0 ), 1.5 );
+  // thread debugLine( eyePos, lookAtPos, ( 1, 0, 0 ), 1.5 );
 
   return sightTracePassed(eyePos, lookAtPos, true, self);
 }

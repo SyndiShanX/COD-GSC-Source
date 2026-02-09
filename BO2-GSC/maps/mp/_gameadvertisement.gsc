@@ -96,7 +96,6 @@ teamscorelimitcheck(rulescorepercent) {
     }
 
     updatedebughud(3, "Score Percentage Left: ", int(minscorepercentageleft));
-
   }
 
   return true;
@@ -351,7 +350,6 @@ updatedebughud(hudindex, text, value) {
       level.sessionadverthud_4b_text = value;
       break;
   }
-
 }
 
 sessionadvertismentupdatedebughud() {

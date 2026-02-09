@@ -52,12 +52,8 @@ class cbarricade: cdoor {
         foreach(s_door in var_59746f25) {
           s_door.c_door.var_7d28591d = 1;
 
-          if([
-              [s_door.c_door]
-            ] - > is_open()) {
-            [
-              [s_door.c_door]
-            ] - > close();
+          if([[s_door.c_door]] - > is_open()) {
+            [[s_door.c_door]] - > close();
           }
         }
       }
@@ -126,12 +122,8 @@ class cbarricade: cdoor {
         foreach(s_door in var_59746f25) {
           s_door.c_door.var_7d28591d = 1;
 
-          if([
-              [s_door.c_door]
-            ] - > is_open()) {
-            [
-              [s_door.c_door]
-            ] - > close();
+          if([[s_door.c_door]] - > is_open()) {
+            [[s_door.c_door]] - > close();
           }
         }
       }
@@ -146,7 +138,6 @@ class cbarricade: cdoor {
     thread function_da5abae9();
     thread function_6c15ac46();
   }
-
 }
 
 autoexec __init__system__() {

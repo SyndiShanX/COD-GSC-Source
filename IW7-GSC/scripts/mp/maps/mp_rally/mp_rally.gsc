@@ -9,10 +9,10 @@ main() {
   scripts\mp\maps\mp_rally\mp_rally_fx::main();
   scripts\mp\load::main();
   scripts\mp\compass::setupminimap("compass_map_mp_rally");
-  setdvar("r_lightGridEnableTweaks", 1);
-  setdvar("r_lightGridIntensity", 1.33);
-  setdvar("r_umbraMinObjectContribution", 8);
-  setdvar("r_umbraAccurateOcclusionThreshold", 1024);
+  setDvar("r_lightGridEnableTweaks", 1);
+  setDvar("r_lightGridIntensity", 1.33);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 1024);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -75,7 +75,7 @@ setupspinningblades() {
         continue;
       }
 
-      if(isplayer(var_5)) {
+      if(isPlayer(var_5)) {
         if(var_5 isinphase()) {
           continue;
         }
@@ -120,7 +120,7 @@ setuppowerlines() {
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(isDefined(var_1)) {
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         if(var_1 isinphase()) {
           continue;
         }
@@ -275,7 +275,7 @@ barreldropperloop(var_0, var_1, var_2, var_3) {
 lingeringgascloudwatch(var_0, var_1, var_2, var_3) {
   while(var_0) {
     var_1 waittill("trigger", var_4);
-    if(isplayer(var_4)) {
+    if(isPlayer(var_4)) {
       if(isDefined(var_4.isrewinding) && var_4.isrewinding == 1) {
         continue;
       }
@@ -387,7 +387,7 @@ watchforvictims(var_0, var_1) {
     }
 
     if(isDefined(var_2)) {
-      if(isplayer(var_2)) {
+      if(isPlayer(var_2)) {
         if(var_2 isinphase()) {
           continue;
         }

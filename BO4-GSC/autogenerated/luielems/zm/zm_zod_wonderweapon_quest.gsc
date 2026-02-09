@@ -41,7 +41,6 @@ class czm_zod_wonderweapon_quest: cluielem {
     cluielem::add_clientfield("purity", 1, 1, "int");
     cluielem::add_clientfield("decay", 1, 1, "int");
   }
-
 }
 
 register(uid) {

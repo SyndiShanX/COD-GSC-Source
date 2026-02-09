@@ -451,7 +451,7 @@ juggernautmodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
       var_0 setclientomnvar("ui_exo_suit_health", var_0.mechhealth / 125);
     }
 
-    if(isDefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       if(isDefined(var_7) && var_7 == "head") {
         var_1 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("headshot");
       } else {
@@ -528,7 +528,7 @@ playercleanupondeath(var_0) {
   self endon("disconnect");
   self waittill("death", var_1, var_2, var_3);
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1 != self && var_1.team != self.team) {
+  if(isDefined(var_1) && isPlayer(var_1) && var_1 != self && var_1.team != self.team) {
     var_1 maps\mp\_utility::incplayerstat("goliath_destroyed", 1);
     level thread maps\mp\gametypes\_rank::awardgameevent("goliath_destroyed", var_1, var_3, self, var_2);
   }
@@ -634,7 +634,7 @@ playerhandlebarrel() {
   self.barrel setModel("npc_exo_armor_minigun_barrel");
   self.barrel linktosynchronizedparent(self.barrellinker, "j_prop_1", (0, 0, 0), (-90, 0, 0));
 
-  if(isDefined(level.ishorde) && level.ishorde && isplayer(self)) {
+  if(isDefined(level.ishorde) && level.ishorde && isPlayer(self)) {
     self.barrel hudoutlineenable(5, 1);
   }
 
@@ -1378,7 +1378,7 @@ attachmentdeath(var_0, var_1, var_2, var_3) {
 
   var_1 waittill("death", var_4, var_5, var_6);
 
-  if(isDefined(var_4) && isplayer(var_4)) {
+  if(isDefined(var_4) && isPlayer(var_4)) {
     var_7 = level.juggsettings[var_0.juggtype].splashattachmentname;
 
     if(issubstr(var_1.attachmenttype, "weakSpot")) {
@@ -1480,7 +1480,7 @@ handleattachmentdeath(var_0, var_1, var_2) {
   level endon("game_ended");
   self waittill("death", var_3, var_4, var_5);
 
-  if(!isDefined(var_3) || !isplayer(var_3) || isDefined(var_1) && var_3 == var_1) {
+  if(!isDefined(var_3) || !isPlayer(var_3) || isDefined(var_1) && var_3 == var_1) {
     return;
   }
   level thread maps\mp\gametypes\_rank::awardgameevent("heavy_exo_attachment", var_3, undefined, undefined, undefined, var_2);
@@ -1511,7 +1511,7 @@ handleattachmentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     self.wasdamaged = 1;
     self.damagefade = 0.0;
 
-    if(isplayer(var_1)) {
+    if(isPlayer(var_1)) {
       if(var_1 maps\mp\_utility::_hasperk("specialty_armorpiercing")) {
         var_12 = var_12 * level.armorpiercingmod;
       }
@@ -2125,8 +2125,8 @@ adjustlink(var_0, var_1, var_2, var_3, var_4) {
   }
 
   thread drawspine(var_2, var_0);
-  setdvar("scr_adjust_angles", "" + var_4);
-  setdvar("scr_adjust_origin", "" + var_3);
+  setDvar("scr_adjust_angles", "" + var_4);
+  setDvar("scr_adjust_origin", "" + var_3);
   var_5 = (0, 0, 0);
   var_6 = (0, 0, 0);
 
@@ -2347,9 +2347,7 @@ playermech_invalid_weapon_instance(var_0, var_1) {
 
     if(self call[[var_0]]()) {
       if(!var_2) {
-        if([
-            [var_1]
-          ]()) {
+        if([[var_1]]()) {
           var_2 = 1;
           self playlocalsound("wpn_mech_offline");
           wait 1.5;
@@ -2754,7 +2752,7 @@ playermech_watch_emp_grenade() {
   for(;;) {
     self waittill("emp_grenaded", var_0);
 
-    if(isDefined(var_0) && isplayer(var_0)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
       var_0 thread ch_emp_goliath_think();
     }
   }

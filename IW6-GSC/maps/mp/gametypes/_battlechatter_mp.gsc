@@ -82,7 +82,7 @@ init() {
 
   common_scripts\_bcs_location_trigs::bcs_location_trigs_init();
 
-  gametype = getdvar("g_gametype");
+  gametype = getDvar("g_gametype");
   level.istactical = true;
   if(gametype == "war" || gametype == "kc" || gametype == "dom")
     level.istactical = false;
@@ -241,7 +241,6 @@ suppressingFireTracking() {
 
     self waittill("stoppedFiring");
   }
-
 }
 
 suppressTimeout() {
@@ -421,7 +420,6 @@ threatCalloutTracking() {
 
           break;
         }
-
       }
     }
 
@@ -835,7 +833,7 @@ GetQACalloutAlias(basealias, lineIndex) {
 }
 
 battleChatter_canPrint() {
-  if(GetDvar("debug_bcprint") == self.team || GetDvar("debug_bcprint") == "all") {
+  if(getDvar("debug_bcprint") == self.team || getDvar("debug_bcprint") == "all") {
     return (true);
   }
 
@@ -843,7 +841,7 @@ battleChatter_canPrint() {
 }
 
 battleChatter_canPrintDump() {
-  if(GetDvar("debug_bcprintdump") == self.team || GetDvar("debug_bcprintdump") == "all") {
+  if(getDvar("debug_bcprintdump") == self.team || getDvar("debug_bcprintdump") == "all") {
     return true;
   }
 
@@ -863,7 +861,7 @@ battleChatter_printDump(alias) {
     return;
   }
 
-  dumpType = GetDvar("debug_bcprintdumptype", "csv");
+  dumpType = getDvar("debug_bcprintdumptype", "csv");
   if(dumpType != "csv" && dumpType != "txt") {
     return;
   }
@@ -910,7 +908,6 @@ battleChatter_printDump(alias) {
 
     battleChatter_printDumpLine(level.bcs_txt_dumpFile, dumpString, "bcs_txt_dumpFileWriting");
   }
-
 }
 
 battleChatter_debugPrint(alias) {

@@ -270,7 +270,6 @@ ghost_zone_spawning_think() {
       level.zombie_ghost_count++;
 
       ghost_print("ghost total " + level.zombie_ghost_count);
-
     } else {
       assertmsg("Female ghost: failed spawn");
 
@@ -1362,7 +1361,6 @@ runaway_update() {
 
     draw_debug_star(self.startinglocation, (0, 0, 1), 1);
     draw_debug_line(self.origin, self.startinglocation, (0, 1, 0), 1, 0);
-
   }
 }
 
@@ -1396,7 +1394,6 @@ ghost_print(str) {
       }
     }
   }
-
 }
 
 ghost_round_think() {
@@ -2343,7 +2340,6 @@ draw_debug_line(from, to, color, time, depth_test) {
 
     line(from, to, color, 1, depth_test, time);
   }
-
 }
 
 draw_debug_star(origin, color, time) {
@@ -2356,7 +2352,6 @@ draw_debug_star(origin, color, time) {
 
     debugstar(origin, time, color);
   }
-
 }
 
 draw_debug_box(origin, mins, maxs, yaw, color, time) {
@@ -2369,5 +2364,4 @@ draw_debug_box(origin, mins, maxs, yaw, color, time) {
 
     box(origin, mins, maxs, yaw, color, 1, 0, 1);
   }
-
 }

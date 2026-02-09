@@ -4,7 +4,7 @@
 *********************************************/
 
 locker_pillage_functions_init() {
-  setdvar("scr_alien_locker_pillage", 1);
+  setDvar("scr_alien_locker_pillage", 1);
   level.locker_build_pillageitem_array_func = ::build_locker_pillageitem_arrays;
   level.get_hintstring_for_item_pickup_func = ::get_hintstring_for_locker_item_pickup;
   level.get_hintstring_for_pillaged_item_func = ::get_locker_hintstring_for_pillaged_item;
@@ -168,9 +168,7 @@ try_to_give_player_locker_weapon(var_0) {
 
       if(isDefined(var_6)) {
         if(isDefined(level.locker_ark_check_func))
-          var_2.item_ref = [
-            [level.locker_ark_check_func]
-          ](var_6, var_1);
+          var_2.item_ref = [[level.locker_ark_check_func]](var_6, var_1);
 
         var_4 = self getweaponammoclip(var_6);
         var_5 = self getweaponammostock(var_6);

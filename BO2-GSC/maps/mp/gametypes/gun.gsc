@@ -245,7 +245,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     return;
   }
 
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(attacker == self) {
       self thread demoteplayer();
       return;
@@ -270,8 +270,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 onstartgametype() {
   level.gungamekillscore = maps\mp\gametypes\_rank::getscoreinfovalue("kill_gun");
   registerscorelimit(level.gunprogression.size * level.gungamekillscore, level.gunprogression.size * level.gungamekillscore);
-  setdvar("scr_xpscale", 0);
-  setdvar("ui_weapon_tiers", level.gunprogression.size);
+  setDvar("scr_xpscale", 0);
+  setDvar("ui_weapon_tiers", level.gunprogression.size);
   makedvarserverinfo("ui_weapon_tiers", level.gunprogression.size);
   setclientnamemode("auto_change");
   setobjectivetext("allies", &"OBJECTIVES_GUN");
@@ -362,6 +362,6 @@ onwagerawards() {
 }
 
 onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer))
+  if(isDefined(winningplayer) && isPlayer(winningplayer))
     [[level._setplayerscore]](winningplayer, [[level._getplayerscore]](winningplayer) + level.gungamekillscore);
 }

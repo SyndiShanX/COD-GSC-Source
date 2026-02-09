@@ -71,7 +71,7 @@ function onstartgametype() {
 }
 
 function onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer)) {
+  if(isDefined(winningplayer) && isPlayer(winningplayer)) {
     [[level._setplayerscore]](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
   }
 }

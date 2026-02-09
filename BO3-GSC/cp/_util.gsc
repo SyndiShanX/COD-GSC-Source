@@ -323,7 +323,7 @@ function getfx(fx) {
 
 function set_dvar_if_unset(dvar, value, reset = 0) {
   if(reset || getdvarstring(dvar) == "") {
-    setdvar(dvar, value);
+    setDvar(dvar, value);
     return value;
   }
   return getdvarstring(dvar);
@@ -331,14 +331,14 @@ function set_dvar_if_unset(dvar, value, reset = 0) {
 
 function set_dvar_float_if_unset(dvar, value, reset = 0) {
   if(reset || getdvarstring(dvar) == "") {
-    setdvar(dvar, value);
+    setDvar(dvar, value);
   }
   return getdvarfloat(dvar);
 }
 
 function set_dvar_int_if_unset(dvar, value, reset = 0) {
   if(reset || getdvarstring(dvar) == "") {
-    setdvar(dvar, value);
+    setDvar(dvar, value);
     return int(value);
   }
   return getdvarint(dvar);
@@ -478,14 +478,14 @@ function registerscorelimit(minvalue, maxvalue) {
   level.scorelimit = math::clamp(getgametypesetting("scoreLimit"), minvalue, maxvalue);
   level.scorelimitmin = minvalue;
   level.scorelimitmax = maxvalue;
-  setdvar("ui_scorelimit", level.scorelimit);
+  setDvar("ui_scorelimit", level.scorelimit);
 }
 
 function registertimelimit(minvalue, maxvalue) {
   level.timelimit = math::clamp(getgametypesetting("timeLimit"), minvalue, maxvalue);
   level.timelimitmin = minvalue;
   level.timelimitmax = maxvalue;
-  setdvar("ui_timelimit", level.timelimit);
+  setDvar("ui_timelimit", level.timelimit);
 }
 
 function registernumlives(minvalue, maxvalue) {
@@ -747,7 +747,7 @@ function screen_fade_in(n_time, str_shader, str_menu_id) {
 
 function screen_fade_to_alpha_with_blur(n_alpha, n_fade_time, n_blur, str_shader) {
   assert(isDefined(n_alpha), "");
-  assert(isplayer(self), "");
+  assert(isPlayer(self), "");
   level notify("_screen_fade");
   level endon("_screen_fade");
   hud_fade = get_fade_hud(str_shader);
@@ -789,7 +789,7 @@ function missionfailedwrapper(fail_reason, fail_hint, shader, iwidth, iheight, f
   }
   screen_message_delete();
   if(isDefined(fail_hint)) {
-    setdvar("ui_deadquote", fail_hint);
+    setDvar("ui_deadquote", fail_hint);
   }
   if(isDefined(shader)) {
     getplayers()[0] thread load::special_death_indicator_hudelement(shader, iwidth, iheight, fdelay, x, y);

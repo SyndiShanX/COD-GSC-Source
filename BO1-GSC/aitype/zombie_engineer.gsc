@@ -19,11 +19,9 @@ main() {
   self setEngagementMaxDist(768.000000, 1024.000000);
   character\char_ger_engineer_zombies::main();
 }
-
 spawner() {
   self setspawnerteam("axis");
 }
-
 precache() {
   character\char_ger_engineer_zombies::precache();
   precacheItem("ak47_zm");

@@ -61,7 +61,7 @@ jump_pad_think() {
   while(isDefined(self)) {
     self waittill("trigger", who);
 
-    if(isplayer(who))
+    if(isPlayer(who))
       self thread trigger_thread(who, ::jump_pad_start, ::jump_pad_cancel);
   }
 }
@@ -133,37 +133,34 @@ jump_pad_start(ent_player, endon_condition) {
       forward_scaling = 1.1;
 
       if(getdvarint(#"_id_D5FD01C3")) {
-        if(getdvar(#"_id_E2494021") != "")
+        if(getDvar(#"_id_E2494021") != "")
           z_dist = z_dist * getdvarfloat(#"_id_E2494021");
 
-        if(getdvar(#"_id_4E3BC729") != "")
+        if(getDvar(#"_id_4E3BC729") != "")
           forward_scaling = getdvarfloat(#"_id_4E3BC729");
       }
-
     } else if(z_dist >= 135) {
       z_dist = z_dist * 2.7;
       forward_scaling = 1.3;
 
       if(getdvarint(#"_id_D5FD01C3")) {
-        if(getdvar(#"_id_E2494021") != "")
+        if(getDvar(#"_id_E2494021") != "")
           z_dist = z_dist * getdvarfloat(#"_id_E2494021");
 
-        if(getdvar(#"_id_4E3BC729") != "")
+        if(getDvar(#"_id_4E3BC729") != "")
           forward_scaling = getdvarfloat(#"_id_4E3BC729");
       }
-
     } else if(z_dist < 0) {
       z_dist = z_dist * 2.4;
       forward_scaling = 1.0;
 
       if(getdvarint(#"_id_D5FD01C3")) {
-        if(getdvar(#"_id_E2494021") != "")
+        if(getDvar(#"_id_E2494021") != "")
           z_dist = z_dist * getdvarfloat(#"_id_E2494021");
 
-        if(getdvar(#"_id_4E3BC729") != "")
+        if(getDvar(#"_id_4E3BC729") != "")
           forward_scaling = getdvarfloat(#"_id_4E3BC729");
       }
-
     }
 
     z_velocity = 2 * z_dist * world_gravity;

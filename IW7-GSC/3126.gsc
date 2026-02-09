@@ -175,7 +175,7 @@ func_E877(var_0, var_1, var_2, var_3) {
 
     self setanimstate(var_1, var_15);
 
-    if(isDefined(var_12) && isplayer(var_12)) {
+    if(isDefined(var_12) && isPlayer(var_12)) {
       self func_83CE();
     }
 
@@ -192,7 +192,7 @@ func_E874(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
 
   for(;;) {
-    if(isplayer(self.enemy)) {
+    if(isPlayer(self.enemy)) {
       self func_83CE();
     }
 

@@ -910,7 +910,7 @@ shot_tracker(var_0) {
   level endon("flag_common_end");
   level endon("player_inside_common_room");
   common_scripts\utility::waittill_any("damage", "fake_damage");
-  setdvar("ui_deadquote", var_0);
+  setDvar("ui_deadquote", var_0);
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1084,7 +1084,7 @@ cw_barracks_fast_trig_proc(var_0) {
   for(;;) {
     var_3 = common_scripts\utility::getclosest(var_1, var_2, 384);
 
-    if(isDefined(var_3) && isplayer(var_3)) {
+    if(isDefined(var_3) && isPlayer(var_3)) {
       common_scripts\utility::flag_set("flag_barracks_go_fast");
       return;
     }

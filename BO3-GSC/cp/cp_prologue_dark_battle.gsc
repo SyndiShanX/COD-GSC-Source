@@ -499,7 +499,7 @@ function dark_battle_shots_fired(n_chance) {
 function fire_at_location(e_target, duration = 5) {
   self endon("death");
   self.firing_at_something = 1;
-  if(isplayer(e_target)) {
+  if(isPlayer(e_target)) {
     var_a03ca40a = e_target;
   } else {
     var_a03ca40a = spawn("script_model", e_target.origin + vectorscale((0, 0, 1), 32));
@@ -599,7 +599,7 @@ function function_b7634680() {
 }
 
 function function_e2b1615a(params) {
-  if(isplayer(params.eattacker)) {
+  if(isPlayer(params.eattacker)) {
     if(params.eattacker flag::exists("melee_killed_ai") && !params.eattacker flag::get("melee_killed_ai")) {
       params.eattacker flag::set("melee_killed_ai");
     }

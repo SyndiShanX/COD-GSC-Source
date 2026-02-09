@@ -533,7 +533,7 @@ crate_drop_think(claw) {
 
       entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
 
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         claw thread claw_drop_pause();
         corpse_delay = gettime() + 3000;
       }
@@ -610,7 +610,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {

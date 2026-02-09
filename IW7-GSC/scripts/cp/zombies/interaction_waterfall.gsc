@@ -75,7 +75,7 @@ kill_zombies(var_0, var_1) {
   level endon("stop_waterfall_trap");
   for(;;) {
     var_0.trigger waittill("trigger", var_2);
-    if(isplayer(var_2)) {
+    if(isPlayer(var_2)) {
       var_3 = var_2 getvelocity();
       var_2 setvelocity(var_3 + (0, 35, 0));
       continue;

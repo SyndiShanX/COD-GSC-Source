@@ -541,7 +541,7 @@ func_4EBB() {
   var_5 = "off";
 
   for(;;) {
-    var_6 = getdvar("debug_character_count");
+    var_6 = getDvar("debug_character_count");
 
     if(var_6 == "off") {
       if(var_6 != var_5) {
@@ -668,11 +668,11 @@ func_37A5() {
 }
 
 func_7370() {
-  setdvar("cl_freemove", "0");
+  setDvar("cl_freemove", "0");
 }
 
 func_F7FD(var_0) {
-  setdvar("cl_freemove", "2");
+  setDvar("cl_freemove", "2");
 }
 
 func_4E6B() {
@@ -707,17 +707,17 @@ func_12ED1() {
   var_0 = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
   if(!isDefined(level.var_B7AF)) {
-    setdvar("scr_minimap_corner_targetname", "minimap_corner");
+    setDvar("scr_minimap_corner_targetname", "minimap_corner");
     level.var_B7AF = "minimap_corner";
   }
 
   if(!isDefined(level.var_B7B1)) {
-    setdvar("scr_minimap_height", "0");
+    setDvar("scr_minimap_height", "0");
     level.var_B7B1 = 0;
   }
 
   var_1 = getdvarfloat("scr_minimap_height");
-  var_2 = getdvar("scr_minimap_corner_targetname");
+  var_2 = getDvar("scr_minimap_corner_targetname");
 
   if(var_1 != level.var_B7B1 || var_2 != level.var_B7AF) {
     if(isDefined(level.var_B7B2)) {
@@ -1012,7 +1012,7 @@ func_56E2(var_0, var_1) {
   var_5 = 20;
   var_6 = (1, 0.5, 0.2);
   var_7 = (0.2, 0.5, 1);
-  var_8 = !isplayer(self) && self.pacifist;
+  var_8 = !isPlayer(self) && self.pacifist;
 
   for(var_9 = 0; var_9 <= var_5; var_9++) {
     if(isDefined(var_1)) {}
@@ -1260,7 +1260,7 @@ func_13C26() {
 
 func_B514() {
   thread func_4EC2();
-  setdvar("debug_measure", 2);
+  setDvar("debug_measure", 2);
   var_0 = [];
   var_1 = 0;
 

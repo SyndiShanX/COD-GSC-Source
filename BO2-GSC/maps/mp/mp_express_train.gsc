@@ -220,7 +220,7 @@ watch_player_touch() {
   for(;;) {
     self waittill("touch", entity);
 
-    if(isplayer(entity))
+    if(isPlayer(entity))
       entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
   }
 }
@@ -281,7 +281,7 @@ train_move_think(kill_trigger) {
       if(isDefined(entity.targetname) && entity.targetname == "train") {
         continue;
       }
-      if(isplayer(entity)) {
+      if(isPlayer(entity)) {
         continue;
       }
       if(!entity istouching(kill_trigger)) {
@@ -382,7 +382,7 @@ gate_move_think(ignoreplayers) {
     entities = getdamageableentarray(self.origin, 100);
 
     foreach(entity in entities) {
-      if(ignoreplayers == 1 && isplayer(entity)) {
+      if(ignoreplayers == 1 && isPlayer(entity)) {
         continue;
       }
       if(!entity istouching(self.kill_trigger)) {
@@ -476,7 +476,7 @@ getwatcherforweapon(weapname) {
   if(!isDefined(self))
     return undefined;
 
-  if(!isplayer(self))
+  if(!isPlayer(self))
     return undefined;
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {

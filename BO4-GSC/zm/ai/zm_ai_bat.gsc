@@ -45,7 +45,6 @@ class class_726d8173 {
     mover = undefined;
     healthmultiplier = undefined;
   }
-
 }
 
 autoexec __init__system__() {
@@ -121,7 +120,7 @@ istargetvalid(target) {
     return false;
   }
 
-  if(isplayer(target) && (target.sessionstate == "spectator" || target.sessionstate == "intermission")) {
+  if(isPlayer(target) && (target.sessionstate == "spectator" || target.sessionstate == "intermission")) {
     return false;
   }
 
@@ -522,7 +521,6 @@ function_66d3e7c2() {
       if(isDefined(self.var_d6acaac4)) {
         recordsphere(self.var_c8c5a7d3, 8, (0, 1, 0), "<dev string:x3e>");
         recordline(self.var_c8c5a7d3, self.var_d6acaac4, (0, 1, 0), "<dev string:x3e>");
-
       }
     }
 

@@ -67,7 +67,7 @@ on_grenade_fired(s_params) {
         var_c006f5e9 dodamage(1, var_c006f5e9.origin, self, undefined, undefined, "MOD_PROJECTILE", 0, s_params.weapon);
       }
 
-      if(isplayer(var_c006f5e9) && var_c006f5e9 != self) {
+      if(isPlayer(var_c006f5e9) && var_c006f5e9 != self) {
         self thread zm_audio::create_and_play_dialog(#"snowball", #"friendly");
       }
     }

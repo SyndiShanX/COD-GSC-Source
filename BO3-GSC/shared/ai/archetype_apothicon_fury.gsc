@@ -42,7 +42,6 @@ class animationadjustmentinfoz {
   }
 
   destructor() {}
-
 }
 
 class animationadjustmentinfoxy {
@@ -53,14 +52,12 @@ class animationadjustmentinfoxy {
   }
 
   destructor() {}
-
 }
 
 class jukeinfo {
   constructor() {}
 
   destructor() {}
-
 }
 
 #namespace apothiconfurybehavior;
@@ -564,7 +561,7 @@ function apothiconcanbamfinternal(entity, bamfafterjuke = 0) {
   if(!isDefined(entity.enemy)) {
     return false;
   }
-  if(!isplayer(entity.enemy)) {
+  if(!isPlayer(entity.enemy)) {
     return false;
   }
   if(isDefined(entity.juking) && entity.juking) {
@@ -675,7 +672,7 @@ function apothiconbamfland(entity) {
     entity orientmode("face direction", entity.enemy.origin - entity.origin);
   }
   entity clientfield::increment("bamf_land");
-  if(isDefined(entity.enemy) && isplayer(entity.enemy) && distancesquared(entity.enemy.origin, entity.origin) <= (250 * 250)) {
+  if(isDefined(entity.enemy) && isPlayer(entity.enemy) && distancesquared(entity.enemy.origin, entity.origin) <= (250 * 250)) {
     entity.enemy dodamage(25, entity.origin, entity, entity, undefined, "MOD_MELEE");
   }
   physicsexplosionsphere(entity.origin, 100, 15, 10);
@@ -835,7 +832,7 @@ function apothiconpreemptivejukeservice(entity) {
     return false;
   }
   if(isDefined(entity.enemy)) {
-    if(!isplayer(entity.enemy)) {
+    if(!isPlayer(entity.enemy)) {
       return false;
     }
     if(entity.enemy playerads() < entity.nextpreemptivejukeads) {
@@ -859,7 +856,7 @@ function apothiconcanjuke(entity) {
   if(!ai::getaiattribute(entity, "can_juke")) {
     return false;
   }
-  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isPlayer(entity.enemy)) {
     return false;
   }
   if(isDefined(entity.isjuking) && entity.isjuking) {
@@ -1118,7 +1115,7 @@ function apothicondamagecallback(einflictor, eattacker, idamage, idflags, smeans
   if(!(isDefined(self.zombie_think_done) && self.zombie_think_done)) {
     return 0;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(shitloc)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(shitloc)) {
     apothicondamageclientfieldupdate(self, shitloc);
   }
   if(isDefined(shitloc)) {

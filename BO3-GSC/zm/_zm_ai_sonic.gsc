@@ -178,7 +178,7 @@ function sonic_zombie_spawn(animname_set) {
   zm_spawner::zombie_spawn_init(animname_set);
   level.var_57ecc1a3 = level.round_number;
   println("");
-  setdvar("", 0);
+  setDvar("", 0);
   self.animname = "sonic_zombie";
   self clientfield::set("issonic", 1);
   self.maxhealth = int(self.maxhealth * level.sonichealthmultiplier);
@@ -234,7 +234,7 @@ function private soniccanattack(entity) {
   if(entity.animname !== "sonic_zombie") {
     return false;
   }
-  if(!isDefined(entity.favoriteenemy) || !isplayer(entity.favoriteenemy)) {
+  if(!isDefined(entity.favoriteenemy) || !isPlayer(entity.favoriteenemy)) {
     return false;
   }
   hashead = !(isDefined(entity.head_gibbed) && entity.head_gibbed);
@@ -420,7 +420,7 @@ function sonic_zombie_death(einflictor, attacker, idamage, smeansofdeath, weapon
   if(isDefined(level._effect["sonic_explosion"])) {
     playFXOnTag(level._effect["sonic_explosion"], self, "J_SpineLower");
   }
-  if(isDefined(self.attacker) && isplayer(self.attacker)) {
+  if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker thread zm_audio::create_and_play_dialog("kill", "sonic");
   }
   self thread _sonic_zombie_death_scream(self.attacker);
@@ -599,7 +599,7 @@ function sonic_zombie_count_watch() {
   }
   println("" + level.nextsonicspawnround);
   attacker = self.attacker;
-  if(isDefined(attacker) && isplayer(attacker) && (isDefined(attacker.screamattackblur) && attacker.screamattackblur)) {
+  if(isDefined(attacker) && isPlayer(attacker) && (isDefined(attacker.screamattackblur) && attacker.screamattackblur)) {
     attacker notify("blinded_by_the_fright_achieved");
   }
 }

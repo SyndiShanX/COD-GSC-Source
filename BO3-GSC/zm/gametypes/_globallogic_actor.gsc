@@ -28,7 +28,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   if(self.team == "spectator") {
     return;
   }
-  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
   self.idflags = idflags;
@@ -72,11 +72,11 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
   }
   if(!idflags &level.idflags_no_protection) {
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       eattacker.pers["participation"]++;
     }
     prevhealthratio = self.health / self.maxhealth;
-    if(level.teambased && isplayer(eattacker) && self != eattacker && self.team == eattacker.pers["team"]) {
+    if(level.teambased && isPlayer(eattacker) && self != eattacker && self.team == eattacker.pers["team"]) {
       if(level.friendlyfire == 0) {
         return;
       }
@@ -130,13 +130,13 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     }
   }
   if(getdvarint("")) {
-    println(((((((((((("" + self getentitynumber()) + "") + self.health) + "") + eattacker.clientid) + "") + isplayer(einflictor) + "") + idamage) + shitloc) + "") + boneindex) + "");
+    println(((((((((((("" + self getentitynumber()) + "") + self.health) + "") + eattacker.clientid) + "") + isPlayer(einflictor) + "") + idamage) + shitloc) + "") + boneindex) + "");
   }
   if(1) {
     lpselfnum = self getentitynumber();
     lpselfteam = self.team;
     lpattackerteam = "";
-    if(isplayer(eattacker)) {
+    if(isPlayer(eattacker)) {
       lpattacknum = eattacker getentitynumber();
       lpattackguid = eattacker getguid();
       lpattackname = eattacker.name;
@@ -163,7 +163,7 @@ function callback_actorkilled(einflictor, attacker, idamage, smeansofdeath, weap
   if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
     attacker = attacker.owner;
   }
-  if(isDefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isPlayer(attacker)) {
     if(!level.teambased || self.team != attacker.pers["team"]) {
       level.globalkillstreaksdestroyed++;
       attacker addweaponstat(getweapon("dogs"), "destroyed", 1);

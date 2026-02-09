@@ -7,17 +7,21 @@
 #include common_scripts\utility;
 
 main() {
-  if(getdvar(#"scr_art_tweak") == "" || getdvar(#"scr_art_tweak") == "0")
-    setdvar("scr_art_tweak", 0);
+  if(getDvar(#"scr_art_tweak") == "" || getDvar(#"scr_art_tweak") == "0") {
+    setDvar("scr_art_tweak", 0);
+  }
 
-  if(getdvar(#"scr_dof_enable") == "")
-    setdvar("scr_dof_enable", "1");
+  if(getDvar(#"scr_dof_enable") == "") {
+    setDvar("scr_dof_enable", "1");
+  }
 
-  if(getdvar(#"scr_cinematic_autofocus") == "")
-    setdvar("scr_cinematic_autofocus", "1");
+  if(getDvar(#"scr_cinematic_autofocus") == "") {
+    setDvar("scr_cinematic_autofocus", "1");
+  }
 
-  if(getdvar(#"scr_art_visionfile") == "")
-    setdvar("scr_art_visionfile", level.script);
+  if(getDvar(#"scr_art_visionfile") == "") {
+    setDvar("scr_art_visionfile", level.script);
+  }
 
   if(!isDefined(level.dofdefault)) {
     level.dofdefault["nearStart"] = 0;
@@ -32,8 +36,9 @@ main() {
 
   thread tweakart();
 
-  if(!isDefined(level.script))
-    level.script = tolower(getdvar(#"mapname"));
+  if(!isDefined(level.script)) {
+    level.script = tolower(getDvar(#"mapname"));
+  }
 }
 
 artfxprintln(file, string) {
@@ -44,12 +49,12 @@ artfxprintln(file, string) {
 }
 
 setfogsliders() {
-  fogall = strtok(getdvar(#"g_fogColorReadOnly"), " ");
+  fogall = strtok(getDvar(#"g_fogColorReadOnly"), " ");
   red = fogall[0];
   green = fogall[1];
   blue = fogall[2];
-  halfplane = getdvar(#"g_fogHalfDistReadOnly");
-  nearplane = getdvar(#"g_fogStartDistReadOnly");
+  halfplane = getDvar(#"g_fogHalfDistReadOnly");
+  nearplane = getDvar(#"g_fogStartDistReadOnly");
 
   if(!isDefined(red) || !isDefined(green) || !isDefined(blue) || !isDefined(halfplane)) {
     red = 1;
@@ -59,34 +64,36 @@ setfogsliders() {
     nearplane = 10000000;
   }
 
-  setdvar("scr_fog_exp_halfplane", halfplane);
-  setdvar("scr_fog_nearplane", nearplane);
-  setdvar("scr_fog_color", red + " " + green + " " + blue);
+  setDvar("scr_fog_exp_halfplane", halfplane);
+  setDvar("scr_fog_nearplane", nearplane);
+  setDvar("scr_fog_color", red + " " + green + " " + blue);
 }
 
 tweakart() {
-  if(!isDefined(level.tweakfile))
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = 0;
-
-  if(level.tweakfile && level.bscriptgened)
-    script_gen_dump_addline("maps\\createart\\" + level.script + "_art::main();", level.script + "_art");
-
-  if(getdvar(#"scr_fog_baseheight") == "") {
-    setdvar("scr_fog_exp_halfplane", "500");
-    setdvar("scr_fog_exp_halfheight", "500");
-    setdvar("scr_fog_nearplane", "0");
-    setdvar("scr_fog_baseheight", "0");
   }
 
-  setdvar("scr_fog_fraction", "1.0");
-  setdvar("scr_art_dump", "0");
-  setdvar("scr_art_sun_fog_dir_set", "0");
-  setdvar("scr_dof_nearStart", level.dofdefault["nearStart"]);
-  setdvar("scr_dof_nearEnd", level.dofdefault["nearEnd"]);
-  setdvar("scr_dof_farStart", level.dofdefault["farStart"]);
-  setdvar("scr_dof_farEnd", level.dofdefault["farEnd"]);
-  setdvar("scr_dof_nearBlur", level.dofdefault["nearBlur"]);
-  setdvar("scr_dof_farBlur", level.dofdefault["farBlur"]);
+  if(level.tweakfile && level.bscriptgened) {
+    script_gen_dump_addline("maps\\createart\\" + level.script + "_art::main();", level.script + "_art");
+  }
+
+  if(getDvar(#"scr_fog_baseheight") == "") {
+    setDvar("scr_fog_exp_halfplane", "500");
+    setDvar("scr_fog_exp_halfheight", "500");
+    setDvar("scr_fog_nearplane", "0");
+    setDvar("scr_fog_baseheight", "0");
+  }
+
+  setDvar("scr_fog_fraction", "1.0");
+  setDvar("scr_art_dump", "0");
+  setDvar("scr_art_sun_fog_dir_set", "0");
+  setDvar("scr_dof_nearStart", level.dofdefault["nearStart"]);
+  setDvar("scr_dof_nearEnd", level.dofdefault["nearEnd"]);
+  setDvar("scr_dof_farStart", level.dofdefault["farStart"]);
+  setDvar("scr_dof_farEnd", level.dofdefault["farEnd"]);
+  setDvar("scr_dof_nearBlur", level.dofdefault["nearBlur"]);
+  setDvar("scr_dof_farBlur", level.dofdefault["farBlur"]);
   dofvarupdate();
   wait_for_first_player();
   players = get_players();
@@ -101,20 +108,20 @@ tweakart() {
     if(tweak_toggle) {
       tweak_toggle = 0;
       fogsettings = getfogsettings();
-      setdvar("scr_fog_nearplane", fogsettings[0]);
-      setdvar("scr_fog_exp_halfplane", fogsettings[1]);
-      setdvar("scr_fog_exp_halfheight", fogsettings[3]);
-      setdvar("scr_fog_baseheight", fogsettings[2]);
-      setdvar("scr_fog_color", fogsettings[4] + " " + fogsettings[5] + " " + fogsettings[6]);
-      setdvar("scr_fog_color_scale", fogsettings[7]);
-      setdvar("scr_sun_fog_color", fogsettings[8] + " " + fogsettings[9] + " " + fogsettings[10]);
+      setDvar("scr_fog_nearplane", fogsettings[0]);
+      setDvar("scr_fog_exp_halfplane", fogsettings[1]);
+      setDvar("scr_fog_exp_halfheight", fogsettings[3]);
+      setDvar("scr_fog_baseheight", fogsettings[2]);
+      setDvar("scr_fog_color", fogsettings[4] + " " + fogsettings[5] + " " + fogsettings[6]);
+      setDvar("scr_fog_color_scale", fogsettings[7]);
+      setDvar("scr_sun_fog_color", fogsettings[8] + " " + fogsettings[9] + " " + fogsettings[10]);
       level.fogsundir = [];
       level.fogsundir[0] = fogsettings[11];
       level.fogsundir[1] = fogsettings[12];
       level.fogsundir[2] = fogsettings[13];
-      setdvar("scr_sun_fog_start_angle", fogsettings[14]);
-      setdvar("scr_sun_fog_end_angle", fogsettings[15]);
-      setdvar("scr_fog_max_opacity", fogsettings[16]);
+      setDvar("scr_sun_fog_start_angle", fogsettings[14]);
+      setDvar("scr_sun_fog_end_angle", fogsettings[15]);
+      setDvar("scr_fog_max_opacity", fogsettings[16]);
     }
 
     level.fogexphalfplane = getdvarfloat(#"scr_fog_exp_halfplane");
@@ -133,7 +140,7 @@ tweakart() {
     level.fogmaxopacity = getdvarfloat(#"scr_fog_max_opacity");
 
     if(getdvarint(#"scr_art_sun_fog_dir_set")) {
-      setdvar("scr_art_sun_fog_dir_set", "0");
+      setDvar("scr_art_sun_fog_dir_set", "0");
       println("Setting sun fog direction to facing of player");
       players = get_players();
       dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
@@ -162,43 +169,42 @@ tweakart() {
     players[0] setdefaultdepthoffield();
     wait 0.1;
   }
-
 }
 
 fovslidercheck() {
   if(level.dofdefault["nearStart"] >= level.dofdefault["nearEnd"]) {
     level.dofdefault["nearStart"] = level.dofdefault["nearEnd"] - 1;
-    setdvar("scr_dof_nearStart", level.dofdefault["nearStart"]);
+    setDvar("scr_dof_nearStart", level.dofdefault["nearStart"]);
   }
 
   if(level.dofdefault["nearEnd"] <= level.dofdefault["nearStart"]) {
     level.dofdefault["nearEnd"] = level.dofdefault["nearStart"] + 1;
-    setdvar("scr_dof_nearEnd", level.dofdefault["nearEnd"]);
+    setDvar("scr_dof_nearEnd", level.dofdefault["nearEnd"]);
   }
 
   if(level.dofdefault["farStart"] >= level.dofdefault["farEnd"]) {
     level.dofdefault["farStart"] = level.dofdefault["farEnd"] - 1;
-    setdvar("scr_dof_farStart", level.dofdefault["farStart"]);
+    setDvar("scr_dof_farStart", level.dofdefault["farStart"]);
   }
 
   if(level.dofdefault["farEnd"] <= level.dofdefault["farStart"]) {
     level.dofdefault["farEnd"] = level.dofdefault["farStart"] + 1;
-    setdvar("scr_dof_farEnd", level.dofdefault["farEnd"]);
+    setDvar("scr_dof_farEnd", level.dofdefault["farEnd"]);
   }
 
   if(level.dofdefault["farBlur"] >= level.dofdefault["nearBlur"]) {
     level.dofdefault["farBlur"] = level.dofdefault["nearBlur"] - 0.1;
-    setdvar("scr_dof_farBlur", level.dofdefault["farBlur"]);
+    setDvar("scr_dof_farBlur", level.dofdefault["farBlur"]);
   }
 
   if(level.dofdefault["farStart"] <= level.dofdefault["nearEnd"]) {
     level.dofdefault["farStart"] = level.dofdefault["nearEnd"] + 1;
-    setdvar("scr_dof_farStart", level.dofdefault["farStart"]);
+    setDvar("scr_dof_farStart", level.dofdefault["farStart"]);
   }
 }
 
 dumpsettings() {
-  if(getdvar(#"scr_art_dump") != "0") {
+  if(getDvar(#"scr_art_dump") != "0") {
     println("\\tstart_dist = " + level.fognearplane + ";");
     println("\\thalf_dist = " + level.fogexphalfplane + ";");
     println("\\thalf_height = " + level.fogexphalfheight + ";");
@@ -221,9 +227,8 @@ dumpsettings() {
     println("\\tsetVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,");
     println("\\t\\tsun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, ");
     println("\\t\\tsun_stop_ang, time, max_fog_opacity);");
-    setdvar("scr_art_dump", "0");
+    setDvar("scr_art_dump", "0");
   }
-
 }
 
 dofvarupdate() {

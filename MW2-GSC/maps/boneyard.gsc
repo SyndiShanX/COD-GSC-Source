@@ -123,7 +123,7 @@ flags_setup() {
 
   /*************************
   ***	FLAGS FROM RADIANT ***
-  **************************
+ **************************
 
   	blow_tanker_first
   	blow_tanker_second
@@ -175,7 +175,7 @@ flags_setup() {
   	where_is_nikolai
   	wing_fall
 
-  *************************/
+ *************************/
 
 }
 

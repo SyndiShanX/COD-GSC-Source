@@ -73,7 +73,7 @@ function iscloseenoughforaivsaimelee(behaviortreeentity) {
 }
 
 function private shouldaquiremutexonenemyforaivsaimelee(behaviortreeentity) {
-  if(isplayer(behaviortreeentity.enemy)) {
+  if(isPlayer(behaviortreeentity.enemy)) {
     return false;
   }
   if(!isDefined(behaviortreeentity.enemy)) {

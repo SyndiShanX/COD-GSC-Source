@@ -333,7 +333,7 @@ watchdeployedriotshielddamage() {
     }
     assert(isDefined(self.owner) && isDefined(self.owner.team));
 
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       if(level.teambased && attacker.team == self.owner.team && attacker != self.owner)
         continue;
     }
@@ -373,7 +373,7 @@ damagethendestroyriotshield(attacker, weaponname) {
   self notsolid();
   self setclientfield("riotshield_state", 2);
 
-  if(isDefined(attacker) && isDefined(weaponname) && attacker != self.owner && isplayer(attacker))
+  if(isDefined(attacker) && isDefined(weaponname) && attacker != self.owner && isPlayer(attacker))
     maps\mp\_scoreevents::processscoreevent("destroyed_shield", attacker, self.owner, weaponname);
 
   wait(getdvarfloat(#"riotshield_destroyed_cleanup_time"));

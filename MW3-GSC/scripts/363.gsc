@@ -11,7 +11,7 @@ _id_2874() {
 }
 
 _id_2875() {
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
+  if(getdvarint("sm_enable") && getDvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model");
   } else {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large");
@@ -24,31 +24,24 @@ init() {
   }
   while(!isDefined(level.gameskill)) {
     wait 0.05;
-
   }
   if(!isDefined(level.cosine)) {
     level.cosine = [];
-
   }
   if(!isDefined(level.cosine["25"])) {
     level.cosine["25"] = cos(25);
-
   }
   if(!isDefined(level.cosine["35"])) {
     level.cosine["35"] = cos(35);
-
   }
   if(!isDefined(level._id_2878)) {
     level._id_2878 = 3500;
-
   }
   if(!isDefined(level._id_2879)) {
     level._id_2879 = 0;
-
   }
   if(!isDefined(level._id_287A)) {
     level._id_287A = cos(30);
-
   }
   level._id_2876 = 1;
   level._id_287B = 3;
@@ -78,7 +71,6 @@ init() {
 _id_2880(var_0) {
   if(!isDefined(var_0)) {
     var_0 = "kill_heli";
-
   }
   var_1 = maps\_vehicle::_id_2881(var_0);
   var_1 = _id_2882(var_1);
@@ -99,7 +91,6 @@ _id_2882(var_0, var_1) {
       var_3 = 2800;
     } else {
       var_3 = 2200;
-
     }
     if(!isDefined(var_0._id_2883)) {
       var_0.attractor = missile_createattractorent(var_2, var_3, 10000, level.player);
@@ -116,7 +107,6 @@ _id_2882(var_0, var_1) {
 
   if(!isDefined(var_0._id_2887)) {
     var_0._id_2887 = 0;
-
   }
   var_0._id_2888 = 1;
   var_0._id_2889 = 0;
@@ -152,7 +142,6 @@ _id_2882(var_0, var_1) {
 
   if(isDefined(var_0._id_2890) && var_0._id_2890 == 1 && !isDefined(var_0._id_2891)) {
     var_0 thread _id_28DE(undefined, 1);
-
   }
   var_0 thread _id_28D9();
   return var_0;
@@ -203,7 +192,6 @@ _id_2893() {
 _id_2894() {
   if(isDefined(self.turrets)) {
     return self.turrets;
-
   }
   _id_2896();
   return self.turrets;
@@ -232,7 +220,6 @@ _id_2899(var_0) {
 _id_289A(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = "kill_heli";
-
   }
   var_2 = maps\_vehicle::_id_2881(var_0);
   var_2._id_2886 = spawn("script_origin", var_2.origin);
@@ -261,30 +248,24 @@ _id_289B(var_0, var_1) {
     var_2 = 40;
   } else {
     var_2 = var_0.script_airspeed;
-
   }
   if(!isDefined(level._id_289D)) {
     level._id_289D = 0;
-
   }
   if(!isDefined(level._id_289E)) {
     level._id_289E = 0;
-
   }
   if(!isDefined(level._id_289F)) {
     level._id_289F = 0;
-
   }
   level._id_28A0 = undefined;
   var_3 = getEntArray("attack_heli_safe_volume", "script_noteworthy");
 
   if(var_3.size > 0) {
     level._id_28A0 = var_3;
-
   }
   if(!level._id_289D) {
     thread _id_28CC(var_0);
-
   }
   if(!isDefined(var_0._id_28A1)) {
     switch (var_0.vehicletype) {
@@ -314,7 +295,6 @@ _id_289B(var_0, var_1) {
 
   if(!isDefined(var_0._id_2887)) {
     var_0._id_2887 = 0;
-
   }
   if(!var_0._id_2887) {
     var_0 setneargoalnotifydist(100);
@@ -339,13 +319,11 @@ _id_289B(var_0, var_1) {
 _id_28A3(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = "attack_heli_circle_node";
-
   }
   var_2 = getEntArray(var_0, "targetname");
 
   if(!isDefined(var_2) || var_2.size < 1) {
     var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
-
   }
   var_3 = self;
   var_3 endon("stop_circling");
@@ -364,7 +342,6 @@ _id_28A3(var_0, var_1) {
 
     if(!isDefined(var_7) || var_7.size < 1) {
       var_7 = common_scripts\utility::getstructarray(var_6.target, "targetname");
-
     }
     var_8 = var_7[randomint(var_7.size)];
     var_3 setvehgoalpos(var_8.origin, 1);
@@ -410,7 +387,6 @@ _id_28A4(var_0) {
       var_5 = self._id_288F;
     } else {
       var_5 = self._id_288E;
-
     }
     var_2 setlookatent(var_5);
     var_2 waittill("near_goal");
@@ -420,7 +396,6 @@ _id_28A4(var_0) {
       if(level.gameskill == 0 || level.gameskill == 1) {
         while(_id_28A5(var_2)) {
           wait 0.5;
-
         }
         wait 3;
       }
@@ -468,17 +443,14 @@ _id_28A4(var_0) {
 _id_28A5(var_0) {
   if(!level.player _id_28CE()) {
     return 0;
-
   }
   if(!level.player adsbuttonpressed()) {
     return 0;
-
   }
   var_1 = level.player getEye();
 
   if(sighttracepassed(var_1, var_0.origin, 0, level.player)) {
     return 1;
-
   }
   return 0;
 }
@@ -497,7 +469,7 @@ _id_28A6() {
     if(!_id_28AB() || !_id_28AA()) {
       var_1 = _id_28AE();
 
-      if(isplayer(var_1)) {
+      if(isPlayer(var_1)) {
         self._id_288F = var_1;
       }
     }
@@ -508,7 +480,7 @@ _id_28A6() {
       if(self._id_288F != var_2) {
         var_1 = _id_28AE();
 
-        if(isplayer(var_1)) {
+        if(isPlayer(var_1)) {
           self._id_288F = var_1;
         }
       }
@@ -521,7 +493,7 @@ _id_28A6() {
       }
     }
 
-    if(isDefined(self._id_288C) && isplayer(self._id_288C)) {
+    if(isDefined(self._id_288C) && isPlayer(self._id_288C)) {
       self._id_288F = self._id_288C;
     } else if(!_id_28AB()) {
       var_1 = _id_28AF();
@@ -551,13 +523,11 @@ _id_28A6() {
       continue;
     }
 
-    if(isplayer(self._id_288F) || isai(self._id_288F)) {
+    if(isPlayer(self._id_288F) || isai(self._id_288F)) {
       _id_28B7();
-
     }
-    if(isplayer(self._id_288F)) {
+    if(isPlayer(self._id_288F)) {
       thread _id_28A8(self);
-
     }
     common_scripts\utility::waittill_notify_or_timeout("damage_by_player", level._id_287C);
   }
@@ -574,13 +544,11 @@ _id_28A8(var_0) {
 _id_28A9() {
   if(!isDefined(self._id_288F)) {
     return 0;
-
   }
   var_0 = self._id_288F.origin + (0, 0, 32);
 
-  if(isplayer(self._id_288F)) {
+  if(isPlayer(self._id_288F)) {
     var_0 = self._id_288F getEye();
-
   }
   var_1 = self gettagorigin("tag_flash");
   var_2 = sighttracepassed(var_1, var_0, 0, self);
@@ -590,9 +558,8 @@ _id_28A9() {
 _id_28AA() {
   if(!isDefined(self._id_288F)) {
     return 0;
-
   }
-  if(isplayer(self._id_288F)) {
+  if(isPlayer(self._id_288F)) {
     return 1;
   } else {
     return 0;
@@ -602,11 +569,9 @@ _id_28AA() {
 _id_28AB() {
   if(!isDefined(self._id_288F)) {
     return 0;
-
   }
   if(!isalive(self._id_288F)) {
     return 0;
-
   }
   if(self._id_288F == self._id_288E) {
     return 0;
@@ -618,13 +583,11 @@ _id_28AB() {
 _id_28AC() {
   var_0 = maps\_helicopter_globals::_id_2865(level._id_2878, level._id_287A, 1, 1, 0, 1, level._id_28AD);
 
-  if(isDefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
     var_0 = self._id_288E;
-
   }
   if(!isDefined(var_0)) {
     var_0 = self._id_288E;
-
   }
   return var_0;
 }
@@ -635,7 +598,6 @@ _id_28AE() {
 
   if(!isDefined(var_1)) {
     var_1 = self._id_288E;
-
   }
   return var_1;
 }
@@ -645,7 +607,6 @@ _id_28AF() {
 
   if(!isDefined(var_0)) {
     var_0 = self._id_288E;
-
   }
   return var_0;
 }
@@ -695,7 +656,7 @@ _id_28B0() {
     wait 0.05;
     self waittill("fire_missiles", var_7);
 
-    if(!isplayer(var_7)) {
+    if(!isPlayer(var_7)) {
       continue;
     }
     var_8 = var_7;
@@ -708,7 +669,6 @@ _id_28B0() {
 
       if(var_6 >= var_5.size) {
         var_6 = 0;
-
       }
       self setvehweapon(var_2);
       self._id_2889 = 1;
@@ -805,7 +765,6 @@ _id_28B7() {
 
       if(self._id_2888 && !self._id_2889) {
         _id_28BB(self._id_288F, var_0);
-
       }
       break;
     default:
@@ -816,7 +775,7 @@ _id_28B7() {
 _id_28B8(var_0) {
   var_1 = undefined;
 
-  if(!isplayer(var_0)) {
+  if(!isPlayer(var_0)) {
     var_1 = level._id_2876;
     return var_1;
   }
@@ -838,7 +797,7 @@ _id_28B9(var_0) {
   self endon("heli_players_dead");
   wait(var_0);
 
-  if(!isplayer(self._id_288F)) {
+  if(!isPlayer(self._id_288F)) {
     return;
   }
   self notify("fire_missiles", self._id_288F);
@@ -852,7 +811,6 @@ _id_28BA(var_0, var_1, var_2) {
 
     if(self._id_2888 && !self._id_2889) {
       self fireweapon();
-
     }
     wait(var_2);
   }
@@ -877,17 +835,14 @@ _id_28BB(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_2 = 3;
-
   }
   var_4 = 0.5;
 
   if(var_4 > var_2) {
     var_4 = var_2;
-
   }
   if(var_4 > 0) {
     wait(randomfloatrange(var_4, var_2));
-
   }
   _id_28BC(var_0, var_1);
   var_3 = _id_2894();
@@ -900,19 +855,17 @@ _id_28BC(var_0, var_1) {
   self endon("death");
   self endon("heli_players_dead");
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     self endon("cant_see_player");
-
   }
   var_2 = _id_2894();
   common_scripts\utility::array_call(var_2, ::startfiring);
   wait(randomfloatrange(1, 2));
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     thread _id_28BD(var_0);
-
   }
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     var_3 = randomfloatrange(0.5, 3);
     thread _id_28B9(var_3);
   }
@@ -945,7 +898,7 @@ _id_28BE(var_0, var_1) {
   self notify("miniguns_have_new_target");
   self endon("miniguns_have_new_target");
 
-  if(!isplayer(var_0) && isai(var_0) && level._id_2879 == 0) {
+  if(!isPlayer(var_0) && isai(var_0) && level._id_2879 == 0) {
     var_2 = spawn("script_origin", var_0.origin + (0, 0, 100));
     var_2 linkto(var_0);
     thread _id_28BF(var_2);
@@ -968,11 +921,10 @@ _id_28C0(var_0) {
   self endon("heli_players_dead");
   self endon("firing_miniguns");
 
-  if(isplayer(var_0)) {
+  if(isPlayer(var_0)) {
     wait(randomfloatrange(3, 4));
   } else {
     wait(randomfloatrange(1, 2));
-
   }
   thread _id_28C1();
   self._id_2898 = 0;
@@ -997,7 +949,6 @@ _id_28C2(var_0) {
 
     if(self._id_2888) {
       self fireweapon();
-
     }
     wait(var_5);
   }
@@ -1048,7 +999,7 @@ heli_damage_monitor() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isDefined(var_1) || !isplayer(var_1)) {
+    if(!isDefined(var_1) || !isPlayer(var_1)) {
       continue;
     }
     self notify("damage_by_player");
@@ -1100,7 +1051,7 @@ _id_28C9(var_0) {
 }
 
 updatedamagefeedback() {
-  if(!isplayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self.hud_damagefeedback setshader("damage_feedback", 24, 48);
@@ -1157,7 +1108,6 @@ _id_28CC(var_0) {
 _id_28CD(var_0) {
   while(level._id_289E) {
     wait 1;
-
   }
   level._id_289E = 1;
   level.player playSound(var_0, "sounddone");
@@ -1171,19 +1121,15 @@ _id_28CE() {
 
   if(!isDefined(var_0)) {
     return 0;
-
   }
   if(issubstr(tolower(var_0), "rpg")) {
     return 1;
-
   }
   if(issubstr(tolower(var_0), "stinger")) {
     return 1;
-
   }
   if(issubstr(tolower(var_0), "at4")) {
     return 1;
-
   }
   return 0;
 }
@@ -1275,11 +1221,9 @@ _id_28D5() {
 
   if(!isDefined(self._id_288F)) {
     return 0;
-
   }
-  if(!isplayer(self._id_288F)) {
+  if(!isPlayer(self._id_288F)) {
     return 0;
-
   }
   var_0 = self._id_288F;
   var_1 = maps\_utility::within_fov(var_0 getEye(), var_0 getplayerangles(), self.origin, level.cosine["35"]);
@@ -1300,7 +1244,6 @@ _id_28D7(var_0) {
 
   if(isDefined(var_0._id_288E)) {
     var_1 settargetentity(var_0._id_288E);
-
   }
   var_1 setmode("manual");
   var_0 waittill("death");
@@ -1315,7 +1258,6 @@ _id_28D9() {
 
   if(isDefined(self.attractor)) {
     missile_deleteattractor(self.attractor);
-
   }
   if(isDefined(self._id_2885)) {
     missile_deleteattractor(self._id_2885);
@@ -1338,11 +1280,9 @@ _id_28DA(var_0) {
 
     if(isDefined(self.currentnode) && isDefined(self.currentnode.target)) {
       var_4 = maps\_utility::_id_27F1(self.currentnode.target, "targetname");
-
     }
     if(isDefined(var_4) && isDefined(var_4.script_linkto)) {
       self._id_28DB = maps\_utility::_id_27F1(var_4.script_linkto, "script_linkname");
-
     }
     if(isDefined(self._id_28DB)) {
       var_1 = self._id_28DB;
@@ -1351,7 +1291,6 @@ _id_28DA(var_0) {
       var_4 waittill("trigger");
     } else {
       common_scripts\utility::waittill_any("near_goal", "goal");
-
     }
     if(isDefined(var_1)) {
       thread _id_28E2(var_1, var_2, var_3, var_0);
@@ -1366,11 +1305,9 @@ _id_28DD() {
 _id_28DE(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = "tag_barrel";
-
   }
   if(!isDefined(var_1)) {
     var_1 = 0;
-
   }
   playFXOnTag(common_scripts\utility::getfx("_attack_heli_spotlight"), self, var_0);
   self._id_2891 = 1;
@@ -1383,7 +1320,6 @@ _id_28DE(var_0, var_1) {
 
     if(!isDefined(self._id_288E)) {
       _id_2893();
-
     }
     self setturrettargetent(self._id_288E);
     thread _id_28D0();
@@ -1401,11 +1337,9 @@ _id_28E0() {
 
   if(!isDefined(self._id_288E)) {
     thread _id_2893();
-
   }
   if(!isDefined(self._id_28D3)) {
     thread _id_28D2();
-
   }
   while(isDefined(self)) {
     wait 0.05;
@@ -1425,13 +1359,11 @@ _id_28E2(var_0, var_1, var_2, var_3) {
     var_4 = self._id_28E3;
   } else {
     var_4 = "turret_attackheli";
-
   }
   var_5 = "missile_attackheli";
 
   if(isDefined(var_3)) {
     var_5 = var_3;
-
   }
   var_6 = undefined;
   var_7 = [];
@@ -1439,11 +1371,9 @@ _id_28E2(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_1)) {
     var_1 = 1;
-
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
-
   }
   if(!isDefined(var_0.classname)) {
     if(!isDefined(self._id_28E4)) {
@@ -1483,7 +1413,6 @@ _id_28E2(var_0, var_1, var_2, var_3) {
 
     if(var_8 >= var_7.size) {
       var_8 = 0;
-
     }
     self setvehweapon(var_5);
     self._id_2889 = 1;

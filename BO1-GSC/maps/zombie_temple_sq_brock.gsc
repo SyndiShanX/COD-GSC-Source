@@ -14,7 +14,6 @@ init() {
   PreCacheModel("p_ztem_digital_recorder");
   level._radio_structs = getstructarray("sq_radios", "targetname");
 }
-
 delete_radio_internal() {
   if(isDefined(level._active_sq_radio)) {
     level._active_sq_radio.trigger Delete();
@@ -24,11 +23,9 @@ delete_radio_internal() {
     level._active_sq_radio = undefined;
   }
 }
-
 delete_radio() {
   level thread delete_radio_internal();
 }
-
 trig_thread() {
   self endon("death");
   while(1) {
@@ -36,17 +33,15 @@ trig_thread() {
     self.owner_ent notify("triggered");
   }
 }
-
 radio_debug() {
   self endon("death");
   level endon("radio_7_played");
 }
-
 radio9_override(struct) {
   self notify("overridden");
   self endon("death");
   self.trigger Delete();
-  self hide();
+  self Hide();
   sidequest = level._zombie_sidequests["sq"];
   if(sidequest.num_reps >= 3) {
     return;
@@ -61,7 +56,7 @@ radio9_override(struct) {
     if(!isDefined(time)) {
       time = 1.0;
     }
-    self moveTo(struct.origin, time, time / 10);
+    self moveto(struct.origin, time, time / 10);
     self waittill("movedone");
     target = struct.target;
   }
@@ -76,22 +71,19 @@ radio9_override(struct) {
   self playSound(snd, "radiodone");
   self playLoopSound("vox_radio_egg_snapshot", 1);
   wait(self.manual_wait);
-  self stopLoopSound(1);
+  self stoploopsound(1);
   flag_set("radio_9_played");
 }
-
 radio7_override(struct) {
   self endon("death");
   self waittill("triggered");
   flag_set("radio_7_played");
 }
-
 radio4_override(struct) {
   self endon("death");
   self waittill("triggered");
   flag_set("radio_4_played");
 }
-
 radio2_override(struct) {
   self endon("death");
   self notify("overridden");
@@ -119,9 +111,8 @@ radio2_override(struct) {
   self playSound(snd, "radiodone");
   self playLoopSound("vox_radio_egg_snapshot", 1);
   wait(self.manual_wait);
-  self stopLoopSound(1);
+  self stoploopsound(1);
 }
-
 radio_thread() {
   self endon("death");
   self endon("overridden");
@@ -131,9 +122,8 @@ radio_thread() {
   self playSound(snd, "radiodone");
   self playLoopSound("vox_radio_egg_snapshot", 1);
   wait(self.manual_wait);
-  self stopLoopSound(1);
+  self stoploopsound(1);
 }
-
 create_radio(radio_num, thread_func) {
   delete_radio();
   radio_struct = undefined;
@@ -144,7 +134,7 @@ create_radio(radio_num, thread_func) {
     }
   }
   if(!isDefined(radio_struct)) {
-    PrintLn("** ERROR:Couldn't find radio struct " + radio_num);
+    PrintLn("*** ERROR:Couldn't find radio struct " + radio_num);
     return;
   }
   radio = spawn("script_model", radio_struct.origin);
@@ -165,7 +155,6 @@ create_radio(radio_num, thread_func) {
   }
   level._active_sq_radio = radio;
 }
-
 set_manual_wait_time(num) {
   if(!isDefined(num)) {
     num = 1;

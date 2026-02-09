@@ -593,7 +593,7 @@ watchgastrigger(var_0, var_1) {
   self endon("death");
   for(;;) {
     self waittill("trigger", var_2);
-    if(!isplayer(var_2)) {
+    if(!isPlayer(var_2)) {
       continue;
     }
 

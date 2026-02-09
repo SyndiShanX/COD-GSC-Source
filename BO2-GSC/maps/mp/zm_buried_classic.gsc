@@ -35,7 +35,7 @@
 precache() {
   precacheshellshock("electrocution");
 
-  if(getdvar(#"createfx") != "") {
+  if(getDvar(#"createfx") != "") {
     return;
   }
   maps\mp\zombies\_zm_ai_ghost::init_animtree();
@@ -59,8 +59,8 @@ setup_buildables() {
 
 main() {
   flag_init("sq_minigame_active");
-  setdvar("player_sliding_velocity_cap", 80.0);
-  setdvar("player_sliding_wishspeed", 800.0);
+  setDvar("player_sliding_velocity_cap", 80.0);
+  setDvar("player_sliding_wishspeed", 800.0);
   level.buildables_built["pap"] = 1;
   maps\mp\gametypes_zm\_zm_gametype::setup_standard_objects("processing");
   maps\mp\zombies\_zm_game_module::set_current_game_module(level.game_module_standard_index);
@@ -128,7 +128,7 @@ vo_fall_down_hole() {
   while(true) {
     stables_roof_trigger waittill("trigger", player);
 
-    if(isplayer(player)) {
+    if(isPlayer(player)) {
       level notify("stables_roof_discovered");
       level.vo_player_who_discovered_stables_roof = player;
       player maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "fall_down_hole");
@@ -302,7 +302,6 @@ collapsing_holes() {
         note = self.script_noteworthy;
 
       println("***!!!*** Set client field " + self.script_string + " Associated script_noteworthy " + note);
-
     }
 
     if(isDefined(self.boards)) {
@@ -355,7 +354,7 @@ tunnel_breach() {
     if(isDefined(amount) && amount <= 1) {
       continue;
     }
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       if(self.boards.damage_state == 0)
         self.boards.damage_state = 1;
 
@@ -574,7 +573,7 @@ dart_game_piece_think() {
   while(true) {
     self waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weaponname, idflags);
 
-    if(isDefined(inflictor) && isplayer(inflictor) && dart_game_is_valid_weapon(weaponname)) {
+    if(isDefined(inflictor) && isPlayer(inflictor) && dart_game_is_valid_weapon(weaponname)) {
       if(!inflictor dart_game_is_award_valid()) {
         continue;
       }
@@ -655,7 +654,7 @@ pianodamagethink() {
     self waittill("trigger", who);
     type = random(noise_level);
 
-    if(isDefined(who) && isplayer(who)) {
+    if(isDefined(who) && isPlayer(who)) {
       iprintlnbold("Piano Damage: " + type);
 
       self playSound("zmb_piano_damage_" + type);
@@ -702,7 +701,6 @@ generator_open_sesame() {
     level waittill_any("open_sesame", "generator_lights_on");
     level.oil_lamp_power = 60.0;
   }
-
 }
 
 fountain_open_sesame() {
@@ -792,7 +790,6 @@ mantle_over_40_move_speed_override() {
     default:
 
       assertmsg("Zombie move speed of '" + self.zombie_move_speed + "' is not supported for mantle_over_40.");
-
   }
 
   return traversealias;
@@ -1192,7 +1189,7 @@ squashed_death_init(kill_if_falling) {
     self waittill("trigger", who);
 
     if(!(isDefined(who.insta_killed) && who.insta_killed)) {
-      if(isplayer(who))
+      if(isPlayer(who))
         who thread insta_kill_player(1, kill_if_falling);
       else if(isai(who)) {
         who dodamage(who.health + 100, who.origin);
@@ -1329,9 +1326,7 @@ get_insta_kill_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_heig
             override_abort = 0;
 
             if(isDefined(level._chugabud_reject_node_override_func))
-              override_abort = [
-                [level._chugabud_reject_node_override_func]
-              ](v_origin, n_node);
+              override_abort = [[level._chugabud_reject_node_override_func]](v_origin, n_node);
 
             if(!override_abort) {
               found_node = n_node;
@@ -1360,7 +1355,7 @@ is_player_killable(player, checkignoremeflag) {
   if(!isalive(player))
     return false;
 
-  if(!isplayer(player))
+  if(!isPlayer(player))
     return false;
 
   if(player.sessionstate == "spectator")

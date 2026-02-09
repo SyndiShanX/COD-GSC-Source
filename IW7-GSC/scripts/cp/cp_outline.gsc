@@ -279,7 +279,7 @@ save_outline_settings() {
   }
 
   foreach(var_2 in var_0) {
-    level.hudoutlinesettings[var_2] = getdvar(var_2);
+    level.hudoutlinesettings[var_2] = getDvar(var_2);
   }
 }
 
@@ -290,6 +290,6 @@ restore_outline_settings() {
   }
 
   foreach(var_2 in var_0) {
-    setdvar(var_2, level.hudoutlinesettings[var_2]);
+    setDvar(var_2, level.hudoutlinesettings[var_2]);
   }
 }

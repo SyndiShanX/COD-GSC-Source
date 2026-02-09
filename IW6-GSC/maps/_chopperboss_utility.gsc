@@ -258,7 +258,7 @@ chopper_boss_fire_mgturrets(var_0) {
   foreach(var_3 in self.mgturret) {
     if(isai(var_0))
       var_3 settargetentity(var_0, (var_0 getEye() - var_0.origin) * 0.7);
-    else if(isplayer(var_0)) {
+    else if(isPlayer(var_0)) {
       if(maps\_utility::is_player_down(var_0)) {
         var_1 = get_chopperboss_data("shot_count_long");
         var_3 settargetentity(var_0);
@@ -299,7 +299,7 @@ chopper_boss_fire_weapon(var_0) {
 
   if(isai(var_0))
     self setturrettargetent(var_0, var_0 getEye() - var_0.origin);
-  else if(isplayer(var_0)) {
+  else if(isPlayer(var_0)) {
     if(maps\_utility::is_player_down(var_0)) {
       var_1 = get_chopperboss_data("shot_count_long");
       self setturrettargetent(var_0);

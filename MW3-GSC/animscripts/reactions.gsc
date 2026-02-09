@@ -18,10 +18,10 @@ _id_0F1C() {
   anim._id_0F1D[anim._id_0F1D.size] = % run_react_stumble;
   anim._id_0F1E = 0;
   anim._id_0F1F = [];
-  anim._id_0F1F["cover_stand"] = animscripts\utility::_id_0C6D( % stand_cover_reaction_a, % stand_cover_reaction_b);
-  anim._id_0F1F["cover_crouch"] = animscripts\utility::_id_0C6D( % crouch_cover_reaction_a, % crouch_cover_reaction_b);
-  anim._id_0F1F["cover_left"] = animscripts\utility::_id_0C6D( % cornerstndl_react_a);
-  anim._id_0F1F["cover_right"] = animscripts\utility::_id_0C6D( % cornerstndr_react_a);
+  anim._id_0F1F["cover_stand"] = animscripts\utility::_id_0C6D(%stand_cover_reaction_a, %stand_cover_reaction_b);
+  anim._id_0F1F["cover_crouch"] = animscripts\utility::_id_0C6D(%crouch_cover_reaction_a, %crouch_cover_reaction_b);
+  anim._id_0F1F["cover_left"] = animscripts\utility::_id_0C6D(%cornerstndl_react_a);
+  anim._id_0F1F["cover_right"] = animscripts\utility::_id_0C6D(%cornerstndr_react_a);
 }
 
 _id_0F20() {
@@ -41,7 +41,7 @@ _id_0F23() {
   self orientmode("face current");
 
   if(var_0 || common_scripts\utility::cointoss()) {
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
     var_1 = [];
     var_1[0] = % exposed_idle_reacta;
     var_1[1] = % exposed_idle_reactb;
@@ -53,15 +53,14 @@ _id_0F23() {
       var_3 = 1 + randomfloat(0.5);
     } else {
       var_3 = 0.2 + randomfloat(0.5);
-
     }
     self setflaggedanimknobrestart("reactanim", var_2, 1, 0.1, 1);
     animscripts\notetracks::_id_0D4F(var_3, "reactanim");
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
 
     if(!var_0 && self.stairsstate == "none" && !isDefined(self._id_0F25)) {
       var_4 = 1 + randomfloat(0.2);
-      var_5 = animscripts\utility::_id_0F26( % exposed_dive_grenade_b, % exposed_dive_grenade_f);
+      var_5 = animscripts\utility::_id_0F26(%exposed_dive_grenade_b, %exposed_dive_grenade_f);
       self setflaggedanimknobrestart("dive", var_5, 1, 0.1, var_4);
       animscripts\shared::_id_0C51("dive");
     }
@@ -70,8 +69,8 @@ _id_0F23() {
     var_4 = 1.2 + randomfloat(0.3);
 
     if(self.a._id_0D26 == "stand") {
-      self clearanim( % root, 0.1);
-      self setflaggedanimknobrestart("crouch", % exposed_stand_2_crouch, 1, 0.1, var_4);
+      self clearanim(%root, 0.1);
+      self setflaggedanimknobrestart("crouch", %exposed_stand_2_crouch, 1, 0.1, var_4);
       animscripts\shared::_id_0C51("crouch");
     }
 
@@ -81,22 +80,21 @@ _id_0F23() {
       var_7 = vectornormalize(self._id_0F24.origin - self.origin);
     } else {
       var_7 = var_6;
-
     }
     if(vectordot(var_7, var_6) > 0) {
-      var_8 = animscripts\utility::_id_0F26( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
-      self clearanim( % root, 0.1);
+      var_8 = animscripts\utility::_id_0F26(%exposed_crouch_idle_twitch_v2, %exposed_crouch_idle_twitch_v3);
+      self clearanim(%root, 0.1);
       self setflaggedanimknobrestart("twitch", var_8, 1, 0.1, 1);
       animscripts\shared::_id_0C51("twitch");
     } else {
-      var_9 = animscripts\utility::_id_0F26( % exposed_crouch_turn_180_left, % exposed_crouch_turn_180_right);
-      self clearanim( % root, 0.1);
+      var_9 = animscripts\utility::_id_0F26(%exposed_crouch_turn_180_left, %exposed_crouch_turn_180_right);
+      self clearanim(%root, 0.1);
       self setflaggedanimknobrestart("turn", var_9, 1, 0.1, 1);
       animscripts\shared::_id_0C51("turn");
     }
   }
 
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self._id_0F24 = undefined;
   self animmode("normal");
   self orientmode("face default");
@@ -157,7 +155,6 @@ _id_0F29() {
       self orientmode("face enemy");
     } else {
       self orientmode("face point", self.reactiontargetpos);
-
     }
     if(self.a._id_0D26 == "crouch") {
       var_2 = vectornormalize(self.reactiontargetpos - self.origin);
@@ -177,22 +174,22 @@ _id_0F29() {
 }
 
 _id_0F2A() {
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 
   if(randomint(4) < 3) {
     self orientmode("face enemy");
-    self setflaggedanimknobrestart("reactanim", % exposed_idle_reactb, 1, 0.2, 1);
-    var_0 = getanimlength( % exposed_idle_reactb);
+    self setflaggedanimknobrestart("reactanim", %exposed_idle_reactb, 1, 0.2, 1);
+    var_0 = getanimlength(%exposed_idle_reactb);
     animscripts\notetracks::_id_0D4F(var_0 * 0.8, "reactanim");
     self orientmode("face current");
   } else {
     self orientmode("face enemy");
-    self setflaggedanimknobrestart("reactanim", % exposed_backpedal, 1, 0.2, 1);
-    var_0 = getanimlength( % exposed_backpedal);
+    self setflaggedanimknobrestart("reactanim", %exposed_backpedal, 1, 0.2, 1);
+    var_0 = getanimlength(%exposed_backpedal);
     animscripts\notetracks::_id_0D4F(var_0 * 0.8, "reactanim");
     self orientmode("face current");
-    self clearanim( % root, 0.2);
-    self setflaggedanimknobrestart("reactanim", % exposed_backpedal_v2, 1, 0.2, 1);
+    self clearanim(%root, 0.2);
+    self setflaggedanimknobrestart("reactanim", %exposed_backpedal_v2, 1, 0.2, 1);
     animscripts\shared::_id_0C51("reactanim");
   }
 }
@@ -207,7 +204,7 @@ _id_0F2B() {
     _id_0F2A();
   } else {
     var_0 = _id_0F29();
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
     animscripts\shared::_id_0C51("reactanim");
   }

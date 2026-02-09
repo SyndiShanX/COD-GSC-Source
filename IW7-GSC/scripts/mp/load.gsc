@@ -10,7 +10,7 @@ main() {
 
   level.func = [];
   level.var_1307 = 1;
-  level.createfx_enabled = getdvar("createfx") != "";
+  level.createfx_enabled = getDvar("createfx") != "";
   level.players_waiting_for_callback = [];
   scripts\engine\utility::struct_class_init();
   scripts\mp\utility::initgameflags();
@@ -63,7 +63,7 @@ main() {
     scripts\mp\createfx::createfx();
   }
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     scripts\mp\dev::reflectionprobe_hide_hp();
     scripts\mp\dev::reflectionprobe_hide_front();
     scripts\mp\spawnlogic::setmapcenterfordev();
@@ -132,15 +132,15 @@ main() {
   level.var_A877 = ::laseroff;
   level.var_4537 = ::connectpaths;
   level.var_563A = ::disconnectpaths;
-  setdvar("sm_sunShadowScale", 1);
-  setdvar("sm_spotLightScoreModelScale", 0);
-  setdvar("r_specularcolorscale", 1);
-  setdvar("r_diffusecolorscale", 1);
-  setdvar("r_lightGridEnableTweaks", 0);
-  setdvar("r_lightGridIntensity", 1);
-  setdvar("r_lightGridContrast", 0);
-  setdvar("ui_showInfo", 1);
-  setdvar("ui_showMinimap", 1);
+  setDvar("sm_sunShadowScale", 1);
+  setDvar("sm_spotLightScoreModelScale", 0);
+  setDvar("r_specularcolorscale", 1);
+  setDvar("r_diffusecolorscale", 1);
+  setDvar("r_lightGridEnableTweaks", 0);
+  setDvar("r_lightGridIntensity", 1);
+  setDvar("r_lightGridContrast", 0);
+  setDvar("ui_showInfo", 1);
+  setDvar("ui_showMinimap", 1);
   setupdamagetriggers();
   precacheitem("bomb_site_mp");
   level.fauxvehiclecount = 0;

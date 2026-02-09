@@ -110,7 +110,7 @@ on_agent_dog_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir
     self.owner leaderDialogOnPlayer("dog_killed");
     self maps\mp\gametypes\_damage::onKillstreakKilled(eAttacker, sWeapon, sMeansOfDeath, iDamage, "destroyed_guard_dog");
 
-    if(IsPlayer(eAttacker)) {
+    if(isPlayer(eAttacker)) {
       eAttacker maps\mp\gametypes\_missions::processChallenge("ch_notsobestfriend");
 
       if(!self IsOnGround()) {
@@ -149,7 +149,7 @@ on_damaged_finished(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     self maps\mp\agents\dog\_dog_think::OnDamage(eInflictor, eAttacker, damageModified, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
   }
 
-  if(IsPlayer(eAttacker)) {
+  if(isPlayer(eAttacker)) {
     if(isDefined(self.attackState) && self.attackState != "attacking") {
       if(DistanceSquared(self.origin, eAttacker.origin) <= self.dogDamagedRadiusSq) {
         self.favoriteEnemy = eAttacker;

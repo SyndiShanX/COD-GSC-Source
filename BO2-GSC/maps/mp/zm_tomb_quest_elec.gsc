@@ -96,7 +96,6 @@ show_chord_debug(a_chord_notes) {
       }
     }
   }
-
 }
 
 piano_run_chords() {
@@ -156,7 +155,6 @@ piano_run_chords() {
     piano_keys_stop();
 
     show_chord_debug();
-
   }
 
   e_player = get_closest_player(a_chords[0].origin);

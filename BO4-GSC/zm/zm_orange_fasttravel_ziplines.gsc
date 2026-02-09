@@ -633,7 +633,6 @@ function_85a2c43b() {
 
     print3d(self.origin + player_forward * 100 + (0, 0, 60), "<dev string:x5c>" + speed, (1, 0, 0), 1, 1, 1);
     record3dtext("<dev string:x5c>" + speed, self.origin, (1, 0, 0), "<dev string:x5f>");
-
   }
 }
 

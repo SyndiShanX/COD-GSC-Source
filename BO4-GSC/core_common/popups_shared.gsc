@@ -118,11 +118,11 @@ devgui_create_weapon_levels_table() {
 }
 
 devgui_notif_init() {
-  setdvar(#"scr_notif_devgui_rank", 0);
-  setdvar(#"scr_notif_devgui_gun_lvl_xp", 0);
-  setdvar(#"scr_notif_devgui_gun_lvl_attachment_index", 0);
-  setdvar(#"scr_notif_devgui_gun_lvl_item_index", 0);
-  setdvar(#"scr_notif_devgui_gun_lvl_rank_id", 0);
+  setDvar(#"scr_notif_devgui_rank", 0);
+  setDvar(#"scr_notif_devgui_gun_lvl_xp", 0);
+  setDvar(#"scr_notif_devgui_gun_lvl_attachment_index", 0);
+  setDvar(#"scr_notif_devgui_gun_lvl_item_index", 0);
+  setDvar(#"scr_notif_devgui_gun_lvl_rank_id", 0);
 
   if(isdedicated()) {
     return;
@@ -193,7 +193,7 @@ notif_devgui_rank_up_think() {
     level.players[0] rank::codecallback_rankup({
       #rank: rank_number, #prestige: 0, #unlock_tokens_added: 1
     });
-    setdvar(#"scr_notif_devgui_rank", 0);
+    setDvar(#"scr_notif_devgui_rank", 0);
     wait 1;
   }
 }
@@ -308,10 +308,10 @@ notif_devgui_gun_level_think() {
     level.players[0] persistence::codecallback_gunchallengecomplete({
       #reward: xp_reward, #attachment_index: attachment_index, #item_index: weapon_item_index, #rank_id: rank_id
     });
-    setdvar(#"scr_notif_devgui_gun_lvl_xp", 0);
-    setdvar(#"scr_notif_devgui_gun_lvl_attachment_index", 0);
-    setdvar(#"scr_notif_devgui_gun_lvl_item_index", 0);
-    setdvar(#"scr_notif_devgui_gun_lvl_rank_id", 0);
+    setDvar(#"scr_notif_devgui_gun_lvl_xp", 0);
+    setDvar(#"scr_notif_devgui_gun_lvl_attachment_index", 0);
+    setDvar(#"scr_notif_devgui_gun_lvl_item_index", 0);
+    setDvar(#"scr_notif_devgui_gun_lvl_rank_id", 0);
     wait 1;
   }
 }
@@ -352,8 +352,8 @@ notif_devgui_challenges() {
 }
 
 notif_devgui_challenges_think() {
-  setdvar(#"scr_notif_devgui_challenge_row", 0);
-  setdvar(#"scr_notif_devgui_challenge_table", 0);
+  setDvar(#"scr_notif_devgui_challenge_row", 0);
+  setDvar(#"scr_notif_devgui_challenge_table", 0);
 
   for(;;) {
     row = getdvarint(#"scr_notif_devgui_challenge_row", 0);
@@ -408,8 +408,8 @@ notif_devgui_challenges_think() {
     player persistence::codecallback_challengecomplete({
       #reward: xpreward, #max: maxvalue, #row: row, #table_number: table - 1, #challenge_type: type, #item_index: itemindex, #challenge_index: challengeid
     });
-    setdvar(#"scr_notif_devgui_challenge_row", 0);
-    setdvar(#"scr_notif_devgui_challenge_table", 0);
+    setDvar(#"scr_notif_devgui_challenge_row", 0);
+    setDvar(#"scr_notif_devgui_challenge_table", 0);
     wait 1;
   }
 }
@@ -496,35 +496,35 @@ popupsfromconsole() {
 
     if(reset) {
       if(medal) {
-        setdvar(#"scr_popupmedal", 0);
+        setDvar(#"scr_popupmedal", 0);
       }
 
       if(challenge) {
-        setdvar(#"scr_popupchallenge", 0);
+        setDvar(#"scr_popupchallenge", 0);
       }
 
       if(gun) {
-        setdvar(#"scr_popupgun", 0);
+        setDvar(#"scr_popupgun", 0);
       }
 
       if(rank) {
-        setdvar(#"scr_popuprank", 0);
+        setDvar(#"scr_popuprank", 0);
       }
 
       if(contractpass) {
-        setdvar(#"scr_popupcontractpass", 0);
+        setDvar(#"scr_popupcontractpass", 0);
       }
 
       if(contractfail) {
-        setdvar(#"scr_popupcontractfail", 0);
+        setDvar(#"scr_popupcontractfail", 0);
       }
 
       if(gamemodemsg) {
-        setdvar(#"scr_gamemodeslideout", 0);
+        setDvar(#"scr_gamemodeslideout", 0);
       }
 
       if(teammsg) {
-        setdvar(#"scr_teamslideout", 0);
+        setDvar(#"scr_teamslideout", 0);
       }
     }
   }
@@ -640,7 +640,7 @@ function_921657e4() {
     nextnotifydata = self.teammessagequeue[0];
     arrayremoveindex(self.teammessagequeue, 0, 0);
 
-    if(!isDefined(nextnotifydata.player) || !isplayer(nextnotifydata.player)) {
+    if(!isDefined(nextnotifydata.player) || !isPlayer(nextnotifydata.player)) {
       continue;
     }
 

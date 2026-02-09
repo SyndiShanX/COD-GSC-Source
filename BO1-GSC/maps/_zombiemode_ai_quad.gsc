@@ -13,7 +13,6 @@ init() {
   level.quad_spawners = getEntArray("quad_zombie_spawner", "script_noteworthy");
   array_thread(level.quad_spawners, ::add_spawn_function, maps\_zombiemode_ai_quad::quad_prespawn);
 }
-
 wait_for_leap() {
   while(1) {
     wait(5);
@@ -22,8 +21,8 @@ wait_for_leap() {
     self.custom_attack = false;
   }
 }
-
 #using_animtree("generic_human");
+
 quad_prespawn() {
   self.animname = "quad_zombie";
   self.custom_idle_setup = maps\_zombiemode_ai_quad::quad_zombie_idle_setup;
@@ -70,7 +69,6 @@ quad_prespawn() {
     self thread[[level.quad_prespawn]]();
   }
 }
-
 quad_zombie_idle_setup() {
   self.a.array["turn_left_45"] = % exposed_tracking_turn45L;
   self.a.array["turn_left_90"] = % exposed_tracking_turn90L;
@@ -84,7 +82,6 @@ quad_zombie_idle_setup() {
   self.a.array["straight_level"] = % ai_zombie_quad_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
-
 init_quad_zombie_anims() {
   level.scr_anim["quad_zombie"]["death1"] = % ai_zombie_quad_death;
   level.scr_anim["quad_zombie"]["death2"] = % ai_zombie_quad_death_2;
@@ -225,7 +222,6 @@ init_quad_zombie_anims() {
   level._effect["quad_explo_gas"] = LoadFX("maps/zombie/fx_zombie_quad_gas_nova6");
   level._effect["quad_trail"] = Loadfx("maps/zombie/fx_zombie_quad_trail");
 }
-
 quad_vox() {
   self endon("death");
   wait(5);
@@ -233,27 +229,26 @@ quad_vox() {
   while(1) {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
-      if(distanceSquared(self.origin, players[i].origin) > 1200 * 1200) {
+      if(DistanceSquared(self.origin, players[i].origin) > 1200 * 1200) {
         self playSound("zmb_quad_amb");
         quad_wait = 7;
-      } else if(distanceSquared(self.origin, players[i].origin) > 200 * 200) {
+      } else if(DistanceSquared(self.origin, players[i].origin) > 200 * 200) {
         self playSound("zmb_quad_vox");
         quad_wait = 5;
-      } else if(distanceSquared(self.origin, players[i].origin) < 150 * 150) {
+      } else if(DistanceSquared(self.origin, players[i].origin) < 150 * 150) {
         wait(.05);
       }
     }
     wait randomfloatrange(1, quad_wait);
   }
 }
-
 quad_close() {
   self endon("death");
   while(1) {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
       if(is_player_valid(players[i], true)) {
-        if(distanceSquared(self.origin, players[i].origin) < 150 * 150) {
+        if(DistanceSquared(self.origin, players[i].origin) < 150 * 150) {
           self playSound("zmb_quad_close");
           wait randomfloatrange(1, 2);
         }
@@ -262,14 +257,12 @@ quad_close() {
     wait_network_frame();
   }
 }
-
 set_leap_attack_properties() {
   self.pathEnemyFightDist = 320;
   self.goalradius = 320;
   self.maxsightdistsqrd = 256 * 256;
   self.can_leap = true;
 }
-
 set_default_attack_properties() {
   self.pathEnemyFightDist = 64;
   self.meleeAttackDist = 64;
@@ -277,7 +270,6 @@ set_default_attack_properties() {
   self.maxsightdistsqrd = 128 * 128;
   self.can_leap = false;
 }
-
 check_wait() {
   min_dist = 96;
   max_dist = 144;
@@ -292,16 +284,16 @@ check_wait() {
     }
     if(dist > min_dist && dist < max_dist && self.nextSpecial < GetTime() && z_check) {
       cansee = SightTracePassed(self.origin, self.enemy.origin, false, undefined);
-      if(cansee)
+      if(cansee) {
         self set_leap_attack_properties();
-      else
+      } else {
         self set_default_attack_properties();
+      }
     } else {
       self set_default_attack_properties();
     }
   }
 }
-
 quad_zombie_think() {
   self endon("death");
   self.specialAttack = maps\_zombiemode_ai_quad::TryLeap;
@@ -319,7 +311,6 @@ quad_zombie_think() {
     wait_network_frame();
   }
 }
-
 trackCollision() {
   self endon("death");
   self endon("stop_coll");
@@ -333,7 +324,6 @@ trackCollision() {
     wait_network_frame();
   }
 }
-
 quad_finish_leap() {
   self endon("death");
   self.state = "waiting";
@@ -344,14 +334,12 @@ quad_finish_leap() {
   self OrientMode("face enemy");
   self thread animscripts\zombie_combat::main();
 }
-
 quad_stop_leap() {
   self endon("death");
   self SetFlaggedAnimKnobAllRestart("attack", %ai_zombie_quad_attack_leap_loop_out, %body, 1, .1, 1);
   self animscripts\zombie_shared::DoNoteTracks("attack");
   self quad_finish_leap();
 }
-
 quad_leap_attack() {
   self endon("death");
   self endon("stop_leap");
@@ -410,7 +398,6 @@ quad_leap_attack() {
   }
   quad_finish_leap();
 }
-
 TryLeap() {
   if(self.state == "leaping") {
     return true;
@@ -418,7 +405,7 @@ TryLeap() {
   if(!isDefined(self.enemy)) {
     return false;
   }
-  if(distanceSquared(self.origin, self.enemy.origin) > 512 * 512) {
+  if(DistanceSquared(self.origin, self.enemy.origin) > 512 * 512) {
     animscripts\zombie_melee::debug_melee("Not doing melee - Distance to enemy is more than 512 units.");
     return false;
   }
@@ -432,18 +419,15 @@ TryLeap() {
   self notify("special_attack");
   return true;
 }
-
 quad_thundergun_disintegrate(player) {
   self endon("death");
   self DoDamage(self.health + 666, player.origin, player);
 }
-
 quad_thundergun_knockdown(player, gib) {
   self endon("death");
   damage = int(self.maxhealth * 0.5);
   self DoDamage(damage, player.origin, player);
 }
-
 quad_gas_explo_death() {
   death_vars = [];
   death_vars["explo_radius_zomb"] = self.death_explo_radius_zomb;
@@ -455,7 +439,6 @@ quad_gas_explo_death() {
   level thread quad_gas_area_of_effect(self.origin, death_vars);
   self Delete();
 }
-
 quad_death_explo(origin, death_vars) {
   playsoundatposition("zmb_quad_explo", origin);
   playFX(level._effect["dog_gib"], origin);
@@ -475,14 +458,12 @@ quad_death_explo(origin, death_vars) {
   self.exploded = true;
   self RadiusDamage(origin, death_vars["explo_radius_zomb"], level.zombie_health, level.zombie_health, self, "MOD_EXPLOSIVE");
 }
-
 quad_damage_func(player) {
   if(self.exploded) {
     return 0;
   }
   return self.meleeDamage;
 }
-
 quad_gas_area_of_effect(origin, death_vars) {
   effectArea = spawn("trigger_radius", origin, 0, death_vars["gas_radius"], 100);
   playFX(level._effect["quad_explo_gas"], origin);
@@ -509,7 +490,6 @@ quad_gas_area_of_effect(origin, death_vars) {
   }
   effectArea Delete();
 }
-
 quad_trail() {
   self endon("death");
   self waittill("quad_end_traverse_anim");
@@ -519,7 +499,6 @@ quad_trail() {
   self.fx_quad_trail LinkTo(self, "tag_origin");
   maps\_zombiemode_net::network_safe_play_fx_on_tag("quad_fx", 2, level._effect["quad_trail"], self.fx_quad_trail, "tag_origin");
 }
-
 quad_post_death() {
   if(isDefined(self.fx_quad_trail)) {
     self.fx_quad_trail unlink();
@@ -529,7 +508,6 @@ quad_post_death() {
     self thread quad_gas_explo_death();
   }
 }
-
 quad_killed_override(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime) {
   if(sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET") {
     self.can_explode = true;
@@ -544,7 +522,6 @@ quad_killed_override(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir
     [[level._override_quad_explosion]](self);
   }
 }
-
 quad_pre_teleport() {
   if(isDefined(self.fx_quad_trail)) {
     self.fx_quad_trail unlink();
@@ -552,7 +529,6 @@ quad_pre_teleport() {
     wait(.1);
   }
 }
-
 quad_post_teleport() {
   if(isDefined(self.fx_quad_trail)) {
     self.fx_quad_trail unlink();
@@ -566,7 +542,6 @@ quad_post_teleport() {
     maps\_zombiemode_net::network_safe_play_fx_on_tag("quad_fx", 2, level._effect["quad_trail"], self.fx_quad_trail, "tag_origin");
   }
 }
-
 quad_bhb_attract_walk() {
   self endon("death");
   flag_wait("bhb_anim_change_allowed");
@@ -585,7 +560,6 @@ quad_bhb_attract_walk() {
   self._bhb_change_anim_notified = 1;
   self.a.runBlendTime = self._normal_run_blend_time;
 }
-
 quad_bhb_attract_run() {
   self endon("death");
   rand = RandomIntRange(1, 4);
@@ -603,7 +577,6 @@ quad_bhb_attract_run() {
   self._bhb_change_anim_notified = 1;
   self.a.runBlendTime = self._normal_run_blend_time;
 }
-
 quad_bhb_horizon_death(bhb_org, poi_ent) {
   self endon("death");
   self playSound("wpn_gersh_device_kill");

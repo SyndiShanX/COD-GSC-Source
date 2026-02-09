@@ -18,12 +18,12 @@ main() {
   thread maps\carrier_code::init_gunboats();
   maps\carrier_anim::main();
 
-  if(getdvar("r_reflectionProbeGenerate") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level.tilt_sky = getent("carrier_tilt_sky", "targetname");
     level.tilt_sky hide();
   }
 
-  if(getdvar("createfx") != "")
+  if(getDvar("createfx") != "")
     thread create_fx_ent_setup();
 
   maps\_load::main();
@@ -114,7 +114,7 @@ obj_regroup_with_hesh() {
   objective_state(var_0, "current");
   objective_onentity(var_0, level.hesh, (0, 0, 70));
   objective_setpointertextoverride(var_0, &"CARRIER_OBJ_FOLLOW");
-  var_1 = getdvar("objectiveFadeTooFar");
+  var_1 = getDvar("objectiveFadeTooFar");
   setsaveddvar("objectiveFadeTooFar", 1);
   wait 3;
   setsaveddvar("objectiveFadeTooFar", var_1);
@@ -152,7 +152,7 @@ obj_sparrow() {
   if(!common_scripts\utility::flag("gunship_trans_mid")) {
     objective_onentity(var_0, level.hesh, (0, 0, 70));
     objective_setpointertextoverride(var_0, &"CARRIER_OBJ_FOLLOW");
-    var_1 = getdvar("objectiveFadeTooFar");
+    var_1 = getDvar("objectiveFadeTooFar");
     setsaveddvar("objectiveFadeTooFar", 1);
     common_scripts\utility::flag_wait("gunship_trans_mid");
     setsaveddvar("objectiveFadeTooFar", var_1);

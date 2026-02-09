@@ -114,7 +114,7 @@ start_zombie_stuff() {
 }
 
 include_weapons() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("m1911_zm", 0);
@@ -182,7 +182,7 @@ include_weapons() {
 }
 
 include_powerups() {
-  gametype = getdvar(#"ui_gametype");
+  gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

@@ -431,7 +431,7 @@ function getunownedflagneareststart(team, excludeflag) {
 
 function onbeginuse(player) {
   ownerteam = self gameobjects::get_owner_team();
-  setdvar(("scr_obj" + self gameobjects::get_label()) + "_flash", 1);
+  setDvar(("scr_obj" + self gameobjects::get_label()) + "_flash", 1);
   self.didstatusnotify = 0;
   if(ownerteam == "allies") {
     otherteam = "axis";
@@ -490,7 +490,7 @@ function statusdialog(dialog, team) {
 }
 
 function onenduse(team, player, success) {
-  setdvar(("scr_obj" + self gameobjects::get_label()) + "_flash", 0);
+  setDvar(("scr_obj" + self gameobjects::get_label()) + "_flash", 0);
   self.objpoints["allies"] thread objpoints::stop_flashing();
   self.objpoints["axis"] thread objpoints::stop_flashing();
 }
@@ -647,7 +647,7 @@ function onscoreclosemusic() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(self.touchtriggers.size && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
+  if(self.touchtriggers.size && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
     triggerids = getarraykeys(self.touchtriggers);
     ownerteam = self.touchtriggers[triggerids[0]].useobj.ownerteam;
     team = self.pers["team"];

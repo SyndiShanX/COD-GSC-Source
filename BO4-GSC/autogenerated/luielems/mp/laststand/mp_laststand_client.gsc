@@ -31,7 +31,6 @@ class cmp_laststand_client: cluielem {
     cluielem::add_clientfield("bleedout_progress", 1, 6, "float");
     cluielem::add_clientfield("revive_progress", 1, 5, "float");
   }
-
 }
 
 register(uid) {
