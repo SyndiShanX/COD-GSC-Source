@@ -586,8 +586,9 @@ arcademode_death(mod, hit_location, hit_origin, player, enemy, uberKillingMachin
     return;
   }
 
-  if(!isDefined(hit_location))
+  if(!isDefined(hit_location)) {
     hit_location = "none";
+  }
 
   death_type = level.arcadeMode_deathtypes[mod];
   if(!isDefined(death_type)) {
@@ -718,8 +719,9 @@ updatePlayers() {
 
 round_up_to_ten(score) {
   new_score = int(score) - int(score) % 10;
-  if(new_score < score)
+  if(new_score < score) {
     new_score += 10;
+  }
   return new_score;
 }
 
@@ -969,14 +971,16 @@ fontPulse(player) {
 }
 
 arcademode_complete() {
-  if(getDvar("arcademode") != "1")
+  if(getDvar("arcademode") != "1") {
     return false;
+  }
   return flag("arcademode_complete");
 }
 
 arcadeMode_ends(level_index) {
-  if(flag("arcademode_complete"))
+  if(flag("arcademode_complete")) {
     return;
+  }
   flag_set("arcademode_complete");
 
   level notify("arcademode_complete");
@@ -1377,8 +1381,9 @@ combine_points(hud_mission, bonus) {
   for(;;) {
     difference = final_score - hud_mission.score;
     boost = difference * 0.2 + 1;
-    if(difference <= 15)
+    if(difference <= 15) {
       boost = 1;
+    }
 
     boost = int(boost);
 
@@ -1410,8 +1415,9 @@ combine_hudpoints(hud_mission, hud_bonus) {
   for(;;) {
     difference = final_score - hud_mission.score;
     boost = difference * 0.2 + 1;
-    if(difference <= 15)
+    if(difference <= 15) {
       boost = 1;
+    }
 
     boost = int(boost);
 

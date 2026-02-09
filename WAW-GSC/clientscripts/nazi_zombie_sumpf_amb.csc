@@ -16,15 +16,17 @@ play_meteor_loop() {
   meteor = clientscripts\_audio::playloopat(0, "meteor_loop", (11264, -1920, -592));
 }
 add_song(song) {
-  if(!isDefined(level.radio_songs))
+  if(!isDefined(level.radio_songs)) {
     level.radio_songs = [];
+  }
   level.radio_songs[level.radio_songs.size] = song;
 }
 
 fade(id, time) {
   rate = 0;
-  if(time != 0)
+  if(time != 0) {
     rate = 1.0 / time;
+  }
 
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);

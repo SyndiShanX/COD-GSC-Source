@@ -21,8 +21,9 @@ musicSaveWait() {
   for(;;) {
     level waittill("save_restore");
 
-    if(level.nextMusicState == "")
+    if(level.nextMusicState == "") {
       level.nextMusicState = level.activeMusicState;
+    }
     level.activeMusicState = "";
 
     println("resetting music state to " + level.nextMusicState);
@@ -60,8 +61,9 @@ updateMusic() {
   level endon("save_restore");
 
   while(1) {
-    if(level.activeMusicState == level.nextMusicState)
+    if(level.activeMusicState == level.nextMusicState) {
       level waittill("new_music");
+    }
 
     if(level.activeMusicState == level.nextMusicState) {
       continue;
@@ -75,11 +77,13 @@ updateMusic() {
       continue;
     }
 
-    if(active != "")
+    if(active != "") {
       transitionOut(active, next);
+    }
 
-    if(next != "")
+    if(next != "") {
       transitionIn(active, next);
+    }
 
     level.activeMusicState = next;
   }
@@ -87,8 +91,9 @@ updateMusic() {
 
 fadeOutAndStopSound(id, time) {
   rate = 0;
-  if(time != 0)
+  if(time != 0) {
     rate = 1.0 / time;
+  }
 
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
@@ -157,16 +162,19 @@ transitionOut(previous, next) {
     }
   }
 
-  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
+  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000) {
     wait(.01);
-
-  if(waittillstingerdone) {
-    while(SoundPlaying(stingerid))
-      wait(.01);
   }
 
-  if(loopalias != nextloopalias)
+  if(waittillstingerdone) {
+    while(SoundPlaying(stingerid)) {
+      wait(.01);
+    }
+  }
+
+  if(loopalias != nextloopalias) {
     level.musicStates[previous].id = -1;
+  }
 }
 
 transitionIn(previous, next) {
@@ -258,8 +266,9 @@ musicWaitTillStingerDone() {
 musicStinger(stinger, delay, force) {
   assert(isDefined(level.musicDeclareName));
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0;
+  }
 
   name = level.musicDeclareName;
 
@@ -276,10 +285,11 @@ _musicAlias(alias, fadein, fadeout, loop) {
 
   name = level.musicDeclareName;
 
-  if(loop)
+  if(loop) {
     level.musicStates[name].loopalias = alias;
-  else
+  } else {
     level.musicStates[name].oneshotalias = alias;
+  }
 
   level.musicStates[name].fadein = fadein;
   level.musicStates[name].fadeout = fadeout;

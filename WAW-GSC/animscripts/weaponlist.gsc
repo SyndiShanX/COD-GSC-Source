@@ -6,15 +6,18 @@
 #using_animtree("generic_human");
 
 usingAutomaticWeapon() {
-  if(weaponIsSemiAuto(self.weapon))
+  if(weaponIsSemiAuto(self.weapon)) {
     return false;
+  }
 
-  if(weaponIsBoltAction(self.weapon))
+  if(weaponIsBoltAction(self.weapon)) {
     return false;
+  }
 
   class = weaponClass(self.weapon);
-  if(class == "rifle" || class == "mg" || class == "smg")
+  if(class == "rifle" || class == "mg" || class == "smg") {
     return true;
+  }
 
   return false;
 }
@@ -65,8 +68,9 @@ RefillClip() {
   }
 
   if(weaponClass(self.weapon) == "rocketlauncher") {
-    if(!self.a.rocketVisible)
+    if(!self.a.rocketVisible) {
       self thread animscripts\combat_utility::showRocketWhenReloadIsDone();
+    }
   }
 
   if(!isDefined(self.bulletsInClip)) {
@@ -77,15 +81,17 @@ RefillClip() {
 
   assertEX(isDefined(self.bulletsInClip), "RefillClip failed");
 
-  if(self.bulletsInClip <= 0)
+  if(self.bulletsInClip <= 0) {
     return false;
-  else
+  } else {
     return true;
+  }
 }
 
 precacheClipFx() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: weaponList.gsc. Function: precacheClipFx()\n");
+  }
 
   clipEffects = [];
 
@@ -106,8 +112,9 @@ precacheClipFx() {
     spawners = getSpawnerArray();
     for(i = 0; i < spawners.size; i++) {
       spawner = spawners[i];
-      if(isDefined(spawnedAITypes[spawner.classname]))
+      if(isDefined(spawnedAITypes[spawner.classname])) {
         continue;
+      }
       spawnedAITypes[spawner.classname] = true;
 
       oldCount = spawner.count;
@@ -118,12 +125,15 @@ precacheClipFx() {
         continue;
       }
 
-      if(isDefined(fakeai.primaryWeapon))
+      if(isDefined(fakeai.primaryWeapon)) {
         level.weapons_list[fakeai.primaryWeapon] = true;
-      if(isDefined(fakeai.secondaryWeapon))
+      }
+      if(isDefined(fakeai.secondaryWeapon)) {
         level.weapons_list[fakeai.secondaryWeapon] = true;
-      if(isDefined(fakeai.sidearm))
+      }
+      if(isDefined(fakeai.sidearm)) {
         level.weapons_list[fakeai.sidearm] = true;
+      }
 
       fakeai delete();
       spawner.count = oldCount;
@@ -131,14 +141,17 @@ precacheClipFx() {
 
     ai = getAiArray();
     for(i = 0; i < ai.size; i++) {
-      if(isDefined(ai[i].primaryWeapon))
+      if(isDefined(ai[i].primaryWeapon)) {
         level.weapons_list[ai[i].primaryWeapon] = true;
+      }
 
-      if(isDefined(ai[i].secondaryWeapon))
+      if(isDefined(ai[i].secondaryWeapon)) {
         level.weapons_list[ai[i].secondaryWeapon] = true;
+      }
 
-      if(isDefined(ai[i].sidearm))
+      if(isDefined(ai[i].sidearm)) {
         level.weapons_list[ai[i].sidearm] = true;
+      }
     }
 
     weapons = getarraykeys(level.weapons_list);
@@ -156,10 +169,12 @@ precacheClipFx() {
       weapon = weapons[i];
       model = getWeaponClipModel(weapon);
 
-      if(model == "")
+      if(model == "") {
         continue;
-      if(isDefined(printedModel[model]))
+      }
+      if(isDefined(printedModel[model])) {
         continue;
+      }
       printedModel[model] = true;
 
       println("^1level.weaponClipModels[" + printIndex + "] = \"" + model + "\";");
@@ -174,10 +189,12 @@ precacheClipFx() {
       weapon = weapons[i];
       model = getWeaponClipModel(weapon);
 
-      if(model == "")
+      if(model == "") {
         continue;
-      if(isDefined(printedModel[model]))
+      }
+      if(isDefined(printedModel[model])) {
         continue;
+      }
       printedModel[model] = true;
 
       println("^1fx," + clipEffects[model]);
@@ -191,8 +208,9 @@ precacheClipFx() {
   }
   setDvar("scr_generateClipModels", 0);
 
-  if(!isDefined(anim._effect))
+  if(!isDefined(anim._effect)) {
     anim._effect = [];
+  }
   if(isDefined(level.weaponClipModels)) {
     for(i = 0; i < level.weaponClipModels.size; i++) {
       model = level.weaponClipModels[i];
@@ -208,8 +226,9 @@ precacheClipFx() {
     level.weaponClipModelsLoaded = true;
   } else {}
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: weaponList.gsc. Function: precacheClipFx() - COMPLETE\n");
+  }
 }
 
 bugLDAboutClipModels() {
@@ -229,12 +248,15 @@ bugLDAboutClipModels() {
 add_weapon(name, type, time, clipsize, anims) {
   assert(isDefined(name));
   assert(isDefined(type));
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 3.0;
-  if(!isDefined(clipsize))
+  }
+  if(!isDefined(clipsize)) {
     time = 1;
-  if(!isDefined(anims))
+  }
+  if(!isDefined(anims)) {
     anims = "rifle";
+  }
 
   name = tolower(name);
   anim.AIWeapon[name]["type"] = type;

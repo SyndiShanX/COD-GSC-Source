@@ -115,10 +115,11 @@ tree_death(guy, anim_point) {
     start = anim_point.origin;
     end = (0, 0, 0);
 
-    if(randomint(10) < 5)
+    if(randomint(10) < 5) {
       createrope(start, end, 70, guy, "j_ankle_le", 1);
-    else
+    } else {
       createrope(start, end, 70, guy, "j_ankle_ri", 1);
+    }
 
     wait 1.0;
 
@@ -170,8 +171,9 @@ fall_and_hang(anim_point) {
 }
 
 convert_guy_to_drone(guy, bKeepguy) {
-  if(!isDefined(bKeepguy))
+  if(!isDefined(bKeepguy)) {
     bKeepguy = false;
+  }
   model = spawn("script_model", guy.origin);
   model.angles = guy.angles;
   model setModel(guy.model);
@@ -180,12 +182,15 @@ convert_guy_to_drone(guy, bKeepguy) {
     model attach(guy getattachmodelname(i), guy getattachtagname(i));
   }
   model useanimtree(#animtree);
-  if(isDefined(guy.team))
+  if(isDefined(guy.team)) {
     model.team = guy.team;
-  if(!bKeepguy)
+  }
+  if(!bKeepguy) {
     guy delete();
-  if(isDefined(guy.animname))
+  }
+  if(isDefined(guy.animname)) {
     model.animname = guy.animname;
+  }
   model makefakeai();
   return model;
 }

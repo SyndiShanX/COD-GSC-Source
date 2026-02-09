@@ -14,8 +14,9 @@ registerWeaponInfo(name, string, type, clip) {
 }
 
 isWeaponRegistered(name) {
-  if(!isDefined(level.weaponInfo[name]))
+  if(!isDefined(level.weaponInfo[name])) {
     return false;
+  }
 
   return true;
 }
@@ -96,8 +97,9 @@ init() {
 }
 
 initWeaponHUD() {
-  if(!isDefined(self.hud_bullets))
+  if(!isDefined(self.hud_bullets)) {
     self.hud_bullets = [];
+  }
 
   if(!isDefined(self.hud_bullets[0])) {
     self.hud_bullets[0] = createIcon(undefined, 24, 96);
@@ -169,8 +171,9 @@ setHudWeaponType(type) {
   if(!isDefined(self.hud_bullets)) {
     return;
   }
-  for(index = 0; index < self.hud_bullets.size; index++)
+  for(index = 0; index < self.hud_bullets.size; index++) {
     self.hud_bullets[index].alpha = 0;
+  }
 
   switch (type) {
     case "pistol":
@@ -210,10 +213,11 @@ setHudWeaponType(type) {
         self.hud_bullets[index] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6 + xOffset, -70);
         self.hud_bullets[index].alpha = 1;
 
-        if(index % 2)
+        if(index % 2) {
           self.hud_bullets[index] setIconShader("hud_bullets_support_back");
-        else
+        } else {
           self.hud_bullets[index] setIconShader("hud_bullets_support_front");
+        }
 
         xOffset -= 14;
       }
@@ -275,12 +279,13 @@ updateHudWeaponAmmo(weapon, ammoCount) {
 
       bulletOffset = 20;
       for(index = 4; index >= 0; index--) {
-        if(diff > bulletOffset)
+        if(diff > bulletOffset) {
           self.hud_bullets[index].alpha = 0;
-        else if((bulletOffset - diff) <= 20)
+        } else if((bulletOffset - diff) <= 20) {
           self.hud_bullets[index].alpha = level.bulletAlphas[diff - (bulletOffset - 20)];
-        else
+        } else {
           self.hud_bullets[index].alpha = 1;
+        }
 
         bulletOffset += 20;
       }

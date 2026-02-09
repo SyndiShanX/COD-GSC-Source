@@ -808,8 +808,9 @@ event1_intro_player_blocker() {
 
   blocker = getEntArray("intro_player_blocker", "targetname");
 
-  for(i = 0; i < blocker.size; i++)
+  for(i = 0; i < blocker.size; i++) {
     blocker[i] Delete();
+  }
 }
 event1_redshirts_regroup() {
   redshirts = getEntArray("event1_redshirts", "script_noteworthy");
@@ -1437,8 +1438,9 @@ event1_axis_beatdown_death() {
   while(self.health > 1) {
     self waittill("damage", dmg, attacker, dir, point);
 
-    if(is_mature())
+    if(is_mature()) {
       playFX(level._effect["flesh_hit"], point);
+    }
     level.beatdown_attacker = attacker;
   }
 
@@ -1454,8 +1456,9 @@ event1_axis_beatdown_death() {
 event1_hut_collapse() {
   pieces = getEntArray("hut1_pieces", "script_noteworthy");
 
-  if(isDefined(pieces[0]))
+  if(isDefined(pieces[0])) {
     playsoundatposition("tower_splash_lowpitch", pieces[0].origin);
+  }
 
   parent = undefined;
   for(i = 0; i < pieces.size; i++) {
@@ -1541,8 +1544,9 @@ event1_showdown_damage(ally) {
     self waittill("damage", dmg, attacker, dir, point, mod);
 
     if(isPlayer(attacker)) {
-      if(is_mature())
+      if(is_mature()) {
         playFX(level._effect["flesh_hit"], point);
+      }
       count += dmg;
 
       if(count > 100) {
@@ -2762,8 +2766,9 @@ event2_beach_dialogue() {
 
   wait(2);
 
-  if(!flag("spotlight_dead"))
+  if(!flag("spotlight_dead")) {
     level.roebuck anim_single_solo(level.roebuck, "take_out_spotlight");
+  }
 }
 
 event2_beach_grenade(squad) {
@@ -3109,8 +3114,9 @@ event3_double_feign_anim(guy, node, death_after_anim) {
 
   guy StopAnimScripted();
 
-  if(!isDefined(death_after_anim))
+  if(!isDefined(death_after_anim)) {
     guy.ignoreall = false;
+  }
 
   guy thread anim_single_solo(guy, "feign_2", undefined, node);
 
@@ -3785,8 +3791,9 @@ event5() {
 }
 
 event4_sullivan_roebuck_dialog(node) {
-  if(!flag("event5_player_charge_set"))
+  if(!flag("event5_player_charge_set")) {
     level.sullivan anim_single_solo(level.sullivan, "plant_charges_now", undefined, node);
+  }
 
   wait(1);
 
@@ -4068,8 +4075,9 @@ event5_bunker_guy_spawn() {
     guy = getFarthest(player.origin, ai_axis);
   }
 
-  if(isDefined(guy.script_goalvolume))
+  if(isDefined(guy.script_goalvolume)) {
     guy.script_goalvolume = "";
+  }
 
   guy.targetname = "event5_bunkerdoor_guy";
 
@@ -4348,13 +4356,15 @@ event6_get_to_boat() {
 
   anim_reach_solo(self, "boat_getin", undefined, boat);
 
-  if(self == level.sullivan)
+  if(self == level.sullivan) {
     flag_set("roebuck_dialogue_cmon_time");
+  }
 
-  if(self == level.sullivan)
+  if(self == level.sullivan) {
     self thread event6_get_to_boat_sullivan(boat);
-  else
+  } else {
     anim_single_solo(self, "boat_getin", undefined, boat);
+  }
 
   if(self == level.roebuck) {
     flag_set("roebuck_in_boat");
@@ -4368,8 +4378,9 @@ event6_get_to_boat() {
 
   self LinkTo(boat, "tag_origin", (0, 0, 0), (0, 0, 0));
 
-  if(self != level.sullivan)
+  if(self != level.sullivan) {
     level thread anim_loop_solo(self, "boat_underfire", undefined, "stop_boat_underfire", boat);
+  }
 
   if(boat == level.event6_boat1) {
     if(is_sullivan) {
@@ -4488,8 +4499,9 @@ event6_outtro_player(player) {
 
   level.players_part1_done++;
 
-  if(level.players_part1_done == get_players().size)
+  if(level.players_part1_done == get_players().size) {
     level notify("part1_done");
+  }
 }
 
 event6_outtro_player_part2(player, i) {
@@ -4509,8 +4521,9 @@ event6_outtro_player_part2(player, i) {
   player thread maps\mak_anim::play_viewhands("outtro2", level.event6_boat1, true, 1, 1, 15, 15, 10, 10, false, undefined);
   player waittill("player_view_lerped");
 
-  if(i == 0)
+  if(i == 0) {
     level.sullivan thread event6_get_to_boat();
+  }
 
   player waittill("outtro2_viewhands_anim_done");
 
@@ -4522,8 +4535,9 @@ event6_outtro_player_part2(player, i) {
   player AllowCrouch(true);
   player AllowStand(false);
 
-  if(i == 0)
+  if(i == 0) {
     flag_set("player_in_boat");
+  }
 
   setsaveddvar("ai_friendlySuppression", "1");
 
@@ -4572,8 +4586,9 @@ event5_outtro_guy_spawn() {
     guy = getFarthest(player.origin, ai_axis);
   }
 
-  if(isDefined(guy.script_goalvolume))
+  if(isDefined(guy.script_goalvolume)) {
     guy.script_goalvolume = "";
+  }
 
   guy.targetname = "outtro_spawner";
 

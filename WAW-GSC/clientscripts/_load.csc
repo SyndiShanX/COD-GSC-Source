@@ -107,8 +107,9 @@ main() {
 
   level.createFX_enabled = (getDvar("createfx") != "");
 
-  if(!isDefined(level.scr_anim))
+  if(!isDefined(level.scr_anim)) {
     level.scr_anim[0][0] = 0;
+  }
 
   clientscripts\_global_fx::main();
 

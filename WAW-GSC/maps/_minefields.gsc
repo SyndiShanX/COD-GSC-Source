@@ -18,8 +18,9 @@ minefield_think() {
   while(1) {
     self waittill("trigger", other);
 
-    if(isSentient(other))
+    if(isSentient(other)) {
       other thread minefield_kill(self);
+    }
   }
 }
 

@@ -44,13 +44,15 @@ SayGenericDialogue(typeString) {
 SayGenericDialogueWithImportance(typeString, importance) {
   voice = self.voice;
 
-  if(!isDefined(voice))
+  if(!isDefined(voice)) {
     voice = "american";
+  }
 
   soundAlias = "generic_" + typeString + "_" + voice;
 
-  if(SoundExists(soundAlias))
+  if(SoundExists(soundAlias)) {
     self thread PlayFaceThread(undefined, soundAlias, importance);
+  }
 }
 
 SetIdleFaceDelayed(facialAnimationArray) {
@@ -115,21 +117,25 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       }
       println("WARNING: delaying alias " + self.a.facialSoundAlias + " to play " + soundAlias);
 
-      while(isDefined(self) && self.isTalking)
+      while(isDefined(self) && self.isTalking) {
         self waittill("done speaking");
+      }
 
-      if(!isDefined(self))
+      if(!isDefined(self)) {
         return;
+      }
     } else {
       println("WARNING: interrupting alias " + self.a.facialSoundAlias + " to play " + soundAlias);
       self stopSound(self.a.facialSoundAlias);
       self notify("cancel speaking");
 
-      while(isDefined(self) && self.isTalking)
+      while(isDefined(self) && self.isTalking) {
         self waittill("done speaking");
+      }
 
-      if(!isDefined(self))
+      if(!isDefined(self)) {
         return;
+      }
     }
   }
 
@@ -159,8 +165,9 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
 
   level.TalkNotifySeed += 1;
 
-  if(!SoundExists(soundAlias))
+  if(!SoundExists(soundAlias)) {
     println("Warning: " + soundAlias + " does not exist");
+  }
 
   self playSound(soundAlias, uniqueNotify, true);
 

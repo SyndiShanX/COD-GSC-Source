@@ -8,8 +8,9 @@
 
 createLoopSound() {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
 
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
@@ -24,8 +25,9 @@ createLoopSound() {
 
 createEffect(type, fxid) {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
 
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
@@ -38,19 +40,23 @@ createEffect(type, fxid) {
 }
 
 exploder_delay() {
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
   min_delay = self.v["delay"];
   max_delay = self.v["delay"] + 0.001;
-  if(isDefined(self.v["delay_min"]))
+  if(isDefined(self.v["delay_min"])) {
     min_delay = self.v["delay_min"];
+  }
 
-  if(isDefined(self.v["delay_max"]))
+  if(isDefined(self.v["delay_max"])) {
     max_delay = self.v["delay_max"];
+  }
 
-  if(min_delay > 0)
+  if(min_delay > 0) {
     realwait(randomfloatrange(min_delay, max_delay));
+  }
 }
 
 fire_effect() {
@@ -63,18 +69,21 @@ fire_effect() {
   origin = self.v["origin"];
   firefx = self.v["firefx"];
   ender = self.v["ender"];
-  if(!isDefined(ender))
+  if(!isDefined(ender)) {
     ender = "createfx_effectStopper";
+  }
   timeout = self.v["firefxtimeout"];
 
   fireFxDelay = 0.5;
-  if(isDefined(self.v["firefxdelay"]))
+  if(isDefined(self.v["firefxdelay"])) {
     fireFxDelay = self.v["firefxdelay"];
+  }
 
   self exploder_delay();
 
-  if(isDefined(firefxSound))
+  if(isDefined(firefxSound)) {
     level thread clientscripts\_utility::loop_fx_sound(firefxSound, origin, ender, timeout);
+  }
 
   players = getlocalplayers();
 
@@ -104,10 +113,11 @@ trail_effect() {
       org = temp_ent.origin;
     }
 
-    if(isDefined(org))
+    if(isDefined(org)) {
       self.v["angles"] = VectorToAngles(org - self.v["origin"]);
-    else
+    } else {
       println("*** Client : Exploder " + self.v["trailfx"] + " Failed to find target " + self.v["target"]);
+    }
   } else {
     println("Client trail : target not defined.");
   }
@@ -194,13 +204,15 @@ activate_individual_exploder() {
     self set_forward_and_up_vectors();
   }
 
-  if(isDefined(self.v["firefx"]))
+  if(isDefined(self.v["firefx"])) {
     self thread fire_effect();
+  }
 
-  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
+  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     self thread cannon_effect();
-  else
+  } else {
   if(isDefined(self.v["soundalias"])) {
+  }
     println("** Client : missing sound_effect");
   }
 
@@ -340,8 +352,9 @@ loopfxStop(clientNum, timeout) {
   self endon("death");
   realwait(timeout);
 
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     self.looper delete();
+  }
 
   if(isDefined(self.looperFX)) {
     deletefakeent(clientNum, self.looperFX);
@@ -349,33 +362,39 @@ loopfxStop(clientNum, timeout) {
 }
 
 loopfxthread(clientNum) {
-  if(isDefined(self.fxStart))
+  if(isDefined(self.fxStart)) {
     level waittill("start fx" + self.fxStart);
+  }
 
   while(1) {
     create_looper(clientNum);
 
-    if(isDefined(self.timeout))
+    if(isDefined(self.timeout)) {
       thread loopfxStop(clientNum, self.timeout);
+    }
 
-    if(isDefined(self.fxStop))
+    if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    else
+    } else {
       return;
+    }
 
-    if(isDefined(self.looper))
+    if(isDefined(self.looper)) {
       deletefakeent(clientNum, self.looper);
+    }
 
-    if(isDefined(self.fxStart))
+    if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    else
+    } else {
       return;
+    }
   }
 }
 
 oneshotfxthread(clientNum) {
-  if(self.v["delay"] > 0)
+  if(self.v["delay"] > 0) {
     realWait(self.v["delay"]);
+  }
 
   create_triggerfx(clientNum);
 }
@@ -419,17 +438,21 @@ fx_init(clientNum) {
 
     if(!isDefined(level._createfxforwardandupset)) {
       if(!isDefined(level.needs_fixup)) {
-        if(isDefined(ent.v["angles"]))
+        if(isDefined(ent.v["angles"])) {
           ent set_forward_and_up_vectors();
+        }
       }
     }
 
-    if(ent.v["type"] == "loopfx")
+    if(ent.v["type"] == "loopfx") {
       ent thread loopfxthread(clientNum);
-    if(ent.v["type"] == "oneshotfx")
+    }
+    if(ent.v["type"] == "oneshotfx") {
       ent thread oneshotfxthread(clientNum);
-    if(ent.v["type"] == "soundfx")
+    }
+    if(ent.v["type"] == "soundfx") {
       ent thread create_loopsound(clientNum);
+    }
   }
 
   level._createfxforwardandupset = true;

@@ -13,8 +13,9 @@ main() {
   include_weapons();
   include_powerups();
 
-  if(!isDefined(level.startInvulnerableTime))
+  if(!isDefined(level.startInvulnerableTime)) {
     level.startInvulnerableTime = GetDvarInt("player_deathInvulnerableTime");
+  }
 
   maps\nazi_zombie_prototype_fx::main();
   maps\_zombiemode_prototype::main();

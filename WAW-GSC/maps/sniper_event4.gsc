@@ -397,10 +397,11 @@ officer_run() {
       if(i == 2) {
         self.health = level.difficulty * 90;
 
-        if(cointoss())
+        if(cointoss()) {
           level thread say_dialogue("hide_tank");
-        else
+        } else {
           level thread say_dialogue("hide_tank2");
+        }
       }
       if(i == 3) {
         flag_set("player_fired_in_e4");
@@ -459,10 +460,11 @@ officer_run() {
         tank = getent("tank_near_officer", "targetname");
         thread tank_shoot_while_backing();
         tank setspeed(3, 1, 1);
-        if(cointoss())
+        if(cointoss()) {
           level thread say_dialogue("hide_truck", undefined, 1);
-        else
+        } else {
           level thread say_dialogue("hide_truck2", undefined, 1);
+        }
         if(isDefined(level.officers_sniper) && isalive(level.officers_sniper)) {
           level thread say_dialogue("kill_bodyguard");
         }
@@ -748,8 +750,9 @@ car_getaway() {
   level endon("driver_shot");
   level endon("driver_dead");
 
-  if(flag("driver_dead"))
+  if(flag("driver_dead")) {
     return;
+  }
   node = getvehiclenode("officer_got_away", "script_noteworthy");
   node waittill("trigger");
   iprintlnbold(&"SNIPER_GENERAL_ESCAPED");
@@ -982,8 +985,9 @@ tank_on_friendlies() {
         enemies[i].script_noteworthy != "lead_bodyguard")
 
       || !isDefined(enemies[i].script_noteworthy)) {
-      if(isDefined(nodes[nodecounter]))
+      if(isDefined(nodes[nodecounter])) {
         enemies[i] setgoalnode(nodes[nodecounter]);
+      }
       enemies[i] thread wait_and_kill(randomintrange(35, 50));
       nodecounter++;
     }

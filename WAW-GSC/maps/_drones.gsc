@@ -644,17 +644,22 @@ do_death_sound() {
 
   alias = undefined;
 
-  if(camp == "american" && team == "allies")
+  if(camp == "american" && team == "allies") {
     alias = "generic_death_american";
-  if(camp == "american" && team == "axis")
+  }
+  if(camp == "american" && team == "axis") {
     alias = "generic_death_japanese";
-  if(camp == "russian" && team == "allies")
+  }
+  if(camp == "russian" && team == "allies") {
     alias = "generic_death_russian";
-  if(camp == "russian" && team == "axis")
+  }
+  if(camp == "russian" && team == "axis") {
     alias = "generic_death_german";
+  }
 
-  if(isDefined(alias) && SoundExists(alias))
+  if(isDefined(alias) && SoundExists(alias)) {
     self thread play_sound_in_space(alias);
+  }
 }
 
 #using_animtree("fakeshooters");

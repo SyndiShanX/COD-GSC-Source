@@ -838,14 +838,17 @@ e2_watch_for_bunker_intersection(satchel, player) {
   if(touched_trig != -1 && isDefined(triggers[touched_trig])) {
     triggers[touched_trig] notify("satchel_exploded");
 
-    if(touched_trig == 0 && !level.gun1_destroyed)
+    if(touched_trig == 0 && !level.gun1_destroyed) {
       arcademode_assignpoints("arcademode_score_oki2_bunker", player);
+    }
 
-    if(touched_trig == 1 && !level.gun2_destroyed)
+    if(touched_trig == 1 && !level.gun2_destroyed) {
       arcademode_assignpoints("arcademode_score_oki2_bunker", player);
+    }
 
-    if(touched_trig == 2 && !level.gun4_destroyed)
+    if(touched_trig == 2 && !level.gun4_destroyed) {
       arcademode_assignpoints("arcademode_score_oki2_bunker", player);
+    }
   }
 }
 e2_first_rocket_barrage() {

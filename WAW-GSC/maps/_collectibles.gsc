@@ -120,8 +120,9 @@ collectible_init() {
     items++;
   }
 
-  if(!level.collectible_save_restored)
+  if(!level.collectible_save_restored) {
     RegisterClientSys("collectibles");
+  }
 
   return collectibles;
 }
@@ -191,14 +192,17 @@ collectible_get_unlock_value(collectible_name) {
 }
 
 collectible_has_been_found(collectible_name) {
-  if(IsCoopEPD())
+  if(IsCoopEPD()) {
     return true;
+  }
 
-  if(coopGame() && collectible_coop_found())
+  if(coopGame() && collectible_coop_found()) {
     return true;
+  }
 
-  if(coopGame())
+  if(coopGame()) {
     return false;
+  }
 
   unlocks = GetDvarInt(level.collectible_dvar);
   collectible_value = collectible_get_unlock_value(collectible_name);
@@ -207,8 +211,9 @@ collectible_has_been_found(collectible_name) {
 }
 
 collectible_coop_found() {
-  if(level.collectible_save_restored == true && getDvar("coop_collectibles_found") == level.script)
+  if(level.collectible_save_restored == true && getDvar("coop_collectibles_found") == level.script) {
     return true;
+  }
 
   return false;
 }
@@ -321,8 +326,9 @@ collectibleNotify(Unlock, num_found) {
   notifyData.notifyText2 = message;
   notifyData.sound = undefined;
 
-  if(!GetDvarInt(level.collectible_dvar))
+  if(!GetDvarInt(level.collectible_dvar)) {
     notifyData.notifyText3 = &"SCRIPT_COLLECTIBLE_USAGE";
+  }
 
   if(CoopGame()) {
     notifyData.notifyText = undefined;

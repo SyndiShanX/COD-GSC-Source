@@ -13,8 +13,9 @@
 main() {
   self endon("killanimscript");
 
-  if(getDvar("showlookaheaddir") == "on")
+  if(getDvar("showlookaheaddir") == "on") {
     self thread drawLookaheadDir();
+  }
 
   [[self.exception["move"]]]();
 
@@ -28,8 +29,9 @@ main() {
     if(newPose != "prone") {
       self animMode("zonly_physics", false);
       rate = 1;
-      if(isDefined(self.grenade))
+      if(isDefined(self.grenade)) {
         rate = 2;
+      }
       self animscripts\cover_prone::proneTo(newPose, rate);
       self animMode("none", false);
       self orientMode("face default");
@@ -84,13 +86,15 @@ MoveMainLoop() {
   self.a.runLoopCount = randomint(10000);
 
   moveMode = self.moveMode;
-  if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 4096)
+  if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 4096) {
     moveMode = "walk";
+  }
 
   for(;;) {
     loopTime = self getAnimTime(%walk_and_run_loops);
-    if(loopTime < prevLoopTime)
+    if(loopTime < prevLoopTime) {
       self.a.runLoopCount++;
+    }
     prevLoopTime = loopTime;
 
     self animscripts\face::SetIdleFaceDelayed(anim.alertface);
@@ -107,8 +111,9 @@ MoveMainLoop() {
       if(self.moveMode != "run" && !self is_zombie()) {
         moveMode = self.moveMode;
       } else if(moveMode == "walk") {
-        if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) > 4096)
+        if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) > 4096) {
           moveMode = self.moveMode;
+        }
       }
 
       if(moveMode == "run") {
@@ -124,15 +129,18 @@ MoveMainLoop() {
 }
 
 MayShootWhileMoving() {
-  if(self.weapon == "none")
+  if(self.weapon == "none") {
     return false;
+  }
 
   weapclass = weaponClass(self.weapon);
-  if(weapclass != "rifle" && weapclass != "smg" && weapclass != "spread" && weapclass != "mg")
+  if(weapclass != "rifle" && weapclass != "smg" && weapclass != "spread" && weapclass != "mg") {
     return false;
+  }
 
-  if(self isSniper())
+  if(self isSniper()) {
     return false;
+  }
 
   if(isDefined(self.dontShootWhileMoving)) {
     assert(self.dontShootWhileMoving);
@@ -174,8 +182,9 @@ shootWhileMoving() {
     self.a.array["single"] = array(%exposed2_shoot_semi1);
   }
 
-  if(isDefined(self.weapon) && weaponClass(self.weapon) == "spread")
+  if(isDefined(self.weapon) && weaponClass(self.weapon) == "spread") {
     self.a.array["single"] = array(%shotgun_stand_fire_1A, %shotgun_stand_fire_1B);
+  }
 
   while(1) {
     if(!self.bulletsInClip) {
@@ -216,10 +225,12 @@ moveAgain() {
 }
 
 seekingCoverInMyFov() {
-  if(distance(self.origin, self.node.origin) > self.goalradius)
+  if(distance(self.origin, self.node.origin) > self.goalradius) {
     return true;
-  if(distance(self.origin, self.node.origin) < 80)
+  }
+  if(distance(self.origin, self.node.origin) < 80) {
     return true;
+  }
   enemyAngles = vectorToAngles(self.origin - self.enemy.origin);
   enemyForward = anglesToForward(enemyAngles);
   nodeAngles = vectorToAngles(self.origin - self.node.origin);

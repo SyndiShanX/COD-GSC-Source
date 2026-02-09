@@ -12,8 +12,9 @@ error(message) {
 }
 
 getstruct(name, type) {
-  if(!isDefined(level.struct_class_names))
+  if(!isDefined(level.struct_class_names)) {
     return undefined;
+  }
 
   array = level.struct_class_names[type][name];
   if(!isDefined(array)) {
@@ -57,28 +58,32 @@ array_thread(entities, process, var1, var2, var3) {
   keys = getArrayKeys(entities);
 
   if(isDefined(var3)) {
-    for(i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++) {
       entities[keys[i]] thread[[process]](var1, var2, var3);
+    }
 
     return;
   }
 
   if(isDefined(var2)) {
-    for(i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++) {
       entities[keys[i]] thread[[process]](var1, var2);
+    }
 
     return;
   }
 
   if(isDefined(var1)) {
-    for(i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++) {
       entities[keys[i]] thread[[process]](var1);
+    }
 
     return;
   }
 
-  for(i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++) {
     entities[keys[i]] thread[[process]]();
+  }
 }
 
 registerSystem(sSysName, cbFunc) {
@@ -133,13 +138,15 @@ within_fov(start_origin, start_angles, end_origin, fov) {
 }
 
 add_to_array(array, ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return array;
+  }
 
-  if(!isDefined(array))
+  if(!isDefined(array)) {
     array[0] = ent;
-  else
+  } else {
     array[array.size] = ent;
+  }
 
   return array;
 }
@@ -147,8 +154,9 @@ add_to_array(array, ent) {
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(level._optionalStepEffects))
+  if(!isDefined(level._optionalStepEffects)) {
     level._optionalStepEffects = [];
+  }
   level._optionalStepEffects[level._optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
 }

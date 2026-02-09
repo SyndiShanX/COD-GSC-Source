@@ -568,8 +568,9 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
     return;
   }
 
-  if(!isDefined(spawntime))
+  if(!isDefined(spawntime)) {
     spawntime = 0.05;
+  }
 
   while(1) {
     aSquad = alive_array(strSquadName);
@@ -598,8 +599,9 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
         }
 
         spawn_index = spawn_index + 1;
-        if(spawn_index >= squad_spawn.size)
+        if(spawn_index >= squad_spawn.size) {
           spawn_index = 0;
+        }
 
         wait(spawntime);
       }

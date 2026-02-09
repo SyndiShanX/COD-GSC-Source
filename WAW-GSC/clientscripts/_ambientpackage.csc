@@ -50,10 +50,12 @@ addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin
   level.ambientPackages[package].elements[index] = spawnStruct();
   level.ambientPackages[package].elements[index].alias = alias;
 
-  if(spawnMin < 0)
+  if(spawnMin < 0) {
     spawnMin = 0;
-  if(spawnMin >= spawnMax)
+  }
+  if(spawnMin >= spawnMax) {
     spawnMax = spawnMin + 1;
+  }
   level.ambientPackages[package].elements[index].spawnMin = spawnMin;
   level.ambientPackages[package].elements[index].spawnMax = spawnMax;
 
@@ -415,8 +417,9 @@ updateActiveAmbientRoom() {
   for(;;) {
     newAmbientRoom = findHighestPriorityAmbientRoom();
 
-    if(newAmbientRoom == level.activeAmbientRoom)
+    if(newAmbientRoom == level.activeAmbientRoom) {
       level waittill("updateActiveAmbientRoom");
+    }
 
     println("*** nar " + newAmbientRoom + " " + level.activeAmbientRoom);
 
@@ -440,8 +443,9 @@ updateActiveAmbientRoom() {
 
       if(isDefined(oldroom) && isDefined(oldroom.tone)) {
         stoploopsound(0, oldroom.ent, oldroom.fadeOut);
-        while(SoundPlaying(oldroom.id))
+        while(SoundPlaying(oldroom.id)) {
           wait(.01);
+        }
       } else {}
     }
 

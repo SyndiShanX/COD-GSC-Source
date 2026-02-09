@@ -542,8 +542,9 @@ give_model(class) {
 
 SavePlayerWeaponStatePersistent(slot) {
   current = level.player getCurrentWeapon();
-  if((!isDefined(current)) || (current == "none"))
+  if((!isDefined(current)) || (current == "none")) {
     assertmsg("Player's current weapon is 'none' or undefined. Make sure 'disableWeapons()' has not been called on the player when trying to save weapon states.");
+  }
   game["weaponstates"][slot]["current"] = current;
 
   offhand = level.player getcurrentoffhand();
@@ -557,10 +558,12 @@ SavePlayerWeaponStatePersistent(slot) {
 }
 
 RestorePlayerWeaponStatePersistent(slot) {
-  if(!isDefined(game["weaponstates"]))
+  if(!isDefined(game["weaponstates"])) {
     return false;
-  if(!isDefined(game["weaponstates"][slot]))
+  }
+  if(!isDefined(game["weaponstates"][slot])) {
     return false;
+  }
 
   level.player takeallweapons();
 
@@ -568,26 +571,31 @@ RestorePlayerWeaponStatePersistent(slot) {
     weapName = game["weaponstates"][slot]["list"][weapIdx]["name"];
 
     if(isDefined(level.legit_weapons)) {
-      if(!isDefined(level.legit_weapons[weapName]))
+      if(!isDefined(level.legit_weapons[weapName])) {
         continue;
+      }
     }
 
-    if(weapName == "c4")
+    if(weapName == "c4") {
       continue;
-    if(weapName == "claymore")
+    }
+    if(weapName == "claymore") {
       continue;
+    }
     level.player GiveWeapon(weapName);
     level.player GiveMaxAmmo(weapName);
   }
 
   if(isDefined(level.legit_weapons)) {
     weapname = game["weaponstates"][slot]["offhand"];
-    if(isDefined(level.legit_weapons[weapName]))
+    if(isDefined(level.legit_weapons[weapName])) {
       level.player switchtooffhand(weapname);
+    }
 
     weapname = game["weaponstates"][slot]["current"];
-    if(isDefined(level.legit_weapons[weapName]))
+    if(isDefined(level.legit_weapons[weapName])) {
       level.player SwitchToWeapon(weapname);
+    }
   } else {
     level.player switchtooffhand(game["weaponstates"][slot]["offhand"]);
     level.player SwitchToWeapon(game["weaponstates"][slot]["current"]);

@@ -156,8 +156,9 @@ swing_lanterns() {
 hanging_dead_guy() {
   dead_guy = getent("hanging_dead_guy", "targetname");
 
-  if(!isDefined(dead_guy))
+  if(!isDefined(dead_guy)) {
     return;
+  }
   dead_guy physicslaunch(dead_guy.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
   while(1) {
     wait(randomint(8, 13));

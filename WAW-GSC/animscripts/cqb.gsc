@@ -18,8 +18,9 @@ MoveCQB() {
 
   if(self.a.pose != "stand") {
     self clearAnim(%root, 0.2);
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       self ExitProneWrapper(1);
+    }
     self.a.pose = "stand";
   }
   self.a.movement = self.moveMode;
@@ -29,12 +30,14 @@ MoveCQB() {
   self thread CQBTracking();
 
   variation = getRandomIntFromSeed(self.a.runLoopCount, 2);
-  if(variation == 0)
+  if(variation == 0) {
     cqbWalkAnim = % run_CQB_F_search_v1;
-  else
+  } else {
     cqbWalkAnim = % run_CQB_F_search_v2;
-  if(self.movemode == "walk")
+  }
+  if(self.movemode == "walk") {
     cqbWalkAnim = % walk_CQB_F;
+  }
 
   rate = self.moveplaybackrate;
 
@@ -54,8 +57,9 @@ MoveCQB() {
 CQBTracking() {
   self notify("want_cqb_tracking");
 
-  if(isDefined(self.cqb_track_thread))
+  if(isDefined(self.cqb_track_thread)) {
     return;
+  }
   self.cqb_track_thread = true;
 
   self endon("killanimscript");
@@ -110,8 +114,9 @@ setupCQBPointsOfInterest() {
 }
 
 findCQBPointsOfInterest() {
-  if(isDefined(anim.findingCQBPointsOfInterest))
+  if(isDefined(anim.findingCQBPointsOfInterest)) {
     return;
+  }
   anim.findingCQBPointsOfInterest = true;
 
   if(!level.cqbPointsOfInterest.size) {
@@ -140,14 +145,17 @@ findCQBPointsOfInterest() {
           dist = distanceSquared(point, lookAheadPoint);
           if(dist < bestdist) {
             if(moving) {
-              if(distanceSquared(point, shootAtPos) < 64 * 64)
+              if(distanceSquared(point, shootAtPos) < 64 * 64) {
                 continue;
+              }
               dot = vectorDot(vectorNormalize(point - shootAtPos), forward);
-              if(dot < 0.643 || dot > 0.966)
+              if(dot < 0.643 || dot > 0.966) {
                 continue;
+              }
             } else {
-              if(dist < 50 * 50)
+              if(dist < 50 * 50) {
                 continue;
+              }
             }
 
             if(!sightTracePassed(lookAheadPoint, point, false, undefined)) {
@@ -158,17 +166,19 @@ findCQBPointsOfInterest() {
           }
         }
 
-        if(best < 0)
+        if(best < 0) {
           ai[i].cqb_point_of_interest = undefined;
-        else
+        } else {
           ai[i].cqb_point_of_interest = level.cqbPointsOfInterest[best];
+        }
 
         wait .05;
         waited = true;
       }
     }
-    if(!waited)
+    if(!waited) {
       wait .25;
+    }
   }
 }
 
@@ -177,8 +187,9 @@ CQBDebug() {
   self endon("end_cqb_debug");
   self endon("death");
 
-  if(getDvar("scr_cqbdebug") == "")
+  if(getDvar("scr_cqbdebug") == "") {
     setDvar("scr_cqbdebug", "off");
+  }
 
   level thread CQBDebugGlobal();
 
@@ -222,8 +233,9 @@ CQBDebug() {
 }
 
 CQBDebugGlobal() {
-  if(isDefined(level.cqbdebugglobal))
+  if(isDefined(level.cqbdebugglobal)) {
     return;
+  }
   level.cqbdebugglobal = true;
 
   while(1) {

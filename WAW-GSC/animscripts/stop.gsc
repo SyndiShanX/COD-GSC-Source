@@ -29,12 +29,13 @@ main() {
 
   transitionedToIdle = gettime() < 3000;
   if(!transitionedToIdle) {
-    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none")
+    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none") {
       transitionedToIdle = true;
-    else if(self.weapon == "none")
+    } else if(self.weapon == "none") {
       transitionedToIdle = true;
-    else if(AngleClamp180(self getTagAngles("tag_weapon")[0]) > 20)
+    } else if(AngleClamp180(self getTagAngles("tag_weapon")[0]) > 20) {
       transitionedToIdle = true;
+    }
   }
 
   for(;;) {

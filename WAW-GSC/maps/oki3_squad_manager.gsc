@@ -60,8 +60,9 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
     return;
   }
 
-  if(!isDefined(spawntime))
+  if(!isDefined(spawntime)) {
     spawntime = 0.05;
+  }
 
   while(1) {
     aSquad = alive_array(strSquadName);
@@ -88,8 +89,9 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
           spawned.sm_goalnode = squad_targets[goal_index];
 
           goal_index = goal_index + 1;
-          if(goal_index >= squad_targets.size)
+          if(goal_index >= squad_targets.size) {
             goal_index = 0;
+          }
 
           wait(0.01);
 
@@ -103,8 +105,9 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
         }
 
         spawn_index = spawn_index + 1;
-        if(spawn_index >= squad_spawn.size)
+        if(spawn_index >= squad_spawn.size) {
           spawn_index = 0;
+        }
 
         wait(spawntime);
       }
@@ -136,11 +139,13 @@ advance() {
     return;
   }
 
-  if(!isDefined(self.sm_advance_wait_min))
+  if(!isDefined(self.sm_advance_wait_min)) {
     self.sm_advance_wait_min = 5;
+  }
 
-  if(!isDefined(self.sm_advance_wait_max))
+  if(!isDefined(self.sm_advance_wait_max)) {
     self.sm_advance_wait_max = 15;
+  }
 
   self waittill("goal");
 

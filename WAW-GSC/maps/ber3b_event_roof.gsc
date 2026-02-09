@@ -1065,8 +1065,9 @@ sarge_outro_notetracks(animNotify, ender) {
       } else if(note == "glint") {
         playFXOnTag(level._effect["knife_glint"], self, "tag_fx");
       } else if(note == "strike") {
-        if(is_mature())
+        if(is_mature()) {
           playFXOnTag(level._effect["knife_slash_blood"], self, "tag_fx");
+        }
       } else if(note == "stab") {
         self thread outro_stab_fx();
       } else if(note == "pull_out") {
@@ -1089,8 +1090,9 @@ outro_stab_fx() {
   forward = anglesToForward((self.victim GetTagAngles("tag_eye")));
   fxTag = "J_Spine4";
 
-  if(is_mature())
+  if(is_mature()) {
     playFX(level._effect["knife_slash_blood"], self.victim GetTagOrigin(fxTag), forward);
+  }
   self.victim playSound("bullet_large_flesh");
 }
 
@@ -1098,13 +1100,15 @@ outro_pullout_fx() {
   forward = anglesToForward((self GetTagAngles("tag_eye")));
   fxTag = "J_SpineLower";
 
-  if(is_mature())
+  if(is_mature()) {
     playFX(level._effect["knife_stab_blood"], self.victim GetTagOrigin(fxTag), forward);
+  }
 
   wait(RandomFloatRange(0.1, 0.2) * GetTimescale());
 
-  if(is_mature())
+  if(is_mature()) {
     playFX(level._effect["knife_stab_blood"], self.victim GetTagOrigin(fxTag), (forward * -1));
+  }
 
   self thread outro_knife_blood_drips();
 }
@@ -1113,8 +1117,9 @@ outro_knife_blood_drips() {
   level endon("pole_sparks");
 
   while(1) {
-    if(is_mature())
+    if(is_mature()) {
       playFXOnTag(level._effect["knife_blood_drip"], self, "tag_fx");
+    }
     wait(1.1);
   }
 }
@@ -1255,8 +1260,9 @@ player_heartbeat() {
 
     wait(0 + randomfloat(0.1));
 
-    if(randomint(50) > level.player_speed)
+    if(randomint(50) > level.player_speed) {
       wait randomfloat(1);
+    }
   }
 }
 
@@ -1267,8 +1273,9 @@ player_jump_punishment() {
 
   while(1) {
     wait 0.05;
-    if(self IsOnGround())
+    if(self IsOnGround()) {
       continue;
+    }
     wait 0.2;
     if(self IsOnGround()) {
       continue;

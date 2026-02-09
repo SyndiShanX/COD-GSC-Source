@@ -41,10 +41,11 @@ setMeleeAttackDist() {
   self endon("death");
 
   while(1) {
-    if(isDefined(self.enemy) && isPlayer(self.enemy))
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       self.meleeAttackDist = anim.dogAttackPlayerDist;
-    else
+    } else {
       self.meleeAttackDist = anim.dogAttackAIDist;
+    }
 
     self waittill("enemy");
   }

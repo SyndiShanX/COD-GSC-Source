@@ -255,8 +255,9 @@ waittillclose(target) {
   self endon("curve_end");
 
   for(i = 0; i < 10; i++) {
-    if(Distance2D(target.origin, self.origin) < 5000)
+    if(Distance2D(target.origin, self.origin) < 5000) {
       self notify("curve_end");
+    }
     wait 0.2;
   }
   self notify("curve_end");

@@ -10,12 +10,15 @@ get_name() {
   british_names = 18;
   russian_names = 10;
 
-  if(!(isDefined(game["americanvehiclenames"])))
+  if(!(isDefined(game["americanvehiclenames"]))) {
     game["americanvehiclenames"] = randomint(american_names);
-  if(!(isDefined(game["britishvehiclenames"])))
+  }
+  if(!(isDefined(game["britishvehiclenames"]))) {
     game["britishvehiclenames"] = randomint(british_names);
-  if(!(isDefined(game["russianvehiclenames"])))
+  }
+  if(!(isDefined(game["russianvehiclenames"]))) {
     game["russianvehiclenames"] = randomint(russian_names);
+  }
 
   if(!isDefined(level.campaign)) {
     return;
@@ -147,7 +150,8 @@ get_russian_name() {
 }
 
 add_group_name(vehiclename) {
-  if(isDefined(self.script_tankgroup))
+  if(isDefined(self.script_tankgroup)) {
     vehiclename = self.script_tankgroup + ": " + vehiclename;
+  }
   return vehiclename;
 }

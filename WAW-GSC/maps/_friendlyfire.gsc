@@ -6,8 +6,9 @@
 #include maps\_utility;
 
 main() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _friendlyfire.gsc. Function: main()\n");
+  }
 
   level.friendlyfire["min_participation"] = -1600;
   level.friendlyfire["max_participation"] = 1000;
@@ -23,8 +24,9 @@ main() {
 
   level.friendlyFireDisabled = 0;
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _friendlyfire.gsc. Function: main() - COMPLETE\n");
+  }
 }
 player_init() {
   self.participation = 0;
@@ -32,8 +34,9 @@ player_init() {
   self thread participation_point_flattenovertime();
 }
 debug_friendlyfire() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _friendlyfire.gsc. Function: debug_friendlyfire()\n");
+  }
 
   self endon("disconnect");
 
@@ -50,8 +53,9 @@ debug_friendlyfire() {
   friendly_fire.alpha = 0;
 
   for(;;) {
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - INNER LOOP START\n");
+    }
 
     if(getDvar("debug_friendlyfire") == "1") {
       friendly_fire.alpha = 1;
@@ -61,17 +65,20 @@ debug_friendlyfire() {
 
     friendly_fire Setvalue(self.participation);
 
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - INNER LOOP WAIT\n");
+    }
 
     wait(0.25);
 
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - INNER LOOP STOP\n");
+    }
   }
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - COMPLLETE\n");
+  }
 }
 friendly_fire_think(entity) {
   if(!isDefined(entity)) {
@@ -255,8 +262,9 @@ missionfail() {
     setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   }
 
-  if(isDefined(level.custom_friendly_fire_shader))
+  if(isDefined(level.custom_friendly_fire_shader)) {
     thread maps\_load::special_death_indicator_hudelement(level.custom_friendly_fire_shader, 64, 64, 0);
+  }
 
   logString("failed mission: Friendly fire");
 

@@ -75,10 +75,12 @@ monitor_for_player_leave_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) 
 
   self.in_volume[trigPlayer getentitynumber()] = 0;
 
-  if(useAmbientPackage)
+  if(useAmbientPackage) {
     deactivateAmbientPackage(self.script_ambientpackage, self.script_ambientpriority, trigPlayer);
-  if(useAmbientRoom)
+  }
+  if(useAmbientRoom) {
     deactivateAmbientRoom(self.script_ambientroom, self.script_ambientpriority, trigPlayer);
+  }
 }
 
 player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
@@ -89,10 +91,12 @@ player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
   }
 
   if(self.in_volume[index] == 0) {
-    if(useAmbientPackage)
+    if(useAmbientPackage) {
       activateAmbientPackage(self.script_ambientpackage, self.script_ambientpriority, trigPlayer);
-    if(useAmbientRoom)
+    }
+    if(useAmbientRoom) {
       activateAmbientRoom(self.script_ambientroom, self.script_ambientpriority, trigPlayer);
+    }
 
     self.in_volume[index] = 1;
 
@@ -245,10 +249,12 @@ addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin
     level.ambientPackages[package].elements[index] = spawnStruct();
     level.ambientPackages[package].elements[index].alias = alias;
 
-    if(spawnMin < 0)
+    if(spawnMin < 0) {
       spawnMin = 0;
-    if(spawnMin >= spawnMax)
+    }
+    if(spawnMin >= spawnMax) {
       spawnMax = spawnMin + 1;
+    }
     level.ambientPackages[package].elements[index].spawnMin = spawnMin;
     level.ambientPackages[package].elements[index].spawnMax = spawnMax;
 

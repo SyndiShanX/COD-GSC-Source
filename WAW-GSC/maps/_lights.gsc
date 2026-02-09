@@ -14,10 +14,11 @@ flickerLight(color0, color1, minDelay, maxDelay) {
     fromColor = toColor;
     toColor = color0 + (color1 - color0) * randomfloat(1.0);
 
-    if(minDelay != maxDelay)
+    if(minDelay != maxDelay) {
       delay += randomfloatrange(minDelay, maxDelay);
-    else
+    } else {
       delay += minDelay;
+    }
 
     colorDeltaPerTime = (fromColor - toColor) * (1 / delay);
     while(delay > 0) {
@@ -130,8 +131,9 @@ getclosests_flickering_model(origin) {
   array = getEntArray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
-  if(isDefined(model))
+  if(isDefined(model)) {
     return_array[0] = model;
+  }
   return return_array;
 }
 
@@ -266,10 +268,11 @@ flickerLightIntensity(minDelay, maxDelay) {
     num = randomintrange(1, 10);
     while(num) {
       wait(randomfloatrange(.05, .1));
-      if(curr > .2)
+      if(curr > .2) {
         curr = randomfloatrange(0, .3);
-      else
+      } else {
         curr = on;
+      }
 
       self setLightIntensity(curr);
       num--;
@@ -309,15 +312,18 @@ strobeLight(intensity0, intensity1, period) {
     self setLightIntensity(intensity0 + (intensity1 - intensity0) * interpolation);
     wait 0.05;
     time += 0.05;
-    if(time > period)
+    if(time > period) {
       time -= period;
+    }
   }
 }
 changeLightColorTo(targetColor, totalTime, accelTime, decelTime) {
-  if(!isDefined(accelTime))
+  if(!isDefined(accelTime)) {
     accelTime = 0;
-  if(!isDefined(decelTime))
+  }
+  if(!isDefined(decelTime)) {
     decelTime = 0;
+  }
   self thread changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime);
 }
 changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {

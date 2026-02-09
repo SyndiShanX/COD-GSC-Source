@@ -1042,8 +1042,9 @@ is_active_ai(suspect) {
 is_group_dead(group) {
   for(i = 0; i < group.size; i++) {
     if(isDefined(group[i])) {
-      if(IsAlive(group[i]))
+      if(IsAlive(group[i])) {
         return false;
+      }
     }
   }
 

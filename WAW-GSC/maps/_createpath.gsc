@@ -42,16 +42,20 @@ main() {
   level.pathmod setshader("psourcemodify", level.pathmodsize * 2, level.pathmodsize);
 
   level.path_editmode = false;
-  if(!isDefined(level.path_views))
+  if(!isDefined(level.path_views)) {
     level.path_views = [];
-  if(!isDefined(level.path_views[level.path_selectid]))
+  }
+  if(!isDefined(level.path_views[level.path_selectid])) {
     level.path_views[level.path_selectid] = [];
+  }
 
-  if(!isDefined(level.path_selectid))
+  if(!isDefined(level.path_selectid)) {
     level.path_selectid = path_createid("default");
+  }
 
-  if(!isDefined(level.path_selectindex))
+  if(!isDefined(level.path_selectindex)) {
     level.path_selectindex = level.path_views.size;
+  }
   level.path_viewindex = undefined;
   thread path_viewmode();
 
@@ -80,8 +84,9 @@ path_enable() {
 }
 
 path_waittill_enable() {
-  while(getDvar("path_enable") != "1")
+  while(getDvar("path_enable") != "1") {
     wait .1;
+  }
 }
 
 path_viewmode() {
@@ -92,8 +97,9 @@ path_viewmode() {
     flag_set("path_Notviewing");
     flag_clear("path_refresh");
     thread path_connectlines();
-    for(i = 0; i < level.path_views[level.path_selectid].size; i++)
+    for(i = 0; i < level.path_views[level.path_selectid].size; i++) {
       level.path_views[level.path_selectid][i] thread path_viewwait(i);
+    }
     thread path_activatebutton();
     thread path_handleselectindex();
     flag_wait("path_refresh");
@@ -118,15 +124,17 @@ path_activatebutton() {
   while(1) {
     players = get_players();
 
-    while(!players[0] usebuttonpressed())
+    while(!players[0] usebuttonpressed()) {
       wait .05;
+    }
     pick = path_getvisible();
     if(isDefined(pick.index)) {
       level.path_selectindex = pick.index;
       level.path_selectid = path_createid(pick.ident);
     }
-    while(players[0] usebuttonpressed())
+    while(players[0] usebuttonpressed()) {
       wait .05;
+    }
   }
 }
 
@@ -134,16 +142,18 @@ path_handleselectindex() {
   level endon("path_refresh");
   lastselect = level.path_selectindex;
   while(1) {
-    if(!isDefined(level.path_views[level.path_selectid][lastselect]))
+    if(!isDefined(level.path_views[level.path_selectid][lastselect])) {
       level.pathmod setshader("psourcecreate", level.pathmodsize * 2, level.pathmodsize);
+    }
 
     if(lastselect == level.path_selectindex) {
       wait .05;
       continue;
     }
     lastselect = level.path_selectindex;
-    if(isDefined(level.path_views[level.path_selectid][lastselect]))
+    if(isDefined(level.path_views[level.path_selectid][lastselect])) {
       level.path_views[level.path_selectid][lastselect] thread path_hudshow();
+    }
   }
 }
 
@@ -156,8 +166,9 @@ path_hudshow() {
   players[0] setorigin(self.origin + (players[0].origin - players[0] getEye()) - vector_multiply(anglesToForward(self.angles), 3));
   players[0] setplayerangles(self.angles);
   flag_set("path_refresh");
-  while(players[0] islookingorg(self) && players[0] usebuttonpressed())
+  while(players[0] islookingorg(self) && players[0] usebuttonpressed()) {
     wait .05;
+  }
   players[0] freezecontrols(false);
   flag_set("path_Notviewing");
 }
@@ -204,15 +215,17 @@ path_viewwait(index) {
     }
     thread draw_arrow_time(self.origin, self.origin + vector_multiply(anglesToForward(self.angles), arrowlength), (0, 1, 1), frametime);
 
-    if(level.path_selectindex == index)
+    if(level.path_selectindex == index) {
       thread plot_circle_star_fortime(level.path_selectrad, frametime, (1, 1, 0));
-    else
+    } else {
       thread plot_circle_fortime(level.path_selectrad, frametime, (0, 1, 0));
+    }
     if(isDefined(level.path_viewindex) && level.path_viewindex == index) {
-      if(viewradexpandcount > viewradexpandmax)
+      if(viewradexpandcount > viewradexpandmax) {
         viewraddir = -1;
-      else if(viewradexpandcount < 0)
+      } else if(viewradexpandcount < 0) {
         viewraddir = 1;
+      }
       viewradexpandcount += viewraddir;
       viewrad = level.path_selectrad + 3 + viewradexpandcount;
       viewcolor = (0, 1, 1);
@@ -226,8 +239,9 @@ path_viewwait(index) {
 }
 
 plot_circle_star_fortime(radius, time, color) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (0, 1, 0);
+  }
   hangtime = .05;
   circleres = 16;
   hemires = circleres / 2;
@@ -247,16 +261,18 @@ plot_circle_star_fortime(radius, time, color) {
       plotpoints[plotpoints.size] = self.origin + vector_multiply(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
-    for(i = 0; i < plotpoints.size; i++)
+    for(i = 0; i < plotpoints.size; i++) {
       line(plotpoints[i], self.origin, color, 1);
+    }
     plotpoints = [];
     wait hangtime;
   }
 }
 
 plot_circle_fortime(radius, time, color) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (0, 1, 0);
+  }
   hangtime = .05;
   circleres = 16;
   hemires = circleres / 2;
@@ -283,39 +299,46 @@ plot_circle_fortime(radius, time, color) {
 }
 
 path_select_next() {
-  if(getDvar("path_select_next") == "")
+  if(getDvar("path_select_next") == "") {
     return;
-  if(!(level.path_selectindex == level.path_views[level.path_selectid].size))
+  }
+  if(!(level.path_selectindex == level.path_views[level.path_selectid].size)) {
     level.path_selectindex++;
+  }
 
   setDvar("path_select_next", "");
 }
 
 path_select_prev() {
-  if(getDvar("path_select_prev") == "")
+  if(getDvar("path_select_prev") == "") {
     return;
-  if(!(level.path_selectindex == 0))
+  }
+  if(!(level.path_selectindex == 0)) {
     level.path_selectindex--;
+  }
   setDvar("path_select_prev", "");
 }
 
 path_select_new() {
-  if(getDvar("path_select_new") == "")
+  if(getDvar("path_select_new") == "") {
     return;
+  }
   level.path_selectindex = level.path_views[level.path_selectid].size;
   setDvar("path_select_new", "");
 }
 
 path_setid() {
-  if(getDvar("path_setid") == "")
+  if(getDvar("path_setid") == "") {
     return;
+  }
   level.path_selectid = path_createid(getDvar("path_setid"));
   level.path_selectindex = 0;
 }
 
 path_setview() {
-  if(getDvar("path_setview") == "")
+  if(getDvar("path_setview") == "") {
     return;
+  }
   view = path_getcurrentview();
 
   path_setvieworgang(view);
@@ -338,8 +361,9 @@ path_trigger_setvieworgang(view) {
 }
 
 path_dump() {
-  if(getDvar("path_dump") == "")
+  if(getDvar("path_dump") == "") {
     return;
+  }
   println(" ");
   println(" ");
   println(" ");
@@ -351,8 +375,9 @@ path_dump() {
   for(j = 0; j < level.paths_selectid_list.size; j++) {
     ident = level.paths_selectid_list[j];
     println("path ident: " + ident);
-    for(i = 0; i < level.path_views[ident].size; i++)
+    for(i = 0; i < level.path_views[ident].size; i++) {
       println(level.path_views[ident][i].origin + "," + level.path_views[ident][i].angles);
+    }
   }
   for(j = 0; j < level.paths_selectid_list.size; j++) {
     ident = level.paths_selectid_list[j];
@@ -367,8 +392,9 @@ path_dump() {
 }
 
 path_help() {
-  if(getDvar("path_help") == "")
+  if(getDvar("path_help") == "") {
     return;
+  }
   println(" ");
   println(" ");
   println("Photo refrenence - Help ");
@@ -400,58 +426,69 @@ path_help() {
 }
 
 path_delete() {
-  if(getDvar("path_delete") == "")
+  if(getDvar("path_delete") == "") {
     return;
+  }
   newarray = [];
-  for(i = 0; i < level.path_views[level.path_selectid].size; i++)
-    if(i != level.path_selectindex)
+  for(i = 0; i < level.path_views[level.path_selectid].size; i++) {
+    if(i != level.path_selectindex) {
       newarray[newarray.size] = level.path_views[level.path_selectid][i];
+    }
   level.path_views = newarray;
+  }
   flag_set("path_refresh");
   setDvar("path_delete", "");
 }
 
 path_select_template() {
-  if(getDvar("path_select_template") == "")
+  if(getDvar("path_select_template") == "") {
     return;
+  }
   setDvar("path_select_template", "");
 }
 
 path_editmode_update() {
-  if(getDvar("path_editmode") == "")
+  if(getDvar("path_editmode") == "") {
     return;
-  if(!level.path_editmode)
+  }
+  if(!level.path_editmode) {
     level.path_editmode = true;
-  else
+  } else {
     level.path_editmode = false;
+  }
   setDvar("path_editmode", "");
 }
 
 path_image_update() {
-  if(getDvar("path_image") == "")
+  if(getDvar("path_image") == "") {
     return;
+  }
   view = path_getcurrentview();
   setDvar("path_image", "");
 }
 
 path_getcurrentview() {
   view = undefined;
-  if(isDefined(level.path_views[level.path_selectid]) && isDefined(level.path_views[level.path_selectid][level.path_selectindex]))
+  if(isDefined(level.path_views[level.path_selectid]) && isDefined(level.path_views[level.path_selectid][level.path_selectindex])) {
     view = level.path_views[level.path_selectindex][level.path_selectid];
-  else
+  } else {
     view = path_newview(false);
+  }
   return view;
 }
 
 path_trigger_newview(bScriptAdded) {
   view = spawnStruct();
-  if(!bScriptAdded)
+  if(!bScriptAdded) {
     path_trigger_setvieworgang(view);
-  if(isDefined(level.path_triggers[level.path_selectid][level.path_selectindex]))
+  }
+  if(isDefined(level.path_triggers[level.path_selectid][level.path_selectindex])) {
     level.path_triggers[level.path_selectid][level.path_selectindex] delete();
+  }
   level.path_triggers[level.path_selectid][level.path_selectindex] = view;
-  if(!bScriptAdded)
+  if(!bScriptAdded) {
     flag_set("path_refresh");
+  }
   return view;
 }
 
@@ -460,38 +497,48 @@ path_newview(bScriptAdded) {
   if(!bScriptAdded) {
     path_setvieworgang(view);
   }
-  if(isDefined(level.path_views[level.path_selectid][level.path_selectindex]))
+  if(isDefined(level.path_views[level.path_selectid][level.path_selectindex])) {
     level.path_views[level.path_selectid][level.path_selectindex] delete();
+  }
   level.path_views[level.path_selectid][level.path_selectindex] = view;
-  if(!bScriptAdded)
+  if(!bScriptAdded) {
     flag_set("path_refresh");
+  }
   return view;
 }
 
 path_createid(ident) {
-  if(!isDefined(level.paths_selectid_list))
+  if(!isDefined(level.paths_selectid_list)) {
     level.paths_selectid_list = [];
+  }
   for(i = 0; i < level.paths_selectid_list.size; i++) {
-    if(ident == level.paths_selectid_list[i])
+    if(ident == level.paths_selectid_list[i]) {
       return ident;
+    }
   }
   level.paths_selectid_list[level.paths_selectid_list.size] = ident;
   return ident;
 }
 path_create(position, angle, ident) {
-  if(!isDefined(ident))
+  if(!isDefined(ident)) {
     ident = "default";
+  }
   level.path_selectid = path_createid(ident);
-  if(!isDefined(level.flag))
+  if(!isDefined(level.flag)) {
     level.flag = [];
-  if(!isDefined(level.flag["path_Notviewing"]))
+  }
+  if(!isDefined(level.flag["path_Notviewing"])) {
     init();
-  if(!isDefined(level.path_selectindex))
+  }
+  if(!isDefined(level.path_selectindex)) {
     level.path_selectindex = 0;
-  if(!isDefined(level.path_views))
+  }
+  if(!isDefined(level.path_views)) {
     level.path_views = [];
-  if(!isDefined(level.path_views[level.path_selectid]))
+  }
+  if(!isDefined(level.path_views[level.path_selectid])) {
     level.path_views[level.path_selectid] = [];
+  }
   view = path_newview(true);
   view.origin = position;
   view.angles = angle;
@@ -499,19 +546,25 @@ path_create(position, angle, ident) {
 }
 
 path_trigger_create(position, radius, ident) {
-  if(!isDefined(ident))
+  if(!isDefined(ident)) {
     ident = "default";
+  }
   level.path_selectid = path_createid(ident);
-  if(!isDefined(level.flag))
+  if(!isDefined(level.flag)) {
     level.flag = [];
-  if(!isDefined(level.flag["path_Notviewing"]))
+  }
+  if(!isDefined(level.flag["path_Notviewing"])) {
     init();
-  if(!isDefined(level.path_selectindex))
+  }
+  if(!isDefined(level.path_selectindex)) {
     level.path_selectindex = 0;
-  if(!isDefined(level.path_triggers))
+  }
+  if(!isDefined(level.path_triggers)) {
     level.path_triggers = [];
-  if(!isDefined(level.path_triggers[level.path_selectid]))
+  }
+  if(!isDefined(level.path_triggers[level.path_selectid])) {
     level.path_triggers[level.path_selectid] = [];
+  }
   view = path_trigger_newview(true);
   view.origin = position;
   view.angles = angle;
@@ -525,8 +578,9 @@ islookingorg(view) {
 
   anglevec = anglesToForward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
-  if(vectordot > insidedot)
+  if(vectordot > insidedot) {
     return true;
-  else
+  } else {
     return false;
+  }
 }

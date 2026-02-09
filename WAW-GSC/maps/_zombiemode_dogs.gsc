@@ -148,8 +148,9 @@ get_number_of_valid_players() {
   players = get_players();
   num_player_valid = 0;
   for(i = 0; i < players.size; i++) {
-    if(is_player_valid(players[i]))
+    if(is_player_valid(players[i])) {
       num_player_valid += 1;
+    }
   }
 
   return num_player_valid;

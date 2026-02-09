@@ -16,8 +16,9 @@ player_in_zone(zone_name) {
   {
     for(i = 0; i < zone.volumes.size; i++) {
       for(j = 0; j < players.size; j++) {
-        if(players[j] IsTouching(zone.volumes[i]))
+        if(players[j] IsTouching(zone.volumes[i])) {
           return true;
+        }
       }
     }
   }

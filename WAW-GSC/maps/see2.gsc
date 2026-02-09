@@ -2758,8 +2758,9 @@ run_airstrike_planes() {
   }
 }
 bomber_planes() {
-  while(distance(self.origin, GetPlayers()[0].origin) > 10000)
+  while(distance(self.origin, GetPlayers()[0].origin) > 10000) {
     wait(.01);
+  }
   self playSound("fly_by");
 }
 

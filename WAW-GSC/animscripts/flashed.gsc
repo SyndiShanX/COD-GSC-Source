@@ -49,8 +49,9 @@ main() {
 
   animscripts\utility::initialize("flashed");
 
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     self ExitProneWrapper(1);
+  }
   self.a.pose = "stand";
 
   self startFlashBanged();
@@ -58,10 +59,11 @@ main() {
   self animscripts\face::SayGenericDialogue("flashbang");
   self.allowdeath = true;
 
-  if(isDefined(self.flashedanim))
+  if(isDefined(self.flashedanim)) {
     self setanimknoball(self.flashedanim, %body);
-  else
+  } else {
     self thread flashBangAnim();
+  }
 
   for(;;) {
     time = gettime();

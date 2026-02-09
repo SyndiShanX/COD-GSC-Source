@@ -4,8 +4,9 @@
 **************************************/
 
 init() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _ingamemenus.gsc. Function: init()\n");
+  }
 
   level.xenon = (getDvar("xenonGame") == "true");
   level.consoleGame = (getDvar("consoleGame") == "true");
@@ -14,8 +15,9 @@ init() {
 
   level thread onPlayerConnect();
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _ingamemenus.gsc. Function: init() - COMPLETE\n");
+  }
 }
 
 onPlayerConnect() {

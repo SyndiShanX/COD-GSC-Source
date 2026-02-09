@@ -93,8 +93,9 @@ ai_supplements_think() {
 }
 
 display_ai_supplements_menu() {
-  if(getdebugdvar("debug_ai_supplement") == "")
+  if(getdebugdvar("debug_ai_supplement") == "") {
     setDvar("debug_ai_supplement", "0");
+  }
 
   for(;;) {
     if(getdvarInt("debug_ai_supplement")) {
@@ -185,10 +186,11 @@ display_ai_supplements() {
 
     for(;;) {
       players = get_players();
-      if(isDefined(players))
+      if(isDefined(players)) {
         settings_index = players.size - 1;
-      else
+      } else {
         settings_index = 0;
+      }
 
       for(i = 0; i < 8; i++) {
         elems[i].color = (0.7, 0.7, 0.7);
@@ -209,8 +211,9 @@ display_ai_supplements() {
           selected--;
         }
       } else {
-        if(!players[0] buttonPressed("UPARROW") && !players[0] buttonPressed("DPAD_UP"))
+        if(!players[0] buttonPressed("UPARROW") && !players[0] buttonPressed("DPAD_UP")) {
           up_pressed = false;
+        }
       }
       if(!down_pressed) {
         if(players[0] buttonPressed("DOWNARROW") || players[0] buttonPressed("DPAD_DOWN")) {
@@ -218,8 +221,9 @@ display_ai_supplements() {
           selected++;
         }
       } else {
-        if(!players[0] buttonPressed("DOWNARROW") && !players[0] buttonPressed("DPAD_DOWN"))
+        if(!players[0] buttonPressed("DOWNARROW") && !players[0] buttonPressed("DPAD_DOWN")) {
           down_pressed = false;
+        }
       }
       if(!left_pressed) {
         if(players[0] buttonPressed("LEFTARROW") || players[0] buttonPressed("DPAD_LEFT")) {
@@ -227,8 +231,9 @@ display_ai_supplements() {
           add_to_max_aisupplements(selected, settings_index, -1);
         }
       } else {
-        if(!players[0] buttonPressed("LEFTARROW") && !players[0] buttonPressed("DPAD_LEFT"))
+        if(!players[0] buttonPressed("LEFTARROW") && !players[0] buttonPressed("DPAD_LEFT")) {
           left_pressed = false;
+        }
       }
       if(!right_pressed) {
         if(players[0] buttonPressed("RIGHTARROW") || players[0] buttonPressed("DPAD_RIGHT")) {
@@ -236,8 +241,9 @@ display_ai_supplements() {
           add_to_max_aisupplements(selected, settings_index, 1);
         }
       } else {
-        if(!players[0] buttonPressed("RIGHTARROW") && !players[0] buttonPressed("DPAD_RIGHT"))
+        if(!players[0] buttonPressed("RIGHTARROW") && !players[0] buttonPressed("DPAD_RIGHT")) {
           right_pressed = false;
+        }
       }
 
       if(players[0] buttonPressed("kp_enter") || players[0] buttonPressed("BUTTON_A") || players[0] buttonPressed("enter")) {

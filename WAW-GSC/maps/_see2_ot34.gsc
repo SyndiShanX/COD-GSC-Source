@@ -46,8 +46,9 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 11; i++)
+  for(i = 0; i < 11; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

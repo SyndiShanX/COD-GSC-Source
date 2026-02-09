@@ -8,8 +8,9 @@ setModelFromArray(a) {
 }
 
 precacheModelArray(a) {
-  for(i = 0; i < a.size; i++)
+  for(i = 0; i < a.size; i++) {
     precacheModel(a[i]);
+  }
 }
 
 useOptionalModels() {
@@ -27,8 +28,9 @@ attachFromArray(a) {
 new() {
   self detachAll();
   oldGunHand = self.anim_gunHand;
-  if(!isDefined(oldGunHand))
+  if(!isDefined(oldGunHand)) {
     return;
+  }
   self.anim_gunHand = "none";
   self[[anim.PutGunInHand]](oldGunHand);
 }
@@ -68,22 +70,25 @@ load(info) {
 
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for(i = 0; i < attachSize; i++)
+  for(i = 0; i < attachSize; i++) {
     self attach(attachInfo[i]["model"], attachInfo[i]["tag"]);
+  }
 }
 
 precache(info) {
-  if(isDefined(info["name"]))
+  if(isDefined(info["name"])) {
     println("Precache: Guy has name ", info["name"]);
-  else
+  } else {
     println("Precache: Guy had no name!");
+  }
 
   precacheModel(info["model"]);
 
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for(i = 0; i < attachSize; i++)
+  for(i = 0; i < attachSize; i++) {
     precacheModel(attachInfo[i]["model"]);
+  }
 }
 
 get_random_character(amount) {

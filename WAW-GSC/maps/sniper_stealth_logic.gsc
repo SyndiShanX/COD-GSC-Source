@@ -166,8 +166,9 @@ found_corpse_behavior() {
     for(i = 0; i < nodes.size; i++) {
       if(!isDefined(nodes[i].isacquired)) {
         self thread maps\_spawner::go_to_node(nodes[i]);
-        if(isDefined(lastnode))
+        if(isDefined(lastnode)) {
           lastnode.isacquired = undefined;
+        }
         nodes[i].isacquired = true;
         self.goalradius = 32;
         wait 0.5;

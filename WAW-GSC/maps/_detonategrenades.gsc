@@ -24,28 +24,31 @@ watchGrenadeUsage() {
     self waittill("grenade_pullback", weaponName);
     self.throwingGrenade = true;
 
-    if(weaponName == "satchel_charge")
+    if(weaponName == "satchel_charge") {
       self beginSatchelTracking();
-    if(weaponName == "satchel_charge_new")
+    }
+    if(weaponName == "satchel_charge_new") {
       self beginSatchelTracking();
-    else if(weaponName == "smoke_grenade_american")
+    } else if(weaponName == "smoke_grenade_american") {
       self beginsmokegrenadetracking();
-
-    else if(weaponName == "mortar_round")
+    } else if(weaponName == "mortar_round") {
       self beginMortarTracking();
-    else
+    } else {
       self beginGrenadeTracking();
+    }
   }
 }
 
 beginsmokegrenadetracking() {
   self waittill("grenade_fire", grenade, weaponName);
-  if(!isDefined(level.smokegrenades))
+  if(!isDefined(level.smokegrenades)) {
     level.smokegrenades = 0;
-  if(level.smokegrenades > 2 && getDvar("player_sustainAmmo") != "0")
+  }
+  if(level.smokegrenades > 2 && getDvar("player_sustainAmmo") != "0") {
     grenade delete();
-  else
+  } else {
     grenade thread smoke_grenade_death();
+  }
 }
 
 beginMortarTracking() {
@@ -148,12 +151,14 @@ claymoreDetonation() {
 
   self thread deleteOnDeath(damagearea);
 
-  if(!isDefined(level.claymores))
+  if(!isDefined(level.claymores)) {
     level.claymores = [];
+  }
   level.claymores = array_add(level.claymores, self);
 
-  if(level.claymores.size > 15 && getDvar("player_sustainAmmo") != "0")
+  if(level.claymores.size > 15 && getDvar("player_sustainAmmo") != "0") {
     level.claymores[0] delete();
+  }
 
   while(1) {
     damagearea waittill("trigger", ent);
@@ -167,10 +172,11 @@ claymoreDetonation() {
     if(ent damageConeTrace(self.origin, self) > 0) {
       self playSound("claymore_activated_SP");
       wait 0.4;
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self detonate(self.owner);
-      else
+      } else {
         self detonate(undefined);
+      }
 
       return;
     }
@@ -181,8 +187,9 @@ deleteOnDeath(ent) {
   self waittill("death");
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 watchSatchelDetonation() {
@@ -192,8 +199,9 @@ watchSatchelDetonation() {
     weap = self getCurrentWeapon();
     if(weap == "satchel_charge" || weap == "satchel_charge_new") {
       for(i = 0; i < self.satchelarray.size; i++) {
-        if(isDefined(self.satchelarray[i]))
+        if(isDefined(self.satchelarray[i])) {
           self.satchelarray[i] thread waitAndDetonate(0.1);
+        }
       }
       self.satchelarray = [];
     }
@@ -224,10 +232,11 @@ satchelDamage() {
     break;
   }
 
-  if(level.satchelexplodethisframe)
+  if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  else
+  } else {
     wait .05;
+  }
 
   if(!isDefined(self)) {
     return;
@@ -298,11 +307,13 @@ clearFXOnDeath(fx) {
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
 
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
+  }
 
-  if(!isDefined(startRadius))
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
 
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -356,8 +367,9 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
 
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
 

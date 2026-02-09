@@ -79,13 +79,15 @@ clean_previous_ai(_flag, name, type) {
 
   ai = undefined;
 
-  if(!isDefined(name))
+  if(!isDefined(name)) {
     ai = getaispeciesarray("axis", "all");
-  else
+  } else {
     ai = get_living_aispecies_array(name, type);
+  }
 
-  for(i = 0; i < ai.size; i++)
+  for(i = 0; i < ai.size; i++) {
     ai[i] delete();
+  }
 }
 
 initialize_spawn_function(name, key, spawn_func) {

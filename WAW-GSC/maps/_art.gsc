@@ -7,8 +7,9 @@
 #include common_scripts\utility;
 
 main() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _art.gsc. Function: main()\n");
+  }
 
   if(getDvar("scr_art_tweak") == "" || getDvar("scr_art_tweak") == "0") {
     setDvar("scr_art_tweak", 0);
@@ -66,15 +67,17 @@ main() {
     level.script = tolower(getDvar("mapname"));
   }
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _art.gsc. Function: main() - COMPLETE\n");
+  }
 }
 
 grain_filter() {}
 
 artfxprintln(file, string) {
-  if(file == -1)
+  if(file == -1) {
     return;
+  }
   fprintln(file, string);
 }
 
@@ -89,8 +92,9 @@ strtok_loc(string, par1) {
       indexstring = indexstring + string[i];
     }
   }
-  if(indexstring.size)
+  if(indexstring.size) {
     stringlist[stringlist.size] = indexstring;
+  }
   return stringlist;
 }
 
@@ -117,14 +121,17 @@ setfogsliders() {
 }
 
 tweakart() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _art.gsc. Function: tweakart()\n");
+  }
 
-  if(!isDefined(level.tweakfile))
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = false;
+  }
 
-  if(level.tweakfile && level.bScriptgened)
+  if(level.tweakfile && level.bScriptgened) {
     script_gen_dump_addline("maps\\createart\\" + level.script + "_art::main();", level.script + "_art");
+  }
 
   if(getDvar("scr_fog_red") == "") {
     setDvar("scr_fog_exp_halfplane", "500");
@@ -157,26 +164,32 @@ tweakart() {
   players = get_players();
 
   for(;;) {
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: _art.gsc. Function: tweakart() - INNER LOOP START\n");
+    }
 
     while(getDvarint("scr_art_tweak") == 0) {
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: _art.gsc. Function: tweakart() - INNER INNER LOOP START\n");
+      }
 
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: _art.gsc. Function: tweakart() - INNER INNER LOOP START WAIT\n");
+      }
 
       wait .05;
 
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: _art.gsc. Function: tweakart() - INNER INNER LOOP STOP WAIT\n");
+      }
 
-      if(!getDvarint("scr_art_tweak") == 0)
+      if(!getDvarint("scr_art_tweak") == 0) {
         setfogsliders();
+      }
 
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: _art.gsc. Function: tweakart() - INNER INNER LOOP END\n");
+      }
     }
 
     if(getDvarint("scr_art_tweak_message")) {
@@ -200,10 +213,11 @@ tweakart() {
 
     dump = dumpsettings();
 
-    if(!getdvarint("scr_fog_disable"))
+    if(!getdvarint("scr_fog_disable")) {
       setVolFog(level.fognearplane, level.fogexphalfplane, level.fogexphalfheight, level.fogbaseheight, level.fogred, level.foggreen, level.fogblue, 0);
-    else
+    } else {
       setExpFog(100000000000, 100000000001, 0, 0, 0, 0);
+    }
 
     players[0] setDefaultDepthOfField();
 
@@ -218,14 +232,16 @@ tweakart() {
       setDvar("scr_art_dump", "0");
     }
 
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: _art.gsc. Function: tweakart() - INNER LOOP END\n");
+    }
 
     wait .1;
   }
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _art.gsc. Function: tweakart() - COMPLETE\n");
+  }
 }
 
 fovslidercheck() {
@@ -256,8 +272,9 @@ fovslidercheck() {
 }
 
 dumpsettings() {
-  if(getDvar("scr_art_dump") == "0")
+  if(getDvar("scr_art_dump") == "0") {
     return false;
+  }
   dump = true;
 
   filename = "createart/" + getDvar("scr_art_visionfile") + "_art.gsc";
@@ -265,8 +282,9 @@ dumpsettings() {
   file = openfile(filename, "write");
 
   assertex(file != -1, "File not writeable (maybe you should check it out): " + filename);
-  if(file == -1)
+  if(file == -1) {
     dump = false;
+  }
 
   artfxprintln(file, "//_createart generated.modify at your own risk. Changing values should be fine.");
   artfxprintln(file, "main()");
@@ -306,13 +324,15 @@ dumpsettings() {
   artfxprintln(file, "\t}");
   artfxprintln(file, "");
 
-  if(getDvar("r_glowUseTweaks") == "0")
+  if(getDvar("r_glowUseTweaks") == "0") {
     getvar = "visionstore";
-  else
+  } else {
     getvar = "r";
+  }
 
-  if(getDvar("visionstore_glowTweakEnable") == "")
+  if(getDvar("visionstore_glowTweakEnable") == "") {
     getvar = "r";
+  }
 
   artfxprintln(file, "\tsetDvar(\"visionstore_glowTweakEnable\"" + ", " + "\"" + getDvar(getvar + "_glowTweakEnable") + "\"" + ");");
   artfxprintln(file, "\tsetDvar(\"visionstore_glowTweakRadius0\"" + ", " + "\"" + getDvar(getvar + "_glowTweakRadius0") + "\"" + ");");
@@ -330,8 +350,9 @@ dumpsettings() {
   artfxprintln(file, "\tsetDvar( \"scr_fog_disable\"" + ", " + "\"" + getdvarint("scr_fog_disable") + "\"" + " );");
 
   artfxprintln(file, "");
-  if(!getdvarint("scr_fog_disable"))
+  if(!getdvarint("scr_fog_disable")) {
     artfxprintln(file, "\tsetVolFog(" + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogexphalfheight + ", " + level.fogbaseheight + ", " + level.fogred + ", " + level.foggreen + ", " + level.fogblue + ", 0);");
+  }
 
   artfxprintln(file, "\tmaps\\_utility::set_vision_set( \"" + level.script + "\", 0 );");
 
@@ -340,8 +361,9 @@ dumpsettings() {
 
   saved = closefile(file);
   assertex((saved == 1), "File not saved (see above message?): " + filename);
-  if(!saved)
+  if(!saved) {
     dump = false;
+  }
 
   visionFilename = "vision/" + getDvar("scr_art_visionfile") + ".vision";
   file = openfile(visionFilename, "write");
@@ -374,17 +396,19 @@ dumpsettings() {
   players = get_players();
   players[0] setDefaultDepthOfField();
 
-  if(dump)
+  if(dump) {
     println("ART DUMPED SUCCESSFULLY");
+  }
   return dump;
 }
 
 tweakfog_fraction() {
   fogfraction = getdvarfloat("scr_fog_fraction");
-  if(fogfraction != level.fogfraction)
+  if(fogfraction != level.fogfraction) {
     level.fogfraction = fogfraction;
-  else
+  } else {
     return;
+  }
 
   color = [];
   color[0] = getdvarfloat("scr_fog_red");
@@ -401,14 +425,16 @@ tweakfog_fraction() {
   larger = 1;
   for(i = 0; i < color.size; i++) {
     fc[i] = fogfraction * color[i];
-    if(fc[i] > larger)
+    if(fc[i] > larger) {
       larger = fc[i];
+    }
   }
 
-  if(larger > 1)
-    for(i = 0; i < fc.size; i++)
+  if(larger > 1) {
+    for(i = 0; i < fc.size; i++) {
       fc[i] = fc[i] / larger;
-
+    }
+  }
   setDvar("scr_fog_red", fc[0]);
   setDvar("scr_fog_green", fc[1]);
   setDvar("scr_fog_blue", fc[2]);
@@ -429,13 +455,15 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
     jitter = scale(1 + randomint(21));
 
     flip = randomint(2);
-    if(flip)
+    if(flip) {
       jitter = jitter * -1;
+    }
 
-    if(direction == "up")
+    if(direction == "up") {
       next_target = sunlight + scale(30) + jitter;
-    else
+    } else {
       next_target = sunlight - scale(30) + jitter;
+    }
 
     if(next_target >= level.sunlight_bright) {
       next_target = level.sunlight_bright;
@@ -447,10 +475,11 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
       direction = "up";
     }
 
-    if(next_target > sunlight)
+    if(next_target > sunlight) {
       brighten(next_target, (3 + randomint(3)), .05);
-    else
+    } else {
       darken(next_target, (3 + randomint(3)), .05);
+    }
   }
 }
 
@@ -500,8 +529,9 @@ scale(percent) {
 }
 
 adsDoF() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _art.gsc. Function: adsDoF()\n");
+  }
 
   level.dof = level.dofDefault;
   art_tweak = false;
@@ -509,20 +539,23 @@ adsDoF() {
   for(;;) {
     wait(0.05);
 
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: _art.gsc. Function: adsDoF() - INNER LOOP START\n");
+    }
 
     if(level.level_specific_dof) {
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: _art.gsc. Function: adsDoF() - INNER LOOP END EARLY 1\n");
+      }
 
       continue;
     }
     if(getDvarInt("scr_cinematic")) {
       updateCinematicDoF();
 
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: _art.gsc. Function: adsDoF() - INNER LOOP END EARLY 2\n");
+      }
 
       continue;
     }
@@ -532,8 +565,9 @@ adsDoF() {
     if(getDvarInt("scr_dof_enable") && !art_tweak) {
       updateDoF();
 
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: _art.gsc. Function: adsDoF() - INNER LOOP END EARLY 3\n");
+      }
 
       continue;
     }
@@ -544,14 +578,16 @@ adsDoF() {
       players[i] setDefaultDepthOfField();
     }
 
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: _art.gsc. Function: adsDoF() - INNER LOOP END\n");
+    }
 
     wait(0.05);
   }
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _art.gsc. Function: adsDoF() - COMPLETE\n");
+  }
 }
 
 updateCinematicDoF() {
@@ -649,38 +685,45 @@ updateDoF() {
       }
       distFrom = distance(playerEye, enemies[index].origin);
 
-      if(distFrom - 30 < nearEnd)
+      if(distFrom - 30 < nearEnd) {
         nearEnd = distFrom - 30;
+      }
 
-      if(distFrom + 30 > farStart)
+      if(distFrom + 30 > farStart) {
         farStart = distFrom + 30;
+      }
     }
 
     if(nearEnd > farStart) {
       nearEnd = 256;
       farStart = 2500;
     } else {
-      if(nearEnd < 50)
+      if(nearEnd < 50) {
         nearEnd = 50;
-      else if(nearEnd > 512)
+      } else if(nearEnd > 512) {
         nearEnd = 512;
+      }
 
-      if(farStart > 2500)
+      if(farStart > 2500) {
         farStart = 2500;
-      else if(farStart < 1000)
+      } else if(farStart < 1000) {
         farStart = 1000;
+      }
     }
 
     traceDist = distance(playerEye, trace["position"]);
 
-    if(nearEnd > traceDist)
+    if(nearEnd > traceDist) {
       nearEnd = traceDist - 30;
+    }
 
-    if(nearEnd < 1)
+    if(nearEnd < 1) {
       nearEnd = 1;
+    }
 
-    if(farStart < traceDist)
+    if(farStart < traceDist) {
       farSTart = traceDist;
+    }
 
     setDoFTarget(i, 1, nearEnd, farStart, farStart * 4, 6, 1.8);
   }
@@ -713,26 +756,30 @@ setDoFTarget(player, nearStart, nearEnd, farStart, farEnd, nearBlur, farBlur) {
 changeDoFValue(valueName, targetValue, maxChange) {
   if(level.dof[valueName] > targetValue) {
     changeVal = (level.dof[valueName] - targetValue) * 0.5;
-    if(changeVal > maxChange)
+    if(changeVal > maxChange) {
       changeVal = maxChange;
-    else if(changeVal < 1)
+    } else if(changeVal < 1) {
       changeVal = 1;
+    }
 
-    if(level.dof[valueName] - changeVal < targetValue)
+    if(level.dof[valueName] - changeVal < targetValue) {
       level.dof[valueName] = targetValue;
-    else
+    } else {
       level.dof[valueName] -= changeVal;
+    }
   } else if(level.dof[valueName] < targetValue) {
     changeVal = (targetValue - level.dof[valueName]) * 0.5;
-    if(changeVal > maxChange)
+    if(changeVal > maxChange) {
       changeVal = maxChange;
-    else if(changeVal < 1)
+    } else if(changeVal < 1) {
       changeVal = 1;
+    }
 
-    if(level.dof[valueName] + changeVal > targetValue)
+    if(level.dof[valueName] + changeVal > targetValue) {
       level.dof[valueName] = targetValue;
-    else
+    } else {
       level.dof[valueName] += changeVal;
+    }
   }
 }
 
@@ -760,23 +807,29 @@ setdefaultdepthoffield() {
 }
 
 isDoFDefault() {
-  if(level.dofDefault["nearStart"] != getDvarInt("scr_dof_nearStart"))
+  if(level.dofDefault["nearStart"] != getDvarInt("scr_dof_nearStart")) {
     return false;
+  }
 
-  if(level.dofDefault["nearEnd"] != getDvarInt("scr_dof_nearEnd"))
+  if(level.dofDefault["nearEnd"] != getDvarInt("scr_dof_nearEnd")) {
     return false;
+  }
 
-  if(level.dofDefault["farStart"] != getDvarInt("scr_dof_farStart"))
+  if(level.dofDefault["farStart"] != getDvarInt("scr_dof_farStart")) {
     return false;
+  }
 
-  if(level.dofDefault["farEnd"] != getDvarInt("scr_dof_farEnd"))
+  if(level.dofDefault["farEnd"] != getDvarInt("scr_dof_farEnd")) {
     return false;
+  }
 
-  if(level.dofDefault["nearBlur"] != getDvarInt("scr_dof_nearBlur"))
+  if(level.dofDefault["nearBlur"] != getDvarInt("scr_dof_nearBlur")) {
     return false;
+  }
 
-  if(level.dofDefault["farBlur"] != getDvarInt("scr_dof_farBlur"))
+  if(level.dofDefault["farBlur"] != getDvarInt("scr_dof_farBlur")) {
     return false;
+  }
 
   return true;
 }

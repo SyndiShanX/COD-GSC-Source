@@ -248,8 +248,9 @@ Callback_PlayerConnect() {
 
   if(isDefined(info_player_spawn) && info_player_spawn.size > 0) {
     players = get_players();
-    if(isDefined(players) && (players.size != 0)) // || players[0] == self ) )
+    if(isDefined(players) && (players.size != 0)) // || players[0] == self ) ) {
     {
+    }
       if(players[0] == self) {
         println("2:Setting player origin to info_player_start " + info_player_spawn[0].origin);
         self setOrigin(info_player_spawn[0].origin);

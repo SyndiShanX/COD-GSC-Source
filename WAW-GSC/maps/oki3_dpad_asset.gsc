@@ -60,8 +60,9 @@ rocket_barrage_watcher() {
       self SwitchToWeapon(self.laststandpistol);
     } else {
       if(!self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
-        if(self getcurrentweapon() == "air_support" && !self.rocket_targeting_on) //&& isDefined(self.first_with_radio) )
+        if(self getcurrentweapon() == "air_support" && !self.rocket_targeting_on) //&& isDefined(self.first_with_radio) ) {
         {
+        }
           self thread rocket_barrage_targeting();
           self.rocket_targeting_on = true;
         } else if(self getcurrentweapon() != "air_support" && self.rocket_targeting_on) {
@@ -323,10 +324,11 @@ air_support_switch_back() {
   primaryWeapons = self GetWeaponsListPrimaries();
 
   if(isDefined(primaryWeapons)) {
-    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker"))
+    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker")) {
       self SwitchToWeapon(primaryWeapons[0]);
-    else
+    } else {
       self SwitchToWeapon(primaryWeapons[1]);
+    }
   }
 
   self.rocket_targeting_on = false;

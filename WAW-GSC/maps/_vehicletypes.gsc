@@ -207,8 +207,9 @@ get_compassTypeForModel(model) {
 }
 
 is_type(model) {
-  if(isDefined(level.vehicle_types[model]))
+  if(isDefined(level.vehicle_types[model])) {
     return true;
-  else
+  } else {
     return false;
+  }
 }

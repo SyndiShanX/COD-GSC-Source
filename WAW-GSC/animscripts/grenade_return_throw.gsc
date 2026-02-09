@@ -25,8 +25,9 @@ main() {
   throwAnim = undefined;
 
   throwDist = 700;
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     throwDist = distance(self.origin, self.enemy.origin);
+  }
 
   animArray = [];
   if(throwDist < 300) {
@@ -44,18 +45,19 @@ main() {
 
   if(getDvar("scr_grenadereturnanim") != "") {
     val = getDvar("scr_grenadereturnanim");
-    if(val == "kick1")
+    if(val == "kick1") {
       throwAnim = % grenade_return_running_kick_forward_1;
-    else if(val == "kick2")
+    } else if(val == "kick2") {
       throwAnim = % grenade_return_running_kick_forward_2;
-    else if(val == "throw1")
+    } else if(val == "throw1") {
       throwAnim = % grenade_return_running_throw_forward;
-    else if(val == "throw2")
+    } else if(val == "throw2") {
       throwAnim = % grenade_return_standing_throw_forward_1;
-    else if(val == "throw3")
+    } else if(val == "throw3") {
       throwAnim = % grenade_return_standing_throw_forward_2;
-    else if(val == "throw4")
+    } else if(val == "throw4") {
       throwAnim = % grenade_return_standing_throw_overhand_forward;
+    }
   }
 
   assert(isDefined(throwAnim));

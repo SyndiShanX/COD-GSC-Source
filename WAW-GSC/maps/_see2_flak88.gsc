@@ -98,10 +98,11 @@ flakcrew_animation_think(flak) {
   flak endon("crew dismounted");
   flak endon("newcrew");
   for(;;) {
-    if(flak.turning != "none")
+    if(flak.turning != "none") {
       self thread flakcrew_playAnim(flak, flak.turning);
-    else
+    } else {
       self thread flakcrew_playAnim(flak, "idle" + randomint(5));
+    }
 
     self waittill("flakcrew animation done");
   }
@@ -184,8 +185,9 @@ flakcrew_gunbackinhand(flak) {
 }
 
 badplace_when_near() {
-  if(level.script == "elalamein")
+  if(level.script == "elalamein") {
     return;
+  }
   self endon("death");
   self endon("bomb planted");
 
@@ -206,8 +208,9 @@ flak_use_dismount() {
 }
 
 flak88_init() {
-  if(!isDefined(self.script_team))
+  if(!isDefined(self.script_team)) {
     self.script_team = "axis";
+  }
 
   self thread kill_flak88();
   self thread shoot();
@@ -216,10 +219,11 @@ flak88_init() {
     targeted = getEntArray(self.target, "targetname");
     triggerUse = [];
     for(i = 0; i < targeted.size; i++) {
-      if(targeted[i].classname == "trigger_use")
+      if(targeted[i].classname == "trigger_use") {
         triggerUse[triggerUse.size] = targeted[i];
-      else if(targeted[i].classname == "script_origin")
+      } else if(targeted[i].classname == "script_origin") {
         self.customTarget = targeted[i];
+      }
     }
     if(triggerUse.size > 0) {
       self.bombTriggers = [];
@@ -244,8 +248,9 @@ flak88_init() {
   self.turning = "none";
   self thread flak_monitorTurretAngles();
   self thread flak_use_dismount();
-  if(isDefined(self.script_flak88))
+  if(isDefined(self.script_flak88)) {
     self spawner_trigger();
+  }
 }
 
 flak_monitorTurretAngles() {
@@ -258,12 +263,13 @@ flak_monitorTurretAngles() {
     prevAngles = newAngles;
     newAngles = self getTagAngles("tag_turret");
 
-    if(newAngles[1] < prevAngles[1])
+    if(newAngles[1] < prevAngles[1]) {
       self.turning = "turnright";
-    else if(newAngles[1] > prevAngles[1])
+    } else if(newAngles[1] > prevAngles[1]) {
       self.turning = "turnleft";
-    else
+    } else {
       self.turning = "none";
+    }
 
     wait 0.1;
   }
@@ -287,8 +293,9 @@ flak88_explosives() {
 
   iprintlnbold(&"SCRIPT_EXPLOSIVESPLANTED");
 
-  for(i = 0; i < self.bombTriggers.size; i++)
+  for(i = 0; i < self.bombTriggers.size; i++) {
     self.bombTriggers[i] delete();
+  }
 
   bomb = getClosest(get_players()[0] getOrigin(), self.bombs);
   bomb setModel(level.flak88_bomb_model);
@@ -296,21 +303,24 @@ flak88_explosives() {
   bomb thread loopsound_for_time_or_death("bomb_tick", level.explosiveplanttime);
 
   for(i = 0; i < self.bombs.size; i++) {
-    if(self.bombs[i] == bomb)
+    if(self.bombs[i] == bomb) {
       continue;
+    }
     self.bombs[i] delete();
   }
 
-  if(isDefined(self.bombstopwatch))
+  if(isDefined(self.bombstopwatch)) {
     self.bombstopwatch destroy();
+  }
 
   level.timersused++;
   wait level.explosiveplanttime;
   bomb stoploopsound("bomb_tick");
   level.timersused--;
   if(level.timersused < 1) {
-    if(isDefined(self.bombstopwatch))
+    if(isDefined(self.bombstopwatch)) {
       self.bombstopwatch destroy();
+    }
   }
   self notify("death", get_players()[0]);
 }
@@ -331,8 +341,9 @@ flak88_explosives_wait(trigger) {
   trigger setHintString(&"SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES");
   trigger waittill("trigger");
 
-  if(isDefined(trigger.script_noteworthy))
+  if(isDefined(trigger.script_noteworthy)) {
     level notify(trigger.script_noteworthy);
+  }
   self notify("explosives planted", trigger);
 }
 
@@ -341,11 +352,13 @@ stop_flak88_objective(flak) {
   flak.remaining_ai_afterstop = 0;
   ai = getaiarray("axis");
   for(i = 0; i < ai.size; i++) {
-    if(distance(flat_origin(ai[i].origin), flat_origin(flak.origin)) < 600)
+    if(distance(flat_origin(ai[i].origin), flat_origin(flak.origin)) < 600) {
       ai[i] thread stop_flak88_remainingai(flak);
+    }
   }
-  if(!flak.remaining_ai_afterstop)
+  if(!flak.remaining_ai_afterstop) {
     flak notify("flakai_cleared");
+  }
 }
 
 stop_flak88(flak) {
@@ -360,18 +373,21 @@ stop_flak88_remainingai(flak) {
   flak.remaining_ai_afterstop++;
   self waittill("death");
   flak.remaining_ai_afterstop--;
-  if(!flak.remaining_ai_afterstop)
+  if(!flak.remaining_ai_afterstop) {
     flak notify("flakai_cleared");
+  }
 }
 
 spawn_trigger_wait(trigger) {
   trigger waittill("trigger");
-  if(isDefined(trigger.script_noteworthy))
+  if(isDefined(trigger.script_noteworthy)) {
     level waittill(trigger.script_noteworthy);
+  }
   if(isDefined(trigger.script_flakaicount)) {
     count = trigger.script_flakaicount;
-    if(isDefined(level.flakaicountmod) && count)
+    if(isDefined(level.flakaicountmod) && count) {
       count--;
+    }
   } else
     count = undefined;
 
@@ -380,16 +396,18 @@ spawn_trigger_wait(trigger) {
 
 spawner_trigger() {
   self endon("death");
-  if(!isDefined(self.script_flak88))
+  if(!isDefined(self.script_flak88)) {
     return;
+  }
   spawn_trigger = false;
   AllTrigs = [];
   AllTrigs = getEntArray("trigger_multiple", "classname");
   trigs2 = [];
   trigs2 = getEntArray("trigger_radius", "classname");
   if(isDefined(trigs2[0])) {
-    for(i = 0; i < trigs2.size; i++)
+    for(i = 0; i < trigs2.size; i++) {
       AllTrigs[AllTrigs.size] = trigs2[i];
+    }
   }
   if(isDefined(AllTrigs[0])) {
     for(i = 0; i < AllTrigs.size; i++) {
@@ -406,10 +424,12 @@ spawner_trigger() {
   ents = getspawnerarray();
   spawners = [];
   for(i = 0; i < ents.size; i++) {
-    if(!isDefined(ents[i].script_flak88))
+    if(!isDefined(ents[i].script_flak88)) {
       continue;
-    if(ents[i].script_flak88 == self.script_flak88)
+    }
+    if(ents[i].script_flak88 == self.script_flak88) {
       spawners[spawners.size] = ents[i];
+    }
   }
 
   if(spawners.size == 0) {
@@ -420,14 +440,16 @@ spawner_trigger() {
   count = 0;
   while(1) {
     numberofguys = undefined;
-    if(spawn_trigger)
+    if(spawn_trigger) {
       self waittill("spawntriggered", numberofguys);
+    }
 
     self.crewsize = 0;
     self.crewMembers = [];
 
-    if(!isDefined(numberofguys))
+    if(!isDefined(numberofguys)) {
       numberofguys = spawners.size;
+    }
 
     println("attempting to set up new flakcrew for: ", self.script_flak88);
     count++;
@@ -441,8 +463,9 @@ spawner_trigger() {
 
     for(i = 0; i < numberofguys; i++) {
       wait_network_frame();
-      if(!isDefined(spawners[i]))
+      if(!isDefined(spawners[i])) {
         continue;
+      }
       spawners[i].count = 1;
       spawned = undefined;
       if(!self isCheap()) {
@@ -490,8 +513,9 @@ spawner_trigger() {
               spawned setGoalPos(self.origin);
             } else {
               node = getnode(spawned.target, "targetname");
-              if(isDefined(node))
+              if(isDefined(node)) {
                 spawned setgoalNode(node);
+              }
             }
           }
         }
@@ -609,8 +633,9 @@ mount_world_flakcrew(entArray) {
         entArray[i] setGoalPos(self.origin);
       } else {
         node = getnode(entArray[i].target, "targetname");
-        if(isDefined(node))
+        if(isDefined(node)) {
           entArray[i] setgoalNode(node);
+        }
       }
     }
 
@@ -651,18 +676,21 @@ delete_on_newcrew(spawned) {
 }
 
 flak88_dismount_crew(flak, used) {
-  if(!isDefined(used))
+  if(!isDefined(used)) {
     used = false;
+  }
   if(isDefined(flak.crewMembers)) {
     for(i = 0; i < flak.crewMembers.size; i++) {
-      if(!isDefined(flak.crewMembers[i]))
+      if(!isDefined(flak.crewMembers[i])) {
         continue;
+      }
       flak.crewMembers[i] detach_shell();
       flak.crewMembers[i] unlink();
     }
   }
-  if(!used)
+  if(!used) {
     flak clearTurretTarget();
+  }
   flak notify("crew dismounted");
 }
 
@@ -714,8 +742,9 @@ flak88_crew_waittill_death(flak, crew_member) {
   crew_member endon("crew dismounted");
 
   isLeader = false;
-  if((isDefined(crew_member.crewposition)) && (crew_member.crewposition == "leader"))
+  if((isDefined(crew_member.crewposition)) && (crew_member.crewposition == "leader")) {
     isLeader = true;
+  }
   crew_member waittill("death");
   if(isDefined(crew_member)) {
     crew_member detach_shell();
@@ -736,45 +765,56 @@ kill_flak88() {
   notifyString = undefined;
 
   self waittill("death");
-  if(isDefined(level.hitbyplayervehiclethread))
+  if(isDefined(level.hitbyplayervehiclethread)) {
     thread[[level.hitbyplayervehiclethread]]();
+  }
 
   ai = getaiarray();
   for(i = 0; i < ai.size; i++) {
-    if(!isDefined(ai[i]))
+    if(!isDefined(ai[i])) {
       continue;
-    if(!isalive(ai[i]))
+    }
+    if(!isalive(ai[i])) {
       continue;
-    if(!isDefined(ai[i].script_flak88))
+    }
+    if(!isDefined(ai[i].script_flak88)) {
       continue;
-    if(!isDefined(self.script_flak88))
+    }
+    if(!isDefined(self.script_flak88)) {
       continue;
+    }
     if((isDefined(ai[i].script_flak88)) && (ai[i].script_flak88 == self.script_flak88)) {
       ai[i] unlink();
-      if(distance(self.origin, ai[i].origin) <= 350)
+      if(distance(self.origin, ai[i].origin) <= 350) {
         ai[i] doDamage(ai[i].health, ai[i].origin);
+      }
       if(self isCheap()) {
         ai[i] thread cleanup_drones();
       }
     }
   }
 
-  if(isDefined(notifyString))
+  if(isDefined(notifyString)) {
     level notify(notifyString);
+  }
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(self.bombstopwatch))
+  if(isDefined(self.bombstopwatch)) {
     self.bombstopwatch destroy();
+  }
 
-  if(level.playervehicle != self)
+  if(level.playervehicle != self) {
     self clearTurretTarget();
+  }
 
-  if(isDefined(self.deathsound))
+  if(isDefined(self.deathsound)) {
     self playSound(self.deathsound);
-  if(isDefined(self.deathfx))
+  }
+  if(isDefined(self.deathfx)) {
     level thread maps\_fx::OneShotfx(self.deathfx, self.origin, 0);
+  }
 
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -786,37 +826,44 @@ kill_flak88() {
   level thread maps\_fx::loopfx("damaged_vehicle_smoke", self.origin, .8);
   earthquake(0.25, 3, self.origin, 1050);
 
-  if(isDefined(self.deathmodel))
+  if(isDefined(self.deathmodel)) {
     self setModel(self.deathmodel);
+  }
   if(isDefined(self.bombs)) {
     for(i = 0; i < self.bombs.size; i++) {
-      if(isDefined(self.bombs[i]))
+      if(isDefined(self.bombs[i])) {
         self.bombs[i] delete();
+      }
     }
   }
 
   if(isDefined(self.bombTriggers)) {
     for(i = 0; i < self.bombTriggers.size; i++) {
-      if(isDefined(self.bombTriggers[i]))
+      if(isDefined(self.bombTriggers[i])) {
         self.bombTriggers[i] delete();
+      }
     }
   }
 }
 
 shoot_flak(org, no_anim) {
-  if(!isDefined(org))
+  if(!isDefined(org)) {
     return false;
-  if(!isDefined(self))
+  }
+  if(!isDefined(self)) {
     return false;
-  if(self.health <= 0)
+  }
+  if(self.health <= 0) {
     return false;
+  }
 
   wait 0.2;
 
   if(isDefined(self.crewMembers) && !isDefined(no_anim)) {
     for(i = 0; i < self.crewMembers.size; i++) {
-      if((isDefined(self.crewMembers[i])) && (isDefined(self.crewMembers[i].crewposition)))
+      if((isDefined(self.crewMembers[i])) && (isDefined(self.crewMembers[i].crewposition))) {
         self.crewMembers[i] thread flakcrew_playAnim(self, "fire");
+      }
     }
   }
 
@@ -829,10 +876,11 @@ shoot_flak(org, no_anim) {
 think() {
   self endon("death");
   self endon("newcrew");
-  if(!isDefined(self.script_accuracy))
+  if(!isDefined(self.script_accuracy)) {
     self.script_accuracy = .4;
-  else if(self.script_accuracy >= 1.000)
+  } else if(self.script_accuracy >= 1.000) {
     self.script_accuracy = .99;
+  }
 
   if((!isDefined(self.script_delay_min)) || (!isDefined(self.script_delay_max))) {
     self.script_delay_min = 4;
@@ -850,16 +898,20 @@ think() {
     self.script_shootai = 0;
   }
 
-  if(!isDefined(self.script_shoottanks))
+  if(!isDefined(self.script_shoottanks)) {
     self.script_shoottanks = 1;
-  if(!isDefined(self.script_shootAI))
+  }
+  if(!isDefined(self.script_shootAI)) {
     self.script_shootAI = 0;
+  }
 
-  if((self.script_shoottanks == 0) && (self.script_shootai == 0))
+  if((self.script_shoottanks == 0) && (self.script_shootai == 0)) {
     self.autoTarget = false;
+  }
 
-  if(!isDefined(self.autoTarget))
+  if(!isDefined(self.autoTarget)) {
     self.autoTarget = true;
+  }
 
   /
   return true;
@@ -869,14 +921,16 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
   flak endon("crew dead");
   flak endon("crew dismounted");
 
-  if(!isDefined(target))
+  if(!isDefined(target)) {
     return;
+  }
   if((target.classname != "script_origin") && (target.health <= 0)) {
     return;
   }
   if(target.classname != "script_origin") {
-    if((isDefined(self.autoTarget)) && (self.autoTarget == false))
+    if((isDefined(self.autoTarget)) && (self.autoTarget == false)) {
       return;
+    }
   }
 
   if(isSentient(target)) {
@@ -884,8 +938,9 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
     aim_org = aim_org - (0, 0, 20);
   } else if(target.classname == "script_origin")
     aim_org = target.origin;
-  else
+  else {
     aim_org = (target.origin + (0, 0, 40));
+  }
 
   offset_x = randomfloat(100 - flak.script_accuracy * 100);
   offset_y = randomfloat(100 - flak.script_accuracy * 100);
@@ -898,12 +953,15 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
   } else
     offset_z = (offset_z * .5);
 
-  if(randomint(2) == 0)
+  if(randomint(2) == 0) {
     offset_x = (offset_x * -1);
-  if(randomint(2) == 0)
+  }
+  if(randomint(2) == 0) {
     offset_y = (offset_y * -1);
-  if(randomint(2) == 0)
+  }
+  if(randomint(2) == 0) {
     offset_z = (offset_z * -1);
+  }
 
   aim_org = (aim_org + (offset_x, offset_y, offset_z));
 
@@ -942,17 +1000,19 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
   }
 
   if(isDefined(delay_difference)) {
-    if(delay_difference <= 0)
+    if(delay_difference <= 0) {
       wait flak.script_delay_min;
-    else
+    } else {
       wait(flak.script_delay_min + randomfloat(delay_difference));
+    }
   }
 
   return;
 }
 cone_check(flak88, target_org) {
-  if((!isDefined(flak88.script_leftarc)) || (!isDefined(flak88.script_leftarc)))
+  if((!isDefined(flak88.script_leftarc)) || (!isDefined(flak88.script_leftarc))) {
     return true;
+  }
 
   forwardvec = anglesToForward(flak88.angles);
   orgA = flak88.origin;
@@ -961,16 +1021,18 @@ cone_check(flak88, target_org) {
   vecdot = vectordot(forwardvec, normalvec);
 
   if(flak88.script_leftarc == flak88.script_rightarc) {
-    if(vecdot > cos(flak88.script_leftarc))
+    if(vecdot > cos(flak88.script_leftarc)) {
       return true;
+    }
     return false;
   } else {
     rightvec = anglestoright(flak88.angles);
     rightvecdot = vectordot(rightvec, normalvec);
-    if(rightvecdot >= 0)
+    if(rightvecdot >= 0) {
       return (vecdot > cos(flak88.script_rightarc));
-    else
+    } else {
       return (vecdot > cos(flak88.script_leftarc));
+    }
   }
 }
 
@@ -995,8 +1057,9 @@ shoot() {
 }
 
 fire_flak88() {
-  if(self.health <= 0)
+  if(self.health <= 0) {
     return;
+  }
 }
 
 flakbarrel(flakbarrel) {

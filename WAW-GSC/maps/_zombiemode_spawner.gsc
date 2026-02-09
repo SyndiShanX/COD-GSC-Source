@@ -2009,8 +2009,9 @@ zombie_follow_enemy() {
         crumb_list = self.favoriteenemy.zombie_breadcrumbs;
         bad_crumbs = [];
         goal = zombie_pathing_get_breadcrumb(self.favoriteenemy.origin, crumb_list, bad_crumbs, 0);
-        if(isDefined(goal))
+        if(isDefined(goal)) {
           self SetGoalPos(goal);
+        }
       }
     }
 

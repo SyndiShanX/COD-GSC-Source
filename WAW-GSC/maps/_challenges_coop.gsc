@@ -39,24 +39,29 @@ init() {
 }
 
 mayGenerateAfterActionReport() {
-  if(getDvarInt("debug_challenges"))
+  if(getDvarInt("debug_challenges")) {
     return true;
+  }
 
-  if(isCoopEPD())
+  if(isCoopEPD()) {
     return false;
+  }
 
   return level.rankedMatch;
 }
 
 mayProcessChallenges() {
-  if(getDvarInt("debug_challenges"))
+  if(getDvarInt("debug_challenges")) {
     return true;
+  }
 
-  if(isCoopEPD())
+  if(isCoopEPD()) {
     return false;
+  }
 
-  if(getDvar("ui_gametype") == "zom")
+  if(getDvar("ui_gametype") == "zom") {
     return false;
+  }
 
   return level.rankedMatch;
 }
@@ -223,21 +228,24 @@ updateMatchSummary(callback) {
 challengeTest() {}
 
 registerMissionCallback(callback, func) {
-  if(!isDefined(level.missionCallbacks[callback]))
+  if(!isDefined(level.missionCallbacks[callback])) {
     level.missionCallbacks[callback] = [];
+  }
   level.missionCallbacks[callback][level.missionCallbacks[callback].size] = func;
 }
 
 getChallengeStatus(name) {
-  if(isDefined(self.challengeData[name]))
+  if(isDefined(self.challengeData[name])) {
     return self.challengeData[name];
-  else
+  } else {
     return 0;
+  }
 }
 
 getChallengeLevels(baseName) {
-  if(isDefined(level.challengeInfo[baseName]))
+  if(isDefined(level.challengeInfo[baseName])) {
     return level.challengeInfo[baseName]["levels"];
+  }
 
   assertex(isDefined(level.challengeInfo[baseName + "1"]), "Challenge name " + baseName + " not found!");
 
@@ -261,8 +269,9 @@ rank_init() {
   pId = 0;
   rId = 0;
   for(pId = 0; pId <= level.maxPrestige; pId++) {
-    for(rId = 0; rId <= level.maxRank; rId++)
+    for(rId = 0; rId <= level.maxRank; rId++) {
       precacheShader(tableLookup("mp/rankIconTable.csv", 0, rId, pId + 1));
+    }
   }
 
   rankId = 0;
@@ -379,8 +388,9 @@ buildMPChallengeInfo() {
   }
 }
 processChallengeBit(baseName, whichbit, levelEnd) {
-  if(!mayProcessChallenges())
+  if(!mayProcessChallenges()) {
     return 0;
+  }
 
   if(!isDefined(levelEnd)) {
     levelEnd = false;
@@ -390,8 +400,9 @@ processChallengeBit(baseName, whichbit, levelEnd) {
 
   missionStatus = self getChallengeStatus(baseName);
 
-  if(!missionStatus || missionStatus == 255)
+  if(!missionStatus || missionStatus == 255) {
     return 0;
+  }
 
   self setStatBit(level.challengeInfo[refString]["statid"], whichbit, 1);
 
@@ -412,8 +423,9 @@ processChallengeBit(baseName, whichbit, levelEnd) {
 }
 
 processChallenge(baseName, progressInc, levelEnd) {
-  if(!mayProcessChallenges())
+  if(!mayProcessChallenges()) {
     return 0;
+  }
 
   if(!isDefined(levelEnd)) {
     levelEnd = false;
@@ -421,26 +433,31 @@ processChallenge(baseName, progressInc, levelEnd) {
 
   numLevels = getChallengeLevels(baseName);
 
-  if(numLevels > 1)
+  if(numLevels > 1) {
     missionStatus = self getChallengeStatus((baseName + "1"));
-  else
+  } else {
     missionStatus = self getChallengeStatus(baseName);
+  }
 
-  if(!isDefined(progressInc))
+  if(!isDefined(progressInc)) {
     progressInc = 1;
+  }
 
-  if(getDvarInt("debug_challenges"))
+  if(getDvarInt("debug_challenges")) {
     println("CHALLENGE PROGRESS - " + baseName + ": " + progressInc);
+  }
 
-  if(!missionStatus || missionStatus == 255)
+  if(!missionStatus || missionStatus == 255) {
     return 0;
+  }
 
   assertex(missionStatus <= numLevels, "Mini challenge levels higher than max: " + missionStatus + " vs. " + numLevels);
 
-  if(numLevels > 1)
+  if(numLevels > 1) {
     refString = baseName + missionStatus;
-  else
+  } else {
     refString = baseName;
+  }
 
   progress = self getStat(level.challengeInfo[refString]["statid"]);
 
@@ -453,15 +470,17 @@ processChallenge(baseName, progressInc, levelEnd) {
       self thread challengeNotify(level.challengeInfo[refString]["name"]);
     }
 
-    if(missionStatus == numLevels)
+    if(missionStatus == numLevels) {
       missionStatus = 255;
-    else
+    } else {
       missionStatus += 1;
+    }
 
-    if(numLevels > 1)
+    if(numLevels > 1) {
       self.challengeData[baseName + "1"] = missionStatus;
-    else
+    } else {
       self.challengeData[baseName] = missionStatus;
+    }
 
     self setStat(level.challengeInfo[refString]["statid"], level.challengeInfo[refString]["maxval"]);
 
@@ -481,26 +500,30 @@ resetChallengeProgress(baseName, progress) {
   }
   numLevels = getChallengeLevels(baseName);
 
-  if(numLevels > 1)
+  if(numLevels > 1) {
     missionStatus = self getChallengeStatus((baseName + "1"));
-  else
+  } else {
     missionStatus = self getChallengeStatus(baseName);
+  }
 
-  if(!isDefined(progress))
+  if(!isDefined(progress)) {
     progress = 0;
+  }
 
-  if(getDvarInt("debug_challenges"))
+  if(getDvarInt("debug_challenges")) {
     println("CHALLENGE PROGRESS - " + baseName + ": " + progress);
+  }
 
   if(!missionStatus || missionStatus == 255) {
     return;
   }
   assertex(missionStatus <= numLevels, "Mini challenge levels higher than max: " + missionStatus + " vs. " + numLevels);
 
-  if(numLevels > 1)
+  if(numLevels > 1) {
     refString = baseName + missionStatus;
-  else
+  } else {
     refString = baseName;
+  }
 
   prevprogress = self getStat(level.challengeInfo[refString]["statid"]);
 
@@ -526,8 +549,9 @@ giveRankXP(type, value, levelEnd) {
 
   self incRankXP(value);
 
-  if(level.rankedMatch && updateRank() && false == levelEnd)
+  if(level.rankedMatch && updateRank() && false == levelEnd) {
     self thread updateRankAnnounceHUD();
+  }
 
   self syncXPStat();
 }
@@ -572,8 +596,9 @@ updateRankAnnounceHUD() {
 
 updateRank() {
   newRankId = self getRank();
-  if(newRankId == self.rank)
+  if(newRankId == self.rank) {
     return false;
+  }
 
   oldRank = self.rank;
   rankId = self.rank;
@@ -587,28 +612,34 @@ updateRank() {
     self setStat(252, rankId);
 
     unlockedWeapon = self getRankInfoUnlockWeapon(rankId);
-    if(isDefined(unlockedWeapon) && unlockedWeapon != "")
+    if(isDefined(unlockedWeapon) && unlockedWeapon != "") {
       unlockWeapon(unlockedWeapon);
+    }
 
     unlockedPerk = self getRankInfoUnlockPerk(rankId);
-    if(isDefined(unlockedPerk) && unlockedPerk != "")
+    if(isDefined(unlockedPerk) && unlockedPerk != "") {
       unlockPerk(unlockedPerk);
+    }
 
     unlockedChallenge = self getRankInfoUnlockChallenge(rankId);
-    if(isDefined(unlockedChallenge) && unlockedChallenge != "")
+    if(isDefined(unlockedChallenge) && unlockedChallenge != "") {
       unlockChallenge(unlockedChallenge);
+    }
 
     unlockedAttachment = self getRankInfoUnlockAttachment(rankId);
-    if(isDefined(unlockedAttachment) && unlockedAttachment != "")
+    if(isDefined(unlockedAttachment) && unlockedAttachment != "") {
       unlockAttachment(unlockedAttachment);
+    }
 
     unlockedCamo = self getRankInfoUnlockCamo(rankId);
-    if(isDefined(unlockedCamo) && unlockedCamo != "")
+    if(isDefined(unlockedCamo) && unlockedCamo != "") {
       unlockCamo(unlockedCamo);
+    }
 
     unlockedFeature = self getRankInfoUnlockFeature(rankId);
-    if(isDefined(unlockedFeature) && unlockedFeature != "")
+    if(isDefined(unlockedFeature) && unlockedFeature != "") {
       unlockFeature(unlockedFeature);
+    }
 
     rankId++;
   }
@@ -626,10 +657,11 @@ getRank() {
   rankXp = self.rankxp;
   rankId = self.rank;
 
-  if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId)))
+  if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  else
+  } else {
     return self getRankForXp(rankXp);
+  }
 }
 
 getRankXP() {
@@ -642,14 +674,16 @@ getRankForXp(xpVal) {
   assert(isDefined(rankName));
 
   while(isDefined(rankName) && rankName != "") {
-    if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))
+    if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId)) {
       return rankId;
+    }
 
     rankId++;
-    if(isDefined(level.rankTable[rankId]))
+    if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    else
+    } else {
       rankName = undefined;
+    }
   }
 
   rankId--;
@@ -704,8 +738,9 @@ unlockWeapon(refString) {
   Ref_Tok = strTok(refString, " ");
   assertex(Ref_Tok.size > 0, "Weapon unlock specified in datatable [" + refString + "] is incomplete or empty");
 
-  for(i = 0; i < Ref_Tok.size; i++)
+  for(i = 0; i < Ref_Tok.size; i++) {
     unlockWeaponSingular(Ref_Tok[i]);
+  }
 }
 unlockWeaponSingular(refString) {
   stat = int(tableLookup("mp/statstable.csv", 4, refString, 1));
@@ -726,8 +761,9 @@ unlockPerk(refString) {
   Ref_Tok = strTok(refString, ";");
   assertex(Ref_Tok.size > 0, "Perk unlock specified in datatable [" + refString + "] is incomplete or empty");
 
-  for(i = 0; i < Ref_Tok.size; i++)
+  for(i = 0; i < Ref_Tok.size; i++) {
     unlockPerkSingular(Ref_Tok[i]);
+  }
 }
 unlockPerkSingular(refString) {
   assert(isDefined(refString) && refString != "");
@@ -745,8 +781,9 @@ unlockCamo(refString) {
   Ref_Tok = strTok(refString, ";");
   assertex(Ref_Tok.size > 0, "Camo unlock specified in datatable [" + refString + "] is incomplete or empty");
 
-  for(i = 0; i < Ref_Tok.size; i++)
+  for(i = 0; i < Ref_Tok.size; i++) {
     unlockCamoSingular(Ref_Tok[i]);
+  }
 }
 unlockCamoSingular(refString) {
   Tok = strTok(refString, " ");
@@ -771,8 +808,9 @@ unlockAttachment(refString) {
   Ref_Tok = strTok(refString, ";");
   assertex(Ref_Tok.size > 0, "Attachment unlock specified in datatable [" + refString + "] is incomplete or empty");
 
-  for(i = 0; i < Ref_Tok.size; i++)
+  for(i = 0; i < Ref_Tok.size; i++) {
     unlockAttachmentSingular(Ref_Tok[i]);
+  }
 }
 unlockAttachmentSingular(refString) {
   Tok = strTok(refString, " ");
@@ -802,8 +840,9 @@ getAttachmentSlot(baseWeapon, attachmentName) {
     attachment_tokens = strtok(attachment_array_string, " ");
     if(isDefined(attachment_tokens) && attachment_tokens.size != 0) {
       for(k = 0; k < attachment_tokens.size; k++) {
-        if(attachment_tokens[k] == attachmentName)
+        if(attachment_tokens[k] == attachmentName) {
           return k;
+        }
       }
     }
     assertex(0, "Could not find attachment " + attachmentName + " in weapon " + baseWeapon);
@@ -818,10 +857,11 @@ unlockChallenge(refString) {
   assertex(Ref_Tok.size > 0, "Camo unlock specified in datatable [" + refString + "] is incomplete or empty");
 
   for(i = 0; i < Ref_Tok.size; i++) {
-    if(getSubStr(Ref_Tok[i], 0, 3) == "ch_")
+    if(getSubStr(Ref_Tok[i], 0, 3) == "ch_") {
       unlockChallengeSingular(Ref_Tok[i]);
-    else
+    } else {
       unlockChallengeGroup(Ref_Tok[i]);
+    }
   }
 }
 unlockChallengeSingular(refString) {
@@ -846,8 +886,9 @@ unlockChallengeGroup(refString) {
   assertEx(tierId > 0 && tierId <= level.numChallengeTiersMP, "invalid tier ID " + tierId);
 
   groupId = "";
-  if(tokens.size > 2)
+  if(tokens.size > 2) {
     groupId = tokens[2];
+  }
 
   challengeArray = getArrayKeys(level.challengeInfoMP);
 
@@ -876,8 +917,9 @@ unlockFeature(refString) {
   Ref_Tok = strTok(refString, ";");
   assertex(Ref_Tok.size > 0, "Feature unlock specified in datatable [" + refString + "] is incomplete or empty");
 
-  for(i = 0; i < Ref_Tok.size; i++)
+  for(i = 0; i < Ref_Tok.size; i++) {
     unlockFeatureSingular(Ref_Tok[i]);
+  }
 }
 
 unlockFeatureSingular(refString) {
@@ -888,8 +930,9 @@ unlockFeatureSingular(refString) {
   if(self getStat(stat) > 0) {
     return;
   }
-  if(refString == "feature_cac")
+  if(refString == "feature_cac") {
     self setStat(260, 1);
+  }
 
   self setStat(stat, 2);
 }
@@ -906,8 +949,9 @@ updateMPChallenges() {
         statVal = self getStat(int(stat_num));
 
         refString = tableLookup(tableName, 0, idx, 7);
-        if(statVal)
+        if(statVal) {
           self.challengeMPData[refString] = statVal;
+        }
       }
     }
   }
@@ -920,8 +964,9 @@ incRankXP(amount) {
   xp = self getRankXP();
   newXp = (xp + amount);
 
-  if(self.rank == level.maxRank && newXp >= getRankInfoMaxXP(level.maxRank))
+  if(self.rank == level.maxRank && newXp >= getRankInfoMaxXP(level.maxRank)) {
     newXp = getRankInfoMaxXP(level.maxRank);
+  }
 
   self.rankxp = newXp;
 }
@@ -1369,11 +1414,13 @@ doMissionCallback(callback, data) {
       return;
     }
     if(isDefined(data)) {
-      for(i = 0; i < level.missionCallbacks[callback].size; i++)
+      for(i = 0; i < level.missionCallbacks[callback].size; i++) {
         thread[[level.missionCallbacks[callback][i]]](data);
+      }
     } else {
-      for(i = 0; i < level.missionCallbacks[callback].size; i++)
+      for(i = 0; i < level.missionCallbacks[callback].size; i++) {
         thread[[level.missionCallbacks[callback][i]]]();
+      }
     }
   }
 
@@ -1386,8 +1433,9 @@ doMissionCallback(callback, data) {
 }
 
 statGet(dataName) {
-  if(!level.onlineGame)
+  if(!level.onlineGame) {
     return 0;
+  }
 
   return self getStat(int(tableLookup("mp/playerStatsTable.csv", 1, dataName, 0)));
 }
@@ -1423,8 +1471,9 @@ cac_init() {
 class_init() {
   max_weapon_num = 149;
   for(i = 0; i < max_weapon_num; i++) {
-    if(!isDefined(level.tbl_weaponIDs[i]) || level.tbl_weaponIDs[i]["group"] == "")
+    if(!isDefined(level.tbl_weaponIDs[i]) || level.tbl_weaponIDs[i]["group"] == "") {
       continue;
+    }
     if(!isDefined(level.tbl_weaponIDs[i]) || level.tbl_weaponIDs[i]["reference"] == "") {
       continue;
     }

@@ -516,18 +516,21 @@ play_loopsound_on_ent(ref) {
 
 string_to_float(string) {
   floatParts = strTok(string, ".");
-  if(floatParts.size == 1)
+  if(floatParts.size == 1) {
     return int(floatParts[0]);
+  }
 
   whole = int(floatParts[0]);
   decimal = int(floatParts[1]);
-  while(decimal > 1)
+  while(decimal > 1) {
     decimal *= 0.1;
+  }
 
-  if(whole >= 0)
+  if(whole >= 0) {
     return (whole + decimal);
-  else
+  } else {
     return (whole - decimal);
+  }
 }
 
 set_zombie_var(var, value, div, is_float) {
@@ -857,8 +860,9 @@ do_player_killstreak_dialog(player_index, sound_to_play, waittime) {
 }
 
 is_magic_bullet_shield_enabled(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
 
   return (isDefined(ent.magic_bullet_shield) && ent.magic_bullet_shield == true);
 }

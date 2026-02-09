@@ -14,11 +14,13 @@ main() {
 
   waittillframeend;
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _animatedmodels.gsc. Function: main() - STOP WAIT waittillframeend\n");
+  }
 
-  if(getDvar("animated_trees_enabled") == "")
+  if(getDvar("animated_trees_enabled") == "") {
     setDvar("animated_trees_enabled", "1");
+  }
 
   level.wind = spawnStruct();
   level.wind.rate = 0.4;
@@ -78,8 +80,9 @@ main() {
 
   level.init_animatedmodels = undefined;
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _animatedmodels.gsc. Function: main() - COMPLETE\n");
+  }
 }
 
 print_modellist_bykey(key) {
@@ -97,11 +100,13 @@ print_modellist_bykey(key) {
 print_modelcsv_bykey(key) {
   anima = level.init_animatedmodels[key];
 
-  if(isDefined(anima["still"]))
+  if(isDefined(anima["still"])) {
     println("xanim," + anima["still"]);
+  }
 
-  if(isDefined(anima["strong"]))
+  if(isDefined(anima["strong"])) {
     println("xanim," + anima["strong"]);
+  }
 }
 
 model_init() {
@@ -161,8 +166,9 @@ model_init() {
 
   level.init_animatedmodels[self.model] = anima;
 
-  if(!isDefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model])) {
     level.init_animatedmodels_dump = true;
+  }
 }
 
 model_disable() {

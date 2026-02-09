@@ -777,8 +777,9 @@ machine_watcher_factory(vending_name) {
 
   temp_machines = getstructarray("perksacola", "targetname");
   for(x = 0; x < temp_machines.size; x++) {
-    if(temp_machines[x].script_sound == temp_script_sound)
+    if(temp_machines[x].script_sound == temp_script_sound) {
       temp_machines[x] thread perks_a_cola_jingle();
+    }
   }
 }
 

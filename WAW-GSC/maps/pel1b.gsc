@@ -207,8 +207,9 @@ event1_show_hud() {
 event1_tank3_targets_link() {
   level.tank3_targets = getEntArray("tank2_firepoints", "targetname");
 
-  for(i = 0; i < level.tank3_targets.size - 1; i++)
+  for(i = 0; i < level.tank3_targets.size - 1; i++) {
     level.tank3_targets[i] linkto(level.tank3);
+  }
 
   targetpos = getent("tank2_firepoints_final", "targetname");
   targetpos linkto(level.tank3);
@@ -269,10 +270,11 @@ event1_player_ride_think() {
   tags = getEntArray("player_dismount_points", "targetname");
 
   for(i = 0; i < tags.size; i++) {
-    if(issubstr(tags[i].script_noteworthy, "flametank"))
+    if(issubstr(tags[i].script_noteworthy, "flametank")) {
       tags[i] linkto(level.flametank);
-    else if(issubstr(tags[i].script_noteworthy, "tank2"))
+    } else if(issubstr(tags[i].script_noteworthy, "tank2")) {
       tags[i] linkto(level.tank3);
+    }
   }
 
   players = get_sorted_players();
@@ -289,10 +291,11 @@ event1_player_ride_think() {
 
       players[i].lvt_linkspot_ref = spawn("script_origin", org);
 
-      if(passenger_pos == 8)
+      if(passenger_pos == 8) {
         players[i].lvt_linkspot_ref linkto(level.flametank, link_tag, (0, 0, 0), (0, 80, 0));
-      else
+      } else {
         players[i].lvt_linkspot_ref linkto(level.flametank, link_tag, (0, 0, 0), (0, 280, 0));
+      }
 
       players[i] DisableWeapons();
       players[i] PlayerLinkToDelta(players[i].lvt_linkspot_ref, undefined, 1);
@@ -321,10 +324,11 @@ event1_player_ride_think() {
 
       players[i].lvt_linkspot_ref = spawn("script_origin", org);
 
-      if(passenger_pos == 8)
+      if(passenger_pos == 8) {
         players[i].lvt_linkspot_ref linkto(level.tank3, link_tag, (0, 0, 0), (0, 80, 0));
-      else
+      } else {
         players[i].lvt_linkspot_ref linkto(level.tank3, link_tag, (0, 0, 0), (0, 280, 0));
+      }
 
       players[i] DisableWeapons();
       players[i] PlayerLinkToDelta(level.tank3, link_tag, 1);
@@ -374,10 +378,11 @@ event1_player_tank_dismount(player, fall_tag) {
   hud.sort = 20;
   hud.font = "default";
 
-  if(level.console)
+  if(level.console) {
     hud SetText(&"PEL1B_PLAYER_DISMOUNT");
-  else
+  } else {
     hud SetText(&"SCRIPT_PLATFORM_PEL1B_PLAYER_DISMOUNT");
+  }
 
   player thread event1_tank_explosion_effect();
 
@@ -615,8 +620,9 @@ event1_bomber_crash() {
 
   players = get_sorted_players();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     earthquake(0.4, 4, players[i].origin, 850);
+  }
 
   destroyed_model = getent("destroyed_corsair", "targetname");
   destroyed_model.origin = hitnoode.origin;
@@ -661,8 +667,9 @@ right_art_target_strat() {
 
   wait(1);
 
-  if(isalive(level.tank3))
+  if(isalive(level.tank3)) {
     fire_shrecks_with_damage(level.tank3, level.tank3.health + 200);
+  }
 }
 
 event1_tank3_moveup_start() {
@@ -791,10 +798,11 @@ event1_hutexplosion_remains() {
   for(i = 0; i < fire_points.size; i++) {
     size = randomintrange(0, 1);
 
-    if(size == 0)
+    if(size == 0) {
       playFX(level._effect["fire_foliage_small"], fire_points[i].origin);
-    else
+    } else {
       playFX(level._effect["fire_foliage_xsmall"], fire_points[i].origin);
+    }
   }
 }
 
@@ -855,8 +863,9 @@ event1_ai_takes_cover_behind_rocks() {
         level.allies[i] setgoalnode(leftnodes[lcount]);
         lcount++;
 
-        if(level.allies[i].script_noteworthy == "guys_following_tank3_1")
+        if(level.allies[i].script_noteworthy == "guys_following_tank3_1") {
           level.allies[i] thread magic_bullet_shield();
+        }
 
         if(level.allies[i].script_noteworthy == "guys_following_tank2_1") {
           level.allies[i] thread magic_bullet_shield();
@@ -949,8 +958,9 @@ event1_rider_dismount_anim(tank, rider, notify_string) {
   rider.animname = "rider" + rider.script_startingposition;
   rider anim_single_solo(rider, "dismountb", "tag_origin", undefined, rider);
 
-  if(isDefined(notify_string))
+  if(isDefined(notify_string)) {
     level notify(notify_string);
+  }
 }
 
 event1_followtankInternal(tank, pos, guy) {
@@ -1023,8 +1033,9 @@ event1_left_art_stop_fire() {
 
   for(i = 0; i < self.arty_crew.size; i++) {
     if(isDefined(self.arty_crew[i]) && isalive(self.arty_crew[i])) {
-      if(isDefined(self.arty_crew[i].magic_bullet_shield))
+      if(isDefined(self.arty_crew[i].magic_bullet_shield)) {
         self.arty_crew[i] thread stop_magic_bullet_shield();
+      }
 
       self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "right");
       self.arty_crew[i].goalradius = 2000;
@@ -1129,8 +1140,9 @@ event1_set_up_grass_guy() {
   grass_trig waittill("trigger", triggerer);
 
   if((issubstr(self.script_string, "4") || issubstr(self.script_string, "21")) && isPlayer(triggerer)) {
-    if(isDefined(self.magic_bullet_shield))
+    if(isDefined(self.magic_bullet_shield)) {
       self thread stop_magic_bullet_shield();
+    }
   }
 
   self.surprisedplayer = true;
@@ -1169,8 +1181,9 @@ track_grass_guy_achievement() {
     self waittill("damage", damage_amount, attacker, direction_vec, point, type);
 
     if(self.health <= 0 && !self.surprisedplayer) {
-      if(isDefined(attacker) && isPlayer(attacker))
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker maps\_utility::giveachievement_wrapper("ANY_ACHIEVEMENT_GRASSJAP");
+      }
     }
   }
 }
@@ -1192,19 +1205,22 @@ event1_cleanup() {
   japs2 = get_ai_group_ai("event1_japs_flow_2");
 
   for(i = 0; i < japs1.size; i++) {
-    if(isDefined(japs1[i]))
+    if(isDefined(japs1[i])) {
       japs1[i] thread bloody_death();
+    }
   }
 
   for(i = 0; i < japs2.size; i++) {
-    if(isDefined(japs2[i]))
+    if(isDefined(japs2[i])) {
       japs2[i] thread bloody_death();
+    }
   }
 
   grass_guys = get_ai_group_ai("event1_grass_guys");
   for(i = 0; i < grass_guys.size; i++) {
-    if(isDefined(grass_guys[i]))
+    if(isDefined(grass_guys[i])) {
       grass_guys[i] thread bloody_death();
+    }
   }
 }
 event1_cleanup2() {
@@ -1214,8 +1230,9 @@ event1_cleanup2() {
   japs3 = get_ai_group_ai("event1_japs_flow_3");
 
   for(i = 0; i < japs3.size; i++) {
-    if(isDefined(japs3[i]))
+    if(isDefined(japs3[i])) {
       japs3[i] thread bloody_death();
+    }
   }
 }
 event1b_cleanup() {
@@ -1225,8 +1242,9 @@ event1b_cleanup() {
   japs1 = get_ai_group_ai("event1_japs_flow_4");
 
   for(i = 0; i < japs1.size; i++) {
-    if(isDefined(japs1[i]))
+    if(isDefined(japs1[i])) {
       japs1[i] thread bloody_death();
+    }
   }
 }
 
@@ -1243,8 +1261,9 @@ event1b_friendlies_cleaup1() {
   squad[2] = guy;
 
   for(i = 0; i < squad.size - 1; i++) {
-    if(isDefined(squad[i].magic_bullet_shield))
+    if(isDefined(squad[i].magic_bullet_shield)) {
       squad[i] thread stop_magic_bullet_shield();
+    }
   }
 
   for(i = 0; i < squad.size; i++) {
@@ -1270,8 +1289,9 @@ event1b_friendlies_cleaup1_co_op() {
   squad[2] = guy;
 
   for(i = 0; i < squad.size - 1; i++) {
-    if(isDefined(squad[i].magic_bullet_shield))
+    if(isDefined(squad[i].magic_bullet_shield)) {
       squad[i] thread stop_magic_bullet_shield();
+    }
   }
 
   for(i = 0; i < squad.size; i++) {
@@ -1290,8 +1310,9 @@ event1b_friendlies_hut_cleaup1() {
   for(i = 0; i < squad.size; i++) {
     wait(randomintrange(0, 7));
 
-    if(isDefined(squad[i]) && isalive(squad[i]))
+    if(isDefined(squad[i]) && isalive(squad[i])) {
       squad[i] thread bloody_death();
+    }
   }
 }
 event1_ambient_planes_setup() {
@@ -1328,8 +1349,9 @@ planes_move(start_struct, end_struct) {
 
     plane thread flyto(destination, randomintrange(90, 120));
 
-    if(i == 3)
+    if(i == 3) {
       plane thread sound_planes();
+    }
   }
 }
 
@@ -1365,8 +1387,9 @@ event1a_skipto_setup() {
   level.heroes[1] forceteleport((47635.6, 2450.34, 198.352), (0, 356.25, 0));
 
   for(i = 0; i < level.allies.size; i++) {
-    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker")
+    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker") {
       level.allies[i] thread bloody_death();
+    }
   }
 }
 
@@ -1378,8 +1401,9 @@ magic_bullet_to_keep_guys_alive(the_squad) {
 
 stop_magic_bullet(the_squad) {
   for(i = 0; i < the_squad.size; i++) {
-    if(isDefined(the_squad[i]) && isalive(the_squad[i]) && isDefined(the_squad[i].magic_bullet_shield))
+    if(isDefined(the_squad[i]) && isalive(the_squad[i]) && isDefined(the_squad[i].magic_bullet_shield)) {
       the_squad[i] stop_magic_bullet_shield();
+    }
   }
 }
 
@@ -1511,8 +1535,9 @@ fire_shrecks_without_damage(tank, switchmodel) {
   shreck = spawn("script_model", tank.origin);
   shreck.angles = tank.angles;
 
-  if(switchmodel)
+  if(switchmodel) {
     shreck setModel("weapon_ger_panzershreck_rocket");
+  }
 
   playFX(level._effect["rocket_explode"], shreck.origin);
   shreck playSound("explo_metal_rand");
@@ -1551,8 +1576,9 @@ player_shellshock() {
 
 players_ignoreall(squad, ignoreflag) {
   for(i = 0; i < squad.size; i++) {
-    if(isalive(squad[i]))
+    if(isalive(squad[i])) {
       squad[i].ignoreall = ignoreflag;
+    }
   }
 }
 reset_turret_target() {
@@ -1845,8 +1871,9 @@ event1b_skipto_setup() {
   }
 
   for(i = 0; i < level.allies.size; i++) {
-    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker")
+    if(isalive(level.allies[i]) && level.allies[i].script_noteworthy != "sarge" && level.allies[i].script_noteworthy != "walker") {
       level.allies[i] thread bloody_death();
+    }
   }
 
   tank1_trig = getent("tank1start", "targetname");
@@ -2373,8 +2400,9 @@ snare_trap_thread() {
   if(!isPlayer(triggerer) && (triggerer.team != "axis") && (triggerer.script_noteworthy == "guys_following_tank2_1")) {
     flag_set("guy_trapped");
 
-    if(isDefined(triggerer.magic_bullet_shield))
+    if(isDefined(triggerer.magic_bullet_shield)) {
       triggerer thread stop_magic_bullet_shield();
+    }
 
     triggerer.NoFriendlyfire = true;
 
@@ -2429,15 +2457,17 @@ grass_guy_shoots_trapped_guy() {
 
   self SetEntityTarget(fireent);
 
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self thread stop_magic_bullet_shield();
+  }
 
   wait(randomintrange(4, 7));
 
   self.ignoreme = false;
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self ClearEntityTarget();
+  }
 }
 setup_right_side_trap_guy() {
   self thread print_trap_guy_overhead();
@@ -2474,8 +2504,9 @@ right_side_grass_guy_trap_think() {
   if(!isPlayer(triggerer) && (triggerer.team != "axis") && (triggerer.script_noteworthy == "right_side_trap_guy")) {
     flag_set("guy_trapped2");
 
-    if(isDefined(self.magic_bullet_shield))
+    if(isDefined(self.magic_bullet_shield)) {
       triggerer thread stop_magic_bullet_shield();
+    }
 
     triggerer.NoFriendlyfire = true;
 
@@ -2510,13 +2541,15 @@ grass_guy_shoots_trapped_guy2() {
 
   self SetEntityTarget(fireent);
 
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self thread stop_magic_bullet_shield();
+  }
 
   wait(randomintrange(5, 8));
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self ClearEntityTarget();
+  }
 }
 
 blood_drop_effect() {

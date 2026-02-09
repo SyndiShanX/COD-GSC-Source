@@ -16,17 +16,19 @@ main() {
 
   duration = self startFlashBanged() * 0.001;
 
-  if(duration > 2 && randomint(100) > 60)
+  if(duration > 2 && randomint(100) > 60) {
     self setflaggedanimrestart("flashed_anim", %german_shepherd_run_pain, 1, 0.2, self.animplaybackrate * 0.75);
-  else
+  } else {
     self setflaggedanimrestart("flashed_anim", %german_shepherd_run_flashbang, 1, 0.2, self.animplaybackrate);
+  }
 
   animLength = getanimlength(%german_shepherd_run_flashbang) * self.animplaybackrate;
 
-  if(duration < animLength)
+  if(duration < animLength) {
     self animscripts\shared::DoNoteTracksForTime(duration, "flashed_anim");
-  else
+  } else {
     self animscripts\shared::DoNoteTracks("flashed_anim");
+  }
 
   self setFlashBanged(false);
   self.flashed = false;

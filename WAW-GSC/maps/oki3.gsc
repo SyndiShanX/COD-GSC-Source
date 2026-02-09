@@ -1289,8 +1289,9 @@ planter_battle_end() {
     alive = false;
     guys = getaiarray("axis");
     for(i = 0; i < guys.size; i++) {
-      if(guys[i] istouching(radius))
+      if(guys[i] istouching(radius)) {
 
+      }
       {
         alive = true;
       }
@@ -3346,8 +3347,9 @@ oki3_grass_guy_achievement() {
     self waittill("damage", damage_amount, attacker, direction_vec, point, type);
 
     if(self.health <= 0 && !self.surprisedplayer) {
-      if(isDefined(attacker) && isPlayer(attacker))
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker maps\_utility::giveachievement_wrapper("ANY_ACHIEVEMENT_GRASSJAP");
+      }
     }
   }
 }

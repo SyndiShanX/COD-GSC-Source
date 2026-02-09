@@ -48,8 +48,9 @@ do_explosion() {
 
       level thread do_explosion_sound(self.origin);
 
-      if(isDefined(level.vehicle_death_earthquake[self.destructibledef]))
+      if(isDefined(level.vehicle_death_earthquake[self.destructibledef])) {
         earthquake(
+      }
           level.vehicle_death_earthquake[self.destructibledef].scale, level.vehicle_death_earthquake[self.destructibledef].duration, self.origin, level.vehicle_death_earthquake[self.destructibledef].radius
         );
 
@@ -151,12 +152,15 @@ set_pre_explosion(def, fx) {
   level._effect[def + "_preexplode"] = LoadFx(fx);
 }
 build_destructible_radiusdamage(destructibledef, offset, range, maxdamage, mindamage, bKillplayer) {
-  if(!isDefined(level.destructible_death_radiusdamage))
+  if(!isDefined(level.destructible_death_radiusdamage)) {
     level.destructible_death_radiusdamage = [];
-  if(!isDefined(bKillplayer))
+  }
+  if(!isDefined(bKillplayer)) {
     bKillplayer = false;
-  if(!isDefined(offset))
+  }
+  if(!isDefined(offset)) {
     offset = (0, 0, 0);
+  }
   struct = spawnStruct();
   struct.offset = offset;
   struct.range = range;

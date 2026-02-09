@@ -46,8 +46,9 @@ player_num_in_laststand() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i] player_is_in_laststand())
+    if(players[i] player_is_in_laststand()) {
       num++;
+    }
   }
 
   return num;
@@ -78,8 +79,9 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   dvarName = "player" + self GetEntityNumber() + "downs";
   setDvar(dvarName, self.downs);
 
-  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf")
+  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
     self AllowJump(false);
+  }
 
   if(isDefined(level.playerlaststand_func)) {
     [[level.playerlaststand_func]]();
@@ -197,8 +199,9 @@ laststand_giveback_player_weapons() {
     self GiveWeapon(weapon);
     self SetWeaponAmmoClip(weapon, self.weaponAmmo[weapon]["clip"]);
 
-    if(WeaponType(weapon) != "grenade")
+    if(WeaponType(weapon) != "grenade") {
       self SetWeaponAmmoStock(weapon, self.weaponAmmo[weapon]["stock"]);
+    }
   }
 
   if(self.lastActiveWeapon != "none" && self.lastActiveWeapon != "mortar_round" && self.lastActiveWeapon != "mine_bouncing_betty") {
@@ -328,8 +331,9 @@ revive_debug() {
   for(;;) {
     self waittill("trigger", player);
 
-    if(!player player_is_in_laststand())
+    if(!player player_is_in_laststand()) {
       iprintln("revive triggered!");
+    }
 
     wait(0.05);
   }
@@ -353,8 +357,9 @@ revive_trigger_think() {
         d = self depthinwater();
       }
 
-      if(players[i] can_revive(self) || (is_sumpf == 1 && d > 20))
+      if(players[i] can_revive(self) || (is_sumpf == 1 && d > 20)) {
 
+      }
       {
         self.revivetrigger setHintString(&"GAME_BUTTON_TO_REVIVE_PLAYER");
         break;
@@ -381,8 +386,9 @@ revive_trigger_think() {
 
       reviver revive_give_back_weapons(gun);
 
-      if(isDefined(level.script) && level.script == "nazi_zombie_sumpf")
+      if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
         self AllowJump(true);
+      }
 
       if(revive_success) {
         self thread revive_success(reviver);
@@ -406,26 +412,33 @@ revive_give_back_weapons(gun) {
 }
 
 can_revive(revivee) {
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return false;
+  }
 
-  if(self player_is_in_laststand())
+  if(self player_is_in_laststand()) {
     return false;
+  }
 
-  if(!isDefined(revivee.revivetrigger))
+  if(!isDefined(revivee.revivetrigger)) {
     return false;
+  }
 
-  if(!self IsTouching(revivee.revivetrigger))
+  if(!self IsTouching(revivee.revivetrigger)) {
     return false;
+  }
 
-  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf" && (revivee depthinwater() > 10))
+  if(isDefined(level.script) && level.script == "nazi_zombie_sumpf" && (revivee depthinwater() > 10)) {
     return true;
+  }
 
-  if(!self is_facing(revivee))
+  if(!self is_facing(revivee)) {
     return false;
+  }
 
-  if(!SightTracePassed(self.origin + (0, 0, 50), revivee.origin + (0, 0, 30), false, undefined))
+  if(!SightTracePassed(self.origin + (0, 0, 50), revivee.origin + (0, 0, 30), false, undefined)) {
     return false;
+  }
 
   if(!bullettracepassed(self.origin + (0, 0, 50), revivee.origin + (0, 0, 30), false, undefined)) {
     return false;
@@ -437,11 +450,13 @@ can_revive(revivee) {
     }
   }
 
-  if(level.script == "nazi_zombie_asylum" && isDefined(self.is_drinking))
+  if(level.script == "nazi_zombie_asylum" && isDefined(self.is_drinking)) {
     return false;
+  }
 
-  if(level.script == "nazi_zombie_sumpf" && isDefined(self.is_drinking))
+  if(level.script == "nazi_zombie_sumpf" && isDefined(self.is_drinking)) {
     return false;
+  }
 
   return true;
 }
@@ -481,11 +496,13 @@ revive_do_revive(playerBeingRevived, reviverGun) {
 
   playerBeingRevived startrevive(self);
 
-  if(!isDefined(self.reviveProgressBar))
+  if(!isDefined(self.reviveProgressBar)) {
     self.reviveProgressBar = self createPrimaryProgressBar();
+  }
 
-  if(!isDefined(self.reviveTextHud))
+  if(!isDefined(self.reviveTextHud)) {
     self.reviveTextHud = newclientHudElem(self);
+  }
 
   self thread laststand_clean_up_on_disconnect(playerBeingRevived, reviverGun);
 
@@ -496,8 +513,9 @@ revive_do_revive(playerBeingRevived, reviverGun) {
   self.reviveTextHud.horzAlign = "center";
   self.reviveTextHud.vertAlign = "bottom";
   self.reviveTextHud.y = -148;
-  if(IsSplitScreen())
+  if(IsSplitScreen()) {
     self.reviveTextHud.y = -107;
+  }
   self.reviveTextHud.foreground = true;
   self.reviveTextHud.font = "default";
   self.reviveTextHud.fontScale = 1.8;

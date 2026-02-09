@@ -224,14 +224,17 @@ makeType(destructibleType) {
 }
 
 getInfoIndex(destructibleType) {
-  if(!isDefined(level.destructible_type))
+  if(!isDefined(level.destructible_type)) {
     return -1;
-  if(level.destructible_type.size == 0)
+  }
+  if(level.destructible_type.size == 0) {
     return -1;
+  }
 
   for(i = 0; i < level.destructible_type.size; i++) {
-    if(destructibleType == level.destructible_type[i].v["type"])
+    if(destructibleType == level.destructible_type[i].v["type"]) {
       return i;
+    }
   }
 
   return -1;
@@ -1265,10 +1268,11 @@ vehicle_80s_sedan1_lowres(destructibleType, color) {
   destructible_explode(4000, 5000, 200, 150, 300);
 
   sColorSuffix = undefined;
-  if(color == "green")
+  if(color == "green") {
     sColorSuffix = "dest";
-  else
+  } else {
     sColorSuffix = "_destroyed";
+  }
 
   destructible_state(undefined, "vehicle_80s_sedan1_" + color + sColorSuffix);
 }

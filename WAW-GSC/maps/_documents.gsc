@@ -61,10 +61,11 @@ get_closest_document(array) {
       }
     }
   }
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     return array[ent];
-  else
+  } else {
     return;
+  }
 }
 
 document_think(activate_notify, array_targetname) {

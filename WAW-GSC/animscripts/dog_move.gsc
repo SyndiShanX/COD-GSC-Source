@@ -45,8 +45,9 @@ main() {
     self moveLoop();
 
     if(self.a.movement == "run") {
-      if(self.disableArrivals == false)
+      if(self.disableArrivals == false) {
         self thread stopMove();
+      }
 
       self waittill("run");
       self clearanim(%german_shepherd_run_stop, 0.1);
@@ -59,10 +60,11 @@ moveLoop() {
   self endon("stop_soon");
 
   while(1) {
-    if(self.disableArrivals)
+    if(self.disableArrivals) {
       self.stopAnimDistSq = 0;
-    else
+    } else {
       self.stopAnimDistSq = anim.dogStoppingDistSq;
+    }
 
     if(self.a.movement == "run") {
       weights = self getRunAnimWeights();
@@ -118,16 +120,19 @@ stopMove() {
 randomSoundDuringRunLoop() {
   self endon("killanimscript");
   while(1) {
-    if(getdebugdvar("debug_dog_sound") != "")
+    if(getdebugdvar("debug_dog_sound") != "") {
       iprintln("dog " + (self getentnum()) + " bark start " + getTime());
+    }
 
-    if(isDefined(self.script_growl))
+    if(isDefined(self.script_growl)) {
       self play_sound_on_tag("anml_dog_growl", "tag_eye");
-    else
+    } else {
       self play_sound_on_tag("anml_dog_bark", "tag_eye");
+    }
 
-    if(getdebugdvar("debug_dog_sound") != "")
+    if(getdebugdvar("debug_dog_sound") != "") {
       iprintln("dog " + (self getentnum()) + " bark end " + getTime());
+    }
 
     wait(randomfloatrange(0.1, 0.3));
   }
@@ -140,29 +145,34 @@ getRunAnimWeights() {
   weights["right"] = 0;
 
   if(self.leanAmount > 0) {
-    if(self.leanAmount < 0.95)
+    if(self.leanAmount < 0.95) {
       self.leanAmount = 0.95;
+    }
 
     weights["left"] = 0;
     weights["right"] = (1 - self.leanAmount) * 20;
 
-    if(weights["right"] > 1)
+    if(weights["right"] > 1) {
       weights["right"] = 1;
-    else if(weights["right"] < 0)
+    } else if(weights["right"] < 0) {
       weights["right"] = 0;
+    }
 
     weights["center"] = 1 - weights["right"];
   } else if(self.leanAmount < 0) {
-    if(self.leanAmount > -0.95)
+    if(self.leanAmount > -0.95) {
       self.leanAmount = -0.95;
+    }
 
     weights["right"] = 0;
     weights["left"] = (1 + self.leanAmount) * 20;
 
-    if(weights["left"] > 1)
+    if(weights["left"] > 1) {
       weights["left"] = 1;
-    if(weights["left"] < 0)
+    }
+    if(weights["left"] < 0) {
       weights["left"] = 0;
+    }
 
     weights["center"] = 1 - weights["left"];
   } else {

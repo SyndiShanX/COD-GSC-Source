@@ -904,8 +904,9 @@ check_for_valid_spawn_near_team(revivee) {
   players = get_players();
   spawn_points = getstructarray("player_respawn_point", "targetname");
 
-  if(spawn_points.size == 0)
+  if(spawn_points.size == 0) {
     return undefined;
+  }
 
   for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i])) {
@@ -1336,8 +1337,9 @@ chalk_round_hint() {
 round_think() {
   for(;;) {
     maxreward = 50 * level.round_number;
-    if(maxreward > 500)
+    if(maxreward > 500) {
       maxreward = 500;
+    }
     level.zombie_vars["rebuild_barrier_cap_per_round"] = maxreward;
 
     level.round_timer = level.zombie_vars["zombie_round_time"];
@@ -1424,8 +1426,9 @@ round_spawn_failsafe() {
     wait(30);
 
     if(isDefined(self.lastchunk_destroy_time)) {
-      if((getTime() - self.lastchunk_destroy_time) < 5000)
+      if((getTime() - self.lastchunk_destroy_time) < 5000) {
         continue;
+      }
     }
 
     if(self.origin[2] < level.zombie_vars["below_world_check"]) {
@@ -2058,12 +2061,13 @@ store_crumb(origin) {
 }
 nazizombies_upload_highscore() {
   playersRank = 1;
-  if(level.players_playing == 1)
+  if(level.players_playing == 1) {
     playersRank = 4;
-  else if(level.players_playing == 2)
+  } else if(level.players_playing == 2) {
     playersRank = 3;
-  else if(level.players_playing == 3)
+  } else if(level.players_playing == 3) {
     playersRank = 2;
+  }
 
   map_name = getDvar("mapname");
 
@@ -2110,25 +2114,29 @@ nazizombies_upload_highscore() {
 }
 
 isZombieLeaderboardAvailable(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map]))
+  if(!isDefined(level.zombieLeaderboardNumber[map])) {
     return 0;
+  }
 
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     return 0;
+  }
 
   return 1;
 }
 
 getZombieLeaderboardNumber(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     assertMsg("Unknown leaderboard number for map " + map + "and type " + type);
+  }
 
   return level.zombieLeaderboardNumber[map][type];
 }
 
 getZombieStatVariable(map, variable) {
-  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable]))
+  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable])) {
     assertMsg("Unknown stat variable " + variable + " for map " + map);
+  }
 
   return level.zombieLeaderboardStatVariable[map][variable];
 }
@@ -2169,18 +2177,20 @@ nazizombies_set_new_zombie_stats() {
 }
 
 makeRankNumber(wave, players, time) {
-  if(time > 86400)
+  if(time > 86400) {
     time = 86400;
+  }
 
   padding = "";
-  if(10 > time)
+  if(10 > time) {
     padding += "0000";
-  else if(100 > time)
+  } else if(100 > time) {
     padding += "000";
-  else if(1000 > time)
+  } else if(1000 > time) {
     padding += "00";
-  else if(10000 > time)
+  } else if(10000 > time) {
     padding += "0";
+  }
 
   rank = wave + "" + players + padding + time;
 
@@ -2397,8 +2407,9 @@ check_for_jugg_perk() {
   while(true) {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
-      if(players[i] hasperk("specialty_armorvest") && !isDefined(players[i].is_burning) && !is_magic_bullet_shield_enabled(players[i]))
+      if(players[i] hasperk("specialty_armorvest") && !isDefined(players[i].is_burning) && !is_magic_bullet_shield_enabled(players[i])) {
 
+      }
       {
         if(!flag("dog_round")) {
           players[i].health += 40;

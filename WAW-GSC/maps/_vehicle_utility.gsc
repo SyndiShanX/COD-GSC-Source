@@ -10,8 +10,9 @@
 
 advance_then_retreat_one_path(startPath, retreatPathName, speed, accel, damage_percent, retreatNotify) {
   self endon("death");
-  if(!isDefined(damage_percent))
+  if(!isDefined(damage_percent)) {
     damage_percent = 0.0;
+  }
 
   self advance_then_stop(startPath, speed, accel);
 
@@ -76,8 +77,9 @@ patrol_loop(path1start, path1end, path2start, path2end, speed, accel) {
 
 patrol_loop_then_retreat(path1start, path1end, path2start, path2end, startretreatnode, retreatpathnode, speed, accel, damage_percent, retreatNotify) {
   self endon("death");
-  if(!isDefined(damage_percent))
+  if(!isDefined(damage_percent)) {
     damage_percent = 0.0;
+  }
 
   reachNode = GetVehicleNode(startretreatnode, "targetname");
   switchNode = GetVehicleNode(retreatpathnode, "targetname");

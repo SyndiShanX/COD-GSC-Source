@@ -7,8 +7,9 @@
 #include maps\_utility;
 
 main() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: main()\n");
+  }
 
   flag_init("pullup_weapon");
   flag_init("starting final intro screen fadeout");
@@ -213,8 +214,9 @@ main() {
       break;
   }
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: main() - COMPLETE\n");
+  }
 }
 introscreen_create_line(string, type, scale, font) {
   index = level.introstring.size;
@@ -250,10 +252,11 @@ introscreen_create_line(string, type, scale, font) {
   }
 
   if(!isDefined(scale)) {
-    if(level.splitscreen && !level.hidef)
+    if(level.splitscreen && !level.hidef) {
       fontScale = 2.75;
-    else
+    } else {
       fontScale = 1.75;
+    }
   } else
     fontScale = scale;
 
@@ -299,8 +302,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   waittillframeend;
   waittillframeend;
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: introscreen_delay() - STOP WAIT waittillframeend x2\n");
+  }
 
   skipIntro = false;
   if(isDefined(level.start)) {
@@ -311,8 +315,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
     skipIntro = true;
   }
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: introscreen_delay() - BEFORE VARIOUS WAITS\n");
+  }
 
   if(skipIntro) {
     flag_wait("all_players_connected");
@@ -423,8 +428,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
 
   flag_set("introscreen_complete");
 
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: introscreen_delay() - COMPLETE\n");
+  }
 }
 
 introscreen_player_connect() {

@@ -382,15 +382,17 @@ set_reverb_priority(name, priority) {
 }
 
 getFilter(name) {
-  if(isDefined(name) && isDefined(level.eq_defs) && isDefined(level.eq_defs[name]))
+  if(isDefined(name) && isDefined(level.eq_defs) && isDefined(level.eq_defs[name])) {
     return level.eq_defs[name];
-  else
+  } else {
     return undefined;
+  }
 }
 
 add_channel_to_filter(track, channel) {
-  if(!isDefined(level.ambient_eq[track]))
+  if(!isDefined(level.ambient_eq[track])) {
     level.ambient_eq[track] = [];
+  }
 
   level.ambient_eq[track][channel] = track;
 }

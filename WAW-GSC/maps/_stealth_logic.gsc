@@ -295,8 +295,9 @@ friendly_logic() {
 
   current_stance_func = self._stealth.logic.current_stance_func;
 
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     self thread friendly_movespeed_calc_loop();
+  }
 
   while(1) {
     self[[current_stance_func]]();
@@ -316,9 +317,9 @@ friendly_init() {
   if(isPlayer(self)) {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
-    if(level.Console)
+    if(level.Console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
-    else {
+    } else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
     }
@@ -379,16 +380,18 @@ player_getvelocity_pc() {
   sub["crouch"] = 25;
   sub["prone"] = 10;
 
-  if(!velocity)
+  if(!velocity) {
     self._stealth.logic.player_pc_velocity = 0;
-  else if(velocity > self._stealth.logic.player_pc_velocity) {
+  } else if(velocity > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity += add[stance];
-    if(self._stealth.logic.player_pc_velocity > velocity)
+    if(self._stealth.logic.player_pc_velocity > velocity) {
       self._stealth.logic.player_pc_velocity = velocity;
+    }
   } else if(velocity < self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity -= sub[stance];
-    if(self._stealth.logic.player_pc_velocity < 0)
+    if(self._stealth.logic.player_pc_velocity < 0) {
       self._stealth.logic.player_pc_velocity = 0;
+    }
   }
 
   return self._stealth.logic.player_pc_velocity;
@@ -412,8 +415,9 @@ friendly_movespeed_calc_loop() {
     } else {
       score_move = self[[velocity_func]]();
       score_turn = length(oldangles - self[[angles_func]]());
-      if(score_turn > 30)
+      if(score_turn > 30) {
         score_turn = 30;
+      }
 
       score = score_move + score_turn;
     }
@@ -436,20 +440,23 @@ friendly_movespeed_calc_loop() {
 }
 
 friendly_compute_score(stance) {
-  if(!isDefined(stance))
+  if(!isDefined(stance)) {
     stance = self._stealth.logic.stance;
+  }
 
   detection_level = level._stealth.logic.detection_level;
 
   score_range = level._stealth.logic.detect_range[detection_level][stance];
   if(self ent_flag("_stealth_in_shadow")) {
     score_range *= .5;
-    if(score_range < level._stealth.logic.detect_range["hidden"]["prone"])
+    if(score_range < level._stealth.logic.detect_range["hidden"]["prone"]) {
       score_range = level._stealth.logic.detect_range["hidden"]["prone"];
+    }
   }
   score_move = self._stealth.logic.movespeed_multiplier[detection_level][stance];
-  if(isDefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap)
+  if(isDefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap) {
     score_move = self._stealth_move_detection_cap;
+  }
 
   return (score_range + score_move);
 }
@@ -482,21 +489,23 @@ friendly_compute_stances_player() {
   if(!self._stealth.logic.stance_change) {
     switch (stance) {
       case "prone":
-        if(self._stealth.logic.oldstance != "prone")
+        if(self._stealth.logic.oldstance != "prone") {
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
+        }
         break;
       case "crouch":
-        if(self._stealth.logic.oldstance == "stand")
+        if(self._stealth.logic.oldstance == "stand") {
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
+        }
         break;
     }
   }
   if(self._stealth.logic.stance_change) {
     self._stealth.logic.stance = self._stealth.logic.oldstance;
 
-    if(self._stealth.logic.stance_change > .05)
+    if(self._stealth.logic.stance_change > .05) {
       self._stealth.logic.stance_change -= .05;
-    else {
+    } else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = stance;
       self._stealth.logic.oldstance = stance;
@@ -522,8 +531,9 @@ enemy_init() {
   self._stealth.logic = spawnStruct();
 
   self._stealth.logic.dog = false;
-  if(issubstr(self.classname, "dog"))
+  if(issubstr(self.classname, "dog")) {
     self._stealth.logic.dog = true;
+  }
 
   self._stealth.logic.alert_level = spawnStruct();
   self._stealth.logic.alert_level.lvl = undefined;
@@ -553,14 +563,16 @@ enemy_event_listeners_init() {
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "silenced_shot";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "projectile_impact";
 
-  for(i = 0; i < self._stealth.logic.event.listener.size; i++)
+  for(i = 0; i < self._stealth.logic.event.listener.size; i++) {
     self addAIEventListener(self._stealth.logic.event.listener[i]);
+  }
 
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "explode";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "doFlashBanged";
 
-  for(i = 0; i < self._stealth.logic.event.listener.size; i++)
+  for(i = 0; i < self._stealth.logic.event.listener.size; i++) {
     self thread enemy_event_listeners_logic(self._stealth.logic.event.listener[i]);
+  }
 
   self thread enemy_event_declare_to_team("damage", "ai_eventDistPain");
   self thread enemy_event_declare_to_team("death", "ai_eventDistDeath");
@@ -623,8 +635,9 @@ enemy_event_awareness(type) {
     self waittill(type, var1, var2);
 
     if(!self._stealth.logic.dog) {
-      if(flag("_stealth_spotted") && (isDefined(self.enemy) || isDefined(self.favoriteenemy)))
+      if(flag("_stealth_spotted") && (isDefined(self.enemy) || isDefined(self.favoriteenemy))) {
         continue;
+      }
     }
 
     switch (type) {
@@ -643,8 +656,9 @@ enemy_event_awareness(type) {
 
     waittillframeend;
 
-    if(!flag("_stealth_spotted") && type != "alerted_once")
+    if(!flag("_stealth_spotted") && type != "alerted_once") {
       flag_set("_stealth_alert");
+    }
   }
 }
 
@@ -687,10 +701,12 @@ enemy_event_declare_to_team(type, name) {
   check = int(level._stealth.logic.ai_event[name][level._stealth.logic.detection_level]);
 
   for(i = 0; i < ai.size; i++) {
-    if(!isalive(ai[i]))
+    if(!isalive(ai[i])) {
       continue;
-    if(!isDefined(ai[i]._stealth))
+    }
+    if(!isDefined(ai[i]._stealth)) {
       continue;
+    }
     if(distance(ai[i].origin, self.origin) > check) {
       continue;
     }
@@ -711,8 +727,9 @@ enemy_threat_logic() {
       continue;
     }
     if(!flag("_stealth_spotted") && !self._stealth.logic.dog) {
-      if(!(self enemy_alert_level_logic(self.enemy)))
+      if(!(self enemy_alert_level_logic(self.enemy))) {
         continue;
+      }
     } else
       self enemy_alert_level_change("attack", self.enemy);
 
@@ -721,8 +738,9 @@ enemy_threat_logic() {
     wait 20;
 
     while(isDefined(self.enemy)) {
-      if(distance(self.origin, self.enemy.origin) > self.maxVisibleDist)
+      if(distance(self.origin, self.enemy.origin) > self.maxVisibleDist) {
         self clearenemy();
+      }
 
       wait .25;
     }
@@ -743,14 +761,17 @@ enemy_threat_set_spotted() {
 }
 
 enemy_alert_level_logic(enemy) {
-  if(!isDefined(enemy._stealth))
+  if(!isDefined(enemy._stealth)) {
     return true;
+  }
 
-  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number]))
+  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number])) {
     enemy._stealth.logic.spotted_list[self.ai_number] = 0;
+  }
 
-  if(!self._stealth.logic.stoptime)
+  if(!self._stealth.logic.stoptime) {
     enemy._stealth.logic.spotted_list[self.ai_number]++;
+  }
 
   if(self ent_flag("_stealth_bad_event_listener") || enemy._stealth.logic.spotted_list[self.ai_number] > 2) {
     self enemy_alert_level_change("attack", enemy);
@@ -759,8 +780,9 @@ enemy_alert_level_logic(enemy) {
 
   self clearenemy();
 
-  if(self._stealth.logic.stoptime)
+  if(self._stealth.logic.stoptime) {
     return false;
+  }
 
   switch (enemy._stealth.logic.spotted_list[self.ai_number]) {
     case 1:
@@ -839,8 +861,9 @@ enemy_corpse_logic() {
             continue;
           }
           distsqrd2 = distancesquared(self.origin, self._stealth.logic.corpse.corpse_entity.origin);
-          if(distsqrd2 <= distsqrd)
+          if(distsqrd2 <= distsqrd) {
             continue;
+          }
         }
 
         if(distsqrd > level._stealth.logic.corpse.sight_distsqrd) {
@@ -867,10 +890,11 @@ enemy_corpse_logic() {
         }
       }
       if(found) {
-        if(!ent_flag("_stealth_found_corpse"))
+        if(!ent_flag("_stealth_found_corpse")) {
           self ent_flag_set("_stealth_found_corpse");
-        else
+        } else {
           self notify("_stealth_found_corpse");
+        }
 
         self ent_flag_clear("_stealth_saw_corpse");
 
@@ -880,10 +904,11 @@ enemy_corpse_logic() {
       } else if(saw) {
         self._stealth.logic.corpse.corpse_entity = corpse;
 
-        if(!ent_flag("_stealth_saw_corpse"))
+        if(!ent_flag("_stealth_saw_corpse")) {
           self ent_flag_set("_stealth_saw_corpse");
-        else
+        } else {
           self notify("_stealth_saw_corpse");
+        }
 
         level notify("_stealth_saw_corpse");
         self notify("saw_corpse", corpse);
@@ -923,15 +948,17 @@ enemy_corpse_death() {
     wait .01;
   }
 
-  if(level.cheatStates["sf_use_tire_explosion"])
+  if(level.cheatStates["sf_use_tire_explosion"]) {
     wait .25;
+  }
 
   corpse enemy_corpse_add_to_stack();
 }
 
 enemy_corpse_add_to_stack() {
-  if(level._stealth.logic.corpse.array.size == level._stealth.logic.corpse.max_num)
+  if(level._stealth.logic.corpse.array.size == level._stealth.logic.corpse.max_num) {
     enemy_corpse_shorten_stack();
+  }
 
   level._stealth.logic.corpse.array[level._stealth.logic.corpse.array.size] = self;
 }
@@ -941,8 +968,9 @@ enemy_corpse_shorten_stack() {
   array2 = level._stealth.logic.corpse.array;
   remove = level._stealth.logic.corpse.array[0];
 
-  for(i = 1; i < level._stealth.logic.corpse.max_num; i++)
+  for(i = 1; i < level._stealth.logic.corpse.max_num; i++) {
     array1[array1.size] = array2[i];
+  }
 
   level._stealth.logic.corpse.array = array1;
 
@@ -961,10 +989,11 @@ enemy_corpse_found(corpse) {
 
   wait randomfloatrange(.25, .5);
 
-  if(!flag("_stealth_found_corpse"))
+  if(!flag("_stealth_found_corpse")) {
     flag_set("_stealth_found_corpse");
-  else
+  } else {
     level notify("_stealth_found_corpse");
+  }
 
   thread enemy_corpse_clear();
 }
@@ -988,14 +1017,15 @@ enemy_corpse_found_loop() {
 enemy_corpse_alert_level() {
   enemy = undefined;
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     enemy = self.enemy;
-  else {
+  } else {
     enemy = get_closest_player(self.origin);
   }
 
-  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number]))
+  if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number])) {
     enemy._stealth.logic.spotted_list[self.ai_number] = 0;
+  }
 
   switch (enemy._stealth.logic.spotted_list[self.ai_number]) {
     case 0:
@@ -1030,8 +1060,9 @@ stealth_shadow_ai_in_volume(volume) {
 
   self ent_flag_set("_stealth_in_shadow");
 
-  while(self istouching(volume))
+  while(self istouching(volume)) {
     wait .05;
+  }
 
   self ent_flag_clear("_stealth_in_shadow");
 }
@@ -1073,20 +1104,23 @@ stealth_ai_behavior(state_functions, alert_functions, corpse_functions, awarenes
 }
 
 stealth_enemy_waittill_alert() {
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
   level endon("_stealth_spotted");
 
-  if(flag("_stealth_found_corpse"))
+  if(flag("_stealth_found_corpse")) {
     return;
+  }
   level endon("_stealth_found_corpse");
 
   self endon("_stealth_enemy_alert_level_change");
 
   waittillframeend;
 
-  if(self ent_flag("_stealth_saw_corpse"))
+  if(self ent_flag("_stealth_saw_corpse")) {
     return;
+  }
   self endon("_stealth_saw_corpse");
 
   self waittill("event_awareness", type);
@@ -1240,7 +1274,8 @@ stealth_ai_reach_and_arrive_idle_and_react_proc(guy, reach_anim, idle_anim, reac
 }
 
 stealth_insure_enabled() {
-  if(isDefined(self._stealth))
+  if(isDefined(self._stealth)) {
     return;
+  }
   self thread stealth_ai();
 }

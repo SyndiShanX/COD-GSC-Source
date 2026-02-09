@@ -153,8 +153,9 @@ lineEmitter_Thread(localClientNum) {
 
   endOfLineEntity = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     endOfLineEntity = getstruct(self.target, "targetname");
+  }
 
   if(isDefined(endOfLineEntity)) {
     soundMover = spawnStruct();
@@ -235,8 +236,9 @@ audio_init(localClientNum) {
 }
 
 playloopat(localClientNum, aliasname, origin, fade) {
-  if(!isDefined(fade))
+  if(!isDefined(fade)) {
     fade = 0;
+  }
   fake_ent = spawnfakeent(localClientNum);
   setfakeentorg(localClientNum, fake_ent, origin);
   playLoopSound(localClientNum, fake_ent, aliasname, fade);
