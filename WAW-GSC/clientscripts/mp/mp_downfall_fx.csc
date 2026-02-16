@@ -1,18 +1,14 @@
-//
-// file: mp_downfall_fx.gsc
-// description: clientside fx script for template: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_downfall_fx.csc
+***********************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {}
 
-// --- Barrys Section ---//
 precache_createfx_fx() {
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");

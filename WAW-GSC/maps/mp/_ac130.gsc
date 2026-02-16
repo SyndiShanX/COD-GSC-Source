@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_ac130.gsc
+**************************************/
+
 #include maps\mp\_utility;
 #using_animtree("ac130");
 init() {
@@ -26,8 +31,6 @@ init() {
   precacheRumble("ac130_25mm_fire");
   precacheRumble("ac130_40mm_fire");
 
-  //	precacheShellShock("ac130");
-
   level.gunReady["ac130_25mm"] = true;
   level.gunReady["ac130_40mm"] = true;
 
@@ -37,8 +40,9 @@ init() {
 }
 
 ac130_attachPlayer(player) {
-  if(isDefined(level.ac130Player))
+  if(isDefined(level.ac130Player)) {
     return;
+  }
 
   player = self;
   level.ac130Player = self;
@@ -51,7 +55,6 @@ ac130_attachPlayer(player) {
   level.ac130Player thread attachPlayer();
 
   thread changeWeapons();
-  //	thread sounds();
 }
 
 overlay() {
@@ -75,7 +78,6 @@ overlay() {
   grain.foreground = true;
   grain setshader("ac130_overlay_grain", 640, 480);
   grain.alpha = 0.5;
-  //	thread ac130ShellShock();
 }
 
 ac130ShellShock() {
@@ -101,8 +103,6 @@ rotatePlane(toggle) {
 }
 
 attachPlayer() {
-  //playerlinktodelta( <linkto entity>, <tag>, <viewpercentag fraction>, <right arc>, <left arc>, <top arc>, <bottom arc> )
-  //	level.player playerLinkToDelta (level.ac130, "tag_player", 1.0, 50, 50, 18, 20);
   self linkTo(level.ac130, "tag_player", (1500, 0, 1000), (0, 0, 0));
 }
 
@@ -128,12 +128,14 @@ changeWeapons() {
   thread fire_screenShake();
 
   for(;;) {
-    while(!level.ac130Player useButtonPressed())
+    while(!level.ac130Player useButtonPressed()) {
       wait 0.05;
+    }
 
     currentWeapon++;
-    if(currentWeapon >= weapon.size)
+    if(currentWeapon >= weapon.size) {
       currentWeapon = 0;
+    }
     level.currentWeapon = weapon[currentWeapon].name;
 
     level.ac130_overlay setShader(weapon[currentWeapon].overlay, 640, 480);
@@ -142,8 +144,9 @@ changeWeapons() {
     level.ac130Player giveWeapon(weapon[currentWeapon].weapon);
     level.ac130Player switchToWeapon(weapon[currentWeapon].weapon);
 
-    while(level.ac130Player useButtonPressed())
+    while(level.ac130Player useButtonPressed()) {
       wait 0.05;
+    }
   }
 }
 
@@ -170,25 +173,7 @@ sounds() {
   }
 }
 
-fire_screenShake() {
-  /*
-  for(;;)
-  {
-  	while(!level.player attackbuttonpressed())
-  		wait 0.05;
-  	
-  	if(level.currentWeapon == "105mm")
-  	{
-  		wait 0.3;
-  		earthquake (0.1, 1, level.player.origin, 1000);
-  		wait 1;
-  	}
-  	
-  	while(level.player attackbuttonpressed())
-  		wait 0.05;
-  }
-  */
-}
+fire_screenShake() {}
 
 gunReload(weaponName, reloadTime) {
   level notify("reloading " + weaponName);
@@ -197,7 +182,4 @@ gunReload(weaponName, reloadTime) {
   level.gunReady[weaponName] = false;
   wait(reloadTime);
   level.gunReady[weaponName] = true;
-
-  //	if(weaponName == "105mm")
-  //		level.ac130 thread play_sound_on_tag("ac130_gunready","tag_player");
 }

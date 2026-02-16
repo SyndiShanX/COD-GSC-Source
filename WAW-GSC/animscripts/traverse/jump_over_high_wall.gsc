@@ -1,5 +1,8 @@
-// Jump_over_high_wall.gsc
-// Makes the character dive over a high wall.Designed for getting bad guys into levels - it looks bad from the back.
+/********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\jump_over_high_wall.gsc
+********************************************************/
+
 #include animscripts\traverse\shared;
 #using_animtree("generic_human");
 
@@ -9,7 +12,6 @@ main() {
     return;
   }
 
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -17,7 +19,6 @@ main() {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -34,5 +35,4 @@ main() {
   self animscripts\shared::DoNoteTracks("diveanim");
   self.a.movement = "run";
   self.a.alertness = "casual";
-  //	self setAnimKnobAllRestart( animscripts\run::GetCrouchRunAnim(), %body, 1, 0.1, 1 );
 }

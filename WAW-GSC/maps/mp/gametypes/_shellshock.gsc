@@ -1,3 +1,8 @@
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_shellshock.gsc
+*********************************************/
+
 init() {
   precacheShellShock("frag_grenade_mp");
   precacheShellShock("damage_mp");
@@ -6,20 +11,22 @@ init() {
 }
 
 shellshockOnDamage(cause, damage) {
-  if(self maps\mp\_flashgrenades::isFlashbanged())
-    return; // don't interrupt flashbang shellshock
+  if(self maps\mp\_flashgrenades::isFlashbanged()) {
+    return;
+  }
 
   if(cause == "MOD_EXPLOSIVE" || cause == "MOD_GRENADE" || cause == "MOD_GRENADE_SPLASH" || cause == "MOD_PROJECTILE" || cause == "MOD_PROJECTILE_SPLASH") {
     time = 0;
 
-    if(damage >= 90)
+    if(damage >= 90) {
       time = 4;
-    else if(damage >= 50)
+    } else if(damage >= 50) {
       time = 3;
-    else if(damage >= 25)
+    } else if(damage >= 25) {
       time = 2;
-    else if(damage > 10)
+    } else if(damage > 10) {
       time = 2;
+    }
 
     if(time) {
       self shellshock("frag_grenade_mp", 0.5);

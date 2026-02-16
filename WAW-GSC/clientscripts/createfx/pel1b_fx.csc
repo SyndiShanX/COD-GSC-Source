@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\pel1b_fx.csc
+***********************************************/
+
 main() {
-  // CreateFX entities placed: 247
   ent = clientscripts\_fx::createOneshotEffect("smoke_rolling_thick");
   ent.v["origin"] = (51996, 3369.19, -3.40324);
   ent.v["angles"] = (270, 0, 0);

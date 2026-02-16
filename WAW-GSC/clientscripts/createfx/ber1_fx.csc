@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\ber1_fx.csc
+**********************************************/
+
 main() {
-  // CreateFX entities placed: 415
   ent = clientscripts\_fx::createOneshotEffect("bldg_fire_medium");
   ent.v["origin"] = (533.229, -341.188, -90.875);
   ent.v["angles"] = (270, 10.5573, 173.443);

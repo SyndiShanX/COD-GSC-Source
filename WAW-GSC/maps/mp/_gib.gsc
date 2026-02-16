@@ -1,9 +1,14 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_gib.gsc
+**************************************/
+
 #include common_scripts\utility;
 #include maps\mp\gametypes\_missions;
 
 precache_gib_fx() {
   level.lastGibTime = 0;
-  level.gibDelay = 3 * 1000; // 3 seconds
+  level.gibDelay = 3 * 1000;
   level.minGibs = 2;
   level.maxGibs = 4;
   level.totalGibs = RandomIntRange(level.minGibs, level.maxGibs);
@@ -12,28 +17,31 @@ precache_gib_fx() {
 }
 
 do_gib(iDamage, sMeansOfDeath, weapon) {
-  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon))
+  if(do_explosive_gib(iDamage, sMeansOfDeath, weapon) || do_bullet_gib(iDamage, sMeansOfDeath, weapon)) {
     return true;
+  }
 
   return false;
 }
 
 do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
-  if(weapon == "m8_white_smoke_mp")
+  if(weapon == "m8_white_smoke_mp") {
     return false;
+  }
 
-  if(weapon == "tabun_gas_mp")
+  if(weapon == "tabun_gas_mp") {
     return false;
+  }
 
-  if(weapon == "signal_flare_mp")
+  if(weapon == "signal_flare_mp") {
     return false;
+  }
 
-  if(weapon == "molotov_mp")
+  if(weapon == "molotov_mp") {
     return false;
+  }
 
   if(sMeansOfDeath == "MOD_EXPLOSIVE" || sMeansOfDeath == "MOD_GRENADE" || sMeansOfDeath == "MOD_GRENADE_SPLASH" || sMeansOfDeath == "MOD_PROJECTILE" || sMeansOfDeath == "MOD_PROJECTILE_SPLASH" || sMeansOfDeath == "MOD_SUICIDE") {
-    // do the gibs only if the damage was enough to kill the player in one hit
-    // even if the were already damaged
     if(iDamage >= self.maxhealth) {
       return true;
     }
@@ -43,25 +51,28 @@ do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
 }
 
 is_weapon_shotgun(sWeapon) {
-  if(WeaponClass(sWeapon) == "spread")
+  if(WeaponClass(sWeapon) == "spread") {
     return true;
+  }
 
   return false;
 }
 
 do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
-  if(!isDefined(vAttackerOrigin))
+  if(!isDefined(vAttackerOrigin)) {
     return false;
+  }
 
-  if(!isDefined(sHitLoc))
+  if(!isDefined(sHitLoc)) {
     return false;
+  }
 
-  if(sMeansOfDeath == "MOD_MELEE")
+  if(sMeansOfDeath == "MOD_MELEE") {
     return false;
+  }
 
   shotty_gib = is_weapon_shotgun(sWeapon);
 
-  // shotgun damage is less than 50
   if(iDamage < 35 && !shotty_gib) {
     return false;
   }
@@ -70,8 +81,7 @@ do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
   maxDist = 300;
   gib_chance = 50;
 
-  if(shotty_gib) // shotgun
-  {
+  if(shotty_gib) {
     if(distSquared < 110 * 110) {
       gib_chance = 100;
     } else if(distSquared < 200 * 200) {
@@ -89,8 +99,7 @@ do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
     }
   } else if(isSubStr(sWeapon, "gunner")) {
     maxDist = 3000;
-  } else if(issubstr(sWeapon, "mg42") || issubstr(sWeapon, "30cal")) // heavy weapons
-  {
+  } else if(issubstr(sWeapon, "mg42") || issubstr(sWeapon, "30cal")) {
     gib_chance = 30;
     maxDist = 2000;
   } else if(issubstr(sWeapon, "ptrs41_")) {
@@ -107,7 +116,6 @@ do_bullet_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin) {
 }
 
 get_explosion_gib_ref(direction) {
-  // Dvars for testing bigs.
   if(GetDvarInt("gib_delay") > 0) {
     level.gibDelay = GetDvarInt("gib_delay");
   }
@@ -117,17 +125,9 @@ get_explosion_gib_ref(direction) {
     return;
   }
 
-  // If already set, then use it. Useful for canned gib deaths.
-  //	if( isDefined( self.gib_ref ) )
-  //	{
-  //		return;
-  //	}
-
   if(GetTime() > level.lastGibTime + level.gibDelay && level.totalGibs > 0) {
     level.totalGibs--;
 
-    // MikeD( 5/5/2008 ): Allows multiple guys to GIB at once.
-    //		level.lastGibTime = GetTime();
     level thread set_last_gib_time();
 
     refs = [];
@@ -167,7 +167,8 @@ get_explosion_gib_ref(direction) {
         gib_ref = get_random(refs);
         break;
 
-      default: // "up"refs[refs.size] = "right_arm";
+      default:
+        refs[refs.size] = "right_arm";
         refs[refs.size] = "left_arm";
         refs[refs.size] = "right_leg";
         refs[refs.size] = "left_leg";
@@ -187,24 +188,21 @@ get_explosion_gib_ref(direction) {
 get_gib_ref_by_direction(damageyaw) {
   gib_debug_print("gibs: damageyaw " + damageyaw);
 
-  // one in five chance of doing the upwards gib
   if(randomint(5) == 0 || damageyaw == 0) {
     gib_debug_print("gibs: gib_ref UP");
     get_explosion_gib_ref("up");
-  } else
-  if((damageyaw > 135) || (damageyaw <= -135)) // Front quadrant
-  {
-    gib_debug_print("gibs: gib_ref FORWARD");
+  } else {
+    if((damageyaw > 135) || (damageyaw <= -135)) {
+      gib_debug_print("gibs: gib_ref FORWARD");
+    }
     get_explosion_gib_ref("forward");
-  } else if((damageyaw > 45) && (damageyaw <= 135)) // Right quadrant
-  {
+  } else if((damageyaw > 45) && (damageyaw <= 135)) {
     gib_debug_print("gibs: gib_ref RIGHT");
     get_explosion_gib_ref("right");
-  } else if((damageyaw > -45) && (damageyaw <= 45)) // Back quadrant
-  {
+  } else if((damageyaw > -45) && (damageyaw <= 45)) {
     gib_debug_print("gibs: gib_ref BACK");
     get_explosion_gib_ref("back");
-  } else { // Left quadrant
+  } else {
     gib_debug_print("gibs: gib_ref LEFT");
     get_explosion_gib_ref("left");
   }
@@ -217,11 +215,6 @@ gib_debug_print(text) {
 }
 
 gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin) {
-  //	if( !is_mature() )
-  //	{
-  //		return;
-  //	}
-
   if(do_explosive_gib(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vAttackerOrigin)) {
     if(isDefined(vDamageDir)) {
       gib_debug_print("gibs: angles " + self.angles[1]);
@@ -262,8 +255,6 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
   pos1 = [];
   pos2 = [];
   velocities = [];
-
-  //	level thread draw_line( self GetTagOrigin( limb_data["spawn_tags"] ), self GetTagOrigin( limb_data["spawn_tags"] ) + velocity );
 
   if(flamethrowerTank) {
     self maps\mp\gametypes\_teams::attachFlamethrowerTank();
@@ -306,14 +297,13 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
   self playSound("death_gibs");
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
 
-  // Set the upperbody model
   self setModel(limb_data["body_model"]);
 
-  // Attach the legs
   self Attach(limb_data["legs_model"]);
 
-  if(gib_ref == "no_legs")
+  if(gib_ref == "no_legs") {
     return true;
+  }
 
   return false;
 }
@@ -321,7 +311,6 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
 get_limb_data(gib_ref) {
   temp_array = [];
 
-  // Slightly faster, store the isdefined stuff before checking, which will be less code-calls.
   torsoDmg1_defined = isDefined(self.torsoDmg1);
   torsoDmg2_defined = isDefined(self.torsoDmg2);
   torsoDmg3_defined = isDefined(self.torsoDmg3);
@@ -343,8 +332,6 @@ get_limb_data(gib_ref) {
   gibSpawnTag3_defined = isDefined(self.gibSpawnTag3);
   gibSpawnTag4_defined = isDefined(self.gibSpawnTag4);
   gibSpawnTag5_defined = isDefined(self.gibSpawnTag5);
-
-  // Right arm is getting blown off! /////////////////////////////////////////////////////	
   if(torsoDmg2_defined && legDmg1_defined && gibSpawn1_defined && gibSpawnTag1_defined) {
     temp_array["right_arm"]["body_model"] = self.torsoDmg2;
     temp_array["right_arm"]["legs_model"] = self.legDmg1;
@@ -353,8 +340,6 @@ get_limb_data(gib_ref) {
     temp_array["right_arm"]["spawn_tags"][0] = self.gibSpawnTag1;
     temp_array["right_arm"]["fx"] = "animscript_gib_fx";
   }
-
-  // Left arm is getting blown off! //////////////////////////////////////////////////////	
   if(torsoDmg3_defined && legDmg1_defined && gibSpawn2_defined && gibSpawnTag2_defined) {
     temp_array["left_arm"]["body_model"] = self.torsoDmg3;
     temp_array["left_arm"]["legs_model"] = self.legDmg1;
@@ -363,8 +348,6 @@ get_limb_data(gib_ref) {
     temp_array["left_arm"]["spawn_tags"][0] = self.gibSpawnTag2;
     temp_array["left_arm"]["fx"] = "animscript_gib_fx";
   }
-
-  // Right leg is getting blown off! ////////////////////////////////////////////////////
   if(torsoDmg1_defined && legDmg2_defined && gibSpawn3_defined && gibSpawnTag3_defined) {
     temp_array["right_leg"]["body_model"] = self.torsoDmg1;
     temp_array["right_leg"]["legs_model"] = self.legDmg2;
@@ -374,7 +357,6 @@ get_limb_data(gib_ref) {
     temp_array["right_leg"]["fx"] = "animscript_gib_fx";
   }
 
-  // Left leg is getting blown off! /////////////////////////////////////////////////////
   if(torsoDmg1_defined && legDmg3_defined && gibSpawn4_defined && gibSpawnTag4_defined) {
     temp_array["left_leg"]["body_model"] = self.torsoDmg1;
     temp_array["left_leg"]["legs_model"] = self.legDmg3;
@@ -383,8 +365,6 @@ get_limb_data(gib_ref) {
     temp_array["left_leg"]["spawn_tags"][0] = self.gibSpawnTag4;
     temp_array["left_leg"]["fx"] = "animscript_gib_fx";
   }
-
-  // No legs! ///////////////////////////////////////////////////////////////////////////
   if(torsoDmg1_defined && legDmg4_defined && gibSpawn4_defined && gibSpawn3_defined && gibSpawnTag3_defined && gibSpawnTag4_defined) {
     temp_array["no_legs"]["body_model"] = self.torsoDmg1;
     temp_array["no_legs"]["legs_model"] = self.legDmg4;
@@ -395,19 +375,14 @@ get_limb_data(gib_ref) {
     temp_array["no_legs"]["spawn_tags"][1] = self.gibSpawnTag3;
     temp_array["no_legs"]["fx"] = "animscript_gib_fx";
   }
-
-  // Guts! //////////////////////////////////////////////////////////////////////////////
   if(torsoDmg4_defined && legDmg1_defined) {
     temp_array["guts"]["body_model"] = self.torsoDmg4;
     temp_array["guts"]["legs_model"] = self.legDmg1;
 
     temp_array["guts"]["spawn_models"][0] = "";
-    //	temp_array["guts"]["spawn_tags"][0]			 = "J_SpineLower";
     temp_array["guts"]["spawn_tags"][0] = "";
     temp_array["guts"]["fx"] = "animscript_gib_fx";
   }
-
-  // Head! //////////////////////////////////////////////////////////////////////////////
   if(torsoDmg5_defined && legDmg1_defined) {
     temp_array["head"]["body_model"] = self.torsoDmg5;
     temp_array["head"]["legs_model"] = self.legDmg1;
@@ -429,8 +404,7 @@ get_limb_data(gib_ref) {
 }
 
 throw_gib(spawn_models, spawn_tags, velocities) {
-  if(velocities.size < 1) // For guts
-  {
+  if(velocities.size < 1) {
     return;
   }
 
@@ -438,16 +412,6 @@ throw_gib(spawn_models, spawn_tags, velocities) {
     origin = self GetTagOrigin(spawn_tags[i]);
     angles = self GetTagAngles(spawn_tags[i]);
     CreateDynEntAndLaunch(spawn_models[i], origin, angles, origin, velocities[i], level._effect["animscript_gibtrail_fx"]);
-    //		gib = spawn( "script_model", self GetTagOrigin( spawn_tags[i] ) );
-    //		gib.angles = self GetTagAngles( spawn_tags[i] );
-    //		gib setModel( spawn_models[i] );
-    //
-    //		// Play trail fX
-    //		playFXOnTag( level._effect["animscript_gibtrail_fx"], gib, "tag_fx" );
-    //
-    //		gib PhysicsLaunch( self.origin, velocities[i] );
-    //	
-    //		gib thread gib_delete();
   }
 }
 
@@ -514,7 +478,6 @@ get_bullet_gib_ref(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDir) {
     self.gib_ref = get_random(refs);
 
     println("GIBS:" + sHitLoc + " " + self.gib_ref);
-
   }
 
   range = 600;

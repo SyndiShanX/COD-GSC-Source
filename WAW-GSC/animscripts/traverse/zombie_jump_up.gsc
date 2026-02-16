@@ -1,4 +1,7 @@
-//zombie wall hop anim
+/***************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\zombie_jump_up.gsc
+***************************************************/
 
 #include animscripts\traverse\shared;
 #include maps\_utility;
@@ -13,19 +16,6 @@ main() {
 #using_animtree("generic_human");
 
 zombie_jump_up() {
-  /*anims = undefined;
-	
-  if( self.has_legs )
-  {
-  	anims = %ai_zombie_jump_up;
-  }
-
-  if(isDefined(anims))
-  {
-  	self advancedTraverse(anims, 39.875);
-  }*/
-
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -33,7 +23,6 @@ zombie_jump_up() {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

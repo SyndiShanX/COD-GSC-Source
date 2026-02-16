@@ -92,7 +92,7 @@ door_think() {
       return;
     }
 
-    if(!who UseButtonPressed()) {
+    if(!who useButtonPressed()) {
       continue;
     }
 
@@ -232,7 +232,7 @@ debris_think() {
   while(1) {
     self waittill("trigger", who);
 
-    if(!who UseButtonPressed()) {
+    if(!who useButtonPressed()) {
       continue;
     }
 
@@ -467,7 +467,7 @@ blocker_trigger_think() {
         break;
       }
 
-      if(!player UseButtonPressed()) {
+      if(!player useButtonPressed()) {
         break;
       }
 

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createfx\nazi_zombie_factory_fx.gsc
+****************************************************/
+
 main() {
-  // CreateFX entities placed: 249
   ent = maps\_utility::createOneshotEffect("mp_ash_and_embers");
   ent.v["origin"] = (-1065.55, -1814.49, 283);
   ent.v["angles"] = (272, 90, -90);

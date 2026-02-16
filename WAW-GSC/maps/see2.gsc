@@ -1556,7 +1556,7 @@ check_damaged_by_player(guy) {
 wait_for_player_shoot_event(inform) {
   level endon(inform);
   while(1) {
-    if(self AttackButtonPressed()) {
+    if(self attackButtonPressed()) {
       break;
     }
     wait(0.05);
@@ -1590,7 +1590,7 @@ check_close_to_stuck_inf(inform, dist) {
 }
 inform_on_ft_button(inform) {
   while(1) {
-    if(self FragButtonPressed()) {
+    if(self fragButtonPressed()) {
       level notify(inform);
       return;
     }
@@ -1599,7 +1599,7 @@ inform_on_ft_button(inform) {
 }
 inform_on_ads_button(inform) {
   while(1) {
-    if(self AdsButtonPressed()) {
+    if(self adsButtonPressed()) {
       level notify(inform);
       return;
     }

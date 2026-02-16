@@ -1,3 +1,8 @@
+/***************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_music.csc
+***************************************/
+
 music_init() {
   level.activeMusicState = "";
   level.nextMusicState = "";
@@ -19,21 +24,18 @@ music_init() {
   declareMusicState("SILENT");
 }
 
-realWait(seconds) //wait is time based off off 1/60 * number of frames not real time.
-{
+realWait(seconds) {
   start = GetRealTime();
 
-  //println("realWait "+seconds*1000);
   while(GetRealTime() - start < seconds * 1000) {
-    //println("waited "+(GetRealTime() - start));
     wait(.01);
   }
-  //println("real wait done");
 }
 
 musicCmdHandler(clientNum, state, oldState) {
-  if(clientNum != 0)
+  if(clientNum != 0) {
     return;
+  }
 
   level.nextMusicState = state;
 
@@ -44,26 +46,30 @@ musicCmdHandler(clientNum, state, oldState) {
 
 updateMusic() {
   while(1) {
-    if(level.activeMusicState == level.nextMusicState) //state didn't change during transition
+    if(level.activeMusicState == level.nextMusicState) {
       level waittill("new_music");
+    }
 
-    if(level.activeMusicState == level.nextMusicState) //got same one twice, ignore
+    if(level.activeMusicState == level.nextMusicState) {
       continue;
+    }
 
     active = level.activeMusicState;
     next = level.nextMusicState;
 
     if(next != "" && !isDefined(level.musicStates[next])) {
       assertmsg("unknown music state '" + next + "'");
-      level.nextMusicState = level.activeMusicState; //keep current if we dont know what we just got
+      level.nextMusicState = level.activeMusicState;
       continue;
     }
 
-    if(active != "")
+    if(active != "") {
       transitionOut(active, next);
+    }
 
-    if(next != "")
+    if(next != "") {
       transitionIn(active, next);
+    }
 
     level.activeMusicState = next;
   }
@@ -71,14 +77,14 @@ updateMusic() {
 
 fadeOutAndStopSound(id, time) {
   rate = 0;
-  if(time != 0)
+  if(time != 0) {
     rate = 1.0 / time;
+  }
 
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
 
   while(getSoundVolume(id) > .0001) {
-    //println("MUSIC: current volume "+getSoundVolume(id));
     wait(.1);
   }
 
@@ -86,15 +92,14 @@ fadeOutAndStopSound(id, time) {
 }
 
 transitionOut(previous, next) {
-  if(previous == "")
+  if(previous == "") {
     return;
+  }
 
   if(!isDefined(level.musicStates[previous])) {
     assertmsg("unknown music state '" + previous + "'");
     return;
   }
-
-  //println("MUSIC: transitioning out of "+previous);
 
   ent = level.musicStates[previous].aliasEnt;
   loopalias = level.musicStates[previous].loopalias;
@@ -106,8 +111,6 @@ transitionOut(previous, next) {
   id = level.musicStates[previous].id;
   startDelay = level.musicStates[previous].startDelay;
   forceStinger = level.musicStates[previous].forceStinger;
-
-  //level.musicStates["a"].blah;
 
   if(next == "") {
     nextloopalias = "";
@@ -122,50 +125,42 @@ transitionOut(previous, next) {
   loopMatches = loopalias == nextloopalias;
   haveOneShot = nextoneshotalias != "";
 
-  if(stinger != "" && (!loopMatches || haveOneShot || forceStinger)) //stinger only plays if loop changes
-  {
+  if(stinger != "" && (!loopMatches || haveOneShot || forceStinger)) {
     stingerid = playSound(0, stinger, (0, 0, 0));
-
   }
 
   if(loopalias != "") {
-    if(loopalias != nextloopalias || nextoneshotalias != "") //dont stop if its the same sound
-    {
-      //println("stopping loop "+loopalias);
-
+    if(loopalias != nextloopalias || nextoneshotalias != "") {
       stopLoopSound(0, ent, fadeout);
 
       if(waittilldone) {
-        //println("*** waiting on music to finish "+loopalias);
         wait(fadeout);
       }
     } else {
-      //println("not stopping loop "+loopalias+" "+nextloopalias+" "+nextoneshotalias);
     }
   } else {
     if(waittilldone) {
       while(SoundPlaying(id)) {
-        //println("*** waiting on music to finish");
         wait(.1);
       }
-      //println("*** done waiting on music to finish "+id);
     } else {
-      //println("MUSIC: fade out and stop");
       thread fadeOutAndStopSound(id, fadeout);
     }
   }
 
-  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
+  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000) {
     wait(.01);
-
-  if(waittillstingerdone) {
-    //println("*** waiting on stinger to finish");
-    while(SoundPlaying(stingerid))
-      wait(.1);
   }
 
-  if(loopalias != nextloopalias)
+  if(waittillstingerdone) {
+    while(SoundPlaying(stingerid)) {
+      wait(.1);
+    }
+  }
+
+  if(loopalias != nextloopalias) {
     level.musicStates[previous].id = -1;
+  }
 }
 
 transitionIn(previous, next) {
@@ -174,8 +169,6 @@ transitionIn(previous, next) {
   oneshotalias = level.musicStates[next].oneshotalias;
   fadein = level.musicStates[next].fadein;
   loop = level.musicStates[next].loop;
-
-  //println("MUSIC: transitioning in to "+next);
 
   if(previous == "") {
     oldloopalias = "";
@@ -191,37 +184,33 @@ transitionIn(previous, next) {
 
   if(oneshotalias != "") {
     level.musicStates[next].id = playSound(0, oneshotalias, (0, 0, 0));
-    if(loopalias != "") //if both are specified play this one
+    if(loopalias != "") {
       while(SoundPlaying(level.musicStates[next].id)) {
         if(level.nextMusicState != next) {
-          //println("MUSIC: bailing transition due to early state change");
-          thread fadeOutAndStopSound(level.musicStates[next].id, level.musicStates[next].fadeout); //hack
-          return;
+          {}
         }
-        wait(.1);
+        thread fadeOutAndStopSound(level.musicStates[next].id, level.musicStates[next].fadeout);
+        return;
       }
-    //println("done with one shot");
+      wait(.1);
+    }
   }
 
-
-  //println("loop state "+oldloopalias+" "+loopalias+" "+oneshotalias+" "+oldid);
   if(oldloopalias == loopalias && oldid != -1 && oneshotalias == "") {
-    //println("using old loop");
     level.musicStates[next].id = level.musicStates[previous].id;
     level.musicStates[previous].id = -1;
     oldent = level.musicStates[previous].aliasEnt;
     level.musicStates[previous].aliasEnt = level.musicStates[next].aliasEnt;
     level.musicStates[next].aliasEnt = oldent;
   } else if(loopalias != "") {
-    //println("starting loop");
     level.musicStates[next].id = playLoopSound(0, ent, loopalias, fadein);
   }
-
 }
 
 declareMusicState(name) {
-  if(isDefined(level.musicStates[name]))
+  if(isDefined(level.musicStates[name])) {
     return;
+  }
 
   level.musicDeclareName = name;
   level.musicStates[name] = spawnStruct();
@@ -257,8 +246,9 @@ musicWaitTillStingerDone() {
 musicStinger(stinger, delay, force) {
   assert(isDefined(level.musicDeclareName));
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0;
+  }
 
   name = level.musicDeclareName;
 
@@ -275,10 +265,11 @@ _musicAlias(alias, fadein, fadeout, loop) {
 
   name = level.musicDeclareName;
 
-  if(loop)
+  if(loop) {
     level.musicStates[name].loopalias = alias;
-  else
+  } else {
     level.musicStates[name].oneshotalias = alias;
+  }
 
   level.musicStates[name].fadein = fadein;
   level.musicStates[name].fadeout = fadeout;
@@ -288,7 +279,6 @@ musicAliasLoop(alias, fadein, fadeout) {
   _musicAlias(alias, fadein, fadeout, true);
 }
 
-musicAlias(alias, fadeout) //for non looping aliases
-{
+musicAlias(alias, fadeout) {
   _musicAlias(alias, 0, fadeout, false);
 }

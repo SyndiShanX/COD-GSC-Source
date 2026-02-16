@@ -130,9 +130,7 @@ main() {
   level._effect["flak_field"] = loadfx("weapon/flak/fx_flak_field_8k");
 }
 
-footsteps()
-
-{
+footsteps() {
   animscripts\utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("carpet", LoadFx("bio/player/fx_footstep_dust"));

@@ -1,11 +1,14 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\mg42\prone.gsc
+**************************************/
+
 #using_animtree("generic_human");
 
 main() {
-  // do not do code prone in this script
   self.desired_anim_pose = "prone";
   animscripts\utility::UpdateAnimPose();
 
-  // It'd be nice if I had an animation to get to stand without moving...
   self.a.movement = "stop";
 
   turret = self getTurret();
@@ -17,8 +20,6 @@ main() {
 
   thread animscripts\saw\common::main(turret);
 }
-
-//=====================================
 #using_animtree("mg42");
 
 turretInit(owner) {
@@ -28,7 +29,7 @@ turretInit(owner) {
   self.additiveTurretFire = % saw_gunner_prone_firing_mg;
 
   self endon("death");
-  owner waittill("killanimscript"); // code
+  owner waittill("killanimscript");
 
   self stopUseAnimTree();
 }

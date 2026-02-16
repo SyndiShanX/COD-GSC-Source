@@ -1,3 +1,8 @@
+/************************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\traverse\through_hole_42.gsc
+************************************************************/
+
 #include maps\mp\animscripts\traverse\shared;
 #include maps\mp\animscripts\utility;
 
@@ -6,7 +11,6 @@ main() {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

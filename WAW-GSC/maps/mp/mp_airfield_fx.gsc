@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_airfield_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -8,12 +13,13 @@ main() {
 
 precacheFX() {
   level._effect["mortar_point"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
-  level._effectType["mortar_point"] = "mortar"; // "mortar", "bomb" or "artillery"level._effect["mortar_sw_hills"] = loadfx("maps/ber1/fx_exp_katyusha_barrage_far");
+  level._effectType["mortar_point"] = "mortar";
+
+  level._effect["mortar_sw_hills"] = loadfx("maps/ber1/fx_exp_katyusha_barrage_far");
   level._effectType["mortar_sw_hills"] = "artillery";
 
   level._effect["mortar_east_hill"] = loadfx("maps/see1/fx_explosion_tank_shell_med");
   level._effectType["mortar_east_hill"] = "bomb";
-
 
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");
@@ -39,8 +45,6 @@ precacheFX() {
   level._effect["mp_water_splash_small"] = loadfx("maps/mp_maps/fx_mp_water_splash_small");
   level._effect["mp_water_wake_flow"] = loadfx("maps/mp_maps/fx_mp_water_wake_flow");
   level._effect["mp_falling_leaves"] = loadfx("maps/mp_maps/fx_mp_falling_leaves_elm");
-
-
 }
 
 spawnFX() {

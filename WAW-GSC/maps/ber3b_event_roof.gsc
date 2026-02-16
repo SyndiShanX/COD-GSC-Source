@@ -300,7 +300,7 @@ flagraise_trigger_wait() {
       flagbearer.outro_hud.alpha = 1;
 
       while(flagbearer IsTouching(usetrig)) {
-        if(flagbearer UseButtonPressed()) {
+        if(flagbearer useButtonPressed()) {
           triggerUsed = true;
           break;
         } else {

@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createart\mp_seelow_art.gsc
+***********************************************/
+
 main() {
   level.tweakfile = true;
-
-  // *Fog section*
 
   setDvar("scr_fog_exp_halfplane", "1028");
   setDvar("scr_fog_exp_halfheight", "1360");
@@ -11,7 +13,6 @@ main() {
   setDvar("scr_fog_green", "0.445");
   setDvar("scr_fog_blue", "0.5859");
   setDvar("scr_fog_baseheight", "-448");
-
 
   setDvar("visionstore_glowTweakEnable", "1");
   setDvar("visionstore_glowTweakRadius0", "1.25");
@@ -31,8 +32,4 @@ main() {
   setDvar("visionstore_filmDarkTint", "0.44 0.15 0.24");
 
   setVolFog(0, 4000, 1400, -450, 0.72, 0.76, 0.96, 0);
-  //	SetCullDist( 7000 );
-  //	VisionSetNaked( "mp_seelow", 0 );
 }
-
-// setVolFog(<startDist>, <halfwayDist>, <halfwayHeight>, <baseHeight>, <red>, <green>, <blue>, <transition time>)

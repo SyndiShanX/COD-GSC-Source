@@ -1,12 +1,10 @@
-//
-// file: mp_stalingrad_fx.csc
-// description: clientside fx script for mp_stalingrad: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_stalingrad_fx.csc
+*************************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
 precache_util_fx() {}
 
 precache_scripted_fx() {}

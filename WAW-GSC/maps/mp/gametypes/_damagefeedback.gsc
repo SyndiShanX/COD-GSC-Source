@@ -1,3 +1,8 @@
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_damagefeedback.gsc
+*************************************************/
+
 init() {
   precacheShader("damage_feedback");
   precacheShader("damage_feedback_j");
@@ -21,12 +26,13 @@ onPlayerConnect() {
 }
 
 updateDamageFeedback(hitBodyArmor, mod) {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return;
+  }
 
   if(hitBodyArmor) {
     self.hud_damagefeedback setShader("damage_feedback_j", 24, 48);
-    self playlocalsound("MP_hit_alert"); // TODO: change sound?
+    self playlocalsound("MP_hit_alert");
   } else {
     self.hud_damagefeedback setShader("damage_feedback", 24, 48);
     if(isDefined(mod) && mod != "MOD_CRUSH") {

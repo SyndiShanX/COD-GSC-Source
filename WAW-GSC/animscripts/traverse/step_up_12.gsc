@@ -1,11 +1,11 @@
-// step_up.gsc
-// Makes the character step up onto a ledge.Currently the ledge is assumed to be 36 units.
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\step_up_12.gsc
+***********************************************/
 
 #using_animtree("generic_human");
 
 main() {
-  // do not do code prone in this script
-
   self endon("killanimscript");
 
   startnode = self getnegotiationstartnode();
@@ -17,7 +17,7 @@ main() {
 
   reps = 6;
   offset = (0, 0, destination / reps);
-  self traverseMode("noclip"); // So he doesn't get stuck if the wall is a little too high
+  self traverseMode("noclip");
   for(i = 0; i < reps; i++) {
     self teleport(self.origin + offset);
     wait(0.05);

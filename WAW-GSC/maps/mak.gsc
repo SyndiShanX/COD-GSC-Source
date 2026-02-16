@@ -6145,7 +6145,7 @@ plant_charge_bar(trigger) {
 plant_charge_bar_thread(other) {
   self endon("stop_charge_bar_thread");
 
-  while(isDefined(other) && other UseButtonPressed() && DistanceSquared(other.origin, self.origin) < 512 * 512) {
+  while(isDefined(other) && other useButtonPressed() && DistanceSquared(other.origin, self.origin) < 512 * 512) {
     other thread plant_charge_trigger_hint(self);
     other thread plant_charge_ticker_sound(self);
     wait(0.05);

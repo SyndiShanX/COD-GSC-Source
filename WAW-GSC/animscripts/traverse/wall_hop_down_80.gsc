@@ -1,5 +1,7 @@
-// wall_hop_down_80.gsc
-// Makes the character climb a 40 unit fence and drop down 80+ units
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\wall_hop_down_80.gsc
+*****************************************************/
 
 #include animscripts\traverse\shared;
 

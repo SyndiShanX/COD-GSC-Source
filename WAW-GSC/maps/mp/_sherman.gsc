@@ -1,5 +1,7 @@
-// _sherman.gsc
-// Sets up the behavior for the Sherman Tank and variants.
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_sherman.gsc
+**************************************/
 
 #include maps\mp\_vehicles;
 

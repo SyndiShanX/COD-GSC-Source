@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/***************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createart\ber2_art.gsc
+***************************************/
+
 main() {
   level.tweakfile = true;
-
-  // *Fog section*
 
   setDvar("scr_fog_exp_halfplane", "750");
   setDvar("scr_fog_exp_halfheight", "400");
@@ -11,21 +13,6 @@ main() {
   setDvar("scr_fog_green", "0.52");
   setDvar("scr_fog_blue", "0.50");
   setDvar("scr_fog_baseheight", "-128");
-
-  //	// *depth of field section*
-  //	level.do_not_use_dof = true;
-  //	level.Dofdefault["Nearstart"] = 0;
-  //	level.Dofdefault["Nearend"] = 60;
-  //	level.Dofdefault["Farstart"] = 2000;
-  //	level.Dofdefault["Farend"] = 10000;
-  //	level.Dofdefault["Nearblur"] = 6;
-  //	level.Dofdefault["Farblur"] = 2;
-  //	
-  //	players = maps\_utility::get_players();
-  //	for( i = 0; i < players.size; i++ )
-  //	{
-  //		players[i] maps\_art::setdefaultdepthoffield();
-  //	}
 
   setDvar("visionstore_glowTweakEnable", "1");
   setDvar("visionstore_glowTweakRadius0", "3");
@@ -37,7 +24,6 @@ main() {
   setDvar("visionstore_glowTweakSkyBleedIntensity0", "0.29");
   setDvar("visionstore_glowTweakSkyBleedIntensity1", "0.29");
 
-  //* Fog section *
   level thread fog_settings();
   level thread maps\_utility::set_all_players_visionset("ber2_interior", 0.1);
 }

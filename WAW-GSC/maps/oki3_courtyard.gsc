@@ -634,8 +634,7 @@ courtyard_dialog_think() {
   }
 }
 
-banzai_wave_spawner_think(location, ender) //location,ender,wave_min,wave_max,time_min,time_max)
-{
+banzai_wave_spawner_think(location, ender) {
   level endon(ender);
 
   org1 = [];
@@ -2210,9 +2209,9 @@ airstrike_radio_dialogue() {
         level.last_hero thread do_dialogue("hit");
         break;
 
-      case "courtyard_ne": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_ne_spline");break;
-      case "courtyard_se": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_se_spline");break;
-      case "courtyard_nw": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_nw_spline");break;
+      case "courtyard_ne":
+      case "courtyard_se":
+      case "courtyard_nw":
       case "courtyard_sw":
         wait(15);
         level.last_hero thread do_dialogue("miss");

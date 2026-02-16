@@ -128,8 +128,7 @@ _nextmission() {
       players[i] giveachievement_wrapper("ANY_ACHIEVEMENT_FTONLY", false);
     }
 
-    if(get_level_completed(level_index) > 1) //normal or greater
-    {
+    if(get_level_completed(level_index) > 1) {
       if(!coopGame() && !IsSplitscreen()) {
         weaps = [];
         weaps[0] = "none";

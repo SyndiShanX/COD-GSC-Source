@@ -60,28 +60,28 @@ rocket_barrage_watcher() {
       self SwitchToWeapon(self.laststandpistol);
     } else {
       if(!self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
-        if(self getcurrentweapon() == "air_support" && !self.rocket_targeting_on) //&& isDefined(self.first_with_radio) ) {
-        {}
-        self thread rocket_barrage_targeting();
-        self.rocket_targeting_on = true;
-      } else if(self getcurrentweapon() != "air_support" && self.rocket_targeting_on) {
-        self.Rocket_Targeting_On = false;
-        self notify("end rocket barrage targeting");
-        delete_spotting_target();
-      } else if(self getcurrentweapon() != "air_support") {
-        self.Rocket_Targeting_On = false;
-        self notify("end rocket barrage targeting");
-        delete_spotting_target();
-      }
-    } else if(self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
-      if(self getcurrentweapon() == "air_support") {
-        self notify("activate pressed during barage");
-        wait 0.1;
+        if(self getcurrentweapon() == "air_support" && !self.rocket_targeting_on) {
+          {}
+          self thread rocket_barrage_targeting();
+          self.rocket_targeting_on = true;
+        } else if(self getcurrentweapon() != "air_support" && self.rocket_targeting_on) {
+          self.Rocket_Targeting_On = false;
+          self notify("end rocket barrage targeting");
+          delete_spotting_target();
+        } else if(self getcurrentweapon() != "air_support") {
+          self.Rocket_Targeting_On = false;
+          self notify("end rocket barrage targeting");
+          delete_spotting_target();
+        }
+      } else if(self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
+        if(self getcurrentweapon() == "air_support") {
+          self notify("activate pressed during barage");
+          wait 0.1;
+        }
       }
     }
+    wait_network_frame();
   }
-  wait_network_frame();
-}
 }
 rocket_barrage_targeting() {
   self endon("end rocket barrage targeting");
@@ -150,7 +150,7 @@ air_support_watch(fire_point) {
   self endon("death");
   self endon("disconnect");
 
-  if(self attackbuttonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok) {
+  if(self attackButtonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok) {
     if(is_valid_airstrike_target(get_firepoint_target(fire_point))) {
       self thread air_support_switch_back();
       self.is_firing_rocket_barrage = true;
@@ -163,9 +163,9 @@ air_support_watch(fire_point) {
       delete_spotting_target();
       self thread air_support_switch_back();
     }
-  } else if(self attackbuttonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrages_remaining <= 0) {
+  } else if(self attackButtonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrages_remaining <= 0) {
     self thread air_support_switch_back();
-  } else if(self attackbuttonPressed() && !self.is_firing_rocket_barrage && !self.rocket_barrage_ok) {
+  } else if(self attackButtonPressed() && !self.is_firing_rocket_barrage && !self.rocket_barrage_ok) {
     self notify("end rocket barrage targeting");
     level.last_hero thread do_dialogue("negative");
     delete_spotting_target();
@@ -351,9 +351,9 @@ is_valid_airstrike_target(target) {
       }
       break;
 
-    case "courtyard_ne": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_ne_spline");break;
-    case "courtyard_se": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_se_spline");break;
-    case "courtyard_nw": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_nw_spline");break;
+    case "courtyard_ne":
+    case "courtyard_se":
+    case "courtyard_nw":
     case "courtyard_sw":
       return true;
 

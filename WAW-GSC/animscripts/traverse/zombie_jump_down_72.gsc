@@ -1,3 +1,8 @@
+/********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\zombie_jump_down_72.gsc
+********************************************************/
+
 #include animscripts\utility;
 #include animscripts\traverse\shared;
 #using_animtree("generic_human");

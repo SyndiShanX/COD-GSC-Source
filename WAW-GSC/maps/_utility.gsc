@@ -924,8 +924,9 @@ magic_bullet_shield(health, time, oldhealth, maxhealth_modifier, no_death_detect
     oldHealth = self.health;
     self waittill("pain");
 
-    if(oldHealth == self.health) // the game spams pain notify every frame while a guy is in pain script
+    if(oldHealth == self.health) {
       continue;
+    }
 
     assertex(self.health > 1000, "Magic bullet shield guy got impossibly low health");
 
@@ -2002,8 +2003,7 @@ waittill_either(msg1, msg2) {
   self waittill(msg2);
 }
 
-getlinks_array(array, linkMap) // don't pass stuff through as an array of struct.linkname[] but only linkMap[]
-{
+getlinks_array(array, linkMap) {
   ents = [];
   for(j = 0; j < array.size; j++) {
     node = array[j];
@@ -2067,8 +2067,7 @@ array_combine(array1, array2) {
   return array3;
 }
 
-array_merge(array1, array2) // adds only things that are new to the array
-{
+array_merge(array1, array2) {
   if(array1.size == 0) {
     return array2;
   }
@@ -2092,8 +2091,7 @@ array_merge(array1, array2) // adds only things that are new to the array
   return newarray;
 }
 
-array_exclude(array, arrayExclude) // returns "array" minus all members of arrayExclude
-{
+array_exclude(array, arrayExclude) {
   newarray = array;
   for(i = 0; i < arrayExclude.size; i++) {
     if(is_in_array(array, arrayExclude[i])) {
@@ -4106,8 +4104,7 @@ set_default_pathenemy_settings() {
   }
 }
 
-cqb_walk(on_or_off) // ( deprecated )
-{
+cqb_walk(on_or_off) {
   if(on_or_off == "on") {
     self enable_cqbwalk();
   } else {
@@ -4353,8 +4350,7 @@ sg_csv_addtype(type, string) {
   script_gen_dump_addline("nowrite CSV entry: " + type + ", " + string, type + "_" + string);
 }
 
-array_combine_keys(array1, array2) // mashes them in. array 2 will overwrite like keys, this works for what I'm using it for - Nate.
-{
+array_combine_keys(array1, array2) {
   if(!array1.size) {
     return array2;
   }

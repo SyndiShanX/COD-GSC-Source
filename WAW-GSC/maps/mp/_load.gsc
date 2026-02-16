@@ -1,20 +1,29 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_load.gsc
+**************************************/
+
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
 main(bScriptgened, bCSVgened, bsgenabled) {
-  if(!isDefined(level.script_gen_dump_reasons))
+  if(!isDefined(level.script_gen_dump_reasons)) {
     level.script_gen_dump_reasons = [];
-  if(!isDefined(bsgenabled))
+  }
+  if(!isDefined(bsgenabled)) {
     level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "First run";
+  }
 
-  if(!isDefined(bCSVgened))
+  if(!isDefined(bCSVgened)) {
     bCSVgened = false;
+  }
   level.bCSVgened = bCSVgened;
 
-  if(!isDefined(bScriptgened))
+  if(!isDefined(bScriptgened)) {
     bScriptgened = false;
-  else
+  } else {
     bScriptgened = true;
+  }
   level.bScriptgened = bScriptgened;
 
   level._loadStarted = true;
@@ -28,12 +37,10 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     level.flags_lock = [];
   }
 
-  // time of day, used for client side night specific FX
   if(!isDefined(level.timeofday)) {
     level.timeofday = "day";
   }
 
-  // for script gen
   flag_init("scriptgen_done");
   level.script_gen_dump_reasons = [];
   if(!isDefined(level.script_gen_dump)) {
@@ -41,18 +48,22 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     level.script_gen_dump_reasons[0] = "First run";
   }
 
-  if(!isDefined(level.script_gen_dump2))
+  if(!isDefined(level.script_gen_dump2)) {
     level.script_gen_dump2 = [];
+  }
 
-  if(isDefined(level.createFXent))
-    script_gen_dump_addline("maps\\mp\\createfx\\" + level.script + "_fx::main();", level.script + "_fx"); // adds to scriptgendump
+  if(isDefined(level.createFXent)) {
+    script_gen_dump_addline("maps\\mp\\createfx\\" + level.script + "_fx::main();", level.script + "_fx");
+  }
 
-  if(isDefined(level.script_gen_dump_preload))
-    for(i = 0; i < level.script_gen_dump_preload.size; i++)
+  if(isDefined(level.script_gen_dump_preload)) {
+    for(i = 0; i < level.script_gen_dump_preload.size; i++) {
       script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
-
-  if(getDvar("scr_RequiredMapAspectratio") == "")
+    }
+  }
+  if(getDvar("scr_RequiredMapAspectratio") == "") {
     setDvar("scr_RequiredMapAspectratio", "1");
+  }
 
   level.aiTriggerSpawnFlags = getaitriggerflags();
 
@@ -79,7 +90,6 @@ main(bScriptgened, bCSVgened, bsgenabled) {
 
   array_thread(GetNodeArray("traverse", "targetname"), ::traverseThink);
 
-  //Bloodlust 20 May 2008 - Zero Scripting MP Dynamic Lights
   flicker_lights = getEntArray("flicker_light", "targetname");
   array_thread(flicker_lights, maps\mp\_lights::flicker_light);
 
@@ -94,12 +104,10 @@ main(bScriptgened, bCSVgened, bsgenabled) {
 
   thread footsteps();
 
-  // Dale - 4/20/2009 -- force MP CreateFX to get proper map center (copied from SP)
   thread maps\mp\_createfx::fx_init();
   if(level.createFX_enabled) {
-    //maps\_callbackglobal::init(); // is there an MP analog to this?
     calculate_map_center();
-    //maps\_loadout::init_loadout(); // MikeD: Just to set the level.campaign	// also, is there an MP analog to this?
+
     maps\mp\_createfx::createfx();
   }
 
@@ -112,7 +120,6 @@ main(bScriptgened, bCSVgened, bsgenabled) {
 
   thread maps\mp\_gib::precache_gib_fx();
 
-  // Do various things on triggers
   for(p = 0; p < 6; p++) {
     switch (p) {
       case 0:
@@ -144,11 +151,13 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     triggers = getEntArray(triggertype, "classname");
 
     for(i = 0; i < triggers.size; i++) {
-      if(isDefined(triggers[i].script_prefab_exploder))
+      if(isDefined(triggers[i].script_prefab_exploder)) {
         triggers[i].script_exploder = triggers[i].script_prefab_exploder;
+      }
 
-      if(isDefined(triggers[i].script_exploder))
+      if(isDefined(triggers[i].script_exploder)) {
         level thread maps\mp\_load::exploder_load(triggers[i]);
+      }
     }
   }
 
@@ -174,9 +183,6 @@ footsteps() {
   maps\mp\animscripts\utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   maps\mp\animscripts\utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
-//Bloodlust - 21 May 2008 - Client Side Scripted FX
-//Get all script_structs, setup their related FX
 parse_structs() {
   for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].targetname)) {
@@ -202,10 +208,11 @@ exploder_load(trigger) {
   level endon("killexplodertridgers" + trigger.script_exploder);
   trigger waittill("trigger");
   if(isDefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
-    if(isDefined(trigger.script_delay))
+    if(isDefined(trigger.script_delay)) {
       wait trigger.script_delay;
-    else
+    } else {
       wait 4;
+    }
     level thread exploder_load(trigger);
     return;
   }
@@ -214,29 +221,26 @@ exploder_load(trigger) {
 }
 
 setupExploders() {
-  // Hide exploder models.
   ents = getEntArray("script_brushmodel", "classname");
   smodels = getEntArray("script_model", "classname");
-  for(i = 0; i < smodels.size; i++)
+  for(i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
+  }
 
   for(i = 0; i < ents.size; i++) {
-    if(isDefined(ents[i].script_prefab_exploder))
+    if(isDefined(ents[i].script_prefab_exploder)) {
       ents[i].script_exploder = ents[i].script_prefab_exploder;
+    }
 
     if(isDefined(ents[i].script_exploder)) {
-      if((ents[i].model == "fx") && ((!isDefined(ents[i].targetname)) || (ents[i].targetname != "exploderchunk")))
+      if((ents[i].model == "fx") && ((!isDefined(ents[i].targetname)) || (ents[i].targetname != "exploderchunk"))) {
         ents[i] hide();
-      else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
+      } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] notsolid();
-        //if( isDefined( ents[ i ].script_disconnectpaths ) )
-        //ents[ i ] connectpaths();
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploderchunk")) {
         ents[i] hide();
         ents[i] notsolid();
-        //if( isDefined( ents[ i ].spawnflags ) && ( ents[ i ].spawnflags & 1 ) )
-        //ents[ i ] connectpaths();
       }
     }
   }
@@ -245,33 +249,40 @@ setupExploders() {
 
   potentialExploders = getEntArray("script_brushmodel", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
   potentialExploders = getEntArray("script_model", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
   potentialExploders = getEntArray("item_health", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
 
   acceptableTargetnames = [];
   acceptableTargetnames["exploderchunk visible"] = true;
@@ -299,34 +310,33 @@ setupExploders() {
     ent.v["target"] = exploder.target;
     ent.v["ender"] = exploder.script_ender;
     ent.v["type"] = "exploder";
-    // 		ent.v[ "worldfx" ] = true;
-    if(!isDefined(exploder.script_fxid))
+    if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    else
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
+    }
     ent.v["exploder"] = exploder.script_exploder;
     assertEx(isDefined(exploder.script_exploder), "Exploder at origin " + exploder.origin + " has no script_exploder");
 
-    if(!isDefined(ent.v["delay"]))
+    if(!isDefined(ent.v["delay"])) {
       ent.v["delay"] = 0;
+    }
 
     if(isDefined(exploder.target)) {
       org = getent(ent.v["target"], "targetname").origin;
       ent.v["angles"] = vectortoangles(org - ent.v["origin"]);
-      // 			forward = anglesToForward( angles );
-      // 			up = anglestoup( angles );
     }
 
-    // this basically determines if its a brush / model exploder or not
     if(exploder.classname == "script_brushmodel" || isDefined(exploder.model)) {
       ent.model = exploder;
       ent.model.disconnect_paths = exploder.script_disconnectpaths;
     }
 
-    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname]))
+    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    else
+    } else {
       ent.v["exploder_type"] = "normal";
+    }
 
     ent maps\mp\_createfx::post_entity_creation_function();
   }
@@ -342,23 +352,20 @@ lanterns() {
 
 script_gen_dump_checksaved() {
   signatures = getarraykeys(level.script_gen_dump);
-  for(i = 0; i < signatures.size; i++)
+  for(i = 0; i < signatures.size; i++) {
     if(!isDefined(level.script_gen_dump2[signatures[i]])) {
       level.script_gen_dump[signatures[i]] = undefined;
-      level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "Signature unmatched( removed feature ): " + signatures[i];
-
     }
+    level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "Signature unmatched( removed feature ): " + signatures[i];
+  }
 }
 
 script_gen_dump() {
-  // initialize scriptgen dump
-
-
-  script_gen_dump_checksaved(); // this checks saved against fresh, if there is no matching saved value then something has changed and the dump needs to happen again.
+  script_gen_dump_checksaved();
 
   if(!level.script_gen_dump_reasons.size) {
     flag_set("scriptgen_done");
-    return; // there's no reason to dump the file so exit
+    return;
   }
 
   firstrun = false;
@@ -371,13 +378,14 @@ script_gen_dump() {
     println("^2 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     for(i = 0; i < level.script_gen_dump_reasons.size; i++) {
       if(issubstr(level.script_gen_dump_reasons[i], "nowrite")) {
-        substr = getsubstr(level.script_gen_dump_reasons[i], 15); // I don't know why it's 15, maybe investigate - nate
+        substr = getsubstr(level.script_gen_dump_reasons[i], 15);
         println(i + ". ) " + substr);
-
-      } else
+      } else {
         println(i + ". ) " + level.script_gen_dump_reasons[i]);
-      if(level.script_gen_dump_reasons[i] == "First run")
+      }
+      if(level.script_gen_dump_reasons[i] == "First run") {
         firstrun = true;
+      }
     }
     println("^2 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" ");
@@ -391,8 +399,6 @@ script_gen_dump() {
       println("maps\\scriptgen\\" + level.script + "_scriptgen::main();");
       println(" ");
     }
-    // 		println( "make sure this is in your " + level.script + ".csv:" );
-    // 		println( "rawfile, maps / scriptgen/" + level.script + "_scriptgen.gsc" );
     println("^2 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" ");
     println("^2 / \\/ \\/ \\");
@@ -400,26 +406,17 @@ script_gen_dump() {
     println("^2 / \\/ \\/ \\");
     println(" ");
   } else {
-    /* 		println( " " );
-		println( " " );
-		println( "^3for legacy purposes I'm printing the would be script here, you can copy this stuff if you'd like to remain a dinosaur:" );
-		println( "^3otherwise, you should add this to your script:" );
-		println( "^3maps\\\_load::main( 1 );" );
-		println( " " );
-		println( "^3rebuild the fast file and the follow the assert instructions" );
-		println( " " );
-		
-		 */
     return;
   }
 
   filename = "scriptgen/" + level.script + "_scriptgen.gsc";
   csvfilename = "zone_source/" + level.script + ".csv";
 
-  if(level.bScriptgened)
+  if(level.bScriptgened) {
     file = openfile(filename, "write");
-  else
+  } else {
     file = 0;
+  }
 
   assertex(file != -1, "File not writeable( check it and and restart the map ): " + filename);
 
@@ -431,93 +428,91 @@ script_gen_dump() {
   script_gen_dumpprintln(file, "");
 
   signatures = getarraykeys(level.script_gen_dump);
-  for(i = 0; i < signatures.size; i++)
-    if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
+  for(i = 0; i < signatures.size; i++) {
+    if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite")) {
       script_gen_dumpprintln(file, "\t" + level.script_gen_dump[signatures[i]]);
-
-  for(i = 0; i < signatures.size; i++)
-    if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
+    }
+  }
+  for(i = 0; i < signatures.size; i++) {
+    if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite")) {
       script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"" + signatures[i] + "\"" + ";");
-    else
-      script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"nowrite\"" + ";");
+    }
+  } else {
+    script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"nowrite\"" + ";");
+  }
 
   script_gen_dumpprintln(file, "");
 
   keys1 = undefined;
   keys2 = undefined;
-  // special animation threading to capture animtrees
-  if(isDefined(level.sg_precacheanims))
+  if(isDefined(level.sg_precacheanims)) {
     keys1 = getarraykeys(level.sg_precacheanims);
-  if(isDefined(keys1))
-    for(i = 0; i < keys1.size; i++)
+  }
+  if(isDefined(keys1)) {
+    for(i = 0; i < keys1.size; i++) {
       script_gen_dumpprintln(file, "\tanim_precach_" + keys1[i] + "();");
-
+    }
+  }
 
   script_gen_dumpprintln(file, "\tmaps\\\_load::main( 1, " + level.bCSVgened + ", 1 );");
   script_gen_dumpprintln(file, "}");
   script_gen_dumpprintln(file, "");
 
-  ///animations section
-
-  // 	level.sg_precacheanims[ animtree ][ animation ]
-  if(isDefined(level.sg_precacheanims))
+  if(isDefined(level.sg_precacheanims)) {
     keys1 = getarraykeys(level.sg_precacheanims);
-  if(isDefined(keys1))
+  }
+  if(isDefined(keys1)) {
     for(i = 0; i < keys1.size; i++) {
-      // first key being the animtree
       script_gen_dumpprintln(file, "#using_animtree( \"" + keys1[i] + "\" );");
-      script_gen_dumpprintln(file, "anim_precach_" + keys1[i] + "()"); // adds to scriptgendump
-      script_gen_dumpprintln(file, "{");
-      script_gen_dumpprintln(file, "\tlevel.sg_animtree[ \"" + keys1[i] + "\" ] = #animtree;"); // adds to scriptgendump get the animtree without having to put #using animtree everywhere.
-
-      keys2 = getarraykeys(level.sg_precacheanims[keys1[i]]);
-      if(isDefined(keys2))
-        for(j = 0; j < keys2.size; j++) {
-          script_gen_dumpprintln(file, "\tlevel.sg_anim[ \"" + keys2[j] + "\" ] = %" + keys2[j] + ";"); // adds to scriptgendump
-
-        }
-      script_gen_dumpprintln(file, "}");
-      script_gen_dumpprintln(file, "");
     }
+    script_gen_dumpprintln(file, "anim_precach_" + keys1[i] + "()");
+    script_gen_dumpprintln(file, "{");
+    script_gen_dumpprintln(file, "\tlevel.sg_animtree[ \"" + keys1[i] + "\" ] = #animtree;");
 
+    keys2 = getarraykeys(level.sg_precacheanims[keys1[i]]);
+    if(isDefined(keys2)) {
+      for(j = 0; j < keys2.size; j++) {
+        script_gen_dumpprintln(file, "\tlevel.sg_anim[ \"" + keys2[j] + "\" ] = %" + keys2[j] + ";");
+      }
+    }
+    script_gen_dumpprintln(file, "}");
+    script_gen_dumpprintln(file, "");
+  }
 
-  if(level.bScriptgened)
+  if(level.bScriptgened) {
     saved = closefile(file);
-  else
-    saved = 1; // dodging save for legacy levels
+  } else {
+    saved = 1;
+  }
 
-  // CSV section	
-
-  if(level.bCSVgened)
+  if(level.bCSVgened) {
     csvfile = openfile(csvfilename, "write");
-  else
+  } else {
     csvfile = 0;
+  }
 
   assertex(csvfile != -1, "File not writeable( check it and and restart the map ): " + csvfilename);
 
   signatures = getarraykeys(level.script_gen_dump);
-  for(i = 0; i < signatures.size; i++)
+  for(i = 0; i < signatures.size; i++) {
     script_gen_csvdumpprintln(csvfile, signatures[i]);
+  }
 
-  if(level.bCSVgened)
+  if(level.bCSVgened) {
     csvfilesaved = closefile(csvfile);
-  else
-    csvfilesaved = 1; // dodging for now
-
-  // check saves
+  } else {
+    csvfilesaved = 1;
+  }
 
   assertex(csvfilesaved == 1, "csv not saved( see above message? ): " + csvfilename);
   assertex(saved == 1, "map not saved( see above message? ): " + filename);
 
-
-
-  // level.bScriptgened is not set on non scriptgen powered maps, keep from breaking everything
   assertex(!level.bScriptgened, "SCRIPTGEN generated: follow instructions listed above this error in the console");
-  if(level.bScriptgened)
+  if(level.bScriptgened) {
     assertmsg("SCRIPTGEN updated: Rebuild fast file and run map again");
+  }
 
   flag_set("scriptgen_done");
-
 }
 
 script_gen_csvdumpprintln(file, signature) {
@@ -526,113 +521,108 @@ script_gen_csvdumpprintln(file, signature) {
   path = "";
   extension = "";
 
-
-  if(issubstr(signature, "ignore"))
+  if(issubstr(signature, "ignore")) {
     prefix = "ignore";
-  else
-  if(issubstr(signature, "col_map_sp"))
-    prefix = "col_map_sp";
-  else
-  if(issubstr(signature, "gfx_map"))
-    prefix = "gfx_map";
-  else
-  if(issubstr(signature, "rawfile"))
-    prefix = "rawfile";
-  else
-  if(issubstr(signature, "sound"))
-    prefix = "sound";
-  else
-  if(issubstr(signature, "xmodel"))
-    prefix = "xmodel";
-  else
-  if(issubstr(signature, "xanim"))
-    prefix = "xanim";
-  else
-  if(issubstr(signature, "item")) {
-    prefix = "item";
+  } else {
+    if(issubstr(signature, "col_map_sp")) {
+      prefix = "col_map_sp";
+    }
+  } else {
+    if(issubstr(signature, "gfx_map")) {
+      prefix = "gfx_map";
+    }
+  } else {
+    if(issubstr(signature, "rawfile")) {
+      prefix = "rawfile";
+    }
+  } else {
+    if(issubstr(signature, "sound")) {
+      prefix = "sound";
+    }
+  } else {
+    if(issubstr(signature, "xmodel")) {
+      prefix = "xmodel";
+    }
+  } else {
+    if(issubstr(signature, "xanim")) {
+      prefix = "xanim";
+    }
+  } else {
+    if(issubstr(signature, "item")) {
+      prefix = "item";
+    }
     writtenprefix = "weapon";
     path = "sp/";
-  } else
-  if(issubstr(signature, "fx")) {
-    prefix = "fx";
-  } else
-  if(issubstr(signature, "menu")) {
-    prefix = "menu";
+  } else {
+    if(issubstr(signature, "fx")) {
+      prefix = "fx";
+    }
+  } else {
+    if(issubstr(signature, "menu")) {
+      prefix = "menu";
+    }
     writtenprefix = "menufile";
     path = "ui / scriptmenus/";
     extension = ".menu";
-  } else
-  if(issubstr(signature, "rumble")) {
-    prefix = "rumble";
+  } else {
+    if(issubstr(signature, "rumble")) {
+      prefix = "rumble";
+    }
     writtenprefix = "rawfile";
     path = "rumble/";
-  } else
-  if(issubstr(signature, "shader")) {
-    prefix = "shader";
+  } else {
+    if(issubstr(signature, "shader")) {
+      prefix = "shader";
+    }
     writtenprefix = "material";
-  } else
-  if(issubstr(signature, "shock")) {
-    prefix = "shock";
+  } else {
+    if(issubstr(signature, "shock")) {
+      prefix = "shock";
+    }
     writtenprefix = "rawfile";
     extension = ".shock";
     path = "shock/";
-  } else
-  if(issubstr(signature, "string")) {
-    prefix = "string";
-    assertmsg("string not yet supported by scriptgen"); // I can't find any instances of string files in a csv, don't think we've enabled localization yet
-  } else
-  if(issubstr(signature, "turret")) {
-    prefix = "turret";
+  } else {
+    if(issubstr(signature, "string")) {
+      prefix = "string";
+    }
+    assertmsg("string not yet supported by scriptgen");
+  } else {
+    if(issubstr(signature, "turret")) {
+      prefix = "turret";
+    }
     writtenprefix = "weapon";
     path = "sp/";
-  } else
-  if(issubstr(signature, "vehicle")) {
-    prefix = "vehicle";
+  } else {
+    if(issubstr(signature, "vehicle")) {
+      prefix = "vehicle";
+    }
     writtenprefix = "rawfile";
     path = "vehicles/";
   }
 
-
-  /* 		
-sg_precachevehicle( vehicle )
- */
-
-
-  if(!isDefined(prefix))
+  if(!isDefined(prefix)) {
     return;
-  if(!isDefined(writtenprefix))
+  }
+  if(!isDefined(writtenprefix)) {
     string = prefix + ", " + getsubstr(signature, prefix.size + 1, signature.size);
-  else
+  } else {
     string = writtenprefix + ", " + path + getsubstr(signature, prefix.size + 1, signature.size) + extension;
+  }
 
-
-  /* 		
-	ignore, code_post_gfx
-	ignore, common
-	col_map_sp, maps / nate_test.d3dbsp
-	gfx_map, maps / nate_test.d3dbsp
-	rawfile, maps / nate_test.gsc
-	sound, voiceovers, rallypoint, all_sp
-	sound, us_battlechatter, rallypoint, all_sp
-	sound, ab_battlechatter, rallypoint, all_sp
-	sound, common, rallypoint, all_sp
-	sound, generic, rallypoint, all_sp
-	sound, requests, rallypoint, all_sp	
- */
-
-  // printing to file is optional	
-  if(file == -1 || !level.bCSVgened)
+  if(file == -1 || !level.bCSVgened) {
     println(string);
-  else
+  } else {
     fprintln(file, string);
+  }
 }
 
 script_gen_dumpprintln(file, string) {
-  // printing to file is optional
-  if(file == -1 || !level.bScriptgened)
+  if(file == -1 || !level.bScriptgened) {
     println(string);
-  else
+  } else {
     fprintln(file, string);
+  }
 }
 
 traverseThink() {
@@ -653,16 +643,13 @@ traverseThink() {
 }
 
 calculate_map_center() {
-  // Dale - 4/21/2009 (based on Gavin's script) -- Do not compute and set the map center if the level script has already done so.
   if(!isDefined(level.mapCenter)) {
     level.nodesMins = (0, 0, 0);
     level.nodesMaxs = (0, 0, 0);
 
     level.mapCenter = maps\mp\gametypes\_spawnlogic::findBoxCenter(level.nodesMins, level.nodesMaxs);
 
-    // do not compile for ship builds
     println("map center: ", level.mapCenter);
-
 
     SetMapCenter(level.mapCenter);
   }

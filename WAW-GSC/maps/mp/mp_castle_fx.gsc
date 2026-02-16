@@ -1,12 +1,14 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_castle_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {
-  //maps\createart\mp_castle_art::main();
   maps\mp\createart\mp_castle_art::main();
   precacheFX();
   spawnFX();
-
-
 }
 
 precacheFX() {
@@ -30,14 +32,6 @@ precacheFX() {
   level._effect["mp_smoke_column_tall"] = loadfx("maps/mp_maps/fx_mp_smoke_column_tall");
   level._effect["mp_smoke_column_short"] = loadfx("maps/mp_maps/fx_mp_smoke_column_short");
   level._effect["mp_cherry_leaves_falling"] = loadfx("maps/mp_maps/fx_mp_castle_cherry_leaves");
-
-  //////////////////////////////////////////////////////////////////////////////////////
-  // Alex Section:
-
-  //level._effect["distant_muzzleflash"]		=	loadfx("weapon/muzzleflashes/heavy");
-
-  //level._effect["flak_flash"] 	= loadfx("weapon/flak/fx_flak_cloudflash_night");
-
 }
 
 spawnFX() {

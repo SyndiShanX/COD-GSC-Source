@@ -1,3 +1,8 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_oldschool.gsc
+********************************************/
+
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
@@ -7,18 +12,18 @@ init() {
     return;
   }
 
-  if(getDvar("scr_os_pickupweaponrespawntime") == "")
+  if(getDvar("scr_os_pickupweaponrespawntime") == "") {
     setDvar("scr_os_pickupweaponrespawntime", "15");
+  }
   level.pickupWeaponRespawnTime = getdvarfloat("scr_os_pickupweaponrespawntime");
-  if(getDvar("scr_os_pickupperkrespawntime") == "")
+  if(getDvar("scr_os_pickupperkrespawntime") == "") {
     setDvar("scr_os_pickupperkrespawntime", "25");
+  }
   level.pickupPerkRespawnTime = getdvarfloat("scr_os_pickupperkrespawntime");
 
   thread initPickups();
 
   thread onPlayerConnect();
-
-
 
   oldschoolLoadout = spawnStruct();
 
@@ -29,7 +34,7 @@ init() {
   oldschoolLoadout.inventoryWeapon = "";
   oldschoolLoadout.inventoryWeaponAmmo = 0;
 
-  //grenade types: "", "frag", "smoke", "flash"oldschoolLoadout.grenadeTypePrimary = "frag";
+  oldschoolLoadout.grenadeTypePrimary = "frag";
   oldschoolLoadout.grenadeCountPrimary = 1;
 
   oldschoolLoadout.grenadeTypeSecondary = "";
@@ -37,29 +42,30 @@ init() {
 
   level.oldschoolLoadout = oldschoolLoadout;
 
-  // mp_player_join
   level.oldschoolPickupSound = "oldschool_pickup";
   level.oldschoolRespawnSound = "oldschool_return";
 
   level.validPerks = [];
   for(i = 150; i < 199; i++) {
     perk = tableLookup("mp/statstable.csv", 0, i, 4);
-    if(issubstr(perk, "specialty_"))
+    if(issubstr(perk, "specialty_")) {
       level.validPerks[level.validPerks.size] = perk;
+    }
   }
 
   level.perkPickupHints = [];
-  level.perkPickupHints["specialty_bulletdamage"] = &"PLATFORM_PICK_UP_STOPPING_POWER";
-  level.perkPickupHints["specialty_armorvest"] = &"PLATFORM_PICK_UP_JUGGERNAUT";
-  level.perkPickupHints["specialty_rof"] = &"PLATFORM_PICK_UP_DOUBLE_TAP";
-  level.perkPickupHints["specialty_pistoldeath"] = &"PLATFORM_PICK_UP_LAST_STAND";
-  level.perkPickupHints["specialty_grenadepulldeath"] = &"PLATFORM_PICK_UP_MARTYRDOM";
-  level.perkPickupHints["specialty_fastreload"] = &"PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
+  level.perkPickupHints["specialty_bulletdamage"	] = &"PLATFORM_PICK_UP_STOPPING_POWER";
+  level.perkPickupHints["specialty_armorvest"	] = &"PLATFORM_PICK_UP_JUGGERNAUT";
+  level.perkPickupHints["specialty_rof"	] = &"PLATFORM_PICK_UP_DOUBLE_TAP";
+  level.perkPickupHints["specialty_pistoldeath"	] = &"PLATFORM_PICK_UP_LAST_STAND";
+  level.perkPickupHints["specialty_grenadepulldeath"	] = &"PLATFORM_PICK_UP_MARTYRDOM";
+  level.perkPickupHints["specialty_fastreload"	] = &"PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
 
   perkPickupKeys = getArrayKeys(level.perkPickupHints);
 
-  for(i = 0; i < perkPickupKeys.size; i++)
+  for(i = 0; i < perkPickupKeys.size; i++) {
     precacheString(level.perkPickupHints[perkPickupKeys[i]]);
+  }
 }
 
 giveLoadout() {
@@ -76,7 +82,6 @@ giveLoadout() {
   self giveStartAmmo(loadout.primaryWeapon);
   self setSpawnWeapon(loadout.primaryWeapon);
 
-  // give secondary weapon
   self GiveWeapon(loadout.secondaryWeapon);
   self giveStartAmmo(loadout.secondaryWeapon);
 
@@ -106,10 +111,11 @@ giveLoadout() {
   if(loadout.grenadeTypeSecondary != "") {
     grenadeTypeSecondary = level.weapons[loadout.grenadeTypeSecondary];
 
-    if(grenadeTypeSecondary == level.weapons["flash"])
+    if(grenadeTypeSecondary == level.weapons["flash"]) {
       self setOffhandSecondaryClass("flash");
-    else
+    } else {
       self setOffhandSecondaryClass("smoke");
+    }
 
     self giveWeapon(grenadeTypeSecondary);
     self SetWeaponAmmoClip(grenadeTypeSecondary, loadout.grenadeCountSecondary);
@@ -120,8 +126,9 @@ deletePickups() {
   pickups = getEntArray("oldschool_pickup", "targetname");
 
   for(i = 0; i < pickups.size; i++) {
-    if(isDefined(pickups[i].target))
+    if(isDefined(pickups[i].target)) {
       getent(pickups[i].target, "targetname") delete();
+    }
     pickups[i] delete();
   }
 }
@@ -130,12 +137,13 @@ initPickups() {
   level.pickupAvailableEffect = loadfx("misc/ui_pickup_available");
   level.pickupUnavailableEffect = loadfx("misc/ui_pickup_unavailable");
 
-  wait .5; // so all pickups have a chance to spawn and drop to the ground
+  wait .5;
 
   pickups = getEntArray("oldschool_pickup", "targetname");
 
-  for(i = 0; i < pickups.size; i++)
+  for(i = 0; i < pickups.size; i++) {
     thread trackPickup(pickups[i], i);
+  }
 }
 
 spawnPickupFX(groundpoint, fx) {
@@ -168,8 +176,9 @@ getPickupGroundpoint(pickup) {
       trace = bulletTrace(pos, pos + (0, 0, -128), false, pickup);
       hitpos = trace["position"];
 
-      if(hitpos[2] > finalz && hitpos[2] < groundpoint[2] + 15)
+      if(hitpos[2] > finalz && hitpos[2] < groundpoint[2] + 15) {
         finalz = hitpos[2];
+      }
     }
   }
   return (groundpoint[0], groundpoint[1], finalz);
@@ -201,8 +210,9 @@ trackPickup(pickup, id) {
     isPerk = true;
     perk = pickup.script_noteworthy;
     for(i = 0; i < level.validPerks.size; i++) {
-      if(level.validPerks[i] == perk)
+      if(level.validPerks[i] == perk) {
         break;
+      }
     }
     if(i == level.validPerks.size) {
       maps\mp\_utility::error("oldschool_pickup with classname script_model does not have script_noteworthy set to a valid perk");
@@ -218,19 +228,19 @@ trackPickup(pickup, id) {
       return;
     }
 
-    if(isDefined(level.perkPickupHints[perk]))
+    if(isDefined(level.perkPickupHints[perk])) {
       trig setHintString(level.perkPickupHints[perk]);
+    }
   } else {
     maps\mp\_utility::error("oldschool_pickup with classname " + classname + " is not supported (at location " + pickup.origin + ")");
     return;
   }
 
-  if(isDefined(pickup.script_delay))
+  if(isDefined(pickup.script_delay)) {
     respawnTime = pickup.script_delay;
+  }
 
   while(1) {
-    //pickup thread spinPickup();
-
     player = undefined;
 
     if(isWeapon) {
@@ -240,30 +250,22 @@ trackPickup(pickup, id) {
       while(1) {
         pickup waittill("trigger", player, dropped);
 
-        if(!isDefined(pickup))
+        if(!isDefined(pickup)) {
           break;
+        }
 
-        // player only picked up ammo. the pickup still remains.
         assert(!isDefined(dropped));
       }
 
       if(isDefined(dropped)) {
         dropDeleteTime = 5;
-        if(dropDeleteTime > respawnTime)
+        if(dropDeleteTime > respawnTime) {
           dropDeleteTime = respawnTime;
+        }
         dropped thread delayedDeletion(dropDeleteTime);
       }
     } else {
       assert(isPerk);
-
-      /*
-      while(1)
-      {
-      	trig waittill( "trigger", player );
-      	if( !player hasPerk( perk ) )
-      		break;
-      }
-      */
 
       trig waittill("trigger", player);
 
@@ -276,9 +278,6 @@ trackPickup(pickup, id) {
         player removeInventoryWeapon();
         player.inventoryWeapon = weapname;
         player SetActionSlot(3, "weapon", weapname);
-        // this used to reset the action slot to alt mode when your ammo is up for the weapon.
-        // however, this isn't safe for C4, which you need to still have even when you have no ammo, so you can detonate.
-        //player thread resetActionSlotToAltMode( weapname );
       }
     } else {
       assert(isPerk);
@@ -325,7 +324,7 @@ playSoundinSpace(alias, origin) {
   org = spawn("script_origin", origin);
   org.origin = origin;
   org playSound(alias);
-  wait 10; // MP doesn't have "sounddone" notifies =(
+  wait 10;
   org delete();
 }
 
@@ -352,12 +351,14 @@ setPickupStartAmmo(weapname) {
 changeSecondaryGrenadeType(weapname) {
   self endon("trigger");
 
-  if(weapname != level.weapons["smoke"] && weapname != level.weapons["flash"] && weapname != level.weapons["concussion"])
+  if(weapname != level.weapons["smoke"] && weapname != level.weapons["flash"] && weapname != level.weapons["concussion"]) {
     return;
+  }
 
   offhandClass = "smoke";
-  if(weapname == level.weapons["flash"])
+  if(weapname == level.weapons["flash"]) {
     offhandClass = "flash";
+  }
 
   trig = spawn("trigger_radius", self.origin - (0, 0, 20), 0, 128, 64);
   self thread deleteTriggerWhenPickedUp(trig);
@@ -384,8 +385,9 @@ resetActionSlotToAltMode(weapname) {
   while(1) {
     if(self getWeaponAmmoTotal(weapname) == 0) {
       curweap = self getCurrentWeapon();
-      if(curweap != weapname && curweap != "none")
+      if(curweap != weapname && curweap != "none") {
         break;
+      }
     }
     wait .2;
   }
@@ -399,8 +401,9 @@ getWeaponAmmoTotal(weapname) {
 }
 
 removeInventoryWeapon() {
-  if(isDefined(self.inventoryWeapon))
+  if(isDefined(self.inventoryWeapon)) {
     self takeWeapon(self.inventoryWeapon);
+  }
   self.inventoryWeapon = undefined;
 }
 
@@ -442,8 +445,9 @@ delayedDeletionOnSwappedWeapons(delay) {
   self endon("death");
   while(1) {
     self waittill("trigger", player, dropped);
-    if(isDefined(dropped))
+    if(isDefined(dropped)) {
       break;
+    }
   }
   dropped thread delayedDeletion(delay);
 }
@@ -507,8 +511,9 @@ updateWeaponsList(delay) {
 
 hadWeaponBeforePickingUp(newWeapon) {
   for(i = 0; i < self.weapons.size; i++) {
-    if(self.weapons[i] == newWeapon)
+    if(self.weapons[i] == newWeapon) {
       return true;
+    }
   }
   return false;
 }

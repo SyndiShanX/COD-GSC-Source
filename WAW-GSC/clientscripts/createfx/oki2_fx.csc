@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\oki2_fx.csc
+**********************************************/
+
 main() {
-  // CreateFX entities placed: 339
   ent = clientscripts\_fx::createExploder("bunker_side_explosion");
   ent.v["origin"] = (-1204.11, 1182.44, -132.757);
   ent.v["angles"] = (0, 314.5, 0);

@@ -1,7 +1,11 @@
+/****************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_mortar.csc
+****************************************/
+
 #include clientscripts\mp\_utility;
 #include clientscripts\mp\_utility_code;
 
-// Sets up the mortar variables.
 init_mortars() {
   level._explosion_max_range = [];
   level._explosion_min_range = [];
@@ -17,8 +21,6 @@ init_mortars() {
   level._explosion_dust_range = [];
   level._explosion_dust_name = [];
 }
-
-// set up the explosion dust fx
 set_mortar_dust(mortar_name, dust_name, range) {
   if(!isDefined(level._explosion_dust_range)) {
     init_mortars();
@@ -32,21 +34,12 @@ set_mortar_dust(mortar_name, dust_name, range) {
 
   level._explosion_dust_range[mortar_name] = range;
 }
-
-// Determines the quake settings for the given mortar group
-// mortar_name - The mortar group to apply settings to
-// quake_power - Set the amount of power to apply to EarthQuake()
-// quake_time - Set the duration of the quake
-// quake_radius - Set the radius of the quake
-// set_default - To set the defaults (should not be used in level script)
 set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default) {
-  // MikeD (8/13/2007): Check to see if this exists, if not, init them.
   if(!isDefined(level._explosion_quake_power)) {
     init_mortars();
   }
 
-  if(isDefined(set_default) && set_default) // Set default if not already set.
-  {
+  if(isDefined(set_default) && set_default) {
     if(!isDefined(level._explosion_quake_power[mortar_name])) {
       level._explosion_quake_power[mortar_name] = quake_power;
     }
@@ -64,20 +57,12 @@ set_mortar_quake(mortar_name, quake_power, quake_time, quake_radius, set_default
     level._explosion_quake_radius[mortar_name] = quake_radius;
   }
 }
-
-// Determines the range of a mortar to go off from a player.
-// mortar_name - The mortar group to apply settings to
-// min_range - Set the min range a mortar can explode at from a player
-// max_range - Set the max range a mortar can explode at from a player
-// set_default - To set the defaults (should not be used in level script)
 set_mortar_range(mortar_name, min_range, max_range, set_default) {
-  // MikeD (8/13/2007): Check to see if this exists, if not, init them.
   if(!isDefined(level._explosion_min_range)) {
     init_mortars();
   }
 
-  if(isDefined(set_default) && set_default) // Set default if not already set.
-  {
+  if(isDefined(set_default) && set_default) {
     if(!isDefined(level._explosion_min_range[mortar_name])) {
       level._explosion_min_range[mortar_name] = min_range;
     }
@@ -90,22 +75,12 @@ set_mortar_range(mortar_name, min_range, max_range, set_default) {
     level._explosion_max_range[mortar_name] = max_range;
   }
 }
-
-// Determines the delays for the mortars
-// mortar_name - The mortar group to apply settings to
-// min_delay - Set the min delay between barrages (if the barrage amount in mortar_loop is greater than 1)
-// max_delay - Set the max delay between barrages (if the barrage amount in mortar_loop is greater than 1)
-// barrage_min_delay - Set the min delay between each explosion within a barrage
-// barrage_max_delay - Set the max delay between each explosion within a barrage
-// set_default - To set the defaults (should not be used in level script)
 set_mortar_delays(mortar_name, min_delay, max_delay, barrage_min_delay, barrage_max_delay, set_default) {
-  // MikeD (8/13/2007): Check to see if this exists, if not, init them.
   if(!isDefined(level._explosion_min_delay)) {
     init_mortars();
   }
 
-  if(isDefined(set_default) && set_default) // Set default if not already set.
-  {
+  if(isDefined(set_default) && set_default) {
     if(!isDefined(level._explosion_min_delay[mortar_name]) && isDefined(min_delay)) {
       level._explosion_min_delay[mortar_name] = min_delay;
     }
@@ -139,10 +114,6 @@ set_mortar_delays(mortar_name, min_delay, max_delay, barrage_min_delay, barrage_
     }
   }
 }
-
-// Determines the "view chance" of the mortar.
-// chance - Sets the chance a player will see an explosion (scale 0 - 1)
-// set_default - To set the defaults (should not be used in level script)
 set_mortar_chance(mortar_name, chance, set_default) {
   if(!isDefined(level._explosion_view_chance)) {
     init_mortars();
@@ -150,8 +121,7 @@ set_mortar_chance(mortar_name, chance, set_default) {
 
   assertex(chance <= 1, "_mortar::set_mortar_chance(), the chance parameter needs to be between 0 and 1");
 
-  if(isDefined(set_default) && set_default) // Set default if not already set.
-  {
+  if(isDefined(set_default) && set_default) {
     if(!isDefined(level._explosion_view_chance[mortar_name])) {
       level._explosion_view_chance[mortar_name] = chance;
     }
@@ -170,8 +140,6 @@ player_view_chance(view_chance, explosion_point) {
 
   return false;
 }
-
-// play the incoming sound dependant on type of fx to play
 explosion_incoming(mortar_name, pos, soundnum) {
   if(!isDefined(level._explosion_last_incoming)) {
     level._explosion_last_incoming = -1;
@@ -240,8 +208,6 @@ explosion_incoming(mortar_name, pos, soundnum) {
     }
   }
 }
-
-// play the earthquake effect for close explosions
 explosion_boom(mortar_name, explosion_origin, power, time, radius) {
   if(!isDefined(power)) {
     power = 0.15;
@@ -265,8 +231,6 @@ explosion_boom(mortar_name, explosion_origin, power, time, radius) {
     localPlayers[i] earthQuake(power, time, explosion_origin, radius);
   }
 }
-
-// play the explosion sound dependant on type of fx to play
 explosion_sound(mortar_name, pos) {
   if(!isDefined(level._explosion_last_sound)) {
     level._explosion_last_sound = 0;
@@ -332,7 +296,6 @@ explosion_sound(mortar_name, pos) {
 }
 
 explosion_activate(mortar_name, blast_radius, quake_power, quake_time, quake_radius, dust_points) {
-  // Initialize Defaults
   set_mortar_quake(mortar_name, 0.15, 2, 850, true);
 
   if(!isDefined(blast_radius)) {
@@ -366,31 +329,22 @@ explosion_activate(mortar_name, blast_radius, quake_power, quake_time, quake_rad
     for(i = 0; i < dust_points.size; i++) {
       if(DistanceSquared(dust_points[i].origin, self.origin) < max_range * max_range) {
         if(isDefined(dust_points[i].script_fxid)) {
+          {}
           playFX(0, level._effect[dust_points[i].script_fxid], dust_points[i].origin);
         } else {
+          {}
           playFX(0, level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
         }
       }
     }
   }
 }
-
-// REQUIRED: level._effect[mortar_name] 		 = LoadFx( ... );
-// REQUIRED: level._effectType[mortar_name]	 = strType( "mortar", "bomb" or "artillery" )
-
-// Allows for multiple sets of explosions in a single level
-// One explosion within max_range distance goes off every( random + random ) seconds but not within min_range units of the player
-// Starts on notify specified by level.explosion_start[mortar_name]
-// Terminates on notify specified by level.explosion_stop[mortar_name]
-// Terminate on demand by setting level._explosion_stop_barrage[mortar_name] == true, operates indefinitely by default
 mortar_loop(mortar_name, barrage_amount) {
   level endon("stop_all_mortar_loops");
 
-  // Safety checks
   assertex((isDefined(mortar_name) && (mortar_name != "")), "mortar_name not passed. pass in level script");
   assertex((isDefined(level._effect) && isDefined(level._effect[mortar_name])), "level._effect[strMortars] not defined. define in level script");
 
-  // Set Defaults
   last_explosion = -1;
 
   set_mortar_range(mortar_name, 300, 2200, true);
@@ -405,14 +359,11 @@ mortar_loop(mortar_name, barrage_amount) {
     level endon(level._explosion_stopNotify[mortar_name]);
   }
 
-  // for backwards compatibility
   if(!isDefined(level._explosion_stop_barrage) || !isDefined(level._explosion_stop_barrage[mortar_name])) {
     level._explosion_stop_barrage[mortar_name] = false;
   }
 
-  // Explosion Points
   explosion_points = [];
-  // MikeD (8/13/2007): Struct support
   explosion_points_structs = [];
 
   num_points = 0;
@@ -425,68 +376,63 @@ mortar_loop(mortar_name, barrage_amount) {
     wait(0.5);
   }
 
-  // MikeD (8/13/2007): Add array to array.
   for(i = 0; i < explosion_points_structs.size; i++) {
     explosion_points_structs[i].is_struct = true;
     explosion_points = add_to_array(explosion_points, explosion_points_structs[i]);
   }
 
-  explosion_points_structs = []; // Save some variables
+  explosion_points_structs = [];
 
-  // DUST POINTS
   dust_points = [];
   if(isDefined(level._explosion_dust_name[mortar_name])) {
     dust_name = level._explosion_dust_name[mortar_name];
 
-    // Explosion Points
     dust_points = getEntArray(0, dust_name, "targetname");
 
-    // MikeD (8/13/2007): Struct support
     dust_points_structs = [];
     dust_points_structs = getstructarray(dust_name, "targetname");
 
-    // MikeD (8/13/2007): Add array to array.
     for(i = 0; i < dust_points_structs.size; i++) {
       dust_points_structs[i].is_struct = true;
       dust_points = add_to_array(dust_points, dust_points_structs[i]);
     }
 
-    dust_points_structs = []; // Save some variables
+    dust_points_structs = [];
   }
 
-  // Start Wait
   if(isDefined(level._explosion_start_notify) && isDefined(level._explosion_start_notify[mortar_name])) {
     level waittill(level._explosion_start_notify[mortar_name]);
   }
 
-  // Main Loop
   while(true) {
     while(!level._explosion_stop_barrage[mortar_name]) {
       do_mortar = false;
 
       for(j = 0; j < barrage_amount; j++) {
-        // putting this here allows for updates during barrage
         max_rangeSQ = level._explosion_max_range[mortar_name] * level._explosion_max_range[mortar_name];
         min_rangeSQ = level._explosion_min_range[mortar_name] * level._explosion_min_range[mortar_name];
         random_num = RandomInt(explosion_points.size);
 
         for(i = 0; i < explosion_points.size; i++) {
+          {}
           num = (i + random_num) % explosion_points.size;
 
           do_mortar = false;
 
           players = getlocalplayers();
           for(q = 0; q < players.size; q++) {
-            // check the distance from the player to the mortar
             dist = distanceSquared(getlocalclientpos(q), explosion_points[num].origin);
 
             if(num != last_explosion && dist < max_rangeSQ && dist > min_rangeSQ) {
-              // check to see if the player should see the explosion
+              {}
+
               if(level._explosion_view_chance[mortar_name] > 0) {
                 if(players[q] player_view_chance(level._explosion_view_chance[mortar_name], explosion_points[num].origin)) {
+                  {}
                   do_mortar = true;
                   break;
                 } else {
+                  {}
                   do_mortar = false;
                 }
               } else {
@@ -494,11 +440,11 @@ mortar_loop(mortar_name, barrage_amount) {
                 break;
               }
             } else {
+              {}
               do_mortar = false;
             }
           }
 
-          // do the mortar effect
           if(do_mortar) {
             explosion_points[num] thread explosion_activate(mortar_name, undefined, undefined, undefined, undefined, dust_points);
             last_explosion = num;
@@ -509,23 +455,25 @@ mortar_loop(mortar_name, barrage_amount) {
         last_explosion = -1;
 
         if(do_mortar) {
+          {}
           if(isDefined(level._explosion_delay) && isDefined(level._explosion_delay[mortar_name])) {
             wait(level._explosion_delay[mortar_name]);
           } else {
             wait(RandomFloatRange(level._explosion_min_delay[mortar_name], level._explosion_max_delay[mortar_name]));
           }
-        } else // MikeD (8/16/2007): Incase we do not finish off the barrage amount equally.
-        {
-          j--; // MikeD (8/16/2007):Decrease j, so we don't skip a barrage explosion.
-          wait(0.25); // MikeD (8/16/2007):Incase for whatever reason there's a forever loop.
+        } else {
+          {}
+          j--;
+          wait(0.25);
         }
       }
 
-      // if an amount greater than 1 was passed into mortar_loop from the level script
       if(barrage_amount > 1) {
         if(isDefined(level._explosion_barrage_delay) && isDefined(level._explosion_barrage_delay[mortar_name])) {
+          {}
           wait(level._explosion_barrage_delay[mortar_name]);
         } else {
+          {}
           wait(RandomFloatRange(level._explosion_barrage_min_delay[mortar_name], level._explosion_barrage_max_delay[mortar_name]));
         }
       }

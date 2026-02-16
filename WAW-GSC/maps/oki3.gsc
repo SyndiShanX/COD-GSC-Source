@@ -1289,7 +1289,7 @@ planter_battle_end() {
     alive = false;
     guys = getaiarray("axis");
     for(i = 0; i < guys.size; i++) {
-      if(guys[i] istouching(radius)) {
+      if(guys[i] istouching(radius)) {} {
         alive = true;
       }
     }

@@ -1,76 +1,17 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\twar.gsc
+**************************************/
+
 #include maps\mp\_utility;
 #include maps\mp\_geometry;
 #include maps\mp\gametypes\_hud_util;
 #include maps\mp\_music;
 
-/*
-	Tank War
-	Objective: 	Capture the enemies starting point by "walking" the capture points
-	Map ends:	When one team captures the other teams starting point, or time limit is reached
-	Respawning:	No wait / Near teammates
-
-	Level requirements
-	------------------ Spawnpoints:
-			classname		mp_twar_spawn
-			All players spawn from these. The spawnpoint chosen is dependent on the current locations of owned flags, teammates and
-			enemies at the time of spawn. Players generally spawn behind their teammates relative to the direction of enemies.
-			Optionally, give a spawnpoint a script_linkto to specify which flag it "belongs" to (see Flag Descriptors).
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-
-		Flags:
-			classname trigger_radius
-			targetnameflag_primary or flag_secondary
-			Flags that need to be captured to win. Primary flags take time to capture; secondary flags are instant.
-		
-		Flag Descriptors:
-			classname script_origin
-			targetnametwar_flag_descriptor
-			Place one flag descriptor close to each flag. Use the script_linkname and script_linkto properties to say which flags
-			it can be considered "adjacent" to in the level. For instance, if players have a primary path from flag1 to flag2, and
-			from flag2 to flag3, flag2 would have a twar_flag_descriptor with these properties:
-			script_linkname flag2
-			script_linkto flag1 flag3
-			
-			Set scr_domdebug to 1 to see flag connections and what spawnpoints are considered connected to each flag.
-
-	Level script requirements
-	------------------------- Team Definitions:
-			game["allies"] = "marines";
-			game["axis"] = "japanese";
-			This sets the nationalities of the teams. Allies can be american, british, or russian. Axis can be german.
-
-		If using minefields or exploders:
-			maps\mp\_load::main();
-
-	Optional level script settings
-	------------------------------ Soldier Type and Variation:
-			game["american_soldiertype"] = "normandy";
-			game["german_soldiertype"] = "normandy";
-			This sets what character models are used for each nationality on a particular map.
-
-			Valid settings:
-				american_soldiertype	normandy
-				british_soldiertype		normandy, africa
-				russian_soldiertype		coats, padded
-				german_soldiertype		normandy, africa, winterlight, winterdark
-*/
-
-/*QUAKED mp_twar_spawn (0.0 0.0 1.0) (-16 -16 0) (16 16 72)
-Players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_twar_spawn_axis_start (1.0 0.0 1.0) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
-/*QUAKED mp_twar_spawn_allies_start (0.0 1.0 1.0) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
 main() {
-  if(getDvar("mapname") == "mp_background")
+  if(getDvar("mapname") == "mp_background") {
     return;
+  }
 
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
@@ -102,67 +43,87 @@ main() {
 
   level.flagSetupComplete = false;
 
-  if(getDvar("twar_captureTime") == "")
+  if(getDvar("twar_captureTime") == "") {
     setDvar("twar_captureTime", "40");
+  }
 
   level.captureTime = getdvarint("twar_captureTime");
 
-  if(getDvar("twar_spawnPointFacingAngle") == "")
+  if(getDvar("twar_spawnPointFacingAngle") == "") {
     setDvar("twar_spawnPointFacingAngle", "60");
+  }
 
-  if(getDvar("twar_captureAccelBonus") == "")
+  if(getDvar("twar_captureAccelBonus") == "") {
     setDvar("twar_captureAccelBonus", "25");
+  }
 
-  if(getDvar("twar_captureAccelBonus") == "")
+  if(getDvar("twar_captureAccelBonus") == "") {
     setDvar("twar_captureAccelBonus", "25");
+  }
 
-  if(getDvar("twar_secondaryInfluencerBonus") == "")
+  if(getDvar("twar_secondaryInfluencerBonus") == "") {
     setDvar("twar_secondaryInfluencerBonus", "0.5");
+  }
 
-  if(getDvar("twar_neutralFlagLockTime") == "")
+  if(getDvar("twar_neutralFlagLockTime") == "") {
     setDvar("twar_neutralFlagLockTime", "10");
+  }
 
-  if(getDvar("twar_finalFightTimeLimit") == "")
+  if(getDvar("twar_finalFightTimeLimit") == "") {
     setDvar("twar_finalFightTimeLimit", "5");
+  }
 
-  if(getDvar("twar_finalFightFlagRespawnPenalty") == "")
+  if(getDvar("twar_finalFightFlagRespawnPenalty") == "") {
     setDvar("twar_finalFightFlagRespawnPenalty", "3");
+  }
 
-  if(getDvar("twar_momentumEnabled") == "")
+  if(getDvar("twar_momentumEnabled") == "") {
     setDvar("twar_momentumEnabled", "0");
+  }
 
-  if(getDvar("twar_momentumMax") == "")
+  if(getDvar("twar_momentumMax") == "") {
     setDvar("twar_momentumMax", "70");
+  }
 
-  if(getDvar("twar_momentumMaxMultiplier") == "")
+  if(getDvar("twar_momentumMaxMultiplier") == "") {
     setDvar("twar_momentumMaxMultiplier", "3");
+  }
 
-  if(getDvar("twar_momentumMultiplierBonus") == "")
+  if(getDvar("twar_momentumMultiplierBonus") == "") {
     setDvar("twar_momentumMultiplierBonus", "25");
+  }
 
-  if(getDvar("twar_momentumMultiplierBonusLimit") == "")
+  if(getDvar("twar_momentumMultiplierBonusLimit") == "") {
     setDvar("twar_momentumMultiplierBonusLimit", "75");
+  }
 
-  if(getDvar("twar_momentumBlitzkriegTime") == "")
+  if(getDvar("twar_momentumBlitzkriegTime") == "") {
     setDvar("twar_momentumBlitzkriegTime", "30");
+  }
 
-  if(getDvar("twar_momentumFlagCap") == "")
+  if(getDvar("twar_momentumFlagCap") == "") {
     setDvar("twar_momentumFlagCap", "25");
+  }
 
-  if(getDvar("twar_momentumKillPlayer") == "")
+  if(getDvar("twar_momentumKillPlayer") == "") {
     setDvar("twar_momentumKillPlayer", "5");
+  }
 
-  if(getDvar("twar_momentumRadar") == "")
+  if(getDvar("twar_momentumRadar") == "") {
     setDvar("twar_momentumRadar", "10");
+  }
 
-  if(getDvar("twar_momentumArtillery") == "")
+  if(getDvar("twar_momentumArtillery") == "") {
     setDvar("twar_momentumArtillery", "10");
+  }
 
-  if(getDvar("twar_momentumDogs") == "")
+  if(getDvar("twar_momentumDogs") == "") {
     setDvar("twar_momentumDogs", "10");
+  }
 
-  if(getDvar("twar_showEnemyCount") == "")
+  if(getDvar("twar_showEnemyCount") == "") {
     setDvar("twar_showEnemyCount", "1");
+  }
 
   setDvar("war_sb", "");
 
@@ -203,15 +164,17 @@ onPrecacheGameType() {
   game["flagmodels"] = [];
   game["flagmodels"]["neutral"] = "prop_flag_neutral";
 
-  if(game["allies"] == "marines")
+  if(game["allies"] == "marines") {
     game["flagmodels"]["allies"] = "prop_flag_american";
-  else
+  } else {
     game["flagmodels"]["allies"] = "prop_flag_russian";
+  }
 
-  if(game["axis"] == "german")
+  if(game["axis"] == "german") {
     game["flagmodels"]["axis"] = "prop_flag_german";
-  else
+  } else {
     game["flagmodels"]["axis"] = "prop_flag_japanese";
+  }
 
   precacheModel(game["flagmodels"]["neutral"]);
   precacheModel(game["flagmodels"]["allies"]);
@@ -256,8 +219,9 @@ onPrecacheGameType() {
   precacheString(&"MP_WAR_TEAM_WAS_LEADING");
   precacheString(&"MP_WAR_OTHERTEAM_WAS_LEADING");
 
-  if(!isDefined(game["strings_menu"]))
+  if(!isDefined(game["strings_menu"])) {
     game["strings_menu"] = [];
+  }
 
   if(!isDefined(game["strings"]["war_callsign_a"]) || !isDefined(game["strings_menu"]["war_callsign_a"])) {
     game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_A";
@@ -336,11 +300,9 @@ onOvertime() {
 
     onTimeLimit();
   }
-
 }
 
 onStartGameType() {
-  // for backwards compatibility
   allow_dom_object_placement = false;
 
   if(game["roundsplayed"] == 0) {
@@ -367,9 +329,6 @@ onStartGameType() {
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
 
-  /* ---------- spawn point setup */
-
-  // start spawn points: prefer twar-specific, fallback are dom points
   spawn_axis_start_classname = "mp_twar_spawn_axis_start";
   spawn_allies_start_classname = "mp_twar_spawn_allies_start";
   level.spawn_axis_start = getEntArray(spawn_axis_start_classname, "classname");
@@ -382,7 +341,6 @@ onStartGameType() {
     allow_dom_object_placement = true;
   }
 
-  // re-spawn points: prefer twar-specific, fallback are tdm points
   spawn_all_classname = "mp_twar_spawn";
   level.spawn_all = getEntArray(spawn_all_classname, "classname");
   if(level.spawn_all.size == 0) {
@@ -391,14 +349,11 @@ onStartGameType() {
     allow_dom_object_placement = true;
   }
 
-  // place spawn points
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints(spawn_allies_start_classname);
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints(spawn_axis_start_classname);
   maps\mp\gametypes\_spawnlogic::addSpawnPoints("allies", spawn_all_classname);
   maps\mp\gametypes\_spawnlogic::addSpawnPoints("axis", spawn_all_classname);
   maps\mp\gametypes\_spawning::updateAllSpawnPoints();
-
-  /* ---------- */
 
   level.mapCenter = maps\mp\gametypes\_spawnlogic::findBoxCenter(level.spawnMins, level.spawnMaxs);
   setMapCenter(level.mapCenter);
@@ -424,15 +379,11 @@ onStartGameType() {
   level.flagBaseFXid["spectator"] = loadfx(flagBaseFX[game["allies"]]);
 
   allowed[0] = "twar";
-  // @TODO: Remove this when all maps are using twar spawn points
-  // if this map has been updated to include twar spawns, don't import any domination objects
-  // otherwise, continue to use dom spawns
   if(allow_dom_object_placement) {
     allowed[1] = "dom";
   }
   maps\mp\gametypes\_gameobjects::main(allowed);
 
-  // now that the game objects have been deleted place the influencers
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
 
   maps\mp\gametypes\_rank::registerScoreInfo("kill", 5);
@@ -457,11 +408,11 @@ onStartGameType() {
 }
 
 onTimeLimit() {
-  // reset the generic message bar so it does not persist past this game
   for(index = 0; index < level.players.size; index++) {
     player = level.players[index];
-    if(isDefined(player))
+    if(isDefined(player)) {
       player thread maps\mp\gametypes\_hud::showClientGenericMessageBar(undefined, undefined);
+    }
   }
 
   if(!level.inFinalFight && 0 <= getDvarInt("twar_finalFightTimeLimit")) {
@@ -506,7 +457,6 @@ onTimeLimit() {
   } else {
     level.forcedEnd = true;
 
-    // hacky but we want the updateWinLossStats call to go through
     level.roundLimit = 0;
 
     thread maps\mp\gametypes\_globallogic::endGame("tie", game["strings"]["tie"]);
@@ -518,12 +468,13 @@ onTeamOutcomeNotify(winner, isRound, endReasonText) {
   self notify("reset_outcome");
 
   team = self.pers["team"];
-  if(!isDefined(team) || (team != "allies" && team != "axis"))
+  if(!isDefined(team) || (team != "allies" && team != "axis")) {
     team = "allies";
+  }
 
-  // wait for notifies to finish
-  while(self.doingNotify)
+  while(self.doingNotify) {
     wait 0.05;
+  }
 
   self endon("reset_outcome");
 
@@ -560,22 +511,25 @@ onTeamOutcomeNotify(winner, isRound, endReasonText) {
     outcomeTitle setText(&"MP_FINALFIGHT");
     outcomeTitle.color = (1, 1, 1);
   } else if(winner == "tie") {
-    if(isRound)
+    if(isRound) {
       outcomeTitle setText(game["strings"]["round_draw"]);
-    else
+    } else {
       outcomeTitle setText(game["strings"]["draw"]);
+    }
     outcomeTitle.color = (1, 1, 1);
   } else if(isDefined(self.pers["team"]) && winner == team) {
-    if(isRound)
+    if(isRound) {
       outcomeTitle setText(game["strings"]["round_win"]);
-    else
+    } else {
       outcomeTitle setText(game["strings"]["victory"]);
+    }
     outcomeTitle.color = (0.6, 0.9, 0.6);
   } else {
-    if(isRound)
+    if(isRound) {
       outcomeTitle setText(game["strings"]["round_loss"]);
-    else
+    } else {
       outcomeTitle setText(game["strings"]["defeat"]);
+    }
     outcomeTitle.color = (0.7, 0.3, 0.2);
   }
 
@@ -676,7 +630,7 @@ sendFlagCallsignDvar(label, dvar, time) {
     time = 0;
   }
 
-  self thread twar_setClientDvar(dvar, getDvar(dvar), time); // flag callsign
+  self thread twar_setClientDvar(dvar, getDvar(dvar), time);
 }
 
 sendFlagCallsignDvars() {
@@ -687,11 +641,11 @@ sendFlagCallsignDvars() {
     flaglabel = "war_c";
   }
 
-  self thread sendFlagCallsignDvar(flaglabel, "war_a", 0.2); // flag callsign
-  self thread sendFlagCallsignDvar(flaglabel, "war_b", 0.4); // flag callsign
-  self thread sendFlagCallsignDvar(flaglabel, "war_c", 0.6); // flag callsign
-  self thread sendFlagCallsignDvar(flaglabel, "war_d", 0.8); // flag callsign
-  self thread sendFlagCallsignDvar(flaglabel, "war_e", 1.0); // flag callsign
+  self thread sendFlagCallsignDvar(flaglabel, "war_a", 0.2);
+  self thread sendFlagCallsignDvar(flaglabel, "war_b", 0.4);
+  self thread sendFlagCallsignDvar(flaglabel, "war_c", 0.6);
+  self thread sendFlagCallsignDvar(flaglabel, "war_d", 0.8);
+  self thread sendFlagCallsignDvar(flaglabel, "war_e", 1.0);
 }
 
 onPlayerConnect() {
@@ -702,10 +656,9 @@ onPlayerConnect() {
       player.hidingHudForNotify = false;
       player.touchingContestedFlag = false;
 
-      player thread twar_setClientDvar("war_sb", getDvar("war_sb")); // score bar
+      player thread twar_setClientDvar("war_sb", getDvar("war_sb"));
       player sendFlagCallsignDvars();
 
-      // this will not create anything until the flags have been set up
       player hud_createPlayerFlagElems();
 
       player thread onTeamChange();
@@ -716,13 +669,6 @@ onPlayerConnect() {
   }
 }
 
-/*
-=============
-onTeamChange
-
-Changes influencer teams when player changes teams
-=============
-*/
 onTeamChange() {
   self endon("disconnect");
   level endon("game_ended");
@@ -733,7 +679,6 @@ onTeamChange() {
     updateHudIcons(false);
     contestedFlag = locate_contested_twar_flag();
     if(isDefined(contestedFlag) && isDefined(contestedFlag.useObj)) {
-      // make sure the progress bar color gets updated
       self hud_beginUseHudFlagProgressBars(contestedFlag.useObj.claimTeam);
     }
 
@@ -761,8 +706,9 @@ hideHudOnNotify() {
 
     wait(notifyDuration);
 
-    if(self.notifyQueue.size != 0)
+    if(self.notifyQueue.size != 0) {
       continue;
+    }
 
     wait(1.0);
 
@@ -941,8 +887,9 @@ updateHudIcons(hide) {
 updateHudProgressBar(flag) {
   prof_begin("TWAR: updateHudProgressBar");
 
-  if(self isHidingHud())
+  if(self isHidingHud()) {
     return;
+  }
 
   if(level.hardcoreMode) {
     return;
@@ -1051,8 +998,9 @@ updateHudPlayerCounts(flag, numAllies, numAxis) {
 }
 
 updateHudMomentumForTeam(team) {
-  if(getDvarInt("twar_momentumEnabled") == 0)
+  if(getDvarInt("twar_momentumEnabled") == 0) {
     return;
+  }
 
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
@@ -1082,13 +1030,13 @@ createWarGameDataHudElem() {
 
 updateHudMomentum() {
   prof_begin("TWAR: updateHudMomentum");
-  if(getDvarInt("twar_momentumEnabled") == 0)
+  if(getDvarInt("twar_momentumEnabled") == 0) {
     return;
+  }
 
   team = self.pers["team"];
 
   if(team != "axis" && team != "allies") {
-    // @TODO: What do we display for spectators?
   } else {
     momentumMax = getDvarInt("twar_momentumMax");
     momentumMaxMultiplier = getDvarInt("twar_momentumMaxMultiplier");
@@ -1097,8 +1045,7 @@ updateHudMomentum() {
     if(momentumMax > 0) {
       hud_momentum_progress = game["war_momentum"][team] / momentumMax;
     } else {
-      #jasone $REVIEW from stefan: what is the right thing to do here ?
-        hud_momentum_progress = game["war_momentum"][team];
+      hud_momentum_progress = game["war_momentum"][team];
     }
 
     self.warGameDataHudElem setWarGameData(hud_momentum_progress, game["war_momentum"][team + "_multiplier"], game["war_momentum"][team + "_blitzkriegTime"]);
@@ -1107,15 +1054,17 @@ updateHudMomentum() {
 }
 
 updateMomentum(team, amount) {
-  if(getDvarInt("twar_momentumEnabled") == 0)
+  if(getDvarInt("twar_momentumEnabled") == 0) {
     return;
+  }
   prof_begin("TWAR: updateMomentum");
 
   momentumMax = getDvarInt("twar_momentumMax");
   momentumMaxMultiplier = getDvarInt("twar_momentumMaxMultiplier");
 
-  if(amount != 0 && game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier)
-    return; // dont let positive adjustments occur when blitzkrieg is counting down
+  if(amount != 0 && game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
+    return;
+  }
 
   previousMultiplier = game["war_momentum"][team + "_multiplier"];
 
@@ -1132,17 +1081,18 @@ updateMomentum(team, amount) {
       game["war_momentum"][team] = game["war_momentum"][team] - momentumMax;
     }
 
-    if(momentumMax < game["war_momentum"][team])
+    if(momentumMax < game["war_momentum"][team]) {
       game["war_momentum"][team] = momentumMax;
-
-    if(game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
-      if(team == "allies")
-        level thread alliesBlitzkriegCountdown();
-      else
-        level thread axisBlitzkriegCountdown();
     }
 
-    // send any required player notifications, as long as game has not ended
+    if(game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
+      if(team == "allies") {
+        level thread alliesBlitzkriegCountdown();
+      } else {
+        level thread axisBlitzkriegCountdown();
+      }
+    }
+
     if(!level.gameEnded &&
       previousMultiplier != game["war_momentum"][team + "_multiplier"]) {
       notifyData = spawnStruct();
@@ -1150,14 +1100,15 @@ updateMomentum(team, amount) {
       if(previousMultiplier < game["war_momentum"][team + "_multiplier"]) {
         enemyTeam = getOtherTeam(team);
         if(game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
+          {}
           notifyData.titleText = &"MP_BLITZKRIEG";
           notifyData.notifyText = &"MP_BLITZKRIEG_DESC";
           notifyData.iconName = "hud_momentum_notification_blitzkrieg";
           notifyData.iconWidth = 40;
           notifyData.iconHeight = 40;
           maps\mp\gametypes\_globallogic::leaderDialog("blitz_friendly", team);
-
         } else {
+          {}
           notifyData.titleText = &"MP_MOMENTUM";
           notifyData.notifyText = &"MP_MOMENTUM_DESC";
           notifyData.iconName = "hud_momentum_notification_bonus";
@@ -1173,6 +1124,7 @@ updateMomentum(team, amount) {
       for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         if(isDefined(player) && player.pers["team"] == team) {
+          {}
           player maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
         }
       }
@@ -1236,8 +1188,9 @@ axisBlitzkriegCountdown() {
 updateFlagStatusHudDvars(flag) {
   prof_begin("TWAR: updateFlagStatusHudDvars");
   otherTeam = "axis";
-  if(isDefined(flag) && flag.claimTeam == "axis")
+  if(isDefined(flag) && flag.claimTeam == "axis") {
     otherTeam = "allies";
+  }
 
   if(!isDefined(flag) || flag.claimTeam == "none" || (flag.numTouching[flag.claimTeam] == 0 && flag.numTouching[otherTeam] == 0)) {
     if(getDvar("war_sb") != "") {
@@ -1258,11 +1211,11 @@ updateFlagStatusHudDvars(flag) {
 
     dvarVal = "";
     if(actualCaptureTeam == "allies") {
-      dvarVal = "a" + flag.label; // "TEAM_ALLIES" + captureAction;
+      dvarVal = "a" + flag.label;
     } else if(actualCaptureTeam == "axis") {
-      dvarVal = "x" + flag.label; // "TEAM_AXIS" + captureAction;
+      dvarVal = "x" + flag.label;
     } else if(actualCaptureTeam == "contested") {
-      dvarVal = "c" + flag.label; //"contested";
+      dvarVal = "c" + flag.label;
     }
 
     if(getDvar("war_sb") != dvarVal) {
@@ -1287,29 +1240,25 @@ onSpawnPlayer() {
     enemyTeam = getOtherTeam(myTeam);
     for(i = 0; i < level.flags.size; i++) {
       team = level.flags[i] getFlagTeam();
-      if(team == myTeam)
+      if(team == myTeam) {
         flagsOwned++;
-      else if(team == enemyTeam)
+      } else if(team == enemyTeam) {
         enemyFlagsOwned++;
+      }
     }
 
     if(flagsOwned == level.flags.size) {
-      // own all flags! pretend we don't own the last one we got, so enemies can spawn there
       enemyBestSpawnFlag = level.bestSpawnFlag[getOtherTeam(self.pers["team"])];
 
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, getSpawnsBoundingFlag(enemyBestSpawnFlag));
     } else if(flagsOwned > 0) {
-      // spawn near any flag we own that's nearish something we can capture
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, getBoundaryFlagSpawns(myTeam));
     } else {
-      // own no flags!
       bestFlag = undefined;
       if(enemyFlagsOwned > 0 && enemyFlagsOwned < level.flags.size) {
-        // there should be an unowned one to use
         bestFlag = getUnownedFlagNearestStart(myTeam);
       }
       if(!isDefined(bestFlag)) {
-        // pretend we still own the last one we lost
         bestFlag = level.bestSpawnFlag[self.pers["team"]];
       }
       level.bestSpawnFlag[self.pers["team"]] = bestFlag;
@@ -1319,13 +1268,12 @@ onSpawnPlayer() {
   }
 
   if(!isDefined(spawnpoint)) {
-    if(self.pers["team"] == "axis")
+    if(self.pers["team"] == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    else
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
+    }
   }
-
-  //spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam( level.spawn_all );
 
   assert(isDefined(spawnpoint));
 
@@ -1333,7 +1281,6 @@ onSpawnPlayer() {
 }
 
 onSpawnSpectator(origin, angles) {
-  //	self updateHudIcons( false );
   self updateHudMomentum();
 
   contestedFlag = locate_contested_twar_flag();
@@ -1351,8 +1298,6 @@ twar_playerSpawnedCB() {
 twar_threadedPlayerSpawnedCB() {
   self endon("disconnect");
   waittillframeend;
-  //	self updateHudIcons( false );
-  //	waittillframeend;
   self updateHudMomentum();
   waittillframeend;
 
@@ -1374,7 +1319,6 @@ twarFlags() {
   refWrapper.maperrors = [];
   refWrapper.descriptorsByLinkname = [];
 
-  // loop through the flag objects and find a corresponding descriptor object
   level.flags = [];
   for(index = 0; index < refWrapper.primaryFlags.size; index++) {
     closestdist = undefined;
@@ -1417,7 +1361,6 @@ twarFlags() {
   level.flagOrder["_e"] = 4;
   sortFlags();
 
-  // create use-objects for each found tank-war flag
   level.twarFlags = [];
   for(index = 0; index < level.flags.size; index++) {
     trigger = level.flags[index];
@@ -1479,7 +1422,6 @@ twarFlags() {
 
     twarFlag.baseeffectpos = trace["position"];
 
-    // legacy spawn code support
     level.flags[index].useObj = twarFlag;
     level.flags[index].adjflags = [];
     level.flags[index].nearbyspawns = [];
@@ -1507,16 +1449,13 @@ twarFlags() {
 
   hud_createPlayersFlagElems();
 
-  // level.bestSpawnFlag is used as a last resort when the enemy holds all flags.
   level.bestSpawnFlag = [];
   level.bestSpawnFlag["allies"] = getUnownedFlagNearestStart("allies", undefined);
   level.bestSpawnFlag["axis"] = getUnownedFlagNearestStart("axis", level.bestSpawnFlag["allies"]);
 
   flagSetup(refWrapper);
 
-
   thread domDebug();
-
 
   updateTwarScores();
 
@@ -1543,8 +1482,9 @@ getUnownedFlagNearestStart(team, excludeFlag) {
   for(i = 0; i < level.flags.size; i++) {
     flag = level.flags[i];
 
-    if(flag getFlagTeam() != "neutral")
+    if(flag getFlagTeam() != "neutral") {
       continue;
+    }
 
     distsq = distanceSquared(flag.origin, level.startPos[team]);
     if((!isDefined(excludeFlag) || flag != excludeFlag) && (!isDefined(best) || distsq < bestdistsq)) {
@@ -1563,9 +1503,10 @@ domDebug() {
     }
 
     while(1) {
-      if(getDvar("scr_domdebug") != "1")
+      if(getDvar("scr_domdebug") != "1") {
         break;
-      // show flag connections and each flag's spawnpoints
+      }
+
       for(i = 0; i < level.flags.size; i++) {
         for(j = 0; j < level.flags[i].adjflags.size; j++) {
           line(level.flags[i].origin, level.flags[i].adjflags[j].origin, (1, 1, 1));
@@ -1575,10 +1516,12 @@ domDebug() {
           line(level.flags[i].origin, level.flags[i].nearbyspawns[j].origin, (.2, .2, .6));
         }
 
-        if(level.flags[i] == level.bestSpawnFlag["allies"])
+        if(level.flags[i] == level.bestSpawnFlag["allies"]) {
           print3d(level.flags[i].origin, "allies best spawn flag");
-        if(level.flags[i] == level.bestSpawnFlag["axis"])
+        }
+        if(level.flags[i] == level.bestSpawnFlag["axis"]) {
           print3d(level.flags[i].origin, "axis best spawn flag");
+        }
       }
       wait .05;
     }
@@ -1588,19 +1531,14 @@ domDebug() {
 isTeamLastFlag(team, label) {
   isLastFlag = false;
   if((team == "axis") && (level.flagOrder[label] == 0) && (getTeamFlagCount("allies") == 0)) {
-    // this is the last flag axis needs to capture to win
     isLastFlag = true;
   } else if((team == "allies") && (level.flagOrder[label] == (level.twarFlags.size - 1)) && (getTeamFlagCount("axis") == 0)) {
-    // this is the last flag allies need to capture to win
     isLastFlag = true;
   }
   return isLastFlag;
 }
 
 onTouchUse(player) {
-  //	ownerTeam = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
-  //	otherTeam = getOtherTeam( player.pers["team"] );
-
   if(player.pers["team"] == self.claimTeam) {
     player hud_showProgressBarForPlayer(false);
 
@@ -1608,35 +1546,25 @@ onTouchUse(player) {
     isLastFlag = isTeamLastFlag(player.pers["team"], self.label);
     isOtherTeamLastFlag = isTeamLastFlag(otherteam, self.label);;
 
-
     if(isLastFlag) {
       player.capturingLastFlag = true;
     } else if(!isOtherTeamLastFlag) {
-      // if this is not the last flag the player can not get the war hero challenge
       player.lastCapKiller = false;
     }
   }
 
   if(self.claimTeam != "none") {
-    // this is the contended flag but we are not the contenders
-    // show the count anyways
     thread updateAllPlayersHudPlayerCounts(self);
     updateFlagStatusHudDvars(self);
   }
 }
 
 onEndTouchUse(player) {
-  //	ownerTeam = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
-  //	otherTeam = getOtherTeam( player.pers["team"] );
-
   if(player.pers["team"] == self.claimTeam) {
     player hud_showProgressBarForPlayer(true);
   }
 
-  //	if( self.claimTeam != "none" )
   {
-    // this is the contended flag but we are not the contenders
-    // show the count anyways
     thread updateAllPlayersHudPlayerCounts(self);
     updateFlagStatusHudDvars(self);
   }
@@ -1648,7 +1576,6 @@ onBeginUse(player) {
   ownerTeam = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
 
   otherTeam = getOtherTeam(player.pers["team"]);
-
 
   if(!self maps\mp\gametypes\_gameobjects::useObjectLockedForTeam(player.pers["team"])) {
     self.didStatusNotify = false;
@@ -1663,8 +1590,6 @@ onBeginUse(player) {
 
     player hud_showProgressBarForPlayer(false);
 
-    // CODER_MOD DROCHE
-    // 07/14/08 War Hero challenge
     isLastFlag = isTeamLastFlag(player.pers["team"], self.label);
 
     if(ownerTeam == "neutral") {
@@ -1672,16 +1597,17 @@ onBeginUse(player) {
         setmusicstate("MATCH_END");
         level.isLastFlag = true;
         level.lastProgress = 0;
-      } else
+      } else {
         level.isLastFlag = false;
+      }
 
       if(getTime() - level.lastDialogTime > 15000) {
         statusDialog("securing_flag", player.pers["team"]);
         statusDialog("losing_flag", otherTeam);
         level.lastDialogTime = getTime();
       }
-      #stefan $REVIEW why does this early out ?
-        return;
+
+      return;
     }
   }
 
@@ -1697,12 +1623,14 @@ onUseUpdate(team, progress, change) {
       if(ownerTeam == "neutral") {
         otherTeam = getOtherTeam(team);
         if(getTime() - level.lastDialogTime > 15000) {
+          {}
           statusDialog("securing_flag", team);
           statusDialog("losing_flag", otherTeam);
           level.lastDialogTime = getTime();
         }
       } else {
         if(getTime() - level.lastDialogTime > 15000) {
+          {}
           statusDialog("losing_flag", ownerTeam);
           statusDialog("securing_flag", team);
           level.lastDialogTime = getTime();
@@ -1713,8 +1641,9 @@ onUseUpdate(team, progress, change) {
     }
   }
 
-  if(progress < 0.05 && level.lastProgress > progress && level.isLastFlag)
+  if(progress < 0.05 && level.lastProgress > progress && level.isLastFlag) {
     setmusicstate("UNDERSCORE");
+  }
 
   level.lastProgress = progress;
 
@@ -1729,8 +1658,9 @@ onUseUpdate(team, progress, change) {
 
 statusDialog(dialog, team, checkTime) {
   time = getTime();
-  if(!isDefined(checkTime) && getTime() < level.lastStatus[team] + 6000)
+  if(!isDefined(checkTime) && getTime() < level.lastStatus[team] + 6000) {
     return;
+  }
 
   thread delayedLeaderDialog(dialog, team);
   level.lastStatus[team] = getTime();
@@ -1753,13 +1683,15 @@ resetFlagBaseEffect(delay_time) {
     wait(delay_time);
   }
 
-  if(isDefined(self.baseeffect))
+  if(isDefined(self.baseeffect)) {
     self.baseeffect delete();
+  }
 
   team = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
 
-  if(team != "neutral")
+  if(team != "neutral") {
     return;
+  }
 
   fxid = level.flagBaseFXid[team];
 
@@ -1862,13 +1794,15 @@ onUse(player) {
     if(!level.inFinalFight) {
       thread playSoundOnPlayers("mx_WAR_captured" + "_" + level.teamPrefix[team]);
       if(team != "neutral") {
-        if(!checkIfLastFlagCaptured(oldTeam))
+        if(!checkIfLastFlagCaptured(oldTeam)) {
           statusDialog("secure_flag", team);
+        }
       }
 
       if(oldTeam != "neutral") {
-        if(!checkIfLastFlagCaptured(oldTeam))
+        if(!checkIfLastFlagCaptured(oldTeam)) {
           statusDialog("lost_flag", oldTeam);
+        }
 
         level.bestSpawnFlag[oldTeam] = self.levelFlag;
       }
@@ -1885,10 +1819,8 @@ onUse(player) {
     level notify(team + "_captured_flag");
 
     if((level.flagOrder[self.label] == 0) && (getTeamFlagCount("allies") == 0)) {
-      // this is the last flag axis needs to capture to win
       isLastFlag = true;
     } else if((level.flagOrder[self.label] == (level.twarFlags.size - 1)) && (getTeamFlagCount("axis") == 0)) {
-      // this is the last flag allies need to capture to win
       isLastFlag = true;
     } else if(level.inFinalFight) {
       isLastFlag = true;
@@ -1901,10 +1833,11 @@ onUse(player) {
 
       updateMomentum(team, getDvarInt("twar_momentumFlagCap"));
 
-      if(team == "allies")
+      if(team == "allies") {
         nextFlag = level.twarFlags[level.flagOrder[self.label] + 1];
-      else
+      } else {
         nextFlag = level.twarFlags[level.flagOrder[self.label] - 1];
+      }
 
       nextFlag setFlagOwner("neutral");
 
@@ -1917,7 +1850,6 @@ onUse(player) {
   if(!isLastFlag) {
     updateFlagStatusHudDvars(undefined);
 
-    // call this before updating HUD elements so that parented offsets are always set correctly
     updateAllPlayersHudIcons(nextFlag);
 
     if(flagChanging) {
@@ -1926,7 +1858,6 @@ onUse(player) {
   }
 
   hud_hideProgressAndCountsForAllPlayers();
-
 
   updateTwarScores();
 
@@ -1943,7 +1874,6 @@ onUse(player) {
       winningReason = game["strings"]["axis_mission_accomplished"];
     }
 
-    // hacky but we want the updateWinLossStats call to go through
     level.roundLimit = 0;
 
     thread maps\mp\gametypes\_globallogic::endGame(team, winningReason);
@@ -1952,23 +1882,20 @@ onUse(player) {
 }
 
 checkIfLastFlag(team) {
-  if(getTeamFlagCount(team) == 1)
+  if(getTeamFlagCount(team) == 1) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 checkIfLastFlagCaptured(team) {
-  if(getTeamFlagCount(team) == 0)
+  if(getTeamFlagCount(team) == 0) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
-
-// determines the useRate (see _gameobjects::useObjectProxThink) based on a percentage bonus
-// if 0% is passed in it returns 1 (the amount 1 player accelerates a flag capture), for any
-// other value it determines the difference in total time it takes to capture a flag and adds
-// the bonus to determine the actual useRate.
 getUseRate(accelPercent) {
   result = 1;
   totalCaptureTime = level.captureTime * 1000;
@@ -1988,8 +1915,9 @@ onUpdateUseRate() {
     claimTeamMomentumMultiplier = game["war_momentum"][self.claimTeam + "_multiplier"];
 
     otherTeamMomentumMultiplier = 0;
-    if(otherTeam == "axis" || otherTeam == "allies")
+    if(otherTeam == "axis" || otherTeam == "allies") {
       otherTeamMomentumMultiplier = game["war_momentum"][otherTeam + "_multiplier"];
+    }
 
     momentumMaxMultiplier = 0;
     momentumMultiplierBonus = 0;
@@ -2007,8 +1935,9 @@ onUpdateUseRate() {
       numClaimants = self.numTouching[self.claimTeam];
 
       numOther = 0;
-      if(otherTeam == "axis" || otherTeam == "allies")
+      if(otherTeam == "axis" || otherTeam == "allies") {
         numOther += self.numTouching[otherTeam];
+      }
 
       accelPercent = 0;
       momentumPercent = 0;
@@ -2016,24 +1945,30 @@ onUpdateUseRate() {
       if(numClaimants && !numOther) {
         accelPercent = (numClaimants - 1) * captureAccelBonus;
 
-        if(captureAccelLimit < accelPercent)
+        if(captureAccelLimit < accelPercent) {
           accelPercent = captureAccelLimit;
+        }
 
         if(1 < claimTeamMomentumMultiplier) {
+          {}
           momentumPercent = claimTeamMomentumMultiplier * momentumMultiplierBonus;
-          if(momentumMultiplierBonusLimit < momentumPercent)
+          if(momentumMultiplierBonusLimit < momentumPercent) {
             momentumPercent = momentumMultiplierBonusLimit;
+          }
         }
       } else if(!numClaimants && numOther) {
         accelPercent = numOther * captureAccelBonus;
 
-        if(captureAccelLimit < accelPercent)
+        if(captureAccelLimit < accelPercent) {
           accelPercent = captureAccelLimit;
+        }
 
         if(1 < otherTeamMomentumMultiplier) {
+          {}
           momentumPercent = otherTeamMomentumMultiplier * momentumMultiplierBonus;
-          if(momentumMultiplierBonusLimit < momentumPercent)
+          if(momentumMultiplierBonusLimit < momentumPercent) {
             momentumPercent = momentumMultiplierBonusLimit;
+          }
         }
       }
 
@@ -2044,13 +1979,15 @@ onUpdateUseRate() {
       accelPercent = (numClaimants - 1) * captureAccelBonus;
       momentumPercent = 0;
 
-      if(captureAccelLimit < accelPercent)
+      if(captureAccelLimit < accelPercent) {
         accelPercent = captureAccelLimit;
+      }
 
       if(1 < claimTeamMomentumMultiplier) {
         momentumPercent = claimTeamMomentumMultiplier * momentumMultiplierBonus;
-        if(momentumMultiplierBonusLimit < momentumPercent)
+        if(momentumMultiplierBonusLimit < momentumPercent) {
           momentumPercent = momentumMultiplierBonusLimit;
+        }
       }
 
       self.useRate = getUseRate(accelPercent * 0.01) * getUseRate(momentumPercent * 0.01);
@@ -2067,7 +2004,6 @@ giveFlagCaptureXP(touchList, isLastFlag) {
   for(index = 0; index < players.size; index++) {
     player = touchList[players[index]].player;
 
-    // Challenges
     if(player.lastcapkiller) {
       player maps\mp\gametypes\_missions::doMissionCallback("warHero", player);
     }
@@ -2121,8 +2057,9 @@ updateTwarScores() {
 getTeamFlagCount(team) {
   score = 0;
   for(i = 0; i < level.flags.size; i++) {
-    if(level.twarFlags[i] maps\mp\gametypes\_gameobjects::getOwnerTeam() == team)
+    if(level.twarFlags[i] maps\mp\gametypes\_gameobjects::getOwnerTeam() == team) {
       score++;
+    }
   }
   return score;
 }
@@ -2132,7 +2069,6 @@ getFlagTeam() {
 }
 
 getBoundaryFlags() {
-  // get all flags which are adjacent to flags that aren't owned by the same team
   bflags = [];
   for(i = 0; i < level.flags.size; i++) {
     for(j = 0; j < level.flags[i].adjflags.size; j++) {
@@ -2151,11 +2087,13 @@ getBoundaryFlagSpawns(team) {
 
   bflags = getBoundaryFlags();
   for(i = 0; i < bflags.size; i++) {
-    if(isDefined(team) && bflags[i] getFlagTeam() != team)
+    if(isDefined(team) && bflags[i] getFlagTeam() != team) {
       continue;
+    }
 
-    for(j = 0; j < bflags[i].nearbyspawns.size; j++)
+    for(j = 0; j < bflags[i].nearbyspawns.size; j++) {
       spawns[spawns.size] = bflags[i].nearbyspawns[j];
+    }
   }
 
   return spawns;
@@ -2166,8 +2104,9 @@ getSpawnsBoundingFlag(avoidflag) {
 
   for(i = 0; i < level.flags.size; i++) {
     flag = level.flags[i];
-    if(flag == avoidflag)
+    if(flag == avoidflag) {
       continue;
+    }
 
     isbounding = false;
     for(j = 0; j < flag.adjflags.size; j++) {
@@ -2177,32 +2116,33 @@ getSpawnsBoundingFlag(avoidflag) {
       }
     }
 
-    if(!isbounding)
+    if(!isbounding) {
       continue;
+    }
 
-    for(j = 0; j < flag.nearbyspawns.size; j++)
+    for(j = 0; j < flag.nearbyspawns.size; j++) {
       spawns[spawns.size] = flag.nearbyspawns[j];
+    }
   }
 
   return spawns;
 }
-
-// gets an array of all spawnpoints which are near flags that are
-// owned by the given team, or that are adjacent to flags owned by the given team.
 getOwnedAndBoundingFlagSpawns(team) {
   spawns = [];
 
   for(i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getFlagTeam() == team) {
-      // add spawns near this flag
-      for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
+      for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
+      }
     } else {
       for(j = 0; j < level.flags[i].adjflags.size; j++) {
         if(level.flags[i].adjflags[j] getFlagTeam() == team) {
-          // add spawns near this flag
-          for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
+          {}
+
+          for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
             spawns[spawns.size] = level.flags[i].nearbyspawns[s];
+          }
           break;
         }
       }
@@ -2211,17 +2151,14 @@ getOwnedAndBoundingFlagSpawns(team) {
 
   return spawns;
 }
-
-// gets an array of all spawnpoints which are near flags that are
-// owned by the given team
 getOwnedFlagSpawns(team) {
   spawns = [];
 
   for(i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getFlagTeam() == team) {
-      // add spawns near this flag
-      for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
+      for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
+      }
     }
   }
 
@@ -2230,7 +2167,6 @@ getOwnedFlagSpawns(team) {
 
 flagSetup(refWrapper) {
   if(refWrapper.maperrors.size == 0) {
-    // find adjacent flags
     for(i = 0; i < level.flags.size; i++) {
       if(isDefined(level.flags[i].descriptor.script_linkto)) {
         adjdescs = strtok(level.flags[i].descriptor.script_linkto, " ");
@@ -2241,11 +2177,13 @@ flagSetup(refWrapper) {
       for(j = 0; j < adjdescs.size; j++) {
         otherdesc = refWrapper.descriptorsByLinkname[adjdescs[j]];
         if(!isDefined(otherdesc) || otherdesc.targetname != "twar_flag_descriptor") {
+          {}
           refWrapper.maperrors[refWrapper.maperrors.size] = "twar_flag_descriptor with script_linkname \"" + level.flags[i].descriptor.script_linkname + "\" linked to \"" + adjdescs[j] + "\" which does not exist as a script_linkname of any other entity with a targetname of twar_flag_descriptor (or, if it does, that twar_flag_descriptor has not been assigned to a flag)";
           continue;
         }
         adjflag = otherdesc.flag;
         if(adjflag == level.flags[i]) {
+          {}
           refWrapper.maperrors[refWrapper.maperrors.size] = "twar_flag_descriptor with script_linkname \"" + level.flags[i].descriptor.script_linkname + "\" linked to itself";
           continue;
         }
@@ -2254,7 +2192,6 @@ flagSetup(refWrapper) {
     }
   }
 
-  // assign each spawnpoint to nearest flag
   spawnpoints = getEntArray("mp_dom_spawn", "classname");
   for(i = 0; i < spawnpoints.size; i++) {
     if(isDefined(spawnpoints[i].script_linkto)) {
@@ -2270,6 +2207,7 @@ flagSetup(refWrapper) {
       for(j = 0; j < level.flags.size; j++) {
         dist = distancesquared(level.flags[j].origin, spawnpoints[i].origin);
         if(!isDefined(nearestflag) || dist < nearestdist) {
+          {}
           nearestflag = level.flags[j];
           nearestdist = dist;
         }
@@ -2288,11 +2226,11 @@ onEndGame(winningTeam) {
     }
   }
 
-  // reset the generic message bar so it does not persist past this game
   for(index = 0; index < level.players.size; index++) {
     player = level.players[index];
-    if(isDefined(player))
+    if(isDefined(player)) {
       player thread maps\mp\gametypes\_hud::showClientGenericMessageBar(undefined, undefined);
+    }
   }
 
   hideAllPlayersHudIcons();
@@ -2310,8 +2248,6 @@ printMapErrors(refWrapper) {
     maps\mp\gametypes\_callbacksetup::AbortLevel();
   }
 }
-
-//string
 twar_flag_index_to_script_flag(
   flag_index) {
   script_flag = undefined;
@@ -2339,8 +2275,6 @@ twar_flag_index_to_script_flag(
 
   return script_flag;
 }
-
-//int[]
 twar_generate_non_enemy_flag_indices(
   player_team) {
   flag_indices = [];
@@ -2355,14 +2289,17 @@ twar_generate_non_enemy_flag_indices(
 }
 
 twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag) {
-  if(!isDefined(influencer_entity.script_gameobjectname) || influencer_entity.script_gameobjectname != "twar")
+  if(!isDefined(influencer_entity.script_gameobjectname) || influencer_entity.script_gameobjectname != "twar") {
     return false;
+  }
 
-  if(!isDefined(influencer_entity.script_team) || influencer_entity.script_team != flag_team)
+  if(!isDefined(influencer_entity.script_team) || influencer_entity.script_team != flag_team) {
     return false;
+  }
 
-  if(!isDefined(influencer_entity.script_twar_flag) || influencer_entity.script_twar_flag != script_flag)
+  if(!isDefined(influencer_entity.script_twar_flag) || influencer_entity.script_twar_flag != script_flag) {
     return false;
+  }
 
   return true;
 }
@@ -2376,21 +2313,22 @@ twar_create_designer_placed_spawn_influencers_for_flag(
   second_closest_influencer_to_objective_index = -1;
 
   if(isDefined(contested_flag)) {
-    // find the linked influencer which is closest to the next objective, and give it a bonus
     flag_origin = contested_flag GetOrigin();
     closest_distance_squared = 1000000000000.0;
     second_closest_distance_squared = 1000000000000.0;
     for(influencer_index = 0; influencer_index < placed_influencers.size; influencer_index++) {
       influencer_entity = placed_influencers[influencer_index];
 
-      if(!twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag))
+      if(!twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag)) {
         continue;
+      }
 
       influencer_origin = influencer_entity GetOrigin();
       distance_squared = point3d_distance_squared(flag_origin, influencer_origin);
 
       if(distance_squared < closest_distance_squared) {
         if(closest_distance_squared < second_closest_distance_squared) {
+          {}
           second_closest_distance_squared = closest_distance_squared;
           second_closest_influencer_to_objective_index = closest_influencer_to_objective_index;
         }
@@ -2406,12 +2344,12 @@ twar_create_designer_placed_spawn_influencers_for_flag(
 
   secondary_influencer_bonus_percent = getdvarfloat("twar_secondaryInfluencerBonus");
 
-  // turn on all influencers which are activated by ownership of this flag
   for(influencer_index = 0; influencer_index < placed_influencers.size; influencer_index++) {
     influencer_entity = placed_influencers[influencer_index];
 
-    if(!twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag))
+    if(!twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag)) {
       continue;
+    }
 
     influencer_score = score;
     if(influencer_index == closest_influencer_to_objective_index) {
@@ -2426,16 +2364,12 @@ twar_create_designer_placed_spawn_influencers_for_flag(
 
   return;
 }
-
-// this should be called when ever the contested flag changes
 twar_update_spawn_influencers() {
-  // this will be all teams
   team_mask = 0;
   clearspawnpointsbaseweight(team_mask);
 
   twar_remove_spawn_influencers();
   twar_create_spawn_influencers();
-
 }
 
 twar_create_spawn_influencers() {
@@ -2445,22 +2379,19 @@ twar_create_spawn_influencers() {
 
   placed_influencers = getEntArray("mp_uspawn_influencer", "classname");
 
-  if(placed_influencers.size == 0)
+  if(placed_influencers.size == 0) {
     return;
+  }
 
   twar_create_spawn_influencers_for_team("allies", placed_influencers);
   twar_create_spawn_influencers_for_team("axis", placed_influencers);
 
-  // generate contested flag spawn influencer
   contested_flag = locate_contested_twar_flag();
   if(isDefined(contested_flag)) {
     level.twar_influencers[level.twar_influencers.size] = twar_create_contested_objective_influencer(contested_flag);
-    //level.twar_influencers[level.twar_influencers.size] = twar_create_contested_objective_positive_influencer(contested_flag);
 
-    // this will be all teams
     team_mask = 0;
 
-    // set the spawn points that face the flag to favorable
     setspawnpointsbaseweight(team_mask, contested_flag.origin, getdvarint("twar_spawnPointFacingAngle"), level.spawnsystem.objective_facing_bonus);
   }
 }
@@ -2473,7 +2404,6 @@ twar_create_spawn_influencers_for_team(team, placed_influencers) {
 
   if(team_flag_indices.size > 0) {
     if((level.flags[0] GetFlagTeam()) == team) {
-      // forward-most flag is the last one in the array
       for(flag_index = team_flag_indices.size - 1; flag_index >= 0; flag_index--) {
         twar_create_designer_placed_spawn_influencers_for_flag(
           placed_influencers, team_flag_indices[flag_index], team, linked_influencer_score);
@@ -2481,7 +2411,6 @@ twar_create_spawn_influencers_for_team(team, placed_influencers) {
         linked_influencer_score -= (score_falloff_percentage * linked_influencer_score);
       }
     } else {
-      // forward-most flag is the first one in the array
       for(flag_index = 0; flag_index < team_flag_indices.size; flag_index++) {
         twar_create_designer_placed_spawn_influencers_for_flag(
           placed_influencers, team_flag_indices[flag_index], team, linked_influencer_score);
@@ -2493,26 +2422,18 @@ twar_create_spawn_influencers_for_team(team, placed_influencers) {
 }
 
 twar_create_contested_objective_influencer(flag_entity) {
-  // war: contested flag influencer (negative influencer generated programatically around the presently contested flag)
-  // want players to spawn near objective, but not on top of it
-  // so, use a very large, but weak, inverse-linear influencer
   spawn_twar_contested_flag_influencer_score = level.spawnsystem.twar_contested_flag_influencer_score;
   spawn_twar_contested_flag_influencer_score_curve = level.spawnsystem.twar_contested_flag_influencer_score_curve;
   spawn_twar_contested_flag_influencer_radius = level.spawnsystem.twar_contested_flag_influencer_radius;
 
-  // this affects both teams
   return addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, flag_entity GetOrigin(), spawn_twar_contested_flag_influencer_radius, spawn_twar_contested_flag_influencer_score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(spawn_twar_contested_flag_influencer_score_curve));
 }
 
 twar_create_contested_objective_positive_influencer(flag_entity) {
-  // war: contested flag influencer (negative influencer generated programatically around the presently contested flag)
-  // want players to spawn near objective, but not on top of it
-  // so, use a very large, but weak, inverse-linear influencer
   spawn_twar_contested_flag_influencer_score = level.spawnsystem.twar_contested_flag_positive_influencer_score;
   spawn_twar_contested_flag_influencer_score_curve = level.spawnsystem.twar_contested_flag_positive_influencer_score_curve;
   spawn_twar_contested_flag_influencer_radius = level.spawnsystem.twar_contested_flag_positive_influencer_radius;
 
-  // this affects both teams
   return addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, flag_entity GetOrigin(), spawn_twar_contested_flag_influencer_radius, spawn_twar_contested_flag_influencer_score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(spawn_twar_contested_flag_influencer_score_curve));
 }
 
@@ -2527,8 +2448,6 @@ twar_remove_spawn_influencers() {
 
   level.twar_influencers = [];
 }
-
-// entity
 locate_contested_twar_flag() {
   flag_entity = undefined;
 
@@ -2542,8 +2461,6 @@ locate_contested_twar_flag() {
 
   return flag_entity;
 }
-
-//int
 locate_contested_twar_flag_index() {
   for(flag_index = 0; flag_index < level.flags.size; flag_index++) {
     flag_team = level.flags[flag_index] GetFlagTeam();
@@ -2562,10 +2479,11 @@ hud_beginUseHudFlagProgressBarsForPlayers(captureTeam) {
 }
 
 hud_beginUseHudFlagProgressBars(captureTeam) {
-  if(self.pers["team"] == captureTeam)
+  if(self.pers["team"] == captureTeam) {
     self.waypointProgress.bar.color = (1, 1, 1);
-  else
+  } else {
     self.waypointProgress.bar.color = (1, 0, 0);
+  }
 }
 
 hud_createPlayerFlagElems() {
@@ -2573,8 +2491,9 @@ hud_createPlayerFlagElems() {
     return;
   }
 
-  if(isDefined(self.flagElemsCreated))
+  if(isDefined(self.flagElemsCreated)) {
     return;
+  }
 
   self hud_createPlayerFlagIcons();
   self hud_createPlayerFlagProgressBar();
@@ -2590,8 +2509,9 @@ hud_createPlayerFlagElems() {
 
   flag = locate_contested_twar_flag();
 
-  if(!isDefined(flag))
+  if(!isDefined(flag)) {
     return;
+  }
 
   self hud_updateHudParentingForPlayer(level.flagOrder[flag.useObj.label]);
 }
@@ -2676,8 +2596,9 @@ hud_createPlayerFlagCapCount() {
 hud_updateHudParentingForAllPlayers() {
   flag = locate_contested_twar_flag();
 
-  if(!isDefined(flag))
+  if(!isDefined(flag)) {
     return;
+  }
 
   parent_elem_index = level.flagOrder[flag.useObj.label];
   for(i = 0; i < level.players.size; i++) {
@@ -2686,13 +2607,15 @@ hud_updateHudParentingForAllPlayers() {
 }
 
 hud_updateHudParentingForPlayer(parent_elem_index) {
-  if(level.hardcoreMode)
+  if(level.hardcoreMode) {
     return;
+  }
 
   parentElem = self.warHudElems[parent_elem_index];
   if(self.waypointAlliesTouching.parent != parentElem) {
-    if(isDefined(self.waypointAlliesTouching.parent))
+    if(isDefined(self.waypointAlliesTouching.parent)) {
       self.waypointAlliesTouching.parent removeChild(self.waypointAlliesTouching);
+    }
 
     parentElem addChild(self.waypointAlliesTouching);
     self.waypointAlliesTouching setParent(parentElem);
@@ -2700,8 +2623,9 @@ hud_updateHudParentingForPlayer(parent_elem_index) {
   }
 
   if(self.waypointAxisTouching.parent != parentElem) {
-    if(isDefined(self.waypointAxisTouching.parent))
+    if(isDefined(self.waypointAxisTouching.parent)) {
       self.waypointAxisTouching.parent removeChild(self.waypointAxisTouching);
+    }
 
     parentElem addChild(self.waypointAxisTouching);
     self.waypointAxisTouching setParent(parentElem);
@@ -2709,8 +2633,9 @@ hud_updateHudParentingForPlayer(parent_elem_index) {
   }
 
   if(self.waypointProgress.parent != parentElem) {
-    if(isDefined(self.waypointProgress.parent))
+    if(isDefined(self.waypointProgress.parent)) {
       self.waypointProgress.parent removeChild(self.waypointProgress);
+    }
 
     parentElem addChild(self.waypointProgress);
     self.waypointProgress setParent(parentElem);
@@ -2734,12 +2659,12 @@ hud_showHudForPlayer(contested_flag) {
     return;
   }
 
-  if(self isHidingHud())
+  if(self isHidingHud()) {
     return;
+  }
 
   team = self.pers["team"];
 
-  // only show these if a flag is being capped
   if(contested_flag.claimTeam != "none" && !level.hardcoreMode) {
     self.waypointProgress showElem();
 
@@ -2757,20 +2682,24 @@ hud_showHudForPlayer(contested_flag) {
 hud_showProgressBarForPlayer(enabled) {
   if(enabled && !(self isHidingHud()) && !level.hardcoreMode) {
     self.waypointProgress showElem();
-  } else
+  } else {
     self.waypointProgress hideElem();
+  }
 }
 
 hud_showProgressBarsForAllPlayers(enabled, exclude) {
-  if(level.hardcoreMode)
+  if(level.hardcoreMode) {
     return;
+  }
 
   for(i = 0; i < level.players.size; i++) {
-    if(!isDefined(level.players[i]))
+    if(!isDefined(level.players[i])) {
       continue;
+    }
 
-    if(isDefined(exclude) && level.players[i] == exclude)
+    if(isDefined(exclude) && level.players[i] == exclude) {
       continue;
+    }
 
     level.players[i] hud_showProgressBarForPlayer(enabled);
   }
@@ -2778,8 +2707,9 @@ hud_showProgressBarsForAllPlayers(enabled, exclude) {
 
 hud_hideProgressAndCountsForAllPlayers() {
   for(i = 0; i < level.players.size; i++) {
-    if(!isDefined(level.players[i]))
+    if(!isDefined(level.players[i])) {
       continue;
+    }
 
     level.players[i] hud_showProgressBarForPlayer(false);
     level.players[i] hud_showPlayerCountForPlayer(undefined, false);
@@ -2797,8 +2727,9 @@ hud_showHudElem(enabled) {
 
 hud_showPlayerCountForPlayer(contested_flag, enabled) {
   if(enabled) {
-    if(level.hardcoreMode)
+    if(level.hardcoreMode) {
       return;
+    }
 
     enabled = (!(self isHidingHud()));
     numallies = contested_flag.numTouching["allies"];

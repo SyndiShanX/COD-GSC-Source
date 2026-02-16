@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_shrine_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -34,14 +39,6 @@ precacheFX() {
   level._effect["mp_water_drip"] = loadfx("maps/mp_maps/fx_mp_water_drip");
   level._effect["mp_waterfall"] = loadfx("maps/mp_maps/fx_mp_water_fall_sm");
   level._effect["mp_waterfall_splash"] = loadfx("maps/mp_maps/fx_mp_water_fall_puddle_splash");
-
-  //////////////////////////////////////////////////////////////////////////////////////
-  // Alex Section:
-
-  //level._effect["distant_muzzleflash"]		=	loadfx("weapon/muzzleflashes/heavy");
-
-  //level._effect["flak_flash"] 	= loadfx("weapon/flak/fx_flak_cloudflash_night");
-
 }
 
 spawnFX() {

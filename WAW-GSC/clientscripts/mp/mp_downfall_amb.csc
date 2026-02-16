@@ -1,21 +1,12 @@
-//
-// file: mp_seelow_amb.csc
-// description: clientside ambient script for template: setup ambient sounds, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_downfall_amb.csc
+************************************************/
 
 #include clientscripts\mp\_utility;
 #include clientscripts\mp\_ambientpackage;
 
 main() {
-  //************************************************************************************************
-  //Ambient Packages
-  //************************************************************************************************
-
-  //declare an ambientpackage, and populate it with elements
-  //mandatory parameters are <package name>, <alias name>, <spawnMin>, <spawnMax>
-  //followed by optional parameters <distMin>, <distMax>, <angleMin>, <angleMax>
-
   declareAmbientPackage("outdoors_pkg");
 
   declareAmbientPackage("indoors1_pkg");
@@ -29,15 +20,6 @@ main() {
   declareAmbientPackage("corridor_pkg");
 
   declareAmbientPackage("underground_pkg");
-
-
-  //************************************************************************************************
-  // ROOMS
-  //************************************************************************************************
-
-  //explicitly activate the base ambientpackage, which is used when not touching any ambientPackageTriggers
-  //the other trigger based packages will be activated automatically when the player is touching them
-  //the same pattern is followed for setting up ambientRooms
 
   declareAmbientRoom("outdoors_room");
   setAmbientRoomTone("outdoors_room", "outdoors_wind");
@@ -67,15 +49,6 @@ main() {
   setAmbientRoomTone("underground_room", "underground_wind");
   setAmbientRoomReverb("underground_room", "dirt_tunnel", 1, 1);
 
-
-  //************************************************************************************************
-  //ACTIVATE DEFAULT AMBIENT SETTINGS
-  //************************************************************************************************
-
   activateAmbientPackage(0, "outdoors_pkg", 0);
   activateAmbientRoom(0, "outdoors_room", 0);
-
-  // Unlike the server side, no need to wait for players to be set up on the client side - // no players == no client scripts running yet.
-
-
 }

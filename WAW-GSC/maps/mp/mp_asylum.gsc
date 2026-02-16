@@ -1,8 +1,9 @@
-main() {
-  //maps\mp\mp_cargoship_fx::main();
-  //maps\createart\mp_cargoship_art::main();
-  //needs to be first for create fx
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_asylum.gsc
+**************************************/
 
+main() {
   maps\mp\mp_asylum_fx::main();
   maps\mp\createart\mp_asylum_art::main();
 
@@ -18,11 +19,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_asylum");
 
-  //setExpFog(300, 1400, 0.5, 0.5, 0.5, 0);
-  //VisionSetNaked( "mp_cargoship" );
-  //ambientPlay("ambient_cargoshipmp_ext");
-
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "russian";
   game["axis"] = "german";
   game["attackers"] = "allies";
@@ -34,20 +30,14 @@ main() {
 
   setDvar("compassmaxrange", "2100");
 
-  //Spawned Collision
   spawncollision("collision_geo_128x128x128", "collider", (-1337, -771, 395.5), (0, 0, 0));
 
-  //fix for people getting on ledge
   spawncollision("collision_wall_256x256x10", "collider", (-368, -52, 320), (0, 0, 0));
-  //fix for people getting on roof	
   spawncollision("collision_wall_512x512x10", "collider", (872, 1747, 596), (0, 270, 0));
-  //Fix for stuck spot that was introduced between TU1 and TU2
   spawncollision("collision_wall_256x256x10", "collider", (1160, 965, 74), (0, 0, 0));
 
-  //fix for out of play space exploit	
   spawncollision("collision_geo_256x256x256", "collider", (960, -724, 316), (0, 0, 0));
 
-  //attempting fix for prone into filing cabinet
   spawncollision("collision_geo_32x32x32", "collider", (-71, 1309, 217), (0, 340, 0));
   spawncollision("collision_geo_32x32x32", "collider", (-103, 1320, 195), (0, 340, 0));
 
@@ -63,7 +53,6 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_ASYLUM_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_ASYLUM_E";
 
-  // enable new player spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
 
   createSpawnpoint("mp_ctf_spawn_allies", (-1322.6, 365.3, 246), 0);
@@ -117,9 +106,11 @@ createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isDefined(level.extraSpawnpoints))
+  if(!isDefined(level.extraSpawnpoints)) {
     level.extraSpawnpoints = [];
-  if(!isDefined(level.extraSpawnpoints[classname]))
+  }
+  if(!isDefined(level.extraSpawnpoints[classname])) {
     level.extraSpawnpoints[classname] = [];
+  }
   level.extraSpawnpoints[classname][level.extraSpawnpoints[classname].size] = spawnpoint;
 }

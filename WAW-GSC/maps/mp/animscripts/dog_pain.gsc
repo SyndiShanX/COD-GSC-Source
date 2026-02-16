@@ -1,3 +1,8 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\dog_pain.gsc
+********************************************/
+
 /using_animtree ("dog");#include maps\mp\animscripts\utility;
 
 main() {
@@ -15,7 +20,6 @@ main() {
 
   pain_anim = getAnimDirection(self.damageyaw);
 
-  // should only do this while running because the anim is supposed to while running
   if(speed > level.dogRunPainSpeed) {
     pain_anim = "pain_run_" + pain_anim;
   } else {

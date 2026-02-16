@@ -1,183 +1,193 @@
-	busInit() {
-	  level.activeBusState = "";
-	  level.nextBusState = "";
-	  level.busStates = [];
+/****************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_busing.csc
+****************************************/
 
-	  registerDefaults();
+busInit() {
+  level.activeBusState = "";
+  level.nextBusState = "";
+  level.busStates = [];
 
-	  thread updateBus();
+  registerDefaults();
 
-	  clientscripts\mp\_utility::registerSystem("busCmd", ::busCmdHandler);
-	}
+  thread updateBus();
 
-	busCmdHandler(clientNum, state, oldState) {
-	  if(clientNum != 0) {
-	    return;
-	  }
+  clientscripts\mp\_utility::registerSystem("busCmd", ::busCmdHandler);
+}
 
-	  level.nextBusState = state;
+busCmdHandler(clientNum, state, oldState) {
+  if(clientNum != 0) {
+    return;
+  }
 
-	  println("bussing debug: got state '" + state + "'");
+  level.nextBusState = state;
 
-	  level notify("new_bus");
-	}
+  println("bussing debug: got state '" + state + "'");
 
-	updateBus() {
-	  while(1) {
-	    if(level.activeBusState == level.nextBusState) //state didn't change during transition
-	    {
-	      level waittill("new_bus");
-	    }
+  level notify("new_bus");
+}
 
-	    if(level.activeBusState == level.nextBusState) //got same one twice, ignore
-	    {
-	      continue;
-	    }
-	    assert(isDefined(level.nextBusState));
-	    assert(isDefined(level.activeBusState));
+updateBus() {
+  while(1) {
+    if(level.activeBusState == level.nextBusState) {
+      level waittill("new_bus");
+    }
 
-	    busStateDeactivate();
+    if(level.activeBusState == level.nextBusState) {
+      continue;
+    }
+    assert(isDefined(level.nextBusState));
+    assert(isDefined(level.activeBusState));
 
-	    next = level.nextBusState; //save since this state could change while we are activating
+    busStateDeactivate();
 
-	    if(next != "") {
-	      busStateActivate(next);
-	    }
+    next = level.nextBusState;
 
-	    level.activeBusState = next;
-	  }
-	}
+    if(next != "") {
+      busStateActivate(next);
+    }
 
-	busStateActivate(name) {
-	  state = level.busStates[name];
+    level.activeBusState = next;
+  }
+}
 
-	  if(!isDefined(state)) {
-	    println("invalid bus state '" + name + "'");
-	    return;
-	  }
+busStateActivate(name) {
+  state = level.busStates[name];
 
-	  assert(isDefined(state.time));
+  if(!isDefined(state)) {
+    println("invalid bus state '" + name + "'");
+    return;
+  }
 
-	  setBusFadeTime(state.time);
+  assert(isDefined(state.time));
 
-	  keys = getArrayKeys(state.levels);
+  setBusFadeTime(state.time);
 
-	  assert(isDefined(keys));
+  keys = getArrayKeys(state.levels);
 
-	  for(i = 0; i < keys.size; i++) {
-	    setBusVolume(keys[i], state.levels[keys[i]]);
-	  }
-	}
+  assert(isDefined(keys));
 
-	busStateDeactivate() {
-	  setBusFadeTime(.5);
+  for(i = 0; i < keys.size; i++) {
+    setBusVolume(keys[i], state.levels[keys[i]]);
+  }
+}
 
-	  for(i = 0; i < GetBusCount(); i++) {
-	    setBusVolume(GetBusName(i), 1.0);
-	  }
-	}
+busStateDeactivate() {
+  setBusFadeTime(.5);
 
-	declareBusState(name) {
-	  if(!isDefined(level.busStates)) {
-	    return;
-	  }
+  for(i = 0; i < GetBusCount(); i++) {
+    setBusVolume(GetBusName(i), 1.0);
+  }
+}
 
-	  level.busDeclareName = name;
+declareBusState(name) {
+  if(!isDefined(level.busStates)) {
+    return;
+  }
 
-	  if(isDefined(level.busStates[name])) {
-	    return;
-	  }
+  level.busDeclareName = name;
 
-	  level.busStates[name] = spawnStruct();
-	  level.busStates[name].time = 0.5;
-	  level.busStates[name].levels = [];
-	}
+  if(isDefined(level.busStates[name])) {
+    return;
+  }
 
-	busVolume(busname, value) {
-	  level.busStates[level.busDeclareName].levels[busname] = value;
-	}
+  level.busStates[name] = spawnStruct();
+  level.busStates[name].time = 0.5;
+  level.busStates[name].levels = [];
+}
 
-	busFadeTime(time) {
-	  level.busStates[level.busDeclareName].time = time;
-	}
+busVolume(busname, value) {
+  level.busStates[level.busDeclareName].levels[busname] = value;
+}
 
-	busIsIn(bus, names) {
-	  for(j = 0; j < names.size; j++) {
-	    if(bus == names[j]) {
-	      return true;
-	    }
-	  }
-	  return false;
-	}
+busFadeTime(time) {
+  level.busStates[level.busDeclareName].time = time;
+}
 
-	busVolumes(names, value) {
-	  for(j = 0; j < names.size; j++) {
-	    busVolume(names[j], value);
-	  }
-	}
+busIsIn(bus, names) {
+  for(j = 0; j < names.size; j++) {
+    if(bus == names[j]) {
+      return true;
+    }
+  }
+  return false;
+}
 
-	busVolumeAll(value) {
-	  for(i = 0; i < GetBusCount(); i++) {
-	    busVolume(GetBusName(i), value);
-	  }
-	}
+busVolumes(names, value) {
+  for(j = 0; j < names.size; j++) {
+    busVolume(names[j], value);
+  }
+}
 
-	argsAsDict(a, b, c, d, e, f, g) {
-	  //icky but good syntax for the user
-	  names = [];
+busVolumeAll(value) {
+  for(i = 0; i < GetBusCount(); i++) {
+    busVolume(GetBusName(i), value);
+  }
+}
 
-	  if(isDefined(a))
-	    names[0] = a;
-	  if(isDefined(b))
-	    names[1] = b;
-	  if(isDefined(c))
-	    names[2] = c;
-	  if(isDefined(d))
-	    names[3] = d;
-	  if(isDefined(e))
-	    names[4] = e;
-	  if(isDefined(f))
-	    names[5] = f;
-	  if(isDefined(g))
-	    names[6] = g;
-	  return names;
-	}
+argsAsDict(a, b, c, d, e, f, g) {
+  names = [];
 
-	busVolumesExcept(a, b, c, d, e, f, g) {
-	  args = argsAsDict(a, b, c, d, e, f, g);
+  if(isDefined(a)) {
+    names[0] = a;
+  }
+  if(isDefined(b)) {
+    names[1] = b;
+  }
+  if(isDefined(c)) {
+    names[2] = c;
+  }
+  if(isDefined(d)) {
+    names[3] = d;
+  }
+  if(isDefined(e)) {
+    names[4] = e;
+  }
+  if(isDefined(f)) {
+    names[5] = f;
+  }
+  if(isDefined(g)) {
+    names[6] = g;
+  }
+  return names;
+}
 
-	  value = args[args.size - 1];
-	  names = [];
+busVolumesExcept(a, b, c, d, e, f, g) {
+  args = argsAsDict(a, b, c, d, e, f, g);
 
-	  for(i = 0; i < args.size - 1; i++)
-	    names[i] = args[i];
+  value = args[args.size - 1];
+  names = [];
 
-	  for(i = 0; i < GetBusCount(); i++) {
-	    name = GetBusName(i);
-	    if(!busIsIn(GetBusName(i), names)) {
-	      busVolume(name, value);
-	    }
-	  }
+  for(i = 0; i < args.size - 1; i++) {
+    names[i] = args[i];
+  }
 
-	}
+  for(i = 0; i < GetBusCount(); i++) {
+    name = GetBusName(i);
+    if(!busIsIn(GetBusName(i), names)) {
+      busVolume(name, value);
+    }
+  }
 
-	registerDefaults() {
-	  declareBusState("map_load");
-	  busFadeTime(.25);
-	  busVolumesExcept("music", "ui", 0);
+}
 
-	  declareBusState("map_start");
-	  busFadeTime(2);
-	  busVolumeAll(1);
+registerDefaults() {
+  declareBusState("map_load");
+  busFadeTime(.25);
+  busVolumesExcept("music", "ui", 0);
 
-	  declareBusState("default");
-	  busFadeTime(.25);
-	  busVolumeAll(1);
+  declareBusState("map_start");
+  busFadeTime(2);
+  busVolumeAll(1);
 
-	  declareBusState("all_off");
-	  busVolumeAll(0);
+  declareBusState("default");
+  busFadeTime(.25);
+  busVolumeAll(1);
 
-	  declareBusState("map_end");
-	  busFadeTime(2);
-	  busVolumesExcept("music", "ui", "voice", 0);
-	}
+  declareBusState("all_off");
+  busVolumeAll(0);
+
+  declareBusState("map_end");
+  busFadeTime(2);
+  busVolumesExcept("music", "ui", "voice", 0);
+}

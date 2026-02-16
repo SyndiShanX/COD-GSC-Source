@@ -1,7 +1,11 @@
+/*****************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_ambient.csc
+*****************************************/
+
 #include clientscripts\mp\_utility;
 #include clientscripts\mp\_utility_code;
 
-// setup a script_struct to play scripted Flak88 tracers FX
 setup_point_fx(point, fx_id) {
   if(isDefined(point.script_fxid)) {
     fx_id = point.script_fxid;
@@ -26,8 +30,6 @@ setup_point_fx(point, fx_id) {
     level thread ambient_fakefire_think(point);
   }
 }
-
-// rotate the Flak88 tracers FX
 ambient_flak_think(point) {
   amount = undefined;
   speed = undefined;
@@ -58,9 +60,6 @@ ambient_flak_think(point) {
     wait(randomFloatRange(min_delay, max_delay));
   }
 }
-
-// This mimics the rotation of the FX, but without using an ent (or client-ent)
-// Updates the forward and up vectors which are used above
 ambient_flak_rotate(point) {
   min_pitch = 30;
   max_pitch = 80;
@@ -94,9 +93,6 @@ ambient_flak_rotate(point) {
     point.up = up;
   }
 }
-
-// This gives a random chance to play a cloud flash
-// or flak burst FX for the ambient Flak
 ambient_flak_flash(point, min_burst_time, max_burst_time) {
   min_dist = 5000;
   max_dist = 6500;
@@ -132,11 +128,6 @@ ambient_flak_flash(point, min_burst_time, max_burst_time) {
   }
 }
 
-//*******************************************************************************************************
-// Ambient Weapon Muzzleflashes
-//
-// point = a script_struct in the map
-// This is used to play the ambient fake fire fx and sound
 ambient_fakefire_think(point) {
   fireSound = undefined;
   weapType = undefined;
@@ -153,7 +144,6 @@ ambient_fakefire_think(point) {
     point.weaponinfo = "axis_turret";
   }
 
-  // determine what type of weapon the script_struct is faking
   switch (point.weaponinfo) {
     case "allies_assault":
 
@@ -284,7 +274,7 @@ ambient_fakefire_think(point) {
     case "axis_turret":
 
       if(isDefined(level.axis_team) && (level.axis_team == "german")) {
-        fireSound = "weap_bar_fire"; //update this if the sound changes
+        fireSound = "weap_bar_fire";
       } else {
         fireSound = "weap_type92_fire";
       }
@@ -304,7 +294,6 @@ ambient_fakefire_think(point) {
   }
 
   while(1) {
-    // burst fire
     burst = randomIntRange(burstMin, burstMax);
 
     for(i = 0; i < burst; i++) {
@@ -312,16 +301,9 @@ ambient_fakefire_think(point) {
 
       target = point.origin + vector_multiply(anglesToForward(point.angles + (-3 + randomInt(6), -5 + randomInt(10), 0)), traceDist);
 
-      // -- not using real weaponsettings
       bulletTracer(point.origin, target, false);
 
       playFX(0, level._effect[point.fx_id], point.origin, point.forward);
-
-      // snyder steez - reduce popcorn effect
-      //			if(randomInt(100) <= soundChance)
-      //			{
-      //				thread play_sound_in_space(0, fireSound, point.origin);
-      //			}
 
       wait(randomFloatRange(betweenShotsMin, betweenShotsMax));
     }

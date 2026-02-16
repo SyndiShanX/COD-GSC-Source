@@ -73,7 +73,7 @@ lastshottime() {
   lastshottime = 0;
   while(1) {
     players = get_players();
-    if(players[0] usebuttonpressed()) {
+    if(players[0] useButtonPressed()) {
       lastshottime = 0;
     } else {
       lastshottime += .05;

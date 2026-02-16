@@ -1,18 +1,14 @@
-//
-// file: mp_courtyard_fx.gsc
-// description: clientside fx script for template: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_courtyard_fx.csc
+************************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {}
 
-// --- QUINN'S SECTION ---//
 precache_createfx_fx() {
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");
@@ -41,7 +37,6 @@ precache_createfx_fx() {
   level._effect["mp_smoke_fire_column"] = loadfx("maps/mp_maps/fx_mp_smoke_fire_column_short");
   level._effect["mp_ash_falling_large"] = loadfx("maps/mp_maps/fx_mp_ash_falling_large");
   level._effect["mp_embers_patch"] = loadfx("maps/mp_maps/fx_mp_embers_patch");
-
 }
 
 main() {

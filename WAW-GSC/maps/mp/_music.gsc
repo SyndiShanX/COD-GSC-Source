@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_music.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 music_init() {

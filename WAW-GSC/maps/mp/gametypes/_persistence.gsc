@@ -1,3 +1,8 @@
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_persistence.gsc
+**********************************************/
+
 init() {
   level.persistentDataInfo = [];
 
@@ -17,21 +22,10 @@ onPlayerConnect() {
   }
 }
 
-// ==========================================
-// Script persistent data functions
-// These are made for convenience, so persistent data can be tracked by strings.
-// They make use of code functions which are prototyped below.
-
-/*
-=============
-statGet
-
-Returns the value of the named stat
-=============
-*/
 statGet(dataName) {
-  if(!level.onlineGame)
+  if(!level.onlineGame) {
     return 0;
+  }
 
   return self getStat(int(tableLookup("mp/playerStatsTable.csv", 1, dataName, 0)));
 }
@@ -48,7 +42,6 @@ getStatNameWithGameType(dataName) {
   }
 
   return prefix + level.gametype + "_" + dataname;
-
 }
 
 getStatNumberWithGametype(dataName) {
@@ -61,16 +54,11 @@ statSetWithGameType(dataName, value) {
     self setStat(statNumber, value);
   }
 }
-/*
-=============
-setStat
 
-Sets the value of the named stat
-=============
-*/
 statSet(dataName, value, includeGameType) {
-  if(!level.rankedMatch)
+  if(!level.rankedMatch) {
     return;
+  }
 
   self setStat(int(tableLookup("mp/playerStatsTable.csv", 1, dataName, 0)), value);
 
@@ -81,16 +69,10 @@ statSet(dataName, value, includeGameType) {
   self setStatLBByname(dataName, value);
 }
 
-/*
-=============
-statAdd
-
-Adds the passed value to the value of the named stat
-=============
-*/
 statAdd(dataName, value) {
-  if(!level.rankedMatch)
+  if(!level.rankedMatch) {
     return;
+  }
 
   curValue = self getStat(int(tableLookup("mp/playerStatsTable.csv", 1, dataName, 0)));
   self setStat(int(tableLookup("mp/playerStatsTable.csv", 1, dataName, 0)), value + curValue);

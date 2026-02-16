@@ -1,7 +1,9 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_makin.gsc
+**************************************/
+
 main() {
-  //maps\mp\mp_cargoship_fx::main();
-  //maps\createart\mp_cargoship_art::main();
-  //needs to be first for create fx
   maps\mp\mp_makin_fx::main();
 
   precachemodel("collision_wall_256x256x10");
@@ -16,11 +18,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_makin");
 
-  //setExpFog(300, 1400, 0.5, 0.5, 0.5, 0);
-  //VisionSetNaked( "mp_cargoship" );
-  //ambientPlay("ambient_cargoshipmp_ext");
-
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "marines";
   game["axis"] = "japanese";
   game["attackers"] = "allies";
@@ -44,38 +41,26 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_MAKIN_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_MAKIN_E";
 
-  // enable new spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
 
-  // round hut
-  thread trigger_killer((-9824, -16816, 328), 475, 227); // large and thin
+  thread trigger_killer((-9824, -16816, 328), 475, 227);
 
-  // tree blocker
   spawncollision("collision_geo_64x64x256", "collider", (-7608.5, -16543, 371), (0, 135, 0));
-  // hut blocker
   spawncollision("collision_geo_128x128x128", "collider", (-10085, -14817, 129), (0, 120, 0));
-  // round hut fence blockers
   spawncollision("collision_wall_256x256x10", "collider", (-10072, -16352, 185), (0, 0, 0));
   spawncollision("collision_wall_256x256x10", "collider", (-9617, -17242, 407), (0, 25, 0));
 
-  // L-shaped hut windows blocking prone entry
   spawncollision("collision_wall_64x64x10", "collider", (-9961, -14426, 172), (0, 12.8, 0));
   spawncollision("collision_wall_64x64x10", "collider", (-9720, -14613, 182), (0, 284.8, 0));
-  //rock blocker to stop user from enetering geo in jungle area
   spawncollision("collision_geo_64x64x64", "collider", (-7967.5, -16214, 270.5), (0, 14.5, 0));
 
-  //hut water blocker to stop user from getting stuck on geo when crouched
   spawncollision("collision_wall_256x256x10", "collider", (-11892, -16454, -68), (0, 180, 0));
   spawncollision("collision_wall_256x256x10", "collider", (-12015, -16587, -68), (0, 270, 0));
 
-
-  //stuck spot underr hut A
   spawncollision("collision_wall_64x64x10", "collider", (-11054, -15549, 23), (0, 30.6, 0));
 
-  //stuck spot by round hut
   spawncollision("collision_wall_256x256x10", "collider", (-9895.5, -16100, 223.5), (0, 256.2, 0));
 
-  //Ridiculous water wave bug, issue ID 44354
   spawncollision("collision_wall_256x256x10", "collider", (-9590, -15890, 240), (0, 354.2, 0));
 
   createSpawnpoint("mp_ctf_spawn_allies", (-8330, -17715, 170.5), 51.2);
@@ -115,10 +100,12 @@ createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isDefined(level.extraSpawnpoints))
+  if(!isDefined(level.extraSpawnpoints)) {
     level.extraSpawnpoints = [];
-  if(!isDefined(level.extraSpawnpoints[classname]))
+  }
+  if(!isDefined(level.extraSpawnpoints[classname])) {
     level.extraSpawnpoints[classname] = [];
+  }
   level.extraSpawnpoints[classname][level.extraSpawnpoints[classname].size] = spawnpoint;
 }
 

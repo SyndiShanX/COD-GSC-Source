@@ -1,3 +1,8 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_vodka_fx.csc
+********************************************/
+
 #include clientscripts\mp\_utility;
 
 precache_util_fx() {}

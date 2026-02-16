@@ -144,7 +144,7 @@ noscope_line() {
     0 > self.health &&
     (weap == "mosin_rifle_scoped" || weap == "ptrs41") &&
     !flag("player_is_ads")) {
-    if(level.player AdsButtonPressed()) {
+    if(level.player adsButtonPressed()) {
       return;
     }
     wait 1;

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createfx\mp_vodka_fx.gsc
+********************************************/
+
 main() {
-  // CreateFX entities placed: 376
   ent = maps\mp\_utility::createOneshotEffect("mp_elec_wire_spark_lg");
   ent.v["origin"] = (4607.35, -479.599, 410.875);
   ent.v["angles"] = (270, 0, 0);

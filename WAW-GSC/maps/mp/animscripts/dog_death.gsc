@@ -1,3 +1,8 @@
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\dog_death.gsc
+*********************************************/
+
 /using_animtree ("dog");#include maps\mp\animscripts\utility;
 
 main() {
@@ -8,7 +13,6 @@ main() {
   if(isDefined(self.a.nodeath)) {
     assertex(self.a.nodeath, "Nodeath needs to be set to true or undefined.");
 
-    // allow death script to run for a bit so it doesn't turn to corpse and get deleted too soon during melee sequence
     wait 3;
     return;
   }
@@ -22,7 +26,6 @@ main() {
   death_anim = "death_" + getAnimDirection(self.damageyaw);
 
   println(death_anim);
-
 
   self animMode("gravity");
   debug_anim_print("dog_death::main() - Setting " + death_anim);

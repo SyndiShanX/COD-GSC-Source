@@ -345,7 +345,7 @@ dumpsettings() {
   artfxprintln(file, "\tsetDvar(\"visionstore_glowTweakSkyBleedIntensity1\"" + ", " + "\"" + getDvar(getvar + "_glowTweakSkyBleedIntensity1") + "\"" + ");");
 
   artfxprintln(file, "");
-  artfxprintln(file, "\t//* Fog section * ");
+  artfxprintln(file, "\t//************************************** Fog section * ");
   artfxprintln(file, "");
   artfxprintln(file, "\tsetDvar( \"scr_fog_disable\"" + ", " + "\"" + getdvarint("scr_fog_disable") + "\"" + " );");
 

@@ -1096,7 +1096,7 @@ epd_demo_outro() {
   host = get_players()[0];
 
   while(GetTime() < endTime) {
-    if(host UseButtonPressed()) {
+    if(host useButtonPressed()) {
       break;
     } else {
       wait(0.05);

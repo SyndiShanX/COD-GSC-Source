@@ -1,3 +1,8 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_clientids.gsc
+********************************************/
+
 init() {
   level.clientid = 0;
 
@@ -9,6 +14,6 @@ onPlayerConnect() {
     level waittill("connecting", player);
 
     player.clientid = level.clientid;
-    level.clientid++; // Is this safe? What if a server runs for a long time and many people join/leave
+    level.clientid++;
   }
 }

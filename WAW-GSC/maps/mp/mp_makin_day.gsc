@@ -1,7 +1,9 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_makin_day.gsc
+**************************************/
+
 main() {
-  //maps\mp\mp_cargoship_fx::main();
-  //maps\createart\mp_cargoship_art::main();
-  //needs to be first for create fx
   maps\mp\mp_makin_day_fx::main();
 
   precachemodel("collision_wall_256x256x10");
@@ -14,11 +16,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_makin_day");
 
-  //setExpFog(300, 1400, 0.5, 0.5, 0.5, 0);
-  //VisionSetNaked( "mp_cargoship" );
-  //ambientPlay("ambient_cargoshipmp_ext");
-
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "marines";
   game["axis"] = "japanese";
   game["attackers"] = "allies";
@@ -42,17 +39,12 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_MAKIN_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_MAKIN_E";
 
-  // enable new spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
 
-  // round hut
-  thread trigger_killer((-9824, -16816, 328), 475, 227); // large and thin
+  thread trigger_killer((-9824, -16816, 328), 475, 227);
 
-  // tree blocker
   spawncollision("collision_geo_64x64x256", "collider", (-7608.5, -16543, 371), (0, 135, 0));
-  // hut blocker
   spawncollision("collision_geo_128x128x128", "collider", (-10085, -14817, 129), (0, 120, 0));
-  // round hut fence blockers
   spawncollision("collision_wall_256x256x10", "collider", (-10072, -16352, 185), (0, 0, 0));
   spawncollision("collision_wall_256x256x10", "collider", (-9617, -17242, 407), (0, 25, 0));
 
@@ -93,10 +85,12 @@ createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isDefined(level.extraSpawnpoints))
+  if(!isDefined(level.extraSpawnpoints)) {
     level.extraSpawnpoints = [];
-  if(!isDefined(level.extraSpawnpoints[classname]))
+  }
+  if(!isDefined(level.extraSpawnpoints[classname])) {
     level.extraSpawnpoints[classname] = [];
+  }
   level.extraSpawnpoints[classname][level.extraSpawnpoints[classname].size] = spawnpoint;
 }
 

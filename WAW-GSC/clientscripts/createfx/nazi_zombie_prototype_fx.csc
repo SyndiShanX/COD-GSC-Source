@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/***************************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\nazi_zombie_prototype_fx.csc
+***************************************************************/
+
 main() {
-  // CreateFX entities placed: 103
   ent = clientscripts\_fx::createOneshotEffect("fog_thick");
   ent.v["origin"] = (-673.074, -766.968, -26.5289);
   ent.v["angles"] = (270, 0, 0);

@@ -1,104 +1,92 @@
-	// This script automaticly plays a users specified oneshot effect on all prefabs that have the
-	// specified "script_struct" and "targetname" It also excepts angles from the "script_struct"// but will set a default angle of ( 0, 0, 0 ) if none is defined.
-	//
-	// example of the syntax:
-	// global_FX( "targetname", "fxIDname", "fxFile", "delay"#include clientscripts\mp\_utility;
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_global_fx.csc
+*******************************************/
 
-	main() {
-	  level._global_fx_ents = [];
-	  randomStartDelay = randomfloatrange(-20, -15);
-	  //_prefabs/lights/rustic_hanging.map
-	  global_FX("rustic_hanging_fx_point", "rustic_hanging_global", "env/light/fx_lights_rustic", randomStartDelay, "fx_lights_rustic_flame");
+#include clientscripts\mp\_utility;
 
-	  //_prefabs/lights/rustic_sconce.map
-	  global_FX("candle_flame_fx_point", "candle_flame_global", "env/light/fx_lights_candle_flame", randomStartDelay);
+main() {
+  level._global_fx_ents = [];
+  randomStartDelay = randomfloatrange(-20, -15);
 
-	  //_prefabs/lights/lantern.map
-	  global_FX("lantern_light_fx_point", "lantern_on_global", "env/light/fx_lights_lantern_on", randomStartDelay);
+  global_FX("rustic_hanging_fx_point", "rustic_hanging_global", "env/light/fx_lights_rustic", randomStartDelay, "fx_lights_rustic_flame");
 
-	  //map_source/prefabs/misc_models/com_barrel_fire.map
-	  global_FX("barrel_fireFX_origin", "global_barrel_fire", "fire/firelp_barrel_pm", randomStartDelay, "fire_barrel_small");
+  global_FX("candle_flame_fx_point", "candle_flame_global", "env/light/fx_lights_candle_flame", randomStartDelay);
 
-	  //map_source/prefabs/misc_models/ch_street_light_02_on.map
-	  //prefabs/misc_models/ch_street_wall_light_01_on.map
-	  global_FX("ch_streetlight_02_FX_origin", "ch_streetlight_02_FX", "misc/lighthaze", randomStartDelay);
+  global_FX("lantern_light_fx_point", "lantern_on_global", "env/light/fx_lights_lantern_on", randomStartDelay);
 
-	  //prefabs/misc_models/me_streetlight_on.map
-	  //prefabs/misc_models/me_streetlight_on_scaleddown80.map
-	  global_FX("me_streetlight_01_FX_origin", "me_streetlight_01_FX", "misc/lighthaze_bog_a", randomStartDelay);
+  global_FX("barrel_fireFX_origin", "global_barrel_fire", "fire/firelp_barrel_pm", randomStartDelay, "fire_barrel_small");
 
-	  //prefabs\village_assault\misc\lamp_post.map
-	  global_FX("ch_street_light_01_on", "lamp_glow_FX", "misc/light_glow_white", randomStartDelay);
+  global_FX("ch_streetlight_02_FX_origin", "ch_streetlight_02_FX", "misc/lighthaze", randomStartDelay);
 
-	  //prefabs\village_assault\misc\highway_lamp_post.map
-	  global_FX("highway_lamp_post", "ch_streetlight_02_FX", "misc/lighthaze_villassault", randomStartDelay);
+  global_FX("me_streetlight_01_FX_origin", "me_streetlight_01_FX", "misc/lighthaze_bog_a", randomStartDelay);
 
-	  //prefabs/misc_models/cs_cargoship_spotlight_on.map
-	  global_FX("cs_cargoship_spotlight_on_FX_origin", "cs_cargoship_spotlight_on_FX", "misc/lighthaze", randomStartDelay);
+  global_FX("ch_street_light_01_on", "lamp_glow_FX", "misc/light_glow_white", randomStartDelay);
 
-	  //prefabs/misc_models/me_dumpster_fire.map
-	  global_FX("me_dumpster_fire_FX_origin", "me_dumpster_fire_FX", "fire/firelp_med_pm", randomStartDelay, "fire_dumpster_medium");
+  global_FX("highway_lamp_post", "ch_streetlight_02_FX", "misc/lighthaze_villassault", randomStartDelay);
 
-	  //map_source/prefabs/misc_models/com_tires01_burning.map
-	  global_FX("com_tires_burning01_FX_origin", "com_tires_burning01_FX", "fire/tire_fire_med", randomStartDelay);
+  global_FX("cs_cargoship_spotlight_on_FX_origin", "cs_cargoship_spotlight_on_FX", "misc/lighthaze", randomStartDelay);
 
-	  //map_source/prefabs/icbm/icbm_powerlinetower02.map
-	  global_FX("icbm_powerlinetower_FX_origin", "icbm_powerlinetower_FX", "misc/power_tower_light_red_blink", randomStartDelay);
+  global_FX("me_dumpster_fire_FX_origin", "me_dumpster_fire_FX", "fire/firelp_med_pm", randomStartDelay, "fire_dumpster_medium");
 
-	  //map_source/prefabs/icbm/icbm_powerlinetower02.map
-	  global_FX("icbm_mainframe_FX_origin", "icbm_mainframe_FX", "props/icbm_mainframe_lightblink", randomStartDelay);
+  global_FX("com_tires_burning01_FX_origin", "com_tires_burning01_FX", "fire/tire_fire_med", randomStartDelay);
 
-	  //map_source/prefabs/misc_model/cs_cargoship_wall_light_red_pulse.map
-	  global_FX("light_pulse_red_FX_origin", "light_pulse_red_FX", "misc/light_glow_red_generic_pulse", -2);
+  global_FX("icbm_powerlinetower_FX_origin", "icbm_powerlinetower_FX", "misc/power_tower_light_red_blink", randomStartDelay);
 
-	  //map_source/prefabs/misc_model/cs_cargoship_wall_light_red_pulse.map
-	  global_FX("light_pulse_red_FX_origin", "light_pulse_red_FX", "misc/light_glow_red_generic_pulse", -2);
+  global_FX("icbm_mainframe_FX_origin", "icbm_mainframe_FX", "props/icbm_mainframe_lightblink", randomStartDelay);
 
-	  //map_source/prefabs/misc_model/cs_cargoship_wall_light_orange_pulse.map
-	  global_FX("light_pulse_orange_FX_origin", "light_pulse_orange_FX", "misc/light_glow_orange_generic_pulse", -2);
-	}
+  global_FX("light_pulse_red_FX_origin", "light_pulse_red_FX", "misc/light_glow_red_generic_pulse", -2);
 
-	global_FX(targetname, fxName, fxFile, delay, soundalias) {
-	  // script_structs
-	  ents = getstructarray(targetname, "targetname");
-	  if(!isDefined(ents))
-	    return;
-	  if(ents.size <= 0)
-	    return;
+  global_FX("light_pulse_red_FX_origin", "light_pulse_red_FX", "misc/light_glow_red_generic_pulse", -2);
 
-	  println("*** Client : _global_FX - creating " + ents.size + " globalFX " + fxName);
+  global_FX("light_pulse_orange_FX_origin", "light_pulse_orange_FX", "misc/light_glow_orange_generic_pulse", -2);
+}
 
-	  for(i = 0; i < ents.size; i++) {
-	    ent = ents[i] global_FX_create(fxName, fxFile, delay, soundalias);
-	    if(!isDefined(ents[i].script_noteworthy))
-	      continue;
+global_FX(targetname, fxName, fxFile, delay, soundalias) {
+  ents = getstructarray(targetname, "targetname");
+  if(!isDefined(ents)) {
+    return;
+  }
+  if(ents.size <= 0) {
+    return;
+  }
 
-	    note = ents[i].script_noteworthy;
-	    if(!isDefined(level._global_fx_ents[note])) {
-	      level._global_fx_ents[note] = [];
-	    }
+  println("*** Client : _global_FX - creating " + ents.size + " globalFX " + fxName);
 
-	    level._global_fx_ents[note][level._global_fx_ents[note].size] = ent;
-	  }
-	}
+  for(i = 0; i < ents.size; i++) {
+    ent = ents[i] global_FX_create(fxName, fxFile, delay, soundalias);
+    if(!isDefined(ents[i].script_noteworthy)) {
+      continue;
+    }
 
-	global_FX_create(fxName, fxFile, delay, soundalias) {
-	  if(!isDefined(level._effect))
-	    level._effect = [];
-	  if(!isDefined(level._effect[fxName]))
-	    level._effect[fxName] = loadedfx(fxFile);
+    note = ents[i].script_noteworthy;
+    if(!isDefined(level._global_fx_ents[note])) {
+      level._global_fx_ents[note] = [];
+    }
 
-	  // default effect angles if they dont exist
-	  if(!isDefined(self.angles))
-	    self.angles = (0, 0, 0);
+    level._global_fx_ents[note][level._global_fx_ents[note].size] = ent;
+  }
+}
 
-	  ent = clientscripts\mp\_fx::createOneshotEffect(fxName);
-	  ent.v["origin"] = (self.origin);
-	  ent.v["angles"] = (self.angles);
-	  ent.v["fxid"] = fxName;
-	  ent.v["delay"] = delay;
-	  if(isDefined(soundalias)) {
-	    ent.v["soundalias"] = soundalias;
-	  }
-	  return ent;
-	}
+global_FX_create(fxName, fxFile, delay, soundalias) {
+  if(!isDefined(level._effect)) {
+    level._effect = [];
+  }
+  if(!isDefined(level._effect[fxName])) {
+    level._effect[fxName] = loadedfx(fxFile);
+  }
+
+  if(!isDefined(self.angles)) {
+    self.angles = (0, 0, 0);
+  }
+
+  ent = clientscripts\mp\_fx::createOneshotEffect(fxName);
+  ent.v["origin"] = (self.origin);
+  ent.v["angles"] = (self.angles);
+  ent.v["fxid"] = fxName;
+  ent.v["delay"] = delay;
+  if(isDefined(soundalias)) {
+    ent.v["soundalias"] = soundalias;
+  }
+  return ent;
+}

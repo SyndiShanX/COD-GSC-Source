@@ -134,7 +134,7 @@ play_arty_sound() {
   ber2_earthquake = getent("music_box", "targetname");
   ber2_earthquake playSound("art_int", "sound_done");
 }
-/*
+/**************************************
 train_ride()
 {
 	

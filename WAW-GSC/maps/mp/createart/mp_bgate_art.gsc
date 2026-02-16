@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createart\mp_bgate_art.gsc
+**********************************************/
+
 main() {
   level.tweakfile = true;
-
-  // *Fog section*
 
   setDvar("scr_fog_exp_halfplane", "1750");
   setDvar("scr_fog_exp_halfheight", "0");
@@ -11,7 +13,6 @@ main() {
   setDvar("scr_fog_green", "0.36");
   setDvar("scr_fog_blue", "0.4");
   setDvar("scr_fog_baseheight", "60");
-
 
   setDvar("visionstore_glowTweakEnable", "1");
   setDvar("visionstore_glowTweakRadius0", "1.25");
@@ -33,5 +34,3 @@ main() {
   setVolFog(1100, 620, 675, 60, 0.49, 0.55, 0.567, 0);
   VisionSetNaked("mp_bgate", 0);
 }
-
-// setVolFog(<startDist>, <halfwayDist>, <halfwayHeight>, <baseHeight>, <red>, <green>, <blue>, <transition time>)

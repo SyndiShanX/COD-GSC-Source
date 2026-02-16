@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createart\mp_vodka_art.gsc
+**********************************************/
+
 main() {
   level.tweakfile = true;
-
-  // *Fog section*
 
   setDvar("scr_fog_exp_halfplane", "1500");
   setDvar("scr_fog_exp_halfheight", "276");
@@ -25,5 +27,3 @@ main() {
   setVolFog(450, 2500, 302, 264, 0.432, 0.492, 0.459, 0);
   VisionSetNaked("mp_vodka", 0);
 }
-
-// setVolFog(<startDist>, <halfwayDist>, <halfwayHeight>, <baseHeight>, <red>, <green>, <blue>, <transition time>)

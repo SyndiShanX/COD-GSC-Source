@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/***********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\nazi_zombie_sumpf_fx.csc
+***********************************************************/
+
 main() {
-  // CreateFX entities placed: 290
   ent = clientscripts\_fx::createOneshotEffect("mp_flies_carcass");
   ent.v["origin"] = (9850.88, 382.071, -635.875);
   ent.v["angles"] = (270, 0, 0);

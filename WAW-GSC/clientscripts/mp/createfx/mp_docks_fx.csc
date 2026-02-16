@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_docks_fx.csc
+*****************************************************/
+
 main() {
-  // CreateFX entities placed: 482
   ent = clientscripts\mp\_fx::createOneshotEffect("water_rain_distortion");
   ent.v["origin"] = (-396.251, 1834.84, 96.125);
   ent.v["angles"] = (270, 0, 0);

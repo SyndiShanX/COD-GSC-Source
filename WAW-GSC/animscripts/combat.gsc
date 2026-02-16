@@ -336,8 +336,7 @@ set_animarray_standing() {
   self.a.array["prone_2_crouch"] = % prone_2_crouch;
   self.a.array["prone_2_stand"] = % prone_2_stand;
 
-  if(self usingBoltActionWeapon()) // SCRIPTER_MOD: JesseS (5/15/2008): bolt action rechambers
-  {
+  if(self usingBoltActionWeapon()) {
     if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
       self.a.array["rechamber"] = % exposed_rechamber_v1;
     } else {
@@ -635,8 +634,7 @@ banzai_exposed_monitor() {
   while(1) {
     if(self is_banzai()) {
       distance = distanceSquared(lastPos, self.origin);
-      if(distance < 36) //havent moved 6 inches, wtf
-      {
+      if(distance < 36) {
         nonmovements++;
         if(self.a.movement == "stop" || nonmovements > 5) {
           self.banzai = false;

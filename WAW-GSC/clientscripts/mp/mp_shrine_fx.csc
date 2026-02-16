@@ -1,18 +1,14 @@
-//
-// file: mp_shrine_fx.gsc
-// description: clientside fx script for mp_shrine: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_shrine_fx.csc
+*********************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {}
 
-// --- AMBIENT SECTION ---//
 precache_createfx_fx() {
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");
@@ -41,8 +37,6 @@ precache_createfx_fx() {
   level._effect["mp_water_drip"] = loadfx("maps/mp_maps/fx_mp_water_drip");
   level._effect["mp_waterfall"] = loadfx("maps/mp_maps/fx_mp_water_fall_sm");
   level._effect["mp_waterfall_splash"] = loadfx("maps/mp_maps/fx_mp_water_fall_puddle_splash");
-
-
 }
 
 main() {

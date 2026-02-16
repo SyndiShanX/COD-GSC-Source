@@ -1786,7 +1786,7 @@ display_starts() {
       println("File: _load.gsc. Function: display_starts() - INNER LOOP START\n");
     }
 
-    if(!(players[0] ButtonPressed("F10"))) {
+    if(!(players[0] buttonPressed("F10"))) {
       level.display_starts_Pressed = false;
     }
 
@@ -1797,23 +1797,23 @@ display_starts() {
     elems[selected].color = (1, 1, 0);
 
     if(!up_pressed) {
-      if(players[0] ButtonPressed("UPARROW") || players[0] ButtonPressed("DPAD_UP") || players[0] ButtonPressed("APAD_UP")) {
+      if(players[0] buttonPressed("UPARROW") || players[0] buttonPressed("DPAD_UP") || players[0] buttonPressed("APAD_UP")) {
         up_pressed = true;
         selected++;
       }
     } else {
-      if(!players[0] ButtonPressed("UPARROW") && !players[0] ButtonPressed("DPAD_UP") && !players[0] ButtonPressed("APAD_UP")) {
+      if(!players[0] buttonPressed("UPARROW") && !players[0] buttonPressed("DPAD_UP") && !players[0] buttonPressed("APAD_UP")) {
         up_pressed = false;
       }
     }
 
     if(!down_pressed) {
-      if(players[0] ButtonPressed("DOWNARROW") || players[0] ButtonPressed("DPAD_DOWN") || players[0] ButtonPressed("APAD_DOWN")) {
+      if(players[0] buttonPressed("DOWNARROW") || players[0] buttonPressed("DPAD_DOWN") || players[0] buttonPressed("APAD_DOWN")) {
         down_pressed = true;
         selected--;
       }
     } else {
-      if(!players[0] ButtonPressed("DOWNARROW") && !players[0] ButtonPressed("DPAD_DOWN") && !players[0] ButtonPressed("APAD_DOWN")) {
+      if(!players[0] buttonPressed("DOWNARROW") && !players[0] buttonPressed("DPAD_DOWN") && !players[0] buttonPressed("APAD_DOWN")) {
         down_pressed = false;
       }
     }
@@ -1826,7 +1826,7 @@ display_starts() {
       selected = 0;
     }
 
-    if(players[0] ButtonPressed("kp_enter") || players[0] ButtonPressed("BUTTON_A") || players[0] ButtonPressed("enter")) {
+    if(players[0] buttonPressed("kp_enter") || players[0] buttonPressed("BUTTON_A") || players[0] buttonPressed("enter")) {
       if(dvars[selected] == "cancel") {
         title Destroy();
         for(i = 0; i < elems.size; i++) {
@@ -1918,9 +1918,9 @@ devhelp() {
     update = false;
 
     players = get_players();
-    if(players.size > 0 && players[0] ButtonPressed("F1")) {
+    if(players.size > 0 && players[0] buttonPressed("F1")) {
       devhelp_hudElements(hudarray, 1);
-      while(players[0] ButtonPressed("F1")) {
+      while(players[0] buttonPressed("F1")) {
         wait(0.05);
       }
     }

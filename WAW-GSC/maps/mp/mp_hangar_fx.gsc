@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_hangar_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -30,14 +35,6 @@ precacheFX() {
   level._effect["mp_light_glow_indoor_short"] = loadfx("maps/mp_maps/fx_mp_light_glow_indoor_short");
   level._effect["mp_light_glow_indoor_long"] = loadfx("maps/mp_maps/fx_mp_light_glow_indoor_long");
   level._effect["mp_light_glow_outdoor"] = loadfx("maps/mp_maps/fx_mp_light_glow_outdoor");
-
-  //////////////////////////////////////////////////////////////////////////////////////
-  // Alex Section:
-
-  //level._effect["distant_muzzleflash"]		=	loadfx("weapon/muzzleflashes/heavy");
-
-  //level._effect["flak_flash"] 	= loadfx("weapon/flak/fx_flak_cloudflash_night");
-
 }
 
 spawnFX() {

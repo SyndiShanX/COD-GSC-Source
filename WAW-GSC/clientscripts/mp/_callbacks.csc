@@ -1,4 +1,7 @@
-// Callback set up, clientside.
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_callbacks.csc
+*******************************************/
 
 #include clientscripts\mp\_utility;
 #include clientscripts\mp\_vehicle;
@@ -12,7 +15,6 @@ statechange(clientNum, system, newState) {
     level._systemStates[system] = spawnStruct();
   }
 
-  //level._systemStates[system].oldState = oldState;
   level._systemStates[system].state = newState;
 
   if(isDefined(level._systemStates[system].callback)) {
@@ -24,9 +26,6 @@ statechange(clientNum, system, newState) {
 
 maprestart() {
   println("*** Client script VM map restart.");
-
-  // This really needs to be in a loop over 0 -> num local clients.
-  // syncsystemstates(0);
 }
 
 init_fx(clientNum) {
@@ -55,12 +54,10 @@ entityspawned(localClientNum) {
   }
 
   if(self.type == "vehicle") {
-    // if _load.csc hasn't been called (such as in most testmaps), set up vehicle arrays specifically
     if(!isDefined(level.vehicles_inited)) {
       clientscripts\mp\_vehicle::init_vehicles();
     }
 
-    // aircrafts don't need treadfx/exhaustfx
     if(!(self is_aircraft())) {
       self thread vehicle_treads(localClientNum);
       self thread vehicle_watch_damage(localClientNum);

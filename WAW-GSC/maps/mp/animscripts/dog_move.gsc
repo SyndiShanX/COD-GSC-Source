@@ -1,10 +1,12 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\dog_move.gsc
+********************************************/
+
 #include maps\mp\animscripts\utility;
 #include maps\mp\animscripts\shared;
 
-/using_animtree ("dog");
-
 setup_sound_variables() {
-  // these should be ordered by distance far to close
   level.dog_sounds["far"] = spawnStruct();
   level.dog_sounds["close"] = spawnStruct();
 
@@ -18,15 +20,13 @@ setup_sound_variables() {
   level.dog_sounds["close"].maxRangeSqr = level.dog_sounds["close"].maxRange * level.dog_sounds["close"].maxRange;
 
   level.dog_sounds["far"].minRange = 500;
-  level.dog_sounds["far"].maxRange = 0; // zero meaning infinity
+  level.dog_sounds["far"].maxRange = 0;
   level.dog_sounds["far"].sound = "anml_dog_bark";
   level.dog_sounds["far"].soundLengthPlaceholder = 0.2;
   level.dog_sounds["far"].afterSoundWaitMin = 0.1;
   level.dog_sounds["far"].afterSoundWaitMax = 0.3;
   level.dog_sounds["far"].minRangeSqr = level.dog_sounds["far"].minRange * level.dog_sounds["far"].minRange;
   level.dog_sounds["far"].maxRangeSqr = level.dog_sounds["far"].maxRange * level.dog_sounds["far"].maxRange;
-
-
 }
 
 main() {
@@ -65,10 +65,10 @@ main() {
     self moveLoop();
 
     if(self.a.movement == "run") {
-      if(self.disableArrivals == false)
+      if(self.disableArrivals == false) {
         self thread stopMove();
+      }
 
-      // if a "run" notify is received while stopping, clear stop anim and go back to moveLoop
       self waittill("run");
     }
   }
@@ -79,10 +79,11 @@ moveLoop() {
   self endon("stop_soon");
 
   while(1) {
-    if(self.disableArrivals)
+    if(self.disableArrivals) {
       self.stopAnimDistSq = 0;
-    else
+    } else {
       self.stopAnimDistSq = level.dogStoppingDistSq;
+    }
 
     if(self.a.movement == "run") {
       if(self need_to_turn()) {
@@ -113,7 +114,6 @@ startMoveTrackLookAhead() {
 }
 
 startMove() {
-  // just use code movement
   if(self need_to_turn()) {
     self turn();
   } else {
@@ -125,7 +125,6 @@ startMove() {
   self animMode("none");
   self set_orient_mode("face motion");
 }
-
 
 stopMove() {
   self endon("killanimscript");
@@ -150,11 +149,13 @@ getSoundKey(distanceSqr) {
   for(i = 0; i < keys.size; i++) {
     sound_set = level.dog_sounds[keys[i]];
 
-    if(sound_set.minRangeSqr > distanceSqr)
+    if(sound_set.minRangeSqr > distanceSqr) {
       continue;
+    }
 
-    if(sound_set.maxRangeSqr && sound_set.maxRangeSqr < distanceSqr)
+    if(sound_set.maxRangeSqr && sound_set.maxRangeSqr < distanceSqr) {
       continue;
+    }
 
     return keys[i];
   }
@@ -169,10 +170,12 @@ get_turn_angle_delta(print_it) {
   deltaYaw = lookaheadYaw - currentYaw;
 
   preDeltaYaw = deltaYaw;
-  if(deltaYaw > 180)
+  if(deltaYaw > 180) {
     deltaYaw -= 360;
-  if(deltaYaw < -180)
+  }
+  if(deltaYaw < -180) {
     deltaYaw += 360;
+  }
 
   return deltaYaw;
 }
@@ -255,9 +258,6 @@ turn() {
   currentYaw = AngleClamp180(self.angles[1]);
   self animMode("zonly_physics");
 
-  // need to force the orient angle to the currentYaw here
-  // the desired angles may already be updated for the "turn"// and cause a doubling of the rotation.Telling it to face
-  // current yaw resets the desired angles and uses only anim deltas
   self set_orient_mode("face angle", currentYaw);
 
   debug_turn_print("turn deltaYaw: " + deltaYaw);
@@ -280,17 +280,12 @@ turn_around() {
   currentYaw = AngleClamp180(self.angles[1]);
   self animMode("zonly_physics");
 
-  // need to force the orient angle to the currentYaw here
-  // the desired angles may already be updated for the "turn"// and cause a doubling of the rotation.Telling it to face
-  // current yaw resets the desired angles and uses only anim deltas
   self set_orient_mode("face angle", currentYaw);
 
   deltaYaw = self get_turn_angle_delta(true);
-  //println("turning around " + Gettime() );
 
   debug_turn_print("turn_around deltaYaw: " + deltaYaw);
 
-  // pick either
   if(deltaYaw > 177 || deltaYaw < -177) {
     if(randomint(2) == 0) {
       debug_turn_print("turn_around random right", true);

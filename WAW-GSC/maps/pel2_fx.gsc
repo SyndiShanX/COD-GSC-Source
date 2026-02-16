@@ -138,9 +138,7 @@ precachefx() {
   level._effect["a_exp_corsair_tower_crash"] = loadfx("maps/pel2/fx_exp_corsair_tower_crash");
 }
 
-footsteps()
-
-{
+footsteps() {
   animscripts\utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("carpet", LoadFx("bio/player/fx_footstep_dust"));
@@ -212,9 +210,7 @@ pel2_firelight() {
   }
 }
 
-vision_settings()
-
-{
+vision_settings() {
   thread pel2_merge_sunsingledvar("sm_sunSampleSizeNear", 0, 1, 1, 0.7);
 
   wait(0.05);

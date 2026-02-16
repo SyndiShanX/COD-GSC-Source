@@ -58,7 +58,7 @@ double_door_think() {
   while(1) {
     self waittill("trigger", who);
 
-    if(!who UseButtonPressed()) {
+    if(!who useButtonPressed()) {
       continue;
     }
 

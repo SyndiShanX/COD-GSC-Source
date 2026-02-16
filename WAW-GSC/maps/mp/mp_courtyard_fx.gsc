@@ -1,3 +1,8 @@
+/***************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_courtyard_fx.gsc
+***************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -34,16 +39,6 @@ precacheFX() {
   level._effect["mp_smoke_fire_column"] = loadfx("maps/mp_maps/fx_mp_smoke_fire_column_short");
   level._effect["mp_ash_falling_large"] = loadfx("maps/mp_maps/fx_mp_ash_falling_large");
   level._effect["mp_embers_patch"] = loadfx("maps/mp_maps/fx_mp_embers_patch");
-
-
-
-  //////////////////////////////////////////////////////////////////////////////////////
-  // Alex Section:
-
-  //level._effect["distant_muzzleflash"]		=	loadfx("weapon/muzzleflashes/heavy");
-
-  //level._effect["flak_flash"] 	= loadfx("weapon/flak/fx_flak_cloudflash_night");
-
 }
 
 spawnFX() {

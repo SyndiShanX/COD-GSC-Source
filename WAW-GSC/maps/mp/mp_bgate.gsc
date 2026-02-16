@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_bgate.gsc
+**************************************/
+
 main() {
   precachemodel("collision_geo_128x128x128");
 
@@ -7,7 +12,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_bgate");
 
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "russian";
   game["axis"] = "german";
   game["attackers"] = "axis";
@@ -31,6 +35,5 @@ main() {
 
   setDvar("compassmaxrange", "2100");
 
-  // enable new player spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
 }

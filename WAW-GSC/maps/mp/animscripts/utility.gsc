@@ -1,12 +1,15 @@
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\utility.gsc
+*******************************************/
+
 anim_get_dvar_int(dvar, def) {
   return int(anim_get_dvar(dvar, def));
 }
-
-// dvar set/fetch/check
 anim_get_dvar(dvar, def) {
-  if(getDvar(dvar) != "")
+  if(getDvar(dvar) != "") {
     return getdvarfloat(dvar);
-  else {
+  } else {
     setDvar(dvar, def);
     return def;
   }
@@ -14,25 +17,28 @@ anim_get_dvar(dvar, def) {
 
 set_orient_mode(mode, val1) {
   if(level.dog_debug_orient == self getentnum()) {
-    if(isDefined(val1))
+    if(isDefined(val1)) {
       println("DOG:Setting orient mode: " + mode + " " + val1 + " " + getTime());
-    else
+    } else {
       println("DOG:Setting orient mode: " + mode + " " + getTime());
+    }
   }
 
-
-  if(isDefined(val1))
+  if(isDefined(val1)) {
     self OrientMode(mode, val1);
-  else
+  } else {
     self OrientMode(mode);
+  }
 }
 
 debug_anim_print(text) {
-  if(level.dog_debug_anims)
+  if(level.dog_debug_anims) {
     println(text + " " + getTime());
+  }
 
-  if(level.dog_debug_anims_ent == self getentnum())
+  if(level.dog_debug_anims_ent == self getentnum()) {
     println(text + " " + getTime());
+  }
 }
 
 debug_turn_print(text, line) {
@@ -63,7 +69,6 @@ current_yaw_line_debug(duration) {
     level.lastDebugHeight = 15;
   }
 
-
   while(gettime() - start_time < 1000) {
     pos1 = (self.origin[0], self.origin[1], self.origin[2] + level.lastDebugHeight);
     pos2 = pos1 + common_scripts\utility::vectorscale(anglesToForward(self.angles), (current_color_index + 1) * 10);
@@ -80,16 +85,13 @@ current_yaw_line_debug(duration) {
 }
 
 getAnimDirection(damageyaw) {
-  if((damageyaw > 135) || (damageyaw <= -135)) // Front quadrant
-  {
+  if((damageyaw > 135) || (damageyaw <= -135)) {
     return "front";
-  } else if((damageyaw > 45) && (damageyaw <= 135)) // Right quadrant
-  {
+  } else if((damageyaw > 45) && (damageyaw <= 135)) {
     return "right";
-  } else if((damageyaw > -45) && (damageyaw <= 45)) // Back quadrant
-  {
+  } else if((damageyaw > -45) && (damageyaw <= 45)) {
     return "back";
-  } else { // Left quadrant
+  } else {
     return "left";
   }
   return "front";
@@ -98,8 +100,9 @@ getAnimDirection(damageyaw) {
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(anim.optionalStepEffects))
+  if(!isDefined(anim.optionalStepEffects)) {
     anim.optionalStepEffects = [];
+  }
   anim.optionalStepEffects[anim.optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
 }

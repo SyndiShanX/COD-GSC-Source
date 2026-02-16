@@ -657,7 +657,7 @@ russian_flag_think() {
             }
           }
 
-          if(player UseButtonPressed() && player isthrowinggrenade() == false) {
+          if(player useButtonPressed() && player isthrowinggrenade() == false) {
             if(!isDefined(player.useButtonHoldTimer) || player.useButtonHoldTimer == 0) {
               player.useButtonHoldTimer = GetTime();
             }
@@ -674,7 +674,7 @@ russian_flag_think() {
               flagtrig Unlink();
               flagtrig Delete();
 
-              while(player UseButtonPressed()) {
+              while(player useButtonPressed()) {
                 wait(0.05);
               }
 
@@ -754,7 +754,7 @@ russian_flag_player_carry(player) {
 
   arcademode_assignpoints("arcademode_score_generic500", player);
 
-  while(player UseButtonPressed()) {
+  while(player useButtonPressed()) {
     wait(0.05);
   }
 }

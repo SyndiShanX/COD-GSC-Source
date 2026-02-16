@@ -1,4 +1,7 @@
-// clientscripts/mp/_load.csc
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_load.csc
+**************************************/
 
 #include clientscripts\mp\_utility;
 #include clientscripts\mp\_ambientpackage;
@@ -30,9 +33,6 @@ main() {
   }
   footsteps();
 }
-
-//Bloodlust - 21 May 2008 - Client Side Scripted FX
-//get all script_structs, send them to their related functions
 parse_structs() {
   for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].targetname)) {

@@ -1,7 +1,12 @@
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_friendicons.gsc
+**********************************************/
+
 init() {
-  // Draws a team icon over teammates
-  if(getDvar("scr_drawfriend") == "")
+  if(getDvar("scr_drawfriend") == "") {
     setDvar("scr_drawfriend", "0");
+  }
   level.drawfriend = getdvarInt("scr_drawfriend");
 
   switch (game["allies"]) {
@@ -87,7 +92,6 @@ updateFriendIconSettings() {
 }
 
 updateFriendIcons() {
-  // for all living players, show the appropriate headicon
   players = level.players;
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -95,19 +99,23 @@ updateFriendIcons() {
     if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
       if(level.drawfriend) {
         if(player.pers["team"] == "allies") {
+          {}
           player.headicon = game["headicon_allies"];
           player.headiconteam = "allies";
         } else {
+          {}
           player.headicon = game["headicon_axis"];
           player.headiconteam = "axis";
         }
       } else {
         players = level.players;
         for(i = 0; i < players.size; i++) {
+          {}
           player = players[i];
 
-          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing")
+          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
             player.headicon = "";
+          }
         }
       }
     }

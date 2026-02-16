@@ -896,10 +896,10 @@ debug_reflection_buttons() {
 
     players = get_players();
 
-    if(players[0] buttonpressed("BUTTON_X")) {
+    if(players[0] buttonPressed("BUTTON_X")) {
       offset += offsetinc;
     }
-    if(players[0] buttonpressed("BUTTON_Y")) {
+    if(players[0] buttonPressed("BUTTON_Y")) {
       offset -= offsetinc;
     }
     if(offset > 1000) {
@@ -3220,7 +3220,7 @@ spawn_anywhere(spawner) {
 
   level endon("kill dynamic spawning");
 
-  if(self UseButtonPressed()) {
+  if(self useButtonPressed()) {
     spawn = spawner spawn_ai();
 
     if(spawn_failed(spawn)) {

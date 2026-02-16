@@ -1041,7 +1041,7 @@ generate_client_fx_log(autosave) {
     return;
   }
 
-  cfxprintln(file, "//_createfx generated. Do not touch!!");
+  cfxprintln(file, "");
   cfxprintln(file, "main()");
   cfxprintln(file, "{");
 
@@ -1131,7 +1131,7 @@ generate_fx_log(autosave) {
 
   file = openfile(filename, "write");
   assertex(file != -1, "File not writeable (maybe you should check it out): " + filename);
-  cfxprintln(file, "//_createfx generated. Do not touch!!");
+  cfxprintln(file, "");
   cfxprintln(file, "main()");
   cfxprintln(file, "{");
 

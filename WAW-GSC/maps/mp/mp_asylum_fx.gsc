@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_asylum_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -31,7 +36,6 @@ precacheFX() {
   level._effect["mp_water_splash_small"] = loadfx("maps/mp_maps/fx_mp_water_splash_small");
   level._effect["mp_water_wake_flow"] = loadfx("maps/mp_maps/fx_mp_water_wake_flow");
   level._effect["mp_falling_leaves"] = loadfx("maps/mp_maps/fx_mp_falling_leaves_elm");
-
 }
 
 spawnFX() {

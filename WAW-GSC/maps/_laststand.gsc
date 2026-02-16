@@ -357,7 +357,7 @@ revive_trigger_think() {
         d = self depthinwater();
       }
 
-      if(players[i] can_revive(self) || (is_sumpf == 1 && d > 20)) {
+      if(players[i] can_revive(self) || (is_sumpf == 1 && d > 20)) {} {
         self.revivetrigger setHintString(&"GAME_BUTTON_TO_REVIVE_PLAYER");
         break;
       }
@@ -459,7 +459,7 @@ can_revive(revivee) {
 }
 
 is_reviving(revivee) {
-  return (can_revive(revivee) && self UseButtonPressed());
+  return (can_revive(revivee) && self useButtonPressed());
 }
 
 is_facing(facee) {

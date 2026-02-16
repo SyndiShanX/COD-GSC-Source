@@ -1,15 +1,15 @@
-//
-// file: mp_airfield_fx.csc
-// description: clientside fx script for mp_airfield: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_airfield_fx.csc
+***********************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
 precache_util_fx() {
   level._effect["mortar_point"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
-  level._effectType["mortar_point"] = "mortar"; // "mortar", "bomb" or "artillery"level._effect["mortar_sw_hills"] = loadfx("maps/ber1/fx_exp_katyusha_barrage_far");
+  level._effectType["mortar_point"] = "mortar";
+
+  level._effect["mortar_sw_hills"] = loadfx("maps/ber1/fx_exp_katyusha_barrage_far");
   level._effectType["mortar_sw_hills"] = "artillery";
   level._explosion_view_chance["mortar_sw_hills"] = 1;
 
@@ -20,7 +20,6 @@ precache_util_fx() {
 
 precache_scripted_fx() {}
 
-// --- AMBIENT SECTION ---//
 precache_createfx_fx() {
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");
@@ -46,9 +45,6 @@ precache_createfx_fx() {
   level._effect["mp_water_splash_small"] = loadfx("maps/mp_maps/fx_mp_water_splash_small");
   level._effect["mp_water_wake_flow"] = loadfx("maps/mp_maps/fx_mp_water_wake_flow");
   level._effect["mp_falling_leaves"] = loadfx("maps/mp_maps/fx_mp_falling_leaves_elm");
-
-
-
 }
 
 main() {

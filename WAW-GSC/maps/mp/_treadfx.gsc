@@ -1,12 +1,17 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_treadfx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main(vehicletype) {
-  //this sets default tread and tire fx for vehicles - they can be overwritten in level scripts
-  if(!isdefined(vehicletype))
+  if(!isDefined(vehicletype)) {
     return;
+  }
   level.vehicle_treads[vehicletype] = true;
   switch (vehicletype) {
-    default: //if the vehicle isn't in this list it will use these effects
+    default:
       setallvehiclefx(vehicletype, "vehicle/treadfx/fx_treadfx_dust");
       setvehiclefx(vehicletype, "concrete", "vehicle/treadfx/fx_treadfx_tiger_concrete");
       setvehiclefx(vehicletype, "rock", "vehicle/treadfx/fx_treadfx_tiger_concrete");
@@ -20,12 +25,14 @@ main(vehicletype) {
 }
 
 setvehiclefx(vehicletype, material, fx) {
-  if(!isDefined(level._vehicle_effect))
+  if(!isDefined(level._vehicle_effect)) {
     level._vehicle_effect = [];
-  if(!isdefined(fx))
+  }
+  if(!isDefined(fx)) {
     level._vehicle_effect[vehicletype][material] = -1;
-  else
+  } else {
     level._vehicle_effect[vehicletype][material] = loadfx(fx);
+  }
 }
 
 setallvehiclefx(vehicletype, fx) {

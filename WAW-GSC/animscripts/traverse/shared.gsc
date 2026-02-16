@@ -1,10 +1,12 @@
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\shared.gsc
+*******************************************/
+
 #include animscripts\utility;
 #include maps\_utility;
 #using_animtree("generic_human");
-
-// Deprecated. only used for old traverses that will be deleted.
 advancedTraverse(traverseAnim, normalHeight) {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -13,9 +15,8 @@ advancedTraverse(traverseAnim, normalHeight) {
 
   self endon("killanimscript");
   self traverseMode("nogravity");
-  self traverseMode("noclip"); // So he doesn't get stuck if the wall is a little too high
+  self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -45,10 +46,11 @@ advancedTraverse(traverseAnim, normalHeight) {
   } else {
     self waittillmatch("traverse", "gravity on");
     self traverseMode("gravity");
-    if(!animHasNotetrack(traverseAnim, "blend"))
+    if(!animHasNotetrack(traverseAnim, "blend")) {
       wait(gravityToBlendTime);
-    else
+    } else {
       self waittillmatch("traverse", "blend");
+    }
   }
 
   self.a.movement = self.old_anim_movement;
@@ -59,14 +61,6 @@ advancedTraverse(traverseAnim, normalHeight) {
   self SetAnimKnobAllRestart(runAnim, %body, 1, endBlendTime, 1);
   wait(endBlendTime);
   thread animscripts\run::MakeRunSounds("killSoundThread");
-
-  /*
-  for(;;)
-  {
-  	self waittill ("traverse",notetrack);
-  	println ("notetrack ", notetrack);
-  }
-  */
 }
 
 teleportThread(verticalOffset) {
@@ -88,16 +82,18 @@ teleportThreadEx(verticalOffset, delay, frames) {
   self notify("endTeleportThread");
   self endon("endTeleportThread");
 
-  if(verticalOffset == 0)
+  if(verticalOffset == 0) {
     return;
+  }
 
   wait delay;
 
   amount = verticalOffset / frames;
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  } else if(amount < -10.0) {
     amount = -10.0;
+  }
 
   offset = (0, 0, amount);
 
@@ -110,11 +106,9 @@ teleportThreadEx(verticalOffset, delay, frames) {
 DoTraverse(traverseData) {
   self endon("killanimscript");
 
-  // do not do code prone in this script
   self.desired_anim_pose = "stand";
   animscripts\utility::UpdateAnimPose();
 
-  // orient to the Negotiation start node
   startnode = self getNegotiationStartNode();
   endNode = self getNegotiationEndNode();
 
@@ -159,15 +153,15 @@ DoTraverse(traverseData) {
   }
   self.traverseAnim = traverseAnim;
   self setFlaggedAnimKnoballRestart("traverseAnim", traverseAnim, %body, 1, .2, 1);
-  //self thread animscripts\utility::ragdollDeath( traverseAnim );
 
   self.traverseDeathIndex = 0;
   self.traverseDeathAnim = traverseData["interruptDeathAnim"];
   self animscripts\shared::DoNoteTracks("traverseAnim", ::handleTraverseNotetracks);
   self traverseMode("gravity");
 
-  if(self.delayedDeath)
+  if(self.delayedDeath) {
     return;
+  }
 
   self.a.nodeath = false;
   if(toCover && isDefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
@@ -181,12 +175,13 @@ DoTraverse(traverseData) {
 }
 
 handleTraverseNotetracks(note) {
-  if(note == "traverse_death")
+  if(note == "traverse_death") {
     return handleTraverseDeathNotetrack();
-  else if(note == "traverse_align")
+  } else if(note == "traverse_align") {
     return handleTraverseAlignment();
-  else if(note == "traverse_drop")
+  } else if(note == "traverse_drop") {
     return handleTraverseDrop();
+  }
 }
 
 handleTraverseDeathNotetrack() {
@@ -215,7 +210,7 @@ handleTraverseDrop() {
   trace = bulletTrace(startpos, self.origin + (0, 0, -512), false, undefined);
   endpos = trace["position"];
   dist = distance(startpos, endpos);
-  realDropHeight = dist - 32 - 0.5; // 0.5 makes sure we end up above the ground a bit
+  realDropHeight = dist - 32 - 0.5;
 
   remainingAnimDelta = getMoveDelta(self.traverseAnim, self getAnimTime(self.traverseAnim), 1);
   animDropHeight = 0 - remainingAnimDelta[2];
@@ -227,7 +222,6 @@ handleTraverseDrop() {
     thread animscripts\utility::debugLine(startpos, endpos, (1, 1, 1), 2 * 20);
     thread animscripts\utility::drawStringTime("drop offset: " + dropOffset, endpos, (1, 1, 1), 2);
   }
-
 
   self thread teleportThread(dropOffset);
   self thread finishTraverseDrop(endpos[2]);
@@ -254,8 +248,9 @@ doNothingFunc() {
 traverseDeath() {
   self notify("traverse_death");
 
-  if(!isDefined(self.triedTraverseRagdoll))
+  if(!isDefined(self.triedTraverseRagdoll)) {
     self animscripts\death::PlayDeathSound();
+  }
 
   deathAnimArray = self.traverseDeathAnim[self.traverseDeathIndex];
   deathAnim = deathAnimArray[randomint(deathAnimArray.size)];
@@ -291,7 +286,6 @@ TraverseRagdollDeathSimple() {
   self startRagdoll();
 
   deathAnim = animscripts\death::get_death_anim();
-  //animscripts\death::play_death_anim( deathAnim );
   self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, %body, 1, .1);
 
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
@@ -309,24 +303,25 @@ TraverseRagdollDeath(traverseAnim) {
 
   while(1) {
     self waittill("damage");
-    if(!self.delayedDeath)
+    if(!self.delayedDeath) {
       continue;
+    }
 
     scriptedDeathTimes = getNotetrackTimes(traverseAnim, "traverse_death");
     currentTime = self getAnimTime(traverseAnim);
     scriptedDeathTimes[scriptedDeathTimes.size] = 1.0;
 
-
-    if(getDebugDvarInt("scr_forcetraverseragdoll") == 1)
+    if(getDebugDvarInt("scr_forcetraverseragdoll") == 1) {
       scriptedDeathTimes = [];
-
+    }
 
     for(i = 0; i < scriptedDeathTimes.size; i++) {
       if(scriptedDeathTimes[i] > currentTime) {
         animLength = getAnimLength(traverseAnim);
         timeUntilScriptedDeath = (scriptedDeathTimes[i] - currentTime) * animLength;
-        if(timeUntilScriptedDeath < 0.5)
+        if(timeUntilScriptedDeath < 0.5) {
           return;
+        }
         break;
       }
     }
@@ -354,9 +349,9 @@ physExplosionForRagdoll(pos) {
 
 postTraverseDeathAnim() {
   self endon("killanimscript");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  // in case the ragdoll failed
+  }
   deathAnim = animscripts\death::get_death_anim();
   self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, %body, 1, .1);
 
@@ -372,7 +367,6 @@ dog_wall_and_window_hop(traverseName, height) {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -392,7 +386,6 @@ dog_jump_down(height, frames) {
   self endon("killanimscript");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -403,7 +396,7 @@ dog_jump_down(height, frames) {
   self setflaggedanimrestart("traverse", anim.dogAnims[self.animSet].traverse["jump_down_40"], 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverse");
 
-  self clearanim(anim.dogAnims[self.animSet].traverse["jump_down_40"], 0); // start run immediately
+  self clearanim(anim.dogAnims[self.animSet].traverse["jump_down_40"], 0);
   self traverseMode("gravity");
   self.traverseComplete = true;
 }
@@ -412,7 +405,6 @@ dog_jump_up(height, frames) {
   self endon("killanimscript");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -423,7 +415,7 @@ dog_jump_up(height, frames) {
   self setflaggedanimrestart("traverse", anim.dogAnims[self.animSet].traverse["jump_up_40"], 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverse");
 
-  self clearanim(anim.dogAnims[self.animSet].traverse["jump_up_40"], 0); // start run immediately
+  self clearanim(anim.dogAnims[self.animSet].traverse["jump_up_40"], 0);
   self traverseMode("gravity");
   self.traverseComplete = true;
 }

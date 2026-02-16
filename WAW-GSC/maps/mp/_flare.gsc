@@ -1,13 +1,17 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_flare.gsc
+**************************************/
+
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
 init() {
   level.flareVisionEffectRadius = flare_get_dvar_int("flare_effect_radius", "400");
-  level.flareDuration = flare_get_dvar_int("flare_duration", "8"); //in seconds
+  level.flareDuration = flare_get_dvar_int("flare_duration", "8");
   level.flareDistanceScale = flare_get_dvar_int("flare_distance_scale", "16");
   level.flareLookAwayFadeWait = flare_get_dvar("flareLookAwayFadeWait", "0.45");
   level.flareBurnOutFadeWait = flare_get_dvar("flareBurnOutFadeWait", "0.65");
-  //greater the number the longer the shock will be the closer you get to the explosion
 }
 
 watchFlareDetonation(owner) {
@@ -16,7 +20,6 @@ watchFlareDetonation(owner) {
   level.flareVisionEffectRadius = flare_get_dvar_int("flare_effect_radius", level.flareVisionEffectRadius);
   durationOfFlare = flare_get_dvar_int("flare_duration", level.flareDuration);
   level.flareDistanceScale = flare_get_dvar_int("flare_distance_scale", level.flareDistanceScale);
-
 
   flareEffectArea = spawn("trigger_radius", position, 0, level.flareVisionEffectRadius, level.flareVisionEffectRadius * 2);
   loopWaitTime = .5;
@@ -30,6 +33,7 @@ watchFlareDetonation(owner) {
 
       if((!isDefined(players[i].inFlareVisionArea)) || (players[i].inFlareVisionArea == false)) {
         if(players[i].sessionstate == "playing") {
+          {}
           players[i].item = players[i] playersighttrace(position, level.flareVisionEffectRadius, players[i].item);
           if(players[i].item == 0) {
             players[i].lastFlaredby = owner;
@@ -38,7 +42,6 @@ watchFlareDetonation(owner) {
           }
         }
       }
-
     }
     wait(loopWaitTime);
     durationOfFlare -= loopWaitTime;
@@ -58,7 +61,7 @@ flareVision(player, flareEffectArea, position) {
   count = 0;
   maxdistance = level.flareVisionEffectRadius;
 
-  while((isdefined(flareEffectArea)) && (player.sessionstate == "playing" && player.item == 0) && !(player player_is_driver())) {
+  while((isDefined(flareEffectArea)) && (player.sessionstate == "playing" && player.item == 0) && !(player player_is_driver())) {
     wait(loopWaitTime);
     ratio = 1 - ((distance(player.origin, position)) / maxdistance);
     player VisionSetLerpRatio(ratio);
@@ -70,21 +73,19 @@ flareVision(player, flareEffectArea, position) {
     count++;
   }
 
-  if(!isdefined(flareEffectArea))
+  if(!isDefined(flareEffectArea)) {
     wait(flare_get_dvar("flareBurnOutFadeWait", level.flareBurnOutFadeWait));
-  else if(distance(position, player.origin) < level.flareVisionEffectRadius)
+  } else if(distance(position, player.origin) < level.flareVisionEffectRadius) {
     wait(flare_get_dvar("flareLookAwayFadeWait", level.flareLookAwayFadeWait));
+  }
 
   player.inFlareVisionArea = false;
   player VisionSetLerpRatio(0);
 }
 
-// returns dvar value in int
 flare_get_dvar_int(dvar, def) {
   return int(flare_get_dvar(dvar, def));
 }
-
-// dvar set/fetch/check
 flare_get_dvar(dvar, def) {
   if(getDvar(dvar) != "") {
     return getdvarfloat(dvar);
@@ -95,16 +96,18 @@ flare_get_dvar(dvar, def) {
 }
 
 player_is_driver() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
+  }
 
   vehicle = self GetVehicleOccupied();
 
   if(isDefined(vehicle)) {
     seat = vehicle GetOccupantSeat(self);
 
-    if(isDefined(seat) && seat == 0)
+    if(isDefined(seat) && seat == 0) {
       return true;
+    }
   }
 
   return false;

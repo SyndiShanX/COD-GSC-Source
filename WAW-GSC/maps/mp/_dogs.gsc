@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_dogs.gsc
+**************************************/
+
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
@@ -22,8 +27,9 @@ init() {
 
   init_node_arrays();
 
-  if(level.no_pathnodes)
+  if(level.no_pathnodes) {
     level.no_dogs = true;
+  }
 
   regenTime = 5;
   level.dogHealth_RegularRegenDelay = regenTime * 1000;
@@ -34,8 +40,6 @@ init() {
   thread dog_usage_init();
 
   thread init_all_preexisting_dogs();
-
-  //	create_dogs();
 }
 
 pick_random_nodes(from, count) {
@@ -58,12 +62,13 @@ init_node_arrays() {
   pathnodes = [];
 
   for(i = 0; i < nodes.size; i++) {
-    // anything with a scriptworthy is automatically a non-patrol node
-    if(isDefined(nodes[i].script_noteworthy) /* || nodes[i].script_noteworthy != "" */ )
+    if(isDefined(nodes[i].script_noteworthy)) {
       continue;
+    }
 
-    if(isDefined(nodes[i].targetname) && nodes[i].targetname == "traverse")
+    if(isDefined(nodes[i].targetname) && nodes[i].targetname == "traverse") {
       continue;
+    }
 
     pathnodes[pathnodes.size] = nodes[i];
   }
@@ -84,7 +89,6 @@ init_node_arrays() {
   if(level.dogspawnnodes.size == 0) {
     println("DOG PATHING:Could not find spawn nodes");
 
-    // pick a random set of spawn nodes so we do not tax the spawn logic to much
     level.dogspawnnodes = pick_random_nodes(pathnodes, 20);
   }
 
@@ -94,7 +98,6 @@ init_node_arrays() {
   if(level.dogexitnodes.size == 0) {
     println("DOG PATHING:Could not find exit nodes");
 
-    // pick a random set of spawn nodes so we do not tax the spawn logic to much
     level.dogexitnodes = pick_random_nodes(pathnodes, 20);
   }
 }
@@ -123,7 +126,6 @@ dog_dvar_updater() {
   while(1) {
     dog_dvar_update();
 
-    // 16 is max allowed by engine
     if(level.dog_count + dogs_in_the_bsp > 16) {
       level.dog_count = 16 - dogs_in_the_bsp;
     }
@@ -136,11 +138,13 @@ count_preexisting_dogs() {
 
   alive_count = 0;
   for(i = 0; i < dogs.size; i++) {
-    if(!isDefined(dogs[i]))
+    if(!isDefined(dogs[i])) {
       continue;
+    }
 
-    if(!isai(dogs[i]))
+    if(!isai(dogs[i])) {
       continue;
+    }
 
     alive_count++;
   }
@@ -162,8 +166,9 @@ dog_set_model() {
 }
 
 init_dog() {
-  if(!isai(self))
+  if(!isai(self)) {
     return;
+  }
 
   self.aiteam = "axis";
 
@@ -171,7 +176,7 @@ init_dog() {
   self.type = "dog";
   self.accuracy = 0.2;
   self.health = level.dog_health;
-  self.maxhealth = level.dog_health; // this currently does not hook to code maxhealth
+  self.maxhealth = level.dog_health;
   self.aiweapon = "dog_bite_mp";
   self.secondaryweapon = "";
   self.sidearm = "";
@@ -193,8 +198,9 @@ init_dog() {
 }
 
 get_spawn_node(team) {
-  if(!level.teambased)
+  if(!level.teambased) {
     return dog_pick_node_away_from_enemy(level.dogspawnnodes, team);
+  }
 
   return dog_pick_node_near_team(level.dogspawnnodes, team);
 }
@@ -215,17 +221,17 @@ dog_watch_for_owner_team_change(owner) {
 }
 
 dog_set_owner(owner, team, requiredDeathCount) {
-  // no owner so he attacks the person who called him in
-  if(level.dog_debug)
+  if(level.dog_debug) {
     return;
+  }
 
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
+  }
 
-  // if the owner switches teams while dogs are still spawning
-  // do not set the owner
-  if(level.teambased && isPlayer(owner) && owner.pers["team"] != team)
+  if(level.teambased && isPlayer(owner) && owner.pers["team"] != team) {
     return;
+  }
 
   self setentityowner(owner);
 
@@ -263,31 +269,32 @@ dog_manager_spawn_dog(owner, team, spawn_node, index, requiredDeathCount) {
   dog thread dog_notify_level_on_death();
   dog dog_thread_behavior_function();
 
-
   return dog;
 }
 
 get_debug_team(team) {
   if(level.teambased) {
     otherteam = getotherteam(team);
-    if(level.dog_debug)
+    if(level.dog_debug) {
       return otherteam;
+    }
   }
 
-  if(!level.teambased)
+  if(!level.teambased) {
     return "free";
+  }
 
   return team;
 }
 
 dog_manager_spawn_dogs(team, enemyTeam, deathCount) {
-  // this can hit if the round ends as the dogs are getting called in
   level endon("dogs done");
   level endon("dogs leaving");
   self endon("disconnect");
 
-  if(level.no_dogs)
+  if(level.no_dogs) {
     return;
+  }
 
   team = get_debug_team(team);
 
@@ -295,8 +302,9 @@ dog_manager_spawn_dogs(team, enemyTeam, deathCount) {
 
   level.dog_spawner = getent("dog_spawner", "targetname");
 
-  if(!isDefined(level.dog_spawner))
+  if(!isDefined(level.dog_spawner)) {
     return;
+  }
 
   level.dogs = [];
 
@@ -323,14 +331,12 @@ dog_manager_spawn_more_dogs_on_death(owner, count, team) {
   while(count > 0) {
     level waittill("dog died");
 
-    // wait a bit before sending in the next dog
     wait(randomfloat(level.spawnTimeWaitMin, level.spawnTimeWaitMax));
 
     node = get_spawn_node(team);
     level.dogs[level.dogs.size] = dog_manager_spawn_dog(owner, team, node, level.dogs.size);
     count -= 1;
   }
-
 
   iprintln("All dogs spawned");
 
@@ -344,7 +350,6 @@ dog_manager_dog_time_limit() {
 
   dog_debug_print("time limit hit notify dogs leaving");
 
-  // this will shut this thread down
   level notify("dogs leaving");
 }
 
@@ -369,11 +374,13 @@ dog_manager_dog_alive_tracker() {
   while(1) {
     alive_count = 0;
     for(i = 0; i < level.dogs.size; i++) {
-      if(!isDefined(level.dogs[i]))
+      if(!isDefined(level.dogs[i])) {
         continue;
+      }
 
-      if(!isalive(level.dogs[i]))
+      if(!isalive(level.dogs[i])) {
         continue;
+      }
 
       alive_count++;
     }
@@ -391,8 +398,9 @@ dog_manager_dog_alive_tracker() {
 
 dog_manager_delete_dogs() {
   for(i = 0; i < level.dogs.size; i++) {
-    if(!isDefined(level.dogs[i]))
+    if(!isDefined(level.dogs[i])) {
       continue;
+    }
 
     level.dogs[i] delete();
   }
@@ -427,14 +435,11 @@ dog_notify_level_on_death() {
   self endon("leaving");
   self waittill("death");
 
-  // do not access self past this point as its not valid
-
   level notify("dog died");
 }
 
 dog_thread_behavior_function() {
   self thread dog_patrol_when_no_enemy();
-  //		self thread dog_attack_when_enemy();
 }
 
 dog_leave() {
@@ -442,7 +447,6 @@ dog_leave() {
 
   self thread dog_leave_failsafe();
 
-  // have them run to an exit node
   self clearentitytarget();
   self.ignoreall = true;
   self.goalradius = 30;
@@ -485,7 +489,6 @@ dog_patrol_when_no_enemy() {
 
     self waittill("enemy");
   }
-
 }
 
 dog_patrol_wait(wait_for, notify_name) {
@@ -523,7 +526,6 @@ dog_patrol() {
   while(1) {
     node = level.patrolnodes[randomInt(level.patrolnodes.size)];
 
-    // ignore all nodes with a script_noteworthy on them
     if(!isDefined(node.script_noteworthy)) {
       self dog_debug_print("patroling to node at " + node.origin);
 
@@ -551,12 +553,10 @@ dog_patrol_debug() {
 dog_get_dvar_int(dvar, def) {
   return int(dog_get_dvar(dvar, def));
 }
-
-// dvar set/fetch/check
 dog_get_dvar(dvar, def) {
-  if(getDvar(dvar) != "")
+  if(getDvar(dvar) != "") {
     return getdvarfloat(dvar);
-  else {
+  } else {
     setDvar(dvar, def);
     return def;
   }
@@ -606,11 +606,9 @@ dog_usage_monitor() {
     total_kills += level.dog_usage[index].kills;
   }
 
-
   seconds = (GetTime() - start_time) / 1000;
   msg = "Dogs- Time: " + seconds + " Kills: " + total_kills + " Last: " + last_alive;
 
-  // make sure that the dogs have printed everything
   wait(1);
   iprintln(msg);
   println(msg);
@@ -633,12 +631,12 @@ dog_usage_kills(index) {
     self waittill("killed", player);
     level.dog_usage[index].kills++;
   }
-
 }
 
 dog_owner_kills(index) {
-  if(!isDefined(self.script_owner))
+  if(!isDefined(self.script_owner)) {
     return;
+  }
 
   self endon("clear_owner");
   self endon("death");
@@ -648,7 +646,6 @@ dog_owner_kills(index) {
     self waittill("killed", player);
     self.script_owner notify("dog_handler");
   }
-
 }
 
 dog_usage_time_alive(index) {
@@ -662,7 +659,6 @@ dog_usage_time_alive(index) {
 
   iprintln("Dog#" + index + " killed. Alive for: " + seconds + " seconds. Kills: " + level.dog_usage[index].kills);
   println("Dog#" + index + " killed. Alive for: " + seconds + " seconds. Kills: " + level.dog_usage[index].kills);
-
 }
 
 dogHealthRegen() {
@@ -679,7 +675,7 @@ dogHealthRegen() {
   dog = self;
   health_add = 0;
 
-  regenRate = 0.1; // 0.017;
+  regenRate = 0.1;
   veryHurt = false;
 
   lastSoundTime_Recover = 0;
@@ -693,8 +689,9 @@ dogHealthRegen() {
       continue;
     }
 
-    if(dog.health <= 0)
+    if(dog.health <= 0) {
       return;
+    }
 
     wasVeryHurt = veryHurt;
     ratio = dog.health / maxHealth;
@@ -706,25 +703,28 @@ dogHealthRegen() {
     }
 
     if(dog.health >= oldhealth) {
-      if(gettime() - hurttime < level.dogHealth_RegularRegenDelay)
+      if(gettime() - hurttime < level.dogHealth_RegularRegenDelay) {
         continue;
+      }
 
-      if(level.dogHealthRegenDisabled)
+      if(level.dogHealthRegenDisabled) {
         continue;
+      }
 
       if(veryHurt) {
         newHealth = ratio;
-        if(gettime() > hurtTime + 3000)
+        if(gettime() > hurtTime + 3000) {
           newHealth += regenRate;
-      } else
+        }
+      } else {
         newHealth = 1;
+      }
 
       if(newHealth >= 1.0) {
         newHealth = 1.0;
       }
 
       if(newHealth <= 0) {
-        // dog is dead
         return;
       }
 
@@ -744,14 +744,15 @@ selfDefenseChallenge() {
   self waittill("death", attacker);
 
   if(isDefined(attacker) && isPlayer(attacker)) {
-    if(isdefined(self.script_owner) && self.script_owner == attacker)
+    if(isDefined(self.script_owner) && self.script_owner == attacker) {
       return;
-    if(level.teambased && isdefined(self.script_owner) && self.script_owner.team == attacker.team)
+    }
+    if(level.teambased && isDefined(self.script_owner) && self.script_owner.team == attacker.team) {
       return;
+    }
 
     attacker notify("selfdefense_dog");
   }
-
 }
 
 dog_get_exit_node() {
@@ -769,19 +770,18 @@ dog_debug_print(message) {
 
 }
 
-// ================================================
-
 getAllOtherPlayers() {
   aliveplayers = [];
 
-  // Make a list of fully connected, non-spectating, alive players
   for(i = 0; i < level.players.size; i++) {
-    if(!isDefined(level.players[i]))
+    if(!isDefined(level.players[i])) {
       continue;
+    }
     player = level.players[i];
 
-    if(player.sessionstate != "playing" || player == self)
+    if(player.sessionstate != "playing" || player == self) {
       continue;
+    }
 
     aliveplayers[aliveplayers.size] = player;
   }
@@ -789,29 +789,25 @@ getAllOtherPlayers() {
 }
 
 dog_pick_node_near_team(nodes, team) {
-  // There are no valid nodes in the map
-  if(!isDefined(nodes))
+  if(!isDefined(nodes)) {
     return undefined;
+  }
 
-  if(!level.teambased)
+  if(!level.teambased) {
     return dog_pick_node_away_from_enemy(level.dogspawnnodes, team);
-
-  //prof_begin("basic_spawnlogic");
+  }
 
   initWeights(nodes);
   update_all_nodes(nodes, team);
 
-  //prof_begin(" getteams");
   obj = spawnStruct();
   getAllAlliedAndEnemyPlayers(obj, team);
-  //prof_end(" getteams");
 
   numplayers = obj.allies.size + obj.enemies.size;
 
   alliedDistanceWeight = 2;
   dogDistanceWeight = 3;
 
-  //prof_begin(" sumdists");
   myTeam = team;
 
   enemyTeam = getOtherTeam(myTeam);
@@ -824,27 +820,18 @@ dog_pick_node_near_team(nodes, team) {
       allyDistSum = node.distSum[myTeam];
       enemyDistSum = node.distSum[enemyTeam];
 
-      // high enemy distance is good, high ally distance is bad
       node.weight = (enemyDistSum - alliedDistanceWeight * allyDistSum) / node.numPlayersAtLastUpdate;
     }
 
     if(node.numDogsAtLastUpdate > 0) {
       dogDistSum = node.distSum["dogs"];
 
-      // high ally distance is bad
       node.weight -= (dogDistSum * dogDistSum) / node.numDogsAtLastUpdate;
     }
   }
-  //prof_end(" sumdists");
-
-  //prof_end("basic_spawnlogic");
-
-  //prof_begin("complex_spawnlogic");
 
   avoidSpawnReuse(nodes);
   avoidEnemies(nodes, team, true);
-
-  //prof_end("complex_spawnlogic");
 
   result = dog_pick_node_final(nodes, team, obj.enemies);
 
@@ -852,17 +839,15 @@ dog_pick_node_near_team(nodes, team) {
 }
 
 dog_pick_node_away_from_enemy(nodes, team) {
-  // There are no valid nodes in the map
-  if(!isDefined(nodes))
+  if(!isDefined(nodes)) {
     return undefined;
+  }
 
   initWeights(nodes);
   update_all_nodes(nodes, team);
 
   aliveplayers = getAllOtherPlayers();
 
-  // new logic: we want most players near idealDist units away.
-  // players closer than badDist units will be considered negatively
   idealDist = 1600;
   badDist = 1200;
 
@@ -873,8 +858,9 @@ dog_pick_node_away_from_enemy(nodes, team) {
       for(j = 0; j < aliveplayers.size; j++) {
         dist = distance(nodes[i].origin, aliveplayers[j].origin);
 
-        if(dist < badDist)
+        if(dist < badDist) {
           nearbyBadAmount += (badDist - dist) / badDist;
+        }
 
         distfromideal = abs(dist - idealDist);
         totalDistFromIdeal += distfromideal;
@@ -882,9 +868,6 @@ dog_pick_node_away_from_enemy(nodes, team) {
       avgDistFromIdeal = totalDistFromIdeal / aliveplayers.size;
 
       wellDistancedAmount = (idealDist - avgDistFromIdeal) / idealDist;
-
-      // wellDistancedAmount is between -inf and 1, 1 being best (likely around 0 to 1)
-      // nearbyBadAmount is between 0 and inf, // and it is very important that we get a bad weight if we have a high nearbyBadAmount.
 
       nodes[i].weight = wellDistancedAmount - nearbyBadAmount * 2 + randomfloat(.2);
     }
@@ -897,11 +880,10 @@ dog_pick_node_away_from_enemy(nodes, team) {
 }
 
 dog_pick_node_random(nodes, team) {
-  // There are no valid nodes in the map
-  if(!isDefined(nodes))
+  if(!isDefined(nodes)) {
     return undefined;
+  }
 
-  // randomize order
   for(i = 0; i < nodes.size; i++) {
     j = randomInt(nodes.size);
     node = nodes[i];
@@ -911,31 +893,24 @@ dog_pick_node_random(nodes, team) {
 
   return dog_pick_node_final(nodes, team, undefined, false);
 }
-
-// selects a node, preferring ones with heigher weights (or toward the beginning of the array if no weights).
-// also does final things like setting self.lastnode to the one chosen.
-// this takes care of avoiding telefragging, so it doesn't have to be considered by any other function.
 dog_pick_node_final(nodes, team, enemies, useweights) {
-  //prof_begin( "dog_pick_node_final" );
-
   bestnode = undefined;
 
-  if(!isDefined(nodes) || nodes.size == 0)
+  if(!isDefined(nodes) || nodes.size == 0) {
     return undefined;
+  }
 
-  if(!isDefined(useweights))
+  if(!isDefined(useweights)) {
     useweights = true;
+  }
 
   if(useweights) {
-    // choose node with best weight
-    // (if a tie, choose randomly from the best)
     bestnode = getBestWeightedNode(nodes, team, enemies);
   } else {
-    // (only place we actually get here from is dog_pick_node_random() )
-    // no weights. prefer nodes toward beginning of array
     for(i = 0; i < nodes.size; i++) {
-      if(positionWouldTelefrag(nodes[i].origin))
+      if(positionWouldTelefrag(nodes[i].origin)) {
         continue;
+      }
 
       bestnode = nodes[i];
       break;
@@ -943,9 +918,7 @@ dog_pick_node_final(nodes, team, enemies, useweights) {
   }
 
   if(!isDefined(bestnode)) {
-    // couldn't find a useable node! all will telefrag.
     if(useweights) {
-      // at this point, forget about weights. just take a random one.
       bestnode = nodes[randomint(nodes.size)];
     } else {
       bestnode = nodes[0];
@@ -953,8 +926,6 @@ dog_pick_node_final(nodes, team, enemies, useweights) {
   }
 
   self finalizeNodeChoice(bestnode);
-
-  //prof_end( "dog_pick_node_final" );
 
   return bestnode;
 }
@@ -970,34 +941,39 @@ getBestWeightedNode(nodes, team, enemies) {
     bestnode = undefined;
     for(i = 0; i < nodes.size; i++) {
       if(!isDefined(bestweight) || nodes[i].weight > bestweight) {
-        if(positionWouldTelefrag(nodes[i].origin))
+        if(positionWouldTelefrag(nodes[i].origin)) {
           continue;
+        }
 
         bestnodes = [];
         bestnodes[0] = nodes[i];
         bestweight = nodes[i].weight;
       } else if(nodes[i].weight == bestweight) {
-        if(positionWouldTelefrag(nodes[i].origin))
+        if(positionWouldTelefrag(nodes[i].origin)) {
           continue;
+        }
 
         bestnodes[bestnodes.size] = nodes[i];
       }
     }
-    if(bestnodes.size == 0)
+    if(bestnodes.size == 0) {
       return undefined;
+    }
 
-    // pick randomly from the available nodes with the best weight
     bestnode = bestnodes[randomint(bestnodes.size)];
 
     if(
-      try == maxSightTracedNodes)
+      try == maxSightTracedNodes) {
       return bestnode;
+    }
 
-    if(isDefined(bestnode.lastSightTraceTime) && bestnode.lastSightTraceTime == gettime())
+    if(isDefined(bestnode.lastSightTraceTime) && bestnode.lastSightTraceTime == gettime()) {
       return bestnode;
+    }
 
-    if(!lastMinuteSightTraces(bestnode, team, enemies))
+    if(!lastMinuteSightTraces(bestnode, team, enemies)) {
       return bestnode;
+    }
 
     penalty = getLosPenalty();
     bestnode.weight -= penalty;
@@ -1020,14 +996,14 @@ getLosPenalty() {
 }
 
 lastMinuteSightTraces(node, dog_team, enemies) {
-  //prof_begin("lastMinuteSightTraces");
-
   team = "all";
-  if(level.teambased)
+  if(level.teambased) {
     team = getOtherTeam(dog_team);
+  }
 
-  if(!isDefined(enemies))
+  if(!isDefined(enemies)) {
     return false;
+  }
 
   closest = undefined;
   closestDistsq = undefined;
@@ -1037,12 +1013,15 @@ lastMinuteSightTraces(node, dog_team, enemies) {
   for(i = 0; i < enemies.size; i++) {
     player = node.nearbyPlayers[team][i];
 
-    if(!isDefined(player))
+    if(!isDefined(player)) {
       continue;
-    if(player.sessionstate != "playing")
+    }
+    if(player.sessionstate != "playing") {
       continue;
-    if(player == self)
+    }
+    if(player == self) {
       continue;
+    }
 
     distsq = distanceSquared(node.origin, player.origin);
     if(!isDefined(closest) || distsq < closestDistsq) {
@@ -1058,12 +1037,14 @@ lastMinuteSightTraces(node, dog_team, enemies) {
   }
 
   if(isDefined(closest)) {
-    if(bullettracepassed(closest.origin + (0, 0, 50), node.origin + (0, 0, 50), false, undefined))
+    if(bullettracepassed(closest.origin + (0, 0, 50), node.origin + (0, 0, 50), false, undefined)) {
       return true;
+    }
   }
   if(isDefined(secondClosest)) {
-    if(bullettracepassed(secondClosest.origin + (0, 0, 50), node.origin + (0, 0, 50), false, undefined))
+    if(bullettracepassed(secondClosest.origin + (0, 0, 50), node.origin + (0, 0, 50), false, undefined)) {
       return true;
+    }
   }
 
   return false;
@@ -1079,8 +1060,9 @@ avoidEnemies(nodes, team, teambased) {
   lospenalty = getLosPenalty();
 
   otherteam = "axis";
-  if(team == "axis")
+  if(team == "axis") {
     otherteam = "allies";
+  }
 
   minDistTeam = otherteam;
 
@@ -1092,28 +1074,27 @@ avoidEnemies(nodes, team, teambased) {
   if(avoidWeight != 0) {
     nearbyEnemyOuterRange = getdvarfloat("scr_spawn_enemyavoiddist");
     nearbyEnemyOuterRangeSq = nearbyEnemyOuterRange * nearbyEnemyOuterRange;
-    nearbyEnemyPenalty = 1500 * avoidWeight; // typical base weights tend to peak around 1500 or so. this is large enough to upset that while only locally dominating it.
-    nearbyEnemyMinorPenalty = 800 * avoidWeight; // additional negative weight for distances up to 2 * nearbyEnemyOuterRange
+    nearbyEnemyPenalty = 1500 * avoidWeight;
+    nearbyEnemyMinorPenalty = 800 * avoidWeight;
 
     lastAttackerOrigin = (-99999, -99999, -99999);
     lastDeathPos = (-99999, -99999, -99999);
 
     for(i = 0; i < nodes.size; i++) {
-      // penalty for nearby enemies
       mindist = nodes[i].minDist[minDistTeam];
       if(mindist < nearbyEnemyOuterRange * 2) {
         penalty = nearbyEnemyMinorPenalty * (1 - mindist / (nearbyEnemyOuterRange * 2));
-        if(mindist < nearbyEnemyOuterRange)
+        if(mindist < nearbyEnemyOuterRange) {
           penalty += nearbyEnemyPenalty * (1 - mindist / nearbyEnemyOuterRange);
+        }
         if(penalty > 0) {
+          {}
           nodes[i].weight -= penalty;
         }
       }
     }
   }
 
-  // DEBUG
-  //prof_end(" spawn_sc");
 }
 
 nodeUpdate(node, team) {
@@ -1151,23 +1132,26 @@ nodeUpdate(node, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(player.sessionstate != "playing")
+    if(player.sessionstate != "playing") {
       continue;
+    }
 
     diff = player.origin - node.origin;
     diff = (diff[0], diff[1], 0);
-    dist = length(diff); // needs to be actual distance for distSum value
+    dist = length(diff);
 
     player_team = "all";
-    if(level.teambased)
+    if(level.teambased) {
       player_team = player.pers["team"];
+    }
 
     if(dist < 1024) {
       node.nearbyPlayers[player_team][node.nearbyPlayers[player_team].size] = player;
     }
 
-    if(dist < node.minDist[player_team])
+    if(dist < node.minDist[player_team]) {
       node.minDist[player_team] = dist;
+    }
 
     node.distSum[player_team] += dist;
     node.numPlayersAtLastUpdate++;
@@ -1176,19 +1160,21 @@ nodeUpdate(node, team) {
   for(i = 0; i < level.dogs.size; i++) {
     dog = level.dogs[i];
 
-    if(!isDefined(dog) || !isalive(dog))
+    if(!isDefined(dog) || !isalive(dog)) {
       continue;
+    }
 
     diff = dog.origin - node.origin;
     diff = (diff[0], diff[1], 0);
-    dist = length(diff); // needs to be actual distance for distSum value
+    dist = length(diff);
 
     if(dist < 1024) {
       node.nearbyDogs[node.nearbyDogs.size] = dog;
     }
 
-    if(dist < node.minDist["dogs"])
+    if(dist < node.minDist["dogs"]) {
       node.minDist["dogs"] = dist;
+    }
 
     node.distSum["dogs"] += dist;
     node.numDogsAtLastUpdate++;
@@ -1196,8 +1182,9 @@ nodeUpdate(node, team) {
 }
 
 initWeights(nodes) {
-  for(i = 0; i < nodes.size; i++)
+  for(i = 0; i < nodes.size; i++) {
     nodes[i].weight = 0;
+  }
 }
 
 getAllAlliedAndEnemyPlayers(obj, team) {
@@ -1225,8 +1212,9 @@ avoidSpawnReuse(nodes) {
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
 
-    if(!isDefined(node.lastspawntime))
+    if(!isDefined(node.lastspawntime)) {
       continue;
+    }
 
     timepassed = time - node.lastspawntime;
     if(timepassed < maxtime) {
@@ -1243,11 +1231,13 @@ flash_dogs(area) {
     for(i = 0; i < level.dogs.size; i++) {
       dog = level.dogs[i];
 
-      if(!isalive(dog))
+      if(!isalive(dog)) {
         continue;
+      }
       if(dog istouching(area)) {
         do_flash = true;
         if(isPlayer(self)) {
+          {}
           if(level.teamBased && (dog.aiteam == self.pers["team"])) {
             do_flash = false;
           } else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner) {
@@ -1256,15 +1246,16 @@ flash_dogs(area) {
         }
 
         if(isDefined(dog.lastFlashed) && dog.lastFlashed + 1500 > gettime()) {
+          {}
           do_flash = false;
         }
 
         if(do_flash) {
+          {}
           dog setFlashBanged(true, 500);
           dog.lastFlashed = gettime();
         }
       }
     }
-
   }
 }

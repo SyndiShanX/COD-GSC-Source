@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_kwai_fx.csc
+****************************************************/
+
 main() {
-  // CreateFX entities placed: 159
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_insects_swarm");
   ent.v["origin"] = (2718.6, 464.548, 858.425);
   ent.v["angles"] = (270, 0, 0);

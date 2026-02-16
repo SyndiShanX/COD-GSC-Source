@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\sniper_fx.csc
+************************************************/
+
 main() {
-  // CreateFX entities placed: 569
   ent = clientscripts\_fx::createOneshotEffect("battle_smoke_thick");
   ent.v["origin"] = (30.3683, 408.271, 23);
   ent.v["angles"] = (270, 352.648, 63.3523);

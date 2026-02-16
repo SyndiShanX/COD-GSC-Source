@@ -1,3 +1,8 @@
+/************************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\zombie_jump_up_to_climb.gsc
+************************************************************/
+
 #include animscripts\Utility;
 #include animscripts\traverse\shared;
 #using_animtree("generic_human");

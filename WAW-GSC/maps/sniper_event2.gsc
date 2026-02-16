@@ -2151,7 +2151,7 @@ sniper_on_u(trig, player) {
                 }
               }
               if(direction == 1 && top > 13) {
-                pressed = level.player adsbuttonpressed();
+                pressed = level.player adsButtonPressed();
                 if(playedfx == 0 || pressed == false) {
                   spot = spawn("script_model", helmet.origin + (0, 0, 10));
                   spot setModel("tag_origin");

@@ -1,9 +1,15 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\sur.gsc
+**************************************/
+
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(getDvar("mapname") == "mp_background")
+  if(getDvar("mapname") == "mp_background") {
     return;
+  }
 
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
@@ -32,7 +38,6 @@ main() {
   precacheString(&"MP_CARGO_RECOVERED_BY");
   precacheString(&"MP_CARGO_DROPPED_BY");
 
-  // temporary cargo pre-cache -->
   game["bombmodelname"] = "mil_tntbomb_mp";
   game["bombmodelnameobj"] = "mil_tntbomb_mp";
   game["bomb_dropped_sound"] = "mp_war_objective_lost";
@@ -52,26 +57,30 @@ main() {
   precacheShader("compass_waypoint_captureneutral");
   precacheShader("compass_waypoint_defend");
   precacheShader("compass_waypoint_kill");
-  // <-- temporary cargo pre-cache
 
-  if(getDvar("sur_autodestroytime") == "")
+  if(getDvar("sur_autodestroytime") == "") {
     setDvar("sur_autodestroytime", "60");
+  }
   level.safeZoneAutoDestroyTime = getdvarint("sur_autodestroytime");
 
-  if(getDvar("sur_captureTime") == "")
+  if(getDvar("sur_captureTime") == "") {
     setDvar("sur_captureTime", "20");
+  }
   level.captureTime = getdvarint("sur_captureTime");
 
-  if(getDvar("sur_destroyTime") == "")
+  if(getDvar("sur_destroyTime") == "") {
     setDvar("sur_destroyTime", "10");
+  }
   level.destroyTime = getdvarint("sur_destroyTime");
 
-  if(getDvar("sur_delayPlayer") == "")
+  if(getDvar("sur_delayPlayer") == "") {
     setDvar("sur_delayPlayer", 1);
+  }
   level.delayPlayer = getdvarint("sur_delayPlayer");
 
-  if(getDvar("sur_spawnDelay") == "")
+  if(getDvar("sur_spawnDelay") == "") {
     setDvar("sur_spawnDelay", 0);
+  }
   level.spawnDelay = getdvarint("sur_spawnDelay");
 
   level.iconoffset = (0, 0, 32);
@@ -97,21 +106,25 @@ updateObjectiveHintMessages(alliesObjective, axisObjective) {
 getRespawnDelay() {
   self.lowerMessageOverride = undefined;
 
-  if(!isDefined(level.safeZoneObject))
+  if(!isDefined(level.safeZoneObject)) {
     return undefined;
+  }
 
   safeZoneOwningTeam = level.safeZoneObject maps\mp\gametypes\_gameobjects::getOwnerTeam();
   if(self.pers["team"] == safeZoneOwningTeam) {
-    if(!isDefined(level.safeZoneDestroyTime))
+    if(!isDefined(level.safeZoneDestroyTime)) {
       return undefined;
+    }
 
     timeRemaining = (level.safeZoneDestroyTime - gettime()) / 1000;
 
-    if(!level.spawnDelay)
+    if(!level.spawnDelay) {
       return undefined;
+    }
 
-    if(level.spawnDelay >= level.safeZoneAutoDestroyTime)
+    if(level.spawnDelay >= level.safeZoneAutoDestroyTime) {
       self.lowerMessageOverride = &"MP_WAITING_FOR_SAFEZONE";
+    }
 
     if(level.delayPlayer) {
       return min(level.spawnDelay, timeRemaining);
@@ -137,7 +150,6 @@ onStartGameType() {
 
   setClientNameMode("auto_change");
 
-  // TODO: Survival spawnpoints
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::addSpawnPoints("allies", "mp_tdm_spawn");
@@ -178,8 +190,9 @@ SURMainLoop() {
 
   level.safeZoneRevealTime = -100000;
 
-  while(level.inPrematchPeriod)
+  while(level.inPrematchPeriod) {
     wait(0.05);
+  }
 
   wait 5;
 
@@ -225,16 +238,20 @@ SURMainLoop() {
 
       case "spawnCargo":
         if(isDefined(level.cargoObject)) {
+          {}
           checkCargoPickup();
         } else {
+          {}
           level.cargoObject = spawnCargo();
         }
         break;
 
       case "spawnSafeZone":
         if(isDefined(level.safeZoneObject)) {
+          {}
           checkSafeZoneResets(level.safeZoneObject);
         } else {
+          {}
           level.safeZoneObject = spawnSafeZone();
         }
         break;
@@ -309,8 +326,6 @@ spawnSafeZone() {
 
   iPrintLn(&"MP_SAFEZONE_REVEALED");
   playSoundOnPlayers("mp_suitcase_pickup");
-  // @ TODO : Audio cue when safe zone spawns? Audio asset?
-  //maps\mp\gametypes\_globallogic::leaderDialog( "safezone_located" );
 
   safeZoneObject = safeZone.gameobject;
   level.safeZoneObject = safeZoneObject;
@@ -369,12 +384,14 @@ spawnSafeZone() {
 
 checkSafeZoneResets(safeZoneObject) {
   level.timerDisplay["allies"].label = &"MP_SAFEZONE_DESPAWN_IN";
-  if(!level.splitscreen)
+  if(!level.splitscreen) {
     level.timerDisplay["allies"].alpha = 1;
+  }
 
   level.timerDisplay["axis"].label = &"MP_SAFEZONE_DESPAWN_IN";
-  if(!level.splitscreen)
+  if(!level.splitscreen) {
     level.timerDisplay["axis"].alpha = 1;
+  }
 
   level waittill("safezone_destroyed");
 
@@ -390,8 +407,9 @@ forceSpawnTeam(team) {
   players = level.players;
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(!isDefined(player))
+    if(!isDefined(player)) {
       continue;
+    }
 
     if(player.pers["team"] == team) {
       player notify("force_spawn");
@@ -424,14 +442,16 @@ onDrop(player) {
     self maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_bomb");
   }
 
-  if(true /*!level.bombPlanted*/ /*is cargo in safe zone?*/ ) {
-    if(isDefined(player) && isDefined(player.name))
+  if(true) {
+    if(isDefined(player) && isDefined(player.name)) {
       printOnTeamArg(&"MP_CARGO_DROPPED_BY", player.pers["team"], player);
+    }
 
-    if(isDefined(player))
+    if(isDefined(player)) {
       player logString("bomb dropped");
-    else
+    } else {
       logString("bomb dropped");
+    }
   }
 
   maps\mp\_utility::playSoundOnPlayers(game["bomb_dropped_sound"], game["attackers"]);
@@ -457,9 +477,10 @@ onPickup(player) {
 
   level.cargoTouched = true;
 
-  if(true /*!level.bombDefused*/ /*is game over? or is cargo safe zone time up?*/ ) {
-    if(isDefined(player) && isDefined(player.name))
+  if(true) {
+    if(isDefined(player) && isDefined(player.name)) {
       printOnTeamArg(&"MP_CARGO_RECOVERED_BY", player.pers["team"], player);
+    }
 
     maps\mp\gametypes\_globallogic::leaderDialog("bomb_taken", player.pers["team"]);
     player logString("bomb taken");
@@ -532,16 +553,18 @@ onSpawnPlayer() {
 
   if(isDefined(level.safeZoneObject)) {
     safeZoneOwningTeam = level.safeZoneObject maps\mp\gametypes\_gameobjects::getOwnerTeam();
-    if(self.pers["team"] == safeZoneOwningTeam)
+    if(self.pers["team"] == safeZoneOwningTeam) {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.safeZoneObject.nearSpawns);
-    else if(level.spawnDelay >= level.safeZoneAutoDestroyTime && gettime() > level.safeZoneRevealTime + 10000)
+    } else if(level.spawnDelay >= level.safeZoneAutoDestroyTime && gettime() > level.safeZoneRevealTime + 10000) {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all);
-    else
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.safeZoneObject.outerSpawns);
+    }
   }
 
-  if(!isDefined(spawnpoint))
+  if(!isDefined(spawnpoint)) {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all);
+  }
 
   assert(isDefined(spawnpoint));
 
@@ -569,6 +592,7 @@ SetupCargoSpots() {
     for(j = 0; j < trigs.size; j++) {
       if(cargoSpot istouching(trigs[j])) {
         if(isDefined(cargoSpot.trig)) {
+          {}
           maperrors[maperrors.size] = "Cargo at " + cargoSpot.origin + " is touching more than one \"sur_cargo_pickup_trig\" trigger";
           errored = true;
           break;
@@ -612,8 +636,9 @@ SetupCargoSpots() {
 
   if(maperrors.size > 0) {
     println("^1------------ Map Errors ------------");
-    for(i = 0; i < maperrors.size; i++)
+    for(i = 0; i < maperrors.size; i++) {
       println(maperrors[i]);
+    }
     println("^1------------------------------------");
 
     maps\mp\_utility::error("Map errors. See above");
@@ -648,6 +673,7 @@ SetupSafeZones() {
     for(j = 0; j < trigs.size; j++) {
       if(safeZone istouching(trigs[j])) {
         if(isDefined(safeZone.trig)) {
+          {}
           maperrors[maperrors.size] = "Safe Zone at " + safeZone.origin + " is touching more than one \"safezone_trigger\" trigger";
           errored = true;
           break;
@@ -686,8 +712,9 @@ SetupSafeZones() {
 
   if(maperrors.size > 0) {
     println("^1------------ Map Errors ------------");
-    for(i = 0; i < maperrors.size; i++)
+    for(i = 0; i < maperrors.size; i++) {
       println(maperrors[i]);
+    }
     println("^1------------------------------------");
 
     maps\mp\_utility::error("Map errors. See above");
@@ -711,11 +738,11 @@ setUpNearbySpawns() {
     spawns[i].distsq = distanceSquared(spawns[i].origin, self.origin);
   }
 
-  // sort by distsq
   for(i = 1; i < spawns.size; i++) {
     thespawn = spawns[i];
-    for(j = i - 1; j >= 0 && thespawn.distsq < spawns[j].distsq; j--)
+    for(j = i - 1; j >= 0 && thespawn.distsq < spawns[j].distsq; j--) {
       spawns[j + 1] = spawns[j];
+    }
     spawns[j + 1] = thespawn;
   }
 
@@ -730,10 +757,11 @@ setUpNearbySpawns() {
   }
   for(; i < spawns.size; i++) {
     outer[outer.size] = spawns[i];
-    if(i <= (thirdSize * 2))
+    if(i <= (thirdSize * 2)) {
       second[second.size] = spawns[i];
-    else
+    } else {
       third[third.size] = spawns[i];
+    }
   }
 
   self.gameObject.nearSpawns = first;
@@ -743,10 +771,6 @@ setUpNearbySpawns() {
 }
 
 PickCargoTospawn() {
-  // find average of positions of each team
-  // (medians would be better, to get rid of outliers...)
-  // and find the safeZone which has the least difference in distance from those two averages
-
   avgpos["allies"] = (0, 0, 0);
   avgpos["axis"] = (0, 0, 0);
   num["allies"] = 0;
@@ -762,8 +786,9 @@ PickCargoTospawn() {
 
   if(num["allies"] == 0 || num["axis"] == 0) {
     cargoSpot = level.cargoSpots[randomint(level.cargoSpots.size)];
-    while(isDefined(level.prevCargoSpot) && cargoSpot == level.prevCargoSpot) // so lazy
+    while(isDefined(level.prevCargoSpot) && cargoSpot == level.prevCargoSpot) {
       cargoSpot = level.cargoSpots[randomint(level.cargoSpots.size)];
+    }
 
     level.prevCargoSpot2 = level.prevCargoSpot;
     level.prevCargoSpot = cargoSpot;
@@ -779,17 +804,17 @@ PickCargoTospawn() {
   for(i = 0; i < level.cargoSpots.size; i++) {
     cargoSpot = level.cargoSpots[i];
 
-    // (purposefully using distance instead of distanceSquared)
     cost = abs(distance(cargoSpot.origin, avgpos["allies"]) - distance(cargoSpot.origin, avgpos["axis"]));
 
     if(isDefined(level.prevCargoSpot) && cargoSpot == level.prevCargoSpot) {
       continue;
     }
     if(isDefined(level.prevCargoSpot2) && cargoSpot == level.prevCargoSpot2) {
-      if(level.cargoSpots.size > 2)
+      if(level.cargoSpots.size > 2) {
         continue;
-      else
+      } else {
         cost += 512;
+      }
     }
 
     if(!isDefined(lowestcost) || cost < lowestcost) {
@@ -806,10 +831,6 @@ PickCargoTospawn() {
 }
 
 PickSafeZoneTospawn() {
-  // find average of positions of each team
-  // (medians would be better, to get rid of outliers...)
-  // and find the safeZone which has the least difference in distance from those two averages
-
   avgpos["allies"] = (0, 0, 0);
   avgpos["axis"] = (0, 0, 0);
   num["allies"] = 0;
@@ -825,8 +846,9 @@ PickSafeZoneTospawn() {
 
   if(num["allies"] == 0 || num["axis"] == 0) {
     safeZone = level.safeZones[randomint(level.safeZones.size)];
-    while(isDefined(level.prevSafeZone) && safeZone == level.prevSafeZone) // so lazy
+    while(isDefined(level.prevSafeZone) && safeZone == level.prevSafeZone) {
       safeZone = level.safeZones[randomint(level.safeZones.size)];
+    }
 
     level.prevSafeZone2 = level.prevSafeZone;
     level.prevSafeZone = safeZone;
@@ -842,17 +864,17 @@ PickSafeZoneTospawn() {
   for(i = 0; i < level.safeZones.size; i++) {
     safeZone = level.safeZones[i];
 
-    // (purposefully using distance instead of distanceSquared)
     cost = abs(distance(safeZone.origin, avgpos["allies"]) - distance(safeZone.origin, avgpos["axis"]));
 
     if(isDefined(level.prevSafeZone) && safeZone == level.prevSafeZone) {
       continue;
     }
     if(isDefined(level.prevSafeZone2) && safeZone == level.prevSafeZone2) {
-      if(level.safeZones.size > 2)
+      if(level.safeZones.size > 2) {
         continue;
-      else
+      } else {
         cost += 512;
+      }
     }
 
     if(!isDefined(lowestcost) || cost < lowestcost) {
@@ -869,8 +891,9 @@ PickSafeZoneTospawn() {
 }
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
-  if(!isPlayer(attacker) || (!self.touchTriggers.size && !attacker.touchTriggers.size) || attacker.pers["team"] == self.pers["team"])
+  if(!isPlayer(attacker) || (!self.touchTriggers.size && !attacker.touchTriggers.size) || attacker.pers["team"] == self.pers["team"]) {
     return;
+  }
 
   if(self.touchTriggers.size) {
     triggerIds = getArrayKeys(self.touchTriggers);
@@ -901,7 +924,6 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
         attacker thread[[level.onXPEvent]]("assault");
         maps\mp\gametypes\_globallogic::givePlayerScore("assault", attacker);
       }
-
     }
   }
 }

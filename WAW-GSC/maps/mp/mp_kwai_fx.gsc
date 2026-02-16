@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_kwai_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -51,7 +56,6 @@ precacheFX() {
   level._effect["fx_mp_water_shimmers"] = loadfx("maps/mp_maps/fx_mp_water_shimmers");
   level._effect["fx_mp_water_splash_mist"] = loadfx("maps/mp_maps/fx_mp_water_splash_mist");
   level._effect["fx_mp_water_fall_mist"] = loadfx("maps/mp_maps/fx_mp_water_fall_mist");
-  //	level._effect["fx_fog_low_tunnel"]	= loadfx("maps/mp_maps/fx_fog_low_tunnel");
   level._effect["mp_fog_low_tunnel"] = loadfx("maps/mp_maps/fx_mp_fog_low_tunnel");
   level._effect["fx_water_edge_ripple"] = loadfx("maps/mp_maps/fx_water_edge_ripple");
   level._effect["fx_mp_water_spill"] = loadfx("maps/mp_maps/fx_mp_water_spill");

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createfx\oki3_fx.gsc
+**************************************/
+
 main() {
-  // CreateFX entities placed: 473
   ent = maps\_utility::createOneshotEffect("a_insects");
   ent.v["origin"] = (4041.56, 4579.96, -777.235);
   ent.v["angles"] = (270, 0, 0);

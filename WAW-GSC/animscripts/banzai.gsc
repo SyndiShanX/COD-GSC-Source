@@ -1240,7 +1240,7 @@ knockedDownSequence(attacker, player) {
 }
 
 player_attacking(player) {
-  return isalive(player) && (player MeleeButtonPressed());
+  return isalive(player) && (player meleeButtonPressed());
 }
 
 banzai_last_stand(attacker, player) {

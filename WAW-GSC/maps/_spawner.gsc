@@ -1129,8 +1129,9 @@ go_to_struct(node, optional_arrived_at_node_func) {
 }
 
 go_to_node(node, goal_type, optional_arrived_at_node_func) {
-  if(isDefined(self.used_an_mg42)) // This AI was called upon to use an MG42 so he's not going to run to his node.
+  if(isDefined(self.used_an_mg42)) {
     return;
+  }
 
   array = get_node_funcs_based_on_target(node, goal_type);
   if(!isDefined(array)) {
@@ -2659,8 +2660,7 @@ flood_and_secure_spawn(spawner) {
 
   self waittill("death", other);
   playerKill = isalive(other) && isPlayer(other);
-  if(!playerkill && isDefined(other) && other.classname == "worldspawn") // OR THE WORLDSPAWN???
-  {
+  if(!playerkill && isDefined(other) && other.classname == "worldspawn") {
     playerKill = true;
   }
 

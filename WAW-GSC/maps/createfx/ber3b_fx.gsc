@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createfx\ber3b_fx.gsc
+**************************************/
+
 main() {
-  // CreateFX entities placed: 400
   ent = maps\_createfx::createLoopSound();
   ent.v["origin"] = (1302.72, 15832.7, 765.856);
   ent.v["angles"] = (270, 0, 0);

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_roundhouse_fx.csc
+**********************************************************/
+
 main() {
-  // CreateFX entities placed: 165
   ent = clientscripts\mp\_fx::createLoopEffect("mp_battlesmoke_large");
   ent.v["origin"] = (1532.78, -390.334, -479.964);
   ent.v["angles"] = (270, 0, 62);

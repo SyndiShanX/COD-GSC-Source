@@ -218,7 +218,7 @@ do_hud_for_ft_tut_by_client(endon_signal, complete_signal) {
 
   if(self != get_players()[0]) {
     flame_allowed_time = 0;
-    while(!(self FragButtonPressed()) && flame_allowed_time > 120) {
+    while(!(self fragButtonPressed()) && flame_allowed_time > 120) {
       wait(0.05);
       flame_allowed_time++;
     }
@@ -235,7 +235,7 @@ do_hud_for_ft_tut_by_client(endon_signal, complete_signal) {
 
   if(self != get_players()[0]) {
     ads_time_allowed = 0;
-    while(!(self AdsButtonPressed()) && ads_time_allowed > 120) {
+    while(!(self adsButtonPressed()) && ads_time_allowed > 120) {
       wait(0.05);
       ads_time_allowed++;
     }
@@ -244,7 +244,7 @@ do_hud_for_ft_tut_by_client(endon_signal, complete_signal) {
       self waittill("go_past_ads_tut");
     } else {
       ads_time_allowed = 0;
-      while(!(self AdsButtonPressed()) && ads_time_allowed > 120) {
+      while(!(self adsButtonPressed()) && ads_time_allowed > 120) {
         wait(0.05);
         ads_time_allowed++;
       }

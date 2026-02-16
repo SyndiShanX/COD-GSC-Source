@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/****************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createart\pel1a_art.gsc
+****************************************/
+
 main() {
   level.tweakfile = true;
-
-  // *Fog section*
 
   setDvar("scr_fog_exp_halfplane", "2787");
   setDvar("scr_fog_exp_halfheight", "2000");
@@ -11,21 +13,6 @@ main() {
   setDvar("scr_fog_green", "0.545");
   setDvar("scr_fog_blue", "0.63");
   setDvar("scr_fog_baseheight", "0");
-
-  //	// *depth of field section*
-  //	level.do_not_use_dof = true;
-  //	level.dofDefault["nearStart"] = 0;
-  //	level.dofDefault["nearEnd"] = 60;
-  //	level.dofDefault["farStart"] = 2000;
-  //	level.dofDefault["farEnd"] = 10000;
-  //	level.dofDefault["nearBlur"] = 6;
-  //	level.dofDefault["farBlur"] = 2;
-  //
-  //	players = maps\_utility::get_players();
-  //	for( i = 0; i < players.size; i++ )
-  //	{
-  //		players[i] maps\_art::setdefaultdepthoffield();
-  //	}
 
   setDvar("visionstore_glowTweakEnable", "0");
   setDvar("visionstore_glowTweakRadius0", "5");

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/*********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_courtyard_fx.csc
+*********************************************************/
+
 main() {
-  // CreateFX entities placed: 104
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_smoke_fire_column");
   ent.v["origin"] = (7024.88, -894.095, 790.093);
   ent.v["angles"] = (270, 356.424, -128.424);

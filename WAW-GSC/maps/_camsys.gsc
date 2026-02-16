@@ -129,7 +129,7 @@ catch_use_button() {
   while(1) {
     players = get_players();
     for(i = 0; i < players.size; i++) {
-      if(players[i] UseButtonPressed()) {
+      if(players[i] useButtonPressed()) {
         level notify("player_skip_igc");
         return;
       }

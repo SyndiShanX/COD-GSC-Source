@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_dev.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 init() {
@@ -16,7 +21,6 @@ init() {
   setDvar("scr_giveperk", "");
   setDvar("scr_takeperk", "");
 
-  // SRS 3/19/08: engagement distance debug dvar toggle watcher
   thread engagement_distance_debug_toggle();
 
   setDvar("debug_dynamic_ai_spawning", "0");
@@ -25,7 +29,6 @@ init() {
     updateDevSettings();
     wait .05;
   }
-
 }
 
 updateDevSettings() {
@@ -107,8 +110,9 @@ updateDevSettings() {
 
   if(getDvar("scr_x_kills_y") != "") {
     nameTokens = strTok(getDvar("scr_x_kills_y"), " ");
-    if(nameTokens.size > 1)
+    if(nameTokens.size > 1) {
       thread xKillsY(nameTokens[0], nameTokens[1]);
+    }
 
     setDvar("scr_x_kills_y", "");
   }
@@ -119,12 +123,14 @@ updateDevSettings() {
 
     owner = undefined;
     for(index = 0; index < level.players.size; index++) {
-      if(level.players[index].name == ownerName)
+      if(level.players[index].name == ownerName) {
         owner = level.players[index];
+      }
     }
 
-    if(isDefined(owner))
+    if(isDefined(owner)) {
       owner maps\mp\gametypes\_hardpoints::triggerHardpoint("dogs_mp");
+    }
   }
 
   if(getDvar("scr_set_level") != "") {
@@ -168,8 +174,9 @@ updateDevSettings() {
   }
 
   if(getDvar("scr_do_notify") != "") {
-    for(i = 0; i < level.players.size; i++)
+    for(i = 0; i < level.players.size; i++) {
       level.players[i] maps\mp\gametypes\_hud_message::oldNotifyMessage(getDvar("scr_do_notify"), getDvar("scr_do_notify"), game["icons"]["allies"]);
+    }
 
     announcement(getDvar("scr_do_notify"));
     setDvar("scr_do_notify", "");
@@ -186,13 +193,15 @@ updateDevSettings() {
 
         level.entArray[level.entArray.size] = curEnt;
 
-        if(!isDefined(level.entCounts[classname]))
+        if(!isDefined(level.entCounts[classname])) {
           level.entCounts[classname] = 0;
+        }
 
         level.entCounts[classname]++;
 
-        if(!isDefined(level.entGroups[classname]))
+        if(!isDefined(level.entGroups[classname])) {
           level.entGroups[classname] = [];
+        }
 
         level.entGroups[classname][level.entGroups[classname].size] = curEnt;
       }
@@ -207,13 +216,15 @@ updateDevSettings() {
 }
 
 giveExtraPerks() {
-  if(!isDefined(self.extraPerks))
+  if(!isDefined(self.extraPerks)) {
     return;
+  }
 
   perks = getArrayKeys(self.extraPerks);
 
-  for(i = 0; i < perks.size; i++)
+  for(i = 0; i < perks.size; i++) {
     self setPerk(perks[i]);
+  }
 }
 
 xKillsY(attackerName, victimName) {
@@ -221,31 +232,23 @@ xKillsY(attackerName, victimName) {
   victim = undefined;
 
   for(index = 0; index < level.players.size; index++) {
-    if(level.players[index].name == attackerName)
+    if(level.players[index].name == attackerName) {
       attacker = level.players[index];
-    else if(level.players[index].name == victimName)
+    } else if(level.players[index].name == victimName) {
       victim = level.players[index];
+    }
   }
 
-  if(!isAlive(attacker) || !isAlive(victim))
+  if(!isAlive(attacker) || !isAlive(victim)) {
     return;
+  }
 
   victim thread[[level.callbackPlayerDamage]](
-    attacker, // eInflictor The entity that causes the damage.(e.g. a turret)
-    attacker, // eAttacker The entity that is attacking.
-    1000, // iDamage Integer specifying the amount of damage done
-    0, // iDFlags Integer specifying flags that are to be applied to the damage
-    "MOD_RIFLE_BULLET", // sMeansOfDeath Integer specifying the method of death
-    "none", // sWeapon The weapon number of the weapon used to inflict the damage
-    (0, 0, 0), // vPoint The point the damage is from?
-    (0, 0, 0), // vDir The direction of the damage
-    "none", // sHitLoc The location of the hit
-    0 // psOffsetTime The time offset for the damage
+    attacker, attacker, 1000, 0, "MOD_RIFLE_BULLET", "none", (0, 0, 0), (0, 0, 0), "none", 0
   );
 }
 
 updateMinimapSetting() {
-  // use 0 for no required map aspect ratio.
   requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio");
 
   if(!isDefined(level.minimapheight)) {
@@ -269,19 +272,22 @@ updateMinimapSetting() {
 
         corners = getEntArray("minimap_corner", "targetname");
         if(corners.size == 2) {
+          {}
           viewpos = (corners[0].origin + corners[1].origin);
           viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
 
           maxcorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
           mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
-          if(corners[1].origin[0] > corners[0].origin[0])
+          if(corners[1].origin[0] > corners[0].origin[0]) {
             maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          else
+          } else {
             mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
-          if(corners[1].origin[1] > corners[0].origin[1])
+          }
+          if(corners[1].origin[1] > corners[0].origin[1]) {
             maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          else
+          } else {
             mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
+          }
 
           viewpostocorner = maxcorner - viewpos;
           viewpos = (viewpos[0], viewpos[1], viewpos[2] + minimapheight);
@@ -291,22 +297,25 @@ updateMinimapSetting() {
           northvector = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
           eastvector = (northvector[1], 0 - northvector[0], 0);
           disttotop = vectordot(northvector, viewpostocorner);
-          if(disttotop < 0)
+          if(disttotop < 0) {
             disttotop = 0 - disttotop;
+          }
           disttoside = vectordot(eastvector, viewpostocorner);
-          if(disttoside < 0)
+          if(disttoside < 0) {
             disttoside = 0 - disttoside;
+          }
 
-          // extend map bounds to meet the required aspect ratio
           if(requiredMapAspectRatio > 0) {
             mapAspectRatio = disttoside / disttotop;
             if(mapAspectRatio < requiredMapAspectRatio) {
+              {}
               incr = requiredMapAspectRatio / mapAspectRatio;
               disttoside *= incr;
               addvec = vecscale(eastvector, vectordot(eastvector, maxcorner - viewpos) * (incr - 1));
               mincorner -= addvec;
               maxcorner += addvec;
             } else {
+              {}
               incr = mapAspectRatio / requiredMapAspectRatio;
               disttotop *= incr;
               addvec = vecscale(northvector, vectordot(northvector, maxcorner - viewpos) * (incr - 1));
@@ -317,7 +326,7 @@ updateMinimapSetting() {
 
           if(level.console) {
             aspectratioguess = 16.0 / 9.0;
-            // .8 would be .75 but it needs to be bigger because of safe area
+
             angleside = 2 * atan(disttoside * .8 / minimapheight);
             angletop = 2 * atan(disttotop * aspectratioguess * .8 / minimapheight);
           } else {
@@ -325,10 +334,11 @@ updateMinimapSetting() {
             angleside = 2 * atan(disttoside / minimapheight);
             angletop = 2 * atan(disttotop * aspectratioguess / minimapheight);
           }
-          if(angleside > angletop)
+          if(angleside > angletop) {
             angle = angleside;
-          else
+          } else {
             angle = angletop;
+          }
 
           znear = minimapheight - 1000;
           if(znear < 16) znear = 16;
@@ -338,7 +348,6 @@ updateMinimapSetting() {
           origin.origin = viewpos + (0, 0, -62);
           origin.angles = (90, getnorthyaw(), 0);
 
-
           player TakeAllWeapons();
           player GiveWeapon("defaultweapon_mp");
           player setclientdvar("cg_drawgun", "0");
@@ -346,8 +355,8 @@ updateMinimapSetting() {
           player setclientdvar("cg_drawfps", "0");
           player setclientdvar("fx_enable", "0");
           player setclientdvar("r_fog", "0");
-          player setclientdvar("r_highLodDist", "0"); // (turns of lods)
-          player setclientdvar("r_znear", znear); // (reduces z-fighting)
+          player setclientdvar("r_highLodDist", "0");
+          player setclientdvar("r_znear", znear);
           player setclientdvar("r_lodscale", "0");
           player setclientdvar("cg_drawversion", "0");
           player setclientdvar("sm_enable", "1");
@@ -356,11 +365,12 @@ updateMinimapSetting() {
           player setclientdvar("cg_fov", angle);
           player setclientdvar("cg_fovmin", "1");
 
-          // hide 3D icons
           if(isDefined(level.objPoints)) {
             for(i = 0; i < level.objPointNames.size; i++) {
-              if(isDefined(level.objPoints[level.objPointNames[i]]))
+              {}
+              if(isDefined(level.objPoints[level.objPointNames[i]])) {
                 level.objPoints[level.objPointNames[i]] destroy();
+              }
             }
             level.objPoints = [];
             level.objPointNames = [];
@@ -374,10 +384,12 @@ updateMinimapSetting() {
           wait .05;
 
           player setplayerangles(origin.angles);
-        } else
+        } else {
           println("^1Error: There are not exactly 2 \"minimap_corner\" entities in the level.");
-      } else
+        }
+      } else {
         setDvar("scr_minimap_height", "0");
+      }
     }
   }
 }
@@ -395,14 +407,6 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
 
   diaglen = length(mincorner - maxcorner);
-
-  /*diagonal = maxcorner - mincorner;
-  side = vecscale(north, vectordot(diagonal, north));
-	
-  origcorner0 = mincorner;
-  origcorner1 = mincorner + side;
-  origcorner2 = maxcorner;
-  origcorner3 = maxcorner - side;*/
 
   mincorneroffset = (mincorner - viewpos);
   mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
@@ -429,11 +433,6 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
     line(corner2, corner3);
     line(corner3, corner0);
 
-    /*line(origcorner0, origcorner1, (1,0,0));
-    line(origcorner1, origcorner2, (1,0,0));
-    line(origcorner2, origcorner3, (1,0,0));
-    line(origcorner3, origcorner0, (1,0,0));*/
-
     print3d(toppos, "This Side Up", (1, 1, 1), 1, textscale);
 
     wait .05;
@@ -444,13 +443,11 @@ addTestClients() {
   wait 5;
 
   for(;;) {
-    if(getdvarInt("scr_testclients") > 0)
+    if(getdvarInt("scr_testclients") > 0) {
       break;
+    }
     wait 1;
   }
-
-  //	for( index = 1; index < 24; index++ )
-  //		kick( index );
 
   testclients = getdvarInt("scr_testclients");
   setDvar("scr_testclients", 0);
@@ -463,11 +460,6 @@ addTestClients() {
       continue;
     }
 
-    /*if(i & 1)
-    	team = "allies";
-    else
-    	team = "axis";*/
-
     ent[i].pers["isBot"] = true;
     ent[i] thread TestClient("autoassign");
   }
@@ -478,8 +470,9 @@ addTestClients() {
 TestClient(team) {
   self endon("disconnect");
 
-  while(!isDefined(self.pers["team"]))
+  while(!isDefined(self.pers["team"])) {
     wait .05;
+  }
 
   self notify("menuresponse", game["menu_team"], team);
   wait 0.5;
@@ -487,8 +480,9 @@ TestClient(team) {
   classes = getArrayKeys(level.classMap);
   okclasses = [];
   for(i = 0; i < classes.size; i++) {
-    if(!issubstr(classes[i], "offline_class11_mp") && !issubstr(classes[i], "custom") && isDefined(level.default_perk[level.classMap[classes[i]]]))
+    if(!issubstr(classes[i], "offline_class11_mp") && !issubstr(classes[i], "custom") && isDefined(level.default_perk[level.classMap[classes[i]]])) {
       okclasses[okclasses.size] = classes[i];
+    }
   }
 
   assert(okclasses.size);
@@ -496,8 +490,9 @@ TestClient(team) {
   while(1) {
     class = okclasses[randomint(okclasses.size)];
 
-    if(!level.oldschool)
+    if(!level.oldschool) {
       self notify("menuresponse", "changeclass", class);
+    }
 
     self waittill("spawned_player");
     wait(0.10);
@@ -563,7 +558,6 @@ showOneSpawnPoint(
 
 showSpawnpoints() {
   if(isDefined(level.spawnpoints)) {
-    // show standard spawn points
     color = (1, 1, 1);
     for(spawn_point_index = 0; spawn_point_index < level.spawnpoints.size; spawn_point_index++) {
       showOneSpawnPoint(level.spawnpoints[spawn_point_index], color, "hide_spawnpoints");
@@ -620,16 +614,15 @@ lineUntilNotified(start, end, color, depthTest, notification) {
   }
 }
 
-// -- SRS 3/19/08: engagement distance debug.only works for P1 -- get_playerone() {
+get_playerone() {
   return level.players[0];
 }
-
-// this controls the engagement distance debug stuff with a dvar
 engagement_distance_debug_toggle() {
   level endon("kill_engage_dist_debug_toggle_watcher");
 
-  if(!isDefined(getdvarint("debug_engage_dists")))
+  if(!isDefined(getdvarint("debug_engage_dists"))) {
     setDvar("debug_engage_dists", "0");
+  }
 
   lastState = getdvarint("debug_engage_dists");
 
@@ -637,14 +630,11 @@ engagement_distance_debug_toggle() {
     currentState = getdvarint("debug_engage_dists");
 
     if(dvar_turned_on(currentState) && !dvar_turned_on(lastState)) {
-      // turn it on
       weapon_engage_dists_init();
       thread debug_realtime_engage_dist();
-      //thread debug_ai_engage_dist();
 
       lastState = currentState;
     } else if(!dvar_turned_on(currentState) && dvar_turned_on(lastState)) {
-      // send notify to turn off threads
       level notify("kill_all_engage_dist_debug");
 
       lastState = currentState;
@@ -663,7 +653,6 @@ dvar_turned_on(val) {
 }
 
 engagement_distance_debug_init() {
-  // set up debug stuff
   level.debug_xPos = -50;
   level.debug_yPos = 250;
   level.debug_yInc = 18;
@@ -733,69 +722,59 @@ engage_dist_debug_hud_destroy(hudArray, killNotify) {
 weapon_engage_dists_init() {
   level.engageDists = [];
 
-  // first pass ok
   genericPistol = spawnStruct();
   genericPistol.engageDistMin = 125;
   genericPistol.engageDistOptimal = 225;
-  genericPistol.engageDistMulligan = 50; // range around the optimal value that is still optimal
+  genericPistol.engageDistMulligan = 50;
   genericPistol.engageDistMax = 400;
 
-  // first pass ok
   shotty = spawnStruct();
   shotty.engageDistMin = 50;
   shotty.engageDistOptimal = 200;
   shotty.engageDistMulligan = 75;
   shotty.engageDistMax = 350;
 
-  // first pass ok
   genericSMG = spawnStruct();
   genericSMG.engageDistMin = 100;
   genericSMG.engageDistOptimal = 275;
   genericSMG.engageDistMulligan = 100;
   genericSMG.engageDistMax = 500;
 
-  // first pass NEED TEST
   genericLMG = spawnStruct();
   genericLMG.engageDistMin = 325;
   genericLMG.engageDistOptimal = 550;
   genericLMG.engageDistMulligan = 150;
   genericLMG.engageDistMax = 850;
 
-  // first pass ok
   genericRifleSA = spawnStruct();
   genericRifleSA.engageDistMin = 325;
   genericRifleSA.engageDistOptimal = 550;
   genericRifleSA.engageDistMulligan = 150;
   genericRifleSA.engageDistMax = 850;
 
-  // first pass ok
   genericRifleBolt = spawnStruct();
   genericRifleBolt.engageDistMin = 350;
   genericRifleBolt.engageDistOptimal = 600;
   genericRifleBolt.engageDistMulligan = 150;
   genericRifleBolt.engageDistMax = 900;
 
-  // first pass NEED TEST
   genericHMG = spawnStruct();
   genericHMG.engageDistMin = 390;
   genericHMG.engageDistOptimal = 600;
   genericHMG.engageDistMulligan = 100;
   genericHMG.engageDistMax = 900;
 
-  // first pass ok
   genericSniper = spawnStruct();
   genericSniper.engageDistMin = 950;
   genericSniper.engageDistOptimal = 1700;
   genericSniper.engageDistMulligan = 300;
   genericSniper.engageDistMax = 3000;
 
-  // Pistols
   engage_dists_add("colt_mp", genericPistol);
   engage_dists_add("nambu_mp", genericPistol);
   engage_dists_add("tokarev_mp", genericPistol);
   engage_dists_add("walther_mp", genericPistol);
 
-  // SMGs
   engage_dists_add("thompson_mp", genericSMG);
   engage_dists_add("type100_smg_mp", genericSMG);
   engage_dists_add("ppsh_mp", genericSMG);
@@ -804,10 +783,8 @@ weapon_engage_dists_init() {
   engage_dists_add("sten_mp", genericSMG);
   engage_dists_add("sten_silenced_mp", genericSMG);
 
-  // shotgun
   engage_dists_add("shotgun_mp", shotty);
 
-  // LMGs
   engage_dists_add("bar_mp", genericLMG);
   engage_dists_add("bar_bipod_mp", genericLMG);
   engage_dists_add("type99_lmg_mp", genericLMG);
@@ -819,7 +796,6 @@ weapon_engage_dists_init() {
   engage_dists_add("bren_mp", genericLMG);
   engage_dists_add("bren_bipod_mp", genericLMG);
 
-  // Rifles (semiautomatic)
   engage_dists_add("m1garand_mp", genericRifleSA);
   engage_dists_add("m1garand_bayonet_mp", genericRifleSA);
   engage_dists_add("m1carbine_mp", genericRifleSA);
@@ -827,7 +803,6 @@ weapon_engage_dists_init() {
   engage_dists_add("svt40_mp", genericRifleSA);
   engage_dists_add("gewehr43_mp", genericRifleSA);
 
-  // Rifles (bolt-action)
   engage_dists_add("springfield_mp", genericRifleBolt);
   engage_dists_add("springfield_bayonet_mp", genericRifleBolt);
   engage_dists_add("type99_rifle_mp", genericRifleBolt);
@@ -839,13 +814,11 @@ weapon_engage_dists_init() {
   engage_dists_add("lee_enfield_mp", genericRifleBolt);
   engage_dists_add("lee_enfield_bayonet_mp", genericRifleBolt);
 
-  // HMGs
   engage_dists_add("30cal_mp", genericHMG);
   engage_dists_add("30cal_bipod_mp", genericHMG);
   engage_dists_add("mg42_mp", genericHMG);
   engage_dists_add("mg42_bipod_mp", genericHMG);
 
-  // Sniper Rifles
   engage_dists_add("springfield_scoped_mp", genericSniper);
   engage_dists_add("type99_rifle_scoped_mp", genericSniper);
   engage_dists_add("mosin_rifle_scoped_mp", genericSniper);
@@ -853,15 +826,12 @@ weapon_engage_dists_init() {
   engage_dists_add("fg42_scoped_mp", genericSniper);
   engage_dists_add("lee_enfield_scoped_mp", genericSniper);
 
-  // start waiting for weapon changes
   level thread engage_dists_watcher();
 }
 
 engage_dists_add(weapontypeStr, values) {
   level.engageDists[weapontypeStr] = values;
 }
-
-// returns a script_struct, or undefined, if the lookup failed
 get_engage_dists(weapontypeStr) {
   if(isDefined(level.engageDists[weapontypeStr])) {
     return level.engageDists[weapontypeStr];
@@ -869,8 +839,6 @@ get_engage_dists(weapontypeStr) {
     return undefined;
   }
 }
-
-// checks currently equipped weapon to make sure that engagement distance values are correct
 engage_dists_watcher() {
   level endon("kill_all_engage_dist_debug");
   level endon("kill_engage_dists_watcher");
@@ -916,7 +884,6 @@ debug_realtime_engage_dist() {
   while(1) {
     lastTracePos = (0, 0, 0);
 
-    // Trace to where the player is looking
     direction = player GetPlayerAngles();
     direction_vec = anglesToForward(direction);
     eye = player getEye();
@@ -926,7 +893,7 @@ debug_realtime_engage_dist() {
     trace = bulletTrace(eye, eye + vector_scale(direction_vec, 10000), true, player);
     tracePoint = trace["position"];
     traceNormal = trace["normal"];
-    traceDist = int(Distance(eye, tracePoint)); // just need an int, thanks
+    traceDist = int(Distance(eye, tracePoint));
 
     if(tracePoint != lastTracePos) {
       lastTracePos = tracePoint;
@@ -935,17 +902,18 @@ debug_realtime_engage_dist() {
         hudobj_changecolor(hudObjArray, level.white);
         hudObjArray engagedist_hud_changetext("nodata", tracedist);
       } else {
-        // for convenience
         engageDistMin = level.weaponEngageDistValues.engageDistMin;
         engageDistOptimal = level.weaponEngageDistValues.engageDistOptimal;
         engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
         engageDistMax = level.weaponEngageDistValues.engageDistMax;
 
-        // if inside our engagement distance range...
         if((traceDist >= engageDistMin) && (traceDist <= engageDistMax)) {
-          // if in the optimal range...
-          if((traceDist >= (engageDistOptimal - engageDistMulligan)) &&
-            (traceDist <= (engageDistOptimal + engageDistMulligan))) {
+          {}
+
+          if((traceDist >= (engageDistOptimal - engageDistMulligan)) {
+              &&
+              (traceDist <= (engageDistOptimal + engageDistMulligan)))
+          } {
             hudObjArray engagedist_hud_changetext("optimal", tracedist);
             hudobj_changecolor(hudObjArray, level.green);
           } else {
@@ -953,17 +921,17 @@ debug_realtime_engage_dist() {
             hudobj_changecolor(hudObjArray, level.yellow);
           }
         } else if(traceDist < engageDistMin) {
+          {}
           hudobj_changecolor(hudObjArray, level.red);
           hudObjArray engagedist_hud_changetext("short", tracedist);
         } else if(traceDist > engageDistMax) {
+          {}
           hudobj_changecolor(hudObjArray, level.red);
           hudObjArray engagedist_hud_changetext("long", tracedist);
         }
       }
     }
 
-    // draw our trace spot
-    // plot_circle_fortime(radius1,radius2,time,color,origin,normal)
     thread plot_circle_fortime(1, 5, 0.05, level.debugRTEngageDistColor, tracePoint, traceNormal);
     thread plot_circle_fortime(1, 1, 0.05, level.debugRTEngageDistColor, tracePoint, traceNormal);
 
@@ -981,8 +949,6 @@ hudobj_changecolor(hudObjArray, newcolor) {
     }
   }
 }
-
-// self = an array of hud objects
 engagedist_hud_changetext(engageDistType, units) {
   if(!isDefined(level.lastDistType)) {
     level.lastDistType = "none";
@@ -1023,91 +989,10 @@ engagedist_hud_changetext(engageDistType, units) {
   level.lastDistType = engageDistType;
 }
 
-// draws print3ds above enemy AI heads to show contact distances
-/*
-debug_ai_engage_dist()
-{
-	level endon( "kill_all_engage_dist_debug" );
-	level endon( "kill_ai_engagement_distance_debug" );
-
-	player = get_playerone();
-
-	while( 1 )
-	{
-		axis = GetAIArray( "axis" );
-
-		if( isDefined( axis ) && axis.size > 0 )
-		{	
-			playerEye = player getEye();
-
-			for( i = 0; i < axis.size; i++ )
-			{
-				ai = axis[i];
-				aiEye = ai getEye();
-
-				if( SightTracePassed( playerEye, aiEye, false, player ) )
-				{
-					dist = Distance( playerEye, aiEye );
-
-					drawColor = level.white;
-					drawString = "-";
-
-					if( !isDefined( level.weaponEngageDistValues ) )
-					{
-						drawColor = level.white;
-					}
-					else
-					{
-						// for convenience
-						engageDistMin = level.weaponEngageDistValues.engageDistMin;
-						engageDistOptimal = level.weaponEngageDistValues.engageDistOptimal;
-						engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
-						engageDistMax = level.weaponEngageDistValues.engageDistMax;
-
-						// if inside our engagement distance range...
-						if( ( dist >= engageDistMin ) && ( dist <= engageDistMax ) )
-						{
-							// if in the optimal range...
-							if( ( dist >= ( engageDistOptimal - engageDistMulligan ) )
-								&& ( dist <= ( engageDistOptimal + engageDistMulligan ) ) )
-							{
-								drawColor = level.green;
-								drawString = "RAD";
-							}
-							// else it's just ok
-							else
-							{
-								drawColor = level.yellow;
-								drawString = "MEH";
-							}
-						}
-						else if( dist < engageDistMin )
-						{
-							drawColor = level.red;
-							drawString = "BAD";
-						}
-						else if( dist > engageDistMax )
-						{
-							drawColor = level.red;
-							drawString = "BAD";
-						}
-					}		
-
-					scale = dist / 525;
-					Print3d( ai.origin + ( 0, 0, 67 ), drawString, drawColor, 1, scale );
-				}
-			}
-		}
-
-		wait( 0.05 );
-	}
-}
-*/
-
-// draws a circle in script
 plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (0, 1, 0);
+  }
   hangtime = .05;
   circleres = 6;
   hemires = circleres / 2;
@@ -1120,7 +1005,6 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
   radius = radius1;
 
   while(gettime() < timer) {
-    // radius = radius1+((radius2-radius1)*(1-((timer-gettime())/(time*1000))));
     radius = radius2;
     angletoplayer = vectortoangles(normal);
     for(i = 0; i < circleres; i++) {
@@ -1133,18 +1017,18 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
   }
 }
 
-// -- end engagement distance debug -- larry_thread() {
+larry_thread() {
   level.larry = spawnStruct();
 
   level.players[0] thread larry_init(level.larry);
 
-  // Cleanup hudelems, dummy models, etc.
   level waittill("kill_larry");
 
   larry_hud_destroy(level.larry);
 
-  if(isDefined(level.larry.model))
+  if(isDefined(level.larry.model)) {
     level.larry.model delete();
+  }
 
   if(isDefined(level.larry.ai)) {
     for(i = 0; i < level.larry.ai.size; i++) {
@@ -1158,14 +1042,11 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
 larry_init(larry) {
   level endon("kill_larry");
 
-  // HUD
   larry_hud_init(larry);
 
-  // Model
   larry.model = spawn("script_model", (0, 0, 0));
   larry.model setModel("defaultactor");
 
-  // AI
   larry.ai = [];
 
   wait 0.1;
@@ -1178,12 +1059,10 @@ larry_init(larry) {
       continue;
     }
 
-    // Trace to where the player is looking
     direction = self getPlayerAngles();
     direction_vec = anglesToForward(direction);
     eye = self getEye();
 
-    // offset 2 units on the Z to fix the bug where it would drop through the ground sometimes
     trace = bulletTrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
 
     dist = distance(eye, trace["position"]);
@@ -1192,11 +1071,12 @@ larry_init(larry) {
     larry.model.origin = position;
     larry.model.angles = self.angles + (0, 180, 0);
 
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       self larry_ai(larry);
 
-      while(self UseButtonPressed())
+      while(self useButtonPressed()) {
         wait(0.05);
+      }
     }
   }
 }
@@ -1218,8 +1098,6 @@ larry_ai_thread(larry, origin, angles) {
 
   for(;;) {
     self waittill("spawned_player");
-
-    //larry.clearTextMarker ClearAllTextAfterHudElem();
 
     larry.menu[larry.menu_health] SetValue(self.health);
     larry.menu[larry.menu_damage] SetText("");
@@ -1247,8 +1125,6 @@ larry_ai_damage(larry) {
 
       range = int(Distance(eye, self.origin));
     }
-
-    //larry.clearTextMarker ClearAllTextAfterHudElem();
 
     larry.menu[larry.menu_health] SetValue(self.health);
     larry.menu[larry.menu_damage] SetValue(damage);
@@ -1318,7 +1194,6 @@ larry_hud_destroy(larry) {
       larry.menu[i] Destroy();
     }
 
-    //larry.clearTextMarker ClearAllTextAfterHudElem();
     larry.clearTextMarker Destroy();
   }
 }
@@ -1336,18 +1211,6 @@ new_hud(hud_name, msg, x, y, scale) {
   level.hud_array[hud_name][level.hud_array[hud_name].size] = hud;
   return hud;
 }
-
-//------------------------------------------------------//
-// set_hudelem( [text], x, y, [scale], [alpha] )		//
-//		Actually creates the hudelem					//
-//------------------------------------------------------//
-// self		- n/a										//
-// text		- The text to be displayed					//
-// x		- Sets the x position of the hudelem		//
-// y		- Sets the y position of the hudelem		//
-// scale	- Sets the scale of the hudelem				//
-// alpha	- Sets the alpha of the hudelem				//
-//------------------------------------------------------//
 set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
   if(!isDefined(alpha)) {
     alpha = 1;
@@ -1381,5 +1244,3 @@ set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
 
   return hud;
 }
-
-// -- end dynamic AI spawning --

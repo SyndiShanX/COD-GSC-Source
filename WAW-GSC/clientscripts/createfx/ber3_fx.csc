@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\ber3_fx.csc
+**********************************************/
+
 main() {
-  // CreateFX entities placed: 230
   ent = clientscripts\_fx::createOneshotEffect("smoke_plume_lg_slow_blk");
   ent.v["origin"] = (2383, -746.087, 570.448);
   ent.v["angles"] = (270, 0, 38);

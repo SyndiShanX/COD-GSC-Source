@@ -1,12 +1,13 @@
-// Jump_across_72.gsc
-// Makes the character do a lateral jump of 72 units.
+/***************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\jump_across_72.gsc
+***************************************************/
 
 #using_animtree("generic_human");
 
 main() {
   self endon("killanimscript");
 
-  // do not do code prone in this script
   self.desired_anim_pose = "stand";
   animscripts\utility::UpdateAnimPose();
 
@@ -14,7 +15,6 @@ main() {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

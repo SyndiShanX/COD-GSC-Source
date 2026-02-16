@@ -60,7 +60,7 @@ add_zombie_weapon(weapon_name, hint, cost, weaponVO, variation_count, ammo_cost)
   level.zombie_weapons[weapon_name] = struct;
 }
 
-include_zombie_weapon(weapon_name) {
+#include_zombie_weapon(weapon_name) {
   if(!isDefined(level.zombie_include_weapons)) {
     level.zombie_include_weapons = [];
   }

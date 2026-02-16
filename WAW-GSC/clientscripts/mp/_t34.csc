@@ -1,5 +1,7 @@
-// _t34.csc
-// Sets up clientside behavior for the t34
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_t34.csc
+**************************************/
 
 #include clientscripts\mp\_vehicle;
 

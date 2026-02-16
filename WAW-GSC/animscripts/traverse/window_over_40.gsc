@@ -1,13 +1,19 @@
+/***************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\window_over_40.gsc
+***************************************************/
+
 #include animscripts\traverse\shared;
 #include animscripts\utility;
 #include maps\_utility;
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "human")
+  if(self.type == "human") {
     jump_through_window_human();
-  else if(self.type == "dog")
+  } else if(self.type == "dog") {
     dog_wall_and_window_hop("window_40", 40);
+  }
 }
 
 jump_through_window_human() {

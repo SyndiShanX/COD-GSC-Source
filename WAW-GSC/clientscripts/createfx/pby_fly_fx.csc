@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\pby_fly_fx.csc
+*************************************************/
+
 main() {
-  // CreateFX entities placed: 311
   ent = clientscripts\_fx::createExploder("sinking_lci_md");
   ent.v["origin"] = (19164.7, -17844.4, 70);
   ent.v["angles"] = (270, 0, 6);

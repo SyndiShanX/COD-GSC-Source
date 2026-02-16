@@ -1,11 +1,16 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_teargrenades.gsc
+**************************************/
+
 main() {
   level.tearradius = 170;
   level.tearheight = 128;
-  level.teargasfillduration = 7; // time until gas fills the area specified
-  level.teargasduration = 23; // duration gas remains in area
-  level.tearsufferingduration = 3; // (duration after leaving area of effect)
+  level.teargasfillduration = 7;
+  level.teargasduration = 23;
+  level.tearsufferingduration = 3;
 
-  level.teargrenadetimer = 4; // should match time to appearance of effect
+  level.teargrenadetimer = 4;
 
   precacheShellShock("teargas");
 
@@ -25,10 +30,9 @@ monitorTearUsage() {
 
   wait .05;
 
-  if(!self hasWeapon("tear_grenade_mp"))
+  if(!self hasWeapon("tear_grenade_mp")) {
     return;
-
-  // when this player's tear grenade ammo goes down, assume the nearest "grenade" entity is a tear grenade.
+  }
 
   prevammo = self getammocount("tear_grenade_mp");
   while(1) {
@@ -36,22 +40,23 @@ monitorTearUsage() {
     if(ammo < prevammo) {
       num = prevammo - ammo;
 
-      //			iprintln(num);
-
       for(i = 0; i < num; i++) {
         grenades = getEntArray("grenade", "classname");
         bestdist = undefined;
         bestg = undefined;
         for(g = 0; g < grenades.size; g++) {
+          {}
           if(!isDefined(grenades[g].teargrenade)) {
             dist = distance(grenades[g].origin, self.origin + (0, 0, 48));
             if(!isDefined(bestdist) || dist < bestdist) {
+              {}
               bestdist = dist;
               bestg = g;
             }
           }
         }
         if(isDefined(bestdist)) {
+          {}
           grenades[bestg].teargrenade = true;
           grenades[bestg] thread tearGrenade_think(self.pers["team"]);
         }
@@ -63,9 +68,6 @@ monitorTearUsage() {
 }
 
 tearGrenade_think(team) {
-  // wait for death
-
-  // (grenade doesn't actually die until finished smoking)
   wait level.teargrenadetimer;
 
   ent = spawnStruct();
@@ -75,8 +77,6 @@ tearGrenade_think(team) {
 tear(pos) {
   trig = spawn("trigger_radius", pos, 0, level.tearradius, level.tearheight);
 
-  //thread drawcylinder(pos, level.tearradius, level.tearheight);
-
   starttime = gettime();
 
   self thread teartimer();
@@ -85,8 +85,9 @@ tear(pos) {
   while(1) {
     trig waittill("trigger", player);
 
-    if(player.sessionstate != "playing")
+    if(player.sessionstate != "playing") {
       continue;
+    }
 
     time = (gettime() - starttime) / 1000;
 
@@ -99,14 +100,17 @@ tear(pos) {
 
     offset = (player.origin + (0, 0, 32)) - pos;
     offset2d = (offset[0], offset[1], 0);
-    if(lengthsquared(offset2d) > currad * currad)
+    if(lengthsquared(offset2d) > currad * currad) {
       continue;
-    if(player.origin[2] - pos[2] > curheight)
+    }
+    if(player.origin[2] - pos[2] > curheight) {
       continue;
+    }
 
-    player.teargasstarttime = gettime(); // purposely overriding old value
-    if(!isDefined(player.teargassuffering))
+    player.teargasstarttime = gettime();
+    if(!isDefined(player.teargassuffering)) {
       player thread teargassuffering();
+    }
   }
 }
 teartimer() {
@@ -123,8 +127,9 @@ teargassuffering() {
   self shellshock("teargas", 60);
 
   while(1) {
-    if(gettime() - self.teargasstarttime > level.tearsufferingduration * 1000)
+    if(gettime() - self.teargasstarttime > level.tearsufferingduration * 1000) {
       break;
+    }
 
     wait 1;
   }
@@ -153,8 +158,9 @@ drawcylinder(pos, rad, height) {
       line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta) * currad, sin(theta) * currad, curheight));
     }
     time += .05;
-    if(time > level.teargasduration)
+    if(time > level.teargasduration) {
       break;
+    }
     wait .05;
   }
 }

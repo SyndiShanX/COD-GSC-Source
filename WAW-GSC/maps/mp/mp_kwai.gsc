@@ -1,18 +1,17 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_kwai.gsc
+**************************************/
+
 main() {
   maps\mp\mp_kwai_fx::main();
-  //maps\mp\createart\mp_kwai_art::main();
 
   maps\mp\_load::main();
 
-  //maps\mp\mp_kwai_amb::main();
-
   maps\mp\_compass::setupMiniMap("compass_map_mp_kwai");
 
-  //setExpFog(300, 1400, 0.5, 0.5, 0.5, 0);
   VisionSetNaked("mp_kwai");
-  //ambientPlay("ambient_cargoshipmp_ext");
 
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "marines";
   game["axis"] = "japanese";
   game["attackers"] = "allies";
@@ -36,8 +35,5 @@ main() {
 
   setDvar("compassmaxrange", "2100");
 
-  // enable new spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
-
-
 }

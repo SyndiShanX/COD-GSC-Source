@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createfx\mp_drum_fx.gsc
+*******************************************/
+
 main() {
-  // CreateFX entities placed: 247
   ent = maps\mp\_utility::createOneshotEffect("mp_smoke_plume_lg");
   ent.v["origin"] = (10253.5, -8142.3, -142.779);
   ent.v["angles"] = (270, 0, 0);

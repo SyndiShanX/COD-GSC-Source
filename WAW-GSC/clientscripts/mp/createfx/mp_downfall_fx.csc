@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_downfall_fx.csc
+********************************************************/
+
 main() {
-  // CreateFX entities placed: 83
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_fire_small");
   ent.v["origin"] = (-1192.97, 8123.2, 44.0802);
   ent.v["angles"] = (270, 0, 0);

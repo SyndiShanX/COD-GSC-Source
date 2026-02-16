@@ -1,14 +1,16 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_airfield.gsc
+**************************************/
+
 main() {
   maps\mp\mp_airfield_fx::main();
   maps\mp\createart\mp_airfield_art::main();
 
   maps\mp\_load::main();
 
-  //maps\mp\mp_airfield_amb::main();
-
   maps\mp\_compass::setupMiniMap("compass_map_mp_airfield");
 
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "marines";
   game["axis"] = "japanese";
   game["attackers"] = "axis";
@@ -32,8 +34,6 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_AIRFIELD_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_AIRFIELD_E";
 
-
-  // enable new spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
 
   createSpawnpoint("mp_ctf_spawn_allies", (2803, 2929, 42), 4);
@@ -63,16 +63,17 @@ main() {
   createSpawnpoint("mp_ctf_spawn_axis", (1402, 4106, 26), 335.6);
   createSpawnpoint("mp_ctf_spawn_axis", (1304, 3666, 13), 313.4);
   createSpawnpoint("mp_ctf_spawn_axis", (1771, 3295, 25), 231.2);
-
 }
 
 createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isDefined(level.extraSpawnpoints))
+  if(!isDefined(level.extraSpawnpoints)) {
     level.extraSpawnpoints = [];
-  if(!isDefined(level.extraSpawnpoints[classname]))
+  }
+  if(!isDefined(level.extraSpawnpoints[classname])) {
     level.extraSpawnpoints[classname] = [];
+  }
   level.extraSpawnpoints[classname][level.extraSpawnpoints[classname].size] = spawnpoint;
 }

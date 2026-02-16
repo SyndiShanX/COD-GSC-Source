@@ -1,4 +1,7 @@
-// Test clientside script for mp_downfall
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_downfall.csc
+********************************************/
 
 #include clientscripts\mp\_utility;
 

@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_lights.gsc
+**************************************/
+
 #include common_scripts\utility;
 #include maps\mp\_utility;
 

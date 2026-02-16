@@ -1,6 +1,10 @@
+/***************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\trench_jumpout.gsc
+***************************************************/
+
 #using_animtree("generic_human");
 main() {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -9,7 +13,6 @@ main() {
   self.a.alertness = "casual";
   self traverseMode("nogravity");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

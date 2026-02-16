@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/**************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createart\mp_makin_day_art.gsc
+**************************************************/
+
 main() {
   level.tweakfile = true;
-
-  //* Fog section *
 
   setDvar("scr_fog_exp_halfplane", "1053");
   setDvar("scr_fog_exp_halfheight", "243");
@@ -28,5 +30,3 @@ main() {
 
   SetCullDist(10000);
 }
-
-// setVolFog(<startDist>, <halfwayDist>, <halfwayHeight>, <baseHeight>, <red>, <green>, <blue>, <transition time>)

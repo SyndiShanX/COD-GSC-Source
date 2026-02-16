@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_nachtfeuer_fx.csc
+**********************************************************/
+
 main() {
-  // CreateFX entities placed: 212
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_ash_and_embers");
   ent.v["origin"] = (-17.5523, -1118.49, 1387);
   ent.v["angles"] = (272, 90, -90);

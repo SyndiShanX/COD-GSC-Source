@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createfx\mak_fx.gsc
+**************************************/
+
 main() {
-  // CreateFX entities placed: 629
   ent = maps\_utility::createOneshotEffect("mist_rolling");
   ent.v["origin"] = (-10907.8, -19018.5, -43);
   ent.v["angles"] = (275.982, 123.8, -157.804);

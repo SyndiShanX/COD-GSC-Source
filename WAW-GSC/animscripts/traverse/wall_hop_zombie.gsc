@@ -1,4 +1,7 @@
-//zombie wall hop anim
+/****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\wall_hop_zombie.gsc
+****************************************************/
 
 #include animscripts\traverse\shared;
 #include maps\_utility;
@@ -20,23 +23,19 @@ wall_hop_zombie() {
   if(self.has_legs) {
     switch (self.zombie_move_speed) {
       case "walk":
-        anims = array(%ai_zombie_traverse_v1, %ai_zombie_traverse_v2
-        );
+        anims = array(%ai_zombie_traverse_v1, %ai_zombie_traverse_v2);
         break;
       case "run":
-        anims = array(%ai_zombie_traverse_v5
-        );
+        anims = array(%ai_zombie_traverse_v5);
         break;
       case "sprint":
-        anims = array(%ai_zombie_traverse_v6, %ai_zombie_traverse_v7
-        );
+        anims = array(%ai_zombie_traverse_v6, %ai_zombie_traverse_v7);
         break;
       default:
         assertmsg("Zombie move speed of '" + self.zombie_move_speed + "' is not supported for wall hop.");
     }
   } else {
-    anims = array(%ai_zombie_traverse_crawl_v1, %ai_zombie_traverse_v4
-    );
+    anims = array(%ai_zombie_traverse_crawl_v1, %ai_zombie_traverse_v4);
   }
 
   self advancedTraverse(random(anims), 39.875);

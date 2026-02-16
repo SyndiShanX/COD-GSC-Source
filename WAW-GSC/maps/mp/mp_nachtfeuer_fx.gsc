@@ -1,3 +1,8 @@
+/****************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_nachtfeuer_fx.gsc
+****************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -7,7 +12,7 @@ main() {
 }
 
 precacheFX() {
-  //---------------------------------------FX_DEPT--------------------------------------------------------- level._effect["mp_battlesmoke_lg"] = loadfx("maps/mp_maps/fx_mp_battlesmoke_thin_lg");
+  level._effect["mp_battlesmoke_lg"] = loadfx("maps/mp_maps/fx_mp_battlesmoke_thin_lg");
   level._effect["mp_fire_distant_150_150"] = loadfx("maps/mp_maps/fx_mp_fire_150x150_tall_distant");
   level._effect["mp_fire_distant_150_600"] = loadfx("maps/mp_maps/fx_mp_fire_150x600_tall_distant");
   level._effect["mp_fire_static_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");

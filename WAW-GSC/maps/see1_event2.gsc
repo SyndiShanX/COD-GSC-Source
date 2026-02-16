@@ -1041,10 +1041,10 @@ pacing_get_on_tank_3(tank) {
     wait(2);
 
     while(1) {
-      if(player UseButtonPressed()) {
+      if(player useButtonPressed()) {
         button_held = true;
         for(i = 0; i < 15; i++) {
-          if(player UseButtonPressed() == false) {
+          if(player useButtonPressed() == false) {
             button_held = false;
             break;
           }
@@ -1159,7 +1159,7 @@ ev2_player_get_on_tank(player, tank) {
         }
       }
 
-      if(player UseButtonPressed()) {
+      if(player useButtonPressed()) {
         if(distance_tag_8 < 150 || distance_tag_9 < 150) {
           if(level.tank_spot_1_available) {
             level.tank_spot_1_available = false;
@@ -1218,10 +1218,10 @@ ev2_player_get_on_tank(player, tank) {
     while(1) {
       if(flag("tank_ride_over")) {
         break;
-      } else if(player UseButtonPressed()) {
+      } else if(player useButtonPressed()) {
         button_held = true;
         for(i = 0; i < 10; i++) {
-          if(player UseButtonPressed() == false) {
+          if(player useButtonPressed() == false) {
             button_held = false;
             break;
           }
@@ -1305,7 +1305,7 @@ get_player_pressing_use_button() {
   players = get_players();
   while(1) {
     for(i = 0; i < players.size; i++) {
-      if(players[i] UseButtonPressed()) {
+      if(players[i] useButtonPressed()) {
         return (players[i]);
       }
     }

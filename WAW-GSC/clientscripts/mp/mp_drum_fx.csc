@@ -1,10 +1,10 @@
-//
-// file: mp_drum_fx.csc
-// description: clientside fx script for mp_drum: setup, special fx functions, etc.
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_drum_fx.csc
+*******************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
 precache_util_fx() {}
 
 precache_scripted_fx() {}

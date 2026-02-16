@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createfx\ber2_fx.gsc
+**************************************/
+
 main() {
-  // CreateFX entities placed: 385
   ent = maps\_utility::createOneshotEffect("smoke_window_out");
   ent.v["origin"] = (3384.67, -735.902, 280.125);
   ent.v["angles"] = (270, 311.496, -67.4954);

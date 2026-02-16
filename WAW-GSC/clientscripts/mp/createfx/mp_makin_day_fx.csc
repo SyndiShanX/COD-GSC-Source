@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/*********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_makin_day_fx.csc
+*********************************************************/
+
 main() {
-  // CreateFX entities placed: 149
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_light_glow_indoor_short_loop");
   ent.v["origin"] = (-10516.4, -20400.1, 166.125);
   ent.v["angles"] = (270, 0, 0);

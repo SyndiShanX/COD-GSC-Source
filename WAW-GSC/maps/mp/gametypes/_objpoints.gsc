@@ -1,3 +1,8 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_objpoints.gsc
+********************************************/
+
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
@@ -7,99 +12,38 @@ init() {
   level.objPointNames = [];
   level.objPoints = [];
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     level.objPointSize = 15;
-  else
+  } else {
     level.objPointSize = 8;
+  }
 
   level.objpoint_alpha_default = .5;
-  //	if( level.splitscreen )
-  //		level.objpoint_alpha_default = 0;
   level.objPointScale = 1.0;
-
-  //	level thread onPlayerConnect();
 }
-/*
-onPlayerConnect()
-{
-	for(;;)
-	{
-		level waittill("connecting", player);
-		
-		player.objpoints = [];
-
-		player thread onPlayerSpawned();
-		player thread onJoinedTeam();
-		player thread onJoinedSpectators();
-	}
-}
-
-onJoinedTeam()
-{
-	self endon("disconnect");
-	
-	for(;;)
-	{
-		self waittill("joined_team");
-		self thread clearPlayerObjpoints();
-	}
-}
-
-onJoinedSpectators()
-{
-	self endon("disconnect");
-	
-	for(;;)
-	{
-		self waittill("joined_spectators");
-		self thread clearPlayerObjpoints();
-	}
-}
-
-onPlayerSpawned()
-{
-	self endon("disconnect");
-	
-	for(;;)
-	{
-		self waittill("spawned_player");
-
-		self thread updatePlayerObjpoints();
-		self thread onPlayerKilled();
-	}
-}
-
-onPlayerKilled()
-{
-	self endon("disconnect");
-
-	for(;;)
-	{
-		self waittill("killed_player");
-		
-		self thread clearPlayerObjpoints();
-	}
-}
-*/
 
 createTeamObjpoint(name, origin, team, shader, alpha, scale) {
   assert(team == "axis" || team == "allies" || team == "all");
 
   objPoint = getObjPointByName(name);
 
-  if(isDefined(objPoint))
+  if(isDefined(objPoint)) {
     deleteObjPoint(objPoint);
+  }
 
-  if(!isDefined(shader))
+  if(!isDefined(shader)) {
     shader = "objpoint_default";
+  }
 
-  if(!isDefined(scale))
+  if(!isDefined(scale)) {
     scale = 1.0;
+  }
 
-  if(team != "all")
+  if(team != "all") {
     objPoint = newTeamHudElem(team);
-  else
+  } else {
     objPoint = newHudElem();
+  }
 
   objPoint.name = name;
   objPoint.x = origin[0];
@@ -112,10 +56,11 @@ createTeamObjpoint(name, origin, team, shader, alpha, scale) {
   objPoint setShader(shader, level.objPointSize, level.objPointSize);
   objPoint setWaypoint(true);
 
-  if(isDefined(alpha))
+  if(isDefined(alpha)) {
     objPoint.alpha = alpha;
-  else
+  } else {
     objPoint.alpha = level.objpoint_alpha_default;
+  }
   objPoint.baseAlpha = objPoint.alpha;
 
   objPoint.index = level.objPointNames.size;
@@ -152,14 +97,17 @@ deleteObjPoint(oldObjPoint) {
 }
 
 updateOrigin(origin) {
-  if(self.x != origin[0])
+  if(self.x != origin[0]) {
     self.x = origin[0];
+  }
 
-  if(self.y != origin[1])
+  if(self.y != origin[1]) {
     self.y = origin[1];
+  }
 
-  if(self.z != origin[2])
+  if(self.z != origin[2]) {
     self.z = origin[2];
+  }
 }
 
 setOriginByName(name, origin) {
@@ -168,24 +116,27 @@ setOriginByName(name, origin) {
 }
 
 getObjPointByName(name) {
-  if(isDefined(level.objPoints[name]))
+  if(isDefined(level.objPoints[name])) {
     return level.objPoints[name];
-  else
+  } else {
     return undefined;
+  }
 }
 
 getObjPointByIndex(index) {
-  if(isDefined(level.objPointNames[index]))
+  if(isDefined(level.objPointNames[index])) {
     return level.objPoints[level.objPointNames[index]];
-  else
+  } else {
     return undefined;
+  }
 }
 
 startFlashing() {
   self endon("stop_flashing_thread");
 
-  if(self.isFlashing)
+  if(self.isFlashing) {
     return;
+  }
 
   self.isFlashing = true;
 
@@ -203,8 +154,9 @@ startFlashing() {
 }
 
 stopFlashing() {
-  if(!self.isFlashing)
+  if(!self.isFlashing) {
     return;
+  }
 
   self.isFlashing = false;
 }

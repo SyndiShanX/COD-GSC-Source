@@ -1,9 +1,11 @@
-// Test clientside script for mp_outskirts
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_outskirts.csc
+*********************************************/
 
 main() {
   clientscripts\mp\_panzeriv::main("vehicle_ger_tracked_panzer4_mp");
   clientscripts\mp\_t34::main("vehicle_rus_tracked_t34_mp");
-
 
   clientscripts\mp\_load::main();
 
@@ -16,6 +18,4 @@ main() {
   thread clientscripts\mp\mp_outskirts_amb::main();
 
   println("*** Client : mp_outskirts running...");
-
-
 }

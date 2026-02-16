@@ -1,10 +1,10 @@
-// clientside script for mp_kneedeep
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_kneedeep.csc
+********************************************/
 
 main() {
   clientscripts\mp\mp_kneedeep_fx::main();
-
-  //clientscripts\mp\_sherman::main( "vehicle_usa_tracked_sherman_m4a3_mp" );
-  //clientscripts\mp\_type97::main( "vehicle_jap_tracked_type97shinhoto_mp" );
 
   clientscripts\mp\_load::main();
 

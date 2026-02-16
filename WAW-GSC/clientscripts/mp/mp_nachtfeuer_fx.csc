@@ -1,18 +1,14 @@
-//
-// file: mp_nachtfeuer_fx.gsc
-// description: clientside fx script for mp_nachtfeuer: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_nachtfeuer_fx.csc
+*************************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {}
 
-// --- BARRY'S SECTION ---//
 precache_createfx_fx() {
   level._effect["mp_battlesmoke_lg"] = loadfx("maps/mp_maps/fx_mp_battlesmoke_thin_lg");
   level._effect["mp_fire_distant_150_150"] = loadfx("maps/mp_maps/fx_mp_fire_150x150_tall_distant");

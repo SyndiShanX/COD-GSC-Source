@@ -1,4 +1,7 @@
-// Test clientside script for mp_roundhouse
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_roundhouse.csc
+**********************************************/
 
 main() {
   clientscripts\mp\_panzeriv::main("vehicle_ger_tracked_panzer4_mp");

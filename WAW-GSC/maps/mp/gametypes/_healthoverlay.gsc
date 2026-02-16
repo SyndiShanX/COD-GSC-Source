@@ -1,7 +1,12 @@
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_healthoverlay.gsc
+************************************************/
+
 init() {
   precacheShader("overlay_low_health");
 
-  level.healthOverlayCutoff = 0.55; // getting the dvar value directly doesn't work right because it's a client dvar getdvarfloat("hud_healthoverlay_pulseStart");
+  level.healthOverlayCutoff = 0.55;
 
   regenTime = maps\mp\gametypes\_tweakables::getTweakableValue("player", "healthregentime");
 
@@ -77,7 +82,7 @@ playerHealthRegen() {
   player = self;
   health_add = 0;
 
-  regenRate = 0.1; // 0.017;
+  regenRate = 0.1;
   veryHurt = false;
 
   player.breathingStopTime = -10000;
@@ -96,11 +101,13 @@ playerHealthRegen() {
       continue;
     }
 
-    if(player.health <= 0)
+    if(player.health <= 0) {
       return;
+    }
 
-    if(isDefined(player.laststand) && player.laststand)
+    if(isDefined(player.laststand) && player.laststand) {
       continue;
+    }
 
     wasVeryHurt = veryHurt;
     ratio = player.health / maxHealth;
@@ -113,11 +120,13 @@ playerHealthRegen() {
     }
 
     if(player.health >= oldhealth) {
-      if(gettime() - hurttime < level.playerHealth_RegularRegenDelay)
+      if(gettime() - hurttime < level.playerHealth_RegularRegenDelay) {
         continue;
+      }
 
-      if(level.healthRegenDisabled)
+      if(level.healthRegenDisabled) {
         continue;
+      }
 
       if(gettime() - lastSoundTime_Recover > level.playerHealth_RegularRegenDelay) {
         lastSoundTime_Recover = gettime();
@@ -126,19 +135,21 @@ playerHealthRegen() {
 
       if(veryHurt) {
         newHealth = ratio;
-        if(gettime() > hurtTime + 3000)
+        if(gettime() > hurtTime + 3000) {
           newHealth += regenRate;
-      } else
+        }
+      } else {
         newHealth = 1;
+      }
 
       if(newHealth >= 1.0) {
-        if(veryHurt)
+        if(veryHurt) {
           self maps\mp\gametypes\_missions::healthRegenerated();
+        }
         newHealth = 1.0;
       }
 
       if(newHealth <= 0) {
-        // Player is dead			
         return;
       }
 
@@ -160,16 +171,19 @@ playerHealthRegen() {
 }
 
 decayPlayerDamages(decay) {
-  if(!isDefined(self.attackerDamage))
+  if(!isDefined(self.attackerDamage)) {
     return;
+  }
 
   for(i = 0; i < self.attackerDamage.size; i++) {
-    if(!isDefined(self.attackerDamage[i]))
+    if(!isDefined(self.attackerDamage[i])) {
       continue;
+    }
 
     self.attackerDamage[i] -= decay;
-    if(self.attackerDamage[i] < 0)
+    if(self.attackerDamage[i] < 0) {
       self.attackerDamage[i] = 0;
+    }
   }
 }
 
@@ -180,15 +194,17 @@ playerBreathingSound(healthcap) {
   player = self;
   for(;;) {
     wait(0.2);
-    if(player.health <= 0)
+    if(player.health <= 0) {
       return;
+    }
 
-    // Player still has a lot of health so no breathing sound
-    if(player.health >= healthcap)
+    if(player.health >= healthcap) {
       continue;
+    }
 
-    if(level.healthRegenDisabled && gettime() > player.breathingStopTime)
+    if(level.healthRegenDisabled && gettime() > player.breathingStopTime) {
       continue;
+    }
 
     player playLocalSound("breathing_hurt");
     wait .784;

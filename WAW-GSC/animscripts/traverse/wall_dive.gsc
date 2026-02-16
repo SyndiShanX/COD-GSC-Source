@@ -1,18 +1,18 @@
-// Wall_dive.gsc
-// Makes the character dive over a low wall
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\wall_dive.gsc
+**********************************************/
 
 #using_animtree("generic_human");
 
 main() {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
   self endon("killanimscript");
   self traverseMode("nogravity");
-  self traverseMode("noclip"); // JBW Was getting caught on wall in test/obstacle
+  self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

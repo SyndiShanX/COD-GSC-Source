@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_drum_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -7,31 +12,7 @@ main() {
 
   thread water_settings();
 }
-water_settings()
-
-{
-  //-- All of these values are modded values from Pel1--BarryW
-  /* Water DvarsDefault Values 							What They Do
-  ======================================================================
-  r_watersim_enableddefault=trueEnables dynamic water simulation
-  r_watersim_debugdefault=false Enables bullet debug markers
-  r_watersim_flattendefault=false Flattens the water surface out
-  r_watersim_waveSeedDelaydefault=500.0 Time between seeding a new wave (ms)
-  r_watersim_curlAmount default=0.5 Amount of curl applied
-  r_watersim_curlMaxdefault=0.4 Maximum curl limit
-  r_watersim_curlReduce default=0.95Amount curl gets reduced by when over limit
-  r_watersim_minShoreHeight default=0.04Allows water to lap over the shoreline edge
-  r_watersim_foamAppear default=20.0Rate foam appears at
-  r_watersim_foamDisappeardefault=0.78Rate foam disappears at
-  r_watersim_windAmount default=0.02Amount of wind applied
-  r_watersim_windDirdefault=45.0Wind direction (degrees)
-  r_watersim_windMaxdefault=0.4 Maximum wind limit
-  r_watersim_particleGravitydefault=0.03Particle gravity
-  r_watersim_particleLimitdefault=2.5 Limit at which particles get spawned
-  r_watersim_particleLength default=0.03Length of each particle
-  r_watersim_particleWidthdefault=2.0 Width of each particle
-  */
-
+water_settings() {
   setDvar("r_watersim_waveSeedDelay", 10);
   setDvar("r_watersim_curlAmount", 0.18);
   setDvar("r_watersim_curlMax", 0.32);
@@ -46,7 +27,6 @@ water_settings()
   setDvar("r_watersim_particleLimit", 2.5);
   setDvar("r_watersim_particleLength", 0.03);
   setDvar("r_watersim_particleWidth", 2.0);
-
 }
 
 precacheFX() {

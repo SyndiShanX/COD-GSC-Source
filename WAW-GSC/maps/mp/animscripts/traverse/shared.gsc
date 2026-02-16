@@ -1,3 +1,8 @@
+/***************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\traverse\shared.gsc
+***************************************************/
+
 #include maps\mp\animscripts\utility;
 
 teleportThread(verticalOffset) {
@@ -19,16 +24,18 @@ teleportThreadEx(verticalOffset, delay, frames) {
   self notify("endTeleportThread");
   self endon("endTeleportThread");
 
-  if(verticalOffset == 0)
+  if(verticalOffset == 0) {
     return;
+  }
 
   wait delay;
 
   amount = verticalOffset / frames;
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  } else if(amount < -10.0) {
     amount = -10.0;
+  }
 
   offset = (0, 0, amount);
 
@@ -43,7 +50,6 @@ dog_wall_and_window_hop(traverseName, height) {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -67,7 +73,6 @@ dog_jump_down(height, frames, time) {
     time = 0.3;
   }
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -90,7 +95,6 @@ dog_jump_down_far(height, frames, time) {
     time = 0.3;
   }
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -109,7 +113,6 @@ dog_jump_up(height, frames) {
   self endon("killanimscript");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -131,7 +134,6 @@ dog_jump_up_high(height, frames) {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

@@ -1,3 +1,8 @@
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\_quickmessages.gsc
+************************************************/
+
 init() {
   game["menu_quickcommands"] = "quickcommands";
   game["menu_quickstatements"] = "quickstatements";
@@ -36,8 +41,9 @@ init() {
 quickcommands(response) {
   self endon("disconnect");
 
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay))
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
+  }
 
   self.spamdelay = true;
 
@@ -45,50 +51,50 @@ quickcommands(response) {
     case "1":
       soundalias = "mp_cmd_followme";
       saytext = &"QUICKMESSAGE_FOLLOW_ME";
-      //saytext = "Follow Me!";
+
       break;
 
     case "2":
       soundalias = "mp_cmd_movein";
       saytext = &"QUICKMESSAGE_MOVE_IN";
-      //saytext = "Move in!";
+
       break;
 
     case "3":
       soundalias = "mp_cmd_fallback";
       saytext = &"QUICKMESSAGE_FALL_BACK";
-      //saytext = "Fall back!";
+
       break;
 
     case "4":
       soundalias = "mp_cmd_suppressfire";
       saytext = &"QUICKMESSAGE_SUPPRESSING_FIRE";
-      //saytext = "Suppressing fire!";
+
       break;
 
     case "5":
       soundalias = "mp_cmd_attackleftflank";
       saytext = &"QUICKMESSAGE_ATTACK_LEFT_FLANK";
-      //saytext = "Attack left flank!";
+
       break;
 
     case "6":
       soundalias = "mp_cmd_attackrightflank";
       saytext = &"QUICKMESSAGE_ATTACK_RIGHT_FLANK";
-      //saytext = "Attack right flank!";
+
       break;
 
     case "7":
       soundalias = "mp_cmd_holdposition";
       saytext = &"QUICKMESSAGE_HOLD_THIS_POSITION";
-      //saytext = "Hold this position!";
+
       break;
 
     default:
       assert(response == "8");
       soundalias = "mp_cmd_regroup";
       saytext = &"QUICKMESSAGE_REGROUP";
-      //saytext = "Regroup!";
+
       break;
   }
 
@@ -101,8 +107,9 @@ quickcommands(response) {
 }
 
 quickstatements(response) {
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay))
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
+  }
 
   self.spamdelay = true;
 
@@ -110,50 +117,50 @@ quickstatements(response) {
     case "1":
       soundalias = "mp_stm_enemyspotted";
       saytext = &"QUICKMESSAGE_ENEMY_SPOTTED";
-      //saytext = "Enemy spotted!";
+
       break;
 
     case "2":
       soundalias = "mp_stm_enemydown";
       saytext = &"QUICKMESSAGE_ENEMY_DOWN";
-      //saytext = "Enemy down!";
+
       break;
 
     case "3":
       soundalias = "mp_stm_iminposition";
       saytext = &"QUICKMESSAGE_IM_IN_POSITION";
-      //saytext = "I'm in position.";
+
       break;
 
     case "4":
       soundalias = "mp_stm_areasecure";
       saytext = &"QUICKMESSAGE_AREA_SECURE";
-      //saytext = "Area secure!";
+
       break;
 
     case "5":
       soundalias = "mp_stm_grenade";
       saytext = &"QUICKMESSAGE_GRENADE";
-      //saytext = "Grenade!";
+
       break;
 
     case "6":
       soundalias = "mp_stm_sniper";
       saytext = &"QUICKMESSAGE_SNIPER";
-      //saytext = "Sniper!";
+
       break;
 
     case "7":
       soundalias = "mp_stm_needreinforcements";
       saytext = &"QUICKMESSAGE_NEED_REINFORCEMENTS";
-      //saytext = "Need reinforcements!";
+
       break;
 
     default:
       assert(response == "8");
       soundalias = "mp_stm_holdyourfire";
       saytext = &"QUICKMESSAGE_HOLD_YOUR_FIRE";
-      //saytext = "Hold your fire!";
+
       break;
   }
 
@@ -166,8 +173,9 @@ quickstatements(response) {
 }
 
 quickresponses(response) {
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay))
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
+  }
 
   self.spamdelay = true;
 
@@ -175,44 +183,44 @@ quickresponses(response) {
     case "1":
       soundalias = "mp_rsp_yessir";
       saytext = &"QUICKMESSAGE_YES_SIR";
-      //saytext = "Yes Sir!";
+
       break;
 
     case "2":
       soundalias = "mp_rsp_nosir";
       saytext = &"QUICKMESSAGE_NO_SIR";
-      //saytext = "No Sir!";
+
       break;
 
     case "3":
       soundalias = "mp_rsp_onmyway";
       saytext = &"QUICKMESSAGE_IM_ON_MY_WAY";
-      //saytext = "On my way.";
+
       break;
 
     case "4":
       soundalias = "mp_rsp_sorry";
       saytext = &"QUICKMESSAGE_SORRY";
-      //saytext = "Sorry.";
+
       break;
 
     case "5":
       soundalias = "mp_rsp_greatshot";
       saytext = &"QUICKMESSAGE_GREAT_SHOT";
-      //saytext = "Great shot!";
+
       break;
 
     case "6":
       soundalias = "mp_rsp_tooklongenough";
       saytext = &"QUICKMESSAGE_TOOK_LONG_ENOUGH";
-      //saytext = "Took long enough!";
+
       break;
 
     default:
       assert(response == "7");
       soundalias = "mp_rsp_areyoucrazy";
       saytext = &"QUICKMESSAGE_ARE_YOU_CRAZY";
-      //saytext = "Are you crazy?";
+
       break;
   }
 
@@ -225,19 +233,22 @@ quickresponses(response) {
 }
 
 doQuickMessage(soundalias, saytext) {
-  if(self.sessionstate != "playing")
+  if(self.sessionstate != "playing") {
     return;
+  }
 
   if(self.pers["team"] == "allies") {
-    if(game["allies"] == "russian")
+    if(game["allies"] == "russian") {
       prefix = "RU_";
-    else
+    } else {
       prefix = "US_";
+    }
   } else {
-    if(game["axis"] == "japanese")
+    if(game["axis"] == "japanese") {
       prefix = "JP_";
-    else
+    } else {
       prefix = "GE_";
+    }
   }
 
   if(isDefined(level.QuickMessageToAll) && level.QuickMessageToAll) {
@@ -247,10 +258,11 @@ doQuickMessage(soundalias, saytext) {
     self playSound(prefix + soundalias);
     self sayAll(saytext);
   } else {
-    if(self.sessionteam == "allies")
+    if(self.sessionteam == "allies") {
       self.headiconteam = "allies";
-    else if(self.sessionteam == "axis")
+    } else if(self.sessionteam == "axis") {
       self.headiconteam = "axis";
+    }
 
     self.headicon = "talkingicon";
 
@@ -261,17 +273,21 @@ doQuickMessage(soundalias, saytext) {
 }
 
 saveHeadIcon() {
-  if(isDefined(self.headicon))
+  if(isDefined(self.headicon)) {
     self.oldheadicon = self.headicon;
+  }
 
-  if(isDefined(self.headiconteam))
+  if(isDefined(self.headiconteam)) {
     self.oldheadiconteam = self.headiconteam;
+  }
 }
 
 restoreHeadIcon() {
-  if(isDefined(self.oldheadicon))
+  if(isDefined(self.oldheadicon)) {
     self.headicon = self.oldheadicon;
+  }
 
-  if(isDefined(self.oldheadiconteam))
+  if(isDefined(self.oldheadiconteam)) {
     self.headiconteam = self.oldheadiconteam;
+  }
 }

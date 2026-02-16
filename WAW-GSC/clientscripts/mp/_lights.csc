@@ -1,3 +1,8 @@
+/****************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_lights.csc
+****************************************/
+
 #include clientscripts\mp\_utility;
 
 add_light(clientNum) {
@@ -19,13 +24,11 @@ create_lights(clientNum) {
   self.lights[clientNum] = self add_light(clientNum);
 }
 
-generic_flickering(clientNum) {
-}
+generic_flickering(clientNum) {}
 
 generic_pulsing(clientNum) {
   assertex(isDefined(self.lights) && isDefined(self.lights[clientNum]), "Light not setup before script thread run on it.");
 
-  //ChrisC wants the lights off when probes are done
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     self.lights[clientNum] setLightIntensity(0);
     return;
@@ -40,7 +43,6 @@ generic_pulsing(clientNum) {
   increment_off = (on - off) / (transition_off / .05);
 
   for(;;) {
-    //ramp down
     time = 0;
     while((time < transition_off)) {
       curr -= increment_off;
@@ -49,10 +51,8 @@ generic_pulsing(clientNum) {
       wait(.05);
     }
 
-    //off wait time
     wait(1);
 
-    //ramp up
     time = 0;
     while(time < transition_on) {
       curr += increment_on;
@@ -61,17 +61,13 @@ generic_pulsing(clientNum) {
       wait(.05);
     }
 
-    //on wait time
     wait(.5);
   }
-
 }
 
 generic_double_strobe(clientNum) {
   assertex(isDefined(self.lights) && isDefined(self.lights[clientNum]), "Light not setup before script thread run on it.");
 }
-
-// modified version of _lights::burning_trash_fire()
 ber3b_firelight(clientNum) {
   assertex(isDefined(self.lights) && isDefined(self.lights[clientNum]), "Light not setup before script thread run on it.");
 
@@ -81,7 +77,7 @@ ber3b_firelight(clientNum) {
 
   while(1) {
     intensity = RandomFloatRange(full * 0.63, full * 1.2);
-    // old values = 6, 12
+
     timer = RandomFloatRange(2, 5);
 
     for(i = 0; i < timer; i++) {
@@ -93,13 +89,10 @@ ber3b_firelight(clientNum) {
 
     old_intensity = intensity;
   }
-
 }
 
 fire_flicker(clientNum) {
   assertex(isDefined(self.lights) && isDefined(self.lights[clientNum]), "Light not setup before script thread run on it.");
-
-
 
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
@@ -148,7 +141,6 @@ fire_flicker(clientNum) {
 
     curr_intensity = temp_intensity;
   }
-
 }
 
 init_lights(clientNum) {
@@ -195,5 +187,4 @@ init_lights(clientNum) {
     println("*** Client : " + fire_casters.size + " fire_casters.");
     array_thread(fire_flickers, ::ber3b_firelight, clientNum);
   }
-
 }

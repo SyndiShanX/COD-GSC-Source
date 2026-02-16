@@ -200,7 +200,7 @@ rocket_barrage_fire_watch(fire_point) {
   self endon("death");
   self endon("disconnect");
 
-  if(self attackbuttonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok && level.rocket_barrage_first_barrage) {
+  if(self attackButtonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok && level.rocket_barrage_first_barrage) {
     self.is_firing_rocket_barrage = true;
 
     self thread rocket_barrage_switch_back();
@@ -237,14 +237,14 @@ rocket_barrage_fire_watch(fire_point) {
     self GiveMaxAmmo("rocket_barrage");
   }
 
-  if(self attackbuttonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok && !level.rocket_barrage_first_barrage && self.rocket_barrage_at_major_target) {
+  if(self attackButtonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok && !level.rocket_barrage_first_barrage && self.rocket_barrage_at_major_target) {
     self.is_firing_rocket_barrage = true;
     self thread rocket_barrage_switch_back();
 
     level thread rocket_barrage_radio_guy("confirm_bunker");
 
     self thread rocket_barrage_fire(fire_point);
-  } else if(self attackbuttonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok && !level.rocket_barrage_first_barrage) {
+  } else if(self attackButtonPressed() && !self.is_firing_rocket_barrage && self.rocket_barrage_ok && !level.rocket_barrage_first_barrage) {
     self.is_firing_rocket_barrage = true;
     self thread rocket_barrage_switch_back();
 
@@ -256,9 +256,9 @@ rocket_barrage_fire_watch(fire_point) {
     }
 
     self thread rocket_barrage_fire(fire_point);
-  } else if(self attackbuttonPressed() && !self.rocket_barrage_ok && !level.rocket_barrage_first_barrage) {
+  } else if(self attackButtonPressed() && !self.rocket_barrage_ok && !level.rocket_barrage_first_barrage) {
     level thread rocket_barrage_radio_guy("cant_fire");
-  } else if(self attackbuttonPressed() && self.is_firing_rocket_barrage && !level.rocket_barrage_first_barrage) {
+  } else if(self attackButtonPressed() && self.is_firing_rocket_barrage && !level.rocket_barrage_first_barrage) {
     level thread rocket_barrage_radio_guy("charging" + self.rocket_barrage_recharging_count);
     self.rocket_barrage_recharging_count++;
 

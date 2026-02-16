@@ -1,5 +1,7 @@
-// _type97.gsc
-// Sets up the behavior for the Type 97 Tank and variants.
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_type97.gsc
+**************************************/
 
 #include maps\mp\_vehicles;
 

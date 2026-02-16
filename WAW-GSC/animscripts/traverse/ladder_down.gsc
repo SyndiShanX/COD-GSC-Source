@@ -1,10 +1,11 @@
-// ladder_down.gsc
-// Climbs down a ladder of any height by using a looping animation.
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\ladder_down.gsc
+************************************************/
 
 #using_animtree("generic_human");
 
 main() {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -12,15 +13,12 @@ main() {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // First, get on
   endnode = self getnegotiationendnode();
   assert(isDefined(endnode));
   endPos = endnode.origin;
-  //("ladder_down: about to start climbing.Height to climb: " + (endPos[2] - self.origin[2]) );
 
   self animscripts\traverse\shared::TraverseStartRagdollDeath();
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -28,7 +26,6 @@ main() {
   self setFlaggedAnimKnoballRestart("climbanim", %ladder_climbon, %body, 1, .1, 1);
   self animscripts\shared::DoNoteTracks("climbanim");
 
-  // Now do the cycle
   climbAnim = % ladder_climbdown;
   self setFlaggedAnimKnoballRestart("climbanim", climbAnim, %body, 1, .1, 1);
 
@@ -44,5 +41,4 @@ main() {
   self.a.movement = "stop";
   self.a.pose = "stand";
   self.a.alertness = "alert";
-  //("ladder_down: all done");
 }

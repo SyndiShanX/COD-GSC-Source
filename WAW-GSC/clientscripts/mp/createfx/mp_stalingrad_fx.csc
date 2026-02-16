@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_stalingrad_fx.csc
+**********************************************************/
+
 main() {
-  // CreateFX entities placed: 197
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_water_drips_hvy_long");
   ent.v["origin"] = (-1624.9, -462.133, 136.093);
   ent.v["angles"] = (0, 0, 0);

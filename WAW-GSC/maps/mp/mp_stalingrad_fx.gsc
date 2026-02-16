@@ -1,3 +1,8 @@
+/****************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_stalingrad_fx.gsc
+****************************************/
+
 #include maps\mp\_utility;
 
 main() {
@@ -6,8 +11,6 @@ main() {
   precache_createfx_fx();
   spawnFX();
 }
-
-// load fx used by util scripts
 precache_util_fx() {}
 
 precache_scripted_fx() {}

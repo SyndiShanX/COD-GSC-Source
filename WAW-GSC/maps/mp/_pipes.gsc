@@ -1,10 +1,12 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_pipes.gsc
+**************************************/
+
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
 main() {
-  //Bloodlust - moved this wait. cant use a wait before _load.gsc is called
-  //	waittillframeend; // insure that structs are initialized
-
   pipes = getEntArray("pipe_shootable", "targetname");
   if(!pipes.size) {
     return;
@@ -16,7 +18,7 @@ main() {
   pipes thread precacheFX();
   pipes thread methodsInit();
 
-  waittillframeend; // insure that structs are initialized
+  waittillframeend;
 
   array_thread(pipes, ::pipesetup);
 
@@ -49,7 +51,7 @@ methodsInit() {
   level._pipe_methods["MOD_TRIGGER_HURT"] = ::pipe_calc_splash;
   level._pipe_methods["MOD_EXPLOSIVE"] = ::pipe_calc_splash;
   level._pipe_methods["MOD_IMPACT"] = ::pipe_calc_nofx;
-  level._pipe_methods["MOD_BURNED"] = ::pipe_calc_nofx; // SRS 12/4/2007: added flame damage
+  level._pipe_methods["MOD_BURNED"] = ::pipe_calc_nofx;
 }
 
 pipe_calc_ballistic(P, type) {
@@ -67,7 +69,6 @@ pipe_calc_nofx(P, type) {
 }
 
 pipe_calc_assert(P, type) {
-  // SRS 12/4/2007: updated bug reference for treyarch
   assertMsg("BUG to SEAN SLAYBACK under LEVEL DESIGN. Pipe at (" + self getorigin() + ") was impacted with unknown type: " + type + ".");
 }
 
@@ -88,18 +89,15 @@ pipemasterInit(breaks) {
 pipemasterIterate(sample) {
   family = get_pipes_in_range(sample, level.pipe_breaks);
 
-  //if we didn't find anything then head back
   if(!isDefined(family) || family.size == 0) {
     return;
   }
 
-  //if we found more - give them the current master and remove them from the list
   for(i = 0; i < family.size; i++) {
     family[i].master = self;
     level.pipe_breaks = array_remove(level.pipe_breaks, family[i]);
   }
 
-  //since we found new ones - we must see if there are more in the list that are near these
   for(i = 0; i < family.size; i++) {
     self pipemasterIterate(family[i]);
   }
@@ -122,6 +120,7 @@ get_pipes_in_range(sample, pipes) {
         dist = distance(pipes[i].ends[e], sample.ends[j]);
 
         if(dist > testdist) {
+          {}
           continue;
         }
 
@@ -149,12 +148,6 @@ pipebreakInit(pipes) {
     self[j].fxnode.forward = vector_scale(anglestoright(self[j].angles), -1);
     self[j].fxnode.up = anglesToForward(self[j].angles);
 
-
-    /****************************************************************/
-
-    /*		THIS IS A HACK UNTIL I GET A MODEL FOR THIS THING		*/
-    /****************************************************************/
-
     if(self[j].script_noteworthy == "fueltanker") {
       node = getstruct(self[j].whole.target, "targetname");
       self[j].fxnode.origin = node.origin;
@@ -162,12 +155,6 @@ pipebreakInit(pipes) {
       self[j].fxnode.up = anglesToForward(node.angles);
       self[j].fxnode.right = anglestoright(node.angles);
     }
-    /****************************************************************/
-
-    /*		THIS IS A HACK UNTIL I GET A MODEL FOR THIS THING		*/
-    /****************************************************************/
-
-
 
     self[j].hurtnode = [];
     switch (self[j].script_noteworthy) {
@@ -208,7 +195,6 @@ pipebreakInit(pipes) {
         newnode.up = self[j].fxnode.up;
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode;
 
-
         vec1 = vector_scale(self[j].fxnode.up, 64);
         self[j].hurtnode[self[j].hurtnode.size] = self[j].fxnode.origin + vec1;
         vec1 = vector_scale(self[j].fxnode.up, -64);
@@ -219,11 +205,6 @@ pipebreakInit(pipes) {
       case "fueltanker": {
         self[j].fx_multinode = [];
         self[j].fx_multinode[self[j].fx_multinode.size] = self[j].fxnode;
-
-        /****************************************************************/
-
-        /*			THIS IS A HACK UNTIL I GET A PROPER EFFECT			*/
-        /****************************************************************/
 
         newnode2 = spawnStruct();
         newnode2.origin = self[j].fxnode.origin;
@@ -274,11 +255,6 @@ pipebreakInit(pipes) {
         newnode2.up = newnode.up;
         newnode2.forward = newnode.forward + vector_scale(self[j].fxnode.right, -1);
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode2;
-        /****************************************************************/
-
-        /*			THIS IS A HACK UNTIL I GET A PROPER EFFECT			*/
-        /****************************************************************/
-
 
         self[j].hurtnode[self[j].hurtnode.size] = self[j].fxnode.origin;
         vec1 = vector_scale(self[j].fxnode.up, 184);
@@ -289,8 +265,6 @@ pipebreakInit(pipes) {
       break;
     }
 
-    //find the ends of the pipe so we can calculate in a later function what other pipes are attached to this one
-    //we'll include the center of the pipe as well for the calculations
     self[j].ends = [];
     displacement = 0;
     switch (self[j].script_noteworthy) {
@@ -353,9 +327,6 @@ pipebreakthink() {
   while(1) {
     self.whole waittill("pipe_ruptured");
 
-    //Bloodlust - removed SP only function
-    //		badplace_cylinder("",2, self.whole.origin, 250, 250);
-
     self.master notify("pipe_ruptured");
     self thread pipebreakthink2();
   }
@@ -393,12 +364,10 @@ pipebreakthink4() {
         self.master.firstsnd = true;
         thread play_sound_in_space("expl_gas_pipe_burst_decay", self.fxnode.origin);
       }
-
     }
     break;
   }
 
-  //DO DAMAGE	
   self thread pipebreak_damage();
 
   self.A = self.whole.A;
@@ -444,7 +413,6 @@ pipesetup() {
   }
 
   if(self.script_noteworthy == "fire") {
-    //Bloodlust - increased the limit on fire FX from 4
     self.limit = 8;
   }
 
@@ -452,32 +420,26 @@ pipesetup() {
 }
 
 pipethink() {
-  P = (0, 0, 0); //just to initialize P as a vector
+  P = (0, 0, 0);
   self.numfx = 0;
 
   self endon("deleting");
 
-  //FIRE
   if(isDefined(self.limit)) {
     while(1) {
       self waittill("damage", other, damage, direction_vec, P, type);
 
-      // SRS 12/4/2007: added burned damage
       if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED") {
         continue;
       }
 
       self pipethink_logic(self.numfx, self.limit, direction_vec, P, type);
       self.numfx++;
-
     }
-  }
-  //EVERYTHING ELSE
-  else {
+  } else {
     while(1) {
       self waittill("damage", other, damage, direction_vec, P, type);
 
-      // SRS 12/4/2007: added burned damage
       if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED") {
         continue;
       }
@@ -498,7 +460,6 @@ pipethink_logic(num, limit, direction_vec, P, type) {
       return;
     }
 
-    //calculate the vector derived from the center line of our pipe and the point of damage
     vec = vectorFromLineToPoint(self.A, self.B, P);
     self thread pipefx(P, vec);
 
@@ -509,14 +470,13 @@ pipethink_logic(num, limit, direction_vec, P, type) {
 }
 
 pipethink2() {
-  //self endon("deleting");
   wait level.pipe_fx_time[self.script_noteworthy];
   level.num_pipe_fx--;
 }
 
 pipefx(P, vec) {
   if(self.script_noteworthy != "fire") {
-    playfx(level._effect["pipe_interactive"][self.script_noteworthy], P, vec);
+    playFX(level._effect["pipe_interactive"][self.script_noteworthy], P, vec);
     thread play_sound_in_space(level._sound["pipe_interactive"][self.script_noteworthy], P);
     return;
   }
@@ -526,8 +486,7 @@ pipefx(P, vec) {
   time = .1;
 
   if(!isDefined(self.burnsec)) {
-    //Bloodlust - increased play time of FX from 2 to 5 seconds
-    self.burnsec = int(5 / time); //2 secs / time = num of times to loop
+    self.burnsec = int(5 / time);
     self.burninterval = int(self.burnsec * .15);
   } else {
     self.burnsec -= self.burninterval;
@@ -541,7 +500,7 @@ pipefx(P, vec) {
   }
 
   for(i = 0; i < self.burnsec; i++) {
-    playfx(level._effect["pipe_interactive"][self.script_noteworthy], P, vec);
+    playFX(level._effect["pipe_interactive"][self.script_noteworthy], P, vec);
     wait time;
   }
 
@@ -549,21 +508,19 @@ pipefx(P, vec) {
 }
 
 pipeimpact() {
-  P = (0, 0, 0); //just to initialize P as a vector
+  P = (0, 0, 0);
 
   self endon("deleting");
 
   while(1) {
     self waittill("damage", other, damage, direction_vec, P, type);
 
-    // SRS 12/4/2007: added burned damage
     if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED") {
       continue;
     }
 
     P = self[[level._pipe_methods[type]]](P, type);
 
-    //play the metal hit fx
     direction_vec = vector_scale(direction_vec, -1);
     playFX(level._effect["pipe_interactive"]["impact"], P, direction_vec);
   }

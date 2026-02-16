@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_hangar_fx.csc
+******************************************************/
+
 main() {
-  // CreateFX entities placed: 130
   ent = clientscripts\mp\_fx::createLoopEffect("mp_godray_white_small");
   ent.v["origin"] = (108.374, -2243.31, 880);
   ent.v["angles"] = (312, 42, -180);

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_suburban_fx.csc
+********************************************************/
+
 main() {
-  // CreateFX entities placed: 131
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_smoke_column_short");
   ent.v["origin"] = (5862.55, -6515.11, -491.696);
   ent.v["angles"] = (270, 357.064, 74.9356);

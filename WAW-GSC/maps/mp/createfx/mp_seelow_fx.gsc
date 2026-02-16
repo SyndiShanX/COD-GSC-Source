@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createfx\mp_seelow_fx.gsc
+*********************************************/
+
 main() {
-  // CreateFX entities placed: 110
   ent = maps\mp\_utility::createOneshotEffect("mp_smoke_column_tall");
   ent.v["origin"] = (8038.39, -115.22, -275.451);
   ent.v["angles"] = (270, 4.08562, 85.9143);

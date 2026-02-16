@@ -1,3 +1,8 @@
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\dog_flashed.gsc
+***********************************************/
+
 main() {
   self endon("killanimscript");
   self endon("stop_flashbang_effect");
@@ -16,10 +21,11 @@ main() {
 }
 
 startFlashBanged() {
-  if(isDefined(self.flashduration))
+  if(isDefined(self.flashduration)) {
     duration = self.flashduration;
-  else
+  } else {
     duration = self getFlashBangedStrength() * 1000;
+  }
 
   self.flashendtime = gettime() + duration;
   self notify("flashed");

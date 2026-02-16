@@ -1,5 +1,9 @@
-/using_animtree ("dog");#include maps\mp\animscripts\shared;
-#include maps\mp\animscripts\utility;
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\dog_init.gsc
+********************************************/
+
+/using_animtree ("dog");#include maps\mp\animscripts\shared;#include maps\mp\animscripts\utility;
 
 main() {
   level.dog_debug_orient = 0;
@@ -21,21 +25,21 @@ main() {
   self.chatInitialized = false;
   self.noDodgeMove = true;
 
-  level.dogAttackPlayerDist = 102; // hard code for now, above is not accurate.
+  level.dogAttackPlayerDist = 102;
   level.dogAttackPlayerCloseRangeDist = 50;
 
-  level.dogTurnAroundAngle = 135; // if the turn delta is greater then this it will play the 180 anim
-  level.dogTurnAngle = 70; // if the turn delta is greater then this it will play the 90 anim
-  level.dogRunTurnSpeed = 20; // if the speed is greater then play the run turns
-  level.dogRunPainSpeed = 20; // if the speed is greater then play the run pains
-  level.dogTurnMinDistanceToGoal = 40; // if the distance to goal is under this then no turn anims play
+  level.dogTurnAroundAngle = 135;
+  level.dogTurnAngle = 70;
+  level.dogRunTurnSpeed = 20;
+  level.dogRunPainSpeed = 20;
+  level.dogTurnMinDistanceToGoal = 40;
 
   self.meleeAttackDist = 0;
   self thread setMeleeAttackDist();
 
   self.a = spawnStruct();
-  self.a.pose = "stand"; // to use DoNoteTracks()
-  self.a.nextStandingHitDying = false; // to allow dogs to use bullet shield
+  self.a.pose = "stand";
+  self.a.nextStandingHitDying = false;
   self.a.movement = "run";
 
   set_anim_playback_rate();
@@ -43,7 +47,6 @@ main() {
   self.suppressionThreshold = 1;
   self.disableArrivals = false;
 
-  // need to do the getmovedelta.took this value from sp
   level.dogStoppingDistSq = 3416.82;
   self.stopAnimDistSq = level.dogStoppingDistSq;
 
@@ -54,8 +57,9 @@ main() {
   level.lastDogMeleePlayerTime = 0;
   level.dogMeleePlayerCounter = 0;
 
-  if(!isDefined(level.dog_hits_before_kill))
+  if(!isDefined(level.dog_hits_before_kill)) {
     level.dog_hits_before_kill = 1;
+  }
 }
 
 firstInit() {
@@ -76,8 +80,10 @@ setMeleeAttackDist() {
         stance = self.enemy getStance();
 
         if(stance == "prone") {
+          {}
           self.meleeAttackDist = level.dogAttackPlayerCloseRangeDist;
         } else {
+          {}
           self.meleeAttackDist = level.dogAttackPlayerDist;
         }
       } else {

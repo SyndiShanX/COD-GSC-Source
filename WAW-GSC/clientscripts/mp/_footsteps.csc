@@ -1,3 +1,8 @@
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_footsteps.csc
+*******************************************/
+
 playFootstep(client_num, pos, ground_type, on_fire) {
   if(ground_type != "default") {
     sound_alias = "step_run_" + ground_type;
@@ -5,7 +10,7 @@ playFootstep(client_num, pos, ground_type, on_fire) {
     sound_alias = "step_run_dirt";
   }
 
-  playsound(client_num, sound_alias, pos);
+  playSound(client_num, sound_alias, pos);
 
   playSound(client_num, "gear_rattle_run", pos);
 
@@ -13,20 +18,17 @@ playFootstep(client_num, pos, ground_type, on_fire) {
 }
 
 do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
-  if(!isDefined(level._optionalStepEffects))
+  if(!isDefined(level._optionalStepEffects)) {
     return;
+  }
 
   if(on_fire) {
     ground_type = "fire";
   }
 
-
-
   if(GetDvarInt("debug_surface_type")) {
     print3d(foot_pos, ground_type, (0.5, 0.5, 0.8), 1, 3, 30);
   }
-
-
 
   for(i = 0; i < level._optionalStepEffects.size; i++) {
     if(level._optionalStepEffects[i] == ground_type) {
@@ -38,5 +40,4 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
       }
     }
   }
-
 }

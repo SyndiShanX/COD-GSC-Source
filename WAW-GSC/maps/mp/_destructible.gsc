@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_destructible.gsc
+**************************************/
+
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
@@ -26,42 +31,24 @@ init() {
     level._effect["dest_car_fire"] = loadFX("destructibles/fx_dest_fire_lg");
     level._effect["dest_car_hoodfire"] = loadFX("destructibles/fx_dest_fire_car_fade_40");
 
-    /*for(i = 0; i < destructibles.size; i++)
-    {
-    	if(!IsSubStr(destructibles[i].destructibledef, "_mp"))
-    	{
-    		ASSERTMSG("You have specificied a non-MP version of a destructible at this location: " + destructibles[i].origin);
-    		return;
-    	}
-    }*/
-
     array_thread(destructibles, ::setup_destructibles);
   } else {
     return;
   }
-
 }
-
-// setup the destructible vehicles
 setup_destructibles() {
   if(isDefined(self.destructibledef)) {
     if(
-      self.destructibledef == "dest_audi_mp" || self.destructibledef == "dest_beetle_mp" || self.destructibledef == "dest_bmwmotorcycle_mp" || self.destructibledef == "dest_horch1a_mp" || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_opel_blitz_mp" || self.destructibledef == "dest_peleliu_generator_mobile_mp" || self.destructibledef == "dest_ptboat_mp" || self.destructibledef == "dest_type94truck_mp" || self.destructibledef == "dest_type94truckcamo_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
+      self.destructibledef == "dest_audi_mp"	 || self.destructibledef == "dest_beetle_mp"	 || self.destructibledef == "dest_bmwmotorcycle_mp"	 || self.destructibledef == "dest_horch1a_mp"	 || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_opel_blitz_mp"	 || self.destructibledef == "dest_peleliu_generator_mobile_mp"	 || self.destructibledef == "dest_ptboat_mp"	 || self.destructibledef == "dest_type94truck_mp"	 || self.destructibledef == "dest_type94truckcamo_mp"	 || self.destructibledef == "dest_type95scoutcar_mp"	) {
       self thread destructibles_think();
-      //self thread printHealth();
     }
   }
 }
 
-destructible_record_initial_values() {
-  // do nothing for now, called from _vehicles::vehicle_record_initial_values()
-}
+destructible_record_initial_values() {}
 
-destructible_recycle_spawn() {
-  // do nothing for now, called from _vehicles::vehicle_recycle_spawn()
-}
+destructible_recycle_spawn() {}
 
-// wait for enough damage, then destroy the destructible vehicle
 destructibles_think() {
   self.exploded = false;
   immediateExplosion = false;
@@ -69,20 +56,16 @@ destructibles_think() {
   for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
 
-    // CODER_MOD - Jay (7/21/08): Knife swipes should not damage the vehicles
     if(type == "MOD_MELEE") {
       self.health += damage;
-    }
-    // CODER_MOD - Jay (7/24/08): Projectiles blow up the vehicles immediately
-    else if(type == "MOD_GRENADE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH" || type == "MOD_EXPLOSIVE") {
-      // REMOVE AFTER SHIP
-      // This is to make the vehicles explode from explosives if they are near it
+    } else if(type == "MOD_GRENADE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH" || type == "MOD_EXPLOSIVE") {
       self.health = 200;
       immediateExplosion = true;
     }
 
-    if(self.health < 200)
+    if(self.health < 200) {
       self.health = 200;
+    }
 
     if(self.health <= 200 && !self.exploded) {
       self.exploded = true;
@@ -93,12 +76,13 @@ destructibles_think() {
         hood_tag = self getTagOrigin("hood_jnt");
 
         if(isDefined(hood_tag)) {
+          {}
           playFX(level._effect["dest_car_hoodfire"], hood_tag);
           self playDestructibleBattleChatter();
 
-          //Make vehicles explode immediately
-          if(!immediateExplosion)
+          if(!immediateExplosion) {
             wait 3;
+          }
 
           playFX(level._effect["dest_car_fire"], self.origin + (0, 0, 15));
         }
@@ -107,10 +91,8 @@ destructibles_think() {
       self.damageOwner = attacker;
       self destructible_vehicle_damage_to_death();
 
-      // make the destructible vehicle lurch when it explodes
       if(self.destructibledef != "dest_peleliu_generator_mobile_mp") {
         self thread explode_anim();
-        //self notify( "vehicle destroyed" );
       }
     }
   }
@@ -118,13 +100,11 @@ destructibles_think() {
 
 playDestructibleBattleChatter() {
   if(
-    self.destructibledef == "dest_audi_mp" || self.destructibledef == "dest_beetle_mp" || self.destructibledef == "dest_horch1a_mp" || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
-    //start the battlechatter thread
+    self.destructibledef == "dest_audi_mp"	 || self.destructibledef == "dest_beetle_mp"	 || self.destructibledef == "dest_horch1a_mp"	 || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
     level thread maps\mp\gametypes\_battlechatter_mp::onPlayerNearExplodable(self, "car");
     return;
   } else if(
-    self.destructibledef == "dest_opel_blitz_mp" || self.destructibledef == "dest_ptboat_mp" || self.destructibledef == "dest_type94truckcamo_mp" || self.destructibledef == "dest_type94truck_mp") {
-    //start the battlechatter thread
+    self.destructibledef == "dest_opel_blitz_mp"	 || self.destructibledef == "dest_ptboat_mp"	 || self.destructibledef == "dest_type94truckcamo_mp"	 || self.destructibledef == "dest_type94truck_mp") {
     level thread maps\mp\gametypes\_battlechatter_mp::onPlayerNearExplodable(self, "truck");
     return;
   }
@@ -137,11 +117,11 @@ destructible_vehicle_play_explosion_sound() {
       self playSound("car_explo_small");
       return;
     } else if(
-      self.destructibledef == "dest_audi_mp" || self.destructibledef == "dest_beetle_mp" || self.destructibledef == "dest_horch1a_mp" || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
+      self.destructibledef == "dest_audi_mp"	 || self.destructibledef == "dest_beetle_mp"	 || self.destructibledef == "dest_horch1a_mp"	 || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
       self playSound("car_explo_med");
       return;
     } else if(
-      self.destructibledef == "dest_opel_blitz_mp" || self.destructibledef == "dest_ptboat_mp" || self.destructibledef == "dest_type94truckcamo_mp" || self.destructibledef == "dest_type94truck_mp") {
+      self.destructibledef == "dest_opel_blitz_mp"	 || self.destructibledef == "dest_ptboat_mp"	 || self.destructibledef == "dest_type94truckcamo_mp"	 || self.destructibledef == "dest_type94truck_mp") {
       self playSound("car_explo_large");
       return;
     }
@@ -162,7 +142,6 @@ printHealth() {
 destructible_vehicle_damage_to_death() {
   self.destructible_type = "vehicle_mp";
   offset = (0, 0, 1);
-  // damage the vehicle so much that it is immediately destroyed
   if(self.destructibledef == "dest_bmwmotorcycle_mp" || self.destructibledef == "dest_peleliu_generator_mobile_mp") {
     radiusDamage(self.origin, 128, 400, 25);
     self dodamage(20000, self.origin + offset, self.damageOwner);
@@ -172,7 +151,6 @@ destructible_vehicle_damage_to_death() {
   }
 }
 
-// make the destructible vehicle lurch when it explodes
 explode_anim() {
   self moveZ(16, 0.3, 0, 0.2);
   self rotatePitch(10, 0.3, 0, 0.2);

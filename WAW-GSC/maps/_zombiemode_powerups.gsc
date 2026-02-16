@@ -192,7 +192,7 @@ add_zombie_powerup(powerup_name, model_name, hint, fx) {
   level.zombie_powerup_array[level.zombie_powerup_array.size] = powerup_name;
 }
 
-include_zombie_powerup(powerup_name) {
+#include_zombie_powerup(powerup_name) {
   if(!isDefined(level.zombie_include_powerups)) {
     level.zombie_include_powerups = [];
   }

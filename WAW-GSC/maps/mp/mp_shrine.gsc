@@ -1,9 +1,9 @@
-main() {
-  //maps\mp\mp_cargoship_fx::main();
-  //maps\createart\mp_cargoship_art::main();
-  //needs to be first for create fx
-  //maps\mp\mp_shrine_fx::main();
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_shrine.gsc
+**************************************/
 
+main() {
   precachemodel("collision_wall_128x128x10");
   precachemodel("collision_geo_128x128x128");
   precachemodel("collision_wall_512x512x10");
@@ -16,15 +16,8 @@ main() {
 
   maps\mp\createart\mp_shrine_art::main();
 
-  //maps\mp\mp_shrine_amb::main();
-
   maps\mp\_compass::setupMiniMap("compass_map_mp_shrine");
 
-  //setExpFog(300, 1400, 0.5, 0.5, 0.5, 0);
-  //VisionSetNaked( "mp_cargoship" );
-  //ambientPlay("ambient_cargoshipmp_ext");
-
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "marines";
   game["axis"] = "japanese";
   game["attackers"] = "allies";
@@ -48,10 +41,8 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_SHRINE_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_SHRINE_E";
 
-
   thread trigger_killer((-1494.5, -2054, -246.5), 1000, 10);
   thread trigger_killer((-3712.5, -2311.5, -323), 2000, 10);
-
 
   spawncollision("collision_wall_128x128x10", "collider", (-760, -1073, 15.5), (0, 350, 0));
   spawncollision("collision_wall_128x128x10", "collider", (-2116, 937.5, -135), (0, 30.5, 0));
@@ -61,11 +52,8 @@ main() {
   spawncollision("collision_geo_128x128x128", "collider", (-2451, -72.5, -409.5), (0, 0, 0));
   spawncollision("collision_wall_256x256x10", "collider", (-1464, 1329, -17), (0, 130, 0));
   spawncollision("collision_wall_256x256x10", "collider", (-1259, 1279, -17), (0, 203, 0));
-
-  //fix for getting onto hilltop by sniper nest window
   spawncollision("collision_geo_32x32x128", "collider", (-1880.5, 672, -152), (0, 346.8, 0));
 
-  // enable new player spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
 
   createSpawnpoint("mp_ctf_spawn_allies", (-726, 1430, -259.8), 163.6);
@@ -114,10 +102,12 @@ createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isDefined(level.extraSpawnpoints))
+  if(!isDefined(level.extraSpawnpoints)) {
     level.extraSpawnpoints = [];
-  if(!isDefined(level.extraSpawnpoints[classname]))
+  }
+  if(!isDefined(level.extraSpawnpoints[classname])) {
     level.extraSpawnpoints[classname] = [];
+  }
   level.extraSpawnpoints[classname][level.extraSpawnpoints[classname].size] = spawnpoint;
 }
 

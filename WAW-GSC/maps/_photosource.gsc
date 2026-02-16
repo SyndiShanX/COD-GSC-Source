@@ -120,7 +120,7 @@ psource_activatebutton() {
   level endon("psource_refresh");
   while(1) {
     players = get_players();
-    while(!players[0] usebuttonpressed()) {
+    while(!players[0] useButtonPressed()) {
       wait .05;
     }
     pick = psource_getvisible();
@@ -128,7 +128,7 @@ psource_activatebutton() {
       level.psource_selectindex = pick;
       level.psource_views[pick] thread psource_hudshow();
     }
-    while(players[0] usebuttonpressed()) {
+    while(players[0] useButtonPressed()) {
       wait .05;
     }
   }
@@ -309,7 +309,7 @@ psource_hudshow() {
   players[0] setplayerangles(self.angles);
   level.photosource.alpha = 1;
   flag_set("psource_refresh");
-  while(players[0] islookingorg(self) && players[0] usebuttonpressed()) {
+  while(players[0] islookingorg(self) && players[0] useButtonPressed()) {
     wait .05;
   }
   players[0] freezecontrols(false);

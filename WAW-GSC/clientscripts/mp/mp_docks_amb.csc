@@ -1,25 +1,12 @@
-//
-// file: mp_docks_amb.csc
-// description: clientside ambient script for mp_docks: setup ambient sounds, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_docks_amb.csc
+*********************************************/
 
 #include clientscripts\mp\_utility;
 #include clientscripts\mp\_ambientpackage;
 
 main() {
-  //************************************************************************************************
-  //Ambient Packages
-  //************************************************************************************************
-
-  //declare an ambientpackage, and populate it with elements
-  //mandatory parameters are <package name>, <alias name>, <spawnMin>, <spawnMax>
-  //followed by optional parameters <distMin>, <distMax>, <angleMin>, <angleMax>
-
-  //***************
-  //_none
-  //***************
-
   declareAmbientPackage("default_pkg");
 
   declareAmbientPackage("rain_package");
@@ -28,21 +15,8 @@ main() {
 
   declareAmbientPackage("sub_package");
 
-  //************************************************************************************************
-  // ROOMS
-  //************************************************************************************************
-
-  //explicitly activate the base ambientpackage, which is used when not touching any ambientPackageTriggers
-  //the other trigger based packages will be activated automatically when the player is touching them
-  //the same pattern is followed for setting up ambientRooms
-
-  //***************
-  //_none
-  //***************
-
   declareAmbientRoom("default_room");
   setAmbientRoomReverb("default_room", "cave", 1, 1);
-  //setAmbientRoomTone( "default_room" , "roof_rain_loop" );
 
   declareAmbientRoom("rain_room");
   setAmbientRoomReverb("rain_room", "cave", 1, 1);
@@ -54,11 +28,6 @@ main() {
 
   declareAmbientRoom("sub_room");
   setAmbientRoomReverb("sub_room", "sewerpipe", 1, 0.5);
-  //setAmbientRoomTone( "sub_room" , "roof_rain_loop" );
-
-  //************************************************************************************************
-  //ACTIVATE DEFAULT AMBIENT SETTINGS
-  //************************************************************************************************
 
   activateAmbientPackage(0, "default_pkg", 0);
   activateAmbientRoom(0, "default_room", 0);
@@ -70,7 +39,7 @@ lightning_audio() {
   while(1) {
     wait(randomintrange(45, 120));
     {
-      playfx(0, level._effect["mp_lightning_flash"], self.origin);
+      playFX(0, level._effect["mp_lightning_flash"], self.origin);
       playSound(0, "thunder", self.origin);
     }
   }

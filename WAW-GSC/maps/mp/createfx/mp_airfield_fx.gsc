@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createfx\mp_airfield_fx.gsc
+***********************************************/
+
 main() {
-  // CreateFX entities placed: 143
   ent = maps\mp\_utility::createOneshotEffect("mp_smoke_column_tall");
   ent.v["origin"] = (-13712.4, 16095.3, 464);
   ent.v["angles"] = (270, 358.722, 3.27837);

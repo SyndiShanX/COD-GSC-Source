@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createfx\mp_bgate_fx.gsc
+********************************************/
+
 main() {
-  // CreateFX entities placed: 236
   ent = maps\mp\_utility::createOneshotEffect("mp_dust_motes");
   ent.v["origin"] = (-1042.07, -872.492, 219.125);
   ent.v["angles"] = (360, 90, -90);

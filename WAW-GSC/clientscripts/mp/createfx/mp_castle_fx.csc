@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_castle_fx.csc
+******************************************************/
+
 main() {
-  // CreateFX entities placed: 72
   ent = clientscripts\mp\_fx::createLoopEffect("mp_godray_yellow_small");
   ent.v["origin"] = (1550.41, -1316.99, -327.875);
   ent.v["angles"] = (312, 60, 0);

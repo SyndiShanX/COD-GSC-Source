@@ -126,9 +126,7 @@ info_gather() {
     wait 2;
   }
 }
-init_flags()
-
-{
+init_flags() {
   flag_init("event1_smoke_popped");
 
   flag_init("model3_fire_think");

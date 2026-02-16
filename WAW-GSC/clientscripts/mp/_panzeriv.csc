@@ -1,5 +1,7 @@
-// _panzeriv.csc
-// Sets up clientside behavior for the panzeriv
+/******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_panzeriv.csc
+******************************************/
 
 #include clientscripts\mp\_vehicle;
 

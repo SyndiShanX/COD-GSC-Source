@@ -1,18 +1,14 @@
-//
-// file: mp_outskirts_fx.gsc
-// description: clientside fx script for mp_roundhouse: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_roundhouse_fx.csc
+*************************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {}
 
-// --- AMBIENT SECTION ---//
 precache_createfx_fx() {
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");
@@ -38,7 +34,6 @@ precache_createfx_fx() {
   level._effect["mp_water_splash_small"] = loadfx("maps/mp_maps/fx_mp_water_splash_small");
   level._effect["mp_water_wake_flow"] = loadfx("maps/mp_maps/fx_mp_water_wake_flow");
   level._effect["mp_falling_leaves"] = loadfx("maps/mp_maps/fx_mp_falling_leaves_elm");
-
 }
 
 main() {

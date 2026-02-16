@@ -1,35 +1,44 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\saw\common.gsc
+**************************************/
+
 main(turret) {
-  self endon("killanimscript"); // code
+  self endon("killanimscript");
 
   assert(isDefined(turret));
 
   animscripts\utility::initialize("saw");
 
-  // when we ran our postscriptfunc we may have decided to stop using our turret, // in which case it's gone now
-  if(!isDefined(turret))
+  if(!isDefined(turret)) {
     return;
+  }
 
   self.a.special = "saw";
 
-  if(isDefined(turret.script_delay_min))
+  if(isDefined(turret.script_delay_min)) {
     turret_delay = turret.script_delay_min;
-  else
+  } else {
     turret_delay = maps\_mgturret::burst_fire_settings("delay");
+  }
 
-  if(isDefined(turret.script_delay_max))
+  if(isDefined(turret.script_delay_max)) {
     turret_delay_range = turret.script_delay_max - turret_delay;
-  else
+  } else {
     turret_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
+  }
 
-  if(isDefined(turret.script_burst_min))
+  if(isDefined(turret.script_burst_min)) {
     turret_burst = turret.script_burst_min;
-  else
+  } else {
     turret_burst = maps\_mgturret::burst_fire_settings("burst");
+  }
 
-  if(isDefined(turret.script_burst_max))
+  if(isDefined(turret.script_burst_max)) {
     turret_burst_range = turret.script_burst_max - turret_burst;
-  else
+  } else {
     turret_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
+  }
 
   pauseUntilTime = getTime();
   turretState = "start";
@@ -50,7 +59,6 @@ main(turret) {
   turret.doFiring = false;
   self thread fireController(turret);
 
-
   self setTurretAnim(self.primaryTurretAnim);
   self setAnimKnobRestart(self.primaryTurretAnim, 1, 0.2, 1);
 
@@ -59,7 +67,6 @@ main(turret) {
 
   turret setAnimKnobLimitedRestart(turret.additiveTurretIdle);
   turret setAnimKnobLimitedRestart(turret.additiveTurretFire);
-
 
   for(;;) {
     if(turret.doFiring) {
@@ -76,7 +83,6 @@ main(turret) {
       thread DoAim(turret);
       turret waittill("turretstatechange");
     }
-
   }
 }
 
@@ -93,12 +99,14 @@ fireController(turret) {
   for(;;) {
     while(isDefined(self.enemy)) {
       enemypos = self.enemy.origin;
-      if(isSentient(enemypos))
+      if(isSentient(enemypos)) {
         enemypos += (0, 0, 32);
+      }
       turretAimPos = turret getTagAngles("tag_aim");
 
       if(within_fov(turret.origin, turretAimPos, enemypos, fovdot) || distanceSquared(turret.origin, enemyPos) < 200 * 200) {
         if(!turret.doFiring) {
+          {}
           turret.doFiring = true;
           turret notify("turretstatechange");
         }
@@ -120,11 +128,12 @@ fireController(turret) {
 }
 
 turretTimer(duration, turret) {
-  if(duration <= 0)
+  if(duration <= 0) {
     return;
+  }
 
-  self endon("killanimscript"); // code
-  turret endon("turretstatechange"); // code
+  self endon("killanimscript");
+  turret endon("turretstatechange");
 
   wait(duration);
   turret notify("turretstatechange");
@@ -133,10 +142,10 @@ turretTimer(duration, turret) {
 stopUsingTurretWhenNodeLost() {
   self endon("killanimscript");
 
-  // sometimes someone else will come and steal our node. when that happens, // we should leave so we don't try to use the same MG at once.
   while(1) {
-    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
+    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
       self stopUseTurret();
+    }
     wait .25;
   }
 }
@@ -177,7 +186,6 @@ postPainFunc(animscript) {
     self.a.usingTurret delete();
     self.a.usingTurret = undefined;
 
-    // we may have gone into long death, in which case our weapon is gone
     if(isDefined(self.weapon) && self.weapon != "none") {
       self animscripts\shared::placeWeaponOn(self.weapon, "right");
     }
@@ -198,8 +206,6 @@ within_fov(start_origin, start_angles, end_origin, fov) {
   return dot >= fov;
 }
 
-// ==================================
-
 #using_animtree("generic_human");
 
 DoShoot(turret) {
@@ -218,12 +224,11 @@ DoAim(turret) {
   turret turretDoAimAnims();
 }
 
-//=====================================
 #using_animtree("mg42");
 
 TurretDoShoot(turret) {
   self endon("killanimscript");
-  turret endon("turretstatechange"); // code or script
+  turret endon("turretstatechange");
 
   for(;;) {
     turret ShootTurret();

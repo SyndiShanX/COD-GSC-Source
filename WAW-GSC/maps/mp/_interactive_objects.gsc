@@ -1,14 +1,18 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_interactive_objects.gsc
+********************************************/
+
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
 init() {
   level.barrelExplodingThisFrame = false;
 
-  // flammable barrels
   qBarrels = false;
   all_barrels = [];
 
-  barrels = getentarray("explodable_barrel", "targetname");
+  barrels = getEntArray("explodable_barrel", "targetname");
   if((isDefined(barrels)) && (barrels.size > 0)) {
     qBarrels = true;
 
@@ -17,7 +21,7 @@ init() {
     }
   }
 
-  barrels = getentarray("explodable_barrel", "script_noteworthy");
+  barrels = getEntArray("explodable_barrel", "script_noteworthy");
   if((isDefined(barrels)) && (barrels.size > 0)) {
     qBarrels = true;
 
@@ -43,11 +47,10 @@ init() {
     array_thread(all_barrels, ::explodable_barrel_think);
   }
 
-  // flammable crates
   qCrates = false;
   all_crates = [];
 
-  crates = getentarray("flammable_crate", "targetname");
+  crates = getEntArray("flammable_crate", "targetname");
   if((isDefined(crates)) && (crates.size > 0)) {
     qCrates = true;
 
@@ -56,7 +59,7 @@ init() {
     }
   }
 
-  crates = getentarray("flammable_crate", "script_noteworthy");
+  crates = getEntArray("flammable_crate", "script_noteworthy");
   if((isDefined(crates)) && (crates.size > 0)) {
     qCrates = true;
 
@@ -101,19 +104,16 @@ explodable_barrel_think() {
   for(;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
 
-
     println("BARRELDAMAGE: " + type);
 
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
 
-    // MikeD (11/2/2007): Added the ability to only have the player shoot these.
     if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
 
-    // MikeD (11/2/2007): Added support to make self be the attacker
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageOwner = self;
     } else {
@@ -144,12 +144,11 @@ explodable_barrel_burn() {
     offset2 = vector_multiply(up, (0, 0, 22)) + (0, 0, 14);
   }
 
-  //start the battlechatter thread
   level thread maps\mp\gametypes\_battlechatter_mp::onPlayerNearExplodable(self, "barrel");
 
   while(self.health > 0) {
     if(!startedfx) {
-      playfx(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
+      playFX(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
@@ -172,7 +171,6 @@ explodable_barrel_burn() {
   level notify("explosion_started");
 
   self thread explodable_barrel_explode();
-
 }
 
 explodable_barrel_explode() {
@@ -193,12 +191,12 @@ explodable_barrel_explode() {
   offset += (0, 0, 4);
 
   level thread play_sound_in_space(level.barrelExpSound, self.origin);
-  playfx(level.breakables_fx["barrel"]["explode"], self.origin + offset);
+  playFX(level.breakables_fx["barrel"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
 
   level.barrelExplodingThisFrame = true;
 
-  if(isdefined(self.remove)) {
+  if(isDefined(self.remove)) {
     self.remove delete();
   }
 
@@ -235,11 +233,10 @@ explodable_barrel_explode() {
 
   level.barrelExplodingThisFrame = false;
 }
-
-//flame crates!
 flammable_crate_think() {
-  if(self.classname != "script_model")
+  if(self.classname != "script_model") {
     return;
+  }
 
   self endon("exploding");
 
@@ -249,15 +246,11 @@ flammable_crate_think() {
 
   for(;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
-    //		if(type != "MOD_BURNED" && type != "MOD_EXPLOSIVE" && type != "MOD_PROJECTILE_SPLASH" && type != "MOD_PROJECTILE" && type != "MOD_GRENADE_SPLASH" && type != "MOD_GRENADE")
-    //			continue;
 
-    // MikeD (11/2/2007): Added the ability to only have the player shoot these.
     if(isDefined(self.script_requires_player) && self.script_requires_player && !isPlayer(attacker)) {
       continue;
     }
 
-    // MikeD (11/2/2007): Added support to make self be the attacker
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageOwner = self;
     } else {
@@ -294,7 +287,7 @@ flammable_crate_burn() {
 
   while(self.health > 0) {
     if(!startedfx) {
-      playfx(level.breakables_fx["ammo_crate"]["burn_start"], self.origin);
+      playFX(level.breakables_fx["ammo_crate"]["burn_start"], self.origin);
       level thread play_sound_in_space(level.crateIgnSound, self.origin);
 
       startedfx = true;
@@ -304,7 +297,7 @@ flammable_crate_burn() {
       count = 0;
     }
 
-    playfx(level.breakables_fx["ammo_crate"]["burn"], self.origin);
+    playFX(level.breakables_fx["ammo_crate"]["burn"], self.origin);
 
     if(count == 0) {
       self.health -= (10 + randomInt(10));
@@ -335,12 +328,12 @@ flammable_crate_explode() {
   offset += (0, 0, 4);
 
   level thread play_sound_in_space(level.crateExpSound, self.origin);
-  playfx(level.breakables_fx["ammo_crate"]["explode"], self.origin);
+  playFX(level.breakables_fx["ammo_crate"]["explode"], self.origin);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
 
   level.barrelExplodingThisFrame = true;
 
-  if(isdefined(self.remove)) {
+  if(isDefined(self.remove)) {
     self.remove delete();
   }
 
@@ -376,7 +369,6 @@ flammable_crate_explode() {
 }
 
 breakable_clip() {
-  //targeted brushmodels take priority over proximity based breakables - nate
   if(isDefined(self.target)) {
     targ = getent(self.target, "targetname");
 
@@ -386,48 +378,31 @@ breakable_clip() {
     }
   }
 
-  //setup it's removable clip part
-  if((isdefined(level.breakables_clip)) && (level.breakables_clip.size > 0)) {
+  if((isDefined(level.breakables_clip)) && (level.breakables_clip.size > 0)) {
     self.remove = getClosestEnt(self.origin, level.breakables_clip);
   }
 
-  if(isdefined(self.remove)) {
+  if(isDefined(self.remove)) {
     level.breakables_clip = array_remove(level.breakables_clip, self.remove);
   }
 }
 
 getClosestEnt(org, array) {
-  if(array.size < 1)
+  if(array.size < 1) {
     return;
+  }
 
   dist = 256;
   ent = undefined;
 
   for(i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist >= dist)
+    if(newdist >= dist) {
       continue;
+    }
     dist = newdist;
     ent = array[i];
   }
 
   return ent;
 }
-
-//	SCR_CONST(mod_unknown,				"MOD_UNKNOWN")
-//	SCR_CONST(mod_pistol_bullet,		"MOD_PISTOL_BULLET")
-//	SCR_CONST(mod_rifle_bullet,			"MOD_RIFLE_BULLET")
-//	SCR_CONST(mod_grenade,				"MOD_GRENADE")
-//	SCR_CONST(mod_grenade_splash,		"MOD_GRENADE_SPLASH")
-//	SCR_CONST(mod_projectile,			"MOD_PROJECTILE")
-//	SCR_CONST(mod_projectile_splash,	"MOD_PROJECTILE_SPLASH")
-//	SCR_CONST(mod_melee,				"MOD_MELEE")
-//	SCR_CONST(mod_head_shot,			"MOD_HEAD_SHOT")
-//	SCR_CONST(mod_crush,				"MOD_CRUSH")
-//	SCR_CONST(mod_telefrag,				"MOD_TELEFRAG")
-//	SCR_CONST(mod_falling,				"MOD_FALLING")
-//	SCR_CONST(mod_suicide,				"MOD_SUICIDE")
-//	SCR_CONST(mod_trigger_hurt,			"MOD_TRIGGER_HURT")
-//	SCR_CONST(mod_explosive,			"MOD_EXPLOSIVE")
-//	SCR_CONST(mod_impact,				"MOD_IMPACT")
-//	SCR_CONST(mod_burned,				"MOD_BURNED")

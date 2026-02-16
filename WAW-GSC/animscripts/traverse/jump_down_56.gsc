@@ -1,10 +1,11 @@
-// jump_down_56.gsc
-// Makes the character jump down off a ledge.Designed for 56 units but should work for 44-70 or so.
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\traverse\jump_down_56.gsc
+*************************************************/
 
 #using_animtree("generic_human");
 
 main() {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -13,7 +14,6 @@ main() {
   self.a.alertness = "alert";
   self traverseMode("nogravity");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

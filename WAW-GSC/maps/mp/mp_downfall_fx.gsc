@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_downfall_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {

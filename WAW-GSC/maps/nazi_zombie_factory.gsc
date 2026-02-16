@@ -325,7 +325,7 @@ init_sounds() {
   maps\_zombiemode_utility::add_sound("gate_door", "open_door");
   maps\_zombiemode_utility::add_sound("heavy_door", "open_door");
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("zombie_colt");
   include_weapon("zombie_colt_upgraded", false);
   include_weapon("zombie_sw_357");
@@ -432,7 +432,7 @@ factory_cymbal_monkey_weighting_func() {
   }
 }
 
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

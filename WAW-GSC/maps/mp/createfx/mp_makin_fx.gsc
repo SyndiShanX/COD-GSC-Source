@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createfx\mp_makin_fx.gsc
+********************************************/
+
 main() {
-  // CreateFX entities placed: 172
   ent = maps\mp\_utility::createLoopEffect("mp_fog_rolling_small");
   ent.v["origin"] = (-10072.9, -17840.1, -2.16801);
   ent.v["angles"] = (270, 0, 0);

@@ -969,22 +969,22 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
       continue;
     }
 
-    if(isDefined(mod_button) && !level.player ButtonPressed(mod_button)) {
+    if(isDefined(mod_button) && !level.player buttonPressed(mod_button)) {
       wait(0.05);
       continue;
-    } else if(isDefined(no_mod_button) && level.player ButtonPressed(no_mod_button)) {
+    } else if(isDefined(no_mod_button) && level.player buttonPressed(no_mod_button)) {
       wait(0.05);
       continue;
     }
 
-    if(use_attackbutton && level.player AttackButtonPressed()) {
+    if(use_attackbutton && level.player attackButtonPressed()) {
       level notify(notify_name, "fire");
       wait(0.1);
       continue;
     }
 
     for(i = 0; i < buttons.size; i++) {
-      if(level.player ButtonPressed(buttons[i])) {
+      if(level.player buttonPressed(buttons[i])) {
         level notify(notify_name, buttons[i]);
         wait(0.1);
         break;

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\pel1a_fx.csc
+***********************************************/
+
 main() {
-  // CreateFX entities placed: 148
   ent = clientscripts\_fx::createOneshotEffect("battlefield_smokebank_lg_white_w");
   ent.v["origin"] = (26098.5, -4136.04, -72);
   ent.v["angles"] = (274, 90, -90);

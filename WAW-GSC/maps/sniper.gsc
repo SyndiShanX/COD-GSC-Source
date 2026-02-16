@@ -598,7 +598,7 @@ main() {
       flag_clear("did_noscope");
       level endon("said_noscope");
       while(1) {
-        if(level.player AdsButtonPressed()) {
+        if(level.player adsButtonPressed()) {
           flag_set("player_is_ads");
           wait 1;
         } else {

@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createart\mp_subway_art.gsc
+***********************************************/
+
 main() {
   level.tweakfile = true;
-
-  //* Fog section *
 
   setDvar("scr_fog_exp_halfplane", "3759.28");
   setDvar("scr_fog_exp_halfheight", "243.735");
@@ -24,5 +26,3 @@ main() {
 
   setVolFog(500, 1200, 27.9, 780, 0.48, 0.46, 0.42, 0);
 }
-
-// setVolFog(<startDist>, <halfwayDist>, <halfwayHeight>, <baseHeight>, <red>, <green>, <blue>, <transition time>)

@@ -1,5 +1,9 @@
-/using_animtree ("dog");#include maps\mp\animscripts\shared;
-#include maps\mp\animscripts\utility;
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\dog_stop.gsc
+********************************************/
+
+/using_animtree ("dog");#include maps\mp\animscripts\shared;#include maps\mp\animscripts\utility;
 
 main() {
   debug_anim_print("dog_stop::main()");
@@ -34,8 +38,9 @@ isFacingEnemy(toleranceCosAngle) {
   vecToEnemy = self.enemy.origin - self.origin;
   distToEnemy = length(vecToEnemy);
 
-  if(distToEnemy < 1)
+  if(distToEnemy < 1) {
     return true;
+  }
 
   forward = anglesToForward(self.angles);
 
@@ -46,13 +51,13 @@ isFacingEnemy(toleranceCosAngle) {
 }
 
 randomAttackIdle() {
-  if(isFacingEnemy(-0.5)) // cos120
+  if(isFacingEnemy(-0.5)) {
     self set_orient_mode("face current");
-  else
+  } else {
     self set_orient_mode("face enemy");
+  }
 
   if(should_growl()) {
-    // just growl
     debug_anim_print("dog_stop::main() - Setting stop_attackidle_growl");
     self setanimstate("stop_attackidle_growl");
     return;
@@ -89,10 +94,12 @@ shouldAttackIdle() {
 }
 
 should_growl() {
-  if(isDefined(self.script_growl))
+  if(isDefined(self.script_growl)) {
     return true;
-  if(!isalive(self.enemy))
+  }
+  if(!isalive(self.enemy)) {
     return true;
+  }
   return !(self cansee(self.enemy));
 }
 

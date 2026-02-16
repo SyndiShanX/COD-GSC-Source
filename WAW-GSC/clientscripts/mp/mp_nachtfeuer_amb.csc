@@ -1,25 +1,12 @@
-//
-// file: mp_nachtfeuer_amb.csc
-// description: clientside ambient script for mp_nachtfeuer: setup ambient sounds, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/**************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_nachtfeuer_amb.csc
+**************************************************/
 
 #include clientscripts\mp\_utility;
 #include clientscripts\mp\_ambientpackage;
 
 main() {
-  //************************************************************************************************
-  //Ambient Packages
-  //************************************************************************************************
-
-  //declare an ambientpackage, and populate it with elements
-  //mandatory parameters are <package name>, <alias name>, <spawnMin>, <spawnMax>
-  //followed by optional parameters <distMin>, <distMax>, <angleMin>, <angleMax>
-
-  //***************
-  //Outdoor
-  //***************
-
   declareAmbientPackage("outdoor_pkg");
   addAmbientElement("outdoor_pkg", "ember", .1, .6, 50, 150);
 
@@ -31,18 +18,6 @@ main() {
 
   declareAmbientPackage("alleyway_pkg");
   addAmbientElement("alleyway_pkg", "ember", .1, .6, 50, 150);
-
-  //************************************************************************************************
-  // ROOMS
-  //************************************************************************************************
-
-  //explicitly activate the base ambientpackage, which is used when not touching any ambientPackageTriggers
-  //the other trigger based packages will be activated automatically when the player is touching them
-  //the same pattern is followed for setting up ambientRooms
-
-  //***************
-  //Outdoor
-  //***************
 
   declareAmbientRoom("outdoor_room");
   setAmbientRoomReverb("outdoor_room", "quarry", .8, .6);
@@ -58,11 +33,6 @@ main() {
 
   declareAmbientRoom("alleyway_room");
   setAmbientRoomReverb("alleyway_room", "quarry", 1, .8);
-
-  //************************************************************************************************
-  //ACTIVATE DEFAULT AMBIENT SETTINGS
-  //************************************************************************************************
-
 
   activateAmbientPackage(0, "outdoor_pkg", 0);
   activateAmbientRoom(0, "outdoor_room", 0);

@@ -1,3 +1,8 @@
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\dog_combat.gsc
+**********************************************/
+
 #include common_scripts\utility;
 #include maps\mp\animscripts\shared;
 #include maps\mp\animscripts\utility;
@@ -14,8 +19,9 @@ main() {
     return;
   }
 
-  if(isPlayer(self.enemy))
+  if(isPlayer(self.enemy)) {
     self meleeBiteAttackPlayer(self.enemy);
+  }
 }
 
 combatIdle() {
@@ -37,8 +43,6 @@ combatIdle() {
 
   self notify("combatIdleEnd");
 }
-
-// when player is in melee sequence, other dogs need to move away
 combatIdlePreventOverlappingPlayer() {
   self endon("killanimscript");
   self endon("combatIdleEnd");
@@ -46,40 +50,39 @@ combatIdlePreventOverlappingPlayer() {
   while(1) {
     wait 0.1;
 
-    if(!isDefined(self.enemy))
+    if(!isDefined(self.enemy)) {
       continue;
+    }
 
-    if(!isDefined(self.enemy.syncedMeleeTarget) || self.enemy.syncedMeleeTarget == self)
+    if(!isDefined(self.enemy.syncedMeleeTarget) || self.enemy.syncedMeleeTarget == self) {
       continue;
+    }
 
     offsetVec = self.enemy.origin - self.origin;
 
-    if(offsetVec[2] * offsetVec[2] > 6400)
+    if(offsetVec[2] * offsetVec[2] > 6400) {
       continue;
+    }
 
     offsetVec = (offsetVec[0], offsetVec[1], 0);
 
     offset = length(offsetVec);
 
-    if(offset < 1)
+    if(offset < 1) {
       offsetVec = anglesToForward(self.angles);
+    }
 
     if(offset < 30) {
       offsetVec = vectorscale(offsetVec, 3 / offset);
       self teleport(self.origin - offsetVec);
     }
-
   }
 }
-
-// prevent multiple dogs attacking at the same time and overlapping
 shouldWaitInCombatIdle() {
   assert(isDefined(self.enemy) && isalive(self.enemy));
 
   return isDefined(self.enemy.dogAttackAllowTime) && (gettime() < self.enemy.dogAttackAllowTime);
 }
-
-// call on target
 setNextDogAttackAllowTime(time) {
   self.dogAttackAllowTime = gettime() + time;
 }
@@ -88,8 +91,9 @@ meleeBiteAttackPlayer(player) {
   attackRangeBuffer = 30;
 
   for(;;) {
-    if(!isalive(self.enemy))
+    if(!isalive(self.enemy)) {
       break;
+    }
 
     meleeRange = self.meleeAttackDist + attackRangeBuffer;
 
@@ -116,9 +120,9 @@ meleeBiteAttackPlayer(player) {
 
     self clearpitchorient();
 
-    if(getdvarint("debug_dog_sound"))
+    if(getdvarint("debug_dog_sound")) {
       iprintln("dog " + (self getentnum()) + " attack player " + getTime());
-
+    }
 
     player setNextDogAttackAllowTime(200);
 
@@ -127,8 +131,6 @@ meleeBiteAttackPlayer(player) {
       level.dogMeleePlayerCounter++;
 
       if(use_low_attack()) {
-        // this is a hack using an existing anim to try and do a short range
-        // ground based attack
         self animMode("angle deltas");
         self setanimstate("combat_attack_player_close_range");
 
@@ -137,7 +139,7 @@ meleeBiteAttackPlayer(player) {
 
         self animMode("gravity");
       } else {
-        // 1.6 is about as big as you want to go or the dog anim will "stall"attack_time = 1.2 + randomfloat(0.4);
+        attack_time = 1.2 + randomfloat(0.4);
         debug_anim_print("dog_combat::meleeBiteAttackPlayer() - Settingcombat_run_attack");
         self setanimstate("combat_attack_run");
         self maps\mp\animscripts\shared::DoNoteTracksForTime(attack_time, "done", ::handleMeleeBiteAttackNoteTracks, player);
@@ -159,8 +161,9 @@ meleeBiteAttackPlayer(player) {
 
     self.safeToChangeScript = true;
 
-    if(checkEndCombat(meleeRange))
+    if(checkEndCombat(meleeRange)) {
       break;
+    }
   }
 
   self.safeToChangeScript = true;
@@ -172,11 +175,11 @@ doMeleeAfterWait(time) {
 
   wait(time);
 
-  // not useing angles on the melee hit so it will always hit
   hitEnt = self melee();
   if(isDefined(hitEnt)) {
-    if(isPlayer(hitEnt))
+    if(isPlayer(hitEnt)) {
       hitEnt shellshock("dog_bite", 1);
+    }
   }
 }
 
@@ -191,8 +194,9 @@ handleMeleeBiteAttackNoteTracks(note, player) {
       hitEnt = self melee(anglesToForward(self.angles));
 
       if(isDefined(hitEnt)) {
-        if(isPlayer(hitEnt))
+        if(isPlayer(hitEnt)) {
           hitEnt shellshock("dog_bite", 1);
+        }
       } else {
         attackMiss();
         return true;
@@ -201,11 +205,8 @@ handleMeleeBiteAttackNoteTracks(note, player) {
     break;
 
     case "stop_tracking": {
-      // best guess
       melee_time = 200;
 
-      // how much longer until the bite
-      // bit of a hack solution
       if(!isDefined(level.dogMeleeBiteAttackTime)) {
         level.dogMeleeBiteAttackTimeStart = GetTime();
       } else {
@@ -230,6 +231,7 @@ handleMeleeFinishAttackNoteTracks(note, player) {
       hitEnt = self melee(anglesToForward(self.angles));
       if(isDefined(hitEnt) && isalive(player)) {
         if(hitEnt == player) {
+          {}
           break;
         }
       } else {
@@ -257,11 +259,8 @@ handleMeleeFinishAttackNoteTracks(note, player) {
       break;
 
     case "stop_tracking": {
-      // best guess
       melee_time = 200;
 
-      // how much longer until the bite
-      // bit of a hack solution
       if(!isDefined(level.dogMeleeFinishAttackTime)) {
         level.dogMeleeFinishAttackTimeStart = GetTime();
       } else {
@@ -292,8 +291,9 @@ orientToPlayerDeadReckoning(player, time_till_bite) {
 }
 
 checkEndCombat(meleeRange) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
   distToTargetSq = distanceSquared(self.origin, self.enemy.origin);
 
@@ -333,20 +333,14 @@ prepareAttackPlayer(player) {
     self thread attackTeleportThread(offset);
   }
 
-
   if(maps\mp\_dogs::dog_get_dvar_int("debug_dog_attack", "0")) {
     teleported = "";
     if(distance_ok && !use_low_attack()) {
       teleported = "Teleported";
     }
-
-    //println("Attack Target - Dist: " + distanceToTarget + " Stance: " + self.enemy_attack_start_stance + " " + teleported);
   }
 
-
 }
-
-// make up for error in intial attack jump position
 attackTeleportThread(offset) {
   self endon("death");
   self endon("killanimscript");
@@ -359,7 +353,7 @@ attackTeleportThread(offset) {
 }
 
 player_attacked() {
-  return isalive(self) && (self MeleeButtonPressed());
+  return isalive(self) && (self meleeButtonPressed());
 }
 
 set_melee_timer(player) {
@@ -372,20 +366,20 @@ clear_player_attacked_by_dog_on_death(player) {
   player.attacked_by_dog = undefined;
 }
 
-
 dog_cant_kill_in_one_hit(player) {
-  // right now we want the dogs not to do the singleplayer "instant-kill"return true;
+  return true;
 
   if(isDefined(player.dogs_dont_instant_kill)) {
     assertex(player.dogs_dont_instant_kill, "Dont set player.dogs_dont_instant_kill to false, set to undefined");
     return true;
   }
 
-  if(getTime() - level.lastDogMeleePlayerTime > 8000)
+  if(getTime() - level.lastDogMeleePlayerTime > 8000) {
     level.dogMeleePlayerCounter = 0;
+  }
 
   return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
-    player.health > 25; // little more than the damage one melee dog bite hit will do
+    player.health > 25;
 }
 
 dog_melee_death(player) {
@@ -393,14 +387,11 @@ dog_melee_death(player) {
   self endon("dog_no_longer_melee_able");
   pressed = false;
 
-  // change this number for difficulty level:
   press_time = anim.dog_presstime;
-
 
   self waittill("dog_early_notetrack");
 
   while(player player_attacked()) {
-    // wait until the player lets go of the button, if he's holding it
     wait(0.05);
   }
 
@@ -409,6 +400,7 @@ dog_melee_death(player) {
       if(player player_attacked()) {
         pressed = true;
         if(isDefined(self.melee_able_timer) && isalive(player)) {
+          {}
           if(gettime() - self.melee_able_timer <= press_time) {
             player.player_view.custom_dog_save = "neck_snap";
             self notify("melee_stop");
@@ -436,7 +428,6 @@ dog_melee_death(player) {
         debug_anim_print("dog_combat::dog_melee_death() - Settingcombat_player_neck_miss");
         self setanimstate("combat_player_neck_miss");
 
-        // once player clicks, if it is at the wrong time, he does not get another chance.
         return;
       }
     } else {
@@ -497,7 +488,7 @@ killplayer(player) {
 
   damage = player.health + 1;
 
-  if(!isalive(player))
+  if(!isalive(player)) {
     return;
-
+  }
 }

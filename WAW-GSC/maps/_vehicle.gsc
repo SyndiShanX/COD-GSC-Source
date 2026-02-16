@@ -5012,7 +5012,7 @@ twobuttonspressed(button1, button2) {
   if(!isDefined(players[0])) {
     return false;
   }
-  return players[0] buttonpressed(button1) && players[0] buttonpressed(button2);
+  return players[0] buttonPressed(button1) && players[0] buttonPressed(button2);
 }
 
 vehicle_load_ai(ai) {

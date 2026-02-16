@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\createfx\mp_shrine_fx.csc
+******************************************************/
+
 main() {
-  // CreateFX entities placed: 78
   ent = clientscripts\mp\_fx::createOneshotEffect("mp_smoke_column_short");
   ent.v["origin"] = (-1830.18, -2581.15, -38.5716);
   ent.v["angles"] = (270, 0, -30);

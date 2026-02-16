@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createfx\mp_subway_fx.gsc
+*********************************************/
+
 main() {
-  // CreateFX entities placed: 332
   ent = maps\mp\_utility::createOneshotEffect("mp_ray_light_lg");
   ent.v["origin"] = (-1431.9, 802.699, 429);
   ent.v["angles"] = (285.579, 217.353, -38.6798);

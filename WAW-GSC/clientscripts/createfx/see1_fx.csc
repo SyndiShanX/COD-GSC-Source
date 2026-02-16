@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\see1_fx.csc
+**********************************************/
+
 main() {
-  // CreateFX entities placed: 454
   ent = clientscripts\_fx::createOneshotEffect("fog_rolling_thick");
   ent.v["origin"] = (2633.41, -6449.83, -692.108);
   ent.v["angles"] = (270, 359.821, 174.179);

@@ -1,9 +1,12 @@
+/******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\animscripts\shared.gsc
+******************************************/
+
 #include common_scripts\utility;
 #include maps\mp\animscripts\utility;
 #include maps\mp\_utility;
 
-// no longer playing sounds on the server but we still want the returns to tell
-// the script if a non-sound notify needs to be handled
 HandleDogSoundNoteTracks(note) {
   if(note == "sound_dogstep_run_default") {
     return true;
@@ -11,8 +14,9 @@ HandleDogSoundNoteTracks(note) {
 
   prefix = getsubstr(note, 0, 5);
 
-  if(prefix != "sound")
+  if(prefix != "sound") {
     return false;
+  }
 
   return true;
 }
@@ -22,14 +26,15 @@ growling() {
 }
 
 HandleNoteTrack(note, flagName, customFunction, var1) {
-  if(getdvarint("debug_dog_notetracks"))
+  if(getdvarint("debug_dog_notetracks")) {
     println("dog notetrack: " + flagName + " " + note + " " + GetTime());
+  }
 
-
-  if(isAI(self) && self.type == "dog")
-    if(HandleDogSoundNoteTracks(note))
+  if(isAI(self) && self.type == "dog") {
+    if(HandleDogSoundNoteTracks(note)) {
       return;
-
+    }
+  }
   switch (note) {
     case "end":
     case "finish":
@@ -38,36 +43,36 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
     default:
       if(isDefined(customFunction)) {
         if(!isDefined(var1)) {
+          {}
           return [[customFunction]](note);
         } else {
+          {}
           return [[customFunction]](note, var1);
         }
       }
       break;
   }
 }
-
-// DoNoteTracks waits for and responds to standard noteTracks on the animation, returning when it gets an "end" or a "finish"// For level scripts, a pointer to a custom function should be passed as the second argument, which handles notetracks not
-// already handled by the generic function. This call should take the form DoNoteTracks(flagName, ::customFunction);
-// The custom function will be called for each notetrack not recognized, and will pass the notetrack name. Note that this
-// function could be called multiple times for a single animation.
 DoNoteTracks(flagName, customFunction, var1) {
   for(;;) {
     self waittill(flagName, note);
 
-    if(!isDefined(note))
+    if(!isDefined(note)) {
       note = "undefined";
+    }
 
     val = self HandleNoteTrack(note, flagName, customFunction, var1);
 
-    if(isDefined(val))
+    if(isDefined(val)) {
       return val;
+    }
   }
 }
 
 DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, var1) {
-  if(isdefined(killString))
+  if(isDefined(killString)) {
     self endon(killString);
+  }
   self endon("killanimscript");
 
   for(;;) {
@@ -86,8 +91,6 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, va
     }
   }
 }
-
-// Don't call this function except as a thread you're going to kill - it lasts forever.
 DoNoteTracksForever(flagName, killString, customFunction, var1) {
   DoNoteTracksForeverProc(::DoNoteTracks, flagName, killString, customFunction, var1);
 }
@@ -96,8 +99,6 @@ DoNoteTracksForTimeProc(doNoteTracksForeverFunc, time, flagName, customFunction,
   ent endon("stop_notetracks");
   [[doNoteTracksForeverFunc]](flagName, undefined, customFunction, var1);
 }
-
-// Designed for using DoNoteTracks on looping animations, so you can wait for a time instead of the "end" parameter
 DoNoteTracksForTime(time, flagName, customFunction, var1) {
   ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
@@ -117,7 +118,7 @@ trackLoop() {
 
   prevYawDelta = 0;
   prevPitchDelta = 0;
-  maxYawDeltaChange = 5; // max change in yaw in 1 frame
+  maxYawDeltaChange = 5;
   maxPitchDeltaChange = 5;
 
   pitchAdd = 0;
@@ -128,10 +129,12 @@ trackLoop() {
     self.shootEnt = self.enemy;
   } else {
     doMaxAngleCheck = true;
-    if(self.a.script == "cover_crouch" && isDefined(self.a.coverMode) && self.a.coverMode == "lean")
+    if(self.a.script == "cover_crouch" && isDefined(self.a.coverMode) && self.a.coverMode == "lean") {
       pitchAdd = -1 * anim.coverCrouchLeanPitch;
-    if((self.a.script == "cover_left" || self.a.script == "cover_right") && isDefined(self.a.cornerMode) && self.a.cornerMode == "lean")
+    }
+    if((self.a.script == "cover_left" || self.a.script == "cover_right") && isDefined(self.a.cornerMode) && self.a.cornerMode == "lean") {
       yawAdd = self.coverNode.angles[1] - self.angles[1];
+    }
   }
 
   yawDelta = 0;
@@ -145,8 +148,9 @@ trackLoop() {
     selfShootAtPos = (self.origin[0], self.origin[1], self getEye()[2]);
 
     shootPos = undefined;
-    if(isDefined(self.enemy))
+    if(isDefined(self.enemy)) {
       shootPos = self.enemy getShootAtPos();
+    }
 
     if(!isDefined(shootPos)) {
       yawDelta = 0;
@@ -167,26 +171,30 @@ trackLoop() {
       yawDelta = 0;
       pitchDelta = 0;
     } else {
-      if(yawDelta > self.rightAimLimit)
+      if(yawDelta > self.rightAimLimit) {
         yawDelta = self.rightAimLimit;
-      else if(yawDelta < self.leftAimLimit)
+      } else if(yawDelta < self.leftAimLimit) {
         yawDelta = self.leftAimLimit;
-      if(pitchDelta > self.upAimLimit)
+      }
+      if(pitchDelta > self.upAimLimit) {
         pitchDelta = self.upAimLimit;
-      else if(pitchDelta < self.downAimLimit)
+      } else if(pitchDelta < self.downAimLimit) {
         pitchDelta = self.downAimLimit;
+      }
     }
 
     if(firstFrame) {
       firstFrame = false;
     } else {
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > maxYawDeltaChange)
+      if(abs(yawDeltaChange) > maxYawDeltaChange) {
         yawDelta = prevYawDelta + maxYawDeltaChange * sign(yawDeltaChange);
+      }
 
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > maxPitchDeltaChange)
+      if(abs(pitchDeltaChange) > maxPitchDeltaChange) {
         pitchDelta = prevPitchDelta + maxPitchDeltaChange * sign(pitchDeltaChange);
+      }
     }
 
     prevYawDelta = yawDelta;
@@ -219,8 +227,6 @@ trackLoop() {
     wait(0.05);
   }
 }
-
-//setAnimAimWeight works just like setanimlimited on an imaginary anim node that affects the four aiming directions.
 setAnimAimWeight(goalweight, goaltime) {
   if(!isDefined(goaltime) || goaltime <= 0) {
     self.a.aimweight = goalweight;

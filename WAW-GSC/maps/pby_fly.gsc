@@ -677,7 +677,7 @@ player_controlled_20mm_cannon() {
     }
 
     while(level.player.current_seat == "pby_frontgun" && !flag("pby_out_of_ammo")) {
-      while(!level.player FragButtonPressed()) {
+      while(!level.player fragButtonPressed()) {
         wait(0.05);
       }
 
@@ -739,7 +739,7 @@ player_controlled_20mm_cannon() {
   }
 
   while(level.player.current_seat == "pby_frontgun") {
-    while(!level.player FragButtonPressed()) {
+    while(!level.player fragButtonPressed()) {
       wait(0.05);
     }
 
@@ -751,7 +751,7 @@ player_controlled_20mm_cannon() {
     bullet_sound playSound("dryfire_rifle_plr", "click_done");
     bullet_sound waittill("click_done");
 
-    while(level.player FragButtonPressed()) {
+    while(level.player fragButtonPressed()) {
       wait(0.05);
     }
 
@@ -1275,7 +1275,7 @@ event1_dialogue_2() {
 thumb_in_ass_dialogue() {
   i = 0;
 
-  while(!(level.player AttackButtonPressed()) && i < 6 && !flag("20mm_shot")) {
+  while(!(level.player attackButtonPressed()) && i < 6 && !flag("20mm_shot")) {
     i += 0.05;
     wait(0.05);
   }
@@ -6889,7 +6889,7 @@ music_notify_continue_trigger_pressed(_wait_string, _end_string) {
   level endon(_end_string);
   self waittill(_wait_string);
 
-  while(!level.player AttackButtonPressed()) {
+  while(!level.player attackButtonPressed()) {
     wait(0.05);
   }
   level notify("continue_music_state_changes");
@@ -6915,17 +6915,17 @@ event2_manage_the_ocean_water() {
 watch_for_player_shooting(important_string, type) {
   if(type == "flag") {
     while(!flag(important_string)) {
-      while(!level.player AttackButtonPressed() && !level.player FragButtonPressed()) {
+      while(!level.player attackButtonPressed() && !level.player fragButtonPressed()) {
         wait(0.05);
       }
 
-      if(level.player AttackButtonPressed()) {
+      if(level.player attackButtonPressed()) {
         if(!level.player.in_transition) {
           flag_set(important_string);
         }
       }
 
-      if(level.player FragButtonPressed()) {
+      if(level.player fragButtonPressed()) {
         if(level.player.current_seat == "pby_frontgun" && !level.player.in_transition) {
           flag_set(important_string);
         }
@@ -9614,11 +9614,11 @@ out_of_ammo_sound(bone, end_notify) {
   bullet_sound waittill("click_done");
 
   while(1) {
-    if(level.player AttackButtonPressed()) {
+    if(level.player attackButtonPressed()) {
       bullet_sound playSound("dryfire_rifle_plr", "click_done");
       bullet_sound waittill("click_done");
 
-      while(level.player AttackButtonPressed()) {
+      while(level.player attackButtonPressed()) {
         wait(0.05);
       }
     } else {
@@ -9635,7 +9635,7 @@ pby_veh_fire_guns() {
   ammo_count = 0;
 
   while(1) {
-    if(level.player AttackButtonPressed()) {
+    if(level.player attackButtonPressed()) {
       if(level.player.current_seat == "pby_rightgun" && level.player.in_transition == false && self IsGunnerFiring(2)) {
         if(flag("pby_out_of_ammo")) {
           if(ammo_count < 8) {
@@ -10053,7 +10053,7 @@ turret_ads_reminder() {
 turret_ads_reminder_press() {
   level endon("turn off ads hint");
 
-  while(!(level.player AdsButtonPressed())) {
+  while(!(level.player adsButtonPressed())) {
     wait(0.05);
   }
 

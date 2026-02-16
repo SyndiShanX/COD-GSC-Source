@@ -1,12 +1,10 @@
-//
-// file: mp_docks_fx.gsc
-// description: clientside fx script for mp_docks: setup, special fx functions, etc.
-// scripter: 		(initial clientside work - laufer)
-//
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_docks_fx.csc
+********************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
 precache_util_fx() {}
 
 precache_scripted_fx() {}
@@ -84,5 +82,4 @@ main() {
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();
   }
-
 }

@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_hangar.gsc
+**************************************/
+
 main() {
   maps\mp\mp_hangar_fx::main();
 
@@ -11,7 +16,6 @@ main() {
   maps\mp\mp_hangar_amb::main();
   maps\mp\_compass::setupMiniMap("compass_map_mp_hangar");
 
-  // If the team nationalites change in this file, // you must update the team nationality in the level's csc file as well!
   game["allies"] = "marines";
   game["axis"] = "japanese";
   game["attackers"] = "axis";
@@ -35,22 +39,15 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_HANGAR_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_HANGAR_E";
 
-  // Spawned Collision
   spawncollision("collision_wall_512x512x10", "collider", (-949.5, 22, 1045.25), (0, 270, 0));
   spawncollision("collision_wall_128x128x10", "collider", (-41, -136, 908), (0, 270, 0));
   spawncollision("collision_wall_512x512x10", "collider", (-384, -2451, 1136), (0, 0, 0));
-  //keep people from leaving the map by using a partner
   spawncollision("collision_wall_512x512x10", "collider", (-1613, -842, 852), (0, 270, 0));
-  //prevent players from going under the stairs in the admin bldg
   spawncollision("collision_wall_32x32x10", "collider", (-366, -2026, 652), (0, 270, 0));
-  //keep people from accessing the lamp which can be used to access the roof
   spawncollision("collision_geo_32x32x128", "collider", (-320, -2480, 892), (0, 0, 0));
 
-  //prevent 2 player access to roof of mess hall
   spawncollision("collision_geo_64x64x128", "collider", (64, -80, 848), (0, 0, 0));
 
-
-  // enable new spawning system
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
 
   createSpawnpoint("mp_ctf_spawn_allies", (842, 1096, 676), 270);
@@ -92,16 +89,17 @@ main() {
   createSpawnpoint("mp_ctf_spawn_axis", (1121, -2562, 756), 153.4);
   createSpawnpoint("mp_ctf_spawn_axis", (1179, -2704, 756), 180);
   createSpawnpoint("mp_ctf_spawn_axis", (1417, -2515, 756), 90);
-
 }
 
 createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isDefined(level.extraSpawnpoints))
+  if(!isDefined(level.extraSpawnpoints)) {
     level.extraSpawnpoints = [];
-  if(!isDefined(level.extraSpawnpoints[classname]))
+  }
+  if(!isDefined(level.extraSpawnpoints[classname])) {
     level.extraSpawnpoints[classname] = [];
+  }
   level.extraSpawnpoints[classname][level.extraSpawnpoints[classname].size] = spawnpoint;
 }

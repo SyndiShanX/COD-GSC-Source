@@ -1,20 +1,21 @@
-// Client side audio functionality
+/***************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_audio.csc
+***************************************/
 
 #include clientscripts\mp\_utility;
 
 soundRandom_Thread(localClientNum, randSound) {
-  if(!isdefined(randSound.script_wait_min)) {
+  if(!isDefined(randSound.script_wait_min)) {
     randSound.script_wait_min = 1;
   }
-  if(!isdefined(randSound.script_wait_max)) {
+  if(!isDefined(randSound.script_wait_max)) {
     randSound.script_wait_max = 3;
   }
-
 
   if(getdvarint("debug_audio") > 0) {
     println("*** Client : SR ( " + randSound.script_wait_min + " - " + randSound.script_wait_max + ")");
   }
-
 
   while(1) {
     pause = RandomFloatRange(randSound.script_wait_min, randSound.script_wait_max);
@@ -31,9 +32,6 @@ soundRandom_Thread(localClientNum, randSound) {
     }
   }
 }
-
-// self is the trigger
-// logic for playing the sound on a loop, looping sound must be set to looping in the CSV
 soundLoop_Thread(localClientNum, loopSound) {
   clientscripts\mp\_utility::loop_fx_sound(localClientNum, loopSound.script_sound, loopSound.origin);
 
@@ -45,9 +43,6 @@ soundLoop_Thread(localClientNum, loopSound) {
   }
 
 }
-
-// self is the script origin mover
-// the crazy math Alex C wrote on COD3, convered to GSC for COD5
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   self endon("end line sound");
 
@@ -70,12 +65,12 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
 }
 
 line_sound_player() {
-  if(isdefined(self.script_looping)) {
+  if(isDefined(self.script_looping)) {
     self.fake_ent = spawnfakeent(self.localClientNum);
     setfakeentorg(self.localClientNum, self.fake_ent, self.origin);
     playLoopSound(self.localClientNum, self.fake_ent, self.script_sound);
   } else {
-    playsound(self.localClientNum, self.script_sound, self.origin);
+    playSound(self.localClientNum, self.script_sound, self.origin);
   }
 }
 
@@ -90,16 +85,13 @@ debug_line_emitter() {
     }
 
     wait(0.01);
-
   }
 }
 
 move_sound_along_line() {
   closest_dist = undefined;
 
-
   self thread debug_line_emitter();
-
 
   while(1) {
     self closest_point_on_line_to_point(getlocalclientpos(0), self.start, self.end);
@@ -108,7 +100,6 @@ move_sound_along_line() {
       setfakeentorg(self.localClientNum, self.fake_ent, self.origin);
     }
 
-    //Update the sound based on distance to the point
     closest_dist = DistanceSquared(getlocalclientpos(0), self.origin);
 
     if(closest_dist > 1024 * 1024) {
@@ -133,8 +124,9 @@ lineEmitter_Thread(localClientNum) {
 
   endOfLineEntity = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     endOfLineEntity = getstruct(self.target, "targetname");
+  }
 
   if(isDefined(endOfLineEntity)) {
     soundMover = spawnStruct();
@@ -153,12 +145,7 @@ lineEmitter_Thread(localClientNum) {
 
     soundMover line_sound_player();
     soundMover thread move_sound_along_line();
-
   }
-  /*	else
-  	{
-  			assertmsg( "_audio::spawn_line_sound(): Could not find end of line entity! Aborting..." );
-  	}*/
 }
 
 startSoundRandoms(localClientNum) {

@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\createfx\pel2_fx.csc
+**********************************************/
+
 main() {
-  // CreateFX entities placed: 503
   ent = clientscripts\_fx::createOneshotEffect("insect_swarm");
   ent.v["origin"] = (2113.43, -16350.7, -142);
   ent.v["angles"] = (270, 0, 0);

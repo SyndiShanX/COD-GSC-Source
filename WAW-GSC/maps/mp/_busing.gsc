@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_busing.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 busInit() {
@@ -5,12 +10,11 @@ busInit() {
 
   level.busState = "";
   registerClientSys("busCmd");
-
-  //setBusState("map_load");
 }
 
 setBusState(state) {
-  if(level.busState != state)
+  if(level.busState != state) {
     setClientSysState("busCmd", state);
+  }
   level.busState = state;
 }

@@ -1,47 +1,10 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\gametypes\dm.gsc
+**************************************/
+
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
-
-/*
-	Deathmatch
-	Objective: 	Score points by eliminating other players
-	Map ends:	When one player reaches the score limit, or time limit is reached
-	Respawning:	No wait / Away from other players
-
-	Level requirements
-	------------------ Spawnpoints:
-			classname		mp_dm_spawn
-			All players spawn from these. The spawnpoint chosen is dependent on the current locations of enemies at the time of spawn.
-			Players generally spawn away from enemies.
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-
-	Level script requirements
-	------------------------- Team Definitions:
-			game["allies"] = "marines";
-			game["axis"] = "japanese";
-			Because Deathmatch doesn't have teams with regard to gameplay or scoring, this effectively sets the available weapons.
-
-		If using minefields or exploders:
-			maps\mp\_load::main();
-
-	Optional level script settings
-	------------------------------ Soldier Type and Variation:
-			game["american_soldiertype"] = "normandy";
-			game["german_soldiertype"] = "normandy";
-			This sets what character models are used for each nationality on a particular map.
-
-			Valid settings:
-				american_soldiertype	normandy
-				british_soldiertype		normandy, africa
-				russian_soldiertype		coats, padded
-				german_soldiertype		normandy, africa, winterlight, winterdark
-*/
-
-/*QUAKED mp_dm_spawn (1.0 0.5 0.0) (-16 -16 0) (16 16 72)
-Players spawn away from enemies at one of these positions.*/
 
 main() {
   maps\mp\gametypes\_globallogic::init();
@@ -89,7 +52,6 @@ onStartGameType() {
   allowed[0] = "dm";
   maps\mp\gametypes\_gameobjects::main(allowed);
 
-  // now that the game objects have been deleted place the influencers
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
 
   maps\mp\gametypes\_rank::registerScoreInfo("kill", 5);
@@ -104,7 +66,6 @@ onStartGameType() {
   level.displayRoundEndText = false;
   level.QuickMessageToAll = true;
 
-  // elimination style
   if(level.roundLimit != 1 && level.numLives) {
     level.overridePlayerScore = true;
     level.displayRoundEndText = true;
@@ -124,6 +85,7 @@ onSpawnPlayer() {
 }
 
 onEndGame(winningPlayer) {
-  if(isDefined(winningPlayer))
+  if(isDefined(winningPlayer)) {
     [[level._setPlayerScore]](winningPlayer, winningPlayer[[level._getPlayerScore]]() + 1);
+  }
 }

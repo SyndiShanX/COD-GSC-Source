@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_vodka_fx.gsc
+**************************************/
+
 #include maps\mp\_utility;
 
 main() {

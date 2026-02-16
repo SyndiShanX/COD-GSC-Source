@@ -1,8 +1,13 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_utility.gsc
+**************************************/
+
 #include common_scripts\utility;
 #include maps\mp\gametypes\_hud_util;
 
 triggerOff() {
-  if(!isdefined(self.realOrigin)) {
+  if(!isDefined(self.realOrigin)) {
     self.realOrigin = self.origin;
   }
 
@@ -19,10 +24,11 @@ triggerOn() {
 
 error(msg) {
   println("^c*ERROR* ", msg);
-  wait .05; // waitframe
+  wait .05;
 
-  if(getDvar("debug") != "1")
+  if(getDvar("debug") != "1") {
     assertmsg("This is a forced error - attach the log file");
+  }
 }
 
 vector_scale(vec, scale) {
@@ -36,20 +42,11 @@ vector_multiply(vec, vec2) {
   return vec;
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: array_remove( <ents> , <remover> )""Summary: Returns < ents > array minus < remover > ""Module: Array""CallOn: ""MandatoryArg: <ents> : array to remove < remover > from""MandatoryArg: <remover> : entity to remove from the array""Example: ents = array_remove( ents, guy );""SPMP: singleplayer"///ScriptDocEnd
- =============
-*/
 array_remove(ents, remover, keepArrayKeys) {
   newents = [];
-  // if this array is a simple numbered array - array keys will return the array in a reverse order
-  // causing the array that is returned from this function to be flipped, that is an un expected
-  // result, which is why we're counting down in the for loop instead of the usual counting up
+
   keys = getArrayKeys(ents);
 
-  //GLocke 2/28/08 - added ability to keep array keys from previous array
   if(isDefined(keepArrayKeys)) {
     for(i = keys.size - 1; i >= 0; i--) {
       if(ents[keys[i]] != remover) {
@@ -60,7 +57,6 @@ array_remove(ents, remover, keepArrayKeys) {
     return newents;
   }
 
-  // Returns array with index of ints
   for(i = keys.size - 1; i >= 0; i--) {
     if(ents[keys[i]] != remover) {
       newents[newents.size] = ents[keys[i]];
@@ -84,12 +80,6 @@ add_to_array(array, ent) {
   return array;
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: array_randomize( <array> )""Summary: Randomizes the array and returns the new array.""Module: Array""CallOn: ""MandatoryArg: <array> : Array to be randomized.""Example: roof_nodes = array_randomize( roof_nodes );""SPMP: both"///ScriptDocEnd
- =============
- */
 array_randomize(array) {
   for(i = 0; i < array.size; i++) {
     j = RandomInt(array.size);
@@ -100,28 +90,14 @@ array_randomize(array) {
   return array;
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: spawn_array_struct()""Summary: Creates a struct with an attribute named "a" which is an empty array.Array structs are useful for passing around arrays by reference.""Module: Array""CallOn: ""Example: fxemitters = spawn_struct_array(); fxemitters.a[ fxemitters.size ] = new_emitter;""SPMP: both"///ScriptDocEnd
- =============
- */
 spawn_array_struct() {
   s = spawnStruct();
   s.a = [];
   return s;
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: append_array_struct( <dst>, <src> )""Summary: Append the array elements in the <src> (2nd) array struct parameter to the array in the <dst> (1st) array struct parameter.""Module: Array""CallOn: ""MandatoryArg: <dst> : Destination - Elements from <src>.a[] are appended to <dst>.a[]""MandatoryArg: <src> : Source - Elements from <src>.a[] are appended to <dst>.a[]""Example: players = spawn_array_struct(); worst_enemies = built_worst_enemies(); append_array_struct( players, worst_enemies ;""SPMP: both"///ScriptDocEnd
- =============
- */
 append_array_struct(
-  dst_s, ///< struct.a[]
-  src_s) ///< struct.a[]
-{
+  dst_s, src_s) {
   for(i = 0; i < src_s.a.size; i++) {
     dst_s.a[dst_s.a.size] = src_s.a[i];
   }
@@ -145,7 +121,7 @@ cannon_effect() {
   }
 
   min_delay = self.v["delay"];
-  max_delay = self.v["delay"] + 0.001; // cant randomfloatrange on the same #
+  max_delay = self.v["delay"] + 0.001;
 
   if(isDefined(self.v["delay_min"])) {
     min_delay = self.v["delay_min"];
@@ -189,7 +165,7 @@ brush_delete() {
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   } else {
-    wait(.05); // so it disappears after the replacement appears
+    wait(.05);
   }
 
   if(!isDefined(self.model)) {
@@ -218,7 +194,7 @@ brush_delete() {
     self.v["exploder"] = undefined;
   }
 
-  waittillframeend; // so it hides stuff after it shows the new stuff
+  waittillframeend;
   self.model delete();
 }
 
@@ -306,8 +282,6 @@ getPlant() {
 
   trace = bulletTrace(traceorigins[0], (traceorigins[0] + (0, 0, -18)), false, undefined);
   if(trace["fraction"] < 1) {
-    //println("^6Using traceorigins[0], tracefraction is", trace["fraction"]);
-
     temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
@@ -316,8 +290,6 @@ getPlant() {
 
   trace = bulletTrace(traceorigins[1], (traceorigins[1] + (0, 0, -18)), false, undefined);
   if(trace["fraction"] < 1) {
-    //println("^6Using traceorigins[1], tracefraction is", trace["fraction"]);
-
     temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
@@ -334,22 +306,15 @@ getPlant() {
   for(i = 0; i < traceorigins.size; i++) {
     trace = bulletTrace(traceorigins[i], (traceorigins[i] + (0, 0, -1000)), false, undefined);
 
-    //ent[i] = spawn("script_model",(traceorigins[i]+(0, 0, -2)));
-    //ent[i].angles = (0, 180, 180);
-    //ent[i] setModel("105");
-
-    //println("^6trace ", i ," fraction is ", trace["fraction"]);
-
     if(!isDefined(besttracefraction) || (trace["fraction"] < besttracefraction)) {
       besttracefraction = trace["fraction"];
       besttraceposition = trace["position"];
-
-      //println("^6besttracefraction set to ", besttracefraction, " which is traceorigin[", i, "]");
     }
   }
 
-  if(besttracefraction == 1)
+  if(besttracefraction == 1) {
     besttraceposition = self.origin;
+  }
 
   temp = spawnStruct();
   temp.origin = besttraceposition;
@@ -361,49 +326,47 @@ orientToNormal(normal) {
   hor_normal = (normal[0], normal[1], 0);
   hor_length = length(hor_normal);
 
-  if(!hor_length)
+  if(!hor_length) {
     return (0, 0, 0);
+  }
 
   hor_dir = vectornormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
 
-  //println("^6hor_normal is ", hor_normal);
-  //println("^6hor_length is ", hor_length);
-  //println("^6hor_dir is ", hor_dir);
-  //println("^6neg_height is ", neg_height);
-  //println("^6tangent is ", tangent);
-  //println("^6plant_angle is ", plant_angle);
-
   return plant_angle;
 }
 
 array_levelthread(ents, process, var, excluders) {
   exclude = [];
-  for(i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++) {
     exclude[i] = false;
-
-  if(isdefined(excluders)) {
-    for(i = 0; i < ents.size; i++)
-      for(p = 0; p < excluders.size; p++)
-        if(ents[i] == excluders[p])
-          exclude[i] = true;
   }
 
+  if(isDefined(excluders)) {
+    for(i = 0; i < ents.size; i++) {
+      for(p = 0; p < excluders.size; p++) {
+        if(ents[i] == excluders[p]) {
+          exclude[i] = true;
+        }
+      }
+    }
+  }
   for(i = 0; i < ents.size; i++) {
     if(!exclude[i]) {
-      if(isdefined(var))
+      if(isDefined(var)) {
         level thread[[process]](ents[i], var);
-      else
+      } else {
         level thread[[process]](ents[i]);
+      }
     }
   }
 }
 
 set_ambient(track) {
   level.ambient = track;
-  if((isdefined(level.ambient_track)) && (isdefined(level.ambient_track[track]))) {
+  if((isDefined(level.ambient_track)) && (isDefined(level.ambient_track[track]))) {
     ambientPlay(level.ambient_track[track], 2);
     println("playing ambient track ", track);
   }
@@ -412,7 +375,6 @@ set_ambient(track) {
 deletePlacedEntity(entity) {
   entities = getEntArray(entity, "classname");
   for(i = 0; i < entities.size; i++) {
-    //println("DELETED: ", entities[i].classname);
     entities[i] delete();
   }
 }
@@ -421,31 +383,33 @@ playSoundOnPlayers(sound, team) {
   assert(isDefined(level.players));
 
   if(level.splitscreen) {
-    if(isDefined(level.players[0]))
+    if(isDefined(level.players[0])) {
       level.players[0] playLocalSound(sound);
+    }
   } else {
     if(isDefined(team)) {
       for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
-        if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
+        if(isDefined(player.pers["team"]) && (player.pers["team"] == team)) {
           player playLocalSound(sound);
+        }
       }
     } else {
-      for(i = 0; i < level.players.size; i++)
+      for(i = 0; i < level.players.size; i++) {
         level.players[i] playLocalSound(sound);
+      }
     }
   }
 }
 
 get_player_height() {
-  return 70.0; // inches, see bg_pmove.cpp::playerMins/playerMaxs
+  return 70.0;
 }
 
 IsBulletImpactMOD(sMeansOfDeath) {
   return IsSubStr(sMeansOfDeath, "BULLET") || sMeansOfDeath == "MOD_HEAD_SHOT";
 }
 
-//entities_s.a[]
 get_team_alive_players_s(teamName) {
   teamPlayers_s = spawn_array_struct();
 
@@ -460,7 +424,6 @@ get_team_alive_players_s(teamName) {
   return teamPlayers_s;
 }
 
-//entities_s.a[]
 get_all_alive_players_s() {
   allPlayers_s = spawn_array_struct();
 
@@ -483,13 +446,15 @@ waitRespawnButton() {
   self endon("disconnect");
   self endon("end_respawn");
 
-  while(self useButtonPressed() != true)
+  while(self useButtonPressed() != true) {
     wait .05;
+  }
 }
 
 setLowerMessage(text, time) {
-  if(!isDefined(self.lowerMessage))
+  if(!isDefined(self.lowerMessage)) {
     return;
+  }
 
   if(isDefined(self.lowerMessageOverride) && text != &"") {
     text = self.lowerMessageOverride;
@@ -499,10 +464,11 @@ setLowerMessage(text, time) {
   self notify("lower_message_set");
   self.lowerMessage setText(text);
 
-  if(isDefined(time) && time > 0)
+  if(isDefined(time) && time > 0) {
     self.lowerTimer setTimer(time);
-  else
+  } else {
     self.lowerTimer setText("");
+  }
 
   self.lowerMessage fadeOverTime(0.05);
   self.lowerMessage.alpha = 1;
@@ -511,8 +477,9 @@ setLowerMessage(text, time) {
 }
 
 clearLowerMessage(fadetime) {
-  if(!isDefined(self.lowerMessage))
+  if(!isDefined(self.lowerMessage)) {
     return;
+  }
 
   self notify("lower_message_set");
 
@@ -537,8 +504,9 @@ printOnTeam(text, team) {
   assert(isDefined(level.players));
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       player iprintln(text);
+    }
   }
 }
 
@@ -546,8 +514,9 @@ printBoldOnTeam(text, team) {
   assert(isDefined(level.players));
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       player iprintlnbold(text);
+    }
   }
 }
 
@@ -555,8 +524,9 @@ printBoldOnTeamArg(text, team, arg) {
   assert(isDefined(level.players));
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       player iprintlnbold(text, arg);
+    }
   }
 }
 
@@ -564,8 +534,9 @@ printOnTeamArg(text, team, arg) {
   assert(isDefined(level.players));
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       player iprintln(text, arg);
+    }
   }
 }
 
@@ -573,8 +544,9 @@ printOnPlayers(text, team) {
   players = level.players;
   for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
-      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team))
+      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team)) {
         players[i] iprintln(text);
+      }
     } else {
       players[i] iprintln(text);
     }
@@ -586,7 +558,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
 
   shouldDoEnemySounds = false;
   if(isDefined(soundEnemy)) {
-    assert(shouldDoSounds); // can't have an enemy sound without a friendly sound
+    assert(shouldDoSounds);
     shouldDoEnemySounds = true;
   }
 
@@ -595,10 +567,11 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team)
+        if(playerteam == team) {
           player iprintln(printFriendly, printarg);
-        else if(playerteam == otherteam)
+        } else if(playerteam == otherteam) {
           player iprintln(printEnemy, printarg);
+        }
       }
     }
     if(shouldDoSounds) {
@@ -612,6 +585,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
         player = level.players[i];
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
+          {}
           if(playerteam == team) {
             player iprintln(printFriendly, printarg);
             player playLocalSound(soundFriendly);
@@ -626,6 +600,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
         player = level.players[i];
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
+          {}
           if(playerteam == team) {
             player iprintln(printFriendly, printarg);
             player playLocalSound(soundFriendly);
@@ -639,8 +614,9 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
 }
 
 _playLocalSound(soundAlias) {
-  if(level.splitscreen && self getEntityNumber() != 0)
+  if(level.splitscreen && self getEntityNumber() != 0) {
     return;
+  }
 
   self playLocalSound(soundAlias);
 }
@@ -654,12 +630,13 @@ dvarIntValue(dVar, defVal, minVal, maxVal) {
 
   value = getDvarInt(dVar);
 
-  if(value > maxVal)
+  if(value > maxVal) {
     value = maxVal;
-  else if(value < minVal)
+  } else if(value < minVal) {
     value = minVal;
-  else
+  } else {
     return value;
+  }
 
   setDvar(dVar, value);
   return value;
@@ -674,12 +651,13 @@ dvarFloatValue(dVar, defVal, minVal, maxVal) {
 
   value = getDvarFloat(dVar);
 
-  if(value > maxVal)
+  if(value > maxVal) {
     value = maxVal;
-  else if(value < minVal)
+  } else if(value < minVal) {
     value = minVal;
-  else
+  } else {
     return value;
+  }
 
   setDvar(dVar, value);
   return value;
@@ -696,7 +674,7 @@ play_sound_on_tag(alias, tag) {
     org linkto(self);
   }
 
-  org playsound(alias);
+  org playSound(alias);
   wait(5.0);
   org delete();
 }
@@ -720,36 +698,35 @@ loop_fx_sound(alias, origin, ender, timeout) {
     self endon(ender);
   }
   org.origin = origin;
-  org playloopsound(alias);
-  if(!isdefined(timeout))
+  org playLoopSound(alias);
+  if(!isDefined(timeout)) {
     return;
+  }
 
   wait(timeout);
-  //	org delete();
 }
 
 exploder_damage() {
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
-  else
+  } else {
     delay = 0;
+  }
 
-  if(isDefined(self.v["damage_radius"]))
+  if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
-  else
+  } else {
     radius = 128;
+  }
 
   damage = self.v["damage"];
   origin = self.v["origin"];
 
   wait(delay);
-  // Range, max damage, min damage
   radiusDamage(origin, radius, damage, damage);
 }
 
 exploder_before_load(num) {
-  // gotta wait twice because the createfx_init function waits once then inits all exploders. This guarentees
-  // that if an exploder is run on the first frame, it happens after the fx are init.
   waittillframeend;
   waittillframeend;
   activate_exploder(num);
@@ -763,43 +740,51 @@ activate_exploder(num) {
   num = int(num);
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
+    }
 
-    if(ent.v["type"] != "exploder")
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
 
-    // make the exploder actually removed the array instead?
-    if(!isDefined(ent.v["exploder"]))
+    if(!isDefined(ent.v["exploder"])) {
       continue;
+    }
 
-    if(ent.v["exploder"] != num)
+    if(ent.v["exploder"] != num) {
       continue;
+    }
 
-    if(isDefined(ent.v["firefx"]))
+    if(isDefined(ent.v["firefx"])) {
       ent thread fire_effect();
+    }
 
-    if(isDefined(ent.v["fxid"]) && ent.v["fxid"] != "No FX")
+    if(isDefined(ent.v["fxid"]) && ent.v["fxid"] != "No FX") {
       ent thread cannon_effect();
-    else
-    if(isDefined(ent.v["soundalias"]))
-      ent thread sound_effect();
-
-    if(isDefined(ent.v["damage"]))
+    } else {
+      if(isDefined(ent.v["soundalias"])) {
+        ent thread sound_effect();
+      }
+    }
+    if(isDefined(ent.v["damage"])) {
       ent thread exploder_damage();
+    }
 
     if(isDefined(ent.v["earthquake"])) {
       eq = ent.v["earthquake"];
       earthquake(level.earthquake[eq]["magnitude"], level.earthquake[eq]["duration"], ent.v["origin"], level.earthquake[eq]["radius"]);
     }
 
-    if(ent.v["exploder_type"] == "exploder")
+    if(ent.v["exploder_type"] == "exploder") {
       ent thread brush_show();
-    else
-    if((ent.v["exploder_type"] == "exploderchunk") || (ent.v["exploder_type"] == "exploderchunk visible"))
-      ent thread brush_throw();
-    else
+    } else {
+      if((ent.v["exploder_type"] == "exploderchunk") || (ent.v["exploder_type"] == "exploderchunk visible")) {
+        ent thread brush_throw();
+      }
+    } else {
       ent thread brush_delete();
+    }
   }
 }
 
@@ -808,10 +793,10 @@ sound_effect() {
 }
 
 effect_soundalias() {
-  if(!isdefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
-  // save off this info in case we delete the effect
   origin = self.v["origin"];
   alias = self.v["soundalias"];
   wait(self.v["delay"]);
@@ -820,13 +805,15 @@ effect_soundalias() {
 
 play_sound_in_space(alias, origin, master) {
   org = spawn("script_origin", (0, 0, 1));
-  if(!isdefined(origin))
+  if(!isDefined(origin)) {
     origin = self.origin;
+  }
   org.origin = origin;
-  if(isDefined(master) && master)
+  if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  else
-    org playsound(alias);
+  } else {
+    org playSound(alias);
+  }
   wait(10.0);
   org delete();
 }
@@ -849,12 +836,14 @@ loop_sound_in_space(alias, origin, ender) {
 }
 
 fire_effect() {
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
   delay = self.v["delay"];
-  if((isDefined(self.v["delay_min"])) && (isDefined(self.v["delay_max"])))
+  if((isDefined(self.v["delay_min"])) && (isDefined(self.v["delay_max"]))) {
     delay = self.v["delay_min"] + randomfloat(self.v["delay_max"] - self.v["delay_min"]);
+  }
 
   forward = self.v["forward"];
   up = self.v["up"];
@@ -865,23 +854,23 @@ fire_effect() {
   origin = self.v["origin"];
   firefx = self.v["firefx"];
   ender = self.v["ender"];
-  if(!isDefined(ender))
+  if(!isDefined(ender)) {
     ender = "createfx_effectStopper";
+  }
   timeout = self.v["firefxtimeout"];
 
   fireFxDelay = 0.5;
-  if(isDefined(self.v["firefxdelay"]))
+  if(isDefined(self.v["firefxdelay"])) {
     fireFxDelay = self.v["firefxdelay"];
+  }
 
   wait(delay);
 
-  if(isDefined(firefxSound))
+  if(isDefined(firefxSound)) {
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
+  }
 
   playFX(level._effect[firefx], self.v["origin"], forward, up);
-
-  // 	loopfx( 				fxId, 	fxPos, 	waittime, 	fxPos2, 	fxStart, 	fxStop, 	timeout )
-  // 	maps\_fx::loopfx( 	firefx, 	origin, 	delay, 		org, 	undefined, 	ender, 	timeout );
 }
 
 loop_sound_delete(ender, ent) {
@@ -898,20 +887,23 @@ createExploder(fxid) {
 }
 
 getOtherTeam(team) {
-  if(team == "allies")
+  if(team == "allies") {
     return "axis";
-  else if(team == "axis")
+  } else if(team == "axis") {
     return "allies";
+  }
 
   assertMsg("getOtherTeam: invalid team " + team);
 }
 
 wait_endon(waitTime, endOnString, endonString2, endonString3) {
   self endon(endOnString);
-  if(isDefined(endonString2))
+  if(isDefined(endonString2)) {
     self endon(endonString2);
-  if(isDefined(endonString3))
+  }
+  if(isDefined(endonString3)) {
     self endon(endonString3);
+  }
 
   wait(waitTime);
 }
@@ -922,14 +914,18 @@ isMG(weapon) {
 
 plot_points(plotpoints, r, g, b, timer) {
   lastpoint = plotpoints[0];
-  if(!isDefined(r))
+  if(!isDefined(r)) {
     r = 1;
-  if(!isDefined(g))
+  }
+  if(!isDefined(g)) {
     g = 1;
-  if(!isDefined(b))
+  }
+  if(!isDefined(b)) {
     b = 1;
-  if(!isDefined(timer))
+  }
+  if(!isDefined(timer)) {
     timer = 0.05;
+  }
   for(i = 1; i < plotpoints.size; i++) {
     thread draw_line_for_time(lastpoint, plotpoints[i], r, g, b, timer);
     lastpoint = plotpoints[i];
@@ -961,7 +957,6 @@ registerClientSys(sSysName) {
     level._clientSys[sSysName] = spawnStruct();
     level._clientSys[sSysName].sysID = ClientSysRegister(sSysName);
   }
-
 }
 
 setClientSysState(sSysName, sSysState, player) {
@@ -1082,39 +1077,47 @@ alphabet_compare(a, b) {
   a = tolower(a);
   b = tolower(b);
   val1 = 0;
-  if(isDefined(list[a]))
+  if(isDefined(list[a])) {
     val1 = list[a];
+  }
 
   val2 = 0;
-  if(isDefined(list[b]))
+  if(isDefined(list[b])) {
     val2 = list[b];
+  }
 
-  if(val1 > val2)
+  if(val1 > val2) {
     return "1st";
-  if(val1 < val2)
+  }
+  if(val1 < val2) {
     return "2nd";
+  }
   return "same";
 }
 
 is_later_in_alphabet(string1, string2) {
   count = string1.size;
-  if(count >= string2.size)
+  if(count >= string2.size) {
     count = string2.size;
+  }
 
   for(i = 0; i < count; i++) {
     val = alphabet_compare(string1[i], string2[i]);
-    if(val == "1st")
+    if(val == "1st") {
       return true;
-    if(val == "2nd")
+    }
+    if(val == "2nd") {
       return false;
+    }
   }
 
   return string1.size > string2.size;
 }
 
 alphabetize(array) {
-  if(array.size <= 1)
+  if(array.size <= 1) {
     return array;
+  }
 
   count = 0;
   for(;;) {
@@ -1127,23 +1130,20 @@ alphabetize(array) {
         changed = true;
         count++;
         if(count >= 9) {
+          {}
           count = 0;
           wait(0.05);
         }
       }
     }
 
-    if(!changed)
+    if(!changed) {
       return array;
+    }
   }
 
   return array;
 }
-
-//------------------------------------------------------//
-// get_players()										//
-//		Returns all of the current players in the level	//
-//------------------------------------------------------//
 get_players() {
   players = getEntArray("player", "classname");
 
@@ -1173,7 +1173,7 @@ struct_arrayspawn() {
 }
 
 structarray_add(struct, object) {
-  assert(!isDefined(object.struct_array_index)); // can't have elements of two structarrays on these. can add that later if it's needed
+  assert(!isDefined(object.struct_array_index));
   struct.array[struct.lastindex] = object;
   object.struct_array_index = struct.lastindex;
   struct.lastindex++;
@@ -1190,8 +1190,9 @@ structarray_swaptolast(struct, object) {
 }
 
 structarray_shuffle(struct, shuffle) {
-  for(i = 0; i < shuffle; i++)
+  for(i = 0; i < shuffle; i++) {
     struct structarray_swap(struct.array[i], struct.array[randomint(struct.lastindex)]);
+  }
 }
 
 structarray_swap(object1, object2) {
@@ -1208,15 +1209,10 @@ waittill_either(msg1, msg2) {
   self waittill(msg2);
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: array_combine( <array1> , <array2> )""Summary: Combines the two arrays and returns the resulting array. This function doesn't care if it produces duplicates in the array.""Module: Array""CallOn: ""MandatoryArg: <array1> : first array""MandatoryArg: <array2> : second array""Example: combinedArray = array_combine( array1, array2 );""SPMP: singleplayer"///ScriptDocEnd
- =============
- */
 array_combine(array1, array2) {
-  if(!array1.size)
+  if(!array1.size) {
     return array2;
+  }
 
   array3 = [];
 
@@ -1235,47 +1231,31 @@ array_combine(array1, array2) {
   return array3;
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: getClosest( <org> , <array> , <dist> )""Summary: Returns the closest entity in < array > to location < org > ""Module: Distance""CallOn: ""MandatoryArg: <org> : Origin to be closest to.""MandatoryArg: <array> : Array of entities to check distance on""OptionalArg: <dist> : Minimum distance to check""Example: friendly = getclosest( level.player.origin, allies );""SPMP: singleplayer"///ScriptDocEnd
- =============
- */
 getClosest(org, array, dist) {
   return compareSizes(org, array, dist, ::closerFunc);
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: getClosestFx( <org> , <fxarray> , <dist> )""Summary: Returns the closest fx struct created by createfx in < fxarray > to location < org > ""Module: Distance""CallOn: ""MandatoryArg: <org> : Origin to be closest to.""MandatoryArg: <array> : Array of createfx structs to check distance on. These are obtained with getfxarraybyID( <fxid> )""OptionalArg: <dist> : Minimum distance to check""Example: fxstruct = getClosestFx( hallway_tv, fxarray );""SPMP: singleplayer"///ScriptDocEnd
- =============
- */
 getClosestFx(org, fxarray, dist) {
   return compareSizesFx(org, fxarray, dist, ::closerFunc);
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: getFarthest( <org> , <array> , <dist> )""Summary: Returns the farthest entity in < array > to location < org > ""Module: Distance""CallOn: ""MandatoryArg: <org> : Origin to be farthest from.""MandatoryArg: <array> : Array of entities to check distance on""OptionalArg: <dist> : Maximum distance to check""Example: target = getFarthest( level.player.origin, targets );""SPMP: singleplayer"///ScriptDocEnd
- =============
- */
 getFarthest(org, array, dist) {
   return compareSizes(org, array, dist, ::fartherFunc);
 }
 
 compareSizesFx(org, array, dist, compareFunc) {
-  if(!array.size)
+  if(!array.size) {
     return undefined;
+  }
   if(isDefined(dist)) {
     distSqr = dist * dist;
     struct = undefined;
     keys = getArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdistSqr = DistanceSquared(array[keys[i]].v["origin"], org);
-      if([[compareFunc]](newdistSqr, distSqr))
+      if([[compareFunc]](newdistSqr, distSqr)) {
         continue;
+      }
       distSqr = newdistSqr;
       struct = array[keys[i]];
     }
@@ -1287,8 +1267,9 @@ compareSizesFx(org, array, dist, compareFunc) {
   distSqr = DistanceSquared(struct.v["origin"], org);
   for(i = 1; i < keys.size; i++) {
     newdistSqr = DistanceSquared(array[keys[i]].v["origin"], org);
-    if([[compareFunc]](newdistSqr, distSqr))
+    if([[compareFunc]](newdistSqr, distSqr)) {
       continue;
+    }
     distSqr = newdistSqr;
     struct = array[keys[i]];
   }
@@ -1296,16 +1277,18 @@ compareSizesFx(org, array, dist, compareFunc) {
 }
 
 compareSizes(org, array, dist, compareFunc) {
-  if(!array.size)
+  if(!array.size) {
     return undefined;
+  }
   if(isDefined(dist)) {
     distSqr = dist * dist;
     ent = undefined;
     keys = GetArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdistSqr = DistanceSquared(array[keys[i]].origin, org);
-      if([[compareFunc]](newdistSqr, distSqr))
+      if([[compareFunc]](newdistSqr, distSqr)) {
         continue;
+      }
       distSqr = newdistSqr;
       ent = array[keys[i]];
     }
@@ -1317,8 +1300,9 @@ compareSizes(org, array, dist, compareFunc) {
   distSqr = DistanceSquared(ent.origin, org);
   for(i = 1; i < keys.size; i++) {
     newdistSqr = DistanceSquared(array[keys[i]].origin, org);
-    if([[compareFunc]](newdistSqr, distSqr))
+    if([[compareFunc]](newdistSqr, distSqr)) {
       continue;
+    }
     distSqr = newdistSqr;
     ent = array[keys[i]];
   }
@@ -1337,46 +1321,41 @@ random(array) {
   return array[randomint(array.size)];
 }
 
-/*
- =============
-///ScriptDocBegin
-"Name: get_array_of_closest( <org> , <array> , <excluders> , <max>, <maxdist> )""Summary: Returns an array of all the entities in < array > sorted in order of closest to farthest.""Module: Distance""CallOn: ""MandatoryArg: <org> : Origin to be closest to.""MandatoryArg: <array> : Array of entities to check distance on.""OptionalArg: <excluders> : Array of entities to exclude from the check.""OptionalArg: <max> : Max size of the array to return""OptionalArg: <maxdist> : Max distance from the origin to return acceptable entities""Example: allies_sort = get_array_of_closest( originFC1.origin, allies );""SPMP: singleplayer"
-///ScriptDocEnd
- =============
- */
 get_array_of_closest(org, array, excluders, max, maxdist) {
-  // pass an array of entities to this function and it will return them in the order of closest
-  // to the origin you pass, you can also set max to limit how many ents get returned
-  if(!isDefined(max))
+  if(!isDefined(max)) {
     max = array.size;
-  if(!isDefined(excluders))
+  }
+  if(!isDefined(excluders)) {
     excluders = [];
+  }
 
   maxdists2rd = undefined;
-  if(isDefined(maxdist))
+  if(isDefined(maxdist)) {
     maxdists2rd = maxdist * maxdist;
+  }
 
-  // return the array, reordered from closest to farthest
   dist = [];
   index = [];
   for(i = 0; i < array.size; i++) {
     excluded = false;
     for(p = 0; p < excluders.size; p++) {
-      if(array[i] != excluders[p])
+      if(array[i] != excluders[p]) {
         continue;
+      }
       excluded = true;
       break;
     }
-    if(excluded)
+    if(excluded) {
       continue;
+    }
 
     length = distancesquared(org, array[i].origin);
 
-    if(isDefined(maxdists2rd) && maxdists2rd < length)
+    if(isDefined(maxdists2rd) && maxdists2rd < length) {
       continue;
+    }
 
     dist[dist.size] = length;
-
 
     index[index.size] = i;
   }
@@ -1384,8 +1363,9 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
   for(;;) {
     change = false;
     for(i = 0; i < dist.size - 1; i++) {
-      if(dist[i] <= dist[i + 1])
+      if(dist[i] <= dist[i + 1]) {
         continue;
+      }
       change = true;
       temp = dist[i];
       dist[i] = dist[i + 1];
@@ -1394,14 +1374,17 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
       index[i] = index[i + 1];
       index[i + 1] = temp;
     }
-    if(!change)
+    if(!change) {
       break;
+    }
   }
 
   newArray = [];
-  if(max > dist.size)
+  if(max > dist.size) {
     max = dist.size;
-  for(i = 0; i < max; i++)
+  }
+  for(i = 0; i < max; i++) {
     newArray[i] = array[index[i]];
+  }
   return newArray;
 }

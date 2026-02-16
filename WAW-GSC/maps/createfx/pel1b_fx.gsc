@@ -1,6 +1,9 @@
-//_createfx generated. Do not touch!!
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createfx\pel1b_fx.gsc
+**************************************/
+
 main() {
-  // CreateFX entities placed: 247
   ent = maps\_utility::createOneshotEffect("smoke_rolling_thick");
   ent.v["origin"] = (51996, 3369.19, -3.40324);
   ent.v["angles"] = (270, 0, 0);
@@ -1536,5 +1539,4 @@ main() {
   ent.v["angles"] = (286.833, 60.0829, -104.522);
   ent.v["fxid"] = "godray_medium";
   ent.v["delay"] = -15;
-
 }

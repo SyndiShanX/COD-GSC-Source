@@ -1,8 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
+/***************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createart\see1_art.gsc
+***************************************/
+
 main() {
   level.tweakfile = true;
-
-  // *Fog section*
 
   setDvar("scr_fog_exp_halfplane", "3200");
   setDvar("scr_fog_exp_halfheight", "1360");
@@ -11,21 +13,6 @@ main() {
   setDvar("scr_fog_green", "0.59");
   setDvar("scr_fog_blue", "0.52");
   setDvar("scr_fog_baseheight", "-448");
-
-  //	// *depth of field section*
-  //	level.do_not_use_dof = true
-  //	level.dofDefault["nearStart"] = 0;
-  //	level.dofDefault["nearEnd"] = 60;
-  //	level.dofDefault["farStart"] = 2000;
-  //	level.dofDefault["farEnd"] = 3200;
-  //	level.dofDefault["nearBlur"] = 6;
-  //	level.dofDefault["farBlur"] = 2;
-  //
-  //	players = maps\_utility::get_players();
-  //	for( i = 0; i < players.size; i++ )
-  //	{
-  //		players[i] maps\_art::setdefaultdepthoffield();
-  //	}
 
   setDvar("visionstore_glowTweakEnable", "1");
   setDvar("visionstore_glowTweakRadius0", "0.25");
@@ -37,9 +24,7 @@ main() {
   setDvar("visionstore_glowTweakSkyBleedIntensity0", "0");
   setDvar("visionstore_glowTweakSkyBleedIntensity1", "0");
 
-  //* Fog section *
   level thread fog_settings();
-  // 	SetSavedDvar("sm_sunSampleSizeNear", "1.5" );
   level thread maps\_utility::set_all_players_visionset("see1", 0.1);
 }
 
@@ -64,9 +49,3 @@ fog_settings() {
     SetVolFog(start_dist, halfway_dist, halfway_height, base_height, red, green, blue, trans_time);
   }
 }
-
-//	setDvar( "scr_fog_disable", "0" );
-//
-//	setVolFog(1100, 4100, 1360, -448, 0.62, 0.59, 0.52, 0);
-//	maps\_utility::set_vision_set( "see1", 0 );
-// }

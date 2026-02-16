@@ -1,10 +1,10 @@
-//
-// file: mp_bgate_fx.csc
-// description: clientside fx script for mp_bgate: setup, special fx functions, etc.
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_bgate_fx.csc
+********************************************/
 
 #include clientscripts\mp\_utility;
 
-// load fx used by util scripts
 precache_util_fx() {}
 
 precache_scripted_fx() {}
@@ -14,7 +14,6 @@ precache_createfx_fx() {
   level._effect["mp_fire_rubble_md_smk"] = loadfx("maps/mp_maps/fx_mp_fire_rubble_md_smk");
   level._effect["mp_fire_rubble_detail_grp"] = loadfx("maps/mp_maps/fx_mp_fire_rubble_detail_grp");
   level._effect["mp_fire_column_xsm"] = loadfx("maps/mp_maps/fx_mp_fire_column_xsm");
-  //	level._effect["mp_fire_column_sm"]								= loadfx("maps/mp_maps/fx_mp_fire_column_sm");
   level._effect["mp_fire_dlight"] = loadfx("maps/mp_maps/fx_mp_fire_dlight");
   level._effect["mp_fire_dlight_sm"] = loadfx("maps/mp_maps/fx_mp_fire_dlight_sm");
   level._effect["mp_fire_dlight_orange"] = loadfx("maps/mp_maps/fx_mp_fire_dlight_orange");
@@ -25,9 +24,6 @@ precache_createfx_fx() {
   level._effect["mp_roof_ash_embers"] = loadfx("maps/mp_maps/fx_mp_roof_ash_embers");
 
   level._effect["mp_ray_light_sm"] = loadfx("env/light/fx_light_godray_overcast_sm");
-  //	level._effect["mp_ray_light_md"]									= loadfx("maps/mp_maps/fx_mp_ray_overcast_md");
-  //	level._effect["mp_ray_light_md_a"]								= loadfx("maps/mp_maps/fx_mp_ray_overcast_md_a");
-  //	level._effect["mp_ray_light_lg"]									= loadfx("env/light/fx_light_godray_overcast_lg");
   level._effect["light_godray_overcast_xsm"] = loadfx("env/light/fx_light_godray_overcast_xsm");
 
   level._effect["mp_smoke_plume_med_wide"] = loadfx("maps/mp_maps/fx_mp_smoke_plume_med_wide");
@@ -35,7 +31,6 @@ precache_createfx_fx() {
   level._effect["mp_smoke_plume_lg"] = loadfx("maps/mp_maps/fx_mp_smoke_plume_lg");
   level._effect["mp_smoke_crater"] = loadfx("maps/mp_maps/fx_mp_smoke_crater");
   level._effect["mp_electric_sparks"] = loadfx("maps/mp_maps/fx_mp_electric_sparks_dlight");
-  //	level._effect["mp_light_distant"]									= loadfx("maps/mp_maps/fx_mp_light_distant");
   level._effect["mp_water_drips_hvy_long"] = loadfx("maps/mp_maps/fx_mp_water_drips_hvy_long");
 
   level._effect["mp_insect_swarm"] = loadfx("maps/mp_maps/fx_mp_insect_swarm");
@@ -57,7 +52,6 @@ precache_createfx_fx() {
 
   level._effect["mp_fog_low_brown"] = loadfx("maps/mp_maps/fx_mp_fog_low_brown");
   level._effect["mp_fog_low_yellow"] = loadfx("maps/mp_maps/fx_mp_fog_low_yellow");
-  //	level._effect["mp_blowing_dust_yellow"]						= loadfx("maps/mp_maps/fx_mp_blowing_dust_yellow");
   level._effect["mp_pipe_cloud"] = loadfx("maps/mp_maps/fx_mp_pipe_cloud");
   level._effect["mp_water_drips_rust"] = loadfx("maps/mp_maps/fx_mp_water_drips_rust");
 

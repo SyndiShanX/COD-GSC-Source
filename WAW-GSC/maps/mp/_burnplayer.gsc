@@ -1,3 +1,8 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_burnplayer.gsc
+**************************************/
+
 initBurnPlayer() {
   level._effect["character_fire_death_torso"] = loadfx("env/fire/fx_fire_player_torso_mp");
   level._effect["character_fire_player_sm"] = loadfx("env/fire/fx_fire_player_sm_mp");
@@ -6,9 +11,9 @@ initBurnPlayer() {
 }
 
 directHitWithMolotov(attacker, inflictor, mod) {
-  // no more effects if we are already on fire
-  if(isDefined(self.burning))
+  if(isDefined(self.burning)) {
     return;
+  }
 
   self endon("disconnect");
   attacker endon("disconnect");
@@ -38,10 +43,9 @@ directHitWithMolotov(attacker, inflictor, mod) {
     tagArray[tagArray.size] = "J_Ankle_RI";
     tagArray[tagArray.size] = "J_Ankle_LE";
 
-    // Need set burn
-
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       self setburn(3.0);
+    }
   }
 
   self startTanning();
@@ -49,16 +53,15 @@ directHitWithMolotov(attacker, inflictor, mod) {
   if(isDefined(level._effect["character_fire_death_torso"])) {
     for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
       playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
-
     }
   }
 
   playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
+  }
 
-  //	self thread doMolotovSlapDamage(attacker, inflictor, mod);
   if(isPlayer(self)) {
     self thread watchForWater(7);
     self thread watchForDeath();
@@ -66,9 +69,9 @@ directHitWithMolotov(attacker, inflictor, mod) {
 }
 
 walkedThroughFlames() {
-  // no more effects if we are already on fire
-  if(isDefined(self.burning))
+  if(isDefined(self.burning)) {
     return;
+  }
 
   self endon("disconnect");
   waittillframeend;
@@ -106,9 +109,9 @@ walkedThroughFlames() {
 }
 
 burnedWithFlameThrower() {
-  // no more effects if we are already on fire
-  if(isDefined(self.burning))
+  if(isDefined(self.burning)) {
     return;
+  }
 
   self endon("disconnect");
   waittillframeend;
@@ -131,9 +134,9 @@ burnedWithFlameThrower() {
     tagArray[3] = "j_knee_ri";
     tagArray[4] = "j_knee_le";
 
-    // Need set burn
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       self setburn(3.0);
+    }
   }
 
   self startTanning();
@@ -151,9 +154,6 @@ burnedWithFlameThrower() {
 }
 
 burnedToDeath() {
-  // allow this even if they are already burning
-  // really this should only be called on the corpse
-
   self.burning = true;
   self thread burn_blocker();
 
@@ -178,9 +178,9 @@ burnedToDeath() {
     tagArray[tagArray.size] = "J_Ankle_RI";
     tagArray[tagArray.size] = "J_Ankle_LE";
 
-    // Need set burn
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       self setburn(3.0);
+    }
   }
 
   self startTanning();
@@ -188,7 +188,6 @@ burnedToDeath() {
   if(isDefined(level._effect["character_fire_death_torso"])) {
     for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
       playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
-
     }
   }
 
@@ -203,8 +202,9 @@ watchForDeath() {
 
   self waittill("death");
 
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     self StopBurning();
+  }
 
   self.burning = undefined;
 }
@@ -236,6 +236,8 @@ watchForWater(time) {
 
       if(isDefined(level._effect["fx_fire_player_sm_smk_2sec"])) {
         for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+          {}
+
           playFXOnTag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagArray[arrayIndex]);
         }
       }
@@ -260,7 +262,7 @@ doMolotovSlapDamage(attacker, inflictor, mod) {
   attacker endon("disconnect");
   self endon("stop burn damage");
 
-  while((isdefined(level.slappedWithMolotovDamage)) && (isdefined(self)) && self DepthOfPlayerInWater() < 1) {
+  while((isDefined(level.slappedWithMolotovDamage)) && (isDefined(self)) && self DepthOfPlayerInWater() < 1) {
     self DoDamage(level.slappedWithMolotovDamage, self.origin, attacker, attacker, 0, mod);
 
     wait(1);
@@ -272,7 +274,7 @@ doDogMolotovSlapDamage(attacker, inflictor, mod) {
   self endon("death");
   self endon("stop burn damage");
 
-  while((isdefined(level.slappedWithMolotovDamage)) && (isdefined(self))) {
+  while((isDefined(level.slappedWithMolotovDamage)) && (isDefined(self))) {
     self DoDamage(level.slappedWithMolotovDamage, self.origin, attacker, attacker, 0, mod);
 
     wait(1);

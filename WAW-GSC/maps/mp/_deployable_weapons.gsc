@@ -1,3 +1,8 @@
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\_deployable_weapons.gsc
+*******************************************/
+
 init() {
   precacheModel("mounted_mp_bar_bipod_lmg");
   precacheModel("mounted_mp_30cal_bipod_lmg");

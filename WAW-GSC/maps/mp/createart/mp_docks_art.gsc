@@ -1,10 +1,10 @@
-//_createart generated.modify at your own risk. Changing values should be fine.
-main()
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\createart\mp_docks_art.gsc
+**********************************************/
 
-{
+main() {
   level.tweakfile = true;
-
-  // *Fog section*
 
   setDvar("scr_fog_exp_halfplane", "1242.13");
   setDvar("scr_fog_exp_halfheight", "603.62");
@@ -26,8 +26,4 @@ main()
   setDvar("visionstore_filmDarkTint", "0.696813 0.889778 1.00089");
 
   setVolFog(600, 1000, 603, 28, 0.4705, 0.539379, 0.574387, 0);
-  // VisionSetNaked( "mp_docks", 0 );
-
-
 }
-// setVolFog(<startDist>, <halfwayDist>, <halfwayHeight>, <baseHeight>, <red>, <green>, <blue>, <transition time>)

@@ -1,7 +1,13 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_fx.csc
+**************************************/
+
 createLoopSound() {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
 
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
@@ -16,8 +22,9 @@ createLoopSound() {
 
 createEffect(type, fxid) {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
 
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
@@ -53,7 +60,6 @@ create_triggerfx(clientNum) {
 }
 
 create_looper(clientNum) {
-  //assert (isDefined(self.looper));
   self.loopFX = spawnfakeent(clientNum);
   playLoopedFx(clientNum, self.loopFX, level._effect[self.v["fxid"]], self.v["delay"], self.v["origin"], 0, self.v["forward"], self.v["up"]);
   create_loopsound(clientNum);
@@ -63,8 +69,9 @@ loopfxStop(clientNum, timeout) {
   self endon("death");
   wait(timeout);
 
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     deletefx(clientNum, self.looper);
+  }
 
   if(isDefined(self.loopFX)) {
     deletefakeent(clientNum, self.loopFX);
@@ -72,51 +79,49 @@ loopfxStop(clientNum, timeout) {
 }
 
 loopfxthread(clientNum) {
-  if(isdefined(self.fxStart))
+  if(isDefined(self.fxStart)) {
     level waittill("start fx" + self.fxStart);
+  }
 
   while(1) {
     create_looper(clientNum);
 
-    if(isdefined(self.timeout))
+    if(isDefined(self.timeout)) {
       thread loopfxStop(clientNum, self.timeout);
+    }
 
-    if(isdefined(self.fxStop))
+    if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    else
+    } else {
       return;
+    }
 
-    if(isdefined(self.looper))
+    if(isDefined(self.looper)) {
       deletefx(clientNum, self.looper);
+    }
 
-    if(isdefined(self.fxStart))
+    if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    else
+    } else {
       return;
+    }
   }
 }
 
 oneshotfxthread(clientNum) {
-  //	maps\_spawner::waitframe();
-
-  // This assumes that client scripts start at beginning of level - will need to take
-  // hot join into account (and possibly restart from checkpoint...)
-
-  if(self.v["delay"] > 0)
+  if(self.v["delay"] > 0) {
     wait self.v["delay"];
+  }
 
   create_triggerfx(clientNum);
 }
 
 create_loopsound(clientNum) {
-  if(clientNum != 0)
+  if(clientNum != 0) {
     return;
+  }
 
   self notify("stop_loop");
-
-  // Note :
-  // Unlike the server side implementation of this - self.looper will contain an fx id, and not an entity
-  // so no threading things on it.
 
   if(isDefined(self.v["soundalias"]) && (self.v["soundalias"] != "nil")) {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
@@ -131,31 +136,31 @@ create_loopsound(clientNum) {
 fx_init(clientNum) {
   clientscripts\mp\_lights::init_lights(clientNum);
 
-  // if the FX editor is running currently, then all fx are server side.
-
   if(level.createFX_enabled) {
     println("*** ClientScripts : _CreateFX enabled.Not creating client side effects.");
     return;
   }
 
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     return;
+  }
 
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
 
-    // This code my be executed for multiple local clients - only set the
-    // axis up once.
     if(!isDefined(level._createfxforwardandupset)) {
       ent set_forward_and_up_vectors();
     }
 
-    if(ent.v["type"] == "loopfx")
+    if(ent.v["type"] == "loopfx") {
       ent thread loopfxthread(clientNum);
-    if(ent.v["type"] == "oneshotfx")
+    }
+    if(ent.v["type"] == "oneshotfx") {
       ent thread oneshotfxthread(clientNum);
-    if(ent.v["type"] == "soundfx")
+    }
+    if(ent.v["type"] == "soundfx") {
       ent thread create_loopsound(clientNum);
+    }
   }
 
   level._createfxforwardandupset = true;
@@ -167,13 +172,10 @@ reportNumEffects() {
   } else {
     println("*** ClientScripts : Added no effects.");
   }
-
 }
-
-// MikeD (12/3/2007): Added some debug, incase we forget to actually setup the level._effect[...]
 spawnFX_wrapper(clientNum, fx_id, origin, delay, forward, up) {
   assertEx(isDefined(level._effect[fx_id]), "Missing level._effect[\"" + fx_id + "\"]. You did not setup the fx before calling it in createFx.");
 
   fx_object = SpawnFx(clientNum, level._effect[fx_id], origin, delay, forward, up);
-  return fx_object; // returns pointer to FX object - not an entity.....
+  return fx_object;
 }
